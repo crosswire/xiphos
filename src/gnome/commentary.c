@@ -41,6 +41,7 @@
 #include "gui/font_dialog.h"
 
 #include "main/commentary.h"
+#include "main/percomm.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
@@ -510,6 +511,34 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  edit_percomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void edit_percomm(GtkMenuItem * menuitem, COMM_DATA * c)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void edit_percomm(GtkMenuItem * menuitem, COMM_DATA * c)
+{
+	if(settings.use_percomm_dialog)
+			gui_open_commentary_editor(c->mod_name);
+	else {
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+			widgets.workbook_lower),settings.percomm_page);
+		gui_set_percomm_page(c->mod_name);		
+	}
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_create_pm
  *
  * Synopsis
@@ -528,6 +557,7 @@ static GtkWidget *create_pm(COMM_DATA * c)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;
+	GtkWidget *edit;
 	GtkWidget *copy;
 	GtkWidget *separator;
 	GtkWidget *lookup_selection;
@@ -554,6 +584,20 @@ static GtkWidget *create_pm(COMM_DATA * c)
 	gtk_object_set_data(GTK_OBJECT(pm), "pm", pm);
 	pm_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm));
+
+	if(c->is_percomm) {
+		edit = gtk_menu_item_new_with_label(_("Edit"));
+		gtk_widget_ref(edit);
+		gtk_object_set_data_full(GTK_OBJECT(pm), "edit", edit,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(edit);
+		gtk_container_add(GTK_CONTAINER(pm), edit);
+		
+		gtk_signal_connect(GTK_OBJECT(edit), "activate",
+			GTK_SIGNAL_FUNC
+			(edit_percomm), c);
+	}
 
 	copy = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_ref(copy);
@@ -1418,6 +1462,7 @@ void gui_setup_commentary(GList *mods)
 		c->mod_name = modname;
 		c->modnum = count;
 		c->search_string = NULL;
+		c->is_percomm = is_personal_comment(c->mod_name);
 		c->key[0] = '\0';
 		c->book_heading = FALSE;
 		c->chapter_heading = FALSE;

@@ -40,11 +40,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#ifdef USE_SPELL
-//#include "main/spell.h"
-//#include "main/spell_gui.h"
-#endif /* USE_SPELL */
-
 #include "gui/editor.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
@@ -113,7 +108,8 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
  *   void
  */
  
-void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
+void gui_html_editor_control_data_destroy(GtkObject * object,
+			GSHTMLEditorControlData * ecd)
 {
 	g_assert(ecd);
 
@@ -182,30 +178,6 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
 			   buf);
 }
 
-
-/******************************************************************************
- * Name
- *  on_editor_destroy
- *
- * Synopsis
- *   #include "_editor.h"
- *
- *   void on_editor_destroy(GtkObject * object,
- *				GSHTMLEditorControlData * ecd)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
- 
-void on_editor_destroy(GtkObject * object,
-				GSHTMLEditorControlData * ecd)
-{
-	gs_html_editor_control_data_destroy(ecd);
-}
-
 /******************************************************************************
  * Name
  *  run_dialog
@@ -236,4 +208,4 @@ void run_dialog(GnomeDialog *** dialog, GtkHTML * html,
 		gtk_widget_show(GTK_WIDGET(**dialog));
 	}
 }
- 
+

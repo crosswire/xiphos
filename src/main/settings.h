@@ -88,7 +88,10 @@ struct _settings {
 		dict_last_page,     /* last notebook page before change */
 		comm_last_page,     /* last notebook page before change */
 		text_last_page,     /* last notebook page before change */
-		percomm_last_page;     /* last notebook page before change */
+		percomm_last_page,  /* last notebook page before change */
+		interlinear_page,   /* interlinear workbook page number */
+		studypad_page,   /* studypad workbook page number */
+		percomm_page;   /* percomm editor workbook page number */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */
@@ -154,6 +157,7 @@ struct _settings {
 		studypad_dialog_exist, /* studypad dialog has been created */
 		use_percomm_dialog, /* display personal 
 					comments editor in a dialog */
+		percomm_dialog_exist, /* percomm dialog has been created */
 		
 		/** do we have these modules **/
 		havebible, 

@@ -380,7 +380,8 @@ void gui_change_verse(gchar * key)
 	 */
 	if (!settings.editnote)
 		if (settings.havepercomm)
-			gui_display_percomm(val_key);
+			if(!settings.use_percomm_dialog)
+				gui_display_percomm(val_key);
 
 	/* 
 	 * set commentary module to current verse 
@@ -584,8 +585,6 @@ void create_mainwindow(void)
 	GtkWidget *nav_toolbar;
 	GtkWidget *hpaned1;
 	GtkWidget *vbox_text;
-	GtkWidget *vbox2;
-	GtkWidget *label85;
 	GtkWidget *swInt;
 	GtkWidget *label41;
 	GtkWidget *label185;
@@ -597,7 +596,6 @@ void create_mainwindow(void)
 	g_print("%s\n", "Building GnomeSword interface");
 
 	widgets.studypad_dialog = NULL;
-	widgets.percomm_dialog = NULL;
 
 	widgets.app =
 	    gnome_app_new("gnomesword",
@@ -849,65 +847,17 @@ void create_mainwindow(void)
 	/*
 	 * percomm 
 	 */
-	vbox2 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox2);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox2",
-				 vbox2,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox2);
-	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower), vbox2);
-
-	widgets.notebook_percomm = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_percomm);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.notebook_percomm",
-				 widgets.notebook_percomm,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.notebook_percomm);
-	gtk_box_pack_start(GTK_BOX(vbox2), widgets.notebook_percomm,
-			   TRUE, TRUE, 0);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_percomm), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK
-				  (widgets.notebook_percomm));
-	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_percomm, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_percomm), TRUE);
-
-	/*
-	 * personal comments editor goes here
-	 */
-
-	label85 = gtk_label_new(_("Personal Comments"));
-	gtk_widget_ref(label85);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label85",
-				 label85,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label85);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.workbook_lower), page_num),
-				   label85);
-
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.workbook_lower),
-					  page_num),
-					 _("Personal Comments"));
-	++page_num;
+	if (!settings.use_percomm_dialog) { 
+		gui_percomm_in_workbook(widgets.workbook_lower,
+							page_num);
+		++page_num;
+	}
 
 	/*
 	 * studypad editor 
 	 */
 	if (settings.use_studypad) {
-		if (settings.use_studypad_dialog) {
-			settings.studypad_dialog_exist =
-				gui_open_studypad_dialog(
-					settings.studypadfilename);
-		} else {
+		if (!settings.use_studypad_dialog) { 
 			settings.studypad_dialog_exist = FALSE;
 			gui_open_studypad(widgets.workbook_lower, 
 					settings.studypadfilename,
@@ -978,7 +928,8 @@ void create_mainwindow(void)
 					 (GTK_NOTEBOOK
 					  (widgets.workbook_lower),
 					  page_num), _("Interlinear"));
-
+	settings.interlinear_page = page_num;
+	
 	/*
 	 * end Interlinear page 
 	 */

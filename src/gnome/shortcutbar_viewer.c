@@ -206,7 +206,7 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
 			chapter_display(sv->htmlshow, sv->mod_name,
 				NULL, (gchar *) url, FALSE);
 			break;
-		case COMMENTARY_TYPE:		
+		case COMMENTARY_TYPE:	
 		case DICTIONARY_TYPE:	
 			text = get_module_text(sv->mod_name, (gchar *) url);
 			if(text) {

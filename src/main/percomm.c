@@ -171,6 +171,28 @@ void change_percomm_module(char * mod_name)
 
 /******************************************************************************
  * Name
+ *   is_personal_comment
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   int is_personal_comment(char * mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
+int is_personal_comment(char * mod_name)
+{
+	return backend_is_personal_comment(mod_name);
+}
+
+
+/******************************************************************************
+ * Name
  *  save_percomm_note
  *
  * Synopsis

@@ -350,8 +350,6 @@ int backend_get_mod_type(char * mod_name)
 {
 
 	ModMap::iterator it;	//-- iteratior
-	SectionMap::iterator sit;	//-- iteratior
-	ConfigEntMap::iterator cit;	//-- iteratior
 	SWMgr *mgr;
 
 	mgr = new SWMgr();	//-- create sword mgrs
