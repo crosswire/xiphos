@@ -187,7 +187,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox2),
 				  GTK_BUTTONBOX_END);
 
-	button_close = gtk_button_new_from_stock ("gtk-close");
+	button_close = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
