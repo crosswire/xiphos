@@ -59,6 +59,7 @@ extern bool file_changed; //-- ???
 extern gchar *current_filename; //-- file in studypad
 extern GtkWidget *MainFrm;      //-- GnomeSword widget (gnome app)(declared and set in GnomeSword.cpp)
 extern GtkWidget *bookmark_mnu; //-- ???
+extern GtkWidget *strongsnum; //-- menu check item (declared in GnomeSword.cpp)
 extern gchar	*font_mainwindow, //--
 							*font_interlinear, //--
 							*font_currentverse;//--
@@ -273,10 +274,12 @@ void
 on_btnStrongs_toggled                  (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-	if(togglebutton->active) 
-		strongsSWORD(TRUE);
+	
+	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;  //-- change menu check item to match button
+	if(togglebutton->active)
+		strongsSWORD(TRUE);   //-- trun strongs numbers on (GnomeSword.cpp)
 	else 
-		strongsSWORD(FALSE);
+		strongsSWORD(FALSE);  //-- trun strongs numbers off (GnomeSword.cpp)
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1051,10 +1054,8 @@ void
 on_strongs_numbers1_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	if(GTK_CHECK_MENU_ITEM(menuitem)->active) 
-		strongsSWORD(TRUE);
-	else 
-		strongsSWORD(FALSE);
+  //-- we change the state of strongs toogle buttn to match the menu item this will activate on_btnStrongs_toogled which will do the work
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnStrongs")), GTK_CHECK_MENU_ITEM(menuitem)->active);	//-- set strongs toogle button
 }
 
 
@@ -2244,5 +2245,202 @@ on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
 	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true); 		
+}
+
+//----------------------------------------------------------------------------------------------
+gboolean
+on_cbeFreeformLookup_drag_drop         (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+
+  return FALSE;
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_moduleText_drag_begin               (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_textCommentaries_drag_begin         (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_textDict_drag_begin                 (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data)
+{
+
+}
+
+ /* //----------------------------------------------------------------------------------------------
+void
+on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+
+}
+*/
+//----------------------------------------------------------------------------------------------
+void
+on_boldNE_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	gchar			*buf;
+	
+	text = lookup_widget(MainFrm, "textComments");	
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<B>", -1);
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</b>", -1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_italicNE_activate                   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	gchar			*buf;
+	
+	text = lookup_widget(MainFrm, "textComments");	
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<I>", -1);
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</i>", -1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_referenceNE_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	gchar			*buf;
+	
+	text = lookup_widget(MainFrm, "textComments");	
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<a href=\"", -1);
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "\"></a>", -1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_underlineNE_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	gchar			*buf;
+	
+	text = lookup_widget(MainFrm, "textComments");	
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<U>", -1);
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</u>", -1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_greekNE_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	gchar			*buf;
+	
+	text = lookup_widget(MainFrm, "textComments");	
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
+	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</font>", -1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_goto_reference_activate             (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_textComments_drag_begin             (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_textComments_drag_data_get          (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        GtkSelectionData *data,
+                                        guint            info,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_textComments_drag_data_received     (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        GtkSelectionData *data,
+                                        guint            info,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+
+}
+
+
+gboolean
+on_textComments_drag_drop              (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+
+  return FALSE;
+}
+
+
+gboolean
+on_textComments_key_press_event        (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	GtkWidget	*text;
+	
+	
+  if(event->keyval == 65293 || event->keyval == 65421)  //-- if user hit return key continue
+	{
+	  text = lookup_widget(widget,"textComments");
+		gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<br>", -1);			
+		return true;
+	}
+  return FALSE;
 }
 
