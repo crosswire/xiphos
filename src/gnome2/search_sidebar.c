@@ -409,12 +409,12 @@ void gui_create_search_sidebar(void)
 	entrySearch = gtk_entry_new();
 	gtk_widget_show(entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), entrySearch, TRUE, TRUE, 0);
-	gtk_widget_set_usize(entrySearch, 130, -2);;	
+	gtk_widget_set_size_request(entrySearch, 130, -1);;	
 	
 	btnSearch = gtk_button_new_from_stock(GTK_STOCK_FIND);
 	gtk_widget_show (btnSearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
-	gtk_tooltips_set_tip (tooltips, btnSearch, _("Click to begin the search"), NULL);
+	gtk_tooltips_set_tip (tooltips, btnSearch, _("Start searching"), NULL);
 	gtk_button_set_relief (GTK_BUTTON (btnSearch), GTK_RELIEF_NONE);
 
 	progressbar_search = gtk_progress_bar_new();
@@ -446,7 +446,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_text));
 	gtk_widget_show(radiobutton_search_text);
-	gtk_widget_set_usize(radiobutton_search_text, -2, 20);
+	gtk_widget_set_size_request(radiobutton_search_text, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_text,
 			   FALSE, FALSE, 0);
 
@@ -457,7 +457,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_comm));
 	gtk_widget_show(radiobutton_search_comm);
-	gtk_widget_set_usize(radiobutton_search_comm, -2, 20);
+	gtk_widget_set_size_request(radiobutton_search_comm, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_comm,
 			   FALSE, FALSE, 0);
 /*
@@ -468,7 +468,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_dict));
 	gtk_widget_show(radiobutton_search_dict);
-	gtk_widget_set_usize(radiobutton_search_dict, -2, 20);
+	gtk_widget_set_size_request(radiobutton_search_dict, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_dict,
 			   FALSE, FALSE, 0);
 
@@ -479,7 +479,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_book));
 	gtk_widget_show(radiobutton_search_book);
-	gtk_widget_set_usize(radiobutton_search_book, -2, 20);
+	gtk_widget_set_size_request(radiobutton_search_book, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_book,
 			   FALSE, FALSE, 0);
 
@@ -504,34 +504,34 @@ void gui_create_search_sidebar(void)
 
 	rbMultiword =
 	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Multi Word"));
+					    _("Multi word"));
 	vbox2_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbMultiword));
 	gtk_widget_show(rbMultiword);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbMultiword, FALSE,
 			   FALSE, 0);
-	gtk_widget_set_usize(rbMultiword, -2, 20);
+	gtk_widget_set_size_request(rbMultiword, -1, 20);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (rbMultiword), TRUE);
 
 	rbRegExp =
 	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Regular Expression"));
+					    _("Regular expression"));
 	vbox2_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbRegExp));
 	gtk_widget_show(rbRegExp);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbRegExp, FALSE, FALSE, 0);
-	gtk_widget_set_usize(rbRegExp, -2, 20);
+	gtk_widget_set_size_request(rbRegExp, -1, 20);
 
 	rbPhraseSearch =
 	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Exact Phrase"));
+					    _("Exact phrase"));
 	vbox2_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbPhraseSearch));
 	gtk_widget_show(rbPhraseSearch);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbPhraseSearch,
 			   FALSE, FALSE, 0);
-	gtk_widget_set_usize(rbPhraseSearch, -2, 20);
+	gtk_widget_set_size_request(rbPhraseSearch, -1, 20);
 
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_show(frame3);
@@ -556,7 +556,7 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(ckbCaseSensitive);
 	gtk_box_pack_start(GTK_BOX(vbox3), ckbCaseSensitive, FALSE,
 			   FALSE, 0);
-	gtk_widget_set_usize(ckbCaseSensitive, -2, 20);
+	gtk_widget_set_size_request(ckbCaseSensitive, -1, 20);
 
 
 	frame4 = gtk_frame_new(NULL);
@@ -578,34 +578,34 @@ void gui_create_search_sidebar(void)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox4), 4);
 
 	rbNoScope =
-	    gtk_radio_button_new_with_label(vbox4_group, _("No Scope"));
+	    gtk_radio_button_new_with_label(vbox4_group, _("No scope"));
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbNoScope));
 	gtk_widget_show(rbNoScope);
 	gtk_box_pack_start(GTK_BOX(vbox4), rbNoScope, FALSE, FALSE, 0);
-	gtk_widget_set_usize(rbNoScope, -2, 20);
+	gtk_widget_set_size_request(rbNoScope, -1, 20);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbNoScope),
 				     TRUE);
 
 	rrbUseBounds =
 	    gtk_radio_button_new_with_label(vbox4_group,
-					    _("Use Bounds"));
+					    _("Use bounds"));
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rrbUseBounds));
 	gtk_widget_show(rrbUseBounds);
 	gtk_box_pack_start(GTK_BOX(vbox4), rrbUseBounds, FALSE,
 			   FALSE, 0);
-	gtk_widget_set_usize(rrbUseBounds, -2, 20);
+	gtk_widget_set_size_request(rrbUseBounds, -1, 20);
 
 	rbLastSearch =
 	    gtk_radio_button_new_with_label(vbox4_group,
-					    _("Last Search"));
+					    _("Last search"));
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbLastSearch));
 	gtk_widget_show(rbLastSearch);
 	gtk_box_pack_start(GTK_BOX(vbox4), rbLastSearch, FALSE,
 			   FALSE, 0);
-	gtk_widget_set_usize(rbLastSearch, -2, 20);
+	gtk_widget_set_size_request(rbLastSearch, -1, 20);
 
 	frame5 = gtk_frame_new(NULL);
 	gtk_widget_show(frame5);
@@ -647,7 +647,7 @@ void gui_create_search_sidebar(void)
 	gtk_table_attach(GTK_TABLE(table1), entryLower, 1, 2, 0, 1,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_widget_set_usize(entryLower, 114, 22);
+	gtk_widget_set_size_request(entryLower, 114, 22);
 	gtk_entry_set_text(GTK_ENTRY(entryLower), _("Genesis"));
 
 	entryUpper = gtk_entry_new();;
@@ -655,9 +655,8 @@ void gui_create_search_sidebar(void)
 	gtk_table_attach(GTK_TABLE(table1), entryUpper, 1, 2, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_widget_set_usize(entryUpper, 114, 22);
+	gtk_widget_set_size_request(entryUpper, 114, 22);
 	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
-
 	
 
 	gtk_signal_connect(GTK_OBJECT(rrbUseBounds),
