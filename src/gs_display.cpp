@@ -355,7 +355,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	beginHTML(GTK_WIDGET(gtkText),TRUE);	
 	
-	sprintf(tmpBuf,"<html><META HTTP-Equiv=\"Content-Type\" CONTENT=\"text/html; charset=iso-8859-7\"><body text=\"#151515\" link=\"#898989\">",
+	sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">",
 		gsfonts->bible_font_size);
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 	utf8len = g_utf8_strlen (utf8str , -1) ;
@@ -421,10 +421,15 @@ char InterlinearDisp::Display(SWModule & imodule)
 	gint utf8len;
 	
 	
-	buf = (char *) imodule.Description();	
+	//buf = (char *) imodule.Description();	
 	(const char *) imodule;		
-	sprintf(tmpBuf, "<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\"><A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
-		gsfonts->interlinear_font_size,imodule.Name(), buf, imodule.Name(), imodule.KeyText());	
+	sprintf(tmpBuf, 
+		"<B><A HREF=\"[%s]%s\"><FONT COLOR=\"#000FCF\" SIZE=\"%s\"> [%s]</font></a></b><FONT COLOR=\"#000FCF\">[%s] </font>",
+				imodule.Name(), 
+				 imodule.Description(),
+				gsfonts->interlinear_font_size,
+				imodule.Name(), 
+				imodule.KeyText());	
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 	utf8len = g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);	
@@ -437,7 +442,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 			
 	displayHTML(GTK_WIDGET(gtkText), (const char *)imodule, strlen((const char *)imodule) );
 		
-	sprintf(tmpBuf,"%s", "</font><br><hr>");
+	sprintf(tmpBuf," [<A HREF=\"@%s\">view context</a>]</font><br><hr>",imodule.Name());
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
 	return 0;
@@ -477,7 +482,8 @@ void AboutModsDisplayHTML(char *to, char *text)
 			if ((text[i+1] == 'p') && (text[i+2] == 'a') && (text[i+3] == 'r'))
 			{
 				*to++ = '<';
-				*to++ = 'P';
+				*to++ = 'b';
+				*to++ = 'r';
 				*to++ = '>';
 				*to++ = '\n';
 				i += 3;

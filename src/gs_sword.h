@@ -41,8 +41,8 @@ void searchSWORD(GtkWidget * searchFrm);
 void resultsListSWORD(GtkWidget * searchFrm, 
 		gint row, 
 		gint column);
-void strongsSWORD(gboolean choice);
-void footnotesSWORD(gboolean choice);
+void strongsSWORD(gint window, gboolean choice);
+void footnotesSWORD(gint window, gboolean choice);
 void nbchangecurModSWORD(gchar *modName, 
 						gint page_num, 
 						gboolean showchange); 
@@ -96,11 +96,13 @@ void navVCModSWORD(gint direction);
 gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
-void morphsSWORD(gboolean choice) ;
+void morphsSWORD(gint window, gboolean choice) ;
 void gotoBookmarkSWORD(gchar *modName, gchar *key);
 gchar* getmodkeySWORD(gint num);
 gboolean getVerseListSWORD(gchar *vlist);
 gfloat getSwordVerionSWORD(void);
+void swapmodsSWORD(gchar *intmod);
+
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }
