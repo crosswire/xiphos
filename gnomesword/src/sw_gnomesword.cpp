@@ -316,8 +316,7 @@ void ChangeVerseSWORD(void)
 	gchar * currRef;
 	
 	//-- save any changes to personal notes
-	if ((GTK_TOGGLE_BUTTON
-	     (lookup_widget(settings->app, "btnEditNote"))->active) && noteModified) {
+	if ((settings->editnote) && noteModified) {
 		if (autoSave) {	//-- if we are in edit mode
 			//savenoteSWORD(noteModified);	//-- save if text in note window has changed                    
 		}
@@ -363,11 +362,8 @@ void ChangeVerseSWORD(void)
 	
 	//--------------------------------------------------------------- change personal notes editor	
 	if (settings->notebook3page == 1) {
-		if (GTK_TOGGLE_BUTTON(lookup_widget(settings->app, "tbtnFollow"))->active) {	//-- if personal notes follow button is active (on)                   
-			if ((GTK_TOGGLE_BUTTON
-			     (lookup_widget
-			      (settings->app, "btnEditNote"))->active)
-			    && (!autoSave)) {
+		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
+			if (settings->editnote && (!autoSave)) {
 				//-- do nothing
 			} else {
 				if (usepersonalcomments && percomMod) {
