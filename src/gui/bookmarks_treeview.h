@@ -56,7 +56,7 @@ typedef struct _bookmark_data BOOKMARK_DATA;
 extern TreePixbufs *pixbufs;
 extern GtkTreeView *bookmark_tree;
 
-void gui_verselist_to_bookmarks(gchar * module_name);	
+void gui_verselist_to_bookmarks(GList * verses);	
 GtkWidget *gui_create_bookmark_tree(void);
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 			    GtkTreeIter *parent);

@@ -210,12 +210,33 @@ int set_range(char * list)
  *   int
  */
 
-int start_parse_verse_list(const char * list)
+int start_parse_verse_list(const char * list, char * current_key)
 {
 	
-	return backend_start_parse_verse_list(list);
+	return backend_start_parse_verse_list(list, current_key);
 }
 
+/******************************************************************************
+ * Name
+ *    start_parse_range_list
+ *
+ * Synopsis
+ *   #include "main/key.h"
+ *
+ *   int start_parse_verse_list(char * list)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   int
+ */
+
+int start_parse_range_list(const char * list)
+{
+	
+	return backend_start_parse_range_list(list);
+}
 
 
 /******************************************************************************
