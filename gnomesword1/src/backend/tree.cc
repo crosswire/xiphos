@@ -225,6 +225,8 @@ char * backend_get_text_from_offset(char * module_name, unsigned long offset)
                         mod->SetKey(treenode);
                         mod->KeyText();      //snap to entry
                 }
+		//g_print("\n%s\n",(char *) mod->getRawEntry());
+		//g_print("\n%s\n",(char *) mod->RenderText());
 		return strdup(mod->RenderText());
         }
         return NULL;

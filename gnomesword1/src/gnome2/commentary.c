@@ -548,6 +548,41 @@ static void add_vbox_to_notebook(COMM_DATA * c)
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+
+static void set_new_globals(GLOBAL_OPS * ops)
+{	
+	ops->module_type = 1;
+	ops->words_in_red = TRUE;
+	ops->strongs = TRUE;
+	ops->morphs = TRUE;
+	ops->footnotes = TRUE;
+	ops->greekaccents = TRUE;
+	ops->lemmas = TRUE;
+	ops->scripturerefs = TRUE;
+	ops->hebrewpoints = TRUE;
+	ops->hebrewcant = TRUE;
+	ops->headings = TRUE;
+	ops->variants_all = TRUE;
+	ops->variants_primary = TRUE;
+	ops->variants_secondary = TRUE;
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_setup_commentary
  *
  * Synopsis
@@ -578,20 +613,8 @@ void gui_setup_commentary(GList * mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		c = g_new0(COMM_DATA, 1);
-		c->cgs = g_new0(COMM_GLOBALS, 1);
-		c->cgs->words_in_red = FALSE;
-		c->cgs->strongs = FALSE;
-		c->cgs->morphs = FALSE;
-		c->cgs->footnotes = FALSE;
-		c->cgs->greekaccents = FALSE;
-		c->cgs->lemmas = FALSE;
-		c->cgs->scripturerefs = FALSE;
-		c->cgs->hebrewpoints = FALSE;
-		c->cgs->hebrewcant = FALSE;
-		c->cgs->headings = FALSE;
-		c->cgs->variants_all = FALSE;
-		c->cgs->variants_primary = FALSE;
-		c->cgs->variants_secondary = FALSE;
+		c->ops = gui_new_globals();
+		set_new_globals(c->ops);
 		c->frame = NULL;
 		c->ec = NULL;
 		c->dialog = NULL;
@@ -671,7 +694,7 @@ void gui_shutdown_commentary(void)
 		/* 
 		 * free global options 
 		 */
-		g_free(c->cgs);
+		g_free(c->ops);
 		g_free((COMM_DATA *) comm_list->data);
 		comm_list = g_list_next(comm_list);
 	}

@@ -23,24 +23,8 @@
 #define ___COMMENTARY_H_
 
 #include "gui/editor.h"
+#include "gui/mod_global_ops.h"
 
-typedef struct _comm_global_ops COMM_GLOBALS;
-struct  _comm_global_ops {
-	gboolean
-	    words_in_red,
-	    strongs,
-	    morphs,
-	    footnotes,
-	    greekaccents,
-	    lemmas,
-	    scripturerefs,
-	    hebrewpoints, 
-	    hebrewcant, 
-	    headings, 
-	    variants_all, 
-	    variants_primary, 
-	    variants_secondary;
-};
 
 typedef struct _commdata COMM_DATA;
 struct _commdata {
@@ -51,8 +35,10 @@ struct _commdata {
 	GtkWidget *spb_verse;
 	GtkWidget *freeform_lookup;
 	GtkWidget *statusbar;
+	
 	/* for personal comments editor */
 	GSHTMLEditorControlData *ec;
+	
 	/* for commentary panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
@@ -81,7 +67,7 @@ struct _commdata {
 	gboolean chapter_heading;
 	gboolean sync;
 	
-	COMM_GLOBALS *cgs;
+	GLOBAL_OPS *ops;
 };
 extern COMM_DATA *cur_c;
 

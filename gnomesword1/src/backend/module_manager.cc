@@ -401,8 +401,6 @@ GList *backend_module_mgr_list_local_sources(void)
 			mms = g_new(MOD_MGR_SOURCE, 1);
 			InstallSource *is = new InstallSource("DIR", 
 					sourceBegin->second.c_str());
-			if(!is)
-				return NULL;
 			mms->caption = is->caption;
 			mms->type = is->type;
 			mms->source = is->source;
