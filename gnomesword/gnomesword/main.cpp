@@ -28,6 +28,7 @@
 #include "callback.h"
 #include "interface.h"
 #include "filestuff.h"
+#include "dialogs.h"
 
 int
 main (int argc, char *argv[])
