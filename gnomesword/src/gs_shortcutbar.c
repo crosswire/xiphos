@@ -405,8 +405,7 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	EShortcutBar *bar1;
 	gchar 
 		*group_name, 
-		modName[16], 
-		*pathname;
+		modName[16]; 
 	GdkPixbuf 
 		*icon_pixbuf = NULL;
 	
@@ -429,20 +428,20 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 		switch (sbtype) {
 		case 0:
-			pathname = gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 			break;
 		case 1:
-			pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 			break;
 		case 2:
-			pathname = gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 			break;
 		case 3:
-			pathname = gnome_pixmap_file("gnomesword/book-gold.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-gold.png");
 			break;
 		}
 		
@@ -469,7 +468,7 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *group_name;
 	gint group_num, sbtype;
 	EShortcutBar *bar1;
-	gchar modName[16], *pathname;
+	gchar modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
@@ -483,17 +482,16 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	switch (sbtype) {
 	case 0:
-		pathname = gnome_pixmap_file("gnomesword/book-un.png");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 		break;
 	case 1:
-		pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
-
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 		break;
 	case 2:
-		pathname = gnome_pixmap_file("gnomesword/book-green.png");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 		break;
 	}
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
@@ -1846,8 +1844,7 @@ void setupSB(SETTINGS * s)
 		*filename, 
 		group_name[256], 
 		icon_size[10],
-		modName[16], 
-		*pathname;
+		modName[16]; 
 	GdkPixbuf 
 		*icon_pixbuf = NULL;
 
@@ -1874,33 +1871,20 @@ void setupSB(SETTINGS * s)
 				sbtype = 0;
 			switch (sbtype) {
 			case 0:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-un.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 				break;
 			case 1:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-bl.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
-
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 				break;
 			case 2:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-green.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 				break;
 			case 3:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-gold.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-gold.png");
 				break;
 			}
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
@@ -1926,9 +1910,8 @@ void setupSB(SETTINGS * s)
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum1, -1,
@@ -1951,9 +1934,8 @@ void setupSB(SETTINGS * s)
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum2, -1,
@@ -1976,9 +1958,8 @@ void setupSB(SETTINGS * s)
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum3, -1,
@@ -2002,9 +1983,8 @@ void setupSB(SETTINGS * s)
 						     groupnum8,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-gold.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-gold.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum8, -1,
@@ -2133,7 +2113,6 @@ void update_shortcut_bar(SETTINGS * s)
 	EShortcutBar *bar;
 	gchar *filename, group_name[256], icon_size[10];
 	GdkPixbuf *icon_pixbuf = NULL;
-	gchar *pathname;
 	gchar modName[16];
 
 	bar = E_SHORTCUT_BAR(shortcut_bar);
@@ -2170,33 +2149,20 @@ void update_shortcut_bar(SETTINGS * s)
 				sbtype = 0;
 			switch (sbtype) {
 			case 0:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-un.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 				break;
 			case 1:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-bl.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
-
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 				break;
 			case 2:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-green.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 				break;
 			case 3:
-				pathname =
-				    gnome_pixmap_file
-				    ("gnomesword/book-gold.png");
 				icon_pixbuf =
-				    gdk_pixbuf_new_from_file(pathname);
+				    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-gold.png");
 				break;
 			}
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
@@ -2221,9 +2187,8 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-un.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum1, -1,
@@ -2246,9 +2211,8 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-bl.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum2, -1,
@@ -2271,9 +2235,8 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-green.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum3, -1,
@@ -2298,9 +2261,8 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum8,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-			pathname =
-			    gnome_pixmap_file("gnomesword/book-gold.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			icon_pixbuf =
+        gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/book-gold.png");
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum8, -1,

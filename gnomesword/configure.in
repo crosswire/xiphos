@@ -77,29 +77,23 @@ dnl Languages which your application supports
 ALL_LINGUAS="de sk"
 AM_GNOME_GETTEXT
 
-dnl Set PACKAGE_LOCALE_DIR in config.h.
+dnl Set PACKAGE_*_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
+  AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/pixmaps/${PACKAGE}")
+  AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${ac_default_prefix}/${DATADIRNAME}/gnome/help/${PACKAGE}")
+  AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${ac_default_prefix}/${DATADIRNAME}/gnome/apps")
+  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}")
 else
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
+  AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/pixmaps/${PACKAGE}")
+  AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${prefix}/${DATADIRNAME}/gnome/help/${PACKAGE}")
+  AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${prefix}/${DATADIRNAME}/gnome/apps")
+  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}")
 fi
 
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
-
-dnl Subst PACKAGE_PIXMAPS_DIR.
-PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
-AC_SUBST(PACKAGE_PIXMAPS_DIR)
-
-dnl Subst PACKAGE_HELP_DIR.
-PACKAGE_HELP_DIR="`gnome-config --datadir`/gnome/help/${PACKAGE}"
-AC_SUBST(PACKAGE_HELP_DIR)
-
-dnl Subst PACKAGE_MENU_DIR.
-PACKAGE_MENU_DIR="`gnome-config --datadir`/gnome/apps"
-AC_SUBST(PACKAGE_MENU_DIR)
-
-
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
 GS_CHECK_LIB(GAL, gal, 0.8.0.0)
