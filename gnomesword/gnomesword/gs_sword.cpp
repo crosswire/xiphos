@@ -438,7 +438,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 
 //-------------------------------------------------------------------------------------------
 void 
-FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
+FillDictKeys(void)  //-- fill clist with dictionary keys -
 {                            //-- number of keys depends on hight of list widget and size of font
 	ModMap::iterator it; //-- iterator to go through modules and find modName
 	int index = 0;      //-- for index into list widget
@@ -449,9 +449,9 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 	GtkWidget *list;     //-- list widget to display items found
 
 	list = lookup_widget(MainFrm, "list1"); //-- get pointer to list widget
-	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText"))); //-- get key to form user
+	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText"))); //-- get key to use form user
 	j=0;
-	it = mainMgr->Modules.find(ModName); //-- find module to use for search
+	it = mainMgr->Modules.find(curdictMod->Name()); //-- find module to use for search
 	if (it != mainMgr->Modules.end()){ //-- if we dont reach the end of our modules	
 		SWModule *mod = (*it).second;  //-- temp module to work with
 		mod->KeyText(); //-- snap to entry
@@ -803,7 +803,7 @@ changcurdictModSWORD(gchar *modName, gchar *keyText, gint page_num) //-- someone
 		curdictMod->SetKey(keyText);   //-- set key to text from lookup entry
 		curdictMod->Display();	 //-- display new dict
 		//curdictMod->Name();
-		FillDictKeys(curdictMod->Name()); //-- fill the list widget with keys	
+		FillDictKeys(); //-- fill the list widget with keys	
 		gtk_frame_set_label( GTK_FRAME(frame),curdictMod->Name()); //-- set frame label
 	}
 }
@@ -817,7 +817,7 @@ dictSearchTextChangedSWORD(char* mytext)   //-- dict lookup text changed
 		if(strcmp(mytext,"")){  //-- if text is not null		
 			curdictMod->SetKey(mytext); //-- set key to our text
 			curdictMod->Display();	//-- show what we found
-			FillDictKeys(curdictMod->Name()); //-- fill the list widget with keys	
+			FillDictKeys(); //-- fill the list widget with keys	
 		}
 	}
 }
@@ -979,4 +979,12 @@ lookupStrongsSWORD(gint theNumber) /* theNumber - strongs number was double clic
 void setglobalopsSWORD(gchar *option, gchar *yesno)
 {
 	mainMgr->setGlobalOption(option, yesno);	/* turn option on or off */	
+}
+
+/*
+ *redisplayTextSWORD - display Bible text in main window
+*/
+void redisplayTextSWORD(void)
+{
+	curMod->Display();	
 }
