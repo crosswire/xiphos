@@ -6,11 +6,11 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=30
-1=248
-2=64
-3=49
-4=181
+0=261
+1=33
+2=219
+3=1
+4=299
 5=69
 6=615
 7=865
@@ -46,28 +46,30 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gui/editor_spell.h
-1=/home/terry/gnomesword/gnomesword1/src/gnome/editor_spell.c
+0=/home/terry/gnomesword/gnomesword1/src/gnome/editor_spell.c
+1=/home/terry/gnomesword/gnomesword1/src/gui/editor_spell.h
+2=/home/terry/gnomesword/gnomesword1/src/main/spell_ispell.c
+3=/home/terry/gnomesword/gnomesword1/src/main/spell.h
 
 [replace_text]
-0=.h
-1=DEBUG_MSG
-2=sword.h
-3=bookmark_tree
-4=bm->
-5=get_mod_type
-6=p->ec->key
-7=p->ec
+0=spell_checker
+1=.h
+2=DEBUG_MSG
+3=sword.h
+4=bookmark_tree
+5=bm->
+6=get_mod_type
+7=p->ec->key
 
 [find_text]
-0=ecd
-1=word
-2=word->text
-3=Tword
-4=free_word
-5=run_spell_checker
-6=check_word
-7=.c
+0=manager
+1=ecd
+2=word
+3=word->text
+4=Tword
+5=free_word
+6=run_spell_checker
+7=check_word
 
 [executer args]
 0=newconfigs

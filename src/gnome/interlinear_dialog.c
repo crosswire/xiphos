@@ -27,6 +27,7 @@
 
 #include "gui/interlinear_dialog.h"
 #include "gui/interlinear.h"
+#include "gui/gnomesword.h"
 
 #include "main/sword.h"
 //#include "main/gs_gnomesword.h"
@@ -156,8 +157,8 @@ void gui_undock_interlinear_page(void)
 {
 	ApplyChangeBook = FALSE;
 	Interlinear_UnDock_Dialog = gui_create_interlinear_dialog();
-	gtk_widget_reparent(settings.frameInt, vboxInt);
-	gtk_notebook_remove_page(GTK_NOTEBOOK(settings.workbook_lower), 2);
+	gtk_widget_reparent(widgets.frame_interlinear, vboxInt);
+	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.workbook_lower), 2);
 	settings.cvInterlinear =
 		update_controls_interlinear(settings.currentverse);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
@@ -219,14 +220,14 @@ static void on_dlgInterlinear_destroy(GtkObject *object, gpointer user_data)
 	
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox",
 				 vbox,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
-	gtk_notebook_insert_page_menu(GTK_NOTEBOOK(settings.workbook_lower),
+	gtk_notebook_insert_page_menu(GTK_NOTEBOOK(widgets.workbook_lower),
 				      vbox, tab_label, menu_label, 2);
-	gtk_widget_reparent(settings.frameInt, vbox);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower), 2); 
+	gtk_widget_reparent(widgets.frame_interlinear, vbox);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower), 2); 
 	settings.dockedInt = TRUE;
 	gui_update_interlinear_page();
 }

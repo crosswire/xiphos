@@ -31,6 +31,7 @@
 #include "gui/interlinear_dialog.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
+#include "gui/gnomesword.h"
 
 //#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
@@ -368,7 +369,7 @@ void gui_update_interlinear_page(void)
 	
 	if (settings.havebible) {
 		/* setup gtkhtml widget */
-		GtkHTML *html = GTK_HTML(settings.htmlInterlinear);
+		GtkHTML *html = GTK_HTML(widgets.html_interlinear);
 		was_editable = gtk_html_get_editable(html);
 		if (was_editable)
 			gtk_html_set_editable(html, FALSE);
@@ -381,7 +382,7 @@ void gui_update_interlinear_page(void)
 			settings.bible_text_color,
 			settings.link_color);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear,
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
 					   tmpBuf);
 		utf8len = strlen(utf8str);      
 		if (utf8len) {
@@ -431,7 +432,7 @@ void gui_update_interlinear_page(void)
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size, 
 					settings.currentverse);
-				utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, tmpBuf);
+				utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, tmpBuf);
 				utf8len = strlen(utf8str);
 				if (utf8len) {
 					gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -446,7 +447,7 @@ void gui_update_interlinear_page(void)
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size,
 				mod_name);
-			utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, tmpBuf);
+			utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, tmpBuf);
 			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -457,7 +458,7 @@ void gui_update_interlinear_page(void)
 			else
 				sprintf(tmpBuf, "<font face=\"%s\"size=\"%s\">", font_name, font_size);
 				
-			utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, tmpBuf);
+			utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, tmpBuf);
 			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -472,7 +473,7 @@ void gui_update_interlinear_page(void)
 			sprintf(tmpBuf,
 				"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 				mod_name);
-			utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, tmpBuf);
+			utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, tmpBuf);
 			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -481,7 +482,7 @@ void gui_update_interlinear_page(void)
 		
 		sprintf(tmpBuf, "</table></body></html>");
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear,
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
 					   tmpBuf);
 		utf8len = strlen(utf8str);       
 		if (utf8len) {
@@ -492,7 +493,7 @@ void gui_update_interlinear_page(void)
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);
 	}
-	gtk_frame_set_label(GTK_FRAME(settings.frameInt), settings.currentverse);
+	gtk_frame_set_label(GTK_FRAME(widgets.frame_interlinear), settings.currentverse);
 	if(font_name)
 		free(font_name);
 }
@@ -538,7 +539,7 @@ static void int_display(gchar *key)
 	
 	const char *cur_book;
 	
-	GtkHTML *html = GTK_HTML(settings.htmlInterlinear);
+	GtkHTML *html = GTK_HTML(widgets.html_interlinear);
 	
 	tmpkey = get_valid_key(key);
 	
@@ -555,7 +556,7 @@ static void int_display(gchar *key)
 		if(cur_chapter != get_chapter_from_key(tmpkey))
 			break;
 		sprintf(buf,"%s","<tr valign=\"top\">");		
-		utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);		
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -611,7 +612,7 @@ static void int_display(gchar *key)
 				use_font_size,
 				textColor);	
 			
-			utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+			utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -624,7 +625,7 @@ static void int_display(gchar *key)
 			}
 			
 			sprintf(buf, "%s", "</font></td>");	
-			utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+			utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 			utf8len = strlen(utf8str);		
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -632,7 +633,7 @@ static void int_display(gchar *key)
 		}
 				
 		sprintf(buf,"%s","</tr>");		
-		utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);		
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
@@ -664,7 +665,7 @@ void gui_update_interlinear_page_detached(void)
 	gint utf8len;
 
 	//-- setup gtkhtml widget
-	GtkHTML *html = GTK_HTML(settings.htmlInterlinear);
+	GtkHTML *html = GTK_HTML(widgets.html_interlinear);
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -675,7 +676,7 @@ void gui_update_interlinear_page_detached(void)
 	sprintf(buf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 		settings.bible_bg_color, settings.bible_text_color, settings.link_color);
-	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
@@ -687,7 +688,7 @@ void gui_update_interlinear_page_detached(void)
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.Interlinear1Module);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		    e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -700,7 +701,7 @@ void gui_update_interlinear_page_detached(void)
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.Interlinear2Module);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		    e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -713,7 +714,7 @@ void gui_update_interlinear_page_detached(void)
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.Interlinear3Module);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		    e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -721,12 +722,12 @@ void gui_update_interlinear_page_detached(void)
 		}
 	}
 
-	if (settings.htmlInterlinear) {
+	if (widgets.html_interlinear) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.Interlinear4Module);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		    e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -739,7 +740,7 @@ void gui_update_interlinear_page_detached(void)
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.Interlinear5Module);
 		utf8str =
-		    e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		    e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -748,7 +749,7 @@ void gui_update_interlinear_page_detached(void)
 	}
 
 	sprintf(buf, "%s", "</tr>");
-	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
@@ -760,7 +761,7 @@ void gui_update_interlinear_page_detached(void)
 	int_display(settings.cvInterlinear);
 
 	sprintf(buf, "%s", "</table></body></html>");
-	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
@@ -912,7 +913,7 @@ static void add_items_to_options_menu(void)
 		/* add global option items to interlinear popup menu */
 		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
 		sprintf(menuName, "optionNum%d", viewNumber++);
-		gtk_object_set_data(GTK_OBJECT(settings.app), menuName, menuChoice);
+		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName, menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 			   GTK_SIGNAL_FUNC(on_int_global_options_activate),
@@ -1142,9 +1143,9 @@ static GtkWidget * create_interlinear_popup(GList * mods)
 void gui_create_interlinear_popup(GList *bible_description) 
 {
 	/* create popup menu for interlinear window */
-	settings.menuInt = create_interlinear_popup(bible_description);	
+	GtkWidget * menu_inter = create_interlinear_popup(bible_description);	
 	/* attach popup menus */
-	gnome_popup_menu_attach(settings.menuInt,
-			settings.htmlInterlinear, (gchar*)"1");
+	gnome_popup_menu_attach(menu_inter,
+			widgets.html_interlinear, (gchar*)"1");
 	add_items_to_options_menu();
 }

@@ -135,9 +135,9 @@ static void set_page_text(gchar * modname, GList * text_list)
 		text_list = g_list_next(text_list);
 	}
 	cur_t = t;
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_text), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_text), page);
 	settings.text_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_text),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 			settings.text_tabs);
 }
 
@@ -241,7 +241,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 * set program title to GnomeSWORD + current text module name 
 	 */
 	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_name));
-	gtk_window_set_title(GTK_WINDOW(settings.app), title);
+	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 	/*
 	 *  hide/show toolbar 
 	 */
@@ -256,7 +256,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
 	
 	gui_set_text_frame_label();
-	settings.html_text = t->html;
+	widgets.html_text = t->html;
 }
 
 /******************************************************************************
@@ -389,7 +389,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_text),
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_text),
 			      page);
 }
 
@@ -413,7 +413,7 @@ static void on_text_showtabs_activate(GtkMenuItem *menuitem,
 		gpointer user_data)
 {
 	settings.text_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_text),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs); 
 	gui_set_text_frame_label();
 }
@@ -990,7 +990,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Strongs Numbers"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_strongs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_strongs",
 					 tgs->t_btn_strongs,
 					 (GtkDestroyNotify)
@@ -1017,7 +1017,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Morph Tags"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_morphs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_morphs",
 					 tgs->t_btn_morphs,
 					 (GtkDestroyNotify)
@@ -1044,7 +1044,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Footnotes"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_footnotes);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_footnotes",
 					 tgs->t_btn_footnotes,
 					 (GtkDestroyNotify)
@@ -1072,7 +1072,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Greek Accents"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_accents);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_accents",
 					 tgs->t_btn_accents,
 					 (GtkDestroyNotify)
@@ -1100,7 +1100,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Lemmas"), NULL,
 					       NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_lemmas);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_lemmas",
 					 tgs->t_btn_lemmas,
 					 (GtkDestroyNotify)
@@ -1129,7 +1129,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Scripture References"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_scripturerefs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_scripturerefs",
 					 tgs->t_btn_scripturerefs,
 					 (GtkDestroyNotify)
@@ -1159,7 +1159,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Hebrew Vowel Points"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_points);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_points",
 					 tgs->t_btn_points,
 					 (GtkDestroyNotify)
@@ -1188,7 +1188,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Hebrew Cantillation"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_cant);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_cant", tgs->t_btn_cant,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -1214,7 +1214,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Headings"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_headings);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_headings",
 					 tgs->t_btn_headings,
 					 (GtkDestroyNotify)
@@ -1236,7 +1236,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 	if (tgs->variants) {
 		variant_menu = gtk_menu_bar_new();
 		gtk_widget_ref(variant_menu);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "variant_menu", variant_menu,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -1248,14 +1248,14 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 				    0);
 
 		gtk_widget_ref(variant_menu_uiinfo[0].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "textual_variants",
 					 variant_menu_uiinfo[0].widget,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 
 		gtk_widget_ref(primary_reading_uiinfo[0].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "primary_reading",
 					 primary_reading_uiinfo[0].
 					 widget, (GtkDestroyNotify)
@@ -1268,7 +1268,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 		
 
 		gtk_widget_ref(primary_reading_uiinfo[1].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "secondary_reading",
 					 primary_reading_uiinfo[1].
 					 widget, (GtkDestroyNotify)
@@ -1277,7 +1277,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 		tgs->t_btn_secondary = primary_reading_uiinfo[1].widget;
 
 		gtk_widget_ref(primary_reading_uiinfo[2].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "all_readings",
 					 primary_reading_uiinfo[2].
 					 widget, (GtkDestroyNotify)
@@ -1312,7 +1312,7 @@ static void create_text_pane(TEXT_DATA * t)
 	
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "t->frame",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame",
 				 t->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->frame);
@@ -1320,14 +1320,14 @@ static void create_text_pane(TEXT_DATA * t)
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox", vbox,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox", vbox,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
 
 	t->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "t->frame_toolbar", t->frame_toolbar,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame_toolbar", t->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(t->frame_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox), t->frame_toolbar, FALSE, TRUE, 0);
@@ -1336,7 +1336,7 @@ static void create_text_pane(TEXT_DATA * t)
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_TEXT);
 	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbar",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar",
 				 toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
@@ -1352,7 +1352,7 @@ static void create_text_pane(TEXT_DATA * t)
 	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "scrolledwindow",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "scrolledwindow",
 				 scrolledwindow,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow);
@@ -1365,7 +1365,7 @@ static void create_text_pane(TEXT_DATA * t)
 
 	t->html = gtk_html_new();
 	gtk_widget_ref(t->html);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "t->html", t->html, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(t->html);
@@ -1376,7 +1376,7 @@ static void create_text_pane(TEXT_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
-			   GTK_SIGNAL_FUNC(gui_url), (gpointer) settings.app);
+			   GTK_SIGNAL_FUNC(gui_url), (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(t->html),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
@@ -1437,7 +1437,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	display_change = FALSE;
 	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (settings.notebook_text),
+				      (widgets.notebook_text),
 				      page_num);
 	}
 
@@ -1522,28 +1522,28 @@ static void add_vbox_to_notebook(TEXT_DATA * t)
 	
 	t->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(t->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 			"t->vbox", t->vbox,
 			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->vbox);
-	gtk_container_add(GTK_CONTAINER(settings.notebook_text), t->vbox);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_text), t->vbox);
 	
 	
 	label = gtk_label_new(t->mod_name);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
 				 label, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_text),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_text),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebook_text),
+				   (GTK_NOTEBOOK(widgets.notebook_text),
 				    t->mod_num), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.notebook_text),
+					 (widgets.notebook_text),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (settings.notebook_text),
+					  (widgets.notebook_text),
 					  t->mod_num),
 					 (gchar *) t->mod_name);
 }
@@ -1592,7 +1592,7 @@ void gui_setup_text(GList *mods)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(settings.notebook_text),
+	gtk_signal_connect(GTK_OBJECT(widgets.notebook_text),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_text_switch_page), text_list);

@@ -30,12 +30,13 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/utilities.h"
+#include "gui/gnomesword.h"
 
 //#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 static GtkWidget* gui_create_shortcutbar_dialog(void);
-
+static GtkWidget * vbox_dock; 
 
 /******************************************************************************
  * Name
@@ -61,29 +62,29 @@ void gui_attach_detach_shortcutbar(void)
 	if (settings.docked) {
 		settings.docked = FALSE;
 		biblepanesize = settings.gs_width / 2;
-		settings.dockSB = gui_create_shortcutbar_dialog();
-		gtk_widget_reparent(settings.shortcut_bar, settings.vboxDock);
+		widgets.dock_sb = gui_create_shortcutbar_dialog();
+		gtk_widget_reparent(widgets.shortcutbar, vbox_dock);
 		settings.showshortcutbar = TRUE;
-		gtk_widget_show(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned), 0);
+		gtk_widget_show(widgets.shortcutbar);
+		e_paned_set_position(E_PANED(widgets.epaned), 0);
 		e_paned_set_position(E_PANED
 				     (gui_lookup_widget
-				      (settings.app, "hpaned1")),
+				      (widgets.app, "hpaned1")),
 				     biblepanesize);
-		gtk_widget_show(settings.dockSB);
+		gtk_widget_show(widgets.dock_sb);
 	} else {
 		settings.docked = TRUE;
 		biblepanesize =
 		    (settings.gs_width - settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(settings.epaned),
+		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (gui_lookup_widget
-				      (settings.app, "hpaned1")),
+				      (widgets.app, "hpaned1")),
 				     biblepanesize);
-		gtk_widget_reparent(settings.shortcut_bar,
-				    settings.epaned);
-		gtk_widget_destroy(settings.dockSB);
+		gtk_widget_reparent(widgets.shortcutbar,
+				    widgets.epaned);
+		gtk_widget_destroy(widgets.dock_sb);
 	}
 }
 
@@ -140,12 +141,12 @@ GtkWidget* gui_create_shortcutbar_dialog(void)
 	gtk_widget_set_usize(dlgDock, settings.shortcutbar_width,
 			settings.gs_hight);
 
-	settings.vboxDock = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(settings.vboxDock);
-	gtk_object_set_data_full(GTK_OBJECT (dlgDock), "settings.vboxDock",
-		  settings.vboxDock, (GtkDestroyNotify)gtk_widget_unref);
-	gtk_widget_show(settings.vboxDock);
-	gtk_container_add(GTK_CONTAINER(dlgDock), settings.vboxDock);
+	vbox_dock = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox_dock);
+	gtk_object_set_data_full(GTK_OBJECT (dlgDock), "vbox_dock",
+		  vbox_dock, (GtkDestroyNotify)gtk_widget_unref);
+	gtk_widget_show(vbox_dock);
+	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
 
 	gtk_signal_connect(GTK_OBJECT(dlgDock), "destroy",
 			GTK_SIGNAL_FUNC(on_dlgDock_destroy), NULL);

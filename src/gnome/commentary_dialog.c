@@ -30,6 +30,7 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary_dialog.h"
 #include "gui/html.h"
+#include "gui/gnomesword.h"
 
 #include "main/commentary.h"
 #include "main/sword.h"
@@ -351,7 +352,7 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 		    gtk_check_menu_item_new_with_label(
 				(gchar *) (gchar *)tmp->data);
 		sprintf(menuName, "ModuleNum%d", view_number);
-		gtk_object_set_data(GTK_OBJECT(settings.app), menuName,
+		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",

@@ -31,6 +31,8 @@ gnomesword_SOURCES =  \
     settings.h \
     shortcutbar.c \
     shortcutbar.h \
+    spell_pspell.c \
+    spell_pspell.h \
     sword.c \
     sword.h
 

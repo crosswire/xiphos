@@ -77,7 +77,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
-		gnome_appbar_set_status(GNOME_APPBAR(settings.appbar),
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					"");
 		in_url = FALSE;
 	}
@@ -107,7 +107,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		else
 			sprintf(buf, _("Go to %s"), url);
 
-		gnome_appbar_set_status(GNOME_APPBAR(settings.appbar),
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 	}
 }
@@ -442,28 +442,28 @@ void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	switch(settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			html = GTK_HTML(settings.html_text);
+			html = GTK_HTML(widgets.html_text);
 		break;
 		case INTERLINEAR_WINDOW:
-			html = GTK_HTML(settings.htmlInterlinear);
+			html = GTK_HTML(widgets.html_interlinear);
 		break;
 		case COMMENTARY_WINDOW:
-			html = GTK_HTML(settings.html_comm);
+			html = GTK_HTML(widgets.html_comm);
 		break;
 		case DICTIONARY_WINDOW:
-			html = GTK_HTML(settings.html_dict);
+			html = GTK_HTML(widgets.html_dict);
 		break;
 		case BOOK_WINDOW:
-			html = GTK_HTML(settings.html_book);
+			html = GTK_HTML(widgets.html_book);
 		break;
 		case PERCOMM_WINDOW:
-			html = GTK_HTML(settings.html_percomm);
+			html = GTK_HTML(widgets.html_percomm);
 		break;
 		case STUDYPAD_WINDOW:
-			html = GTK_HTML(settings.html_studypad);
+			html = GTK_HTML(widgets.html_studypad);
 		break;
 		default: 
-			html = GTK_HTML(settings.html_text);
+			html = GTK_HTML(widgets.html_text);
 	}
 		
 	gtk_html_copy(html);

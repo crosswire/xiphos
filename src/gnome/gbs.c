@@ -121,7 +121,7 @@ static GtkCTreeNode *add_node_gbs(NODEDATA * data)
 {
 	GtkCTreeNode *retval;
 
-	retval = gtk_ctree_insert_node(GTK_CTREE(settings.ctree_widget_books),
+	retval = gtk_ctree_insert_node(GTK_CTREE(widgets.ctree_widget_books),
 				       data->parent,
 				       data->sibling,
 				       data->buf,
@@ -238,7 +238,7 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
 {
 	gchar *text;
 	
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs),
 			      page_num);
 	
 	text = display_gbs(cur_g->mod_name, key);
@@ -303,7 +303,7 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 	GtkCTreeNode *treeNode;
 	
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
-	settings.ctree_widget_books = gbs->ctree;
+	widgets.ctree_widget_books = gbs->ctree;
 
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 					cell[0])->text;
@@ -395,7 +395,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
 	settings.book_last_page = page_num;	
-	settings.html_book = g->html;
+	widgets.html_book = g->html;
 }
 
 /******************************************************************************
@@ -610,7 +610,7 @@ static void on_view_book_activate(GtkMenuItem * menuitem,
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs),
 			      page);
 }
 
@@ -678,7 +678,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 static void on_showtabs_activate(GtkMenuItem *menuitem, GBS_DATA *g)
 {
 	settings.book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
 	gui_set_gbs_frame_label(g);
 }
@@ -1007,7 +1007,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	p_gbs->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(p_gbs->frame);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "p_gbs->frame",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p_gbs->frame",
 				 p_gbs->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p_gbs->frame);
@@ -1015,7 +1015,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	
 	hpanedGBS = gtk_hpaned_new();
 	gtk_widget_ref(hpanedGBS);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "hpanedGBS",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hpanedGBS",
 				 hpanedGBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpanedGBS);
@@ -1024,7 +1024,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowCTREE_GBS);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindowCTREE_GBS",
 				 scrolledwindowCTREE_GBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -1038,7 +1038,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	p_gbs->ctree = gtk_ctree_new(3, 0);
 	gtk_widget_ref(p_gbs->ctree);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "p_gbs->ctree",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p_gbs->ctree",
 				 p_gbs->ctree,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p_gbs->ctree);
@@ -1052,28 +1052,28 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	label = gtk_label_new(_("label"));
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 0, label);
 
 	label = gtk_label_new(_("label200"));
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 1, label);
 
 	label = gtk_label_new(_("label"));
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 2, label);
 
 	frameGBS = gtk_frame_new(NULL);
 	gtk_widget_ref(frameGBS);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frameGBS",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frameGBS",
 				 frameGBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frameGBS);
@@ -1081,7 +1081,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	scrolledwindowHTML_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowHTML_GBS);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindowHTML_GBS",
 				 scrolledwindowHTML_GBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -1096,7 +1096,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	p_gbs->html = gtk_html_new();
 	
 	gtk_widget_ref(p_gbs->html);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "p_gbs->html", p_gbs->html,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p_gbs->html);
@@ -1113,7 +1113,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
 			   GTK_SIGNAL_FUNC(gui_url), 
-			   (gpointer) settings.app);
+			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),
@@ -1182,11 +1182,11 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 		gbs_list = g_list_next(gbs_list);
 	}
 		
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs), page);
 	gui_set_gbs_frame_label(g);
 		
 	settings.book_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
 }
 
@@ -1239,28 +1239,28 @@ static void add_vbox_to_notebook(GBS_DATA * g)
 	
 	g->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(g->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 			"g->vbox", g->vbox,
 			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(g->vbox);
-	gtk_container_add(GTK_CONTAINER(settings.notebook_gbs), g->vbox);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_gbs), g->vbox);
 	
 	
 	label = gtk_label_new(g->mod_name);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
 				 label, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebook_gbs),
+				   (GTK_NOTEBOOK(widgets.notebook_gbs),
 				    g->mod_num), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.notebook_gbs),
+					 (widgets.notebook_gbs),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (settings.notebook_gbs),
+					  (widgets.notebook_gbs),
 					  g->mod_num),
 					 (gchar *) g->mod_name);
 }
@@ -1310,7 +1310,7 @@ void gui_setup_gbs(GList *mods)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(settings.notebook_gbs), "switch_page",
+	gtk_signal_connect(GTK_OBJECT(widgets.notebook_gbs), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook_gbs_switch_page),
 			   gbs_list);
 	

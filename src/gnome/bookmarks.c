@@ -782,7 +782,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		node = (GtkCTreeNode *) user_data;
 	else
 		node = gtk_ctree_node_nth(
-				GTK_CTREE(settings.ctree_widget),
+				GTK_CTREE(widgets.ctree_widget),
                                 0);
 	mod_name = get_module_name();
 	key = get_module_key();
@@ -843,7 +843,7 @@ void on_new_subgroup_activate(GtkMenuItem * menuitem,
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
 				 GINT_TO_POINTER(0),
-				 GTK_WINDOW(settings.app));
+				 GTK_WINDOW(widgets.app));
 }
 
 
@@ -875,7 +875,7 @@ void on_add_new_group1_activate(GtkMenuItem * menuitem,
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
 				 GINT_TO_POINTER(1),
-				 GTK_WINDOW(settings.app));
+				 GTK_WINDOW(widgets.app));
 }
 
 
@@ -1195,7 +1195,7 @@ void gui_verselist_to_bookmarks(GList * list)
 	node = NULL;
 	tmp = list;
 	t = "|";
-	ctree = GTK_CTREE(settings.ctree_widget);
+	ctree = GTK_CTREE(widgets.ctree_widget);
 	/*** open dialog to get name for root node ***/
 	dialog =
 	    gnome_request_dialog(FALSE,
@@ -1203,7 +1203,7 @@ void gui_verselist_to_bookmarks(GList * list)
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
 				 GINT_TO_POINTER(1),
-				 GTK_WINDOW(settings.app));
+				 GTK_WINDOW(widgets.app));
 	/*** wait here until dialog is closed ***/
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
@@ -1307,8 +1307,8 @@ void gui_load_bookmark_tree(void)
 	GtkWidget *menu, *new_widget, *insert_item_widget;
 	GNode *gnode = NULL;
 
-	bmtree.ctree = GTK_CTREE(settings.ctree_widget);
-	bmtree.ctree_widget = settings.ctree_widget;
+	bmtree.ctree = GTK_CTREE(widgets.ctree_widget);
+	bmtree.ctree_widget = widgets.ctree_widget;
 	p_bmtree = &bmtree;
 
 	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
@@ -1344,7 +1344,7 @@ void gui_load_bookmark_tree(void)
 	}
 	
 	
-	gtk_signal_connect(GTK_OBJECT(settings.ctree_widget),
+	gtk_signal_connect(GTK_OBJECT(widgets.ctree_widget),
 			   "select_row",
 			   GTK_SIGNAL_FUNC(on_ctree_select_row),
 			   bmtree.ctree);
@@ -1682,7 +1682,7 @@ void create_add_bookmark_menu(GtkWidget * menu,
 	GtkCTreeNode *node;
 	gboolean is_leaf;
 	gint i;
-	ctree = GTK_CTREE(settings.ctree_widget);
+	ctree = GTK_CTREE(widgets.ctree_widget);
 
 	/* collapse tree so we only iterate through the roots */
 	gtk_ctree_collapse_recursive(ctree, NULL);

@@ -1,11 +1,18 @@
+2002-07-29  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added main/spell_pspell.c and main/spell.h
+	* moved widgets from settings structure to
+	  a widgets structure in gui/gnomesword.h
+	
+	
+
 2002-07-27  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed main/char_table.*, main/spell.* and main/spell_gui.*
 	* added gui/editor_spell.h and gnome/editor_spell.c
 	* spell checking now requires pspell but gnomesword will be built
 	  without spell checking if configure does not find pspell.
-	* gui stuff is removed from backend and main execpt main/settings.h
-	
+	* gui stuff is removed from backend and main execpt main/settings.h	
 
 
 2002-07-24  Terry Biggs <tbiggs@users.sourceforge.net>
