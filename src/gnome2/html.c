@@ -156,6 +156,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	gchar buf[255], *buf1;
 	gchar *tmpbuf;
 	gboolean is_strongsmorph = FALSE;
+	gint i,j;
 
 	
 	/***  moved out of url - clear appbar  ***/
@@ -178,7 +179,14 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		/***  osis footnote  ***/
 		else if (!strncmp(url, "noteID=", 7)) { /*noteID=Hebrews 1:2.n.1*/
-			//g_warning(url);               /*noteID=I Chronicles 1:7.n.1*/
+			//g_warning(url); 
+			if(!in_url) {
+				return;
+			}
+			if (hint.in_popup) {
+				gtk_widget_destroy(hint.hint_window);
+				hint.in_popup = FALSE;
+			}
 			buf1 = strchr(url, '=');
 			++buf1;
 			tmpbuf = get_footnote_body(buf1);
@@ -193,6 +201,18 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				g_free(tmpbuf);
 				return;
 			}
+		} else if (!strncmp(url, "note=", 5)) { 
+			g_warning(url);               
+			buf1 = strchr(url, '=');
+			++buf1;
+			//tmpbuf = get_footnote_body(buf1);
+			//if (tmpbuf == NULL)
+				//return;
+			//else {
+			gui_display_in_hint_window(buf1);
+			//g_free(tmpbuf);
+			return;
+			//}
 		}
 		/***  module name link  ***/
 		else if (*url == '[') {

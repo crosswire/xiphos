@@ -94,26 +94,26 @@ void gui_display_hint_in_viewer(gchar * text)
  *   GtkWidget*
  */
 
-static GtkWidget *create_hint_window(void)
+static void create_hint_window(void)
 {
 	GtkWidget *hint_window;
 	GtkWidget *frame;
 	GtkWidget *scrolledwindow72;
 
-	hint_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT(hint_window), "hint_window",
-			    hint_window);
-	gtk_window_set_title(GTK_WINDOW(hint_window), "window1");
-	gtk_window_set_position(GTK_WINDOW(hint_window),
+	hint.hint_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+/*	gtk_object_set_data(GTK_OBJECT(hint_window), "hint_window",
+			    hint_window);*/
+	gtk_window_set_title(GTK_WINDOW(hint.hint_window), "window1");
+	gtk_window_set_position(GTK_WINDOW(hint.hint_window),
 				GTK_WIN_POS_MOUSE);
-	gtk_window_set_default_size(GTK_WINDOW(hint_window), 191, 83);
-	gtk_window_set_resizable(GTK_WINDOW(hint_window),FALSE);
-	gtk_window_set_decorated(GTK_WINDOW(hint_window), FALSE);
-	gtk_widget_show(hint_window);
+	gtk_window_set_default_size(GTK_WINDOW(hint.hint_window), 191, 83);
+	gtk_window_set_resizable(GTK_WINDOW(hint.hint_window),FALSE);
+	gtk_window_set_decorated(GTK_WINDOW(hint.hint_window), FALSE);
+	gtk_widget_show(hint.hint_window);
 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
-	gtk_container_add(GTK_CONTAINER(hint_window), frame);
+	gtk_container_add(GTK_CONTAINER(hint.hint_window), frame);
 
 	scrolledwindow72 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow72);
@@ -130,7 +130,7 @@ static GtkWidget *create_hint_window(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow72),
 			  hint.html_widget);
 	hint.in_popup = TRUE;
-	return hint_window;
+	//return hint.hint_window;
 }
 
 
@@ -165,29 +165,39 @@ void gui_display_in_hint_window(gchar * note)
 	size_of_note = ((size_of_note / 24) + 2);
 	size_of_note = size_of_note * 18;
 	
+	hint.hint_window = NULL;
 	
-	str = g_string_new("");
 	if (!hint.in_popup) {
-		hint.hint_window = create_hint_window();
+		//hint.hint_window = 
+		create_hint_window();
+		if(!hint.hint_window)
+			return;
+		
+		gtk_window_set_modal(GTK_WINDOW(hint.hint_window), TRUE);
+		str = g_string_new("");
+		html = GTK_HTML(hint.html_widget);
+		htmlstream =
+		    gtk_html_begin_content(html, "text/html; charset=utf-8");
+		g_string_sprintf(str, "<body bgcolor=\"%s\">%s</body>",
+							 HINT_COLOR, note);
+		
+		gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
+		
+		gtk_html_end(GTK_HTML(html), htmlstream, status1);
+		
+		gtk_widget_set_size_request(hint.html_widget, 191, size_of_note);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		
+		gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
+		x += 10;
+		y += 10;
+		
+		gtk_window_move(GTK_WINDOW(hint.hint_window), x, y);
+		g_string_free(str, TRUE);
+		gtk_window_set_modal(GTK_WINDOW(hint.hint_window), FALSE);
 	}
-
-	html = GTK_HTML(hint.html_widget);
-	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-	g_string_sprintf(str, "<body bgcolor=\"%s\">%s</body>",
-						 HINT_COLOR, note);
-	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-
-	gtk_widget_set_size_request(hint.html_widget, 191, size_of_note);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
-	gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
-	x += 10;
-	y += 10;
-	gtk_window_move(GTK_WINDOW(hint.hint_window), x, y);
-	g_string_free(str, TRUE);
 }
 
 
@@ -210,7 +220,9 @@ void gui_display_in_hint_window(gchar * note)
 void gui_destroy_hint_window(void)
 {
 	if (hint.in_popup) {
-		gtk_widget_destroy(hint.hint_window);
+		if(hint.hint_window)
+			gtk_widget_destroy(hint.hint_window);
+		hint.hint_window = NULL;
 		hint.in_popup = FALSE;
 	}
 }
