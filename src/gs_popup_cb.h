@@ -80,6 +80,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
 void on_changeint5mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
+void on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data);
 					
 #ifdef __cplusplus
 }

@@ -869,7 +869,9 @@ static GtkWidget *create_pmDict(GList * mods)
 	return pmDict;
 }
 
-//----------------------------------------------------
+/*****************************************************************************
+ *  popup menu for main bible window
+ *****************************************************************************/
 static GtkWidget* create_pmBible(GList *mods)
 {
 	GtkWidget *pmBible;
@@ -882,9 +884,9 @@ static GtkWidget* create_pmBible(GList *mods)
 	GtkWidget *view_module3_menu;
 	GtkAccelGroup *view_module3_menu_accels;
 	GtkWidget *item3;
+	GtkWidget *viewtext;
 	GList *tmp;
 	gint i = 0;
-	//gchar buf[80];
 
 	pmBible = gtk_menu_new ();
 	gtk_object_set_data (GTK_OBJECT (pmBible), "pmBible", pmBible);
@@ -911,6 +913,14 @@ static GtkWidget* create_pmBible(GList *mods)
   	gtk_widget_show (about_this_module1);
   	gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
 
+	viewtext = gtk_menu_item_new_with_label ("View Text in new window");
+  	gtk_widget_ref (viewtext);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "viewtext", viewtext,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (viewtext);
+  	gtk_container_add (GTK_CONTAINER (pmBible), viewtext);	
+  	
+  	
   	separator2 = gtk_menu_item_new ();
   	gtk_widget_ref (separator2);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
@@ -956,11 +966,14 @@ static GtkWidget* create_pmBible(GList *mods)
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");
-          gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+          	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
                       	GTK_SIGNAL_FUNC (on_html_lookup_selection_activate),
                       	(gchar *)"htmlTexts");   
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
+                      	NULL);
+	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
+                      	GTK_SIGNAL_FUNC (on_viewtext_activate),
                       	NULL);
   return pmBible;
 }
