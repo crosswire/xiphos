@@ -1,7 +1,7 @@
 figdir = figures
-docname = gnomesword2
+docname = gnomesword
 lang = C
-omffile = gnomesword2-C.omf
+omffile = gnomesword-C.omf
 entities =  legal.xml
 include $(top_srcdir)/xmldocs.make
 dist-hook: app-dist-hook
