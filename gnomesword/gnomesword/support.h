@@ -17,7 +17,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
 #include <gnome.h>
 
 /*
@@ -30,10 +33,7 @@
  * or alternatively any widget in the component, and the name of the widget
  * you want returned.
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
-	 GtkWidget *lookup_widget(GtkWidget * widget,
+GtkWidget *lookup_widget(GtkWidget * widget,
 				  const gchar * widget_name);
 
 /* get_widget() is deprecated. Use lookup_widget instead. */
