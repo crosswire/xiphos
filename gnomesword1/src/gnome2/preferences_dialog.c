@@ -399,12 +399,12 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 		g_free(buf2);
 
 
-//      if (settings.havebible)
-//              gui_display_text(settings.currentverse);
+      if (settings.havebible)
+              gui_display_text(settings.currentverse);
 	if (settings.havecomm)
 		gui_display_commentary(settings.currentverse);
-	if (settings.havedict)
-		gui_display_dictlex(settings.dictkey);
+//	if (settings.havedict)
+//		gui_display_dictlex(settings.dictkey);
 	if (settings.havebible)
 		gui_update_parallel_page();
 	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
@@ -572,11 +572,11 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 				      "0");
 		settings.comm_tabs =
 		    atoi(xml_get_value("tabs", "comm"));
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+		/*gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 					   (widgets.notebook_comm),
-					   settings.comm_tabs);
-		if (settings.havecomm)
-			gui_set_comm_frame_label(cur_c);
+					   settings.comm_tabs);*/
+		/*if (settings.havecomm)
+			gui_set_comm_frame_label(settings.CommWindowModule);*/
 		break;
 	case SHOW_DICTIONARY_TABS:
 		if (togglebutton->active)
@@ -590,8 +590,8 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 					   (widgets.notebook_dict),
 					   settings.dict_tabs);
-		if (settings.havedict)
-			gui_set_dict_frame_label();
+//		if (settings.havedict)
+//			gui_set_dict_frame_label();
 		break;
 	case SHOW_BOOK_TABS:
 		if (togglebutton->active)

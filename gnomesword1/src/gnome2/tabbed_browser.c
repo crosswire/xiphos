@@ -488,11 +488,11 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 		return;
 	pt = g_new0(PASSAGE_TAB_INFO, 1);
 	pt->text_mod = g_strdup(settings.MainWindowModule);
-	pt->commentary_mod = g_strdup(cur_c->mod_name);
-	pt->dictlex_mod = g_strdup(cur_d->mod_name);
+	pt->commentary_mod = g_strdup(settings.CommWindowModule);
+	pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 	pt->book_mod = NULL;
 	pt->text_commentary_key = g_strdup(verse_key);
-	pt->dictlex_key = g_strdup(cur_d->key);
+	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_key = NULL;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
@@ -539,19 +539,19 @@ void gui_open_module_in_new_tab(gchar *module)
 		break;
 	case TEXT_TYPE:
 		pt->text_mod = g_strdup(module);
-		pt->commentary_mod = g_strdup(cur_c->mod_name);
-		pt->dictlex_mod = g_strdup(cur_d->mod_name);
+		pt->commentary_mod = g_strdup(settings.CommWindowModule);
+		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = NULL;
 		break;
 	case COMMENTARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(module);
-		pt->dictlex_mod = g_strdup(cur_d->mod_name);
+		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = NULL;
 		break;
 	case DICTIONARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
-		pt->commentary_mod = g_strdup(cur_c->mod_name);
+		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(module);
 		pt->book_mod = NULL;
 		break;
@@ -560,7 +560,7 @@ void gui_open_module_in_new_tab(gchar *module)
 	}
 		
 	pt->text_commentary_key = g_strdup(settings.currentverse);
-	pt->dictlex_key = g_strdup(cur_d->key);
+	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_key = NULL;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);

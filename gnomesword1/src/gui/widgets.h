@@ -34,13 +34,14 @@ struct  _app_widgets {
 		*epaned, /* shortcut bar and main panle */
 		*vpaned, /* shortcut bar and main panle */
 		*hpaned, /* shortcut bar and main panle */
+		*bible_info_paned, /* shortcut bar and main panle */
 		*shortcutbar,  /* the shortcut bar widget */
 		*bookmark_tree, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
-		*notebook_comm,  /* notebook - commentaries */
+		*box_comm,  /* notebook - commentaries */
 		*notebook_parallel_text,  /* notebook -  */
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
@@ -48,6 +49,7 @@ struct  _app_widgets {
 		*notebook_main,	/* main notebook to have multiple passages open at once */
 		*vbox_percomm,  /* vbox for personal comments notebook */
 		*vbox_text,  /* vbox for  */
+		*box_dict,
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
@@ -55,6 +57,9 @@ struct  _app_widgets {
 	
 	/* editor_dialog */
 		*studypad_dialog,
+		
+	/* entry widgets */
+		*entry_dict,
 	
 	/* toolbars */
 		*toolbar_comments,
@@ -69,9 +74,17 @@ struct  _app_widgets {
 		*html_dict, /* html dictionary widget */
 		*html_book, /* gbs html widget */
 		*html_studypad, /* studypad html widget */
+		*bible_info_win, /* to display information (ie strongs) at  
+                                     bottom of text pane */
 		
 	/* textview widget */
 		*textview,
+	/* listview widget */
+		*listview_dict,
+		
+	/* label widgets */
+		*label_comm,
+		*label_dict,
 		
 	/* popup menu submenu widgets */	
 		*add_bookmark_submenu,

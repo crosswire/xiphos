@@ -161,9 +161,7 @@ void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref
 		history_items = 23;
 	}
 	history_list[history_items].itemnum = history_items;
-	history_list[history_items].compagenum =
-	    gtk_notebook_get_current_page(GTK_NOTEBOOK
-					  (widgets.notebook_comm));
+	
 	sprintf(history_list[history_items].verseref, "%s", ref);
 	if(xml_get_value("modules", "bible"))
 		sprintf(history_list[history_items].textmod, "%s",
