@@ -75,6 +75,8 @@ static GtkWidget *treeview;
 static GtkWidget *treeview1;
 static GtkWidget *treeview2;
 static GtkWidget *notebook1;
+static GtkWidget *button_close;
+static GtkWidget *button_cancel;
 static GtkWidget *button5;
 static GtkWidget *button6;
 static GtkWidget *button7;
@@ -190,7 +192,6 @@ static void remove_install_modules(GList * modules, gboolean install)
 	GString *mods = g_string_new(NULL);
 	GString *dialog_text = g_string_new(NULL);
 
-
 	tmp = modules;
 	while (tmp) {
 		buf = (gchar *) tmp->data;
@@ -229,7 +230,8 @@ static void remove_install_modules(GList * modules, gboolean install)
 	g_free(yes_no_dialog);
 	g_string_free(dialog_text, TRUE);
 	gtk_widget_queue_draw(dialog);
-
+	gtk_widget_hide(button_close);
+	gtk_widget_show(button_cancel);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
@@ -308,6 +310,8 @@ static void remove_install_modules(GList * modules, gboolean install)
 					      (progressbar1), 0);
 	}
 	g_string_free(mods, TRUE);
+	gtk_widget_hide(button_cancel);
+	gtk_widget_show(button_close);
 
 }
 
@@ -810,10 +814,10 @@ static void response_close(void)
 		}
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));
-	mod_mgr_shut_down();
 	g_string_printf(str, "%s/dirlist", settings.homedir);
 	if (mod_mgr_check_for_file(str->str))
 		g_warning(str->str);
+	g_string_free(str,TRUE);
 }
 
 /******************************************************************************
@@ -842,6 +846,13 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 	GString *str = g_string_new(NULL);
 
 	switch (response_id) {
+	case GTK_RESPONSE_CANCEL:
+		mod_mgr_terminate();
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		
+		break;
 	case GTK_RESPONSE_REFRESH:
 		response_refresh();
 		break;
@@ -1882,6 +1893,16 @@ void on_button_remove_remote_clicked(GtkButton * button,
 }
 
 
+static gboolean on_destroy(GtkWidget * widget, GdkEvent * event, gpointer data)
+{
+	g_message("on_delete");
+	mod_mgr_shut_down();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	return FALSE;
+}
+
 /******************************************************************************
  * Name
  *   create_dialog
@@ -1948,7 +1969,6 @@ GtkWidget *create_dialog(void)
 	GtkWidget *label15;
 
 	GtkWidget *dialog_action_area1;
-	GtkWidget *button4;
 	GtkWidget *alignment3;
 	GtkWidget *hbox8;
 	GtkWidget *image3;
@@ -2397,11 +2417,19 @@ GtkWidget *create_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
 				  GTK_BUTTONBOX_END);
 
-	button4 = gtk_button_new_from_stock("gtk-close");
-	gtk_widget_show(button4);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button4,
+	button_cancel = gtk_button_new_from_stock("gtk-cancel");
+//	gtk_widget_show(button_cancel);
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button_cancel,
+				     GTK_RESPONSE_CANCEL);
+	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
+	gtk_tooltips_set_tip(tooltips, button_cancel,
+			     _("Cancel current operation"), NULL);
+	
+	button_close = gtk_button_new_from_stock("gtk-close");
+	gtk_widget_show(button_close);
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button_close,
 				     GTK_RESPONSE_CLOSE);
-	GTK_WIDGET_SET_FLAGS(button4, GTK_CAN_DEFAULT);
+	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
 
 	button5 = gtk_button_new_from_stock("gtk-refresh");
 	//gtk_widget_show (button5);
@@ -2464,7 +2492,9 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox7), label8, FALSE, FALSE, 0);
 	gtk_label_set_justify(GTK_LABEL(label8), GTK_JUSTIFY_LEFT);
 
-
+	//dialog
+	g_signal_connect((gpointer) dialog, "destroy",
+			 G_CALLBACK(on_destroy), NULL);
 	g_signal_connect((gpointer) dialog, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 	g_signal_connect(G_OBJECT(treeview1),
@@ -2569,20 +2599,29 @@ void gui_update_install_status(glong total, glong done,
 			       const gchar * message)
 {
 	gchar *buf;
+	GtkProgressBar *pbar = NULL;
 	
-	buf = g_strdup_printf("%s: %s",current_mod,message);
-	GtkProgressBar *pbar;
 	switch (current_page) {
 	case 1:
+		if(!progressbar_refresh) {
+			return;
+		}
 		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
 		break;
 	case 2:
+		if(!progressbar) {
+			return;
+		}
 		pbar = GTK_PROGRESS_BAR(progressbar);
 		break;
 	case 3:
+		if(!progressbar1) {
+			return;
+		}
 		pbar = GTK_PROGRESS_BAR(progressbar1);
 		break;
 	}
+	buf = g_strdup_printf("%s: %s",current_mod,message);
 	gtk_progress_bar_set_text(pbar, buf);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -2612,12 +2651,18 @@ void gui_update_install_progressbar(gdouble fraction)
 	GtkProgressBar *pbar;
 	switch (current_page) {
 	case 1:
+		if(!progressbar_refresh)
+			return;
 		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
 		break;
 	case 2:
+		if(!progressbar)
+			return;
 		pbar = GTK_PROGRESS_BAR(progressbar);
 		break;
 	case 3:
+		if(!progressbar1)
+			return;
 		pbar = GTK_PROGRESS_BAR(progressbar1);
 		break;
 	}

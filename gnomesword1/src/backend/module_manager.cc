@@ -44,6 +44,9 @@
 #include "main/mod_mgr.h"
 #include "main/sword.h"
 
+#ifdef DEBUG 
+static gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
+#endif
 using namespace sword;
 using std::cout;
 using std::cin;
@@ -76,6 +79,9 @@ static ModMap::iterator end;
 void GSStatusReporter::preStatus(long totalBytes, long completedBytes, 
 				   const char *message)
 {
+#ifdef DEBUG 
+	g_print(f_message,83,"message",message);
+#endif
 	update_install_status(totalBytes, completedBytes, message);
 }
 
@@ -694,6 +700,26 @@ void backend_init_module_mgr(const char *dir)
 	backend_module_mgr_list_local_sources();
 }
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/module_manager.hh"
+ *
+ *   void (void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void backend_terminate_module_mgr(void)
+{
+	installMgr->terminate();
+}
 
 /******************************************************************************
  * Name
