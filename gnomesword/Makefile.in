@@ -94,26 +94,29 @@ PACKAGE = @PACKAGE@
 PACKAGE_PIXMAPS_DIR = @PACKAGE_PIXMAPS_DIR@
 PTHREAD_LIB = @PTHREAD_LIB@
 RANLIB = @RANLIB@
+SWORD_CPPFLAGS = @SWORD_CPPFLAGS@
+SWORD_LIBS = @SWORD_LIBS@
 VERSION = @VERSION@
 XPM_LIBS = @XPM_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword 	-I/usr/local/include/sword 	-I$(top_srcdir)/widgets/misc 	-I$(top_srcdir)/widgets/shotrcur-bar
-
+INCLUDES = \ 
 
 bin_PROGRAMS = gnomesword
 
-@SPELLING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
-@PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	printstuff.c printstuff.h
-@SPELLING_PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
-@NO_OPS_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h
+COMMON_SOURCE = \ 
 
-CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
+SPELLING_SOURCE = \ 
 
-gnomesword_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) 		    $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a 			$(top_builddir)/widgets/e-text/libetext.a 			$(top_builddir)/widgets/misc/libemiscwidgets.a 			$(top_builddir)/e-util/libeutil.la 			$(EXTRA_GNOME_LIBS)		
+PRINT_SOURCE = \ 
 
+EXTRA_DIST = $(PRINT_SOURCE) $(SPELLING_SOURCE) 
+
+CXXFLAGS = $(GTK_CFLAGS) $(SWORD_CPPFLAGS) 
+
+gnomesword_LDADD = \ 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -124,32 +127,10 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I..
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-@PRINTING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
-@PRINTING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@PRINTING_TRUE@menustuff.o listeditor.o noteeditor.o searchstuff.o \
-@PRINTING_TRUE@printstuff.o
-@NO_OPS_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
-@NO_OPS_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@NO_OPS_TRUE@menustuff.o listeditor.o noteeditor.o searchstuff.o
-@SPELLING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
-@SPELLING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@SPELLING_TRUE@menustuff.o listeditor.o noteeditor.o searchstuff.o \
-@SPELLING_TRUE@spellcheck.o DICTClient.o
-@SPELLING_PRINTING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
-@SPELLING_PRINTING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@SPELLING_PRINTING_TRUE@menustuff.o listeditor.o noteeditor.o \
-@SPELLING_PRINTING_TRUE@searchstuff.o spellcheck.o DICTClient.o \
-@SPELLING_PRINTING_TRUE@printstuff.o
+gnomesword_SOURCES = gnomesword.c
+gnomesword_OBJECTS =  gnomesword.o
 gnomesword_DEPENDENCIES =  \
-$(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a \
-$(top_builddir)/widgets/e-text/libetext.a \
-$(top_builddir)/widgets/misc/libemiscwidgets.a \
-$(top_builddir)/e-util/libeutil.la
 gnomesword_LDFLAGS = 
-CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -162,16 +143,13 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = gtar
 GZIP_ENV = --best
-DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
-.deps/display.P .deps/filestuff.P .deps/interface.P .deps/listeditor.P \
-.deps/main.P .deps/menustuff.P .deps/noteeditor.P .deps/printstuff.P \
-.deps/searchstuff.P .deps/spellcheck.P .deps/support.P
-SOURCES = $(gnomesword_SOURCES)
-OBJECTS = $(gnomesword_OBJECTS)
+DEP_FILES =  .deps/gnomesword.P
+SOURCES = gnomesword.c
+OBJECTS = gnomesword.o
 
 all: all-redirect
 .SUFFIXES:
-.SUFFIXES: .S .c .cpp .lo .o .s
+.SUFFIXES: .S .c .lo .o .s
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu gnomesword/Makefile
 
@@ -239,11 +217,7 @@ maintainer-clean-libtool:
 
 gnomesword: $(gnomesword_OBJECTS) $(gnomesword_DEPENDENCIES)
 	@rm -f gnomesword
-	$(CXXLINK) $(gnomesword_LDFLAGS) $(gnomesword_OBJECTS) $(gnomesword_LDADD) $(LIBS)
-.cpp.o:
-	$(CXXCOMPILE) -c $<
-.cpp.lo:
-	$(LTCXXCOMPILE) -c $<
+	$(LINK) $(gnomesword_LDFLAGS) $(gnomesword_OBJECTS) $(gnomesword_LDADD) $(LIBS)
 
 tags: TAGS
 
@@ -320,25 +294,6 @@ maintainer-clean-depend:
 %.lo: %.c
 	@echo '$(LTCOMPILE) -c $<'; \
 	$(LTCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
-	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
-	  < .deps/$(*F).pp > .deps/$(*F).P; \
-	tr ' ' '\012' < .deps/$(*F).pp \
-	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
-	    >> .deps/$(*F).P; \
-	rm -f .deps/$(*F).pp
-
-%.o: %.cpp
-	@echo '$(CXXCOMPILE) -c $<'; \
-	$(CXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
-	@-cp .deps/$(*F).pp .deps/$(*F).P; \
-	tr ' ' '\012' < .deps/$(*F).pp \
-	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
-	    >> .deps/$(*F).P; \
-	rm .deps/$(*F).pp
-
-%.lo: %.cpp
-	@echo '$(LTCXXCOMPILE) -c $<'; \
-	$(LTCXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
 	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
 	  < .deps/$(*F).pp > .deps/$(*F).P; \
 	tr ' ' '\012' < .deps/$(*F).pp \
@@ -422,6 +377,59 @@ all-redirect all-am all installdirs mostlyclean-generic \
 distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
 
+ $(GNOME_INCLUDEDIR) \ 
+ -I$(top_srcdir)/widgets/misc \ 
+ -I$(top_srcdir)/widgets/shotrcur-bar
+        callback.cpp \ 
+        callback.h \ 
+        display.cpp \ 
+        display.h \ 
+        filestuff.cpp \ 
+        filestuff.h \ 
+        GnomeSword.cpp \ 
+        GnomeSword.h \ 
+        interface.c \ 
+        interface.h \ 
+        listeditor.cpp \ 
+        listeditor.h \ 
+        main.cpp \ 
+        menustuff.cpp \ 
+        menustuff.h \ 
+        noteeditor.cpp \ 
+        noteeditor.h \ 
+        searchstuff.cpp \ 
+        searchstuff.h \ 
+        support.c \ 
+        support.h 
+        DICTClient.cpp \ 
+        DICTClient.h \ 
+        spellcheck.cpp \ 
+        spellcheck.h 
+        printstuff.c \ 
+        printstuff.h 
+
+@SPELLING_PRINTING_TRUE@        gnomesword_SOURCES = \ 
+@SPELLING_PRINTING_TRUE@        $(SPELLING_SOURCE) \ 
+@SPELLING_PRINTING_TRUE@        $(PRINT_SOURCE) \ 
+@SPELLING_PRINTING_TRUE@        $(COMMON_SOURCE) 
+
+@SPELLING_TRUE@        gnomesword_SOURCES = \ 
+@SPELLING_TRUE@         $(SPELLING_SOURCE) \ 
+@SPELLING_TRUE@         $(COMMON_SOURCE) 
+
+@PRINTING_TRUE@        gnomesword_SOURCES = \ 
+@PRINTING_TRUE@        $(PRINT_SOURCE) \ 
+@PRINTING_TRUE@        $(COMMON_SOURCE) 
+
+@NO_OPS_TRUE@        gnomesword_SOURCES = \ 
+@NO_OPS_TRUE@        $(COMMON_SOURCE) 
+         $(GNOME_LIBDIR) $(GNOMEUI_LIBS) \ 
+         $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a \ 
+         $(top_builddir)/widgets/e-paned/libepaned.a \ 
+         $(top_builddir)/widgets/e-text/libetext.a \ 
+         $(top_builddir)/widgets/misc/libemiscwidgets.a \ 
+         $(top_builddir)/e-util/libeutil.la \ 
+         $(EXTRA_GNOME_LIBS) $(SWORD_LIBS) 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
