@@ -36,13 +36,6 @@
 int
 main (int argc, char *argv[])
 {
-/*  GtkWidget *fileselection1;
-  GtkWidget *fileselectionSave;
-  GtkWidget *about1;
-  GtkWidget *dlgSearch;
-  GtkWidget *dlgOptions;
-  GtkWidget *wdwEditBookmarks;
-*/
   GtkWidget *mainwindow;
   GtkWidget *menu1;
   GtkWidget *menu2;
@@ -68,7 +61,7 @@ main (int argc, char *argv[])
   loadoptionarray();
   initSword(mainwindow,menu1,menu2,menu3,menu4,menu5);
   gtk_widget_show (mainwindow);
-  UpdateChecks(mainwindow);
+  UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
   gtk_main ();
   return 0;
 }

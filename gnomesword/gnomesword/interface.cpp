@@ -212,6 +212,13 @@ static GnomeUIInfo view1_menu_uiinfo[] =
 static GnomeUIInfo settings1_menu_uiinfo[] =
 {
   GNOMEUIINFO_MENU_PREFERENCES_ITEM (on_preferences1_activate, NULL),
+  {
+    GNOME_APP_UI_TOGGLEITEM, "Auto Save Notes",
+    "Save personal notes when verse changes",
+    on_auto_save_notes1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
   GNOMEUIINFO_END
 };
 
@@ -294,6 +301,7 @@ create_mainwindow (void)
   GtkWidget *vbox8;
   GtkWidget *scrolledwindow11;
   GtkWidget *textComments;
+  GtkWidget *sbNotes;
   GtkWidget *handlebox16;
   GtkWidget *tbNotes;
   GtkWidget *btnEditNote;
@@ -484,6 +492,12 @@ create_mainwindow (void)
                             settings1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
+  gtk_widget_ref (settings1_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "auto_save_notes1",
+                            settings1_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (settings1_menu_uiinfo[1].widget), TRUE);
+
   gtk_widget_ref (menubar1_uiinfo[6].widget);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "help1",
                             menubar1_uiinfo[6].widget,
@@ -515,7 +529,7 @@ create_mainwindow (void)
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
                                 "Search",
-                                "Search current text of commentary module", NULL,
+                                "Search current text or commentary module", NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnSearch);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnSearch", btnSearch,
@@ -799,6 +813,12 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (textComments);
   gtk_container_add (GTK_CONTAINER (scrolledwindow11), textComments);
+
+  sbNotes = gtk_statusbar_new ();
+  gtk_widget_ref (sbNotes);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "sbNotes", sbNotes,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_box_pack_start (GTK_BOX (vbox8), sbNotes, FALSE, FALSE, 0);
 
   handlebox16 = gtk_handle_box_new ();
   gtk_widget_ref (handlebox16);
@@ -1237,10 +1257,12 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
-	gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
+  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
+
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
                       NULL);
+  gnome_app_install_menu_hints (GNOME_APP (mainwindow), menubar1_uiinfo);
   gtk_signal_connect (GTK_OBJECT (btnSearch), "clicked",
                       GTK_SIGNAL_FUNC (on_btnSearch_clicked),
                       NULL);
@@ -1384,6 +1406,12 @@ create_propertybox1 (void)
   GtkWidget *label78;
   GtkWidget *label79;
   GtkWidget *label80;
+  GtkWidget *fpMainwindowitalic;
+  GtkWidget *label84;
+  GtkWidget *entry2;
+  GtkWidget *entry3;
+  GtkWidget *entry4;
+  GtkWidget *entry5;
   GtkWidget *label74;
   GtkWidget *table3;
   GtkWidget *label76;
@@ -1402,7 +1430,7 @@ create_propertybox1 (void)
   gtk_object_set_data (GTK_OBJECT (propertybox1), "notebook6", notebook6);
   gtk_widget_show (notebook6);
 
-  table4 = gtk_table_new (3, 3, FALSE);
+  table4 = gtk_table_new (4, 4, FALSE);
   gtk_widget_ref (table4);
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "table4", table4,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1414,7 +1442,7 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "cpfgMainwindow", cpfgMainwindow,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (cpfgMainwindow);
-  gtk_table_attach (GTK_TABLE (table4), cpfgMainwindow, 2, 3, 0, 1,
+  gtk_table_attach (GTK_TABLE (table4), cpfgMainwindow, 3, 4, 0, 1,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1423,7 +1451,7 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "fpMainwindow", fpMainwindow,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (fpMainwindow);
-  gtk_table_attach (GTK_TABLE (table4), fpMainwindow, 1, 2, 0, 1,
+  gtk_table_attach (GTK_TABLE (table4), fpMainwindow, 2, 3, 0, 1,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1432,7 +1460,7 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "fbCurrentverse", fbCurrentverse,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (fbCurrentverse);
-  gtk_table_attach (GTK_TABLE (table4), fbCurrentverse, 1, 2, 1, 2,
+  gtk_table_attach (GTK_TABLE (table4), fbCurrentverse, 2, 3, 2, 3,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1441,7 +1469,7 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "fbInerlinear", fbInerlinear,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (fbInerlinear);
-  gtk_table_attach (GTK_TABLE (table4), fbInerlinear, 1, 2, 2, 3,
+  gtk_table_attach (GTK_TABLE (table4), fbInerlinear, 2, 3, 3, 4,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1450,7 +1478,7 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "cpfgCurrentverse", cpfgCurrentverse,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (cpfgCurrentverse);
-  gtk_table_attach (GTK_TABLE (table4), cpfgCurrentverse, 2, 3, 1, 2,
+  gtk_table_attach (GTK_TABLE (table4), cpfgCurrentverse, 3, 4, 2, 3,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1459,21 +1487,21 @@ create_propertybox1 (void)
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "cpfgInterlinear", cpfgInterlinear,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (cpfgInterlinear);
-  gtk_table_attach (GTK_TABLE (table4), cpfgInterlinear, 2, 3, 2, 3,
+  gtk_table_attach (GTK_TABLE (table4), cpfgInterlinear, 3, 4, 3, 4,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
 
-  label78 = gtk_label_new ("Current verse                                                                               ");
+  label78 = gtk_label_new ("Current verse");
   gtk_widget_ref (label78);
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "label78", label78,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label78);
-  gtk_table_attach (GTK_TABLE (table4), label78, 0, 1, 1, 2,
+  gtk_table_attach (GTK_TABLE (table4), label78, 0, 1, 2, 3,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label78), GTK_JUSTIFY_LEFT);
 
-  label79 = gtk_label_new ("Main Window                                                                               ");
+  label79 = gtk_label_new ("Main Window");
   gtk_widget_ref (label79);
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "label79", label79,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1483,15 +1511,70 @@ create_propertybox1 (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label79), GTK_JUSTIFY_LEFT);
 
-  label80 = gtk_label_new ("Interlinear Window                                                                        ");
+  label80 = gtk_label_new ("Interlinear Window");
   gtk_widget_ref (label80);
   gtk_object_set_data_full (GTK_OBJECT (propertybox1), "label80", label80,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label80);
-  gtk_table_attach (GTK_TABLE (table4), label80, 0, 1, 2, 3,
+  gtk_table_attach (GTK_TABLE (table4), label80, 0, 1, 3, 4,
                     (GtkAttachOptions) (0),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label80), GTK_JUSTIFY_LEFT);
+
+  fpMainwindowitalic = gnome_font_picker_new ();
+  gtk_widget_ref (fpMainwindowitalic);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "fpMainwindowitalic", fpMainwindowitalic,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (fpMainwindowitalic);
+  gtk_table_attach (GTK_TABLE (table4), fpMainwindowitalic, 2, 3, 1, 2,
+                    (GtkAttachOptions) (0),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label84 = gtk_label_new ("Main Window Italics");
+  gtk_widget_ref (label84);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "label84", label84,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label84);
+  gtk_table_attach (GTK_TABLE (table4), label84, 0, 1, 1, 2,
+                    (GtkAttachOptions) (0),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label84), GTK_JUSTIFY_LEFT);
+
+  entry2 = gtk_entry_new ();
+  gtk_widget_ref (entry2);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "entry2", entry2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entry2);
+  gtk_table_attach (GTK_TABLE (table4), entry2, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  entry3 = gtk_entry_new ();
+  gtk_widget_ref (entry3);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "entry3", entry3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entry3);
+  gtk_table_attach (GTK_TABLE (table4), entry3, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  entry4 = gtk_entry_new ();
+  gtk_widget_ref (entry4);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "entry4", entry4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entry4);
+  gtk_table_attach (GTK_TABLE (table4), entry4, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  entry5 = gtk_entry_new ();
+  gtk_widget_ref (entry5);
+  gtk_object_set_data_full (GTK_OBJECT (propertybox1), "entry5", entry5,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entry5);
+  gtk_table_attach (GTK_TABLE (table4), entry5, 1, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
 
   label74 = gtk_label_new ("Fonts");
   gtk_widget_ref (label74);
@@ -1593,6 +1676,9 @@ create_propertybox1 (void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (cpfgInterlinear), "color_set",
                       GTK_SIGNAL_FUNC (on_cpfgInterlinear_color_set),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (fpMainwindowitalic), "font_set",
+                      GTK_SIGNAL_FUNC (on_fpMainwindowitalic_font_set),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (cpbgMainwindow), "color_set",
                       GTK_SIGNAL_FUNC (on_cpbgMainwindow_color_set),
@@ -2328,3 +2414,5 @@ create_dlgAboutSword (void)
   return dlgAboutSword;
 }
 
+
+     
