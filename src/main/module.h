@@ -34,7 +34,7 @@ int get_mod_type(char * mod_name);
 int do_module_search(char * module_name ,const char *search_string, 
 		  int search_type, int search_params, int dialog);
 char *get_module_description(char * module_name);
-char *get_module_language(const char *module_name);
+const char *get_module_language(const char *module_name);
 int module_is_locked(char * mod_name);
 char *get_cipher_key(char *mod_name);
 int has_cipher_tag(char *mod_name);
