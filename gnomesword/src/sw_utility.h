@@ -38,6 +38,7 @@ extern "C" {
 
 	gchar *addrenderfiltersSWORD(SWModule * module,
 				ConfigEntMap & section);
+	void deleteRenderfilters(void);
 	/* path to sword mods */
 	char *pathtomods(void);
 	void changeModuleUTILITY(SWModule * module, 

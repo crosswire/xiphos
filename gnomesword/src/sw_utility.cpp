@@ -33,6 +33,14 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
+//#include <swbasicfilter.h>
+#include <gbfplain.h>
+#include <plainhtml.h>
+#include "gbfhtmlhref.h"
+#include <rwphtml.h>
+#include <thmlhtml.h>
+#include "thmlhtmlhref.h"
+//#include <latin1utf8.h>
 
 #ifndef __GNUC__
 #include <io.h>
@@ -41,15 +49,15 @@
 #include <unixstr.h>
 #endif
 
+#include "sw_latin1utf8.h"
 #include "sw_gnomesword.h"
 #include "sw_utility.h"
-
-//extern SWFilter *swbasicfilter;
-extern SWFilter *gbftohtml;
-extern SWFilter *plaintohtml;
-extern SWFilter *thmltohtml;
-extern SWFilter *rwptohtml;
-extern SWFilter *lattoutf8;
+SWFilter 
+    * gbftohtml,		/* sword render filters */
+    *plaintohtml, 
+    *thmltohtml, 
+    *rwptohtml, 
+    *lattoutf8;
 
 /********************************************************************************************** 
  * addrenderfilters - 
@@ -66,6 +74,13 @@ gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;
  	bool isGBF = false;
+	
+	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
+	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
+	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
+	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
+	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
+	
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	encoding = ((entry = section.find("Encoding")) != section.end()) ? (*entry).second : (string) "";
@@ -108,6 +123,21 @@ gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	retval = (char*)lang.c_str();
 	//g_warning(retval);
 	return retval;
+}
+
+void deleteRenderfilters(void)
+{
+	//-- delete render filters
+	if (thmltohtml != 0)
+		delete thmltohtml;
+	if (rwptohtml != 0)
+		delete rwptohtml;
+	if (gbftohtml != 0)
+		delete gbftohtml;
+	if (plaintohtml != 0)
+		delete plaintohtml;
+	if (lattoutf8 != 0)
+		delete lattoutf8;
 }
 
 /* path to sword modules */
