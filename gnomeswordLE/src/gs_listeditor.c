@@ -265,6 +265,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 		write(flbookmarksnew, (char *) &mylistitem,
 		      sizeof(mylistitem));
 	}
+	
 	sprintf(rememberlastitem, "%s", p_mylistitem->item);
 	close(flbookmarksnew);
 
