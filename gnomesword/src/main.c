@@ -43,7 +43,7 @@ extern GList
 	*dictionarymods,
 	*percommods;	
 extern gchar *swbmDir;
-
+ 
 int
 main (int argc, char *argv[])
 {
@@ -106,6 +106,8 @@ main (int argc, char *argv[])
 			createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
 		}
 	}
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
   	if(settings->showsplash)
 		gtk_widget_unref (splash);
 	gtk_widget_destroy (splash);

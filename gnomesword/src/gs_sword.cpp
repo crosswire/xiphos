@@ -340,7 +340,8 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 {
 	int l;
 	GList *mods;
-	
+	gchar 
+		*currRef;
 	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
@@ -351,10 +352,17 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	ApplyChange = false;
 	if(changemain && havebible) {
 		if(curMod){  //--------------------------------------------------- change main window
-		
+			currRef = g_strdup(curMod->KeyText());
 			curMod->SetKey(ref);
-			curMod->Display();			
-			swKey = curMod->KeyText();
+			if(!stricmp(curMod->KeyText(),"Genesis 1:1")) 
+				if(!stricmp(ref,"Gen 1:1") || !stricmp(ref,"Genesis 1:1") || !stricmp(ref,"Gene 1:1")){	
+					g_warning("Genesis 1:1");
+				}else{
+					ref=currRef;
+					curMod->SetKey(ref);
+					strcpy(current_verse,ref);
+				}			
+			swKey = curMod->KeyText();			
 			if(addhistoryitem){
 			        if(strcmp(settings->currentverse,historylist[historyitems-1].verseref))
 			                addHistoryItem(MainFrm,
@@ -378,6 +386,8 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")),curChapter);
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),curVerse);
 			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")),swKey);
+			curMod->Display();	
+			g_free(currRef);
 		}
 	}
 	changemain = TRUE;
@@ -428,12 +438,7 @@ updateinterlinearpage(void)
 		settings->link_color);
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);
-		/*sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">");		
-		utf8str = e_utf8_from_gtk_string (html_widget, tmpBuf);
-		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(html_widget),utf8str , utf8len ); */
-		
+		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);		
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
 		changecomp1ModSWORD(settings->Interlinear3Module);
@@ -673,54 +678,35 @@ gotoBookmarkSWORD(gchar *modName, gchar *key)
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			if(!strcmp((*it).second->Name(), modName)){
-				curMod = (*it).second;
+				//curMod = (*it).second;
 				notebook = lookup_widget(MainFrm,"nbTextMods");
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),bibleindex ); 
 				changeVerseSWORD(key);
-			}				
+				return;
+			} 				
 			++bibleindex;
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			if(!strcmp((*it).second->Name(), modName)){
-				curcomMod = (*it).second;  //-- change current module to new module				
+				//curcomMod = (*it).second;  //-- change current module to new module				
 				notebook = lookup_widget(MainFrm,"notebook1");
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),commindex ); 
 				changeVerseSWORD(key);
+				return;
 			}
 			++commindex;
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules	
 			if(!strcmp((*it).second->Name(), modName)){
-				curdictMod = (*it).second;  //-- change current module to new module
-				curdictMod->SetKey(key);
-				entry = lookup_widget(MainFrm,"dictionarySearchText"); 
-				gtk_entry_set_text(GTK_ENTRY(entry), key);
+				//curdictMod = (*it).second;  //-- change current module to new module
+				//curdictMod->SetKey(key);
+				entry = lookup_widget(MainFrm,"dictionarySearchText");
 				notebook = lookup_widget(MainFrm,"notebook4");
-				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),dictindex ); 				
-			}
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),dictindex );
+				gtk_entry_set_text(GTK_ENTRY(entry), key); 				
+				return;				
+			} 
 			++dictindex;
 		}
-	} 		
-	
-	
-	
-	
-	/*
-	it = mainMgr->Modules.find(modName);
-	if(it != mainMgr->Modules.end()){ //-- if we find the module	
-		if(!strcmp((*it).second->Type(), "Biblical Texts")){
-			curMod = (*it).second;  //-- change current module to new module
-			curMod->SetKey(key);
-			curMod->Display();
-		}else if(!strcmp((*it).second->Type(), "Commentaries")){
-			curcomMod = (*it).second;  //-- change current module to new module
-			curcomMod->SetKey(key);
-			curcomMod->Display();
-		}else if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
-			curdictMod = (*it).second;  //-- change current module to new module
-			curdictMod->SetKey(key);
-			FillDictKeysSWORD();
-			curdictMod->Display();
-		}
-	}*/
+	} 
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1730,8 +1716,7 @@ void gs_firstrunSWORD(void)
 					pathtoswordmods
 					); 
   		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
-		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
-	
+		gnome_dialog_run_and_close(GNOME_DIALOG(setup));	
 	g_list_free(textMods); //-- free GLists
         g_list_free(commMods);
         g_list_free(dictMods);
