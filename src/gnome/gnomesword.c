@@ -122,7 +122,7 @@ void frontend_init(void)
 	 *  setup general book gui support 
 	 */
 	if (settings.havebook) {
-		gui_setup_gbs(get_list(GBS_LIST));
+		gui_setup_gbs(get_list(GBS_LIST), 0);
 		gui_setup_gbs_dialog(get_list(GBS_LIST));
 	}
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
-"POT-Creation-Date: 2003-08-29 14:31-0400\n"
+"POT-Creation-Date: 2003-09-05 22:39-0400\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -251,10 +251,10 @@ msgstr "_Upravi»"
 #. gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));
 #: src/gnome/bibletext_menu.c:1270 src/gnome/commentary_menu.c:1349
 #: src/gnome/editor_menu.c:1028 src/gnome/main_menu.c:623
-#: src/gnome/parallel_view.c:1242 src/gnome/toolbar_edit.c:532
+#: src/gnome/parallel_view.c:1246 src/gnome/toolbar_edit.c:532
 #: src/gnome2/bibletext_menu.c:1270 src/gnome2/commentary_menu.c:1349
 #: src/gnome2/editor_menu.c:1028 src/gnome2/main_menu.c:615
-#: src/gnome2/parallel_view.c:1201 src/gnome2/toolbar_edit.c:532
+#: src/gnome2/parallel_view.c:1205 src/gnome2/toolbar_edit.c:532
 msgid "Copy"
 msgstr "Kopírova»"
 
@@ -274,8 +274,8 @@ msgid "Note"
 msgstr "Upravi» poloŸku"
 
 #: src/gnome/bibletext_menu.c:1300 src/gnome/commentary_menu.c:1372
-#: src/gnome/parallel_view.c:1256 src/gnome2/bibletext_menu.c:1300
-#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1215
+#: src/gnome/parallel_view.c:1260 src/gnome2/bibletext_menu.c:1300
+#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1219
 msgid "Module Options"
 msgstr "Nastavenia modulov"
 
@@ -514,7 +514,7 @@ msgstr ""
 
 #: src/gnome/commentary_dialog.c:610 src/gnome/dictlex.c:495
 #: src/gnome/dictlex_dialog.c:394 src/gnome/parallel_dialog.c:514
-#: src/gnome2/commentary_dialog.c:615 src/gnome2/dictlex.c:495
+#: src/gnome2/commentary_dialog.c:615 src/gnome2/dictlex.c:498
 #: src/gnome2/dictlex_dialog.c:395 src/gnome2/parallel_dialog.c:518
 msgid "Sync"
 msgstr "Synchr"
@@ -557,7 +557,7 @@ msgid "Book Heading"
 msgstr "Hlavièky"
 
 #: src/gnome/dictlex.c:495 src/gnome/dictlex_dialog.c:394
-#: src/gnome2/dictlex.c:496 src/gnome2/dictlex_dialog.c:396
+#: src/gnome2/dictlex.c:499 src/gnome2/dictlex_dialog.c:396
 msgid "Load current key"
 msgstr ""
 
@@ -980,7 +980,7 @@ msgstr "Okno s textom Biblie"
 #: src/gnome/preferences_dialog.c:2065 src/gnome/setup_druid.c:808
 #: src/gnome/shortcutbar_search.c:445 src/gnome2/main_menu.c:672
 #: src/gnome2/preferences_dialog.c:1586 src/gnome2/preferences_dialog.c:2060
-#: src/gnome2/search_sidebar.c:471
+#: src/gnome2/search_sidebar.c:471 src/gnome2/setup_druid.c:819
 msgid "Commentary"
 msgstr "Komentár"
 
@@ -1126,7 +1126,7 @@ msgstr "GnomeSword - softvér na ¹túdium biblie"
 #: src/gnome/preferences_dialog.c:2072 src/gnome/setup_druid.c:925
 #: src/gnome/shortcutbar_main.c:1365 src/gnome/shortcutbar_main.c:1547
 #: src/gnome2/main_window.c:693 src/gnome2/main_window.c:706
-#: src/gnome2/preferences_dialog.c:2067
+#: src/gnome2/preferences_dialog.c:2067 src/gnome2/setup_druid.c:936
 msgid "Dict/Lex"
 msgstr "Slovník-Lexikón"
 
@@ -1137,32 +1137,32 @@ msgstr "Slovník-Lexikón"
 msgid "Parallel View"
 msgstr ""
 
-#: src/gnome/parallel_view.c:1251 src/gnome2/parallel_view.c:1210
+#: src/gnome/parallel_view.c:1255 src/gnome2/parallel_view.c:1214
 msgid "Detach/Attach"
 msgstr "Pripoji»/Odobra»"
 
 #. build change parallel modules submenu
-#: src/gnome/parallel_view.c:1269 src/gnome2/parallel_view.c:1228
+#: src/gnome/parallel_view.c:1273 src/gnome2/parallel_view.c:1232
 #, fuzzy
 msgid "Change parallel 1"
 msgstr "Interlinearny 1"
 
-#: src/gnome/parallel_view.c:1272 src/gnome2/parallel_view.c:1231
+#: src/gnome/parallel_view.c:1276 src/gnome2/parallel_view.c:1235
 #, fuzzy
 msgid "Change parallel 2"
 msgstr "Interlinearny 2"
 
-#: src/gnome/parallel_view.c:1275 src/gnome2/parallel_view.c:1234
+#: src/gnome/parallel_view.c:1279 src/gnome2/parallel_view.c:1238
 #, fuzzy
 msgid "Change parallel 3"
 msgstr "Interlinearny 3"
 
-#: src/gnome/parallel_view.c:1278 src/gnome2/parallel_view.c:1237
+#: src/gnome/parallel_view.c:1282 src/gnome2/parallel_view.c:1241
 #, fuzzy
 msgid "Change parallel 4"
 msgstr "Interlinearny 4"
 
-#: src/gnome/parallel_view.c:1281 src/gnome2/parallel_view.c:1240
+#: src/gnome/parallel_view.c:1285 src/gnome2/parallel_view.c:1244
 #, fuzzy
 msgid "Change parallel 5"
 msgstr "Interlinearny 5"
@@ -1339,7 +1339,7 @@ msgid "Misc"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:1669 src/gnome/setup_druid.c:638
-#: src/gnome2/preferences_dialog.c:1663
+#: src/gnome2/preferences_dialog.c:1663 src/gnome2/setup_druid.c:647
 msgid "Use Verse Style"
 msgstr "PouŸi» ¹týl ver¹a"
 
@@ -1488,54 +1488,54 @@ msgid "Main Text Module"
 msgstr "Hlavný textový modul"
 
 #: src/gnome/preferences_dialog.c:2079 src/gnome/setup_druid.c:906
-#: src/gnome2/preferences_dialog.c:2074
+#: src/gnome2/preferences_dialog.c:2074 src/gnome2/setup_druid.c:917
 msgid "Personal"
 msgstr "Osobné"
 
 #: src/gnome/preferences_dialog.c:2122 src/gnome/setup_druid.c:848
-#: src/gnome2/preferences_dialog.c:2117
+#: src/gnome2/preferences_dialog.c:2117 src/gnome2/setup_druid.c:859
 msgid "parallel 5"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2129 src/gnome/setup_druid.c:855
-#: src/gnome2/preferences_dialog.c:2124
+#: src/gnome2/preferences_dialog.c:2124 src/gnome2/setup_druid.c:866
 msgid "parallel 4"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2136 src/gnome/setup_druid.c:862
-#: src/gnome2/preferences_dialog.c:2131
+#: src/gnome2/preferences_dialog.c:2131 src/gnome2/setup_druid.c:873
 msgid "parallel 3"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2145 src/gnome/setup_druid.c:871
-#: src/gnome2/preferences_dialog.c:2140
+#: src/gnome2/preferences_dialog.c:2140 src/gnome2/setup_druid.c:882
 msgid "parallel 2"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2154 src/gnome/setup_druid.c:880
-#: src/gnome2/preferences_dialog.c:2149
+#: src/gnome2/preferences_dialog.c:2149 src/gnome2/setup_druid.c:891
 msgid "parallel 1"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2162 src/gnome/setup_druid.c:990
-#: src/gnome2/preferences_dialog.c:2157
+#: src/gnome2/preferences_dialog.c:2157 src/gnome2/setup_druid.c:1001
 msgid "Daily Devotional"
 msgstr "Denné zamyslenie"
 
 #: src/gnome/preferences_dialog.c:2197 src/gnome/setup_druid.c:963
-#: src/gnome2/preferences_dialog.c:2192
+#: src/gnome2/preferences_dialog.c:2192 src/gnome2/setup_druid.c:974
 msgid ""
 "Which Greek Lexicon to display in Dict/Lex Window when a link or word is "
 "clicked"
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2200 src/gnome/setup_druid.c:966
-#: src/gnome2/preferences_dialog.c:2195
+#: src/gnome2/preferences_dialog.c:2195 src/gnome2/setup_druid.c:977
 msgid "Hebrew Lexicon"
 msgstr "Hebrejský lexikón"
 
 #: src/gnome/preferences_dialog.c:2217 src/gnome/setup_druid.c:987
-#: src/gnome2/preferences_dialog.c:2212
+#: src/gnome2/preferences_dialog.c:2212 src/gnome2/setup_druid.c:998
 msgid ""
 "Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is "
 "clicked"
@@ -1561,7 +1561,7 @@ msgid ""
 msgstr ""
 
 #: src/gnome/preferences_dialog.c:2262 src/gnome/setup_druid.c:943
-#: src/gnome2/preferences_dialog.c:2257
+#: src/gnome2/preferences_dialog.c:2257 src/gnome2/setup_druid.c:954
 msgid "Greek Lexicon"
 msgstr "Grécky lexikón"
 
@@ -1917,106 +1917,106 @@ msgid "Custom Lists"
 msgstr "Èíslovaný zoznam"
 
 #: src/gnome/setup_druid.c:422 src/gnome/setup_druid.c:459
-#: src/gnome2/setup_druid.c:422
+#: src/gnome2/setup_druid.c:423 src/gnome2/setup_druid.c:460
 msgid "Welcome To GnomeSword"
 msgstr "Vitajte v GnomeSword"
 
-#: src/gnome/setup_druid.c:432 src/gnome2/setup_druid.c:432
+#: src/gnome/setup_druid.c:432 src/gnome2/setup_druid.c:433
 msgid "Setup"
 msgstr ""
 
-#: src/gnome/setup_druid.c:463
+#: src/gnome/setup_druid.c:463 src/gnome2/setup_druid.c:464
 msgid "This guide will take you through the initial setup of GnomeSword"
 msgstr "Tento sprievodca vás prevedie cez poèiatoèné nastavenie GnomeSword"
 
-#: src/gnome/setup_druid.c:501
+#: src/gnome/setup_druid.c:501 src/gnome2/setup_druid.c:507
 msgid "Your Home Directory:"
 msgstr "Vá¹ domovský prieèinok:"
 
-#: src/gnome/setup_druid.c:523
+#: src/gnome/setup_druid.c:523 src/gnome2/setup_druid.c:530
 #, fuzzy
 msgid "Sword"
 msgstr "GnomeSword"
 
-#: src/gnome/setup_druid.c:526
+#: src/gnome/setup_druid.c:526 src/gnome2/setup_druid.c:533
 #, fuzzy
 msgid "SWORD version"
 msgstr "Verzia SWORD"
 
-#: src/gnome/setup_druid.c:534
+#: src/gnome/setup_druid.c:534 src/gnome2/setup_druid.c:541
 msgid "Sword Directory:"
 msgstr "Sword prieèinok:"
 
-#: src/gnome/setup_druid.c:542
+#: src/gnome/setup_druid.c:542 src/gnome2/setup_druid.c:549
 msgid "Number of Bible Text Modules:"
 msgstr "Poèet modulov Biblických textov:"
 
-#: src/gnome/setup_druid.c:550
+#: src/gnome/setup_druid.c:550 src/gnome2/setup_druid.c:557
 msgid "Number of Commentary Modules:"
 msgstr "Poèet modulov Komentárov:"
 
-#: src/gnome/setup_druid.c:559
+#: src/gnome/setup_druid.c:559 src/gnome2/setup_druid.c:566
 msgid "Number of Lexicon / Dictionary Modules"
 msgstr "Poèet modulov Lexikónov / Slovníkov"
 
-#: src/gnome/setup_druid.c:584
+#: src/gnome/setup_druid.c:584 src/gnome2/setup_druid.c:591
 msgid "Do you want GnomeSword to open with"
 msgstr "Prejete si otvori» GnomeSword s"
 
-#: src/gnome/setup_druid.c:602
+#: src/gnome/setup_druid.c:602 src/gnome2/setup_druid.c:611
 msgid "Settings you choose as default"
 msgstr "Nastavenia, ktoré ste oznaèili ako ¹tandardné"
 
-#: src/gnome/setup_druid.c:614
+#: src/gnome/setup_druid.c:614 src/gnome2/setup_druid.c:623
 msgid "Settings used the last time GnomeSword ran"
 msgstr "Nastavenie, ktoré boli pouŸité pri poslednom spustení GnomeSword"
 
-#: src/gnome/setup_druid.c:649
+#: src/gnome/setup_druid.c:649 src/gnome2/setup_druid.c:658
 msgid "Show Bible Tabs"
 msgstr "Zobrazi» u¹ká Biblií"
 
-#: src/gnome/setup_druid.c:657
+#: src/gnome/setup_druid.c:657 src/gnome2/setup_druid.c:666
 #, fuzzy
 msgid "Show Bible Window"
 msgstr "Okno s textom Biblie"
 
-#: src/gnome/setup_druid.c:671
+#: src/gnome/setup_druid.c:671 src/gnome2/setup_druid.c:680
 msgid "Show Commentary Tabs"
 msgstr "Zobrazi» u¹ká komentárov"
 
-#: src/gnome/setup_druid.c:679
+#: src/gnome/setup_druid.c:679 src/gnome2/setup_druid.c:688
 msgid "Show Upper Workbook"
 msgstr ""
 
-#: src/gnome/setup_druid.c:694
+#: src/gnome/setup_druid.c:694 src/gnome2/setup_druid.c:703
 msgid "Show Dict/Lex Tabs"
 msgstr "Zobrazi» u¹ká Slov/Lex"
 
-#: src/gnome/setup_druid.c:702
+#: src/gnome/setup_druid.c:702 src/gnome2/setup_druid.c:711
 msgid "Show Lower Workbook"
 msgstr ""
 
-#: src/gnome/setup_druid.c:717
+#: src/gnome/setup_druid.c:717 src/gnome2/setup_druid.c:726
 #, fuzzy
 msgid "Show Book Tabs"
 msgstr "Zobrazi» u¹ká"
 
-#: src/gnome/setup_druid.c:741
+#: src/gnome/setup_druid.c:741 src/gnome2/setup_druid.c:750
 #, fuzzy
 msgid "Choose default Sword modules"
 msgstr "O Sword moduloch"
 
-#: src/gnome/setup_druid.c:756
+#: src/gnome/setup_druid.c:756 src/gnome2/setup_druid.c:767
 #, fuzzy
 msgid "Text Module       "
 msgstr "Hlavný textový modul"
 
-#: src/gnome/setup_druid.c:888
+#: src/gnome/setup_druid.c:888 src/gnome2/setup_druid.c:899
 #, fuzzy
 msgid "Generic Book"
 msgstr "Hµada» v knihách"
 
-#: src/gnome/setup_druid.c:1011
+#: src/gnome/setup_druid.c:1011 src/gnome2/setup_druid.c:1022
 msgid ""
 "These setting will be the default settings if you chose to use default "
 "settings. "
@@ -2024,7 +2024,7 @@ msgstr ""
 "Tieto nastavenie budú ¹tandardnými nastaveniami, ak si zvolíte pouŸitie "
 "¹tandardných nastavení. "
 
-#: src/gnome/setup_druid.c:1040
+#: src/gnome/setup_druid.c:1040 src/gnome2/setup_druid.c:1051
 #, fuzzy
 msgid ""
 "            Thank-you for using GnomeSword. \n"
@@ -2201,8 +2201,8 @@ msgstr "Zobrazi» výsledky hµadania"
 msgid "has been modified. "
 msgstr ""
 
-#: src/gnome/studypad.c:651 src/gnome/studypad.c:663 src/gnome2/studypad.c:649
-#: src/gnome2/studypad.c:661
+#: src/gnome/studypad.c:651 src/gnome/studypad.c:663 src/gnome2/studypad.c:650
+#: src/gnome2/studypad.c:662
 msgid "Study Pad"
 msgstr "©tudijný blok"
 
@@ -2415,32 +2415,32 @@ msgstr ""
 "Veµa frontendov je budovaných na tomto rámci.  Nain¹talovaná sada "
 "modulov môŸe by» zdielaná medzi frontendom s pouŸitím rámca."
 
-#: src/gnome2/sidebar.c:856
+#: src/gnome2/sidebar.c:1053
 #, fuzzy
 msgid "_Modules"
 msgstr "Modul"
 
-#: src/gnome2/sidebar.c:862
+#: src/gnome2/sidebar.c:1061
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "ZáloŸky"
 
-#: src/gnome2/sidebar.c:868
+#: src/gnome2/sidebar.c:1069
 #, fuzzy
 msgid "_Search"
 msgstr "Hµada»"
 
-#: src/gnome2/sidebar.c:874
+#: src/gnome2/sidebar.c:1078
 #, fuzzy
 msgid "Search _Results"
 msgstr "Prehµadáva» výsledky"
 
-#: src/gnome2/sidebar.c:880
+#: src/gnome2/sidebar.c:1088
 #, fuzzy
 msgid "_Viewer"
 msgstr "Prehliadaè"
 
-#: src/gnome2/sidebar.c:886
+#: src/gnome2/sidebar.c:1098
 #, fuzzy
 msgid "Verse _List"
 msgstr "Zoznam ver¹ov"

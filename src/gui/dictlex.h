@@ -30,9 +30,14 @@ struct _dldata {
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *clist;
+	GtkWidget *listview;
 	GtkWidget *entry;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
+
+#ifdef USE_GNOME2	
+	GObject *mod_selection;
+#endif	
 	gchar *mod_name;
 	gchar *search_string;
 	gchar *key;
@@ -40,6 +45,8 @@ struct _dldata {
 	gchar *cipher_old;
 	
 	int mod_num;
+	gulong sig_id;
+	
 	gboolean has_key;
 	gboolean is_locked;
 	gboolean is_dialog;
@@ -52,7 +59,7 @@ void gui_set_dict_frame_label(void);
 void gui_display_dictlex(gchar * key);
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
 void gui_add_new_dict_pane(DL_DATA *dl);
-void gui_setup_dictlex(GList *mods);
+gint gui_setup_dictlex(GList *mods);
 void gui_shutdown_dictlex(void);
 void on_entryDictLookup_changed(GtkEditable * editable,
 						       DL_DATA * d);

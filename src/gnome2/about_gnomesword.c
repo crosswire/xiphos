@@ -65,7 +65,7 @@ gui_create_about_gnomesword(void)
   GError *error = NULL;
 
   about1_logo_pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR"/about.png", &error);
-  about1 = gnome_about_new ("gnome2sword", VERSION,
+  about1 = gnome_about_new (PACKAGE, VERSION,
                         _("Copyright 2003 The  GnomeSword Development team"),
                         _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."),
                         authors,

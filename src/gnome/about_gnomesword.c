@@ -66,7 +66,7 @@ GtkWidget *gui_create_about_gnomesword(void)
         GtkWidget *about;
 
         about = gnome_about_new(
-                settings.program_title, VERSION,
+                PACKAGE, VERSION,
                 "Copyright 2000-2003", authors,
                 _(
                 "We would like to thank Troy Griffitts and all the other "
