@@ -1,49 +1,69 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_Interlinear_dlg.c
-     * -------------------
-     * Thu Feb  7 21:55:14 2002 
-     * copyright (C) 2002 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * interlinear_dialog.c - dialog for detached interlinear
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
 
 #include <gnome.h>
-#include "gs_detach_int.h"
-#include "gs_gnomesword.h"
-#include "sword.h"
-#include "interlinear.h"
-#include "gs_interlinear.h"
 
-GtkWidget *Interlinear_UnDock_Dialog;
-GtkWidget *vboxInt;
-GtkWidget *entrycbIntBook;
-GtkWidget *sbIntChapter;
-GtkWidget *sbIntVerse;
-GtkWidget *entryIntLookup;
-gboolean ApplyChangeBook;
+/* frontend */
+#include "interlinear_dialog.h"
+
+/* main */ 
+#include "gs_gnomesword.h"
+#include "gs_interlinear.h"
+#include "lists.h"
+
+
+/******************************************************************************
+ * static
+ */
+static GtkWidget *Interlinear_UnDock_Dialog;
+static GtkWidget *vboxInt;
+static GtkWidget *entrycbIntBook;
+static GtkWidget *sbIntChapter;
+static GtkWidget *sbIntVerse;
+static GtkWidget *entryIntLookup;
+static gboolean ApplyChangeBook;
+
+
+/******************************************************************************
+ * Name
+ *   change_verse_interlinear
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   gchar *change_verse_interlinear(void)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gchar *
+ */
 
 static gchar *change_verse_interlinear(void)
 {	
@@ -61,9 +81,9 @@ static gchar *change_verse_interlinear(void)
 
 	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 	
-	newbook = backend_get_book_from_key(buf);
-	chapter = backend_get_chapter_from_key(buf);
-	verse = backend_get_verse_from_key(buf);
+	newbook = get_book_from_key(buf);
+	chapter = get_chapter_from_key(buf);
+	verse = get_verse_from_key(buf);
 	
 	if (strcmp(bookname, newbook))
 		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
@@ -74,15 +94,35 @@ static gchar *change_verse_interlinear(void)
 	retval = buf;
 	return retval;	
 }
+
+/******************************************************************************
+ * Name
+ *   update_controls_interlinear
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   gchar *update_controls_interlinear(gchar * ref)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gchar*
+ */
+
 static gchar *update_controls_interlinear(gchar * ref)
 {
 	gchar *bookname, buf[256];
 	gint chapter, verse;
 	const char *newbook;
 				
-	newbook = backend_get_book_from_key(ref);
-	chapter = backend_get_chapter_from_key(ref);
-	verse = backend_get_verse_from_key(ref);
+	newbook = get_book_from_key(ref);
+	chapter = get_chapter_from_key(ref);
+	verse = get_verse_from_key(ref);
 	
 	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
 	if(strcmp(bookname, newbook))
@@ -95,10 +135,29 @@ static gchar *update_controls_interlinear(gchar * ref)
 	return g_strdup(buf);
 }
 
-void undock_interlinear_page(SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   undock_interlinear_page
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void undock_interlinear_page(SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_undock_interlinear_page(SETTINGS * s)
 {
 	ApplyChangeBook = FALSE;
-	Interlinear_UnDock_Dialog = create_dlgInterlinear(s);
+	Interlinear_UnDock_Dialog = gui_create_interlinear_dialog(s);
 	gtk_widget_reparent(s->frameInt, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(s->workbook_lower), 2);
 	s->cvInterlinear = update_controls_interlinear(s->currentverse);
@@ -108,11 +167,48 @@ void undock_interlinear_page(SETTINGS * s)
 	ApplyChangeBook = TRUE;
 }
 
-void on_btnDockInt_clicked(GtkButton * button, SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_btnDockInt_clicked
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void on_btnDockInt_clicked(GtkButton * button, SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_btnDockInt_clicked(GtkButton * button, SETTINGS * s)
 {
 	gtk_widget_destroy(Interlinear_UnDock_Dialog);
 }
 
+/******************************************************************************
+ * Name
+ *   on_dlgInterlinear_destroy
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void on_dlgInterlinear_destroy(GtkObject * object, SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 static void on_dlgInterlinear_destroy(GtkObject * object, SETTINGS * s)
 {
@@ -136,6 +232,25 @@ static void on_dlgInterlinear_destroy(GtkObject * object, SETTINGS * s)
 	update_interlinear_page(s);
 }
 
+/******************************************************************************
+ * Name
+ *   on_buttonIntSync_clicked
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 static void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
 {
 	ApplyChangeBook = FALSE;	
@@ -145,9 +260,28 @@ static void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
 	ApplyChangeBook = TRUE;
 }
 
-static void
-on_entrycbIntBook_changed              (GtkEditable     *editable,
-                                        SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_entrycbIntBook_changed
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void on_entrycbIntBook_changed(GtkEditable *editable,
+						SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_entrycbIntBook_changed(GtkEditable *editable,
+						SETTINGS * s)
 {
 	if(ApplyChangeBook) {
 		gchar *bookname, buf[256];
@@ -161,10 +295,28 @@ on_entrycbIntBook_changed              (GtkEditable     *editable,
 	}
 }
 
-static gboolean
-on_sbIntChapter_button_release_event(GtkWidget * widget,
-				   GdkEventButton * event,
-				   SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_sbIntChapter_button_release_event
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
+ *				   GdkEventButton * event, SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
+				   GdkEventButton * event, SETTINGS * s)
 {		
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
@@ -174,10 +326,27 @@ on_sbIntChapter_button_release_event(GtkWidget * widget,
 	return TRUE;
 }
 
-static gboolean
-on_sbIntVerse_button_release_event(GtkWidget * widget,
-				 GdkEventButton * event,
-				 SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_sbIntVerse_button_release_event
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
+				 GdkEventButton * event, SETTINGS * s)
+ *
+ * Description
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
+				 GdkEventButton * event, SETTINGS * s)
 {	
 	ApplyChangeBook = FALSE;
 	s->cvInterlinear = change_verse_interlinear();
@@ -186,19 +355,34 @@ on_sbIntVerse_button_release_event(GtkWidget * widget,
 	return TRUE;
 }
 
+/******************************************************************************
+ * Name
+ *   on_entryIntLookup_key_press_event
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   gboolean on_entryIntLookup_key_press_event(GtkWidget *widget,
+ *                                      GdkEventKey *event, SETTINGS * s)
+ *
+ * Description
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
 
-
-static gboolean
-on_entryIntLookup_key_press_event      (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        SETTINGS * s)
+static gboolean on_entryIntLookup_key_press_event(GtkWidget *widget,
+                                       GdkEventKey *event, SETTINGS * s)
 {
-	gchar *buf;		//-- pointer to entry string
+	gchar *buf;		
 	ApplyChangeBook = FALSE;
-	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
-	if (event->keyval == 65293 || event->keyval == 65421) {	//-- if user hit return key continue
+	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	
+	if (event->keyval == 65293 || event->keyval == 65421) {	
 		s->cvInterlinear = update_controls_interlinear(buf);
-		update_interlinear_page_detached(s);;	//-- change verse to entry text 
+		update_interlinear_page_detached(s);;	
 		g_free(s->cvInterlinear);
 		ApplyChangeBook = TRUE;
 		return TRUE; 
@@ -207,9 +391,26 @@ on_entryIntLookup_key_press_event      (GtkWidget       *widget,
 	return FALSE;
 }
 
-static void
-on_btnIntGotoVerse_clicked             (GtkButton       *button,
-                                        SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_btnIntGotoVerse_clicked
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   void on_btnIntGotoVerse_clicked(GtkButton *button, SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btnIntGotoVerse_clicked(GtkButton *button, SETTINGS * s)
 {
 	gchar *buf;		//-- pointer to entry string
 		//-- pointer to entry string
@@ -223,7 +424,26 @@ on_btnIntGotoVerse_clicked             (GtkButton       *button,
 	ApplyChangeBook = TRUE;
 }
 
-GtkWidget *create_dlgInterlinear(SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   create_interlinear_dialog
+ *
+ * Synopsis
+ *   #include "interlinear_dialog.h"
+ *   
+ *   GtkWidget *create_interlinear_dialog(SETTINGS * s)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   GtkWidget *
+ */
+
+GtkWidget *gui_create_interlinear_dialog(SETTINGS * s)
 {
 	GtkWidget *dlgInterlinear;
 	GtkWidget *dialog_vbox19;
@@ -231,7 +451,6 @@ GtkWidget *create_dlgInterlinear(SETTINGS * s)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *buttonIntSync;
 	GtkWidget *cbIntBook;
-	GList *cbIntBook_items = NULL;
 	GtkObject *sbIntChapter_adj;
 	GtkObject *sbIntVerse_adj;
 	GtkWidget *btnIntGotoVerse;
@@ -283,10 +502,7 @@ GtkWidget *create_dlgInterlinear(SETTINGS * s)
 	gtk_widget_set_usize (cbIntBook, 154, -2);
 	
 	/*** get and load books of the Bible ***/
-	cbIntBook_items = backend_get_books();
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbIntBook), cbIntBook_items);
-	g_list_free(cbIntBook_items);
-	
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbIntBook), get_list(BOOKS_LIST));	
 	
 	entrycbIntBook = GTK_COMBO (cbIntBook)->entry;
 	gtk_widget_ref (entrycbIntBook);
@@ -371,7 +587,7 @@ GtkWidget *create_dlgInterlinear(SETTINGS * s)
 		      GTK_SIGNAL_FUNC (on_btnIntGotoVerse_clicked),
 		      s);
 	gtk_signal_connect (GTK_OBJECT (btnDockInt), "clicked",
-		      GTK_SIGNAL_FUNC (on_btnDockInt_clicked),
+		      GTK_SIGNAL_FUNC (gui_btnDockInt_clicked),
 		      s);
 	
 	return dlgInterlinear;
