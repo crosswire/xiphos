@@ -1,3 +1,10 @@
+2001-07-05 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* worked on unicode support stuff - help
+	* added gs_bookmarks.* and sw_latin1utf8.*
+	* added ctree to shortcut bar for bookmarks	
+
+
 2001-07-03 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* worked on unicode support stuff - help
