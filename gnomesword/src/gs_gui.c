@@ -45,7 +45,7 @@
 #include "gs_html.h"
 #include "gs_mainmenu_cb.h"
 #include "gs_gui_cb.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_shortcutbar.h"

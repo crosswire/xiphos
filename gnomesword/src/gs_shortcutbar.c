@@ -46,6 +46,7 @@
 #include "sw_gbs.h"
 #include "gs_undock_sb.h"
 #include "gs_html.h"
+#include "gs_gbs.h"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
@@ -364,7 +365,7 @@ static void on_about_item_activate(GtkMenuItem * menuitem, gpointer data)
 				       &item_url, &item_name, NULL);
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, item_name);
-	showmoduleinfoSWORD(modName);
+	showmoduleinfoSWORD(modName,FALSE);
 	g_free(item_url);
 	g_free(item_name);
 }
@@ -909,8 +910,8 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	if(item_num == -1) {
 		if(group_num == groupnum2) /* change work space notebook to commentary page */
 			gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebook3")),0);
-		if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-			gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebookBooksDicts")),0);
+		//if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
+			//gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebookBooksDicts")),0);
 	}
 	
 		if (event->button.button == 1) {
@@ -1859,12 +1860,9 @@ void setupSB(SETTINGS * s)
 		group_name[256], 
 		icon_size[10],
 		modName[16], 
-		*pathname,
-		*buf[2];
+		*pathname;
 	GdkPixbuf 
 		*icon_pixbuf = NULL;
-	GtkCTreeNode 
-		*node;
 	GdkColor 
 		transparent = { 0 };
 	
@@ -2016,23 +2014,8 @@ void setupSB(SETTINGS * s)
 	}
 	g_list_free(tmplang);
 	
-	/*** add books group to shortcut bar ***/
-	scrolledwindow1 = e_vscrolled_bar_new(NULL);
-	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow1",
-				 scrolledwindow1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow1);
-	
-	s->ctree_widget_books = gtk_ctree_new(3, 0);
-	gtk_widget_ref(s->ctree_widget_books);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->ctree_widget_books", s->ctree_widget_books,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(s->ctree_widget_books);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), s->ctree_widget_books);
-	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 0, 280);
-	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 1, 80);
-	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 2, 280);
+	/*** add books group to shortcut bar ***/	
+	scrolledwindow1 = setupGBS(s, bookmods);  /* gs_gbs.c */
 	
 	buttonBooks = gtk_button_new_with_label(_("Books"));
 	gtk_widget_ref(buttonBooks);
@@ -2040,28 +2023,10 @@ void setupSB(SETTINGS * s)
 				 buttonBooks,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(buttonBooks);
+	
 	groupnum8 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 					  scrolledwindow1, buttonBooks, -1); 
 	
-	/* load books */
-	tmp = bookmods;
-	while (tmp != NULL) {
-		buf[0] = (gchar *) tmp->data;
-		buf[1] = (gchar *) tmp->data;
-		buf[2] = "0";
-		
-		node = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
-				NULL, NULL, buf, 3,
-				pixmap1, mask1, pixmap2,
-				mask2, FALSE, FALSE);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	/* end load books */
-	
-	gtk_signal_connect (GTK_OBJECT (s->ctree_widget_books), "select_row",
-                      GTK_SIGNAL_FUNC (on_ctreeBooks_select_row),
-                      s);
 	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
                       GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
                       s);

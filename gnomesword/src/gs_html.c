@@ -61,7 +61,7 @@
 #include "support.h"
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
 
@@ -181,7 +181,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			tmpbuf[i + 1] = '\0';
 			++url;
 		}
-		showmoduleinfoSWORD(tmpbuf);
+		showmoduleinfoSWORD(tmpbuf,FALSE);
 	 /*** let's seperate mod version and passage ***/
 	} else if (!strncmp(url, "version=", 7)
 		   || !strncmp(url, "passage=", 7)) {
@@ -380,7 +380,7 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			tmpbuf[i + 1] = '\0';
 			++url;
 		}
-		showmoduleinfoSWORD(tmpbuf);
+		showmoduleinfoSWORD(tmpbuf,FALSE);
 	
 	 /*** let's remove passage= verse list ***/
 	} else if (!strncmp(url, "passage=", 7)) {

@@ -17,12 +17,18 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
+    gs_editor.c \
+    gs_editor.h \
     gs_editor_replace.c \
     gs_editor_replace.h \
     gs_editor_toolbar.c \
     gs_editor_toolbar.h \
     gs_file.c \
     gs_file.h \
+    gs_gbs.c \
+    gs_gbs.h \
+    gs_getinfo_dlg.c \
+    gs_getinfo_dlg.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
     gs_gui.c \
@@ -33,8 +39,6 @@ COMMON_SOURCE =  \
     gs_history.h \
     gs_html.c \
     gs_html.h \
-    gs_html_editor.c \
-    gs_html_editor.h \
     gs_info_box.c \
     gs_info_box.h\
     gs_information_dlg.c \
