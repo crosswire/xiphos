@@ -1,32 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_gui_cb.c
-    * -------------------
-    * Mon May 8 2000
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-  */
-
-/*   
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+/*
+ * GnomeSword Bible Study Tool
+ * gs_gui_cb.c - SHORT DESCRIPTION
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -39,21 +33,17 @@
 #include "sword.h"
 #include "gs_history.h"
 #include "support.h"
+#include "settings.h"
 
-
-/******************************************************************************
- * externals
- */
-extern gboolean ApplyChange;/* to keep form looping when book combobox is changed */
-
+extern gboolean ApplyChange;
 
 void
 on_mainwindow_size_allocate(GtkWidget * widget,
 			    GtkAllocation * allocation,
 			    gpointer user_data)
 {
-	settings->gs_width = allocation->width;
-	settings->gs_hight = allocation->height;
+	settings.gs_width = allocation->width;
+	settings.gs_hight = allocation->height;
 }
 
 void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
@@ -77,10 +67,10 @@ void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 		gchar buf[256];
 		gchar *bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (settings->cbeBook));
+				       (settings.cbeBook));
 		sprintf(buf,"%s 1:1",bookname);
 		change_verse(buf);
-	}
+	} 
 }
 
 gboolean
@@ -88,24 +78,24 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   GdkEventButton * event,
 				   gpointer user_data)
 {
-	if (ApplyChange) {
+	if (ApplyChange) { 
 		gchar *bookname;
 		gchar buf[256];
 		gint chapter, verse;
 	
 		bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (settings->cbeBook));
+				       (settings.cbeBook));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings->spbChapter));
+						     (settings.spbChapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings->spbVerse));
+						     (settings.spbVerse));
 		sprintf(buf,"%s %d:%d",bookname,chapter,verse);
 		change_verse(buf);		
 		return TRUE;
-	}
+	} 
 	return FALSE;
 }
 
@@ -114,23 +104,23 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 				 GdkEventButton * event,
 				 gpointer user_data)
 {
-	if (ApplyChange) {
+	if (ApplyChange) { 
 		gchar *bookname, buf[256];
 		gint chapter, verse;
 	
 		bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (settings->cbeBook));
+				       (settings.cbeBook));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings->spbChapter));
+						     (settings.spbChapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings->spbVerse));
+						     (settings.spbVerse));
 		sprintf(buf,"%s %d:%d",bookname,chapter,verse);
 		change_verse(buf);
 		return TRUE;
-	}
+	} 
 	return FALSE;
 }
 
@@ -140,7 +130,7 @@ void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (settings->cbeFreeformLookup));
+			       (settings.cbeFreeformLookup));
 	change_verse(buf);	//-- change verse to entry text 
 }
 
@@ -170,26 +160,26 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	}
 	firsttime = FALSE;	//-- remember we were here
 
-	gtk_widget_hide(settings->toolbarComments);
-	gtk_widget_hide(settings->toolbarStudypad);
+	gtk_widget_hide(settings.toolbarComments);
+	gtk_widget_hide(settings.toolbarStudypad);
 
-	if (page_num == 1 && settings->editnote) {
-		gtk_widget_show(settings->toolbarComments);
+	if (page_num == 1 && settings.editnote) {
+		gtk_widget_show(settings.toolbarComments);
 	}
 
 	else if (page_num == 2) {
-		gtk_widget_show(settings->toolbarStudypad);
+		gtk_widget_show(settings.toolbarStudypad);
 	}
 }
 
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(settings->app, 0);
+	historynav(settings.app, 0);
 }
 
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(settings->app, 1);
+	historynav(settings.app, 1);
 }
 
 gboolean
@@ -200,22 +190,20 @@ on_epaned_button_release_event(GtkWidget * widget,
 	gint panesize;
 	if(!strcmp((gchar*)user_data,"epaned")) 
 		panesize = 
-		    e_paned_get_position(E_PANED(settings->epaned));
+		    e_paned_get_position(E_PANED(settings.epaned));
 	else
 		panesize =
 		    e_paned_get_position(E_PANED(lookup_widget
-				  (settings->app,
+				  (settings.app,
 				   (gchar *) user_data)));
 
 	if (panesize > 15) {
 		if (!strcmp((gchar *) user_data, "epaned"))
-			settings->shortcutbar_width = panesize;
+			settings.shortcutbar_width = panesize;
 		if (!strcmp((gchar *) user_data, "vpaned1"))
-			settings->upperpane_hight = panesize;
+			settings.upperpane_hight = panesize;
 		if (!strcmp((gchar *) user_data, "hpaned1"))
-			settings->biblepane_width = panesize;
+			settings.biblepane_width = panesize;
 	}
 	return TRUE;
 }
-
-/******  end of file  ******/

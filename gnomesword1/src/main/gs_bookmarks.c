@@ -1,33 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */ 
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_bookmarks.c
-    * -------------------
-    * Thu July 05 2001
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
+/*
+ * GnomeSword Bible Study Tool
+ * gs_bookmarks.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -44,13 +37,12 @@
 #include "sword.h"
 #include "gs_gnomesword.h"
 #include "support.h"
+#include "settings.h"
 
-/*
- ******************************************************************************
+/******************************************************************************
  * externals
- ******************************************************************************
-*/
-extern SETTINGS *settings;
+ *****************************************************************************/
+
 extern GtkWidget *MainFrm;
 extern GtkCTreeNode *personal_node;
 extern gchar *fnquickmarks;
@@ -62,30 +54,27 @@ extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
 
 
-/*
- ******************************************************************************
+/******************************************************************************
  * globals
- ******************************************************************************
-*/
+ *****************************************************************************/
+
 GtkWidget *pmBookmarkTree;
 GtkStyle *style;
 BM_TREE bmtree;
 BM_TREE *p_bmtree;
 GtkCTreeNode *newrootnode;
 
-/*
- ******************************************************************************
+/******************************************************************************
  * static
- ******************************************************************************
-*/
+ *****************************************************************************/
+
 static GtkCTreeNode *selected_node;
 static gboolean applychangestobookmark;
 
-/*
- *****************************************************************************
+/*****************************************************************************
  * static function declrations
- *****************************************************************************
-*/
+ *****************************************************************************/
+
 static void after_press(GtkCTree * ctree, gpointer data);
 static void on_ctree_select_row(GtkCList * clist,
 		    	gint row,
@@ -387,9 +376,9 @@ static void stringCallback(gchar * str, gpointer data)
 						  mask1, pixmap2, mask2,
 						  FALSE, FALSE);
 			gtk_ctree_select(p_bmtree->ctree, newrootnode);
-			addnewgrouptoMenus(settings->menuBible, newrootnode, str);
-			addnewgrouptoMenus(settings->menuhtmlcom, newrootnode, str);
-			addnewgrouptoMenus(settings->menuDict, newrootnode, str);
+			addnewgrouptoMenus(settings.menuBible, newrootnode, str);
+			addnewgrouptoMenus(settings.menuhtmlcom, newrootnode, str);
+			addnewgrouptoMenus(settings.menuDict, newrootnode, str);
 			break;
 		}
 	}
@@ -501,8 +490,8 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 		node = (GtkCTreeNode *)user_data;
 	else
 		node = NULL;
-	mod_name = get_module_name(settings);
-	key = get_module_key(settings);
+	mod_name = get_module_name(&settings);
+	key = get_module_key(&settings);
 	add_bookmark_to_tree(node, mod_name, key);
 }
 
@@ -632,8 +621,8 @@ void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    NULL);
 	if( gnome_dialog_run (GNOME_DIALOG (yes_no_dialog)) ) return;
 	
-	modName = get_module_name(settings);
-	key     = get_module_key(settings);
+	modName = get_module_name(&settings);
+	key     = get_module_key(&settings);
 
 	cell1 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[1]);
 	cell2 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[2]);
@@ -1093,5 +1082,3 @@ create_addBookmarkMenuBM(GtkWidget *menu,
 		//}
 	}	
 }
-
-/******  end of file    ******/

@@ -40,9 +40,8 @@
 #include <gal/widgets/e-unicode.h>
 #include "gs_gnomesword.h"
 #include "gs_find_dlg.h"
+#include "settings.h"
 
-
-extern SETTINGS *settings;
 
 static void
 next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)
@@ -65,7 +64,7 @@ search_cb(GtkWidget *but, GSFindDialog *d)
 	html_engine_search(html->engine, text,
 			GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
 			GTK_TOGGLE_BUTTON(d->backward)->active == 0, d->regular);
-	sprintf(settings->findText,"%s",text);
+	sprintf(settings.findText,"%s",text);
 	g_free (text);
 }
 
@@ -73,7 +72,7 @@ static void
 close_dialog(GtkWidget *but, GSFindDialog *d)
 {
 	gnome_dialog_close(d->dialog);
-	settings->finddialog = FALSE;
+	settings.finddialog = FALSE;
 }
 
 static void
@@ -151,7 +150,7 @@ searchGS_FIND_DLG(GBS_DATA *g, gboolean regular, gchar *text)
 			gtk_entry_set_text(GTK_ENTRY(g->find_dialog->entry),text);
 		
 		gtk_widget_grab_focus(g->find_dialog->entry);
-		settings->finddialog = TRUE;
+		settings.finddialog = TRUE;
 		//gtk_widget_show(GTK_WIDGET(g->find_dialog->dialog));
 		//gdk_window_raise(GTK_WIDGET(g->find_dialog->dialog)->window);		
 	}

@@ -27,6 +27,7 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
+#include "gs_editor.h"
 
 typedef struct _percomm_find_dialog Percomm_Find_Dialog;
 struct _percomm_find_dialog {

@@ -1,33 +1,30 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_gbs.c (generic book support)
-     * -------------------
-     * Tue Apr  2 09:35:20 2002
-     * copyright (C) 2002 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_gbs.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
+#endif
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -44,11 +41,13 @@
 #include "gs_html.h"
 #include "gs_find_dlg.h"
 #include "cipher_key_dialog.h"
+#include "settings.h"
 #include "gs_bookmarks.h"
 
 /******************************************************************************
  *  externs  
  */
+
 extern GdkPixmap *pixmap1;
 extern GdkPixmap *pixmap2;
 extern GdkPixmap *pixmap3;
@@ -76,7 +75,7 @@ gboolean show_tabs_gbs;
 
 void gui_set_book_page_and_key(gint page_num, gchar * key)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookGBS),
 			      page_num);
 	backend_display_book(page_num, key);
 }
@@ -199,8 +198,8 @@ void on_ctreeGBS_select_row(GtkCList * clist,
 
 
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
-	settings->ctree_widget_books = gbs->ctree;
-	settings->htmlBook = gbs->html;
+	settings.ctree_widget_books = gbs->ctree;
+	settings.htmlBook = gbs->html;
 
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				    cell[0])->text;
@@ -214,7 +213,7 @@ void on_ctreeGBS_select_row(GtkCList * clist,
 	/** fill ctree node with children **/
 		if ((GTK_CTREE_ROW(treeNode)->children == NULL)
 		    && (!GTK_CTREE_ROW(treeNode)->is_leaf)) {
-			gui_add_node_children(settings, treeNode, bookname, strtoul(offset, NULL, 0));	//load_book_tree(settings, treeNode, bookname,nodename,strtoul(offset,NULL,0));      
+			gui_add_node_children(&settings, treeNode, bookname, strtoul(offset, NULL, 0));	//load_book_tree(&settings, treeNode, bookname,nodename,strtoul(offset,NULL,0));      
 			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
 					 treeNode);
 		}
@@ -232,7 +231,7 @@ GBS_DATA *getgbs(GList * gbs)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		g = (GBS_DATA *) tmp->data;
-		if (!strcmp(g->bookName, settings->BookWindowModule)) {
+		if (!strcmp(g->bookName, settings.BookWindowModule)) {
 			break;
 		}
 		tmp = g_list_next(tmp);
@@ -251,40 +250,40 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 	
 	g_old =
 	    (GBS_DATA *) g_list_nth_data(data_gbs,
-					 settings->gbsLastPage);
+					 settings.gbsLastPage);
 	g = (GBS_DATA *) g_list_nth_data(data_gbs, page_num);
 	cur_g = g;
 	//-- change tab label to current book name
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
-					(settings->workbook_lower),
+					(settings.workbook_lower),
 					gtk_notebook_get_nth_page
 					(GTK_NOTEBOOK
-					 (settings->workbook_lower), 1),
+					 (settings.workbook_lower), 1),
 					g->bookName);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings->workbook_lower),
+					 (settings.workbook_lower),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (settings->workbook_lower),
+					  (settings.workbook_lower),
 					  1), g->bookName);
 	/*
-	   get the book key and store in settings->book_key
+	   get the book key and store in settings.book_key
 	   for adding bookmarks
 	 */
 	key = backend_get_book_key(g->booknum);
 	if(key) {
-		sprintf(settings->book_key, "%s", key);
+		sprintf(settings.book_key, "%s", key);
 		g_free(key);
 	}
 	
-	sprintf(settings->BookWindowModule, "%s", g->bookName);
+	sprintf(settings.BookWindowModule, "%s", g->bookName);
 
-	if (settings->finddialog) {
+	if (settings.finddialog) {
 		gnome_dialog_close(g_old->find_dialog->dialog);
-		searchGS_FIND_DLG(g, FALSE, settings->findText);
+		searchGS_FIND_DLG(g, FALSE, settings.findText);
 	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = show_tabs_gbs;
-	settings->gbsLastPage = page_num;
+	settings.gbsLastPage = page_num;
 }
 
 /****  popup menu call backs  ****/
@@ -323,7 +322,7 @@ void on_lookup_word_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName, modDescription);
 	key = get_word_or_selection(g->html, TRUE);
 	if (key) {
-		display_dictlex_in_viewer(modName, key, settings);
+		display_dictlex_in_viewer(modName, key, &settings);
 		g_free(key);
 	}
 }
@@ -341,7 +340,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName, modDescription);
 	key = get_word_or_selection(g->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(modName, key, settings);
+		display_dictlex_in_viewer(modName, key, &settings);
 		g_free(key);
 	}
 }
@@ -350,8 +349,8 @@ void on_same_lookup_word_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 {
 	gchar *key = get_word_or_selection(g->html, TRUE);
 	if (key) {
-		display_dictlex_in_viewer(settings->DictWindowModule,
-					  key, settings);
+		display_dictlex_in_viewer(settings.DictWindowModule,
+					  key, &settings);
 		g_free(key);
 	}
 }
@@ -362,8 +361,8 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(g->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(settings->DictWindowModule,
-					  key, settings);
+		display_dictlex_in_viewer(settings.DictWindowModule,
+					  key, &settings);
 		g_free(key);
 	}
 }
@@ -374,7 +373,7 @@ on_view_book_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookGBS),
 			      page);
 }
 
@@ -384,17 +383,16 @@ on_button_release_event(GtkWidget * widget,
 {
 	gchar *key;
 	
-	settings->whichwindow = BOOK_WINDOW;
+	settings.whichwindow = BOOK_WINDOW;
 	
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
 			key = buttonpresslookupGS_HTML(g->html);
 			if (key) {
-				display_dictlex_in_viewer(settings->
-							  DictWindowModule,
+				display_dictlex_in_viewer(settings.DictWindowModule,
 							  key,
-							  settings);
+							  &settings);
 				g_free(key);
 			}
 			return TRUE;
@@ -677,7 +675,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 			   GTK_SIGNAL_FUNC(on_find_activate), gbs);
 	gtk_signal_connect(GTK_OBJECT(gbs->showtabs), "activate",
 			   GTK_SIGNAL_FUNC(on_showtabs_activate),
-			   settings);
+			   &settings);
 	return pmGBS;
 }
 
@@ -845,7 +843,7 @@ GList* gui_setup_gbs(SETTINGS * s)
 			   GTK_SIGNAL_FUNC(on_notebookGBS_switch_page),
 			   gbs_list);
 
-	settings->gbsLastPage = 0;
+	settings.gbsLastPage = 0;
 	g_list_free(tmp);
 	return mods;
 }
@@ -862,6 +860,3 @@ void gui_shutdownGBS(void)
 	}
 	g_list_free(gbs_list);
 }
-
-
-/******   end of file   ******/
