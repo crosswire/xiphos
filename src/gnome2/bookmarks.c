@@ -142,19 +142,19 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 static void add_node(xmlNodePtr cur, GtkCTree * ctree,
 		     GtkCTreeNode * parent);
 
-void gui_add_bookmark_to_tree(GtkCTreeNode * node,
+static void gui_add_bookmark_to_tree(GtkCTreeNode * node,
 		   gchar * modName, gchar * verse);
 
-void on_new_folder_activate(GtkMenuItem * menuitem,
+static void on_new_folder_activate(GtkMenuItem * menuitem,
 			  gpointer user_data);
 
-void on_edit_item_activate(GtkMenuItem * menuitem,
+static void on_edit_item_activate(GtkMenuItem * menuitem,
 		       gpointer user_data);
-void on_delete_item_activate(GtkMenuItem * menuitem,
+static void on_delete_item_activate(GtkMenuItem * menuitem,
 			 gpointer user_data);
-void on_allow_reordering_activate(GtkMenuItem * menuitem,
+static void on_allow_reordering_activate(GtkMenuItem * menuitem,
 			      gpointer user_data);
-void gui_create_add_bookmark_menu(GtkWidget * menu,
+static void gui_create_add_bookmark_menu(GtkWidget * menu,
 			  GtkWidget * bookmark_menu_widget);			  
 		   
 
@@ -374,6 +374,121 @@ static void parse_bookmark_tree(GNode * node, xmlNodePtr parent)
 
 		parse_bookmark_tree(work, cur_node);
 	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  parse_treeview
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void parse_treeview(xmlNodePtr parent)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void parse_treeview(xmlNodePtr parent)
+{
+	static xmlNodePtr cur_node;
+/*	GNode *work;
+
+	for (work = node->children; work; work = work->next) {
+		get_node_data(work);
+		if (!es->is_leaf) {
+			cur_node = add_xml_folder_to_parent(parent, es);
+		} else {
+			add_xml_bookmark_to_parent(parent, es);
+		}
+		g_free(es);
+
+		parse_bookmark_tree(work, cur_node);
+	}
+	*/
+}
+/******************************************************************************
+ * Name
+ *  save_treeview_to_xml_bookmarks
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void save_treeview_to_xml_bookmarks(gchar *file_buf)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void save_treeview_to_xml_bookmarks(gchar * file_buf)
+{
+	xmlNodePtr root_node = NULL;
+	xmlNodePtr cur_node = NULL;
+	xmlDocPtr root_doc;
+	xmlAttrPtr root_attr;
+	const xmlChar *xml_filename;
+
+	if (bookmarks_changed) {
+
+		/*if (!gnode)
+			return;*/
+		xml_filename = (const xmlChar *) file_buf;
+		root_doc = xmlNewDoc((const xmlChar *) "1.0");
+		/*xmlNewDocProp(root_doc,"encoding",
+					 "UTF-8");*/
+		
+		if (root_doc != NULL) {
+			root_node = xmlNewNode(NULL, (const xmlChar *)
+					       "SwordBookmarks");
+			root_attr =
+			    xmlNewProp(root_node, "syntaxVersion",
+				       (const xmlChar *) "1");
+			xmlDocSetRootElement(root_doc, root_node);
+		}
+
+//		es = (BOOKMARK_DATA *) gnode->data;
+/*		g_warning("bookmark = %s - %s - %s", es->caption,
+			  es->key, es->module);
+*/
+		if ((!g_strcasecmp(es->module, "ROOT")) ||
+		    (!g_strcasecmp(es->module, "GROUP"))) {
+			cur_node =
+			    add_xml_folder_to_parent(root_node, es);
+			parse_treeview(cur_node);
+		} else {
+			add_xml_bookmark_to_parent(root_node, es);
+		}
+/*
+		while ((gnode = g_node_next_sibling(gnode)) != NULL) {
+			get_node_data(gnode);
+			if (!es->is_leaf) {
+				cur_node =
+				    add_xml_folder_to_parent(root_node,
+							     es);
+				parse_treeview(cur_node);
+			} else {
+				if (root_doc != NULL) {
+					add_xml_bookmark_to_parent
+					    (root_node, es);
+				}
+			}
+		}
+*/
+		g_print("\nsaving = %s\n", xml_filename);
+		xmlSaveFormatFile(xml_filename, root_doc,1);
+		xmlFreeDoc(root_doc);
+		g_free(file_buf);
+	}
+
+	bookmarks_changed = FALSE;
+	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
 }
 
 
