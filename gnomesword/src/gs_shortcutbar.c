@@ -929,6 +929,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *scrolledwindow2;
 	GtkWidget *label1;
 	GtkWidget *vbox3;
+	GtkWidget *vpaned_srch_rslt;
 	GtkWidget *frame3;
 	GtkWidget *scrolledwindow3;
 	GtkWidget *frame4;
@@ -1142,6 +1143,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 							     (nbVL), 0),
 				   label1);
 
+//-------------------------------------------------------------------------
+
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox3);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox3", vbox3,
@@ -1179,12 +1182,21 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 //	gtk_widget_set_usize(s->htmlRP, -2, 63);
 	gtk_html_load_empty(GTK_HTML(s->htmlRP));
 
+	vpaned_srch_rslt = gtk_vpaned_new();
+	gtk_widget_ref(vpaned_srch_rslt);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vpaned_srch_rslt",
+				 vpaned_srch_rslt, (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vpaned_srch_rslt);
+	gtk_box_pack_start(GTK_BOX(vbox3), vpaned_srch_rslt, TRUE, TRUE, 0);
+	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt), 100);
+
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame3);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame3", frame3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame3);
-	gtk_box_pack_start(GTK_BOX(vbox3), frame3, FALSE, TRUE, 0);
+	gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), frame3, TRUE, TRUE);
+	//gtk_box_pack_start(GTK_BOX(vbox3), frame3, FALSE, TRUE, 0);
 
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow3);
@@ -1193,7 +1205,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow3);
 	gtk_container_add(GTK_CONTAINER(frame3), scrolledwindow3);
-	gtk_widget_set_usize(scrolledwindow3, -2, 85);
+	//gtk_widget_set_usize(scrolledwindow3, -2, 95);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow3), GTK_POLICY_AUTOMATIC,
 				      GTK_POLICY_AUTOMATIC);
@@ -1222,7 +1234,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame4);
-	gtk_box_pack_start(GTK_BOX(vbox3), frame4, TRUE, TRUE, 0);
+	//gtk_box_pack_start(GTK_BOX(vbox3), frame4, TRUE, TRUE, 0);
+	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE, TRUE);
 
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow4);
@@ -1256,6 +1269,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (nbVL), 1),
 				   label2);
+
+//-------------------------------------------------------------------------
 
 	frame5 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame5);
