@@ -353,7 +353,10 @@ void gui_load_tabs(const gchar *filename)
 			passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 			notebook_main_add_page(pt);
 		}
-		else {
+		else
+		{
+			// This is a hack to keep gs from loading the settings from the last session
+			// into the last tab loaded here.
 			settings.MainWindowModule = g_strdup(pt->text_mod);
 			settings.CommWindowModule = g_strdup(pt->commentary_mod);
 			settings.DictWindowModule = g_strdup(pt->dictlex_mod);
