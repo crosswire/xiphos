@@ -89,8 +89,8 @@ struct _ESplashPrivate {
 
 /* Layout constants.  These need to be changed if the splash changes.  */
 
-#define ICON_Y    280
-#define ICON_SIZE 34
+#define ICON_Y    240
+#define ICON_SIZE 28
 
 /* Icon management.  */
 
@@ -352,12 +352,12 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	g_signal_connect(GTK_OBJECT(splash), "button-press-event",
 			 G_CALLBACK(button_press_event), splash);
 
-	gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
+	//gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
 	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER);
 	gtk_window_set_policy(GTK_WINDOW(splash), FALSE, FALSE, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(splash), image_width,
 				    image_height+20);
-	gtk_window_set_title(GTK_WINDOW(splash), "GnomeSword");
+	gtk_window_set_title(GTK_WINDOW(splash), _("Powered by the SWORD Project"));
 
 }
 
@@ -374,7 +374,7 @@ GtkWidget *e_splash_new(void)
 	GdkPixbuf *splash_image_pixbuf;
 	GError *error = NULL;
 	splash_image_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash.png",
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash2.png",
 				     &error);
 	if (!splash_image_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
@@ -481,7 +481,7 @@ void gui_splash_init()
 		
 		icon_pixbuf = 
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/init-settings.png", &error);
+					     "/gnome-session.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
@@ -492,7 +492,7 @@ void gui_splash_init()
 
 		icon_pixbuf =
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/gnome-window-manager.png", &error);
+					     "/gnome-windows.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
@@ -504,7 +504,7 @@ void gui_splash_init()
 
 		icon_pixbuf =
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/sword3.png", &error);
+					     "/sword.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
