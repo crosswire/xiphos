@@ -157,6 +157,32 @@ additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 	//g_free(menuitem->user_data); 
 	//g_free(menuitem);
 }
+/******************************************************************************
+ * add_item_to_gnome_menu_w_num - add item to gnome menu 
+ * adds an item to the main menu bar
+ * MainFrm - the main window - app widget
+ * itemname - the item label and also used for user data
+ * menuname - the gnome menu path 
+ * mycallback - the callback to call when item is selected 
+ ******************************************************************************/
+static void
+add_item_to_gnome_menu_w_num(GtkWidget * MainFrm, gchar * item_name, gint item_num,
+		   gchar * menu_name, GtkMenuCallback mycallback)
+{
+	GnomeUIInfo *menuitem;
+
+	menuitem = g_new(GnomeUIInfo, 2);
+	menuitem->type = GNOME_APP_UI_ITEM;
+	menuitem->moreinfo = (gpointer) mycallback;
+	menuitem->user_data = GINT_TO_POINTER(item_num);
+	menuitem->label = item_name;
+	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
+	menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+	menuitem->accelerator_key = 0;
+	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menu_name,
+					 menuitem, NULL);
+}
 
 
 /******************************************************************************
@@ -331,6 +357,40 @@ void addmodstomenus(GList *biblelist, GList *commentarylist,
 				(GtkMenuCallback)on_kjv1_activate );			
 		sprintf(aboutrememberlastitem3,"%s%s", _("_Help/About Sword Modules/Books/"),
 				(gchar *) tmp->data);
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+}
+
+/*
+ *******************************************************************************
+ 
+ 
+ */
+void add_mods_to_menus(GList * modlist, gchar * menu,
+				GtkMenuCallback callback) 
+{	
+	gchar	
+		view_remember_last_item[80];
+	gint	i = 0;
+	GList 	*tmp = NULL;
+
+	sprintf(view_remember_last_item,"%s", menu);
+	
+	
+	tmp = modlist;
+	while (tmp != NULL) {	
+
+		add_item_to_gnome_menu_w_num(settings.app, 
+				(gchar *) tmp->data, 
+				i, 
+				view_remember_last_item , 
+				(GtkMenuCallback) callback);
+		//-- remember last item - so next item will be place below it   
+		sprintf(view_remember_last_item,"%s%s", 
+				menu, 
+				(gchar *) tmp->data);	
+		++i;
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);

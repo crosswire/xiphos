@@ -41,7 +41,9 @@
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary.h"
+#include "gui/commentary_dialog.h"
 #include "gui/dictlex.h"
+#include "gui/dictlex_dialog.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -123,9 +125,9 @@ void init_gnomesword(void)
 	 *  setup commentary gui support 
 	 */
 	if (havecomm) {
-		gui_setup_commentary(get_list(COMM_LIST));
+		gui_setup_commentary(get_list(COMM_LIST));	
+		gui_setup_commentary_dialog(get_list(COMM_LIST));
 	}
-
 	/*
 	 *  setup personal comments gui support 
 	 */
@@ -145,6 +147,7 @@ void init_gnomesword(void)
 	 */
 	if (havedict) {
 		gui_setup_dictlex(get_list(DICT_LIST));
+		gui_setup_dictlex_dialog(get_list(DICT_LIST));
 	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
@@ -223,10 +226,14 @@ void gnomesword_shutdown(void)
 	}
 	if(havebook)
 		gui_shutdown_gbs();
-	if(havecomm)
+	if(havecomm){
 		gui_shutdown_commentary();
-	if(havedict)
+		gui_shutdown_commentary_dialog();
+	}
+	if(havedict){
 		gui_shutdown_dictlex();
+		gui_shutdown_dictlex_dialog();
+	}
 	if(havepercomm)
 		shutdown_percomm();
 	
@@ -746,7 +753,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 							TEXT_MODS);
 			val_key = update_nav_controls(key);
 			gui_set_text_page_and_key(page_num, val_key);
-			g_free(val_key);
+			free(val_key);
 		}
 		break;
 	case COMMENTARY_TYPE:
@@ -828,7 +835,7 @@ void change_verse(gchar * key)
 	if (havecomm)
 		gui_display_commentary(val_key);
 	
-	g_free(val_key);
+	free(val_key);
 	settings.apply_change = TRUE;
 }
 
@@ -889,7 +896,7 @@ void display_new_font_color_and_size(void)
 {
 	gui_display_text(settings.currentverse);
 	gui_display_commentary(settings.currentverse);
-	display_dictlex(settings.dictkey);
+	gui_display_dictlex(settings.dictkey);
 	update_interlinear_page();
 }
 
@@ -977,6 +984,21 @@ void save_sb_iconsize(gchar *file_name, char *icons)
 	backend_save_sb_iconsize(file_name, icons);
 }
 
+
+char *get_module_font_name(char *mod_name)
+{
+	return backend_get_module_font_name(mod_name);
+}
+
+char *get_module_font_size(char *mod_name)
+{
+	return backend_get_module_font_size(mod_name);
+}
+
+int get_mod_type(char * mod_name)
+{
+	return backend_get_mod_type(mod_name);
+}
 gint get_sb_type_from_modname(gchar *modName)
 {
 	return backend_sb_type_from_modname(modName);

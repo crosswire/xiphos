@@ -25,12 +25,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+char *backend_get_first_dictlex_key(void);
+char *backend_get_next_dictlex_key(void);	
+int backend_set_dictlex_module(char * mod_name);
+int backend_set_dictlex_key(char * key);
+char *backend_get_dictlex_key(int direction);
+char *backend_get_dictlex_text(char * mod_name, char * key);
+	
 void backend_new_dictlex_display(GtkWidget *html, int mod_num);
 void backend_setup_dictlex(void);
 void backend_shutdown_dictlex(void);
-void backend_display_dictlex(int mod_num, char *key);
-GList* backend_fill_dictlex_keys(int mod_num, int count);
+//void backend_display_dictlex(int mod_num, char *key);
 void backend_dictentryTextChangedDL(char *modname, char *mytext);	
 	
 #ifdef __cplusplus

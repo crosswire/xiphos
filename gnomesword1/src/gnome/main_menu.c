@@ -31,6 +31,9 @@
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
 #include "gui/shortcutbar_main.h"
+#include "gui/bibletext_dialog.h"
+#include "gui/commentary_dialog.h"
+#include "gui/dictlex_dialog.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/support.h"
@@ -41,6 +44,7 @@
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "main/gs_history.h"
+#include "main/lists.h"
 
 GtkWidget *htmlTexts;
 
@@ -302,6 +306,92 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(AboutBox);
 }
 
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   v	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void on_bibletext_item_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	gui_open_bibletext_dialog(GPOINTER_TO_INT(user_data));
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   v	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void on_commentary_item_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	gui_open_commentary_dialog(GPOINTER_TO_INT(user_data));
+}
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   v	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void on_dictlex_item_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	gui_open_dictlex_dialog(GPOINTER_TO_INT(user_data));
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   v	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void on_book_item_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	
+}
 
 /******************************************************************************
  * gnome menu structures
@@ -341,15 +431,75 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo view1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
-	 N_("Show the Daily Devotion for Today"),
-	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
+
+
+static GnomeUIInfo new_bibletext_dialog1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
 };
+
+static GnomeUIInfo new_commentary_dialog1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo new_dict_lex_dialog1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo new_book_dialog1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo view1_menu_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_ITEM, N_("Daily Devotion"),
+    N_("Show the Daily Devotion for Today"),
+    (gpointer) on_daily_devotion1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_SEPARATOR,
+  {
+    GNOME_APP_UI_SUBTREE, N_("New Bibletext Dialog"),
+    NULL,
+    new_bibletext_dialog1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, N_("New Commentary Dialog"),
+    NULL,
+    new_commentary_dialog1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, N_("New Dictionary Dialog"),
+    NULL,
+    new_dict_lex_dialog1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, N_("New Book Dialog"),
+    NULL,
+    new_book_dialog1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+
+
 
 static GnomeUIInfo settings1_menu_uiinfo[] = {
 	
@@ -535,6 +685,57 @@ void gui_create_main_menu(GtkWidget *app)
 				 "daily_devotion1",
 				 view1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
+
+
+
+
+  gtk_widget_ref (view1_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (app), "separator28",
+                            view1_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (view1_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (app), "new_bibletext_dialog1",
+                            view1_menu_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+			    
+
+	
+  add_mods_to_menus(get_list(TEXT_LIST), _("_View/New Bibletext Dialog/"),
+			  (GtkMenuCallback)on_bibletext_item_activate);
+			  
+			  
+
+  gtk_widget_ref (view1_menu_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (app), "new_commentary_dialog1",
+                            view1_menu_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  
+  add_mods_to_menus(get_list(COMM_LIST), _("_View/New Commentary Dialog/"),
+			  (GtkMenuCallback)on_commentary_item_activate);
+  
+
+  gtk_widget_ref (view1_menu_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (app), "new_dict_lex_dialog1",
+                            view1_menu_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+	add_mods_to_menus(get_list(DICT_LIST), _("_View/New Dictionary Dialog/"),
+			  (GtkMenuCallback)on_dictlex_item_activate);
+
+
+  gtk_widget_ref (view1_menu_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (app), "new_book_dialog1",
+                            view1_menu_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+
+	add_mods_to_menus(get_list(GBS_LIST), _("_View/New Book Dialog/"),
+			  (GtkMenuCallback)on_book_item_activate);
+
+
+
 
 	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "settings1",

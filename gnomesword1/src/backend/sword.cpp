@@ -59,7 +59,6 @@
 #include "backend/percomm_.h"
 #include "backend/search_.h"
 #include "backend/interlinear.h"
-#include "backend/bibletext_view_.h"
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
@@ -198,10 +197,8 @@ void backend_init_sword(void)
 	 * setup Commentary, Personal Comments
 	 * Generic Book and Dict/Lex Support
 	 */
-	if(havebible){
+	if(havebible)
 		backend_setup_bibletext();
-		backend_setup_viewtext();
-	}
 	if(havecomm)
 		backend_setup_commentary();
 	if(havepercomm)
@@ -242,8 +239,8 @@ GList * backend_get_global_options_list(void)
  * Return value
  *   void
  */
-void backend_module_name_from_description(gchar * mod_name,
-					  gchar * mod_desc)
+void backend_module_name_from_description(char * mod_name,
+					  char * mod_desc)
 {
 	strcpy(mod_name, descriptionMap[mod_desc].c_str());
 }
@@ -270,7 +267,6 @@ void backend_shutdown(void)
 	backend_save_properties(true);
 	
 	backend_shutdown_bibletext();
-	backend_shutdown_viewtext();
 	backend_shutdown_commentary();
 	backend_shutdown_percomm();
 	backend_shutdown_dictlex();
@@ -309,7 +305,7 @@ char *backend_get_valid_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return g_strdup((char *) vkey.getText());
+	return strdup((char *) vkey.getText());
 }
 
 const char *backend_get_book_from_key(char *key)
@@ -342,8 +338,8 @@ int backend_get_verse_from_key(char *key)
  * option - option to set
  * yesno - yes or no
 ******************************************************************************/
-void backend_set_global_option(gint window, gchar * option,
-			       gchar * yesno)
+void backend_set_global_option(int window, char * option,
+			       char * yesno)
 {
 	/* turn option on or off */
 	switch (window) {
@@ -445,7 +441,7 @@ void backend_save_module_key(char *mod_name, char *key)
 }
 
 /*** we come here to get module type - Bible text, Commentary, Dict/Lex or Book ***/
-int backend_get_mod_type(gchar * mod_name)
+int backend_get_mod_type(char * mod_name)
 {
 
 	ModMap::iterator it;	//-- iteratior
@@ -572,7 +568,7 @@ GList *backend_get_mod_description_list_SWORD(char *mod_type)
 	return mods;
 }
 
-gchar *backend_get_module_description(gchar * modName)
+char *backend_get_module_description(char * modName)
 {
 	ModMap::iterator it;	//-- iteratior
 
@@ -584,7 +580,7 @@ gchar *backend_get_module_description(gchar * modName)
 }
 
 /***  returns path to sword modules must be freed by calling function  ***/
-gchar *backend_get_path_to_mods(void)
+char *backend_get_path_to_mods(void)
 {
 	return g_strdup(mainMgr->prefixPath);
 }
@@ -604,7 +600,7 @@ gchar *backend_get_path_to_mods(void)
  * Return value
  *   gchar *
  */
-gchar *backend_get_mod_aboutSWORD(gchar * modname)
+char *backend_get_mod_aboutSWORD(char * modname)
 {
 	return g_strdup((gchar *) mainMgr->Modules[modname]->
 			getConfigEntry("About"));
@@ -632,16 +628,29 @@ int backend_get_module_page(char *module_name, char *module_type)
 char *backend_get_module_font_name(char *mod_name)
 {
 	SWModule *mod = mainMgr->Modules[mod_name];
-	char *buf = (gchar *) mod->getConfigEntry("Font");
-	return buf;
+	char *buf = (char *) mod->getConfigEntry("Font");
+	if(buf)
+		return strdup(buf);
+	else
+		return NULL;
 }
 
-gboolean backend_module_is_locked(char *mod_name)
+char *backend_get_module_font_size(char *mod_name)
+{
+	SWModule *mod = mainMgr->Modules[mod_name];
+	char *buf = (char*) mod->getConfigEntry("GSFont size");
+	if(buf)
+		return strdup(buf);
+	else
+		return NULL;
+}
+
+int backend_module_is_locked(char *mod_name)
 {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	gchar buf[256], conffile[256];
+	char buf[256], conffile[256];
 	struct dirent *ent;
 	bool retval = false;
 
@@ -689,7 +698,7 @@ char *backend_get_cipher_key(char *mod_name)
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	gchar buf[256], conffile[256];
+	char buf[256], conffile[256];
 	struct dirent *ent;
 	char *retval = NULL;
 

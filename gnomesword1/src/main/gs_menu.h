@@ -63,6 +63,8 @@ GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
 void removemenuitems(GtkWidget *MainFrm, gchar *startitem, gint numberofitems);
 
 void createpopupmenus(GList * bilbeDescription, GList * options);
+void add_mods_to_menus(GList * modlist, gchar * menu,
+				GtkMenuCallback callback);
 void addmodstomenus(GList * biblelist, GList * commentarylist,
 		GList * dictionarylist, GList * booklist);
 

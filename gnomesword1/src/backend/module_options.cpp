@@ -24,27 +24,15 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
-#include <swmgr.h>
 #include <swconfig.h>
-#include <swmodule.h>
-#include <versekey.h>
-#include <gbfplain.h>
-#include <plainhtml.h>
-#include <rwphtml.h>
-#include <regex.h>
-#include <stdio.h>
-#include <sys/stat.h>
 
-#include "main/gs_gnomesword.h"
 #include "backend/module_options.h"
-#include "main/support.h"
 #include "main/settings.h"
 
 /******************************************************************************
  * load module option - using sword SWConfig
  ******************************************************************************/
-gboolean backend_load_module_options(char * modName, char * option)
+int backend_load_module_options(char * modName, char * option)
 {
 	char buf[255], *yesno;
 	bool retval = false;
@@ -63,7 +51,7 @@ gboolean backend_load_module_options(char * modName, char * option)
 /******************************************************************************
  * save module option - using sword SWConfig
  ******************************************************************************/
-gboolean backend_save_module_options(char * modName, char * option, char * value)
+int backend_save_module_options(char * modName, char * option, char * value)
 {
 	char buf[80], buf2[255];
 

@@ -26,15 +26,9 @@
 extern "C" {
 #endif
 
-/******************************************************************************
- * load module option - using sword SWConfig
- ******************************************************************************/
-gboolean backend_load_module_options(char *modName, char *option);
-
-/******************************************************************************
- * save module option - using sword SWConfig
- ******************************************************************************/
-gboolean backend_save_module_options(char *modName, char *option, char *value);
+int backend_load_module_options(char *modName, char *option);
+int backend_save_module_options(char *modName, char *option, 
+				char *value);
 
 #ifdef __cplusplus
 }
