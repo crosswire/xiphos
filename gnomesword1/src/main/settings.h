@@ -194,6 +194,9 @@ struct _settings {
 	/* window location at close */
 	int app_x;
 	int app_y;
+	
+	/* set up druid canceled */
+	int setup_canceled;
 };
 
 extern SETTINGS settings;
