@@ -585,25 +585,25 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 GNOME_APP_UI_SUBTREE, N_("Open Bibletext Dialog"),
 	 NULL,
 	 open_bibletext_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_RED,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_SUBTREE, N_("Open Commentary Dialog"),
 	 NULL,
 	 open_commentary_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_BLUE,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_SUBTREE, N_("Open Dictionary Dialog"),
 	 NULL,
 	 open_dict_lex_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_GREEN,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_SUBTREE, N_("Open Book Dialog"),
 	 NULL,
 	 open_book_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_YELLOW,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,*/
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
@@ -615,20 +615,20 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Copy"),
 	 N_("Copy highlighted text from main window"),
 	 gui_copyhtml_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_COPY,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
 	 N_("Search using the shortcut bar"),
 	 on_search_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
 	 N_("Advanced search using the search dialog"),
 	 gui_do_dialog_search, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
@@ -641,7 +641,7 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("C_lear"),
 	 N_("Clear history list"),
 	 on_clear1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CLEAR,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -652,7 +652,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
 	 N_("Show the Daily Devotion for today"),
 	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 /*
@@ -758,27 +758,27 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Contents"),
 	 N_("Open the GnomeSword manual"),
 	 on_help_contents_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,/*
 	{
 	 GNOME_APP_UI_SUBTREE, N_("About Sword Modules"),
 	 N_("Information about the installed modules"),
 	 about_sword_modules1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,*/
 	{
 	 GNOME_APP_UI_ITEM, N_("About the SWORD Project ..."),
 	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("About GnomeSword ..."),
 	 N_("About this application"),
 	 on_about_gnomesword1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };

@@ -412,7 +412,7 @@ void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
 	menuitem->user_data = itemdata;
 	menuitem->label = itemname;
 	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-	menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+	menuitem->pixmap_info = GNOME_STOCK_BOOK_OPEN;
 	menuitem->accelerator_key = 0;
 	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
 	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menuname,

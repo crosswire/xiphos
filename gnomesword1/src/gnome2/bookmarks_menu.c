@@ -1110,14 +1110,14 @@ static GnomeUIInfo rr_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Remove Folder"),
 	 N_("Remove folder and save it"),
 	 on_remove_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Restore Folder"),
 	 N_("Restore saved folder"),
 	 on_restore_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PASTE,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -1127,44 +1127,44 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
 	 N_("Open this bookmark in a dialog"),
 	 (gpointer) on_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("New Folder"),
 	 N_("Add new folder to selected folder"),
 	 (gpointer) on_new_folder_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Insert Bookmark"),
 	 N_("Insert new bookmark here"),
 	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Edit Item"),
 	 N_("Edit bookmark item"),
 	 (gpointer) on_edit_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Delete Item"),
 	 N_("Delete item"),
 	 (gpointer) on_delete_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TRASH,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Expand All"),
 	 N_("Expand all Bookmarks groups"),
 	 (gpointer) on_expand_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOTTOM,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_BOTTOM,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Collapse All"),
 	 N_("Collapse all Bookmarks groups"),
 	 (gpointer) on_collapse_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TOP,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_TOP,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
@@ -1185,7 +1185,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_UI_SUBTREE, N_("Remove - Restore"),
 	 NULL,
 	 rr_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_TOP,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };
