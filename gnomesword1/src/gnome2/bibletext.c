@@ -218,6 +218,9 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 					 gint page_num, GList * tl)
 {
 	TEXT_DATA *t;
+	
+	if(page_num == settings.parallel_page)
+		return;
 	/*
 	 * get data structure for new module 
 	 */
@@ -659,7 +662,14 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 				      (widgets.notebook_text),
 				      page_num);
 	}
-
+	
+	if(settings.parallel_page == gtk_notebook_get_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_text))) {
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_text),
+				      page_num);					      
+	}
+	
 	if (!cur_t->is_locked) {
 		if (!cur_t->is_rtol)
 			chapter_display(cur_t->html,
@@ -807,7 +817,8 @@ void gui_setup_text(GList * mods)
 	gchar *modbuf;
 	TEXT_DATA *t;
 	gint count = 0;
-
+	
+	settings.parallel_page = g_list_length(mods);
 	text_list = NULL;
 	tmp = mods;
 	tmp = g_list_first(tmp);

@@ -673,8 +673,8 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.workbook_lower), FALSE);
-	/*gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.workbook_lower),
-				   FALSE);*/
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.workbook_lower),
+				   FALSE);
 
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.workbook_lower,
 		      TRUE, TRUE);
@@ -774,6 +774,7 @@ void create_mainwindow(void)
 	/*
 	 * parallel page 
 	 */
+/*
 	widgets.frame_parallel = gtk_frame_new(NULL);
 	gtk_widget_show(widgets.frame_parallel);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
@@ -810,7 +811,7 @@ void create_mainwindow(void)
 					  (widgets.workbook_lower),
 					  page_num), _("Parallel View"));
 	settings.parallel_page = page_num;
-
+*/
 	/*
 	 * end parallel page 
 	 */
@@ -859,6 +860,7 @@ void create_mainwindow(void)
 			   G_CALLBACK(epaned_button_release_event),
 			   (gchar *) "hpaned1");
 */
+/*
 	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", G_CALLBACK(gui_url),
 			   (gpointer) widgets.app);
@@ -868,7 +870,7 @@ void create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "button_release_event",
 			   G_CALLBACK(button_release_event), NULL);
-
+*/
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
 	gtk_widget_set_usize(widgets.app, settings.gs_width,

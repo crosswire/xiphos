@@ -508,6 +508,9 @@ char *backend_get_next_book_of_bible(void)
 		j = 0;
 		i++;
 	}
+	// set counter to zero after we are done getting list of books
+	i = 0;
+	j = 0;
 	return NULL;
 	
 }

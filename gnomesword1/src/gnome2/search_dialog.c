@@ -2771,7 +2771,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_results),
 			  search.results_html);
 
-	gui_load_module_tree(search.treeview);
+	gui_load_module_tree(search.treeview, FALSE);
 	mod_selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(search.treeview)));
 	/* connect signals */

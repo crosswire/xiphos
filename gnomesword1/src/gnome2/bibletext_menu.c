@@ -860,7 +860,7 @@ static void add_global_option_items(TEXT_DATA * t)
 	}
 
 	if ((check_for_global_option(t->mod_name, "ThMLScripref")) ||
-	   (check_for_global_option(t->mod_name, "OSISHeadings")) ) {
+	   (check_for_global_option(t->mod_name, "OSISScripref")) ) {
 		t->tgs->scripturerefs =
 		    load_module_options(t->mod_name,
 					"Cross-references");
@@ -1144,6 +1144,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	GtkAccelGroup *view_text_menu_accels;
 	GtkWidget *set_font;
 	GtkWidget *find;
+	GtkWidget *parallel_page;
 	GtkWidget *add_module_key = NULL;
 	gchar buf[256];
 	GtkTooltips *tooltips;
