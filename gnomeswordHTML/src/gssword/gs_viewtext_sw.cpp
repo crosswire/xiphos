@@ -66,7 +66,7 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			VTMod = (*it).second;
-			sit = VTMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
+			sit = VTMgr->config->Sections.find((*it).second->Name()); //-- add render filters			
 			ConfigEntMap &section = (*sit).second;
 			addrenderfiltersSWORD(VTMod, section);
 			//havebible = TRUE;		
@@ -143,7 +143,7 @@ gchar *VTgetbookSWORD(void)
 	
 	VerseKey VTKey = VTMod->KeyText();
 	sprintf(s1,"%s",(const char *)VTKey);
-	for(l=0;l<strlen(s1);l++){ //------------------------ seperate book name			
+	for(l=0;l<strlen(s1);l++){ //--  seperate book name			
 		if(isdigit(s1[l])) break;
 	}
 	strncpy(s2,s1,l);

@@ -1,6 +1,6 @@
 
-SUBDIRS = gsdialogs \
-          gssword
+SUBDIRS = gssword \
+          gsdialogs
 
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
