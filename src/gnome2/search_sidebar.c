@@ -160,17 +160,14 @@ static void fill_search_results_list(int finds)
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
-	gchar *buf0 = N_("Search Results");
+	GtkTreeSelection *selection;
+	GtkTreePath *path;	
 	gchar *buf1 = N_("matches");
-	gchar *buf2 = N_("Occurrences of");
-	gchar *buf3 = N_("found in");
-
-	//g_list_free(sblist);
-	//sblist = NULL;
 	
+	selection = gtk_tree_view_get_selection
+                                          (GTK_TREE_VIEW(sidebar.results_list));
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 	list_store = GTK_LIST_STORE(model);
-	//gtk_clist_clear(GTK_CLIST(sidebar.clist));
 	gtk_list_store_clear(list_store);
 	set_results_position((char) 1);	/* TOP */
 	while ((key_buf = get_next_result_key()) != NULL) {
@@ -185,27 +182,17 @@ static void fill_search_results_list(int finds)
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 3);
 	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
 					3);
-	/* report results */
-
-	gui_begin_html(widgets.html_search_report, TRUE);
-	sprintf(buf, "<body><center>%d %s <br><font color=\"%s\">"
-		"<b>\"%s\"</b></font><br>%s <font color=\"%s\">"
-		"<b>[%s]</b></font></center></body>",
-		finds,
-		buf2,
-		settings.found_color,
-		settings.searchText,
-		buf3,
-		settings.bible_verse_num_color, settings.sb_search_mod);
-	gui_display_html(widgets.html_search_report, buf,
-			 strlen(buf));
-	gui_end_html(widgets.html_search_report);
-
-	/* cleanup appbar progress */
+	/* cleanup progress bar */
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search),
 				0.0);
-	/* display first item in list by selection row 0 */
-	//gtk_clist_select_row(GTK_CLIST(sidebar.clist), 0, 0);
+	/* display first item in list by selection row*/	
+	if(!gtk_tree_model_get_iter_first(model,&iter))
+		return;
+	path = gtk_tree_model_get_path(model,&iter);				
+	gtk_tree_selection_select_path(selection,
+                                             path);
+	gtk_tree_path_free(path);	 
+	gui_verselist_button_release_event(NULL,NULL,NULL);
 }
 
 
