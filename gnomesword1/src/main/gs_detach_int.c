@@ -34,6 +34,8 @@
 #include "gs_detach_int.h"
 #include "gs_gnomesword.h"
 #include "sword.h"
+#include "interlinear.h"
+#include "gs_interlinear.h"
 
 GtkWidget *Interlinear_UnDock_Dialog;
 GtkWidget *vboxInt;
@@ -98,8 +100,8 @@ void undock_interlinear_page(SETTINGS * s)
 	gtk_widget_reparent(s->frameInt, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(s->workbook_lower), 2);
 	s->cvInterlinear = update_controls_interlinear(s->currentverse);
-	updateIntDlg(s);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
+	update_interlinear_page_detached(s);
 	g_free(s->cvInterlinear);
 	ApplyChangeBook = TRUE;
 }
@@ -136,7 +138,7 @@ static void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
 {
 	ApplyChangeBook = FALSE;	
 	s->cvInterlinear = update_controls_interlinear(s->currentverse);
-	updateIntDlg(s);
+	update_interlinear_page_detached(s);
 	g_free(s->cvInterlinear);
 	ApplyChangeBook = TRUE;
 }
@@ -153,7 +155,7 @@ on_entrycbIntBook_changed              (GtkEditable     *editable,
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
 		gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
 		s->cvInterlinear = buf;
-		updateIntDlg(s);	
+		update_interlinear_page_detached(s);	
 	}
 }
 
@@ -165,7 +167,7 @@ on_sbIntChapter_button_release_event(GtkWidget * widget,
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
 	s->cvInterlinear = change_verse_interlinear();
-	updateIntDlg(s);
+	update_interlinear_page_detached(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -177,7 +179,7 @@ on_sbIntVerse_button_release_event(GtkWidget * widget,
 {	
 	ApplyChangeBook = FALSE;
 	s->cvInterlinear = change_verse_interlinear();
-	updateIntDlg(s);
+	update_interlinear_page_detached(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -194,7 +196,7 @@ on_entryIntLookup_key_press_event      (GtkWidget       *widget,
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
 	if (event->keyval == 65293 || event->keyval == 65421) {	//-- if user hit return key continue
 		s->cvInterlinear = update_controls_interlinear(buf);
-		updateIntDlg(s);;	//-- change verse to entry text 
+		update_interlinear_page_detached(s);;	//-- change verse to entry text 
 		g_free(s->cvInterlinear);
 		ApplyChangeBook = TRUE;
 		return TRUE; 
@@ -214,7 +216,7 @@ on_btnIntGotoVerse_clicked             (GtkButton       *button,
 	
 	s->cvInterlinear = update_controls_interlinear(buf);
 	
-	updateIntDlg(s);;	//-- change verse to entry text 
+	update_interlinear_page_detached(s);;	//-- change verse to entry text 
 	g_free(s->cvInterlinear);
 	ApplyChangeBook = TRUE;
 }

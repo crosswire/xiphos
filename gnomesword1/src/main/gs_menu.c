@@ -41,7 +41,8 @@
 #include "gs_bookmarks.h"
 
 GtkWidget *module_options_menu;
-
+gint	greekpage,
+        hebrewpage;
 /*
  *******************************************************************************
  * static function prototypes
@@ -55,8 +56,7 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 		gchar *labelGtkWidget, 
 		GtkMenuCallback mycallback);
 /******************************************************************************/
-extern gint	greekpage,
-        	hebrewpage;
+
 extern SETTINGS *settings;
 
 		

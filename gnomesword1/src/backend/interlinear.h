@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary.h - support for Sword commentary modules
+ * interlinear.h - support for displaying multiple modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -20,8 +20,8 @@
  */
 
 
-#ifndef __COMMENTARY_H_
-#define __COMMENTARY_H_
+#ifndef __INTERLINEAR_H_
+#define __INTERLINEAR_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,15 +29,14 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-        void backend_nav_commentary_COMM ( gint modnum,
-                                           gint direction );
-        void backend_newDisplayCOMM ( GtkWidget * html, char *modname,
-                                      SETTINGS * s );
-        void backend_setupCOMM ( SETTINGS * s );
-        void backend_shutdownCOMM ( void );
-        void backend_displayinCOMM ( int modnnum, gchar * key );
-
+	gboolean backend_setup_interlinear(SETTINGS *s);
+	void backend_shutdown_interlinear(void);
+	char *backend_get_interlinear_module_text(char *mod_name,
+						  char *key);
+	void backend_set_interlinear_global_option(char *option,
+						   char *yesno);
+	
 #ifdef __cplusplus
 }
 #endif
-#endif                          /* __COMMENTARY_H_ */
+#endif				/* __INTERLINEAR_H_ */
