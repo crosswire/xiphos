@@ -1011,6 +1011,7 @@ const char *backend_get_language_map(const char *language)
 char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
+	bool if_true = false;
 	
 	switch (manager) {
 	case TEXT_MGR:
@@ -1024,6 +1025,7 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 		break;
 	case GBS_MGR:
 		mod = sw.gbs_mgr->Modules[module_name];
+		if_true = true;
 		break;
 	case MAIN_MGR:
 		mod = sw.main_mgr->Modules[module_name];
@@ -1045,7 +1047,10 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 			else
 				return strdup((char *) mod->RenderText());
 		} 
-		return strdup((char *) mod->RenderText());
+		if(if_true)
+			g_warning((char *) mod->getRawEntry());
+		
+			return strdup((char *) mod->RenderText());
 		
 	}
 	return NULL;

@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * gbs.h - generic book support - the gui
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 
 #ifndef ___GBS_H_
 #define ___GBS_H_
+
+#include "gui/mod_global_ops.h"
 
 typedef struct _gbs_global_ops GBS_GLOBALS;
 struct  _gbs_global_ops {
@@ -65,7 +67,7 @@ struct _gbsdata {
 	gboolean is_dialog;
 	gboolean is_rtol;
 	
-	GBS_GLOBALS *bgo;
+	GLOBAL_OPS *bgo;
 };
 
 typedef struct _nodedata NODEDATA;

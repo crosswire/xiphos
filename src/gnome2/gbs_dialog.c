@@ -725,26 +725,21 @@ void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)
  * Return value
  *   GBS_GLOBALS*
  */
-static GBS_GLOBALS *new_globals(void)
+static void set_new_globals(GLOBAL_OPS * gops)
 {
-	GBS_GLOBALS *retval = NULL;
-	
-	retval = g_new0(GBS_GLOBALS, 1);
-	retval->words_in_red = FALSE;
-	retval->strongs = FALSE;
-	retval->morphs = FALSE;
-	retval->footnotes = FALSE;
-	retval->greekaccents = FALSE;
-	retval->lemmas = FALSE;
-	retval->scripturerefs = FALSE;
-	retval->hebrewpoints = FALSE;
-	retval->hebrewcant = FALSE;
-	retval->headings = FALSE;
-	retval->variants_all = FALSE;
-	retval->variants_primary = FALSE;
-	retval->variants_secondary = FALSE;
-	
-	return retval;
+	gops->words_in_red = TRUE;
+	gops->strongs = TRUE;
+	gops->morphs = TRUE;
+	gops->footnotes = TRUE;
+	gops->greekaccents = TRUE;
+	gops->lemmas = TRUE;
+	gops->scripturerefs = TRUE;
+	gops->hebrewpoints = TRUE;
+	gops->hebrewcant = TRUE;
+	gops->headings = TRUE;
+	gops->variants_all = TRUE;
+	gops->variants_primary = TRUE;
+	gops->variants_secondary = TRUE;
 }
 
 
@@ -771,7 +766,8 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	create_pixbufs();
 	dlg = g_new0(GBS_DATA, 1);
-	dlg->bgo = new_globals();
+	dlg->bgo = gui_new_globals();
+	set_new_globals(dlg->bgo);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->is_dialog = TRUE;
