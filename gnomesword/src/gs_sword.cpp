@@ -41,8 +41,8 @@
 #include <sys/stat.h>
 
 #if USE_SHORTCUTBAR
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
-#include <gal/e-paned/e-hpaned.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
 #include "sw_gbfhtml.h"
@@ -61,7 +61,9 @@
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
+
 #include "sw_utility.h"
+
 
 /***********************************************************************************************
 Sword global to this file
@@ -131,12 +133,8 @@ gboolean autoscroll = true; /* commentary module auto scroll when true -- in syn
 
 gint answer; /* do we want to save studybad file on shutdown */
 gchar com_key[80] ="Rom 8:28"; /* current commentary key */
-gint	groupnum1 = 0,
-        groupnum2 = 0,
-        groupnum3 = 0,
-        groupnum4 = 0,
-        greekpage = 0,
-        hebrewpage = 0;
+gint	hebrewpage = 0,
+	greekpage = 0;
 gchar *textmod,
         *commod,
         *dictmod;
@@ -155,7 +153,7 @@ extern SETTINGS *settings;
 extern SETTINGS myset;
 extern GtkWidget *shortcut_bar;
 #if USE_SHORTCUTBAR
-extern gchar *shortcut_types[];
+//extern gchar *shortcut_types[];
 #endif /* USE_SHORTCUTBAR */
 extern gchar *current_filename;	/* filename for open file in study pad window  */
 extern gchar current_verse[80];	/* current verse showing in main window - 1st - 2nd - 3rd
@@ -228,21 +226,7 @@ initSWORD(GtkWidget *mainform)
 	textmodule.description = NULL;
 	textmodule.key = NULL;
 	p_textmodule = &textmodule;
-#if USE_SHORTCUTBAR	
-  	//-- create shortcut bar groups
-	if(settings->showtextgroup){
-	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
-	}
-	if(settings->showcomgroup){
-	    	groupnum2 = add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
-	}
-	if(settings->showdictgroup){
-		groupnum3 = add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
-	}
-	if(settings->showhistorygroup){
-		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	
-	}
-#endif /* USE_SHORTCUTBAR */
+
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
@@ -267,15 +251,7 @@ initSWORD(GtkWidget *mainform)
 			addrenderfiltersSWORD(curMod, section);
 			curMod->Disp(HTMLchapDisplay);
 				
-#if USE_SHORTCUTBAR			
-		  	//--  add choice to shortcut bar
-		  	if(settings->showtextgroup){
-		    		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      groupnum1, -1,
-						      shortcut_types[0],
-						      curMod->Name());
-		  	}
-#endif /* USE_SHORTCUTBAR */	
+
 	  			
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
@@ -292,14 +268,7 @@ initSWORD(GtkWidget *mainform)
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);*/
-#if USE_SHORTCUTBAR			
-			if(settings->showcomgroup){
-			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      groupnum2, -1,
-						      shortcut_types[1],
-						      curcomMod->Name());
-			}
-#endif /* USE_SHORTCUTBAR */
+
 
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
 			havedict = TRUE; //-- we have at least one lex / dict module
@@ -310,14 +279,7 @@ initSWORD(GtkWidget *mainform)
 			ConfigEntMap &section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
 			curdictMod->Disp(dictDisplay);
-#if USE_SHORTCUTBAR			
-			if(settings->showdictgroup){			
-			        e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      groupnum3, -1,
-						      shortcut_types[2],
-						      curdictMod->Name());
-			}
-#endif /* USE_SHORTCUTBAR */
+
 		}
 	} 		
   	//-- set up percom editor module

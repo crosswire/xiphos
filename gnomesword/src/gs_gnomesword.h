@@ -31,7 +31,7 @@ extern "C" {
 #include "gs_sword.h"
 	
 #if USE_SHORTCUTBAR	
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 	
 typedef struct _mods GS_MODS;
@@ -121,11 +121,6 @@ void applyoptions(GtkWidget *app,
 	     	gboolean showcomgroup, 
 	     	gboolean showdictgroup, 
 	     	gboolean showhistorygroup);
-
-#if USE_SHORTCUTBAR
-gint add_sb_group(EShortcutBar * shortcut_bar, 
-		gchar * group_name);
-#endif /* USE_SHORTCUTBAR */
 
 gint getversenumber(GtkWidget * text);
 gint getdictnumber(GtkWidget * text);
