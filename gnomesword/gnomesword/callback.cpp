@@ -38,6 +38,7 @@
 #include  <widgets/e-paned/e-vpaned.h>
 
 #include "callback.h"
+#include "gs_gnomesword.h"
 #include "GnomeSword.h"
 #include "support.h"
 #include "interface.h"
@@ -1467,7 +1468,7 @@ void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 	applycolor = false;
 
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup,
+	applyoptions(MainFrm, bar, comtabs, dicttabs, showtextgroup, showcomgroup,
 		     showdictgroup, showhistorygroup);
 	gtk_widget_destroy(dlg);
 }
@@ -1479,7 +1480,7 @@ void on_btnPropertyboxApply_clicked(GtkButton * button, gpointer user_data)
 		setcurrentversecolor(num1, num2, num3);	//-- if color has changed
 	applycolor = false;
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup,
+	applyoptions(MainFrm,bar, comtabs, dicttabs, showtextgroup, showcomgroup,
 		     showdictgroup, showhistorygroup);
 }
 

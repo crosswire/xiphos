@@ -10,6 +10,8 @@ INCLUDES = \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE = \
+        gs_gnomesword.c \
+        gs_gnomesword.h \
         callback.cpp \
         callback.h \
         display.cpp \

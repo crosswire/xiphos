@@ -25,6 +25,7 @@
 #include <gnome.h>
 //#include "gs_SWORD.h"
 #include "GnomeSword.h"
+#include "gs_gnomesword.h"
 #include "menustuff.h"
 #include "support.h"
 #include "callback.h"
@@ -32,8 +33,11 @@
 #include "filestuff.h"
 
 extern SETTINGS *settings;
-extern SETTINGS myset;	
-
+SETTINGS myset;	
+extern GList 	*biblemods,
+	*commentarymods,
+	*dictionarymods,
+	*percommods;
 int
 main (int argc, char *argv[])
 {
@@ -77,7 +81,7 @@ main (int argc, char *argv[])
   	/* set pointer to structure */
   	settings = &myset;       
   	initSword(mainwindow);
-  	initGnomeSword(mainwindow);
+  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */
   	UpdateChecks(mainwindow);    	

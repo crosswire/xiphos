@@ -21,6 +21,10 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "GnomeSword.h"
 
 void saveFile(gchar * filename);
@@ -54,3 +58,7 @@ SETTINGS createsettings(void);
 void loadStudyPadFile(gchar * filename);
 
 void savelist(gchar * filename, GtkWidget * list);
+
+#ifdef __cplusplus
+}
+#endif
