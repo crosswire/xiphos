@@ -39,63 +39,30 @@ struct _listitem {
  *callbacks liseditor
 **********************************************************************************
 *********************************************************************************/
-void
-	 on_clLElist_select_row(GtkCList * clist,
+void on_clLElist_select_row(GtkCList * clist,
+				gint row,	
+				gint column,
+				GdkEvent * event,
+				gpointer user_data);
+void on_btnLEup_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEdown_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEleft_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEright_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data);
+void on_clLElist_select_row(GtkCList * clist,
 				gint row,
 				gint column,
 				GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnLEup_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEleft_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEright_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_clLElist_select_row(GtkCList * clist,
-				gint row,
-				gint column,
-				GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEapplylistchanges_clicked(GtkButton * button,
-					  gpointer user_data);
-
-	void
-	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-
-
-
+void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEapplylistchanges_clicked(GtkButton * button,
+				gpointer user_data);
+void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
 
 
 /*********************************************************************************
@@ -108,10 +75,8 @@ void loadbookmarkslevel(GtkWidget *list, gint level, gchar *submenu);
 void addsubitme(GtkWidget *list, gint row);
 void addverse(GtkWidget *list, gint row, gchar *item);
 void deleteitem(GtkWidget *list);
-
 GtkWidget *createListEditor(void);
 void editbookmarks(GtkWidget *editdlg);
-
 void applychanges(GtkWidget *widget);
 void applylistchanges(GtkWidget *widget, gint row);
 void selectrow(GtkWidget *widget, gint row, gint column);
