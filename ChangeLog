@@ -2,6 +2,8 @@
 
 	* added gui_alert_dialog() to gnome2/dialog.c - much closer to HIG 
 	  for alerts than gui_gs_dialog().
+	* added new create_dialog_request() should be easier to get to conform 
+	  to the HIG it's called by gui_gs_dialog().
 	
 
 
