@@ -51,6 +51,10 @@
 #include "gs_shortcutbar.h"
 #include "support.h"
 
+using std::string;
+using std::list;
+using namespace sword;
+
 extern gint groupnum7;
 extern gchar *shortcutbarDir;
 extern SETTINGS *settings;

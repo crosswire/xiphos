@@ -38,7 +38,6 @@
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
-#include <gal/e-paned/e-vpaned.h>
 #include <gtkhtml/gtkhtml.h>
 
 #include "gs_gui.h"
@@ -200,6 +199,25 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
+       GNOMEUIINFO_SEPARATOR,
+       {
+        GNOME_APP_UI_TOGGLEITEM, N_("Bible Texts"),
+        NULL,
+        (gpointer) on_view_texts1_activate, NULL, NULL,
+        GNOME_APP_PIXMAP_NONE, NULL,
+        0, (GdkModifierType) 0, NULL },
+       {
+        GNOME_APP_UI_TOGGLEITEM, N_("Commentaries"),
+        NULL,
+        (gpointer) on_view_comms1_activate, NULL, NULL,
+        GNOME_APP_PIXMAP_NONE, NULL,
+        0, (GdkModifierType) 0, NULL },
+       {
+        GNOME_APP_UI_TOGGLEITEM, N_("Dictionaries-Lexicons"),
+        NULL,
+        (gpointer) on_view_dicts1_activate, NULL, NULL,
+        GNOME_APP_PIXMAP_NONE, NULL,
+        0, (GdkModifierType) 0, NULL },	 
 	GNOMEUIINFO_END
 };
 
@@ -537,6 +555,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 "daily_devotion1",
 				 view1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
+
+       s->viewtexts_item = view1_menu_uiinfo[2].widget;
+       s->viewcomms_item = view1_menu_uiinfo[3].widget;
+       s->viewdicts_item = view1_menu_uiinfo[4].widget;
+ 
+
 
 	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "settings1",

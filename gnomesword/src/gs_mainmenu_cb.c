@@ -178,7 +178,26 @@ on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
-/*** toogle between verse and paragraph style ***/
+/*** toggle between  ***/
+void on_view_texts1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+       showhidetextsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active); 
+}
+
+/*** toogle between  ***/
+void on_view_comms1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+        showhidecommsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active);
+}
+
+/*** toogle between  ***/
+void on_view_dicts1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+        showhidedictsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active);
+}
+
+
+/*** toggle between verse and paragraph style ***/
 void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	setversestyleSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active); 
