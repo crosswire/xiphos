@@ -88,6 +88,9 @@ int check_for_module(char * mod_name);
 void init_sword(void);
 void shutdown_sword(void);
 char *get_striptext(char *mod_name, char *key);
+const unsigned int chapter_count(char *key);
+const unsigned int verse_count(char *key);
+
 #ifdef __cplusplus
 }
 #endif
