@@ -48,7 +48,8 @@ struct _settings {
 		*shortcut_bar,  /* the shortcut bar widget */
 		*ctree_widget,  /* bookmarks tree */
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
-		*srhtml,  /* html widget for serch results list in shortcut bar */
+		*srhtml,  /* html widget for serch results list in shortcut bar */	
+		*htmlRP,  /* html widget for serch report shortcut bar */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
 		*unlocktextmod_item, /* unlock module menu item */
@@ -78,6 +79,7 @@ struct _settings {
 	        currentverse_bg_color[15],  /* color for current verse background */
 	        link_color[15],  /* color for strongs, morph tags */	
 		bible_verse_num_color[15],
+		found_color[15],
 		bible_font_size[4], /*** html font sizes ***/
 		commentary_font_size[4],
 		dictionary_font_size[4],
