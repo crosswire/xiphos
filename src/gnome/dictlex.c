@@ -190,6 +190,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		d = (DL_DATA *) dl_list->data;
 		page = 0;
 	}
+	cur_d = d;
 	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
