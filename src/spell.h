@@ -55,6 +55,8 @@ enum {
 typedef struct {
   GtkWidget *window;
   GtkWidget *vbox;
+  GtkWidget *scrollwindow;
+  GtkWidget *text;	
   GtkWidget *hbuttonbox_top;
   GtkWidget *start_button;
   GtkWidget *close_button;

@@ -324,7 +324,7 @@ void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
 	notebook = lookup_widget(settings->app, "nbTextMods");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page	
 }
-
+/*
 //----------------------------------------------------------------------------------------------
 void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -335,7 +335,7 @@ void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 	}
 }
-
+*/
 //----------------------------------------------------------------------------------------------
 void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -343,7 +343,7 @@ void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
 	text = lookup_widget(settings->app, "textComments");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
-
+/*
 //----------------------------------------------------------------------------------------------
 void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -354,7 +354,7 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 			NULL, NULL,
 			gs_clipboard->str, -1);
 }
-
+*/
 //----------------------------------------------------------------------------------------------
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {

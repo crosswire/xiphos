@@ -43,7 +43,7 @@
 #include "gs_gui.h"
 #include "gs_mainmenu_cb.h"
 #include "gs_gui_cb.h"
-#include "gs_studypad.h"
+#include "gs_html_editor.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_shortcutbar.h"
@@ -287,7 +287,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *hbox11;
 	GtkWidget *vbox8;
 	GtkWidget *nbPerCom;
-	GtkWidget *swHtmlPerCom;
+	GtkWidget *vboxPC;
+//	GtkWidget *swHtmlPerCom;
 	GtkWidget *scrolledwindow11;
 	GtkWidget *textComments;
 	GtkWidget *sbNotes;
@@ -295,8 +296,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *tbNotes;
 	GtkWidget *tbtnFollow;
 	GtkWidget *btnEditNote;
-	GtkWidget *btnSaveNote;
-	GtkWidget *btnDeleteNote;
+//	GtkWidget *btnSaveNote;
+//	GtkWidget *btnDeleteNote;
 	GtkWidget *btnSpellNotes;
 	GtkWidget *label85;
 	GtkWidget *vboxInt;
@@ -305,6 +306,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *scrolledwindow15;
 	GtkWidget *framedict;
 	GtkWidget *label12;
+	/*
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
 	GtkWidget *handlebox10;
@@ -315,6 +317,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *btnSaveFileAs;
 	GtkWidget *vseparator9;
 	GtkWidget *btnPrint;
+	GtkWidget *vboxSB;
 	GtkWidget *vseparator10;
 	GtkWidget *btnCut;
 	GtkWidget *btnCopy;
@@ -324,6 +327,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *scrolledwindow17;
 	GtkWidget *text3;
 	GtkWidget *statusbar2;
+	*/
 	GtkWidget *label41;
 	GtkWidget *label;
 	GtkWidget *hbox8;
@@ -1047,7 +1051,17 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_box_pack_start(GTK_BOX(vbox8), nbPerCom, TRUE, TRUE, 0);
 	GTK_WIDGET_UNSET_FLAGS(nbPerCom, GTK_CAN_FOCUS);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(nbPerCom), FALSE);
+	
+	vboxPC = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vboxPC);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vboxPC",vboxPC ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vboxPC);
+        gtk_container_add (GTK_CONTAINER (nbPerCom), vboxPC);
+	
 
+	percom_control(vboxPC, settings);
+/*
 	swHtmlPerCom = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(swHtmlPerCom);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "swHtmlPerCom",
@@ -1058,7 +1072,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlPerCom),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
+*/
 	label = gtk_label_new("label");
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
@@ -1159,10 +1173,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 btnEditNote,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnEditNote);
-
+/*
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_ADD);
+				      
+	
 	btnSaveNote =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1187,7 +1203,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 "btnDeleteNote", btnDeleteNote,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnDeleteNote);
-
+*/
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_SPELLCHECK);
@@ -1261,7 +1277,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     2), label12);
-
+/*
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "frame12",
@@ -1466,15 +1482,19 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				       (scrolledwindow17),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
-	text3 = gtk_text_new(NULL, NULL);
+*/
+	studypad_control(notebook3, settings);
+	/*gtk_text_new(NULL, NULL);
 	gtk_widget_ref(text3);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "text3", text3,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(text3);
+				 (GtkDestroyNotify) gtk_widget_unref);*/
+	//gtk_widget_show(text3);
+	/**
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17), text3);
 	gtk_text_set_editable(GTK_TEXT(text3), TRUE);
-
+	
+	
+	
 	statusbar2 = gtk_statusbar_new();
 	gtk_widget_ref(statusbar2);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "statusbar2",
@@ -1482,7 +1502,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(statusbar2);
 	gtk_box_pack_start(GTK_BOX(vbox6), statusbar2, FALSE, TRUE, 0);
-
+*/
 	label41 = gtk_label_new(_("Study Pad"));
 	gtk_widget_ref(label41);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label41",
@@ -1730,11 +1750,13 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   GTK_SIGNAL_FUNC(on_tbtnFollow_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnEditNote), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnEditNote_toggled), NULL);
+			   /*
 	gtk_signal_connect(GTK_OBJECT(btnSaveNote), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSaveNote_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnDeleteNote), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnDeleteNote_clicked),
 			   NULL);
+			   */
 #ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
@@ -1752,6 +1774,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL);
+/*
 	gtk_signal_connect(GTK_OBJECT(btnSPnew), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSPnew_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnOpenFile), "clicked",
@@ -1774,10 +1797,11 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_signal_connect(GTK_OBJECT(btnSpell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
 			   (gchar *) "text3");
-#endif				/* USE_SPELL */
+#endif				
 
 	gtk_signal_connect(GTK_OBJECT(text3), "changed",
 			   GTK_SIGNAL_FUNC(on_text3_changed), NULL);
+*/
 	gtk_signal_connect(GTK_OBJECT(notebook4), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook4_switch_page),
 			   NULL);

@@ -83,6 +83,7 @@ struct _settings {
 		lex_greek[80],
 		lex_hebrew[80],
 	        currentverse[80],	/* verse to use at program startup */
+		*percomverse,
 	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
 	        studypadfilename[255],   /* name of file in studypad when we closed */
 		studypaddir[255],	    /* directory for studypad files */

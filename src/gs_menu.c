@@ -1316,8 +1316,20 @@ void loadmenuformmodlist(GtkWidget *pmInt, GList *mods,  gchar *label, GtkMenuCa
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp); 
-} 	
+} 
 
+static void
+on_cut1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer data)
+{
+		
+}
+static void
+on_paste1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer data)
+{
+		
+}
 
 static GnomeUIInfo edit2_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_CUT_ITEM(on_cut1_activate, NULL),
