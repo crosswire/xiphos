@@ -37,10 +37,11 @@
 #include "gui/bookmarks.h"
 #include "gui/setup_druid.h"
 
+#include "main/lists.h"
 #include "main/settings.h"
 #include "main/xml.h"
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
 
 
 /******************************************************************************

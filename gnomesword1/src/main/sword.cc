@@ -28,6 +28,7 @@
 #include <swmgr.h>
 #include <swmodule.h>
 #include <stringmgr.h>
+#include <localemgr.h>
 
 #ifdef USE_MOZILLA
 #include <gtkmozembed.h>
@@ -68,9 +69,10 @@ extern "C" {
 #include "main/xml.h"
  
 #include "main/parallel_view.h"
-#include "backend/sword.h"
+//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
+using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
@@ -278,7 +280,7 @@ char *main_module_name_from_description(char *description)
 
 const char *get_sword_version(void)
 {
-	return backend_get_sword_version();
+	return backend->get_sword_version();
 }
 
 
@@ -406,10 +408,49 @@ char *get_path_to_mods(void)
 }
 
 
-void init_sword(void)
-{
-	backend_init();
+/******************************************************************************
+ * Name
+ *   backend_init
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_init_backend(void)	
+ *
+ * Description
+ *   start sword 
+ *
+ * Return value
+ *   void
+ */
+
+void main_init_backend(void)
+{	
+	char *sword_locale = NULL;
+	char *sys_locale = NULL;
+	char *buf = (char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+	SWMgr mgr;
+	
+	backend = new BackEnd();
+	backend->init_SWORD(0);
+	sword_locale = backend->set_sword_locale();
+#ifdef DEBUG	
+	g_print("%s sword-%s\n", _("Starting"), backend->get_sword_version());
+	g_print("%s\n", _("Initiating SWORD"));
+	g_print("%s: %s\n",_("path to sword"),mgr.prefixPath);
+	g_print("%s %s\n", _("System locale is"),buf);	
+	g_print("%s %s\n", _("SWORD locale is"), sword_locale);	
+	g_print("OLD_CODESET = %s\n\n", OLD_CODESET);
+	g_print("%s\n", _("Checking for SWORD Modules"));
+#endif
+	sys_locale = strdup(buf);
+	settings.spell_language = strdup(sys_locale);	
+	main_init_lists();
+	free((char*)sword_locale);
+	free(sys_locale);	
 }
+
+
 /******************************************************************************
  * Name
  *   shutdown_sword
@@ -420,7 +461,7 @@ void init_sword(void)
  *   void shutdown_sword(void)	
  *
  * Description
- *   close down sword by calling backend_shutdown();
+ *   close down sword by deleting backend;
  *
  * Return value
  *   void
@@ -428,7 +469,10 @@ void init_sword(void)
 
 void shutdown_backend(void)
 {
-	backend_shutdown(TRUE);
+	delete backend; 
+#ifdef DEBUG	
+	g_print("%s\n", _("SWORD is shutdown"));
+#endif
 }
 
 /******************************************************************************
@@ -1132,11 +1176,8 @@ void main_display_bible(const char * mod_name, const char * key)
 	gchar *file = NULL;
 	gchar *style = NULL;
 	gchar *val_key = NULL;
-	gchar *utf8_key = NULL;
-        gsize bytes_written;                                               
-        gsize bytes_read;
 	
-	GError *error = NULL;
+	
 	if(!mod_name)
 		mod_name = xml_get_value("modules", "bible");	
 	
@@ -1145,13 +1186,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		return;
 	if(!backend->is_module(mod_name))
 		return;
-
-	/*utf8_key = g_convert(key,-1, UTF_8,
-                             OLD_CODESET,&bytes_read,&bytes_written,NULL);
-	if(error) {
-		g_print ("main_display_bible error: %s\n", error->message);
-		g_error_free (error);
-	}*/
+	
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	if(!settings.MainWindowModule)
 		settings.MainWindowModule = (char*)mod_name;
@@ -1193,7 +1228,7 @@ void main_display_bible(const char * mod_name, const char * key)
 	style_display = TRUE;
 	
 	if(backend->module_has_testament(mod_name,
-		backend->get_key_testament(key))) {
+				backend->get_key_testament(key))) {
 			backend->set_module_key(mod_name, key);
 			backend->display_mod->Display();
 	} else {
@@ -1228,8 +1263,6 @@ void main_display_bible(const char * mod_name, const char * key)
 		main_update_parallel_page();
 	else
 		gui_keep_parallel_dialog_in_sync();
-	//g_free(utf8_key);
-
 }
 
 

@@ -60,7 +60,7 @@ char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
 const char *get_sword_version(void);
 char *get_path_to_mods(void);
-void init_sword(void);
+void main_init_backend(void);
 void shutdown_backend(void);
 int main_is_mod_rtol(const char * module_name);
 char *main_module_name_from_description(char *description);

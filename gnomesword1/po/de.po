@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-16 15:59-0500\n"
+"POT-Creation-Date: 2005-03-19 19:08-0500\n"
 "PO-Revision-Date: Don, 06 Mai 2004 21:09:01 +0200\n"
 "Last-Translator: Johannes Tanzler <johannes.tanzler@aon.at>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -73,7 +73,7 @@ msgid "Parallel View"
 msgstr "Parallelansicht"
 
 #: src/main/sidebar.cc:580 src/main/sidebar.cc:854 src/main/sidebar.cc:855
-#: src/main/sidebar.cc:856 src/gnome2/main_window.c:603
+#: src/main/sidebar.cc:856 src/gnome2/main_window.c:604
 msgid "Standard View"
 msgstr ""
 
@@ -1118,10 +1118,6 @@ msgstr "Chiffrierschlüssel eingeben: "
 msgid "Note for"
 msgstr "Notiz zu"
 
-#: src/gnome2/dialog.c:159
-msgid " "
-msgstr " "
-
 #: src/gnome2/dialog.c:799
 msgid "Close _without Saving"
 msgstr ""
@@ -1403,21 +1399,31 @@ msgstr "_Chronik"
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: src/gnome2/main_window.c:479
+#: src/gnome2/main_window.c:472
+#, fuzzy
+msgid "Starting"
+msgstr "Beim Starten Vorgaben verwenden"
+
+#: src/gnome2/main_window.c:473
+#, fuzzy
+msgid "Building GnomeSword interface"
+msgstr "Schnittstelle"
+
+#: src/gnome2/main_window.c:480
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Software zum Bibelstudium"
 
-#: src/gnome2/main_window.c:533
+#: src/gnome2/main_window.c:534
 #, fuzzy
 msgid "Open a new tab"
 msgstr "Datei öffnen"
 
-#: src/gnome2/main_window.c:669
+#: src/gnome2/main_window.c:670
 #, fuzzy
 msgid "Commentary View"
 msgstr "Kommentare"
 
-#: src/gnome2/main_window.c:686
+#: src/gnome2/main_window.c:687
 msgid "Book View"
 msgstr ""
 
@@ -1645,7 +1651,7 @@ msgstr "Notiz exportieren"
 msgid "Delete Note"
 msgstr "Notiz löschen"
 
-#: src/gnome2/parallel_dialog.c:590 src/gnome2/preferences_dialog.c:945
+#: src/gnome2/parallel_dialog.c:591 src/gnome2/preferences_dialog.c:945
 msgid "Parallel"
 msgstr "Parallel"
 
@@ -2518,6 +2524,17 @@ msgstr "Parallelansicht 1 ändern"
 #: src/gnome2/toolbar_nav.c:539
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Initiating SWORD"
+#~ msgstr "Beim Starten Vorgaben verwenden"
+
+#, fuzzy
+#~ msgid "Checking for SWORD Modules"
+#~ msgstr "Vorgabe SWORD-Modul verwenden"
+
+#~ msgid " "
+#~ msgstr " "
 
 #~ msgid "Sync"
 #~ msgstr "Synchronisieren"

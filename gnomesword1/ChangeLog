@@ -1,3 +1,8 @@
+2005-03-19  terry <tbiggs@users.sf.net>
+
+	* removed backend/sword.cpp and backend/sword.h
+	
+
 2005-03-16  terry <tbiggs@users.sf.net>
 
 	* changed to new nabar in parallel dialog. I think that this was the

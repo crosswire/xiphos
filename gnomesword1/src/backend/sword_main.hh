@@ -67,8 +67,10 @@ public:
 	BackEnd();
 	~BackEnd();
 	void init_SWORD(int gsType);
+	char *set_sword_locale(void);
 	void init_lists(MOD_LISTS * mods);
 	void init_language_map(void);
+	const char *get_sword_version(void);
 	void setup_displays(void);
 
 	//GList *fill_Bible_books(int testament);
