@@ -95,7 +95,7 @@ void addbooktoCTree(GtkWidget *ctree, gchar *bookName) {
 	
 }
 static
-void setnodeinfoGS_GBS(SETTINGS *s, NODEDATA *data)
+void setnodeinfoSW_GBS(SETTINGS *s, NODEDATA *data)
 {
 	gtk_ctree_set_node_info(GTK_CTREE(s->ctree_widget_books),
 		data->parent,
@@ -109,7 +109,7 @@ void setnodeinfoGS_GBS(SETTINGS *s, NODEDATA *data)
 		data->expanded);	
 }
 static
-GtkCTreeNode *addnodeGS_GBS(SETTINGS *s, NODEDATA *data)
+GtkCTreeNode *addnodeSW_GBS(SETTINGS *s, NODEDATA *data)
 {
 	GtkCTreeNode *retval;
 	
@@ -246,6 +246,7 @@ void setupSW_GBS(SETTINGS *s)
 	gint count = 0;
 	
 	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
+	curbookMod = NULL;
 	displays.clear();	
 	bookmods = NULL;	
 	sbbookmods = NULL;
@@ -255,6 +256,7 @@ void setupSW_GBS(SETTINGS *s)
 			bookmods = g_list_append(bookmods, (*it).second->Name());
 			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
 			createGBS_Pane((*it).second, s, count) ;
+			curbookMod = (*it).second;
 		}
 	}
 }
@@ -300,8 +302,6 @@ on_ctreeGBS_select_row(GtkCList * clist,
 	
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[0])->text;	
-	g_warning("nodename = %s",nodename);
-	
 	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[1])->text;	
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
@@ -313,7 +313,7 @@ on_ctreeGBS_select_row(GtkCList * clist,
 			TreeKeyIdx *treeKey =  getTreeKey((*it).second);
 			TreeKeyIdx treenode = *treeKey;
 			treenode.setOffset(strtoul(offset,NULL,0));
-	
+			curbookMod = (*it).second; //-- for search
 			//g_warning("Lang = %s" ,(const char *)curbookMod->getConfigEntry("Lang"));
 			/** if not root node then display **/
 			if(treenode.getOffset() > 0) {	
@@ -369,7 +369,7 @@ static void addNodeChildren(SETTINGS *s,
 			p_nodedata->is_leaf = TRUE;
 			p_nodedata->expanded = FALSE;
 		}
-		node = addnodeGS_GBS(s, p_nodedata);
+		node = addnodeSW_GBS(s, p_nodedata);
 	}
 	
 	while(treeKey.nextSibling()){
@@ -392,7 +392,7 @@ static void addNodeChildren(SETTINGS *s,
 			p_nodedata->is_leaf = TRUE;
 			p_nodedata->expanded = FALSE;
 		}
-		node = addnodeGS_GBS(s, p_nodedata);
+		node = addnodeSW_GBS(s, p_nodedata);
 	}	
 }
 
@@ -416,9 +416,6 @@ void load_book_tree(SETTINGS *s,
 		addNodeChildren(s,node,bookName, root);	
 	}
 	else 
-		cout << "oops\n";
-	
-	
+		cout << "oops\n";	
 }
-
 
