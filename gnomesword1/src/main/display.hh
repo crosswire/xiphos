@@ -38,3 +38,9 @@ public:
 	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);
 };
+
+class DialogChapDisp : public GTKEntryDisp {
+public:
+	DialogChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};

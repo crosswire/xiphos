@@ -222,14 +222,19 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	gchar *buf, *modName;
 	gchar newref[80];
 	static GtkWidget *dlg;
-	cur_vt = vt;
+//	cur_vt = vt;
+	
+	if(main_dialogs_url_handler(vt, url, TRUE))
+		return;
+	
+/*	
 	//gtk_window_set_title(GTK_WINDOW(dialog_display_info)," ");
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
 			dlg = gui_create_display_informtion_dialog();
 		}
-		++url;		/* remove # */
+		++url;		
 
 		if (*url == 'T')
 			++url;
@@ -262,7 +267,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		if (!gsI_isrunning) {
 			dlg = gui_create_display_informtion_dialog();
 		}
-		++url;		/* remove M */
+		++url;		
 		buf = g_strdup(url);
 		gui_display_mod_and_key("Packard", buf);
 		g_free(buf);
@@ -283,7 +288,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		g_free(buf);
 	}
 
-	else if (!strncmp(url, "passage=", 7)) {/*** remove passage= verse list ***/
+	else if (!strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
 		mybuf = strchr(url, '=');
 		++mybuf;
@@ -297,20 +302,6 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
-/*
-		mybuf = strstr(url, "class=");
-		if (mybuf) {
-			gint i;
-			modbuf = strchr(mybuf, '=');
-			++modbuf;
-			for (i = 0; i < strlen(modbuf); i++) {
-				if (modbuf[i] == ' ') {
-					modbuf[i] = '\0';
-					break;
-				}
-			}
-		}			
-*/
 		modbuf = "Robinson";
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
@@ -330,7 +321,6 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		g_free(buf);
 		gtk_widget_show(dlg);
 	}
-	/*** thml strongs ***/
 	else if (!strncmp(url, "type=Strongs", 12)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
@@ -354,8 +344,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 			if (!gsI_isrunning) {
 				dlg =
-				    gui_create_display_informtion_dialog
-				    ();
+				    gui_create_display_informtion_dialog();
 			}
 			buf = g_strdup(newref);
 			gui_display_mod_and_key(modbuf, buf);
@@ -366,6 +355,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		}
 
 	}
+*/
 }
 
 
@@ -559,6 +549,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	gint context_id2;
 
 	cur_vt = vt;
+	
+	
 	if(url) url_buf = g_strdup(url);
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
@@ -574,6 +566,9 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	/***  we are in an url  ***/
 	else {
 		in_url = TRUE;
+		
+		if(main_dialogs_url_handler(vt, url, FALSE))
+			return;
 		if (*url_buf == '#') {
 			++url_buf;	/* remove # */
 			if (*url_buf == 'T') {
@@ -1487,16 +1482,246 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_global_option(GtkMenuItem * menuitem, gpointer data)
+static void global_option_red_words(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
 {
-/*	gchar *url = g_strdup_printf(	"sword://%s/%s",
-					settings.MainWindowModule,
-					settings.currentverse);
-	save_module_options(settings.MainWindowModule, (gchar *) data,
-			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	main_url_handler(url, TRUE);		
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->words_in_red = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
-*/
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_strongs
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_strongs(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_strongs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->strongs = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_morphs
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_morphs(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_morphs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->morphs = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_footnotes
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_footnotes(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_footnotes(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->footnotes = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_greekaccents
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_greekaccents(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_greekaccents(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->greekaccents = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_lemmas
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_lemmas(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_lemmas(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->lemmas = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_scripturerefs
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_scripturerefs(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->scripturerefs = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_hebrewpoints
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_hebrewpoints(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->hebrewpoints = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_hebrewcant
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_hebrewcant(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->hebrewcant = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
+}
+
+
+/******************************************************************************
+ * Name
+ *  global_option_headings
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void global_option_headings(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void global_option_headings(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	t->ops->headings = menuitem->active;
+	main_dialogs_url_handler(t, url, TRUE);
+	g_free(url);
 }
 
 
@@ -1539,9 +1764,22 @@ static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void on_sync_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+static void on_sync_activate(GtkMenuItem * menuitem, gpointer data)
 {
-//	gui_sync_bibletext_dialog_with_main(t);
+	main_sync_bibletext_dialog_with_main(cur_vt);
+}
+
+static void sync_toggled(GtkCheckMenuItem * menuitem, gpointer data)
+{
+	if(menuitem->active) {
+		main_sync_bibletext_dialog_with_main(cur_vt);
+		cur_vt->sync = TRUE;
+		gtk_widget_hide(cur_vt->toolbar_nav);
+	}
+	else {		
+		cur_vt->sync = FALSE;
+		gtk_widget_show(cur_vt->toolbar_nav);
+	}
 }
 
 
@@ -1561,11 +1799,17 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	 NULL,
 	 view_text_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
+	 0, (GdkModifierType) 0, NULL },
 	 {
 	 GNOME_APP_UI_ITEM, N_("Sync with main"),
 	 NULL,
 	 (gpointer) on_sync_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
+	 0, (GdkModifierType) 0, NULL},
+	 {
+	 GNOME_APP_UI_TOGGLEITEM, N_("Stay in sync"),
+	 NULL,
+	 (gpointer) sync_toggled, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
@@ -1638,7 +1882,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Words of Christ in Red"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Words of Christ in Red",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1647,7 +1891,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 GNOME_APP_UI_TOGGLEITEM,
 	 N_("Strong's Numbers"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Strong's Numbers",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE,
@@ -1658,7 +1902,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Morphological Tags"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Morphological Tags",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1666,7 +1910,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Footnotes"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Footnotes",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1674,7 +1918,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Greek Accents"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Greek Accents",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1682,7 +1926,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lemmas"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Lemmas",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1690,7 +1934,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Scripture Cross-references"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Scripture Cross-references",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1698,7 +1942,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Vowel Points"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Hebrew Vowel Points",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1706,7 +1950,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Cantillation"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Hebrew Cantillation",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1714,7 +1958,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Headings"),
 	 NULL,
-	 (gpointer) on_global_option,
+	 NULL, //(gpointer) on_global_option,
 	 (gpointer) "Headings",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1777,13 +2021,6 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
-	 NULL,
-	 (gpointer) on_show_tabs_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -1797,7 +2034,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = t->mod_name;
-	GLOBAL_OPS *ops = main_new_globals(mod_name);
+	//GLOBAL_OPS *ops = main_new_globals(mod_name);
 	cur_vt = t;
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
@@ -1817,7 +2054,12 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
+	//gtk_widget_hide(file3_menu_uiinfo[1].widget);	
+	//gtk_widget_hide(file3_menu_uiinfo[2].widget);	
 
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (file3_menu_uiinfo[2].widget),
+				       t->sync);
 
 
 	view_menu = gtk_menu_new();
@@ -1867,7 +2109,12 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 				     "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
-				    widget)->active = ops->words_in_red;
+				    widget)->active = t->ops->words_in_red;					     
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[2].widget),
+				"activate",
+				G_CALLBACK(global_option_red_words), 
+				(TEXT_DATA *)t);
 	}
 	if ((check_for_global_option
 	     (mod_name, "GBFStrongs"))
@@ -1879,53 +2126,98 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 	     (mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
-				    widget)->active = ops->strongs;
+				    widget)->active = t->ops->strongs;					     
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[3].widget),
+				"activate",
+				G_CALLBACK(global_option_strongs), 
+				(TEXT_DATA *)t);
 	}
 	if ((check_for_global_option(mod_name, "GBFMorph")) ||
 	    (check_for_global_option(mod_name, "ThMLMorph")) ||
 	    (check_for_global_option(mod_name, "OSISMorph"))) {
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
-				    widget)->active = ops->morphs;
+				    widget)->active = t->ops->morphs;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[4].widget),
+				"activate",
+				G_CALLBACK(global_option_morphs), 
+				(TEXT_DATA *)t);
 	}
 	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
 	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
 	    (check_for_global_option(mod_name, "OSISFootnotes"))) {
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
-				    widget)->active = ops->footnotes;
+				    widget)->active = t->ops->footnotes;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[5].widget),
+				"activate",
+				G_CALLBACK(global_option_footnotes), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
-				    widget)->active = ops->greekaccents;
+				    widget)->active = t->ops->greekaccents;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[6].widget),
+				"activate",
+				G_CALLBACK(global_option_greekaccents), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
-				    widget)->active = ops->lemmas;
+				    widget)->active = t->ops->lemmas;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[7].widget),
+				"activate",
+				G_CALLBACK(global_option_lemmas), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLScripref") ||
 	    (check_for_global_option(mod_name, "OSISScripref"))) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
-				    widget)->active = ops->scripturerefs;
+				    widget)->active = t->ops->scripturerefs;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[8].widget),
+				"activate",
+				G_CALLBACK(global_option_scripturerefs), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
-				    widget)->active = ops->hebrewpoints;
+				    widget)->active = t->ops->hebrewpoints;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[9].widget),
+				"activate",
+				G_CALLBACK(global_option_hebrewpoints), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
 		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
-				    widget)->active = ops->hebrewcant;
+				    widget)->active = t->ops->hebrewcant;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[10].widget),
+				"activate",
+				G_CALLBACK(global_option_hebrewcant), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLHeadings") ||
 	    (check_for_global_option(mod_name, "OSISHeadings"))) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
 		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
-				    widget)->active = ops->headings;
+				    widget)->active = t->ops->headings;
+		
+		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
+				"activate",
+				G_CALLBACK(global_option_headings), 
+				(TEXT_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
@@ -1967,7 +2259,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 					NULL, event, NULL,
 					t->html);
 	gtk_widget_destroy(menu1);
-	g_free(ops);
+	//g_free(ops);
 }
 
 
