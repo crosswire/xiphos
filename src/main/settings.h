@@ -22,6 +22,8 @@
 #ifndef _SETTINGS_H_
 #define _SETTINGS_H_
 
+#include <gnome.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -69,10 +71,12 @@ struct _settings {
 		*verse_num_font_size;		
 		
 	int 
-      		shortcutbar_width,
+      		sidebar_width,
 		verselist_toppane_height, //height of the top pane in the search results window
 		upperpane_hight,
 		biblepane_width,
+		biblepane_hight,
+		commpane_hight,
 		sidebar_notebook_hight,
 		gs_width,
 		tmp_width,
@@ -215,6 +219,9 @@ struct _settings {
 	
 	/* widget shadow type */
 	int shadow_type;
+	
+	/* signal id for dictionary entry */
+	gulong signal_id;
 };
 
 extern SETTINGS settings;

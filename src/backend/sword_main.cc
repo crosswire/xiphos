@@ -24,11 +24,11 @@
 
 #include <swmgr.h>
 
-#ifdef USE_MOZILLA
-#include "backend/gs_markupfiltmgr.h"
-#else
+//#ifdef USE_MOZILLA
+//#include "backend/gs_markupfiltmgr.h"
+//#else
 #include <markupfiltmgr.h>
-#endif
+//#endif
 
 #include <gnome.h>
 #include <versekey.h>
@@ -54,18 +54,19 @@ BackEnd *backend = NULL;
 //static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
  
 BackEnd::BackEnd() {
-#ifdef USE_MOZILLA
-	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-#else
+//#ifdef USE_MOZILLA
+//	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+//	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+//#else
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-#endif
+//#endif
 	display_mod = NULL;
 	
 	tree_key = NULL;
 	
 	commDisplay          = 0;
+	bookDisplay          = 0;
 	dictDisplay          = 0;
 	textDisplay          = 0;
 	entryDisplay         = 0;
@@ -82,6 +83,8 @@ BackEnd::~BackEnd() {
 	
 	if (commDisplay)
 		delete commDisplay;
+	if (bookDisplay)
+		delete bookDisplay;
 	if (dictDisplay)
 		delete dictDisplay;
 	if (textDisplay)
@@ -121,7 +124,7 @@ void BackEnd::init_SWORD(int gsType) {
 				display_mod->Disp(dictDisplay);
 			}
 			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
-				display_mod->Disp(commDisplay);
+				display_mod->Disp(bookDisplay);
 			}			
 		}
 		init_language_map();

@@ -334,7 +334,7 @@ void load_settings_structure(void)
 		settings.book_offset = 0;
 	}
 
-	settings.shortcutbar_width =
+	settings.sidebar_width =
 		atoi(xml_get_value("layout", "shortcutbar"));
 	if(xml_get_value("layout", "vltoppaneheight"))
 		settings.verselist_toppane_height =
@@ -371,7 +371,20 @@ void load_settings_structure(void)
 	settings.upperpane_hight =
 	    atoi(xml_get_value("layout", "uperpane"));
 
+	if(xml_get_value("layout", "biblehight"))
+		settings.biblepane_hight = atoi(xml_get_value("layout", "biblehight"));
+	else {
+		xml_add_new_item_to_section("layout", "biblehight", "340");
+		settings.biblepane_hight = 340;
+	}
 
+	if(xml_get_value("layout", "commentaryhight"))
+		settings.commpane_hight = atoi(xml_get_value("layout", "commentaryhight"));
+	else {
+		xml_add_new_item_to_section("layout", "commentaryhight", "240");
+		settings.commpane_hight = 240;
+	}
+	
 	settings.verse_num_font_size =
 	    xml_get_value("fontsize", "versenum");
 

@@ -207,7 +207,6 @@ module.source.files=\
 	src/gnome2/bookmarks_menu.c\
 	src/gnome2/spell_gnome_spell.c\
 	src/gnome2/session.c\
-	src/main/mod_mgr.c\
 	src/backend/module_manager.cc\
 	src/gnome2/mod_mgr.c\
 	src/gnome2/tabbed_browser.c\
@@ -229,7 +228,9 @@ module.source.files=\
 	src/main/embed.cc\
 	src/backend/gs_markupfiltmgr.cpp\
 	src/backend/gs_osishtmlhref.cpp\
-	src/main/configs.cc
+	src/main/configs.cc\
+	src/main/mod_mgr.cc\
+	src/gnome2/sidebar_dialog.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -81,6 +81,7 @@ void main_change_verse(const char * bible, const char * commentary,
 						const char * key);
 void main_setup_displays(void);
 void main_dictionary_entery_changed(char * mod_name);
+void main_dictionary_button_clicked(gint direction);
 const char *main_get_module_language(const char *module_name);
 int main_check_for_global_option(char * mod_name, char * option);
 int main_has_cipher_tag(char *mod_name);
