@@ -263,7 +263,6 @@ void main_display_commentary(const char * mod_name, const char * key)
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
 		settings.CommWindowModule = xml_get_value( "modules", "comm");
 		gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-		//gui_set_comm_label(settings.CommWindowModule);
 		gui_change_window_title(settings.CommWindowModule);
 	}
 	backend->set_module_key(mod_name, key);

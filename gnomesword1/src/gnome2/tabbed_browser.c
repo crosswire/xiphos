@@ -74,7 +74,7 @@ PASSAGE_TAB_INFO *cur_passage_tab;
 static GList *passage_list;
 static gboolean page_change = FALSE;
 //static gboolean display_change = TRUE;
-//static gint text_last_page;
+static gint removed_page;
 
 
 /******************************************************************************
@@ -308,12 +308,22 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
 					 gint page_num, GList **tl)
-{
+{ 
+	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
+	
 	page_change = TRUE;
 	/* get data structure for new passage */
-	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
-	
+	/*
+	 * this is needed to stop seg fault if the left tab is closed when
+	 * there are only two tabs - because number_of_pages equals 2 even
+	 * thought there is only 1. 
+	 */
+	if(number_of_pages == 2 && removed_page == 0)
+		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, 0);
+	else
+		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
+	removed_page = 1;
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 	set_current_tab (pt);
 	
@@ -670,6 +680,7 @@ void gui_close_passage_tab(gint pagenum)
 	if(pt->book_offset) g_free(pt->book_offset);
 	g_free(pt);
 	cur_passage_tab = NULL;
+	removed_page = pagenum;
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 
@@ -699,6 +710,7 @@ void gui_notebook_main_setup(GList *ptlist)
 	PASSAGE_TAB_INFO *pt = NULL;
 	static gboolean connected = FALSE;
 	
+	removed_page = 1;
 	cur_passage_tab = NULL;
 	passage_list = NULL;
 	tmp = ptlist;
