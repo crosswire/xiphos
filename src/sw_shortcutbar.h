@@ -30,9 +30,9 @@ extern "C" {
 	
 #include "gs_gnomesword.h"
 
-	
-GList *loadshortcutbarSW(gchar *filename);
-void saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list);
+void save_iconsizeSW(gchar * filename, gchar *large_icons);	
+GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeicons);
+void saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_icons);
 GList *getModlistSW(gchar *modtype);
 	
 #ifdef __cplusplus

@@ -29,23 +29,18 @@
 extern "C" {
 #endif
 
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include "gs_gnomesword.h"
 	
 	
 void showSBVerseList(SETTINGS *s);
-void on_btnSB_clicked(GtkButton * button, gpointer user_data);
+void on_btnSB_clicked(GtkButton * button, 
+					gpointer user_data);
 void setupSB(GList * favoriteslist, 
 					GList *text, 
 					GList *commentary, 
 					GList *dictionary);
-void update_shortcut_bar(SETTINGS *s,
-					GList * favorites,
-					GList *text, 
-					GList *commentary, 
-					GList *dictionary);
-void
-create_modlistmenu_sb(GtkWidget *menu, 
+void update_shortcut_bar(SETTINGS *s);
+void create_modlistmenu_sb(GtkWidget *menu, 
 					GtkWidget *shortcut_menu_widget, 
 					gchar *modtype);		
 	
