@@ -1,7 +1,7 @@
 2004-02-07  Terry <tbiggs@users.sf.net>
 
 	* added sword url handler to gnome2/utilities.c
-	  pass to uri in the form of sword://KJV/1John5:8 
+	  pass uri in the form of sword://KJV/1John5:8 
 	  to the command line.
 
 
