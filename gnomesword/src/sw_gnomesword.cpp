@@ -36,20 +36,11 @@
 #include <swconfig.h>
 #include <versekey.h>
 #include <dirent.h> 
-#include <swbasicfilter.h>
-#include <gbfplain.h>
-#include <plainhtml.h>
-#include "gbfhtmlhref.h"
-#include <rwphtml.h>
-#include <thmlhtml.h>
-#include "thmlhtmlhref.h"
-//#include <latin1utf8.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "sw_display.h"
@@ -98,13 +89,6 @@ SWModule
     *percomMod,			/* module for personal commentary  window */
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
-SWFilter 
-    //*swbasicfilter,
-    * gbftohtml,		/* sword render filters */
-    *plaintohtml, 
-    *thmltohtml, 
-    *rwptohtml, 
-    *lattoutf8;
 
 modDescMap descriptionMap;
 
@@ -166,12 +150,6 @@ void initSWORD(GtkWidget * mainform)
 	gchar * lang;
  
 	g_print("Initiating Sword\n");
-	//swbasicfilter = new SWBasicFilter();
-	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
-	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
-	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
-	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
-	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
 
 	mainMgr = new SWMgr();	//-- create sword mgrs
 	mainMgr1 = new SWMgr();
@@ -564,20 +542,12 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	}
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
-	g_string_free(gs_clipboard, TRUE);
+	g_string_free(gs_clipboard, TRUE);	
+	deleteRenderfilters();
 	//-- delete Sword managers
 	delete mainMgr;
 	delete mainMgr1;
 	delete percomMgr;
-	//-- delete render filters
-	if (thmltohtml != 0)
-		delete thmltohtml;
-	if (gbftohtml != 0)
-		delete gbftohtml;
-	if (plaintohtml != 0)
-		delete plaintohtml;
-	if (lattoutf8 != 0)
-		delete lattoutf8;
 	//-- delete Sword displays
 	if (entryDisplay)
 		delete entryDisplay;
