@@ -153,7 +153,9 @@ module.source.files=\
 	gs_getinfo_dlg.h\
 	gs_editor.c\
 	gs_editor.h\
-	sw_sword.h
+	sw_sword.h\
+	gs_gbs.h\
+	sw_sword.cpp
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

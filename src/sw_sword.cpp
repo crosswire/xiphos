@@ -276,13 +276,6 @@ void initSWORD(SETTINGS *s)
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
 			curdictMod->Disp(dictDisplay);			
 		} 
-		
-		/*else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
-			curbookMod = (*it).second;
-			bookmods = g_list_append(bookmods, curbookMod->Name());
-			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
-			curbookMod->Disp(bookDisplay);
-		}*/
 	}
 	setupSW_GBS(s);
 	

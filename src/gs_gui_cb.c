@@ -525,4 +525,23 @@ void on_btnCommPrint_clicked                (GtkButton       *button,
 	on_print_item_activate(NULL, "htmlCommentaries");
 }
 
+void
+on_nbDict_GBS_switch_page              (GtkNotebook     *notebook,
+                                        GtkNotebookPage *page,
+                                        gint             page_num,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_ctreeGBS_tree_select_row            (GtkCTree        *ctree,
+                                        GList           *node,
+                                        gint             column,
+                                        gpointer         user_data)
+{
+
+}
+
 

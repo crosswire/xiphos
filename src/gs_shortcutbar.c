@@ -634,6 +634,8 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS *s)
 		s->dockSB = create_dlgDock(s);
 		 gtk_widget_reparent(shortcut_bar,
                                             s->vboxDock );
+		settings->showshortcutbar = TRUE;
+		gtk_widget_show(shortcut_bar);
 		e_paned_set_position(E_PANED
 				     (lookup_widget(s->app, "epaned")),
 				     0);
@@ -661,42 +663,32 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS *s)
 void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 {
 	gint biblepanesize;
+	if(!s->docked) {
+		//gtk_window_activate_focus(GTK_WINDOW(s->dockSB));
+		return;
+	}
 	
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
-		if(s->docked) {
-			
-			biblepanesize = settings->gs_width / 2;
-			gtk_widget_hide(shortcut_bar);
-			e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "epaned")),
-				     0);
-			e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "hpaned1")),
-				     biblepanesize);
-		}
-		
-		else
-			gtk_widget_hide(s->dockSB);
+		biblepanesize = settings->gs_width / 2;
+		gtk_widget_hide(shortcut_bar);
+		e_paned_set_position(E_PANED
+			     (lookup_widget(s->app, "epaned")),
+			     0);
+		e_paned_set_position(E_PANED
+			     (lookup_widget(s->app, "hpaned1")),
+			     biblepanesize);
 	} else {
 		settings->showshortcutbar = TRUE;
-		if(s->docked) {
-			biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
-			e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "epaned")),
-				     settings->shortcutbar_width);
-			e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "hpaned1")),
-				     biblepanesize);
-			gtk_widget_show(shortcut_bar);
-		}
-		
-		else
-			gtk_widget_show(s->dockSB);
+		biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
+		e_paned_set_position(E_PANED
+			     (lookup_widget(s->app, "epaned")),
+			     settings->shortcutbar_width);
+		e_paned_set_position(E_PANED
+			     (lookup_widget(s->app, "hpaned1")),
+			     biblepanesize);
+		gtk_widget_show(shortcut_bar);
 	}
-	
-	
-	
 }
 
 static void
