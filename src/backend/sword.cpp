@@ -201,7 +201,9 @@ void backend_init(void)
 void backend_shutdown(int save_properties)
 {
 	backend_shutdown_treekey();
-	main_delete_displays();
+	//main_delete_displays();
+	if(sw.entryDisplay)
+		delete sw.entryDisplay;
 	/* delete Sword managers */
 	backend_delete_managers();
 	g_print("%s\n", _("SWORD is shutdown"));

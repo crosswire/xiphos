@@ -274,7 +274,7 @@ void backend_set_treekey(char * module_name, unsigned long offset)
 	sw.treeKey->setOffset(offset);
 	
 	sw.gbs_mod->SetKey(backend_get_key_from_offset(offset));
-        g_warning("backend_set_treekey = %s",sw.gbs_mod->KeyText());  
+        //g_warning("backend_set_treekey = %s",sw.gbs_mod->KeyText());  
 	//(const char *) *sw.gbs_mod;
 }
 

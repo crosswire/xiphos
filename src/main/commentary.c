@@ -50,7 +50,7 @@
  *   
  */ 
 
-void set_commentary_key(char * mod_name, char * key)
+void main_set_commentary_key(char * mod_name, char * key)
 {
 	backend_set_commentary_key(mod_name, key);
 }
