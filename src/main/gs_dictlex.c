@@ -40,6 +40,7 @@
 #include "sword.h"
 #include "dictlex.h"
 #include "gs_viewdict_dlg.h"
+#include "cipher_key_dialog.h"
 
 
 extern SETTINGS *settings;
@@ -221,6 +222,13 @@ void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings->dictkey);
 }
 
+static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
+{
+	GtkWidget *dlg;
+	
+	dlg = gui_create_unlock_key_dialog(d->modName);
+	gtk_widget_show(dlg);
+}
 static
 GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 {
@@ -306,6 +314,31 @@ GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 	view_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_menu));
 
+	/*
+	   if module has cipher key include this item
+	 */
+	if(dl->has_key) {
+		GtkWidget *add_module_key;
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
+					 separator, (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);	
+		gtk_container_add(GTK_CONTAINER(pm), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+			
+		add_module_key = gtk_menu_item_new_with_label (_("Unlock This Module"));
+		gtk_widget_ref (add_module_key);
+		gtk_object_set_data_full (GTK_OBJECT (pm), "add_module_key",add_module_key ,
+				    (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show (add_module_key);
+		gtk_container_add (GTK_CONTAINER (pm), add_module_key);
+			
+		gtk_signal_connect (GTK_OBJECT (add_module_key), "activate",
+                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
+                      	dl);
+	}
 
 	i = 0;
 	tmp = mods;
@@ -529,7 +562,8 @@ void gui_setupDL(SETTINGS * s)
 		dl->modName = modname;
 		dl->modDescription =
 		    backend_get_module_description(modname);
-		dl->searchstring = NULL;
+		dl->searchstring = NULL;	
+		dl->has_key = backend_module_is_locked(dl->modName);
 		create_DictLexPane(s, mods, dl, count);
 		backend_newDisplayDL(dl->html, dl->modName, s);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);

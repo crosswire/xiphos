@@ -176,7 +176,7 @@ void backend_save_sb_group(char * filename, char * group_name, int group_num,
     delete sbconf;
 }
 
-GList *backend_get_sb_mod_list(char * modtype)
+/*GList *backend_get_sb_mod_list(char * modtype)
 {
     GList *list;
     ModMap::iterator it;
@@ -188,13 +188,13 @@ GList *backend_get_sb_mod_list(char * modtype)
     for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 	if (!strcmp((*it).second->Type(), modtype)) {
 	    buf = g_strdup((char *) (*it).second->Description());
-	    list = g_list_append(list, buf);	/* calling function must free each item */
+	    list = g_list_append(list, buf);	// calling function must free each item 
 	}
     }
     delete mgr;
     return list;
 }
-
+*/
 /*
  * 
  * 

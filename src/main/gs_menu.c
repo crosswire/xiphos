@@ -274,16 +274,16 @@ void createpopupmenus(SETTINGS *s,
 		GList *options) 
 {
 	/* create popup menu for Bible window */
-	s->menuBible = create_pmBible(bibleDescription, dictDescription);
+	//s->menuBible = create_pmBible(bibleDescription, dictDescription);
 	/* create popup menu for interlinear window */
 	s->menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
 	
 	/* attach popup menus */
 	gnome_popup_menu_attach(s->menuInt,s->htmlInterlinear,(gchar*)"1");
-	gnome_popup_menu_attach(s->menuBible,lookup_widget(s->app,"htmlTexts"),(gchar*)"1");
+//	gnome_popup_menu_attach(s->menuBible,lookup_widget(s->app,"htmlTexts"),(gchar*)"1");
 	
 	/* ajust checkmarks */
-	GTK_CHECK_MENU_ITEM (lookup_widget(s->menuBible,"show_tabs"))->active = s->text_tabs;
+	//GTK_CHECK_MENU_ITEM (lookup_widget(s->menuBible,"show_tabs"))->active = s->text_tabs;
 }
 
 /*
@@ -691,9 +691,6 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
                       	GTK_SIGNAL_FUNC (on_viewtext_activate),
                       	NULL);
-	gtk_signal_connect (GTK_OBJECT (settings->unlocktextmod_item), "activate",
-                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
-                      	GINT_TO_POINTER(MAIN_TEXT_WINDOW));
   return pmBible;
 }
 

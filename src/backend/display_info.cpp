@@ -58,7 +58,7 @@ void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)
 	it = mgr->Modules.find(modName);	//-- find module we want to use
 	if (it != mgr->Modules.end()) {
 
-		mod = (*it).second;	//-- set curdictMod to new choice
+		mod = (*it).second;	//-- set mod to new choice
 		mod->SetKey(newkey);
 		mod->Display();	//-- display new dict
 	}
