@@ -47,6 +47,7 @@
 
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
+//#include "gs_gbfhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -69,8 +70,6 @@ Sword global to this file
 SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
 SWDisplay *entryDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *comp1Display; /* to display modules using GtkText a verse at a time */
-SWDisplay *comp2Display; /* to display modules using GtkText a verse at a time */
-SWDisplay *comp3Display; /* to display modules using GtkText a verse at a time */
 SWDisplay *comDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *percomDisplay; /* to display personal comment modules using GtkText a verse at a time */
 SWDisplay *dictDisplay; /* to display modules using GtkText a verse at a time */
@@ -83,9 +82,7 @@ SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
-SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
-SWMgr *mainMgr2; /* sword mgr for comp2Mod - second interlinear module */
-SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
+SWMgr *mainMgr1; /* sword mgr for comp1Mod - interlinear module */
 SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 SWMgr *listMgr;	/* sword mgr for ListEditor */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
@@ -95,8 +92,6 @@ VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
 SWModule *curMod; /* module for main text window */
 SWModule *comp1Mod; /* module for first interlinear window */
-SWModule *comp2Mod; /* module for second interlinear window */	
-SWModule *comp3Mod; /* module for third interlinear window */
 SWModule *curcomMod; /* module for commentary  window */	
 SWModule *percomMod; /* module for personal commentary  window */	
 SWModule *curdictMod; /* module for dict window */
@@ -184,23 +179,18 @@ initSWORD(GtkWidget *mainform)
 		*font;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-
   	
- 	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
+ 	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
-        rwptohtml	= new GS_RWPHTML();
-        gbftohtml		= new GBFHTML();
+        rwptohtml		= new GS_RWPHTML(); /* sword renderfilter rwp to html */	
+        gbftohtml		= new GBFHTML(); /* sword renderfilter gbf to html */	
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
-	mainMgr2        = new SWMgr();
-	mainMgr3        = new SWMgr();	
   	percomMgr	= new SWMgr();
 	
 	curMod		= NULL; //-- set mods to null
 	comp1Mod      = NULL;
-	comp2Mod      = NULL;
-	comp3Mod      = NULL;
 	curcomMod     = NULL;
 	curdictMod      = NULL; 	
 	percomMod     = NULL;
@@ -208,8 +198,6 @@ initSWORD(GtkWidget *mainform)
 	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display    = 0;// set in create
-	comp2Display    = 0;// set in create
-	comp3Display    = 0;// set in create
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create	
 	percomDisplay   = 0;// set in create
@@ -514,8 +502,6 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	g_string_free(gs_clipboard,TRUE);
 	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
-	delete mainMgr2;
-	delete mainMgr3;
 	
         if (thmltohtml != 0)
 		delete thmltohtml;
@@ -528,11 +514,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	if (entryDisplay)
 		delete entryDisplay;	
 	if(comp1Display)
-		delete comp1Display;
-	if(comp2Display)
-		delete comp2Display;
-	if(comp3Display)
-		delete comp3Display;	
+		delete comp1Display;	
 	if(comDisplay)
 		delete comDisplay;
 	if(dictDisplay)
@@ -623,36 +605,6 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 		comp1Mod->Display();              //-- show it to the world
 	}
 	//strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
-}
-
-//-------------------------------------------------------------------------------------------
-void
-changecomp2ModSWORD(gchar *modName)  //-- change sword module for 2nd interlinear window
-{
-	ModMap::iterator it;
-
-	it = mainMgr2->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr2->Modules.end()){    //-- if we find the module	
-		comp2Mod = (*it).second;    //-- change current module to new module
-		comp2Mod->SetKey(current_verse); //-- set key to current verse
-		comp2Mod->Display();            //-- show it to the world
-	}
-	strcpy(settings->Interlinear2Module, comp2Mod->Name()); //-- remember where we are so we can open here next time we startup
-}
-
-//-------------------------------------------------------------------------------------------
-void
-changecomp3ModSWORD(gchar *modName)   //-- change sword module for 3rd interlinear window
-{
-	ModMap::iterator it;
-
-	it = mainMgr3->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr3->Modules.end()){    //-- if we find the module	
-		comp3Mod = (*it).second;     //-- change current module to new module
-		comp3Mod->SetKey(current_verse); //-- set key to current verse
-		comp3Mod->Display();          //-- show it to the world
-	}
-	strcpy(settings->Interlinear3Module, comp3Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
 
 //-------------------------------------------------------------------------------------------
@@ -796,12 +748,9 @@ savenoteSWORD(gboolean noteisModified) //-- save personal comments
 {  	
         if(noteisModified){ //-- if note modified save the changes
 		VerseKey mykey; //-- verse key text
-		gchar *buf;     //-- pointer to a string 					
-		//GtkWidget *text; //-- pointer to commentary text widget		
-		//text = lookup_widget(MainFrm,"textComments"); //-- get text widget
+		gchar *buf;     //-- pointer to a string 
 		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
 		*percomMod << (const char *)buf; //-- save note!
-		//g_warning(buf);
 	}
 	noteModified = false; //-- we just saved the note so it has not been modified 	
 }
@@ -1055,10 +1004,6 @@ gchar* getmodnameSWORD(gint num)
 		        case 2: return curdictMod->Name();
 			        break;
 		        case 3: return comp1Mod->Name();
-			        break;
-		        case 4: return comp2Mod->Name();
-			        break;	
-		        case 5: return comp3Mod->Name();
 			        break;
 	        }
 	}		

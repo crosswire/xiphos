@@ -23,7 +23,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -31,12 +30,20 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
-//#include <versekey.h>
-#include <plainhtml.h>
-#include <gbfhtml.h>
 
-#include "gs_rwphtml.h"
-#include "gs_thmlhtml.h"
+#ifndef __GNUC__
+#include <io.h>
+#else
+#include <unistd.h>
+#include <unixstr.h>
+#endif
+
+//#include <versekey.h>
+//#include <plainhtml.h>
+//#include <gbfhtml.h>
+
+//#include "gs_rwphtml.h"
+//#include "gs_thmlhtml.h"
 #include "gs_sword.h"
 #include "sw_utility.h"
 
@@ -56,7 +63,7 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	string moduleDriver;
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;
-
+	
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	
@@ -67,7 +74,8 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 //	}
 	
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
-		noDriver = false; /* gbfhtml filter is built into gnomesword at present */
+		/* module->AddRenderFilter(gbftohtml);  gbfhtml filter is built into gnomesword at present */
+		noDriver = false; 
 	}
 
 	if (!stricmp(sourceformat.c_str(), "PLAIN")) {
