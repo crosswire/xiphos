@@ -30,7 +30,8 @@ extern "C" {
 
 
 #include <gnome.h>
-
+#include "gs_viewtext_dlg.h"
+	
 void initSWORD(GtkWidget *mainform);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
@@ -98,6 +99,7 @@ void gotoverseVTSWORD(gchar *newkey);
 void loadVTmodSWORD(gchar *modName);
 gchar* getVTmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
+void getvtrefSWORD(VT_REF *vtref);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

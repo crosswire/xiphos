@@ -312,13 +312,14 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 } /* end - char GTKhtmlChapDisp::Display(SWModule & imodule) */
 
 
-/* --------------------------------------------------------------------------------------------- */
+/****************************************************************************** 
+ *
+ ******************************************************************************/
 char InterlinearDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[800], *font, *buf;
 	gint i;
-	//GtkWidget *gtkText;
-	ModMap::iterator it;
+	//ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
@@ -333,16 +334,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	    		mainMgr1->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
 		    	(*sit).second.end()) {
-				font = (char *) (*eit).second.c_str();
-				g_warning(font);
+				font = (char *) (*eit).second.c_str();				
 		}
-		/*
-		eit = (*sit).second.find("SourceType");
-		if (eit != (*sit).second.end())
-				sourceformat = (char *) (*eit).second.c_str();
-		if (!stricmp(sourceformat, "GBF"))
-				gbf = true;
-		*/
 	} 
 	(const char *) imodule;
 	strbuf = g_string_new("");
@@ -353,24 +346,26 @@ char InterlinearDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	/* heading */
-	if (!stricmp(font, "Symbol")) {
+	if (font) {
+		//g_warning(font);
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"symbol\" SIZE=\"%s\">",settings->bible_font_size);
-	} else if (!stricmp(font, "greek1")) { 
+		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
+	} /*else if (!stricmp(font, "greek1")) { 
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"greek1\" SIZE=\"%s\">",settings->bible_font_size);
+		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
 		//g_string_sprintf(strbuf,"<div style=\"font-family: greek1; font-size: 16pt\">",settings->bible_font_size);
 	} else if (!stricmp(font, "BSTHebrew")) {
 		strbuf = g_string_new("");	
-		g_string_sprintf(strbuf,"<FONT FACE=\"bsthebrew\" SIZE=\"%s\">",settings->bible_font_size);
+		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
 	} else if (!stricmp(font, "arial unicode ms")) {
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"arial unicode ms\" SIZE=\"%s\">",settings->bible_font_size);
+		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
 		utf = TRUE;
 	} else {
+		g_warning("no font");
 		strbuf = g_string_new("");
 		g_string_sprintf(strbuf,"<FONT SIZE=\"%s\">",settings->bible_font_size);
-	}
+	}*/
 	/* body */
 	/*if(utf){
 		gchar *tmpstr;		
@@ -380,23 +375,11 @@ char InterlinearDisp::Display(SWModule & imodule)
 	} else */
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */
-	if (!stricmp(font, "Symbol")) {
-		strbuf = g_string_append(strbuf, "</FONT><BR><HR>");
+	if(font){
+		strbuf = g_string_append(strbuf, "</font><br><hr>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
-	} else if (!stricmp(font, "greek1")) {
-		strbuf = g_string_append(strbuf, "</div><BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else if (!stricmp(font, "BSTHebrew")) {
-		strbuf = g_string_append(strbuf, "</FONT><BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else {
-		strbuf = g_string_append(strbuf, "<BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	}	
+	} 
 	return 0;
 }
 
