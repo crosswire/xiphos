@@ -92,6 +92,7 @@ GList * get_list(gint type)
 			return mod_lists->options;
 		break;
 	}
+	return NULL;
 }
 
 void init_lists(void)

@@ -40,18 +40,19 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-/*
-   frontend
- */
+/* frontend */
 #include "_bibletext.h"
+#include "shortcutbar_dialog.h"
 
-
-#include "gs_preferences_dlg.h"
-#include "sword.h"
-#include "gs_gnomesword.h"
-#include "properties.h"
+/* main */ 
 #include "support.h"
 #include "gs_shortcutbar.h"
+#include "gs_preferences_dlg.h"
+#include "gs_gnomesword.h"
+
+/* backend */
+#include "sword.h"
+#include "properties.h"
 
 GtkWidget *notebook7;
 extern gchar *tmpcolor;
@@ -139,7 +140,7 @@ static void applyoptions(SETTINGS * s)
 static void on_dock_clicked(GtkButton * button,
 					SETTINGS * s)
 {
-	dock_undock(s);
+	gui_attach_detach_shortcutbar(s);
 }
 
 static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)

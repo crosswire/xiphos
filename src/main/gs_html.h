@@ -61,7 +61,6 @@ extern "C" {
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 	void gotoanchorHTML(GtkWidget * html_widget, gchar * verse);
-	void sethtmltoeditHTML(gboolean choice);
 	gchar *gethtmlfontnameHTML(gchar * xfontname);
 	void html_print(GtkWidget * htmlwidget);
 	void set_html_edit(GtkWidget * htmlwidget);

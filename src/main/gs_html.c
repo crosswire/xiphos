@@ -653,45 +653,8 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlBible")),
 			  htmlTexts);
 	gtk_html_load_empty(GTK_HTML(htmlTexts));
-/*
-	htmlCommentaries = gtk_html_new();
-	gtk_widget_ref(htmlCommentaries);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "htmlCommentaries", htmlCommentaries,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlCommentaries);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlCom")),
-			  htmlCommentaries);
-*/
 	usehtml = htmlTexts;
 
-
-/*	
-	settings.htmlInterlinear = gtk_html_new();
-	gtk_widget_ref(settings.htmlInterlinear);
-	gtk_object_set_data_full(GTK_OBJECT(app), "settings.htmlInterlinear",
-				 settings.htmlInterlinear,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings.htmlInterlinear);
-	
-		gtk_container_add(GTK_CONTAINER
-			  (settings.swIntDocked),
-			  settings.htmlInterlinear);
-	if(settings.dockedInt)
-		gtk_container_add(GTK_CONTAINER
-			  (settings.swIntDocked),
-			  settings.htmlInterlinear);
-*/
-/*	htmlDict = gtk_html_new();
-	gtk_widget_ref(htmlDict);
-	gtk_object_set_data_full(GTK_OBJECT(app), "htmlDict",
-				 htmlDict,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlDict);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "scrolledwindow8")),
-			  htmlDict);
-*/
 
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
@@ -703,45 +666,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_release_event",
 			   GTK_SIGNAL_FUNC(html_button_released),
 			   GINT_TO_POINTER(0));
-/*
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries),
-			   "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed),
-			   GINT_TO_POINTER(1));
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries),
-			   "button_release_event",
-			   GTK_SIGNAL_FUNC(html_button_released),
-			   GINT_TO_POINTER(0));
-*/
-/*
-	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(htmlComments), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
-/*
-	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(htmlDict), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(htmlDict), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed),
-			   GINT_TO_POINTER(2));
-*/
-	/*gtk_signal_connect(GTK_OBJECT(lookup_widget(settings.app,"htmlBooks")), "button_press_event",
-	   GTK_SIGNAL_FUNC(html_button_pressed), NULL); */
 }
 
 /***************************************************************************************************
@@ -790,14 +715,6 @@ void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt)
 void gotoanchorHTML(GtkWidget * html_widget, gchar * verse)
 {
 	gtk_html_jump_to_anchor(GTK_HTML(html_widget), verse);
-}
-
-/***************************************************************************************************
- *sethtmltoeditHTML
- ***************************************************************************************************/
-void sethtmltoeditHTML(gboolean choice)
-{
-	gtk_html_set_editable(GTK_HTML(htmlComments), choice);
 }
 
 /***************************************************************************************************
