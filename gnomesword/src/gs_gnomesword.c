@@ -289,6 +289,11 @@ void UpdateChecks(SETTINGS * s)
 	/* does user want verses or paragraphs */
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 
+        /* does user want to see bible texts? */
+        GTK_CHECK_MENU_ITEM(s->viewtexts_item)->active = s->showtexts;
+        GTK_CHECK_MENU_ITEM(s->viewcomms_item)->active = s->showcomms;
+        GTK_CHECK_MENU_ITEM(s->viewdicts_item)->active = s->showdicts;
+ 
 	if (s->footnotesint)
 		setglobalopsSWORD(INTERLINEAR_WINDOW, "Footnotes", "On");	/* keep footnotes in sync with menu */
 	else
@@ -352,9 +357,10 @@ void UpdateChecks(SETTINGS * s)
 	/* set hight of bible and commentary pane */
 	e_paned_set_position(E_PANED(lookup_widget(s->app, "vpaned1")),
 			     s->upperpane_hight);
+        showhidetextsSWORD(s->showtexts);
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
-			     s->biblepane_width);
+	/*e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
+			     s->biblepane_width);*/
 
 	if (!s->docked) {
 		s->docked = TRUE;

@@ -120,6 +120,7 @@ int main(int argc, char *argv[])
 
     if (strcmp(VERSION, settings->gs_version)) {
 	gs_firstrunSWORD();
+	loadconfig(settings);
     }
 
     /*
