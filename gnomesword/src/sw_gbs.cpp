@@ -73,7 +73,8 @@ SWDisplay *bookDisplay; /* to display gbs modules */
 list <SWDisplay *> displays;	// so we can delete each display we create
 GList *gbs_data;
 bool show_tabs_gbs;
-/***   ***/
+
+/***  start code  ***/
 
 static TreeKeyIdx* getTreeKey(SWModule *mod)
 {
