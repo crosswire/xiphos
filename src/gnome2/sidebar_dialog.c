@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * shortcutbar_dialog.c - dialog for detached shortcut bar
+ * sidebar_dialog.c - dialog for detached sidebar
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,15 +26,15 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_dialog.h"
+#include "gui/sidebar.h"
+#include "gui/sidebar_dialog.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"
 
-static GtkWidget* gui_create_shortcutbar_dialog(void);
+static GtkWidget* create_sidebar_dialog(void);
 static GtkWidget * vbox_dock; 
 
 /******************************************************************************
@@ -54,14 +54,14 @@ static GtkWidget * vbox_dock;
  *   
  */
 
-void gui_attach_detach_shortcutbar(void)
+void gui_attach_detach_sidebar(void)
 {
 	gint biblepanesize;
 
 	if (settings.docked) {
 		settings.docked = FALSE;
 		biblepanesize = settings.gs_width / 2;
-		widgets.dock_sb = gui_create_shortcutbar_dialog();
+		widgets.dock_sb = create_sidebar_dialog();
 		gtk_widget_reparent(widgets.shortcutbar, vbox_dock);
 		settings.showshortcutbar = TRUE;
 		gtk_widget_show(widgets.shortcutbar);
@@ -86,12 +86,12 @@ void gui_attach_detach_shortcutbar(void)
 
 /******************************************************************************
  * Name
- *   on_dlgDock_destroy
+ *   on_dialog_destroy
  *
  * Synopsis
  *   #include "shortcutbar_dialog.h"
  *   
- *   void on_dlgDock_destroy(GtkObject *object, gpointer user_data)
+ *   void on_dialog_destroy(GtkObject *object, gpointer user_data)
  *
  * Description
  *   send the shortcut bar back to the main window before we 
@@ -102,11 +102,11 @@ void gui_attach_detach_shortcutbar(void)
  *   void
  */
 
-static void on_dlgDock_destroy(GtkObject *object, gpointer user_data)
+static void on_dialog_destroy(GtkObject *object, gpointer user_data)
 {
 	/* we need the if to prevent a loop */
 	if(!settings.docked)
-		gui_attach_detach_shortcutbar();
+		gui_attach_detach_sidebar();
 }
 
 /******************************************************************************
@@ -126,7 +126,7 @@ static void on_dlgDock_destroy(GtkObject *object, gpointer user_data)
  *   GtkWidget*
  */
 
-GtkWidget* gui_create_shortcutbar_dialog(void)
+GtkWidget* create_sidebar_dialog(void)
 {
 	GtkWidget *dlgDock; 
 
@@ -142,7 +142,7 @@ GtkWidget* gui_create_shortcutbar_dialog(void)
 	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
 
 	gtk_signal_connect(GTK_OBJECT(dlgDock), "destroy",
-			G_CALLBACK(on_dlgDock_destroy), NULL);
+			GTK_SIGNAL_FUNC(on_dialog_destroy), NULL);
 
 	return dlgDock;
 }
