@@ -1,3 +1,10 @@
+2002-03-21 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* a single click with left button will lookup word under
+	  cursor in current Dict/Lex module and display it in
+	  shortcut bar viewer. Works in gbs, texts, and comm windows.
+
+
 2002-03-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* adding a new bookmark group now adds a menu item to

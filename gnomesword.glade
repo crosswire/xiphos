@@ -1492,6 +1492,11 @@ Revelation
 				      <handler>on_textCommentaries_drag_begin</handler>
 				      <last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
 				    </signal>
+				    <signal>
+				      <name>button_press_event</name>
+				      <handler>on_textCommentaries_button_press_event</handler>
+				      <last_modification_time>Thu, 21 Mar 2002 17:00:27 GMT</last_modification_time>
+				    </signal>
 				    <editable>False</editable>
 				    <text></text>
 				  </widget>
