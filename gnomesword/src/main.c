@@ -139,7 +139,8 @@ main (int argc, char *argv[])
 	gtk_widget_destroy (splash);
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */
-  	UpdateChecks(mainwindow);    	
+  	UpdateChecks(mainwindow);    
+	displayDevotional();
   	gtk_main ();  	
   	return 0;
 }

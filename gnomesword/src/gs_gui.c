@@ -117,6 +117,18 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
+static GnomeUIInfo view1_menu_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_ITEM, N_("Daily Devotion"),
+    N_("Show the Daily Devotion for Today"),
+    (gpointer) on_daily_devotion1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
 static GnomeUIInfo language_options1_menu_uiinfo[] =
 {
   GNOMEUIINFO_SEPARATOR,
@@ -216,6 +228,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	 history1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
+	GNOMEUIINFO_MENU_VIEW_TREE (view1_menu_uiinfo), 
 	GNOMEUIINFO_MENU_SETTINGS_TREE(settings1_menu_uiinfo),
 	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
 	GNOMEUIINFO_END
@@ -439,6 +452,16 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 history1_menu_uiinfo[1].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
+  gtk_widget_ref (menubar1_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "view1",
+                            menubar1_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (view1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "daily_devotion1",
+                            view1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+			    
 	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "settings1",
 				 menubar1_uiinfo[4].widget,

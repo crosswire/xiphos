@@ -292,6 +292,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}
+	
+	
 	/*if(savefontinfoSWORD("KJV", "GSFont", "helvetica"))
 		g_warning("we wrote something");*/
 	g_print("%s\n", "done\n");

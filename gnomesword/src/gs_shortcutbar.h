@@ -35,7 +35,7 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-
+	void setupforDailyDevotion(SETTINGS * s);
 	void showSBVerseList(SETTINGS * s);
 	void showSBGroup(SETTINGS * s, gint groupnum);
 	void changegroupnameSB(SETTINGS * s,

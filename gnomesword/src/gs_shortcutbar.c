@@ -126,6 +126,13 @@ void showSBVerseList(SETTINGS * s)
 	changegroupnameSB(s, s->groupName, groupnum7);
 }
 
+/*** set shortcut bar to verse list group ***/
+void setupforDailyDevotion(SETTINGS * s)
+{
+	showSBGroup(s, groupnum7);
+	changegroupnameSB(s, "Daily Devotion", groupnum7);
+}
+
 /*** set shortcut bar group ***/
 void showSBGroup(SETTINGS * s, gint groupnum)
 {
