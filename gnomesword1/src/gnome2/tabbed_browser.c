@@ -521,6 +521,15 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	//sets the dictionary mod and key
 	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);
 
+	if(pt->comm_showing)
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(
+					widgets.notebook_comm_book),
+					0);
+	else
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(
+					widgets.notebook_comm_book),
+					1);
+		
 	page_change = FALSE;
 }
 
@@ -656,7 +665,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->book_mod = g_strdup(settings.book_mod);
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
-	pt->book_offset = NULL;
+	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
@@ -729,7 +738,7 @@ void gui_open_module_in_new_tab(gchar *module)
 		
 	pt->text_commentary_key = g_strdup(settings.currentverse);
 	pt->dictlex_key = g_strdup(settings.dictkey);	
-	pt->book_offset = NULL;
+	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
