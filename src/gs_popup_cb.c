@@ -22,6 +22,7 @@
 #include <gnome.h>
 
 #include "gs_popup_cb.h"
+#include "gs_unlockkey_dlg.h"
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
@@ -42,6 +43,15 @@ extern gboolean isrunningVC;    /* is the view dictionary dialog runing */
 extern gboolean isrunningVT;    /* is the view text dialog runing */
 
 extern gchar current_verse[80];
+
+//----------------------------------------------------------------------------------------------
+void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *dlg;
+	
+	dlg = create_dlgUnlockKey();
+	gtk_widget_show(dlg);
+}
 
 //----------------------------------------------------------------------------------------------
 void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data)

@@ -115,7 +115,7 @@ INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =      e-splash.c     e-splash.h     gs_gui.c     gs_gui.h     gs_setup.c     gs_setup.h     gs_abouts.c     gs_abouts.h     gs_info_box.c     gs_info_box.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_bookmarks.c     gs_bookmarks.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_preferences_dlg.c     gs_preferences_dlg.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     sw_viewtext_dlg.cpp     sw_viewtext_dlg.h     gs_information_dlg.c     gs_information_dlg.h     gs_information_sw.cpp     gs_information_sw.h     gs_shortcutbar.c     gs_shortcutbar.h     sw_gnomesword.cpp     sw_gnomesword.h     sw_utility.cpp     sw_utility.h     sw_properties.cpp     sw_properties.h     sw_bookmarks.cpp     sw_bookmarks.h     sw_gbfhtml.cpp     sw_gbfhtml.h     thmlhtmllink.cpp     thmlhtmllink.h     sw_latin1utf8.cpp     sw_latin1utf8.h     sw_search.cpp     sw_search.h     sw_shortcutbar.cpp     sw_shortcutbar.h     sw_verselist_sb.cpp     sw_verselist_sb.h     sw_viewcomm_dlg.cpp     sw_viewcomm_dlg.h     sw_viewdict_dlg.cpp     sw_viewdict_dlg.h
+COMMON_SOURCE =      e-splash.c     e-splash.h     gs_gui.c     gs_gui.h     gs_setup.c     gs_setup.h     gs_abouts.c     gs_abouts.h     gs_info_box.c     gs_info_box.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_bookmarks.c     gs_bookmarks.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_preferences_dlg.c     gs_preferences_dlg.h     gs_unlockkey_dlg.c     gs_unlockkey_dlg.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     sw_viewtext_dlg.cpp     sw_viewtext_dlg.h     gs_information_dlg.c     gs_information_dlg.h     gs_information_sw.cpp     gs_information_sw.h     gs_shortcutbar.c     gs_shortcutbar.h     sw_gnomesword.cpp     sw_gnomesword.h     sw_utility.cpp     sw_utility.h     sw_properties.cpp     sw_properties.h     sw_bookmarks.cpp     sw_bookmarks.h     sw_gbfhtml.cpp     sw_gbfhtml.h     thmlhtmllink.cpp     thmlhtmllink.h     sw_latin1utf8.cpp     sw_latin1utf8.h     sw_search.cpp     sw_search.h     sw_shortcutbar.cpp     sw_shortcutbar.h     sw_verselist_sb.cpp     sw_verselist_sb.h     sw_viewcomm_dlg.cpp     sw_viewcomm_dlg.h     sw_viewdict_dlg.cpp     sw_viewdict_dlg.h
 
 
 SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell_gui.h     char_table.c     char_table.h 
@@ -167,9 +167,10 @@ LIBS = @LIBS@
 @SHORTCUTBAR_TRUE@gs_viewcomm_dlg.o gs_viewdict_dlg.o gs_studypad.o \
 @SHORTCUTBAR_TRUE@gs_bookmarks.o gs_gnomesword.o gs_history.o \
 @SHORTCUTBAR_TRUE@callback.o display.o gs_display.o gs_file.o \
-@SHORTCUTBAR_TRUE@gs_preferences_dlg.o gs_listeditor.o main.o gs_menu.o \
-@SHORTCUTBAR_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
-@SHORTCUTBAR_TRUE@gs_html.o gs_viewtext_dlg.o sw_viewtext_dlg.o \
+@SHORTCUTBAR_TRUE@gs_preferences_dlg.o gs_unlockkey_dlg.o \
+@SHORTCUTBAR_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
+@SHORTCUTBAR_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
+@SHORTCUTBAR_TRUE@gs_viewtext_dlg.o sw_viewtext_dlg.o \
 @SHORTCUTBAR_TRUE@gs_information_dlg.o gs_information_sw.o \
 @SHORTCUTBAR_TRUE@gs_shortcutbar.o sw_gnomesword.o sw_utility.o \
 @SHORTCUTBAR_TRUE@sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
@@ -182,8 +183,9 @@ LIBS = @LIBS@
 @SHORTCUTBAR_SPELL_TRUE@gs_viewcomm_dlg.o gs_viewdict_dlg.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_studypad.o gs_bookmarks.o gs_gnomesword.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_history.o callback.o display.o gs_display.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_file.o gs_preferences_dlg.o gs_listeditor.o \
-@SHORTCUTBAR_SPELL_TRUE@main.o gs_menu.o gs_popup_cb.o gs_search.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_file.o gs_preferences_dlg.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_unlockkey_dlg.o gs_listeditor.o main.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_menu.o gs_popup_cb.o gs_search.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_search_cb.o support.o gs_html.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_viewtext_dlg.o sw_viewtext_dlg.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_information_dlg.o gs_information_sw.o \
@@ -197,11 +199,12 @@ LIBS = @LIBS@
 @PRINTING_TRUE@gs_viewdict_dlg.o gs_studypad.o gs_bookmarks.o \
 @PRINTING_TRUE@gs_gnomesword.o gs_history.o callback.o display.o \
 @PRINTING_TRUE@gs_display.o gs_file.o gs_preferences_dlg.o \
-@PRINTING_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
-@PRINTING_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@PRINTING_TRUE@gs_viewtext_dlg.o sw_viewtext_dlg.o gs_information_dlg.o \
-@PRINTING_TRUE@gs_information_sw.o gs_shortcutbar.o sw_gnomesword.o \
-@PRINTING_TRUE@sw_utility.o sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
+@PRINTING_TRUE@gs_unlockkey_dlg.o gs_listeditor.o main.o gs_menu.o \
+@PRINTING_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
+@PRINTING_TRUE@gs_html.o gs_viewtext_dlg.o sw_viewtext_dlg.o \
+@PRINTING_TRUE@gs_information_dlg.o gs_information_sw.o \
+@PRINTING_TRUE@gs_shortcutbar.o sw_gnomesword.o sw_utility.o \
+@PRINTING_TRUE@sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
 @PRINTING_TRUE@thmlhtmllink.o sw_latin1utf8.o sw_search.o \
 @PRINTING_TRUE@sw_shortcutbar.o sw_verselist_sb.o sw_viewcomm_dlg.o \
 @PRINTING_TRUE@sw_viewdict_dlg.o
@@ -210,23 +213,25 @@ LIBS = @LIBS@
 @NO_OPS_TRUE@gs_viewdict_dlg.o gs_studypad.o gs_bookmarks.o \
 @NO_OPS_TRUE@gs_gnomesword.o gs_history.o callback.o display.o \
 @NO_OPS_TRUE@gs_display.o gs_file.o gs_preferences_dlg.o \
-@NO_OPS_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o gs_search.o \
-@NO_OPS_TRUE@gs_search_cb.o support.o gs_html.o gs_viewtext_dlg.o \
-@NO_OPS_TRUE@sw_viewtext_dlg.o gs_information_dlg.o gs_information_sw.o \
-@NO_OPS_TRUE@gs_shortcutbar.o sw_gnomesword.o sw_utility.o \
-@NO_OPS_TRUE@sw_properties.o sw_bookmarks.o sw_gbfhtml.o thmlhtmllink.o \
-@NO_OPS_TRUE@sw_latin1utf8.o sw_search.o sw_shortcutbar.o \
-@NO_OPS_TRUE@sw_verselist_sb.o sw_viewcomm_dlg.o sw_viewdict_dlg.o
+@NO_OPS_TRUE@gs_unlockkey_dlg.o gs_listeditor.o main.o gs_menu.o \
+@NO_OPS_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
+@NO_OPS_TRUE@gs_html.o gs_viewtext_dlg.o sw_viewtext_dlg.o \
+@NO_OPS_TRUE@gs_information_dlg.o gs_information_sw.o gs_shortcutbar.o \
+@NO_OPS_TRUE@sw_gnomesword.o sw_utility.o sw_properties.o \
+@NO_OPS_TRUE@sw_bookmarks.o sw_gbfhtml.o thmlhtmllink.o sw_latin1utf8.o \
+@NO_OPS_TRUE@sw_search.o sw_shortcutbar.o sw_verselist_sb.o \
+@NO_OPS_TRUE@sw_viewcomm_dlg.o sw_viewdict_dlg.o
 @SPELLING_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o char_table.o \
 @SPELLING_TRUE@e-splash.o gs_gui.o gs_setup.o gs_abouts.o gs_info_box.o \
 @SPELLING_TRUE@gs_viewcomm_dlg.o gs_viewdict_dlg.o gs_studypad.o \
 @SPELLING_TRUE@gs_bookmarks.o gs_gnomesword.o gs_history.o callback.o \
 @SPELLING_TRUE@display.o gs_display.o gs_file.o gs_preferences_dlg.o \
-@SPELLING_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
-@SPELLING_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@SPELLING_TRUE@gs_viewtext_dlg.o sw_viewtext_dlg.o gs_information_dlg.o \
-@SPELLING_TRUE@gs_information_sw.o gs_shortcutbar.o sw_gnomesword.o \
-@SPELLING_TRUE@sw_utility.o sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
+@SPELLING_TRUE@gs_unlockkey_dlg.o gs_listeditor.o main.o gs_menu.o \
+@SPELLING_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
+@SPELLING_TRUE@gs_html.o gs_viewtext_dlg.o sw_viewtext_dlg.o \
+@SPELLING_TRUE@gs_information_dlg.o gs_information_sw.o \
+@SPELLING_TRUE@gs_shortcutbar.o sw_gnomesword.o sw_utility.o \
+@SPELLING_TRUE@sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
 @SPELLING_TRUE@thmlhtmllink.o sw_latin1utf8.o sw_search.o \
 @SPELLING_TRUE@sw_shortcutbar.o sw_verselist_sb.o sw_viewcomm_dlg.o \
 @SPELLING_TRUE@sw_viewdict_dlg.o
@@ -236,8 +241,9 @@ LIBS = @LIBS@
 @SPELLING_PRINTING_TRUE@gs_viewcomm_dlg.o gs_viewdict_dlg.o \
 @SPELLING_PRINTING_TRUE@gs_studypad.o gs_bookmarks.o gs_gnomesword.o \
 @SPELLING_PRINTING_TRUE@gs_history.o callback.o display.o gs_display.o \
-@SPELLING_PRINTING_TRUE@gs_file.o gs_preferences_dlg.o gs_listeditor.o \
-@SPELLING_PRINTING_TRUE@main.o gs_menu.o gs_popup_cb.o gs_search.o \
+@SPELLING_PRINTING_TRUE@gs_file.o gs_preferences_dlg.o \
+@SPELLING_PRINTING_TRUE@gs_unlockkey_dlg.o gs_listeditor.o main.o \
+@SPELLING_PRINTING_TRUE@gs_menu.o gs_popup_cb.o gs_search.o \
 @SPELLING_PRINTING_TRUE@gs_search_cb.o support.o gs_html.o \
 @SPELLING_PRINTING_TRUE@gs_viewtext_dlg.o sw_viewtext_dlg.o \
 @SPELLING_PRINTING_TRUE@gs_information_dlg.o gs_information_sw.o \
@@ -277,13 +283,14 @@ DEP_FILES =  .deps/callback.P .deps/char_table.P .deps/display.P \
 .deps/gs_listeditor.P .deps/gs_menu.P .deps/gs_popup_cb.P \
 .deps/gs_preferences_dlg.P .deps/gs_search.P .deps/gs_search_cb.P \
 .deps/gs_setup.P .deps/gs_shortcutbar.P .deps/gs_studypad.P \
-.deps/gs_viewcomm_dlg.P .deps/gs_viewdict_dlg.P .deps/gs_viewtext_dlg.P \
-.deps/main.P .deps/printstuff.P .deps/spell.P .deps/spell_gui.P \
-.deps/support.P .deps/sw_bookmarks.P .deps/sw_gbfhtml.P \
-.deps/sw_gnomesword.P .deps/sw_latin1utf8.P .deps/sw_properties.P \
-.deps/sw_search.P .deps/sw_shortcutbar.P .deps/sw_utility.P \
-.deps/sw_verselist_sb.P .deps/sw_viewcomm_dlg.P .deps/sw_viewdict_dlg.P \
-.deps/sw_viewtext_dlg.P .deps/thmlhtmllink.P
+.deps/gs_unlockkey_dlg.P .deps/gs_viewcomm_dlg.P \
+.deps/gs_viewdict_dlg.P .deps/gs_viewtext_dlg.P .deps/main.P \
+.deps/printstuff.P .deps/spell.P .deps/spell_gui.P .deps/support.P \
+.deps/sw_bookmarks.P .deps/sw_gbfhtml.P .deps/sw_gnomesword.P \
+.deps/sw_latin1utf8.P .deps/sw_properties.P .deps/sw_search.P \
+.deps/sw_shortcutbar.P .deps/sw_utility.P .deps/sw_verselist_sb.P \
+.deps/sw_viewcomm_dlg.P .deps/sw_viewdict_dlg.P .deps/sw_viewtext_dlg.P \
+.deps/thmlhtmllink.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
