@@ -44,6 +44,7 @@
 #include "main/configs.h"
 #include "main/module.h"
 #include "main/sword.h"
+#include "main/xml.h"
 
 extern gboolean in_url;
 
@@ -437,15 +438,15 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
-	if(!work_buf[2] && !work_buf[3]) {
+	if(!work_buf[2] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
 		return 0;
 	}
 	if(!work_buf[3]) {
-		tmpkey = work_buf[2];		
+		tmpkey = work_buf[MODULE];		
 	} else
-		tmpkey = work_buf[3];
+		tmpkey = work_buf[KEY];
 	
 	verse_count = start_parse_verse_list(tmpkey, settings.currentverse);
 	if(!work_buf[3] && !verse_count){
@@ -453,14 +454,15 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		g_strfreev(work_buf);
 		return 0;
 	}
-	if(check_for_module(work_buf[2])) {
-		mod_type = get_mod_type(work_buf[2]);
+	if(check_for_module(work_buf[MODULE])) {
+		mod_type = get_mod_type(work_buf[MODULE]);
 		switch(mod_type) {
 			case TEXT_TYPE:			
 				key = get_valid_key(tmpkey);
 				xml_set_value("GnomeSword", "modules", "bible",
-				      work_buf[2]);
-				settings.MainWindowModule = work_buf[2];
+				      work_buf[MODULE]);
+				settings.MainWindowModule 
+					= xml_get_value("modules", "bible");
 				if(strcmp(key,settings.currentverse))
 					change_verse = TRUE;
 				gui_change_module_and_key(
@@ -471,13 +473,11 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 					gui_change_verse(settings.currentverse);
 				}
 				if(key) g_free((gchar*)key);
-				g_strfreev(work_buf);
-				return 1;	
 			break;
 			case COMMENTARY_TYPE:				
 				key = get_valid_key(tmpkey);
 				xml_set_value("GnomeSword", "modules", "comm",
-				      work_buf[2]);
+				      work_buf[MODULE]);
 				settings.CommWindowModule = work_buf[2];
 				if(strcmp(key,settings.currentverse))
 					change_verse = TRUE;
@@ -488,35 +488,29 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 					settings.currentverse = (gchar*)key;
 					gui_change_verse(settings.currentverse);
 				}
-				if(key) g_free((gchar*)key);
-				g_strfreev(work_buf);
-				return 1;				
+				if(key) g_free((gchar*)key);	
 			break;
 			case DICTIONARY_TYPE:
 				settings.dictkey = tmpkey;
 				xml_set_value("GnomeSword", "modules", "dict",
-				      work_buf[2]);
+				      work_buf[MODULE]);
 				settings.DictWindowModule = work_buf[2];
 				gui_change_module_and_key(
 					settings.DictWindowModule,
 					settings.dictkey);
 				gtk_notebook_set_current_page(
 					GTK_NOTEBOOK(widgets.workbook_lower),0);
-				g_strfreev(work_buf);
-				return 1;	
 			break;
 			case BOOK_TYPE:
 				settings.book_key = tmpkey;
 				xml_set_value("GnomeSword", "modules", "book",
-				      work_buf[2]);
+				      work_buf[MODULE]);
 				settings.BookWindowModule = work_buf[2];
 				gui_change_module_and_key(
 					settings.BookWindowModule,
 					settings.book_key);
 				gtk_notebook_set_current_page(
 					GTK_NOTEBOOK(widgets.workbook_lower),1); 
-				g_strfreev(work_buf);
-				return 1;	
 			break;
 		}
 	} else { /* module name not found or not given */
@@ -553,7 +547,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 
 gint gui_url_handler(const gchar * url, gboolean clicked)
 {		
-	g_warning(url);
+	//g_warning(url);
 	if(strstr(url,"sword://"))
 		return sword_uri(url,clicked);
 	if(strstr(url,"reference://"))

@@ -26,10 +26,9 @@
 
 #include "gui/mod_global_ops.h"
 	
-
+/*
 typedef struct _text_data_new TEXT_DATA_NEW;
 struct _text_data_new {
-	/* widgets for text panes */
 	GtkWidget *showtabs;
 	GtkWidget *menu;
 	
@@ -47,7 +46,7 @@ struct _text_data_new {
 	GLOBAL_OPS *ops;
 };
 extern TEXT_DATA_NEW *cur_t_new;
-
+*/
 void gui_setup_bibletext(void);
 void gui_update_text_global_ops(gchar * option, gboolean choice);
 void gui_display_text(const gchar * val_key);

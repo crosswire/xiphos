@@ -25,6 +25,15 @@
 #include <gnome.h>
 //#include "main/configs.h"
 
+enum {
+	TYPE_URI,
+	BLANK,
+	MODULE,
+	KEY,
+	TYPE_NOTE,
+	NOTE_NUM
+};
+
 gint gui_url_handler(const gchar * url, gboolean clicked);
 	
 

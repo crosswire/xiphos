@@ -43,6 +43,7 @@
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
 #include "gui/html.h"
+#include "gui/url.h"
 
 #include "main/sword.h"
 #include "main/gbs.h"
@@ -238,19 +239,7 @@ static void on_notebook_switch_page(GtkNotebook *notebook,
 
 static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf = NULL;
-	gchar *mod_name = NULL;
-	gchar *key = NULL;
-	
-	buf = g_strdup(url);
-	key = get_verse_from_url(buf);
-	if(buf) g_free(buf);
-	buf = g_strdup(url);
-	mod_name = get_module_from_url(buf);	
-	gui_change_module_and_key(mod_name, key);
-	g_free(buf);
-	g_free(mod_name);
-	g_free(key);
+	gui_url_handler(url, TRUE);
 }
 
 
@@ -1244,11 +1233,11 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	case 2:		
 		url = html_engine_get_link_at (GTK_HTML(data)->engine,
 					 event->x,
-					 event->y);		
-		buf = get_verse_from_url(url);
-		if(buf) {
-			gui_open_verse_in_new_tab(buf);
-			g_free(buf);	
+					 event->y);
+		if(strstr(url,"sword://")) {
+			gchar **work_buf = g_strsplit (url,"/",4);			
+			gui_open_verse_in_new_tab(work_buf[KEY]);
+			g_strfreev(work_buf);
 		}			
 		break;
 	case 3:
