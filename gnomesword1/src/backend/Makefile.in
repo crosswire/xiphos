@@ -173,10 +173,12 @@ libbackend_a_SOURCES = \
     interlinear.h \
     module_options.cpp \
     module_options.h \
+    percomm_.cpp \
+    percomm_.h \
     properties.cpp \
     properties.h \
-    search.cpp \
-    search.h \
+    search_.cpp \
+    search_.h \
     shortcutbar.cpp \
     shortcutbar.h \
     sword.cpp \
@@ -201,9 +203,10 @@ libbackend_a_LIBADD =
 am_libbackend_a_OBJECTS = bibletext_.$(OBJEXT) bookmarks.$(OBJEXT) \
 	commentary.$(OBJEXT) dictlex.$(OBJEXT) display.$(OBJEXT) \
 	display_info.$(OBJEXT) gbs.$(OBJEXT) interlinear.$(OBJEXT) \
-	module_options.$(OBJEXT) properties.$(OBJEXT) search.$(OBJEXT) \
-	shortcutbar.$(OBJEXT) sword.$(OBJEXT) verselist.$(OBJEXT) \
-	viewcomm.$(OBJEXT) viewdict.$(OBJEXT) viewtext.$(OBJEXT)
+	module_options.$(OBJEXT) percomm_.$(OBJEXT) \
+	properties.$(OBJEXT) search_.$(OBJEXT) shortcutbar.$(OBJEXT) \
+	sword.$(OBJEXT) verselist.$(OBJEXT) viewcomm.$(OBJEXT) \
+	viewdict.$(OBJEXT) viewtext.$(OBJEXT)
 libbackend_a_OBJECTS = $(am_libbackend_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -216,11 +219,11 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/commentary.Po $(DEPDIR)/dictlex.Po \
 @AMDEP_TRUE@	$(DEPDIR)/display.Po $(DEPDIR)/display_info.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gbs.Po $(DEPDIR)/interlinear.Po \
-@AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/properties.Po \
-@AMDEP_TRUE@	$(DEPDIR)/search.Po $(DEPDIR)/shortcutbar.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist.Po \
-@AMDEP_TRUE@	$(DEPDIR)/viewcomm.Po $(DEPDIR)/viewdict.Po \
-@AMDEP_TRUE@	$(DEPDIR)/viewtext.Po
+@AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/percomm_.Po \
+@AMDEP_TRUE@	$(DEPDIR)/properties.Po $(DEPDIR)/search_.Po \
+@AMDEP_TRUE@	$(DEPDIR)/shortcutbar.Po $(DEPDIR)/sword.Po \
+@AMDEP_TRUE@	$(DEPDIR)/verselist.Po $(DEPDIR)/viewcomm.Po \
+@AMDEP_TRUE@	$(DEPDIR)/viewdict.Po $(DEPDIR)/viewtext.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -286,8 +289,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gbs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/interlinear.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/module_options.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/percomm_.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/properties.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/search_.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/shortcutbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/verselist.Po@am__quote@

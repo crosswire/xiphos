@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bibletext_.h - support for Sword commentary modules
+ * _editor.h - the html editor
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,27 +19,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef ___EDITOR_H_
+#define ___EDITOR_H_
 
-#ifndef __BIBLETEXT__H_
-#define __BIBLETEXT__H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+#include <gnome.h>
 #include "gs_gnomesword.h"
+#include "gs_editor.h"
 
-void backend_nav_text_module(int modnum, int direction);
-void backend_new_text_display(GtkWidget * html, char *modname,
-					      SETTINGS * s);
-void backend_setup_text(SETTINGS * s);
-void backend_shutdown_text(void);
-void backend_display_text(int modnum, char *key);
-void backend_set_text_global_option(char *option, char *yesno);
-void backend_set_module_unlocked(char *mod_name, int mod_num,char *key);
-gboolean backend_check_for_global_option(int mod_num, char *option);
-	
-#ifdef __cplusplus
-}
-#endif
-#endif				/* __BIBLETEXT__H_ */
+GtkWidget *gui_create_html_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
+			 SETTINGS * s, GSHTMLEditorControlData * necd);
+
+#endif	/* ___EDITOR_H_ */

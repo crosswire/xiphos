@@ -1,3 +1,10 @@
+2002-05-02  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* split main/gs_editor into gnome/link_dialog, gnome/_editor, 
+	* gnome/editor_menu and main/gs_editor more work to be dome.
+	* added main/percomm and backend/percomm_
+
+
 2002-04-26  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed main/gs_unlockkey_dlg.* gnome/cipher_key_dialog.*

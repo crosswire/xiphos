@@ -627,11 +627,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 					 item3,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
-		gtk_widget_show(item3);		
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_mainText_activate),
-				   GINT_TO_POINTER(i));
+		gtk_widget_show(item3);	
 
 		gtk_container_add(GTK_CONTAINER(view_module3_menu), item3);
 		++i;

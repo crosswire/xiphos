@@ -76,6 +76,8 @@ COMMON_SOURCE =  \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     main.c \
+    percomm.c \
+    percomm.h \
     support.c \
     support.h 
 

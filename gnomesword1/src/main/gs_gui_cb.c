@@ -266,16 +266,6 @@ void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 	}
 }
 
-//----------------------------------------------------------------------------------------------
-void on_btnDeleteNote_clicked(GtkButton * button, gpointer user_data)
-{
-	if (GTK_TOGGLE_BUTTON
-	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->
-	    active) {
-		backend_delete_personal_comment();
-	}
-}
-
 
 //----------------------------------------------------------------------------------------------
 void

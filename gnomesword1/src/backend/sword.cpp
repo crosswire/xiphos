@@ -77,7 +77,8 @@
 #include "gs_commentary.h"
 #include "bibletext.h"
 #include "bibletext_.h"
-#include "search.h"
+#include "percomm_.h"
+#include "search_.h"
 #include "interlinear.h"
 #include "gs_interlinear.h"
 #include "bibletext.h"
@@ -210,7 +211,7 @@ void backend_init_sword(SETTINGS * s)
 	s->havebdb = false;
 
 	MainFrm = s->app;	//-- save mainform for use latter
-	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
+//	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 
 	//-- setup displays for sword modules
 	FPNDisplay = new GtkHTMLEntryDisp(htmlComments, s);
@@ -270,7 +271,8 @@ void backend_init_sword(SETTINGS * s)
 	backend_setupDL(s);
 	backend_setupGBS(s);
 	backend_setup_interlinear(s);
-
+	backend_setup_percomm(s);
+	/*
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
 	     it != percomMgr->Modules.end(); it++) {
@@ -281,13 +283,11 @@ void backend_init_sword(SETTINGS * s)
 			     find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
 				percomMod->Disp(FPNDisplay);
-				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
+				usepersonalcomments = TRUE;	
 				percomMod->SetKey(s->currentverse);
 			}
 		}
-	}
-
-
+	}*/
 }
 
 GList * backend_get_global_options_list(void)
@@ -303,33 +303,6 @@ GList * backend_get_global_options_list(void)
 	}
 	return tmp;
 }
-/******************************************************************************
- * Name
- *   backend_change_verse_percom
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void backend_change_verse_percom(gchar * key)
- *
- * Description
- *   change verse for percom mod
- *
- * Return value
- *   void
- */
-void backend_change_verse_percom(gchar * key)
-{	
-	if(percomMod) {
-		//-- set personal module to current verse
-		percomMod->SetKey(key);	
-		//-- show change
-		percomMod->Display();	
-		//-- we just loaded comment so it is not modified
-		noteModified = false;	                                       
-	}
-}
-
 /******************************************************************************
  * Name
  *   backend_module_name_from_description
@@ -379,7 +352,8 @@ void backend_shutdown(SETTINGS * s)
 	backend_shutdown_search_results_display();
 	backend_shutdown_sb_viewer();
 	backend_shutdown_interlinear();
-
+	backend_shutdown_percomm();
+	
 	//-- delete Sword managers
 	delete mainMgr;
 	delete percomMgr;
@@ -426,67 +400,6 @@ int backend_get_verse_from_key(char *key)
 }
 
 //-------------------------------------------------------------------------------------------
-void backend_save_personal_comment(gchar * buf)	//-- save personal comments
-{
-	if (buf)
-		*percomMod << (const char *) buf;	//-- save note!
-	noteModified = false;	//-- we just saved the note so it has not been modified 
-}
-
-
-//-------------------------------------------------------------------------------------------
-void backend_delete_personal_comment(void)	//-- delete personal comment
-{
-	GtkWidget *label1, *label2, *label3, *msgbox;
-	gint answer = -1;
-
-	msgbox = create_InfoBox();
-	label1 = lookup_widget(msgbox, "lbInfoBox1");
-	label2 = lookup_widget(msgbox, "lbInfoBox2");
-	label3 = lookup_widget(msgbox, "lbInfoBox3");
-	gtk_label_set_text(GTK_LABEL(label1), "Are you sure you want");
-	gtk_label_set_text(GTK_LABEL(label2), "to delete the note for");
-	gtk_label_set_text(GTK_LABEL(label3),
-			   (gchar *) percomMod->KeyText());
-
-	gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-	answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-	switch (answer) {
-	case 0:
-		percomMod->deleteEntry();	//-- delete note
-		percomMod->Display();	//-- show change
-		noteModified = false;	//-- we just deleted the note so it has not been modified 
-		break;
-	default:
-		break;
-	}
-}
-
-//-------------------------------------------------------------------------------------------
-void backend_change_percom_module(gchar * modName)	//-- change personal comments module
-{
-	GtkWidget *notebook,	//-- pointer to a notebook widget
-	*label;			//-- pointer to a label widget
-	ModMap::iterator it;	//-- module iterator
-
-	if (noteModified)
-		return;		//backend_save_personal_comment(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
-	it = percomMgr->Modules.find(modName);	//-- find commentary module (modName from page label)
-	if (it != percomMgr->Modules.end()) {	//-- if we don't run out of mods before we find the one we are looking for 
-		percomMod = (*it).second;	//-- set Mod to modName
-		strcpy(settings->personalcommentsmod,
-		       percomMod->Name());
-		if (havebible)
-			percomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
-		//-- let's change the notebook label to match our percomMod (current personal comments module)
-		notebook = lookup_widget(settings->app, "notebook3");	//-- get the notebook our page is in]
-		label = gtk_label_new(percomMod->Name());	//-- create new label with mod name as the text
-		gtk_widget_show(label);	//-- make is visible
-		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 1), label);	//-- put label on personal comments page
-		noteModified = false;
-	}
-}
-
 
 
 /******************************************************************************
@@ -562,7 +475,7 @@ const char *backend_get_sword_verion(void)
 void backend_display_new_font_color_and_size(SETTINGS * s)
 {
 	curMod->Display();
-	gui_displayCOMM(s->currentverse);
+	display_commentary(s->currentverse);
 	backend_displayinDL(s->DictWindowModule, s->dictkey);
 	update_interlinear_page(settings);
 }

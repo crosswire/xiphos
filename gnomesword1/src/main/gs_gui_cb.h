@@ -79,8 +79,6 @@ extern "C" {
 				    gpointer user_data);
 	void on_btnSaveNote_clicked(GtkButton * button,
 				    gpointer user_data);
-	void on_btnDeleteNote_clicked(GtkButton * button,
-				      gpointer user_data);
 	void on_btnSpell_clicked(GtkButton * button, gpointer user_data);
 	void on_btbSpellOK_clicked(GtkButton * button, gpointer user_data);
 	void on_btnSpellCancel_clicked(GtkButton * button,

@@ -35,7 +35,6 @@ extern "C" {
 	void backend_first_init(void);
 	void backend_init_sword(SETTINGS * s);
 	GList * backend_get_global_options_list(void);
-	void backend_change_verse_percom(char *key);
 	void backend_module_name_from_description(gchar * mod_name,
 						  gchar * mod_desc);
 	void backend_shutdown(SETTINGS * s);
@@ -44,8 +43,6 @@ extern "C" {
 	char *backend_get_book_from_key(char *key);
 	int backend_get_chapter_from_key(char *key);
 	int backend_get_verse_from_key(char *key);
-	void backend_save_personal_comment(gchar * buf);
-	void backend_delete_personal_comment(void);
 	void backend_change_percom_module(gchar * modName);
 	void backend_set_global_option(gint window, gchar * option,
 				       gchar * yesno);
