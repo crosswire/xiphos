@@ -63,19 +63,30 @@ char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 					{
 						case 'G':               // Greek
 						case 'H':               // Hebrew
-						case 'T':               // Tense	
-							strcpy(to," <a href=\"#");
+							strcpy(to," <small><em>&lt;<a href=\"#");
+							to += strlen(to);					
+							for (i = 1; i < strlen(token); i++)
+								*to++ = token[i];
+							strcpy(to,"\">");
+							to += strlen(to);
+							for (i = 2; i < strlen(token); i++)								
+								if(isdigit(token[i])) *to++ = token[i];
+							strcpy(to,"</a>&gt;</em></small> ");
+							to += strlen(to);
+							continue;
+						case 'T':               // Tense	-- morphological tags		
+							
+							strcpy(to," <small><em>(<a href=\"#");
 							to += strlen(to);					
 							for (i = 1;
 					     			i < strlen(token); i++)
 							*to++ = token[i];
-							strcpy(to," \"><small><em>");
+							strcpy(to," \">");
 							to += strlen(to);
 							for (i = 2;	i < strlen(token); i++)
 								if(isdigit(token[i])) *to++ = token[i];
-							strcpy(to,"</em></small></a> ");
-							to += strlen(to);
-							continue;						
+							strcpy(to,"</a>)</em></small> ");
+							to += strlen(to);	
 					}
 					break;
 				case 'R':
