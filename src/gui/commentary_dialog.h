@@ -26,7 +26,8 @@
 extern "C" {
 #endif
 
-#include "gui/editor.h"
+#include "gui/editor.h"	
+#include "gui/commentary.h"
 	
 typedef struct _viewcomm VIEW_COMM;
 struct _viewcomm {
@@ -37,20 +38,20 @@ struct _viewcomm {
 	GtkWidget *btn_next;
 	GtkWidget *btn_close;
 	GtkWidget *entry_key;
-	GtkWidget *html;
 	GtkWidget *btn_print;
-	gchar *mod_name;
-	gchar key[80];
 	gboolean has_key;
-	gboolean book_heading;
-	gboolean chapter_heading;
 	GSHTMLEditorControlData *ec;
+	COMM_DATA *c;
 };
 
+void gui_on_lookup_commentary_dialog_selection
+	(GtkMenuItem * menuitem, gchar * dict_mod_description);
+void gui_close_comm_dialog(void);
 void gui_open_commentary_dialog(gchar * mod_name);
 void gui_open_commentary_editor(gchar * mod_name);
 void gui_setup_commentary_dialog(GList *mods);
 void gui_shutdown_commentary_dialog(void);
+void gui_display_commentary_in_dialog(gchar * key);
 
 #ifdef __cplusplus
 }

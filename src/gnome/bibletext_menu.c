@@ -36,12 +36,14 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
+#include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/main_window.h"
 #include "gui/percomm.h"
 #include "gui/dictlex.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/utilities.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -69,6 +71,28 @@ static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	gui_copy_html(t->html);
 }
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *   void (GtkMenuItem * menuitem, TEXT_DATA * t)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+{
+	gui_close_text_dialog();
+}
+
 
 /******************************************************************************
  * Name
@@ -110,44 +134,8 @@ static void on_print_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 
 static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	//searchGS_FIND_DLG(c, FALSE, NULL);
+	gui_find_dlg(t->html, t->mod_name, FALSE, NULL);
 }
-
-/******************************************************************************
- * Name
- *  on_lookup_selection_activate
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *   void on_lookup_selection_activate(GtkMenuItem * menuitem,
- *				  gchar * modDescription)   	
- *
- * Description
- *   lookup seledtion in a dict/lex module
- *
- * Return value
- *   void
- */
-
-static void on_lookup_selection_activate(GtkMenuItem * menuitem,
-					 gchar * dict_mod_description)
-{
-	gchar *dict_key, mod_name[16];
-
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, dict_mod_description);
-
-	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
-	if (dict_key) {
-		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
-						      dict_key);
-		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
-		g_free(dict_key);
-	}
-}
-
 /******************************************************************************
  * Name
  *  on_same_lookup_selection_activate				       
@@ -201,11 +189,13 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gint page;
-
-	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_text),
-			      page);
+	
+	gchar module_name[16];
+	
+	memset(module_name, 0, 16);
+	module_name_from_description(module_name, (gchar *) user_data);
+	gui_change_module_and_key(module_name, 
+				settings.currentverse);
 }
 
 
@@ -235,6 +225,7 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 		gui_set_percomm_page((gchar *) user_data);		
 	}
 }
+
 
 /******************************************************************************
  * Name
@@ -306,7 +297,7 @@ void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t)
 	cipher_key = gui_add_cipher_key(t->mod_name, t->cipher_old);
 	if (cipher_key) {
 		t->cipher_key = cipher_key;
-		cur_t = t;
+		//cur_t = t;
 		gui_module_is_locked_display(t->html,
 					     t->mod_name,
 					     t->cipher_key);
@@ -940,6 +931,33 @@ static void add_global_option_items(TEXT_DATA * t)
 
 /******************************************************************************
  * Name
+ *  on_new_dialog_activate
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *  void on_new_dialog_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_new_dialog_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	gchar module_name[16];
+	
+	memset(module_name, 0, 16);
+	module_name_from_description(module_name, (gchar *) user_data);	
+	gui_open_bibletext_dialog(module_name);
+}
+
+/******************************************************************************
+ * Name
  *  gui_create_pm_text
  *
  * Synopsis
@@ -958,12 +976,15 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 {
 	GtkWidget *pm_text;
 	GtkAccelGroup *pm_text_accels;
-	GtkWidget *copy;
 	GtkWidget *separator;
+	GtkWidget *file;
+	GtkWidget *file_menu;
+	GtkWidget *print;
+	GtkWidget *close;
 	GtkWidget *show;
 	GtkWidget *show_menu;
 	GtkWidget *module_options;
-	GtkWidget *print;
+	GtkWidget *copy;
 	GtkWidget *edit;
 	GtkWidget *edit_menu;
 	GtkWidget *edit_note;
@@ -973,22 +994,17 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	GtkWidget *lookup_selection_menu;
 	GtkAccelGroup *lookup_selection_menu_accels;
 	GtkWidget *usecurrent;
-	GtkWidget *item3;
-	GtkWidget *item4;
-	GtkWidget *view_new;
+	GtkWidget *view_new = NULL;
 	GtkWidget *view_text;
-	GtkWidget *view_text_menu;
+	GtkWidget *view_text_menu = NULL;
 	GtkAccelGroup *view_text_menu_accels;
 	GtkWidget *set_font;
 	GtkWidget *find;
 	GtkWidget *add_module_key = NULL;
-	GList *tmp;
 	gchar buf[256];
-	gint i=0;
 	GtkTooltips *tooltips;
 
-	tmp = NULL;
-	sprintf(buf,"%s %s",t->mod_name, _("in a new window"));
+	sprintf(buf,"%s %s %s", _("Open"),t->mod_name, _("in a dialog"));
 	
 	tooltips = gtk_tooltips_new();
 
@@ -996,42 +1012,112 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
 	pm_text_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));
-	    
-	/*
-	 * show menu
-	 */
-	show =
-	    gtk_menu_item_new_with_label(_("Show"));
-	gtk_widget_show(show);
-	gtk_container_add(GTK_CONTAINER(pm_text), show);
-
-	show_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(show),
-				  show_menu);
-	if(!t->is_dialog) {
-		t->showtabs =
-		    gtk_check_menu_item_new_with_label(_("Tabs"));
-		gtk_widget_show(t->showtabs);
-		gtk_container_add(GTK_CONTAINER(show_menu), t->showtabs);
-		gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_text_showtabs_activate), NULL);
-	}
-
-
-	view_new = gtk_menu_item_new_with_label(buf);
-	gtk_widget_show(view_new);
-	gtk_container_add(GTK_CONTAINER(show_menu), view_new);
 	
-	view_text = gtk_menu_item_new_with_label(_("New Module"));
-	gtk_widget_show(view_text);
-	gtk_container_add(GTK_CONTAINER(show_menu), view_text);
+	/*
+	 * file menu
+	 */
+	file =
+	    gtk_menu_item_new_with_label(_("File"));
+	gtk_widget_show(file);
+	gtk_container_add(GTK_CONTAINER(pm_text), file);
 
-	view_text_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
-				  view_text_menu);
-	view_text_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
+	file_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file),
+				  file_menu);	
+	if (t->is_dialog) {
+		view_text = gtk_menu_item_new_with_label(_("Open New Dialog"));
+		gtk_widget_show(view_text);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
+	
+		view_text_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
+					  view_text_menu);
+		view_text_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
+		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
+				(GtkMenuCallback) on_new_dialog_activate);
+		
+	}
+	else {	
+		view_text = gtk_menu_item_new_with_label(_("Open Module"));
+		gtk_widget_show(view_text);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
+	
+		view_text_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
+					  view_text_menu);
+		view_text_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
+		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
+				(GtkMenuCallback) on_view_mod_activate);
+		
+		view_new = gtk_menu_item_new_with_label(buf);
+		gtk_widget_show(view_new);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_new);	
+	
+		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
+			   GTK_SIGNAL_FUNC(on_view_new_activate), 
+				t);
+
+	}
+	 
+	print = gtk_menu_item_new_with_label(_("Print"));
+	gtk_widget_show(print);
+	gtk_container_add(GTK_CONTAINER(file_menu), print);
+	
+	if (t->is_dialog) {	     
+		separator = gtk_menu_item_new();
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(file_menu), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+		
+		close = gtk_menu_item_new_with_label(_("Close"));
+		gtk_widget_show(close);
+		gtk_container_add(GTK_CONTAINER(file_menu), close);
+		gtk_signal_connect(GTK_OBJECT(close),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_close_activate), t);
+	}
+	
+	/*
+	 * edit menu
+	 */
+	edit =
+	    gtk_menu_item_new_with_label(_("Edit"));
+	gtk_widget_show(edit);
+	gtk_container_add(GTK_CONTAINER(pm_text), edit);
+
+	edit_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit),
+				  edit_menu);
+	
+	copy = gtk_menu_item_new_with_label(_("Copy"));
+	gtk_widget_show(copy);
+	gtk_container_add(GTK_CONTAINER(edit_menu), copy);
+
+	find = gtk_menu_item_new_with_label(_("Find"));
+	gtk_widget_show(find);
+	gtk_container_add(GTK_CONTAINER(edit_menu), find);
+	
+
+
+	if (settings.havepercomm && (!t->is_dialog)) {
+		edit_note =
+		    gtk_menu_item_new_with_label(_("Note"));
+		gtk_widget_show(edit_note);
+		gtk_container_add(GTK_CONTAINER(edit_menu), edit_note);
+
+		edit_note_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_note),
+					  edit_note_menu);
+		edit_note_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU
+						      (edit_note_menu));
+		gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_note_menu,
+				(GtkMenuCallback) edit_percomm);
+		
+	}
 
 	/*
 	 * module options menu
@@ -1058,45 +1144,6 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	add_global_option_items(t);
 	
 	/*
-	 * edit menu
-	 */
-	edit =
-	    gtk_menu_item_new_with_label(_("Edit"));
-	gtk_widget_show(edit);
-	gtk_container_add(GTK_CONTAINER(pm_text), edit);
-
-	edit_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit),
-				  edit_menu);
-	
-	copy = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_show(copy);
-	gtk_container_add(GTK_CONTAINER(edit_menu), copy);
-
-	find = gtk_menu_item_new_with_label(_("Find"));
-	gtk_widget_show(find);
-	gtk_container_add(GTK_CONTAINER(edit_menu), find);
-	
-	print = gtk_menu_item_new_with_label(_("Print"));
-	gtk_widget_show(print);
-	gtk_container_add(GTK_CONTAINER(edit_menu), print);	
-
-
-	if (settings.havepercomm && (!t->is_dialog)) {
-		edit_note =
-		    gtk_menu_item_new_with_label(_("Note"));
-		gtk_widget_show(edit_note);
-		gtk_container_add(GTK_CONTAINER(edit_menu), edit_note);
-
-		edit_note_menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_note),
-					  edit_note_menu);
-		edit_note_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (edit_note_menu));
-	}
-	
-	/*
 	 * lookup menu
 	 */
 	lookup_selection =
@@ -1121,7 +1168,14 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-
+	
+	if(t->is_dialog)
+		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
+				(GtkMenuCallback) gui_on_lookup_bibletext_dialog_selection);
+	else
+		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
+				(GtkMenuCallback) gui_lookup_bibletext_selection);
+	
 	/*
 	 * if module has cipher key include this item
 	 */
@@ -1143,63 +1197,29 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   GTK_SIGNAL_FUNC
 				   (gui_unlock_bibletext), t);
 	}
-
-	tmp = get_list(DICT_DESC_LIST);
-	while (tmp != NULL) {
-		item4 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_show(item4);
-		gtk_signal_connect(GTK_OBJECT(item4), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_lookup_selection_activate),
-				   (gchar *) tmp->data);
-		
-		gtk_container_add(GTK_CONTAINER
-				  (lookup_selection_menu), item4);
-		tmp = g_list_next(tmp);
+	
+	    
+	/*
+	 * show menu
+	 */
+	if(!t->is_dialog) {
+		show =
+		    gtk_menu_item_new_with_label(_("Show"));
+		gtk_widget_show(show);
+		gtk_container_add(GTK_CONTAINER(pm_text), show);
+	
+		show_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(show),
+					  show_menu);
+		t->showtabs =
+		    gtk_check_menu_item_new_with_label(_("Tabs"));
+		gtk_widget_show(t->showtabs);
+		gtk_container_add(GTK_CONTAINER(show_menu), t->showtabs);
+		gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
+			   GTK_SIGNAL_FUNC
+			   (on_text_showtabs_activate), NULL);
 	}
-	g_list_free(tmp);
-
-	tmp = NULL;
-	i = 0;
-	tmp = get_list(TEXT_DESC_LIST);
-	while (tmp != NULL) {
-		item3 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_show(item3);
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_view_mod_activate),
-				   GINT_TO_POINTER(i));
-		gtk_container_add(GTK_CONTAINER(view_text_menu), item3);
-		++i;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-
-	tmp = NULL;
-	if (settings.havepercomm && (!t->is_dialog)) {
-		i = 0;
-		tmp = get_list(PERCOMM_LIST);
-		while (tmp != NULL) {
-			item3 =
-			    gtk_menu_item_new_with_label((gchar *) tmp->
-							 data);
-			gtk_widget_show(item3);
-
-			gtk_signal_connect(GTK_OBJECT(item3),
-					   "activate",
-					   GTK_SIGNAL_FUNC
-					   (edit_percomm),
-					   (gchar *) tmp->data);
-
-			gtk_container_add(GTK_CONTAINER(edit_note_menu),
-					  item3);
-			++i;
-			tmp = g_list_next(tmp);
-		}
-		g_list_free(tmp);
-	}
+	
 	/*
 	 * for using the current dictionary for lookup 
 	 */
@@ -1213,10 +1233,6 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 			   GTK_SIGNAL_FUNC(on_print_activate), t);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
 			   GTK_SIGNAL_FUNC(on_find_activate), t);
-
-	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			   GTK_SIGNAL_FUNC(on_view_new_activate), t);
-
 
 	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
 			   GTK_SIGNAL_FUNC(set_module_font_activate),

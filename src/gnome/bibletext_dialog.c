@@ -34,6 +34,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 
@@ -41,6 +42,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+
 
 
 /******************************************************************************
@@ -56,6 +58,69 @@ static gboolean apply_change;
  */
 extern gboolean gsI_isrunning;	/* information dialog */
 
+
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void  gui_on_lookup_bibletext_dialog_selection
+		(GtkMenuItem * menuitem, gchar * dict_mod_description)	
+ *
+ * Description
+ *   lookup seledtion in a dict/lex module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_on_lookup_bibletext_dialog_selection
+		(GtkMenuItem * menuitem, gchar * dict_mod_description)
+{
+	gchar *dict_key, mod_name[16];
+
+	memset(mod_name, 0, 16);
+	module_name_from_description(mod_name, dict_mod_description);
+
+	dict_key = gui_get_word_or_selection(cur_vt->t->html, FALSE);
+	if (dict_key) {
+		if (settings.inViewer)
+			gui_display_dictlex_in_viewer(mod_name,
+						      dict_key);
+		if (settings.inDictpane)
+			gui_change_module_and_key(mod_name, dict_key);
+		g_free(dict_key);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   gui_close_text_dialog
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void btn_close_clicked(GtkButton * button,VIEW_TEXT * vt)	
+ *
+ * Description
+ *   call gtk_widget_destroy to destroy the bibletext dialog
+ *   set vt->dialog to NULL
+ *
+ * Return value
+ *   void
+ */
+
+void gui_close_text_dialog(void)
+{
+	if (cur_vt->dialog) {
+		dialog_freed = FALSE;
+		gtk_widget_destroy(cur_vt->dialog);
+	}
+}
 
 
 /******************************************************************************
@@ -266,8 +331,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 					break;
 				}
 			}
-		}
-
+		}			
 
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
@@ -475,30 +539,6 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 	return TRUE;
 }
 
-
-/******************************************************************************
- * Name
- *   cbe_module_changed
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void (cbe_module_changedGtkEditable * editable, 
- *						gpointer user_data)	
- *
- * Description
- *   change to new module
- *
- * Return value
- *   void
- */
-
-static void module_new_activate(GtkMenuItem * menuitem,
-				gpointer user_data)
-{
-	gui_open_bibletext_dialog((gchar *) user_data);
-}
-
 /******************************************************************************
  * Name
  *   btn_sync_clicked
@@ -575,80 +615,6 @@ static void dialog_destroy(GtkObject * object, VIEW_TEXT * vt)
 }
 
 
-/******************************************************************************
- * Name
- *   btn_close_clicked
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void btn_close_clicked(GtkButton * button,VIEW_TEXT * vt)	
- *
- * Description
- *   call gtk_widget_destroy to destroy the bibletext dialog
- *   set vt->dialog to NULL
- *
- * Return value
- *   void
- */
-
-static void btn_close_clicked(GtkButton * button, VIEW_TEXT * vt)
-{
-	if (vt->dialog) {
-		dialog_freed = FALSE;
-		gtk_widget_destroy(vt->dialog);
-	}
-}
-
-/******************************************************************************
- * Name
- *   add_items_to_module_menu
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void add_items_to_module_menu(GtkWidget * shellmenu)	
- *
- * Description
- *   add bibletext module names to menu
- *
- * Return value
- *   void
- */
-
-static void add_items_to_module_menu(GtkWidget * shellmenu)
-{
-	GtkWidget *menuChoice;
-	gchar menuName[64];
-	int view_number = 0;
-	GList *tmp;
-
-	tmp = NULL;
-
-	tmp = get_list(TEXT_LIST);
-	while (tmp != NULL) {
-
-		/* add module name items to menu */
-		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *)
-						       (gchar *) tmp->
-						       data);
-		sprintf(menuName, "ModuleNum%d", view_number);
-		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
-				    menuChoice);
-		gtk_widget_show(menuChoice);
-		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
-				   GTK_SIGNAL_FUNC(module_new_activate),
-				   (gchar *) tmp->data);
-		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
-				      GTK_WIDGET(menuChoice),
-				      view_number);
-		++view_number;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-}
-
 static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      GdkEventMotion * event,
 					      VIEW_TEXT * vt)
@@ -677,11 +643,12 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 		       VIEW_TEXT * vt)
 {
 	gchar buf[255], *buf1;
+	gchar *url_buf = NULL;
 	gint context_id2;
 
-
+	
 	cur_vt = vt;
-
+	if(url) url_buf = g_strdup(url);
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
 					 settings.program_title);
@@ -696,12 +663,12 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	/***  we are in an url  ***/
 	else {
 
-		if (*url == '#') {
-			++url;	/* remove # */
-			if (*url == 'T') {
-				++url;	/* remove T */
-				if (*url == 'G') {
-					++url;	/* remove G */
+		if (*url_buf == '#') {
+			++url_buf;	/* remove # */
+			if (*url_buf == 'T') {
+				++url_buf;	/* remove T */
+				if (*url_buf == 'G') {
+					++url_buf;	/* remove G */
 					if (settings.havethayer) {
 						buf1 = g_strdup(url);
 						show_in_statusbar(vt->
@@ -716,8 +683,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 						return;
 				}
 
-				if (*url == 'H') {
-					++url;	/* remove H */
+				if (*url_buf == 'H') {
+					++url_buf;	/* remove H */
 					if (settings.havebdb) {
 						buf1 = g_strdup(url);
 						show_in_statusbar(vt->
@@ -733,9 +700,9 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 				}
 			}
 
-			if (*url == 'G') {
-				++url;	/* remove G */
-				buf1 = g_strdup(url);
+			if (*url_buf == 'G') {
+				++url_buf;	/* remove G */
+				buf1 = g_strdup(url_buf);
 				if (atoi(buf1) > 5624) {
 					if (settings.havethayer) {
 						show_in_statusbar(vt->
@@ -759,8 +726,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 				}
 			}
 
-			if (*url == 'H') {
-				++url;	/* remove H */
+			if (*url_buf == 'H') {
+				++url_buf;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
 					if (settings.havebdb) {
@@ -790,8 +757,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 		else if (!strncmp(url, "type=morph", 10)) {
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
-			buf1 = g_strdup(url);
-			mybuf = strstr(url, "class=");
+			buf1 = g_strdup(url_buf);
+			mybuf = strstr(url_buf, "class=");
 			if (mybuf) {
 				gint i;
 				modbuf = strchr(mybuf, '=');
@@ -816,7 +783,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 			return;
 		}
 		/*** thml strongs ***/
-		else if (!strncmp(url, "type=Strongs", 12)) {
+		else if (!strncmp(url_buf, "type=Strongs", 12)) {
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			gchar newref[80];
@@ -851,6 +818,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
 				   context_id2, buf);
 	}
+	if(url_buf) 
+		g_free(url_buf);
 }
 
 
@@ -991,13 +960,6 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 {
 
 	GtkWidget *vbox33;
-	GtkWidget *toolbar;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *vseparator16;
-	GtkWidget *menubar;
-	GtkWidget *module_new;
-	GtkWidget *module_new_menu;
-	GtkAccelGroup *module_new_menu_accels;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
@@ -1020,103 +982,6 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_widget_show(vbox33);
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
 
-
-	toolbar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "toolbar",
-				 toolbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox33), toolbar, FALSE, FALSE, 0);
-	gtk_toolbar_set_space_size(GTK_TOOLBAR(toolbar), 3);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
-				      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vt->dialog,
-				      GNOME_STOCK_PIXMAP_REFRESH);
-	vt->btn_sync =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Sync"),
-				       _("Sync with main window"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(vt->btn_sync);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->btn_sync",
-				 vt->btn_sync,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->btn_sync);
-
-	vseparator16 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator16);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "vseparator16", vseparator16,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator16);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator16,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator16, 7, 13);
-
-	menubar = gtk_menu_bar_new();
-	gtk_widget_ref(menubar);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "menubar",
-				 menubar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(menubar);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), menubar, NULL,
-				  NULL);
-
-	module_new =
-	    gtk_menu_item_new_with_label(_("Open New Module "));
-	gtk_widget_ref(module_new);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "module_new", module_new,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(module_new);
-	gtk_container_add(GTK_CONTAINER(menubar), module_new);
-
-	module_new_menu = gtk_menu_new();
-	gtk_widget_ref(module_new_menu);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "module_new_menu",
-				 module_new_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_new),
-				  module_new_menu);
-	module_new_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (module_new_menu));
-
-	add_items_to_module_menu(module_new_menu);
-
-
-	vseparator16 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator16);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "vseparator16", vseparator16,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator16);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator16,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator16, 7, 13);
-
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vt->dialog,
-				      GNOME_STOCK_PIXMAP_EXIT);
-	vt->btn_close =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Close"), _("Close Dialog"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(vt->btn_close);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "vt->btn_close", vt->btn_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->btn_close);
 
 	toolbar_nav = create_nav_toolbar(vt);
 	gtk_widget_show(toolbar_nav);
@@ -1177,13 +1042,9 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vt);
 	gtk_signal_connect(GTK_OBJECT(vt->t->html), "on_url",
-			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);
+			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);			   
 	gtk_signal_connect(GTK_OBJECT(vt->t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(link_clicked), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->btn_sync), "clicked",
-			   GTK_SIGNAL_FUNC(btn_sync_clicked), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->btn_close), "clicked",
-			   GTK_SIGNAL_FUNC(btn_close_clicked), vt);
 }
 
 /******************************************************************************
@@ -1210,12 +1071,11 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	vt = g_new(VIEW_TEXT, 1);
 	vt->t = g_new(TEXT_DATA, 1);
 	vt->t->tgs = g_new(TEXT_GLOBALS, 1);
-	vt->t->find_dialog = NULL;
 	vt->t->mod_num = get_module_number(mod_name, TEXT_MODS);
 	vt->t->search_string = NULL;
 	vt->dialog = NULL;
 	vt->t->is_dialog = TRUE;
-	vt->t->mod_name = mod_name;
+	vt->t->mod_name = g_strdup(mod_name);
 	create_bibletext_dialog(vt);
 	if (has_cipher_tag(vt->t->mod_name)) {
 		vt->t->is_locked = module_is_locked(vt->t->mod_name);
@@ -1286,13 +1146,9 @@ void gui_shutdown_bibletext_dialog(void)
 		if (vt->dialog)
 			gtk_widget_destroy(vt->dialog);
 		/* 
-		 * free any search dialogs created 
-		 */
-		if (vt->t->find_dialog)
-			g_free(vt->t->find_dialog);
-		/* 
 		 * free each TEXT_DATA item created 
 		 */
+		g_free(vt->t->mod_name);
 		g_free(vt->t->tgs);
 		g_free(vt->t);
 		g_free((VIEW_TEXT *) dialog_list->data);

@@ -89,8 +89,7 @@ static MOD_FONT *get_font(gchar * mod_name)
  */
 
 static void set_global_options(TEXT_GLOBALS * tgs)
-{
-	
+{	
 	set_text_module_global_option("Strong's Numbers",tgs->strongs);
 	set_text_module_global_option("Morphological Tags",tgs->morphs);
 	set_text_module_global_option("Footnotes",tgs->footnotes);
@@ -100,8 +99,7 @@ static void set_global_options(TEXT_GLOBALS * tgs)
 	set_text_module_global_option("Hebrew Vowel Points",tgs->hebrewpoints);
 	set_text_module_global_option("Hebrew Cantillation",tgs->hebrewcant);
 	set_text_module_global_option("Headings",tgs->headings);
-	set_text_module_global_option("Red letter words",tgs->words_in_red);
-	
+	set_text_module_global_option("Red letter words",tgs->words_in_red);	
 	if (tgs->variants_primary)
 			set_text_global_option("Textual Variants",
 					       "Primary Reading");

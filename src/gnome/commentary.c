@@ -29,6 +29,7 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary.h"
+#include "gui/commentary_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
@@ -47,18 +48,19 @@
 #include "main/sword.h"
 
 
-static void on_notebook_comm_switch_page(GtkNotebook * notebook,
-				 GtkNotebookPage * page,
-				 gint page_num, GList * cl);
+COMM_DATA *cur_c;
 
 /******************************************************************************
  * global to this file only 
  */
 static GList *comm_list;
-static COMM_DATA *cur_c;
 static gboolean comm_display_change;
 
 
+static void on_notebook_comm_switch_page(GtkNotebook * notebook,
+				 GtkNotebookPage * page,
+				 gint page_num, GList * cl);
+				 
 /******************************************************************************
  * Name
  *  display
@@ -84,7 +86,6 @@ static void display(COMM_DATA *c, gchar * key)
 		return;
 	}
 	else if(c->cipher_key) {
-//		g_warning(c->cipher_key);
 		gui_module_is_locked_display(c->html, 
 				c->mod_name, c->cipher_key);
 		return;		
@@ -243,748 +244,9 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 			strcpy(c->key, settings.comm_key);
 		}
 	}
-	
-	if(settings.comm_tool)
-		gtk_widget_show(c->frame_toolbar);
-	else
-		gtk_widget_hide(c->frame_toolbar);
-	GTK_CHECK_MENU_ITEM(c->showtoolbar)->active = settings.comm_tool;
-	
-	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
 	widgets.html_comm = c->html;
 }
 
-/******************************************************************************
- * Name
- *  on_copy_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
- *
- * Description
- *   copy selection to clipboard
- *
- * Return value
- *   void
- */
-
-static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
-{
-	gui_copy_html(c->html);
-}
-
-/******************************************************************************
- * Name
- *  on_find_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
- *
- * Description
- *   open find dialog
- *
- * Return value
- *   void
- */
-
-static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
-{
-	gui_find_dlg(c->html, c->mod_name,  FALSE, NULL);//search_comm_find_dlg(c, FALSE, NULL);
-}
-
-/******************************************************************************
- * Name
- *   on_lookup_selection_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_lookup_selection_activate(GtkMenuItem * menuitem,
- *					gchar * dict_mod_description)
- *
- * Description
- *   lookup selection in new dict/lex
- *
- * Return value
- *   void
- */
-
-static void on_lookup_selection_activate(GtkMenuItem * menuitem,
-					gchar * dict_mod_description)
-{
-	gchar *dict_key, dict_mod[16];
-
-	memset(dict_mod, 0, 16);
-	module_name_from_description(dict_mod, dict_mod_description);
-	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
-	if (dict_key) {
-		gui_display_dictlex_in_viewer(dict_mod, dict_key);
-		g_free(dict_key);
-	}
-}
-
-/******************************************************************************
- * Name
- *   on_same_lookup_selection_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
- *							COMM_DATA * c)
- *
- * Description
- *   lookup selection in current dict/lex
- *
- * Return value
- *   void
- */
-
-static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-							COMM_DATA * c)
-{
-	gchar *key = gui_get_word_or_selection(c->html, FALSE);
-	if (key) {
-		gui_display_dictlex_in_viewer(settings.DictWindowModule, 
-						key);
-		g_free(key);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_view_mod_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_view_mod_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)
- *
- * Description
- *   select new mode by changing the notebook page
- *
- * Return value
- *   void
- */
-
-static void on_view_mod_activate(GtkMenuItem * menuitem, 
-						gpointer user_data)
-{
-	gint page;
-
-	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm),
-			      page);
-}
-
-/******************************************************************************
- * Name
- *   on_comm_showtabs_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_comm_showtabs_activate(GtkMenuItem * menuitem, COMM_DATA *c)
- *
- * Description
- *   display/hide commentary notebook tabs
- *
- * Return value
- *   void
- */
-
-static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
-						COMM_DATA *c)
-{
-	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
-				   settings.comm_tabs);
-	set_comm_frame_label(c);
-}
-
-/******************************************************************************
- * Name
- *   on_comm_showtoolbar_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_comm_showtoolbar_activate(GtkMenuItem *menuitem, COMM_DATA *)
- *
- * Description
- *   display/hide commentary toolbar
- *
- * Return value
- *   void
- */
-
-static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
-						COMM_DATA * c)
-{
-	settings.comm_tool = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if(settings.comm_tool)
-		gtk_widget_show(c->frame_toolbar);
-	else
-		gtk_widget_hide(c->frame_toolbar);
-}
-
-/******************************************************************************
- * Name
- *   on_view_new_activate
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
- * Description
- *   open new commentary dialog
- *
- * Return value
- *   void
- */
-
-static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
-{
-	gui_open_commentary_dialog(c->mod_name);
-}
-
-/******************************************************************************
- * Name
- *   gui_unlock_commentary 
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
- *
- * Description
- *   open cipher dialog to add cipher key to unlock module
- *
- * Return value
- *   void
- */
-
-void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
-{
-	gchar *cipher_key;
-	
-//	g_warning(c->cipher_old);
-	
-	cipher_key = gui_add_cipher_key(c->mod_name, c->cipher_old);
-	if(cipher_key){
-		c->cipher_key = cipher_key;
-		cur_c = c;
-		gui_module_is_locked_display(c->html, 
-				c->mod_name, c->cipher_key);		
-	}
-}
-	
-/******************************************************************************
- * Name
- *  set_module_font_activate
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void set_module_font_activate(GtkMenuItem * menuitem, 
-						COMM_DATA *c)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void set_module_font_activate(GtkMenuItem * menuitem, 
-						COMM_DATA *c)
-{
-	gui_set_module_font(c->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  edit_percomm
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void edit_percomm(GtkMenuItem * menuitem, COMM_DATA * c)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void edit_percomm(GtkMenuItem * menuitem, COMM_DATA * c)
-{
-	if(settings.use_percomm_dialog)
-			gui_open_commentary_editor(c->mod_name);
-	else {
-		gtk_notebook_set_page(GTK_NOTEBOOK(
-			widgets.workbook_lower),settings.percomm_page);
-		gui_set_percomm_page(c->mod_name);		
-	}
-}
-
-
-/******************************************************************************
- * Name
- *   gui_create_pm
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   GtkWidget *gui_create_pm(COMM_DATA * c)
- *
- * Description
- *   create popup menu for a commentary pane
- *
- * Return value
- *   GtkWidget*
- */
-
-static GtkWidget *create_pm(COMM_DATA * c)
-{
-	GtkWidget *pm;
-	GtkAccelGroup *pm_accels;
-	GtkWidget *edit;
-	GtkWidget *copy;
-	GtkWidget *separator;
-	GtkWidget *lookup_selection;
-	GtkWidget *lookup_selection_menu;
-	GtkAccelGroup *lookup_selection_menu_accels;
-	GtkWidget *usecurrent;
-	GtkWidget *item3;
-	GtkWidget *item4;
-	GtkWidget *view_new;
-	GtkWidget *view_commentary;
-	GtkWidget *view_commentary_menu;
-	GtkAccelGroup *view_commentary_menu_accels;
-	GtkWidget *find;
-	GList *tmp;
-	gint i;
-	GtkWidget *set_font; 
-	GtkTooltips *tooltips; 
-	
-	tooltips = gtk_tooltips_new();
-
-	tmp = NULL;
-
-	pm = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pm), "pm", pm);
-	pm_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm));
-
-	if(c->is_percomm) {
-		edit = gtk_menu_item_new_with_label(_("Edit"));
-		gtk_widget_ref(edit);
-		gtk_object_set_data_full(GTK_OBJECT(pm), "edit", edit,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(edit);
-		gtk_container_add(GTK_CONTAINER(pm), edit);
-		
-		gtk_signal_connect(GTK_OBJECT(edit), "activate",
-			GTK_SIGNAL_FUNC
-			(edit_percomm), c);
-	}
-
-	copy = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_ref(copy);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "copy", copy,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(copy);
-	gtk_container_add(GTK_CONTAINER(pm), copy);
-
-	find = gtk_menu_item_new_with_label(_("Find"));
-	gtk_widget_ref(find);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "find", find,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(find);
-	gtk_container_add(GTK_CONTAINER(pm), find);
-
-	c->showtabs =
-	    gtk_check_menu_item_new_with_label(_("Show Tabs"));
-	gtk_widget_ref(c->showtabs);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "c->showtabs",
-				 c->showtabs, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->showtabs);
-	gtk_container_add(GTK_CONTAINER(pm), c->showtabs);
-
-	c->showtoolbar =
-	    gtk_check_menu_item_new_with_label(_("Show Toolbar"));
-	gtk_widget_ref(c->showtoolbar);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "c->showtoolbar",
-				 c->showtoolbar, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->showtoolbar);
-	gtk_container_add(GTK_CONTAINER(pm), c->showtoolbar);
-
-	separator = gtk_menu_item_new();
-	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
-				 separator, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pm), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-
-	view_new = gtk_menu_item_new_with_label("View in new window");
-	gtk_widget_ref(view_new);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "view_new",
-				 view_new, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(view_new);
-	gtk_container_add(GTK_CONTAINER(pm), view_new);
-
-	separator = gtk_menu_item_new();
-	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
-				 separator, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pm), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-
-
-	lookup_selection =
-	    gtk_menu_item_new_with_label(_("Lookup Selection"));
-	gtk_widget_ref(lookup_selection);
-	gtk_object_set_data_full(GTK_OBJECT(pm),
-				 "lookup_selection", lookup_selection,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(lookup_selection);
-	gtk_container_add(GTK_CONTAINER(pm), lookup_selection);
-
-	lookup_selection_menu = gtk_menu_new();
-	gtk_widget_ref(lookup_selection_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pm),
-				 "lookup_selection_menu",
-				 lookup_selection_menu,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(lookup_selection),
-				  lookup_selection_menu);
-	lookup_selection_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (lookup_selection_menu));
-
-	usecurrent =
-	    gtk_menu_item_new_with_label("Use Current Dictionary");
-	gtk_widget_ref(usecurrent);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "usecurrent",
-				 usecurrent, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(usecurrent);
-	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
-			  usecurrent);
-
-
-	separator = gtk_menu_item_new();
-	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
-				 separator, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pm), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-
-
-	view_commentary =
-	    gtk_menu_item_new_with_label(_("View Commentary"));
-	gtk_widget_ref(view_commentary);
-	gtk_object_set_data_full(GTK_OBJECT(pm),
-				 "view_commentary", view_commentary,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(view_commentary);
-	gtk_container_add(GTK_CONTAINER(pm), view_commentary);
-
-	view_commentary_menu = gtk_menu_new();
-	gtk_widget_ref(view_commentary_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pm),
-				 "view_commentary_menu",
-				 view_commentary_menu,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_commentary),
-				  view_commentary_menu);
-	view_commentary_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (view_commentary_menu));
-					      
-	
-  	separator = gtk_menu_item_new ();
-  	gtk_widget_ref (separator);
-  	gtk_object_set_data_full (GTK_OBJECT (pm), "separator", separator,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (separator);
-  	gtk_container_add (GTK_CONTAINER (pm), separator);
-  	gtk_widget_set_sensitive (separator, FALSE);
-	
-	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
-	gtk_widget_ref(set_font);
-	gtk_object_set_data_full(GTK_OBJECT(pm), "set_font",
-				 set_font,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(set_font);
-	gtk_container_add(GTK_CONTAINER(pm), set_font);
-	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
-			     NULL);
-			     
-	/*
-	 * if module has cipher key include this item
-	 */
-	if(c->cipher_old || c->is_locked) {
-		GtkWidget *add_module_key;
-		separator = gtk_menu_item_new();
-		gtk_widget_ref(separator);
-		gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
-					 separator, (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(separator);	
-		gtk_container_add(GTK_CONTAINER(pm), separator);
-		gtk_widget_set_sensitive(separator, FALSE);
-			
-		add_module_key = gtk_menu_item_new_with_label (_("Unlock This Module"));
-		gtk_widget_ref (add_module_key);
-		gtk_object_set_data_full (GTK_OBJECT (pm), "add_module_key",add_module_key ,
-				    (GtkDestroyNotify) gtk_widget_unref);
-		gtk_widget_show (add_module_key);
-		gtk_container_add (GTK_CONTAINER (pm), add_module_key);
-			
-		gtk_signal_connect (GTK_OBJECT (add_module_key), "activate",
-                      	GTK_SIGNAL_FUNC (gui_unlock_commentary),
-                      	c);
-	}
-	tmp = get_list(DICT_DESC_LIST);
-	while (tmp != NULL) {
-		item4 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_ref(item4);
-		gtk_object_set_data_full(GTK_OBJECT(pm),
-					 "item4", item4,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(item4);
-		gtk_signal_connect(GTK_OBJECT(item4), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_lookup_selection_activate),
-				   (gchar *) tmp->data);
-		gtk_container_add(GTK_CONTAINER
-				  (lookup_selection_menu), item4);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-
-	i = 0;
-	tmp = get_list(COMM_DESC_LIST);
-	while (tmp != NULL) {
-		item3 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_ref(item3);
-		gtk_object_set_data_full(GTK_OBJECT(pm),
-					 "item3", item3,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(item3);
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_view_mod_activate),
-				   GINT_TO_POINTER(i));
-		gtk_container_add(GTK_CONTAINER
-				  (view_commentary_menu), item3);
-		++i;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	/*
-	 * for using the current dictionary for lookup 
-	 */
-	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
-			GTK_SIGNAL_FUNC
-			(on_same_lookup_selection_activate), c);
-
-	gtk_signal_connect(GTK_OBJECT(copy), "activate",
-			GTK_SIGNAL_FUNC(on_copy_activate), c);
-	gtk_signal_connect(GTK_OBJECT(find), "activate",
-			GTK_SIGNAL_FUNC(on_find_activate), c);
-	gtk_signal_connect(GTK_OBJECT(c->showtabs), "activate",
-			GTK_SIGNAL_FUNC(on_comm_showtabs_activate), 
-			c);
-	gtk_signal_connect(GTK_OBJECT(c->showtoolbar), "activate",
-			GTK_SIGNAL_FUNC(on_comm_showtoolbar_activate), 
-			c);
-	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			GTK_SIGNAL_FUNC(on_view_new_activate), 
-			c);
-			
-	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
-			   GTK_SIGNAL_FUNC(set_module_font_activate), 
-			c);
-	gtk_object_set_data(GTK_OBJECT(pm), "tooltips", tooltips);
-	return pm;
-}
-
-/******************************************************************************
- * Name
- *   on_btn_sync_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   bring commentary in sync with Bible text
- *
- * Return value
- *   void
- */
-
-static void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
-{
-	gui_set_commentary_page_and_key(c->modnum, settings.currentverse);
-}
-
-/******************************************************************************
- * Name
- *   on_btn_back_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   move backward through the commentary keys
- *
- * Return value
- *   void
- */
-
-static void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
-{
-	gchar *key;
-	
-	set_commentary_key(c->mod_name, c->key);	
-	key = navigate_commentary(c->mod_name, 0);
-	if(key) {
-		strcpy(settings.comm_key,key);
-		strcpy(cur_c->key, settings.comm_key);
-		display(c,key);
-		free(key);
-	}
-}
-
-/******************************************************************************
- * Name
- *   on_btn_forward_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   move foward through the commentary keys
- *
- * Return value
- *   void
- */
-
-static void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
-{
-	gchar *key;
-	
-	set_commentary_key(c->mod_name, c->key);	
-	key = navigate_commentary(c->mod_name, 1);
-	if(key) {
-		strcpy(settings.comm_key,key);
-		strcpy(cur_c->key, settings.comm_key);
-		display(c,key);
-		free(key);
-	}
-}
-
-/******************************************************************************
- * Name
- *   on_btn_print_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   send comment to the printer
- *
- * Return value
- *   void
- */
-
-static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
-{
-	gui_html_print(c->html);
-}
-
-/******************************************************************************
- * Name
- *   on_btn_book_heading_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_book_heading_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_btn_book_heading_clicked(GtkButton *button, COMM_DATA *c)
-{
-	c->book_heading = TRUE;
-	display(c,settings.currentverse);
-}
-
-/******************************************************************************
- * Name
- *   on_btn_chap_heading_clicked
- *
- * Synopsis
- *   #include "_commentary.h"
- *
- *   void on_btn_chap_heading_clicked(GtkButton * button, COMM_DATA * c)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_btn_chap_heading_clicked(GtkButton *button, COMM_DATA *c)
-{
-	c->chapter_heading = TRUE;
-	display(c,settings.currentverse);
-}
 
 /******************************************************************************
  * Name
@@ -1071,9 +333,6 @@ static gboolean on_button_release_event(GtkWidget * widget,
 static void create_commentary_pane(COMM_DATA *c)
 {
 	GtkWidget *vbox57;
-	GtkWidget *toolbar;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *vseparator19;
 	GtkWidget *frame_comm;
 	GtkWidget *scrolledwindowCOMMhtml;
 
@@ -1093,147 +352,16 @@ static void create_commentary_pane(COMM_DATA *c)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox57);
 	gtk_container_add(GTK_CONTAINER(c->frame), vbox57);
-
+/*
 	c->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(c->frame_toolbar);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 				"c->frame_toolbar", c->frame_toolbar,
 				(GtkDestroyNotify) gtk_widget_unref);
 	gtk_frame_set_shadow_type (GTK_FRAME (c->frame_toolbar), GTK_SHADOW_NONE);
-	//gtk_widget_show(c->frame_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox57), 
 				c->frame_toolbar, FALSE, TRUE, 0);
-	
-	toolbar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar",
-				 toolbar, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(toolbar);
-	gtk_container_add(GTK_CONTAINER(c->frame_toolbar), toolbar);	
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
-				      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_REFRESH);
-	c->btnCOMMSync =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Sync"),
-				       _("Sync with Bible Text"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(c->btnCOMMSync);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btnCOMMSync", c->btnCOMMSync,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btnCOMMSync);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_BACK);
-	c->btnCOMMBack =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Back"),
-				       _("Go to previous comment"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(c->btnCOMMBack);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btnCOMMBack", c->btnCOMMBack,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btnCOMMBack);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_FORWARD);
-	c->btnCOMMForward =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Forward"),
-				       _("Go to next comment"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(c->btnCOMMForward);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btnCOMMForward",
-				 c->btnCOMMForward, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btnCOMMForward);
-
-	vseparator19 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vseparator19", vseparator19,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vseparator19);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar),
-				  vseparator19, NULL, NULL);
-	gtk_widget_set_usize(vseparator19, 5, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PRINT);
-	c->btnCOMMPrint =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Print"),
-				       _("Print Comment"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(c->btnCOMMPrint);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btnCOMMPrint", c->btnCOMMPrint,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btnCOMMPrint);
-
-	vseparator19 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vseparator19", vseparator19,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vseparator19);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar),
-				  vseparator19, NULL, NULL);
-	gtk_widget_set_usize(vseparator19, 5, 7);
-	
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_TOP);
-	c->btn_book_heading =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Book"),
-				       _("Display Book Heading"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(c->btn_book_heading);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btn_book_heading", c->btn_book_heading,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btn_book_heading);
-	
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_UP);
-	c->btn_chap_heading =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Chapter"),
-				       _("Display Chapter Heading"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(c->btn_chap_heading);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->btn_chap_heading", c->btn_chap_heading,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(c->btn_chap_heading);
-	
-
+*/
 	frame_comm = gtk_frame_new(NULL);
 	gtk_widget_ref(frame_comm);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -1254,10 +382,7 @@ static void create_commentary_pane(COMM_DATA *c)
 				 gtk_widget_unref);
 	gtk_widget_show(scrolledwindowCOMMhtml);	
 	gtk_container_add(GTK_CONTAINER(frame_comm), scrolledwindowCOMMhtml);
-	/*
-	gtk_box_pack_start(GTK_BOX(vbox57), scrolledwindowCOMMhtml,
-			   TRUE, TRUE, 0);
-			   */
+	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowCOMMhtml),
 				       GTK_POLICY_AUTOMATIC,
@@ -1282,24 +407,6 @@ static void create_commentary_pane(COMM_DATA *c)
 			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event), 
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btnCOMMSync), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_sync_clicked),
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btnCOMMBack), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_back_clicked),
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btnCOMMForward),"clicked",
-			   GTK_SIGNAL_FUNC(on_btn_forward_clicked),
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btnCOMMPrint), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_print_clicked), 
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btn_chap_heading), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_chap_heading_clicked),
-			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btn_book_heading), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_book_heading_clicked),
 			   (COMM_DATA *) c);
 }
 
@@ -1353,6 +460,30 @@ void gui_display_commentary(gchar * key)
 	display(cur_c, key);
 } 
 
+
+/******************************************************************************
+ * Name
+ *   gui_display_commentary_with_struct
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void gui_display_commentary_with_struct(gchar * key)	
+ *
+ * Description
+ *    display new key in current commentary
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_display_commentary_with_struct(COMM_DATA *c, gchar * key)
+{
+	strcpy(settings.comm_key,key);
+	strcpy(cur_c->key, key);
+        display(c, key);
+} 
+
 /******************************************************************************
  * Name
  *  gui_add_new_comm_pane
@@ -1373,10 +504,11 @@ void gui_add_new_comm_pane(COMM_DATA *c)
 {	
 	GtkWidget *popupmenu;
 	
+	popupmenu =   gui_create_pm_comm(c);//create_pm(c);
 	create_commentary_pane(c);
 	if(c->is_locked)
 		gui_module_is_locked_display(c->html, c->mod_name, c->cipher_key);
-	popupmenu = create_pm(c);
+	//popupmenu = create_pm(c); // gui_create_pm_comm(c);
 	gnome_popup_menu_attach(popupmenu, c->html, NULL);
 }
 
@@ -1458,11 +590,13 @@ void gui_setup_commentary(GList *mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		c = g_new(COMM_DATA, 1);
+		c->cgs = g_new(COMM_GLOBALS, 1);
 		c->frame = NULL;
 		c->mod_name = modname;
 		c->modnum = count;
 		c->search_string = NULL;
 		c->is_percomm = is_personal_comment(c->mod_name);
+		c->is_dialog = FALSE;
 		c->key[0] = '\0';
 		c->book_heading = FALSE;
 		c->chapter_heading = FALSE;
@@ -1529,7 +663,10 @@ void gui_shutdown_commentary(void)
 			g_free(c->cipher_key);
 		if(c->cipher_old)
 			g_free(c->cipher_old);
-		
+		/* 
+		 * free global options 
+		 */
+		g_free(c->cgs);
 		g_free((COMM_DATA *) comm_list->data);
 		comm_list = g_list_next(comm_list);
 	}
