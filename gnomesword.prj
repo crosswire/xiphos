@@ -90,7 +90,7 @@ module.include.files=\
 	src/gui/dictlex_dialog.h\
 	src/gui/_display_info.h\
 	src/gui/_editor.h\
-	src/gui/_gbs.h\
+	src/gui/gbs.h\
 	src/gui/_percomm.h\
 	src/gui/gbs_find.h\
 	src/gui/cipher_key_dialog.h\
@@ -171,7 +171,7 @@ module.source.files=\
 	src/gnome/dictlex_dialog.c\
 	src/gnome/_display_info.c\
 	src/gnome/_editor.c\
-	src/gnome/_gbs.c\
+	src/gnome/gbs.c\
 	src/gnome/_percomm.c\
 	src/gnome/gbs_find.c\
 	src/gnome/cipher_key_dialog.c\

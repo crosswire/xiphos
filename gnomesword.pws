@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=31
-1=103
-2=648
-3=4
-4=48
-5=47
+0=4
+1=40
+2=131
+3=226
+4=138
+5=3
 6=1
 7=30
 8=1
@@ -38,7 +38,12 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+0=/home/terry/Projects/gnomesword1/ChangeLog
+1=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+2=/home/terry/Projects/gnomesword1/src/main/gbs.c
+3=/home/terry/Projects/gnomesword1/src/backend/gbs_.cpp
+4=/home/terry/Projects/gnomesword1/src/gnome/gbs.c
+5=/home/terry/Projects/gnomesword1/src/gui/gbs.h
 
 [replace_text]
 0=settings.
@@ -64,11 +69,11 @@ ShowLocals=true
 0=newconfigs
 
 [find_in_files]
-0=gs_shortcutbar.h
-1=create_shortcutbar_viewer.h
-2=preferences_dlg
-3=gs_info_box.h
-4=create_InfoBox
-5=create_InfoBoxf
-6=find_dlg_defs.h
-7=create_dlgInformation
+0=gui/_gbs.h
+1=gs_shortcutbar.h
+2=create_shortcutbar_viewer.h
+3=preferences_dlg
+4=gs_info_box.h
+5=create_InfoBox
+6=create_InfoBoxf
+7=find_dlg_defs.h
