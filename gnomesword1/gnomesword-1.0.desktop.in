@@ -3,7 +3,7 @@
 Name=Gnomesword Bible Study
 Comment=The GNOME bibly study application
 Exec=gnomesword-1.0
-Icon=/usr/share/pixmaps/gnomesword1/GnomeSword.png
+Icon=@pixmapdir@/GnomeSword.png
 Terminal=false
 MultipleArgs=false
 Type=Application
