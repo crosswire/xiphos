@@ -1,3 +1,8 @@
+2000-12-15 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*changed filestuff.cpp to gs_file.c
+	*changed filestuff.h to gs_file.c
+
 2000-12-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*changed listeditor.cpp to gs_listeditor.c

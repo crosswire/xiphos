@@ -1,5 +1,5 @@
 /***************************************************************************
-                          filestuff.h  -  description
+                          gs_file.h  -  description
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -28,35 +28,20 @@ extern "C" {
 #include "gs_sword.h"
 
 void saveFile(gchar * filename);
-
 void loadFile(GtkWidget * filesel);
-
 void setDiretory(void);
-
 void loadbookmarkarray(void);
-
 void loadbookmarks_programstart(void);
-
 void loadbookmarks_afterSeparator(void);
-
 void loadoptionarray(void);
-
 void savebookmark(gchar * item);
-
 void savebookmarks(void);
-
 void saveoptions(void);
-
 void createFiles(void);
-
 void writesettings(SETTINGS settings);
-
 SETTINGS readsettings(void);
-
 SETTINGS createsettings(void);
-
 void loadStudyPadFile(gchar * filename);
-
 void savelist(gchar * filename, GtkWidget * list);
 
 #ifdef __cplusplus

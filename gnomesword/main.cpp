@@ -30,7 +30,7 @@
 #include "support.h"
 #include "callback.h"
 #include "interface.h"
-#include "filestuff.h"
+#include "gs_file.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	
