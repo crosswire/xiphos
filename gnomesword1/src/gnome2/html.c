@@ -518,7 +518,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		deal_with_notes(url, TRUE);
 		return;
 	} else if (!strncmp(url, "version=", 7)||!strncmp(url, "passage=", 7)) {
-		deal_with_refs(url);/* thml verse reference */
+		deal_with_refs(url);/* thml verse reference *//* for old notes */
 		return;
 	} else if (!strncmp(url, "type=morph", 10)) {/* thml and osis morph tag */
 		deal_with_morphs(url, TRUE);

@@ -57,6 +57,7 @@ WIDGETS widgets;
 extern HISTORY history_list[];	/* sturcture for storing history items */
 extern gint history_items;
 
+GtkTextBuffer *text_buffer;
 
 /******************************************************************************
  * Name
@@ -669,6 +670,210 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 }
 
 
+static gboolean textview_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	extern gboolean in_url;
+	gchar *key;
+
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to current text module name 
+	 */
+	gui_change_window_title(settings.MainWindowModule);
+
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+
+
+static gboolean textview_button_press_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	gchar *key;
+
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:	
+		gui_popup_pm_text(settings.MainWindowModule, event);
+		break;
+	}
+	return FALSE;
+}
+
+
+static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
+	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
+{
+	gint char_index;
+	
+	char_index = gtk_text_iter_get_offset (iter);
+	//printf ("offset = %d", char_index);
+  switch (event->type)
+    {
+    case GDK_MOTION_NOTIFY:
+      printf ("Motion event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_PRESS:
+      printf ("Button press at char %d tag `%s'\n",
+             char_index, tag->name);
+	    switch(event->button.button){
+		    case 1:
+			//return do_something_with_tag(tag, iter, user_data);
+		        break;
+		    case 2:
+		    case 3:
+		        break;
+	    
+	}
+	
+    	return TRUE;	
+      break;
+        
+    case GDK_2BUTTON_PRESS:
+      printf ("Double click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_3BUTTON_PRESS:
+      printf ("Triple click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_RELEASE:
+      printf ("Button release at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_KEY_PRESS:
+    case GDK_KEY_RELEASE:
+      printf ("Key event at char %d tag `%s'\n",
+              char_index, tag->name);
+    	return TRUE;
+      break;
+      
+    case GDK_ENTER_NOTIFY:
+      printf ("enter event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_LEAVE_NOTIFY:
+      printf ("leave event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_PROPERTY_NOTIFY:
+    case GDK_SELECTION_CLEAR:
+    case GDK_SELECTION_REQUEST:
+    case GDK_SELECTION_NOTIFY:
+    case GDK_PROXIMITY_IN:
+    case GDK_PROXIMITY_OUT:
+    case GDK_DRAG_ENTER:
+    case GDK_DRAG_LEAVE:
+    case GDK_DRAG_MOTION:
+    case GDK_DRAG_STATUS:
+    case GDK_DROP_START:
+    case GDK_DROP_FINISHED:
+    	return FALSE;
+    default:
+    	return FALSE;
+      break;
+    }    
+    return FALSE;
+}
+
+static void setup_tag (GtkTextTag *tag, gpointer user_data)
+{
+	g_signal_connect (G_OBJECT (tag),
+		    "event",
+		    G_CALLBACK (tag_event_handler),
+		    user_data);
+}
+
+static void create_text_tags(GtkTextBuffer * buffer)
+{
+	GtkTextTag *tag;
+	GdkColor color;
+	GdkColor color2;
+	GdkColor color_red;
+	GdkColor colorLink;
+	PangoFontDescription *font_desc;
+	
+		
+		
+	/* verse number tag verse style*/
+	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
+	setup_tag (tag, buffer);  
+	color.red = color.green = 0;
+	color.blue = 0xffff;
+		"scale", PANGO_SCALE_XX_SMALL,
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);	
+			
+	/* verse number tag verse style*/
+	/*tag = gtk_text_buffer_create_tag (buffer, "verse", NULL);
+	setup_tag (tag, buffer); 
+	g_object_set (G_OBJECT (tag),	
+                NULL);	*/
+		
+	/* current verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
+	color.blue = 0;
+	color.green = 0xbbbb;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/*  verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
+	color.blue = 0;
+	color.green = 0;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/* right to left tag */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", rtl_font,
+                "wrap_mode", GTK_WRAP_WORD,
+                "direction", GTK_TEXT_DIR_RTL,
+                "indent", 0,
+                "left_margin", 0,
+                "right_margin", 0,
+                NULL);	
+		
+	/* large tag */
+	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
+        g_object_set (G_OBJECT (tag),
+		"scale", (double)1.928, //PANGO_SCALE_XX_LARGE,
+                NULL);			
+}
+	
+
 /******************************************************************************
  * Name
  *   create_mainwindow
@@ -856,7 +1061,38 @@ void create_mainwindow(void)
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
-
+			  
+			  
+	
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
+			  scrolledwindow);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	widgets.textview = gtk_text_view_new ();
+	gtk_widget_show(widgets.textview);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.textview);
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (widgets.textview), FALSE);
+	text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (widgets.textview));
+	
+	create_text_tags(text_buffer);
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview), GTK_WRAP_WORD);	
+			  
+	
+	g_signal_connect(GTK_OBJECT(widgets.textview),
+				   "button_release_event",
+				   G_CALLBACK
+				   (textview_button_release_event),
+				  NULL);
+	g_signal_connect(GTK_OBJECT(widgets.textview),
+				   "button_press_event",
+				   G_CALLBACK
+				   (textview_button_press_event),
+				  NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);

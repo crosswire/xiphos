@@ -193,7 +193,7 @@ static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
 		chapter_display(vt->html,
 			vt->mod_name, vt->ops, key, show_key);
 	else
-		chapter_display_textview(vt->text,
+		chapter_display(vt->text,
 					vt->mod_name,
 					vt->ops, key, show_key);
 

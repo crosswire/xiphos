@@ -399,8 +399,8 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 		g_free(buf2);
 
 
-//	if (settings.havebible)
-//		gui_display_text(settings.currentverse);
+//      if (settings.havebible)
+//              gui_display_text(settings.currentverse);
 	if (settings.havecomm)
 		gui_display_commentary(settings.currentverse);
 	if (settings.havedict)
@@ -978,26 +978,27 @@ static GtkTreeModel *create_model(void)
 	gtk_tree_store_set(model, &iter, 0, "General", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Tabs", 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Tabs and Panes", 1,
+			   2, -1);
+
+/*	gtk_tree_store_append(model, &child_iter, &iter);
+	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 3, -1);*/
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 2, -1);
-
-	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 3, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, "Modules", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Main", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Main", 1, 4, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Parallel", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Parallel", 1, 5, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Lecicons", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 6, -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -1161,7 +1162,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			    dialog_prefs);
 	gtk_window_set_title(GTK_WINDOW(dialog_prefs),
 			     _("Preferences"));
-	gtk_window_set_default_size(GTK_WINDOW(dialog_prefs), 560, 340);
+	gtk_window_set_default_size(GTK_WINDOW(dialog_prefs), 600, 345);
 	gtk_window_set_policy(GTK_WINDOW(dialog_prefs), TRUE, TRUE,
 			      FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_prefs), FALSE);
@@ -1187,7 +1188,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				       (scrolledwindow_treeview),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-				       
+
 	model = create_model();
 	treeview = gtk_tree_view_new_with_model(model);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview),
@@ -1196,9 +1197,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_treeview),
 			  treeview);
 	gtk_widget_set_size_request(treeview, 130, -1);
-	add_columns(treeview);	
+	add_columns(treeview);
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(treeview));
-	
+
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection
 		     (GTK_TREE_VIEW(treeview)));
@@ -1270,7 +1271,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(notebook7), vbox);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
 
-	image = gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/logo.png");
+	image =
+	    gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR "/logo.png");
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(vbox), image, TRUE, TRUE, 0);
 
@@ -1517,16 +1519,17 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   (GTK_NOTEBOOK(notebook7), 0),
 				   label98);
 /* end font color page */
-	
-	
-	
-	
 
 
 
 
-/* start misc / general page */
-	scrolledwindow55 = gtk_scrolled_window_new(NULL, NULL);
+
+
+
+
+/* start tabs and panes page */
+
+/*	scrolledwindow55 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow55);
 	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow55);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -1539,11 +1542,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(scrolledwindow55), viewport8);
 	gtk_viewport_set_shadow_type(GTK_VIEWPORT(viewport8),
 				     GTK_SHADOW_NONE);
-	gtk_container_set_border_width(GTK_CONTAINER(viewport8), 12);
+	gtk_container_set_border_width(GTK_CONTAINER(viewport8), 6);*/
 
 	vbox41 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox41);
-	gtk_container_add(GTK_CONTAINER(viewport8), vbox41);
+	gtk_container_add(GTK_CONTAINER(notebook7), vbox41);
 
 	hbox64 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox64);
@@ -1614,7 +1617,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_label_widget(GTK_FRAME(frame42), label802);
 
 	gtk_widget_show(frame42);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame42, TRUE, FALSE, 6);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame42, TRUE, FALSE, 0);
 
 	vbox54 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox54);
@@ -1656,6 +1659,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox54), check_button.show_book_tabs,
 			   FALSE, FALSE, 0);
 
+
 	//frame72 = gtk_frame_new(_("Show"));
 	frame72 = gtk_frame_new(NULL);
 
@@ -1673,14 +1677,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_label_widget(GTK_FRAME(frame72), label803);
 
 	gtk_widget_show(frame72);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame72, TRUE, FALSE, 6);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame72, TRUE, FALSE, 0); //6);
 
 	vbox86 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox86);
 	gtk_container_add(GTK_CONTAINER(frame72), vbox86);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox86), 6);
-
-
 
 	check_button.show_bible_pane =
 	    gtk_check_button_new_with_label(_("Bible Texts"));
@@ -1722,6 +1724,17 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     (check_button.show_lower_workbook),
 				     TRUE);
 
+/* end tabs and panes page */
+
+
+/* start misc page */
+
+
+	vbox28 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox28);
+	gtk_container_add(GTK_CONTAINER(notebook7), vbox28);
+
+
 	//frame43 = gtk_frame_new(_("General"));
 	frame43 = gtk_frame_new(NULL);
 
@@ -1740,7 +1753,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_label_widget(GTK_FRAME(frame43), label804);
 
 	gtk_widget_show(frame43);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame43, TRUE, FALSE, 6);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame43, TRUE, FALSE, 0); //6);
 
 	vbox55 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox55);
@@ -1900,7 +1913,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 */
 	hbox_default_dir = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_default_dir);
-	gtk_box_pack_start(GTK_BOX(vbox41), hbox_default_dir, TRUE,
+	gtk_box_pack_start(GTK_BOX(vbox28), hbox_default_dir, TRUE,
 			   TRUE, 0);
 
 	label = gtk_label_new(NULL);
@@ -1917,10 +1930,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	hbox_default_dir = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_default_dir);
-	gtk_box_pack_start(GTK_BOX(vbox41), hbox_default_dir, FALSE,
+	gtk_box_pack_start(GTK_BOX(vbox28), hbox_default_dir, FALSE,
 			   FALSE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox_default_dir),
-				       6);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox_default_dir), 6);
 
 	fileentry1 =
 	    gnome_file_entry_new(NULL, _("StudyPad default directory"));
@@ -1929,277 +1941,319 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   TRUE, 0);
 	gnome_file_entry_set_directory_entry(GNOME_FILE_ENTRY
 					     (fileentry1), TRUE);
-	//gnome_file_entry_set_directory (GNOME_FILE_ENTRY (fileentry1), TRUE);
 
 	entry.combo_entry_sp_dir =
 	    gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(fileentry1));
 	gtk_widget_show(entry.combo_entry_sp_dir);
 
 
-	label123 = gtk_label_new(_("Interface"));
-	gtk_widget_show(label123);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook7),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook7), 1),
-				   label123);
-	/* end misc page */
+/* end misc page */
 
 
+/* start module page */
 
-	/* start module page */
+	vbox = gtk_vbox_new(FALSE, 6);
+	gtk_widget_show(vbox);
+	gtk_container_add(GTK_CONTAINER(notebook7), vbox);
+	gtk_container_set_border_width(GTK_CONTAINER(vbox), 13);
 
-	scrolledwindow52 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow52);
-	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow52);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow52),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	//gtk_container_set_border_width(GTK_CONTAINER(scrolledwindow52), 12);
+	label = gtk_label_new(_("<b>Main Window Modules</b>"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
+	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
 
-	viewport5 = gtk_viewport_new(NULL, NULL);
-	gtk_widget_show(viewport5);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow52), viewport5);
-	gtk_viewport_set_shadow_type(GTK_VIEWPORT(viewport5),
-				     GTK_SHADOW_NONE);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	table9 = gtk_table_new(15, 2, FALSE);
-	gtk_widget_show(table9);
-	gtk_container_add(GTK_CONTAINER(viewport5), table9);
-	gtk_table_set_row_spacings(GTK_TABLE(table9), 4);
-	gtk_table_set_col_spacings(GTK_TABLE(table9), 4);
-
-	label156 = gtk_label_new(_("Main Text Module"));
-	gtk_widget_show(label156);
-	gtk_table_attach(GTK_TABLE(table9), label156, 0, 1, 0, 1,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label156), 0, 0.5);
+	label = gtk_label_new(_("Biblical Text"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	combo17 = gtk_combo_new();
 	gtk_widget_show(combo17);
-	gtk_table_attach(GTK_TABLE(table9), combo17, 1, 2, 0, 1,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), combo17, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo17, 209, -1);
 
 	entry.text_module = GTK_COMBO(combo17)->entry;
 	gtk_widget_show(entry.text_module);
 
-	combo18 = gtk_combo_new();
-	gtk_widget_show(combo18);
-	gtk_table_attach(GTK_TABLE(table9), combo18, 1, 2, 1, 2,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	entry.parallel_1_module = GTK_COMBO(combo18)->entry;
-	gtk_widget_show(entry.parallel_1_module);
-
-	combo19 = gtk_combo_new();
-	gtk_widget_show(combo19);
-	gtk_table_attach(GTK_TABLE(table9), combo19, 1, 2, 2, 3,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.parallel_2_module = GTK_COMBO(combo19)->entry;
-	gtk_widget_show(entry.parallel_2_module);
-
-	combo20 = gtk_combo_new();
-	gtk_widget_show(combo20);
-	gtk_table_attach(GTK_TABLE(table9), combo20, 1, 2, 3, 4,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.parallel_3_module = GTK_COMBO(combo20)->entry;
-	gtk_widget_show(entry.parallel_3_module);
-
-	label157 = gtk_label_new(_("Commentary"));
-	gtk_widget_show(label157);
-	gtk_table_attach(GTK_TABLE(table9), label157, 0, 1, 6, 7,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label157), 0, 0.5);
-
-	label158 = gtk_label_new(_("Dictionary/Lexicon"));
-	gtk_widget_show(label158);
-	gtk_table_attach(GTK_TABLE(table9), label158, 0, 1, 7, 8,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label158), 0, 0.5);
-
-	label159 = gtk_label_new(_("Personal"));
-	gtk_widget_show(label159);
-	gtk_table_attach(GTK_TABLE(table9), label159, 0, 1, 13, 14,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label159), 0, 0.5);
-
-	combo21 = gtk_combo_new();
-	gtk_widget_show(combo21);
-	gtk_table_attach(GTK_TABLE(table9), combo21, 1, 2, 4, 5,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.parallel_4_module = GTK_COMBO(combo21)->entry;
-	gtk_widget_show(entry.parallel_4_module);
-
-	combo22 = gtk_combo_new();
-	gtk_widget_show(combo22);
-	gtk_table_attach(GTK_TABLE(table9), combo22, 1, 2, 5, 6,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.parallel_5_module = GTK_COMBO(combo22)->entry;
-	gtk_widget_show(entry.parallel_5_module);
+	label = gtk_label_new(_("Commentary"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	combo23 = gtk_combo_new();
 	gtk_widget_show(combo23);
-	gtk_table_attach(GTK_TABLE(table9), combo23, 1, 2, 6, 7,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), combo23, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo23, 209, -1);
 
 	entry.commentary_module = GTK_COMBO(combo23)->entry;
 	gtk_widget_show(entry.commentary_module);
 
-	combo25 = gtk_combo_new();
-	gtk_widget_show(combo25);
-	gtk_table_attach(GTK_TABLE(table9), combo25, 1, 2, 13, 14,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	entry.percomm_module = GTK_COMBO(combo25)->entry;
-	gtk_widget_show(entry.percomm_module);
-
-	label160 = gtk_label_new(_("Parallel 5"));
-	gtk_widget_show(label160);
-	gtk_table_attach(GTK_TABLE(table9), label160, 0, 1, 5, 6,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label160), 0, 0.5);
-
-	label161 = gtk_label_new(_("Parallel 4"));
-	gtk_widget_show(label161);
-	gtk_table_attach(GTK_TABLE(table9), label161, 0, 1, 4, 5,
-			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label161), 0, 0.5);
-
-	label162 = gtk_label_new(_("Parallel 3"));
-	gtk_widget_show(label162);
-	gtk_table_attach(GTK_TABLE(table9), label162, 0, 1, 3, 4,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify(GTK_LABEL(label162), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label162), 7.45058e-09,
-			       7.45058e-09);
-
-	label163 = gtk_label_new(_("Parallel 2"));
-	gtk_widget_show(label163);
-	gtk_table_attach(GTK_TABLE(table9), label163, 0, 1, 2, 3,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-	gtk_label_set_justify(GTK_LABEL(label163), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label163), 7.45058e-09,
-			       7.45058e-09);
-
-	label164 = gtk_label_new(_("Parallel 1"));
-	gtk_widget_show(label164);
-	gtk_table_attach(GTK_TABLE(table9), label164, 0, 1, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label164), 1.2666e-07,
-			       7.45058e-09);
-
-	labelDevotional = gtk_label_new(_("Daily Devotional"));
-	gtk_widget_show(labelDevotional);
-	gtk_table_attach(GTK_TABLE(table9), labelDevotional, 0, 1, 14,
-			 15, (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(labelDevotional), 0, 0.5);
-
-	comboDevotion = gtk_combo_new();
-	gtk_widget_show(comboDevotion);
-	gtk_table_attach(GTK_TABLE(table9), comboDevotion, 1, 2, 14, 15,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.devotion_module = GTK_COMBO(comboDevotion)->entry;
-	gtk_widget_show(entry.devotion_module);
+	label = gtk_label_new(_("Dictionary"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	combo24 = gtk_combo_new();
 	gtk_widget_show(combo24);
-	gtk_table_attach(GTK_TABLE(table9), combo24, 1, 2, 7, 8,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), combo24, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo24, 209, -1);
 
 	entry.dictionary_module = GTK_COMBO(combo24)->entry;
 	gtk_widget_show(entry.dictionary_module);
 
-	combo26 = gtk_combo_new();
-	gtk_widget_show(combo26);
-	gtk_table_attach(GTK_TABLE(table9), combo26, 1, 2, 9, 10,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	entry.greek_lex__module = GTK_COMBO(combo26)->entry;
-	gtk_widget_show(entry.greek_lex__module);
-	gtk_tooltips_set_tip(tooltips, entry.greek_lex__module,
-			     _
-			     ("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
-			     NULL);
+	label = gtk_label_new(_("Default Dictionary"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
-	label192 = gtk_label_new(_("Hebrew Lexicon"));
-	gtk_widget_show(label192);
-	gtk_table_attach(GTK_TABLE(table9), label192, 0, 1, 11, 12,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label192), 0, 0.5);
+	comboDefaultDict = gtk_combo_new();
+	gtk_widget_show(comboDefaultDict);
+	gtk_box_pack_start(GTK_BOX(hbox), comboDefaultDict, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(comboDefaultDict, 209, -1);
+
+	entry.default_dictionary_module =
+	    GTK_COMBO(comboDefaultDict)->entry;
+	gtk_widget_show(entry.default_dictionary_module);
+
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Personal Notes"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo25 = gtk_combo_new();
+	gtk_widget_show(combo25);
+	gtk_box_pack_start(GTK_BOX(hbox), combo25, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo25, 209, -1);
+
+	entry.percomm_module = GTK_COMBO(combo25)->entry;
+	gtk_widget_show(entry.percomm_module);
+
+/* end module page */
+
+
+/* start parallel module page */
+	vbox = gtk_vbox_new(FALSE, 6);
+	gtk_widget_show(vbox);
+	gtk_container_add(GTK_CONTAINER(notebook7), vbox);
+	gtk_container_set_border_width(GTK_CONTAINER(vbox), 13);
+
+
+	label = gtk_label_new(_("<b>Parallel View</b>"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
+	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Parallel 1"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo18 = gtk_combo_new();
+	gtk_widget_show(combo18);
+	gtk_box_pack_start(GTK_BOX(hbox), combo18, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo18, 209, -1);
+
+	entry.parallel_1_module = GTK_COMBO(combo18)->entry;
+	gtk_widget_show(entry.parallel_1_module);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Parallel 2"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo19 = gtk_combo_new();
+	gtk_widget_show(combo19);
+	gtk_box_pack_start(GTK_BOX(hbox), combo19, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo19, 209, -1);
+
+	entry.parallel_2_module = GTK_COMBO(combo19)->entry;
+	gtk_widget_show(entry.parallel_2_module);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Parallel 3"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo20 = gtk_combo_new();
+	gtk_widget_show(combo20);
+	gtk_box_pack_start(GTK_BOX(hbox), combo20, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo20, 209, -1);
+
+	entry.parallel_3_module = GTK_COMBO(combo20)->entry;
+	gtk_widget_show(entry.parallel_3_module);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Parallel 4"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo21 = gtk_combo_new();
+	gtk_widget_show(combo21);
+	gtk_box_pack_start(GTK_BOX(hbox), combo21, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo21, 209, -1);
+
+	entry.parallel_4_module = GTK_COMBO(combo21)->entry;
+	gtk_widget_show(entry.parallel_4_module);
+
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Parallel 5"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	combo22 = gtk_combo_new();
+	gtk_widget_show(combo22);
+	gtk_box_pack_start(GTK_BOX(hbox), combo22, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo22, 209, -1);
+
+	entry.parallel_5_module = GTK_COMBO(combo22)->entry;
+	gtk_widget_show(entry.parallel_5_module);
+
+
+
+/* end parallel module page */
+
+
+
+/* start misc module page */
+	vbox = gtk_vbox_new(FALSE, 6);
+	gtk_widget_show(vbox);
+	gtk_container_add(GTK_CONTAINER(notebook7), vbox);
+	gtk_container_set_border_width(GTK_CONTAINER(vbox), 13);
+
+
+	label = gtk_label_new(_("<b>Miscellaneous Modules</b>"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
+	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Daily Devotional"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	comboDevotion = gtk_combo_new();
+	gtk_widget_show(comboDevotion);
+	gtk_box_pack_start(GTK_BOX(hbox), comboDevotion, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(comboDevotion, 209, -1);
+
+	entry.devotion_module = GTK_COMBO(comboDevotion)->entry;
+	gtk_widget_show(entry.devotion_module);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Hebrew Lexicon"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	combo27 = gtk_combo_new();
 	gtk_widget_show(combo27);
-	gtk_table_attach(GTK_TABLE(table9), combo27, 1, 2, 11, 12,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), combo27, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo27, 209, -1);
 
 	entry.hebrew_lex__module = GTK_COMBO(combo27)->entry;
 	gtk_widget_show(entry.hebrew_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex__module,
 			     _
-			     ("Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
+			     ("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
 			     NULL);
 
-	label202 = gtk_label_new(_("Greek Lexicon Viewer"));
-	gtk_widget_show(label202);
-	gtk_table_attach(GTK_TABLE(table9), label202, 0, 1, 10, 11,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label202), 0, 0.5);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	label203 = gtk_label_new(_("Hebrew Lexicon Viewer"));
-	gtk_widget_show(label203);
-	gtk_table_attach(GTK_TABLE(table9), label203, 0, 1, 12, 13,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label203), 0, 0.5);
-
-	comboGreekViewer = gtk_combo_new();
-	gtk_widget_show(comboGreekViewer);
-	gtk_table_attach(GTK_TABLE(table9), comboGreekViewer, 1, 2, 10,
-			 11, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-
-	entry.greek_lex_viewer_module =
-	    GTK_COMBO(comboGreekViewer)->entry;
-	gtk_widget_show(entry.greek_lex_viewer_module);
-	gtk_tooltips_set_tip(tooltips, entry.greek_lex_viewer_module,
-			     _
-			     ("Which Greek Lexicon to display in viewer when a link or word is clicked"),
-			     NULL);
+	label = gtk_label_new(_("Hebrew Lexicon Viewer"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	comboHebViewer = gtk_combo_new();
 	gtk_widget_show(comboHebViewer);
-	gtk_table_attach(GTK_TABLE(table9), comboHebViewer, 1, 2, 12,
-			 13, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), comboHebViewer, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(comboHebViewer, 209, -1);
 
 	entry.hebrew_lex_viewer_module =
 	    GTK_COMBO(comboHebViewer)->entry;
@@ -2209,38 +2263,56 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			     ("Which Hebrew Lexicon to display in viewer when a link or word is clicked"),
 			     NULL);
 
-	label191 = gtk_label_new(_("Greek Lexicon"));
-	gtk_widget_show(label191);
-	gtk_table_attach(GTK_TABLE(table9), label191, 0, 1, 9, 10,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label191), 0, 0.5);
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	label253 = gtk_label_new(_("Default Dictionary"));
-	gtk_widget_show(label253);
-	gtk_table_attach(GTK_TABLE(table9), label253, 0, 1, 8, 9,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label253), 0, 0.5);
+	label = gtk_label_new(_("Greek Lexicon"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
-	comboDefaultDict = gtk_combo_new();
-	gtk_widget_show(comboDefaultDict);
-	gtk_table_attach(GTK_TABLE(table9), comboDefaultDict, 1, 2, 8,
-			 9, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
+	combo26 = gtk_combo_new();
+	gtk_widget_show(combo26);
+	gtk_box_pack_start(GTK_BOX(hbox), combo26, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(combo26, 209, -1);
 
-	entry.default_dictionary_module =
-	    GTK_COMBO(comboDefaultDict)->entry;
-	gtk_widget_show(entry.default_dictionary_module);
+	entry.greek_lex__module = GTK_COMBO(combo26)->entry;
+	gtk_widget_show(entry.greek_lex__module);
+	gtk_tooltips_set_tip(tooltips, entry.greek_lex__module,
+		_("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
+			     NULL);
 
-	label155 = gtk_label_new(_("Sword Modules"));
-	gtk_widget_show(label155);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook7),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook7), 2),
-				   label155);
 
-	/* end module page */
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new(_("Greek Lexicon Viewer"));
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
+
+	comboGreekViewer = gtk_combo_new();
+	gtk_widget_show(comboGreekViewer);
+	gtk_box_pack_start(GTK_BOX(hbox), comboGreekViewer, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(comboGreekViewer, 209, -1);
+
+	entry.greek_lex_viewer_module =
+	    GTK_COMBO(comboGreekViewer)->entry;
+	gtk_widget_show(entry.greek_lex_viewer_module);
+	gtk_tooltips_set_tip(tooltips, entry.greek_lex_viewer_module,
+			     _
+			     ("Which Greek Lexicon to display in viewer when a link or word is clicked"),
+			     NULL);
+/* end misc module page */
+
+
 
 	/*  */
 

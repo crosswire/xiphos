@@ -54,7 +54,6 @@
 #include "main/xml.h"
 
 static void create_menu(GdkEventButton * event);
-//widgets.notebook_text
 
 /******************************************************************************
  * Name
@@ -237,7 +236,16 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 void
 on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-
+	gchar *cipher_key;
+	gchar *cipher_old;
+	
+	cipher_old = get_cipher_key(settings.MainWindowModule);
+	cipher_key = gui_add_cipher_key(settings.MainWindowModule, cipher_old);
+	if (cipher_key) {
+		gui_module_is_locked_display(widgets.html_text,
+					     settings.MainWindowModule,
+					     cipher_key);
+	}
 }
 
 
@@ -665,8 +673,6 @@ static void create_menu(GdkEventButton * event)
 	
 	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
 				(GCallback)gui_lookup_bibletext_selection);
-	
-			
 			
 				
 	if ((check_for_global_option(settings.MainWindowModule,
@@ -745,9 +751,11 @@ static void create_menu(GdkEventButton * event)
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 		
 	}
-
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	/* GLADE_HOOKUP_OBJECT_NO_REF (menu1, menu1, "menu1");
+	if(has_cipher_tag(mod_name))
+		gtk_widget_show(menu1_uiinfo[6].widget);
+	
+	
+	/* 
 	 * menu1_uiinfo[0].widget, "about");
 	 * menu1_uiinfo[1].widget, "separator4");
 	 * menu1_uiinfo[2].widget, "file3");

@@ -33,14 +33,7 @@ extern "C" {
 void entry_display(GtkWidget * html_widget, gchar * mod_name, 
  				        gchar * text, gchar * key, 
 					gboolean show_key);
-void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name, 
- 				        gchar * text, gchar * key, 
-					gboolean show_key);
 void chapter_display(GtkWidget * html_widget, gchar * module_name, 
-		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);
-void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);
-void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);
 /*void chapter_display_icu(GtkWidget * html_widget, gchar * mod_name,
 		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);*/

@@ -74,10 +74,10 @@ static void display_text(TEXT_DATA * t)
 		chapter_display(t->html, 
 			t->mod_name,
 			t->ops, t->key, TRUE);
-	else
+/*	else
 		chapter_display_textview(t->text, 
 			t->mod_name,
-			t->ops, t->key, TRUE);
+			t->ops, t->key, TRUE);*/
 
 
 }
