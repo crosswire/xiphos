@@ -34,9 +34,10 @@ struct _settings
 						Interlinear1Module[80],
 						Interlinear2Module[80],
 						Interlinear3Module[80],
-						personalcommentsmod[80];
-	gchar			currentverse[80],      //-- verse to use at program startup	
-						dictkey[80];        //-- dictionary key to use at program startup - the one we shut down with
+						personalcommentsmod[80],
+						currentverse[80],      //-- verse to use at program startup	
+						dictkey[80],        //-- dictionary key to use at program startup - the one we shut down with
+						studypadfilename[255]; //-- name of file in open in study when we closed or last file in studypad
 	gint			currentverse_red,   //-- current verse colors
 						currentverse_green,
 						currentverse_blue;
@@ -171,5 +172,9 @@ openpropertiesbox				(void);
 void
 changepagenotebook			(GtkNotebook *notebook,
 												gint page_num);
+
+void
+showmoduleinfoSWORD			(char *modName);
+
 
 #endif /* __GNOMESWORD_H__ */
