@@ -22,7 +22,7 @@
 #ifndef _TOOLBAR_EDIT_H
 #define _TOOLBAR_EDIT_H
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData *ecd);
 

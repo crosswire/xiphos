@@ -26,10 +26,10 @@
 extern "C" {
 #endif
 
-int backend_load_module_options(char *modName, char *option, 
-						char * dir);
-int backend_save_module_options(char *modName, char *option, 
-				char *value, char * dir);
+int backend_load_module_options(char * modName, char * option, 
+					char * dir, char * conf);
+int backend_save_module_options(char * modName, char * option, 
+			char * value, char * dir, char * conf);
 
 #ifdef __cplusplus
 }

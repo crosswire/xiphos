@@ -8,8 +8,6 @@ INCLUDES =  \
 bin_PROGRAMS = gnomesword-1.0
 
 gnomesword_1_0_SOURCES =  \
-    display_info.c \
-    _editor.c \
     about_gnomesword.c \
     about_modules.c \
     about_sword.c \
@@ -22,7 +20,9 @@ gnomesword_1_0_SOURCES =  \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \
+    display_info.c \
     dummy.cpp \
+    editor.c \
     editor_menu.c \
     editor_replace.c \
     editor_search.c \
@@ -39,8 +39,8 @@ gnomesword_1_0_SOURCES =  \
     html.c \
     interlinear.c \
     interlinear_dialog.c \
-    main_window.c \
     main_menu.c \
+    main_window.c \
     percomm.c \
     preferences_dialog.c \
     search_dialog.c \
@@ -51,6 +51,7 @@ gnomesword_1_0_SOURCES =  \
     shortcutbar_viewer.c \
     splash.c \
     studypad.c \
+    studypad_dialog.c \
     toolbar_edit.c \
     toolbar_nav.c \
     toolbar_style.c \

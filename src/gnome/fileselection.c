@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <stdio.h>
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 
@@ -182,7 +182,7 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 	GtkWidget *cancel;
 
 	fileselection =
-		gtk_file_selection_new(_("GnomeSword - Open StudyPad File"));
+		gtk_file_selection_new(_("Open StudyPad File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection), "fileselection",
 			fileselection);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselection), 10);

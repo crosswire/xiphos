@@ -39,7 +39,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/toolbar_style.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
@@ -63,12 +63,12 @@ static GtkWidget *toolbars;
  
 /******************************************************************************
  * Name
- *  on_new_activate
+ *  gui_new_activate
  *
  * Synopsis
  *   #include "editor_menu.h"
  *
- *   void on_new_activate(GtkMenuItem * menuitem, 
+ *   void gui_new_activate(GtkMenuItem * menuitem, 
  *					GSHTMLEditorControlData * ecd)	
  *
  * Description
@@ -78,7 +78,7 @@ static GtkWidget *toolbars;
  *   void
  */ 
  
-static void on_new_activate(GtkMenuItem * menuitem, 
+void gui_new_activate(GtkMenuItem * menuitem, 
 					GSHTMLEditorControlData * ecd)
 {
 	/* 
@@ -186,7 +186,7 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 	if (ecd->personal_comments) {		
 		gui_save_note(ecd);
 		ecd->changed = FALSE;
-		update_statusbar(ecd);
+		gui_update_statusbar(ecd);
 	}
 }
 
@@ -230,7 +230,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		}
 		settings.percomverse = key;
 		ecd->changed = FALSE;
-		update_statusbar(ecd);
+		gui_update_statusbar(ecd);
 		g_free(info);
 		g_free(key);
 	}
@@ -334,7 +334,7 @@ static void on_cut_activate(GtkMenuItem * menuitem,
 {
 	gtk_html_cut(ecd->html);
 	ecd->changed = TRUE;
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -382,7 +382,7 @@ static void on_paste_activate(GtkMenuItem * menuitem,
 {
 	gtk_html_paste(ecd->html);
 	ecd->changed = TRUE;
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -407,7 +407,7 @@ static void on_undo_activate(GtkMenuItem * menuitem,
 {
 	gtk_html_undo(ecd->html);
 	ecd->changed = TRUE;
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -557,7 +557,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 		if (strlen(info->text1) > 0) {
 			set_link_to_module(info->text1, info->text2, ecd);
 			ecd->changed = TRUE;
-			update_statusbar(ecd);
+			gui_update_statusbar(ecd);
 		}
 	}
 	g_free(info->text1);
@@ -693,8 +693,10 @@ static void edit_bar_activate(GtkMenuItem * menuitem,
 	ecd->editbar = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	if(ecd->studypad)
 		settings.show_edit_bar_sp = ecd->editbar;
-	else
-		settings.show_edit_bar = ecd->editbar;
+	else {
+		save_percomm_options(ecd->filename, "Edit bar", 
+				    ecd->editbar);
+	}
 	if(ecd->editbar)
 		gtk_widget_show(ecd->toolbar_edit);
 	else
@@ -725,8 +727,10 @@ static void style_bar_activate(GtkMenuItem * menuitem,
 	ecd->stylebar = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	if(ecd->studypad)
 		settings.show_style_bar_sp = ecd->stylebar;
-	else
-		settings.show_style_bar = ecd->stylebar;
+	else {
+		save_percomm_options(ecd->filename, "Style bar", 
+				    ecd->stylebar);
+	}
 	if(ecd->stylebar)
 		gtk_widget_show(ecd->toolbar_style);
 	else
@@ -802,10 +806,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				 toolbars,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbars);
-	gtk_container_add(GTK_CONTAINER(pmEditor), toolbars);	
-	if (ecd->personal_comments) {
-		gtk_widget_set_sensitive(toolbars,FALSE);		
-	}
+	gtk_container_add(GTK_CONTAINER(pmEditor), toolbars);
 	toolbars_menu = gtk_menu_new();
 	gtk_widget_ref(toolbars_menu);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "toolbars_menu",
@@ -840,8 +841,9 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
  
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				(edit_toolbar), ecd->editbar);	
-	
+		
 	if (ecd->personal_comments) {
+		gtk_widget_set_sensitive(toolbars,FALSE);
 		ecd->editnote =
 		    gtk_check_menu_item_new_with_label("Edit Note");
 		gtk_widget_ref(ecd->editnote);
@@ -1181,7 +1183,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				   ecd);
 	} else {
 		gtk_signal_connect(GTK_OBJECT(new), "activate",
-				   GTK_SIGNAL_FUNC(on_new_activate),
+				   GTK_SIGNAL_FUNC(gui_new_activate),
 				   ecd);
 		gtk_signal_connect(GTK_OBJECT(open), "activate",
 				   GTK_SIGNAL_FUNC(on_open_activate),

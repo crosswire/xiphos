@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _editor.h - the html editor
+ * editor.h - the html editor
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___EDITOR_H_
-#define ___EDITOR_H_
+#ifndef __EDITOR_H_
+#define __EDITOR_H_
 
 #include <gnome.h>
 
@@ -76,6 +76,7 @@ struct _GSHTMLEditorControlData {
 	/* 
 	   toolbar_commands buttons 
 	 */	
+	GtkWidget *btn_new;
 	GtkWidget *btn_open;
 	GtkWidget *btn_save;
 	GtkWidget *btn_delete;
@@ -129,7 +130,7 @@ struct _GSHTMLEditorControlData {
 
 };
 
-void update_statusbar(GSHTMLEditorControlData *ecd);
+void gui_update_statusbar(GSHTMLEditorControlData *ecd);
 GSHTMLEditorControlData *gs_html_editor_control_data_new(void);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData *cd);
 void on_editor_destroy(GtkObject *object, GSHTMLEditorControlData *ecd);

@@ -28,7 +28,7 @@
 typedef struct _GtkHTMLReplaceAskDialog GtkHTMLReplaceAskDialog;
 typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 GtkHTMLReplaceDialog * gs_editor_replace_dialog_new(GtkHTML *html);
 void gs_editor_replace_dialog_destroy(GtkHTMLReplaceDialog *d);

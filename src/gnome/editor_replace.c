@@ -25,7 +25,7 @@
 #include <gtkhtml/htmlengine.h>
 
 #include "gui/editor_replace.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 struct _GtkHTMLReplaceAskDialog {
 	GtkWidget *dialog;

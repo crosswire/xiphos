@@ -449,6 +449,17 @@ static void view_lower_workbook(GtkMenuItem * menuitem,
 }
 
 
+
+static void open_studypad(GtkMenuItem * menuitem,
+				gpointer user_data)
+{
+	if(settings.use_studypad_dialog) {
+		gtk_widget_show(widgets.studypad_dialog);
+		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->window);
+	}
+}
+
+
 /******************************************************************************
  * gnome menu structures
  */
@@ -480,6 +491,12 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("Studypad"),
+	 N_("Open Studypad"),
+	 open_studypad, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
 };

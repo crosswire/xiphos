@@ -183,7 +183,13 @@ void shutdown_gnomesword(void)
 	gui_save_bookmarks(NULL,NULL);
 	
 	/* if study pad file has changed since last save */
-	gui_studypad_can_close();
+	if(settings.use_studypad) {
+		gui_studypad_can_close();
+		if(widgets.studypad_dialog)
+			gtk_widget_destroy(widgets.studypad_dialog);
+	}
+	if(widgets.percomm_dialog)
+		gtk_widget_destroy(widgets.percomm_dialog);
 	
 	/* shutdown the sword stuff */
 	shutdown_sword();

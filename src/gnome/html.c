@@ -37,7 +37,7 @@
 
 #include "gui/html.h"
 #include "gui/gnomesword.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/interlinear.h"

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_menu.h - popup menu for html editor
+ * studypad_dialog.h - dialog for detached shortcut bar
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,17 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __EDITOR_MENU_H_
-#define __EDITOR_MENU_H_
+#ifndef __STUDYPAD_DIALOG_H__
+#define __EDITOR_DIALOG_H__
 
-#include <gnome.h>
-#include "gui/editor.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void gui_new_activate(GtkMenuItem * menuitem, 
-				GSHTMLEditorControlData * ecd);
-void on_save_activate(GtkMenuItem * menuitem, 
-				GSHTMLEditorControlData * ecd);
-GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd);
+void gui_attach_detach_studypad(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

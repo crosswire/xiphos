@@ -30,7 +30,7 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gui/editor_search.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 struct _GSHTMLSearchDialog {
 	GnomeDialog *dialog;
