@@ -33,7 +33,7 @@
 #include "body.h"
 #include "properties.h"
 #include "utils.h"
-#define ICONDIR "./art"
+//#define ICONDIR "./art"
 struct _GtkHTMLEditBodyProperties {
 	GSHTMLEditorControlData *cd;
 
@@ -65,7 +65,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Perforated Paper"),
-		ICONDIR "/paper.png",
+		PACKAGE_PIXMAPS_DIR "/paper.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0x3380, 0x6680},
@@ -73,7 +73,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Blue Ink"),
-		ICONDIR "/texture.png",
+		PACKAGE_PIXMAPS_DIR "/texture.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0x1fff, 0x1fff, 0x8fff},
 		{0, 0, 0, 0xffff},
@@ -81,7 +81,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Paper"),
-		ICONDIR "/rect.png",
+		PACKAGE_PIXMAPS_DIR "/rect.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -89,7 +89,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Ribbon"),
-		ICONDIR "/ribbon.jpg",
+		PACKAGE_PIXMAPS_DIR "/ribbon.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0x9900, 0x3300, 0x6600},
@@ -97,7 +97,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Midnight"),
-		ICONDIR "/midnight-stars.jpg",
+		PACKAGE_PIXMAPS_DIR "/midnight-stars.jpg",
 		{0, 0, 0, 0},
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0xffff, 0x9900, 0},
@@ -105,7 +105,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Confidential"),
-		ICONDIR "/confidential-stamp.jpg",
+		PACKAGE_PIXMAPS_DIR "/confidential-stamp.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -113,7 +113,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Draft"),
-		ICONDIR "/draft-stamp.jpg",
+		PACKAGE_PIXMAPS_DIR "/draft-stamp.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -121,7 +121,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Graph paper"),
-		ICONDIR "/draft-paper.png",
+		PACKAGE_PIXMAPS_DIR "/draft-paper.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0x8000},
 		{0, 0xe300, 0x2100, 0x2300},
