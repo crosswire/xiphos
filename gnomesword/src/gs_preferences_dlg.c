@@ -170,6 +170,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	sprintf(s->CommWindowModule, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry10")));
 	sprintf(s->DictWindowModule, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entryDefaultDict")));
+	sprintf(s->DefaultDict, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry11")));
 	sprintf(s->personalcommentsmod, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entryDevotion")));
@@ -258,6 +260,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDLtabs"))->active;
 	s->book_tabs =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBooktabs"))->active;
+	s->useDefaultDict =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnUseDefaultDict"))->active;
 	s->versestyle =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton9"))->active;
 	s->showfavoritesgroup =
@@ -533,11 +537,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   GtkWidget *cbtnShowBibletabs;
   GtkWidget *cbtnShowCOMtabs;
   GtkWidget *cbtnShowDLtabs;
-  GtkWidget *cbtnShowBooktabs;
+  GtkWidget *cbtnShowBooktabs;  
   GtkWidget *frame43;
   GtkWidget *vbox55;
   GtkWidget *checkbutton9;
   GtkWidget *cbtnShowDevotion;
+  GtkWidget *cbtnUseDefaultDict;
   GtkWidget *frame41;
   GtkWidget *vbox53;
   GtkWidget *cbtnInViewer;
@@ -626,6 +631,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   GtkWidget *combo_entryGreekViewer;
   GtkWidget *comboHebViewer;
   GtkWidget *combo_entryHebViewer;
+  GtkWidget *label204;
+  GtkWidget *comboDefaultDict;
+  GtkWidget *entryDefaultDict;
   GtkWidget *label155;
   GtkWidget *dialog_action_area9;
   GtkWidget *btnPropertyboxOK;
@@ -1147,6 +1155,15 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_box_pack_start (GTK_BOX (vbox55), cbtnShowDevotion, FALSE, FALSE, 0);
   gtk_tooltips_set_tip (tooltips, cbtnShowDevotion, _("Show Daily Devotion if you have a Devotion module"), NULL);
 
+  cbtnUseDefaultDict = gtk_check_button_new_with_label (_("Use Default Dictionary"));
+  gtk_widget_ref (cbtnUseDefaultDict);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnUseDefaultDict", cbtnUseDefaultDict,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnUseDefaultDict);
+  gtk_box_pack_start (GTK_BOX (vbox55), cbtnUseDefaultDict, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, cbtnUseDefaultDict, _("Use default dictionary when a word is left clicked"), NULL);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbtnUseDefaultDict), TRUE);
+
   frame41 = gtk_frame_new (_("where to View Dict/Lex When Link or Word Clicked"));
   gtk_widget_ref (frame41);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "frame41", frame41,
@@ -1564,7 +1581,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label159", label159,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label159);
-  gtk_table_attach (GTK_TABLE (table9), label159, 0, 1, 12, 13,
+  gtk_table_attach (GTK_TABLE (table9), label159, 0, 1, 13, 14,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label159), 0, 0.5);
@@ -1619,7 +1636,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "combo25", combo25,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (combo25);
-  gtk_table_attach (GTK_TABLE (table9), combo25, 1, 2, 12, 13,
+  gtk_table_attach (GTK_TABLE (table9), combo25, 1, 2, 13, 14,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1686,7 +1703,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "labelDevotional", labelDevotional,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (labelDevotional);
-  gtk_table_attach (GTK_TABLE (table9), labelDevotional, 0, 1, 13, 14,
+  gtk_table_attach (GTK_TABLE (table9), labelDevotional, 0, 1, 14, 15,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (labelDevotional), 0, 0.5);
@@ -1696,7 +1713,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "comboDevotion", comboDevotion,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (comboDevotion);
-  gtk_table_attach (GTK_TABLE (table9), comboDevotion, 1, 2, 13, 14,
+  gtk_table_attach (GTK_TABLE (table9), comboDevotion, 1, 2, 14, 15,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1711,7 +1728,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label191", label191,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label191);
-  gtk_table_attach (GTK_TABLE (table9), label191, 0, 1, 8, 9,
+  gtk_table_attach (GTK_TABLE (table9), label191, 0, 1, 9, 10,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label191), 0, 0.5);
@@ -1736,7 +1753,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "combo26", combo26,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (combo26);
-  gtk_table_attach (GTK_TABLE (table9), combo26, 1, 2, 8, 9,
+  gtk_table_attach (GTK_TABLE (table9), combo26, 1, 2, 9, 10,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1752,7 +1769,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label192", label192,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label192);
-  gtk_table_attach (GTK_TABLE (table9), label192, 0, 1, 10, 11,
+  gtk_table_attach (GTK_TABLE (table9), label192, 0, 1, 11, 12,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label192), 0, 0.5);
@@ -1762,7 +1779,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "combo27", combo27,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (combo27);
-  gtk_table_attach (GTK_TABLE (table9), combo27, 1, 2, 10, 11,
+  gtk_table_attach (GTK_TABLE (table9), combo27, 1, 2, 11, 12,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1778,7 +1795,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label202", label202,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label202);
-  gtk_table_attach (GTK_TABLE (table9), label202, 0, 1, 9, 10,
+  gtk_table_attach (GTK_TABLE (table9), label202, 0, 1, 10, 11,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label202), 0, 0.5);
@@ -1788,7 +1805,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label203", label203,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label203);
-  gtk_table_attach (GTK_TABLE (table9), label203, 0, 1, 11, 12,
+  gtk_table_attach (GTK_TABLE (table9), label203, 0, 1, 12, 13,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label203), 0, 0.5);
@@ -1798,7 +1815,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "comboGreekViewer", comboGreekViewer,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (comboGreekViewer);
-  gtk_table_attach (GTK_TABLE (table9), comboGreekViewer, 1, 2, 9, 10,
+  gtk_table_attach (GTK_TABLE (table9), comboGreekViewer, 1, 2, 10, 11,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1814,7 +1831,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "comboHebViewer", comboHebViewer,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (comboHebViewer);
-  gtk_table_attach (GTK_TABLE (table9), comboHebViewer, 1, 2, 11, 12,
+  gtk_table_attach (GTK_TABLE (table9), comboHebViewer, 1, 2, 12, 13,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1824,6 +1841,35 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (combo_entryHebViewer);
   gtk_tooltips_set_tip (tooltips, combo_entryHebViewer, _("Which Hebrew Lexicon to display in viewer when a link or word is clicked"), NULL);
+
+  label204 = gtk_label_new (_("Default Dictionary"));
+  gtk_widget_ref (label204);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label204", label204,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label204);
+  gtk_table_attach (GTK_TABLE (table9), label204, 0, 1, 8, 9,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label204), 0, 0.5);
+
+  comboDefaultDict = gtk_combo_new ();
+  gtk_widget_ref (comboDefaultDict);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "comboDefaultDict", comboDefaultDict,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (comboDefaultDict);
+  gtk_table_attach (GTK_TABLE (table9), comboDefaultDict, 1, 2, 8, 9,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  entryDefaultDict = GTK_COMBO (comboDefaultDict)->entry;
+  gtk_widget_ref (entryDefaultDict);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entryDefaultDict", entryDefaultDict,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryDefaultDict);
+  gtk_tooltips_set_tip (tooltips, entryDefaultDict, _("Dictionary to use when words are selected by left clicking"), NULL);
+
+
+
 
   label155 = gtk_label_new (_("Sword Modules"));
   gtk_widget_ref (label155);
@@ -1896,6 +1942,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo22), biblelist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo23), commlist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo24), dictlist);
+	gtk_combo_set_popdown_strings(GTK_COMBO(comboDefaultDict), dictlist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(comboGreekViewer), dictlist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo26), dictlist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(comboHebViewer), dictlist);
@@ -1956,6 +2003,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				     s->inViewer);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnInDictPane),
 				     s->inDictpane);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnUseDefaultDict),
+				     s->useDefaultDict);
 
 	/******************************************************************************/
 	/*
@@ -1982,6 +2031,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_entry_set_text(GTK_ENTRY(entry8), s->Interlinear5Module);
 	gtk_entry_set_text(GTK_ENTRY(entry9), s->CommWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry10), s->DictWindowModule);
+	gtk_entry_set_text(GTK_ENTRY(entryDefaultDict), s->DefaultDict);
 	gtk_entry_set_text(GTK_ENTRY(combo_entryGreekViewer), s->lex_greek_viewer);
 	gtk_entry_set_text(GTK_ENTRY(combo_entryHebViewer), s->lex_hebrew_viewer);
 	gtk_entry_set_text(GTK_ENTRY(entry11), s->personalcommentsmod);
@@ -2069,6 +2119,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(cbtnShowHistoryGroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
+  gtk_signal_connect (GTK_OBJECT (cbtnUseDefaultDict), "toggled",
+                      GTK_SIGNAL_FUNC (on_button_toggled),
+                      GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
@@ -2113,6 +2166,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(entry13), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(entry14), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(entryDefaultDict), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(combo_entryHebViewer), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
