@@ -17,14 +17,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "sw_gbfhtml.h"
+#include <gbfhtmlhref.h>
 
-SW_GBFHTML::SW_GBFHTML()
+GBFHTMLHREF::GBFHTMLHREF()
 {
 }
 
 
-char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
+char GBFHTMLHREF::ProcessText(char *text, int maxlen, const SWKey *key)
 {
 	char *to, *from, token[2048];
 	int tokpos = 0;

@@ -92,18 +92,17 @@ void showSBVerseList(SETTINGS * s)
 	changegroupnameSB(s, s->groupName, groupnum7);
 }
 
-void	 changegroupnameSB(SETTINGS *s, gchar *groupName, gint groupNum)
+void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
 {
 	GtkWidget *label;
 	EShortcutBar *bar1;
-	
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);	
+
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
 	//g_warning(groupName);
 	label = gtk_label_new(groupName);
 	gtk_widget_show(label);
 	e_group_bar_set_group_button_label(E_GROUP_BAR(bar1),
-						 groupNum,
-						 label);
+					   groupNum, label);
 }
 static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 {
@@ -124,13 +123,13 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name);
-#else /* USE_OLD_GAL */
+#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
-						NULL);
-#endif /* USE_OLD_GAL */
+					       NULL);
+#endif				/* USE_OLD_GAL */
 	}
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
@@ -196,23 +195,21 @@ on_shortcut_dropped(EShortcutBar * shortcut_bar,
 		    gint item_num, gchar * url, gchar * name)
 {
 	GdkPixbuf *icon_pixbuf = NULL;
-	
+
 	g_print("In on_shortcut_dropped Group:%i Item:%i\n", group_num,
 		item_num);
-#ifdef USE_OLD_GAL		
+#ifdef USE_OLD_GAL
 	e_shortcut_model_add_item(shortcut_bar->model,
 				  group_num, item_num, url, name);
-#else /* USE_OLD_GAL */
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       	(shortcut_bar)->model,
-					       	group_num,
-					       	item_num, 
-					       	NULL, 
-					       	NULL,
-						&icon_pixbuf);
+#else				/* USE_OLD_GAL */
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+				       (shortcut_bar)->model,
+				       group_num,
+				       item_num, NULL, NULL, &icon_pixbuf);
 	e_shortcut_model_add_item(shortcut_bar->model,
-				  group_num, item_num, url, name, icon_pixbuf);
-#endif /* USE_OLD_GAL */
+				  group_num, item_num, url, name,
+				  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 	savegroup((EShortcutBar *) shortcut_bar, group_num);
 }
 
@@ -225,24 +222,20 @@ static void on_about_item_activate(GtkMenuItem * menuitem, gpointer data)
 
 	item_num = GPOINTER_TO_INT(data);
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
-	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));	
+	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
 #ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       item_num, 
-						&item_url, 
-						&item_name);
-#else /* USE_OLD_GAL */
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       item_num, 
-					       &item_url, 
-					       &item_name,
-						NULL);
-#endif /* USE_OLD_GAL */
-	memset(modName,0,16); 
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+				       (shortcut_bar)->model,
+				       group_num,
+				       item_num, &item_url, &item_name);
+#else				/* USE_OLD_GAL */
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+				       (shortcut_bar)->model,
+				       group_num,
+				       item_num,
+				       &item_url, &item_name, NULL);
+#endif				/* USE_OLD_GAL */
+	memset(modName, 0, 16);
 	modNameFromDesc(modName, item_name);
 	showmoduleinfoSWORD(modName);
 	g_free(item_url);
@@ -272,13 +265,13 @@ static void on_remove_item_activate(GtkMenuItem * menuitem, gpointer data)
 		e_shortcut_model_get_item_info(shortcut_model,
 					       group_num,
 					       j, &item_url, &item_name);
-#else /* USE_OLD_GAL */
+#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
-						NULL);
-#endif /* USE_OLD_GAL */
+					       NULL);
+#endif				/* USE_OLD_GAL */
 		list = g_list_append(list, item_name);
 	}
 	if (group_num == groupnum0) {
@@ -339,37 +332,37 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
-	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *)user_data);
+	memset(modName, 0, 16);
+	modNameFromDesc(modName, (gchar *) user_data);
 	sbtype = 0;
 	sbtype = sbtypefromModNameSBSW(modName);
-	if(sbtype < 0) sbtype = 0;
-	
-#ifdef USE_OLD_GAL	
+	if (sbtype < 0)
+		sbtype = 0;
+
+#ifdef USE_OLD_GAL
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  group_num, -1, shortcut_types[sbtype],
 				  (gchar *) user_data);
-#else /* USE_OLD_GAL */
-	switch(sbtype){
-		case 0:
-			pathname = gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+#else				/* USE_OLD_GAL */
+	switch (sbtype) {
+	case 0:
+		pathname = gnome_pixmap_file("gnomesword/book-un.png");
+		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 		break;
-		case 1:
-			pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
-					
+	case 1:
+		pathname = gnome_pixmap_file("gnomesword/book-bl.png");
+		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+
 		break;
-		case 2:
-			pathname = gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);					
+	case 2:
+		pathname = gnome_pixmap_file("gnomesword/book-green.png");
+		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 		break;
-	}				
+	}
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  group_num, -1, "not null",
-				  (gchar *) user_data,
-				icon_pixbuf);	
-#endif /* USE_OLD_GAL */
+				  (gchar *) user_data, icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 	list = NULL;
 	group_name = "";
 	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR
@@ -384,13 +377,13 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name);
-#else /* USE_OLD_GAL */
+#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
-						NULL);
-#endif /* USE_OLD_GAL */
+					       NULL);
+#endif				/* USE_OLD_GAL */
 		list = g_list_append(list, item_name);
 	}
 	if (group_num == groupnum0) {
@@ -634,12 +627,12 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 	gtk_menu_append(GTK_MENU(menu), menuitem);
 	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
 			   GTK_SIGNAL_FUNC(set_small_icons), shortcut_bar);
-	
+
 	menuitem = gtk_menu_item_new();
 	gtk_widget_set_sensitive(menuitem, FALSE);
 	gtk_widget_show(menuitem);
 	gtk_menu_append(GTK_MENU(menu), menuitem);
-	
+
 	if (group_num == groupnum0) {
 		menuitem = gtk_menu_item_new_with_label("Add Bible Text");
 		gtk_widget_show(menuitem);
@@ -739,27 +732,26 @@ show_context_popup(EShortcutBar * shortcut_bar,
 
 	menu = gtk_menu_new();
 
-	menuitem =
-	    gtk_menu_item_new_with_label("About this Module");
+	menuitem = gtk_menu_item_new_with_label("About this Module");
 	gtk_widget_show(menuitem);
-	gtk_menu_append(GTK_MENU(menu), menuitem);	
+	gtk_menu_append(GTK_MENU(menu), menuitem);
 	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
 			   GTK_SIGNAL_FUNC(on_about_item_activate),
 			   GINT_TO_POINTER(item_num));
-	
+
 	menuitem = gtk_menu_item_new();
 	gtk_widget_set_sensitive(menuitem, FALSE);
 	gtk_widget_show(menuitem);
 	gtk_menu_append(GTK_MENU(menu), menuitem);
-		
+
 	menuitem =
 	    gtk_menu_item_new_with_label("Remove from Shortcut Bar");
 	gtk_widget_show(menuitem);
-	gtk_menu_append(GTK_MENU(menu), menuitem);	
+	gtk_menu_append(GTK_MENU(menu), menuitem);
 	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
 			   GTK_SIGNAL_FUNC(on_remove_item_activate),
 			   GINT_TO_POINTER(item_num));
-	
+
 	/* Save the group & item nums so we can get them in the callbacks. */
 	gtk_object_set_data(GTK_OBJECT(menu), "group_num",
 			    GINT_TO_POINTER(group_num));
@@ -781,49 +773,48 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 {
 	GtkWidget *app;
 	gchar *type, *ref;
-	gchar modName[16];	
+	gchar modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
-	
+
 	if (event->button.button == 1) {
 		app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
 #ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
-					       	group_num, 
-						item_num, 
-						&type,
-					       	&ref);
-#else /* USE_OLD_GAL */
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
-					       	group_num, 
-						item_num, 
-						&type,
-					       	&ref,
-						&icon_pixbuf);
-#endif /* USE_OLD_GAL */
-		memset(modName,0,16); 
+		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (shortcut_bar)->model,
+					       group_num, item_num, &type,
+					       &ref);
+#else				/* USE_OLD_GAL */
+		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (shortcut_bar)->model,
+					       group_num, item_num, &type,
+					       &ref, &icon_pixbuf);
+#endif				/* USE_OLD_GAL */
+		memset(modName, 0, 16);
 		modNameFromDesc(modName, ref);
 		if (group_num == groupnum0) {
-			gint sbtype;			
+			gint sbtype;
 			sbtype = sbtypefromModNameSBSW(modName);
-			if(sbtype == 0 || sbtype == 1)
-				gotoBookmarkSWORD(modName, settings->currentverse);
+			if (sbtype == 0 || sbtype == 1)
+				gotoBookmarkSWORD(modName,
+						  settings->currentverse);
 			else
-				gotoBookmarkSWORD(modName, settings->dictkey);
+				gotoBookmarkSWORD(modName,
+						  settings->dictkey);
 		}
 		if (group_num == groupnum1) {
-			if (havebible) {	
+			if (havebible) {
 				gotoBookmarkSWORD(modName,
 						  settings->currentverse);
 			}
 		}
 		if (group_num == groupnum2) {
-			if (havecomm) {	
+			if (havecomm) {
 				gotoBookmarkSWORD(modName,
 						  settings->currentverse);
 			}
 		}
 		if (group_num == groupnum3) {
-			if (havedict) {	
+			if (havedict) {
 				gotoBookmarkSWORD(modName,
 						  settings->dictkey);
 			}
@@ -843,10 +834,8 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	}
 }
 
-
 static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 {
-	sblist = NULL;
 	sblist = searchSWORD(s->app, s);
 }
 
@@ -869,12 +858,33 @@ static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
 	s->showinmain = togglebutton->active;
 }
 
-/*
+
 static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data)
 {
-	
+
 }
-*/
+
+
+static void on_btnViewVL_clicked(GtkButton * button, gpointer user_data)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK(GTK_WIDGET(user_data)), 0);
+	changegroupnameSB(settings, "Verse List", groupnum7);
+}
+
+
+static void on_btnViewSR_clicked(GtkButton * button, gpointer user_data)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK(GTK_WIDGET(user_data)), 1);
+	changegroupnameSB(settings, "Search Results", groupnum7);
+}
+
+
+static void on_btnViewer_clicked(GtkButton * button, gpointer user_data)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK(GTK_WIDGET(user_data)), 2);
+	changegroupnameSB(settings, "Viewer", groupnum7);
+}
+
 
 static void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
@@ -885,20 +895,72 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	changeVerseListSBSWORD(s, (gchar *) url);
 }
 
+static void
+on_search_results_link_clicked(GtkHTML * html, const gchar * url,
+			       gpointer data)
+{
+	SETTINGS *s;
+
+	s = (SETTINGS *) data;
+	changesearchresultsSBSW(s, (gchar *) url);
+}
+
+static void
+on_nbVL_switch_page                    (GtkNotebook     *notebook,
+                                        GtkNotebookPage *page,
+                                        gint             page_num,
+                                        gpointer         user_data)
+{
+	SETTINGS *s;
+	
+	s = (SETTINGS*) user_data;	
+	switch(page_num){
+		case 0:
+			gtk_widget_set_sensitive(lookup_widget(s->app, "btnSBSaveVL"), FALSE);
+			gtk_widget_set_sensitive( lookup_widget(s->app, "tbtnSBViewMain"), TRUE);
+		break;
+		case 1:
+			gtk_widget_set_sensitive(lookup_widget(s->app, "btnSBSaveVL"), TRUE);
+			gtk_widget_set_sensitive( lookup_widget(s->app, "tbtnSBViewMain"), TRUE);			
+		break;
+		case 2:
+			gtk_widget_set_sensitive(lookup_widget(s->app, "btnSBSaveVL"), FALSE);
+			gtk_widget_set_sensitive( lookup_widget(s->app, "tbtnSBViewMain"), FALSE);			
+		break;
+	}
+}
+
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 {
 	GtkWidget *toolbar1;
-	GtkWidget *frameTB;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSBSaveVL;
 	GtkWidget *tbtnSBViewMain;
-//	GtkWidget *btnSBShowCV;
+	GtkWidget *btnSBShowCV;
+	GtkWidget *vseparator1;
+	GtkWidget *btnViewVL;
+	GtkWidget *btnViewSR;
+	GtkWidget *btnViewer;
+	GtkWidget *nbVL;
+	GtkWidget *vbox2;
 	GtkWidget *frame1;
 	GtkWidget *scrolledwindow1;
-//  GtkWidget *htmllist;        
 	GtkWidget *frame2;
 	GtkWidget *scrolledwindow2;
+	GtkWidget *label1;
+	GtkWidget *vbox3;
+	GtkWidget *frame3;
+	GtkWidget *scrolledwindow3;
+	GtkWidget *frame4;
+	GtkWidget *scrolledwindow4;
+	GtkWidget *label2;
+	GtkWidget *frame5;
+	GtkWidget *label3;
 	GtkWidget *htmlshow;
+	GtkWidget *htmlshow2;
+	GtkWidget *scrolledwindow5;
+	GtkWidget *htmlviewer;
+	GtkWidget *frameTB;
 
 	frameTB = gtk_frame_new(NULL);
 	gtk_widget_ref(frameTB);
@@ -913,10 +975,10 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar1", toolbar1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar1);
-	//gtk_box_pack_start (GTK_BOX (), toolbar1, FALSE, FALSE, 0);
+	//gtk_box_pack_start (GTK_BOX (vboxVL), toolbar1, FALSE, FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(frameTB), toolbar1);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar1),
 				      GTK_RELIEF_NONE);
-	gtk_container_add(GTK_CONTAINER(frameTB), toolbar1);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_SAVE);
@@ -939,14 +1001,15 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, _("Main Form"),
-				       _("Toggle to show in Main Form"),
+				       _
+				       ("Toggle to show results in Main Form"),
 				       NULL, tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(tbtnSBViewMain);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "tbtnSBViewMain",
 				 tbtnSBViewMain,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(tbtnSBViewMain);
-/*
+
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_REFRESH);
 	btnSBShowCV =
@@ -960,14 +1023,84 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBShowCV",
 				 btnSBShowCV,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSBShowCV);*/
+	gtk_widget_show(btnSBShowCV);
+
+	vseparator1 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator1);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator1",
+				 vseparator1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator1);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar1), vseparator1, NULL,
+				  NULL);
+	gtk_widget_set_usize(vseparator1, 12, 12);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_BOOK_RED);
+	btnViewVL =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("VerseList"),
+				       _("View Verse List"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(btnViewVL);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewVL",
+				 btnViewVL,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btnViewVL);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app,
+				      GNOME_STOCK_PIXMAP_BOOK_GREEN);
+	btnViewSR =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("SearchResults"),
+				       _("View Search Results"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(btnViewSR);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewSR",
+				 btnViewSR,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btnViewSR);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app,
+				      GNOME_STOCK_PIXMAP_BOOK_BLUE);
+	btnViewer =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Viewer"), _("Viewer"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(btnViewer);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewer",
+				 btnViewer,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btnViewer);
+
+	nbVL = gtk_notebook_new();
+	gtk_widget_ref(nbVL);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "nbVL", nbVL,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(nbVL);
+	//gtk_container_add(GTK_CONTAINER(frameTB), toolbar1);
+	gtk_box_pack_start(GTK_BOX(vboxVL), nbVL, TRUE, TRUE, 0);
+	GTK_WIDGET_UNSET_FLAGS(nbVL, GTK_CAN_FOCUS);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(nbVL), FALSE);
+
+	vbox2 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox2);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox2", vbox2,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox2);
+	gtk_container_add(GTK_CONTAINER(nbVL), vbox2);
 
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame1);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame1", frame1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame1);
-	gtk_box_pack_start(GTK_BOX(vboxVL), frame1, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), frame1, TRUE, TRUE, 0);
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow1);
@@ -994,7 +1127,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame2", frame2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame2);
-	gtk_box_pack_start(GTK_BOX(vboxVL), frame2, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), frame2, TRUE, TRUE, 0);
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow2);
@@ -1017,14 +1150,151 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), htmlshow);
 	gtk_html_load_empty(GTK_HTML(htmlshow));
 
+	label1 = gtk_label_new(_("label1"));
+	gtk_widget_ref(label1);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "label1", label1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label1);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbVL),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (nbVL), 0),
+				   label1);
+
+	vbox3 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox3);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox3", vbox3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox3);
+	gtk_container_add(GTK_CONTAINER(nbVL), vbox3);
+
+	frame3 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame3);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame3", frame3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame3);
+	gtk_box_pack_start(GTK_BOX(vbox3), frame3, TRUE, TRUE, 0);
+
+	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow3);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow3",
+				 scrolledwindow3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow3);
+	gtk_container_add(GTK_CONTAINER(frame3), scrolledwindow3);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow3), GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	s->srhtml = gtk_html_new();
+	gtk_widget_ref(s->srhtml);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "s->srhtml", s->srhtml,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(s->srhtml);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3), s->srhtml);
+	gtk_html_load_empty(GTK_HTML(s->srhtml));
+
+	frame4 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame4);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame4);
+	gtk_box_pack_start(GTK_BOX(vbox3), frame4, TRUE, TRUE, 0);
+
+	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow4);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow4",
+				 scrolledwindow4,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow4);
+	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow4);
+	gtk_widget_set_usize(scrolledwindow4, -2, 251);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow4), GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	htmlshow2 = gtk_html_new();
+	gtk_widget_ref(htmlshow2);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "htmlshow2", htmlshow2,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlshow2);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow4), htmlshow2);
+	gtk_html_load_empty(GTK_HTML(htmlshow2));
+	setupsearchresultsSBSW(htmlshow2);
+
+	label2 = gtk_label_new(_("label2"));
+	gtk_widget_ref(label2);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "label2", label2,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label2);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbVL),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (nbVL), 1),
+				   label2);
+
+	frame5 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame5);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame5", frame5,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame5);
+	gtk_container_add(GTK_CONTAINER(nbVL), frame5);
+
+	scrolledwindow5 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow5);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow5",
+				 scrolledwindow5,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow5);
+	gtk_container_add(GTK_CONTAINER(frame5), scrolledwindow5);
+	gtk_widget_set_usize(scrolledwindow5, -2, 251);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow5), GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	htmlviewer = gtk_html_new();
+	gtk_widget_ref(htmlviewer);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "htmlviewer", htmlviewer,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlviewer);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow5), htmlviewer);
+	gtk_html_load_empty(GTK_HTML(htmlviewer));
+	setupviewerSBSW(htmlviewer);
+
+	label3 = gtk_label_new(_("label3"));
+	gtk_widget_ref(label3);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "label3", label3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label3);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbVL),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (nbVL), 2),
+				   label3);
+
 	gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), s);
+	gtk_signal_connect(GTK_OBJECT(s->srhtml), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_search_results_link_clicked),
+			   s);
 	gtk_signal_connect(GTK_OBJECT(btnSBSaveVL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(tbtnSBViewMain), "toggled",
 			   GTK_SIGNAL_FUNC(on_tbtnSBViewMain_toggled), s);
-	/*gtk_signal_connect(GTK_OBJECT(btnSBShowCV), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), s);*/
+	gtk_signal_connect(GTK_OBJECT(btnSBShowCV), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), s);
+	gtk_signal_connect(GTK_OBJECT(btnViewVL), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnViewVL_clicked),
+			   GTK_WIDGET(nbVL));
+	gtk_signal_connect(GTK_OBJECT(btnViewSR), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnViewSR_clicked),
+			   GTK_WIDGET(nbVL));
+	gtk_signal_connect(GTK_OBJECT(btnViewer), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnViewer_clicked),
+			   GTK_WIDGET(nbVL));
+  	gtk_signal_connect (GTK_OBJECT (nbVL), "switch_page",
+                      		GTK_SIGNAL_FUNC (on_nbVL_switch_page),
+                      		s);
 	return htmlshow;
 }
 
@@ -1323,11 +1593,12 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), s);
 	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
 }
+
 #ifdef USE_OLD_GAL
 #define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
 	"bible:", "commentary:", "dictionary:",
-	"greek:","hebrew:"
+	"greek:", "hebrew:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	"gnomesword/book-un.png",
@@ -1355,11 +1626,10 @@ static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 	}
 	return NULL;
 }
-#endif /* USE_OLD_GAL */
+#endif				/* USE_OLD_GAL */
 
 
-void
-setupSB(SETTINGS *s)
+void setupSB(SETTINGS * s)
 {
 	GList *tmplang, *tmp;
 	GtkWidget
@@ -1371,12 +1641,12 @@ setupSB(SETTINGS *s)
 	gint sbtype = 0, large_icons = 0;
 	gchar *filename, group_name[256], icon_size[10];
 	gchar modName[16], *pathname;
-#ifdef USE_OLD_GAL	
-	gint i; 
-#endif /*USE_OLD_GAL  */
+#ifdef USE_OLD_GAL
+	gint i;
+#endif				/*USE_OLD_GAL  */
 	GdkPixbuf *icon_pixbuf = NULL;
-	
-	
+
+
 #ifdef USE_OLD_GAL
 /************************************************************/
 	gtk_widget_pop_visual();
@@ -1392,8 +1662,8 @@ setupSB(SETTINGS *s)
 	}
 	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
 					 icon_callback, NULL);
-/***********************************************************/	
-#endif /* USE_OLD_GAL */
+/***********************************************************/
+#endif				/* USE_OLD_GAL */
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
@@ -1403,11 +1673,11 @@ setupSB(SETTINGS *s)
 		filename = "Favorites.conf";
 		tmp = loadshortcutbarSW(filename, group_name, icon_size);
 		while (tmp != NULL) {
-			memset(modName,0,16); 
+			memset(modName, 0, 16);
 			modNameFromDesc(modName, (gchar *) tmp->data);
 			sbtype = 0;
 			sbtype = sbtypefromModNameSBSW(modName);
-			if(sbtype < 0) 
+			if (sbtype < 0)
 				sbtype = 0;
 #ifdef USE_OLD_GAL
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
@@ -1415,31 +1685,40 @@ setupSB(SETTINGS *s)
 						  groupnum0, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /*  USE_OLD_GAL */
-			switch(sbtype){
-				case 0:
-					pathname = gnome_pixmap_file("gnomesword/book-un.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+#else				/*  USE_OLD_GAL */
+			switch (sbtype) {
+			case 0:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-un.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
 				break;
-				case 1:
-					pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
-					
+			case 1:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-bl.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
+
 				break;
-				case 2:
-					pathname = gnome_pixmap_file("gnomesword/book-green.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);					
+			case 2:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-green.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
 				break;
-			}					
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum0, 
-						-1,
-						"favorite",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
+			}
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum0, -1,
+						  "favorite",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
-	
+
 		}
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
@@ -1462,16 +1741,17 @@ setupSB(SETTINGS *s)
 						  groupnum1, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum1, 
-						-1,
-						"bible text",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-un.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum1, -1,
+						  "bible text",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
@@ -1495,16 +1775,17 @@ setupSB(SETTINGS *s)
 						  groupnum2, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum2, 
-						-1,
-						"commentary",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-bl.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum2, -1,
+						  "commentary",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
@@ -1528,17 +1809,18 @@ setupSB(SETTINGS *s)
 						  groupnum3, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum3, 
-						-1,
-						"dictionary",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
-			
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-green.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum3, -1,
+						  "dictionary",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
+
 			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
@@ -1689,7 +1971,7 @@ void update_shortcut_bar(SETTINGS * s)
 	GdkPixbuf *icon_pixbuf = NULL;
 	gchar *pathname;
 	gchar modName[16];
-	
+
 	bar = E_SHORTCUT_BAR(shortcut_bar);
 	tmp = NULL;
 	current_group =
@@ -1710,11 +1992,11 @@ void update_shortcut_bar(SETTINGS * s)
 		filename = "Favorites.conf";
 		tmp = loadshortcutbarSW(filename, group_name, icon_size);
 		while (tmp != NULL) {
-			memset(modName,0,16); 
+			memset(modName, 0, 16);
 			modNameFromDesc(modName, (gchar *) tmp->data);
 			sbtype = 0;
 			sbtype = sbtypefromModNameSBSW(modName);
-			if(sbtype < 0) 
+			if (sbtype < 0)
 				sbtype = 0;
 #ifdef USE_OLD_GAL
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
@@ -1722,29 +2004,38 @@ void update_shortcut_bar(SETTINGS * s)
 						  groupnum0, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /*  USE_OLD_GAL */
-			switch(sbtype){
-				case 0:
-					pathname = gnome_pixmap_file("gnomesword/book-un.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+#else				/*  USE_OLD_GAL */
+			switch (sbtype) {
+			case 0:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-un.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
 				break;
-				case 1:
-					pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
-					
+			case 1:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-bl.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
+
 				break;
-				case 2:
-					pathname = gnome_pixmap_file("gnomesword/book-green.png");
-					icon_pixbuf = gdk_pixbuf_new_from_file(pathname);					
+			case 2:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-green.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
 				break;
-			}					
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum0, 
-						-1,
-						"favorites",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
+			}
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum0, -1,
+						  "favorites",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
@@ -1768,17 +2059,18 @@ void update_shortcut_bar(SETTINGS * s)
 						  groupnum1, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-un.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum1, 
-						-1,
-						"bible text",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */	
-			tmp = g_list_next(tmp);		
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-un.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum1, -1,
+						  "bible text",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
+			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
@@ -1801,17 +2093,18 @@ void update_shortcut_bar(SETTINGS * s)
 						  groupnum2, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-bl.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum2, 
-						-1,
-						"commentary",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
-			tmp = g_list_next(tmp);			
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-bl.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum2, -1,
+						  "commentary",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
+			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
@@ -1834,17 +2127,18 @@ void update_shortcut_bar(SETTINGS * s)
 						  groupnum3, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
-#else /* USE_OLD_GAL */			
-			pathname = gnome_pixmap_file("gnomesword/book-green.png");
-			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);	
-			e_shortcut_model_add_item(E_SHORTCUT_BAR (shortcut_bar)->model,
-						groupnum3, 
-						-1,
-						"dictionary",
-						(gchar *) tmp->data,
-						icon_pixbuf);
-#endif /* USE_OLD_GAL */
-			tmp = g_list_next(tmp);			
+#else				/* USE_OLD_GAL */
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-green.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum3, -1,
+						  "dictionary",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);
+#endif				/* USE_OLD_GAL */
+			tmp = g_list_next(tmp);
 		}
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
