@@ -279,10 +279,9 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
 {
-	//shift_key_presed = FALSE;
 	gtk_widget_grab_focus (widgets.html_dict);
 	settings.whichwindow = DICTIONARY_WINDOW;
-	gui_change_window_title(settings.DictWindowModule);
+	//gui_change_window_title(settings.DictWindowModule);
   	return FALSE;
 }
 
@@ -296,6 +295,7 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 		return;
 	
 	main_display_dictionary(settings.DictWindowModule, buf);
+	//gtk_widget_grab_focus(widgets.entry_dict);
 }
 
 void button_back_clicked(GtkButton * button, gpointer user_data)
@@ -308,6 +308,19 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
 	main_dictionary_button_clicked(1);
 }
 
+static void on_entry_activate(GtkEntry * entry,
+				   gpointer user_data)
+{
+	g_message("on_entry_activate");
+}
+
+static void on_comboboxentry_dict_key_changed(GtkComboBox * combobox,
+					gpointer user_data)
+{
+	//g_message("on_comboboxentry_dict_key_changed");
+	gtk_widget_activate(widgets.entry_dict);
+
+}
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
@@ -332,56 +345,6 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(box_dict);
 	
 	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
-/*
-	widgets.label_dict = gtk_label_new(settings.DictWindowModule);
-	gtk_widget_show(widgets.label_dict);
-	gtk_box_pack_start(GTK_BOX(box_dict),
-			   widgets.label_dict, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(widgets.label_dict),
-			      GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(widgets.label_dict), 0, 0.5);
-*/
-/*
-	hpaned = gtk_hpaned_new();
-	gtk_widget_show(hpaned);
-	gtk_box_pack_start(GTK_BOX(box_dict), hpaned, TRUE, TRUE, 0);
-	gtk_paned_set_position(GTK_PANED(hpaned), 195);
-
-	
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_paned_pack1(GTK_PANED(hpaned), vbox, TRUE, TRUE);
-	
-	widgets.entry_dict = gtk_entry_new();
-	gtk_widget_show(widgets.entry_dict);
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.entry_dict, FALSE, TRUE, 0);
-
-	frame_entry = gtk_frame_new(NULL);
-	gtk_widget_show(frame_entry);
-	gtk_frame_set_shadow_type((GtkFrame *)frame_entry,
-                                    settings.shadow_type);
-	gtk_box_pack_start(GTK_BOX(vbox), frame_entry, TRUE, TRUE, 0);
-*/	
-	/* create tree model */
-//	model = gtk_list_store_new(1, G_TYPE_STRING);
-
-	/* create tree view */
-/*	widgets.listview_dict =
-	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
-	gtk_widget_show(widgets.listview_dict);
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW
-				     (widgets.listview_dict), TRUE);
-	
-	gtk_container_add(GTK_CONTAINER(frame_entry), widgets.listview_dict);
-	
-	
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
-					  (widgets.listview_dict),
-					  FALSE);
-	add_columns(GTK_TREE_VIEW(widgets.listview_dict));
-
-*/
-
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox2);
@@ -418,8 +381,6 @@ GtkWidget *gui_create_dictionary_pane(void)
 				     GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
-
-
 
 #ifdef USE_MOZILLA	
 	eventbox = gtk_event_box_new ();
@@ -462,10 +423,12 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
-	settings.signal_id = g_signal_connect(GTK_OBJECT(widgets.entry_dict), 
-			 "changed",
-			 G_CALLBACK(dict_key_entry_changed), 
-			 NULL);
+ 
+	settings.signal_id = g_signal_connect ((gpointer) widgets.comboboxentry_dict, "changed",
+                    G_CALLBACK (on_comboboxentry_dict_key_changed),
+                    NULL);
+	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
+			 G_CALLBACK(dict_key_entry_changed), NULL);
 			 
 	g_signal_connect ((gpointer) button10, "clicked",
 		    G_CALLBACK (button_back_clicked),
@@ -473,9 +436,6 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect ((gpointer) button11, "clicked",
 		    G_CALLBACK (button_forward_clicked),
 		    NULL);
-	/*g_signal_connect(G_OBJECT(widgets.listview_dict),
-			 "button_release_event",
-			 G_CALLBACK(list_button_released), NULL);*/
 	return box_dict;
 }
 
@@ -488,29 +448,6 @@ GtkWidget *gui_create_dictionary_pane(void)
  **
  **/
 
-
-/******************************************************************************
- * Name
- *  update_text_global_ops
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void update_text_global_ops(gchar * option, gboolean choice)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void update_comm_global_ops(gchar * option, gboolean choice)
-{
-	/*g_warning("gui_update_text_global_ops");
-	   save_module_options(settings.MainWindowModule, option, choice);
-	   gui_display_text(settings.currentverse); */
-}
 
 /******************************************************************************
  * Name
@@ -619,17 +556,13 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 #ifdef USE_MOZILLA
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
-	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);	
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);		
 #else
 	dict_key =
 	    gui_get_word_or_selection(widgets.html_dict, FALSE);
 	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(settings.
-						     DictWindowModule,
-						     dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(settings.
+		main_display_dictionary(settings.
 						DictWindowModule,
 						dict_key);
 		g_free(dict_key);
@@ -970,6 +903,10 @@ void gui_create_pm_dictionary(void)
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
+	g_signal_connect(GTK_OBJECT(usecurrent),
+			   "activate",
+			   G_CALLBACK(on_use_current_dictionary_activate), 
+			   NULL);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);

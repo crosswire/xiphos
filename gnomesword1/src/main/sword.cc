@@ -884,7 +884,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
  *   main_clear_viewer
  *
  * Synopsis
- *   #include "main/sword.h.h"
+ *   #include "main/sword.h"
  *
  *   void main_clear_viewer(VOID)
  *
@@ -935,9 +935,26 @@ void main_clear_viewer(void)
 	g_string_free(tmp_str, TRUE);
 }
 
+
+/******************************************************************************
+ * Name
+ *   main_dictionary_entery_changed
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_dictionary_entery_changed(char * mod_name)
+ *
+ * Description
+ *   text in the dictionary entry has changed and the entry activated
+ *
+ * Return value
+ *   void
+ */
+
 void main_dictionary_entery_changed(char * mod_name)
 {	
-	gint count = 7, i;
+	gint count = 9, i;
 	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
 	gchar *key2 = NULL;
@@ -946,9 +963,7 @@ void main_dictionary_entery_changed(char * mod_name)
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	
-	g_signal_handler_block((gpointer)widgets.entry_dict,
-                         settings.signal_id);
-	
+	g_signal_handler_block(widgets.comboboxentry_dict,settings.signal_id);
 	if(strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
@@ -998,11 +1013,30 @@ void main_dictionary_entery_changed(char * mod_name)
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	free(new_key);
 	g_free(key);
-	
-	g_signal_handler_unblock((gpointer) widgets.entry_dict,
-                         settings.signal_id);
+	g_signal_handler_unblock(widgets.comboboxentry_dict,
+					settings.signal_id);
 } 
 
+
+/******************************************************************************
+ * Name
+ *   main_dictionary_button_clicked
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_dictionary_button_clicked(gint direction)
+ *
+ * Description
+ *   The back or foward dictinary key button was clicked.
+ *   the module key is set to the current dictkey.
+ *   then the module is incremented or dincremented.
+ *   the new key is returned from the module and the dictionary entry is set
+ *   to the new key. The entry is then activated.
+ *
+ * Return value
+ *   void
+ */
 
 
 void main_dictionary_button_clicked(gint direction)
@@ -1016,6 +1050,7 @@ void main_dictionary_button_clicked(gint direction)
 		(*backend->display_mod)++;
 	key = g_strdup((char*)backend->display_mod->KeyText());	
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	gtk_widget_activate(widgets.entry_dict);
 	g_free(key);
 }
 
@@ -1111,8 +1146,10 @@ void main_display_dictionary(char * mod_name, char * key)
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
 	if(!strcmp(old_key, key))
 		main_dictionary_entery_changed(settings.DictWindowModule);
-	else
+	else {
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+		gtk_widget_activate(widgets.entry_dict);
+	}
 	
 	if(settings.browsing)
 		gui_update_tab_struct(NULL,

@@ -220,8 +220,9 @@ struct _settings {
 	/* widget shadow type */
 	int shadow_type;
 	
-	/* signal id for dictionary entry */
+	/* signal id dictionary combo changed */
 	gulong signal_id;
+	
 };
 
 extern SETTINGS settings;
