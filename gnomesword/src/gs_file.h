@@ -1,10 +1,13 @@
-/***************************************************************************
-                          gs_file.h  -  description
-                             -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                :  tbiggs@infinet.com
- ***************************************************************************/
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_file.h
+    * -------------------
+    * Mon May 8 2000
+    * copyright (C) 2001 by tbiggs
+    * tbiggs@users.sourceforge.net
+    *
+ */
 
  /*
     *  This program is free software; you can redistribute it and/or modify
@@ -21,10 +24,13 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
+  
+#ifndef __GS_FILE_H_
+#define __GS_FILE_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include "sw_gnomesword.h"
 	
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
@@ -46,4 +52,6 @@ GtkWidget *create_fileselectionSave(void);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* __GS_FILE_H_ */
 

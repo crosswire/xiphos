@@ -1,12 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
- /*
-    * GnomeSword Bible Study Tool
-    * gs_abouts.h
-    * -------------------
-    * Tue Mar 13 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-  */
+/***************************************************************************
+gs_unlockkey_dlg.h
+ 
+Mon Aug 18 2001
+copyright (C) 2001 by Terry Biggs
+tbiggs@users.sourceforge.net
+ ***************************************************************************/
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -23,28 +22,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef __GS_ABOUTS_H_
-#define __GS_ABOUTS_H_ 
+#ifndef __GS_UNLOCKKEY_DLG_H__
+#define __GS_UNLOCKKEY_DLG_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+GtkWidget*
+create_dlgUnlockKey (void);
 
-#include <gnome.h>
-
-void on_btnAboutModuleOK_clicked(GtkButton * button,
-				     gpointer user_data);
-void on_btnAboutSwordOK_clicked(GtkButton * button,
-				    gpointer user_data); 
-GtkWidget *create_about(void);
-GtkWidget *create_AboutSword(void);
-GtkWidget *create_aboutmodules(void);
- 
- 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __GS_ABOUTS_H_ */
+#endif /* __GS_UNLOCKKEY_DLG_H__ */
 

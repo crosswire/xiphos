@@ -1,11 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                          gs_menu.cpp  -  description
-                             -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_menu.c
+    * -------------------
+    * Mon May 8 2000
+    * copyright (C) 2000 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+ */
+ 
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -37,9 +39,11 @@
 #include "support.h"
 #include "gs_bookmarks.h"
 
-/******************************************************************************
- * function prototypes only visible to this file
- ******************************************************************************/
+/*
+ *******************************************************************************
+ * static function prototypes
+ *******************************************************************************
+ */
 static GtkWidget* create_pmInt(GList *mods, gchar *intWindow);
 static GtkWidget *create_pmCommentsHtml(GList *comDescription, 
 				GList *dictDescription);
@@ -332,160 +336,6 @@ removemenuitems(GtkWidget * MainFrm, gchar * startitem, gint numberofitems)
 	gnome_app_remove_menus(GNOME_APP(MainFrm), startitem,
 			       numberofitems);
 }
-
-/*
-//-------------------------------------------------------------------------------------------
-static GtkWidget *create_pmComments2(GList * mods)
-{
-	GtkWidget *pmComments2;
-	GtkWidget *copy6;
-	GtkWidget *goto_reference2;
-	GtkWidget *lookup_selection2;
-	GtkWidget *about_this_module6;
-	GtkWidget *auto_scroll1;
-	GtkWidget *show_tabs1;
-	GtkWidget *view_module1;
-	GtkWidget *view_module1_menu;
-	GtkAccelGroup *view_module1_menu_accels;
-	GtkWidget *separator22, *item1;
-	GtkTooltips *tooltips;
-	GList *tmp = NULL;
-	gint i = 0;
-	gchar buf[80];
-	
-	tooltips = gtk_tooltips_new();
-
-	pmComments2 = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmComments2), "pmComments2",
-			    pmComments2);
-			
-	copy6 = gtk_menu_item_new_with_label("Copy");
-	gtk_widget_ref(copy6);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "copy6", copy6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(copy6);
-	gtk_container_add(GTK_CONTAINER(pmComments2), copy6);
-
-	goto_reference2 = gtk_menu_item_new_with_label("Goto Reference");
-	gtk_widget_ref(goto_reference2);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
-				 "goto_reference2", goto_reference2,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(goto_reference2);
-	gtk_container_add(GTK_CONTAINER(pmComments2), goto_reference2);
-
-	lookup_selection2 =
-	    gtk_menu_item_new_with_label("Lookup Selection");
-	gtk_widget_ref(lookup_selection2);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
-				 "lookup_selection2", lookup_selection2,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(lookup_selection2);
-	gtk_container_add(GTK_CONTAINER(pmComments2), lookup_selection2);
-
-	about_this_module6 =
-	    gtk_menu_item_new_with_label("About this module");
-	gtk_widget_ref(about_this_module6);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
-				 "about_this_module6", about_this_module6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(about_this_module6);
-	gtk_container_add(GTK_CONTAINER(pmComments2), about_this_module6);
-
-	auto_scroll1 = gtk_check_menu_item_new_with_label("Auto Scroll");
-	gtk_widget_ref(auto_scroll1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "auto_scroll1",
-				 auto_scroll1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(auto_scroll1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), auto_scroll1);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(auto_scroll1),
-				       TRUE);
-
-	show_tabs1 = gtk_check_menu_item_new_with_label("Show Tabs");
-	gtk_widget_ref(show_tabs1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "show_tabs1",
-				 show_tabs1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(show_tabs1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), show_tabs1);
-	gtk_tooltips_set_tip(tooltips, show_tabs1, "Show notebook tabs",
-			     NULL);
-
-	view_module1 = gtk_menu_item_new_with_label("View Module");
-	gtk_widget_ref(view_module1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "view_module1",
-				 view_module1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(view_module1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), view_module1);
-
-	view_module1_menu = gtk_menu_new();
-	gtk_widget_ref(view_module1_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
-				 "view_module1_menu", view_module1_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_module1),
-				  view_module1_menu);
-	view_module1_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module1_menu));
-
-	separator22 = gtk_menu_item_new();
-	gtk_widget_ref(separator22);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "separator22",
-				 separator22,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(separator22);
-	gtk_container_add(GTK_CONTAINER(view_module1_menu), separator22);
-	gtk_widget_set_sensitive(separator22, FALSE);
-
-
-	tmp = mods;
-	
-	while (tmp != NULL) {
-		item1 = gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_ref(item1);
-		gtk_object_set_data_full(GTK_OBJECT(pmComments2), "item1",
-					 item1,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(item1);
-		sprintf(buf, "%d", i);
-		gtk_signal_connect(GTK_OBJECT(item1), "activate",
-				   GTK_SIGNAL_FUNC(on_com_select_activate),
-				   g_strdup((gchar *) buf));
-
-		gtk_container_add(GTK_CONTAINER(view_module1_menu), item1);
-		++i;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-
-
-	gtk_signal_connect(GTK_OBJECT(copy6), "activate",
-			   GTK_SIGNAL_FUNC(on_copy3_activate),
-			   (gchar *) "textCommentaries");
-	gtk_signal_connect(GTK_OBJECT(goto_reference2), "activate",
-			   GTK_SIGNAL_FUNC(on_goto_reference2_activate),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(lookup_selection2), "activate",
-			   GTK_SIGNAL_FUNC(on_lookup_selection2_activate),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
-			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
-			   "commentary");
-
-	gtk_signal_connect(GTK_OBJECT(auto_scroll1), "activate",
-			   GTK_SIGNAL_FUNC(on_auto_scroll1_activate),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(show_tabs1), "activate",
-			   GTK_SIGNAL_FUNC(on_show_tabs_activate), NULL);
-
-	gtk_object_set_data(GTK_OBJECT(pmComments2), "tooltips", tooltips);
-	return pmComments2;
-}
-*/
-
 
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmCommentsHtml(GList *comDescription, 
