@@ -347,12 +347,14 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	gchar *tmpkey, tmpbuf[256], *use_font, *use_font_size;
 	gchar *text_str = NULL;
 	gchar *paragraphMark;
+	gchar *preverse = NULL;
 	gint count;
 	gboolean was_editable = FALSE;
 	gboolean newparagraph = FALSE;
 	gboolean use_gtkhtml_font = FALSE;
 	GString *str;
 	gint cur_verse, cur_chapter, i = 1;
+	gint x = 0;
 	const char *cur_book;
 	MOD_FONT *mf;
 
@@ -411,7 +413,15 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		g_free(tmpkey);
 		tmpkey = get_valid_key(tmpbuf);
-
+		
+		x = 0;
+		while((preverse = get_preverse_header(mod_name, tmpkey, x)) 
+								     != NULL) {
+			sprintf(buf,"<br><b>%s</b><br><br>",preverse);
+			str = g_string_append(str, buf);
+			++x;
+		}
+		
 		if (i == cur_verse)
 			textColor = settings.currentverse_color;
 		else
