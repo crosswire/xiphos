@@ -147,7 +147,8 @@ module.include.files=\
 	src/gui/sidebar.h\
 	src/gui/parallel_dialog.h\
 	src/gui/parallel_view.h\
-	src/gui/widgets.h
+	src/gui/widgets.h\
+	src/gui/preferences_cell_renderer.h
 
 module.source.name=.
 module.source.type=
@@ -279,7 +280,8 @@ module.source.files=\
 	src/gnome2/parallel_dialog.c\
 	src/gnome2/parallel_view.c\
 	src/gnome2/search_sidebar.c\
-	src/gnome2/bookmarks_treeview.c
+	src/gnome2/bookmarks_treeview.c\
+	src/gnome2/preferences_cell_renderer.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
