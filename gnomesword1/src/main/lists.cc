@@ -117,12 +117,14 @@ void main_init_lists(void)
 	settings.havebook = FALSE;
 	settings.havepercomm = FALSE;
 	
-	if(!backend) {
+	if(backend) {
+		mods.bible_books = backend->fill_Bible_books(2);
+		mods.options = backend->get_module_options();
+	} else {
 		start_backend = TRUE;
 		backend = new BackEnd();
+		backend_get_sword_locale();		
 	}
-	mods.bible_books = backend->fill_Bible_books(2);
-	mods.options = backend->get_module_options();
 	backend->init_lists(mod_lists);
 	if(start_backend)
 		delete backend;
