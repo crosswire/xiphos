@@ -551,7 +551,7 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 	gchar *book = NULL;
 	gchar *offset = NULL;
 
-
+	cur_g = g;
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(g->tree));
 
 
@@ -861,6 +861,28 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 	/*save_module_options(cur_t->mod_name, option, 
 				    choice);*/
 	gbs_display(cur_g, tree_level);
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_gbs_display(GBS_DATA * g)
+{
+	gbs_display(g, tree_level);
 }
 
 /******************************************************************************

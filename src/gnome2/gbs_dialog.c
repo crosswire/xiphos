@@ -745,6 +745,27 @@ static void set_new_globals(GLOBAL_OPS * gops)
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_gbs_dialog_display(void)
+{
+	gbs_display(cur_dlg, tree_level);
+}
+
+/******************************************************************************
+ * Name
  *   gui_open_gbs_dialog
  *
  * Synopsis

@@ -33,10 +33,10 @@ void gui_open_gbs_dialog(gchar * mod_name);
 void gui_setup_gbs_dialog(GList *mods);
 void gui_shutdown_gbs_dialog(void) ;
 void gui_close_gbs_dialog(GBS_DATA * dlg);
-
+void gui_update_gbs_dialog_display(void);
+	
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

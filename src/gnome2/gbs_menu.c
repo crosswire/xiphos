@@ -369,6 +369,10 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 				     GBS_DATA * t)
 {
 	gui_set_module_font(t->mod_name);
+	if(t->is_dialog)
+		gui_update_gbs_dialog_display();
+	else
+		gui_update_gbs_display(t);
 }
 
 
