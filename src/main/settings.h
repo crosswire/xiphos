@@ -31,7 +31,7 @@ extern "C" {
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	
-		gs_version[16], 	/* GnomeSWORD version */
+		gs_version[16], 	/* GnomeSword version */
 		MainWindowModule[80],	/* module to open at program startup  */
 		CommWindowModule[80],	/* module to open at program startup  */
 		DictWindowModule[80],	/* module to open at program startup  */
@@ -148,6 +148,8 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
+		show_style_bar, /* show style toolbar for editors */
+		show_edit_bar, /* show edit toolbar for editors */
 		
 		/** do we have these modules **/
 		havebible, 

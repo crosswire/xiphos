@@ -250,7 +250,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 */
 	text_page_changed(page_num, t);
 	/*
-	 * set program title to GnomeSWORD + current text module name 
+	 * set program title current text module name 
 	 */
 	gui_change_window_title(t->mod_name);
 	/*
@@ -868,7 +868,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*
-	 * set program title to GnomeSWORD + current text module name 
+	 * set program title to current text module name 
 	 */
 	gui_change_window_title(t->mod_name);
 	/*

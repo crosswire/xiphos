@@ -1,5 +1,10 @@
 2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* moved editors from upper workbook to lower workbook
+	
+
+2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* added gnome/font_dialog.c and gui/font_dialog.h
 	* added backend/module_fonts.cpp and backend/module_fonts.h
 

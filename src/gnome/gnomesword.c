@@ -130,7 +130,7 @@ void init_gnomesword(void)
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 	
-	g_print("%s\n", "Initiating GnomeSWORD\n");
+	g_print("%s\n", "Initiating GnomeSword\n");
 
 	gui_set_shortcutbar_porgram_start();
 	
@@ -219,5 +219,5 @@ void shutdown_gnomesword(void)
 	if(settings.havepercomm)
 		gui_shutdown_percomm();
 	
-	g_print("\nGnomeSWORD is shutdown\n");
+	g_print("\GnomeSword is shutdown\n");
 }

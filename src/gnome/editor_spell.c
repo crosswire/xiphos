@@ -602,7 +602,7 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_gui.window",
 			    spc_gui.window);
 	gtk_window_set_title(GTK_WINDOW(spc_gui.window),
-			     _("GnomeSWORD Spell Checker"));
+			     _("GnomeSword Spell Checker"));
         gtk_window_set_default_size (GTK_WINDOW (spc_gui.window), 300, 200);
 
 	spc_gui.vbox = gtk_vbox_new(FALSE, 0);

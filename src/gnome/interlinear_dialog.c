@@ -477,7 +477,7 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	gtk_object_set_data(GTK_OBJECT(dialog_interlinear),
 			    "dialog_interlinear", dialog_interlinear);
 	gtk_window_set_title(GTK_WINDOW(dialog_interlinear),
-			     _("GnomeSWORD - Interlinear"));
+			     _("GnomeSword - Interlinear"));
 	gtk_window_set_default_size(GTK_WINDOW(dialog_interlinear), 657,
 				    361);
 	gtk_window_set_policy(GTK_WINDOW(dialog_interlinear), TRUE,
