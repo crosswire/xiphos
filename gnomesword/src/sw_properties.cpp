@@ -145,8 +145,16 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["User Options"]["UseDefault"].c_str());
 	settings->strongs =
 	    atoi(settingsInfo["User Options"]["strongs"].c_str());
+	settings->morphs =
+	    atoi(settingsInfo["User Options"]["morphs"].c_str());    
 	settings->footnotes =
 	    atoi(settingsInfo["User Options"]["footnotes"].c_str());
+	settings->strongsint =
+	    atoi(settingsInfo["User Options"]["strongs interlinear"].c_str());
+	settings->morphsint =
+	    atoi(settingsInfo["User Options"]["morphs interlinear"].c_str());    
+	settings->footnotesint =
+	    atoi(settingsInfo["User Options"]["footnotes interlinear"].c_str());
 	settings->versestyle =
 	    atoi(settingsInfo["User Options"]["versestyle"].c_str());
 	settings->autosavepersonalcomments =
@@ -294,10 +302,30 @@ gboolean saveconfig(void)
 		else
 			settingsInfo["User Options"]["strongs"] = "0";
 
+		if (settings->morphs)
+			settingsInfo["User Options"]["morphs"] = "1";
+		else
+			settingsInfo["User Options"]["morphs"] = "0";
+
 		if (settings->footnotes)
 			settingsInfo["User Options"]["footnotes"] = "1";
 		else
 			settingsInfo["User Options"]["footnotes"] = "0";
+
+		if (settings->strongsint)
+			settingsInfo["User Options"]["strongs interlinear"] = "1";
+		else
+			settingsInfo["User Options"]["strongs interlinear"] = "0";
+
+		if (settings->morphsint)
+			settingsInfo["User Options"]["morphs interlinear"] = "1";
+		else
+			settingsInfo["User Options"]["morphs interlinear"] = "0";
+
+		if (settings->footnotesint)
+			settingsInfo["User Options"]["footnotes interlinear"] = "1";
+		else
+			settingsInfo["User Options"]["footnotes interlinear"] = "0";
 
 		if (settings->versestyle)
 			settingsInfo["User Options"]["versestyle"] = "1";

@@ -577,7 +577,7 @@ morphsSWORD(gint window, gboolean choice)
 			}else{   
 				mainMgr->setGlobalOption("Morphological Tags","Off");	
 			}
-			settings->strongs = choice;   //-- store choice in settings
+			settings->morphs = choice;   //-- store choice in settings
 			if(havebible){
 				curMod->Display(); //-- we need to show change
 			}
@@ -588,6 +588,7 @@ morphsSWORD(gint window, gboolean choice)
 			}else{   				
 				mainMgr1->setGlobalOption("Morphological Tags","Off");	
 			}
+			settings->morphsint = choice;   //-- store choice in settings
 			if(havebible){
 				updateinterlinearpage();
 			}
@@ -622,6 +623,7 @@ strongsSWORD(gint window, gboolean choice)
 			}else{   //-- we don't want strongs numbers					
 				mainMgr1->setGlobalOption("Strong's Numbers","Off");
 			}
+			settings->strongsint = choice;   //-- store choice in settings
 			if(havebible){
 				updateinterlinearpage();
 			}
@@ -644,7 +646,7 @@ footnotesSWORD(gint window, gboolean choice)
 			}else{   
 				mainMgr->setGlobalOption("Footnotes","Off");	
 			}
-			settings->strongs = choice;  
+			settings->footnotes = choice;  
 			if(havebible){
 				curMod->Display(); 
 			}
@@ -655,6 +657,7 @@ footnotesSWORD(gint window, gboolean choice)
 			}else{   				
 				mainMgr1->setGlobalOption("Footnotes","Off");	
 			}
+			settings->footnotesint = choice;  
 			if(havebible){
 				updateinterlinearpage();
 			}
@@ -1089,10 +1092,17 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label, GtkLabel *version_label) //--  s
  * option - option to set
  * yesno - yes or no
 ******************************************************************************/
-void setglobalopsSWORD(gchar *option, gchar *yesno)
+void setglobalopsSWORD(gint window, gchar *option, gchar *yesno)
 {
 	/* turn option on or off */
-	mainMgr->setGlobalOption(option, yesno);	
+	switch(window){
+		case 0: /*** Bible text window ***/
+			mainMgr->setGlobalOption(option, yesno);	
+		break;
+		case 1: /*** interlinear window ***/
+			mainMgr1->setGlobalOption(option, yesno);
+		break;
+	}
 }
 
 /******************************************************************************

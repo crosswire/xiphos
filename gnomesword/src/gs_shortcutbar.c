@@ -39,14 +39,14 @@
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
 
+GtkWidget *shortcut_bar;
+EShortcutModel *shortcut_model;
 extern gchar *shortcut_types[];
-extern GtkWidget *shortcut_bar;
 extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
 extern gboolean havedict;	/* let us know if we have at least one lex-dict module */
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
-extern EShortcutModel *shortcut_model;
 GList *sblist;
 gint groupnum0 = -1,
     groupnum1 = -1,
@@ -666,7 +666,6 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	gchar *type, *ref;
 	gchar modName[16];	
 
-
 	if (event->button.button == 1) {
 		app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
@@ -676,9 +675,13 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 		memset(modName,0,16); 
 		modNameFromDesc(modName, ref);
 		if (group_num == groupnum0) {
-			gotoBookmarkSWORD(modName, settings->currentverse);
+			gint sbtype;			
+			sbtype = sbtypefromModNameSBSW(modName);
+			if(sbtype == 0 || sbtype == 1)
+				gotoBookmarkSWORD(modName, settings->currentverse);
+			else
+				gotoBookmarkSWORD(modName, settings->dictkey);
 		}
-
 		if (group_num == groupnum1) {
 			if (havebible) {	/* let's don't do this if we don't have at least one Bible text */
 				gotoBookmarkSWORD(modName,
@@ -1193,6 +1196,40 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
 }
 
+#define NUM_SHORTCUT_TYPES 5
+gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
+	"bible:", "commentary:", "dictionary:",
+	"greek:","hebrew:"
+};
+gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
+	"gnomesword/book-un.png",
+	"gnomesword/book-bl.png",
+	"gnomesword/book-green.png",
+	"gnomesword/book-un.png",
+	"gnomesword/book-un.png"
+};
+
+GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
+static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
+				const gchar * url, gpointer data);
+
+static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
+				const gchar * url, gpointer data)
+{
+	gint i;
+
+	for (i = 0; i < NUM_SHORTCUT_TYPES; i++) {
+		if (!strncmp(url, shortcut_types[i],
+			     strlen(shortcut_types[i]))) {
+			gdk_pixbuf_ref(icon_pixbufs[i]);
+			return icon_pixbufs[i];
+		}
+	}
+	return NULL;
+}
+
+
+
 void
 setupSB(SETTINGS *s)
 {
@@ -1205,8 +1242,24 @@ setupSB(SETTINGS *s)
 	    *scrolledwindow2, *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
 	gint sbtype = 0, large_icons = 0;
 	gchar *filename, group_name[256], icon_size[10];
-	gchar modName[16];
-	
+	gchar modName[16], *pathname;	
+	gint i; 
+/************************************************************/
+	gtk_widget_pop_visual();
+	gtk_widget_pop_colormap();
+
+	/* Load our default icons. */
+	for (i = 0; i < NUM_SHORTCUT_TYPES; i++) {
+		pathname = gnome_pixmap_file(icon_filenames[i]);
+		if (pathname)
+			icon_pixbufs[i] =
+			    gdk_pixbuf_new_from_file(pathname);
+		else
+			icon_pixbufs[i] = NULL;
+	}
+/***********************************************************/	
+	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
+					 icon_callback, NULL);
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {

@@ -91,7 +91,11 @@ struct _settings {
 	gboolean   
 		usedefault,
 		strongs,	//-- toogle button and check menu states
+		morphs,
 	        footnotes,
+		strongsint,	
+		morphsint,
+	        footnotesint,
 	        versestyle,
 	        interlinearpage,
 	        autosavepersonalcomments,
@@ -127,8 +131,6 @@ gint addnotebookpages(GtkWidget *notebook,
 		GList *list,
 		gchar *modName); 
 void UpdateChecks(GtkWidget * mainform);
-gint getversenumber(GtkWidget * text);
-gint getdictnumber(GtkWidget * text);
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
