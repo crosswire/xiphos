@@ -1,8 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   doc macros po src
+SUBDIRS = m4  doc macros po src
+
 
 BUILT_SOURCES = ${PACKAGE}.desktop
+
 
 gnomesworddoc_DATA = \
  	   README\
@@ -49,3 +51,8 @@ dist-hook:
           done \
         fi
 
+
+ACLOCAL_AMFLAGS = -I m4
+
+EXTRA_DIST = config.rpath\
+            ${PACKAGE}.desktop.in

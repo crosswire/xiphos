@@ -1053,8 +1053,6 @@ static GtkWidget *create_style_toolbar (GSHTMLEditorControlData *cd)
 	gtk_signal_connect (GTK_OBJECT (cd->html), "current_paragraph_alignment_changed",
 			    GTK_SIGNAL_FUNC (paragraph_alignment_changed_cb), cd);
 
-	/*gtk_box_pack_start(GTK_BOX(widgets.hbox_toolbar), cd->handlebox_toolbar, TRUE,
-			   TRUE, 0);*/
 	return cd->toolbar_style;
 }
 

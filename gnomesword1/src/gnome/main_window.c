@@ -175,11 +175,10 @@ void gui_set_bible_comm_layout(void)
 {
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == FALSE)) {
-		e_paned_set_position(E_PANED
-				     (widgets.vpaned), 0);
+		e_paned_set_position(E_PANED(widgets.vpaned), 0);
 	} else if (settings.showdicts == FALSE) {
 		e_paned_set_position(E_PANED
-				     (widgets.vpaned), 
+				     (widgets.vpaned),
 				     settings.gs_hight);
 	} else {
 		e_paned_set_position(E_PANED
@@ -189,8 +188,7 @@ void gui_set_bible_comm_layout(void)
 
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == TRUE)) {
-		e_paned_set_position(E_PANED(widgets.hpaned),
-				      0);
+		e_paned_set_position(E_PANED(widgets.hpaned), 0);
 	} else if (settings.showtexts == FALSE) {
 		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.gs_width);
@@ -202,8 +200,7 @@ void gui_set_bible_comm_layout(void)
 		   && (settings.showcomms == TRUE)) {
 		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.biblepane_width);
-	}
-	else if (settings.showtexts == TRUE) {
+	} else if (settings.showtexts == TRUE) {
 		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else {
@@ -234,7 +231,7 @@ void gui_change_window_title(gchar * module_name)
 	/*
 	 * set program title to current module name 
 	 */
-	sprintf(title, "%s - %s",settings.program_title,
+	sprintf(title, "%s - %s", settings.program_title,
 		get_module_description(module_name));
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 }
@@ -265,7 +262,7 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	gchar *val_key = NULL;
 
 	mod_type = get_mod_type(module_name);
-	
+
 	switch (mod_type) {
 	case TEXT_TYPE:
 		if (settings.havebible) {
@@ -361,7 +358,7 @@ void gui_change_verse(gchar * key)
 	 */
 	if (!settings.editnote)
 		if (settings.havepercomm)
-			if(!settings.use_percomm_dialog)
+			if (!settings.use_percomm_dialog)
 				gui_display_percomm(val_key);
 
 	/* 
@@ -488,7 +485,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 					    gpointer user_data)
 {
 	gint panesize;
-		
+
 	panesize = e_paned_get_position(E_PANED(widget));
 
 	if (panesize > 15) {
@@ -583,13 +580,6 @@ void create_mainwindow(void)
 	gtk_widget_show(vbox_gs);
 	gnome_app_set_contents(GNOME_APP(widgets.app), vbox_gs);
 
-
-	widgets.hbox_toolbar = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(widgets.hbox_toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.hbox_toolbar,
-			   FALSE, TRUE, 0);
-	
-	
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox25);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), hbox25, TRUE, TRUE, 0);
@@ -614,7 +604,7 @@ void create_mainwindow(void)
 	/*
 	 * nav toolbar 
 	 */
-
+	 
 	nav_toolbar = gui_create_nav_toolbar();
 	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
 			   FALSE, 0);
@@ -626,8 +616,10 @@ void create_mainwindow(void)
 
 	widgets.vpaned = e_vpaned_new();
 	gtk_widget_show(widgets.vpaned);
-	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned), 1);
+	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE,
+			 0);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned),
+				       1);
 
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
@@ -636,24 +628,27 @@ void create_mainwindow(void)
 
 	widgets.hpaned = e_hpaned_new();
 	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE,
+			   0);
 
 
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
-	e_paned_pack1(E_PANED(widgets.hpaned), widgets.vbox_text, FALSE, TRUE);
+	e_paned_pack1(E_PANED(widgets.hpaned), widgets.vbox_text, FALSE,
+		      TRUE);
 
 	/*
 	 * text notebook
 	 */
 	widgets.notebook_text = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_text);
-	gtk_box_pack_start(GTK_BOX(widgets.vbox_text), widgets.notebook_text,
-			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_text),
+			   widgets.notebook_text, TRUE, TRUE, 0);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_text),
 				    TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
-
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_text), FALSE);
 
 	/*
 	 * commentary notebook
@@ -663,9 +658,11 @@ void create_mainwindow(void)
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_comm),
 				    TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_comm));
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_comm), FALSE);
 
-	e_paned_pack2(E_PANED(widgets.hpaned), widgets.notebook_comm, TRUE,
-		      TRUE);
+	e_paned_pack2(E_PANED(widgets.hpaned), widgets.notebook_comm,
+		      TRUE, TRUE);
 
 	/*
 	 * lower_workbook
@@ -673,14 +670,15 @@ void create_mainwindow(void)
 	widgets.workbook_lower = gtk_notebook_new();
 	gtk_widget_show(widgets.workbook_lower);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.workbook_lower), FALSE);
 
-	e_paned_pack2(E_PANED(widgets.vpaned), widgets.workbook_lower, TRUE,
-		      TRUE);
+	e_paned_pack2(E_PANED(widgets.vpaned), widgets.workbook_lower,
+		      TRUE, TRUE);
 
 	/*
 	 * dict/lex  
 	 */
-
 	widgets.notebook_dict = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_dict);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
@@ -690,6 +688,8 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_dict));
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_dict), FALSE);
 
 	label41 = gtk_label_new(_("Dict/Lex"));
 	gtk_widget_show(label41);
@@ -722,6 +722,8 @@ void create_mainwindow(void)
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   FALSE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_gbs), FALSE);
 
 	label185 = gtk_label_new(_("Books"));
 	gtk_widget_show(label185);
@@ -744,9 +746,9 @@ void create_mainwindow(void)
 	/*
 	 * percomm 
 	 */
-	if (!settings.use_percomm_dialog) { 
+	if (!settings.use_percomm_dialog) {
 		gui_percomm_in_workbook(widgets.workbook_lower,
-							page_num);
+					page_num);
 		++page_num;
 	}
 
@@ -754,11 +756,11 @@ void create_mainwindow(void)
 	 * studypad editor 
 	 */
 	if (settings.use_studypad) {
-		if (!settings.use_studypad_dialog) { 
+		if (!settings.use_studypad_dialog) {
 			settings.studypad_dialog_exist = FALSE;
-			gui_open_studypad(widgets.workbook_lower, 
-					settings.studypadfilename,
-		       			page_num);
+			gui_open_studypad(widgets.workbook_lower,
+					  settings.studypadfilename,
+					  page_num);
 			++page_num;
 		}
 	}
@@ -806,7 +808,7 @@ void create_mainwindow(void)
 					  (widgets.workbook_lower),
 					  page_num), _("Interlinear"));
 	settings.interlinear_page = page_num;
-	
+
 	/*
 	 * end Interlinear page 
 	 */
@@ -846,10 +848,12 @@ void create_mainwindow(void)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "epaned");
-	gtk_signal_connect(GTK_OBJECT(widgets.vpaned), "button_release_event",
+	gtk_signal_connect(GTK_OBJECT(widgets.vpaned),
+			   "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "vpaned");
-	gtk_signal_connect(GTK_OBJECT(widgets.hpaned), "button_release_event",
+	gtk_signal_connect(GTK_OBJECT(widgets.hpaned),
+			   "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
