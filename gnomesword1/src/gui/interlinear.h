@@ -28,6 +28,7 @@ extern "C" {
 
 #include "main/settings.h"
 	
+void gui_check_interlinear_modules(void);	
 void gui_set_interlinear_options_at_start(void);
 void gui_update_interlinear_page(void);
 void gui_update_interlinear_page_detached(void);
