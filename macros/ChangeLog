@@ -1,3 +1,19 @@
+2002-02-10  Chema Celorio  <chema@celorio.com>
+
+	* Port to the GNOME 2.0 platform
+
+2002-02-08  Chema Celorio  <chema@celorio.com>
+
+	* configure.in: 0.12.0 here we go
+2001-12-11  Israel Escalante <israel@ximian.com>
+
+	* Release 0.10.0.
+
+2001-11-28  Sebastian Rittau  <srittau@jroger.in-berlin.de>
+
+	* gnome-pilot.m4 (PILOT_LINK_HOOK):
+	Fixed a typo: inlude -> include
+
 2001-10-24  jacob berkman  <jacob@ximian.com>
 
 	* aclocal-include.m4 (AM_ACLOCAL_INCLUDE): do a test that is not

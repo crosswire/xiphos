@@ -5,12 +5,14 @@ dnl    "no" otherwise.  May define USE_EXT2FSLIB for cpp.
 dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 
 AC_DEFUN([GNOME_UNDELFS_CHECKS], [
-  AC_CHECK_HEADERS(ext2fs/ext2fs.h linux/ext2_fs.h)
   ext2fs_undel=no
   EXT2FS_UNDEL_LIBS=
-  if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
+  AC_CHECK_HEADERS(linux/ext2_fs.h)
+  if test x$ac_cv_header_linux_ext2_fs_h = xyes
   then
-    if test x$ac_cv_header_linux_ext2_fs_h = xyes
+    AC_CHECK_HEADERS(ext2fs/ext2fs.h, , , [#include <stdio.h>
+#include <linux/ext2_fs.h>])
+    if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
     then
       AC_DEFINE(USE_EXT2FSLIB)
       ext2fs_undel=yes
