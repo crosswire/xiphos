@@ -32,7 +32,7 @@
 #include <regex.h>
 #include <string.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include <nsIDOMHTMLAnchorElement.h>
 #endif
@@ -392,7 +392,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 }
 
 
-#ifdef USE_MOZILLA 
+#ifdef USE_GTKMOZEMBED 
 char GTKMozEntryDisp::Display(SWModule &imodule) 
 {
 	GString *str = g_string_new(NULL);

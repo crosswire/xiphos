@@ -105,7 +105,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 			}
 		}
 
-#ifdef USE_MOZILLA		// <w> tag
+#ifdef USE_GTKMOZEMBED		// <w> tag
 		else if (!strcmp(tag.getName(), "w")) {
 			// start <w> tag
 			if ((!tag.isEmpty()) && (!tag.isEndTag())) {

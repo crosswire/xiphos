@@ -26,7 +26,7 @@
 #include <localemgr.h>
 #include <swversion.h>
 
-//#ifdef USE_MOZILLA
+//#ifdef USE_GTKMOZEMBED
 #include "backend/gs_markupfiltmgr.h"
 //#else
 //#include <markupfiltmgr.h>

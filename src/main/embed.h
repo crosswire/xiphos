@@ -29,14 +29,14 @@ extern "C"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	
 void embed_copy_selection(GtkMozEmbed *mozilla_embed);
 void embed_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor);
 void embed_navigate_to_anchor (GtkMozEmbed *mozilla_embed, const char *anchor);
 GtkWidget *embed_new(gint window);
 
-#endif /* USE_MOZILLA */
+#endif /* USE_GTKMOZEMBED */
 
 #ifdef __cplusplus
 }
