@@ -33,14 +33,8 @@ void set_text_module_global_option(gchar * option,
 const char* text_get_description(char * mod_name);
 gint check_for_global_option(gchar * mod_name, gchar * option);
 	
-const char *get_book_viewtext(void);	
-int get_chapter_viewtext(void);
-int get_verse_viewtext(void);
-void goto_verse_viewtext(char * verse);
-void load_module_viewtext(char * module_name);
-void shutdown_viewtext(void);	
 void set_global_options_viewtext(gchar *option, gboolean choice);
-void setup_viewtext(GtkWidget * text);
+char *get_viewtext_text(char *mod_name, char *key);
 
 #ifdef __cplusplus
 }

@@ -39,6 +39,7 @@
 #include "gui/info_box.h"
 #include "gui/gbs.h"
 #include "gui/bibletext.h"
+#include "gui/bibletext_dialog.h"
 #include "gui/commentary.h"
 #include "gui/dictlex.h"
 
@@ -110,6 +111,12 @@ void init_gnomesword(void)
 	 */
 	if (havebible) {
 		gui_setup_text(get_list(TEXT_LIST));
+	}
+	/*
+	 *  setup Bible text dialog gui 
+	 */
+	if (havebible) {
+		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 
 	/*
@@ -210,8 +217,10 @@ void gnomesword_shutdown(void)
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
 	
-	if(havebible)
+	if(havebible){
 		gui_shutdown_text();
+		gui_shutdown_bibletext_dialog();
+	}
 	if(havebook)
 		gui_shutdown_gbs();
 	if(havecomm)
@@ -716,6 +725,11 @@ static gchar *update_nav_controls(gchar * key)
 	return val_key;
 }
 
+
+int get_module_page(char *module_name, char *module_type)
+{
+	return backend_get_module_page(module_name, module_type);
+}
 void change_module_and_key(gchar * module_name, gchar * key)
 {
 	gint mod_type;

@@ -689,7 +689,7 @@ static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "_bibletext.h"
  *
- *  void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *  void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)	
  *
  * Description
  *   opens view text dialog
@@ -698,23 +698,9 @@ static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem *menuitem, gpointer user_data)
-{
-	static GtkWidget *dlg;
-	GdkCursor *cursor;
-
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(settings.app->window, cursor);
-
-	if (!isrunningVT) {
-		dlg = gui_create_bibletext_dialog();
-		isrunningVT = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(settings.app->window, cursor);
+static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+{	
+	gui_open_bibletext_dialog(t->mod_num);
 }
 
 /******************************************************************************
@@ -1004,7 +990,7 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 			   (on_text_showtoolbar_activate), t);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_view_new_activate), NULL);
+			   (on_view_new_activate), t);
 	return pm_text;
 }
 
