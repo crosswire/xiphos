@@ -33,7 +33,7 @@ extern "C" {
 #endif
 #include "gs_gnomesword.h"
 
-	GtkWidget *create_mainwindow(SETTINGS *s);
+	void create_mainwindow(SETTINGS *s);
 
 #ifdef __cplusplus
 }
