@@ -180,7 +180,7 @@ gint embed_dom_mouse_over(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 	
 	if(shift_key_presed)
 		return FALSE;
-	
+	main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
