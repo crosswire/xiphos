@@ -153,7 +153,8 @@ module.pixmap.files=\
 	strongs3.xpm\
 	sword.xpm\
 	yes.xpm\
-	sword2.xpm
+	sword2.xpm\
+	splash.png
 
 module.data.name=data
 module.data.type=
@@ -164,7 +165,8 @@ module.help.name=help
 module.help.type=
 module.help.expanded=1
 module.help.files=\
-	help00.html
+	help00.html\
+	intro.html
 
 module.doc.name=doc
 module.doc.type=

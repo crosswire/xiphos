@@ -29,18 +29,21 @@
 extern "C" {
 #endif
 
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
+#include "gs_gnomesword.h"
 
 void on_btnSB_clicked(GtkButton * button, gpointer user_data);
 void setupSB(GList *text, GList *commentary, GList *dictionary);
-gint add_sb_group(EShortcutBar * shortcut_bar,
-		gchar * group_name);
-
-void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
+/*void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				       GdkEvent * event,
 				       gint group_num, gint item_num);
-
-				
+*/
+void update_shortcut_bar(SETTINGS *s,
+					GList *text, 
+					GList *commentary, 
+					GList *dictionary);
+		
+	
 #ifdef __cplusplus
 }
 #endif

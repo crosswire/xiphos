@@ -41,64 +41,70 @@ struct _mods {
 			*description;
 	gint		modnum;
 };
-
+ 
 typedef struct _settings SETTINGS;
 struct _settings {
-	gchar	MainWindowModule[80],	/* modules to open at program startup  */
-			CommWindowModule[80],
-			DictWindowModule[80],
-	           	Interlinear1Module[80],
-	           	Interlinear2Module[80],
-	           	Interlinear3Module[80], 
-	           	Interlinear4Module[80],
-	           	Interlinear5Module[80], 
-	           	personalcommentsmod[80], 
-			lex_greek[80],
-			lex_hebrew[80],
-	           	currentverse[80],	/* verse to use at program startup */
-	           	dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
-	           	studypadfilename[255],   /* name of file in studypad when we closed */
-			studypaddir[255],	    /* directory for studypad files */
-	           	bible_text_color[15], /* color for text */
-	           	bible_bg_color[15],  /* color for background */
-	           	currentverse_color[15],  /* color for current verse */	
-	           	currentverse_bg_color[15],  /* color for current verse background */
-	           	link_color[15],  /* color for strongs, morph tags */	
-			bible_verse_num_color[15],
-			bible_font_size[4], /*** html font sizes ***/
-			commentary_font_size[4],
-			dictionary_font_size[4],
-			interlinear_font_size[4],
-			verselist_font_size[4],
-			verse_num_font_size[4];			
-	gint       	currentverse_red,	/* current verse colors */
-	           	currentverse_green, 
-	           	currentverse_blue,
-			shortcutbar_width,
-			upperpane_hight,
-			biblepane_width,
-			gs_width,
-			gs_hight,	
-		  	notebook3page;	//-- notebook 3 page number
-	gboolean   usedefault,
-			strongs,	//-- toogle button and check menu states
-	           	footnotes,
-	           	versestyle,
-	           	interlinearpage,
-	           	autosavepersonalcomments,
-	           	formatpercom,
-	           	showcomtabs,
-	           	showdicttabs,
-	           	showshortcutbar,
-	           	showtextgroup,
-	           	showcomgroup,
-	           	showdictgroup,
-	           	showbookmarksgroup,
-	        	showhistorygroup,
-			showsplash,
-			text_tabs, /* show module tabs in text window if true  */
-			comm_tabs, /* show module tabs in commentary window if true  */
-			dict_tabs; /* show module tabs in text dict/lex if true  */; 
+	GtkWidget
+		*app,
+		*versestyle_item;	/* widget to access toggle menu - for versestyle */
+	gchar	
+		MainWindowModule[80],	/* modules to open at program startup  */
+		CommWindowModule[80],
+		DictWindowModule[80],
+	        Interlinear1Module[80],
+	        Interlinear2Module[80],
+	        Interlinear3Module[80], 
+	        Interlinear4Module[80],
+	        Interlinear5Module[80], 
+	        personalcommentsmod[80], 
+		lex_greek[80],
+		lex_hebrew[80],
+	        currentverse[80],	/* verse to use at program startup */
+	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
+	        studypadfilename[255],   /* name of file in studypad when we closed */
+		studypaddir[255],	    /* directory for studypad files */
+	        bible_text_color[15], /* color for text */
+	        bible_bg_color[15],  /* color for background */
+	        currentverse_color[15],  /* color for current verse */	
+	        currentverse_bg_color[15],  /* color for current verse background */
+	        link_color[15],  /* color for strongs, morph tags */	
+		bible_verse_num_color[15],
+		bible_font_size[4], /*** html font sizes ***/
+		commentary_font_size[4],
+		dictionary_font_size[4],
+		interlinear_font_size[4],
+		verselist_font_size[4],
+		verse_num_font_size[4];			
+	gint 
+      		currentverse_red,	/* current verse colors */
+	        currentverse_green, 
+	        currentverse_blue,
+		shortcutbar_width,
+		upperpane_hight,
+		biblepane_width,
+		gs_width,
+		gs_hight,	
+		notebook3page;	//-- notebook 3 page number
+	gboolean   
+		usedefault,
+		strongs,	//-- toogle button and check menu states
+	        footnotes,
+	        versestyle,
+	        interlinearpage,
+	        autosavepersonalcomments,
+	        formatpercom,
+	        showcomtabs,
+	        showdicttabs,
+	        showshortcutbar,
+	        showtextgroup,
+	        showcomgroup,
+	        showdictgroup,
+	        showbookmarksgroup,
+	        showhistorygroup,
+		showsplash,
+		text_tabs, /* show module tabs in text window if true  */
+		comm_tabs, /* show module tabs in commentary window if true  */
+		dict_tabs; /* show module tabs in text dict/lex if true  */; 
 };
 
 typedef struct _gs_app GS_APP;
@@ -135,13 +141,8 @@ gint addnotebookpages(GtkWidget *notebook,
 		GList *list,
 		gchar *modName); 
 void UpdateChecks(GtkWidget * mainform);
-void applyoptions(void);
 gint getversenumber(GtkWidget * text);
 gint getdictnumber(GtkWidget * text);
-void sbchangeModSword(GtkWidget *app, 
-		GtkWidget *shortcut_bar, 
-		gint group_num, 
-		gint item_num);		
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
