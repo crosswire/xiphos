@@ -435,6 +435,87 @@ char InterlinearDisp::Display(SWModule & imodule)
 	return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+char SearchResultsDisp::Display(SWModule & imodule)
+{
+	gchar tmpBuf[800], *buf, *rowcolor;
+	gint i;
+	bool utf = false;
+	gint len;
+	gchar *utf8str, *use_font, *use_font_size, *font, *token;
+	gint utf8len;
+	string lang, swfont, swfontsize;
+	SWMgr *Mgr;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
+	static gint row = 1;
+
+	Mgr = new SWMgr();	//-- create sword mgr
+
+	if ((sit =
+	     Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
+		ConfigEntMap & section = (*sit).second;
+		swfont =
+		    ((entry =
+		      section.find("GSFont")) !=
+		     section.end())? (*entry).second : (string) "";
+		swfontsize =
+		    ((entry =
+		      section.find("GSFont size")) !=
+		     section.end())? (*entry).second : (string) "";
+		lang =
+		    ((entry =
+		      section.find("Lang")) !=
+		     section.end())? (*entry).second : (string) "";
+	}
+	if (strcmp(swfontsize.c_str(), "")) {
+		use_font_size = (gchar *) swfontsize.c_str();
+	} else {
+		use_font_size = settings->interlinear_font_size;
+	}
+	font = g_strdup("-adobe-helvetica-*-*");
+	if (strcmp(swfont.c_str(), "")) {
+		use_font = (gchar *) swfont.c_str();
+	} else {
+		font = "-adobe-helvetica-*-*";
+		if (!stricmp(lang.c_str(), "") ||
+		    !stricmp(lang.c_str(), "en") ||
+		    !stricmp(lang.c_str(), "de")) {
+			font = g_strdup(settings->default_font);
+		} else if (!stricmp(lang.c_str(), "grc")) {
+			font = g_strdup(settings->greek_font);
+		} else if (!stricmp(lang.c_str(), "he")) {
+			font = g_strdup(settings->hebrew_font);
+		} else {
+			font = g_strdup(settings->unicode_font);
+		}
+		use_font = gethtmlfontnameHTML(font);
+	}
+	sprintf(tmpBuf,
+			"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s] </font></i>",
+			settings->bible_verse_num_color,
+			settings->verse_num_font_size, imodule.KeyText());
+		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	
+	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	//, settings->interlinear_font_size);
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
+		    strlen((const char *) imodule));
+	sprintf(tmpBuf,
+		"</font><small>[<A HREF=\"%s\">view context</a>]</small><br>",
+		imodule.KeyText());
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
+	g_free(font);
+	delete Mgr;
+	return 0;
+}
+
 /* ***************************************************************************
  * to display Sword module about information
  *****************************************************************************/

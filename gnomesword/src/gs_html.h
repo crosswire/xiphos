@@ -55,6 +55,8 @@ extern "C" {
 	void sethtmltoeditHTML(gboolean choice);
 	gchar *gethtmlfontnameHTML(gchar *xfontname);
 
+	/*** marks search words or phrase in search results html ***/
+	void markSearchWordsHTML(GtkWidget *html_widget, gchar *words);
 #ifdef __cplusplus
 }
 #endif
