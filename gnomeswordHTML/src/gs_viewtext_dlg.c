@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            gs_viewcomm.c
+                            gs_viewtext_dlg.c
                              -------------------
     begin                : Sat Mar 24 2001
     copyright            : (C) 2001 by Terry Biggs
@@ -43,6 +43,8 @@ gboolean isrunningVT = FALSE;	/* is the view commentary dialog runing */
 GtkWidget *text;
 GList *textList;
 GtkWidget *dlgViewText;
+gchar vt_current_verse[80];
+VT_REF *vtref;
 
 /****************************************************************************************
  * externs
@@ -98,7 +100,7 @@ static void
 on_btnGotoVerse_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-	//gchar *, *, *;
+	
 	
 }
 
@@ -154,11 +156,15 @@ on_btnVTClose_clicked (GtkButton * button, gpointer user_data)
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
+static void updatecontrols( gchar *ref )
+{
+	getvtrefSWORD(vtref);
+	g_warning(vtref->book);
+}
 
 /******************************************************************************
  * viewtext ui
  ******************************************************************************/
-
 GtkWidget *
 create_dlgViewText (void)
 {
@@ -428,6 +434,8 @@ create_dlgViewText (void)
 	//loadVTmodSWORD(gettextmodSWORD());
 	//gtk_entry_set_text(GTK_ENTRY(entry1), current_verse);
 	gotoverseVTSWORD(current_verse);
+	sprintf(vt_current_verse,"%s",current_verse);
+	updatecontrols(vt_current_verse);
 	g_list_free(textList);
 	isrunningVT = TRUE;
 
