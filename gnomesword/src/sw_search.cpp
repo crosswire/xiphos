@@ -54,13 +54,14 @@
 #include "support.h"
 #include "sw_utility.h"
 #include "sw_verselist_sb.h"
+#include "sw_gbs.h"
 
 
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
 extern SWModule *curMod, *curcomMod, *percomMod;
-extern SWModule *curbookMod;
+//extern SWModule *curbookMod;
 extern gboolean firstsearch;
 extern SETTINGS *settings;
 extern GtkWidget *clistSearchResults;
@@ -155,7 +156,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	} 
 	
 	else if (GTK_TOGGLE_BUTTON (so->ckbGBS)->active) {	/* if true search personal commentary */	  
-		  it = searchMgr->Modules.find(curbookMod->Name());	/* find personal commentary module */
+		  it = searchMgr->Modules.find(s->BookWindowModule);	/* find personal commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
 			    tmpMod = (*it).second;
@@ -353,7 +354,7 @@ changesearchresultsSW_SEARCH(SETTINGS *s, SEARCH_OPT *so, gchar *url)
 		}
 			
 		else if(GTK_TOGGLE_BUTTON(so->ckbGBS)->active) {
-			//curbookMod->SetKey(url);
+			displayinGBS(url);
 		}
 			
 		else

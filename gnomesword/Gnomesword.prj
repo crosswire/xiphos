@@ -133,7 +133,6 @@ module.source.files=\
 	gs_editor_replace.c\
 	gs_editor_toolbar.c\
 	sw_gbs.cpp\
-	gs_gbs.c\
 	gs_getinfo_dlg.c\
 	gs_editor.c\
 	sw_sword.cpp\
