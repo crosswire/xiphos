@@ -1,3 +1,8 @@
+2003-12-31  Terry <tbiggs@users.sf.net>
+
+	* remove pango markup form strings in bookmarks_menu.c and editor_menu.c
+
+
 2003-12-30  Terry <tbiggs@users.sf.net>
 
 	* fixed bug #866548

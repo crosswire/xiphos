@@ -37,6 +37,7 @@ extern "C" {
 #include "backend/module.hh"
 #include "backend/tree.hh"
 	
+char *backend_get_text(const char * module_name, const char *key);	
 void backend_init(void);
 void backend_shutdown(int save_properties);
 const char *backend_get_sword_version(void);
