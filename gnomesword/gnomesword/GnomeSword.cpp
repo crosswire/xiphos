@@ -31,6 +31,7 @@
 #include <swmodule.h>
 #include <versekey.h>
 #include <gbfplain.h>
+#include <gbfhtml.h>
 //#include <thmlgbf.h>
 #include <regex.h>
 #include <stdio.h>
@@ -44,6 +45,7 @@
 #include "filestuff.h"
 #include "menustuff.h"
 #include "listeditor.h"
+#include "noteeditor.h"
 
 
 //------------------------------------------------- sword global to this file
@@ -56,7 +58,6 @@ SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *GBFcomDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *GBFsearchDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Testament using GtkText
 SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
 SWDisplay *GBFDisplay; //--- to display formatted gbf
@@ -65,8 +66,7 @@ SWDisplay *HTMLDisplay; //--- to display formatted html
 SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
 SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
 SWMgr *mainMgr2; //-- sword mgr for comp2Mod - second interlinear module 
-SWMgr *mainMgr3; //-- sword mgr for comp3Mod - third interlinear module 
-SWMgr *searchMgr; //-- sword mgr for searchMod - module used for searching
+SWMgr *mainMgr3; //-- sword mgr for comp3Mod - third interlinear module
 SWMgr *percomMgr; //-- sword mgr for percomMod - personal comments editor
 
 VerseKey vsKey; //-- ??
@@ -77,14 +77,11 @@ SWModule *comp3Mod;	 //-- module for third interlinear window
 SWModule *curcomMod; //-- module for commentary  window	
 SWModule *percomMod; //-- module for personal commentary  window	
 SWModule *curdictMod; //-- module for dict window
-SWModule *searchMod; //-- module for searching and search window
 
 
-VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
-ListKey	searchScopeList; //----------- search list for searching verses found on last search
-SWKey	*currentScope; //----------- use to set scope of search
+
 SWFilter *gbftoplain;
-
+SWFilter *gbftohtml;
 
 //---------------------------------------------------------------- GnomeSword global to this file
 
@@ -95,7 +92,7 @@ GtkWidget *MainFrm,	//-- main form widget
 					*bookmark_mnu; //-- popup menu for bookmarks
 
 gchar *current_filename= NULL;	//-- filename for open file in study pad window 
-gchar current_verse[45]="Romans 8:28";	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
+gchar current_verse[80]="Romans 8:28";	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
 bool ApplyChange = TRUE;	//-- should we make changes when cbBook is changed
 bool bVerseStyle = TRUE;	//-- should we show verses of paragraphs in main text window
 
@@ -126,12 +123,15 @@ gboolean autoSave = true; //-- we want to auto save changes to personal comments
 //gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
 gboolean havedict = false; //-- let us know if we have at least one lex-dict module
 gboolean havecomm = false; //-- let us know if we have at least one commentary module
+gboolean autoscroll = true; //-- commentary module auto scroll when true -- in sync with main text window
 extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
 extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
+extern NoteEditor *noteeditor;
 gint historyitems = 0;
 gint answer;
 gint dictpages,
 	 compages;
+gchar com_key[80] ="Rom 8:28"; //-- current commentary key
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- apps main form
@@ -143,7 +143,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 {
 	ModMap::iterator it; //-- iteratior
 	SectionMap::iterator sit; //-- iteratior
-	ConfigEntMap::iterator eit; //-- iteratior
+	ConfigEntMap::iterator cit; //-- iteratior
 	int pg=0, //-- notebook page number - for creating notebook pages
 			pg1=0, //-- notebook page number - for creating notebook pages
 	    pg2=0; //-- notebook page numger
@@ -155,7 +155,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					*label, //-- labels for adding notebook pages
 					*menu, //-- ??
 					*menuNE,
-					*menuCom;
+					*menuCom,
+					*menuDict;
 				//iBibletext=0; //--
 	char          menuName[64], //--  for menu item label
 					menuName1[64], //--  for menu item label
@@ -164,6 +165,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 					aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 					aboutrememberlastitem3[80]; //--  use to store last menu item so we can add the next item under it - gnome menus
+					//rememberlookup[80]; //--  use to store last menu item
 	int             viewNumber = 1, //--  for numbering menu items
 					viewNumber1= 1, //-- for numbering menu items
 					itemNum = 0, //-- for numbering menu items
@@ -171,16 +173,16 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					j; //-- counter
 
 	GnomeUIInfo *menuitem; //--  gnome menuitem
-
+  GtkWidget *menu_items;
   myset = readsettings();  //-- load settings into structure
   settings = &myset;       //-- set pointer to structure
   gbftoplain	= new GBFPlain(); //-- renderfilter
+  gbftohtml		= new GBFHTML(); //-- sword renderfilter gbf to html
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
 	mainMgr2        = new SWMgr();
-	mainMgr3        = new SWMgr();
-	searchMgr				= new SWMgr();
+	mainMgr3        = new SWMgr();	
   percomMgr				= new SWMgr();
 	
 	curMod        = NULL; //-- set mods to null
@@ -188,8 +190,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp2Mod      = NULL;
 	comp3Mod      = NULL;
 	curcomMod     = NULL;
-	curdictMod    = NULL;
-	searchMod     = NULL;
+	curdictMod    = NULL; 	
 	percomMod     = NULL;
 
 	
@@ -201,7 +202,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create
 	GBFcomDisplay   = 0; // set in create
-	GBFsearchDisplay =0; // set in create
+	
 	percomDisplay   = 0;// set in create
 	RWPDisplay			= 0;
 	FPNDisplay			= 0;
@@ -214,13 +215,15 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	myGreen.blue =  settings->currentverse_blue;
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
-  NEtext =  lookup_widget(MainFrm,"textComments"); //-- get note edit widget
+  NEtext =  lookup_widget(MainFrm,"textComments"); //-- get note edit widget	
+  menuDict = create_pmDict(); //-- create popup menu for dict/lex window
 	//--------------------------------------------------------------------- setup displays for sword modules
+    noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
-	percomDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textComments"));
+	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	GBFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textCommentaries"));
 	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
@@ -238,11 +241,15 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , TRUE );
+	
+	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),(gchar*)"1");
+	
   //------------------------------------------------------------------ store text widgets for spell checker
   notes =  lookup_widget(mainform,"textComments");
   studypad = lookup_widget(mainform,"text3");
 	//-------------------------------------------------------------- set main window modules and add to menus	
 	sprintf(rememberlastitem,"%s","_View/Main Window/");
+	//sprintf(remberlookup,"%s","");
 	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
 	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
 	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
@@ -281,15 +288,30 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
 			additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
 			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
-			if(!strcmp(curcomMod->Name(),"Family"))
-				curcomMod->Disp(GBFcomDisplay);
-			else if(!strcmp(curcomMod->Name(),"RWP"))
-			  curcomMod->Disp(RWPDisplay);
-			else if(!strcmp(curcomMod->Name(),"Scofield"))
+			
+			gchar *sourceformat;
+			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	    if (sit !=mainMgr->config->Sections.end())
+	    {
+	    	cit = (*sit).second.find("SourceType");
+					if (cit != (*sit).second.end()) 				
+						 sourceformat = g_strdup((*cit).second.c_str());
+					else
+						sourceformat = "Plain";
+			}
+			//cout << sourceformat << '\n';
+			if (!strcmp(sourceformat, "GBF")) //-- we need gbf to html filter
+			{
+			  curcomMod->AddRenderFilter(gbftohtml);
+				curcomMod->Disp(HTMLDisplay);
+			}
+			else if(!strcmp(sourceformat,"ThML"))
 			{
 				//curcomMod->AddRenderFilter(thmltogbf);
 			  curcomMod->Disp(HTMLDisplay);
 			}
+			else if(!strcmp(curcomMod->Name(),"RWP"))
+			  curcomMod->Disp(RWPDisplay);
 			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
 			{   				 	
 				 	if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
@@ -314,8 +336,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg2++), label);
 			curdictMod->Disp(dictDisplay);
 		}
-	}
-		
+	} 		
   //----------------------------------------------------------------- set up percom editor module and menu
 	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++)
 	{
@@ -488,14 +509,14 @@ initSword(GtkWidget *mainform,  //-- apps main form
  	
  	
 	//-------------------------------------------------------------- attach popup menus
-	//menuNE = create_pmNE ();
-	menuCom = create_pmComments ();
-	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),(gchar*)"1");
+
+	menuCom = create_pmComments();
+	
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),(gchar*)"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),(gchar*)"1");
 	gnome_popup_menu_attach(menu5,lookup_widget(mainform,"textComments"),(gchar*)"1");
-	//gnome_popup_menu_attach(menuNE,lookup_widget(mainform,"textComments"),(gchar*)"1");
+	gnome_popup_menu_attach(menuDict,lookup_widget(mainform,"textDict"),(gchar*)"1");
 	gnome_popup_menu_attach(menuCom,lookup_widget(mainform,"textCommentaries"),(gchar*)"1");	
 		
   //----------------------------------------------------------------------- set dictionary key
@@ -605,12 +626,13 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 				}
 			}
 		}
-		if(settings->notebook3page == 0)
+		if(settings->notebook3page == 0 && autoscroll)
 		{
 			if(curcomMod)
 			{	
 				curcomMod->SetKey(keyText.c_str()); //-- set comments module to current verse
 				curcomMod->Display(); //-- show change
+				strcpy(com_key,ref);
 			}
 		}  		
 	ApplyChange = TRUE;	
@@ -738,7 +760,7 @@ ShutItDown(void)  //------------- close down GnomeSword program
 	delete mainMgr1;
 	delete mainMgr2;
 	delete mainMgr3;
-	delete searchMgr;
+	//delete searchMgr;
 	
   if (gbftoplain != 0)  //-- delete Sword render filters
 		delete gbftoplain;
@@ -757,168 +779,18 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		delete GBFcomDisplay;
 	if(dictDisplay)
 		delete dictDisplay;
-	if(GBFsearchDisplay)
-		delete GBFsearchDisplay;
 	if(percomDisplay)
 		delete percomDisplay;
 	if(HTMLDisplay)
 		delete HTMLDisplay;	
 	if(GBFDisplay)
-		delete GBFDisplay;		
+		delete GBFDisplay;	
+	if(noteeditor)
+		delete noteeditor;	
 	gtk_exit(0);           //-- exit
 	
 }
 
-
-//-------------------------------------------------------------------------------------------
-void
-searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
-{
-	GtkWidget	*searchText,   //-- what we want to find -text entry
-					 	*lbSearchHits,  //-- label for showing how many verses we found
-					 	*resultList,    //-- list of verses found
-					 	*regexSearch,   //-- do we want to use regular expression search - radio button
-					 	*phraseSearch,  //-- do we want to use phrase seach - radio button
-					 	*caseSensitive, //-- do we want search to be case sensitive - check box
-					 	*comToggle,     //-- do we want to search current commentary - check box
-					 	*bounds,        //-- do we want to use bounds for our search - check box
-					 	*lastsearch,    //-- use verses from last search for bounds of this search
-					 	*textWindow,    //-- text widget to display verses
-					 	*percomToggle;  //-- do we want to search personal commentary - check box
-	string 		srchText;       //-- string to search for - from entryText
-	gchar     *entryText,//-- pointer to text in searchText entry
-			      scount[5];  //-- string from gint count for label
-	gchar 		*resultText; //-- temp storage for verse found
-	gint count;              //-- number of hits
-
-	searchText = lookup_widget(searchFrm,"entry1"); //-- pointer to text entry
-	lbSearchHits = lookup_widget(searchFrm,"lbSearchHits");//-- pointer to count label
-	resultList = lookup_widget(searchFrm,"resultList");   //-- pointer to list
-	regexSearch = lookup_widget(searchFrm,"regexSearch"); //-- pointer to radio button
-	phraseSearch = lookup_widget(searchFrm,"phraseSearch");//-- pointer to radio button
-	caseSensitive = lookup_widget(searchFrm,"caseSensitive");//-- pointer to check box
-	bounds = lookup_widget(searchFrm,"rbUseBounds"); //-- pointer to check box
-	lastsearch = lookup_widget(searchFrm,"rbLastSearch"); //-- pointer to radio button
-	comToggle = lookup_widget(searchFrm,"ckbCom"); //-- pointer to check box
-	percomToggle = lookup_widget(searchFrm,"cbpercom"); //-- pointer to check box	
-	textWindow= lookup_widget(searchFrm,"txtSearch");	//-- pointer to text widget
-	
-	
-	gtk_text_set_point(GTK_TEXT(textWindow), 0); //-- clear text window
-	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
-
-	if(GTK_TOGGLE_BUTTON(comToggle)->active)//-- if true search commentary
-		searchMod = curcomMod; //-- set search module to current commentary module
-	else if(GTK_TOGGLE_BUTTON(percomToggle)->active) //-- if true search personal commentary
-		searchMod = percomMod; //-- set search module to personal commentary module
-	else                    //-- if neither commertary nor personal check box checked
-	  searchMod = curMod;  //-- set search module to current text module
-	
-	if(GTK_TOGGLE_BUTTON(bounds)->active) //---------- check to see if we want to set bounds for search
-	{
-		GtkWidget  *lower, //-------- lower bounds entry widget
-						*upper; //-------- upper bounds entry widget
-		lower = lookup_widget(searchFrm,"entryLower"); //----------- get Lower bounds entry widget from search form
-		upper = lookup_widget(searchFrm,"entryUpper"); //----------- get Upper bounds entry widget from search form	
-		searchScopeLowUp.ClearBounds(); //-------- clear old bounds
-		searchScopeLowUp.LowerBound(gtk_entry_get_text(GTK_ENTRY(lower))); //--read lower bounds entry and set lower bounds for search
-		searchScopeLowUp.UpperBound(gtk_entry_get_text(GTK_ENTRY(upper))); //--read upper bounds entry and set upper bounds for search
-		currentScope = &searchScopeLowUp; //------------- set scope of search to use bounds	
-	}
-	else if(GTK_TOGGLE_BUTTON(lastsearch)->active) //---------- check to see if we want to use results of search last for this search
-	{
-		currentScope = &searchScopeList; //-- if we do = move searchlist into currentScope
-	}
-	else
-	{
-		searchScopeLowUp.ClearBounds();  //-------- clear old bounds
-		searchScopeList.ClearList(); //------------ clear scope search list
-		currentScope = 0; //------------ clear scope
-	}
-
-	count = 0;    //-- set count to 0 - we have not found anything yet
-	gtk_clist_clear(GTK_CLIST(resultList));	//-- clear list widget for new results
-
-	entryText = gtk_entry_get_text(GTK_ENTRY(searchText)); //-- what to search for
-	srchText = entryText; //-- move from char* to string
-	gtk_label_set_text( GTK_LABEL(lbSearchHits) ,"0" ); //-- set hits label to 0
-	if (searchMod)  //-- must have a good module - not null
-	{
-		int searchType = GTK_TOGGLE_BUTTON(regexSearch)->active ? 0 : GTK_TOGGLE_BUTTON(phraseSearch)->active ? -1 : -2; //-- get search type
-		int searchParams = GTK_TOGGLE_BUTTON(caseSensitive)->active ? 0 : REG_ICASE; //-- get search params - case sensitive
-		gtk_clist_freeze(GTK_CLIST(resultList)); //-- keep list form scrolling until we are done
-		for (ListKey &searchResults = searchMod->Search(srchText.c_str(), searchType, //-- give search string to module to search
-									searchParams, currentScope); !searchResults.Error(); searchResults++)
-		{
-			resultText = g_strdup((const char *)searchResults);  //-- put verse key string of find into a string
-			gtk_clist_append(GTK_CLIST(resultList), &resultText); //-- store find in list
-			searchScopeList << (const char *)searchResults;  //-- remember finds for next search's scope
-			++count;                                         //-- if we want to use them
-		}
-		gtk_clist_thaw(GTK_CLIST(resultList)); //-- thaw list so we can look through the results
-		sprintf(scount,"%d",count); //-- put count into string
-		gtk_label_set_text( GTK_LABEL(lbSearchHits) ,scount ); //-- tell user how many hits we had
-	}
-}
-
-//-------------------------------------------------------------------------------------------
-void
-resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone clicked the results list
-{                                                             //-- from our search and sent us here
-	GtkWidget	*resultList,  //-- pointer to resultlist
-					 *textWindow,   //-- pointer to search dlg textwindow
-					 *comToggle,    //-- pointer to search commentary check box
-					 *percomToggle, //-- pointer to search personal check box
-					 *contextToggle;//-- pointer to context check box
- 	gchar 	 *text;     //-- pointer to resultlist key text
-	SWModule *searchMod;  //-- pointer to search module
-	ModMap::iterator it;	//-- manager iterator
-	
-	
-	resultList = lookup_widget(searchFrm,"resultList"); //-- set pointer to resultList
-	textWindow = lookup_widget(searchFrm,"txtSearch");  //-- set pointer to text window
-	comToggle = lookup_widget(searchFrm,"ckbCom");      //-- set pointer to commentary check box
-	percomToggle = lookup_widget(searchFrm,"cbpercom");      //-- set pointer to personal check box
-	contextToggle = lookup_widget(searchFrm,"cbContext");      //-- set pointer to context check box
-	
-  gtk_clist_get_text(GTK_CLIST(resultList), row, column, &text); //-- get key text from resultlist
-
-  if(GTK_TOGGLE_BUTTON(comToggle)->active) //-- check state of commentary check box
-	{
-		it = searchMgr->Modules.find(curcomMod->Name());  //-- if checked (true) use curMod for display	
-		if (it != searchMgr->Modules.end()) 
-		{
-			searchMod = (*it).second;  //-- set search module to same as curMod
-		}			
-	}
-	if(GTK_TOGGLE_BUTTON(percomToggle)->active) //-- check state of personal check box
-	{
-		it = searchMgr->Modules.find(percomMod->Name());  //-- if checked (true) use percomMod for display	
-		if (it != searchMgr->Modules.end())
-		{
-			searchMod = (*it).second;  //-- set search module to same as percomMod
-		}			
-	}
-	else
-	{
-		it = searchMgr->Modules.find(curMod->Name()); //-- nothing checked so we use curMod for display
-		if (it != searchMgr->Modules.end()) 
-		{
-			searchMod = (*it).second; //-- set search module to curMod
-		}			
-	}		
-	
-	if(searchMod) //-- make sure module is not null
-	{
-		searchMod->SetKey(text); //-- set module to verse key text
-		searchMod->Display();    //-- show verse or commentary
-	}
-	if(GTK_TOGGLE_BUTTON(contextToggle)->active) //-- check state of context check box
-	{
-		changeVerse(text);	//curMod->SetKey(text);  //-- set module to verse key text
-	//	curMod->Display();    //-- show verse or commentary
-	}
-}
 
 //-------------------------------------------------------------------------------------------
 void
@@ -935,22 +807,6 @@ savelistinfo(gchar *filename, GtkWidget *list) //-- get info we need to save sea
 	savelist(filename, list, howmany);	
 */
 }
-
-//-------------------------------------------------------------------------------------------
-void
-setupSearchDlg(GtkWidget *searchDlg) //-- init search dialog
-{
-		ModMap::iterator it;  //-- sword manager iterator
-		gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(searchDlg,"txtSearch")) , TRUE ); //-- set text window to word wrap
-		GBFsearchDisplay = new GTKInterlinearDisp(lookup_widget(searchDlg,"txtSearch")); //-- set sword display
-    	//--------------------------------------------------------------------------------------- searchmodule	
-		for (it = searchMgr->Modules.begin(); it != searchMgr->Modules.end(); it++) //-- iterator through modules
-		{
-			searchMod  = (*it).second;  //-- set searchMod
-			searchMod->Disp(GBFsearchDisplay); //-- set search display for modules
-		}
-}
-
 //-------------------------------------------------------------------------------------------
 void
 strongsSWORD(bool choice) //-- toogle strongs numbers for modules that have strongs
@@ -1232,9 +1088,28 @@ changcurcomModSWORD(gchar *modName, gint page_num)  //-- someone changed comment
 	if (it != mainMgr->Modules.end()) 
 	{
 		curcomMod = (*it).second;  //-- set curcomMod to modName
-		curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
+		if(autoscroll) curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
+		//else  curcomMod->SetKey(com_key); //-- keep all commentary modules together (as close as we can)
 		curcomMod->Display(); //-- show the change
 	}	
+}
+
+//-------------------------------------------------------------------------------------------
+void
+navcurcomModSWORD(gint direction)  //--
+{
+   /*switch(direction)
+   {
+		case 0:
+		    curcomMod--;
+			break;
+		case 1:
+			curcomMod++;
+			break;
+   }
+   curcomMod->Error();
+   //curcomMod->Display();
+   */
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1542,6 +1417,43 @@ setformatoption(GtkWidget *button)
    		//percomMod->Disp(FPNDisplay);
    		
    }
+}
+
+//-------------------------------------------------------------------------------------------
+/*		return verse number form verse in main Bible window
+			starting index must be in the verse number
+			else we return 0			
+*/
+gint
+getversenumber(GtkWidget *text)
+{
+	gchar			*buf, //-- buffer for storing the verse number
+						cbuf; //-- char for checking for numbers (isdigit)
+						//tmpbuf[256];
+	gint			startindex, //-- first digit in verse number
+						endindex,   //-- last digit in verse number
+						index;      //-- current position in text widget
+						
+	 index = gtk_editable_get_position(GTK_EDITABLE(text));	//-- get current position for a starting point
+	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); //-- get char at current position (index)
+	 if(!isdigit(cbuf)) return 0; //-- if cbuf is not a number stop - do no more
+	 endindex = index;  //-- set endindex to index
+	 while(isdigit(cbuf)) //-- loop until cbuf is not a number
+	 {
+	 		cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); //-- get next char
+	 		++endindex;   //-- increment endindex
+	 }
+	 --endindex; //-- our last char was not a number so back up one
+	 startindex = index; //-- set startindex to index
+	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get char at index - we know it is a number
+	  while(isdigit(cbuf))  //-- loop backward util cbuf is not a number
+	 {
+	 		cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get previous char
+	 		--startindex; //-- decrement startindex
+	 }
+	 ++startindex; //-- last char (cbuf) was not a number
+	 buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
+	 return atoi(buf); //-- send it back as an integer
 }
 
 

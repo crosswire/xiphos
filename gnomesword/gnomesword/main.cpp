@@ -20,7 +20,6 @@
 #endif
 
 #include <gnome.h>
-#include <swmodule.h>
 
 #include "GnomeSword.h"
 #include "menustuff.h"
@@ -42,12 +41,12 @@ main (int argc, char *argv[])
   bool 			newconfigs = false;
   bool			newbookmarks = false;
   gchar 		*buf,
-  					tmpbuf[80];
+  				tmpbuf[80];
 
 
   if(argc > 1) buf = g_strdup(argv[1]);
 	
-  gnome_init ("GnomeSword", VERSION, argc, argv);
+  gnome_init("GnomeSword", VERSION, argc, argv);
   if(!strcmp(buf,"newconfigs")) newconfigs = true;
   if(!strcmp(buf,"newbookmarks")) newbookmarks = true;
   if(!strcmp(buf,"newfiles"))
