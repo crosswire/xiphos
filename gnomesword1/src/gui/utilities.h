@@ -26,9 +26,8 @@ extern "C" {
 #include <gnome.h>
 
 gchar * remove_linefeeds(gchar * buf);	
-GtkWidget *gui_lookup_widget(GtkWidget * widget,
-				  const gchar * widget_name);
-
+/*GtkWidget *gui_lookup_widget(GtkWidget * widget,
+				  const gchar * widget_name);*/
 void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
      gchar * itemdata, gchar * submenuname, GtkMenuCallback mycallback);
 void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);

@@ -541,27 +541,26 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   sync_with_main
+ *   gui_sync_bibletext_dialog
  *
  * Synopsis
  *   #include "gui/bibletext_dialog.h"
  *
- *   void sync_with_main(VIEW_TEXT * vt)	
+ *   gui_sync_bibletext_dialog(VIEW_TEXT * vt)	
  *
  * Description
- *   set text to main window current verse
+ *   set bibletext dialog to main window current verse
  *
  * Return value
  *   void
  */
 
-static void sync_with_main(VIEW_TEXT * vt)
+void gui_sync_bibletext_dialog(void)
 {
-	cur_vt = vt;
-	display(vt, settings.currentverse, TRUE);
-	strcpy(vt->key, settings.currentverse);
-	vt->t->key = vt->key;
-	update_controls(vt);
+	display(cur_vt, settings.currentverse, TRUE);
+	strcpy(cur_vt->key, settings.currentverse);
+	cur_vt->t->key = cur_vt->key;
+	update_controls(cur_vt);
 }
 
 
@@ -814,7 +813,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 		}
 		/***  any other link  ***/
 		else
-			sprintf(buf, _("Go to %s"), url);
+			sprintf(buf, "%s %s", _("Go to "), url);
 		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
 				   context_id2, buf);
 	}
@@ -1090,7 +1089,8 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	gnome_popup_menu_attach(popupmenu, vt->t->html, NULL);
 	gtk_widget_show(vt->dialog);
 	dialog_list = g_list_append(dialog_list, (VIEW_TEXT *) vt);
-	sync_with_main(vt);
+	cur_vt = vt;
+	gui_sync_bibletext_dialog();
 }
 
 /******************************************************************************

@@ -28,6 +28,8 @@
 
 #include "gui/about_sword.h"
 
+#include "main/sword.h"
+
 /******************************************************************************
  * privat
  *****************************************************************************/
@@ -73,7 +75,6 @@ static void about_sword_ok(GtkButton * button, gpointer user_data)
 
 GtkWidget *gui_create_about_sword(void)
 {
-
 	GtkWidget *dialog_about_sword;
 	GtkWidget *dialog_vbox27;
 	GtkWidget *vbox21;
@@ -86,6 +87,8 @@ GtkWidget *gui_create_about_sword(void)
 	GtkWidget *dialog_action_area27;
 	GtkWidget *hbuttonbox6;
 	GtkWidget *button_ok;
+	const char *ver;
+	gchar version[40];
 	gchar *about =
 	    _
 	    ("The SWORD Project is an effort to create an ever expanding "
@@ -96,6 +99,12 @@ GtkWidget *gui_create_about_sword(void)
 	     "module set may be shared between any frontend using the"
 	     "framework.");
 
+	/* 
+	 * get sword version 
+	 */
+	ver = get_sword_version();
+	sprintf(version, "Sword-%s", ver);
+	
 	dialog_about_sword = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
 			    "dialog_about_sword", dialog_about_sword);
@@ -136,6 +145,8 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_box_pack_start(GTK_BOX(vbox21), version_label, FALSE, FALSE,
 			   0);
 
+	gtk_label_set_text(GTK_LABEL(version_label), version);
+	
 	scrolledwindow26 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow26);
 	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
