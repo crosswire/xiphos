@@ -567,9 +567,9 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Lower Workbook"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("Dictionary/Lexicon"),
 	 N_
-	 ("Show or hide lower workbook - dictionaries and other books"),
+	 ("Show or hide - dictionaries and lexicons"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},

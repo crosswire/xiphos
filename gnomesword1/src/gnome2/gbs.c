@@ -34,6 +34,7 @@
 #endif
 
 //#include "gui/gtkhtml_display.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
 #include "gui/gnomesword.h"
@@ -122,27 +123,38 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	
 	switch (event->button) {
 	case 1:
-		if (!in_url) {
-			key = gui_button_press_lookup(widgets.html_book);
-			if (key) {
-				gchar *dict = NULL;
-				if (settings.useDefaultDict)
-					dict =
-					    g_strdup(settings.
-						     DefaultDict);
-				else
-					dict =
-					    g_strdup(settings.
-						     DictWindowModule);
-				if (settings.inViewer)
-					main_sidebar_display_dictlex
-					    (dict, key);
-				if (settings.inDictpane)
-					main_display_dictionary(dict, key);
+		if (in_url) 
+			break;
+		key = gui_button_press_lookup(widgets.html_book);
+		if (key) {
+			if(g_strstr_len(key,strlen(key),"*")) {
+				key = g_strdelimit(key, "*", ' ');
+				key = g_strstrip(key);
+				url = g_strdup_printf(
+					"gnomesword.url?action=showModInfo&value=1&module=%s",
+					key);
+				main_url_handler(url,TRUE);
+				g_free((gchar*)url);
 				g_free(key);
-				if (dict)
-					g_free(dict);
+				break;
 			}
+			gchar *dict = NULL;
+			if (settings.useDefaultDict)
+				dict =
+				    g_strdup(settings.
+					     DefaultDict);
+			else
+				dict =
+				    g_strdup(settings.
+					     DictWindowModule);
+			if (settings.inViewer)
+				main_sidebar_display_dictlex
+				    (dict, key);
+			if (settings.inDictpane)
+				main_display_dictionary(dict, key);
+			g_free(key);
+			if (dict)
+				g_free(dict);
 		}
 		break;
 	case 2:
