@@ -38,5 +38,4 @@ libmain_a_SOURCES =  \
 
 
 EXTRA_DIST = \
-    $(SPELL_IDLS) \
-    $(SPELL_IDL_GENERATED)
+    $(SPELL_IDL)
