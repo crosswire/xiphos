@@ -52,6 +52,7 @@
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
+#include "gui/interlinear.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -61,7 +62,7 @@
 #include "main/percomm.h"
 #include "main/dictlex.h"
 #include "main/settings.h"
-#include "main/gs_menu.h"
+#include "main/gs_popup_cb.h"
  
 #include "backend/search_.h"
 #include "backend/sword.h"
@@ -107,10 +108,9 @@ void init_gnomesword(void)
 	gui_setup_shortcut_bar();
 
 	/*
-	 *  create popup menus -- gs_menu.c 
+	 *  create interlinear popup menu 
 	 */
-	createpopupmenus(get_list(TEXT_DESC_LIST), get_list(OPTIONS_LIST));
-
+	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
 	/*
 	 *  setup Bible text gui 
 	 */
@@ -152,11 +152,20 @@ void init_gnomesword(void)
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 
 	/*
-	 *  add modules to about modules menus -- gs_menu.c 
-	 */
-	addmodstomenus(get_list(TEXT_LIST), get_list(COMM_LIST),
-			get_list(DICT_LIST), get_list(GBS_LIST));
-	
+	 *  add modules to about modules menus
+	 */	
+	gui_add_mods_to_menus(get_list(TEXT_LIST), 
+			_("_Help/About Sword Modules/Bible Texts/"),
+			(GtkMenuCallback)on_kjv1_activate);
+	gui_add_mods_to_menus(get_list(COMM_LIST), 
+			_("_Help/About Sword Modules/Commentaries/"),
+			(GtkMenuCallback)on_kjv1_activate);
+	gui_add_mods_to_menus(get_list(DICT_LIST), 
+			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
+			(GtkMenuCallback)on_kjv1_activate);
+	gui_add_mods_to_menus(get_list(GBS_LIST), 
+			_("_Help/About Sword Modules/Books/"),
+			(GtkMenuCallback)on_kjv1_activate);
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */

@@ -32,7 +32,8 @@ void gui_update_interlinear_page(void);
 void gui_update_interlinear_page_detached(void);
 void gui_swap_interlinear_with_main(char *intmod);
 void gui_set_interlinear_module_global_options(gchar * option, gboolean choice);
-
+void gui_create_interlinear_popup(GList *bible_description);
+	
 #ifdef __cplusplus
 }
 #endif
