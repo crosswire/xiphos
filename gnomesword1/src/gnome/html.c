@@ -284,11 +284,11 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	
 		else if (*url == 'U') {
 			++url;
-			sprintf(buf,_("Unlock %s"),url);
+			sprintf(buf,"%s %s", _("Unlock "),url);
 		}
 		/***  any other link  ***/
 		else
-			sprintf(buf, _("Go to %s"), url);
+			sprintf(buf, "%s %s", _("Go to "), url);
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);

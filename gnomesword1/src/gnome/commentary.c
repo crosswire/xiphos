@@ -58,9 +58,9 @@ static gboolean comm_display_change;
 
 
 static void on_notebook_comm_switch_page(GtkNotebook * notebook,
-				 GtkNotebookPage * page,
-				 gint page_num, GList * cl);
-				 
+					 GtkNotebookPage * page,
+					 gint page_num, GList * cl);
+
 /******************************************************************************
  * Name
  *  display
@@ -76,39 +76,39 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
  * Return value
  *   void
  */
- 
-static void display(COMM_DATA *c, gchar * key)
+
+static void display(COMM_DATA * c, gchar * key)
 {
 	gchar *text_str = NULL;
 	gchar *strkey;
-	
+
 	if (c->is_locked) {
 		return;
+	} else if (c->cipher_key) {
+		gui_module_is_locked_display(c->html,
+					     c->mod_name,
+					     c->cipher_key);
+		return;
 	}
-	else if(c->cipher_key) {
-		gui_module_is_locked_display(c->html, 
-				c->mod_name, c->cipher_key);
-		return;		
-	}
-	
-	
+
+
 	strkey = get_valid_key(key);
-	if(c->book_heading){
+	if (c->book_heading) {
 		c->book_heading = FALSE;
 		text_str = get_book_heading(c->mod_name, strkey);
 	}
-	
-	else if(c->chapter_heading){
+
+	else if (c->chapter_heading) {
 		c->chapter_heading = FALSE;
 		text_str = get_chapter_heading(c->mod_name, strkey);
 	}
-	
+
 	else {
 		text_str = get_commentary_text(c->mod_name, strkey);
 	}
 	entry_display(c->html, c->mod_name, text_str, key, TRUE);
 	free(text_str);
-	
+
 }
 
 /******************************************************************************
@@ -126,7 +126,7 @@ static void display(COMM_DATA *c, gchar * key)
  * Return value
  *   void
  */
- 
+
 static void set_commentary_page(gchar * modname, GList * comm_list)
 {
 	gint page = 0;
@@ -140,18 +140,16 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 		++page;
 		comm_list = g_list_next(comm_list);
 	}
-	if(page)
-		gtk_notebook_set_page(GTK_NOTEBOOK(
-				  widgets.notebook_comm), page);
+	if (page)
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_comm), page);
 	else
-		on_notebook_comm_switch_page(GTK_NOTEBOOK(
-				  widgets.notebook_comm),
-				  NULL,
-				  page, 
-				  comm_list);
+		on_notebook_comm_switch_page(GTK_NOTEBOOK
+					     (widgets.notebook_comm),
+					     NULL, page, comm_list);
 	settings.comm_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
-			settings.comm_tabs);
+				   settings.comm_tabs);
 }
 
 
@@ -177,12 +175,13 @@ void gui_set_comm_frame_label(void)
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
-	 */	
+	 */
 	if (settings.comm_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_c->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_c->frame), cur_c->mod_name);
-	
+		gtk_frame_set_label(GTK_FRAME(cur_c->frame),
+				    cur_c->mod_name);
+
 }
 
 /******************************************************************************
@@ -204,23 +203,23 @@ void gui_set_comm_frame_label(void)
  */
 
 void on_notebook_comm_switch_page(GtkNotebook * notebook,
-				 GtkNotebookPage * page,
-				 gint page_num, GList * cl)
+				  GtkNotebookPage * page,
+				  gint page_num, GList * cl)
 {
 	COMM_DATA *c, *c_old;
 	c_old = (COMM_DATA *) g_list_nth_data(cl,
-					 settings.comm_last_page);
+					      settings.comm_last_page);
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
-	
+
 	strcpy(settings.CommWindowModule, c->mod_name);
-	
-	if(!c->frame)
+
+	if (!c->frame)
 		gui_add_new_comm_pane(c);
-	
+
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
 	gui_set_comm_frame_label();
-	
+
 	gui_change_window_title(c->mod_name);
 	/*
 	 * set search module to current text module 
@@ -228,20 +227,22 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	strcpy(settings.sb_search_mod, c->mod_name);
 	/*
 	 * set search frame label to current commentary module 
-	 */	
+	 */
 	gui_set_search_label(c->mod_name);
-	
+
 	settings.comm_last_page = page_num;
 	/*
 	 * set settings.comm_key to current module key
 	 */
-	if(c->key)
-		strcpy(settings.comm_key,c->key);
-	
-	if(comm_display_change) {
-		if ((c->key[0] == '\0') && (settings.currentverse != NULL)) {
+	if (c->key)
+		strcpy(settings.comm_key, c->key);
+
+	if (comm_display_change) {
+		if ((c->key[0] == '\0')
+		    && (settings.currentverse != NULL)) {
 			display(c, settings.currentverse);
-			strcpy(settings.comm_key,settings.currentverse);
+			strcpy(settings.comm_key,
+			       settings.currentverse);
 			strcpy(c->key, settings.comm_key);
 		}
 	}
@@ -267,13 +268,14 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
  */
 
 static gboolean on_button_release_event(GtkWidget * widget,
-			GdkEventButton * event, COMM_DATA * c)
+					GdkEventButton * event,
+					COMM_DATA * c)
 {
 	extern gboolean in_url;
 	gchar *key;
-	
+
 	settings.whichwindow = COMMENTARY_WINDOW;
-	
+
 	gui_change_window_title(c->mod_name);
 	/*
 	 * set search module to current commentary module 
@@ -281,9 +283,9 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	strcpy(settings.sb_search_mod, c->mod_name);
 	/*
 	 * set search frame label to current commentary module 
-	 */	
+	 */
 	gui_set_search_label(c->mod_name);
-	
+
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -291,13 +293,19 @@ static gboolean on_button_release_event(GtkWidget * widget,
 			if (key) {
 				gchar *dict = NULL;
 				if (settings.useDefaultDict)
-					dict = g_strdup(settings.DefaultDict);
+					dict =
+					    g_strdup(settings.
+						     DefaultDict);
 				else
-					dict = g_strdup(settings.DictWindowModule);
+					dict =
+					    g_strdup(settings.
+						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer(dict, key);
+					gui_display_dictlex_in_viewer
+					    (dict, key);
 				if (settings.inDictpane)
-					gui_change_module_and_key(dict, key);
+					gui_change_module_and_key(dict,
+								  key);
 				g_free(key);
 				if (dict)
 					g_free(dict);
@@ -331,7 +339,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static void create_commentary_pane(COMM_DATA *c)
+static void create_commentary_pane(COMM_DATA * c)
 {
 	GtkWidget *vbox57;
 	GtkWidget *frame_comm;
@@ -369,11 +377,10 @@ static void create_commentary_pane(COMM_DATA *c)
 				 "frame_comm", frame_comm,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame_comm);
-	gtk_box_pack_start(GTK_BOX(vbox57), frame_comm, TRUE, TRUE,
-			   0);
-	
-	
-	
+	gtk_box_pack_start(GTK_BOX(vbox57), frame_comm, TRUE, TRUE, 0);
+
+
+
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowCOMMhtml);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -381,9 +388,10 @@ static void create_commentary_pane(COMM_DATA *c)
 				 scrolledwindowCOMMhtml,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(scrolledwindowCOMMhtml);	
-	gtk_container_add(GTK_CONTAINER(frame_comm), scrolledwindowCOMMhtml);
-	
+	gtk_widget_show(scrolledwindowCOMMhtml);
+	gtk_container_add(GTK_CONTAINER(frame_comm),
+			  scrolledwindowCOMMhtml);
+
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowCOMMhtml),
 				       GTK_POLICY_AUTOMATIC,
@@ -402,12 +410,13 @@ static void create_commentary_pane(COMM_DATA *c)
 
 
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(gui_link_clicked), (COMM_DATA *) c);
+			   GTK_SIGNAL_FUNC(gui_link_clicked),
+			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
-			   GTK_SIGNAL_FUNC(gui_url), 
+			   GTK_SIGNAL_FUNC(gui_url),
 			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
-			   GTK_SIGNAL_FUNC(on_button_release_event), 
+			   GTK_SIGNAL_FUNC(on_button_release_event),
 			   (COMM_DATA *) c);
 }
 
@@ -426,14 +435,15 @@ static void create_commentary_pane(COMM_DATA *c)
  * Return value
  *   void
  */
- 
-void gui_set_commentary_page_and_key(gint page_num, gchar *key)
+
+void gui_set_commentary_page_and_key(gint page_num, gchar * key)
 {
 	comm_display_change = FALSE;
-	strcpy(settings.comm_key,key);
-	strcpy(cur_c->key,key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm), page_num);
-	display(cur_c,key);
+	strcpy(settings.comm_key, key);
+	strcpy(cur_c->key, key);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm),
+			      page_num);
+	display(cur_c, key);
 	comm_display_change = TRUE;
 }
 
@@ -452,14 +462,15 @@ void gui_set_commentary_page_and_key(gint page_num, gchar *key)
  * Return value
  *   void
  */
- 
+
 void gui_display_commentary(gchar * key)
 {
-        if(!cur_c) return;
-	strcpy(settings.comm_key,key);
+	if (!cur_c)
+		return;
+	strcpy(settings.comm_key, key);
 	strcpy(cur_c->key, key);
 	display(cur_c, key);
-} 
+}
 
 
 /******************************************************************************
@@ -477,13 +488,14 @@ void gui_display_commentary(gchar * key)
  * Return value
  *   void
  */
- 
-void gui_display_commentary_with_struct(COMM_DATA *c, gchar * key)
+
+void gui_display_commentary_with_struct(COMM_DATA * c, gchar * key)
 {
-	strcpy(settings.comm_key,key);
+	strcpy(settings.comm_key, key);
 	strcpy(cur_c->key, key);
-        display(c, key);
-} 
+	display(c, key);
+}
+
 
 /******************************************************************************
  * Name
@@ -501,17 +513,19 @@ void gui_display_commentary_with_struct(COMM_DATA *c, gchar * key)
  *   void
  */
 
-void gui_add_new_comm_pane(COMM_DATA *c)
-{	
+void gui_add_new_comm_pane(COMM_DATA * c)
+{
 	GtkWidget *popupmenu;
-	
-	popupmenu =   gui_create_pm_comm(c);//create_pm(c);
+
+	popupmenu = gui_create_pm_comm(c);
 	create_commentary_pane(c);
-	if(c->is_locked)
-		gui_module_is_locked_display(c->html, c->mod_name, c->cipher_key);
-	//popupmenu = create_pm(c); // gui_create_pm_comm(c);
+	if (c->is_locked)
+		gui_module_is_locked_display(c->html, c->mod_name,
+					     c->cipher_key);
 	gnome_popup_menu_attach(popupmenu, c->html, NULL);
+	display(c, settings.currentverse);
 }
+
 
 /******************************************************************************
  * Name
@@ -529,18 +543,19 @@ void gui_add_new_comm_pane(COMM_DATA *c)
  *   void
  */
 
-static void add_vbox_to_notebook(COMM_DATA *c)
-{	
+static void add_vbox_to_notebook(COMM_DATA * c)
+{
 	GtkWidget *label;
-	
+
 	c->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(c->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-			"c->vbox", c->vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "c->vbox", c->vbox,
+				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(c->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm), c->vbox);
-	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm),
+			  c->vbox);
+
 	label = gtk_label_new(c->mod_name);
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
@@ -548,14 +563,16 @@ static void add_vbox_to_notebook(COMM_DATA *c)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm),
-				gtk_notebook_get_nth_page
-				(GTK_NOTEBOOK(widgets.notebook_comm),
-				c->modnum), label);
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK(widgets.notebook_comm),
+				    c->modnum), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-				(widgets.notebook_comm),
-				gtk_notebook_get_nth_page
-				(GTK_NOTEBOOK(widgets.notebook_comm),
-				c->modnum), (gchar *) c->mod_name);
+					 (widgets.notebook_comm),
+					 gtk_notebook_get_nth_page
+					 (GTK_NOTEBOOK
+					  (widgets.notebook_comm),
+					  c->modnum),
+					 (gchar *) c->mod_name);
 }
 
 
@@ -574,8 +591,8 @@ static void add_vbox_to_notebook(COMM_DATA *c)
  * Return value
  *   void
  */
- 
-void gui_setup_commentary(GList *mods)
+
+void gui_setup_commentary(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modname;
@@ -583,9 +600,9 @@ void gui_setup_commentary(GList *mods)
 	gchar *keybuf;
 	COMM_DATA *c;
 	gint count = 0;
-	
+
 	comm_list = NULL;
-	
+
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -601,20 +618,20 @@ void gui_setup_commentary(GList *mods)
 		c->key[0] = '\0';
 		c->book_heading = FALSE;
 		c->chapter_heading = FALSE;
-		c->cipher_key = NULL;	
-		
-		if(has_cipher_tag(c->mod_name)) {
+		c->cipher_key = NULL;
+
+		if (has_cipher_tag(c->mod_name)) {
 			c->is_locked = module_is_locked(c->mod_name);
 			c->cipher_old = get_cipher_key(c->mod_name);
 			//g_warning("cipher key for %s is %s", c->mod_name,c->cipher_old);
 		}
-		
+
 		else {
-			
+
 			c->is_locked = 0;
 			c->cipher_old = NULL;
 		}
-		
+
 		add_vbox_to_notebook(c);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
@@ -651,7 +668,7 @@ void gui_setup_commentary(GList *mods)
  * Return value
  *   void
  */
- 
+
 void gui_shutdown_commentary(void)
 {
 	comm_list = g_list_first(comm_list);
@@ -660,9 +677,9 @@ void gui_shutdown_commentary(void)
 		/* 
 		 * free any cipher keys 
 		 */
-		if(c->cipher_key)
+		if (c->cipher_key)
 			g_free(c->cipher_key);
-		if(c->cipher_old)
+		if (c->cipher_old)
 			g_free(c->cipher_old);
 		/* 
 		 * free global options 

@@ -45,15 +45,14 @@
 #include "gui/gnomesword.h"
 #include "gui/search_dialog.h"
 #include "gui/studypad_dialog.h"
+#include "gui/about_gnomesword.h"
+#include "gui/about_sword.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
-#include "gui/about_gnomesword.h"
-#include "gui/about_sword.h"
 #include "main/lists.h"
 
 GtkWidget *htmlTexts;
-
 
 
 
@@ -151,18 +150,9 @@ void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 					  gpointer user_data)
 {
-	GtkWidget *dlg, *version_label;
-	const char *ver;
-	gchar version[40];
+	GtkWidget *dlg;
 
 	dlg = gui_create_about_sword();
-	version_label = gui_lookup_widget(dlg, "version_label");
-	/* 
-	 * get sword version 
-	 */
-	ver = get_sword_version();
-	sprintf(version, "Sword-%s", ver);
-	gtk_label_set_text(GTK_LABEL(version_label), version);
 	gtk_widget_show(dlg);
 }
 
@@ -270,12 +260,12 @@ void on_verse_style1_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_exit1_activate
+ *  on_exit_activate
  *
  * Synopsis
  *   #include "main_menu.h"
  *
- *   void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *   void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *   do a nice orderly shut down and exit gnomesword
@@ -286,7 +276,7 @@ void on_verse_style1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gtk_widget_destroy(widgets.app);
 }
@@ -540,7 +530,6 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
  * gnome menu structures
  */
 
-
 static GnomeUIInfo open_bibletext_dialog1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -594,7 +583,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
+	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -608,13 +597,13 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
-	 N_("Open search dialog"),
+	 N_("Shortcut Bar Search"),
 	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
-	 NULL,
+	 N_("Open Search Dialog"),
 	 gui_do_dialog_search, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
@@ -650,8 +639,8 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Upper Workbook"),
-	 N_("Show/Hide Upper Workbook - Commentaries and Studypad"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary"),
+	 N_("Show/Hide Commentaries"),
 	 (gpointer) view_upper_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
@@ -793,8 +782,8 @@ static GnomeUIInfo menubar1_uiinfo[] = {
  */
 
 void gui_create_main_menu(GtkWidget * app)
-{
-	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
+{	
+ 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 
 	gtk_widget_ref(menubar1_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "file1",
@@ -962,12 +951,7 @@ void gui_create_main_menu(GtkWidget * app)
 			      _
 			      ("_Help/About Sword Modules/Bible Texts/"),
 			      (GtkMenuCallback) gui_about_activate);
-/*
-	gtk_widget_ref(bible_texts1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator15",
-				 bible_texts1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-*/
+			      
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "commentaries1",
@@ -979,12 +963,6 @@ void gui_create_main_menu(GtkWidget * app)
 			      _
 			      ("_Help/About Sword Modules/Commentaries/"),
 			      (GtkMenuCallback) gui_about_activate);
-/*
-	gtk_widget_ref(commentaries1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator16",
-				 commentaries1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-*/
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[2].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "dictionaries_lexicons1",
@@ -996,13 +974,7 @@ void gui_create_main_menu(GtkWidget * app)
 			      _
 			      ("_Help/About Sword Modules/Dictionaries-Lexicons/"),
 			      (GtkMenuCallback) gui_about_activate);
-/*
-	gtk_widget_ref(dictionaries_lexicons1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator17",
-				 dictionaries_lexicons1_menu_uiinfo
-				 [0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-*/
+			      
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[3].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "books",
@@ -1013,18 +985,12 @@ void gui_create_main_menu(GtkWidget * app)
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_Help/About Sword Modules/Books/"),
 			      (GtkMenuCallback) gui_about_activate);
-/*
-	gtk_widget_ref(books_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator17",
-				 books_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);	
-				 
-*/
 
 	gtk_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
 			   GTK_SIGNAL_FUNC(on_verse_style1_activate),
 			   NULL);
+			   
 }
 
 /******************************************************************************
@@ -1045,5 +1011,5 @@ void gui_create_main_menu(GtkWidget * app)
 
 void gui_install_menu_hints(GtkWidget * app)
 {
-	gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
+	//gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
 }

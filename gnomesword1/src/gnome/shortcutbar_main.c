@@ -117,8 +117,7 @@ void showSBGroup(gint groupnum)
 		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+				     (widgets.hpaned),
 				     biblepanesize);
 		settings.showshortcutbar = TRUE;
 	}
@@ -1893,8 +1892,7 @@ void gui_shortcutbar_showhide(void)
 		gtk_widget_hide(widgets.shortcutbar);
 		e_paned_set_position(E_PANED(widgets.epaned), 0);
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+				     (widgets.hpaned),
 				     settings.biblepane_width);
 	} else {
 		settings.showshortcutbar = TRUE;
@@ -1903,7 +1901,7 @@ void gui_shortcutbar_showhide(void)
 		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget(widgets.app, "hpaned1")),
+				     (widgets.hpaned),
 				     settings.biblepane_width);
 		gtk_widget_show(widgets.shortcutbar);
 	}
@@ -1949,11 +1947,11 @@ void gui_set_shortcutbar_porgram_start(void)
 	}
 
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(widgets.app, "vpaned1")),
+	e_paned_set_position(E_PANED(widgets.vpaned),
 			     settings.upperpane_hight);
 
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(widgets.app, "hpaned1")),
+	e_paned_set_position(E_PANED(widgets.hpaned),
 			     settings.biblepane_width);
 
 	if (!settings.docked) {
