@@ -27,25 +27,17 @@ extern "C" {
 #endif	
 
 #include <glib-1.2/glib.h>
+	
+
 #include "main/lists.h"
 	
 void backend_init(void);
-GList * backend_get_global_options_list(void);
 void backend_module_name_from_description(char * mod_name, char * mod_desc);
-void backend_shutdown(void);
-char *backend_get_valid_key(char *key);
-const char *backend_get_book_from_key(char *key);
-int backend_get_chapter_from_key(char *key);
-int backend_get_verse_from_key(char *key);
+void backend_shutdown(int save_properties);
 void backend_change_percom_module(char * modName);
-GList *backend_get_books(void);
 const char *backend_get_sword_version(void);
 void backend_save_module_key(char *mod_name, char *key);
 int backend_get_mod_type(char * modName);
-GList *backend_get_list_of_mods_by_type(char *mod_type);
-GList *backend_get_list_of_devotion_modules(void);
-GList *backend_get_list_of_percom_modules(void);
-GList *backend_get_mod_description_list_SWORD(char *mod_type);
 char *backend_get_module_description(char * modName);
 char *backend_get_path_to_mods(void);
 char *backend_get_mod_about_info(char * modname);
@@ -56,8 +48,7 @@ char *backend_get_cipher_key(char *mod_name);
 char *backend_get_module_text(char * mod_name, char * key);	
 int backend_check_for_module(char * mod_name);
 char *backend_get_striptext(char *mod_name, char *key);
-const unsigned int backend_chapter_count(char *key);
-const unsigned int backend_verse_count(char *key);
+
 
 #ifdef __cplusplus
 }

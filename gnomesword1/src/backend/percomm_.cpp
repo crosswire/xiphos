@@ -198,6 +198,9 @@ void backend_delete_personal_comment(void)
 int backend_is_personal_comment(char * mod_name)
 {
 	SWModule *module = mgr->Modules[mod_name];
+	if(!module)
+		return FALSE;
+	
 	if (!strcmp((char*)module->getConfigEntry("ModDrv") ,"RawFiles")) {
 		     return TRUE;
 	}

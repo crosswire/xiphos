@@ -139,14 +139,20 @@ module.include.files=\
 	src/main/settings.h\
 	src/main/shortcutbar.h\
 	src/main/spell.h\
-	src/main/sword.h
+	src/main/sword.h\
+	src/main/module.h\
+	src/backend/module.hh\
+	src/backend/key.hh\
+	src/backend/mgr.hh\
+	src/main/key.h\
+	src/backend/config.hh\
+	src/main/configs.h
 
 module.source.name=.
 module.source.type=
 module.source.expanded=1
 module.source.files=\
 	src/backend/sword.cpp\
-	src/backend/search.cpp\
 	src/backend/percomm_.cpp\
 	src/backend/properties.cpp\
 	src/backend/module_fonts.cpp\
@@ -156,9 +162,7 @@ module.source.files=\
 	src/backend/interlinear.cpp\
 	src/backend/dictlex_.cpp\
 	src/backend/commentary_.cpp\
-	src/backend/new_bookmarks.cpp\
 	src/backend/bookmarks.cpp\
-	src/backend/shortcutbar.cpp\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
@@ -223,7 +227,15 @@ module.source.files=\
 	src/main/shortcutbar.c\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
-	src/main/sword.c
+	src/main/sword.c\
+	src/backend/module.cc\
+	src/main/module.c\
+	src/backend/key.cc\
+	src/backend/mgr.cc\
+	src/main/key.c\
+	src/backend/config.cc\
+	src/main/configs.c\
+	src/backend/shortcutbar.cpp
 
 module.pixmap.name=.
 module.pixmap.type=

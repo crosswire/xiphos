@@ -36,6 +36,7 @@
 #include "main/bibletext.h"
 #include "main/lists.h"
 #include "main/sword.h"
+#include "main/key.h"
 
 
 
@@ -1012,7 +1013,7 @@ static void add_items_to_options_menu(void)
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 			   GTK_SIGNAL_FUNC(on_int_global_options_activate),
-			  (gchar *)(gchar *) tmp->data);  
+			  (gchar *) tmp->data);  
 		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
                                              GTK_WIDGET(menuChoice),
                                              1);  	      
@@ -1060,8 +1061,7 @@ static void add_items_to_options_menu(void)
 		if(!strcmp((gchar *) tmp->data, "Headings")) {
 			GTK_CHECK_MENU_ITEM(menuChoice)->active =
 				settings.headingsint;
-		}	
-		g_free((gchar *) tmp->data);
+		}
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
