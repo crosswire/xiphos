@@ -49,8 +49,8 @@
 #include <glib-1.2/glib.h>
 #endif
 
-#include "backend/config.hh"
-#include "backend/sword_defs.h"
+#include "config.hh"
+#include "sword_defs.h"
 
 #include "main/sword.h"
 #include "main/search.h"
