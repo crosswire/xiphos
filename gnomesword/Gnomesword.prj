@@ -94,7 +94,6 @@ module.source.files=\
 	gs_shortcutbar.h\
 	gs_gui.c\
 	gs_gui.h\
-	sw_gbfhtml.cpp\
 	gs_viewtext_dlg.c\
 	gs_viewtext_dlg.h\
 	gs_info_box.c\

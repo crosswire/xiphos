@@ -1,28 +1,30 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                            sw_utility.cpp
-                             -------------------
-    begin                : Thur Apr 5 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@users.sourceforge.net
- ***************************************************************************/
 
-/*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  /*
+    * GnomeSword Bible Study Tool
+    * sw_utility.cpp
+    * -------------------
+    * Thur Apr 5 2001
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+    *
  */
-
+ 
+ /*
+    *  This program is free software; you can redistribute it and/or modify
+    *  it under the terms of the GNU General Public License as published by
+    *  the Free Software Foundation; either version 2 of the License, or
+    *  (at your option) any later version.
+    *
+    *  This program is distributed in the hope that it will be useful,
+    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    *  GNU Library General Public License for more details.
+    *
+    *  You should have received a copy of the GNU General Public License
+    *  along with this program; if not, write to the Free Software
+    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -117,47 +119,4 @@ changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 		module = (*it).second;  //-- change current module to new module
 	}		
 }
-/**
-    * Sets the cipher key for the given module. This function updates the key at runtime,
-    * but it does not write to the config file.
-    * To write the new unlock key to the config file use code like this:
-    *
-    * @code
-    * SectionMap::iterator section;
-    * ConfigEntMap::iterator entry;
-    * DIR *dir = opendir(configPath);
-    * struct dirent *ent;
-    * char* modFile;
-    * if (dir) {    // find and update .conf file
-    *   rewinddir(dir);
-    *   while ((ent = readdir(dir)))
-    *   {
-    *     if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, "..")))
-    *     {
-    *       modFile = m_backend->configPath;
-    *       modFile += "/";
-    *       modFile += ent->d_name;
-    *       SWConfig *myConfig = new SWConfig( modFile );
-    *       section = myConfig->Sections.find( m_module->Name() );
-    *       if ( section != myConfig->Sections.end() )
-    *       {
-    *         entry = section->second.find("CipherKey");
-    *         if (entry != section->second.end())
-    *         {
-    *           entry->second = unlockKey;//set cipher key
-    *           myConfig->Save();//save config file
-    *         }
-    *       }
-    *       delete myConfig;
-    *     }
-    *   }
-    * }
-    * closedir(dir);
-    * @endcode
-    *
-    * @param modName For this module we change the unlockKey
-    * @paran key This is the new unlck key we use for te module. 
-    * virtual char setCipherKey (const char *modName, const char *key);
-    */
-
 
