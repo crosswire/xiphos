@@ -604,13 +604,15 @@ static int show_module_and_key(const char * module, const char * key,
 	gint mod_type;
 	gint verse_count;
 	gboolean change_verse = FALSE;
-		
-	g_message("show_module_and_key1");
+	
+	if(module && (strlen((char*)module) < 3) && 
+		backend->is_Bible_key(key, settings.currentverse)) {
+		module = settings.MainWindowModule;
+	}
 	if(!clicked) {
 		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
-	g_message("show_module_and_key2");
 	
 	if(backend->is_module(module)) {
 		if(!strcmp(type,"newTab")) {
