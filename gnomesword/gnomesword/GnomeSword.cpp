@@ -102,8 +102,9 @@ GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
 				*notepage;	//-- widget to access toggle menu - for interlinear notebook page
 				
 extern gint ibookmarks;	//-- number of items in bookmark menu
-extern GdkColor myGreen;
-
+extern GdkColor myGreen; //-- current verse color
+GtkWidget* studypad;  //-- studypad text widget
+GtkWidget* notes;    //-- notes text widget
 
 
 //----------------------------------------------------------------------------------------------
@@ -171,7 +172,6 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	myGreen.blue = 0x0000;
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
-//	bookmark_mnu = lookup_widget(menu5,"pumuBookmarks"); //-- save menu for use latter
 	//--------------------------------------------------------------------- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
@@ -190,7 +190,9 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textDict")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , TRUE );
-
+  //------------------------------------------------------------------ store text widgets for spell checker
+  notes =  lookup_widget(mainform,"textComments");
+  studypad = lookup_widget(mainform,"text3");
 	//-------------------------------------------------------------- set main window modules and add to menus	
 	sprintf(rememberlastitem,"%s","_View/Main Window/");
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) 
@@ -326,8 +328,9 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	it = mainMgr->Modules.find(options[1]); 
 	if (it != mainMgr->Modules.end()) 
 	{
-		curMod = (*it).second;	
-	}
+		curMod = (*it).second;
+		gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")),curMod->Name()); //-- set main text window	
+	}                                                                                  //-- label to modName
 
 	//-------------------------------------------------- use module in options list to set 1st int text module
 	it = mainMgr1->Modules.find(options[2]); 
@@ -358,10 +361,9 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),"1");
-	gnome_popup_menu_attach(menu5,lookup_widget(mainform,"btnBookmarks"),"1");	
 
 	loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
-//    changeVerse(options[9]); //-------------------------------------------------- set Text
+  changeVerse(options[9]); //-------------------------------------------------- set Text
 }
 
 
@@ -430,24 +432,24 @@ changeVerse(gchar *ref)
 		//--------------------------------------------------------------- change interlinear verses
 		if(comp1Mod)
 		{
-			comp1Mod->SetKey(swKey);
+			comp1Mod->SetKey(swKey);   //-- interlinear1
 			comp1Mod->Display();
 		}
 		if(comp2Mod)
 		{
-			comp2Mod->SetKey(swKey);
+			comp2Mod->SetKey(swKey);  //-- interlinear2
 			comp2Mod->Display();
 		}		
 		if(comp3Mod)
 		{
-			comp3Mod->SetKey(swKey);
+			comp3Mod->SetKey(swKey);  //-- interlinear3
 			comp3Mod->Display();
 		}
 		//---------------------------------------------------------------- change commentary 
 		if(curcomMod)
 		{	
-			if(!GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active)
-			{
+			if(!GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) //-- change if we are
+			{                                                                    //-- not in edit mode
 				curcomMod->SetKey(swKey);
 				curcomMod->Display();	
 			}	
@@ -458,44 +460,44 @@ changeVerse(gchar *ref)
 
 //-------------------------------------------------------------------------------------------
 void 
-FillDictKeys(char *ModName) 
-{
-	ModMap::iterator it;
-	int index = 0;
-	SWKey saveKey;
-	string keyText;
-	gchar *entryText;
-	int i, j, count ;
-	const gchar *listitem;
-	GtkWidget *list;
+FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
+{                            //-- number of keys depends on hight of list widget and size of font
+	ModMap::iterator it; //-- iterator to go through modules and find modName
+	int index = 0;      //-- for index into list widget
+	SWKey saveKey;      //-- for starting point
+	string keyText;     //-- string to search for
+	gchar *entryText;   //-- pointer to string to search for
+	int i, j, count ;   //-- counters
+	const gchar *listitem; //-- hold item until added to list
+	GtkWidget *list;     //-- list widget to display items found
 
-	list = lookup_widget(MainFrm, "list1");
-	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText")));
+	list = lookup_widget(MainFrm, "list1"); //-- get pointer to list widget
+	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText"))); //-- get key to form user
 	j=0;
-	keyText = entryText;
-	it = mainMgr->Modules.find(ModName);
-	if (it != mainMgr->Modules.end()) 	
+	keyText = entryText; //-- put key in string
+	it = mainMgr->Modules.find(ModName); //-- find module to use for search
+	if (it != mainMgr->Modules.end()) //-- if we don't reach the end of our modules 	
 	{
-		SWModule *mod = (*it).second;
-		mod->KeyText(); // snap to entry
-		saveKey = mod->KeyText(); 
-		count = GTK_CLIST(list)->clist_window_height / GTK_CLIST(list)->row_height;		
-		gtk_clist_clear( GTK_CLIST(list));
-		if(mod)
+		SWModule *mod = (*it).second;  //-- temp module to work with
+		mod->KeyText(); //-- snap to entry
+		saveKey = mod->KeyText(); //-- save our place
+		count = GTK_CLIST(list)->clist_window_height / GTK_CLIST(list)->row_height;	//-- how many items do we need to fill our list	
+		gtk_clist_clear( GTK_CLIST(list)); //-- start with empty list
+		if(mod) //-- make sure we have module to work with
 		{
-			for (i = 0; i < (count / 2); i++) (*mod)++;
+			for (i = 0; i < (count / 2); i++) (*mod)++; //-- get equal number of keys before and after our starting key(saveKey)
 			for (i = 0; i < count-1; i++) (*mod)--;
-			mod->Error();
+			mod->Error(); //-- clear errors
 			for (;!mod->Error() && count;count--,(*mod)++) 
 			{
 				++j;
-				listitem = (const char *)mod->KeyText();
-				gtk_clist_append(GTK_CLIST(list) , &listitem);
-				if (saveKey == mod->Key())
+				listitem = (const char *)mod->KeyText(); //-- key to listitem
+				gtk_clist_append(GTK_CLIST(list) , &listitem); //-- listitem to list
+				if (saveKey == mod->Key()) //-- if we are back to starting place set index
 				index = j-1; 
 			}
 		}
-		gtk_clist_moveto( GTK_CLIST(list),
+		gtk_clist_moveto( GTK_CLIST(list),  //-- move in list to index
                             index,
                             0,
                             0.5,
@@ -505,84 +507,65 @@ FillDictKeys(char *ModName)
 
 //-------------------------------------------------------------------------------------------
 void 
-setHistory(void)
-{
-	
-	GtkWidget *menuChoice;	
-	gchar   menuName[64];
-/*
-	menuChoice = gtk_menu_item_new_with_label (curMod->KeyText());
-	sprintf(menuName, "%s",curMod->KeyText() );
-	gtk_object_set_data (GTK_OBJECT (MainFrm), menuName, menuChoice);
-	gtk_widget_show (menuChoice);
-	gtk_signal_connect(GTK_OBJECT (menuChoice), "activate",
-			      GTK_SIGNAL_FUNC (on_mnuHistoryitem1_activate),
-			      g_strdup(curMod->KeyText() ));
-	gtk_container_add (GTK_CONTAINER (lookup_widget(MainFrm,"history1_menu")), menuChoice);
-*/
-}
-
-//-------------------------------------------------------------------------------------------
-void 
-UpdateChecks(GtkWidget *mainform)
-{
+UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle buttons
+{                                 //-- called on start up
 	if(options[5][0] == 'T')	//--------------------- set verse style to last setting used
 	{
 		GTK_CHECK_MENU_ITEM (versestyle)->active = TRUE;
-		bVerseStyle = TRUE;
+		bVerseStyle = TRUE; //-- keep VerseStyle in sync with menu
 	}
 	if(options[5][0] == 'F')
 	{
 		GTK_CHECK_MENU_ITEM (versestyle)->active = FALSE;
-		bVerseStyle = FALSE;
+		bVerseStyle = FALSE; //-- keep VerseStyle in sync with menu
 	}
 	if(options[7][0] == 'T')  //----------------------- set footnotes to last setting used
 	{
 		GTK_CHECK_MENU_ITEM (footnotes)->active = TRUE;	
-		mainMgr->setGlobalOption("Footnotes","On");			
+		mainMgr->setGlobalOption("Footnotes","On");	//-- keep footnotes in sync with menu		
 	}	
 	if(options[7][0] == 'F')
 	{
 		GTK_CHECK_MENU_ITEM (footnotes)->active = FALSE;
-		mainMgr->setGlobalOption("Footnotes","Off");				
+		mainMgr->setGlobalOption("Footnotes","Off");	//-- keep footnotes in sync with menu			
 	}
 	if(options[8][0] == 'T')	//---------------------------- set interlinear page to last setting
 	{
-		GTK_CHECK_MENU_ITEM (notepage)->active = TRUE;
+		GTK_CHECK_MENU_ITEM (notepage)->active = TRUE; //-- keep toggle interlinear page on
 		gtk_widget_show(lookup_widget(mainform,"vbox3"));	
 	}
 	if(options[8][0] == 'F')
 	{
-		GTK_CHECK_MENU_ITEM (notepage)->active = FALSE;
+		GTK_CHECK_MENU_ITEM (notepage)->active = FALSE; //-- keep toggle interlinear page off
 		gtk_widget_hide(lookup_widget(mainform,"vbox3"));		
 	}
 	if(options[6][0] == 'T')	//--------------------------- set Strong's numbers to last setting
 	{	
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(mainform,"btnStrongs")), TRUE);
-		mainMgr->setGlobalOption("Strong's Numbers","On");
+		mainMgr->setGlobalOption("Strong's Numbers","On"); //-- keep strongs numbers in sync with menu	
 	}
 	if(options[6][0] == 'F')
 	{
 		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(lookup_widget(mainform,"btnStrongs")), FALSE);
-		mainMgr->setGlobalOption("Strong's Numbers","Off");
+		mainMgr->setGlobalOption("Strong's Numbers","Off"); //-- keep strongs numbers in sync with menu
 	}		
     changeVerse(options[9]); //--------------------------------------- set Text - apply changes
 }
 
 //-------------------------------------------------------------------------------------------
 void 
-ShutItDown(void)
+ShutItDown(void)  //------------- close down GnomeSword program
 {
 
-	saveoptions();
+	saveoptions();  //-- save setting to use when we start back up
 	
-	delete mainMgr;
+	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
 	delete mainMgr2;
 	delete mainMgr3;
 	delete searchMgr;
 
-	if (chapDisplay)
+	if (chapDisplay)    //-- delete Sword displays
 		delete chapDisplay;
 	if (entryDisplay)
 		delete entryDisplay;	
@@ -596,50 +579,50 @@ ShutItDown(void)
 		delete BTFcomDisplay;
 	if(dictDisplay)
 		delete dictDisplay;
-	gtk_exit(0);
+	gtk_exit(0);           //-- exit
 }
 
 
 //-------------------------------------------------------------------------------------------
 void
-searchSWORD(GtkWidget *searchFrm)
+searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 {
-	GtkWidget	*searchText,
-					 *lbSearchHits,
-					 *resultList,
-					 *regexSearch,
-					 *phraseSearch,
-					 *caseSensitive,
-					 *comToggle,
-					 *bounds,
-					 *lastsearch,
-					 *textWindow;
-    string srchText;
-	gchar         *entryText,
-			         scount[5];
-	const gchar *resultText;
-	gint count;
+	GtkWidget	*searchText,   //-- what we want to find -text entry
+					 *lbSearchHits,  //-- label for showing how many verses we found
+					 *resultList,    //-- list of verses found
+					 *regexSearch,   //-- do we want to use regular expression search - radio button
+					 *phraseSearch,  //-- do we want to use phrase seach - radio button
+					 *caseSensitive, //-- do we want search to be case sensitive - check box
+					 *comToggle,     //-- do we want to search current commentary - check box
+					 *bounds,        //-- do we want to use bounds for our search - check box
+					 *lastsearch,    //-- use verses from last search for bounds of this search
+					 *textWindow;    //-- text widget to display verses
+    string srchText;       //-- string to search for - from entryText
+	gchar         *entryText,//-- pointer to text in searchText entry
+			         scount[5];  //-- string from gint count for label
+	const gchar *resultText; //-- temp storage for verse found
+	gint count;              //-- number of hits
 
 
 
-	searchText = lookup_widget(searchFrm,"entry1");
-	lbSearchHits = lookup_widget(searchFrm,"lbSearchHits");
-	resultList = lookup_widget(searchFrm,"resultList");
-	regexSearch = lookup_widget(searchFrm,"regexSearch");
-	phraseSearch = lookup_widget(searchFrm,"phraseSearch");
-	caseSensitive = lookup_widget(searchFrm,"caseSensitive");
-	bounds = lookup_widget(searchFrm,"rbUseBounds");
-	lastsearch = lookup_widget(searchFrm,"rbLastSearch");
-	comToggle = lookup_widget(searchFrm,"ckbCom");	
-	textWindow= lookup_widget(searchFrm,"txtSearch");	
+	searchText = lookup_widget(searchFrm,"entry1"); //-- pointer to text entry
+	lbSearchHits = lookup_widget(searchFrm,"lbSearchHits");//-- pointer to count label
+	resultList = lookup_widget(searchFrm,"resultList");   //-- pointer to list
+	regexSearch = lookup_widget(searchFrm,"regexSearch"); //-- pointer to radio button
+	phraseSearch = lookup_widget(searchFrm,"phraseSearch");//-- pointer to radio button
+	caseSensitive = lookup_widget(searchFrm,"caseSensitive");//-- pointer to check box
+	bounds = lookup_widget(searchFrm,"rbUseBounds"); //-- pointer to check box
+	lastsearch = lookup_widget(searchFrm,"rbLastSearch"); //-- pointer to radio button
+	comToggle = lookup_widget(searchFrm,"ckbCom"); //-- pointer to check box	
+	textWindow= lookup_widget(searchFrm,"txtSearch");	//-- pointer to text widget
 	
-	/********************************************************************************************************** clear text window */	
-	gtk_text_set_point(GTK_TEXT(textWindow), 0);
+	
+	gtk_text_set_point(GTK_TEXT(textWindow), 0); //-- clear text window
 	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
 
-	/********************************************************************************************************* search text or com */
-	if(!GTK_TOGGLE_BUTTON(comToggle)->active)
-		searchMod = curMod;
+	
+	if(!GTK_TOGGLE_BUTTON(comToggle)->active)//-- search Bible text or commentary
+		searchMod = curMod; //-- set search module
 	else
 		searchMod = curcomMod;
 	
@@ -1058,7 +1041,9 @@ deletenoteSWORD(void)
 		VerseKey mykey;
 		gchar *buf;
 		
-		gtk_text_set_point(GTK_TEXT(lookup_widget(MainFrm,"textComments")), 0);											gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")), gtk_text_get_length(GTK_TEXT(lookup_widget(MainFrm,"textComments"))));
+		gtk_text_set_point(GTK_TEXT(lookup_widget(MainFrm,"textComments")), 0);
+		gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")),
+							 gtk_text_get_length(GTK_TEXT(lookup_widget(MainFrm,"textComments"))));
 		mykey = curcomMod->KeyText();
 		mykey.Persist(1);
 		curcomMod->SetKey(mykey);
@@ -1099,3 +1084,31 @@ dictSearchTextChangedSWORD(char* mytext)
 		}
 	}
 }
+
+//-------------------------------------------------------------------------------------------
+void
+setsensitive(bool editbtnactive)
+{	/*
+ 	GtkWidget	*save,
+ 						*cut,
+ 						*spell;
+ 	save = lookup_widget(MainFrm,"btnSaveNote");
+ 	cut = lookup_widget(MainFrm,"btnDeleteNote");
+ 	spell = lookup_widget(MainFrm,"btnSpellNotes");
+ 	if(editbtnactive)
+ 	{
+ 		gtk_widget_set_sensitive (save, TRUE);
+ 		gtk_widget_set_sensitive (cut, TRUE);
+ 		gtk_widget_set_sensitive (spell, TRUE); 	
+ 	}
+ 	else
+ 	{
+ 		gtk_widget_set_sensitive(save, FALSE);
+ 		gtk_widget_set_sensitive(cut, FALSE);
+ 		gtk_widget_set_sensitive(spell, FALSE);
+  }
+*/
+}
+
+
+

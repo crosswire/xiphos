@@ -36,12 +36,13 @@
 int
 main (int argc, char *argv[])
 {
-  GtkWidget *fileselection1;
+/*  GtkWidget *fileselection1;
   GtkWidget *fileselectionSave;
   GtkWidget *about1;
   GtkWidget *dlgSearch;
   GtkWidget *dlgOptions;
   GtkWidget *wdwEditBookmarks;
+*/
   GtkWidget *mainwindow;
   GtkWidget *menu1;
   GtkWidget *menu2;
@@ -49,7 +50,7 @@ main (int argc, char *argv[])
   GtkWidget *menu4;
   GtkWidget *menu5;  
 
-  gnome_init ("gtkSword", VERSION, argc, argv);
+  gnome_init ("GnomeSword", VERSION, argc, argv);
 
   /*
    * The following code was added by Glade to create one of each component
@@ -60,10 +61,8 @@ main (int argc, char *argv[])
   menu1 = create_menu1();
   menu2 = create_menuInt1();
   menu3 = create_menuInt2();
-  menu4 = create_menuInt3(); 
-  menu5 = create_pumuBookmarks ();
+  menu4 = create_menuInt3();
   mainwindow = create_mainwindow ();
-//  dlgSearch = create_dlgSearch();
   setDiretory();
   loadbookmarkarray();
   loadoptionarray();
