@@ -86,6 +86,7 @@ extern gint ibookmarks;		//-- number of bookmark menu items
 extern NoteEditor *noteeditor;
 extern gboolean autoscroll;
 extern gboolean isstrongs;	//-- main window selection is not storngs number (GnomeSword.cpp)
+extern char *homedir;
 guint num1, num2, num3;
 bool buttonpressed = false;
 bool dicttabs,
@@ -519,10 +520,12 @@ on_textComp3_button_press_event(GtkWidget * widget,
 void on_btnOpenFile_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *openFile;
+	gchar buf[255];
 
+	sprintf(buf,"%s/BibleStudy/*.pad",homedir);
 	openFile = create_fileselection1();
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
-					"/home/tb/BibleStudy/*.pad");
+					buf);
 	gtk_widget_show(openFile);
 }
 
@@ -530,6 +533,9 @@ void on_btnOpenFile_clicked(GtkButton * button, gpointer user_data)
 void on_btnSaveFile_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *savemyFile, *ok_button2;
+	gchar buf[255];
+
+	sprintf(buf,"%s/BibleStudy/.pad",homedir);	
 	if (current_filename) {
 		saveFile(current_filename);
 		return;
@@ -537,7 +543,7 @@ void on_btnSaveFile_clicked(GtkButton * button, gpointer user_data)
 		savemyFile = create_fileselectionSave();
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION
 						(savemyFile),
-						"/home/tb/BibleStudy/*.pad");
+						buf);
 		ok_button2 = lookup_widget(savemyFile, "ok_button2");
 		gtk_signal_connect(GTK_OBJECT(ok_button2), "clicked",
 				   GTK_SIGNAL_FUNC(on_ok_button2_clicked),
@@ -550,10 +556,12 @@ void on_btnSaveFile_clicked(GtkButton * button, gpointer user_data)
 void on_btnSaveFileAs_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *savemyFile, *ok_button2;
+        gchar buf[255];
 
+	sprintf(buf,"%s/BibleStudy/.pad",homedir);
 	savemyFile = create_fileselectionSave();
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(savemyFile),
-					"/home/tb/BibleStudy/*.pad");
+					buf);
 	ok_button2 = lookup_widget(savemyFile, "ok_button2");
 	gtk_signal_connect(GTK_OBJECT(ok_button2), "clicked",
 			   GTK_SIGNAL_FUNC(on_ok_button2_clicked), NULL);
@@ -1839,12 +1847,10 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 		return;		//-- do we have a selection?
 	buf =
 	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
-				   GTK_EDITABLE(NEtext)->
-				   selection_start_pos,
-				   GTK_EDITABLE(NEtext)->
-				   selection_end_pos);
+				   GTK_EDITABLE(NEtext)->selection_start_pos,
+				   GTK_EDITABLE(NEtext)->selection_end_pos);
 
-	changeVerse(buf);
+	changeVerse(buf);	
 }
 
 //----------------------------------------------------------------------------------------------

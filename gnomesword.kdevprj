@@ -1,10 +1,10 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/projects/gnomesword2/gnomesword/main.cpp,/home/terry/projects/gnomesword2/gnomesword/interface.c,/home/terry/projects/gnomesword2/ChangeLog,/home/terry/projects/gnomesword2/INSTALL,/home/terry/projects/gnomesword2/README,/home/terry/projects/gnomesword2/COPYING,/home/terry/projects/gnomesword2/AUTHORS,/home/terry/projects/gnomesword2/TODO,/home/terry/projects/gnomesword2/gnomesword/listeditor.h,/home/terry/projects/gnomesword2/gnomesword/menustuff.cpp,
-show_outputview=false
+openfiles=Untitled.h,Untitled.cpp,/home/terry/projects/gnomesword2/gnomesword/main.cpp,/home/terry/projects/gnomesword2/ChangeLog,/home/terry/projects/gnomesword2/configure.in,
+show_outputview=true
 show_treeview=true
-header_file=/home/terry/projects/gnomesword2/gnomesword/listeditor.h
-cpp_file=/home/terry/projects/gnomesword2/gnomesword/menustuff.cpp
+header_file=/home/terry/projects/gnomesword2/configure.in
+cpp_file=/home/terry/projects/gnomesword2/gnomesword/main.cpp
 browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/strcpy.html
 [gnomesword/printstuff.c]
 install_location=
