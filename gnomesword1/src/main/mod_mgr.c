@@ -23,12 +23,9 @@
 #include <config.h>
 #endif
 
-#ifdef USE_GNOME2
+
 #include <glib-2.0/glib.h>
 #include <gnome.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 
 
 #include "main/mod_mgr.h"

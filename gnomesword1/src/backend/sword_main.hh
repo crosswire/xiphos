@@ -77,6 +77,7 @@ public:
 	char *get_config_entry(char * module_name, char * entry);
 	int is_Bible_key(const char * list, char * current_key);
 	char *get_render_text(const char *module_name, const char *key);
+	char *render_this_text(const char * module_name, const char * text);
 	char *get_strip_text(const char *module_name, const char *key);
 	char *get_valid_key(const char *key);
 	char *key_get_book(const char *key);

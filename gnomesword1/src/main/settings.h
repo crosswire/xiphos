@@ -72,6 +72,7 @@ struct _settings {
 		verselist_toppane_height, //height of the top pane in the search results window
 		upperpane_hight,
 		biblepane_width,
+		sidebar_notebook_hight,
 		gs_width,
 		tmp_width,
 		gs_hight,	

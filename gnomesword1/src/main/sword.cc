@@ -27,10 +27,8 @@
 #include <gnome.h>
 #include <swmgr.h>
 #include <swmodule.h>
-
-#ifdef USE_SWORD_CVS
 #include <stringmgr.h>
-#endif
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,6 +48,7 @@ extern "C" {
 #include "gui/parallel_view.h"
 #include "gui/tabbed_browser.h"
 #include "gui/gnomesword.h"
+#include "gui/sidebar.h"
 #include "gui/utilities.h"
 
 #include "main/display.hh"
@@ -694,6 +693,144 @@ void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
 	//g_print(str->str); 
 	
 	free_font(mf);
+	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
+}
+
+/******************************************************************************
+ * Name
+ *   main_information_viewer
+ *
+ * Synopsis
+ *   #include "main/sword.h.h"
+ *
+ *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
+ *		    gchar * text, gchar *key, gchar * type, gboolean show_key)
+ *
+ * Description
+ *   display information in the information viewer
+ *
+ * Return value
+ *   void
+ */
+
+void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
+		             gchar * action ,gchar * type)
+{
+	GString *tmp_str = g_string_new(NULL);
+	GString *str;
+	GString *search_str;
+	gboolean was_editable = FALSE;
+	MOD_FONT *mf = get_font(mod_name);
+	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
+
+	/* setup gtkhtml widget */
+	was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+
+	g_string_printf(tmp_str,
+		HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color,
+		settings.link_color);
+
+	str = g_string_new(tmp_str->str);
+	if(type) {
+		if(!strcmp(type,"n")) {
+			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+					_("Footnote"));
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(type,"x")) {
+			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+					_("Cross Reference"));
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Strongs"),key);
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Morphology"),key);
+			str = g_string_append(str, tmp_str->str);
+		}
+	}
+	g_string_printf(tmp_str, 
+			"<font face=\"%s\" size=\"%s\">",
+			(mf->old_font)?mf->old_font:"none", 
+			(mf->old_font_size)?mf->old_font_size:"+0");
+	str = g_string_append(str, tmp_str->str);
+	str = g_string_append(str, text);
+
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
+	str = g_string_append(str, tmp_str->str);
+
+	if (str->len) {
+		gtk_html_load_from_string(html,str->str,str->len);
+	}
+	gtk_html_set_editable(html, was_editable);
+	
+	free_font(mf);
+	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_clear_viewer
+ *
+ * Synopsis
+ *   #include "main/sword.h.h"
+ *
+ *   void main_clear_viewer(GtkWidget * html_widget, gchar * mod_name, 
+ *		    gchar * text, gchar *key, gchar * type, gboolean show_key)
+ *
+ * Description
+ *   clear the information viewer
+ *
+ * Return value
+ *   void
+ */
+
+void main_clear_viewer(void)
+{
+	GString *tmp_str = g_string_new(NULL);
+	GString *str;
+	GString *search_str;
+	gboolean was_editable = FALSE;
+	//MOD_FONT *mf = get_font(mod_name);
+	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
+
+	/* setup gtkhtml widget */
+	was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+
+	g_string_printf(tmp_str,
+		HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color,
+		settings.link_color);
+
+	str = g_string_new(tmp_str->str);
+	
+	g_string_printf(tmp_str,
+	"<font color=\"grey\">" "<HR></font><br>");
+	str = g_string_append(str, tmp_str->str);
+		
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
+	str = g_string_append(str, tmp_str->str);
+
+	if (str->len) {
+		gtk_html_load_from_string(html,str->str,str->len);
+	}
+	gtk_html_set_editable(html, was_editable);
+	
+	//free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
 }

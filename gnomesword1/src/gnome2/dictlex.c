@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/dictlex.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
@@ -42,7 +41,6 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/dictlex.h"
 #include "main/xml.h"
 
 /******************************************************************************

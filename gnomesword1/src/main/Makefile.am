@@ -1,5 +1,6 @@
 INCLUDES =  \
     -I$(top_srcdir)/src \
+    $(SWORD_INCLUDES) \
     $(GNOME_CFLAGS) 
     
 
@@ -23,10 +24,7 @@ endif
 
 libmain_a_SOURCES =  \
     $(IDL_GENERATED)\
-    bibletext.c bibletext.h \
-    commentary.cc commentary.h \
     configs.c configs.h \
-    dictlex.c dictlex.h \
     display.cc display.hh \
     global_ops.cc global_ops.hh \
     lists.cc lists.h \
@@ -34,7 +32,6 @@ libmain_a_SOURCES =  \
     module_dialogs.cc module_dialogs.h \
     mod_mgr.c mod_mgr.h \
     parallel_view.cc parallel_view.h \
-    percomm.c percomm.h \
     search_dialog.cc search_dialog.h \
     search_sidebar.cc search_sidebar.h \
     settings.c settings.h \

@@ -34,6 +34,9 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #undef HAVE_LC_MESSAGES
 
+/* Define if you have libz */
+#undef HAVE_LIBZ
+
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
 
@@ -121,9 +124,6 @@
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
 
-/* Define if you want to use Gnome2 */
-#undef USE_GNOME2
-
 /* Define if you want to use gnome-spell */
 #undef USE_GNOME_SPELL
 
@@ -132,9 +132,6 @@
 
 /* Define if you want to spell checking */
 #undef USE_SPELL
-
-/* Define if you want to use cvs sword */
-#undef USE_SWORD_CVS
 
 /* Version number of package */
 #undef VERSION

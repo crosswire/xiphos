@@ -28,7 +28,6 @@
 
 #include "gui/cipher_key_dialog.h"
 #include "main/sword.h"
-#include "main/bibletext.h"
 #include "gui/dialog.h"
 
 

@@ -333,6 +333,13 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("layout", "vltoppaneheight", "210");
 		settings.verselist_toppane_height = 210;
 	}
+	if(xml_get_value("layout", "sidebar_notebook_hight"))
+		settings.sidebar_notebook_hight =
+			atoi(xml_get_value("layout", "sidebar_notebook_hight"));
+	else {
+		xml_add_new_item_to_section("layout", "sidebar_notebook_hight", "300");
+		settings.sidebar_notebook_hight = 250;
+	}
 	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
 	settings.gs_width = atoi(xml_get_value("layout", "width"));
 	
