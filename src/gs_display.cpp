@@ -43,6 +43,7 @@
 #include "gs_gnomesword.h"
 
 
+gchar *mycolor;
 
 /****************************************************************************************
  * externs
@@ -54,7 +55,6 @@ extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
 extern INTERLINEAR interlinearMods;
-extern gchar *mycolor;
 extern GS_FONTS *gsfonts;
 
 /***************************************************************************** 
@@ -369,7 +369,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		}else{
 			  sprintf(versecolor,"%s", "#000000");
 		}		
-		sprintf(tmpBuf, "&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d </B></font></A>",
+		sprintf(tmpBuf, "&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
 					 imodule.Description(),
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());	

@@ -58,13 +58,25 @@ void
 removemenuitems(GtkWidget * MainFrm,
 		gchar * startitem, gint numberofitems);
 		
-void createpopupmenus(GtkWidget *app, SETTINGS *settings,GList *biblelist, 
-		GList *commentarylist, GList *dictionarylist,
-		GList *percomlist);
+void createpopupmenus(GtkWidget *app, 
+				SETTINGS *settings,
+				GList *biblelist, 
+				GList *bilbeDescription,
+				GList *commentarylist, 
+				GList *comDescription,
+				GList *dictionarylist,
+				GList *dictDescription,
+				GList *percomlist);
 		
-void addmodstomenus(GtkWidget *app, SETTINGS *settings,GList *biblelist, 
-		GList *commentarylist, GList *dictionarylist,
-		GList *percomlist);		
+void addmodstomenus(GtkWidget *app, 
+				SETTINGS *settings,
+				GList *biblelist, 
+				GList *bilbeDescription,
+				GList *commentarylist, 
+				GList *comDescription,
+				GList *dictionarylist,
+				GList *dictDescription,
+				GList *percomlist);		
 
 		
 #ifdef __cplusplus
