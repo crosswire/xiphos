@@ -88,7 +88,9 @@ COMMON_SOURCE =  \
     thmlhtmlhref.cpp \
     thmlhtmlhref.h\
     sw_latin1utf8.cpp \
-    sw_latin1utf8.h
+    sw_latin1utf8.h\
+    printstuff.c \
+    printstuff.h
 
 SPELLING_SOURCE =  \
     debug.h \
@@ -99,51 +101,33 @@ SPELLING_SOURCE =  \
     char_table.c \
     char_table.h 
 
-PRINT_SOURCE = \
-    printstuff.c \
-    printstuff.h
-
 EXTRA_DIST = \
-    $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE)
-
+    $(SPELLING_SOURCE)
+    
 COMMON_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
     $(SWORD_LIBS) \
     $(GTKHTML_LIBS)\
-    $(GNOME_APP_LIBS)
-    
-PRINT_LDADD = \
+    $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
-    $(PIXBUF_LIBS)
-
-SHORTCUTBAR_LDADD = \
+    $(PIXBUF_LIBS) \
     $(GNOME_APP_LIBS)
 
 if SHORTCUTBAR_SPELL
 gnomesword_SOURCES = \
     $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE)	 \
     $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD) \
-    $(SHORTCUTBAR_LDADD)
 endif
 
 if SHORTCUTBAR
 gnomesword_SOURCES = \
-    $(PRINT_SOURCE)	 \
     $(COMMON_SOURCE)
+endif
 
 gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD) \
-    $(SHORTCUTBAR_LDADD)
-endif
+    $(COMMON_LDADD) 
 
 CXXFLAGS =  \
     $(GTK_CFLAGS) \
