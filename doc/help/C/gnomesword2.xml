@@ -32,7 +32,7 @@
 	<title>GnomeSword2 Manual</title>
 	<copyright>
         <year>2003</year>
-        <holder>the GnomeSword Team</holder>
+        <holder>&gnomesword;</holder>
         </copyright>
 
   <!-- translators: uncomment this:
@@ -50,7 +50,7 @@
 <!-- not sure whether this should be set to &gnomesword as the GDP hasn't actually
      written this manual -->
 	 <publisher>
-      	 	<publishername>GNOME Documentation Project</publishername>
+      	 	<publishername>&gnomesword;</publishername>
     	 </publisher>
 
    
@@ -60,7 +60,22 @@
 
     	 <authorgroup>
       	 	<author>
-        		<firstname>The GnomeSword Team</firstname>
+        		<firstname>Pierre</firstname>
+			<surname>Benz</surname>
+		        <affiliation>
+		        	<address>  </address>
+	  	        </affiliation>
+      	        </author>
+      	 	<author>
+        		<firstname>Terry</firstname>
+			<surname>Biggs</surname>
+		        <affiliation>
+		        	<address>  </address>
+	  	        </affiliation>
+      	        </author>
+      	 	<author>
+        		<firstname>Andy</firstname>
+			<surname>Piper</surname>
 		        <affiliation>
 		        	<address>  </address>
 	  	        </affiliation>
@@ -98,8 +113,8 @@
      		   <revnumber>GnomeSword2 Manual V2.0 v0.9</revnumber>
      		   <date>30th Nov 2003</date>
        		   <revdescription>
-        		  <para role="author">the GnomeSword Team</para>
-       	       		  <para role="publisher">GNOME Documentation Project</para>
+        		  <para role="author">&gnomesword;</para>
+       	       		  <para role="publisher">&gnomesword;</para>
      		   </revdescription>
    	        </revision>
 	 </revhistory>
@@ -112,8 +127,8 @@
   <sect1 id="gnomesword-intro">
   	<title>Introduction</title>
   	<para>
-		<application>GnomeSword2</application> is a Bible study and research tool based upon the "SWORD Project" libraries
-     		and the GNOME Desktop libraries.<application>GnomeSword2</application> aims to provide a simple and clean user interface
+		<application>&app;</application> is a Bible study and research tool based upon the "SWORD Project" libraries
+     		and the GNOME Desktop libraries. <application>&app;</application> aims to provide a simple and clean user interface
 		whilst providing a powerful tool allowing a personalized Bible study environment.
 	</para>
 
@@ -122,10 +137,10 @@
   		<title>Notice</title>
    		<warning>
    			<para>
-				<application>GnomeSword2</application> is currently in development, so this manual may not
+				<application>&app;</application> is currently in development, so this manual may not
    	  			reflect the program as you see it. If it does not, please file a
 		   		bug at the <ulink type="http" url="http://sourceforge.net/projects/gnomesword">
-				project website</ulink>, or email  <email>gnomesword-developers@lists.sourceforge.net</email>.
+				project website</ulink>, or email <email>gnomesword-developers@lists.sourceforge.net</email>.
 			</para>
   		</warning>
   	</sect2>
@@ -137,18 +152,18 @@
 
 <!--To Start Gnomesword  -->
   		 <sect2 id="gnomesword-to-start">
-  	  	 	<title>To Start GnomeSword2</title>
+  	  	 	<title>To Start &app;</title>
 			<para>
-				You can start <application>GnomeSword2</application> in the following ways.
+				You can start <application>&app;</application> in the following ways.
 			</para>
 			<variablelist>
 				<varlistentry>
 					<item>
-					<guimenu>Applications</guimenu>menu
+					<guimenu>Applications</guimenu> menu
 			 		</item>
  					<listitem>
 						<para>
-							Choose <menuchoice><guisubmenu>Accessories</guisubmenu> <guimenuitem>Gnomesword</guimenuitem>
+							Choose <menuchoice><guisubmenu>Accessories</guisubmenu><guimenuitem>Gnomesword2 Bible Study Guide</guimenuitem>
 							</menuchoice>.
 			                        </para>
     					</listitem>
@@ -166,74 +181,76 @@
 
 <!-- First Start -->
 		 <sect2 id="gnomesword-first-start">
-			<title>Starting GnomeSword2 The First Time</title>
+			<title>Starting &app; For The First Time</title>
 			<para>
-				When you start <application>GnomeSword2</application> for the first time,you will be presented	by a simple
-				<interface>Setup Druid</interface> dialog. This will enable you to configure your <application>SWORD Project</application>
-				modules and basic user interface options.
+				When you start <application>&app;</application> for the first time, a simple
+				<interface>Setup Assistant</interface> appears. This will enable you to configure your choice of 
+				<application>SWORD Project</application> modules. It also enables you to set basic user interface options.
 			</para>
 		 </sect2>
 
    		 <sect2 id="gnomesword-when-you-start">
-		 	<title>When You Start GnomeSword2</title>
+		 	<title>When You Start &app;</title>
 			<para>
-				When you start <application>GnomeSword2</application>, the following interface is displayed:
+				When you start <application>&app;</application>, the following interface is displayed:
 			</para>
 			<figure id="gnomesword-start-interface">
-			   <title>GnomeSword2 interface</title>
+			   <title>&app; interface</title>
 			 	  <screenshot>
 			      	 	 <mediaobject>
 			 			 <imageobject>
 					         	<imagedata fileref="figures/gnomesword_interface" format="PNG"/>
 						 </imageobject>
 						 <textobject>
-        					 	<phrase>GnomeSword2 window</phrase>
+        					 	<phrase>&app; window</phrase>
 						 </textobject>
 				         </mediaobject>
 				  </screenshot>
 			</figure>
 			<para>
-				The <application>GnomeSword2</application> interface contains the following  elements:
+				The <application>&app;</application> interface contains the following elements:
 			</para>
 			<variablelist>
 			  	<varlistentry>
 					<term>Menubar</term>
 					<listitem>
 						<para>
-							The menus on the menubar contain several commands which extend the use of gnomesword. These include the studypad and 		                                                advanced search functions. The menus also allow you to customize your use of gnomesword.
+						The menus on the menubar contain several commands which extend the use of &app;. These include the StudyPad and advanced search functions. 
+						The menus also allow you to customize your use of &app;.
 			        		</para>
 					</listitem>
 		 		</varlistentry>
-	                <varlistentry> <menuchoice><guisubmenu>Accessories</guisubmenu> <guimenuitem>Bible Application</guimenuitem>
-							</menuchoice>.
-				<term>Toolbar</term>
-				<listitem>
-					<para>
-						 The <interface>toolbar</interface> contains buttons that let you navigate through the Bible.
-					</para>
+	                        <varlistentry>
+					<term>Toolbar</term>
+					<listitem>
+						<para>
+						 The <interface>toolbar</interface> contains buttons that let you quickly navigate through the Bible.
+						</para>
 				</listitem>
 		 	</varlistentry>
                         <varlistentry>
-				<term>Side Pane</term>
+				<term>Side pane</term>
 				<listitem>
 					<para>
-						The <interface>Side pane</interface> provides access to several features. It contains your bookmarks and the list of installed books. It 							can also be used for simple searches.
+						The <interface>Side pane</interface> provides access to several features. 
+						It contains your bookmarks and the list of installed books. It can also be 
+						used to perform simple searches.
 					</para>
 				</listitem>
 		  	 </varlistentry>
 		  	 <varlistentry>
-				<term>Bible Text Pane</term>
+				<term>Bible Text pane</term>
 	                        <listitem>
 					 <para>
-						The <interface>Bible Text Pane</interface> displays the Bible text which is currently being viewed.
+						The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed.
 					 </para>
 			        </listitem>
 		  	 </varlistentry>
 		  	 <varlistentry>
-			 	<term>Commentary Pane</term>
+			 	<term>Commentary pane</term>
 			 	<listitem>
 					<para>
-						The <interface>Commentary Pane</interface> displays commentaries on the current Bible Text being used.
+						The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used.
 					</para>
 			 	</listitem>
 		         </varlistentry>
@@ -248,7 +265,7 @@
 		         </varlistentry>
 		         </variablelist>
 		         <para>
-				When you right-click in the <application>GnomeSword2</application>
+				When you right-click in the <application>&app;</application>
 		                window, the application displays a popup menu. The popup menu contains the most
 		                common text editing commands.
 			 </para>
@@ -280,9 +297,9 @@
 			</figure>
 
 			<para>
-                        	 The first two buttons on the toolbar are toggle buttons,which enables quick switching
-				 between options.The first being a<guibutton> dictionary view toggle</guibutton> and
-				 the second a<guibutton>parallel view toggle</guibutton>.
+                        	 The first two buttons on the toolbar are toggle buttons. The first toggles the display 
+				 of the <guibutton>Book pane</guibutton>. The second toggles the display 
+				 of the <guibutton>Parallel View</guibutton>.
 				 When you press button toggles the dictionary view,enabling fast switching
 				 between the dictionary and the general books that you have installed
 				 on your system. The second icon/button switches between the main bible
