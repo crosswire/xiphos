@@ -253,7 +253,7 @@ void setup_commentary(GList *mods)
 		gui_create_commentary_pane(c, count);
 		popupmenu = gui_create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		backend_new_display_commentary(c->html, c->modName, &settings);
+		backend_new_display_commentary(c->html, c->modName);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
 		tmp = g_list_next(tmp);

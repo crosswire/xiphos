@@ -203,7 +203,7 @@ void setup_dictlex(GList *mods)
 		gui_create_dictlex_pane(dl, count);
 		popup = gui_create_dictlex_pm(dl, mods);
 		gnome_popup_menu_attach(popup, dl->html, NULL);
-		backend_new_dictlex_display(dl->html, dl->mod_num, &settings);
+		backend_new_dictlex_display(dl->html, dl->mod_num);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
 		++count;
 		tmp = g_list_next(tmp);
@@ -422,6 +422,6 @@ void goto_key_viewdict(gchar * key)
 
 void setup_viewdict(GtkWidget * text)
 {
-	backend_setup_viewdict(text, &settings);
+	backend_setup_viewdict(text);
 }
 

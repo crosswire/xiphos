@@ -24,11 +24,14 @@
 	
 #include "main/gbs.h"
 
+void gui_set_book_page_and_key(gint page_num, gchar * key);
 void gui_set_gbs_frame_label(GBS_DATA *g);
-void on_notebook_gbs_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
-		gint page_num, GList *data_gbs);
+void on_notebook_gbs_switch_page(GtkNotebook *notebook, 
+		GtkNotebookPage *page, gint page_num, GList *data_gbs);
 GtkWidget *gui_create_pm_gbs(GBS_DATA *gbs);
 void gui_create_gbs_pane(gchar *modName, gint count, GBS_DATA *p_gbs);
+void gui_setup_gbs(GList *mods);
+void gui_shutdown_gbs(void);
 
 #endif
 

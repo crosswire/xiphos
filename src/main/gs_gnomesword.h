@@ -127,6 +127,8 @@ void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
 				     gint item_num,
 				     gchar ** item_url,
 				     gchar ** item_name);
+int module_is_locked(char * mod_name);
+
 #ifdef __cplusplus
 }
 #endif

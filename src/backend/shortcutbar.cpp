@@ -223,7 +223,7 @@ void backend_setup_viewer(GtkWidget * html_widget)
 
     mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
     mod = NULL;
-    display = new GtkHTMLEntryDisp(html_widget, &settings);
+    display = new GtkHTMLEntryDisp(html_widget);
 
     for (it = mgr->Modules.begin();
 	 it != mgr->Modules.end(); it++) {

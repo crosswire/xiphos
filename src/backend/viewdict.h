@@ -29,7 +29,7 @@ extern "C" {
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
-void backend_setup_viewdict(GtkWidget * text, SETTINGS *s);
+void backend_setup_viewdict(GtkWidget * text);
 void backend_shutdown_viewdict(void);
 void backend_load_module_viewdict(char *module_name);
 void backend_goto_key_viewdict(char *new_key);
