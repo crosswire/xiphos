@@ -140,6 +140,34 @@ static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
+ *   save_plain_text_ok
+ *
+ * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
+ *   void save_plain_text_ok(GtkButton *button, GSHTMLEditorControlData ecd);
+ *
+ * Description
+ *   OK button for save fileselection was clicked.
+ *
+ * Return value
+ *   void
+ */
+
+static void save_plain_text_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
+{
+	GtkWidget *filesel;
+	gchar *filename = NULL;
+
+	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	filename = g_strdup(gtk_file_selection_get_filename(
+				GTK_FILE_SELECTION(filesel)));
+	gtk_widget_destroy(filesel);
+	save_file_plain_text(filename, ecd);
+}
+
+/******************************************************************************
+ * Name
  *   save_cancel
  *
  * Synopsis
@@ -226,8 +254,8 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
  *   GtkWidget *
  */
 
-static GtkWidget *create_fileselection_save(
-					GSHTMLEditorControlData *ecd)
+static GtkWidget *create_fileselection_save(GSHTMLEditorControlData *ecd, 
+							gboolean to_html)
 {
 	GtkWidget *fileselection;
 	GtkWidget *ok;
@@ -251,8 +279,13 @@ static GtkWidget *create_fileselection_save(
 
 	gtk_signal_connect(GTK_OBJECT(fileselection), "destroy",
 			   G_CALLBACK(dialog_destroy), NULL);
-	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
-			G_CALLBACK(save_ok), ecd);
+	if(to_html)
+		gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+						G_CALLBACK(save_ok), ecd);
+	else
+		gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+						G_CALLBACK(save_plain_text_ok), ecd);
+		
 	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
 		       G_CALLBACK(save_cancel), NULL);
 
@@ -277,7 +310,7 @@ static GtkWidget *create_fileselection_save(
  *   gint
  */
 
-gint gui_fileselection_save(GSHTMLEditorControlData *ecd)
+gint gui_fileselection_save(GSHTMLEditorControlData *ecd, gboolean to_html)
 {
 	GtkWidget *window;
 	static gboolean is_running = FALSE;
@@ -285,11 +318,15 @@ gint gui_fileselection_save(GSHTMLEditorControlData *ecd)
 	
 	if(!is_running) {
 		gchar buf[256];
-		window = create_fileselection_save(ecd);
-		if(ecd->studypad)
-			sprintf(buf, "%s/.pad", settings.studypaddir);
-		else
-			sprintf(buf, "%s/.html", settings.studypaddir);
+		window = create_fileselection_save(ecd, to_html);
+		if(to_html) {
+			if(ecd->studypad)
+				sprintf(buf, "%s/.pad", settings.studypaddir);
+			else
+				sprintf(buf, "%s/.html", settings.studypaddir);
+		}
+		else 
+			sprintf(buf, "%s/.txt", settings.studypaddir);
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION
 						(window), buf);
 		retval = 4;
