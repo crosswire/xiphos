@@ -21,9 +21,38 @@
 
 #ifndef ___GBS_H_
 #define ___GBS_H_
-	
-#include "main/gbs.h"
 
+
+typedef struct _gbsdata GBS_DATA;
+
+#include "gui/gbs_find.h"
+
+struct _gbsdata {
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *ctree;
+	GtkWidget *showtabs;
+	gchar *bookName;
+	gchar *searchstring;
+	gint booknum;
+	gboolean has_key;
+	GBF_FIND_DIALOG *find_dialog;
+};
+
+typedef struct _nodedata NODEDATA;
+struct _nodedata {
+	GtkCTreeNode *parent;
+	GtkCTreeNode *sibling;
+	gchar *buf[3];
+	GdkPixmap *pixmap1;
+	GdkPixmap *pixmap2;
+	GdkBitmap *mask1;
+	GdkBitmap *mask2;
+	gboolean is_leaf;
+	gboolean expanded;
+};
+
+GBS_DATA *get_gbs(GList * gbs);
 void gui_set_book_page_and_key(gint page_num, gchar * key);
 void gui_set_gbs_frame_label(GBS_DATA *g);
 void on_notebook_gbs_switch_page(GtkNotebook *notebook, 

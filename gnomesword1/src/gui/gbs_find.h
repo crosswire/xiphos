@@ -28,7 +28,7 @@
 
 typedef struct _gs_find_dialog GBF_FIND_DIALOG;
 
-#include "main/gbs.h"
+#include "gui/gbs.h"
 
 void gbs_find_close_dialog(GtkWidget *but, GBF_FIND_DIALOG *d);
 void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text);

@@ -343,12 +343,12 @@ void setup_percomm(GList *mods)
 
 /******************************************************************************
  * Name
- *  shutdown_text
+ *  shutdown_percomm
  *
  * Synopsis
  *   #include "percomm.h"
  *
- *  void shutdown_text(void)	
+ *  void shutdown_percomm(void)	
  *
  * Description
  *   shut down text module support clean mem

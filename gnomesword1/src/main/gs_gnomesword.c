@@ -38,6 +38,7 @@
 #include "gui/studypad.h"
 #include "gui/info_box.h"
 #include "gui/gbs.h"
+#include "gui/_bibletext.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -106,7 +107,7 @@ void init_gnomesword(void)
 	 *  setup Bible text gui 
 	 */
 	if (havebible) {
-		setup_text(get_list(TEXT_LIST));
+		gui_setup_text(get_list(TEXT_LIST));
 	}
 
 	/*
@@ -210,7 +211,7 @@ void gnomesword_shutdown(void)
 	g_free(settings.swbmDir);
 	
 	if(havebible)
-		shutdown_text();
+		gui_shutdown_text();
 	if(havebook)
 		gui_shutdown_gbs();
 	if(havedict)
@@ -730,7 +731,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			    backend_get_module_page(module_name, 
 							TEXT_MODS);
 			val_key = update_nav_controls(key);
-			set_text_page_and_key(page_num, val_key);
+			gui_set_text_page_and_key(page_num, val_key);
 			g_free(val_key);
 		}
 		break;
