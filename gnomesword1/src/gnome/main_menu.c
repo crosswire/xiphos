@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * main_menu.c - creation of and call backs for gnomesword main menu
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -429,20 +429,68 @@ static void on_book_item_activate(GtkMenuItem * menuitem,
 }
 
 
-/*** toggle between  ***/
+/******************************************************************************
+ * Name
+ *  view_bible_texts
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void view_bible_texts(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    toogle Bibletext window
+ *
+ * Return value
+ *   void
+ */
+
 static void view_bible_texts(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-/*** toogle between  ***/
+
+/******************************************************************************
+ * Name
+ *  view_upper_workbook
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void view_upper_workbook(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    toogle commentary window *** we need to change the name of this
+ *    function because there no longer an upper_workbook
+ *
+ * Return value
+ *   void
+ */
+
 static void view_upper_workbook(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
 	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-/*** toogle between  ***/
+
+/******************************************************************************
+ * Name
+ *   view_lower_workbook
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void view_lower_workbook(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    toogle lower_workbook view (on or off)
+ *
+ * Return value
+ *   void
+ */
+
 static void view_lower_workbook(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
@@ -450,6 +498,22 @@ static void view_lower_workbook(GtkMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   open_studypad
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void open_studypad(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    open studypad editor - if studypad dialog exist bring it to the
+ *    top
+ *
+ * Return value
+ *   void
+ */
 
 static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -476,6 +540,27 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
  * gnome menu structures
  */
 
+
+static GnomeUIInfo open_bibletext_dialog1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo open_commentary_dialog1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo open_dict_lex_dialog1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo open_book_dialog1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Open Studypad"),
@@ -483,6 +568,31 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Bibletext Dialog"),
+	 NULL,
+	 open_bibletext_dialog1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Commentary Dialog"),
+	 NULL,
+	 open_commentary_dialog1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Dictionary Dialog"),
+	 NULL,
+	 open_dict_lex_dialog1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Book Dialog"),
+	 NULL,
+	 open_book_dialog1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
 	GNOMEUIINFO_END
@@ -525,28 +635,6 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-
-
-static GnomeUIInfo new_bibletext_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo new_commentary_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo new_dict_lex_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo new_book_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
 static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
@@ -573,31 +661,6 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 ("Show/Hide Lower Workbook - Dictionaries, Books and Interlinear"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_SUBTREE, N_("New Bibletext Dialog"),
-	 NULL,
-	 new_bibletext_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("New Commentary Dialog"),
-	 NULL,
-	 new_commentary_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_BLUE,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("New Dictionary Dialog"),
-	 NULL,
-	 new_dict_lex_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("New Book Dialog"),
-	 NULL,
-	 new_book_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
@@ -744,8 +807,58 @@ void gui_create_main_menu(GtkWidget * app)
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(file1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "exit1",
+	gtk_object_set_data_full(GTK_OBJECT(app),
+				 "new_bibletext_dialog1",
 				 file1_menu_uiinfo[1].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+
+
+	gui_add_mods_to_menus(get_list(TEXT_LIST),
+			      _("_File/Open Bibletext Dialog/"),
+			      (GtkMenuCallback)
+			      on_bibletext_item_activate);
+
+
+
+	gtk_widget_ref(file1_menu_uiinfo[2].widget);
+	gtk_object_set_data_full(GTK_OBJECT(app),
+				 "new_commentary_dialog1",
+				 file1_menu_uiinfo[2].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+
+	gui_add_mods_to_menus(get_list(COMM_LIST),
+			      _("_File/Open Commentary Dialog/"),
+			      (GtkMenuCallback)
+			      on_commentary_item_activate);
+
+
+	gtk_widget_ref(file1_menu_uiinfo[3].widget);
+	gtk_object_set_data_full(GTK_OBJECT(app),
+				 "new_dict_lex_dialog1",
+				 file1_menu_uiinfo[3].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gui_add_mods_to_menus(get_list(DICT_LIST),
+			      _("_File/Open Dictionary Dialog/"),
+			      (GtkMenuCallback)
+			      on_dictlex_item_activate);
+
+
+	gtk_widget_ref(file1_menu_uiinfo[4].widget);
+	gtk_object_set_data_full(GTK_OBJECT(app), "new_book_dialog1",
+				 file1_menu_uiinfo[4].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gui_add_mods_to_menus(get_list(GBS_LIST),
+			      _("_File/Open Book Dialog/"),
+			      (GtkMenuCallback) on_book_item_activate);
+
+
+	gtk_widget_ref(file1_menu_uiinfo[5].widget);
+	gtk_object_set_data_full(GTK_OBJECT(app), "exit1",
+				 file1_menu_uiinfo[5].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(menubar1_uiinfo[1].widget);
@@ -808,59 +921,7 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
 	widgets.viewcomms_item = view1_menu_uiinfo[3].widget;
 	widgets.viewdicts_item = view1_menu_uiinfo[4].widget;
-
-
-
-	gtk_widget_ref(view1_menu_uiinfo[6].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_bibletext_dialog1",
-				 view1_menu_uiinfo[6].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
-
-	gui_add_mods_to_menus(get_list(TEXT_LIST),
-			      _("_View/New Bibletext Dialog/"),
-			      (GtkMenuCallback)
-			      on_bibletext_item_activate);
-
-
-
-	gtk_widget_ref(view1_menu_uiinfo[7].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_commentary_dialog1",
-				 view1_menu_uiinfo[7].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
-	gui_add_mods_to_menus(get_list(COMM_LIST),
-			      _("_View/New Commentary Dialog/"),
-			      (GtkMenuCallback)
-			      on_commentary_item_activate);
-
-
-	gtk_widget_ref(view1_menu_uiinfo[8].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_dict_lex_dialog1",
-				 view1_menu_uiinfo[8].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gui_add_mods_to_menus(get_list(DICT_LIST),
-			      _("_View/New Dictionary Dialog/"),
-			      (GtkMenuCallback)
-			      on_dictlex_item_activate);
-
-
-	gtk_widget_ref(view1_menu_uiinfo[9].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "new_book_dialog1",
-				 view1_menu_uiinfo[9].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gui_add_mods_to_menus(get_list(GBS_LIST),
-			      _("_View/New Book Dialog/"),
-			      (GtkMenuCallback) on_book_item_activate);
-
-	widgets.versestyle_item = view1_menu_uiinfo[11].widget;
+	widgets.versestyle_item = view1_menu_uiinfo[6].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
