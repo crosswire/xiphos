@@ -59,7 +59,6 @@
 #include "gs_info_box.h"
 #include "support.h"
 #include "sw_sword.h"
-#include "sw_gbs.h"
 
 GSHTMLEditorControlData *specd;
 GSHTMLEditorControlData *gbsecd;

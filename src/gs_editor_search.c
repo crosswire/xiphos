@@ -41,7 +41,6 @@ struct _GSHTMLSearchDialog {
 	gboolean     regular;
 };
 
-
 static void
 next_button_cb(GtkWidget *but, GtkHTML *html)
 {
@@ -75,7 +74,6 @@ entry_changed (GtkWidget *entry, GSHTMLSearchDialog *d)
 static void
 entry_activate (GtkWidget *entry, GSHTMLSearchDialog *d)
 {
-	//gnome_dialog_close (d->dialog);
 	search_cb (NULL, d);
 }
 

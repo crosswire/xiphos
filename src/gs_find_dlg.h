@@ -35,23 +35,21 @@ extern "C" {
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#include "sw_gbs.h"
+	
+typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 
-typedef struct _GSFindDialog  GSFindDialog;
-struct _GSFindDialog {
-	GnomeDialog *dialog;
-	GtkHTML     *html;
-	GtkWidget   *entry;
-	GtkWidget   *backward;
-	GtkWidget   *case_sensitive;
+#define FIND_DIALOG(name,title) find_dialog ((GnomeDialog ***)&g-> name ## _dialog, g->html, (DialogCtor) gs_ ## name ## _dialog_new, title)
 
-	gboolean     regular;
-};
 
 GSFindDialog * gs_find_dialog_new(GtkWidget *htmlwidget);
-void gs_find_dialog_destroy(GSFindDialog *d);
-void searchGS_FIND_DLG(GtkWidget *html_widget, gboolean regular, gchar *text);
+void gs_find_dialog_destroy(GtkWidget *dialog, GSFindDialog *d);
+void searchGS_FIND_DLG(GBS_DATA *g, gboolean regular, gchar *text);
 void search_nextGS_FIND_DLG(GtkWidget *html_widget);
-
+void find_dialog(GnomeDialog ***dialog, 
+			GtkWidget *html, 
+			DialogCtor ctor, 
+			const gchar *title);
 #ifdef __cplusplus
 }
 #endif

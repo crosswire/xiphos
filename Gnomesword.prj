@@ -50,13 +50,13 @@ anjuta.program.arguments=
 
 project.config.blocked=0
 
-project.config.disable.overwriting=1 1 1 1 1 1 1 1 0 
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 
 module.include.name=src
 module.include.type=
-module.include.expanded=1
+module.include.expanded=0
 module.include.files=\
 	char_table.h\
 	gs_html.h\
