@@ -51,8 +51,8 @@
  * globals
 ******************************************************************************/
 gboolean firstsearch = TRUE,	/* search dialog is not running when TRUE */
-    firstLE = TRUE;		/* ListEditor in not running when TRUE */
-GtkWidget * listeditor;
+ firstLE = TRUE;		/* ListEditor in not running when TRUE */
+GtkWidget *listeditor;
 GtkWidget *toolbarComments;
 GtkWidget *toolbarBooks;
 GtkWidget *toolbarStudypad;
@@ -61,10 +61,10 @@ GtkWidget *toolbarStudypad;
  * externals
 ******************************************************************************/
 extern gchar current_verse[80];
-extern SETTINGS * settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
+extern SETTINGS *settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
 extern gboolean ApplyChange,	/* to keep form looping when book combobox is changed */
  noteModified;			/* personal comments window changed */
-extern GtkWidget * htmlComments, *NEtext;	/* menu check item (declared in gs_gnomesword.c) */
+extern GtkWidget *htmlComments, *NEtext;	/* menu check item (declared in gs_gnomesword.c) */
 extern gint answer;		/* do we save file on exit */
 
 /*********************************************************************************
@@ -75,40 +75,43 @@ extern gint answer;		/* do we save file on exit */
 
 void
 on_mainwindow_size_allocate(GtkWidget * widget,
-			    GtkAllocation * allocation, gpointer user_data)
+			    GtkAllocation * allocation,
+			    gpointer user_data)
 {
-    settings->gs_width = allocation->width;
-    settings->gs_hight = allocation->height;
+	settings->gs_width = allocation->width;
+	settings->gs_hight = allocation->height;
 }
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+on_btnStrongs_toggled(GtkToggleButton * togglebutton,
+		      gpointer user_data)
 {
-    if (settings->strongsnum) {
-	GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
-    }
+	if (settings->strongsnum) {
+		GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
+		globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+	}
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_btnMorphs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-    if (settings->morphs) {
-	GTK_CHECK_MENU_ITEM(settings->morphs)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Morphological Tags", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
-    }
+	if (settings->morphs) {
+		GTK_CHECK_MENU_ITEM(settings->morphs)->active = togglebutton->active;	//-- change menu check item to match button
+		globaloptionsSWORD("Morphological Tags", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+	}
 }
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnFootnotes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
-    if (settings->footnotes) {
-	GTK_CHECK_MENU_ITEM(settings->footnotes)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Footnotes", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)
-    }
+	if (settings->footnotes) {
+		GTK_CHECK_MENU_ITEM(settings->footnotes)->active = togglebutton->active;	//-- change menu check item to match button
+		globaloptionsSWORD("Footnotes", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)
+	}
 }
 
 //----------------------------------------------------------------------------------------------
@@ -116,24 +119,28 @@ void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
 {
 	backend_shutdown(s);
 	gnomesword_shutdown(s);
-	gtk_exit(0);		
+	gtk_exit(0);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
-    SETTINGS *s;
+	SETTINGS *s;
 
-    s = (SETTINGS *) user_data;
-    showSBGroup(s, s->searchbargroup);
+	s = (SETTINGS *) user_data;
+	showSBGroup(s, s->searchbargroup);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 {
-    if (ApplyChange) {
-	bookSWORD();
-    }
+	if (ApplyChange) {
+		gchar *bookname =
+		    gtk_entry_get_text(GTK_ENTRY
+				       (lookup_widget
+					(settings->app, "cbeBook")));
+		backend_book_changed(bookname);
+	}
 }
 
 //----------------------------------------------------------------------------------------------
@@ -142,11 +149,28 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   GdkEventButton * event,
 				   gpointer user_data)
 {
-    if (ApplyChange) {
-	verseSWORD();
-	return TRUE;
-    }
-    return FALSE;
+	if (ApplyChange) {
+		gchar *bookname;
+		gint chapter, verse;
+	
+		bookname =
+		    gtk_entry_get_text(GTK_ENTRY
+				       (lookup_widget
+					(settings->app, "cbeBook")));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "spbChapter")));
+		verse =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "spbVerse")));
+		backend_chapter_verse_changed(bookname,chapter,verse);		
+		return TRUE;
+	}
+	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -155,17 +179,40 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 				 GdkEventButton * event,
 				 gpointer user_data)
 {
-    if (ApplyChange) {
-	verseSWORD();
-	return TRUE;
-    }
-    return FALSE;
+	if (ApplyChange) {
+		gchar *bookname;
+		gint chapter, verse;
+	
+		bookname =
+		    gtk_entry_get_text(GTK_ENTRY
+				       (lookup_widget
+					(settings->app, "cbeBook")));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "spbChapter")));
+		verse =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "spbVerse")));
+		backend_chapter_verse_changed(bookname,chapter,verse);
+		return TRUE;
+	}
+	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 {
-    btnlookupSWORD();
+	gchar *buf;
+
+	buf =
+	    gtk_entry_get_text(GTK_ENTRY
+			       (lookup_widget
+				(settings->app, "cbeFreeformLookup")));
+	changeVerseSWORD(buf);	//-- change verse to entry text 
 }
 
 //----------------------------------------------------------------------------------------------
@@ -174,10 +221,15 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 				     GdkEventKey * event,
 				     gpointer user_data)
 {
-    freeformlookupSWORD(event);
-    return TRUE;
-}
+	gchar *buf;
 
+	buf = gtk_entry_get_text(GTK_ENTRY(widget));	//lookup_widget(settings->app, "cbeFreeformLookup")));
+	if (event->keyval == 65293 || event->keyval == 65421) {	/* enter key */
+		changeVerseSWORD(buf);	//backend_freeform_lookup(buf);
+		return TRUE;
+	}
+	return FALSE;
+}
 
 //----------------------------------------------------------------------------------------------
 void /* commentary notebook page changed */
@@ -185,27 +237,12 @@ on_nbTextMods_switch_page(GtkNotebook * notebook,
 			  GtkNotebookPage * page, gint page_num,
 			  gpointer user_data)
 {
-    GtkLabel *label;		//-- pointer to page label
+	GtkLabel *label;	//-- pointer to page label
 
-    label = (GtkLabel *) page->tab_label;	//-- get label
-    changecurModSWORD((char *) label->label, TRUE);
-}
-
-
-//----------------------------------------------------------------------------------------------
-void /* commentary notebook page changed */
-on_notebook1_switch_page(GtkNotebook * notebook,
-			 GtkNotebookPage * page, gint page_num,
-			 gpointer user_data)
-{
-    GtkLabel *label;		//-- pointer to page label
-    static gboolean firsttime = TRUE;
-    if (!firsttime) {
 	label = (GtkLabel *) page->tab_label;	//-- get label
-	changcurcomModSWORD((char *) label->label, TRUE);	//-- pass label text and page number
-    }				//-- to function to do the work - gs_sword.cpp
-    firsttime = FALSE;
+	backend_change_text_module((char *) label->label, TRUE);
 }
+
 
 //----------------------------------------------------------------------------------------------
 void on_textComments_changed(GtkEditable * editable, gpointer user_data)
@@ -220,40 +257,43 @@ on_textComments_button_release_event(GtkWidget * widget,
 				     gpointer user_data)
 {
 
-    return FALSE;
+	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+on_btnEditNote_toggled(GtkToggleButton * togglebutton,
+		       gpointer user_data)
 {
-    gtk_html_set_editable(GTK_HTML(htmlComments),
-			  GTK_TOGGLE_BUTTON(togglebutton)->active);
-    if (GTK_TOGGLE_BUTTON(togglebutton)->active) {
-	gtk_widget_show(settings->toolbarComments);
-    }
+	gtk_html_set_editable(GTK_HTML(htmlComments),
+			      GTK_TOGGLE_BUTTON(togglebutton)->active);
+	if (GTK_TOGGLE_BUTTON(togglebutton)->active) {
+		gtk_widget_show(settings->toolbarComments);
+	}
 
-    else {
-	gtk_widget_hide(settings->toolbarComments);
-    }
+	else {
+		gtk_widget_hide(settings->toolbarComments);
+	}
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 {
-    if (GTK_TOGGLE_BUTTON
-	(lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-	//savenoteSWORD(TRUE);
-    }
+	if (GTK_TOGGLE_BUTTON
+	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->
+	    active) {
+		//backend_save_personal_comment(TRUE);
+	}
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnDeleteNote_clicked(GtkButton * button, gpointer user_data)
 {
-    if (GTK_TOGGLE_BUTTON
-	(lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-	deletenoteSWORD();
-    }
+	if (GTK_TOGGLE_BUTTON
+	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->
+	    active) {
+		backend_delete_personal_comment();
+	}
 }
 
 
@@ -263,39 +303,40 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
-    static gboolean firsttime = TRUE;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
-    if (!firsttime) {
-	changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
-    }
-    firsttime = FALSE;		//-- remember we were here
+	static gboolean firsttime = TRUE;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
+	if (!firsttime) {
+		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
+	}
+	firsttime = FALSE;	//-- remember we were here
 
-    gtk_widget_hide(settings->toolbarComments);
-    gtk_widget_hide(settings->toolbarStudypad);
+	gtk_widget_hide(settings->toolbarComments);
+	gtk_widget_hide(settings->toolbarStudypad);
 
-    if (page_num == 1 && settings->editnote) {
-	gtk_widget_show(settings->toolbarComments);
-    }
+	if (page_num == 1 && settings->editnote) {
+		gtk_widget_show(settings->toolbarComments);
+	}
 
-    else if (page_num == 2) {
-	gtk_widget_show(settings->toolbarStudypad);
-    }
+	else if (page_num == 2) {
+		gtk_widget_show(settings->toolbarStudypad);
+	}
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnInfoBoxYes_clicked(GtkButton * button, gpointer user_data)
 {
-    answer = 0;
+	answer = 0;
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data)
 {
-    answer = 1;
+	answer = 1;
 }
 
 //----------------------------------------------------------------------------------------------
 void
-on_tbtnFollow_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+on_tbtnFollow_toggled(GtkToggleButton * togglebutton,
+		      gpointer user_data)
 {
 
 }
@@ -306,86 +347,89 @@ on_textComments_key_press_event(GtkWidget * widget,
 				GdkEventKey * event, gpointer user_data)
 {
 //      gchar *buf;
-    static gboolean needsecond = FALSE;
+	static gboolean needsecond = FALSE;
 
-    if (!settings->formatpercom) {	/* do we want formatting?       */
-	noteModified = TRUE;	/* note has been modified to get us here */
-	return FALSE;
-    }
-    if (event->keyval == 65293 || event->keyval == 65421) {	/* return key */
-	gtk_text_set_point(GTK_TEXT(NEtext),
-			   gtk_editable_get_position(GTK_EDITABLE
-						     (NEtext)));
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black,
-			NULL, "<br>", -1);
-	noteModified = TRUE;	//-- noteeditor.cpp
+	if (!settings->formatpercom) {	/* do we want formatting?       */
+		noteModified = TRUE;	/* note has been modified to get us here */
+		return FALSE;
+	}
+	if (event->keyval == 65293 || event->keyval == 65421) {	/* return key */
+		gtk_text_set_point(GTK_TEXT(NEtext),
+				   gtk_editable_get_position
+				   (GTK_EDITABLE(NEtext)));
+		gtk_text_insert(GTK_TEXT(NEtext), NULL,
+				&NEtext->style->black, NULL, "<br>",
+				-1);
+		noteModified = TRUE;	//-- noteeditor.cpp
+		return TRUE;
+	}
+	if (GTK_EDITABLE(NEtext)->has_selection) {	//-- do we have a selection?    
+		if (event->keyval == 65507) {	//-- ctrl key pressed           
+			needsecond = TRUE;
+			return FALSE;
+		}
+	}
+
+	noteModified = TRUE;
+	if (needsecond) {
+		switch (event->keyval) {
+		case 98:	//-- bold
+			//noteModified = noteeditor->setBOLD(NEtext);   //-- noteeditor.cpp
+			break;
+		case 105:	//-- italics
+			//noteModified = noteeditor->setITALIC(NEtext); //-- noteeditor.cpp
+			break;
+		case 114:	//-- reference
+			//noteModified = noteeditor->setREFERENCE(NEtext);      //-- noteeditor.cpp
+			break;
+		case 108:	//-- underline -- broken using l not u - u removes line
+			//noteModified = noteeditor->setUNDERLINE(NEtext);      //-- noteeditor.cpp
+			break;
+		case 103:	//-- greek font
+			//noteModified = noteeditor->setGREEK(NEtext);  //-- noteeditor.cpp
+			break;
+		default:
+			break;
+		}
+		needsecond = FALSE;
+	}
 	return TRUE;
-    }
-    if (GTK_EDITABLE(NEtext)->has_selection) {	//-- do we have a selection?    
-	if (event->keyval == 65507) {	//-- ctrl key pressed           
-	    needsecond = TRUE;
-	    return FALSE;
-	}
-    }
-
-    noteModified = TRUE;
-    if (needsecond) {
-	switch (event->keyval) {
-	case 98:		//-- bold
-	    //noteModified = noteeditor->setBOLD(NEtext);   //-- noteeditor.cpp
-	    break;
-	case 105:		//-- italics
-	    //noteModified = noteeditor->setITALIC(NEtext); //-- noteeditor.cpp
-	    break;
-	case 114:		//-- reference
-	    //noteModified = noteeditor->setREFERENCE(NEtext);      //-- noteeditor.cpp
-	    break;
-	case 108:		//-- underline -- broken using l not u - u removes line
-	    //noteModified = noteeditor->setUNDERLINE(NEtext);      //-- noteeditor.cpp
-	    break;
-	case 103:		//-- greek font
-	    //noteModified = noteeditor->setGREEK(NEtext);  //-- noteeditor.cpp
-	    break;
-	default:
-	    break;
-	}
-	needsecond = FALSE;
-    }
-    return TRUE;
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-    historynav(settings->app, 0);
+	historynav(settings->app, 0);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-    historynav(settings->app, 1);
+	historynav(settings->app, 1);
 }
 
 //----------------------------------------------------------------------------------------------
 gboolean
 on_epaned_button_release_event(GtkWidget * widget,
-			       GdkEventButton * event, gpointer user_data)
+			       GdkEventButton * event,
+			       gpointer user_data)
 {
-    gint panesize;
-    panesize =
-	e_paned_get_position(E_PANED
-			     (lookup_widget
-			      (settings->app, (gchar *) user_data)));
+	gint panesize;
+	panesize =
+	    e_paned_get_position(E_PANED
+				 (lookup_widget
+				  (settings->app,
+				   (gchar *) user_data)));
 
-    if (panesize > 15) {
-	if (!strcmp((gchar *) user_data, "epaned"))
-	    settings->shortcutbar_width = panesize;
-	if (!strcmp((gchar *) user_data, "vpaned1"))
-	    settings->upperpane_hight = panesize;
-	if (!strcmp((gchar *) user_data, "hpaned1"))
-	    settings->biblepane_width = panesize;
-    }
-    return TRUE;
+	if (panesize > 15) {
+		if (!strcmp((gchar *) user_data, "epaned"))
+			settings->shortcutbar_width = panesize;
+		if (!strcmp((gchar *) user_data, "vpaned1"))
+			settings->upperpane_hight = panesize;
+		if (!strcmp((gchar *) user_data, "hpaned1"))
+			settings->biblepane_width = panesize;
+	}
+	return TRUE;
 }
 
 /******  end of file  ******/

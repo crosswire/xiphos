@@ -33,13 +33,13 @@ extern "C" {
 #endif
 #include "gs_gnomesword.h"
 
-GtkWidget *create_dlgSettings(SETTINGS *s,
+GtkWidget *gui_create_preferences_dialog(SETTINGS *s,
 				GList *biblelist,
 				GList *commlist,
 				GList *dictlist,
 				GList *percomlist,
 				GList *devotionlist);
-
+void setup_preferences_dlg(SETTINGS *s);
 #ifdef __cplusplus
 }
 #endif

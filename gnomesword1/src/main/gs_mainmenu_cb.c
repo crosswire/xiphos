@@ -47,6 +47,7 @@
 #include "gs_file.h"
 #include "about_gnomesword.h"
 #include "about_sword.h"
+#include "gs_preferences_dlg.h"
 
 /******************************************************************************
  * externals
@@ -107,7 +108,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	dlg = gui_create_about_sword();
 	version_label = lookup_widget(dlg, "version_label");
 	/* get sword version */
-	ver = getSwordVerionSWORD();	
+	ver = backend_get_sword_verion();	
 	sprintf(version,"Sword-%s",ver);
 	gtk_label_set_text(GTK_LABEL(version_label),version);
 	gtk_widget_show(dlg);
@@ -133,7 +134,7 @@ void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*** open preferences dialog ***/
 void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	loadpreferencemodsSWORD();
+	setup_preferences_dlg(settings);
 }
 
 
@@ -166,7 +167,7 @@ on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*** toogle between verse and paragraph style ***/
 void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	setversestyleSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active); 
+	backend_set_verse_style(GTK_CHECK_MENU_ITEM(menuitem)->active); 
 }
 
 

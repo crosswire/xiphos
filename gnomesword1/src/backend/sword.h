@@ -45,6 +45,7 @@ extern "C" {
 
 
 	void backend_firstInitSWORD(void);
+	void navcurcomModSWORD(gint direction);
 	void initSWORD(SETTINGS * s);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
 	void updateIntDlg(SETTINGS * s);
@@ -58,57 +59,36 @@ extern "C" {
 			      gint row, gint column);
 	void globaloptionsSWORD(gchar * option, gint window,
 				gboolean choice, gboolean showchange);
-	void changecurModSWORD(gchar * modName, gboolean showchange);
-	void navcurcomModSWORD(gint direction);
-	void changecomp1ModSWORD(gchar * modName);
-	void changecomp2ModSWORD(gchar * modName);
-	void changecomp3ModSWORD(gchar * modName);
-	void setversestyleSWORD(gboolean choice);
+	void backend_change_text_module(gchar * modName, gboolean showchange);
+	void backend_set_verse_style(gboolean choice);
 	void backend_set_locale(char *locale);
 	/*** change Bible book ***/
-	void bookSWORD(void);
-	gchar *intchangeverseSWORD(GtkWidget * book,
-				   GtkWidget * chapter,
-				   GtkWidget * verse,
-				   GtkWidget * entry);
-	gchar *intsyncSWORD(GtkWidget * book,
-			    GtkWidget * chapter,
-			    GtkWidget * verse,
-			    GtkWidget * entry, gchar * key);
-	void verseSWORD(void);
-	void btnlookupSWORD(void);
-	void freeformlookupSWORD(GdkEventKey * event);
-	void changcurcomModSWORD(gchar * modName, gboolean showchange);
-	void savenoteSWORD(gchar * buf);
-	void deletenoteSWORD(void);
-	void changcurdictModSWORD(gchar * modName, gchar * keyText);
-	void dictSearchTextChangedSWORD(gchar * mytext);
-	void dictchangekeySWORD(gint direction);
-	void setglobalopsSWORD(gint window, gchar * option,
+	void backend_book_changed(gchar *bookname);
+	void backend_chapter_verse_changed(char *bookname, int chapter, int verse);
+	char *backend_get_book_from_key(char *key);
+	int backend_get_chapter_from_key(char *key);
+	int backend_get_verse_from_key(char *key);
+	void backend_save_personal_comment(gchar * buf);
+	void backend_delete_personal_comment(void);
+	void backend_change_percom_module(gchar * modName);
+	void backend_set_global_option(gint window, gchar * option,
 			       gchar * yesno);
-	void changepercomModSWORD(gchar * modName);
-	void redisplayTextSWORD(void);
-	gchar *getmodnameSWORD(gint num);
-	gchar *getdictmodSWORD(void);
-	gchar *gettextmodSWORD(void);
-	gchar *getcommodSWORD(void);
-	gchar *getcommodDescriptionSWORD(void);
 	GList *backend_get_books(void);
-	void gotoBookmarkSWORD(gchar * modName, gchar * key);
-	gchar *getmodkeySWORD(gint num);
-	const char *getSwordVerionSWORD(void);
-	void swapmodsSWORD(gchar * intmod);
-	void loadpreferencemodsSWORD(void);
+	const char *backend_get_sword_verion(void);
+	void backend_swap_interlinear_with_main(gchar * intmod, SETTINGS *s);
 	void backend_display_new_font_color_and_size(SETTINGS *s);
 	void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s);
 	void backend_display_devotional(SETTINGS * s);
 	int backend_get_mod_type(gchar * modName);
 	GList *backend_get_list_of_mods_by_type(char *mod_type);
+	GList *backend_get_list_of_devotion_modules(void);
+	GList *backend_get_list_of_percom_modules(void);
 	GList *backend_get_mod_description_list_SWORD(char *mod_type);
 	gchar *backend_get_module_description(gchar * modName);
 	gchar *backend_get_path_to_mods(void);
 	gchar *backend_get_mod_aboutSWORD(gchar * modname);
-
+	int backend_get_module_page(char * module_name, char * module_type);
+	
 #ifdef __cplusplus
 }
 #endif

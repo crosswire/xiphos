@@ -167,6 +167,18 @@ void backend_newDisplayGBS(GtkWidget * html, char *bookname,
         g_list_free(tmp);
 }
 
+void backend_display_book(gint booknum, gchar * key)
+{
+        ModMap::iterator it;
+        BE_GBS *g;
+        g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
+             /** if not root node then display **/
+	
+		g->mod->SetKey(key);
+		g->mod->KeyText();      //snap to entry
+		g->mod->Display();
+	      
+}
 gboolean backend_displayRowGBS(gint booknum, gchar * offset)
 {
         ModMap::iterator it;

@@ -284,7 +284,7 @@ static GtkWidget *create_dlgSetup(void)
     gtk_box_pack_start(GTK_BOX(vbox27), label143, FALSE, FALSE, 0);
 
     /* get sword version */
-    ver = getSwordVerionSWORD();
+    ver = backend_get_sword_verion();
     sprintf(version, "Sword-%s", ver);
 
     label144 = gtk_label_new(_(version));
