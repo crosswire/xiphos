@@ -680,8 +680,9 @@ SearchWindow::create ()
 			    GTK_SIGNAL_FUNC (on_btnSearch1_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (resultList), "select_row",
 			    GTK_SIGNAL_FUNC (on_resultList_select_row), NULL);
-	gtk_signal_connect (GTK_OBJECT (cbContext), "toggled",
+/*	gtk_signal_connect (GTK_OBJECT (cbContext), "toggled",
 			    GTK_SIGNAL_FUNC (on_cbContext_toggled), NULL);
+*/
 	gtk_signal_connect (GTK_OBJECT (btnSearchOK), "clicked",
 			    GTK_SIGNAL_FUNC (on_btnSearchOK_clicked), NULL);
 

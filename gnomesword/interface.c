@@ -38,6 +38,7 @@
 #include <gtk/gtk.h>
 
 #include "callback.h"
+#include "gs_studypad.h"
 #include "interface.h"
 #include "support.h"
 
@@ -1971,15 +1972,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSpellNotes_clicked),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(textComp1), "button_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_textComp1_button_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(textComp2), "button_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_textComp2_button_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(textComp3), "button_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_textComp3_button_press_event), NULL);
+
 	gtk_signal_connect(GTK_OBJECT(btnSPnew), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSPnew_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnOpenFile), "clicked",

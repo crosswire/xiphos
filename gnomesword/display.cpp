@@ -1299,25 +1299,35 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
-						    if (!strcmp(tag, "<FONT COLOR=#800000>")) {	/* foot note color  */
-							gtk_text_insert
-							    (GTK_TEXT
-							     (gtkText),
-							     roman_font,
-							     &gtkText->style->
-							     black, NULL,
-							     verseBuf, -1);
+						    	if (!strcmp(tag, "<FONT COLOR=\"#800000\">")) {	/* foot note color  */ 						    	
+						    	if (key->Verse() ==
+							    curVerse)
+								    gtk_text_insert
+								    (GTK_TEXT
+								     (gtkText),
+								     roman_font,
+								     &myGreen,
+								     NULL,
+								     verseBuf,
+								     -1);
+							else
+								gtk_text_insert
+								    (GTK_TEXT
+								     (gtkText),
+								     roman_font,
+								     &gtkText->style->black,
+								     NULL,
+								     verseBuf,
+								     -1);						    	
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
-						    if (!strcmp(tag, "</FONT>")) {	/* end foot note color */
-							gtk_text_insert
-							    (GTK_TEXT
-							     (gtkText),
-							     cite_font,
-							     &colourBlue,
-							     NULL,
-							     verseBuf, -1);
+						    if (!strcmp(tag, "</FONT>")) {	/* end foot note color */ 						
+								gtk_text_insert(GTK_TEXT(gtkText),
+								cite_font,
+							     	&colourBlue,
+							     	NULL,
+							     	verseBuf, -1);
 							j = 0;
 							verseBuf[0] = '\0';
 						} else

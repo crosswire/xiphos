@@ -78,6 +78,9 @@ void changepercomModSWORD(gchar * modName);
 void redisplayTextSWORD(void);
 gchar* getmodnameSWORD(gint num);
 void navcurcommModSWORD(gint backfoward);
+void setuplisteditSWORD(GtkWidget *text);
+void changeLEverseSWORD(gchar *verse);
+void destroyListEditorSWORD(void);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
