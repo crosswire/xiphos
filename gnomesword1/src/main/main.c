@@ -34,7 +34,7 @@
 
 #include "main/url.hh"
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
  
 /******************************************************************************
  * Name
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 
 	gui_splash_step2();
 		
-	backend_init();
+	main_init_backend();
 	
 	gui_splash_step3();
 

@@ -23,6 +23,8 @@
 #endif
 
 #include <swmgr.h>
+#include <localemgr.h>
+#include <swversion.h>
 
 //#ifdef USE_MOZILLA
 #include "backend/gs_markupfiltmgr.h"
@@ -56,18 +58,11 @@ static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {
-//#ifdef USE_MOZILLA
-//	SWMgr mgr(0, 0, true, new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-//#else
-//	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//#endif
-	display_mod = NULL;
 	
-	tree_key = NULL;
-	
+	display_mod = NULL;	
+	tree_key = NULL;	
 	commDisplay          = 0;
 	bookDisplay          = 0;
 	dictDisplay          = 0;
@@ -108,8 +103,7 @@ BackEnd::~BackEnd() {
 void BackEnd::init_SWORD(int gsType) {
 	ModMap::iterator it;
 	if(gsType == 0) {
-		main_setup_displays();
-		
+		main_setup_displays();		
 		for (it = display_mgr->Modules.begin();
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
@@ -146,6 +140,81 @@ void BackEnd::init_SWORD(int gsType) {
 	}
 }
 
+char *BackEnd::set_sword_locale(void) {
+	const char *sys_locale;
+	const char *mylocale;
+	char *retval = NULL;
+	char buf[32];
+	int i = 0;
+	SWLocale *sw_locale;
+	
+	sys_locale = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+	if(sys_locale) {
+		if(!strncmp(sys_locale,"ru_RU",5)) {
+			sys_locale = "ru_RU-koi8-r";		
+		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)){
+			if(strlen(sys_locale) >  12) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)){
+			if(strlen(sys_locale) > 12 ) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)){
+			if(strlen(sys_locale) > 12 ) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"pt_BR",5)){
+			if(strlen(sys_locale) > 5 ) {
+				for(i = 0; i < 5; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"en_GB",5)){
+			if(strlen(sys_locale) > 5 ) {
+				for(i = 0; i < 5; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+		} else {
+			if(strlen(sys_locale) > 2 ) {
+				buf[0] = sys_locale[0];
+				buf[1] = sys_locale[1];
+				buf[2] = '\0';
+				sys_locale = buf;
+			}
+		}
+		retval = strdup(sys_locale);
+		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
+		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
+	}
+	if(sw_locale) {
+		OLD_CODESET = (char*)sw_locale->getEncoding();
+	} else {
+		OLD_CODESET = "iso8859-1";
+	}
+	return retval;
+}
 
 void BackEnd::init_lists(MOD_LISTS * mods) {
 	ModMap::iterator it;
@@ -204,49 +273,13 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 		}			
 	}
 }
-/*
-GList *BackEnd::fill_Bible_books(int testament) {
-	VerseKey key; 
-	GList *retlist = NULL;
-	char *book = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;
-	int i = 0, j = 0, x = 2;
-	
-	switch(testament) {
-		case 0: i = 0; x = 1;
-			break;
-		case 1:i = 1; x = 2;
-			break;
-		case 2: i = 0; x = 2;
-			break;
-	}
-	
-	while(i < x) {
-		while(j < key.BMAX[i]) { 
-			book = g_locale_to_utf8((const char *)key.books[i][j].name,
-                                             -1,
-                                             NULL,
-                                             &bytes_written,
-                                             &error);
-			
-			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
-				g_error_free (error);
-				continue;
-			}
-			//printf("%s\n",(const char *)key.books[i][j].name);
-			//printf("%s\n",book);
-			retlist = g_list_append(retlist, (char *)book);
-			++j;
-		}
-		j = 0;
-		i++;
-	}
-	return retlist;
+
+const char *BackEnd::get_sword_version(void) {
+	SWVersion retval;
+	retval = SWVersion::currentVersion;
+	return retval;
 }
-*/
+
 GList *BackEnd::get_module_options(void) {
 	GList *options = NULL;
 	StringList optionslist = main_mgr->getGlobalOptions();	
@@ -1089,114 +1122,114 @@ void BackEnd::init_language_map(void) {
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 	//languageMap[SWBuf("ae")] = SWBuf("Avestan");
-	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans"));
+	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans")); /* done */
 	//languageMap[SWBuf("am")] = SWBuf("Amharic");
-	languageMap[SWBuf("ang")] = SWBuf(_("English, Old (ca.450-1100)"));
-	languageMap[SWBuf("ar")] = SWBuf(_("Arabic"));
+	languageMap[SWBuf("ang")] = SWBuf(_("English, Old (ca.450-1100)")); /* done */
+	languageMap[SWBuf("ar")] = SWBuf(_("Arabic")); /* done */
 	//languageMap[SWBuf("as")] = SWBuf("Assamese");
 	//languageMap[SWBuf("ay")] = SWBuf("Aymara");
-	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani"));
+	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani")); /* done */
 	//languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-	languageMap[SWBuf("be")] = SWBuf(_("Belarusian"));
-	languageMap[SWBuf("bg")] = SWBuf(_("Bulgarian"));
+	languageMap[SWBuf("be")] = SWBuf(_("Belarusian")); /* done */
+	languageMap[SWBuf("bg")] = SWBuf(_("Bulgrian")); /* done */
 	//languageMap[SWBuf("bh")] = SWBuf("Bihari");
 	//languageMap[SWBuf("bi")] = SWBuf("Bislama");
 	//languageMap[SWBuf("bn")] = SWBuf("Bengali");
 	//languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-	languageMap[SWBuf("br")] = SWBuf(_("Breton"));
-	languageMap[SWBuf("bs")] = SWBuf(_("Bosnian"));
-	languageMap[SWBuf("ca")] = SWBuf(_("Catalan"));
+	languageMap[SWBuf("br")] = SWBuf(_("Breton")); /* done */
+	languageMap[SWBuf("bs")] = SWBuf(_("Bosnian")); /* done */
+	languageMap[SWBuf("ca")] = SWBuf(_("Catalan")); /* done */
 	//languageMap[SWBuf("ce")] = SWBuf("Chechen");
-	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano"));
+	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano")); /* done */
 	//languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 	//languageMap[SWBuf("co")] = SWBuf("Corsican");
-	languageMap[SWBuf("cop")] = SWBuf(_("Coptic"));
-	languageMap[SWBuf("cs")] = SWBuf(_("Czech"));
-	languageMap[SWBuf("cu")] = SWBuf(_("Church Slavic"));
+	languageMap[SWBuf("cop")] = SWBuf(_("Coptic")); /* done */
+	languageMap[SWBuf("cs")] = SWBuf(_("Czech")); /* done */
+	languageMap[SWBuf("cu")] = SWBuf(_("Church Slavic")); /* done */
 	//languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-	languageMap[SWBuf("cy")] = SWBuf(_("Welsh"));
-	languageMap[SWBuf("da")] = SWBuf(_("Danish"));
-	languageMap[SWBuf("de")] = SWBuf(_("German"));
+	languageMap[SWBuf("cy")] = SWBuf(_("Welsh")); /* done */
+	languageMap[SWBuf("da")] = SWBuf(_("Danish")); /* done */
+	languageMap[SWBuf("de")] = SWBuf(_("German")); /* done */
 	//languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-	languageMap[SWBuf("el")] = SWBuf(_("Greek, Modern (1453-)"));
+	languageMap[SWBuf("el")] = SWBuf(_("Greek, Modern (1453-)")); /* done */
 	languageMap[SWBuf("en")] = SWBuf(_("English"));
-	languageMap[SWBuf("en_US")] = SWBuf(_("American English"));
-	languageMap[SWBuf("enm")] =
-	    SWBuf(_("English, Middle (1100-1500)"));
-	languageMap[SWBuf("eo")] = SWBuf(_("Esperanto"));
-	languageMap[SWBuf("es")] = SWBuf(_("Spanish"));
-	languageMap[SWBuf("et")] = SWBuf(_("Estonian"));
-	languageMap[SWBuf("eu")] = SWBuf(_("Basque"));
+	languageMap[SWBuf("en_US")] = SWBuf(_("American English")); /* done */
+/*  */	languageMap[SWBuf("enm")] =
+	    SWBuf(_("English, Middle (1100-1500)")); /* done */
+	languageMap[SWBuf("eo")] = SWBuf(_("Esperanto")); /* done */
+	languageMap[SWBuf("es")] = SWBuf(_("Spanish")); /* done */
+	languageMap[SWBuf("et")] = SWBuf(_("Estonian")); /* done */
+	languageMap[SWBuf("eu")] = SWBuf(_("Basque")); /* done */
 	//languageMap[SWBuf("fa")] = SWBuf("Persian");
-	languageMap[SWBuf("fi")] = SWBuf(_("Finnish"));
+	languageMap[SWBuf("fi")] = SWBuf(_("Finnish")); /* done */
 	//languageMap[SWBuf("fj")] = SWBuf("Fijian");
 	//languageMap[SWBuf("fo")] = SWBuf("Faroese");
-	languageMap[SWBuf("fr")] = SWBuf(_("French"));
-	languageMap[SWBuf("fy")] = SWBuf(_("Frisian"));
-	languageMap[SWBuf("ga")] = SWBuf(_("Irish"));
-	languageMap[SWBuf("gd")] = SWBuf(_("Gaelic (Scots)"));
+	languageMap[SWBuf("fr")] = SWBuf(_("French")); /* done */
+	languageMap[SWBuf("fy")] = SWBuf(_("Frisian")); /* done */
+	languageMap[SWBuf("ga")] = SWBuf(_("Irish")); /* done */
+	languageMap[SWBuf("gd")] = SWBuf(_("Gaelic (Scots)")); /* done */
 	//languageMap[SWBuf("gl")] = SWBuf("Gallegan");
 	//languageMap[SWBuf("gn")] = SWBuf("Guarani");
 	//languageMap[SWBuf("gn")] = SWBuf("Gujarati");
-	languageMap[SWBuf("got")] = SWBuf(_("Gothic"));
-	languageMap[SWBuf("gv")] = SWBuf(_("Manx"));
-	languageMap[SWBuf("grc")] = SWBuf(_("Greek, Ancient (to 1453)"));
-	languageMap[SWBuf("he")] = SWBuf(_("Hebrew"));
-	languageMap[SWBuf("haw")] = SWBuf(_("Hawaiian"));
+/*  */	languageMap[SWBuf("got")] = SWBuf(_("Gothic")); /* done */
+	languageMap[SWBuf("gv")] = SWBuf(_("Manx")); /* done */
+	languageMap[SWBuf("grc")] = SWBuf(_("Greek, Ancient (to 1453)")); /* done */
+	languageMap[SWBuf("he")] = SWBuf(_("Hebrew")); /* done */
+	languageMap[SWBuf("haw")] = SWBuf(_("Hawaiian")); /* done */
 	//languageMap[SWBuf("hi")] = SWBuf("Hindi");
 	//languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-	languageMap[SWBuf("hr")] = SWBuf("Croatian");
-	languageMap[SWBuf("hu")] = SWBuf(_("Hungarian"));
-	languageMap[SWBuf("hy")] = SWBuf(_("Armenian"));
+	languageMap[SWBuf("hr")] = SWBuf(_("Croatian")); /* done */
+	languageMap[SWBuf("hu")] = SWBuf(_("Hungarian")); /* done */
+	languageMap[SWBuf("hy")] = SWBuf(_("Armenian")); /* done */
 	//languageMap[SWBuf("hz")] = SWBuf("Herero");
 	//languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-	languageMap[SWBuf("i-klingon")] = SWBuf(_("Klingon"));
+	languageMap[SWBuf("i-klingon")] = SWBuf(_("Klingon")); /* done */
 	//languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-	languageMap[SWBuf("id")] = SWBuf(_("Indonesian"));
-	//languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-	languageMap[SWBuf("is")] = SWBuf(_("Icelandic"));
-	languageMap[SWBuf("it")] = SWBuf(_("Italian"));
-	//languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-	languageMap[SWBuf("ja")] = SWBuf(_("Japanese"));
-	languageMap[SWBuf("ka")] = SWBuf(_("Georgian"));
+	languageMap[SWBuf("id")] = SWBuf(_("Indonesian")); /* done */
+/*  */	//languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
+	languageMap[SWBuf("is")] = SWBuf(_("Icelandic")); /* done */
+	languageMap[SWBuf("it")] = SWBuf(_("Italian")); /* done */
+	//languageMap[SWBuf("iu")] = SWBuf("Inuktitut"); 
+	languageMap[SWBuf("ja")] = SWBuf(_("Japanese")); /* done */
+	languageMap[SWBuf("ka")] = SWBuf(_("Georgian")); /* done */
 	//languageMap[SWBuf("ki")] = SWBuf("Kikuyu");
 	//languageMap[SWBuf("kj")] = SWBuf("Kuanyama");
 	//languageMap[SWBuf("kk")] = SWBuf("Kazakh");
 	//languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
 	//languageMap[SWBuf("km")] = SWBuf("Khmer");
 	//languageMap[SWBuf("kn")] = SWBuf("Kannada");
-	languageMap[SWBuf("ko")] = SWBuf(_("Korean"));
+	languageMap[SWBuf("ko")] = SWBuf(_("Korean")); /* done */
 	//languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-	languageMap[SWBuf("ku")] = SWBuf(_("Kurdish"));
+	languageMap[SWBuf("ku")] = SWBuf(_("Kurdish")); /* done */
 	//languageMap[SWBuf("kv")] = SWBuf("Komi");
 	//languageMap[SWBuf("kw")] = SWBuf("Cornish");
-	languageMap[SWBuf("ky")] = SWBuf(_("Kirghiz"));
-	languageMap[SWBuf("la")] = SWBuf(_("Latin"));
+	languageMap[SWBuf("ky")] = SWBuf(_("Kirghiz")); /* done */
+	languageMap[SWBuf("la")] = SWBuf(_("Latin")); /* done */
 	//languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 	//languageMap[SWBuf("ln")] = SWBuf("Lingala");
 	//languageMap[SWBuf("lo")] = SWBuf("Lao");
-	languageMap[SWBuf("lt")] = SWBuf("Lithuanian");
-	languageMap[SWBuf("lv")] = SWBuf(_("Latvian"));
+	languageMap[SWBuf("lt")] = SWBuf("Lithuanian"); /* done */
+	languageMap[SWBuf("lv")] = SWBuf(_("Latvian")); /* done */
 	//languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 	//languageMap[SWBuf("mh")] = SWBuf("Marshall");
-	languageMap[SWBuf("mi")] = SWBuf(_("Maori"));
-	languageMap[SWBuf("mk")] = SWBuf(_("Macedonian"));
+	languageMap[SWBuf("mi")] = SWBuf(_("Maori")); /* done */
+	languageMap[SWBuf("mk")] = SWBuf(_("Macedonian")); /* done */
 	//languageMap[SWBuf("ml")] = SWBuf("Malayalam");
 	//languageMap[SWBuf("mn")] = SWBuf("Mongolian");
 	//languageMap[SWBuf("mo")] = SWBuf("Moldavian");
 	//languageMap[SWBuf("mr")] = SWBuf("Marathi");
-	languageMap[SWBuf("ms")] = SWBuf(_("Malay"));
-	languageMap[SWBuf("mt")] = SWBuf(_("Maltese"));
+	languageMap[SWBuf("ms")] = SWBuf(_("Malay")); /* done */
+	languageMap[SWBuf("mt")] = SWBuf(_("Maltese")); /* done */
 	//languageMap[SWBuf("my")] = SWBuf("Burmese");
 	//languageMap[SWBuf("na")] = SWBuf("Nauru");
 	//languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
-	//languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-	languageMap[SWBuf("nds")] = SWBuf(_("Low German; Low Saxon"));
+/*  */	//languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
+	languageMap[SWBuf("nds")] = SWBuf(_("Low German; Low Saxon")); /* done */
 	//languageMap[SWBuf("ne")] = SWBuf("Nepali");
 	//languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-	languageMap[SWBuf("nl")] = SWBuf(_("Dutch"));
+	languageMap[SWBuf("nl")] = SWBuf(_("Dutch")); /* done */
 	//languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-	languageMap[SWBuf("no")] = SWBuf(_("Norwegian"));
+	languageMap[SWBuf("no")] = SWBuf(_("Norwegian")); /* done */
 	//languageMap[SWBuf("nr")] = SWBuf("Ndebele, South");
 	//languageMap[SWBuf("nv")] = SWBuf("Navajo");
 	//languageMap[SWBuf("ny")] = SWBuf("Chichewa; Nyanja");
@@ -1205,74 +1238,74 @@ void BackEnd::init_language_map(void) {
 	//languageMap[SWBuf("or")] = SWBuf("Oriya");
 	//languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
 	//languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-	languageMap[SWBuf("pap")] = SWBuf(_("Papiamento"));
+	languageMap[SWBuf("pap")] = SWBuf(_("Papiamento")); /* done */
 	//languageMap[SWBuf("pi")] = SWBuf("Pali");
-	languageMap[SWBuf("pl")] = SWBuf(_("Polish"));
+	languageMap[SWBuf("pl")] = SWBuf(_("Polish")); /* done */
 	//languageMap[SWBuf("ps")] = SWBuf("Pushto");
-	languageMap[SWBuf("pt")] = SWBuf(_("Portuguese"));
+	languageMap[SWBuf("pt")] = SWBuf(_("Portuguese")); /* done */
 	//languageMap[SWBuf("qu")] = SWBuf("Quechua");
 	//languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
 	//languageMap[SWBuf("rn")] = SWBuf("Rundi");
-	languageMap[SWBuf("ro")] = SWBuf(_("Romanian"));
-	languageMap[SWBuf("ru")] = SWBuf(_("Russian"));
+	languageMap[SWBuf("ro")] = SWBuf(_("Romanian")); /* done */
+	languageMap[SWBuf("ru")] = SWBuf(_("Russian")); /* done */
 	//languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
 	//languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
 	//languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-	languageMap[SWBuf("sco")] = SWBuf(_("Scots"));
+	languageMap[SWBuf("sco")] = SWBuf(_("Scots")); /* done */
 	//languageMap[SWBuf("sd")] = SWBuf("Sindhi");
 	//languageMap[SWBuf("se")] = SWBuf("Northern Sami");
 	//languageMap[SWBuf("sg")] = SWBuf("Sango");
 	//languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-	languageMap[SWBuf("sk")] = SWBuf(_("Slovak"));
-	languageMap[SWBuf("sl")] = SWBuf(_("Slovenian"));
+	languageMap[SWBuf("sk")] = SWBuf(_("Slovak")); /* done */
+	languageMap[SWBuf("sl")] = SWBuf(_("Slovenian")); /* done */
 	//languageMap[SWBuf("sm")] = SWBuf("Samoan");
-	//languageMap[SWBuf("sn")] = SWBuf("Shona");
-	languageMap[SWBuf("so")] = SWBuf(_("Somali"));
-	languageMap[SWBuf("sq")] = SWBuf(_("Albanian"));
+/*  */	//languageMap[SWBuf("sn")] = SWBuf("Shona");
+	languageMap[SWBuf("so")] = SWBuf(_("Somali")); /* done */
+	languageMap[SWBuf("sq")] = SWBuf(_("Albanian")); /* done */
 	//languageMap[SWBuf("sr")] = SWBuf("Serbian");
 	//languageMap[SWBuf("ss")] = SWBuf("Swati");
 	//languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
 	//languageMap[SWBuf("su")] = SWBuf("Sundanese");
-	languageMap[SWBuf("sv")] = SWBuf(_("Swedish"));
-	languageMap[SWBuf("sw")] = SWBuf(_("Swahili"));
-	languageMap[SWBuf("syr")] = SWBuf(_("Syriac"));
-	languageMap[SWBuf("ta")] = SWBuf(_("Tamil"));
+	languageMap[SWBuf("sv")] = SWBuf(_("Swedish")); /* done */
+	languageMap[SWBuf("sw")] = SWBuf(_("Swahili")); /* done */
+	languageMap[SWBuf("syr")] = SWBuf(_("Syriac")); /* done */
+	languageMap[SWBuf("ta")] = SWBuf(_("Tamil")); /* done */
 	//languageMap[SWBuf("te")] = SWBuf("Telugu");
 	//languageMap[SWBuf("tg")] = SWBuf("Tajik");
-	languageMap[SWBuf("th")] = SWBuf(_("Thai"));
+	languageMap[SWBuf("th")] = SWBuf(_("Thai")); /* done */
 	//languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-	languageMap[SWBuf("tl")] = SWBuf(_("Tagalog"));
-	languageMap[SWBuf("tn")] = SWBuf(_("Tswana"));
-	languageMap[SWBuf("tr")] = SWBuf(_("Turkish"));
+	languageMap[SWBuf("tl")] = SWBuf(_("Tagalog")); /* done */
+	languageMap[SWBuf("tn")] = SWBuf(_("Tswana")); /* done */
+	languageMap[SWBuf("tr")] = SWBuf(_("Turkish")); /* done */
 	//languageMap[SWBuf("ts")] = SWBuf("Tsonga");
 	//languageMap[SWBuf("tt")] = SWBuf("Tatar");
 	//languageMap[SWBuf("tw")] = SWBuf("Twi");
-	languageMap[SWBuf("ty")] = SWBuf(_("Tahitian"));
+	languageMap[SWBuf("ty")] = SWBuf(_("Tahitian")); /* done */
 	//languageMap[SWBuf("ug")] = SWBuf("Uighur");
-	languageMap[SWBuf("uk")] = SWBuf(_("Ukrainian"));
+	languageMap[SWBuf("uk")] = SWBuf(_("Ukrainian")); /* done */
 	//languageMap[SWBuf("ur")] = SWBuf("Urdu");
 	//languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-	languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese"));
+	languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese")); /* done */
 	//languageMap[SWBuf("vo")] = SWBuf("Volapük");
-	//languageMap[SWBuf("wo")] = SWBuf("Wolof");
-	languageMap[SWBuf("xh")] = SWBuf(_("Xhosa"));
-	languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian"));
-	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch"));
-	languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French"));
-	languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz"));
-	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar"));
-	languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchi"));
-	languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard"));
-	languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian"));
-	languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin"));
-	languageMap[SWBuf("x-E-PPK")] = SWBuf(_("Uma"));
-	languageMap[SWBuf("x-E-RMY")] = SWBuf(_("Romani, Vlax"));
-	languageMap[SWBuf("x-E-SAJ")] = SWBuf(_("Sango"));
-	languageMap[SWBuf("x-E-SRN")] = SWBuf(_("Sranan"));
+/*  */	//languageMap[SWBuf("wo")] = SWBuf("Wolof");
+	languageMap[SWBuf("xh")] = SWBuf("Xhosa"); /* causes gettext problems */
+	languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian")); /* done */
+	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch")); /* done */
+/*  */	languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French")); /* done */
+	languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz")); /* done */
+	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar")); /* done */
+	languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchi")); /* done */
+	languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard")); /* done */
+	languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian")); /* done */
+	languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin")); /* done */
+	languageMap[SWBuf("x-E-PPK")] = SWBuf(_("Uma")); /* done */
+	languageMap[SWBuf("x-E-RMY")] = SWBuf(_("Romani, Vlax")); /* done */
+	languageMap[SWBuf("x-E-SAJ")] = SWBuf(_("Sango")); /* done */
+	languageMap[SWBuf("x-E-SRN")] = SWBuf(_("Sranan")); /* done */
 	//languageMap[SWBuf("yi")] = SWBuf("Yiddish");
 	//languageMap[SWBuf("za")] = SWBuf("Zhuang");
-	languageMap[SWBuf("zh")] = SWBuf(_("Chinese"));
-	languageMap[SWBuf("zu")] = SWBuf(_("Zulu"));
+	languageMap[SWBuf("zh")] = SWBuf(_("Chinese")); /* done */
+	languageMap[SWBuf("zu")] = SWBuf(_("Zulu")); /* done */
 }
 
 char *BackEnd::get_conf_file_item(const char * file, const char * mod_name, const char * item){
@@ -1293,8 +1326,7 @@ void BackEnd::save_conf_file_item(const char * file, const char * mod_name, cons
 	conf_file.Save();
 }
  
-void BackEnd::save_module_key(char *mod_name, char *key)
-{
+void BackEnd::save_module_key(char *mod_name, char *key) {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	return; // this needs help

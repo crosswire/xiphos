@@ -156,7 +156,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
-	gtk_window_set_title(GTK_WINDOW(dialog_alert), _(" "));
+	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
 	gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 

@@ -36,7 +36,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 
@@ -118,7 +118,7 @@ void main_init_lists(void)
 	} else {
 		start_backend = TRUE;
 		backend = new BackEnd();
-		backend_get_sword_locale();		
+		backend->set_sword_locale();//backend_get_sword_locale();		
 	}
 	backend->init_lists(mod_lists);
 	if(start_backend)
@@ -134,7 +134,7 @@ void main_init_lists(void)
 
 	settings.havepercomm = g_list_length(mods.percommods);
 #ifdef DEBUG
-	g_print("\n%s = %d\n", _("Number of Text modules"), settings.havebible);
+	g_print("%s = %d\n", _("Number of Text modules"), settings.havebible);
 	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);
 	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
 	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
