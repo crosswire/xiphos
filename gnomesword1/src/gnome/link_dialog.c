@@ -39,15 +39,10 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-
-/*
- * gnome
- */
+/* frontend */
 #include "link_dialog.h"
-/*
- * main
- */
-#include "gs_editor.h"
+#include "_editor.h"
+
 
 /******************************************************************************
  * globals to this file only 

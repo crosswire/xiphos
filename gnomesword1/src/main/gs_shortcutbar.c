@@ -42,7 +42,7 @@
 #include "gs_bookmarks.h"
 #include "gbs.h"
 #include "gs_html.h"
-#include "gs_editor.h"
+#include "_editor.h"
 #include "settings.h"
 #include "lists.h"
 

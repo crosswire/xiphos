@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=45
-1=30
-2=1
-3=1
-4=31
-5=1
-6=22
-7=54
-8=29
-9=40
+0=30
+1=163
+2=141
+3=51
+4=26
+5=120
+6=228
+7=30
+8=12
+9=341
 10=41
 11=1
 12=406
@@ -38,12 +38,13 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/_percomm.c
-1=/home/terry/Projects/gnomesword1/src/gnome/_percomm.h
-2=/home/terry/Projects/gnomesword1/src/gnome/editor_search.c
-3=/home/terry/Projects/gnomesword1/src/gnome/editor_search.h
-4=/home/terry/Projects/gnomesword1/src/gnome/editor_replace.h
-5=/home/terry/Projects/gnomesword1/src/gnome/editor_replace.c
+0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
+1=/home/terry/Projects/gnomesword1/src/main/settings.h
+2=/home/terry/Projects/gnomesword1/src/main/gs_gui.c
+3=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
+4=/home/terry/Projects/gnomesword1/src/gnome/studypad.h
+5=/home/terry/Projects/gnomesword1/src/gnome/_editor.c
+6=/home/terry/Projects/gnomesword1/gnomesword.prj
 
 [replace_text]
 0=dl->frame
@@ -56,24 +57,24 @@ ShowLocals=true
 7=pm
 
 [find_text]
-0=specd
-1=backend_
-2=shortcut_bar
-3=frameDict
-4=curMod
-5=cbeB
-6=updatecontrols
-7=update
+0=BUFFER_SIZE
+1=interlinear
+2=htmlTexts
+3=find_word
+4=find_word_EDITOR
+5=load_text_from_spell_EDITOR
+6=save_note_receiver
+7=EDITOR_TOOLBAR_PATH
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=searchgbsGS_EDITOR
-1=gbsecd
-2=specd
-3=create_editor
-4=save_percomm_note
-5=dock_undock
-6=create_dlgDock
-7=get_book_key
+0=htmlBook
+1=htmlSP
+2=htmlcomm
+3=htmlTexts
+4=gs_new_html_widget
+5=html_print
+6=gnome_font_new_closest
+7=load_text_for_spell_EDITOR
