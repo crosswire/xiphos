@@ -146,6 +146,9 @@ void frontend_init(void)
 		gui_create_parallel_page();
 		gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
+	
+	// setup passage notebook
+	gui_notebook_main_setup(NULL);
 
 	gui_set_sidebar_porgram_start();
 }

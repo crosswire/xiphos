@@ -41,6 +41,7 @@
 #include "gui/dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/dictlex.h"
+#include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
 #include "main/bibletext.h"
@@ -155,6 +156,27 @@ static void set_page_text(gchar * modname, GList * text_list)
 	text_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
+}
+
+/******************************************************************************
+ * Name
+ *  gui_set_text_mod_and_key
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   
+ *   void gui_set_text_mod_and_key(gchar *mod, gchar *key)	
+ *
+ * Description
+ *   sets the text module and key.  Primarily added for use in tabbed browsing
+ *
+ * Return value
+ *   void
+ */
+void gui_set_text_mod_and_key(gchar *mod, gchar *key)
+{
+	set_page_text(mod, text_list);
+	gui_display_text(key);
 }
 
 /******************************************************************************

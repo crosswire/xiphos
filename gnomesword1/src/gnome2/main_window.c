@@ -553,7 +553,6 @@ void create_mainwindow(void)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
-	GtkWidget *notebook;
 	GtkWidget *empty_notebook_page;
 	GdkColor transparent = { 0 };
 	gint page_num = 0;
@@ -600,38 +599,34 @@ void create_mainwindow(void)
 	gtk_widget_show(vboxMain);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vboxMain, TRUE, TRUE, 0);
 	
-	/* tabbed notebook start */
-	notebook = gtk_notebook_new();
-	//gtk_widget_show(notebook);
+	/*
+	 * notebook to have separate passages opened at once
+	 * the passages are not actually open but are switched
+	 * between similar to bookmarks
+	 */
+	widgets.notebook_main = gtk_notebook_new();
+	gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(vboxMain),
-			   notebook, FALSE,
-			  FALSE , 0);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook), FALSE);
-	//gtk_widget_set_size_request(notebook, -1, 18);
-	
+			   widgets.notebook_main, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(widgets.notebook_main, -1, 20);
+
 	empty_notebook_page = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (empty_notebook_page);
-	gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
 	
 	label41 = gtk_label_new(_("//KJV/John 3:16"));
 	gtk_widget_show(label41);
-	gtk_widget_set_size_request(notebook, -1, 20);
 
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK
-				   (notebook),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (notebook),
-				    0), label41);
-	/* tabbed notebook end */
+	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 empty_notebook_page, label41);
+
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
+	/* main passage tabbed notebook end */
 	
 	/*
 	 * nav toolbar 
 	 */
-
 	nav_toolbar = gui_create_nav_toolbar(widgets.app);
 	/* gtk_box_pack_start(GTK_BOX(vboxMain),nav_toolbar,FALSE,FALSE,0); */
-
 	/*
 	 * end nav toolbar 
 	 */
