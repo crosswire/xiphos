@@ -208,7 +208,7 @@ inline static Tword *new_word(Tword * word)
 	return (word);
 }
 
-inline void free_word(Tword * word)
+inline static void free_word(Tword * word)
 {
 	DEBUG_MSG("Free word \"%s\" \n", word->text);
 	g_free(word->text);
@@ -233,7 +233,7 @@ static void store_char_in_word(Tword * word, gchar c)
 	(word->index)++;
 }
 
-inline gboolean is_empty_word(Tword * word)
+inline static gboolean is_empty_word(Tword * word)
 {
 	return ((word->index) == 0);
 }
@@ -348,9 +348,9 @@ void create_ispell_pipe()
 
 		argc = 0;
 #if USE_ASPELL
-		argv[argc++] = "/usr/local/bin/aspell";
+		argv[argc++] = "aspell";
 #else
-		argv[argc++] = "/usr/bin/ispell";
+		argv[argc++] = "ispell";
 #endif /* USE_ASPELL */
 		argv[argc++] = g_strdup("-a");	// "Pipe" mode
 /*
@@ -382,9 +382,9 @@ void create_ispell_pipe()
 			MY_DEBUG_MSG("%s ", argv[i]);
 #endif
 #if USE_ASPELL
-		execvp("/usr/local/bin/aspell", (char *const *) argv);
+		execvp("aspell", (char *const *) argv);
 #else
-		execvp("/usr/bin/ispell", (char *const *) argv);
+		execvp("ispell", (char *const *) argv);
 #endif /* USE_ASPELL */
 		/* free the memory used  */
 		for (i = 0; i < argc - 1; i++)
