@@ -245,7 +245,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 		p_mylistitem->type = atoi(buf[1]);
 		p_mylistitem->level = atoi(buf[2]);
 		strcpy(p_mylistitem->subitem, buf[3]);
-		strcpy(p_mylistitem->menu, "_Quickmarks/");
+		strcpy(p_mylistitem->menu, _("_Quickmarks/"));
 		strcpy(p_mylistitem->preitem, buf[5]);
 		write(flbookmarksnew, (char *) &mylistitem,
 		      sizeof(mylistitem));
@@ -261,7 +261,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 void getitem(gchar * buf[6])
 {
 	static gchar subs[6][80],
-	    tmpbuf[255], *preitem = "", *presubitem = "Edit Quickmarks";
+	    tmpbuf[255], *preitem = "", *presubitem = N_("Edit Quickmarks");
 	static gint oldlevel = 0;
 	gint level, type;
 	static gboolean firsttime = TRUE, firstsub = TRUE, first0item =
@@ -274,7 +274,7 @@ void getitem(gchar * buf[6])
 			sprintf(subs[i], "%s", "");
 		sprintf(tmpbuf, "%s", "");
 		preitem = "";
-		presubitem = "Edit Quickmarks";
+		presubitem = _("Edit Quickmarks");
 		oldlevel = 0;
 		firsttime = TRUE;
 		firstsub = TRUE;
@@ -460,7 +460,7 @@ GtkWidget *createListEditor(void)
 {
 	GtkWidget *ListEditor;
 
-	title = "GnomeSword - Quickmark Editor";
+	title = _("GnomeSword - Quickmark Editor");
 	p_mylistitem = &mylistitem;
 	ListEditor = create_listeditor();
 	gtk_signal_connect(GTK_OBJECT(ListEditor), "destroy",
@@ -494,11 +494,11 @@ void applychanges(GtkWidget * widget)
 	editbookmarksSave(listeditor);
 	getrow(list, 0, buf);
 	getitem(buf);
-	sprintf(tmpbuf, "%s%s", "_Quickmarks/", buf[0]);
+	sprintf(tmpbuf, "%s%s", _("_Quickmarks/"), buf[0]);
 	/* remove old bookmarks form menu -- menustuff.cpp */
 	removemenuitems(MainFrm, tmpbuf, ibookmarks);
-	/* add Separator it was deleted with old menus */
-	addseparator(MainFrm, "_Quickmarks/Edit Quickmarks");
+	//-- add Separator it was deleted with old menus 
+	addseparator(MainFrm, _("_Quickmarks/Edit Quickmarks"));
 	/* let's show what we did -- filestuff.cpp */
 	loadbookmarks_programstart();
 	loadbookmarksnew(list);
@@ -964,7 +964,7 @@ GtkWidget *create_listeditor(void)
 	GtkWidget *btnLEapply;
 	GtkWidget *btnLEcancel;
 
-	listeditor = gnome_dialog_new("GnomeSword - ListEditor", NULL);
+	listeditor = gnome_dialog_new(_("GnomeSword - Quickmarks Editor"), NULL);
 	gtk_object_set_data(GTK_OBJECT(listeditor), "listeditor",
 			    listeditor);
 	gtk_container_set_border_width(GTK_CONTAINER(listeditor), 4);
@@ -1105,7 +1105,7 @@ GtkWidget *create_listeditor(void)
 	gtk_widget_show(hbox1);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox1), hbox1, TRUE, TRUE, 0);
 
-	frame3 = gtk_frame_new("Quickmarks");
+	frame3 = gtk_frame_new(_("Quickmarks"));
 	gtk_widget_ref(frame3);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame3", frame3,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -1223,7 +1223,7 @@ GtkWidget *create_listeditor(void)
 	btnLEleft =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "button23", "Previous Level", NULL,
+				       "button23", _("Previous Level"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnLEleft);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "btnLEleft",
@@ -1237,7 +1237,7 @@ GtkWidget *create_listeditor(void)
 	btnLEright =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "button24", "Next level", NULL,
+				       "button24", _("Next level"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnLEright);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "btnLEright",
@@ -1254,7 +1254,7 @@ GtkWidget *create_listeditor(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), vbox3, FALSE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox3), 3);
 	
-	frame2 = gtk_frame_new("Edit items");
+	frame2 = gtk_frame_new(_("Edit items"));
 	gtk_widget_ref(frame2);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame2", frame2,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -1349,7 +1349,7 @@ GtkWidget *create_listeditor(void)
 	btnLEAddItem = gtk_toolbar_append_element(GTK_TOOLBAR(toolbar6),
 						  GTK_TOOLBAR_CHILD_BUTTON,
 						  NULL,
-						  "Add Menu",
+						  _("Add Menu"),
 						  NULL, NULL,
 						  NULL, NULL, NULL);
 	gtk_widget_ref(btnLEAddItem);
@@ -1361,7 +1361,7 @@ GtkWidget *create_listeditor(void)
 	btnLEdelete = gtk_toolbar_append_element(GTK_TOOLBAR(toolbar6),
 						 GTK_TOOLBAR_CHILD_BUTTON,
 						 NULL,
-						 "Delete Item",
+						 _("Delete Item"),
 						 NULL, NULL, NULL, NULL,
 						 NULL);
 	gtk_widget_ref(btnLEdelete);
@@ -1382,7 +1382,7 @@ GtkWidget *create_listeditor(void)
 	btnLEapplylistchanges =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar9),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Apply Changes to List", NULL, NULL,
+				       _("Apply Changes to List"), NULL, NULL,
 				       NULL, NULL, NULL);
 	gtk_widget_ref(btnLEapplylistchanges);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor),

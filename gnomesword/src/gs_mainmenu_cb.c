@@ -110,6 +110,14 @@ on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
 	morphsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
+/*** toogle morph tags in main text window ***/
+void
+on_hebrew_points_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	hebrewpointsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+
+
 /*** display - The SWORD Project - about information ***/
 void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,

@@ -53,6 +53,7 @@
 GtkWidget	
 	*footnotes,	/* widget to access toggle menu - for footnotes */
   	*strongsnum,/* widget to access toggle menu - for strongs numbers */
+	*hebrewpoints,
 	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
 	*studypad,  /* studypad text widget */
@@ -173,7 +174,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	morphs   = additemtooptionmenu(app, _("_Settings/"), _("Show Morphological Tags"),
 				(GtkMenuCallback)on_morphs_activate);
  	strongsnum   = additemtooptionmenu(app, _("_Settings/"), _("Show Strongs Numbers"),
- 				(GtkMenuCallback)on_strongs_numbers1_activate); 		
+ 				(GtkMenuCallback)on_strongs_numbers1_activate); 
+ 	hebrewpoints   = additemtooptionmenu(app, _("_Settings/"), _("Show Hebrew Points"),
+ 				(GtkMenuCallback)on_hebrew_points_activate); 		
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
