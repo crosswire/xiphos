@@ -28,6 +28,23 @@ extern "C" {
 
 #include <gnome.h>
 
+/*** these defs need to be seen by gui and backend ***/
+	
+/* module types */
+#define TEXT_TYPE 0 
+#define COMMENTARY_TYPE 1
+#define DICTIONARY_TYPE 2
+#define BOOK_TYPE 3
+       
+/* these strings are not seen by users */
+#define TEXT_MODS "Biblical Texts"
+#define COMM_MODS "Commentaries"
+#define DICT_MODS "Lexicons / Dictionaries"
+#define BOOK_MODS "Generic Books"
+
+/*** end defs ***/
+
+
 /*** function prototypes ***/
 
 void search_percent_update(char percent, void *userData);
@@ -53,6 +70,8 @@ int create_properties_from_setup(void);
 gchar *get_path_to_mods(void);
 GList *get_list_of_mods_by_type(char *mod_type);
 gchar *get_mod_about_info(char * mod_name);
+int check_for_module(char * mod_name);
+void shutdown_sword(void);
 
 #ifdef __cplusplus
 }

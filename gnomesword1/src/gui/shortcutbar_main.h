@@ -26,6 +26,32 @@
 extern "C" {
 #endif
 
+#include <gnome.h>
+	
+typedef struct _search_opt SEARCH_OPT;
+struct _search_opt {
+	GtkWidget
+	    *ckbCommentary,
+	    *ckbPerCom, 
+	    *ckbGBS, 
+	    *rbPhraseSearch;
+
+	gchar
+	    *module_name,
+	    *upper_bond, 
+	    *lower_bond, 
+	    *search_string;
+
+	gint
+	    search_type, 
+	    search_params, 
+	    found_count;
+
+	 gboolean 
+	    use_bonds, 
+	    use_lastsearch_for_bonds;
+};
+
 void showSBGroup(gint groupnum);
 void changegroupnameSB(gchar * groupName, gint groupNum);
 gint gui_get_num_shortcut_items(gint group_num);

@@ -58,7 +58,7 @@
 #include "gui/utilities.h"
 
 #include "main/percomm.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /****************************************************************************** 

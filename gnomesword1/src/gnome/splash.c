@@ -32,9 +32,9 @@
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include <gal/util/e-util.h>
 
-#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 #include "gui/splash.h"
+#include "gui/gnomesword.h"
 
 /*****************************************************************************/
 /* FIXME: clean up below */

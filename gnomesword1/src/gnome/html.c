@@ -36,6 +36,7 @@
 #include <libgnomeprint/gnome-print-preview.h>
 
 #include "gui/html.h"
+#include "gui/gnomesword.h"
 #include "gui/_editor.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/shortcutbar_main.h"
@@ -45,7 +46,6 @@
 #include "gui/main_window.h"
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 static GtkHTMLStream *htmlstream;

@@ -22,7 +22,6 @@
 #ifndef __MAIN_MENU__H_
 #define __MAIN_MENU__H_
 
-#include "main/gs_gnomesword.h"
 
 void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 

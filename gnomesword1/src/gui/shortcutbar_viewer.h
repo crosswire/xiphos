@@ -39,7 +39,7 @@ struct _shortcutbar_viewer {
 	gchar   mod_name[80];
 };
 
-void set_sb_for_daily_devotion(void);
+void gui_display_devotional(void);
 void showSBVerseList(void);
 gboolean gui_display_dictlex_in_viewer(char *modName, char *key);
 void gui_display_verse_list(gchar *module_name, gchar *verse_list);

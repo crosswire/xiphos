@@ -28,9 +28,9 @@
 #include <gal/e-paned/e-vpaned.h>
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
+#include "gui/gnomesword.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/shortcutbar_main.h"
@@ -419,7 +419,7 @@ static void on_mainwindow_size_allocate(GtkWidget * widget,
 
 static void on_mainwindow_destroy(GtkObject *object, gpointer user_data)
 {
-	gnomesword_shutdown();
+	shutdown_gnomesword();
 	gtk_exit(0);
 }
 

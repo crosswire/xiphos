@@ -27,7 +27,8 @@ extern "C" {
 #endif	
 
 #include <glib-1.2/glib.h>
-
+	
+	
 void backend_first_init(void);
 void backend_init_sword(void);
 GList * backend_get_global_options_list(void);
@@ -39,7 +40,6 @@ const char *backend_get_book_from_key(char *key);
 int backend_get_chapter_from_key(char *key);
 int backend_get_verse_from_key(char *key);
 void backend_change_percom_module(char * modName);
-void backend_set_global_option(int window, char *option, char *yesno);
 GList *backend_get_books(void);
 const char *backend_get_sword_version(void);
 void backend_save_module_key(char *mod_name, char *key);

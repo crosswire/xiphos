@@ -24,19 +24,20 @@
 #endif
 
 #include <glib-1.2/glib.h>
+#include <string.h>
 
 #include "gui/gui.h"
 #include "gui/main_window.h"
 #include "gui/splash.h"
 #include "gui/setup_druid.h"
+#include "gui/gnomesword.h"
 
 #include "backend/sword.h"
 #include "backend/properties.h"
 
-#include "main/gs_gnomesword.h"
 #include "main/bookmarks.h"
 #include "main/settings.h"
-
+ 
 /******************************************************************************
  * Name
  *   main
