@@ -2,25 +2,25 @@
 <chapter id="preferences">
 	<title>Préférences</title>
 
-<!-- Introduction -->
+	<!-- Introduction -->
 	<sect1 id="preferences-introduction">
   		<title>Introduction</title>
 		<figure>
 			<title>La boite dialogue préférences</title>
-	        <screenshot>
-	        	<mediaobject>
-	         		<imageobject>
-		     	    	<imagedata fileref="figures/preferences.png" format="PNG"/>
+		        <screenshot>
+	        		<mediaobject>
+	        	 		<imageobject>
+				     	    	<imagedata fileref="figures/preferences.png" format="PNG"/>
 					</imageobject>
-		        	<textobject>
-			        	<phrase>La boite dialogue préférences</phrase>
+			        	<textobject>
+				        	<phrase>La boite dialogue préférences</phrase>
 					</textobject>
-		        </mediaobject>
+			        </mediaobject>
 		 	</screenshot>
 		</figure>
 	</sect1>
 	
-<!-- Fonts And Colors -->
+	<!-- Fonts And Colors -->
 	<sect1 id="fonts-and-colors">
 		<title>Polices et couleurs</title>
 		<sect2 id="font-color">
@@ -58,7 +58,7 @@
 		</sect2>
 	</sect1>
 	
-<!-- General Settings -->
+	<!-- General Settings -->
 	<sect1 id="general-settings">
 		<title>Paramètres généraux</title>
 		<sect2 id="tab-pane">
@@ -79,7 +79,7 @@
 		</sect2>
 	</sect1>
 	
-<!-- Module Settings -->
+	<!-- Module Settings -->
 	<sect1 id="module-settings">
 		<title>Modules</title>
 		<sect2 id="main-modules">
