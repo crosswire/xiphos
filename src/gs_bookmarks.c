@@ -52,7 +52,7 @@ GtkStyle *style;
 extern GtkWidget *MainFrm;
 BM_TREE bmtree;
 BM_TREE *p_bmtree;
-extern GS_APP gs;
+//extern GS_APP gs;
 extern GtkCTreeNode *personal_node;
 extern gchar *fnbookmarksnew;
 
@@ -736,22 +736,22 @@ void addbookmarktotree(gchar * modName, gchar * verse)
 	}
 }
  
-void loadtree(GtkWidget * ctree1)
+void loadtree(SETTINGS *s)
 {
 	GtkWidget *menu;
 	GdkColor transparent = { 0 };
-	bmtree.ctree = GTK_CTREE(ctree1);
-	bmtree.ctree_widget = ctree1;
+	bmtree.ctree = GTK_CTREE(s->ctree_widget);
+	bmtree.ctree_widget = s->ctree_widget;
 	p_bmtree = &bmtree;
 
 	pixmap1 =
-	    gdk_pixmap_create_from_xpm_d(ctree1->window, &mask1,
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask1,
 					 &transparent, book_closed_xpm);
 	pixmap2 =
-	    gdk_pixmap_create_from_xpm_d(MainFrm->window, &mask2,
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
 					 &transparent, book_open_xpm);
 	pixmap3 =
-	    gdk_pixmap_create_from_xpm_d(MainFrm->window, &mask3,
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
 					 &transparent, mini_page_xpm);
 
 	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
@@ -779,11 +779,11 @@ void loadtree(GtkWidget * ctree1)
 				 "scroll_vertical",
 				 GTK_SIGNAL_FUNC(after_press), NULL);
 
-	loadbookmarks(gs.ctree_widget);
-	setleaf(ctree1);
+	loadbookmarks(s->ctree_widget);
+	setleaf(s->ctree_widget);
 	gtk_ctree_sort_recursive(p_bmtree->ctree, personal_node);
 	
-	gtk_signal_connect(GTK_OBJECT(gs.ctree_widget), "select_row",
+	gtk_signal_connect(GTK_OBJECT(s->ctree_widget), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctree_select_row),
 			   bmtree.ctree);
 	gtk_clist_set_row_height(GTK_CLIST(p_bmtree->ctree), 15);
@@ -794,7 +794,6 @@ void loadtree(GtkWidget * ctree1)
 				(gchar *) "1");
 	gtk_widget_set_sensitive(GTK_WIDGET
 				 (pmBookmarkTree_uiinfo[0].widget), FALSE);
-	//gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[1].widget),FALSE);
 }
 
 GtkWidget *create_pmBookmarkTree(void)

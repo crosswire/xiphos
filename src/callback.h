@@ -19,14 +19,8 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-	
-	
-GtkWidget *create_menu1(void);
-GtkWidget *create_wdwEditBookmarks(void);
-GtkWidget *create_dialog1(void);
 
-void
-on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_nbTextMods_switch_page(GtkNotebook * notebook,	
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data);
@@ -121,17 +115,6 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_preferences1_activate(GtkMenuItem * menuitem,
 				  gpointer user_data);
 void on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data);
-void on_fpMainwindow_font_set(GnomeFontPicker * gnomefontpicker,
-				  GString arg1, gpointer user_data);
-void on_fbCurrentverse_font_set(GnomeFontPicker * gnomefontpicker,
-				    GString arg1, gpointer user_data);
-void on_fbInerlinear_font_set(GnomeFontPicker * gnomefontpicker,
-				  GString arg1, gpointer user_data);
-void on_cpfgCurrentverse_color_set(GnomeColorPicker * gnomecolorpicker,
-				       guint arg1,
-				       guint arg2,
-				       guint arg3,
-				       guint arg4, gpointer user_data);
 void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 					      gpointer user_data);
 void on_spell1_found_word(GnomeSpell * gnomespell,
@@ -152,8 +135,6 @@ void on_change_module_activate(GtkMenuItem * menuitem,
 void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data);
 void on_btnKeyNext_clicked(GtkButton * button, gpointer user_data);
 void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_fpStudypad_font_set(GnomeFontPicker * gnomefontpicker,
-				GString arg1, gpointer user_data);
 void on_btnSearchSaveList_clicked(GtkButton * button,
 				      gpointer user_data);
 void on_notebook3_switch_page(GtkNotebook * notebook,
@@ -165,43 +146,7 @@ void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data);
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_tbtnFollow_toggled(GtkToggleButton * togglebutton,
 			       gpointer user_data);
-void on_cbtnPNformat_toggled(GtkToggleButton * togglebutton,
-				 gpointer user_data);
-gboolean on_cbeFreeformLookup_drag_drop(GtkWidget * widget,
-					   GdkDragContext * drag_context,
-					   gint x,
-					   gint y,
-					   guint time, gpointer user_data);
-void on_moduleText_drag_begin(GtkWidget * widget,
-				  GdkDragContext * drag_context,
-				  gpointer user_data);
-void on_textCommentaries_drag_begin(GtkWidget * widget,
-					GdkDragContext * drag_context,
-					gpointer user_data);
-void on_textDict_drag_begin(GtkWidget * widget,
-				GdkDragContext * drag_context,
-				gpointer user_data);
-void on_textComments_drag_begin(GtkWidget * widget,
-				    GdkDragContext * drag_context,
-				    gpointer user_data);
-void on_textComments_drag_data_get(GtkWidget * widget,
-				       GdkDragContext * drag_context,
-				       GtkSelectionData * data,
-				       guint info,
-				       guint time, gpointer user_data);
-void on_textComments_drag_data_received(GtkWidget * widget,
-					    GdkDragContext * drag_context,
-					    gint x,
-					    gint y,
-					    GtkSelectionData * data,
-					    guint info,
-					    guint time,
-					    gpointer user_data);
-gboolean on_textComments_drag_drop(GtkWidget * widget,
-				      GdkDragContext * drag_context,
-				      gint x,
-				      gint y,
-				      guint time, gpointer user_data);
+
 gboolean on_textComments_key_press_event(GtkWidget * widget,
 					    GdkEventKey * event,
 					    gpointer user_data);
@@ -217,33 +162,13 @@ gboolean on_dictionarySearchText_key_press_event
 gboolean on_list1_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer user_data);
-
-void on_cbtnShowSCB_toggled(GtkToggleButton * togglebutton,
-				gpointer user_data);
-void on_cbtnShowTXtabs_toggled(GtkToggleButton * togglebutton,
-			  gpointer user_data);
-void on_cbtnShowCOMtabs_toggled(GtkToggleButton * togglebutton,
-				    gpointer user_data);
-void on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data);
 void on_com_select_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_dict_select_activate(GtkMenuItem * menuitem,
 				 gpointer user_data);
-void on_cbtnShowTextgroup_toggled(GtkToggleButton * togglebutton,
-				      gpointer user_data);
-void on_cbtnShowComGroup_toggled(GtkToggleButton * togglebutton,
-				     gpointer user_data);
-void on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
-				      gpointer user_data);
 gboolean on_epaned_button_release_event(GtkWidget *widget,
 		GdkEventButton  *event,
-		gpointer  user_data);                   
-void on_cbtnShowHistoryGroup_toggled(GtkToggleButton *togglebutton,
-		gpointer user_data);
-
-void on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
-                                        gpointer         user_data);
+		gpointer  user_data);   
 void on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 

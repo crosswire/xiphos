@@ -78,7 +78,7 @@ extern SWMgr *mainMgr1;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
-extern INTERLINEAR interlinearMods;
+//extern INTERLINEAR interlinearMods;
 extern SETTINGS *settings;
 
 /* --------------------------------------------------------------------------------------------- */
