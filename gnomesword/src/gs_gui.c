@@ -576,7 +576,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(vseparator13);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarOptions),
 				  vseparator13, NULL, NULL);
-	gtk_widget_set_usize(vseparator13, 3, 3);
+	gtk_widget_set_usize(vseparator13, 7, 7);
 
 
 	tmp_toolbar_icon =
