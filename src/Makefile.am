@@ -19,10 +19,10 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_info_box.c \
     gs_info_box.h\
-    gs_viewcomm.c \
-    gs_viewcomm.h \
-    gs_viewdict.c \
-    gs_viewdict.h \
+    gs_viewcomm_dlg.c \
+    gs_viewcomm_dlg.h \
+    gs_viewdict_dlg.c \
+    gs_viewdict_dlg.h \
     gs_studypad.c \
     gs_studypad.h \
     gs_bookmarks.c \

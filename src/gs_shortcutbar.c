@@ -194,14 +194,15 @@ void setupSB(GList *textlist,
 				       (scrolledwindow1),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	ctree = gtk_ctree_new (2, 0);
+	ctree = gtk_ctree_new (3, 0);
   	gtk_widget_ref (ctree);
   	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "ctree",ctree ,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (ctree);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow1), ctree);
   	gtk_clist_set_column_width (GTK_CLIST (ctree), 0, 280);
-  	gtk_clist_set_column_width (GTK_CLIST (ctree), 1, 40);
+  	gtk_clist_set_column_width (GTK_CLIST (ctree), 1, 80);
+	gtk_clist_set_column_width (GTK_CLIST (ctree), 2, 80);
   	//gtk_clist_column_titles_show (GTK_CLIST (ctree1));
 	gs.ctree_widget = ctree;
 	settings->ctree_widget = lookup_widget(MainFrm,"ctree");

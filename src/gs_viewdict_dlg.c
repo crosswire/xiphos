@@ -31,7 +31,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gs_viewdict.h"
+#include "gs_viewdict_dlg.h"
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"

@@ -202,7 +202,7 @@ on_ctree_select_row(GtkCList * clist,
 		    gint column, GdkEvent * event, gpointer user_data)
 {
 	//GtkCTreeNode *node;
-	gchar *modName, *key;
+	gchar *label, *modName, *key;
 	GtkCTree *ctree;
 
 	ctree = user_data;
@@ -210,12 +210,17 @@ on_ctree_select_row(GtkCList * clist,
 	//if(GTK_CTREE_ROW(selected_node)->children == NULL){
 		//g_warning("no children");
 	if (GTK_CTREE_ROW(selected_node)->is_leaf) {	/* if node is leaf we need to change mod and key */
-		key =
+		
+		label =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[0])->text;
-		modName =
+		 key=
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[1])->text;
+		
+		modName =
+		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
+				     cell[2])->text;
 		gtk_widget_set_sensitive(GTK_WIDGET
 					 (pmBookmarkTree_uiinfo[0].widget),
 					 FALSE);
@@ -546,7 +551,7 @@ static void set_background(GtkCTree * ctree, GtkCTreeNode * node,
  ******************************************************************************/
 static void stringCallback(gchar * string, gpointer data)
 {
-	gchar *text[2];
+	gchar *text[3];
 	gchar buf[80], buf2[80];
 	gint length, i = 0, j = 0;
 
@@ -557,6 +562,7 @@ static void stringCallback(gchar * string, gpointer data)
 		case 0:
 			text[0] = string;
 			text[1] = "GROUP";
+			text[2] = "GROUP";
 			gtk_ctree_insert_node(p_bmtree->ctree,
 					      selected_node, NULL, text, 3,
 					      pixmap1, mask1, pixmap2,
@@ -578,6 +584,7 @@ static void stringCallback(gchar * string, gpointer data)
 			}
 			sprintf(buf, "%s%s", buf2, ".conf");
 			text[1] = buf;
+			text[2] = "ROOT";
 			g_warning(text[1]);
 			gtk_ctree_insert_node(p_bmtree->ctree, NULL, NULL,
 					      text, 3, pixmap1, mask1,
@@ -647,10 +654,14 @@ on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data)
  ******************************************************************************/
 void addbookmarktotree(gchar * modName, gchar * verse)
 {
-	gchar *text[2];
-
-	text[0] = verse;
-	text[1] = modName;
+	gchar 
+		*text[3],
+		buf[256];
+	sprintf(buf,"%s %s",verse,modName);
+	text[0] = buf;
+	text[1] = verse;
+	text[2] = modName;
+	
 	gtk_ctree_insert_node(p_bmtree->ctree, personal_node, NULL, text,
 			      3, pixmap3, mask3, NULL, NULL, TRUE, FALSE);
 }
@@ -700,7 +711,8 @@ void loadtree(GtkWidget * ctree1)
 
 	loadbookmarks(gs.ctree_widget);
 	setleaf(ctree1);
-
+	gtk_ctree_sort_recursive(p_bmtree->ctree, personal_node);
+	
 	gtk_signal_connect(GTK_OBJECT(gs.ctree_widget), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctree_select_row),
 			   bmtree.ctree);
@@ -765,7 +777,9 @@ loadoldbookmarks(void)
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
 	int flbookmarksnew;
-	gchar *buf[2];
+	gchar 
+		*buf[3],
+		tmpbuf[256];
 	gint i = 0;
 	long filesize;
 	struct stat stat_p;
@@ -784,22 +798,25 @@ loadoldbookmarks(void)
 	       return 0;	
 	}else{
 		buf[0] = "Personal";
-		buf[1] = "Personal.conf";
+		buf[1] = "personal.conf";
+		buf[2] = "ROOT";
 		rootnode = gtk_ctree_insert_node(p_bmtree->ctree,NULL,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 		while (i < ibookmarks) {
 			read(flbookmarksnew, (char *) &mylist, sizeof(mylist));		
 			if (p_mylist->type == 1) {  /* if type is 1 it is a subtree (submenu) */
 				buf[0] = p_mylist->item;
 				buf[1] = "GROUP";
+				buf[2] = "GROUP";
 				if (p_mylist->level == 0) {
 					parent = gtk_ctree_insert_node(p_bmtree->ctree,rootnode,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 				}else{
 					parent = gtk_ctree_insert_node(p_bmtree->ctree,parent,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 				}
-			} else {
-				
-				buf[0] = p_mylist->item;
-				buf[1] = "KJV";
+			} else { 
+				sprintf(tmpbuf,"%s %s",p_mylist->item,"KJV");
+				buf[0] = tmpbuf;
+				buf[1] = p_mylist->item; 
+				buf[2] = "KJV"; 
 				if (p_mylist->level == 0) {
 					node = gtk_ctree_insert_node(p_bmtree->ctree,rootnode,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 				}else{
@@ -807,7 +824,7 @@ loadoldbookmarks(void)
 				}
 			}
 			++i;
-		}
+		} 
 		close(flbookmarksnew);
 	}
 	setleaf(p_bmtree->ctree_widget);

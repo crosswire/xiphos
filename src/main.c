@@ -24,8 +24,6 @@
 
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
-#include "gs_menu.h"
-#include "support.h"
 #include "gs_file.h"
 #include "gs_html.h"
 #include "gs_gui.h"
@@ -35,9 +33,12 @@
 #include "sw_bookmarks.h"
 #include "e-splash.h"
 
-extern SETTINGS *settings;
-SETTINGS myset;	
-extern GList 	*biblemods,
+extern SETTINGS 
+	*settings;
+SETTINGS 
+	myset;	
+extern GList 	
+	*biblemods,
 	*commentarymods,
 	*dictionarymods,
 	*percommods;	
@@ -66,43 +67,43 @@ main (int argc, char *argv[])
   			newbookmarks = TRUE;
 		}
 	}  	
-  	icreatefiles = setDiretory(); 
+  	icreatefiles = setDiretory(); /*** gs_file.c ***/  
   	if(newconfigs)
   	{
-  		gs_firstrunSWORD();
+  		gs_firstrunSWORD(); /*** gs_sword.cpp ***/  
   	}
   	if(newbookmarks)
   	{
-  		createFiles();
+  		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
   	}
 	//icreatefiles = 1;/* please remove me - i am for testing */
 	if(icreatefiles == 1 || icreatefiles == 3 ){		
-		gs_firstrunSWORD();
+		gs_firstrunSWORD(); /*** gs_sword.cpp ***/  
 	}
   	/* set pointer to structure */
   	settings = &myset; 
-	loadconfig(); /* new */    
+	loadconfig(); /* new */  /*** sw_propertiew.cpp ***/  
 	/* splash screen */	
-	splash = e_splash_new ();
+	splash = e_splash_new (); /*** e-splash.c ***/ 
 	if(settings->showsplash){	
 		gtk_widget_show (splash);
 		gtk_object_ref (GTK_OBJECT (splash));
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
 	}  	 
-	mainwindow = create_mainwindow (splash);
-  	add_gtkhtml_widgets(mainwindow);
+	mainwindow = create_mainwindow (splash); /*** gs_gui.c ***/ 
+  	add_gtkhtml_widgets(mainwindow); /*** gs_html.c ***/ 
 	
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),1, TRUE);
-  	initSWORD(mainwindow);
+  	initSWORD(mainwindow); /*** gs_sword.cpp ***/  
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
-  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash);
+  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
 	if(icreatefiles == 2 || icreatefiles == 3 ){		
-		if(loadoldbookmarks() == 0){
+		if(loadoldbookmarks() == 0){ /*** gs_bookmarks.c ***/ 
 			g_warning("loadoldbookmarks failed!");
-			createbookmarksBM(swbmDir);
+			createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
 		}
 	}
   	if(settings->showsplash)

@@ -65,13 +65,16 @@ void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTre
 	node = NULL;
 	if((sit = config->Sections.find(section)) != config->Sections.end()){
 		for(eit = (*sit).second.begin(); eit != (*sit).second.end(); eit++){
-			char *token, *text[2];
+			char *token, *text[3];
 			token=strtok((char *)(*eit).second.c_str(),",");
 			text[0] = token;
-			while(token != NULL){
+			/*i=1;
+			while(token != NULL){*/
+				token=strtok(NULL,",");
 				text[1] = token;
 				token=strtok(NULL,",");
-			}
+				text[2] = token;
+			//}
 			is_leaf = false;
 			node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
 			gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
@@ -94,26 +97,30 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	DIR *dir;
 	struct dirent *ent;
 	GtkCTree *ctree;
+	gint i;
 	
 	ctree = GTK_CTREE(ctree_widget);
 	gtk_clist_freeze(GTK_CLIST(ctree));
 	gtk_clist_clear(GTK_CLIST(ctree));
 	
-	sprintf(conffile,"%sPersonal.conf", swbmDir);	
-	g_warning(conffile);
+	sprintf(conffile,"%spersonal.conf", swbmDir);	
+	//g_warning(conffile);
 	
 	if (access(conffile, F_OK) == -1) return;
 		
 	bookmarkInfo = new SWConfig(conffile);	 
 	if((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()){
 		if((eit = (*sit).second.begin()) != (*sit).second.end()){
-			char *token, *text[2];
+			char *token, *text[3];
 			token=strtok((char *)(*eit).second.c_str(),",");
 			text[0] = token;
-			while(token != NULL){
+			//i=1;
+			//while(token != NULL){
+				token=strtok(NULL,",");
 				text[1] = token;
 				token=strtok(NULL,",");
-			}
+				text[2] = token;
+			//}
 			*bmfiles.insert(bmfiles.begin(),conffile);
 			personal_node = gtk_ctree_insert_node(ctree,NULL,NULL,text, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 			style = gtk_style_new();
@@ -129,18 +136,22 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	if(dir = opendir(swbmDir)){
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "Personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
+			if ((strcmp(ent->d_name, "personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s%s",swbmDir,ent->d_name);
 				bookmarkInfo = new SWConfig(conffile);
 				if ((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()) {
 					if ((eit = (*sit).second.begin()) != (*sit).second.end()) {	// Currently supports only ONE topsection per file because on save, each topsection designates which file to rewrite
-						char *token, *text[2];
+						char *token, *text[3];
 						token=strtok((char *)(*eit).second.c_str(),",");
 						text[0] = token;
-						while(token != NULL){
+						//i=1;
+						//while(token != NULL){
+						token=strtok(NULL,",");
 							text[1] = token;
 							token=strtok(NULL,",");
-						}
+							text[i] = token;
+							//++i;							
+						//}
 						node = gtk_ctree_insert_node(ctree,NULL,NULL,text, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 						gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
 						*bmfiles.insert(bmfiles.begin(),conffile);
@@ -172,8 +183,9 @@ void AddSectionToConf(SWConfig *config, string section, GtkCTreeNode *node, int 
 	   				work = GTK_CTREE_ROW (work)->sibling){
 			++i;			
 			sprintf(buf, "branch%d", i);
-			sprintf(tmpbuf,"%s,%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (work)->row.cell[0])->text,
-					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (work)->row.cell[1])->text);	
+			sprintf(tmpbuf,"%s,%s,%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (work)->row.cell[0])->text,
+					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (work)->row.cell[1])->text,
+					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (work)->row.cell[2])->text);		
 			sit.erase(buf); sit.insert(ConfigEntMap::value_type (buf,tmpbuf));
 			//g_warning("%s=%s",buf,tmpbuf); 
 			AddSectionToConf(config, buf, work, i);
@@ -221,8 +233,9 @@ void savebookmarks(GtkWidget *ctree_widget)
 		 bmconf = new SWConfig(conffile);
 		emap = bmconf->Sections["ROOT"];
 		sprintf(buf, "branch%d", j++);
-		sprintf(tmpbuf,"%s,%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text,
-					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text);
+		sprintf(tmpbuf,"%s,%s,%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text,
+					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text,
+					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[2])->text);
 		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, tmpbuf));	
 		AddSectionToConf(bmconf, buf, node, j);
 		bmconf->Sections["ROOT"] = emap;
@@ -243,17 +256,17 @@ createbookmarksBM(gchar *dir)
 	sprintf(buf, "%s/Personal.conf", dir);
 	SWConfig bmInfo(buf);
 	
-	bmInfo["ROOT"]["branch0"] = "Personal,Personal.conf";
-	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?],GROUP";
-	bmInfo["branch0"]["branch5"]="[What is the Gospel?],GROUP";
-	bmInfo["branch0"]["branch7"]="Romans 8:28,KJV";
-	bmInfo["branch0"]["branch8"]="Rev 1:5,KJV";
+	bmInfo["ROOT"]["branch0"] = "Personal,personal.conf,ROOT";
+	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?],GROUP, ";
+	bmInfo["branch0"]["branch5"]="[What is the Gospel?],GROUP, ";
+	bmInfo["branch0"]["branch7"]="Romans 8:28 KJV,Romans 8:28,KJV";
+	bmInfo["branch0"]["branch8"]="Rev 1:5 KJV,Rev 1:5,KJV";
 	
-	bmInfo["branch1"]["branch2"]="Romans 1:16,KJV";
-	bmInfo["branch1"]["branch3"]="Eph 2:8,KJV";
-	bmInfo["branch1"]["branch4"]="Acts  16:31,KJV";
+	bmInfo["branch1"]["branch2"]="Romans 1:16 KJV,Romans 1:16,KJV";
+	bmInfo["branch1"]["branch3"]="Eph 2:8 KJV,Eph 2:8,KJV";
+	bmInfo["branch1"]["branch4"]="Acts 16:31 KJV,Acts 16:31,KJV";
 	
-	bmInfo["branch5"]["branch6"]="1 Cor 15:1,KJV";
+	bmInfo["branch5"]["branch6"]="1 Cor 15:1 KJV,1 Cor 15:1,KJV";
 	
 	bmInfo.Save(); 	
 }

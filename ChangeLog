@@ -1,6 +1,14 @@
+2001-07-30 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* convert old bookmarks to new on first start
+	* run setup dialog on first start
+	* preferences are applied when ok or apply button on
+	   preferences dialog is pressed.
+
 2001-07-28 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	*new preferences dialog
+	* set version to 0.4.9
+	* new preferences dialog
 	* added files gs_preferences_dlg.c and gs_preferences_dlg.h
 	* removed interface.c and interface.h	
 
@@ -18,9 +26,10 @@
 
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added a verse list dialog that pops up when you  click
+	* added a verse list dialog that pops up when you  click a
 	link in a ThML commentay that has more than one verse.
 	Thanks to SWORD ParseVerseList.
+	* added notebook tabs to Bible window
 
 2001-07-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
