@@ -23,6 +23,7 @@ BuildRequires:	gal-devel >= 0.22
 BuildRequires:	gtkhtml3-devel >= 3.0
 BuildRequires:	bonobo-devel >= 1.0
 BuildRequires:	gnome-spell
+BuildRequires: scrollkeeper >= 0.3.5
 
 %description
 Bible Study Software for the Linux community. Lookup and search Bible texts and
@@ -56,13 +57,20 @@ case "$RPM_BUILD_ROOT" in
 /var/*) rm -rf $RPM_BUILD_ROOT;;
 esac
 
+%post
+if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q -o %{_datadir}/omf/%{name}; fi
+
+%postun
+if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
+
 %files
 %defattr(-,root,root)
 %{prefix}/bin/gnomesword2
 %{prefix}/share/gnome/help/*
+%{prefix}/share/omf/%{name}
 %{prefix}/share/locale/*
 %{prefix}/share/pixmaps/*
-%doc ABOUT-NLS AUTHORS COPYING INSTALL NEWS README TODO
+%doc ABOUT-NLS AUTHORS COPYING COPYING-DOCS INSTALL NEWS README TODO
 %{prefix}/share/applications/%{name}.desktop
 
 %changelog
