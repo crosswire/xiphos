@@ -38,7 +38,7 @@
 #include "gui/sidebar.h"
 #include "gui/sidebar_dialog.h"
 #include "gui/search_dialog.h"
-#include "gui/studypad_dialog.h"
+#include "gui/studypad.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
@@ -473,7 +473,7 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 				 window);
 	} else {
 		settings.studypad_dialog_exist =
-			  gui_open_studypad_dialog(settings.studypadfilename);
+			  gui_open_studypad(settings.studypadfilename);
 	}
 }
 

@@ -46,20 +46,18 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "gui/gnomesword.h"
-#include "gui/studypad.h"
 #include "editor/editor.h"
 #include "editor/popup.h"
 #include "editor/spell.h"
-#include "editor/toolbar_style.h"
-#include "editor/toolbar_edit.h"
+#include "editor/editor-control.h"
+//#include "editor/toolbar_edit.h"
+#include "gui/gnomesword.h"
+#include "gui/studypad.h"
 #include "editor/editor_menu.h"
-//#include "editor/editor_spell.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/fileselection.h"
 #include "gui/widgets.h"
-//#include "editor/html-stream-mem.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
@@ -110,12 +108,6 @@ on_studypad_delete                        (GtkWidget       *widget,
 		g_string_free(str,TRUE);
 	}
 	return FALSE;
-}
-
-void screen_changed(GtkWidget *widget, GdkScreen *arg1, gpointer user_data)
-{
-	//g_warning("screen_changed");
-	
 }
 	
 
@@ -440,353 +432,72 @@ gint save_file_plain_text(gchar * filename, GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
- *  release
+ *   dialog_destroy
  *
  * Synopsis
- *   #include "studypad.h"
+ *   #include "studypad_dialog.h"
  *
- *   gint release(GtkWidget * widget, GdkEventButton * event,
- *					GSHTMLEditorControlData * cd)	
- *
- * Description
- *    ?????
- *
- * Return value
- *   gint
- */
-
-static gint release(GtkWidget * widget, GdkEventButton * event,
-		    GSHTMLEditorControlData * cd)
-{
-
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *  html_key_pressed
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * ecd)	
+ *   void dialog_destroy(GtkObject *object, DL_DIALOG * dlg)
  *
  * Description
- *   a key has been pressed - ecd->changed to true 
- *
- * Return value
- *   gint
- */
-
-static gint html_key_pressed(GtkWidget * html, GdkEventKey * event,
-			     GSHTMLEditorControlData * ecd)
-{
-	ecd->changed = TRUE;
-	gui_update_statusbar(ecd);
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *  html_load_done
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   void html_load_done(GtkWidget * html,
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *   ???? 
+ *    
  *
  * Return value
  *   void
  */
 
-static void html_load_done(GtkWidget * html,
-			   GSHTMLEditorControlData * ecd)
-{
-	gui_update_statusbar(ecd);
-}
-
-/******************************************************************************
- * Name
- *  on_submit
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   void on_submit(GtkHTML * html, const gchar * method,
- *		      const gchar * url, const gchar * encoding,
- *		      GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    ?????
- *
- * Return value
- *   void
- */
-
-static void on_submit(GtkHTML * html, const gchar * method,
-		      const gchar * url, const gchar * encoding,
-		      GSHTMLEditorControlData * ecd)
-{
-	/*
-	   GList *l;
-
-	   l = NULL;
-
-	   l=html->engine->form->elements;
-	   while (l != NULL) {  
-	   g_warning((gchar *) l->data);
-	   l = g_list_next(l);
-	   }
-	   g_list_free(l);
-	 */
-	g_warning(method);
-	g_warning(url);
-	g_warning(encoding);
-
-}
-
-/******************************************************************************
- * Name
- *  html_button_pressed
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    mouse button pressed in editor 
- *
- * Return value
- *   gint
- */
-
-static gint html_button_pressed(GtkWidget * html,
-				GdkEventButton * event,
-				GSHTMLEditorControlData * ecd)
-{
-	if (ecd->personal_comments)
-		settings.whichwindow = PERCOMM_WINDOW;
-	if (ecd->studypad)
-		settings.whichwindow = STUDYPAD_WINDOW;
-	switch (event->button) {
-	case 1:
-		if (event->type == GDK_2BUTTON_PRESS && ecd->obj
-		    && event->state & GDK_CONTROL_MASK) {
-			ecd->releaseId =
-			    g_signal_connect(G_OBJECT(html),
-					       "button_release_event",
-					       G_CALLBACK(release),
-					       ecd);
-
-		}
-
-		break;
-	case 2:
-		/* 
-		 * pass this for pasting 
-		 */
-	case 3:
-		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
-					     "button_press_event");
-		break;
-	}
-
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *  on_html_enter_notify_event
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   gboolean on_html_enter_notify_event(GtkWidget * widget,
- *			   GdkEventCrossing * event,
- *			   GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    mouse moved into editor - sets studypad html widget to edit mode
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_html_enter_notify_event(GtkWidget * widget,
-					   GdkEventCrossing * event,
-					   GSHTMLEditorControlData *
-					   ecd)
-{
-	if (!ecd->personal_comments && !ecd->gbs)
-		if (!gtk_html_get_editable(ecd->html))
-			gtk_html_set_editable(ecd->html, TRUE);
+static gboolean dialog_destroy (GtkObject *object, gpointer data)
+{	
+	widgets.studypad_dialog = NULL;
+	settings.studypad_dialog_exist = FALSE;	
 	return TRUE;
 }
 
 
 /******************************************************************************
  * Name
- *  gui_create_studypad_control
+ *  create_dialog
  *
  * Synopsis
- *   #include "studypad.h"
+ *   #include "studypad_dialog.h"
  *
- *   GtkWidget *gui_create_studypad_control(GtkWidget *container)	
+ *   GtkWidget *create_dialog(void)	
  *
  * Description
- *    create studypad control
+ *    
  *
  * Return value
- *   GtkWidget *
+ *   
  */
 
-GtkWidget *gui_create_studypad_control(GtkWidget * container,
-				gchar * filename)
+static GtkWidget *create_dialog(void)
 {
-/*	GtkWidget *vbox;
-	GtkWidget *vboxSP;
-	GtkWidget *hboxstyle;
-	//GtkWidget *htmlwidget;
-	GtkWidget *frame34;
-	GtkWidget *scrolledwindow17;
-	GtkWidget *toolbar;
-
-	GtkWidget *htmlwidget = gtk_html_new();
-	vboxSP = gtk_vbox_new(FALSE, 0);
-	GSHTMLEditorControlData *specd =
-	    editor_control_data_new(GTK_HTML(htmlwidget),vboxSP);
-
-#ifdef DEBUG
-	g_message("gui_create_studypad_control");
-#endif	
-
-	specd->studypad = TRUE;
-	specd->stylebar = settings.show_style_bar_sp;
-	specd->editbar = settings.show_edit_bar_sp;
-
-	gtk_widget_show(vboxSP);
-	gtk_container_add(GTK_CONTAINER(container), vboxSP);
+	GtkWidget *dialog;
+	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_object_set_data(GTK_OBJECT(dialog),"dialog",dialog);
+	gtk_widget_set_size_request(dialog, 600, 300);
+	gtk_window_set_policy(GTK_WINDOW
+			      (dialog),
+			      TRUE, TRUE, FALSE);
+	gtk_window_set_title((GtkWindow *)dialog,
+                                (const gchar*)N_("StudyPad"));
+	gtk_widget_show(dialog);
 	
-	g_signal_connect(GTK_OBJECT(container), "delete-event",
-                G_CALLBACK(on_studypad_delete),
-			   specd);
-			   
-	hboxstyle = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hboxstyle);
-	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);
-
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_box_pack_start(GTK_BOX(hboxstyle), vbox, TRUE, TRUE, 0);
-
-	//htmlwidget = gtk_html_new();
-
-	frame34 = gtk_frame_new(NULL);
-	gtk_widget_show(frame34);
-	gtk_box_pack_end(GTK_BOX(vbox), frame34, TRUE, TRUE, 0);
-
-	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow17);
-	gtk_container_add(GTK_CONTAINER(frame34), scrolledwindow17);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow17),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow17,
-                                             settings.shadow_type);
-
-	specd->htmlwidget = htmlwidget;
-	//specd->html = GTK_HTML(specd->htmlwidget);
-	gtk_widget_show(specd->htmlwidget);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
-			  specd->htmlwidget);
-
-	specd->statusbar = gtk_statusbar_new();
-	gtk_widget_show(specd->statusbar);
-	gtk_box_pack_start(GTK_BOX(vboxSP), specd->statusbar, FALSE,
-			   TRUE, 0);
-
-	specd->vbox = vboxSP;
-//	specd->pm = gui_create_editor_popup(specd);
-//	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
+	g_signal_connect(G_OBJECT(dialog), "destroy",
+                      G_CALLBACK(dialog_destroy),
+			   NULL);	 
 	
-
-	g_signal_connect(GTK_OBJECT
-			   (specd->htmlwidget),
-			   "screen-changed",
-			   G_CALLBACK(screen_changed), specd);
-	g_signal_connect(G_OBJECT(specd->htmlwidget),"key_press_event",
-			   G_CALLBACK(html_key_pressed), 
-			   specd);
-	g_signal_connect(G_OBJECT(specd->htmlwidget), "link_clicked", 
-			G_CALLBACK(gui_link_clicked),	
-			   NULL);
-	g_signal_connect(G_OBJECT(specd->htmlwidget), "on_url", 
-			G_CALLBACK(gui_url),	
-			   NULL);
-	g_signal_connect (G_OBJECT(specd->htmlwidget), "popup_menu", G_CALLBACK(html_show_popup), specd);
-	g_signal_connect (G_OBJECT(specd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed2), specd);
-	g_signal_connect_after (G_OBJECT(specd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed_after), specd);
-	
-*/
-
-/*	g_signal_connect(G_OBJECT(specd->htmlwidget),"button_press_event",
-			   G_CALLBACK(html_button_pressed), 
-			   specd);*/
-
-	/* create toolbars */
-/*	widgets.toolbar_studypad = gui_toolbar_style(specd);
-	if (settings.show_style_bar_sp)
-		gtk_widget_show(widgets.toolbar_studypad);
-	else
-		gtk_widget_hide(widgets.toolbar_studypad);
-	
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.toolbar_studypad,
-			   FALSE, FALSE, 0);
-
-	toolbar = gui_toolbar_edit(specd);
-	if (settings.show_edit_bar_sp)
-		gtk_widget_show(toolbar);
-	else
-		gtk_widget_hide(toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 0);
-*/
-	/* load last file */
-/*	if (filename) 
-		load_file(filename, specd);
-	else 
-		gtk_html_load_from_string(specd->html,"  ",2);
-		
-	editor_cd = specd;	
-	
-	new_editor_api ();
-	gtk_html_set_editor_api (GTK_HTML (specd->html), editor_api, specd);
-	//GNOME_Spell_Dictionary
-	specd->dict = spell_new_dictionary ();
-	spell_set_language (specd->html, settings.spell_language, specd);
-	gtk_html_set_editable(specd->html,TRUE);
-	gtk_html_set_inline_spelling (specd->html, TRUE);
-	//gui_new_editor_api(specd);
-	return specd->htmlwidget;
-*/
+	return dialog;	
 }
-
 
 /******************************************************************************
  * Name
- *  
+ *  gui_open_studypad
  *
  * Synopsis
- *   #include "studypad.h"
+ *   #include "studypad_dialog.h"
  *
- *   	
+ *   gint gui_open_studypad(gchar * file_name)	
  *
  * Description
  *    
@@ -797,11 +508,10 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 
 gint gui_open_studypad(gchar * file_name)
 {
-/*	widgets.studypad_dialog = create_dialog();
 
-	widgets.html_studypad =
-	  	gui_create_studypad_control(widgets.studypad_dialog,
-							  file_name);
-*/	
-	return TRUE;
+	widgets.studypad_dialog = create_dialog();
+	
+	editor_new(widgets.studypad_dialog, 
+					STUDYPAD, 
+					file_name); 
 }

@@ -55,6 +55,8 @@
 #include "table.h"
 #include "text.h"
 
+#include "main/settings.h"
+
 //#define ICONDIR "./art"
 
 /* #define DEBUG */
@@ -102,7 +104,11 @@ paste_cite (GtkWidget *mi, GSHTMLEditorControlData *cd)
 static void
 insert_link (GtkWidget *mi, GSHTMLEditorControlData *cd)
 {
-	if (cd->properties_dialog)
+	link_insert (cd, NULL);
+	
+	
+	
+/*	if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
 
 	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
@@ -114,6 +120,7 @@ insert_link (GtkWidget *mi, GSHTMLEditorControlData *cd)
 
 	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
 	gtk_html_edit_properties_dialog_set_page (cd->properties_dialog, GTK_HTML_EDIT_PROPERTY_LINK);
+*/	
 	
 }
 
@@ -266,7 +273,7 @@ link_prop_dialog (GtkWidget *mi, GSHTMLEditorControlData *cd)
 	if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
 
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"), GTKHTML_DATA_DIR"/icons/insert-link-24.png");
 
 	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
 						   GTK_HTML_EDIT_PROPERTY_LINK, _("Link"),
@@ -291,7 +298,7 @@ spell_add (GtkWidget *mi, GSHTMLEditorControlData *cd)
 
 	word = html_engine_get_spell_word (e);
 	if (word) {
-		spell_add_to_personal (cd->html, word, g_object_get_data (G_OBJECT (mi), "abbrev"), cd);
+		spell_add_to_personal (cd->html, word, settings.spell_language, cd);//g_object_get_data (G_OBJECT (mi), "abbrev")
 		g_free (word);
 	}
 	html_engine_spell_check (e);

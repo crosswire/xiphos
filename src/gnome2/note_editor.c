@@ -563,7 +563,7 @@ void gui_create_note_editor(DIALOG_DATA * d)
 			   FALSE, 0);
 	
 	d->editor = (GSHTMLEditorControlData *) 
-				editor_new_editor(vbox,PERCOM,NULL);
+				editor_new(vbox,PERCOM,NULL);
 
 
 	g_signal_connect(GTK_OBJECT(d->dialog), "destroy",
