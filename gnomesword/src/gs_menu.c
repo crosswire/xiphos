@@ -39,18 +39,11 @@
 /******************************************************************************
  * function prototypes only visible to this file
  ******************************************************************************/
-static GtkWidget* create_pmInt(GList *mods, gchar *intWindow, 
-			GtkMenuCallback cbchangemod, 
-			GtkMenuCallback mycallback);
-static GtkWidget *create_pmComments2(GList * mods);
-static GtkWidget *create_pmCommentsHtml(GList * mods,
-				GList *comDescription,
-				GList * dictmods, 
+static GtkWidget* create_pmInt(GList *mods, gchar *intWindow);
+static GtkWidget *create_pmCommentsHtml(GList *comDescription, 
 				GList *dictDescription);
-static GtkWidget *create_pmDict(GList * mods, GList *modsdesc);
-static GtkWidget* create_pmBible(GList *mods, 
-				GList * bibleDescription, 
-				GList *dictmods,
+static GtkWidget *create_pmDict(GList *modsdesc);
+static GtkWidget* create_pmBible(GList * bibleDescription,
 				GList *dictDescription);
 static GtkWidget *create_pmEditnote(GtkWidget *app, 
 		GList *mods);
@@ -59,12 +52,9 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 		gchar *labelGtkWidget, 
 		GtkMenuCallback mycallback);
 /******************************************************************************/
-
-
 extern gint	greekpage,
         	hebrewpage;
 extern SETTINGS *settings;
-//extern GS_TABS	*p_tabs;
 		
 /******************************************************************************
  * additemtognomemenu - add item to gnome menu 
@@ -175,68 +165,49 @@ addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
  * percomlist - list of personal comments modules
  ******************************************************************************/
 void createpopupmenus(GtkWidget *app, 
-				SETTINGS *settings, 
-				GList *biblelist, 
+				SETTINGS *settings,
 				GList *bibleDescription,
-				GList *commentarylist,
-				GList *comDescription, 
-				GList *dictionarylist,
+				GList *comDescription,
 				GList *dictDescription,
 				GList *percomlist) 
 {
 	GtkWidget 
 		*menu2, 
-		//*menu3, 
-		//*menu4, 
 		*menu5,
-		*menuCom,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
-	menu2 = create_pmInt(biblelist, "textComp1",
-				(GtkMenuCallback)on_1st_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module_activate); /*** not using this callback ***/
-	/*menu3 =create_pmInt(biblelist, "textComp2",
-				(GtkMenuCallback)on_2nd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module_activate); */
-	/*menu4 =create_pmInt(biblelist, "textComp3",
-				(GtkMenuCallback)on_3rd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module_activate); */
+	menu2 = create_pmInt(bibleDescription, "textComp1"); 
 	menu5 = create_pmEditnote(app, percomlist);
-	/* create pop menu for commentaries */
-	menuCom = create_pmComments2(commentarylist);
-
-	/* create popup menu for dict/lex window */
-	menuDict = create_pmDict(dictionarylist, dictDescription);
+	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
-	menuBible = create_pmBible(biblelist, bibleDescription, dictionarylist, dictDescription);	
-		
+	menuBible = create_pmBible(bibleDescription, dictDescription);	
+	/* create popup menu for commentaries window */
+	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
 	/* attach popup menus */
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
-	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");	
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->dict_tabs;
-	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->comm_tabs;
+	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
-	menuhtmlcom = create_pmCommentsHtml(commentarylist, comDescription, dictionarylist, dictDescription);	
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
-	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->comm_tabs;
+	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");	
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->dict_tabs;
 
 }
 
-/******************************************************************************
- * addmodsmenus(GList *, GList *, GList *) - add modules to view menus
+/*
+ *******************************************************************************
+ * addmodsmenus(GList *, GList *, GList *) - add modules to about mods menus
  * app - main window
  * settings - gnomesword settings structure
  * biblelist - list of Bible modules - from initSword
  * commentarylist - list of commentary modules - from initSword
  * dictionarylist - list of dict/lex modules - from initSword 
  * percomlist - list of personal comments modules
- ******************************************************************************/
-
+ *******************************************************************************
+ */
 void addmodstomenus(GtkWidget *app, 
 				SETTINGS *settings, 
 				GList *biblelist, 
@@ -247,51 +218,35 @@ void addmodstomenus(GtkWidget *app,
 				GList *dictDescription,
 				GList *percomlist) 
 {
-	gchar	//rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+	gchar	
 		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 		aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		aboutrememberlastitem3[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		//rememberlastitemCom[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		//rememberlastitemDict[80], //--  use to store last menu item so we can add the next item under it - gnome menus	
+		aboutrememberlastitem3[80], //--  use to store last menu item so we can add the next item under it - gnome menus	
 		mybuf[80];
 	gint	pg = 0;
 	GList *tmp = NULL;
-	//GList *tmp2 = NULL;
 
-//-- set main window modules and add to menus	
-	//sprintf(rememberlastitem,"%s","_View/Main Window/");
-	//sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
-	//sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
 	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
 	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
 	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
 //-- add textmods - Main Window menu
 	tmp = biblelist;
-	//tmp2 = bibleDescription;
 	while (tmp != NULL) {	
 	//-- add to menubar
-		//additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, rememberlastitem , (GtkMenuCallback)on_mainText_activate );
 		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
-		//-- remember last item - so next item will be place below it       	
-		//sprintf(rememberlastitem,"%s%s","_View/Main Window/",(gchar *) tmp->data);	
+		//-- remember last item - so next item will be place below it   
 		sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/", (gchar *) tmp->data);			
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
 //-- add commmods - commentary window menu
 	tmp = commentarylist;
-	while (tmp != NULL) {		
-		/*sprintf(mybuf,"%d",pg);
-		additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemCom, 
-				(GtkMenuCallback)on_com_select_activate);			
-		sprintf(rememberlastitemCom,"%s%s","_View/Commentary Window/",
-				(gchar *) tmp->data);	*/
+	while (tmp != NULL) {
 		additemtognomemenu(app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem2, 
 				(GtkMenuCallback)on_kjv1_activate );			
 		sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",
 				(gchar *) tmp->data);
-		//++pg;
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
@@ -302,10 +257,6 @@ void addmodstomenus(GtkWidget *app,
 		sprintf(mybuf,"%d",pg);
 		if(!strcmp((gchar *) tmp->data,"StrongsHebrew")) hebrewpage = pg;
 		if(!strcmp((gchar *) tmp->data,"StrongsGreek")) greekpage = pg;
-		/*additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemDict,
-				(GtkMenuCallback)on_dict_select_activate );		
-		sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",
-				(gchar *) tmp->data);	*/	
 		additemtognomemenu(app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem3,
 				(GtkMenuCallback)on_kjv1_activate );
@@ -315,69 +266,6 @@ void addmodstomenus(GtkWidget *app,
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
-/*	
-//-- add interlin1mods - interliniar1 window menu	
-	sprintf(rememberlastitem,"%s","_View/Interlinear1 Window/");
-	tmp = biblelist;
-	while (tmp != NULL) {
-		//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_changeint1mod_activate );
-		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Interlinear1 Window/", (gchar *) tmp->data);		
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(tmp);
-	
-//-- add interlin2mods - interliniar2 window menu	
-	sprintf(rememberlastitem,"%s","_View/Interlinear2 Window/");
-	tmp = biblelist;
-	while (tmp != NULL) {
-		//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_changeint2mod_activate);
-		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Interlinear2 Window/", (gchar *) tmp->data);		
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(tmp);	
-//-- add interlin3mods - interliniar3 window menu	
-	sprintf(rememberlastitem,"%s","_View/Interlinear3 Window/");
-	tmp = biblelist;
-	while (tmp != NULL) {
-		//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_changeint3mod_activate);
-		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Interlinear3 Window/", (gchar *) tmp->data);		
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(tmp);	
-//-- add interlin4mods - interliniar4 window menu	
-	sprintf(rememberlastitem,"%s","_View/Interlinear4 Window/");
-	tmp = biblelist;
-	while (tmp != NULL) {
-		//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_changeint4mod_activate);
-		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Interlinear4 Window/", (gchar *) tmp->data);		
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(tmp);	
-//-- add interlin5mods - interliniar5 window menu	
-	sprintf(rememberlastitem,"%s","_View/Interlinear5 Window/");
-	tmp = biblelist;
-	while (tmp != NULL) {
-		//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_changeint5mod_activate);
-		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Interlinear5 Window/", (gchar *) tmp->data);		
-		tmp = g_list_next(tmp);	
-	}
-	g_list_free(tmp);
-	*/
 }			
 
 /********************************************************************************
@@ -441,6 +329,7 @@ removemenuitems(GtkWidget * MainFrm, gchar * startitem, gint numberofitems)
 			       numberofitems);
 }
 
+/*
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmComments2(GList * mods)
 {
@@ -591,11 +480,11 @@ static GtkWidget *create_pmComments2(GList * mods)
 	gtk_object_set_data(GTK_OBJECT(pmComments2), "tooltips", tooltips);
 	return pmComments2;
 }
+*/
+
 
 //-------------------------------------------------------------------------------------------
-static GtkWidget *create_pmCommentsHtml(GList * mods, 
-						GList *comDescription, 
-						GList * dictmods, 
+static GtkWidget *create_pmCommentsHtml(GList *comDescription, 
 						GList *dictDescription)
 {
 	GtkWidget *pmCommentsHtml;
@@ -621,7 +510,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 	GtkWidget *separator22, *item1, *item3, *item4;
 	GtkTooltips *tooltips;
 	GList *tmp = NULL;
-	GList *tmp2 = NULL;
+	//GList *tmp2 = NULL;
 	gint i = 0;
 		
 	tooltips = gtk_tooltips_new();
@@ -784,8 +673,8 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module1_menu));
 	    
 	i=0;
-	tmp = dictmods;
-	tmp2 = dictDescription;
+	//tmp = dictmods;
+	tmp = dictDescription;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		item4 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -811,19 +700,14 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 				   GINT_TO_POINTER(i));
 		gtk_container_add(GTK_CONTAINER(lookup_word_menu), item3);
 		gtk_container_add(GTK_CONTAINER(lookup_selection_menu), item4);
-		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,
-			     NULL);
-		gtk_tooltips_set_tip(tooltips, item4, (gchar *) tmp2->data,
-			     NULL);	     
+		   
 		++i;
 		tmp = g_list_next(tmp);
-		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
-	g_list_free(tmp2);
 	i=0;
-	tmp = mods;
-	tmp2 = comDescription;	
+	//tmp = mods;
+	tmp = comDescription;	
 	while (tmp != NULL) {
 		item1 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item1);
@@ -837,14 +721,10 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module1_menu), item1);
-		gtk_tooltips_set_tip(tooltips, item1, (gchar *) tmp2->data,
-			     NULL);
 		++i;
 		tmp = g_list_next(tmp);
-		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
-	g_list_free(tmp2);
 
 	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
 				   GTK_SIGNAL_FUNC
@@ -879,7 +759,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 }
 
 //-------------------------------------------------------------------------------------------
-static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
+static GtkWidget *create_pmDict(GList *modsdesc)
 {
 	GtkWidget *pmDict;
 	GtkWidget *copy5;
@@ -897,7 +777,6 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 	GtkWidget *item3;
 	GtkTooltips *tooltips;
 	GList *tmp = NULL;
-	GList *tmp2 = NULL;
 	gint i = 0;
 	
 	tooltips = gtk_tooltips_new();
@@ -1000,9 +879,8 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 				  view_module2_menu);
 	view_module2_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module2_menu));
-	    
-	tmp = mods;
-	tmp2 = modsdesc;
+	 
+	tmp = modsdesc;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item3);
@@ -1017,14 +895,10 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module2_menu), item3);
-		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,
-			     NULL);
 		++i;
 		tmp = g_list_next(tmp);
-		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
-	g_list_free(tmp2);
   	gtk_signal_connect (GTK_OBJECT (copy5), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlDict");
@@ -1033,10 +907,7 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
                       	(gchar *)"htmlDict");   
 	gtk_signal_connect(GTK_OBJECT(lookup_word1), "activate",
 			   GTK_SIGNAL_FUNC(on_html_lookup_selection_activate),
-			   (gchar *)"htmlDict");                      	          	
-/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), 
-				(gchar *)"2");*/
+			   (gchar *)"htmlDict");    
 	gtk_signal_connect(GTK_OBJECT(about_this_module5), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
 			   "dictionary");
@@ -1051,9 +922,7 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 /*****************************************************************************
  *  popup menu for main bible window
  *****************************************************************************/
-static GtkWidget* create_pmBible(GList *textmods, 
-				GList *bibleDescription, 
-				GList *dictmods, 
+static GtkWidget* create_pmBible(GList *bibleDescription, 
 				GList *dictDescription)
 {
 	GtkWidget *pmBible;
@@ -1080,7 +949,6 @@ static GtkWidget* create_pmBible(GList *textmods,
 	GtkTooltips *tooltips;
 	GtkWidget *viewtext;
 	GList *tmp = NULL;
-	GList *tmp2 = NULL;
 	gint i = 0;
 	
 	tooltips = gtk_tooltips_new();
@@ -1219,8 +1087,7 @@ static GtkWidget* create_pmBible(GList *textmods,
   	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 
 	i=0;
-	tmp = dictmods;
-	tmp2 = dictDescription;
+	tmp = dictDescription;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		item4 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -1246,20 +1113,13 @@ static GtkWidget* create_pmBible(GList *textmods,
 				   GINT_TO_POINTER(i));
 		gtk_container_add(GTK_CONTAINER(lookup_word_menu), item3);
 		gtk_container_add(GTK_CONTAINER(lookup_selection_menu), item4);
-		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,
-			     NULL);
-		gtk_tooltips_set_tip(tooltips, item4, (gchar *) tmp2->data,
-			     NULL);	     
 		++i;
 		tmp = g_list_next(tmp);
-		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
-	g_list_free(tmp2);
 
 	i=0;
-	tmp = textmods;
-	tmp2 = bibleDescription;
+	tmp = bibleDescription;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item3);
@@ -1274,17 +1134,11 @@ static GtkWidget* create_pmBible(GList *textmods,
 				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module3_menu), item3);
-		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,
-			     NULL);
 		++i;
 		tmp = g_list_next(tmp);
-		tmp2 = g_list_next(tmp2);
 	}
-	g_list_free(tmp);
-	g_list_free(tmp2);
-	
-	
-	//ns->html_name = "htmlTexts";
+	g_list_free(tmp);	
+	/*** these two are for using the current dictionary for lookup ***/
 	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_word_activate),
@@ -1293,17 +1147,12 @@ static GtkWidget* create_pmBible(GList *textmods,
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_selection_activate),
 				   GINT_TO_POINTER(1001));
-/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"0");*/
 	gtk_signal_connect(GTK_OBJECT(show_tabs), "activate",
-			   GTK_SIGNAL_FUNC(on_show_tabs_activate), (gchar *)"nbTextMods");
-	
+			   GTK_SIGNAL_FUNC(on_show_tabs_activate), 
+			(gchar *)"nbTextMods");	
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");
-        /*  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
-                      	GTK_SIGNAL_FUNC (on_html_lookup_selection_activate),
-                      	(gchar *)"htmlTexts");   */
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module_activate),
                       	"Bible");
@@ -1322,8 +1171,7 @@ static GtkWidget* create_pmBible(GList *textmods,
  * GtkMenuCallback mycallback - callback for copy text
  ******************************************************************************/
 static GtkWidget*
-create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod, 
-		GtkMenuCallback mycallback)
+create_pmInt(GList *mods, gchar *intWindow)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
@@ -1331,7 +1179,6 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 	GtkWidget *show_strongs;
 	GtkWidget *show_morphs;
 	GtkWidget *show_footnotes;
-	//GtkWidget *about_this_module1;
 	GtkWidget *separator2;
 	GtkTooltips *tooltips;
 

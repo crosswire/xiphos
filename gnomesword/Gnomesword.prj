@@ -85,7 +85,6 @@ module.source.files=\
 	gs_search_cb.cpp\
 	gs_abouts.c\
 	gs_abouts.h\
-	gs_rwphtml.cpp\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
