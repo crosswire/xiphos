@@ -36,6 +36,7 @@
 #include "gui/info_box.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
+#include "gui/dialog.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"
@@ -491,35 +492,31 @@ static void on_btn_save_clicked(GtkButton * button,
 static void on_btn_delete_clicked(GtkButton * button,
 					PC_DATA *p)
 {
-	GtkWidget *label1, *label2, *label3, *msgbox;
-	gint answer = -1;
-	gchar *key;
-	
 	if(p->ec->personal_comments) {
-		key = get_percomm_key();
+		GS_DIALOG *info;
+		gint test;
+		gchar *key;
 		
-		msgbox = gui_create_info_box();
-		label1 = gui_lookup_widget(msgbox, "lbInfoBox1");
-		label2 = gui_lookup_widget(msgbox, "lbInfoBox2");
-		label3 = gui_lookup_widget(msgbox, "lbInfoBox3");
-		gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
-		gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
-		gtk_label_set_text(GTK_LABEL(label3),key);
-	
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		switch (answer) {
-		case 0:
+		key = get_percomm_key();		
+		info = gui_new_dialog();
+		info->label_top = N_("Are you sure you want");
+		info->label_middle = N_("to delete the note for");
+		info->label_bottom = key;
+		info->yes = TRUE;
+		info->no = TRUE;
+		
+		test = gui_gs_dialog(info);
+		if (test == GS_YES) {	
 			delete_percomm_note();
-			break;
-		default:
-			break;
+			gui_display_percomm(key);
 		}
 		settings.percomverse = key;
 		p->ec->changed = FALSE;
 		update_statusbar(p->ec);
-		free(key);
+		g_free(info);
+		g_free(key);
 	}
+	
 }
 
 /******************************************************************************

@@ -724,10 +724,7 @@ static void on_showtabs_activate(GtkMenuItem *menuitem, GBS_DATA *g)
 
 static void on_unlock_key_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 {
-	GtkWidget *dlg;
-	
-	dlg = gui_create_cipher_key_dialog(g->mod_name);
-	gtk_widget_show(dlg);
+	//gui_add_cipher_key(g->mod_name);
 }
 
 

@@ -463,10 +463,7 @@ void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
 
 static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
-	GtkWidget *dlg;
-	
-	dlg = gui_create_cipher_key_dialog(d->mod_name);
-	gtk_widget_show(dlg);
+	//gui_add_cipher_key(d->mod_name);
 }
 
 /******************************************************************************

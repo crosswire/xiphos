@@ -549,6 +549,7 @@ char *backend_get_module_font_size(char *mod_name)
 		return NULL;
 }
 
+
 int backend_module_is_locked(char *mod_name)
 {
 	SectionMap::iterator section;
@@ -585,8 +586,7 @@ int backend_module_is_locked(char *mod_name)
 						else
 							retval = true;
 						delete myConfig;
-						closedir(dir);
-						return retval;
+						break;
 					}
 				}
 				delete myConfig;
@@ -594,7 +594,7 @@ int backend_module_is_locked(char *mod_name)
 		}
 	}
 	closedir(dir);
-	return false;
+	return retval;
 }
 
 char *backend_get_cipher_key(char *mod_name)
@@ -629,13 +629,13 @@ char *backend_get_cipher_key(char *mod_name)
 						    (entry->second.
 						     c_str()) ==
 						    CIPHER_KEY_LEN)
-							retval = (char*)entry->second.
-						     c_str();
+							retval = strdup((char*)entry->second.
+						     c_str());
 						else
 							retval = NULL;
+						
 						delete myConfig;
-						closedir(dir);
-						return retval;
+						break;
 					}
 				}
 				delete myConfig;
@@ -643,8 +643,52 @@ char *backend_get_cipher_key(char *mod_name)
 		}
 	}
 	closedir(dir);
-	return NULL;	
+	return retval;
 }
+
+int backend_has_cipher_tag(char *mod_name)
+{
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	DIR *dir;
+	char buf[256], conffile[256];
+	struct dirent *ent;
+	int retval = 0;
+
+	sprintf(buf, "%s", mainMgr->configPath);
+	dir = opendir(buf);
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile, "%s/%s", buf,
+					ent->d_name);
+				SWConfig *myConfig =
+				    new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(mod_name);
+				if (section != myConfig->Sections.end()) {
+					entry =
+					    section->second.
+					    find("CipherKey");
+					if (entry !=
+					    section->second.end()) {
+						retval = 1;
+					}
+					else 
+						retval = 0;
+					delete myConfig;
+					break;
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+	return retval;	
+}
+
 
 /******************************************************************************
  * Name

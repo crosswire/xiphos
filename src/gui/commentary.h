@@ -41,14 +41,17 @@ struct _commdata {
 	GtkWidget *showtoolbar;
 	gchar *mod_name;
 	gchar *search_string;
+	gchar *cipher_key;
+	gchar *cipher_old;
 	gchar key[80];
 	gint modnum;
-	gboolean has_key;
+	gboolean is_locked;
 	gboolean book_heading;
 	gboolean chapter_heading;
 	COMMFindDialog *find_dialog;
 };
 
+void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c);
 void gui_set_commentary_page_and_key(gint page_num,
 				     gchar * key);
 void gui_display_commentary(gchar * key);

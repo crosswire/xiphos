@@ -36,6 +36,7 @@
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
+#include "gui/dialog.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -488,12 +489,12 @@ static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 
 /******************************************************************************
  * Name
- *  on_unlock_key_activate
+ *  gui_unlock_bibletext
  *
  * Synopsis
  *   #include "_bibletext.h"
  *
- *  void on_unlock_key_activate(GtkMenuItem * menuitem,TEXT_DATA * t) 	
+ *  void gui_unlock_bibletext(GtkMenuItem * menuitem,TEXT_DATA * t) 	
  *
  * Description
  *   opens add cipher key dialog
@@ -502,12 +503,19 @@ static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void on_unlock_key_activate(GtkMenuItem * menuitem,
-				   TEXT_DATA * t)
+void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	GtkWidget *dlg = gui_create_cipher_key_dialog(t->mod_name);
-	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
+	gchar *cipher_key;
+	
+	g_warning(t->cipher_old);
+	
+	cipher_key = gui_add_cipher_key(t->mod_name, t->cipher_old);
+	if(cipher_key){
+		t->cipher_key = cipher_key;
+		cur_t = t;
+		gui_module_is_locked_display(t->html, 
+				t->mod_name, t->cipher_key);		
+	}
 }
 
 /******************************************************************************
@@ -680,7 +688,7 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 	/*
 	 * if module has cipher key include this item
 	 */
-	if (t->is_locked) {
+	if (t->cipher_old || t->is_locked) {
 		GtkWidget *add_module_key;
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);
@@ -708,7 +716,7 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 		gtk_signal_connect(GTK_OBJECT(add_module_key),
 				   "activate",
 				   GTK_SIGNAL_FUNC
-				   (on_unlock_key_activate), t);
+				   (gui_unlock_bibletext), t);
 	}
 
 	tmp = get_list(DICT_DESC_LIST);
@@ -1351,6 +1359,7 @@ static void create_text_pane(TEXT_DATA * t)
 {
 	GtkWidget *vbox;
 	GtkWidget *toolbar;
+	GtkWidget *frame_text;
 	GtkWidget *scrolledwindow;
 
 	t->frame = gtk_frame_new(NULL);
@@ -1373,6 +1382,7 @@ static void create_text_pane(TEXT_DATA * t)
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "t->frame_toolbar", t->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_frame_set_shadow_type (GTK_FRAME (t->frame_toolbar), GTK_SHADOW_NONE);
 	//gtk_widget_show(t->frame_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox), t->frame_toolbar, FALSE, TRUE,
 			   0);
@@ -1396,14 +1406,24 @@ static void create_text_pane(TEXT_DATA * t)
 				      on_t_btn_toggled);
 
 
+	frame_text = gtk_frame_new(NULL);
+	gtk_widget_ref(frame_text);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "frame_text", frame_text,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame_text);
+	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE,
+			   0);
+			   
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindow", scrolledwindow,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
-			   0);
+	gtk_container_add(GTK_CONTAINER(frame_text), scrolledwindow);
+	/*gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
+			   0);*/
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
@@ -1420,7 +1440,7 @@ static void create_text_pane(TEXT_DATA * t)
 
 
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
+			   GTK_SIGNAL_FUNC(gui_link_clicked), (TEXT_DATA *) t);
 	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
 			   GTK_SIGNAL_FUNC(gui_url),
 			   (gpointer) widgets.app);
@@ -1514,6 +1534,12 @@ void gui_display_text(gchar * key)
 	if (!cur_t->is_locked) 
 		chapter_display(cur_t->html, cur_t->mod_name,
 			cur_t->tgs, key, TRUE);
+	else if(cur_t->cipher_key) {
+		g_warning(cur_t->cipher_key);
+		gui_module_is_locked_display(cur_t->html, 
+				cur_t->mod_name, cur_t->cipher_key);
+		
+	}
 }
 
 /******************************************************************************
@@ -1538,6 +1564,8 @@ void gui_add_new_text_pane(TEXT_DATA * t)
 
 	gui_get_module_global_options(t);
 	create_text_pane(t);
+	if(t->is_locked)
+		gui_module_is_locked_display(t->html, t->mod_name, t->cipher_key);
 	popupmenu = create_pm_text(t);
 	gnome_popup_menu_attach(popupmenu, t->html, NULL);
 }
@@ -1625,15 +1653,27 @@ void gui_setup_text(GList * mods)
 		t->mod_num = count;
 		t->search_string = NULL;
 		t->key = NULL;
+		t->cipher_key = NULL;
 		t->find_dialog = NULL;
-		t->is_locked = module_is_locked(t->mod_name);
+		
+		if(has_cipher_tag(t->mod_name)) {
+			t->is_locked = module_is_locked(t->mod_name);
+			t->cipher_old = get_cipher_key(t->mod_name);
+		}
+		
+		else {
+			
+			t->is_locked = 0;
+			t->cipher_old = NULL;
+		}
+		
 		t->frame = NULL;
 		add_vbox_to_notebook(t);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);
 		++count;
 		tmp = g_list_next(tmp);
 	}
-	//g_warning("count = %d module = %s",count,t->mod_name);
+	
 	gtk_signal_connect(GTK_OBJECT(widgets.notebook_text),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
@@ -1673,6 +1713,16 @@ void gui_shutdown_text(void)
 		 */
 		if (t->find_dialog)
 			g_free(t->find_dialog);
+		/* 
+		 * free any cipher keys 
+		 */
+		if(t->cipher_key)
+			g_free(t->cipher_key);
+		if(t->cipher_old)
+			g_free(t->cipher_old);
+		/* 
+		 * free global options 
+		 */
 		g_free(t->tgs);
 		/* 
 		 * free each TEXT_DATA item created 
