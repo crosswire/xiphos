@@ -5961,8 +5961,13 @@ List item (roman)
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GtkCombo:entry</child_name>
-	    <name>combo-entry10</name>
+	    <name>cbeModule</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_cbeModule_changed</handler>
+	      <last_modification_time>Tue, 22 May 2001 16:49:28 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -5983,7 +5988,15 @@ List item (roman)
 	</widget>
 
 	<widget>
-	  <class>Placeholder</class>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>btnSync</name>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnSync_clicked</handler>
+	    <last_modification_time>Tue, 22 May 2001 16:50:36 GMT</last_modification_time>
+	  </signal>
+	  <label>Sync</label>
 	</widget>
       </widget>
 
@@ -5991,7 +6004,7 @@ List item (roman)
 	<class>GtkToolbar</class>
 	<name>toolbar30</name>
 	<orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	<type>GTK_TOOLBAR_BOTH</type>
+	<type>GTK_TOOLBAR_ICONS</type>
 	<space_size>5</space_size>
 	<space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
 	<relief>GTK_RELIEF_NORMAL</relief>
@@ -6015,8 +6028,13 @@ List item (roman)
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GtkCombo:entry</child_name>
-	    <name>combo-entry11</name>
+	    <name>cbeBook</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_cbeBook_changed</handler>
+	      <last_modification_time>Tue, 22 May 2001 18:22:03 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -6042,8 +6060,13 @@ List item (roman)
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GtkCombo:entry</child_name>
-	    <name>combo-entry12</name>
+	    <name>cbeChapter</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_cbeChapter_changed</handler>
+	      <last_modification_time>Tue, 22 May 2001 18:22:22 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -6069,8 +6092,13 @@ List item (roman)
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GtkCombo:entry</child_name>
-	    <name>entry2</name>
+	    <name>cbeVerse</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_cbeVerse_changed</handler>
+	      <last_modification_time>Tue, 22 May 2001 18:23:03 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -6079,7 +6107,17 @@ List item (roman)
 	</widget>
 
 	<widget>
-	  <class>Placeholder</class>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>btnGotoVerse</name>
+	  <tooltip>Go to verse</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnGotoVerse_clicked</handler>
+	    <last_modification_time>Tue, 22 May 2001 18:27:23 GMT</last_modification_time>
+	  </signal>
+	  <label>button7</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_JUMP_TO</stock_pixmap>
 	</widget>
       </widget>
 

@@ -40,8 +40,10 @@
 #include <swmodule.h>
 #include <swmgr.h>
 #include <versekey.h>
-#include <thmlgbf.h>
-#include <gbfplain.h>
+//#include <thmlgbf.h>
+//#include <gbfplain.h>
+#include <gal/widgets/e-unicode.h>
+
 
 #include "gs_display.h"
 #include "support.h"
@@ -137,7 +139,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	strbuf = g_string_new("");
 	/* show verse ref in text widget  */
 	g_string_sprintf(strbuf,
-			 "<B><FONT COLOR=\"#000FCF\"><A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
+			 "<B><FONT COLOR=\"#000FCF\" SIZE=\"+2\"><A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 			 imodule.Name(), buf, imodule.Name(),
 			 imodule.KeyText());
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -346,7 +348,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-	//bool gbf = false;
+	bool utf = false;
 	gint len;
 	gchar *sourceformat;
 	char *Buf, *modName;	
@@ -358,6 +360,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		if ((eit = (*sit).second.find("Font")) !=
 		    	(*sit).second.end()) {
 				font = (char *) (*eit).second.c_str();
+				g_warning(font);
 		}
 		/*
 		eit = (*sit).second.find("SourceType");
@@ -368,7 +371,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		*/
 	} 
 	(const char *) imodule;
-	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
+	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\" SIZE=\"+2\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
@@ -378,25 +381,34 @@ char InterlinearDisp::Display(SWModule & imodule)
 	if (!stricmp(font, "Symbol")) {
 		strbuf = g_string_new("<FONT FACE=\"symbol\">");
 	} else if (!stricmp(font, "greek1")) { 
-		strbuf = g_string_new("<FONT SIZE=\"+3\" FACE=\"greek1\">");
+		strbuf = g_string_new("<DIV class=\"Abstract\"><FONT FACE=\"greek1\">");
 	} else if (!stricmp(font, "BSTHebrew")) {
-		strbuf = g_string_new("<FONT FACE=\"bsthebrew\">");
+		strbuf = g_string_new("<FONT FACE=\"bsthebrew\">");		
+	} else if (!stricmp(font, "arial unicode ms")) {
+		strbuf = g_string_new("<FONT FACE=\"arial unicode ms\">");
+		utf = TRUE;
 	} else {
 		strbuf = g_string_new("<FONT COLOR=\"#000000\" >");
 	}
 	/* body */
-	strbuf = g_string_append(strbuf, (const char *) imodule);
+	/*if(utf){
+		gchar *tmpstr;		
+		tmpstr = e_utf8_from_gtk_string (gtkText, (const char *) imodule);
+		strbuf = g_string_append(strbuf, tmpstr);
+		g_warning("unicode\\n");
+	} else */
+		strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */
 	if (!stricmp(font, "Symbol")) {
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
+		strbuf = g_string_append(strbuf, "</FONT><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else if (!stricmp(font, "greek1")) {
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
+		strbuf = g_string_append(strbuf, "</FONT></div><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else if (!stricmp(font, "BSTHebrew")) {
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
+		strbuf = g_string_append(strbuf, "</FONT><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else {

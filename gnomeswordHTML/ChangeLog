@@ -1,3 +1,8 @@
+2001-05-14 Terry Biggs <tbiggs@users.sourceforge.net>
+ 
+	* added gs_viewtext_dlg.c and gs_viewtext_dlg.h
+	* changed gs_viewcomm.* and gs_viewdict.* to gs_viewcomm_dlg.* and gs_viewdict_dlg.*
+
 2001-04-17 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* add html directory with code form the GtkHTML editor-control
