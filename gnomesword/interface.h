@@ -1190,6 +1190,11 @@ on_btnSPnew_clicked                    (GtkButton       *button,
                                         gpointer         user_data);
 
 
+void
+on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+
 #ifdef __cplusplus
 }
 #endif

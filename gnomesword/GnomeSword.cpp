@@ -57,6 +57,7 @@ SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *GBFcomDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *GBFsearchDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Testament using GtkText
+SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
 
 SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
 SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
@@ -196,6 +197,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	GBFsearchDisplay =0; // set in create
 	percomDisplay   = 0;// set in create
 	RWPDisplay			= 0;
+	FPNDisplay			= 0;
 
 
 //	gtk_rc_parse( "gsword.rc" );
@@ -217,6 +219,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
 	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
+	FPNDisplay = new GTKRWPDisp(lookup_widget(mainform,"textComments"));
 
 //----------------------------------------------------------------------- set text windows to word warp
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"moduleText")) , TRUE );
@@ -256,6 +259,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		}
 		else if (!strcmp((*it).second->Type(), "Commentaries")) //-- set commentary modules and add to notebook
 		{
+			curcomMod = (*it).second;
 			havecomm = true; //-- we have at least one commentay module
 			++compages; //-- how many pages do we have
 			curcomMod = (*it).second;
@@ -272,8 +276,13 @@ initSword(GtkWidget *mainform,  //-- apps main form
 				curcomMod->Disp(GBFcomDisplay);
 			else if(!strcmp(curcomMod->Name(),"RWP"))
 			  curcomMod->Disp(RWPDisplay);
+			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
+			{   				 	
+				 	if(settings->formatpercom) curcomMod->Disp(RWPDisplay);
+				 	else curcomMod->Disp(comDisplay);
+			}			  		
 			else
-				curcomMod->Disp(comDisplay); 				
+				curcomMod->Disp(comDisplay);
 		}
 		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) //-- set dictionary modules and add to notebook
 		{	
@@ -301,7 +310,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
 			{
 				 	percomMod = (*it).second;
-				 	percomMod->Disp(percomDisplay);
+				 	if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formattec display
+				 	else percomMod->Disp(percomDisplay);                     //-- else standard displey
 				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate); //-- add module to popup menu
 				 	usepersonalcomments = true; //-- this does nothing now
 				 	gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
@@ -1194,12 +1204,14 @@ editnoteSWORD(bool editbuttonactive) //-- someone clicked the note edit button
 {
  	if(editbuttonactive)
 	{
+			percomMod->Disp(percomDisplay);
 			gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
 			gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 			noteModified = FALSE;	 //-- we just turned edit mode on no changes yet
 	}
 	else
 	{
+			if(settings->formatpercom) percomMod->Disp(FPNDisplay);
 			gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), FALSE); //-- set text widget to not editable
 			gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 			//if(noteModified) ;
@@ -1391,7 +1403,8 @@ openpropertiesbox(void)    //-- someone clicked properties
 	red = settings->currentverse_red;  //-- get color from settings structure
 	green = settings->currentverse_green;
 	blue =settings->currentverse_blue;
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); //-- set color of current verse color picker button	
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); //-- set color of current verse color picker button
+	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; //-- set Personal note format check button	
 	gtk_widget_show(Propertybox); //-- show propertybox
 }
 
@@ -1477,3 +1490,17 @@ newSP(GtkWidget *text) //--  start new file in studypad
 	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
 	file_changed = false;	
 }
+
+//-------------------------------------------------------------------------------------------
+void
+setformatoption(GtkWidget *button)
+{
+   settings->formatpercom = GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
+   if(settings->formatpercom)
+   {
+   		//percomMod->Disp(FPNDisplay);
+   		
+   }
+}
+
+
