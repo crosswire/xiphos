@@ -655,6 +655,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
+/*
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Main Window Hints"),
 	 N_("Show/Hide Hints in text windows"),
@@ -662,6 +663,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
+*/
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Bible Texts"),
 	 N_("Show/Hide Bible texts window"),
@@ -835,57 +837,15 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 void gui_create_main_menu(GtkWidget * app)
 {
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
-/*
-	gui_add_mods_to_menus(get_list(TEXT_LIST),
-			      _("_File/Open Bibletext Dialog/"),
-			      (GtkMenuCallback)
-			      on_bibletext_item_activate);
-
-	gui_add_mods_to_menus(get_list(COMM_LIST),
-			      _("_File/Open Commentary Dialog/"),
-			      (GtkMenuCallback)
-			      on_commentary_item_activate);
-
-	gui_add_mods_to_menus(get_list(DICT_LIST),
-			      _("_File/Open Dictionary Dialog/"),
-			      (GtkMenuCallback)
-			      on_dictlex_item_activate);
-
-	gui_add_mods_to_menus(get_list(GBS_LIST),
-			      _("_File/Open Book Dialog/"),
-			      (GtkMenuCallback) on_book_item_activate);
-	*/
-	widgets.viewtexts_item = view1_menu_uiinfo[4].widget;
-	widgets.viewcomms_item = view1_menu_uiinfo[5].widget;
-	widgets.viewdicts_item = view1_menu_uiinfo[6].widget;
-	widgets.versestyle_item = view1_menu_uiinfo[8].widget;
+	
+	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
+	widgets.viewcomms_item = view1_menu_uiinfo[3].widget;
+	widgets.viewdicts_item = view1_menu_uiinfo[4].widget;
+	widgets.versestyle_item = view1_menu_uiinfo[6].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
-
-	/*gtk_menu_item_right_justify(GTK_MENU_ITEM
-				    (menubar1_uiinfo[4].widget));*/
-	//gtk_widget_set_sensitive(help1_menu_uiinfo[0].widget, FALSE);
-/*
-	gui_add_mods_to_menus(get_list(TEXT_LIST),
-			      _
-			      ("_Help/About Sword Modules/Bible Texts/"),
-			      (GtkMenuCallback) gui_about_activate);
-
-	gui_add_mods_to_menus(get_list(COMM_LIST),
-			      _
-			      ("_Help/About Sword Modules/Commentaries/"),
-			      (GtkMenuCallback) gui_about_activate);
-
-	gui_add_mods_to_menus(get_list(DICT_LIST),
-			      _
-			      ("_Help/About Sword Modules/Dictionaries-Lexicons/"),
-			      (GtkMenuCallback) gui_about_activate);
-
-	gui_add_mods_to_menus(get_list(GBS_LIST),
-			      _("_Help/About Sword Modules/Books/"),
-			      (GtkMenuCallback) gui_about_activate);
-*/
+	
 	gtk_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
 			   G_CALLBACK(on_verse_style1_activate),
