@@ -349,26 +349,9 @@ static void change_viewer_page(GtkWidget *notebook, gint page)
  *   void
  */
 
-static void show_search_results_in_main(gboolean show, gchar *key)
+static void show_search_results_in_main(gchar *key)
 {
-
-	if (show) {
-		gui_change_module_and_key(p_so->module_name, key);
-		/*if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
-			gui_change_module_and_key(p_so->module_name, key);
-		}
-
-		else if (GTK_TOGGLE_BUTTON(p_so->ckbPerCom)->active) {
-			gui_change_module_and_key(p_so->module_name, key);
-		}
-
-		else if (GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {
-			gui_change_module_and_key(p_so->module_name, key);
-		}
-
-		else
-			gui_change_verse(key);*/
-	}
+	gui_change_module_and_key(p_so->module_name, key);
 }
 
 /******************************************************************************
@@ -396,7 +379,6 @@ static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &key);
 	settings.displaySearchResults = TRUE;
 	
-	//display_search_results_item(key);
 	text = get_search_results_text(p_so->module_name, key);
 	if(text) {
 		entry_display(sv->html_widget, p_so->module_name,
@@ -404,8 +386,8 @@ static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
 		free(text);
 	}
 	if (settings.showinmain)
-		show_search_results_in_main(settings.showinmain,key);
-	settings.displaySearchResults = FALSE;
+		show_search_results_in_main(key);
+	settings.displaySearchResults = FALSE;	
 }
 
 /******************************************************************************
@@ -428,7 +410,7 @@ static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
 static void on_btnSBSaveVL_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	gui_verselist_to_bookmarks(sblist);
+	gui_verselist_to_bookmarks(sblist,p_so->module_name);
 }
 
 /******************************************************************************

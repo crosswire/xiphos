@@ -68,28 +68,21 @@ void module_name_from_description(char *mod_name, char *description);
 void save_module_key(char * mod_name, char * key);
 const char *get_sword_version(void);
 char *get_module_description(char * mod_name);
-const char *get_book_from_key(char *key);
-int get_chapter_from_key(char *key);
-int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
 GList *get_verse_list(char* module_name, char *verse_list);
 int module_is_locked(char * mod_name);
 char *get_cipher_key(char *mod_name);
 int has_cipher_tag(char *mod_name);
-char *get_valid_key(char *key);
 int get_module_number(char *module_name, char *module_type);
 char *get_module_text(char * mod_name, char * key);
 char *get_search_results_text(char * mod_name, char * key);
 int create_properties_from_setup(void);
 char *get_path_to_mods(void);
-GList *get_list_of_mods_by_type(char *mod_type);
 char *get_mod_about_info(char * mod_name);
 int check_for_module(char * mod_name);
 void init_sword(void);
 void shutdown_sword(void);
 char *get_striptext(char *mod_name, char *key);
-const unsigned int chapter_count(char *key);
-const unsigned int verse_count(char *key);
 
 #ifdef __cplusplus
 }

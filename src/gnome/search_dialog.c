@@ -37,7 +37,10 @@
 #include "gui/dialog.h"
 
 #include "main/search.h"
+#include "main/configs.h"
 #include "main/lists.h"
+#include "main/key.h"
+#include "main/module.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/commentary.h"
@@ -120,6 +123,42 @@ static SEARCH_DIALOG search;
 static gboolean is_running = FALSE;
 
 
+
+/******************************************************************************
+ * Name
+ *   gui_add_to_found_list
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void gui_add_to_found_list(gchar * result_text, gchar * module)
+ *
+ * Description
+ *   loads result_text (key) and modlue (name) to the results html widget
+ *   we got here from  
+ *   on_button_begin_search_clicked -> 
+ *   do_dialog_search -> 
+ *   backend_do_dialog_search ->
+ *   add_to_found_list ->
+ *
+ * Return value
+ *   void
+ */
+
+static void add_to_found_list(gchar * result_text, gchar * module)
+{
+	gchar buf[256], *utf8str;
+	gint utf8len;
+
+	sprintf(buf,
+		"&nbsp; <A HREF=\"version=%s passage=%s\"NAME=\"%s\" >%s, %s</A><br>",
+		module, result_text, module, module, result_text);
+	utf8str = e_utf8_from_gtk_string(search.results_html, buf);
+	utf8len = strlen(utf8str);
+	if (utf8len) {
+		gui_display_html(search.results_html, utf8str, utf8len);
+	}
+}
 /******************************************************************************
  * Name
  *   get_current_list
@@ -283,20 +322,17 @@ static void button_clean(GtkButton * button, gpointer user_data)
 
 static gchar *get_custom_range_from_name(gchar * name)
 {
-	GList *tmp = NULL;
 	gchar *buf;
-	CUSTOM_RANGE *r;
-
-	tmp = search.rangelist;
-	while (tmp != NULL) {
-		r = (CUSTOM_RANGE *) tmp->data;
-		buf = r->label;
-		if (!strcmp(buf, name))
-			return g_strdup(r->range);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	return NULL;
+	
+	open_config_file(settings.fnconfigure);
+	buf = (gchar*)get_config_value("Custom Ranges", name);	
+	close_config_file();
+	
+	g_warning(buf);
+	if(buf)
+		return buf;
+	else
+		return NULL;
 
 }
 
@@ -322,7 +358,7 @@ static GList *get_custom_list_from_name(gchar * name)
 	GList *tmp = NULL;
 	GList *items = NULL;
 	gchar *buf, *mod_list = NULL;
-	CUSTOM_MODLIST *r;
+	CUSTOM_LIST *r;
 	gchar *t;
 	gchar *token;
 
@@ -330,10 +366,10 @@ static GList *get_custom_list_from_name(gchar * name)
 	t = ",";
 	tmp = search.modlists;
 	while (tmp != NULL) {
-		r = (CUSTOM_MODLIST *) tmp->data;
-		//g_warning("mod list = %s",r->modules);
+		r = (CUSTOM_LIST *) tmp->data;
+		//g_warning("mod list = %s",r->value);
 		buf = r->label;
-		mod_list = g_strdup(r->modules);
+		mod_list = g_strdup(r->value);
 		if (!strcmp(buf, name)) {
 			token = strtok(mod_list, t);
 			++search.module_count;
@@ -440,15 +476,15 @@ static void add_ranges(void)
 	GList *tmp = NULL;
 	GList *items = NULL;
 	gchar *buf[2];
-	CUSTOM_RANGE *r;
+	CUSTOM_LIST *r;
 
 	gtk_clist_clear(GTK_CLIST(search.clist_range));
 	tmp = search.rangelist;
 	while (tmp != NULL) {
-		r = (CUSTOM_RANGE *) tmp->data;
-		//g_warning("on load %s = %s", r->label, r->range);
+		r = (CUSTOM_LIST *) tmp->data;
+		//g_warning("on load %s = %s", r->label, r->value);
 		buf[0] = r->label;
-		buf[1] = r->range;
+		buf[1] = r->value;
 
 		items = g_list_append(items, (gchar *) r->label);
 		search.range_rows =
@@ -487,15 +523,15 @@ static void add_modlist(void)
 	GList *tmp = NULL;
 	GList *items = NULL;
 	gchar *buf[2];
-	CUSTOM_MODLIST *r;
+	CUSTOM_LIST *r;
 
 	gtk_clist_clear(GTK_CLIST(search.module_lists));
 	tmp = search.modlists;
 	while (tmp != NULL) {
-		r = (CUSTOM_MODLIST *) tmp->data;
-		//g_warning("on load %s = %s", r->label, r->range);
+		r = (CUSTOM_LIST *) tmp->data;
+		//g_warning("on load %s = %s", r->label, r->value);
 		buf[0] = r->label;
-		buf[1] = r->modules;
+		buf[1] = r->value;
 
 		items = g_list_append(items, (gchar *) r->label);
 		search.list_rows =
@@ -672,18 +708,17 @@ static void set_up_search(void)
 
 static void on_button_close(GtkButton * button, gpointer user_data)
 {
-	CUSTOM_RANGE *r;
-	CUSTOM_MODLIST *m;
+	CUSTOM_LIST *r;
 	GList *tmp = NULL;
 
 	is_running = FALSE;
 
 	tmp = g_list_first(search.rangelist);
 	while (tmp != NULL) {
-		r = (CUSTOM_RANGE *) tmp->data;
+		r = (CUSTOM_LIST *) tmp->data;
 		g_free(r->label);
-		g_free(r->range);
-		g_free((CUSTOM_RANGE *) tmp->data);
+		g_free(r->value);
+		g_free((CUSTOM_LIST *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
@@ -691,10 +726,10 @@ static void on_button_close(GtkButton * button, gpointer user_data)
 
 	tmp = g_list_first(search.modlists);
 	while (tmp != NULL) {
-		m = (CUSTOM_MODLIST *) tmp->data;
-		g_free(m->label);
-		g_free(m->modules);
-		g_free((CUSTOM_MODLIST *) tmp->data);
+		r = (CUSTOM_LIST *) tmp->data;
+		g_free(r->label);
+		g_free(r->value);
+		g_free((CUSTOM_LIST *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
@@ -731,6 +766,7 @@ static void on_button_begin_search(GtkButton * button,
 	gchar buf[256], *utf8str;
 	gint utf8len;
 	GList *search_mods = NULL;
+	const gchar *key_buf;
 
 	GtkHTMLStreamStatus status2 = 0;
 	GtkHTML *html;
@@ -785,11 +821,15 @@ static void on_button_begin_search(GtkButton * button,
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 		gnome_appbar_set_status(GNOME_APPBAR
 					(search.progressbar), buf);
-		set_search_module(module);
-
-		finds = do_dialog_search(search_string,
-					 search_type, search_params);
-
+		
+		finds = do_module_search(module,search_string, 
+			search_type, search_params, TRUE);
+		
+		while((key_buf = get_next_result_key()) != NULL) {
+			add_to_found_list((gchar*)key_buf, 
+							(gchar*)module);
+		}
+		
 		sprintf(buf, "%d %s <A HREF=\"%s\">%s</A><br>",
 			finds, FINDS, module, module);
 		utf8str =
@@ -1216,23 +1256,22 @@ static void range_text_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
 	gchar *entry;
-	gchar *text;
-	GList *range = NULL;
-	GList *tmp = NULL;
+	gchar *buf = NULL;
+	gint count;
+	gint i = 0;
 
-	entry = gtk_entry_get_text(GTK_ENTRY(editable));
-	range = get_element(entry);
 	gtk_clist_clear((GtkCList *) search.clist_ranges);
-	tmp = g_list_first(range);
-	while (tmp != NULL) {
-		text = (gchar *) tmp->data;
+	entry = gtk_entry_get_text(GTK_ENTRY(editable));	
+	count = start_parse_verse_list(entry);	
+	
+	while (count--) {
+		buf = get_next_verse_list_element(i++);
+		if(!buf)
+			break;
 		gtk_clist_append((GtkCList *) search.clist_ranges,
-				 &text);
-		g_free((gchar *) tmp->data);
-		tmp = g_list_next(tmp);
+				 &buf);
+		g_free(buf);
 	}
-	g_list_free(tmp);
-	g_list_free(range);
 	gtk_clist_set_text((GtkCList *) search.clist_range,
 			   search.custom_range_row, 1, entry);
 }
@@ -1366,36 +1405,43 @@ static void save_modlist(GtkButton * button, gpointer user_data)
 	gint i = 0;
 	gchar *text1;
 	gchar *text2;
-	CUSTOM_MODLIST *r;
+	CUSTOM_LIST *r;
 
 	tmp = g_list_first(search.modlists);
 	while (tmp != NULL) {
-		r = (CUSTOM_MODLIST *) tmp->data;
-		//g_warning("on save1 %s = %s", r->label, r->modules);
+		r = (CUSTOM_LIST *) tmp->data;
+		//g_warning("on save1 %s = %s", r->label, r->value);
 		g_free(r->label);
-		g_free(r->modules);
-		g_free((CUSTOM_MODLIST *) tmp->data);
+		g_free(r->value);
+		g_free((CUSTOM_LIST *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
 	g_list_free(search.modlists);
 	search.modlists = NULL;
 
+
+	open_config_file(settings.fnconfigure);
+	erase_config_section("Custom Module Lists");
+	
 	for (i = 0; i < (search.list_rows + 1); i++) {
 
 		gtk_clist_get_text((GtkCList *) search.module_lists,
 				   i, 0, &text1);
 		gtk_clist_get_text((GtkCList *) search.module_lists,
 				   i, 1, &text2);
+		add_to_config_file("Custom Module Lists", 
+			text1, text2);
 
-		r = g_new(CUSTOM_MODLIST, 1);
+		r = g_new(CUSTOM_LIST, 1);
 		r->label = g_strdup(text1);
-		r->modules = g_strdup(text2);
+		r->value = g_strdup(text2);
 		search.modlists =
 		    g_list_append(search.modlists,
-				  (CUSTOM_MODLIST *) r);
+				  (CUSTOM_LIST *) r);
 	}
-	save_custom_modlist(search.modlists);
+	//save_custom_modlist(search.modlists);
+	close_config_file();
 	add_modlist();
 }
 
@@ -1419,7 +1465,7 @@ static void save_modlist(GtkButton * button, gpointer user_data)
 static void save_modlist_as(GtkButton * button, gpointer user_data)
 {
 	gint test;
-	CUSTOM_MODLIST *m;
+	CUSTOM_LIST *m;
 	
 	GS_DIALOG *info;
 
@@ -1445,13 +1491,13 @@ static void save_modlist_as(GtkButton * button, gpointer user_data)
 			    gtk_clist_append((GtkCList *) search.
 					     module_lists, text);
 			search.list_rows = search.custom_list_row;
-			m = g_new(CUSTOM_MODLIST, 1);
+			m = g_new(CUSTOM_LIST, 1);
 			m->label = g_strdup(info->text1);
-			m->modules = g_strdup(mods_string);
+			m->value = g_strdup(mods_string);
 			search.modlists =
 			    g_list_append(search.modlists,
-					  (CUSTOM_MODLIST *) m);
-			save_custom_modlist(search.modlists);
+					  (CUSTOM_LIST *) m);
+//			save_custom_modlist(search.modlists);
 			gtk_clist_select_row((GtkCList *)
 					     search.module_lists,
 					     search.custom_list_row, 0);
@@ -1517,35 +1563,40 @@ static void save_range(GtkButton * button, gpointer user_data)
 	gint i = 0;
 	gchar *text1;
 	gchar *text2;
-	CUSTOM_RANGE *r;
+	CUSTOM_LIST *r;
 
 	tmp = g_list_first(search.rangelist);
 	while (tmp != NULL) {
-		r = (CUSTOM_RANGE *) tmp->data;
-		//g_warning("on save1 %s = %s", r->label, r->range);
+		r = (CUSTOM_LIST *) tmp->data;
+		//g_warning("on save1 %s = %s", r->label, r->value);
 		g_free(r->label);
-		g_free(r->range);
-		g_free((CUSTOM_RANGE *) tmp->data);
+		g_free(r->value);
+		g_free((CUSTOM_LIST *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
 	g_list_free(search.rangelist);
 	search.rangelist = NULL;
 
+	open_config_file(settings.fnconfigure);
+	erase_config_section("Custom Ranges");
+	
 	for (i = 0; i < (search.range_rows + 1); i++) {
 
 		gtk_clist_get_text((GtkCList *) search.clist_range,
 				   i, 0, &text1);
 		gtk_clist_get_text((GtkCList *) search.clist_range,
 				   i, 1, &text2);
-
-		r = g_new(CUSTOM_RANGE, 1);
+		add_to_config_file("Custom Ranges", 
+			text1, text2);
+		r = g_new(CUSTOM_LIST, 1);
 		r->label = g_strdup(text1);
-		r->range = g_strdup(text2);
+		r->value = g_strdup(text2);
 		search.rangelist =
-		    g_list_append(search.rangelist, (CUSTOM_RANGE *) r);
+		    g_list_append(search.rangelist, (CUSTOM_LIST *) r);
 	}
-	save_custom_ranges(search.rangelist);
+	//save_custom_ranges(search.rangelist);
+	close_config_file();
 	add_ranges();
 
 }
@@ -1723,6 +1774,7 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
 	}
 }
 
+
 /******************************************************************************
  * Name
  *   on_ctree_select_row
@@ -1797,6 +1849,27 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		++search.module_count;
 	}
 	change_mods_select_label(mod_name);
+}
+
+
+static GList *load_custom_list(gchar *section)
+{
+	GList *glist = NULL;
+	const gchar *buf;	
+	CUSTOM_LIST *r;
+	
+	open_config_file(settings.fnconfigure);
+	
+	if(set_config_to_get_labels(section)) {
+		while((buf = get_next_config_label()) != NULL) {
+			r = g_new(CUSTOM_LIST,1);
+			r->label = g_strdup((gchar*)buf);
+			r->value = g_strdup((gchar*)get_config_value(section,r->label));
+			glist = g_list_append(glist,(CUSTOM_LIST*)r);
+		}
+	}
+	close_config_file();
+	return glist;
 }
 
 /******************************************************************************
@@ -2990,10 +3063,10 @@ void gui_do_dialog_search(void)
 		search.module_count = 0;
 
 		/* load custom ranges in glist and add to clist_ranges */
-		search.rangelist = load_custom_ranges();
+		search.rangelist = load_custom_list("Custom Ranges");
 		add_ranges();
 		/* load custom modlist in glist and add to module_list */
-		search.modlists = load_custom_modlist();
+		search.modlists = load_custom_list("Custom Module Lists");
 		add_modlist();
 
 		/* add bibletext folder to module ctree and fill it */		
@@ -3031,38 +3104,4 @@ void gui_do_dialog_search(void)
 }
 
 
-/******************************************************************************
- * Name
- *   gui_add_to_found_list
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void gui_add_to_found_list(gchar * result_text, gchar * module)
- *
- * Description
- *   loads result_text (key) and modlue (name) to the results html widget
- *   we got here from  
- *   on_button_begin_search_clicked -> 
- *   do_dialog_search -> 
- *   backend_do_dialog_search ->
- *   add_to_found_list ->
- *
- * Return value
- *   void
- */
 
-void gui_add_to_found_list(gchar * result_text, gchar * module)
-{
-	gchar buf[256], *utf8str;
-	gint utf8len;
-
-	sprintf(buf,
-		"&nbsp; <A HREF=\"version=%s passage=%s\"NAME=\"%s\" >%s, %s</A><br>",
-		module, result_text, module, module, result_text);
-	utf8str = e_utf8_from_gtk_string(search.results_html, buf);
-	utf8len = strlen(utf8str);
-	if (utf8len) {
-		gui_display_html(search.results_html, utf8str, utf8len);
-	}
-}

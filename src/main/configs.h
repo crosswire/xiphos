@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * bookmarks.h- functions to load and save bookmarks
+ * configs.h - 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,15 +19,20 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
-#ifndef __BOOKMARKS_H_
-#define __BOOKMARKS_H_
+#ifndef __CONFIGS_H__
+#define __CONFIGS_H__
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-	
-GNode * backend_load_bookmarks(char *dir);
-
+#endif	
+int open_config_file(char *file);
+void erase_config_section(char *section);
+int close_config_file(void);
+void add_to_config_file(char * section, 
+			char * label, char * value);
+const char *get_config_value(char * section, char * label);
+int set_config_to_get_labels(char * section);
+const char *get_next_config_label(void);
 #ifdef __cplusplus
 }
 #endif

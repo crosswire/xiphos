@@ -29,6 +29,7 @@
 #include "main/settings.h"
 
 #include "backend/percomm_.h"
+#include "backend/module_options.h"
 #include "backend/sword.h"
 
 /******************************************************************************
