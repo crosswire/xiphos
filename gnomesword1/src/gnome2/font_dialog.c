@@ -269,7 +269,6 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	GtkWidget *dialog_vbox21;
 	GtkWidget *hbox_picker;
 	GtkWidget *combo_size;
-	//GtkWidget *frame44;
 	GtkWidget *vbox56;
 	GtkWidget *hbox67;
 	GtkWidget *pixmap6;
@@ -296,24 +295,16 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 			    "dialog_vbox21", dialog_vbox21);
 	gtk_widget_show(dialog_vbox21);
 
-	//frame44 = gtk_frame_new(NULL);
-	//gtk_widget_show(frame44);
-	//gtk_box_pack_start(GTK_BOX(dialog_vbox21), frame44, TRUE, TRUE, 0);
-	//gtk_widget_set_usize(frame44, -2, 53);
-
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox56);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox21), vbox56, TRUE, TRUE,
 			   0);
-	//gtk_container_add(GTK_CONTAINER(frame44), vbox56);
 
 	hbox67 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox67);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox67, TRUE, TRUE, 0);
 
-	pixmap6 = gtk_image_new_from_stock( "gtk-select-font", GTK_ICON_SIZE_DND);
-	    /*gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-				       "/gnome-fontsel.xpm");*/
+	pixmap6 = gtk_image_new_from_stock( GTK_STOCK_SELECT_FONT, GTK_ICON_SIZE_DND);
 	gtk_widget_show(pixmap6);
 	gtk_box_pack_start(GTK_BOX(hbox67), pixmap6, TRUE, TRUE, 0);
 
@@ -385,7 +376,7 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 
 	checkbutton_no_font =
 	    gtk_check_button_new_with_label(
-			_("Use default font for this module"));
+			_("Use the default font for this module"));
 	gtk_widget_show(checkbutton_no_font);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font),
@@ -408,14 +399,12 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox1),
 				  GTK_BUTTONBOX_EDGE);
 
-	button_cancel = gtk_button_new_from_stock ("gtk-cancel");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);*/
+	button_cancel = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
 
-	button_ok = gtk_button_new_from_stock ("gtk-ok");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_OK);*/
+	button_ok = gtk_button_new_from_stock (GTK_STOCK_OK);
 	gtk_widget_show(button_ok);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_ok);
 	gtk_widget_set_sensitive(button_ok, FALSE);
