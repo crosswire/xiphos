@@ -504,66 +504,6 @@ void gui_load_removed(const xmlChar * file)
 	gtk_tree_path_free(path);
 }
 
-/******************************************************************************
- * Name
- *   tree_selection_changed
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void tree_selection_changed(GtkTreeSelection * selection,
- *		      GtkWidget * tree_widget)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void tree_selection_changed(GtkTreeSelection * selection,
-				   gpointer data)
-{
-	GtkTreeIter selected;
-	gchar *caption = NULL;
-	gchar *key = NULL;
-	gchar *module = NULL;
-
-	current_selection = selection;
-	
-	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   2, &caption, 3, &key, 4, &module, -1);
-		
-		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
-				     &selected) && key != NULL) {
-			if(button_one)
-				goto_bookmark(module, key);
-			else if(button_two) {
-				use_dialog = TRUE; 
-				goto_bookmark(module, key);
-				use_dialog = FALSE; 
-			}
-			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
-			gtk_widget_set_sensitive(menu.new, FALSE);
-			gtk_widget_set_sensitive(menu.insert, FALSE);
-			gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
-		}
-		else {
-			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
-			gtk_widget_set_sensitive(menu.new, TRUE);
-			gtk_widget_set_sensitive(menu.insert, TRUE);
-			gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
-		}
-			
-		g_free(caption);
-		g_free(key);
-		g_free(module);
-	}
-	gtk_widget_set_sensitive(menu.edit, TRUE);
-	gtk_widget_set_sensitive(menu.delete, TRUE);
-}
-
 
 /******************************************************************************
  * Name
@@ -789,8 +729,42 @@ static GtkTreeModel *create_model(void)
 static gboolean button_press_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer data)
 {
+	GtkTreeSelection* selection = NULL;
+	GtkTreeIter selected;
+	gboolean is_selected = FALSE;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
 	button_one = FALSE;
 	button_two = FALSE;
+	
+	
+	selection = gtk_tree_view_get_selection(bookmark_tree);	
+	current_selection = selection;
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+				   2, &caption, 3, &key, 4, &module, -1);
+		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
+					     &selected) && key != NULL) {			
+			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
+			gtk_widget_set_sensitive(menu.new, FALSE);
+			gtk_widget_set_sensitive(menu.insert, FALSE);
+			gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
+		}
+		else {
+			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
+			gtk_widget_set_sensitive(menu.new, TRUE);
+			gtk_widget_set_sensitive(menu.insert, TRUE);
+			gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
+		}					     
+	
+		gtk_widget_set_sensitive(menu.bibletime,
+						       settings.have_bibletime);
+		gtk_widget_set_sensitive(menu.edit, TRUE);
+		gtk_widget_set_sensitive(menu.delete, TRUE);
+		is_selected = TRUE;
+	}
+	
 	switch(event->button) {
 		case 1:
 			button_one = TRUE;
@@ -799,6 +773,9 @@ static gboolean button_press_event(GtkWidget * widget,
 			button_two = TRUE;
 			break;
 		case 3:
+			g_free(caption);
+			g_free(key);
+			g_free(module);
 			gtk_menu_popup(GTK_MENU(menu.menu),
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
@@ -816,11 +793,28 @@ static gboolean button_press_event(GtkWidget * widget,
 			}
 			else {
 				gtk_widget_set_sensitive(menu.bibletime,
-						       settings.have_bibletime);	
-				
+						       settings.have_bibletime);
+				return FALSE;
 			}
 			break;
 		
+	}
+	
+	
+	if (is_selected) {
+		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
+				     &selected) && key != NULL) {
+			if(button_one)
+				goto_bookmark(module, key);
+			else if(button_two) {
+				use_dialog = TRUE; 
+				goto_bookmark(module, key);
+				use_dialog = FALSE; 
+			}
+		}
+		g_free(caption);
+		g_free(key);
+		g_free(module);
 	}
 	return FALSE;
 }
@@ -846,7 +840,6 @@ GtkWidget *gui_create_bookmark_tree(void)
 	GtkWidget *tree;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GObject *selection;
 	
 	gui_create_bookmark_menu();
 	create_pixbufs();	
@@ -854,10 +847,7 @@ GtkWidget *gui_create_bookmark_tree(void)
 	tree = gtk_tree_view_new_with_model(model);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tree),
 					  FALSE);
-	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(tree)));
-	
+		
 	add_columns(GTK_TREE_VIEW(tree));
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
 			      NULL);
@@ -871,11 +861,9 @@ GtkWidget *gui_create_bookmark_tree(void)
 
 	load_xml_bookmarks(GTK_TREE_VIEW(tree),&iter);
 	g_signal_connect(G_OBJECT(tree),
-				 "button_press_event",
+				 "button_release_event",
 				G_CALLBACK(button_press_event),
 				 NULL);
-	g_signal_connect(selection, "changed",
-			 G_CALLBACK(tree_selection_changed), NULL);
 	use_dialog = FALSE;
 	bookmark_tree = GTK_TREE_VIEW(tree); 
 	
