@@ -39,7 +39,7 @@ void initSword(GtkWidget *mainform);
 
 void ShutItDown(void);
 
-void FillDictKeys(char *ModName);
+void FillDictKeys(void);
 void changeVerse(gchar * ref);
 void searchSWORD(GtkWidget * searchFrm);
 void resultsListSWORD(GtkWidget * searchFrm, 
@@ -75,6 +75,7 @@ void lookupStrongsSWORD(gint theNumber);
 void setglobalopsSWORD(gchar *option,
 		gchar *yesno);
 void changepercomModSWORD(gchar * modName);
+void redisplayTextSWORD(void);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
