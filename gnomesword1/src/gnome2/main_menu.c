@@ -45,6 +45,7 @@
 #include "gui/about_sword.h"
 #include "gui/hints.h"
 #include "gui/widgets.h"
+#include "gui/sidebar_dialog.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
@@ -690,7 +691,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Detach/Attach Shortcut Bar"),
 	 NULL,
-	 NULL, NULL, NULL, /*gui_attach_detach_shortcutbar*/
+	 gui_attach_detach_sidebar, NULL, NULL, 
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
