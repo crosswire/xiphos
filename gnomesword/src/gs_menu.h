@@ -72,17 +72,17 @@ extern "C" {
 			      GList * bilbeDescription,
 			      GList * comDescription,
 			      GList * dictDescription, 
+			      GList * bookDescription, 
 			      GList * percomlist, 
 			      GList * options);
 
 	void addmodstomenus(GtkWidget * app,
 			    SETTINGS * settings,
 			    GList * biblelist,
-			    GList * bilbeDescription,
 			    GList * commentarylist,
-			    GList * comDescription,
 			    GList * dictionarylist,
-			    GList * dictDescription, GList * percomlist);
+			    GList *booklist, 
+			    GList * percomlist);
 	GtkWidget *create_shortcutbarMenu(gint barnum);
 
 

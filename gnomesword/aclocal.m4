@@ -568,7 +568,7 @@ AC_DEFUN([_AM_DIRNAME],
 dnl AM_ACLOCAL_INCLUDE(macrodir)
 AC_DEFUN([AM_ACLOCAL_INCLUDE],
 [
-	AM_CONDITIONAL(INSIDE_GNOME_COMMON, test x = y)
+	AM_CONDITIONAL(INSIDE_GNOME_COMMON, false)
 
 	test -n "$ACLOCAL_FLAGS" && ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
@@ -806,7 +806,7 @@ AC_DEFUN([AC_ISC_POSIX],
 
 # serial 5
 
-AC_DEFUN(AM_GNOME_WITH_NLS,
+AC_DEFUN([AM_GNOME_WITH_NLS],
   [AC_MSG_CHECKING([whether NLS is requested])
     dnl Default is enabled NLS
     AC_ARG_ENABLE(nls,
@@ -815,11 +815,12 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     AC_MSG_RESULT($USE_NLS)
     AC_SUBST(USE_NLS)
 
+    BUILD_INCLUDED_LIBINTL=no
     USE_INCLUDED_LIBINTL=no
 
     dnl If we use NLS figure out what method
     if test "$USE_NLS" = "yes"; then
-      AC_DEFINE(ENABLE_NLS)
+#      AC_DEFINE(ENABLE_NLS)
 #      AC_MSG_CHECKING([whether included gettext is requested])
 #      AC_ARG_WITH(included-gettext,
 #        [  --with-included-gettext use the GNU gettext library included here],
@@ -991,6 +992,7 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     done
 
     dnl Make all variables we use known to autoconf.
+    AC_SUBST(BUILD_INCLUDED_LIBINTL)
     AC_SUBST(USE_INCLUDED_LIBINTL)
     AC_SUBST(CATALOGS)
     AC_SUBST(CATOBJEXT)
@@ -1004,7 +1006,7 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     AC_SUBST(POSUB)
   ])
 
-AC_DEFUN(AM_GNOME_GETTEXT,
+AC_DEFUN([AM_GNOME_GETTEXT],
   [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
    AC_REQUIRE([AC_PROG_CC])dnl
    AC_REQUIRE([AC_PROG_RANLIB])dnl
@@ -1043,7 +1045,7 @@ strdup __argz_count __argz_stringify __argz_next])
        fi
        for lang in $LINGUAS; do
          case "$ALL_LINGUAS" in
-          *$lang*) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
+          *\ $lang\ *|$lang\ *|*\ $lang) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
          esac
        done
        LINGUAS=$NEW_LINGUAS
@@ -2642,7 +2644,7 @@ if test x"$compiler_c_o" = x"yes"; then
   CFLAGS="$save_CFLAGS"
   ])
   compiler_o_lo=$lt_cv_compiler_o_lo
-  AC_MSG_RESULT([$compiler_c_lo])
+  AC_MSG_RESULT([$compiler_o_lo])
 else
   compiler_o_lo=no
 fi
@@ -3025,7 +3027,7 @@ else
         hardcode_libdir_flag_spec='${wl}-bnolibpath ${wl}-blibpath:$libdir:/usr/lib:/lib'
         # Warning - without using the other run time loading flags, -berok will
         #           link without error, but may produce a broken library.
-        allow_undefined_flag='${wl}-berok"
+        allow_undefined_flag='${wl}-berok'
         # This is a bit strange, but is similar to how AIX traditionally builds
         # it's shared libraries.
         archive_expsym_cmds="\$CC $shared_flag"' -o $output_objdir/$soname $libobjs $deplibs $compiler_flags ${allow_undefined_flag} '"\${wl}$no_entry_flag \${wl}$exp_sym_flag:\$export_symbols"' ~$AR -crlo $objdir/$libname$release.a $objdir/$soname'
@@ -4736,7 +4738,7 @@ irix5* | irix6*)
 # This must be Linux ELF.
 linux-gnu*)
   case $host_cpu in
-  alpha* | i*86 | powerpc* | sparc* | ia64* )
+  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* )
     lt_cv_deplibs_check_method=pass_all ;;
   *)
     # glibc up to 2.1.1 does not perform some relocations on ARM
