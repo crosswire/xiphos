@@ -40,9 +40,6 @@
 #include "main/search.h"
 #include "main/settings.h"
 
-#include "gnome2/shortcutbar.h"
-
-SEARCH_OPT so, *p_so;
 
 static GtkWidget *rrbUseBounds;
 static GtkWidget *entrySearch;
@@ -255,7 +252,6 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 	} 	
 	
 	search_module = settings.sb_search_mod;
-	p_so->module_name = search_module;
 
 	clear_scope();
 
@@ -388,8 +384,6 @@ void gui_create_search_sidebar(void)
 	GtkWidget *scrolledwindow_search;
 	GtkWidget *viewport_search;
 	GtkTooltips *tooltips;
-
-	p_so = &so;
 
 	tooltips = gtk_tooltips_new();
 
