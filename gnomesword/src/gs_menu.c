@@ -234,31 +234,32 @@ void createpopupmenus(GtkWidget *app,
  * dictionarylist - list of dict/lex modules - from initSword 
  * percomlist - list of personal comments modules
  ******************************************************************************/
+
 void addmodstomenus(GtkWidget *app, 
 				SETTINGS *settings, 
 				GList *biblelist, 
 				GList *bibleDescription,
 				GList *commentarylist, 
-				GList *dictionarylist, 
 				GList *comDescription,
+				GList *dictionarylist, 
 				GList *dictDescription,
 				GList *percomlist) 
 {
-	gchar	rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+	gchar	//rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 		aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
 		aboutrememberlastitem3[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		rememberlastitemCom[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		rememberlastitemDict[80], //--  use to store last menu item so we can add the next item under it - gnome menus	
+		//rememberlastitemCom[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		//rememberlastitemDict[80], //--  use to store last menu item so we can add the next item under it - gnome menus	
 		mybuf[80];
 	gint	pg = 0;
 	GList *tmp = NULL;
 	//GList *tmp2 = NULL;
 
 //-- set main window modules and add to menus	
-	sprintf(rememberlastitem,"%s","_View/Main Window/");
-	sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
-	sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
+	//sprintf(rememberlastitem,"%s","_View/Main Window/");
+	//sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
+	//sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
 	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
 	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
 	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
@@ -267,10 +268,10 @@ void addmodstomenus(GtkWidget *app,
 	//tmp2 = bibleDescription;
 	while (tmp != NULL) {	
 	//-- add to menubar
-		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, rememberlastitem , (GtkMenuCallback)on_mainText_activate );
+		//additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, rememberlastitem , (GtkMenuCallback)on_mainText_activate );
 		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
 		//-- remember last item - so next item will be place below it       	
-		sprintf(rememberlastitem,"%s%s","_View/Main Window/",(gchar *) tmp->data);	
+		//sprintf(rememberlastitem,"%s%s","_View/Main Window/",(gchar *) tmp->data);	
 		sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/", (gchar *) tmp->data);			
 		tmp = g_list_next(tmp);	
 	}
@@ -278,17 +279,17 @@ void addmodstomenus(GtkWidget *app,
 //-- add commmods - commentary window menu
 	tmp = commentarylist;
 	while (tmp != NULL) {		
-		sprintf(mybuf,"%d",pg);
+		/*sprintf(mybuf,"%d",pg);
 		additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemCom, 
 				(GtkMenuCallback)on_com_select_activate);			
 		sprintf(rememberlastitemCom,"%s%s","_View/Commentary Window/",
-				(gchar *) tmp->data);	
+				(gchar *) tmp->data);	*/
 		additemtognomemenu(app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem2, 
 				(GtkMenuCallback)on_kjv1_activate );			
 		sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",
 				(gchar *) tmp->data);
-		++pg;
+		//++pg;
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
@@ -299,10 +300,10 @@ void addmodstomenus(GtkWidget *app,
 		sprintf(mybuf,"%d",pg);
 		if(!strcmp((gchar *) tmp->data,"StrongsHebrew")) hebrewpage = pg;
 		if(!strcmp((gchar *) tmp->data,"StrongsGreek")) greekpage = pg;
-		additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemDict,
+		/*additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemDict,
 				(GtkMenuCallback)on_dict_select_activate );		
 		sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",
-				(gchar *) tmp->data);		
+				(gchar *) tmp->data);	*/	
 		additemtognomemenu(app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem3,
 				(GtkMenuCallback)on_kjv1_activate );
@@ -312,7 +313,7 @@ void addmodstomenus(GtkWidget *app,
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
-	
+/*	
 //-- add interlin1mods - interliniar1 window menu	
 	sprintf(rememberlastitem,"%s","_View/Interlinear1 Window/");
 	tmp = biblelist;
@@ -373,7 +374,8 @@ void addmodstomenus(GtkWidget *app,
 		sprintf(rememberlastitem,"%s%s","_View/Interlinear5 Window/", (gchar *) tmp->data);		
 		tmp = g_list_next(tmp);	
 	}
-	g_list_free(tmp);				
+	g_list_free(tmp);
+	*/
 }			
 
 /********************************************************************************
@@ -808,7 +810,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 	}
 	g_list_free(tmp);
 	g_list_free(tmp2);
-
+	i=0;
 	tmp = mods;
 	tmp2 = comDescription;	
 	while (tmp != NULL) {

@@ -61,6 +61,7 @@
 #include "gs_abouts.h"
 #include "gs_info_box.h"
 #include "gs_verselist_dlg.h"
+#include "gs_setup.h"
 
 #include "sw_utility.h"
 #include "sw_properties.h"
@@ -651,9 +652,7 @@ footnotesSWORD(gint window, gboolean choice) //-- toogle gbf footnotes for modul
 void
 gotoBookmarkSWORD(gchar *modName, gchar *key)
 {
-	GtkWidget *page, *entry, *notebook;
-	GtkNotebookPage *realpage;
-	GtkLabel *reallabel;
+	GtkWidget *notebook, *entry;
 	ModMap::iterator it;
 	gint bibleindex = 0;
 	gint commindex = 0;
@@ -1558,7 +1557,13 @@ gboolean getVerseListSWORD(gchar *vlist)
 	if(!isrunningVL){
 		dlg = create_dglVerseList();
 		isrunningVL = TRUE;
-	}			
+	}		
+	for(int i=0; i<strlen(vlist); i++){
+		if(vlist[i] == '+') 
+			vlist[i] = ' ';
+		if(vlist[i] == ',') 
+			vlist[i] = ';';
+	}
 	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
 	beginHTML(htmlVL, FALSE);
 	while (!tmpVerseList.Error()) {
@@ -1614,5 +1619,39 @@ swapmodsSWORD(gchar *intmod)
 	}
 	gotoBookmarkSWORD(intmod, current_verse);
 	updateinterlinearpage();
+}
+	
+
+/*
+ *
+ */
+void gs_firstrunSWORD(void)
+{
+	GtkWidget *setup;
+	ModMap::iterator it; //-- iteratior
+	SectionMap::iterator sit; //-- iteratior
+	ConfigEntMap::iterator cit; //-- iteratior
+	mainMgr         = new SWMgr();	//-- create sword mgrs
+	GList *textMods = NULL;
+	GList *commMods = NULL;
+	GList *dictMods = NULL;
+	
+	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			textMods = g_list_append(textMods,(*it).second->Name());
+		}if(!strcmp((*it).second->Type(), "Commentaries")){
+			commMods = g_list_append(commMods,(*it).second->Name());
+		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
+			dictMods = g_list_append(dictMods,(*it).second->Name());
+		}
+	}
+	setup = create_dlgSetup (textMods, commMods, dictMods);
+  		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
+		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
+	
+	g_list_free(textMods); //-- free GLists
+        g_list_free(commMods);
+        g_list_free(dictMods);
+	delete mainMgr;   //-- delete Sword manager		
 }
 
