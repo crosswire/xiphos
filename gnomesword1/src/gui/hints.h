@@ -37,8 +37,9 @@ struct  _hint {
 };
 extern HINT hint;
 
-void gui_show_footnote(gchar *note);
-	
+void gui_display_footnote_in_hint(gchar *note);
+//void gui_display_text_in_hint(gchar * key, gchar * module_name);
+
 #ifdef __cplusplus
 }
 #endif
