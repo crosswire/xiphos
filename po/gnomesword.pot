@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-10-10 15:20-0400\n"
+"POT-Creation-Date: 2001-10-19 13:10-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,54 +112,49 @@ msgstr ""
 msgid "GomeSword - Save Note File"
 msgstr ""
 
-#: src/gs_gnomesword.c:71 src/gs_gui.c:606
+#: src/gs_gnomesword.c:72 src/gs_gui.c:619
 msgid "Romans 8:28"
 msgstr ""
 
 #. Add options to Options Menu and get toggle item widget
-#: src/gs_gnomesword.c:166 src/gs_gnomesword.c:168 src/gs_gnomesword.c:170
-#: src/gs_gnomesword.c:172 src/gs_gnomesword.c:174 src/gs_gnomesword.c:176
-#: src/gs_gnomesword.c:178
+#: src/gs_gnomesword.c:167 src/gs_gnomesword.c:169 src/gs_gnomesword.c:171
+#: src/gs_gnomesword.c:173 src/gs_gnomesword.c:175 src/gs_gnomesword.c:177
 msgid "_Settings/"
 msgstr ""
 
-#: src/gs_gnomesword.c:166
+#: src/gs_gnomesword.c:167
 msgid "Auto Save Personal Comments"
 msgstr ""
 
-#: src/gs_gnomesword.c:168 src/gs_setup.c:797
+#: src/gs_gnomesword.c:169 src/gs_setup.c:797
 msgid "Show Interlinear Page"
 msgstr ""
 
-#: src/gs_gnomesword.c:170
+#: src/gs_gnomesword.c:171
 msgid "Verse Style"
 msgstr ""
 
-#: src/gs_gnomesword.c:172
+#: src/gs_gnomesword.c:173
 msgid "Show Footnotes"
 msgstr ""
 
-#: src/gs_gnomesword.c:174
+#: src/gs_gnomesword.c:175
 msgid "Show Morphological Tags"
 msgstr ""
 
-#: src/gs_gnomesword.c:176
+#: src/gs_gnomesword.c:177
 msgid "Show Strongs Numbers"
 msgstr ""
 
-#: src/gs_gnomesword.c:178
-msgid "Show Hebrew Points"
-msgstr ""
-
-#: src/gs_gnomesword.c:465
+#: src/gs_gnomesword.c:490
 msgid "_Quickmarks/<Separator>"
 msgstr ""
 
-#: src/gs_gnomesword.c:466 src/gs_listeditor.c:248 src/gs_listeditor.c:497
+#: src/gs_gnomesword.c:491 src/gs_listeditor.c:248 src/gs_listeditor.c:497
 msgid "_Quickmarks/"
 msgstr ""
 
-#: src/gs_gui.c:77 src/gs_gui.c:1296
+#: src/gs_gui.c:77 src/gs_gui.c:1309
 msgid "Copy"
 msgstr ""
 
@@ -196,200 +191,204 @@ msgstr ""
 msgid "Clear history list"
 msgstr ""
 
-#: src/gs_gui.c:142
+#: src/gs_gui.c:128
+msgid "Language Options"
+msgstr ""
+
+#: src/gs_gui.c:155
 msgid "Bible Texts"
 msgstr ""
 
-#: src/gs_gui.c:143
+#: src/gs_gui.c:156
 msgid "Information about Bible texts"
 msgstr ""
 
-#: src/gs_gui.c:148 src/gs_gui.c:892 src/gs_shortcutbar.c:577
+#: src/gs_gui.c:161 src/gs_gui.c:905 src/gs_shortcutbar.c:577
 #: src/gs_shortcutbar.c:612 src/gs_shortcutbar.c:1638
 msgid "Commentaries"
 msgstr ""
 
-#: src/gs_gui.c:154
+#: src/gs_gui.c:167
 msgid "Dictionaries-Lexicons"
 msgstr ""
 
-#: src/gs_gui.c:164
+#: src/gs_gui.c:177
 msgid "Contents"
 msgstr ""
 
-#: src/gs_gui.c:165
+#: src/gs_gui.c:178
 msgid "Help Contents"
 msgstr ""
 
-#: src/gs_gui.c:170
+#: src/gs_gui.c:183
 msgid "About the Sword Project..."
 msgstr ""
 
-#: src/gs_gui.c:171
+#: src/gs_gui.c:184
 msgid "Infotmation About The Sword Project"
 msgstr ""
 
-#: src/gs_gui.c:176
+#: src/gs_gui.c:189
 msgid "About Sword Modules"
 msgstr ""
 
-#: src/gs_gui.c:177
+#: src/gs_gui.c:190
 msgid "Information about the installed modules"
 msgstr ""
 
-#: src/gs_gui.c:183
+#: src/gs_gui.c:196
 msgid "About GnomeSword..."
 msgstr ""
 
-#: src/gs_gui.c:184
+#: src/gs_gui.c:197
 msgid "About GnomeSword"
 msgstr ""
 
-#: src/gs_gui.c:195
+#: src/gs_gui.c:208
 msgid "_Quickmarks"
 msgstr ""
 
-#: src/gs_gui.c:201
+#: src/gs_gui.c:214
 msgid "_History"
 msgstr ""
 
-#: src/gs_gui.c:337
+#: src/gs_gui.c:350
 msgid "GnomeSword - Bible Study Software"
 msgstr ""
 
-#: src/gs_gui.c:572
+#: src/gs_gui.c:585
 msgid "Romans"
 msgstr ""
 
-#: src/gs_gui.c:614
+#: src/gs_gui.c:627
 msgid "Goto verse"
 msgstr ""
 
-#: src/gs_gui.c:615
+#: src/gs_gui.c:628
 msgid "Go to verse in free form lookup and add verse to history"
 msgstr ""
 
-#: src/gs_gui.c:629
+#: src/gs_gui.c:642
 msgid "Back"
 msgstr ""
 
-#: src/gs_gui.c:630
+#: src/gs_gui.c:643
 msgid "Go backward through history list"
 msgstr ""
 
-#: src/gs_gui.c:645
+#: src/gs_gui.c:658
 msgid "Foward"
 msgstr ""
 
-#: src/gs_gui.c:646
+#: src/gs_gui.c:659
 msgid "Go foward through history list"
 msgstr ""
 
-#: src/gs_gui.c:671
+#: src/gs_gui.c:684
 msgid "Exit"
 msgstr ""
 
-#: src/gs_gui.c:672
+#: src/gs_gui.c:685
 msgid "Exit GnomeSword"
 msgstr ""
 
-#: src/gs_gui.c:1024
+#: src/gs_gui.c:1037
 msgid "Follow Main Text Window"
 msgstr ""
 
-#: src/gs_gui.c:1039
+#: src/gs_gui.c:1052
 msgid "Edit"
 msgstr ""
 
-#: src/gs_gui.c:1039
+#: src/gs_gui.c:1052
 msgid "Edit note"
 msgstr ""
 
-#: src/gs_gui.c:1053 src/gs_gui.c:1221
+#: src/gs_gui.c:1066 src/gs_gui.c:1234
 msgid "Save"
 msgstr ""
 
-#: src/gs_gui.c:1053
+#: src/gs_gui.c:1066
 msgid "Save note"
 msgstr ""
 
-#: src/gs_gui.c:1067
+#: src/gs_gui.c:1080
 msgid "Delete"
 msgstr ""
 
-#: src/gs_gui.c:1067
+#: src/gs_gui.c:1080
 msgid "Delete note"
 msgstr ""
 
-#: src/gs_gui.c:1081 src/gs_gui.c:1334
+#: src/gs_gui.c:1094 src/gs_gui.c:1347
 msgid "Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1081 src/gs_gui.c:1334
+#: src/gs_gui.c:1094 src/gs_gui.c:1347
 msgid "Start Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1089 src/gs_preferences_dlg.c:1266
+#: src/gs_gui.c:1102 src/gs_preferences_dlg.c:1266
 msgid "Personal Comments"
 msgstr ""
 
-#: src/gs_gui.c:1138
+#: src/gs_gui.c:1151
 msgid "Interlinear"
 msgstr ""
 
-#: src/gs_gui.c:1193
+#: src/gs_gui.c:1206
 msgid "New"
 msgstr ""
 
-#: src/gs_gui.c:1193
+#: src/gs_gui.c:1206
 msgid "Start new document"
 msgstr ""
 
-#: src/gs_gui.c:1207
+#: src/gs_gui.c:1220
 msgid "Open"
 msgstr ""
 
-#: src/gs_gui.c:1207
+#: src/gs_gui.c:1220
 msgid "Open File"
 msgstr ""
 
-#: src/gs_gui.c:1235
+#: src/gs_gui.c:1248
 msgid "Save As"
 msgstr ""
 
-#: src/gs_gui.c:1235
+#: src/gs_gui.c:1248
 msgid "Save as"
 msgstr ""
 
-#: src/gs_gui.c:1259
+#: src/gs_gui.c:1272
 msgid "Print"
 msgstr ""
 
-#: src/gs_gui.c:1259
+#: src/gs_gui.c:1272
 msgid "Print current file"
 msgstr ""
 
-#: src/gs_gui.c:1282
+#: src/gs_gui.c:1295
 msgid "Cut"
 msgstr ""
 
-#: src/gs_gui.c:1282
+#: src/gs_gui.c:1295
 msgid "Cut to clipboard"
 msgstr ""
 
-#: src/gs_gui.c:1296
+#: src/gs_gui.c:1309
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/gs_gui.c:1310
+#: src/gs_gui.c:1323
 msgid "Paste"
 msgstr ""
 
-#: src/gs_gui.c:1310
+#: src/gs_gui.c:1323
 msgid "Paste from clipborad"
 msgstr ""
 
-#: src/gs_gui.c:1370
+#: src/gs_gui.c:1383
 msgid "Study Pad"
 msgstr ""
 
@@ -1033,21 +1032,21 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-#: src/gs_studypad.c:88 src/gs_studypad.c:217
+#: src/gs_studypad.c:88 src/gs_studypad.c:218
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr ""
 
-#: src/gs_studypad.c:192
+#: src/gs_studypad.c:193
 #, c-format
 msgid "%s - modified."
 msgstr ""
 
-#: src/gs_studypad.c:196
+#: src/gs_studypad.c:197
 msgid "modified"
 msgstr ""
 
-#: src/gs_studypad.c:233
+#: src/gs_studypad.c:234
 msgid "-untitled-"
 msgstr ""
 

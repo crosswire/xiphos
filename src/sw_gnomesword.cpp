@@ -596,6 +596,7 @@ void hebrewpointsSWORD(gint window, gboolean choice)
 			mainMgr->setGlobalOption("Hebrew Vowel Points",
 						 "Off");
 		}
+		settings->hebrewpoints = choice;
 		//-- settings->morphs = choice;	//-- store choice in settings
 		if (havebible) {
 			curMod->Display();	//-- we need to show change
@@ -609,6 +610,46 @@ void hebrewpointsSWORD(gint window, gboolean choice)
 			mainMgr1->setGlobalOption("Hebrew Vowel Points",
 						  "Off");
 		}
+		settings->hebrewpointsint = choice;
+		//-- settings->morphsint = choice;	//-- store choice in settings
+		if (havebible) {
+			updateinterlinearpage();
+		}
+		break;
+	}
+}
+
+/*******************************************************************************
+ * toggle hebrew cantillation marks on and off
+ * window - the window to effect - text or interlinear
+ * choice - true = on, false = off
+ ******************************************************************************/
+void cantillationmarksSWORD(gint window, gboolean choice)
+{
+	switch (window) {
+	case 0:		//--  main text window     
+		if (choice) {
+			mainMgr->setGlobalOption("Hebrew Cantillation",
+						 "On");
+		} else {
+			mainMgr->setGlobalOption("Hebrew Cantillation",
+						 "Off");
+		}
+		settings->cantillationmarks = choice;
+		//-- settings->morphs = choice;	//-- store choice in settings
+		if (havebible) {
+			curMod->Display();	//-- we need to show change
+		}
+		break;
+	case 1:		//-- interlinear window   
+		if (choice) {
+			mainMgr1->setGlobalOption("Hebrew Cantillation",
+						  "On");
+		} else {
+			mainMgr1->setGlobalOption("Hebrew Cantillation",
+						  "Off");
+		}
+		settings->cantillationmarksint = choice;
 		//-- settings->morphsint = choice;	//-- store choice in settings
 		if (havebible) {
 			updateinterlinearpage();
@@ -1527,5 +1568,6 @@ gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
 	closedir(dir);
 	return retval;
 }
+
 
 

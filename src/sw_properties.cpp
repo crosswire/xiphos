@@ -151,13 +151,21 @@ gboolean loadconfig(void)
 	settings->strongs =
 	    atoi(settingsInfo["User Options"]["strongs"].c_str());
 	settings->morphs =
-	    atoi(settingsInfo["User Options"]["morphs"].c_str());    
+	    atoi(settingsInfo["User Options"]["morphs"].c_str());  
+	settings->hebrewpoints =
+	    atoi(settingsInfo["User Options"]["Hebrew Points"].c_str());
+	settings->cantillationmarks =
+	    atoi(settingsInfo["User Options"]["Cantillation Marks"].c_str());  
 	settings->footnotes =
 	    atoi(settingsInfo["User Options"]["footnotes"].c_str());
 	settings->strongsint =
 	    atoi(settingsInfo["User Options"]["strongs interlinear"].c_str());
 	settings->morphsint =
-	    atoi(settingsInfo["User Options"]["morphs interlinear"].c_str());    
+	    atoi(settingsInfo["User Options"]["morphs interlinear interlinear"].c_str());  
+	settings->hebrewpointsint =
+	    atoi(settingsInfo["User Options"]["Hebrew Points Interlinear"].c_str());
+	settings->cantillationmarksint =
+	    atoi(settingsInfo["User Options"]["Cantillation Marks Interlinear"].c_str());     
 	settings->footnotesint =
 	    atoi(settingsInfo["User Options"]["footnotes interlinear"].c_str());
 	settings->versestyle =
@@ -313,6 +321,16 @@ gboolean saveconfig(void)
 		else
 			settingsInfo["User Options"]["morphs"] = "0";
 
+		if (settings->hebrewpoints)
+			settingsInfo["User Options"]["Hebrew Points"] = "1";
+		else
+			settingsInfo["User Options"]["Hebrew Points"] = "0";
+
+		if (settings->cantillationmarks)
+			settingsInfo["User Options"]["Cantillation Marks"] = "1";
+		else
+			settingsInfo["User Options"]["Cantillation Marks"] = "0";
+
 		if (settings->footnotes)
 			settingsInfo["User Options"]["footnotes"] = "1";
 		else
@@ -327,6 +345,16 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["morphs interlinear"] = "1";
 		else
 			settingsInfo["User Options"]["morphs interlinear"] = "0";
+
+		if (settings->hebrewpoints)
+			settingsInfo["User Options"]["Hebrew Points Interlinear"] = "1";
+		else
+			settingsInfo["User Options"]["Hebrew Points Interlinear"] = "0";
+
+		if (settings->cantillationmarks)
+			settingsInfo["User Options"]["Cantillation Marks Interlinear"] = "1";
+		else
+			settingsInfo["User Options"]["Cantillation Marks Interlinear"] = "0";
 
 		if (settings->footnotesint)
 			settingsInfo["User Options"]["footnotes interlinear"] = "1";
