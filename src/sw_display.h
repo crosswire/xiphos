@@ -1,9 +1,9 @@
 /***************************************************************************
-                          gs_display.h  -  description
-                             -------------------
-    begin                : Fri Mar 16 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@infinet.com
+sw_display.h
+                             
+Fri Mar 16 2001
+copyright (C) 2001 by Terry Biggs
+tbiggs@users.sourceforge.net
  ***************************************************************************/
 
 /*

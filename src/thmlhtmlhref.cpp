@@ -17,15 +17,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "thmlhtmllink.h"
+#include <thmlhtmlhref.h>
 
 
-ThMLHTMLLINK::ThMLHTMLLINK()
+ThMLHTMLHREF::ThMLHTMLHREF()
 {
 }
 
 
-char ThMLHTMLLINK::ProcessText(char *text, int maxlen)
+char ThMLHTMLHREF::ProcessText(char *text, int maxlen)
 {
   char *to, *from, token[2048], verseRef[500], tokpos = 0, refpos = 0;
   bool intoken 	= false;
