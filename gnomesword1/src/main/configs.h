@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#include <glib-2.0/glib.h>
+//#include <glib-2.0/glib.h>
 	
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
@@ -38,22 +38,10 @@ struct  _mod_font {
 	const char *new_font_size;
 	int no_font;
 };
-
-void save_module_key(char * mod_name, char * key);
-int open_config_file(char *file);
-void erase_config_section(char *section);
-int close_config_file(void);
-void add_to_config_file(char * section, 
-			char * label, char * value);
-const char *get_config_value(char * section, char * label);
-int set_config_to_get_labels(char * section);
-const char *get_next_config_label(void);
-	
-char *get_module_font_name(char *mod_name);
+ 
 char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
 void save_conf_file_item(const char * file, const char * mod_name, const char * item,
 			const char * value);
-char *get_module_font_size(char *mod_name);
 #ifdef __cplusplus
 }
 #endif

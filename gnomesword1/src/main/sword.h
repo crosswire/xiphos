@@ -50,6 +50,7 @@ extern char *OLD_CODESET;
 /*** function prototypes ***/
 
 void main_set_module_unlocked(char * mod_name, char * key);
+void main_save_module_key(char * mod_name, char * key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);

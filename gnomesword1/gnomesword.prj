@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr CFLAGS=-O2 CXXFLAGS=-O2
+project.configure.options=--prefix=/home/tom --enable-moz_embed --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -62,8 +62,8 @@ preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
 preferences.use.tabs=1
-preferences.indent.size=4
-preferences.tabsize=4
+preferences.indent.size=8
+preferences.tabsize=8
 preferences.indent.closing=0
 
 module.include.name=.
@@ -122,7 +122,6 @@ module.include.files=\
 	src/main/settings.h\
 	src/main/spell.h\
 	src/main/sword.h\
-	src/backend/config.hh\
 	src/main/configs.h\
 	src/main/xml.h\
 	src/gui/sidebar.h\
@@ -156,13 +155,11 @@ module.include.files=\
 module.source.name=.
 module.source.type=
 module.source.files=\
-	src/backend/config.cc\
 	src/backend/sword.cpp\
 	src/main/main.c\
 	src/main/settings.c\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
-	src/main/configs.c\
 	src/main/xml.c\
 	src/gnome2/about_gnomesword.c\
 	src/gnome2/about_modules.c\
@@ -231,7 +228,8 @@ module.source.files=\
 	src/main/parallel_view.cc\
 	src/main/embed.cc\
 	src/backend/gs_markupfiltmgr.cpp\
-	src/backend/gs_osishtmlhref.cpp
+	src/backend/gs_osishtmlhref.cpp\
+	src/main/configs.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -34,12 +34,12 @@
 
 /******************************************************************************
  * Name
- *   
+ *   gui_add_cipher_key
  *
  * Synopsis
  *   #include "unlock_key_dialog.h"
  *
- *   	
+ *   gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)	
  *
  * Description
  *   create dialog to get key to unlock a module
@@ -48,7 +48,7 @@
  *   gboolean
  */
 
-gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
+gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 {
 	gchar *retval = NULL;
 	gint test;
@@ -63,11 +63,11 @@ gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	info->label1 = N_("Enter Cipher Key: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
-	/*** open dialog to get name for root node ***/
+	/*** open dialog ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		main_set_module_unlocked(mod_name, info->text1);
-		save_module_key(mod_name, info->text1);
+		main_save_module_key(mod_name, info->text1);
 		retval = g_strdup(info->text1);
 	}
 	g_free(info->text1);

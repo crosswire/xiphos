@@ -47,7 +47,7 @@ char *OLD_CODESET;
 
 using namespace sword; 
   
-static char *get_sword_locale(void)
+char *backend_get_sword_locale(void)
 {
 	const char *sys_local;
 	char *retval = NULL;
@@ -161,7 +161,7 @@ void backend_init(void)
 	 
 	sys_locale = strdup((char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
 
-	sword_locale = get_sword_locale();
+	sword_locale = backend_get_sword_locale();
 #ifdef DEBUG	
 	g_print("%s %s\n", _("System locale is"),sys_locale);
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);

@@ -538,6 +538,7 @@ void main_update_parallel_page(void)
 	gboolean was_editable, use_gtkhtml_font;
 	gboolean is_rtol = FALSE;
 	gchar *buf;
+	gchar *file = NULL;
 
 	if (settings.havebible) {
 		/* setup gtkhtml widget */
@@ -606,7 +607,12 @@ void main_update_parallel_page(void)
 
 			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
-			font_name = get_module_font_name(mod_name);
+			//font_name = get_module_font_name(mod_name);
+			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
+			font_name = get_conf_file_item(file, mod_name, "Font");
+			//g_free(file);
+			if (!font_name)
+				font_name = g_strdup("none");
 			if (strlen(font_name) < 2) {
 				use_gtkhtml_font = TRUE;
 //                                      g_warning("use_gtkhtml_font = TRUE");
@@ -619,8 +625,12 @@ void main_update_parallel_page(void)
 //                                      g_warning("use_gtkhtml_font = FALSE");
 				}
 			}
-
-			font_size = get_module_font_size(mod_name);
+			
+			//file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);			
+			font_size = get_conf_file_item(file, mod_name, "Fontsize");
+			g_free(file);//get_module_font_size(mod_name);			
+			if(!font_size)
+				font_size = g_strdup("+0");
 			if (strlen(font_size) < 2){
 				free(font_size);
 				font_size = g_strdup("+0");
@@ -761,15 +771,19 @@ void main_update_parallel_page(void)
 
 static void int_display(gchar * key)
 {
-	gchar
-	    * utf8str,
-	    *bgColor,
-	    *textColor,
-	    buf[500], *tmpkey, tmpbuf[256], *mod_name, *use_font_size;
+	gchar  	* utf8str,
+	   	*bgColor,
+		*textColor,
+	    	buf[500], 
+		*tmpkey, 
+		tmpbuf[256], 
+		*mod_name, 
+		*use_font_size;
 	GString *str;
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
 	gchar *buf2;
+	gchar *file = NULL;
 	gint utf8len, cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
 	GtkHTML *html = GTK_HTML(widgets.html_parallel);
@@ -842,7 +856,13 @@ static void int_display(gchar * key)
 
 			is_rtol = main_is_mod_rtol(mod_name);
 			
-			use_font_size = get_module_font_size(mod_name);
+			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);			
+			use_font_size = get_conf_file_item(file, mod_name, "Fontsize");
+			g_free(file);
+			if(!use_font_size)
+				use_font_size = g_strdup("+0");			
+			
+			//use_font_size = get_module_font_size(mod_name);
 			if (strlen(use_font_size) < 2) {
 				free(use_font_size);
 				use_font_size = g_strdup("+0");
