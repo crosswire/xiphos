@@ -55,8 +55,6 @@ extern "C" {
 	void gotoanchorHTML(GtkWidget *html_widget, gchar * verse);
 	void sethtmltoeditHTML(gboolean choice);
 	gchar *gethtmlfontnameHTML(gchar *xfontname);
-	/*** set html default font ***/
-	void set_gtkhtml_default_font_HTML(GtkWidget *html_widget, gchar *xfontname);
 	void html_print(GtkWidget *htmlwidget);
 #ifdef __cplusplus
 }

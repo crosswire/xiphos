@@ -90,6 +90,7 @@ SWDisplay
     *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *commDisplay,		/* to display commentary modules */
+    *bookDisplay,		/* to display gbs modules */
     *UTF8Display;		/* to display modules in utf8 */
     
 SWMgr 
@@ -105,6 +106,7 @@ SWModule
     * curMod,		/* module for main text window */
     *comp1Mod,			/* module for first interlinear window */
     *curcomMod,			/* module for commentary  window */
+    *curbookMod,			/* module for gen book  window */
     *percomMod,			/* module for personal commentary  window */
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
@@ -118,19 +120,26 @@ GList
     * biblemods,
     *commentarymods,
     *dictionarymods,
-    *percommods, 
+    *percommods,
+    *bookmods, 
     *sbfavoritesmods, 
     *sbbiblemods, 
     *sbdictmods, 
     *sbcommods,
+    *sbbookmods,
     *options;
+    
 GtkWidget * NEtext,		/* note edit widget */
     *MainFrm;			/* main form widget  */
-gint curChapter = 8,		/* keep up with current chapter */
+    
+gint 
+    curChapter = 8,		/* keep up with current chapter */
     curVerse = 28,		/* keep up with current verse */
     answer,			/* do we want to save studybad file on shutdown */
     hebrewpage = 0, greekpage = 0;
-gboolean noteModified = false,	/* set to true is personal note has changed */
+    
+gboolean 
+    noteModified = false,	/* set to true is personal note has changed */
     usepersonalcomments = false,	/* do we setup for personal comments - default is false  */
     ApplyChange = true,		/* should we make changes when cbBook is changed */
     autoSave = true,		/* we want to auto save changes to personal comments */
@@ -138,7 +147,9 @@ gboolean noteModified = false,	/* set to true is personal note has changed */
     havedict = false,		/* let us know if we have at least one lex-dict module */
     havecomm = false,		/* let us know if we have at least one commentary module */
     autoscroll = true;		/* commentary module auto scroll when true -- in sync with main text window */
-gchar com_key[80] = "Rom 8:28",	/* current commentary key */
+    
+gchar 
+    com_key[80] = "Rom 8:28",	/* current commentary key */
     *textmod, *commod, *dictmod;
 
 /***********************************************************************************************
@@ -170,7 +181,6 @@ extern gchar * current_filename,	/* filename for open file in study pad window  
  current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
 *mycolor, *mycolor;
 extern HISTORY historylist[];	/* sturcture for storing history items */
-
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -193,6 +203,7 @@ void initSWORD(GtkWidget * mainform)
 	curMod = NULL;		//-- set mods to null
 	comp1Mod = NULL;
 	curcomMod = NULL;
+	curbookMod = NULL;
 	curdictMod = NULL;
 	percomMod = NULL;
 
@@ -201,6 +212,7 @@ void initSWORD(GtkWidget * mainform)
 	percomDisplay = 0;	// set in create
 	FPNDisplay = 0;
 	commDisplay = 0;
+	bookDisplay = 0;
 	UTF8Display = 0;
 	/* setup versekeys for text and comm windows */
 	vkText.Persist(1);
@@ -227,6 +239,7 @@ void initSWORD(GtkWidget * mainform)
 	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
+	bookDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlBooks"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
 	FPNDisplay = new ComEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
@@ -259,7 +272,7 @@ void initSWORD(GtkWidget * mainform)
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have  
 			curcomMod->Disp(commDisplay);
-			curcomMod->SetKey(vkComm);
+			curcomMod->SetKey(vkComm);    
 		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
@@ -267,6 +280,12 @@ void initSWORD(GtkWidget * mainform)
 			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
 			curdictMod->Disp(dictDisplay);
+		} else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
+			curbookMod = (*it).second;
+			g_warning(curbookMod->Name());
+			bookmods = g_list_append(bookmods, curbookMod->Name());
+			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
+			curbookMod->Disp(bookDisplay);
 		}
 	}
 	//-- set up percom editor module

@@ -47,6 +47,7 @@ struct _settings {
 		*appbar, /* gnome status/progress bar */
 		*shortcut_bar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
+		*ctree_widget_books, /* books tree */
 		*hboxToolbar, /* for editor toolbars ??? */
 	
 	/* html widgets */

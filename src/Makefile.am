@@ -60,34 +60,36 @@ COMMON_SOURCE =  \
     gs_html.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
-    sw_viewtext_dlg.cpp \
-    sw_viewtext_dlg.h \
     gs_information_dlg.c \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
-    sw_module_options.cpp \
-    sw_module_options.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
-    sw_gnomesword.cpp \
-    sw_gnomesword.h \
-    sw_utility.cpp\
-    sw_utility.h \
-    sw_properties.cpp \
-    sw_properties.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
+    sw_gbs.cpp \
+    sw_gbs.h \
+    sw_gnomesword.cpp \
+    sw_gnomesword.h \
+    sw_module_options.cpp \
+    sw_module_options.h \
+    sw_properties.cpp \
+    sw_properties.h \
     sw_search.cpp \
     sw_search.h \
     sw_shortcutbar.cpp \
     sw_shortcutbar.h \
+    sw_utility.cpp\
+    sw_utility.h \
     sw_verselist_sb.cpp \
     sw_verselist_sb.h\
     sw_viewcomm_dlg.cpp \
     sw_viewcomm_dlg.h\
     sw_viewdict_dlg.cpp \
-    sw_viewdict_dlg.h
+    sw_viewdict_dlg.h \
+    sw_viewtext_dlg.cpp \
+    sw_viewtext_dlg.h 
 
 SPELLING_SOURCE =  \
     debug.h \
