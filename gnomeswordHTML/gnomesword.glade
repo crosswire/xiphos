@@ -5842,7 +5842,7 @@ Revelation
       <widget>
 	<class>GtkVBox</class>
 	<name>vbox35</name>
-	<homogeneous>False</homogeneous>
+	<homogeneous>True</homogeneous>
 	<spacing>0</spacing>
 	<child>
 	  <padding>0</padding>
@@ -5853,7 +5853,7 @@ Revelation
 	<widget>
 	  <class>GtkHBox</class>
 	  <name>hbox29</name>
-	  <homogeneous>False</homogeneous>
+	  <homogeneous>True</homogeneous>
 	  <spacing>0</spacing>
 	  <child>
 	    <padding>0</padding>
@@ -5864,7 +5864,7 @@ Revelation
 	  <widget>
 	    <class>GtkHandleBox</class>
 	    <name>hboxEDStudyPad</name>
-	    <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	    <shadow_type>GTK_SHADOW_NONE</shadow_type>
 	    <handle_position>GTK_POS_LEFT</handle_position>
 	    <snap_edge>GTK_POS_TOP</snap_edge>
 	    <child>
@@ -5880,7 +5880,7 @@ Revelation
 	      <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
 	      <type>GTK_TOOLBAR_ICONS</type>
 	      <space_size>5</space_size>
-	      <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+	      <space_style>GTK_TOOLBAR_SPACE_LINE</space_style>
 	      <relief>GTK_RELIEF_NONE</relief>
 	      <tooltips>True</tooltips>
 
@@ -5961,7 +5961,7 @@ Revelation
 	  <widget>
 	    <class>GtkHandleBox</class>
 	    <name>hboxPerCom</name>
-	    <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	    <shadow_type>GTK_SHADOW_NONE</shadow_type>
 	    <handle_position>GTK_POS_LEFT</handle_position>
 	    <snap_edge>GTK_POS_TOP</snap_edge>
 	    <child>
@@ -6028,7 +6028,7 @@ Revelation
 	<widget>
 	  <class>GtkHandleBox</class>
 	  <name>handlebox21</name>
-	  <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	  <shadow_type>GTK_SHADOW_NONE</shadow_type>
 	  <handle_position>GTK_POS_LEFT</handle_position>
 	  <snap_edge>GTK_POS_TOP</snap_edge>
 	  <child>
@@ -6219,20 +6219,12 @@ Revelation
       </widget>
 
       <widget>
-	<class>GtkNotebook</class>
-	<name>nbEditor</name>
-	<signal>
-	  <name>switch_page</name>
-	  <handler>on_nbEditor_switch_page</handler>
-	  <last_modification_time>Mon, 18 Jun 2001 20:03:03 GMT</last_modification_time>
-	</signal>
-	<show_tabs>False</show_tabs>
-	<show_border>False</show_border>
-	<tab_pos>GTK_POS_TOP</tab_pos>
-	<scrollable>False</scrollable>
-	<tab_hborder>2</tab_hborder>
-	<tab_vborder>2</tab_vborder>
-	<popup_enable>False</popup_enable>
+	<class>GtkScrolledWindow</class>
+	<name>swEDHTML</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -6240,59 +6232,7 @@ Revelation
 	</child>
 
 	<widget>
-	  <class>GtkScrolledWindow</class>
-	  <name>swEditorText</name>
-	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	  <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-	  <widget>
-	    <class>GtkText</class>
-	    <name>textedit</name>
-	    <can_focus>True</can_focus>
-	    <editable>True</editable>
-	    <text></text>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <child_name>Notebook:tab</child_name>
-	  <name>label139</name>
-	  <label>label139</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
-	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	</widget>
-
-	<widget>
-	  <class>GtkScrolledWindow</class>
-	  <name>swEditorHTML</name>
-	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-	  <widget>
-	    <class>Placeholder</class>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <child_name>Notebook:tab</child_name>
-	  <name>label140</name>
-	  <label>label140</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
-	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
+	  <class>Placeholder</class>
 	</widget>
       </widget>
 

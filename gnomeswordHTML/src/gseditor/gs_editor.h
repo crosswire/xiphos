@@ -36,15 +36,12 @@ extern "C" {
 
 typedef struct _editor EDITOR;
 struct _editor {
-	GtkWidget *vbox,
-			   *notebook,
-			   *htmlwidget,
-			   *statusbar,
-			   *text;
+	GtkWidget *htmlwidget,
+		*statusbar;
 	gboolean   note_editor;
 };
 	
-GtkWidget* create_editor (GtkWidget *vbox, gboolean ispercom);	
+GtkWidget* create_editor (GtkWidget *app, GtkWidget *vbox, gboolean ispercom);	
 	
 #ifdef __cplusplus
 }
