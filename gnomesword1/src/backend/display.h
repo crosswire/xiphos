@@ -31,7 +31,7 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include "gs_gnomesword.h"
-
+#include "settings.h"
 
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"

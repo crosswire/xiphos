@@ -66,8 +66,8 @@ SB_VIEWER sb_v, *sv ;
 
 void set_sb_for_daily_devotion(SETTINGS * s)
 {
-	showSBGroup(s, groupnum7);
-	changegroupnameSB(s, _("Daily Devotion"), groupnum7);
+	showSBGroup(groupnum7);
+	changegroupnameSB(_("Daily Devotion"), groupnum7);
 }
 
 
@@ -89,8 +89,8 @@ void set_sb_for_daily_devotion(SETTINGS * s)
 
 void showSBVerseList(SETTINGS * s)
 {
-	showSBGroup(s, groupnum7);
-	changegroupnameSB(s, s->groupName, groupnum7);
+	showSBGroup(groupnum7);
+	changegroupnameSB(settings.groupName, groupnum7);
 }
 
 /******************************************************************************
@@ -211,13 +211,13 @@ static void change_viewer_page(GtkWidget *notebook, gint page)
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
 	switch(page) {
 		case 0:
-			changegroupnameSB(&settings, _("Verse List"), groupnum7);
+			changegroupnameSB(_("Verse List"), groupnum7);
 			break;
 		case 1:
-			changegroupnameSB(&settings, _("Search Results"), groupnum7);
+			changegroupnameSB(_("Search Results"), groupnum7);
 			break;
 		case 2:
-			changegroupnameSB(&settings, _("Viewer"), groupnum7);
+			changegroupnameSB(_("Viewer"), groupnum7);
 			break;
 			
 	}	

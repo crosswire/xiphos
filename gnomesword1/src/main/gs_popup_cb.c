@@ -145,7 +145,7 @@ on_about_this_module_activate(GtkMenuItem * menuitem,
 	else if (!strcmp((gchar *) user_data, "dictionary"))
 		settings.whichwindow = DICTIONARY_WINDOW;
 
-	display_about_module_dialog(get_module_name(&settings), FALSE);
+	display_about_module_dialog(get_module_name(), FALSE);
 }
 
 /*******************************************************************************

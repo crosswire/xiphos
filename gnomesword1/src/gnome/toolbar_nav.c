@@ -36,9 +36,6 @@
 #include "settings.h"
 #include "lists.h"
 
-extern gboolean ApplyChange;
-
-
 /******************************************************************************
  * Name
  *   on_cbeBook_changed
@@ -59,7 +56,7 @@ extern gboolean ApplyChange;
 static void on_cbeBook_changed(GtkEditable * editable, 
 						gpointer user_data)
 {
-	if (ApplyChange) {
+	if (settings.apply_change) {
 		gchar buf[256];
 		gchar *bookname =
 		    gtk_entry_get_text(GTK_ENTRY(settings.cbeBook));
@@ -88,7 +85,7 @@ static void on_cbeBook_changed(GtkEditable * editable,
 static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 			GdkEventButton * event,   gpointer user_data)
 {
-	if (ApplyChange) {
+	if (settings.apply_change) {
 		gchar *bookname;
 		gchar buf[256];
 		gint chapter, verse;
@@ -130,7 +127,7 @@ static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 static gboolean on_spbVerse_button_release_event(GtkWidget * widget, 
 			GdkEventButton * event,  gpointer user_data)
 {
-	if (ApplyChange) {
+	if (settings.apply_change) {
 		gchar *bookname, buf[256];
 		gint chapter, verse;
 

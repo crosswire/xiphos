@@ -30,7 +30,6 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
-
 /* frontend */
 #include "main_menu.h"
 #include "about_modules.h"
@@ -51,6 +50,7 @@
 #include "gbs.h"
 #include "gs_interlinear.h"
 #include "gs_history.h"
+#include "settings.h"
 #include "support.h"
 #include "gs_html.h"
 #include "gs_menu.h"
@@ -69,7 +69,6 @@
 #include "verselist.h"
 #include "shortcutbar.h"
  
- 
 /*****************************************************************************
  * externs
  */
@@ -87,11 +86,6 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
 
 /******************************************************************************
- * globals
- */
-gboolean ApplyChange;
-
-/******************************************************************************
  * static
  */
 static gchar *update_nav_controls(gchar * key);
@@ -101,21 +95,22 @@ static gchar *update_nav_controls(gchar * key);
  *****************************************************************************/
 void init_gnomesword(void)
 {	
-	
-
 	/*
 	 *  setup shortcut bar 
 	 */
-	gui_setup_shortcut_bar(&settings);
+	gui_setup_shortcut_bar();
+
 	/*
 	 *  create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(&settings, get_list(TEXT_DESC_LIST),get_list(OPTIONS_LIST));
+	createpopupmenus(&settings, get_list(TEXT_DESC_LIST),
+			get_list(OPTIONS_LIST));
+
 	/*
 	 *  setup Bible text gui 
 	 */
 	if(havebible)
-		setup_text(&settings,get_list(TEXT_LIST));
+		setup_text(&settings, get_list(TEXT_LIST));
 
 	/*
 	 *  setup commentary gui support 
@@ -161,7 +156,7 @@ void init_gnomesword(void)
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */
-	UpdateChecks(&settings);
+	UpdateChecks();
 
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
@@ -170,7 +165,7 @@ void init_gnomesword(void)
 	 * FIXME: maybe we need to move the devotional ? 
 	 */
 	if (settings.showdevotional) {
-		display_devotional(&settings);
+		display_devotional();
 	}
 	
 	g_print("done\n");
@@ -231,12 +226,12 @@ void gnomesword_shutdown(void)
  * and toggle buttons - called on start up
  *****************************************************************************/
 
-void UpdateChecks(SETTINGS * s)
+void UpdateChecks(void)
 {
 	/* does user want verses or paragraphs */
-	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
+	GTK_CHECK_MENU_ITEM(settings.versestyle_item)->active = settings.versestyle;
 
-	if (s->footnotesint)
+	if (settings.footnotesint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "On");	/* keep footnotes in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "Off");	/* keep footnotes in sync with menu */
@@ -244,7 +239,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set interlinear Strong's Numbers to last setting used 
 	 */
-	if (s->strongsint)
+	if (settings.strongsint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "On");	/* keep Strongs in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
@@ -252,7 +247,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set interlinear morph tags to last setting used 
 	 */
-	if (s->morphsint)
+	if (settings.morphsint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
@@ -260,7 +255,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set interlinear Hebrew Vowel Points to last setting used 
 	 */
-	if (s->hebrewpointsint)
+	if (settings.hebrewpointsint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
@@ -268,7 +263,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set interlinear Hebrew Cantillation to last setting used 
 	 */
-	if (s->cantillationmarksint)
+	if (settings.cantillationmarksint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
@@ -276,7 +271,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set interlinear Greek Accents to last setting used 
 	 */
-	if (s->greekaccentsint)
+	if (settings.greekaccentsint)
 		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "On");	/* keep Greek Accents in sync with menu */
 	else
 		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
@@ -284,7 +279,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set auto save personal comments to last setting 
 	 */
-	autoSave = s->autosavepersonalcomments;
+	autoSave = settings.autosavepersonalcomments;
 	/*
 	   set auto save menu check item 
 	 */
@@ -293,64 +288,40 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   show hide shortcut bar - set to options setting 
 	 */
-	if (s->showshortcutbar) {
-		gtk_widget_show(s->shortcut_bar);
-		e_paned_set_position(E_PANED(s->epaned),
-				     s->shortcutbar_width);
+	if (settings.showshortcutbar) {
+		gtk_widget_show(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned),
+				     settings.shortcutbar_width);
 	}
 
-	else if (!s->showshortcutbar && s->showdevotional) {
-		gtk_widget_show(s->shortcut_bar);
+	else if (!settings.showshortcutbar && settings.showdevotional) {
+		gtk_widget_show(settings.shortcut_bar);
 		gui_shortcutbar_showhide();
 	}
 
 	else {
-		gtk_widget_hide(s->shortcut_bar);
-		e_paned_set_position(E_PANED(s->epaned),
+		gtk_widget_hide(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned),
 				     1);
 	}
 
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(lookup_widget(s->app, "vpaned1")),
-			     s->upperpane_hight);
+	e_paned_set_position(E_PANED(lookup_widget(settings.app, "vpaned1")),
+			     settings.upperpane_hight);
 
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
-			     s->biblepane_width);
+	e_paned_set_position(E_PANED(lookup_widget(settings.app, "hpaned1")),
+			     settings.biblepane_width);
 
-	if (!s->docked) {
-		s->docked = TRUE;
-		gui_attach_detach_shortcutbar(s);
+	if (!settings.docked) {
+		settings.docked = TRUE;
+		gui_attach_detach_shortcutbar();
 	}
-	gtk_widget_show(s->app);
+	gtk_widget_show(settings.app);
 
 	addhistoryitem = FALSE;
-	change_verse(s->currentverse);
+	change_verse(settings.currentverse);
 }
-
-/******************************************************************************
- * setformatoption
- * button
- *****************************************************************************/
-
-void setformatoption(GtkWidget * button)
-{
-	settings.formatpercom =
-	    GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
-}
-
-/******************************************************************************
- * changepagenotebook - someone changed the page in the main notebook
- * notebook - notebook widget - main notebook
- * page_num - notebook page number
- *****************************************************************************/
-
-void changepagenotebook(GtkNotebook * notebook, gint page_num)
-{
-	settings.notebook3page = page_num;/* store the page number so we can 
-					     open to it the next time we start */
-}
-
 
 /******************************************************************************
  * setautosave - someone clicked auto save personal  comments
@@ -639,24 +610,24 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
  * returns module key
  *****************************************************************************/
 
-gchar *get_module_key(SETTINGS * s)
+gchar *get_module_key(void)
 {
 	if (havebible) {
-		switch (s->whichwindow) {
+		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (gchar *) s->currentverse;
+			return (gchar *) settings.currentverse;
 			break;
 		case COMMENTARY_WINDOW:
-			return (gchar *) s->comm_key;
+			return (gchar *) settings.comm_key;
 			break;
 		case DICTIONARY_WINDOW:
-			return (gchar *) s->dictkey;
+			return (gchar *) settings.dictkey;
 			break;
 		case INTERLINEAR_WINDOW:
-			return (gchar *) s->cvInterlinear;
+			return (gchar *) settings.cvInterlinear;
 			break;
 		case BOOK_WINDOW:
-			return (gchar *) s->book_key;
+			return (gchar *) settings.book_key;
 			break;
 		}
 	}
@@ -668,21 +639,21 @@ gchar *get_module_key(SETTINGS * s)
  * returns module name
  *****************************************************************************/
 
-gchar *get_module_name(SETTINGS * s)
+gchar *get_module_name(void)
 {
 	if (havebible) {
-		switch (s->whichwindow) {
+		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (gchar *) s->MainWindowModule;
+			return (gchar *) settings.MainWindowModule;
 			break;
 		case COMMENTARY_WINDOW:
-			return (gchar *) s->CommWindowModule;
+			return (gchar *) settings.CommWindowModule;
 			break;
 		case DICTIONARY_WINDOW:
-			return (gchar *) s->DictWindowModule;
+			return (gchar *) settings.DictWindowModule;
 			break;
 		case BOOK_WINDOW:
-			return (gchar *) s->BookWindowModule;
+			return (gchar *) settings.BookWindowModule;
 			break;
 		}
 	}
@@ -717,7 +688,7 @@ static gchar *update_nav_controls(gchar * key)
 	char *val_key;
 	gint cur_chapter = 8, cur_verse = 28;
 
-	ApplyChange = FALSE;
+	settings.apply_change = FALSE;
 	val_key = backend_get_valid_key(key);
 	cur_chapter = backend_get_chapter_from_key(val_key);
 	cur_verse = backend_get_verse_from_key(val_key);
@@ -727,7 +698,7 @@ static gchar *update_nav_controls(gchar * key)
 	strcpy(settings.currentverse, val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - ApplyChange is set to false so we don't
+	 *  to new verse - settings.apply_change is set to false so we don't
 	 *  start a loop
 	 */
 	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
@@ -738,7 +709,7 @@ static gchar *update_nav_controls(gchar * key)
 				  (settings.spbVerse), cur_verse);
 	gtk_entry_set_text(GTK_ENTRY
 			   (settings.cbeFreeformLookup), val_key);
-	ApplyChange = TRUE;
+	settings.apply_change = TRUE;
 	return val_key;
 }
 
@@ -800,7 +771,7 @@ void change_verse(gchar * key)
 
 	val_key = update_nav_controls(key);
 
-	ApplyChange = FALSE;
+	settings.apply_change = FALSE;
 	
 	if (havebible) {
 		/* add item to history */
@@ -840,7 +811,7 @@ void change_verse(gchar * key)
 		display_commentary(val_key);
 	
 	g_free(val_key);
-	ApplyChange = TRUE;
+	settings.apply_change = TRUE;
 }
 
 void save_module_key(gchar * mod_name, gchar * key)
@@ -870,7 +841,7 @@ const char *get_sword_version(void)
 	return backend_get_sword_version();
 }
 
-void display_devotional(SETTINGS * s)
+void display_devotional(void)
 {
 	gchar buf[80];
 	time_t curtime;
@@ -891,15 +862,16 @@ void display_devotional(SETTINGS * s)
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
 
-	gui_display_dictlex_in_viewer(s->devotionalmod, buf, s);
-	set_sb_for_daily_devotion(s);
+	gui_display_dictlex_in_viewer(settings.devotionalmod, buf, &settings);
+	set_sb_for_daily_devotion(&settings);
 }
+
 /*** the changes are already made we just need to show them ***/
-void display_new_font_color_and_size(SETTINGS * s)
+void display_new_font_color_and_size(void)
 {
 	display_text(settings.currentverse);
-	display_commentary(s->currentverse);
-	display_dictlex(s->dictkey);
+	display_commentary(settings.currentverse);
+	display_dictlex(settings.dictkey);
 	update_interlinear_page(&settings);
 }
 

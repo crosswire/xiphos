@@ -28,7 +28,8 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
-	
+#include "settings.h"
+
 const char *backend_get_percomm_key(int mod_num);
 void backend_save_personal_comment(int mod_num, char * buf);
 void backend_delete_personal_comment(int mod_num);
