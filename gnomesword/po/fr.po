@@ -1,0 +1,1287 @@
+# French translation for GnomeSword
+# Dominique Corbex <dominique@corbex.net>
+# Version 0.1.0   2002-06-01
+#
+# Notes
+# Quickmark -> Marque
+# Daily devotion -> Méditation du jour
+# Sword Project -> Projet Sword
+# Shortcut Bar -> Barre des raccourcis
+
+
+# src/gs_abouts.c
+msgid "About The Sword Project"
+msgstr "À propos du Projet Sword"
+
+# src/gs_abouts.c
+msgid "About Sword Modules"
+msgstr "À propos des Modules de Sword"
+
+# src/gs_preferences_dlg.c
+msgid "App Height"
+msgstr "Hauteur de l'application"
+
+# src/gs_gui.c
+msgid "Bible Texts"
+msgstr "Textes Bibliques"
+
+# src/gs_shortcutbar.c
+msgid "Book"
+msgstr "Livre"
+
+# src/gs_gui.c
+# src/gs_gui.c
+# src/gs_shortcutbar.c
+msgid "Books"
+msgstr "Livres"
+
+# src/gs_preferences_dlg.c
+msgid "Default Dictionary"
+msgstr "Dictionnaire par défaut"
+
+# src/gs_gui.c
+msgid "Detach/Attach Shortcut Bar"
+msgstr "Détache/Attache la barre de raccourcis"
+
+# src/gs_menu.c
+msgid "Dict/Lex"
+msgstr "Dict/Lex"
+
+# src/gs_preferences_dlg.c
+msgid "Dock Shortcut Bar"
+msgstr "Attacher la barre de raccourcis"
+
+# src/gs_preferences_dlg.c x 2
+msgid "Font Colors and Sizes"
+msgstr "Couleurs et tailles des polices"
+
+# src/gs_preferences_dlg.c
+msgid "Font Size"
+msgstr "Taille des polices"
+
+# src/gs_menu.c
+msgid "Footnotes"
+msgstr "Notes de bas de page"
+
+# src/gs_preferences_dlg.c
+msgid "GnomeSword - Settings"
+msgstr "GnomeSword - Options"
+
+# src/menu.c
+msgid "Greek Accents"
+msgstr "Accents Grecs"
+
+# src/gs_preferences_dlg.c
+msgid "Greek Lex Viewer"
+msgstr "Visualisation du lexique Grec"
+
+# src/gs_menu.c
+msgid "Headings"
+msgstr "En-têtes"
+
+# src/gs_menu.c
+msgid "Hebrew Cantillation"
+msgstr "Cantique Hébreu"
+
+# src/gs_preferences_dlg.c
+msgid "Hebrew Lex Viewer"
+msgstr "Visualisation du lexique Hébreu"
+
+# src/gs_menu.c
+msgid "Hebrew Vowel Points"
+msgstr "Ponctuation des voyelles Hébreu"
+
+# src/gs_gui.c
+msgid "Hide/Show Shortcut Bar"
+msgstr "Cacher/Montrer la barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "In Dict/Lex Window"
+msgstr "Dans la fenêtre Dict/Lex"
+
+# src/gs_preferences_dlg.c
+msgid "In Shortcut bar Viewer"
+msgstr "Dans la barre de raccourcis"
+
+# src/menu.c
+msgid "Lemmas"
+msgstr "Lemmas"
+
+# src/gs_preferences_dlg.c
+msgid "Misc Interface Settings"
+msgstr "Interface utilisateur"
+
+# src/gs_preferences_dlg.c
+msgid "Misc"
+msgstr "Divers"
+
+# src/gs_menu.c
+msgid "Morphological Tags"
+msgstr "Étiquettes Morphologiques"
+
+# src/gs_preferences_dlg.c
+msgid "Preferences"
+msgstr "Préférences"
+
+# src/gs_menu.c
+msgid "Scripture Cross-reference"
+msgstr "Références croisées de l'Écriture"
+
+# src/gs_shortcutbar.c
+msgid "Search Book"
+msgstr "Livre"
+
+# src/gs_preferences_dlg.c
+msgid "Shortcut Bar"
+msgstr "Barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "Shortcut Bar Settings"
+msgstr "Options de la barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "Show Books Group"
+msgstr "Afficher le groupe Livres"
+
+# src/gs_menu.c
+# src/gs_preferences_dlg.c
+msgid "Show Tabs"
+msgstr "Afficher les onglets"
+
+# src/gs_menu.c
+msgid "Strong's Numbers"
+msgstr "Numéros de Strong"
+
+# src/gs_setup.c
+msgid "SWORD version"
+msgstr "Version de SWORD"
+
+# src/gs_abouts.c
+msgid ""
+"The SWORD Project is an effort to create an ever expanding software "
+"package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework. An installed module set may be shared between any frontend using the framework."
+msgstr ""
+"Le Projet SWORD à pour but de créer un ensemble de logiciels en constante évolution permettant la recherche et l'étude de Dieu et de sa Parole. Le moteur SWORD Bible permet de manipuler aisément les modules de Textes Bibliques, Commentaires, Lexiques, Dictionnaires, etc. De nombreuses interfaces utilisateur permettant d'utiliser ce moteur sont en cours de création. Elles partagent le même ensemble de modules."
+
+# src/gs_setup.c
+msgid "This guide will take you through the initial setup of GnomeSword"
+msgstr "Ce guide va vous assister pendant l'installation initiale de GnomeSword"
+
+# src/gs_gui.c
+msgid "Toggle Footnotes"
+msgstr "Montrer/Cacher les notes de bas de page"
+
+# src/gs_gui.c
+msgid "Toggle Morphological Tags"
+msgstr "Montrer/Cacher les étiquettes morphologiques"
+
+# src/gs_gui.c
+msgid "Toggle Strongs Numbers"
+msgstr "Montrer/Cacher les numéros de Strong"
+
+# src/gs_preferences_dlg.c
+msgid "Upper Pane Height"
+msgstr "Hauteur du panneau supérieur"
+
+# src/gs_preferences_dlg.c
+msgid "Use Default Dictionary"
+msgstr "Utiliser le dictionnaire par défaut"
+
+# src/gs_abouts.c
+msgid ""
+"We would like to thank Troy Griffitts and all the other folks who "
+"have given us The SWORD Project."
+msgstr ""
+"Nous voulons remercier Troy Griffitts et toutes les autres personnes "
+"qui nous ont apporté le Projet SWORD."
+
+# src/gs_setup.c
+msgid "Welcome To GnomeSword"
+msgstr "Bienvenue à GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "where to View Dict/Lex When Link or Word Clicked"
+msgstr "Où afficher le Dict/Lex après avoir cliqué sur un mot ou un lien"
+
+#
+# unsorted below this point :o(
+#
+
+# src/gs_abouts.c
+msgid "Modules can be downloaded from the Sword Project "
+msgstr "Les modules peuvent être téléchargés depuis le Projet Sword "
+
+# src/gs_abouts.c x 2
+msgid "The Sword Project"
+msgstr "Le Projet Sword"
+
+# src/gs_bookmarks.c
+msgid "_New SubGroup"
+msgstr "_Nouveau sous-groupe"
+
+# src/gs_bookmarks.c
+msgid "Add new SubGroup to selected group"
+msgstr "Ajouter un nouveau sous-groupe au groupe sélectionné"
+
+# src/gs_bookmarks.c
+msgid "Add New Group"
+msgstr "Ajouter un nouveau groupe"
+
+# src/gs_bookmarks.c
+msgid "Add a new root group and file"
+msgstr "Ajouter un nouveau fichier groupe de base"
+
+# src/gs_bookmarks.c
+msgid "Save Bookmarks"
+msgstr "Enregistrer les signets"
+
+# src/gs_bookmarks.c
+msgid "Save all bookmark files"
+msgstr "Enregistrer tous les fichiers de signets"
+
+# src/gs_bookmarks.c
+msgid "Edit Item"
+msgstr "Éditer un élément"
+
+# src/gs_bookmarks.c
+msgid "Edit bookmark item"
+msgstr "Éditer un signet"
+
+# src/gs_bookmarks.c
+msgid "Delete Item(s)"
+msgstr "Supprimer l(es) élément(s)"
+
+# src/gs_bookmarks.c
+msgid "Delete item and it's siblings"
+msgstr "Supprimer un élément et ses descendants"
+
+# src/gs_bookmarks.c
+msgid "Expand All"
+msgstr "Développer tout"
+
+# src/gs_bookmarks.c
+msgid "Expand all Bookmarks groups"
+msgstr "Développer tous les groupes de signets"
+
+# src/gs_bookmarks.c
+msgid "Collapse All"
+msgstr "Réduire tout"
+
+# src/gs_bookmarks.c
+msgid "Collapse all Bookmarks groups"
+msgstr "Réduire tous les groupes de signets"
+
+# src/gs_bookmarks.c
+msgid "Allow Reordering"
+msgstr "Déplacer"
+
+# src/gs_bookmarks.c
+msgid "Toggle Reording - allow items to be moved by draging"
+msgstr "Activer/Désactiver le déplacement des éléments"
+
+# src/gs_bookmarks.c
+msgid "Enter SubGroup Name - use no '|'"
+msgstr "Entrer le nom du sous-groupe - ne pas utiliser '|'"
+
+# src/gs_bookmarks.c
+msgid "Enter Group Name - use no '|'"
+msgstr "Entrer le nom du groupe - ne pas utiliser '|'"
+
+# src/gs_bookmarks.c
+msgid "Enter Root Group Name - use no '|'"
+msgstr "Entrer le nom du groupe de base - ne pas utiliser '|'"
+
+# src/gs_bookmarks.c
+msgid "GnomeSword - Edit Bookmark"
+msgstr "GnomeSword - Éditer un signet"
+
+# src/gs_bookmarks.c
+msgid "Label"
+msgstr "Étiquette"
+
+# src/gs_bookmarks.c
+msgid "Reference "
+msgstr "Référence "
+
+# src/gs_bookmarks.c src/gs_html_editor.c
+msgid "Module"
+msgstr "Module"
+
+# src/gs_file.c
+msgid "GnomeSword - Open Note File"
+msgstr "GnomeSword - Ouvrir un fichier de notes"
+
+# src/gs_file.c:502
+msgid "GomeSword - Save Note File"
+msgstr "GnomeSword - Enregistrer le fichier de notes"
+
+# src/gs_gnomesword.c
+# src/gs_gui.c
+msgid "Romans 8:28"
+msgstr "Romains 8:28"
+
+# src/gs_gnomesword.c
+# src/gs_gnomesword.c
+# src/gs_gnomesword.c
+msgid "_Settings/"
+msgstr "_Configuration/"
+
+# src/gs_gnomesword.c
+msgid "Auto Save Personal Comments"
+msgstr "Enregistrer automatiquement les commentaires personnels"
+
+# src/gs_gnomesword.c src/gs_setup.c
+msgid "Show Interlinear Page"
+msgstr "Afficher la page interlinéaire"
+
+# src/gs_gnomesword.c
+msgid "Verse Style"
+msgstr "Style des versts"
+
+# src/gs_gnomesword.c
+msgid "_Quickmarks/<Separator>"
+msgstr "_Marques/<Séparateur>"
+
+# src/gs_gnomesword.c
+# src/gs_listeditor.c
+# src/gs_listeditor.c
+msgid "_Quickmarks/"
+msgstr "_Marques/"
+
+# src/gs_gui.c
+msgid "Clear Quickmarks"
+msgstr "Supprimer les Marques"
+
+# src/gs_gnomesword.c
+# src/gs_mainmenu.c
+msgid "_Quickmarks/Clear Quickmarks"
+msgstr "_Marques/Supprimer les Marques"
+
+# src/gs_gui.c
+# src/gs_html_editor.c
+msgid "Copy"
+msgstr "Copier"
+
+# src/gs_gui.c
+msgid "Copy highlighted text from main window"
+msgstr "Copier le texte en surbrillance de la fenêtre principale"
+
+# src/gs_gui.c
+# src/gs_shortcutbar.c
+msgid "Search"
+msgstr "Chercher"
+
+# src/gs_gui.c
+msgid "Open search dialog"
+msgstr "Ouvrir la fenêtre de recherche"
+
+# src/gs_gui.c
+msgid "Add Quickmark"
+msgstr "Ajouter une Marque"
+
+# src/gs_gui.c
+msgid "Add current verse to Quickmarks menu"
+msgstr "Ajouter le verset courant au Marques"
+
+# src/gs_gui.c
+# src/gs_gui.c
+# src/gs_listeditor.c
+# src/gs_listeditor.c
+msgid "Edit Quickmarks"
+msgstr "Éditer les Marques"
+
+# src/gs_gui.c
+msgid "C_lear"
+msgstr "_Effacer"
+
+# src/gs_gui.c
+msgid "Clear history list"
+msgstr "Effacer l'historique"
+
+# src/gs_gui.c
+msgid "Daily Devotion"
+msgstr "Daily Devotion"
+
+# src/gs_gui.c
+msgid "Show the Daily Devotion for Today"
+msgstr "Afficher la Daily Devotion d'aujourd'hui"
+
+# src/gs_gui.c
+msgid "Language Options"
+msgstr "Options de langue"
+
+# src/gs_gui.c
+msgid "Information about Bible texts"
+msgstr "Information à propos des Textes Bíbliques"
+
+# src/gs_gui.c
+# src/gs_gui.c
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Commentaries"
+msgstr "Commentaires"
+
+# src/gs_gui.c
+msgid "Dictionaries-Lexicons"
+msgstr "Dictionnaires-Lexiques"
+
+# src/gs_gui.c
+msgid "Contents"
+msgstr "Contenus"
+
+# src/gs_gui.c
+msgid "Help Contents"
+msgstr "Contenu de l'aide"
+
+# src/gs_gui.c
+msgid "About the Sword Project..."
+msgstr "À propos du Projet Sword..."
+
+# src/gs_gui.c
+msgid "Infotmation About The Sword Project"
+msgstr "Information à propos du Projet Sword"
+
+# src/gs_gui.c
+msgid "Information about the installed modules"
+msgstr "Information à propos des modules installés"
+
+# src/gs_gui.c
+msgid "About GnomeSword..."
+msgstr "À propos de GnomeSword..."
+
+# src/gs_gui.c
+msgid "About GnomeSword"
+msgstr "À propos de GnomeSword"
+
+# src/gs_gui.c
+msgid "_Quickmarks"
+msgstr "Mar_ques"
+
+# src/gs_gui.c
+msgid "_History"
+msgstr "_Historique"
+
+# src/gs_gui.c
+msgid "GnomeSWORD - Bible Study Software"
+msgstr "GnomeSword - Logiciel d'Étude de la Bible"
+
+# src/gs_gui.c
+msgid "Romans"
+msgstr "Romains"
+
+# src/gs_gui.c
+msgid "Go to verse in free form lookup and add verse to history"
+msgstr "Aller au verset saisi (ce verset est ajouté à l'historique)"
+
+# src/gs_gui.c
+msgid "Back"
+msgstr "Arrière"
+
+# src/gs_gui.c
+msgid "Go backward through history list"
+msgstr "Retour en arrière dans l'historique"
+
+# src/gs_gui.c
+msgid "Foward"
+msgstr "Avant"
+
+# src/gs_gui.c
+msgid "Go foward through history list"
+msgstr "Aller en avant dans l'historique"
+
+# src/gs_gui.c
+msgid "Exit"
+msgstr "Quitter"
+
+# src/gs_gui.c
+msgid "Exit GnomeSword"
+msgstr "Quitter GnomeSword"
+
+# src/gs_gui.c
+msgid "Synchronize"
+msgstr "Synchroniser"
+
+# src/gs_gui.c
+msgid "Synchronize Commentary with Bible Text"
+msgstr "Synchroniser le commentaire avec le Texte Bíblique"
+
+# src/gs_gui.c
+# src/gs_html_editor.c
+msgid "Print"
+msgstr "Imprimer"
+
+# src/gs_gui.c
+msgid "Print this Comment"
+msgstr "Imprimer ce commentaire"
+
+# src/gs_gui.c
+# src/gs_preferences_dlg.c
+msgid "Personal Comments"
+msgstr "Commentaires Personnels"
+
+# src/gs_gui.c
+msgid "Interlinear"
+msgstr "Interlinéaire"
+
+# src/gs_gui.c
+msgid "Study Pad"
+msgstr "Bloc-notes d'étude"
+
+# src/gs_history.c
+# src/gs_history.c
+# src/gs_history.c
+msgid "_History/<Separator>"
+msgstr "_Historique/<Séparateur>"
+
+# src/gs_history.c
+# src/gs_history.c
+msgid "_History/C_lear"
+msgstr "_Historique/_Effacer"
+
+# src/gs_html.c
+msgid "Show %s in main window"
+msgstr "Afficher %s dans la fenêtre principale"
+
+# src/gs_html_editor.c
+# src/gs_html_editor.c
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr "``%s'' a été modifié. Voulez-vous l'enregistrer?"
+
+# src/gs_html_editor.c
+msgid "File"
+msgstr "Fichier"
+
+# src/gs_html.c
+msgid "Show %s in main window"
+msgstr "Afficher %s dans la fenêtre principale"
+
+# src/gs_html.c
+msgid "Go to Strongs %s"
+msgstr "Aller à %s de Strong"
+
+# src/gs_html.c
+msgid "Go to %s"
+msgstr "Aller à %s"
+
+# src/gs_html_editor.c
+# src/gs_html_editor.c
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr "``%s'' a été modifié.  Voulez-vous l'enregistrer?"
+
+# src/gs_html_editor.c
+msgid "-untitled-"
+msgstr "-sans títre-"
+
+# src/gs_html_editor.c
+msgid "Save Note"
+msgstr "Enregistrer Note"
+
+# src/gs_html_editor.c
+msgid "Delete Note"
+msgstr "Supprimer Note"
+
+# src/gs_html_editor.c
+msgid "New"
+msgstr "Nouveau"
+
+# src/gs_html_editor.c
+msgid "Open"
+msgstr "Ouvrir"
+
+# src/gs_html_editor.c
+msgid "Save"
+msgstr "Enregistrer"
+
+# src/gs_html_editor.c
+msgid "Save AS"
+msgstr "Enregistrer sous"
+
+# src/gs_html_editor.c
+msgid "_Edit"
+msgstr "_Editer"
+
+# src/gs_html_editor.c
+msgid "Cut"
+msgstr "Couper"
+
+# src/gs_html_editor.c
+msgid "Paste"
+msgstr "Coller"
+
+# src/gs_html_editor.c
+msgid "Spell Check"
+msgstr "Vérification orthographique"
+
+# src/gs_html_editor.c
+msgid "Undo"
+msgstr "Annuler"
+
+# src/gs_html_editor.c
+msgid "Find"
+msgstr "Rechercher"
+
+# src/gs_html_editor.c
+msgid "Find Next"
+msgstr "Rechercher suivant"
+
+# src/gs_html_editor.c
+msgid "Replace"
+msgstr "Remplacer"
+
+# src/gs_html_editor.c
+msgid "Link..."
+msgstr "Lien..."
+
+# src/gs_html_editor.c
+msgid "GnomeSWORD Find"
+msgstr "Recherche GnomeSword"
+
+# src/gs_html_editor.c
+msgid "Enter Word or Phrase"
+msgstr "Entrer un mot ou une phrase"
+
+# src/gs_html_editor.c
+# src/gs_shortcutbar.c
+msgid "Case Sensitive"
+msgstr "Respecter la casse"
+
+# src/gs_html_editor.c
+msgid "Foward Search"
+msgstr "Rechercher en avant"
+
+# src/gs_html_editor.c
+msgid "Regular Expresion"
+msgstr "Expression Régulière"
+
+# src/gs_html_editor.c
+msgid "GnomeSWORD Add Reference Link"
+msgstr "Ajouter un lien de référence GnomeSword"
+
+# src/gs_html_editor.c
+msgid "Reference"
+msgstr "Référence"
+
+# src/gs_html_editor.c
+msgid "Bible Reference or Module key to display when link is clicked"
+msgstr "Clé de référence biblique ou module à afficher quand le lien est activé"
+
+# src/gs_html_editor.c
+msgid "Name of module to show when link is clicked"
+msgstr "Nom du module à afficher quand le lien est activé"
+
+# src/gs_info_box.c
+msgid "GnomeSword - InfoBox"
+msgstr "GnomeSword - Boîte d'information"
+
+# src/gs_info_box.c
+msgid "in StudyPad is not saved!"
+msgstr "Le bloc-notes d'étude n'est pas enregistré!"
+
+# src/gs_info_box.c
+msgid "Shall I save it?"
+msgstr "Doit-il être enregistré?"
+
+# src/gs_listeditor.c
+msgid "GnomeSword - Quickmark Editor"
+msgstr "GnomeSword - Éditeur de Marque"
+
+# src/gs_listeditor.c
+msgid "_Quickmarks/Edit Quickmarks"
+msgstr "_Quickmark/Éditer les Marques"
+
+# src/gs_listeditor.c
+msgid "GnomeSword - Quickmarks Editor"
+msgstr "GnomeSword - Éditeur de Marque"
+
+# src/gs_preferences_dlg.c
+msgid "Pick a color for Background"
+msgstr "Sélectionnez la couleur du fond"
+
+# src/gs_preferences_dlg.c
+msgid "Pick a color for Bible Text"
+msgstr "Sélectionnez la couleur du Texte Biblique"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "-2"
+msgstr "-2"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "-1"
+msgstr "-1"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+0"
+msgstr "+0"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+1"
+msgstr "+1"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+2"
+msgstr "+2"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+3"
+msgstr "+3"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+4"
+msgstr "+4"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "+5\r"
+msgstr "+5\r"
+
+# src/gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
+msgid "Zero is base font size Go up or down from there"
+msgstr "Zéro est la taille par défaut de la police.  Incrémentez ou décrémentez-là."
+
+# src/gs_preferences_dlg.c
+msgid "Pick a color - CurrentVerse BG"
+msgstr "Sélectionnez la couleur de fond du verset courant"
+
+# src/gs_preferences_dlg.c
+msgid "Pick a color for Current Verse"
+msgstr "Sélectionnez la couleur du verset courant"
+
+# src/gs_preferences_dlg.c
+msgid "Strongs Numbers & Morph Tags"
+msgstr "Numéros de Strong & Étiquettes Morphologiques"
+
+# src/gs_preferences_dlg.c
+msgid "Background Color"
+msgstr "Couleur du fond"
+
+# src/gs_preferences_dlg.c
+msgid "Text Color"
+msgstr "Couleur du texte"
+
+# src/gs_preferences_dlg.c
+msgid "Current Verse Color"
+msgstr "Couleur du verset courant"
+
+# src/gs_preferences_dlg.c
+msgid "Current Verse Background Color"
+msgstr "Couleur de fond du verset courant"
+
+# src/gs_preferences_dlg.c
+msgid "Default Font"
+msgstr "Police par défaut"
+
+# src/gs_preferences_dlg.c
+msgid "Verse Numbers"
+msgstr "Numéros de Versets"
+
+# src/gs_preferences_dlg.c
+msgid "Verse Number Font Size"
+msgstr "Taille de la police des numéros de versets"
+
+# src/gs_preferences_dlg.c
+msgid "Link Color"
+msgstr "Couleur des liens"
+
+# src/gs_preferences_dlg.c
+msgid "Greek Font"
+msgstr "Police du texte Grec"
+
+# src/gs_preferences_dlg.c
+msgid "Hebrew Font"
+msgstr "Police du texte Hébreu"
+
+# src/gs_preferences_dlg.c
+msgid "Unicode Font"
+msgstr "Police Unicode"
+
+# src/gs_preferences_dlg.c
+msgid "GnomeSword Defaults"
+msgstr "Options par défaut de GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "Use GnomeSword defaults for all settings on this page"
+msgstr "Utiliser les options par défaut de GnomeSword pour toutes les options de cette page"
+
+# src/gs_preferences_dlg.c
+msgid "Bible Text Window"
+msgstr "Fenêtre du Texte Biblique"
+
+# src/gs_preferences_dlg.c
+msgid "Use Defaults When Opening GnomeSword"
+msgstr "Utiliser les options par défaut au démarrage de GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "Yes, use defaults that I select"
+msgstr "Oui, utiliser les options par défaut que j'ai sélectionnées"
+
+# src/gs_preferences_dlg.c
+msgid ""
+"No, use settings saved\n"
+"on last GnomeSword run"
+msgstr ""
+"Non, utiliser les options enregistrées\n"
+"lors de la session précédente de GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "Show Shortcut bar"
+msgstr "Afficher la barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "Show Bible Texts notebook tabs"
+msgstr "Afficher les onglets des Textes Bibliques"
+
+# src/gs_preferences_dlg.c
+msgid "Show Commentary notebook tabs"
+msgstr "Afficher les onglets des Commentaires"
+
+# src/gs_preferences_dlg.c
+msgid "Show Dict/Lex notebook tabs"
+msgstr "Afficher les onglets des Dict/Lex"
+
+# src/gs_preferences_dlg.c
+msgid "No, use settings saved on last GnomeSword run"
+msgstr "Non, utiliser les options enregistrées lors de la session précédente de GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "Show Bible Texts notebook tabs"
+msgstr "Afficher les onglets des Textes Bibliques"
+
+# src/gs_preferences_dlg.c
+msgid "Show Commentary notebook tabs"
+msgstr "Afficher les onglets des Commentaires"
+
+# src/gs_preferences_dlg.c
+msgid "Show Dict/Lex notebook tabs"
+msgstr "Afficher les onglets des Textes Bibliques"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Use Verse Style"
+msgstr "Utiliser le style Verset"
+
+# src/gs_preferences_dlg.c
+msgid "Show Daily Devotion"
+msgstr "Afficher Daily Devotion"
+
+# src/gs_preferences_dlg.c
+msgid "Show Daily Devotion if you have a Devotion module"
+msgstr "Afficher Daily Devotion si vous avez un module Daily Devotion"
+
+# src/gs_preferences_dlg.c
+msgid "Shortcut Bar Groups"
+msgstr "Groupes de la barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "Show Favorites Group"
+msgstr "Afficher le groupe Favoris"
+
+# src/gs_preferences_dlg.c
+msgid "Show Bible Text Group"
+msgstr "Afficher le groupe Textes Bibliques"
+
+# src/gs_preferences_dlg.c
+msgid "Show Commentary Group"
+msgstr "Afficher le groupe Commentaires"
+
+# src/gs_preferences_dlg.c
+msgid "Show Dict/Lex Group"
+msgstr "Afficher le groupe Dict/Lex"
+
+# src/gs_preferences_dlg.c
+msgid "Show History Group"
+msgstr "Afficher le groupe Historique"
+
+# src/gs_preferences_dlg.c
+msgid "Use Formatting"
+msgstr "Utiliser la mise en forme"
+
+# src/gs_preferences_dlg.c
+msgid "Auto Save"
+msgstr "Enregistrement automatique"
+
+# src/gs_preferences_dlg.c
+msgid "Layout"
+msgstr "Disposition des fenêtres"
+
+# src/gs_preferences_dlg.c
+msgid "App Width"
+msgstr "Largeur de l'application"
+
+# src/gs_preferences_dlg.c
+msgid "ShortCut Bar Width"
+msgstr "Largeur de la barre de raccourcis"
+
+# src/gs_preferences_dlg.c
+msgid "Upper Pane Hight"
+msgstr "Hauteur du panneau supérieur"
+
+# src/gs_preferences_dlg.c
+msgid "App Hight"
+msgstr "Hauteur de l'application"
+
+# src/gs_preferences_dlg.c
+msgid "Bible Pane Width"
+msgstr "Largeur du panneau Bible"
+
+# src/gs_preferences_dlg.c
+msgid "Interface"
+msgstr "Interface"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Main Text Module"
+msgstr "Module principal de Texte"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Commentary"
+msgstr "Commentaire"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+# src/gs_shortcutbar.c x 2
+msgid "Dict/Lex"
+msgstr "Dict/Lex"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Personal"
+msgstr "Personnel"
+
+# src/gs_preferences_dlg.c
+msgid "Greek Lexicon"
+msgstr "Lexique Grec"
+
+# src/gs_preferences_dlg.c
+msgid "Hebrew Lexicon"
+msgstr "Lexique Hébreu"
+
+# src/gs_preferences_dlg.c
+msgid "Daily Devotional"
+msgstr "Daily Devotional"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Interlinear 5"
+msgstr "Interlinéaire 5"
+
+# src/gs_preferences_dlg.c
+# src/gs_setup.c
+msgid "Interlinear 4"
+msgstr "Interlinéaire 4"
+
+# src/gs_setup.c
+msgid "Your Home Directory:"
+msgstr "Votre répertoire perso :"
+
+# src/gs_setup.c
+msgid "Sword version"
+msgstr "Version de Sword"
+
+# src/gs_setup.c
+msgid "Sword Directory:"
+msgstr "Répertoire de Sword:"
+
+# src/gs_setup.c
+msgid "Number of Bible Text Modules:"
+msgstr "Nombre de modules Texte Bíblique :"
+
+# src/gs_setup.c
+msgid "Number of Commentary Modules:"
+msgstr "Nombre de modules Commentaire :"
+
+# src/gs_setup.c
+msgid "Number of Lexicon / Dictionary Modules"
+msgstr "Nombre de modules Dictionnaire / Lexique :"
+
+# src/gs_setup.c
+msgid "Do you want GnomeSword to open with"
+msgstr "Désirez-vous que GnomeSword s'ouvre avec"
+
+# src/gs_setup.c
+msgid "Settings you choose as default"
+msgstr "Options que vous avez choisies par défaut"
+
+# src/gs_setup.c
+msgid "Settings used the last time GnomeSword ran"
+msgstr "Options utilisées la dernière fois que vous avez exécuté GnomeSword"
+
+# src/gs_setup.c
+msgid "Settings to use on first program run"
+msgstr "Options utilisées à la première exécution de GnomeSword"
+
+# src/gs_setup.c:746
+msgid "Show Bible Tabs"
+msgstr "Afficher les onglets des Bibles"
+
+# src/gs_setup.c:766
+msgid "Auto Save Personal comments "
+msgstr "Sauvegarder automatiquement les Commentaires Personnels"
+
+# src/gs_setup.c:778
+msgid "Show Commentary Tabs"
+msgstr "Afficher les onglets des Commentaires"
+
+# src/gs_setup.c:809
+msgid "Show Dict/Lex Tabs"
+msgstr "Afficher les onglets des Dict/Lex"
+
+# src/gs_setup.c
+msgid ""
+"These setting will be the default settings if you chose to use default "
+"settings. "
+msgstr ""
+"Ces options deviendront les options par défaut si vous choisissez d'utiliser "
+"les options par défaut"
+
+# src/gs_setup.c
+msgid ""
+"            Thank-you for using GnomeSword.\n"
+"Click Finish to close this dialog and run GnomeSword."
+msgstr ""
+"            Merci d'utiliser Gnomesword.\n"
+"Cliquez sur Terminer pour fermer cette boîte de dialogue et exécuter GnomeSword."
+
+# src/gs_shortcutbar.c
+msgid "Large Icons"
+msgstr "Grandes Icônes"
+
+# src/gs_shortcutbar.c
+msgid "Small Icons"
+msgstr "Petites Icônes"
+
+# src/gs_shortcutbar.c
+msgid "Add Bible Text"
+msgstr "Ajouter un Texte Biblique"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Biblical Texts"
+msgstr "Textes Bíbliques"
+
+# src/gs_shortcutbar.c
+msgid "Add Commentary"
+msgstr "Ajouter un Commentaire"
+
+# src/gs_shortcutbar.c
+msgid "Add Dictionary"
+msgstr "Ajouter un Dictionnaire"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Lexicons / Dictionaries"
+msgstr "Lexiques / Dictionnaires"
+
+# src/gs_shortcutbar.c
+msgid "Add Shortcut"
+msgstr "Ajouter un Raccourci"
+
+# src/gs_shortcutbar.c
+msgid "About this Module"
+msgstr "À propos de ce module"
+
+# src/gs_shortcutbar.c
+msgid "Remove from Shortcut Bar"
+msgstr "Enlever de la barre de raccourcis"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Verse List"
+msgstr "Liste de Versets"
+
+# src/gs_shortcutbar.c
+msgid "Search Results"
+msgstr "Résultats de la recherche"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Viewer"
+msgstr "Visualiser"
+
+# src/gs_shortcutbar.c
+msgid "Save List"
+msgstr "Enregistrer la liste"
+
+# src/gs_shortcutbar.c
+msgid "Save the current verse list as a bookmark file"
+msgstr "Enregistrer la liste de versets courante comme un fichier de signets"
+
+# src/gs_shortcutbar.c
+msgid "Main Form"
+msgstr "Formulaire Principal"
+
+# src/gs_shortcutbar.c
+msgid "Toggle to show results in Main Form"
+msgstr "Activer/Désactiver pour afficher les résultats dans le formulaire principal"
+
+# src/gs_shortcutbar.c
+msgid "Show current verse list verse in Main Form"
+msgstr "Afficher la liste de versets courante dans le formulaire principal"
+
+# src/gs_shortcutbar.c
+msgid "View Verse List"
+msgstr "Voir la liste de versets"
+
+# src/gs_shortcutbar.c
+msgid "View Search Results"
+msgstr "Voir les résultats de la recherche"
+
+# src/gs_shortcutbar.c
+msgid "Begin Search"
+msgstr "Lancer la recherche"
+
+# src/gs_shortcutbar.c
+msgid "Search Type"
+msgstr "Type de recherche"
+
+# src/gs_shortcutbar.c
+msgid "Multi Word"
+msgstr "Multi-mots"
+
+# src/gs_shortcutbar.c
+msgid "Regular Expression"
+msgstr "Expression régulière"
+
+# src/gs_shortcutbar.c
+msgid "Exact Phrase"
+msgstr "Phrase exacte"
+
+# src/gs_shortcutbar.c
+msgid "Search Options"
+msgstr "Options de la recherche"
+
+# src/gs_shortcutbar.c
+msgid "Search Commentary"
+msgstr "Chercher dans Commentaire"
+
+# src/gs_shortcutbar.c
+msgid "Search Personal"
+msgstr "Cherhcher dans Personnel"
+
+# src/gs_shortcutbar.c
+msgid "Search Scope"
+msgstr "Étendue de la recherche"
+
+# src/gs_shortcutbar.c
+msgid "No Scope"
+msgstr "Sans limites"
+
+# src/gs_shortcutbar.c
+msgid "Use Bounds"
+msgstr "Utiliser les Limites"
+
+# src/gs_shortcutbar.c
+msgid "Last Search"
+msgstr "Recherche précédente"
+
+# src/gs_shortcutbar.c
+msgid "Bounds"
+msgstr "Limites"
+
+# src/gs_shortcutbar.c
+msgid "Lower"
+msgstr "Inférieure"
+
+# src/gs_shortcutbar.c
+msgid "Upper "
+msgstr "Supérieure "
+
+# src/gs_shortcutbar.c
+msgid "Genesis"
+msgstr "Genèse"
+
+# src/gs_shortcutbar.c
+msgid "Revelation"
+msgstr "Apocalypse"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Favorites"
+msgstr "Favoris"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "Bible Text"
+msgstr "Textes Bíbliques"
+
+# src/gs_shortcutbar.c
+# src/gs_shortcutbar.c
+msgid "History"
+msgstr "Historique"
+
+# src/gs_shortcutbar.c
+msgid "Bookmarks"
+msgstr "Signets"
+
+# src/gs_shortcutbar.c
+msgid "Add All Modules"
+msgstr "Ajouter tous les modules"
+
+# src/gs_unlockkey_dlg.c
+# src/gs_viewtext_dlg.c
+msgid "GnomeSword"
+msgstr "GnomeSword"
+
+# src/gs_unlockkey_dlg.c
+msgid "Enter Unlock Key"
+msgstr "Entrez la clé de déverrouillage"
+
+# src/gs_viewcomm_dlg.c
+msgid "GnomeSword - View Commentary"
+msgstr "GnomeSword - Voir Commentaire"
+
+# src/gs_viewcomm_dlg.c
+# src/gs_viewtext_dlg.c
+msgid "Sync with main window"
+msgstr "Synchroniser avec la fenêtre principale"
+
+# src/gs_viewcomm_dlg.c
+msgid "Enter a verse"
+msgstr "Entrer un verset"
+
+# src/gs_viewcomm_dlg.c
+msgid "Goto Verse"
+msgstr "Aller au verset"
+
+# src/gs_viewdict_dlg.c
+msgid "GnomeSword - View Dictionary"
+msgstr "GnomeSword - Voir Dictionnaire"
+
+# src/gs_viewdict_dlg.c
+# src/gs_viewtext_dlg.c
+msgid "Sync"
+msgstr "Sync"
+
+# src/gs_viewdict_dlg.c
+msgid "Lookup key from main window"
+msgstr "Clé de recherche de la fenêtre principale"
+
+# src/gs_viewdict_dlg.c
+msgid "Lookup: "
+msgstr "Recherche : "
+
+# src/gs_viewdict_dlg.c
+msgid "Load all keys for this module"
+msgstr "Charger toutes les clés de ce module"
+
+# src/gs_viewtext_dlg.c
+msgid "Add"
+msgstr "Ajouter"
+
+# src/gs_viewtext_dlg.c
+msgid "Module Options"
+msgstr "Options du Module"
+
+# src/gs_viewtext_dlg.c
+msgid "Go to verse"
+msgstr "Aller au verset"
