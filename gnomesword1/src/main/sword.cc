@@ -146,6 +146,31 @@ void main_set_module_unlocked(char * mod_name, char * key)
 	mgr->setCipherKey(mod_name, key);	
 }
 
+
+/******************************************************************************
+ * Name
+ *  main_save_module_key
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   void main_save_module_key(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *    to unlock locked modules
+ *
+ * Return value
+ *   void
+ */ 
+
+void main_save_module_key(char * mod_name, char * key)
+{
+	backend->save_module_key(mod_name, key);
+
+	/* FIXME: we need to display change */
+}
+
+
 /******************************************************************************
  * Name
  *   main_update_nav_controls
