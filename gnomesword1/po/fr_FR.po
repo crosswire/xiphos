@@ -30,12 +30,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-01 12:00-0500\n"
-"PO-Revision-Date: 2004-09-29 20:26+0200\n"
+"PO-Revision-Date: 2005-01-20 21:36+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -899,7 +899,7 @@ msgstr "Rechercher"
 
 #: src/gnome2/main_menu.c:507
 msgid "Search using the shortcut bar"
-msgstr "Utilise la recherche de la barre de raccourcis"
+msgstr "Utilise la recherche simple du volet latéral"
 
 #: src/gnome2/main_menu.c:512 src/gnome2/search_dialog.c:1223
 msgid "Advanced Search"
@@ -968,11 +968,11 @@ msgstr "Style verset"
 
 #: src/gnome2/main_menu.c:585
 msgid "Attach/Detach Sidebar"
-msgstr "Attacher/Détacher la barre de raccourcis"
+msgstr "Attacher/Détacher le volet latéral"
 
 #: src/gnome2/main_menu.c:591
 msgid "Show/Hide Sidebar"
-msgstr "Afficher/Cacher la barre de raccourcis"
+msgstr "Afficher/Cacher le volet latéral"
 
 #: src/gnome2/main_menu.c:601
 msgid "Contents"
