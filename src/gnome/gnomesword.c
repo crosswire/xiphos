@@ -76,6 +76,7 @@ void init_gnomesword(void)
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
+	
 	/*
 	 *  setup shortcut bar 
 	 */
@@ -86,6 +87,7 @@ void init_gnomesword(void)
 	 */
 	gui_set_interlinear_options_at_start();
 	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
+	
 	/*
 	 *  setup Bible text gui 
 	 */

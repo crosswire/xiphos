@@ -34,7 +34,6 @@ void backend_init(void);
 GList * backend_get_global_options_list(void);
 void backend_module_name_from_description(char * mod_name, char * mod_desc);
 void backend_shutdown(void);
-void backend_set_locale(char *locale);
 char *backend_get_valid_key(char *key);
 const char *backend_get_book_from_key(char *key);
 int backend_get_chapter_from_key(char *key);
