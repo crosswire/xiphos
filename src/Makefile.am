@@ -13,6 +13,8 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     e-splash.c \
     e-splash.h \
+    font_dialog.c \
+    font_dialog.h \
     gs_abouts.c \
     gs_abouts.h \
     gs_bookmarks.c \
@@ -78,6 +80,8 @@ COMMON_SOURCE =  \
     sw_bookmarks.h \
     sw_display.cpp \
     sw_display.h \
+    sw_font.cpp \
+    sw_font.h \
     sw_gbs.cpp \
     sw_gbs.h \
     sw_information_dlg.cpp \

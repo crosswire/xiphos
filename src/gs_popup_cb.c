@@ -50,6 +50,7 @@
 #include "gs_bookmarks.h"
 #include "gs_detach_int.h"
 #include "support.h"
+#include "font_dialog.h"
 
 
 /******************************************************************************
@@ -75,6 +76,11 @@ extern gchar
 
 extern GList
 	*options;
+	
+void set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_set_module_font(getmodnameSWORD(GPOINTER_TO_INT(user_data)));
+}
 	
 /*** undock/dock interlinear page ***/
 void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s)
