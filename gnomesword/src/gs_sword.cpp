@@ -404,7 +404,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
-		beginHTML(lookup_widget(MainFrm,"textComp1"));		
+		beginHTML(lookup_widget(MainFrm,"textComp1"),FALSE);		
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
 		changecomp1ModSWORD(settings->Interlinear3Module);
@@ -554,15 +554,39 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 
 //-------------------------------------------------------------------------------------------
 void
+morphsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
+{
+	if(choice){ //-- if choice is TRUE - we want strongs numbers	
+		mainMgr->setGlobalOption("Morphological Tags","On");  //-- turn strongs on 
+		mainMgr1->setGlobalOption("Morphological Tags","On");  //-- turn strongs on
+	}else{   //-- we don't want strongs numbers	
+		mainMgr->setGlobalOption("Morphological Tags","Off");	//-- turn strongs off
+		mainMgr1->setGlobalOption("Morphological Tags","Off");	//-- turn strongs off
+	}
+	settings->strongs = choice;   //-- store choice in settings
+	if(havebible){
+		curMod->Display(); //-- we need to show change
+		//comp1Mod->Display(); //-- we need to show change
+	}
+}
+
+
+//-------------------------------------------------------------------------------------------
+void
 strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
 {
 	if(choice){ //-- if choice is TRUE - we want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 		
+		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 
+		mainMgr1->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on
 	}else{   //-- we don't want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
+		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off
+		mainMgr1->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off
 	}
 	settings->strongs = choice;   //-- store choice in settings
-	if(havebible) curMod->Display(); //-- we need to show change
+	if(havebible){
+		curMod->Display(); //-- we need to show change
+		//comp1Mod->Display(); //-- we need to show change
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -571,13 +595,16 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 {
 	if(choice){ //-- we want footnotes	
 		mainMgr->setGlobalOption("Footnotes","On"); //-- turn footnotes on
-		//mainMgr1->setGlobalOption("Footnotes","On"); //-- turn footnotes on
+		mainMgr1->setGlobalOption("Footnotes","On"); //-- turn footnotes on
 	}else{ //-- we don't want footnotes	
 		mainMgr->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
-		//mainMgr1->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
+		mainMgr1->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
 	}
 	settings->footnotes = choice;   //-- store choice in settings
-	if(havebible) curMod->Display(); //-- we need to show change
+	if(havebible) {
+		curMod->Display(); //-- we need to show change
+		//comp1Mod->Display(); //-- we need to show change
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1378,3 +1405,5 @@ GList *getBibleBooks(void)
 	}
 	return list;	
 }
+
+

@@ -48,10 +48,6 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
-    gs_rwphtml.cpp \
-    gs_rwphtml.h \
-    gs_thmlhtml.cpp \
-    gs_thmlhtml.h \
     sw_utility.cpp\
     sw_utility.h \
     gs_viewtext_dlg.c \

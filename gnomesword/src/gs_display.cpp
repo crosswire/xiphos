@@ -93,7 +93,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	strbuf = g_string_append(strbuf, tmpBuf);
 	/* show verse ref in text widget  */
 	/* show module text for current key */
-	beginHTML(GTK_WIDGET(gtkText));
+	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	if (!strcmp(font, "Symbol")) {
@@ -141,7 +141,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbCom")), 0);
 	(const char *) imodule;	/* snap to entry */
-	beginHTML(GTK_WIDGET(gtkText));
+	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	strbuf = g_string_new("");
 	/* show verse ref in text widget  */
 	g_string_sprintf(strbuf,
@@ -190,10 +190,9 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
  ******************************************************************************/
 char GTKhtmlChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[500], *buf, *font;
+	char tmpBuf[500], *buf, *font, *mybuf;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
-	//ConfigEntMap::iterator cit;	//-- iteratior
 	GString *strbuf;
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
 	int curVerse = key->Verse();
@@ -201,31 +200,25 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gint len;
-	gchar *sourceformat;
-	bool gbf = false;
-	char *Buf;
+	char *Buf, c;
+	bool newparagraph = false;
+	gint mybuflen;
 
+	c = 182;
 	font = "Roman";
-	sourceformat = "plain";
-
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbText")), 1);
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
 		}
-		eit = (*sit).second.find("SourceType");
-		if (eit != (*sit).second.end())
-			sourceformat = (char *) (*eit).second.c_str();
-		if (!strcmp(sourceformat, "GBF"))
-			gbf = true;
 	}
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbText")), 1);
-	beginHTML(GTK_WIDGET(gtkText));
+	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	strbuf =
-	    g_string_new
-	    ("<HTML><BODY><body text=\"#151515\" link=\"#898989\">");
+	    g_string_new("");
+	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">","+3");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 
@@ -247,46 +240,52 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());
 		}
+		
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 		if (key->Verse() == curVerse) {
 			strbuf = g_string_new("");
-			if (!strcmp(font, "Symbol")) {
+			if (!stricmp(font, "Symbol")) {
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\" FACE=\"symbol\">",
 						 mycolor);
-			} else if (!strcmp(font, "Greek")) {
+			} else if (!stricmp(font, "greek1")) {
 				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\" FACE=\"sil galatia\">",
+						 "<FONT SIZE=\"+5\" COLOR=\"%s\" FACE=\"greek1\">",
 						 mycolor);
+			
+			} else if (!stricmp(font, "BSTHebrew")) {
+				g_string_sprintf(strbuf,
+						 "<FONT COLOR=\"%s\" FACE=\"bsthebrew\">",
+						 mycolor);				
 			} else {
+				if (bVerseStyle && newparagraph) {				
+					g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">%c", mycolor,182);				
+					newparagraph = false;
+				} else
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\">",
 						 mycolor);
 			}
-
-			if (gbf) {
-				len = strlen((const char *) imodule);
-				len = len * 8;
-				Buf = new char[len];
-				strcpy(Buf, (const char *) imodule);
-				gbftohtml(Buf, len);
-				strbuf = g_string_append(strbuf, Buf);
-				delete[]Buf;
-				Buf = NULL;
-
-			} else
-
-				strbuf =
-				    g_string_append(strbuf, (const char *)
-						    imodule);
+			if (newparagraph) {			
+				newparagraph = false;
+			} 	
+			strbuf = g_string_append(strbuf, (const char *)imodule);
 			if (bVerseStyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
 				    && strstr(strbuf->str, "<P>") == NULL)
 					strbuf =
 					    g_string_append(strbuf,
 							    "</font><br>");
-				else
+				else if(strstr(strbuf->str, "<P>") != NULL) {
+					mybuf = strstr(strbuf->str, "<P>");
+					mybuflen = strlen(mybuf);
+					mybuflen =strbuf->len - mybuflen; 
+					strbuf = g_string_truncate(strbuf,mybuflen);
+					    g_string_append(strbuf,
+							    "</font><br>");
+					newparagraph = true;
+				} else
 					strbuf =
 					    g_string_append(strbuf,
 							    "</font>");
@@ -297,61 +296,37 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				    strbuf->len);
 			g_string_free(strbuf, TRUE);
 		} else {
-			if (!strcmp(font, "Symbol")) {
-				strbuf =
-				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */
-				strbuf =
-				    g_string_append(strbuf, (const char *)
-						    imodule);
-				if (bVerseStyle)
-					strbuf =
-					    g_string_append(strbuf,
-							    "</font><br>");
-				else
-					g_string_append(strbuf, "</font>");
-			} else if (!strcmp(font, "Greek")) {
-				strbuf =
-				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"sil galatia\">");	
-				strbuf =
-				    g_string_append(strbuf, (const char *)
-						    imodule);
-				if (bVerseStyle)
-					strbuf =
-					    g_string_append(strbuf,
-							    "</font><br>");
-				else
-					g_string_append(strbuf, "</font>");
+			if (!stricmp(font, "Symbol")) {
+				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */				
+			} else if (!stricmp(font, "greek1")) {
+				strbuf = g_string_new("<FONT SIZE=\"+5\"  COLOR=\"#000000\" FONT FACE=\"greek1\">");
+			} else if (!stricmp(font, "BSTHebrew")) {
+				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");					
 			} else {
-
-				if (gbf) {
-					len =
-					    strlen((const char *) imodule);
-					len = len * 8;
-					Buf = new char[len];
-					strcpy(Buf,
-					       (const char *) imodule);
-					gbftohtml(Buf, len);
-					strbuf = g_string_new(Buf);
-					delete[]Buf;
-					Buf = NULL;
+				strbuf = g_string_new("");
+				if (bVerseStyle && newparagraph) {
+					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >%c",c);
+					newparagraph = false;
 				} else
-
-					strbuf =
-					    g_string_new((const char *)
-							 imodule);
-				if (bVerseStyle) {
-					if (strstr(strbuf->str, "<BR>") ==
-					    NULL
-					    && strstr(strbuf->str,
-						      "<P>") == NULL)
-						strbuf =
-						    g_string_append(strbuf,
-								    "<br>");
-
-				}
+					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >");
 			}
-			displayHTML(GTK_WIDGET(gtkText), strbuf->str,
-				    strbuf->len);
+			strbuf = g_string_append(strbuf, (const char *)imodule);
+			if (bVerseStyle) {
+				if (strstr(strbuf->str, "<BR>") == NULL
+					    && strstr(strbuf->str, "<P>") == NULL)
+						strbuf = g_string_append(strbuf, "</font><br>");
+				else if(strstr(strbuf->str, "<P>") != NULL) {
+						mybuf = strstr(strbuf->str, "<P>");
+						mybuflen = strlen(mybuf);
+						mybuflen =strbuf->len - mybuflen; 
+						strbuf = g_string_truncate(strbuf,mybuflen);
+					    	g_string_append(strbuf, "</font><br>");
+						newparagraph = true;
+				} else
+					strbuf = g_string_append(strbuf, "</font>"); 
+			} else 
+				strbuf = g_string_append(strbuf, "</font>");	
+			displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 			g_string_free(strbuf, TRUE);
 		}
 	}
@@ -375,54 +350,61 @@ char InterlinearDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[800], *font, *buf;
 	gint i;
-	//GtkWidget *gtkText;
-	ModMap::iterator it;
+	//ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-
+	bool utf = false;
+	gint len;
+	gchar *sourceformat;
+	char *Buf, *modName, *thebuf;	
+		
 	font = "Roman";
 	buf = (char *) imodule.Description();
 	if ((sit = mainMgr1->config->Sections.find(comp1Mod->Name())) !=
-	    mainMgr1->config->Sections.end()) {
+	    		mainMgr1->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
-		    (*sit).second.end()) {
-			font = (char *) (*eit).second.c_str();
+		    	(*sit).second.end()) {
+				font = (char *) (*eit).second.c_str();				
 		}
-	}
+	} 
 	(const char *) imodule;
-	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
+	strbuf = g_string_new("");
+	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+5");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
-
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
-
-	if (!strcmp(font, "Symbol")) {
-		strbuf = g_string_new("<FONT FACE=\"symbol\">");
+	/* heading */
+	if (font) {
+		
+		g_warning(font);
+		strbuf = g_string_new("");
+		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+5");
+	} 
+	/* body */
+	/*if(utf){
+		gchar *tmpstr;		
+		tmpstr = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
+		strbuf = g_string_append(strbuf, tmpstr);
+		g_warning("unicode\\n");
+	} else 
+	if(!stricmp(font,"caslon")){
+			//if(g_utf8_validate((const char *) imodule)){
+			g_warning("caslon is here");
+			thebuf = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
+			strbuf = g_string_append(strbuf, thebuf);	
+			//}
+		
+	} else */
 		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
+	/* closing */
+	if(font){
+		strbuf = g_string_append(strbuf, "</font><br><hr>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
-	} else if (!strcmp(font, "Greek")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"sil galatia\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else if (!strcmp(font, "BSTHebrew")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"bsthebrew\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font><BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else {
-		strbuf = g_string_new((const char *) imodule);
-		strbuf = g_string_append(strbuf, "<BR><HR>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	}
+	} 
 	return 0;
 }
 
