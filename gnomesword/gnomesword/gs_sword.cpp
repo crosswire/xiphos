@@ -41,7 +41,7 @@
 #include <sys/stat.h>
 
 #if USE_SHORTCUTBAR
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
@@ -285,8 +285,8 @@ initSWORD(GtkWidget *mainform)
 				curcomMod->Disp(HTMLDisplay);
 			}
 			else if(!strcmp(sourceformat,"ThML")) {
-			        curcomMod->AddRenderFilter(thmltoplain);
-				//curcomMod->AddRenderFilter(thmltohtml);
+			        //curcomMod->AddRenderFilter(thmltoplain);
+				curcomMod->AddRenderFilter(thmltohtml);
 				curcomMod->Disp(HTMLDisplay);				
 			}
 			else if(!strcmp(sourceformat,"HTML")) {
@@ -790,15 +790,16 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 
 //-------------------------------------------------------------------------------------------
 void
-savenoteSWORD(gboolean noteModified) //-- save personal comments
+savenoteSWORD(gboolean noteisModified) //-- save personal comments
 {  	
-        if(noteModified){ //-- if note modified save the changes  
+        if(noteisModified){ //-- if note modified save the changes
 		VerseKey mykey; //-- verse key text
 		gchar *buf;     //-- pointer to a string 					
-		GtkWidget *text; //-- pointer to commentary text widget		
+		//GtkWidget *text; //-- pointer to commentary text widget		
 		//text = lookup_widget(MainFrm,"textComments"); //-- get text widget
 		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
-		*percomMod << (const char *)buf; //-- save note!  		
+		*percomMod << (const char *)buf; //-- save note!
+		//g_warning(buf);
 	}
 	noteModified = false; //-- we just saved the note so it has not been modified 	
 }
@@ -1184,7 +1185,7 @@ void gotokeySWORD(gchar *newkey)
  *  newkey from the dict lookup entry
  */
 void SDdictSearchTextChangedSWORD(char* newkey)
-{	                        //-- mytext from the dict dict lookup entry
+{	
 	strcpy(settings->dictkey,newkey); //-- remember the key
 	if (SDMod){ //-- if we have a dict module	
 		if(strcmp(newkey,"")){  //-- if text is not null		
@@ -1193,3 +1194,4 @@ void SDdictSearchTextChangedSWORD(char* newkey)
 		}
 	}
 }
+

@@ -1,7 +1,14 @@
+2001-02-03 Terry Biggs <tbiggs@users.sourceforge.net>
+
+        *release 0.4.0
+        *gal-0.4.1 is required to build with gnomesword the Evolution
+        shortcut-bar.
+        *revomed all the Evolution code
+
+
 2001-01-30 Terry Biggs <tbiggs@users.sourceforge.net>
 
-      *release 0.4.0
-      *added history list and buttons
+        *added history list and buttons
 
 
 2001-01-08 Terry Biggs <tbiggs@users.sourceforge.net>

@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
 SUBDIRS = 	macros \
-	    widgets \
 	    gnomesword
 
 EXTRA_DIST = gnomesword.glade gnomesword.kdevprj Gnomesword.prj
