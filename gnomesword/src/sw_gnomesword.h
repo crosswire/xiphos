@@ -1,10 +1,14 @@
-/***************************************************************************
-                                  sw_gnomesword.h
-                             -------------------
-  				   Mon May 8 2000
-    			copyright  (C) 2000 by Terry Biggs
- 				tbiggs@infinet.com
- ***************************************************************************/
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+  /*
+     * GnomeSword Bible Study Tool
+     * sw_gnomesword.h
+     * -------------------
+     * Mon May 8 2000
+     * copyright (C) 2000 by Terry Biggs
+     * tbiggs@users.sourceforge.net
+     *
+   */
 
  /*
     *  This program is free software; you can redistribute it and/or modify
@@ -17,79 +21,69 @@
     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     *  GNU Library General Public License for more details.
     *
-    *  You should have received a copy of the GNU Library General Public License
+    *  You should have received a copy of the GNU General Public License
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
+
 #ifndef __SW_GNOMESWORD_H__
-#define __SW_GNOMESWORD_H__  
+#define __SW_GNOMESWORD_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
- 
+
 #include <gnome.h>
-	
-	
-	
-void initSWORD(GtkWidget *mainform);
-void modNameFromDesc(gchar* modName, gchar* modDesc);
-void updateinterlinearpage(void);
-void shutdownSWORD(void);
-void FillDictKeysSWORD(void);
-void changeVerseSWORD(gchar * ref);
-//void searchSWORD(GtkWidget * searchFrm);
-void resultsListSWORD(GtkWidget * searchFrm, 
-		gint row, 
-		gint column);
-void strongsSWORD(gint window, gboolean choice);
-void footnotesSWORD(gint window, gboolean choice);
-/*
-void nbchangecurModSWORD(gchar *modName, 
-						gint page_num, 
-						gboolean showchange); 
-*/	
-void changecurModSWORD(gchar *modName, gboolean showchange);
-void navcurcomModSWORD(gint direction);
-void changecomp1ModSWORD(gchar * modName);
-void changecomp2ModSWORD(gchar * modName);
-void changecomp3ModSWORD(gchar * modName);
-void setversestyleSWORD(gboolean choice);
-void chapterSWORD(void);
-void verseSWORD(void);
-void btnlookupSWORD(void);
-void freeformlookupSWORD(GdkEventKey * event);
-void changcurcomModSWORD(gchar * modName, 
-		gboolean showchange);
-void editnoteSWORD(gboolean editbuttonactive);
-void savenoteSWORD(gboolean noteisModified);
-void deletenoteSWORD(void);
-void changcurdictModSWORD(gchar * modName, 
-		gchar* keyText);
-void dictSearchTextChangedSWORD(gchar * mytext);
-void dictchangekeySWORD(gint direction);
-void showmoduleinfoSWORD(char *modName);
-void setglobalopsSWORD(gint window, gchar *option, gchar *yesno);
-void changepercomModSWORD(gchar * modName);
-void redisplayTextSWORD(void);
-gchar* getmodnameSWORD(gint num);
-void navcurcommModSWORD(gint backfoward);
-gchar* getdictmodSWORD(void);
-gchar* gettextmodSWORD(void);
-gchar* getcommodSWORD(void);
-gchar* getcommodDescriptionSWORD(void);
-GList *getBibleBooks(void);
-void morphsSWORD(gint window, gboolean choice) ;
-void gotoBookmarkSWORD(gchar *modName, gchar *key);
-gchar* getmodkeySWORD(gint num);
-gfloat getSwordVerionSWORD(void);
-void swapmodsSWORD(gchar *intmod);
-void loadpreferencemodsSWORD(void);
-void gs_firstrunSWORD(void);
-void applyfontcolorandsizeSWORD(void);
-void savekeySWORD(gchar *key);
+
+	void initSWORD(GtkWidget * mainform);
+	void modNameFromDesc(gchar * modName, gchar * modDesc);
+	void updateinterlinearpage(void);
+	void shutdownSWORD(void);
+	void FillDictKeysSWORD(void);
+	void changeVerseSWORD(gchar * ref);
+	void resultsListSWORD(GtkWidget * searchFrm,
+			      gint row, gint column);
+	void strongsSWORD(gint window, gboolean choice);
+	void footnotesSWORD(gint window, gboolean choice);
+	void changecurModSWORD(gchar * modName, gboolean showchange);
+	void navcurcomModSWORD(gint direction);
+	void changecomp1ModSWORD(gchar * modName);
+	void changecomp2ModSWORD(gchar * modName);
+	void changecomp3ModSWORD(gchar * modName);
+	void setversestyleSWORD(gboolean choice);
+	void chapterSWORD(void);
+	void verseSWORD(void);
+	void btnlookupSWORD(void);
+	void freeformlookupSWORD(GdkEventKey * event);
+	void changcurcomModSWORD(gchar * modName, gboolean showchange);
+	void editnoteSWORD(gboolean editbuttonactive);
+	void savenoteSWORD(gboolean noteisModified);
+	void deletenoteSWORD(void);
+	void changcurdictModSWORD(gchar * modName, gchar * keyText);
+	void dictSearchTextChangedSWORD(gchar * mytext);
+	void dictchangekeySWORD(gint direction);
+	void showmoduleinfoSWORD(char *modName);
+	void setglobalopsSWORD(gint window, gchar * option, gchar * yesno);
+	void changepercomModSWORD(gchar * modName);
+	void redisplayTextSWORD(void);
+	gchar *getmodnameSWORD(gint num);
+	void navcurcommModSWORD(gint backfoward);
+	gchar *getdictmodSWORD(void);
+	gchar *gettextmodSWORD(void);
+	gchar *getcommodSWORD(void);
+	gchar *getcommodDescriptionSWORD(void);
+	GList *getBibleBooks(void);
+	void morphsSWORD(gint window, gboolean choice);
+	void gotoBookmarkSWORD(gchar * modName, gchar * key);
+	gchar *getmodkeySWORD(gint num);
+	gfloat getSwordVerionSWORD(void);
+	void swapmodsSWORD(gchar * intmod);
+	void loadpreferencemodsSWORD(void);
+	void gs_firstrunSWORD(void);
+	void applyfontcolorandsizeSWORD(void);
+	void savekeySWORD(gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __SW_GNOMESWORD_H__ */
+#endif				/* __SW_GNOMESWORD_H__ */
