@@ -13,63 +13,65 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     e-splash.c \
     e-splash.h \
-    gs_dock_dlg.c \
-    gs_dock_dlg.h \
-    gs_gui.c \
-    gs_gui.h \
-    gs_setup.c \
-    gs_setup.h \
     gs_abouts.c \
     gs_abouts.h \
+    gs_bookmarks.c \
+    gs_bookmarks.h \
     gs_editor_replace.c \
     gs_editor_replace.h \
     gs_editor_toolbar.c \
     gs_editor_toolbar.h \
+    gs_file.c \
+    gs_file.h \
+    gs_gnomesword.c \
+    gs_gnomesword.h \
+    gs_gui.c \
+    gs_gui.h \
+    gs_gui_cb.c \
+    gs_gui_cb.h \
+    gs_history.c \
+    gs_history.h \
+    gs_html.c \
+    gs_html.h \
     gs_html_editor.c \
     gs_html_editor.h \
     gs_info_box.c \
     gs_info_box.h\
-    gs_mainmenu_cb.c \
-    gs_mainmenu_cb.h\
-    gs_viewcomm_dlg.c \
-    gs_viewcomm_dlg.h \
-    gs_viewdict_dlg.c \
-    gs_viewdict_dlg.h \
-    gs_bookmarks.c \
-    gs_bookmarks.h \
-    gs_gnomesword.c \
-    gs_gnomesword.h \
-    gs_history.c \
-    gs_history.h \
-    gs_gui_cb.c \
-    gs_gui_cb.h \
-    sw_display.cpp \
-    sw_display.h \
-    gs_file.c \
-    gs_file.h \
-    gs_preferences_dlg.c \
-    gs_preferences_dlg.h \
-    gs_unlockkey_dlg.c \
-    gs_unlockkey_dlg.h \
-    main.c \
-    gs_menu.c \
-    gs_menu.h \
-    gs_popup_cb.c \
-    gs_popup_cb.h \
-    support.c \
-    support.h \
-    gs_html.c \
-    gs_html.h \
-    gs_viewtext_dlg.c \
-    gs_viewtext_dlg.h \
     gs_information_dlg.c \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
+    gs_mainmenu_cb.c \
+    gs_mainmenu_cb.h\
+    gs_menu.c \
+    gs_menu.h \
+    gs_preferences_dlg.c \
+    gs_preferences_dlg.h \
+    gs_popup_cb.c \
+    gs_popup_cb.h \
+    gs_setup.c \
+    gs_setup.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
+    gs_undock_int.c \
+    gs_undock_int.h \
+    gs_undock_sb.c \
+    gs_undock_sb.h \
+    gs_unlockkey_dlg.c \
+    gs_unlockkey_dlg.h \
+    gs_viewcomm_dlg.c \
+    gs_viewcomm_dlg.h \
+    gs_viewdict_dlg.c \
+    gs_viewdict_dlg.h \
+    gs_viewtext_dlg.c \
+    gs_viewtext_dlg.h \
+    main.c \
+    support.c \
+    support.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
+    sw_display.cpp \
+    sw_display.h \
     sw_gbs.cpp \
     sw_gbs.h \
     sw_gnomesword.cpp \

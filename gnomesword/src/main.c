@@ -118,11 +118,11 @@ main (int argc, char *argv[])
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
 	}  	 
-	mainwindow = create_mainwindow (splash); /*** gs_gui.c ***/ 	
+	mainwindow = create_mainwindow (splash, settings); /*** gs_gui.c ***/ 	
   	add_gtkhtml_widgets(mainwindow); /*** gs_html.c ***/ 	
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
-  	initSWORD(mainwindow); /*** sw_gnomesword.cpp ***/  
+  	initSWORD(settings); /*** sw_gnomesword.cpp ***/  
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
