@@ -190,7 +190,7 @@ filestuff.o: filestuff.cpp /usr/include/gnome.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
  /usr/include/g++-2/iterator /usr/include/g++-2/stl_relops.h \
  /usr/include/g++-2/stl_iterator.h /usr/include/g++-2/std/bastring.cc \
- menustuff.h
+ menustuff.h dialogs.h
 filestuff.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -483,3 +483,4 @@ GnomeSword.h :
 /usr/include/g++-2/stl_iterator.h :
 /usr/include/g++-2/std/bastring.cc :
 menustuff.h :
+dialogs.h :

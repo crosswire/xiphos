@@ -197,7 +197,8 @@ menustuff.o: menustuff.cpp /usr/include/gnome.h \
  /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/new \
  /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/exception \
  /usr/include/g++-2/stl_construct.h \
- /usr/include/g++-2/stl_uninitialized.h /usr/include/g++-2/stl_list.h
+ /usr/include/g++-2/stl_uninitialized.h /usr/include/g++-2/stl_list.h \
+ dialogs.h
 menustuff.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -499,3 +500,4 @@ callback.h :
 /usr/include/g++-2/stl_construct.h :
 /usr/include/g++-2/stl_uninitialized.h :
 /usr/include/g++-2/stl_list.h :
+dialogs.h :
