@@ -42,7 +42,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <sys/stat.h>
-
+ 
 #ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
 #else
@@ -71,8 +71,6 @@ typedef struct _ExportStruct ExportStruct;
  
 static SWConfig *config;
 static ConfigEntMap::iterator loop, end;
-
-//list < String *> bmfiles;
 
 extern SWMgr *main_mgr;
 

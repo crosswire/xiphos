@@ -296,7 +296,7 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	while(html_engine_forward_word (ecd->html->engine)){
 		if(html_engine_spell_word_is_valid (ecd->html->engine)) {
 			buf = html_engine_get_spell_word(ecd->html->engine);
-			utf8str = e_utf8_from_gtk_string(ecd->htmlwidget, buf);
+			utf8str = buf;//e_utf8_from_gtk_string(ecd->htmlwidget, buf);
 			if(utf8str)	{
 				if (strlen(utf8str) > 2) {
 					word_count++;

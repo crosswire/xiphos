@@ -11,6 +11,7 @@
 #undef PACKAGE_HELP_DIR
 #undef PACKAGE_MENU_DIR
 #undef PACKAGE_PIXMAPS_DIR
+#undef SRC_MAKEFILE_AM
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -222,6 +223,9 @@
 
 /* Define if you want to use aspell */
 #undef USE_ASPELL
+
+/* Define if you want to use GNOME2 */
+#undef USE_GNOME2
 
 /* Define if you want to use the GtkHTML-1.1 */
 #undef USE_GTKHTML1
