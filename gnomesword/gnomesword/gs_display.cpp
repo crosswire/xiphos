@@ -34,7 +34,7 @@
 *********************************************************************/
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #ifdef USE_GTKHTML
@@ -53,6 +53,9 @@
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 
+/****************************************************************************************
+ * externs
+ ****************************************************************************************/
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
 extern bool bVerseStyle;
@@ -256,7 +259,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 						 mycolor);
 			} else if (!strcmp(font, "Greek")) {
 				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\" FACE=\"greek1\">",
+						 "<FONT COLOR=\"%s\" FACE=\"sil galatia\">",
 						 mycolor);
 			} else {
 				g_string_sprintf(strbuf,
@@ -310,7 +313,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					g_string_append(strbuf, "</font>");
 			} else if (!strcmp(font, "Greek")) {
 				strbuf =
-				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"greek1\">");	
+				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"sil galatia\">");	
 				strbuf =
 				    g_string_append(strbuf, (const char *)
 						    imodule);
@@ -405,7 +408,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else if (!strcmp(font, "Greek")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"bstgreek\">");
+		strbuf = g_string_new("<B> </B><FONT FACE=\"sil galatia\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);

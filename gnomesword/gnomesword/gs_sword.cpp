@@ -140,14 +140,15 @@ gchar *textmod,
         *commod,
         *dictmod;
 GtkWidget *MainFrm; /* main form widget  */
-INTERLINEAR interlinearMods;
+//INTERLINEAR interlinearMods;
+GS_MODS *p_textmodule;
+GS_MODS textmodule;
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
 extern gboolean changemain; /* change verse of Bible text window */
-//extern NoteEditor *noteeditor; /* we need this to set up sword display */
 extern gint 	dictpages, /* number of dictionaries */
-	 	compages;  /* number of commentaries */
+	 		compages;  /* number of commentaries */
 extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved */
 extern SETTINGS *settings;
 extern SETTINGS myset;
@@ -164,6 +165,7 @@ extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
+
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -180,10 +182,7 @@ initSWORD(GtkWidget *mainform)
 		*font;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-	
-	sprintf(interlinearMods.ver1,"%s","KJV");
-	sprintf(interlinearMods.ver2,"%s","NIV");
-	sprintf(interlinearMods.ver3,"%s","NASB");
+
   	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
@@ -222,6 +221,11 @@ initSWORD(GtkWidget *mainform)
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
 	mycolor = settings->currentverse_color;
+	textmodule.name = NULL;
+	textmodule.type = NULL;
+	textmodule.description = NULL;
+	textmodule.key = NULL;
+	p_textmodule = &textmodule;
 #if USE_SHORTCUTBAR	
   	//-- create shortcut bar groups
 	if(settings->showtextgroup){
@@ -722,16 +726,16 @@ changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module 
 		                curMod->SetKey(current_verse); //-- set key to current verse
 		                curMod->Display();            //-- show it to the world
 		        }
-	        }
-	        strcpy(settings->MainWindowModule, curMod->Name()); //-- remember where we are so we can open here next time we startup
-	/*
-	        gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")), //-- set main window frame label of
-                                 curMod->Name());                  //-- to current Module name
-	*/
-		sprintf(title,"GnomeSword - %s", (gchar*)curMod->Description());
+	        }			
+		p_textmodule->name = (gchar*)curMod->Name(); 
+		p_textmodule->description = (gchar*)curMod->Description();
+		p_textmodule->type = (gchar*)curMod->Type();
+		p_textmodule->key = (gchar*)curMod->KeyText();
 		
-		gtk_window_set_title(GTK_WINDOW(MainFrm),
-						title);
+	       strcpy(settings->MainWindowModule, p_textmodule->name);  //(gchar*)curMod->Name()); //-- remember where we are so we can open here next time we startup
+	
+		sprintf(title,"GnomeSword - %s", p_textmodule->description); //curMod->Description());		
+		gtk_window_set_title(GTK_WINDOW(MainFrm), title);
 		
         }
 }

@@ -103,7 +103,9 @@ module.source.files=\
 	gs_viewcomm.h\
 	gs_history.h\
 	printstuff.h\
-	interface.h
+	interface.h\
+	gs_thmlhtml.h\
+	gs_rwphtml.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
