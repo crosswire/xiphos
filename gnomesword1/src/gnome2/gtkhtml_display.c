@@ -39,52 +39,6 @@
 #include "main/settings.h"
 #include "main/key.h"
 
- 
-/******************************************************************************
- * Name
- *  set_gobal_options
- *
- * Synopsis
- *   #include ".h"
- *
- *  void (TEXT_DATA * t)	
- *
- * Description
- *   set module global options on page change
- *
- * Return value
- *   void
- */
-
-static void set_global_options(TEXT_GLOBALS * tgs)
-{
-	set_text_module_global_option("Strong's Numbers", tgs->strongs);
-	set_text_module_global_option("Morphological Tags",
-				      tgs->morphs);
-	set_text_module_global_option("Footnotes", tgs->footnotes);
-	set_text_module_global_option("Greek Accents",
-				      tgs->greekaccents);
-	set_text_module_global_option("Lemmas", tgs->lemmas);
-	set_text_module_global_option("Cross-references",
-				      tgs->scripturerefs);
-	set_text_module_global_option("Hebrew Vowel Points",
-				      tgs->hebrewpoints);
-	set_text_module_global_option("Hebrew Cantillation",
-				      tgs->hebrewcant);
-	set_text_module_global_option("Headings", tgs->headings);
-	set_text_module_global_option("Words of Christ in Red",
-				      tgs->words_in_red);
-	if (tgs->variants_primary)
-		set_text_global_option("Textual Variants",
-				       "Primary Reading");
-	else if (tgs->variants_secondary)
-		set_text_global_option("Textual Variants",
-				       "Secondary Reading");
-	else
-		set_text_global_option("Textual Variants",
-				       "All Readings");
-}
-
 
 
 /******************************************************************************
@@ -340,7 +294,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  */
 
 void chapter_display(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key,
+		     GLOBAL_OPS * ops, gchar * key,
 		     gboolean use_globals)
 {
 	gchar *bgColor;
@@ -403,7 +357,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	 * set global options for current module 
 	 */
 	if (use_globals)
-		set_global_options(tgs);
+		gui_set_global_options(ops);
+		//set_global_options(tgs);
 
 	sprintf(buf,
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -546,7 +501,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 
 void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
-			     TEXT_GLOBALS * tgs, gchar * key,
+			     GLOBAL_OPS * ops, gchar * key,
 			     gboolean use_globals)
 {
 	gchar *cur_book;
@@ -567,7 +522,8 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 	 * set global options for current module 
 	 */
 	if (use_globals)
-		set_global_options(tgs);
+		gui_set_global_options(ops);
+		//set_global_options(tgs);
 	
 	cur_verse = get_verse_from_key(tmpkey);
 	cur_chapter = get_chapter_from_key(tmpkey);

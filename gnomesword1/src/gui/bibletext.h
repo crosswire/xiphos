@@ -26,23 +26,9 @@
 extern "C" {
 #endif
 
-typedef struct _text_global_ops TEXT_GLOBALS;
-struct  _text_global_ops {
-	gboolean
-	    words_in_red,
-	    strongs,
-	    morphs,
-	    footnotes,
-	    greekaccents,
-	    lemmas,
-	    scripturerefs,
-	    hebrewpoints, 
-	    hebrewcant, 
-	    headings, 
-	    variants_all, 
-	    variants_primary, 
-	    variants_secondary;
-};
+
+#include "gui/mod_global_ops.h"
+	
 
 typedef struct _text_data TEXT_DATA;
 struct _text_data {
@@ -75,10 +61,11 @@ struct _text_data {
 	gboolean is_rtol;
 	gboolean sync;
 	
-	TEXT_GLOBALS *tgs;
+	GLOBAL_OPS *ops;
 };
 extern TEXT_DATA *cur_t;
 
+void gui_update_text_global_ops(gchar * option, gboolean choice);
 void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 				 gchar * dict_mod_description);
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);

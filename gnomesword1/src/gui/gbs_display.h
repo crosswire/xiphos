@@ -30,8 +30,7 @@ extern "C" {
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
-void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
-					gboolean is_leaf);
+void gbs_display(GBS_DATA * gbs, gint level);
 
 	
 #ifdef __cplusplus

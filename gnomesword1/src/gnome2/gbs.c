@@ -575,9 +575,9 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 				gtk_tree_view_expand_to_path
 				    (GTK_TREE_VIEW(g->tree), path);
 			}
-			gbs_display(g, offset, tree_level,
-				    gtk_tree_model_iter_has_child(model,
-								  &selected));
+			g->is_leaf = gtk_tree_model_iter_has_child(model,
+								  &selected);
+			gbs_display(g, tree_level);
 			g_free(name);
 			g_free(book);
 			g_free(offset);
@@ -845,6 +845,29 @@ static void add_vbox_to_notebook(GBS_DATA * g)
  *  
  *
  * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_gbs_global_ops(gchar * option, gboolean choice)
+{
+	/*save_module_options(cur_t->mod_name, option, 
+				    choice);*/
+	gbs_display(cur_g, tree_level);
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
  *   #include "gbs.h"
  *
  *   	
@@ -855,22 +878,22 @@ static void add_vbox_to_notebook(GBS_DATA * g)
  * Return value
  *   
  */
-static void set_new_globals(GLOBAL_OPS * gops)
+static void set_new_globals(GLOBAL_OPS * ops)
 {	
-	gops->module_type = 3;
-	gops->words_in_red = TRUE;
-	gops->strongs = TRUE;
-	gops->morphs = TRUE;
-	gops->footnotes = TRUE;
-	gops->greekaccents = TRUE;
-	gops->lemmas = TRUE;
-	gops->scripturerefs = TRUE;
-	gops->hebrewpoints = TRUE;
-	gops->hebrewcant = TRUE;
-	gops->headings = TRUE;
-	gops->variants_all = TRUE;
-	gops->variants_primary = TRUE;
-	gops->variants_secondary = TRUE;
+	ops->module_type = 3;
+	ops->words_in_red = TRUE;
+	ops->strongs = TRUE;
+	ops->morphs = TRUE;
+	ops->footnotes = TRUE;
+	ops->greekaccents = TRUE;
+	ops->lemmas = TRUE;
+	ops->scripturerefs = TRUE;
+	ops->hebrewpoints = TRUE;
+	ops->hebrewcant = TRUE;
+	ops->headings = TRUE;
+	ops->variants_all = TRUE;
+	ops->variants_primary = TRUE;
+	ops->variants_secondary = TRUE;
 }
 
 /******************************************************************************
@@ -906,8 +929,8 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 	while (tmp != NULL) {
 		bookname = (gchar *) tmp->data;
 		gbs = g_new0(GBS_DATA, 1);
-		gbs->bgo = gui_new_globals();
-		set_new_globals(gbs->bgo);
+		gbs->ops = gui_new_globals();
+		set_new_globals(gbs->ops);
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;
 		gbs->search_string = NULL;
@@ -966,7 +989,7 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 
 void gui_shutdown_gbs(void)
 {
-	
+	GBS_DATA *g;
 	if(pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);	
 	if(pixbufs->pixbuf_opened)
@@ -976,7 +999,9 @@ void gui_shutdown_gbs(void)
 	
 	gbs_list = g_list_first(gbs_list);
 	while (gbs_list != NULL) {
-		g_free((GBS_DATA *) gbs_list->data);
+		g = (GBS_DATA *) gbs_list->data;
+		g_free(g->ops);
+		g_free(g);
 		gbs_list = g_list_next(gbs_list);
 	}
 	g_list_free(gbs_list);
