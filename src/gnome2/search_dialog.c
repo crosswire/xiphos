@@ -2183,6 +2183,7 @@ static GtkWidget *create_search_dialog(void)
 	GObject *selection_range_name;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	gchar *header;
 
 	tooltips = gtk_tooltips_new();
 
@@ -2271,8 +2272,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame_scope),GTK_SHADOW_NONE);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Scope</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Scope"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame_scope),label_frame);
 
@@ -2346,8 +2350,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame_modlists),GTK_SHADOW_NONE);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Modules</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Modules"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame_modlists),label_frame);
 
@@ -2424,8 +2431,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame49),GTK_SHADOW_NONE);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Search Type</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Type"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame49),label_frame);
 
@@ -2465,8 +2475,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame57),GTK_SHADOW_NONE);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Options</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Options"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame57),label_frame);
 
@@ -2599,8 +2612,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_paned_pack1(GTK_PANED(vpaned3), vbox65, FALSE, TRUE);
 
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Search Results</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Results"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2628,8 +2644,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_paned_pack2(GTK_PANED(vpaned3), vbox65, FALSE, TRUE);
 
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Preview</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Preview"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2656,8 +2675,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_paned_pack2(GTK_PANED(hpaned7), vbox65, FALSE, TRUE);
 
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">Found</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Found"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2787,7 +2809,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox76), vbox76, TRUE, TRUE, 0);
 
 	label227 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label227), _("<span weight=\"bold\">Range Name</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Range Name"));
+  	gtk_label_set_markup(GTK_LABEL(label227), header);
+	g_free(header);
+
 	gtk_widget_show(label227);
 	gtk_box_pack_start(GTK_BOX(vbox76), label227, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(label227, -1, 26);
@@ -2799,7 +2825,11 @@ static GtkWidget *create_search_dialog(void)
 			   FALSE, 0);
 
 	label228 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label228), _("<span weight=\"bold\">Range Text</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Range Text"));
+  	gtk_label_set_markup(GTK_LABEL(label228), header);
+	g_free(header);
+
 	gtk_widget_show(label228);
 	gtk_box_pack_start(GTK_BOX(vbox76), label228, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(label228, -1, 26);
@@ -2964,8 +2994,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox82), vbox80, FALSE, TRUE, 0);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<span weight=\"bold\">List Name</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("List Name"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+
 	gtk_widget_show(label_frame);
 	gtk_misc_set_alignment (GTK_MISC (label_frame), 0.01, 0.5);
 	gtk_box_pack_start(GTK_BOX(vbox80), label_frame, FALSE, TRUE, 0);
@@ -2975,7 +3008,11 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox80), entry_modlist_name, FALSE, TRUE, 0);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame), _("<span weight=\"bold\">Modules</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Modules"));
+  	gtk_label_set_markup(GTK_LABEL(label_frame), header);
+	g_free(header);
+	
 	gtk_widget_show(label_frame);
 	gtk_misc_set_alignment (GTK_MISC (label_frame), 0.01, 0.5);
 	gtk_box_pack_start(GTK_BOX(vbox80), label_frame, FALSE, TRUE, 0);

@@ -2,11 +2,14 @@
 
 	* added manual to the build. Sweeping changes to the doc/ directory. 
 	  Plus, we now depend on scrollkeeper.
-	* updated .spec file for more prereqs and scrollkeeper scripts
+	* updated .spec file for more prereqs and scrollkeeper scripts, use
+	  generic prefixes per GNOME packaging examples
 	* added COPYING-DOCS file
 	* updated POTFILES.in to include all source files in src/gnome2
 	* added en_GB translation
 	* updated typewriter icon to a nice PNG
+	* more work on fixing deprecated GNOME / GTK calls
+	* reworked the way we do Pango text to make translations easier
 
 
 2003-12-08  Andy <andyp@users.sf.net>
