@@ -31,12 +31,70 @@
 #include <bonobo.h>
 
 #include "Spell.h"
+#include "gui/editor.h"
 #include "main/spell.h"
 
 
 CORBA_Environment   ev;
 GNOME_Spell_Dictionary en;
- 
+char *spell_language;
+
+
+
+/******************************************************************************
+ * Name
+ *   get_dictionary_languages
+ *
+ * Synopsis
+ *   #include "main/spell.h"
+ *
+ *   GList *get_dictionary_languages(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   GList *
+ */
+
+GList *get_dictionary_languages(gpointer data)
+{
+	GList * returnval = NULL;
+	CORBA_sequence_GNOME_Spell_Language *language_seq;
+	gint i = 0;
+	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *)data;
+	
+	cd->languages = GNOME_Spell_Dictionary_getLanguages (en, &ev);
+	if (cd->languages) {
+		for (i = 0; i < cd->languages->_length; i++) {
+			returnval = g_list_append(returnval,cd->languages->_buffer[i].name);
+		}
+	}
+	return returnval;	
+}
+
+
+/******************************************************************************
+ * Name
+ *   set_dictionary_language
+ *
+ * Synopsis
+ *   #include "main/spell.h"
+ *
+ *   void set_dictionary_language(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void set_dictionary_language(char * language)
+{
+	
+	GNOME_Spell_Dictionary_setLanguage (en, language, &ev);	
+}
 
 
 /******************************************************************************
@@ -55,13 +113,14 @@ GNOME_Spell_Dictionary en;
  *   void
  */
 
-void store_replacement(const gchar * missed_word, const gchar * new_word)
+void store_replacement(const char * missed_word, const char * new_word, 
+							char * language)
 {
 	
 	GNOME_Spell_Dictionary_setCorrection(en,
 					     missed_word,
 					     new_word,
-					     "en",
+					     language,
 					     &ev);
 }
 
@@ -97,7 +156,7 @@ int add_to_session(const gchar * word)
  * Synopsis
  *   #include "main/spell.h"
  *
- *   int add_to_personal(const gchar * word)
+ *   int add_to_personal(const gchar * word, char * language)
  *
  * Description
  *   
@@ -106,9 +165,9 @@ int add_to_session(const gchar * word)
  *   int
  */
  
-int add_to_personal(const gchar * word)
+int add_to_personal(const gchar * word, char * language)
 {
-	GNOME_Spell_Dictionary_addWordToPersonal(en, word, "en", &ev);
+	GNOME_Spell_Dictionary_addWordToPersonal(en, word, language, &ev);
 }
 
 
@@ -199,9 +258,8 @@ int init_spell(void)
 	}
 
 	CORBA_exception_init (&ev);
-
+	spell_language = NULL;
 //	GNOME_Spell_Dictionary_getLanguages (en, &ev);
-	GNOME_Spell_Dictionary_setLanguage (en, "en", &ev);
 	return 1;
 }
 

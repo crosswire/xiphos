@@ -568,6 +568,11 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("editor", "UseStudypadDialog"));
 	settings.use_percomm_dialog =
 	    atoi(xml_get_value("editor", "UsePercommDialog"));
+	if(xml_get_value("editor", "spell_language"))
+	     settings.spell_language = xml_get_value("editor","spell_language");
+	else 
+		xml_add_new_item_to_section("editor","spell_language","unknown");
+		settings.spell_language = "unknown";
 
 
 	settings.studypadfilename =
