@@ -27,13 +27,13 @@
 #  include <config.h>
 #endif
 
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
  
 #include "gs_abouts.h"
 #include "support.h"
@@ -308,7 +308,7 @@ GtkWidget *create_aboutmodules(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 
-	textModAbout = gtk_text_new(NULL, NULL);
+	textModAbout = gtk_html_new();
 	gtk_widget_ref(textModAbout);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "textModAbout",
 				 textModAbout,

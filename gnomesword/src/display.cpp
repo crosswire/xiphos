@@ -1136,7 +1136,8 @@ char GTKPerComDisp::Display(SWModule & imodule)
 }
 
 /* ----------------------------------------------------------------------------------------- */
-void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo)
+void 
+AboutModsDisplay(GtkWidget * text, gchar * aboutinfo)
 {				/* to display Sword module about information */
 	gchar *textBuf;		/* text buffer to play with */
 	gint i,			/* counter */

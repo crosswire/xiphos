@@ -1,11 +1,11 @@
 /***************************************************************************
-                            interface.h
+                                      gs_info_box.h
                              -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+    begin                : Sat June 30 2001
+    copyright            : (C) 2001 by Terry Biggs
+    email                : tbiggs@users.sf.net
  ***************************************************************************/
- 
+
 /*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-
+GtkWidget *create_InfoBox(void);
 
 #ifdef __cplusplus
 }
