@@ -43,7 +43,6 @@
 #include "gui/history.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
-//#include "gui/percomm.h"
 #include "gui/commentary.h"
 #include "gui/gbs.h"
 #include "gui/dictlex.h"
@@ -78,9 +77,9 @@ void gui_show_hide_texts(gboolean choice)
 {
 	settings.showtexts = choice;
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.vbox_text);
+		gtk_widget_hide(widgets.vpaned);
 	} else {
-		gtk_widget_show(widgets.vbox_text);
+		gtk_widget_show(widgets.vpaned);
 	}
 	gui_set_bible_comm_layout();
 }
@@ -160,7 +159,6 @@ void gui_show_hide_dicts(gboolean choice)
 
 void gui_set_bible_comm_layout(void)
 {
-	
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       settings.biblepane_width);
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
@@ -168,10 +166,23 @@ void gui_set_bible_comm_layout(void)
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 				       settings.commpane_hight);
 	
-	if (settings.showtexts == FALSE) {
+	if (settings.showtexts == FALSE) 
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
+	else
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
+				       settings.biblepane_width);
 
-	} else if (settings.showdicts == FALSE) {
+	if (settings.showcomms == FALSE) {
+		gtk_paned_set_position(GTK_PANED
+				       (widgets.vpaned2),
+				       0);
+	} else {
+		gtk_paned_set_position(GTK_PANED
+				       (widgets.vpaned2),
+				       settings.commpane_hight);
+	}
+	
+	if (settings.showdicts == FALSE) {
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.vpaned2),
 				       settings.gs_hight);
@@ -180,6 +191,7 @@ void gui_set_bible_comm_layout(void)
 				       (widgets.vpaned2),
 				       settings.commpane_hight);
 	}
+	
 	if ((settings.showcomms == FALSE)
 		   && (settings.showdicts == FALSE)) {
 		gtk_paned_set_position(GTK_PANED
@@ -187,28 +199,12 @@ void gui_set_bible_comm_layout(void)
 				       settings.gs_width);	   
 	}
 	
-/*
-	if (settings.showcomms == TRUE) {
-		gtk_paned_set_position(GTK_PANED(widgets.vpaned2), settings.commpane_hight);
-	} else if (settings.showtexts == FALSE) {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.gs_width);
-	} else if ((settings.showtexts == TRUE)
-		   && (settings.showcomms == FALSE)) {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.gs_width);
-	} else if ((settings.showtexts == TRUE)
-		   && (settings.showcomms == TRUE)) {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.biblepane_width);
-	} else if (settings.showtexts == TRUE) {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.gs_width);
-	} else {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.biblepane_width);
+	if ((settings.showcomms == TRUE)
+		   || (settings.showdicts == TRUE)) {
+		gtk_paned_set_position(GTK_PANED
+				       (widgets.hpaned),
+				       settings.biblepane_width);	   
 	}
-*/
 }
 
 
