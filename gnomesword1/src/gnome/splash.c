@@ -358,7 +358,7 @@ e_splash_construct (ESplash *splash,
 	gtk_window_set_position (GTK_WINDOW (splash), GTK_WIN_POS_CENTER);
 	gtk_window_set_policy (GTK_WINDOW (splash), FALSE, FALSE, FALSE);
 	gtk_window_set_default_size (GTK_WINDOW (splash), image_width, image_height);
-	gtk_window_set_title (GTK_WINDOW (splash), "GnomeSWORD");
+	gtk_window_set_title (GTK_WINDOW (splash), "GnomeSword");
 
 }
 

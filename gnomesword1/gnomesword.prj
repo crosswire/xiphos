@@ -1,4 +1,4 @@
-# Anjuta Version 0.9.99 
+# Anjuta Version 1.0.1 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=0.9.99
+anjuta.version=1.0.1
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -31,14 +31,15 @@ project.type=GNOME
 project.target.type=EXECUTABLE
 project.version=0.7.1
 project.author=The GnomeSWORD Team
-project.source.target=src/main/gnomesword1
-
-project.excluded.modules=\
-	intl
-
+project.source.target=src/gnome/gnomesword-1.0
 project.has.gettext=1
-
 project.programming.language=C
+project.excluded.modules=	intl
+
+project.config.extra.modules.before=
+project.config.extra.modules.after=
+project.config.blocked=1
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
 project.menu.entry=gnomesword Version 0.7.1
 project.menu.group=Application
@@ -47,14 +48,16 @@ project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
 project.configure.options=--prefix=/home/terry
-
 anjuta.program.arguments=
-
-project.config.blocked=1
-
-project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
-project.config.extra.modules.before=
-project.config.extra.modules.after=
+preferences.indent.automatic=1
+preferences.use.tabs=1
+preferences.indent.opening=0
+preferences.indent.closing=0
+preferences.tabsize=8
+preferences.indent.size=8
+preferences.autoformat.style=Custom style
+preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
+preferences.autoformat.disable=0
 
 module.include.name=.
 module.include.type=
@@ -276,30 +279,19 @@ module.po.files=\
 	sk.po
 
 compiler.options.supports=
-
 compiler.options.include.paths=\
 	.\
 	..
-
 compiler.options.library.paths=
-
 compiler.options.libraries=
 compiler.options.libraries.selected=
-
 compiler.options.defines=\
 	HAVE_CONFIG_H
-
 compiler.options.warning.buttons=0 0 1 1 0 1 0 0 0 0 0 0 0 1 0 0 
-
 compiler.options.optimize.buttons=0 0 1 0 
-
 compiler.options.other.buttons=1 0 
-
 compiler.options.other.c.flags=
-
 compiler.options.other.l.flags=
-
 compiler.options.other.l.libs=
-
 project.source.paths=
 
