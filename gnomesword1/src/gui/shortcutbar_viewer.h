@@ -26,8 +26,6 @@
 extern "C" {
 #endif	
 
-#include "main/settings.h"
-
 typedef struct _shortcutbar_viewer SB_VIEWER;
 struct _shortcutbar_viewer {
 	GtkWidget
@@ -39,13 +37,11 @@ struct _shortcutbar_viewer {
 		*html_viewer_widget;
 };
 
-void set_sb_for_daily_devotion(SETTINGS * s);
-void showSBVerseList(SETTINGS * s);
-gboolean gui_display_dictlex_in_viewer(char *modName,
-				   char *key, SETTINGS * s);
-void gui_display_verse_list(gchar * module_name, gchar * verse_list,
-				SETTINGS * s);
-GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vp, SETTINGS * s);
+void set_sb_for_daily_devotion(void);
+void showSBVerseList(void);
+gboolean gui_display_dictlex_in_viewer(char *modName, char *key);
+void gui_display_verse_list(gchar *module_name, gchar *verse_list);
+GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vp);
 
 #ifdef __cplusplus
 }

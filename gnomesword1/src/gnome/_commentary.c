@@ -207,7 +207,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	module_name_from_description(dict_mod, dict_mod_description);
 	dict_key = get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
-		gui_display_dictlex_in_viewer(dict_mod, dict_key, &settings);
+		gui_display_dictlex_in_viewer(dict_mod, dict_key);
 		g_free(dict_key);
 	}
 }
@@ -235,8 +235,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
 		gui_display_dictlex_in_viewer(settings.DictWindowModule, 
-						key,
-						&settings);
+						key);
 		g_free(key);
 	}
 }
@@ -275,8 +274,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "_commentary.h"
  *
- *   void on_comm_showtabs_activate(GtkMenuItem * menuitem,
- *						SETTINGS * s)
+ *   void on_comm_showtabs_activate(GtkMenuItem * menuitem, COMM_DATA *c)
  *
  * Description
  *   display/hide commentary notebook tabs
@@ -301,8 +299,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "_commentary.h"
  *
- *   void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
- *						SETTINGS * s)
+ *   void on_comm_showtoolbar_activate(GtkMenuItem *menuitem, COMM_DATA *)
  *
  * Description
  *   display/hide commentary toolbar
@@ -328,7 +325,7 @@ static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "_commentary.h"
  *
- *   void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+ *   void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   open new commentary dialog
@@ -337,23 +334,23 @@ static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+static void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	static GtkWidget *dlg;
         GdkCursor *cursor;	
 	
-	gtk_widget_show(s->app);
+	gtk_widget_show(settings.app);
 	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(s->app->window,cursor);
+	gdk_window_set_cursor(settings.app->window,cursor);
 	
 	if(!isrunningVC) {
-		dlg = gui_create_commentary_dialog(s);
+		dlg = gui_create_commentary_dialog();
 		isrunningVC = TRUE;
 	}
 	gtk_widget_show(dlg);
-	gtk_widget_show(s->app);
+	gtk_widget_show(settings.app);
 	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(s->app->window,cursor);
+	gdk_window_set_cursor(settings.app->window,cursor);
 
 }
 
@@ -636,7 +633,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 			c);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			GTK_SIGNAL_FUNC(on_view_new_activate), 
-			&settings);
+			NULL);
 	return pm;
 }
 
@@ -810,8 +807,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 				else
 					dict = g_strdup(settings.DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer(dict, key,
-							   &settings);
+					gui_display_dictlex_in_viewer(dict, key);
 				if (settings.inDictpane)
 					change_module_and_key(dict, key);
 				g_free(key);
@@ -838,8 +834,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  * Synopsis
  *   #include "_commentary.h"
  *
- *   void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
- *							gint count)
+ *   void gui_create_commentary_pane(COMM_DATA * c, *gint count)
  *
  * Description
  *   create a commentary pane (window) for a sword commentary module
@@ -848,8 +843,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  *   void
  */
 
-void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
-							gint count)
+void gui_create_commentary_pane(COMM_DATA *c, gint count)
 {
 	GtkWidget *vbox57;
 	GtkWidget *toolbar;
@@ -861,15 +855,15 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	c->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(c->frame);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "c->frame",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "c->frame",
 				 c->frame, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->frame);
-	gtk_container_add(GTK_CONTAINER(s->notebook_comm), c->frame);
+	gtk_container_add(GTK_CONTAINER(settings.notebook_comm), c->frame);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox57);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox57",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox57",
 				 vbox57, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox57);
@@ -877,7 +871,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	c->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(c->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), 
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
 				"c->frame_toolbar", c->frame_toolbar,
 				(GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(c->frame_toolbar);
@@ -888,7 +882,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbar",
 				 toolbar, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(toolbar);
@@ -897,7 +891,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_REFRESH);
 	c->btnCOMMSync =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -907,14 +901,14 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMSync);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btnCOMMSync", c->btnCOMMSync,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btnCOMMSync);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_BACK);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_BACK);
 	c->btnCOMMBack =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -923,14 +917,14 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMBack);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btnCOMMBack", c->btnCOMMBack,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btnCOMMBack);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_FORWARD);
 	c->btnCOMMForward =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -940,7 +934,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMForward);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btnCOMMForward",
 				 c->btnCOMMForward, (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -948,7 +942,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	vseparator19 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "vseparator19", vseparator19,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -958,7 +952,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	gtk_widget_set_usize(vseparator19, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PRINT);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PRINT);
 	c->btnCOMMPrint =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -966,7 +960,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       _("Print Comment"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btnCOMMPrint);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btnCOMMPrint", c->btnCOMMPrint,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -974,7 +968,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	vseparator19 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "vseparator19", vseparator19,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -984,7 +978,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	gtk_widget_set_usize(vseparator19, 5, 7);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_TOP);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_TOP);
 	c->btn_book_heading =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -992,14 +986,14 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       _("Display Book Heading"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btn_book_heading);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btn_book_heading", c->btn_book_heading,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btn_book_heading);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_UP);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_UP);
 	c->btn_chap_heading =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1007,7 +1001,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				       _("Display Chapter Heading"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btn_chap_heading);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->btn_chap_heading", c->btn_chap_heading,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1015,7 +1009,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowCOMMhtml);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindowCOMMhtml",
 				 scrolledwindowCOMMhtml,
 				 (GtkDestroyNotify)
@@ -1031,7 +1025,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	c->html = gtk_html_new();
 	gtk_widget_ref(c->html);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "c->html", c->html, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->html);
@@ -1041,26 +1035,26 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 
 	label = gtk_label_new(c->modName);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
 				 label, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebook_comm),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_comm),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(s->notebook_comm),
+				   (GTK_NOTEBOOK(settings.notebook_comm),
 				    count), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (s->notebook_comm),
+					 (settings.notebook_comm),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (s->notebook_comm),
+					  (settings.notebook_comm),
 					  count), (gchar *) c->modName);
 
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), 
-			   (gpointer) s->app);
+			   (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event), 
 			   (COMM_DATA *) c);

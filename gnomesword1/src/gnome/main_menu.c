@@ -177,7 +177,7 @@ void on_daily_devotion1_activate(GtkMenuItem *menuitem,
  
 void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	gui_setup_preferences_dialog(&settings);
+	gui_setup_preferences_dialog();
 }
 
 /******************************************************************************
@@ -198,16 +198,14 @@ void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)
  
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	SETTINGS *s;
 	EShortcutBar *bar1;
 		
-	s = &settings;
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
-	if(!s->showshortcutbar){
+	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
+	if(!settings.showshortcutbar){
 		gui_shortcutbar_showhide();
 	}
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
-						 s->searchbargroup,
+						 settings.searchbargroup,
 						 TRUE);
 }
 

@@ -592,8 +592,8 @@ static void on_btn_replace_clicked(GtkButton * button,
  * Synopsis
  *   #include "_percomm.h"
  *
- *   GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
- *				gchar *mod_name, gint page_num)	
+ *   GSHTMLEditorControlData *gui_percomm_control(gchar *mod_name,
+ *   		gint page_num)	
  *
  * Description
  *   create personal commentary editor control
@@ -602,8 +602,7 @@ static void on_btn_replace_clicked(GtkButton * button,
  *   GSHTMLEditorControlData *
  */
 
-GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
-				gchar *mod_name, gint page_num)
+GSHTMLEditorControlData *gui_percomm_control(gchar *mod_name, gint page_num)
 {
 	GtkWidget * vbox;
 	GtkWidget *vboxPC;
@@ -616,21 +615,21 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 
 	
 	GSHTMLEditorControlData *pcecd =
-	    gs_html_editor_control_data_new(s);
+	    gs_html_editor_control_data_new();
 	
 	pcecd->personal_comments = TRUE;
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox",
 				 vbox,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
-	gtk_container_add(GTK_CONTAINER(s->notebook_percomm), vbox);
+	gtk_container_add(GTK_CONTAINER(settings.notebook_percomm), vbox);
 	
 	pcecd->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(pcecd->frame);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->frame",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->frame",
 				 pcecd->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->frame);
@@ -638,7 +637,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 
 	vboxPC = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxPC);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxPC", vboxPC,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vboxPC", vboxPC,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxPC);
 	gtk_container_add(GTK_CONTAINER(pcecd->frame), vboxPC);
@@ -647,7 +646,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	
 	pcecd->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(pcecd->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "pcecd->frame_toolbar",
 				 pcecd->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -657,7 +656,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar", toolbar,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbar", toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
 	gtk_container_add(GTK_CONTAINER(pcecd->frame_toolbar), toolbar);
@@ -665,20 +664,20 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				      GTK_RELIEF_NONE);
 		
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_SAVE);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_SAVE);
 	pcecd->btn_save =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save"), _("Save Note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_save);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_save",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_save",
 				 pcecd->btn_save,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_save);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_TRASH);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_TRASH);
 	pcecd->btn_delete =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -686,13 +685,13 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(pcecd->btn_delete);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_delete",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_delete",
 				 pcecd->btn_delete,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_delete);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PRINT);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PRINT);
 	pcecd->btn_print =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -700,14 +699,14 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(pcecd->btn_print);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_print",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_print",
 				 pcecd->btn_print,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_print);
 
 	vseparator = gtk_vseparator_new();
 	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator",
 				 vseparator,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
@@ -716,60 +715,60 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_CUT);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_CUT);
 	pcecd->btn_cut =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Cut"), _("Cut "), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_cut);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_cut",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_cut",
 				 pcecd->btn_cut,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_cut);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_COPY);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_COPY);
 	pcecd->btn_copy =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Copy"), _("Copy"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_copy);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_copy",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_copy",
 				 pcecd->btn_copy,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_copy);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PASTE);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PASTE);
 	pcecd->btn_paste =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Paste"), _("Paste"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_paste);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_paste",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_paste",
 				 pcecd->btn_paste,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_paste);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_UNDO);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_UNDO);
 	pcecd->btn_undo =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Undo"), _("Undo"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_undo);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_undo",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_undo",
 				 pcecd->btn_undo,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_undo);
 
 	vseparator = gtk_vseparator_new();
 	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator",
 				 vseparator,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
@@ -778,7 +777,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_SEARCH);
 	pcecd->btn_Find =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -787,13 +786,13 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				       _("Find in this note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_Find);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_Find",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_Find",
 				 pcecd->btn_Find,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_Find);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_SRCHRPL);
 	pcecd->btn_replace =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -802,14 +801,14 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				       _("Find and Replace"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_replace);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "pcecd->btn_replace", pcecd->btn_replace,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_replace);
 
 	vseparator = gtk_vseparator_new();
 	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator",
 				 vseparator,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
@@ -818,7 +817,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_SPELLCHECK);
 	pcecd->btn_spell =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -827,21 +826,21 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				       _("Spell check note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(pcecd->btn_spell);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->btn_spell",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->btn_spell",
 				 pcecd->btn_spell,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->btn_spell);
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame34", frame34,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame34", frame34,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
 	gtk_box_pack_start(GTK_BOX(vboxPC), frame34, TRUE, TRUE, 0);
 
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow17);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow17", scrolledwindow17,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow17);
@@ -854,7 +853,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	pcecd->htmlwidget = gtk_html_new();
 	pcecd->html = GTK_HTML(pcecd->htmlwidget);
 	gtk_widget_ref(pcecd->htmlwidget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "pcecd->htmlwidget", pcecd->htmlwidget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->htmlwidget);
@@ -864,7 +863,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 
 	pcecd->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(pcecd->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->statusbar",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "pcecd->statusbar",
 				 pcecd->statusbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pcecd->statusbar);
@@ -928,22 +927,22 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	
 	label85 = gtk_label_new(mod_name);
 	gtk_widget_ref(label85);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label85",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label85",
 				 label85,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label85);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebook_percomm),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_percomm),
 				gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(s->notebook_percomm),
+							(settings.notebook_percomm),
 							page_num), label85);	
 							     
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->notebook_percomm),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings.notebook_percomm),
                                 gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(s->notebook_percomm),
+							(settings.notebook_percomm),
 							page_num), mod_name);
 	
 	
-	s->toolbarComments = toolbar_style(pcecd);
+	settings.toolbarComments = toolbar_style(pcecd);
 	gtk_widget_hide(pcecd->handlebox_toolbar);
 	return pcecd;
 }

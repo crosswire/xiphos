@@ -51,7 +51,7 @@ SB_VIEWER sb_v, *sv ;
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void set_sb_for_daily_devotion(SETTINGS * s)	
+ *   void set_sb_for_daily_devotion(void)	
  *
  * Description
  *   set shortcut bar for displaying Daily Devotion
@@ -60,7 +60,7 @@ SB_VIEWER sb_v, *sv ;
  *   void
  */
 
-void set_sb_for_daily_devotion(SETTINGS * s)
+void set_sb_for_daily_devotion(void)
 {
 	showSBGroup(groupnum7);
 	changegroupnameSB(_("Daily Devotion"), groupnum7);
@@ -74,7 +74,7 @@ void set_sb_for_daily_devotion(SETTINGS * s)
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void showSBVerseList(SETTINGS * s)
+ *   void showSBVerseList(void)
  *
  * Description
  *   set shortcut bar to display verse list group
@@ -83,7 +83,7 @@ void set_sb_for_daily_devotion(SETTINGS * s)
  *   void
  */
 
-void showSBVerseList(SETTINGS * s)
+void showSBVerseList(void)
 {
 	showSBGroup(groupnum7);
 	changegroupnameSB(settings.groupName, groupnum7);
@@ -96,8 +96,7 @@ void showSBVerseList(SETTINGS * s)
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   gboolean gui_display_dictlex_in_viewer(char * modName, char * key, 
-						SETTINGS * s)	
+ *   gboolean gui_display_dictlex_in_viewer(char *modName, char *key) 
  *
  * Description
  *   
@@ -106,14 +105,13 @@ void showSBVerseList(SETTINGS * s)
  *   gboolean
  */
 
-gboolean gui_display_dictlex_in_viewer(char * modName, char * key, 
-						SETTINGS * s)
+gboolean gui_display_dictlex_in_viewer(char *modName, char *key) 
 {
-	if (s->showshortcutbar) {	
+	if (settings.showshortcutbar) {	
 		gtk_notebook_set_page(GTK_NOTEBOOK(
-			s->verse_list_notebook), 2);
-		sprintf(s->groupName, "%s", "Viewer");
-		showSBVerseList(s);
+			settings.verse_list_notebook), 2);
+		sprintf(settings.groupName, "%s", "Viewer");
+		showSBVerseList();
 		display_sb_dictlex(modName, key);
 		return TRUE;
 	}
@@ -127,8 +125,7 @@ gboolean gui_display_dictlex_in_viewer(char * modName, char * key,
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void gui_display_verse_list(gchar * module_name, gchar * verse_list,
- *				SETTINGS * s)	
+ *   void gui_display_verse_list(gchar *module_name, gchar *verse_list)
  *
  * Description
  *   
@@ -137,8 +134,7 @@ gboolean gui_display_dictlex_in_viewer(char * modName, char * key,
  *   void
  */
 
-void gui_display_verse_list(gchar * module_name, gchar * verse_list,
-				SETTINGS * s)
+void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 {
 	GList * tmp = NULL;
 	gboolean oddkey = TRUE;
@@ -149,41 +145,41 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list,
 	
 	tmp = get_verse_list(module_name, verse_list);
 	
-	beginHTML(s->vlsbhtml, TRUE);
+	beginHTML(settings.vlsbhtml, TRUE);
 	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
-			s->bible_bg_color, 
-			s->bible_text_color,
-			s->link_color,
-			s->bible_verse_num_color,
+			settings.bible_bg_color, 
+			settings.bible_text_color,
+			settings.link_color,
+			settings.bible_verse_num_color,
 			module_name);
-	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
+	utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
+	displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
 	
 	while(tmp != NULL) {		
 		if(oddkey){
-			colorkey = s->link_color;
+			colorkey = settings.link_color;
 			oddkey = FALSE;
 		}else{
-			colorkey = s->bible_text_color;
+			colorkey = settings.bible_text_color;
 			oddkey = TRUE;
 		}
 		sprintf(buf,"<a href=\"%s\"><font color=\"%s\"size=\"%s\">%s</font></a><br>",
 					(const char *)tmp->data,
 					colorkey,
-					s->verselist_font_size,
+					settings.verselist_font_size,
 					(const char *)tmp->data);
-		utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-		displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
+		utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
+		displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
 	sprintf(buf,"</table></body</html>");	
-	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
-	endHTML(s->vlsbhtml);
+	utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
+	displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
+	endHTML(settings.vlsbhtml);
 	
-	showSBVerseList(s);
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->verse_list_notebook), 0);	
+	showSBVerseList();
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.verse_list_notebook), 0);	
 }
 
 /******************************************************************************
@@ -263,8 +259,8 @@ static void show_search_results_in_main(gboolean show, gchar *key)
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void on_clistSearchResults_select_row(GtkCList * clist, gint row,
- *			gint column, GdkEvent * event, SETTINGS * s)
+ *   void on_clistSearchResults_select_row(GtkCList *clist, gint row,
+ *			gint column, GdkEvent *event)
  *
  * Description
  *   
@@ -273,17 +269,17 @@ static void show_search_results_in_main(gboolean show, gchar *key)
  *   void
  */
 
-static void on_clistSearchResults_select_row(GtkCList * clist, gint row,
-			gint column, GdkEvent * event, SETTINGS * s)
+static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
+		gint column, GdkEvent *event)
 {
 	gchar *key;
 
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &key);
-	s->displaySearchResults = TRUE;
+	settings.displaySearchResults = TRUE;
 	display_search_results_item(key);
-	if (s->showinmain)
-		show_search_results_in_main(s->showinmain,key);
-	s->displaySearchResults = FALSE;
+	if (settings.showinmain)
+		show_search_results_in_main(settings.showinmain,key);
+	settings.displaySearchResults = FALSE;
 }
 
 /******************************************************************************
@@ -293,8 +289,8 @@ static void on_clistSearchResults_select_row(GtkCList * clist, gint row,
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void on_vllink_clicked(GtkHTML * html, const gchar * url, 
- *						SETTINGS * s)	
+ *   void on_vllink_clicked(GtkHTML *html, const gchar *url,
+ *						gpointer user_data)
  *
  * Description
  *   
@@ -303,11 +299,11 @@ static void on_clistSearchResults_select_row(GtkCList * clist, gint row,
  *   void
  */
 
-static void on_vllink_clicked(GtkHTML * html, const gchar * url, 
-						SETTINGS * s)
+static void on_vllink_clicked(GtkHTML *html, const gchar *url,
+		gpointer user_data)
 {
 	verselist_change_verse((gchar *) url);
-	if(s->showinmain)
+	if(settings.showinmain)
 		change_verse((gchar *) url);	
 }
 
@@ -331,9 +327,6 @@ static void on_vllink_clicked(GtkHTML * html, const gchar * url,
 static void on_btnSBSaveVL_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	SETTINGS *s;
-
-	s = (SETTINGS *) user_data;
 	addverselistBM(sblist);
 }
 
@@ -384,19 +377,16 @@ static void on_nbVL_switch_page(GtkNotebook * notebook,
  *				      gpointer user_data)
  *
  * Description
- *   toggle s->showinmain
+ *   toggle settings.showinmain
  *
  * Return value
  *   void
  */
 
-static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
+static void on_tbtnSBViewMain_toggled(GtkToggleButton *togglebutton,
 				      gpointer user_data)
 {
-	SETTINGS *s;
-
-	s = (SETTINGS *) user_data;
-	s->showinmain = togglebutton->active;
+	settings.showinmain = togglebutton->active;
 }
 
 /******************************************************************************
@@ -475,8 +465,7 @@ static void on_btnViewer_clicked(GtkButton * button,
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL, 
- *							SETTINGS * s)	
+ *   GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL) 
  *
  * Description
  *   create shortcut bar viewer group (viewer, search results and verse list)
@@ -485,8 +474,7 @@ static void on_btnViewer_clicked(GtkButton * button,
  *   GtkWidget *
  */
 
-GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL, 
-							SETTINGS * s)
+GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL) 
 {
 	GtkWidget *toolbarVL;
 	GtkWidget *tmp_toolbar_icon;
@@ -520,7 +508,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	
 	frameTB = gtk_frame_new(NULL);
 	gtk_widget_ref(frameTB);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameTB",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frameTB",
 				 frameTB, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frameTB);
@@ -530,7 +518,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbarVL);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbarVL",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbarVL",
 				 toolbarVL, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(toolbarVL);
@@ -539,7 +527,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_SAVE);
+	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_SAVE);
 	sv->btn_save =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -549,14 +537,14 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(sv->btn_save);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "sv->btn_save",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "sv->btn_save",
 				 sv->btn_save, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(sv->btn_save);
 	gtk_widget_set_sensitive(sv->btn_save, FALSE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_JUMP_TO);
 	sv->tbtn_view_main =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
@@ -567,7 +555,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(sv->tbtn_view_main);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "sv->tbtn_view_main", sv->tbtn_view_main,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -575,7 +563,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	
 	vseparator1 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator1",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator1",
 				 vseparator1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vseparator1);
@@ -584,7 +572,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	gtk_widget_set_usize(vseparator1, 12, 12);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_BOOK_RED);
 	btnViewVL =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
@@ -593,13 +581,13 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       _("View Verse List"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnViewVL);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewVL",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnViewVL",
 				 btnViewVL, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(btnViewVL);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_BOOK_GREEN);
 	btnViewSR =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
@@ -609,13 +597,13 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnViewSR);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewSR",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnViewSR",
 				 btnViewSR, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(btnViewSR);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_BOOK_BLUE);
 	btnViewer =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
@@ -624,14 +612,14 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnViewer);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnViewer",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnViewer",
 				 btnViewer, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(btnViewer);
 
 	sv->notebook = gtk_notebook_new();
 	gtk_widget_ref(sv->notebook);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "sv->notebook", sv->notebook,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "sv->notebook", sv->notebook,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(sv->notebook);
@@ -639,11 +627,11 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	GTK_WIDGET_UNSET_FLAGS(sv->notebook, GTK_CAN_FOCUS);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(sv->notebook), FALSE);
 
-	s->verse_list_notebook = sv->notebook;
+	settings.verse_list_notebook = sv->notebook;
 	
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox2",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox2",
 				 vbox2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox2);
@@ -651,7 +639,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame1",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame1",
 				 frame1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame1);
@@ -659,7 +647,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow1", scrolledwindow1,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -671,19 +659,19 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_usize(scrolledwindow1, -2, 75);
 
-	s->vlsbhtml = gtk_html_new();
-	gtk_widget_ref(s->vlsbhtml);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "s->vlsbhtml", s->vlsbhtml,
+	settings.vlsbhtml = gtk_html_new();
+	gtk_widget_ref(settings.vlsbhtml);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+				 "settings.vlsbhtml", settings.vlsbhtml,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(s->vlsbhtml);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), s->vlsbhtml);
-	gtk_html_load_empty(GTK_HTML(s->vlsbhtml));
+	gtk_widget_show(settings.vlsbhtml);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow1), settings.vlsbhtml);
+	gtk_html_load_empty(GTK_HTML(settings.vlsbhtml));
 
 	frame2 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame2",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame2",
 				 frame2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame2);
@@ -691,7 +679,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow2", scrolledwindow2,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -704,7 +692,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	htmlshow = gtk_html_new();
 	gtk_widget_ref(htmlshow);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "htmlshow", htmlshow,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -714,7 +702,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	label1 = gtk_label_new(_("label1"));
 	gtk_widget_ref(label1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label1",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label1",
 				 label1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label1);
@@ -726,7 +714,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox3",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox3",
 				 vbox3, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox3);
@@ -734,7 +722,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	frameRP = gtk_frame_new(NULL);
 	gtk_widget_ref(frameRP);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameRP",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frameRP",
 				 frameRP, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frameRP);
@@ -742,7 +730,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindowRP = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowRP);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindowRP", scrolledwindowRP,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -754,15 +742,15 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_NEVER);
 
-	s->htmlRP = gtk_html_new();
-	gtk_widget_ref(s->htmlRP);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "s->htmlRP", s->htmlRP,
+	settings.htmlRP = gtk_html_new();
+	gtk_widget_ref(settings.htmlRP);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+				 "settings.htmlRP", settings.htmlRP,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(s->htmlRP);
-	gtk_container_add(GTK_CONTAINER(scrolledwindowRP), s->htmlRP);
-	gtk_html_load_empty(GTK_HTML(s->htmlRP));
+	gtk_widget_show(settings.htmlRP);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowRP), settings.htmlRP);
+	gtk_html_load_empty(GTK_HTML(settings.htmlRP));
 
 	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_ref(vpaned_srch_rslt);
@@ -777,7 +765,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame3",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame3",
 				 frame3, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame3);
@@ -786,7 +774,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow3", scrolledwindow3,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -799,7 +787,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	sv->clist = gtk_clist_new(1);
 	gtk_widget_ref(sv->clist);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "sv->clist",
 				 sv->clist, (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -812,7 +800,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame4);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame4",
 				 frame4, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame4);
@@ -821,7 +809,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow4);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow4", scrolledwindow4,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -835,7 +823,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	sv->html_widget = gtk_html_new();
 	gtk_widget_ref(sv->html_widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "sv->html_widget", sv->html_widget,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -847,7 +835,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	label2 = gtk_label_new(_("label2"));
 	gtk_widget_ref(label2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label2",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label2",
 				 label2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label2);
@@ -859,7 +847,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	frame5 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame5);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame5",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame5",
 				 frame5, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame5);
@@ -867,7 +855,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	scrolledwindow5 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow5);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow5", scrolledwindow5,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -880,7 +868,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 
 	sv->html_viewer_widget = gtk_html_new();
 	gtk_widget_ref(sv->html_viewer_widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "sv->html_viewer_widget", sv->html_viewer_widget,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -890,7 +878,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 		
 	label3 = gtk_label_new(_("label3"));
 	gtk_widget_ref(label3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label3",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label3",
 				 label3, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label3);
@@ -898,15 +886,15 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(sv->notebook), 2), label3);
 
-	gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_vllink_clicked), s);
+	gtk_signal_connect(GTK_OBJECT(settings.vlsbhtml), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_vllink_clicked), NULL);
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->btn_save), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), s);
+			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), NULL);
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->tbtn_view_main), "toggled",
 			   GTK_SIGNAL_FUNC
-			   (on_tbtnSBViewMain_toggled), s);
+			   (on_tbtnSBViewMain_toggled), NULL);
 			   
 	gtk_signal_connect(GTK_OBJECT(btnViewVL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnViewVL_clicked),
@@ -926,9 +914,10 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL,
 	gtk_signal_connect(GTK_OBJECT(sv->clist),
 			   "select_row",
 			   GTK_SIGNAL_FUNC
-			   (on_clistSearchResults_select_row), s);
+			   (on_clistSearchResults_select_row), NULL);
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->html_widget), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), s->app);
+			   GTK_SIGNAL_FUNC(on_url), settings.app);
 	return htmlshow;
 }
+

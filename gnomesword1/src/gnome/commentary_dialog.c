@@ -229,7 +229,7 @@ static void on_btnNext_clicked(GtkButton * button, gpointer user_data)
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   GtkWidget *gui_create_commentary_dialog(SETTINGS * s)	
+ *   GtkWidget *gui_create_commentary_dialog(void)	
  *
  * Description
  *   create the View Commentary Dialog
@@ -238,7 +238,7 @@ static void on_btnNext_clicked(GtkButton * button, gpointer user_data)
  *   GtkWidget *
  */
 
-GtkWidget *gui_create_commentary_dialog(SETTINGS * s)
+GtkWidget *gui_create_commentary_dialog(void)
 {
 	GtkWidget *dialog_vbox11;
 	GtkWidget *vbox30;
@@ -430,7 +430,7 @@ GtkWidget *gui_create_commentary_dialog(SETTINGS * s)
 	gtk_signal_connect(GTK_OBJECT(text8), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);			   
 	gtk_signal_connect (GTK_OBJECT (text8), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)s->app);
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)settings.app);
 
 	commList = NULL;
 	
@@ -440,7 +440,7 @@ GtkWidget *gui_create_commentary_dialog(SETTINGS * s)
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbChangeMod), commList);	
 	g_list_free(commList);	
 	
-	gtk_entry_set_text(GTK_ENTRY(cbEntry), s->CommWindowModule);
+	gtk_entry_set_text(GTK_ENTRY(cbEntry), settings.CommWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry1), settings.currentverse);
 	goto_verse_viewcomm(settings.currentverse);
 	isrunningVC = TRUE;

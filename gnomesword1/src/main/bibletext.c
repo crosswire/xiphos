@@ -425,7 +425,7 @@ void setup_text(GList *mods)
 		t->find_dialog = NULL;
 		t->is_locked = backend_module_is_locked(t->mod_name);
 		get_module_global_options(t);
-		gui_create_text_pane(&settings, t);
+		gui_create_text_pane(t);
 		popupmenu = gui_create_pm_text(t);
 		gnome_popup_menu_attach(popupmenu, t->html, NULL);
 		backend_new_text_display(t->html, t->mod_name, &settings);
