@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * create_shortcutbar_viewer.c - create viewer group gui
@@ -20,9 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -34,9 +32,7 @@
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "support.h"
-
-
-extern SETTINGS *settings;
+#include "settings.h"
 
 SB_VIEWER sb_v, *sv ;
 
@@ -402,7 +398,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vboxVL, SETTINGS * s)
 
 	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_ref(vpaned_srch_rslt);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "vpaned_srch_rslt", vpaned_srch_rslt,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);

@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -34,15 +34,12 @@
 #include "gs_shortcutbar.h"
 #include "bibletext.h"
 #include "gs_menu.h"
-#include "gs_file.h"
 #include "about_gnomesword.h"
 #include "about_sword.h"
 #include "gs_preferences_dlg.h"
 #include "gs_history.h"
 
-/*
- * gnome
- */
+/* gnome */
 #include "main_menu.h"
 
 /******************************************************************************
@@ -157,7 +154,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
 						gpointer user_data)
 {	
-	display_devotional(settings);
+	display_devotional(&settings);
 }
 
 /******************************************************************************
@@ -178,7 +175,7 @@ void on_daily_devotion1_activate(GtkMenuItem *menuitem,
  
 void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	setup_preferences_dlg(settings);
+	setup_preferences_dlg(&settings);
 }
 
 /******************************************************************************
@@ -202,7 +199,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 	SETTINGS *s;
 	EShortcutBar *bar1;
 		
-	s = settings;
+	s = &settings;
 	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
 	if(!s->showshortcutbar){
 		on_btnSB_clicked(NULL,s);
@@ -253,7 +250,7 @@ void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gtk_widget_destroy(settings->app); 
+	gtk_widget_destroy(settings.app); 
 }
 
 /******************************************************************************
@@ -274,10 +271,9 @@ void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
  
-void on_clear1_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	clearhistory(settings->app,GTK_WIDGET(settings->shortcut_bar));
+	clearhistory(settings.app, GTK_WIDGET(settings.shortcut_bar));
 }
 
 /******************************************************************************
@@ -645,4 +641,3 @@ void gui_install_menu_hints(GtkWidget *app)
 	gnome_app_install_menu_hints(GNOME_APP(app),
 				     menubar1_uiinfo);
 }
-/******   end of file   ******/
