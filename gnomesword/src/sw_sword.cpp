@@ -45,6 +45,7 @@
 #include <swmodule.h>
 #include <swconfig.h>
 #include <versekey.h>
+#include <localemgr.h>
 #include <dirent.h> 
 #include <regex.h>
 #include <stdio.h>
@@ -240,6 +241,8 @@ void initSWORD(SETTINGS *s)
 	options = NULL;
 	
 	settings->displaySearchResults = false;
+	
+	//LocaleMgr::systemLocaleMgr.setDefaultLocaleName( "de" );
 	
 	MainFrm = s->app;	//-- save mainform for use latter
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
@@ -1692,6 +1695,10 @@ gint get_mod_typeSWORD(gchar *modName)
 			
 			if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {				
 				return 2;				
+			}
+			
+			if (!strcmp((*it).second->Type(), "Generic Books")) {				
+				return 3;				
 			}
 	}
 	return -1;
