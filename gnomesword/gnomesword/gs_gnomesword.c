@@ -820,3 +820,35 @@ void setautosave(gboolean choice)
 	}
 	settings->autosavepersonalcomments = choice; /* remember our choice for next startup */
 }
+
+/*****************************************************************************
+ * gdouble_arr_to_hex  -- this code is from bluefish-0.6
+ *
+*****************************************************************************/
+gchar *gdouble_arr_to_hex(gdouble *color, gint websafe)
+{
+	gchar *tmpstr;
+	unsigned int red_int;
+	unsigned int green_int;
+	unsigned int blue_int;
+	gdouble red;
+	gdouble green;
+	gdouble blue;
+	
+	red = color[0];
+	green = color[1];
+	blue = color[2];
+
+	if (websafe) {
+		red_int = 0x33*((unsigned int) (red * 255 / 0x33));
+		green_int = 0x33*((unsigned int) (green * 255/0x33));
+		blue_int = 0x33*((unsigned int) (blue * 255/0x33));
+	} else {
+		red_int = (unsigned int) (red * 255);
+		green_int = (unsigned int) (green * 255);
+		blue_int = (unsigned int) (blue * 255);
+	}
+	tmpstr = g_malloc(8*sizeof(char));
+	g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X", red_int, green_int, blue_int);
+	return tmpstr;
+}

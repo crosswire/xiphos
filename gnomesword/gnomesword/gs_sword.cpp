@@ -32,7 +32,6 @@
 #include <swmodule.h>
 #include <versekey.h>
 #include <gbfplain.h>
-#include <gbfhtml.h>
 #include <plainhtml.h>
 
 #include <regex.h>
@@ -47,6 +46,7 @@
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
 #include "gs_thmlplain.h"
+#include "gs_gbfhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -155,6 +155,7 @@ extern gchar current_verse[80];	/* current verse showing in main window - 1st - 
 extern gint historyitems;      /* number of history items */
 extern HISTORY historylist[];  /* sturcture for storing history items */
 extern gboolean addhistoryitem; /* do we need to add item to history */
+extern gchar *mycolor;
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -171,7 +172,7 @@ initSWORD(GtkWidget *mainform)
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
   	
-  	gbftohtml	= new GBFHTML(); //-- sword renderfilter gbf to html
+  	gbftohtml	= new GS_GBFHTML(); //-- sword renderfilter gbf to html
   	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */
         thmltoplain	= new GS_ThMLPlain(); /* sword renderfilter thml to plain */  	
@@ -209,6 +210,7 @@ initSWORD(GtkWidget *mainform)
 	percommods = NULL;
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
+	mycolor = settings->currentverse_color;
 #if USE_SHORTCUTBAR	
   	//-- create shortcut bar groups
 	if(settings->showtextgroup){
