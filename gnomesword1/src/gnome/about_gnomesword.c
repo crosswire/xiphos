@@ -56,6 +56,7 @@ GtkWidget *gui_create_about_gnomesword(void)
                 "Victor Porton  porton@users.sf.net",
                 "Stephen Binks steveb@icenet.com.au",
                 "Carl Constantine duckwing@users.sf.net",
+		"Jorge Chacon <jgchacon@itelgua.com>",
                 NULL
         };
         GtkWidget *about;
@@ -65,7 +66,8 @@ GtkWidget *gui_create_about_gnomesword(void)
                 "Copyright 2000-2002", authors,
                 _(
                 "We would like to thank Troy Griffitts and all the other "
-                "folks who have given us The SWORD Project."),
+                "folks who have given us The SWORD Project."
+		),
                 "gnomesword/about.png"
         );
         gtk_object_set_data(GTK_OBJECT(about), "about", about);
