@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 #include <libxml/parser.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
+//#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
 #include <ctype.h>
 #include <sys/types.h>

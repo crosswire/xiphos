@@ -23,7 +23,9 @@
  */
 #include <config.h>
 #include <gnome.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/widget-color-combo.h>
+#endif
 
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
@@ -468,12 +470,14 @@ static void unset_focus(GtkWidget * w, gpointer data)
 static void set_color_combo(GtkHTML * html,
 			    DIALOG_DATA * d)
 {
+#ifdef USE_GTKHTML30
+
 	GSHTMLEditorControlData *cd = d->editor;
 	color_combo_set_color(COLOR_COMBO(cd->combo),
 			      &html_colorset_get_color_allocated
 			      (html->engine->painter,
 			       HTMLTextColor)->color);
-
+#endif
 }
 
 /******************************************************************************
@@ -548,6 +552,8 @@ static void load_done(GtkHTML * html, DIALOG_DATA * d)
 
 static GtkWidget *setup_color_combo(DIALOG_DATA * d)
 {
+
+#ifdef USE_GTKHTML30
 	GSHTMLEditorControlData *cd = d->editor;
 	HTMLColor *color;
 
@@ -577,6 +583,7 @@ static GtkWidget *setup_color_combo(DIALOG_DATA * d)
 
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
+#endif
 }
 
 /******************************************************************************
