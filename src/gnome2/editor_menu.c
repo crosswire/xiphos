@@ -364,12 +364,7 @@ void on_save_activate(GtkMenuItem * menuitem,
 void on_export_plain_activate(GtkMenuItem * menuitem,
 		      GSHTMLEditorControlData * ecd)
 {
-	/*if (ecd->filename) {
-		save_file_plain_text(ecd->filename, ecd);
-		return;
-	} else {*/
-		gui_fileselection_save(ecd,FALSE);
-	//}
+	gui_fileselection_save(ecd,FALSE);
 }
 
 
@@ -597,9 +592,9 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 	e = ecd->html->engine;
 	
 	if (strlen(linkmod))
-		sprintf(buf, "version=%s passage=%s", linkmod, linkref);
+		sprintf(buf, "sword://%s/%s", linkmod, linkref);
 	else
-		sprintf(buf, "passage=%s", linkref);
+		sprintf(buf, "sword:///%s", linkref);
 
 	url = buf;
 	text = linkref;
