@@ -559,10 +559,13 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 		gtk_moz_embed_append_data(new_browser, str_tmp->str, str_tmp->len);
 		g_string_erase(str_tmp,0,-1);
 		
-		if(key->Verse() == curVerse)
+		if(key->Verse() == curVerse) {
 			settings.font_color = settings.currentverse_color;
-		else			
+			main_set_strongs_morphs(ops);
+		} else {		
 			settings.font_color = settings.bible_text_color;
+			main_set_strongs_morphs_off(ops);
+		}
 		
 		utf8_key = g_convert((char*)key->getText(),
                              -1,
@@ -580,11 +583,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 			settings.bible_verse_num_color, 
 			key->Verse());
 		g_free(utf8_key);
-		//g_message(f_message,163,"buf",buf);
-		//gtk_moz_embed_append_data(new_browser, str->str, str->len);
 		
-		//str = g_string_append(str,buf);
-		//g_free(buf);
 		buf = g_strdup_printf(
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				(mf->old_font)?mf->old_font:"", 
@@ -646,20 +645,13 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	else	
 		g_string_printf(str, "</body></html>");
 	if (str->len) {
-		/*gtk_moz_embed_render_data(new_browser, 
-						str->str, str->len,
-						"file:///sword", 
-						"text/html");*/
 		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
 		gtk_moz_embed_close_stream(new_browser);		
 		if(curVerse > 1) {
 			buf = g_strdup_printf("%d", curVerse);
 			embed_go_to_anchor(new_browser, buf);
 			g_free(buf);
-		}	
-		/*gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
-		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
-		gtk_moz_embed_close_stream(new_browser);*/
+		}
 	}
 	
 	g_string_free(str, TRUE);
