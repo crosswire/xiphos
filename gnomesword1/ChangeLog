@@ -1,6 +1,7 @@
 2003-12-05  Terry <tbiggs@users.sf.net>
 
 	* enabled printing using gnome-print.
+	* fixed gnome2/history.c
 
 
 2003-12-05  Terry <tbiggs@users.sf.net>
