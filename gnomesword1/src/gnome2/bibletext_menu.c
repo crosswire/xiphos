@@ -315,7 +315,7 @@ static void on_text_showtabs_activate(GtkMenuItem * menuitem,
 
 static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	gui_open_bibletext_dialog(t->mod_name);
+	gui_open_bibletext_dialog(t->mod_name); 
 }
 
 /******************************************************************************
