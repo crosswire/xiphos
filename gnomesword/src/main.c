@@ -127,10 +127,7 @@ main (int argc, char *argv[])
 		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
 	if(icreatefiles == 2 || icreatefiles == 3 ){		
-		if(loadoldbookmarks() == 0){ /*** gs_bookmarks.c ***/ 
-			g_warning("loadoldbookmarks failed!");
-			createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
-		}
+		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
 	}
 	while (gtk_events_pending ())
 		gtk_main_iteration ();

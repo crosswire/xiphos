@@ -67,7 +67,7 @@ extern "C" {
 				      	gpointer user_data);
 	void
 	 addverselistBM(SETTINGS * s, GList * list);
-	 gint loadoldbookmarks(void);
+	// gint loadoldbookmarks(void);
 	GtkWidget *create_dlgEditBookMark(gchar * text[3],
 					gboolean newbookmark);
 	void

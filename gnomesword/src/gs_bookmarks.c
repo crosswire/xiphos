@@ -43,7 +43,6 @@
 #include "sw_bookmarks.h"
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
-//#include "gs_listeditor.h"
 #include "support.h"
 
 /*
@@ -734,9 +733,9 @@ void loadtree(SETTINGS * s)
 	bmtree.ctree = GTK_CTREE(s->ctree_widget);
 	bmtree.ctree_widget = s->ctree_widget;
 	p_bmtree = &bmtree;
-
+	
 	pixmap1 =
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask1,
+	    gdk_pixmap_create_from_xpm_d(s->shortcut_bar->window, &mask1,
 					 &transparent, book_closed_xpm);
 	pixmap2 =
 	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
@@ -831,83 +830,6 @@ GtkWidget *create_pmBookmarkTree(void)
 	return pmBookmarkTree;
 }
 
-/*
- * load old style bookmarks on first run of gnomesword
- */
-gint loadoldbookmarks(void)
-{
-/*	LISTITEM mylist;
-	LISTITEM *p_mylist;
-	int flbookmarksnew;
-	gchar *buf[3], tmpbuf[256];
-	gint i = 0;
-	long filesize;
-	struct stat stat_p;
-	GtkCTreeNode *rootnode = NULL, *node = NULL, *parent = NULL;
-	gint ibookmarks;
-
-	stat(fnquickmarks, &stat_p);
-	filesize = stat_p.st_size;
-	ibookmarks = (filesize / (sizeof(mylist)));
-	p_mylist = &mylist;
-	
-	if ((flbookmarksnew = open(fnquickmarks, O_RDONLY)) == -1) {
-		return 0;
-	} else {
-		buf[0] = "Personal";
-		buf[1] = "personal.conf";
-		buf[2] = "ROOT";
-		rootnode =
-		    gtk_ctree_insert_node(p_bmtree->ctree, NULL, NULL, buf,
-					  3, pixmap1, mask1, pixmap2,
-					  mask2, FALSE, FALSE);
-		while (i < ibookmarks) {
-			read(flbookmarksnew, (char *) &mylist,
-			     sizeof(mylist));
-			if (p_mylist->type == 1) {	
-				buf[0] = p_mylist->item;
-				buf[1] = "GROUP";
-				buf[2] = "GROUP";
-				if (p_mylist->level == 0) {
-					parent =
-					    gtk_ctree_insert_node
-					    (p_bmtree->ctree, rootnode,
-					     NULL, buf, 3, pixmap1, mask1,
-					     pixmap2, mask2, FALSE, FALSE);
-				} else {
-					parent =
-					    gtk_ctree_insert_node
-					    (p_bmtree->ctree, parent, NULL,
-					     buf, 3, pixmap1, mask1,
-					     pixmap2, mask2, FALSE, FALSE);
-				}
-			} else {
-				sprintf(tmpbuf, "%s %s", p_mylist->item,
-					"KJV");
-				buf[0] = tmpbuf;
-				buf[1] = p_mylist->item;
-				buf[2] = "KJV";
-				if (p_mylist->level == 0) {
-					node =
-					    gtk_ctree_insert_node
-					    (p_bmtree->ctree, rootnode,
-					     NULL, buf, 3, pixmap1, mask1,
-					     pixmap2, mask2, FALSE, FALSE);
-				} else {
-					node =
-					    gtk_ctree_insert_node
-					    (p_bmtree->ctree, parent, NULL,
-					     buf, 3, pixmap1, mask1,
-					     pixmap2, mask2, FALSE, FALSE);
-				}
-			}
-			++i;
-		}
-		close(flbookmarksnew);
-	}
-	setleaf(p_bmtree->ctree_widget);*/
-	return 1;
-}
 
 /*** open dialog to allow editing of a bookmark ***/
 GtkWidget *create_dlgEditBookMark(gchar * text[3], gboolean newbookmark)
