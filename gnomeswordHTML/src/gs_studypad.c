@@ -44,7 +44,7 @@ extern gboolean file_changed;	/* ??? */
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern gint answer; /* do we want to save studybad file on shutdown */
 extern GtkWidget *text3;
-extern GtkWidget *statusbar2;
+extern GtkWidget *statusbarSP;
 
 /******************************************************************************
  * StudyPad callbacks
@@ -180,9 +180,9 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 	
 	if (current_filename) {
 		sprintf(charbuf, "%s - modified.", current_filename);
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), 1, charbuf);
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), 1, charbuf);
 	} else {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), 1,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), 1,
 				   "modified");
 	}
 	file_changed = TRUE;
@@ -218,7 +218,7 @@ void newSP(GtkWidget *text)
         current_filename = NULL;
         gtk_text_set_point(GTK_TEXT(text), 0);
 	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
-	gtk_statusbar_push (GTK_STATUSBAR (statusbar2), 1, "-untitled-");
+	gtk_statusbar_push (GTK_STATUSBAR (statusbarSP), 1, "-untitled-");
 	file_changed = FALSE;	
 }
 

@@ -213,7 +213,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 /* set personal commets notebook label and display module */
 	if(usepersonalcomments){
 		 /* change personal comments module */
-		changepercomModSWORD(settings->personalcommentsmod);	
+		//changepercomModSWORD(settings->personalcommentsmod);	
 	}
 /* set text modules to last used */
 	changecurModSWORD(settings->MainWindowModule,TRUE);
@@ -233,14 +233,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         gtk_widget_show (lookup_widget(app,"btnSpell"));
         gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
 #endif /* USE_SPELL */	
-
-#ifdef USE_SHORTCUTBAR
-     /* do nothing */
-#else
-        /* create shortcut bar groups */
-        setupSidebar(app);
-        fillSBtoolbars(app,biblemods , commentarymods, dictionarymods);
-#endif /* USE_SHORTCUTBAR */
 
 /* free module lists */
         g_list_free(biblemods);
