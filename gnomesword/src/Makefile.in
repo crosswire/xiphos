@@ -110,7 +110,7 @@ ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     $(GTKHTML_CFLAGS)
+INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     $(GTKHTML_CFLAGS) 	-I/usr/include/gnome-1.0/
 
 
 bin_PROGRAMS = gnomesword
@@ -124,7 +124,7 @@ SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell
 EXTRA_DIST =      $(SPELLING_SOURCE)
 
 
-COMMON_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GTKHTML_LIBS)     $(GNOME_APP_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     -L /usr/lib -licuuc -licui18n
+COMMON_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GTKHTML_LIBS)     $(GNOME_APP_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS) 
 
 
 @SHORTCUTBAR_SPELL_TRUE@gnomesword_SOURCES =     $(SPELLING_SOURCE)     $(COMMON_SOURCE)
@@ -173,7 +173,7 @@ LIBS = @LIBS@
 @SHORTCUTBAR_SPELL_TRUE@sw_bookmarks.o sw_search.o sw_shortcutbar.o \
 @SHORTCUTBAR_SPELL_TRUE@sw_verselist_sb.o sw_viewcomm_dlg.o \
 @SHORTCUTBAR_SPELL_TRUE@sw_viewdict_dlg.o printstuff.o
-gnomesword_DEPENDENCIES =  /usr/lib
+gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)

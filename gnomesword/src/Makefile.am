@@ -5,7 +5,8 @@ INCLUDES =  \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
-    $(GTKHTML_CFLAGS)
+    $(GTKHTML_CFLAGS) \
+	-I/usr/include/gnome-1.0/
 
 bin_PROGRAMS = gnomesword
  
@@ -107,9 +108,8 @@ COMMON_LDADD = \
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS) \
-    $(GNOME_APP_LIBS) \
-    -L /usr/lib -licuuc -licui18n
-
+    $(GNOME_APP_LIBS) 
+	
 if SHORTCUTBAR_SPELL
 gnomesword_SOURCES = \
     $(SPELLING_SOURCE) \

@@ -146,10 +146,13 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 			    tmpMod = (*it).second;
 		  }
 	} else {			/* if neither commertary nor personal check box checked */	 
-		  it = searchMgr->Modules.find (curMod->Name ());	/* find personal commentary module */
+		  it = searchMgr->Modules.find (curMod->Name());	/* find personal commentary module */
+		g_warning(curMod->Name());
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
+		g_warning(searchMod->Name());
 			    tmpMod = (*it).second;
+		g_warning(tmpMod->Name());
 		  }
 	}
 	
