@@ -24,6 +24,7 @@
 #include <swmgr.h>
 #include <swdisp.h>
 #include "backend/sword_main.hh"
+#include "gui/utilities.h"
 
 using namespace sword;
 
@@ -32,7 +33,7 @@ protected:
 	GtkWidget *gtkText;
 	BackEnd *be;
 public:	
-	GTKEntryDisp(GtkWidget *gtkText, BackEnd *sm) 
+	GTKEntryDisp(GtkWidget *gtkText, BackEnd *be) 
 					 { this->gtkText = gtkText; 
 					   this->be = be;}
 	virtual char Display(SWModule &imodule);
@@ -47,15 +48,18 @@ public:
 	virtual char Display(SWModule &imodule);
 };
 
+class GtkMozChapDisp : public GTKMozEntryDisp {
+public:
+	GtkMozChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKMozEntryDisp(gtkText,be) {}
+	virtual char Display(SWModule &imodule);
+	virtual void getVerseBefore(SWModule &imodule);
+	virtual void getVerseAfter(SWModule &imodule);
+	MOD_FONT *mf;
+};
+
 class GTKChapDisp : public GTKEntryDisp {
 public:
 	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
-	virtual char Display(SWModule &imodule);
-};
-
-class GtkMozChapDisp : public GTKEntryDisp {
-public:
-	GtkMozChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };
 
