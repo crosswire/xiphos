@@ -1307,7 +1307,7 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	//GtkTreePath *path;
+	GString *str;
 
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search.module_lists));
@@ -1316,17 +1316,23 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 				    (search.listview_modules));
 	list_store = GTK_LIST_STORE(model);
 
+	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-clear";
-	info->label_top = N_("Clear List?");
-	info->label_middle =
-	    N_("Do you really want to clear the module list?");
+	info->stock_icon = "gtk-dialog-warning";
+	g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			_("Clear List?"),
+			_("Do you really want to clear the module list?"));
+	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
 
-	test = gui_gs_dialog(info);
-	if (test != GS_YES)
+	test = gui_alert_dialog(info);
+	if (test != GS_YES){
+		g_free(info);
+		g_string_free(str,TRUE);		
 		return;
+	}
 
 	gtk_list_store_clear(list_store);
 
@@ -1336,6 +1342,7 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected))
 		gtk_list_store_set(list_store, &selected, 1, "", -1);
 	g_free(info);
+	g_string_free(str,TRUE);
 }
 
 
@@ -1365,6 +1372,7 @@ static void delete_module(GtkButton * button, gpointer user_data)
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
+	GString *str;
 
 
 	model =
@@ -1379,17 +1387,23 @@ static void delete_module(GtkButton * button, gpointer user_data)
 		return;
 
 
+	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-remove";
-	info->label_top = N_("Remove Module?");
-	info->label_middle =
-	    N_("Do you really want to remove\n the selected module?");
+	info->stock_icon = "gtk-dialog-warning";
+	g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			_("Remove Module?"),
+			_("Do you really want to remove the selected module?"));
+	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
 
-	test = gui_gs_dialog(info);
-	if (test != GS_YES)
+	test = gui_alert_dialog(info);
+	if (test != GS_YES) {
+		g_free(info);
+		g_string_free(str,TRUE);		
 		return;
+	}
 	gtk_list_store_remove(list_store, &selected);
 
 	mods = get_current_list();
@@ -1407,10 +1421,10 @@ static void delete_module(GtkButton * button, gpointer user_data)
 		if (mod_list) {
 			gtk_list_store_set(list_store, &selected, 1,
 					   mod_list, -1);
-			//g_warning(mod_list);
 			g_free(mod_list);
 		}
 	g_free(info);
+	g_string_free(str,TRUE);
 }
 
 
@@ -1580,7 +1594,7 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-
+	GString *str;
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
@@ -1594,16 +1608,19 @@ static void delete_range(GtkButton * button, gpointer user_data)
 		return;
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 
+	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-delete";
-	info->label_top = N_("Delete Range?");
-	info->label_middle =
-	    N_("Are you sure you want ot delete this range?");
-	info->label_bottom = name_string;
+	info->stock_icon = "gtk-dialog-warning";
+	g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Delete Range?"),
+			_("Are you sure you want ot delete this range?"),
+			name_string);
+	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
 
-	test = gui_gs_dialog(info);
+	test = gui_alert_dialog(info);
 	if (test != GS_YES) {
 		g_free(name_string);
 		g_free(info);
@@ -1617,6 +1634,7 @@ static void delete_range(GtkButton * button, gpointer user_data)
 
 	g_free(info);
 	g_free(name_string);
+	g_string_free(str,TRUE);
 }
 
 
@@ -1645,6 +1663,7 @@ static void delete_list(GtkButton * button, gpointer user_data)
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
+	GString *str;
 
 
 	model =
@@ -1658,16 +1677,19 @@ static void delete_list(GtkButton * button, gpointer user_data)
 		return;
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 
+	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-delete";
-	info->label_top = N_("Delete list?");
-	info->label_middle =
-	    N_("Are you sure you want to delete:");
-	info->label_bottom = name_string;
+	info->stock_icon = "gtk-dialog-warning";
+	g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Delete list?"),
+			_("Are you sure you want to delete:"),
+			name_string);
+	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
 
-	test = gui_gs_dialog(info);
+	test = gui_alert_dialog(info);
 	if (test != GS_YES) {
 		g_free(name_string);
 		g_free(info);
@@ -1681,6 +1703,7 @@ static void delete_list(GtkButton * button, gpointer user_data)
 
 	g_free(info);
 	g_free(name_string);
+	g_string_free(str,TRUE);
 }
 
 

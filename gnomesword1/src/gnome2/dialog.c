@@ -60,31 +60,43 @@ static gint retval = 3;
 
 static void get_entry_text(GS_DIALOG * info)
 {
-	if(entry1){
-		if(info->text1) g_free(info->text1);
-		info->text1 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry1)));
+	if (entry1) {
+		if (info->text1)
+			g_free(info->text1);
+		info->text1 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry1)));
 	}
-	if(entry2){
-		if(info->text2) g_free(info->text2);
-		info->text2 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry2)));
+	if (entry2) {
+		if (info->text2)
+			g_free(info->text2);
+		info->text2 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry2)));
 	}
-	if(entry3){
-		if(info->text3) g_free(info->text3);
-		info->text3 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry3)));
+	if (entry3) {
+		if (info->text3)
+			g_free(info->text3);
+		info->text3 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry3)));
 	}
-	if(entry4){
-		if(info->text4) g_free(info->text4);
-		info->text4 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry4)));
+	if (entry4) {
+		if (info->text4)
+			g_free(info->text4);
+		info->text4 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry4)));
 	}
-	if(entry5){
-		if(info->text5) g_free(info->text5);
-		info->text5 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry5)));
+	if (entry5) {
+		if (info->text5)
+			g_free(info->text5);
+		info->text5 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry5)));
 	}
-	if(entry6){
-		if(info->text6) g_free(info->text6);
-		info->text6 = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry6)));
+	if (entry6) {
+		if (info->text6)
+			g_free(info->text6);
+		info->text6 =
+		    g_strdup(gtk_entry_get_text(GTK_ENTRY(entry6)));
 	}
-	
+
 }
 
 
@@ -107,26 +119,102 @@ static void get_entry_text(GS_DIALOG * info)
  */
 
 static void on_dialog1_response(GtkDialog * dialog, gint response_id,
-							GS_DIALOG * info)
+				GS_DIALOG * info)
 {
-	g_warning("%d",response_id);
-	switch(response_id) {
-		case GTK_RESPONSE_OK:
-			retval = GS_OK;
-			get_entry_text(info);
+	g_warning("%d", response_id);
+	switch (response_id) {
+	case GTK_RESPONSE_OK:
+		retval = GS_OK;
+		get_entry_text(info);
 		break;
-		case GTK_RESPONSE_YES:
-			retval = GS_YES;
-			get_entry_text(info);
+	case GTK_RESPONSE_YES:
+		retval = GS_YES;
+		get_entry_text(info);
 		break;
-		case GTK_RESPONSE_NO:
-			retval = GS_NO;
+	case GTK_RESPONSE_NO:
+		retval = GS_NO;
 		break;
-		case GTK_RESPONSE_CANCEL:
-			retval = GS_CANCEL;
+	case GTK_RESPONSE_CANCEL:
+		retval = GS_CANCEL;
 		break;
-		
+
 	}
+}
+
+
+GtkWidget *create_dialog_alert(GS_DIALOG * info)
+{
+	GtkWidget *dialog_alert;
+	GtkWidget *dialog_vbox2;
+	GtkWidget *hbox3;
+	GtkWidget *image5;
+	GtkWidget *vbox2;
+	GtkWidget *label7;
+	GtkWidget *dialog_action_area2;
+	GtkWidget *cancelbutton1;
+	GtkWidget *okbutton2;
+
+	dialog_alert = gtk_dialog_new();
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
+	gtk_window_set_title(GTK_WINDOW(dialog_alert), _(" "));
+	gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
+	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
+
+	dialog_vbox2 = GTK_DIALOG(dialog_alert)->vbox;
+	gtk_widget_show(dialog_vbox2);
+
+	hbox3 = gtk_hbox_new(FALSE, 12);
+	gtk_widget_show(hbox3);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox2), hbox3, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 6);
+
+	if (info->stock_icon) {
+		image5 =
+		    gtk_image_new_from_stock(info->stock_icon,
+					     GTK_ICON_SIZE_DIALOG);
+		gtk_widget_show(image5);
+		gtk_box_pack_start(GTK_BOX(hbox3), image5, FALSE, TRUE,
+				   0);
+		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
+		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
+	}
+
+	vbox2 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox2);
+	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
+
+	label7 = gtk_label_new(info->label_top);
+	gtk_widget_show(label7);
+	gtk_box_pack_start(GTK_BOX(vbox2), label7, FALSE, FALSE, 0);
+	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
+	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
+	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
+	gtk_misc_set_alignment(GTK_MISC(label7), 0.5, 0);
+
+	dialog_action_area2 = GTK_DIALOG(dialog_alert)->action_area;
+	gtk_widget_show(dialog_action_area2);
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
+				  GTK_BUTTONBOX_END);
+
+	if (info->no)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_NO, GTK_RESPONSE_NO);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_YES, GTK_RESPONSE_YES);
+
+	if (info->cancel)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_CANCEL,
+				      GTK_RESPONSE_CANCEL);
+	if (info->ok)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_OK, GTK_RESPONSE_OK);
+
+	g_signal_connect((gpointer) dialog_alert, "response",
+			 G_CALLBACK(on_dialog1_response), NULL);
+
+	return dialog_alert;
 }
 
 
@@ -152,7 +240,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	GtkWidget *dialog_vbox;
 	GtkWidget *hbox83;
-	GtkWidget *pixmap;
+	GtkWidget *image;
 	GtkWidget *vbox84;
 	GtkWidget *label_top;
 	GtkWidget *label_middle;
@@ -173,31 +261,30 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	GString *str;
 
 
-	gs_dialog = gtk_dialog_new();	
+	gs_dialog = gtk_dialog_new();
+	info->dialog = gs_dialog;
 	gtk_object_set_data(GTK_OBJECT(gs_dialog), "gs_dialog",
 			    gs_dialog);
-	gtk_window_set_title(GTK_WINDOW(gs_dialog), 
-					info->title ? info->title : " ");
+	gtk_window_set_title(GTK_WINDOW(gs_dialog),
+			     info->title ? info->title : " ");
 	gtk_window_set_policy(GTK_WINDOW(gs_dialog), TRUE, TRUE, FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (gs_dialog), 8);
-	
+	gtk_container_set_border_width(GTK_CONTAINER(gs_dialog), 12);
+
 	if (info->no)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),GTK_STOCK_NO,
-                                             GTK_RESPONSE_NO);
+		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
+				      GTK_STOCK_NO, GTK_RESPONSE_NO);
 	if (info->yes)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),GTK_STOCK_YES,
-                                             GTK_RESPONSE_YES);
-	
+		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
+				      GTK_STOCK_YES, GTK_RESPONSE_YES);
+
 	if (info->cancel)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),GTK_STOCK_CANCEL,
-                                             GTK_RESPONSE_CANCEL);
+		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
+				      GTK_STOCK_CANCEL,
+				      GTK_RESPONSE_CANCEL);
 	if (info->ok)
-		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),GTK_STOCK_OK,
-                                             GTK_RESPONSE_OK);
-	
-	
-	info->dialog = gs_dialog;
-	
+		gtk_dialog_add_button(GTK_DIALOG(gs_dialog),
+				      GTK_STOCK_OK, GTK_RESPONSE_OK);
+
 	dialog_vbox = GTK_DIALOG(gs_dialog)->vbox;
 	gtk_object_set_data(GTK_OBJECT(gs_dialog), "dialog_vbox",
 			    dialog_vbox);
@@ -206,29 +293,34 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	hbox83 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox83);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), hbox83, TRUE, TRUE, 0);
-	if(info->stock_icon) {
-		pixmap = gtk_image_new_from_stock(info->stock_icon,
-						      GTK_ICON_SIZE_DIALOG);
-		/*pixmap = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-						    "/gs2-48x48.png");*/
-		gtk_widget_show(pixmap);
-		gtk_box_pack_start(GTK_BOX(hbox83), pixmap, FALSE, FALSE, 0);
+
+	if (info->stock_icon) {
+		image = gtk_image_new_from_stock(info->stock_icon,
+						 GTK_ICON_SIZE_DND);
+		/*image = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+		   "/gs2-48x48.png"); */
+		gtk_widget_show(image);
+		gtk_box_pack_start(GTK_BOX(hbox83), image, FALSE, TRUE,
+				   0);
+		gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
+		gtk_misc_set_padding(GTK_MISC(image), 12, 0);
 	}
 
 	vbox84 = gtk_vbox_new(FALSE, 8);
 	gtk_widget_show(vbox84);
 	gtk_box_pack_start(GTK_BOX(hbox83), vbox84, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(vbox84), 6);
 
 	if (info->label_top) {
-		str = g_string_new("");
-		g_string_printf(str,"<span weight=\"bold\">%s</span>",info->label_top);
-		label_top = gtk_label_new(info->label_top);
-		gtk_label_set_markup((GtkLabel*)label_top,
-                                           str->str);  
+		//str = g_string_new("");
+		//g_string_printf(str,"<span weight=\"bold\">%s</span>",info->label_top);
+		label_top = gtk_label_new(NULL);
+		gtk_label_set_markup((GtkLabel *) label_top,
+				     info->label_top);
 		gtk_widget_show(label_top);
 		gtk_box_pack_start(GTK_BOX(vbox84), label_top, TRUE,
 				   TRUE, 0);
-		g_string_free(str,TRUE);
+		//g_string_free(str,TRUE);
 	}
 
 	if (info->label_middle) {
@@ -237,7 +329,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 		gtk_box_pack_start(GTK_BOX(vbox84), label_middle, TRUE,
 				   TRUE, 0);
 	}
-	
+
 	if (info->label_bottom) {
 		label_bottom = gtk_label_new(info->label_bottom);
 		gtk_widget_show(label_bottom);
@@ -245,12 +337,11 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				   TRUE, 0);
 	}
 
-	
-
 	table14 = gtk_table_new(6, 2, FALSE);;
 	gtk_widget_show(table14);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox), table14, TRUE, TRUE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (table14), 16);
+	gtk_box_pack_start(GTK_BOX(vbox84), table14, TRUE, TRUE, 0);
+	gtk_table_set_row_spacings(GTK_TABLE(table14), 4);
+	gtk_table_set_col_spacings(GTK_TABLE(table14), 7);
 
 	if (info->label1) {
 		label1 = gtk_label_new(info->label1);
@@ -266,9 +357,10 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		gtk_widget_set_size_request (entry1, 250, -1);
-		if(info->text1)
-			gtk_entry_set_text(GTK_ENTRY(entry1),info->text1);
+		gtk_widget_set_size_request(entry1, 250, -1);
+		if (info->text1)
+			gtk_entry_set_text(GTK_ENTRY(entry1),
+					   info->text1);
 	}
 
 	if (info->label2) {
@@ -285,8 +377,9 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		if(info->text2)
-			gtk_entry_set_text(GTK_ENTRY(entry2),info->text2);
+		if (info->text2)
+			gtk_entry_set_text(GTK_ENTRY(entry2),
+					   info->text2);
 	}
 
 	if (info->label3) {
@@ -304,8 +397,9 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		if(info->text3)
-			gtk_entry_set_text(GTK_ENTRY(entry3),info->text3);
+		if (info->text3)
+			gtk_entry_set_text(GTK_ENTRY(entry3),
+					   info->text3);
 	}
 
 	if (info->label4) {
@@ -322,8 +416,9 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				 (GtkAttachOptions) (GTK_EXPAND |
 						     GTK_FILL),
 				 (GtkAttachOptions) (0), 0, 0);
-		if(info->text4)
-			gtk_entry_set_text(GTK_ENTRY(entry4),info->text4);
+		if (info->text4)
+			gtk_entry_set_text(GTK_ENTRY(entry4),
+					   info->text4);
 	}
 	/*
 	   label5 = gtk_label_new(_("label5"));
@@ -332,7 +427,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	   (GtkAttachOptions) (GTK_FILL),
 	   (GtkAttachOptions) (0), 0, 0);
 	   gtk_misc_set_alignment(GTK_MISC(label5), 0, 0.5);
-	
+
 	   entry5 = gtk_entry_new();
 	   gtk_widget_show(entry5);
 	   gtk_table_attach(GTK_TABLE(table14), entry5, 1, 2, 4, 5,
@@ -353,9 +448,8 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	   (GtkAttachOptions) (0), 0, 0);
 
 	 */
-	g_signal_connect ((gpointer) gs_dialog, "response",
-                    G_CALLBACK (on_dialog1_response),
-                    info);
+	g_signal_connect((gpointer) gs_dialog, "response",
+			 G_CALLBACK(on_dialog1_response), info);
 
 	gtk_widget_show_all(gs_dialog);
 	return gs_dialog;
@@ -380,10 +474,10 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 GS_DIALOG *gui_new_dialog(void)
 {
-	GS_DIALOG * info;
-	
+	GS_DIALOG *info;
+
 	info = g_new0(GS_DIALOG, 1);
-	
+
 	info->stock_icon = NULL;
 	info->dialog = NULL;
 	info->title = NULL;
@@ -413,7 +507,7 @@ GS_DIALOG *gui_new_dialog(void)
 	entry4 = NULL;
 	entry5 = NULL;
 	entry6 = NULL;
-	
+
 	return info;
 }
 
@@ -438,14 +532,47 @@ gint gui_gs_dialog(GS_DIALOG * info)
 {
 	GtkWidget *dialog;
 	static gboolean is_running = FALSE;
-	
-	if(!is_running) {
+
+	if (!is_running) {
 		dialog = gs_dialog_build(info);
 		retval = 4;
 		is_running = TRUE;
-		gtk_dialog_run((GtkDialog *)dialog);
+		gtk_dialog_run((GtkDialog *) dialog);
 		is_running = FALSE;
-		gtk_widget_destroy(gs_dialog);
+		gtk_widget_destroy(dialog);
+		return retval;
+	}
+	return 4;
+}
+
+/******************************************************************************
+ * Name
+ *   gui_gs_dialog
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   gint gui_gs_dialog(GS_DIALOG * info)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+gint gui_alert_dialog(GS_DIALOG * info)
+{
+	GtkWidget *dialog;
+	static gboolean is_running = FALSE;
+
+	if (!is_running) {
+		dialog = create_dialog_alert(info);	//gs_dialog_build(info);
+		retval = 4;
+		is_running = TRUE;
+		gtk_dialog_run((GtkDialog *) dialog);
+		is_running = FALSE;
+		gtk_widget_destroy(dialog);
 		return retval;
 	}
 	return 4;

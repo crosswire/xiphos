@@ -273,13 +273,13 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 
 		else {
 			sprintf(tmpBuf,
-				"<A HREF=\"[%s] %s\">"
-				"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
-				mod_name,
-				get_module_description
-				(mod_name),
-				settings.bible_verse_num_color,
-				mod_name, key);
+				//"<A HREF=\"[%s] %s\">"
+				"[%s] ", //<FONT COLOR=\"%s\">[%s]</A></font>
+				//mod_name,
+				//get_module_description(mod_name),
+				//settings.bible_verse_num_color,
+				//mod_name, 
+				key);
 		}
 		str = g_string_append(str, tmpBuf);
 	}

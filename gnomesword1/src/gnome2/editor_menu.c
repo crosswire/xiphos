@@ -85,28 +85,45 @@
 void gui_new_activate(GtkMenuItem * menuitem,
 		      GSHTMLEditorControlData * ecd)
 {
+	gchar *filename = NULL;
+	gchar *buf = NULL;
+	gint test;
+	GS_DIALOG *info;
+	GString *str;
 	/* 
 	 * if study pad file has changed let's ask about saving it 
 	 */
 	if (ecd->changed) {
-		GS_DIALOG *info;
-		gint test;
-
+		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-save";
-		info->title = N_("Studypad");
-		info->label_top = ecd->filename;
-		info->label_middle = N_("has been modified.");
-		info->label_bottom = N_("Do you wish to save it?");
+		info->stock_icon = "gtk-dialog-warning";
+		if (settings.studypadfilename)
+			buf = settings.studypadfilename;
+		else
+			buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			buf,
+			"has been modified. Do you wish to save it?");
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
-			save_file(ecd->filename, ecd);
+			if (settings.studypadfilename) {
+				filename = g_strdup(settings.studypadfilename);
+				save_file(filename, ecd);
+			} else {
+				gui_fileselection_save(ecd,TRUE);
+			}
 		}
+		settings.modifiedSP = FALSE;
 		g_free(info);
+		g_string_free(str,TRUE);
 	}
+	
+	
 	settings.studypadfilename = NULL;
 	xml_set_value("GnomeSword", "studypad", "lastfile", 
 							NULL);
@@ -142,6 +159,9 @@ static void on_open_activate(GtkMenuItem * menuitem,
 {
 	GtkWidget *openFile;
 	gchar buf[255];
+	gchar *tmp_buf = NULL;
+	GString *str;
+	gchar *filename = NULL;
 	/* 
 	 * if study pad file has changed let's ask about saving it 
 	 */
@@ -149,20 +169,32 @@ static void on_open_activate(GtkMenuItem * menuitem,
 		GS_DIALOG *info;
 		gint test;
 
+		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-save";
-		info->title = N_("Studypad");
-		info->label_top = ecd->filename;
-		info->label_middle = N_("has been modified. ");
-		info->label_bottom = N_("Do you wish to save it?");
+		info->stock_icon = "gtk-dialog-warning";
+		if (settings.studypadfilename)
+			tmp_buf = settings.studypadfilename;
+		else
+			tmp_buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			tmp_buf,
+			"has been modified. Do you wish to save it?");
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
-			save_file(ecd->filename, ecd);
+			if (settings.studypadfilename) {
+				filename = g_strdup(settings.studypadfilename);
+				save_file(filename, ecd);
+			} else {
+				gui_fileselection_save(ecd,TRUE);
+			}
 		}
 		g_free(info);
+		g_string_free(str,TRUE);
 	}
 	sprintf(buf, "%s/*.pad", settings.studypaddir);
 	openFile = gui_fileselection_open(ecd);
@@ -226,7 +258,7 @@ static void on_exportnote_activate(GtkMenuItem * menuitem,
 			ecd->changed = FALSE;
 			gui_update_statusbar(ecd);
 		}
-		gui_fileselection_save(ecd);
+		gui_fileselection_save(ecd,TRUE);
 	}
 }
 /******************************************************************************
@@ -252,12 +284,17 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
+		GString *str;
+		
+		str = g_string_new("");
 
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-delete";
-		info->label_top = N_("Delete Note?");
-		info->label_middle = N_("Are you sure you want\nto delete the note for");
-		info->label_bottom = ecd->key;
+		info->stock_icon = "gtk-dialog-warning";
+		g_string_printf(str,"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Delete Note?"), 
+			_("Are you sure you want to delete the note for\n"), 
+			ecd->key);
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
@@ -273,6 +310,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
+		g_string_free(str,TRUE);
 	}
 }
 
@@ -301,8 +339,37 @@ void on_save_activate(GtkMenuItem * menuitem,
 		save_file(ecd->filename, ecd);
 		return;
 	} else {
-		gui_fileselection_save(ecd);
+		gui_fileselection_save(ecd,TRUE);
 	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_export_plain_activate
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void on_export_plain_activate(GtkMenuItem * menuitem,
+				      GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    if filename call save_file_plain_text() else open save file dialog
+ *
+ * Return value
+ *   void
+ */
+
+void on_export_plain_activate(GtkMenuItem * menuitem,
+		      GSHTMLEditorControlData * ecd)
+{
+	/*if (ecd->filename) {
+		save_file_plain_text(ecd->filename, ecd);
+		return;
+	} else {*/
+		gui_fileselection_save(ecd,FALSE);
+	//}
 }
 
 
@@ -326,7 +393,7 @@ void on_save_activate(GtkMenuItem * menuitem,
 static void on_save_as_activate(GtkMenuItem * menuitem,
 				GSHTMLEditorControlData * ecd)
 {
-	gui_fileselection_save(ecd);
+	gui_fileselection_save(ecd,TRUE);
 }
 
 /******************************************************************************
@@ -819,6 +886,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	GtkWidget *open = NULL;
 	GtkWidget *save = NULL;
 	GtkWidget *saveas = NULL;
+	GtkWidget *export_plain = NULL;
 	GtkWidget *print;
 	GtkWidget *edit2_menu;
 	//GtkAccelGroup *edit2_menu_accels;
@@ -999,6 +1067,12 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		saveas = gtk_menu_item_new_with_label(_("Save As ..."));
 		gtk_widget_show(saveas);
 		gtk_container_add(GTK_CONTAINER(file_menu), saveas);
+		
+		export_plain =
+		    gtk_menu_item_new_with_label(_("Export"));
+		gtk_widget_show(export_plain);
+		gtk_container_add(GTK_CONTAINER(file_menu), export_plain);
+
 	}
 
 	print = gtk_menu_item_new_with_label(_("Print"));
@@ -1108,6 +1182,9 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				   ecd);
 		gtk_signal_connect(GTK_OBJECT(saveas), "activate",
 				   G_CALLBACK(on_save_as_activate),
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(export_plain), "activate",
+				   G_CALLBACK(on_export_plain_activate),
 				   ecd);
 	}
 	gtk_signal_connect(GTK_OBJECT(print), "activate",

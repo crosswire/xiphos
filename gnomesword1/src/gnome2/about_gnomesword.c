@@ -59,7 +59,12 @@ gui_create_about_gnomesword(void)
     "Andy Piper",
     NULL
   };
-  const gchar *documenters[] = { NULL };
+  
+  const gchar *documenters[] = { 
+    "Pierre Benz",
+    "Andy Piper",
+    NULL
+  };
   gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\303\275";
   GdkPixbuf *about1_logo_pixbuf;
   GtkWidget *about1;

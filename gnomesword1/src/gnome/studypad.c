@@ -72,20 +72,28 @@ void gui_studypad_can_close(void)
 {
 	gchar *filename = NULL;
 	gint test;
+	gchar *tmp_buf = NULL;
+	GString *str;
 	GS_DIALOG *info;
 	
 	if (settings.modifiedSP) {
+		str = g_string_new("");
 		info = gui_new_dialog();
-		if (strlen(settings.studypadfilename) > 0)
-			info->label_top = settings.studypadfilename;
+		info->stock_icon = "gtk-dialog-warning";
+		
+		if (settings.studypadfilename)
+			tmp_buf = settings.studypadfilename;
 		else
-			info->label_top = N_("File");
-		info->label_middle = N_("has been modified. ");
-		info->label_bottom = N_("Do you wish to save it?");
+			tmp_buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			tmp_buf,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			if (strlen(settings.studypadfilename) > 0) {
 				g_strdup(settings.studypadfilename);
@@ -96,6 +104,7 @@ void gui_studypad_can_close(void)
 		}
 		settings.modifiedSP = FALSE;
 		g_free(info);
+		g_string_free(str,TRUE);
 	}
 }
 
