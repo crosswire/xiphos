@@ -1,6 +1,6 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev5)
+AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev6)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
@@ -11,19 +11,15 @@ if test "x$gnome2" = xyes; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
 	DIRS="backend main gnome2"
 	AC_SUBST(DIRS)
-	GNAME="GnomeSword2 Bible Study Tool"
-	AC_SUBST(GNAME)	
 	gnomesword_exec="gnomesword2"
 	AC_SUBST(gnomesword_exec)	
 	PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0 sword,,exit)
 else		
-	DIRS="backend main gnome"
-	AC_SUBST(DIRS)
-	GNAME="GnomeSword Bible Study Tool"
-	AC_SUBST(GNAME)	
-	gnomesword_exec="gnomesword-1.0"
-	AC_SUBST(gnomesword_exec)
-	PKG_CHECK_MODULES(GNOME, gtkhtml-1.1 gal libxml sword,,exit)
+ 	DIRS="backend main gnome"
+ 	AC_SUBST(DIRS)
+ 	gnomesword_exec="gnomesword-1.0"
+ 	AC_SUBST(gnomesword_exec)
+ 	PKG_CHECK_MODULES(GNOME, gtkhtml-1.1 gal libxml sword,,exit)
 fi
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
@@ -158,6 +154,7 @@ AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}",[packa
 AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}",[package menu directory])
 AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}",[package source directory])
 
+
 AC_OUTPUT([ m4/Makefile 
 Makefile
 po/Makefile.in
@@ -172,13 +169,13 @@ gnomesword-1.0.desktop
 ])
 
 echo
-echo "Summary of GnomeSword1 configuration:"
+echo "Summary of GnomeSword configuration:"
 echo
 
 if test "x$gnome2" = xyes; then
-	echo "using Gnome:                   2.x"  
+	echo "Building for Gnome:              2.x"  
 else
-        echo "using Gnome:                   1.4.x"
+         echo "Building for Gnome:              1.4.x"
 fi
 
 

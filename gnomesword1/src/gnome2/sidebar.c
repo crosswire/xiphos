@@ -446,246 +446,6 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 
 /******************************************************************************
  * Name
- *   add_module_to_language_folder
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void add_module_to_language_folder(GtkTreeModel * model,
- *		      GtkTreeIter iter, gchar * language, gchar * module_name)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void add_module_to_language_folder(GtkTreeModel * model,
-					  GtkTreeIter iter,
-					  const gchar * language,
-					  gchar * module_name)
-{
-	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
-	GtkTreeIter child_iter;
-	gboolean valid;
-
-	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = "Unknown";
-
-	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
-	while (valid) {
-		/* Walk through the list, reading each row */
-		gchar *str_data;
-
-		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
-		if (!strcmp(language, str_data)) {
-			gtk_tree_store_append(GTK_TREE_STORE(model),
-					      &child_iter, &iter_iter);
-			gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, 0,
-					   (gchar *) module_name, -1);
-			g_free(str_data);
-			return;
-		}
-		valid = gtk_tree_model_iter_next(model, &iter_iter);
-	}
-}
-
-
-/******************************************************************************
- * Name
- *   add_language_folder
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
- *			 gchar * language)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * language)
-{
-	GtkTreeIter iter_iter;
-	GtkTreeIter parent;
-	GtkTreeIter child_iter;
-	gboolean valid;
-
-	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = "Unknown";
-
-	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
-	while (valid) {
-		/* Walk through the list, reading each row */
-		gchar *str_data;
-
-		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
-		if (!strcmp(language, str_data)) {
-			g_free(str_data);
-			return;
-		}
-		valid = gtk_tree_model_iter_next(model, &iter_iter);
-	}
-	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
-			      &iter);
-	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, 0,
-			   (gchar *) language, -1);
-
-}
-
-
-/******************************************************************************
- * Name
- *   load_module_tree
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void load_module_tree(GtkWidget * tree)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void load_module_tree(GtkWidget * tree)
-{
-	gint i;
-	static gboolean need_column = TRUE;
-	GtkTreeStore *store;
-	GtkTreeIter iter;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-	GtkTreeIter child_iter;
-	GList *tmp = NULL;
-	GObject *mod_selection;
-
-
-	need_column = TRUE;
-	store = gtk_tree_store_new(1, G_TYPE_STRING);
-
-	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Biblical Texts", -1);
-
-	/*  add language folders Biblical Texts folder */
-	tmp = get_list(TEXT_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Biblical Texts language folders */
-	tmp = get_list(TEXT_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      iter, buf,
-					      (gchar *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add language folders Commentaries folder */
-	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Commentaries", -1);
-
-	tmp = get_list(COMM_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Commentaries language folders */
-	tmp = get_list(COMM_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      iter, buf,
-					      (gchar *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add language folders Dictionaries folder */
-	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Dict/Lex", -1);
-
-	tmp = get_list(DICT_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-
-	}
-
-	/*  add modules to Dict/Lex language folders */
-	tmp = get_list(DICT_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      iter, buf,
-					      (gchar *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-
-
-	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "General Books", -1);
-
-	/*  add language folders Books folder */
-	tmp = get_list(GBS_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Books language folders */
-	tmp = get_list(GBS_LIST);
-	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
-		add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      iter, buf,
-					      (gchar *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-
-	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
-				GTK_TREE_MODEL(store));
-	if (need_column) {
-		renderer = gtk_cell_renderer_text_new();
-		column =
-		    gtk_tree_view_column_new_with_attributes("Found",
-							     renderer,
-							     "text", 0,
-							     NULL);
-		gtk_tree_view_column_set_sort_column_id(column, 0);
-		gtk_tree_view_append_column(GTK_TREE_VIEW(tree),
-					    column);
-		need_column = FALSE;
-	}
-
-	mod_selection =
-	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(tree)));
-
-	g_signal_connect(mod_selection, "changed",
-			 G_CALLBACK(mod_selection_changed), tree);
-
-
-}
-
-/******************************************************************************
- * Name
  *   on_modules_activate
  *
  * Synopsis
@@ -1136,6 +896,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox_search_results;
 	GtkWidget *vbox_verse_list;
 	GtkWidget *vbox_viewer;
+	GObject *mod_selection;
 
 	//sv = &sb_v;
 	vbox1 = gtk_vbox_new(FALSE, 0);
@@ -1218,7 +979,12 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  vbox_viewer);
 
-	load_module_tree(treeview1);
+	gui_load_module_tree(treeview1);
+	mod_selection =
+	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1)));
+
+	g_signal_connect(mod_selection, "changed",
+			 G_CALLBACK(mod_selection_changed), treeview1);
 	gui_load_bookmark_tree();
 
 

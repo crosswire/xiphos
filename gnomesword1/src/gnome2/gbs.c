@@ -819,7 +819,7 @@ static void add_vbox_to_notebook(GBS_DATA * g)
  *   void
  */ 
  
-void gui_setup_gbs(GList *mods)
+void gui_setup_gbs(GList *mods, gint starting_page)
 {
 	gint count = 0;
 	GList *tmp = NULL;

@@ -4852,6 +4852,8 @@ glib_DEFUN([GLIB_WITH_NLS],
 	GLIB_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
 	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)dnl
 	if test "$MSGFMT" != "no"; then
+          glib_save_LIBS="$LIBS"
+          LIBS="$LIBS $INTLLIBS"
 	  AC_CHECK_FUNCS(dcgettext)
 	  AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
 	  GLIB_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
@@ -4878,6 +4880,7 @@ glib_DEFUN([GLIB_WITH_NLS],
             DATADIRNAME=lib
 	    ;;
 	    esac])
+          LIBS="$glib_save_LIBS"
 	  INSTOBJEXT=.mo
 	else
 	  gt_cv_have_gettext=no

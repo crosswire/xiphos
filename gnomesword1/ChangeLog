@@ -1,3 +1,20 @@
+2003-09-17  Terry <tbiggs@users.sf.net>
+
+	* changed clist to listview in gnome2/dictlex.c and gnome2/dictlex_dialog.c
+
+
+2003-09-10  Terry <tbiggs@users.sf.net>
+
+	* moved add_module_to_language_folder, add_language_folder and
+	  gui_load_module_tree from sidebar.c to utilities.c to be used by other 
+	  files.
+	* replaced the search_dialog ctree with a treeview widget.
+	
+2003-09-06  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev6
+	
+	
 2003-07-30  Terry <tbiggs@users.sf.net>
 
 	* Added chapter_display_textview to gnome2/gtkhtml_display.c
