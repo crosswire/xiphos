@@ -73,13 +73,13 @@ extern GtkWidget *textDict;
 extern SETTINGS *settings;
 
 /***************************************************************************************************
- *on_url taken form gtkhtml project
+ *
  ***************************************************************************************************/
 void on_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	GnomeApp *app;
-	gchar buf[255];
-
+	gchar buf[255];	
+	
 	app = GNOME_APP(data);
 	if (url == NULL)
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
@@ -87,7 +87,6 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 	else {
 		if (*url == '@') {
 			++url;
-			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf, _("Show %s in main window"), url);
 		
 		} else if (!strncmp(url, "type=morph", 10)) {
@@ -151,6 +150,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, "%s", url);
 		} else
 			sprintf(buf, _("Go to %s"), url);
+		
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
 					buf);
 	}

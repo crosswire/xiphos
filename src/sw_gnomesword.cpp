@@ -278,7 +278,7 @@ void initSWORD(GtkWidget * mainform)
 				else
 					percomMod->Disp(percomDisplay);	//-- else standard display
 				percommods = g_list_append(percommods, percomMod->Name());
-				usepersonalcomments = TRUE;	//-- used by verseChange function (GnomeSword.cpp)
+				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
 				percomMod->SetKey(settings->currentverse);
 				gtk_widget_show(lookup_widget(settings->app, "vbox2"));	//-- show personal comments page because we
 			}	//-- have at least one personl module
@@ -292,7 +292,7 @@ void initSWORD(GtkWidget * mainform)
 			comp1Mod->Disp(comp1Display);
 		}
 	}
-	//-- add globalOptions to menus
+	//-- get list of  globalOptions for menus
 	OptionsList optionslist = mainMgr->getGlobalOptions();
 	for (OptionsList::iterator it = optionslist.begin(); it != optionslist.end(); it++) {	
 		//-- save options in a glist for popup menus
@@ -395,7 +395,6 @@ void changeVerseSWORD(gchar * ref)
 	VerseKey key;
 	
 	key = ref;
-	//g_warning("chapter = %d",key.Chapter());
 	
 	if((!key.Chapter()) || (!key.Verse())) {	
 		vkText.AutoNormalize(0);
@@ -555,7 +554,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	
 
 	//-- delete Sword managers
-//	delete mainMgr;
+	delete mainMgr;
 	delete mainMgr1;
 	delete percomMgr;
 	//-- delete Sword displays

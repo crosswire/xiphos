@@ -419,7 +419,7 @@ additemtosubtree(GtkWidget * MainFrm, gchar * subtreelabel,
 		 gchar * itemlabel)
 {
 	GnomeUIInfo *bookmarkitem;
-	g_print("%s\n",subtreelabel);
+	
 	bookmarkitem = g_new(GnomeUIInfo, 2);
 	bookmarkitem->type = GNOME_APP_UI_ITEM;
 	bookmarkitem->moreinfo = (gpointer) on_john_3_1_activate;
