@@ -14,7 +14,7 @@ DIRS="backend editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libxml-2.0 ,,exit)
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 ,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
@@ -262,7 +262,8 @@ if test "x$debug" = xyes; then
   echo "Sword libs              $LIB_SWORD"
   echo "CFLAGS:   $CFLAGS"
   echo "CPPFLAGS: @CPPFLAGS"
-  echo "CXXFLAGS: $CXXFLAGS"
+  echo "CXXFLAGS: $CXXFLAGS"GNOME_CFLAGS
+  echo "GNOME_CFLAGS: $GNOME_CFLAGS"
   echo "install directory:     ${prefix}/bin"
   echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
 fi

@@ -163,8 +163,10 @@ void main_add_tab_history_item(gpointer data)
 	tab->history_list[tab->history_items].itemnum = tab->history_items;
 	
 	strcpy(tab->history_list[tab->history_items].verseref, tab->text_commentary_key);
-	strcpy(tab->history_list[tab->history_items].textmod, tab->text_mod);
-	strcpy(tab->history_list[tab->history_items].commod, tab->commentary_mod);
+	if(tab->text_mod)
+		strcpy(tab->history_list[tab->history_items].textmod, tab->text_mod);
+	if(tab->commentary_mod)
+		strcpy(tab->history_list[tab->history_items].commod, tab->commentary_mod);
 
 	++tab->history_items;
 	tab->current_history_item = tab->history_items;

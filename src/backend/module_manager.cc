@@ -32,7 +32,7 @@
 
 
 #include <glib-2.0/glib.h>
-#include <gnome.h>
+//#include <gnome.h>
 #include <swmgr.h>
 #include <installmgr.h>
 #include <filemgr.h>
