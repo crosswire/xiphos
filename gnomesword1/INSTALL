@@ -36,13 +36,13 @@ everything it needs..
 ======================================================================
 
 ============================================================================
- gnomesword will use ispell or aspell for spell checking 
+ gnomesword will use ispell or pspell for spell checking 
 ============================================================================
 
 You must also have gnome up and running.
 If you are using RedHat you need to have the gnome and gtk dev packages
 installed.
-It all worked on my RedHat 6.2 system.
+It all worked on my RedHat 7.2 system.
 
 First, be sure to read INSTALL in the root of the Sword project
 directory for instructions on how to make sure the API
@@ -55,7 +55,6 @@ make
 su
 make install
 
-For spell checking to work aspell or ispell must be in your path.
 
    ========================================================
      ====================================================

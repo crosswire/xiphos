@@ -93,7 +93,7 @@ bookAbrevMap abrevationMap;
  *   void backend_init(void)	
  *
  * Description
- *   create swmgrs 
+ *   start sword 
  *
  * Return value
  *   void
