@@ -727,7 +727,7 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 {
 	GtkWidget * notebook, *entry;
 	ModMap::iterator it;
-	gint bibleindex = 0, commindex = 0, dictindex = 0;
+	gint bibleindex = 0, commindex = 0, dictindex = 0, bookindex = 0;
 
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		     
@@ -745,7 +745,9 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 			}
 			++bibleindex;
 			
-		} else if (!strcmp((*it).second->Type(), "Commentaries")) {
+		} 
+		
+		else if (!strcmp((*it).second->Type(), "Commentaries")) {
 			if (!strcmp((*it).second->Name(), modName)) {
 				notebook =
 				    lookup_widget(settings->app, "notebook1");
@@ -758,7 +760,9 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 			}
 			++commindex;
 			
-		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {
+		} 
+		
+		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {
 			if (!strcmp((*it).second->Name(), modName)) {
 				entry =
 				    lookup_widget(settings->app, "dictionarySearchText");
@@ -769,6 +773,14 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 				return;
 			}
 			++dictindex;
+		} 
+		
+		else if (!strcmp((*it).second->Type(), "Generic Book")) {
+			if (!strcmp((*it).second->Name(), modName)) {				
+				gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), bookindex);
+				return;
+			}
+			++bookindex;
 		}
 	}
 }
