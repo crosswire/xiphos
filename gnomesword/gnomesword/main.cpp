@@ -23,13 +23,16 @@
 #endif
 
 #include <gnome.h>
-
+//#include "gs_SWORD.h"
 #include "GnomeSword.h"
 #include "menustuff.h"
 #include "support.h"
 #include "callback.h"
 #include "interface.h"
 #include "filestuff.h"
+
+extern SETTINGS *settings;
+extern SETTINGS myset;	
 
 int
 main (int argc, char *argv[])
@@ -45,6 +48,8 @@ main (int argc, char *argv[])
   		tmpbuf[80];
 
 
+
+			
 	if(argc > 1) buf = g_strdup(argv[1]);	
 	gnome_init("GnomeSword", VERSION, argc, argv);
 	if(!strcmp(buf,"newconfigs")) newconfigs = true;
@@ -70,9 +75,13 @@ main (int argc, char *argv[])
   	{
   		createFiles();
   	}
+  	myset = readsettings();  //-- load settings into structure
+  	settings = &myset;       //-- set pointer to structure
   	initSword(mainwindow);
+  	initGnomeSword(mainwindow);
   	gtk_widget_show(mainwindow);
   	UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
-  	gtk_main ();
+  	
+  	gtk_main ();  	
   	return 0;
 }

@@ -6,7 +6,6 @@
     copyright            : (C) 2000 by Terry Biggs
     email                : tbiggs@infinet.com
  ***************************************************************************/
-
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -42,6 +41,9 @@ static GtkWidget* create_pmBible(GList *mods);
 static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods);
 /******************************************************************************/
 
+
+extern gint	greekpage,
+        	hebrewpage;
 /******************************************************************************
  * additemtognomemenu - add item to gnome menu 
  * adds an item to the main menu bar
@@ -148,6 +150,7 @@ addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
  * biblelist - list of Bible modules - from initSword
  * commentarylist - list of commentary modules - from initSword
  * dictionarylist - list of dict/lex modules - from initSword 
+ * percomlist - list of personal comments modules
  ******************************************************************************/
 void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist, 
 			GList *commentarylist, GList *dictionarylist,
@@ -179,7 +182,7 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	/* create popup menu for Bible window */
 	menuBible = create_pmBible(biblelist);	
 		
-	//-------------------------------------------------------- attach popup menus
+	/* attach popup menus */
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"moduleText"),(gchar*)"1");
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(app,"textComp2"),(gchar*)"1");
@@ -191,8 +194,131 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
 }
 
+/******************************************************************************
+ * addmodsmenus(GList *, GList *, GList *) - add modules to view menus
+ * app - main window
+ * settings - gnomesword settings structure
+ * biblelist - list of Bible modules - from initSword
+ * commentarylist - list of commentary modules - from initSword
+ * dictionarylist - list of dict/lex modules - from initSword 
+ * percomlist - list of personal comments modules
+ ******************************************************************************/
+void addmodstomenus(GtkWidget *app, SETTINGS *settings, GList *biblelist, 
+			GList *commentarylist, GList *dictionarylist,
+			GList *percomlist) 
+{
+	gchar	rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		aboutrememberlastitem3[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		rememberlastitemCom[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+		rememberlastitemDict[80], //--  use to store last menu item so we can add the next item under it - gnome menus	
+		mybuf[80];
+	gint	pg = 0;
+	GList *tmp;		
 
-//-------------------------------------------------------------------------------------------
+//-- set main window modules and add to menus	
+	sprintf(rememberlastitem,"%s","_View/Main Window/");
+	sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
+	sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
+	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
+	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
+	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
+//-- add textmods - Main Window menu
+	tmp = biblelist;
+	while (tmp != NULL) {	
+	//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, rememberlastitem , (GtkMenuCallback)on_mainText_activate );
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data, aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Main Window/",(gchar *) tmp->data);	
+		sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/", (gchar *) tmp->data);			
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+//-- add commmods - commentary window menu
+	tmp = commentarylist;
+	while (tmp != NULL) {		
+		sprintf(mybuf,"%d",pg);
+		additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemCom, 
+				(GtkMenuCallback)on_com_select_activate);			
+		sprintf(rememberlastitemCom,"%s%s","_View/Commentary Window/",
+				(gchar *) tmp->data);	
+		additemtognomemenu(app,(gchar *) tmp->data, 
+				(gchar *) tmp->data, aboutrememberlastitem2, 
+				(GtkMenuCallback)on_kjv1_activate );			
+		sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",
+				(gchar *) tmp->data);
+		++pg;
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+	pg = 0;
+//-- add dictmods - dictionary window menu
+	tmp = dictionarylist;
+	while (tmp != NULL) {
+		sprintf(mybuf,"%d",pg);
+		if(!strcmp((gchar *) tmp->data,"StrongsHebrew")) hebrewpage = pg;
+		if(!strcmp((gchar *) tmp->data,"StrongsGreek")) greekpage = pg;
+		additemtognomemenu(app, (gchar *) tmp->data, mybuf, rememberlastitemDict,
+				(GtkMenuCallback)on_dict_select_activate );		
+		sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",
+				(gchar *) tmp->data);		
+		additemtognomemenu(app,(gchar *) tmp->data, 
+				(gchar *) tmp->data, aboutrememberlastitem3,
+				(GtkMenuCallback)on_kjv1_activate );
+		sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",
+				(gchar *) tmp->data);				
+		++pg;
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+	
+//-- add interlin1mods - interliniar1 window menu	
+	sprintf(rememberlastitem,"%s","_View/Interlinear1 Window/");
+	tmp = biblelist;
+	while (tmp != NULL) {
+		//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
+					 (GtkMenuCallback)on_1st_interlinear_window1_activate);
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Interlinear1 Window/", (gchar *) tmp->data);		
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+	
+//-- add interlin2mods - interliniar2 window menu	
+	sprintf(rememberlastitem,"%s","_View/Interlinear2 Window/");
+	tmp = biblelist;
+	while (tmp != NULL) {
+		//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
+					 (GtkMenuCallback)on_2nd_interlinear_window1_activate);
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Interlinear2 Window/", (gchar *) tmp->data);		
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);	
+//-- add interlin3mods - interliniar3 window menu	
+	sprintf(rememberlastitem,"%s","_View/Interlinear3 Window/");
+	tmp = biblelist;
+	while (tmp != NULL) {
+		//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
+					 (GtkMenuCallback)on_3rd_interlinear_window1_activate);
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Interlinear3 Window/", (gchar *) tmp->data);		
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);				
+}			
+
+/********************************************************************************
+ * additemtosubtree
+ * GtkWidget * MainFrm - application main window
+ * gchar * subtreelabel - path to menu subtree
+ * gchar * itemlabel - item to add
+ *******************************************************************************/
 void
 additemtosubtree(GtkWidget * MainFrm, gchar * subtreelabel,
 		 gchar * itemlabel)
