@@ -38,8 +38,106 @@
 #include "main/settings.h"
 #include "main/configs.h"
 #include "main/module.h"
+#include "main/sword.h"
 
 
+
+/******************************************************************************
+ * Name
+ *   sword_url_handler
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   gint sword_url_handler(const gchar * url)
+ *
+ * Description
+ *   display a sword uri in the form 'sword://KJV/1John5:8'
+ *                                   'sword://MHC/Genesis1:1'
+ *   in the appropriate pane
+ *
+ * Return value
+ *   gint
+ */
+
+gint sword_url_handler(const gchar * url)
+{
+	gchar *buf = NULL;
+	gchar *module = NULL;
+	const gchar *key = NULL;
+	static gchar **work_buf = NULL;
+	gint mod_type;
+	gboolean change_verse = FALSE;
+	
+	if(!strstr(url,"sword://"))
+		return 0;
+	
+	work_buf = g_strsplit (url,"/",4);
+	if(check_for_module(work_buf[2])) {
+		mod_type = get_mod_type(work_buf[2]);
+		switch(mod_type) {
+			case TEXT_TYPE:			
+				key = get_valid_key(work_buf[3]);
+				xml_set_value("GnomeSword", "modules", "bible",
+				      work_buf[2]);
+				settings.MainWindowModule = work_buf[2];
+				if(strcmp(key,settings.currentverse))
+					change_verse = TRUE;
+				gui_change_module_and_key(
+					settings.MainWindowModule, 
+					key);
+				if(change_verse) {
+					settings.currentverse = (gchar*)key;
+					gui_change_verse(settings.currentverse);
+				}
+				if(key) g_free((gchar*)key);
+				return 1;	
+			break;
+			case COMMENTARY_TYPE:				
+				key = get_valid_key(work_buf[3]);
+				xml_set_value("GnomeSword", "modules", "comm",
+				      work_buf[2]);
+				settings.CommWindowModule = work_buf[2];
+				if(strcmp(key,settings.currentverse))
+					change_verse = TRUE;
+				gui_change_module_and_key(
+					settings.CommWindowModule,
+					key);
+				if(change_verse) {
+					settings.currentverse = (gchar*)key;
+					gui_change_verse(settings.currentverse);
+				}
+				if(key) g_free((gchar*)key);
+				return 1;				
+			break;
+			case DICTIONARY_TYPE:
+				settings.dictkey = work_buf[3];
+				xml_set_value("GnomeSword", "modules", "dict",
+				      work_buf[2]);
+				settings.DictWindowModule = work_buf[2];
+				gui_change_module_and_key(
+					settings.DictWindowModule,
+					settings.dictkey);
+				gtk_notebook_set_current_page(
+					GTK_NOTEBOOK(widgets.workbook_lower),0);
+				return 1;	
+			break;
+			case BOOK_TYPE:
+				settings.book_key = work_buf[3];
+				xml_set_value("GnomeSword", "modules", "book",
+				      work_buf[2]);
+				settings.BookWindowModule = work_buf[2];
+				gui_change_module_and_key(
+					settings.BookWindowModule,
+					settings.book_key);
+				gtk_notebook_set_current_page(
+					GTK_NOTEBOOK(widgets.workbook_lower),1);
+				return 1;	
+			break;
+		}
+	}
+	return 0;
+}
 
 
 /******************************************************************************
