@@ -96,7 +96,7 @@ void gui_new_activate(GtkMenuItem * menuitem,
 	if (ecd->changed) {
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
 		else
@@ -171,7 +171,7 @@ static void on_open_activate(GtkMenuItem * menuitem,
 
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		if (settings.studypadfilename)
 			tmp_buf = settings.studypadfilename;
 		else
@@ -289,7 +289,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		str = g_string_new("");
 
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		g_string_printf(str,"<span weight=\"bold\">%s</span>\n\n%s %s",
 			_("Delete Note?"), 
 			_("Are you sure you want to delete the note for\n"), 
@@ -646,7 +646,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
-	//info->stock_icon = "gtk-add";
+	//info->stock_icon = GTK_STOCK_ADD;
 	info->label_top = N_("<b>Add reference Link</b>");
 	info->text1 = g_strdup("");
 	info->label1 = N_("Reference: ");

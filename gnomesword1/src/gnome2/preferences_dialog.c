@@ -1297,6 +1297,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *label805;
 	GtkWidget *label806;
 	GtkWidget *label807;
+	gchar *header;
 
 	tooltips = gtk_tooltips_new();
   /*************************************************************/
@@ -1443,8 +1444,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame26),GTK_SHADOW_NONE);
   	 
   	label800 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label800),
-  	                                      _("<span weight=\"bold\">Font Colors</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Font Colors"));
+  	gtk_label_set_markup(GTK_LABEL(label800), header);
+	g_free(header);
+
   	gtk_widget_show(label800);
   	gtk_frame_set_label_widget(GTK_FRAME(frame26),label800);
 	gtk_misc_set_alignment(GTK_MISC(label800), 0, 0);
@@ -1670,9 +1674,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame21),GTK_SHADOW_NONE);
   	 
   	label801 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label801),
-  	                                      _("<span weight=\"bold\">Use Defaults When Starting GnomeSword</span>"));
-  	gtk_widget_show(label801);
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Use Defaults When Starting GnomeSword"));
+  	gtk_label_set_markup(GTK_LABEL(label801), header);
+	g_free(header);
+
+	gtk_widget_show(label801);
   	gtk_frame_set_label_widget(GTK_FRAME(frame21),label801);
 
 //	gtk_widget_show(frame21);
@@ -1710,8 +1717,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame42),GTK_SHADOW_NONE);
   	 
   	label802 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label802),
-  	                                      _("<span weight=\"bold\">Show Tabs</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Show Tabs"));
+  	gtk_label_set_markup(GTK_LABEL(label802), header);
+	g_free(header);
+
   	gtk_widget_show(label802);
   	gtk_frame_set_label_widget(GTK_FRAME(frame42),label802);
 	
@@ -1758,9 +1768,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame72),GTK_SHADOW_NONE);
   	 
   	label803 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label803),
-  	                                      _("<span weight=\"bold\">Show</span>"));
-  	gtk_widget_show(label803);
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Show"));
+  	gtk_label_set_markup(GTK_LABEL(label803), header);
+	g_free(header);
+
+	gtk_widget_show(label803);
   	gtk_frame_set_label_widget(GTK_FRAME(frame72),label803);
 	
 	gtk_widget_show(frame72);
@@ -1818,9 +1831,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame43),GTK_SHADOW_NONE);
   	 
   	label804 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label804),
-  	                                      _("<span weight=\"bold\">General</span>"));
-  	gtk_widget_show(label804);
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("General"));
+  	gtk_label_set_markup(GTK_LABEL(label804), header);
+	g_free(header);
+
+	gtk_widget_show(label804);
   	gtk_frame_set_label_widget(GTK_FRAME(frame43),label804);
 
 	gtk_widget_show(frame43);
@@ -1877,9 +1893,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame41),GTK_SHADOW_NONE);
   	 
   	label805 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label805),
-  	                                      _("<span weight=\"bold\">Show Dictionary / Lexicon</span>"));
-  	gtk_widget_show(label805);
+	
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Show Dictionary / Lexicon"));
+  	gtk_label_set_markup(GTK_LABEL(label805), header);
+	g_free(header);
+  	
+	gtk_widget_show(label805);
   	gtk_frame_set_label_widget(GTK_FRAME(frame41),label805);
 
 	gtk_widget_show(frame41);
@@ -1915,8 +1934,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame74),GTK_SHADOW_NONE);
   	 
   	label806 = gtk_label_new(NULL);
-  	gtk_label_set_markup(GTK_LABEL(label806),
-  	                                      _("<span weight=\"bold\">Editors</span>"));
+	
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Editors"));
+  	gtk_label_set_markup(GTK_LABEL(label806), header);
+	g_free(header);
+	
   	gtk_widget_show(label806);
   	gtk_frame_set_label_widget(GTK_FRAME(frame74),label806);
 
