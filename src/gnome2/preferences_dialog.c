@@ -42,7 +42,7 @@
 #include "gui/gbs.h"
 #include "gui/commentary.h"
 #include "gui/dictlex.h"
-#include "gui/interlinear.h"
+#include "gui/parallel_view.h"
 #include "gui/main_window.h"
 #include "gui/widgets.h"
 
@@ -56,11 +56,11 @@
 typedef struct _preferences_entry ENTRY;
 struct _preferences_entry {
 	GtkWidget *text_module;	/*  Main Window Module  */
-	GtkWidget *interlinear_1_module;
-	GtkWidget *interlinear_2_module;
-	GtkWidget *interlinear_3_module;
-	GtkWidget *interlinear_4_module;
-	GtkWidget *interlinear_5_module;
+	GtkWidget *parallel_1_module;
+	GtkWidget *parallel_2_module;
+	GtkWidget *parallel_3_module;
+	GtkWidget *parallel_4_module;
+	GtkWidget *parallel_5_module;
 	GtkWidget *commentary_module;
 	GtkWidget *dictionary_module;
 	GtkWidget *default_dictionary_module;
@@ -424,7 +424,7 @@ static void applyoptions(void)
 		gui_display_text(settings.currentverse);
 		gui_display_commentary(settings.currentverse);
 		gui_display_dictlex(settings.dictkey);
-		gui_update_interlinear_page();
+		gui_update_parallel_page();
 		//display_new_font_color_and_size();
 	}
 
@@ -494,25 +494,25 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	xml_set_value("GnomeSword", "modules", "bible", buf);
 	settings.MainWindowModule = xml_get_value("modules", "bible");
 
-	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_1_module));
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.parallel_1_module));
 	xml_set_value("GnomeSword", "modules", "int1", buf);
-	settings.Interlinear1Module = xml_get_value("modules", "int1");
+	settings.parallel1Module = xml_get_value("modules", "int1");
 
-	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_2_module));
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.parallel_2_module));
 	xml_set_value("GnomeSword", "modules", "int2", buf);
-	settings.Interlinear2Module = xml_get_value("modules", "int2");
+	settings.parallel2Module = xml_get_value("modules", "int2");
 
-	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_3_module));
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.parallel_3_module));
 	xml_set_value("GnomeSword", "modules", "int3", buf);
-	settings.Interlinear3Module = xml_get_value("modules", "int3");
+	settings.parallel3Module = xml_get_value("modules", "int3");
 
-	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_4_module));
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.parallel_4_module));
 	xml_set_value("GnomeSword", "modules", "int4", buf);
-	settings.Interlinear4Module = xml_get_value("modules", "int4");
+	settings.parallel4Module = xml_get_value("modules", "int4");
 
-	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_5_module));
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.parallel_5_module));
 	xml_set_value("GnomeSword", "modules", "int5", buf);
-	settings.Interlinear5Module = xml_get_value("modules", "int5");
+	settings.parallel5Module = xml_get_value("modules", "int5");
 
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.commentary_module));
 	xml_set_value("GnomeSword", "modules", "comm", buf);
@@ -1647,7 +1647,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_lower_workbook,
 			     _
-			     ("Dict/Lex, Generic Books and Interlinear Page"),
+			     ("Dict/Lex, Generic Books and parallel Page"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
@@ -2038,8 +2038,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	entry.interlinear_1_module = GTK_COMBO(combo18)->entry;
-	gtk_widget_show(entry.interlinear_1_module);
+	entry.parallel_1_module = GTK_COMBO(combo18)->entry;
+	gtk_widget_show(entry.parallel_1_module);
 
 	combo19 = gtk_combo_new();
 	gtk_widget_show(combo19);
@@ -2047,8 +2047,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	entry.interlinear_2_module = GTK_COMBO(combo19)->entry;
-	gtk_widget_show(entry.interlinear_2_module);
+	entry.parallel_2_module = GTK_COMBO(combo19)->entry;
+	gtk_widget_show(entry.parallel_2_module);
 
 	combo20 = gtk_combo_new();
 	gtk_widget_show(combo20);
@@ -2056,8 +2056,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	entry.interlinear_3_module = GTK_COMBO(combo20)->entry;
-	gtk_widget_show(entry.interlinear_3_module);
+	entry.parallel_3_module = GTK_COMBO(combo20)->entry;
+	gtk_widget_show(entry.parallel_3_module);
 
 	label157 = gtk_label_new(_("Commentary"));
 	gtk_widget_show(label157);
@@ -2086,8 +2086,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	entry.interlinear_4_module = GTK_COMBO(combo21)->entry;
-	gtk_widget_show(entry.interlinear_4_module);
+	entry.parallel_4_module = GTK_COMBO(combo21)->entry;
+	gtk_widget_show(entry.parallel_4_module);
 
 	combo22 = gtk_combo_new();
 	gtk_widget_show(combo22);
@@ -2095,8 +2095,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	entry.interlinear_5_module = GTK_COMBO(combo22)->entry;
-	gtk_widget_show(entry.interlinear_5_module);
+	entry.parallel_5_module = GTK_COMBO(combo22)->entry;
+	gtk_widget_show(entry.parallel_5_module);
 
 	combo23 = gtk_combo_new();
 	gtk_widget_show(combo23);
@@ -2116,21 +2116,21 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.percomm_module = GTK_COMBO(combo25)->entry;
 	gtk_widget_show(entry.percomm_module);
 
-	label160 = gtk_label_new(_("Interlinear 5"));
+	label160 = gtk_label_new(_("parallel 5"));
 	gtk_widget_show(label160);
 	gtk_table_attach(GTK_TABLE(table9), label160, 0, 1, 5, 6,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label160), 0, 0.5);
 
-	label161 = gtk_label_new(_("Interlinear 4"));
+	label161 = gtk_label_new(_("parallel 4"));
 	gtk_widget_show(label161);
 	gtk_table_attach(GTK_TABLE(table9), label161, 0, 1, 4, 5,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label161), 0, 0.5);
 
-	label162 = gtk_label_new(_("Interlinear 3"));
+	label162 = gtk_label_new(_("parallel 3"));
 	gtk_widget_show(label162);
 	gtk_table_attach(GTK_TABLE(table9), label162, 0, 1, 3, 4,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2139,7 +2139,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_misc_set_alignment(GTK_MISC(label162), 7.45058e-09,
 			       7.45058e-09);
 
-	label163 = gtk_label_new(_("Interlinear 2"));
+	label163 = gtk_label_new(_("parallel 2"));
 	gtk_widget_show(label163);
 	gtk_table_attach(GTK_TABLE(table9), label163, 0, 1, 2, 3,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2148,7 +2148,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_misc_set_alignment(GTK_MISC(label163), 7.45058e-09,
 			       7.45058e-09);
 
-	label164 = gtk_label_new(_("Interlinear 1"));
+	label164 = gtk_label_new(_("parallel 1"));
 	gtk_widget_show(label164);
 	gtk_table_attach(GTK_TABLE(table9), label164, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2456,16 +2456,16 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	gtk_entry_set_text(GTK_ENTRY(entry.text_module),
 			   settings.MainWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entry.interlinear_1_module),
-			   settings.Interlinear1Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.interlinear_2_module),
-			   settings.Interlinear2Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.interlinear_3_module),
-			   settings.Interlinear3Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.interlinear_4_module),
-			   settings.Interlinear4Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.interlinear_5_module),
-			   settings.Interlinear5Module);
+	gtk_entry_set_text(GTK_ENTRY(entry.parallel_1_module),
+			   settings.parallel1Module);
+	gtk_entry_set_text(GTK_ENTRY(entry.parallel_2_module),
+			   settings.parallel2Module);
+	gtk_entry_set_text(GTK_ENTRY(entry.parallel_3_module),
+			   settings.parallel3Module);
+	gtk_entry_set_text(GTK_ENTRY(entry.parallel_4_module),
+			   settings.parallel4Module);
+	gtk_entry_set_text(GTK_ENTRY(entry.parallel_5_module),
+			   settings.parallel5Module);
 	gtk_entry_set_text(GTK_ENTRY(entry.commentary_module),
 			   settings.CommWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry.dictionary_module),
@@ -2651,19 +2651,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	/*** module combos ***/
 	gtk_signal_connect(GTK_OBJECT(entry.text_module), "changed",
 			   G_CALLBACK(on_Entry_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(entry.interlinear_1_module),
+	gtk_signal_connect(GTK_OBJECT(entry.parallel_1_module),
 			   "changed", G_CALLBACK(on_Entry_changed),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(entry.interlinear_2_module),
+	gtk_signal_connect(GTK_OBJECT(entry.parallel_2_module),
 			   "changed", G_CALLBACK(on_Entry_changed),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(entry.interlinear_3_module),
+	gtk_signal_connect(GTK_OBJECT(entry.parallel_3_module),
 			   "changed", G_CALLBACK(on_Entry_changed),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(entry.interlinear_4_module),
+	gtk_signal_connect(GTK_OBJECT(entry.parallel_4_module),
 			   "changed", G_CALLBACK(on_Entry_changed),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(entry.interlinear_5_module),
+	gtk_signal_connect(GTK_OBJECT(entry.parallel_5_module),
 			   "changed", G_CALLBACK(on_Entry_changed),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(entry.commentary_module),

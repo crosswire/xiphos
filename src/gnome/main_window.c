@@ -40,7 +40,7 @@
 #include "gui/html.h"
 #include "gui/history.h"
 #include "gui/bibletext.h"
-#include "gui/interlinear.h"
+#include "gui/parallel_view.h"
 #include "gui/percomm.h"
 #include "gui/commentary.h"
 #include "gui/gbs.h"
@@ -350,10 +350,10 @@ void gui_change_verse(const gchar * key)
 	}
 
 	/* 
-	 * change interlinear verses 
+	 * change parallel verses 
 	 */
 	if (settings.dockedInt) {
-		gui_update_interlinear_page();
+		gui_update_parallel_page();
 	}
 
 	/* 
@@ -387,7 +387,7 @@ void gui_change_verse(const gchar * key)
  *					gpointer *data)	
  *
  * Description
- *    mouse button pressed in interlinear window 
+ *    mouse button pressed in parallel window 
  *
  * Return value
  *   gint
@@ -396,7 +396,7 @@ void gui_change_verse(const gchar * key)
 static gint button_release_event(GtkWidget * html,
 				 GdkEventButton * event, gpointer data)
 {
-	settings.whichwindow = INTERLINEAR_WINDOW;
+	settings.whichwindow = parallel_WINDOW;
 
 	switch (event->button) {
 	case 1:
@@ -773,16 +773,16 @@ void create_mainwindow(void)
 
 
 	/*
-	 * interlinear page 
+	 * parallel page 
 	 */
-	widgets.frame_interlinear = gtk_frame_new(NULL);
-	gtk_widget_show(widgets.frame_interlinear);
+	widgets.frame_parallel = gtk_frame_new(NULL);
+	gtk_widget_show(widgets.frame_parallel);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.frame_interlinear);
+			  widgets.frame_parallel);
 
 	swInt = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swInt);
-	gtk_container_add(GTK_CONTAINER(widgets.frame_interlinear),
+	gtk_container_add(GTK_CONTAINER(widgets.frame_parallel),
 			  swInt);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swInt),
 				       GTK_POLICY_AUTOMATIC,
@@ -790,14 +790,14 @@ void create_mainwindow(void)
 
 	settings.dockedInt = TRUE;
 
-	widgets.html_interlinear = gtk_html_new();
-	gtk_widget_show(widgets.html_interlinear);
-	gtk_html_load_empty(GTK_HTML(widgets.html_interlinear));
+	widgets.html_parallel = gtk_html_new();
+	gtk_widget_show(widgets.html_parallel);
+	gtk_html_load_empty(GTK_HTML(widgets.html_parallel));
 	gtk_container_add(GTK_CONTAINER(swInt),
-			  widgets.html_interlinear);
+			  widgets.html_parallel);
 
 
-	label197 = gtk_label_new(_("Interlinear"));
+	label197 = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label197);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
 				   gtk_notebook_get_nth_page
@@ -809,11 +809,11 @@ void create_mainwindow(void)
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
 					  (widgets.workbook_lower),
-					  page_num), _("Interlinear"));
-	settings.interlinear_page = page_num;
+					  page_num), _("Parallel View"));
+	settings.parallel_page = page_num;
 
 	/*
-	 * end Interlinear page 
+	 * end parallel page 
 	 */
 
 	widgets.appbar = gnome_appbar_new(FALSE, TRUE,
@@ -860,13 +860,13 @@ void create_mainwindow(void)
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
-	gtk_signal_connect(GTK_OBJECT(widgets.html_interlinear),
+	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", GTK_SIGNAL_FUNC(gui_url),
 			   (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(widgets.html_interlinear),
+	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(widgets.html_interlinear),
+	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(button_release_event), NULL);
 
