@@ -14,6 +14,10 @@
  * or alternatively any widget in the component, and the name of the widget
  * you want returned.
  */
+#ifdef __cplusplus
+extern "C" {
+#endif 
+ 
 GtkWidget*  lookup_widget              (GtkWidget       *widget,
                                         const gchar     *widget_name);
 
@@ -32,3 +36,7 @@ GtkWidget*  create_pixmap              (GtkWidget       *widget,
 
 GdkImlibImage* create_image            (const gchar     *filename);
 
+
+#ifdef __cplusplus
+}
+#endif

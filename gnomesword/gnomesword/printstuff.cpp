@@ -34,7 +34,6 @@
 
 #include "printstuff.h"
 #include "support.h"
-#include "dialogs.h"
 
 #include <libgnomeprint/gnome-printer.h>
 #include <libgnomeprint/gnome-print.h>
