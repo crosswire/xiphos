@@ -45,6 +45,7 @@
 #include "gui/dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/dictlex.h"
+#include "gui/widgets.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -706,13 +707,20 @@ void gui_add_new_text_pane(TEXT_DATA * t)
 {
 	GtkWidget *popupmenu;
 
-	popupmenu = gui_create_pm_text(t);
 	create_pane(t);
 	if (t->is_locked)
 		gui_module_is_locked_display(t->html, t->mod_name,
-					     t->cipher_key);
-	if (!t->is_rtol)
+							t->cipher_key);
+
+#ifdef USE_GTKEMBEDMOZ					    
+	if (!t->is_rtol) {
+		popupmenu = gui_create_pm_text(t);
 		gnome_popup_menu_attach(popupmenu, t->html, NULL);
+	}
+#else
+	popupmenu = gui_create_pm_text(t);
+	gnome_popup_menu_attach(popupmenu, t->html, NULL);
+#endif
 }
 
 /******************************************************************************
@@ -814,7 +822,7 @@ void gui_setup_text(GList * mods)
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_text_switch_page), text_list);
 
-	modbuf = g_strdup(xml_get_value("modules", "text"));
+	modbuf = g_strdup(xml_get_value("modules", "bible"));
 
 	set_page_text(modbuf, text_list);
 

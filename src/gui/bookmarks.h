@@ -28,31 +28,13 @@ extern "C" {
 
 #include "main/settings.h"
 
-typedef struct _bmtree BM_TREE;
-struct _bmtree {
-	GtkWidget *ctree_widget;
-	GtkCTree *ctree;
-};
 
 void gui_new_xml_bookmark_file(void);
-void gui_add_bookmark_to_tree(GtkCTreeNode * node,
-		   gchar * modName, gchar * verse);
 void gui_load_bookmark_tree(void);
 void create_bookmark_menu(void);
-void on_new_folder_activate(GtkMenuItem * menuitem,
-			  gpointer user_data);
 void gui_save_old_bookmarks_to_new(GNode *gnode);
-void gui_save_bookmarks(GtkMenuItem * menuitem,
-			     gpointer user_data);
-void on_edit_item_activate(GtkMenuItem * menuitem,
-		       gpointer user_data);
-void on_delete_item_activate(GtkMenuItem * menuitem,
-			 gpointer user_data);
-void on_allow_reordering_activate(GtkMenuItem * menuitem,
-			      gpointer user_data);
+void gui_save_bookmarks(void);
 void gui_verselist_to_bookmarks(GList *list, gchar * module_name);
-void gui_create_add_bookmark_menu(GtkWidget * menu,
-			  GtkWidget * bookmark_menu_widget);
 
 
 #ifdef __cplusplus
@@ -60,4 +42,3 @@ void gui_create_add_bookmark_menu(GtkWidget * menu,
 #endif
 
 #endif
-

@@ -26,8 +26,6 @@
 extern "C" {
 #endif
 
-//#include <glib-1.2/glib.h>
-
 #include "main/module.h"
 #include "main/key.h"	
 #include "main/configs.h"	

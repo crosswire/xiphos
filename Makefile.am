@@ -2,10 +2,6 @@
 
 SUBDIRS = m4 doc po src
 
-
-BUILT_SOURCES = ${PACKAGE}.desktop
-
-
 gnomesworddoc_DATA = \
  	   README\
 	    COPYING\
@@ -16,9 +12,6 @@ gnomesworddoc_DATA = \
 	    TODO
 
 
-${PACKAGE}.desktop: ${PACKAGE}.desktop.in
-	sed -e 's:@pixmapdir@:$(datadir)/pixmaps/${PACKAGE}:g' ${PACKAGE}.desktop.in > ${PACKAGE}.desktop
-	
 gnomesworddocdir = $(prefix)/doc/${PACKAGE}
 
 install-data-local:

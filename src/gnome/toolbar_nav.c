@@ -30,6 +30,7 @@
 #include "gui/history.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/settings.h"

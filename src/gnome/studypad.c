@@ -42,6 +42,7 @@
 #include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/fileselection.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
@@ -444,15 +445,11 @@ static gint html_button_pressed(GtkWidget * html,
 					       ecd);
 
 		}
-
-		else
-			return TRUE;
 		break;
 	case 2:
 		/* 
 		 * pass this for pasting 
 		 */
-		return TRUE;
 	case 3:
 		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 					     "button_press_event");

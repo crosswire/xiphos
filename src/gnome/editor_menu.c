@@ -58,6 +58,7 @@
 #include "gui/dialog.h"
 #include "gui/find_dialog.h"
 #include "gui/commentary_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"
@@ -592,7 +593,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 		    html_engine_get_selection_string(ecd->html->engine);
 		info->text1 = g_strdup(buf);
 	}
-	info->text2 = g_strdup(xml_get_value("modules", "text"));//settings.MainWindowModule);
+	info->text2 = g_strdup(xml_get_value("modules", "bible"));//settings.MainWindowModule);
 	/*** open dialog to get name for list ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {

@@ -23,9 +23,8 @@
 #include <config.h>
 #endif
 
-#include <glib-1.2/glib.h>
+
 #include <string.h>
-#include <gconf/gconf.h>
 
 #include "gui/gui.h"
 #include "gui/main_window.h"
@@ -33,8 +32,6 @@
 #include "gui/gnomesword.h"
 
 #include "backend/sword.h"
-
-#include "main/settings.h"
  
 /******************************************************************************
  * Name
@@ -53,9 +50,8 @@
 
 int main(int argc, char *argv[])
 {
-	gboolean newconfigs = FALSE;
-	gboolean newbookmarks = FALSE;
-	GError *gconf_error = NULL;
+	int newconfigs = FALSE;
+	int newbookmarks = FALSE;
 	
 	gui_init(argc, argv);
 	
@@ -74,15 +70,6 @@ int main(int argc, char *argv[])
 			newconfigs = TRUE;
 			newbookmarks = TRUE;
 		}
-	}
-
-	/* 
-	* This is needed for gtkhtml-1.1
-	*/	
-	if (!gconf_init(argc, argv, &gconf_error)) {
-		g_assert(gconf_error != NULL);
-		g_error("GConf init failed:\n%s", gconf_error->message);
-		return FALSE;
 	}
 
 	/* 

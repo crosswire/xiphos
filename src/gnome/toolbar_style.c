@@ -32,6 +32,7 @@
 
 #include "gui/toolbar_style.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 
