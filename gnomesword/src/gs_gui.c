@@ -763,10 +763,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	shortcut_bar = e_shortcut_bar_new();
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
 				 shortcut_model);
-	if(s->showshortcutbar)
-		gtk_widget_show(shortcut_bar);
-	else
-		gtk_widget_hide(shortcut_bar);
+	
 
 	s->shortcut_bar = shortcut_bar;
 
