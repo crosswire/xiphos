@@ -68,6 +68,9 @@ extern gboolean
 	noteModified;	/* personal comments window changed */
 extern gchar 
 	current_verse[80];
+
+extern GList
+	*options;
 	
 	
 
@@ -571,7 +574,7 @@ on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 	static GtkWidget *dlg;
 	
 	if(!isrunningVT) {
-		dlg = create_dlgViewText ();
+		dlg = create_dlgViewText(options);
 	}
 	gtk_widget_show(dlg);
 }
