@@ -69,3 +69,4 @@ void addmodstomenus(GtkWidget *app, SETTINGS *settings,GList *biblelist,
 #ifdef __cplusplus
 }
 #endif
+

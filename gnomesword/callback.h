@@ -693,3 +693,4 @@ void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 #ifdef __cplusplus
 }
 #endif
+

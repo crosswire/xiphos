@@ -64,7 +64,11 @@ extern  GtkWidget *MainFrm;
 static void
 on_link_clicked (GtkHTML *html, const gchar *url, gpointer data)
 {	
-	changeVerseSWORD(url);
+	gchar *buf;
+	
+	buf = g_strdup(url);
+	changeVerseSWORD(buf);
+	g_free(buf);
 }
 
 /***************************************************************************************************
@@ -73,13 +77,16 @@ on_link_clicked (GtkHTML *html, const gchar *url, gpointer data)
 static void
 on_link2_clicked (GtkHTML *html, const gchar *url, gpointer data)
 {	
-	//g_warning(url);
-	if(*url == '#') {
-		++url;
+	if(*url== '#') {
+		++url;	 /* remove # */	
 	     	lookupStrongsSWORD(atoi(url));
-	}else changeVerseSWORD(url);
+	}else{
+		gchar *buf;	
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+	}
 }
-
 
 /***************************************************************************************************
  *copy menu item clicked in any html window
@@ -92,10 +99,12 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkHTML *html;
 	
 	widget= lookup_widget(MainFrm, (gchar *) user_data);
+	
 	html = GTK_HTML (widget);
 	buf = html->engine->clipboard	
 		? html_object_get_selection_string(html->engine->clipboard)
 		: html_engine_get_selection_string (html->engine);
+	
 	//g_warning(buf);
 }
 
@@ -287,4 +296,5 @@ void gotoanchorHTML(gchar *verse)
 	gtk_html_jump_to_anchor(GTK_HTML(htmlTexts),verse);
 #endif /* GTK_HTML */	
 }
+
 

@@ -94,3 +94,4 @@ public:
 };
 
 extern SearchWindow *searchWindow;
+

@@ -1582,3 +1582,4 @@ GtkWidget *create_listeditor(void)
 
 	return listeditor;
 }
+

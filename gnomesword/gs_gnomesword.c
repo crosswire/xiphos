@@ -857,3 +857,4 @@ gchar *gdouble_arr_to_hex(gdouble *color, gint websafe)
 	g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X", red_int, green_int, blue_int);
 	return tmpstr;
 }
+

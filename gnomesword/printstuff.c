@@ -836,3 +836,4 @@ static void preview_destroy_cb(GtkObject * obj, PrintJobInfo * pji)
 {
 
 }
+
