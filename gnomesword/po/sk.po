@@ -19,8 +19,8 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Radi by sme sa poïakovali Troy Griffitts a v¹etkým ostatným µuïom, ktorý nám "
-"dali Sword projekt."
+"Radi by sme sa poïakovali Troy Griffitts a v¹etkým ostatným µuïom, "
+"ktorý nám dali Sword projekt."
 
 #: src/gs_abouts.c:105
 msgid "About The Sword Project"
@@ -35,10 +35,10 @@ msgid ""
 "installed module set may be shared between any frontend using the framework."
 msgstr ""
 "SWORD projekt je úsilie o vytvorenie rozsiahleho softvérového balíka na "
-"výskum a ¹túdium Boha a Jeho Slova.  Biblický rámec SWORDu umoŸòuje µahké "
-"ovládanie textu biblie, komentárov, lexikónov, slovníkov atï.  Veµa "
-"frontendov je budovaných na tomto rámci.  Nain¹talovaná sada modulov môŸe "
-"by» zdielaná medzi frontendom s pouŸitím rámca."
+"výskum a ¹túdium Boha a Jeho Slova.  Biblický rámec SWORDu umoŸòuje "
+"µahké ovládanie textu biblie, komentárov, lexikónov, slovníkov atï.  "
+"Veµa frontendov je budovaných na tomto rámci.  Nain¹talovaná sada "
+"modulov môŸe by» zdielaná medzi frontendom s pouŸitím rámca."
 
 #: src/gs_abouts.c:170
 msgid "Modules can be downloaded from the Sword Project "
@@ -123,8 +123,8 @@ msgstr "Povoli» preusporiadanie"
 #: src/gs_bookmarks.c:173
 msgid "Toggle Reording - allow items to be moved by draging"
 msgstr ""
-"Prepnú» preusporiadanie - povoli» poloŸkám, aby mohli by» premiestòované "
-"»ahaním"
+"Prepnú» preusporiadanie - povoli» poloŸkám, aby mohli by» "
+"premiestòované »ahaním"
 
 #: src/gs_bookmarks.c:836
 msgid "GnomeSword - New Bookmark"
@@ -294,7 +294,8 @@ msgstr "Referencia"
 #: src/gs_editor.c:1302
 msgid "Bible Reference or Module key to display when link is clicked"
 msgstr ""
-"Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri kliknutí na odkaz"
+"Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri kliknutí "
+"na odkaz"
 
 #: src/gs_editor.c:1326
 msgid "Name of module to show when link is clicked"
@@ -512,7 +513,7 @@ msgstr "Prida» Rýchlu znaèku"
 msgid "Add current verse to Quickmarks menu"
 msgstr "Prida» aktuálny ver¹ do ponuky Rýchlych  znaèiek"
 
-#: src/gs_gui.c:177Nastavenie
+#: src/gs_gui.c:177
 msgid "Clear Quickmarks"
 msgstr "Zmaza» rýchle znaèky"
 
@@ -956,7 +957,8 @@ msgstr "+5\r"
 
 #: src/gs_preferences_dlg.c:893 src/gs_preferences_dlg.c:1019
 msgid "Zero is base font size Go up or down from there"
-msgstr "Nula je základná veµkos» písma Choïte hore alebo dolu z tadiaµto"
+msgstr ""
+"Nula je základná veµkos» písma Choïte hore alebo dolu z tadiaµto"
 
 #: src/gs_preferences_dlg.c:907
 msgid "Pick a color - CurrentVerse BG"
