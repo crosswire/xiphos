@@ -869,12 +869,14 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	GtkWidget *aboutbox,  //-- pointer to about dialog
  		*text,       //-- pointer to text widget of dialog
     		*label;     //-- pointer to label in dialog
-	char 	*buf,       //-- pointer to text buffer for label (mod name)
- 		*bufabout;  //-- pointer to text buffer for text widget (mod about)
+	char 	*buf;      //-- pointer to text buffer for label (mod name)
+ 	GString	*bufabout;  //-- pointer to text buffer for text widget (mod about)
         ModMap::iterator it; //-- module iterator
 	SectionMap::iterator sit; //--
 	ConfigEntMap::iterator cit; //--
 	
+	 bufabout = g_string_new("");
+	 g_warning(modName);
 	it = mainMgr->Modules.find(modName); //-- find module (modName)
 	if (it != mainMgr->Modules.end()){ //-- if we don't run out of mods before we find the one we are looking for	
 	        buf = (char *)(*it).second->Description();  //-- get discription of module
@@ -882,17 +884,23 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	        if (sit !=mainMgr->config->Sections.end()){
 	                cit = (*sit).second.find("About");
 			if (cit != (*sit).second.end()) 				
-				bufabout = (char *)(*cit).second.c_str(); //-- get module about information
-				//cout << bufabout << '\n';
-	        }
+				bufabout = g_string_append(bufabout ,(char *)(*cit).second.c_str()); //-- get module about information
+			else 
+				bufabout = g_string_append(bufabout ,"\\qc no info  \\par  for this module ");
+	        } else 
+			bufabout = g_string_append(bufabout ,"\\qc no info  \\par  for this module ");
+	} else {
+	         bufabout = g_string_append(bufabout ,"\\qc no info  \\par  for this module ");
+	
 	}
-	aboutbox = create_aboutmodules(); //-- create about dialog
-	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
+	g_warning(bufabout->str);
+	AboutModsDisplayHTML(bufabout);
+	g_warning(bufabout->str);
+	aboutbox = create_aboutmodules(bufabout->str); //-- create about dialog
 	label = lookup_widget(aboutbox,"lbModName");    //-- get label
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
-	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to TRUE for text widget
-	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
-	gtk_widget_show(aboutbox); //-- show the about dialog   	
+	gtk_widget_show(aboutbox); //-- show the about dialog   
+	g_string_free(bufabout,FALSE);
 }
 
 

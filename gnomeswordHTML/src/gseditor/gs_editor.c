@@ -51,12 +51,10 @@
 #include "gs_editor.h"
 #include "gs_control_data.h"
 
-GtkWidget *pcHTML;
 GtkWidget *spHTML;
 GtkWidget *statusbarNE;
 GtkWidget *statusbarSP;  	
-GtkWidget *tgbtnEDEditpc;
-GtkWidget *tgbtnEDEditsp;
+GtkWidget *tgbtnEDEdit;
 
 
 
@@ -143,7 +141,7 @@ static void on_btnEDPaste_clicked(GtkButton * button, gboolean ispercom)
 
 static void on_btnEDBold_clicked(GtkButton * button, gboolean ispercom)
 {
-	   if (GTK_TOGGLE_BUTTON (tgbtnEDEditsp)->active){
+	   if (GTK_TOGGLE_BUTTON (tgbtnEDEdit)->active){
 	   	gtk_html_set_font_style (GTK_HTML (spHTML),
 	   		GTK_HTML_FONT_STYLE_MAX,
 	   		GTK_HTML_FONT_STYLE_BOLD);  	   	
@@ -153,7 +151,7 @@ static void on_btnEDBold_clicked(GtkButton * button, gboolean ispercom)
 
 static void on_btnEDItalics_clicked(GtkButton * button, gboolean ispercom)
 {	
-	if (GTK_TOGGLE_BUTTON (tgbtnEDEditsp)->active){
+	if (GTK_TOGGLE_BUTTON (tgbtnEDEdit)->active){
 	   	gtk_html_set_font_style (GTK_HTML (spHTML),
 	   		GTK_HTML_FONT_STYLE_MAX,
 	   		GTK_HTML_FONT_STYLE_ITALIC);  	   	
@@ -201,7 +199,7 @@ static void on_btnEDSpell_clicked(GtkButton * button, gboolean ispercom)
  ******************************************************************************/
 GtkWidget *create_StudyPad(GtkWidget *app, GtkWidget *vbox)
 {
-	GtkHTMLControlData *cd;
+	//GtkHTMLControlData *cd;
 	//EDITOR *ed;
 	  GtkWidget *editor;
   
@@ -217,15 +215,8 @@ GtkWidget *create_StudyPad(GtkWidget *app, GtkWidget *vbox)
   GtkWidget *btnEDSaveAs;
   GtkWidget *vseparator17;
   GtkWidget *btnEDPrint;
-  GtkWidget *hboxPerCom;
-  GtkWidget *toolbarPC;
-  GtkWidget *btnEDSaveNote;
-  GtkWidget *btnEDClearNote;
-  GtkWidget *vseparator18;
-  GtkWidget *btnEDPrintNote;
   GtkWidget *handlebox21;
   GtkWidget *toolbarEdit;
-  GtkWidget *tgbtnEDEdit;
   GtkWidget *vseparator20;
   GtkWidget *btnEDCut;
   GtkWidget *btnEDCopy;
@@ -358,67 +349,6 @@ GtkWidget *create_StudyPad(GtkWidget *app, GtkWidget *vbox)
   gtk_object_set_data_full (GTK_OBJECT (app), "btnEDPrint", btnEDPrint,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnEDPrint);
-
-  hboxPerCom = gtk_handle_box_new ();
-  gtk_widget_ref (hboxPerCom);
-  gtk_object_set_data_full (GTK_OBJECT (app), "hboxPerCom", hboxPerCom,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hboxPerCom);
-  gtk_box_pack_start (GTK_BOX (hbox29), hboxPerCom, FALSE, TRUE, 0);
-  gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hboxPerCom), GTK_SHADOW_NONE);
-
-  toolbarPC = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_widget_ref (toolbarPC);
-  gtk_object_set_data_full (GTK_OBJECT (app), "toolbarPC", toolbarPC,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbarPC);
-  gtk_container_add (GTK_CONTAINER (hboxPerCom), toolbarPC);
-  gtk_container_set_border_width (GTK_CONTAINER (toolbarPC), 1);
-  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbarPC), GTK_RELIEF_NONE);
-
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_SAVE);
-  btnEDSaveNote = gtk_toolbar_append_element (GTK_TOOLBAR (toolbarPC),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                _("button12"),
-                                NULL, NULL,
-                                tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnEDSaveNote);
-  gtk_object_set_data_full (GTK_OBJECT (app), "btnEDSaveNote", btnEDSaveNote,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnEDSaveNote);
-
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_CLEAR);
-  btnEDClearNote = gtk_toolbar_append_element (GTK_TOOLBAR (toolbarPC),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                _("button13"),
-                                NULL, NULL,
-                                tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnEDClearNote);
-  gtk_object_set_data_full (GTK_OBJECT (app), "btnEDClearNote", btnEDClearNote,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnEDClearNote);
-
-  vseparator18 = gtk_vseparator_new ();
-  gtk_widget_ref (vseparator18);
-  gtk_object_set_data_full (GTK_OBJECT (app), "vseparator18", vseparator18,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vseparator18);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarPC), vseparator18, NULL, NULL);
-  gtk_widget_set_usize (vseparator18, 7, 7);
-
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_PRINT);
-  btnEDPrintNote = gtk_toolbar_append_element (GTK_TOOLBAR (toolbarPC),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                _("button14"),
-                                NULL, NULL,
-                                tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnEDPrintNote);
-  gtk_object_set_data_full (GTK_OBJECT (app), "btnEDPrintNote", btnEDPrintNote,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnEDPrintNote);
 
   handlebox21 = gtk_handle_box_new ();
   gtk_widget_ref (handlebox21);
@@ -641,12 +571,6 @@ GtkWidget *create_StudyPad(GtkWidget *app, GtkWidget *vbox)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnEDPrint), "clicked",
                       GTK_SIGNAL_FUNC (on_btnEDPrint_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnEDSaveNote), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnEDSaveNote_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnEDPrintNote), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnEDPrintNote_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (tgbtnEDEdit), "toggled",
                       GTK_SIGNAL_FUNC (on_tgbtnEDEdit_toggled),

@@ -70,7 +70,7 @@ GtkWidget *htmlComments;
 GtkWidget *statusbarNE;
 GtkWidget *textComments;
 GList *cbBook_items=NULL;
-extern GtkWidget *pcHTML;
+GtkWidget *pcHTML;
 
 gint openWidth = 800;
 gint openHight = 600;

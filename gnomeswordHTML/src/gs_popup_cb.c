@@ -324,6 +324,7 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+	g_warning((char *) user_data);
 	showmoduleinfoSWORD((char *) user_data);
 }
 

@@ -33,8 +33,10 @@
 #include <unistd.h>
 #include <string.h>
 
+
 #include <gnome.h>
- 
+#include <gtkhtml/gtkhtml.h>
+
 #include "gs_abouts.h"
 #include "support.h"
 
@@ -215,7 +217,7 @@ GtkWidget *create_AboutSword(void)
 	return AboutSword;
 }
 
-GtkWidget *create_aboutmodules(void)
+GtkWidget *create_aboutmodules(gchar *buf)
 {
 	GtkWidget *aboutmodules;
 	GtkWidget *dialog_vbox8;
@@ -307,7 +309,7 @@ GtkWidget *create_aboutmodules(void)
 				       (scrolledwindow30),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
-
+              /*
 	textModAbout = gtk_text_new(NULL, NULL);
 	gtk_widget_ref(textModAbout);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "textModAbout",
@@ -315,6 +317,14 @@ GtkWidget *create_aboutmodules(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textModAbout);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), textModAbout);
+               */
+        textModAbout  = gtk_html_new_from_string (buf,strlen(buf));
+	gtk_widget_ref(textModAbout);
+	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "textModAbout", textModAbout,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textModAbout);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow30), textModAbout);
+
 
 	dialog_action_area8 = GNOME_DIALOG(aboutmodules)->action_area;
 	gtk_object_set_data(GTK_OBJECT(aboutmodules),
