@@ -40,7 +40,7 @@
 #include "support.h"
 #include "gs_file.h"
 #include "gs_menu.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "gs_shortcutbar.h"
 #include "e-splash.h"
 
@@ -61,8 +61,6 @@ GtkWidget
 	*studypad,  /* studypad text widget */
 	*notes,    /* notes text widget */
 	*morphs;
-GString 
-	*gs_clipboard; /* for copying from the html widgets freed in shutdownSWORD in gs_sword.cpp*/
 gboolean 
 	isstrongs = FALSE,/* main window selection is not storngs number */
 	file_changed = FALSE, /* set to true if text is study pad has changed - and file is not saved  */
@@ -188,8 +186,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), settings->biblepane_width);
 	/* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
-	/* create gs_clipboard */
-	gs_clipboard = g_string_new("");
 	
 	/* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
@@ -399,7 +395,7 @@ void editbookmarksLoad(GtkWidget *editdlg)
 }
 
 /*****************************************************************************
- *addQuickmark - someone clicked add bookmark to get us here
+ *addQuickmark - someone clicked add quickmark to get us here
 *****************************************************************************/
 void addQuickmark(GtkWidget *app)  
 {
@@ -417,13 +413,13 @@ void addQuickmark(GtkWidget *app)
 	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' );
 	/* increment number of bookmark item + 1 */
 	 ++ibookmarks; 
-	 /* save to file so we dont forget -- function in filestuff.cpp */
-	savebookmark(buf); 
-	//-- remove old bookmarks from menu -- menustuff.cpp 
+	 /* save to file so we dont forget -- function in gs_file.c */
+	savequickmark(buf); 
+	//-- remove old bookmarks from menu -- gs_menu.c
 	removemenuitems(app, _("_Quickmarks/<Separator>"), ibookmarks); 
-        sprintf(buf,"%s%s", _("_Quickmarks/"),remembersubtree);
+        sprintf(buf,"%s%s", _("_Quickmarks/"),"Clear Quickmarks");
         addseparator(app, buf);
-	/* let's show what we did -- GnomeSword.cpp */
+	/* let's show what we did -- gs_file.c */
         loadbookmarks_afterSeparator(); 
 }
 

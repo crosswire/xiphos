@@ -44,7 +44,7 @@
 #include "gs_history.h"
 #include "support.h"
 #include "gs_file.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "gs_abouts.h"
 
 

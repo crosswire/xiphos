@@ -49,8 +49,6 @@ COMMON_SOURCE =  \
     gs_preferences_dlg.h \
     gs_unlockkey_dlg.c \
     gs_unlockkey_dlg.h \
-    gs_listeditor.c \
-    gs_listeditor.h \
     main.c \
     gs_menu.c \
     gs_menu.h \

@@ -91,10 +91,10 @@ static GnomeUIInfo quickmarks_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Edit Quickmarks"),
+	 GNOME_APP_UI_ITEM, N_("Clear Quickmarks"),
 	 N_("Edit Quickmarks"),
-	 on_edit_quickmarks_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
+	 on_clear_quickmarks_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
