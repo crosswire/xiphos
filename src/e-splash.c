@@ -323,7 +323,7 @@ e_splash_construct (ESplash *splash,
 	gtk_signal_connect (GTK_OBJECT (splash), "button-press-event",
 			    GTK_SIGNAL_FUNC (button_press_event), splash);
 	
-	gtk_object_set (GTK_OBJECT (splash), "type", GTK_WINDOW_TOPLEVEL, NULL);
+	gtk_object_set (GTK_OBJECT (splash), "type", GTK_WINDOW_POPUP, NULL);
 	gtk_window_set_position (GTK_WINDOW (splash), GTK_WIN_POS_CENTER);
 	gtk_window_set_policy (GTK_WINDOW (splash), FALSE, FALSE, FALSE);
 	gtk_window_set_default_size (GTK_WINDOW (splash), image_width, image_height);
