@@ -38,7 +38,9 @@ static GtkWidget* create_pmInt(GList *mods, gchar *intWindow,
 			GtkMenuCallback cbchangemod, 
 			GtkMenuCallback mycallback);
 static GtkWidget *create_pmComments2(GList * mods);
+#ifdef GTK_HTML
 static GtkWidget *create_pmCommentsHtml(GList * mods);
+#endif /* GTK_HTML */
 static GtkWidget *create_pmDict(GList * mods);
 static GtkWidget* create_pmBible(GList *mods);
 static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods);
@@ -181,7 +183,7 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	menu5 = create_pmEditnote(app, percomlist);
 	/* create pop menu for commentaries */
 	menuCom = create_pmComments2(commentarylist);
-	menuhtmlcom = create_pmCommentsHtml(commentarylist);
+
 	/* create popup menu for dict/lex window */
 	menuDict = create_pmDict(dictionarylist);
 	/* create popup menu for Bible window */
@@ -197,9 +199,11 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
 	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
+#ifdef GTK_HTML
+	menuhtmlcom = create_pmCommentsHtml(commentarylist);	
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->showcomtabs;
-	
+#endif /* GTK_HTML */		
 }
 
 /******************************************************************************
@@ -534,11 +538,11 @@ static GtkWidget *create_pmComments2(GList * mods)
 
 	return pmComments2;
 }
-
+#ifdef GTK_HTML
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmCommentsHtml(GList * mods)
 {
-	GtkWidget *pmComments2;
+	GtkWidget *pmCommentsHtml;
 	GtkWidget *copy6;
 	GtkWidget *goto_reference2;
 	GtkWidget *lookup_selection2;
@@ -556,74 +560,74 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	
 	tooltips = gtk_tooltips_new();
 
-	pmComments2 = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmComments2), "pmComments2",
-			    pmComments2);
+	pmCommentsHtml = gtk_menu_new();
+	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "pmCommentsHtml",
+			    pmCommentsHtml);
 			
 	copy6 = gtk_menu_item_new_with_label("Copy");
 	gtk_widget_ref(copy6);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "copy6", copy6,
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "copy6", copy6,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(copy6);
-	gtk_container_add(GTK_CONTAINER(pmComments2), copy6);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), copy6);
 
 	goto_reference2 = gtk_menu_item_new_with_label("Goto Reference");
 	gtk_widget_ref(goto_reference2);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "goto_reference2", goto_reference2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(goto_reference2);
-	gtk_container_add(GTK_CONTAINER(pmComments2), goto_reference2);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), goto_reference2);
 
 	lookup_selection2 =
 	    gtk_menu_item_new_with_label("Lookup Selection");
 	gtk_widget_ref(lookup_selection2);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "lookup_selection2", lookup_selection2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(lookup_selection2);
-	gtk_container_add(GTK_CONTAINER(pmComments2), lookup_selection2);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), lookup_selection2);
 
 	about_this_module6 =
 	    gtk_menu_item_new_with_label("About this module");
 	gtk_widget_ref(about_this_module6);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "about_this_module6", about_this_module6,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(about_this_module6);
-	gtk_container_add(GTK_CONTAINER(pmComments2), about_this_module6);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), about_this_module6);
 
 	auto_scroll1 = gtk_check_menu_item_new_with_label("Auto Scroll");
 	gtk_widget_ref(auto_scroll1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "auto_scroll1",
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "auto_scroll1",
 				 auto_scroll1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(auto_scroll1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), auto_scroll1);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), auto_scroll1);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(auto_scroll1),
 				       TRUE);
 
 	show_tabs1 = gtk_check_menu_item_new_with_label("Show Tabs");
 	gtk_widget_ref(show_tabs1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "show_tabs1",
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "show_tabs1",
 				 show_tabs1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(show_tabs1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), show_tabs1);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), show_tabs1);
 	gtk_tooltips_set_tip(tooltips, show_tabs1, "Show notebook tabs",
 			     NULL);
 
 	view_module1 = gtk_menu_item_new_with_label("View Module");
 	gtk_widget_ref(view_module1);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "view_module1",
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "view_module1",
 				 view_module1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(view_module1);
-	gtk_container_add(GTK_CONTAINER(pmComments2), view_module1);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), view_module1);
 
 	view_module1_menu = gtk_menu_new();
 	gtk_widget_ref(view_module1_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2),
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "view_module1_menu", view_module1_menu,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_module1),
@@ -633,7 +637,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 
 	separator22 = gtk_menu_item_new();
 	gtk_widget_ref(separator22);
-	gtk_object_set_data_full(GTK_OBJECT(pmComments2), "separator22",
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "separator22",
 				 separator22,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(separator22);
@@ -646,7 +650,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	while (tmp != NULL) {
 		item1 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item1);
-		gtk_object_set_data_full(GTK_OBJECT(pmComments2), "item1",
+		gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "item1",
 					 item1,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -662,31 +666,28 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	}
 	g_list_free(tmp);
 
-
 	gtk_signal_connect(GTK_OBJECT(copy6), "activate",
 			   GTK_SIGNAL_FUNC(on_copyhtml_activate),
 			   (gchar *) "htmlCommentaries");
-	gtk_signal_connect(GTK_OBJECT(goto_reference2), "activate",
-			   GTK_SIGNAL_FUNC(on_goto_reference2_activate),
-			   NULL);
 	gtk_signal_connect(GTK_OBJECT(lookup_selection2), "activate",
-			   GTK_SIGNAL_FUNC(on_lookup_selection2_activate),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_html_lookup_selection_activate),
+			   (gchar *) "htmlCommentaries");
+	gtk_signal_connect(GTK_OBJECT(goto_reference2), "activate",
+			   GTK_SIGNAL_FUNC(on_html_goto_reference_activate),
+			   (gchar *) "htmlCommentaries");
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module6_activate),
 			   NULL);
-
 	gtk_signal_connect(GTK_OBJECT(auto_scroll1), "activate",
 			   GTK_SIGNAL_FUNC(on_auto_scroll1_activate),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(show_tabs1), "activate",
 			   GTK_SIGNAL_FUNC(on_show_tabs1_activate), NULL);
 
-	gtk_object_set_data(GTK_OBJECT(pmComments2), "tooltips", tooltips);
-
-
-	return pmComments2;
+	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "tooltips", tooltips);
+	return pmCommentsHtml;
 }
+#endif /* GTK_HTML */
 
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmDict(GList * mods)
@@ -917,12 +918,20 @@ static GtkWidget* create_pmBible(GList *mods)
 	}
 	g_list_free(tmp);
 
+#ifdef GTK_HTML
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");
+                      	
+  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+                      	GTK_SIGNAL_FUNC (on_html_lookup_selection_activate),
+                      	(gchar *)"htmlTexts");
+                      	
+#else
   	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
                       	GTK_SIGNAL_FUNC (on_lookup_selection_activate),
                       	NULL);
+#endif /* GTK_HTML */
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
                       	NULL);
@@ -1012,11 +1021,15 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-
+#ifdef GTK_HTML
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
-
+#else
+	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      	GTK_SIGNAL_FUNC (on_copy2_activate),
+                      	(gchar *)intWindow);
+#endif /* GTK_HTML */
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (mycallback),
                       	NULL);

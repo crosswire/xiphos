@@ -23,6 +23,22 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlobject.h>
+
+#include <gtkhtml/htmlengine-edit-clueflowstyle.h>
+#include <gtkhtml/htmlengine-edit-cut-and-paste.h>
+#include <gtkhtml/htmlengine-edit-fontstyle.h>
+#include <gtkhtml/htmlengine-edit-rule.h>
+#include <gtkhtml/htmlengine-edit-movement.h>
+#include <gtkhtml/htmlengine-edit-cursor.h>
+#include <gtkhtml/htmlengine-edit-text.h>
+#include <gtkhtml/htmlengine-edit.h>
+#include <gtkhtml/htmlengine-print.h>
+#include <gtkhtml/htmlengine-save.h>
+#include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlcolorset.h>
+#include <gtkhtml/htmlselection.h>
+#include <gtkhtml/htmlcursor.h>
 
 #include "gs_html.h"
 #include "support.h"
@@ -33,8 +49,10 @@ GtkHTMLStreamStatus status1;
 GtkWidget *htmlCommentaries;
 GtkWidget *htmlTexts;
 
-extern GtkWidget *MainFrm;
-
+extern  GtkWidget *MainFrm;
+extern	GtkWidget *textComp1;
+extern	GtkWidget *textComp2;
+extern	GtkWidget *textComp3;	
 
 /***************************************************************************************************
  *link in commentary module clicked
@@ -64,10 +82,52 @@ on_link2_clicked (GtkHTML *html, const gchar *url, gpointer data)
  ***************************************************************************************************/
 void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *html;
-	html = lookup_widget(MainFrm, (gchar *) user_data);
-	//g_warning((gchar *) user_data);
-	gtk_html_copy(GTK_HTML(html)); 	
+	GtkWidget *widget;
+	gchar *buf;
+	GtkHTML *html;
+	
+	widget= lookup_widget(MainFrm, (gchar *) user_data);
+	html = GTK_HTML (widget);
+	buf = html->engine->clipboard	
+		? html_object_get_selection_string(html->engine->clipboard)
+		: html_engine_get_selection_string (html->engine);
+	//g_warning(buf);
+}
+
+/***************************************************************************************************
+ *lookup selection in current dict/lex module
+ ***************************************************************************************************/
+void on_html_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *widget;
+	gchar *buf;
+	GtkHTML *html;
+	
+	widget= lookup_widget(MainFrm, (gchar *) user_data);
+	html = GTK_HTML (widget);
+	buf = NULL; 
+	buf = html->engine->clipboard	
+		? html_object_get_selection_string(html->engine->clipboard)
+		: html_engine_get_selection_string (html->engine);
+	if(buf)dictSearchTextChangedSWORD(buf);
+}
+
+/***************************************************************************************************
+ *goto selected Bible reference
+ ***************************************************************************************************/
+void on_html_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *widget;
+	gchar *buf;
+	GtkHTML *html;
+	
+	widget= lookup_widget(MainFrm, (gchar *) user_data);
+	html = GTK_HTML (widget);
+	buf = NULL; 
+	buf = html->engine->clipboard	
+		? html_object_get_selection_string(html->engine->clipboard)
+		: html_engine_get_selection_string (html->engine);
+	if(buf)changeVerseSWORD(buf);
 }
 
 /***************************************************************************************************
@@ -75,17 +135,11 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
  ***************************************************************************************************/
 void add_gtkhtml_widgets(GtkWidget *app)
 {       	
+
+
+#ifdef GTK_HTML		
 	GtkWidget *htmlComments;
-	GtkWidget *textComp1;
-	GtkWidget *textComp2;
-	GtkWidget *textComp3;	
-/*	GdkColor   bgColor = {0, 0xc7ff, 0xc7ff, 0xc7ff};
-	
-	gdk_rgb_init ();
-	
-	gtk_widget_set_default_colormap (gdk_rgb_get_cmap ());
-	gtk_widget_set_default_visual (gdk_rgb_get_visual ());
-*/	
+
 	htmlTexts = gtk_html_new();
 	gtk_widget_ref(htmlTexts);
 	gtk_object_set_data_full(GTK_OBJECT(app),
@@ -95,8 +149,6 @@ void add_gtkhtml_widgets(GtkWidget *app)
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"swHtmlBible")),
 			  	htmlTexts);
 	gtk_html_load_empty(GTK_HTML(htmlTexts));
-/*	gtk_html_set_default_background_color(GTK_HTML(htmlTexts), &bgColor);
-*/
 			  	
 	htmlCommentaries = gtk_html_new();
 	gtk_widget_ref(htmlCommentaries);
@@ -116,7 +168,7 @@ void add_gtkhtml_widgets(GtkWidget *app)
 	gtk_widget_show(htmlComments);
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"swHtmlPerCom")),
 				htmlComments);
-				
+			
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
@@ -124,14 +176,14 @@ void add_gtkhtml_widgets(GtkWidget *app)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textComp1);
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow15")), textComp1);
-				
+	
 	textComp2 = gtk_html_new();
 	gtk_widget_ref(textComp2);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp2",
 				 textComp2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textComp2);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow16")), textComp2);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow16")), textComp2);		
 	
 	textComp3 = gtk_html_new();
 	gtk_widget_ref(textComp3);
@@ -139,16 +191,47 @@ void add_gtkhtml_widgets(GtkWidget *app)
 				 textComp3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textComp3);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow21")), textComp3);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow21")), textComp3);	
 	
-	gtk_signal_connect (GTK_OBJECT (htmlTexts), "link_clicked",
+		gtk_signal_connect (GTK_OBJECT (htmlTexts), "link_clicked",
 			    GTK_SIGNAL_FUNC (on_link2_clicked), NULL);			
 				
 	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "link_clicked",
 			    GTK_SIGNAL_FUNC (on_link_clicked), NULL);	
 			    		
 	gtk_signal_connect (GTK_OBJECT (htmlComments), "link_clicked",
-			    GTK_SIGNAL_FUNC (on_link_clicked), NULL);
+			    GTK_SIGNAL_FUNC (on_link_clicked), NULL);		
+				
+#else				
+	textComp1 = gtk_text_new(NULL, NULL);
+	gtk_widget_ref(textComp1);
+	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
+				 textComp1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textComp1);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow15")), textComp1);
+	
+	textComp2 = gtk_text_new(NULL, NULL);
+	gtk_widget_ref(textComp2);
+	gtk_object_set_data_full(GTK_OBJECT(app), "textComp2",
+				 textComp2,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textComp2);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow16")), textComp2);		
+	
+	textComp3 = gtk_text_new(NULL, NULL);
+	gtk_widget_ref(textComp3);
+	gtk_object_set_data_full(GTK_OBJECT(app), "textComp3",
+				 textComp3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textComp3);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow21")), textComp3);	
+			
+				
+								
+		
+#endif /* GTK_HTML */
+
 }
 
 /***************************************************************************************************

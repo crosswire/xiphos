@@ -167,7 +167,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				imodule++) {
 		/* verse number */
 		strbuf = g_string_new( "" );
-		g_string_sprintf(strbuf,"<A HREF=\"%s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
+		g_string_sprintf(strbuf,"&nbsp;&nbsp;<A HREF=\"%s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
 				imodule.KeyText(), key->Verse(), key->Verse());
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
 		g_string_free( strbuf,TRUE);				
