@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 {
 	int newconfigs = FALSE;
 	int newbookmarks = FALSE;
+	int have_sword_url = FALSE;
 
 	gui_init(argc, argv);
 	
@@ -70,6 +71,13 @@ int main(int argc, char *argv[])
 			newconfigs = TRUE;
 			newbookmarks = TRUE;
 		}
+		/*
+		 * this arg is a sword uri
+		 */
+		if (!strncmp(argv[1], "sword://",8)) {
+			have_sword_url = TRUE;
+		}
+		
 	}
 
 	/* 
@@ -94,6 +102,9 @@ int main(int argc, char *argv[])
 	gui_splash_step4();
 	
 	frontend_display();
+	
+	if(have_sword_url)
+		sword_url_handler(argv[1]);
 	
 	gui_splash_done();
 
