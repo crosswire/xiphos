@@ -14,6 +14,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef __LISTEDITOR_H__
 #define __LISTEDITOR_H__
@@ -35,10 +38,10 @@ void loadbookmarkslevel(GtkWidget *list, gint level, gchar *submenu);
 void addsubitme(GtkWidget *list, gint row);
 void addverse(GtkWidget *list, gint row, gchar *item);
 void deleteitem(GtkWidget *list);
-void changeLEverse(gchar *verse);
+
 GtkWidget *createListEditor(void);
 void editbookmarks(GtkWidget *editdlg);
-void destroyListEditor(void);
+
 void applychanges(GtkWidget *widget);
 void applylistchanges(GtkWidget *widget, gint row);
 void selectrow(GtkWidget *widget, gint row, gint column);
@@ -48,3 +51,6 @@ void getcolumn(GtkWidget *list, gint row, gint column, gchar *buf);
 
 #endif /* __LISTEDITOR_H__ */
 
+#ifdef __cplusplus
+}
+#endif

@@ -463,22 +463,6 @@ void setformatoption(GtkWidget *button)
 }
 
 /*****************************************************************************
- *newSP - start new file in studypad
- *text - studypad text widget
-*****************************************************************************/
-void newSP(GtkWidget *text) 
-{
-        GtkWidget *statusbar;
-
-        current_filename = NULL;
-        gtk_text_set_point(GTK_TEXT(text), 0);
-	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
-	statusbar = lookup_widget((text),"statusbar2");
-	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
-	file_changed = FALSE;	
-}
-
-/*****************************************************************************
  *changepagenotebook - someone changed the page in the main notebook
  *notebook - notebook widget - main notebook
  *page_num - notebook page number

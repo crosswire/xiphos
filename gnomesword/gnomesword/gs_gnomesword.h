@@ -91,8 +91,7 @@ void sbchangeModSword(GtkWidget *app,
 		GtkWidget *shortcut_bar, 
 		gint group_num, 
 		gint item_num);		
-void setformatoption(GtkWidget * button);		
-void newSP(GtkWidget * text);
+void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
 void openpropertiesbox(void);
