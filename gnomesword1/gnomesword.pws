@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=782
-1=38
-2=14
-3=1
-4=1
-5=1
-6=102
-7=4
-8=1
+0=4
+1=195
+2=40
+3=38
+4=68
+5=808
+6=44
+7=153
+8=782
 9=17
 10=48
 11=47
@@ -36,25 +36,24 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_bookmarks.c
-1=/home/terry/Projects/gnomesword1/src/backend/bookmarks.h
-2=/home/terry/Projects/gnomesword1/src/backend/bookmarks.cpp
-3=/home/terry/Projects/gnomesword1/src/backend/gbs.cpp
-4=/home/terry/Projects/gnomesword1/src/main/gs_gbs.c
-5=/home/terry/Projects/gnomesword1/src/backend/display.cpp
-6=/home/terry/Projects/gnomesword1/src/backend/display_info.cpp
-7=/home/terry/Projects/gnomesword1/doc/getting_started.txt
-8=/home/terry/Projects/gnomesword1/doc/Makefile.am
+0=/home/terry/Projects/gnomesword1/doc/head.txt
+1=/home/terry/Projects/gnomesword1/src/backend/search.cpp
+2=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
+3=/home/terry/Projects/gnomesword1/src/backend/search.h
+4=/home/terry/Projects/gnomesword1/src/backend/commentary.cpp
+5=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+6=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
+7=/home/terry/Projects/gnomesword/src/gs_shortcutbar.c
 
 [find_text]
-0=ctree = user_data;
-1=discription
-2=false
-3=len
-4=textModAbout
-5=aboutbox
-6=notebook1
-7=htmlCommentaries
+0=changesearchresultsSW_SEARCH
+1=ctree = user_data;
+2=discription
+3=false
+4=len
+5=textModAbout
+6=aboutbox
+7=notebook1
 
 [find_in_files]
 0=display_about_module_dialog

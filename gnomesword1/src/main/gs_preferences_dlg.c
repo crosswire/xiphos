@@ -320,7 +320,7 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 					     (lookup_widget
 					      (d, "sbtnUpPaneHight")));
 	
-	saveconfig(s, FALSE);
+	backend_save_properties(s, FALSE);
 	applyoptions(s);
 
 }

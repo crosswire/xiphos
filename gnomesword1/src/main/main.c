@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 	 * Set pointer to structure.
 	 */
 	settings = &myset;
-	loadconfig(settings);
+	backend_load_properties(settings);
 
 	gui_splash_init();
 
