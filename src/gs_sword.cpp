@@ -52,7 +52,7 @@
 #include "callback.h"
 #include "gs_sword.h"
 #include "support.h"
-#include "interface.h"
+#include "gs_preferences_dlg.h"
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
@@ -71,7 +71,7 @@
 /***********************************************************************************************
 Sword global to this file
 ***********************************************************************************************/
-SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
+//SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
 SWDisplay *entryDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *comp1Display; /* to display modules using GtkText a verse at a time */
 SWDisplay *comp2Display; /* to display modules using GtkText a verse at a time */
@@ -81,17 +81,14 @@ SWDisplay *percomDisplay; /* to display personal comment modules using GtkText a
 SWDisplay *dictDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
 SWDisplay *HTMLDisplay; /* to display formatted html */
-SWDisplay *HTMLchapDisplay; /* to display formatted html */
 SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 SWDisplay *UTF8Display;	/* to display modules in utf8 */
-
+ 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
-SWMgr *mainMgr2; /* sword mgr for comp2Mod - second interlinear module */
-SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
 SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 SWMgr *listMgr;	/* sword mgr for ListEditor */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
@@ -171,8 +168,8 @@ extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GS_APP gs;
-extern GS_FONTS *gsfonts;
-extern GS_NB_PAGES *nbpages;
+//extern GS_FONTS *gsfonts;
+//extern GS_NB_PAGES *nbpages;
 extern GtkWidget *htmlVL;
 extern gboolean isrunningVL
 ;
@@ -203,9 +200,7 @@ initSWORD(GtkWidget *mainform)
         lattoutf8		= new SW_Latin1UTF8();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
-	mainMgr1        = new SWMgr();
-	mainMgr2        = new SWMgr();
-	mainMgr3        = new SWMgr();	
+	mainMgr1        = new SWMgr();	
   	percomMgr	= new SWMgr();
 	
 	curMod		= NULL; //-- set mods to null
@@ -216,7 +211,7 @@ initSWORD(GtkWidget *mainform)
 	curdictMod      = NULL; 	
 	percomMod     = NULL;
 	
-	chapDisplay     = 0;// set in create
+	//chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display    = 0;// set in create
 	comp2Display    = 0;// set in create
@@ -226,7 +221,6 @@ initSWORD(GtkWidget *mainform)
 	percomDisplay   = 0;// set in create
 	FPNDisplay			= 0;
 	HTMLDisplay			= 0;
-	HTMLchapDisplay			= 0;
 	UTF8Display	= 0;
 	
 	
@@ -250,11 +244,10 @@ initSWORD(GtkWidget *mainform)
 
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
-	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
+	//chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform,"htmlTexts"));
-	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
 	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
@@ -390,9 +383,9 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	}
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
-	updateinterlinearpage();
+	updateinterlinearpage(); 
 	//---------------------------------------------------------------- change personal notes editor
-	if(nbpages->notebook3page == 1){ 		
+	if(settings->notebook3page == 1){ 		
 		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"tbtnFollow"))->active){ //-- if personal notes follow button is active (on)			
 			if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave)){
 					//-- do nothing
@@ -405,7 +398,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			}
 		}
 	}
-	if(nbpages->notebook3page == 0 && autoscroll){
+	if(settings->notebook3page == 0 && autoscroll){
 		if(curcomMod){	
 			curcomMod->SetKey(current_verse); //keyText.c_str()); //-- set comments module to current verse
 			curcomMod->Display(); //-- show change
@@ -427,12 +420,12 @@ updateinterlinearpage(void)
 	gchar *utf8str;
 	gint utf8len;
 	
-	if(nbpages->notebook3page == 2){
+	if(settings->notebook3page == 2){
 		html_widget = lookup_widget(MainFrm,"textComp1");
 		beginHTML(html_widget,TRUE);
 		sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">");		
 		utf8str = e_utf8_from_gtk_string (html_widget, tmpBuf);
-		utf8len = g_utf8_strlen (utf8str , -1) ;
+		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(html_widget),utf8str , utf8len ); 
 		
 		changecomp1ModSWORD(settings->Interlinear1Module);
@@ -522,8 +515,6 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	g_string_free(gs_clipboard,TRUE);
 	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
-	delete mainMgr2;
-	delete mainMgr3;
 	
         if (thmltohtml != 0)
 		delete thmltohtml;
@@ -533,8 +524,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete plaintohtml;	
 	if (lattoutf8 != 0)
 		delete lattoutf8;	
-	if (chapDisplay)    //-- delete Sword displays
-		delete chapDisplay;
+	/*if (chapDisplay)    //-- delete Sword displays
+		delete chapDisplay;*/
 	if (entryDisplay)
 		delete entryDisplay;	
 	if(comp1Display)
@@ -553,8 +544,6 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete FPNDisplay;		
 	if(HTMLDisplay)
 		delete HTMLDisplay;
-	if(HTMLchapDisplay)
-		delete HTMLchapDisplay;	
 	if(RWPDisplay)
 		delete RWPDisplay;		
 	/*if(noteeditor)
@@ -1585,7 +1574,7 @@ gboolean getVerseListSWORD(gchar *vlist)
 	beginHTML(htmlVL, FALSE);
 	while (!tmpVerseList.Error()) {
 		sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
-					gsfonts->verselist_font_size,
+					settings->verselist_font_size,
 					(const char *)tmpVerseList,
 					(const char *)tmpVerseList);
 		displayHTML(htmlVL, buf, strlen(buf));
@@ -1637,7 +1626,54 @@ swapmodsSWORD(gchar *intmod)
 	gotoBookmarkSWORD(intmod, current_verse);
 	updateinterlinearpage();
 }
+
+/*
+ *
+ */
+void loadpreferencemodsSWORD(void)
+{
+	GtkWidget *dlg;
+	ModMap::iterator it; //-- iteratior
+	SWMgr *mainMgr2;  
+	GList *textMods = NULL;
+	GList *commMods = NULL;
+	GList *dictMods = NULL;
+	GList *percomMods = NULL;	
 	
+	mainMgr2         = new SWMgr();	//-- create sword mgrs
+	for(it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			textMods = g_list_append(textMods,(*it).second->Name());
+		}if(!strcmp((*it).second->Type(), "Commentaries")){
+			commMods = g_list_append(commMods,(*it).second->Name());	
+		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
+			dictMods = g_list_append(dictMods,(*it).second->Name());
+		} 
+	}
+	//-- set up percom editor module
+	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
+		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is 
+		 	 //-- if driver is RawFiles			
+			if((*mainMgr2->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
+				 percomMods = g_list_append(percomMods,(*it).second->Name());	
+				g_warning((*it).second->Name());
+			} 	                                               
+	  	}
+	}
+	
+	dlg = create_dlgSettings(settings,
+						textMods,
+						commMods,
+						dictMods,
+						percomMods); /* create propertybox dialog */
+	gtk_widget_show(dlg); /* show propertybox */
+	
+	g_list_free(textMods); //-- free GLists
+        g_list_free(commMods);
+        g_list_free(dictMods);
+	g_list_free(percomMods);
+	delete mainMgr2;   //-- delete Sword manager		
+}
 
 /*
  *
@@ -1648,34 +1684,39 @@ void gs_firstrunSWORD(void)
 	ModMap::iterator it; //-- iteratior
 	SectionMap::iterator sit; //-- iteratior
 	ConfigEntMap::iterator cit; //-- iteratior
-	mainMgr         = new SWMgr();	//-- create sword mgrs
+	SWMgr *mgr;
+	mgr         = new SWMgr();	//-- create sword mgrs
 	GList *textMods = NULL;
 	GList *commMods = NULL;
 	GList *dictMods = NULL;
+	GList *percomMods = NULL;
 	gint 
 		itextmods=0, 
 		icommmods=0, 
-		idictmods=0;
+		idictmods=0,
+		ipercommods;
 	gchar 
-		*gtextmods,
-		*gcommmods,
-		*gdictmods,
+		gtextmods[40],
+		gcommmods[40],
+		gdictmods[40],
+		gpercommods[40],
 		*pathtoswordmods;
 	
-	pathtoswordmods = mainMgr->prefixPath;
-	g_warning(pathtoswordmods);
-	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
+	pathtoswordmods = mgr->prefixPath;
+	
+	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			textMods = g_list_append(textMods,(*it).second->Name());
 			++itextmods;
 		}if(!strcmp((*it).second->Type(), "Commentaries")){
 			commMods = g_list_append(commMods,(*it).second->Name());
-			++icommmods;
+			++icommmods;			
 		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			dictMods = g_list_append(dictMods,(*it).second->Name());
 			++idictmods;
 		} 
 	}
+	g_warning(pathtoswordmods);
 	sprintf(gtextmods,"%d",itextmods);
 	sprintf(gcommmods,"%d",icommmods);
 	sprintf(gdictmods,"%d",idictmods);
@@ -1693,6 +1734,14 @@ void gs_firstrunSWORD(void)
 	g_list_free(textMods); //-- free GLists
         g_list_free(commMods);
         g_list_free(dictMods);
-	delete mainMgr;   //-- delete Sword manager		
+	delete mgr;   //-- delete Sword manager		
 }
 
+void
+applyfontcolorandsizeSWORD(void)
+{
+	curMod->Display();
+	curcomMod->Display();
+	curdictMod->Display();
+	updateinterlinearpage();	
+}

@@ -103,7 +103,9 @@ gboolean getVerseListSWORD(gchar *vlist);
 gfloat getSwordVerionSWORD(void);
 void swapmodsSWORD(gchar *intmod);
 void loadSDkeysSWORD(GtkWidget *clist);
+void loadpreferencemodsSWORD(void);
 void gs_firstrunSWORD(void);
+void applyfontcolorandsizeSWORD(void);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

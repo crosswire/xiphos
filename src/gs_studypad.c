@@ -25,7 +25,6 @@
 #include "callback.h"
 #include "support.h"
 #include "gs_gnomesword.h"
-#include "interface.h"
 #include "gs_info_box.h"
 
 #if USE_GNOMEPRINT

@@ -46,7 +46,6 @@
 
 #include "display.h"
 #include "support.h"
-#include "interface.h"
 #include "gs_sword.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
