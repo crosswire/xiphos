@@ -69,6 +69,7 @@ module.include.files=\
 	src/backend/properties.h\
 	src/backend/module_options.h\
 	src/backend/gbs.h\
+	src/backend/interlinear.h\
 	src/backend/display.h\
 	src/backend/dictlex.h\
 	src/backend/commentary.h\
@@ -94,6 +95,7 @@ module.include.files=\
 	src/main/gs_file.h\
 	src/main/gs_find_dlg.h\
 	src/main/gs_gbs.h\
+	src/main/gs_interlinear.h\
 	src/main/gs_getinfo_dlg.h\
 	src/main/gs_gnomesword.h\
 	src/main/gs_gui.h\
@@ -129,6 +131,7 @@ module.source.files=\
 	src/backend/properties.cpp\
 	src/backend/module_options.cpp\
 	src/backend/gbs.cpp\
+	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
 	src/backend/dictlex.cpp\
 	src/backend/commentary.cpp\
@@ -154,6 +157,7 @@ module.source.files=\
 	src/main/gs_file.c\
 	src/main/gs_find_dlg.c\
 	src/main/gs_gbs.c\
+	src/main/gs_interlinear.c\
 	src/main/gs_getinfo_dlg.c\
 	src/main/gs_gnomesword.c\
 	src/main/gs_gui.c\

@@ -34,7 +34,6 @@
 #include "sword.h"
 #include "gs_gnomesword.h"
 #include "gs_file.h"
-#include "gs_html.h"
 #include "gs_gui.h"
 #include "properties.h"
 #include "gs_setup.h"
@@ -129,12 +128,11 @@ int main(int argc, char *argv[])
 
 	gui_splash_step2();
 	
-	initSWORD(settings);
+	backend_init_sword(settings);
 
 	gui_splash_step3();
 
-	initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
-			percommods);
+	initGnomeSword(settings);
 
 	gui_splash_step4();
 	

@@ -163,10 +163,12 @@ libbackend_a_SOURCES = \
     dictlex.h \
     display.cpp \
     display.h \
-    gbs.cpp \
-    gbs.h \
     display_info.cpp \
     display_info.h \
+    gbs.cpp \
+    gbs.h \
+    interlinear.cpp \
+    interlinear.h \
     module_options.cpp \
     module_options.h \
     properties.cpp \
@@ -195,8 +197,8 @@ LIBRARIES = $(noinst_LIBRARIES)
 libbackend_a_AR = $(AR) cru
 libbackend_a_LIBADD =
 am_libbackend_a_OBJECTS = bookmarks.$(OBJEXT) commentary.$(OBJEXT) \
-	dictlex.$(OBJEXT) display.$(OBJEXT) gbs.$(OBJEXT) \
-	display_info.$(OBJEXT) module_options.$(OBJEXT) \
+	dictlex.$(OBJEXT) display.$(OBJEXT) display_info.$(OBJEXT) \
+	gbs.$(OBJEXT) interlinear.$(OBJEXT) module_options.$(OBJEXT) \
 	properties.$(OBJEXT) search.$(OBJEXT) shortcutbar.$(OBJEXT) \
 	sword.$(OBJEXT) verselist.$(OBJEXT) viewcomm.$(OBJEXT) \
 	viewdict.$(OBJEXT) viewtext.$(OBJEXT)
@@ -211,6 +213,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bookmarks.Po $(DEPDIR)/commentary.Po \
 @AMDEP_TRUE@	$(DEPDIR)/dictlex.Po $(DEPDIR)/display.Po \
 @AMDEP_TRUE@	$(DEPDIR)/display_info.Po $(DEPDIR)/gbs.Po \
+@AMDEP_TRUE@	$(DEPDIR)/interlinear.Po \
 @AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/properties.Po \
 @AMDEP_TRUE@	$(DEPDIR)/search.Po $(DEPDIR)/shortcutbar.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist.Po \
@@ -278,6 +281,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/display_info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gbs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/interlinear.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/module_options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/properties.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/search.Po@am__quote@
