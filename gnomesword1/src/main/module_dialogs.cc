@@ -525,10 +525,11 @@ void main_dialog_update_controls(DIALOG_DATA * t)
 {
 	gchar *val_key;
 	gint cur_chapter, cur_verse;
+	BackEnd *be = (BackEnd*)t->backend;
 
 	dlg_bible = t;
 	bible_apply_change = FALSE;
-	val_key = get_valid_key(t->key);
+	val_key = be->get_valid_key(t->key);
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
 	/* 
@@ -543,10 +544,12 @@ void main_dialog_update_controls(DIALOG_DATA * t)
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
 				  (t->spb_verse), cur_verse);
 	gtk_entry_set_text(GTK_ENTRY(t->freeform_lookup), val_key);
+	if(t->key)
+		g_free(t->key);
+	t->key = g_strdup(val_key);
 	g_free(val_key);
 
 	bible_apply_change = TRUE;
-	//return val_key;
 }
 
 /******************************************************************************
@@ -727,28 +730,6 @@ void main_dialogs_setup(void)
 	dialog_freed = FALSE;
 	bible_apply_change = FALSE;
 	dlg_percom = NULL;
-}
-
-
-/******************************************************************************
- * Name
- *   gui_sync_bibletext_dialog_with_main
- *
- * Synopsis
- *   #include "gui/bibletext_dialog.h"
- *
- *   gui_sync_bibletext_dialog_with_main(DIALOG_DATA * vt)	
- *
- * Description
- *   set bibletext dialog to main window current verse
- *
- * Return value
- *   void
- */
-
-void main_sync_bibletext_dialog_with_main(DIALOG_DATA * t)
-{ 
-	main_bible_dialog_passage_changed(t, settings.currentverse);
 }
 
 
@@ -1104,8 +1085,9 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	
 	be->set_module_key(t->mod_name, t->key);
 	main_dialog_set_global_options(t);
-	be->display_mod->Display();		
-	main_dialog_update_controls(t);
+	be->display_mod->Display();
+		
+	//main_dialog_update_controls(t);
 	
 	g_free(module);
 	g_free(key);
@@ -1175,6 +1157,7 @@ void main_dialogs_open(gchar * mod_name)
 	DIALOG_DATA *t = NULL;
 	gint type;
 	gchar *direction = NULL;
+	gchar *url;
 	GSHTMLEditorControlData *ec;
 	
 	if(!backend->is_module(mod_name))
@@ -1218,9 +1201,11 @@ void main_dialogs_open(gchar * mod_name)
 		case TEXT_TYPE:
 			gui_create_bibletext_dialog(t);
 			if(t->is_rtol)
-				be->dialogRTOLDisplay = new DialogTextviewChapDisp(t->text, be);
+				be->dialogRTOLDisplay 
+				      = new DialogTextviewChapDisp(t->text, be);
 			else	
-				be->chapDisplay = new DialogChapDisp(t->html, be); 
+				be->chapDisplay 
+				      = new DialogChapDisp(t->html, be); 
 			be->init_SWORD(1);			
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
@@ -1244,7 +1229,8 @@ void main_dialogs_open(gchar * mod_name)
 			strcpy(ec->filename, t->mod_name);
 			t->is_percomm = TRUE;
 			gui_create_note_editor(t);
-			be->entryDisplay = new DialogEntryDisp(ec->htmlwidget, be); 
+			be->entryDisplay 
+				    = new DialogEntryDisp(ec->htmlwidget, be); 
 			be->init_SWORD(1);
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
@@ -1284,11 +1270,13 @@ void main_dialogs_open(gchar * mod_name)
 	
 	if(type == BOOK_TYPE)
 		be->set_treekey(t->offset);
+	
 	be->display_mod->Display();
 	bible_apply_change = TRUE;
 	
-	if(type == PERCOM_TYPE)
+	if(type == PERCOM_TYPE){
 		gtk_html_set_editable(ec->html, TRUE);
+	}
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	if(type == BOOK_TYPE)
