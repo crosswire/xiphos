@@ -516,7 +516,24 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_widget_show(view_in_new_window);
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), view_in_new_window);
 	gtk_tooltips_set_tip(tooltips, view_in_new_window, "View this module in a new window",
-			     NULL);			     
+			     NULL);
+		
+	separator22 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator22);
+  	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "separator22", separator22,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator22);
+  	gtk_container_add (GTK_CONTAINER (pmCommentsHtml), separator22);
+  	gtk_widget_set_sensitive (separator22, FALSE);		
+			     
+  	settings->unlockcommmod_item = gtk_menu_item_new_with_label ("Unlock This Module");
+  	gtk_widget_ref (settings->unlockcommmod_item);
+  	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "settings->unlockcommmod_item",settings->unlockcommmod_item ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (settings->unlockcommmod_item);
+  	gtk_container_add (GTK_CONTAINER (pmCommentsHtml), settings->unlockcommmod_item);
+  			     
+
 	separator22 = gtk_menu_item_new();
 	gtk_widget_ref(separator22);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "separator22",
@@ -627,7 +644,10 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 			   (gchar *)"notebook1");
 	gtk_signal_connect(GTK_OBJECT(view_in_new_window), "activate",
 			   GTK_SIGNAL_FUNC(on_view_in_new_window2_activate),
-			   NULL);
+			   NULL);	
+	gtk_signal_connect (GTK_OBJECT (settings->unlockcommmod_item), "activate",
+                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
+                      	GINT_TO_POINTER(COMMENTARY_WINDOW));
 	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "tooltips", tooltips);
 	return pmCommentsHtml;
 }
@@ -946,12 +966,12 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_container_add (GTK_CONTAINER (pmBible), separator4);
   	gtk_widget_set_sensitive (separator4, FALSE);		
 			     
-  	settings->unlockmod_item = gtk_menu_item_new_with_label ("Unlock This Module");
-  	gtk_widget_ref (settings->unlockmod_item);
-  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "settings->unlockmod_item",settings->unlockmod_item ,
+  	settings->unlocktextmod_item = gtk_menu_item_new_with_label ("Unlock This Module");
+  	gtk_widget_ref (settings->unlocktextmod_item);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "settings->unlocktextmod_item",settings->unlocktextmod_item ,
                             (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (settings->unlockmod_item);
-  	gtk_container_add (GTK_CONTAINER (pmBible), settings->unlockmod_item);
+  	gtk_widget_show (settings->unlocktextmod_item);
+  	gtk_container_add (GTK_CONTAINER (pmBible), settings->unlocktextmod_item);
   	
   	
   	separator2 = gtk_menu_item_new ();
@@ -1049,9 +1069,9 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
                       	GTK_SIGNAL_FUNC (on_viewtext_activate),
                       	NULL);
-	gtk_signal_connect (GTK_OBJECT (settings->unlockmod_item), "activate",
+	gtk_signal_connect (GTK_OBJECT (settings->unlocktextmod_item), "activate",
                       	GTK_SIGNAL_FUNC (on_unlock_key_activate),
-                      	NULL);
+                      	GINT_TO_POINTER(MAIN_TEXT_WINDOW));
   return pmBible;
 }
 

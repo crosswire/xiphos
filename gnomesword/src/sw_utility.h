@@ -40,7 +40,7 @@ extern "C" {
 				ConfigEntMap & section);
 	void deleteRenderfilters(void);
 	/* path to sword mods */
-	char *pathtomods(void);
+	//void pathtomods(char *path);
 	void changeModuleUTILITY(SWModule * module, 
 				SWMgr * Mgr,
 				char *modName);

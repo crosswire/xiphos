@@ -126,9 +126,6 @@ extern "C" {
 	gboolean on_textComments_key_press_event(GtkWidget * widget,
 						 GdkEventKey * event,
 						 gpointer user_data);
-	gboolean on_moduleText_enter_notify_event(GtkWidget * widget,
-						  GdkEventCrossing * event,
-						  gpointer user_data);
 	void on_btnBack_clicked(GtkButton * button, gpointer user_data);
 	void on_btnFoward_clicked(GtkButton * button, gpointer user_data);
 	void on_btnComPrev_clicked(GtkButton * button, gpointer user_data);

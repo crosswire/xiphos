@@ -210,7 +210,6 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 
 GtkWidget *create_mainwindow(GtkWidget * splash)
 {
-//      GtkWidget *mainwindow;
 	GtkWidget *dock1;
 	GtkWidget *toolbar20;
 	GtkWidget *tmp_toolbar_icon;
@@ -238,22 +237,13 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *vbox32;
 	GtkWidget *nbTextMods;
 	GtkWidget *frame9;
-	GtkWidget *nbText;
 	GtkWidget *swHtmlBible;
-	GtkWidget *vbox19;
-	GtkWidget *scrolledwindow18;
-	GtkWidget *moduleText;
 	GtkWidget *notebook3;
 	GtkWidget *vbox22;
 	GtkWidget *notebook1;
 	GtkWidget *hbox18;
 	GtkWidget *framecom;
-	GtkWidget *nbCom;
 	GtkWidget *swHtmlCom;
-	GtkWidget *label;
-	GtkWidget *vbox23;
-	GtkWidget *scrolledwindow28;
-	GtkWidget *textCommentaries;
 	GtkWidget *handlebox17;
 	GtkWidget *toolbar26;
 	GtkWidget *btnComPrev;
@@ -301,6 +291,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *text3;
 	GtkWidget *statusbar2;
 	GtkWidget *label41;
+	GtkWidget *label;
 	GtkWidget *hbox8;
 	GtkWidget *frame10;
 	GtkWidget *hbox13;
@@ -715,10 +706,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	settings->shortcut_bar = shortcut_bar;	//lookup_widget(settings->app,"shortcut_bar");
 
 	e_paned_pack1(E_PANED(epaned), shortcut_bar, FALSE, TRUE);
-
-//#if 0
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
-//#endif
 
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	e_paned_pack2(E_PANED(epaned), mainPanel, TRUE, TRUE);
@@ -770,7 +758,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_set_usize(nbTextMods, -2, 31);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(nbTextMods), TRUE);
 
-
 	frame9 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame9);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "frame9",
@@ -782,77 +769,19 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_set_usize(frame9, 380, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(frame9), 2);
 
-	nbText = gtk_notebook_new();
-	gtk_widget_ref(nbText);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "nbText",
-				 nbText,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(nbText);
-	gtk_container_add(GTK_CONTAINER(frame9), nbText);
-	GTK_WIDGET_UNSET_FLAGS(nbText, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(nbText), FALSE);
-
-	vbox19 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox19);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vbox19",
-				 vbox19,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox19);
-	gtk_container_add(GTK_CONTAINER(nbText), vbox19);
-
-	scrolledwindow18 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow18);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
-				 "scrolledwindow18", scrolledwindow18,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow18);
-	gtk_box_pack_start(GTK_BOX(vbox19), scrolledwindow18, TRUE, TRUE,
-			   0);
-	gtk_container_set_border_width(GTK_CONTAINER(scrolledwindow18), 2);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow18),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	moduleText = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(moduleText);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "moduleText",
-				 moduleText,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(moduleText);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow18), moduleText);
-
-	label = gtk_label_new("label");
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbText),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (nbText), 0),
-				   label);
-
 	swHtmlBible = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(swHtmlBible);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "swHtmlBible",
 				 swHtmlBible,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(swHtmlBible);
-	gtk_container_add(GTK_CONTAINER(nbText), swHtmlBible);
+	gtk_container_add(GTK_CONTAINER(frame9), swHtmlBible);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlBible),
-				       GTK_POLICY_NEVER,
+				      GTK_POLICY_AUTOMATIC ,
 				       GTK_POLICY_AUTOMATIC);
-
-	label = gtk_label_new("label");
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbText),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (nbText), 1),
-				   label);
-
+				       
+	/***  htmlTexts goes here  ***/
+	
 	notebook3 = gtk_notebook_new();
 	gtk_widget_ref(notebook3);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "notebook3",
@@ -899,83 +828,20 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(framecom);
 	gtk_box_pack_start(GTK_BOX(hbox18), framecom, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(framecom), 2);
-
-
-	nbCom = gtk_notebook_new();
-	gtk_widget_ref(nbCom);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "nbCom", nbCom,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(nbCom);
-	gtk_container_add(GTK_CONTAINER(framecom), nbCom);
-	//gtk_container_set_border_width (GTK_CONTAINER (nbCom), 2);
-	//gtk_container_add(GTK_CONTAINER(framecom), nbCom);
-	//gtk_box_pack_start (GTK_BOX (framecom), nbCom, TRUE, TRUE, 0);
-	GTK_WIDGET_UNSET_FLAGS(nbCom, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(nbCom), FALSE);
-
+	
 	swHtmlCom = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(swHtmlCom);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "swHtmlCom",
 				 swHtmlCom,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(swHtmlCom);
-	gtk_container_add(GTK_CONTAINER(nbCom), swHtmlCom);
+	gtk_container_add(GTK_CONTAINER(framecom), swHtmlCom);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlCom),
-				       GTK_POLICY_NEVER,
+				      GTK_POLICY_AUTOMATIC ,
 				       GTK_POLICY_AUTOMATIC);
 
 	/* htmlCommentaries goes here */
-
-	label = gtk_label_new("label");
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbCom),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (nbCom), 0),
-				   label);
-
-	vbox23 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox23);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vbox23",
-				 vbox23,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox23);
-	gtk_container_add(GTK_CONTAINER(nbCom), vbox23);
-
-	scrolledwindow28 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow28);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
-				 "scrolledwindow28", scrolledwindow28,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow28);
-	gtk_box_pack_start(GTK_BOX(vbox23), scrolledwindow28, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow28),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	textCommentaries = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(textCommentaries);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
-				 "textCommentaries", textCommentaries,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textCommentaries);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow28),
-			  textCommentaries);
-
-	label = gtk_label_new("label");
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(nbCom),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (nbCom), 1),
-				   label);
-
+	
 	handlebox17 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox17);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "handlebox17",
@@ -1711,16 +1577,13 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnExit), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnExit_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
-			   GTK_SIGNAL_FUNC
-			   (on_moduleText_enter_notify_event), NULL);
 	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
-			   NULL);
+			   NULL);/*
 	gtk_signal_connect(GTK_OBJECT(textCommentaries),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
-			   (on_textComments_button_release_event), NULL);
+			   (on_textComments_button_release_event), NULL);*/
 	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
@@ -1749,20 +1612,18 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   (gchar *) "textComments");
 #endif				/* USE_SPELL */
 
-	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
-			   GTK_SIGNAL_FUNC
-			   (on_moduleText_enter_notify_event), NULL);
+
 
 	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(notebook1), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook1_switch_page),
-			   NULL);
+			   NULL);/*
 	gtk_signal_connect(GTK_OBJECT(textCommentaries),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
-			   (on_textComments_button_release_event), NULL);
+			   (on_textComments_button_release_event), NULL);*/
 	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
