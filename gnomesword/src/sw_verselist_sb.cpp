@@ -23,6 +23,7 @@
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gs_gnomesword.h"
 #include "gs_html.h"
@@ -51,6 +52,7 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 	gboolean retval = FALSE;
 	gchar 
 		buf[256], 
+		*utf8str,
 		tmpbuf[256],
 		firstkey[256];
 	ListKey tmpVerseList;
@@ -64,19 +66,31 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 			vlist[i] = ';';
 	}
 	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
-	beginHTML(s->vlsbhtml, FALSE);
+	beginHTML(s->vlsbhtml, TRUE);
+	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
+			s->bible_bg_color, 
+			s->bible_text_color,
+			s->link_color,
+			s->bible_verse_num_color,
+			modName);
+	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
+	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
 	while (!tmpVerseList.Error()) {
 		sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
 					s->verselist_font_size,
 					(const char *)tmpVerseList,
 					(const char *)tmpVerseList);
-		displayHTML(s->vlsbhtml, buf, strlen(buf));
+		utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
+		displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
 		if(!count) 
 			sprintf(firstkey,"%s",(const char *)tmpVerseList);
 		retval = TRUE;
 		tmpVerseList++;
 		++count;
 	}
+	sprintf(buf,"</body</html>");	
+	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
+	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
 	endHTML(s->vlsbhtml);
 	if(count>0){ 
 		showSBVerseList(s);
