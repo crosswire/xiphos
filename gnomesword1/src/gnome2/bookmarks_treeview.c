@@ -60,6 +60,32 @@ GtkTreeView *bookmark_tree;
 
 /******************************************************************************
  * Name
+ *   gui_save_old_bookmarks_to_new
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_treeview.h"
+ *
+ *   void gui_save_old_bookmarks_to_new(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *   save bookmark tree 
+ *
+ * Return value
+ *   void
+ */
+
+void gui_save_old_bookmarks_to_new(GNode * gnode)
+{
+	gchar buf[256];
+
+	sprintf(buf, "%s/bookmarks/%s", settings.gSwordDir,
+		"bookmarks.xml");
+	xml_save_gnode_to_bookmarks(gnode, g_strdup(buf));
+}
+
+
+/******************************************************************************
+ * Name
  *   goto_bookmark
  *
  * Synopsis
