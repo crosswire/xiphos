@@ -1,3 +1,9 @@
+2003-12-10  Terry <tbiggs@users.sf.net>
+
+	* added get_sword_locale() to backend/sword.cpp to help with the
+	  books of the bible problem.
+
+
 2003-12-09  Andy <andyp@users.sf.net>
 
 	* added manual to the build. Sweeping changes to the doc/ directory. 
