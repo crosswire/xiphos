@@ -35,7 +35,7 @@
 #include "main/xml.h"
 #include "main/settings.h"
 
-
+#define HINT_COLOR "#ffffbf"
 HINT hint;
 
 /******************************************************************************
@@ -100,15 +100,15 @@ static GtkWidget *create_hint_window(void)
 	GtkWidget *frame;
 	GtkWidget *scrolledwindow72;
 
-	hint_window = gtk_window_new(GTK_WINDOW_POPUP);
+	hint_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(hint_window), "hint_window",
 			    hint_window);
 	gtk_window_set_title(GTK_WINDOW(hint_window), "window1");
 	gtk_window_set_position(GTK_WINDOW(hint_window),
 				GTK_WIN_POS_MOUSE);
 	gtk_window_set_default_size(GTK_WINDOW(hint_window), 191, 83);
-	gtk_window_set_policy(GTK_WINDOW(hint_window), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(hint_window),FALSE);
+	gtk_window_set_decorated(GTK_WINDOW(hint_window), FALSE);
 	gtk_widget_show(hint_window);
 
 	frame = gtk_frame_new(NULL);
@@ -121,11 +121,12 @@ static GtkWidget *create_hint_window(void)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow72),
 				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
+				       GTK_POLICY_NEVER);
 
 	hint.html_widget = gtk_html_new();
 	gtk_html_load_empty(GTK_HTML(hint.html_widget));
 	gtk_widget_show(hint.html_widget);
+	gtk_widget_set_size_request(hint.html_widget, 191, 83);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow72),
 			  hint.html_widget);
 	hint.in_popup = TRUE;
@@ -157,31 +158,35 @@ void gui_display_in_hint_window(gchar * note)
 	GString *str;
 	gint x;
 	gint y;
-
+	gint size_of_note = 0;
+	
+	/* FIXME */
+	size_of_note = strlen(note);
+	size_of_note = ((size_of_note / 24) + 2);
+	size_of_note = size_of_note * 18;
+	
+	
 	str = g_string_new("");
 	if (!hint.in_popup) {
 		hint.hint_window = create_hint_window();
-		gtk_widget_realize(hint.hint_window);
 	}
 
 	html = GTK_HTML(hint.html_widget);
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-	g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
-			 note);
+	g_string_sprintf(str, "<body bgcolor=\"%s\">%s</body>",
+						 HINT_COLOR, note);
 	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 
+	gtk_widget_set_size_request(hint.html_widget, 191, size_of_note);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
-	gdk_window_get_position(hint.hint_window->window, &x, &y);
-/*	g_warning("x = %d y = %d",x,y);*/
-	x += 100;
-	y += 50;
-	/*gtk_window_reposition((GtkWindow *)hint.hint_window,
-	   x,
-	   y); */
+	gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
+	x += 10;
+	y += 10;
+	gtk_window_move(GTK_WINDOW(hint.hint_window), x, y);
 	g_string_free(str, TRUE);
 }
 
