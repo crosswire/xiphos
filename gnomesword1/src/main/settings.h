@@ -71,6 +71,7 @@ struct _settings {
 		
 	int 
       		shortcutbar_width,
+		verselist_toppane_height, //height of the top pane in the search results window
 		upperpane_hight,
 		biblepane_width,
 		gs_width,
