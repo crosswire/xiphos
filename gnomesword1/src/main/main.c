@@ -30,6 +30,7 @@
 #include "gui/main_window.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
+#include "gui/url.h"
 
 #include "backend/sword.h"
  
@@ -104,7 +105,7 @@ int main(int argc, char *argv[])
 	frontend_display();
 	
 	if(have_sword_url)
-		sword_url_handler(argv[1]);
+		gui_url_handler(argv[1]);
 	
 	gui_splash_done();
 
