@@ -270,8 +270,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	gchar newref[80];
 	static GtkWidget *dlg;
 	cur_vt = vt;
-	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
-			     " ");
+	//gtk_window_set_title(GTK_WINDOW(dialog_display_info)," ");
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
