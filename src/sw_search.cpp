@@ -49,6 +49,7 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
+#include "gs_editor.h"
 #include "sw_sword.h"
 #include "support.h"
 #include "sw_utility.h"
@@ -94,7 +95,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	        *lbSearchHits,	//-- label for showing how many verses we found
 	        *resultList,	//-- list of verses found
 	        *regexSearch,	//-- do we want to use regular expression search - radio button
-	        *phraseSearch,	//-- do we want to use phrase seach - radio button
+	        //*phraseSearch,	//-- do we want to use phrase seach - radio button
 	        *caseSensitive,	//-- do we want search to be case sensitive - check box
 	       //	*comToggle,	//-- do we want to search current commentary - check box
 	       //  *percomToggle,	//-- do we want to search personal commentary - check box
@@ -129,7 +130,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	searchMod = NULL;
 	searchText = lookup_widget (s->app, "entrySearch");	//-- pointer to text entry
 	regexSearch = lookup_widget (s->app, "rbRegExp");	//-- pointer to radio button
-	phraseSearch = lookup_widget (s->app, "rbPhraseSearch");	//-- pointer to radio button
+	//phraseSearch = lookup_widget (s->app, "rbPhraseSearch");	//-- pointer to radio button
 	caseSensitive = lookup_widget (s->app, "ckbCaseSensitive");	//-- pointer to check box
 	bounds = lookup_widget (s->app, "rrbUseBounds");	//-- pointer to check box
 	lastsearch = lookup_widget (s->app, "rbLastSearch");	//-- pointer to radio button
@@ -197,7 +198,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	if (searchMod) {		/* must have a good module - not null */	 
                 int searchType =
 			  GTK_TOGGLE_BUTTON (regexSearch)->
-			  active ? 0 : GTK_TOGGLE_BUTTON (phraseSearch)->
+			  active ? 0 : GTK_TOGGLE_BUTTON (so->rbPhraseSearch)->
 			  active ? -1 : -2;	//-- get search type	
 		s->searchType = searchType;
 		int searchParams =
@@ -322,7 +323,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	}
 }
 
-/*** close down searchresults dialog ***/
+/*** close down searchresults ***/
 void shutdownsearchresultsSBSW(void) 
 {	
 	delete searchresultssbMgr;	

@@ -47,6 +47,7 @@
 #include "gs_detach_sb.h"
 #include "gs_html.h"
 #include "gs_gbs.h"
+#include "gs_editor.h"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
@@ -221,6 +222,11 @@ on_clistSearchResults_select_row(GtkCList *clist,
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &buf);	
 	s->displaySearchResults = TRUE;
 	changesearchresultsSW_SEARCH(s, p_so, buf);
+	if(GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {		
+		if(GTK_TOGGLE_BUTTON (p_so->rbPhraseSearch)->active){
+			searchgbsGS_EDITOR(s->searchText); //s->searchText
+		}
+	}
 	s->displaySearchResults = FALSE;
 }
 
@@ -1538,7 +1544,6 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	GSList *vbox2_group = NULL;
 	GtkWidget *rbMultiword;
 	GtkWidget *rbRegExp;
-	GtkWidget *rbPhraseSearch;
 	GtkWidget *frame3;
 	GtkWidget *vbox3;
 	GtkWidget *ckbCaseSensitive;
@@ -1646,19 +1651,19 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_box_pack_start(GTK_BOX(vbox2), rbRegExp, FALSE, FALSE, 0);
 	gtk_widget_set_usize(rbRegExp, -2, 20);
 
-	rbPhraseSearch =
+	p_so->rbPhraseSearch =
 	    gtk_radio_button_new_with_label(vbox2_group,
 					    _("Exact Phrase"));
 	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbPhraseSearch));
-	gtk_widget_ref(rbPhraseSearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "rbPhraseSearch",
-				 rbPhraseSearch,
+	    gtk_radio_button_group(GTK_RADIO_BUTTON(p_so->rbPhraseSearch));
+	gtk_widget_ref(p_so->rbPhraseSearch);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "p_so->rbPhraseSearch",
+				 p_so->rbPhraseSearch,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(rbPhraseSearch);
-	gtk_box_pack_start(GTK_BOX(vbox2), rbPhraseSearch, FALSE, FALSE,
+	gtk_widget_show(p_so->rbPhraseSearch);
+	gtk_box_pack_start(GTK_BOX(vbox2), p_so->rbPhraseSearch, FALSE, FALSE,
 			   0);
-	gtk_widget_set_usize(rbPhraseSearch, -2, 20);
+	gtk_widget_set_usize(p_so->rbPhraseSearch, -2, 20);
 
 	frame3 = gtk_frame_new(_("Search Options"));
 	gtk_widget_ref(frame3);

@@ -9874,7 +9874,7 @@ Footnotes
       <handler>on_create_new_book_activate</handler>
       <last_modification_time>Wed, 20 Feb 2002 16:19:00 GMT</last_modification_time>
     </signal>
-    <label>Create New Book</label>
+    <label>Create New Book </label>
     <right_justify>False</right_justify>
     <stock_icon>GNOME_STOCK_MENU_BOOK_RED</stock_icon>
   </widget>
@@ -9922,6 +9922,11 @@ Footnotes
     <class>GtkPixmapMenuItem</class>
     <name>edit_current_node</name>
     <tooltip>edit the name of the current node</tooltip>
+    <accelerator>
+      <modifiers>0</modifiers>
+      <key>GDK_F2</key>
+      <signal>activate</signal>
+    </accelerator>
     <signal>
       <name>activate</name>
       <handler>on_edit_current_node_activate</handler>
@@ -10254,6 +10259,28 @@ Footnotes
 	</widget>
       </widget>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>menu2</name>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>one_more_time1</name>
+    <accelerator>
+      <modifiers>GDK_CONTROL_MASK</modifiers>
+      <key>GDK_n</key>
+      <signal>activate</signal>
+    </accelerator>
+    <signal>
+      <name>activate</name>
+      <handler>on_one_more_time1_activate</handler>
+      <last_modification_time>Fri, 01 Mar 2002 16:00:11 GMT</last_modification_time>
+    </signal>
+    <label>One More Time</label>
+    <right_justify>False</right_justify>
   </widget>
 </widget>
 
