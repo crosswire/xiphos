@@ -50,7 +50,6 @@
 #include "support.h"
 #include "gs_shortcutbar.h"
 #include "sword.h"
-#include "e-splash.h"
 #include "gs_html.h"
 
 
@@ -319,7 +318,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
+GtkWidget *create_mainwindow(SETTINGS *s)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
@@ -377,36 +376,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
-	GdkPixbuf *icon_pixbuf;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
-	if (s->showsplash) {
-		icon_pixbuf =
-			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf = 
-			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword.xpm");
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf =
-			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/gnome-fontsel.xpm");
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf =
-		      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		while (gtk_events_pending())
-			gtk_main_iteration();
-		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
-	}
-
 	s->app =
 	    gnome_app_new("gnomesword",
 			  _("GnomeSWORD - Bible Study Software"));
@@ -1362,11 +1334,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	
 	gtk_widget_grab_focus(s->app);
-	if (s->showsplash) {
-		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
-		while (gtk_events_pending())
-			gtk_main_iteration();
-	}
 
 	return s->app;
 }
