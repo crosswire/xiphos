@@ -39,6 +39,7 @@ extern "C" {
 #define INTERLINEAR_WINDOW 1
 #define COMMENTARY_WINDOW 2
 #define DICTIONARY_WINDOW 3
+#define BOOK_WINDOW 4
 	
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -185,7 +186,7 @@ void initGnomeSword(GtkWidget *app,
 gint addnotebookpages(GtkWidget *notebook, 
 		GList *list,
 		gchar *modName); 
-void UpdateChecks(GtkWidget * mainform);
+void UpdateChecks(SETTINGS *);
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);

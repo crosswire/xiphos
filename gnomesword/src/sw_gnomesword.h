@@ -53,12 +53,10 @@ extern "C" {
 	void setversestyleSWORD(gboolean choice);
 	/*** change Bible book ***/
 	void bookSWORD(void);
-	//void chapterSWORD(void);
 	void verseSWORD(void);
 	void btnlookupSWORD(void);
 	void freeformlookupSWORD(GdkEventKey * event);
 	void changcurcomModSWORD(gchar * modName, gboolean showchange);
-//	void editnoteSWORD(gboolean editbuttonactive);
 	void savenoteSWORD(gchar *buf);
 	void savebookSWORD(gchar *buf)	;
 	void deletenoteSWORD(void);
@@ -89,10 +87,10 @@ extern "C" {
 	gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo);
 	/*** display daily devotional ***/
 	void displayDevotional(void);
-/******************************************************************************
- * get module type - Bible text, Commentary or Dict/Lex
- ******************************************************************************/
-gint get_mod_typeSWORD(gchar *modName);
+	/******************************************************************************
+	 * get module type - Bible text, Commentary or Dict/Lex
+	 ******************************************************************************/
+	gint get_mod_typeSWORD(gchar *modName);
 
 #ifdef __cplusplus
 }
