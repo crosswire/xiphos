@@ -1848,7 +1848,8 @@ void
 on_btnPropertyboxApply_clicked         (GtkButton       *button,
                                         gpointer         user_data)
 {
-	setcurrentversecolor(num1,num2,num3); 	
+	setcurrentversecolor(num1,num2,num3);
+	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat")); 	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2227,5 +2228,21 @@ on_btnSPnew_clicked                    (GtkButton       *button,
 
    text = lookup_widget(GTK_WIDGET(button),"text3");
    newSP(text);  //-- send text widget to GnomeSword.cpp to start new file
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+	GtkWidget	*dlg,
+						*btnok,
+						*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true); 		
 }
 

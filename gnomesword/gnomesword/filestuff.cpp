@@ -451,6 +451,17 @@ readsettings(void)
 {
    int fd;           //-- file handle
    SETTINGS settings; //-- settings structure
+   long filesize;
+   struct stat stat_p;
+	
+	 stat(fnconfigure, &stat_p);
+   filesize = stat_p.st_size;
+
+   if(filesize != sizeof(settings)) //-- if file is not the same size as the structure
+   {
+      settings = createsettings();  //-- we will create new file
+      return(settings); //-- return settings structure to initSword() in GnomeSword.cpp	
+   }
 
    if((fd = open(fnconfigure, O_RDONLY))== -1) //-- try to open file
    {
@@ -461,6 +472,7 @@ readsettings(void)
 	 		read(fd,(char *)&settings,sizeof(settings));  //-- read file into structure
 	 }
 	 close(fd);        //-- close file
+	
 	 return(settings); //-- return settings structure to initSword() in GnomeSword.cpp	
 }
 
@@ -489,6 +501,7 @@ createsettings(void)
 	p_settings->versestyle = true; //-- set versestyle to on
 	p_settings->interlinearpage = true; //-- set show interlinear page to on
 	p_settings->autosavepersonalcomments = true; //-- set autosave personal comments to on
+	p_settings->formatpercom = false; //-- set personal comments formatting to off
 	p_settings->notebook3page = 0;  //-- notebook 3 page number
 	p_settings->notebook1page = 0;  //-- commentaries notebook
 	p_settings->notebook2page = 0;  //-- dict and lex notebook  	
