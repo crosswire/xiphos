@@ -84,13 +84,7 @@ COMMON_SOURCE =  \
     sw_viewdict_dlg.cpp \
     sw_viewdict_dlg.h \
     printstuff.c \
-    printstuff.h\
-    gbfhtmlhref.cpp \
-    gbfhtmlhref.h\
-    thmlhtmlhref.cpp \
-    thmlhtmlhref.h\
-    sw_latin1utf8.cpp \
-    sw_latin1utf8.h
+    printstuff.h
 
 SPELLING_SOURCE =  \
     debug.h \
