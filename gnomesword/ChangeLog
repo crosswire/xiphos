@@ -1,9 +1,14 @@
+2001-07-14 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* Create new bookmark group and file is working.
+	
+
 2001-07-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* load and save bookmark ctree is working
 	* add bookmark menu item added to popup windows
 	  for Text, commentary and lex/dict. This adds bookmark
-	  to the ctree.
+	  to the personal node of the ctree.
 
 2001-07-11 Terry Biggs <tbiggs@users.sourceforge.net>
 
