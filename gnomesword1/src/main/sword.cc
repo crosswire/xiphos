@@ -745,7 +745,6 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 		if(!strcmp(type,"x")) {
 			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
 					_("Cross Reference"));
-			g_warning(text);
 			str = g_string_append(str, tmp_str->str);
 		}
 		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
