@@ -467,12 +467,12 @@ void gui_update_tab_struct(const gchar * text_mod,
 
 /******************************************************************************
  * Name
- *  gui_open_verse_in_new_tab
+ *  gui_open_passage_in_new_tab
  *
  * Synopsis
  *   #include "tabbed_browser.h"
  *
- *   void gui_open_verse_in_new_tab(gchar *verse_key)
+ *   void gui_open_passage_in_new_tab(gchar *verse_key)
  *
  * Description
  *   opens the given verse in a new passage tab
@@ -480,7 +480,7 @@ void gui_update_tab_struct(const gchar * text_mod,
  * Return value
  *   void
  */
-void gui_open_verse_in_new_tab(gchar *verse_key)
+void gui_open_passage_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
 	
@@ -497,7 +497,76 @@ void gui_open_verse_in_new_tab(gchar *verse_key)
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
-//	gui_open_bibletext(pt->text_mod);
+	notebook_main_add_page(pt);
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
+				gtk_notebook_page_num
+				(GTK_NOTEBOOK(widgets.notebook_main),
+				pt->page_widget));
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_open_module_in_new_tab
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_open_module_in_new_tab(gchar *verse_key)
+ *
+ * Description
+ *   opens the given module in a new passage tab
+ *
+ * Return value
+ *   void
+ */
+
+void gui_open_module_in_new_tab(gchar *module)
+{
+	PASSAGE_TAB_INFO *pt;
+	gint module_type;
+
+	module_type = get_mod_type(module);
+	
+	if(!settings.browsing)
+		return;
+	pt = g_new0(PASSAGE_TAB_INFO, 1);
+	switch (module_type) {
+	case -1:
+		break;
+	case TEXT_TYPE:
+		pt->text_mod = g_strdup(module);
+		pt->commentary_mod = g_strdup(cur_c->mod_name);
+		pt->dictlex_mod = g_strdup(cur_d->mod_name);
+		pt->book_mod = NULL;
+		
+		break;
+	case COMMENTARY_TYPE:
+		pt->text_mod = g_strdup(settings.MainWindowModule);
+		pt->commentary_mod = g_strdup(module);
+		pt->dictlex_mod = g_strdup(cur_d->mod_name);
+		pt->book_mod = NULL;
+		
+		break;
+	case DICTIONARY_TYPE:
+		pt->text_mod = g_strdup(settings.MainWindowModule);
+		pt->commentary_mod = g_strdup(cur_c->mod_name);
+		pt->dictlex_mod = g_strdup(module);
+		pt->book_mod = NULL;
+		
+		break;
+	case BOOK_TYPE:
+		
+		break;
+	}
+		
+	pt->text_commentary_key = g_strdup(settings.currentverse);
+	pt->dictlex_key = g_strdup(cur_d->key);
+	pt->book_key = NULL;
+	
+	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+	set_current_tab(pt);
 	notebook_main_add_page(pt);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
@@ -586,7 +655,7 @@ void gui_close_passage_tab(gint pagenum)
 
 static void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data)
 {
-	gui_open_verse_in_new_tab(settings.currentverse);
+	gui_open_passage_in_new_tab(settings.currentverse);
 }
 
 /******************************************************************************
@@ -681,7 +750,8 @@ void gui_notebook_main_setup(GList *ptlist)
  *   void
  */
 void gui_notebook_main_shutdown(void)
-{	passage_list = g_list_first(passage_list);
+{	
+	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
 		PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)passage_list->data;
 		g_free(pt->text_mod);
