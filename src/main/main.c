@@ -30,7 +30,8 @@
 #include "gui/main_window.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
-#include "gui/url.h"
+
+#include "main/url.h"
 
 #include "backend/sword.h"
  

@@ -178,9 +178,9 @@ int settings_init(int new_configs, int new_bookmarks)
 		g_print("\nFirst Run: need to create settings!\n");
 		xml_create_settings_file(settings.fnconfigure);
 		backend_init_main_mgr();
-		init_lists();
+		main_init_lists();
 		retval = gui_first_run();
-		shutdown_list();
+		main_shutdown_list();
 		backend_delete_main_mgr();
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
