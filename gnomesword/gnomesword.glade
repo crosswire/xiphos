@@ -118,7 +118,20 @@
   </widget>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
+    <name>lookup_selection1</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_lookup_selection_activate</handler>
+      <last_modification_time>Sat, 22 Jul 2000 13:45:06 GMT</last_modification_time>
+    </signal>
+    <label>Lookup Selection</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_SEARCH</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
     <name>about_this_module1</name>
     <signal>
       <name>activate</name>
@@ -127,6 +140,7 @@
     </signal>
     <label>About this module</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 
   <widget>
@@ -744,7 +758,7 @@ Revelation
 	  <wrap>False</wrap>
 	  <value>8</value>
 	  <lower>0</lower>
-	  <upper>150</upper>
+	  <upper>151</upper>
 	  <step>1</step>
 	  <page>10</page>
 	  <page_size>10</page_size>
@@ -777,7 +791,7 @@ Revelation
 	  <wrap>False</wrap>
 	  <value>28</value>
 	  <lower>0</lower>
-	  <upper>100</upper>
+	  <upper>180</upper>
 	  <step>1</step>
 	  <page>10</page>
 	  <page_size>10</page_size>
@@ -814,8 +828,38 @@ Revelation
 	    <handler>on_btnLookup_clicked</handler>
 	    <last_modification_time>Mon, 14 Feb 2000 18:34:42 GMT</last_modification_time>
 	  </signal>
-	  <label>button1</label>
+	  <label>Goto verse</label>
 	  <stock_pixmap>GNOME_STOCK_PIXMAP_JUMP_TO</stock_pixmap>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>btnBack</name>
+	  <sensitive>False</sensitive>
+	  <tooltip>Go backward through history list</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnBack_clicked</handler>
+	    <last_modification_time>Wed, 19 Jul 2000 18:43:19 GMT</last_modification_time>
+	  </signal>
+	  <label>Back</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_BACK</stock_pixmap>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>btnFoward</name>
+	  <sensitive>False</sensitive>
+	  <tooltip>Go foward through history list</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnFoward_clicked</handler>
+	    <last_modification_time>Wed, 19 Jul 2000 18:51:33 GMT</last_modification_time>
+	  </signal>
+	  <label>Foward</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_FORWARD</stock_pixmap>
 	</widget>
 
 	<widget>
@@ -920,6 +964,7 @@ Revelation
 		    <class>GtkText</class>
 		    <name>moduleText</name>
 		    <can_focus>True</can_focus>
+		    <has_focus>True</has_focus>
 		    <signal>
 		      <name>button_press_event</name>
 		      <handler>on_moduleText_button_press_event</handler>
@@ -929,6 +974,11 @@ Revelation
 		      <name>drag_begin</name>
 		      <handler>on_moduleText_drag_begin</handler>
 		      <last_modification_time>Sat, 15 Jul 2000 16:56:59 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>enter_notify_event</name>
+		      <handler>on_moduleText_enter_notify_event</handler>
+		      <last_modification_time>Wed, 19 Jul 2000 15:45:08 GMT</last_modification_time>
 		    </signal>
 		    <editable>False</editable>
 		    <text></text>
@@ -1069,6 +1119,57 @@ Revelation
 			</signal>
 			<editable>False</editable>
 			<text></text>
+		      </widget>
+		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkHandleBox</class>
+		    <name>handlebox17</name>
+		    <visible>False</visible>
+		    <shadow_type>GTK_SHADOW_OUT</shadow_type>
+		    <handle_position>GTK_POS_TOP</handle_position>
+		    <snap_edge>GTK_POS_TOP</snap_edge>
+		    <child>
+		      <padding>0</padding>
+		      <expand>False</expand>
+		      <fill>False</fill>
+		    </child>
+
+		    <widget>
+		      <class>GtkToolbar</class>
+		      <name>toolbar26</name>
+		      <orientation>GTK_ORIENTATION_VERTICAL</orientation>
+		      <type>GTK_TOOLBAR_ICONS</type>
+		      <space_size>5</space_size>
+		      <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+		      <relief>GTK_RELIEF_NORMAL</relief>
+		      <tooltips>True</tooltips>
+
+		      <widget>
+			<class>GtkButton</class>
+			<child_name>Toolbar:button</child_name>
+			<name>btnComPrev</name>
+			<signal>
+			  <name>clicked</name>
+			  <handler>on_btnComPrev_clicked</handler>
+			  <last_modification_time>Tue, 25 Jul 2000 19:37:17 GMT</last_modification_time>
+			</signal>
+			<label>button2</label>
+			<stock_pixmap>GNOME_STOCK_PIXMAP_UP</stock_pixmap>
+		      </widget>
+
+		      <widget>
+			<class>GtkButton</class>
+			<child_name>Toolbar:button</child_name>
+			<name>btnComNext</name>
+			<signal>
+			  <name>clicked</name>
+			  <handler>on_btnComNext_clicked</handler>
+			  <last_modification_time>Tue, 25 Jul 2000 19:37:10 GMT</last_modification_time>
+			</signal>
+			<label>button3</label>
+			<stock_pixmap>GNOME_STOCK_PIXMAP_DOWN</stock_pixmap>
 		      </widget>
 		    </widget>
 		  </widget>
@@ -1762,26 +1863,6 @@ Revelation
 		    <name>textDict</name>
 		    <can_focus>True</can_focus>
 		    <signal>
-		      <name>button_press_event</name>
-		      <handler>on_moduleText_button_press_event</handler>
-		      <last_modification_time>Tue, 20 Apr 1999 20:08:53 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>selection_notify_event</name>
-		      <handler>on_moduleText_selection_notify_event</handler>
-		      <last_modification_time>Tue, 06 Jul 1999 16:44:39 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>selection_get</name>
-		      <handler>on_moduleText_selection_notify_event</handler>
-		      <last_modification_time>Tue, 06 Jul 1999 19:44:54 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>selection_received</name>
-		      <handler>on_moduleText_selection_received</handler>
-		      <last_modification_time>Tue, 06 Jul 1999 19:46:14 GMT</last_modification_time>
-		    </signal>
-		    <signal>
 		      <name>drag_begin</name>
 		      <handler>on_textDict_drag_begin</handler>
 		      <last_modification_time>Sat, 15 Jul 2000 16:57:13 GMT</last_modification_time>
@@ -1959,7 +2040,7 @@ Revelation
   </widget>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
     <name>about_this_module2</name>
     <signal>
       <name>activate</name>
@@ -1968,6 +2049,7 @@ Revelation
     </signal>
     <label>About this module</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 
   <widget>
@@ -1993,7 +2075,7 @@ Revelation
   </widget>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
     <name>about_this_module3</name>
     <signal>
       <name>activate</name>
@@ -2002,6 +2084,7 @@ Revelation
     </signal>
     <label>About this module</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 
   <widget>
@@ -2027,7 +2110,7 @@ Revelation
   </widget>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
     <name>about_this_module4</name>
     <signal>
       <name>activate</name>
@@ -2036,6 +2119,7 @@ Revelation
     </signal>
     <label>About this module</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 
   <widget>
@@ -2642,197 +2726,6 @@ Revelation
 	      <fill>False</fill>
 	    </child>
 	  </widget>
-	</widget>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
-  <class>GnomeDialog</class>
-  <name>wdwEditBookmarks</name>
-  <border_width>4</border_width>
-  <title>GnomeSword - Edit Bookmarks</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
-  <auto_close>False</auto_close>
-  <hide_on_close>False</hide_on_close>
-
-  <widget>
-    <class>GtkVBox</class>
-    <child_name>GnomeDialog:vbox</child_name>
-    <name>dialog-vbox2</name>
-    <homogeneous>False</homogeneous>
-    <spacing>0</spacing>
-    <child>
-      <padding>4</padding>
-      <expand>True</expand>
-      <fill>True</fill>
-    </child>
-
-    <widget>
-      <class>GtkHButtonBox</class>
-      <child_name>GnomeDialog:action_area</child_name>
-      <name>dialog-action_area2</name>
-      <layout_style>GTK_BUTTONBOX_END</layout_style>
-      <spacing>8</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
-      <child_ipad_y>0</child_ipad_y>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-	<pack>GTK_PACK_END</pack>
-      </child>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>btnEBMOK</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_btnEBMOK_clicked</handler>
-	  <last_modification_time>Wed, 26 Apr 2000 17:13:14 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>btnEBMApply</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_btnEBMApply_clicked</handler>
-	  <last_modification_time>Wed, 26 Apr 2000 17:13:35 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>btnEBMCancel</name>
-	<can_default>True</can_default>
-	<has_default>True</has_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_btnEBMCancel_clicked</handler>
-	  <last_modification_time>Wed, 26 Apr 2000 17:13:58 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkVBox</class>
-      <name>vbox17</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkHandleBox</class>
-	<name>handlebox17</name>
-	<height>36</height>
-	<shadow_type>GTK_SHADOW_OUT</shadow_type>
-	<handle_position>GTK_POS_LEFT</handle_position>
-	<snap_edge>GTK_POS_TOP</snap_edge>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkToolbar</class>
-	  <name>toolbar23</name>
-	  <height>34</height>
-	  <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	  <type>GTK_TOOLBAR_ICONS</type>
-	  <space_size>5</space_size>
-	  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	  <relief>GTK_RELIEF_NONE</relief>
-	  <tooltips>True</tooltips>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <child_name>Toolbar:button</child_name>
-	    <name>btnEBMcut</name>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_btnEBMcut_clicked</handler>
-	      <last_modification_time>Wed, 26 Apr 2000 17:15:18 GMT</last_modification_time>
-	    </signal>
-	    <label>Cut</label>
-	    <stock_pixmap>GNOME_STOCK_PIXMAP_CUT</stock_pixmap>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <child_name>Toolbar:button</child_name>
-	    <name>btnEBMcopy</name>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_btnEBMcopy_clicked</handler>
-	      <last_modification_time>Wed, 26 Apr 2000 17:15:38 GMT</last_modification_time>
-	    </signal>
-	    <label>Copy</label>
-	    <stock_pixmap>GNOME_STOCK_PIXMAP_COPY</stock_pixmap>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <child_name>Toolbar:button</child_name>
-	    <name>btnEBMpaste</name>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_btnEBMpaste_clicked</handler>
-	      <last_modification_time>Wed, 26 Apr 2000 17:15:55 GMT</last_modification_time>
-	    </signal>
-	    <label>Paste</label>
-	    <stock_pixmap>GNOME_STOCK_PIXMAP_PASTE</stock_pixmap>
-	  </widget>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkScrolledWindow</class>
-	<name>scrolledwindow25</name>
-	<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	<vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkText</class>
-	  <name>text4</name>
-	  <height>219</height>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>changed</name>
-	    <handler>on_text4_changed</handler>
-	    <last_modification_time>Wed, 26 Apr 2000 17:14:27 GMT</last_modification_time>
-	  </signal>
-	  <editable>True</editable>
-	  <text></text>
 	</widget>
       </widget>
     </widget>
@@ -5187,7 +5080,7 @@ Revelation
   </widget>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
     <name>goto_reference</name>
     <tooltip>Go to selected reference</tooltip>
     <signal>
@@ -5197,6 +5090,20 @@ Revelation
     </signal>
     <label>Goto Reference</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_JUMP_TO</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>lookup_selection4</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_lookup_selection4_activate</handler>
+      <last_modification_time>Tue, 25 Jul 2000 23:29:16 GMT</last_modification_time>
+    </signal>
+    <label>Lookup Selection</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_SEARCH</stock_icon>
   </widget>
 </widget>
 
@@ -5205,16 +5112,115 @@ Revelation
   <name>pmComments</name>
 
   <widget>
-    <class>GtkMenuItem</class>
+    <class>GtkPixmapMenuItem</class>
     <name>goto_reference</name>
     <tooltip>Go to the selected reference</tooltip>
     <signal>
       <name>activate</name>
-      <handler>on_goto_reference_activate</handler>
-      <last_modification_time>Sun, 16 Jul 2000 16:29:04 GMT</last_modification_time>
+      <handler>on_goto_reference2_activate</handler>
+      <last_modification_time>Tue, 25 Jul 2000 23:27:40 GMT</last_modification_time>
     </signal>
     <label>Goto Reference</label>
     <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_JUMP_TO</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>lookup_selection2</name>
+    <tooltip>Lookup selection in current Dict/Lex</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_lookup_selection2_activate</handler>
+      <last_modification_time>Sat, 22 Jul 2000 16:33:37 GMT</last_modification_time>
+    </signal>
+    <label>Lookup Selection</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_SEARCH</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>about_this_module6</name>
+    <tooltip>Show information about this moduel</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_about_this_module6_activate</handler>
+      <last_modification_time>Sat, 22 Jul 2000 16:34:10 GMT</last_modification_time>
+    </signal>
+    <label>About this module</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkCheckMenuItem</class>
+    <name>auto_scroll1</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_auto_scroll1_activate</handler>
+      <last_modification_time>Tue, 25 Jul 2000 19:40:13 GMT</last_modification_time>
+    </signal>
+    <label>Auto Scroll</label>
+    <active>True</active>
+    <always_show_toggle>False</always_show_toggle>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>pmDict</name>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>copy5</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_copy5_activate</handler>
+      <last_modification_time>Wed, 19 Jul 2000 18:35:37 GMT</last_modification_time>
+    </signal>
+    <stock_item>GNOMEUIINFO_MENU_COPY_ITEM</stock_item>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>goto_reference3</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_goto_reference3_activate</handler>
+      <last_modification_time>Tue, 25 Jul 2000 23:28:02 GMT</last_modification_time>
+    </signal>
+    <label>Goto Reference</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_JUMP_TO</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>lookup_word1</name>
+    <tooltip>lookup word in this module</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_lookup_word1_activate</handler>
+      <last_modification_time>Wed, 19 Jul 2000 18:36:50 GMT</last_modification_time>
+    </signal>
+    <label>Lookup Word</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_SEARCH</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>about_this_module5</name>
+    <tooltip>Show module info</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_about_this_module5_activate</handler>
+      <last_modification_time>Wed, 19 Jul 2000 18:35:48 GMT</last_modification_time>
+    </signal>
+    <label>About this module</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 </widget>
 

@@ -112,6 +112,7 @@ interface.o: interface.c ../config.h /usr/include/sys/types.h \
  /usr/include/libgnomeui/gnome-app-util.h \
  /usr/include/libgnomeui/gnome-canvas.h \
  /usr/include/libart_lgpl/art_misc.h \
+ /usr/include/libart_lgpl/art_config.h \
  /usr/include/libart_lgpl/art_rect.h \
  /usr/include/libart_lgpl/art_svp.h \
  /usr/include/libart_lgpl/art_point.h \
@@ -379,6 +380,7 @@ interface.c :
 /usr/include/libgnomeui/gnome-app-util.h :
 /usr/include/libgnomeui/gnome-canvas.h :
 /usr/include/libart_lgpl/art_misc.h :
+/usr/include/libart_lgpl/art_config.h :
 /usr/include/libart_lgpl/art_rect.h :
 /usr/include/libart_lgpl/art_svp.h :
 /usr/include/libart_lgpl/art_point.h :

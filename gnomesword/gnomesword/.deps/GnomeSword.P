@@ -108,6 +108,7 @@ GnomeSword.o: GnomeSword.cpp ../config.h /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-app-util.h \
  /usr/include/libgnomeui/gnome-canvas.h \
  /usr/include/libart_lgpl/art_misc.h \
+ /usr/include/libart_lgpl/art_config.h \
  /usr/include/libart_lgpl/art_rect.h \
  /usr/include/libart_lgpl/art_svp.h \
  /usr/include/libart_lgpl/art_point.h \
@@ -196,16 +197,16 @@ GnomeSword.o: GnomeSword.cpp ../config.h /usr/include/gnome.h \
  /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/exception \
  /usr/include/g++-2/stl_construct.h /usr/include/g++-2/stl_function.h \
  /usr/include/g++-2/stl_map.h /usr/include/g++-2/stl_multimap.h \
- /usr/include/sword/swmodule.h /usr/include/sword/swdisp.h \
- /usr/include/sword/swkey.h /usr/include/sword/listkey.h \
- /usr/include/sword/swfilter.h /usr/include/g++-2/list \
- /usr/include/g++-2/stl_uninitialized.h /usr/include/g++-2/stl_list.h \
+ /usr/include/g++-2/list /usr/include/g++-2/stl_uninitialized.h \
+ /usr/include/g++-2/stl_list.h /usr/include/sword/swmodule.h \
+ /usr/include/sword/swdisp.h /usr/include/sword/swkey.h \
+ /usr/include/sword/listkey.h /usr/include/sword/swfilter.h \
  /usr/include/sword/swconfig.h /usr/include/sword/swlog.h \
  /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
- /usr/include/sword/gbfplain.h /usr/include/regex.h \
- /usr/include/sys/stat.h /usr/include/bits/stat.h display.h callback.h \
- GnomeSword.h support.h interface.h filestuff.h menustuff.h \
- listeditor.h
+ /usr/include/sword/gbfplain.h /usr/include/sword/gbfhtml.h \
+ /usr/include/regex.h /usr/include/sys/stat.h /usr/include/bits/stat.h \
+ display.h callback.h GnomeSword.h support.h interface.h filestuff.h \
+ menustuff.h listeditor.h noteeditor.h
 GnomeSword.cpp :
 ../config.h :
 /usr/include/gnome.h :
@@ -394,6 +395,7 @@ GnomeSword.cpp :
 /usr/include/libgnomeui/gnome-app-util.h :
 /usr/include/libgnomeui/gnome-canvas.h :
 /usr/include/libart_lgpl/art_misc.h :
+/usr/include/libart_lgpl/art_config.h :
 /usr/include/libart_lgpl/art_rect.h :
 /usr/include/libart_lgpl/art_svp.h :
 /usr/include/libart_lgpl/art_point.h :
@@ -504,19 +506,20 @@ GnomeSword.cpp :
 /usr/include/g++-2/stl_function.h :
 /usr/include/g++-2/stl_map.h :
 /usr/include/g++-2/stl_multimap.h :
+/usr/include/g++-2/list :
+/usr/include/g++-2/stl_uninitialized.h :
+/usr/include/g++-2/stl_list.h :
 /usr/include/sword/swmodule.h :
 /usr/include/sword/swdisp.h :
 /usr/include/sword/swkey.h :
 /usr/include/sword/listkey.h :
 /usr/include/sword/swfilter.h :
-/usr/include/g++-2/list :
-/usr/include/g++-2/stl_uninitialized.h :
-/usr/include/g++-2/stl_list.h :
 /usr/include/sword/swconfig.h :
 /usr/include/sword/swlog.h :
 /usr/include/sword/versekey.h :
 /usr/include/sword/swmacs.h :
 /usr/include/sword/gbfplain.h :
+/usr/include/sword/gbfhtml.h :
 /usr/include/regex.h :
 /usr/include/sys/stat.h :
 /usr/include/bits/stat.h :
@@ -528,3 +531,4 @@ interface.h :
 filestuff.h :
 menustuff.h :
 listeditor.h :
+noteeditor.h :
