@@ -50,9 +50,9 @@ void backend_new_module_mgr(void);
 void backend_delete_module_mgr(void);
  
 void backend_set_global_option_iterator(void);
-char *backend_get_path_to_mods(void);	
+//char *backend_get_path_to_mods(void);	
 
-void backend_set_global_option(int manager, char *option, char *yesno);
+//void backend_set_global_option(int manager, char *option, char *yesno);
 
 void backend_set_module_unlocked(char *mod_name, char *key);	
 //void backend_get_global_options_list(GList * list);

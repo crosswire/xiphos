@@ -37,7 +37,6 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/key.h"
 #include "main/url.h"
 #include "main/xml.h"
 

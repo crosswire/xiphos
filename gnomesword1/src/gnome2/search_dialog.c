@@ -39,7 +39,6 @@
 #include "main/search_dialog.h"
 #include "main/configs.h"
 #include "main/lists.h"
-#include "main/key.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/commentary.h"

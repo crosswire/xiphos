@@ -226,7 +226,6 @@ GList *BackEnd::fill_Bible_books(int testament) {
 	return retlist;
 }
 
-
 GList *BackEnd::get_module_options(void) {
 	GList *options = NULL;
 	StringList optionslist = main_mgr->getGlobalOptions();	
