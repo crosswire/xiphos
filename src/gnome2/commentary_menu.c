@@ -1157,6 +1157,28 @@ static void on_close_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 /******************************************************************************
  * Name
+ *  on_about_module_activate
+ *
+ * Synopsis
+ *   #include "gui/commentary_menu.h"
+ *
+ *  void on_about_module_activate(GtkMenuItem * menuitem, 
+						TEXT_DATA * vt)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_about_module_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+{
+	gui_display_about_module_dialog(c->mod_name, FALSE);
+}
+
+/******************************************************************************
+ * Name
  *  gui_create_pm_text
  *
  * Synopsis
@@ -1175,6 +1197,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;
+	GtkWidget *about_module;
 	GtkWidget *copy;
 	GtkWidget *separator;
 	GtkWidget *file;
@@ -1206,6 +1229,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 	GtkWidget *find;
 	GtkWidget *add_module_key = NULL;
 	gchar buf[256];
+	GString *str;
 	GtkTooltips *tooltips;
 
 	sprintf(buf, "%s %s %s", _("Open"), c->mod_name,
@@ -1216,6 +1240,20 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 	pm = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pm), "pm", pm);
 /*	pm_accels = gtk_menu_ensure_uline_accel_group(GTK_MENU(pm));*/
+	str = g_string_new(NULL);
+	g_string_printf(str,"%s %s",_("About"),c->mod_name);
+	
+	about_module =
+	    gtk_menu_item_new_with_label(str->str);
+	gtk_widget_show(about_module);
+	gtk_container_add(GTK_CONTAINER(pm),
+				  about_module);
+	g_string_free(str,TRUE);
+	
+	separator = gtk_menu_item_new();
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(pm), separator);
+	gtk_widget_set_sensitive(separator, FALSE);
 	/*
 	 * file menu
 	 */
@@ -1476,6 +1514,9 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 				   G_CALLBACK
 				   (on_comm_showtabs_activate), c);
 	}
+	
+	gtk_signal_connect(GTK_OBJECT(about_module), "activate",
+			   G_CALLBACK(on_about_module_activate), c);
 
 	gtk_signal_connect(GTK_OBJECT(prev), "activate",
 			   G_CALLBACK(on_prev_activate), c);

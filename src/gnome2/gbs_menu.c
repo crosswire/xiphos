@@ -404,6 +404,28 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_about_module_activate
+ *
+ * Synopsis
+ *   #include "gui/gbs_menu.h"
+ *
+ *  void on_about_module_activate(GtkMenuItem * menuitem, 
+						GBS_DATA * t)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_about_module_activate(GtkMenuItem * menuitem, GBS_DATA * t)
+{
+	gui_display_about_module_dialog(t->mod_name, FALSE);
+}
+
+/******************************************************************************
+ * Name
  *  
  *
  * Synopsis
@@ -445,6 +467,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 {
 	GtkWidget *pm_text;
 	GtkAccelGroup *pm_text_accels;
+	GtkWidget *about_module;
 	GtkWidget *separator;
 	GtkWidget *file;
 	GtkWidget *file_menu;
@@ -469,6 +492,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	GtkWidget *find;
 	GtkWidget *add_module_key = NULL;
 	gchar buf[256];
+	GString *str;
 	GtkTooltips *tooltips;
 
 	sprintf(buf, "%s %s %s", _("Open"), t->mod_name,
@@ -478,6 +502,22 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 
 	pm_text = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
+	
+	str = g_string_new(NULL);
+	g_string_printf(str,"%s %s",_("About"),t->mod_name);
+	
+	about_module =
+	    gtk_menu_item_new_with_label(str->str);
+	gtk_widget_show(about_module);
+	gtk_container_add(GTK_CONTAINER(pm_text),
+				  about_module);
+	g_string_free(str,TRUE);
+	
+	separator = gtk_menu_item_new();
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(pm_text), separator);
+	gtk_widget_set_sensitive(separator, FALSE);
+
 	
 	/*
 	 * file menu
@@ -686,6 +726,9 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   G_CALLBACK
 			   (on_same_lookup_selection_activate), t);
+	gtk_signal_connect(GTK_OBJECT(about_module), "activate",
+			   G_CALLBACK
+			   (on_about_module_activate), t);
 
 	gtk_signal_connect(GTK_OBJECT(copy), "activate",
 			   G_CALLBACK(on_copy_activate), t);

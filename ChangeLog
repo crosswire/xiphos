@@ -1,3 +1,9 @@
+2003-12-07  Terry <tbiggs@users.sf.net>
+
+	* added about module item to contex menus in gbs_menu.c, dictlex_menu.c,
+	  commentary_menu.c and bibletext_menu.c
+
+
 2003-12-05  Terry <tbiggs@users.sf.net>
 
 	* enabled printing using gnome-print.
