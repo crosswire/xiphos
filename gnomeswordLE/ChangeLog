@@ -1,3 +1,9 @@
+2001-07-07 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* fixed? No worked around crash when using MCH by
+	  adding thml to plain render filter.
+	* release 0.4.1
+
 2001-04-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* GnomeSwordLE-0.4.0

@@ -36,6 +36,7 @@
 #include <gbfhtml.h>
 #include <rwphtml.h>
 #include <thmlhtml.h>
+#include <thmlplain.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -100,6 +101,7 @@ SWModule *VCMod;   /* module for view comm dialog */
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
 SWFilter *thmltohtml;
+SWFilter *thmltoplain;
 SWFilter *rwphtml;
 /***********************************************************************************************
 GnomeSword globals
@@ -180,7 +182,7 @@ initSWORD(GtkWidget *mainform)
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
         rwphtml		= new GS_RWPHTML();
         gbftohtml		= new GBFHTML();
-
+	thmltoplain	= new ThMLPlain(); /* sword renderfilter thml to plain */	
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
 	mainMgr2        = new SWMgr();
@@ -270,9 +272,13 @@ initSWORD(GtkWidget *mainform)
 			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				curcomMod->AddRenderFilter(gbftohtml);
 				curcomMod->Disp(HTMLDisplay);
-			} else if(!strcmp(sourceformat,"ThML")) {
+			} else if(!strcmp(sourceformat,"ThML" ) && strcmp(curcomMod->Name(),"MHC" )) {
+				//g_warning(curcomMod->Name());
 				curcomMod->AddRenderFilter(thmltohtml);
-				curcomMod->Disp(HTMLDisplay);				
+				curcomMod->Disp(HTMLDisplay);	
+			} else if(!strcmp(curcomMod->Name(),"MHC")) {				
+				curcomMod->AddRenderFilter(thmltoplain);
+				curcomMod->Disp(comDisplay);			
 			} else if(!strcmp(sourceformat,"HTML")) {
 				curcomMod->Disp(HTMLDisplay);			
 			} else if(!strcmp(sourceformat,"Plain")&& strcmp(curcomMod->Name(),"RWP")) {
