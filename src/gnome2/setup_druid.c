@@ -250,7 +250,7 @@ static void dialog_destroy(GtkObject * object, gpointer user_data)
  *   void
  */
 
-static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
+static void on_finish_clicked(GtkWidget * dialog, gint arg1,
 			      gpointer user_data)
 {
 	save_frist_run_settings(widgets);
@@ -275,7 +275,7 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
  *   void
  */
 
-static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
+static void on_cancel_clicked(GtkWidget * dialog, gint arg1,
 			      gpointer user_data)
 {
 	

@@ -5,6 +5,7 @@ SUBDIRS = m4 doc po src
 gnomesworddoc_DATA = \
  	   README\
 	    COPYING\
+	    COPYING-DOCS\
 	    AUTHORS\
 	    ChangeLog\
 	    INSTALL\
@@ -47,4 +48,4 @@ dist-hook:
 
 ACLOCAL_AMFLAGS = -I m4
 
-EXTRA_DIST = ${PACKAGE}.desktop.in ${PACKAGE}.spec.in ${PACKAGE}.spec
+EXTRA_DIST = ${PACKAGE}.desktop.in ${PACKAGE}.spec.in ${PACKAGE}.spec xmldocs.make omf.make COPYING-DOCS
