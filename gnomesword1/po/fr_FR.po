@@ -21,27 +21,28 @@
 # Personal			-> Notes personnelles
 # Lemmas			-> Déclinaisons
 # <>, 2004.
+# Dominique Corbex <domcox@sourceforge.net>, 2004.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2 2.1.dev1\n"
+"Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-07 09:32-0400\n"
-"PO-Revision-Date: 2004-07-02 18:45+0200\n"
-"Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
-"Language-Team: French\n"
+"PO-Revision-Date: 2004-09-28 07:09+0200\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=\n"
+"Content-Transfer-Encoding: "
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword - Guide de la Bible"
+msgstr "Guide de la Bible GnomeSword"
 
 #: gnomesword.desktop.in.h:2
 msgid "Study the Bible"
-msgstr "Étudier la Bible"
+msgstr "Aide à l'étude de la Bible"
 
 #: src/main/lists.cc:128
 msgid "Number of Text modules"
@@ -68,13 +69,12 @@ msgid "Number of Devotion modules"
 msgstr "Le nombre de modules de cultes quotidiens :"
 
 #: src/main/sidebar.cc:357
-#, fuzzy
 msgid "verse"
-msgstr "n° de versets"
+msgstr "verset"
 
 #: src/main/sidebar.cc:417
 msgid "chapter"
-msgstr ""
+msgstr "chapitre"
 
 #.
 #. * parallel page
@@ -128,7 +128,7 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Nos remerciements à Troy Griffitts et tous ceux à qui nous devons le SWORD "
+"Nos remerciements à Troy Griffitts et à tous les participants du SWORD "
 "Project."
 
 #: src/gnome2/about_modules.c:162
@@ -143,12 +143,12 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"La démarche du SWORD Project est de créer un ensemble extensible à souhait "
+"Le SWORD Project a pour but de réaliser un ensemble extensible à souhait "
 "de logiciels destinés à l'étude de Dieu et de sa Parole. L'infrastructure "
-"SWORD-Bible permet de naviguer facilement dans:les textes bibliques, "
-"commentaires, lexiques, dictionnaires, etc.. De nombreux logiciels sont "
-"developpés en utilisant cette infrastructure. Elle permet le partage du même "
-"ensemble de modules installés par tous les logiciels qui l'employent."
+"SWORD-Bible permet de manier aisément les textes bibliques, "
+"commentaires, lexiques, dictionnaires, etc.. De nombreux logiciels utilisateurs sont "
+"developpés en utilisant cette infrastructure. Elle leur permet de partager le même "
+"ensemble de textes."
 
 #: src/gnome2/about_sword.c:111
 msgid "About the SWORD Project"
@@ -294,7 +294,7 @@ msgstr "Utiliser le dictionnaire en cours"
 #: src/gnome2/commentary.c:698 src/gnome2/commentary_dialog.c:1526
 #: src/gnome2/dictlex.c:768 src/gnome2/gbs.c:565 src/gnome2/sidebar.c:953
 msgid "About"
-msgstr "À propos de"
+msgstr "À propos"
 
 #: src/gnome2/bibletext.c:965 src/gnome2/bibletext_dialog.c:1851
 #: src/gnome2/commentary.c:705 src/gnome2/commentary_dialog.c:1533
@@ -317,7 +317,6 @@ msgstr "Éditer"
 #: src/gnome2/bibletext.c:977 src/gnome2/bibletext_dialog.c:1863
 #: src/gnome2/commentary.c:717 src/gnome2/commentary_dialog.c:1545
 #: src/gnome2/dictlex.c:787 src/gnome2/gbs.c:584
-#, fuzzy
 msgid "_Module Options"
 msgstr "Options du module"
 
@@ -337,7 +336,7 @@ msgstr "Déverrouiller ce module"
 #: src/gnome2/dictlex.c:806 src/gnome2/gbs.c:603
 #: src/gnome2/preferences_dialog.c:1651
 msgid "Show Tabs"
-msgstr "Afficher les onglets"
+msgstr "Onglets"
 
 #: src/gnome2/bibletext_dialog.c:569
 msgid "Go to "
@@ -376,7 +375,7 @@ msgstr "Nom du dossier :"
 
 #: src/gnome2/bookmarks_menu.c:501
 msgid "Bookmark name: "
-msgstr "nom du signet"
+msgstr "Nom du signet"
 
 #: src/gnome2/bookmarks_menu.c:504 src/gnome2/bookmarks_menu.c:943
 msgid "Verse: "
@@ -397,7 +396,7 @@ msgstr "Supprimer le dossier sélectionné"
 
 #: src/gnome2/bookmarks_menu.c:767
 msgid "(and all its contents)?"
-msgstr "(et tout ses contenus)?"
+msgstr "(et tout son contenu)?"
 
 #: src/gnome2/bookmarks_menu.c:772
 msgid "Remove the selected bookmark"
@@ -413,7 +412,7 @@ msgstr "Étiquette"
 
 #: src/gnome2/bookmarks_menu.c:1035 src/gnome2/bookmarks_treeview.c:101
 msgid "Enter Folder Name"
-msgstr "Entrer le nom du dossier"
+msgstr "Saisir le nom du dossier"
 
 #: src/gnome2/bookmarks_menu.c:1037
 msgid "Folder Name"
@@ -429,7 +428,7 @@ msgstr "Supprimer le dossier"
 
 #: src/gnome2/bookmarks_menu.c:1122
 msgid "Remove folder and save it"
-msgstr "Sauver et supprimer le dossier"
+msgstr "Sauve et supprime le dossier"
 
 #: src/gnome2/bookmarks_menu.c:1128
 msgid "Restore Folder"
@@ -437,16 +436,15 @@ msgstr "Restaurer le dossier"
 
 #: src/gnome2/bookmarks_menu.c:1129
 msgid "Restore saved folder"
-msgstr "Restaurer un dossier sauvegardé"
+msgstr "Restaure un dossier sauvegardé"
 
 #: src/gnome2/bookmarks_menu.c:1138 src/gnome2/sidebar.c:941
-#, fuzzy
 msgid "Open in a new tab"
-msgstr "Ouvrir dans une fenêtre"
+msgstr "Ouvrir dans un nouvel onglet"
 
 #: src/gnome2/bookmarks_menu.c:1139 src/gnome2/bookmarks_menu.c:1145
 msgid "Open this bookmark in a dialog"
-msgstr "Ouvrir le signet dans une fenêtre"
+msgstr "Ouvre le signet dans une nouvelle fenêtre"
 
 #: src/gnome2/bookmarks_menu.c:1144
 msgid "Open in a dialog"
@@ -458,7 +456,7 @@ msgstr "Nouveau dossier"
 
 #: src/gnome2/bookmarks_menu.c:1151
 msgid "Add new folder to selected folder"
-msgstr "Ajouter un nouveau dossier au dossier sélectionné"
+msgstr "Ajoute un nouveau dossier au dossier sélectionné"
 
 #: src/gnome2/bookmarks_menu.c:1156
 msgid "Insert Bookmark"
@@ -466,7 +464,7 @@ msgstr "Insérer un signet"
 
 #: src/gnome2/bookmarks_menu.c:1157
 msgid "Insert new bookmark here"
-msgstr "Insérer un nouveau signet ici"
+msgstr "Insére un nouveau signet dans le dossier sélectionné"
 
 #: src/gnome2/bookmarks_menu.c:1162
 msgid "_Edit Item"
@@ -474,7 +472,7 @@ msgstr "Éditer l'élément.."
 
 #: src/gnome2/bookmarks_menu.c:1163
 msgid "Edit bookmark item"
-msgstr "Éditer un signet"
+msgstr "Édite ce signet"
 
 #: src/gnome2/bookmarks_menu.c:1168
 msgid "Delete Item"
@@ -482,7 +480,7 @@ msgstr "Supprimer l'élément"
 
 #: src/gnome2/bookmarks_menu.c:1169
 msgid "Delete item"
-msgstr "Supprimer l'élément"
+msgstr "Supprime l'élément sélectionné"
 
 #: src/gnome2/bookmarks_menu.c:1175
 msgid "Expand All"
@@ -490,7 +488,7 @@ msgstr "Développer tout"
 
 #: src/gnome2/bookmarks_menu.c:1176
 msgid "Expand all Bookmarks groups"
-msgstr "Développer tous les groupes de signets"
+msgstr "Développe tous les groupes de signets"
 
 #: src/gnome2/bookmarks_menu.c:1181
 msgid "Collapse All"
@@ -498,7 +496,7 @@ msgstr "Réduire tout"
 
 #: src/gnome2/bookmarks_menu.c:1182
 msgid "Collapse all Bookmarks groups"
-msgstr "Réduire tous les groupes de signets"
+msgstr "Réduit tous les groupes de signets"
 
 #: src/gnome2/bookmarks_menu.c:1188
 msgid "Allow Reordering"
@@ -506,7 +504,7 @@ msgstr "Déplacement des signets"
 
 #: src/gnome2/bookmarks_menu.c:1190
 msgid "Allow items to be moved from one folder to another"
-msgstr "Activer/Désactiver le déplacement des éléments"
+msgstr "Active/désactive le déplacement des éléments"
 
 #: src/gnome2/bookmarks_menu.c:1196
 msgid "Import Bibletime Bookmarks"
@@ -664,7 +662,7 @@ msgstr "Suivant"
 #: src/gnome2/editor_replace.c:382 src/gnome2/note_toolbar_edit.c:601
 #: src/gnome2/toolbar_edit.c:594
 msgid "Find and Replace"
-msgstr "Chercher et remplacer dans cette note"
+msgstr "Rechercher et remplacer"
 
 #: src/gnome2/editor_replace.c:420
 msgid "with"
@@ -837,7 +835,7 @@ msgstr "Affichage de GnomeSword"
 
 #: src/gnome2/gnomesword.c:209
 msgid "The Setup Druid was cancelled."
-msgstr "Arrêt de l\"assistant d'installation"
+msgstr "Arrêt de l'assistant d'installation"
 
 #: src/gnome2/gnomesword.c:210
 msgid "Do you wish to set preferences now?"
@@ -884,11 +882,11 @@ msgstr "Bloc-notes..."
 
 #: src/gnome2/main_menu.c:489
 msgid "Open the StudyPad editor"
-msgstr "Ouvre l'éditeur de-notes d'étude"
+msgstr "Ouvre le bloc-notes d'étude"
 
 #: src/gnome2/main_menu.c:501
 msgid "Copy highlighted text from main window"
-msgstr "Copier le texte en surbrillance depuis la fenêtre principale"
+msgstr "Copie le texte en surbrillance depuis la fenêtre principale"
 
 #: src/gnome2/main_menu.c:507 src/gnome2/sidebar.c:214
 msgid "Search"
@@ -896,7 +894,7 @@ msgstr "Rechercher"
 
 #: src/gnome2/main_menu.c:508
 msgid "Search using the shortcut bar"
-msgstr "Utiliser la recherche de la barre de raccourcis"
+msgstr "Utilise la recherche de la barre de raccourcis"
 
 #: src/gnome2/main_menu.c:513 src/gnome2/search_dialog.c:1221
 msgid "Advanced Search"
@@ -904,7 +902,7 @@ msgstr "Recherche avancée.."
 
 #: src/gnome2/main_menu.c:514
 msgid "Advanced search using the search dialog"
-msgstr "Recherche utilisant la fenêtre de recherche avancée"
+msgstr "Utilise la fenêtre de recherche avancée"
 
 #: src/gnome2/main_menu.c:522 src/gnome2/mod_mgr.c:1921
 #: src/gnome2/mod_mgr.c:1977
@@ -914,16 +912,15 @@ msgstr "Gestionnaire de modules"
 #: src/gnome2/main_menu.c:523
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
-"Utiliser le gestionnaire de modules pour installer ou supprimer des modules "
-"Sword"
+"Le gestionnaire de modules permet d'installer ou de supprimer les modules de textes du SWORD Project"
 
 #: src/gnome2/main_menu.c:532
 msgid "C_lear"
-msgstr "Effacer"
+msgstr "_Effacer l'historique"
 
 #: src/gnome2/main_menu.c:533
 msgid "Clear history list"
-msgstr "Effacer l'historique"
+msgstr "Efface l'historique des versets consultés"
 
 #: src/gnome2/main_menu.c:543
 msgid "Daily Devotion"
@@ -931,7 +928,7 @@ msgstr "Culte quotidien"
 
 #: src/gnome2/main_menu.c:544
 msgid "Show the Daily Devotion for today"
-msgstr "Afficher le culte quotidien pour aujourd'hui"
+msgstr "Affiche le culte quotidien d'aujourd'hui"
 
 #: src/gnome2/main_menu.c:559 src/gnome2/preferences_dialog.c:1727
 msgid "Bible Texts"
@@ -939,7 +936,7 @@ msgstr "Textes bibliques"
 
 #: src/gnome2/main_menu.c:560
 msgid "Show or hide Bible texts window"
-msgstr "Afficher/Cacher la fenêtre des textes bibliques"
+msgstr "Affiche/cache le volet des textes bibliques"
 
 #: src/gnome2/main_menu.c:565 src/gnome2/preferences_dialog.c:1682
 #: src/gnome2/preferences_dialog.c:2029 src/gnome2/search_sidebar.c:211
@@ -949,7 +946,7 @@ msgstr "Commentaires"
 
 #: src/gnome2/main_menu.c:566
 msgid "Show or hide commentaries"
-msgstr "Afficher/Cacher les commentaires"
+msgstr "Affiche/cache le volet des commentaires"
 
 #: src/gnome2/main_menu.c:571
 msgid "Lower Workbook"
@@ -957,7 +954,7 @@ msgstr "Dictionnaires et lexiques"
 
 #: src/gnome2/main_menu.c:573
 msgid "Show or hide lower workbook - dictionaries and other books"
-msgstr "Affiche/Cache les dictionnaires ou les livres d\"étude"
+msgstr "Affiche/cache le volet des dictionnaires"
 
 #: src/gnome2/main_menu.c:579
 msgid "Verse Style"
@@ -973,11 +970,11 @@ msgstr "Afficher/Cacher la barre de raccourcis"
 
 #: src/gnome2/main_menu.c:602
 msgid "Contents"
-msgstr "Contenu"
+msgstr "Sommaire"
 
 #: src/gnome2/main_menu.c:603
 msgid "Open the GnomeSword manual"
-msgstr "Ouvrir l'aide de GnomeSword"
+msgstr "Ouvre l'aide de GnomeSword"
 
 #: src/gnome2/main_menu.c:616
 msgid "About the SWORD Project ..."
@@ -1016,9 +1013,8 @@ msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Logiciel d'étude de la Bible"
 
 #: src/gnome2/main_window.c:487
-#, fuzzy
 msgid "Open a new tab"
-msgstr "Ouvrir un fichier"
+msgstr "Ouvrir un nouvel onglet"
 
 #: src/gnome2/mod_mgr.c:208
 msgid "Install the following modules:"
@@ -1077,9 +1073,8 @@ msgid "Configure"
 msgstr "Configurer"
 
 #: src/gnome2/mod_mgr.c:1071
-#, fuzzy
 msgid "Type"
-msgstr "Type :"
+msgstr "Type"
 
 #: src/gnome2/mod_mgr.c:1079
 #, fuzzy
@@ -1087,15 +1082,13 @@ msgid "Caption"
 msgstr "Options"
 
 #: src/gnome2/mod_mgr.c:1087
-#, fuzzy
 msgid "Source"
-msgstr "Sources"
+msgstr "Source"
 
 # src/gs_preferences_dlg.c
 #: src/gnome2/mod_mgr.c:1095
-#, fuzzy
 msgid "Directory"
-msgstr "Répertoire :"
+msgstr "Répertoire"
 
 #: src/gnome2/mod_mgr.c:1353
 msgid "Please Refresh"
@@ -1106,7 +1099,6 @@ msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
 #: src/gnome2/mod_mgr.c:1577
-#, fuzzy
 msgid "Select Local Source"
 msgstr "Support local"
 
@@ -1146,7 +1138,8 @@ msgstr "ATTENTION :"
 
 #: src/gnome2/mod_mgr.c:1987
 msgid "If you live in a persecuted country use with care."
-msgstr "À utilser avec précautions dans les pays où règne la persécution."
+msgstr "À utiliser avec prudence dans les pays où "
+"la lecture de la Sainte Bible présente des risques"
 
 #: src/gnome2/mod_mgr.c:1995
 msgid "Cover"
@@ -1170,15 +1163,16 @@ msgstr "Distant"
 
 #: src/gnome2/mod_mgr.c:2065
 msgid "Install Destination"
-msgstr "Destination"
+msgstr "Répertoire de destination"
 
 #: src/gnome2/mod_mgr.c:2109
 msgid ""
 "If you live in a persecuted country and do not wish to risk detection you "
 "should NOT use  the remote installation feature! "
 msgstr ""
-"NE PAS utiliser l'installation à distance dans les pays où règne la "
-"persécution. La confidentialité n'est pas assurée."
+"Ne pas utiliser le support "
+"d'installation à distance dans les pays où "
+"cela peut représenter un danger"
 
 #: src/gnome2/mod_mgr.c:2160
 msgid "Install Modules"
@@ -1190,16 +1184,15 @@ msgstr "Enlever les modules"
 
 #: src/gnome2/mod_mgr.c:2209
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Gérer les sources</b>"
+msgstr "<b>Sources des modules</b>"
 
 #: src/gnome2/mod_mgr.c:2225
-#, fuzzy
 msgid "Current local sources"
-msgstr "Sources distantes actuelles"
+msgstr "Sources locales"
 
 #: src/gnome2/mod_mgr.c:2269
 msgid "Current Remote Sources"
-msgstr "Sources distantes actuelles"
+msgstr "Sources à distance"
 
 #: src/gnome2/mod_mgr.c:2312
 msgid "Sources"
@@ -1247,7 +1240,7 @@ msgstr "Supprimer note"
 
 #: src/gnome2/note_toolbar_edit.c:447 src/gnome2/toolbar_edit.c:443
 msgid "Create a new file"
-msgstr "Créer un nouveau fichier"
+msgstr "Créer un document"
 
 #: src/gnome2/note_toolbar_edit.c:465 src/gnome2/toolbar_edit.c:460
 msgid "Open a file"
@@ -1255,7 +1248,7 @@ msgstr "Ouvrir un fichier"
 
 #: src/gnome2/note_toolbar_edit.c:482 src/gnome2/toolbar_edit.c:476
 msgid "Save the current file"
-msgstr "Sauvegarder le fichier en cours"
+msgstr "Enregistrer le fichier"
 
 #: src/gnome2/note_toolbar_edit.c:495 src/gnome2/toolbar_edit.c:489
 msgid "Save note"
@@ -1273,11 +1266,11 @@ msgstr "Supprimer la note"
 
 #: src/gnome2/note_toolbar_edit.c:527 src/gnome2/toolbar_edit.c:520
 msgid "Print window contents"
-msgstr "Inprimer le contenu de la fenêtre"
+msgstr "Inprimer la note"
 
 #: src/gnome2/note_toolbar_edit.c:590 src/gnome2/toolbar_edit.c:583
 msgid "Find in this note"
-msgstr "Rechercher dans cette note"
+msgstr "Rechercher"
 
 #: src/gnome2/note_toolbar_edit.c:617 src/gnome2/toolbar_edit.c:610
 msgid "Spell"
@@ -1285,7 +1278,7 @@ msgstr "Vérifier l'orthographe"
 
 #: src/gnome2/note_toolbar_edit.c:618 src/gnome2/toolbar_edit.c:611
 msgid "Check spelling in this note"
-msgstr "Vérifier l'orthographe de cette note"
+msgstr "Vérifier l'orthographe"
 
 #: src/gnome2/note_toolbar_style.c:48 src/gnome2/toolbar_style.c:47
 msgid "Normal"
@@ -1349,7 +1342,7 @@ msgstr "Aligner à gauche"
 
 #: src/gnome2/note_toolbar_style.c:1044 src/gnome2/toolbar_style.c:1030
 msgid "Left justifies the paragraphs"
-msgstr "Paragraphes alignés à gauche"
+msgstr "Aligner à gauche"
 
 #: src/gnome2/note_toolbar_style.c:1047 src/gnome2/toolbar_style.c:1033
 msgid "Center"
@@ -1357,7 +1350,7 @@ msgstr "Centré"
 
 #: src/gnome2/note_toolbar_style.c:1048 src/gnome2/toolbar_style.c:1034
 msgid "Center justifies the paragraphs"
-msgstr "Paragraphes alignés au centre"
+msgstr "Aligner au centre"
 
 #: src/gnome2/note_toolbar_style.c:1051 src/gnome2/toolbar_style.c:1037
 msgid "Right align"
@@ -1365,7 +1358,7 @@ msgstr "Aligné à droite"
 
 #: src/gnome2/note_toolbar_style.c:1052 src/gnome2/toolbar_style.c:1038
 msgid "Right justifies the paragraphs"
-msgstr "Paragraphes alignés à droite"
+msgstr "Aligner à droite"
 
 #: src/gnome2/note_toolbar_style.c:1064 src/gnome2/toolbar_style.c:1050
 msgid "Typewriter"
@@ -1373,7 +1366,7 @@ msgstr "Courrier"
 
 #: src/gnome2/note_toolbar_style.c:1065 src/gnome2/toolbar_style.c:1051
 msgid "Toggle typewriter font style"
-msgstr "Mettre/Enlever la police de style courrier"
+msgstr "Police à chasse fixe"
 
 #: src/gnome2/note_toolbar_style.c:1068 src/gnome2/toolbar_style.c:1054
 msgid "Bold"
@@ -1381,7 +1374,7 @@ msgstr "Gras"
 
 #: src/gnome2/note_toolbar_style.c:1068 src/gnome2/toolbar_style.c:1054
 msgid "Makes the text bold"
-msgstr "Mettre le texte en gras"
+msgstr "Gras"
 
 #: src/gnome2/note_toolbar_style.c:1071 src/gnome2/toolbar_style.c:1057
 msgid "Italic"
@@ -1389,7 +1382,7 @@ msgstr "Italique"
 
 #: src/gnome2/note_toolbar_style.c:1072 src/gnome2/toolbar_style.c:1058
 msgid "Makes the text italic"
-msgstr "Mettre le texte en italique"
+msgstr "Italique"
 
 #: src/gnome2/note_toolbar_style.c:1075 src/gnome2/toolbar_style.c:1061
 msgid "Underline"
@@ -1397,7 +1390,7 @@ msgstr "Souligné"
 
 #: src/gnome2/note_toolbar_style.c:1076 src/gnome2/toolbar_style.c:1062
 msgid "Underlines the text"
-msgstr "Souligner le texte"
+msgstr "Souligné"
 
 #: src/gnome2/note_toolbar_style.c:1079 src/gnome2/toolbar_style.c:1065
 msgid "Strikeout"
@@ -1405,7 +1398,7 @@ msgstr "Barré"
 
 #: src/gnome2/note_toolbar_style.c:1080 src/gnome2/toolbar_style.c:1066
 msgid "Strikes out the text"
-msgstr "Barrer le texte"
+msgstr "Barré"
 
 #: src/gnome2/note_toolbar_style.c:1090 src/gnome2/toolbar_style.c:1076
 msgid "Unindent"
@@ -1413,7 +1406,7 @@ msgstr "Annuler l'indentation"
 
 #: src/gnome2/note_toolbar_style.c:1091 src/gnome2/toolbar_style.c:1077
 msgid "Indents the paragraphs less"
-msgstr "Diminuer l'indentation du paragraphe"
+msgstr "Réduire l'indentation"
 
 #: src/gnome2/note_toolbar_style.c:1094 src/gnome2/toolbar_style.c:1080
 msgid "Indent"
@@ -1425,7 +1418,7 @@ msgstr "Augmenter l'indentation du texte"
 
 #: src/gnome2/parallel_dialog.c:388 src/gnome2/preferences_dialog.c:1013
 msgid "Parallel"
-msgstr "Parallèle"
+msgstr "Vue parallèle"
 
 #: src/gnome2/parallel_dialog.c:474
 msgid "Goto verse"
@@ -1485,20 +1478,17 @@ msgid "Preferences"
 msgstr "Préférences"
 
 #: src/gnome2/preferences_dialog.c:983
-#, fuzzy
 msgid "Fonts"
-msgstr "Police"
+msgstr "Polices"
 
 #: src/gnome2/preferences_dialog.c:986
-#, fuzzy
 msgid "Color"
-msgstr "Couleur des liens"
+msgstr "Couleurs"
 
 #: src/gnome2/preferences_dialog.c:989 src/gnome2/preferences_dialog.c:1003
 #: src/gnome2/preferences_dialog.c:1016
-#, fuzzy
 msgid "Misc"
-msgstr "divers"
+msgstr "Divers"
 
 #: src/gnome2/preferences_dialog.c:993 src/gnome2/preferences_dialog.c:1786
 msgid "General"
@@ -1506,7 +1496,7 @@ msgstr "Général"
 
 #: src/gnome2/preferences_dialog.c:996
 msgid "Tabs and Panes"
-msgstr ""
+msgstr "Onglets et volets"
 
 #: src/gnome2/preferences_dialog.c:1007 src/gnome2/search_dialog.c:1375
 #: src/gnome2/search_dialog.c:2037 src/gnome2/sidebar.c:208
@@ -1515,9 +1505,8 @@ msgid "Modules"
 msgstr "Modules"
 
 #: src/gnome2/preferences_dialog.c:1010
-#, fuzzy
 msgid "Main"
-msgstr "FenÃªtre principale"
+msgstr "Principaux"
 
 #: src/gnome2/preferences_dialog.c:1327
 msgid "Font Colors"
@@ -1574,11 +1563,11 @@ msgstr "Options par défaut de GnomeSword"
 #. GTK_RELIEF_HALF);
 #: src/gnome2/preferences_dialog.c:1484
 msgid "Bible Text Window"
-msgstr "Fenêtre du texte biblique"
+msgstr "Volet d'affichage du texte biblique"
 
 #: src/gnome2/preferences_dialog.c:1502
 msgid "Font Miscellaneous"
-msgstr ""
+msgstr "Divers polices"
 
 #: src/gnome2/preferences_dialog.c:1525
 msgid "Verse number font size"
@@ -1604,7 +1593,7 @@ msgstr "Non, utiliser les options de la session précédente de GnomeSwordg"
 
 #: src/gnome2/preferences_dialog.c:1668
 msgid "Use tabbed browsing"
-msgstr ""
+msgstr "Utiliser les onglets"
 
 #: src/gnome2/preferences_dialog.c:1675
 msgid "Bible texts"
@@ -1620,15 +1609,15 @@ msgstr "Livres d'étude"
 
 #: src/gnome2/preferences_dialog.c:1710
 msgid "Show"
-msgstr "Affichage"
+msgstr "Volets"
 
 #: src/gnome2/preferences_dialog.c:1733
 msgid "Display Bible text window"
-msgstr "Fenêtre du texte biblique"
+msgstr "Volet d'affichage du texte biblique"
 
 #: src/gnome2/preferences_dialog.c:1747
 msgid "Commentaries, Personal Comments and StudyPad"
-msgstr "Commentaires, notes personnelles et bloc-notes d'étude"
+msgstr "Volet d'affichage des commentaires, notes personnelles et livres d'étude"
 
 #: src/gnome2/preferences_dialog.c:1754
 msgid "Lower workbook"
@@ -1636,7 +1625,7 @@ msgstr "Dictionnaires / Lexiques"
 
 #: src/gnome2/preferences_dialog.c:1760
 msgid "Dictionary/Lexicon and generic books"
-msgstr "Dictionnaire et livres d'étude"
+msgstr "Volet d'affichage des dictionnaires"
 
 #: src/gnome2/preferences_dialog.c:1805 src/gnome2/setup_druid.c:614
 msgid "Use Verse style"
@@ -1649,11 +1638,11 @@ msgstr "Utiliser le dictionnaire par défaut"
 
 #: src/gnome2/preferences_dialog.c:1826
 msgid "Show Daily Devotion at start up"
-msgstr "Afficher les cultes quotidiens au démarrage"
+msgstr "Afficher le culte quotidien au démarrage"
 
 #: src/gnome2/preferences_dialog.c:1832
 msgid "Show Daily Devotion if you have a Devotion module"
-msgstr "Afficher les Cultes quotidiens si vous avez un module correspondant"
+msgstr "Affiche le culte quotidien si un module de cultes quotidiens est installé"
 
 #: src/gnome2/preferences_dialog.c:1837
 msgid "Show splash screen at start up"
@@ -1661,7 +1650,7 @@ msgstr "Afficher l'écran de démarrage"
 
 #: src/gnome2/preferences_dialog.c:1844
 msgid "Show the splash screen when GnomeSword starts"
-msgstr "Afficher l'écran de démarrage"
+msgstr "Affiche l'écran de bienvenue au démarrage de GnomeSword"
 
 #: src/gnome2/preferences_dialog.c:1857
 msgid "Show Dictionary / Lexicon"
@@ -1670,12 +1659,12 @@ msgstr "Affichage des Dictionnaires/Lexiques"
 # src/gs_preferences_dlg.c
 #: src/gnome2/preferences_dialog.c:1876
 msgid "In Sidebar viewer"
-msgstr "Dans le visualiseur de la barre de raccourcis"
+msgstr "Dans Information Viewer"
 
 # src/gs_preferences_dlg.c
 #: src/gnome2/preferences_dialog.c:1886
 msgid "In Dictionary/Lexicon window"
-msgstr "Dans la fenêtre dictionnaires et lexiques"
+msgstr "Dans le volet dictionnaires et lexiques"
 
 # src/gs_preferences_dlg.c
 #: src/gnome2/preferences_dialog.c:1960 src/gnome2/preferences_dialog.c:1977
@@ -1683,9 +1672,8 @@ msgid "StudyPad default directory"
 msgstr "Répertoire par défaut du bloc-notes d'étude"
 
 #: src/gnome2/preferences_dialog.c:1999
-#, fuzzy
 msgid "<b>Main Window Modules</b>"
-msgstr "Astuces de la fenêtre principale"
+msgstr "<b>Modules principaux</b>"
 
 #: src/gnome2/preferences_dialog.c:2010
 msgid "Biblical Text"
@@ -1697,14 +1685,12 @@ msgid "Default Dictionary"
 msgstr "Dictionnaire par défaut"
 
 #: src/gnome2/preferences_dialog.c:2089
-#, fuzzy
 msgid "Personal Notes"
 msgstr "Notes personnelles"
 
 #: src/gnome2/preferences_dialog.c:2114
-#, fuzzy
 msgid "<b>Parallel View</b>"
-msgstr "Vue parallèle"
+msgstr "<b>Vue parallèle</b>"
 
 #: src/gnome2/preferences_dialog.c:2125 src/gnome2/setup_druid.c:882
 msgid "Parallel 1"
@@ -1728,7 +1714,7 @@ msgstr "Bible parallèle n°5"
 
 #: src/gnome2/preferences_dialog.c:2230
 msgid "<b>Miscellaneous Modules</b>"
-msgstr ""
+msgstr "<b>Modules divers</b>"
 
 #: src/gnome2/preferences_dialog.c:2241 src/gnome2/setup_druid.c:997
 msgid "Daily Devotional"
@@ -1826,7 +1812,7 @@ msgstr "Module en entier"
 
 #: src/gnome2/search_dialog.c:1326
 msgid "Search entire module"
-msgstr "Rechercher dans le module entier"
+msgstr "Recherche dans le module entier"
 
 #: src/gnome2/search_dialog.c:1332
 msgid "Current results"
@@ -1834,9 +1820,8 @@ msgstr "Résultats actuels"
 
 #: src/gnome2/search_dialog.c:1336
 msgid "Use the results of the last search as the scope of the search"
-msgstr ""
-"Utiliser les résultats e l dernière recherche comme limites de la recherche "
-"actuelle"
+msgstr "Recherche en prenant  les derniers "
+"résultats comme limites"
 
 #: src/gnome2/search_dialog.c:1341
 msgid "Custom range"
@@ -1844,7 +1829,7 @@ msgstr "Sélections personnalisées"
 
 #: src/gnome2/search_dialog.c:1346
 msgid "Use a custom range for the scope of the search"
-msgstr "Utiliser une sélection personnalisée comme limites de la recherche"
+msgstr "Recherche en utilisant la sélection personnalisée de limites"
 
 #: src/gnome2/search_dialog.c:1393
 msgid "Single module"
@@ -1852,7 +1837,7 @@ msgstr "Un seul module"
 
 #: src/gnome2/search_dialog.c:1397
 msgid "Use a single module for the search"
-msgstr "Utiliser un seul module pour la recherche"
+msgstr "Recherche dans un seul module"
 
 #: src/gnome2/search_dialog.c:1404
 msgid "Module list"
@@ -1860,7 +1845,7 @@ msgstr "Liste de modules"
 
 #: src/gnome2/search_dialog.c:1409
 msgid "Use the current module list for the search"
-msgstr "Utiliser la liste actuelle de modules pour la recherche"
+msgstr "Recherche dans la liste actuelle des modules"
 
 #: src/gnome2/search_dialog.c:1414
 msgid "Custom list"
@@ -1868,7 +1853,7 @@ msgstr "Liste personnalisée"
 
 #: src/gnome2/search_dialog.c:1420
 msgid "Use a custom module list for the search"
-msgstr "Utiliser une liste personnalisée de modules pour la recherche"
+msgstr "Recherche dans une liste de modules personnalisée"
 
 #: src/gnome2/search_dialog.c:1450 src/gnome2/search_sidebar.c:225
 msgid "Search Type"
@@ -1884,11 +1869,11 @@ msgstr "Phrase exacte"
 
 #: src/gnome2/search_dialog.c:1484
 msgid "Attributes"
-msgstr ""
+msgstr "Attributs"
 
 #: src/gnome2/search_dialog.c:1486
 msgid "examples"
-msgstr ""
+msgstr "Exemples"
 
 #: src/gnome2/search_dialog.c:1504
 msgid "Options"
@@ -1900,7 +1885,8 @@ msgstr "Afficher les nombres de Strong"
 
 #: src/gnome2/search_dialog.c:1529
 msgid "In modules that have Strong's Numbers"
-msgstr "dans les modules avec nombres de Strong"
+msgstr "Affiche les nombres de Strong s'ils sont "
+"présents dans le module"
 
 #: src/gnome2/search_dialog.c:1533
 msgid "Include Morphological Tags"
@@ -1908,7 +1894,8 @@ msgstr "Afficher les étiquettes morphologiques"
 
 #: src/gnome2/search_dialog.c:1538
 msgid "In modules that have Morphological Tags"
-msgstr "dans les modules avec étiquettes morphologiques"
+msgstr "Affiche les étiquettes morphologiques si elles sont "
+"présentes dans le module"
 
 #: src/gnome2/search_dialog.c:1542
 msgid "Include Footnotes"
@@ -1916,7 +1903,8 @@ msgstr "Afficher les notes de bas de page"
 
 #: src/gnome2/search_dialog.c:1547
 msgid "In modules that have Footnotes"
-msgstr "Dans les modules qui ont des notes de bas de page"
+msgstr "Affiche les notes de bas de page éventuelles"
+""
 
 #: src/gnome2/search_dialog.c:1549
 msgid "Search Criteria"
@@ -1928,15 +1916,15 @@ msgstr "Afficher le contexte"
 
 #: src/gnome2/search_dialog.c:1576
 msgid "Show in main window"
-msgstr "Afficher dans la fenêtre principale"
+msgstr "Affiche le résultat dans la fenêtre principale"
 
 #: src/gnome2/search_dialog.c:1594
 msgid "Save Results"
-msgstr "Enregistrer les résultats de la recherche"
+msgstr "Enregistre les résultats de la recherche"
 
 #: src/gnome2/search_dialog.c:1596
 msgid "Save search results as bookmarks"
-msgstr "Enregistrer lles résultats de la recherche comme signets"
+msgstr "Enregistre les résultats de la recherche comme signets"
 
 #: src/gnome2/search_dialog.c:1615
 msgid "Clear"
@@ -1944,7 +1932,7 @@ msgstr "Effacer"
 
 #: src/gnome2/search_dialog.c:1616
 msgid "Clear lists for new search"
-msgstr "Effacer les listes pour une nouvelle recherche"
+msgstr "Efface les résutats de la recherche"
 
 #: src/gnome2/search_dialog.c:1641
 msgid "Search Results"
@@ -1964,7 +1952,7 @@ msgstr "Résultats de la recherche"
 
 #: src/gnome2/search_dialog.c:1761
 msgid "Create new custom range"
-msgstr "Créer de nouvelles limites personnalisées"
+msgstr "Crée de nouvelles limites personnalisées"
 
 #: src/gnome2/search_dialog.c:1773 src/gnome2/search_dialog.c:1958
 #: src/gnome2/sidebar.c:902
@@ -1973,11 +1961,11 @@ msgstr "Enregistrer la liste"
 
 #: src/gnome2/search_dialog.c:1774
 msgid "Save custom range"
-msgstr "Enregistrer la seléction personnalisée"
+msgstr "Enregistre la sélection personnalisée"
 
 #: src/gnome2/search_dialog.c:1793
 msgid "Delete selected range"
-msgstr "Supprimer la selection"
+msgstr "Supprime la sélection"
 
 #: src/gnome2/search_dialog.c:1838
 msgid "Range Name"
@@ -1997,23 +1985,23 @@ msgstr "Sélections personnalisées"
 
 #: src/gnome2/search_dialog.c:1932
 msgid "Create a new module list"
-msgstr "Créer une nouvelle liste de modules"
+msgstr "Crée une nouvelle liste de modules"
 
 #: src/gnome2/search_dialog.c:1945 src/gnome2/search_dialog.c:2064
 msgid "Clear Module List"
-msgstr "Effacer la liste des modules"
+msgstr "Efface la liste des modules"
 
 #: src/gnome2/search_dialog.c:1946
 msgid "Clear the module list"
-msgstr "Effacer la liste de modules"
+msgstr "Efface la liste de modules"
 
 #: src/gnome2/search_dialog.c:1959
 msgid "Save the module list"
-msgstr "Sauvegarder la liste de modules"
+msgstr "Enregistre la liste des modules"
 
 #: src/gnome2/search_dialog.c:1978
 msgid "Delete the selected list"
-msgstr "Supprimer la liste sélectionnée"
+msgstr "Supprime la liste sélectionnée"
 
 #: src/gnome2/search_dialog.c:2023
 msgid "List Name"
@@ -2021,11 +2009,11 @@ msgstr "Nom de la liste"
 
 #: src/gnome2/search_dialog.c:2065
 msgid "Clear all modules from the list"
-msgstr "Effacer tous les modules de la liste"
+msgstr "Efface tous les modules de la liste"
 
 #: src/gnome2/search_dialog.c:2086
 msgid "Remove the selected module from the list"
-msgstr "Supprimer le module selectionné de la liste"
+msgstr "Supprime le module sélectionné de la liste"
 
 #: src/gnome2/search_dialog.c:2115
 msgid "Custom Lists"
@@ -2099,9 +2087,8 @@ msgid ""
 "Once you have completed these steps, you can always change the settings "
 "later by using the Preferences dialog."
 msgstr ""
-"Comme vous utilisez GnomeSword pour la première fois,. cet assistant va vous "
-"aider à initialiser votre configuration en vous posant quelques questions "
-"très simples.\n"
+"Vous utilisez GnomeSword pour la première fois. Cet assistant va vous "
+"aider à initialiser votre configuration selon vos préférences.\n"
 "\n"
 "Vous pourrez ultérieurement modifier cette configuration à votre gré en "
 "utilisant le menu Préférences de GnomeSword."
@@ -2249,12 +2236,11 @@ msgstr "Visualiseur"
 
 #: src/gnome2/sidebar.c:903
 msgid "Save the search results as bookmarks"
-msgstr "Enregistrer lles résultats de la recherche comme signets"
+msgstr "Enregistre les résultats de la recherche comme signets"
 
 #: src/gnome2/sidebar.c:942
-#, fuzzy
 msgid "Open selected module in a new tab"
-msgstr "Ouvrir le module selectionné dans une nouvelle fenêtre"
+msgstr "Ouvrir le module selectionné dans un nouvel onglet"
 
 #: src/gnome2/sidebar.c:947
 msgid "Open in dialog"
@@ -2298,15 +2284,15 @@ msgstr "Bloc-notes d'étude"
 
 #: src/gnome2/toolbar_nav.c:374
 msgid "Move backwards through history"
-msgstr "Se déplacer en arrière dans l'historique"
+msgstr "Verset précédent dans l'historique"
 
 #: src/gnome2/toolbar_nav.c:380
 msgid "Move foward through history"
-msgstr "Se déplacer en avant dans l'historique"
+msgstr "Verset suivant dans l'historique"
 
 #: src/gnome2/toolbar_nav.c:439
 msgid "Select a Book of the Bible"
-msgstr "Sélectionne un livre de la Bible"
+msgstr "Change de livre"
 
 #: src/gnome2/toolbar_nav.c:454
 msgid "Change Chapter"
@@ -2321,12 +2307,12 @@ msgid ""
 "Enter a Verse reference in Book 1:1 format and press Return or click the Go "
 "to Verse button"
 msgstr ""
-"Saisir une référence de verset et tapez «Entrée» ou cliquez sur «Va au "
-"verset»"
+"Saisir un verset au format <livre> <chap>:<verset>"
+"(ex: Jn 3:16) puis cliquer sur le bouton «Aller à»"
 
 #: src/gnome2/toolbar_nav.c:493
 msgid "Go to verse"
-msgstr "Va au verset"
+msgstr "Affiche le verset"
 
 #~ msgid "in a dialog"
 #~ msgstr "dans une fenêtre"
