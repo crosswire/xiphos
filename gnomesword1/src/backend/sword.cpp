@@ -161,27 +161,28 @@ static char *get_sword_locale(void)
 void backend_init(void)
 {	
 	char *sword_locale = NULL;
+	char *sys_locale = NULL;
 	const char *sword_version = get_sword_version();
 	//ModMap::iterator it; 
 #ifdef DEBUG	
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
-	g_print("%s %s\n", _("System locale is"),
 #endif
-	
+	 
 #ifdef USE_SWORD_CVS
-	LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
+	sys_locale = strdup((char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
 #else		
-	LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+	sys_locale = strdup((char*)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 #endif
 	sword_locale = get_sword_locale();
 #ifdef DEBUG	
+	g_print("%s %s\n", _("System locale is"),sys_locale);
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
-	g_print("%s\n", _("Checking for SWORD Modules"));
-	
+	g_print("%s\n", _("Checking for SWORD Modules"));	
 #endif
 	free((char*)sword_locale);
+	free(sys_locale);
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
