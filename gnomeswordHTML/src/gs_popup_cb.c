@@ -21,7 +21,7 @@
 
 #include <gnome.h>
 #include <gtk/gtk.h>
-#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
@@ -119,33 +119,17 @@ void on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings->formatpercom)
 		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
-	}
+	italicHTML( lookup_widget(MainFrm ,"btnItalic"), lookup_widget(MainFrm ,(gchar *)user_data));
 
 }
 
 //----------------------------------------------------------------------------------------------
 void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar	*buf,
-			tmpbuf[256];
-	
+
 	if (!settings->formatpercom)
 		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-		sprintf(tmpbuf,"<a href=\"%s\">",buf);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
-	}
+	linkHTML(lookup_widget(MainFrm ,(gchar *)user_data));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -168,6 +152,9 @@ void on_greekNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings->formatpercom)
 		return;		//-- do we want formatting?
+	
+	symbolHTML(lookup_widget(MainFrm ,(gchar *)user_data));
+	/*
 	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
 	{
 	  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
@@ -176,6 +163,7 @@ void on_greekNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
 		noteModified = TRUE;
 	}
+	*/
 }
 
 //----------------------------------------------------------------------------------------------
@@ -320,10 +308,8 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
 
-	text = lookup_widget(MainFrm, "textComments");
-	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
-			NULL, NULL,
-			gs_clipboard->str, -1);
+	text = lookup_widget(MainFrm, "htmlComments");
+	pasteHTML(text);
 }
 
 //----------------------------------------------------------------------------------------------

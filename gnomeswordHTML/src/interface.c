@@ -57,6 +57,8 @@ GtkWidget *shortcut_bar, *appbar1;
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
+gint openWidth = 800;
+gint openHight = 600;
 
 #define NUM_SHORTCUT_TYPES 4
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
@@ -389,6 +391,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *hbox2;
 	GtkWidget *hpaned1;
 	GtkWidget *frame9;
+	GtkWidget *frameBible;
 	GtkWidget *swHtmlBible;
 	GtkWidget *notebook3;
 	GtkWidget *vbox22;
@@ -404,7 +407,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *vbox2;
 	GtkWidget *hbox11;
 	GtkWidget *vbox8;
-	GtkWidget *swHtmlPerCom;
+	//GtkWidget *swHtmlPerCom;
 	GtkWidget *sbNotes;
 	GtkWidget *handlebox16;
 	GtkWidget *tbNotes;
@@ -469,7 +472,7 @@ GtkWidget *create_mainwindow(void)
 			    mainwindow);
 	gtk_widget_set_usize(mainwindow, 680, 480);
 	GTK_WIDGET_SET_FLAGS(mainwindow, GTK_CAN_FOCUS);
-	gtk_window_set_default_size(GTK_WINDOW(mainwindow), 680, 480);
+	gtk_window_set_default_size(GTK_WINDOW(mainwindow), openWidth, openHight);
 
 	dock1 = GNOME_APP(mainwindow)->dock;
 	gtk_widget_ref(dock1);
@@ -1016,8 +1019,9 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vpaned1);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vpaned1, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
-	e_paned_set_position(E_PANED(vpaned1), 236);
-
+	//e_paned_set_position(E_PANED(vpaned1), 236);
+	e_paned_set_position (E_PANED(vpaned1), 325);
+	
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox2);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hbox2", hbox2,
@@ -1421,7 +1425,13 @@ GtkWidget *create_mainwindow(void)
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame9", frame9,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame9);
-
+	
+	frameBible = gtk_frame_new(NULL);
+	gtk_widget_ref(frameBible);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frameBible", frameBible,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frameBible);
+	gtk_container_add(GTK_CONTAINER(frame9), frameBible);
 #ifdef USE_SHORTCUTBAR
 	e_paned_pack1(E_PANED(hpaned1), frame9, FALSE, TRUE);
 #else
@@ -1437,7 +1447,7 @@ GtkWidget *create_mainwindow(void)
 				 swHtmlBible,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(swHtmlBible);
-	gtk_container_add(GTK_CONTAINER(frame9), swHtmlBible);
+	gtk_container_add(GTK_CONTAINER(frameBible), swHtmlBible);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlBible),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1555,13 +1565,14 @@ GtkWidget *create_mainwindow(void)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     0), label64);
-
+	
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vbox2", vbox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_container_add(GTK_CONTAINER(notebook3), vbox2);
-
+	gtk_widget_show(vbox2);
+	
 	hbox11 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox11);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hbox11", hbox11,
@@ -1576,7 +1587,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vbox8);
 	gtk_box_pack_start(GTK_BOX(hbox11), vbox8, TRUE, TRUE, 0);
 
-	swHtmlPerCom = gtk_scrolled_window_new(NULL, NULL);
+/*	swHtmlPerCom = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(swHtmlPerCom);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "swHtmlPerCom",
 				 swHtmlPerCom,
@@ -1594,6 +1605,7 @@ GtkWidget *create_mainwindow(void)
 				 sbNotes,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_box_pack_start(GTK_BOX(vbox8), sbNotes, FALSE, FALSE, 0);
+*/
 
 	handlebox16 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox16);
@@ -1606,7 +1618,6 @@ GtkWidget *create_mainwindow(void)
 				       GTK_SHADOW_NONE);
 	gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(handlebox16),
 					   GTK_POS_TOP);
-
 	tbNotes =
 	    gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(tbNotes);

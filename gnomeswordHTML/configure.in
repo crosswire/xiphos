@@ -253,6 +253,7 @@ AM_CONDITIONAL(SPELLING,test "x$have_speller" = xyes)
 AC_OUTPUT([
 Makefile
 macros/Makefile
+html/Makefile
 src/Makefile
 ])
 
