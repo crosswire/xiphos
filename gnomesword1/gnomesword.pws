@@ -6,17 +6,17 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=106
-1=56
-2=74
-3=825
-4=468
-5=1
-6=66
-7=884
-8=73
-9=51
-10=59
+0=102
+1=45
+2=3
+3=620
+4=39
+5=296
+6=68
+7=31
+8=40
+9=1
+10=57
 11=4
 12=89
 
@@ -35,15 +35,22 @@ ShowLocals=true
 11=
 12=
 
+[breakpoints]
+0=3,,1,135832392,0,,gs_gnomesword.c,1226,93,0,IntDisplay,,1019761036,
+1=5,,1,135832392,0,,gs_gnomesword.c,1231,94,0,IntDisplay,,1019761036,
+
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/dictlex.cpp
-1=/home/terry/Projects/gnomesword1/src/main/gs_commentary.c
-2=/home/terry/Projects/gnomesword1/src/main/gs_commentary.h
-3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-4=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-5=/home/terry/Projects/gnomesword1/src/backend/gbs.cpp
-6=/home/terry/Projects/gnomesword1/src/main/gs_gbs.c
-7=/home/terry/Projects/gnomesword/src/sw_sword.cpp
+0=/home/terry/Projects/gnomesword1/src/backend/viewtext.cpp
+1=/home/terry/Projects/gnomesword1/src/backend/interlinear.h
+2=/home/terry/Projects/gnomesword1/src/backend/interlinear.cpp
+3=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+4=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+5=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
+6=/home/terry/Projects/gnomesword1/src/backend/sword.h
+7=/home/terry/Projects/gnomesword1/src/main/gs_interlinear.c
+8=/home/terry/Projects/gnomesword1/src/main/gs_interlinear.h
+9=/home/terry/Projects/gnomesword1/src/main/gs_detach_int.c
+10=/home/terry/Projects/gnomesword1/src/main/Makefile.am
 
 [replace_text]
 0=s->app
@@ -56,21 +63,21 @@ ShowLocals=true
 7=sv->html_viewer_widget
 
 [find_text]
-0=on_mainwindow_destroy
-1=app
-2=shutdownVCSWORD
-3=getCOMM
-4=setupCommSWORD
-5=DefaultVCKey
-6=VCMod
-7=VCMgr
+0=sbook
+1=mdoule_iterator
+2=curChapter
+3=hebrewpage
+4=autoscroll
+5=usepersonalcomments
+6=noteModified
+7=ApplyChange
 
 [find_in_files]
-0=gui_setPageandKey_DL
-1=shutdownSWORD
-2=shutdownviewerSBSW
-3=displaydictlexSBSW
-4=getModlistSW
-5=saveshortcutbarSW
-6=loadshortcutbarSW
-7=save_iconsizeSW
+0=backend_set_global_option
+1=updateIntDlg
+2=usepersonalcomments
+3=g_print
+4=interlinearMod1
+5=updateinterlinearpage
+6=backend_firstInitSWOR
+7=backend_chapter_verse_changed

@@ -49,9 +49,11 @@
 #include "gs_viewtext_dlg.h"
 #include "gs_bookmarks.h"
 #include "gs_detach_int.h"
+#include "gs_interlinear.h"
 #include "support.h"
 
-
+gboolean 
+	autoscroll;  /* is commentary window set to scroll with text window */
 /******************************************************************************
  * externals
 ******************************************************************************/
@@ -64,7 +66,6 @@ extern GtkWidget
 	*htmlCommentaries;
 	
 extern gboolean 
-	autoscroll,  /* is commentary window set to scroll with text window */
 	isrunningSD,    /* is the view dictionary dialog runing */
 	isrunningVC,    /* is the view commentary dialog runing */
 	isrunningVT,    /* is the view text dialog runing */
@@ -333,7 +334,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		update_interlinear_page(settings);
 	else
-		updateIntDlg(settings);
+		update_interlinear_page_detached(settings);
 }	
 		
 
@@ -353,7 +354,7 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		update_interlinear_page(settings);
 	else
-		updateIntDlg(settings);
+		update_interlinear_page_detached(settings);
 }		
 
 /*******************************************************************************
@@ -372,7 +373,7 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		update_interlinear_page(settings);
 	else
-		updateIntDlg(settings);
+		update_interlinear_page_detached(settings);
 }		
 
 /*******************************************************************************
@@ -391,7 +392,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		update_interlinear_page(settings);
 	else
-		updateIntDlg(settings);
+		update_interlinear_page_detached(settings);
 }		
 
 /*******************************************************************************
@@ -410,7 +411,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		update_interlinear_page(settings);
 	else
-		updateIntDlg(settings);
+		update_interlinear_page_detached(settings);
 }
 
 

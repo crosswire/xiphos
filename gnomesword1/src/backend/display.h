@@ -67,16 +67,7 @@ class GtkHTMLChapDisp:public GtkHTMLEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
-class InterlinearDisp:public GtkHTMLEntryDisp { public:
-	InterlinearDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
-	} 
-	virtual char Display(SWModule & imodule);
-};
-
-
-//----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);
-char IntDisplay(SETTINGS *s);
 
 
 #endif /* __SW_DISPLAY_H_ */
