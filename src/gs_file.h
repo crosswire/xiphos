@@ -43,7 +43,6 @@ struct _listitem {
 
 //void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
-void loadFile(GtkWidget * filesel);
 gint setDiretory(void);
 void loadbookmarkarray(void);
 void loadbookmarks_programstart(void);
@@ -53,7 +52,6 @@ void clearquickmarks(void);
 void savequickmark(gchar * item);
 void saveoptions(void);
 void createFiles(void);
-void loadStudyPadFile(gchar * filename);
 GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd);
 GtkWidget *create_fileselectionSave(GSHTMLEditorControlData * ecd);
 

@@ -112,6 +112,7 @@ void replace(GSHTMLEditorControlData *ecd);
 GtkWidget *create_editor(GtkWidget *htmlwidget, GtkWidget *vbox, SETTINGS *s, GSHTMLEditorControlData *necd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData *ecd);
 void savenoteEDITOR(GtkWidget *html_widget);
+gint save_file_program_end(GtkWidget *htmlwidget, gchar * filename);
 gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
 /*** load studypad file ***/
 gint load_file(gchar *filename, GSHTMLEditorControlData * ecd);
@@ -128,4 +129,7 @@ void load_text_from_spell_EDITOR(GtkWidget *text,
 /*** load text from html to speller ***/
 gboolean load_text_for_spell_EDITOR(GtkWidget *text, 
 					GSHTMLEditorControlData * ecd);
+/*** save studypad file ***/
+void on_save_activate(GtkMenuItem * menuitem,
+			     GSHTMLEditorControlData * ecd);
 #endif				/* __GS_HTML_EDITOR_H_ */
