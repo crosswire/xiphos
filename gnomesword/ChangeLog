@@ -1,3 +1,8 @@
+2003-03-25  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.7.9
+	* fixed crash on open with setup druid
+
 2002-12-19  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* bumped to 0.7.7
@@ -822,6 +827,3 @@
 
 2000-05-17  	-added spellchecking - not perfect but seems to work
 		ok in studypad.
-						
-
-
