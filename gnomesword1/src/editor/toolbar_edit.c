@@ -40,12 +40,10 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
-//#include "editor/editor_spell.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
 #include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
-//#include "gui/find_dialog.h"
 
 #include "main/settings.h"
 #include "main/module_dialogs.h"
@@ -94,7 +92,8 @@ insert_image (GtkButton * button, GSHTMLEditorControlData *cd)
 static void
 insert_link_cb (GtkButton * button, GSHTMLEditorControlData *cd)
 {
-	if (cd->properties_dialog)
+	link_insert (cd, NULL);
+	/*if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
 
 	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
@@ -106,6 +105,7 @@ insert_link_cb (GtkButton * button, GSHTMLEditorControlData *cd)
 
 	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
 	gtk_html_edit_properties_dialog_set_page (cd->properties_dialog, GTK_HTML_EDIT_PROPERTY_LINK);
+*/
 }
 
 static void
@@ -116,7 +116,7 @@ insert_rule (GtkButton * button, GSHTMLEditorControlData *cd)
 
 	html_engine_insert_rule (cd->html->engine, 0, 100, 2, FALSE, HTML_HALIGN_LEFT);
 
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-rule-24.png");
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), GTKHTML_DATA_DIR"/icons/insert-rule-24.png");
 
 	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
 						   GTK_HTML_EDIT_PROPERTY_RULE, _("Rule"),
@@ -137,7 +137,7 @@ insert_table (GSHTMLEditorControlData *cd)
 		html_engine_table_set_cols (cd->html->engine, 3);
 		html_engine_table_set_rows (cd->html->engine, 3);
 	}
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-table-24.png");
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), GTKHTML_DATA_DIR"/icons/insert-table-24.png");
 
 	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
 						   GTK_HTML_EDIT_PROPERTY_TABLE, _("Table"),
@@ -550,7 +550,11 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;
-
+	//GtkToolItem *toolitem;
+	//GtkTooltips *tooltips;	
+	//GtkWidget *separatortoolitem;
+	
+	//tooltips = gtk_tooltips_new ();
 
 	/****************************************************** toolbar_edit */
 
@@ -562,6 +566,15 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				      GTK_RELIEF_NONE);*/
 
 	if (ecd->studypad) {
+/*		ecd->btn_new = (GtkWidget*)gtk_tool_button_new_from_stock(GTK_STOCK_NEW);
+		gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+                                             (GtkToolItem*)ecd->btn_new,
+                                             0);
+		gtk_widget_show(ecd->btn_new);
+ 		gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (ecd->btn_new), 
+					tooltips, _("Create a new file"), 
+					NULL);
+*/
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_NEW, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -573,11 +586,22 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("Create a new file"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
-		gtk_widget_show(ecd->btn_new);
 		
 		g_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
 				   G_CALLBACK(new_clicked),
 				   ecd);
+		gtk_widget_show(ecd->btn_new);
+		
+/*		ecd->btn_open = (GtkWidget*)gtk_tool_button_new_from_stock(GTK_STOCK_OPEN);
+		gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+                                             (GtkToolItem*)ecd->btn_open,
+                                             0);
+		gtk_widget_show(ecd->btn_open);
+ 		gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (ecd->btn_open), 
+					tooltips, _("Open a file"), 
+					NULL);
+		gtk_widget_show(ecd->btn_open);
+*/		
 		
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_OPEN, 
@@ -595,6 +619,18 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 		g_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
 				   G_CALLBACK(on_btn_open_clicked),
 				   ecd);
+/*				 
+		ecd->btn_save = (GtkWidget*)gtk_tool_button_new_from_stock(GTK_STOCK_SAVE);
+		gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+                                             (GtkToolItem*)ecd->btn_save,
+                                             0);
+		gtk_widget_show(ecd->btn_save);
+ 		gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (ecd->btn_save), 
+					tooltips, _("Open a file"), 
+					NULL);
+		gtk_widget_show(ecd->btn_save);
+*/		  
+				   
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SAVE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -607,6 +643,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       NULL, tmp_toolbar_icon,
 					       NULL, NULL);
 		gtk_widget_show(ecd->btn_save);
+
 	} else {
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SAVE, 
@@ -640,6 +677,8 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				   (on_btn_delete_clicked), ecd);
 
 	}
+
+	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_PRINT, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -649,327 +688,27 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       _("Print"),
 				       _("Print window contents"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
+
+/*	ecd->btn_print = (GtkWidget*)gtk_tool_button_new_from_stock(GTK_STOCK_PRINT);
+	gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+				     (GtkToolItem*)ecd->btn_print,
+				     0);
+	gtk_widget_show(ecd->btn_print);
+	gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (ecd->btn_print), 
+				tooltips, _("Print window contents"), 
+				NULL);
+*/
 	gtk_widget_show(ecd->btn_print);
 
-	vseparator = gtk_vseparator_new();
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
-				  vseparator, NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_CUT, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_cut =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Cut"), _("Cut"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_cut);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_COPY, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_copy =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Copy"), _("Copy"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_copy);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_PASTE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_paste =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Paste"), _("Paste"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_paste);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_UNDO, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_undo =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Undo"), _("Undo"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_undo);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
-				  vseparator, NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_FIND, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_Find =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Find"),
-				       _("Find in this note"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_Find);
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_FIND_AND_REPLACE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_replace =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Replace"),
-				       _("Find and Replace"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_replace);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
-				  vseparator, NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-image-24.png");
-	
-	//gtk_widget_show(tmp_toolbar_icon);
-	ecd->btn_insert_image =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Insert image"),
-				       _("Insert image at cursor"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_insert_image);
-	
-	
-	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-link-24.png");
-	ecd->btn_insert_link =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Insert link"),
-				       _("Insert link at cursor"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_insert_link);
-	
-	
-	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-rule-24.png");
-	ecd->btn_insert_rule =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Insert rule"),
-				       _("Insert rule at cursor"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_insert_rule);
-
-	
-	
-	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-table-24.png");
-	ecd->btn_insert_table =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Insert table"),
-				       _("Insert table at cursor"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_insert_table);
-
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
-				  vseparator, NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-	
-	
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_SPELL_CHECK, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_spell =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Spell"),
-				       _("Check spelling in this note"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_spell);
-
-#ifdef USE_SPELL
-	gtk_widget_set_sensitive(ecd->btn_spell, 1);
-#else
-	gtk_widget_set_sensitive(ecd->btn_spell, 0);
-#endif
 /*	
-	GtkWidget *btn_insert_image;
-	GtkWidget *btn_insert_link;
-	GtkWidget *btn_insert_rule;
-	GtkWidget *btn_insert_table;
-*/ 
-
-	g_signal_connect(GTK_OBJECT(ecd->btn_insert_image), "clicked",
-			   G_CALLBACK(insert_image), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_insert_link), "clicked",
-			   G_CALLBACK(insert_link_cb), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_insert_rule), "clicked",
-			   G_CALLBACK(insert_rule), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_insert_table), "clicked",
-			   G_CALLBACK(insert_table_cb), ecd);
-			   
-	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
-			   G_CALLBACK(on_btn_save_clicked), ecd);
-
-	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
-			   G_CALLBACK(on_btn_print_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
-			   G_CALLBACK(on_btn_cut_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_copy), "clicked",
-			   G_CALLBACK(on_btn_copy_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_paste), "clicked",
-			   G_CALLBACK(on_btn_paste_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_undo), "clicked",
-			   G_CALLBACK(on_btn_undo_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_Find), "clicked",
-			   G_CALLBACK(on_btn_Find_clicked), ecd);
-	g_signal_connect(GTK_OBJECT(ecd->btn_replace), "clicked",
-			   G_CALLBACK(on_btn_replace_clicked),
-			   ecd);
-#ifdef USE_SPELL
-	g_signal_connect(GTK_OBJECT(ecd->btn_spell), "clicked",
-			   G_CALLBACK(spell_check_cb), ecd);
-#endif
-	/************************************************** end toolbar_edit */
-
-	return ecd->toolbar_edit;
-}
-
-
-/******************************************************************************
- * Name
- *   create_toolbar_edit
- *
- * Synopsis
- *   #include "toolbar_edit.h"
- *
- *   GtkWidget *create_toolbar_edit (GSHTMLEditorControlData *cd)
- *
- * Description
- *   create the edit toolbar
- *
- * Return value
- *   GtkWidget *
- */
-
-static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
-{
-	//GSHTMLEditorControlData *ecd = d->editor;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *vseparator;
-
-#ifdef DEBUG
-	g_message("create_note_toolbar_edit");
-#endif
-	/****************************************************** toolbar_edit */
-
-	ecd->toolbar_edit =
-	    gtk_toolbar_new();
-	gtk_widget_show(ecd->toolbar_edit);
-	gtk_toolbar_set_style (GTK_TOOLBAR (ecd->toolbar_edit), 
-				GTK_TOOLBAR_ICONS);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(ecd->toolbar_edit),
-				      GTK_RELIEF_NONE);*/
-
-	if (ecd->studypad) {
-		tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_NEW, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
-						(ecd->toolbar_edit)));
-		ecd->btn_new =
-		    gtk_toolbar_append_element(GTK_TOOLBAR
-					       (ecd->toolbar_edit),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("New"),
-					       _("Create a new file"), NULL,
-					       tmp_toolbar_icon, NULL,
-					       NULL);
-		gtk_widget_show(ecd->btn_new);
-		
-		g_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
-				   G_CALLBACK(new_clicked),
-				   ecd);
-		
-		tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_OPEN, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
-						(ecd->toolbar_edit)));
-		ecd->btn_open =
-		    gtk_toolbar_append_element(GTK_TOOLBAR
-					       (ecd->toolbar_edit),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Open"),
-					       _("Open a file"), NULL,
-					       tmp_toolbar_icon, NULL,
-					       NULL);
-		gtk_widget_show(ecd->btn_open);
-
-		g_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
-				   G_CALLBACK(on_btn_open_clicked),
-				   ecd);
-		tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_SAVE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
-						(ecd->toolbar_edit)));
-		ecd->btn_save =
-		    gtk_toolbar_append_element(GTK_TOOLBAR
-					       (ecd->toolbar_edit),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Save"),
-					       _("Save the current file"),
-					       NULL, tmp_toolbar_icon,
-					       NULL, NULL);
-		gtk_widget_show(ecd->btn_save);
-	} else {
-		tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_SAVE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-		ecd->btn_save =
-		    gtk_toolbar_append_element(GTK_TOOLBAR
-					       (ecd->toolbar_edit),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Save"),
-					       _("Save note"), NULL,
-					       tmp_toolbar_icon, NULL,
-					       NULL);
-		gtk_widget_show(ecd->btn_save);
-
-		tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_DELETE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-		ecd->btn_delete =
-		    gtk_toolbar_append_element(GTK_TOOLBAR
-					       (ecd->toolbar_edit),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Delete"),
-					       _("Delete note"), NULL,
-					       tmp_toolbar_icon, NULL,
-					       NULL);
-		gtk_widget_show(ecd->btn_delete);
-
-		g_signal_connect(GTK_OBJECT(ecd->btn_delete),
-				   "clicked",
-				   G_CALLBACK
-				   (on_btn_delete_clicked), 
-				   ecd);
-
-	}
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_PRINT, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
-	ecd->btn_print =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Print"),
-				       _("Print window contents"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(ecd->btn_print);
+	separatortoolitem = (GtkWidget*) gtk_separator_tool_item_new ();
+	gtk_widget_show (separatortoolitem);
+	gtk_separator_tool_item_set_draw((GtkSeparatorToolItem*)separatortoolitem,
+                                             TRUE);
+	gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+				     (GtkToolItem*)separatortoolitem,
+				     0);
+*/
 
 	vseparator = gtk_vseparator_new();
 	gtk_widget_show(vseparator);
@@ -977,6 +716,7 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 				  vseparator, NULL, NULL);
 	gtk_widget_set_usize(vseparator, 5, 7);
 
+	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_CUT, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -985,7 +725,19 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Cut"), _("Cut"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
+
+/*	ecd->btn_cut = (GtkWidget*)gtk_tool_button_new_from_stock(GTK_STOCK_CUT);
+	gtk_toolbar_insert(GTK_TOOLBAR (ecd->toolbar_edit),
+				     (GtkToolItem*)ecd->btn_cut,
+				     0);
 	gtk_widget_show(ecd->btn_cut);
+	gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (ecd->btn_cut), 
+				tooltips, _("Cut"), 
+				NULL);
+*/
+	gtk_widget_show(ecd->btn_cut);
+
+
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_COPY, 
@@ -1050,7 +802,6 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
 				  vseparator, NULL, NULL);
 	gtk_widget_set_usize(vseparator, 5, 7);
-	
 
 	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-image-24.png");
 	
@@ -1101,7 +852,8 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 				  vseparator, NULL, NULL);
 	gtk_widget_set_usize(vseparator, 5, 7);
 	
-
+	
+	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SPELL_CHECK, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -1118,10 +870,6 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 #else
 	gtk_widget_set_sensitive(ecd->btn_spell, 0);
 #endif
-
-	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
-			   G_CALLBACK(on_btn_save_clicked), ecd);
-
 	g_signal_connect(GTK_OBJECT(ecd->btn_insert_image), "clicked",
 			   G_CALLBACK(insert_image), ecd);
 	g_signal_connect(GTK_OBJECT(ecd->btn_insert_link), "clicked",
@@ -1131,6 +879,9 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 	g_signal_connect(GTK_OBJECT(ecd->btn_insert_table), "clicked",
 			   G_CALLBACK(insert_table_cb), ecd);
 			   
+	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
+			   G_CALLBACK(on_btn_save_clicked), ecd);
+
 	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
 			   G_CALLBACK(on_btn_print_clicked), ecd);
 	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
@@ -1154,8 +905,6 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 
 	return ecd->toolbar_edit;
 }
-
-
 
 
 /******************************************************************************
@@ -1178,9 +927,5 @@ GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData * cd)
 {
 	g_return_val_if_fail(cd->html != NULL, NULL);
 	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
-
-	if(cd->personal_comments)
-		return create_note_toolbar_edit(cd);
-	else
-		return create_toolbar_edit(cd);
+	return create_toolbar_edit(cd);
 }

@@ -147,13 +147,15 @@ spell_set_language (GtkHTML *html, const gchar *language, gpointer data)
 void
 spell_init (GtkHTML *html, GSHTMLEditorControlData *cd)
 {
-/*	CORBA_sequence_GNOME_Spell_Language *language_seq;
-	gint i;
-	GNOME_Spell_StringSeq *seq;
-
+/*
 #ifdef DEBUG
 	g_message("spell_init");
 #endif
+
+	CORBA_sequence_GNOME_Spell_Language *language_seq;
+	gint i;
+	GNOME_Spell_StringSeq *seq;
+
 	if (!bonobo_ui_init ("test-spell", VERSION, NULL, NULL))
 		g_error (_("I could not initialize Bonobo"));
 	bonobo_activate ();
@@ -345,6 +347,7 @@ spell_check_dialog (GSHTMLEditorControlData *cd, gboolean whole_document)
 	gtk_widget_destroy (dialog);
 	bonobo_object_release_unref (cd->spell_control_pb, NULL);
 	cd->spell_control_pb = CORBA_OBJECT_NIL;
+
 
  end:
 	if (!inline_spelling)

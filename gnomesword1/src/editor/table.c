@@ -224,10 +224,10 @@ table_widget (GtkHTMLEditTableProperties *d)
 	table_page = glade_xml_get_widget (xml, "table_page");
 
 	gtk_box_pack_start (GTK_BOX (glade_xml_get_widget (xml, "table_rows_hbox")),
-			    gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/table-row-16.png"),
+			    gtk_image_new_from_file (GTKHTML_DATA_DIR "/icons/table-row-16.png"),
 			    FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (glade_xml_get_widget (xml, "table_cols_hbox")),
-			    gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/table-column-16.png"),
+			    gtk_image_new_from_file (GTKHTML_DATA_DIR "/icons/table-column-16.png"),
 			    FALSE, FALSE, 0);
 
 	d->combo_bg_color = color_combo_new (NULL, _("Transparent"), NULL,

@@ -328,15 +328,17 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 						if (vkey) {
 							// printf("URL =
 							// %s\n",URL::encode(vkey->getText()).c_str());
-							char
-							                ch = ((tag.getAttribute("type")
-									       && ((!strcmp(tag.getAttribute("type"),
+							char ch = ((tag.getAttribute("type")
+									      && ((!strcmp(tag.getAttribute("type"),
 											    "crossReference"))
-										   || (!strcmp(tag.getAttribute("type"),
-											       "x-cross-ref")))) ? 'x' : 'n');
+									      || (!strcmp(tag.getAttribute("type"),
+											     "x-cross-ref")))) ? 'x' : 'n');
 							buf.appendFormatted
 							    ("<a href=\"passagestudy.jsp?action=showNote&type=%c&value=%s&module=%s&passage=%s\"><small><sup>*%c</sup></small></a> ",
-							     ch, URL::encode(footnoteNumber.c_str()).c_str(), URL::encode(u->version.c_str()).c_str(), URL::encode(vkey->getText()).c_str(), ch);
+							     	ch, 
+								URL::encode(footnoteNumber.c_str()).c_str(), 
+								URL::encode(u->version.c_str()).c_str(), 
+								URL::encode(vkey->getText()).c_str(), ch);
 						}
 					}
 				}
@@ -349,16 +351,29 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		// <p> paragraph tag
 		else if (!strcmp(tag.getName(), "p")) {
 			if ((!tag.isEndTag()) && (!tag.isEmpty())) {	// non-empty 
-				// 
-				// 
-				// start
-				// tag
 				buf += (settings.versestyle)?"<!p>":"<p>";
 			} else if (tag.isEndTag() && !settings.versestyle) {	// end tag
 				buf += "</p>";
 				userData->supressAdjacentWhitespace = true;
 			} else {	// empty paragraph break marker
-				buf += (settings.versestyle)?"<!p>":"<p>";
+				if(!strcmp(u->version.c_str(), "KJV")) {
+					//g_message(u->version.c_str());
+					VerseKey       *vkey;
+					// see if we have a VerseKey * or descendant
+					SWTRY {
+						vkey = SWDYNAMIC_CAST(VerseKey, u->key);
+					}
+					SWCATCH(...) {
+					}
+					if (vkey) {					
+						int curBook = vkey->Book();
+						int curTestament = vkey->Testament();
+					
+						if(curTestament == 2 && curBook < 6)
+							buf += (settings.versestyle)?"<!p>":"<p>";
+					}
+				} else 
+					buf += (settings.versestyle)?"<!p>":"<p>";
 				userData->supressAdjacentWhitespace = true;
 			}
 		}

@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/tee
+project.configure.options=--prefix=/home/tee --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -105,7 +105,6 @@ module.include.files=\
 	src/gui/shortcutbar_search.h\
 	src/gui/shortcutbar_viewer.h\
 	src/gui/studypad.h\
-	src/gui/studypad_dialog.h\
 	src/gui/toolbar_nav.h\
 	src/gui/utilities.h\
 	src/main/bibletext.h\
@@ -197,7 +196,6 @@ module.source.files=\
 	src/gnome2/search_dialog.c\
 	src/gnome2/setup_druid.c\
 	src/gnome2/studypad.c\
-	src/gnome2/studypad_dialog.c\
 	src/gnome2/splash.c\
 	src/gnome2/toolbar_nav.c\
 	src/gnome2/utilities.c\
@@ -238,12 +236,9 @@ module.source.files=\
 	src/editor/gi-color-palette.c\
 	src/editor/gi-colors.c\
 	src/editor/gi-combo-box.c\
-	src/editor/note_toolbar_edit.c\
-	src/editor/note_toolbar_style.c\
 	src/editor/spell.c\
 	src/editor/toolbar_edit.c\
 	src/editor/toolbar_style.c\
-	src/editor/note_editor.c\
 	src/editor/popup.c\
 	src/editor/properties.c\
 	src/editor/dialog.c\
@@ -254,10 +249,6 @@ module.source.files=\
 	src/editor/cell.c\
 	src/editor/e-html-utils.c\
 	src/editor/engine.c\
-	src/editor/gnome-gtkhtml-editor.c\
-	src/editor/html-stream-mem.c\
-	src/editor/html-stream-mem.h\
-	src/editor/htmlsourceview.c\
 	src/editor/image.c\
 	src/editor/paragraph.c\
 	src/editor/persist-file.c\

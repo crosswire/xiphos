@@ -40,6 +40,12 @@
 #include "editor/link.h"
 #include "editor/utils.h"
 
+#include "gui/dialog.h"
+
+#include "main/settings.h"
+#include "main/xml.h"
+
+
 struct _GtkHTMLEditLinkProperties {
 	GSHTMLEditorControlData *cd;
 	GtkWidget *entry_description;
@@ -171,10 +177,107 @@ test_url_clicked (GtkWidget *w, GtkHTMLEditLinkProperties *d)
 		gnome_url_show (url, NULL);
 }
 
-static GtkWidget *
-link_widget (GtkHTMLEditLinkProperties *d, gboolean insert)
+
+/******************************************************************************
+ * Name
+ *  set_link_to_module
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void set_link_to_module(gchar * linkref, gchar * linkmod,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    set link to module and key
+ *
+ * Return value
+ *   void
+ */
+
+static void set_link(gchar * linktext, gchar * linkref, 
+			       gchar * linkmod, GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *link_page, *button;
+	const gchar *url;
+	const gchar *text;
+	gchar *target;
+	gchar *url_copy;
+	gchar buf[256];
+	//HTMLEngine *e;
+	gchar *new_link = NULL;
+
+	//e = ecd->html->engine;
+	
+	if (linkmod && strlen(linkmod))
+		sprintf(buf, "sword://%s/%s", linkmod, linkref);
+	else
+		sprintf(buf, "sword:///%s", linkref);
+
+	url = buf;
+	text = linkref;
+	if (url && text && *url && *text) {
+		target = strchr(url, '#');
+		url_copy =
+		    target ? g_strndup(url,
+				       target - url) : g_strdup(url);
+		new_link = g_strdup_printf("<a href=\"%s\">%s</a>",url_copy,linktext);
+		gtk_html_insert_html(ecd->html,new_link);
+		g_free(url_copy);
+		g_free(new_link);
+	}
+}
+
+
+static 
+GtkWidget *link_widget (GSHTMLEditorControlData *cd, gboolean insert)
+{
+	gint test;
+	GS_DIALOG *info;
+	GString *str;
+	
+	str = g_string_new(NULL);
+	g_string_printf(str,"<span weight=\"bold\">%s</span>",_("Add reference Link"));
+
+	info = gui_new_dialog();
+	//info->stock_icon = GTK_STOCK_ADD;
+	info->label_top = str->str;
+	info->text1 = g_strdup("");
+	info->label1 = N_("Link text: ");
+	info->text2 = g_strdup("");
+	info->label2 = N_("Reference: ");
+	info->text3 = g_strdup("");
+	info->label3 = N_("Module: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	
+	 // * get selected text *
+	
+	if (html_engine_is_selection_active(cd->html->engine)) {
+		gchar *buf;
+		buf =
+		    html_engine_get_selection_string(cd->html->engine);
+		info->text1 = g_strdup(buf);
+		info->text2 = g_strdup(buf);
+	}
+	info->text3 = g_strdup(xml_get_value("modules", "bible"));//settings.MainWindowModule);
+	// *** open dialog to get name for list ***
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {
+		if (strlen(info->text1) > 0) {
+			set_link(info->text1, info->text2, info->text3, cd);
+			cd->changed = TRUE;
+			gui_update_statusbar(cd);
+		}
+	}
+	g_free(info->text1);
+	g_free(info->text2);
+	g_free(info->text3);
+	g_free(info);
+	g_string_free(str,TRUE);
+	
+	
+	
+/*	GtkWidget *link_page, *button;
 	GladeXML *xml;
 
 	xml = glade_xml_new (GTKHTML_DATA_DIR"/gtkhtml-editor-properties.glade", "link_page", NULL);
@@ -197,66 +300,32 @@ link_widget (GtkHTMLEditLinkProperties *d, gboolean insert)
 
 	d->label_description = glade_xml_get_widget (xml, "label_description");
 
-	/*GtkWidget *vbox, *hbox, *button, *frame, *f1;
-
-	vbox = gtk_vbox_new (FALSE, 18);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
-
-	data->entry_text = gtk_entry_new ();
-	data->entry_url  = gtk_entry_new ();
-
-	gtk_box_pack_start (GTK_BOX (vbox), editor_hig_vbox (_("Link Text"), data->entry_text), FALSE, FALSE, 0);
-
-	if (html_engine_is_selection_active (cd->html->engine)) {
-		gchar *str;
-
-		str = html_engine_get_selection_string (cd->html->engine);
-		gtk_entry_set_text (GTK_ENTRY (data->entry_text), str);
-		g_free (str);
-	}
-
-	hbox = gtk_hbox_new (FALSE, 5);
-	editor_check_stock ();
-	button = gtk_button_new_from_stock (GTKHTML_STOCK_TEST_URL);
-	gtk_box_pack_start (GTK_BOX (hbox), data->entry_url, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), editor_hig_vbox (_("Click Will Follow This URL"), hbox), FALSE, FALSE, 0);
-
-	if (!insert) {
-		gtk_widget_set_sensitive (data->entry_text, FALSE);
-		set_ui (data);
-	}
-
-	g_signal_connect (data->entry_text, "changed", G_CALLBACK (changed), data);
-	g_signal_connect (data->entry_url, "changed", G_CALLBACK (changed), data);
-	g_signal_connect (button, "clicked", G_CALLBACK (test_clicked), data);*/
+	
 
 	gtk_widget_show_all (link_page);
 	link_set_ui (d);
-
-	return link_page;
+*/
+//	return link_page;
 }
 
-GtkWidget *
-link_insert (GSHTMLEditorControlData *cd, gpointer *set_data)
+GtkWidget *link_insert (GSHTMLEditorControlData *cd, gpointer *set_data)
 {
-	GtkHTMLEditLinkProperties *data = g_new0 (GtkHTMLEditLinkProperties, 1);
+	//GtkHTMLEditLinkProperties *data = g_new0 (GtkHTMLEditLinkProperties, 1);
 
-	*set_data = data;
-	data->cd = cd;
+	//*set_data = data;
+	//data->cd = cd;
 
-	return link_widget (data, TRUE);
+	return link_widget (cd, TRUE);
 }
 
-GtkWidget *
-link_properties (GSHTMLEditorControlData *cd, gpointer *set_data)
+GtkWidget *link_properties (GSHTMLEditorControlData *cd, gpointer *set_data)
 {
-	GtkHTMLEditLinkProperties *data = g_new0 (GtkHTMLEditLinkProperties, 1);
+	//GtkHTMLEditLinkProperties *data = g_new0 (GtkHTMLEditLinkProperties, 1);
 
-	*set_data = data;
-	data->cd = cd;
+	//*set_data = data;
+	//data->cd = cd;
 
-	return link_widget (data, FALSE);
+	return link_widget (cd, FALSE);
 }
 
 void

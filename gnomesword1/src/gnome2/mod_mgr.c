@@ -2208,7 +2208,7 @@ GtkWidget *create_dialog(void)
 	/* add columns to the tree view */
 	add_columns(GTK_TREE_VIEW(treeview), FALSE);
 
-
+//dlg-un.png
 	progressbar = gtk_progress_bar_new();
 	gtk_widget_show(progressbar);
 	gtk_box_pack_start(GTK_BOX(vbox1), progressbar, FALSE, FALSE,
