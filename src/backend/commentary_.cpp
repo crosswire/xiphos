@@ -224,8 +224,7 @@ static SWModule *backend_get_module(char *modname)
  *   void
  */
  
-void backend_new_display_commentary(GtkWidget * html, char *modname,
-							SETTINGS * s)
+void backend_new_display_commentary(GtkWidget * html, char *modname)
 {
 	GList *tmp = NULL;
 	BE_COMM *c;
@@ -234,7 +233,7 @@ void backend_new_display_commentary(GtkWidget * html, char *modname,
 	while (tmp != NULL) {
 		c = (BE_COMM *) tmp->data;
 		if (!strcmp(c->mod->Name(), modname)) {
-			c->dlDisp = new GtkHTMLEntryDisp(html, s);
+			c->dlDisp = new GtkHTMLEntryDisp(html);
 			c->mod->Disp(c->dlDisp);
 		}
 		tmp = g_list_next(tmp);

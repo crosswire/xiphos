@@ -49,11 +49,163 @@
 /******************************************************************************
  *  externs  
  */
+extern GdkPixmap *pixmap1;
+extern GdkPixmap *pixmap2;
+extern GdkPixmap *pixmap3;
+extern GdkBitmap *mask1;
+extern GdkBitmap *mask2;
+extern GdkBitmap *mask3;
 
-extern gboolean in_url;
-extern GBS_DATA *cur_g;
-extern gboolean gbs_find_running;
+/******************************************************************************
+ *  static   
+ */
+static void add_node_children(GtkCTreeNode *node, gchar *bookname,
+					unsigned long offset);
+/* list of gbs data structures */
+static GList *gbs_list;		
+static GBS_DATA *cur_g;
+static gboolean in_url;
+static gboolean gbs_find_running;
 
+/******************************************************************************
+ * Name
+ *  add_node_gbs
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   GtkCTreeNode *add_node_gbs(NODEDATA *data)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GtkCTreeNode*
+ */ 
+ 
+static GtkCTreeNode *add_node_gbs(NODEDATA * data)
+{
+	GtkCTreeNode *retval;
+
+	retval = gtk_ctree_insert_node(GTK_CTREE(settings.ctree_widget_books),
+				       data->parent,
+				       data->sibling,
+				       data->buf,
+				       3,
+				       data->pixmap1,
+				       data->mask1,
+				       data->pixmap2,
+				       data->mask2,
+				       data->is_leaf, data->expanded);
+	return retval;
+}
+		
+/******************************************************************************
+ * Name
+ *  add_node_children
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void add_node_children(GtkCTreeNode *node, gchar *bookname,
+ *   				unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void add_node_children(GtkCTreeNode *node, gchar *bookname,
+		unsigned long offset)
+{
+	gchar buf[256];
+	gchar *tmpbuf;
+	GtkCTreeNode *tmp_parent_node = node;
+	NODEDATA nodedata, *p_nodedata;
+
+	p_nodedata = &nodedata;
+	p_nodedata->sibling = NULL;
+	p_nodedata->buf[1] = bookname;
+
+	if (gbs_treekey_first_child(bookname, offset)) {
+		offset = gbs_get_treekey_offset(bookname);
+		sprintf(buf, "%lu", offset);
+		p_nodedata->parent = node;
+		p_nodedata->buf[2] = buf;
+		tmpbuf =
+		    gbs_get_treekey_local_name(bookname, offset);
+		p_nodedata->buf[0] = (gchar*)tmpbuf;
+		if (gbs_treekey_has_children(bookname, offset)) {
+			p_nodedata->pixmap1 = pixmap1;
+			p_nodedata->mask1 = mask1;
+			p_nodedata->pixmap2 = pixmap2;
+			p_nodedata->mask2 = mask2;
+			p_nodedata->is_leaf = FALSE;
+			p_nodedata->expanded = FALSE;
+		} else {
+			p_nodedata->pixmap1 = pixmap3;
+			p_nodedata->mask1 = mask3;
+			p_nodedata->pixmap2 = NULL;
+			p_nodedata->mask2 = NULL;
+			p_nodedata->is_leaf = TRUE;
+			p_nodedata->expanded = FALSE;
+		}
+		node = add_node_gbs(p_nodedata);
+		free(tmpbuf);
+	}
+
+	while (treekey_next_sibling(bookname, offset)) {
+		offset = gbs_get_treekey_offset(bookname);
+		sprintf(buf, "%lu", offset);
+		p_nodedata->parent = tmp_parent_node;
+		p_nodedata->buf[2] = buf;
+		tmpbuf =
+		    gbs_get_treekey_local_name(bookname, offset);
+		p_nodedata->buf[0] = (gchar*)tmpbuf;
+		if (gbs_treekey_has_children(bookname, offset)) {
+			p_nodedata->pixmap1 = pixmap1;
+			p_nodedata->mask1 = mask1;
+			p_nodedata->pixmap2 = pixmap2;
+			p_nodedata->mask2 = mask2;
+			p_nodedata->is_leaf = FALSE;
+			p_nodedata->expanded = FALSE;
+		} else {
+			p_nodedata->pixmap1 = pixmap3;
+			p_nodedata->mask1 = mask3;
+			p_nodedata->pixmap2 = NULL;
+			p_nodedata->mask2 = NULL;
+			p_nodedata->is_leaf = TRUE;
+			p_nodedata->expanded = FALSE;
+		}
+		node = add_node_gbs(p_nodedata);
+		free(tmpbuf);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *  gui_set_book_page_and_key
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void gui_set_book_page_and_key(gint page_num, gchar * key)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void gui_set_book_page_and_key(gint page_num, gchar * key)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs),
+			      page_num);
+	display_gbs(page_num, key);
+}
 
 /******************************************************************************
  * Name
@@ -104,7 +256,7 @@ void gui_set_gbs_frame_label(GBS_DATA *g)
 static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 			gint column, GdkEvent * event, GBS_DATA * gbs)
 {
-	gchar *bookname, *nodename, *offset;
+	gchar *bookname, *nodename, *offset, *key;
 	GtkCTreeNode *treeNode;
 	
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
@@ -126,7 +278,13 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
 					 treeNode);
 		}
-		strcpy(settings.book_key, get_book_key(gbs->booknum));
+		key = get_book_key(gbs->booknum);
+		if(key) {
+			strcpy(settings.book_key, key);
+			free(key);
+		} else {
+			settings.book_key[0] = '\0';
+		}		
 	} else {
 		settings.book_key[0] = '\0';
 	}
@@ -163,21 +321,6 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	
 	gui_set_gbs_frame_label(g);
 	
-	//-- change tab label to current book name
-	/*
-	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
-					(settings.workbook_lower),
-					gtk_notebook_get_nth_page
-					(GTK_NOTEBOOK
-					 (settings.workbook_lower), 1),
-					g->bookName);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (settings.workbook_lower),
-					  1), g->bookName);
-					  */
 	/*
 	 *  get the book key and store in settings.book_key
 	 *  for adding bookmarks
@@ -185,7 +328,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	key = get_book_key(g->booknum);
 	if(key) {
 		strcpy(settings.book_key, key);
-		g_free(key);
+		free(key);
 	} else {
 		settings.book_key[0] = '\0';
 	}
@@ -244,7 +387,7 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 	gchar *key = get_book_key(gbs->booknum);
 	if(key){
 		add_bookmark_to_tree(NULL, gbs->bookName, key);
-		g_free(key);
+		free(key);
 	}
 }
 
@@ -935,4 +1078,159 @@ void gui_create_gbs_pane(gchar *modName, gint count, GBS_DATA *p_gbs)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),
 			   p_gbs);
+}
+
+/******************************************************************************
+ * Name
+ *  add_book_to_ctree
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void add_book_to_ctree(GtkWidget * ctree, gchar * bookName)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void add_book_to_ctree(GtkWidget * ctree, gchar * bookName)
+{
+
+	GtkCTreeNode *rootnode;
+	gchar *buf[3];
+
+	buf[0] = bookName;
+	buf[1] = bookName;
+	buf[2] = "0";
+	rootnode = gtk_ctree_insert_node(GTK_CTREE(ctree),
+					 NULL, NULL, buf, 3, pixmap1,
+					 mask1, pixmap2, mask2, FALSE,
+					 FALSE);
+
+}
+
+/******************************************************************************
+ * Name
+ *  set_gbs_page
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void set_gbs_page(gchar * modname, GList * comm_list)	
+ *
+ * Description
+ *    change gbs page without changing key
+ *
+ * Return value
+ *   void
+ */
+ 
+static void set_gbs_page(gchar * book_name, GList * gbs_list)
+{
+	gint page = 0;
+	GBS_DATA *g = NULL;
+
+	gbs_list = g_list_first(gbs_list);
+	while (gbs_list != NULL) {
+		g = (GBS_DATA *) gbs_list->data;
+		if (!strcmp(g->bookName, book_name))
+			break;
+		++page;
+		gbs_list = g_list_next(gbs_list);
+	}
+		
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs), page);
+	gui_set_gbs_frame_label(g);
+		
+	settings.book_last_page = page;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+				   settings.book_tabs);
+}
+
+/******************************************************************************
+ * Name
+ *  gui_setup_gbs
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void gui_setup_gbs(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void gui_setup_gbs(GList *mods)
+{
+	GtkWidget *popupmenu;
+	gint count = 0;
+	GList *tmp = NULL;
+	gchar *bookname;
+	GBS_DATA *gbs;
+	
+	gbs_list = NULL;
+	gbs_find_running = FALSE;
+	
+	tmp = mods;
+	tmp = g_list_first(tmp);
+	while (tmp != NULL) {
+		bookname = (gchar *)tmp->data;
+		gbs = g_new(GBS_DATA, 1);
+		gbs->bookName = bookname;
+		gbs->searchstring = NULL;
+		gbs->booknum = count;
+		gbs->find_dialog = NULL;	
+		gbs->has_key = module_is_locked(gbs->bookName);
+		gui_create_gbs_pane(bookname, count, gbs);
+		popupmenu = gui_create_pm_gbs(gbs);
+		gnome_popup_menu_attach(popupmenu, gbs->html, NULL);
+		new_gbs_display(gbs->html, gbs->bookName);
+		add_book_to_ctree(gbs->ctree, gbs->bookName);
+		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
+		++count;
+		tmp = g_list_next(tmp);
+	}
+
+	gtk_signal_connect(GTK_OBJECT(settings.notebook_gbs), "switch_page",
+			   GTK_SIGNAL_FUNC(on_notebook_gbs_switch_page),
+			   gbs_list);
+	
+		
+	set_gbs_page(settings.BookWindowModule, gbs_list);
+	g_list_free(tmp);
+}
+
+/******************************************************************************
+ * Name
+ *  gui_shutdown_gbs
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void gui_shutdown_gbs(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void gui_shutdown_gbs(void)
+{
+	gbs_list = g_list_first(gbs_list);
+	while (gbs_list != NULL) {
+		GBS_DATA *g = (GBS_DATA *) gbs_list->data;
+		if (g->find_dialog)
+			g_free(g->find_dialog);	//-- free any search dialogs created
+		g_free((GBS_DATA *) gbs_list->data);
+		gbs_list = g_list_next(gbs_list);
+	}
+	g_list_free(gbs_list);
 }

@@ -30,15 +30,15 @@ extern "C" {
 	
 char *backend_get_book_key(int book_num);
 void backend_display_gbs(gint booknum, gchar * key);
-gboolean backend_treekey_next_sibling(gchar *bookname, unsigned long offset);
-gboolean backend_gbs_treekey_has_children(gchar *bookname,
+int backend_treekey_next_sibling(gchar *bookname, unsigned long offset);
+int backend_gbs_treekey_has_children(gchar *bookname,
 		unsigned long offset);
 char *backend_gbs_get_treekey_local_name(gchar *bookname,
 		unsigned long offset);
 unsigned long backend_gbs_get_treekey_offset(gchar *bookname);
-void backend_new_gbs_display(GtkWidget *html, char *bookName, SETTINGS *s);
-gboolean backend_gbs_treekey_first_child(char *bookname, unsigned long offset);
-gboolean backend_display_row_gbs(gint booknum, gchar *offset);
+void backend_new_gbs_display(GtkWidget *html, char *bookName);
+int backend_gbs_treekey_first_child(char *bookname, unsigned long offset);
+int backend_display_row_gbs(gint booknum, gchar *offset);
 void backend_setup_books(SETTINGS *s);
 void backend_shutdown_books(void);
 

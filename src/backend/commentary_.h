@@ -31,8 +31,7 @@ extern "C" {
 void backend_display_book_heading(gint modnum);	
 void backend_display_chap_heading(gint modnum);
 const char *backend_nav_commentary(gint modnum, gint direction);
-void backend_new_display_commentary(GtkWidget *html, char *modname,
-		SETTINGS *s);
+void backend_new_display_commentary(GtkWidget *html, char *modname);
 void backend_setup_commentary( SETTINGS * s );
 void backend_shutdown_commentary( void );
 void backend_display_commentary( int modnnum, gchar * key );

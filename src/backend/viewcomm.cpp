@@ -63,7 +63,7 @@ void backend_setup_viewcomm(GtkWidget * text)
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
-	display = new GtkHTMLEntryDisp(text, &settings);
+	display = new GtkHTMLEntryDisp(text);
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Commentaries")) {

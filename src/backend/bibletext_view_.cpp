@@ -66,7 +66,7 @@ void backend_setup_viewtext(GtkWidget * text)
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
-	dispaly = new GtkHTMLChapDisp(text, &settings);
+	dispaly = new GtkHTMLChapDisp(text);
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
