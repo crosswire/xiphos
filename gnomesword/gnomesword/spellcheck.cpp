@@ -32,6 +32,7 @@
 #include "spellcheck.h"
 #include "callback.h"
 #include "support.h"
+#include "dialogs.h"
 
 using namespace aspell;
 using namespace autil;

@@ -79,10 +79,13 @@ void
 resultsListSWORD	  (GtkWidget *searchFrm, gint row, gint column);
 
 void
+savelistinfo							(GtkWidget *list);
+
+void
 setupSearchDlg		   (GtkWidget *searchDlg);
 
 void
-strongsSWORD		  (bool choice);
+strongsSWORD		  	(bool choice);
 
 void
 addBookmark				(void);

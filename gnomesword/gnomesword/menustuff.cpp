@@ -25,6 +25,7 @@
 #include <gnome.h>
 #include "menustuff.h"
 #include "callback.h"
+#include "dialogs.h"
 
 //extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
 
