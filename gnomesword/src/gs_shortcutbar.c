@@ -103,7 +103,10 @@ void showSBGroup(SETTINGS * s, gint groupnum)
 {
 	EShortcutBar *bar1;
 	if(!s->showshortcutbar) {
+		gint biblepanesize;
+		biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
 		e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
+		e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")), biblepanesize);
 		s->showshortcutbar = TRUE;	
 	}
 	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
@@ -881,7 +884,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameTB", frameTB,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frameTB);
-	gtk_box_pack_start(GTK_BOX(vboxVL), frameTB, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vboxVL), frameTB, FALSE, TRUE, 0);
 
 	toolbar1 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
@@ -889,7 +892,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar1", toolbar1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar1);
-	//gtk_box_pack_start (GTK_BOX (vboxVL), toolbar1, FALSE, FALSE, 0);
+	//gtk_box_pack_start (GTK_BOX (vboxVL), toolbar1, TRUE, FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(frameTB), toolbar1);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar1),
 				      GTK_RELIEF_NONE);
@@ -1013,7 +1016,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame1", frame1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame1);
-	gtk_box_pack_start(GTK_BOX(vbox2), frame1, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), frame1, FALSE, TRUE, 0);
 
 	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow1);
@@ -1025,6 +1028,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow1), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_widget_set_usize(scrolledwindow1, -2, 75);
 
 	s->vlsbhtml = gtk_html_new();
 	gtk_widget_ref(s->vlsbhtml);
@@ -1084,9 +1088,9 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_widget_ref(frameRP);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameRP",frameRP ,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_set_usize(frameRP, -2, 50);
+	//gtk_widget_set_usize(frameRP, -2, 50);
 	gtk_widget_show(frameRP);
-	gtk_box_pack_start(GTK_BOX(vbox3), frameRP, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox3), frameRP, FALSE, TRUE, 0);
 
 	scrolledwindowRP = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowRP);
@@ -1095,6 +1099,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindowRP);
 	gtk_container_add(GTK_CONTAINER(frameRP), scrolledwindowRP);
+	gtk_widget_set_usize(scrolledwindowRP, -2, 68);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowRP), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1113,7 +1118,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame3", frame3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame3);
-	gtk_box_pack_start(GTK_BOX(vbox3), frame3, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox3), frame3, FALSE, TRUE, 0);
 
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow3);
@@ -1122,6 +1127,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow3);
 	gtk_container_add(GTK_CONTAINER(frame3), scrolledwindow3);
+	gtk_widget_set_usize(scrolledwindow3, -2, 75);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow3), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1149,7 +1155,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow4);
 	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow4);
-	gtk_widget_set_usize(scrolledwindow4, -2, 175);
+	//gtk_widget_set_usize(scrolledwindow4, -2, 175);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow4), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1758,14 +1764,14 @@ void setupSB(SETTINGS * s)
 					  scrolledwindow2,
 					  searchbutton, -1);
 	s->searchbargroup = groupnum6;
-
+/*************************************************************************************/
 	vboxVL = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxVL);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxVL",
 				 vboxVL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxVL);
-	gtk_widget_set_usize(vboxVL, 160, 360);
+	gtk_widget_set_usize(vboxVL, 160, 160);
 
 	vpVL = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpVL);
@@ -1773,7 +1779,7 @@ void setupSB(SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vpVL);
 	gtk_container_add(GTK_CONTAINER(vpVL), vboxVL);
-	gtk_widget_set_usize(vpVL, 234, -2);
+	//gtk_widget_set_usize(vpVL, 234, -2);
 
 	VLbutton = gtk_button_new_with_label(_("Verse List"));
 	gtk_widget_ref(VLbutton);
@@ -1785,7 +1791,7 @@ void setupSB(SETTINGS * s)
 	/* setup shortcut bar verse list sword stuff */
 	setupVerseListSBSWORD(html);
 	groupnum7 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
-					  vpVL, VLbutton, -1);
+					 vpVL , VLbutton, -1);
 	e_shortcut_bar_set_enable_drags((EShortcutBar *) shortcut_bar,
 					TRUE);
 

@@ -32,6 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
+#include <swmarkupmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
@@ -57,7 +58,7 @@ extern gint groupnum7;
 static SWDisplay 
 	*verselistsbDisplay,	/* to display modules in verselist dialog */
 	*verselisttextsbDisplay;
-static SWMgr 
+static SWMarkupMgr 
 	*verselistsbMgr; 
 static SWModule 
 	*verselistsbMod;   /* module for verselist dialog */
@@ -148,7 +149,8 @@ void setupVerseListSBSWORD(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	verselistsbMgr	= new SWMgr();
+	verselistsbMgr	= new SWMarkupMgr();	//-- create sword mgrs
+	verselistsbMgr->Markup(FMT_HTMLHREF);
 	verselistsbMod     = NULL;
 	verselistsbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	verselisttextsbDisplay = new  GTKutf8ChapDisp(html_widget);
@@ -157,7 +159,7 @@ void setupVerseListSBSWORD(GtkWidget *html_widget)
 		verselistsbMod = (*it).second;
 		sit = verselistsbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
 		ConfigEntMap &section = (*sit).second;
-		addrenderfiltersSWORD(verselistsbMod, section);
+		//addrenderfiltersSWORD(verselistsbMod, section);
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			verselistsbMod->Disp(verselisttextsbDisplay);			
 		}else{
