@@ -2,7 +2,7 @@
 
 SUBDIRS =   doc macros intl po src
 
-EXTRA_DIST = gnomesword.desktop \
+EXTRA_DIST = gnomesword1.desktop \
              src/gui/*.h
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
