@@ -1,10 +1,10 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
   /*
      * GnomeSword Bible Study Tool
-     * sw_gbs.h
+     * gs_find_dlg.h
      * -------------------
-     * Mon Jan 28 17:21:01 2002
+     * Sun Mar 10 20:17:08 2002
      * copyright (C) 2002 by Terry Biggs
      * tbiggs@users.sourceforge.net
      *
@@ -25,41 +25,34 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-
-#ifndef __SW_GBS_H_
-#define __SW_GBS_H_
+#ifndef _GS_FIND_DLG_H_
+#define _GS_FIND_DLG_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
-	
-typedef struct _gbsdata GBS_DATA;
+#include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 
-typedef struct _nodedata NODEDATA;
-struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
-	gchar *buf[3];
-	GdkPixmap *pixmap1;
-	GdkPixmap *pixmap2;
-	GdkBitmap *mask1;
-	GdkBitmap *mask2;
-	gboolean is_leaf;
-	gboolean expanded;
+
+typedef struct _GSFindDialog  GSFindDialog;
+struct _GSFindDialog {
+	GnomeDialog *dialog;
+	GtkHTML     *html;
+	GtkWidget   *entry;
+	GtkWidget   *backward;
+	GtkWidget   *case_sensitive;
+
+	gboolean     regular;
 };
 
-	void setupSW_GBS(SETTINGS *s);
-	void shutdownSW_GBS(void);
-	void load_book_tree(SETTINGS *s,
-			GtkCTreeNode *node, 
-			gchar *bookName, 
-			gchar *treekey,
-			unsigned long offset);
-
+GSFindDialog * gs_find_dialog_new(GtkWidget *htmlwidget);
+void gs_find_dialog_destroy(GSFindDialog *d);
+void searchGS_FIND_DLG(GtkWidget *html_widget, gboolean regular, gchar *text);
+void search_nextGS_FIND_DLG(GtkWidget *html_widget);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SW_GBS_H_ */
+#endif /* _GS_FIND_DLG_H_ */

@@ -624,7 +624,7 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 {
 	gint biblepanesize;
 	if(!s->docked) {
-		//gtk_window_activate_focus(GTK_WINDOW(s->dockSB));
+		gdk_window_raise(GTK_WIDGET(s->dockSB)->window);
 		return;
 	}
 	
@@ -673,7 +673,6 @@ set_large_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
 	if (group_num == groupnum3)
 		save_iconsizeSW("Dictionaries.conf", "1");
 }
-
 
 static void
 set_small_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
