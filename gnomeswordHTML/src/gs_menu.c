@@ -564,6 +564,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	GtkWidget *about_this_module6;
 	GtkWidget *auto_scroll1;
 	GtkWidget *show_tabs1;
+	GtkWidget *print;
 	GtkWidget *view_in_new_window;
 	GtkWidget *view_module1;
 	GtkWidget *view_module1_menu;
@@ -604,6 +605,15 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	gtk_widget_show(lookup_selection2);
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), lookup_selection2);
 
+	print =
+	    gtk_menu_item_new_with_label("Print");
+	gtk_widget_ref(print);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
+				 "print", print,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), print);
+	
 	about_this_module6 =
 	    gtk_menu_item_new_with_label("About this module");
 	gtk_widget_ref(about_this_module6);
@@ -697,6 +707,9 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	gtk_signal_connect(GTK_OBJECT(goto_reference2), "activate",
 			   GTK_SIGNAL_FUNC(on_html_goto_reference_activate),
 			   (gchar *) "htmlCommentaries");
+	gtk_signal_connect(GTK_OBJECT(print), "activate",
+			   GTK_SIGNAL_FUNC(print_preview_cb),
+			   (gchar *) "htmlCommentaries");	
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module6_activate),
 			   NULL);
