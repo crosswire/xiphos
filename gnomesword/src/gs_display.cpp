@@ -140,7 +140,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 	sprintf(tmpBuf, "<font size=\"%s\">",
-		settings->dictionary_font_size);
+		settings->bible_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -190,13 +190,12 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
 		}
-	}
+	} 
 	beginHTML(GTK_WIDGET(gtkText), FALSE);
 	strbuf = g_string_new("");
 	g_string_sprintf(strbuf,
 			 "<HTML><HEAD><META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; CHARSET=ISO-8859-7\"><META NAME=\"GENERATOR\" CONTENT=\"GtkHTML/0.10.99\">\
-			</HEAD><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">",
-			 "+1");
+			</HEAD><body text=\"#151515\" link=\"#898989\">");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 

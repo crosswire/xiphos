@@ -46,7 +46,7 @@ extern gboolean havecomm;	/* let us know if we have at least one commentary modu
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 extern EShortcutModel *shortcut_model;
 GList 
-	*sblist;
+	*sblist; /* for building verselist */
 gint 
 	groupnum1 = -1,
     	groupnum2 = -1,
@@ -56,6 +56,27 @@ gint
 	groupnum6 = -1, 
 	groupnum7 = -1;
 
+static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
+static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
+static void on_link_clicked(GtkHTML * html, const gchar * url,
+			    gpointer data);
+static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
+static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
+				      gpointer user_data);
+static void on_btnSBSaveVL_clicked(GtkButton * button, gpointer user_data);
+static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s);
+static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
+					  GdkEvent * event, gint group_num,
+					  gint item_num);
+static void show_standard_popup(EShortcutBar * shortcut_bar,
+				GdkEvent * event, gint group_num);
+static void set_small_icons(GtkWidget * menuitem,
+			    EShortcutBar * shortcut_bar);
+static void set_large_icons(GtkWidget * menuitem,
+			    EShortcutBar * shortcut_bar);
+static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
+
+/*** set shortcut bar to verse list group ***/
 void showSBVerseList(SETTINGS * s)
 {
 	EShortcutBar *bar1;
@@ -83,15 +104,7 @@ static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name)
 	return group_num;
 }
 
-
-static void on_button_clicked(GtkButton * button, gpointer user_data)
-{
-	//g_warning("ok!");
-}
-
-
-
-//----------------------------------------------------------------------------------------------
+/*** show hide shortcut bar ***/
 void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
 	if (settings->showshortcutbar) {
@@ -107,6 +120,75 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 	}
 }
 
+
+static void
+set_large_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
+{
+	GtkWidget *menu;
+	gint group_num;
+
+	menu = menuitem->parent;
+	g_return_if_fail(GTK_IS_MENU(menu));
+
+	group_num = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(menu),
+							"group_num"));
+
+	e_shortcut_bar_set_view_type(shortcut_bar, group_num,
+				     E_ICON_BAR_LARGE_ICONS);
+}
+
+
+static void
+set_small_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
+{
+	GtkWidget *menu;
+	gint group_num;
+
+	menu = menuitem->parent;
+	g_return_if_fail(GTK_IS_MENU(menu));
+
+	group_num = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(menu),
+							"group_num"));
+
+	e_shortcut_bar_set_view_type(shortcut_bar, group_num,
+				     E_ICON_BAR_SMALL_ICONS);
+}
+
+
+
+static void
+show_standard_popup(EShortcutBar * shortcut_bar,
+		    GdkEvent * event, gint group_num)
+{
+	GtkWidget *menu, *menuitem;
+
+	/* We don't have any commands if there aren't any groups yet. */
+	if (group_num == -1)
+		return;
+
+	menu = gtk_menu_new();
+
+	menuitem = gtk_menu_item_new_with_label("Large Icons");
+	gtk_widget_show(menuitem);
+	gtk_menu_append(GTK_MENU(menu), menuitem);
+	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
+			   GTK_SIGNAL_FUNC(set_large_icons), shortcut_bar);
+
+	menuitem = gtk_menu_item_new_with_label("Small Icons");
+	gtk_widget_show(menuitem);
+	gtk_menu_append(GTK_MENU(menu), menuitem);
+	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
+			   GTK_SIGNAL_FUNC(set_small_icons), shortcut_bar);
+
+	/* Save the group num so we can get it in the callbacks. */
+	gtk_object_set_data(GTK_OBJECT(menu), "group_num",
+			    GINT_TO_POINTER(group_num));
+
+	/* FIXME: Destroy menu when finished with it somehow? */
+	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
+		       event->button.button, event->button.time);
+}
+
 /*****************************************************************************
  *      for any shortcut bar item clicked
  *****************************************************************************/
@@ -115,35 +197,43 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
 			      gint group_num, gint item_num)
 {
-	GtkWidget * notebook, *app;
-	gchar * type, *ref;
+	GtkWidget *notebook, *app;
+	gchar *type, *ref;
 
-	app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
-	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
-				       group_num, item_num, &type, &ref);
-	if (!strcmp(type, "bible:")) {
-		if (havebible) {	/* let's don't do this if we don't have at least one Bible text */
-			notebook = lookup_widget(app, "nbTextMods");	/* get notebook */
-			gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+	if (event->button.button == 1) {
+		app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
+		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (shortcut_bar)->model,
+					       group_num, item_num, &type,
+					       &ref);
+		if (!strcmp(type, "bible:")) {
+			if (havebible) {	/* let's don't do this if we don't have at least one Bible text */
+				notebook = lookup_widget(app, "nbTextMods");	/* get notebook */
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+			}
 		}
-	}
-	if (!strcmp(type, "commentary:")) {
-		if (havecomm) {	/* let's don't do this if we don't have at least one commentary */
-			notebook = lookup_widget(app, "notebook1");	/* get notebook */
-			gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+		if (!strcmp(type, "commentary:")) {
+			if (havecomm) {	/* let's don't do this if we don't have at least one commentary */
+				notebook = lookup_widget(app, "notebook1");	/* get notebook */
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+			}
 		}
-	}
-	if (!strcmp(type, "dict/lex:")) {
-		if (havedict) {	/* let's don't do this if we don't have at least one dictionary / lexicon */
-			notebook = lookup_widget(app, "notebook4");	/* get notebook */
-			gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+		if (!strcmp(type, "dict/lex:")) {
+			if (havedict) {	/* let's don't do this if we don't have at least one dictionary / lexicon */
+				notebook = lookup_widget(app, "notebook4");	/* get notebook */
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+			}
 		}
+		if (!strcmp(type, "history:")) {
+			changeVerseSWORD(ref);
+		}
+		g_free(type);
+		g_free(ref);
+	} else if (event->button.button == 3) {
+		if (item_num == -1)
+			show_standard_popup(shortcut_bar, event,
+					    group_num);
 	}
-	if (!strcmp(type, "history:")) {
-		changeVerseSWORD(ref);
-	}
-	g_free(type);
-	g_free(ref);
 }
 
 
@@ -152,24 +242,24 @@ static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 	sblist = NULL;
 	sblist = searchSWORD(s->app, s);
 }
+
 /*** save verse list as bookmarks ***/
 static void on_btnSBSaveVL_clicked(GtkButton * button, gpointer user_data)
 {
 	SETTINGS *s;
-	
-	s = (SETTINGS *)user_data;
-	addverselistBM(s,sblist);	
+
+	s = (SETTINGS *) user_data;
+	addverselistBM(s, sblist);
 }
 
 
-static void
-on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
-			  gpointer user_data)
+static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
+				      gpointer user_data)
 {
 	SETTINGS *s;
-	
-	s = (SETTINGS *)user_data;
-	s->showinmain  = togglebutton->active;
+
+	s = (SETTINGS *) user_data;
+	s->showinmain = togglebutton->active;
 }
 
 
@@ -182,8 +272,8 @@ static void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	SETTINGS *s;
-	
-	s = (SETTINGS *)data;
+
+	s = (SETTINGS *) data;
 	changeVerseListSBSWORD(s, (gchar *) url);
 }
 
@@ -226,7 +316,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save List"),
-				       _("Save the current verse list as a bookmark file"),
+				       _
+				       ("Save the current verse list as a bookmark file"),
 				       NULL, tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSBSaveVL);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBSaveVL",
@@ -254,7 +345,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("UpdateMain"),
-				       _("Show current verse list verse in Main Form"),
+				       _
+				       ("Show current verse list verse in Main Form"),
 				       NULL, tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSBShowCV);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBShowCV",
@@ -318,17 +410,13 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_html_load_empty(GTK_HTML(htmlshow));
 
 	gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), 
-			   s);
+			   GTK_SIGNAL_FUNC(on_link_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(btnSBSaveVL), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), 
-			   s);
+			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(tbtnSBViewMain), "toggled",
-			   GTK_SIGNAL_FUNC(on_tbtnSBViewMain_toggled),
-			   s);
+			   GTK_SIGNAL_FUNC(on_tbtnSBViewMain_toggled), s);
 	gtk_signal_connect(GTK_OBJECT(btnSBShowCV), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), 
-			   s);
+			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), s);
 	return htmlshow;
 }
 
@@ -628,8 +716,8 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
 }
 
-void setupSB(GList * textlist,
-	     GList * commentarylist, GList * dictionarylist)
+void
+setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 {
 	GList * tmp;
 	GtkWidget
@@ -791,8 +879,6 @@ void setupSB(GList * textlist,
 	groupnum7 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 					  vpVL, VLbutton, -1);
 
-	gtk_signal_connect(GTK_OBJECT(button), "clicked",
-			   GTK_SIGNAL_FUNC(on_button_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);
