@@ -58,6 +58,7 @@ GtkWidget *gui_create_about_gnomesword(void)
                 "Carl Constantine duckwing@users.sf.net",
 		"Jorge Chacon  jgchacon@itelgua.com",
 		"Jp Robinson  robinson@knightmail.com",
+		"Dominique Corbex dominique@corbex.net",
                 NULL
         };
         GtkWidget *about;
