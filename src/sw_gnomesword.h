@@ -41,6 +41,7 @@ extern "C" {
 	void shutdownSWORD(void);
 	void FillDictKeysSWORD(void);
 	void changeVerseSWORD(gchar * ref);
+	void ChangeVerseSWORD(void);
 	void resultsListSWORD(GtkWidget * searchFrm,
 			      gint row, gint column);
 	void strongsSWORD(gint window, gboolean choice);

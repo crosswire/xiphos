@@ -44,7 +44,7 @@
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 SWMgr *VCMgr;	/* sword mgr for view comm dialog */
 SWModule *VCMod;   /* module for view comm dialog */
-
+VerseKey DefaultVCKey;
 /******************************************************************************
  * returns the description of the view commentary dialog module
  ******************************************************************************/
@@ -99,8 +99,7 @@ void loadVCmodSWORD(gchar *modName)
         ModMap::iterator it;
         
         it = VCMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != VCMgr->Modules.end()){
-		
+	if (it != VCMgr->Modules.end()){		
 		VCMod = (*it).second;  //-- set curdictMod to new choice
 		VCMod->SetKey("");		
 		VCMod->Display();	 //-- display new dict
@@ -112,9 +111,13 @@ void loadVCmodSWORD(gchar *modName)
  *
  ******************************************************************************/
 void gotoverseVCSWORD(gchar *newkey)
-{
-        VCMod->SetKey(newkey); //-- set key to our text
+{       
+	DefaultVCKey.AutoNormalize(0);
+	DefaultVCKey.Persist(1);	// when set to a module, make the module hold on to this actual key and not a copy
+	DefaultVCKey = newkey; // set to our new verse key
+	VCMod->SetKey(DefaultVCKey); //-- set key to our text
         VCMod->Display();
+	DefaultVCKey.AutoNormalize(1);
 }
 
 void navVCModSWORD(gint direction)  //-- navigate the current commentary module

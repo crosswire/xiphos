@@ -360,6 +360,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	GtkWidget *view_in_new_window;
 	GtkWidget *view_module1;
 	GtkWidget *view_module1_menu;
+	GtkWidget *print_item;
 	GtkAccelGroup *view_module1_menu_accels;
 	GtkWidget *separator22, *item1, *item3, *item4;
 	GtkTooltips *tooltips;
@@ -379,6 +380,23 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_widget_show(copy6);
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), copy6);
 
+
+	print_item = gtk_menu_item_new_with_label("Print Comment");
+	gtk_widget_ref(print_item);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
+				 "print_item", print_item,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print_item);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml),print_item);
+		
+	separator1 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator1);
+  	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "separator1", separator1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator1);
+  	gtk_container_add (GTK_CONTAINER (pmCommentsHtml), separator1);
+  	gtk_widget_set_sensitive (separator1, FALSE);
+	
 	goto_reference = gtk_menu_item_new_with_label("Goto Reference");
 	gtk_widget_ref(goto_reference);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
@@ -579,7 +597,9 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-
+	gtk_signal_connect(GTK_OBJECT(print_item), "activate",
+			   GTK_SIGNAL_FUNC(on_print_item_activate),
+			   (gchar *) "htmlCommentaries");
 	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_word_activate),
