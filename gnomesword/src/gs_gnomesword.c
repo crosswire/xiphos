@@ -40,6 +40,7 @@
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "gs_shortcutbar.h"
+#include "e-splash.h"
 
 #if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
@@ -111,14 +112,15 @@ extern gchar *mycolor;
 void
 initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		GList *biblemods, GList *commentarymods ,
-		GList *dictionarymods, GList *percommods)
+		GList *dictionarymods, GList *percommods,
+		GtkWidget *splash)
 {
 	GtkWidget *notebook;
 	gint		biblepage,
 			commpage,
 			dictpage;
 	p_gslayout = &gslayout;
-	
+	g_print("Initiating GnomeSword\n");
 /* set the main window size */
 	gtk_window_set_default_size(GTK_WINDOW(app), p_gslayout->gs_width, p_gslayout->gs_hight);
 	//g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
@@ -280,6 +282,13 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
+	
+	if(settings->showsplash){
+		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);	
+		while (gtk_events_pending ())
+				gtk_main_iteration ();
+	}
+	g_print("done\n");
 }
 
 /**********************************************************************************************

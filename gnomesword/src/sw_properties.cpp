@@ -113,7 +113,8 @@ gboolean loadconfig(void)
 	settings->showdictgroup = atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
 	settings->showbookmarksgroup = atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());	
 	settings->interlinearpage = atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
-	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());	
+	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
+	settings->showsplash = atoi(settingsInfo["User Options"]["ShowSplash"].c_str());
 	tabs.textwindow= atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
 	tabs.commwindow= atoi(settingsInfo["User Options"]["CommTabs"].c_str());
 	tabs.dictwindow= atoi(settingsInfo["User Options"]["DictTabs"].c_str());
@@ -248,6 +249,11 @@ gboolean saveconfig(void)
 	else
 		settingsInfo["User Options"]["showhistorygroup"] = "0";
 	
+	if(settings->showsplash)
+		settingsInfo["User Options"]["ShowSplash"] = "1";
+	else
+		settingsInfo["User Options"]["ShowSplash"] = "0";
+	
     	settingsInfo.Save();
 	return true;
 }
@@ -298,12 +304,18 @@ gboolean createfromsetupconfig(GtkWidget *setup)
 		settingsInfo["User Options"]["UseDefault"] = "1";
 	else
 		settingsInfo["User Options"]["UseDefault"] = "0";
-	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
-	settingsInfo["User Options"]["BibleTabs"]= "1";
-	settingsInfo["User Options"]["CommTabs"]= "1";
-	settingsInfo["User Options"]["DictTabs"]= "1";
-	settingsInfo["User Options"]["strongs"] = "0";
-	settingsInfo["User Options"]["footnotes"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton4"))->active)
+		settingsInfo["User Options"]["BibleTabs"] = "1";
+	else
+		settingsInfo["User Options"]["BibleTabs"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton5"))->active)
+		settingsInfo["User Options"]["CommTabs"] = "1";
+	else
+		settingsInfo["User Options"]["CommTabs"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton6"))->active)
+		settingsInfo["User Options"]["DictTabs"] = "1";
+	else
+		settingsInfo["User Options"]["DictTabs"] = "0";
 	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton2"))->active)
 		settingsInfo["User Options"]["versestyle"] = "1";
 	else
@@ -312,17 +324,21 @@ gboolean createfromsetupconfig(GtkWidget *setup)
 		settingsInfo["User Options"]["autosavepersonalcomments"] = "1";
 	else 
 		settingsInfo["User Options"]["autosavepersonalcomments"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton3"))->active)
+		settingsInfo["User Options"]["interlinearpage"] = "1";
+	else
+		settingsInfo["User Options"]["interlinearpage"] = "0";
+	settingsInfo["User Options"]["strongs"] = "0";
+	settingsInfo["User Options"]["footnotes"] = "0";
 	settingsInfo["User Options"]["formatpercom"] = "0";
 	settingsInfo["User Options"]["showshortcutbar"] = "1";
 	settingsInfo["User Options"]["showtextgroup"] = "1";
 	settingsInfo["User Options"]["showcomgroup"] = "1";
 	settingsInfo["User Options"]["showdictgroup"] = "1";
 	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
-	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton3"))->active)
-		settingsInfo["User Options"]["interlinearpage"] = "1";
-	else
-		settingsInfo["User Options"]["interlinearpage"] = "0";
+	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
+	settingsInfo["User Options"]["ShowSplash"] = "1";
 	
     	settingsInfo.Save();
 	return true;
@@ -386,6 +402,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
 	settingsInfo["User Options"]["interlinearpage"] = "1";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
+	settingsInfo["User Options"]["ShowSplash"] = "1";
 	
     	settingsInfo.Save();
 	return true;
