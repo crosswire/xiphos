@@ -25,10 +25,11 @@
 
 #include <gnome.h>
 #include <glib-2.0/glib.h>
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
-
+*/
 #include <string.h>
 
 #include "main/lists.h"

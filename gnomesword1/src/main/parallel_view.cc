@@ -33,10 +33,11 @@ extern "C" {
 }
 #endif
 
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
-
+*/
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
 #include "gui/html.h"

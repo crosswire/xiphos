@@ -26,10 +26,11 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
-
+*/
 #ifdef USE_MOZILLA
 #include <gtkmozembed.h>
 #endif

@@ -25,10 +25,11 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
-
+*/
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
