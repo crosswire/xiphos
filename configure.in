@@ -180,31 +180,21 @@ AC_SUBST(SWORD_LIBS)
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
 
 have_speller="no"
-dnl looking for aspell 
+dnl looking for pspell 
 
-  AC_MSG_CHECKING([for aspell]) 
-  aspell_dirs="${prefix}/bin $ac_aspell_dir/bin /usr/bin /usr/local/bin" 
-  AC_FIND_FILE(aspell, $aspell_dirs, aspell_dir) 
-  if test -r $aspell_dir/aspell; then 
-   HAVE_ASPELL=yes 
+AC_MSG_CHECKING([for pspell]) 
+pspell_dirs="${prefix}/bin $ac_pspell_dir/bin /usr/bin /usr/local/bin /opt/bin" 
+AC_FIND_FILE(pspell-config, $pspell_dirs, pspell_dir) 
+
+if test -r $pspell_dir/pspell-config; then 
+   HAVE_PSPELL=yes 
    have_speller="yes"
-   AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
-#   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
-   echo "found"
-  else
-   AC_MSG_CHECKING([for ispell]) 
-   ispell_dirs="${prefix}/bin $ac_ispell_dir/bin /usr/bin /usr/local/bin" 
-   AC_FIND_FILE(ispell, $ispell_dirs, ispell_dir) 
-   if test -r $ispell_dir/ispell; then 
-    HAVE_ISPELL=yes 
-    have_speller="yes"
-    AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
-#    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
-    echo "found"
-   fi
-  fi
-if test $have_speller="yes"; then
-   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
+   AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
+   PSPELL_LIBS="-L$pspell_dir -lpspell -lltdl"
+   AC_SUBST(PSPELL_LIBS)  
+else
+   PSPELL_LIBS=""
+   AC_SUBST(PSPELL_LIBS)
 fi
 
 dnl ******************************
@@ -278,6 +268,11 @@ echo
 
 if test "x$have_speller" = xyes; then
         echo "Spellchecking:                enabled"
+	echo "using:                            pspell"
 else
         echo "Spellchecking:                disabled"
 fi
+
+echo "install directory:              ${prefix}/bin"
+echo "Sword lib type:                $SWORD_LIB_TYPE"
+echo "path to swordlibs:             $sword_libdir"

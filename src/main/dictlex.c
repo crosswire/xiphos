@@ -30,7 +30,6 @@
 #include "backend/dictlex_.h"
 
 #include "main/dictlex.h"
-//#include "main/gs_gnomesword.h"
 
 
 /******************************************************************************
