@@ -75,6 +75,12 @@ main (int argc, char *argv[])
 	GError  *gconf_error  = NULL;
 #endif	
 
+#if ENABLE_NLS
+  bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
+  textdomain(PACKAGE);
+#endif
+
+  
 	gnome_init("GnomeSword", VERSION, argc, argv);		
 	if(argc > 1) {			
 		if(!strcmp(argv[1],"newconfigs")) newconfigs = TRUE;
