@@ -25,7 +25,6 @@
 #include <versekey.h>
 
 #include "gs_gnomesword.h"
-#include "gs_verselist_dlg.h"
 #include "gs_html.h"
 #include "gs_display.h"
 #include "gs_shortcutbar.h"

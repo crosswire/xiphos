@@ -36,7 +36,6 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "sw_utility.h"
-//#include "sw_verselist_dlg.h"
 #include "sw_verselist_sb.h"
 
 
