@@ -507,11 +507,14 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 					     NULL, NULL, NULL, -1);
 	gtk_widget_show(btnLookup);
 
-	tmp_toolbar_icon =
+	/*tmp_toolbar_icon =
 	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
 				     gtk_toolbar_get_icon_size
-				     (GTK_TOOLBAR(toolbarNav)));
-	nav_bar.button_back =
+				     (GTK_TOOLBAR(toolbarNav)));*/
+	nav_bar.button_back = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
+                                "gtk-go-back",
+                                NULL,
+                                NULL, NULL, NULL, -1);/*
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("button5"), NULL, NULL,
@@ -521,15 +524,18 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				       *) (g_list_last(GTK_TOOLBAR
 						       (toolbarNav)->
 						       children)->
-					   data))->label), TRUE);
+					   data))->label), TRUE);*/
 	gtk_widget_show(nav_bar.button_back);
 
-	tmp_toolbar_icon =
+	/*tmp_toolbar_icon =
 	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
 				     gtk_toolbar_get_icon_size
-				     (GTK_TOOLBAR(toolbarNav)));
-	nav_bar.button_forward =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
+				     (GTK_TOOLBAR(toolbarNav)));*/
+	nav_bar.button_forward = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
+                                "gtk-go-forward",
+                                NULL,
+                                NULL, NULL, NULL, -1);
+	/*    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("button6"), NULL, NULL,
 				       tmp_toolbar_icon, NULL, NULL);
@@ -538,92 +544,9 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				       *) (g_list_last(GTK_TOOLBAR
 						       (toolbarNav)->
 						       children)->
-					   data))->label), TRUE);
+					   data))->label), TRUE);*/
+					   
 	gtk_widget_show(nav_bar.button_forward);
-	/*toolbarNav = gtk_hbox_new(FALSE, 0);
-	   gtk_widget_show(toolbarNav);
-
-	   cbBook = gtk_combo_new();
-	   gtk_widget_show(cbBook);
-	   gtk_box_pack_start(GTK_BOX(toolbarNav), cbBook, FALSE, TRUE, 0);
-	 */
-	/*
-	 * get and load books of the Bible 
-	 */
-/*	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
-				      get_list(BOOKS_LIST));
-
-	cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_show(cbe_book);
-	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
-
-	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
-	spb_chapter =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_show(spb_chapter);
- // gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), spb_chapter, NULL, NULL);
-
-	gtk_box_pack_start(GTK_BOX(toolbarNav), spb_chapter, FALSE,
-			   TRUE, 0);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spb_chapter), TRUE);
-
-	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
-	spb_verse =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_show(spb_verse);
-	gtk_box_pack_start(GTK_BOX(toolbarNav), spb_verse, FALSE, TRUE,
-			   0);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spb_verse), TRUE);
-
-	cbe_freeform_lookup = gtk_entry_new();
-	gtk_widget_show(cbe_freeform_lookup);
-	gtk_box_pack_start(GTK_BOX(toolbarNav), cbe_freeform_lookup,
-			   TRUE, TRUE, 0);
-	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup),
-			   _("Romans 8:28"));
-	gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
-	nav_bar.lookup_entry = cbe_freeform_lookup;
-	
-	btnLookup = gtk_button_new();
-	gtk_widget_show(btnLookup);
-	gtk_box_pack_start(GTK_BOX(toolbarNav), btnLookup, FALSE, TRUE,
-			   0);
-	gtk_button_set_relief(GTK_BUTTON(btnLookup), GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_JUMP_TO,
-						    GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(tmp_toolbar_icon);
-	gtk_container_add(GTK_CONTAINER(btnLookup), tmp_toolbar_icon);
-
-	nav_bar.button_back = gtk_button_new();
-	gtk_widget_show(nav_bar.button_back);
-	gtk_box_pack_start(GTK_BOX(toolbarNav), nav_bar.button_back,
-			   FALSE, TRUE, 0);
-	gtk_button_set_relief(GTK_BUTTON(nav_bar.button_back),
-			      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
-						    GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(tmp_toolbar_icon);
-	gtk_container_add(GTK_CONTAINER(nav_bar.button_back),
-			  tmp_toolbar_icon);
-
-	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
-
-	nav_bar.button_forward = gtk_button_new();
-	gtk_widget_show(nav_bar.button_forward);
-	gtk_box_pack_start(GTK_BOX(toolbarNav), nav_bar.button_forward,
-			   FALSE, TRUE, 0);
-	gtk_button_set_relief(GTK_BUTTON(nav_bar.button_forward),
-			      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
-						    GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(tmp_toolbar_icon);
-	gtk_container_add(GTK_CONTAINER(nav_bar.button_forward),
-			  tmp_toolbar_icon);
-
-*/
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 

@@ -61,6 +61,78 @@ static gint button_vl_html;
 static gchar *buf_module;
 GList *list_of_verses;
 
+
+
+/******************************************************************************
+ * Name
+ *   on_close_button_clicked
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_close_button_clicked(GtkButton * button,  gpointer user_data)
+ *
+ * Description
+ *    hide the sidebar
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_close_button_clicked(GtkButton * button,  gpointer user_data)
+{
+	gui_sidebar_showhide();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_notebook_switch_page
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_notebook_switch_page(GtkNotebook *notebook,
+ *				    GtkNotebookPage *page,
+ *                                  guint page_num,
+ *                                  gpointer user_data)
+ *
+ * Description
+ *   sets the sidebar menu button label to the current page 
+ *
+ * Return value
+ *   void
+ */
+
+static void on_notebook_switch_page(GtkNotebook *notebook,
+				    GtkNotebookPage *page,
+                                    guint page_num,
+                                    gpointer user_data)
+{
+ 	GtkWidget *label;
+	
+	label = GTK_WIDGET(user_data);
+	switch(page_num) {
+		case 0:
+			gtk_label_set_text (GTK_LABEL(label), _("Modules"));
+		break;
+		case 1:
+			gtk_label_set_text (GTK_LABEL(label), _("Bookmarks"));
+		break;
+		case 2:
+			gtk_label_set_text (GTK_LABEL(label), _("Search"));
+		break;
+		case 3:
+			gtk_label_set_text (GTK_LABEL(label), _("Verse List"));
+		break;
+		case 4:
+			gtk_label_set_text (GTK_LABEL(label), _("Viewer"));
+		break;
+	}
+	
+}
+
+
 /******************************************************************************
  * Name
  *   gui_link_clicked
@@ -198,8 +270,8 @@ void gui_display_devotional_in_sidebar(void)
 	 * Print it out in a nice format.
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
-	gtk_option_menu_set_history(GTK_OPTION_MENU
-				    (sidebar.optionmenu1), 4);
+	/*gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 4);*/
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
 	gui_display_dictlex_in_sidebar(settings.devotionalmod, buf);
@@ -322,8 +394,8 @@ gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
 {
 	if (settings.showshortcutbar) {
 		gchar *text;
-		gtk_option_menu_set_history(GTK_OPTION_MENU
-					    (sidebar.optionmenu1), 4);
+		/*gtk_option_menu_set_history(GTK_OPTION_MENU
+					    (sidebar.optionmenu1), 4);*/
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_sidebar), 4);
 		text = get_dictlex_text(mod_name, key);
@@ -480,8 +552,8 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gtk_tree_path_free(path);
 	
 	gui_verselist_button_release_event(NULL,NULL,NULL);
-	gtk_option_menu_set_history(GTK_OPTION_MENU
-				    (sidebar.optionmenu1), 3);
+	/*gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 3);*/
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
 	//g_string_free(str, TRUE);
@@ -561,30 +633,6 @@ static void on_search_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *   on_viewer_activate
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void on_viewer_activate(GtkMenuItem * menuitem, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_viewer_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
-{
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
-			      4);
-}
-
-
-/******************************************************************************
- * Name
  *   on_search_results_activate
  *
  * Synopsis
@@ -606,6 +654,29 @@ static void on_search_results_activate(GtkMenuItem * menuitem,
 
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_viewer_activate
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_viewer_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void on_viewer_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+			      4);
+}
 
 
 /******************************************************************************
@@ -658,115 +729,7 @@ static void create_viewer_page(GtkWidget * notebook)
 			   G_CALLBACK(gui_url), widgets.app);
 	*/
 }
-/******************************************************************************
- * Name
- *   mod_selection_changed
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void mod_selection_changed(GtkTreeSelection * selection,
- *		      GtkWidget * tree_widget)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
 
-/*static void mod_selection_changed(GtkTreeSelection * selection,
-				  GtkWidget * tree_widget)
-{
-	gint sbtype;
-	GtkTreeIter selected;
-	gchar *mod = NULL;
-	gint mod_type;
-	GtkTreeModel *model;
-
-
-
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
-
-	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
-		return;
-
-	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected))
-		return;
-
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &mod, -1);
-
-	if (!mod)
-		return;
-
-	if (button_mod_list == 3) {
-		if (!g_utf8_collate(mod, _("Parallel View"))) {
-			g_free(mod);
-			return;
-		}
-		buf_module = g_strdup(mod);
-		gtk_menu_popup(GTK_MENU
-			       (sidebar.menu_modules),
-			       NULL, NULL, NULL, NULL,
-			       0, gtk_get_current_event_time());
-		return;
-	}
-	
-	if (!g_utf8_collate(mod, _("Parallel View"))) {
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-					     (widgets.
-					      button_parallel_view),
-					     TRUE);
-	}
-	
-	sbtype = get_mod_type(mod);
-	switch (sbtype) {
-	case 0:
-		if(button_mod_list == 2) {
-			gui_open_bibletext_dialog(mod);
-			break;
-		}
-		if (GTK_TOGGLE_BUTTON(widgets.button_parallel_view)->
-		    active) {
-			//settings.MainWindowModule = mod;
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (widgets.
-						      button_parallel_view),
-						     FALSE);
-			    
-		}
-		gui_change_module_and_key(mod, settings.currentverse);
-		break;
-	case 1:
-		if(button_mod_list == 2) {
-			gui_open_commentary_dialog(mod);
-			break;
-		}
-		gui_change_module_and_key(mod, settings.currentverse);
-		break;
-	case 2:
-		if(button_mod_list == 2) {
-			gui_open_dictlex_dialog(mod);
-			break;
-		}
-		gtk_notebook_set_current_page
-		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
-		gui_change_module_and_key(mod, settings.dictkey);
-		break;
-	case 3:
-		if(button_mod_list == 2) {
-			gui_open_gbs_dialog(mod);
-			break;
-		}
-		gtk_notebook_set_current_page
-		    	(GTK_NOTEBOOK(widgets.workbook_lower), 1);
-		gui_change_module_and_key(mod, NULL);
-		break;
-	}
-	g_free(mod);
-	
-}
-*/
 
 /******************************************************************************
  * Name
@@ -1273,7 +1236,110 @@ static void create_search_results_page(GtkWidget * notebook)
 }
 
 
-static GnomeUIInfo menu1_uiinfo[] = {
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
+static void menu_position_under (GtkMenu *menu, 
+		     int *x, 
+		     int *y,
+		     gboolean *push_in,
+		     gpointer user_data)
+{
+	GtkWidget *widget;
+	
+	g_return_if_fail (GTK_IS_BUTTON (user_data));
+	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
+
+	widget = GTK_WIDGET (user_data);
+	
+	gdk_window_get_origin (widget->window, x, y);
+	
+	*x += widget->allocation.x;
+	*y += widget->allocation.y + widget->allocation.height;
+
+	*push_in = FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   select_button_press_callback
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean select_button_press_callback (GtkWidget *widget,
+ *			      GdkEventButton *event,
+ *			      gpointer user_data)
+ *
+ * Description
+ *    make the tooglebutton act like a gtk optionmenu by dropping a popup
+ *    under the button
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean select_button_press_callback (GtkWidget *widget,
+			      GdkEventButton *event,
+			      gpointer user_data)
+{
+	extern GtkWidget *menu;
+	
+	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
+		gtk_widget_grab_focus (widget);
+		
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+		gtk_menu_popup (GTK_MENU (sidebar.optionmenu1),
+				NULL, NULL, menu_position_under, widget, 
+				event->button, event->time);
+
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   menu_deactivate_callback
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
+{
+	GtkWidget *menu_button;
+	
+	menu_button = GTK_WIDGET (user_data);
+		
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
+}
+
+
+static GnomeUIInfo menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Modules"),
 	 NULL,
@@ -1322,6 +1388,34 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
+
+/******************************************************************************
+ * Name
+ *   create_menu
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   GtkWidget* create_menu(void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+static GtkWidget* create_menu(void)
+{
+  GtkWidget *menu;
+
+  menu = gtk_menu_new ();
+  gnome_app_fill_menu (GTK_MENU_SHELL (menu), menu_uiinfo,
+                       NULL, FALSE, 0);
+  return menu;
+}
+
+
 /******************************************************************************
  * Name
  *   gui_create_sidebar
@@ -1354,6 +1448,16 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox_search_results;
 	GtkWidget *vbox_verse_list;
 	GtkWidget *vbox_viewer;
+	GtkWidget *frame;
+	GtkWidget *hbox;
+	GtkWidget *select_button;
+	GtkWidget *alignment1;
+	GtkWidget *select_hbox;
+	GtkWidget *title_label;
+	GtkWidget *arrow;
+	GtkWidget *close_button;
+	GtkWidget *image;
+	GtkWidget *shortcut_box;
 	GObject *mod_selection;
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
@@ -1361,18 +1465,85 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;
 
-	sidebar.optionmenu1 = gtk_option_menu_new();
+	
+	/*gtk_option_menu_new();
 	gtk_widget_show(sidebar.optionmenu1);
 	gtk_box_pack_start(GTK_BOX(vbox1), sidebar.optionmenu1, FALSE,
 			   TRUE, 0);
 
 	menu1 = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu_uiinfo,
 			    NULL, FALSE, 0);
 
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(sidebar.optionmenu1),
 				 menu1);
+*/
+	frame = gtk_frame_new (NULL);
+	gtk_widget_show (frame);
+	gtk_box_pack_start (GTK_BOX (vbox1), frame, FALSE, FALSE, 0);
+	
+	//gtk_frame_set_shadow_type(GTK_FRAME(frame),GTK_SHADOW_NONE);
+	
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (hbox);
+	gtk_container_add (GTK_CONTAINER (frame), hbox);
+	
+	select_button = gtk_toggle_button_new ();
+	gtk_button_set_relief (GTK_BUTTON (select_button), GTK_RELIEF_NONE);
+	gtk_widget_show (select_button);
+	
+	g_signal_connect (select_button, 
+			  "button_press_event",
+			  G_CALLBACK (select_button_press_callback),
+			  NULL);
+			  
+	alignment1 = gtk_alignment_new (0.03, 0.5, 0, 0);
+	gtk_widget_show (alignment1);
+	gtk_container_add (GTK_CONTAINER (select_button), alignment1);
+	
+	select_hbox = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (select_hbox);
+	
+	title_label = gtk_label_new (_("Modules"));
+	
+	gtk_widget_show (title_label);
+	gtk_box_pack_start (GTK_BOX (select_hbox), 
+				title_label,
+				FALSE, FALSE, 0);
+	
+	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_NONE);
+	gtk_widget_show (arrow);
+	gtk_box_pack_start (GTK_BOX (select_hbox), arrow, FALSE, FALSE, 0);
+	
+	gtk_container_add (GTK_CONTAINER (alignment1), select_hbox); 
+	gtk_box_pack_start (GTK_BOX (hbox), select_button, FALSE, TRUE, 0);
+	
+	close_button = gtk_button_new ();
+	gtk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
+	
+			  
+	gtk_widget_show (close_button);
+	
+	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, 
+					  GTK_ICON_SIZE_SMALL_TOOLBAR);
+	gtk_widget_show (image);
+	
+	gtk_container_add (GTK_CONTAINER (close_button), image);
+	
+	g_signal_connect ((gpointer) close_button, "clicked",
+                    G_CALLBACK (on_close_button_clicked),
+                    title_label);
+		    
+	gtk_box_pack_end (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+	
+	
+	shortcut_box = gtk_hbox_new (TRUE, 0);
+	gtk_widget_show (shortcut_box);
+	gtk_box_pack_end (GTK_BOX (hbox),
+			  shortcut_box,
+			  TRUE, TRUE, 0);
 
+/***/
 	widgets.notebook_sidebar = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_sidebar);
 	gtk_box_pack_start(GTK_BOX(vbox1), widgets.notebook_sidebar,
@@ -1383,6 +1554,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK
 				    (widgets.notebook_sidebar), TRUE);
 
+	g_signal_connect ((gpointer) widgets.notebook_sidebar, "switch-page",
+                    G_CALLBACK (on_notebook_switch_page),
+                    title_label);
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
@@ -1439,6 +1613,11 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 G_CALLBACK(mod_selection_changed),
 			 sidebar.module_list);*/
 
+	sidebar.optionmenu1 = create_menu();
+	g_signal_connect (sidebar.optionmenu1,
+			  "deactivate",
+			  G_CALLBACK (menu_deactivate_callback),
+			  select_button);
 	sidebar.menu_modules = create_menu_modules();
 
 	return vbox1;

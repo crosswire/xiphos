@@ -189,6 +189,78 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 
 /******************************************************************************
  * Name
+ *   deal_with_refs
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void deal_with_refs(const gchar *url)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void deal_with_refs(const gchar * url)
+{
+	gchar *mybuf = NULL;
+	gchar *modbuf = NULL;
+	gchar *mod_name = NULL;
+	gchar *buf = NULL;
+	gchar newmod[80];
+	gchar newref[80];
+	gint i;
+	
+	mybuf = strstr(url, "version=");
+	if (mybuf) {
+		mybuf = strchr(mybuf, '=');
+		++mybuf;
+		i = 0;
+		while (mybuf[i] != ' ') {
+			newmod[i] = mybuf[i];
+			newmod[i + 1] = '\0';
+			++i;
+		}
+	}
+	mybuf = NULL;
+	mybuf = strstr(url, "passage=");
+	i = 0;
+	if (mybuf) {
+		mybuf = strchr(mybuf, '=');
+		++mybuf;
+		while (i < strlen(mybuf)) {
+			newref[i] = mybuf[i];
+			newref[i + 1] = '\0';
+			++i;
+		}
+	}
+	if (check_for_module(newmod)) {
+		modbuf = newmod;
+	} else {
+		modbuf = xml_get_value("modules", "bible");
+	}
+	buf = g_strdup(newref);
+	mod_name = g_strdup(modbuf);
+
+	if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
+		/* we have a dict/lex module 
+		   so we don't need to get a verse list */
+		gui_display_dictlex_in_sidebar(mod_name, buf);
+	} else {
+		gui_display_verse_list_in_sidebar(settings.currentverse,
+						  mod_name,
+						  buf);
+	}
+	g_free(buf);
+	g_free(mod_name);
+	
+}
+
+
+/******************************************************************************
+ * Name
  *   deal_with_strongs
  *
  * Synopsis
@@ -370,12 +442,9 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar buf[255], *buf1;
-	gchar *tmpbuf;
-	gboolean is_strongsmorph = FALSE;
-	gint i,j;
+	gchar buf[255];
 
-	if (url == NULL) { /***  moved out of url - clear appbar  ***/
+	if (url == NULL) { /* moved out of url - clear appbar */
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					"");
 		in_url = FALSE;
@@ -383,39 +452,38 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			gtk_widget_destroy(hint.hint_window);
 			hint.in_popup = FALSE;
 		}
-	} else {/***  we are in an url  ***/
+	} else {
 		in_url = TRUE;	/* we need this for html_button_released */
-		if (*url == '@') { /* swap parallel and main text mods link */
+		if (*url == '@') { /* swap parallel and main text mods */
 			++url;
 			sprintf(buf, _("Show %s in main window"), url);
-		} else if (!strncmp(url, "noteID=", 7)) { /***  osis footnote  ***/
+		} else if (!strncmp(url, "noteID=", 7)) { /* footnote */
 			deal_with_notes(url, FALSE);
 			return;
-		} else if (*url == '[') {  /***  module name link  ***/
+		} else if (*url == '[') {  /* module name */
 			++url;
 			while (*url != ']') {
 				++url;
 			}
 			++url;
 			sprintf(buf, "%s", url);
-		} else if (*url == '*') {/***  verse number link  ***/
+		} else if (*url == '*') {/* verse number link */
 			++url;
 			sprintf(buf, "%s", url);
-		} else if (!strncmp(url, "type=morph", 10)) {/***  thml and osis morph tag  ***/
+		} else if (!strncmp(url, "type=morph", 10)) {/* morph tag */
 			deal_with_morphs(url, FALSE);
 			return;
-		} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml and osis strongs ***/
+		} else if (!strncmp(url, "type=Strongs", 12)) {/* strongs */
 			deal_with_storngs(url, FALSE);			
 			return;
 		} else if (*url == 'U') {
 			++url;
 			sprintf(buf, "%s %s", _("Unlock "), url);
-		} else /***  any other link  ***/
+		} else /* any other link */
 			sprintf(buf, "%s", "");
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
-
 	}
 }
 
@@ -438,13 +506,9 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf = NULL, *modbuf = NULL;
-	gchar *buf1 = NULL;
-	gchar newmod[80], newref[80], tmpbuf[255];
-	gchar *oldnew = NULL;
+	gchar *buf = NULL;
+	gchar tmpbuf[255];
 	gint i = 0;
-	//gboolean is_strongsmorph = FALSE;
-	//const char *type;
 	
 	if (*url == '@') {
 		++url;
@@ -457,68 +521,26 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
+		return;
 	} else if (*url == 'I') {
 		++url;
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
+		return;
 	} else if (*url == '[') {/* module name  */
 		++url;
+		i = 0;
 		while (*url != ']') {
 			tmpbuf[i++] = *url;
 			tmpbuf[i + 1] = '\0';
 			++url;
 		}
 		gui_display_about_module_dialog(tmpbuf, FALSE);
-
-	} else if (!strncmp(url, "version=", 7)/* thml verse reference */
-		 || !strncmp(url, "passage=", 7)) {
-		gchar *mybuf = NULL;
-		gchar *mod_name = NULL;
-		mybuf = strstr(url, "version=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			i = 0;
-			while (mybuf[i] != ' ') {
-				newmod[i] = mybuf[i];
-				newmod[i + 1] = '\0';
-				++i;
-			}
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "passage=");
-		i = 0;
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			while (i < strlen(mybuf)) {
-				newref[i] = mybuf[i];
-				newref[i + 1] = '\0';
-				++i;
-			}
-		}
-		if (check_for_module(newmod)) {
-			modbuf = newmod;
-		} else {
-			modbuf = xml_get_value("modules", "bible");
-		}
-		buf = g_strdup(newref);
-		mod_name = g_strdup(modbuf);
-
-		if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
-			/* we have a dict/lex module 
-			   so we don't need to get a verse list */
-			gui_display_dictlex_in_sidebar(mod_name, buf);
-		} else {
-			gui_display_verse_list_in_sidebar(settings.
-							  currentverse,
-							  mod_name,
-							  buf);
-		}
-		g_free(buf);
-		g_free(mod_name);
-
+		return;
+	} else if (!strncmp(url, "version=", 7)||!strncmp(url, "passage=", 7)) {
+		deal_with_refs(url);/* thml verse reference */
+		return;
 	} else if (!strncmp(url, "type=morph", 10)) {/* thml and osis morph tag */
 		deal_with_morphs(url, TRUE);
 		return;
@@ -628,7 +650,7 @@ void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   get word or selection from html widget
  *
  * Return value
- *   gchar *
+ *   gchar *   must be freed by calling function
  */
 
 gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
@@ -663,7 +685,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
  *   lookup word in dict/lex module
  *
  * Return value
- *   gchar *
+ *   gchar *   must be freed by calling function 
  */
 
 gchar *gui_button_press_lookup(GtkWidget * html_widget)
@@ -682,7 +704,6 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 			key = g_strdelimit(key, ".,\"<>;:?", ' ');
 			key = g_strstrip(key);
 			len = strlen(key);
-			/* g_warning("len = %d",len); */
 			if (key[len - 1] == 's' || key[len - 1] == 'd')
 				key[len - 1] = '\0';
 			if (key[len - 1] == 'h' && key[len - 2] == 't'
