@@ -35,7 +35,7 @@ extern "C" {
 					       gpointer user_data);
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 					     gpointer user_data);
-	void gotoanchorHTML(gchar * verse);
+	void gotoanchorHTML(GtkWidget *html_widget, gchar * verse);
 	void sethtmltoeditHTML(gboolean choice);
 
 #ifdef __cplusplus
