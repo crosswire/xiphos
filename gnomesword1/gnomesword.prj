@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug
+project.configure.options=--prefix=/usr --enable-debug --enable-sword_cvs
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -150,10 +150,10 @@ module.include.files=\
 	src/main/mod_mgr.h\
 	src/backend/module_manager.hh\
 	src/gui/mod_mgr.h\
-	src/gui/mod_global_ops.h\
 	src/gui/tabbed_browser.h\
 	src/gui/url.h\
-	src/main/display.hh
+	src/main/display.hh\
+	src/main/global_ops.hh
 
 module.source.name=.
 module.source.type=
@@ -175,7 +175,6 @@ module.source.files=\
 	src/main/settings.c\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
-	src/main/sword.c\
 	src/main/module.c\
 	src/main/key.c\
 	src/main/configs.c\
@@ -237,14 +236,15 @@ module.source.files=\
 	src/main/mod_mgr.c\
 	src/backend/module_manager.cc\
 	src/gnome2/mod_mgr.c\
-	src/gnome2/mod_global_ops.c\
 	src/gnome2/tabbed_browser.c\
 	src/gnome2/url.c\
 	src/backend/gs_gbfhtmlhref.cpp\
 	src/backend/gs_markupfiltmgr.cpp\
 	src/backend/gs_osishtmlhref.cpp\
 	src/backend/gs_thmlhtmlhref.cpp\
-	src/main/display.cc
+	src/main/display.cc\
+	src/main/sword.cc\
+	src/main/global_ops.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

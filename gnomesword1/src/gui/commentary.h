@@ -30,7 +30,7 @@ void gui_set_commentary_mod_and_key(gchar * mod_name,
 				     gchar * key);
 void gui_display_commentary(gchar * key);
 GtkWidget *gui_create_commentary_pane(void);
-void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event);
+//void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event);
 
 
 #endif

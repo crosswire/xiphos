@@ -683,12 +683,12 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_container_add(GTK_CONTAINER(t->module_options_menu),
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-
+/*
 	gui_add_global_option_items(t->mod_name, 
 				t->module_options_menu, 
 				0,
 				t->ops);
-
+*/
 	/*
 	 * lookup menu
 	 */
