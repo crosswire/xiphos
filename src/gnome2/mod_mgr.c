@@ -1332,6 +1332,7 @@ GtkWidget *create_dialog(void)
 	GError *error = NULL;
 	GtkTooltips *tooltips;
 	tooltips = gtk_tooltips_new();
+	GString *str = g_string_new(NULL);
 
 	dialog = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
@@ -1378,7 +1379,8 @@ GtkWidget *create_dialog(void)
 	gtk_widget_show(vbox6);
 	gtk_container_add(GTK_CONTAINER(notebook1), vbox6);
 
-	label12 = gtk_label_new(_("<b>SWORD</b>"));
+	g_string_printf(str,"<b>%s</b>",_("SWORD"));
+	label12 = gtk_label_new(str->str);
 	gtk_widget_show(label12);
 	gtk_box_pack_start(GTK_BOX(vbox6), label12, TRUE, TRUE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label12), TRUE);
@@ -1390,16 +1392,18 @@ GtkWidget *create_dialog(void)
 	gtk_widget_show(image5);
 	gtk_box_pack_start(GTK_BOX(vbox6), image5, TRUE, TRUE, 0);
 
-	label13 = gtk_label_new(_("<b>Module Manager</b>"));
+	g_string_printf(str,"<b>%s</b>",_("Module Manager"));
+	label13 = gtk_label_new(str->str);
 	gtk_widget_show(label13);
 	gtk_box_pack_start(GTK_BOX(vbox6), label13, TRUE, TRUE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label13), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label13), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label13), 0.5, 0.28);
 
+	g_string_printf(str,"<b>%s</b> %s",_("WARNING:"),
+		_("If you live in a persecuted country use with care."));
 	label14 =
-	    gtk_label_new(_
-			  ("<b>WARNING:</b> If you live in a persecuted country use with care."));
+	    gtk_label_new(str->str);
 	gtk_widget_show(label14);
 	gtk_box_pack_start(GTK_BOX(vbox6), label14, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label14), TRUE);
@@ -1422,7 +1426,8 @@ GtkWidget *create_dialog(void)
 					   GTK_PACK_START);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox3), 4);
 
-	label5 = gtk_label_new(_("<b>Install Source</b>"));
+	g_string_printf(str,"<b>%s</b>",_("Install Source"));
+	label5 = gtk_label_new(str->str);
 	gtk_widget_show(label5);
 	gtk_box_pack_start(GTK_BOX(vbox3), label5, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label5), TRUE);
@@ -1474,7 +1479,8 @@ GtkWidget *create_dialog(void)
 	combo_entry2 = GTK_COMBO(combo1)->entry;
 	gtk_widget_show(combo_entry2);
 
-	label6 = gtk_label_new(_("<b>Install Destination</b>"));
+	g_string_printf(str,"<b>%s</b>",_("Install Destination"));
+	label6 = gtk_label_new(str->str);
 	gtk_widget_show(label6);
 	gtk_box_pack_start(GTK_BOX(vbox3), label6, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label6), TRUE);
@@ -1515,9 +1521,10 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox9), image4, FALSE, TRUE, 0);
 	gtk_misc_set_alignment(GTK_MISC(image4), 0, 0);
 
+	g_string_printf(str,"<b>%s</b> %s",_("WARNING:"),
+		_("If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "));
 	label10 =
-	    gtk_label_new(_
-			  ("<b>WARNING:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "));
+	    gtk_label_new(str->str);
 	gtk_widget_show(label10);
 	gtk_box_pack_start(GTK_BOX(hbox9), label10, TRUE, TRUE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label10), TRUE);
