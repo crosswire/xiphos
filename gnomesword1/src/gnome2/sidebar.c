@@ -734,7 +734,7 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	text = main_get_search_results_text(settings.sb_search_mod, key);
 	if (text) {
 		settings.displaySearchResults = TRUE;
-		main_entry_display(sidebar.html_widget,
+		main_entry_display(sidebar.html_viewer_widget, //sidebar.html_widget,
 			      settings.sb_search_mod, text, key, TRUE);
 		settings.displaySearchResults = FALSE;
 		free(text);
@@ -1114,11 +1114,11 @@ static void create_search_results_page(GtkWidget * notebook)
 	GtkWidget *vbox;
 	GtkWidget *frame;
 	GtkWidget *scrolledwindow;
-	GtkWidget *vpaned_srch_rslt;
-	GtkWidget *frame3;
+//	GtkWidget *vpaned_srch_rslt;
+//	GtkWidget *frame3;
 	GtkWidget *scrolledwindow3;
-	GtkWidget *frame4;
-	GtkWidget *scrolledwindow4;
+//	GtkWidget *frame4;
+//	GtkWidget *scrolledwindow4;
 	GtkListStore *model;
 	GtkTreeSelection *selection;
 	GtkWidget *menu = create_results_menu();
@@ -1126,7 +1126,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(notebook), vbox);
-	
+/*	
 	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_show(vpaned_srch_rslt);
 	gtk_box_pack_start(GTK_BOX(vbox), vpaned_srch_rslt, TRUE,
@@ -1135,11 +1135,13 @@ static void create_search_results_page(GtkWidget * notebook)
 		settings.verselist_toppane_height = 100;
 	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt),
 				settings.verselist_toppane_height);
-	
+*/
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow3);
-	gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), scrolledwindow3, TRUE,
-			TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow3, TRUE,
+			   TRUE, 0);
+	/*gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), scrolledwindow3, TRUE,
+			TRUE);*/
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
@@ -1169,6 +1171,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
 				     results_menu_uiinfo);
+/*
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
 	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), scrolledwindow4, TRUE,
@@ -1186,7 +1189,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow4),
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
-
+*/
 	g_signal_connect((gpointer)sidebar.results_list, 
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb),
@@ -1195,6 +1198,7 @@ static void create_search_results_page(GtkWidget * notebook)
 			 "changed",
 			 G_CALLBACK(tree_selection_changed_cb),
 			 NULL);
+			 /*
 	g_signal_connect(GTK_OBJECT(sidebar.html_widget), 
 			 "link_clicked",
 			 G_CALLBACK(link_clicked),
@@ -1203,7 +1207,7 @@ static void create_search_results_page(GtkWidget * notebook)
 			 "button_release_event",
 			 G_CALLBACK(on_button_release_event),
 			 sidebar.html_widget);
-
+*/
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "button_release_event",
 			 G_CALLBACK(gui_verselist_button_release_event),
@@ -1212,10 +1216,12 @@ static void create_search_results_page(GtkWidget * notebook)
 			 "button_press_event",
 			 G_CALLBACK(on_treeview_button_press_event),
 			 NULL);
+			 /*
 	g_signal_connect(GTK_OBJECT(vpaned_srch_rslt),
 			"button_release_event",
 			G_CALLBACK(vpaned_srch_rslt_button_release_event),
 			NULL);
+			*/
 }
 
 

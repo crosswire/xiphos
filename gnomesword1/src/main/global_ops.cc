@@ -203,12 +203,12 @@ void main_set_global_options(GLOBAL_OPS * ops)
 
 /******************************************************************************
  * Name
- *  
+ *   main_set_strongs_morphs_off
  *
  * Synopsis
  *   #include "gui/mod_global_ops.h"
  *
- *   void (GLOBAL_OPS * ops)	
+ *   void main_set_strongs_morphs_off(GLOBAL_OPS * ops)	
  *
  * Description
  *   set module global options 
@@ -225,6 +225,33 @@ void main_set_strongs_morphs_off(GLOBAL_OPS * ops)
 			  FALSE);
 
 }
+
+
+/******************************************************************************
+ * Name
+ *   main_set_strongs_morphs
+ *
+ * Synopsis
+ *   #include "gui/mod_global_ops.h"
+ *
+ *   void main_set_strongs_morphs(GLOBAL_OPS * ops)	
+ *
+ * Description
+ *   set module global options 
+ *
+ * Return value
+ *   void
+ */
+
+void main_set_strongs_morphs(GLOBAL_OPS * ops)
+{
+	set_global_option(ops->module_type, "Strong's Numbers",
+			  ops->strongs);
+	set_global_option(ops->module_type, "Morphological Tags",
+			  ops->morphs);
+
+}
+
 
 /******************************************************************************
  * Name
