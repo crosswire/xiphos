@@ -488,8 +488,9 @@ on_ctreeBooks_select_row(GtkCList * clist,
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
 	TreeKeyIdx treenode = *treeKey;
 	treenode.setOffset(strtoul(offset,NULL,0));
-	
-	g_warning("nodename = %s bookname = %s",nodename, bookname);
+	//if((const char *)curbookMod->getConfigEntry("Description"))
+		//g_warning("Description");
+		//g_warning("Description = %s" ,(const char *)curbookMod->getConfigEntry("Description"));
 	
 	if(!curbookMod->isWritable()) 
 		iswritable = 0;

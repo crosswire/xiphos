@@ -140,7 +140,7 @@ entry_activate (GtkWidget *entry, GtkHTMLReplaceDialog *d)
 }
 
 GtkHTMLReplaceDialog *
-gtk_html_replace_dialog_new (GtkHTML *html)
+gs_editor_replace_dialog_new (GtkHTML *html)
 {
 	GtkHTMLReplaceDialog *dialog = g_new (GtkHTMLReplaceDialog, 1);
 	GtkWidget *hbox;
@@ -197,7 +197,7 @@ gtk_html_replace_dialog_new (GtkHTML *html)
 }
 
 void
-gtk_html_replace_dialog_destroy (GtkHTMLReplaceDialog *d)
+gs_editor_replace_dialog_destroy (GtkHTMLReplaceDialog *d)
 {
 	g_free (d);
 }
@@ -212,16 +212,3 @@ replace (GSHTMLEditorControlData *ecd)
 }
 
 
-void
-run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title)
-{
-	if (*dialog) {
-		gtk_window_set_title (GTK_WINDOW (**dialog), title);
-		gtk_widget_show (GTK_WIDGET (**dialog));
-		gdk_window_raise (GTK_WIDGET (**dialog)->window);
-	} else {
-		*dialog = ctor (html);
-		gtk_window_set_title (GTK_WINDOW (**dialog), title);
-		gtk_widget_show (GTK_WIDGET (**dialog));
-	}
-}

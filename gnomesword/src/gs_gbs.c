@@ -329,7 +329,7 @@ static GnomeUIInfo pmGBS_uiinfo[] = {
 	 N_("edit the name of the current node"),
 	 (gpointer) on_edit_current_node_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
-	 0, (GdkModifierType) 0, NULL},
+	 GDK_F2, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Delete Current Node"),
 	 NULL,
