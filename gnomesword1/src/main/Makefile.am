@@ -1,7 +1,6 @@
 INCLUDES =  \
     -I$(top_builddir)/src \
-    $(XML_CFLAGS) \
-    -I/usr/include/gconf/1/
+    $(PACKAGE_CFLAGS) 
 
 noinst_LIBRARIES = libmain.a  
 

@@ -7,4 +7,4 @@ Icon=@pixmapdir@/GnomeSword.png
 Terminal=false
 MultipleArgs=false
 Type=Application
-Categories=Application;Accessories;
+Categories=Application;Accessories;Other

@@ -33,7 +33,6 @@
 #include "main/settings.h"
 
 #include "backend/sword.h"
-//#include "backend/shortcutbar.h"
 
 /******************************************************************************
  * Name

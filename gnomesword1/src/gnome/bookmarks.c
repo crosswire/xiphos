@@ -177,7 +177,7 @@ static void get_node_data(GNode * node)
  */
 
 static xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent,
-					   BOOKMARK_DATA * es)
+				BOOKMARK_DATA * es)
 {
 	xmlNodePtr cur_node;
 	xmlAttrPtr xml_attr;

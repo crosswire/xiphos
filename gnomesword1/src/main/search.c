@@ -85,4 +85,30 @@ void search_dialog_appbar_update(char percent, void *userData)
 
 
 
+/******************************************************************************
+ * Name
+ *   set_search_global_option
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void set_search_global_option(gchar * option, gchar * choice)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
+void set_search_global_option(gchar * option, gboolean choice)
+{	
+	char *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	backend_set_global_option(5, option, on_off);
+}

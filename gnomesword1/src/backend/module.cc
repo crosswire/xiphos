@@ -93,7 +93,6 @@ extern SWKey *current_scope;
 
 int backend_is_module_rtl(char * mod_name)
 {
-	int retval = 0;
 	char *direction = NULL;
 	
 	SWModule *module = sw.main_mgr->Modules[mod_name];
@@ -101,9 +100,9 @@ int backend_is_module_rtl(char * mod_name)
 		direction = (char*)module->getConfigEntry("Direction");
 	if(direction)
 		if(!strcmp(direction,"RtoL"))
-			retval = 1;
+			return 1;
 		
-	return retval;
+	return 0;
 		
 }
 

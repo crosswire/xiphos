@@ -74,8 +74,6 @@
 
 void init_gnomesword(void)
 {
-
-
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
@@ -196,6 +194,7 @@ void shutdown_gnomesword(void)
 	gui_save_bookmarks(NULL, NULL);
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
+	
 	/* if study pad file has changed since last save */
 	if (widgets.studypad_dialog)
 		gtk_widget_destroy(widgets.studypad_dialog);
@@ -212,7 +211,6 @@ void shutdown_gnomesword(void)
 	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
-	/*g_free(settings.xml_bookmark_dir);*/
 
 	if (settings.havebible) {
 		gui_shutdown_text();

@@ -402,11 +402,11 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	/*
 	 * set search module to current gbs module 
 	 */
-	strcpy(settings.sb_search_mod, g->mod_name);
+//	strcpy(settings.sb_search_mod, g->mod_name);
 	/*
 	 * set search frame label to current gbs module 
 	 */
-	gui_set_search_label(g->mod_name);
+	gui_set_search_label();
 	
 	settings.BookWindowModule = g->mod_name;	
 	xml_set_value("GnomeSword", "modules", "book",g->mod_name);
@@ -468,11 +468,11 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	/*
 	 * set search module to current gbs module 
 	 */
-	strcpy(settings.sb_search_mod, g->mod_name);
+//	strcpy(settings.sb_search_mod, g->mod_name);
 	/*
 	 * set search frame label to current gbs module 
 	 */
-	gui_set_search_label(g->mod_name);
+//	gui_set_search_label();
 	
 	switch (event->button) {
 	case 1:

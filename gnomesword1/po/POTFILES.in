@@ -17,7 +17,6 @@ src/gnome/display_info.c
 src/gnome/editor.c
 src/gnome/editor_menu.c
 src/gnome/editor_replace.c
-src/gnome/editor_search.c
 src/gnome/editor_spell.c
 src/gnome/fileselection.c
 src/gnome/find_dialog.c

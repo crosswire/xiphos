@@ -26,10 +26,10 @@ props.file.type=project
 anjuta.version=1.0.2
 anjuta.compatibility.level=1
 
-project.name=gnomesword-1.0
+project.name=gnomesword
 project.type=GNOME
 project.target.type=EXECUTABLE
-project.version=0.9.1
+project.version=0.9.0
 project.author=The GnomeSword Team
 project.source.target=src/gnome/gnomesword-1.0
 project.has.gettext=1
@@ -41,13 +41,13 @@ project.config.extra.modules.after=
 project.config.blocked=1
 project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
-project.menu.entry=gnomesword Version 0.9.1
+project.menu.entry=gnomesword Version 0.9.0
 project.menu.group=Application
-project.menu.comment=gnomesword Version 0.9.1
+project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--enable-use_aspell
+project.configure.options=--prefix=/home/terry --enable-gtkembedmoz
 anjuta.program.arguments=
 preferences.indent.automatic=1
 preferences.use.tabs=1
@@ -64,7 +64,7 @@ preferences.help.browser=devhelp -s '$(current.file.selection)'
 
 module.include.name=.
 module.include.type=
-module.include.expanded=1
+module.include.expanded=0
 module.include.files=\
 	src/backend/sword.h\
 	src/backend/sword_defs.h\
