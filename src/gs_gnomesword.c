@@ -144,6 +144,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				percommods);
 /* add pages to commentary and  dictionary notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
+	//g_warning("%d",biblepage);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
 	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);	
 /*  set text windows to word warp */
@@ -192,17 +193,16 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	
 /* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
-	if(havebible){ 			
-		gint pagenum;
-		
-		pagenum = biblepage; 
+	if(havebible){ 	
+		if(biblepage == 0)
+			changecurModSWORD(settings->MainWindowModule, TRUE); 
 		/* get notebook */
 		notebook = lookup_widget(app,"nbTextMods");
 		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
 			   GTK_SIGNAL_FUNC(on_nbTextMods_switch_page),
 			   NULL);			
 		/* set notebook page */
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), biblepage); 
                 if(settings->text_tabs) 
 			gtk_widget_show(notebook);
                 else 
@@ -211,34 +211,37 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		
 /* set dict module to open notebook page */
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
-	if(havedict){ 			
-		/* set page to 0 (first page in notebook) */
-		gint pagenum = 0;
-		pagenum = dictpage;
+	if(havedict){ 	
+		if(dictpage == 0) 
+			changcurdictModSWORD(settings->DictWindowModule, settings->dictkey);
 		/* get notebook */
 		notebook = lookup_widget(app,"notebook4");
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook4_switch_page),
                       NULL);		
 		/* set notebook page */
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
-		if(settings->dict_tabs) gtk_widget_show(notebook);
-                else gtk_widget_hide(notebook);
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), dictpage); 	
+		if(settings->dict_tabs) 
+			gtk_widget_show(notebook);
+                else 
+			gtk_widget_hide(notebook);
          /* hide dictionary section of window if we do not have at least one dict/lex */
 	}else 
 		gtk_widget_hide(lookup_widget(app,"hbox8"));
-	
+	 
 /* set com module to open notebook page */	
-	if(havecomm){ /* let's don't do this if we don't have at least one commentary */  	
-		gint pagenum = 0;
+	if(havecomm){ /* let's don't do this if we don't have at least one commentary */ 
+		if(commpage == 0)
+			changcurcomModSWORD(settings->CommWindowModule, TRUE);  		
 		notebook = lookup_widget(app,"notebook1");
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
-                                        NULL);
-		pagenum = commpage;			
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );		
-                if(settings->comm_tabs) gtk_widget_show(notebook);
-                else gtk_widget_hide(notebook);
+                                        NULL);		
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), commpage);		
+                if(settings->comm_tabs) 
+			gtk_widget_show(notebook);
+                else 
+			gtk_widget_hide(notebook);
         }else 
 		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
 		
