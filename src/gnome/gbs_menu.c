@@ -41,6 +41,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/utilities.h"
+#include "gui/widgets.h"
 
 #include "main/gbs.h"
 #include "main/settings.h"

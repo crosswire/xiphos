@@ -1,5 +1,5 @@
 INCLUDES = \
-    $(PACKAGE_CFLAGS) \
+    $(GNOME_CFLAGS) \
     -I$(top_builddir)/src
 
 noinst_LIBRARIES = libbackend.a

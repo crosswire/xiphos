@@ -106,7 +106,7 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL, "HTMLcolors", NULL);
 	xmlNewTextChild(section_node, NULL, "background", "#FFFFFF");
-	xmlNewTextChild(section_node, NULL, "text", "#000000");
+	xmlNewTextChild(section_node, NULL, "text_fg", "#000000");
 	xmlNewTextChild(section_node, NULL, "versenum", "#0000CF");
 	xmlNewTextChild(section_node, NULL, "currentverse", "#339766");
 	xmlNewTextChild(section_node, NULL, "link", "#878787");
@@ -152,7 +152,7 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL, "misc", NULL);
 	xmlNewTextChild(section_node, NULL, "dailydevotional", "0");
-	xmlNewTextChild(section_node, NULL, "splash", "1");
+	xmlNewTextChild(section_node, NULL, "splash", "0");
 	xmlNewTextChild(section_node, NULL, "usedefault", "1");
 	xmlNewTextChild(section_node, NULL, "formatpercom", "1");
 	xmlNewTextChild(section_node, NULL, "showcomms", "1");
@@ -162,16 +162,16 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "modules", NULL);
-	xmlNewTextChild(section_node, NULL, "book", "");
+	xmlNewTextChild(section_node, NULL, "book", "NeeNormal");
 	xmlNewTextChild(section_node, NULL, "comm", "MHC");
-	xmlNewTextChild(section_node, NULL, "devotional", "");
+	xmlNewTextChild(section_node, NULL, "devotional", "SME");
 	xmlNewTextChild(section_node, NULL, "dict", "BDB");
-	xmlNewTextChild(section_node, NULL, "int1", "");
-	xmlNewTextChild(section_node, NULL, "int2", "");
-	xmlNewTextChild(section_node, NULL, "int3", "");
-	xmlNewTextChild(section_node, NULL, "int4", "");
-	xmlNewTextChild(section_node, NULL, "int5", "");
-	xmlNewTextChild(section_node, NULL, "text", "KJV");
+	xmlNewTextChild(section_node, NULL, "int1", "KJV");
+	xmlNewTextChild(section_node, NULL, "int2", "KJV");
+	xmlNewTextChild(section_node, NULL, "int3", "KJV");
+	xmlNewTextChild(section_node, NULL, "int4", "KJV");
+	xmlNewTextChild(section_node, NULL, "int5", "KJV");
+	xmlNewTextChild(section_node, NULL, "bible", "KJV");
 	xmlNewTextChild(section_node, NULL, "percomm", "Personal");
 
 
@@ -180,12 +180,12 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "shortcutbar", "1");
 	xmlNewTextChild(section_node, NULL, "docked", "1");
 	xmlNewTextChild(section_node, NULL, "book", "0");
-	xmlNewTextChild(section_node, NULL, "bookmark", "0");
+	xmlNewTextChild(section_node, NULL, "bookmark", "1");
 	xmlNewTextChild(section_node, NULL, "comm", "0");
 	xmlNewTextChild(section_node, NULL, "dict", "0");
-	xmlNewTextChild(section_node, NULL, "favo", "1");
+	xmlNewTextChild(section_node, NULL, "favo", "0");
 	xmlNewTextChild(section_node, NULL, "history", "0");
-	xmlNewTextChild(section_node, NULL, "text", "0");
+	xmlNewTextChild(section_node, NULL, "bible", "0");
 
 
 	section_node = xmlNewChild(root_node, NULL, "studypad", NULL);
@@ -197,13 +197,16 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "tabs", NULL);
-	xmlNewTextChild(section_node, NULL, "text", "1");
+	xmlNewTextChild(section_node, NULL, "bible", "1");
 	xmlNewTextChild(section_node, NULL, "comm", "1");
 	xmlNewTextChild(section_node, NULL, "dict", "1");
 	xmlNewTextChild(section_node, NULL, "book", "1");
 	xmlNewTextChild(section_node, NULL, "percomm", "1");
 	return 1;
 }
+
+
+
 
 
 /******************************************************************************

@@ -44,6 +44,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/utilities.h"
+#include "gui/widgets.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -858,10 +859,11 @@ static void add_global_option_items(TEXT_DATA * t)
 				   (global_option_lemmas), t);
 	}
 
-	if (check_for_global_option(t->mod_name, "ThMLScripref")) {
+	if ((check_for_global_option(t->mod_name, "ThMLScripref")) ||
+	   (check_for_global_option(t->mod_name, "OSISHeadings")) ) {
 		t->tgs->scripturerefs =
 		    load_module_options(t->mod_name,
-					"Scripture Cross-references");
+					"Cross-references");
 
 		item =
 		    gtk_check_menu_item_new_with_label(

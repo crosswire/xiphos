@@ -40,7 +40,6 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
-#include "main/settings.h"
 #include "main/search.h"
 #include "main/sword.h"
 
@@ -226,7 +225,6 @@ int backend_do_module_search(char *module_name, char *search_string,
 {
 	char progressunits = 70;
 
-	strcpy(settings.searchText, search_string);
 	results.ClearList();
 	search_module = NULL;
 

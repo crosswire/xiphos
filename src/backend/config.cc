@@ -42,18 +42,19 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <sys/stat.h>
+
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 
 #include "backend/config.hh"
 #include "backend/sword_defs.h"
 
-#include "main/settings.h"
 #include "main/sword.h"
 #include "main/search.h"
 
-//using std::string;
-//using std::map;
-//using std::list;
 using namespace sword;
 using namespace std;
 

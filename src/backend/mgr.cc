@@ -36,12 +36,11 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
-#include "main/settings.h"
 #include "main/search.h"
 
-using std::string;
-using std::map;
-using std::list;
+//using std::string;
+//using std::map;
+//using std::list;
 using namespace sword;
 
 #include "backend/mgr.hh"
@@ -61,8 +60,8 @@ SWORD sw;
  * static  global to this file only 
  */
 
-static OptionsList optionslist;
-static OptionsList::iterator it;
+static StringList optionslist;
+static StringList::iterator it;
 
 
 

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -91,7 +91,7 @@ struct _settings {
 		studypad_page,   /* studypad workbook page number */
 		percomm_page;   /* percomm editor workbook page number */
 						
-	gboolean   
+	int   
 		usedefault, /* use default settings in gnomesword or those used for last session */
 		strongs,	//-- toogle button and check menu state
 		strongsint, //-- check menu state interlinear mods
@@ -190,13 +190,13 @@ struct _settings {
 	char *module_dialog;
 
 	/* apply changes to what? the text navigation bar */
-	gboolean apply_change;
+	int apply_change;
 	
 	/* load xml bookmarks */
-	gboolean load_xml_bookmarks;
+	int load_xml_bookmarks;
 	
 	/* is Bibletime on the system */
-	gboolean have_bibletime;
+	int have_bibletime;
 };
 
 extern SETTINGS settings;
