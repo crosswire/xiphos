@@ -695,6 +695,8 @@ void
 changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module for main window
 {                                 //-- someone clicked View->MainWindow->module
 	ModMap::iterator it;            //-- or clicked the mainwindow popup menu and the callback sent us here
+	gchar title[200];
+	
         if(havebible) {
 	        it = mainMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 	        if (it != mainMgr->Modules.end()){ //-- if we find the module	
@@ -705,9 +707,15 @@ changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module 
 		        }
 	        }
 	        strcpy(settings->MainWindowModule, curMod->Name()); //-- remember where we are so we can open here next time we startup
-	
+	/*
 	        gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")), //-- set main window frame label of
                                  curMod->Name());                  //-- to current Module name
+	*/
+		sprintf(title,"GnomeSword - %s",curMod->Name());
+		
+		gtk_window_set_title(GTK_WINDOW(MainFrm),
+						title);
+		
         }
 }
 
@@ -931,18 +939,17 @@ void
 changcurdictModSWORD(gchar *modName, gchar *keyText, gint page_num) //-- someone changed dict notebook page - sent here by notebook callback
 {	                    //-- modName form page label - keyText from dict lookup entry
 	ModMap::iterator it;
-        GtkWidget   *frame;  //-- pointer to dict&lex frame
+        //GtkWidget   *frame;  //-- pointer to dict&lex frame
             						
-	frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
+	//frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
 	settings->notebook2page = page_num; //-- save current page
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != mainMgr->Modules.end()){	
 		curdictMod = (*it).second;  //-- set curdictMod to new choice
 		curdictMod->SetKey(keyText);   //-- set key to text from lookup entry
 		curdictMod->Display();	 //-- display new dict
-		//curdictMod->Name();
 		FillDictKeysSWORD(); //-- fill the list widget with keys	
-		gtk_frame_set_label( GTK_FRAME(frame),curdictMod->Name()); //-- set frame label
+		//gtk_frame_set_label( GTK_FRAME(frame),curdictMod->Name()); //-- set frame label
 	}
 }
 

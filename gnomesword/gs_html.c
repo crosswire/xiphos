@@ -90,7 +90,7 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 			++url;
 			sprintf(buf,"%s",url);		
 		} else 
-			sprintf(buf,"Go to Reference  %s",url);
+			sprintf(buf,"Go to %s",url);
 		gnome_appbar_set_status (GNOME_APPBAR (appbar1), buf);
 	}
 }
@@ -125,7 +125,8 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 static void
 on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf;
+	gchar *buf, tmpbuf[255];
+	gint i = 0;
 	
 	if (*url == '#') {
 		++url;		/* remove # */
@@ -139,7 +140,15 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
-	}  else {		
+	} else if(*url == '[')   {
+		++url;
+		while(*url != ']') {
+			tmpbuf[i++] = *url;
+			tmpbuf[i+1] = '\0';
+			++url;
+		}		
+		showmoduleinfoSWORD(tmpbuf);  
+	} else {		
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
