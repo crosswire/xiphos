@@ -237,7 +237,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 */
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
 
-	gui_set_text_frame_label();
+	gui_set_text_frame_label(t);
 	widgets.html_text = t->html;
 }
 
@@ -384,7 +384,7 @@ static void create_pane(TEXT_DATA * t)
  * Synopsis
  *   #include "_bibletext.h"
  *
- *   void gui_set_text_frame_label(void)	
+ *   void gui_set_text_frame_label(TEXT_DATA * t)	
  *
  * Description
  *   sets text frame label to module name or null
@@ -393,17 +393,17 @@ static void create_pane(TEXT_DATA * t)
  *   void
  */
 
-void gui_set_text_frame_label(void)
+void gui_set_text_frame_label(TEXT_DATA * t)
 {
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
 	 */
 	if (settings.text_tabs)
-		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
+		gtk_frame_set_label(GTK_FRAME(t->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_t->frame),
-				    cur_t->mod_name);
+		gtk_frame_set_label(GTK_FRAME(t->frame),
+				    t->mod_name);
 }
 
 /******************************************************************************

@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * shortcutbar_main.c - create and maintain the main shortcut bar
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
+#include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/shortcut-bar/e-vscrolled-bar.h>
 #include <gal/widgets/e-unicode.h>
 
@@ -41,6 +41,10 @@
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
+#include "gui/bibletext_dialog.h"
+#include "gui/commentary_dialog.h"
+#include "gui/dictlex_dialog.h"
+#include "gui/gbs_dialog.h"
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
@@ -86,8 +90,7 @@ static void on_add_all_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 static void remove_all_items(gint group_num);
 static void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
-		      GtkWidget * shortcut_menu_widget, gint mod_type);
-		      
+		      GtkWidget * shortcut_menu_widget, gint mod_type);      
 		      
 		      
 /******************************************************************************
@@ -125,7 +128,90 @@ void showSBGroup(gint groupnum)
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 					  groupnum, TRUE);
 }
+		      
+/******************************************************************************
+ * Name
+ *    get_pixbuf
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   GdkPixbuf * get_pixbuf(gint type, gchar *item_url)	
+ *
+ * Description
+ *   return pixbuf to use for creating a shortcut item
+ *
+ * Return value
+ *   GdkPixbuf *
+ */
 
+GdkPixbuf * get_pixbuf(gint type, gchar *item_url)
+{
+	GdkPixbuf *icon_pixbuf = NULL;	
+	switch (type) {
+		case 0:
+			if(!strcmp(item_url,"dialog"))
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file(
+					PACKAGE_PIXMAPS_DIR
+					"/dlg-un.png");
+			else
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file
+					(PACKAGE_PIXMAPS_DIR
+					"/book-un.png");
+			break;
+		case 1:
+			if(!strcmp(item_url,"dialog"))
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file(
+					PACKAGE_PIXMAPS_DIR
+					"/dlg-bl.png");
+			else
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file
+					(PACKAGE_PIXMAPS_DIR
+					"/book-bl.png");
+			break;
+		case 2:
+			if(!strcmp(item_url,"dialog"))
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file(
+					PACKAGE_PIXMAPS_DIR
+					"/dlg-un.png");
+			else
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file
+				    (PACKAGE_PIXMAPS_DIR
+				     "/book-green.png");
+			break;
+		case 3:
+			if(!strcmp(item_url,"dialog"))
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file(
+					PACKAGE_PIXMAPS_DIR
+					"/dlg-un.png");
+			else
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file
+				    (PACKAGE_PIXMAPS_DIR
+				     "/book-gold.png");
+			break;
+		default :
+			if(!strcmp(item_url,"dialog"))
+				icon_pixbuf =
+					gdk_pixbuf_new_from_file(
+					PACKAGE_PIXMAPS_DIR
+					"/dlg-un.png");
+			else
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file
+				    (PACKAGE_PIXMAPS_DIR
+				     "/book-un.png");
+		
+	}
+	return icon_pixbuf;	
+}
 /******************************************************************************
  * Name
  *   changegroupnameSB 
@@ -155,6 +241,114 @@ void changegroupnameSB(gchar * groupName, gint groupNum)
 					   groupNum, label);
 }
 
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   void (EShortcutBar * shortcut_bar, gint group_num)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static GList *fill_group_list(gint group_num)
+{
+	GList *group_list = NULL;
+	gchar *item_url, *item_name;
+	gint j, number_of_items = 0;
+	GString *str;
+	
+	number_of_items = gui_get_num_shortcut_items(group_num);
+	str = g_string_new("");
+	for (j = 0; j < number_of_items; j++) {
+		gui_get_shortcut_item_info(group_num, j, &item_url,
+				       &item_name);
+		if(!strcmp(item_url,"dialog"))
+			g_string_sprintf(str, "%s@dialog",item_name);
+		else
+			g_string_sprintf(str, "%s@main",item_name);
+		
+		group_list = g_list_append(group_list, (char *) g_strdup(str->str));
+		//g_warning("%s", item_name);
+		g_free(item_url);
+		g_free(item_name);
+	}
+	g_string_free(str,FALSE);
+	return group_list;
+	
+}
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void load_group_shortcuts_from_list(gchar * path, gint group_num)
+{
+	GList *tmp = NULL;
+	gchar *buf;
+	gchar *token;
+	gchar *item_url;
+	gchar *item_name;
+	gchar mod_name[16];
+	gchar group_name[256];
+	gchar icon_size[10];
+	gint sbtype = 0;
+	GdkPixbuf *icon_pixbuf = NULL;
+	
+	tmp = load_sb_group(path, group_name, icon_size); 
+	if(atoi(icon_size) == 1)
+		e_shortcut_bar_set_view_type((EShortcutBar *)
+				     shortcut_bar,
+				     group_num,
+				     E_ICON_BAR_LARGE_ICONS);
+	while (tmp != NULL) {
+		/* seperate name and url */
+		buf = (gchar *) tmp->data;
+		token =
+		    strtok(buf, "@");
+		item_name = g_strdup(token);
+		token = strtok(NULL, "@");
+		item_url = strdup(token);
+		
+		memset(mod_name, 0, 16);
+		module_name_from_description(mod_name, item_name);
+		sbtype = 0;
+		sbtype = get_mod_type(mod_name);
+		
+		if (sbtype < 0)
+			sbtype = 0;
+		icon_pixbuf = get_pixbuf(sbtype, item_url);
+		
+		e_shortcut_model_add_item(E_SHORTCUT_BAR
+					  (shortcut_bar)->
+					  model, group_num,
+					  -1, item_url,
+					  item_name, icon_pixbuf);
+		g_free(item_url);
+		g_free(item_name);
+		tmp = g_list_next(tmp);
+	}
+}
 /******************************************************************************
  * Name
  *   savegroup 
@@ -174,65 +368,67 @@ void changegroupnameSB(gchar * groupName, gint groupNum)
 static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 {
 	gchar *group_name;
-
+	GList *group_list;
+	
 	group_name =
 	    e_shortcut_model_get_group_name(E_SHORTCUT_BAR
 					    (shortcut_bar)->model,
 					    group_num);
-
+	group_list = fill_group_list(group_num);
+	
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Favorites.conf",
-					  group_name, group_num, "1");
+			save_sb_group(group_list, "Favorites.conf",
+					  group_name, "1");
 		else
-			save_sb_group("Favorites.conf",
-					  group_name, group_num, "0");
+			save_sb_group(group_list,"Favorites.conf",
+					  group_name, "0");
 	}
 
 	if (group_num == groupnum1) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("BibleText.conf",
-					  group_name, group_num, "1");
+			save_sb_group(group_list,"BibleText.conf",
+					  group_name, "1");
 		else
-			save_sb_group("BibleText.conf",
-					  group_name, group_num, "0");
+			save_sb_group(group_list,"BibleText.conf",
+					  group_name, "0");
 	}
 
 	if (group_num == groupnum2) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Commentaries.conf",
-					  group_name, group_num, "1");
+			save_sb_group(group_list,"Commentaries.conf",
+					  group_name, "1");
 		else
-			save_sb_group("Commentaries.conf",
-					  group_name, group_num, "0");
+			save_sb_group(group_list,"Commentaries.conf",
+					  group_name, "0");
 	}
 
 	if (group_num == groupnum3) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Dictionaries.conf",
-					  group_name, group_num, "1");
+			save_sb_group(group_list,"Dictionaries.conf",
+					  group_name, "1");
 		else
-			save_sb_group("Dictionaries.conf",
-					  group_name, group_num, "0");
+			save_sb_group(group_list,"Dictionaries.conf",
+					  group_name, "0");
 	}
 
 	if (group_num == groupnum8) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum8) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Books.conf", group_name,
-					  group_num, "1");
+			save_sb_group(group_list,"Books.conf", group_name,
+					  "1");
 		else
-			save_sb_group("Books.conf", group_name,
-					  group_num, "0");
+			save_sb_group(group_list,"Books.conf", group_name,
+					  "0");
 	}
 }
 
@@ -401,7 +597,9 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 				     item_num);
 	group_name =
 	    e_shortcut_model_get_group_name(shortcut_model, group_num);
-
+	
+	savegroup(bar1, group_num);
+/*
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
@@ -444,7 +642,7 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 		else
 			save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "0");
-	}
+	}*/
 }
 
 /******************************************************************************
@@ -466,7 +664,7 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GList *glist;
-	gint number_of_items = 0, group_num, sbtype;
+	gint group_num, sbtype;
 	EShortcutBar *bar1;
 	gchar *group_name, modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
@@ -505,39 +703,16 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 		
 		if (sbtype < 0)
 			sbtype = 0;
-
-		switch (sbtype) {
-		case 0:
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-un.png");
-			break;
-		case 1:
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-bl.png");
-			break;
-		case 2:
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-green.png");
-			break;
-		case 3:
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-gold.png");
-			break;
-		}
+		icon_pixbuf = get_pixbuf(sbtype, "main");
 
 		e_shortcut_model_add_item(E_SHORTCUT_BAR
 					  (shortcut_bar)->model,
-					  group_num, -1, "not null",
+					  group_num, -1, "main",
 					  (gchar *) glist->data,
 					  icon_pixbuf);
-		++number_of_items;
 		glist = g_list_next(glist);
 	}
-	g_list_free(glist);
+	//g_list_free(glist);
 	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);
 }
 
@@ -561,92 +736,15 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_add_shortcut_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
-	gchar *group_name;
-	gint group_num, sbtype;
+	//gchar *group_name;
+	gint group_num;
 	EShortcutBar *bar1;
-	gchar modName[16];
-	GdkPixbuf *icon_pixbuf = NULL;
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num =
 	    e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
-	memset(modName, 0, 16);
-	module_name_from_description(modName, (gchar *) user_data);
-	sbtype = 0;
-	sbtype = get_mod_type(modName);
 	
-	if (sbtype < 0)
-		sbtype = 0;
-
-	switch (sbtype) {
-	case 0:
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/book-un.png");
-		break;
-	case 1:
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/book-bl.png");
-		break;
-	case 2:
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/book-green.png");
-		break;
-	}
-	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->
-				  model, group_num, -1, "not null",
-				  (gchar *) user_data, icon_pixbuf);
-
-	group_name = "";
-	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR
-						     (shortcut_bar)->
-						     model, group_num);
-
-	if (group_num == groupnum0) {
-		if (e_shortcut_bar_get_view_type
-		    (E_SHORTCUT_BAR(shortcut_bar),
-		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Favorites.conf",
-					  group_name, group_num, "1");
-		else
-			save_sb_group("Favorites.conf",
-					  group_name, group_num, "0");
-	}
-
-	if (group_num == groupnum1) {
-		if (e_shortcut_bar_get_view_type
-		    (E_SHORTCUT_BAR(shortcut_bar),
-		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("BibleText.conf",
-					  group_name, group_num, "1");
-		else
-			save_sb_group("BibleText.conf",
-					  group_name, group_num, "0");
-	}
-
-	if (group_num == groupnum2) {
-		if (e_shortcut_bar_get_view_type
-		    (E_SHORTCUT_BAR(shortcut_bar),
-		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Commentaries.conf",
-					  group_name, group_num, "1");
-		else
-			save_sb_group("Commentaries.conf",
-					  group_name, group_num, "0");
-	}
-
-	if (group_num == groupnum3) {
-		if (e_shortcut_bar_get_view_type
-		    (E_SHORTCUT_BAR(shortcut_bar),
-		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
-			save_sb_group("Dictionaries.conf",
-					  group_name, group_num, "1");
-		else
-			save_sb_group("Dictionaries.conf",
-					  group_name, group_num, "0");
-	}
+	gui_add_sb_item("main", (gchar *) user_data, group_num);
 }
 
 /******************************************************************************
@@ -678,6 +776,50 @@ static gint add_sb_group(EShortcutBar * shortcut_bar,
 				     E_ICON_BAR_SMALL_ICONS);
 	return group_num;
 }
+
+
+/******************************************************************************
+ * Name
+ *   gui_add_sb_item 
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   void gui_add_sb_item(gchar * url, gchar * name,
+ *					gint group_num)
+ *
+ * Description
+ *   add item to shourtcut bar
+ *
+ * Return value
+ *   gint
+ */
+
+void gui_add_sb_item(gchar * url, gchar * name,
+					gint group_num)
+{
+	
+	EShortcutBar *bar1;
+	GdkPixbuf *icon_pixbuf = NULL;
+	gchar modName[16];
+	gint sbtype;
+	
+	memset(modName, 0, 16);
+	module_name_from_description(modName, name);
+	sbtype = 0;
+	sbtype = get_mod_type(modName);
+	
+	if (sbtype < 0)
+		sbtype = 0;
+	
+	bar1 = E_SHORTCUT_BAR(shortcut_bar);
+	icon_pixbuf = get_pixbuf(sbtype, url);
+	e_shortcut_model_add_item(bar1->
+				  model, group_num, -1, url,
+				  name, icon_pixbuf);
+	savegroup(bar1, group_num);
+}
+
 
 /******************************************************************************
  * Name
@@ -989,100 +1131,104 @@ static void show_context_popup(EShortcutBar * shortcut_bar,
 static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			GdkEvent * event,gint group_num, gint item_num)
 {
-	GtkWidget *app;
-	gchar *type, *ref;
-	gchar modName[16];
+	gchar *item_url, *item_name;
+	gchar mod_name[16];
 	gint remItemNum = 0;
+	gint sbtype;
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	remItemNum = item_num;
 
-//      if(item_num == -1) {
-//              if(group_num == groupnum2) /* change work space notebook to commentary page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_upper),0);
-//              if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower),0);
-//              if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower),1);
-//      }
 
 	if (event->button.button == 1) {
 		if (item_num > -1) {
-			app =
-			    gtk_widget_get_toplevel(GTK_WIDGET
-						    (shortcut_bar));
 			e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 						       (shortcut_bar)->
 						       model,
 						       group_num,
 						       item_num,
-						       &type, &ref,
+						       &item_url, 
+						       &item_name,
 						       &icon_pixbuf);
 			
+			memset(mod_name, 0, 16);
+			module_name_from_description(mod_name, item_name);
 			
-			memset(modName, 0, 16);
-			module_name_from_description(modName, ref);
-
-			if (group_num == groupnum0) {
-				gint sbtype;
-				sbtype = get_mod_type(modName);
-				if (sbtype == 0 || sbtype == 1)
-					gui_change_module_and_key(modName,
-							  settings.currentverse);
-				else if (sbtype == 3) {
-					gtk_notebook_set_page
-					    (GTK_NOTEBOOK
-					     (widgets.workbook_lower), 1);
-					gui_change_module_and_key(modName,
-							  NULL);
+			if(!strcmp(item_url,"main")){	
+				if (group_num == groupnum0) {
+					sbtype = get_mod_type(mod_name);
+					if (sbtype == 0 || sbtype == 1)
+						gui_change_module_and_key(mod_name,
+								  settings.currentverse);
+					else if (sbtype == 3) {
+						gtk_notebook_set_page
+						    (GTK_NOTEBOOK
+						     (widgets.workbook_lower), 1);
+						gui_change_module_and_key(mod_name,
+								  NULL);
+					}
+	
+					else
+						gui_change_module_and_key(mod_name,
+								  settings.dictkey);
 				}
-
-				else
-					gui_change_module_and_key(modName,
-							  settings.dictkey);
-			}
-
-			if (group_num == groupnum1) {
-				if (settings.havebible) {
-					gui_change_module_and_key(modName,
-							  settings.currentverse);
+	
+				if (group_num == groupnum1) {
+					if (settings.havebible) {
+						gui_change_module_and_key(mod_name,
+								  settings.currentverse);
+					}
+				}
+	
+				if (group_num == groupnum2) {
+					if (settings.havecomm) {
+						gui_change_module_and_key(mod_name,
+								  settings.currentverse);
+						/*gtk_notebook_set_page
+						    (GTK_NOTEBOOK
+						     (widgets.workbook_upper), 0);*/
+					}
+				}
+	
+				if (group_num == groupnum3) {
+					if (settings.havedict) {
+						gui_change_module_and_key(mod_name,
+								  settings.dictkey);
+						gtk_notebook_set_page
+						    (GTK_NOTEBOOK
+						     (widgets.workbook_lower), 0);
+					}
+				}
+	
+				if (group_num == groupnum4) {
+					gui_change_verse(item_name);
+				}
+	
+				if (group_num == groupnum8) {
+					gui_change_module_and_key(mod_name, NULL);
+					gtk_notebook_set_page(GTK_NOTEBOOK
+							      (widgets.workbook_lower),
+							      1);
 				}
 			}
-
-			if (group_num == groupnum2) {
-				if (settings.havecomm) {
-					gui_change_module_and_key(modName,
-							  settings.currentverse);
-					/*gtk_notebook_set_page
-					    (GTK_NOTEBOOK
-					     (widgets.workbook_upper), 0);*/
+			else {
+				sbtype = get_mod_type(mod_name);
+				switch(sbtype) {
+					case 0: gui_open_bibletext_dialog(mod_name);
+						break;
+					case 1: gui_open_commentary_dialog(mod_name);
+						break;
+					case 2: gui_open_dictlex_dialog(mod_name);
+						break;
+					case 3: gui_open_gbs_dialog(mod_name);
+						break;
 				}
 			}
-
-			if (group_num == groupnum3) {
-				if (settings.havedict) {
-					gui_change_module_and_key(modName,
-							  settings.dictkey);
-					gtk_notebook_set_page
-					    (GTK_NOTEBOOK
-					     (widgets.workbook_lower), 0);
-				}
-			}
-
-			if (group_num == groupnum4) {
-				gui_change_verse(ref);
-			}
-
-			if (group_num == groupnum8) {
-				gui_change_module_and_key(modName, NULL);
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (widgets.workbook_lower),
-						      1);
-			}
-			g_free(type);
-			g_free(ref);
+			g_free(item_url);
+			g_free(item_name);
 		}
-	} else if (event->button.button == 3) {
+	} 
+	else if (event->button.button == 3) {
 		if (remItemNum == -1)
 			show_standard_popup(shortcut_bar, event,
 					    group_num);
@@ -1143,6 +1289,8 @@ void gui_get_shortcut_item_info(gint group_num, gint item_num,
 				item_num,
 				item_url, item_name, NULL);
 }
+
+
 /******************************************************************************
  * Name
  *    gui_setup_shortcut_bar
@@ -1161,7 +1309,6 @@ void gui_get_shortcut_item_info(gint group_num, gint item_num,
 
 void gui_setup_shortcut_bar(void)
 {
-	GList *tmp;
 	GtkWidget
 	    * button,
 	    *searchbutton,
@@ -1169,12 +1316,10 @@ void gui_setup_shortcut_bar(void)
 	    *scrolledwindow1,
 	    *scrolledwindow2,
 	    *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
-	gint sbtype = 0, large_icons = 0;
-	gchar *filename, group_name[256], icon_size[10], modName[16];
-	GdkPixbuf *icon_pixbuf = NULL;
+	gchar *text;
 
 	/*
-	 * shortcut bar 
+	 * create shortcut bar 
 	 */
 	shortcut_model = e_shortcut_model_new();
 
@@ -1191,151 +1336,52 @@ void gui_setup_shortcut_bar(void)
 	e_paned_pack1(E_PANED(widgets.epaned), shortcut_bar, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 	/*
-	 * end shortcut bar 
-	*/
-	
+	 * shortcut bar created now add groups and shortcuts
+	*/	
 
-	tmp = NULL;
+	/* Favorites */
 	if (settings.showfavoritesgroup) {
-		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+		text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Favorites.conf") + 3);
 		sprintf(text, "%s/%s", settings.shortcutbarDir,
 				"Favorites.conf");
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
-		filename = "Favorites.conf";
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		g_free(text);
-		//g_warning("group = %s",group_name);
-		//g_warning("size  = %s",icon_size);
 		
-		large_icons = atoi(icon_size);
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum0,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			memset(modName, 0, 16);
-			module_name_from_description(modName, (gchar *) tmp->data);
-			sbtype = 0;
-			sbtype = get_mod_type(modName);
-			
-			if (sbtype < 0)
-				sbtype = 0;
-			switch (sbtype) {
-			case 0:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-un.png");
-				break;
-			case 1:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-bl.png");
-				break;
-			case 2:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-green.png");
-				break;
-			case 3:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-gold.png");
-				break;
-			default :
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-un.png");
-			
-			}
-			
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum0,
-						  -1, "favorite",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
+		load_group_shortcuts_from_list(text, groupnum0);
+		g_free(text);
 	}
-	g_list_free(tmp);
-	tmp = NULL;
 	
+	/* bibletext */
 	if (settings.showtextgroup) {
-		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+		text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("BibleText.conf") + 3);
 		sprintf(text, "%s/%s", settings.shortcutbarDir,
-				"BibleText.conf");
-		
+				"BibleText.conf");		
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Bible Text"));
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		
-		g_free(text);
-		
-		large_icons = atoi(icon_size);
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum1,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-un.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum1,
-						  -1, "bible text",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
+				 _("Bible Text"));		
+		load_group_shortcuts_from_list(text, groupnum1);
+		g_free(text);		
 	}
+	
+	/* commentary */
 	if (settings.showcomgroup) {
-		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+		text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Commentaries.conf") + 3);
 		sprintf(text, "%s/%s", settings.shortcutbarDir,
 				"Commentaries.conf");	
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Commentaries"));
-		
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		g_free(text);
-		large_icons = atoi(icon_size);
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum2,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-bl.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum2,
-						  -1, "commentary",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
+				 _("Commentaries"));		
+		load_group_shortcuts_from_list(text, groupnum2);
+		g_free(text);		
 	}
+	
+	/* dictionary/lexicon */
 	if (settings.showdictgroup) {
-		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+		text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Dictionaries.conf") + 3);
 		sprintf(text, "%s/%s", settings.shortcutbarDir,
 				"Dictionaries.conf");
@@ -1343,65 +1389,22 @@ void gui_setup_shortcut_bar(void)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
 							   ("Dict/Lex")));
-		
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
+		load_group_shortcuts_from_list(text, groupnum3);
 		g_free(text);
-		
-		large_icons = atoi(icon_size);
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum3,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-green.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum3,
-						  -1, "dictionary",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
 
 	/* GBS */
 	if (settings.showbookgroup) {
-		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+		text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Books.conf") + 3);
 		sprintf(text, "%s/%s", settings.shortcutbarDir,
 				"Books.conf");
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Book"));
-		filename = "Books.conf";
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
+		load_group_shortcuts_from_list(text, groupnum8);
 		g_free(text);
-		
-		large_icons = atoi(icon_size);
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum8,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-gold.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum8,
-						  -1, "book",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
-	g_list_free(tmp);
 
 	if (settings.showhistorygroup) {
 		groupnum4 =
@@ -1466,24 +1469,12 @@ void gui_setup_shortcut_bar(void)
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar), vpVL,
 				  VLbutton, -1);
 				  
-				  
-				  
 	e_shortcut_bar_set_enable_drags((EShortcutBar *)
-					shortcut_bar, TRUE);/*
-	gtk_signal_connect(GTK_OBJECT(VLbutton), "clicked",
-			   GTK_SIGNAL_FUNC(on_VLbutton_clicked), NULL);*/
+					shortcut_bar, TRUE);
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar),
 			   "item_selected",
 			   GTK_SIGNAL_FUNC
 			   (on_shortcut_bar_item_selected), NULL);
-			   /*
-	gtk_signal_connect(GTK_OBJECT(shortcut_model),
-			   "item_added",
-			   GTK_SIGNAL_FUNC(on_item_added), NULL);
-	gtk_signal_connect(GTK_OBJECT(shortcut_model),
-			   "item_removed",
-			   GTK_SIGNAL_FUNC(on_item_removed), NULL);
-			   */
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar),
 			   "shortcut_dragged",
 			   GTK_SIGNAL_FUNC(on_shortcut_dragged), NULL);
@@ -1510,12 +1501,8 @@ void gui_setup_shortcut_bar(void)
 
 void gui_update_shortcut_bar(void)
 {
-	gint count, i, large_icons, current_group, sbtype = 0;
-	GList *tmp;
+	gint count, i, current_group;
 	EShortcutBar *bar;
-	gchar group_name[256], icon_size[10];
-	GdkPixbuf *icon_pixbuf = NULL;
-	gchar modName[16];
 	
 	groupnum0 = -1;
 	groupnum1 = -1; 
@@ -1525,18 +1512,18 @@ void gui_update_shortcut_bar(void)
 	groupnum8 = -1;	
 	
 	bar = E_SHORTCUT_BAR(shortcut_bar);
-	tmp = NULL;
 	current_group =
 	    e_group_bar_get_current_group_num(E_GROUP_BAR(bar));
 	count =
 	    e_shortcut_model_get_num_groups(E_SHORTCUT_MODEL
 					    (shortcut_model));
-	/*** remove shortcutbar groups so we can load the one the user has sellected ***/
+	/*** remove shortcutbar groups so we can 
+	     load the one the user has sellected ***/
 	for (i = count - 1; i > -1; i--) {
 		e_shortcut_model_remove_group(E_SHORTCUT_MODEL
 					      (shortcut_model), i);
 	}
-	tmp = NULL;
+	
 	if (settings.showfavoritesgroup) {
 		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Favorites.conf") + 3);
@@ -1546,59 +1533,10 @@ void gui_update_shortcut_bar(void)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
 		
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		large_icons = atoi(icon_size);
-		
-		g_free(text);
-		
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum0,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			memset(modName, 0, 16);
-			module_name_from_description(modName, (gchar *) tmp->data);
-			sbtype = 0;
-			sbtype = get_mod_type(modName);
-			if (sbtype < 0)
-				sbtype = 0;
-			switch (sbtype) {
-			case 0:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-un.png");
-				break;
-			case 1:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-bl.png");
-				break;
-			case 2:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-green.png");
-				break;
-			case 3:
-				icon_pixbuf =
-				    gdk_pixbuf_new_from_file
-				    (PACKAGE_PIXMAPS_DIR
-				     "/book-gold.png");
-				break;
-			}
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum0,
-						  -1, "favorites",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
+		load_group_shortcuts_from_list(text, groupnum0);
+		g_free(text);		
 	}
+	
 	if (settings.showtextgroup) {
 		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("BibleText.conf") + 3);
@@ -1608,30 +1546,10 @@ void gui_update_shortcut_bar(void)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Bible Text"));
 		
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		large_icons = atoi(icon_size);
-		
+		load_group_shortcuts_from_list(text, groupnum1);
 		g_free(text);
-		
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum1,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-un.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum1,
-						  -1, "bible text",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
+	
 	if (settings.showcomgroup) {
 		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Commentaries.conf") + 3);
@@ -1640,30 +1558,10 @@ void gui_update_shortcut_bar(void)
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Commentaries"));
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		large_icons = atoi(icon_size);
-		
+		load_group_shortcuts_from_list(text, groupnum2);
 		g_free(text);
-		
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum2,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-bl.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum2,
-						  -1, "commentary",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
+	
 	if (settings.showdictgroup) {
 		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
 				strlen("Dictionaries.conf") + 3);
@@ -1672,30 +1570,9 @@ void gui_update_shortcut_bar(void)
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
-							   ("Dict/Lex")));
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		large_icons = atoi(icon_size);
-		
+							("Dict/Lex")));
+		load_group_shortcuts_from_list(text, groupnum3);		
 		g_free(text);
-		
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum3,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-green.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum3,
-						  -1, "dictionary",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
 
 	/* GBS */
@@ -1706,30 +1583,9 @@ void gui_update_shortcut_bar(void)
 				"Books.conf");
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Book"));		
-		tmp =
-		    load_sb_group(text, group_name, icon_size);
-		large_icons = atoi(icon_size);
-		
+				 _("Book"));
+		load_group_shortcuts_from_list(text, groupnum8);
 		g_free(text);
-		
-		if (large_icons == 1)
-			e_shortcut_bar_set_view_type((EShortcutBar *)
-						     shortcut_bar,
-						     groupnum8,
-						     E_ICON_BAR_LARGE_ICONS);
-		while (tmp != NULL) {
-			icon_pixbuf =
-			    gdk_pixbuf_new_from_file
-			    (PACKAGE_PIXMAPS_DIR "/book-gold.png");
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->
-						  model, groupnum8,
-						  -1, "book",
-						  (gchar *) tmp->
-						  data, icon_pixbuf);
-			tmp = g_list_next(tmp);
-		}
 	}
 
 	if (settings.showhistorygroup) {
@@ -1737,13 +1593,13 @@ void gui_update_shortcut_bar(void)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("History"));
 	}
-	g_list_free(tmp);
+	
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar),
 					  current_group, TRUE);
 	count =
 	    e_shortcut_model_get_num_groups(E_SHORTCUT_MODEL
 					    (shortcut_model));
-	/* set manually added groups number */
+	/* set group numbers that were added manually */
 	groupnum5 = count; 
 	groupnum6 = count + 1; 
 	groupnum7 = count + 2; 
@@ -1772,6 +1628,7 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 {
 	GtkWidget *item;
 	GList *glist = NULL;
+		
 	if (group_num != groupnum0) {
 		item =
 		    gtk_menu_item_new_with_label(_("Add All Modules"));
@@ -1813,7 +1670,7 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 				   (gchar *) glist->data);
 		glist = g_list_next(glist);
 	}
-	g_list_free(glist);
+	//g_list_free(glist);
 }
 
 /******************************************************************************

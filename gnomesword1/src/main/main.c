@@ -36,11 +36,11 @@
 #include "gui/splash.h"
 #include "gui/setup_druid.h"
 #include "gui/gnomesword.h"
+#include "gui/bookmarks.h"
 
 #include "backend/sword.h"
 #include "backend/properties.h"
 
-#include "main/bookmarks.h"
 #include "main/settings.h"
  
 /******************************************************************************
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 	 */    
 	icreatefiles = settings_init();	
 	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
-		create_bookmarks(settings.swbmDir);
+		gui_new_xml_bookmark_file();
 	}
 
 	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs)  {

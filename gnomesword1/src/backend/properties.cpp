@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <glib-1.2/glib.h>
+//#include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <swconfig.h>
 

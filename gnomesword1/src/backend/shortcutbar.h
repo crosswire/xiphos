@@ -3,7 +3,7 @@
  * shortcutbar.h - functions for saving and loading shortcutbar groups
  *                 and getting verse list
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ void backend_save_sb_iconsize(char *filename, char *large_icons);
 GList *backend_load_sb_group(char *filename, 
 			char *group_name, char *use_largeicons);
 void backend_save_sb_group(GList * items, char *filename, 
-	char *group_name, int group_num, char *large_icons);
+			char *group_name, char *large_icons);
 GList *backend_get_verse_list(char *modName, char *vlist);
 	
 #ifdef __cplusplus
@@ -39,4 +39,3 @@ GList *backend_get_verse_list(char *modName, char *vlist);
 #endif
 
 #endif
-
