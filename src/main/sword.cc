@@ -364,7 +364,7 @@ void main_display_bible(const char * mod_name, const char * key)
 				      NULL,
 				      NULL,
 				      settings.comm_showing);
-		gui_set_tab_label(key);
+		gui_set_tab_label(settings.currentverse);
 	}
 
 	/*

@@ -25,8 +25,8 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif
-	
+#endif	
+
 #include <glib-2.0/glib.h>
 
 typedef struct _module_lists MOD_LISTS;

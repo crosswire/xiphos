@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#include "main/sword.h"
+#include <glib-2.0/glib.h>
+//#include "main/sword.h"
 
 int backend_open_config_file(char *file);
 void backend_erase_config_section(char *section);

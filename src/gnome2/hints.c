@@ -125,7 +125,7 @@ static void create_hint_window(void)
 				       GTK_POLICY_NEVER);
 
 	hint.html_widget = gtk_html_new();
-	gtk_html_load_empty(GTK_HTML(hint.html_widget));
+	//gtk_html_load_empty(GTK_HTML(hint.html_widget));
 	gtk_widget_show(hint.html_widget);
 	gtk_widget_set_size_request(hint.html_widget, 191, 83);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow72), hint.html_widget);
@@ -190,7 +190,7 @@ void gui_display_in_hint_window(gchar * note)
 		
 		
 		gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
-		if(x < settings.app_x){
+/*		if(x < settings.app_x){
 			gtk_window_set_position(GTK_WINDOW(hint.hint_window),
 					GTK_WIN_POS_MOUSE);
 			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
@@ -202,6 +202,7 @@ void gui_display_in_hint_window(gchar * note)
 			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
 					&x, &y);
 		}
+*/
 		x += 10;
 		y += 10;
 		

@@ -190,7 +190,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
 	gchar *val_key;
-	gchar *url;
+	gchar *url = g_strdup_printf("sword://%s/%s",mod_name,key);;
 	
 	if(!check_for_module(mod_name)) 
 		mod_name = settings.MainWindowModule;
@@ -202,7 +202,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 			case -1:
 				break;
 			case TEXT_TYPE:
-				//main_bibletext_dialog_goto_bookmark(mod_name, key);
+				main_bibletext_dialog_goto_bookmark(url);
 				break;
 			case COMMENTARY_TYPE:
 				gui_commentary_dialog_goto_bookmark(mod_name,
@@ -217,9 +217,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				break;
 		}
 	} else  {
-		url = g_strdup_printf("sword://%s/%s",mod_name,key);
 		main_url_handler(url, TRUE);
-		g_free(url);
 /*		switch (module_type) {
 			case -1:
 				break;
@@ -247,6 +245,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 		}
 */
 	}
+	g_free(url);
 }
 
 /******************************************************************************
@@ -905,13 +904,13 @@ static gboolean button_release_event(GtkWidget * widget,
 	if (is_selected) {
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 				     &selected) && key != NULL) {
+			gchar *url = g_strdup_printf("bookmark://%s/%s",module,key);
 			if(button_one)
-				goto_bookmark(module, key);
-			else if(button_two) {
-				use_dialog = TRUE; 
-				goto_bookmark(module, key);
-				use_dialog = FALSE; 
-			}
+				main_url_handler(url, FALSE);
+			else if(button_two) 
+				main_url_handler(url, TRUE);
+			g_free(url);
+			
 		}
 		g_free(caption);
 		g_free(key);

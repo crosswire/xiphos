@@ -30,11 +30,13 @@
 
 #include "main/global_ops.hh"
 
+#include "main/module_dialogs.h"
 #include "main/settings.h"
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
+#include "backend/dialogs.hh"
 #include "backend/mgr.hh"
 
 static int of2tf(const gchar * on_off)
@@ -52,6 +54,19 @@ static gchar *tf2of(int true_false)
 	else
 		return "Off";
 }
+
+
+static void set_dialog_global_option(TEXT_DATA * t, char * option, gboolean choice)
+{
+	ModuleDialogs* be = (ModuleDialogs*)t->backend;	
+	SWMgr *mgr = be->get_mgr();
+	char *on_off;
+
+	on_off = tf2of(choice);
+	
+	mgr->setGlobalOption(option, on_off);
+}
+
 
 static void set_global_option(int manager, char * option, gboolean choice)
 {
@@ -79,6 +94,60 @@ static void set_global_option(int manager, char * option, gboolean choice)
 		break;
 	}	
 	sw.results->setGlobalOption(option, on_off);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_set_global_options
+ *
+ * Synopsis
+ *   #include "gui/mod_global_ops.h"
+ *
+ *   void gui_set_global_options(GLOBAL_OPS * ops)	
+ *
+ * Description
+ *   set module global options 
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialog_set_global_options(TEXT_DATA * t)
+{
+	set_dialog_global_option(t, "Strong's Numbers",
+			  t->ops->strongs);
+	set_dialog_global_option(t, "Morphological Tags",
+			  t->ops->morphs);
+	set_dialog_global_option(t, "Footnotes",
+			  t->ops->footnotes);
+	set_dialog_global_option(t, "Greek Accents",
+			  t->ops->greekaccents);
+	set_dialog_global_option(t, "Lemmas", 
+			  t->ops->lemmas);
+	set_dialog_global_option(t, "Cross-references",
+			  t->ops->scripturerefs);
+	set_dialog_global_option(t, "Hebrew Vowel Points",
+			  t->ops->hebrewpoints);
+	set_dialog_global_option(t, "Hebrew Cantillation",
+			  t->ops->hebrewcant);
+	set_dialog_global_option(t, "Headings", 
+			  t->ops->headings);
+	set_dialog_global_option(t, "Words of Christ in Red",
+			  t->ops->words_in_red);
+
+//	if (!ops->module_type) {	/* if we have Biblical text */
+/*		if (ops->variants_primary)
+			set_text_global_option("Textual Variants",
+					       "Primary Reading");
+		else if (ops->variants_secondary)
+			set_text_global_option("Textual Variants",
+					       "Secondary Reading");
+		else
+			set_text_global_option("Textual Variants",
+					       "All Readings");
+*/
+	
 }
 
 
