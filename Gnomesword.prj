@@ -140,8 +140,8 @@ module.source.files=\
 	gs_detach_int.c\
 	gs_editor_search.c\
 	gs_editor_search.h\
-	sw_gbs_2.cpp\
-	sw_gbs_2.h
+	gs_find_dlg.h\
+	gs_find_dlg.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
