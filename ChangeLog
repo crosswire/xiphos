@@ -1,3 +1,8 @@
+2003-06-28  Terry <tbiggs@users.sf.net>
+
+	* requires Sword cvs (1.5.6)
+	
+
 2003-06-24  Terry <tbiggs@users.sf.net>
 
 	* added support for Osis footnotes
