@@ -43,14 +43,14 @@
 
 #include "gnome/shortcutbar.h"
 
-#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf-8'></head>"
 
 extern SB_VIEWER sb_v, *sv;
 extern gint groupnum6;
 
 SEARCH_OPT so, *p_so;
 
-GList *sblist;	/* for saving search results to bookmarks */
+GList *sblist;			/* for saving search results to bookmarks */
 
 
 static GtkWidget *rrbUseBounds;
@@ -63,10 +63,16 @@ static GtkWidget *rbPhraseSearch;
 static GtkWidget *ckbCaseSensitive;
 static GtkWidget *progressbar_search;
 static GtkWidget *frame5;
+static GtkWidget *frame_module;
+static GtkWidget *radiobutton_search_text;
+static GtkWidget *radiobutton_search_comm;
+
+//static GtkWidget *radiobutton_search_dict;
+//static GtkWidget *radiobutton_search_book;
 
 
 void gui_search_update(char percent, void *userData)
-{	
+{
 	char maxHashes = *((char *) userData);
 	float num;
 	char buf[80];
@@ -75,13 +81,16 @@ void gui_search_update(char percent, void *userData)
 	while ((((float) percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float) percent) / 100));
 		num = (float) percent / 100;
-		gtk_progress_bar_update((GtkProgressBar*)progressbar_search, num);
+		gtk_progress_bar_update((GtkProgressBar *)
+					progressbar_search, num);
 		printed++;
 	}
 	while (gtk_events_pending())
 		gtk_main_iteration();
 	printed = 0;
 }
+
+
 /******************************************************************************
  * Name
  *   gui_set_search_label 
@@ -89,7 +98,7 @@ void gui_search_update(char percent, void *userData)
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *    void gui_set_search_label(gchar * mod_name) 
+ *    void gui_set_search_label(void) 
  *
  * Description
  *   
@@ -98,16 +107,44 @@ void gui_search_update(char percent, void *userData)
  *   void
  */
 
-void gui_set_search_label(gchar * mod_name)
+void gui_set_search_label(void)
 {
 	gchar search_label[80];
 	gchar *buf = N_("Search");
 
-	sprintf(search_label, "%s %s", buf, mod_name);
+	if (GTK_TOGGLE_BUTTON(radiobutton_search_text)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.MainWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.MainWindowModule);
+	} 
+	
+	else if (GTK_TOGGLE_BUTTON(radiobutton_search_comm)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.CommWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.CommWindowModule);
+	} 
+/*
+	else if (GTK_TOGGLE_BUTTON(radiobutton_search_dict)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.DictWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.DictWindowModule);
+	} 
+	
+	else if (GTK_TOGGLE_BUTTON(radiobutton_search_book)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.BookWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.BookWindowModule);
+	}
+*/
 	/*
 	 * set search label to current module 
 	 */
-	changegroupnameSB(search_label, groupnum6);
+	gtk_frame_set_label((GtkFrame *) frame_module, search_label);
+	//changegroupnameSB(search_label, groupnum6);
 }
 
 
@@ -133,30 +170,39 @@ static void fill_search_results_clist(int finds)
 	gchar *tmpbuf;
 	const gchar *key_buf = NULL;
 	gint i = 0;
+	gchar *buf0 = N_("Search Results");
+	gchar *buf1 = N_("matches");
+	gchar *buf2 = N_("Occurrences of");
+	gchar *buf3 = N_("found in");
 
-	
+
+
 	gtk_clist_clear(GTK_CLIST(sv->clist));
 	set_results_position((char) 1);	/* TOP */
-	while((key_buf = get_next_result_key()) != NULL) {
-		tmpbuf = (gchar*)key_buf;
+	while ((key_buf = get_next_result_key()) != NULL) {
+		tmpbuf = (gchar *) key_buf;
 		gtk_clist_insert(GTK_CLIST(sv->clist), i++, &tmpbuf);
-		
+
 	}
-	
-	sprintf(settings.groupName, "%s", "Search Results");
-	sprintf(buf, "%d matches", finds);
+
+	strcpy(settings.groupName, buf0);
+	sprintf(buf, "%d %s", finds, buf1);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
 	showSBVerseList();
 
 	/* report results */
-	
+
 	gui_begin_html(widgets.html_search_report, TRUE);
 	sprintf(buf, HTML_START
-		"<body><center>%d Occurrences of <br><font color=\"%s\">"
-		"<b>\"%s\"</b></font><br>found in <font color=\"%s\">"
+		"<body><center>%d %s <br><font color=\"%s\">"
+		"<b>\"%s\"</b></font><br>%s <font color=\"%s\">"
 		"<b>[%s]</b></font></center></body</html>",
-		finds, settings.found_color, settings.searchText,
+		finds,
+		buf2,
+		settings.found_color,
+		settings.searchText,
+		buf3,
 		settings.bible_verse_num_color, settings.sb_search_mod);
 	utf8str =
 	    e_utf8_from_gtk_string(widgets.html_search_report, buf);
@@ -164,8 +210,9 @@ static void fill_search_results_clist(int finds)
 			 strlen(utf8str));
 	gui_end_html(widgets.html_search_report);
 
-	/* cleanup appbar progress */	
-	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search), 0.0);
+	/* cleanup appbar progress */
+	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search),
+				0.0);
 	/* display first item in list by selection row 0 */
 	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);
 }
@@ -192,46 +239,47 @@ static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 	GString *str;
 	gint search_params, finds;
 	gchar *search_string, *search_module;
-	
+
 	search_module = settings.sb_search_mod;
 	p_so->module_name = search_module;
-	
+
 	clear_scope();
-	
-	if(GTK_TOGGLE_BUTTON(rrbUseBounds)->active) {		
+
+	if (GTK_TOGGLE_BUTTON(rrbUseBounds)->active) {
 		clear_search_list();
 		str = g_string_new(" ");
-		g_string_sprintf(str,"%s - %s",
-			gtk_entry_get_text(GTK_ENTRY(entryLower)),
-			gtk_entry_get_text(GTK_ENTRY(entryUpper)));
+		g_string_sprintf(str, "%s - %s",
+				 gtk_entry_get_text(GTK_ENTRY
+						    (entryLower)),
+				 gtk_entry_get_text(GTK_ENTRY
+						    (entryUpper)));
 		set_range(str->str);
 		set_scope2range();
-		g_warning(str->str);
-		g_string_free(str,TRUE);		
+		g_string_free(str, TRUE);
 	}
-	
-	if(GTK_TOGGLE_BUTTON(rbLastSearch)->active)
+
+	if (GTK_TOGGLE_BUTTON(rbLastSearch)->active)
 		set_scope2last_search();
 
 
-	search_string =
-	    gtk_entry_get_text(GTK_ENTRY(entrySearch));
+	search_string = gtk_entry_get_text(GTK_ENTRY(entrySearch));
 	sprintf(settings.searchText, "%s", search_string);
 
 	settings.searchType = GTK_TOGGLE_BUTTON
 	    (rbRegExp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(rbPhraseSearch)->active ? -1 : -2;
-	
-	search_params = 
+
+	search_params =
 	    GTK_TOGGLE_BUTTON(ckbCaseSensitive)->active ? 0 : REG_ICASE;
-			
+
 	//clear_search_list();
-	
-	finds = do_module_search(search_module, search_string, 
-			settings.searchType, search_params, FALSE);
-	
+
+	finds = do_module_search(search_module, search_string,
+				 settings.searchType, search_params,
+				 FALSE);
+
 	fill_search_results_clist(finds);
-	
+
 }
 
 
@@ -254,14 +302,37 @@ static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
  */
 
 static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
-			      gpointer user_data)
+				    gpointer user_data)
 {
-	if(togglebutton->active) {
+	if (togglebutton->active) {
 		gtk_widget_show(frame5);
-	}
-	else {		
+	} else {
 		gtk_widget_hide(frame5);
 	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   radiobutton_search_toggled
+ *
+ * Synopsis
+ *   #include "gui/shortcutbar_search.h"
+ *
+ *   void radiobutton_search_toggled(GtkToggleButton * togglebutton,
+				       gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void radiobutton_search_toggled(GtkToggleButton * togglebutton,
+				       gpointer user_data)
+{
+	gui_set_search_label();
 }
 
 
@@ -285,6 +356,8 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 {
 	GtkWidget *frame1;
 	GtkWidget *vbox1;
+	GtkWidget *vbox90;
+	GSList *vbox90_group = NULL;
 	GtkWidget *frame_search;
 	GtkWidget *vbox5;
 	GtkWidget *btnSearch;
@@ -330,8 +403,8 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	gtk_widget_show(entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), entrySearch, TRUE, TRUE, 0);
 	gtk_widget_set_usize(entrySearch, 130, -2);;
- 
- 
+
+
 	btnSearch = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
 	gtk_widget_show(btnSearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
@@ -339,8 +412,67 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 			     NULL);
 	gtk_button_set_relief(GTK_BUTTON(btnSearch), GTK_RELIEF_HALF);
 
+	frame6 = gtk_frame_new(NULL);
+	gtk_widget_show(frame6);
+	gtk_box_pack_start(GTK_BOX(vbox5), frame6, FALSE, TRUE, 0);
 
+	progressbar_search = gtk_progress_bar_new();
+	gtk_widget_show(progressbar_search);
+	gtk_container_add(GTK_CONTAINER(frame6), progressbar_search);
 
+	frame_module = gtk_frame_new(_("Search Module"));
+	gtk_widget_show(frame_module);
+	gtk_box_pack_start(GTK_BOX(vbox1), frame_module, FALSE, FALSE,
+			   0);
+
+	vbox90 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox90);
+	gtk_container_add(GTK_CONTAINER(frame_module), vbox90);
+
+	radiobutton_search_text =
+	    gtk_radio_button_new_with_label(vbox90_group, _("Bible"));
+	vbox90_group =
+	    gtk_radio_button_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_text));
+	gtk_widget_show(radiobutton_search_text);
+	gtk_widget_set_usize(radiobutton_search_text, -2, 20);
+	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_text,
+			   FALSE, FALSE, 0);
+
+	radiobutton_search_comm =
+	    gtk_radio_button_new_with_label(vbox90_group,
+					    _("Commentary"));
+	vbox90_group =
+	    gtk_radio_button_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_comm));
+	gtk_widget_show(radiobutton_search_comm);
+	gtk_widget_set_usize(radiobutton_search_comm, -2, 20);
+	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_comm,
+			   FALSE, FALSE, 0);
+/*
+	radiobutton_search_dict =
+	    gtk_radio_button_new_with_label(vbox90_group,
+					    _("Dictionary"));
+	vbox90_group =
+	    gtk_radio_button_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_dict));
+	gtk_widget_show(radiobutton_search_dict);
+	gtk_widget_set_usize(radiobutton_search_dict, -2, 20);
+	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_dict,
+			   FALSE, FALSE, 0);
+
+	radiobutton_search_book =
+	    gtk_radio_button_new_with_label(vbox90_group,
+					    _("General Book"));
+	vbox90_group =
+	    gtk_radio_button_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_book));
+	gtk_widget_show(radiobutton_search_book);
+	gtk_widget_set_usize(radiobutton_search_book, -2, 20);
+	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_book,
+			   FALSE, FALSE, 0);
+
+*/
 	frame2 = gtk_frame_new(_("Search Type"));
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame2, FALSE, TRUE, 0);
@@ -438,7 +570,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	gtk_widget_show(frame5);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame5, FALSE, TRUE, 0);
 	gtk_widget_hide(frame5);
-	
+
 	table1 = gtk_table_new(2, 2, FALSE);
 	gtk_widget_show(table1);
 	gtk_container_add(GTK_CONTAINER(frame5), table1);
@@ -474,16 +606,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
 
 
-	
-	frame6 = gtk_frame_new(NULL);
-	gtk_widget_show(frame6);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame6, FALSE, TRUE, 0);
-	
-  progressbar_search = gtk_progress_bar_new ();
-  gtk_widget_show (progressbar_search);
-	gtk_container_add(GTK_CONTAINER(frame6), progressbar_search);
-  //gtk_box_pack_start (GTK_BOX (vbox1), progressbar_search, FALSE, FALSE, 0);
- //gtk_progress_set_show_text (GTK_PROGRESS (progressbar_search), TRUE)
+
 
 	gtk_signal_connect(GTK_OBJECT(rrbUseBounds),
 			   "toggled",
@@ -491,6 +614,30 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), NULL);
+			   
+       gtk_signal_connect(GTK_OBJECT(entrySearch), "activate",
+                          GTK_SIGNAL_FUNC(on_btnSearch_clicked), NULL);
+			   
+			   
 	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",
 			    tooltips);
+
+	gtk_signal_connect(GTK_OBJECT(radiobutton_search_text),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(radiobutton_search_toggled),
+			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT(radiobutton_search_comm),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(radiobutton_search_toggled),
+			   GINT_TO_POINTER(1));
+/*
+	gtk_signal_connect(GTK_OBJECT(radiobutton_search_dict),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(radiobutton_search_toggled),
+			   GINT_TO_POINTER(2));
+	gtk_signal_connect(GTK_OBJECT(radiobutton_search_book),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(radiobutton_search_toggled),
+			   GINT_TO_POINTER(3));
+*/
 }

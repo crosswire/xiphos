@@ -27,6 +27,11 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/gtkhtmlfontstyle.h>
 #include <gtkhtml/htmlform.h>
+#include <gtkhtml/htmlenums.h>
+#include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlcolor.h>
+#include <gtkhtml/htmlcolorset.h>
+#include <gtkhtml/htmllinktext.h>
 #include <gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
@@ -38,15 +43,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <fcntl.h>
-
-
-#ifdef USE_GTKHTML1
-#include <gtkhtml/htmlenums.h>
-#include <gtkhtml/htmlsettings.h>
-#include <gtkhtml/htmlcolor.h>
-#include <gtkhtml/htmlcolorset.h>
-#include <gtkhtml/htmllinktext.h>
-#endif
 
 #include "gui/editor.h"
 #include "gui/toolbar_style.h"
@@ -117,7 +113,6 @@ void gui_new_activate(GtkMenuItem * menuitem,
 	gtk_html_cut(ecd->html);
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), 1,
 			   _("-untitled-"));
-	//gtk_frame_set_label(GTK_FRAME(ecd->frame), _("-untitled-"));
 	ecd->changed = FALSE;
 }
 
@@ -388,11 +383,7 @@ static void on_copy_activate(GtkMenuItem * menuitem,
 static void on_paste_activate(GtkMenuItem * menuitem,
 			      GSHTMLEditorControlData * ecd)
 {
-#ifdef USE_GTKHTML1
 	gtk_html_paste(ecd->html,FALSE);
-#else
-	gtk_html_paste(ecd->html);
-#endif
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
 }
@@ -506,7 +497,6 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 	else
 		sprintf(buf, "passage=%s", linkref);
 
-#ifdef USE_GTKHTML1
 	url = buf;
 	text = linkref;
 	if (url && text && *url && *text) {
@@ -526,12 +516,6 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 					 g_utf8_strlen(text, -1));
 		g_free(url_copy);
 	}
-#else
-	target = "";
-	html_engine_selection_push(e);
-	html_engine_insert_link(e, buf, target);
-	html_engine_selection_pop(e);
-#endif
 }
 
 /******************************************************************************
@@ -884,33 +868,33 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			gtk_signal_connect(GTK_OBJECT(ecd->editnote),
 				   "activate",
 				   GTK_SIGNAL_FUNC
-				   (on_editnote_activate), ecd);
+				   (on_editnote_activate), ecd);		
+
+			separator = gtk_menu_item_new();
+			gtk_widget_ref(separator);
+			gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+						 "separator", separator,
+						 (GtkDestroyNotify)
+						 gtk_widget_unref);
+			gtk_widget_show(separator);
+			gtk_container_add(GTK_CONTAINER(pmEditor), separator);
+			gtk_widget_set_sensitive(separator, FALSE);
+	
+			
+			ecd->show_tabs =
+			    gtk_check_menu_item_new_with_label("Show Tabs");
+			gtk_widget_ref(ecd->show_tabs);
+			gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+						 "ecd->show_tabs",
+						 ecd->show_tabs,
+						 (GtkDestroyNotify)
+						 gtk_widget_unref);
+			gtk_widget_show(ecd->show_tabs);
+			gtk_container_add(GTK_CONTAINER(pmEditor),
+					  ecd->show_tabs);
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+						       (ecd->show_tabs), FALSE);
 		}
-		
-
-		separator = gtk_menu_item_new();
-		gtk_widget_ref(separator);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "separator", separator,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(separator);
-		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
-		gtk_widget_set_sensitive(separator, FALSE);
-
-		ecd->show_tabs =
-		    gtk_check_menu_item_new_with_label("Show Tabs");
-		gtk_widget_ref(ecd->show_tabs);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "ecd->show_tabs",
-					 ecd->show_tabs,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(ecd->show_tabs);
-		gtk_container_add(GTK_CONTAINER(pmEditor),
-				  ecd->show_tabs);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->show_tabs), FALSE);
 
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);

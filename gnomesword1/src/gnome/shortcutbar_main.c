@@ -533,7 +533,6 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
 	memset(modname, 0, 16);
 	module_name_from_description(modname, item_name);
 	gui_display_about_module_dialog(modname, FALSE);
-	if(modname) g_free(modname);
 	g_free(item_url);
 	g_free(item_name);
 }

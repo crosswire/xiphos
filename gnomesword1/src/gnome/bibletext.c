@@ -25,6 +25,11 @@
 
 #include <gnome.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
+
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext.h"
@@ -231,11 +236,11 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	/*
 	 * set search module to current text module 
 	 */
-	strcpy(settings.sb_search_mod, t->mod_name);
+//	strcpy(settings.sb_search_mod, t->mod_name);
 	/*
 	 * set search label to current text module 
 	 */
-	gui_set_search_label(t->mod_name);
+	gui_set_search_label();
 	/*
 	 *  keep showtabs menu item current 
 	 */
@@ -243,6 +248,12 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 
 	gui_set_text_frame_label(t);
 	widgets.html_text = t->html;
+/*
+	if(!t->is_rtol)
+		gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
+	else
+		gtk_notebook_popup_disable(GTK_NOTEBOOK(widgets.notebook_text));
+*/
 }
 
 /******************************************************************************
@@ -274,15 +285,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	 * set program title to current text module name 
 	 */
 	gui_change_window_title(t->mod_name);
-	/*
-	 * set search module to current text module 
-	 */
-	strcpy(settings.sb_search_mod, t->mod_name);
-	/*
-	 * set search frame label to current text module 
-	 */
-	gui_set_search_label(t->mod_name);
-
+	
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -320,6 +323,23 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+#ifdef USE_GTKEMBEDMOZ	
+int mozilla_mouse_click(GtkMozEmbed *embed, gpointer dom_event)
+{
+/*
+	GtkWidget *popupmenu;
+	
+	popupmenu = gui_create_pm_text(cur_t);
+	gnome_popup_menu_do_popup(popupmenu,
+                                   NULL,
+                                   NULL,
+                                   NULL,
+                                   NULL);
+	g_warning("mozilla_mouse_click");
+*/
+	return 0;
+}
+#endif
 
 /******************************************************************************
  * Name
@@ -346,16 +366,54 @@ static void create_pane(TEXT_DATA * t)
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_show(t->frame);
 	gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
-
+	
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
 
 	frame_text = gtk_frame_new(NULL);
 	gtk_widget_show(frame_text);
-	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE, 0);	
 
+
+#ifdef USE_GTKEMBEDMOZ
+	if(!t->is_rtol) {
+		scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(scrolledwindow);
+		gtk_container_add(GTK_CONTAINER(frame_text), scrolledwindow);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+					       (scrolledwindow),
+					       GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
+		t->html = gtk_html_new();
+		gtk_widget_show(t->html);
+		gtk_container_add(GTK_CONTAINER(scrolledwindow), t->html);
+		gtk_html_load_empty(GTK_HTML(t->html));
+		gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
+				   GTK_SIGNAL_FUNC(gui_link_clicked),
+				   (TEXT_DATA *) t);
+		gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
+				   GTK_SIGNAL_FUNC(gui_url),
+				   (TEXT_DATA *) t);
+		gtk_signal_connect(GTK_OBJECT(t->html), "button_release_event",
+				   GTK_SIGNAL_FUNC(on_button_release_event),
+				   (TEXT_DATA *) t);
+	}
 	
+	else {
+		gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1"); 		  
+		t->html = gtk_moz_embed_new();
+		gtk_widget_show (t->html);
+		gtk_container_add(GTK_CONTAINER(frame_text), t->html);
+		gtk_widget_realize(t->html);
+		
+			   
+		gtk_signal_connect(GTK_OBJECT(t->html), "dom_mouse_click",
+				   GTK_SIGNAL_FUNC(mozilla_mouse_click),
+				   NULL);
+	}		
+
+#else	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(frame_text), scrolledwindow);
@@ -363,12 +421,10 @@ static void create_pane(TEXT_DATA * t)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
 	t->html = gtk_html_new();
 	gtk_widget_show(t->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), t->html);
 	gtk_html_load_empty(GTK_HTML(t->html));
-
 
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked),
@@ -379,6 +435,7 @@ static void create_pane(TEXT_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(t->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),
 			   (TEXT_DATA *) t);
+#endif
 }
 
 /******************************************************************************
@@ -439,9 +496,22 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 				      page_num);
 	}
 
-	if (!cur_t->is_locked)
+	if (!cur_t->is_locked) {
+#ifdef USE_GTKEMBEDMOZ	
+		if(!cur_t->is_rtol) 
+			chapter_display(cur_t->html, 
+				cur_t->mod_name,
+				cur_t->tgs, key, TRUE);
+		else
+			chapter_display_mozilla(cur_t->html, 
+				cur_t->mod_name,
+				cur_t->tgs, key, TRUE);
+
+#else	
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
+#endif
+	}
 	display_change = TRUE;
 	cur_t->key = settings.currentverse;
 }
@@ -465,8 +535,20 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 void gui_display_text(gchar * key)
 {
 	if (!cur_t->is_locked)
+#ifdef USE_GTKEMBEDMOZ	
+		if(!cur_t->is_rtol) 
+			chapter_display(cur_t->html, 
+				cur_t->mod_name,
+				cur_t->tgs, key, TRUE);
+		else
+			chapter_display_mozilla(cur_t->html, 
+				cur_t->mod_name,
+				cur_t->tgs, key, TRUE);
+
+#else	
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
+#endif
 	else if (cur_t->cipher_key) {
 //              g_warning(cur_t->cipher_key);
 		gui_module_is_locked_display(cur_t->html,
@@ -502,7 +584,8 @@ void gui_add_new_text_pane(TEXT_DATA * t)
 	if (t->is_locked)
 		gui_module_is_locked_display(t->html, t->mod_name,
 					     t->cipher_key);
-	gnome_popup_menu_attach(popupmenu, t->html, NULL);
+	if(!t->is_rtol)
+		gnome_popup_menu_attach(popupmenu, t->html, NULL);
 }
 
 /******************************************************************************
@@ -574,7 +657,6 @@ void gui_setup_text(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modbuf;
-	gchar *direction;
 	TEXT_DATA *t;
 	gint count = 0;
 

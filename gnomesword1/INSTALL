@@ -1,23 +1,21 @@
-Basic Installation for GnomeSword 0.7.0 and later
+Basic Installation for GnomeSword 0.9.0 and later
 ==================
 ===================== notice =======================
-You must have GtkHTML-1.0.0 or later to build gnomesword 
-ftp://download.sourceforge.net/pub/mirrors/gnome/unstable/sources/gtkhtml/gtkhtml-1.0.0.tar.gz
+You must have pkgconfig-0.12.0 or later to build gnomesword  -- http://www.gnome.org/
+You need GtkHTML-1.1.0 or later -- Ximian
+You need gal-0.24.0 or later -- Ximian 
+You need gnome-print-0.35 or later -- http://www.gnome.org/
+You need gdk-pixbuf-0.18.0 or later -- http://www.gnome.org/
 
-You need to have the Sword Project (sword-1.5.3) installed.
+You need to have the Sword Project (sword-1.5.5) installed.
 You need at least one each text ,commentary and dictionary module also.
-Sword-1.5.3 and the modules can be found at www.crosswire.org in the Sword Project.
-
-you also need these packages
-You need gal-0.18.1 or later -- helix  ftp://spidermonkey.ximian.com/ximian/
-                                                evolution-snapshots/distributions/RedHat-6
-You need gnome-print-0.31 or later -- http://www.gnome.org/
-You need gdk-pixbuf-0.11.0 or later -- http://www.gnome.org/
+Sword-1.5.5 and the modules can be found at www.crosswire.org 
+in the Sword Project.
 
 
 ======================================================================
 
-**************************************************************************************************
+**********************************************************************
 If you want to install into the same prefix as the rest of GNOME,
 type:
 
@@ -28,24 +26,32 @@ and remember the answers, and pass them to "configure" and "autogen"
 when building gnome-print, gdk-pixbuf and gal. Eg:
 
 	./configure --prefix=/usr --sysconfdir=/etc
-These are the instructions from the Evolution readme.
+These instructions are from the Evolution readme.
+**********************************************************************
 
-If you don't use this method gnomesword will likely have problems finding
-everything it needs..
-**************************************************************************************************
+======================================================================
+GnomeSword will try to locate pspell and if it finds it build GnomeSword
+with pspell. 
+
+If you want to use ispell you must run configure with 
+--enable-use_ispell. GnomeSword will try to locate ispell and 
+if it is foung GnomeSword will be built with ispell support.
+
+If you want to use aspell you must run configure with 
+--enable-use_aspell. GnomeSword will try to locate aspell and 
+if it is foung GnomeSword will be built with aspell support
 ======================================================================
 
-============================================================================
- gnomesword will use ispell or pspell for spell checking 
-============================================================================
+
 
 You must also have gnome up and running.
 If you are using RedHat you need to have the gnome and gtk dev packages
 installed.
-It all worked on my RedHat 7.2 system.
+It all worked on my RedHat 7.2 and 8.0 system. (with the latest Evolution
+packages form Ximian)
 
 First, be sure to read INSTALL in the root of the Sword project
-directory for instructions on how to make sure the API
+directory for instructions on how to make sure the Sword API
 libraries are installed and configured properly.
 
 Then do a:
@@ -224,4 +230,3 @@ operates.
      script, and exit.
 
 `configure' also accepts some other, not widely useful, options.
-

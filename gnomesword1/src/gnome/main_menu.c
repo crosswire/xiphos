@@ -594,20 +594,20 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Copy"),
 	 N_("Copy highlighted text from main window"),
 	 gui_copyhtml_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
 	 N_("Shortcut Bar Search"),
 	 on_search_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
 	 N_("Open Search Dialog"),
 	 gui_do_dialog_search, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
@@ -753,16 +753,41 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo menubar1_uiinfo[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(file1_menu_uiinfo),
-	GNOMEUIINFO_MENU_EDIT_TREE(edit1_menu_uiinfo),
 	{
-	 GNOME_APP_UI_SUBTREE, N_("H_istory"),
-	 NULL,
-	 history1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_MENU_VIEW_TREE(view1_menu_uiinfo),
-	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
+	    GNOME_APP_UI_SUBTREE, N_("_File"),
+	    NULL,
+	    file1_menu_uiinfo, NULL, NULL,
+	    GNOME_APP_PIXMAP_NONE, NULL,
+	    0, (GdkModifierType) 0, NULL
+	},
+	{
+	    GNOME_APP_UI_SUBTREE, N_("_Edit"),
+	    NULL,
+	    edit1_menu_uiinfo, NULL, NULL,
+	    GNOME_APP_PIXMAP_NONE, NULL,
+	    0, (GdkModifierType) 0, NULL
+	},
+	{
+		GNOME_APP_UI_SUBTREE, N_("H_istory"),
+		NULL,
+		history1_menu_uiinfo, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL,
+		0, 0, NULL
+	},
+	{
+	    GNOME_APP_UI_SUBTREE, N_("_View"),
+	    NULL,
+	    view1_menu_uiinfo, NULL, NULL,
+	    GNOME_APP_PIXMAP_NONE, NULL,
+	    0, (GdkModifierType) 0, NULL
+	},
+	{
+	    GNOME_APP_UI_SUBTREE, N_("_Help"),
+	    NULL,
+	    help1_menu_uiinfo, NULL, NULL,
+	    GNOME_APP_PIXMAP_NONE, NULL,
+	    0, (GdkModifierType) 0, NULL
+	},
 	GNOMEUIINFO_END
 };
 

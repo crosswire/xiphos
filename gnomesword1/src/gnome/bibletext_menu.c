@@ -53,6 +53,40 @@
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void display_text(TEXT_DATA * t)
+{	
+#ifdef USE_GTKEMBEDMOZ	
+		if(!t->is_rtol) 
+			chapter_display(t->html, 
+				t->mod_name,
+				t->tgs, t->key, TRUE);
+		else
+			chapter_display_mozilla(t->html, 
+				t->mod_name,
+				t->tgs, t->key, TRUE);
+
+#else	
+		chapter_display(t->html, t->mod_name,
+				t->tgs, t->key, TRUE);
+#endif
+}
+
+/******************************************************************************
+ * Name
  *  on_copy_activate
  *
  * Synopsis
@@ -355,7 +389,7 @@ static void global_option_red_words(GtkMenuItem * menuitem,
 	t->tgs->words_in_red = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Red letter words", 
 				    t->tgs->words_in_red);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -381,7 +415,7 @@ static void global_option_strongs(GtkMenuItem * menuitem, TEXT_DATA * t)
 	t->tgs->strongs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Strong's Numbers", 
 				    t->tgs->strongs);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -407,7 +441,7 @@ static void global_option_morph(GtkMenuItem * menuitem, TEXT_DATA * t)
 	t->tgs->morphs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Morphological Tags", 
 				    t->tgs->morphs);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -434,7 +468,7 @@ static void global_option_footnotes(GtkMenuItem * menuitem,
 	t->tgs->footnotes = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Footnotes", 
 				    t->tgs->footnotes);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 /******************************************************************************
@@ -460,7 +494,7 @@ static void global_option_greekaccents(GtkMenuItem * menuitem,
 	t->tgs->greekaccents = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Greek Accents", 
 				    t->tgs->greekaccents);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -486,7 +520,7 @@ static void global_option_lemmas(GtkMenuItem * menuitem, TEXT_DATA * t)
 	t->tgs->lemmas = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Lemmas", 
 				    t->tgs->lemmas);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -513,7 +547,7 @@ static void global_option_scripturerefs(GtkMenuItem * menuitem,
 	t->tgs->scripturerefs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Scripture Cross-references", 
 				    t->tgs->scripturerefs);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -540,7 +574,7 @@ static void global_option_hebrewpoints(GtkMenuItem * menuitem,
 	t->tgs->hebrewpoints = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Hebrew Vowel Points", 
 				    t->tgs->hebrewpoints);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -567,7 +601,7 @@ static void global_option_hebrewcant(GtkMenuItem * menuitem,
 	t->tgs->hebrewcant = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Hebrew Cantillation", 
 				    t->tgs->hebrewcant);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -594,7 +628,7 @@ static void global_option_headings(GtkMenuItem * menuitem,
 	t->tgs->headings = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	save_module_options(t->mod_name, "Headings", 
 				    t->tgs->headings);
-	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
+	display_text(t);
 }
 
 
@@ -623,8 +657,7 @@ static void global_option_variants_all(GtkMenuItem * menuitem,
 	save_module_options(t->mod_name, "All Readings", 
 				    t->tgs->variants_all);
 	if (t->tgs->variants_all)
-		chapter_display(t->html, t->mod_name,
-				t->tgs, t->key, TRUE);
+		display_text(t);
 }
 
 
@@ -653,8 +686,7 @@ static void global_option_variants_primary(GtkMenuItem * menuitem,
 	save_module_options(t->mod_name, "Primary Reading", 
 				    t->tgs->variants_primary);
 	if (t->tgs->variants_primary)
-		chapter_display(t->html, t->mod_name,
-				t->tgs, t->key, TRUE);
+		display_text(t);
 }
 
 
@@ -683,8 +715,7 @@ static void global_option_variants_scondary(GtkMenuItem * menuitem,
 	save_module_options(t->mod_name, "Secondary Reading", 
 				    t->tgs->variants_secondary);
 	if (t->tgs->variants_secondary)
-		chapter_display(t->html, t->mod_name,
-				t->tgs, t->key, TRUE);
+		display_text(t);
 }
 
 
@@ -1010,6 +1041,18 @@ static void on_sync_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 	gui_sync_bibletext_dialog(t);
 }
 
+
+
+void
+on_menu_deactivate(GtkMenuShell * menushell, TEXT_DATA * t)
+{
+#ifdef USE_GTKEMBEDMOZ	
+	g_warning("on_menu_deactivate");
+	//if(t->is_rtol)
+		//gtk_widget_destroy(GTK_WIDGET(menushell));
+#endif
+}
+
 /******************************************************************************
  * Name
  *  gui_create_pm_text
@@ -1069,25 +1112,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
 	pm_text_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));
-	/*    
-	if (t->is_dialog) {
-		shortcut =
-		    gtk_menu_item_new_with_label(_
-						 ("Add Dialog to Favorites Bar"));
-		gtk_widget_show(shortcut);
-		gtk_container_add(GTK_CONTAINER(pm_text),
-				  shortcut);
-
-		gtk_signal_connect(GTK_OBJECT(shortcut),
-				   "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_shortcut_activate), t);
-		
-		separator = gtk_menu_item_new();
-		gtk_widget_show(separator);
-		gtk_container_add(GTK_CONTAINER(pm_text), separator);
-		gtk_widget_set_sensitive(separator, FALSE);
-	}*/
+	    
 	/*
 	 * file menu
 	 */
@@ -1320,6 +1345,9 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   (on_text_showtabs_activate), NULL);
 	}
 
+  	gtk_signal_connect (GTK_OBJECT(pm_text), "deactivate",
+                      GTK_SIGNAL_FUNC (on_menu_deactivate),
+                      NULL);
 	/*
 	 * for using the current dictionary for lookup 
 	 */
