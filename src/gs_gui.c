@@ -338,6 +338,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 		gdk_pixbuf_unref(icon_pixbuf);
 		while (gtk_events_pending())
 			gtk_main_iteration();
+		e_splash_set_icon_highlight (E_SPLASH(splash),1, TRUE);
 	}
 
 	settings->app =
