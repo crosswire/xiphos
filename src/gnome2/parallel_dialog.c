@@ -33,7 +33,6 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/parallel_view.h"
-#include "main/key.h"
 #include "main/settings.h"
 
 GtkWidget *entrycbIntBook;

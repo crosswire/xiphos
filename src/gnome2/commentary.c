@@ -44,7 +44,6 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
-#include "main/key.h"
 #include "main/xml.h"
 #include "main/global_ops.hh"
 

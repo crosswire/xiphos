@@ -71,7 +71,6 @@ public:
 	void setup_displays(void);
 
 	GList *fill_Bible_books(int testament);
-
 	GList *get_module_options(void);
 	int has_global_option(char *mod_name, char *option);
 	char *get_config_entry(char * module_name, char * entry);

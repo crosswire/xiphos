@@ -59,7 +59,6 @@ extern "C" {
 #include "main/sidebar.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/key.h"
 #include "main/xml.h"
 #include "main/display.hh"
 #include "main/global_ops.hh"
