@@ -28,6 +28,7 @@
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/widgets/e-unicode.h>
 #include <regex.h>
+#include <string.h>
 
 #include "gui/search_dialog.h"
 #include "gui/html.h"
