@@ -26,8 +26,7 @@
 extern "C" {
 #endif
 
-
-#include "setup_druid.h"
+#include "gui/setup_druid.h"
 	
 void save_frist_run_settings(SETTINGS_DRUID widgets);
 void first_run(void);	
@@ -37,4 +36,5 @@ gchar *get_path_to_mods(void);
 }
 #endif	
 
-#endif /* __SETUP_H__ */
+#endif
+

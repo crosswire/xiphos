@@ -26,8 +26,8 @@
 extern "C" {
 #endif
 
-#include "settings.h"
-#include "_editor.h"
+#include "main/settings.h"
+#include "gui/_editor.h"
 
 typedef struct _percomm_data PC_DATA;
 struct _percomm_data {
@@ -54,4 +54,6 @@ void shutdown_percomm(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __PERCOMM_H_ */
+
+#endif
+

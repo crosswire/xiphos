@@ -32,12 +32,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "gs_bookmarks.h"
-#include "bookmarks.h"
-#include "sword.h"
-#include "gs_gnomesword.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_bookmarks.h"
+#include "backend/bookmarks.h"
+#include "backend/sword.h"
+#include "main/gs_gnomesword.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * externals

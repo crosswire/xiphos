@@ -27,7 +27,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
-#include <settings.h>
+
+#include "main/settings.h"
 
 /* input buffer size */
 #define BUFFER_SIZE 8192

@@ -33,8 +33,8 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 	void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s);
 	/*** toogle global options in interlinear window ***/
@@ -83,4 +83,5 @@ extern "C" {
 }
 #endif
 
-#endif /* __GS_POPUP_CB_H_ */
+#endif
+
