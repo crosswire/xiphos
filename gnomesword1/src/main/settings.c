@@ -560,7 +560,14 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
-
+	
+		
+	if(xml_get_value("misc", "setup_canceled"))
+		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
+	else {
+		xml_add_new_item_to_section("misc","setup_canceled","0");
+		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
+	}
 
 	settings.use_studypad =
 	    atoi(xml_get_value("editor", "UseStudyPad"));
@@ -570,9 +577,10 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("editor", "UsePercommDialog"));
 	if(xml_get_value("editor", "spell_language"))
 	     settings.spell_language = xml_get_value("editor","spell_language");
-	else 
+	else {
 		xml_add_new_item_to_section("editor","spell_language","unknown");
 		settings.spell_language = "unknown";
+	}
 
 
 	settings.studypadfilename =
