@@ -252,14 +252,18 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modbuf = "Packard";
 		}
 		mybuf = NULL;
+		mybuf = strstr(url, "class=Robinson");
+		if (mybuf) {
+			modbuf = "Robinson";
+		}
 		mybuf = strstr(url, "value=");
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			for(i=0;i<strlen(mybuf);i++){
+			/*for(i=0;i<strlen(mybuf);i++){
 				if(mybuf[i]=='-') 
 					mybuf[i]=' ';
-			}
+			}*/
 		}
 		buf = g_strdup(mybuf);
 		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
@@ -418,14 +422,19 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modbuf = "Packard";
 		}
 		mybuf = NULL;
+		mybuf = strstr(url, "class=Robinson");
+		if (mybuf) {
+			modbuf = "Robinson";
+		}
+		mybuf = NULL;
 		mybuf = strstr(url, "value=");
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
-			++mybuf;
+			++mybuf;/*
 			for(i=0;i<strlen(mybuf);i++){
 				if(mybuf[i]=='-') 
 					mybuf[i]=' ';
-			}
+			}*/
 		}
 		buf = g_strdup(mybuf);
 		//g_warning("newmod = %s newvalue = %s",modbuf,buf);

@@ -255,7 +255,7 @@ void setupviewerSBSW(GtkWidget *html_widget)
 	
 	viewersbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	viewersbMod     = NULL;
-	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget);
+	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget,settings);
 	
 	for(it = viewersbMgr->Modules.begin(); it != viewersbMgr->Modules.end(); it++){
 		viewersbMod = (*it).second;

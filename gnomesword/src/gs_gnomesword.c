@@ -92,7 +92,6 @@ extern GList
 extern gchar 
 	*mydictmod,
 	*shortcut_types[],
-	*mycolor,
 	rememberlastitem[];
 	
 extern gboolean 
@@ -133,8 +132,6 @@ initGnomeSword(SETTINGS *s,
 	setupSB(s);
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
-	/* set current verse color html */
-	mycolor = s->currentverse_color;
 	/* add modules to menus -- gs_menu.c */
 	addmodstomenus(s, 
 			biblemods, 

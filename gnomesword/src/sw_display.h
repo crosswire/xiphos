@@ -37,11 +37,13 @@
 class GtkHTMLEntryDisp:public SWDisplay {
       protected:
 	GtkWidget * gtkText;
+	SETTINGS *s;
       public:
 	
 	bool use_gtkhtml_font;
-	GtkHTMLEntryDisp(GtkWidget * gtkText) {
+	GtkHTMLEntryDisp(GtkWidget * gtkText, SETTINGS *s) {
 		this->gtkText = gtkText;
+		this->s = s;
 	}
 	virtual char Display(SWModule & imodule);
 	virtual gchar* pick_font(SWModule & imodule);
@@ -50,20 +52,20 @@ class GtkHTMLEntryDisp:public SWDisplay {
 
 //----------------------------------------------------------------------------------------------
 class EntryDisp:public GtkHTMLEntryDisp { public:
-	EntryDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
+	EntryDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
 	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKutf8ChapDisp:public GtkHTMLEntryDisp { public:
-	GTKutf8ChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
+class GtkHTMLChapDisp:public GtkHTMLEntryDisp { public:
+	GtkHTMLChapDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
 	} 
 	virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
 class InterlinearDisp:public GtkHTMLEntryDisp { public:
-	InterlinearDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
+	InterlinearDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
 	} 
 	virtual char Display(SWModule & imodule);
 };
