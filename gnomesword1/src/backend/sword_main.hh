@@ -93,6 +93,7 @@ public:
 	void delete_entry(void);
 	int set_module_key(const char *module_name, const char *key);
 	int set_key(const char *key);
+	int get_key_testament(const char * key);
 	int is_module(const char *mod_name);
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
