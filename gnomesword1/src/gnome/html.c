@@ -156,6 +156,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[255], *buf1;
 	gchar *tmpbuf;
+	gboolean is_strongsmorph = FALSE;
 
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
@@ -181,14 +182,13 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			buf1 = strchr(url,'=');
 			++buf1;
 			tmpbuf = get_footnote_body(buf1);
-			//tmpbuf = gui_show_footnote(buf1);
 			if(tmpbuf == NULL)
 				return;	
 			else {
 				gnome_appbar_set_status(GNOME_APPBAR(
 					widgets.appbar),tmpbuf);
 				if(hint.use_hints) {
-					gui_show_footnote(tmpbuf);
+					gui_display_footnote_in_hint(tmpbuf);
 				}
 				
 				g_free(tmpbuf);				
@@ -304,41 +304,54 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			gchar *myurl = NULL;
-
+			gchar *oldnew = NULL;
+			
+			oldnew = g_strdup(url);
 			myurl = g_strdup(url);
 			buf1 = g_strdup(myurl);
-/*
+
 			mybuf = strstr(myurl, "class=");
 			if (mybuf) {
-				gint i;
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
-				if (!strncmp(modbuf, "none", 5)) {	// gbf 
-					modbuf = "Packard";
-				} else {
-					for (i = 0; i < strlen(modbuf);
-					     i++) {
-						if (modbuf[i] == ' ') {
-							modbuf[i] =
-							    '\0';
-							break;
-						}
-					}
+				if (!strncmp(modbuf, "Robinson", 7)) {	
+					modbuf = "Robinson";
+				} 
+				else if(!strncmp(modbuf, "StrongsMorph", 11)) {
+					is_strongsmorph = TRUE;
+					if(strstr(oldnew,"value=TH"))
+						modbuf = settings.lex_hebrew;
+					else
+						modbuf = settings.lex_greek;
 				}
 			}
-*/
-			modbuf = "Robinson";
+			else 
+				modbuf = "Robinson";
+
 			mybuf = NULL;
 			mybuf = strstr(buf1, "value=");
 			if (mybuf) {
 				mybuf = strchr(mybuf, '=');
 				++mybuf;
 			}
+			if(is_strongsmorph) {				
+				++mybuf;
+				++mybuf;
+			} 
 			buf1 = g_strdup(mybuf);
-			//g_warning("show %s in %s",buf1,modbuf);
+			g_warning("show %s in %s",buf1,modbuf);
+			mybuf = NULL;
+			if(hint.use_hints) {
+				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
+				if(mybuf) {
+					gui_display_footnote_in_hint(mybuf);
+					g_free(mybuf);
+				}
+			}
 			show_in_appbar(widgets.appbar, buf1, modbuf);
 			g_free(buf1);
 			g_free(myurl);
+			g_free(oldnew);
 			return;
 		}
 		/*** thml strongs ***/
@@ -373,6 +386,14 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				modbuf = settings.lex_hebrew;
 
 			buf1 = g_strdup(newref);
+			mybuf = NULL;
+			if(hint.use_hints) {
+				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
+				if(mybuf) {
+					gui_display_footnote_in_hint(mybuf);
+					g_free(mybuf);
+				}
+			}
 			show_in_appbar(widgets.appbar, buf1, modbuf);
 			g_free(buf1);
 			return;
@@ -413,7 +434,9 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
+	gchar *oldnew = NULL;
 	gint i = 0;
+	gboolean is_strongsmorph = FALSE;
 
 	if (*url == '@') {
 		++url;
@@ -495,24 +518,23 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		gchar *mybuf = NULL;
 
 		buf = g_strdup(url);
-/*		mybuf = strstr(url, "class=");
+		mybuf = strstr(url, "class=");
 		if (mybuf) {
-			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if (!strncmp(modbuf, "none", 5)) {	
-				modbuf = "Packard";
-			} else {
-				for (i = 0; i < strlen(modbuf); i++) {
-					if (modbuf[i] == ' ') {
-						modbuf[i] = '\0';
-						break;
-					}
-				}
+			if (!strncmp(modbuf, "Robinson", 7)) {	
+				modbuf = "Robinson";
+			} 
+			else if(!strncmp(modbuf, "StrongsMorph", 11)) {
+				is_strongsmorph = TRUE;
+				if(strstr(oldnew,"value=TH"))
+					modbuf = settings.lex_hebrew;
+				else
+					modbuf = settings.lex_greek;
 			}
 		}
-*/
-		modbuf = "Robinson";
+		else
+			modbuf = "Robinson";
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
 		if (mybuf) {
