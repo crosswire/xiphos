@@ -369,6 +369,10 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *druidpagefinish1;
 	GtkTooltips *tooltips;
 	GError *error = NULL;
+	GtkWidget *label700;
+	GtkWidget *label701;
+	GtkWidget *label702;
+	GtkWidget *label703;
 
 
 	gchar *homedir, version[40];
@@ -413,11 +417,14 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			     GNOME_DRUID_PAGE(druidpagestart1));
 	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					 (druidpagestart1),
-					 _("Welcome To GnomeSword"));
+					 _("GnomeSword Configuration - Page 1 of 5"));
 	gnome_druid_page_edge_set_text(GNOME_DRUID_PAGE_EDGE
 					(druidpagestart1),
 					_
-					("This guide will take you through the initial setup of GnomeSword"));
+					("Since this is the first time you have run GnomeSword, this assistant "
+					 "will guide you through the initial setup by asking a few simple questions.\n\n"
+					 "Once you have completed these steps, you can always change the settings "
+					 "later by using the Preferences dialog."));
 
 	gnome_druid_page_edge_set_logo(GNOME_DRUID_PAGE_EDGE
 					(druidpagestart1),
@@ -434,7 +441,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagestandard3));
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
-					    settings.program_title);
+					    _("GnomeSword Configuration - Page 2 of 5"));
 
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
@@ -451,7 +458,12 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(vbox27);
 	gtk_box_pack_start(GTK_BOX(druid_vbox3), vbox27, TRUE, TRUE, 0);
 
-	label112 = gtk_label_new(_("Your Home Directory:"));
+	label700 = gtk_label_new(NULL);
+	gtk_label_set_markup(GTK_LABEL(label700), _("<span weight=\"bold\">These settings have been detected automatically</span>"));
+	gtk_widget_show(label700);
+	gtk_box_pack_start(GTK_BOX(vbox27), label700, FALSE, FALSE, 0);
+
+	label112 = gtk_label_new(_("Your home directory:"));
 	gtk_widget_show(label112);
 	gtk_box_pack_start(GTK_BOX(vbox27), label112, FALSE, FALSE, 0);
 
@@ -485,7 +497,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(label144);
 	gtk_box_pack_start(GTK_BOX(vbox27), label144, FALSE, FALSE, 0);
 
-	label114 = gtk_label_new(_("Sword Directory:"));
+	label114 = gtk_label_new(_("SWORD Directory:"));
 	gtk_widget_show(label114);
 	gtk_box_pack_start(GTK_BOX(vbox27), label114, FALSE, FALSE, 0);
 
@@ -493,7 +505,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(label115);
 	gtk_box_pack_start(GTK_BOX(vbox27), label115, FALSE, FALSE, 0);
 
-	label116 = gtk_label_new(_("Number of Bible Text Modules:"));
+	label116 = gtk_label_new(_("Number of Bible text modules:"));
 	gtk_widget_show(label116);
 	gtk_box_pack_start(GTK_BOX(vbox27), label116, FALSE, FALSE, 0);
 
@@ -501,7 +513,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(label117);
 	gtk_box_pack_start(GTK_BOX(vbox27), label117, FALSE, FALSE, 0);
 
-	label118 = gtk_label_new(_("Number of Commentary Modules:"));
+	label118 = gtk_label_new(_("Number of Commentary modules:"));
 	gtk_widget_show(label118);
 	gtk_box_pack_start(GTK_BOX(vbox27), label118, FALSE, FALSE, 0);
 
@@ -510,7 +522,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(vbox27), label119, FALSE, FALSE, 0);
 
 	label120 =
-	    gtk_label_new(_("Number of Lexicon / Dictionary Modules"));
+	    gtk_label_new(_("Number of Dictionary/Lexicon modules:"));
 	gtk_widget_show(label120);
 	gtk_box_pack_start(GTK_BOX(vbox27), label120, FALSE, FALSE, 0);
 
@@ -525,8 +537,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagestandard1));
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard1),
-					    _
-					    ("Do you want GnomeSword to open with"));
+					    _("GnomeSword Configuration - Page 3 of 5"));
 
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard1),
@@ -543,10 +554,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(vbox26);
 	gtk_box_pack_start(GTK_BOX(druid_vbox1), vbox26, TRUE, TRUE, 0);
 
+	label701 = gtk_label_new(NULL);
+	gtk_label_set_markup(GTK_LABEL(label701), _("<span weight=\"bold\">Settings to use when GnomeSword starts</span>"));
+	gtk_widget_show(label701);
+	gtk_box_pack_start(GTK_BOX(vbox26), label701, FALSE, FALSE, 8);
+
 	widgets.radiobutton_use_default =
 	    gtk_radio_button_new_with_label(vbox26_group,
 					    _
-					    ("Settings you choose as default"));
+					    ("Settings you select as the defaults"));
 	vbox26_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (widgets.radiobutton_use_default));
@@ -558,7 +574,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	radiobutton_last_run =
 	    gtk_radio_button_new_with_label(vbox26_group,
 					    _
-					    ("Settings used the last time GnomeSword ran"));
+					    ("Settings used the last time GnomeSword was opened"));
 	vbox26_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (radiobutton_last_run));
@@ -582,26 +598,26 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox27, TRUE, TRUE, 0);
 
 	widgets.checkbutton_verse_style =
-	    gtk_check_button_new_with_label(_("Use Verse Style"));
+	    gtk_check_button_new_with_label(_("Use Verse style"));
 	gtk_widget_show(widgets.checkbutton_verse_style);
 	gtk_box_pack_start(GTK_BOX(hbox27),
 			   widgets.checkbutton_verse_style, FALSE, TRUE,
 			   0);
-	gtk_widget_set_usize(widgets.checkbutton_verse_style, 202, -2);
+	gtk_widget_set_size_request(widgets.checkbutton_verse_style, 202, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.checkbutton_verse_style),
 				     TRUE);
 
 	widgets.checkbutton_text_tabs =
-	    gtk_check_button_new_with_label(_("Show Bible Tabs"));
+	    gtk_check_button_new_with_label(_("Show Bible tabs"));
 	gtk_widget_show(widgets.checkbutton_text_tabs);
 	gtk_box_pack_start(GTK_BOX(hbox27),
 			   widgets.checkbutton_text_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_usize(widgets.checkbutton_text_tabs, 162, -2);
+	gtk_widget_set_size_request(widgets.checkbutton_text_tabs, 162, -1);
 
 	widgets.checkbutton_text_window =
-	    gtk_check_button_new_with_label(_("Show Bible Window"));
+	    gtk_check_button_new_with_label(_("Show Bible window"));
 	gtk_widget_show(widgets.checkbutton_text_window);
 	gtk_box_pack_start(GTK_BOX(hbox27),
 			   widgets.checkbutton_text_window, FALSE, TRUE,
@@ -615,15 +631,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox28, TRUE, TRUE, 0);
 
 	widgets.checkbutton_comm_tabs =
-	    gtk_check_button_new_with_label(_("Show Commentary Tabs"));
+	    gtk_check_button_new_with_label(_("Show Commentary tabs"));
 	gtk_widget_show(widgets.checkbutton_comm_tabs);
 	gtk_box_pack_start(GTK_BOX(hbox28),
 			   widgets.checkbutton_comm_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_usize(widgets.checkbutton_comm_tabs, 162, -2);
+	gtk_widget_set_size_request(widgets.checkbutton_comm_tabs, 162, -1);
 
 	widgets.checkbutton_upper_workbook =
-	    gtk_check_button_new_with_label(_("Show Upper Workbook"));
+	    gtk_check_button_new_with_label(_("Show upper workbook"));
 	gtk_widget_show(widgets.checkbutton_upper_workbook);
 	gtk_box_pack_start(GTK_BOX(hbox28),
 			   widgets.checkbutton_upper_workbook, FALSE,
@@ -638,15 +654,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox29, TRUE, TRUE, 0);
 
 	widgets.checkbutton_dict_tabs =
-	    gtk_check_button_new_with_label(_("Show Dict/Lex Tabs"));
+	    gtk_check_button_new_with_label(_("Show Dictionary/Lexicon tabs"));
 	gtk_widget_show(widgets.checkbutton_dict_tabs);
 	gtk_box_pack_start(GTK_BOX(hbox29),
 			   widgets.checkbutton_dict_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_usize(widgets.checkbutton_dict_tabs, 162, -2);
+	gtk_widget_set_size_request(widgets.checkbutton_dict_tabs, 162, -1);
 
 	widgets.checkbutton_lower_workbook =
-	    gtk_check_button_new_with_label(_("Show Lower Workbook"));
+	    gtk_check_button_new_with_label(_("Show lower workbook"));
 	gtk_widget_show(widgets.checkbutton_lower_workbook);
 	gtk_box_pack_start(GTK_BOX(hbox29),
 			   widgets.checkbutton_lower_workbook, FALSE,
@@ -661,12 +677,12 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox84, TRUE, TRUE, 0);
 
 	widgets.checkbutton_book_tabs =
-	    gtk_check_button_new_with_label(_("Show Book Tabs"));
+	    gtk_check_button_new_with_label(_("Show book tabs"));
 	gtk_widget_show(widgets.checkbutton_book_tabs);
 	gtk_box_pack_start(GTK_BOX(hbox84),
 			   widgets.checkbutton_book_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_usize(widgets.checkbutton_book_tabs, 162, -2);
+	gtk_widget_set_size_request(widgets.checkbutton_book_tabs, 162, -1);
 
 	druidpagestandard2 =
 	    gnome_druid_page_standard_new();
@@ -675,8 +691,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagestandard2));
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard2),
-					    _
-					    ("Choose default Sword modules"));
+					    _("GnomeSword Configuration - Page 4 of 5"));
 
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard2),
@@ -688,6 +703,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druid_vbox2 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard2)->vbox;
 	gtk_widget_show(druid_vbox2);
+
+	label702 = gtk_label_new(NULL);
+	gtk_label_set_markup(GTK_LABEL(label702), _("<span weight=\"bold\">Choose default SWORD modules</span>"));
+	gtk_widget_show(label702);
+	gtk_box_pack_start(GTK_BOX(druid_vbox2), label702, FALSE, FALSE, 8);
 
 	table7 = gtk_table_new(15, 2, FALSE);
 	gtk_widget_show(table7);
@@ -792,21 +812,21 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	widgets.combo_entry_comm = GTK_COMBO(combo_comm)->entry;
 	gtk_widget_show(widgets.combo_entry_comm);
 
-	label139 = gtk_label_new(_("parallel 5"));
+	label139 = gtk_label_new(_("Parallel 5"));
 	gtk_widget_show(label139);
 	gtk_table_attach(GTK_TABLE(table7), label139, 0, 1, 5, 6,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label139), 0, 0.5);
 
-	label138 = gtk_label_new(_("parallel 4"));
+	label138 = gtk_label_new(_("Parallel 4"));
 	gtk_widget_show(label138);
 	gtk_table_attach(GTK_TABLE(table7), label138, 0, 1, 4, 5,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label138), 0, 0.5);
 
-	label107 = gtk_label_new(_("parallel 3"));
+	label107 = gtk_label_new(_("Parallel 3"));
 	gtk_widget_show(label107);
 	gtk_table_attach(GTK_TABLE(table7), label107, 0, 1, 3, 4,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -815,7 +835,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_misc_set_alignment(GTK_MISC(label107), 7.45058e-09,
 			       7.45058e-09);
 
-	label106 = gtk_label_new(_("parallel 2"));
+	label106 = gtk_label_new(_("Parallel 2"));
 	gtk_widget_show(label106);
 	gtk_table_attach(GTK_TABLE(table7), label106, 0, 1, 2, 3,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -824,7 +844,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_misc_set_alignment(GTK_MISC(label106), 7.45058e-09,
 			       7.45058e-09);
 
-	label105 = gtk_label_new(_("parallel 1"));
+	label105 = gtk_label_new(_("Parallel 1"));
 	gtk_widget_show(label105);
 	gtk_table_attach(GTK_TABLE(table7), label105, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -832,7 +852,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_misc_set_alignment(GTK_MISC(label105), 1.2666e-07,
 			       7.45058e-09);
 
-	label240 = gtk_label_new(_("Generic Book"));
+	label240 = gtk_label_new(_("Generic book"));
 	gtk_widget_show(label240);
 	gtk_table_attach(GTK_TABLE(table7), label240, 0, 1, 8, 9,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -871,7 +891,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	widgets.combo_entry_personal = GTK_COMBO(combo_personal)->entry;
 	gtk_widget_show(widgets.combo_entry_personal);
 
-	label141 = gtk_label_new(_("Dict/Lex"));
+	label141 = gtk_label_new(_("Dictionary/Lexicon"));
 	gtk_widget_show(label141);
 	gtk_table_attach(GTK_TABLE(table7), label141, 0, 1, 9, 10,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -911,7 +931,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(widgets.entry_greek_lex);
 	gtk_tooltips_set_tip(tooltips, widgets.entry_greek_lex,
 			     _
-			     ("Which Greek Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     ("Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or word is clicked"),
 			     NULL);
 
 	label251 = gtk_label_new(_("Hebrew Lexicon"));
@@ -936,7 +956,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(widgets.entry_hebrew_lex);
 	gtk_tooltips_set_tip(tooltips, widgets.entry_hebrew_lex,
 			     _
-			     ("Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     ("Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or word is clicked"),
 			     NULL);
 
 	label252 = gtk_label_new(_("Daily Devotional"));
@@ -961,7 +981,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label111 =
 	    gtk_label_new(_
-			  ("These setting will be the default settings if you chose to use default settings. "));
+			  ("These settings will be the defaults if you choose to use default settings."));
 	gtk_widget_show(label111);
 	gtk_box_pack_start(GTK_BOX(druid_vbox2), label111, FALSE, FALSE,
 			   0);
@@ -974,11 +994,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagefinish1));
 	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					  (druidpagefinish1),
-					  settings.program_title);
+					  _("GnomeSword Configuration - Page 5 of 5"));
 	gnome_druid_page_edge_set_text(GNOME_DRUID_PAGE_EDGE
 					 (druidpagefinish1),
-					 _
-					 ("            Thank-you for using GnomeSword. \nClick Finish to close this dialog and run GnomeSword."));
+					 _("Thank you for using GnomeSword.\n\n"
+					  "Click Apply to close this dialog and run GnomeSword."));
 
 	gnome_druid_page_edge_set_logo(GNOME_DRUID_PAGE_EDGE
 					(druidpagefinish1),

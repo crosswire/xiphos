@@ -852,7 +852,7 @@ static void on_button_begin_search(GtkButton * button,
 /*	gnome_appbar_set_progress((GnomeAppBar *) search.progressbar,
 				  (gfloat) 0);*/
 	gnome_appbar_set_status(GNOME_APPBAR(search.progressbar),
-				_("Search Finished"));
+				_("Search finished"));
 	g_string_free(str, TRUE);
 }
 
@@ -1332,7 +1332,7 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			_("Clear List?"),
-			_("Do you really want to clear the module list?"));
+			_("Are you sure you want to clear the module list?"));
 	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
@@ -1403,7 +1403,7 @@ static void delete_module(GtkButton * button, gpointer user_data)
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			_("Remove Module?"),
-			_("Do you really want to remove the selected module?"));
+			_("Are you sure you want to remove the selected module?"));
 	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
@@ -1624,7 +1624,7 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s %s",
 			_("Delete Range?"),
-			_("Are you sure you want ot delete this range?"),
+			_("Are you sure you want to delete this range?"),
 			name_string);
 	info->label_top = str->str;
 	info->yes = TRUE;
@@ -2225,7 +2225,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(label_search_module);
 	gtk_box_pack_start(GTK_BOX(vbox82), label_search_module, TRUE,
 			   TRUE, 0);
-	gtk_widget_set_usize(label_search_module, 80, -2);
+	gtk_widget_set_size_request(label_search_module, 80, -1);
 	gtk_label_set_justify(GTK_LABEL(label_search_module),
 			      GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment (GTK_MISC (label_search_module), 0, 0.5);
@@ -2247,7 +2247,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox71), button_begin_search, FALSE,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, button_begin_search,
-			     _("Click to begin the search"), NULL);
+			     _("Start searching"), NULL);
 	gtk_button_set_relief(GTK_BUTTON(button_begin_search),
 			      GTK_RELIEF_NONE);
 			      	
@@ -2288,19 +2288,19 @@ static GtkWidget *create_search_dialog(void)
 
 	rb_no_scope =
 	    gtk_radio_button_new_with_label(hbox77_group,
-					    _("Entire Module   "));
+					    _("Entire module"));
 	hbox77_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_no_scope));
 	gtk_widget_show(rb_no_scope);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_no_scope, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_no_scope,
-			     _("Search entire module(s)"), NULL);
+			     _("Search entire module"), NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rb_no_scope),
 				     TRUE);
 
 	rb_last =
 	    gtk_radio_button_new_with_label(hbox77_group,
-					    _("Current Results   "));
+					    _("Current results"));
 	hbox77_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_last));
 	gtk_widget_show(rb_last);
@@ -2312,7 +2312,7 @@ static GtkWidget *create_search_dialog(void)
 
 	rb_custom_range =
 	    gtk_radio_button_new_with_label(hbox77_group,
-					    _("Custom Range   "));
+					    _("Custom range"));
 	hbox77_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_custom_range));
 	gtk_widget_show(rb_custom_range);
@@ -2383,12 +2383,12 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_mod_list, FALSE, TRUE,
 			   0);
 	gtk_tooltips_set_tip(tooltips, rb_mod_list,
-			     _("Use current module list for the search"),
+			     _("Use the current module list for the search"),
 			     NULL);
 
 	rb_custom_list =
 	    gtk_radio_button_new_with_label(hbox79_group,
-					    _("Custom List"));
+					    _("Custom list"));
 	hbox79_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_custom_list));
 	gtk_widget_show(rb_custom_list);
@@ -2484,12 +2484,12 @@ static GtkWidget *create_search_dialog(void)
 
 	search.cb_include_strongs =
 	    gtk_check_button_new_with_label(_
-					    ("Include Strongs Numbers"));
+					    ("Include Strong's Numbers"));
 	gtk_widget_show(search.cb_include_strongs);
 	gtk_box_pack_start(GTK_BOX(vbox64), search.cb_include_strongs,
 			   FALSE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, search.cb_include_strongs,
-			     _("In modules that have Strongs Numbers"),
+			     _("In modules that have Strong's Numbers"),
 			     NULL);
 
 	search.cb_include_morphs =
@@ -2544,7 +2544,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(vseparator22);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator22,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator22, 6, 7);
+	gtk_widget_set_size_request(vseparator22, 6, 7);
 
 
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_SAVE_AS,
@@ -2566,7 +2566,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(vseparator23);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator23,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator23, 6, 7);
+	gtk_widget_set_size_request(vseparator23, 6, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLEAR,
 						    gtk_toolbar_get_icon_size
@@ -2612,7 +2612,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(frame_report);
 	gtk_box_pack_start(GTK_BOX(vbox65), frame_report, TRUE, TRUE,
 			   0);
-	gtk_widget_set_usize(frame_report, 212, -2);
+	gtk_widget_set_size_request(frame_report, 212, -1);
 	gtk_container_set_border_width(GTK_CONTAINER(frame_report), 2);	
 
 	scrolledwindow_report = gtk_scrolled_window_new(NULL, NULL);
@@ -2733,7 +2733,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(vseparator26);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar38), vseparator26,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator26, 6, 7);
+	gtk_widget_set_size_request(vseparator26, 6, 7);
 
 
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CUT,
@@ -2757,7 +2757,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(scrolledwindow67);
 	gtk_box_pack_start(GTK_BOX(hbox76), scrolledwindow67, TRUE,
 			   TRUE, 0);
-	gtk_widget_set_usize(scrolledwindow67, 175, -2);
+	gtk_widget_set_size_request(scrolledwindow67, 175, -1);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow67),
 				       GTK_POLICY_NEVER,
@@ -2791,7 +2791,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_label_set_markup(GTK_LABEL(label227), _("<b>Range Name</b>"));
 	gtk_widget_show(label227);
 	gtk_box_pack_start(GTK_BOX(vbox76), label227, FALSE, FALSE, 0);
-	gtk_widget_set_usize(label227, -2, 26);
+	gtk_widget_set_size_request(label227, -1, 26);
 	gtk_misc_set_alignment (GTK_MISC (label227), 0.01, 0.5);
 
 	entry_range_name = gtk_entry_new();;
@@ -2803,7 +2803,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_label_set_markup(GTK_LABEL(label228), _("<b>Range Text</b>"));
 	gtk_widget_show(label228);
 	gtk_box_pack_start(GTK_BOX(vbox76), label228, FALSE, FALSE, 0);
-	gtk_widget_set_usize(label228, -2, 26);
+	gtk_widget_set_size_request(label228, -1, 26);
 	gtk_misc_set_alignment (GTK_MISC (label228), 0.01, 0.5);
 
 	entry_range_text = gtk_entry_new();
@@ -2814,7 +2814,7 @@ static GtkWidget *create_search_dialog(void)
 	label229 = gtk_label_new(_("e.g. Matt-John;Rev4"));
 	gtk_widget_show(label229);
 	gtk_box_pack_start(GTK_BOX(vbox76), label229, FALSE, FALSE, 0);
-	gtk_widget_set_usize(label229, -2, 26);
+	gtk_widget_set_size_request(label229, -1, 26);
 
 	scrolledwindow65 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow65);
@@ -2889,7 +2889,7 @@ static GtkWidget *create_search_dialog(void)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Clear Module List"),
-				       _("Clear module list"), NULL,
+				       _("Clear the module list"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(button_clear_list);
 
@@ -2902,7 +2902,7 @@ static GtkWidget *create_search_dialog(void)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save List"),
-				       _("Save module list"), NULL,
+				       _("Save the module list"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(button_save_mods);
 
@@ -2910,7 +2910,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(vseparator27);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar36), vseparator27,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator27, 6, 7);
+	gtk_widget_set_size_request(vseparator27, 6, 7);
 
 
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CUT,
@@ -2921,7 +2921,7 @@ static GtkWidget *create_search_dialog(void)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Delete"),
-				       _("Delete selected list"), NULL,
+				       _("Delete the selected list"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(button_delete_list);
 
@@ -2934,7 +2934,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(scrolledwindow68);
 	gtk_box_pack_start(GTK_BOX(hbox82), scrolledwindow68, TRUE,
 			   TRUE, 0);
-	gtk_widget_set_usize(scrolledwindow68, 175, -2);
+	gtk_widget_set_size_request(scrolledwindow68, 175, -1);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow68),
 				       GTK_POLICY_AUTOMATIC,
@@ -3001,7 +3001,7 @@ static GtkWidget *create_search_dialog(void)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar39),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Clear Module List"),
-				       _("Clear all modules from list"),
+				       _("Clear all modules from the list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_show(button28);
@@ -3010,7 +3010,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(vseparator33);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar39), vseparator33,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator33, 6, 7);
+	gtk_widget_set_size_request(vseparator33, 6, 7);
 
 
 	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CUT,
@@ -3022,7 +3022,7 @@ static GtkWidget *create_search_dialog(void)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Delete"),
 				       _
-				       ("Remove selected module from list"),
+				       ("Remove the selected module from the list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_show(button30);
@@ -3031,7 +3031,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(scrolledwindow66);
 	gtk_box_pack_start(GTK_BOX(vbox81), scrolledwindow66, TRUE,
 			   TRUE, 0);
-	gtk_widget_set_usize(scrolledwindow66, 240, -2);
+	gtk_widget_set_size_request(scrolledwindow66, 240, -1);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow66),
 				       GTK_POLICY_NEVER,
