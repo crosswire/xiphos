@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.4 
+# Anjuta Version 0.1.5 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -22,7 +22,7 @@ Compatibility Level: 1
 
 props.file.type=project
 
-anjuta.version=0.1.4
+anjuta.version=0.1.5
 anjuta.compatibility.level=1
 
 project.name=GnomeswordLE
@@ -42,7 +42,7 @@ project.menu.comment=No comment
 project.menu.icon=
 project.menu.need.terminal=1
 
-project.configure.options=
+project.configure.options=--enable-all
 
 anjuta.program.arguments=
 
