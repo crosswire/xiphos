@@ -25,6 +25,7 @@ class SearchWindow
 {
         GtkWidget *dlgSearch;
         GtkWidget *dialog_vbox1;
+ 
         GtkWidget *frame8;
         GtkWidget *searchPanel;
         GtkWidget *hbox4;
@@ -67,6 +68,7 @@ class SearchWindow
         GtkWidget *lbSearchHits;
         GtkWidget *dialog_action_area1;
         GtkWidget *btnSearchOK;
+        GtkAdjustment *adj;
         SWDisplay *PLAINsearchDisplay; //--- to display GBF modules using GtkText a verse at a time
         SWDisplay *HTMLsearchDisplay; //--- to display HTML modules using GtkText a verse at a time
         SWDisplay *RWPsearchDisplay; //--- to display RWP module using GtkText a verse at a time
@@ -77,11 +79,13 @@ class SearchWindow
         SWKey	*currentScope; //----------- use to set scope of search
         SWFilter *plaintohtml;
         SWFilter *gbftohtml;
-
+        
+	//void percentUpdate(char percent, void *userData); 
 public:
 	SearchWindow();
 	~SearchWindow();
 	GtkWidget *create();
+	GtkWidget *progressbar;
         void searchSWORD(GtkWidget *searchFrm);  //-- search Bible text or commentaries
         void resultsListSWORD(GtkWidget *searchFrm, gint row, gint column); //-- someone clicked the results list
         void initsearchWindow(GtkWidget *searchDlg); //-- init search dialog

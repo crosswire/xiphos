@@ -30,7 +30,9 @@ COMMON_SOURCE = \
         searchstuff.cpp \
         searchstuff.h \
         support.c \
-        support.h 
+        support.h \
+        printstuff.c \
+        printstuff.h 
 
 SPELLING_SOURCE= \
         DICTClient.cpp \
@@ -38,29 +40,13 @@ SPELLING_SOURCE= \
         spellcheck.cpp \
         spellcheck.h 
 
-PRINT_SOURCE= \
-        printstuff.c \
-        printstuff.h 
+EXTRA_DIST=$(SPELLING_SOURCE) 
 
-EXTRA_DIST=$(PRINT_SOURCE) $(SPELLING_SOURCE) 
-
-if SPELLING_PRINTING 
-gnomesword_SOURCES = \
-        $(SPELLING_SOURCE) \
-        $(PRINT_SOURCE)	 \
-        $(COMMON_SOURCE) 
-endif 
 
 if SPELLING 
 gnomesword_SOURCES = \
          $(SPELLING_SOURCE) \
          $(COMMON_SOURCE) 
-endif
-
-if PRINTING 
-gnomesword_SOURCES = \
-        $(PRINT_SOURCE) \
-        $(COMMON_SOURCE) 
 endif
 
 if NO_OPS
