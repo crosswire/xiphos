@@ -376,7 +376,8 @@ GtkWidget *gui_create_nav_toolbar(void)
 	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup),
 			   _("Romans 8:28"));
 	gtk_widget_set_usize(cbe_freeform_lookup, 150, -2);
-
+	nav_bar.lookup_entry = cbe_freeform_lookup;
+	
 	btnLookup = gtk_button_new();
 	gtk_widget_show(btnLookup);
 	gtk_box_pack_start(GTK_BOX(toolbarNav), btnLookup, FALSE, TRUE,

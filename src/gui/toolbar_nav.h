@@ -30,6 +30,7 @@ extern "C" {
 
 typedef struct _toolbar_nav NAV_BAR;
 struct  _toolbar_nav {
+	GtkWidget *lookup_entry;
 	GtkWidget *button_back;
 	GtkWidget *button_forward;
 };
