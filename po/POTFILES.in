@@ -4,9 +4,7 @@ src/gs_abouts.c
 src/gs_bookmarks.c
 src/gs_file.c
 src/gs_gnomesword.c
-src/gs_gnomesword.h
 src/gs_gui.c
-src/gs_gui_cb.c
 src/gs_history.c
 src/gs_html.c
 src/gs_info_box.c
@@ -20,8 +18,8 @@ src/gs_setup.c
 src/gs_shortcutbar.c
 src/gs_studypad.c
 src/gs_unlockkey_dlg.c
-src/gs_viewtext_dlg.c
 src/gs_viewcomm_dlg.c
 src/gs_viewdict_dlg.c
+src/gs_viewtext_dlg.c
 src/main.c
 src/support.c
