@@ -191,6 +191,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 	if(!check_for_module(mod_name)) 
 		mod_name = settings.MainWindowModule;
 	
+	module_type = get_mod_type(mod_name);
 	if (use_dialog) {
 		module_type = get_mod_type(mod_name);
 		switch (module_type) {
@@ -213,8 +214,19 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				break;
 		}
 	} else  {
-		gui_change_module_and_key(mod_name, key);
-		gui_change_verse(key);
+		switch (module_type) {
+			case -1:
+				break;
+			case TEXT_TYPE:
+			case COMMENTARY_TYPE:
+				gui_change_module_and_key(mod_name, key);
+				gui_change_verse(key);
+				break;
+			case DICTIONARY_TYPE:				
+			case BOOK_TYPE:
+				gui_change_module_and_key(mod_name, key);
+				break;
+		}
 	}
 }
 
@@ -243,6 +255,8 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	data->caption = g_strdup(folder);
 	data->key = NULL; //g_strdup("GROUP");
 	data->module = NULL; //g_strdup("GROUP");
+	data->module_desc = NULL; //g_strdup("GROUP");
+	data->description = NULL; //g_strdup("GROUP");
 	data->is_leaf = FALSE;
 	data->opened = pixbufs->pixbuf_opened;
 	data->closed = pixbufs->pixbuf_closed;
@@ -270,21 +284,25 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *mod1;
 	xmlChar *key;
 	xmlChar *caption;
+	xmlChar *mod_desc;
+	xmlChar *description;
 	gchar buf[500];
 
 	data->opened = pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
 	mod1 = xmlGetProp(cur, "modulename");
 	key = xmlGetProp(cur, "key");
-	caption = xmlGetProp(cur, "caption");	// needed to load early devel release 
-	if (caption) {
+	//caption = xmlGetProp(cur, "caption");	
+	mod_desc = xmlGetProp(cur, "moduledescription");
+	description = xmlGetProp(cur, "description"); 
+/*	if (caption) {
 		if (strlen(caption) > 0) {
 			data->caption = g_strdup(caption);
 		} else {
 			sprintf(buf, "%s, %s", key, mod1);
 			data->caption = g_strdup(buf);
 		}
-	} else {
+	} else {*/
 		caption = xmlGetProp(cur, "description");
 		if (caption) {
 			if (strlen(caption) > 0) {
@@ -295,9 +313,11 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 			}
 		} else
 			data->caption = g_strdup(key);
-	}
+//	}
 	data->key = g_strdup(key);
 	data->module = g_strdup(mod1);
+	data->description = g_strdup(description);
+	data->module_desc = g_strdup(mod_desc);
 	data->is_leaf = TRUE;
 }
 
@@ -326,6 +346,10 @@ static void free_bookmark_data(BOOKMARK_DATA * data)
 		g_free(data->key);
 	if(data->module) 
 		g_free(data->module);
+	if(data->module_desc) 
+		g_free(data->module_desc);
+	if(data->description) 
+		g_free(data->description);
 }
 
 /******************************************************************************
@@ -356,6 +380,8 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DAT
 			   COL_CAPTION, data->caption, 
 			   COL_KEY, data->key,
 			   COL_MODULE, data->module,
+			   COL_MODULE_DESC, data->module_desc,
+			   COL_DESCRIPTION, data->description,
 			   -1);
 }
 
@@ -698,6 +724,22 @@ static void add_columns(GtkTreeView * tree)
 					    "text", COL_MODULE, NULL);
 	gtk_tree_view_append_column(tree, column);
 	gtk_tree_view_column_set_visible(column, FALSE);
+	
+	column = gtk_tree_view_column_new();
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "text", COL_MODULE_DESC, NULL);
+	gtk_tree_view_append_column(tree, column);
+	gtk_tree_view_column_set_visible(column, FALSE);
+	
+	column = gtk_tree_view_column_new();
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_text_new());
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "text", COL_DESCRIPTION, NULL);
+	gtk_tree_view_append_column(tree, column);
+	gtk_tree_view_column_set_visible(column, FALSE);
 }
 
 
@@ -724,6 +766,8 @@ static GtkTreeModel *create_model(void)
 	model = gtk_tree_store_new(N_COLUMNS,
 				   GDK_TYPE_PIXBUF,
 				   GDK_TYPE_PIXBUF,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING, 
 				   G_TYPE_STRING);
@@ -757,6 +801,8 @@ static gboolean button_press_event(GtkWidget * widget,
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
 	button_one = FALSE;
 	button_two = FALSE;
 	
@@ -765,7 +811,12 @@ static gboolean button_press_event(GtkWidget * widget,
 	current_selection = selection;
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   2, &caption, 3, &key, 4, &module, -1);
+				   2, &caption, 
+				   3, &key, 
+				   4, &module, 
+				   5, &mod_desc, 
+				   6, &description, 
+				   -1);
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 					     &selected) && key != NULL) {			
 			gtk_widget_set_sensitive(menu.in_dialog, TRUE);

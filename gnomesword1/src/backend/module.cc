@@ -1620,7 +1620,7 @@ char *backend_get_percomm_text(char *key)
  *   void backend_init_language_map(void)	
  *
  * Description
- *   maps language abbreviation to language name
+ *   maps language abbreviation to language name - form Bibletime-1.3
  *
  * Return value
  *   void

@@ -52,7 +52,6 @@ extern "C" {
 
 void set_global_option(int manager, char * option, gboolean choice);
 void delete_module_mgr(void);
-char *get_text(const char * module_name, const char *key);
 int gbs_treekey_get_parent(unsigned long offset);
 const char *get_sword_version(void);
 char *get_search_results_text(char * mod_name, char * key);
