@@ -263,7 +263,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			sprintf(tmpBuf,
-				"<a hred=\"version=%s passage=%s\">"
+				"<a href=\"version=%s passage=%s\">"
 				"<font color=\"%s\">[%s] %s </font></A>",
 				mod_name,
 				key,
