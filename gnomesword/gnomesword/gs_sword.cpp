@@ -50,6 +50,7 @@
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
+#include "gs_display.h"
 #include "callback.h"
 #include "gs_sword.h"
 #include "support.h"
@@ -57,7 +58,6 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
-//#include "noteeditor.h"
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
@@ -239,8 +239,7 @@ initSWORD(GtkWidget *mainform)
         //-- setup displays for sword modules
     	//noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
-	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
-	
+	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 #ifdef USE_GTKHTML
@@ -281,14 +280,15 @@ initSWORD(GtkWidget *mainform)
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter
 #if 	USE_GTKHTML
 				//curMod->AddRenderFilter(gbftohtml);
-				/* the gbftohtml fileter for html widgets is built in to gomesword  */
+				/* the gbftohtml fileter for html widgets is built in to gomesword  
+				     at present */
 #else 	/* !USE_GTKHTML */	
-				curMod->AddRenderFilter(gbftohtml);
+				curMod->AddRenderFilter(gbftohtml); 
 #endif /* USE_GTKHTML */				
 				curMod->Disp(HTMLchapDisplay);
 			}else if(!strcmp(sourceformat, "Plain") && !strcmp(font, "Greek")){ //-- 
 				curMod->Disp(chapDisplay);				
-			}else if(!strcmp(sourceformat, "Plain") && strcmp(font, "Greek")){ //-- we need gbf to html filter			
+			}else if(!strcmp(sourceformat, "Plain") && strcmp(font, "Greek")){ //-- we need plain to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);
 				curMod->Disp(HTMLchapDisplay);
 			} /*else			
@@ -847,12 +847,12 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 		                curcomMod->Display(); //-- show the change
 		        }
 		        //gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
-		        label = gtk_label_new(curcomMod->Name());
-		        gtk_widget_show(label);
-		        gtk_notebook_set_tab_label(GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")),
+		        //label = gtk_label_new(curcomMod->Name());
+		       // gtk_widget_show(label);
+		        /*gtk_notebook_set_tab_label(GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (lookup_widget(MainFrm,"notebook3")),
-							     0), label);
+							     0), label);*/
 	        }
 	}	
 }

@@ -35,8 +35,6 @@
 #include <gnome.h>
 #include <swmodule.h>
 
-
-
 class GTKEntryDisp:public SWDisplay {
       protected:
 	GtkWidget * gtkText;
@@ -79,26 +77,9 @@ class GTKEntryDisp:public SWDisplay {
 	}
 	virtual char Display(SWModule & imodule);
 	gint gettags(gchar * text, gchar *tag, gint pos);
-	gchar *gbftohtml(gchar * text, gint maxlen);
+	//gchar *gbftohtml(gchar * text, gint maxlen);
 };
 
-//----------------------------------------------------------------------------------------------
-class ComEntryDisp:public GTKEntryDisp { public:
-	ComEntryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class GtkHTMLEntryDisp:public GTKEntryDisp { public:
-	GtkHTMLEntryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class GTKhtmlChapDisp:public GTKEntryDisp { public:
-	GTKhtmlChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
 
 //----------------------------------------------------------------------------------------------
 class GTKPerComDisp:public GTKEntryDisp { public:
@@ -135,14 +116,9 @@ class GTKRWPDisp:public GTKEntryDisp { public:
 class GTKInterlinearDisp:public GTKEntryDisp { public:
 	GTKInterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
-};//----------------------------------------------------------------------------------------------
-class InterlinearDisp:public GTKEntryDisp { public:
-	InterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
-//void interlinearDisplay(GList *mods, gchar *verse);
 
 
