@@ -78,9 +78,10 @@ bool GSGBFHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserDa
 
 	if (!substituteToken(buf, token)) {
 		XMLTag tag(token);
-		if (!strncmp(token, "w", 1)) {
+		/*if (!strncmp(token, "w", 1)) {
 			// OSIS Word (temporary until OSISRTF is done)
 			valto = val;
+			
 			num = strstr(token, "lemma=\"x-Strongs:");
 			if (num) {
 				for (num+=17; ((*num) && (*num != '\"')); num++)
@@ -97,13 +98,6 @@ bool GSGBFHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserDa
 					//cout << buf;
 					
 				}
-				/*	forget these for now
-				else {
-					// verb morph
-					sprintf(wordstr, "%03d", word-1);
-					module->getEntryAttributes()["Word"][wordstr]["Morph"] = val;
-				}
-				*/
 			}
 			else {
 				num = strstr(token, "lemma=\"strong:");
@@ -122,13 +116,6 @@ bool GSGBFHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserDa
 						//cout << buf;
 						
 					}
-					/*	forget these for now
-					else {
-						// verb morph
-						sprintf(wordstr, "%03d", word-1);
-						module->getEntryAttributes()["Word"][wordstr]["Morph"] = val;
-					}
-					*/
 				}
 			}
 			valto = val;
@@ -147,9 +134,9 @@ bool GSGBFHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserDa
 						buf += *tok;		
 				buf += "</a>)</em></small> ";					
 			}
-		}
+		}*/
 		
-		else if (!strncmp(token, "WG", 2)) { // strong's numbers
+		if (!strncmp(token, "WG", 2)) { // strong's numbers
 			buf += " <small><em>&lt;<a href=\"strongs://Greek/";
 			for (tok = token+2; *tok; tok++)
 				//if(token[i] != '\"')
