@@ -25,7 +25,7 @@
 
 #ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
-#include <gal-2.0/gal/widgets/e-unicode.h>
+#include <gal/widgets/e-unicode.h>
 #else
 #include <glib-1.2/glib.h>
 #endif
