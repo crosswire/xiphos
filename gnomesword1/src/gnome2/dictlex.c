@@ -149,7 +149,7 @@ void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	if(d) {
-		gtk_notebook_set_page(GTK_NOTEBOOK(
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(
 				widgets.notebook_dict), page_num);
 		gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 	}
@@ -194,13 +194,13 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 	cur_d = d;
 	
 	if (page)
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_dict), page);
 	else
 		on_notebook_dictlex_switch_page(GTK_NOTEBOOK
 						(widgets.notebook_dict),
 						NULL, page, dl_list);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict),
 			      page);
 	g_print("dictkey = %s\n", settings.dictkey);
 
@@ -596,21 +596,21 @@ static void create_dictlex_pane(DL_DATA * dl)
 			  dl->html);
 	gtk_html_load_empty(GTK_HTML(dl->html));
 
-	gtk_signal_connect(GTK_OBJECT(dl->html),
+	g_signal_connect(GTK_OBJECT(dl->html),
 			   "button_press_event",
 			   G_CALLBACK(html_button_pressed), dl);
-	gtk_signal_connect(GTK_OBJECT(dl->html),
+	g_signal_connect(GTK_OBJECT(dl->html),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
-	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
+	g_signal_connect(GTK_OBJECT(dl->html), "on_url",
 			   G_CALLBACK(gui_url), (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 
 
-	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
+	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   G_CALLBACK(on_btnSyncDL_clicked), dl);
-	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
+	g_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   G_CALLBACK(on_entryDictLookup_changed), dl);
 	g_signal_connect(G_OBJECT(dl->listview),
 			   "button_release_event",
@@ -741,7 +741,7 @@ gint gui_setup_dictlex(GList * mods)
 	}
 
 
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_dict),
+	g_signal_connect(GTK_OBJECT(widgets.notebook_dict),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_dictlex_switch_page), dl_list);

@@ -220,7 +220,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (!settings.showshortcutbar) 
 		gui_sidebar_showhide();
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 2);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 2);
 	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),2);
 }
 
@@ -540,7 +540,7 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 			    gui_open_studypad_dialog(settings.
 						     studypadfilename);
 		} else {
-			gtk_notebook_set_page(GTK_NOTEBOOK
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.workbook_lower),
 					      settings.studypad_page);
 		}
@@ -847,7 +847,7 @@ void gui_create_main_menu(GtkWidget * app)
 				       (widgets.versestyle_item),
 				       settings.versestyle);
 	
-	gtk_signal_connect(GTK_OBJECT(widgets.versestyle_item),
+	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
 			   G_CALLBACK(on_verse_style1_activate),
 			   NULL);

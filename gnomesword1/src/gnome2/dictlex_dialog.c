@@ -600,38 +600,38 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 	label = gtk_label_new(dlg->mod_name);
 	gtk_widget_show(label);
 		
-	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "set_focus",
+	g_signal_connect (GTK_OBJECT (dlg->dialog), "set_focus",
                       G_CALLBACK (dialog_set_focus),
                       dlg);
-	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "destroy",
+	g_signal_connect (GTK_OBJECT (dlg->dialog), "destroy",
                       G_CALLBACK (dialog_destroy),
                       dlg);
-	/*gtk_signal_connect (GTK_OBJECT (btn_close), "clicked",
+	/*g_signal_connect (GTK_OBJECT (btn_close), "clicked",
                       G_CALLBACK (on_btn_close_clicked),
                       dlg);*/
 		      
 			/*
-	gtk_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 			   */
 			   
-	gtk_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(GTK_OBJECT(dlg->html),
 			"url_requested",
 			G_CALLBACK(url_requested), 
 			NULL);
-	gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   G_CALLBACK(dialog_url), 
 			   dlg);
-	gtk_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(GTK_OBJECT(dlg->html),
 			   "button_press_event",
 			   G_CALLBACK(button_press_event),
 			   dlg);
-	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
+	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   G_CALLBACK(on_btnSyncDL_clicked), dlg);
-	gtk_signal_connect(GTK_OBJECT(dlg->entry), "changed",
+	g_signal_connect(GTK_OBJECT(dlg->entry), "changed",
 			   G_CALLBACK(on_entry_lookup_changed),
 			   dlg);/*
-	gtk_signal_connect(GTK_OBJECT(dlg->clist), "select_row",
+	g_signal_connect(GTK_OBJECT(dlg->clist), "select_row",
 			   G_CALLBACK(on_clistDictLex_select_row),
 			   dlg);*/
 	g_signal_connect(G_OBJECT(dlg->listview),

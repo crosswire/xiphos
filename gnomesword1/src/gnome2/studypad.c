@@ -53,7 +53,7 @@ GSHTMLEditorControlData *editor_cd;
 
 void screen_changed(GtkWidget *widget, GdkScreen *arg1, gpointer user_data)
 {
-	g_warning("screen_changed");
+	//g_warning("screen_changed");
 	
 }
 	
@@ -608,7 +608,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
 	
 	
-	gtk_signal_connect(GTK_OBJECT(vboxSP), "destroy",
+	g_signal_connect(GTK_OBJECT(vboxSP), "destroy",
                 G_CALLBACK(gui_html_editor_control_data_destroy),
 			   specd);
 
@@ -650,15 +650,15 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
 	
 /*
-	gtk_signal_connect(GTK_OBJECT(specd->html), "submit",
+	g_signal_connect(GTK_OBJECT(specd->html), "submit",
 			   G_CALLBACK(on_submit), specd);
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (specd->htmlwidget),
 			   "load_done",
 			   G_CALLBACK(html_load_done), specd);
 */			  
 
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (specd->htmlwidget),
 			   "screen-changed",
 			   G_CALLBACK(screen_changed), specd);

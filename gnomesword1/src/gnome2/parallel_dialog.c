@@ -234,7 +234,7 @@ static void on_dlgparallel_destroy(GtkObject * object,
 				      tab_label, menu_label, 
 					1);
 	gtk_widget_reparent(widgets.frame_parallel, vbox);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_parallel_text), 
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text), 
 					1);
 	settings.dockedInt = TRUE;
 	gui_update_parallel_page();
@@ -592,32 +592,32 @@ GtkWidget *gui_create_parallel_dialog(void)
 	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
 
 
-	gtk_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
+	g_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
 			   G_CALLBACK(on_dlgparallel_destroy),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(buttonIntSync), "clicked",
+	g_signal_connect(GTK_OBJECT(buttonIntSync), "clicked",
 			   G_CALLBACK(on_buttonIntSync_clicked),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(entrycbIntBook), "changed",
+	g_signal_connect(GTK_OBJECT(entrycbIntBook), "changed",
 			   G_CALLBACK(on_entrycbIntBook_changed),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(sbIntChapter),
+	g_signal_connect(GTK_OBJECT(sbIntChapter),
 			   "button_release_event",
 			   G_CALLBACK
 			   (on_sbIntChapter_button_release_event),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(sbIntVerse),
+	g_signal_connect(GTK_OBJECT(sbIntVerse),
 			   "button_release_event",
 			   G_CALLBACK
 			   (on_sbIntVerse_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(entryIntLookup),
+	g_signal_connect(GTK_OBJECT(entryIntLookup),
 			   "key_press_event",
 			   G_CALLBACK
 			   (on_entryIntLookup_key_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnIntGotoVerse), "clicked",
+	g_signal_connect(GTK_OBJECT(btnIntGotoVerse), "clicked",
 			   G_CALLBACK(on_btnIntGotoVerse_clicked),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
+	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
 			   G_CALLBACK(gui_btnDockInt_clicked),
 			   NULL);
 	return dialog_parallel;

@@ -362,7 +362,7 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 				gui_set_book_page_and_key(page_num,
 							  key);
 			else {
-				gtk_notebook_set_page(GTK_NOTEBOOK
+				gtk_notebook_set_current_page(GTK_NOTEBOOK
 						      (widgets.
 						       notebook_gbs),
 						      page_num);
@@ -951,32 +951,32 @@ void create_mainwindow(void)
 					 &mask3, &transparent,
 					 mini_page_xpm);
 
-	gtk_signal_connect(GTK_OBJECT(widgets.app), "destroy",
+	g_signal_connect(GTK_OBJECT(widgets.app), "destroy",
 			   G_CALLBACK(on_mainwindow_destroy), NULL);
 	g_signal_connect((gpointer) widgets.app,
 			 "configure_event",
 			 G_CALLBACK(on_configure_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(widgets.epaned),
+	g_signal_connect(GTK_OBJECT(widgets.epaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "epaned");
-	gtk_signal_connect(GTK_OBJECT(widgets.vpaned),
+	g_signal_connect(GTK_OBJECT(widgets.vpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "vpaned");
-	gtk_signal_connect(GTK_OBJECT(widgets.hpaned),
+	g_signal_connect(GTK_OBJECT(widgets.hpaned),
 			   "button_release_event",
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
 /*
-	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", G_CALLBACK(gui_url),
 			   (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 */

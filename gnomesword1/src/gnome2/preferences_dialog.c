@@ -886,7 +886,7 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 		return;
 
 	gtk_tree_model_get(model, &selected, 2, &page, -1);
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook7), page);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook7), page);
 }
 
 /******************************************************************************
@@ -1464,9 +1464,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    gtk_radio_button_new_with_label(vbox36_group,
 					    _
 					    ("Yes, use defaults"));
-	vbox36_group =
+/*	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (check_button.use_defaults));
+				   (check_button.use_defaults));*/
 	gtk_widget_show(check_button.use_defaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), check_button.use_defaults,
 			   FALSE, FALSE, 0);
@@ -1474,8 +1474,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
 		   _("No, use settings saved the last time I used GnomeSword"));
-	vbox36_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
+/*	vbox36_group =
+	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));*/
 	gtk_widget_show(rbtnNoDefaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), rbtnNoDefaults, FALSE,
 			   FALSE, 0);
@@ -2116,7 +2116,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   TRUE, TRUE, 0);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox3),
 				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(hbuttonbox3), 10);
+	gtk_box_set_spacing(GTK_BOX(hbuttonbox3), 10);
 
 	gtk_dialog_add_button(GTK_DIALOG(dialog_prefs),
 				      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
@@ -2291,177 +2291,177 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	g_signal_connect((gpointer) dialog_prefs, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
 	/*** color pickers ***/
-	gtk_signal_connect(GTK_OBJECT(color_picker.text_background),
+	g_signal_connect(GTK_OBJECT(color_picker.text_background),
 			   "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), 
 				GINT_TO_POINTER(TEXT_BACKGROUND));
-	gtk_signal_connect(GTK_OBJECT(color_picker.text), "color_set",
+	g_signal_connect(GTK_OBJECT(color_picker.text), "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), 
 				GINT_TO_POINTER(TEXT_FORGROUND));
-	/*gtk_signal_connect(GTK_OBJECT(gcpCurrentverseBG), "color_set",
+	/*g_signal_connect(GTK_OBJECT(gcpCurrentverseBG), "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), NULL);*/
-	gtk_signal_connect(GTK_OBJECT(color_picker.text_current_verse),
+	g_signal_connect(GTK_OBJECT(color_picker.text_current_verse),
 			   "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), 
 			   GINT_TO_POINTER(TEXT_CURRENT_VERSE));
-	gtk_signal_connect(GTK_OBJECT(color_picker.verse_numbers),
+	g_signal_connect(GTK_OBJECT(color_picker.verse_numbers),
 			   "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), 
 			   GINT_TO_POINTER(VERSE_NUMBERS));
-	gtk_signal_connect(GTK_OBJECT(color_picker.href_links),
+	g_signal_connect(GTK_OBJECT(color_picker.href_links),
 			   "color_set",
 			   G_CALLBACK(on_colorpicker_color_set), 
 			   GINT_TO_POINTER(HREF_LINKS));
 	/*** combo entrys  font sizes ***/
-	gtk_signal_connect(GTK_OBJECT(entry.verse_number_size),
+	g_signal_connect(GTK_OBJECT(entry.verse_number_size),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(VERSE_NUMBER_SIZE));
 
 	/*** toggle buttons ***//*
-	gtk_signal_connect(GTK_OBJECT(check_button.use_defaults),
+	g_signal_connect(GTK_OBJECT(check_button.use_defaults),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(0));
-	gtk_signal_connect(GTK_OBJECT(rbtnNoDefaults), "toggled",
+	g_signal_connect(GTK_OBJECT(rbtnNoDefaults), "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(0));*/
 	/*
-	   gtk_signal_connect(GTK_OBJECT(check_button.show_shortcut_bar),
+	   g_signal_connect(GTK_OBJECT(check_button.show_shortcut_bar),
 	   "toggled",
 	   G_CALLBACK(on_button_toggled),
 	   GINT_TO_POINTER(2));
 	 */
-	gtk_signal_connect(GTK_OBJECT(check_button.show_bible_tabs),
+	g_signal_connect(GTK_OBJECT(check_button.show_bible_tabs),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_BIBLE_TABS));
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (check_button.show_commentary_tabs),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_COMMENTARY_TABS));
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (check_button.show_dictionary_tabs),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_DICTIONARY_TABS));
-	gtk_signal_connect(GTK_OBJECT(check_button.show_book_tabs),
+	g_signal_connect(GTK_OBJECT(check_button.show_book_tabs),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_BOOK_TABS));
-	gtk_signal_connect(GTK_OBJECT(check_button.show_in_viewer),
+	g_signal_connect(GTK_OBJECT(check_button.show_in_viewer),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_IN_VIEWER));
-	gtk_signal_connect(GTK_OBJECT(check_button.show_in_dictionary),
+	g_signal_connect(GTK_OBJECT(check_button.show_in_dictionary),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_IN_DICTIONARY));
 
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (check_button.use_default_dictionary),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(USE_DEFAULT_DICTIONARY));
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (check_button.show_splash_screen),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_SPLASH_SCREEN));
 			   /*
-	gtk_signal_connect(GTK_OBJECT(check_button.percomm_formatting),
+	g_signal_connect(GTK_OBJECT(check_button.percomm_formatting),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER());
 			   */
 	/*
-	   gtk_signal_connect(GTK_OBJECT(check_button.dock_shortcut_bar),
+	   g_signal_connect(GTK_OBJECT(check_button.dock_shortcut_bar),
 	   "toggled", G_CALLBACK(on_dock_clicked),
 	   NULL);
 	 */
-	gtk_signal_connect(GTK_OBJECT(check_button.use_verse_style),
+	g_signal_connect(GTK_OBJECT(check_button.use_verse_style),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(USE_VERSE_STYLE));
-	gtk_signal_connect(GTK_OBJECT(check_button.show_devotion),
+	g_signal_connect(GTK_OBJECT(check_button.show_devotion),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_DEVOTION));
 
-	gtk_signal_connect(GTK_OBJECT(check_button.show_bible_pane),
+	g_signal_connect(GTK_OBJECT(check_button.show_bible_pane),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_BIBLE_PANE));
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (check_button.show_commentary_pane),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_COMMENTARY_PANE));
-	gtk_signal_connect(GTK_OBJECT(check_button.show_lower_workbook),
+	g_signal_connect(GTK_OBJECT(check_button.show_lower_workbook),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_LOWER_WORKBOOK));
 /*
-	gtk_signal_connect(GTK_OBJECT(check_button.use_studypad),
+	g_signal_connect(GTK_OBJECT(check_button.use_studypad),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled), 
 			   GINT_TO_POINTER(USE_STUDYPAD));
-	gtk_signal_connect(GTK_OBJECT(check_button.use_studypad_dialog),
+	g_signal_connect(GTK_OBJECT(check_button.use_studypad_dialog),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled), 
 			   GINT_TO_POINTER(USE_STUDYPAD_DIALOG));
-	gtk_signal_connect(GTK_OBJECT(check_button.use_percomm_dialog),
+	g_signal_connect(GTK_OBJECT(check_button.use_percomm_dialog),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled), 
 			   GINT_TO_POINTER(USE_PERCOMM_DIALOG));
 */
 	/*** module combos ***/
-	gtk_signal_connect(GTK_OBJECT(entry.text_module), "changed",
+	g_signal_connect(GTK_OBJECT(entry.text_module), "changed",
 			   G_CALLBACK(on_entry_changed), 
 			   GINT_TO_POINTER(TEXT_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.parallel_1_module),
+	g_signal_connect(GTK_OBJECT(entry.parallel_1_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(PARALLEL_1_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.parallel_2_module),
+	g_signal_connect(GTK_OBJECT(entry.parallel_2_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(PARALLEL_2_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.parallel_3_module),
+	g_signal_connect(GTK_OBJECT(entry.parallel_3_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(PARALLEL_3_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.parallel_4_module),
+	g_signal_connect(GTK_OBJECT(entry.parallel_4_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(PARALLEL_4_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.parallel_5_module),
+	g_signal_connect(GTK_OBJECT(entry.parallel_5_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(PARALLEL_5_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.commentary_module),
+	g_signal_connect(GTK_OBJECT(entry.commentary_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(COMMENTARY_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.dictionary_module),
+	g_signal_connect(GTK_OBJECT(entry.dictionary_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(DICTIONARY_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.percomm_module), "changed",
+	g_signal_connect(GTK_OBJECT(entry.percomm_module), "changed",
 			   G_CALLBACK(on_entry_changed), 
 			   GINT_TO_POINTER(PERCOMM_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.greek_lex__module),
+	g_signal_connect(GTK_OBJECT(entry.greek_lex__module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(GREEK_LEX__MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.hebrew_lex__module),
+	g_signal_connect(GTK_OBJECT(entry.hebrew_lex__module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(HEBREW_LEX__MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.default_dictionary_module),
+	g_signal_connect(GTK_OBJECT(entry.default_dictionary_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(DEFAULT_DICTIONARY_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.hebrew_lex_viewer_module),
+	g_signal_connect(GTK_OBJECT(entry.hebrew_lex_viewer_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(HEBREW_LEX_VIEWER_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.greek_lex_viewer_module),
+	g_signal_connect(GTK_OBJECT(entry.greek_lex_viewer_module),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(GREEK_LEX_VIEWER_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.devotion_module), "changed",
+	g_signal_connect(GTK_OBJECT(entry.devotion_module), "changed",
 			   G_CALLBACK(on_entry_changed), 
 			   GINT_TO_POINTER(DEVOTION_MODULE));
-	gtk_signal_connect(GTK_OBJECT(entry.combo_entry_sp_dir),
+	g_signal_connect(GTK_OBJECT(entry.combo_entry_sp_dir),
 			   "changed", G_CALLBACK(on_entry_changed),
 			   GINT_TO_POINTER(COMBO_ENTRY_SP_DIR));
 			   

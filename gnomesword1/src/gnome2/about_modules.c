@@ -252,7 +252,7 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button), "clicked",
+	g_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
 

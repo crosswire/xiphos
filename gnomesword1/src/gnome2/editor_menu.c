@@ -930,7 +930,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 						       (ecd->editnote), FALSE);
 			
-			gtk_signal_connect(GTK_OBJECT(ecd->editnote),
+			g_signal_connect(GTK_OBJECT(ecd->editnote),
 				   "activate",
 				   G_CALLBACK
 				   (on_editnote_activate), ecd);		
@@ -1124,80 +1124,80 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_widget_set_sensitive(GTK_WIDGET(ecd->link), FALSE);
 
 	if (ecd->personal_comments) {
-		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
+		g_signal_connect(GTK_OBJECT(save_note), "activate",
 				   G_CALLBACK
 				   (on_savenote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(export_note), "activate",
+		g_signal_connect(GTK_OBJECT(export_note), "activate",
 				   G_CALLBACK
 				   (on_exportnote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
+		g_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   G_CALLBACK
 				   (on_deletenote_activate), ecd);
 		if(!settings.use_percomm_dialog)
-			gtk_signal_connect(GTK_OBJECT(ecd->show_tabs),
+			g_signal_connect(GTK_OBJECT(ecd->show_tabs),
 				   "activate",
 				   G_CALLBACK
 				   (show_tabs_activate), ecd);
 	} else if (ecd->gbs) {
-		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
+		g_signal_connect(GTK_OBJECT(save_note), "activate",
 				   G_CALLBACK
 				   (on_savenote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
+		g_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   G_CALLBACK
 				   (on_deletenote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(ecd->editnote),
+		g_signal_connect(GTK_OBJECT(ecd->editnote),
 				   "activate",
 				   G_CALLBACK
 				   (on_editnote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(open), "activate",
+		g_signal_connect(GTK_OBJECT(open), "activate",
 				   G_CALLBACK(on_open_activate),
 				   ecd);
 	} else {
-		gtk_signal_connect(GTK_OBJECT(new), "activate",
+		g_signal_connect(GTK_OBJECT(new), "activate",
 				   G_CALLBACK(gui_new_activate),
 				   ecd);
-		gtk_signal_connect(GTK_OBJECT(open), "activate",
+		g_signal_connect(GTK_OBJECT(open), "activate",
 				   G_CALLBACK(on_open_activate),
 				   ecd);
-		gtk_signal_connect(GTK_OBJECT(save), "activate",
+		g_signal_connect(GTK_OBJECT(save), "activate",
 				   G_CALLBACK(on_save_activate),
 				   ecd);
-		gtk_signal_connect(GTK_OBJECT(saveas), "activate",
+		g_signal_connect(GTK_OBJECT(saveas), "activate",
 				   G_CALLBACK(on_save_as_activate),
 				   ecd);
-		gtk_signal_connect(GTK_OBJECT(export_plain), "activate",
+		g_signal_connect(GTK_OBJECT(export_plain), "activate",
 				   G_CALLBACK(on_export_plain_activate),
 				   ecd);
 	}
-	gtk_signal_connect(GTK_OBJECT(print), "activate",
+	g_signal_connect(GTK_OBJECT(print), "activate",
 			   G_CALLBACK(on_print_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(cut), "activate",
+	g_signal_connect(GTK_OBJECT(cut), "activate",
 			   G_CALLBACK(on_cut_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(copy), "activate",
+	g_signal_connect(GTK_OBJECT(copy), "activate",
 			   G_CALLBACK(on_copy_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(paste), "activate",
+	g_signal_connect(GTK_OBJECT(paste), "activate",
 			   G_CALLBACK(on_paste_activate), ecd);
 
 #ifdef USE_SPELL
-	gtk_signal_connect(GTK_OBJECT(spell), "activate",
+	g_signal_connect(GTK_OBJECT(spell), "activate",
 			   G_CALLBACK(spell_check_cb), ecd);
 #endif				/* USE_SPELL */
 /*
-	gtk_signal_connect(GTK_OBJECT(style_toolbar),
+	g_signal_connect(GTK_OBJECT(style_toolbar),
 			   "activate",
 			   G_CALLBACK(style_bar_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(edit_toolbar),
+	g_signal_connect(GTK_OBJECT(edit_toolbar),
 			   "activate",
 			   G_CALLBACK(edit_bar_activate), ecd);
 */
-	gtk_signal_connect(GTK_OBJECT(undo), "activate",
+	g_signal_connect(GTK_OBJECT(undo), "activate",
 			   G_CALLBACK(on_undo_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(find), "activate",
+	g_signal_connect(GTK_OBJECT(find), "activate",
 			   G_CALLBACK(on_find_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(replace), "activate",
+	g_signal_connect(GTK_OBJECT(replace), "activate",
 			   G_CALLBACK(on_replace_activate), ecd);
 
-	gtk_signal_connect(GTK_OBJECT(ecd->link), "activate",
+	g_signal_connect(GTK_OBJECT(ecd->link), "activate",
 			   G_CALLBACK(on_link_activate), ecd);
 	//gtk_menu_set_accel_group(GTK_MENU(pmEditor), accel_group);
 	return pmEditor;

@@ -546,7 +546,7 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
 				   (callback),
 				   (gchar *) tmp->data);		

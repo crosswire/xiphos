@@ -152,7 +152,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 	cur_c = c;
 	
 	if (page)
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_comm), page);
 	else
 		on_notebook_comm_switch_page(GTK_NOTEBOOK
@@ -383,13 +383,13 @@ static void create_commentary_pane(COMM_DATA * c)
 	gtk_html_load_empty(GTK_HTML(c->html));
 
 
-	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked),
 			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
+	g_signal_connect(GTK_OBJECT(c->html), "on_url",
 			   G_CALLBACK(gui_url),
 			   (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
+	g_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   G_CALLBACK(on_button_release_event),
 			   (COMM_DATA *) c);
 }
@@ -415,7 +415,7 @@ void gui_set_commentary_page_and_key(gint page_num, gchar * key)
 	comm_display_change = FALSE;
 	strcpy(settings.comm_key, key);
 	strcpy(cur_c->key, key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm),
 			      page_num);
 	display(cur_c, key);
 	comm_display_change = TRUE;
@@ -620,7 +620,7 @@ void gui_setup_commentary(GList * mods)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_comm),
+	g_signal_connect(GTK_OBJECT(widgets.notebook_comm),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_comm_switch_page), comm_list);
