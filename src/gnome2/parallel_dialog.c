@@ -179,9 +179,10 @@ static void sync_with_main(void)
 				"type=verse&value=%s",
 				main_url_encode(xml_get_value("keys", "verse")));
 	main_url_handler(url, TRUE);
-	//main_navbar_set(navbar, xml_get_value("keys", "verse"));
 	g_free(url);
 }
+
+
 /******************************************************************************
  * Name
  *   gui_keep_parallel_dialog_in_sync
