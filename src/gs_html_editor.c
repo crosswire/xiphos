@@ -60,12 +60,15 @@
 #include "gs_file.h"
 #include "gs_html.h"
 #include "gs_html_editor.h"
+#include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
 #include "support.h"
 
 extern SETTINGS *settings;
 extern char *homedir;
 extern GtkWidget *htmlComments;
+extern GtkWidget *toolbarComments;
+extern GtkWidget *toolbarStudypad;
 
 static GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd);
 static GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd);
@@ -408,11 +411,14 @@ on_html_enter_notify_event(GtkWidget * widget,
 }
 
 /*** create editor ui ***/
-GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
+GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox, 
 			 SETTINGS * s, GSHTMLEditorControlData * necd)
 {
-	GtkWidget * frame34, *scrolledwindow17;
-
+	GtkWidget 
+		* frame34, 
+		*scrolledwindow17;
+	
+	
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame34", frame34,
@@ -471,7 +477,16 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			   "enter_notify_event",
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   necd);
-
+			   
+	if(necd->personal_comments){
+		toolbarComments = toolbar_style(necd);
+		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarComments, FALSE, FALSE, 0);
+		gtk_widget_hide(toolbarComments);
+	}else{
+		toolbarStudypad = toolbar_style(necd);
+		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarStudypad, FALSE, FALSE, 0);
+		gtk_widget_hide(toolbarStudypad);
+	}
 	return necd->htmlwidget;
 }
 
@@ -883,7 +898,7 @@ on_numerical_list_activate(GtkMenuItem * menuitem,
 	updatestatusbar(ecd);
 }
 
-
+/*
 static void
 insertion_font_style_changed_cb(GtkHTML * widget,
 				GtkHTMLFontStyle font_style,
@@ -921,8 +936,8 @@ insertion_font_style_changed_cb(GtkHTML * widget,
 
 	ecd->block_font_style_change--;
 }
-
-
+*/
+/*
 static void safe_set_active(GtkWidget * widget, gpointer data)
 {
 	GtkObject *object;
@@ -935,8 +950,8 @@ static void safe_set_active(GtkWidget * widget, gpointer data)
 	gtk_check_menu_item_set_active(item, TRUE);
 	//gtk_toggle_button_set_active (toggle_button, TRUE);
 	gtk_signal_handler_unblock_by_data(object, data);
-}
-
+}*/
+/*
 static void
 paragraph_alignment_changed_cb(GtkHTML * widget,
 			       GtkHTMLParagraphAlignment alignment,
@@ -956,7 +971,7 @@ paragraph_alignment_changed_cb(GtkHTML * widget,
 		g_warning("Unknown GtkHTMLParagraphAlignment %d.",
 			  alignment);
 	}
-}
+}*/
 
 GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 {
@@ -1179,7 +1194,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(replace);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), replace);
-
+/*
 	font_style1 = gtk_menu_item_new_with_label(_("Font Style"));
 	gtk_widget_ref(font_style1);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "font_style1",
@@ -1197,6 +1212,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				  font_style1_menu);
 	font_style1_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(font_style1_menu));
+	    */
 /*
 	plain_text1 = gtk_check_menu_item_new_with_label(_("Plain Text"));
 	gtk_widget_ref(plain_text1);
@@ -1208,7 +1224,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
 					    (plain_text1), TRUE);
 */
-	ecd->bold = gtk_check_menu_item_new_with_label(_("Bold"));
+/*	ecd->bold = gtk_check_menu_item_new_with_label(_("Bold"));
 	gtk_widget_ref(ecd->bold);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->bold",
 				 ecd->bold,
@@ -1249,7 +1265,8 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->strikeout);
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
 					    (ecd->strikeout), TRUE);
-
+*/
+/*
 	paragraph1 = gtk_menu_item_new_with_label(_("Paragraph"));
 	gtk_widget_ref(paragraph1);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paragraph1",
@@ -1267,6 +1284,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				  paragraph1_menu);
 	paragraph1_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(paragraph1_menu));
+	    */
 /*
 	ecd->left_align = gtk_check_menu_item_new_with_label(_("Left"));
 	gtk_widget_ref(ecd->left_align);
@@ -1277,7 +1295,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->left_align),
 					    TRUE);
 */
-	ecd->left_align =
+/*	ecd->left_align =
 	    gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
 					       _("Left"));
 	ecd->paragraph_group =
@@ -1323,6 +1341,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->center);
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
 					    (ecd->center), TRUE);
+					    */
 /*
 	ecd->right_align = gtk_check_menu_item_new_with_label(_("Right"));
 	gtk_widget_ref(ecd->right_align);
@@ -1342,7 +1361,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->center),
 					    TRUE);
 */
-	increase_indent =
+/*	increase_indent =
 	    gtk_menu_item_new_with_label(_("Increase Indent"));
 	gtk_widget_ref(increase_indent);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "increase_indent",
@@ -1359,7 +1378,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(decrease_indent);
 	gtk_container_add(GTK_CONTAINER(paragraph1_menu), decrease_indent);
-
+*/
 	link = gtk_menu_item_new_with_label(_("Link..."));
 	gtk_widget_ref(link);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "link",
@@ -1367,7 +1386,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(link);
 	gtk_container_add(GTK_CONTAINER(pmEditor), link);
-
+/*
 	heading1 = gtk_menu_item_new_with_label(_("Heading"));
 	gtk_widget_ref(heading1);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "heading1",
@@ -1426,7 +1445,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_container_add(GTK_CONTAINER(heading1_menu), numerical_list1);
 	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
 					    (numerical_list1), TRUE);
-
+*/
 	if (ecd->personal_comments) {
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
 				   GTK_SIGNAL_FUNC(on_savenote_activate),
@@ -1469,6 +1488,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	   gtk_signal_connect(GTK_OBJECT(plain_text1), "activate",
 	   GTK_SIGNAL_FUNC(on_plain_text_activate), ecd);
 	 */
+	 /*
 	gtk_signal_connect(GTK_OBJECT(ecd->bold), "activate",
 			   GTK_SIGNAL_FUNC(on_bold_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(ecd->italic), "activate",
@@ -1489,8 +1509,10 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_signal_connect(GTK_OBJECT(decrease_indent), "activate",
 			   GTK_SIGNAL_FUNC(on_decrease_indent_activate),
 			   ecd);
+			   */
 	gtk_signal_connect(GTK_OBJECT(link), "activate",
 			   GTK_SIGNAL_FUNC(on_link_activate), ecd);
+			   /*
 	gtk_signal_connect(GTK_OBJECT(normal1), "activate",
 			   GTK_SIGNAL_FUNC(on_normal_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(roman_list1), "activate",
@@ -1501,7 +1523,8 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_signal_connect(GTK_OBJECT(numerical_list1), "activate",
 			   GTK_SIGNAL_FUNC(on_numerical_list_activate),
 			   ecd);
-	ecd->font_style_changed_connection_id
+			   */
+	/*ecd->font_style_changed_connection_id
 	    =
 	    gtk_signal_connect(GTK_OBJECT(ecd->html),
 			       "insertion_font_style_changed",
@@ -1511,6 +1534,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 			   "current_paragraph_alignment_changed",
 			   GTK_SIGNAL_FUNC(paragraph_alignment_changed_cb),
 			   ecd);
+			   */
 	return pmEditor;
 }
 
@@ -1919,6 +1943,7 @@ GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 
 	//create_editor(vboxPC, s, pcecd);
 	htmlComments = gtk_html_new();
+	
 	create_editor(htmlComments, vboxPC, s, pcecd);
 	return htmlComments;
 }

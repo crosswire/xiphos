@@ -56,6 +56,8 @@ gboolean
 	firstLE = TRUE;	  /* ListEditor in not running when TRUE */
 GtkWidget 
 	*listeditor;
+GtkWidget *toolbarComments;
+GtkWidget *toolbarStudypad;
 	
 /******************************************************************************
  * externals
@@ -230,9 +232,15 @@ on_textComments_button_release_event(GtkWidget * widget,
 //----------------------------------------------------------------------------------------------
 void
 on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-	//editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
+{	
 	gtk_html_set_editable(GTK_HTML(htmlComments), GTK_TOGGLE_BUTTON(togglebutton)->active);
+	if(GTK_TOGGLE_BUTTON(togglebutton)->active){
+		gtk_widget_show(toolbarComments);
+	}
+	
+	else {
+		gtk_widget_hide(toolbarComments);
+	}
 }
 
 //----------------------------------------------------------------------------------------------
@@ -337,6 +345,16 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
 	}
 	firsttime = FALSE;	//-- remember we were here
+	
+	gtk_widget_hide(toolbarComments);
+	gtk_widget_hide(toolbarStudypad);
+	if(page_num == 1 && GTK_TOGGLE_BUTTON(lookup_widget(settings->app, "btnEditNote"))->active) {
+		gtk_widget_show(toolbarComments);
+	}
+	
+	else if(page_num == 3) {
+		gtk_widget_show(toolbarStudypad);	
+	}		
 }
 
 //----------------------------------------------------------------------------------------------
