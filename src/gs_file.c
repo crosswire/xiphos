@@ -39,7 +39,6 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "sw_sword.h"
-//#include "gs_listeditor.h"
 #include "gs_setup.h"
 #include "sw_properties.h"
 
