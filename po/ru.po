@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword 0.7.9\n"
-"POT-Creation-Date: 2003-10-06 20:55-0400\n"
+"POT-Creation-Date: 2003-10-22 13:51-0400\n"
 "PO-Revision-Date: 2003-06-05 15:31+0300\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -78,7 +78,7 @@ msgid "Cantilation"
 msgstr "Кантиляции иврита"
 
 #: src/gnome/bibletext_dialog.c:871 src/gnome/html.c:414
-#: src/gnome2/bibletext_dialog.c:868 src/gnome2/html.c:408
+#: src/gnome2/bibletext_dialog.c:868 src/gnome2/html.c:424
 #, fuzzy
 msgid "Go to "
 msgstr "Перейти к %s"
@@ -306,191 +306,191 @@ msgstr "Показывать"
 msgid "Tabs"
 msgstr "Показать вкладки"
 
-#: src/gnome/bookmarks.c:1369 src/gnome2/bookmarks.c:1487
+#: src/gnome/bookmarks.c:1369 src/gnome2/bookmarks_menu.c:1086
 msgid "Enter Folder Name - use no '|'"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1370 src/gnome2/bookmarks.c:1488
+#: src/gnome/bookmarks.c:1370 src/gnome2/bookmarks_menu.c:1087
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1371 src/gnome2/bookmarks.c:1489
+#: src/gnome/bookmarks.c:1371 src/gnome2/bookmarks_menu.c:1088
 msgid "Folder: "
 msgstr ""
 
-#: src/gnome/bookmarks.c:1584 src/gnome2/bookmarks.c:1702
+#: src/gnome/bookmarks.c:1584 src/gnome2/bookmarks_menu.c:601
 #, fuzzy
 msgid "Edit Bookmark"
 msgstr "Добавить закладку"
 
-#: src/gnome/bookmarks.c:1749 src/gnome2/bookmarks.c:1867
+#: src/gnome/bookmarks.c:1749 src/gnome2/bookmarks_menu.c:769
 msgid "Restore Bookmark Folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1814 src/gnome2/bookmarks.c:1932
+#: src/gnome/bookmarks.c:1814 src/gnome2/bookmarks_menu.c:840
 msgid "Really REMOVE the selected item (and all its subitems)?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1865 src/gnome2/bookmarks.c:1983
+#: src/gnome/bookmarks.c:1865
 msgid "Make the selected bookmark point to the current Module and Key?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1979 src/gnome2/bookmarks.c:2097
+#: src/gnome/bookmarks.c:1979 src/gnome2/bookmarks_menu.c:999
 msgid "Add Bookmark"
 msgstr "Добавить закладку"
 
-#: src/gnome/bookmarks.c:1984 src/gnome2/bookmarks.c:2102
+#: src/gnome/bookmarks.c:1984 src/gnome2/bookmarks_menu.c:1005
 #, fuzzy
 msgid "Label: "
 msgstr "Метка"
 
-#: src/gnome/bookmarks.c:1985 src/gnome2/bookmarks.c:2103
+#: src/gnome/bookmarks.c:1985 src/gnome2/bookmarks_menu.c:1006
 #, fuzzy
 msgid "Verse: "
 msgstr "Список стиха"
 
 #: src/gnome/bookmarks.c:1986 src/gnome/editor_menu.c:584
-#: src/gnome2/bookmarks.c:2104 src/gnome2/editor_menu.c:584
+#: src/gnome2/bookmarks_menu.c:1007 src/gnome2/editor_menu.c:584
 #, fuzzy
 msgid "Module: "
 msgstr "Модуль"
 
-#: src/gnome/bookmarks.c:2054 src/gnome2/bookmarks.c:2172
+#: src/gnome/bookmarks.c:2054
 msgid "Enter Root Group Name - use no '|'"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2055 src/gnome2/bookmarks.c:2173
+#: src/gnome/bookmarks.c:2055
 msgid "Group Name"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2056 src/gnome2/bookmarks.c:2174
+#: src/gnome/bookmarks.c:2056
 #, fuzzy
 msgid "Group: "
 msgstr "Просмотр:"
 
-#: src/gnome/bookmarks.c:2192 src/gnome2/bookmarks.c:2310
+#: src/gnome/bookmarks.c:2192 src/gnome2/bookmarks_menu.c:1134
 msgid "Remove Folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2193 src/gnome2/bookmarks.c:2311
+#: src/gnome/bookmarks.c:2193 src/gnome2/bookmarks_menu.c:1135
 msgid "Remove folder and save it"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2199 src/gnome2/bookmarks.c:2317
+#: src/gnome/bookmarks.c:2199 src/gnome2/bookmarks_menu.c:1141
 msgid "Restore Folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2200 src/gnome2/bookmarks.c:2318
+#: src/gnome/bookmarks.c:2200 src/gnome2/bookmarks_menu.c:1142
 msgid "Restore saved folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2209 src/gnome2/bookmarks.c:2327
+#: src/gnome/bookmarks.c:2209 src/gnome2/bookmarks_menu.c:1151
 #, fuzzy
 msgid "Open in a dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome/bookmarks.c:2210 src/gnome2/bookmarks.c:2328
+#: src/gnome/bookmarks.c:2210 src/gnome2/bookmarks_menu.c:1152
 #, fuzzy
 msgid "Open this bookmark in a dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome/bookmarks.c:2215 src/gnome2/bookmarks.c:2333
+#: src/gnome/bookmarks.c:2215 src/gnome2/bookmarks_menu.c:1157
 msgid "New Folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2216 src/gnome2/bookmarks.c:2334
+#: src/gnome/bookmarks.c:2216 src/gnome2/bookmarks_menu.c:1158
 #, fuzzy
 msgid "Add new Folder to selected Folder"
 msgstr "Добавить новую подгруппу в выбранную группу"
 
-#: src/gnome/bookmarks.c:2221 src/gnome2/bookmarks.c:2339
+#: src/gnome/bookmarks.c:2221
 #, fuzzy
 msgid "Insert Item"
 msgstr "Вставить элемент"
 
-#: src/gnome/bookmarks.c:2222 src/gnome2/bookmarks.c:2340
+#: src/gnome/bookmarks.c:2222 src/gnome2/bookmarks_menu.c:1164
 msgid "Insert new bookmark here"
 msgstr "Вставить здесь новую закладку"
 
-#: src/gnome/bookmarks.c:2227 src/gnome2/bookmarks.c:2345
+#: src/gnome/bookmarks.c:2227
 #, fuzzy
 msgid "Add Item at Root"
 msgstr "Добавить элемент в корень"
 
-#: src/gnome/bookmarks.c:2228 src/gnome2/bookmarks.c:2346
+#: src/gnome/bookmarks.c:2228 src/gnome2/bookmarks_menu.c:1170
 msgid "Add new bookmark item"
 msgstr "Добавить новый елемент закладки"
 
-#: src/gnome/bookmarks.c:2233 src/gnome2/bookmarks.c:2351
+#: src/gnome/bookmarks.c:2233 src/gnome2/bookmarks_menu.c:1175
 #, fuzzy
 msgid "_Edit Item"
 msgstr "Правка элемента"
 
-#: src/gnome/bookmarks.c:2234 src/gnome2/bookmarks.c:2352
+#: src/gnome/bookmarks.c:2234 src/gnome2/bookmarks_menu.c:1176
 msgid "Edit bookmark item"
 msgstr "Правка элемента закладки"
 
-#: src/gnome/bookmarks.c:2239 src/gnome2/bookmarks.c:2357
+#: src/gnome/bookmarks.c:2239 src/gnome2/bookmarks_menu.c:1181
 msgid "Make _Point to New "
 msgstr ""
 
-#: src/gnome/bookmarks.c:2241 src/gnome2/bookmarks.c:2359
+#: src/gnome/bookmarks.c:2241 src/gnome2/bookmarks_menu.c:1183
 msgid "Change the bookmark to point to the current reading point"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2246 src/gnome2/bookmarks.c:2364
+#: src/gnome/bookmarks.c:2246 src/gnome2/bookmarks_menu.c:1188
 msgid "Delete Item(s)"
 msgstr "Удалить элемент(ы)"
 
-#: src/gnome/bookmarks.c:2247 src/gnome2/bookmarks.c:2365
+#: src/gnome/bookmarks.c:2247 src/gnome2/bookmarks_menu.c:1189
 msgid "Delete item and it's siblings"
 msgstr "Удалить элемент и его уровни"
 
-#: src/gnome/bookmarks.c:2253 src/gnome2/bookmarks.c:2371
+#: src/gnome/bookmarks.c:2253 src/gnome2/bookmarks_menu.c:1195
 msgid "Save Bookmarks"
 msgstr "Сохранить закладки"
 
-#: src/gnome/bookmarks.c:2254 src/gnome2/bookmarks.c:2372
+#: src/gnome/bookmarks.c:2254 src/gnome2/bookmarks_menu.c:1196
 msgid "Save all bookmark files"
 msgstr "Сохранить все файлы закладок"
 
-#: src/gnome/bookmarks.c:2259 src/gnome2/bookmarks.c:2377
+#: src/gnome/bookmarks.c:2259 src/gnome2/bookmarks_menu.c:1201
 msgid "Expand All"
 msgstr "Выделить все"
 
-#: src/gnome/bookmarks.c:2260 src/gnome2/bookmarks.c:2378
+#: src/gnome/bookmarks.c:2260 src/gnome2/bookmarks_menu.c:1202
 msgid "Expand all Bookmarks groups"
 msgstr "Выделить все группы закладок"
 
-#: src/gnome/bookmarks.c:2265 src/gnome2/bookmarks.c:2383
+#: src/gnome/bookmarks.c:2265 src/gnome2/bookmarks_menu.c:1207
 msgid "Collapse All"
 msgstr "Уничтожить все"
 
-#: src/gnome/bookmarks.c:2266 src/gnome2/bookmarks.c:2384
+#: src/gnome/bookmarks.c:2266 src/gnome2/bookmarks_menu.c:1208
 msgid "Collapse all Bookmarks groups"
 msgstr "Уничтожить все группы закладок"
 
-#: src/gnome/bookmarks.c:2272 src/gnome2/bookmarks.c:2390
+#: src/gnome/bookmarks.c:2272 src/gnome2/bookmarks_menu.c:1214
 msgid "Allow Reordering"
 msgstr "Допустить преобразование"
 
-#: src/gnome/bookmarks.c:2274 src/gnome2/bookmarks.c:2392
+#: src/gnome/bookmarks.c:2274 src/gnome2/bookmarks_menu.c:1216
 #, fuzzy
 msgid "Toggle Reording - allow items to be moved from one folder to another"
 msgstr ""
 "Переключать преобразование - допускать перемещение пунктов перетягиванием"
 
-#: src/gnome/bookmarks.c:2280 src/gnome2/bookmarks.c:2398
+#: src/gnome/bookmarks.c:2280 src/gnome2/bookmarks_menu.c:1222
 #, fuzzy
 msgid "Bibletime Bookmarks"
 msgstr "Сохранить закладки"
 
-#: src/gnome/bookmarks.c:2281 src/gnome2/bookmarks.c:2399
+#: src/gnome/bookmarks.c:2281 src/gnome2/bookmarks_menu.c:1223
 #, fuzzy
 msgid "Load Bibletime Bookmarks"
 msgstr "Сохранить закладки"
 
-#: src/gnome/bookmarks.c:2286 src/gnome2/bookmarks.c:2404
+#: src/gnome/bookmarks.c:2286 src/gnome2/bookmarks_menu.c:1228
 msgid "Remove - Restore"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgid "Find Next"
 msgstr "Продолжить поиск"
 
 #: src/gnome/gbs_dialog.c:375 src/gnome/html.c:178 src/gnome2/gbs_dialog.c:309
-#: src/gnome2/html.c:172
+#: src/gnome2/html.c:174
 #, c-format
 msgid "Show %s in main window"
 msgstr "Показать %s в главном окне"
@@ -809,36 +809,36 @@ msgid "Go to %s"
 msgstr "Перейти к %s"
 
 #: src/gnome/gtkhtml_display.c:1036 src/gnome/gtkhtml_display.c:1051
-#: src/gnome2/gtkhtml_display.c:848 src/gnome2/gtkhtml_display.c:860
+#: src/gnome2/gtkhtml_display.c:854 src/gnome2/gtkhtml_display.c:866
 msgid "The"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:850
+#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:856
 msgid "module is locked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:863
+#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:869
 msgid "module has been unlocked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:877
+#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:883
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:881
+#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:887
 msgid "click here"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:882
+#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:888
 #, fuzzy
 msgid "to unlock the module"
 msgstr "Разблокировать модуль"
 
-#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:892
+#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:898
 msgid "You will have to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:903
+#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:909
 #, fuzzy
 msgid "You need to restart GnomeSword to view it"
 msgstr "Хотите ли вы открыть GnomeSword с помощью"
@@ -853,7 +853,7 @@ msgstr "История/<Separator>"
 msgid "_History/C_lear"
 msgstr "История/Очистить"
 
-#: src/gnome/html.c:410 src/gnome2/html.c:404
+#: src/gnome/html.c:410 src/gnome2/html.c:420
 #, fuzzy
 msgid "Unlock "
 msgstr "Ввести разблокирующий ключ"
@@ -1013,8 +1013,8 @@ msgstr "Словари-Лексиконы"
 
 #: src/gnome/main_menu.c:754 src/gnome/main_window.c:731
 #: src/gnome/main_window.c:743 src/gnome/preferences_dialog.c:1606
-#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:731
-#: src/gnome2/main_window.c:743 src/gnome2/preferences_dialog.c:1600
+#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:729
+#: src/gnome2/main_window.c:741 src/gnome2/preferences_dialog.c:1600
 msgid "Books"
 msgstr "Книги"
 
@@ -1101,7 +1101,7 @@ msgstr "Помощь/О модулях Sword/Словари-Лексиконы/"
 msgid "_Help/About Sword Modules/Books/"
 msgstr "Помощь/О модулях Sword/Книги/"
 
-#: src/gnome/main_window.c:569 src/gnome2/main_window.c:564
+#: src/gnome/main_window.c:569 src/gnome2/main_window.c:562
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSWORD - программа по изучению Библии"
@@ -1109,14 +1109,14 @@ msgstr "GnomeSWORD - программа по изучению Библии"
 #: src/gnome/main_window.c:697 src/gnome/main_window.c:710
 #: src/gnome/preferences_dialog.c:2072 src/gnome/setup_druid.c:925
 #: src/gnome/shortcutbar_main.c:1365 src/gnome/shortcutbar_main.c:1547
-#: src/gnome2/main_window.c:697 src/gnome2/main_window.c:710
+#: src/gnome2/main_window.c:695 src/gnome2/main_window.c:708
 #: src/gnome2/preferences_dialog.c:2067 src/gnome2/setup_druid.c:936
 msgid "Dict/Lex"
 msgstr "Словари/Лексиконы"
 
 #: src/gnome/main_window.c:800 src/gnome/main_window.c:812
 #: src/gnome/parallel_dialog.c:222 src/gnome/parallel_dialog.c:224
-#: src/gnome2/main_window.c:799 src/gnome2/main_window.c:811
+#: src/gnome2/main_window.c:797 src/gnome2/main_window.c:809
 #: src/gnome2/parallel_dialog.c:225 src/gnome2/parallel_dialog.c:227
 msgid "Parallel View"
 msgstr ""
@@ -1668,7 +1668,7 @@ msgid "Use a custom search range"
 msgstr ""
 
 #: src/gnome/search_dialog.c:2091 src/gnome/search_dialog.c:2656
-#: src/gnome2/search_dialog.c:2012 src/gnome2/search_dialog.c:2588
+#: src/gnome2/search_dialog.c:2012 src/gnome2/search_dialog.c:2590
 #, fuzzy
 msgid "Modules"
 msgstr "Модуль"
@@ -1844,7 +1844,7 @@ msgstr ""
 #: src/gnome/search_dialog.c:2429 src/gnome/search_dialog.c:2593
 #: src/gnome/search_dialog.c:2696 src/gnome/toolbar_edit.c:487
 #: src/gnome2/search_dialog.c:2355 src/gnome2/search_dialog.c:2523
-#: src/gnome2/search_dialog.c:2629 src/gnome2/toolbar_edit.c:487
+#: src/gnome2/search_dialog.c:2631 src/gnome2/toolbar_edit.c:487
 #, fuzzy
 msgid "Delete"
 msgstr "Удалить заметку"
@@ -1875,7 +1875,7 @@ msgstr ""
 
 #: src/gnome/search_dialog.c:2565 src/gnome/search_dialog.c:2566
 #: src/gnome/search_dialog.c:2678 src/gnome2/search_dialog.c:2493
-#: src/gnome2/search_dialog.c:2494 src/gnome2/search_dialog.c:2610
+#: src/gnome2/search_dialog.c:2494 src/gnome2/search_dialog.c:2612
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Очистить список истории"
@@ -1888,21 +1888,21 @@ msgstr ""
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2648 src/gnome2/search_dialog.c:2579
+#: src/gnome/search_dialog.c:2648 src/gnome2/search_dialog.c:2581
 #, fuzzy
 msgid "List Name"
 msgstr "Список"
 
-#: src/gnome/search_dialog.c:2679 src/gnome2/search_dialog.c:2611
+#: src/gnome/search_dialog.c:2679 src/gnome2/search_dialog.c:2613
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2698 src/gnome2/search_dialog.c:2631
+#: src/gnome/search_dialog.c:2698 src/gnome2/search_dialog.c:2633
 msgid "Remove selected module from list"
 msgstr ""
 
 #. ********************************************************************
-#: src/gnome/search_dialog.c:2731 src/gnome2/search_dialog.c:2669
+#: src/gnome/search_dialog.c:2731 src/gnome2/search_dialog.c:2671
 #, fuzzy
 msgid "Custom Lists"
 msgstr "Нумерованый список"
@@ -2304,7 +2304,7 @@ msgstr "Список римскими цифрами"
 msgid "Alpha List"
 msgstr "Альфа список"
 
-#: src/gnome/toolbar_style.c:541 src/gnome2/toolbar_style.c:541
+#: src/gnome/toolbar_style.c:541 src/gnome2/toolbar_style.c:543
 msgid "Automatic"
 msgstr "Автоматический"
 
@@ -2407,32 +2407,42 @@ msgstr ""
 "структуры. Набор инсталлированных модулей, используя структуру, может быть "
 "распределен между какими-либо фронтендами."
 
-#: src/gnome2/sidebar.c:909
+#: src/gnome2/bookmarks_menu.c:1163
+#, fuzzy
+msgid "Insert Bookmark"
+msgstr "Вставить здесь новую закладку"
+
+#: src/gnome2/bookmarks_menu.c:1169
+#, fuzzy
+msgid "Add Bookmark at Root"
+msgstr "Добавить закладку"
+
+#: src/gnome2/sidebar.c:910
 #, fuzzy
 msgid "_Modules"
 msgstr "Модуль"
 
-#: src/gnome2/sidebar.c:917
+#: src/gnome2/sidebar.c:918
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Закладки"
 
-#: src/gnome2/sidebar.c:925
+#: src/gnome2/sidebar.c:926
 #, fuzzy
 msgid "_Search"
 msgstr "Поиск"
 
-#: src/gnome2/sidebar.c:934
+#: src/gnome2/sidebar.c:935
 #, fuzzy
 msgid "Search _Results"
 msgstr "Поиск результатов"
 
-#: src/gnome2/sidebar.c:944
+#: src/gnome2/sidebar.c:945
 #, fuzzy
 msgid "_Viewer"
 msgstr "Просмоторщик"
 
-#: src/gnome2/sidebar.c:954
+#: src/gnome2/sidebar.c:955
 #, fuzzy
 msgid "Verse _List"
 msgstr "Список стиха"

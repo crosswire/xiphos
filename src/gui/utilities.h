@@ -25,7 +25,8 @@ extern "C" {
 	
 #include <gnome.h>
 #include "main/configs.h"
-	
+
+
 void gui_load_module_tree(GtkWidget * tree);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);

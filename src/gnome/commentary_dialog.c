@@ -768,26 +768,6 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 		gtk_widget_show(vc->ec->statusbar);
 		gtk_box_pack_start(GTK_BOX(vbox30), vc->ec->statusbar,
 				   FALSE, TRUE, 0);
-		/*
-		   gtk_signal_connect(GTK_OBJECT(vc->ec->html), "submit",
-		   GTK_SIGNAL_FUNC(on_submit), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
-		   "load_done",
-		   GTK_SIGNAL_FUNC(html_load_done), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
-		   "key_press_event",
-		   GTK_SIGNAL_FUNC(html_key_pressed), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
-		   "button_press_event",
-		   GTK_SIGNAL_FUNC(html_button_pressed), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
-		   "enter_notify_event",
-		   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
-		   vc->ec);
-		 */
 		/* html.c */
 		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "link_clicked",

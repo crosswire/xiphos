@@ -55,7 +55,7 @@
 
 BOOKMARK_MENU menu;
 
-static gboolean bookmarks_changed;
+gboolean bookmarks_changed;
 
 /******************************************************************************
  * Name
@@ -106,6 +106,65 @@ static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
+
+/******************************************************************************
+ * Name
+ *   save_iter_to_xml_removed
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void save_iter_to_xml_removed(GtkTreeIter * iter)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void save_iter_to_xml_removed(GtkTreeIter * iter)
+{
+	xmlNodePtr root_node = NULL;
+	xmlNodePtr cur_node = NULL;
+	xmlDocPtr root_doc;
+	xmlAttrPtr root_attr;
+	const xmlChar *xml_filename;
+	gchar *caption = NULL;
+	gchar buf[256];
+	GtkTreeIter child;
+	
+	if (!bookmarks_changed) 
+		return;
+	
+	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+			   2, &caption, -1);
+	sprintf(buf, "%s/bookmarks/removed/%s.xml", settings.gSwordDir,caption);
+	xml_filename = (const xmlChar *) buf;
+	root_doc = xmlNewDoc((const xmlChar *) "1.0");
+	
+	if (root_doc != NULL) {
+		root_node = xmlNewNode(NULL, (const xmlChar *)
+				       "SwordBookmarks");
+		root_attr =
+		    xmlNewProp(root_node, "syntaxVersion",
+			       (const xmlChar *) "1");
+		xmlDocSetRootElement(root_doc, root_node);
+	}
+	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+			   2, &caption, -1);
+		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
+			cur_node = xml_add_folder_to_parent(root_node, caption);
+			parse_treeview(cur_node, iter);
+		}
+	g_free(caption);
+	xmlSaveFormatFile(xml_filename, root_doc,1);
+	xmlFreeDoc(root_doc);
+	
+	bookmarks_changed = FALSE;
+	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+}
+
 /******************************************************************************
  * Name
  *  save_treeview_to_xml_bookmarks
@@ -122,7 +181,7 @@ static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
  *   void
  */
 
-static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * file_buf)
+static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 {
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
@@ -135,8 +194,8 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * file_buf)
 	
 	if (!bookmarks_changed) 
 		return;
-
-	xml_filename = (const xmlChar *) file_buf;
+	
+	xml_filename = (const xmlChar *) filename;
 	root_doc = xmlNewDoc((const xmlChar *) "1.0");
 	
 	if (root_doc != NULL) {
@@ -165,10 +224,9 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * file_buf)
 		g_free(module);	
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model),iter));
 	
-	g_print("\nsaving = %s\n", xml_filename);
 	xmlSaveFormatFile(xml_filename, root_doc,1);
 	xmlFreeDoc(root_doc);
-	g_free(file_buf);
+	g_free(filename);
 	
 	bookmarks_changed = FALSE;
 	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
@@ -206,88 +264,6 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DAT
 			   COL_MODULE, data->module,
 			   -1);
 }
-
-/******************************************************************************
- * Name
- *  get_module_key
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   gchar *get_module_key(void)	
- *
- * Description
- *    returns module key
- *
- * Return value
- *   gchar *
- */
-
-static gchar *get_module_key(void)
-{
-	if (settings.havebible) {
-		switch (settings.whichwindow) {
-		case MAIN_TEXT_WINDOW:
-			return (gchar *) settings.currentverse;
-			break;
-		case COMMENTARY_WINDOW:
-			return (gchar *) settings.comm_key;
-			break;
-		case DICTIONARY_WINDOW:
-			return (gchar *) settings.dictkey;
-			break;
-		case parallel_WINDOW:
-			return (gchar *) settings.cvparallel;
-			break;
-		case BOOK_WINDOW:
-			return (gchar *) settings.book_key;
-			break;
-		}
-	}
-	return NULL;
-}
-
-
-/******************************************************************************
- * Name
- *  get_module_name
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   gchar *get_module_name(void)	
- *
- * Description
- *    returns module name
- *
- * Return value
- *   gchar *
- */
-
-static gchar *get_module_name(void)
-{
-	if (settings.havebible) {
-		switch (settings.whichwindow) {
-		case MAIN_TEXT_WINDOW:
-			return (gchar *) xml_get_value("modules",
-						       "bible");
-			break;
-		case COMMENTARY_WINDOW:
-			return (gchar *) xml_get_value("modules",
-						       "comm");
-			break;
-		case DICTIONARY_WINDOW:
-			return (gchar *) settings.DictWindowModule;
-			break;
-		case BOOK_WINDOW:
-			return (gchar *) settings.BookWindowModule;
-			break;
-		}
-	}
-	return NULL;
-}
-
-
 
 /******************************************************************************
  * Name
@@ -542,11 +518,8 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 static void on_allow_reordering_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
-	/*
-	gtk_clist_set_reorderable(GTK_CLIST(p_bmtree->ctree),
-				  GTK_CHECK_MENU_ITEM(menuitem)->
-				  active);
-	*/
+	 gtk_tree_view_set_reorderable(bookmark_tree,
+                           GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
 /******************************************************************************
@@ -691,28 +664,27 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_remove_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-/*	gchar buf[256];
-	GNode *gnode;
-	GtkCTreeNode *node;
-	BOOKMARK_DATA *bd;
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	gchar buf[256];
+	gchar *caption = NULL;
+	
+	selection = gtk_tree_view_get_selection(bookmark_tree);
+	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+				   2, &caption, -1);
 
-	node = GTK_CTREE_NODE(g_list_nth(GTK_CLIST
-					 (bmtree.ctree)->row_list,
-					 selected_row));
-
-	gnode = gtk_ctree_export_to_gnode(bmtree.ctree, NULL,
-					  NULL, node, ctree2gnode,
-					  NULL);
-	bd = (BOOKMARK_DATA *) gnode->data;
 	sprintf(buf, "%s/removed/%s.xml", settings.swbmDir,
-		bd->caption);
-//	g_warning(buf);
+		caption);
+	g_warning(buf);
 
 	bookmarks_changed = TRUE;
-	save_gnode_to_xml_bookmarks(gnode, g_strdup(buf));
-	remove_selection(bmtree.ctree);
+	save_iter_to_xml_removed(&selected);
+	gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 	bookmarks_changed = TRUE;
-	*/
+	g_free(caption);
 }
 
 
@@ -734,23 +706,16 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
 
 static void restore_ok(GtkButton * button, GtkWidget * filesel)
 {
-/*	GtkCTreeNode *node;
 	const xmlChar *file;
-
-	node = GTK_CTREE_NODE(g_list_nth(GTK_CLIST
-					 (bmtree.ctree)->row_list,
-					 selected_row));
-
+	gchar buf[256];
+	
 	file = (const xmlChar *)
 	    gtk_file_selection_get_filename(GTK_FILE_SELECTION
-					    (filesel));
-
-	parse_bookmarks(bmtree.ctree, file, node);
-
+					    (filesel));	
+	gui_load_removed(file);
+	
 	bookmarks_changed = TRUE;
-
 	gtk_widget_destroy(filesel);
-	*/
 }
 
 
@@ -772,7 +737,7 @@ static void restore_ok(GtkButton * button, GtkWidget * filesel)
 
 static void restore_cancel(GtkButton * button, GtkWidget * dlg)
 {
-	//gtk_widget_destroy(dlg);
+	gtk_widget_destroy(dlg);
 }
 
 
@@ -795,7 +760,7 @@ static void restore_cancel(GtkButton * button, GtkWidget * dlg)
 static void on_restore_folder_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
-/*	GtkWidget *fileselection;
+	GtkWidget *fileselection;
 	GtkWidget *ok;
 	GtkWidget *cancel;
 	gchar buf[256];
@@ -830,7 +795,7 @@ static void on_restore_folder_activate(GtkMenuItem * menuitem,
 	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
 			   GTK_SIGNAL_FUNC(restore_cancel),
 			   (GtkWidget *) fileselection);
-*/
+
 }
 
 
@@ -1195,13 +1160,13 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Insert Item"),
+	 GNOME_APP_UI_ITEM, N_("Insert Bookmark"),
 	 N_("Insert new bookmark here"),
 	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Add Item at Root"),
+	 GNOME_APP_UI_ITEM, N_("Add Bookmark at Root"),
 	 N_("Add new bookmark item"),
 	 (gpointer) on_add_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
@@ -1288,8 +1253,6 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 
 void gui_create_bookmark_menu(void)
 {
-	//GtkWidget *pmBookmarkTree;
-	
 	menu.menu = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(menu.menu),
 			    "menu.menu", menu.menu);
@@ -1299,6 +1262,7 @@ void gui_create_bookmark_menu(void)
 	menu.in_dialog = pmBookmarkTree_uiinfo[0].widget;
 	menu.new = pmBookmarkTree_uiinfo[1].widget;
 	menu.insert = pmBookmarkTree_uiinfo[2].widget;
+	menu.add = pmBookmarkTree_uiinfo[3].widget;
 	menu.edit = pmBookmarkTree_uiinfo[4].widget;
 	menu.point = pmBookmarkTree_uiinfo[5].widget;
 	menu.delete = pmBookmarkTree_uiinfo[6].widget;
@@ -1314,6 +1278,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 	gtk_widget_set_sensitive(menu.new, FALSE);
 	gtk_widget_set_sensitive(menu.insert, FALSE);
+	gtk_widget_set_sensitive(menu.add, FALSE);
 	gtk_widget_set_sensitive(menu.edit, FALSE);
 	gtk_widget_set_sensitive(menu.point, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
