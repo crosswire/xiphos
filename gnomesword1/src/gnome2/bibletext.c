@@ -439,7 +439,7 @@ static void setup_tag (GtkTextTag *tag, gpointer user_data)
 		    user_data);
 }
 
-static void create_text_tags(GtkTextBuffer *buffer)
+static void create_text_tags(GtkTextBuffer * buffer, gchar * rtl_font)
 {
 	GtkTextTag *tag;
 	GdkColor color;
@@ -479,10 +479,9 @@ static void create_text_tags(GtkTextBuffer *buffer)
                 NULL);
 		
 	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_quote", NULL);
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
         g_object_set (G_OBJECT (tag),
-		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
-		//"scale", PANGO_SCALE_XX_LARGE,
+		//"font", rtl_font,
                 "wrap_mode", GTK_WRAP_WORD,
                 "direction", GTK_TEXT_DIR_RTL,
                 "indent", 0,
@@ -490,10 +489,15 @@ static void create_text_tags(GtkTextBuffer *buffer)
                 "right_margin", 0,
                 NULL);	
 		
+	/* right to left font */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
+        g_object_set (G_OBJECT (tag),
+		"font", rtl_font,
+                NULL);	
+		
 	/* large tag */
 	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
         g_object_set (G_OBJECT (tag),
-		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
 		"scale", PANGO_SCALE_XX_LARGE,
                 NULL);			
 }
@@ -520,13 +524,16 @@ static void create_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *frame_text;
 	GtkWidget *scrolledwindow;
+	gchar *gdk_font = NULL;
+	gchar file[250];
+
+	
 	
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_show(t->frame);
 	gtk_box_pack_start(GTK_BOX(t->vbox), t->frame, TRUE,
 			   TRUE, 0); 
 	gtk_frame_set_shadow_type(GTK_FRAME(t->frame),GTK_SHADOW_NONE);
-	//gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
@@ -547,7 +554,6 @@ static void create_pane(TEXT_DATA * t)
 				       GTK_POLICY_AUTOMATIC);
 
 	if (!t->is_rtol) {
-		
 		t->html = gtk_html_new();
 		gtk_widget_show(t->html);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -567,12 +573,15 @@ static void create_pane(TEXT_DATA * t)
 	}
 
 	else {  /* use gtktextview for right to left text */
+		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 		t->text = gtk_text_view_new ();
 		gtk_widget_show (t->text);
 		gtk_container_add (GTK_CONTAINER (scrolledwindow), t->text);
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (t->text), FALSE);
 		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (t->text));
-		create_text_tags(text_buffer);
+		gdk_font = get_conf_file_item(file, t->mod_name, "GdkFont");
+		//g_warning("font = %s",gdk_font);
+		create_text_tags(text_buffer,gdk_font);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (t->text), GTK_WRAP_WORD);
 		
 		gtk_signal_connect(GTK_OBJECT(t->text),
@@ -580,6 +589,7 @@ static void create_pane(TEXT_DATA * t)
 				   G_CALLBACK
 				   (textview_button_release_event),
 				   (TEXT_DATA *) t);
+		if(gdk_font) g_free(gdk_font);
 	}
 }
 

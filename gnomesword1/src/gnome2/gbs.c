@@ -173,7 +173,7 @@ static void add_tree_item(TreeItem * item, GtkTreeIter parent)
 {
 
 	GtkTreeIter iter;
-
+	
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, &parent);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, item->pixbuf_opened,
@@ -219,6 +219,7 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 			   -1);
 
+  
 	if (gbs_treekey_first_child(offset)) {
 		offset = gbs_get_treekey_offset();
 		sprintf(buf, "%lu", offset);
@@ -227,7 +228,7 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		p_treeitem->item_name = (gchar *) tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
 			p_treeitem->pixbuf_opened =
-			    pixbufs->pixbuf_closed;
+				pixbufs->pixbuf_closed;
 			p_treeitem->pixbuf_closed =
 			    pixbufs->pixbuf_opened;
 			p_treeitem->is_leaf = FALSE;
@@ -625,7 +626,7 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 	GtkWidget *frameGBS;
 	GtkWidget *scrolledwindowHTML_GBS;
 	GObject *selection;
-
+	
 	p_gbs->frame = gtk_frame_new(NULL);
 	gtk_widget_show(p_gbs->frame);
 	gtk_container_add(GTK_CONTAINER(p_gbs->vbox), p_gbs->frame);
@@ -645,8 +646,6 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 	gtk_widget_show(scrolledwindowCTREE_GBS);
 	gtk_container_add(GTK_CONTAINER(frame),
 			  scrolledwindowCTREE_GBS);
-	/*gtk_paned_pack1(GTK_PANED(hpanedGBS), scrolledwindowCTREE_GBS, TRUE,
-	   TRUE); */
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowCTREE_GBS),

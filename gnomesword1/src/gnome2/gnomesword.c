@@ -217,7 +217,7 @@ void frontend_display(void)
 
 void shutdown_frontend(void)
 {
-	//gui_save_bookmarks();
+	gui_save_bookmarks_treeview();
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
 	

@@ -143,13 +143,14 @@ void gui_display_dictlex(gchar * key)
 
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 {
-	DL_DATA *d;
+	DL_DATA *d = NULL;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
-			      page_num);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
-
+	if(d) {
+		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
+				      page_num);
+		gtk_entry_set_text(GTK_ENTRY(d->entry), key);
+	}
 }
 
 /******************************************************************************
