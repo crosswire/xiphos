@@ -62,7 +62,7 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 
 	++numinst;
 	/* fill book combo box */
-	cbBook_items = getBibleBooks();
+	cbBook_items = getBibleBooksSWORD();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	VTMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	VTMod     = NULL;

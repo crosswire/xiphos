@@ -347,7 +347,6 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	}
 	firsttime = FALSE;	//-- remember we were here
 	
-	gtk_widget_hide(settings->toolbarBooks);
 	gtk_widget_hide(settings->toolbarComments);
 	gtk_widget_hide(settings->toolbarStudypad);
 	
