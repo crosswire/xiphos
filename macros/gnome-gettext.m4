@@ -12,7 +12,7 @@
 
 # serial 5
 
-AC_DEFUN(AM_GNOME_WITH_NLS,
+AC_DEFUN([AM_GNOME_WITH_NLS],
   [AC_MSG_CHECKING([whether NLS is requested])
     dnl Default is enabled NLS
     AC_ARG_ENABLE(nls,
@@ -21,11 +21,12 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     AC_MSG_RESULT($USE_NLS)
     AC_SUBST(USE_NLS)
 
+    BUILD_INCLUDED_LIBINTL=no
     USE_INCLUDED_LIBINTL=no
 
     dnl If we use NLS figure out what method
     if test "$USE_NLS" = "yes"; then
-      AC_DEFINE(ENABLE_NLS)
+#      AC_DEFINE(ENABLE_NLS)
 #      AC_MSG_CHECKING([whether included gettext is requested])
 #      AC_ARG_WITH(included-gettext,
 #        [  --with-included-gettext use the GNU gettext library included here],
@@ -197,6 +198,7 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     done
 
     dnl Make all variables we use known to autoconf.
+    AC_SUBST(BUILD_INCLUDED_LIBINTL)
     AC_SUBST(USE_INCLUDED_LIBINTL)
     AC_SUBST(CATALOGS)
     AC_SUBST(CATOBJEXT)
@@ -210,7 +212,7 @@ AC_DEFUN(AM_GNOME_WITH_NLS,
     AC_SUBST(POSUB)
   ])
 
-AC_DEFUN(AM_GNOME_GETTEXT,
+AC_DEFUN([AM_GNOME_GETTEXT],
   [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
    AC_REQUIRE([AC_PROG_CC])dnl
    AC_REQUIRE([AC_PROG_RANLIB])dnl
@@ -249,7 +251,7 @@ strdup __argz_count __argz_stringify __argz_next])
        fi
        for lang in $LINGUAS; do
          case "$ALL_LINGUAS" in
-          *$lang*) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
+          *\ $lang\ *|$lang\ *|*\ $lang) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
          esac
        done
        LINGUAS=$NEW_LINGUAS

@@ -126,6 +126,7 @@ static void addNodeChildren(GtkWidget *ctree,
 	gchar *text[3], buf[256];
 	GtkCTreeNode *parent_node;
 	GtkCTreeNode *tmp_parent_node = node;
+	
 	text[1] = bookname;
 	text[2] = "0";
 	if (treeKey.firstChild()) {
@@ -158,6 +159,7 @@ static void addNodeChildren(GtkWidget *ctree,
 								FALSE);
 		}
 	}
+	
 	while(treeKey.nextSibling()){
 		text[0] = (gchar*)treeKey.getLocalName();
 		sprintf(buf,"%lu",treeKey.getOffset());
@@ -165,7 +167,7 @@ static void addNodeChildren(GtkWidget *ctree,
 		if(treeKey.hasChildren())
 			node = gtk_ctree_insert_node(GTK_CTREE(ctree),
 								tmp_parent_node,
-								node,
+								NULL,
 								text, 
 								3, 
 								pixmap1,
@@ -177,7 +179,7 @@ static void addNodeChildren(GtkWidget *ctree,
 		else
 			node = gtk_ctree_insert_node(GTK_CTREE(ctree),
 								tmp_parent_node,
-								node,
+								NULL,
 								text, 
 								3, 
 								pixmap3,
@@ -200,22 +202,15 @@ void load_book_tree(GtkWidget *ctree,
 	
 	it = mainMgr->Modules.find(bookName);	//-- find module (modName)
 	curbookMod = (*it).second;
-	
-	cout << "book is " << (gchar*)curbookMod->Name() << "\n";
-	
+			
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);	
 	
 	if (treeKey) {
 		TreeKeyIdx root = *treeKey;	
-		if(!strcmp(treekey, "root")) {
+		if(!strcmp(treekey, "root")) 
 			root.root();
-		}
-		else {
-			//curbookMod->SetKey(treekey);
-			//curbookMod->KeyText(); //snap to entry
-			root.setOffset(offset);
-			
-		}
+		else 
+			root.setOffset(offset);		
 		addNodeChildren(ctree,node,bookName, root);	
 	}
 	else 

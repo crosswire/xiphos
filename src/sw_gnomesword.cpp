@@ -380,7 +380,7 @@ void ChangeVerseSWORD(void)
 	updateinterlinearpage();
 	
 	//--------------------------------------------------------------- change personal notes editor	
-	if (settings->notebook3page == 1) {
+	if (settings->notebook3page == 2) {
 		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
 			if (settings->editnote && (!autoSave)) {
 				//-- do nothing
@@ -461,7 +461,7 @@ void updateinterlinearpage(void)
 	gchar *utf8str;
 	gint utf8len;
 
-	if (settings->notebook3page == 2) {
+	if (settings->notebook3page == 3) {
 		html_widget = lookup_widget(settings->app, "textComp1");
 		beginHTML(html_widget, TRUE);
 		sprintf(tmpBuf,
@@ -1107,7 +1107,7 @@ void changepercomModSWORD(gchar * modName)	//-- change personal comments module
 		notebook = lookup_widget(settings->app, "notebook3");	//-- get the notebook our page is in]
 		label = gtk_label_new(percomMod->Name());	//-- create new label with mod name as the text
 		gtk_widget_show(label);	//-- make is visible
-		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 1), label);	//-- put label on personal comments page
+		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 2), label);	//-- put label on personal comments page
 		noteModified = false;
 	}
 }
