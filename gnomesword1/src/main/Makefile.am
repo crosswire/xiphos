@@ -30,7 +30,6 @@ libmain_a_SOURCES =  \
     configs.c configs.h \
     dictlex.c dictlex.h \
     display.cc display.hh \
-    gbs.c gbs.h \
     global_ops.cc global_ops.hh \
     key.c key.h \
     lists.cc lists.h \

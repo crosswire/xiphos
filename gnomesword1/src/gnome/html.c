@@ -45,7 +45,6 @@
 #include "gui/parallel_view.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
-#include "gui/main_window.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/dialog.h"
 #include "gui/bibletext.h"

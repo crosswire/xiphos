@@ -39,11 +39,14 @@ struct _dialog_data {
 	GtkWidget *spb_verse;
 	GtkWidget *freeform_lookup;
 	GtkWidget *statusbar;
+        GtkWidget *listview;
+	GtkWidget *tree; 
 	/* widgets for text panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *text;
 	GtkWidget *frame;
+        GtkWidget *entry;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
 	
@@ -54,11 +57,14 @@ struct _dialog_data {
 	gchar *cipher_old;
 	
 	gint mod_num;
+	gint display_level;
+	unsigned long offset;
 	
 	gboolean is_locked;
 	gboolean is_percomm;
 	gboolean is_dialog;
 	gboolean is_rtol;
+	gboolean is_leaf;
 	gboolean book_heading;
 	gboolean chapter_heading;
 	gboolean sync;
@@ -66,12 +72,22 @@ struct _dialog_data {
 	gpointer backend;
 	gpointer editor;
 	
+        GObject *mod_selection;
+	
 	GLOBAL_OPS *ops;
 };
-extern DIALOG_DATA *cur_t;
-extern DIALOG_DATA *cur_c;	
+//extern DIALOG_DATA *cur_t;
+//extern DIALOG_DATA *cur_c;	
 
 
+void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
+	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d);
+void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name, 
+			     gboolean is_dialog, DIALOG_DATA * d);
+void main_dialogs_tree_selection_changed(GtkTreeModel * model, 
+	   GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g);
+
+void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d);
 void main_dialog_save_note(const gchar * note);
 void main_dialog_update_controls(DIALOG_DATA * vt);
 void main_bible_dialog_display(DIALOG_DATA * t);
