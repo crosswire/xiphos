@@ -215,8 +215,9 @@
 					<term>Menubar</term>
 					<listitem>
 						<para>
-						The menus on the menubar contain several commands which extend the use of &app;. These include the StudyPad and advanced search functions. 
-						The menus also allow you to customize your use of &app;.
+						The menus on the menubar contain several commands which extend the use of <application>&app;</application>.
+						These include the StudyPad and advanced search functions.The menus also allow you to customize your use of 
+						<application>&app;</application>.
 			        		</para>
 					</listitem>
 		 		</varlistentry>
@@ -265,15 +266,14 @@
 		         </varlistentry>
 		         </variablelist>
 		         <para>
-				When you right-click in the <application>&app;</application>
-		                window, the application displays a popup menu. The popup menu contains the most
-		                common text editing commands.
+				When you right-click in the different interface sections, the interface displays a popup menu. 
+				
 			 </para>
 		 </sect2>
   </sect1>
 
  <!-- ============= The Gnomesword UI ============================= -->
-												 --&gt;
+												 
   <sect1 id="gnomesword-interface">
  	<title>The Interface</title>
 
