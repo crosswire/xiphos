@@ -31,7 +31,7 @@
 #endif
 
 #include <swmgr.h>
-#include <markupfiltmgr.h>
+#include <gs_markupfiltmgr.h>
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
@@ -83,15 +83,15 @@ static StringList::iterator it;
  
 void backend_init_managers(void)
 {
-	sw.main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.text_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.inter_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.comm_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.dict_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.gbs_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.search_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw.percom_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	sw.main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.text_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.inter_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.comm_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.dict_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.gbs_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.search_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.results = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	sw.percom_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));	
 }
 
 /******************************************************************************
@@ -184,7 +184,7 @@ void backend_delete_main_mgr(void)
  
 void backend_new_module_mgr(void)
 {
-	sw.module_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	sw.module_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 }
 
 

@@ -45,6 +45,12 @@
 extern int search_dialog;
 
 
+const char *get_mod_config_entry(const char * module_name, const char * entry)
+{
+	return backend_get_module_config_entry(module_name, entry);
+}
+
+
 char *get_key_from_module(int manager, char *module_name)
 {
 	return backend_get_key_from_module(manager, module_name);
@@ -150,39 +156,9 @@ char *get_module_name(void)
 	}
 	return NULL;
 }
-char *get_crossref(char *note)
+char *get_crossref(char * mod_name, char * key, char * note_number)
 {
-	gchar *buf = NULL;
-	gchar *token;
-	gchar *type;
-	gchar *note_number;
-	gchar *key;
-	
-	token = strtok(note, ".");
-	if(token)
-		key = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		type = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		note_number = strdup(token);
-	else 
-		return NULL;
-	buf = backend_get_crossref(
-		xml_get_value("modules", "bible"), 
-		key, note_number);		
-	g_free(type);
-	g_free(key);
-	g_free(note_number);
-	if(buf) 
-		return buf;
-	else
-		return NULL;
+	return backend_get_crossref(mod_name,  key, note_number);
 }
 /******************************************************************************
  * Name
@@ -200,41 +176,9 @@ char *get_crossref(char *note)
  *   char*
  */
 
-const char *get_footnote_type(char *module_name,
-				char *tkey, char *note)
+const char *get_footnote_type(char * module_name, char * key, char * note_number)
 {	
-	const gchar *buf = NULL;
-	gchar *token;
-	gchar *type;
-	gchar *note_number;
-	gchar *key;
-	
-	token = strtok(note, ".");
-	if(token)
-		key = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		type = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		note_number = strdup(token);
-	else 
-		return NULL;
-	buf = backend_get_footnote_type(
-		xml_get_value("modules", "bible"), 
-		key, note_number);		
-	g_free(type);
-	g_free(key);
-	g_free(note_number);
-	if(buf) 
-		return buf;
-	else
-		return NULL;
-	//return backend_get_footnote_type(module_name, key, note);
+	return backend_get_footnote_type(module_name, key, note_number);
 }
 
 /******************************************************************************
@@ -253,41 +197,9 @@ const char *get_footnote_type(char *module_name,
  *   char*
  */
 
-char *get_footnote_body(char *note)
+char *get_footnote_body(char * mod_name, char * key, char * note_number)
 {
-	gchar *buf = NULL;
-	gchar *token;
-	gchar *type;
-	gchar *note_number;
-	gchar *key;
-	
-	token = strtok(note, ".");
-	if(token)
-		key = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		type = g_strdup(token);
-	else 
-		return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		note_number = strdup(token);
-	else 
-		return NULL;
-	
-	buf = backend_get_footnote_body(
-		xml_get_value("modules", "bible"), 
-		key, note_number);		
-	g_free(type);
-	g_free(key);
-	g_free(note_number);
-	if(buf) 
-		return buf;
-	else
-		return NULL;
-	
+	return backend_get_footnote_body(mod_name, key, note_number);
 }
 
 /******************************************************************************

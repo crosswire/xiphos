@@ -214,6 +214,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	g_signal_connect((gpointer) dialog_alert, "response",
 			 G_CALLBACK(on_dialog_response), info);
 
+	//gtk_widget_show_all(dialog_alert);
 	return dialog_alert;
 }
 

@@ -42,7 +42,7 @@ struct  _global_ops {
 };
  
 void gui_set_global_options(GLOBAL_OPS * ops);
-GLOBAL_OPS *gui_new_globals(void);
+GLOBAL_OPS *gui_new_globals(gchar * mod_name);
 void gui_add_global_option_items(gchar * mod_name, 
 				GtkWidget * module_options_menu, 
 				gint type_module,

@@ -88,15 +88,15 @@ static GString *gbs_entry(unsigned long offset, GBS_DATA * gbs,
 	
 	if(use_gtkhtml_font)
 		g_string_sprintf(str,
-			 "&nbsp; %s<a href=\"%lu\" name=\"%lu\">%s</a>"
+			 "&nbsp; %s<a href=\"sword://%s/%lu\" name=\"%lu\">%s</a>"
 			"%s<br></div>",
-			 div_align, offset, offset, 
+			div_align, gbs->mod_name, offset, offset, 
 			title, text);
 	else
 		g_string_sprintf(str,
-			"&nbsp; %s<a href=\"%lu\" name=\"%lu\">%s</a>"
+			"&nbsp; %s<a href=\"sword://%s/%lu\" name=\"%lu\">%s</a>"
 			"<font face=\"%s\" size=\"%s\">%s</font><br></div>",
-			div_align, offset, offset, 
+			div_align, gbs->mod_name, offset, offset, 
 			title, use_font,use_font_size,text);
 	g_free(use_font);
 	g_free(use_font_size);

@@ -1422,7 +1422,7 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	GtkWidget *popupmenu;
 
 	vt = g_new0(TEXT_DATA, 1);
-	vt->ops = gui_new_globals();
+	vt->ops = gui_new_globals(mod_name);
 	vt->mod_num = get_module_number(mod_name, TEXT_MODS);
 	vt->search_string = NULL;
 	vt->dialog = NULL;
@@ -1439,11 +1439,11 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 		vt->is_locked = 0;
 		vt->cipher_old = NULL;
 	}
-	popupmenu = gui_create_pm_text(vt);
+/*	popupmenu = gui_create_pm_text(vt);
 	if(!vt->is_rtol)
 		gnome_popup_menu_attach(popupmenu, vt->html, NULL);
 	else
-		gnome_popup_menu_attach(popupmenu, vt->text, NULL);
+		gnome_popup_menu_attach(popupmenu, vt->text, NULL);*/
 	gtk_widget_show(vt->dialog);
 	dialog_list = g_list_append(dialog_list, (TEXT_DATA *) vt);
 	cur_vt = vt;
