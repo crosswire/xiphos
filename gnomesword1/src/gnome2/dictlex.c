@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif
 
@@ -455,7 +455,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
 	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
@@ -598,7 +598,7 @@ static void on_print1_activate(GtkMenuItem * menuitem,
 static void on_copy2_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
 #else
 	gui_copy_html(widgets.html_dict);
@@ -634,7 +634,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
 	gchar *dict_key = NULL;
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
