@@ -35,6 +35,29 @@ extern int search_dialog;
 
 /******************************************************************************
  * Name
+ *   is_module_rtl
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   int is_module_rtl(char * mod_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   int
+ */
+
+int is_module_rtl(char * mod_name)
+{
+	return backend_is_module_rtl(mod_name);
+	
+}
+
+
+/******************************************************************************
+ * Name
  *   do_module_search
  *
  * Synopsis
@@ -280,4 +303,3 @@ int get_mod_type(char * mod_name)
 {
 	return backend_get_mod_type(mod_name);
 }
-

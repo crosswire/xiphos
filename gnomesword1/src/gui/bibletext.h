@@ -70,6 +70,7 @@ struct _text_data {
 	
 	gboolean is_locked;
 	gboolean is_dialog;
+	gboolean is_rtol;
 	
 	TEXT_GLOBALS *tgs;
 };
@@ -90,4 +91,3 @@ void gui_shutdown_text(void);
 #endif
 
 #endif
-

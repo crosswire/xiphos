@@ -68,22 +68,23 @@ static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 {
 	if (!mf->no_font && new_font_set) {
 		gchar *new_font = g_strdup(mf->new_gdk_font);
-		mf->new_font = get_html_font_name(new_font);
+		mf->new_font = g_strdup(get_html_font_name(new_font));
 //		g_warning(mf->new_font);
 		g_free(new_font);
 	} else {
-		mf->new_font = "none";
+		mf->new_font = g_strdup("none");
 		mf->new_gdk_font = "none";
 	}
 	mf->new_font_size =
 	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
 	save_font_info(mf);
-
-/*	g_warning(mf->new_font);
+/*
+	g_warning(mf->new_font);
 	g_warning(mf->new_gdk_font);
 	g_warning(mf->new_font_size);
 */
 	gtk_widget_destroy(dlg);
+	g_free(mf->new_font);
 }
 
 

@@ -92,7 +92,7 @@ void gui_studypad_can_close(void)
 				gui_fileselection_save(editor_cd);
 			}
 		}
-
+		settings.modifiedSP = FALSE;
 		g_free(info);
 	}
 }
