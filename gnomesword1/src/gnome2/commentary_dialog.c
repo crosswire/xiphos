@@ -30,6 +30,7 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary_dialog.h"
 #include "gui/commentary_menu.h"
+#include "gui/dialog.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/editor_menu.h"
@@ -56,6 +57,53 @@ static gboolean dialog_freed;
 static gboolean apply_change;
 
 
+
+/******************************************************************************
+ * Name
+ *   gui_note_can_close
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void gui_note_can_close(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void gui_note_can_close(GSHTMLEditorControlData *ecd)
+{
+	gchar *filename = NULL;
+	gchar *buf = NULL;
+	gint test;
+	GS_DIALOG *info;
+	GString *str;
+	
+	if (settings.modifiedPC) {
+		str = g_string_new("");
+		info = gui_new_dialog();
+		info->stock_icon = "gtk-dialog-warning";
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Note for"),
+			ecd->key,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
+		info->yes = TRUE;
+		info->no = TRUE;
+
+		test = gui_alert_dialog(info);
+		if (test == GS_YES) {
+			gui_save_note(ecd);
+		}
+		settings.modifiedPC = FALSE;
+		g_free(info);
+		g_string_free(str,TRUE);
+	}
+}
 
 /******************************************************************************
  * Name
@@ -204,6 +252,7 @@ static void free_on_destroy(COMM_DATA * vc)
 
 static void on_dialog_destroy(GtkObject * object, COMM_DATA * vc)
 {
+	gui_note_can_close(vc->ec);
 	if (!dialog_freed) {
 		if (vc->ec)
 			gui_html_editor_control_data_destroy(NULL,
@@ -314,8 +363,21 @@ static gint button_press_event(GtkWidget * html,
 	cur_vc = vc;
 	return FALSE;
 }
+static gboolean html_key_press_event(GtkWidget * widget,
+				      GdkEventKey * event,
+				      COMM_DATA * vc)
+{
+	vc->ec->changed = TRUE;
+	g_warning("html_key_press_event");
+	gui_update_statusbar(vc->ec);
+	return FALSE;
+	
+}
 
-
+void html_cursor_move(GtkHTML *html, GtkDirectionType dir_type, GtkHTMLCursorSkipType skip)
+{
+	g_warning("html_cursor_move");
+}
 /******************************************************************************
  * Name
  *   update_controls
@@ -718,9 +780,13 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 			    vc->dialog);
 	gtk_window_set_title(GTK_WINDOW(vc->dialog),
 			     get_module_description(vc->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
+	//gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
 	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE,
 			      FALSE);
+	if (do_edit)
+		gtk_widget_set_size_request(vc->dialog, 590, 380);
+	else
+		gtk_widget_set_size_request(vc->dialog, 460, 280);
 
 	vbox30 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox30);
@@ -787,13 +853,19 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 		   "enter_notify_event",
 		   G_CALLBACK(on_html_enter_notify_event),
 		   vc->ec);
+		g_signal_connect(G_OBJECT(vc->ec->htmlwidget),
+		   		"cursor_move",
+		   		G_CALLBACK(html_cursor_move), vc->ec);
 		 */
 		/* html.c */
+		g_signal_connect(G_OBJECT(vc->ec->htmlwidget),
+		   		"key_press_event",
+		   		G_CALLBACK(html_key_press_event), vc);
 		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-		/* html.c */
+		
 		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "on_url", G_CALLBACK(gui_url),
 				   NULL);
@@ -1045,7 +1117,7 @@ void gui_open_commentary_editor(gchar * mod_name)
 		gtk_widget_show(vc->ec->toolbar_style);
 	if (vc->ec->editbar)
 		gtk_widget_show(vc->ec->toolbar_edit);
-	gtk_widget_show(vc->dialog);
+	gtk_widget_show(vc->dialog);	
 	gtk_widget_set_sensitive(vc->ec->toolbars, TRUE);
 	gtk_html_set_editable(GTK_HTML(vc->ec->html), TRUE);
 	settings.percomm_dialog_exist = TRUE;

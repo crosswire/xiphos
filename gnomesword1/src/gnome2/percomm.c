@@ -117,9 +117,8 @@ void gui_save_note(GSHTMLEditorControlData * e)
 		//change_percomm_module(e->filename);
 		//set_percomm_key(e->key);
 		save_percomm_note(gstr->str);
-		/*g_print("\nmod = %s\nkey = %s\nnote = %s\n",e->filename, 
-				e->key,gstr->str); */
-		g_print("\nfile writen\n");
+		
+		g_print("\nnote saved\n");
 	}
 	g_string_free(gstr, 0);
 	gtk_html_set_editable(e->html, TRUE);
@@ -280,7 +279,7 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
 	ecd->changed = TRUE;
 	//file_changed = TRUE;
 	gui_update_statusbar(ecd);
-	return 1;
+	return FALSE;
 }
 
 /******************************************************************************
