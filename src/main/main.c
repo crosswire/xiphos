@@ -34,9 +34,7 @@
 #include "gui/gui.h"
 #include "gui/main_window.h"
 #include "gui/splash.h"
-#include "gui/setup_druid.h"
 #include "gui/gnomesword.h"
-#include "gui/bookmarks.h"
 
 #include "backend/sword.h"
 #include "backend/properties.h"
@@ -59,7 +57,6 @@
 
 int main(int argc, char *argv[])
 {
-	gint icreatefiles = 0;
 	gint first_run = 0;
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
@@ -99,25 +96,16 @@ int main(int argc, char *argv[])
 #endif
 	/* 
 	 * check for directories and files
-	 */    
-	icreatefiles = settings_init();	
-	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
-		gui_new_xml_bookmark_file();
-	}
-
-	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs)  {
-		backend_init();
-		first_run = gui_first_run();
-	}
-
+	 */   
+    	first_run = settings_init(newconfigs,newbookmarks);
+    
 	backend_load_properties(settings.fnconfigure);
 	
 	gui_splash_init();
 
 	gui_splash_step1();
-		
-	if(!first_run) 
-		backend_init();
+    
+	backend_init();
 
 	gui_splash_step2();
 		

@@ -33,6 +33,7 @@
 #include "main/sword.h"
 #include "main/bibletext.h"
 #include "main/settings.h"
+#include "main/key.h"
 
 
 /******************************************************************************

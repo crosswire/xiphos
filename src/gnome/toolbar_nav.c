@@ -34,6 +34,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/key.h"
 
 NAV_BAR nav_bar;
 static GtkWidget * cbe_book;

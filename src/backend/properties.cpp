@@ -483,11 +483,11 @@ int backend_create_properties_from_setup(void)
 	settingsInfo["StudyPad"]["Lastfile"] = "";
 	settingsInfo["StudyPad"]["Directory"] = "~";
 	settingsInfo["FontSize"]["VerseNum"] = "+0";
-	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
-	settingsInfo["LAYOUT"]["UperPane"] = "296";
-	settingsInfo["LAYOUT"]["BiblePane"] = "262";
-	settingsInfo["LAYOUT"]["AppWidth"] = "700";
-	settingsInfo["LAYOUT"]["AppHight"] = "550";
+	settingsInfo["LAYOUT"]["Shortcutbar"] = "180";
+	settingsInfo["LAYOUT"]["UperPane"] = "225";
+	settingsInfo["LAYOUT"]["BiblePane"] = "240";
+	settingsInfo["LAYOUT"]["AppWidth"] = "640";
+	settingsInfo["LAYOUT"]["AppHight"] = "480";
 	settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
 
 	settingsInfo["User Options"]["UseDefault"] =
@@ -501,9 +501,9 @@ int backend_create_properties_from_setup(void)
 	settingsInfo["User Options"]["versestyle"] =
 	    isON(settings.versestyle);
 	settingsInfo["User Options"]["autosavepersonalcomments"] =
-	    isON(settings.autosavepersonalcomments);
+	    "1";
 	settingsInfo["User Options"]["interlinearpage"] =
-	    isON(settings.interlinearpage);
+	    "1";
 	settingsInfo["User Options"]["strongs"] = "0";
 	settingsInfo["User Options"]["footnotes"] = "0";
 	settingsInfo["User Options"]["formatpercom"] = "0";
@@ -526,20 +526,20 @@ int backend_create_properties_from_setup(void)
 	settingsInfo["User Options"]["NoteScroll"] = "1";
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
-	settingsInfo["User Options"]["UseDefaultDict"] = "0";
+	settingsInfo["User Options"]["UseDefaultDict"] = "1";
 	settingsInfo["User Options"]["showtexts"] = "1";
 	settingsInfo["User Options"]["showcomms"] = "1";
 	settingsInfo["User Options"]["showdicts"] = "1";
-	
+	/*
 	settingsInfo["Show Bookmarks"]["Bibletext Dialog"] = "0";
 	settingsInfo["Show Bookmarks"]["Commentary Dialog"] = "0";		 
 	settingsInfo["Show Bookmarks"]["Dictionary Dialog"] = "0";		 
 	settingsInfo["Show Bookmarks"]["General Book Dialog"] = "0";
-	
+	*/
 	settingsInfo["Editor Options"]["Use StudyPad"] = "1";
 	settingsInfo["Editor Options"]["showeditbar studypad"] = "1";
 	settingsInfo["Editor Options"]["showstylebar studypad"] = "1";
-	settingsInfo["Editor Options"]["Use Studypad Dialog"] = "0";
+	settingsInfo["Editor Options"]["Use Studypad Dialog"] = "1";
 	settingsInfo["Editor Options"]["Use Percomm Dialog"] = "0";
 
 	settingsInfo.Save();

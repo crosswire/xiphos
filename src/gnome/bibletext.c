@@ -588,6 +588,7 @@ void gui_setup_text(GList * mods)
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);
 			t->cipher_old = get_cipher_key(t->mod_name);
+			//g_warning("cipher tag for %s = %s",t->mod_name,t->cipher_old);
 		}
 
 		else {

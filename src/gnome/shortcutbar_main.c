@@ -324,8 +324,10 @@ static void load_group_shortcuts_from_list(gchar * path, gint group_num)
 	while (tmp != NULL) {
 		/* seperate name and url */
 		buf = (gchar *) tmp->data;
-		token =
-		    strtok(buf, "@");
+		if(!strstr(buf,"@"))
+			buf = g_strconcat((gchar *) tmp->data, "@main",
+                                           			NULL);
+		token = strtok(buf, "@");
 		item_name = g_strdup(token);
 		token = strtok(NULL, "@");
 		item_url = strdup(token);
@@ -1769,3 +1771,5 @@ void gui_set_shortcutbar_porgram_start(void)
 		gui_attach_detach_shortcutbar();
 	}
 }
+
+

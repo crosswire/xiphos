@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * bookmarks.h- functions to load and save bookmarks
+ * mgr.hh - SHORT DESCRIPTION
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,16 +18,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#ifndef __BOOKMARKS_H_
-#define __BOOKMARKS_H_
+
+#ifndef _MGR_HH_
+#define _MGR_HH_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-GNode * backend_load_bookmarks(char *dir);
 
+void backend_init_main_mgr(void);
+void backend_delete_main_mgr(void);	
+void backend_new_module_mgr(void);
+void backend_delete_module_mgr(void);
+ 
+void backend_set_global_option_iterator(void);
+char *backend_get_next_global_option(void);	
+
+	
 #ifdef __cplusplus
 }
 #endif

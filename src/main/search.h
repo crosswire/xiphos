@@ -30,54 +30,20 @@ extern "C" {
   
 typedef struct _sword_search SEARCH_SWORD;
 struct  _sword_search {
-	
-	GList * modules;
 	gchar
-	    *module_name,
-	    *upper_bond, 
-	    *lower_bond, 
-	    *search_string;
-
-	gint
-	    search_type, 
-	    search_params, 
-	    found_count;
-
-	 gboolean 
-	    use_bonds, 
-	    use_lastsearch_for_bonds;
+	    *module_name;
+	
 };
 
-  
-typedef struct _custom_range CUSTOM_RANGE;
-struct  _custom_range{
-	gchar *label;
-	gchar *range;
-};
 
-typedef struct _custom_list CUSTOM_MODLIST;
+typedef struct _custom_list CUSTOM_LIST;
 struct  _custom_list{
 	gchar *label;
-	gchar *modules;
+	gchar *value;
 };
 
-void save_custom_modlist(GList * modlist);
-GList * load_custom_modlist(void);
-GList * get_element(char * entry);
-int set_range(char * list);
-void save_custom_ranges(GList * ranges);
-GList * load_custom_ranges(void);
 void search_dialog_appbar_update(char percent, void *userData);
 void search_percent_update(char percent, void *userData);
-GList *do_search(gpointer *usr_data);
-int clear_scope(void);	
-int clear_search_list(void);
-int set_scope2last_search(void);
-void set_scope2range(void);	
-int set_search_module(char * module);	
-int do_dialog_search(char *search_string, int search_type, 
-						int search_params);
-void add_to_found_list(const char * result_text, const char * module);
 
 #ifdef __cplusplus
 }

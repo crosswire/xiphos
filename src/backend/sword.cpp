@@ -68,15 +68,21 @@ using namespace sword;
 typedef map < string, string > modDescMap;
 //typedef map < string, string > bookAbrevMap;
 
+
 #define CIPHER_KEY_LEN 16
 
+
+
+/******************************************************************************
+ * externs
+ */
+
+extern SWMgr *main_mgr;	
 
 /******************************************************************************
  * static  global to this file only 
  */
 
-static SWMgr *mainMgr;	
-static modDescMap descriptionMap;
 
 /******************************************************************************
  * globals
@@ -85,6 +91,7 @@ static modDescMap descriptionMap;
 //bookAbrevMap abrevationMap;
 MANAGERS sw_mgr;
 
+modDescMap descriptionMap;
 
 
 /******************************************************************************
@@ -105,6 +112,7 @@ MANAGERS sw_mgr;
  
 void backend_init(void)
 {	
+	ModMap::iterator it;
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n", "Initiating Sword\n");		
 	g_print("Sword locale is %s\n",
@@ -114,10 +122,15 @@ void backend_init(void)
 	/*
 	 *create sword mgrs
 	 */
-	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	sw_mgr.search = new SWMgr();
 	sw_mgr.results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
-	
+	for (it = main_mgr->Modules.begin();
+	     it != main_mgr->Modules.end(); it++) {
+		descriptionMap[string
+			((char *) (*it).second->Description())] =
+				  string((char *) (*it).second->Name());
+	 }
 	/* 
 	 * fill module lists
 	 */
@@ -139,37 +152,6 @@ void backend_init(void)
 		backend_setup_books();
 	if(settings.havebible)
 		backend_setup_interlinear();
-}
-
-
-/******************************************************************************
- * Name
- *   backend_get_global_options_list
- *
- * Synopsis
- *   #include "backend/sword.h"
- *
- *   GList * backend_get_global_options_list(void)	
- *
- * Description
- *    
- *
- * Return value
- *   GList
- */
- 
-GList * backend_get_global_options_list(void)
-{
-	GList * tmp = NULL;
-	//-- get list of  globalOptions for menus
-	OptionsList optionslist = mainMgr->getGlobalOptions();
-	for (OptionsList::iterator it = optionslist.begin();
-	     it != optionslist.end(); it++) {
-		//-- save options in a glist for popup menus
-		tmp =
-		    g_list_append(tmp, (gchar *) strdup((*it).c_str()));
-	}
-	return tmp;
 }
 
 
@@ -212,9 +194,10 @@ void backend_module_name_from_description(char * mod_name,
  *   void
  */
 
-void backend_shutdown(void)
+void backend_shutdown(int save_properties)
 {
-	backend_save_properties(true);
+	if(save_properties)
+		backend_save_properties(true);
 	
 	backend_shutdown_bibletext();
 	backend_shutdown_commentary();
@@ -226,130 +209,10 @@ void backend_shutdown(void)
 	/*
 	 * delete Sword managers
 	 */
-	delete mainMgr;
+	delete main_mgr;
 	delete sw_mgr.search;
 	delete sw_mgr.results; 
 	g_print("\nSword is shutdown\n");
-}
-
-/******************************************************************************
- * Name
- *   backend_get_valid_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *backend_get_valid_key(char *key)	
- *
- * Description
- *    returns a valid Bible reference - must be freed by calling function
- *
- * Return value
- *   char *
- */
-
-char *backend_get_valid_key(char *key)
-{
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	return strdup((char *) vkey.getText());
-}
-
-const char *backend_get_book_from_key(char *key)
-{
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	return vkey.books[vkey.Testament() - 1][vkey.Book() -
-							 1].name;
-}
-
-int backend_get_chapter_from_key(char *key)
-{
-	unsigned char chapters;
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	return vkey.Chapter();
-}
-
-/** Returns the number of chapters for the given book. */
-const unsigned int backend_chapter_count(char *key) 
-{
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	
-	char testament = vkey.Testament() ;
-	char book = vkey.Book();
-	return (vkey.books[testament-1][book-1].chapmax);
-}
-
-/** Returns the number of verses  for the given chapter. */
-const unsigned int backend_verse_count(char *key) 
-{
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	
-	char testament = vkey.Testament() ;
-	char book = vkey.Book();
-	int chapter = vkey.Chapter();
-	
-	return (vkey.books[testament-1][book-1].versemax[chapter-1]);
-	/*}
-	else if (book>=1 && (book - staticKey.BMAX[0]) <= (unsigned int)staticKey.BMAX[1] && hasTestament(NewTestament)) {	//is the book in the new testament?
-		if (chapter <= chapterCount(book) )	//does the chapter exist?
-			result = staticKey.books[1][book-1-staticKey.BMAX[0]].versemax[chapter-1];
-	}*/
-}
-
-int backend_get_verse_from_key(char *key)
-{
-	VerseKey vkey;
-	vkey.AutoNormalize(1);
-	vkey = key;
-	return vkey.Verse();
-}
-
-/**********************************************************************
- * Name
- *   backend_get_books
- *
- * Synopsis
- *   #include "sw_sword.h"
- *   
- *   GList *backend_get_books(void)
- *
- * Description
- *   Returns a list of the books of the Bible.
- *   GList *list needs to be freed by calling function.
- *
- *   This is called before initSWORD! :o(
- *
- * Return value
- *   GList pointer of books of the Bible
- */
-
-GList *backend_get_books(void)
-{
-	VerseKey key;
-	GList *glist = NULL;
-
-	/*
-	 * Load Bible books.
-	 */
-
-	for (int i = 0; i <= 1; ++i) {
-		for (int j = 0; j < key.BMAX[i]; ++j) {
-			glist =
-			    g_list_append(glist,
-					  (char *) key.books[i][j].
-					  name);
-		}
-	}
-	return glist;
 }
 
 /*** returns the version number of the sword libs ***/
@@ -369,7 +232,7 @@ void backend_save_module_key(char *mod_name, char *key)
 	char buf[256], conffile[256];
 	struct dirent *ent;
 
-	strcpy(buf, mainMgr->configPath);
+	strcpy(buf, main_mgr->configPath);
 	dir = opendir(buf);
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
@@ -439,101 +302,13 @@ int backend_get_mod_type(char * mod_name)
 	return -1;
 }
 
-GList *backend_get_list_of_mods_by_type(char *mod_type)
-{
-	ModMap::iterator it;
-	GList *mods = NULL;
-
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), mod_type)) {
-			mods =
-			    g_list_append(mods,
-				  (gchar *) (*it).second->
-				  Name());
-			descriptionMap[string
-			       ((char *) (*it).second->Description())] =
-				string((char *) (*it).second->Name());
-		}
-	}
-	return mods;
-}
-
-GList *backend_get_list_of_devotion_modules(void)
-{
-	ModMap::iterator it;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
-
-	string feature;
-	GList *mods = NULL;
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), DICT_MODS)) {
-			sit =
-			    mainMgr->config->Sections.find((*it).
-							   second->
-							   Name());
-			ConfigEntMap & section = (*sit).second;
-			feature = ((entry = section.find("Feature")) !=
-				   section.end())? (*entry).
-			    second : (string) "";
-			if (!stricmp(feature.c_str(), "DailyDevotion")) {
-				mods =
-				    g_list_append(mods,
-						  (*it).second->Name());
-			}
-		}
-	}
-	return mods;
-}
-
-GList *backend_get_list_of_percom_modules(void)
-{
-	ModMap::iterator it;
-	GList *mods = NULL;
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), COMM_MODS)) {
-			//-- if driver is RawFiles                     
-			if ((*mainMgr->config->
-			     Sections[(*it).second->Name()].
-			     find("ModDrv")).second == "RawFiles") {
-				mods =
-				    g_list_append(mods,
-						  (*it).second->Name());
-			}
-		}
-	}
-	return mods;
-}
-
-/* returns a glist of module descriptions
- * modType - type of modules 
- */
-GList *backend_get_mod_description_list_SWORD(char *mod_type)
-{
-	ModMap::iterator it;
-	GList *mods = NULL;
-
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), mod_type)) {
-			mods =
-			    g_list_append(mods,
-					  (gchar *) (*it).second->
-					  Description());
-		}
-	}
-	return mods;
-}
 
 char *backend_get_module_description(char * modName)
 {
 	ModMap::iterator it;	//-- iteratior
 
-	it = mainMgr->Modules.find(modName);
-	if (it != mainMgr->Modules.end()) {
+	it = main_mgr->Modules.find(modName);
+	if (it != main_mgr->Modules.end()) {
 		return (*it).second->Description();
 	}
 	return NULL;
@@ -542,7 +317,7 @@ char *backend_get_module_description(char * modName)
 /***  returns path to sword modules must be freed by calling function  ***/
 char *backend_get_path_to_mods(void)
 {
-	return g_strdup(mainMgr->prefixPath);
+	return g_strdup(main_mgr->prefixPath);
 }
 
 /******************************************************************************
@@ -562,7 +337,7 @@ char *backend_get_path_to_mods(void)
  */
 char *backend_get_mod_about_info(char * modname)
 {
-	return g_strdup((char *) mainMgr->Modules[modname]->
+	return g_strdup((char *) main_mgr->Modules[modname]->
 			getConfigEntry("About"));
 }
 
@@ -571,8 +346,8 @@ int backend_get_module_page(char *module_name, char *module_type)
 	ModMap::iterator it;
 	int module_index = 0;
 
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
+	for (it = main_mgr->Modules.begin();
+	     it != main_mgr->Modules.end(); it++) {
 
 		if (!strcmp((*it).second->Type(), module_type)) {
 
@@ -587,141 +362,33 @@ int backend_get_module_page(char *module_name, char *module_type)
 
 int backend_module_is_locked(char *mod_name)
 {
-	SectionMap::iterator section;
-	ConfigEntMap::iterator entry;
-	DIR *dir;
-	char buf[256], conffile[256];
-	struct dirent *ent;
-	bool retval = false;
-
-	sprintf(buf, "%s", mainMgr->configPath);
-	dir = opendir(buf);
-	if (dir) {		//-- find and update .conf file
-		rewinddir(dir);
-		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "."))
-			    && (strcmp(ent->d_name, ".."))) {
-				sprintf(conffile, "%s/%s", buf,
-					ent->d_name);
-				SWConfig *myConfig =
-				    new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(mod_name);
-				if (section != myConfig->Sections.end()) {
-					entry =
-					    section->second.
-					    find("CipherKey");
-					if (entry !=
-					    section->second.end()) {
-						if (strlen
-						    (entry->second.
-						     c_str()) ==
-						    CIPHER_KEY_LEN)
-							retval = false;
-						else
-							retval = true;
-						delete myConfig;
-						break;
-					}
-				}
-				delete myConfig;
-			}
+	char *tmpbuf = (char *) main_mgr->Modules[mod_name]->
+				getConfigEntry("CipherKey");
+	if(tmpbuf != NULL) {
+		if (strlen(tmpbuf) == CIPHER_KEY_LEN) {
+		/* the key is the right length so we assume it is right */
+			return false;
 		}
+		else
+			return true;
 	}
-	closedir(dir);
-	return retval;
+	
 }
 
 char *backend_get_cipher_key(char *mod_name)
 {
-	SectionMap::iterator section;
-	ConfigEntMap::iterator entry;
-	DIR *dir;
-	char buf[256], conffile[256];
-	struct dirent *ent;
-	char *retval = NULL;
-
-	sprintf(buf, "%s", mainMgr->configPath);
-	dir = opendir(buf);
-	if (dir) {		//-- find and update .conf file
-		rewinddir(dir);
-		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "."))
-			    && (strcmp(ent->d_name, ".."))) {
-				sprintf(conffile, "%s/%s", buf,
-					ent->d_name);
-				SWConfig *myConfig =
-				    new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(mod_name);
-				if (section != myConfig->Sections.end()) {
-					entry =
-					    section->second.
-					    find("CipherKey");
-					if (entry !=
-					    section->second.end()) {
-						if (strlen
-						    (entry->second.
-						     c_str()) ==
-						    CIPHER_KEY_LEN)
-							retval = strdup((char*)entry->second.
-						     c_str());
-						else
-							retval = NULL;
-						
-						delete myConfig;
-						break;
-					}
-				}
-				delete myConfig;
-			}
-		}
-	}
-	closedir(dir);
-	return retval;
+	return strdup((char *) main_mgr->Modules[mod_name]->
+				getConfigEntry("CipherKey"));
 }
 
 int backend_has_cipher_tag(char *mod_name)
 {
-	SectionMap::iterator section;
-	ConfigEntMap::iterator entry;
-	DIR *dir;
-	char buf[256], conffile[256];
-	struct dirent *ent;
-	int retval = 0;
-
-	sprintf(buf, "%s", mainMgr->configPath);
-	dir = opendir(buf);
-	if (dir) {		//-- find and update .conf file
-		rewinddir(dir);
-		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "."))
-			    && (strcmp(ent->d_name, ".."))) {
-				sprintf(conffile, "%s/%s", buf,
-					ent->d_name);
-				SWConfig *myConfig =
-				    new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(mod_name);
-				if (section != myConfig->Sections.end()) {
-					entry =
-					    section->second.
-					    find("CipherKey");
-					if (entry !=
-					    section->second.end()) {
-						retval = 1;
-					}
-					else 
-						retval = 0;
-					delete myConfig;
-					break;
-				}
-				delete myConfig;
-			}
-		}
-	}
-	closedir(dir);
-	return retval;	
+	char *tmpbuf = (char *) main_mgr->Modules[mod_name]->
+				getConfigEntry("CipherKey");	
+	if(tmpbuf != NULL)
+		return 1;
+	else 
+		return 0;
 }
 
 
@@ -743,7 +410,7 @@ int backend_has_cipher_tag(char *mod_name)
  
 char *backend_get_module_text(char * mod_name, char * key)
 {
-	SWModule *mod = mainMgr->Modules[mod_name];
+	SWModule *mod = main_mgr->Modules[mod_name];
 	
 	if(mod) {
 		mod->SetKey(key);
@@ -770,7 +437,7 @@ char *backend_get_module_text(char * mod_name, char * key)
  
 int backend_check_for_module(char * mod_name)
 {
-	SWModule *mod = mainMgr->Modules[mod_name];
+	SWModule *mod = main_mgr->Modules[mod_name];
 	
 	if(mod) {
 		
@@ -798,10 +465,11 @@ int backend_check_for_module(char * mod_name)
 
 char *backend_get_striptext(char *mod_name, char *key)
 {
-	SWModule *mod = mainMgr->Modules[mod_name];
+	SWModule *mod = main_mgr->Modules[mod_name];
 	if (mod)
 		mod->SetKey(key);
 	else
 		return NULL;
 	return strdup((char *) mod->StripText());
 }
+

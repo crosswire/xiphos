@@ -28,7 +28,6 @@ extern "C" {
 	
 void gui_search_dialog_appbar_update(char percent, void *userData);
 void gui_do_dialog_search(void);
-void gui_add_to_found_list(gchar * result_text, gchar * module);
 	
 #ifdef __cplusplus
 }

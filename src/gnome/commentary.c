@@ -46,6 +46,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
+#include "main/key.h"
 
 
 COMM_DATA *cur_c;

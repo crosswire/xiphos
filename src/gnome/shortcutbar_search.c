@@ -35,6 +35,8 @@
 #include "gui/gnomesword.h"
 
 #include "main/shortcutbar.h"
+#include "main/module.h"
+#include "main/key.h"
 #include "main/sword.h"
 #include "main/search.h"
 #include "main/settings.h"
@@ -79,24 +81,6 @@ void gui_search_update(char percent, void *userData)
 	while (gtk_events_pending())
 		gtk_main_iteration();
 	printed = 0;
-	/*
-	char maxHashes = *((char *) userData);
-	float num;
-	char buf[80];
-	static char printed = 0;
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
-		gtk_progress_bar_update((GtkProgressBar*)progressbar_search,
-                                             percent);
-		printed++;
-	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	printed = 0;*/
 }
 /******************************************************************************
  * Name
@@ -143,117 +127,49 @@ void gui_set_search_label(gchar * mod_name)
  *   void
  */
 
-static void fill_search_results_clist(GList * glist, SEARCH_OPT * so)
+static void fill_search_results_clist(int finds)
 {
-	GList *tmp = NULL;
 	gchar *utf8str, buf[256];
+	gchar *tmpbuf;
+	const gchar *key_buf = NULL;
 	gint i = 0;
 
-	tmp = glist;
+	
 	gtk_clist_clear(GTK_CLIST(sv->clist));
-	while (tmp != NULL) {
-		gchar *buf2 = g_strdup((gchar *) tmp->data);
-		gchar *buf1 = buf2;
-		gchar *token = strtok(buf1, "|");
-		buf1 = token;
-		token = strtok(NULL, "|");
-		buf1 = token;
-		gtk_clist_insert(GTK_CLIST(sv->clist), i, &buf1);
-		++i;
-		g_free(buf2);
-		tmp = g_list_next(tmp);
+	
+	while((key_buf = get_next_result_key()) != NULL) {
+		tmpbuf = (gchar*)key_buf;
+		gtk_clist_insert(GTK_CLIST(sv->clist), i++, &tmpbuf);
+		
 	}
-	g_list_free(tmp);
+	
 	sprintf(settings.groupName, "%s", "Search Results");
-	sprintf(buf, "%d matches", i);
+	sprintf(buf, "%d matches", finds);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
 	showSBVerseList();
 
 	/* report results */
+	
 	gui_begin_html(widgets.html_search_report, TRUE);
 	sprintf(buf, HTML_START
 		"<body><center>%d Occurrences of <br><font color=\"%s\">"
 		"<b>\"%s\"</b></font><br>found in <font color=\"%s\">"
 		"<b>[%s]</b></font></center></body</html>",
-		i, settings.found_color, settings.searchText,
-		settings.bible_verse_num_color, so->module_name);
+		finds, settings.found_color, settings.searchText,
+		settings.bible_verse_num_color, settings.sb_search_mod);
 	utf8str =
 	    e_utf8_from_gtk_string(widgets.html_search_report, buf);
 	gui_display_html(widgets.html_search_report, utf8str,
 			 strlen(utf8str));
 	gui_end_html(widgets.html_search_report);
 
-	/* cleanup appbar progress */
-	//gnome_appbar_set_progress((GnomeAppBar *) widgets.appbar, 0);	
+	/* cleanup appbar progress */	
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search), 0.0);
-  	//gtk_progress_bar_set_text (progressbar_search, count_text);
 	/* display first item in list by selection row 0 */
 	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);
 }
 
-
-/******************************************************************************
- * Name
- *    fill_ss
- *
- * Synopsis
- *   #include "shortcutbar_search.h"
- *
- *    void fill_ss(SEARCH_SWORD *ss, SEARCH_OPT * so)
- *
- * Description
- *   fill search information structure to pass to do_search();
- *
- * Return value
- *   void
- */
-
-static void fill_ss(SEARCH_SWORD * ss, SEARCH_OPT * so)
-{
-	ss->modules = NULL;
-	ss->module_name = so->module_name;
-	ss->upper_bond = so->upper_bond;
-	ss->lower_bond = so->lower_bond;
-	ss->search_string = so->search_string;
-
-	ss->search_type = so->search_type;
-	ss->search_params = so->search_params;
-	ss->found_count = so->found_count;
-
-	ss->use_bonds = so->use_bonds;
-	ss->use_lastsearch_for_bonds = so->use_lastsearch_for_bonds;
-}
-
-
-/******************************************************************************
- * Name
- *   search_module 
- *
- * Synopsis
- *   #include "shortcutbar_search.h"
- *
- *   void search_module(SEARCH_OPT *so)	
- *
- * Description
- *   begin search and display results
- *
- * Return value
- *   
- */
-
-static void search_module(SEARCH_OPT * so)
-{
-	SEARCH_SWORD *ptr_ss, ss;
-
-	ptr_ss = &ss;
-	fill_ss(ptr_ss, so);
-	if (sblist)
-		g_list_free(sblist);
-	sblist = NULL;
-	sblist = do_search((gpointer *) ptr_ss);
-	fill_search_results_clist(sblist, so);
-}
 
 /******************************************************************************
  * Name
@@ -273,38 +189,49 @@ static void search_module(SEARCH_OPT * so)
 
 static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
-	p_so->module_name = settings.sb_search_mod;
-
-	p_so->use_bonds = GTK_TOGGLE_BUTTON(rrbUseBounds)->active;
-	if (p_so->use_bonds) {
-		/* read lower bounds entry and 
-		   set lower bounds for search */
-		p_so->lower_bond =
-		    gtk_entry_get_text(GTK_ENTRY(entryLower));
-		/* read upper bounds entry and 
-		   set upper bounds for search */
-		p_so->upper_bond =
-		    gtk_entry_get_text(GTK_ENTRY(entryUpper));
+	GString *str;
+	gint search_params, finds;
+	gchar *search_string, *search_module;
+	
+	search_module = settings.sb_search_mod;
+	p_so->module_name = search_module;
+	
+	clear_scope();
+	
+	if(GTK_TOGGLE_BUTTON(rrbUseBounds)->active) {		
+		clear_search_list();
+		str = g_string_new(" ");
+		g_string_sprintf(str,"%s - %s",
+			gtk_entry_get_text(GTK_ENTRY(entryLower)),
+			gtk_entry_get_text(GTK_ENTRY(entryUpper)));
+		set_range(str->str);
+		set_scope2range();
+		g_warning(str->str);
+		g_string_free(str,TRUE);		
 	}
+	
+	if(GTK_TOGGLE_BUTTON(rbLastSearch)->active)
+		set_scope2last_search();
 
-	p_so->use_lastsearch_for_bonds =
-	    GTK_TOGGLE_BUTTON(rbLastSearch)->active;
 
-
-	p_so->found_count = 0;
-	p_so->search_string =
+	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(entrySearch));
-	sprintf(settings.searchText, "%s", p_so->search_string);
+	sprintf(settings.searchText, "%s", search_string);
 
-	p_so->search_type = GTK_TOGGLE_BUTTON
+	settings.searchType = GTK_TOGGLE_BUTTON
 	    (rbRegExp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(rbPhraseSearch)->active ? -1 : -2;
-	settings.searchType = p_so->search_type;
-	/* get search params - case sensitive */
-	p_so->search_params = 
+	
+	search_params = 
 	    GTK_TOGGLE_BUTTON(ckbCaseSensitive)->active ? 0 : REG_ICASE;
-
-	search_module(p_so);
+			
+	//clear_search_list();
+	
+	finds = do_module_search(search_module, search_string, 
+			settings.searchType, search_params, FALSE);
+	
+	fill_search_results_clist(finds);
+	
 }
 
 
@@ -336,6 +263,8 @@ static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 		gtk_widget_hide(frame5);
 	}
 }
+
+
 /******************************************************************************
  * Name
  *   gui_create_shortcutbar_search 
