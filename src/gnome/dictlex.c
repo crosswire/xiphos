@@ -32,6 +32,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/html.h"
 
+#include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"

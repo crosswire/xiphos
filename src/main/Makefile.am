@@ -31,7 +31,9 @@ COMMON_SOURCE =  \
     settings.c \
     settings.h \
     shortcutbar.c \
-    shortcutbar.h 
+    shortcutbar.h \
+    sword.c \
+    sword.h 
     
 SPELLING_SOURCE =  \
     debug.h \

@@ -177,6 +177,85 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
+/******************************************************************************
+ * Name
+ *  get_module_key
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   gchar *get_module_key(void)	
+ *
+ * Description
+ *    returns module key
+ *
+ * Return value
+ *   gchar *
+ */ 
+
+static gchar *get_module_key(void)
+{
+	if (settings.havebible) {
+		switch (settings.whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (gchar *) settings.currentverse;
+			break;
+		case COMMENTARY_WINDOW:
+			return (gchar *) settings.comm_key;
+			break;
+		case DICTIONARY_WINDOW:
+			return (gchar *) settings.dictkey;
+			break;
+		case INTERLINEAR_WINDOW:
+			return (gchar *) settings.cvInterlinear;
+			break;
+		case BOOK_WINDOW:
+			return (gchar *) settings.book_key;
+			break;
+		}
+	}
+	return NULL;
+}
+
+
+/******************************************************************************
+ * Name
+ *  get_module_name
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   gchar *get_module_name(void)	
+ *
+ * Description
+ *    returns module name
+ *
+ * Return value
+ *   gchar *
+ */ 
+
+static gchar *get_module_name(void)
+{
+	if (settings.havebible) {
+		switch (settings.whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (gchar *) settings.MainWindowModule;
+			break;
+		case COMMENTARY_WINDOW:
+			return (gchar *) settings.CommWindowModule;
+			break;
+		case DICTIONARY_WINDOW:
+			return (gchar *) settings.DictWindowModule;
+			break;
+		case BOOK_WINDOW:
+			return (gchar *) settings.BookWindowModule;
+			break;
+		}
+	}
+	return NULL;
+}
+
+
 
 
 /******************************************************************************
