@@ -126,7 +126,9 @@ char *backend_get_sword_locale(void)
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	else {
 		OLD_CODESET = "iso8859-1";
+#ifdef DEBUG
 		g_warning("locale not found");
+#endif
 	}
 	return retval;
 }

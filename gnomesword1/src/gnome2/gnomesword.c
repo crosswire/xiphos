@@ -145,15 +145,24 @@ void frontend_display(void)
 	GString *str;
 	gchar *url;
 
-//#ifdef DEBUG	
+#ifdef DEBUG	
 	g_print("%s\n", _("Displaying GnomeSword"));
-//#endif
+#endif
 	gui_show_main_window();
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
 	
+	main_clear_viewer();
+	
+	gtk_widget_realize(widgets.html_dict);
 	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 					      settings.dictkey);
+	main_url_handler(url);
+	g_free(url);
+					
+	gtk_widget_realize(widgets.html_book);
+	url = g_strdup_printf("sword://%s/%d",settings.book_mod,
+					      settings.book_offset);
 	main_url_handler(url);
 	g_free(url);
 
@@ -220,11 +229,14 @@ void frontend_display(void)
 		settings.setup_canceled = FALSE;
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(
+					widgets.notebook_comm_book), 
+					0);
 	gtk_widget_grab_focus (sidebar.module_list);
 	
-//#ifdef DEBUG	
+#ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
-//#endif
+#endif
 }
 
 
@@ -286,8 +298,8 @@ void shutdown_frontend(void)
 	main_delete_sidebar_search_backend();
 	main_delete_paraellel_view();
 	
-//#ifdef DEBUG	
+#ifdef DEBUG	
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
-//#endif
+#endif
 
 }

@@ -404,24 +404,25 @@ void gui_create_parallel_page(void)
 	/*
 	 * parallel page 
 	 */
-	widgets.frame_parallel = gtk_frame_new(_("Parallel View"));
+/*	widgets.frame_parallel = gtk_frame_new(_("Parallel View"));
 	gtk_widget_show(widgets.frame_parallel);
 	gtk_frame_set_shadow_type(GTK_FRAME(widgets.frame_parallel),GTK_SHADOW_NONE);
+*/	
 	
-	
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_parallel_text),
-			  widgets.frame_parallel);
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
-	gtk_container_add(GTK_CONTAINER(widgets.frame_parallel),
-			  scrolled_window);
+	/*gtk_container_add(GTK_CONTAINER(widgets.frame_parallel),
+			  scrolled_window);*/
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);
 
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
+			  scrolled_window);
+			  
 	settings.dockedInt = TRUE;
 
 	widgets.html_parallel = gtk_html_new();
@@ -433,10 +434,10 @@ void gui_create_parallel_page(void)
 
 	label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK
-				    (widgets.notebook_parallel_text), 
+				    (widgets.notebook_bible_parallel), 
 				    1),
 				   label);
 							
