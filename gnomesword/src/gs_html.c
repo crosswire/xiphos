@@ -158,19 +158,19 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->greek, buf, 1);  
+			changcurdictModSWORD(p_gslexicon->greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->hebrew, buf, 1);  
+			changcurdictModSWORD(p_gslexicon->hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
-		changcurdictModSWORD("Packard", buf, 1);  
+		changcurdictModSWORD("Packard", buf);  
 		g_free(buf);
 	} 
 	
@@ -191,19 +191,19 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->greek, buf, 1);  
+			changcurdictModSWORD(p_gslexicon->greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->hebrew, buf, 1);  
+			changcurdictModSWORD(p_gslexicon->hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
-		changcurdictModSWORD("Packard", buf, 1);  
+		changcurdictModSWORD("Packard", buf);  
 		g_free(buf);
 	} else  if(*url == '*')   {
 		++url;
@@ -276,20 +276,22 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	GtkWidget *widget;
+	GtkWidget *widget, *entry;
 	gchar *buf;
 	GtkHTML *html;
 	
-	widget = lookup_widget(MainFrm, (gchar *) user_data);
-	
+	widget = lookup_widget(MainFrm, (gchar *) user_data);	
 	html = GTK_HTML(widget);
 	gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
-	if (buf)
-		dictSearchTextChangedSWORD(buf);
+	if (buf){
+		entry = lookup_widget(MainFrm,"dictionarySearchText"); 
+		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
+		//dictSearchTextChangedSWORD(buf);
+	}
 }
 
 /***************************************************************************************************
