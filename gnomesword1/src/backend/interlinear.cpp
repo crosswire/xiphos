@@ -19,9 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -67,7 +66,6 @@ gboolean backend_setup_interlinear(SETTINGS * s)
 {
 	ModMap::iterator it;	//-- iteratior     
 	SectionMap::iterator sit;	//-- iteratior
-	extern SETTINGS *settings;
 	bool retval = false;
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));

@@ -44,10 +44,9 @@
 #include "shortcutbar.h"
 #include "sword.h"
 #include "support.h"
+#include "settings.h"
 
 extern gint groupnum7;
-extern gchar *shortcutbarDir;
-extern SETTINGS *settings;
 
 list < string > sbfiles;
 
@@ -95,7 +94,7 @@ void backend_save_sb_iconsize(char * filename, char * large_icons)
     char conffile[256];
     int j = 0;
 
-    sprintf(conffile, "%s/%s", shortcutbarDir, filename);
+    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
     SWConfig sbInfo(conffile);
     sbInfo["Shortcut Info"]["Large Icon"] = large_icons;
     sbInfo.Save();
@@ -114,7 +113,7 @@ GList *backend_load_sb_group(char * filename, char * group_name,
     GList *list;
 
     list = NULL;
-    sprintf(conffile, "%s/%s", shortcutbarDir, filename);
+    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
 
     SWConfig sbInfo(conffile);
     sprintf(group_name, "%s",
@@ -147,7 +146,7 @@ void backend_save_sb_group(char * filename, char * group_name, int group_num,
     char buf[500], conffile[256], *item_url, *item_name;
     int j = 0, number_of_items;
 
-    sprintf(conffile, "%s/%s", shortcutbarDir, filename);
+    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
     unlink(conffile);
 
     SWConfig sbInfo(conffile);
@@ -159,10 +158,10 @@ void backend_save_sb_group(char * filename, char * group_name, int group_num,
     emap = sbconf->Sections["ROOT"];
 
     number_of_items =
-	gs_shortcut_model_get_num_items(settings->shortcut_bar, group_num);
+	gs_shortcut_model_get_num_items(settings.shortcut_bar, group_num);
 
     for (j = 0; j < number_of_items; j++) {
-	gs_shortcut_model_get_item_info(settings->shortcut_bar,
+	gs_shortcut_model_get_item_info(settings.shortcut_bar,
 					group_num,
 					j, &item_url, &item_name);
 	sprintf(buf, "branch%d", j);
@@ -225,7 +224,7 @@ void backend_setup_viewer(GtkWidget * html_widget)
 
     mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
     mod = NULL;
-    display = new GtkHTMLEntryDisp(html_widget, settings);
+    display = new GtkHTMLEntryDisp(html_widget, &settings);
 
     for (it = mgr->Modules.begin();
 	 it != mgr->Modules.end(); it++) {

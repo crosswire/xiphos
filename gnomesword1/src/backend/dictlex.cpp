@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * dictlex.cpp - support for Sword commentary modules
@@ -46,9 +45,6 @@ struct _backend_dl {
 	SWDisplay *dlDisp;
 	int num;
 };
-
-/***  externs  ***/
-extern SETTINGS *settings;
 
 /***  globals  ***/
 SWMgr *swmgrDL;
@@ -195,5 +191,3 @@ void backend_dictentryTextChangedDL(gchar * modname, char *mytext)
 		}
 	}
 }
-
-/******   end of file   ******/
