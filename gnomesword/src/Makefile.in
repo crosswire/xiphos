@@ -172,6 +172,8 @@ COMMON_SOURCE = \
     gs_editor_toolbar.h \
     gs_file.c \
     gs_file.h \
+    gs_find_dlg.c \
+    gs_find_dlg.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \
@@ -289,9 +291,9 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_detach_sb.$(OBJEXT) gs_editor.$(OBJEXT) \
 	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
 	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
-	gs_getinfo_dlg.$(OBJEXT) gs_gnomesword.$(OBJEXT) \
-	gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) gs_history.$(OBJEXT) \
-	gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
+	gs_find_dlg.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
+	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
+	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
 	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
 	gs_menu.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
 	gs_popup_cb.$(OBJEXT) gs_setup.$(OBJEXT) \
@@ -322,6 +324,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_find_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_getinfo_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gnomesword.Po $(DEPDIR)/gs_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gui_cb.Po $(DEPDIR)/gs_history.Po \
@@ -432,6 +435,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_toolbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_file.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_find_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_getinfo_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gui.Po@am__quote@
