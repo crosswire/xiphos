@@ -22,20 +22,26 @@ configure:1282: checking whether the C compiler (gcc  ) is a cross-compiler
 configure:1287: checking whether we are using GNU C
 configure:1315: checking whether gcc accepts -g
 configure:1347: checking for POSIXized ISC
-configure:1369: checking how to run the C preprocessor
-configure:1449: checking for ANSI C header files
-configure:1565: checking what warning flags to pass to the C compiler
-configure:1597: checking what language compliance flags to pass to the C compiler
-configure:1622: checking for pthread_create in -lpthread
-configure:1846: checking for gtk-config
-configure:1881: checking for GTK - version >= 1.2.0
-configure:1982: gcc -o conftest -g -O2 -Wall -Wunused  -I/usr/lib/glib/include -I/usr/X11R6/include   conftest.c -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
-configure:2085: checking for SmcSaveYourselfDone in -lSM
-configure:2133: checking for X11/SM/SMlib.h
-configure:2181: checking for XpmFreeXpmImage in -lXpm
-configure:2236: checking for c++
-configure:2268: checking whether the C++ compiler (c++  ) works
-configure:2284: c++ -o conftest   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.C  1>&5
-configure:2310: checking whether the C++ compiler (c++  ) is a cross-compiler
-configure:2315: checking whether we are using GNU C++
-configure:2343: checking whether c++ accepts -g
+configure:1370: checking for gcc
+configure:1483: checking whether the C compiler (gcc -g -O2 ) works
+configure:1499: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1525: checking whether the C compiler (gcc -g -O2 ) is a cross-compiler
+configure:1530: checking whether we are using GNU C
+configure:1558: checking whether gcc accepts -g
+configure:1590: checking how to run the C preprocessor
+configure:1670: checking for ANSI C header files
+configure:1786: checking what warning flags to pass to the C compiler
+configure:1818: checking what language compliance flags to pass to the C compiler
+configure:1843: checking for pthread_create in -lpthread
+configure:2067: checking for gtk-config
+configure:2102: checking for GTK - version >= 1.2.0
+configure:2203: gcc -o conftest -g -O2 -Wall -Wunused  -I/usr/lib/glib/include -I/usr/X11R6/include   conftest.c -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
+configure:2306: checking for SmcSaveYourselfDone in -lSM
+configure:2354: checking for X11/SM/SMlib.h
+configure:2402: checking for XpmFreeXpmImage in -lXpm
+configure:2457: checking for c++
+configure:2489: checking whether the C++ compiler (c++  ) works
+configure:2505: c++ -o conftest   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.C  1>&5
+configure:2531: checking whether the C++ compiler (c++  ) is a cross-compiler
+configure:2536: checking whether we are using GNU C++
+configure:2564: checking whether c++ accepts -g
