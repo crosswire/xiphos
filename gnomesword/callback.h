@@ -32,7 +32,6 @@ GtkWidget *create_AboutSword(void);
 GtkWidget *create_aboutmodules(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
-GtkWidget *create_listeditor(void);
 
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
 		gpointer user_data);
@@ -363,64 +362,7 @@ void
 	 on_about_this_module4_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
 
-	void
-	 on_clLElist_select_row(GtkCList * clist,
-				gint row,
-				gint column,
-				GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnLEup_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEleft_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEright_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_clLElist_select_row(GtkCList * clist,
-				gint row,
-				gint column,
-				GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-/*
-	void
-	 on_entryPreitem_changed(GtkEditable * editable,
-				 gpointer user_data);
-*/
-	void
-	 on_btnLEapplylistchanges_clicked(GtkButton * button,
-					  gpointer user_data);
-
-	void
-	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
+	
 
 //==============================================================================================
 

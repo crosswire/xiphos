@@ -52,7 +52,7 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "menustuff.h"
-#include "listeditor.h"
+#include "gs_listeditor.h"
 #include "noteeditor.h"
 
 /***********************************************************************************************
