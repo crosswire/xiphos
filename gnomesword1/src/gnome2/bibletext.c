@@ -27,7 +27,7 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif
 
@@ -501,7 +501,7 @@ GtkWidget *gui_create_bible_pane(void)
 	/*gtk_notebook_set_show_border((GtkNotebook *)notebook_text,
                                              TRUE);*/
 
-#ifdef USE_MOZILLA	
+#ifdef USE_GTKMOZEMBED	
 	
 /*	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
@@ -625,7 +625,7 @@ void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
 #else
 	gui_copy_html(widgets.html_text);
@@ -662,7 +662,7 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   		gpointer user_data)
 {
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -746,7 +746,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 	
 	mod_name = main_module_name_from_description(dict_mod_description);
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
