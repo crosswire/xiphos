@@ -121,15 +121,30 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
+	string lang, swfont;
+	SWMgr *Mgr;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
 
-	font = "-adobe-helvetica-*-*";
-	font = g_strdup(settings->greek_font);	
-	++font;
-	token=strtok(font,"-");
-	use_font = token;
-	use_font = strtok(NULL,"-");
-	//g_warning("use_font = %s",use_font);
+	Mgr = new SWMgr();	//-- create sword mgr
 	
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
+		ConfigEntMap &section = (*sit).second;
+		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
+	} 
+	g_warning(swfont.c_str());
+	if(strcmp(swfont.c_str(),"")){
+		use_font = (gchar*)swfont.c_str();
+		g_warning("have font");
+	}else{	
+		font = "-adobe-helvetica-*-*";
+		font = g_strdup(settings->default_font);	
+		++font;
+		token=strtok(font,"-");
+		use_font = token;
+		use_font = strtok(NULL,"-");
+	}
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	sprintf(tmpBuf,
@@ -156,12 +171,12 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
 		    strlen((const char *) imodule));
-	//g_warning((const char *) imodule);
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
+	delete Mgr;
 	return 0;
 }
 
@@ -393,8 +408,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gchar *utf8str, *use_font, *font, *token;
 	gint mybuflen, utf8len;
 	const gchar **end;
-
-	string lang;
+	string lang, swfont;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
@@ -405,25 +419,32 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap &section = (*sit).second;
-		//font = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
-	font = "-adobe-helvetica-*-*";
-	if (!stricmp(lang.c_str(), "") || 
+	g_warning(swfont.c_str());
+	if(strcmp(swfont.c_str(),"")){
+		use_font = (gchar*)swfont.c_str();
+		g_warning("have font");
+	}else{
+		font = "-adobe-helvetica-*-*";
+		if (!stricmp(lang.c_str(), "") || 
 				!stricmp(lang.c_str(), "en") || 
 					!stricmp(lang.c_str(), "de" )) {
-		font = g_strdup(settings->default_font);		
-	}else if (!stricmp(lang.c_str(), "grc")) {
+			font = g_strdup(settings->default_font);		
+		}else if (!stricmp(lang.c_str(), "grc")) {
 		font = g_strdup(settings->greek_font);		
-	}else if (!stricmp(lang.c_str(), "he")) {
+		}else if (!stricmp(lang.c_str(), "he")) {
 		font = g_strdup(settings->hebrew_font);		
-	}else{
+		}else{
 		font = g_strdup(settings->unicode_font);		
+		}
+		++font;
+		token=strtok(font,"-");
+		use_font = token;
+		use_font = strtok(NULL,"-");
+		g_warning("no font");
 	}
-	++font;
-	token=strtok(font,"-");
-	use_font = token;
-	use_font = strtok(NULL,"-");
 	//g_warning("use_font = %s",use_font);
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 
@@ -486,7 +507,6 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
-	//g_free(font);
 	delete Mgr;
 	return 0;
 }
@@ -500,7 +520,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	gint len;
 	gchar *utf8str, *use_font, *font, *token;
 	gint utf8len;
-	string lang;
+	string lang, swfont;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
@@ -512,24 +532,32 @@ char InterlinearDisp::Display(SWModule & imodule)
 	
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap &section = (*sit).second;
+		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
-	font = "-adobe-helvetica-*-*";
-	if (!stricmp(lang.c_str(), "") || 
-				!stricmp(lang.c_str(), "en") || 
-					!stricmp(lang.c_str(), "en" )) {
-		font = g_strdup(settings->default_font);		
-	}else if (!stricmp(lang.c_str(), "grc")) {
-		font = g_strdup(settings->greek_font);		
-	}else if (!stricmp(lang.c_str(), "he")) {
-		font = g_strdup(settings->hebrew_font);		
+	g_warning(swfont.c_str());
+	if(strcmp(swfont.c_str(),"")){
+		use_font = (gchar*)swfont.c_str();
+		g_warning("have font");
 	}else{
+		font = "-adobe-helvetica-*-*";
+		if (!stricmp(lang.c_str(), "") || 
+				!stricmp(lang.c_str(), "en") || 
+					!stricmp(lang.c_str(), "de" )) {
+			font = g_strdup(settings->default_font);		
+		}else if (!stricmp(lang.c_str(), "grc")) {
+		font = g_strdup(settings->greek_font);		
+		}else if (!stricmp(lang.c_str(), "he")) {
+		font = g_strdup(settings->hebrew_font);		
+		}else{
 		font = g_strdup(settings->unicode_font);		
+		}
+		++font;
+		token=strtok(font,"-");
+		use_font = token;
+		use_font = strtok(NULL,"-");
+		g_warning("no font");
 	}
-	++font;
-	token=strtok(font,"-");
-	use_font = token;
-	use_font = strtok(NULL,"-");
 	//g_warning("use_font = %s",use_font);
 	if(row == 6) 
 		row = 1;
