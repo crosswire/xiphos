@@ -34,6 +34,7 @@
 #include "gui/gnomesword.h"
 
 #include "main/settings.h"
+#include "main/xml.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
@@ -138,9 +139,9 @@ void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
 					  (widgets.notebook_comm));
 	sprintf(historylist[historyitems].verseref, "%s", ref);
 	sprintf(historylist[historyitems].textmod, "%s",
-		settings.MainWindowModule);
+		xml_get_value("modules", "text"));//settings.MainWindowModule);
 	sprintf(historylist[historyitems].commod, "%s",
-		settings.CommWindowModule);
+		xml_get_value("modules", "comm"));//settings.CommWindowModule);
 
 	++historyitems;
 	currenthistoryitem = historyitems;

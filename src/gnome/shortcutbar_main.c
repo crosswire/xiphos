@@ -348,6 +348,7 @@ static void load_group_shortcuts_from_list(gchar * path, gint group_num)
 					  item_name, icon_pixbuf);
 		g_free(item_url);
 		g_free(item_name);
+		g_free((gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 }
@@ -1771,5 +1772,3 @@ void gui_set_shortcutbar_porgram_start(void)
 		gui_attach_detach_shortcutbar();
 	}
 }
-
-

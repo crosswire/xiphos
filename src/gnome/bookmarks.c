@@ -860,10 +860,10 @@ static gchar *get_module_name(void)
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (gchar *) settings.MainWindowModule;
+			return (gchar *) xml_get_value("modules", "text");//settings.MainWindowModule;
 			break;
 		case COMMENTARY_WINDOW:
-			return (gchar *) settings.CommWindowModule;
+			return (gchar *) xml_get_value("modules", "comm");//settings.CommWindowModule;
 			break;
 		case DICTIONARY_WINDOW:
 			return (gchar *) settings.DictWindowModule;
@@ -1058,7 +1058,7 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[2])->text;
 		if (strlen(mod_name) < 3)
-			mod_name = settings.MainWindowModule;
+			mod_name = xml_get_value("modules", "text");//settings.MainWindowModule;
 		gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 		gtk_widget_set_sensitive(menu.new, FALSE);
 		gtk_widget_set_sensitive(menu.insert, FALSE);

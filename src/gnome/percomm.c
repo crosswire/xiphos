@@ -41,6 +41,7 @@
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"
+#include "main/xml.h"
  
 /******************************************************************************
  * global to this file only
@@ -191,7 +192,8 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	/*
 	 * remember new module name
 	 */
-	strcpy(settings.personalcommentsmod, p->mod_name);
+	settings.personalcommentsmod = p->mod_name;
+	xml_set_value("GnomeSword", "modules", "percomm",p->mod_name);
 	/*
 	 * remember page number
 	 */

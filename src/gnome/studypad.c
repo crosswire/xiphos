@@ -121,7 +121,8 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	gboolean was_editable;
 	int fd;
 
-	sprintf(settings.studypadfilename, "%s", filename);
+	settings.studypadfilename = filename;
+	xml_set_value("GnomeSword", "studypad", "lastfile", filename);
 
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
@@ -266,8 +267,9 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	int fd;
 
 	if (filename) {
-		sprintf(settings.studypadfilename, "%s", filename);
-
+		settings.studypadfilename = filename;
+		xml_set_value("GnomeSword", "studypad", "lastfile", 
+							filename);
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd == -1)
@@ -664,5 +666,3 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 					page_num), _("Study Pad"));
 	return TRUE;
 }
-
-

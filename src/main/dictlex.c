@@ -27,52 +27,9 @@
 
 
 #include "backend/sword.h"
-#include "backend/dictlex_.h"
 
 #include "main/dictlex.h"
 
-
-/******************************************************************************
- * Name
- *  set_dictlex_module 
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   int set_dictlex_module(char * mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */
- 
-int set_dictlex_module(char * mod_name)
-{
-	return backend_set_dictlex_module(mod_name);
-}
-
-/******************************************************************************
- * Name
- *   set_dictlex_key
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   int set_dictlex_key(char * key)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */
- 
-int set_dictlex_key(char * key)
-{
-	return backend_set_dictlex_key(key);
-}
 
 /******************************************************************************
  * Name
@@ -84,15 +41,15 @@ int set_dictlex_key(char * key)
  *   char *get_dictlex_key(int direction)
  *
  * Description
- *    
+ *    int manager, char * module_name, int direction
  *
  * Return value
  *   char *
  */
  
-char *get_dictlex_key(int direction)
+char *get_dictlex_key(int manager, char * module_name, int direction)
 {
-	return backend_get_dictlex_key(direction);
+	return backend_nav_module(manager, module_name, direction);
 }
 
 /******************************************************************************
@@ -111,50 +68,8 @@ char *get_dictlex_key(int direction)
  *   char *
  */
 
-char *get_dictlex_text(char * mod_name, char * key)
+char *get_dictlex_text(char * module_name, char * key)
 {
-	return backend_get_dictlex_text(mod_name, key);
+	return backend_get_module_text(2, module_name, key);
 }
 
-
-/******************************************************************************
- * Name
- *   get_first_key_viewdict
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   gchar *get_first_key_viewdict(void)
- *
- * Description
- *   
- *
- * Return value
- *   gchar *
- */
-
-gchar *get_first_dictlex_key(void)
-{
-	return backend_get_first_dictlex_key();
-}
-
-/******************************************************************************
- * Name
- *   get_next_key_viewdict
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   gchar *get_next_key_viewdict(void)
- *
- * Description
- *   
- *
- * Return value
- *   gchar *
- */
-
-gchar *get_next_dictlex_key(void)
-{
-	return backend_get_next_dictlex_key();	
-}

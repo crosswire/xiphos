@@ -182,7 +182,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		gint test;
 		gchar *key;
 
-		key = get_percomm_key();
+		key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
 		info->label_top = N_("Are you sure you want");
 		info->label_middle = N_("to delete the note for");

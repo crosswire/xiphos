@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bookmarks.h- functions to load and save bookmarks
+ * bookmarks.h- function to load old style bookmarks
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -33,4 +33,3 @@ GNode * backend_load_bookmarks(char *dir);
 #endif
 
 #endif
-
