@@ -2,8 +2,8 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 <!ENTITY legal SYSTEM "legal.xml">
 <!ENTITY app "GnomeSword2">
-<!ENTITY appversion "2.0 v0.9">
-<!ENTITY manrevision "2.0 v0.9">
+<!ENTITY appversion "2.0 v2.0.0">
+<!ENTITY manrevision "2.0 v2.0.0">
 <!ENTITY gnomesword "the GnomeSword Team">
 ]>
 <!--
@@ -110,8 +110,8 @@
 
     	 <revhistory>
         	 <revision>
-     		   <revnumber>GnomeSword2 Manual V2.0 v0.9</revnumber>
-     		   <date>30th Nov 2003</date>
+     		   <revnumber>GnomeSword2 Manual &manrevision;</revnumber>
+     		   <date>24th Dec 2003</date>
        		   <revdescription>
         		  <para role="author">&gnomesword;</para>
        	       		  <para role="publisher">&gnomesword;</para>
@@ -352,22 +352,22 @@
 			<sect3 id="gnomesword-toolbar-book">
 				<title>Bible Book Selector</title>
 				<para>		
-					Allows quick selecting of biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
-					<interface>Commentary Pane</interface>.Changes take immediate effect.
+					Allows quick selection of the Biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>. Changes take immediate effect.
 				</para>
 			</sect3>
 			<sect3 id="gnomesword-toolbar-chapter">
 				<title>Bible Chapter Selector</title>
 				<para>
-					Allows quick selecting of biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
-					<interface>Commentary Pane</interface>.Changes take immediate effect.
+					Allows quick selection of Biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>. Changes take immediate effect.
 				</para>
 			</sect3>
 			<sect3 id="gnomesword-toolbar-verse">
 				<title>Bible Verse Selector</title>
 				<para>
-					Allows quick selecting of biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
-					<interface>Commentary Pane</interface>.Changes take immediate effect.
+					Allows quick selection of Biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>. Changes take immediate effect.
 				</para>
 			</sect3>
 			<sect3 id="gnomesword-toolbar-summary">
@@ -378,7 +378,7 @@
 				</para>
 				<warning>
 					<para>
-						Please ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
+						Ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
 						will be displayed.
 					</para>
 				</warning>
@@ -414,8 +414,8 @@
    			 <para>
      			 	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
      				user can quickly and easily switch between the different Bible texts,
-     				commentaries,dictionaries and general books. Also, you can select and
-     				edit your bookmarks,view search results, view verse lists and view your
+     				commentaries, dictionaries and general books. You can also select and
+     				edit your bookmarks, view search results, view verse lists and view your
      				daily devotional book by simply clicking on the <guibutton>module</guibutton>
      				icon and select your selection.
    			</para>
@@ -439,8 +439,8 @@
 			        </screenshot>
 			</figure>
 		        <para>
-				Positioned to the right of the Shortcut bar is the Bible text dialog.Here All your different translations
-			        will be displayed for full viewing.When starting <application>GnomeSword2</application> either your default Bible translation or the translation
+				Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
+			        will be displayed for full viewing. When starting <application>GnomeSword2</application> either your default Bible translation or the translation
 			        last used will be displayed.
 			</para>
 
@@ -475,7 +475,7 @@
 				<itemizedlist>
 					 <listitem>
 						<para>
-							right-click in the	<interface> Bible Text Pane</interface>.In the popup menu choose
+							right-click in the <interface>Bible Text pane</interface>. In the popup menu choose
 							<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open current in a dialog Module
 							</guimenuitem></menuchoice>.
 						</para>
@@ -484,7 +484,7 @@
 						<para>
 							 Under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose <menuchoice>
 							<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
-							.Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
+							. Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
 							option.
 						</para>
 					</listitem>
@@ -498,7 +498,7 @@
 				<itemizedlist>
 					 <listitem>
 						<para>
-							right-click in the	<interface> Bible Text Pane</interface>.In the popup menu choose
+							right-click in the <interface>Bible Text pane</interface>.In the popup menu choose
 							<guimenuitem>About </guimenuitem> module name.
 						</para>
 					</listitem>
@@ -508,7 +508,7 @@
 			<sect3 id="gnomesword-bible-options">
 				<title>Module Options</title>
 				<para>
-					Most Bible translations have additional option which the user can enable or disable. These include:
+					Most Bible translations have additional options which the user can enable or disable. These include:
 				</para>
 				<itemizedlist>
 					 <listitem>
@@ -518,7 +518,7 @@
 					</listitem>
 					<listitem>
 						<para>
-							Strong Numbers
+							Strong's Numbers
 						</para>
 					</listitem>
 					<listitem>
@@ -544,7 +544,7 @@
 				</itemizedlist>
 				<note>
 					<para>
-						Translations in other Languages such as Greek or Hebrew have specific options which deal only with the specific language.
+						Translations in other languages such as Greek or Hebrew have specific options which deal only with the specific language.
 					</para>
 				</note>
 				<para>
@@ -553,7 +553,7 @@
 				<itemizedlist>
 					<listitem>
 						<para>
-							right-click in the <interface>Bible Text Pane</interface>.In the popup menu choose <guibutton>Module
+							right-click in the <interface>Bible Text pane</interface>. In the popup menu choose <guibutton>Module
 							Options</guibutton> and select the specific option.
 						</para>
 					</listitem>
@@ -562,7 +562,7 @@
 			<sect3 id="gnomesword-bible-dictionary">
 				<title>Specific Word Meanings</title>
 				<para>
-					In order to check the meaning of a specific word,simply click on the desired word you wish to lookup. The word should then highlight itself and the
+					In order to check the meaning of a specific word, simply click on the desired word you wish to lookup. The word should then highlight itself and the
 					explanation should be displayed, if available, in the <interface>Dictionary Pane</interface>. 
 				</para>
 			</sect3>
@@ -601,16 +601,16 @@
 			        </screenshot>
 			</figure>
 			<para>
-				The <interface>Commentary Pane</interface> is where the commentary modules are displayed.This provides easy
-				reading,reference and  access to different commentaries currently installed. The passage viewed by the 
-				<interface>Commentary Pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
-				Text Pane</interface>,so in order to change to a different passage commentary, simply select the desired passage
+				The <interface>Commentary pane</interface> is where the commentary modules are displayed. This provides easy
+				reading, reference and  access to different commentaries currently installed. The passage viewed by the 
+				<interface>Commentary pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
+				Text pane</interface>, so in order to change to a different passage commentary, simply select the desired passage
 				on the <interface>Toolbar</interface>.
 			</para>
 			<note>
 				<para>
-					By changing to passage settings on the <interface>Toolbar</interface>,the contents in the 
-					<interface>Bible Text Pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	
+					By changing to passage settings on the <interface>Toolbar</interface>, the contents in the 
+					<interface>Bible Text pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	
 				</para>
 			</note>
 			<sect3 id="gnomesword-commentary-about">
@@ -621,7 +621,7 @@
 				<itemizedlist>
 					 <listitem>
 						<para>
-							right-click in the	<interface>Commentary Pane</interface>.In the popup menu choose
+							right-click in the <interface>Commentary Pane</interface>. In the popup menu choose
 							<guimenuitem>About </guimenuitem> module name.
 						</para>
 					</listitem>
@@ -630,12 +630,12 @@
 			<sect3 id="gnomesword-commentary-headings">
 				<title>Commentary Headings.</title>	
 				<para>Most commentaries have additional headings which enable introductory information about the book and chapter currently
-					  being displayed in the <interface>Bible Text Pane</interface>. In order to view them, simply:
+					  being displayed in the <interface>Bible Text pane</interface>. In order to view them, simply:
 				</para>
 				<itemizedlist>
 					 <listitem>
 						<para>
-						  	right-click in the <interface>Commentary Pane</interface>.	In the popup menu choose <guimenuitem>File-&gt;Navigate
+						  	right-click in the <interface>Commentary Pane</interface>. In the popup menu choose <guimenuitem>File-&gt;Navigate
 							-&gt;Chapter Heading</guimenuitem>
 						</para>
 					</listitem>
@@ -660,7 +660,7 @@
    <sect1 id="gnomesword-studypad">
   	<title>Using The Studypad</title>
 	<para>
-		The Studypad can be open by simply choosing <guibutton>File-&gt;Open Studypad</guibutton>
+		The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>
 	</para>
 	<para>
 		This is what the Studypad typically looks like:
