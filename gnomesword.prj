@@ -146,8 +146,7 @@ module.include.files=\
 	src/gui/parallel_dialog.h\
 	src/gui/parallel_view.h\
 	src/gui/widgets.h\
-	src/gui/preferences_cell_renderer.h\
-	src/gnome2/shortcutbar.h
+	src/gui/preferences_cell_renderer.h
 
 module.source.name=.
 module.source.type=
@@ -266,14 +265,7 @@ module.doc.files=\
 	README\
 	TODO\
 	po/ChangeLog\
-	doc/head.txt\
-	doc/getting_started.txt\
-	doc/help/index.html\
-	doc/help/intro.html\
-	doc/help/search.html\
-	doc/help/search_sb.html\
-	doc/help/search_dialog.html\
-	doc/help/template.html
+	doc/getting_started.txt
 
 module.po.files=\
 	bg.po\
