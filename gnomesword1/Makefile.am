@@ -12,7 +12,7 @@ gnomesworddoc_DATA = \
 	    TODO
 
 
-gnomesworddocdir = $(prefix)/doc/${PACKAGE}
+gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
 
 install-data-local:
 	@$(NORMAL_INSTALL)
