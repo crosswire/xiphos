@@ -35,7 +35,7 @@
 
 #include "sw_viewcomm_dlg.h"
 #include "gs_viewcomm_dlg.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_html.h"
 
 /****************************************************************************************

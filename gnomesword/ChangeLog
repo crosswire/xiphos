@@ -1,3 +1,12 @@
+2002-02-23 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* changed sw_gnomesword.* to sw_sword.*
+	* changed gs_information_sw.* sw_information_dlg.*
+	* changed gs_html_editor.* to gs_editor.*
+	* added gs_gbs.* and sw_gbs.*
+	* added gs_getinfo_dlg.*
+
+
 2002-02-19 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* one more time - change look of search results - removed preview 

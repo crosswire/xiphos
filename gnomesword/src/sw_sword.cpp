@@ -56,7 +56,7 @@
 #include "gs_history.h"
 #include "sw_display.h"
 #include "gs_gui_cb.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "support.h"
 #include "gs_preferences_dlg.h"
 #include "gs_file.h"
@@ -1002,22 +1002,6 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 }
 
 //-------------------------------------------------------------------------------------------
-void navcurcomModSWORD(gint direction)	//-- navigate the current commentary module
-{
-	switch (direction) {
-	case 0:
-		(*curcomMod)--;
-		break;
-	case 1:
-		(*curcomMod)++;
-		break;
-	}
-	curcomMod->Error();	//-- clear any errors
-	curcomMod->Display();
-}
-
-
-//-------------------------------------------------------------------------------------------
 void savenoteSWORD(gchar *buf)	//-- save personal comments
 {
 	if(buf)
@@ -1273,20 +1257,24 @@ gchar *getmodkeySWORD(gint num)
 }
 
 /******************************************************************************
- *navcurcommModSWORD
+ *navcurcomModSWORD
  * 
  * 
 ******************************************************************************/
-void navcurcommModSWORD(gint backfoward)
+void navcurcomModSWORD(gint direction)	//-- navigate the current commentary module
 {
-	if (curcomMod) {
-		if (backfoward)
-			(*curcomMod)++;
-		else
-			(*curcomMod)--;
-		curcomMod->Display();
+	switch (direction) {
+	case 0:
+		(*curcomMod)--;
+		break;
+	case 1:
+		(*curcomMod)++;
+		break;
 	}
+	curcomMod->Error();	//-- clear any errors
+	curcomMod->Display();
 }
+
 
 /******************************************************************************
  * returns the name of the current commentary module

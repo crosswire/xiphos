@@ -49,7 +49,7 @@
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_shortcutbar.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "e-splash.h"
 #include "gs_html.h"
 
