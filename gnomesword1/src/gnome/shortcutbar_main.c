@@ -1417,7 +1417,7 @@ void gui_setup_shortcut_bar(void)
 	gtk_widget_show(VLbutton);
 
 	/*** create viewer group and add to shortcut bar ****/
-	html = gui_create_shortcutbar_viewer(vboxVL, &settings);
+	html = gui_create_shortcutbar_viewer(vboxVL);
 
 	
 	/* setup shortcut bar verse list sword stuff */
