@@ -35,7 +35,6 @@ extern "C" {
 	
 
 #include "main/search_dialog.h"
-#include "main/search.h"
 #include "main/settings.h"
 #include "main/xml.h"
  
@@ -107,6 +106,34 @@ void main_dialog_search_percent_update(char percent, void *userData)
 /****************************** dialog search *************************/
 /**********************************************************************/
 
+/******************************************************************************
+ * Name
+ *   set_search_global_option
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void set_search_global_option(gchar * option, gchar * choice)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void set_search_global_option(gchar * option, gboolean choice)
+{	
+	char *on_off;
+	SWMgr *mgr = backendSearch->get_main_mgr();
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	mgr->setGlobalOption(option, on_off);
+}
 
 
 /******************************************************************************

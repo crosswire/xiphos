@@ -328,6 +328,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
+	gui_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the commentary mod and key
 	if(pt->comm_showing)
@@ -335,6 +336,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 				pt->text_commentary_key);
 	else
 		main_display_book(pt->book_mod, pt->book_offset);
+	
 //	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
