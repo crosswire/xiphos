@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-GtkWidget *create_InfoBox(void);
+GtkWidget *gui_create_info_box(void);
 
 #ifdef __cplusplus
 }

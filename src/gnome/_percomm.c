@@ -44,6 +44,36 @@
 
 /******************************************************************************
  * Name
+ *  gui_set_percomm_frame_label
+ *
+ * Synopsis
+ *   #include "_percomm.h"
+ *
+ *   void gui_set_percomm_frame_label(void)	
+ *
+ * Description
+ *   sets percomm frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_percomm_frame_label(GtkWidget * frame, gchar *mod_name)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings.percomm_tabs)
+		gtk_frame_set_label(GTK_FRAME(frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(frame), mod_name);
+	
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_percomm_control
  *
  * Synopsis
@@ -63,7 +93,7 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 				gchar *mod_name, gint page_num)
 {
 	GtkWidget * vbox;
-	GtkWidget *frame12;
+//	GtkWidget *frame12;
 	GtkWidget *vboxPC;
 	GtkWidget *label85;
 	GtkWidget *html;
@@ -81,20 +111,20 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s,
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(s->notebook_percomm), vbox);
 	
-	frame12 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame12);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
-				 frame12,
+	pcecd->frame = gtk_frame_new(NULL);
+	gtk_widget_ref(pcecd->frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "pcecd->frame",
+				 pcecd->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame12);
-	gtk_box_pack_start(GTK_BOX(vbox), frame12, TRUE, TRUE, 0);
+	gtk_widget_show(pcecd->frame);
+	gtk_box_pack_start(GTK_BOX(vbox), pcecd->frame, TRUE, TRUE, 0);
 
 	vboxPC = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxPC);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxPC", vboxPC,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxPC);
-	gtk_container_add(GTK_CONTAINER(frame12), vboxPC);
+	gtk_container_add(GTK_CONTAINER(pcecd->frame), vboxPC);
 
 							
 	html = gtk_html_new();

@@ -180,7 +180,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	
 	/* if study pad file has changed since last save */
 	if (s->modifiedSP) {
-		msgbox = create_InfoBox();
+		msgbox = gui_create_info_box();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
 		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
