@@ -512,7 +512,7 @@ void on_btnCommSyn_clicked                  (GtkButton       *button,
 void on_btnCommPrint_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-	on_print_item_activate(NULL, NULL);
+	on_print_item_activate(NULL, "htmlCommentaries");
 }
 
 
