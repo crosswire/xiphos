@@ -149,9 +149,11 @@ GtkWidget *gui_create_about_sword(void)
 	textview1 = gtk_text_view_new ();
 	gtk_widget_show (textview1);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow26), textview1);
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview1), GTK_WRAP_WORD);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview1), GTK_WRAP_WORD);	
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview1),FALSE);
 	gtk_text_buffer_set_text (gtk_text_view_get_buffer 
-				(GTK_TEXT_VIEW (textview1)), about, -1);	
+				(GTK_TEXT_VIEW (textview1)), about, -1);
+	gtk_widget_set_sensitive(textview1,FALSE);
 	
 	label95 =
 	    gtk_label_new(_
