@@ -56,6 +56,7 @@
 #include "main/percomm.h"
 #include "main/settings.h"
 
+static GtkWidget *toolbars;
 /****************************************************************************** 
  * editor popup menu and call backs 
  */
@@ -638,6 +639,8 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 			gtk_widget_hide(ecd->toolbar_edit);
 		}
 	}
+	
+	gtk_widget_set_sensitive(toolbars,settings.editnote);
 	gtk_html_set_editable(GTK_HTML(ecd->html),
 			      GTK_CHECK_MENU_ITEM(menuitem)->active);
 
@@ -754,7 +757,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	guint tmp_key;
 	//GtkWidget *autoscroll = NULL;
 	GtkWidget *separator;
-	GtkWidget *toolbars;
 	GtkWidget *toolbars_menu;
 	GtkAccelGroup *toolbars_menu_accels;
 	GtkWidget *style_toolbar;
@@ -801,7 +803,9 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbars);
 	gtk_container_add(GTK_CONTAINER(pmEditor), toolbars);	
-	
+	if (ecd->personal_comments) {
+		gtk_widget_set_sensitive(toolbars,FALSE);		
+	}
 	toolbars_menu = gtk_menu_new();
 	gtk_widget_ref(toolbars_menu);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "toolbars_menu",

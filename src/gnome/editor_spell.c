@@ -828,7 +828,10 @@ void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);	
 	gtk_widget_show(spc_gui.window);
 
-	init_spell();
+	if(init_spell() == -1) {
+		gtk_widget_destroy(spc_gui.window);
+		return;
+	}
 }
 
 
