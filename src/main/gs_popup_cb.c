@@ -69,11 +69,11 @@ void on_undockInt_activate(GtkMenuItem *menuitem)
 {
 	if (settings.dockedInt) {
 		settings.dockedInt = FALSE;
-		gui_undock_interlinear_page(&settings);
+		gui_undock_interlinear_page();
 
 	} else {
 		settings.dockedInt = TRUE;
-		gui_btnDockInt_clicked(NULL, &settings);
+		gui_btnDockInt_clicked(NULL, NULL);
 	}
 }
 

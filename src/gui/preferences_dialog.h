@@ -26,9 +26,7 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
-void gui_setup_preferences_dialog(SETTINGS *s);
+void gui_setup_preferences_dialog(void);
 
 #ifdef __cplusplus
 }

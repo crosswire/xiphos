@@ -171,7 +171,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
 		buf = g_strdup(mybuf);
 		settings.whichwindow = 0;
 		modbuf = get_module_name();
-		gui_display_verse_list(modbuf, buf, &settings);
+		gui_display_verse_list(modbuf, buf);
 		g_free(buf);
 
 	}

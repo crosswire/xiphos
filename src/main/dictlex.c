@@ -200,7 +200,7 @@ void setup_dictlex(GList *mods)
 		dl->searchstring = NULL;
 		dl->find_dialog = NULL;	
 		dl->has_key = backend_module_is_locked(dl->modName);
-		gui_create_dictlex_pane(&settings, dl, count);
+		gui_create_dictlex_pane(dl, count);
 		popup = gui_create_dictlex_pm(dl, mods);
 		gnome_popup_menu_attach(popup, dl->html, NULL);
 		backend_new_dictlex_display(dl->html, dl->mod_num, &settings);

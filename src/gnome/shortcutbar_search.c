@@ -32,6 +32,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
+#include "main/settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
@@ -92,7 +93,7 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 	sprintf(buf,"%d matches",i);
 	gnome_appbar_set_status (GNOME_APPBAR (settings.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
-	showSBVerseList(&settings);
+	showSBVerseList();
 	
 	/* report results */
 	beginHTML(settings.htmlRP, TRUE);
@@ -543,7 +544,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
 
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), &settings);
+			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), NULL);
 	gtk_object_set_data(GTK_OBJECT(settings.app), "tooltips", tooltips);
 }
 
