@@ -28,11 +28,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+void createbookmarksBM(void);
 void loadbookmarks(GtkWidget *ctree_widget);
-void savebookmarks(GtkWidget *ctree_widget);	
-
-
+void savebookmarks(GtkWidget *ctree_widget);
 				
 #ifdef __cplusplus
 }

@@ -53,6 +53,7 @@ extern GdkBitmap *mask3;
 list <string> bmfiles;
 GtkCTreeNode *personal_node;
 
+
 void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTreeNode *parent)
 {
 	SectionMap::iterator sit;
@@ -89,7 +90,7 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GtkCTreeNode *node;
-	char conffile[256];
+	char conffile[500];
 	DIR *dir;
 	struct dirent *ent;
 	GtkCTree *ctree;
@@ -98,9 +99,12 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	gtk_clist_freeze(GTK_CLIST(ctree));
 	gtk_clist_clear(GTK_CLIST(ctree));
 	
-	sprintf(conffile,"%spersonal.conf", swbmDir);	
-	bookmarkInfo = new SWConfig(conffile);	
-	 
+	sprintf(conffile,"%sPersonal.conf", swbmDir);	
+	g_warning(conffile);
+	
+	if (access(conffile, F_OK) == -1) return;
+		
+	bookmarkInfo = new SWConfig(conffile);	 
 	if((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()){
 		if((eit = (*sit).second.begin()) != (*sit).second.end()){
 			char *token, *text[2];
@@ -125,7 +129,7 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	if(dir = opendir(swbmDir)){
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
+			if ((strcmp(ent->d_name, "Personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s%s",swbmDir,ent->d_name);
 				bookmarkInfo = new SWConfig(conffile);
 				if ((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()) {
@@ -228,6 +232,33 @@ void savebookmarks(GtkWidget *ctree_widget)
     /***************************************************************************/	
 }
 
+
+/******************************************************************************
+ * load bookmarks file into listeditor
+ *****************************************************************************/
+static gint
+conv_oldmenubookmarks(void)
+{
+	gint retval=0;
+	
+	return retval;
+}
+
+
+
+/******************************************************************************
+ * no bookmark dir found on startup
+ ******************************************************************************/
+void 
+createbookmarksBM(void)
+{
+	gint oldbookmarks;
+	
+	oldbookmarks = conv_oldmenubookmarks();
+	if(oldbookmarks)
+		return;
+	
+}
 
 
 
