@@ -48,6 +48,7 @@
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 
 using namespace sword;
   
@@ -175,8 +176,9 @@ void backend_init(void)
 	backend_init_language_map();
 	/* create sword mgrs */
 	backend_init_managers();
-	
-	init_lists();
+	backend = new SwordMain();
+	backend->init_SWORD();
+	main_init_lists();
 	backend_setup_treekey();
 	backend_setup_display_mgr();
 }
@@ -204,8 +206,11 @@ void backend_shutdown(int save_properties)
 	//main_delete_displays();
 	if(sw.entryDisplay)
 		delete sw.entryDisplay;
+	if(sw.dictDisplay)
+		delete sw.dictDisplay;
 	/* delete Sword managers */
 	backend_delete_managers();
+	delete backend;
 	g_print("%s\n", _("SWORD is shutdown"));
 }
 

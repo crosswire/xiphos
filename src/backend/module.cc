@@ -46,6 +46,7 @@
 #include "backend/key.hh"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 
 #include "main/display.hh"
 #include "main/lists.h"
@@ -576,7 +577,8 @@ char *backend_get_search_results_text(char *mod_name, char *key)
 
 void backend_get_module_lists(MOD_LISTS * mods)
 {
-	ModMap::iterator it;
+	backend->init_lists(mods);
+	/*	ModMap::iterator it;
 	for (it = sw.module_mgr->Modules.begin(); it != 
 				sw.module_mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
@@ -631,7 +633,7 @@ void backend_get_module_lists(MOD_LISTS * mods)
 		}
 		
 	}	
-	
+*/	
 }
 
 /******************************************************************************
@@ -1462,7 +1464,7 @@ int backend_set_module(int manager, char *module_name)
 			return 1;
 		break;
 	case DICT_MGR:
-		sw.dict_mod = sw.dict_mgr->Modules[module_name];
+		sw.dict_mod = sw.display_mgr->Modules[module_name];
 		if (sw.dict_mod)
 			return 1;
 		break;
