@@ -318,8 +318,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
 			     main_get_module_description(dlg->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 525, 306);
-	gtk_window_set_policy(GTK_WINDOW(dlg->dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dlg->dialog), TRUE);
 
 	vbox_dialog = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dialog);

@@ -6,10 +6,12 @@ gnomesword.desktop.in
 # shared source files
 src/main/lists.cc
 src/main/sidebar.cc
+src/main/tab_history.c
 # editor Source files
 src/editor/editor.c
 src/editor/editor-control.c
 src/editor/editor_menu.c
+src/editor/popup.c
 src/editor/replace.c
 src/editor/search.c
 src/editor/spell.c
@@ -38,7 +40,6 @@ src/gnome2/gbs_dialog.c
 src/gnome2/gnomesword.c
 src/gnome2/gui.c
 src/gnome2/hints.c
-src/gnome2/history.c
 src/gnome2/html.c
 src/gnome2/main_menu.c
 src/gnome2/main_window.c

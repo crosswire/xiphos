@@ -231,12 +231,8 @@ gnomesword.spec
 echo
 echo "Summary of GnomeSword configuration:"
 echo
-
   echo "Building for Gnome:  2.x"  
 
-  echo "CFLAGS:   $CFLAGS"
-  echo "CPPFLAGS: @CPPFLAGS"
-  echo "CXXFLAGS: $CXXFLAGS"
 if test "x$have_speller" = xyes; then
   echo "Spellchecking:         enabled"
   echo "using:                      $speller"
@@ -244,27 +240,29 @@ else
   echo "Spellchecking:         disabled"
 fi
 
-if test "x$sword_cvs" = xyes; then
-  echo "Sword CVS:             enabled"
-fi
-
-if test "x$ac_static_sword" = xYES; then
-  echo "Static link to Sword:           enabled"
-else  
-  echo "Dynamic link to Sword:          enabled"
-fi
-echo "Sword libs              $LIB_SWORD"
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
-fi
+  if test "x$have_gtkhtml" = xyes; then
+    echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
+  fi
 
-if test "x$have_gtkhtml" = xyes; then
-  echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
-fi
+  if test "x$moz_embed" = xyes; then
+    echo "use mozilla:              enabled"
+    echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
+  fi
+  if test "x$sword_cvs" = xyes; then
+    echo "Sword CVS:             enabled"
+  fi
 
-if test "x$moz_embed" = xyes; then
-  echo "use mozilla:              enabled"
-  echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
-fi
+  if test "x$ac_static_sword" = xYES; then
+    echo "Static link to Sword:           enabled"
+  else  
+    echo "Dynamic link to Sword:          enabled"
+  fi
+  echo "Sword libs              $LIB_SWORD"
+  echo "CFLAGS:   $CFLAGS"
+  echo "CPPFLAGS: @CPPFLAGS"
+  echo "CXXFLAGS: $CXXFLAGS"
   echo "install directory:     ${prefix}/bin"
   echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
+fi

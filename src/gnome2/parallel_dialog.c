@@ -394,8 +394,7 @@ GtkWidget *gui_create_parallel_dialog(void)
 			     title);
 	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel), 657,
 				    361);
-	gtk_window_set_policy(GTK_WINDOW(dialog_parallel), TRUE,
-			      TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_parallel), TRUE);
 
 	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog_parallel),

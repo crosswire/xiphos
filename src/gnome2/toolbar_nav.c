@@ -30,7 +30,6 @@
 
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/history.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -40,6 +39,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/tab_history.h"
 #include "main/url.hh"
 #include "main/xml.h"
 
@@ -180,7 +180,7 @@ static void on_entry_activate(GtkEntry * entry, gpointer data)
 static void on_button_back_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	gui_navigate_history(widgets.app, 0);
+	main_navigate_tab_history(0); //gui_navigate_history(widgets.app, 0);
 }
 
 /******************************************************************************
@@ -202,7 +202,7 @@ static void on_button_back_clicked(GtkButton * button,
 static void on_button_forward_clicked(GtkButton * button,
 				      gpointer user_data)
 {
-	gui_navigate_history(widgets.app, 1);
+	main_navigate_tab_history(1); //gui_navigate_history(widgets.app, 1);
 }
 
 static void on_comboboxentry4_changed(GtkComboBox * combobox,

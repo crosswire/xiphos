@@ -353,12 +353,12 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 			 G_CALLBACK(button_press_event), splash);
 
 	//gtk_window_set_decorated(GTK_WINDOW(splash), FALSE);
-	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER);
-	gtk_window_set_policy(GTK_WINDOW(splash), FALSE, FALSE, FALSE);
+	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER); 
+	gtk_window_set_resizable(GTK_WINDOW(splash), FALSE);
+	//gtk_window_set_policy(GTK_WINDOW(splash), FALSE, FALSE, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(splash), image_width,
 				    image_height+20);
 	gtk_window_set_title(GTK_WINDOW(splash), _("Powered by the SWORD Project"));
-
 }
 
 /**

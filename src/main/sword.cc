@@ -744,10 +744,10 @@ void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
  *   #include "main/sword.h.h"
  *
  *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
- *		    gchar * text, gchar *key, gchar * type, gboolean show_key)
+ *		    gchar * text, gchar *key, gchar * type)
  *
  * Description
- *   display information in the information viewer
+ *   display information in the information previewer
  *
  * Return value
  *   void
@@ -760,14 +760,9 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	//gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 
-	/* setup gtkhtml widget */
-	//was_editable = gtk_html_get_editable(html);
-	//if (was_editable)
-	//	gtk_html_set_editable(html, FALSE);
 
 	g_string_printf(tmp_str,
 		HTML_START
@@ -778,29 +773,34 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	str = g_string_new(tmp_str->str);
 	if(type) {
 		if(!strcmp(type,"n")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s<HR></font><br>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if(!strcmp(type,"x")) {
-			g_string_printf(tmp_str,"<font color=\"grey\">%s<HR></font><br>",
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s<HR></font><br>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
 		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Strongs"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
 		if(!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s: %s<HR></font><br>",
 					_("Morphology"),key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
 	
 	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
-		g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+		g_string_printf(tmp_str,
+			"<font color=\"grey\">%s: %s<HR></font><br>",
 				_("Strongs"),key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str, 
@@ -810,7 +810,8 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 		
-		g_string_printf(tmp_str,"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+		g_string_printf(tmp_str,
+			"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
 					_("Morphology"),morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
@@ -834,7 +835,6 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
-	//gtk_html_set_editable(html, was_editable);
 	
 	free_font(mf);
 	g_string_free(str, TRUE);
@@ -1190,6 +1190,9 @@ void main_display_bible(const char * mod_name, const char * key)
 		g_free(val_key);			
 	}
 	
+#ifdef DEBUG 
+	g_print("mod_name = %s\n",mod_name);	
+#endif
 	if(settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,

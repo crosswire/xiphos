@@ -22,6 +22,9 @@
 #ifndef __MAIN_MENU__H_
 #define __MAIN_MENU__H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
@@ -49,4 +52,7 @@ void on_search_activate(GtkMenuItem * menuitem,
 void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
