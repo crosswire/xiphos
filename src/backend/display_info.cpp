@@ -41,9 +41,9 @@
  * Text or Commentary dialog
  */
 
-static SWDisplay *display;      /* to display modules in view dialog */
-static SWMgr *mgr;              /* sword mgr for view comm dialog */
-static SWModule *mod;           /* module for view text dialog */
+static SWDisplay *display;	/* to display modules in view dialog */
+static SWMgr *mgr;		/* sword mgr for view comm dialog */
+static SWModule *mod;		/* module for view text dialog */
 
 extern SETTINGS *settings;
 
@@ -53,15 +53,15 @@ extern SETTINGS *settings;
  ******************************************************************************/
 void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)
 {
-        ModMap::iterator it;
+	ModMap::iterator it;
 
-        it = mgr->Modules.find(modName);        //-- find module we want to use
-        if (it != mgr->Modules.end()) {
+	it = mgr->Modules.find(modName);	//-- find module we want to use
+	if (it != mgr->Modules.end()) {
 
-                mod = (*it).second;     //-- set curdictMod to new choice
-                mod->SetKey(newkey);
-                mod->Display(); //-- display new dict
-        }
+		mod = (*it).second;	//-- set curdictMod to new choice
+		mod->SetKey(newkey);
+		mod->Display();	//-- display new dict
+	}
 }
 
 /**************************************************************************
@@ -70,19 +70,19 @@ void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)
  **************************************************************************/
 void backend_display_info_setup(GtkWidget * text)
 {
-        ModMap::iterator it;    //-- iteratior     
-        SectionMap::iterator sit;       //-- iteratior        
+	ModMap::iterator it;	//-- iteratior     
+	SectionMap::iterator sit;	//-- iteratior        
 
-        mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-        mod = NULL;
-        display = new GtkHTMLEntryDisp(text, settings);
-        for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
-                if (!strcmp
-                    ((*it).second->Type(), "Lexicons / Dictionaries")) {
-                        mod = (*it).second;
-                        mod->Disp(display);
-                }
-        }
+	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	mod = NULL;
+	display = new GtkHTMLEntryDisp(text, settings);
+	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
+		if (!strcmp
+		    ((*it).second->Type(), "Lexicons / Dictionaries")) {
+			mod = (*it).second;
+			mod->Disp(display);
+		}
+	}
 }
 
 /******************************************************************************
@@ -90,9 +90,9 @@ void backend_display_info_setup(GtkWidget * text)
  ******************************************************************************/
 void backend_dispaly_info_shutdown(void)
 {
-        delete mgr;
-        if (display)
-                delete display;
+	delete mgr;
+	if (display)
+		delete display;
 }
 
 /******************************************************************************
@@ -100,7 +100,8 @@ void backend_dispaly_info_shutdown(void)
  ******************************************************************************/
 void backend_dispaly_info_change_key(gchar * newkey)
 {
-        mod->SetKey(newkey);
-        mod->Display();
+	mod->SetKey(newkey);
+	mod->Display();
 }
-tb63
+
+/******  end of file  ******/
