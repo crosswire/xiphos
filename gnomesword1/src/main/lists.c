@@ -24,156 +24,299 @@
 #endif
 
 #include <glib-1.2/glib.h>
+#include <string.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
 
 #include "backend/sword.h"
-	
+#include "backend/mgr.hh"
+#include "backend/module.hh"
+#include "backend/key.hh"
+
 /******************************************************************************
  *  lists to keep for the life of the program
  *   
  */
 typedef struct _module_lists MOD_LISTS;
 struct _module_lists {
-	GList	
-	*biblemods,
-	*commentarymods,
-	*dictionarymods, 
-	*bookmods, 
-	*percommods,
-	*devotionmods, 
-	*text_descriptions, 
-	*dict_descriptions,
-	*comm_descriptions,
-	*book_descriptions,
-	*bible_books,
-	*options;	
+	GList
+	    * biblemods,
+	    *commentarymods,
+	    *dictionarymods,
+	    *bookmods,
+	    *percommods,
+	    *devotionmods,
+	    *text_descriptions,
+	    *dict_descriptions,
+	    *comm_descriptions,
+	    *book_descriptions, *bible_books, *options;
 };
 static MOD_LISTS *mod_lists;
 static MOD_LISTS mods;
 
-
-GList * get_list(gint type)
+GList *get_list(gint type)
 {
-	switch(type) {
-		case TEXT_LIST:
-			return mod_lists->biblemods;
+	switch (type) {
+	case TEXT_LIST:
+		return mod_lists->biblemods;
 		break;
-		case TEXT_DESC_LIST:
-			return mod_lists->text_descriptions;
+	case TEXT_DESC_LIST:
+		return mod_lists->text_descriptions;
 		break;
-		case COMM_LIST:
-			return mod_lists->commentarymods;
+	case COMM_LIST:
+		return mod_lists->commentarymods;
 		break;
-		case COMM_DESC_LIST:
-			return mod_lists->comm_descriptions;
+	case COMM_DESC_LIST:
+		return mod_lists->comm_descriptions;
 		break;
-		case DICT_LIST:
-			return mod_lists->dictionarymods;
+	case DICT_LIST:
+		return mod_lists->dictionarymods;
 		break;
-		case DICT_DESC_LIST:
-			return mod_lists->dict_descriptions;
+	case DICT_DESC_LIST:
+		return mod_lists->dict_descriptions;
 		break;
-		case GBS_LIST:
-			return mod_lists->bookmods;
+	case GBS_LIST:
+		return mod_lists->bookmods;
 		break;
-		case GBS_DESC_LIST:
-			return mod_lists->book_descriptions;
+	case GBS_DESC_LIST:
+		return mod_lists->book_descriptions;
 		break;
-		case PERCOMM_LIST:
-			return mod_lists->percommods;
+	case PERCOMM_LIST:
+		return mod_lists->percommods;
 		break;
-		case BOOKS_LIST:
-			return mod_lists->bible_books;
+	case BOOKS_LIST:
+		return mod_lists->bible_books;
 		break;
-		case OPTIONS_LIST:
-			return mod_lists->options;
+	case OPTIONS_LIST:
+		return mod_lists->options;
 		break;
-		case DEVOTION_LIST:
-			return mod_lists->devotionmods;
+	case DEVOTION_LIST:
+		return mod_lists->devotionmods;
 		break;
 	}
 	return NULL;
 }
 
+
+
 void init_lists(void)
-{	
-	guint  number_mods = 0;
+{
+	guint number_mods = 0;
+	char *buf = NULL;
+	NAME_TYPE *nt;
+
 	mod_lists = &mods;
 	/* set glist to null */
 	mods.biblemods = NULL;
 	mods.commentarymods = NULL;
 	mods.dictionarymods = NULL;
 	mods.percommods = NULL;
-	mods.bookmods = NULL;	
+	mods.bookmods = NULL;
 	mods.devotionmods = NULL;
 	mods.options = NULL;
 	mods.text_descriptions = NULL;
 	mods.comm_descriptions = NULL;
 	mods.dict_descriptions = NULL;
-	mods.book_descriptions = NULL;	
+	mods.book_descriptions = NULL;
 	mods.bible_books = NULL;
-	
+
 	settings.havebible = FALSE;
 	settings.havecomm = FALSE;
 	settings.havedict = FALSE;
 	settings.havebook = FALSE;
 	settings.havepercomm = FALSE;
-	
-	mods.bible_books = backend_get_books();
-	mods.options = backend_get_global_options_list();
-	
-	mods.biblemods = backend_get_list_of_mods_by_type(TEXT_MODS);
-	if(mods.biblemods != NULL) 
+
+	backend_new_module_mgr();
+
+	while ((buf = backend_get_next_book_of_bible()) != NULL) {
+		mods.bible_books = g_list_append(mods.bible_books,
+						 (char *) buf);
+	}
+
+	backend_set_global_option_iterator();
+	while ((buf = backend_get_next_global_option()) != NULL) {
+		mods.options =
+		    g_list_append(mods.options, (char *) buf);
+	}
+
+	backend_set_module_iterators();
+	while ((nt = backend_get_next_module_name()) != NULL) {
+		switch (nt->type) {
+		case TEXT_TYPE:
+			mods.biblemods =
+			    g_list_append(mods.biblemods,
+					  (char *) nt->name);
+			break;
+		case COMMENTARY_TYPE:
+			mods.commentarymods =
+			    g_list_append(mods.commentarymods,
+					  (char *) nt->name);
+			break;
+		case DICTIONARY_TYPE:
+			mods.dictionarymods =
+			    g_list_append(mods.dictionarymods,
+					  (char *) nt->name);
+			break;
+		case BOOK_TYPE:
+			mods.bookmods =
+			    g_list_append(mods.bookmods,
+					  (char *) nt->name);
+			break;
+		}
+	}
+
+	backend_set_module_iterators();
+	while ((nt = backend_get_next_module_description()) != NULL) {
+		switch (nt->type) {
+		case TEXT_TYPE:
+			mods.text_descriptions =
+			    g_list_append(mods.text_descriptions,
+					  (char *) nt->name);
+			break;
+		case COMMENTARY_TYPE:
+			mods.comm_descriptions =
+			    g_list_append(mods.comm_descriptions,
+					  (char *) nt->name);
+			break;
+		case DICTIONARY_TYPE:
+			mods.dict_descriptions =
+			    g_list_append(mods.dict_descriptions,
+					  (char *) nt->name);
+			break;
+		case BOOK_TYPE:
+			mods.book_descriptions =
+			    g_list_append(mods.book_descriptions,
+					  (char *) nt->name);
+			break;
+		}
+	}
+
+	backend_set_module_iterators();
+	while ((buf = backend_get_next_percom_name()) != NULL) {
+		if (!strcmp(buf, "+"))
+			continue;
+		mods.percommods = g_list_append(mods.percommods,
+						(char *) buf);
+	}
+
+	backend_set_module_iterators();
+	while ((buf = backend_get_next_devotion_name()) != NULL) {
+		if (!strcmp(buf, "+"))
+			continue;
+		mods.devotionmods = g_list_append(mods.devotionmods,
+						  (char *) buf);
+	}
+
+	backend_delete_module_mgr();
+
+	if (mods.biblemods != NULL)
 		settings.havebible = TRUE;
 	number_mods = g_list_length(mods.biblemods);
 	g_print("\nNumber of Text modules = %d\n", number_mods);
-	
-	mods.commentarymods = backend_get_list_of_mods_by_type(COMM_MODS);
-	if(mods.commentarymods != NULL) 
+
+	if (mods.commentarymods != NULL)
 		settings.havecomm = TRUE;
 	number_mods = g_list_length(mods.commentarymods);
 	g_print("Number of Commentary modules = %d\n", number_mods);
-	
-	mods.dictionarymods = backend_get_list_of_mods_by_type(DICT_MODS);
-	if(mods.dictionarymods != NULL) 
+
+	if (mods.dictionarymods != NULL)
 		settings.havedict = TRUE;
 	number_mods = g_list_length(mods.dictionarymods);
 	g_print("Number of Dict/lex modules = %d\n", number_mods);
-	
-	mods.bookmods = backend_get_list_of_mods_by_type(BOOK_MODS);
-	if(mods.bookmods != NULL) 
+
+	if (mods.bookmods != NULL)
 		settings.havebook = TRUE;
 	number_mods = g_list_length(mods.bookmods);
 	g_print("Number of Book modules = %d\n", number_mods);
-	
-	mods.percommods = backend_get_list_of_percom_modules();
-	if(mods.percommods != NULL) 
+
+	if (mods.percommods != NULL)
 		settings.havepercomm = TRUE;
 	number_mods = g_list_length(mods.percommods);
-	g_print("Number of Percomm modules = %d\n\n", number_mods);
-	
-	mods.devotionmods = backend_get_list_of_devotion_modules();
-	mods.text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
-	mods.comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
-	mods.dict_descriptions = backend_get_mod_description_list_SWORD(DICT_MODS);
-	mods.book_descriptions = backend_get_mod_description_list_SWORD(BOOK_MODS);
+	g_print("Number of Percomm modules = %d\n", number_mods);
+
+	number_mods = g_list_length(mods.devotionmods);
+	g_print("Number of Devotion modules = %d\n\n", number_mods);
 }
 
 void shutdown_list(void)
-{	
+{
 	/* free lists */
-	g_list_free(mod_lists->biblemods);
-	g_list_free(mod_lists->commentarymods);
-	g_list_free(mod_lists->dictionarymods);
-	g_list_free(mod_lists->bookmods);
-	g_list_free(mod_lists->percommods);
-	g_list_free(mod_lists->text_descriptions);
-	g_list_free(mod_lists->dict_descriptions);
-	g_list_free(mod_lists->comm_descriptions);
-	g_list_free(mod_lists->book_descriptions);
+	while (mod_lists->options != NULL) {
+		g_free((char *) mod_lists->options->data);
+		mod_lists->options = g_list_next(mod_lists->options);
+	}
 	g_list_free(mod_lists->options);
+
+	while (mod_lists->biblemods != NULL) {
+		g_free((char *) mod_lists->biblemods->data);
+		mod_lists->biblemods =
+		    g_list_next(mod_lists->biblemods);
+	}
+	g_list_free(mod_lists->biblemods);
+
+	while (mod_lists->commentarymods != NULL) {
+		g_free((char *) mod_lists->commentarymods->data);
+		mod_lists->commentarymods =
+		    g_list_next(mod_lists->commentarymods);
+	}
+	g_list_free(mod_lists->commentarymods);
+
+	while (mod_lists->dictionarymods != NULL) {
+		g_free((char *) mod_lists->dictionarymods->data);
+		mod_lists->dictionarymods =
+		    g_list_next(mod_lists->dictionarymods);
+	}
+	g_list_free(mod_lists->dictionarymods);
+
+	while (mod_lists->bookmods != NULL) {
+		g_free((char *) mod_lists->bookmods->data);
+		mod_lists->bookmods = g_list_next(mod_lists->bookmods);
+	}
+	g_list_free(mod_lists->bookmods);
+
+	while (mod_lists->percommods != NULL) {
+		g_free((char *) mod_lists->percommods->data);
+		mod_lists->percommods =
+		    g_list_next(mod_lists->percommods);
+	}
+	g_list_free(mod_lists->percommods);
+
+	while (mod_lists->text_descriptions != NULL) {
+		g_free((char *) mod_lists->text_descriptions->data);
+		mod_lists->text_descriptions =
+		    g_list_next(mod_lists->text_descriptions);
+	}
+	g_list_free(mod_lists->text_descriptions);
+
+	while (mod_lists->dict_descriptions != NULL) {
+		g_free((char *) mod_lists->dict_descriptions->data);
+		mod_lists->dict_descriptions =
+		    g_list_next(mod_lists->dict_descriptions);
+	}
+	g_list_free(mod_lists->dict_descriptions);
+
+	while (mod_lists->comm_descriptions != NULL) {
+		g_free((char *) mod_lists->comm_descriptions->data);
+		mod_lists->comm_descriptions =
+		    g_list_next(mod_lists->comm_descriptions);
+	}
+	g_list_free(mod_lists->comm_descriptions);
+
+	while (mod_lists->book_descriptions != NULL) {
+		g_free((char *) mod_lists->book_descriptions->data);
+		mod_lists->book_descriptions =
+		    g_list_next(mod_lists->book_descriptions);
+	}
+	g_list_free(mod_lists->book_descriptions);
+
+	while (mod_lists->devotionmods != NULL) {
+		g_free((char *) mod_lists->devotionmods->data);
+		mod_lists->devotionmods =
+		    g_list_next(mod_lists->devotionmods);
+	}
+	g_list_free(mod_lists->devotionmods);
+
 	g_list_free(mod_lists->bible_books);
 }

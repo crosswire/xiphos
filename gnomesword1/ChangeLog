@@ -1,3 +1,13 @@
+2003-03-13  Terry <tbiggs@users.sf.net>
+
+	* bumped to dev3
+	* fixed crash on open related to using old configs and bookmarks
+	* added config.*, key.*, module.* and mgr.* to backend 
+	* added configs.*, key.* and module.* to main
+	* moved the code for using old configs and bookmarks from
+	  main.c to settings.c.
+
+
 2003-03-03  Terry Biggs <tbiggs@users.sf.net>
 
 	* bumped to dev2

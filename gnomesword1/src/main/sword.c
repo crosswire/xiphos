@@ -34,7 +34,6 @@
 #include "main/settings.h"
 #include "main/lists.h"
  
-#include "backend/search.h"
 #include "backend/sword.h"
 #include "backend/interlinear.h"
 #include "backend/bibletext_.h"
@@ -46,6 +45,7 @@
 #include "backend/shortcutbar.h"
 #include "backend/bookmarks.h"
 #include "backend/module_fonts.h"
+#include "backend/module.hh"
 
 
 /******************************************************************************
@@ -158,73 +158,6 @@ char *get_module_description(char * mod_name)
 {
 	return backend_get_module_description(mod_name);
 }
-
-
-/******************************************************************************
- * Name
- *  get_book_from_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   const char *get_book_from_key(char *key)	
- *
- * Description
- *    
- *
- * Return value
- *   const char *
- */ 
-
-const char *get_book_from_key(char *key)
-{
-	return backend_get_book_from_key(key);
-}
-
-
-/******************************************************************************
- * Name
- *  get_chapter_from_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int get_chapter_from_key(char *key)	
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_chapter_from_key(char *key)
-{
-	return backend_get_chapter_from_key(key);
-}
-
-
-/******************************************************************************
- * Name
- *  get_verse_from_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int get_verse_from_key(char *key)	
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_verse_from_key(char *key)
-{
-	return backend_get_verse_from_key(key);
-}
-
 
 /******************************************************************************
  * Name
@@ -450,28 +383,6 @@ int has_cipher_tag(char *mod_name)
 
 /******************************************************************************
  * Name
- *   get_valid_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *get_valid_key(char *key)	
- *
- * Description
- *    returns a valid Bible reference - must be freed by calling function
- *
- * Return value
- *   char *
- */
-
-char *get_valid_key(char *key)
-{
-	return backend_get_valid_key(key);
-}
-
-
-/******************************************************************************
- * Name
  *   get_module_text
  *
  * Synopsis
@@ -560,28 +471,6 @@ char *get_path_to_mods(void)
 
 /******************************************************************************
  * Name
- *  get_list_of_mods_by_type
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   GList *get_list_of_mods_by_type(char *mod_type)	
- *
- * Description
- *    
- *
- * Return value
- *   GList *
- */ 
-
-GList *get_list_of_mods_by_type(char *mod_type)
-{
-	return backend_get_list_of_mods_by_type(mod_type);
-}
-
-
-/******************************************************************************
- * Name
  *  get_mod_about_info
  *
  * Synopsis
@@ -645,7 +534,7 @@ void init_sword(void)
 
 void shutdown_sword(void)
 {
-	backend_shutdown();
+	backend_shutdown(TRUE);
 }
 
 /******************************************************************************
@@ -668,19 +557,6 @@ char *get_striptext(char *mod_name, char *key)
 {
 	return backend_get_striptext(mod_name, key);
 }
-
-/** Returns the number of chapters for the given book. */
-const unsigned int chapter_count(char *key) 
-{
-	return backend_chapter_count(key);
-}
-
-/** Returns the number of verses  for the given chapter. */
-const unsigned int verse_count(char *key) 
-{
-	return backend_verse_count(key);
-}
-
 /** Returns error. */
 /*
 char int module_error(void) 

@@ -203,7 +203,7 @@ struct _settings {
 
 extern SETTINGS settings;
 
-gint settings_init(void);
+gint settings_init(int new_configs, int new_bookmarks);
 
 #ifdef __cplusplus
 }
