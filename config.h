@@ -24,7 +24,7 @@
 #define PACKAGE "gnomesword"
 
 /* Version number of package */
-#define VERSION "0.1.8c"
+#define VERSION "0.1.8d"
 
 /* Define if you want to use aspell spell checking */
 #define USE_ASPELL 1
