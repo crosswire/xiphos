@@ -52,15 +52,15 @@ static SWModule *mod;
  * Synopsis
  *   #include "interlinear.h"
  *
- *   bool backend_setup_interlinear(SETTINGS * s)	
+ *   int backend_setup_interlinear(void)	
  *
  * Description
  *   setup interlinear sword support
  *
  * Return value
- *   gboolean
+ *   int
  */
-gboolean backend_setup_interlinear(SETTINGS * s)
+int backend_setup_interlinear(void)
 {
 	ModMap::iterator it;	//-- iteratior     
 	SectionMap::iterator sit;	//-- iteratior

@@ -28,7 +28,7 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 	
-GList *backend_do_search(SETTINGS * s, gpointer *usr_data);
+GList *backend_do_search(gpointer *usr_data);
 void backend_setup_search_results_display(GtkWidget * html_widget);
 void backend_shutdown_search_results_display(void);
 void backend_search_results_item_display(gchar * key);

@@ -25,16 +25,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-const char* backend_get_text_module_description(int modnum);
-void backend_nav_text_module(int modnum, int direction);
-void backend_new_text_display(GtkWidget * html, char *modname);
-void backend_setup_text(void);
-void backend_shutdown_text(void);
-void backend_display_text(int modnum, char *key);
+void backend_setup_bibletext(void);
+void backend_shutdown_bibletext(void);
+const char* backend_get_text_module_description(char * mod_name);
+char *backend_get_bibletext_text(char *mod_name, char *key);
 void backend_set_text_global_option(char *option, char *yesno);
 void backend_set_module_unlocked(char *mod_name, int mod_num,char *key);
-int backend_check_for_global_option(int mod_num, char *option);
+int backend_check_for_global_option(char * mod_name, char * option);
 	
 #ifdef __cplusplus
 }

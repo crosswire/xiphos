@@ -198,7 +198,7 @@ void backend_new_percomm_display(GtkWidget * html, char *mod_name)
  * Synopsis
  *   #include "percomm_.h"
  *   
- *   void backend_setup_percomm(SETTINGS * s)	
+ *   void backend_setup_percomm(void)	
  *
  * Description
  *   setup sword text module support
@@ -207,7 +207,7 @@ void backend_new_percomm_display(GtkWidget * html, char *mod_name)
  *   void
  */
 
-void backend_setup_percomm(SETTINGS * s)
+void backend_setup_percomm(void)
 {
 	ModMap::iterator it;
 	gint count = 0;
