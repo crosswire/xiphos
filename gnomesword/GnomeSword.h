@@ -99,10 +99,6 @@ void
 resultsListSWORD	  (GtkWidget *searchFrm, gint row, gint column);
 
 void
-savelistinfo							(gchar *filename,
-														GtkWidget *list);
-
-void
 setupSearchDlg		   (GtkWidget *searchDlg);
 
 void
@@ -113,10 +109,6 @@ addBookmark				(void);
 
 void
 editbookmarksLoad			(GtkWidget *editdlg);
-
-gchar *
-getlistitem						(GtkWidget *list,
-								gint row);
 
 void
 footnotesSWORD		  	(bool choice);
