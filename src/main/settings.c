@@ -43,7 +43,7 @@
 
 #include "main/settings.h"
 #include "main/search.h"
-#include "main/shortcutbar.h"
+//#include "main/shortcutbar.h"
 #include "main/xml.h"
 
 #include "backend/sword.h"
