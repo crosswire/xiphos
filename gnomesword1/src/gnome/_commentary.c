@@ -50,7 +50,23 @@ extern gboolean comm_display_change;
  * global to this file only 
  */
 
-
+/******************************************************************************
+ * Name
+ *  on_notebook_comm_switch_page
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_notebook_comm_switch_page(GtkNotebook * notebook,
+ *				  GtkNotebookPage * page,
+ *				  gint page_num, GList * cl)	
+ *
+ * Description
+ *   sets commentary gui to new sword module
+ *
+ * Return value
+ *   void
+ */
 
 void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
@@ -78,24 +94,67 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings->comm_tabs;
 }
 
+/******************************************************************************
+ * Name
+ *  on_copy_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+ *
+ * Description
+ *   copy selection to clipboard
+ *
+ * Return value
+ *   void
+ */
 
-
-
-static
-void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	copyGS_HTML(c->html);
 }
 
-static
-void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *  on_find_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+ *
+ * Description
+ *   open find dialog
+ *
+ * Return value
+ *   void
+ */
+
+static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	//searchGS_FIND_DLG(c, FALSE, NULL);
 }
 
-static
-void on_lookup_selection_activate(GtkMenuItem * menuitem,
-				  gchar * dict_mod_description)
+/******************************************************************************
+ * Name
+ *   on_lookup_selection_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_lookup_selection_activate(GtkMenuItem * menuitem,
+ *					gchar * dict_mod_description)
+ *
+ * Description
+ *   lookup selection in new dict/lex
+ *
+ * Return value
+ *   void
+ */
+
+static void on_lookup_selection_activate(GtkMenuItem * menuitem,
+					gchar * dict_mod_description)
 {
 	gchar *dict_key, *dict_mod;
 
@@ -108,9 +167,25 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	}
 }
 
-static
-void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-				       COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *   on_same_lookup_selection_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
+ *							COMM_DATA * c)
+ *
+ * Description
+ *   lookup selection in current dict/lex
+ *
+ * Return value
+ *   void
+ */
+
+static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
+							COMM_DATA * c)
 {
 	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
@@ -121,8 +196,25 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	}
 }
 
-static 
-void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
+/******************************************************************************
+ * Name
+ *  on_view_mod_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_view_mod_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)
+ *
+ * Description
+ *   select new mode by changing the notebook page
+ *
+ * Return value
+ *   void
+ */
+
+static void on_view_mod_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
 {
 	gint page;
 
@@ -131,17 +223,48 @@ void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
 			      page);
 }
 
-static 
-void on_comm_showtabs_activate(GtkMenuItem * menuitem,
-				      SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_comm_showtabs_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_comm_showtabs_activate(GtkMenuItem * menuitem,
+ *						SETTINGS * s)
+ *
+ * Description
+ *   display/hide commentary notebook tabs
+ *
+ * Return value
+ *   void
+ */
+
+static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
+						SETTINGS * s)
 {
 	s->comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
 				   s->comm_tabs);
 }
 
-static 
-void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   on_view_new_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+ *
+ * Description
+ *   open new commentary dialog
+ *
+ * Return value
+ *   void
+ */
+
+static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	static GtkWidget *dlg;
         GdkCursor *cursor;	
@@ -161,14 +284,46 @@ void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 
 }
 
-static 
-void on_unlock_key_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *   on_unlock_key_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_unlock_key_activate(GtkMenuItem *menuitem, COMM_DATA *c)
+ *
+ * Description
+ *   open cipher dialog to add cipher key to unlock module
+ *
+ * Return value
+ *   void
+ */
+
+static void on_unlock_key_activate(GtkMenuItem *menuitem, COMM_DATA *c)
 {
 	GtkWidget *dlg;
 	
 	dlg = gui_create_cipher_key_dialog(c->modName);
 	gtk_widget_show(dlg);
 }
+
+/******************************************************************************
+ * Name
+ *   gui_create_pm
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   GtkWidget *gui_create_pm(COMM_DATA * c)
+ *
+ * Description
+ *   create popup menu for a commentary pane
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
 GtkWidget *gui_create_pm(COMM_DATA * c)
 {
 	GtkWidget *pm;
@@ -315,7 +470,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU
 					      (view_commentary_menu));
 	/*
-	   if module has cipher key include this item
+	 * if module has cipher key include this item
 	 */
 	if(c->has_key) {
 		GtkWidget *add_module_key;
@@ -339,7 +494,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
                       	GTK_SIGNAL_FUNC (on_unlock_key_activate),
                       	c);
 	}
-	tmp = mod_lists->dict_descriptions; //backend_get_mod_description_list_SWORD(DICT_MODS);
+	tmp = mod_lists->dict_descriptions;
 	while (tmp != NULL) {
 		item4 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -380,7 +535,9 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-    /*** for using the current dictionary for lookup ***/
+	/*
+	 * for using the current dictionary for lookup 
+	 */
 	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_same_lookup_selection_activate), c);
@@ -398,17 +555,44 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 	return pm;
 }
 
+/******************************************************************************
+ * Name
+ *   on_btn_sync_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   bring commentary in sync with Bible text
+ *
+ * Return value
+ *   void
+ */
 
-
-
-static 
-void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
+static void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 {
 	set_commentary_page_and_key(c->modnum, settings->currentverse);
 }
 
-static 
-void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *   on_btn_back_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   move backward through the commentary keys
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
 	const gchar *key = navigate_commentary(c->modnum, 0);
 	if(key) {
@@ -417,8 +601,23 @@ void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 	}
 }
 
-static 
-void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *   on_btn_forward_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   move foward through the commentary keys
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
 	const gchar *key = navigate_commentary(c->modnum, 1);
 	if(key) {
@@ -427,14 +626,45 @@ void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 	}
 }
 
-static 
-void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
+/******************************************************************************
+ * Name
+ *   on_btn_print_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   send comment to the printer
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
 {
 	html_print(c->html);
 }
 
-static 
-gboolean on_button_release_event(GtkWidget * widget,
+/******************************************************************************
+ * Name
+ *  on_button_release_event
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   gboolean on_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event, COMM_DATA * c)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static gboolean on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event, COMM_DATA * c)
 {
 	extern gboolean in_url;
@@ -476,6 +706,22 @@ gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *    gui_create_commentary_pane
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
+ *							gint count)
+ *
+ * Description
+ *   create a commentary pane (window) for a sword commentary module
+ *
+ * Return value
+ *   void
+ */
 
 void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 							gint count)
@@ -672,8 +918,5 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 			   (on_btn_print_clicked), (COMM_DATA *) c);
 
 }
-
-
-
 
 //******  end of file  ******/
