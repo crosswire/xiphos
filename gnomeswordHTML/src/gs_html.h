@@ -41,7 +41,7 @@ extern "C" {
 			     	gpointer data);
 	void on_link2_clicked(GtkHTML * html, const gchar * url, 
 				gpointer data);
-	void beginHTML(GtkWidget * html);
+	void beginHTML(GtkWidget * html, gboolean isutf8); 
 	void endHTML(GtkWidget * html);
 	void displayHTML(GtkWidget * html, gchar * txt, gint lentxt);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,
