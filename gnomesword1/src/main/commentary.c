@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#include "gui/_commentary.h"
+#include "gui/commentary.h"
 #include "gui/commentary_dialog.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
