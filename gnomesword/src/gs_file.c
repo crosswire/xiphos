@@ -107,21 +107,6 @@ void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
 	saveFile(filename);
 }
 
- //------------------------------------------
- //-- save verse list - fileselection dialog ok button clicke
- //-- user data - the list widget dialog ok button clicked
-void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *filesel;	//-- pointer to fileselection dialog
-	gchar filename[255];	//-- string to store filename from fileselection dialog
-
-	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));	//-- get fileselection dialog
-	sprintf(filename, "%s",
-		gtk_file_selection_get_filename(GTK_FILE_SELECTION(filesel)));	//-- get filename
-	gtk_widget_destroy(filesel);	//-- destroy fileselection dialog
-	savelist(filename, (GtkWidget *) user_data);	//-- send filename and list widget to savelist function (gs_file.c)
-}
-
 /* fileselection dialog cancel button clicked */
 static void
 on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
@@ -543,49 +528,6 @@ void loadStudyPadFile(gchar * filename)
 			   current_filename);
 }
 
-/********************************************************************************************************** 
- * save results list form search dialog *filename = pointer to filename from fileselection dialogure
- * list is results list widget where results are stored 
- **********************************************************************************************************/
-void savelist(gchar * filename, GtkWidget * list)
-{
-	GtkWidget *label;	/* label from search dialog that show number of finds */
-	gchar *text;		/* pointer to text in the label */
-	gint howmany;		/* integer storage for number of finds */
-	FILE *fp;		/* file pointer */
-	gint i = 0,		/* counters */
-	 j = 0;
-	gchar buf[255],		/* string storage for each list item */
-	*buftmp;		/* pointer for list to text */
-
-	label = lookup_widget(list, "lbSearchHits");	/* get the label */
-	text = (char *) GTK_LABEL(label)->label;	/* get text from label */
-	howmany = atoi(text);	/* convert to number */
-	//cout  << text;        
-	if (howmany < 1)
-		return;		/* if less than 1 the list is empty lets quit and go back to our program */
-	fp = fopen(filename, "w");	/* open file (filename) */
-	if (fp == NULL) {	/* if fopen fails lets quit and return to our program */
-		return;
-	}
-	while (i < howmany) {	/* iterate through the results list */
-		gtk_clist_get_text(GTK_CLIST(list), i, 0, &buftmp);	/* point to text data in each row (i)  */
-		sprintf(buf, "%s", buftmp);	/* put text data into our buf string */
-		for (j = 0; j < 79; j++) {	/* iterate through each string */
-			if (buf[j] == '\0') {	/* look for  null */
-				buf[j] = '\n';	/* replace null with newline ('\n') */
-				buf[j + 1] = '\0';	/* put null after newline */
-				break;	/* leave for(;;) loop */
-			}
-		}
-		fputs(buf, fp);	/* write string to file (filename) */
-		++i;		/* increment i by one */
-	}
-	fputs("-end-", fp);	/* mark end -  */
-	fclose(fp);		/* close file (filename) */
-}
-
-
 GtkWidget *create_fileselection1(void)
 {
 	GtkWidget *fileselection1;
@@ -593,7 +535,7 @@ GtkWidget *create_fileselection1(void)
 	GtkWidget *cancel_button1;
 
 	fileselection1 =
-	    gtk_file_selection_new("GtkSword - Open Note File");
+	    gtk_file_selection_new(_("GnomeSword - Open Note File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection1), "fileselection1",
 			    fileselection1);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselection1), 10);
@@ -628,7 +570,7 @@ GtkWidget *create_fileselectionSave(void)
 	GtkWidget *cancel_button2;
 
 	fileselectionSave =
-	    gtk_file_selection_new("GtkSword - Save Note File");
+	    gtk_file_selection_new(_("GomeSword - Save Note File"));
 	gtk_object_set_data(GTK_OBJECT(fileselectionSave),
 			    "fileselectionSave", fileselectionSave);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselectionSave),

@@ -189,7 +189,7 @@ static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 */
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New SubGroup"),
-				  N_("Add new SubGroup to selected gourp"),
+				  N_("Add new SubGroup to selected group"),
 				  on_new_activate, NULL),
 	{
 	 GNOME_APP_UI_ITEM, N_("Add New Group"),
@@ -204,7 +204,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Eidt Item"),
+	 GNOME_APP_UI_ITEM, N_("Edit Item"),
 	 N_("Edit bookmark item"),
 	 (gpointer) on_edit_item_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
@@ -956,7 +956,7 @@ GtkWidget *create_dlgEditBookMark(gchar * text[3], gboolean newbookmark)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label170), 0, 0.5);
 
-	label171 = gtk_label_new(_("Reference  "));
+	label171 = gtk_label_new(_("Reference "));
 	gtk_widget_ref(label171);
 	gtk_object_set_data_full(GTK_OBJECT(dlgEditBookMark), "label171",
 				 label171,
