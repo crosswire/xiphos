@@ -6,8 +6,8 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1
-1=36
+0=343
+1=1
 2=1
 3=75
 4=231
@@ -149,12 +149,8 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/preferences_dialog.c
-1=/home/terry/Projects/gnomesword1/src/main/configs.h
-2=/home/terry/Projects/gnomesword1/src/gui/utilities.h
-3=/home/terry/Projects/gnomesword1/src/gnome/utilities.c
-4=/home/terry/Projects/gnomesword1/src/main/configs.c
-5=/home/terry/Projects/gnomesword1/src/gnome/font_dialog.c
+0=/home/terry/Projects/gnomesword1/src/gnome2/studypad.c
+1=/home/terry/Projects/gnomesword1/src/gnome2/commentary_dialog.c
 
 [Project Tree]
 0=0
@@ -163,8 +159,6 @@ filter.dir.ignore.hidden=0
 
 [File Tree]
 0=0
-1=0:8
-2=0:8:2
 
 [replace_text]
 0=mod_name
@@ -177,11 +171,11 @@ filter.dir.ignore.hidden=0
 7=vpc->
 
 [find_text]
-0=SUBDIRS
-1=e_utf8_from_gtk_string
-2=AC_DEFINE
-3=USE_GOME2
-4=save_treeview_to_xml_bookmarks
+0=gnomesword
+1=AC_PROG_MAK_SET
+2=AC_PROG_MAK_-SET
+3=SUBDIRS
+4=e_utf8_from_gtk_string
 
 [executer args]
 0=newconfigs

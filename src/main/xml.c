@@ -314,7 +314,7 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, char *item,
  *   char *
  */
 
-char *xml_get_list_from_label(char *section, char *item, char *label)
+char *xml_get_list_from_label(char *section, char *item, const char *label)
 {
 	xmlNodePtr cur = NULL;
 	xmlChar *prop_label = NULL;

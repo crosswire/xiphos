@@ -210,7 +210,7 @@ int set_range(char * list)
  *   int
  */
 
-int start_parse_verse_list(char * list)
+int start_parse_verse_list(const char * list)
 {
 	
 	return backend_start_parse_verse_list(list);
@@ -256,7 +256,7 @@ char *get_valid_key(const char *key)
  *   const char *
  */ 
 
-const char *get_book_from_key(char *key)
+const char *get_book_from_key(const char *key)
 {
 	return backend_get_book_from_key(key);
 }
@@ -278,7 +278,7 @@ const char *get_book_from_key(char *key)
  *   int
  */ 
 
-int get_chapter_from_key(char *key)
+int get_chapter_from_key(const char *key)
 {
 	return backend_get_chapter_from_key(key);
 }
@@ -300,7 +300,7 @@ int get_chapter_from_key(char *key)
  *   int
  */ 
 
-int get_verse_from_key(char *key)
+int get_verse_from_key(const char *key)
 {
 	return backend_get_verse_from_key(key);
 }
@@ -330,13 +330,13 @@ char *get_next_verse_list_element(int count)
 
 
 /** Returns the number of chapters for the given book. */
-const unsigned int chapter_count(char *key) 
+const unsigned int chapter_count(const char *key) 
 {
 	return backend_chapter_count(key);
 }
 
 /** Returns the number of verses  for the given chapter. */
-const unsigned int verse_count(char *key) 
+const unsigned int verse_count(const char *key) 
 {
 	return backend_verse_count(key);
 }

@@ -1,2 +1,2 @@
 
-SUBDIRS = backend main gnome
+SUBDIRS = @DIRS@

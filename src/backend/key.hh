@@ -35,15 +35,15 @@ void backend_set_scope2range(void);
 void backend_set_results_position(char pos);	
 const char *backend_get_next_result_key(void);
 int backend_set_range(char * list);
-int backend_start_parse_verse_list(char * list);
+int backend_start_parse_verse_list(const char * list);
 char *backend_get_next_verse_list_element(int count);
 
 char *backend_get_valid_key(const char *key);
-const char *backend_get_book_from_key(char *key);
-int backend_get_chapter_from_key(char *key);
-int backend_get_verse_from_key(char *key);
-const unsigned int backend_chapter_count(char *key);
-const unsigned int backend_verse_count(char *key);
+const char *backend_get_book_from_key(const char *key);
+int backend_get_chapter_from_key(const char *key);
+int backend_get_verse_from_key(const char *key);
+const unsigned int backend_chapter_count(const char *key);
+const unsigned int backend_verse_count(const char *key);
 char *backend_get_next_book_of_bible(void);
 
 

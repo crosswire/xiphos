@@ -605,7 +605,7 @@ void load_settings_structure(void)
 	if(buf)
 		settings.percomm_tabs =  atoi(buf);
 	//atoi(xml_get_value("tabs", "percomm"));
-
+	//settings.base_font = "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-iso10646-1"
 
 	/*
 	   settings. = xml_get_value("", "");
