@@ -31,6 +31,7 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
+#include "gui/gbs_dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/gbs_find.h"
@@ -158,7 +159,8 @@ static void add_node_children(GtkCTreeNode *node, gchar *bookname,
 	gchar *tmpbuf;
 	GtkCTreeNode *tmp_parent_node = node;
 	NODEDATA nodedata, *p_nodedata;
-
+	
+	
 	p_nodedata = &nodedata;
 	p_nodedata->sibling = NULL;
 	p_nodedata->buf[1] = bookname;
@@ -313,6 +315,8 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 					cell[2])->text;
 	gbs->offset = strtoul(offset, NULL, 0);
 	
+	change_book(bookname, gbs->offset);
+
 	text = display_row_gbs(gbs->mod_name, offset);
 	if (text) {
 	/** fill ctree node with children **/
@@ -707,6 +711,29 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 	gtk_widget_show(dlg);
 }
 
+
+/******************************************************************************
+ * Name
+ *  view_new
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void view_new(GtkMenuItem * menuitem, )	
+ *
+ * Description
+ *    open view gbs dialog
+ *
+ * Return value
+ *   void
+ */
+
+static void view_new_dialog(GtkMenuItem *menuitem, GBS_DATA * g)
+{
+	gui_open_gbs_dialog(g->mod_name);
+}
+
+
 /******************************************************************************
  * Name
  *  gui_create_pm_gbs
@@ -740,6 +767,7 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	GtkWidget *usecurrent2;
 	GtkWidget *item3;
 	GtkWidget *item4;
+	GtkWidget *view_new;
 	GtkWidget *view_book;
 	GtkWidget *view_book_menu;
 	GtkAccelGroup *view_book_menu_accels;
@@ -853,6 +881,22 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent2);
 
+	separator = gtk_menu_item_new();
+	gtk_widget_ref(separator);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS), "separator", separator,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(pmGBS), separator);
+	gtk_widget_set_sensitive(separator, FALSE);
+
+	view_new =
+	    gtk_menu_item_new_with_label(_("View in new window"));
+	gtk_widget_ref(view_new);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS), "view_new",
+				 view_new,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(view_new);
+	gtk_container_add(GTK_CONTAINER(pmGBS), view_new);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
@@ -862,6 +906,7 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(pmGBS), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
+	
 
 	view_book = gtk_menu_item_new_with_label(_("View Book"));
 	gtk_widget_ref(view_book);
@@ -976,6 +1021,9 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 			   GTK_SIGNAL_FUNC(on_find_activate), gbs);
 	gtk_signal_connect(GTK_OBJECT(gbs->showtabs), "activate",
 			   GTK_SIGNAL_FUNC(on_showtabs_activate),
+			   gbs);
+	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
+			   GTK_SIGNAL_FUNC(view_new_dialog),
 			   gbs);
 	return pmGBS;
 }

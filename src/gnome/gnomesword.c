@@ -117,6 +117,7 @@ void init_gnomesword(void)
 	 */
 	if (settings.havebook) {
 		gui_setup_gbs(get_list(GBS_LIST));
+		gui_setup_gbs_dialog(get_list(GBS_LIST));
 	}
 
 	/*
@@ -189,16 +190,22 @@ void shutdown_gnomesword(void)
 		gui_shutdown_text();
 		gui_shutdown_bibletext_dialog();
 	}
-	if(settings.havebook)
+	
+	if(settings.havebook){
 		gui_shutdown_gbs();
+		gui_shutdown_gbs_dialog();
+	}
+	
 	if(settings.havecomm){
 		gui_shutdown_commentary();
 		gui_shutdown_commentary_dialog();
 	}
+	
 	if(settings.havedict){
 		gui_shutdown_dictlex();
 		gui_shutdown_dictlex_dialog();
 	}
+	
 	if(settings.havepercomm)
 		gui_shutdown_percomm();
 	
