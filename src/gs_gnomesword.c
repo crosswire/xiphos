@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_gnomesword.c
@@ -30,7 +31,6 @@
 #endif
 #include <gnome.h>
 #include <ctype.h>
-//#include <gtkhtml/gtkhtml.h>
 
 
 #include "gs_gnomesword.h"
@@ -38,7 +38,6 @@
 #include "gs_gui_cb.h"
 #include "gs_mainmenu_cb.h"
 #include "support.h"
-//#include "interface.h"
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
@@ -333,10 +332,29 @@ void UpdateChecks(GtkWidget *app)
 	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;	
 	/* set footnotes to last setting used */
 	if(settings->footnotes)  
-		setglobalopsSWORD(0,"Footnotes","On" );	/* keep footnotes in sync with menu */		
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
-		setglobalopsSWORD(0,"Footnotes","Off" );	/* keep footnotes in sync with menu */			
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */
+	/* set footnote menu checkitem */			
 	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;	
+	/* set Strong's numbers to last setting */
+	if(settings->strongs)	
+		/* keep strongs numbers in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","On");  
+	else
+		/* keep strongs numbers in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","Off");	
+	/* set strongs toogle button */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
+	/* set strongs menu checkitem */
+	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
+	/* set  morph tags to last setting used */
+	if(settings->morphs)  
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
+	else
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */
+	/* set morphs menu checkitem */
+	GTK_CHECK_MENU_ITEM (morphs)->active = settings->morphs;	
 	
 	/* set interlinear page to last setting */
 	if(settings->interlinearpage)
@@ -347,28 +365,23 @@ void UpdateChecks(GtkWidget *app)
 	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 
 	/* set interlinear footnotes to last setting used */
 	if(settings->footnotesint)  
-		setglobalopsSWORD(1,"Footnotes","On" );	/* keep footnotes in sync with menu */		
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
-		setglobalopsSWORD(1,"Footnotes","Off" );	/* keep footnotes in sync with menu */	
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */	
 	/* set interlinear Strong's Numbers to last setting used */
 	if(settings->strongsint)  
-		setglobalopsSWORD(1,"Strong's Numbers","On" );	/* keep footnotes in sync with menu */		
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","On" );	/* keep footnotes in sync with menu */		
 	else
-		setglobalopsSWORD(1,"Strong's Numbers","Off" );	/* keep footnotes in sync with menu */	
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","Off" );	/* keep footnotes in sync with menu */
+	/* set interlinear morph tags to last setting used */
+	if(settings->morphsint)  
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
+	else
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */	
 	/* set auto save personal comments to last setting */
 	autoSave = settings->autosavepersonalcomments;
 	/* set auto save menu check item */	
-	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
-	/* set Strong's numbers to last setting */
-	if(settings->strongs)	
-		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD(0,"Strong's Numbers","On");  
-	else
-		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD(0,"Strong's Numbers","Off");
-	/* set strongs toogle button */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
-	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
+	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 
 	
         /* fill the dict key clist */
         if(havedict) FillDictKeysSWORD();
