@@ -204,7 +204,7 @@ GList *getModlistSW(gchar *modtype)
 	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), modtype)){
 			buf = g_strdup((gchar*)(*it).second->Description());
-			list = g_list_append(list,buf);	
+			list = g_list_append(list,buf);	/* calling function must free each item */
 		}
 	}
 	delete mgr;				

@@ -54,85 +54,13 @@ EShortcutModel *shortcut_model;
 SEARCH_OPT so,
 	*p_so;
 
-static char *book_open_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c #808080",
-	"o      c white",
-	"                ",
-	"  ..            ",
-	" .Xo.    ...    ",
-	" .Xoo. ..oo.    ",
-	" .Xooo.Xooo...  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	"  .Xoo.Xoo..X.  ",
-	"   .Xo.o..ooX.  ",
-	"    .X..XXXXX.  ",
-	"    ..X.......  ",
-	"     ..         ",
-	"                "
-};
 
-static char *book_closed_xpm[] = {
-	"16 16 6 1",
-	"       c None s None",
-	".      c black",
-	"X      c red",
-	"o      c yellow",
-	"O      c #808080",
-	"#      c white",
-	"                ",
-	"       ..       ",
-	"     ..XX.      ",
-	"   ..XXXXX.     ",
-	" ..XXXXXXXX.    ",
-	".ooXXXXXXXXX.   ",
-	"..ooXXXXXXXXX.  ",
-	".X.ooXXXXXXXXX. ",
-	".XX.ooXXXXXX..  ",
-	" .XX.ooXXX..#O  ",
-	"  .XX.oo..##OO. ",
-	"   .XX..##OO..  ",
-	"    .X.#OO..    ",
-	"     ..O..      ",
-	"      ..        ",
-	"                "
-};
-
-static char *mini_page_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c white",
-	"o      c #808080",
-	"                ",
-	"   .......      ",
-	"   .XXXXX..     ",
-	"   .XoooX.X.    ",
-	"   .XXXXX....   ",
-	"   .XooooXoo.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   ..........o  ",
-	"    oooooooooo  ",
-	"                "
-};
-GdkPixmap *pixmap1;
-GdkPixmap *pixmap2;
-GdkPixmap *pixmap3;
-GdkBitmap *mask1;
-GdkBitmap *mask2;
-GdkBitmap *mask3;
+extern GdkPixmap *pixmap1;
+extern GdkPixmap *pixmap2;
+extern GdkPixmap *pixmap3;
+extern GdkBitmap *mask1;
+extern GdkBitmap *mask2;
+extern GdkBitmap *mask3;
 
 extern gchar *shortcut_types[];
 extern SETTINGS *settings;
@@ -466,7 +394,7 @@ void
 on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GList 
-		*list;
+		*glist;
 	gint 
 		number_of_items = 0,
 		group_num, 
@@ -479,8 +407,8 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GdkPixbuf 
 		*icon_pixbuf = NULL;
 	
-	list = NULL;
-	list = getModlistSW((gchar*)user_data);
+	glist = NULL;
+	glist = getModlistSW((gchar*)user_data);
 	
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
@@ -488,9 +416,9 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR(shortcut_bar)->model, group_num);	
 	remove_all_items(group_num);
 	
-	while (list != NULL) {
+	while (glist != NULL) {
 		memset(modName, 0, 16);
-		modNameFromDesc(modName, (gchar*)list->data);
+		modNameFromDesc(modName, (gchar*)glist->data);
 		sbtype = 0;
 		sbtype = sbtypefromModNameSBSW(modName);
 		if (sbtype < 0)
@@ -517,12 +445,18 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 		
 		e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  group_num, -1, "not null",
-				  (gchar *) list->data, icon_pixbuf);
+				  (gchar *) glist->data, icon_pixbuf);
 		++number_of_items;
-		list = g_list_next(list);
+		glist = g_list_next(glist);
 	}
-	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);	
-	g_list_free(list);
+	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);
+	/****  we used g_strdup to fill the list so we need to g_free each item  ****/
+	glist = g_list_first(glist);
+	while (glist != NULL) {
+		g_free((gchar*)glist->data);
+		glist = g_list_next(glist);		
+	}
+	g_list_free(glist);
 	
 }
 
@@ -953,72 +887,72 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
 	}
 	
-		if (event->button.button == 1) {
-			if(item_num > -1) {
-				app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
-				e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-						       (shortcut_bar)->model,
-						       group_num, item_num, &type,
-						       &ref, &icon_pixbuf);
-				memset(modName, 0, 16);
-				modNameFromDesc(modName, ref);
-				
-				if (group_num == groupnum0) {
-					gint sbtype;
-					sbtype = sbtypefromModNameSBSW(modName);
-					if (sbtype == 0 || sbtype == 1)
-						gotoBookmarkSWORD(modName,
-							  settings->currentverse);
-					else if (sbtype == 3) {
-						gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
-						gotoBookmarkSWORD(modName,NULL);
-					}
-						
-					else
-						gotoBookmarkSWORD(modName,
-							  settings->dictkey);
-				}
-				
-				if (group_num == groupnum1) {
-					if (havebible) {
-						gotoBookmarkSWORD(modName,
-							  settings->currentverse);
-					}
-				}
-				
-				if (group_num == groupnum2) {
-					if (havecomm) {
-						gotoBookmarkSWORD(modName,
-							  settings->currentverse);
-					}
-				}
-				
-				if (group_num == groupnum3) {
-					if (havedict) {
-						gotoBookmarkSWORD(modName,
-							  settings->dictkey);
-					}
-				}
-				
-				if (group_num == groupnum4) {
-					changeVerseSWORD(ref);
-				}
-				
-				if (group_num == groupnum8) {
+	if (event->button.button == 1) {
+		if(item_num > -1) {
+			app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
+			e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (shortcut_bar)->model,
+					       group_num, item_num, &type,
+					       &ref, &icon_pixbuf);
+			memset(modName, 0, 16);
+			modNameFromDesc(modName, ref);
+			
+			if (group_num == groupnum0) {
+				gint sbtype;
+				sbtype = sbtypefromModNameSBSW(modName);
+				if (sbtype == 0 || sbtype == 1)
+					gotoBookmarkSWORD(modName,
+						  settings->currentverse);
+				else if (sbtype == 3) {
+					gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
 					gotoBookmarkSWORD(modName,NULL);
-					//gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
 				}
-				g_free(type);
-				g_free(ref);
+					
+				else
+					gotoBookmarkSWORD(modName,
+						  settings->dictkey);
 			}
-		} else if (event->button.button == 3) {
-			if (remItemNum == -1)
-				show_standard_popup(shortcut_bar, event,
-						    group_num);
-			else
-				show_context_popup(shortcut_bar, event, group_num,
-						   item_num);
+			
+			if (group_num == groupnum1) {
+				if (havebible) {
+					gotoBookmarkSWORD(modName,
+						  settings->currentverse);
+				}
+			}
+			
+			if (group_num == groupnum2) {
+				if (havecomm) {
+					gotoBookmarkSWORD(modName,
+						  settings->currentverse);
+				}
+			}
+			
+			if (group_num == groupnum3) {
+				if (havedict) {
+					gotoBookmarkSWORD(modName,
+						  settings->dictkey);
+				}
+			}
+			
+			if (group_num == groupnum4) {
+				changeVerseSWORD(ref);
+			}
+			
+			if (group_num == groupnum8) {
+				gotoBookmarkSWORD(modName,NULL);
+				//gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
+			}
+			g_free(type);
+			g_free(ref);
 		}
+	} else if (event->button.button == 3) {
+		if (remItemNum == -1)
+			show_standard_popup(shortcut_bar, event,
+					    group_num);
+		else
+			show_context_popup(shortcut_bar, event, group_num,
+					   item_num);
+	}
 	
 }
 
@@ -1912,19 +1846,7 @@ void setupSB(SETTINGS * s)
 		*pathname;
 	GdkPixbuf 
 		*icon_pixbuf = NULL;
-	GdkColor 
-		transparent = { 0 };
-	
-	gtk_widget_realize(s->app); /** added to stop annoying gdk warning on startup **/
-	pixmap1 =                   /** when these pixmaps are created **/
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask1,
-					 &transparent, book_closed_xpm);
-	pixmap2 =
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
-					 &transparent, book_open_xpm);
-	pixmap3 =
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
-					 &transparent, mini_page_xpm);
+
 
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
@@ -2398,7 +2320,7 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 		      GtkWidget * shortcut_menu_widget, gchar * modtype)
 {
 	GtkWidget *item;
-	GList *list;
+	GList *glist;
 	if(group_num !=  groupnum0) {
 	item = gtk_menu_item_new_with_label(_("Add All Modules"));
 	gtk_widget_ref(item);
@@ -2415,10 +2337,10 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 			   (gchar*)modtype);
 	}
 	
-	list = NULL;
-	list = getModlistSW(modtype);
-	while (list != NULL) {
-		item = gtk_menu_item_new_with_label((gchar *) list->data);
+	glist = NULL;
+	glist = getModlistSW(modtype);
+	while (glist != NULL) {
+		item = gtk_menu_item_new_with_label((gchar *) glist->data);
 		gtk_widget_ref(item);
 		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
 					 item, (GtkDestroyNotify)
@@ -2429,8 +2351,14 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_add_shortcut_activate),
-				   (gchar *) list->data);
-		list = g_list_next(list);
+				   (gchar *) glist->data);
+		glist = g_list_next(glist);
 	}
-	g_list_free(list);
+	/****  we used g_strdup to fill the list so we need to g_free each item  ****/
+	glist = g_list_first(glist);
+	while (glist != NULL) {
+		g_free((gchar*)glist->data);
+		glist = g_list_next(glist);		
+	}
+	g_list_free(glist);
 }
