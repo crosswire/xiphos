@@ -28,9 +28,10 @@
 #include <libxml/parser.h>
 
 
-#include "main/xml.h"
-#include "main/sword.h"
+#include "main/lists.h"
 #include "main/settings.h"
+#include "main/sword.h"
+#include "main/xml.h"
 
 struct _bookmark_data {
 	gchar *caption;
@@ -464,6 +465,7 @@ int xml_create_settings_file(char *path)
 	xmlNodePtr section_node;
 	xmlAttrPtr xml_attr;
 	const xmlChar *xml_filename;
+	GList *tmp = NULL;
 
 	xml_filename = (const xmlChar *) path;
 	xml_settings_doc = xmlNewDoc((const xmlChar *) "1.0");
@@ -547,10 +549,12 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "app_x", "40");
 	xmlNewTextChild(section_node, NULL, "app_y", "40");
 	xmlNewTextChild(section_node, NULL, "textpane", "240");
-	xmlNewTextChild(section_node, NULL, "shortcutbar", "178");
+	xmlNewTextChild(section_node, NULL, "shortcutbar", "158");
 	xmlNewTextChild(section_node, NULL, "uperpane", "210");
 	xmlNewTextChild(section_node, NULL, "vltoppaneheight", "210");
 	xmlNewTextChild(section_node, NULL, "sidebar_notebook_hight", "250");
+	xmlNewTextChild(section_node, NULL, "biblehight", "250");
+	xmlNewTextChild(section_node, NULL, "commentaryhight", "240");
 
 
 	section_node = xmlNewChild(root_node, NULL, "lexicons", NULL);
@@ -576,47 +580,72 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "setup_canceled","0");
 
 	section_node = xmlNewChild(root_node, NULL, "modules", NULL);
-	xmlNewTextChild(section_node, NULL, "book", NULL);
-	xmlNewTextChild(section_node, NULL, "comm", NULL);
-	xmlNewTextChild(section_node, NULL, "devotional", NULL);
-	xmlNewTextChild(section_node, NULL, "dict", NULL);
-	xmlNewTextChild(section_node, NULL, "int1", NULL);
-	xmlNewTextChild(section_node, NULL, "int2", NULL);
-	xmlNewTextChild(section_node, NULL, "int3", NULL);
-	xmlNewTextChild(section_node, NULL, "int4", NULL);
-	xmlNewTextChild(section_node, NULL, "int5", NULL);
-	xmlNewTextChild(section_node, NULL, "bible", NULL);
-	xmlNewTextChild(section_node, NULL, "percomm", NULL);
+	tmp = get_list(GBS_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "book", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "book", NULL);
+	tmp = get_list(COMM_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "comm", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "comm", NULL);
+	tmp = get_list(DEVOTION_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "devotional", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "devotional", NULL);
+	tmp = get_list(DICT_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "dict", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "dict", NULL);
+	tmp = get_list(TEXT_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "int1", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "int1", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, "int2",(gchar*)tmp->data);		
+	else
+		xmlNewTextChild(section_node, NULL, "int2", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, "int3", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "int3", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, "int4", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "int4", NULL);
+	if((tmp = g_list_next(tmp)) != NULL)
+		xmlNewTextChild(section_node, NULL, "int5", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "int5", NULL);
+	tmp = get_list(TEXT_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "bible", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "bible", NULL);
+	tmp = get_list(PERCOMM_LIST);
+	if(tmp)
+		xmlNewTextChild(section_node, NULL, "percomm", (gchar*)tmp->data);
+	else
+		xmlNewTextChild(section_node, NULL, "percomm", NULL);
 
 
 	section_node =
 	    xmlNewChild(root_node, NULL, "shortcutbar", NULL);
 	xmlNewTextChild(section_node, NULL, "shortcutbar", "1");
 	xmlNewTextChild(section_node, NULL, "docked", "1");
-	xmlNewTextChild(section_node, NULL, "book", "0");
-	xmlNewTextChild(section_node, NULL, "bookmark", "1");
-	xmlNewTextChild(section_node, NULL, "comm", "0");
-	xmlNewTextChild(section_node, NULL, "dict", "0");
-	xmlNewTextChild(section_node, NULL, "favo", "0");
-	xmlNewTextChild(section_node, NULL, "history", "0");
-	xmlNewTextChild(section_node, NULL, "bible", "0");
 
 
 	section_node = xmlNewChild(root_node, NULL, "studypad", NULL);
-	xmlNewTextChild(section_node, NULL, "directory",
-			settings.homedir);
+	xmlNewTextChild(section_node, NULL, "directory", settings.homedir);
 	xmlNewTextChild(section_node, NULL, "lastfile", NULL);
-	xmlNewTextChild(section_node, NULL, "editbar", "1");
-	xmlNewTextChild(section_node, NULL, "stylebar", "1");
 
 
 	section_node = xmlNewChild(root_node, NULL, "tabs", NULL);
 	xmlNewTextChild(section_node, NULL, "browsing", "1");
-	xmlNewTextChild(section_node, NULL, "bible", "0");
-	xmlNewTextChild(section_node, NULL, "comm", "0");
-	xmlNewTextChild(section_node, NULL, "dict", "0");
-	xmlNewTextChild(section_node, NULL, "book", "0");
-	xmlNewTextChild(section_node, NULL, "percomm", "0");
 	return 1;
 }
 
