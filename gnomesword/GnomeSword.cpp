@@ -319,7 +319,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	        	if(sit !=mainMgr->config->Sections.end()){
 	    	    		cit = (*sit).second.find("SourceType");
-				if(cit != (*sit).second.end()) sourceformat = g_strdup((*cit).second.c_str());
+				if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
 				else sourceformat = "Plain";
 			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
@@ -330,6 +330,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 				curMod->Disp(HTMLchapDisplay);
 			}else			
 				curMod->Disp(chapDisplay);
+			//g_free(sourceformat);
 		  	//-----------   add choice to shortcut bar
 		  	if(settings->showtextgroup){
 		    		sprintf(groupitems[groupnum1][itemNum++], "%s", curMod->Name());
@@ -337,7 +338,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 						      groupnum1, -1,
 						      shortcut_types[0],
 						      curMod->Name());
-		  	}		
+		  	}		  			
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){ //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			havecomm = true; //-- we have at least one commentay module
@@ -358,8 +359,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	    		if (sit !=mainMgr->config->Sections.end()){
 	    			cit = (*sit).second.find("SourceType");
-				if (cit != (*sit).second.end())	sourceformat = g_strdup((*cit).second.c_str());
-				else sourceformat = "Plain";
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
 			}
 			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter
 			
@@ -372,6 +373,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);
+			//g_free(sourceformat);
 			if(settings->showcomgroup){
 			    sprintf(groupitems[groupnum2][itemNum2++], "%s", curcomMod->Name());
 			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
@@ -670,7 +672,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 			curcomMod->Display(); //-- show change
 			strcpy(com_key,ref);
 		}
-	}  		
+	}			
 	ApplyChange = TRUE;	
 }
 
@@ -704,6 +706,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 				++j;
 				listitem = g_strdup((const char *)mod->KeyText()); //-- key to listitem
 				gtk_clist_append(GTK_CLIST(list) , &listitem); //-- listitem to list
+				g_free(listitem);
 				if (saveKey == mod->Key()) //-- if we are back to starting place set index
 				index = j-1; 
 			}
@@ -711,7 +714,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 		gtk_clist_moveto( GTK_CLIST(list), index, 0, 0.5, 0.0 ); //-- move in list to index
 		mod->SetKey(saveKey);
 	}
-	//g_free((char *)listitem);
+
 }
 
 //-------------------------------------------------------------------------------------------
@@ -996,10 +999,13 @@ void
 chapterSWORD(void)  //-- someone clicked the chapter spin button
 {
 	gint       iChap;
-
+        gchar      *buf;
+        
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- set iChap to value in spin button
 	swKey.Chapter(iChap); //-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
-	changeVerse(g_strdup(swKey));	  //-- change all our modules to new chapter
+	buf = g_strdup(swKey); 
+	changeVerse(buf);	  //-- change all our modules to new chapter
+	g_free(buf);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1007,10 +1013,13 @@ void
 verseSWORD(void)  //-- someone clicked the verse spin button
 {
 	gint       iVerse;
-
+        gchar      *buf;
+        
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- set iVerse to value in spin button
 	swKey.Verse(iVerse ); //-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
-	changeVerse(g_strdup(swKey));	//-- change all our modules to new verse	
+	buf = g_strdup(swKey);	
+	changeVerse(buf);	//-- change all our modules to new verse	
+        g_free(buf);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1158,7 +1167,9 @@ dictSearchTextChangedSWORD(char* mytext)   //-- dict lookup text changed
 //-------------------------------------------------------------------------------------------
 void
 dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow buttons
-{	
+{
+        gchar   *buf;
+        	
         if(direction == 1){   //-- next key  
 	        (*curdictMod)++;  //-- move up one
         } else if(direction == 0) {     //-- previous key  
@@ -1167,7 +1178,9 @@ dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow bu
         curdictMod->Display(); //-- show the changes
 	//-- put new key into dictionary text entry
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")), curdictMod->KeyText());
-        dictSearchTextChangedSWORD(g_strdup(curdictMod->KeyText()));
+        buf = g_strdup(curdictMod->KeyText());
+        dictSearchTextChangedSWORD(buf);
+        g_free(buf);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1308,15 +1321,15 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	ConfigEntMap::iterator cit; //--
 	
 	it = mainMgr->Modules.find(modName); //-- find module (modName)
-	if (it != mainMgr->Modules.end()){ //-- if we don't run out of mods before we find the one we are looking for
-	
-	    buf = (char *)(*it).second->Description();  //-- get discription of module
-	    sit = mainMgr->config->Sections.find((*it).second->Name());
-	    if (sit !=mainMgr->config->Sections.end()){
-	    	cit = (*sit).second.find("About");
-					if (cit != (*sit).second.end()) 				
-						bufabout = g_strdup((*cit).second.c_str()); //-- get module about information
-	    }
+	if (it != mainMgr->Modules.end()){ //-- if we don't run out of mods before we find the one we are looking for	
+	        buf = (char *)(*it).second->Description();  //-- get discription of module
+	        sit = mainMgr->config->Sections.find((*it).second->Name());
+	        if (sit !=mainMgr->config->Sections.end()){
+	                cit = (*sit).second.find("About");
+			if (cit != (*sit).second.end()) 				
+				bufabout = (char *)(*cit).second.c_str(); //-- get module about information
+				cout << bufabout << '\n';
+	        }
 	}
 	aboutbox = create_aboutmodules(); //-- create about dialog
 	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
@@ -1344,7 +1357,7 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	        if (sit !=mainMgr->config->Sections.end()){
 	        	cit = (*sit).second.find("About");
 			if (cit != (*sit).second.end()) 				
-			        bufabout = g_strdup((*cit).second.c_str()); //-- get module about information
+			        bufabout = (char *)(*cit).second.c_str(); //-- get module about information
 	        }
 	}	
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
@@ -1419,30 +1432,29 @@ getversenumber(GtkWidget *text)
 void
 sbchangeModSword(gint group_num, gint item_num)
 {
-    GtkWidget *notebook;
-    gint num = 0;
+        GtkWidget       *notebook;
+        gint            num = 0;
 
-    if(groupnum3 == 2) num = group_num;
-    else if( groupnum3 == 1)num = group_num + 1;
-    else if( groupnum3 == 0)num = group_num + 2;
+        if(groupnum3 == 2) num = group_num;
+        else if( groupnum3 == 1)num = group_num + 1;
+        else if( groupnum3 == 0)num = group_num + 2;
 
-    switch(num){
-        case 0: changecurModSWORD(groupitems[0][item_num]);
-                break;
-        case 1: if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
-		            notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
-		            gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-                }
-                break;
-        case 2: if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
-		            notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
-		            gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-                }	
-                break;
-        case 3:
-                break;
-
-    }
+        switch(num){
+                case 0: changecurModSWORD(groupitems[0][item_num]);
+                        break;
+                case 1: if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
+		                notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
+		                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+                        }
+                        break;
+                case 2: if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
+		                notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+		                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+                        }	
+                        break;
+                case 3:
+                        break;
+        }
 
 }
 
@@ -1496,23 +1508,22 @@ void
 lookupStrongsSWORD(gint theNumber) //-- theNumber - strongs number was double clicked selected and
                                     //-- sent here
 {
-    GtkWidget   *notebook, //-- pointer to dict/lex notebook (we use the notebook even if it is not showing)
-                *entry;    //-- pointer to dictionarySearchText entry
-    gint pagenum;  //-- temp storage for notebook page num
-    gchar buf[40]; //-- char string to put our strongs number in
-    char a;        //-- char to store testament (old - 001 or new - 002)
+        GtkWidget       *notebook, //-- pointer to dict/lex notebook (we use the notebook even if it is not showing)
+                        *entry;    //-- pointer to dictionarySearchText entry
+        gint            pagenum;  //-- temp storage for notebook page num
+        gchar           buf[40]; //-- char string to put our strongs number in
+        char            a;        //-- char to store testament (old - 001 or new - 002)
 
-    VerseKey *key = (VerseKey *)(SWKey *)(*curMod); //-- get a versekey form the current text module
+        VerseKey *key = (VerseKey *)(SWKey *)(*curMod); //-- get a versekey form the current text module
                                                     //-- so we can find which testament we are using
-    a = key->Testament();  //-- find out if we are in old or new testament
-    if(a == 001) pagenum = hebrewpage; //-- if old testament use hebrew lex
-    else pagenum = greekpage;          //-- if new testament use greek lex
-    if(havedict) //-- let's don't do this if we don't have at least one dictionary / lexicon
-    {			            	
-        notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
-        gtk_notebook_set_page(GTK_NOTEBOOK(notebook), pagenum); //-- set notebook page
-        entry = lookup_widget(MainFrm,"dictionarySearchText"); //-- get the entry so we can send it the new key
-        sprintf(buf,"%d",theNumber); //-- put the number into a string
-        gtk_entry_set_text(GTK_ENTRY(entry),buf); //-- put key string into the dict entry (which will cause a on_dictionarySearchText_changed event)
-    }
+        a = key->Testament();  //-- find out if we are in old or new testament
+        if(a == 001) pagenum = hebrewpage; //-- if old testament use hebrew lex
+        else pagenum = greekpage;          //-- if new testament use greek lex
+        if(havedict){ //-- let's don't do this if we don't have at least one dictionary / lexicon    			            	
+                notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), pagenum); //-- set notebook page
+                entry = lookup_widget(MainFrm,"dictionarySearchText"); //-- get the entry so we can send it the new key
+                sprintf(buf,"%d",theNumber); //-- put the number into a string
+                gtk_entry_set_text(GTK_ENTRY(entry),buf); //-- put key string into the dict entry (which will cause a on_dictionarySearchText_changed event)
+        }
 }
