@@ -160,18 +160,15 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 {
 	gint i;
-	static gboolean need_column = TRUE;
 	GtkTreeStore *store;
 	GtkTreeIter iter;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
 	GtkTreeIter child_iter;
 	GList *tmp = NULL;
 
 
-	need_column = TRUE;
 	store = gtk_tree_store_new(1, G_TYPE_STRING);
-
+	gtk_tree_store_clear(store);
+	
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, _("Biblical Texts"), -1);
 
@@ -264,21 +261,8 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 		tmp = g_list_next(tmp);
 	}
 	
-	
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
-	if (need_column) {
-		renderer = gtk_cell_renderer_text_new();
-		column =
-		    gtk_tree_view_column_new_with_attributes("Found",
-							     renderer,
-							     "text", 0,
-							     NULL);
-		gtk_tree_view_column_set_sort_column_id(column, 0);
-		gtk_tree_view_append_column(GTK_TREE_VIEW(tree),
-					    column);
-		need_column = FALSE;
-	}
 }
 
 /******************************************************************************

@@ -36,7 +36,10 @@
 
 #include "gui/mod_mgr.h"
 #include "gui/dialog.h"
+#include "gui/sidebar.h"
+#include "gui/utilities.h"
 
+#include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/settings.h"
 #include "main/sword.h"
@@ -67,6 +70,7 @@ static GtkWidget *button7;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 static GtkWidget *progressbar;
+static GtkWidget *progressbar_refresh;
 static GtkWidget *radiobutton_source;
 static GtkWidget *radiobutton2;
 static GtkWidget *radiobutton_dest;
@@ -82,6 +86,8 @@ static const gchar *source;
 static gboolean dot_sword;
 static const gchar *destination;
 static gboolean have_configs;
+static gboolean have_changes;
+static gint current_page;
 
 static gboolean mod_mgr_check_for_configs(const gchar *filename)
 {
@@ -197,12 +203,40 @@ static void remove_install_modules(GList * modules, gboolean install)
 		g_free(tmp->data);
 		tmp = g_list_next(tmp);
 	}
+	have_changes = TRUE;
+	/* 
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
+		_("Up dating Sidepane module list"));
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
+		progressbar), 0);
+	shutdown_list();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
+		progressbar), 0.3);
+	init_lists();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
+		progressbar), 0.6);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gui_load_module_tree(sidebar.module_list, TRUE);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
+		progressbar), 1.0);
+		*/
+	g_list_free(tmp);
+	g_string_free(mods, TRUE);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
 		_("Finished"));
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
 		progressbar), 0);
-	g_list_free(tmp);
-	g_string_free(mods, TRUE);
 
 }
 
@@ -584,13 +618,49 @@ static void
 on_dialog_response(GtkDialog * dialog, gint response_id, gpointer data)
 {
 	GList *modules = NULL;
+	GtkProgressBar *pbar;gint test;
+	GS_DIALOG *yes_no_dialog;
+	GString *str = g_string_new(NULL);
 
 	switch (response_id) {
 	case GTK_RESPONSE_REFRESH:
+		switch(current_page) {
+			case 1:
+				pbar = GTK_PROGRESS_BAR(progressbar_refresh);
+				break;
+			case 2:
+				pbar = GTK_PROGRESS_BAR(progressbar);
+				break;
+		}
+		gtk_progress_bar_set_text(pbar, _("Refreshing remote"));
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		gtk_progress_bar_set_fraction(pbar, 0);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 		mod_mgr_refresh_remote_source("crosswire");
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
+		gtk_progress_bar_set_text(pbar, _("Finished"));
+		gtk_progress_bar_set_fraction(pbar, 0);
 		break;
 	case GTK_RESPONSE_CLOSE:
+		if(have_changes) {
+			yes_no_dialog = gui_new_dialog();
+			yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
+			g_string_printf(str,
+				"<span weight=\"bold\">%s</span>\n\n%s",
+				_("Please Restart GnomeSword"), 
+				_("The modules are out of sync!"));
+			yes_no_dialog->label_top = str->str;
+			yes_no_dialog->ok = TRUE;
+		
+			test = gui_alert_dialog(yes_no_dialog);
+			if (test != GS_OK) {
+				
+			}
+		}
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		mod_mgr_shut_down();
 		break;
@@ -883,6 +953,7 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 	GS_DIALOG *yes_no_dialog;
 	GString *str = g_string_new(NULL);
 	
+	current_page = page_num;
 	switch (page_num) {
 	case 0:
 		break;
@@ -937,12 +1008,14 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 
 void on_radiobutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	if(togglebutton->active)
+	if(togglebutton->active) {
 		gtk_widget_show(button5);
-	else
+		gtk_widget_show(progressbar_refresh);
+	} else {
 		gtk_widget_hide(button5);
+		gtk_widget_hide(progressbar_refresh);
+	}
 }
-
 
 
 /******************************************************************************
@@ -1134,7 +1207,8 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox4), hbox2, FALSE, TRUE, 0);
 
 	radiobutton2 =
-	    gtk_radio_button_new_with_mnemonic_from_widget((GtkRadioButton *) radiobutton_source, _("Remote"));
+	    gtk_radio_button_new_with_mnemonic_from_widget(
+	    		(GtkRadioButton *) radiobutton_source, _("Remote"));
 	gtk_widget_show(radiobutton2);
 	gtk_box_pack_start(GTK_BOX(hbox2), radiobutton2, FALSE, FALSE,
 			   0);
@@ -1197,6 +1271,9 @@ GtkWidget *create_dialog(void)
 	gtk_label_set_use_markup(GTK_LABEL(label10), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label10), TRUE);
+
+	progressbar_refresh = gtk_progress_bar_new();
+	gtk_box_pack_start(GTK_BOX(vbox3), progressbar_refresh, FALSE, FALSE, 0);
 
 	label2 = gtk_label_new(_("Configure"));
 	gtk_widget_show(label2);
@@ -1392,7 +1469,7 @@ void gui_open_mod_mgr(void)
 	GList *tmp = NULL;
 	GList *combo1_items = NULL;
 	MOD_MGR_SOURCE *mms;
-	
+	have_changes = FALSE;
 	g_string_printf(str, "%s/%s", settings.homedir, 
 			".sword/InstallMgr/InstallMgr.conf");
 	
@@ -1432,15 +1509,33 @@ void gui_open_mod_mgr(void)
 
 void gui_update_install_status(glong total, glong done, const gchar *message)
 {
-	 gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),message);
+	GtkProgressBar *pbar;
+	switch(current_page) {
+		case 1:
+			pbar = GTK_PROGRESS_BAR(progressbar_refresh);
+			break;
+		case 2:
+			pbar = GTK_PROGRESS_BAR(progressbar);
+			break;
+	}
+	gtk_progress_bar_set_text(pbar,message);
 }
 
 void gui_update_install_progressbar(gdouble fraction)
 {
+	GtkProgressBar *pbar;
+	switch(current_page) {
+		case 1:
+			pbar = GTK_PROGRESS_BAR(progressbar_refresh);
+			break;
+		case 2:
+			pbar = GTK_PROGRESS_BAR(progressbar);
+			break;
+	}
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar), fraction);
+	gtk_progress_bar_set_fraction(pbar, fraction);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
