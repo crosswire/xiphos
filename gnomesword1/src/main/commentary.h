@@ -25,21 +25,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "settings.h"
-		
-typedef struct _COMMFindDialog COMMFindDialog;
-struct _COMMFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget *htmlwidget;
-	GtkWidget *entry;
-	GtkWidget *backward;
-	GtkWidget *case_sensitive;
-	gboolean regular;
-};
-
+	
+/* main */
+#include "settings.h"	
 
 typedef struct _commdata COMM_DATA;
+/* gnome */
+#include "commentary_find_dialog.h"
 struct _commdata {
 	GtkWidget *html;
 	GtkWidget *btnCOMMSync;

@@ -1,6 +1,8 @@
 2002-05-08  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/commentary_find_dialog.*
+	* added gnome/gbs_find_dialog.*
+	* removed main/gs_find_dlg.*
 	
 
 2002-05-07  Terry Biggs <tbiggs@users.sourceforge.net>

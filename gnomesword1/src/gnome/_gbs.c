@@ -36,6 +36,7 @@
 /* frontend */
 #include "_gbs.h"
 #include "cipher_key_dialog.h"
+#include "gbs_find_dialog.h"
 
 /* main */
 #include "settings.h"
@@ -44,7 +45,6 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
-#include "gs_find_dlg.h"
 
 /******************************************************************************
  *  externs  
@@ -52,6 +52,7 @@
 
 extern gboolean in_url;
 extern GBS_DATA *cur_g;
+extern gboolean gbs_find_running;
 
 
 /******************************************************************************
@@ -153,9 +154,9 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	
 	sprintf(settings.BookWindowModule, "%s", g->bookName);
 
-	if (g_old->find_dialog) {
-		close_dialog(NULL, g_old->find_dialog);
-		searchGS_FIND_DLG(g, FALSE, settings.findText);
+	if (gbs_find_running) {
+		gbs_find_close_dialog(NULL, g_old->find_dialog);
+		search_gbs_find_dlg(g, FALSE, settings.findText);
 	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
 	settings.book_last_page = page_num;
@@ -225,7 +226,7 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 
 static void on_find_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 {
-	searchGS_FIND_DLG(gbs, FALSE, NULL);
+	if(!gbs_find_running) search_gbs_find_dlg(gbs, FALSE, NULL);
 }
 
 /******************************************************************************

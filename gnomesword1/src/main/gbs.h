@@ -28,18 +28,10 @@ extern "C" {
 
 #include "settings.h"
 
-typedef struct _GSFindDialog GSFindDialog;
-struct _GSFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget *htmlwidget;
-	GtkWidget *entry;
-	GtkWidget *backward;
-	GtkWidget *case_sensitive;
-	gboolean regular;
-};
-
 
 typedef struct _gbsdata GBS_DATA;
+/* gnome */
+#include "gbs_find_dialog.h"
 struct _gbsdata {
 	GtkWidget *html;
 	GtkWidget *ctree;
@@ -48,7 +40,7 @@ struct _gbsdata {
 	gchar *searchstring;
 	gint booknum;
 	gboolean has_key;
-	GSFindDialog *find_dialog;
+	GBF_FIND_DIALOG *find_dialog;
 };
 
 

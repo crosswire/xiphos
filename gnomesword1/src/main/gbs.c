@@ -43,7 +43,6 @@
 #include "gs_shortcutbar.h"
 #include "gbs.h"
 #include "gs_html.h"
-#include "gs_find_dlg.h"
 
 /* backend */
 #include "sword.h"
@@ -61,6 +60,7 @@ extern GdkBitmap *mask1;
 extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
 extern gboolean in_url;
+extern gboolean gbs_find_running;
 
 /******************************************************************************
  * globals 
@@ -349,8 +349,10 @@ GList* setup_gbs(SETTINGS * s)
 	GList *mods = NULL;
 	gchar *bookname;
 	GBS_DATA *gbs;
+	
 	gbs_list = NULL;
-
+	gbs_find_running = FALSE;
+	
 	mods = backend_get_list_of_mods_by_type(BOOK_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
