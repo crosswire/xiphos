@@ -2,9 +2,7 @@
 
 SUBDIRS =   help macros intl po src
 
-EXTRA_DIST = Gnomesword.glade \
-        Gnomesword.prj \
-        gnomesword.desktop
+EXTRA_DIST = gnomesword.desktop
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \
