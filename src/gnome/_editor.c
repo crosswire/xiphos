@@ -69,7 +69,7 @@
  * Synopsis
  *   #include "_editor.h"
  *
- *   GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)	
+ *   GSHTMLEditorControlData *gs_html_editor_control_data_new(void)	
  *
  * Description
  *    
@@ -78,7 +78,7 @@
  *   GSHTMLEditorControlData *
  */
  
-GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
+GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 {
 	GSHTMLEditorControlData *necd =
 	    g_new0(GSHTMLEditorControlData, 1);
@@ -93,7 +93,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
-	sprintf(necd->filename, "%s", s->studypadfilename);
+	sprintf(necd->filename, "%s", settings.studypadfilename);
 	return necd;
 }
 

@@ -26,9 +26,7 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-	
-GtkWidget *gui_create_commentary_dialog(SETTINGS * s);
+GtkWidget *gui_create_commentary_dialog(void);
 
 #ifdef __cplusplus
 }

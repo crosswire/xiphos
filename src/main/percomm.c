@@ -315,7 +315,7 @@ void setup_percomm(GList *mods)
 		p->mod_num = count;
 		p->search_string = NULL;
 		p->key = NULL;
-		p->ec = gui_percomm_control(&settings,p->mod_name,count);
+		p->ec = gui_percomm_control(p->mod_name,count);
 		p->html = p->ec->htmlwidget;
 		backend_new_percomm_display(p->ec->htmlwidget,
 					    p->mod_name, &settings);

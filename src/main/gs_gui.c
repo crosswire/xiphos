@@ -721,7 +721,7 @@ void create_mainwindow(void)
 	 * studypad editor 
 	 */
 	settings.html_studypad =
-		gui_create_studypad_control(settings.workbook_upper, &settings);
+		gui_create_studypad_control(settings.workbook_upper);
 	
 				
 	label41 = gtk_label_new(_("Study Pad"));
