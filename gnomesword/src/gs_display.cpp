@@ -384,22 +384,33 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter
 	      && !imodule.Error()); imodule++) {
-		/* verse number */
-		 if(g_utf8_validate ((const char *)imodule , -1 , NULL) ){
-			 sprintf(tmpBuf,
+		const gchar **end;
+		      
+		 if(g_utf8_validate ((const char *)imodule , strlen((const char *)imodule) , end) ){
+			 /*sprintf(tmpBuf,
 					 " <b> </b><A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A>",
 					 imodule.Description(),
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 			utf8len = g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-			utf8len = g_utf8_strlen ( (const char *)imodule , -1) ;
-			//displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, utf8len ); 
-			  sprintf(tmpBuf, " %s", "<br>");
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); */
+			 sprintf(tmpBuf,
+					 "<font face=\"%s\">",
+					 "caslon");	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 			utf8len = g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
+			 
+			utf8len = g_utf8_strlen ( (const char *)imodule , strlen((const char *)imodule) ) ;
+			 g_warning("utf8len = %d - %d",utf8len, strlen((const char *)imodule)); 
+			displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
+			 /* sprintf(tmpBuf, " %s", "</font><br>");
+			 
+			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+			utf8len = g_utf8_strlen (utf8str , -1) ;
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); */
+			 
 		 }else{
 			 g_warning("not utf8 string!");
 			 //displayHTML(GTK_WIDGET(gtkText),"not utf8 string!" , strlen("not utf8 string!") ); 

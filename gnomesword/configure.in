@@ -128,6 +128,7 @@ dnl looking for aspell
    HAVE_ASPELL=yes 
    have_speller="yes"
    AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
+   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
    echo "found"
   else
    AC_MSG_CHECKING([for ispell]) 
@@ -137,6 +138,7 @@ dnl looking for aspell
     HAVE_ISPELL=yes 
     have_speller="yes"
     AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
+    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
     echo "found"
    fi
   fi
