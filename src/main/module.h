@@ -30,6 +30,8 @@ extern "C" {
 char *get_preverse_header(char * module_name, char * key, int pvHeading);
 char *get_module_key(void);
 char *get_module_name(void);
+const char *get_footnote_type(char * module_name, char * key, char * note);
+char *get_crossref(char *note);
 char *get_footnote_body(char *note);
 int get_display_level(char * module_name);	
 int is_module_rtl(char * mod_name);

@@ -114,6 +114,62 @@ char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
 
 /******************************************************************************
  * Name
+ *   backend_get_footnote_type
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   char *backend_get_footnote_type(char * module_name, 
+ *                                       char * key, char * note)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+const char *backend_get_footnote_type(char *module_name,
+				char *key, char *note)
+{
+	SWModule *module = sw.text_mgr->Modules[module_name];
+	
+	module->SetKey(key);
+	module->RenderText();
+	
+	return module->getEntryAttributes()["Footnote"][note]["type"].c_str();
+}
+
+/******************************************************************************
+ * Name
+ *   backend_get_footnote_type
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   char *backend_get_footnote_type(char * module_name, 
+ *                                       char * key, char * note)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+char *backend_get_crossref(char *module_name, char *key, char *note)
+{
+	SWModule *module = sw.text_mgr->Modules[module_name];
+	module->Error();
+	module->SetKey(key);
+	module->RenderText();
+	
+	return strdup(module->getEntryAttributes()["Footnote"][note]["refList"].c_str());
+}
+
+
+/******************************************************************************
+ * Name
  *   backend_get_footnote_body
  *
  * Synopsis
@@ -896,7 +952,7 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
 	int is_text = false;
-
+	
 	switch (manager) {
 	case TEXT_MGR:
 		mod = sw.text_mgr->Modules[module_name];
@@ -924,10 +980,11 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 	if (mod) {
 		mod->SetKey(key);
 		// work-a-round for bug in thmlhtmlhref filter
-		if ((!strcmp(mod->Name(), "AmTract")) ||
-		    (!strcmp(mod->Name(), "Scofield")))
-			return strdup((char *) mod->getRawEntry());
-		else
+		if(!strcmp(sw.version,"1.5.6")) {
+			if ((!strcmp(mod->Name(), "AmTract")) ||
+			    (!strcmp(mod->Name(), "Scofield")))
+				return strdup((char *) mod->getRawEntry());
+		} else
 			return strdup((char *) mod->RenderText());
 	}
 	return NULL;
@@ -1263,10 +1320,11 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 		versekey = key;
 		mod->SetKey(versekey);
 		// work-a-round for bug in thmlhtmlhref filter
-		if ((!strcmp(mod->Name(), "AmTract"))
-		    || (!strcmp(mod->Name(), "Scofield")))
-			return strdup(mod->getRawEntry());
-		else
+		if(!strcmp(sw.version,"1.5.6")) {
+			if ((!strcmp(mod->Name(), "AmTract"))
+			    || (!strcmp(mod->Name(), "Scofield")))
+				return strdup(mod->getRawEntry());
+		} else
 			return strdup(mod->RenderText());
 	}
 	return NULL;

@@ -57,6 +57,7 @@ static gchar *s_module_name;
 static gint button_mod_list;
 static gint button_vl_html;
 static gchar *buf_module;
+GList *list_of_verses;
 
 /******************************************************************************
  * Name
@@ -347,54 +348,54 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	GtkTreeSelection *selection;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-
+	RESULTS *list_item;
+	
+	
+	list_of_verses = g_list_first(list_of_verses);
+	if(list_of_verses) {
+		while(list_of_verses) {
+			g_free(list_of_verses->data);
+			list_of_verses = g_list_next(list_of_verses);
+		}
+		g_list_free(list_of_verses);
+	}
+	list_of_verses = NULL;
+	
 	strcpy(settings.sb_search_mod,module_name);
 	
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
 	
-	str = g_string_new("");
-	s_module_name = g_strdup(module_name);
 	strcpy(sidebar.mod_name, module_name);
+	
 	if (verse_list[0] == 'S' && verse_list[1] == 'e'
 	    && verse_list[2] == 'e') {
 		verse_list += 4;
 	}
-	if (verse_list[0] == 'c' && verse_list[1] == 'h'
-	    && verse_list[2] == '.') {
-		verse_list += 4;
-		g_string_sprintf(str, "%s %s", get_book_from_key(key),
-				 verse_list);
-		verse_list = str->str;
-
-	}
-	for (i = 0; i < strlen(verse_list); i++) {
-		if (verse_list[i] == '+')
-			verse_list[i] = ' ';
-		if (verse_list[i] == ',')
-			verse_list[i] = ';';
-	}
 	i = 0;
 	
-	count = start_parse_verse_list(verse_list);
+	count = start_parse_verse_list(verse_list,key);
 	while (count--) {
 		next_verse = get_next_verse_list_element(i++);
 		if (!next_verse)
 			break;
-		tmp = g_list_append(tmp, (gchar *) next_verse);
-		//g_free(next_verse);
+		list_item = g_new(RESULTS,1);
+		list_item->module = module_name;
+		list_item->key = (gchar *) next_verse;
+		list_of_verses = g_list_append(list_of_verses, 
+						(RESULTS *) list_item);
 	}
+	tmp = list_of_verses;
 	while (tmp != NULL) {
+		list_item = (RESULTS *) tmp->data;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
-					   (const char *) tmp->data, -1);
+					   (const char *) list_item->key, -1);
 		
 		if (i == 0)
-			first_key = g_strdup((const char *) tmp->data);
+			first_key = g_strdup((const char *) list_item->key);
 		++i;
-
-		gui_display_html(vl_html, str->str, str->len);
 		tmp = g_list_next(tmp);
 	}
 	
@@ -413,7 +414,8 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 				    (sidebar.optionmenu1), 3);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
-	g_string_free(str, TRUE);
+
+	//g_string_free(str, TRUE);
 }
 
 /******************************************************************************
@@ -847,10 +849,11 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 
 	if(event) {
 		switch (event->button) {
-		case 1:
+		case 1: 
+			gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 2:
-			gui_change_module_and_key(settings.sb_search_mod, key);
+			//gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 3:
 	
@@ -931,7 +934,7 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 					gpointer user_data)
 {
-	gui_verselist_to_bookmarks(settings.sb_search_mod);
+	gui_verselist_to_bookmarks(list_of_verses);
 }
 
 

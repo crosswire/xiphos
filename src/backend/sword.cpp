@@ -154,9 +154,10 @@ static char *get_sword_locale(void)
 void backend_init(void)
 {	
 	char *sword_locale = NULL;
-	
-	ModMap::iterator it;
+	sw.version = get_sword_version();
+	ModMap::iterator it; 
 	g_print("gnomesword-%s\n", VERSION);
+	g_print("sword-%s\n", sw.version);
 	g_print("%s\n", "Initiating Sword\n");
 	g_print("System locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
