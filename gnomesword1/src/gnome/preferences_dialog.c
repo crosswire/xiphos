@@ -116,7 +116,6 @@ struct _preferences_check_buttons {
 	GtkWidget *use_studypad_dialog;
 	GtkWidget *use_percomm_dialog;
 	
-	GtkWidget *bibletext_in_dialog;
 	GtkWidget *commentary_in_dialog;
 	GtkWidget *dictionary_in_dialog;
 	GtkWidget *book_in_dialog;
@@ -617,15 +616,6 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.docked =
 	    GTK_TOGGLE_BUTTON(check_button.dock_shortcut_bar)->active;
 	    
-	settings.bibletext_in_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.bibletext_in_dialog)->active;	    
-	settings.commentary_in_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.commentary_in_dialog)->active;
-	settings.dictionary_in_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.dictionary_in_dialog)->active;	    
-	settings.book_in_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.book_in_dialog)->active;	    
-	    
 	settings.inViewer =
 	    GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->active;
 	settings.inDictpane =
@@ -1004,8 +994,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *frame42;
 	GtkWidget *vbox54;
 	GtkWidget *frame72;
-	GtkWidget *frame572;
-	GtkWidget *vbox555;
 	GtkWidget *vbox86;
 	GtkWidget *frame43;
 	GtkWidget *vbox55;
@@ -1447,54 +1435,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
 				     TRUE);
-
-	frame572 = gtk_frame_new(_("Show Bookmarks in New Dialog"));
-	gtk_widget_show(frame572);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame572, TRUE, TRUE, 0);
-	
-	vbox555 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox555);
-	gtk_container_add(GTK_CONTAINER(frame572), vbox555);
-	
-	check_button.bibletext_in_dialog =
-	    gtk_check_button_new_with_label(_("Bible Texts"));
-	gtk_widget_show(check_button.bibletext_in_dialog);
-	gtk_box_pack_start(GTK_BOX(vbox555),
-			   check_button.bibletext_in_dialog, FALSE,
-			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, check_button.bibletext_in_dialog,
-	  _("Do you want to have Bibletext bookmarks displayed in a new Bibletext Dialog"),
-			     NULL);
-	
-	check_button.commentary_in_dialog =
-	    gtk_check_button_new_with_label(_("Commentaries"));
-	gtk_widget_show(check_button.commentary_in_dialog);
-	gtk_box_pack_start(GTK_BOX(vbox555),
-			   check_button.commentary_in_dialog, FALSE,
-			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, check_button.commentary_in_dialog,
-	  _("Do you want to have Bibletext bookmarks displayed in a new Bibletext Dialog"),
-			     NULL);			     
-	
-	check_button.dictionary_in_dialog =
-	    gtk_check_button_new_with_label(_("Dictionaries"));
-	gtk_widget_show(check_button.dictionary_in_dialog);
-	gtk_box_pack_start(GTK_BOX(vbox555),
-			   check_button.dictionary_in_dialog, FALSE,
-			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, check_button.dictionary_in_dialog,
-	  _("Do you want to have Bibletext bookmarks displayed in a new Bibletext Dialog"),
-			     NULL);			     
-	
-	check_button.book_in_dialog =
-	    gtk_check_button_new_with_label(_("General Books"));
-	gtk_widget_show(check_button.book_in_dialog);
-	gtk_box_pack_start(GTK_BOX(vbox555),
-			   check_button.book_in_dialog, FALSE,
-			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, check_button.book_in_dialog,
-	  _("Do you want to have Bibletext bookmarks displayed in a new Bibletext Dialog"),
-			     NULL);
 			     
 	frame43 = gtk_frame_new(_("Misc"));
 	gtk_widget_show(frame43);
@@ -2235,20 +2175,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     settings.showbookgroup);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_history_group),
-				     settings.showhistorygroup);
-				     
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.bibletext_in_dialog),
-				     settings.bibletext_in_dialog);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.commentary_in_dialog),
-				     settings.commentary_in_dialog);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.dictionary_in_dialog),
-				     settings.dictionary_in_dialog);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.book_in_dialog),
-				     settings.book_in_dialog);				     
+				     settings.showhistorygroup);		     
 				     
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.dock_shortcut_bar),
@@ -2440,23 +2367,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
-
-	gtk_signal_connect(GTK_OBJECT(check_button.bibletext_in_dialog),
-			   "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
-	gtk_signal_connect(GTK_OBJECT(check_button.commentary_in_dialog),
-			   "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
-	gtk_signal_connect(GTK_OBJECT(check_button.dictionary_in_dialog),
-			   "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
-	gtk_signal_connect(GTK_OBJECT(check_button.book_in_dialog),
-			   "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
 
 	gtk_signal_connect(GTK_OBJECT(check_button.use_studypad),
 			   "toggled",

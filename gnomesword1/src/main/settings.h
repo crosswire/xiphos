@@ -199,12 +199,6 @@ struct _settings {
 	
 	/* is Bibletime on the system */
 	gboolean have_bibletime;
-	
-	/* display bookmarks in dialogs */
-	gboolean bibletext_in_dialog;
-	gboolean commentary_in_dialog;
-	gboolean dictionary_in_dialog;
-	gboolean book_in_dialog;
 };
 
 extern SETTINGS settings;

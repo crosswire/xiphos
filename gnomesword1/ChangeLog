@@ -1,3 +1,7 @@
+2003-02-25  Terry Biggs <tbiggs@users.sf.net>
+
+	* added open in dialog item to bookmark popup menu
+
 2003-02-24  Terry Biggs <tbiggs@users.sf.net>
 
 	* bookmarks are only saved if they have been changed
