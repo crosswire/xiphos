@@ -31,10 +31,10 @@
 #endif
 
 #include <swmgr.h>
-#include <gs_markupfiltmgr.h>
 #include <gnome.h>
 #include <glib-2.0/glib.h>
 
+#include "backend/gs_markupfiltmgr.h"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 #include "backend/sword_main.hh"

@@ -22,7 +22,6 @@
 #include <swmgr.h>
 
 #include <gnome.h>
-#include <gs_markupfiltmgr.h>
 #include <versekey.h>
 #include <regex.h>
 #include <gbfplain.h>
@@ -31,6 +30,7 @@
 #include <utf8html.h>
 
 #include "backend/dialogs.hh"
+#include "backend/gs_markupfiltmgr.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
