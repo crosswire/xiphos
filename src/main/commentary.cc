@@ -23,16 +23,57 @@
 #  include <config.h>
 #endif
 
-#ifdef USE_GNOME2
+#include <swmgr.h>
+#include <swmodule.h>
+#include <swconfig.h>
+
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 
 #include "main/commentary.h"
+#include "main/settings.h"
 
 #include "backend/sword.h" 
 
+using namespace sword;
+using namespace std;
+
+/******************************************************************************
+ * Name
+ *   main_save_module_options_comm
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   int main_save_module_options_comm(char * mod_name, char * option, 
+ *				    int choice)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int main_save_module_options_comm(char * mod_name, char * option, int choice)
+{
+	gchar *on_off;
+	gchar *buf;
+	
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}	
+
+	buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	SWConfig module_options(buf);
+
+	module_options[mod_name][option] = on_off;
+
+	module_options.Save();
+	g_free(buf);
+	return true;	
+}
 
 /******************************************************************************
  * Name
@@ -185,5 +226,6 @@ char* navigate_commentary(char * mod_name, gint direction)
 {
 	return backend_nav_module(1, mod_name, direction);
 }
+
 
 /******  end of file  ******/

@@ -36,6 +36,7 @@ extern "C" {
 	
 #include "main/display.hh"
 #include "main/settings.h"
+#include "main/global_ops.hh"
 
 #include "gui/utilities.h"
 #include "gui/widgets.h"
@@ -57,7 +58,10 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	GtkHTML *html = GTK_HTML(gtkText);
 	MOD_FONT *mf = get_font(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	
 	(const char *)imodule;	// snap to entry
+	main_set_global_options(ops);
 	if(backend_get_mod_type(imodule.Name()) == 3)
 		keytext = backend_gbs_get_treekey_local_name(
 			backend_gbs_get_treekey_offset());
@@ -88,6 +92,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gtk_html_set_editable(html, was_editable);
 	g_string_free(str, TRUE);
 	free_font(mf);	
+	g_free(ops);
 }
 
 

@@ -10,11 +10,12 @@ noinst_LIBRARIES = libmain.a
 
 libmain_a_SOURCES =  \
     bibletext.c bibletext.h \
-    commentary.c commentary.h \
+    commentary.cc commentary.h \
     configs.c configs.h \
     dictlex.c dictlex.h \
     display.cc display.hh \
     gbs.c gbs.h \
+    global_ops.cc global_ops.hh \
     key.c key.h \
     lists.c lists.h \
     main.c \

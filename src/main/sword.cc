@@ -44,7 +44,8 @@
  
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
-
+#include "backend/mgr.hh"
+/*
 void set_global_option(int manager, char * option, gboolean choice)
 {
 	char *on_off;
@@ -54,9 +55,30 @@ void set_global_option(int manager, char * option, gboolean choice)
 	} else {
 		on_off = "Off";
 	}
-	backend_set_global_option(manager, option, on_off);
+	switch(manager) {
+		case TEXT_MGR:
+			sw.text_mgr->setGlobalOption(option, on_off);
+		break;
+		case COMM_MGR:
+			sw.display_mgr->setGlobalOption(option, on_off);
+		break;
+		case GBS_MGR:			
+			sw.display_mgr->setGlobalOption(option, on_off);
+		break;
+		case MAIN_MGR:			
+			sw.main_mgr->setGlobalOption(option, on_off);
+		break;
+		case SEARCH_MGR:
+			sw.search_mgr->setGlobalOption(option, on_off);
+		break;	
+		case INTER_MGR:
+			sw.inter_mgr->setGlobalOption(option, on_off);
+		break;
+	}	
+	sw.results->setGlobalOption(option, on_off);
+	//backend_set_global_option(manager, option, on_off);
 }
-
+*/
 void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();

@@ -29,7 +29,6 @@
  
 #include "gui/gbs_display.h"
 #include "gui/gbs.h"
-#include "gui/mod_global_ops.h"
 #include "gui/utilities.h"
 
 #include "main/gbs.h"
@@ -144,7 +143,7 @@ void gbs_display(GBS_DATA * gbs, gint level)
 	else
 		str = g_string_new(HTML_START "<body>");
 
-	gui_set_global_options(gbs->ops);
+	main_set_global_options(gbs->ops);
 	
 	text = get_text_from_offset(gbs->mod_name, gbs->offset);
 	tmpbuf = gbs_get_treekey_local_name(gbs->offset);

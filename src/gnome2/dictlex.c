@@ -866,7 +866,7 @@ static void create_menu(GdkEventButton * event)
 	GtkWidget *separator;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = settings.DictWindowModule;
-	GLOBAL_OPS *ops = gui_new_globals(mod_name);
+	GLOBAL_OPS *ops = main_new_globals(mod_name);
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);

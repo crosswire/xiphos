@@ -22,12 +22,10 @@
 #ifndef __BIBLETEXT_DIALOG_H__
 #define __BIBLETEXT_DIALOG_H__
 
-#include "gui/bibletext.h"
+//#include "gui/bibletext.h"
 
+#include "main/global_ops.hh"
 
-
-#include "gui/mod_global_ops.h"
-	
 
 typedef struct _text_data TEXT_DATA;
 struct _text_data {

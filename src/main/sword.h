@@ -50,7 +50,7 @@ extern "C" {
 
 /*** function prototypes ***/
 
-void set_global_option(int manager, char * option, gboolean choice);
+//void set_global_option(int manager, char * option, gboolean choice);
 void delete_module_mgr(void);
 int gbs_treekey_get_parent(unsigned long offset);
 const char *get_sword_version(void);

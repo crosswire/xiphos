@@ -323,7 +323,7 @@ static void chapter_display_html(GtkWidget * html_widget, gchar * mod_name,
 	 * set global options for current module 
 	 */
 	if (use_globals)
-		gui_set_global_options(ops);
+		main_set_global_options(ops);
 		//set_global_options(tgs);
 
 	sprintf(buf,
@@ -499,7 +499,7 @@ static void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 	 * set global options for current module 
 	 */
 	if (use_globals)
-		gui_set_global_options(ops);
+		main_set_global_options(ops);
 	
 	cur_verse = get_verse_from_key(tmpkey);
 	cur_chapter = get_chapter_from_key(tmpkey);
