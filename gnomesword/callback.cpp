@@ -65,7 +65,7 @@ gboolean dicttabs,
 	showdictgroup,
 	showhistorygroup;
 GtkWidget *listeditor;		/* pointer to ListEditor */
-
+gchar *tmpcolor;
 /******************************************************************************
  * externals
 ******************************************************************************/
@@ -85,6 +85,7 @@ extern gboolean autoscroll;
 extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern GtkWidget *htmlCommentaries;
+extern gchar *mycolor;
 /******************************************************************************
 *******************************************************************************
  *callbacks fileselection dialogs
@@ -682,11 +683,16 @@ on_cpfgCurrentverse_color_set(GnomeColorPicker * gnomecolorpicker,
 			      guint arg3, guint arg4, gpointer user_data)
 {
 	GtkWidget *dlg, *btnok, *btnapply;
+	gdouble colo[4];
+        //gchar *colour;
 
 	num1 = arg1;
 	num2 = arg2;
 	num3 = arg3;
-
+	
+	gnome_color_picker_get_d(gnomecolorpicker, &colo[0] , &colo[1], &colo[2], &colo[3]);
+        tmpcolor = gdouble_arr_to_hex(colo, 1);
+        //g_warning(colour);
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(gnomecolorpicker));
 	btnok = lookup_widget(dlg, "btnPropertyboxOK");
 	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
@@ -883,10 +889,13 @@ void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *dlg;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	if (applycolor)
-		setcurrentversecolor(num1, num2, num3);
+	if (applycolor){
+		mycolor = tmpcolor;
+        	strcpy(settings->currentverse_color,mycolor);        	
+		setcurrentversecolor(num1, num2, num3); /* if color has changed  */
+		//g_free(tmpcolor);
+	}
 	applycolor = FALSE;
-
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
 	applyoptions(MainFrm, bar, comtabs, dicttabs, showtextgroup, showcomgroup,
 		     showdictgroup, showhistorygroup);
@@ -896,8 +905,12 @@ void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnPropertyboxApply_clicked(GtkButton * button, gpointer user_data)
 {
-	if (applycolor)
-		setcurrentversecolor(num1, num2, num3);	//-- if color has changed
+	if (applycolor){
+		mycolor = tmpcolor;		
+        	strcpy(settings->currentverse_color,mycolor);
+		setcurrentversecolor(num1, num2, num3);	/* if color has changed */
+		//g_free(tmpcolor);
+	}
 	applycolor = FALSE;
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
 	applyoptions(MainFrm,bar, comtabs, dicttabs, showtextgroup, showcomgroup,

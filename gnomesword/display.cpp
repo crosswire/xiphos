@@ -54,6 +54,7 @@ GdkColor GTKEntryDisp::colourCur;
 GdkColor myGreen;
 GdkColor BGcolor;
 GdkFont *roman_font, *italic_font, *versenum_font, *bold_font;
+gchar *mycolor;
 
 gchar *font_mainwindow =
     "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
@@ -152,7 +153,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbText")), 1);
 			      	
-			      
+	//colour = gdouble_arr_to_hex(, gint websafe)		
 	beginHTML(GTK_WIDGET(gtkText));
 	strbuf = g_string_new( "<HTML><BODY>" );
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);	
@@ -167,10 +168,13 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
 		g_string_free( strbuf,TRUE);				
 		if (key->Verse() == curVerse) {
+		        strbuf = g_string_new("");
 			if(!strcmp(font,"Symbol")){
-			        strbuf = g_string_new("<FONT COLOR=\"#000FCF\" FACE=\"symbol\">"); 			        	
+			        g_string_sprintf(strbuf, "<FONT COLOR=\"%s\" FACE=\"symbol\">",
+			        	mycolor);			        	
 			} else {
-				strbuf = g_string_new("<FONT COLOR=\"#000FCF\" >");
+				g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">",
+			        	mycolor);
 			}
 			strbuf = g_string_append( strbuf,(const char *) imodule);
 			strbuf = g_string_append( strbuf,"</font><br>" );			
@@ -217,8 +221,8 @@ char GTKEntryDisp::Display(SWModule & imodule)
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
 
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbCom")), 1);
+	/*gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbCom")), 1); */
 
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_forward_delete(GTK_TEXT(gtkText),
