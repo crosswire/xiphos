@@ -56,18 +56,14 @@ struct  _custom_range{
 };
 
 GList * get_element(char * entry);
-char * set_range(char * list);
+int set_range(char * list);
 void save_custom_ranges(GList * ranges);
 GList * load_custom_ranges(void);
 void search_dialog_appbar_update(char percent, void *userData);
 void search_percent_update(char percent, void *userData);
 GList *do_search(gpointer *usr_data);
 int clear_scope(void);	
-int clear_search_list(void);	
-int clear_bounds(void);	
-int set_bounds_upper(char * bound);	
-int set_bounds_lower(char * bound);	
-int set_scope2bounds(void);	
+int clear_search_list(void);
 int set_scope2last_search(void);
 void set_scope2range(void);	
 int set_search_module(char * module);	
