@@ -29,6 +29,7 @@
 #include "gs_popup_cb.h"
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
+#include "gs_html.h"
 #include "gs_viewdict.h"
 #include "gs_viewcomm.h"
 #include "support.h"
@@ -105,15 +106,12 @@ void print_preview_cb (GtkMenuItem * menuitem,  gpointer data)
 //----------------------------------------------------------------------------------------------
 void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+	
 	if (!settings->formatpercom)
 		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
-	}
+	
+	boldHTML( lookup_widget(MainFrm ,"btnBold"), lookup_widget(MainFrm ,(gchar *)user_data));
+	
 }
 
 //----------------------------------------------------------------------------------------------

@@ -113,7 +113,7 @@ INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =      gs_abouts.c     gs_abouts.h     gs_viewcomm.c     gs_viewcomm.h     gs_viewdict.c     gs_viewdict.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_sword.cpp     gs_sword.h     interface.c     interface.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_rwphtml.cpp     gs_rwphtml.h     gs_thmlhtml.cpp     gs_thmlhtml.h     sw_utility.cpp     sw_utility.h
+COMMON_SOURCE =      gs_abouts.c     gs_abouts.h     gs_viewcomm.c     gs_viewcomm.h     gs_viewdict.c     gs_viewdict.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_sword.cpp     gs_sword.h     interface.c     interface.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_rwphtml.cpp     gs_rwphtml.h     gs_thmlhtml.cpp     gs_thmlhtml.h     sw_utility.cpp     sw_utility.h     gs_toolbarEditor.c     gs_toolbarEditor.h
 
 
 SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell_gui.h     char_table.c     char_table.h 
@@ -166,7 +166,8 @@ LIBS = @LIBS@
 @SHORTCUTBAR_TRUE@gs_display.o gs_file.o gs_sword.o interface.o \
 @SHORTCUTBAR_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
 @SHORTCUTBAR_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@SHORTCUTBAR_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o
+@SHORTCUTBAR_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o \
+@SHORTCUTBAR_TRUE@gs_toolbarEditor.o
 @SHORTCUTBAR_SPELL_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o \
 @SHORTCUTBAR_SPELL_TRUE@char_table.o printstuff.o gs_abouts.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_viewcomm.o gs_viewdict.o gs_studypad.o \
@@ -175,27 +176,29 @@ LIBS = @LIBS@
 @SHORTCUTBAR_SPELL_TRUE@interface.o gs_listeditor.o main.o gs_menu.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o \
 @SHORTCUTBAR_SPELL_TRUE@support.o gs_html.o gs_rwphtml.o gs_thmlhtml.o \
-@SHORTCUTBAR_SPELL_TRUE@sw_utility.o
+@SHORTCUTBAR_SPELL_TRUE@sw_utility.o gs_toolbarEditor.o
 @PRINTING_TRUE@gnomesword_OBJECTS =  printstuff.o gs_abouts.o \
 @PRINTING_TRUE@gs_viewcomm.o gs_viewdict.o gs_studypad.o \
 @PRINTING_TRUE@gs_gnomesword.o gs_history.o callback.o display.o \
 @PRINTING_TRUE@gs_display.o gs_file.o gs_sword.o interface.o \
 @PRINTING_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
 @PRINTING_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@PRINTING_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o
+@PRINTING_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o \
+@PRINTING_TRUE@gs_toolbarEditor.o
 @NO_OPS_TRUE@gnomesword_OBJECTS =  gs_abouts.o gs_viewcomm.o \
 @NO_OPS_TRUE@gs_viewdict.o gs_studypad.o gs_gnomesword.o gs_history.o \
 @NO_OPS_TRUE@callback.o display.o gs_display.o gs_file.o gs_sword.o \
 @NO_OPS_TRUE@interface.o gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
 @NO_OPS_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@NO_OPS_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o
+@NO_OPS_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o gs_toolbarEditor.o
 @SPELLING_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o char_table.o \
 @SPELLING_TRUE@gs_abouts.o gs_viewcomm.o gs_viewdict.o gs_studypad.o \
 @SPELLING_TRUE@gs_gnomesword.o gs_history.o callback.o display.o \
 @SPELLING_TRUE@gs_display.o gs_file.o gs_sword.o interface.o \
 @SPELLING_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
 @SPELLING_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@SPELLING_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o
+@SPELLING_TRUE@gs_rwphtml.o gs_thmlhtml.o sw_utility.o \
+@SPELLING_TRUE@gs_toolbarEditor.o
 @SPELLING_PRINTING_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o \
 @SPELLING_PRINTING_TRUE@char_table.o printstuff.o gs_abouts.o \
 @SPELLING_PRINTING_TRUE@gs_viewcomm.o gs_viewdict.o gs_studypad.o \
@@ -204,7 +207,7 @@ LIBS = @LIBS@
 @SPELLING_PRINTING_TRUE@interface.o gs_listeditor.o main.o gs_menu.o \
 @SPELLING_PRINTING_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o \
 @SPELLING_PRINTING_TRUE@support.o gs_html.o gs_rwphtml.o gs_thmlhtml.o \
-@SPELLING_PRINTING_TRUE@sw_utility.o
+@SPELLING_PRINTING_TRUE@sw_utility.o gs_toolbarEditor.o
 @SHORTCUTBAR_TRUE@gnomesword_DEPENDENCIES = 
 @SHORTCUTBAR_SPELL_TRUE@gnomesword_DEPENDENCIES = 
 @PRINTING_TRUE@gnomesword_DEPENDENCIES = 
@@ -234,9 +237,9 @@ DEP_FILES =  .deps/callback.P .deps/char_table.P .deps/display.P \
 .deps/gs_listeditor.P .deps/gs_menu.P .deps/gs_popup_cb.P \
 .deps/gs_rwphtml.P .deps/gs_search.P .deps/gs_search_cb.P \
 .deps/gs_studypad.P .deps/gs_sword.P .deps/gs_thmlhtml.P \
-.deps/gs_viewcomm.P .deps/gs_viewdict.P .deps/interface.P .deps/main.P \
-.deps/printstuff.P .deps/spell.P .deps/spell_gui.P .deps/support.P \
-.deps/sw_utility.P
+.deps/gs_toolbarEditor.P .deps/gs_viewcomm.P .deps/gs_viewdict.P \
+.deps/interface.P .deps/main.P .deps/printstuff.P .deps/spell.P \
+.deps/spell_gui.P .deps/support.P .deps/sw_utility.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
