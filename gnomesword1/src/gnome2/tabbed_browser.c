@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <libxml/tree.h>
 #include <libxml/parser.h>
 
 
@@ -56,8 +57,8 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					gint page_num, GList **tl);
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 					const gchar *label_text);
-
-
+void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
+void set_current_tab (PASSAGE_TAB_INFO *pt);
 
 
 /******************************************************************************
@@ -72,27 +73,97 @@ PASSAGE_TAB_INFO *cur_passage_tab;
  */
 static GList *passage_list;
 static gboolean page_change = FALSE;
-//static gboolean display_change = TRUE;
 static gint removed_page;
+static const gchar *default_tab_filename = ".last_session_tabs";
 
 
 /******************************************************************************
  * Name
- *  
+ *  set_current_tab
  *
  * Synopsis
  *   #include "tabbed_browser.h"
  *
- *   	
+ *   void set_current_tab (PASSAGE_TAB_INFO *pt)	
  *
  * Description
- *   
+ *   point cur_passage_tab to the current tab and turns the close button on 
+ *   and off
+ *
+ * Return value
+ *   void
+ */
+ 
+void set_current_tab (PASSAGE_TAB_INFO *pt)
+{
+	PASSAGE_TAB_INFO *ot = cur_passage_tab;
+	
+	if (ot != NULL && ot->button_close != NULL) {
+		gtk_widget_hide (ot->button_close);
+		gtk_widget_show (ot->close_pixmap);
+	}
+	cur_passage_tab = pt;
+	if (pt != NULL && pt->button_close != NULL) {
+		gtk_widget_show (pt->button_close);
+		gtk_widget_hide (pt->close_pixmap);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  notebook_main_add_page
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
+ *
+ * Description
+ *   adds a new page and label to the main notebook for a new scripture passage
+ *
+ * Return value
+ *   void
+ */
+void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
+{
+	GtkWidget *tab_widget;
+	GtkWidget *menu_label;
+	
+	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show(tbinf->page_widget);
+
+	tab_widget = tab_widget_new(tbinf, (gchar*)tbinf->text_commentary_key);
+
+	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 tbinf->page_widget, tab_widget);
+	
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
+					tbinf->page_widget,
+					(gchar*)tbinf->text_commentary_key);
+	
+	menu_label = gtk_label_new((gchar*)tbinf->text_commentary_key);	
+	gtk_notebook_set_menu_label(GTK_NOTEBOOK(widgets.notebook_main),
+                                             tbinf->page_widget,
+                                             menu_label);
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_save_tabs
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ * Description
+ *   Saves the information for the current set of tabs.
  *
  * Return value
  *   
  */
-/* 
-static void save_tabs(void) //const gchar * filename)
+
+void gui_save_tabs(gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -104,19 +175,18 @@ static void save_tabs(void) //const gchar * filename)
 	gchar *file;
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt;
-	gchar * filename = "mytabs.xml";
-	
+	if (NULL == filename)
+		filename = default_tab_filename;
 	
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
-
 	
 	if (access(tabs_dir, F_OK) == -1) {
 		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
 			printf("can't create tabs dir");
 			return;
 		}
-	}	
-	file = g_strdup_printf("%s/%s",tabs_dir,filename);
+	}
+	file = g_strdup_printf("%s%s",tabs_dir,filename);
 	xml_filename = (const xmlChar *) file;
 	
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
@@ -127,7 +197,7 @@ static void save_tabs(void) //const gchar * filename)
 		return;
 	}
 
-	root_node = xmlNewNode(NULL, (const xmlChar *) "GnomeSword");
+	root_node = xmlNewNode(NULL, (const xmlChar *) "GnomeSword_Tabs");
 	xml_attr = xmlNewProp(root_node, "Version", VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 	
@@ -151,14 +221,133 @@ static void save_tabs(void) //const gchar * filename)
 				(const xmlChar *)pt->text_commentary_key);		
 		xmlNewProp(cur_node, "dictlex_key", 
 				(const xmlChar *)pt->dictlex_key);		
-		xmlNewProp(cur_node, "book_key", 
-				(const xmlChar *)pt->book_key);
+		xmlNewProp(cur_node, "book_offset", 
+				(const xmlChar *)pt->book_offset);
 		tmp = g_list_next(tmp);
 	}
 	xmlSaveFormatFile(xml_filename, xml_doc,1);
 	xmlFreeDoc(xml_doc);
 }
-*/
+
+
+/******************************************************************************
+ * Name
+ *   gui_load_tabs
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ * Description
+ *   Load the tabs from the given file.
+ *
+ * Return value
+ *   
+ */
+
+void gui_load_tabs(gchar *filename)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr tmp_node, childnode;
+	const xmlChar *xml_filename;
+	gchar *tabs_dir, *file, *val;
+	gboolean error = FALSE;
+
+	GList *tmp = NULL;
+	PASSAGE_TAB_INFO *pt = NULL;
+
+	if (filename == NULL)
+	{
+		error = TRUE;
+	}
+	else
+	{
+		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+		if (access(tabs_dir, F_OK) == -1) {
+			printf("Tabs directory cannot be accessed");
+			return;
+		}	
+		file = g_strdup_printf("%s%s",tabs_dir,filename);
+
+		xml_filename = (const xmlChar *) file;
+		xml_doc = xmlParseFile(xml_filename);
+		if (xml_doc == NULL) {
+			fprintf(stderr, "Document not parsed successfully. \n");
+			error = TRUE;
+		}
+		else
+		{
+			tmp_node = xmlDocGetRootElement(xml_doc);
+			if (tmp_node == NULL) {
+				fprintf(stderr,"empty document\n");
+				xmlFreeDoc(xml_doc);
+				error = TRUE;
+			}
+			else if (xmlStrcmp(tmp_node->name, (const xmlChar *)"GnomeSword_Tabs")) {
+				fprintf(stderr,"document of the wrong type, root node != GnomeSword_Tabs");
+				xmlFreeDoc(xml_doc);
+				error = TRUE;
+			}
+		}
+		
+		if (error == FALSE)
+		{
+			for (childnode = tmp_node->children; childnode != NULL; childnode = childnode->next)
+			{
+				if (!xmlStrcmp(childnode->name, (const xmlChar*)"tabs"))
+				{
+					tmp_node = childnode;
+					for (tmp_node = tmp_node->children; tmp_node != NULL; tmp_node = tmp_node->next)
+					{
+						if (!xmlStrcmp(tmp_node->name, (const xmlChar*)"tab"))
+						{
+							pt = g_new0(PASSAGE_TAB_INFO, 1);
+							
+							val = (gchar*)xmlGetProp(tmp_node, "text_mod");
+							pt->text_mod = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "commentary_mod");
+							pt->commentary_mod = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "dictlex_mod");
+							pt->dictlex_mod = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "book_mod");
+							pt->book_mod = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "text_commentary_key");
+							pt->text_commentary_key = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "dictlex_key");
+							pt->dictlex_key = g_strdup(val);
+							xmlFree(val);
+							val = (gchar*)xmlGetProp(tmp_node, "book_offset");
+							pt->book_offset = g_strdup(val);
+							xmlFree(val);
+					
+							passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+							notebook_main_add_page(pt);
+						}
+					}
+				}
+			}
+		}
+		xmlFreeDoc(xml_doc);
+
+		if (error == TRUE || pt == NULL) {
+			pt = g_new0(PASSAGE_TAB_INFO, 1);
+			pt->text_mod = g_strdup(settings.MainWindowModule);
+			pt->commentary_mod = g_strdup(settings.CommWindowModule);
+			pt->dictlex_mod = g_strdup(settings.DictWindowModule);
+			pt->book_mod = NULL;
+			pt->text_commentary_key = g_strdup(settings.currentverse);
+			pt->dictlex_key = g_strdup(settings.dictkey);
+			pt->book_offset = NULL;
+			passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+			notebook_main_add_page(pt);
+		}
+	}
+	set_current_tab(pt);
+}
 
 
 /******************************************************************************
@@ -183,39 +372,6 @@ static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
 	gui_close_passage_tab(gtk_notebook_page_num
 				(GTK_NOTEBOOK(widgets.notebook_main),
 				pt->page_widget));
-}
-
-
-/******************************************************************************
- * Name
- *  set_current_tab
- *
- * Synopsis
- *   #include "tabbed_browser.h"
- *
- *   void set_current_tab (PASSAGE_TAB_INFO *pt)	
- *
- * Description
- *   point cur_passage_tab to the current tab and turns the close button on 
- *   and off
- *
- * Return value
- *   void
- */
- 
-static void set_current_tab (PASSAGE_TAB_INFO *pt)
-{
-	PASSAGE_TAB_INFO *ot = cur_passage_tab;
-	
-	if (ot != NULL && ot->button_close != NULL) {
-		gtk_widget_hide (ot->button_close);
-		gtk_widget_show (ot->close_pixmap);
-	}
-	cur_passage_tab = pt;
-	if (pt != NULL && pt->button_close != NULL) {
-		gtk_widget_show (pt->button_close);
-		gtk_widget_hide (pt->close_pixmap);
-	}
 }
 
 
@@ -345,44 +501,6 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	page_change = FALSE;
 	//gtk_notebook_reorder_child(notebook,GTK_WIDGET(pt->page_widget),0);
 	//sets the book mod and key
-}
-
-/******************************************************************************
- * Name
- *  notebook_main_add_page
- *
- * Synopsis
- *   #include "tabbed_browser.h"
- *
- *   void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
- *
- * Description
- *   adds a new page and label to the main notebook for a new scripture passage
- *
- * Return value
- *   void
- */
-static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
-{
-	GtkWidget *tab_widget;
-	GtkWidget *menu_label;
-	
-	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show(tbinf->page_widget);
-
-	tab_widget = tab_widget_new(tbinf, (gchar*)tbinf->text_commentary_key);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 tbinf->page_widget, tab_widget);
-	
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
-					tbinf->page_widget,
-					(gchar*)tbinf->text_commentary_key);
-	
-	menu_label = gtk_label_new((gchar*)tbinf->text_commentary_key);	
-	gtk_notebook_set_menu_label(GTK_NOTEBOOK(widgets.notebook_main),
-                                             tbinf->page_widget,
-                                             menu_label);
 }
 
 
@@ -606,7 +724,7 @@ void gui_open_module_in_new_tab(gchar *module)
 
 /******************************************************************************
  * Name
- *  gui_close_al_tabs
+ *  gui_close_all_tabs
  *
  * Synopsis
  *   #include "tabbed_browser.h"
@@ -614,7 +732,7 @@ void gui_open_module_in_new_tab(gchar *module)
  *   void gui_close_all_tabs(void)
  *
  * Description
- *   called from preferences dialog when disable browsing is choosen
+ *   called from preferences dialog when disable browsing is chosen
  *
  * Return value
  *   void
@@ -644,6 +762,33 @@ void gui_close_all_tabs(void)
 	passage_list = NULL;
 	cur_passage_tab = NULL;
 //	gui_set_text_frame_label(cur_t);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_open_tabs
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_open_tabs(void)
+ *
+ * Description
+ *   called from preferences dialog when enable browsing is chosen
+ *
+ * Return value
+ *   void
+ */
+void gui_open_tabs(void)
+{
+	removed_page = 1;
+	cur_passage_tab = NULL;
+	passage_list = NULL;
+
+	gui_load_tabs(default_tab_filename);
+
+	gtk_widget_show(widgets.button_new_tab);
 }
 
 
@@ -703,66 +848,24 @@ static void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_da
  * Return value
  *   void
  */
-void gui_notebook_main_setup(GList *ptlist)
+void gui_notebook_main_setup(void)
 {
-	GList *tmp = NULL;
-	PASSAGE_TAB_INFO *pt = NULL;
-	static gboolean connected = FALSE;
-	
 	removed_page = 1;
 	cur_passage_tab = NULL;
 	passage_list = NULL;
-	tmp = ptlist;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		pt = g_new0(PASSAGE_TAB_INFO, 1);
-		pt->text_mod = NULL;
-		pt->commentary_mod = NULL;
-		pt->dictlex_mod = NULL;
-		pt->book_mod = NULL;
-		pt->text_commentary_key = NULL;
-		pt->dictlex_key = NULL;
-		pt->book_offset = NULL;
 
-		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
-		notebook_main_add_page(pt);
-		tmp = g_list_next(tmp);
-	}
-	if (NULL == pt) {
-		pt = g_new0(PASSAGE_TAB_INFO, 1);
-		pt->text_mod = g_strdup(settings.MainWindowModule);
-		pt->commentary_mod = g_strdup(settings.CommWindowModule);
-		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
-		pt->book_mod = NULL;
-		pt->text_commentary_key = g_strdup(settings.currentverse);
-		pt->dictlex_key = g_strdup(settings.dictkey);
-		pt->book_offset = NULL;
-		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
-		notebook_main_add_page(pt);
-	}
-	set_current_tab(pt);
-	/*
-	 * this is ugly :(
-	 * but when browsing is truned off and then back on in preferences
-	 * we don't need to connect or bad things happen since we are already
-	 * connected.
-	 *
-	 */
-	if(!connected) {
-		g_signal_connect(GTK_OBJECT(widgets.notebook_main),
-				   "switch_page",
-				   G_CALLBACK
-				   (on_notebook_main_switch_page), &passage_list);
-		g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
-				   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
-		connected = TRUE;
-	}
+	gui_load_tabs(default_tab_filename);
+
+	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
+			   "switch_page",
+			   G_CALLBACK
+			   (on_notebook_main_switch_page), &passage_list);
+	g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
+			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
 		
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
-	//gui_set_text_frame_label(cur_t);
 	gtk_widget_show(widgets.button_new_tab);
-	g_list_free(tmp);
 }
 
 /******************************************************************************
@@ -782,6 +885,7 @@ void gui_notebook_main_setup(GList *ptlist)
  */
 void gui_notebook_main_shutdown(void)
 {	
+	gui_save_tabs(default_tab_filename);
 	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
 		PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)passage_list->data;

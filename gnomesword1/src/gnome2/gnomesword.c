@@ -115,7 +115,7 @@ void frontend_init(void)
 	main_dialogs_setup();
 	// setup passage notebook
 	if(settings.browsing)
-		gui_notebook_main_setup(NULL);
+		gui_notebook_main_setup();
 
 	gui_set_sidebar_porgram_start();
 }
@@ -273,6 +273,9 @@ void shutdown_frontend(void)
 
 	main_shutdown_list();
 
+	if(settings.browsing)
+		gui_notebook_main_shutdown();
+
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
 	g_free(settings.shortcutbarDir);
@@ -283,8 +286,6 @@ void shutdown_frontend(void)
 	main_delete_sidebar_search_backend();
 	main_delete_paraellel_view();
 	
-	if(settings.browsing)
-		gui_notebook_main_shutdown();
 //#ifdef DEBUG	
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
 //#endif
