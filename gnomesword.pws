@@ -6,11 +6,11 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1
-1=57
-2=160
-3=95
-4=1317
+0=1397
+1=5
+2=162
+3=1
+4=43
 5=34
 6=33
 7=1
@@ -46,34 +46,29 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/main/sword.c
-1=/home/terry/gnomesword/gnomesword1/src/main/settings.c
-2=/home/terry/gnomesword/gnomesword1/src/backend/shortcutbar.cpp
-3=/home/terry/gnomesword/gnomesword1/src/main/shortcutbar.c
-4=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_main.c
-5=/home/terry/gnomesword/gnomesword1/src/backend/shortcutbar.h
-6=/home/terry/gnomesword/gnomesword1/src/main/shortcutbar.h
-7=/home/terry/gnomesword/gnomesword1/src/backend/bookmarks.cpp
+0=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
+1=/home/terry/gnomesword/gnomesword1/ChangeLog
+2=/home/terry/gnomesword/gnomesword1/gnomesword.prj
 
 [replace_text]
-0=oldbmfiles
-1=frame_search
-2=settings.frame_search
-3=so.frame_search
-4=button_close
-5=show_in_statusbar
-6=vt->statusbar
-7=notebook_search
+0=add_modlist_to_label
+1=oldbmfiles
+2=frame_search
+3=settings.frame_search
+4=so.frame_search
+5=button_close
+6=show_in_statusbar
+7=vt->statusbar
 
 [find_text]
-0=bmfiles
-1=group_num
-2=dir
-3=group_name
-4=filename
-5=text
-6=settings.frame_search
-7=so.frame_search
+0=on_button_yes_clicked
+1=dialog
+2=versestyle_item
+3=cbtnUseDefaultDict
+4=checkbuttonSBDock
+5=cbtnFavoritesGroup
+6=gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnFavoritesGroup),
+7=where
 
 [executer args]
 0=newconfigs

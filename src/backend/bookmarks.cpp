@@ -378,7 +378,7 @@ GNode * backend_load_bookmarks(char *dir)
 	
         t = "|";
         sprintf(conffile, "%s/personal.conf", dir);
-	cout << conffile;
+	//cout << conffile;
         if (access(conffile, F_OK) == -1)
                 return NULL;
         bookmarkInfo = new SWConfig(conffile);
