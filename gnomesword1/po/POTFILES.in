@@ -4,10 +4,12 @@ src/gnome/about_modules.c
 src/gnome/about_sword.c
 src/gnome/bibletext.c
 src/gnome/bibletext_dialog.c
+src/gnome/bibletext_menu.c
 src/gnome/bookmarks.c
+src/gnome/cipher_key_dialog.c
 src/gnome/commentary.c
 src/gnome/commentary_dialog.c
-src/gnome/cipher_key_dialog.c
+src/gnome/commentary_menu.c
 src/gnome/dialog.c
 src/gnome/dictlex.c
 src/gnome/dictlex_dialog.c

@@ -5,6 +5,10 @@ INCLUDES =  \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
+EXTRA_DIST =  \
+	$(top_builddir)/src/gui/*.h \
+	shortcutbar.h
+
 bin_PROGRAMS = gnomesword-1.0
 
 gnomesword_1_0_SOURCES =  \
@@ -22,6 +26,7 @@ gnomesword_1_0_SOURCES =  \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \
+    dictlex_menu.c \
     display_info.c \
     dummy.cpp \
     editor.c \
@@ -34,6 +39,7 @@ gnomesword_1_0_SOURCES =  \
     font_dialog.c \
     gbs.c \
     gbs_dialog.c \
+    gbs_menu.c \
     gnomesword.c \
     gtkhtml_display.c \
     gui.c \

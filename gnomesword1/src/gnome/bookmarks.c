@@ -598,7 +598,6 @@ static void on_expand_activate(GtkMenuItem * menuitem,
 static void on_collapse_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-
 	gtk_ctree_collapse_recursive(p_bmtree->ctree, NULL);
 	after_press(p_bmtree->ctree, NULL);
 }
@@ -1391,26 +1390,25 @@ void create_bookmark_menu(void)
 
 /******************************************************************************
  * Name
- *   create_add_bookmark_menu
+ *   gui_create_add_bookmark_menu
  *
  * Synopsis
  *   #include "gui/bookmarks.h"
  *
- *   void create_add_bookmark_menu(GtkWidget * menu,
+ *   void gui_create_add_bookmark_menu(GtkWidget * menu,
  *			 GtkWidget * bookmark_menu_widget)
  *
  * Description
  *   
  *   creats an add bookmark menu list of root nodes
  *   so user can chose where to add bookmark
- *   called from gs_menu.c - create_pmBible, create_pmCommentsHtml
- *   and create_pmDict
+ *   called from 
  *
  * Return value
  *   void
  */
 
-void create_add_bookmark_menu(GtkWidget * menu,
+void gui_create_add_bookmark_menu(GtkWidget * menu,
 			      GtkWidget * bookmark_menu_widget)
 {
 	GtkWidget *item;
@@ -1439,10 +1437,6 @@ void create_add_bookmark_menu(GtkWidget * menu,
 		    gtk_menu_item_new_with_label(GTK_CELL_PIXTEXT
 						 (GTK_CTREE_ROW(node)->
 						  row.cell[0])->text);
-		gtk_widget_ref(item);
-		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
-					 item, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(item);
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
 				   GTK_SIGNAL_FUNC
