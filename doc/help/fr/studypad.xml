@@ -1,43 +1,47 @@
 <chapter id="studypad">
-	<title>The Studypad</title>
+	<title>Le bloc-notes</title>
 <!-- ============= The Studypad ============================= -->
     <sect1 id="gnomesword-studypad">
-		<title>Using The Studypad</title>
+		<title>Utiliser le bloc-notes</title>
 		<para>
-		The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>
+			Le bloc-notes s'obtient à l'aide du menu <guibutton>Fichier-&gt;Bloc-notes..</guibutton>
 		</para>
 		<para>
-		This is what the Studypad typically looks like:
+			Présentation du bloc-notes :
 		</para>
 		<figure>
-			<title>The Studypad</title>
+			<title>Le bloc-notes</title>
 			<screenshot>
 	 			<mediaobject>
 		    		<imageobject>
 						<imagedata fileref="figures/studypad" format="PNG"/>
 					</imageobject>
 			 		<textobject>
-		     			<phrase>The Studypad</phrase>
+		     			<phrase>Le bloc-notes</phrase>
 					</textobject>
 				</mediaobject>
 			</screenshot>
 		</figure>
-		   <para> The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes.</para>
-		<para> Toolbar 1</para>
+		<para>
+			Les données saisies à l'aide du bloc-notes sont sauvées dans le répertoire 
+			de travail de l'utilisateur, ce qui permet l'échange et l'export d'informations
+			entre &app; et d'autres applications.
+		</para>
+		<para>Barre d'outils supérieure</para>
 			        	<itemizedlist>
-			     		<listitem><para>Font Size and Environment</para></listitem>
-			     		<listitem><para>Font Type</para></listitem>
-			     		<listitem><para>Bold, Italics, Underscored, Crossed Out</para></listitem>
-			     		<listitem><para>Left, Centre and Right  Bound</para></listitem>
-			     		<listitem><para>Shift Paragraph Right or Left</para></listitem>
-			     		<listitem><para>Colour Selector</para></listitem>
+			     		<listitem><para>Taille et style de police</para></listitem>
+			     		<listitem><para>Type de police</para></listitem>
+			     		<listitem><para>Gras, italique, souligné, barré</para></listitem>
+			     		<listitem><para>Alignement à gauche, centré et à droite</para></listitem>
+			     		<listitem><para>Réduire ou augmenter l'indentation</para></listitem>
+			     		<listitem><para>Couleur de la police</para></listitem>
 			     		</itemizedlist>
-		<para> Toolbar 2</para>
+		<para>Barre d'outils inférieure</para>
 			        	<itemizedlist>
-			        	<listitem><para>New, Save, Delete and Print</para></listitem>
-			        	<listitem><para>Cut, Copy, Paste and Undo</para></listitem>
-			        	<listitem><para>Find and 'Find and Replace'</para></listitem>
-			        	<listitem><para>Spellcheck</para></listitem>
+			        	<listitem><para>Ouvrir, enregistrer, supprimer ou imprimer une note</para></listitem>
+			        	<listitem><para>Couper, copier, coller ou annuler</para></listitem>
+			        	<listitem><para>Recherhcher et remplacer</para></listitem>
+			        	<listitem><para>Vérifier l'orthographe</para></listitem>
 			        	</itemizedlist>
 	</sect1>
 </chapter>
