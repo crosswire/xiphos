@@ -21,6 +21,7 @@ extern "C" {
 	
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+
 	
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
 	void on_link_clicked(GtkHTML * html, const gchar * url,
@@ -31,6 +32,8 @@ extern "C" {
 	void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,
 				  gpointer user_data);
+	void on_html_lookup_word_activate(GtkMenuItem * menuitem,
+				       gpointer user_data);
 	void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 					       gpointer user_data);
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
