@@ -6,6 +6,7 @@
 	* added configs.*, key.* and module.* to main
 	* moved the code for using old configs and bookmarks from
 	  main.c to settings.c.
+	* added xml.* to main (not used yet)
 
 
 2003-03-03  Terry Biggs <tbiggs@users.sf.net>
