@@ -46,7 +46,6 @@
 #include "sw_gbs.h"
 #include "gs_detach_sb.h"
 #include "gs_html.h"
-#include "gs_gbs.h"
 #include "gs_editor.h"
 
 GtkWidget *clistSearchResults;
@@ -203,13 +202,13 @@ static void on_add_all_activate(GtkMenuItem * menuitem,
 static void remove_all_items(gint group_num);
 
 
-
+/*
 static void on_buttonBooks_clicked(GtkButton * button, 
 					SETTINGS *s)
 {
-	gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(s->app,"notebook3")),1);	
+	gtk_notebook_set_page(GTK_NOTEBOOK(s->workbook_lower),1);	
 }
-
+*/
 void
 on_clistSearchResults_select_row(GtkCList *clist,
                                         gint row,
@@ -222,9 +221,11 @@ on_clistSearchResults_select_row(GtkCList *clist,
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &buf);	
 	s->displaySearchResults = TRUE;
 	changesearchresultsSW_SEARCH(s, p_so, buf);
-	if(GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {		
-		if(GTK_TOGGLE_BUTTON (p_so->rbPhraseSearch)->active){
-			searchgbsGS_EDITOR(s->searchText); //s->searchText
+	if(s->showinmain) {
+		if(GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {		
+			if(GTK_TOGGLE_BUTTON (p_so->rbPhraseSearch)->active){
+				searchgbsGS_EDITOR(s->searchText);
+			}
 		}
 	}
 	s->displaySearchResults = FALSE;
@@ -909,9 +910,11 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	remItemNum = item_num;
 	if(item_num == -1) {
 		if(group_num == groupnum2) /* change work space notebook to commentary page */
-			gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebook3")),0);
-		//if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-			//gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebookBooksDicts")),0);
+			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook),0);
+		if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
+			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),0);
+		if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
+			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
 	}
 	
 		if (event->button.button == 1) {
@@ -953,6 +956,10 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				}
 				if (group_num == groupnum4) {
 					changeVerseSWORD(ref);
+				}
+				
+				if (group_num == groupnum8) {
+					gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
 				}
 				g_free(type);
 				g_free(ref);
@@ -1840,10 +1847,10 @@ void setupSB(SETTINGS * s)
 		*tmp;
 	GtkWidget
 		*button,
-		*buttonBooks,
+//		*buttonBooks,
 		*searchbutton,
 		*ctree,
-		*scrolledwindowGBS,
+//		*scrolledwindowGBS,
 		*scrolledwindow1,
 		*scrolledwindow2, 
 		*vpSearch, 
@@ -2007,14 +2014,41 @@ void setupSB(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
+	/* GBS */
+	groupnum8 =
+	    add_sb_group((EShortcutBar *) shortcut_bar,
+			 _("Books"));
+	//filename = "Dictionaries.conf";
+	//tmp = loadshortcutbarSW(filename, group_name, icon_size);
+	large_icons = 1; //atoi(icon_size);
+	if (large_icons == 1)
+		e_shortcut_bar_set_view_type((EShortcutBar *)
+					     shortcut_bar,
+					     groupnum8,
+					     E_ICON_BAR_LARGE_ICONS);
+	tmp = bookmods;
+	while (tmp != NULL) {
+		pathname =
+		    gnome_pixmap_file("gnomesword/book-green.png");
+		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+		e_shortcut_model_add_item(E_SHORTCUT_BAR
+					  (shortcut_bar)->model,
+					  groupnum8, -1,
+					  "book",
+					  (gchar *) tmp->data,
+					  icon_pixbuf);
+
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
 	if (s->showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, _("History"));
 	}
 	g_list_free(tmplang);
 	
-	/*** add books group to shortcut bar ***/	
-	scrolledwindowGBS = setupGBS(s, bookmods);  /* gs_gbs.c */
+	/*** add books group to shortcut bar ***/	/* gs_gbs.c */
+	/*scrolledwindowGBS = setupGBS(s, bookmods);  
 	
 	buttonBooks = gtk_button_new_with_label(_("Books"));
 	gtk_widget_ref(buttonBooks);
@@ -2029,6 +2063,7 @@ void setupSB(SETTINGS * s)
 	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
                       GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
                       s);
+	*/
 	/*** end books group ***/
 	
 	
