@@ -1348,6 +1348,14 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkTreeModel *model;
 	GtkListStore *store;
 	GObject *selection;
+	GtkWidget *label800;
+	GtkWidget *label801;
+	GtkWidget *label802;
+	GtkWidget *label803;
+	GtkWidget *label804;
+	GtkWidget *label805;
+	GtkWidget *label806;
+	GtkWidget *label807;
 
 	tooltips = gtk_tooltips_new();
   /*************************************************************/
@@ -1411,7 +1419,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(listview);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_listview),
 			  listview);
-	gtk_widget_set_size_request(listview, 110, -1);
+	gtk_widget_set_size_request(listview, 130, -1);
 	add_columns(listview);
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection
@@ -1419,19 +1427,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	
 	/* add icons to sidebar listview */
 	icon_pixbuf = NULL;
-/*	icon_pixbuf = gtk_widget_render_icon(widgets.app,
+	icon_pixbuf = gtk_widget_render_icon(widgets.app,
                                              GTK_STOCK_SELECT_FONT, //GNOME_STOCK_BOOK_BLUE, 
-                                             GTK_ICON_SIZE_DIALOG,
-                                             NULL);*/
-	/*if (!icon_pixbuf) {
+                                             GTK_ICON_SIZE_DND,
+                                             NULL);
+	if (!icon_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}*/
-	add_row("Font Colors", icon_pixbuf, store, 0);
+	}
+	add_row(_("Font Colors"), icon_pixbuf, store, 0);
 
-/*	icon_pixbuf = NULL;
+	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 				     "/gs2-48x48.png", &error);
@@ -1440,8 +1448,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}*/
-	add_row("Misc Settings", icon_pixbuf, store, 1);
+	}
+	add_row(_("General Settings"), icon_pixbuf, store, 1);
 
 /*	icon_pixbuf = NULL;
 	icon_pixbuf =
@@ -1454,7 +1462,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 		error = NULL;
 	}*/
 /*	add_row("Layout", icon_pixbuf, store, 2);*/
-/*
+
 	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.png",
@@ -1464,8 +1472,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}*/
-	add_row("Sword Modules", icon_pixbuf, store, 2);
+	}
+	add_row(_("Sword Modules"), icon_pixbuf, store, 2);
 /***************************************************** end sidebar */
 
 
@@ -1487,7 +1495,17 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(viewport9);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow56), viewport9);
 
-	frame26 = gtk_frame_new(_("Font Colors"));
+	//frame26 = gtk_frame_new(_("Font Colors"));
+	frame26 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame26),GTK_SHADOW_NONE);
+  	 
+  	label800 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label800),
+  	                                      _("<span weight=\"bold\">Font Colors</span>"));
+  	gtk_widget_show(label800);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame26),label800);
+	
 	gtk_widget_show(frame26);
 	gtk_container_add(GTK_CONTAINER(viewport9), frame26);
 
@@ -1498,7 +1516,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 /***************************************************************************/
 	table13 = gtk_table_new(7, 2, FALSE);
 	gtk_widget_show(table13);
-	gtk_box_pack_start(GTK_BOX(vbox35), table13, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox35), table13, TRUE, TRUE, 6);
 
 	label149 = gtk_label_new(_("Background"));
 	gtk_widget_show(label149);
@@ -1670,7 +1688,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   label98);
 	/* end font color page */
 	
-	/* start misc page */
+	/* start misc / general page */
 	scrolledwindow55 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow55);
 	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow55);
@@ -1695,10 +1713,18 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(vbox28);
 	gtk_box_pack_start(GTK_BOX(hbox64), vbox28, TRUE, TRUE, 0);
 
-	frame21 =
-	    gtk_frame_new(_("Use Defaults When Starting GnomeSword"));
+	//frame21 = gtk_frame_new(_("Use Defaults When Starting GnomeSword"));
+	frame21 = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame21),GTK_SHADOW_NONE);
+  	 
+  	label801 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label801),
+  	                                      _("<span weight=\"bold\">Use Defaults When Starting GnomeSword</span>"));
+  	gtk_widget_show(label801);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame21),label801);
+
 	gtk_widget_show(frame21);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame21, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame21, TRUE, FALSE, 6);
 
 	vbox36 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox36);
@@ -1725,9 +1751,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox36), rbtnNoDefaults, FALSE,
 			   FALSE, 0);
 
-	frame42 = gtk_frame_new(_("Show Tabs"));
+	//frame42 = gtk_frame_new(_("Show Tabs"));
+	frame42 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame42),GTK_SHADOW_NONE);
+  	 
+  	label802 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label802),
+  	                                      _("<span weight=\"bold\">Show Tabs</span>"));
+  	gtk_widget_show(label802);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame42),label802);
+	
 	gtk_widget_show(frame42);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame42, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame42, TRUE, FALSE, 6);
 
 	vbox54 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox54);
@@ -1760,9 +1796,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox54), check_button.show_book_tabs,
 			   FALSE, FALSE, 0);
 
-	frame72 = gtk_frame_new(_("Show"));
+	//frame72 = gtk_frame_new(_("Show"));
+	frame72 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame72),GTK_SHADOW_NONE);
+  	 
+  	label803 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label803),
+  	                                      _("<span weight=\"bold\">Show</span>"));
+  	gtk_widget_show(label803);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame72),label803);
+	
 	gtk_widget_show(frame72);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame72, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame72, TRUE, FALSE, 6);
 
 	vbox86 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox86);
@@ -1788,8 +1834,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips,
 			     check_button.show_commentary_pane,
-			     _
-			     ("Commentaries, Personal Comments and StudyPad"),
+			     _("Commentaries, Personal Comments and StudyPad"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.
@@ -1802,16 +1847,25 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   check_button.show_lower_workbook, FALSE,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_lower_workbook,
-			     _
-			     ("Dictionary/Lexicon and generic books"),
+			     _("Dictionary/Lexicon and generic books"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
 				     TRUE);
 
-	frame43 = gtk_frame_new(_("Misc"));
+	//frame43 = gtk_frame_new(_("General"));
+	frame43 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame43),GTK_SHADOW_NONE);
+  	 
+  	label804 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label804),
+  	                                      _("<span weight=\"bold\">General</span>"));
+  	gtk_widget_show(label804);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame43),label804);
+
 	gtk_widget_show(frame43);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame43, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame43, TRUE, FALSE, 6);
 
 	vbox55 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox55);
@@ -1829,27 +1883,23 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     TRUE);
 
 	check_button.use_default_dictionary =
-	    gtk_check_button_new_with_label(_
-					    ("Use default Dictionary"));
+	    gtk_check_button_new_with_label(_("Use default Dictionary"));
 	gtk_widget_show(check_button.use_default_dictionary);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.use_default_dictionary, FALSE,
 			   FALSE, 0);
 
 	check_button.show_devotion =
-	    gtk_check_button_new_with_label(_
-					    ("Show Daily Devotion at start up"));
+	    gtk_check_button_new_with_label(_("Show Daily Devotion at start up"));
 	gtk_widget_show(check_button.show_devotion);
 	gtk_box_pack_start(GTK_BOX(vbox55), check_button.show_devotion,
 			   FALSE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_devotion,
-			     _
-			     ("Show Daily Devotion if you have a Devotion module"),
+			     _("Show Daily Devotion if you have a Devotion module"),
 			     NULL);
 
 	check_button.show_splash_screen =
-	    gtk_check_button_new_with_label(_
-					    ("Show splash screen at start up"));
+	    gtk_check_button_new_with_label(_("Show splash screen at start up"));
 	gtk_widget_show(check_button.show_splash_screen);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.show_splash_screen, FALSE,
@@ -1859,11 +1909,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			     NULL);
 
 
-	frame41 =
-	    gtk_frame_new(_
-			  ("Where to View Dictionary/Lexicon"));
+	//frame41 = gtk_frame_new(_("Where to View Dictionary/Lexicon"));
+	frame41 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame41),GTK_SHADOW_NONE);
+  	 
+  	label805 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label805),
+  	                                      _("<span weight=\"bold\">Show Dictionary / Lexicon</span>"));
+  	gtk_widget_show(label805);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame41),label805);
+
 	gtk_widget_show(frame41);
-	gtk_box_pack_start(GTK_BOX(vbox28), frame41, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox28), frame41, TRUE, FALSE, 6);
 
 	vbox53 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox53);
@@ -1886,9 +1944,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   check_button.show_in_dictionary, FALSE,
 			   FALSE, 0);
 
-	frame74 = gtk_frame_new(_("Editors"));
+	//frame74 = gtk_frame_new(_("Editors"));
+	frame74 = gtk_frame_new(NULL);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame74),GTK_SHADOW_NONE);
+  	 
+  	label806 = gtk_label_new(NULL);
+  	gtk_label_set_markup(GTK_LABEL(label806),
+  	                                      _("<span weight=\"bold\">Editors</span>"));
+  	gtk_widget_show(label806);
+  	gtk_frame_set_label_widget(GTK_FRAME(frame74),label806);
+
 	gtk_widget_show(frame74);
-	gtk_box_pack_start(GTK_BOX(vbox41), frame74, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox41), frame74, TRUE, FALSE, 6);
 
 	vbox89 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox89);
@@ -1919,8 +1987,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 
 	check_button.percomm_formatting =
-	    gtk_check_button_new_with_label(_
-					    ("Use formatting in Personal Comments"));
+	    gtk_check_button_new_with_label(_("Use formatting in Personal Comments"));
 	//gtk_widget_show(check_button.percomm_formatting);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.percomm_formatting, FALSE,
@@ -2380,15 +2447,15 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				  GTK_BUTTONBOX_END);
 	gtk_button_box_set_spacing(GTK_BUTTON_BOX(hbuttonbox3), 10);
 
-	button_cancel = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
-	gtk_widget_show(button_cancel);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button_cancel);
-	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
-
 	button.apply = gtk_button_new_from_stock(GTK_STOCK_APPLY);
 	gtk_widget_show(button.apply);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button.apply);
 	GTK_WIDGET_SET_FLAGS(button.apply, GTK_CAN_DEFAULT);
+
+	button_cancel = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+	gtk_widget_show(button_cancel);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button_cancel);
+	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
 
 	button.ok = gtk_button_new_from_stock(GTK_STOCK_OK);
 	gtk_widget_show(button.ok);

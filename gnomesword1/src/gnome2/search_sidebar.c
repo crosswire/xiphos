@@ -430,7 +430,7 @@ void gui_create_search_sidebar(void)
 	
 	label1 = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<b>Search Module</b>"));
+                                     _("<span weight=\"bold\">Search Module</span>"));
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame_module),
                                              label1);
@@ -492,7 +492,7 @@ void gui_create_search_sidebar(void)
 	
 	label1 = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<b>Search Type</b>"));
+                                     _("<span weight=\"bold\">Search Type</span>"));
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame2),
                                              label1);
@@ -541,7 +541,7 @@ void gui_create_search_sidebar(void)
 	
 	label1 = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<b>Search Options</b>"));
+                                     _("<span weight=\"bold\">Search Options</span>"));
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame3),
                                              label1);
@@ -567,7 +567,7 @@ void gui_create_search_sidebar(void)
 	
 	label1 = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<b>Search Scope</b>"));
+                                     _("<span weight=\"bold\">Search Scope</span>"));
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame4),
                                              label1);
@@ -616,7 +616,7 @@ void gui_create_search_sidebar(void)
 	
 	label1 = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<b>Bounds</b>"));
+                                     _("<span weight=\"bold\">Bounds</span>"));
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame5),
                                              label1);
