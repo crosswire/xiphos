@@ -71,6 +71,7 @@ module.include.files=\
 	src/backend/dictlex_.h\
 	src/backend/commentary_.h\
 	src/backend/bookmarks.h\
+	src/backend/new_bookmarks.h\
 	src/backend/shortcutbar.h\
 	src/backend/sword_defs.h\
 	src/gui/about_gnomesword.h\
@@ -78,6 +79,7 @@ module.include.files=\
 	src/gui/about_sword.h\
 	src/gui/bibletext.h\
 	src/gui/bibletext_dialog.h\
+	src/gui/bookmarks.h\
 	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
 	src/gui/commentary_find.h\
@@ -112,13 +114,11 @@ module.include.files=\
 	src/gui/toolbar_nav.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
-	src/main/gs_bookmarks.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_gnomesword.h\
-	src/main/gs_gui.h\
 	src/main/gs_history.h\
 	src/main/gs_html.h\
 	src/main/gs_mainmenu_cb.h\
@@ -146,6 +146,7 @@ module.source.files=\
 	src/backend/interlinear.cpp\
 	src/backend/dictlex_.cpp\
 	src/backend/commentary_.cpp\
+	src/backend/new_bookmarks.cpp\
 	src/backend/bookmarks.cpp\
 	src/backend/shortcutbar.cpp\
 	src/gnome/about_gnomesword.c\
@@ -153,6 +154,7 @@ module.source.files=\
 	src/gnome/about_sword.c\
 	src/gnome/bibletext.c\
 	src/gnome/bibletext_dialog.c\
+	src/gnome/bookmarks.c\
 	src/gnome/commentary.c\
 	src/gnome/commentary_dialog.c\
 	src/gnome/commentary_find.c\
@@ -188,12 +190,10 @@ module.source.files=\
 	src/gnome/toolbar_nav.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
-	src/main/gs_bookmarks.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/gs_gnomesword.c\
-	src/main/gs_gui.c\
 	src/main/gs_history.c\
 	src/main/gs_html.c\
 	src/main/gs_menu.c\

@@ -30,11 +30,11 @@
 #include "gui/splash.h"
 
 #include "backend/sword.h"
-#include "backend/bookmarks.h"
 #include "backend/properties.h"
 
 #include "main/setup.h"
 #include "main/gs_gnomesword.h"
+#include "main/bookmarks.h"
 #include "main/settings.h"
 
 /******************************************************************************
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 	icreatefiles = settings_init();
 
 	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
-		createbookmarksBM(settings.swbmDir);
+		create_bookmarks(settings.swbmDir);
 	}
 
 	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs) {

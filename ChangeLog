@@ -1,3 +1,11 @@
+2002-07-13  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed main/gs_bookmarks.*
+	* added main/bookmarks.*
+	* added gui/bookmarks.h
+	* added gnome/bookmarks.c
+
+
 2002-07-05  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gui/_display_info.h to gui/display_info.h
