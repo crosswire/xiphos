@@ -81,15 +81,18 @@ extern "C" {
 	void swapmodsSWORD(gchar * intmod);
 	void loadpreferencemodsSWORD(void);
 	void gs_firstrunSWORD(void);
-	void applyfontcolorandsizeSWORD(void);
-	
+	void applyfontcolorandsizeSWORD(void);	
 	/*** write individual module key to <module>.conf ***/
-	void savekeySWORD(gint modwindow, gchar * key);
-	
+	void savekeySWORD(gint modwindow, gchar * key);	
 	/*** write individual module font information to <module>.conf ***/
 	gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo);
 	/*** display daily devotional ***/
 	void displayDevotional(void);
+/******************************************************************************
+ * get module type - Bible text, Commentary or Dict/Lex
+ ******************************************************************************/
+gint get_mod_typeSWORD(gchar *modName);
+
 #ifdef __cplusplus
 }
 #endif

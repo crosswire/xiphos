@@ -115,8 +115,7 @@ void
 on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {	
-	if(settings->showdevotional)
-		displayDevotional();
+	displayDevotional();
 }
 
 
