@@ -2454,6 +2454,7 @@ GtkWidget *create_dlgSettings(void)
 	GtkWidget *cbtnShowTextgroup;
 	GtkWidget *cbtnShowComGroup;
 	GtkWidget *cbtnShowDictGroup;
+	GtkWidget *cbtnShowHistoryGroup;
 	GtkWidget *label124;
 	GtkWidget *hbox24;
 	GtkWidget *cbtnPNformat;
@@ -2613,6 +2614,13 @@ GtkWidget *create_dlgSettings(void)
                             (GtkDestroyNotify) gtk_widget_unref);
  	 gtk_widget_show (cbtnShowDictGroup);
  	 gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowDictGroup, FALSE, FALSE, 0);
+  
+  	cbtnShowHistoryGroup = gtk_check_button_new_with_label ("Show History Group in Shortcut Bar");
+  	gtk_widget_ref (cbtnShowHistoryGroup);
+  	gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowHistoryGroup", cbtnShowHistoryGroup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (cbtnShowHistoryGroup);
+  	gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowHistoryGroup, FALSE, FALSE, 0);
 
 	label124 = gtk_label_new("Shortcut Bar");
 	gtk_widget_ref(label124);
@@ -2713,8 +2721,11 @@ GtkWidget *create_dlgSettings(void)
 	                   GTK_SIGNAL_FUNC (on_cbtnShowComGroup_toggled),
 		           NULL);
 	gtk_signal_connect (GTK_OBJECT (cbtnShowDictGroup), "toggled",
-			GTK_SIGNAL_FUNC (on_cbtnShowDictGroup_toggled),
-			NULL); 	
+				GTK_SIGNAL_FUNC (on_cbtnShowDictGroup_toggled),
+				NULL);
+  	gtk_signal_connect (GTK_OBJECT (cbtnShowHistoryGroup), "toggled",
+                      	GTK_SIGNAL_FUNC (on_cbtnShowHistoryGroup_toggled),
+                     	 NULL);			
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_cbtnPNformat_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",

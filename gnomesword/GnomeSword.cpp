@@ -62,7 +62,7 @@ SWDisplay *comp3Display; //--- to display modules using GtkText a verse at a tim
 SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Testament using GtkText
+SWDisplay *RWPDisplay; //--- to display Robertsons Word Pictures in the New Testament using GtkText
 SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
 SWDisplay *HTMLDisplay; //--- to display formatted html
 SWDisplay *HTMLchapDisplay; //--- to display formatted html
@@ -89,7 +89,12 @@ SWFilter *gbftohtml;
 SWFilter *plaintohtml;
 
 //---------------------------------------------------------------- GnomeSword global to this file
-
+	
+GList 	*biblemods,
+	*commentarymods,
+	*dictionarymods,
+	*percommods;
+		
 SETTINGS *settings;
 SETTINGS myset;	
 extern GtkWidget	*MainFrm,	//-- main form widget 					
@@ -115,10 +120,10 @@ gboolean file_changed = false;	//-- set to true if text is study pad has changed
 gchar //options[16][80],	//-- array to store a number of setting - read in form file when program starts - saved to file at normal shut down
 		 bmarks[50][80];	//-- array to store bookmarks - read in form file when program starts - saved to file after edit
 GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
-						*footnotes,	//-- widget to access toggle menu - for footnotes
-  *strongsnum,//-- widget to access toggle menu - for strongs numbers
-	    *notepage,	//-- widget to access toggle menu - for interlinear notebook page
-	    *autosaveitem; //-- widget to access toggle menu - for personal comments auto save
+		*footnotes,	//-- widget to access toggle menu - for footnotes
+  		*strongsnum,//-- widget to access toggle menu - for strongs numbers
+	    	*notepage,	//-- widget to access toggle menu - for interlinear notebook page
+	    	*autosaveitem; //-- widget to access toggle menu - for personal comments auto save
 			
 extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
 extern GdkColor myGreen; //-- current verse color
@@ -157,60 +162,20 @@ gint    groupnum1 = 0,
 
 
 /***********************************************************************************************
-initSwrod has grown into a monster - it needs to be at least two functions
-initSwrod to setup all the Sword stuff 
-and 
-initGnomeSword to setup the interface
-***********************************************************************************************/
+ *initSwrod to setup all the Sword stuff 
+ ***********************************************************************************************/
 void
 initSword(GtkWidget *mainform)
 {
 	ModMap::iterator it; //-- iteratior
 	SectionMap::iterator sit; //-- iteratior
 	ConfigEntMap::iterator cit; //-- iteratior
-	int	pg=0, //-- notebook page number - for creating notebook pages
-		pg1=0, //-- notebook page number - for creating notebook pages
-		pg2=0; //-- notebook page numger
-	GtkWidget
-		*empty_notebook_page, //-- used to create new pages
-		*notebook, //-- to access notebooks for adding pages
-		*menuChoice, //-- gtk menu item
-		*popmenu, //-- to access popup menus for adding items
-		*menuChoice1, //-- gtk menu item
-		*label, //-- labels for adding notebook pages
-		*menu, //-- ??
-		*menuNE;
-		//iBibletext=0; //--
-	char    
-		menuName[64], //--  for menu item label
-		menuName1[64], //--  for menu item label
-		mybuf[80], //-- ??
-		rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		aboutrememberlastitem3[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		rememberlastitemCom[80], //--  use to store last menu item so we can add the next item under it - gnome menus
-		rememberlastitemDict[80]; //--  use to store last menu item so we can add the next item under it - gnome menus	
-		//rememberlookup[80]; //--  use to store last menu item
-	int   
-		viewNumber = 1, //--  for numbering menu items
-		viewNumber1= 1, //-- for numbering menu items
-		itemNum = 0, //-- for numbering shortbar items
-		itemNum2 = 0,//-- for numbering shortbar items
-		itemNum3 = 0,//-- for numbering shortbar items
-		i, //-- counter
-		j; //-- counter
-		
-	GList 	*biblemods = NULL,
-		*commentarymods = NULL,
-		*dictionarymods = NULL,
-		*percommods = NULL;
-					
+	int   	i, //-- counter
+		j; //-- counter					
    	gchar *sourceformat;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-  	myset = readsettings();  //-- load settings into structure
-  	settings = &myset;       //-- set pointer to structure
+  	
   	gbftoplain	= new GBFPlain(); //-- renderfilter
   	gbftohtml	= new GBFHTML(); //-- sword renderfilter gbf to html
   	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
@@ -236,48 +201,19 @@ initSword(GtkWidget *mainform)
 	comp2Display    = 0;// set in create
 	comp3Display    = 0;// set in create
 	comDisplay      = 0;// set in create
-	dictDisplay     = 0;// set in create
-	//GBFcomDisplay   = 0; // set in create 	
+	dictDisplay     = 0;// set in create	
 	percomDisplay   = 0;// set in create
 	RWPDisplay			= 0;
 	FPNDisplay			= 0;
-	//GBFDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
-
-  	myGreen.red =  settings->currentverse_red; //-- set color for current verse
-	myGreen.green = settings->currentverse_green;
-	myGreen.blue =  settings->currentverse_blue;
-	
+	biblemods = NULL;
+	commentarymods = NULL;
+	dictionarymods = NULL;
+	percommods = NULL;
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
-	NEtext =  lookup_widget(MainFrm,"textComments"); //-- get note edit widget	
-  	
-        //------------------------------------------------------------- setup displays for sword modules
-    	noteeditor = new NoteEditor();
-	GTKEntryDisp::__initialize();
-	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
-	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
-	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
-	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
-	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
-	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
-	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
-	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
-	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));
-	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
-
-        //---------------------------------------------------------------- set text windows to word warp
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"moduleText")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp1")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp2")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp3")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textDict")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textCommentaries")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComments")) , true );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , true );
-	
-        //--------------------------------------------------------------- create shortcut bar groups
+	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget	
+  	//--------------------------------------------------------------- create shortcut bar groups
 	if(settings->showtextgroup){
 	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
 	}
@@ -291,33 +227,26 @@ initSword(GtkWidget *mainform)
 		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	    
 	}
 		
-        //--------------------------------------------------------- store text widgets for spell checker
-	notes =  lookup_widget(mainform,"textComments");
-	studypad = lookup_widget(mainform,"text3");
-        //----------------------------------------------------- set main window modules and add to menus	
-	sprintf(rememberlastitem,"%s","_View/Main Window/");
-	sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
-	sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
-
-	//sprintf(remberlookup,"%s","");
-	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
-	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
-	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
+        //------------------------------------------------------------- setup displays for sword modules
+    	noteeditor = new NoteEditor();
+	GTKEntryDisp::__initialize();
+	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
+	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
+	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
+	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
+	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
+	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
+	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
+	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
+	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
+	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));
+	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));        
 	compages = 0;
 	dictpages = 0;
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
 			biblemods = g_list_append(biblemods,curMod->Name());
-			//------------------------------------------------------------------ add to menubar
-			additemtognomemenu(MainFrm, curMod->Name(), curMod->Name(), rememberlastitem , (GtkMenuCallback)on_mainText_activate );
-			additemtognomemenu(MainFrm, curMod->Name(), curMod->Name(), aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
-			//--------------------------------------- remember last item - so next item will be place below it       	
-			sprintf(rememberlastitem,"%s%s","_View/Main Window/",curMod->Name());	
-			sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/",curMod->Name());			
-			//---------------------------------------------------------------- add to popup menu
-			//additemtopopupmenu(MainFrm, menu1, curMod->Name(), (GtkMenuCallback)on_mainText_activate );
-			//------------------------------------------------------- set GTK display for each module
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	        	if(sit !=mainMgr->config->Sections.end()){
 	    	    		cit = (*sit).second.find("SourceType");
@@ -345,24 +274,7 @@ initSword(GtkWidget *mainform)
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
 			havecomm = true; //-- we have at least one commentay module
 			++compages; //-- how many pages do we have
-			curcomMod = (*it).second;
-			notebook = lookup_widget(mainform,"notebook1");
-			empty_notebook_page = gtk_vbox_new (false, 0);
-  		    	gtk_widget_show (empty_notebook_page);
-  		    	gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
-			label = gtk_label_new (curcomMod->Name());
-			gtk_widget_show (label);
-			sprintf(mybuf,"%d",pg1);
-			additemtognomemenu(MainFrm, curcomMod->Name(), mybuf, rememberlastitemCom, (GtkMenuCallback)on_com_select_activate);
-			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label); 
-			sprintf(rememberlastitemCom,"%s%s","_View/Commentary Window/",curcomMod->Name());	
-			additemtognomemenu(MainFrm,curcomMod->Name(), curcomMod->Name(),aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
-			/*						
-			//---------------------------------------------------------------- add to popup menu
-			gtk_menu_item_set_submenu (GTK_MENU_ITEM (pmComments_uiinfo[6].widget),GTK_WIDGET(view_module1_menu_uiinfo));
-			additemtopopupmenu(MainFrm, pmComments_uiinfo[6].widget, curcomMod->Name(), (GtkMenuCallback)on_com_select_activate);
-			*/
-			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());			
+			curcomMod = (*it).second;					
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	    		if (sit !=mainMgr->config->Sections.end()){
 	    			cit = (*sit).second.find("SourceType");
@@ -380,7 +292,7 @@ initSword(GtkWidget *mainform)
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);
-			//g_free(sourceformat);
+			
 			if(settings->showcomgroup){
 			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum2, -1,
@@ -391,25 +303,9 @@ initSword(GtkWidget *mainform)
 			havedict = true; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
-			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());
-			notebook = lookup_widget(mainform,"notebook4");
-			additemtognomemenu(MainFrm,curdictMod->Name(), curdictMod->Name(),aboutrememberlastitem3 ,
-						 (GtkMenuCallback)on_kjv1_activate );
-			sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",curdictMod->Name());	
-			empty_notebook_page = gtk_vbox_new (false, 0);
-  		    	gtk_widget_show (empty_notebook_page);
-  		    	gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
-			label = gtk_label_new (curdictMod->Name());
-			gtk_widget_show (label);
-			sprintf(mybuf,"%d",pg2);			
-			if(!strcmp(curdictMod->Name(),"StrongsHebrew")) hebrewpage = pg2;
-			if(!strcmp(curdictMod->Name(),"StrongsGreek")) greekpage = pg2;
-			additemtognomemenu(MainFrm, curdictMod->Name(), mybuf, rememberlastitemDict,
-						 (GtkMenuCallback)on_dict_select_activate );
-			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 
-						pg2++), label);
-			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
+			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());			
 			curdictMod->Disp(dictDisplay);
+			
 			if(settings->showdictgroup){			
 			        e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum3, -1,
@@ -418,7 +314,7 @@ initSword(GtkWidget *mainform)
 			}
 		}
 	} 		
-  	//----------------------------------------------------------------- set up percom editor module and menu
+  	//-- set up percom editor module and menu
 	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++){
 		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is Commentaries
 		 	 //-- if driver is RawFiles			
@@ -427,83 +323,106 @@ initSword(GtkWidget *mainform)
 				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formatted display
 				 else percomMod->Disp(percomDisplay);                     //-- else standard displey
 				 percommods = g_list_append(percommods,percomMod->Name());
-				 //additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate); //-- add module to popup menu
 				 usepersonalcomments = true; //-- used by verseChange function (GnomeSword.cpp)
 				 percomMod->SetKey(settings->currentverse);
 				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
 	  	}
 	}	
-	//---------------------------------------------------------------------------------- interlinear 1	
-	sprintf(rememberlastitem,"%s","_View/Interlinear1 Window/");
+	//-- interlinear 1
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){	
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
-			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp1Mod->Name(), comp1Mod->Name(),rememberlastitem ,
-						 (GtkMenuCallback)on_1st_interlinear_window1_activate);
-			//---------------------------------------------------- remember last item - so next item will be place below it       	
-			sprintf(rememberlastitem,"%s%s","_View/Interlinear1 Window/",comp1Mod->Name());			
-			//----------------------------------------------------------------------------- add to popup menu
-			//additemtopopupmenu(MainFrm, menu2, comp1Mod->Name(), (GtkMenuCallback)on_1st_interlinear_window1_activate);
-			//-------------------------------------------------------------------- set GTK display for each module
-			comp1Mod->Disp(comp1Display);
+				comp1Mod->Disp(comp1Display);
 		}
 	}
-
-	//------------------------------------------------------------------------------------------- interlinear 2	
-	sprintf(rememberlastitem,"%s","_View/Interlinear2 Window/"); //----- set rememberlastitem for interlinear 2
+	//-- interlinear 2	
 	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
 		comp2Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
-			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp2Mod->Name(), comp2Mod->Name(),rememberlastitem ,
-						 (GtkMenuCallback)on_2nd_interlinear_window1_activate);
-			//---------------------------------------------------- remember last item - so next item will be place below it       	
-			sprintf(rememberlastitem,"%s%s","_View/Interlinear2 Window/",comp2Mod->Name());			
-			//----------------------------------------------------------------------------- add to popup menu
-			//additemtopopupmenu(MainFrm, menu3, comp2Mod->Name(), (GtkMenuCallback)on_2nd_interlinear_window1_activate);
-			//-------------------------------------------------------------------- set GTK display for each module
-			comp2Mod->Disp(comp2Display);
+			 comp2Mod->Disp(comp2Display);
 		}
 	}
-
-	//------------------------------------------------------------------------------------------- interlinear 3	
-	sprintf(rememberlastitem,"%s","_View/Interlinear3 Window/");	
+	//-- interlinear 3	
 	for (it = mainMgr3->Modules.begin(); it != mainMgr3->Modules.end(); it++){
 		comp3Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){
-			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp3Mod->Name(), comp3Mod->Name(),rememberlastitem ,
-						 (GtkMenuCallback)on_3rd_interlinear_window1_activate);
-			//---------------------------------------------------- remember last item - so next item will be place below it	
-			sprintf(rememberlastitem,"%s%s","_View/Interlinear3 Window/",comp3Mod->Name());			
-			//----------------------------------------------------------------------------- add to popup menu
-			//additemtopopupmenu(MainFrm, menu4, comp3Mod->Name(), (GtkMenuCallback)on_3rd_interlinear_window1_activate);
-			//-------------------------------------------------------------------- set GTK display for each module
 			comp3Mod->Disp(comp3Display);
 		}
-	}
+	}	
+}
 
-	//----------------------------------------------------------------------------- set dict module to open notebook page
+/******************************************************************************
+ * initGnomeSword - sets up the interface
+ *****************************************************************************/
+void
+initGnomeSword(GtkWidget *app)
+{
+	ModMap::iterator it; //-- iteratior
+	GtkWidget *label;
+	
+//-- set color for current verse
+  	myGreen.red =  settings->currentverse_red; 
+	myGreen.green = settings->currentverse_green;
+	myGreen.blue =  settings->currentverse_blue;		
+//-- add modules to menus -- menu.c
+	addmodstomenus(app, settings, biblemods, 
+			commentarymods, dictionarymods,
+			percommods);
+//-- create popup menus -- menu.c
+	createpopupmenus(app, settings, biblemods, 
+			commentarymods, dictionarymods,
+			percommods);
+//-- add pages to commentary and  dictionary notebooks			
+	addnotebookpages(lookup_widget(app,"notebook1"), commentarymods);
+	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
+//--  set text windows to word warp
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp1")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textDict")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , true );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , true );
+//-- set main notebook page
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),settings->notebook3page );        
+//-- store text widgets for spell checker
+	notes =  lookup_widget(app,"textComments");
+	studypad = lookup_widget(app,"text3");				
+//-- Add options to Options Menu and get toggle item widget
+	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments", (GtkMenuCallback)on_auto_save_notes1_activate); 
+	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page", (GtkMenuCallback)on_show_interlinear_page1_activate);
+	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style", (GtkMenuCallback)on_verse_style1_activate);
+	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes", (GtkMenuCallback)on_footnotes1_activate);
+ 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers", (GtkMenuCallback)on_strongs_numbers1_activate); 		
+//-- set dictionary key
+        gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);        
+        loadbookmarks_programstart(); //--------------------------------- add bookmarks to menubar
+        changeVerse(settings->currentverse); //---------------------------------------------- set Text
+//-- show hide shortcut bar - set to options setting
+        if(settings->showshortcutbar){
+                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
+        }else{
+                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
+        }
+//-- load last used file into studypad
+        if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
+
+//-- set dict module to open notebook page
 	GtkLabel *label1;
-	if(havedict){ //-- let's don't do this if we don't have at least one dictionary / lexicon
-			
+	GtkWidget *notebook;
+	if(havedict){ //-- let's don't do this if we don't have at least one dictionary / lexicon			
 		gint pagenum = 0; //-- set page to 0 (first page in notebook)
 		//-- if save page is less than actual number of pages use saved page number else 0
 		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; 
-		notebook = lookup_widget(mainform,"notebook4"); //-- get notebook
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); //-- set notebook page	
+		notebook = lookup_widget(app,"notebook4"); //-- get notebook
+		//-- set notebook page
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
 		//-- get the label from the notebook page (module name)		
 		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), 
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		it = mainMgr->Modules.find((char *)label1->label); //-- fint the module using text from label	
-		if (it != mainMgr->Modules.end()){
-			curdictMod = (*it).second; //-- set dictionary module
-			curdictMod->SetKey(settings->dictkey); //-- set key to the key saved in settings
-			curdictMod->Display(); //-- show what we have done	
-			FillDictKeys(curdictMod->Name()); //-- fill dictionary key clist widget	
-		}
+		changcurdictModSWORD(label1->label, settings->dictkey, pagenum);	
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook4_switch_page),
                       NULL);
@@ -511,122 +430,83 @@ initSword(GtkWidget *mainform)
                 else gtk_widget_hide(notebook);
 	}else gtk_widget_hide(lookup_widget(MainFrm,"hbox8")); //-- hide dictionary section of window if we do not have at least one dict/lex
 	
-	//---------------------------------------------------------------------------- set com module to open notebook page	
+//-- set com module to open notebook page	
 	if(havecomm){ //-- let's don't do this if we don't have at least one commentary	
 		gint pagenum = 0;
 		
 		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
-		notebook = lookup_widget(mainform,"notebook1");	
+		notebook = lookup_widget(app,"notebook1");	
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
 		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		it = mainMgr->Modules.find((char *)label1->label); 
-		if (it != mainMgr->Modules.end()) curcomMod = (*it).second;
+		changcurcomModSWORD(label1->label, pagenum);
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                                         NULL);
                 if(settings->showcomtabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
-        }else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")) , 0);
-    
-	//---------------------------------------------------------------- set main notebook page
-	notebook = lookup_widget(mainform,"notebook3");	
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),settings->notebook3page );
+        }else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")) , 0);	
 		
-	//---------------------------------------------------------------- set personal commets notebook label and display module
+//-- set personal commets notebook label and display module
 	if(usepersonalcomments){
-		it = percomMgr->Modules.find(settings->personalcommentsmod); //-- set percomMod to last used
-		if (it != percomMgr->Modules.end()) percomMod = (*it).second;
-		if(percomMod){ //-- if we found the module set up page and show the world			
-			notebook = lookup_widget(mainform,"notebook3");
-			label = gtk_label_new (percomMod->Name());
-			gtk_widget_show (label);
-			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label);
-			percomMod->Display();
-		}
+		 //-- change personal comments module
+		changepercomModSWORD(settings->personalcommentsmod);	
 	}
+//-- set text modules to last used
+	changecurModSWORD(settings->MainWindowModule);
+	changecomp1ModSWORD(settings->Interlinear1Module);
+	changecomp2ModSWORD(settings->Interlinear2Module);
+	changecomp3ModSWORD(settings->Interlinear3Module);
 	
-	//--------------------------------------------- use module in options list to set main window text module
-	it = mainMgr->Modules.find(settings->MainWindowModule);
-	if (it != mainMgr->Modules.end()){
-	        curMod = (*it).second;
-		gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")),curMod->Name()); //-- set main text window	
-	}                                                                                  //-- label to modName
-
-	//-------------------------------------------------- use module in options list to set 1st int text module
-	it = mainMgr1->Modules.find(settings->Interlinear1Module);
-	if (it != mainMgr1->Modules.end())  comp1Mod = (*it).second;
-	else comp1Mod = NULL;
-	//-------------------------------------------------- use module in options list to set 2nt int text module
-	it = mainMgr2->Modules.find(settings->Interlinear2Module);
-	if (it != mainMgr2->Modules.end()) comp2Mod = (*it).second;	
-        else comp2Mod = NULL;
-	//--------------------------------------------------- use module in options list to set 3rd int text module
-	it = mainMgr3->Modules.find(settings->Interlinear3Module);
-	if (it != mainMgr3->Modules.end()) comp3Mod = (*it).second;	
-	else comp3Mod = NULL;
-	
-	//-------------------------------------------------------- Add options to Options Menu and get toggle item widget
-	autosaveitem = additemtooptionmenu(MainFrm, "_Settings/", "Auto Save Personal Comments", (GtkMenuCallback)on_auto_save_notes1_activate);
-	notepage  = additemtooptionmenu(MainFrm, "_Settings/", "Show Interlinear Page", (GtkMenuCallback)on_show_interlinear_page1_activate);
-	versestyle = additemtooptionmenu(MainFrm, "_Settings/", "Verse Style", (GtkMenuCallback)on_verse_style1_activate);
-	footnotes   = additemtooptionmenu(MainFrm, "_Settings/", "Show Footnotes", (GtkMenuCallback)on_footnotes1_activate);
- 	strongsnum   = additemtooptionmenu(MainFrm, "_Settings/", "Show Strongs Numbers", (GtkMenuCallback)on_strongs_numbers1_activate); 	
- 		
-		
-        //----------------------------------------------------------------------- set dictionary key
-        gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")),settings->dictkey);
-
-        //loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
-        loadbookmarks_programstart(); //--------------------------------- add bookmarks to menubar
-        changeVerse(settings->currentverse); //---------------------------------------------- set Text
-        //----------------------- show hide shortcut bar - set to options setting
-        if(settings->showshortcutbar){
-                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
-        }else{
-                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1);
-        }
-
-        if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); //-- load last used file into studypad
-
 //-- hide buttons - only show them if their options are enabled
-	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
-	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
-	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
-//-- create popup menus -- menu.c
-	createpopupmenus(MainFrm, settings, biblemods, 
-			commentarymods, dictionarymods,
-			percommods);
-			
-//-- free list we used to build menus			
+	gtk_widget_hide(lookup_widget(app,"btnPrint"));
+	gtk_widget_hide(lookup_widget(app,"btnSpell"));
+	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
+
+//-- do not show print button if printing not enabled
+#ifdef  USE_GNOMEPRINT
+        gtk_widget_show(lookup_widget(app,"btnPrint"));
+#endif /* USE_GNOMEPRINT */
+//-- do not show spell buttons if spellcheck not enabled
+#ifdef USE_ASPELL
+        gtk_widget_show (lookup_widget(app,"btnSpell"));
+        gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
+#endif /* USE_ASPELL */	
+//-- free module lists
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
 	g_list_free(percommods);	
-#ifdef  USE_GNOMEPRINT                   //-- do not show print button if printing not enabled
-        gtk_widget_show(lookup_widget(MainFrm,"btnPrint"));
-#endif /* USE_GNOMEPRINT */
-
-#ifdef USE_ASPELL                         //-- do not show spell buttons if spellcheck not enabled
-        gtk_widget_show (lookup_widget(MainFrm,"btnSpell"));
-        gtk_widget_show (lookup_widget(MainFrm,"btnSpellNotes"));
-#endif /* USE_ASPELL */
-}
-
-
-/*
- * initGnomeSword - sets up the interface
-*/
-/*
-void
-initGnomeSword(GList *biblemods, 
-		GList *commentarymods, 
-		GList *dictionarymods)
-{
-		
 }  
-*/
 
+/********************************************************************************************** 
+ * addnotebookpages - add pages to commentary and dictionary notebooks
+ * notebook - notebook to add the pages to
+ * list - list of modules
+ *********************************************************************************************/ 
+void 
+addnotebookpages(GtkWidget *notebook, GList *list)
+{
+	GList *tmp;
+	gint pg = 0;
+	GtkWidget 
+		*empty_notebook_page, //-- used to create new pages
+		*label;
+		
+	tmp = list;
+	while (tmp != NULL) {
+		empty_notebook_page = gtk_vbox_new (false, 0);
+		gtk_widget_show (empty_notebook_page);
+		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
+		label = gtk_label_new ((gchar *) tmp->data);
+		gtk_widget_show (label);
+		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), 
+			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label); 
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);	
+} 
+  
 /********************************************************************************************** 
  * changeVerse - this function changes all currently used sword Bible and commentary modules 
  *               to (ref)
@@ -796,7 +676,7 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 
 //-------------------------------------------------------------------------------------------
 void 
-ShutItDown(void)  //------------- close down GnomeSword program
+ShutItDown(void)  //-- close down GnomeSword program
 {
         char *msg;
         GtkWidget *msgbox;
@@ -944,11 +824,12 @@ addHistoryItem(gchar *ref)  //-- add an item to the history menu
 */
 	additemtognomemenu(MainFrm, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); //-- add item to history menu
 	++historyitems;
-	
-	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+	if(settings->showhistorygroup){
+		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum4, -1,
 						      shortcut_types[3],
 						      ref);
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1291,10 +1172,12 @@ clearhistory(void)    //-- someone clicked clear history
 
         removemenuitems(MainFrm, "_History/<Separator>", historyitems+1);
         addseparator(MainFrm, "_History/C_lear");
-        for(i = historyitems-1; i >= 0; i--) {
-        	e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+        if(settings->showhistorygroup){
+        	for(i = historyitems-1; i >= 0; i--) {
+        		e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  groupnum4,
 						  i);
+		}
         }
         historyitems = 0;
 }
@@ -1320,7 +1203,8 @@ openpropertiesbox(void)    //-- someone clicked properties
                 *shortcutbarbutton, //-- show shortcut bar toggle button
                 *textgroupbutton,   //-- show text group toggle button
                 *comgroupbutton,    //-- show commentary group toggle button
-                *dictgroupbutton;   //-- show dict/lex group toggle button
+                *dictgroupbutton,   //-- show dict/lex group toggle button
+                *historygroupbutton;
 
 	gushort red,       //-- vars for setting color
 		green,
@@ -1335,7 +1219,7 @@ openpropertiesbox(void)    //-- someone clicked properties
         textgroupbutton = lookup_widget(Propertybox,"cbtnShowTextgroup");
 	comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
 	dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
-
+	historygroupbutton = lookup_widget(Propertybox,"cbtnShowHistoryGroup");
         a = 000000;
         //-- setup current verse color picker
 	red = settings->currentverse_red;  //-- get color from settings structure
@@ -1349,7 +1233,7 @@ openpropertiesbox(void)    //-- someone clicked properties
 	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
 	GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
 	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;
-		
+	GTK_TOGGLE_BUTTON(historygroupbutton)->active = settings->showhistorygroup;	
 	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; //-- set Personal note format check button	
 	gtk_widget_show(Propertybox); //-- show propertybox
 }
@@ -1553,7 +1437,7 @@ sbchangeModSword(gint group_num, gint item_num)
 //---------------------------------------------------------------------------------------------
 void
 applyoptions(gboolean showshortcut, gboolean showcomtabs, gboolean showdicttabs, gboolean showtextgroup,
-                gboolean showcomgroup, gboolean showdictgroup)
+                gboolean showcomgroup, gboolean showdictgroup, gboolean showhistorygroup)
 {
          GtkWidget    *dict,
                       *comm;
@@ -1568,6 +1452,7 @@ applyoptions(gboolean showshortcut, gboolean showcomtabs, gboolean showdicttabs,
         settings->showtextgroup = showtextgroup;
         settings->showcomgroup =  showcomgroup;
         settings->showdictgroup = showdictgroup;
+        settings->showhistorygroup = showhistorygroup;
 
         if(settings->showshortcutbar){
                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);

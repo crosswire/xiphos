@@ -1110,7 +1110,9 @@ void
                                         GdkEventButton  *event,
                                         gpointer         user_data);
                    
-
+void
+on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
 
 #ifdef __cplusplus
 }
