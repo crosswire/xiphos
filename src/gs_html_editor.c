@@ -448,7 +448,6 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  necd->htmlwidget);
 	gtk_html_load_empty(necd->html);
-	//gtk_html_set_editable(necd->html, TRUE);
 
 	necd->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(necd->statusbar);
@@ -482,11 +481,14 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 		toolbarComments = toolbar_style(necd);
 		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarComments, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarComments);
-	}else{
+	}
+	
+	else{
 		toolbarStudypad = toolbar_style(necd);
 		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarStudypad, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarStudypad);
 	}
+	
 	return necd->htmlwidget;
 }
 
@@ -719,133 +721,6 @@ on_replace_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 	replace(ecd);
 }
 
-/*
-static void
-on_plain_text_activate(GtkMenuItem * menuitem,
-		       GSHTMLEditorControlData * ecd)
-{
-
-}
-*/
-
-static void
-on_bold_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-		gtk_html_set_font_style(ecd->html,
-					GTK_HTML_FONT_STYLE_MAX,
-					GTK_HTML_FONT_STYLE_BOLD);
-	} else {
-		gtk_html_set_font_style(ecd->html,
-					~GTK_HTML_FONT_STYLE_BOLD, 0);
-	}
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_italic_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-		gtk_html_set_font_style(ecd->html,
-					GTK_HTML_FONT_STYLE_MAX,
-					GTK_HTML_FONT_STYLE_ITALIC);
-	} else {
-		gtk_html_set_font_style(ecd->html,
-					~GTK_HTML_FONT_STYLE_ITALIC, 0);
-	}
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-
-}
-
-
-static void
-on_underline_activate(GtkMenuItem * menuitem,
-		      GSHTMLEditorControlData * ecd)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-		gtk_html_set_font_style(ecd->html,
-					GTK_HTML_FONT_STYLE_MAX,
-					GTK_HTML_FONT_STYLE_UNDERLINE);
-	} else {
-		gtk_html_set_font_style(ecd->html,
-					~GTK_HTML_FONT_STYLE_UNDERLINE, 0);
-	}
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-
-}
-
-
-static void
-on_strikeout_activate(GtkMenuItem * menuitem,
-		      GSHTMLEditorControlData * ecd)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-		gtk_html_set_font_style(ecd->html,
-					GTK_HTML_FONT_STYLE_MAX,
-					GTK_HTML_FONT_STYLE_STRIKEOUT);
-	} else {
-		gtk_html_set_font_style(ecd->html,
-					~GTK_HTML_FONT_STYLE_STRIKEOUT, 0);
-	}
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-
-}
-
-
-static void
-on_left_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_alignment(ecd->html,
-					 GTK_HTML_PARAGRAPH_ALIGNMENT_LEFT);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_right_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_alignment(ecd->html,
-					 GTK_HTML_PARAGRAPH_ALIGNMENT_RIGHT);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_center_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_alignment(ecd->html,
-					 GTK_HTML_PARAGRAPH_ALIGNMENT_CENTER);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_increase_indent_activate(GtkMenuItem * menuitem,
-			    GSHTMLEditorControlData * ecd)
-{
-	gtk_html_modify_indent_by_delta(ecd->html, +1);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_decrease_indent_activate(GtkMenuItem * menuitem,
-			    GSHTMLEditorControlData * ecd)
-{
-	gtk_html_modify_indent_by_delta(ecd->html, -1);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
 static void
 on_link_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
@@ -854,130 +729,33 @@ on_link_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 	dlg = create_dlgLink(ecd);
 	gtk_widget_show(dlg);
 }
-
-
-static void
-on_normal_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_style(ecd->html,
-				     GTK_HTML_PARAGRAPH_STYLE_NORMAL);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
+void
+on_autoscroll_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
+{	
+	settings->notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
-
-
-static void
-on_roman_list_activate(GtkMenuItem * menuitem,
-		       GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_style(ecd->html,
-				     GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_alphabetical_list_activate(GtkMenuItem * menuitem,
-			      GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_style(ecd->html,
-				     GTK_HTML_PARAGRAPH_STYLE_ITEMALPHA);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-
-static void
-on_numerical_list_activate(GtkMenuItem * menuitem,
-			   GSHTMLEditorControlData * ecd)
-{
-	gtk_html_set_paragraph_style(ecd->html,
-				     GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT);
-	ecd->changed = TRUE;
-	updatestatusbar(ecd);
-}
-
-/*
-static void
-insertion_font_style_changed_cb(GtkHTML * widget,
-				GtkHTMLFontStyle font_style,
-				GSHTMLEditorControlData * ecd)
-{
-	ecd->block_font_style_change++;
-
-	if (font_style & GTK_HTML_FONT_STYLE_BOLD)
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->bold), TRUE);
-	else
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->bold), FALSE);
-
-	if (font_style & GTK_HTML_FONT_STYLE_ITALIC)
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->italic), TRUE);
-	else
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->italic), FALSE);
-
-	if (font_style & GTK_HTML_FONT_STYLE_UNDERLINE)
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->underline), TRUE);
-	else
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->underline), FALSE);
-
-	if (font_style & GTK_HTML_FONT_STYLE_STRIKEOUT)
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->strikeout), TRUE);
-	else
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (ecd->strikeout), FALSE);
-
-	ecd->block_font_style_change--;
-}
-*/
-/*
-static void safe_set_active(GtkWidget * widget, gpointer data)
-{
-	GtkObject *object;
-	GtkCheckMenuItem *item;
-
-	object = GTK_OBJECT(widget);
-	item = GTK_CHECK_MENU_ITEM(widget);
-
-	gtk_signal_handler_block_by_data(object, data);
-	gtk_check_menu_item_set_active(item, TRUE);
-	//gtk_toggle_button_set_active (toggle_button, TRUE);
-	gtk_signal_handler_unblock_by_data(object, data);
-}*/
-/*
-static void
-paragraph_alignment_changed_cb(GtkHTML * widget,
-			       GtkHTMLParagraphAlignment alignment,
-			       GSHTMLEditorControlData * ecd)
-{
-	switch (alignment) {
-	case GTK_HTML_PARAGRAPH_ALIGNMENT_LEFT:
-		safe_set_active(ecd->left_align, ecd);
-		break;
-	case GTK_HTML_PARAGRAPH_ALIGNMENT_CENTER:
-		safe_set_active(ecd->center, ecd);
-		break;
-	case GTK_HTML_PARAGRAPH_ALIGNMENT_RIGHT:
-		safe_set_active(ecd->right_align, ecd);
-		break;
-	default:
-		g_warning("Unknown GtkHTMLParagraphAlignment %d.",
-			  alignment);
+void
+on_editnote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
+{	
+	settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	gtk_html_set_editable(GTK_HTML(htmlComments), GTK_CHECK_MENU_ITEM(menuitem)->active);
+	if(GTK_CHECK_MENU_ITEM(menuitem)->active){
+		gtk_widget_show(toolbarComments);
 	}
-}*/
+	
+	else {
+		gtk_widget_hide(toolbarComments);
+	}
+}
 
 GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *pmEditor;
 	GtkAccelGroup *pmEditor_accels;
 	guint tmp_key;
+	GtkWidget *autoscroll = NULL;
+	GtkWidget *editnote = NULL;
+	GtkWidget *separator;
 	GtkWidget *file;
 	GtkWidget *file_menu;
 	GtkAccelGroup *file_menu_accels;
@@ -1003,31 +781,43 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	GtkWidget *find;
 	GtkWidget *find_again;
 	GtkWidget *replace;
-	GtkWidget *font_style1;
-	GtkWidget *font_style1_menu;
-	GtkAccelGroup *font_style1_menu_accels;
-//      GtkWidget *plain_text1;
-	GtkWidget *paragraph1;
-	GtkWidget *paragraph1_menu;
-	GtkAccelGroup *paragraph1_menu_accels;
-	GtkWidget *increase_indent;
-	GtkWidget *decrease_indent;
 	GtkWidget *link;
-	GtkWidget *heading1;
-	GtkWidget *heading1_menu;
-	GtkAccelGroup *heading1_menu_accels;
-	GtkWidget *normal1;
-	GtkWidget *roman_list1;
-	GtkWidget *alphabetical_list1;
-	GtkWidget *numerical_list1;
 
-	// GSList *_123_group = NULL;
-	ecd->paragraph_group = NULL;
 	pmEditor = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmEditor), "pmEditor", pmEditor);
 	pmEditor_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmEditor));
-
+	    
+	if (ecd->personal_comments) {
+		autoscroll = gtk_check_menu_item_new_with_label("Auto Scroll");
+		gtk_widget_ref(autoscroll);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "autoscroll",
+				 autoscroll,
+				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show(autoscroll);
+		gtk_container_add(GTK_CONTAINER(pmEditor), autoscroll);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(autoscroll),
+				       TRUE);
+				       
+		editnote = gtk_check_menu_item_new_with_label("Edit Note");
+		gtk_widget_ref(editnote);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "editnote",
+				 editnote,
+				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show(editnote);
+		gtk_container_add(GTK_CONTAINER(pmEditor), editnote);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(editnote),
+				       FALSE);	
+				       
+		separator = gtk_menu_item_new ();
+		gtk_widget_ref (separator);
+		gtk_object_set_data_full (GTK_OBJECT (pmEditor), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show (separator);
+		gtk_container_add (GTK_CONTAINER (pmEditor), separator);
+		gtk_widget_set_sensitive (separator, FALSE);		    
+	}
+				       
 	file = gtk_menu_item_new_with_label("");
 	tmp_key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(file)->child),
 					_("File"));
@@ -1194,191 +984,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(replace);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), replace);
-/*
-	font_style1 = gtk_menu_item_new_with_label(_("Font Style"));
-	gtk_widget_ref(font_style1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "font_style1",
-				 font_style1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(font_style1);
-	gtk_container_add(GTK_CONTAINER(pmEditor), font_style1);
 
-	font_style1_menu = gtk_menu_new();
-	gtk_widget_ref(font_style1_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "font_style1_menu",
-				 font_style1_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(font_style1),
-				  font_style1_menu);
-	font_style1_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(font_style1_menu));
-	    */
-/*
-	plain_text1 = gtk_check_menu_item_new_with_label(_("Plain Text"));
-	gtk_widget_ref(plain_text1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "plain_text1",
-				 plain_text1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(plain_text1);
-	gtk_container_add(GTK_CONTAINER(font_style1_menu), plain_text1);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (plain_text1), TRUE);
-*/
-/*	ecd->bold = gtk_check_menu_item_new_with_label(_("Bold"));
-	gtk_widget_ref(ecd->bold);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->bold",
-				 ecd->bold,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->bold);
-	gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->bold);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->bold),
-					    TRUE);
-
-	ecd->italic = gtk_check_menu_item_new_with_label(_("Italic"));
-	gtk_widget_ref(ecd->italic);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->italic",
-				 ecd->italic,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->italic);
-	gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->italic);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->italic), TRUE);
-
-	ecd->underline =
-	    gtk_check_menu_item_new_with_label(_("Underline"));
-	gtk_widget_ref(ecd->underline);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->underline",
-				 ecd->underline,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->underline);
-	gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->underline);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->underline), TRUE);
-
-	ecd->strikeout =
-	    gtk_check_menu_item_new_with_label(_("Strick Out"));
-	gtk_widget_ref(ecd->strikeout);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->strikeout",
-				 ecd->strikeout,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->strikeout);
-	gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->strikeout);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->strikeout), TRUE);
-*/
-/*
-	paragraph1 = gtk_menu_item_new_with_label(_("Paragraph"));
-	gtk_widget_ref(paragraph1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paragraph1",
-				 paragraph1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(paragraph1);
-	gtk_container_add(GTK_CONTAINER(pmEditor), paragraph1);
-
-	paragraph1_menu = gtk_menu_new();
-	gtk_widget_ref(paragraph1_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paragraph1_menu",
-				 paragraph1_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(paragraph1),
-				  paragraph1_menu);
-	paragraph1_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(paragraph1_menu));
-	    */
-/*
-	ecd->left_align = gtk_check_menu_item_new_with_label(_("Left"));
-	gtk_widget_ref(ecd->left_align);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->left_align", ecd->left_align,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->left_align);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->left_align);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->left_align),
-					    TRUE);
-*/
-/*	ecd->left_align =
-	    gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-					       _("Left"));
-	ecd->paragraph_group =
-	    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-				      (ecd->left_align));
-	gtk_widget_ref(ecd->left_align);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->left_align",
-				 ecd->left_align,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->left_align);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->left_align);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (ecd->left_align), TRUE);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->left_align), TRUE);
-
-	ecd->right_align =
-	    gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-					       _("Right"));
-	ecd->paragraph_group =
-	    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-				      (ecd->right_align));
-	gtk_widget_ref(ecd->right_align);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->right_align",
-				 ecd->right_align,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->right_align);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu),
-			  ecd->right_align);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->right_align), TRUE);
-
-	ecd->center =
-	    gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-					       _("Center"));
-	ecd->paragraph_group =
-	    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(ecd->center));
-	gtk_widget_ref(ecd->center);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->center",
-				 ecd->center,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->center);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->center);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (ecd->center), TRUE);
-					    */
-/*
-	ecd->right_align = gtk_check_menu_item_new_with_label(_("Right"));
-	gtk_widget_ref(ecd->right_align);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->right_align", ecd->right_align,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->right_align);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->right_align);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->right_align),
-					    TRUE);
-
-	ecd->center = gtk_check_menu_item_new_with_label(_("Center"));
-	gtk_widget_ref(ecd->center);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->center", ecd->center,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ecd->center);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->center);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->center),
-					    TRUE);
-*/
-/*	increase_indent =
-	    gtk_menu_item_new_with_label(_("Increase Indent"));
-	gtk_widget_ref(increase_indent);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "increase_indent",
-				 increase_indent,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(increase_indent);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), increase_indent);
-
-	decrease_indent =
-	    gtk_menu_item_new_with_label(_("Decrease Indent"));
-	gtk_widget_ref(decrease_indent);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "decrease_indent",
-				 decrease_indent,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(decrease_indent);
-	gtk_container_add(GTK_CONTAINER(paragraph1_menu), decrease_indent);
-*/
 	link = gtk_menu_item_new_with_label(_("Link..."));
 	gtk_widget_ref(link);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "link",
@@ -1386,72 +992,19 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(link);
 	gtk_container_add(GTK_CONTAINER(pmEditor), link);
-/*
-	heading1 = gtk_menu_item_new_with_label(_("Heading"));
-	gtk_widget_ref(heading1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "heading1",
-				 heading1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(heading1);
-	gtk_container_add(GTK_CONTAINER(pmEditor), heading1);
 
-	heading1_menu = gtk_menu_new();
-	gtk_widget_ref(heading1_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "heading1_menu",
-				 heading1_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(heading1), heading1_menu);
-	heading1_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(heading1_menu));
-
-	normal1 = gtk_check_menu_item_new_with_label(_("Normal"));
-	gtk_widget_ref(normal1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "normal1", normal1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(normal1);
-	gtk_container_add(GTK_CONTAINER(heading1_menu), normal1);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(normal1),
-					    TRUE);
-
-	roman_list1 = gtk_check_menu_item_new_with_label(_("Roman List"));
-	gtk_widget_ref(roman_list1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "roman_list1",
-				 roman_list1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(roman_list1);
-	gtk_container_add(GTK_CONTAINER(heading1_menu), roman_list1);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (roman_list1), TRUE);
-
-	alphabetical_list1 =
-	    gtk_check_menu_item_new_with_label(_("Alphabetical List"));
-	gtk_widget_ref(alphabetical_list1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-				 "alphabetical_list1", alphabetical_list1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(alphabetical_list1);
-	gtk_container_add(GTK_CONTAINER(heading1_menu),
-			  alphabetical_list1);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (alphabetical_list1), TRUE);
-
-	numerical_list1 =
-	    gtk_check_menu_item_new_with_label(_("Numerical List"));
-	gtk_widget_ref(numerical_list1);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "numerical_list1",
-				 numerical_list1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(numerical_list1);
-	gtk_container_add(GTK_CONTAINER(heading1_menu), numerical_list1);
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-					    (numerical_list1), TRUE);
-*/
 	if (ecd->personal_comments) {
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
 				   GTK_SIGNAL_FUNC(on_savenote_activate),
 				   ecd);
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   GTK_SIGNAL_FUNC(on_deletenote_activate),
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(autoscroll), "activate",
+			   GTK_SIGNAL_FUNC(on_autoscroll_activate), 
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(editnote), "activate",
+			   GTK_SIGNAL_FUNC(on_editnote_activate), 
 				   ecd);
 	} else {
 		gtk_signal_connect(GTK_OBJECT(new), "activate",
@@ -1484,57 +1037,10 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 			   GTK_SIGNAL_FUNC(on_find_again_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(replace), "activate",
 			   GTK_SIGNAL_FUNC(on_replace_activate), ecd);
-	/*
-	   gtk_signal_connect(GTK_OBJECT(plain_text1), "activate",
-	   GTK_SIGNAL_FUNC(on_plain_text_activate), ecd);
-	 */
-	 /*
-	gtk_signal_connect(GTK_OBJECT(ecd->bold), "activate",
-			   GTK_SIGNAL_FUNC(on_bold_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->italic), "activate",
-			   GTK_SIGNAL_FUNC(on_italic_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->underline), "activate",
-			   GTK_SIGNAL_FUNC(on_underline_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->strikeout), "activate",
-			   GTK_SIGNAL_FUNC(on_strikeout_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->left_align), "activate",
-			   GTK_SIGNAL_FUNC(on_left_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->right_align), "activate",
-			   GTK_SIGNAL_FUNC(on_right_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->center), "activate",
-			   GTK_SIGNAL_FUNC(on_center_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(increase_indent), "activate",
-			   GTK_SIGNAL_FUNC(on_increase_indent_activate),
-			   ecd);
-	gtk_signal_connect(GTK_OBJECT(decrease_indent), "activate",
-			   GTK_SIGNAL_FUNC(on_decrease_indent_activate),
-			   ecd);
-			   */
+	
 	gtk_signal_connect(GTK_OBJECT(link), "activate",
 			   GTK_SIGNAL_FUNC(on_link_activate), ecd);
-			   /*
-	gtk_signal_connect(GTK_OBJECT(normal1), "activate",
-			   GTK_SIGNAL_FUNC(on_normal_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(roman_list1), "activate",
-			   GTK_SIGNAL_FUNC(on_roman_list_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(alphabetical_list1), "activate",
-			   GTK_SIGNAL_FUNC(on_alphabetical_list_activate),
-			   ecd);
-	gtk_signal_connect(GTK_OBJECT(numerical_list1), "activate",
-			   GTK_SIGNAL_FUNC(on_numerical_list_activate),
-			   ecd);
-			   */
-	/*ecd->font_style_changed_connection_id
-	    =
-	    gtk_signal_connect(GTK_OBJECT(ecd->html),
-			       "insertion_font_style_changed",
-			       GTK_SIGNAL_FUNC
-			       (insertion_font_style_changed_cb), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->html),
-			   "current_paragraph_alignment_changed",
-			   GTK_SIGNAL_FUNC(paragraph_alignment_changed_cb),
-			   ecd);
-			   */
+			  
 	return pmEditor;
 }
 
@@ -1555,7 +1061,6 @@ on_btnFindOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 	gchar *buf;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	//buf = gtk_editable_get_chars(GTK_EDITABLE(lookup_widget(GTK_WIDGET(button),"entry12")), 0, -1);
 	buf =
 	    e_utf8_gtk_entry_get_text(GTK_ENTRY
 				      (lookup_widget
@@ -1941,7 +1446,6 @@ GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 	gtk_widget_show(vboxPC);
 	gtk_box_pack_start(GTK_BOX(vbox6), vboxPC, TRUE, TRUE, 0);
 
-	//create_editor(vboxPC, s, pcecd);
 	htmlComments = gtk_html_new();
 	
 	create_editor(htmlComments, vboxPC, s, pcecd);

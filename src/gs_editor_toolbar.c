@@ -559,6 +559,9 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 
 	cd->toolbar_style = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(cd->toolbar_style),
+				      GTK_RELIEF_NONE);
+	
 	gtk_container_add (GTK_CONTAINER (frame), cd->toolbar_style);
 	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, TRUE, 0);
 
@@ -582,7 +585,7 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 		= gtk_signal_connect (GTK_OBJECT (cd->html), "insertion_font_style_changed",
 				      GTK_SIGNAL_FUNC (insertion_font_style_changed_cb), cd);
 
-	/* The following SUCKS!  */
+	
 	cd->tt_button        = editor_toolbar_style_uiinfo [0].widget;
 	cd->bold_button      = editor_toolbar_style_uiinfo [1].widget;
 	cd->italic_button    = editor_toolbar_style_uiinfo [2].widget;
