@@ -36,6 +36,8 @@ libgui_a_SOURCES =  \
     editor_menu.h \
     link_dialog.c \
     link_dialog.h \
+    main_menu.c \
+    main_menu.h \
     splash.c \
     splash.h
 

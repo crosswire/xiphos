@@ -35,11 +35,14 @@
 #include "sword.h"
 #include "gs_history.h"
 #include "gs_gui_cb.h"
-#include "gs_mainmenu_cb.h"
+//#include "gs_mainmenu_cb.h"
 #include "gs_menu.h"
 #include "support.h"
 
-
+/*
+ * gnome
+ */
+#include "main_menu.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>

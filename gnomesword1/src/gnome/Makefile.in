@@ -173,6 +173,8 @@ libgui_a_SOURCES = \
     editor_menu.h \
     link_dialog.c \
     link_dialog.h \
+    main_menu.c \
+    main_menu.h \
     splash.c \
     splash.h
 
@@ -189,7 +191,7 @@ am_libgui_a_OBJECTS = _bibletext.$(OBJEXT) about_gnomesword.$(OBJEXT) \
 	create_shortcutbar_search.$(OBJEXT) \
 	create_shortcutbar_viewer.$(OBJEXT) cipher_key_dialog.$(OBJEXT) \
 	_editor.$(OBJEXT) editor_menu.$(OBJEXT) link_dialog.$(OBJEXT) \
-	splash.$(OBJEXT)
+	main_menu.$(OBJEXT) splash.$(OBJEXT)
 libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -205,7 +207,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_viewer.Po \
 @AMDEP_TRUE@	$(DEPDIR)/editor_menu.Po $(DEPDIR)/link_dialog.Po \
-@AMDEP_TRUE@	$(DEPDIR)/splash.Po
+@AMDEP_TRUE@	$(DEPDIR)/main_menu.Po $(DEPDIR)/splash.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -264,6 +266,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/create_shortcutbar_viewer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/editor_menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/link_dialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/main_menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/splash.Po@am__quote@
 
 distclean-depend:

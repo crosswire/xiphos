@@ -1,29 +1,22 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_gnomesword.c
-    * -------------------
-    * Tue Dec 05 2000
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
-  */
-
 /*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * GnomeSword Bible Study Tool
+ * gnomesword.c - glue
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -38,67 +31,71 @@
 #include "gs_gnomesword.h"
 #include "gs_interlinear.h"
 #include "gs_history.h"
-#include "sword.h"
 #include "gs_gui_cb.h"
 #include "gs_commentary.h"
 #include "gs_gbs.h"
 #include "gs_dictlex.h"
-#include "gs_mainmenu_cb.h"
 #include "support.h"
 #include "gs_file.h"
 #include "gs_info_box.h"
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
-#include "bibletext.h"
+
+/*
+ * gnome
+ */
+#include "main_menu.h"
 #include "about_modules.h"
-#include "search_.h"
-#include "interlinear.h"
+/*
+ * main
+ */ 
 #include "percomm.h"
-
-
-/*****************************************************************************
-* globals
-*****************************************************************************/
-GtkWidget *notepage,		/* widget to access toggle menu - for interlinear notebook page */
-*autosaveitem,			/* widget to access toggle menu - for personal comments auto save */
-*notes;				/* notes text widget */
-
-gboolean file_changed = FALSE,	/* set to true if text is study pad has changed - and file is not saved  */
- changemain = TRUE,		/* change verse of Bible text window */
- ApplyChange = TRUE;
-gchar *current_filename = NULL;	/* filename for open file in study pad window */
-
-gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
-
-gint dictpages, compages, textpages, bookpages;
-MOD_LISTS *mod_lists;
-SETTINGS *settings;
-GList *sblist;			/* for saving search results to bookmarks  */
-
+#include "bibletext.h"
+ 
+/*
+ * backend
+ */
+#include "search_.h"
+#include "sword.h"
+#include "interlinear.h"
+#include "bibletext_.h"
+#include "percomm_.h"
+#include "gbs.h"
+#include "dictlex.h"
+ 
+ 
 /*****************************************************************************
  * externs
  */
-extern gchar *mydictmod, *shortcut_types[], rememberlastitem[];
 
-extern gboolean havedict,	/* let us know if we have at least one lex-dict module */
- havecomm,			/* let us know if we have at least one commentary module */
- havebible,			/* let us know if we have at least one Bible text module */
- usepersonalcomments,		/* do we setup for personal comments - default is FALSE */
- autoSave, addhistoryitem,	/* do we need to add item to history */
- ApplyChange;
-extern gint groupnum4, iquickmarks;	/* number of items in bookmark menu -- declared in gs_file.c */
+extern gboolean havebible, /* do we have at least one Bible text module */
+ autoSave, addhistoryitem;	/* do we need to add item to history */
+ 
 extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
-extern GtkWidget *shortcut_bar;
 
-static
-gchar *update_nav_controls(gchar * key);
+/******************************************************************************
+ * globals
+ */
+gboolean changemain = TRUE; /* change verse of Bible text window */
+gboolean ApplyChange;
+gchar current_verse[80] = N_("Romans 8:28");
+MOD_LISTS *mod_lists;
+SETTINGS *settings;
+GList *sblist;			/* for saving search results to bookmarks  */
 MOD_LISTS mods;
+
+
+/******************************************************************************
+ * static
+ */
+static gchar *update_nav_controls(gchar * key);
+
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
-void initGnomeSword(SETTINGS * s)
+void init_gnomesword(SETTINGS * s)
 {	
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
@@ -126,61 +123,46 @@ void initGnomeSword(SETTINGS * s)
 	mod_lists->book_descriptions = backend_get_mod_description_list_SWORD(BOOK_MODS);
 	
 	/*
-	   setup shortcut bar 
+	 *  setup shortcut bar 
 	 */
 	setupSB(s);
 	/*
-	   create popup menus -- gs_menu.c 
+	 *  create popup menus -- gs_menu.c 
 	 */
 	createpopupmenus(s, mod_lists->text_descriptions, mod_lists->options);
-	//additemstooptionsmenu(options, s);
 	/*
-	   setup Bible text gui 
+	 *  setup Bible text gui 
 	 */
 	mod_lists->biblemods = setup_text(s);
 
 	/*
-	   setup commentary gui support 
+	 *  setup commentary gui support 
 	 */
 	mod_lists->commentarymods = gui_setup_comm(s);
 	/*
-	   setup personal comments gui support 
+	 *  setup personal comments gui support 
 	 */
 	mod_lists->percommods = setup_percomm(s);
 	/*
-	   setup general book gui support 
+	 *  setup general book gui support 
 	 */
 	mod_lists->bookmods = gui_setup_gbs(s);
 	/*
-	   setup Dict/Lex gui support 
+	 *  setup Dict/Lex gui support 
 	 */
 	mod_lists->dictionarymods = gui_setup_dict(s);
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
 	/*
-	   add modules to about modules menus -- gs_menu.c 
+	 *  add modules to about modules menus -- gs_menu.c 
 	 */
 	addmodstomenus(s,
 		       mod_lists->biblemods,
 		       mod_lists->commentarymods, 
 		       mod_lists->dictionarymods, 
 		       mod_lists->bookmods);
-	 
-
-	/*gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(s->app, "nbPerCom")), 0);*/
-	/*
-	   set text windows to word warp 
-	 */
-/*	gtk_text_set_word_wrap(GTK_TEXT
-			       (lookup_widget(s->app, "textComments")),
-			       TRUE);*/
-	/*
-	   store text widgets for spell checker 
-	 */
-//	notes = lookup_widget(s->app, "textComments");
-
+		
 	s->versestyle_item =
 	    additemtooptionmenu(s->app, _("_Settings/"),
 				_("Verse Style"), (GtkMenuCallback)
@@ -194,8 +176,11 @@ void initGnomeSword(SETTINGS * s)
 	UpdateChecks(s);
 
 	/* showing the devotional must come after the the app is shown or
-	   it will mess up the shortcut bar display */
-	/* FIXME: maybe we need to move the devotional ? */
+	 *  it will mess up the shortcut bar display 
+	 */
+	/* 
+	 * FIXME: maybe we need to move the devotional ? 
+	 */
 	if (s->showdevotional) {
 		backend_display_devotional(s);
 	}
@@ -254,47 +239,6 @@ void gnomesword_shutdown(SETTINGS * s)
 	shutdown_percomm();
 	
 	g_print("\nwe are done with Gnomesword\n");
-}
-
-/*****************************************************************************
- * addnotebookpages - add pages to commentary and dictionary notebooks
- * notebook - notebook to add the pages to
- * list - list of modules - add one page per module
- *********************************************************************************************/
-gint
-addnotebookpages(GtkWidget * notebook, GList * modlist, gchar * modName)
-{
-	GList *tmp;
-	gint pg = 0, retVal = 0;
-	GtkWidget *empty_notebook_page,	/* used to create new pages */
-	*label;
-	GtkLabel *mylabel;
-
-	tmp = modlist;
-	while (tmp != NULL) {
-		empty_notebook_page = gtk_vbox_new(FALSE, 0);
-		gtk_widget_show(empty_notebook_page);
-		gtk_container_add(GTK_CONTAINER(notebook),
-				  empty_notebook_page);
-		label = gtk_label_new((gchar *) tmp->data);
-		mylabel = GTK_LABEL(label);
-		if (!strcmp((gchar *) mylabel->label, modName))	/* set retVal to saved mod's page number */
-			retVal = pg;
-		gtk_widget_show(label);
-		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook),
-					   gtk_notebook_get_nth_page
-					   (GTK_NOTEBOOK(notebook), pg),
-					   label);
-		gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook),
-						 gtk_notebook_get_nth_page
-						 (GTK_NOTEBOOK
-						  (notebook), pg),
-						 (gchar *) tmp->data);
-		++pg;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	return retVal;
 }
 
 /*****************************************************************************
@@ -367,8 +311,7 @@ void UpdateChecks(SETTINGS * s)
 	 */
 	if (s->showshortcutbar) {
 		gtk_widget_show(s->shortcut_bar);
-		e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "epaned")),
+		e_paned_set_position(E_PANED(s->epaned),
 				     s->shortcutbar_width);
 	}
 
@@ -379,8 +322,7 @@ void UpdateChecks(SETTINGS * s)
 
 	else {
 		gtk_widget_hide(s->shortcut_bar);
-		e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "epaned")),
+		e_paned_set_position(E_PANED(s->epaned),
 				     1);
 	}
 
@@ -397,7 +339,7 @@ void UpdateChecks(SETTINGS * s)
 
 	if (!s->docked) {
 		s->docked = TRUE;
-		on_btnSBDock_clicked(NULL, s);
+		dock_undock(s);
 	}
 	gtk_widget_show(s->app); /** display the whole thing **/
 
@@ -425,28 +367,6 @@ void changepagenotebook(GtkNotebook * notebook, gint page_num)
 {
 	settings->notebook3page = page_num;	/* store the page number so we can open to it the next time we start */
 	changemain = FALSE;	/* we don't want to cause the Bible text window to scrool */
-	//if(page_num == 4) change_verse(current_verse); /* if we changed to page 0, 1 or 2 */
-}
-
-
-/*****************************************************************************
- * showIntPage - do we want to see interlinear page?
- * choice
-*****************************************************************************/
-void showIntPage(GtkWidget * app, gboolean choice)
-{
-	GtkWidget *intpage, *frame;	/* pointer to interlinear notebook page */
-
-	intpage = lookup_widget(app, "vboxInt");	/* set pointer to page */
-	frame = lookup_widget(app, "frame2");	/* set pointer to page */
-	if (choice) {
-		gtk_widget_show(intpage);	/* show page */
-		gtk_widget_show(frame);	/* show page */
-	} else {
-		gtk_widget_hide(intpage);	/* hide page */
-		gtk_widget_hide(frame);
-	}
-	settings->interlinearpage = choice;	/* remember choice for next program startup */
 }
 
 
@@ -806,11 +726,11 @@ gchar *update_nav_controls(gchar * key)
 	cur_chapter = backend_get_chapter_from_key(val_key);
 	cur_verse = backend_get_verse_from_key(val_key);
 	/* 
-	   remember last verse 
+	 *  remember last verse 
 	 */
 	sprintf(settings->currentverse, "%s", val_key);
 	/* 
-	   set book, chapter,verse and freeform lookup entries to new verse 
+	 *  set book, chapter,verse and freeform lookup entries to new verse 
 	 */
 	gtk_entry_set_text(GTK_ENTRY(settings->cbeBook),
 			   backend_get_book_from_key(val_key));
@@ -882,7 +802,7 @@ void change_verse(gchar * key)
 			     historylist[historyitems - 1].verseref))
 				addHistoryItem(settings->app,
 					       GTK_WIDGET
-					       (shortcut_bar),
+					       (settings->shortcut_bar),
 					       settings->currentverse);
 		}
 		addhistoryitem = TRUE;

@@ -79,13 +79,7 @@ GSHTMLEditorControlData *gbsecd;
 
 extern SETTINGS *settings;
 extern char *homedir;
-extern gchar *current_filename;	/* filename for open file in study pad window  */
 extern GtkWidget *htmlComments;
-extern GtkWidget *toolbarComments;
-extern GtkWidget *toolbarBooks;
-
-
-
 
 
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
@@ -175,9 +169,7 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	gboolean was_editable;
 	int fd;
 
-	current_filename = filename;
 	sprintf(settings->studypadfilename, "%s", filename);
-	//g_warning("filename = %s\n",current_filename);
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -473,7 +465,6 @@ GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, gchar *mod_name,
 {
 	GtkWidget * vbox;
 	GtkWidget *frame12;
-	GtkWidget *vbox6;
 	GSHTMLEditorControlData *pcecd =
 	    gs_html_editor_control_data_new(s);
 	GtkWidget *vboxPC;

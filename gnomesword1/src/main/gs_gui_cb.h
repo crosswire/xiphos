@@ -34,88 +34,32 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
-	
-	void on_mainwindow_size_allocate(GtkWidget * widget,
-					 GtkAllocation * allocation,
-					 gpointer user_data);
-	void on_ok_button1_clicked(GtkButton * button, gpointer user_data);
-	void on_cancel_button1_clicked(GtkButton * button,
-				       gpointer user_data);
-	void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
-	void on_cancel_button2_clicked(GtkButton * button,
-				       gpointer user_data);
-	void on_btnSearch1_clicked(GtkButton * button, gpointer user_data);
-	void on_resultList_select_row(GtkCList * clist, gint row,
-				      gint column, GdkEvent * event,
-				      gpointer user_data);
-	void on_mainwindow_destroy(GtkObject * object, SETTINGS * s);
-	void on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
-	void on_btnSearch_clicked(GtkButton * button, gpointer user_data);
-	void on_btnStrongs_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data);
-	void on_btnMorphs_toggled(GtkToggleButton * togglebutton,
-				  gpointer user_data);
-	void on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
-				     gpointer user_data);
-	void on_cbeBook_changed(GtkEditable * editable,
-				gpointer user_data);
-	gboolean on_spbChapter_button_release_event(GtkWidget * widget,
-						    GdkEventButton * event,
-						    gpointer user_data);
-	gboolean on_spbVerse_button_release_event(GtkWidget * widget,
-						  GdkEventButton * event,
-						  gpointer user_data);
-	void on_btnLookup_clicked(GtkButton * button, gpointer user_data);
-	gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
-						      GdkEventKey * event,
-						      gpointer user_data);
-	void on_textComments_changed(GtkEditable * editable,
-				     gpointer user_data);
-	gboolean on_textComments_button_release_event(GtkWidget * widget,
-						      GdkEventButton *
-						      event,
-						      gpointer user_data);
-	void on_btnEditNote_toggled(GtkToggleButton * togglebutton,
-				    gpointer user_data);
-	void on_btnSaveNote_clicked(GtkButton * button,
-				    gpointer user_data);
-	void on_btnSpell_clicked(GtkButton * button, gpointer user_data);
-	void on_btbSpellOK_clicked(GtkButton * button, gpointer user_data);
-	void on_btnSpellCancel_clicked(GtkButton * button,
-				       gpointer user_data);
-	void on_btnSearchOK_clicked(GtkButton * button,
-				    gpointer user_data);
-	void on_btnSpellCancel_clicked(GtkButton * button,
-				       gpointer user_data);
-	void on_spell1_found_word(GnomeSpell * gnomespell, gpointer arg1,
-				  gpointer user_data);
-	void on_spell1_handled_word(GnomeSpell * gnomespell, gpointer arg1,
-				    gpointer user_data);
-	void on_btndlg1OK_clicked(GtkButton * button, gpointer user_data);
-	void on_btndlg1Apply_clicked(GtkButton * button,
-				     gpointer user_data);
-	void on_btndialog1Cancel_clicked(GtkButton * button,
-					 gpointer user_data);
-	void on_btnBack_clicked(GtkButton * button, gpointer user_data);
-	void on_btnSearchSaveList_clicked(GtkButton * button,
+
+void on_mainwindow_size_allocate(GtkWidget * widget,
+				 GtkAllocation * allocation,
+				 gpointer user_data);
+void on_mainwindow_destroy(GtkObject * object, SETTINGS * s);
+void on_btn_search_clicked(GtkButton * button, gpointer user_data);
+void on_cbeBook_changed(GtkEditable * editable,
+			gpointer user_data);
+gboolean on_spbChapter_button_release_event(GtkWidget * widget,
+					    GdkEventButton * event,
+					    gpointer user_data);
+gboolean on_spbVerse_button_release_event(GtkWidget * widget,
+					  GdkEventButton * event,
 					  gpointer user_data);
-	void on_notebook3_switch_page(GtkNotebook * notebook,
-				      GtkNotebookPage * page,
-				      gint page_num, gpointer user_data);
-	void on_btnInfoBoxYes_clicked(GtkButton * button,
-				      gpointer user_data);
-	void on_btnInfoBoxNo_clicked(GtkButton * button,
-				     gpointer user_data);
-	void on_tbtnFollow_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data);
-	gboolean on_textComments_key_press_event(GtkWidget * widget,
-						 GdkEventKey * event,
-						 gpointer user_data);
-	void on_btnBack_clicked(GtkButton * button, gpointer user_data);
-	void on_btnFoward_clicked(GtkButton * button, gpointer user_data);
-	gboolean on_epaned_button_release_event(GtkWidget * widget,
-						GdkEventButton * event,
-						gpointer user_data);
+void on_btnLookup_clicked(GtkButton * button, gpointer user_data);
+gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
+					      GdkEventKey * event,
+					      gpointer user_data);
+void on_notebook3_switch_page(GtkNotebook * notebook,
+			      GtkNotebookPage * page,
+			      gint page_num, gpointer user_data);
+void on_btnBack_clicked(GtkButton * button, gpointer user_data);
+void on_btnFoward_clicked(GtkButton * button, gpointer user_data);
+gboolean on_epaned_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer user_data);
 
 #ifdef __cplusplus
 }

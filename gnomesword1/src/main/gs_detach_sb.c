@@ -43,7 +43,7 @@ on_dlgDock_destroy(GtkObject *object,
                    SETTINGS *s)
 {
 	if(!s->docked) /* we need the if to prevent a loop */
-		on_btnSBDock_clicked(NULL, s);
+		dock_undock(s);
 }
 
 GtkWidget*
