@@ -1,6 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
 SUBDIRS =   macros \
+            po \
             help \
 	    src
 
