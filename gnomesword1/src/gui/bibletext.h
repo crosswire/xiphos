@@ -68,6 +68,7 @@ extern TEXT_DATA *cur_t;
 void gui_update_text_global_ops(gchar * option, gboolean choice);
 void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 				 gchar * dict_mod_description);
+void gui_set_text_mod_and_key(gchar *mod, gchar *key);
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
 void gui_set_text_frame_label(TEXT_DATA * t);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
