@@ -30,6 +30,7 @@
 
 //extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
 
+
 //----------------------------------------------------------------------------------
 void
 additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *menuname, GtkMenuCallback mycallback)

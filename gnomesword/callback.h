@@ -999,3 +999,178 @@ on_btnLEapply_clicked                  (GtkButton       *button,
 void
 on_btnLEcancel_clicked                 (GtkButton       *button,
                                         gpointer         user_data);
+
+//==============================================================================================
+
+
+void
+on_new1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_open1_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_save1_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_save_as1_activate                   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_close1_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_exit1_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnLEup1_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdown1_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEaddmenu_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdelete_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEok_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEapply_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEcancel_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnew_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEopen_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEup1_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdown1_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEup2_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdown2_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEup3_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdown3_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEok_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEapply_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEcancel_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnew_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEopen_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLErefresh_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEsave_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);

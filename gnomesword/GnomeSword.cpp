@@ -72,6 +72,7 @@ SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
 SWMgr *mainMgr2; //-- sword mgr for comp2Mod - second interlinear module 
 SWMgr *mainMgr3; //-- sword mgr for comp3Mod - third interlinear module 
 SWMgr *searchMgr; //-- sword mgr for searchMod - module used for searching
+SWMgr *percomMgr; //-- sword mgr for percomMod - personal comments editor
 
 VerseKey vsKey; //-- ??
 SWModule *curMod; //-- module for main text window
@@ -177,7 +178,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	mainMgr2        = new SWMgr();
 	mainMgr3        = new SWMgr();
 	searchMgr				= new SWMgr();
-
+  percomMgr				= new SWMgr();
 	
 	curMod           = NULL; //-- set mods to null
 	comp1Mod      = NULL;
@@ -255,58 +256,56 @@ initSword(GtkWidget *mainform,  //-- app's main form
 			//------------------------------------------------------- set GTK display for each module
 			curMod->Disp(chapDisplay); 
 		}
-		else	
+		else if (!strcmp((*it).second->Type(), "Commentaries")) //-- set commentary modules and add to notebook
 		{
-			//------------------------------------------------------------------ set commentary modules and add to notebook
-			if (!strcmp((*it).second->Type(), "Commentaries"))
-			{ 	
-				if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles")
-				{
+			curcomMod = (*it).second;
+			notebook = lookup_widget(mainform,"notebook1");
+			empty_notebook_page = gtk_vbox_new (FALSE, 0);
+  		gtk_widget_show (empty_notebook_page);
+  		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
+			label = gtk_label_new (curcomMod->Name());
+			gtk_widget_show (label);
+			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
+			additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
+			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
+			if(!strcmp(curcomMod->Name(),"Family"))
+				curcomMod->Disp(GBFcomDisplay);
+			else
+				curcomMod->Disp(comDisplay); 				
+		}
+		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) //-- set dictionary modules and add to notebook
+		{	
+			curdictMod = (*it).second;
+			notebook = lookup_widget(mainform,"notebook4");
+			additemtognomemenu(MainFrm,curdictMod->Name(), aboutrememberlastitem3 , (GtkMenuCallback)on_kjv1_activate );
+			sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",curdictMod->Name());	
+			empty_notebook_page = gtk_vbox_new (FALSE, 0);
+  		gtk_widget_show (empty_notebook_page);
+  		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
+			label = gtk_label_new (curdictMod->Name());
+			gtk_widget_show (label);
+			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg2++), label);
+			curdictMod->Disp(dictDisplay);
+		}
+	}
+		
+  //----------------------------------------------------------------- set up percom editor module and menu
+	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++)
+	{
+		if (!strcmp((*it).second->Type(), "Commentaries")) //-- if type is Commentaries
+		{ 	
+			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
+			{
 				 	percomMod = (*it).second;
-				 	percomMod->Disp(percomDisplay);	
-				 	additemtognomemenu(MainFrm,percomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
-				 	sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",percomMod->Name());	
-				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate);
+				 	percomMod->Disp(percomDisplay);
+				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate); //-- add module to popup menu
 				 	usepersonalcomments = true; //-- this does nothing now
 				 	gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
-				} 				                                         //-- have at least one personl module
-				else
-				{
-					curcomMod = (*it).second;
-					notebook = lookup_widget(mainform,"notebook1");
-					empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  				gtk_widget_show (empty_notebook_page);
-  				gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
-					label = gtk_label_new (curcomMod->Name());
-			    gtk_widget_show (label);
-					gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
-				  additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
-				 	sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
-					if(!strcmp(curcomMod->Name(),"Family"))
-						curcomMod->Disp(GBFcomDisplay);
-					else
-						curcomMod->Disp(comDisplay);
-				}
-			}	
-			//------------------------------------------------------------------ set dictionary modules and add to notebook
-			if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries"))
-			{	
-				curdictMod = (*it).second;
-				notebook = lookup_widget(mainform,"notebook4");
-				additemtognomemenu(MainFrm,curdictMod->Name(), aboutrememberlastitem3 , (GtkMenuCallback)on_kjv1_activate );
-				sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",curdictMod->Name());	
-				empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  				gtk_widget_show (empty_notebook_page);
-  				gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
-				label = gtk_label_new (curdictMod->Name());
-			    gtk_widget_show (label);
-				gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg2++), label);
-				curdictMod->Disp(dictDisplay);
-			}
-		}
-	}	
- 
-	//------------------------------------------------------------------------------------------- interlinear 1	
+			} 	                                                 //-- have at least one personl module
+	  }
+	}
+	
+	//---------------------------------------------------------------------------------- interlinear 1	
 	sprintf(rememberlastitem,"%s","_View/Interlinear1 Window/");
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++) 
 	{	
@@ -394,8 +393,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	//---------------------------------------------------------------- set personal commets notebook label and display module
 	if(usepersonalcomments)
 	{
-		it = mainMgr->Modules.find(settings->personalcommentsmod); //-- set percomMod to last used
-		if (it != mainMgr->Modules.end())
+		it = percomMgr->Modules.find(settings->personalcommentsmod); //-- set percomMod to last used
+		if (it != percomMgr->Modules.end())
 		{
 			percomMod = (*it).second;			
 		}	
@@ -563,7 +562,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 	string keyText;     //-- string to search for
 	gchar *entryText;   //-- pointer to string to search for
 	int i, j, count ;   //-- counters
-	const gchar *listitem; //-- hold item until added to list
+	gchar *listitem; //-- hold item until added to list
 	GtkWidget *list;     //-- list widget to display items found
 
 	list = lookup_widget(MainFrm, "list1"); //-- get pointer to list widget
@@ -586,7 +585,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 			for (;!mod->Error() && count;count--,(*mod)++) 
 			{
 				++j;
-				listitem = (const char *)mod->KeyText(); //-- key to listitem
+				listitem = g_strdup((const char *)mod->KeyText()); //-- key to listitem
 				gtk_clist_append(GTK_CLIST(list) , &listitem); //-- listitem to list
 				if (saveKey == mod->Key()) //-- if we are back to starting place set index
 				index = j-1; 
@@ -720,7 +719,7 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 	string 		srchText;       //-- string to search for - from entryText
 	gchar     *entryText,//-- pointer to text in searchText entry
 			      scount[5];  //-- string from gint count for label
-	const gchar *resultText; //-- temp storage for verse found
+	gchar 		*resultText; //-- temp storage for verse found
 	gint count;              //-- number of hits
 
 	searchText = lookup_widget(searchFrm,"entry1"); //-- pointer to text entry
@@ -782,7 +781,7 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 		for (ListKey &searchResults = searchMod->Search(srchText.c_str(), searchType, //-- give search string to module to search
 									searchParams, currentScope); !searchResults.Error(); searchResults++)
 		{
-			resultText = (const char *)searchResults;  //-- put verse key string of find into a string
+			resultText = g_strdup((const char *)searchResults);  //-- put verse key string of find into a string
 			gtk_clist_append(GTK_CLIST(resultList), &resultText); //-- store find in list
 			searchScopeList << (const char *)searchResults;  //-- remember finds for next search's scope
 			++count;                                         //-- if we want to use them
@@ -962,15 +961,7 @@ editbookmarksLoad(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
 }
 
 
-//-------------------------------------------------------------------------------------------
-void
-editbookmarks(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
-{
-	GtkWidget *list;
-	struct LISTITEM listitems[ibookmarks];
-	list = lookup_widget(editdlg,"clLElist");
-	loadbookmarksnew(list);
-}
+
 //-------------------------------------------------------------------------------------------
 gchar *
 getlistitem(GtkWidget *list, gint row) //--
@@ -1117,7 +1108,7 @@ chapterSWORD(void)  //-- someone clicked the chapter spin button
 
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- set iChap to value in spin button
 	swKey.Chapter(iChap); //-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
-	changeVerse(swKey);	  //-- change all our modules to new chapter
+	changeVerse(g_strdup(swKey));	  //-- change all our modules to new chapter
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1128,7 +1119,7 @@ verseSWORD(void)  //-- someone clicked the verse spin button
 
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- set iVerse to value in spin button
 	swKey.Verse(iVerse ); //-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
-	changeVerse(swKey);	//-- change all our modules to new verse	
+	changeVerse(g_strdup(swKey));	//-- change all our modules to new verse	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1295,8 +1286,8 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 	ModMap::iterator it; //-- module iterator
 	
   if(noteModified) savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
-	it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
-	if (it != mainMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
+	it = percomMgr->Modules.find(modName); //-- find commentary module (modName from page label)
+	if (it != percomMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
 	{
 		percomMod = (*it).second;  //-- set curcomMod to modName
 		strcpy(settings->personalcommentsmod, percomMod->Name());
@@ -1373,7 +1364,7 @@ openpropertiesbox(void)    //-- someone clicked properties
 						blue,
 						a;
 	
-	Propertybox = create_propertybox1(); //-- create propertybox dialog
+	Propertybox = create_dlgSettings(); //-- create propertybox dialog
 	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); //-- set cpcurrentverse to point to color picker
   a = 000000;
   //-- setup current verse color picker
@@ -1393,7 +1384,7 @@ changepagenotebook(GtkNotebook *notebook,gint page_num) //-- someone changed the
 
 //-------------------------------------------------------------------------------------------
 void
-showmoduleinfoSWORD(char *modName) //--  show module about information in an about dialog
+showmoduleinfoSWORD(char *modName) //--  show module information in an about dialog
 {
 	GtkWidget *aboutbox,  //-- pointer to about dialog
  						*text,       //-- pointer to text widget of dialog
@@ -1413,7 +1404,7 @@ showmoduleinfoSWORD(char *modName) //--  show module about information in an abo
 	    {
 	    	cit = (*sit).second.find("About");
 					if (cit != (*sit).second.end()) 				
-						bufabout = (*cit).second.c_str(); //-- get module about information
+						bufabout = g_strdup((*cit).second.c_str()); //-- get module about information
 	    }
 	}
 	aboutbox = create_aboutmodules(); //-- create about dialog
@@ -1444,7 +1435,7 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	    {
 	    	cit = (*sit).second.find("About");
 					if (cit != (*sit).second.end()) 				
-						bufabout = (*cit).second.c_str(); //-- get module about information
+						bufabout = g_strdup((*cit).second.c_str()); //-- get module about information
 	    }
 	}
 	
