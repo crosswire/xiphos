@@ -1,6 +1,6 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev6)
+AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev10)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
