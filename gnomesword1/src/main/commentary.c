@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary.c - glue for commentary modules
+ * commentary.c - glue for commentary modules and commentary dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -27,6 +27,7 @@
 
 /* frontend */
 #include "_commentary.h"
+#include "commentary_dialog.h"
 #include "cipher_key_dialog.h"
 #include "shortcutbar_main.h"
 
@@ -36,11 +37,11 @@
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "shortcutbar.h"
-#include "gs_viewcomm_dlg.h"
 
 /* backend */
 #include "sword.h"
 #include "commentary_.h"
+#include "viewcomm.h"
 
 /******************************************************************************
  * externs
@@ -310,4 +311,108 @@ void shutdown_commentary(void)
 	g_list_free(comm_list);
 }
 
+/******************************************************************************
+ * Name
+ *   goto_verse_viewcomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void goto_verse_viewcomm(gchar *verse)	
+ *
+ * Description
+ *   change to new verse in viewcomm and display in commentary_dialog 
+ *
+ * Return value
+ *   void
+ */
+ 
+void goto_verse_viewcomm(gchar *verse)
+{
+	backend_goto_verse_viewcomm(verse);
+}
+
+/******************************************************************************
+ * Name
+ *   load_module_viewcomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void load_module_viewcomm(gchar *module_name)	
+ *
+ * Description
+ *    load module into commentary_dialog
+ *
+ * Return value
+ *   void
+ */
+ 
+void load_module_viewcomm(gchar *module_name)
+{
+	backend_load_module_viewcomm(module_name);
+}
+
+/******************************************************************************
+ * Name
+ *   nav_module_viewcomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void nav_module_viewcomm(gint direction)	
+ *
+ * Description
+ *    navagate commentary called by commentary_dialog
+ *
+ * Return value
+ *   void
+ */
+ 
+void nav_module_viewcomm(gint direction)
+{
+	backend_nav_module_viewcomm(direction);
+}
+
+/******************************************************************************
+ * Name
+ *   setup_viewcomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void setup_viewcomm(GtkWidget * text)	
+ *
+ * Description
+ *    setup viewcomm for commentary_dialog
+ *
+ * Return value
+ *   void
+ */
+ 
+void setup_viewcomm(GtkWidget * text)
+{
+	backend_setup_viewcomm(text);
+}
+
+/******************************************************************************
+ * Name
+ *   shutdown_viewcomm
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void shutdown_viewcomm(void)	
+ *
+ * Description
+ *    call backend_shutdown_viewcomm to shutdown viewcomm
+ *
+ * Return value
+ *   void
+ */
+ 
+void shutdown_viewcomm(void)
+{
+	backend_shutdown_viewcomm();
+}
 /******  end of file  ******/
