@@ -115,6 +115,7 @@ struct _settings {
 		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
 		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/
 	        currentverse[80],	/* verse to use at program startup */
+	        *cvInterlinear,	/* current verse for detached interlinear */
 		*percomverse, /* current verse for personal comments */
 	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
 	        studypadfilename[255],   /* name of file in studypad when we closed */
@@ -155,6 +156,7 @@ struct _settings {
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
 						/* 0=text, 1= comm, 2=dict */
+		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
 		iquickmarks;	/* number of items in bookmark menu */
 						

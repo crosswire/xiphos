@@ -54,6 +54,15 @@ extern "C" {
 	void setversestyleSWORD(gboolean choice);
 	/*** change Bible book ***/
 	void bookSWORD(void);
+	gchar *intchangeverseSWORD(GtkWidget *book, 
+			GtkWidget *chapter, 
+			GtkWidget *verse, 
+			GtkWidget *entry);
+	gchar *intsyncSWORD(GtkWidget *book, 
+			GtkWidget *chapter, 
+			GtkWidget *verse, 
+			GtkWidget *entry,
+			gchar *key);	
 	void verseSWORD(void);
 	void btnlookupSWORD(void);
 	void freeformlookupSWORD(GdkEventKey * event);
@@ -72,7 +81,7 @@ extern "C" {
 	gchar *gettextmodSWORD(void);
 	gchar *getcommodSWORD(void);
 	gchar *getcommodDescriptionSWORD(void);
-	GList *getBibleBooks(void);
+	GList *getBibleBooksSWORD(void);
 	void gotoBookmarkSWORD(gchar * modName, gchar * key);
 	gchar *getmodkeySWORD(gint num);
 	const char *getSwordVerionSWORD(void);

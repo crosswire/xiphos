@@ -818,7 +818,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				  NULL);
 
 	/*** get and load books of the Bible ***/
-	cbBook_items = getBibleBooks();
+	cbBook_items = getBibleBooksSWORD();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	g_list_free(cbBook_items);
 
