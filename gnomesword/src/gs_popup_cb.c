@@ -231,10 +231,12 @@ void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *modName;
+	GtkWidget *notebook;
+	gint modNum;
 
-	modName = (gchar *) user_data;
-	changecurModSWORD(modName,TRUE);
+	modNum = GPOINTER_TO_INT(user_data);
+	notebook = lookup_widget(MainFrm, "nbTextMods");	//-- get notebook
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page	
 }
 
 //----------------------------------------------------------------------------------------------

@@ -83,6 +83,8 @@ gboolean loadconfig(void)
 	sprintf(mfonts.verselist_font_size, "%s", settingsInfo["FontSize"]["VerseListWindow"].c_str()); 
 	
     	sprintf(settings->MainWindowModule, "%s",settingsInfo["Modules"]["MainWindow"].c_str());
+    	sprintf(settings->CommWindowModule, "%s",settingsInfo["Modules"]["CommWindow"].c_str());
+    	sprintf(settings->DictWindowModule, "%s",settingsInfo["Modules"]["DictWindow"].c_str());	
     	sprintf(settings->Interlinear1Module, "%s",settingsInfo["Modules"]["Interlinear1"].c_str());
 	sprintf(settings->Interlinear2Module, "%s",settingsInfo["Modules"]["Interlinear2"].c_str() );
 	sprintf(settings->Interlinear3Module, "%s",settingsInfo["Modules"]["Interlinear3"].c_str());
@@ -90,9 +92,6 @@ gboolean loadconfig(void)
 	sprintf(settings->Interlinear5Module, "%s",settingsInfo["Modules"]["Interlinear5"].c_str());
     	sprintf(settings->personalcommentsmod, "%s",settingsInfo["Modules"]["PerComments"].c_str()); 
 	/* notebook pages */
-	npages.nbTextModspage = atoi(settingsInfo["Notebooks"]["BiblePage"].c_str());
-	npages.notebook1page = atoi(settingsInfo["Notebooks"]["CommentaryPage"].c_str());
-	npages.notebook2page = atoi(settingsInfo["Notebooks"]["Dict/LexPage"].c_str()); 
 	npages.notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
 	
 	sprintf(settings->currentverse, "%s",settingsInfo["Keys"]["verse"].c_str() ); 
@@ -137,6 +136,8 @@ gboolean saveconfig(void)
 	sprintf(buf2,"%s/preferences.conf",gSwordDir); 
 	SWConfig settingsInfo(buf2); 
     	settingsInfo["Modules"]["MainWindow"] = settings->MainWindowModule;
+    	settingsInfo["Modules"]["CommWindow"] = settings->CommWindowModule;
+    	settingsInfo["Modules"]["DictWindow"] = settings->DictWindowModule;	
     	settingsInfo["Modules"]["Interlinear1"] = settings->Interlinear1Module;
 	settingsInfo["Modules"]["Interlinear2"] = settings->Interlinear2Module;
 	settingsInfo["Modules"]["Interlinear3"] = settings->Interlinear3Module; 
@@ -146,14 +147,8 @@ gboolean saveconfig(void)
 	
 	settingsInfo["LEXICONS"]["Greek"]=p_gslexicon->greek; 
 	settingsInfo["LEXICONS"]["Hebrew"]=p_gslexicon->hebrew; 
+		
 	
-	
-	sprintf(buf, "%d",nbpages->nbTextModspage);
-	settingsInfo["Notebooks"]["BiblePage"] = buf; //-- commentaries notebook
-	sprintf(buf, "%d",nbpages->notebook1page);
-	settingsInfo["Notebooks"]["CommentaryPage"] = buf; //-- commentaries notebook
-	sprintf(buf, "%d",nbpages->notebook2page);
-	settingsInfo["Notebooks"]["Dict/LexPage"] = buf; //-- dict - lex notebook; 
 	sprintf(buf, "%d",nbpages->notebook3page);
 	settingsInfo["Notebooks"]["notebook3page"] = buf; 
 	

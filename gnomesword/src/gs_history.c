@@ -154,7 +154,7 @@ void changeverseHistory(gint historynum)
         } else   addhistoryitem = FALSE;
         //g_warning("change mod = %s\n",historylist[historynum].textmod);
         changecurModSWORD(historylist[historynum].textmod,FALSE);
-        changcurcomModSWORD(historylist[historynum].commod,historylist[historynum].compagenum, FALSE);
+        changcurcomModSWORD(historylist[historynum].commod, FALSE);
         changeVerseSWORD(historylist[historynum].verseref);
 	if(firstbackclick){
                 --currenthistoryitem;
