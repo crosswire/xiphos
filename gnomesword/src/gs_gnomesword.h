@@ -135,7 +135,7 @@ void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
 void editbookmarksLoad(GtkWidget * editdlg);
-void addBookmark(GtkWidget *app);
+void addQuickmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
 void setcurrentversecolor(gint arg1, 
