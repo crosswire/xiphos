@@ -299,6 +299,7 @@ char GTKMozEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	
+	//imodule.setSkipConsecutiveLinks(true);
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
@@ -501,7 +502,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curPos = 0;
+	//int curPos = 0;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
@@ -540,7 +541,6 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	
 	main_set_global_options(ops);
 	//main_set_strongs_morphs_off(ops);
-	
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;

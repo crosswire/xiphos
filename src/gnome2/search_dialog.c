@@ -1481,16 +1481,16 @@ GtkWidget *gui_create_search_dialog(void)
 			   FALSE, 0);
 			   
 	
-	search.rb_attribute = gtk_radio_button_new_with_label_from_widget
+	search.rb_attributes = gtk_radio_button_new_with_label_from_widget
                                             ((GtkRadioButton *)rb_words,
                                              _("Attributes"));
-	gtk_widget_show(search.rb_attribute);
+	gtk_widget_show(search.rb_attributes);
 	header = g_strdup_printf("%s:\n%s\n%s",_("examples"),
 				"Word//Strongs/G1722",
 				"Footnote//body/love");
-	gtk_tooltips_set_tip(tooltips, search.rb_attribute,
+	gtk_tooltips_set_tip(tooltips, search.rb_attributes,
 			     header, NULL);
-	gtk_box_pack_start(GTK_BOX(vbox63), search.rb_attribute, FALSE,
+	gtk_box_pack_start(GTK_BOX(vbox63), search.rb_attributes, FALSE,
 			   FALSE, 0);	
 	g_free(header);			   
 			   

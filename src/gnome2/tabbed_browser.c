@@ -171,7 +171,7 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
  *   
  */
 
-void gui_save_tabs(gchar *filename)
+void gui_save_tabs(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -252,7 +252,7 @@ void gui_save_tabs(gchar *filename)
  *   
  */
 
-void gui_load_tabs(gchar *filename)
+void gui_load_tabs(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr tmp_node, childnode;
@@ -271,8 +271,9 @@ void gui_load_tabs(gchar *filename)
 	{
 		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 		if (access(tabs_dir, F_OK) == -1) {
-			printf("Tabs directory cannot be accessed");
-			return;
+			printf("creating new Tabs directory\n");
+			gui_save_tabs(NULL);
+			//return;
 		}	
 		file = g_strdup_printf("%s%s",tabs_dir,filename);
 
@@ -282,8 +283,7 @@ void gui_load_tabs(gchar *filename)
 			fprintf(stderr, "Document not parsed successfully. \n");
 			error = TRUE;
 		}
-		else
-		{
+		else {
 			tmp_node = xmlDocGetRootElement(xml_doc);
 			if (tmp_node == NULL) {
 				fprintf(stderr,"empty document\n");
@@ -340,7 +340,7 @@ void gui_load_tabs(gchar *filename)
 			}
 		}
 		xmlFreeDoc(xml_doc);
-
+	}
 		if (error == TRUE || pt == NULL) {
 			pt = g_new0(PASSAGE_TAB_INFO, 1);
 			pt->text_mod = g_strdup(settings.MainWindowModule);
@@ -353,8 +353,7 @@ void gui_load_tabs(gchar *filename)
 			passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 			notebook_main_add_page(pt);
 		}
-		else
-		{
+		else {
 			settings.MainWindowModule = g_strdup(pt->text_mod);
 			settings.CommWindowModule = g_strdup(pt->commentary_mod);
 			settings.DictWindowModule = g_strdup(pt->dictlex_mod);
@@ -363,7 +362,7 @@ void gui_load_tabs(gchar *filename)
 			settings.dictkey = g_strdup(pt->dictlex_key);
 			settings.book_offset = atol(pt->book_offset);
 		}
-	}
+//	}
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 			gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
 	set_current_tab(pt);
