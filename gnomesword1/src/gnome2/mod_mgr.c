@@ -1765,9 +1765,11 @@ void gui_open_mod_mgr(void)
 		tmp = g_list_next(tmp);
 	}
 	tmp = mod_mgr_list_local_sources();
+	if(tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
-	gnome_file_entry_set_filename((GnomeFileEntry*)fileentry1,
+		gnome_file_entry_set_filename((GnomeFileEntry*)fileentry1,
 					 mms->directory);
+	}
 	while(tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gnome_entry_append_history((GnomeEntry*)combo_entry1,
