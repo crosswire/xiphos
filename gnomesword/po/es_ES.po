@@ -1,8 +1,107 @@
 # Spanish translation for GnomeSword
-# Localized for Spain
-# Copyright (C) 2002 Jan Paul Schmidt
-# Jan Paul Schmidt <jps@methusalix.net>
-# jps4ks
+# Copyright (C) 2002 Jorge Chacón
+# Jorge Chacón <jgchacon@itelgua.com> 
+
+msgid "Add Bookmark"
+msgstr "Añadir Marca de Libro"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Goto Reference"
+msgstr "Ir a Referencia"
+
+msgid "Make Point to Here"
+msgstr "Apuntar aquí"
+
+msgid "New Group"
+msgstr "Nuevo Grupo"
+
+msgid "New SubGroup"
+msgstr "Nuevo Subgrupo"
+
+msgid "Add Item at Root"
+msgstr "Añadir Ítem en la Raíz"
+
+msgid "Sync with Bible Text"
+msgstr "Sincronizar con Texto Bíblico"
+
+msgid "Go to previous comment"
+msgstr "Ir al comentario previo"
+
+msgid "Go to next comment"
+msgstr "Ir al siguiente comentario"
+
+msgid "Print Comment"
+msgstr "Imprimir Comentario"
+
+msgid "Dock"
+msgstr "Anclar"
+
+msgid "Insert Item"
+msgstr "Insertar Ítem"
+
+msgid "Add Book"
+msgstr "Añadir Libro"
+
+msgid "View Commentary"
+msgstr "Ver Comentario"
+
+msgid "Change Interlinear 1"
+msgstr "Cambiar Interlineal 1"
+
+msgid "Change Interlinear 2"
+msgstr "Cambiar Interlineal 2"
+
+msgid "Change Interlinear 3"
+msgstr "Cambiar Interlineal 3"
+
+msgid "Change Interlinear 4"
+msgstr "Cambiar Interlineal 4"
+
+msgid "Change Interlinear 5"
+msgstr "Cambiar Interlineal 5"
+
+msgid "Change Interlinear 6"
+msgstr "Cambiar Interlineal 6"
+
+msgid "Use Current Dictionary"
+msgstr "Usar Diccionario Actual"
+
+msgid "Detach/Attach"
+msgstr "Desprender/Fijar"
+
+msgid "Interlinear Page"
+msgstr "Página Interlineal"
+
+msgid "Lookup Selection"
+msgstr "Sección de Búsquedas"
+
+msgid "Lookup Word"
+msgstr "Buscar Palabra"
+
+msgid "View Dict/Lex"
+msgstr "Ver Diccionario/Lexicón"
+
+msgid "View Module"
+msgstr "Ver módulo"
+
+msgid "View Text in new window"
+msgstr "Ver Texto en una ventana nueva"
+
+msgid "Unlock This Module"
+msgstr "Quitarle llave a este Módulo"
+
+msgid "View in new window"
+msgstr "Ver en una ventana nueva"
+
+msgid "View in New Window"
+msgstr "Ver en una Ventana Nueva"
+
+msgid "About this module"
+msgstr "Acerca de este módulo"
+
+###
 
 # src/gs_abouts.c
 msgid "About The Sword Project"
@@ -32,7 +131,7 @@ msgstr "Libros"
 
 # src/gs_preferences_dlg.c
 msgid "Default Dictionary"
-msgstr "Diccionario por Omisión"
+msgstr "Diccionario Predeterminado"
 
 # src/gs_gui.c
 msgid "Detach/Attach Shortcut Bar"
@@ -154,7 +253,7 @@ msgstr "Versión de SWORD"
 # src/gs_abouts.c
 msgid ""
 "The SWORD Project is an effort to create an ever expanding software "
-"package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework. An installed module set may be shared between any frontend using the framework."
+"package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are built using this framework. An installed module set may be shared between any frontend using the framework."
 
 msgstr ""
 "El Proyecto SWORD es un esfuerzo para crear un paquete de programas de ordenador en contínua expansión para la investigación y estudio de Dios y Su Palabra.  El marco bíblico SWORD permite la manipulación fácil de textos bíblicos, comentarios, léxica, diccionarios, etc.  Muchos programas cliente son construidos utilizando este marco.  Un grupo de módulos instalados puede ser compartido entre todos los programas cliente utilizando el marco."
@@ -181,7 +280,7 @@ msgstr "Altura del Pánel Superior"
 
 # src/gs_preferences_dlg.c
 msgid "Use Default Dictionary"
-msgstr "Usar Diccionario por Omisión"
+msgstr "Usar Diccionario Predeterminado"
 
 # src/gs_abouts.c
 msgid ""
@@ -206,7 +305,7 @@ msgstr "dónde Visualizar el Diccionario/Lexicón cuando el Enlace o Palabra es Se
 # src/gs_abouts.c
 msgid "Modules can be downloaded from the Sword Project "
 msgstr ""
-"los Módulos pueden ser obtenidos de el Proyecto Sword "
+"los Módulos pueden ser obtenidos de Proyecto Sword "
 
 # src/gs_abouts.c x 2
 msgid "The Sword Project"
@@ -310,7 +409,7 @@ msgstr "GnomeSword - Abrir el Fichero de Notas"
 
 # src/gs_file.c:502
 msgid "GomeSword - Save Note File"
-msgstr "GnomeSword - Guardar el Archivo de Notas"
+msgstr "GnomeSword - Guardar el Fichero de Notas"
 
 # src/gs_gnomesword.c
 # src/gs_gui.c
@@ -366,7 +465,7 @@ msgstr "Copiar el texto resaltado de la ventana principal"
 # src/gs_gui.c
 # src/gs_shortcutbar.c
 msgid "Search"
-msgstr "Básqueda"
+msgstr "Búsqueda"
 
 # src/gs_gui.c
 msgid "Open search dialog"
@@ -397,7 +496,7 @@ msgstr "Borrar lista de historial"
 
 # src/gs_gui.c
 msgid "Daily Devotion"
-msgstr "Devocion Diaria"
+msgstr "Devoción Diaria"
 
 # src/gs_gui.c
 msgid "Show the Daily Devotion for Today"
@@ -544,7 +643,7 @@ msgstr "Mostrar %s en la ventana principal"
 # src/gs_html_editor.c
 # src/gs_html_editor.c
 msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr ",,%s'' ha sido modificado. ¿Desea guardarlo?"
+msgstr "``%s'' ha sido modificado. ¿Desea guardarlo?"
 
 # src/gs_html_editor.c
 msgid "File"
@@ -654,7 +753,7 @@ msgstr "Expresión Regular"
 
 # src/gs_html_editor.c
 msgid "GnomeSWORD Add Reference Link"
-msgstr "Añadir Enlace de Referencia GnomeSword"
+msgstr "GnomeSWORD Añadir Enlace de Referencia"
 
 # src/gs_html_editor.c
 msgid "Reference"
@@ -743,7 +842,7 @@ msgstr "+5\r"
 # src/gs_preferences_dlg.c
 # src/gs_preferences_dlg.c
 msgid "Zero is base font size Go up or down from there"
-msgstr "Cero es el tamano base de la letra.  Incremente o decremente desde allí."
+msgstr "Cero es el tamano base de la fuente.  Incremente o decremente desde allí."
 
 # src/gs_preferences_dlg.c
 msgid "Pick a color - CurrentVerse BG"
@@ -775,7 +874,7 @@ msgstr "Color de Fondo del Verso Actual"
 
 # src/gs_preferences_dlg.c
 msgid "Default Font"
-msgstr "Tipo de Letra por Omisión"
+msgstr "Fuente Predeterminada"
 
 # src/gs_preferences_dlg.c
 msgid "Verse Numbers"
@@ -783,7 +882,7 @@ msgstr "Números de Versos"
 
 # src/gs_preferences_dlg.c
 msgid "Verse Number Font Size"
-msgstr "Tamano del Tipo para los Números de los Versos"
+msgstr "Tamano de la Fuente para los Números de los Versos"
 
 # src/gs_preferences_dlg.c
 msgid "Link Color"
@@ -791,23 +890,23 @@ msgstr "Color de los Enlaces"
 
 # src/gs_preferences_dlg.c
 msgid "Greek Font"
-msgstr "Tipo de Letra Griego"
+msgstr "Fuente Griega"
 
 # src/gs_preferences_dlg.c
 msgid "Hebrew Font"
-msgstr "Tipo de Letra Hebreo"
+msgstr "Fuente Hebrea"
 
 # src/gs_preferences_dlg.c
 msgid "Unicode Font"
-msgstr "Tipo de Letra Unicode"
+msgstr "Fuente Unicode"
 
 # src/gs_preferences_dlg.c
 msgid "GnomeSword Defaults"
-msgstr "Propiedades por Omisión de GnomeSword"
+msgstr "Propiedades Predeterminada de GnomeSword"
 
 # src/gs_preferences_dlg.c
 msgid "Use GnomeSword defaults for all settings on this page"
-msgstr "Utilizar las propiedades por omisión de GnomeSword para todas las propiedades de esta página"
+msgstr "Utilizar las propiedades predeterminadas de GnomeSword para todas las propiedades de esta página"
 
 # src/gs_preferences_dlg.c
 msgid "Bible Text Window"
@@ -815,11 +914,11 @@ msgstr "Ventana de Texto Bíblico"
 
 # src/gs_preferences_dlg.c
 msgid "Use Defaults When Opening GnomeSword"
-msgstr "Utilizar Propiedades por Omisión al Iniciar GnomeSword"
+msgstr "Utilizar Propiedades Predeterminadas al Iniciar GnomeSword"
 
 # src/gs_preferences_dlg.c
 msgid "Yes, use defaults that I select"
-msgstr "Sí, utilizar las propiedades por omisión que yo elija"
+msgstr "Sí, utilizar las propiedades predeterminadas que yo elija"
 
 # src/gs_preferences_dlg.c
 msgid ""
@@ -857,7 +956,7 @@ msgstr "Mostrar las lenguetas de los Comentarios"
 
 # src/gs_preferences_dlg.c
 msgid "Show Dict/Lex notebook tabs"
-msgstr "Mostrar las lenguetas de los Diccionarios/léxica"
+msgstr "Mostrar las lenguetas de los Diccionarios/Léxica"
 
 # src/gs_preferences_dlg.c
 # src/gs_setup.c
@@ -946,7 +1045,7 @@ msgstr "Comentario"
 # src/gs_setup.c
 # src/gs_shortcutbar.c x 2
 msgid "Dict/Lex"
-msgstr "Diccionario/Lexicón"
+msgstr "Diccionarios/Lexica"
 
 # src/gs_preferences_dlg.c
 # src/gs_setup.c
@@ -997,7 +1096,7 @@ msgstr "Número de Módulos de Comentarios:"
 
 # src/gs_setup.c
 msgid "Number of Lexicon / Dictionary Modules"
-msgstr "Número de Módulos de Diccionarios / léxica:"
+msgstr "Número de Módulos de Diccionarios / Léxica:"
 
 # src/gs_setup.c
 msgid "Do you want GnomeSword to open with"
@@ -1005,7 +1104,7 @@ msgstr "Desea que GnomeSword inicie con"
 
 # src/gs_setup.c
 msgid "Settings you choose as default"
-msgstr "Opciones que usted escoge por omisión"
+msgstr "Opciones predeterminadas que usted escoge"
 
 # src/gs_setup.c
 msgid "Settings used the last time GnomeSword ran"
@@ -1036,8 +1135,8 @@ msgid ""
 "These setting will be the default settings if you chose to use default "
 "settings. "
 msgstr ""
-"Estas opciones serán las opciones por omisión si elige usar opciones "
-"por omisión"
+"Estas opciones serán las opciones predeterminadas si elige usar opciones "
+"predeteminadas"
 
 # src/gs_setup.c
 msgid ""
@@ -1109,7 +1208,7 @@ msgstr "Guardar Lista"
 
 # src/gs_shortcutbar.c
 msgid "Save the current verse list as a bookmark file"
-msgstr "Guardar la lista de versos actual como un fichero de marcas de libro"
+msgstr "Guardar la lista de versos actual como un archivo de marcas de libro"
 
 # src/gs_shortcutbar.c
 msgid "Main Form"
@@ -1177,7 +1276,7 @@ msgstr "Utilizar Límites"
 
 # src/gs_shortcutbar.c
 msgid "Last Search"
-msgstr "Ultima Búsqueda"
+msgstr "Última Búsqueda"
 
 # src/gs_shortcutbar.c
 msgid "Bounds"
