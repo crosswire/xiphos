@@ -38,6 +38,7 @@
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/find_dialog.h"
+#include "gui/font_dialog.h"
 
 #include "main/commentary.h"
 #include "main/settings.h"
@@ -482,13 +483,37 @@ void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
 				c->mod_name, c->cipher_key);		
 	}
 }
+	
+/******************************************************************************
+ * Name
+ *  set_module_font_activate
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void set_module_font_activate(GtkMenuItem * menuitem, 
+						COMM_DATA *c)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void set_module_font_activate(GtkMenuItem * menuitem, 
+						COMM_DATA *c)
+{
+	gui_set_module_font(c->mod_name);
+}
+
 
 /******************************************************************************
  * Name
  *   gui_create_pm
  *
  * Synopsis
- *   #include "_commentary.h"
+ *   #include "commentary.h"
  *
  *   GtkWidget *gui_create_pm(COMM_DATA * c)
  *
@@ -518,6 +543,10 @@ static GtkWidget *create_pm(COMM_DATA * c)
 	GtkWidget *find;
 	GList *tmp;
 	gint i;
+	GtkWidget *set_font; 
+	GtkTooltips *tooltips; 
+	
+	tooltips = gtk_tooltips_new();
 
 	tmp = NULL;
 
@@ -653,6 +682,26 @@ static GtkWidget *create_pm(COMM_DATA * c)
 	view_commentary_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU
 					      (view_commentary_menu));
+					      
+	
+  	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pm), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pm), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pm), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pm), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);
+			     
 	/*
 	 * if module has cipher key include this item
 	 */
@@ -739,6 +788,11 @@ static GtkWidget *create_pm(COMM_DATA * c)
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			GTK_SIGNAL_FUNC(on_view_new_activate), 
 			c);
+			
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			c);
+	gtk_object_set_data(GTK_OBJECT(pm), "tooltips", tooltips);
 	return pm;
 }
 

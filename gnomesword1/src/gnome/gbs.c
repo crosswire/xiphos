@@ -41,6 +41,7 @@
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
+#include "gui/font_dialog.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -747,6 +748,30 @@ static void view_new_dialog(GtkMenuItem *menuitem, GBS_DATA * g)
 
 /******************************************************************************
  * Name
+ *  set_module_font_activate
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void set_module_font_activate(GtkMenuItem * menuitem, 
+						GBS_DATA * g)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void set_module_font_activate(GtkMenuItem * menuitem, 
+						GBS_DATA * g)
+{
+	gui_set_module_font(g->mod_name);
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_create_pm_gbs
  *
  * Synopsis
@@ -785,6 +810,9 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	GtkWidget *find;
 	GList *tmp;
 	gint i;
+	GtkWidget *set_font; 
+	GtkTooltips *tooltips;  
+	tooltips = gtk_tooltips_new();
 
 	tmp = NULL;
 
@@ -937,6 +965,24 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	view_book_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_book_menu));
 	
+	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pmGBS), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pmGBS), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);
+	
 	/*
 	   if module has cipher key include this item
 	 */
@@ -1036,6 +1082,13 @@ static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC(view_new_dialog),
 			   gbs);
+			   
+			
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			gbs);
+	gtk_object_set_data(GTK_OBJECT(pmGBS), "tooltips", tooltips);
+	
 	return pmGBS;
 }
 

@@ -82,6 +82,7 @@ int backend_load_properties(char * path)
 		settingsInfo["LEXICONS"]["Default Dictionary"].c_str());
 
 	/* font sizes html widgets */
+	/*
 	sprintf(settings.bible_font_size, "%s",
 		settingsInfo["FontSize"]["BibleWindow"].c_str());
 	sprintf(settings.commentary_font_size, "%s",
@@ -92,10 +93,12 @@ int backend_load_properties(char * path)
 		settingsInfo["FontSize"]["InterlinearWindow"].c_str());
 	sprintf(settings.verselist_font_size, "%s",
 		settingsInfo["FontSize"]["VerseListWindow"].c_str());
+		*/
 	sprintf(settings.verse_num_font_size, "%s",
 		settingsInfo["FontSize"]["VerseNum"].c_str());
 
 	/*** fonts ***/
+	/*
 	sprintf(settings.default_font, "%s",
 		settingsInfo["Fonts"]["Default"].c_str());
 	sprintf(settings.greek_font, "%s",
@@ -106,7 +109,7 @@ int backend_load_properties(char * path)
 		settingsInfo["Fonts"]["Unicode"].c_str());
 	sprintf(settings.interlinear_font, "%s",
 		settingsInfo["Fonts"]["Interlinear"].c_str());
-
+	*/
 	/* modules to use on startup */
 	sprintf(settings.MainWindowModule, "%s",
 		settingsInfo["Modules"]["MainWindow"].c_str());
@@ -314,7 +317,7 @@ int backend_save_properties(int shutdown)
 		settingsInfo["StudyPad"]["Lastfile"] =
 		    settings.studypadfilename;
 		settingsInfo["StudyPad"]["Directory"] = settings.studypaddir;
-
+/*
 		settingsInfo["FontSize"]["BibleWindow"] =
 		    settings.bible_font_size;
 		settingsInfo["FontSize"]["CommentaryWindow"] =
@@ -325,15 +328,17 @@ int backend_save_properties(int shutdown)
 		    settings.interlinear_font_size;
 		settingsInfo["FontSize"]["VerseListWindow"] =
 		    settings.verselist_font_size;
+*/
 		settingsInfo["FontSize"]["VerseNum"] =
 		    settings.verse_num_font_size;
+/*
 		settingsInfo["Fonts"]["Default"] = settings.default_font;
 		settingsInfo["Fonts"]["Greek"] = settings.greek_font;
 		settingsInfo["Fonts"]["Hebrew"] = settings.hebrew_font;
 		settingsInfo["Fonts"]["Unicode"] = settings.unicode_font;
 		settingsInfo["Fonts"]["Interlinear"] =
 		    settings.interlinear_font;
-
+*/
 		/* layout */
 		sprintf(buf, "%d", settings.shortcutbar_width);
 		settingsInfo["LAYOUT"]["Shortcutbar"] = buf;
@@ -479,14 +484,15 @@ int backend_create_properties_from_setup(void)
 
 	settingsInfo["StudyPad"]["Lastfile"] = "";
 	settingsInfo["StudyPad"]["Directory"] = "~";
-
+/*
 	settingsInfo["FontSize"]["BibleWindow"] = "+0";
 	settingsInfo["FontSize"]["CommentaryWindow"] = "+0";
 	settingsInfo["FontSize"]["DictionaryWindow"] = "+0";
 	settingsInfo["FontSize"]["InterlinearWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseListWindow"] = "+0";
+	*/
 	settingsInfo["FontSize"]["VerseNum"] = "+0";
-
+/*
 	settingsInfo["Fonts"]["Default"] =
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
 	settingsInfo["Fonts"]["Greek"] =
@@ -497,6 +503,7 @@ int backend_create_properties_from_setup(void)
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
 	settingsInfo["Fonts"]["Interlinear"] =
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
+	    */
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";
 	settingsInfo["LAYOUT"]["BiblePane"] = "262";
@@ -575,14 +582,15 @@ int backend_create_properties(void)
 
 	settingsInfo["StudyPad"]["Lastfile"] = "";
 	settingsInfo["StudyPad"]["Directory"] = "~";
-
+/*
 	settingsInfo["FontSize"]["BibleWindow"] = "+0";
 	settingsInfo["FontSize"]["CommentaryWindow"] = "+0";
 	settingsInfo["FontSize"]["DictionaryWindow"] = "+0";
 	settingsInfo["FontSize"]["InterlinearWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseListWindow"] = "+0";
+	*/
 	settingsInfo["FontSize"]["VerseNum"] = "+0";
-
+/*
 	settingsInfo["Fonts"]["Default"] =
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
 	settingsInfo["Fonts"]["Greek"] =
@@ -593,7 +601,7 @@ int backend_create_properties(void)
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
 	settingsInfo["Fonts"]["Interlinear"] =
 	    "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
-
+*/
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";
 	settingsInfo["LAYOUT"]["BiblePane"] = "262";
