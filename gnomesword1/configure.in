@@ -1,5 +1,5 @@
 
-AC_INIT(gnomesword2, 2.0.0, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword2, 2.1.dev1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -32,6 +32,8 @@ AC_SUBST(GNOME_CFLAGS)
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
 AC_HEADER_TIME
+
+AC_PROG_INTLTOOL([0.23])
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -231,7 +233,7 @@ src/Makefile
 src/backend/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-gnomesword2.desktop
+gnomesword2.desktop.in
 gnomesword2.spec
 ])
 

@@ -1,19 +1,37 @@
 ## Process this file with automake to produce Makefile.in
 
+@INTLTOOL_DESKTOP_RULE@
+
 SUBDIRS = m4 doc po src
 
 gnomesworddoc_DATA = \
- 	   README\
-	    COPYING\
-	    COPYING-DOCS\
-	    AUTHORS\
-	    ChangeLog\
-	    INSTALL\
-	    NEWS\
-	    TODO
+	README \
+	COPYING \
+	COPYING-DOCS \
+	AUTHORS \
+	ChangeLog \
+	INSTALL \
+	NEWS \
+	TODO
 
+ACLOCAL_AMFLAGS = -I m4
+
+EXTRA_DIST = \
+	${PACKAGE}.desktop.in.in \
+	${PACKAGE}.spec.in \
+	${PACKAGE}.spec \
+	xmldocs.make \
+	omf.make \
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in \
+	COPYING-DOCS
 
 gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
+
+gnomemenudir = $(datadir)/applications
+gnomemenu_premerge_file = gnomesword2.desktop.in
+gnomemenu_DATA = $(gnomemenu_premerge_file:.desktop.in=.desktop)
 
 install-data-local:
 	@$(NORMAL_INSTALL)
@@ -45,7 +63,5 @@ dist-hook:
           done \
         fi
 
-
-ACLOCAL_AMFLAGS = -I m4
-
-EXTRA_DIST = ${PACKAGE}.desktop.in ${PACKAGE}.spec.in ${PACKAGE}.spec xmldocs.make omf.make COPYING-DOCS
+rpm: dist
+	rpmbuild -ta $(distdir).tar.gz
