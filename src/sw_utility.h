@@ -22,14 +22,16 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#include <swmodule.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#include <swmodule.h>
+#include <swmgr.h>	
 
 void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section);
+void changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName);
 	
 #ifdef __cplusplus
 }

@@ -382,8 +382,8 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["Modules"]["Interlinear5"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry11")));	/* get mod name */
 	settingsInfo["Modules"]["PerComments"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry14")));	/* get mod name */
 
-	settingsInfo["LEXICONS"]["Greek"] = "Strongs Greek";
-	settingsInfo["LEXICONS"]["Hebrew"] = "Strongs Hebrew";
+	settingsInfo["LEXICONS"]["Greek"] = "StrongsGreek";
+	settingsInfo["LEXICONS"]["Hebrew"] = "StrongsHebrew";
 
 	settingsInfo["Notebooks"]["notebook3page"] = "0";
 	settingsInfo["Keys"]["verse"] = "Romans 8:28";
@@ -481,8 +481,8 @@ gboolean createconfig(void)
 	settingsInfo["Modules"]["Interlinear5"] = "BBE";
 	settingsInfo["Modules"]["PerComments"] = "Personal";
 
-	settingsInfo["LEXICONS"]["Greek"] = "Strongs Greek";
-	settingsInfo["LEXICONS"]["Hebrew"] = "Strongs Hebrew";
+	settingsInfo["LEXICONS"]["Greek"] = "StrongsGreek";
+	settingsInfo["LEXICONS"]["Hebrew"] = "StrongsHebrew";
 
 	settingsInfo["Notebooks"]["notebook3page"] = "0";
 	settingsInfo["Keys"]["verse"] = "Romans 8:28";

@@ -32,7 +32,7 @@ extern "C" {
 
 #include "gs_sword.h"
 	
-
+/*
 typedef struct _mods GS_MODS;
 struct _mods {
 	gchar	*name,
@@ -41,11 +41,14 @@ struct _mods {
 			*description;
 	gint		modnum;
 };
+*/
  
 typedef struct _settings SETTINGS;
 struct _settings {
 	GtkWidget
 		*app,
+		*appbar, /* gnome status/progress bar */
+		*shortcut_bar,
 		*ctree_widget,
 		*versestyle_item;	/* widget to access toggle menu - for versestyle */
 	gchar	
@@ -85,7 +88,8 @@ struct _settings {
 		biblepane_width,
 		gs_width,
 		gs_hight,	
-		notebook3page;	//-- notebook 3 page number
+		notebook3page,	//-- notebook 3 page number
+		searchbargroup;       //-- number of search group in shortcut bar
 	gboolean   
 		usedefault,
 		strongs,	//-- toogle button and check menu states
@@ -106,26 +110,6 @@ struct _settings {
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs; /* show module tabs in text dict/lex if true  */; 
-};
-
-typedef struct _gs_app GS_APP;
-struct _gs_app {
-	GtkWidget  *app,
-			*Bible,
-			*Commentary,
-			*Dicttionary,
-			*Interlinear,
-			*Percom,
-			*ctree_widget;		
-	
-};
-typedef struct _interlinear INTERLINEAR;
-struct _interlinear {
-	gchar 	ver1[80],
-		ver2[80],
-		ver3[80],
-		ver4[80],
-		ver5[80];
 };
 
 

@@ -57,7 +57,7 @@
 #endif				/* USE_SPELL */
 
 GtkWidget *shortcut_bar, *appbar1;
-extern GS_APP gs;
+//extern GS_APP gs;
 extern SETTINGS *settings;
 
 #define NUM_SHORTCUT_TYPES 5
@@ -425,7 +425,7 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_widget_set_usize(settings->app, 680, 480);
 	GTK_WIDGET_SET_FLAGS(settings->app, GTK_CAN_FOCUS);
 	
-	gs.app = settings->app;
+//	gs.app = settings->app;
 	
 	dock1 = GNOME_APP(settings->app)->dock;
 	gtk_widget_ref(dock1);
@@ -878,6 +878,8 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 				 shortcut_model);
 	gtk_widget_set_usize(shortcut_bar, 150, 250);
 	gtk_widget_show(shortcut_bar);
+	
+	settings->shortcut_bar =  shortcut_bar;//lookup_widget(settings->app,"shortcut_bar");
 
 	e_paned_pack1(E_PANED(epaned), shortcut_bar, FALSE, TRUE);
 
@@ -1814,20 +1816,23 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_widget_show(label58);
 	gtk_clist_set_column_widget(GTK_CLIST(list1), 0, label58);
 
-	appbar1 = gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER);
+	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gtk_widget_ref(appbar1);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "appbar1",
 				 appbar1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(appbar1);
 	gnome_app_set_statusbar(GNOME_APP(settings->app), appbar1);
-
+	
+	settings->appbar = lookup_widget(settings->app,"appbar1");
+	
 	gtk_signal_connect(GTK_OBJECT(settings->app), "destroy",
 			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
 	gnome_app_install_menu_hints(GNOME_APP(settings->app),
 				     menubar1_uiinfo);
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), 
+			   settings);
 	gtk_signal_connect(GTK_OBJECT(btnStrongs), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnStrongs_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",
@@ -1844,9 +1849,10 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_cbeFreeformLookup_key_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(cbeFreeformLookup), "drag_drop",
+/*	gtk_signal_connect(GTK_OBJECT(cbeFreeformLookup), "drag_drop",
 			   GTK_SIGNAL_FUNC(on_cbeFreeformLookup_drag_drop),
 			   NULL);
+*/			   
 	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLookup_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnBack), "clicked",
@@ -1858,9 +1864,10 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_button_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(moduleText), "drag_begin",
+/*	gtk_signal_connect(GTK_OBJECT(moduleText), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_moduleText_drag_begin),
 			   NULL);
+*/			   
 	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_enter_notify_event), NULL);
@@ -1871,9 +1878,10 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(textCommentaries), "drag_begin",
+/*	gtk_signal_connect(GTK_OBJECT(textCommentaries), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_textCommentaries_drag_begin),
 			   NULL);
+*/			   
 	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
@@ -1884,7 +1892,7 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(textComments), "drag_begin",
+/*	gtk_signal_connect(GTK_OBJECT(textComments), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_textComments_drag_begin),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(textComments), "drag_data_get",
@@ -1896,6 +1904,7 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_signal_connect(GTK_OBJECT(textComments), "drag_drop",
 			   GTK_SIGNAL_FUNC(on_textComments_drag_drop),
 			   NULL);
+*/
 	gtk_signal_connect(GTK_OBJECT(textComments), "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_key_press_event), NULL);
@@ -1933,9 +1942,10 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(textCommentaries), "drag_begin",
+/*	gtk_signal_connect(GTK_OBJECT(textCommentaries), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_textCommentaries_drag_begin),
 			   NULL);
+*/			   
 	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
