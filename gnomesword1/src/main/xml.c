@@ -342,7 +342,11 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 void xml_write_bookmark_doc(const xmlChar * xml_filename)
 {	
 	g_print("\nsaving = %s\n", xml_filename);
+#ifdef USE_GNOME2
 	xmlSaveFormatFile(xml_filename, bookmark_doc,1);
+#else
+	xmlSaveFile(xml_filename, bookmark_doc);
+#endif
 }
 
 /******************************************************************************
@@ -521,12 +525,10 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "inviewer", "0");
 	xmlNewTextChild(section_node, NULL, "usedefaultdict", "0");
 	xmlNewTextChild(section_node, NULL, "defaultdictionary", NULL);
-	xmlNewTextChild(section_node, NULL, "greek", "StrongsGreek");
-	xmlNewTextChild(section_node, NULL, "greekviewer",
-			"StrongsGreek");
-	xmlNewTextChild(section_node, NULL, "hebrew", "StrongsHebrew");
-	xmlNewTextChild(section_node, NULL, "hebrewviewer",
-			"StrongsHebrew");
+	xmlNewTextChild(section_node, NULL, "greek", NULL);
+	xmlNewTextChild(section_node, NULL, "greekviewer", NULL);
+	xmlNewTextChild(section_node, NULL, "hebrew", NULL);
+	xmlNewTextChild(section_node, NULL, "hebrewviewer", NULL);
 
 
 	section_node = xmlNewChild(root_node, NULL, "misc", NULL);
@@ -541,17 +543,17 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "modules", NULL);
-	xmlNewTextChild(section_node, NULL, "book", "NeeNormal");
-	xmlNewTextChild(section_node, NULL, "comm", "MHC");
-	xmlNewTextChild(section_node, NULL, "devotional", "SME");
-	xmlNewTextChild(section_node, NULL, "dict", "BDB");
-	xmlNewTextChild(section_node, NULL, "int1", "KJV");
-	xmlNewTextChild(section_node, NULL, "int2", "KJV");
-	xmlNewTextChild(section_node, NULL, "int3", "KJV");
-	xmlNewTextChild(section_node, NULL, "int4", "KJV");
-	xmlNewTextChild(section_node, NULL, "int5", "KJV");
-	xmlNewTextChild(section_node, NULL, "bible", "KJV");
-	xmlNewTextChild(section_node, NULL, "percomm", "Personal");
+	xmlNewTextChild(section_node, NULL, "book", NULL);
+	xmlNewTextChild(section_node, NULL, "comm", NULL);
+	xmlNewTextChild(section_node, NULL, "devotional", NULL);
+	xmlNewTextChild(section_node, NULL, "dict", NULL);
+	xmlNewTextChild(section_node, NULL, "int1", NULL);
+	xmlNewTextChild(section_node, NULL, "int2", NULL);
+	xmlNewTextChild(section_node, NULL, "int3", NULL);
+	xmlNewTextChild(section_node, NULL, "int4", NULL);
+	xmlNewTextChild(section_node, NULL, "int5", NULL);
+	xmlNewTextChild(section_node, NULL, "bible", NULL);
+	xmlNewTextChild(section_node, NULL, "percomm", NULL);
 
 
 	section_node =
