@@ -17,14 +17,14 @@
 
 class NoteEditor
 {
-	public:
-		NoteEditor();
-		~NoteEditor();
-		bool setBOLD(GtkWidget *text);
-		bool setITALIC(GtkWidget *text);
-		bool setREFERENCE(GtkWidget *text);
-		bool setUNDERLINE(GtkWidget *text);
-		bool setGREEK(GtkWidget *text);
-		bool setNEWLINE(GtkWidget *text); 		
+    public:
+        NoteEditor();
+        ~NoteEditor();
+        bool setBOLD(GtkWidget *text);
+        bool setITALIC(GtkWidget *text);
+        bool setREFERENCE(GtkWidget *text);
+        bool setUNDERLINE(GtkWidget *text);
+        bool setGREEK(GtkWidget *text);
+        bool setNEWLINE(GtkWidget *text); 		
 };
 

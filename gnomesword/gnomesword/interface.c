@@ -4552,93 +4552,8 @@ GtkWidget *create_pmEditnote(void)
 	return pmEditnote;
 }
 
+
 /*
-GnomeUIInfo pmComments_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_COPY_ITEM (on_copy3_activate, "textCommentaries"),
-  {
-    GNOME_APP_UI_ITEM, "Goto Reference",
-    "Go to the selected reference",
-    on_goto_reference2_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
-    0, 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, "Lookup Selection",
-    "Lookup selection in current Dict/Lex",
-    on_lookup_selection2_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
-    0, 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, "About this module",
-    "Show information about this moduel",
-    on_about_this_module6_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-    0, 0, NULL
-  },
-  {
-    GNOME_APP_UI_TOGGLEITEM, "Auto Scroll",
-    NULL,
-    on_auto_scroll1_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL,
-    0, 0, NULL
-  },
-  {
-    GNOME_APP_UI_TOGGLEITEM, "Show Tabs",
-    "Show notebook tabs",
-    on_show_tabs1_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL,
-    0, 0, NULL
-  },
-  GNOMEUIINFO_END
-};
-
-GtkWidget*
-create_pmComments (void)
-{
-  GtkWidget *pmComments;
-
-  pmComments = gtk_menu_new ();
-  gtk_object_set_data (GTK_OBJECT (pmComments), "pmComments", pmComments);
-  gnome_app_fill_menu (GTK_MENU_SHELL (pmComments), pmComments_uiinfo,
-                       NULL, FALSE, 0);
-
-  gtk_widget_ref (pmComments_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "copy12",
-                            pmComments_uiinfo[0].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pmComments_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "goto_reference",
-                            pmComments_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pmComments_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "lookup_selection2",
-                            pmComments_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pmComments_uiinfo[3].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "about_this_module6",
-                            pmComments_uiinfo[3].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pmComments_uiinfo[4].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "auto_scroll1",
-                            pmComments_uiinfo[4].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (pmComments_uiinfo[4].widget), TRUE);
-
-  gtk_widget_ref (pmComments_uiinfo[5].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmComments), "show_tabs1",
-                            pmComments_uiinfo[5].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  return pmComments;
-}*/
-
-
 GnomeUIInfo view_module1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -4748,6 +4663,7 @@ GtkWidget *create_pmComments(void)
 	return pmComments;
 }
 
+
 GnomeUIInfo pmDict_uiinfo[] = {
 	GNOMEUIINFO_MENU_COPY_ITEM(on_copy3_activate, "textDict"),
 	{
@@ -4817,3 +4733,4 @@ GtkWidget *create_pmDict(void)
 
 	return pmDict;
 }
+*/
