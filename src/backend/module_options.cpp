@@ -39,13 +39,7 @@
 #include "gs_gnomesword.h"
 #include "module_options.h"
 #include "support.h"
-
-
-/***********************************************************************************************
- externals
-***********************************************************************************************/
-extern char *gSwordDir;
-extern SETTINGS *settings;
+#include "settings.h"
 
 /******************************************************************************
  * load module option - using sword SWConfig
@@ -55,7 +49,7 @@ gboolean backend_load_module_options(char * modName, char * option)
 	char buf[255], *yesno;
 	bool retval = false;
 
-	sprintf(buf, "%s/modops.conf", gSwordDir);
+	sprintf(buf, "%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 	module_options.Load();
 	yesno = (char *) module_options[modName][option].c_str();
@@ -73,7 +67,7 @@ gboolean backend_save_module_options(char * modName, char * option, char * value
 {
 	char buf[80], buf2[255];
 
-	sprintf(buf, "%s/modops.conf", gSwordDir);
+	sprintf(buf, "%s/modops.conf", settings.gSwordDir);
 	SWConfig module_options(buf);
 
 	module_options[modName][option] = value;

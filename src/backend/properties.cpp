@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * properties.cpp - save gnomesword properties and settings
@@ -21,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -39,13 +38,7 @@
 #include "gs_gnomesword.h"
 #include "properties.h"
 #include "support.h"
-
-
-/***********************************************************************************************
- externals
-***********************************************************************************************/
-extern gchar *gSwordDir;
-extern SETTINGS *settings;
+#include "settings.h"
 
 static
 gchar *isON(bool value)
@@ -58,17 +51,18 @@ gchar *isON(bool value)
 
 /******************************************************************************
  * load gnomesword properties - using sword SWConfig
- ******************************************************************************/
+ *****************************************************************************/
+
 gboolean backend_load_properties(SETTINGS * s)
 {
 	gchar buf[255];
 
-	sprintf(buf, "%s/preferences.conf", gSwordDir);
+	sprintf(buf, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf);
 	settingsInfo.Load();
 
 	/* app size on open ,epane sizes and shortcut bar width */
-	sprintf(settings->gs_version, "%s",
+	sprintf(settings.gs_version, "%s",
 		settingsInfo["GnomeSword"]["Version"].c_str());
 	s->shortcutbar_width =
 	    atoi(settingsInfo["LAYOUT"]["Shortcutbar"].c_str());
@@ -251,12 +245,13 @@ gboolean backend_load_properties(SETTINGS * s)
 
 /******************************************************************************
  * save gnomesword properties - using sword SWConfig
- ******************************************************************************/
+ *****************************************************************************/
+
 gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 {
 	gchar buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", gSwordDir);
+	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
 
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
@@ -437,12 +432,13 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 /******************************************************************************
  * create gnomesword properties - using sword SWConfig
  * and information from the setup dialog
- ******************************************************************************/
+ *****************************************************************************/
+
 gboolean backend_create_properties_from_setup(GtkWidget * setup)
 {
 	gchar buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", gSwordDir);
+	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry1")));	/* get mod name */
@@ -540,12 +536,13 @@ gboolean backend_create_properties_from_setup(GtkWidget * setup)
 
 /******************************************************************************
  * create gnomesword properties - using sword SWConfig
- ******************************************************************************/
+ *****************************************************************************/
+
 gboolean backend_create_properties(void)
 {
 	gchar buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", gSwordDir);
+	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = "KJV";

@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * search.cpp - search Sword modules
@@ -21,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -38,15 +37,11 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "search_.h"
+#include "settings.h"
 
-/***********************************************************************************************
- externals
-***********************************************************************************************/
-extern SETTINGS *settings;
-
-/***********************************************************************************************
- static
-***********************************************************************************************/
+/******************************************************************************
+ * static
+ *****************************************************************************/
 static SWDisplay 
 	*display;	/* to display modules in searchresults */
 	
@@ -201,7 +196,7 @@ void backend_setup_search_results_display(GtkWidget *html_widget)
 	
 	mgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
 	mod     = NULL;
-	display = new  GtkHTMLEntryDisp(html_widget,settings);
+	display = new  GtkHTMLEntryDisp(html_widget,&settings);
 	
 	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
 		mod = (*it).second;

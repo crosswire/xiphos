@@ -1,26 +1,26 @@
 /*
-    GnomeSword Bible Study Tool
-    *  gbs.c - sword lib support for general book modules
-    *
-    *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
-    *
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+ * GnomeSword Bible Study Tool
+ * gbs.c - sword lib support for general book modules
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -41,6 +41,7 @@
 #include "display.h"
 #include "gbs.h"
 #include "gbs.h"
+#include "settings.h"
 
 typedef struct _backend_gbs BE_GBS;
 struct _backend_gbs {
@@ -49,9 +50,6 @@ struct _backend_gbs {
         SWDisplay *bookDisplay;
         int num;
 };
-
-/***  externs  ***/
-extern SETTINGS *settings;
 
 /***  globals  ***/
 SWMgr *swmgrBook;
@@ -196,9 +194,9 @@ gboolean backend_displayRowGBS(gint booknum, gchar * offset)
         if (treeKey) {
                 TreeKeyIdx treenode = *treeKey;
                 treenode.setOffset(strtoul(offset, NULL, 0));
-                sprintf(settings->BookWindowModule, "%s",
+                sprintf(settings.BookWindowModule, "%s",
                         (gchar *) g->mod->Name());
-		sprintf(settings->book_key,"%s",treenode.getText());
+		sprintf(settings.book_key,"%s",treenode.getText());
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
                         g->mod->SetKey(treenode);
