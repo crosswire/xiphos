@@ -165,7 +165,7 @@ void gui_undock_parallel_page(void)
 	ApplyChangeBook = FALSE;
 	parallel_UnDock_Dialog = gui_create_parallel_dialog();
 	gtk_widget_reparent(widgets.frame_parallel, vboxInt);
-	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.workbook_lower),
+	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_text),
 				 settings.parallel_page);
 	settings.cvparallel =
 	    update_controls_parallel(settings.currentverse);
@@ -230,11 +230,11 @@ static void on_dlgparallel_destroy(GtkObject * object,
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_notebook_insert_page_menu(GTK_NOTEBOOK
-				      (widgets.workbook_lower), vbox,
+				      (widgets.notebook_text), vbox,
 				      tab_label, menu_label, 
 					settings.parallel_page);
 	gtk_widget_reparent(widgets.frame_parallel, vbox);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower), 
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_text), 
 					settings.parallel_page);
 	settings.dockedInt = TRUE;
 	gui_update_parallel_page();
