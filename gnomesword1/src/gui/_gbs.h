@@ -22,16 +22,16 @@
 #ifndef ___GBS_H_
 #define ___GBS_H_
 	
-#include "settings.h"
-#include "gbs.h"
+#include "main/settings.h"
+#include "main/gbs.h"
 
 void gui_set_gbs_frame_label(GBS_DATA *g);
 void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 				GtkNotebookPage * page,
 				gint page_num, GList * data_gbs);
-//void on_showtabs_activate(GtkMenuItem * menuitem, GBS_DATA * g);
 GtkWidget *gui_create_pm_gbs(GBS_DATA * gbs);
 void gui_create_gbs_pane(gchar * modName, SETTINGS * s, 
 				gint count, GBS_DATA * p_gbs);
 
-#endif	/* ___GBS_H_ */
+#endif
+

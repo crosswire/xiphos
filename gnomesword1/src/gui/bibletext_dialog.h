@@ -24,4 +24,5 @@
 
 GtkWidget *gui_create_bibletext_dialog(void);
 
-#endif	/* __BIBLETEXT_DIALOG_H__ */
+#endif
+

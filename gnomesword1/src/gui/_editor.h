@@ -23,12 +23,11 @@
 #define ___EDITOR_H_
 
 #include <gnome.h>
-#include "settings.h"
+#include "main/settings.h"
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
-#include "editor_replace.h"
-#include "editor_search.h"
-
+#include "gui/editor_replace.h"
+#include "gui/editor_search.h"
 
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
 
@@ -135,4 +134,5 @@ void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
 void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
 
-#endif	/* ___EDITOR_H_ */
+#endif
+

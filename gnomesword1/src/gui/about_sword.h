@@ -35,5 +35,5 @@ GtkWidget *gui_create_about_sword(void);
 }
 #endif
 
-#endif /* __ABOUT_SWORD_H_ */
+#endif
 
