@@ -103,7 +103,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else if (!strcmp(font, "Greek")) {
-		strbuf = g_string_new("<FONT FACE=\"greek1\">");
+		strbuf = g_string_new("<FONT FACE=\"SIL Galatia\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -160,7 +160,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	} else if (!strcmp(font, "Greek")) {	/* greek -wingreek */
 		strbuf =
 		    g_string_new
-		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"greek1\">");
+		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"SIL Galatia\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font><I> </I>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -257,7 +257,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 						 mycolor);
 			} else if (!strcmp(font, "Greek")) {
 				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\" FACE=\"sil galatia\">",
+						 "<FONT COLOR=\"%s\" FACE=\"SIL Galatia\">",
 						 mycolor);
 			} else {
 				g_string_sprintf(strbuf,
@@ -311,7 +311,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					g_string_append(strbuf, "</font>");
 			} else if (!strcmp(font, "Greek")) {
 				strbuf =
-				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"sil galatia\">");	
+				    g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"SIL Galatia\">");	
 				strbuf =
 				    g_string_append(strbuf, (const char *)
 						    imodule);
@@ -406,7 +406,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	} else if (!strcmp(font, "Greek")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"sil galatia\">");
+		strbuf = g_string_new("<B> </B><FONT FACE=\"SIL Galatia\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
