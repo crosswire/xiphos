@@ -1,38 +1,30 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_dictlex.c (dictionary / lexicon support)
-     * -------------------
-     * Wed Apr  3 16:12:45 2002
-     * copyright (C) 2002 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_dictlex.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-
 
 #include "gs_gnomesword.h"
 #include "gs_dictlex.h"
@@ -41,9 +33,9 @@
 #include "dictlex.h"
 #include "gs_viewdict_dlg.h"
 #include "cipher_key_dialog.h"
+#include "settings.h"
 
 
-extern SETTINGS *settings;
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 
 GList *dl_list;
@@ -55,7 +47,7 @@ void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 	DL_DATA *d;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookDL),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL),
 			      page_num);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 
@@ -75,10 +67,10 @@ static void setPageDL(gchar * modname, GList * dl_list)
 		dl_list = g_list_next(dl_list);
 	}
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookDL), page);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings->dictkey);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
+	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 
-	settings->dlLastPage = page;
+	settings.dlLastPage = page;
 }
 
 static
@@ -88,33 +80,26 @@ void on_notebookDL_switch_page(GtkNotebook * notebook,
 {
 	DL_DATA *d; //, *d_old;
 
-//      d_old = (DL_DATA*)g_list_nth_data(tmp, settings->dlLastPage);
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	//-- change tab label to current book name
 
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
-					(settings->workbook_lower),
+					(settings.workbook_lower),
 					gtk_notebook_get_nth_page
 					(GTK_NOTEBOOK
-					 (settings->workbook_lower), 0),
+					 (settings.workbook_lower), 0),
 					d->modName);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings->workbook_lower),
+					 (settings.workbook_lower),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (settings->workbook_lower),
+					  (settings.workbook_lower),
 					  0), d->modName);
 
 
-	sprintf(settings->DictWindowModule, "%s", d->modName);
-	/*
-	   if(settings->finddialog) {
-	   gnome_dialog_close(g_old->find_dialog->dialog);
-	   searchGS_FIND_DLG(g, FALSE, settings->findText);
-	   } */
-	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings->dict_tabs;
-	settings->dlLastPage = page_num;
-	//gtk_entry_set_text(GTK_ENTRY(d->entry),settings->dictkey);
+	sprintf(settings.DictWindowModule, "%s", d->modName);
+	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
+	settings.dlLastPage = page_num;
 }
 
 static void on_entryDictLookup_changed(GtkEditable * editable,
@@ -126,7 +111,7 @@ static void on_entryDictLookup_changed(GtkEditable * editable,
 	static gboolean firsttime = TRUE;
 
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	strcpy(settings->dictkey, key);
+	strcpy(settings.dictkey, key);
 	backend_displayinDL(d->modName, key);
 	if (firsttime)
 		count = 11;
@@ -180,7 +165,7 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookDL), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
 }
 
 static
@@ -219,7 +204,7 @@ void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 static
 void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
 {
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings->dictkey);
+	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 }
 
 static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
@@ -314,9 +299,7 @@ GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 	view_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_menu));
 
-	/*
-	   if module has cipher key include this item
-	 */
+	/* if module has cipher key include this item */
 	if(dl->has_key) {
 		GtkWidget *add_module_key;
 		separator = gtk_menu_item_new();
@@ -366,10 +349,10 @@ GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 			   GTK_SIGNAL_FUNC(on_find_activate), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->showtabs), "activate",
 			   GTK_SIGNAL_FUNC(on_showtabs_activate),
-			   settings);
+			   &settings);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC(on_view_new_activate),
-			   settings);
+			   &settings);
 	return pm;
 }
 
@@ -604,5 +587,3 @@ void gui_shutdownDL(void)
 	g_list_free(dl_list);
 
 }
-
-/******   end of file   ******/

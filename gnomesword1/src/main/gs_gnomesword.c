@@ -20,8 +20,9 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
+
 #include <gnome.h>
 #include <ctype.h>
 #include <gal/widgets/e-unicode.h>
@@ -35,7 +36,6 @@
 #include "gs_gbs.h"
 #include "gs_dictlex.h"
 #include "support.h"
-#include "gs_file.h"
 #include "gs_info_box.h"
 #include "gs_html.h"
 #include "gs_menu.h"
@@ -51,6 +51,7 @@
  */ 
 #include "percomm.h"
 #include "bibletext.h"
+#include "settings.h"
 #include "commentary.h"
  
 /*
@@ -82,10 +83,8 @@ gboolean changemain = TRUE; /* change verse of Bible text window */
 gboolean ApplyChange;
 gchar current_verse[80] = N_("Romans 8:28");
 MOD_LISTS *mod_lists;
-SETTINGS *settings;
 GList *sblist;			/* for saving search results to bookmarks  */
 MOD_LISTS mods;
-
 
 /******************************************************************************
  * static
@@ -97,12 +96,10 @@ static gchar *update_nav_controls(gchar * key);
  *****************************************************************************/
 void init_gnomesword(SETTINGS * s)
 {	
-	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 	mod_lists = &mods;
-	/*
-	 * set glist to null 
-	 */
+
+	/* set glist to null */
 	mod_lists->biblemods = NULL;
 	mod_lists->commentarymods = NULL;
 	mod_lists->dictionarymods = NULL;
@@ -113,9 +110,8 @@ void init_gnomesword(SETTINGS * s)
 	mod_lists->comm_descriptions = NULL;
 	mod_lists->dict_descriptions = NULL;
 	mod_lists->book_descriptions = NULL;
-	/*
-	 * fill module lists
-	 */
+
+	/* fill module lists */
 	mod_lists->options = backend_get_global_options_list();
 	mod_lists->text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
 	mod_lists->comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
@@ -173,7 +169,7 @@ void init_gnomesword(SETTINGS * s)
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */
-	UpdateChecks(s);
+	UpdateChecks(&settings);
 
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
@@ -189,11 +185,10 @@ void init_gnomesword(SETTINGS * s)
 void gnomesword_shutdown(SETTINGS * s)
 {
 	GtkWidget *msgbox;
-	extern gchar
-	    * gSwordDir, *shortcutbarDir, *fnconfigure, *swbmDir;
 	gint answer = 0;
 
-	if (s->modifiedSP) {	//-- if study pad file has changed since last save  
+	/* if study pad file has changed since last save */
+	if (s->modifiedSP) {
 		msgbox = create_InfoBox();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
@@ -209,10 +204,9 @@ void gnomesword_shutdown(SETTINGS * s)
 		default:
 			break;
 		}
-	}/*
-	   free lists 
-	 */
+	}
 	
+	/* free lists */
 	g_list_free(mod_lists->biblemods);
 	g_list_free(mod_lists->commentarymods);
 	g_list_free(mod_lists->dictionarymods);
@@ -224,13 +218,12 @@ void gnomesword_shutdown(SETTINGS * s)
 	g_list_free(mod_lists->book_descriptions);
 	g_list_free(mod_lists->options);
 	g_list_free(s->settingslist);
-	/*
-	   free dir and file stuff 
-	 */
-	g_free(gSwordDir);
-	g_free(shortcutbarDir);
-	g_free(fnconfigure);
-	g_free(swbmDir);
+
+	/* free dir and file stuff */
+	g_free(settings.gSwordDir);
+	g_free(settings.shortcutbarDir);
+	g_free(settings.fnconfigure);
+	g_free(settings.swbmDir);
 	
 	shutdown_text();
 	gui_shutdownGBS();
@@ -245,11 +238,10 @@ void gnomesword_shutdown(SETTINGS * s)
  * UpdateChecks(GtkWidget *app) update chech menu items
  * and toggle buttons - called on start up
  *****************************************************************************/
+
 void UpdateChecks(SETTINGS * s)
 {
-	/*
-	   does user want verses or paragraphs 
-	 */
+	/* does user want verses or paragraphs */
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 
 	if (s->footnotesint)
@@ -304,7 +296,7 @@ void UpdateChecks(SETTINGS * s)
 	/*
 	   set auto save menu check item 
 	 */
-	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments;  
+	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings.autosavepersonalcomments;  
 
 	/*
 	   show hide shortcut bar - set to options setting 
@@ -317,7 +309,7 @@ void UpdateChecks(SETTINGS * s)
 
 	else if (!s->showshortcutbar && s->showdevotional) {
 		gtk_widget_show(s->shortcut_bar);
-		on_btnSB_clicked(NULL, settings);
+		on_btnSB_clicked(NULL, &settings);
 	}
 
 	else {
@@ -326,14 +318,11 @@ void UpdateChecks(SETTINGS * s)
 				     1);
 	}
 
-	/*
-	   set hight of bible and commentary pane 
-	 */
+	/* set hight of bible and commentary pane */
 	e_paned_set_position(E_PANED(lookup_widget(s->app, "vpaned1")),
 			     s->upperpane_hight);
-	/*
-	   set width of bible pane 
-	 */
+
+	/* set width of bible pane */
 	e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
 			     s->biblepane_width);
 
@@ -341,47 +330,53 @@ void UpdateChecks(SETTINGS * s)
 		s->docked = TRUE;
 		dock_undock(s);
 	}
-	gtk_widget_show(s->app); /** display the whole thing **/
-
+	gtk_widget_show(s->app);
 
 	addhistoryitem = FALSE;
 	change_verse(s->currentverse);
 }
 
-/*****************************************************************************
- *setformatoption
- *button
-*****************************************************************************/
+/******************************************************************************
+ * setformatoption
+ * button
+ *****************************************************************************/
+
 void setformatoption(GtkWidget * button)
 {
-	settings->formatpercom =
+	settings.formatpercom =
 	    GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
 }
 
-/*****************************************************************************
- *changepagenotebook - someone changed the page in the main notebook
- *notebook - notebook widget - main notebook
- *page_num - notebook page number
-*****************************************************************************/
+/******************************************************************************
+ * changepagenotebook - someone changed the page in the main notebook
+ * notebook - notebook widget - main notebook
+ * page_num - notebook page number
+ *****************************************************************************/
+
 void changepagenotebook(GtkNotebook * notebook, gint page_num)
 {
-	settings->notebook3page = page_num;	/* store the page number so we can open to it the next time we start */
+	settings.notebook3page = page_num;	/* store the page number so we can open to it the next time we start */
 	changemain = FALSE;	/* we don't want to cause the Bible text window to scrool */
 }
 
 
-/*****************************************************************************
+/******************************************************************************
  * setautosave - someone clicked auto save personal  comments
  * choice
-*****************************************************************************/
+ *****************************************************************************/
+
 void setautosave(gboolean choice)
 {
-	if (choice) {		/* if choice was to autosave */
+	if (choice) {
+		/* if choice was to autosave */
 		autoSave = TRUE;
-	} else {		/* if choice was not to autosave    */
+	} else {
+		/* if choice was not to autosave */
 		autoSave = FALSE;
 	}
-	settings->autosavepersonalcomments = choice;	/* remember our choice for next startup */
+
+	/* remember our choice for next startup */
+	settings.autosavepersonalcomments = choice;
 }
 
 
@@ -398,8 +393,7 @@ void percent_update(char percent, void *userData)
 	while ((((float) percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float) percent) / 100));
 		num = (float) percent / 100;
-		gnome_appbar_set_progress((GnomeAppBar *) settings->
-					  appbar, num);
+		gnome_appbar_set_progress((GnomeAppBar *) settings.appbar, num);
 		printed++;
 	}
 	while (gtk_events_pending())
@@ -407,10 +401,11 @@ void percent_update(char percent, void *userData)
 	printed = 0;
 }
 
-/*****************************************************************************
+/******************************************************************************
  *   -string_is_color- this code is from bluefish-0.6
  *
-*****************************************************************************/
+ *****************************************************************************/
+
 gint string_is_color(gchar * color)
 {
 	gint i;
@@ -443,10 +438,11 @@ gint string_is_color(gchar * color)
 
 }
 
-/*****************************************************************************
+/******************************************************************************
  * gdouble_arr_to_hex  -- this code is from bluefish-0.6
  *
-*****************************************************************************/
+ *****************************************************************************/
+
 gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 {
 	gchar *tmpstr;
@@ -477,10 +473,11 @@ gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 	return tmpstr;
 }
 
-/*****************************************************************************
+/******************************************************************************
  *  hex_to_gdouble_arr -- this code is from bluefish-0.6
  *
-*****************************************************************************/
+ *****************************************************************************/
+
 gdouble *hex_to_gdouble_arr(gchar * color)
 {
 	static gdouble tmpcol[4];
@@ -619,7 +616,7 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
 		if (!isGBS) {
 			text = lookup_widget(aboutbox, "text");	/* get text widget */
 		} else {
-			text = settings->htmlBook;
+			text = settings.htmlBook;
 		}
 
 		about_module_display(to, bufabout);	/* send about info to display function */
@@ -648,7 +645,8 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
  *
  * num
  * returns module key
-******************************************************************************/
+ *****************************************************************************/
+
 gchar *get_module_key(SETTINGS * s)
 {
 	if (havebible) {
@@ -674,10 +672,10 @@ gchar *get_module_key(SETTINGS * s)
 }
 
 /******************************************************************************
- *
  * num
  * returns module name
-******************************************************************************/
+ *****************************************************************************/
+
 gchar *get_module_name(SETTINGS * s)
 {
 	if (havebible) {
@@ -698,11 +696,13 @@ gchar *get_module_name(SETTINGS * s)
 	}
 	return NULL;
 }
+
 /******************************************************************************
  *
  * 
  * 
  */
+
 gchar *get_module_name_from_description(gchar *description)
 {
 	gchar mod_name[16];
@@ -715,8 +715,7 @@ gchar *get_module_name_from_description(gchar *description)
 		return NULL;
 }
 
-static
-gchar *update_nav_controls(gchar * key)
+static gchar *update_nav_controls(gchar * key)
 {
 	char *val_key;
 	gint cur_chapter = 8, cur_verse = 28;
@@ -728,18 +727,18 @@ gchar *update_nav_controls(gchar * key)
 	/* 
 	 *  remember last verse 
 	 */
-	sprintf(settings->currentverse, "%s", val_key);
+	sprintf(settings.currentverse, "%s", val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries to new verse 
 	 */
-	gtk_entry_set_text(GTK_ENTRY(settings->cbeBook),
+	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
 			   backend_get_book_from_key(val_key));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings->spbChapter), cur_chapter);
+				  (settings.spbChapter), cur_chapter);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings->spbVerse), cur_verse);
+				  (settings.spbVerse), cur_verse);
 	gtk_entry_set_text(GTK_ENTRY
-			   (settings->cbeFreeformLookup), val_key);
+			   (settings.cbeFreeformLookup), val_key);
 	ApplyChange = TRUE;
 	return val_key;
 }
@@ -776,7 +775,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 		if(key)
 			gui_set_book_page_and_key(page_num, key);
 		else {
-			gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
+			gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookGBS),
 			      page_num);
 		}
 		break;
@@ -793,42 +792,39 @@ void change_verse(gchar * key)
 	ApplyChange = FALSE;
 	
 	if (havebible) {
-		/*
-		   add item to history
-		 */
+		/* add item to history */
 		if (addhistoryitem) {
 			if (strcmp
-			    (settings->currentverse,
+			    (settings.currentverse,
 			     historylist[historyitems - 1].verseref))
-				addHistoryItem(settings->app,
+				addHistoryItem(settings.app,
 					       GTK_WIDGET
-					       (settings->shortcut_bar),
-					       settings->currentverse);
+					       (settings.shortcut_bar),
+					       settings.currentverse);
 		}
 		addhistoryitem = TRUE;
-		/* 
-		   change main window 
-		 */
+
+		/* change main window */
 		display_text(val_key);
 	}
 
 	/* 
 	   change interlinear verses 
 	 */
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 
 	/* 
 	   change personal notes editor   if not in edit mode 
 	 */
-	if (settings->notefollow) {	                  
-		if (!settings->editnote)
+	if (settings.notefollow) {	                  
+		if (!settings.editnote)
 			display_percomm(val_key);
 	}
 	/* 
 	   set commentary module to current verse 
 	 */
-	display_commentary(settings->currentverse);
+	display_commentary(settings.currentverse);
 	
 	g_free(val_key);
 	ApplyChange = TRUE;
@@ -838,19 +834,22 @@ void save_module_key(gchar * mod_name, gchar * key)
 {
 	backend_save_module_key(mod_name, key);
 
-	/*
-	   FIXME: we need to display change
-	 */
-
+	/* FIXME: we need to display change */
 }
+
 /******************************************************************************
-* set verse style -- verses or paragraphs
-*******************************************************************************/
+ * set verse style -- verses or paragraphs
+ *****************************************************************************/
+
 void set_verse_style(gboolean choice)
 {
-	settings->versestyle = choice;	//-- remember our choice for the next program startup
-	if (havebible)
-		display_text(settings->currentverse);	//-- show the change
+	/* remember our choice for the next program startup */
+	settings.versestyle = choice;
+
+	if (havebible) {
+		/* show the change */
+		display_text(settings.currentverse);
+	}
 }
 
 const char *get_sword_version(void)
@@ -862,4 +861,3 @@ void display_devotional(SETTINGS * s)
 {
 	backend_display_devotional(s);
 }
-/*****   end of file   ******/

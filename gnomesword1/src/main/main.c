@@ -23,27 +23,31 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
-#include <gtk/gtk.h>
+#include <glib-1.2/glib.h>
 
-#ifdef GTKHTML_HAVE_GCONF
-#include <gconf/gconf.h>
-#endif
-
+#include "gui.h"
 #include "splash.h"
 #include "sword.h"
-#include "gs_gnomesword.h"
-#include "gs_file.h"
-#include "gs_gui.h"
-#include "properties.h"
-#include "gs_setup.h"
-#include "gs_bookmarks.h"
 #include "bookmarks.h"
+#include "gs_setup.h"
+#include "properties.h"
+#include "gs_gui.h"
+#include "gs_gnomesword.h"
+#include "settings.h"
 
-extern SETTINGS *settings;
-extern gchar *swbmDir;
-
-SETTINGS myset;
+/******************************************************************************
+ * Name
+ *   main
+ *
+ * Synopsis
+ *   none
+ *
+ * Description
+ *   Starting point of GnomeSword.
+ *
+ * Return value
+ *   int
+ */
 
 int main(int argc, char *argv[])
 {
@@ -51,16 +55,7 @@ int main(int argc, char *argv[])
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
 
-#ifdef GTKHTML_HAVE_GCONF
-	GError *gconf_error = NULL;
-#endif
-
-#if ENABLE_NLS
-	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
-	textdomain(PACKAGE);
-#endif
-
-	gnome_init("GnomeSword", VERSION, argc, argv);
+	gui_init(argc, argv);
 	
 	if (argc > 1) {
 		/*
@@ -78,19 +73,7 @@ int main(int argc, char *argv[])
 			newbookmarks = TRUE;
 		}
 	}
-	
-#ifdef GTKHTML_HAVE_GCONF
-	/* 
-	 * This is needed for gtkhtml.
-	 */
 
-	if (!gconf_init(argc, argv, &gconf_error)) {
-		g_assert(gconf_error != NULL);
-		g_error("GConf init failed:\n  %s", gconf_error->message);
-		return FALSE;
-	}
-#endif
-	
 	/* 
 	 * start swmgrs so they can be used by setup druid
 	 */
@@ -99,42 +82,37 @@ int main(int argc, char *argv[])
 	/* 
 	 * check for directories and files
 	 */    
-	icreatefiles = setDiretory();
+	icreatefiles = settings_init();
 
 	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
-		createbookmarksBM(swbmDir);
+		createbookmarksBM(settings.swbmDir);
 	}
 
-	/*icreatefiles = 1;*/ /* please comment me - i am for testing */
 	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs) {
 		gui_firstRunSETUP();
 	}
 
-	/*
-	 * Set pointer to structure.
-	 */
-	settings = &myset;
-	backend_load_properties(settings);
+	backend_load_properties(&settings);
 
 	gui_splash_init();
 
 	gui_splash_step1();
 
-	create_mainwindow(settings);
+	create_mainwindow(&settings);
 
 	gui_splash_step2();
 	
-	backend_init_sword(settings);
+	backend_init_sword(&settings);
 
 	gui_splash_step3();
 
-	init_gnomesword(settings);
+	init_gnomesword(&settings);
 
 	gui_splash_step4();
 	
 	gui_splash_done();
 
-	gtk_main();
+	gui_main();
 
 	return 0;
 }

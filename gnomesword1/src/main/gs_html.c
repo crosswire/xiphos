@@ -66,6 +66,7 @@
 #include "gs_interlinear.h"
 #include "verselist.h"
 #include "shortcutbar.h"
+#include "settings.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -78,7 +79,6 @@ GtkWidget *htmlComments;
 GtkWidget *usehtml;
 
 extern GtkWidget *textDict;
-extern SETTINGS *settings;
 gboolean in_url;
 
 GtkWidget *gs_new_html_widget(SETTINGS * s)
@@ -103,7 +103,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
-		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
+		gnome_appbar_set_status(GNOME_APPBAR(settings.appbar),
 					"");
 		in_url = FALSE;
 	}
@@ -133,7 +133,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 		else
 			sprintf(buf, _("Go to %s"), url);
 
-		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
+		gnome_appbar_set_status(GNOME_APPBAR(settings.appbar),
 					buf);
 	}
 }
@@ -150,7 +150,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	if (*url == '@') {
 		++url;
-		swap_interlinear_with_main((gchar *) url, settings);
+		swap_interlinear_with_main((gchar *) url, &settings);
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {
@@ -213,17 +213,17 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (havemod > 2) {
 			modbuf = newmod;
 		} else {
-			modbuf = settings->MainWindowModule;
+			modbuf = settings.MainWindowModule;
 		}
 		buf = g_strdup(newref);
-		sprintf(settings->groupName, "%s", "Verse List");
+		sprintf(settings.groupName, "%s", "Verse List");
 
 		if (backend_get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
-			display_dictlex_in_viewer(modbuf, buf, settings);
+			display_dictlex_in_viewer(modbuf, buf, &settings);
 		} else {
-			display_verse_list(modbuf, buf, settings);
+			display_verse_list(modbuf, buf, &settings);
 		}
 		g_free(buf);
 
@@ -253,10 +253,10 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++mybuf;
 		}
 		buf = g_strdup(mybuf);
-		if (settings->inDictpane)
+		if (settings.inDictpane)
 			change_module_and_key(modbuf, buf);
-		if (settings->inViewer)
-			display_dictlex_in_viewer(modbuf, buf, settings);
+		if (settings.inViewer)
+			display_dictlex_in_viewer(modbuf, buf, &settings);
 		g_free(buf);
 	}
 	/*** thml strongs ***/
@@ -279,15 +279,15 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(newref, "%5.5d", atoi(mybuf));
 		}
 		if (type)
-			modbuf = settings->lex_greek;
+			modbuf = settings.lex_greek;
 		else
-			modbuf = settings->lex_hebrew;
+			modbuf = settings.lex_hebrew;
 
 		buf = g_strdup(newref);
-		if (settings->inDictpane)
+		if (settings.inDictpane)
 			change_module_and_key(modbuf, buf);
-		if (settings->inViewer)
-			display_dictlex_in_viewer(modbuf, buf, settings);
+		if (settings.inViewer)
+			display_dictlex_in_viewer(modbuf, buf, &settings);
 		g_free(buf);
 
 	}
@@ -298,15 +298,15 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;	/* remove T */
 			if (*url == 'G') {
 				++url;	/* remove G */
-				if (settings->havethayer) {
+				if (settings.havethayer) {
 					buf = g_strdup(url);
-					if (settings->inDictpane)
+					if (settings.inDictpane)
 						change_module_and_key("Thayer",
 								  buf);
-					if (settings->inViewer)
+					if (settings.inViewer)
 						display_dictlex_in_viewer
 						    ("Thayer", buf,
-						     settings);
+						     &settings);
 					g_free(buf);
 					return;
 				}
@@ -317,15 +317,15 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 			if (*url == 'H') {
 				++url;	/* remove H */
-				if (settings->havebdb) {
+				if (settings.havebdb) {
 					buf = g_strdup(url);
-					if (settings->inDictpane)
+					if (settings.inDictpane)
 						change_module_and_key("BDB",
 								  buf);
-					if (settings->inViewer)
+					if (settings.inViewer)
 						display_dictlex_in_viewer("BDB",
 								   buf,
-								   settings);
+								   &settings);
 					g_free(buf);
 					return;
 				}
@@ -339,15 +339,15 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;	/* remove G */
 			buf = g_strdup(url);
 			if (atoi(buf) > 5624) {
-				if (settings->havethayer) {
+				if (settings.havethayer) {
 					buf = g_strdup(url);
-					if (settings->inDictpane)
+					if (settings.inDictpane)
 						change_module_and_key("Thayer",
 								  buf);
-					if (settings->inViewer)
+					if (settings.inViewer)
 						display_dictlex_in_viewer
 						    ("Thayer", buf,
-						     settings);
+						     &settings);
 					g_free(buf);
 					return;
 				} else
@@ -356,13 +356,11 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			}
 
 			else {
-				if (settings->inDictpane)
-					change_module_and_key(settings->
-							  lex_greek, buf);
-				if (settings->inViewer)
-					display_dictlex_in_viewer(settings->
-							   lex_greek_viewer,
-							   buf, settings);
+				if (settings.inDictpane)
+					change_module_and_key(settings.lex_greek, buf);
+				if (settings.inViewer)
+					display_dictlex_in_viewer(settings.lex_greek_viewer,
+							   buf, &settings);
 				g_free(buf);
 			}
 		}
@@ -371,15 +369,15 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;	/* remove H */
 			buf = g_strdup(url);
 			if (atoi(buf) > 8674) {
-				if (settings->havebdb) {
+				if (settings.havebdb) {
 					buf = g_strdup(url);
-					if (settings->inDictpane)
+					if (settings.inDictpane)
 						change_module_and_key("BDB",
 								  buf);
-					if (settings->inViewer)
+					if (settings.inViewer)
 						display_dictlex_in_viewer("BDB",
 								   buf,
-								   settings);
+								   &settings);
 					g_free(buf);
 					return;
 				}
@@ -389,13 +387,11 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			}
 
 			else {
-				if (settings->inDictpane)
-					change_module_and_key(settings->
-							  lex_hebrew, buf);
-				if (settings->inViewer)
-					display_dictlex_in_viewer(settings->
-							   lex_hebrew_viewer,
-							   buf, settings);
+				if (settings.inDictpane)
+					change_module_and_key(settings.lex_hebrew, buf);
+				if (settings.inViewer)
+					display_dictlex_in_viewer(settings.lex_hebrew_viewer,
+							   buf, &settings);
 				g_free(buf);
 			}
 		}
@@ -404,10 +400,10 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
-		if (settings->inDictpane)
+		if (settings.inDictpane)
 			change_module_and_key("Packard", buf);
-		if (settings->inViewer)
-			display_dictlex_in_viewer("Packard", buf, settings);
+		if (settings.inViewer)
+			display_dictlex_in_viewer("Packard", buf, &settings);
 		g_free(buf);
 	}
 }
@@ -420,7 +416,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		    gpointer * data)
 {
 	usehtml = html;
-	settings->whichwindow = GPOINTER_TO_INT(data);
+	settings.whichwindow = GPOINTER_TO_INT(data);
 
 	switch (event->button) {
 	case 1:
@@ -443,7 +439,7 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 	gchar *key;
 
 	usehtml = html;
-	settings->whichwindow = GPOINTER_TO_INT(data);
+	settings.whichwindow = GPOINTER_TO_INT(data);
 
 	switch (event->button) {
 	case 1:
@@ -451,18 +447,16 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 			key = buttonpresslookupGS_HTML(html);
 			if (key) {
 				gchar *dict = NULL;
-				if (settings->useDefaultDict)
+				if (settings.useDefaultDict)
 					dict =
-					    g_strdup(settings->
-						     DefaultDict);
+					    g_strdup(settings.DefaultDict);
 				else
 					dict =
-					    g_strdup(settings->
-						     DictWindowModule);
-				if (settings->inViewer)
+					    g_strdup(settings.DictWindowModule);
+				if (settings.inViewer)
 					display_dictlex_in_viewer(dict, key,
-							   settings);
-				if (settings->inDictpane)
+							   &settings);
+				if (settings.inDictpane)
 					change_module_and_key(dict, key);
 				g_free(key);
 				if (dict)
@@ -474,7 +468,7 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 	case 2:
 		break;
 	case 3:		/*
-				   gnome_popup_menu_do_popup(settings->menuBible,
+				   gnome_popup_menu_do_popup(settings.menuBible,
 				   NULL,
 				   NULL,
 				   event,
@@ -507,9 +501,9 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkHTML *html;
 
 	if (!strcmp((gchar *) user_data, "textComp1"))
-		widget = settings->htmlInterlinear;
+		widget = settings.htmlInterlinear;
 	else
-		widget = lookup_widget(settings->app, (gchar *) user_data);
+		widget = lookup_widget(settings.app, (gchar *) user_data);
 
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
@@ -573,16 +567,16 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 	}
 
 	else {
-		sprintf(modName, "%s", settings->DictWindowModule);
+		sprintf(modName, "%s", settings.DictWindowModule);
 	}
 
 	key = get_word_or_selection(usehtml, TRUE);
 					/***  usehtml is set when a button is pressed
 						in a html window  ***/
 	if (key) {
-		if (settings->inViewer)
-			display_dictlex_in_viewer(modName, key, settings);
-		if (settings->inDictpane)
+		if (settings.inViewer)
+			display_dictlex_in_viewer(modName, key, &settings);
+		if (settings.inDictpane)
 			change_module_and_key(modName, key);
 		g_free(key);
 	}
@@ -604,16 +598,16 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	}
 
 	else {
-		sprintf(modName, "%s", settings->DictWindowModule);
+		sprintf(modName, "%s", settings.DictWindowModule);
 	}
 
 	key = get_word_or_selection(usehtml, FALSE);
 					 /***  usehtml is set when a button is pressed
 						in a html window  ***/
 	if (key) {
-		if (settings->inViewer)
-			display_dictlex_in_viewer(modName, key, settings);
-		if (settings->inDictpane)
+		if (settings.inViewer)
+			display_dictlex_in_viewer(modName, key, &settings);
+		if (settings.inDictpane)
 			change_module_and_key(modName, key);
 		g_free(key);
 	}
@@ -630,19 +624,19 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	GtkHTML *html;
 	gchar *buf, *modbuf;
 
-	widget = lookup_widget(settings->app, (gchar *) user_data);
+	widget = lookup_widget(settings.app, (gchar *) user_data);
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
-	entry = lookup_widget(settings->app, "cbeFreeformLookup");
+	entry = lookup_widget(settings.app, "cbeFreeformLookup");
 	/* clear entry */
 	gtk_entry_set_text(GTK_ENTRY(entry), "");
 	/* put selected ref in entry */
 	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));
 	buf = gtk_entry_get_text(GTK_ENTRY(entry));
 	/* get name for current text module */
-	settings->whichwindow = MAIN_TEXT_WINDOW;
-	modbuf = get_module_name(settings);
-	display_verse_list(modbuf, buf, settings);
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	modbuf = get_module_name(&settings);
+	display_verse_list(modbuf, buf, &settings);
 }
 
 /***************************************************************************************************
@@ -673,20 +667,20 @@ void add_gtkhtml_widgets(GtkWidget * app)
 
 
 /*	
-	settings->htmlInterlinear = gtk_html_new();
-	gtk_widget_ref(settings->htmlInterlinear);
-	gtk_object_set_data_full(GTK_OBJECT(app), "settings->htmlInterlinear",
-				 settings->htmlInterlinear,
+	settings.htmlInterlinear = gtk_html_new();
+	gtk_widget_ref(settings.htmlInterlinear);
+	gtk_object_set_data_full(GTK_OBJECT(app), "settings.htmlInterlinear",
+				 settings.htmlInterlinear,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings->htmlInterlinear);
+	gtk_widget_show(settings.htmlInterlinear);
 	
 		gtk_container_add(GTK_CONTAINER
-			  (settings->swIntDocked),
-			  settings->htmlInterlinear);
-	if(settings->dockedInt)
+			  (settings.swIntDocked),
+			  settings.htmlInterlinear);
+	if(settings.dockedInt)
 		gtk_container_add(GTK_CONTAINER
-			  (settings->swIntDocked),
-			  settings->htmlInterlinear);
+			  (settings.swIntDocked),
+			  settings.htmlInterlinear);
 */
 /*	htmlDict = gtk_html_new();
 	gtk_widget_ref(htmlDict);
@@ -731,11 +725,11 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
 /*
-	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "on_url",
+	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "link_clicked",
+	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
 
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "on_url",
@@ -746,7 +740,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(html_button_pressed),
 			   GINT_TO_POINTER(2));
 */
-	/*gtk_signal_connect(GTK_OBJECT(lookup_widget(settings->app,"htmlBooks")), "button_press_event",
+	/*gtk_signal_connect(GTK_OBJECT(lookup_widget(settings.app,"htmlBooks")), "button_press_event",
 	   GTK_SIGNAL_FUNC(html_button_pressed), NULL); */
 }
 
