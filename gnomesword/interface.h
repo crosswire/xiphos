@@ -14,7 +14,7 @@ GtkWidget* create_about2 (void);
 GtkWidget* create_menuInt1 (void);
 GtkWidget* create_menuInt2 (void);
 GtkWidget* create_menuInt3 (void);
-GtkWidget* create_dlgSearch (void);
+//GtkWidget* create_dlgSearch (void);
 GtkWidget* create_wdwEditBookmarks (void);
 GtkWidget* create_pmEditnote (void);
 GtkWidget* create_InfoBox (void);
@@ -24,6 +24,8 @@ GtkWidget* create_dlgSettings (void);
 GtkWidget* create_dialog1 (void);
 GtkWidget* create_listeditor (void);
 GtkWidget* create_pmComments (void);
+GtkWidget* create_pmDict (void);
+
 
 
 void
@@ -54,16 +56,8 @@ void
 on_btnAboutOK_clicked                  (GtkButton       *button,
                                         gpointer         user_data);
 
-void
-on_btnSearch1_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-on_resultList_select_row               (GtkCList        *clist,
-                                        gint             row,
-                                        gint             column,
-                                        GdkEvent        *event,
-                                        gpointer         user_data);
+  void on_btnSearch1_clicked (GtkButton *button, gpointer user_data);
+  void on_resultList_select_row (GtkCList *clist,gint row,gint column,GdkEvent *event,gpointer user_data);
 
 void
 on_dictionary_lookup1_activate         (GtkMenuItem     *menuitem,
@@ -1287,6 +1281,73 @@ on_textComments_key_press_event        (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data);
 
+void
+on_lookup_selection2_activate          (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module6_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+
+gboolean
+on_moduleText_enter_notify_event       (GtkWidget       *widget,
+                                        GdkEventCrossing *event,
+                                        gpointer         user_data);
+
+void
+on_lookup_word_1_activate              (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_copy5_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module5_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_lookup_word1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnBack_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnFoward_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+                                        
+
+void
+on_lookup_selection_activate           (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);                                        
+
+
+void
+on_about_this_module6_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnComPrev_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnComNext_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_auto_scroll1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_lookup_selection4_activate          (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_goto_reference3_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
 
 #ifdef __cplusplus
 }

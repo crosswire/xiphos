@@ -108,6 +108,7 @@ main.o: main.cpp ../config.h /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-app-util.h \
  /usr/include/libgnomeui/gnome-canvas.h \
  /usr/include/libart_lgpl/art_misc.h \
+ /usr/include/libart_lgpl/art_config.h \
  /usr/include/libart_lgpl/art_rect.h \
  /usr/include/libart_lgpl/art_svp.h \
  /usr/include/libart_lgpl/art_point.h \
@@ -176,29 +177,19 @@ main.o: main.cpp ../config.h /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-druid-page.h \
  /usr/include/libgnomeui/gnome-druid-page-start.h \
  /usr/include/libgnomeui/gnome-druid-page-standard.h \
- /usr/include/libgnomeui/gnome-druid-page-finish.h \
- /usr/include/sword/swmodule.h /usr/include/sword/swdisp.h \
- /usr/include/sword/swkey.h /usr/include/sword/listkey.h \
- /usr/include/sword/swfilter.h /usr/include/g++-2/string \
- /usr/include/g++-2/std/bastring.h /usr/include/g++-2/cstddef \
- /usr/include/g++-2/std/straits.h /usr/include/g++-2/cctype \
- /usr/include/ctype.h /usr/include/g++-2/cstring \
- /usr/include/g++-2/alloc.h /usr/include/g++-2/stl_config.h \
- /usr/include/g++-2/stl_alloc.h /usr/include/g++-2/iostream.h \
- /usr/include/g++-2/streambuf.h /usr/include/assert.h \
- /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
- /usr/include/signal.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/sigthread.h /usr/include/g++-2/iterator \
- /usr/include/g++-2/stl_relops.h /usr/include/g++-2/stl_iterator.h \
- /usr/include/g++-2/std/bastring.cc /usr/include/g++-2/list \
- /usr/include/g++-2/stl_algobase.h /usr/include/g++-2/stl_pair.h \
- /usr/include/g++-2/type_traits.h \
- /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/new.h \
- /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/new \
- /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/exception \
- /usr/include/g++-2/stl_construct.h \
- /usr/include/g++-2/stl_uninitialized.h /usr/include/g++-2/stl_list.h \
- GnomeSword.h menustuff.h support.h callback.h interface.h filestuff.h
+ /usr/include/libgnomeui/gnome-druid-page-finish.h GnomeSword.h \
+ /usr/include/g++-2/string /usr/include/g++-2/std/bastring.h \
+ /usr/include/g++-2/cstddef /usr/include/g++-2/std/straits.h \
+ /usr/include/g++-2/cctype /usr/include/ctype.h \
+ /usr/include/g++-2/cstring /usr/include/g++-2/alloc.h \
+ /usr/include/g++-2/stl_config.h /usr/include/g++-2/stl_alloc.h \
+ /usr/include/g++-2/iostream.h /usr/include/g++-2/streambuf.h \
+ /usr/include/assert.h /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/bits/sched.h /usr/include/signal.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
+ /usr/include/g++-2/iterator /usr/include/g++-2/stl_relops.h \
+ /usr/include/g++-2/stl_iterator.h /usr/include/g++-2/std/bastring.cc \
+ menustuff.h support.h callback.h interface.h filestuff.h
 main.cpp :
 ../config.h :
 /usr/include/gnome.h :
@@ -387,6 +378,7 @@ main.cpp :
 /usr/include/libgnomeui/gnome-app-util.h :
 /usr/include/libgnomeui/gnome-canvas.h :
 /usr/include/libart_lgpl/art_misc.h :
+/usr/include/libart_lgpl/art_config.h :
 /usr/include/libart_lgpl/art_rect.h :
 /usr/include/libart_lgpl/art_svp.h :
 /usr/include/libart_lgpl/art_point.h :
@@ -461,11 +453,7 @@ main.cpp :
 /usr/include/libgnomeui/gnome-druid-page-start.h :
 /usr/include/libgnomeui/gnome-druid-page-standard.h :
 /usr/include/libgnomeui/gnome-druid-page-finish.h :
-/usr/include/sword/swmodule.h :
-/usr/include/sword/swdisp.h :
-/usr/include/sword/swkey.h :
-/usr/include/sword/listkey.h :
-/usr/include/sword/swfilter.h :
+GnomeSword.h :
 /usr/include/g++-2/string :
 /usr/include/g++-2/std/bastring.h :
 /usr/include/g++-2/cstddef :
@@ -489,17 +477,6 @@ main.cpp :
 /usr/include/g++-2/stl_relops.h :
 /usr/include/g++-2/stl_iterator.h :
 /usr/include/g++-2/std/bastring.cc :
-/usr/include/g++-2/list :
-/usr/include/g++-2/stl_algobase.h :
-/usr/include/g++-2/stl_pair.h :
-/usr/include/g++-2/type_traits.h :
-/usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/new.h :
-/usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/new :
-/usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/include/exception :
-/usr/include/g++-2/stl_construct.h :
-/usr/include/g++-2/stl_uninitialized.h :
-/usr/include/g++-2/stl_list.h :
-GnomeSword.h :
 menustuff.h :
 support.h :
 callback.h :

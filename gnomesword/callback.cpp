@@ -39,6 +39,8 @@
 #include "filestuff.h"
 #include "display.h"
 #include "listeditor.h"
+#include "noteeditor.h"
+#include "searchstuff.h"
 
 #ifdef  USE_GNOMEPRINT
 #include "printstuff.h"
@@ -76,6 +78,8 @@ extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.
 extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
 extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
 extern gint ibookmarks;    //-- number of bookmark menu items
+extern NoteEditor *noteeditor;
+extern gboolean autoscroll;
 guint		num1,
 				num2,
 				num3;
@@ -158,29 +162,6 @@ on_btnAboutOK_clicked                  (GtkButton       *button,
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnSearch1_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget	*searchFrm;
-	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	searchSWORD(searchFrm);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_resultList_select_row               (GtkCList        *clist,
-                                        gint             row,
-                                        gint             column,
-                                        GdkEvent        *event,
-                                        gpointer         user_data)
-{
-	GtkWidget	*searchFrm;
-	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist)); 
-	resultsListSWORD(searchFrm, row, column);
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_dictionary_lookup1_activate         (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
@@ -256,13 +237,36 @@ on_dlgSearch_destroy                  (GtkObject       *object,
 
 //----------------------------------------------------------------------------------------------
 void
+on_btnSearch1_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget	*searchFrm;
+	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	searchWindow->searchSWORD(searchFrm);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_resultList_select_row               (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data)
+{
+	GtkWidget	*searchFrm;
+	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
+	searchWindow->resultsListSWORD(searchFrm, row, column);
+}
+
+//----------------------------------------------------------------------------------------------
+void
 on_btnSearch_clicked                   (GtkButton       *button,
                                         gpointer         user_data)
 {
 	if(firstsearch)
 	{
 		searchDlg = create_dlgSearch();
-		setupSearchDlg(searchDlg);
+		searchWindow->initsearchWindow(searchDlg);
 		firstsearch = FALSE;
 		gtk_signal_connect (GTK_OBJECT (searchDlg), "destroy",
                       GTK_SIGNAL_FUNC (on_dlgSearch_destroy),
@@ -572,13 +576,21 @@ gboolean
 on_moduleText_button_press_event       (GtkWidget       *widget,
                                         GdkEventButton  *event,
                                         gpointer         user_data)
-{	
-	if(event->button == 1)
+{							
+	gint	versenum; //-- new verse number
+	
+	if(event->button == 1)//-- some one pressed mouse button one
 	{		
-		gtk_entry_set_text(GTK_ENTRY(lookup_widget(widget,"dictionarySearchText")), "");		
-	 	return TRUE;  
+		//gtk_entry_set_text(GTK_ENTRY(lookup_widget(widget,"dictionarySearchText")), "");
+		if(!GTK_EDITABLE(widget)->has_selection) return false; //-- we do not have a selection
+		versenum = getversenumber(widget);  //-- get the new verse number
+		if(versenum > 0) //-- if not a number stop
+		{
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),versenum); //-- set verse spin button to new number
+			verseSWORD(); //-- change modules to the new verse
+		}
 	}
-	return FALSE;
+	return true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1446,14 +1458,6 @@ on_auto_save_notes1_activate			(GtkMenuItem     *menuitem,
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnBack_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_cut1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
@@ -1518,7 +1522,7 @@ on_search1_activate                       (GtkMenuItem     *menuitem,
 	if(firstsearch)
 	{
 		searchDlg = create_dlgSearch();
-		setupSearchDlg(searchDlg);
+		searchWindow->initsearchWindow(searchDlg);
 		firstsearch = FALSE;
 		gtk_signal_connect (GTK_OBJECT (searchDlg), "destroy",
                       GTK_SIGNAL_FUNC (on_dlgSearch_destroy),
@@ -2294,13 +2298,8 @@ void
 on_boldNE_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	if(!settings->formatpercom) return;  //-- do we want formatting?
-	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
-	noteModified = true;
+	if(!settings->formatpercom) return;  //-- do we want formatting? 	
+	noteModified = noteeditor->setBOLD(NEtext); //-- noteeditor.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2309,30 +2308,16 @@ on_italicNE_activate                   (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	if(!settings->formatpercom) return;   //-- do we want formatting?
-	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
-	noteModified = true;
+	noteModified = noteeditor->setITALIC(NEtext);  //-- noteeditor.cpp
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_referenceNE_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
-{
-	gchar			*buf,
-						tmpbuf[256];
-	if(!settings->formatpercom) return;   //-- do we want formatting?
-	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
-	buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-	sprintf(tmpbuf,"<a href=\"%s\">",buf);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
-	noteModified = true;
+{ 	
+	if(!settings->formatpercom) return;   //-- do we want formatting? 	
+	noteModified = noteeditor->setREFERENCE(NEtext);  //-- noteeditor.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2341,12 +2326,7 @@ on_underlineNE_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 { 	
 	if(!settings->formatpercom) return;  //-- do we want formatting?
-	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
-	noteModified = true;
+	noteModified = noteeditor->setUNDERLINE(NEtext);  //-- noteeditor.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2355,12 +2335,7 @@ on_greekNE_activate                    (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	if(!settings->formatpercom) return;   //-- do we want formatting?
-	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
-	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
-	noteModified = true;
+	noteModified = noteeditor->setGREEK(NEtext); //-- noteeditor.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2391,7 +2366,7 @@ on_goto_reference2_activate             (GtkMenuItem     *menuitem,
 	changeVerse(buf);
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_textComments_drag_begin             (GtkWidget       *widget,
                                         GdkDragContext  *drag_context,
@@ -2400,7 +2375,7 @@ on_textComments_drag_begin             (GtkWidget       *widget,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_textComments_drag_data_get          (GtkWidget       *widget,
                                         GdkDragContext  *drag_context,
@@ -2412,7 +2387,7 @@ on_textComments_drag_data_get          (GtkWidget       *widget,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_textComments_drag_data_received     (GtkWidget       *widget,
                                         GdkDragContext  *drag_context,
@@ -2426,7 +2401,7 @@ on_textComments_drag_data_received     (GtkWidget       *widget,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 gboolean
 on_textComments_drag_drop              (GtkWidget       *widget,
                                         GdkDragContext  *drag_context,
@@ -2439,7 +2414,7 @@ on_textComments_drag_drop              (GtkWidget       *widget,
   return FALSE;
 }
 
-
+//----------------------------------------------------------------------------------------------
 gboolean
 on_textComments_key_press_event        (GtkWidget       *widget,
                                         GdkEventKey     *event,
@@ -2450,10 +2425,8 @@ on_textComments_key_press_event        (GtkWidget       *widget,
 		
 	if(!settings->formatpercom) return false;   //-- do we want formatting?
 	if(event->keyval == 65293 || event->keyval == 65421) //-- return key
-	{ 	
-	  gtk_text_set_point( GTK_TEXT(NEtext), gtk_editable_get_position(GTK_EDITABLE(NEtext)));
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<br>", -1);
-		noteModified = true;
+	{
+		noteModified = noteeditor->setNEWLINE(NEtext); //-- noteeditor.cpp
 		return true;	
 	}
 	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
@@ -2471,40 +2444,20 @@ on_textComments_key_press_event        (GtkWidget       *widget,
 	  switch(event->keyval)
 		{
 		   case 98:   //-- bold
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
+				noteModified = noteeditor->setBOLD(NEtext); //-- noteeditor.cpp
 				break;
 			case 105:	 //-- italics
-			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
+				noteModified = noteeditor->setITALIC(NEtext);  //-- noteeditor.cpp
 			  break;
 			case 114:   //-- reference
-			  gchar		tmpbuf[256];
-	
-				buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-				sprintf(tmpbuf,"<a href=\"%s\">",buf);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
+				noteModified = noteeditor->setREFERENCE(NEtext);  //-- noteeditor.cpp			
 				break;
 			case 108:  //-- underline -- broken using l not u - u removes line
-			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
+				noteModified = noteeditor->setUNDERLINE(NEtext);  //-- noteeditor.cpp
 				break;
 			case 103:	 //-- greek font
-			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
-				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
-				break;			
-			
+				noteModified = noteeditor->setGREEK(NEtext); //-- noteeditor.cpp
+				break;				
 			default: break;
 		}
 		needsecond = false;
@@ -2512,5 +2465,162 @@ on_textComments_key_press_event        (GtkWidget       *widget,
   return true;
 }
 
+//----------------------------------------------------------------------------------------------
+gboolean
+on_moduleText_enter_notify_event       (GtkWidget       *widget,
+                                        GdkEventCrossing *event,
+                                        gpointer         user_data)
+{
 
+  return FALSE;
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_lookup_word_1_activate              (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_copy5_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_this_module5_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_lookup_word1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+  GtkWidget *entry,
+  					*text;
+  gchar			*buf;
+
+  entry = lookup_widget(MainFrm, "dictionarySearchText");
+  text  = lookup_widget(MainFrm, "textDict");
+  if(GTK_EDITABLE(text)->has_selection)
+  {   	
+  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  }
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBack_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnFoward_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_lookup_selection_activate           (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+  GtkWidget *entry,
+  					*text;
+  gchar			*buf;
+
+  entry = lookup_widget(MainFrm, "dictionarySearchText");
+  text  = lookup_widget(MainFrm, "moduleText");
+  if(GTK_EDITABLE(text)->has_selection)
+  {   	
+  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  }
+}
+
+
+void
+on_lookup_selection2_activate          (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+  GtkWidget *entry,
+  			*text;
+  gchar		*buf;
+
+  entry = lookup_widget(MainFrm, "dictionarySearchText");
+  text  = lookup_widget(MainFrm, "textCommentaries");
+  if(GTK_EDITABLE(text)->has_selection)
+  {   	
+  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  }
+}
+
+
+void
+on_about_this_module6_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_btnComPrev_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	navcurcomModSWORD(0);
+}
+
+
+void
+on_btnComNext_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	navcurcomModSWORD(1);
+}
+
+
+void
+on_auto_scroll1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget *toolbar;
+	
+	toolbar = lookup_widget(MainFrm,"handlebox17");
+	
+	autoscroll = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	/*if(autoscroll) gtk_widget_hide(toolbar);
+	else gtk_widget_show(toolbar);
+	*/
+}
+
+
+void
+on_lookup_selection4_activate          (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_goto_reference3_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
 

@@ -82,10 +82,18 @@ class GTKPerComDisp : public GTKEntryDisp
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKChapDisp : public GTKEntryDisp 
+class GTKChapDisp : public GTKEntryDisp
 {
   public:
 	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class HTMLChapDisp : public GTKEntryDisp
+{
+  public:
+	HTMLChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);
 };
 
