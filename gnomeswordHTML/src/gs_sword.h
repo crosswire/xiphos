@@ -99,7 +99,9 @@ void gotoverseVTSWORD(gchar *newkey);
 void loadVTmodSWORD(gchar *modName);
 gchar* getVTmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
-void getvtrefSWORD(VT_REF *vtref);
+gchar *getvtbookSWORD(void);
+gint getvtchapterSWORD(void);
+gint getvtverseSWORD(void);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

@@ -29,13 +29,6 @@ extern "C" {
 #ifndef __GS_VIEWTEXT_DLG_H__
 #define __GS_VIEWTEXT_DLG_H__
 	
-typedef struct _ref VT_REF;
-struct _ref {
-	gchar	book[80];
-	gint		chapter, 
-			verse;
-};
-
 
 	GtkWidget* create_dlgViewText (void);
 #endif /* __GS_VIEWTEXT_DLG_H__ */
