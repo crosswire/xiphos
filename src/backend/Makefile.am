@@ -7,9 +7,6 @@ noinst_LIBRARIES = libbackend.a
 EXTRA_DIST =  \
     sword_defs.h
 
-CXXFLAGS =  \
-    $(SWORD_INCLUDES)
-
 libbackend_a_SOURCES =  \
     config.cc config.hh \
     key.cc key.hh \
