@@ -402,7 +402,7 @@ void gui_create_search_sidebar(void)
 	gtk_container_add(GTK_CONTAINER(viewport_search), frame1);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame1), GTK_SHADOW_NONE);
 
-	vbox1 = gtk_vbox_new(FALSE, 0);
+	vbox1 = gtk_vbox_new(FALSE, 4);
 	gtk_widget_show(vbox1);
 	gtk_container_add(GTK_CONTAINER(frame1), vbox1);
 	
@@ -444,15 +444,24 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(progressbar_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), progressbar_search, FALSE, TRUE, 0);
 
-	frame_module = gtk_frame_new(_("Search Module"));
+	frame_module = gtk_frame_new(NULL);
 	gtk_widget_show(frame_module);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame_module, FALSE, FALSE,
 			   0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame_module), 2);
-
+	gtk_frame_set_shadow_type(GTK_FRAME(frame_module),GTK_SHADOW_NONE);
+	
+	label1 = gtk_label_new(NULL); 
+	gtk_label_set_markup(GTK_LABEL(label1),
+                                     _("<b>Search Module</b>"));
+	gtk_widget_show(label1);
+	gtk_frame_set_label_widget      (GTK_FRAME(frame_module),
+                                             label1);
+					     
 	vbox90 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox90);
 	gtk_container_add(GTK_CONTAINER(frame_module), vbox90);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox90), 4);
 
 	radiobutton_search_text =
 	    gtk_radio_button_new_with_label(vbox90_group, _("Bible"));
@@ -498,14 +507,23 @@ void gui_create_search_sidebar(void)
 			   FALSE, FALSE, 0);
 
 */
-	frame2 = gtk_frame_new(_("Search Type"));
+	frame2 = gtk_frame_new(NULL);
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame2, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame2), 2);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame2),GTK_SHADOW_NONE);
+	
+	label1 = gtk_label_new(NULL); 
+	gtk_label_set_markup(GTK_LABEL(label1),
+                                     _("<b>Search Type</b>"));
+	gtk_widget_show(label1);
+	gtk_frame_set_label_widget      (GTK_FRAME(frame2),
+                                             label1);
 
 	vbox2 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox2);
 	gtk_container_add(GTK_CONTAINER(frame2), vbox2);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox2), 4);
 
 	rbMultiword =
 	    gtk_radio_button_new_with_label(vbox2_group,
@@ -538,14 +556,23 @@ void gui_create_search_sidebar(void)
 			   FALSE, FALSE, 0);
 	gtk_widget_set_usize(rbPhraseSearch, -2, 20);
 
-	frame3 = gtk_frame_new(_("Search Options"));
+	frame3 = gtk_frame_new(NULL);
 	gtk_widget_show(frame3);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame3, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame3), 2);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame3),GTK_SHADOW_NONE);
+	
+	label1 = gtk_label_new(NULL); 
+	gtk_label_set_markup(GTK_LABEL(label1),
+                                     _("<b>Search Options</b>"));
+	gtk_widget_show(label1);
+	gtk_frame_set_label_widget      (GTK_FRAME(frame3),
+                                             label1);
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
 	gtk_container_add(GTK_CONTAINER(frame3), vbox3);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox3), 4);
 
 	ckbCaseSensitive =
 	    gtk_check_button_new_with_label(_("Case Sensitive"));
@@ -555,14 +582,23 @@ void gui_create_search_sidebar(void)
 	gtk_widget_set_usize(ckbCaseSensitive, -2, 20);
 
 
-	frame4 = gtk_frame_new(_("Search Scope"));
+	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame4, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame4), 2);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame4),GTK_SHADOW_NONE);
+	
+	label1 = gtk_label_new(NULL); 
+	gtk_label_set_markup(GTK_LABEL(label1),
+                                     _("<b>Search Scope</b>"));
+	gtk_widget_show(label1);
+	gtk_frame_set_label_widget      (GTK_FRAME(frame4),
+                                             label1);
 
 	vbox4 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox4);
 	gtk_container_add(GTK_CONTAINER(frame4), vbox4);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox4), 4);
 
 	rbNoScope =
 	    gtk_radio_button_new_with_label(vbox4_group, _("No Scope"));
@@ -594,29 +630,40 @@ void gui_create_search_sidebar(void)
 			   FALSE, 0);
 	gtk_widget_set_usize(rbLastSearch, -2, 20);
 
-	frame5 = gtk_frame_new(_("Bounds"));
+	frame5 = gtk_frame_new(NULL);
 	gtk_widget_show(frame5);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame5, FALSE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame5), 2);
 	gtk_widget_hide(frame5);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame5),GTK_SHADOW_NONE);
+	
+	label1 = gtk_label_new(NULL); 
+	gtk_label_set_markup(GTK_LABEL(label1),
+                                     _("<b>Bounds</b>"));
+	gtk_widget_show(label1);
+	gtk_frame_set_label_widget      (GTK_FRAME(frame5),
+                                             label1);
 
 	table1 = gtk_table_new(2, 2, FALSE);
 	gtk_widget_show(table1);
 	gtk_container_add(GTK_CONTAINER(frame5), table1);
+	gtk_table_set_row_spacings(GTK_TABLE(table1), 3);
+	gtk_table_set_col_spacings(GTK_TABLE(table1), 3);
+	gtk_container_set_border_width (GTK_CONTAINER (table1), 8);
 
 	label1 = gtk_label_new(_("Lower"));
 	gtk_widget_show(label1);
 	gtk_table_attach(GTK_TABLE(table1), label1, 0, 1, 0, 1,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
+	gtk_misc_set_alignment(GTK_MISC(label1), 1.0, 0.5);
 
-	label2 = gtk_label_new(_("Upper "));
+	label2 = gtk_label_new(_("Upper"));
 	gtk_widget_show(label2);
 	gtk_table_attach(GTK_TABLE(table1), label2, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label2), 0, 0.5);
+	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 
 	entryLower = gtk_entry_new();;
 	gtk_widget_show(entryLower);
