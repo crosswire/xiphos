@@ -1,3 +1,10 @@
+2002-07-02  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added backend/sword_defs.h
+	* Bibletext, commentary, and dictlex panes are now
+	  created when needed not on startup.
+	
+
 2002-07-01  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed /backend/viewcomm.*
