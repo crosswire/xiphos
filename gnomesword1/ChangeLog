@@ -1,3 +1,8 @@
+2003-01-10  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added strip_words_in_red() to gnome/gtkhtml_display.c
+	* made bibletext_dialog nav toolbar look like main nav toolbar
+
 2002-12-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gui/_editor.h to gui/editor.h

@@ -35,6 +35,8 @@ void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 					GtkMenuCallback callback);
 void gui_remove_menu_items(gchar *startitem, gint numberofitems);
+GList *gui_fill_count_list(int count);
+void gui_free_count_list(GList *glist);
 	
 #ifdef __cplusplus
 }
