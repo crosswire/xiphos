@@ -25,7 +25,7 @@ extern "C" {
 #include <gnome.h>
 	
 #if USE_SHORTCUTBAR
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 	
 GtkWidget *create_menu1(void);
@@ -213,11 +213,7 @@ void on_cbtnShowCOMtabs_toggled(GtkToggleButton * togglebutton,
 				    gpointer user_data);
 void on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data);
-#if USE_SHORTCUTBAR
-void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
-				       GdkEvent * event,
-				       gint group_num, gint item_num);
-#endif /* USE_SHORTCUTBAR */
+
 void on_com_select_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_dict_select_activate(GtkMenuItem * menuitem,

@@ -14,5 +14,7 @@ INCLUDES =  \
      $(EXTRA_GNOME_CFLAGS)
 
 libgseditor_a_SOURCES =  \
+       gs_control_data.c \
+       gs_control_data.h \
        gs_editor.c \
        gs_editor.h 

@@ -24,8 +24,8 @@
  */
 
 
-#ifndef __GNOMESWORD_H_
-#define __GNOMESWORD_H_
+#ifndef __GS_EDITOR_H_
+#define __GS_EDITOR_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,15 +33,17 @@ extern "C" {
 
 #include <gnome.h>
 
-
 typedef struct _editor EDITOR;
 struct _editor {
-	GtkWidget *htmlwidget,
+	GtkWidget *vbox,
+		*htmlwidget,
 		*statusbar;
 	gboolean   note_editor;
 };
+
+
 	
-GtkWidget* create_editor (GtkWidget *app, GtkWidget *vbox, gboolean ispercom);	
+GtkWidget* create_StudyPad(GtkWidget *app, GtkWidget *vbox);	
 	
 #ifdef __cplusplus
 }

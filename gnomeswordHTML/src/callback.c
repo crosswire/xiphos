@@ -59,7 +59,7 @@
 #include <unistd.h>
 
 #if USE_SHORTCUTBAR
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 /*
@@ -513,7 +513,7 @@ on_textComments_button_release_event(GtkWidget * widget,
 void
 on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	static gboolean firsttime = TRUE;
+	//static gboolean firsttime = TRUE;
 	gboolean choice;
 	
 	choice = GTK_TOGGLE_BUTTON(togglebutton)->active;
@@ -902,14 +902,6 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 	}
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
-			      GdkEvent * event,
-			      gint group_num, gint item_num)
-{
-	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
-}
 
 
 //----------------------------------------------------------------------------------------------

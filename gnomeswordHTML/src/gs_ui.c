@@ -46,6 +46,7 @@
 #include "support.h"
 #include "gs_popup_cb.h"
 #include "gs_sword.h"
+#include "gs_shortcutbar.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
@@ -69,7 +70,7 @@ GtkWidget *htmlComments;
 GtkWidget *statusbarNE;
 GtkWidget *textComments;
 GList *cbBook_items=NULL;
-
+extern GtkWidget *pcHTML;
 
 gint openWidth = 800;
 gint openHight = 600;
@@ -341,7 +342,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 
 GtkWidget *create_mainwindow(void)
 {
-	//EDITOR ed_sp, ed_pc;
+	EDITOR ed;
 	GtkWidget *mainwindow;
 	GtkWidget *dock1;
 	GtkWidget *toolbar20;
@@ -410,7 +411,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *label58;
 	GtkWidget *hbox25;
 	GtkWidget *PCEditor;
-	GtkWidget *SPEditor;
+	GtkWidget *SPEditor, *swEDHTML;
 	gint i;
 	gchar *pathname;	
 	
@@ -1099,19 +1100,25 @@ GtkWidget *create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(hbox11), vbox8, TRUE, TRUE, 0);
 
        /***  personal comments editor  ***/
-
-	/*ed_pc.vbox = lookup_widget(mainwindow,"vbox8");
-	ed_pc.htmlwidget = gtk_html_new();
-	ed_pc.text = gtk_text_new(NULL, NULL);
-	ed_pc.statusbar = gtk_statusbar_new();
-	ed_pc.notebook = gtk_notebook_new();
-	ed_pc.note_editor = TRUE;*/
 	
-	PCEditor = create_editor (mainwindow,vbox8,TRUE);
-	gtk_widget_show(PCEditor);
-	/*statusbarNE = ed_pc.statusbar;
-	textComments = ed_pc.text;	*/	
+              swEDHTML = gtk_scrolled_window_new (NULL, NULL);
+  	gtk_widget_ref (swEDHTML);
+  	gtk_object_set_data_full (GTK_OBJECT (mainwindow), "swEDHTML", swEDHTML,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (swEDHTML);
+  	gtk_box_pack_start (GTK_BOX (vbox8), swEDHTML, TRUE, TRUE, 0);
+  	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swEDHTML), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
+  	pcHTML = gtk_html_new();
+	gtk_widget_ref(pcHTML);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
+				 "pcHTML",pcHTML ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(pcHTML);
+	gtk_container_add(GTK_CONTAINER(swEDHTML),
+			  pcHTML);
+	gtk_html_load_empty(GTK_HTML(pcHTML));
+  	
 	label85 = gtk_label_new("Comments Editor");
 	gtk_widget_ref(label85);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label85",
@@ -1196,17 +1203,12 @@ GtkWidget *create_mainwindow(void)
 /*************************************************************
 studypad editor
 *************************************************************/
-	/*ed_sp.vbox = vbox6;
-	ed_sp.htmlwidget = gtk_html_new();
-	ed_sp.text = gtk_text_new(NULL, NULL);
-	ed_sp.notebook = gtk_notebook_new();
-	ed_sp.statusbar = gtk_statusbar_new();
-	ed_sp.note_editor = FALSE;
-	htmltext3 = create_editor(mainwindow, ed_sp);	  
-	statusbar2 = ed_sp.statusbar;
-	text3 = ed_sp.text;   */
-	
-         SPEditor = create_editor (mainwindow,vbox6,FALSE);
+	/*ed.vbox = vbox6;
+	ed.htmlwidget = gtk_html_new();
+	ed.statusbar = gtk_statusbar_new();
+	ed.note_editor = FALSE;   */
+	SPEditor = create_StudyPad(mainwindow, vbox6);	
+	/*statusbarSP = ed.statusbar; */
 	gtk_widget_show(SPEditor);
 	
 	label41 = gtk_label_new("Study Pad");
