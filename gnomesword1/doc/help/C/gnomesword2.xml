@@ -215,8 +215,10 @@
 					<term>Menubar</term>
 					<listitem>
 						<para>
-						The menus on the menubar contain several commands which extend the use of <application>&app;</application>.
-						These include the StudyPad and advanced search functions.The menus also allow you to customize your use of 
+						The menus on the menubar contain several commands which extend the use of <application>&app;
+						</application>.
+						These include the StudyPad and advanced search functions.The menus also allow you to customize
+						your use of 
 						<application>&app;</application>.
 			        		</para>
 					</listitem>
@@ -295,52 +297,98 @@
 				       </mediaobject>
 			        </screenshot>
 			</figure>
-
 			<para>
-                        	 The first two buttons on the toolbar are toggle buttons. The first toggles the display 
-				 of the <guibutton>Book pane</guibutton>. The second toggles the display 
-				 of the <guibutton>Parallel View</guibutton>.
-				 When you press button toggles the dictionary view,enabling fast switching
-				 between the dictionary and the general books that you have installed
-				 on your system. The second icon/button switches between the main bible
-				 view and the parallel view. In order to utilize the parallel view
-				 correctly, please ensure that your SWORD module configuration for the
-				 parallel view is set up correctly.
-			</para>
-
-		 	<note>
-		   	<para>
-			   	 For more information on SWORD module configuration within <application>GnomeSword2</application>
-				 please consult the Preferences section of this document.
-		   	</para>
-			</note>
-
-			<para>
-		        	Next to the two toggle buttons is the current book,chapter
-			        and verse. Here you can select your book by simply clicking on
-			        the book box and selecting your book.You can also type the desired
-				book into the book box. You can increment and decrement the chapter
-				and verse values by clicking on the chapter or verse value boxes.
-				By changing the book, chapter or verse information via clicking on
-				their boxes, the changes will have immediate effect on your Bible
-				text. Next to these you will find a summarized version which
-				the user can edit manually. If the value is edited in the summarized
-				text box, the button on the right of it will transport you to your
-				desired destination.
-			</para>
-			<note>
-		        <para>
-			    	Please ensure that the summarized box has the correct book,chapter
-			   	and verse value otherwise your result might be unexpected.
-			</para>
-			</note>
-			<para>
-				The last two arrows on the far right of the toolbar en
-			        <application>GnomeSword2</application> is a Bible study and research tool based upon the "SWORD Project" libraries
-				 and the GNOME Desktop libraries.
-				 GnomeSword2 aims to provide a simple and clean user interface whilst providing a powerful
-				 tool allowing a personalized Bible study environment.
-			</para>
+					The <interface>Toolbar</interface> consists of the following functions:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							Dictionary View Toggle
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Parallel View Toggle
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bible Book Selector
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bible Chapter Selector
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bible Verse Selector
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bible Passage Summary
+						</para>
+					</listitem>
+					<listitem>
+						<para>					
+							History Forward/Backward Selector
+						</para>
+					</listitem>
+				</itemizedlist>
+			<sect3 id="gnomesword-toolbar-dictionary">
+				<title>Dictionary View Toggle</title>
+				<para>
+					Allows quick switching between dictionary and book modules currently installed.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-parallel">
+				<title>Parallel View Toggle</title>
+				<para>
+					Allows quick switching between single translation and multiple translation displays.
+				</para>		
+			</sect3>
+			<sect3 id="gnomesword-toolbar-book">
+				<title>Bible Book Selector</title>
+				<para>		
+					Allows quick selecting of biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-chapter">
+				<title>Bible Chapter Selector</title>
+				<para>
+					Allows quick selecting of biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-verse">
+				<title>Bible Verse Selector</title>
+				<para>
+					Allows quick selecting of biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-summary">
+				<title>Bible Passage Summary</title>
+				<para>
+					Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>. Changes only take effect once button on the right is clicked.
+				</para>
+				<warning>
+					<para>
+						Please ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
+						will be presented.
+					</para>
+				</warning>
+			</sect3>
+			<sect3 id="gnomeword-toolbar-history">
+				<title>History Forward/Backward Selector</title>
+				<para>
+					Allows quick and easy switching between current and previous passage selections. 
+				</para>
+			</sect3>
 
 		 </sect2>
 
@@ -404,14 +452,14 @@
 				<itemizedlist>
 					 <listitem>
 						<para>
-							right-click in the	<interface> Bible Translation Display didArea</interface>.In the popup menu choose
+							right-click in the	<interface> Bible Text Pane </interface>.In the popup menu choose
 							<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</guimenuitem></menuchoice>
 							and select your specific translation that you want to view.
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							 under the <guibutton>Modules</guibutton> option in the <interface>Shortbutbar</interface>,choose <menuchoice>
+							 under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose <menuchoice>
 							<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
 							and select your specific translation.
 						</para>
@@ -422,7 +470,7 @@
 			<sect3 id="gnomesword-bible-open-seperate">
 				<title>Opening A Seperate Bible Translation</title>
 				<para>
-					In order to view a Bible translation seperate from the <application>GnomeSword2</application> interface,simply:
+					In order to view a Bible translation separate from the <application>GnomeSword2</application> interface,simply:
 				</para>
 				<itemizedlist>
 					 <listitem>
@@ -434,7 +482,7 @@
 					</listitem>
 					<listitem>
 						<para>
-							 under the <guibutton>Modules</guibutton> option in the <interface>Shortbutbar</interface>,choose <menuchoice>
+							 under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose <menuchoice>
 							<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
 							.Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
 							option.
@@ -461,7 +509,21 @@
 				        </mediaobject>
 			        </screenshot>
 			</figure>
+			<para>
+				The <interface>Commentary Pane</interface> is where the commentary modules are displayed.This provides easy
+				reading,reference and  access to different commentaries currently installed. The passage viewed by the 
+				<interface>Commentary Pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
+				Text Pane</interface>,so in order to change to a different passage commentary, simply select the desired passage
+				on the <interface>Toolbar</interface>.
+			</para>
+			<note>
+				<para>
+					By changing to passage settings on the <interface>Toolbar</interface>,the contents in the 
+					<interface>Bible Text Pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	
+				</para>
+			</note>
 		</sect2>
+		
    </sect1>
 
 <!--   =============The Search Dialogs========================= -->
