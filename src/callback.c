@@ -180,14 +180,14 @@ void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 
 //----------------------------------------------------------------------------------------------
-void on_add_bookmark1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_add_quickmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	addBookmark(settings->app);
+	addQuickmark(settings->app);
 }
 
 //----------------------------------------------------------------------------------------------
 void
-on_edit_bookmarks1_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_edit_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (firstLE) {
 		listeditor = createListEditor();

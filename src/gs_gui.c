@@ -85,17 +85,17 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo bookmarks1_menu_uiinfo[] = {
+static GnomeUIInfo quickmarks_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, "Add Bookmark",
-	 "Add current verse to bookmarks menu",
-	 on_add_bookmark1_activate, NULL, NULL,
+	 GNOME_APP_UI_ITEM, "Add Quickmark",
+	 "Add current verse to Quickmarks menu",
+	 on_add_quickmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, "Edit Bookmarks",
-	 "Edit bookmarks list",
-	 on_edit_bookmarks1_activate, NULL, NULL,
+	 GNOME_APP_UI_ITEM, "Edit Quickmarks",
+	 "Edit Quickmarks",
+	 on_edit_quickmarks_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_GREEN,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
@@ -188,9 +188,9 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(file1_menu_uiinfo),
 	GNOMEUIINFO_MENU_EDIT_TREE(edit1_menu_uiinfo),
 	{
-	 GNOME_APP_UI_SUBTREE, "_Bookmarks",
+	 GNOME_APP_UI_SUBTREE, "_Quickmarks",
 	 NULL,
-	 bookmarks1_menu_uiinfo, NULL, NULL,
+	 quickmarks_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
@@ -389,25 +389,25 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(menubar1_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "bookmarks1",
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "quickmarks",
 				 menubar1_uiinfo[2].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(bookmarks1_menu_uiinfo[0].widget);
+	gtk_widget_ref(quickmarks_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app),
 				 "add_bookmark1",
-				 bookmarks1_menu_uiinfo[0].widget,
+				 quickmarks_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(bookmarks1_menu_uiinfo[1].widget);
+	gtk_widget_ref(quickmarks_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app),
-				 "edit_bookmarks1",
-				 bookmarks1_menu_uiinfo[1].widget,
+				 "edit_quickmarks",
+				 quickmarks_menu_uiinfo[1].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(bookmarks1_menu_uiinfo[2].widget);
+	gtk_widget_ref(quickmarks_menu_uiinfo[2].widget);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "separator4",
-				 bookmarks1_menu_uiinfo[2].widget,
+				 quickmarks_menu_uiinfo[2].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(menubar1_uiinfo[3].widget);
