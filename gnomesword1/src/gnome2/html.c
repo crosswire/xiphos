@@ -288,7 +288,6 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 	myurl = g_strdup(url);
 	buf = g_strdup(myurl);
 
-	g_warning(url);
 	mybuf = strstr(myurl, "class=");
 	if (mybuf) {
 		modbuf = strchr(mybuf, '=');
