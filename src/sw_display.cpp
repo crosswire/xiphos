@@ -438,11 +438,8 @@ void GtkHTMLEntryDisp::marksearchwords( GString *str )
 	g_free(searchbuf);
 }
 
-
-char IntDisplay(GList *modList)
+char IntDisplay(SETTINGS *s)
 {
-	GList 
-		*tmp = NULL;
 	gchar 
 		*utf8str,
 		*bgColor,
@@ -450,16 +447,21 @@ char IntDisplay(GList *modList)
 		buf[500], 
 		*tmpkey;
 	
-	bool evenRow = FALSE;
+	SWMgr 	*mgr;
+	
+	bool 
+		evenRow = FALSE;
+	
 	extern SWModule 
 		*curMod;
 	
-	tmp = modList;
-	tmp = g_list_first(tmp);
+	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	
+	SWModule *mod = mgr->Modules[curMod->Name()];
 	
 	tmpkey = g_strdup(settings->currentverse);
-	curMod->SetKey(tmpkey);
-	VerseKey *key = (VerseKey *) (SWKey *) *curMod;
+	mod->SetKey(tmpkey);
+	VerseKey *key = (VerseKey *) (SWKey *) *mod;
 	
 	beginHTML(settings->htmlInterlinear, TRUE);
 	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
@@ -467,15 +469,24 @@ char IntDisplay(GList *modList)
 			settings->bible_text_color, settings->link_color);
 	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
 	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-	
-	while(tmp != NULL) {
-		SWModule *m = (SWModule*)tmp->data;
-		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",m->Name());		
-		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-		displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-		tmp = g_list_next(tmp);		
-	}
-	
+
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+
+
 	sprintf(buf,"%s","</tr>");		
 	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
 	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
@@ -483,13 +494,11 @@ char IntDisplay(GList *modList)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !curMod->Error()); (*curMod)++) {
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !mod->Error()); (*mod)++) {
 		sprintf(buf,"%s","<tr valign=\"top\">");		
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
 		displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-		g_list_free(tmp);	
-		tmp = modList;
-		
+				
 		if(key->Verse() == curVerse)
 			textColor = settings->currentverse_color;
 		else 
@@ -505,8 +514,24 @@ char IntDisplay(GList *modList)
 			bgColor = "#f1f1f1";				
 		}
 		
-		while(tmp != NULL) {
-			SWModule *m = (SWModule*)tmp->data;
+		for(int i=0;i< 5; i++) {
+			SWModule *m;
+			
+			switch(i) {
+				case 0: m = mgr->Modules[s->Interlinear1Module];
+					break;
+				case 1: m = mgr->Modules[s->Interlinear2Module];
+					break;
+				case 2: m = mgr->Modules[s->Interlinear3Module];
+					break;
+				case 3: m = mgr->Modules[s->Interlinear4Module];
+					break;
+				case 4: m = mgr->Modules[s->Interlinear5Module];
+					break;
+			}
+			
+			mgr->setGlobalOption("Strong's Numbers", "Yes");
+			
 			m->SetKey(key);
 			sprintf(buf,
 				"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
@@ -523,7 +548,6 @@ char IntDisplay(GList *modList)
 			sprintf(buf, "%s", "</font></td>");	
 			utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);			
 			displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-			tmp = g_list_next(tmp);			
 		}	
 		sprintf(buf,"%s","</tr>");		
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
@@ -536,9 +560,8 @@ char IntDisplay(GList *modList)
 	endHTML(settings->htmlInterlinear);	
 	sprintf(buf, "%d", curVerse);
 	gotoanchorHTML(settings->htmlInterlinear, buf);
-	curMod->SetKey(tmpkey);
 	g_free(tmpkey);
-	g_list_free(tmp);
+	delete mgr;		//-- delete Sword manager   
 	return 0;
 }
 

@@ -31,8 +31,6 @@ COMMON_SOURCE =  \
     gs_editor_toolbar.h \
     gs_file.c \
     gs_file.h \
-    gs_gbs.c \
-    gs_gbs.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \
@@ -111,7 +109,8 @@ SPELLING_SOURCE =  \
     char_table.h 
 
 EXTRA_DIST = \
-    $(SPELLING_SOURCE)
+    $(SPELLING_SOURCE)\
+    tt.xpm
     
 gnomesword_LDADD = \
     $(GNOME_LIBDIR) \

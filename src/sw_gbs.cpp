@@ -47,10 +47,10 @@
 #include "sw_display.h"
 #include "gs_editor.h"
 #include "sw_gbs.h"
-#include "gs_gbs.h"
+#include "gs_html.h"
 
 
-extern GSHTMLEditorControlData *gbsecd;
+/***  externs  ***/
 extern GdkPixmap *pixmap1;
 extern GdkPixmap *pixmap2;
 extern GdkPixmap *pixmap3;
@@ -60,48 +60,15 @@ extern GdkBitmap *mask3;
 extern GList 
 	*bookmods,
 	*sbbookmods;
-extern GtkCTreeNode *current_node;	
+extern SETTINGS *settings;
 
+/***  globals  ***/
+GtkCTreeNode *current_node;
 SWModule *curbookMod;
 SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
-
-/******************************************************************************
- * check to see if mod is writable
- ******************************************************************************/
- /*
-bool isWritableSW_GBS(gchar *modName)
-{
-	gchar buf[255];
-	bool retval = false;
-		
-	sprintf(buf, "%s/modops.conf", gSwordDir);
-	SWConfig module_iswritable(buf);
-	module_iswritable.Load();	
-	retval = module_iswritable[modName]["IsWritable"];
-	
-	return retval;	
-}
-*/
-
-/***    ***/
-static bool changeBookMod(GSHTMLEditorControlData *ecd, gchar *newbook)
-{
-	ModMap::iterator it;	//-- module iterator		     
-	it = swmgrBook->Modules.find(newbook);	//-- find module (modName)
-	
-	if (it != swmgrBook->Modules.end ()) {
-		curbookMod = (*it).second;		
-		gint context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(ecd->statusbar),
-					 "GnomeSWORD");
-		gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
-		sprintf(ecd->filename,"%s",(gchar*)curbookMod->Name());
-		gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
-			   ecd->filename);
-		return true;
-	}
-	return false;
-}
+list <SWDisplay *> displays;	// so we can delete each display we create
+/***   ***/
 
 static TreeKeyIdx* getTreeKey(SWModule *mod)
 {
@@ -112,411 +79,256 @@ static TreeKeyIdx* getTreeKey(SWModule *mod)
 		return 0;
 }
 
-static void appendChild(TreeKeyIdx *treeKey, gchar *text) 
+static
+void addbooktoCTree(GtkWidget *ctree, gchar *bookName) {
+	
+	GtkCTreeNode * rootnode;
+	gchar * buf[3];	
+	
+	buf[0] = bookName;
+	buf[1] = bookName;
+	buf[2] = "0";
+	rootnode = gtk_ctree_insert_node(GTK_CTREE(ctree),
+			NULL, NULL, buf, 3, pixmap1,
+			mask1, pixmap2, mask2, FALSE,
+			FALSE);
+	
+}
+static
+void setnodeinfoGS_GBS(SETTINGS *s, NODEDATA *data)
 {
-	treeKey->appendChild();
-	treeKey->setLocalName(text);
-	treeKey->save();
+	gtk_ctree_set_node_info(GTK_CTREE(s->ctree_widget_books),
+		data->parent,
+		*data->buf,
+		3,
+		data->pixmap1,
+		data->mask1,
+		data->pixmap2, 
+		data->mask2, 
+		data->is_leaf,
+		data->expanded);	
+}
+static
+GtkCTreeNode *addnodeGS_GBS(SETTINGS *s, NODEDATA *data)
+{
+	GtkCTreeNode *retval;
+	
+	retval = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
+			data->parent,
+			data->sibling,  
+			data->buf, 
+			3, 
+			data->pixmap1,
+			data->mask1,
+			data->pixmap2, 
+			data->mask2, 
+			data->is_leaf, 
+			data->expanded);
+	return retval;
 }
 
-static void appendSibling(TreeKeyIdx *treeKey, gchar *text) {
-	if (treeKey->getOffset()) {
-		treeKey->append();
-		treeKey->setLocalName(text);
-		treeKey->save();
-	}
-	else	cout << "Can't add sibling to root node\n";
-}
 
-void addchildSW_GBS(SETTINGS *s, gchar *name)
-{
-	gchar *bookname, *nodename, *offset;
-	static gchar *lastbook = "oldbook";
-	gchar tmpbuf[256];	
-	NODEDATA nodedata,
-		*p_nodedata;
+static
+GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count) {
 	
-	name = g_strchomp(name); //-- remove trailing spaces
-	p_nodedata = &nodedata;	
+	GtkWidget *hpanedGBS;
+	GtkWidget *scrolledwindowCTREE_GBS;
+	GtkWidget *ctreeGBS;
+	GtkWidget *label;
+	GtkWidget *frameGBS;
+	GtkWidget *scrolledwindowHTML_GBS;	
+	GtkWidget *htmlGBS;
 	
-	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[0])->text;	
-	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[1])->text;	
-	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[2])->text;
-				     
-	/** if we have changed to a different book **/
-	if(strcmp(lastbook,bookname)){
-		/**  change curbookMod to match  **/	
-		if(changeBookMod(gbsecd, bookname))
-			lastbook = bookname;
-		else return;
-	}	
 	
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
-	treeKey->setOffset(strtoul(offset,NULL,0));
+	hpanedGBS = gtk_hpaned_new ();
+	gtk_widget_ref (hpanedGBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "hpanedGBS", hpanedGBS,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (hpanedGBS);
+	gtk_container_add (GTK_CONTAINER (s->notebookGBS), hpanedGBS);
+	gtk_paned_set_position (GTK_PANED (hpanedGBS), 189);
 	
-	p_nodedata->parent = current_node;
-	p_nodedata->sibling = NULL;	
-	p_nodedata->buf[0] = nodename;
-	p_nodedata->buf[1] = bookname;
-	p_nodedata->buf[2] = offset;
-	p_nodedata->pixmap1 = pixmap1;
-	p_nodedata->mask1 = mask1;
-	p_nodedata->pixmap2 = pixmap2;
-	p_nodedata->mask2 = mask2;
-	p_nodedata->is_leaf = FALSE;
-	p_nodedata->expanded = TRUE;
+	scrolledwindowCTREE_GBS = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_ref (scrolledwindowCTREE_GBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), 
+			"scrolledwindowCTREE_GBS", 
+			scrolledwindowCTREE_GBS,
+			(GtkDestroyNotify) gtk_widget_unref);			
+	gtk_widget_show (scrolledwindowCTREE_GBS);
+	gtk_paned_pack1 (GTK_PANED (hpanedGBS), scrolledwindowCTREE_GBS, FALSE, TRUE);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowCTREE_GBS), 
+			GTK_POLICY_NEVER, 
+			GTK_POLICY_AUTOMATIC);
 	
-	setnodeinfoGS_GBS(s, p_nodedata);
-	appendChild(treeKey, name);
+	ctreeGBS = gtk_ctree_new (3, 0);
+	gtk_widget_ref (ctreeGBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "ctreeGBS", ctreeGBS,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (ctreeGBS);
+	gtk_container_add (GTK_CONTAINER (scrolledwindowCTREE_GBS), ctreeGBS);
+	gtk_container_set_border_width (GTK_CONTAINER (ctreeGBS), 1);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 0, 280);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 1, 80);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 2, 20);
+	gtk_clist_column_titles_hide (GTK_CLIST (ctreeGBS));
 	
-	treeKey->firstChild(); 
-	sprintf(tmpbuf,"%lu",treeKey->getOffset());
+	label = gtk_label_new (_("label"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 0, label);
 	
-	p_nodedata->buf[0] = name;	
-	p_nodedata->buf[2] = tmpbuf;
-	p_nodedata->pixmap1 = pixmap3;
-	p_nodedata->mask1 = mask3;
-	p_nodedata->pixmap2 = NULL;
-	p_nodedata->mask2 = NULL;
-	p_nodedata->is_leaf = TRUE;
-	p_nodedata->expanded = FALSE;
+	label = gtk_label_new (_("label200"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 1, label);
 	
-	current_node = addnodeGS_GBS(s, p_nodedata);
-}
-
-void addSiblingSW_GBS(SETTINGS *s, gchar *name)
-{
-	gchar *bookname, *offset;
-	static gchar *lastbook = "oldbook";
-	gchar tmpbuf[256];
-	NODEDATA nodedata,
-		*p_nodedata;
+	label = gtk_label_new (_("label"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 2, label);
 	
-	name = g_strchomp(name); //-- remove trailing spaces
-	p_nodedata = &nodedata;		
+	frameGBS = gtk_frame_new (NULL);
+	gtk_widget_ref (frameGBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "frameGBS", frameGBS,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (frameGBS);
+	gtk_paned_pack2 (GTK_PANED (hpanedGBS), frameGBS, TRUE, TRUE);
 	
-	p_nodedata->parent = GTK_CTREE_ROW(current_node)->parent;
-	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[1])->text;	
-	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[2])->text;
-				     
-	/** if we have changed to a different book **/			     
-	if(strcmp(lastbook,bookname)){
-		/**  change curbookMod to match  **/
-		if(changeBookMod(gbsecd, bookname))
-			lastbook = bookname;
-		else return;
-	}	
+	scrolledwindowHTML_GBS = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_ref (scrolledwindowHTML_GBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), 
+			"scrolledwindowHTML_GBS", 
+			scrolledwindowHTML_GBS,
+			(GtkDestroyNotify) gtk_widget_unref);			
+	gtk_widget_show (scrolledwindowHTML_GBS);
+	gtk_container_add (GTK_CONTAINER (frameGBS), scrolledwindowHTML_GBS);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowHTML_GBS), 
+			GTK_POLICY_AUTOMATIC, 
+			GTK_POLICY_AUTOMATIC);
 	
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
-	treeKey->setOffset(strtoul(offset,NULL,0));
-	appendSibling(treeKey, name);
-	treeKey->nextSibling();
-	sprintf(tmpbuf,"%lu",treeKey->getOffset());
+	htmlGBS = gs_new_html_widget(s);	
+	gtk_widget_ref(htmlGBS);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "htmlGBS", htmlGBS,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlGBS);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
+			  htmlGBS);
+			  
+	label = gtk_label_new ((gchar*)mod->Name());
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->notebookGBS), 
+		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->notebookGBS), count++), label);
 	
-	p_nodedata->sibling = NULL; /** must be null to keep correct tree order **/	
-	p_nodedata->buf[0] = name;
-	p_nodedata->buf[1] = bookname;	
-	p_nodedata->buf[2] = tmpbuf;
-	p_nodedata->pixmap1 = pixmap3;
-	p_nodedata->mask1 = mask3;
-	p_nodedata->pixmap2 = NULL;
-	p_nodedata->mask2 = NULL;
-	p_nodedata->is_leaf = TRUE;
-	p_nodedata->expanded = FALSE;
+	gtk_signal_connect(GTK_OBJECT(ctreeGBS), "select_row",
+			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row), GTK_CTREE(ctreeGBS));
 	
-	current_node = addnodeGS_GBS(s, p_nodedata);	
+	SWDisplay *disp = new EntryDisp(htmlGBS);
+	mod->Disp(disp);
+	displays.insert(displays.begin(), disp);
+	addbooktoCTree(ctreeGBS, (gchar*)mod->Name());
+	return hpanedGBS;
 }
 
 void setupSW_GBS(SETTINGS *s)
 {
+	ModMap::iterator 
+		it;	//-- iteratior
+	gint count = 0;
+	
 	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
-	curbookMod = NULL;
-	bookDisplay = 0;
-	bookDisplay = new EntryDisp(s->htmlBook);
+	displays.clear();	
+	bookmods = NULL;	
+	sbbookmods = NULL;
+	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), "Generic Book")) {  
+			//curbookMod = (*it).second;
+			bookmods = g_list_append(bookmods, (*it).second->Name());
+			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
+			createGBS_Pane((*it).second, s, count) ;
+		}
+	}
 }
 
 void shutdownSW_GBS(void)
 {
+	list <SWDisplay *>::iterator it;
+	
 	g_list_free(bookmods);
 	g_list_free(sbbookmods);
 	delete swmgrBook;
-	if (bookDisplay)
-		delete bookDisplay;
-}
-
-void loadBookListSW_GBS(SETTINGS *s)
-{	
-	ModMap::iterator 
-		it;	//-- iteratior
-	GList *books;
-	
-	g_list_free(bookmods);
-	g_list_free(sbbookmods);
-	bookmods = NULL;	
-	sbbookmods = NULL;
-	books = NULL;
-	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Generic Book")) {  
-			curbookMod = (*it).second;
-			bookmods = g_list_append(bookmods, curbookMod->Name());
-			books = g_list_append(books, curbookMod->Name());
-			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
-			curbookMod->Disp(bookDisplay);
-		}
-	}
-	addbooktoCTreeGS_GBS(s, books);
-	g_list_free(books);
-}
-
-//-------------------------------------------------------------------------------------------
-void savebookSW_GBS(gchar *buf)	//-- save personal comments
-{
-	if(buf)
-		*curbookMod << (const char *) buf;	//-- save note!
-}
-
-
-static void createModuleConf(gchar *bookName, gchar *fileName)
-{
-	extern gchar *homedir;
-	gchar buf[255], pathbuf[255];
-
-	sprintf(buf, "%s/.sword/mods.d/%s.conf", homedir, fileName);
-	SWConfig module_conf(buf);
-	
-	sprintf(pathbuf,"./modules/genbook/rawbook/%s/%s",fileName,fileName);
-	module_conf[bookName]["DataPath"] = pathbuf;
-	module_conf[bookName]["ModDrv"] = "RawGenBook";	
-	module_conf[bookName]["BlockType"] = "BOOK";	
-	module_conf[bookName]["Version"] = "1.0";	
-	module_conf[bookName]["SourceType"] = "HTML";	
-	module_conf[bookName]["Lang"] = "en";	
-	module_conf[bookName]["Description"] = "A GBS book";	
-	module_conf[bookName]["About"] = bookName;		
-	
-	module_conf.Save();	
-}
-
-static bool createBookDir(gchar *dir)
-{
-	if ((mkdir(dir, S_IRWXU)) == 0) {
-		return true;
-	}
- 	else{
-		cout << "could not create Book Dir\n";
-		return false;
-	}
-}
-
-static void setEntryText(RawGenBook *book, gchar *text) 
-{
-	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
-	if (treeKey->getOffset()) {
-		(*book) << text;
-	}
-	else	cout << "Can't add entry text to root node\n";
-}
-
-void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *fileName)
-{
-	extern gchar 
-		*homedir;
-	gchar 
-		*buf[3],
-		tmpbuf[256];
-	string 
-		bookpath;
-	
-	fileName = g_strchomp(fileName); //-- remove trailing spaces
-	fileName = g_strdelimit(fileName," /*?|",'_'); //-- remove chars from filename
-	bookName = g_strchomp(bookName); //-- remove trailing spaces
-
-	buf[0] = bookName;
-	buf[1] = fileName;
-	
-	bookpath = "/.sword/modules/genbook/rawbook/";
-	bookpath = homedir + bookpath;
-	bookpath = bookpath + fileName;
-	
-	if(createBookDir((gchar*)bookpath.c_str())){
-		bookpath = bookpath + "/" + fileName;
-		RawGenBook::createModule((gchar*)bookpath.c_str());
-		createModuleConf(bookName,fileName);
-	}
-	
-	RawGenBook *book = new RawGenBook((gchar*)bookpath.c_str());
-	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
-	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
-	appendChild(treeKey, bookName);
-	treeKey->firstChild();
-	setEntryText(book, bookName);
-	sprintf(tmpbuf,"%lu",treeKey->getOffset());
-	buf[2] = tmpbuf;
-	current_node = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
-				current_node, NULL, buf, 3,
-				pixmap1, mask1, pixmap2,
-				mask2, FALSE, FALSE);
-	
-	delete book;
-	swmgrBook->Load();
-	loadBookListSW_GBS(s);
-}
-
-void changeNodeNameSW_GBS(SETTINGS *s, gchar *name)
-{
-	gchar *bookname, *offset;
-	static gchar *lastbook = "oldbook";
-	gchar tmpbuf[256];	
-	NODEDATA nodedata,
-		*p_nodedata;
-	
-	name = g_strchomp(name); //-- remove trailing spaces
-	p_nodedata = &nodedata;	
-		
-	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[1])->text;	
-	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[2])->text;
-				     
-	/** if we have changed to a different book **/
-	if(strcmp(lastbook,bookname)){	
-		/**  change curbookMod to match  **/
-		if(changeBookMod(gbsecd, bookname))
-			lastbook = bookname;
-		else return;
-	}	
-	
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
-	treeKey->setOffset(strtoul(offset,NULL,0));	
-	treeKey->setLocalName(name);
-	treeKey->save();
-	
-	p_nodedata->parent = current_node;
-	p_nodedata->sibling = NULL;	
-	p_nodedata->buf[0] = name;
-	p_nodedata->buf[1] = bookname;
-	p_nodedata->buf[2] = offset;
-	if(treeKey->hasChildren()){
-		p_nodedata->pixmap1 = pixmap1;
-		p_nodedata->mask1 = mask1;
-		p_nodedata->pixmap2 = pixmap2;
-		p_nodedata->mask2 = mask2;
-		p_nodedata->is_leaf = FALSE;
-		p_nodedata->expanded = FALSE;
-	} else {
-		p_nodedata->pixmap1 = pixmap3;
-		p_nodedata->mask1 = mask3;
-		p_nodedata->pixmap2 = NULL;
-		p_nodedata->mask2 = NULL;
-		p_nodedata->is_leaf = TRUE;
-		p_nodedata->expanded = FALSE;
-	}	
-	setnodeinfoGS_GBS(s, p_nodedata);	
-}
-
-/***  does nothing yet ****fixme****  ***/
-gint deleteNodeSW_GBS(SETTINGS *s)
-{
-	gchar *bookname, *offset;
-	static gchar *lastbook = "oldbook";
-	
-	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[1])->text;	
-	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
-				     cell[2])->text;
-				     
-	/** if we have changed to a different book **/			     
-	if(strcmp(lastbook,bookname)){
-		/**  change curbookMod to match  **/
-		if(changeBookMod(gbsecd, bookname))
-			lastbook = bookname;
-		else return 0;
-	}	
-	
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
-	treeKey->setOffset(strtoul(offset,NULL,0));
-	//curbookMod->deleteEntry();
-	//treeKey->remove();
-	//treeKey->save();
-	return 0;
+	for (it = displays.begin(); it != displays.end(); it++)
+		delete *it;
 }
 
 void
-on_ctreeBooks_select_row(GtkCList * clist,
-		    	gint row,
-		    	gint column, 
-			GdkEvent * event, 
-			SETTINGS *s)
+on_ctreeGBS_select_row(GtkCList * clist,
+		    gint row,
+		    gint column, 
+		GdkEvent * event, 
+		GtkCTree *ctree)
 {	
 	gchar 
 		*bookname, 
 		*nodename, 
-		*offset;
+		*offset,
+		*text[3];
+	
 	GtkCTreeNode 
 		*treeNode;
+	
 	gboolean 
 		is_leaf = false;
-	gint 
-		iswritable = 0;
+	
 	static gchar 
 		*lastbook = "oldbook";	
 	
-	treeNode = gtk_ctree_node_nth(GTK_CTREE(s->ctree_widget_books), row);
+	ModMap::iterator it;	
+	
+	treeNode = gtk_ctree_node_nth(ctree, row);
+	settings->ctree_widget_books = GTK_WIDGET(ctree);	
 	current_node = treeNode;
 	
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[0])->text;	
+	g_warning("nodename = %s",nodename);
+	
 	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[1])->text;	
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[2])->text;
 				     
-	/** if we have changed to a different book **/			     
-	if(strcmp(lastbook,bookname)){
-		/**  change curbookMod to match  **/
-		if(changeBookMod(gbsecd, bookname))
-			lastbook = bookname;
-		else 
-			return;	
+	if (swmgrBook) {
+		it = swmgrBook->Modules.find(bookname);
+		if (it != swmgrBook->Modules.end()) {
+			TreeKeyIdx *treeKey =  getTreeKey((*it).second);
+			TreeKeyIdx treenode = *treeKey;
+			treenode.setOffset(strtoul(offset,NULL,0));
+	
+			//g_warning("Lang = %s" ,(const char *)curbookMod->getConfigEntry("Lang"));
+			/** if not root node then display **/
+			if(treenode.getOffset() > 0) {	
+				(*it).second->SetKey(treenode);
+				(*it).second->KeyText(); //snap to entry
+				(*it).second->Display();
+			}
+				
+			/** fill ctree node with children **/
+			if((GTK_CTREE_ROW(treeNode)->children == NULL)&&(!GTK_CTREE_ROW(treeNode)->is_leaf)){
+				load_book_tree(settings, treeNode, bookname,nodename,strtoul(offset,NULL,0));	
+				gtk_ctree_expand(ctree, treeNode);
+			}
+		}
 	}
-	
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
-	TreeKeyIdx treenode = *treeKey;
-	treenode.setOffset(strtoul(offset,NULL,0));
-	//if((const char *)curbookMod->getConfigEntry("Description"))
-		//g_warning("Description");
-		//g_warning("Description = %s" ,(const char *)curbookMod->getConfigEntry("Description"));
-	
-	if(!curbookMod->isWritable()) 
-		iswritable = 0;
-	else
-		iswritable = 1;
-		
-	/** if not root node then display **/
-	if(treenode.getOffset() > 0) {	
-		curbookMod->SetKey(treenode);
-		curbookMod->KeyText(); //snap to entry
-		curbookMod->Display();
-	}
-	
-	else {
-		// let's display the module about information for the root node
-		showmoduleinfoSWORD(curbookMod->Name(), TRUE);
-		if(iswritable)
-			iswritable = 2;
-	}
-	
-	setitemssensitivityGS_GBS(gbsecd, iswritable);
-	/** fill ctree node with children **/
-	if((GTK_CTREE_ROW(treeNode)->children == NULL)&&(!GTK_CTREE_ROW(treeNode)->is_leaf)){
-		load_book_tree(s, treeNode, bookname,nodename,strtoul(offset,NULL,0));	
-		gtk_ctree_expand(GTK_CTREE(s->ctree_widget_books), treeNode);
-	}	
 }
 
 
@@ -592,10 +404,8 @@ void load_book_tree(SETTINGS *s,
 {
 	ModMap::iterator it;	//-- module iterator
 		 
-	it = swmgrBook->Modules.find(bookName);	//-- find module (modName)
-	curbookMod = (*it).second;
-			
-	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);	
+	it = swmgrBook->Modules.find(bookName);	//-- find module (modName)			
+	TreeKeyIdx *treeKey =  getTreeKey((*it).second);	
 	
 	if (treeKey) {
 		TreeKeyIdx root = *treeKey;	
@@ -610,3 +420,5 @@ void load_book_tree(SETTINGS *s,
 	
 	
 }
+
+
