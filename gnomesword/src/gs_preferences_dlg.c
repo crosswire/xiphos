@@ -778,8 +778,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cmbEntryTextSize);
 	gtk_tooltips_set_tip(tooltips, cmbEntryTextSize,
-			     _
-			     ("Zero is base font size Go up or down from there"),
+			     _("Zero is base font size Go up or down from there"),
 			     NULL);
 	gtk_entry_set_text(GTK_ENTRY(cmbEntryTextSize),
 			   _(s->bible_font_size));
@@ -860,8 +859,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cmbEentryVNSize);
 	gtk_tooltips_set_tip(tooltips, cmbEentryVNSize,
-			     _
-			     ("Zero is base font size Go up or down from there"),
+			     _("Zero is base font size Go up or down from there"),
 			     NULL);
 	gtk_entry_set_text(GTK_ENTRY(cmbEentryVNSize), s->verse_num_font_size);
 
@@ -1074,8 +1072,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox35), btnSetToGSDefaults, FALSE,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, btnSetToGSDefaults,
-			     _
-			     ("Use GnomeSword defaults for all settings on this page"),
+			     _("Use GnomeSword defaults for all settings on this page"),
 			     NULL);
 	gtk_button_set_relief(GTK_BUTTON(btnSetToGSDefaults),
 			      GTK_RELIEF_HALF);
@@ -1122,8 +1119,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 
 	rbtnUsedefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-					    _
-					    ("Yes, use defaults that I select"));
+					    _("Yes, use defaults that I select"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnUsedefaults));
 	gtk_widget_ref(rbtnUsedefaults);
@@ -1137,8 +1133,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-					    _
-					    ("No, use settings saved\non last GnomeSword run"));
+					    _("No, use settings saved\non last GnomeSword run"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_ref(rbtnNoDefaults);
@@ -2009,7 +2004,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   (on_btnPropertyboxCancel_clicked), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSettings), "tooltips", tooltips);
 	groupnum =
-	    add_sb_group2((EShortcutBar *) shortcut_bar, "Preferences");
+	    add_sb_group2((EShortcutBar *) shortcut_bar, _("Preferences"));
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
 			   NULL);
@@ -2029,31 +2024,31 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				     groupnum, E_ICON_BAR_LARGE_ICONS);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, shortcut_types[0],
-				  "Font Colors and Sizes");
+				  _("Font Colors and Sizes"));
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, shortcut_types[1],
-				  "Misc Interface Settings");
+				  _("Misc Interface Settings"));
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, shortcut_types[2],
-				  "Sword Modules");
+				  _("Sword Modules"));
 #else /* USE_OLD_GAL */
 	pathname = gnome_pixmap_file("gnome-ccwindowmanager.png");
 	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, "fonts",
-				  "Font Colors and Sizes",
+				  _("Font Colors and Sizes"),
 				  icon_pixbuf);
 	pathname = gnome_pixmap_file("gnome-settings.png");
 	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, "misc interface",
-				  "Misc Interface Settings",
+				  _("Misc Interface Settings"),
 				  icon_pixbuf);
 	pathname = gnome_pixmap_file("gdict.png");
 	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, "Sword Mods",
-				  "Sword Modules",
+				  _("Sword Modules"),
 				  icon_pixbuf);	
 #endif /* USE_OLD_GAL */
 	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,

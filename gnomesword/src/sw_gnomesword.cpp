@@ -193,7 +193,7 @@ void initSWORD(GtkWidget * mainform)
 	sbbiblemods = NULL;
 	sbcommods = NULL;
 	sbdictmods = NULL;
-
+	
 	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
 	NEtext = lookup_widget(mainform, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
@@ -207,6 +207,8 @@ void initSWORD(GtkWidget * mainform)
 	compages = 0;
 	dictpages = 0;
 
+	initRenderFiltersUTIL();
+	
 	if (settings->showsplash) {
 		while (gtk_events_pending())
 			gtk_main_iteration();
@@ -573,6 +575,44 @@ void morphsSWORD(gint window, gboolean choice)
 		break;
 	}
 }
+
+/*******************************************************************************
+ * toggle hebrew points on and off
+ * window - the window to effect - text or interlinear
+ * choice - true = on, false = off
+ ******************************************************************************/
+void hebrewpointsSWORD(gint window, gboolean choice)
+{
+	switch (window) {
+	case 0:		//--  main text window     
+		if (choice) {
+			mainMgr->setGlobalOption("Hebrew Vowel Points",
+						 "On");
+		} else {
+			mainMgr->setGlobalOption("Hebrew Vowel Points",
+						 "Off");
+		}
+		//-- settings->morphs = choice;	//-- store choice in settings
+		if (havebible) {
+			curMod->Display();	//-- we need to show change
+		}
+		break;
+	case 1:		//-- interlinear window   
+		if (choice) {
+			mainMgr1->setGlobalOption("Hebrew Vowel Points",
+						  "On");
+		} else {
+			mainMgr1->setGlobalOption("Hebrew Vowel Points",
+						  "Off");
+		}
+		//-- settings->morphsint = choice;	//-- store choice in settings
+		if (havebible) {
+			updateinterlinearpage();
+		}
+		break;
+	}
+}
+
 
 
 /*******************************************************************************

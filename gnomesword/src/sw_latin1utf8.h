@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LATIN1UTF8_H
-#define LATIN1UTF8_H
+#ifndef SW_LATIN1UTF8_H
+#define SW_LATIN1UTF8_H
 
 #include <swfilter.h>
 
