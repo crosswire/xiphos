@@ -27,7 +27,6 @@ libgui_a_SOURCES =  \
     cipher_key_dialog.c \
     commentary_dialog.c \
     commentary.c \
-    commentary_find.c \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \
@@ -37,9 +36,9 @@ libgui_a_SOURCES =  \
     editor_spell.c \
     editor_toolbar.c \
     fileselection.c \
+    find_dialog.c \
     gbs.c \
     gbs_dialog.c \
-    gbs_find.c \
     gnomesword.c \
     gtkhtml_display.c \
     gui.c \
@@ -47,7 +46,6 @@ libgui_a_SOURCES =  \
     html.c \
     interlinear.c \
     interlinear_dialog.c \
-    link_dialog.c \
     main_window.c \
     main_menu.c \
     percomm.c \

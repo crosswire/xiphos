@@ -1450,14 +1450,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gchar title[256];
 	
 	sprintf(title,"%s - %s",vt->t->mod_name, _("GnomeSword"));
-/*
-	vt->dialog = gnome_dialog_new(title, NULL);
-	gtk_object_set_data(GTK_OBJECT(vt->dialog), "vt->dialog",
-			    vt->dialog);
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 370, 412);
-	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
-			      FALSE);
-*/			      
+			      
 	vt->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
 	    
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
@@ -1466,13 +1459,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 335, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
-	/*
-	
-	dialog_vbox14 = GNOME_DIALOG(vt->dialog)->vbox;
-	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dialog_vbox14",
-			    dialog_vbox14);
-	gtk_widget_show(dialog_vbox14);
-*/
+
 	vbox33 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox33);
 	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vbox33",
@@ -1481,10 +1468,6 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_widget_show(vbox33);
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
 	
-	/*
-	gtk_box_pack_start(GTK_BOX(dialog_vbox14), vbox33, TRUE, TRUE,
-			   0);
-	*/
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -1705,31 +1688,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_widget_show (vt->statusbar);
 	gtk_box_pack_start (GTK_BOX (vbox33), vt->statusbar, FALSE, FALSE, 0);
 	
-	
-	
-/*	
-	dialog_action_area14 = GNOME_DIALOG(vt->dialog)->action_area;
-	gtk_object_set_data(GTK_OBJECT(vt->dialog),
-			    "dialog_action_area14",
-			    dialog_action_area14);
-	gtk_widget_show(dialog_action_area14);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area14),
-				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area14),
-				   8);
 
-	gnome_dialog_append_button(GNOME_DIALOG(vt->dialog),
-				   GNOME_STOCK_BUTTON_CLOSE);
-	vt->btn_close =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(vt->dialog)->buttons)->
-		       data);
-	gtk_widget_ref(vt->btn_close);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->btn_close",
-				 vt->btn_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->btn_close);
-	GTK_WIDGET_SET_FLAGS(vt->btn_close, GTK_CAN_DEFAULT);
-*/
 	
 	gtk_signal_connect (GTK_OBJECT (vt->dialog), "destroy",
                       GTK_SIGNAL_FUNC (dialog_destroy),
