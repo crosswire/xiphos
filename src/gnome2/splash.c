@@ -29,9 +29,8 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkwindow.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-//#include <gal/util/e-util.h>
 
-#ifdef USE_GTKHTML30
+
 #include "main/settings.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
@@ -573,5 +572,3 @@ void gui_splash_done()
 		gtk_widget_destroy(splash);
 	}
 }
-	
-#endif
