@@ -1,3 +1,10 @@
+2004-02-12  Terry <tbiggs@users.sf.net>
+
+	* add sword filters to /backend until the changes are added to the SWORD
+	  project filters.
+	* completely reworked gnome2/bibletext.c
+	
+
 2004-02-07  Terry <tbiggs@users.sf.net>
 
 	* added sword url handler to gnome2/utilities.c

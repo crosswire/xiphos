@@ -289,7 +289,7 @@ static void on_text_showtabs_activate(GtkMenuItem * menuitem,
 		xml_set_value("GnomeSword", "tabs", "bible", "0");
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
-	gui_set_text_frame_label(t);
+//	gui_set_text_frame_label(t);
 }
 
 
@@ -744,7 +744,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-
+/*
 	if (t->is_dialog)
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 			lookup_selection_menu,
@@ -755,7 +755,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 			lookup_selection_menu,
 			(GCallback)
 			gui_lookup_bibletext_selection);
-
+*/
 	/*
 	 * if module has cipher key include this item
 	 */

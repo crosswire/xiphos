@@ -25,7 +25,7 @@
 #include <gnome.h>
 //#include "main/configs.h"
 
-gint gui_url_handler(const gchar * url);
+gint gui_url_handler(const gchar * url, gboolean clicked);
 	
 
 #endif

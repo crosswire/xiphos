@@ -177,9 +177,9 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	gboolean use_gtkhtml_font = FALSE;
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf;
-	GtkHTMLStreamStatus status1 = 0;
+	//GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
-	GtkHTMLStream *htmlstream;
+	//GtkHTMLStream *htmlstream;
 
 	mf = get_font(mod_name);
 	use_font = g_strdup(mf->old_font);
@@ -201,8 +201,8 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	/*htmlstream =
+	    gtk_html_begin_content(html, "text/html; charset=utf-8");*/
 
 
 	g_string_printf(tmp_str,
@@ -216,7 +216,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
-				"<a href=\"version=%s passage=%s\">"
+				"<a href=\"sword://%s/%s\">"
 				"<font color=\"%s\">[%s] %s </font></A>",
 				mod_name,
 				key,
@@ -226,7 +226,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 
 		else {
 			g_string_printf(tmp_str,
-				"<a href=\"[%s] %s\">"
+				"<a href=\"about://%s/%s\">"
 				"<font color=\"%s\">[%s]</a></font>[%s] ",
 				mod_name,
 				get_module_description(mod_name),
@@ -257,10 +257,11 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	str = g_string_append(str, tmp_str->str);
 
 	if (str->len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
-			       str->len);
+		gtk_html_load_from_string(html,str->str,str->len);
+		/*gtk_html_write(GTK_HTML(html), htmlstream, str->str,
+			       str->len);*/
 	}
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	//gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
 
 	/* andyp - inserted for debugging, remove */
@@ -316,8 +317,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	MOD_FONT *mf;
 
 	GtkHTML *html = GTK_HTML(html_widget);
-	GtkHTMLStreamStatus status1 = 0;
-	GtkHTMLStream *htmlstream;
+	//GtkHTMLStreamStatus status1 = 0;
+	//GtkHTMLStream *htmlstream;
 
 	was_editable = gtk_html_get_editable(html);
 
@@ -350,8 +351,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	}
 	use_font_size = g_strdup(mf->old_font_size);
 
-	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	/*htmlstream =
+	    gtk_html_begin_content(html, "text/html; charset=utf-8");*/
 
 	/*
 	 * set global options for current module 
@@ -388,8 +389,9 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			textColor = settings.bible_text_color;
 
 		sprintf(buf,
-			"&nbsp; <A HREF=\"*%s\" NAME=\"%d\">"
-			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",  //*%s
+			//mod_name,
 			tmpkey,
 			i,
 			settings.verse_num_font_size,
@@ -460,11 +462,12 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	sprintf(buf, "%s", "</body></html>");
 	str = g_string_append(str, buf);
 	if (str->len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
-			       str->len);
+		gtk_html_load_from_string(html,str->str,str->len);
+		/*gtk_html_write(GTK_HTML(html), htmlstream, str->str,
+			       str->len);*/
 	}
 
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	//gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
 	if(cur_verse > 1) {
 		sprintf(buf, "%d", cur_verse - 1);
@@ -817,7 +820,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 
 	str = g_string_new("");
 	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	    gtk_html_begin(html);
 
 	g_string_printf(str, "%s", HTML_START "<body><br>");
 	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
