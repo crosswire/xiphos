@@ -121,29 +121,6 @@ void on_btnLEright_clicked(GtkButton * button, gpointer user_data)
 	movelistitem(GTK_WIDGET(button), 3, listrow);	/* send to movelistitem function for processing (listeditor.cpp) */
 }
 
-
-void on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *entry;
-	gchar *buf;
-	entry = lookup_widget(GTK_WIDGET(button), "entryVerseLookup");
-	buf = gtk_entry_get_text(GTK_ENTRY(entry));
-	changeLEverseSWORD(buf);
-}
-
-
-void on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *list, *entry;
-	gchar *item;
-
-	list = lookup_widget(GTK_WIDGET(button), "clLElist");
-	entry = lookup_widget(GTK_WIDGET(button), "entryVerseLookup");
-	item = gtk_entry_get_text(GTK_ENTRY(entry));
-	addverse(list, listrow, item);	/* function to add item to list (listeditor.cpp) */
-}
-
-
 void on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *list;
@@ -472,16 +449,11 @@ void addverse(GtkWidget * list, gint row, gchar * item)
  *****************************************************************************/
 GtkWidget *createListEditor(void)
 {
-	GtkWidget *ListEditor, *text;
+	GtkWidget *ListEditor;
 
 	title = "GnomeSword - Quickmark Editor";
 	p_mylistitem = &mylistitem;
 	ListEditor = create_listeditor();
-	text = lookup_widget(ListEditor, "text7");
-	/* set text window to word wrap */
-	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);
-	/* init listmodule */
-	setuplisteditSWORD(text);
 	gtk_signal_connect(GTK_OBJECT(ListEditor), "destroy",
 			   GTK_SIGNAL_FUNC(on_listeditor_destroy), NULL);
 	return (ListEditor);
@@ -963,10 +935,6 @@ GtkWidget *create_listeditor(void)
 	GtkWidget *btnLEleft;
 	GtkWidget *btnLEright;
 	GtkWidget *vbox3;
-	GtkWidget *frame1;
-	GtkWidget *toolbar4;
-	GtkWidget *entryVerseLookup;
-	GtkWidget *btnLEgotoverse;
 	GtkWidget *frame2;
 	GtkWidget *vbox4;
 	GtkWidget *hbox2;
@@ -978,14 +946,10 @@ GtkWidget *create_listeditor(void)
 	GtkWidget *label21;
 	GtkWidget *entryLevel;
 	GtkWidget *toolbar6;
-	GtkWidget *btnLEAddVerse;
 	GtkWidget *btnLEAddItem;
 	GtkWidget *btnLEdelete;
 	GtkWidget *toolbar9;
 	GtkWidget *btnLEapplylistchanges;
-	GtkWidget *frame4;
-	GtkWidget *scrolledwindow3;
-	GtkWidget *text7;
 	GtkWidget *dialog_action_area1;
 	GtkWidget *btnLEok;
 	GtkWidget *btnLEapply;
@@ -1280,50 +1244,7 @@ GtkWidget *create_listeditor(void)
 	gtk_widget_show(vbox3);
 	gtk_box_pack_start(GTK_BOX(hbox1), vbox3, FALSE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox3), 3);
-
-	frame1 = gtk_frame_new("Lookup Verse");
-	gtk_widget_ref(frame1);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame1", frame1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame1);
-	gtk_box_pack_start(GTK_BOX(vbox3), frame1, FALSE, TRUE, 0);
-
-	toolbar4 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar4);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "toolbar4",
-				 toolbar4,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar4);
-	gtk_container_add(GTK_CONTAINER(frame1), toolbar4);
-	gtk_widget_set_usize(toolbar4, 193, -2);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar4),
-				      GTK_RELIEF_NONE);
-
-	entryVerseLookup = gtk_entry_new();
-	gtk_widget_ref(entryVerseLookup);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor),
-				 "entryVerseLookup", entryVerseLookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(entryVerseLookup);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar4), entryVerseLookup,
-				  NULL, NULL);
-	gtk_widget_set_usize(entryVerseLookup, 172, -2);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(listeditor,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	btnLEgotoverse =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar4),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Go to Verse", NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnLEgotoverse);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "btnLEgotoverse",
-				 btnLEgotoverse,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnLEgotoverse);
-
+	
 	frame2 = gtk_frame_new("Edit items");
 	gtk_widget_ref(frame2);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame2", frame2,
@@ -1415,20 +1336,7 @@ GtkWidget *create_listeditor(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar6);
 	gtk_box_pack_start(GTK_BOX(vbox4), toolbar6, FALSE, FALSE, 0);
-
-	btnLEAddVerse = gtk_toolbar_append_element(GTK_TOOLBAR(toolbar6),
-						   GTK_TOOLBAR_CHILD_BUTTON,
-						   NULL,
-						   "Add Verse",
-						   NULL, NULL,
-						   NULL, NULL, NULL);
-	gtk_widget_ref(btnLEAddVerse);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "btnLEAddVerse",
-				 btnLEAddVerse,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnLEAddVerse);
-	gtk_widget_set_usize(btnLEAddVerse, 69, -2);
-
+	
 	btnLEAddItem = gtk_toolbar_append_element(GTK_TOOLBAR(toolbar6),
 						  GTK_TOOLBAR_CHILD_BUTTON,
 						  NULL,
@@ -1474,33 +1382,7 @@ GtkWidget *create_listeditor(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnLEapplylistchanges);
 	gtk_widget_set_usize(btnLEapplylistchanges, 207, -2);
-
-	frame4 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame4);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame4", frame4,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame4);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox1), frame4, FALSE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(frame4), 3);
-
-	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow3);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "scrolledwindow3",
-				 scrolledwindow3,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow3);
-	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow3);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow3), GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	text7 = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(text7);
-	gtk_object_set_data_full(GTK_OBJECT(listeditor), "text7", text7,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(text7);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), text7);
-
+	
 	dialog_action_area1 = GNOME_DIALOG(listeditor)->action_area;
 	gtk_object_set_data(GTK_OBJECT(listeditor), "dialog_action_area1",
 			    dialog_action_area1);
@@ -1559,12 +1441,6 @@ GtkWidget *create_listeditor(void)
 			   GTK_SIGNAL_FUNC(on_btnLEleft_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnLEright), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLEright_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnLEgotoverse), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnLEgotoverse_clicked),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnLEAddVerse), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnLEAddVerse_clicked),
-			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnLEAddItem), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLEAddItem_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnLEdelete), "clicked",

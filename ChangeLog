@@ -1,3 +1,8 @@
+2001-08-21Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*release  0.5.2
+
+
 2001-08-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* Added notebook to verselist group of shortcut bar
@@ -6,10 +11,12 @@
 	* Changed the names of the filters:
 		gs_gbfhtml.* to gbfhtmlhref.*
 		gs_thmlhtml.* to thmlhtmlhref.*
+	* removed gs_search.* and ga_search_cb.*
+	* removed display.*
 
 2001-08-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* add unlock module dialog
+	* added unlock module dialog
 	* added support for module font size and font name
 
 

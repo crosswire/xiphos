@@ -101,33 +101,11 @@ class GTKEntryDisp:public SWDisplay {
 		this->gtkText = gtkText;
 	}
 	virtual char Display(SWModule & imodule);
-	gint gettags(gchar * text, gchar *tag, gint pos);
-	//gchar *gbftohtml(gchar * text, gint maxlen);
 };
-
 
 //----------------------------------------------------------------------------------------------
 class GTKPerComDisp:public GTKEntryDisp { public:
 	GTKPerComDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class GTKChapDisp:public GTKEntryDisp { public:
-	GTKChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class HTMLChapDisp:public GTKEntryDisp {	
-      public:
-	HTMLChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class HTMLentryDisp:public GTKEntryDisp { public:
-	HTMLentryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
 };
 
