@@ -53,7 +53,19 @@ COMMON_SOURCE =  \
     gs_thmlhtml.cpp \
     gs_thmlhtml.h \
     sw_utility.cpp\
-    sw_utility.h
+    sw_utility.h \
+    gs_viewtext_dlg.c \
+    gs_viewtext_dlg.h \
+    gs_viewtext_sw.cpp \
+    gs_viewtext_sw.h \
+    gs_information_dlg.c \
+    gs_information_dlg.h \
+    gs_information_sw.cpp \
+    gs_information_sw.h \
+    sw_gbfhtml.cpp \
+    sw_gbfhtml.h \
+    sw_thmlhtml.cpp \
+    sw_thmlhtml.h
 
 SPELLING_SOURCE =  \
     debug.h \

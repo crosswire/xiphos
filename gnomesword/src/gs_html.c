@@ -126,7 +126,9 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	
 	if (*url == '#') {
 		++url;		/* remove # */
-		lookupStrongsSWORD(atoi(url));
+		if(*url == 'T') ++url;
+		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
+		lookupStrongsSWORD(atoi(url));  		
 	} else  if(*url == '*')   {
 		++url;
 		while(*url != ']') {			
@@ -323,9 +325,9 @@ void displayHTML(GtkWidget * html, gchar * txt, gint lentxt)
 /***************************************************************************************************
  *gotoanchorHTML
  ***************************************************************************************************/
-void gotoanchorHTML(gchar * verse)
+void gotoanchorHTML(GtkWidget *html_widget, gchar * verse)
 {
-	gtk_html_jump_to_anchor(GTK_HTML(htmlTexts), verse);
+	gtk_html_jump_to_anchor(GTK_HTML(html_widget), verse);
 }
 
 /***************************************************************************************************
