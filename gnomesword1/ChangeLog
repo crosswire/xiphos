@@ -1,3 +1,9 @@
+2002-06-05  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed gnome/_bibletext_view.* to gnome/bibletext_dialog.*
+	* removed main/bibletext_view.*
+
+
 2002-06-04  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gnome/create_shortcutbar_search.* to gnome/shortcutbar_search.*

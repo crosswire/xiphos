@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_viewtext.h - text view dialog glue
+ * bibletext_dialog.h - view Bible text module in a dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -18,26 +18,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef __BIBLETEXT_DIALOG_H__
+#define __BIBLETEXT_DIALOG_H__
 
-#ifndef __GS_VIEWTEXT_H__
-#define __GS_VIEWTEXT_H__
+GtkWidget *gui_create_bibletext_dialog(void);
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <gnome.h>
-	
-const char *get_book_viewtext(void);	
-int get_chapter_viewtext(void);
-int get_verse_viewtext(void);
-void goto_verse_viewtext(char * verse);
-void load_module_viewtext(char * module_name);
-void shutdown_viewtext(void);	
-void set_global_options_viewtext(gchar *option, gboolean choice);
-void setup_viewtext(GtkWidget * text);
-	
-#ifdef __cplusplus
-}
-#endif
-#endif	/* __GS_VIEWTEXT_H__ */
+#endif	/* __BIBLETEXT_DIALOG_H__ */

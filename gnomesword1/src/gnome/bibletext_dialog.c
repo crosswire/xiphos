@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * text_view.c - view Bible text module in a dialog
+ * bibletext_dialog.c - view Bible text module in a dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -28,14 +28,14 @@
 
 
 /* frontend */
-#include "_bibletext_view.h"
+#include "bibletext_dialog.h"
 #include "_display_info.h"
 #include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
 /* main */ 
 #include "display_info.h"
-#include "bibletext_view.h"
+#include "bibletext.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "support.h"
@@ -44,17 +44,18 @@
 
 /******************************************************************************
  * globals
- *****************************************************************************/
-
-/* is the view text dialog runing */
-gboolean isrunningVT = FALSE;
-
-GtkWidget *text;
-GtkWidget *dlgViewText;
+ */
+gboolean isrunningVT = FALSE; /* is the view text dialog runing */
 gchar vt_current_verse[80];
-GtkWidget *cbeBook;
-GtkWidget *spbVTChapter;
-GtkWidget *spbVTVerse;
+
+/******************************************************************************
+ * static - global to this file only
+ */
+static GtkWidget *text;
+static GtkWidget *dlgViewText;
+static GtkWidget *cbeBook;
+static GtkWidget *spbVTChapter;
+static GtkWidget *spbVTVerse;
 
 /******************************************************************************
  * externs
@@ -66,7 +67,7 @@ extern gboolean gsI_isrunning;
  *   update_controls
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void update_controls(void)	
  *
@@ -94,7 +95,7 @@ static void update_controls(void)
  *   on_linkVT_clicked
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_linkVT_clicked(GtkHTML * html, const gchar * url, 
  *							gpointer data)	
@@ -218,7 +219,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
  *   on_cbeBook_changed
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_cbeBook_changed(GtkEditable * editable,
  *					       gpointer user_data)
@@ -241,7 +242,7 @@ static void on_cbeBook_changed(GtkEditable * editable,
  *   on_btnGotoVerse_clicked
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_btnGotoVerse_clicked(GtkButton * button,
  *						gpointer user_data)
@@ -277,7 +278,7 @@ static void on_btnGotoVerse_clicked(GtkButton * button,
  *   on_cbeModule_changed
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_cbeModule_changed(GtkEditable * editable, 
  *						gpointer user_data)	
@@ -309,7 +310,7 @@ static void on_cbeModule_changed(GtkEditable * editable,
  *   on_btnSync_clicked
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_btnSync_clicked(GtkButton * button, gpointer user_data)	
  *
@@ -331,7 +332,7 @@ static void on_btnSync_clicked(GtkButton * button, gpointer user_data)
  *   on_dlgViewText_destroy
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_dlgViewText_destroy(GtkObject * object,
  *						gpointer user_data)
@@ -356,7 +357,7 @@ static void on_dlgViewText_destroy(GtkObject * object,
  *   on_btnVTAdd_clicked
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_btnVTAdd_clicked(GtkButton * button, gpointer user_data)	
  *
@@ -378,7 +379,7 @@ static void on_btnVTAdd_clicked(GtkButton * button, gpointer user_data)
  *   on_btnVTClose_clicked
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_btnVTClose_clicked(GtkButton * button,
  *						gpointer user_data)	
@@ -401,7 +402,7 @@ static void on_btnVTClose_clicked(GtkButton * button,
  *   on_modops_activate
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   	void on_modops_activate(GtkMenuItem * menuitem,
  *					       gpointer user_data)
@@ -425,7 +426,7 @@ static void on_modops_activate(GtkMenuItem * menuitem,
  *   additemstooptionsmenu
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void additemstooptionsmenu(GtkWidget * shellmenu)	
  *
@@ -471,12 +472,12 @@ static void additemstooptionsmenu(GtkWidget * shellmenu)
 
 /******************************************************************************
  * Name
- *   gui_create_viewtext_dialog
+ *   gui_create_bibletext_dialog
  *
  * Synopsis
- *   #include "text_view.h"
+ *   #include "bibletext_dialog.h"
  *
- *   GtkWidget *gui_create_viewtext_dialog(void)	
+ *   GtkWidget *gui_create_bibletext_dialog(void)	
  *
  * Description
  *   viewtext gui
@@ -485,7 +486,7 @@ static void additemstooptionsmenu(GtkWidget * shellmenu)
  *   GtkWidget *
  */
 
-GtkWidget *gui_create_viewtext_dialog(void)
+GtkWidget *gui_create_bibletext_dialog(void)
 {
 
 	GtkWidget *dialog_vbox14;

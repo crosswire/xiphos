@@ -92,6 +92,16 @@ void setup_text(SETTINGS * s, GList *mods);
 void shutdown_text(void);
 void display_text(gchar * key);
 
+	
+const char *get_book_viewtext(void);	
+int get_chapter_viewtext(void);
+int get_verse_viewtext(void);
+void goto_verse_viewtext(char * verse);
+void load_module_viewtext(char * module_name);
+void shutdown_viewtext(void);	
+void set_global_options_viewtext(gchar *option, gboolean choice);
+void setup_viewtext(GtkWidget * text);
+
 #ifdef __cplusplus
 }
 #endif

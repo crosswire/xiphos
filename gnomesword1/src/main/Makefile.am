@@ -15,8 +15,6 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     bibletext.c \
     bibletext.h \
-    bibletext_view.c \
-    bibletext_view.h \
     commentary.c \
     commentary.h \
     dictlex.c \
