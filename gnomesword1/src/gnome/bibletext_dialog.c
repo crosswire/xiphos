@@ -42,6 +42,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/key.h"
 
 
 

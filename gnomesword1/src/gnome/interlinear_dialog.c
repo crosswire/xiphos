@@ -31,6 +31,7 @@
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/key.h"
 
 /******************************************************************************
  * static
