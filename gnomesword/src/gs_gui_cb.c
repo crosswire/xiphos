@@ -57,6 +57,7 @@ gboolean
 GtkWidget 
 	*listeditor;
 GtkWidget *toolbarComments;
+GtkWidget *toolbarBooks;
 GtkWidget *toolbarStudypad;
 	
 /******************************************************************************
@@ -347,9 +348,15 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	firsttime = FALSE;	//-- remember we were here
 	
 	gtk_widget_hide(toolbarComments);
+	gtk_widget_hide(toolbarBooks);
 	gtk_widget_hide(toolbarStudypad);
+	
 	if(page_num == 2 && settings->editnote) {
 		gtk_widget_show(toolbarComments);
+	}
+	
+	else if(page_num == 1 && settings->editgbs) {
+		gtk_widget_show(toolbarBooks);
 	}
 	
 	else if(page_num == 4) {

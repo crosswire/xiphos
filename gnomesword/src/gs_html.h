@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */ 
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
  /*
     * GnomeSword Bible Study Tool
@@ -8,8 +8,8 @@
     * copyright (C) 2001 by tbiggs
     * tbiggs@users.sourceforge.net
     *
- */
- 
+  */
+
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -32,32 +32,32 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-	
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
 	void on_link_clicked(GtkHTML * html, const gchar * url,
-			     gpointer data);
+				gpointer data);
 	void add_gtkhtml_widgets(GtkWidget * app);
 	void beginHTML(GtkWidget * html, gboolean utf8);
 	void endHTML(GtkWidget * html);
 	void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
+				gpointer user_data);
 	void on_html_lookup_word_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
+				gpointer user_data);
 	void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
-					       gpointer user_data);
+				gpointer user_data);
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
-					     gpointer user_data);
-	void gotoanchorHTML(GtkWidget *html_widget, gchar * verse);
+				gpointer user_data);
+	void gotoanchorHTML(GtkWidget * html_widget, gchar * verse);
 	void sethtmltoeditHTML(gboolean choice);
-	gchar *gethtmlfontnameHTML(gchar *xfontname);
-	void html_print(GtkWidget *htmlwidget);
+	gchar *gethtmlfontnameHTML(gchar * xfontname);
+	void html_print(GtkWidget * htmlwidget);
+	void set_html_edit(GtkWidget * htmlwidget);
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __GS_HTML_H_ */
+#endif				/* __GS_HTML_H_ */

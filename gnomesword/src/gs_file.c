@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_file.c
@@ -54,25 +55,27 @@ char
 	*shortcutbarDir,		/* store dir name for shortcutbar files */
 	*fnquickmarks,
 	*fnconfigure;		/* store filename for configure file - options */
-FILE 	*configfile;		/*  file pointer to configuration file - options */
-	//*flbookmarks;
-gint 	iquickmarks;		/* number of quickmark menu items */
-gchar 	remembersubtree[256],	/* we need to use this when add to quickmarks */
+	
+FILE 
+	*configfile;		/*  file pointer to configuration file - options */
+	
+gint 	
+	iquickmarks;		/* number of quickmark menu items */
+	
+gchar 	
+	remembersubtree[256],	/* we need to use this when add to quickmarks */
  	rememberlastitem[255];	/* we need to use this when add to quickmarks */
 
-LISTITEM mylistitem;
-LISTITEM *p_mylistitem;
-LISTITEM listitem;		/* structure for ListEditor items
+LISTITEM 
+	*p_mylistitem,
+	mylistitem,
+	listitem;		/* structure for ListEditor items
 				   (verse lists and bookmarks) */
 /*****************************************************************************
  *externals
 *****************************************************************************/
-extern GtkWidget *MainFrm;	/* main window (form) widget */
-extern gchar *current_filename;	/* file loaded into study pad */
-extern gchar bmarks[50][80];	/* array to store bookmarks - read in form file
-				when program starts - saved to file after edit */
-extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
-					- and file is not saved */
+
+
 
 /******************************************************************************
 *******************************************************************************
@@ -213,7 +216,7 @@ gint setDiretory(void)
 /*****************************************************************************
  * load bookmarks program start
  *****************************************************************************/
-void loadquickmarks_programstart(void)
+void loadquickmarks_programstart(GtkWidget *MainFrm)
 {
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
@@ -251,7 +254,7 @@ void loadquickmarks_programstart(void)
 /*****************************************************************************
  * load bookmarks after menu separator
  *****************************************************************************/
-void loadquickmarks_afterSeparator(void)
+void loadquickmarks_afterSeparator(GtkWidget *MainFrm)
 {
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
@@ -331,14 +334,6 @@ void createFiles(void)
 
 	close(flbookmarksnew);
 	iquickmarks = 2;
-}
-
-/*****************************************************************************
- * save studypad file
- *****************************************************************************/
-void saveFile(gchar * filename)
-{				
-
 }
 
 GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd)

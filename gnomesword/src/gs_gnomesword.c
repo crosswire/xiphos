@@ -171,7 +171,7 @@ initGnomeSword(GtkWidget *app,
 				(GtkMenuCallback)on_verse_style1_activate);
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
-        loadquickmarks_programstart(); /* add quickmarks to menubar */
+        loadquickmarks_programstart(settings->app); /* add quickmarks to menubar */
         changeVerseSWORD(settings->currentverse); /* set Text */
 	/* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
@@ -399,7 +399,7 @@ void addQuickmark(GtkWidget *app)
         addseparator(app, buf);
 	
 	/* let's show what we did -- gs_file.c */
-        loadquickmarks_afterSeparator(); 
+        loadquickmarks_afterSeparator(app); 
 }
 
 /*****************************************************************************

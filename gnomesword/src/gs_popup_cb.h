@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_popup_cb.h
@@ -33,6 +34,8 @@ extern "C" {
 
 #include <gnome.h>
 	/*** toogle global options in interlinear window ***/
+	void on_edit_book_activate(GtkMenuItem * menuitem,  gchar *user_data);
+	void on_save_book_activate(GtkMenuItem * menuitem, gchar *user_data);
 	void on_print_item_activate(GtkMenuItem * menuitem, gchar * html);
 	void on_int_global_options_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);
