@@ -666,7 +666,7 @@ void gui_set_text_frame_label(TEXT_DATA * t)
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
 	 */
-	if (settings.text_tabs)
+	if (settings.text_tabs || settings.browsing)
 		gtk_frame_set_label(GTK_FRAME(t->frame), NULL);
 	else
 		gtk_frame_set_label(GTK_FRAME(t->frame), t->mod_name);
