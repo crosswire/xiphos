@@ -132,9 +132,8 @@ static void create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(widgets.app,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	LOCKED = gtk_widget_render_icon(widgets.app,
-					"gnome-stock-lockscreen",
-					GTK_ICON_SIZE_MENU, NULL);
+	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+					"/epiphany-secure.png",NULL);
 	BLANK = gtk_widget_render_icon(widgets.app,
 				       "gnome-stock-blank",
 				       GTK_ICON_SIZE_MENU, NULL);
@@ -916,7 +915,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_tree_view_append_column(treeview, column);
 
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock(GTK_STOCK_APPLY,	//"gnome-stock-apply",
+	image = gtk_image_new_from_stock(GTK_STOCK_APPLY,	
 					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
@@ -928,8 +927,8 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_tree_view_append_column(treeview, column);
 
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock("gnome-stock-lockscreen",
-					 GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
+					"/epiphany-secure.png");
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
