@@ -104,7 +104,7 @@ static GtkWidget *create_hint_window(void)
  *   void
  */
 
-void gui_show_footnote(gchar * note)
+void gui_display_footnote_in_hint(gchar * note)
 {
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
@@ -127,3 +127,45 @@ void gui_show_footnote(gchar * note)
 	gtk_widget_show(hint.hint_window);
 	g_string_free(str, TRUE);
 }
+
+
+/******************************************************************************
+ * Name
+ *   gui_show_footnote
+ *
+ * Synopsis
+ *   #include "gui/hints.h"
+ *
+ *   void gui_show_footnote(gchar *note)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+/*
+void gui_display_text_in_hint(gchar * key, gchar * module_name)
+{
+	GtkHTMLStreamStatus status1 = 0;
+	GtkHTML *html;
+	GtkHTMLStream *htmlstream;
+	GString *str;
+
+	str = g_string_new("");
+	if (!hint.in_popup) {
+		hint.hint_window = create_hint_window();
+	}
+
+	html = GTK_HTML(hint.html_widget);
+	htmlstream =
+	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
+			 note);
+	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+
+	gtk_widget_show(hint.hint_window);
+	g_string_free(str, TRUE);
+}
+*/

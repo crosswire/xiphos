@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=26
-1=29
-2=21
-3=25
-4=104
-5=34
-6=35
-7=28
-8=257
+0=320
+1=789
+2=257
+3=87
+4=107
+5=31
+6=34
+7=29
+8=171
 9=268
 10=43
 11=335
@@ -51,25 +51,21 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/hints.c
-1=/home/terry/Projects/gnomesword1/src/gui/hints.h
-2=/home/terry/Projects/gnomesword1/doc/h.txt
-3=/home/terry/Projects/gnomesword1/src/gnome/html.c
-4=/home/terry/Projects/gnomesword1/src/backend/module.cc
-5=/home/terry/Projects/gnomesword1/src/backend/module.hh
-6=/home/terry/Projects/gnomesword1/src/main/module.c
+0=/home/terry/Projects/gnomesword1/src/gnome/html.c
+1=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
+2=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
+3=/home/terry/Projects/gnomesword1/src/main/module.c
+4=/home/terry/Projects/gnomesword1/src/gnome/hints.c
+5=/home/terry/Projects/gnomesword1/src/gui/hints.h
+6=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
 7=/home/terry/Projects/gnomesword1/src/main/module.h
-8=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-9=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_viewer.c
-10=/home/terry/Projects/gnomesword1/src/main/key.h
-11=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
-12=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
-13=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
+8=/home/terry/Projects/gnomesword1/src/main/settings.h
 
 [Project Tree]
 0=0
 1=0:0
 2=0:1
+3=0:3
 
 [Symbol Tree]
 0=5
@@ -78,24 +74,24 @@ filter.dir.ignore.hidden=0
 0=0
 
 [replace_text]
-0=gbs_entry
-1=toolbar_nav
-2=freeform_lookup
-3=vc->
-4=ecd->toolbars
-5=vpc->
-6=cur_vpc
-7=vpc
+0=hint_window
+1=gbs_entry
+2=toolbar_nav
+3=freeform_lookup
+4=vc->
+5=ecd->toolbars
+6=vpc->
+7=cur_vpc
 
 [find_text]
-0=g_warning
-1=audiofile
-2=GS_CHECK_LIB
-3=on_button_release_event
-4=editor_toolbar_left_align_cb
-5=vseparator
-6=tmp_toolbar_icon
-7=sync
+0=check
+1=popup_window
+2=g_warning
+3=audiofile
+4=GS_CHECK_LIB
+5=on_button_release_event
+6=editor_toolbar_left_align_cb
+7=vseparator
 
 [executer args]
 0=newconfigs

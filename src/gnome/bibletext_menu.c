@@ -786,7 +786,7 @@ static void add_global_option_items(TEXT_DATA * t)
 
 	if ((check_for_global_option(t->mod_name, "GBFMorph")) ||
 	    (check_for_global_option(t->mod_name, "ThMLMorph")) ||
-	    (check_for_global_option(t->mod_name, "OSISSMorph"))) {
+	    (check_for_global_option(t->mod_name, "OSISMorph"))) {
 		t->tgs->morphs =
 		    load_module_options(t->mod_name,
 					"Morphological Tags");
