@@ -61,16 +61,11 @@ module.include.type=
 module.include.expanded=0
 module.include.files=
 
+
 module.source.name=.
 module.source.type=
 module.source.expanded=0
 module.source.files=\
-	intl/dcigettext.c\
-	intl/dcngettext.c\
-	intl/dngettext.c\
-	intl/localcharset.c\
-	intl/ngettext.c\
-	intl/plural.c\
 	src/backend/viewtext_dlg.cpp\
 	src/backend/viewdict_dlg.cpp\
 	src/backend/viewcomm_dlg.cpp\
@@ -175,6 +170,8 @@ module.doc.files=\
 	TODO\
 	macros/ChangeLog\
 	po/ChangeLog\
+	doc/head.txt\
+	doc/getting_started.txt\
 	doc/help/index.html\
 	doc/help/intro.html\
 	doc/help/template.html

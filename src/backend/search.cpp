@@ -192,6 +192,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 			  active ? 0 : GTK_TOGGLE_BUTTON (so->rbPhraseSearch)->
 			  active ? -1 : -2;	//-- get search type	
 		s->searchType = searchType;
+		so->modname = searchMod->Name();
 		int searchParams =
 			  GTK_TOGGLE_BUTTON (caseSensitive)->
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
@@ -315,28 +316,9 @@ void shutdownsearchresultsSBSW(void)
 }
 
 void
-changesearchresultsSW_SEARCH(SETTINGS *s, SEARCH_OPT *so, gchar *url)
+backend_search_results_item_display(gchar *url)
 {	
 	searchresultssbMod->SetKey(url);
 	searchresultssbMod->Display();
-	
-	if(s->showinmain) {
-		if(GTK_TOGGLE_BUTTON(so->ckbCommentary)->active){
-			curcomMod->SetKey(url);
-			curcomMod->Display();
-		}
-				
-		else if(GTK_TOGGLE_BUTTON(so->ckbPerCom)->active) {
-			percomMod->SetKey(url);
-			percomMod->Display();
-		}
-			
-		else if(GTK_TOGGLE_BUTTON(so->ckbGBS)->active) {
-			//displayinGBS(url);
-		}
-			
-		else
-			changeVerseSWORD(url);	
-	}
 }
 
