@@ -44,7 +44,6 @@
 
 #include "module_manager.hh"
 #include "backend/sword_main.hh"
-#include "backend/mgr.hh"
 #include "main/mod_mgr.h"
 #include "main/sword.h"
 

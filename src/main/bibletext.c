@@ -37,27 +37,6 @@
 #include "backend/sword.h"
 
 
-/******************************************************************************
- * Name
- *  set_module_unlocked
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void set_module_unlocked(char *mod_name, char *key)	
- *
- * Description
- *   unlocks locked module - 
- *
- * Return value
- *   void
- */
-
-void set_module_unlocked(char * mod_name, char * key)
-{	
-	backend_set_module_unlocked(mod_name, key);
-}
-
 
 /******************************************************************************
  * Name
