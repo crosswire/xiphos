@@ -174,19 +174,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
 	settings->versestyle_item = additemtooptionmenu(app, _("_Settings/"), _("Verse Style"),
 				(GtkMenuCallback)on_verse_style1_activate);
-	/*footnotes   = additemtooptionmenu(app, _("_Settings/"), _("Show Footnotes"),
-				(GtkMenuCallback)on_footnotes1_activate);
-	morphs   = additemtooptionmenu(app, _("_Settings/"), _("Show Morphological Tags"),
-				(GtkMenuCallback)on_morphs_activate);
- 	strongsnum   = additemtooptionmenu(app, _("_Settings/"), _("Show Strongs Numbers"),
- 				(GtkMenuCallback)on_strongs_numbers1_activate); 
-	
-	
- 	hebrewpoints   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Hebrew Points"),
- 				(GtkMenuCallback)on_hebrew_points_activate); 	
- 	cantillationmarks   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Cantillation Marks"),
- 				(GtkMenuCallback)on_cantillation_marks_activate); 	
-	*/
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
@@ -293,9 +280,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				gtk_main_iteration ();
 	}
 	
-	
-	/*if(savefontinfoSWORD("KJV", "GSFont", "helvetica"))
-		g_warning("we wrote something");*/
 	g_print("%s\n", "done\n");
 }
 
