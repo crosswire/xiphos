@@ -1,15 +1,10 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-  /*
-    * GnomeSword Bible Study Tool
-    * gs_information_sw.h
-    * -------------------
-    * Thu Jun 14 2001
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
+
+/*
+    GnomeSword Bible Study Tool
+    *  display_info.h - About dialogs for GnomeSword
     *
- */
- 
- /*
+    *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+    *
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
     *  the Free Software Foundation; either version 2 of the License, or
@@ -34,10 +29,11 @@ extern "C" {
 
 #include <gnome.h>
 
-void VIDsetupSWORD(GtkWidget *text);
-void VIDshutdownSWORD(void);
-void VIDloadmodSWORD(gchar *modName, gchar *newkey) ;
-
+void backend_display_info_setup(GtkWidget *text);
+void backend_dispaly_info_shutdown(void);
+void backend_dispaly_info_load_modudle(gchar *modName, gchar *newkey) ;
+void backend_dispaly_info_change_key(gchar *newkey);
+        
 #ifdef __cplusplus
 }
 #endif
