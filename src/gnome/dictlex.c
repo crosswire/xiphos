@@ -230,7 +230,7 @@ void on_entryDictLookup_changed(GtkEditable * editable,
 	
 	text = get_dictlex_text(d->mod_name, key);	
 	entry_display(d->html, d->mod_name,
-		   text, key);
+		   text, key, TRUE);
 	free(text);
 		
 	if (firsttime)

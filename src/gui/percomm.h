@@ -30,17 +30,14 @@ typedef struct _percomm_data PC_DATA;
 struct _percomm_data {
 	GtkWidget *vbox;
 	GtkWidget *html;
-	//GtkWidget *frame;
-	//GtkWidget *showtabs;
 	gchar *mod_name;
-	gchar *mod_description;
 	gchar *search_string;
-	gchar *key;
 	gint mod_num;
 	gboolean is_locked;
 	GSHTMLEditorControlData *ec;
 };
 
+void gui_save_note(GSHTMLEditorControlData * e);
 void gui_percomm_tabs(gboolean choice);
 void gui_display_percomm(gchar * key);
 void gui_set_percomm_page_and_key(gint page_num, gchar * key);

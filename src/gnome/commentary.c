@@ -88,7 +88,7 @@ static void display(COMM_DATA *c, gchar * key)
 	else {
 		text_str = get_commentary_text(c->mod_name, strkey);
 	}
-	entry_display(c->html, c->mod_name, text_str, key);
+	entry_display(c->html, c->mod_name, text_str, key, TRUE);
 	free(text_str);
 	
 }

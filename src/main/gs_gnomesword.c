@@ -44,7 +44,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
-#include "gui/_percomm.h"
+#include "gui/percomm.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"

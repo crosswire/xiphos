@@ -225,7 +225,7 @@ static void mark_search_words(GString * str)
  */
 
 void entry_display(GtkWidget * html_widget, gchar * mod_name,
-		   gchar * text, gchar * key)
+		   gchar * text, gchar * key, gboolean show_key)
 {
 	gchar
 	    tmpBuf[500],
@@ -275,37 +275,37 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 			       utf8len);
 	}
 
-	str = g_string_new("");
-
 	/* show key in html widget  */
-
-	if ((settings.displaySearchResults)) {
-		g_string_sprintf(str,
-			"<A HREF=\"version=%s passage=%s\">"
-			"<FONT COLOR=\"%s\">[%s] %s </font></A>",
-				 mod_name,
-				 key,
-				 settings.bible_verse_num_color,
-				 mod_name, key);
+	if(show_key) {
+		str = g_string_new("");
+		if ((settings.displaySearchResults)) {
+			g_string_sprintf(str,
+				"<A HREF=\"version=%s passage=%s\">"
+				"<FONT COLOR=\"%s\">[%s] %s </font></A>",
+					 mod_name,
+					 key,
+					 settings.bible_verse_num_color,
+					 mod_name, key);
+		}
+	
+		else {
+			g_string_sprintf(str,
+				"<A HREF=\"[%s] %s\">"
+				"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
+					 mod_name,
+					 get_module_description(mod_name),
+					 settings.bible_verse_num_color,
+					 mod_name, key);
+		}	
+	
+		utf8str = e_utf8_from_gtk_string(html_widget, str->str);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+		g_string_free(str, 0);
 	}
-
-	else {
-		g_string_sprintf(str,
-			"<A HREF=\"[%s] %s\">"
-			"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
-				 mod_name,
-				 get_module_description(mod_name),
-				 settings.bible_verse_num_color,
-				 mod_name, key);
-	}
-
-	utf8str = e_utf8_from_gtk_string(html_widget, str->str);
-	utf8len = strlen(utf8str);
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
-	}
-	g_string_free(str, TRUE);
 
 
 	if (use_gtkhtml_font)
@@ -410,8 +410,10 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	use_font = get_module_font_name(mod_name);
 	if (use_font)
 		use_gtkhtml_font = FALSE;	
-	else
+	else 
 		use_gtkhtml_font = TRUE;
+		
+	
 
 	use_font_size = get_module_font_size(mod_name);
 
@@ -428,7 +430,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	set_global_options(tgs);	
 	
 	sprintf(buf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		HTML_START"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color, settings.link_color);
 	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
 	utf8len = strlen(utf8str);     
@@ -473,72 +475,73 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 		else {
 			sprintf(tmpbuf, "<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				use_font, use_font_size, textColor);		
+				use_font, use_font_size, textColor);			
 		}
 	
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			g_string_free(str,TRUE);
+			str = g_string_new(utf8str);
+			/*gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);*/
 		}
 		
 		if(newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
+			 str = g_string_append (str,paragraphMark);
+			
 			sprintf(tmpbuf,  "%s ", paragraphMark);
 			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
 			utf8len = strlen(utf8str);		
 			if (utf8len) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+				str = g_string_append (str,utf8str);
 			}	
 		} 
+		
 		text_str = get_bibletext_text(mod_name, tmpkey);
-		if((settings.displaySearchResults) && (i == cur_verse)){			
-			g_string_free(str,TRUE);
-			str = g_string_new(text_str);
+		if((settings.displaySearchResults) && (i == cur_verse)){
+			str = g_string_append (str,text_str);
 			mark_search_words(str);
 			utf8str = str->str;			
-		} else {
-			g_string_free(str,TRUE);
-			str = g_string_new(text_str);		
+		} else {			
+			str = g_string_append (str,text_str);
+			mark_search_words(str);		
 			utf8str = str->str;			
 		}
 		free(text_str);
-		if (strlen(utf8str)) {
-			
+		/*
+		if (strlen(utf8str)) {			
 			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-			
-			if (settings.versestyle) {
-				if ((strstr(utf8str , "<BR>") == NULL ) && (strstr(utf8str, "<!P>") == NULL))  {
-					sprintf(tmpbuf, " %s", "</font><br>");
-				} else {
-					sprintf(tmpbuf, " %s", "</font>");
-				}
-				if (strstr(utf8str, "<!P>") == NULL) {
-					newparagraph = FALSE;
-				} else {
-					newparagraph = TRUE;
-				}
-			} 
-			
-			else
-				if (strstr(utf8str, "<!P>") == NULL)
-					sprintf(tmpbuf, " %s", "</font>");
-				else 
-					sprintf(tmpbuf, " %s", "</font><p>");
-					
-			
-				
-			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
-			utf8len = strlen(utf8str);		
-			if (utf8len) {
-				gtk_html_write(html, htmlstream, utf8str, utf8len);
-			}	
 		}
-	}
-	
-	
-	
+		*/	
+		if (settings.versestyle) {
+			if ((strstr(utf8str , "<BR>") == NULL ) && (strstr(utf8str, "<!P>") == NULL))  {
+				sprintf(tmpbuf, " %s", "</font><br>");
+			} else {
+				sprintf(tmpbuf, " %s", "</font>");
+			}
+			if (strstr(utf8str, "<!P>") == NULL) {
+				newparagraph = FALSE;
+			} else {
+				newparagraph = TRUE;
+			}
+		} 
+		
+		else {
+			if (strstr(utf8str, "<!P>") == NULL)
+				sprintf(tmpbuf, " %s", "</font>");
+			else 
+				sprintf(tmpbuf, " %s", "</font><p>");
+		}			
+		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
+		utf8len = strlen(utf8str);		
+		if (utf8len) {	
+			str = g_string_append (str,utf8str);
+			gtk_html_write(html, htmlstream, str->str, str->len);
+		}	
+		
+	}	
 
 	sprintf(buf, "%s", "</body></html>");
 	utf8str = e_utf8_from_gtk_string(html_widget, buf);

@@ -244,7 +244,7 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
 	
 	if(text){
 		entry_display(cur_g->html, cur_g->mod_name,
-		   text, key);
+		   text, key, TRUE);
 		free(text);
 	}
 }
@@ -330,7 +330,7 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 		}	
 		
 		entry_display(gbs->html, gbs->mod_name,
-		   text, key);
+		   text, key, TRUE);
 		if(key) 
 			free(key);
 		free(text);
