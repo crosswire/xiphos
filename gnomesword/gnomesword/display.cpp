@@ -429,9 +429,9 @@ GTKRWPDisp::Display(SWModule &imodule)
 		}
 		if(greek_on) //-- if greek is on let's try to replace characters that don't print right with the symbol font with some that will
 		{
-    		gchar buftext[80];    			
+    		/*gchar buftext[80];    			
     		sprintf(buftext,"%3.3d\n",myverse[i]);
-    		cout << buftext;    			
+    		cout << buftext;  */  			
     		if(myverse[i] == 't' && myverse[i+1] == 'h') //-- replace th with q (theta)
     		{										
     			++i;
