@@ -26,18 +26,8 @@ COMMON_SOURCE =  \
     gbs.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
-    gs_detach_int.c \
-    gs_detach_int.h \
-    gs_detach_sb.c \
-    gs_detach_sb.h \
     gs_editor.c \
     gs_editor.h \
-    gs_editor_replace.c \
-    gs_editor_replace.h \
-    gs_editor_search.c \
-    gs_editor_search.h \
-    gs_editor_toolbar.c \
-    gs_editor_toolbar.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \

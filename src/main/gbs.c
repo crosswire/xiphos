@@ -257,6 +257,44 @@ static void add_book_to_ctree(GtkWidget * ctree, gchar * bookName)
 
 /******************************************************************************
  * Name
+ *  set_gbs_page
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void set_gbs_page(gchar * modname, GList * comm_list)	
+ *
+ * Description
+ *    change gbs page without changing key
+ *
+ * Return value
+ *   void
+ */
+ 
+static void set_gbs_page(gchar * book_name, GList * gbs_list)
+{
+	gint page = 0;
+	GBS_DATA *g = NULL;
+
+	gbs_list = g_list_first(gbs_list);
+	while (gbs_list != NULL) {
+		g = (GBS_DATA *) gbs_list->data;
+		if (!strcmp(g->bookName, book_name))
+			break;
+		++page;
+		gbs_list = g_list_next(gbs_list);
+	}
+		
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_gbs), page);
+	gui_set_gbs_frame_label(g);
+		
+	settings.book_last_page = page;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+				   settings.book_tabs);
+}
+
+/******************************************************************************
+ * Name
  *  add_node_gbs
  *
  * Synopsis
@@ -368,8 +406,7 @@ void setup_gbs(SETTINGS * s, GList *mods)
 		gnome_popup_menu_attach(popupmenu, gbs->html, NULL);
 		backend_new_gbs_display(gbs->html, gbs->bookName, s);
 		add_book_to_ctree(gbs->ctree, gbs->bookName);
-		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);
-		sprintf(s->BookWindowModule, "%s", gbs->bookName);
+		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
 		++count;
 		tmp = g_list_next(tmp);
 	}
@@ -377,8 +414,9 @@ void setup_gbs(SETTINGS * s, GList *mods)
 	gtk_signal_connect(GTK_OBJECT(s->notebook_gbs), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook_gbs_switch_page),
 			   gbs_list);
-
-	settings.book_last_page = 0;
+	
+		
+	set_gbs_page(s->BookWindowModule, gbs_list);
 	g_list_free(tmp);
 }
 

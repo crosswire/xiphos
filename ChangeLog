@@ -1,3 +1,13 @@
+2002-05-12  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* move main/gs_detach_sb.* to gnome/shortcutbar_dialog.*
+
+
+2002-05-11  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* move main/gs_detach_int.* to gnome/interlinear_dialog.*
+	
+
 2002-05-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gnome/commentary_find_dialog.* to gnome/commentary_find.*

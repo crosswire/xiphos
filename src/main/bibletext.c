@@ -412,7 +412,6 @@ void setup_text(SETTINGS * s, GList *mods)
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
-	gchar *keybuf;
 	TEXT_DATA *t;
 	gint count = 0;
 
@@ -446,12 +445,10 @@ void setup_text(SETTINGS * s, GList *mods)
 			   (on_notebook_text_switch_page), text_list);
 
 	modbuf = g_strdup(s->MainWindowModule);
-	keybuf = g_strdup(s->currentverse);
 
 	set_page_text(modbuf, text_list, s);
 
 	g_free(modbuf);
-	g_free(keybuf);
 	g_list_free(tmp);
 }
 

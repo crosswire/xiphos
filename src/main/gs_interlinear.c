@@ -28,8 +28,11 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
+
 #include "gs_gnomesword.h"
 #include "gs_interlinear.h"
+
+
 #include "sword.h"
 #include "interlinear.h"
 

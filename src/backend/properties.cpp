@@ -136,7 +136,9 @@ gboolean backend_load_properties(SETTINGS * s)
 		settingsInfo["Modules"]["PerComments"].c_str());
 	sprintf(s->devotionalmod, "%s",
 		settingsInfo["Modules"]["Devotional"].c_str());
-
+	strcpy(s->BookWindowModule,
+		settingsInfo["Modules"]["BookWindow"].c_str());
+	
 	/* main notebook page */
 	s->notebook3page =
 	    atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
@@ -146,7 +148,9 @@ gboolean backend_load_properties(SETTINGS * s)
 		settingsInfo["Keys"]["verse"].c_str());
 	sprintf(s->dictkey, "%s",
 		settingsInfo["Keys"]["dictionarykey"].c_str());
-
+	/* book key */
+	strcpy(s->book_key,settingsInfo["Keys"]["BookKey"].c_str());
+	
 	/* studypad file to open with if any */
 	sprintf(s->studypadfilename, "%s",
 		settingsInfo["StudyPad"]["Lastfile"].c_str());
@@ -272,6 +276,8 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 		    s->CommWindowModule;
 		settingsInfo["Modules"]["DictWindow"] =
 		    s->DictWindowModule;
+		settingsInfo["Modules"]["BookWindow"] =
+		    s->BookWindowModule;
 		settingsInfo["Modules"]["Interlinear1"] =
 		    s->Interlinear1Module;
 		settingsInfo["Modules"]["Interlinear2"] =
@@ -305,6 +311,7 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 
 		settingsInfo["Keys"]["verse"] = s->currentverse;
 		settingsInfo["Keys"]["dictionarykey"] = s->dictkey;
+		settingsInfo["Keys"]["BookKey"] = s->book_key;
 
 		settingsInfo["StudyPad"]["Lastfile"] =
 		    s->studypadfilename;

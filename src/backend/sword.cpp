@@ -70,7 +70,6 @@ typedef map < string, string > bookAbrevMap;
  */
 
 static SWMgr *mainMgr;		/* sword mgr for curMod */
-static SWModule *curMod;		/* module for main text window */
 static modDescMap descriptionMap;
 
 /******************************************************************************
@@ -107,19 +106,7 @@ gboolean
 void backend_first_init(SETTINGS * s)
 {
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgr
-	/*
-	   char locale_name[40];
-	   sprintf(locale_name,"%s",(char *)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
-	   cout << locale_name << "\n";
-	   if(strlen(locale_name) > 2) {
-	   char buf[40];
-	   strncpy(buf,locale_name,2);
-	   buf[2] = '\0';
-	   LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
-	   }
-	 */
 	init_lists();
-	curMod = NULL;		//-- set mods to null
 }
 
 /******************************************************************************
@@ -170,7 +157,6 @@ void backend_init_sword(SETTINGS * s)
 		    string((char *) (*it).second->Name());		
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
-			curMod = (*it).second;
 			havebible = TRUE;
 			++textpages;
 		}

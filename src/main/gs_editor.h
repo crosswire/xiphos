@@ -1,39 +1,33 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * GnomeSword Bible Study Tool
+ * editor.h - html editor for personal comments and studypad 
+ *               (generic book support - to be added)
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_editor.h
-     * -------------------
-     * Mon Dec 10 2001
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
-
-#ifndef __GS_EDITOR_H_
-#define __GS_EDITOR_H_
+#ifndef __EDITOR_H_
+#define __EDITOR_H_
 
 #include <gnome.h>
 #include <gtkhtml/htmlgdkpainter.h>
-#include "gs_gnomesword.h"
-#include "gs_editor_replace.h"
-#include "gs_editor_search.h"
+#include "settings.h"
+#include "editor_replace.h"
+#include "editor_search.h"
 
 
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
@@ -138,13 +132,9 @@ struct _GSHTMLEditorControlData {
 void update_statusbar(GSHTMLEditorControlData * ecd);
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
-
 void replace(GSHTMLEditorControlData * ecd);
 void search(GSHTMLEditorControlData *ecd, gboolean regular, gchar *text);
 void search_next(GSHTMLEditorControlData *ecd);
-/*** create editor ui ***/
-GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
-			 SETTINGS * s, GSHTMLEditorControlData * necd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
 void editor_save_note(GtkWidget * html_widget);
 void savebookEDITOR(GtkWidget * html_widget);
@@ -152,14 +142,8 @@ gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
 gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
 /*** load studypad file ***/
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
-
 GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s);
-GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, gchar *mod_name, 
-						gint page_num);
 GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s);
-/*** link dialog create and call back ***/
-void set_link_to_module(gchar * linkref, gchar * linkmod,
-			GSHTMLEditorControlData * ecd);
 void find_word_EDITOR(gchar * word, GSHTMLEditorControlData * ecd);
 void load_text_from_spell_EDITOR(GtkWidget * text,
 				 GSHTMLEditorControlData * ecd);
@@ -170,6 +154,5 @@ gboolean load_text_for_spell_EDITOR(GtkWidget * text,
 void on_save_activate(GtkMenuItem * menuitem,
 		      GSHTMLEditorControlData * ecd);
 void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
-void searchgbsGS_EDITOR(gchar *searchstring);
 
-#endif				/* __GS_EDITOR_H_ */
+#endif	/* __EDITOR_H_ */

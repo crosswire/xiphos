@@ -347,14 +347,11 @@ void backend_new_gbs_display(GtkWidget * html, char *bookname,
  
 void backend_display_gbs(gint booknum, gchar * key)
 {
-        ModMap::iterator it;
         BE_GBS *g;
         g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
-             /** if not root node then display **/
-	
-		g->mod->SetKey(key);
-		g->mod->KeyText();      //snap to entry
-		g->mod->Display();
+	g->mod->SetKey(key);
+	g->mod->KeyText();      //snap to entry
+	g->mod->Display();
 	      
 }
 /******************************************************************************

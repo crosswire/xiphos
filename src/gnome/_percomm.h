@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * percomm.h - support for personal commentary modules
+ * _percom.c - personal comments gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,39 +19,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PERCOMM_H_
-#define __PERCOMM_H_
+#ifndef ___PERCOMM_H_
+#define ___PERCOMM_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+#include <gnome.h>
 #include "settings.h"
-#include "gs_editor.h"
+#include "percomm.h"
 
-typedef struct _percomm_data PC_DATA;
-struct _percomm_data {
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *showtabs;
-	gchar *mod_name;
-	gchar *mod_description;
-	gchar *search_string;
-	gchar *key;
-	gint mod_num;
-	gboolean is_locked;
-	GSHTMLEditorControlData *ec;
-};
-
-void save_percomm_note(gchar *note);
-void delete_percomm_note(void);
-void percomm_page_changed(gint page_num, PC_DATA * p);
-void set_percomm_page_and_key(gint page_num, gchar * key);
-void display_percomm(gchar * key);
-void setup_percomm(SETTINGS * s, GList *mods);
-void shutdown_percomm(void);
-
-#ifdef __cplusplus
-}
-#endif
-#endif	/* __PERCOMM_H_ */
+GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
+					gchar *mod_name, gint page_num);
+#endif	/* ___PERCOMM_H_ */
