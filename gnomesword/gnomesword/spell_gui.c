@@ -75,35 +75,35 @@ spc_close_button_clicked_lcb(GtkButton * button, gpointer user_data)
 	if (!spc_is_running)
 		gtk_widget_destroy(spc_gui.window);
 }
-
+static
 void on_spc_options_button_clicked(GtkButton * button, gpointer user_data)
 {
 	//configure_cb(NULL,CONFIGURE_EXTERNAL_PAGE);
 }
-
+static
 void on_spc_accept_button_clicked(GtkButton * button, gpointer user_data)
 {
 	spc_message = SPC_ACCEPT;	/* accept word */
 }
 
-
+static
 void on_spc_insert_button_clicked(GtkButton * button, gpointer user_data)
 {
 	spc_message = SPC_INSERT;
 }
 
-
+static
 void on_spc_ignore_button_clicked(GtkButton * button, gpointer user_data)
 {
 	spc_message = SPC_IGNORE;	/* ignore word */
 }
 
-
+static
 void on_spc_replace_button_clicked(GtkButton * button, gpointer user_data)
 {
 	spc_message = SPC_REPLACE;	/* replace word */
 }
-
+static
 gboolean delete_event_lcb(GtkButton * button, gpointer user_data)
 {
 	DEBUG_MSG("Delete event\n");
@@ -111,7 +111,7 @@ gboolean delete_event_lcb(GtkButton * button, gpointer user_data)
 	return (spc_is_running);	/* do not call the destroy event */
 }
 
-void
+static void
 on_near_misses_select_row_lcb(GtkWidget * clist,
 			      gint row,
 			      gint column,
