@@ -33,14 +33,14 @@
 
 //----------------------------------------------------------------------------------
 void
-additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *menuname, GtkMenuCallback mycallback)
+additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *itemdata, gchar *menuname, GtkMenuCallback mycallback)
 {
 	GnomeUIInfo *menuitem;
 	
 	menuitem = g_new(GnomeUIInfo,2); 
 	menuitem->type = GNOME_APP_UI_ITEM;
 	menuitem->moreinfo=(gpointer)mycallback;
-	menuitem->user_data = g_strdup(itemname);
+	menuitem->user_data = g_strdup(itemdata);
 	menuitem->label = itemname;
 	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
 	menuitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;

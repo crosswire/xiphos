@@ -1,47 +1,78 @@
 This file contains any messages produced by compilers while
 running configure, to aid debugging if configure makes a mistake.
 
-configure:576: checking for a BSD compatible install
-configure:629: checking whether build environment is sane
-configure:686: checking whether make sets ${MAKE}
-configure:732: checking for working aclocal
-configure:745: checking for working autoconf
-configure:758: checking for working automake
-configure:771: checking for working autoheader
-configure:784: checking for working makeinfo
-configure:872: checking for gnome-config
-configure:909: checking if /usr/bin/gnome-config works
-configure:917: checking for orbit-config
-configure:953: checking for orbit-idl
-configure:987: checking for working ORBit environment
-configure:1023: checking for gnorba libraries
-configure:1127: checking for gcc
-configure:1240: checking whether the C compiler (gcc  ) works
-configure:1256: gcc -o conftest    conftest.c  1>&5
-configure:1282: checking whether the C compiler (gcc  ) is a cross-compiler
-configure:1287: checking whether we are using GNU C
-configure:1315: checking whether gcc accepts -g
-configure:1347: checking for POSIXized ISC
-configure:1370: checking for gcc
-configure:1483: checking whether the C compiler (gcc -g -O2 ) works
-configure:1499: gcc -o conftest -g -O2   conftest.c  1>&5
-configure:1525: checking whether the C compiler (gcc -g -O2 ) is a cross-compiler
-configure:1530: checking whether we are using GNU C
-configure:1558: checking whether gcc accepts -g
-configure:1590: checking how to run the C preprocessor
-configure:1670: checking for ANSI C header files
-configure:1786: checking what warning flags to pass to the C compiler
-configure:1818: checking what language compliance flags to pass to the C compiler
-configure:1843: checking for pthread_create in -lpthread
-configure:2067: checking for gtk-config
-configure:2102: checking for GTK - version >= 1.2.0
-configure:2203: gcc -o conftest -g -O2 -Wall -Wunused  -I/usr/lib/glib/include -I/usr/X11R6/include   conftest.c -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
-configure:2306: checking for SmcSaveYourselfDone in -lSM
-configure:2354: checking for X11/SM/SMlib.h
-configure:2402: checking for XpmFreeXpmImage in -lXpm
-configure:2457: checking for c++
-configure:2489: checking whether the C++ compiler (c++  ) works
-configure:2505: c++ -o conftest   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.C  1>&5
-configure:2531: checking whether the C++ compiler (c++  ) is a cross-compiler
-configure:2536: checking whether we are using GNU C++
-configure:2564: checking whether c++ accepts -g
+configure:586: checking for a BSD compatible install
+configure:639: checking whether build environment is sane
+configure:696: checking whether make sets ${MAKE}
+configure:742: checking for working aclocal
+configure:755: checking for working autoconf
+configure:768: checking for working automake
+configure:781: checking for working autoheader
+configure:794: checking for working makeinfo
+configure:882: checking for gnome-config
+configure:919: checking if /usr/bin/gnome-config works
+configure:927: checking for orbit-config
+configure:963: checking for orbit-idl
+configure:997: checking for working ORBit environment
+configure:1033: checking for gnorba libraries
+configure:1141: checking for gcc
+configure:1254: checking whether the C compiler (gcc  ) works
+configure:1270: gcc -o conftest    conftest.c  1>&5
+configure:1296: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1301: checking whether we are using GNU C
+configure:1329: checking whether gcc accepts -g
+configure:1361: checking for POSIXized ISC
+configure:1384: checking for gcc
+configure:1497: checking whether the C compiler (gcc -g -O2 ) works
+configure:1513: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1539: checking whether the C compiler (gcc -g -O2 ) is a cross-compiler
+configure:1544: checking whether we are using GNU C
+configure:1572: checking whether gcc accepts -g
+configure:1604: checking how to run the C preprocessor
+configure:1684: checking for ANSI C header files
+configure:1800: checking what warning flags to pass to the C compiler
+configure:1832: checking what language compliance flags to pass to the C compiler
+configure:1857: checking for pthread_create in -lpthread
+configure:2081: checking for gtk-config
+configure:2116: checking for GTK - version >= 1.2.0
+configure:2217: gcc -o conftest -g -O2 -Wall -Wunused  -I/usr/lib/glib/include -I/usr/X11R6/include   conftest.c -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
+configure:2320: checking for SmcSaveYourselfDone in -lSM
+configure:2368: checking for X11/SM/SMlib.h
+configure:2416: checking for XpmFreeXpmImage in -lXpm
+configure:2465: checking for Gdkpixbuf libraries
+configure:2551: checking host system type
+configure:2572: checking build system type
+configure:2592: checking for ranlib
+configure:2631: checking for ld used by GCC
+configure:2693: checking if the linker (/usr/bin/ld) is GNU ld
+configure:2709: checking for BSD-compatible nm
+configure:2745: checking whether ln -s works
+ltconfig:603: checking for object suffix
+ltconfig:604: gcc -c -g -O2 -Wall -Wunused   -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+ltconfig:629: checking for executable suffix
+ltconfig:630: gcc -o conftest -g -O2 -Wall -Wunused   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.c  1>&5
+conftest.c:1: warning: return-type defaults to `int'
+ltconfig:776: checking if gcc PIC flag -fPIC works
+ltconfig:777: gcc -c -g -O2 -Wall -Wunused  -fPIC -DPIC  -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+ltconfig:829: checking if gcc supports -c -o file.o
+ltconfig:830: gcc -c -g -O2 -Wall -Wunused  -o out/conftest2.o  -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+ltconfig:862: checking if gcc supports -c -o file.lo
+ltconfig:863: gcc -c -g -O2 -Wall -Wunused  -c -o conftest.lo  -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+ltconfig:914: checking if gcc supports -fno-rtti -fno-exceptions
+ltconfig:915: gcc -c -g -O2 -Wall -Wunused  -fno-rtti -fno-exceptions -c conftest.c  -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+ltconfig:958: checking if gcc static flag -static works
+ltconfig:959: gcc -o conftest -g -O2 -Wall -Wunused   -I/usr/lib/glib/include -I/usr/X11R6/include  -static conftest.c  1>&5
+conftest.c:1: warning: return-type defaults to `int'
+GNU ld version 2.9.5 (with BFD 2.9.5.0.22)
+ltconfig:1635: checking if global_symbol_pipe works
+ltconfig:1636: gcc -c -g -O2 -Wall -Wunused   -I/usr/lib/glib/include -I/usr/X11R6/include conftest.c 1>&5
+conftest.c:9: warning: return-type defaults to `int'
+ltconfig:1639: eval "/usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW]\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1691: gcc -o conftest -g -O2 -Wall -Wunused  -fno-builtin -fno-rtti -fno-exceptions  -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.c conftstm.o 1>&5
+conftest.c:6: warning: `main' is usually a function
+configure:2940: checking for c++
+configure:2972: checking whether the C++ compiler (c++  ) works
+configure:2988: c++ -o conftest   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.C  1>&5
+configure:3014: checking whether the C++ compiler (c++  ) is a cross-compiler
+configure:3019: checking whether we are using GNU C++
+configure:3047: checking whether c++ accepts -g

@@ -31,6 +31,8 @@
 #include <swmgr.h>
 #include <versekey.h>
 #include <regex.h>
+#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include <widgets/e-paned/e-hpaned.h>
 
 #include "callback.h"
 #include "GnomeSword.h"
@@ -64,6 +66,7 @@ extern GtkWidget *MainFrm;      //-- GnomeSword widget (gnome app)(declared and 
 extern GtkWidget *NEtext;
 extern GtkWidget *bookmark_mnu; //-- ???
 extern GtkWidget *strongsnum; //-- menu check item (declared in GnomeSword.cpp)
+extern GtkWidget *shortcut_bar;
 extern gchar	*font_mainwindow, //--
 							*font_interlinear, //--
 							*font_currentverse;//--
@@ -77,14 +80,22 @@ extern SWModule *curMod; //-- module for main text window (GnomeSword.cpp)
 extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.cpp)
 extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
 extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
-extern SWModule *curcomMod;
+extern SWModule *curcomMod;  //-- module for commentary text window (GnomeSword.cpp)
+extern SWModule *curdictMod; //-- module for dict/lex text window (GnomeSword.cpp)
+
 extern gint ibookmarks;    //-- number of bookmark menu items
 extern NoteEditor *noteeditor;
 extern gboolean autoscroll;
+extern gboolean isstrongs; //-- main window selection is not storngs number (GnomeSword.cpp)
 guint		num1,
 				num2,
 				num3;
-bool buttonpressed=false;
+bool buttonpressed = false;
+bool    dicttabs,
+        comtabs,
+        bar,
+        applycolor = false;
+
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -164,52 +175,12 @@ on_btnAboutOK_clicked                  (GtkButton       *button,
 
 //----------------------------------------------------------------------------------------------
 void
-on_dictionary_lookup1_activate         (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_copy_verse1_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
   GtkWidget *text;
 	text = lookup_widget(MainFrm,"moduleText");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_item1_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnOptionsOK_clicked                (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnOptionsCancel_clicked            (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnOptionsHelp_clicked              (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -319,23 +290,6 @@ on_john_3_1_activate                   (GtkMenuItem     *menuitem,
 {
  	changeVerse((gchar*)user_data);
 }
-
-//----------------------------------------------------------------------------------------------
-void
-on_romans_1_1_activate                 (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-  	changeVerse((gchar*)user_data);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_luke_1_1_activate                   (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
- 	changeVerse((gchar*)user_data);
-}
-
 //----------------------------------------------------------------------------------------------
 void
 on_footnotes_activate                 (GtkMenuItem     *menuitem,
@@ -347,13 +301,6 @@ on_footnotes_activate                 (GtkMenuItem     *menuitem,
 		footnotesSWORD(FALSE);
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_view_item1_activate                 (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
 //----------------------------------------------------------------------------------------------
 void
 on_mainText_activate                   (GtkMenuItem     *menuitem,
@@ -378,14 +325,6 @@ on_1st_interlinear_window1_activate    (GtkMenuItem     *menuitem,
 
 //----------------------------------------------------------------------------------------------
 void
-on_item2_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_2nd_interlinear_window1_activate    (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
@@ -404,14 +343,6 @@ on_3rd_interlinear_window1_activate    (GtkMenuItem     *menuitem,
 
 	modName = 	(gchar *)user_data;
 	changecomp3ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_item4_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -440,33 +371,6 @@ on_show_interlinear_page1_activate     (GtkMenuItem     *menuitem,
 
 //----------------------------------------------------------------------------------------------
 void
-on_about2_activate                     (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-gboolean
-on_cbBook_button_release_event         (GtkWidget       *widget,
-                                        GdkEventButton  *event,
-                                        gpointer         user_data)
-{
-
-  return FALSE;
-}
-
-//----------------------------------------------------------------------------------------------
-GtkDirectionType
-on_cbBook_focus                        (GtkContainer    *container,
-                                        GtkDirectionType direction,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_cbeBook_changed                     (GtkEditable     *editable,
                                         gpointer         user_data)
 {
@@ -483,23 +387,6 @@ on_cbeBook_changed                     (GtkEditable     *editable,
 		changeVerse(ref);	
 	}	
 }
-
-//----------------------------------------------------------------------------------------------
-void
-on_spbChapter_changed                  (GtkEditable     *editable,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_spbChapter_activate                 (GtkEditable     *editable,
-                                        gpointer         user_data)
-{
-
-}
-
 //----------------------------------------------------------------------------------------------
 gboolean
 on_spbChapter_button_release_event     (GtkWidget       *widget,
@@ -508,22 +395,6 @@ on_spbChapter_button_release_event     (GtkWidget       *widget,
 {
 	chapterSWORD();
     return TRUE;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_spbVerse_changed                    (GtkEditable     *editable,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_spbVerse_activate                   (GtkEditable     *editable,
-                                        gpointer         user_data)
-{
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -554,16 +425,6 @@ on_cbeFreeformLookup_key_press_event   (GtkWidget       *widget,
   	return TRUE;
 }
 
-//----------------------------------------------------------------------------------------------
-gboolean
-on_arrow1_button_press_event           (GtkWidget       *widget,
-                                        GdkEventButton  *event,
-                                        gpointer         user_data)
-{
-
-  return FALSE;
-}
-
 
 //----------------------------------------------------------------------------------------------
 void
@@ -581,15 +442,24 @@ on_moduleText_button_press_event       (GtkWidget       *widget,
 {							
 	gint	versenum; //-- new verse number
 	
+	isstrongs = false;
 	if(event->button == 1)//-- some one pressed mouse button one
 	{		
 		//gtk_entry_set_text(GTK_ENTRY(lookup_widget(widget,"dictionarySearchText")), "");
 		if(!GTK_EDITABLE(widget)->has_selection) return false; //-- we do not have a selection
 		versenum = getversenumber(widget);  //-- get the new verse number
-		if(versenum > 0) //-- if not a number stop
+		if(versenum > 0 ) //-- if not a number stop
 		{
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),versenum); //-- set verse spin button to new number
-			verseSWORD(); //-- change modules to the new verse
+			if(isstrongs)  //-- if we have a storngs number look it up
+			{
+			
+			   isstrongs = false;
+			}
+			else
+			{
+			    gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),versenum); //-- set verse spin button to new number
+			    verseSWORD(); //-- change modules to the new verse
+			}
 		}
 	}
 	return true;
@@ -635,20 +505,7 @@ void
 on_btnEditNote_toggled                 (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-	editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
-/*	if(
-	{
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(GTK_WIDGET(togglebutton),"textComments")), TRUE);	
-		noteModified = FALSE;
-		
-	}
-	else
-	{
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(GTK_WIDGET(togglebutton),"textComments")), FALSE);
-		//if(noteModified) ;
-	}
-*/
-	//setsensitive(togglebutton->active);
+	editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active); 	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -660,8 +517,7 @@ on_btnSaveNote_clicked                 (GtkButton       *button,
 	{
 		//saveChanges = true; //-- we know we want to save the changes - that's how we got here
 		savenoteSWORD(noteModified);
-	}	
-	//noteModified = false;
+	}
 }
 
 //----------------------------------------------------------------------------------------------
@@ -894,30 +750,6 @@ on_list1_select_row                    (GtkCList        *clist,
 
 //----------------------------------------------------------------------------------------------
 void
-on_item51_activate                     (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_item52_activate                     (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_item53_activate                     (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_btnSpell_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 { 	
@@ -928,7 +760,6 @@ on_btnSpell_clicked                    (GtkButton       *button,
 #endif /* USE_ASPELL */
 }
 
-
 //----------------------------------------------------------------------------------------------
 void
 on_btbSpellOK_clicked                  (GtkButton       *button,
@@ -938,15 +769,6 @@ on_btbSpellOK_clicked                  (GtkButton       *button,
 
 	spell = gtk_widget_get_toplevel (GTK_WIDGET (button));	
 	gtk_widget_destroy(spell);
-}
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnSpellApply_clicked               (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
 }
 
 
@@ -980,41 +802,6 @@ on_exit1_activate                      (GtkMenuItem     *menuitem,
 	ShutItDown();
 }
 
-
-//----------------------------------------------------------------------------------------------
-void
-on_copy1_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_copy2_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_find1_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_inter1_module1_activate               (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
 //----------------------------------------------------------------------------------------------
 void
 on_clear1_activate               (GtkMenuItem     *menuitem,    //-- clear history menu
@@ -1033,16 +820,6 @@ on_about_gnomesword1_activate                     (GtkMenuItem     *menuitem,
 	AboutBox = create_about2();
 	gtk_widget_show (AboutBox);
 }
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_item3_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
 
 //----------------------------------------------------------------------------------------------
 void
@@ -1090,17 +867,8 @@ on_copy3_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	GtkWidget *text;
-	text = lookup_widget(MainFrm,"moduleText");
+	text = lookup_widget(MainFrm,(gchar *)user_data);
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_propertybox1_clicked                (GnomePropertyBox *gnomepropertybox,
-                                        gint             arg1,
-                                        gpointer         user_data)
-{
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1162,6 +930,9 @@ on_preferences1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	openpropertiesbox();
+	comtabs = settings->showcomtabs;
+	dicttabs = settings->showdicttabs;
+	bar = settings->showshortcutbar;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1332,6 +1103,7 @@ on_cpfgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (gnomecolorpicker));
 	btnok = lookup_widget(dlg,"btnPropertyboxOK");
 	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	applycolor = true;
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true); 		
 }
@@ -1460,7 +1232,12 @@ void
 on_cut1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+    GtkWidget *text;
+    if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active)
+    {
+	    text = lookup_widget(MainFrm,"textComments");
+	    gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
+	}
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1468,7 +1245,9 @@ void
 on_copy4_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+    GtkWidget *text;
+	text = lookup_widget(MainFrm,"textComments");
+	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1476,7 +1255,10 @@ void
 on_paste1_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+    GtkWidget *text;
 
+	text = lookup_widget(MainFrm,"textComments");
+	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
 
@@ -1845,7 +1627,10 @@ on_btnPropertyboxOK_clicked            (GtkButton       *button,
  	GtkWidget	*dlg;
 
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
-	setcurrentversecolor(num1,num2,num3);		
+	if(applycolor)setcurrentversecolor(num1,num2,num3);
+	applycolor = false;	
+	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat"));
+	applyoptions(bar, comtabs, dicttabs); 	
 	gtk_widget_destroy(dlg);
 }
 
@@ -1854,8 +1639,10 @@ void
 on_btnPropertyboxApply_clicked         (GtkButton       *button,
                                         gpointer         user_data)
 {
-	setcurrentversecolor(num1,num2,num3);
-	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat")); 	
+	if(applycolor) setcurrentversecolor(num1,num2,num3); //-- if color has changed
+	applycolor = false;
+	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat"));
+	applyoptions(bar, comtabs, dicttabs); 	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2484,18 +2271,10 @@ on_lookup_word_1_activate              (GtkMenuItem     *menuitem,
 
 //----------------------------------------------------------------------------------------------
 void
-on_copy5_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
 on_about_this_module5_activate         (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+   showmoduleinfoSWORD(curdictMod->Name());
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2560,7 +2339,7 @@ on_lookup_selection_activate           (GtkMenuItem     *menuitem,
   }
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_lookup_selection2_activate          (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -2579,15 +2358,15 @@ on_lookup_selection2_activate          (GtkMenuItem     *menuitem,
   }
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_about_this_module6_activate         (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+    showmoduleinfoSWORD(curcomMod->Name());
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnComPrev_clicked                  (GtkButton       *button,
                                         gpointer         user_data)
@@ -2603,7 +2382,7 @@ on_btnComNext_clicked                  (GtkButton       *button,
 	navcurcomModSWORD(1);
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_auto_scroll1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -2618,23 +2397,41 @@ on_auto_scroll1_activate               (GtkMenuItem     *menuitem,
 	
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_lookup_selection4_activate          (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+  GtkWidget *entry,
+            *text;
+  gchar		*buf;
 
+  entry = lookup_widget(MainFrm, "dictionarySearchText");
+  text  = lookup_widget(MainFrm, "textComments");
+  if(GTK_EDITABLE(text)->has_selection)
+  {   	
+  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  	dictSearchTextChangedSWORD(buf);
+  }
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_goto_reference3_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+    GtkWidget *text;
+	gchar *buf;
+	
+	text = lookup_widget(MainFrm,"textDict");
+	if(!GTK_EDITABLE(text)->has_selection) return; //-- do we have a selection?
+	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+	
+	changeVerse(buf);
 }
 
-
+//----------------------------------------------------------------------------------------------
 gboolean
 on_dictionarySearchText_key_press_event
                                         (GtkWidget       *widget,
@@ -2653,7 +2450,7 @@ on_dictionarySearchText_key_press_event
   return FALSE;
 }
 
-
+//----------------------------------------------------------------------------------------------
 gboolean
 on_list1_button_press_event            (GtkWidget       *widget,
                                         GdkEventButton  *event,
@@ -2663,3 +2460,120 @@ on_list1_button_press_event            (GtkWidget       *widget,
   return FALSE;
 }
 
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowSCB_toggled                 (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    GtkWidget	*dlg,
+						*btnok,
+						*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	bar = togglebutton->active;	
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowCOMtabs_toggled             (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    GtkWidget	*dlg,
+						*btnok,
+						*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true); 	
+	comtabs = togglebutton->active;
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowDLtabs_toggled              (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    GtkWidget	*dlg,
+						*btnok,
+						*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	dicttabs = togglebutton->active; 	 	
+}
+
+//----------------------------------------------------------------------------------------------
+void   //-- show hide commentary notebook tabs - popup menu choice
+on_show_tabs1_activate                 (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+   if(GTK_CHECK_MENU_ITEM(menuitem)->active) gtk_widget_show(lookup_widget(MainFrm,"notebook1"));
+   else gtk_widget_hide(lookup_widget(MainFrm,"notebook1"));
+}
+
+//----------------------------------------------------------------------------------------------
+void  //-- show hide dict/lex notebook tabs - popup menu choice
+on_show_tabs2_activate                 (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+    if(GTK_CHECK_MENU_ITEM(menuitem)->active) gtk_widget_show(lookup_widget(MainFrm,"notebook4"));
+    else gtk_widget_hide(lookup_widget(MainFrm,"notebook4"));
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnSB_clicked                       (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   if(settings->showshortcutbar)
+   {
+      settings->showshortcutbar = false;
+      gtk_widget_hide(GTK_WIDGET(shortcut_bar));
+   }
+   else
+   {
+      settings->showshortcutbar = true;
+      gtk_widget_show(GTK_WIDGET(shortcut_bar));
+   }
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_shortcut_bar_item_selected           (EShortcutBar *shortcut_bar,
+					                    GdkEvent *event,
+					                    gint group_num,
+					                    gint item_num)
+{
+    sbchangeModSword(group_num, item_num);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_com_select_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+    gchar *modNum;
+
+	modNum = (gchar *)user_data;
+	sbchangeModSword(1, atoi(modNum));
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_dict_select_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+    gchar *modNum;
+
+	modNum = (gchar *)user_data;
+	sbchangeModSword(2, atoi(modNum));
+}

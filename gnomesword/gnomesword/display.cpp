@@ -37,9 +37,11 @@
 #include <versekey.h>
 //#include <thmlgbf.h>
 //#include <gbfplain.h>
+//#include <gtkhtml.h>
 
 #include "display.h"
 #include "support.h"
+#include "interface.h"
 #include "GnomeSword.h"
 
 GdkColor GTKEntryDisp::colourBlue;
@@ -579,8 +581,40 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 }
 
+/*
+//-------------------------------------------------------------------------------------------
+char
+HTMLChapDisp::Display(SWModule &imodule)
+{
+	char tmpBuf[255];
 
-
+	
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gfloat adjVal;
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++)
+	{
+		sprintf(tmpBuf, "%d. ", key->Verse());
+		showhtml(tmpBuf);
+		if (key->Verse() == curVerse)
+		{
+			showhtml((const char *)imodule);
+		}
+		else
+		{
+			showhtml((const char *)imodule);
+		}   		
+	}
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+}
+*/
 //-----------------------------------------------------------------------------------------------
 char                                   //-- this will handle some of the html formatting
 HTMLentryDisp::Display(SWModule &imodule)
@@ -725,7 +759,7 @@ HTMLentryDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-char                                //-- this will handle some GBF format a chapter at a time
+char                                //-- this will handle some html format a chapter at a time
 HTMLChapDisp::Display(SWModule &imodule)
 {
 	char    tmpBuf[255];
@@ -887,16 +921,7 @@ HTMLChapDisp::Display(SWModule &imodule)
 			        j=0;
 			        verseBuf[0]='\0';
 			        //i= i+15;
-		        }/*
-		        else if(!strcmp(tag,"</CITE></CITE></I>")) //-- special format used in KJV for Psalms titles -- end italic
-		        {  		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_italic_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        //Fo_on = false;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+18;
-		        } */
+		        }
 		        else if(!strcmp(tag,"<CITE><CITE>")) //-- special format used in KJV for Psalms titles
 		        {
 		

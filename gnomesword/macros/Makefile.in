@@ -57,23 +57,35 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AS = @AS@
 CC = @CC@
 CXX = @CXX@
+DLLTOOL = @DLLTOOL@
+EXTRA_GNOME_CFLAGS = @EXTRA_GNOME_CFLAGS@
+EXTRA_GNOME_LIBS = @EXTRA_GNOME_LIBS@
 GNOMEGNORBA_LIBS = @GNOMEGNORBA_LIBS@
 GNOMEUI_LIBS = @GNOMEUI_LIBS@
 GNOME_APPLETS_LIBS = @GNOME_APPLETS_LIBS@
 GNOME_CAPPLET_LIBS = @GNOME_CAPPLET_LIBS@
 GNOME_CONFIG = @GNOME_CONFIG@
+GNOME_DOCKLETS_LIBS = @GNOME_DOCKLETS_LIBS@
 GNOME_INCLUDEDIR = @GNOME_INCLUDEDIR@
 GNOME_LIBDIR = @GNOME_LIBDIR@
 GNOME_LIBS = @GNOME_LIBS@
+GNOME_PRINT_CFLAGS = @GNOME_PRINT_CFLAGS@
+GNOME_PRINT_LIBS = @GNOME_PRINT_LIBS@
 GNORBA_CFLAGS = @GNORBA_CFLAGS@
 GNORBA_LIBS = @GNORBA_LIBS@
 GTKXMHTML_LIBS = @GTKXMHTML_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_CONFIG = @GTK_CONFIG@
 GTK_LIBS = @GTK_LIBS@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
+OBJDUMP = @OBJDUMP@
 ORBIT_CFLAGS = @ORBIT_CFLAGS@
 ORBIT_CONFIG = @ORBIT_CONFIG@
 ORBIT_IDL = @ORBIT_IDL@
@@ -81,6 +93,7 @@ ORBIT_LIBS = @ORBIT_LIBS@
 PACKAGE = @PACKAGE@
 PACKAGE_PIXMAPS_DIR = @PACKAGE_PIXMAPS_DIR@
 PTHREAD_LIB = @PTHREAD_LIB@
+RANLIB = @RANLIB@
 VERSION = @VERSION@
 XPM_LIBS = @XPM_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
@@ -93,9 +106,9 @@ MACROS =    aclocal-include.m4				  compiler-flags.m4				  curses.m4					  gnome
 EXTRA_DIST = $(MACROS) gnome-common.m4 autogen.sh
 MAINTAINERCLEANFILES = macros.dep
 
-@INSIDE_GNOME_COMMON_TRUE@gnome_aclocaldir = $(datadir)/aclocal/gnome
+@INSIDE_GNOME_COMMON_TRUE@gnome_aclocaldir = $(datadir)/aclocal/gnome-macros
 
-@INSIDE_GNOME_COMMON_TRUE@gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 autogen.sh
+@INSIDE_GNOME_COMMON_TRUE@gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 	autogen.sh
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -206,6 +219,7 @@ clean-am:  clean-generic mostlyclean-am
 clean: clean-am
 
 distclean-am:  distclean-generic clean-am
+	-rm -f libtool
 
 distclean: distclean-am
 
