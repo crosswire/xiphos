@@ -37,7 +37,8 @@
 #include "filestuff.h"
 #include "menustuff.h"
 #include "listeditor.h"
-//#include "noteeditor.h"
+//#include "searchstuff.h"
+
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 #include  <widgets/e-paned/e-paned.h>
 #include  <widgets/e-paned/e-hpaned.h>
@@ -592,7 +593,7 @@ void addBookmark(GtkWidget *app)
 	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(app,"cbeBook"))); /* get book name */
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbVerse"))); /* get verse number */
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbChapter"))); /* get chapter */
-	sprintf(buf,"%s %d:%d\0",bookname, iChap,iVerse ); /* put book chapter and verse into bookmarks array */
+	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' ); /* put book chapter and verse into bookmarks array */
 	 ++ibookmarks;  /* increment number of bookmark item + 1 */	
 	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
 	removemenuitems(app, "_Bookmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
@@ -644,9 +645,7 @@ void showIntPage(GtkWidget *app, gboolean choice)
  * arg3 - blue
 *****************************************************************************/
 void setcurrentversecolor(gint arg1, gint arg2, gint arg3)
-{
- 	gchar buf[10]; /* temp storage for args */
- 	
+{	
         /* set color for current session */
 	myGreen.red = arg1;  /* new red setting */
 	settings->currentverse_red = arg1; /* remember setting */
