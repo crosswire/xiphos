@@ -86,13 +86,11 @@ typedef map < string, string > bookAbrevMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
-//SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
 SWDisplay 
     *comp1Display,		/* to display interlinear modules  a verse at a time */
     *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *commDisplay,		/* to display commentary modules */
-   // *bookDisplay,		/* to display gbs modules */
     *UTF8Display;		/* to display modules in utf8 */
     
 SWMgr 
@@ -113,7 +111,6 @@ SWModule
     *interlinearMod3,			/* module for first interlinear window */
     *interlinearMod4,			/* module for first interlinear window */
     *curcomMod,			/* module for commentary  window */
-  //  *curbookMod,			/* module for gen book  window */
     *percomMod,			/* module for personal commentary  window */
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
@@ -171,7 +168,8 @@ extern gint
  dictpages,		/* number of dictionaries */
  compages,			/* number of commentaries */
  textpages,			/* number of Bible text */
- historyitems;			/* number of history items */
+ historyitems,			/* number of history items */
+ bookpages;
 extern SETTINGS * settings, myset;
 extern GtkWidget 
         *lang_options_menu,
@@ -267,7 +265,8 @@ void initSWORD(SETTINGS *s)
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
 	compages = 0;
 	dictpages = 0;
-
+	textpages = 0;
+	bookpages = 0;
 
 	if (s->showsplash) {
 		while (gtk_events_pending())
@@ -276,7 +275,7 @@ void initSWORD(SETTINGS *s)
 	
 	g_print("Sword locale is %s\n", LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 
-	g_print("%s\n", "Loading SWORD Moudules");
+	g_print("%s\n", "Loading SWORD Modules");
 	
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string ((char *) (*it).second->Description())] =
@@ -318,8 +317,15 @@ void initSWORD(SETTINGS *s)
 		else if (!strcmp((*it).second->Type(), "Generic Books")) { 			
 			bookmods = g_list_append(bookmods, (*it).second->Name());
 			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
+			++bookpages;
 		}
 	}
+	
+	g_print("\nNumber of Text modules = %d\n",textpages);
+	g_print("Number of Commentary modules = %d\n",compages);
+	g_print("Number of Dict/Lex modules = %d\n",dictpages);
+	g_print("Number of Book modules = %d\n\n",bookpages);
+	
 	//-- setup Generic Book Support
 	backend_setupGBS(s);
 	
@@ -777,7 +783,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 			on_off = "Off";
 		}
 	switch (window) {
-	case 0:		// main text window 
+	case MAIN_TEXT_WINDOW:		
 		mainMgr->setGlobalOption(option, on_off);		
 		save_module_options(curMod->Name(), option, on_off);
 		
@@ -819,7 +825,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 		}
 		
 		break;
-	case 1:		// interlinear window   
+	case INTERLINEAR_WINDOW:		
 		mainMgr1->setGlobalOption(option, on_off);
 		
 		
@@ -1405,10 +1411,10 @@ void setglobalopsSWORD(gint window, gchar * option, gchar * yesno)
 {
 	/* turn option on or off */
 	switch (window) {
-	case 0:	/*** Bible text window ***/
+	case MAIN_TEXT_WINDOW:	/*** Bible text window ***/
 		mainMgr->setGlobalOption(option, yesno);
 		break;
-	case 1:	/*** interlinear window ***/
+	case INTERLINEAR_WINDOW:	/*** interlinear window ***/
 		mainMgr1->setGlobalOption(option, yesno);
 		break;
 	}
