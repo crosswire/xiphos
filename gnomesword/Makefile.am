@@ -17,6 +17,8 @@ COMMON_SOURCE =  \
     gs_studypad.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
+    gs_history.c \
+    gs_history.h \
     callback.cpp \
     callback.h \
     display.cpp \

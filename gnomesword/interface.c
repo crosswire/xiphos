@@ -71,7 +71,7 @@ gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 };
 
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
-GtkWidget *main_label, *MainFrm;
+GtkWidget *main_label;
 EShortcutModel *shortcut_model;
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data);
