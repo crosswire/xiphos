@@ -24,7 +24,9 @@
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
+#endif
 
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
