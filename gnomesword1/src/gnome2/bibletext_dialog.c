@@ -903,7 +903,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	    gtk_toolbar_new();
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar_nav), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar_nav);
-	gtk_widget_set_usize(toolbar_nav, -2, 34);
+	gtk_widget_set_size_request(toolbar_nav, -1, 34);
 /*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);*/
 	
@@ -919,7 +919,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 				      get_list(BOOKS_LIST));
 
 	vt->cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_set_usize(vt->cbe_book, 100, -2);
+	gtk_widget_set_size_request(vt->cbe_book, 100, -1);
 	gtk_widget_show(vt->cbe_book);
 	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), _("Romans"));
 
@@ -1318,7 +1318,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	frame21 = gtk_frame_new(NULL);
 	gtk_widget_show(frame21);
 	gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
-	gtk_widget_set_usize(frame21, -2, 400);
+	gtk_widget_set_size_request(frame21, -1, 400);
 
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
