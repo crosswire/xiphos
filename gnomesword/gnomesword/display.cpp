@@ -686,7 +686,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 		greek_on = true;
 	} else if (!strcmp(font, "Greek")) {
 		sword_font = gdk_font_load
-		    ("-unknown-greekregular-medium-r-normal--15-140-75-75-p-74-adobe-fontspecific");
+		    ("-unknown-greek1-medium-r-normal-*-*-160-*-*-p-*-adobe-fontspecific");
 		if (sword_font == NULL)
 			sword_font = gdk_font_load
 			    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
