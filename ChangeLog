@@ -1,3 +1,9 @@
+2003-12-21  Terry <tbiggs@users.sf.net>
+
+	* fixed bug #863854 that I caused when I fixed to build with
+	  -DGTK_DISABLE_DEPRECATED -- still builds with -DGTK_DISABLE_DEPRECATED
+	  
+
 2003-12-19  Terry <tbiggs@users.sf.net>
 
 	* fixed to build with -DGTK_DISABLE_DEPRECATED

@@ -2304,8 +2304,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_no_scope =
 	    gtk_radio_button_new_with_label(hbox77_group,
 					    _("Entire module"));
-/*	hbox77_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_no_scope));*/
+	hbox77_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_no_scope));
 	gtk_widget_show(rb_no_scope);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_no_scope, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_no_scope,
@@ -2316,8 +2316,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_last =
 	    gtk_radio_button_new_with_label(hbox77_group,
 					    _("Current results"));
-/*	hbox77_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_last));*/
+	hbox77_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_last));
 	gtk_widget_show(rb_last);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_last, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_last,
@@ -2327,8 +2327,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_custom_range =
 	    gtk_radio_button_new_with_label(hbox77_group,
 					    _("Custom range"));
-/*	hbox77_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_custom_range));*/
+	hbox77_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_custom_range));
 	gtk_widget_show(rb_custom_range);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_custom_range, TRUE, TRUE,
 			   0);
@@ -2381,8 +2381,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_one_mod =
 	    gtk_radio_button_new_with_label(hbox79_group,
 					    _("Single module"));
-/*	hbox79_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_one_mod));*/
+	hbox79_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_one_mod));
 	gtk_widget_show(rb_one_mod);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_one_mod, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_one_mod,
@@ -2394,8 +2394,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_mod_list =
 	    gtk_radio_button_new_with_label(hbox79_group,
 					    _("Module list"));
-/*	hbox79_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_mod_list));*/
+	hbox79_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_mod_list));
 	gtk_widget_show(rb_mod_list);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_mod_list, FALSE, TRUE,
 			   0);
@@ -2406,8 +2406,8 @@ static GtkWidget *create_search_dialog(void)
 	rb_custom_list =
 	    gtk_radio_button_new_with_label(hbox79_group,
 					    _("Custom list"));
-/*	hbox79_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_custom_list));*/
+	hbox79_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_custom_list));
 	gtk_widget_show(rb_custom_list);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_custom_list, FALSE, TRUE,
 			   0);
@@ -2458,23 +2458,23 @@ static GtkWidget *create_search_dialog(void)
 	rb_words =
 	    gtk_radio_button_new_with_label(_301_group,
 					    _("Multi word"));
-/*	_301_group = gtk_radio_button_group(GTK_RADIO_BUTTON(rb_words));*/
+	_301_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_words));
 	gtk_widget_show(rb_words);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_words, FALSE, FALSE, 0);
 
 	tb_regexp =
 	    gtk_radio_button_new_with_label(_301_group,
 					    _("Regular expression"));
-/*	_301_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(tb_regexp));*/
+	_301_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(tb_regexp));
 	gtk_widget_show(tb_regexp);
 	gtk_box_pack_start(GTK_BOX(vbox63), tb_regexp, FALSE, FALSE, 0);
 
 	rb_exact_phrase =
 	    gtk_radio_button_new_with_label(_301_group,
 					    _("Exact phrase"));
-/*	_301_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rb_exact_phrase));*/
+	_301_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_exact_phrase));
 	gtk_widget_show(rb_exact_phrase);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_exact_phrase, FALSE,
 			   FALSE, 0);

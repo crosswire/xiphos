@@ -137,6 +137,104 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 
 /******************************************************************************
  * Name
+ *   deal_with_gbf_storngs
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void deal_with_gbf_storngs(const gchar *url)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void deal_with_gbf_storngs(const gchar *url)
+{
+	gchar *buf1;
+		
+	if (*url == 'T') {
+		++url;	/* remove T */
+		if (*url == 'G') {
+			++url;	/* remove G */
+			if (settings.havethayer) {
+				buf1 = g_strdup(url);
+				show_in_appbar(widgets.
+					       appbar,
+					       buf1,
+					       "Thayer");
+				g_free(buf1);
+				return;
+			} else
+				return;
+		}
+		if (*url == 'H') {
+			++url;	/* remove H */
+			if (settings.havebdb) {
+				buf1 = g_strdup(url);
+				show_in_appbar(widgets.
+					       appbar,
+					       buf1,
+					       "BDB");
+				g_free(buf1);
+				return;
+			} else
+				return;
+		}
+	}
+
+	if (*url == 'G') {
+		++url;	/* remove G */
+		buf1 = g_strdup(url);
+		if (atoi(buf1) > 5624) {
+			if (settings.havethayer) {
+				show_in_appbar(widgets.
+					       appbar,
+					       buf1,
+					       "Thayer");
+				g_free(buf1);
+				return;
+			} else
+				return;
+
+		} else {
+			show_in_appbar(widgets.appbar,
+				       buf1,
+				       settings.
+				       lex_greek);
+			g_free(buf1);
+			return;
+		}
+	}
+
+	if (*url == 'H') {
+		++url;	/* remove H */
+		buf1 = g_strdup(url);
+		if (atoi(buf1) > 8674) {
+			if (settings.havebdb) {
+				show_in_appbar(widgets.
+					       appbar,
+					       buf1,
+					       "BDB");
+				g_free(buf1);
+				return;
+			} else
+				return;
+		} else {
+			show_in_appbar(widgets.appbar,
+				       buf1,
+				       settings.
+				       lex_hebrew);
+			g_free(buf1);
+			return;
+		}
+	}	
+}
+
+/******************************************************************************
+ * Name
  *   gui_url
  *
  * Synopsis
@@ -223,87 +321,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, "%s", url);
 		} else if (*url == '#') {/***  gbf strongs  ***/
 			++url;	/* remove # */
-			if (*url == 'T') {
-				++url;	/* remove T */
-				if (*url == 'G') {
-					++url;	/* remove G */
-					if (settings.havethayer) {
-						buf1 = g_strdup(url);
-						show_in_appbar(widgets.
-							       appbar,
-							       buf1,
-							       "Thayer");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
-				}
-
-				if (*url == 'H') {
-					++url;	/* remove H */
-					if (settings.havebdb) {
-						buf1 = g_strdup(url);
-						show_in_appbar(widgets.
-							       appbar,
-							       buf1,
-							       "BDB");
-						g_free(buf1);
-						return;
-					}
-
-					else
-						return;
-				}
-			}
-
-			if (*url == 'G') {
-				++url;	/* remove G */
-				buf1 = g_strdup(url);
-				if (atoi(buf1) > 5624) {
-					if (settings.havethayer) {
-						show_in_appbar(widgets.
-							       appbar,
-							       buf1,
-							       "Thayer");
-						g_free(buf1);
-						return;
-					} else
-						return;
-
-				} else {
-					show_in_appbar(widgets.appbar,
-						       buf1,
-						       settings.
-						       lex_greek);
-					g_free(buf1);
-					return;
-				}
-			}
-
-			if (*url == 'H') {
-				++url;	/* remove H */
-				buf1 = g_strdup(url);
-				if (atoi(buf1) > 8674) {
-					if (settings.havebdb) {
-						show_in_appbar(widgets.
-							       appbar,
-							       buf1,
-							       "BDB");
-						g_free(buf1);
-						return;
-					} else
-						return;
-				} else {
-					show_in_appbar(widgets.appbar,
-						       buf1,
-						       settings.
-						       lex_hebrew);
-					g_free(buf1);
-					return;
-				}
-			}
+			deal_with_gbf_storngs(url);
 		} else if (!strncmp(url, "type=morph", 10)) {/***  thml morph tag  ***/
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
@@ -448,7 +466,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				modbuf = newmod;
 			
 			ref = g_strdup(newref);
-			if(get_mod_type(modbuf) == TEXT_TYPE) {
+			if(GPOINTER_TO_INT(data) == TEXT_TYPE) {//get_mod_type(modbuf) == TEXT_TYPE) {
 				e_utf8 = e_utf8_from_locale_string((const char *)ref);
 				gui_display_in_hint_window(e_utf8);
 			}
@@ -683,9 +701,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						    ("Thayer", buf);
 					g_free(buf);
 					return;
-				}
-
-				else
+				} else
 					return;
 			}
 
@@ -701,9 +717,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						    ("BDB", buf);
 					g_free(buf);
 					return;
-				}
-
-				else
+				} else
 					return;
 			}
 		}
@@ -753,13 +767,9 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						    ("BDB", buf);
 					g_free(buf);
 					return;
-				}
-
-				else
+				} else
 					return;
-			}
-
-			else {
+			} else {
 				if (settings.inDictpane)
 					gui_change_module_and_key
 					    (settings.lex_hebrew, buf);

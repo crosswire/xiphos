@@ -461,9 +461,9 @@ void gui_create_search_sidebar(void)
 
 	radiobutton_search_text =
 	    gtk_radio_button_new_with_label(vbox90_group, _("Bible"));
-/*	vbox90_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (radiobutton_search_text));*/
+	vbox90_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_text));
 	gtk_widget_show(radiobutton_search_text);
 	gtk_widget_set_size_request(radiobutton_search_text, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_text,
@@ -472,9 +472,9 @@ void gui_create_search_sidebar(void)
 	radiobutton_search_comm =
 	    gtk_radio_button_new_with_label(vbox90_group,
 					    _("Commentary"));
-/*	vbox90_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (radiobutton_search_comm));*/
+	vbox90_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON
+				   (radiobutton_search_comm));
 	gtk_widget_show(radiobutton_search_comm);
 	gtk_widget_set_size_request(radiobutton_search_comm, -1, 20);
 	gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_comm,
@@ -484,7 +484,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_new_with_label(vbox90_group,
 					    _("Dictionary"));
 	vbox90_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_dict));
 	gtk_widget_show(radiobutton_search_dict);
 	gtk_widget_set_size_request(radiobutton_search_dict, -1, 20);
@@ -495,7 +495,7 @@ void gui_create_search_sidebar(void)
 	    gtk_radio_button_new_with_label(vbox90_group,
 					    _("General Book"));
 	vbox90_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON
 				   (radiobutton_search_book));
 	gtk_widget_show(radiobutton_search_book);
 	gtk_widget_set_size_request(radiobutton_search_book, -1, 20);
@@ -526,8 +526,8 @@ void gui_create_search_sidebar(void)
 	rbMultiword =
 	    gtk_radio_button_new_with_label(vbox2_group,
 					    _("Multi word"));
-	/*vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbMultiword));*/
+	vbox2_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbMultiword));
 	gtk_widget_show(rbMultiword);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbMultiword, FALSE,
 			   FALSE, 0);
@@ -538,8 +538,8 @@ void gui_create_search_sidebar(void)
 	rbRegExp =
 	    gtk_radio_button_new_with_label(vbox2_group,
 					    _("Regular expression"));
-/*	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbRegExp));*/
+	vbox2_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbRegExp));
 	gtk_widget_show(rbRegExp);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbRegExp, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(rbRegExp, -1, 20);
@@ -547,8 +547,8 @@ void gui_create_search_sidebar(void)
 	rbPhraseSearch =
 	    gtk_radio_button_new_with_label(vbox2_group,
 					    _("Exact phrase"));
-/*	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbPhraseSearch));*/
+	vbox2_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbPhraseSearch));
 	gtk_widget_show(rbPhraseSearch);
 	gtk_box_pack_start(GTK_BOX(vbox2), rbPhraseSearch,
 			   FALSE, FALSE, 0);
@@ -604,8 +604,8 @@ void gui_create_search_sidebar(void)
 
 	rbNoScope =
 	    gtk_radio_button_new_with_label(vbox4_group, _("No scope"));
-/*	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbNoScope));*/
+	vbox4_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbNoScope));
 	gtk_widget_show(rbNoScope);
 	gtk_box_pack_start(GTK_BOX(vbox4), rbNoScope, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(rbNoScope, -1, 20);
@@ -615,8 +615,8 @@ void gui_create_search_sidebar(void)
 	rrbUseBounds =
 	    gtk_radio_button_new_with_label(vbox4_group,
 					    _("Use bounds"));
-/*	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rrbUseBounds));*/
+	vbox4_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rrbUseBounds));
 	gtk_widget_show(rrbUseBounds);
 	gtk_box_pack_start(GTK_BOX(vbox4), rrbUseBounds, FALSE,
 			   FALSE, 0);
@@ -625,8 +625,8 @@ void gui_create_search_sidebar(void)
 	rbLastSearch =
 	    gtk_radio_button_new_with_label(vbox4_group,
 					    _("Last search"));
-/*	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbLastSearch));*/
+	vbox4_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbLastSearch));
 	gtk_widget_show(rbLastSearch);
 	gtk_box_pack_start(GTK_BOX(vbox4), rbLastSearch, FALSE,
 			   FALSE, 0);
