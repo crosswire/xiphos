@@ -2,14 +2,14 @@
 Please see INSTALL file before you start.
 ==================================================================
 ******************************************************************
-GnomeSword requires Gnome ,the Sword libs and GtkHTML-0.9.x to run
+GnomeSword requires Gnome ,the Sword libs and GtkHTML-1.x to run
 ******************************************************************
 ##################################################################
 you can do some formatting of your personal notes
 text inclosed in <B></b> will be bold - ctrl+b
 text inclosed in <I></i> will be italic - ctrl+i
 text inclosed in <FONT FACE="symbol"></font> will use the symbol font (greek) - ctrl+g
-text formatted like <a href=\"Romans 8:28">Romans 8:28</a> will be red (for Bible references) - ctrl+r
+text formatted like <a href=\"Romans 8:28">Romans 8:28</a> to link to Bible references) - ctrl+r
 you can also mark for underline - ctrl+l.
 when in edit mode you will see the format <TAGS> in the editor
 you must higlight the text you want marked - then use the keys or the popup menu to apply

@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-	GtkWidget *create_dlgViewText(void);
+	GtkWidget *create_dlgViewText(GList *glist);
 
 #ifdef __cplusplus
 }
