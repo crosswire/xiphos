@@ -768,3 +768,23 @@ on_notebook3_switch_page               (GtkNotebook     *notebook,
                                         GtkNotebookPage *page,
                                         gint             page_num,
                                         gpointer         user_data);
+
+void
+on_btnInfoBoxYes_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnInfoBoxNo_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnAboutSwordOK_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_kjv1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnAboutModuleOK_clicked            (GtkButton       *button,
+                                        gpointer         user_data);

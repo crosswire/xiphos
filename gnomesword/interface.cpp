@@ -241,6 +241,50 @@ static GnomeUIInfo settings1_menu_uiinfo[] =
   GNOMEUIINFO_END
 };
 
+static GnomeUIInfo bible_texts1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo commentaries1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo dictionaries_lexicons1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo about_sword_modules1_menu_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_SUBTREE, "Bible Texts",
+    "Information about Bible texts",
+    bible_texts1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, "Bible Texts",
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, "Commentaries",
+    NULL,
+    commentaries1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, "Commentaries",
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, "Dictionaries-Lexicons",
+    NULL,
+    dictionaries_lexicons1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, "Dictionaries-Lexicons",
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
 static GnomeUIInfo help1_menu_uiinfo[] =
 {
   {
@@ -255,6 +299,13 @@ static GnomeUIInfo help1_menu_uiinfo[] =
     "About GnomeSword",
     on_about_gnomesword1_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, "About Sword Modules",
+    "Information about the installed modules",
+    about_sword_modules1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "About Sword Modules",
     0, 0, NULL
   },
   GNOMEUIINFO_END
@@ -545,6 +596,41 @@ create_mainwindow (void)
   gtk_widget_ref (help1_menu_uiinfo[1].widget);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "about_gnomesword1",
                             help1_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (help1_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "about_sword_modules1",
+                            help1_menu_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (about_sword_modules1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "bible_texts1",
+                            about_sword_modules1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (bible_texts1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator15",
+                            bible_texts1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (about_sword_modules1_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "commentaries1",
+                            about_sword_modules1_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (commentaries1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator16",
+                            commentaries1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (about_sword_modules1_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "dictionaries_lexicons1",
+                            about_sword_modules1_menu_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (dictionaries_lexicons1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator17",
+                            dictionaries_lexicons1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   toolbar20 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
@@ -1382,6 +1468,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
+  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
 
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
@@ -1571,7 +1658,7 @@ create_propertybox1 (void)
 
   propertybox1 = gnome_property_box_new ();
   gtk_object_set_data (GTK_OBJECT (propertybox1), "propertybox1", propertybox1);
-  gtk_container_set_border_width (GTK_CONTAINER (propertybox1), 1);
+  gtk_container_set_border_width (GTK_CONTAINER (propertybox1), 5);
 
   notebook6 = GNOME_PROPERTY_BOX (propertybox1)->notebook;
   gtk_object_set_data (GTK_OBJECT (propertybox1), "notebook6", notebook6);
@@ -1925,7 +2012,7 @@ create_about2 (void)
                         "This is a faithful saying,and worthy of all acceptation, that Christ Jesus came into the world to save sinners; of whom I am chief. - I Timothy 1:15",
                         "gnomesword/GnomeSword.png");
   gtk_object_set_data (GTK_OBJECT (about2), "about2", about2);
-  gtk_container_set_border_width (GTK_CONTAINER (about2), 1);
+  gtk_container_set_border_width (GTK_CONTAINER (about2), 4);
   gtk_window_set_modal (GTK_WINDOW (about2), TRUE);
 
   return about2;
@@ -2070,6 +2157,7 @@ create_dlgSearch (void)
 
   dlgSearch = gnome_dialog_new ("GnomeSword - Search", NULL);
   gtk_object_set_data (GTK_OBJECT (dlgSearch), "dlgSearch", dlgSearch);
+  gtk_container_set_border_width (GTK_CONTAINER (dlgSearch), 4);
   GTK_WINDOW (dlgSearch)->type = GTK_WINDOW_DIALOG;
 
   dialog_vbox1 = GNOME_DIALOG (dlgSearch)->vbox;
@@ -2426,6 +2514,7 @@ create_wdwEditBookmarks (void)
 
   wdwEditBookmarks = gnome_dialog_new ("GnomeSword - Edit Bookmarks", NULL);
   gtk_object_set_data (GTK_OBJECT (wdwEditBookmarks), "wdwEditBookmarks", wdwEditBookmarks);
+  gtk_container_set_border_width (GTK_CONTAINER (wdwEditBookmarks), 4);
 
   dialog_vbox2 = GNOME_DIALOG (wdwEditBookmarks)->vbox;
   gtk_object_set_data (GTK_OBJECT (wdwEditBookmarks), "dialog_vbox2", dialog_vbox2);
@@ -2564,100 +2653,6 @@ create_wdwEditBookmarks (void)
   return wdwEditBookmarks;
 }
 
-GtkWidget*
-create_dlgAboutSword (void)
-{
-  GtkWidget *dlgAboutSword;
-  GtkWidget *dialog_vbox4;
-  GtkWidget *vbox21;
-  GtkWidget *pixmap1;
-  GtkWidget *scrolledwindow26;
-  GtkWidget *txtAboutSword;
-  GtkWidget *scrolledwindow27;
-  GtkWidget *text6;
-  GtkWidget *dialog_action_area4;
-  GtkWidget *btnAboutSwordOK;
-
-  dlgAboutSword = gtk_dialog_new ();
-  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dlgAboutSword", dlgAboutSword);
-  gtk_widget_set_usize (dlgAboutSword, 319, -2);
-  gtk_window_set_title (GTK_WINDOW (dlgAboutSword), "About The Sword Project");
-  gtk_window_set_modal (GTK_WINDOW (dlgAboutSword), TRUE);
-
-  dialog_vbox4 = GTK_DIALOG (dlgAboutSword)->vbox;
-  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dialog_vbox4", dialog_vbox4);
-  gtk_widget_show (dialog_vbox4);
-
-  vbox21 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox21);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "vbox21", vbox21,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox21);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox4), vbox21, TRUE, TRUE, 0);
-
-  pixmap1 = create_pixmap (dlgAboutSword, "gnomesword/sword.xpm", FALSE);
-  gtk_widget_ref (pixmap1);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "pixmap1", pixmap1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (pixmap1);
-  gtk_box_pack_start (GTK_BOX (vbox21), pixmap1, FALSE, FALSE, 0);
-  gtk_misc_set_padding (GTK_MISC (pixmap1), 4, 4);
-
-  scrolledwindow26 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow26);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "scrolledwindow26", scrolledwindow26,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow26);
-  gtk_box_pack_start (GTK_BOX (vbox21), scrolledwindow26, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow26), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-
-  txtAboutSword = gtk_text_new (NULL, NULL);
-  gtk_widget_ref (txtAboutSword);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "txtAboutSword", txtAboutSword,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (txtAboutSword);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow26), txtAboutSword);
-  gtk_widget_realize (txtAboutSword);
-  gtk_text_insert (GTK_TEXT (txtAboutSword), NULL, NULL, NULL,
-                   "The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.", 359);
-
-  scrolledwindow27 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow27);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "scrolledwindow27", scrolledwindow27,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow27);
-  gtk_box_pack_start (GTK_BOX (vbox21), scrolledwindow27, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow27), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-
-  text6 = gtk_text_new (NULL, NULL);
-  gtk_widget_ref (text6);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "text6", text6,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (text6);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow27), text6);
-  gtk_widget_realize (text6);
-  gtk_text_insert (GTK_TEXT (text6), NULL, NULL, NULL,
-                   "Modules can be downloaded from the Sword Project at www.crosswire.org", 69);
-
-  dialog_action_area4 = GTK_DIALOG (dlgAboutSword)->action_area;
-  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dialog_action_area4", dialog_action_area4);
-  gtk_widget_show (dialog_action_area4);
-  gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area4), 10);
-
-  btnAboutSwordOK = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
-  gtk_widget_ref (btnAboutSwordOK);
-  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "btnAboutSwordOK", btnAboutSwordOK,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnAboutSwordOK);
-  gtk_box_pack_start (GTK_BOX (dialog_action_area4), btnAboutSwordOK, FALSE, FALSE, 0);
-
-  gtk_signal_connect (GTK_OBJECT (btnAboutSwordOK), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnAboutSwordOK_clicked),
-                      NULL);
-
-  return dlgAboutSword;
-}
-
 static GnomeUIInfo edit2_menu_uiinfo[] =
 {
   GNOMEUIINFO_MENU_CUT_ITEM (on_cut1_activate, NULL),
@@ -2735,6 +2730,7 @@ create_dlgVerseList (void)
 
   dlgVerseList = gnome_dialog_new ("GnomeSword - Verse List", NULL);
   gtk_object_set_data (GTK_OBJECT (dlgVerseList), "dlgVerseList", dlgVerseList);
+  gtk_container_set_border_width (GTK_CONTAINER (dlgVerseList), 4);
   gtk_window_set_policy (GTK_WINDOW (dlgVerseList), FALSE, FALSE, TRUE);
 
   dialog_vbox5 = GNOME_DIALOG (dlgVerseList)->vbox;
@@ -2914,5 +2910,319 @@ create_dlgVerseList (void)
                       NULL);
 
   return dlgVerseList;
+}
+
+GtkWidget*
+create_InfoBox (void)
+{
+  GtkWidget *InfoBox;
+  GtkWidget *dialog_vbox6;
+  GtkWidget *hbox20;
+  GtkWidget *pixmap2;
+  GtkWidget *vbox24;
+  GtkWidget *lbInfoBox1;
+  GtkWidget *lbInfoBox2;
+  GtkWidget *lbInfoBox3;
+  GtkWidget *dialog_action_area6;
+  GtkWidget *btnInfoBoxYes;
+  GtkWidget *btnInfoBoxNo;
+
+  InfoBox = gnome_dialog_new ("GnomeSword - InfoBox", NULL);
+  gtk_object_set_data (GTK_OBJECT (InfoBox), "InfoBox", InfoBox);
+  gtk_widget_set_usize (InfoBox, 216, -2);
+  gtk_container_set_border_width (GTK_CONTAINER (InfoBox), 4);
+  gtk_window_set_modal (GTK_WINDOW (InfoBox), TRUE);
+
+  dialog_vbox6 = GNOME_DIALOG (InfoBox)->vbox;
+  gtk_object_set_data (GTK_OBJECT (InfoBox), "dialog_vbox6", dialog_vbox6);
+  gtk_widget_show (dialog_vbox6);
+
+  hbox20 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox20);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "hbox20", hbox20,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox20);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox6), hbox20, TRUE, TRUE, 0);
+
+  pixmap2 = create_pixmap (InfoBox, "gnomesword/GnomeSword.xpm", FALSE);
+  gtk_widget_ref (pixmap2);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "pixmap2", pixmap2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (pixmap2);
+  gtk_box_pack_start (GTK_BOX (hbox20), pixmap2, TRUE, TRUE, 0);
+
+  vbox24 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox24);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "vbox24", vbox24,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox24);
+  gtk_box_pack_start (GTK_BOX (hbox20), vbox24, TRUE, TRUE, 0);
+
+  lbInfoBox1 = gtk_label_new ("File");
+  gtk_widget_ref (lbInfoBox1);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "lbInfoBox1", lbInfoBox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (lbInfoBox1);
+  gtk_box_pack_start (GTK_BOX (vbox24), lbInfoBox1, FALSE, FALSE, 0);
+
+  lbInfoBox2 = gtk_label_new ("in StudyPad is not saved!");
+  gtk_widget_ref (lbInfoBox2);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "lbInfoBox2", lbInfoBox2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (lbInfoBox2);
+  gtk_box_pack_start (GTK_BOX (vbox24), lbInfoBox2, FALSE, FALSE, 0);
+
+  lbInfoBox3 = gtk_label_new ("Shall I save it?");
+  gtk_widget_ref (lbInfoBox3);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "lbInfoBox3", lbInfoBox3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (lbInfoBox3);
+  gtk_box_pack_start (GTK_BOX (vbox24), lbInfoBox3, FALSE, FALSE, 0);
+
+  dialog_action_area6 = GNOME_DIALOG (InfoBox)->action_area;
+  gtk_object_set_data (GTK_OBJECT (InfoBox), "dialog_action_area6", dialog_action_area6);
+  gtk_widget_show (dialog_action_area6);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area6), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area6), 8);
+
+  gnome_dialog_append_button (GNOME_DIALOG (InfoBox), GNOME_STOCK_BUTTON_YES);
+  btnInfoBoxYes = g_list_last (GNOME_DIALOG (InfoBox)->buttons)->data;
+  gtk_widget_ref (btnInfoBoxYes);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "btnInfoBoxYes", btnInfoBoxYes,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnInfoBoxYes);
+  GTK_WIDGET_SET_FLAGS (btnInfoBoxYes, GTK_CAN_DEFAULT);
+
+  gnome_dialog_append_button (GNOME_DIALOG (InfoBox), GNOME_STOCK_BUTTON_NO);
+  btnInfoBoxNo = g_list_last (GNOME_DIALOG (InfoBox)->buttons)->data;
+  gtk_widget_ref (btnInfoBoxNo);
+  gtk_object_set_data_full (GTK_OBJECT (InfoBox), "btnInfoBoxNo", btnInfoBoxNo,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnInfoBoxNo);
+  GTK_WIDGET_SET_FLAGS (btnInfoBoxNo, GTK_CAN_DEFAULT);
+
+  gtk_signal_connect (GTK_OBJECT (btnInfoBoxYes), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnInfoBoxYes_clicked),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (btnInfoBoxNo), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnInfoBoxNo_clicked),
+                      NULL);
+
+  return InfoBox;
+}
+
+GtkWidget*
+create_AboutSword (void)
+{
+  GtkWidget *AboutSword;
+  GtkWidget *dialog_vbox7;
+  GtkWidget *vbox21;
+  GtkWidget *pixmap1;
+  GtkWidget *scrolledwindow26;
+  GtkWidget *txtAboutSword;
+  GtkWidget *label95;
+  GtkWidget *href1;
+  GtkWidget *label96;
+  GtkWidget *text6;
+  GtkWidget *dialog_action_area7;
+  GtkWidget *btnAboutSwordOK;
+
+  AboutSword = gnome_dialog_new ("About The Sword Project", NULL);
+  gtk_object_set_data (GTK_OBJECT (AboutSword), "AboutSword", AboutSword);
+  gtk_container_set_border_width (GTK_CONTAINER (AboutSword), 4);
+  gtk_window_set_policy (GTK_WINDOW (AboutSword), FALSE, FALSE, FALSE);
+
+  dialog_vbox7 = GNOME_DIALOG (AboutSword)->vbox;
+  gtk_object_set_data (GTK_OBJECT (AboutSword), "dialog_vbox7", dialog_vbox7);
+  gtk_widget_show (dialog_vbox7);
+
+  vbox21 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox21);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "vbox21", vbox21,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox21);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox7), vbox21, TRUE, TRUE, 0);
+
+  pixmap1 = create_pixmap (AboutSword, "gnomesword/sword.xpm", FALSE);
+  gtk_widget_ref (pixmap1);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "pixmap1", pixmap1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (pixmap1);
+  gtk_box_pack_start (GTK_BOX (vbox21), pixmap1, FALSE, FALSE, 0);
+  gtk_misc_set_padding (GTK_MISC (pixmap1), 4, 4);
+
+  scrolledwindow26 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow26);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "scrolledwindow26", scrolledwindow26,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow26);
+  gtk_box_pack_start (GTK_BOX (vbox21), scrolledwindow26, TRUE, TRUE, 0);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow26), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+
+  txtAboutSword = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (txtAboutSword);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "txtAboutSword", txtAboutSword,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (txtAboutSword);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow26), txtAboutSword);
+  gtk_widget_set_usize (txtAboutSword, -2, 103);
+  gtk_widget_realize (txtAboutSword);
+  gtk_text_insert (GTK_TEXT (txtAboutSword), NULL, NULL, NULL,
+                   "The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.", 359);
+
+  label95 = gtk_label_new ("Modules can be downloaded from the Sword Project ");
+  gtk_widget_ref (label95);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "label95", label95,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label95);
+  gtk_box_pack_start (GTK_BOX (vbox21), label95, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label95, -2, 24);
+
+  href1 = gnome_href_new ("www.crosswire.org", "The Sword Project");
+  gtk_widget_ref (href1);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "href1", href1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (href1);
+  gtk_box_pack_start (GTK_BOX (vbox21), href1, FALSE, FALSE, 0);
+
+  label96 = gtk_label_new ("Current Module");
+  gtk_widget_ref (label96);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "label96", label96,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label96);
+  gtk_box_pack_start (GTK_BOX (vbox21), label96, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label96, -2, 19);
+
+  text6 = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (text6);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "text6", text6,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (text6);
+  gtk_box_pack_start (GTK_BOX (vbox21), text6, TRUE, TRUE, 0);
+
+  dialog_action_area7 = GNOME_DIALOG (AboutSword)->action_area;
+  gtk_object_set_data (GTK_OBJECT (AboutSword), "dialog_action_area7", dialog_action_area7);
+  gtk_widget_show (dialog_action_area7);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area7), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area7), 8);
+
+  gnome_dialog_append_button (GNOME_DIALOG (AboutSword), GNOME_STOCK_BUTTON_OK);
+  btnAboutSwordOK = g_list_last (GNOME_DIALOG (AboutSword)->buttons)->data;
+  gtk_widget_ref (btnAboutSwordOK);
+  gtk_object_set_data_full (GTK_OBJECT (AboutSword), "btnAboutSwordOK", btnAboutSwordOK,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnAboutSwordOK);
+  GTK_WIDGET_SET_FLAGS (btnAboutSwordOK, GTK_CAN_DEFAULT);
+
+  gtk_signal_connect (GTK_OBJECT (btnAboutSwordOK), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnAboutSwordOK_clicked),
+                      NULL);
+
+  return AboutSword;
+}
+
+GtkWidget*
+create_dialog1 (void)
+{
+  GtkWidget *dialog1;
+  GtkWidget *dialog_vbox8;
+  GtkWidget *vbox25;
+  GtkWidget *hbox21;
+  GtkWidget *pixmap3;
+  GtkWidget *label97;
+  GtkWidget *pixmap4;
+  GtkWidget *lbModName;
+  GtkWidget *scrolledwindow30;
+  GtkWidget *textModAbout;
+  GtkWidget *dialog_action_area8;
+  GtkWidget *btnAboutModuleOK;
+
+  dialog1 = gnome_dialog_new ("About Sword Modules", NULL);
+  gtk_object_set_data (GTK_OBJECT (dialog1), "dialog1", dialog1);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog1), 4);
+  gtk_window_set_policy (GTK_WINDOW (dialog1), FALSE, FALSE, FALSE);
+
+  dialog_vbox8 = GNOME_DIALOG (dialog1)->vbox;
+  gtk_object_set_data (GTK_OBJECT (dialog1), "dialog_vbox8", dialog_vbox8);
+  gtk_widget_show (dialog_vbox8);
+
+  vbox25 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox25);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "vbox25", vbox25,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox25);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox8), vbox25, TRUE, TRUE, 0);
+
+  hbox21 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox21);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "hbox21", hbox21,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox21);
+  gtk_box_pack_start (GTK_BOX (vbox25), hbox21, TRUE, TRUE, 0);
+
+  pixmap3 = create_pixmap (dialog1, "gnomesword/sword.xpm", FALSE);
+  gtk_widget_ref (pixmap3);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "pixmap3", pixmap3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (pixmap3);
+  gtk_box_pack_start (GTK_BOX (hbox21), pixmap3, TRUE, TRUE, 0);
+
+  label97 = gtk_label_new ("The Sword Project");
+  gtk_widget_ref (label97);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "label97", label97,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label97);
+  gtk_box_pack_start (GTK_BOX (hbox21), label97, FALSE, FALSE, 0);
+
+  pixmap4 = create_pixmap (dialog1, "gnomesword/GnomeSword.xpm", FALSE);
+  gtk_widget_ref (pixmap4);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "pixmap4", pixmap4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (pixmap4);
+  gtk_box_pack_start (GTK_BOX (hbox21), pixmap4, TRUE, TRUE, 0);
+
+  lbModName = gtk_label_new ("KJV");
+  gtk_widget_ref (lbModName);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "lbModName", lbModName,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (lbModName);
+  gtk_box_pack_start (GTK_BOX (vbox25), lbModName, FALSE, FALSE, 0);
+  gtk_widget_set_usize (lbModName, -2, 21);
+
+  scrolledwindow30 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow30);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "scrolledwindow30", scrolledwindow30,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow30);
+  gtk_box_pack_start (GTK_BOX (vbox25), scrolledwindow30, TRUE, TRUE, 0);
+  gtk_widget_set_usize (scrolledwindow30, 304, 183);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow30), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+
+  textModAbout = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (textModAbout);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "textModAbout", textModAbout,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (textModAbout);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow30), textModAbout);
+
+  dialog_action_area8 = GNOME_DIALOG (dialog1)->action_area;
+  gtk_object_set_data (GTK_OBJECT (dialog1), "dialog_action_area8", dialog_action_area8);
+  gtk_widget_show (dialog_action_area8);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area8), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area8), 8);
+
+  gnome_dialog_append_button (GNOME_DIALOG (dialog1), GNOME_STOCK_BUTTON_OK);
+  btnAboutModuleOK = g_list_last (GNOME_DIALOG (dialog1)->buttons)->data;
+  gtk_widget_ref (btnAboutModuleOK);
+  gtk_object_set_data_full (GTK_OBJECT (dialog1), "btnAboutModuleOK", btnAboutModuleOK,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnAboutModuleOK);
+  GTK_WIDGET_SET_FLAGS (btnAboutModuleOK, GTK_CAN_DEFAULT);
+
+  gtk_signal_connect (GTK_OBJECT (btnAboutModuleOK), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnAboutModuleOK_clicked),
+                      NULL);
+
+  return dialog1;
 }
 
