@@ -605,11 +605,12 @@ static int show_module_and_key(const char * module, const char * key,
 	gint verse_count;
 	gboolean change_verse = FALSE;
 		
+	g_message("show_module_and_key1");
 	if(!clicked) {
 		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
 		return 1;
 	}
-	
+	g_message("show_module_and_key2");
 	
 	if(backend->is_module(module)) {
 		if(!strcmp(type,"newTab")) {
