@@ -35,7 +35,6 @@ extern "C" {
 	
 
 #include "main/search_sidebar.h"
-#include "main/search.h"
 #include "main/settings.h"
 #include "main/xml.h"
  

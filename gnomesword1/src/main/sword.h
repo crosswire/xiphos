@@ -27,7 +27,6 @@ extern "C" {
 #endif
 #include <gnome.h>
 	
-#include "main/module.h"
 #include "main/key.h"	
 #include "main/configs.h"	
 /*** these defs need to be seen by gui and backend ***/
@@ -54,6 +53,8 @@ extern "C" {
 
 //void set_global_option(int manager, char * option, gboolean choice);
 //void delete_module_mgr(void);
+char *main_get_active_pane_key(void);
+char *main_get_active_pane_module(void);
 const char *get_sword_version(void);
 char *get_path_to_mods(void);
 void init_sword(void);

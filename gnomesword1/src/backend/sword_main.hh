@@ -123,6 +123,7 @@ public:
 	
 	
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
+	SWMgr *get_main_mgr(void) {return(main_mgr);};
 };
 extern BackEnd *backend;
 
