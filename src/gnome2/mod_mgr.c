@@ -1425,6 +1425,22 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 }
 
 
+/******************************************************************************
+ * Name
+ *   save_sources
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void save_sources(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 void save_sources(void)
 {	
 	gchar *type = NULL;
@@ -1488,6 +1504,23 @@ void save_sources(void)
 }
 
 
+/******************************************************************************
+ * Name
+ *   on_fileselection_local_source_response
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_fileselection_local_source_response (GtkDialog * dialog,
+ *                                gint response_id, GtkFileSelection * filesel)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 void on_fileselection_local_source_response (GtkDialog * dialog,
                                 gint response_id, GtkFileSelection * filesel)
 {
@@ -1520,6 +1553,22 @@ void on_fileselection_local_source_response (GtkDialog * dialog,
 }
 
 
+/******************************************************************************
+ * Name
+ *   create_fileselection_local_source
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   GtkWidget* create_fileselection_local_source (void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
 GtkWidget* create_fileselection_local_source (void)
 {
   GtkWidget *fileselection_local_source;
@@ -1549,12 +1598,45 @@ GtkWidget* create_fileselection_local_source (void)
   return fileselection_local_source;
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_button_add_local_clicked
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *dlg = create_fileselection_local_source ();
 	gtk_widget_show(dlg);
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_button_remove_local_clicked
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 static void on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
 {
@@ -1611,8 +1693,23 @@ static void on_button_remove_local_clicked(GtkButton * button, gpointer user_dat
 }
 
 
-void
-on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_button_add_remote_clicked
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
@@ -1665,8 +1762,23 @@ on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-void
-on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_button_remove_remote_clicked
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -1719,9 +1831,6 @@ on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 	g_string_free(str,TRUE);
 	
 }
-
-
-
 
 
 /******************************************************************************
