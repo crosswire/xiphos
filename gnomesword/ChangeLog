@@ -1,5 +1,10 @@
 2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* shortcut bar viewer is made visible when a word is clicked
+	  in a Bible text ,Commentary or Book pane.
+
+2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* reworked some of the save and load bookmarks code
 	  to work with Victor's changes	
 	* removed unused button form shortcut bar verse list

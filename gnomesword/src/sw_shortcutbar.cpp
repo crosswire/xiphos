@@ -234,7 +234,8 @@ displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
 	
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 2);	
 	sprintf(s->groupName,"%s","Viewer");
-	changegroupnameSB(s, s->groupName, groupnum7);
+	showSBVerseList(s);
+	//changegroupnameSB(s, s->groupName, groupnum7);
 	if(!strcmp(modName,viewersbMod->Name())){
 		viewersbMod->SetKey(key); //-- set key to the first one in the list
 		viewersbMod->Display(); 
