@@ -10,6 +10,8 @@ INCLUDES = \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE = \
+        gs_studypad.c \
+        gs_studypad.h \
         gs_gnomesword.c \
         gs_gnomesword.h \
         callback.cpp \
@@ -22,7 +24,7 @@ COMMON_SOURCE = \
         gs_sword.h \
         interface.c \
         interface.h \
-        listeditor.cpp \
+        listeditor.c \
         listeditor.h \
         main.cpp \
         menustuff.c \

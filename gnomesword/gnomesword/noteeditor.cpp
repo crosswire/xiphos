@@ -112,7 +112,7 @@ NoteEditor::setGREEK(GtkWidget *text) //-- insert greek tags
 
 //----------------------------------------------------------------------------------------
 bool
-NoteEditor::setNEWLINE(GtkWidget *text) //-- insert greek tags
+NoteEditor::setNEWLINE(GtkWidget *text) //-- insert new line
 {
 	gtk_text_set_point(GTK_TEXT(text), gtk_editable_get_position(GTK_EDITABLE(text)));
 	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<br>", -1); 	
