@@ -29,9 +29,11 @@
 #include <string.h>
 #include <utf8html.h>
 
-#include "backend/dialogs.hh"
+#include "backend/module_search.hh"
 #include "backend/gs_markupfiltmgr.h"
 
+#include "main/search_sidebar.h"
+#include "main/search_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
 
@@ -40,7 +42,7 @@ using namespace std;
 
 
 
-ModuleDialogs::ModuleDialogs() {
+ModuleSearch::ModuleSearch() {
 	mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;	
 	tree_key = NULL;	
@@ -49,7 +51,7 @@ ModuleDialogs::ModuleDialogs() {
 }
 
 
-ModuleDialogs::~ModuleDialogs() {
+ModuleSearch::~ModuleSearch() {
 	delete mgr;
 	
 	if (entryDisplay)
@@ -59,8 +61,7 @@ ModuleDialogs::~ModuleDialogs() {
 }
 
 
-void ModuleDialogs::init_SWORD() {
-	//main_setup_new_displays();
+void ModuleSearch::init_SWORD() {
 	ModMap::iterator it;
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {	
 		mod = (*it).second;
@@ -72,8 +73,12 @@ void ModuleDialogs::init_SWORD() {
 	}
 }
 
+char *ModuleSearch::get_config_entry(char * entry) {
+	return g_strdup((char *) mod->getConfigEntry(entry));
+}
 
-GList *ModuleDialogs::fill_Bible_books(int testament) {
+
+GList *ModuleSearch::fill_Bible_books(int testament) {
 	VerseKey key;
 	GList *retlist = NULL;
 	char *book = NULL;
@@ -114,7 +119,7 @@ GList *ModuleDialogs::fill_Bible_books(int testament) {
 }
 
 
-void ModuleDialogs::get_module_options(GList * options) {
+void ModuleSearch::get_module_options(GList * options) {
 	StringList optionslist = mgr->getGlobalOptions();	
 	for (StringList::iterator it = optionslist.begin(); 
 				  it != optionslist.end(); it++) {
@@ -123,7 +128,7 @@ void ModuleDialogs::get_module_options(GList * options) {
 }
 
 
-int ModuleDialogs::is_Bible_key(const char * list, char * current_key) {
+int ModuleSearch::is_Bible_key(const char * list, char * current_key) {
 	VerseKey key;
 	
 	key.setText(current_key);
@@ -132,14 +137,14 @@ int ModuleDialogs::is_Bible_key(const char * list, char * current_key) {
 }
 
 
-char *ModuleDialogs::get_valid_key(const char *key) {
+char *ModuleSearch::get_valid_key(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
 	return strdup((char *) vkey.getText());
 }
 
-char *ModuleDialogs::key_get_book(const char *key) {
+char *ModuleSearch::key_get_book(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -147,7 +152,7 @@ char *ModuleDialogs::key_get_book(const char *key) {
 }
 
 
-int ModuleDialogs::key_get_chapter(const char *key) {
+int ModuleSearch::key_get_chapter(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -155,7 +160,7 @@ int ModuleDialogs::key_get_chapter(const char *key) {
 }
 
 
-const unsigned int ModuleDialogs::key_chapter_count(const char *key) {
+const unsigned int ModuleSearch::key_chapter_count(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -166,7 +171,7 @@ const unsigned int ModuleDialogs::key_chapter_count(const char *key) {
 }
 
 
-const unsigned int ModuleDialogs::key_verse_count(const char *key) {
+const unsigned int ModuleSearch::key_verse_count(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -178,21 +183,21 @@ const unsigned int ModuleDialogs::key_verse_count(const char *key) {
 }
 
 
-char *ModuleDialogs::get_module_key() {
+char *ModuleSearch::get_module_key() {
 	(const char *) *mod;
 	return strdup(mod->KeyText());
 }
 
 
-void ModuleDialogs::save_entry(const char * entry) {
+void ModuleSearch::save_entry(const char * entry) {
 	mod->setEntry((const char *) entry);
 }
 
-void ModuleDialogs::delete_entry(void) {
+void ModuleSearch::delete_entry(void) {
 	mod->deleteEntry();
 }
 
-int ModuleDialogs::is_module(const char *mod_name) {
+int ModuleSearch::is_module(const char *mod_name) {
 	SWMgr *tmp_mgr = new SWMgr();
 	ModMap::iterator it = tmp_mgr->Modules.find(mod_name);
 	if (it != tmp_mgr->Modules.end()) {
@@ -204,7 +209,7 @@ int ModuleDialogs::is_module(const char *mod_name) {
 }
 
 
-int ModuleDialogs::module_type(void) {
+int ModuleSearch::module_type(void) {
 	if (!strcmp(mod->Type(), TEXT_MODS)) {
 		return TEXT_TYPE;
 	} else if (!strcmp(mod->Type(), COMM_MODS)) {
@@ -219,8 +224,20 @@ int ModuleDialogs::module_type(void) {
 		return -1;
 }
 
+char *ModuleSearch::module_description(char *mod_name) {
+	ModMap::iterator it;	//-- iteratior
+	if((!mod_name) || (strlen(mod_name) < 2)) 
+		return NULL;
+	//-- iterate through the modules until we find modName 
+	it = mgr->Modules.find(mod_name);
+	//-- if we find the module
+	if (it != mgr->Modules.end()) {
+		return (*it).second->Description();
+	}
+	return NULL;
+}
 
-int ModuleDialogs::module_has_testament(int testament) {
+int ModuleSearch::module_has_testament(int testament) {
 	int ot = 0;
 	int nt = 0;
 	
@@ -254,7 +271,7 @@ int ModuleDialogs::module_has_testament(int testament) {
 }
 
 
-char *ModuleDialogs::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
+char *ModuleSearch::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
 	UTF8HTML u2html;	
 	mod->RenderText();                 	
 	SWBuf preverseHeading = mod->getEntryAttributes()
@@ -267,7 +284,7 @@ char *ModuleDialogs::get_entry_attribute(const char *level1, const char *level2,
 }
 
 
-int ModuleDialogs::set_module(const char *module_name) {
+int ModuleSearch::set_module(const char *module_name) {
 	ModMap::iterator it = mgr->Modules.find(module_name);
 	if (it != mgr->Modules.end()) {
 		mod = (*it).second;
@@ -277,7 +294,7 @@ int ModuleDialogs::set_module(const char *module_name) {
 	return 0;	
 }
 
-int ModuleDialogs::set_module_key(const char *module_name, const char *key) {
+int ModuleSearch::set_module_key(const char *module_name, const char *key) {
 	ModMap::iterator it = mgr->Modules.find(module_name);
 	if (it != mgr->Modules.end()) {	
 		mod = (*it).second;
@@ -290,7 +307,7 @@ int ModuleDialogs::set_module_key(const char *module_name, const char *key) {
 }
 
 
-int ModuleDialogs::set_key(const char *key) {
+int ModuleSearch::set_key(const char *key) {
 	if (mod) {
 		mod->setKey(key);
 		return 1;
@@ -299,7 +316,7 @@ int ModuleDialogs::set_key(const char *key) {
 		return 0;
 	
 }
-char *ModuleDialogs::get_key_form_offset(unsigned long offset) {
+char *ModuleSearch::get_key_form_offset(unsigned long offset) {
 	char *retval = NULL;
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
@@ -315,7 +332,7 @@ char *ModuleDialogs::get_key_form_offset(unsigned long offset) {
 }
 
 
-void ModuleDialogs::set_treekey(unsigned long offset) {
+void ModuleSearch::set_treekey(unsigned long offset) {
 	if(tree_key)
 		delete tree_key;
 	tree_key = (TreeKeyIdx *) mod->CreateKey();
@@ -330,14 +347,14 @@ void ModuleDialogs::set_treekey(unsigned long offset) {
         }
 }
 
-unsigned long ModuleDialogs::get_treekey_offset(void) {
+unsigned long ModuleSearch::get_treekey_offset(void) {
         if (tree_key) 
                 return tree_key->getOffset();
         return 0;
 }
 
 
-int ModuleDialogs::treekey_has_children(unsigned long offset) {	
+int ModuleSearch::treekey_has_children(unsigned long offset) {	
         if (tree_key) {
                 tree_key->setOffset(offset);
 		return tree_key->hasChildren();
@@ -346,7 +363,7 @@ int ModuleDialogs::treekey_has_children(unsigned long offset) {
 }
 
 
-int ModuleDialogs::treekey_first_child(unsigned long offset) {
+int ModuleSearch::treekey_first_child(unsigned long offset) {
         if (tree_key) {
                 tree_key->setOffset(offset);
 		return tree_key->firstChild();
@@ -355,7 +372,7 @@ int ModuleDialogs::treekey_first_child(unsigned long offset) {
 }
 
 
-char *ModuleDialogs::treekey_get_local_name(unsigned long offset) {	
+char *ModuleSearch::treekey_get_local_name(unsigned long offset) {	
         if (tree_key) {
                 tree_key->setOffset(offset);
                 //-- returned value must be freed by calling function
@@ -365,7 +382,7 @@ char *ModuleDialogs::treekey_get_local_name(unsigned long offset) {
 }
 
 
-int ModuleDialogs::treekey_next_sibling(unsigned long offset) {
+int ModuleSearch::treekey_next_sibling(unsigned long offset) {
         if (tree_key) {
                 tree_key->setOffset(offset);
                 if(tree_key->nextSibling()) {
@@ -376,7 +393,7 @@ int ModuleDialogs::treekey_next_sibling(unsigned long offset) {
 }
 
 
-char *ModuleDialogs::navigate_module(int direction) {
+char *ModuleSearch::navigate_module(int direction) {
 	if (direction == -1)
 		return strdup((char *) mod->KeyText());
 
@@ -393,8 +410,68 @@ char *ModuleDialogs::navigate_module(int direction) {
 }
 
 
-void ModuleDialogs::setup_displays(void) {
+void ModuleSearch::setup_displays(void) {
 	
 }
+
+void ModuleSearch::set_listkey_position(char pos) {
+	results.setPosition((char)pos);
+}
+
+const char *ModuleSearch::get_next_listkey(void) {
+	const char *retval = NULL;	
+	while(!results.Error()) {
+		retval = results.getText();
+		results++;
+		return retval;
+	}
+	return NULL;	
+}
+
+int ModuleSearch::clear_scope(void) {
+	current_scope = 0;	
+	return 1;
+}
+
+int ModuleSearch::clear_search_list(void) {
+	search_scope_list.ClearList();
+	return search_scope_list.Count ();
+}
+
+int ModuleSearch::set_range(char * list) {
+	search_range = VerseKey().ParseVerseList(list, "", true);
+	return search_range.Count ();
+}
+
+void ModuleSearch::set_scope2range(void) {
+	current_scope = &search_range;
+}
+
+int ModuleSearch::set_scope2last_search(void) {
+	current_scope = &search_scope_list;//-- move searchlist into current_scope
+	return 1;
+}
+
+int ModuleSearch::do_module_search(char *module_name, const char *search_string, 
+				int search_type, int search_params, int is_dialog) {
+	char progressunits = 70;
+	results.ClearList();
+	search_module = NULL;
+
+	search_module = mgr->Modules[module_name];
+	if (!search_module)
+		return -1;
+	results = search_module->Search(search_string,
+					search_type,
+					search_params,
+					current_scope, 0,
+					(is_dialog)
+					?main_dialog_search_percent_update
+					:main_sidebar_search_percent_update,
+					(void *) &progressunits);
+	search_scope_list = results;
+	return results.Count();
+}
+
 
 /* end of file */

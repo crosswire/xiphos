@@ -20,6 +20,7 @@
  */
 
 #include <swmgr.h>
+//#include <markupfiltmgr.h>
 
 #include <gnome.h>
 #include <versekey.h>
@@ -38,11 +39,11 @@
 using namespace sword;
 using namespace std;
 
-SwordMain *backend = NULL;
+BackEnd *backend = NULL;
 
 
 
-SwordMain::SwordMain() {
+BackEnd::BackEnd() {
 	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 //	search_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
@@ -64,7 +65,7 @@ SwordMain::SwordMain() {
 }
 
 
-SwordMain::~SwordMain() {
+BackEnd::~BackEnd() {
 	delete main_mgr;
 	delete display_mgr;
 //	delete search_mgr;
@@ -80,30 +81,42 @@ SwordMain::~SwordMain() {
 }
 
 
-void SwordMain::init_SWORD() {
+void BackEnd::init_SWORD(int gsType) {
 	ModMap::iterator it;
-	main_setup_new_displays();
-	for (it = display_mgr->Modules.begin();
-				it != display_mgr->Modules.end(); it++) {
-		display_mod = (*it).second;
-		if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-			display_mod->Disp(textDisplay);
+	if(gsType == 0) {
+		main_setup_new_displays();
+		
+		for (it = display_mgr->Modules.begin();
+					it != display_mgr->Modules.end(); it++) {
+			display_mod = (*it).second;
+			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+				display_mod->Disp(textDisplay);
+			}
+			if (!strcmp(display_mod->Type(), COMM_MODS)) {
+				display_mod->Disp(commDisplay);
+			}
+			if (!strcmp(display_mod->Type(), DICT_MODS)) {
+				display_mod->Disp(dictDisplay);
+			}
+			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
+				display_mod->Disp(commDisplay);
+			}			
 		}
-		if (!strcmp(display_mod->Type(), COMM_MODS)) {
-			display_mod->Disp(commDisplay);
-		}
-		if (!strcmp(display_mod->Type(), DICT_MODS)) {
-			display_mod->Disp(dictDisplay);
-		}
-		if (!strcmp(display_mod->Type(), BOOK_MODS)) {
-			display_mod->Disp(commDisplay);
-		}			
+		init_language_map();
+	} else if(gsType == 1) {
+		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
+			display_mod = (*it).second;
+			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+				display_mod->Disp(chapDisplay);
+			} else {
+				display_mod->Disp(entryDisplay);
+			}
+		}	
 	}
-	init_language_map();
 }
 
 
-void SwordMain::init_lists(MOD_LISTS * mods) {
+void BackEnd::init_lists(MOD_LISTS * mods) {
 	ModMap::iterator it;
 	
 	for (it = main_mgr->Modules.begin();
@@ -161,7 +174,7 @@ void SwordMain::init_lists(MOD_LISTS * mods) {
 	}
 }
 
-GList *SwordMain::fill_Bible_books(int testament) {
+GList *BackEnd::fill_Bible_books(int testament) {
 	VerseKey key;
 	GList *retlist = NULL;
 	char *book = NULL;
@@ -202,7 +215,7 @@ GList *SwordMain::fill_Bible_books(int testament) {
 }
 
 
-void SwordMain::get_module_options(GList * options) {
+void BackEnd::get_module_options(GList * options) {
 	StringList optionslist = main_mgr->getGlobalOptions();	
 	for (StringList::iterator it = optionslist.begin(); 
 				  it != optionslist.end(); it++) {
@@ -210,8 +223,33 @@ void SwordMain::get_module_options(GList * options) {
 	}
 }
 
+int BackEnd::has_global_option(char * module_name, char * option) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		mod = (*it).second;
+		return mod->getConfig().has("GlobalOptionFilter", option);
+	} else
+		return 0;
+}
 
-int SwordMain::is_Bible_key(const char * list, char * current_key) {
+char *BackEnd::get_config_entry(char * module_name, char * entry) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		mod = (*it).second;
+		return g_strdup((char *) mod->
+			getConfigEntry(entry));
+	} else
+		return NULL;
+}
+int BackEnd::is_Bible_key(const char * list, char * current_key) {
 	VerseKey key;
 	
 	key.setText(current_key);
@@ -220,14 +258,44 @@ int SwordMain::is_Bible_key(const char * list, char * current_key) {
 }
 
 
-char *SwordMain::get_valid_key(const char *key) {
+char *BackEnd::get_render_text(const char *module_name, const char *key) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		mod = (*it).second;
+		mod->setKey(key);
+		return strdup((char *) mod->RenderText());
+	}
+	return NULL;	
+}
+
+
+char *BackEnd::get_strip_text(const char *module_name, const char *key) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		mod = (*it).second;
+		mod->setKey(key);
+		return strdup((char *) mod->StripText());
+	}
+	return NULL;	
+}
+
+
+char *BackEnd::get_valid_key(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
 	return strdup((char *) vkey.getText());
 }
 
-char *SwordMain::key_get_book(const char *key) {
+char *BackEnd::key_get_book(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -235,7 +303,7 @@ char *SwordMain::key_get_book(const char *key) {
 }
 
 
-int SwordMain::key_get_chapter(const char *key) {
+int BackEnd::key_get_chapter(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -243,7 +311,7 @@ int SwordMain::key_get_chapter(const char *key) {
 }
 
 
-const unsigned int SwordMain::key_chapter_count(const char *key) {
+const unsigned int BackEnd::key_chapter_count(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -254,7 +322,7 @@ const unsigned int SwordMain::key_chapter_count(const char *key) {
 }
 
 
-const unsigned int SwordMain::key_verse_count(const char *key) {
+const unsigned int BackEnd::key_verse_count(const char *key) {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -266,13 +334,21 @@ const unsigned int SwordMain::key_verse_count(const char *key) {
 }
 
 
-char *SwordMain::get_module_key() {
+char *BackEnd::get_module_key() {
 	(const char *) *display_mod;
 	return strdup(display_mod->KeyText());
 }
 
+void BackEnd::save_entry(const char * entry) {
+	display_mod->setEntry((const char *) entry);
+}
 
-const char *SwordMain::module_get_language(const char *module_name) {
+void BackEnd::delete_entry(void) {
+	display_mod->deleteEntry();
+}
+
+
+const char *BackEnd::module_get_language(const char *module_name) {
 	ModMap::iterator it;	//-- iteratior
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
@@ -283,12 +359,12 @@ const char *SwordMain::module_get_language(const char *module_name) {
 }
 
 
-const char *SwordMain::get_language_map(const char *language) {
+const char *BackEnd::get_language_map(const char *language) {
 	return languageMap[language].c_str();
 }
 
 
-int SwordMain::is_module(const char *mod_name) {
+int BackEnd::is_module(const char *mod_name) {
 	ModMap::iterator it = main_mgr->Modules.find(mod_name);
 	if (it != main_mgr->Modules.end()) {
 		return 1;
@@ -297,7 +373,7 @@ int SwordMain::is_module(const char *mod_name) {
 }
 
 
-int SwordMain::module_type(char *mod_name) {
+int BackEnd::module_type(char *mod_name) {
 	ModMap::iterator it;	//-- iteratior
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
@@ -327,8 +403,20 @@ int SwordMain::module_type(char *mod_name) {
 	return -1;
 }
 
+char *BackEnd::module_description(char *mod_name) {
+	ModMap::iterator it;	//-- iteratior
+	if((!mod_name) || (strlen(mod_name) < 2)) 
+		return NULL;
+	//-- iterate through the modules until we find modName 
+	it = main_mgr->Modules.find(mod_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		return (*it).second->Description();
+	}
+	return NULL;
+}
 
-int SwordMain::module_has_testament(const char * module_name,  int testament) {
+int BackEnd::module_has_testament(const char * module_name,  int testament) {
 	ModMap::iterator it;
 	SWModule *module;
 	int ot = 0;
@@ -367,20 +455,21 @@ int SwordMain::module_has_testament(const char * module_name,  int testament) {
 }
 
 
-char *SwordMain::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
-	UTF8HTML u2html;	
+char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
+	UTF8HTML u2html;
 	display_mod->RenderText();                 	
-	SWBuf preverseHeading = display_mod->getEntryAttributes()
-					   [level1][level2][level3].c_str();
-	u2html.processText(preverseHeading);
-	if (preverseHeading.length()) {  
-		return strdup(preverseHeading.c_str());
+	SWBuf attribute2 = display_mod->getEntryAttributes()[level1][level2][level3].c_str();
+	
+	u2html.processText(attribute2);
+	
+	if (attribute2.length()) {  
+		return strdup(attribute2.c_str());
 	}  
 	return NULL;	
 }
 
 
-int SwordMain::set_module(const char *module_name) {
+int BackEnd::set_module(const char *module_name) {
 	display_mod = display_mgr->Modules[module_name];
 	if (display_mod) 
 		return 1;
@@ -389,7 +478,7 @@ int SwordMain::set_module(const char *module_name) {
 	
 }
 
-int SwordMain::set_module_key(const char *module_name, const char *key) {
+int BackEnd::set_module_key(const char *module_name, const char *key) {
 	display_mod = display_mgr->Modules[module_name];
 	if (display_mod) {
 		display_mod->setKey(key);
@@ -400,8 +489,17 @@ int SwordMain::set_module_key(const char *module_name, const char *key) {
 	
 }
 
+int BackEnd::set_key(const char *key) {
+	if (display_mod) {
+		display_mod->setKey(key);
+		return 1;
+	}
+	else 
+		return 0;
+	
+}
 
-char *SwordMain::get_key_form_offset(unsigned long offset) {
+char *BackEnd::get_key_form_offset(unsigned long offset) {
 	char *retval = NULL;
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
@@ -417,7 +515,7 @@ char *SwordMain::get_key_form_offset(unsigned long offset) {
 }
 
 
-void SwordMain::set_treekey(unsigned long offset) {
+void BackEnd::set_treekey(unsigned long offset) {
 	if(tree_key)
 		delete tree_key;
 	tree_key = (TreeKeyIdx *) display_mod->CreateKey();
@@ -432,14 +530,14 @@ void SwordMain::set_treekey(unsigned long offset) {
         }
 }
 
-unsigned long SwordMain::get_treekey_offset(void) {
+unsigned long BackEnd::get_treekey_offset(void) {
         if (tree_key) 
                 return tree_key->getOffset();
         return 0;
 }
 
 
-int SwordMain::treekey_has_children(unsigned long offset) {	
+int BackEnd::treekey_has_children(unsigned long offset) {	
         if (tree_key) {
                 tree_key->setOffset(offset);
 		return tree_key->hasChildren();
@@ -448,7 +546,7 @@ int SwordMain::treekey_has_children(unsigned long offset) {
 }
 
 
-int SwordMain::treekey_first_child(unsigned long offset) {
+int BackEnd::treekey_first_child(unsigned long offset) {
         if (tree_key) {
                 tree_key->setOffset(offset);
 		return tree_key->firstChild();
@@ -457,7 +555,7 @@ int SwordMain::treekey_first_child(unsigned long offset) {
 }
 
 
-char *SwordMain::treekey_get_local_name(unsigned long offset) {	
+char *BackEnd::treekey_get_local_name(unsigned long offset) {	
         if (tree_key) {
                 tree_key->setOffset(offset);
                 //-- returned value must be freed by calling function
@@ -467,7 +565,7 @@ char *SwordMain::treekey_get_local_name(unsigned long offset) {
 }
 
 
-int SwordMain::treekey_next_sibling(unsigned long offset) {
+int BackEnd::treekey_next_sibling(unsigned long offset) {
         if (tree_key) {
                 tree_key->setOffset(offset);
                 if(tree_key->nextSibling()) {
@@ -478,7 +576,7 @@ int SwordMain::treekey_next_sibling(unsigned long offset) {
 }
 
 
-char *SwordMain::navigate_module(int direction) {
+char *BackEnd::navigate_module(int direction) {
 	if (direction == -1)
 		return strdup((char *) display_mod->KeyText());
 
@@ -495,11 +593,11 @@ char *SwordMain::navigate_module(int direction) {
 }
 
 
-void SwordMain::setup_displays(void) {
+void BackEnd::setup_displays(void) {
 	
 }
 
-void SwordMain::init_language_map(void) {
+void BackEnd::init_language_map(void) {
 	/* --list form Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");

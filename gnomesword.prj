@@ -1,4 +1,4 @@
-# Anjuta Version 1.2.0 
+# Anjuta Version 1.2.2 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.2.0
+anjuta.version=1.2.2
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug --enable-sword_cvs
+project.configure.options=--prefix=/usr --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -88,8 +88,6 @@ module.include.files=\
 	src/gui/font_dialog.h\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
-	src/gui/percomm.h\
-	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
 	src/gui/editor.h\
 	src/gui/editor_menu.h\
@@ -133,7 +131,6 @@ module.include.files=\
 	src/main/key.h\
 	src/backend/config.hh\
 	src/main/configs.h\
-	src/backend/tree.hh\
 	src/main/xml.h\
 	src/gui/sidebar.h\
 	src/gui/parallel_dialog.h\
@@ -152,7 +149,12 @@ module.include.files=\
 	src/main/module_dialogs.h\
 	src/gui/note_editor.h\
 	src/gui/note_toolbar_edit.h\
-	src/gui/note_toolbar_style.h
+	src/gui/note_toolbar_style.h\
+	src/main/mod_search.h\
+	src/gui/search_sidebar.h\
+	src/backend/module_search.hh\
+	src/main/search_dialog.h\
+	src/main/search_sidebar.h
 
 module.source.name=.
 module.source.type=
@@ -162,7 +164,6 @@ module.source.files=\
 	src/backend/mgr.cc\
 	src/backend/module.cc\
 	src/backend/sword.cpp\
-	src/backend/tree.cc\
 	src/main/bibletext.c\
 	src/main/dictlex.c\
 	src/main/main.c\
@@ -192,7 +193,6 @@ module.source.files=\
 	src/gnome2/hints.c\
 	src/gnome2/history.c\
 	src/gnome2/html.c\
-	src/gnome2/percomm.c\
 	src/gnome2/cipher_key_dialog.c\
 	src/gnome2/editor.c\
 	src/gnome2/editor_menu.c\
@@ -239,11 +239,13 @@ module.source.files=\
 	src/main/sidebar.cc\
 	src/main/module_dialogs.cc\
 	src/main/commentary.cc\
-	src/backend/dialogs.cc\
 	src/gnome2/gbs_dialog.c\
 	src/gnome2/note_editor.c\
 	src/gnome2/note_toolbar_edit.c\
-	src/gnome2/note_toolbar_style.c
+	src/gnome2/note_toolbar_style.c\
+	src/backend/module_search.cc\
+	src/main/search_dialog.cc\
+	src/main/search_sidebar.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -45,6 +45,7 @@
 #include "main/bibletext.h"
 #include "main/lists.h"
 #include "main/sword.h"
+#include "main/search_dialog.h"
 
 
 
@@ -511,7 +512,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
 	 N_("Advanced search using the search dialog"),
-	 gui_do_dialog_search, NULL, NULL,
+	 main_open_search_dialog, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,

@@ -50,11 +50,11 @@
  *   char *
  */
  
-char *get_dictlex_key(int manager, char * module_name, int direction)
+/*char *get_dictlex_key(int manager, char * module_name, int direction)
 {
 	return backend_nav_module(manager, module_name, direction);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_dictlex_text
@@ -71,7 +71,8 @@ char *get_dictlex_key(int manager, char * module_name, int direction)
  *   char *
  */
 
-char *get_dictlex_text(char * module_name, char * key)
+/*char *get_dictlex_text(char * module_name, char * key)
 {
 	return backend_get_module_text(2, module_name, key);
 }
+*/

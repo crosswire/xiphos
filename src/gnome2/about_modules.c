@@ -267,9 +267,9 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 
 	bufabout = NULL;
 
-	buf = get_module_description(modname);
-	bufabout = get_mod_about_info(modname);
-	version = get_mod_config_entry(modname, "Version");
+	buf = main_get_module_description(modname);
+	bufabout = main_get_mod_about_info(modname);
+	version = main_get_mod_config_entry(modname, "Version");
 	
 	g_string_printf(discription,
 		"<center><FONT COLOR=\"#000FCF\"><b>%s</b></font><HR>%s %s</center><br>",

@@ -86,8 +86,8 @@ void frontend_init(void)
 	
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
-	settings.havethayer = check_for_module("Thayer");
-	settings.havebdb = check_for_module("BDB");
+	settings.havethayer = main_is_module("Thayer");
+	settings.havebdb = main_is_module("BDB");
 	
 	/*
 	 * get and load books of the Bible 
@@ -98,7 +98,7 @@ void frontend_init(void)
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
-	
+	main_init_sidebar_search_backend();
 	/*
 	 *  parallel stuff
 	 */
@@ -272,7 +272,8 @@ void shutdown_frontend(void)
 	g_free(settings.swbmDir);
 	
 	main_dialogs_shutdown();
-
+	main_delete_sidebar_search_backend();
+	
 	if(settings.browsing)
 		gui_notebook_main_shutdown();
 

@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include <stdlib.h>
-#include <gs_osishtmlhref.h>
+#include "gs_osishtmlhref.h"
 #include <utilxml.h>
 #include <versekey.h>
 #include <swmodule.h>
@@ -56,7 +56,6 @@ bool GSOSISHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserD
 	if (!substituteToken(buf, token)) {
 		MyUserData *u = (MyUserData *)userData;
 		XMLTag tag(token);
-
 		// <w> tag
 		if (!strcmp(tag.getName(), "w")) {
 

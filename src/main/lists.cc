@@ -119,7 +119,7 @@ void main_init_lists(void)
 	
 	if(!backend) {
 		start_backend = TRUE;
-		backend = new SwordMain();
+		backend = new BackEnd();
 	}
 	mods.bible_books = backend->fill_Bible_books(2);
 	backend->get_module_options(mods.options);

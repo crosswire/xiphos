@@ -33,7 +33,6 @@
 #include "gui/about_modules.h"
 #include "gui/html.h"
 #include "gui/history.h"
-#include "gui/gtkhtml_display.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/hints.h"
@@ -135,7 +134,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 {
 	gchar *str;
 	gchar *text;
-	text = get_striptext(4, mod, key);
+	text = main_get_striptext(mod, key);
 	str = remove_linefeeds(text);
 	if (str) {
 		gnome_appbar_set_status(GNOME_APPBAR(appbar), str);
@@ -246,10 +245,10 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		if (settings.inDictpane)
 			main_display_dictionary(modbuf, work_buf[3]);
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf, work_buf[3]);		
+			main_sidebar_display_dictlex(modbuf, work_buf[3]);		
 	} else {
 		mybuf =
-		    get_module_text(get_mod_type(modbuf), modbuf, work_buf[3]);
+		    main_get_rendered_text(modbuf, work_buf[3]);
 		if (mybuf) {
 			show_in_appbar(widgets.appbar, work_buf[3], modbuf);
 			//gui_display_in_hint_window(mybuf);
@@ -304,12 +303,12 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 		if (settings.inDictpane)
 			main_display_dictionary(modbuf, work_buf[3]);
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf_viewer, work_buf[3]);		
+			main_sidebar_display_dictlex(modbuf_viewer, work_buf[3]);		
 	} else {
 		mybuf =
-		    get_module_text(get_mod_type(modbuf), modbuf, work_buf[3]);
+		    main_get_rendered_text(modbuf, work_buf[3]);
 		if (mybuf) {
-			entry_display(sidebar.html_viewer_widget,  
+			main_entry_display(sidebar.html_viewer_widget,  
 					modbuf, 
 					mybuf, 
 					work_buf[3], 
@@ -347,6 +346,7 @@ static gint note_uri(const gchar * url, gboolean clicked)
 	gchar *module = NULL;
 	gchar *tmpbuf = NULL;
 	
+	//g_warning(url);
 	if(!in_url)
 		return 1;
 	
@@ -362,7 +362,10 @@ static gint note_uri(const gchar * url, gboolean clicked)
 	else
 		module = settings.MainWindowModule;
 	if(strstr(work_buf[4],"x") && clicked) {
-		tmpbuf = get_crossref(module,work_buf[3],work_buf[5]);
+		backend->set_module_key(module,work_buf[3]);
+		tmpbuf = backend->get_entry_attribute("Footnote",
+							work_buf[5],
+							"refList");
 		if (tmpbuf) {
 			gui_display_verse_list_in_sidebar(settings.
 					  currentverse,
@@ -371,8 +374,10 @@ static gint note_uri(const gchar * url, gboolean clicked)
 			g_free(tmpbuf);
 		}
 	} else if(!clicked) {
-		
-		tmpbuf = get_footnote_body(module,work_buf[3],work_buf[5]);
+		backend->set_module_key(module,work_buf[3]);		
+		tmpbuf = backend->get_entry_attribute("Footnote",
+						work_buf[5],
+						"body");
 		if (tmpbuf) {
 			gui_display_in_hint_window(tmpbuf);
 			g_free(tmpbuf);	
@@ -697,12 +702,12 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 
 /******************************************************************************
  * Name
- *   main_get_mod_type_from_url
+ *   main_main_get_mod_type_from_url
  *
  * Synopsis
  *   #include "gui/utilities.h"
  *
- *   gint main_get_mod_type_from_url(const gchar * url)
+ *   gint main_main_get_mod_type_from_url(const gchar * url)
  *
  * Description
  *  
@@ -711,7 +716,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
  *   gint
  */
  
-gint main_get_mod_type_from_url(const gchar * url)
+gint main_main_get_mod_type_from_url(const gchar * url)
 {
 	gchar **work_buf = NULL;
 	gint retval = -1;

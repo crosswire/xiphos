@@ -55,7 +55,7 @@ extern GList *list_of_verses;
 void gui_display_devotional_in_sidebar(void);
 void gui_set_sidebar_porgram_start(void);
 void gui_sidebar_showhide(void);
-gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key);
+gboolean main_sidebar_display_dictlex(char *mod_name, char *key);
 GtkWidget *gui_create_sidebar(GtkWidget * paned);
 void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name, 
 						gchar * verse_list);	
