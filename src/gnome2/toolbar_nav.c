@@ -411,13 +411,13 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			      GTK_TOOLBAR_ICONS);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gnome-stock-book-blue",
+	    gtk_image_new_from_stock(GNOME_STOCK_BOOK_BLUE,
 				     gtk_toolbar_get_icon_size
 				     (GTK_TOOLBAR(toolbarNav)));
 	widgets.button_dict_book =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Dict/Book"), 
+				       _("Dictionary/Book"), 
 				       _("Toggle Dictionary View"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_label_set_use_underline(GTK_LABEL
@@ -429,7 +429,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(widgets.button_dict_book);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gnome-stock-text-bulleted-list",
+	    gtk_image_new_from_stock(GNOME_STOCK_TEXT_BULLETED_LIST,
 				     gtk_toolbar_get_icon_size
 				     (GTK_TOOLBAR(toolbarNav)));
 	widgets.button_parallel_view =
@@ -456,7 +456,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	g_object_set_data(G_OBJECT(GTK_COMBO(cbBook)->popwin),
 			  "GladeParentKey", cbBook);
 	gtk_widget_show(cbBook);
-	//gtk_widget_set_usize(cbBook, 130, -2);
+	//gtk_widget_set_size_request(cbBook, 130, -1);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
 				  NULL);
 	/*
@@ -488,7 +488,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(cbe_freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  cbe_freeform_lookup, NULL, NULL);
-	//gtk_widget_set_usize(cbe_freeform_lookup, 150, -2);
+	//gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
 	nav_bar.lookup_entry = cbe_freeform_lookup;
 
 	vseparator2 = gtk_vseparator_new();
@@ -498,13 +498,13 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_set_size_request(vseparator2, 5, 0);
 
 	btnLookup = gtk_toolbar_insert_stock(GTK_TOOLBAR(toolbarNav),
-					     "gtk-jump-to",
+					     GTK_STOCK_JUMP_TO,
 					     NULL,
 					     NULL, NULL, NULL, -1);
 	gtk_widget_show(btnLookup);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gtk-go-back",
+	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
 				     gtk_toolbar_get_icon_size
 				     (GTK_TOOLBAR(toolbarNav)));
 	nav_bar.button_back =
@@ -521,7 +521,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(nav_bar.button_back);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gtk-go-forward",
+	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
 				     gtk_toolbar_get_icon_size
 				     (GTK_TOOLBAR(toolbarNav)));
 	nav_bar.button_forward =
@@ -577,7 +577,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			   TRUE, TRUE, 0);
 	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup),
 			   _("Romans 8:28"));
-	gtk_widget_set_usize(cbe_freeform_lookup, 150, -2);
+	gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
 	nav_bar.lookup_entry = cbe_freeform_lookup;
 	
 	btnLookup = gtk_button_new();
