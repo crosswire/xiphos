@@ -43,6 +43,80 @@
  */
 
 static SWMgr *mgr;
+static SWModule *mod;
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_percomm_text
+ *
+ * Synopsis
+ *   #include "percomm_.h"
+ *
+ *   char *backend_get_percomm_text(char *mod_name, char *key)	
+ *
+ * Description
+ *   return formated text for a verse
+ *
+ * Return value
+ *   char *
+ */
+
+char *backend_get_percomm_text(char * key)
+{
+	if (mod){
+		mod->SetKey(key);
+		return strdup((char *) mod->RenderText());		
+	}
+	return NULL;
+}
+
+/******************************************************************************
+ * Name
+ *   backend_set_percomm_key
+ *
+ * Synopsis
+ *   #include "percomm_.h"
+ *
+ *   void backend_set_percomm_key(char * key)	
+ *
+ * Description
+ *   set commentary key
+ *
+ * Return value
+ *   void
+ */
+
+void backend_set_percomm_key(char * key)
+{
+	if (mod){
+		//versekey = key;
+		mod->SetKey(key);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   backend_change_percomm_module
+ *
+ * Synopsis
+ *   #include "percomm_.h"
+ *
+ *   void backend_change_percomm_module(char * mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_change_percomm_module(char * mod_name)
+{	
+	mod = mgr->Modules[mod_name];
+}
+
 
 /******************************************************************************
  * Name
@@ -57,12 +131,11 @@ static SWMgr *mgr;
  *    returns the key for the current personal commentary
  *
  * Return value
- *   const char *
+ *   char *
  */
  
-char *backend_get_percomm_key(char * mod_name)
-{
-	SWModule *mod = mgr->Modules[mod_name];
+char *backend_get_percomm_key(void)
+{	
 	return strdup((char*)mod->KeyText());
 }
 
@@ -82,11 +155,10 @@ char *backend_get_percomm_key(char * mod_name)
  *   void
  */
  
-void backend_save_personal_comment(char * mod_name, char * buf)
+void backend_save_personal_comment(char * note)
 {	
-	SWModule *mod = mgr->Modules[mod_name];
-	if (buf)
-		*mod << (const char *) buf;
+	if(note)
+		*mod << (const char *) note;
 }
 
 /******************************************************************************
@@ -96,7 +168,7 @@ void backend_save_personal_comment(char * mod_name, char * buf)
  * Synopsis
  *   #include "percomm_.h"
  *
- *   void backend_delete_personal_comment(int mod_num)
+ *   void backend_delete_personal_comment(void)
  *
  * Description
  *    delete the data at the currnet key in current personal commentary
@@ -105,11 +177,10 @@ void backend_save_personal_comment(char * mod_name, char * buf)
  *   void
  */
  
-void backend_delete_personal_comment(char * mod_name)
+void backend_delete_personal_comment(void)
 {
-	SWModule *mod = mgr->Modules[mod_name];
-	g_warning("key %s of module %s would have be deleted",mod->KeyText(),mod->Name());
-	/* not finished - does nothing */ 
+	mod->deleteEntry();
+	g_warning("key %s of module %s has been deleted",mod->KeyText(),mod->Name());
 }
 /******************************************************************************
  * Name

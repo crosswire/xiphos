@@ -27,10 +27,13 @@ extern "C" {
 #endif
 
 #include "main/settings.h"
-
-void editor_save_note(GtkWidget * html_widget, char * mod_name);
-void save_percomm_note(gchar *note, char * mod_name);
-void delete_percomm_note(char * mod_name);
+	
+char *get_percomm_key(void);
+char *get_percomm_text(char * key);	
+void set_percomm_key(char * key);
+void change_percomm_module(char * mod_name);
+void save_percomm_note(gchar *note);
+void delete_percomm_note(void);
 
 #ifdef __cplusplus
 }

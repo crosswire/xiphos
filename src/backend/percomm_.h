@@ -25,10 +25,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-char *backend_get_percomm_key(char *mod_name);
-void backend_save_personal_comment(char *mod_name, char * buf);
-void backend_delete_personal_comment(char *mod_name);
+	
+char *backend_get_percomm_text(char * key);	
+void backend_set_percomm_key(char * key);	
+void backend_change_percomm_module(char * mod_name);
+char *backend_get_percomm_key(void);
+void backend_save_personal_comment(char * note);
+void backend_delete_personal_comment(void);
 void backend_setup_percomm(void);
 void backend_shutdown_percomm(void);
 	

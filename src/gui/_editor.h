@@ -124,6 +124,7 @@ struct _GSHTMLEditorControlData {
 	gboolean gbs; /** gen book support **/
 	gboolean studypad; 
 	gchar filename[256];
+	gchar key[256];
 
 };
 

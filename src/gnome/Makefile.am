@@ -20,8 +20,6 @@ libgui_a_SOURCES =  \
     _display_info.h \
     _editor.c \
     _editor.h \
-    _percomm.c \
-    _percomm.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
@@ -65,6 +63,7 @@ libgui_a_SOURCES =  \
     link_dialog.h \
     main_menu.c \
     main_menu.h \
+    percomm.c \
     preferences_dialog.c \
     preferences_dialog.h \
     setup_druid.c \

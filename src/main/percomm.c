@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#include "gui/_percomm.h"
+#include "gui/percomm.h"
 #include "gui/_editor.h"
 #include "backend/module_options.h"
 #include "gui/info_box.h"
@@ -38,54 +38,57 @@
 #include "backend/percomm_.h"
 #include "backend/sword.h"
 
-/******************************************************************************
- * globals to this file only 
- */ 
-
-static GString *gstr;
 
 /******************************************************************************
  * Name
- *   save_note_receiver
+ *   get_percomm_key
  *
  * Synopsis
  *   #include "percomm.h"
  *
- *   	gboolean save_note_receiver(const HTMLEngine * engine,
- *		   const char *data, unsigned int len, void *user_data)
+ *   char *get_percomm_key(void)
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   char *
  */ 
 
-static gboolean save_note_receiver(const HTMLEngine * engine,
-		   const char *data, unsigned int len, void *user_data)
+char *get_percomm_key(void)
 {
-	static gboolean startgrabing = FALSE;
-	if (!strncmp(data, "</BODY>", 7))
-		startgrabing = FALSE;
-	if (startgrabing) {
-		gstr = g_string_append(gstr, data);
-		//g_warning(gstr->str);
-	}
-	if (strstr(data, "<BODY") != NULL)
-		startgrabing = TRUE;
-
-	return TRUE;
+	backend_get_percomm_key();
 }
-
 
 /******************************************************************************
  * Name
- *   editor_save_note
+ *   get_percomm_text
  *
  * Synopsis
  *   #include "percomm.h"
  *
- *   void editor_save_note(GtkWidget * html_widget)
+ *   char *get_percomm_text(char * key)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+
+char *get_percomm_text(char * key)
+{
+	return backend_get_percomm_text(key);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   
  *
  * Description
  *    
@@ -94,23 +97,30 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
  *   void
  */ 
 
-void editor_save_note(GtkWidget * html_widget, char * mod_name)
+void set_percomm_key(char * key)
 {
-	GtkHTML *html;
+	backend_set_percomm_key(key);
+}
 
-	html = GTK_HTML(html_widget);
-	gtk_html_set_editable(html, FALSE);
-	gstr = g_string_new("");
-	if (!gtk_html_save
-	    (html, (GtkHTMLSaveReceiverFn) save_note_receiver,
-	     GINT_TO_POINTER(0))) {
-		g_warning("file not writen");
-	} else {
-		save_percomm_note(gstr->str, mod_name);
-		g_print("\nfile writen\n");
-	}
-	g_string_free(gstr, 1);
-	gtk_html_set_editable(html, TRUE);
+/******************************************************************************
+ * Name
+ *   change_percomm_module
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   void change_percomm_module(char * mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void change_percomm_module(char * mod_name)
+{
+	backend_change_percomm_module(mod_name);
 }
 
 /******************************************************************************
@@ -130,9 +140,9 @@ void editor_save_note(GtkWidget * html_widget, char * mod_name)
  *   void
  */ 
 
-void save_percomm_note(gchar *note, char * mod_name)
+void save_percomm_note(gchar *note)
 {
-	backend_save_personal_comment(mod_name, note);
+	backend_save_personal_comment(note);
 }
 
 /******************************************************************************
@@ -152,31 +162,8 @@ void save_percomm_note(gchar *note, char * mod_name)
  *   void
  */ 
 
-void delete_percomm_note(char * mod_name)
-{	
-	GtkWidget *label1, *label2, *label3, *msgbox;
-	gint answer = -1;
-	gchar *key;
-	
-	key = backend_get_percomm_key(mod_name);
-	
-	msgbox = gui_create_info_box();
-	label1 = lookup_widget(msgbox, "lbInfoBox1");
-	label2 = lookup_widget(msgbox, "lbInfoBox2");
-	label3 = lookup_widget(msgbox, "lbInfoBox3");
-	gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
-	gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
-	gtk_label_set_text(GTK_LABEL(label3),key);
-
-	gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-	answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-	switch (answer) {
-	case 0:
-		backend_delete_personal_comment(mod_name);
-		break;
-	default:
-		break;
-	}
-	free(key);
+void delete_percomm_note(void)
+{		
+	backend_delete_personal_comment();
 }
 

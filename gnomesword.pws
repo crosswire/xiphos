@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=33
-1=155
-2=44
-3=987
-4=31
-5=162
-6=262
-7=157
-8=110
-9=66
+0=170
+1=34
+2=161
+3=33
+4=413
+5=34
+6=1242
+7=58
+8=4
+9=31
 10=290
 11=32
 12=36
@@ -45,51 +45,47 @@ ShowLocals=true
 16=
 17=
 
-[breakpoints]
-0=1,,1,41,0,,_percomm.c,628,46,0,create_percomm_pane,,1025750997,
-1=2,,1,0,0,,gtkhtml_display.c,259,2,0,entry_display,,1025750997,
-
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/percomm_.h
-1=/home/terry/Projects/gnomesword1/src/backend/percomm_.cpp
-2=/home/terry/Projects/gnomesword1/src/gui/_percomm.h
-3=/home/terry/Projects/gnomesword1/src/gnome/_percomm.c
-4=/home/terry/Projects/gnomesword1/src/main/percomm.h
-5=/home/terry/Projects/gnomesword1/src/main/percomm.c
-6=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-7=/home/terry/Projects/gnomesword1/src/gnome/_editor.c
-8=/home/terry/Projects/gnomesword1/src/main/settings.h
-9=/home/terry/Projects/gnomesword1/src/backend/display.cpp
+0=/home/terry/Projects/gnomesword1/src/main/percomm.c
+1=/home/terry/Projects/gnomesword1/src/main/percomm.h
+2=/home/terry/Projects/gnomesword1/src/backend/percomm_.cpp
+3=/home/terry/Projects/gnomesword1/src/backend/percomm_.h
+4=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
+5=/home/terry/Projects/gnomesword1/src/gui/percomm.h
+6=/home/terry/Projects/gnomesword1/src/gnome/percomm.c
+7=/home/terry/Projects/gnomesword1/src/main/main.c
+8=/home/terry/Projects/gnomesword1/ChangeLog
+9=/home/terry/Projects/gnomesword1/src/gui/gtkhtml_display.h
 
 [replace_text]
-0=p->ec
-1=sw_mgr->results
-2=sw_mgr->search
-3=mgr_search
-4=mgr_results
-5=html_widget
-6=comm_display
-7=vc->
+0=p->ec->key
+1=p->ec
+2=sw_mgr->results
+3=sw_mgr->search
+4=mgr_search
+5=mgr_results
+6=html_widget
+7=comm_display
 
 [find_text]
-0=tabs(
-1=gui_set_percomm_frame_label
-2=pmEditor
-3=set_page_percomm
-4=set_percomm_page_and_key
-5=menu
-6=mod_description
-7=scrolledwindow17
+0=str
+1=p->ec->filename
+2=p->key
+3=gui_save_note
+4=text_str
+5=set_percomm_key
+6=settings.currentverse
+7=keybuf
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=set_percomm_page_and_key
-1=mainMgr
-2=SWMgr *mainMgr
-3=backend/viewdict.h
-4=backend/viewcomm.h
-5=#include "backend/viewcomm.h"
-6=gui/_gbs.h
-7=gs_shortcutbar.h
+0=_percomm.h
+1=set_percomm_page_and_key
+2=mainMgr
+3=SWMgr *mainMgr
+4=backend/viewdict.h
+5=backend/viewcomm.h
+6=#include "backend/viewcomm.h"
+7=gui/_gbs.h
