@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * toolbar_style.h - style toolbar for editors
+ * note_toolbar_style.h - style toolbar for note editor
  *               
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,12 +19,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _TOOLBAR_STYLE_H
-#define _TOOLBAR_STYLE_H
+#ifndef _NOTE_TOOLBAR_STYLE_H
+#define _NOTE_TOOLBAR_STYLE_H
 
-#include "gui/editor.h"
+#include "main/module_dialogs.h"
 
-GtkWidget *gui_toolbar_style(GSHTMLEditorControlData *ecd);
-//void toolbar_update_format(GSHTMLEditorControlData *ecd);
+GtkWidget *gui_note_toolbar_style(DIALOG_DATA * d);
 
 #endif

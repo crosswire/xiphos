@@ -172,35 +172,6 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 
 /******************************************************************************
  * Name
- *   display
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void display(DIALOG_DATA * vt, gchar * key, gboolean show_key)	
- *
- * Description
- *   calls chapter_display to display module text
- *
- * Return value
- *   void
- */
-
-static void display(DIALOG_DATA * vt, gchar * key, gboolean show_key)
-{
-	if (!vt->is_rtol)
-		chapter_display(vt->html,
-			vt->mod_name, vt->ops, key, show_key);
-	else
-		chapter_display(vt->text,
-					vt->mod_name,
-					vt->ops, key, show_key);
-
-}
-
-
-/******************************************************************************
- * Name
  *   link_clicked
  *
  * Synopsis
@@ -379,6 +350,7 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * vt)
 {
 	gchar buf[256];
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
+	cur_vt = vt;
 	if (*bookname) {
 		sprintf(buf, "%s 1:1", bookname);
 		main_bible_dialog_passage_changed(vt, buf);
@@ -411,6 +383,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	gchar *val_key;
 	gchar buf[256];
 	gint chapter;
+	cur_vt = vt;
 
 	bookname = (gchar*)gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
 	chapter =
@@ -447,6 +420,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	const gchar *bookname;
 	gchar buf[256], *val_key;
 	gint chapter, verse;
+	cur_vt = vt;
 
 	bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
 	chapter =
@@ -484,6 +458,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 				      DIALOG_DATA * vt)
 {
 	/* if <enter> key */
+	cur_vt = vt;
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		const gchar *buf;
 		buf = gtk_entry_get_text(GTK_ENTRY(widget));
@@ -868,6 +843,8 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					DIALOG_DATA * t)
 {
+	cur_vt = t;
+	
 	switch (event->button) {
 	case 1:
 		break;
@@ -904,6 +881,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 {
 	
 	gchar *key;
+	cur_vt = t;
 
 	//settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*
@@ -951,6 +929,7 @@ static gboolean textview_button_release_event(GtkWidget * widget,
 {
 	extern gboolean in_url;
 	gchar *key;
+	cur_vt = t;
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*
@@ -1455,12 +1434,14 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-
-	gchar *module_name = NULL;
-
-	module_name = module_name_from_description((gchar *) user_data);
+	gchar *module_name = module_name_from_description((gchar *)user_data);
+	gchar *url = NULL;
 	if(module_name) {
-		//main_display_bible(module_name, settings.currentverse);
+		url = g_strdup_printf("sword://%s/%s",
+					module_name,
+					cur_vt->key);
+		main_dialogs_url_handler(cur_vt, url, TRUE);
+		g_free(url);
 		g_free(module_name);
 	}
 }
@@ -1774,11 +1755,11 @@ static void sync_toggled(GtkCheckMenuItem * menuitem, gpointer data)
 	if(menuitem->active) {
 		main_sync_bibletext_dialog_with_main(cur_vt);
 		cur_vt->sync = TRUE;
-		gtk_widget_hide(cur_vt->toolbar_nav);
+		//gtk_widget_hide(cur_vt->toolbar_nav);
 	}
 	else {		
 		cur_vt->sync = FALSE;
-		gtk_widget_show(cur_vt->toolbar_nav);
+		//gtk_widget_show(cur_vt->toolbar_nav);
 	}
 }
 

@@ -46,9 +46,11 @@ gnomesword2_SOURCES =  \
     main_menu.c \
     main_window.c \
     mod_mgr.c \
+    note_editor.c \
+    note_toolbar_edit.c \
+    note_toolbar_style.c \
     parallel_view.c \
     parallel_dialog.c \
-    percomm.c \
     preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \

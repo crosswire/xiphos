@@ -32,6 +32,7 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/module_dialogs.h"
 
 /******************************************************************************
  * Name

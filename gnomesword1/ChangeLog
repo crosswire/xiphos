@@ -1,3 +1,11 @@
+2004-04-02 Terry <tbiggs@users.sf.net>
+
+	* added gnome2/note_editor.c and gui/note_editor.h
+	* added gnome2/note_toolbar_edit.c and gui/note_toolbar_edit.h
+	* added gnome2/note_toolbar_style.c and gui/note_toolbar_style.h
+	* removed gnome2/percomm.c and gui/percomm.h
+	
+
 2004-03-30  Terry <tbiggs@users.sf.net>
 
 	* completely reworked gnome2/commentary_dialog.c

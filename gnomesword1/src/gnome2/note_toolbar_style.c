@@ -35,8 +35,9 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/module_dialogs.h"
 
-static void toolbar_update_format(GSHTMLEditorControlData * cd);
+static void toolbar_update_format(DIALOG_DATA * d);
 
 
 static struct {
@@ -273,8 +274,10 @@ static GtkWidget *setup_paragraph_style_option_menu(GtkHTML * html)
  *   void
  */
 
-static void set_font_size(GtkWidget * w, GSHTMLEditorControlData * cd)
+static void set_font_size(GtkWidget * w, DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
+	
 	GtkHTMLFontStyle style = GTK_HTML_FONT_STYLE_SIZE_1 +
 	    GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(w),
 						"size"));
@@ -305,8 +308,9 @@ static void set_font_size(GtkWidget * w, GSHTMLEditorControlData * cd)
 
 static void font_size_changed(GtkWidget * w,
 			      GtkHTMLParagraphStyle style,
-			      GSHTMLEditorControlData * cd)
+			      DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (style == GTK_HTML_FONT_STYLE_DEFAULT)
 		style = GTK_HTML_FONT_STYLE_SIZE_3;
 	cd->block_font_style_change++;
@@ -334,9 +338,9 @@ static void font_size_changed(GtkWidget * w,
  *   GtkWidget *
  */
 
-static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
-					      cd)
+static GtkWidget *setup_font_size_option_menu(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	GtkWidget *option_menu;
 	GtkWidget *menu;
 	guint i;
@@ -361,7 +365,8 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
 		gtk_object_set_data(GTK_OBJECT(menu_item), "size",
 				    GINT_TO_POINTER(i));
 		g_signal_connect(GTK_OBJECT(menu_item), "activate",
-				   G_CALLBACK(set_font_size), cd);
+				   G_CALLBACK(set_font_size), 
+				   (DIALOG_DATA *) d);
 	}
 
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
@@ -369,7 +374,8 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
 
 	g_signal_connect(GTK_OBJECT(cd->html),
 			   "insertion_font_style_changed",
-			   G_CALLBACK(font_size_changed), cd);
+			   G_CALLBACK(font_size_changed), 
+			   (DIALOG_DATA *) d);
 
 	gtk_widget_show(option_menu);
 
@@ -397,8 +403,9 @@ static void color_changed(GtkWidget * w, GdkColor * gdk_color,
 			gboolean custom,	
 			  gboolean by_user,
 			  gboolean is_default,
-			  GSHTMLEditorControlData * cd)
+			  DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	HTMLColor *color;
 
 	/* If the color was changed programatically 
@@ -435,6 +442,7 @@ static void color_changed(GtkWidget * w, GdkColor * gdk_color,
 
 static void unset_focus(GtkWidget * w, gpointer data)
 {
+	//GSHTMLEditorControlData *cd = d->editor;
 	GTK_WIDGET_UNSET_FLAGS(w, GTK_CAN_FOCUS);
 	if (GTK_IS_CONTAINER(w))
 		gtk_container_forall(GTK_CONTAINER(w),
@@ -458,8 +466,9 @@ static void unset_focus(GtkWidget * w, gpointer data)
  */
 
 static void set_color_combo(GtkHTML * html,
-			    GSHTMLEditorControlData * cd)
+			    DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	color_combo_set_color(COLOR_COMBO(cd->combo),
 			      &html_colorset_get_color_allocated
 			      (html->engine->painter,
@@ -482,11 +491,13 @@ static void set_color_combo(GtkHTML * html,
  *   void
  */
 
-static void realize_engine(GtkHTML * html, GSHTMLEditorControlData * cd)
+static void realize_engine(GtkHTML * html, DIALOG_DATA * d)
 {
-	set_color_combo(html, cd);
+	GSHTMLEditorControlData *cd = d->editor;
+	set_color_combo(html, d);
 	g_signal_handlers_disconnect_by_func(GTK_OBJECT(html),
-				      G_CALLBACK(realize_engine), cd);
+				      G_CALLBACK(realize_engine), 
+				      (DIALOG_DATA *) d);
 	/*gtk_signal_disconnect_by_func(GTK_OBJECT(html),
 				      G_CALLBACK(realize_engine), cd);*/
 }
@@ -507,13 +518,15 @@ static void realize_engine(GtkHTML * html, GSHTMLEditorControlData * cd)
  *   void
  */
 
-static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
+static void load_done(GtkHTML * html, DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (GTK_WIDGET_REALIZED(cd->html))
-		set_color_combo(html, cd);
+		set_color_combo(html, d);
 	else
 		g_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   G_CALLBACK(realize_engine), cd);
+				G_CALLBACK(realize_engine), 
+				(DIALOG_DATA *) d);
 }
 
 /******************************************************************************
@@ -532,48 +545,37 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
  *   GtkWidget *
  */
 
-static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
+static GtkWidget *setup_color_combo(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	HTMLColor *color;
 
-	color = html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor);
+	color = html_colorset_get_color (
+				cd->html->engine->settings->color_set, 
+				HTMLTextColor);
 	if (GTK_WIDGET_REALIZED (cd->html))
 		html_color_alloc (color, cd->html->engine->painter);
 	else
-		g_signal_connect (cd->html, "realize", G_CALLBACK (realize_engine), cd);
-        g_signal_connect (cd->html, "load_done", G_CALLBACK (load_done), cd);
+		g_signal_connect (cd->html, "realize", 
+				G_CALLBACK (realize_engine), 
+				(DIALOG_DATA *) d);
+	
+        g_signal_connect (cd->html, "load_done", 
+				G_CALLBACK (load_done), 
+				(DIALOG_DATA *) d);
 
-	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
+	cd->combo = color_combo_new (	NULL, 
+				     	_("Automatic"),
+			  		&color->color, 
+					color_group_fetch ("toolbar_text",d));
 	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
-        g_signal_connect (cd->combo, "color_changed", G_CALLBACK (color_changed), cd);
+        g_signal_connect (cd->combo, "color_changed", 
+				G_CALLBACK (color_changed), 
+				(DIALOG_DATA *) d);
 
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
-	
-/*	HTMLColor *color;
-
-	color =
-	    html_colorset_get_color(cd->html->engine->settings->
-				    color_set, HTMLTextColor);
-	if (GTK_WIDGET_REALIZED(cd->html))
-		html_color_alloc(color, cd->html->engine->painter);
-	else
-		g_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   G_CALLBACK(realize_engine), cd);
-	g_signal_connect(GTK_OBJECT(cd->html), "load_done",
-			   G_CALLBACK(load_done), cd);
-
-	cd->combo = color_combo_new(NULL, _("Automatic"), &color->color,
-				    color_group_fetch("toolbar_text",
-						      cd));
-	GTK_WIDGET_UNSET_FLAGS(cd->combo, GTK_CAN_FOCUS);
-	gtk_container_forall(GTK_CONTAINER(cd->combo),
-			     unset_focus, NULL);
-
-	gtk_widget_show_all(cd->combo);
-	return cd->combo;
-	*/
 }
 
 /******************************************************************************
@@ -594,8 +596,9 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
  */
 
 static void editor_toolbar_tt_cb(GtkWidget * widget,
-				 GSHTMLEditorControlData * cd)
+				 DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (!cd->block_font_style_change) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
 						 (widget)))
@@ -627,8 +630,9 @@ static void editor_toolbar_tt_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_bold_cb(GtkWidget * widget,
-				   GSHTMLEditorControlData * cd)
+				   DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (!cd->block_font_style_change) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
 						 (widget)))
@@ -660,8 +664,9 @@ static void editor_toolbar_bold_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_italic_cb(GtkWidget * widget,
-				     GSHTMLEditorControlData * cd)
+				     DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (!cd->block_font_style_change) {
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
 						 (widget)))
@@ -693,8 +698,9 @@ static void editor_toolbar_italic_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_underline_cb(GtkWidget * widget,
-					GSHTMLEditorControlData * cd)
+					DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (!cd->block_font_style_change) {
 		if (gtk_toggle_button_get_active
 		    (GTK_TOGGLE_BUTTON(widget)))
@@ -726,8 +732,9 @@ static void editor_toolbar_underline_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_strikeout_cb(GtkWidget * widget,
-					GSHTMLEditorControlData * cd)
+					DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	if (!cd->block_font_style_change) {
 		if (gtk_toggle_button_get_active
 		    (GTK_TOGGLE_BUTTON(widget)))
@@ -760,9 +767,9 @@ static void editor_toolbar_strikeout_cb(GtkWidget * widget,
 
 static void insertion_font_style_changed_cb(GtkHTML * widget,
 					    GtkHTMLFontStyle font_style,
-					    GSHTMLEditorControlData *
-					    cd)
+					    DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	cd->block_font_style_change++;
 
 	if (font_style & GTK_HTML_FONT_STYLE_FIXED)
@@ -826,8 +833,9 @@ static void insertion_font_style_changed_cb(GtkHTML * widget,
  */
 
 static void editor_toolbar_left_align_cb(GtkWidget * widget,
-					 GSHTMLEditorControlData * cd)
+					 DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	/* If the button is not active at this point, it means that the user clicked on
 	   some other button in the radio group.  */
 	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
@@ -855,8 +863,9 @@ static void editor_toolbar_left_align_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_center_cb(GtkWidget * widget,
-				     GSHTMLEditorControlData * cd)
+				     DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	/* If the button is not active at this point, it means that the user clicked on
 	   some other button in the radio group.  */
 	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
@@ -884,8 +893,9 @@ static void editor_toolbar_center_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_right_align_cb(GtkWidget * widget,
-					  GSHTMLEditorControlData * cd)
+					  DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	/* If the button is not active at this point, it means that the user clicked on
 	   some other button in the radio group.  */
 	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
@@ -913,6 +923,7 @@ static void editor_toolbar_right_align_cb(GtkWidget * widget,
 
 static void safe_set_active(GtkWidget * widget, gpointer data)
 {
+	//GSHTMLEditorControlData *cd = d->editor;
 	GtkObject *object;
 	GtkToggleButton *toggle_button;
 
@@ -955,17 +966,18 @@ static void safe_set_active(GtkWidget * widget, gpointer data)
 static void paragraph_alignment_changed_cb(GtkHTML * widget,
 					   GtkHTMLParagraphAlignment
 					   alignment,
-					   GSHTMLEditorControlData * cd)
+					   DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	switch (alignment) {
 	case GTK_HTML_PARAGRAPH_ALIGNMENT_LEFT:
-		safe_set_active(cd->left_align_button, cd);
+		safe_set_active(cd->left_align_button, d);
 		break;
 	case GTK_HTML_PARAGRAPH_ALIGNMENT_CENTER:
-		safe_set_active(cd->center_button, cd);
+		safe_set_active(cd->center_button, d);
 		break;
 	case GTK_HTML_PARAGRAPH_ALIGNMENT_RIGHT:
-		safe_set_active(cd->right_align_button, cd);
+		safe_set_active(cd->right_align_button, d);
 		break;
 	default:
 		g_warning("Unknown GtkHTMLParagraphAlignment %d.",
@@ -991,8 +1003,9 @@ static void paragraph_alignment_changed_cb(GtkHTML * widget,
  */
 
 static void editor_toolbar_indent_cb(GtkWidget * widget,
-				     GSHTMLEditorControlData * cd)
+				     DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	gtk_html_indent_push_level(GTK_HTML (cd->html), 
 				HTML_LIST_TYPE_BLOCKQUOTE);
 }
@@ -1015,8 +1028,9 @@ static void editor_toolbar_indent_cb(GtkWidget * widget,
  */
 
 static void editor_toolbar_unindent_cb(GtkWidget * widget,
-				       GSHTMLEditorControlData * cd)
+				       DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	gtk_html_indent_pop_level (GTK_HTML (cd->html));
 }
 
@@ -1084,9 +1098,9 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void
-indentation_changed (GtkWidget *w, guint level, GSHTMLEditorControlData *cd)
+static void indentation_changed (GtkWidget *w, guint level, DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	gtk_widget_set_sensitive (cd->unindent_button, level != 0);
 }
 
@@ -1106,29 +1120,31 @@ indentation_changed (GtkWidget *w, guint level, GSHTMLEditorControlData *cd)
  *   GtkWidget *
  */
 
-static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
+static GtkWidget *create_style_toolbar(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	GtkWidget *fontitem;
 	GtkWidget *coloritem;
-	cd->toolbar_style =
-	    gtk_toolbar_new();
+	
+	cd->toolbar_style = gtk_toolbar_new();
 	gtk_widget_show_all(cd->toolbar_style);
-	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
+	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), 
+				GTK_TOOLBAR_ICONS);
 
 	cd->paragraph_option =
 	    setup_paragraph_style_option_menu(cd->html),
 	    gtk_toolbar_prepend_widget(GTK_TOOLBAR(cd->toolbar_style),
 				       cd->paragraph_option, NULL,
 				       NULL);
-	fontitem = setup_font_size_option_menu(cd);
+	fontitem = setup_font_size_option_menu(d);
 	gtk_toolbar_prepend_widget(GTK_TOOLBAR(cd->toolbar_style),
 				   fontitem,
 				   NULL, NULL);
 
 	gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(cd->toolbar_style),
 					 editor_toolbar_style_uiinfo,
-					 NULL, cd);
-	coloritem = setup_color_combo(cd);
+					 NULL, d);
+	coloritem = setup_color_combo(d);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
 				  coloritem, NULL, NULL);
 
@@ -1137,7 +1153,8 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	    g_signal_connect(G_OBJECT(cd->htmlwidget),
 			       "insertion_font_style_changed",
 			       G_CALLBACK
-			       (insertion_font_style_changed_cb), cd);
+			       (insertion_font_style_changed_cb), 
+			       (DIALOG_DATA *) d);
 
 
 	cd->tt_button = editor_toolbar_style_uiinfo[0].widget;
@@ -1155,15 +1172,18 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	cd->unindent_button = editor_toolbar_style_uiinfo[8].widget;
 	cd->indent_button = editor_toolbar_style_uiinfo[9].widget;
 	g_signal_connect (cd->html, "current_paragraph_indentation_changed",
-			  G_CALLBACK (indentation_changed), cd);
+			  G_CALLBACK (indentation_changed), 
+			  (DIALOG_DATA *) d);
 
-	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
+	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style),
+		 	  GTK_TOOLBAR_ICONS);
 	
 	g_signal_connect(GTK_OBJECT(cd->html),
 			   "current_paragraph_alignment_changed",
 			   G_CALLBACK
-			   (paragraph_alignment_changed_cb), cd);
-	toolbar_update_format (cd);
+			   (paragraph_alignment_changed_cb), 
+			   (DIALOG_DATA *) d);
+	toolbar_update_format ((DIALOG_DATA *) d);
 			   
 	return cd->toolbar_style;
 }
@@ -1228,8 +1248,9 @@ static void toolbar_item_update_sensitivity(GtkWidget * widget,
  *   void
  */
 
-static void toolbar_update_format(GSHTMLEditorControlData * cd)
+static void toolbar_update_format(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	/*if (cd->toolbar_style)
 		gtk_container_forall(GTK_CONTAINER(cd->toolbar_style),
 			     toolbar_item_update_sensitivity, cd);
@@ -1255,10 +1276,11 @@ static void toolbar_update_format(GSHTMLEditorControlData * cd)
  *   GtkWidget *
  */
 
-GtkWidget *gui_toolbar_style(GSHTMLEditorControlData * cd)
+GtkWidget *gui_note_toolbar_style(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *cd = d->editor;
 	g_return_val_if_fail(cd->html != NULL, NULL);
 	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
 
-	return create_style_toolbar(cd);
+	return create_style_toolbar(d);
 }
