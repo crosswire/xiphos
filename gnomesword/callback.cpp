@@ -33,8 +33,8 @@
 #include <regex.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 #include  <widgets/e-paned/e-paned.h>
-#include  <widgets/e-paned/e-hpaned.h/>
-#include  <widgets/e-paned/e-vpaned.h/>
+#include  <widgets/e-paned/e-hpaned.h>
+#include  <widgets/e-paned/e-vpaned.h>
 
 #include "callback.h"
 #include "GnomeSword.h"

@@ -3,7 +3,9 @@
 INCLUDES = \
  $(GNOME_INCLUDEDIR) \
  -I$(top_srcdir)/widgets/misc \
- -I$(top_srcdir)/widgets/shotrcur-bar
+ -I$(top_srcdir)/widgets/shortcut-bar \
+ -I$(top_srcdir)/widgets/e-paned
+ 
 
 bin_PROGRAMS = gnomesword
 
