@@ -36,10 +36,15 @@
 #include "gui/editor_spell.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
+#include "gui/percomm.h"
+#include "gui/fileselection.h"
 
 #include "main/settings.h"
 #include "main/percomm.h"
 
+static void on_btn_save_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd);
+					
 /******************************************************************************
  * Name
  *  on_btn_open_clicked
@@ -365,7 +370,6 @@ static void on_btn_replace_clicked(GtkButton * button,
 
 static GtkWidget *create_toolbar_edit (GSHTMLEditorControlData *ecd)
 {	
-	GtkWidget *toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;	
 	
