@@ -443,7 +443,8 @@ void gui_update_tab_struct(const gchar * text_mod,
 	if(text_mod) {
 		if(cur_passage_tab->text_mod)
 			g_free(cur_passage_tab->text_mod);
-		cur_passage_tab->text_mod = g_strdup(text_mod);		
+		cur_passage_tab->text_mod = g_strdup(text_mod);	
+				
 	}
 	if(commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
@@ -504,7 +505,7 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->text_mod = g_strdup(settings.MainWindowModule);
 	pt->commentary_mod = g_strdup(settings.CommWindowModule);
 	pt->dictlex_mod = g_strdup(settings.DictWindowModule);
-	pt->book_mod = NULL;
+	pt->book_mod = g_strdup(settings.book_mod);
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_offset = NULL;
@@ -660,14 +661,15 @@ void gui_close_passage_tab(gint pagenum)
 		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	passage_list = g_list_remove(passage_list, pt);
-	g_free(pt->text_mod);
-	g_free(pt->commentary_mod);
-	g_free(pt->dictlex_mod);
-	g_free(pt->book_mod);
-	g_free(pt->text_commentary_key);
-	g_free(pt->dictlex_key);
-	g_free(pt->book_offset);
+	if(pt->text_mod) g_free(pt->text_mod);
+	if(pt->commentary_mod) g_free(pt->commentary_mod);
+	if(pt->dictlex_mod) g_free(pt->dictlex_mod);
+	if(pt->book_mod) g_free(pt->book_mod);
+	if(pt->text_commentary_key) g_free(pt->text_commentary_key);
+	if(pt->dictlex_key) g_free(pt->dictlex_key);
+	if(pt->book_offset) g_free(pt->book_offset);
 	g_free(pt);
+	cur_passage_tab = NULL;
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 

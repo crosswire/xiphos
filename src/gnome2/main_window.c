@@ -262,15 +262,8 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 						      NULL,
 						      settings.comm_showing);
 			val_key = gui_update_nav_controls(key);
-			if(!strcmp(settings.MainWindowModule,module_name))
-				gui_change_verse((gchar*)val_key);
-			else {
-				xml_set_value("GnomeSword", "modules", "bible",
-							module_name);
-				settings.MainWindowModule = xml_get_value(
-							"modules", "bible");
-				gui_set_text_mod_and_key(module_name, val_key);
-			}
+			main_display_bible(module_name, val_key);
+			main_display_commentary(settings.CommWindowModule, val_key);
 			free(val_key);
 		}
 		break;
@@ -284,7 +277,7 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 						      NULL,
 						      NULL,
 						      TRUE);
-			gui_set_commentary_mod_and_key(module_name, key);
+			main_display_commentary(module_name, key);
 		}
 		break;
 	case DICTIONARY_TYPE:
@@ -297,7 +290,8 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 						      key,
 						      NULL,
 						      settings.comm_showing);			
-			gui_set_dictlex_mod_and_key(module_name, key);
+			//gui_set_dictlex_mod_and_key(module_name, key);
+			main_display_dictionary(module_name, key);
 		}
 		break;
 	case BOOK_TYPE:
