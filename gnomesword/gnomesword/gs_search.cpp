@@ -38,6 +38,7 @@
 #include "interface.h"
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
+#include "sw_utility.h"
 
 
 SearchWindow *searchWindow;
@@ -93,11 +94,9 @@ SearchWindow::initsearchWindow (GtkWidget * searchDlg)	//-- init search dialog
 {
 	ModMap::iterator it;	//-- sword manager iterator
 	SectionMap::iterator sit;	//-- iteratior
-	ConfigEntMap::iterator cit;	//-- iteratior
-	gchar *sourceformat;
 
 	gtk_text_set_word_wrap (GTK_TEXT(lookup_widget (searchDlg, "txtSearch")), TRUE); //-- set text window to word wrap
-	PLAINsearchDisplay = new GTKEntryDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for gbf
+//	PLAINsearchDisplay = new GTKEntryDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for gbf
 	HTMLsearchDisplay = new HTMLentryDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for html
 //	RWPsearchDisplay = new GTKRWPDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for html
 	//--------------------------------------------------------------------------------------- searchmodule      
@@ -105,30 +104,10 @@ SearchWindow::initsearchWindow (GtkWidget * searchDlg)	//-- init search dialog
 		searchMod = (*it).second;	//-- set searchMod
 		sit = searchMgr->config->Sections.find ((*it).second->Name ());	/* check to see if we need render filters */
 		if (sit != searchMgr->config->Sections.end ()) {
-		        cit = (*sit).second.find ("SourceType");
-			if (cit != (*sit).second.end ())
-				    sourceformat = g_strdup ((*cit).second.c_str ());
-			else
-				    sourceformat = g_strdup ("Plain");
-		}
-		if (!strcmp (sourceformat, "GBF")) {	/* we need gbf to html filter */		    
-			searchMod->AddRenderFilter (gbftohtml);
-			searchMod->Disp (HTMLsearchDisplay);
-		}
-		else if (!strcmp (sourceformat, "ThML")) {	/* we need ThML to html filter */		    
-			//curcomMod->AddRenderFilter(thmltohtml);
-			searchMod->Disp (HTMLsearchDisplay);
-		} else if ((*searchMgr->config->Sections[(*it).second->Name ()].find ("ModDrv")).second == "RawFiles") {	/* if driver is RawFiles */		    
-			searchMod->Disp (HTMLsearchDisplay);	//-- no filter needed
-		} else if (!strcmp (searchMod->Name (), "RWP")) {
-			searchMod->AddRenderFilter(rwphtml);
-			searchMod->Disp (HTMLsearchDisplay);	
-                } else {
-			//searchMod->AddRenderFilter(plaintohtml);
-			searchMod->Disp (PLAINsearchDisplay);
-			//cout << searchMod->Name() << '\n';                                    
+			ConfigEntMap &section = (*sit).second;
+			addrenderfiltersSWORD(searchMod, section);
+			searchMod->Disp (HTMLsearchDisplay);                                   
                 }
-		g_free (sourceformat);
         }
 }
 
