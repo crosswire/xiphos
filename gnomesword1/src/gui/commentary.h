@@ -27,6 +27,7 @@ typedef struct _commdata COMM_DATA;
 #include "gui/commentary_find.h"
 
 struct _commdata {
+	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *frame_toolbar;
@@ -51,6 +52,7 @@ struct _commdata {
 void gui_set_commentary_page_and_key(gint page_num,
 				     gchar * key);
 void gui_display_commentary(gchar * key);
+void gui_add_new_comm_pane(COMM_DATA *c);
 void gui_setup_commentary(GList *mods);
 void gui_shutdown_commentary(void);
 #endif
