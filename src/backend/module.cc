@@ -144,21 +144,24 @@ char *backend_get_footnote_body(char *module_name,
 	keybuf = module->getKey();
 	SWBuf type = 
 		module->getEntryAttributes()["Footnote"][note]["type"].c_str();
-/*		
+	SWBuf body = module->getEntryAttributes()
+					["Footnote"][note]["body"].c_str();	
 	if (type == "crossReference") {
-		SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
+/*		SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
 		//tmpVerseList = DefaultVSKey->ParseVerseList(refList.c_str(), *DefaultVSKey);
 		if (tmpVerseList.Count())
 			printf("%s\n", refList.c_str());
-			return strdup(refList.c_str());
-	} else {*/
-		SWBuf body =
-			module->getEntryAttributes()
-					["Footnote"][note]["body"].c_str();
-		module->renderFilter(body, keybuf);	
-		if (body)
-			return strdup(body.c_str());
-	//}
+			return strdup(refList.c_str());*/
+		module->stripFilter(body, keybuf);
+		
+	} else {
+		
+		module->renderFilter(body, keybuf);
+
+	}		
+	if (body)
+		return strdup(body.c_str());
+	
 	return NULL;
 }
 
