@@ -35,6 +35,10 @@ on_ok_button2_clicked                  (GtkButton       *button,
                                         gpointer         user_data);
 
 void
+on_ok_button4_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
 on_cancel_button2_clicked              (GtkButton       *button,
                                         gpointer         user_data);
 
@@ -79,6 +83,9 @@ on_btnOptionsHelp_clicked              (GtkButton       *button,
 
 void
 on_mainwindow_destroy                  (GtkObject       *object,
+                                       gpointer         user_data);
+void
+on_listeditor_destroy                  (GtkObject       *object,
                                         gpointer         user_data);
 void
 on_dlgSearch_destroy                  	(GtkObject       *object,
@@ -845,4 +852,150 @@ on_btnBMEapply_clicked                 (GtkButton       *button,
 
 void
 on_btnBMEcancel_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_about_this_module1_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module2_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module3_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module4_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnPropertyboxOK_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnPropertyboxApply_clicked         (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnPropertyboxCancel_clicked        (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_about_this_module1_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module2_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module3_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_about_this_module4_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_clLElist_select_row                 (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data);
+
+void
+on_btnLEup_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEdown_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEleft_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEright_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnGotoVerse_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_cbLEBook_changed                    (GtkEditable     *editable,
+                                        gpointer         user_data);
+
+void
+on_spLEChapter_changed                 (GtkEditable     *editable,
+                                        gpointer         user_data);
+
+void
+on_spLEVerse_changed                   (GtkEditable     *editable,
+                                        gpointer         user_data);
+
+void
+on_btnLEAddVerse_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEAddItem_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEDelete_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEClose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_clLElist_select_row                 (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data);
+
+void
+on_btnLEmakesub_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEok_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEapply_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEcancel_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_entryPreitem_changed                (GtkEditable     *editable,
+                                        gpointer         user_data);
+
+void
+on_btnLEapplylistchanges_clicked       (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEcancelistchanges_clicked       (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEok_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEapply_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnLEcancel_clicked                 (GtkButton       *button,
                                         gpointer         user_data);

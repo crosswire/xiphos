@@ -35,6 +35,7 @@
 #include "menustuff.h"
 #include "GnomeSword.h"
 #include "dialogs.h"
+#include "listeditor.h"
 
 #define BUFFER_SIZE 8192	//-- input buffer size	
 //extern SETTINGS *settings;
@@ -45,12 +46,14 @@ extern gboolean file_changed;	//-- set to true if text is study pad has changed 
 char	 	 *homedir,	//-- store $home directory
 				*gSwordDir,	//-- store GnomeSword directory
 				*fnbookmarks,	//-- store filename for bookmark file
+				*fnbookmarksnew,
 				*fnconfigure;	//-- store filename for configure file - options
 FILE 		 *configfile, //--  file pointer to configuration file - options
-				*flbookmarks;	 //-- file pointer to bookmarks file	
+				*flbookmarks;	
 		
 gint 			ibookmarks;	//-- number of bookmark menu items		
-gchar remembersubtree[256];
+gchar remembersubtree[256], //-- we need to use this when add to bookmarks
+			rememberlastitem[255];//-- we need to use this when add to bookmarks
 
 /*-----------------------------------------------------
 check for GnomeSword dir
@@ -69,6 +72,10 @@ setDiretory(void)
 	sprintf(gSwordDir, "%s/%s", homedir,".GnomeSword" );
 	fnbookmarks = g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt")+ 2); //-- set fnbookmarks to gSwordDir + bookmarks.txt
 	sprintf(fnbookmarks, "%s/%s", gSwordDir,"bookmarks.txt" );
+	
+	fnbookmarksnew = g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs")+ 2); //-- set fnbookmarks to gSwordDir + bookmarks.txt
+	sprintf(fnbookmarksnew, "%s/%s", gSwordDir,"bookmarksnew.gs" );
+	
 	fnconfigure = g_new(char, strlen(gSwordDir) + strlen("settings.cfg")+ 2); //-- set fnconfigure to gSwordDir + gsword.cfg
 	sprintf(fnconfigure, "%s/%s", gSwordDir,"settings.cfg" );
 	if(access(gSwordDir,F_OK) == -1)  //-- if gSwordDir does not exist create it
@@ -116,14 +123,170 @@ loadbookmarkarray(void) //------------------------------------------- load bookm
 		strcpy(bmarks[i],mybuf);
 	}	
 	fclose(flbookmarks);
-	
+
 }
 
+//-------------------------------------------------------------------------------------------
+void
+loadbookmarksnew(GtkWidget *list)
+{
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	
+	gint i=0;
+	gchar *buf[1][6],
+				workbuf[255];
+	gchar tmpbuf[255];
+	p_mylist = &mylist;
+	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
+	while(i < ibookmarks)
+	{
+	  read(flbookmarksnew,(char *)&mylist,sizeof(mylist)); 	
+	  switch(p_mylist->level)
+	  {
+	  	case 0:  strcpy(workbuf,p_mylist->item);
+	  			break;
+	  	case 1: sprintf(workbuf,"\t%s",p_mylist->item);
+	  			break;
+	  	case 2: sprintf(workbuf,"\t\t%s",p_mylist->item);
+	  			break;
+	  	case 3: sprintf(workbuf,"\t\t\t%s",p_mylist->item);
+	  			break;
+	  	case 4: sprintf(workbuf,"\t\t\t\t%s",p_mylist->item);
+	  			break;
+	  }
+	  buf[0][0] = g_strdup(workbuf);
+	  sprintf(tmpbuf,"%d", p_mylist->type); 	
+	  buf[0][1] = g_strdup(tmpbuf);
+	  sprintf(tmpbuf,"%d", p_mylist->level);
+	  buf[0][2] = g_strdup(tmpbuf);
+	  buf[0][3] = g_strdup(p_mylist->subitem);
+	  buf[0][4] = g_strdup(p_mylist->menu);
+	  buf[0][5] = g_strdup(p_mylist->preitem);	
+	  if(buf[0][0][0] == '-') break;	  	
+	  gtk_clist_insert(GTK_CLIST(list), i, buf[0]); //-- insert item in editor list
+	  ++i;
+	}
+	sprintf(rememberlastitem,"%s",p_mylist->item);	
+	close(flbookmarksnew);
+}
+
+//-------------------------------------------------------------------------------------------
+void
+loadbookmarks_programstart(void)
+{
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	gchar 	  subtreelabel[255],
+						firstsubtree[255];
+	gint      ifirsttime = 1;	
+	gint i=0;
+	gchar *buf[1][6];
+	gchar tmpbuf[255];
+	long filesize;
+	
+	struct stat stat_p;
+	
+	stat (fnbookmarksnew, &stat_p);
+  filesize = stat_p.st_size;
+  ibookmarks = (filesize / (sizeof(mylist)));
+	p_mylist = &mylist;
+	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
+	
+	while(i < ibookmarks)
+	{
+	  read(flbookmarksnew,(char *)&mylist,sizeof(mylist));					
+		if(p_mylist->type == 1)  //--- if type is 1 it is a subtree (submenu)
+		{			
+			sprintf(subtreelabel, "%s%s",p_mylist->menu,p_mylist->preitem );
+			sprintf(remembersubtree,p_mylist->item);
+			addsubtreeitem(MainFrm, subtreelabel, p_mylist->item);			
+		}		
+		else
+		{
+			sprintf(subtreelabel, "%s%s%s",p_mylist->menu, p_mylist->subitem, p_mylist->preitem ); //-- create subitem label
+			additemtosubtree(MainFrm,subtreelabel,p_mylist->item); //--- add menu item to subtree
+		}		
+	  ++i;
+	}
+	sprintf(rememberlastitem,"%s",p_mylist->item);
+	//ibookmarks = i;
+	close(flbookmarksnew);
+}
+
+//-------------------------------------------------------------------------------------------
+void
+loadbookmarks_afterSeparator(void)
+{
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	gchar 	  subtreelabel[255];
+	gint i=0;
+	
+	p_mylist = &mylist;
+	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
+	while(i < ibookmarks)
+	{
+	  read(flbookmarksnew,(char *)&mylist,sizeof(mylist));					
+		if(p_mylist->type == 0 && p_mylist->level == 0)  //--- if type is 1 it is a subtree (submenu)
+		{			
+			sprintf(subtreelabel, "%s%s%s",p_mylist->menu, p_mylist->subitem, p_mylist->preitem ); //-- create subitem label
+			additemtosubtree(MainFrm,subtreelabel,p_mylist->item); //--- add menu item to subtree
+		}		
+	  ++i;
+	}
+	sprintf(rememberlastitem,"%s",p_mylist->item);
+	//ibookmarks = i+1;
+	close(flbookmarksnew);
+}
 
 //-------------------------------------------------------------------------------------------
 void
 editbookmarksSave(GtkWidget *editdlg)  //-------------------------- save bookmarks after edit
 {
+	GtkWidget *list;
+	gint 	i,
+				x;
+	gint 	j=0;
+	gchar *buf,
+				*tmpbuf;
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	gint flbookmarksnew;
+	
+	flbookmarksnew = open(fnbookmarksnew, O_WRONLY|O_TRUNC);	
+	p_mylist = &mylist;
+	list = lookup_widget(editdlg,"clLElist");
+	for(i=0;i<ibookmarks;i++)   //ibookmarks
+	{
+		gtk_clist_get_text(GTK_CLIST(list), i, 0, &buf); //-- get item from list
+		if((tmpbuf = strrchr(buf, '\t')) == NULL) //-- remove any tabs
+		{
+		   strcpy(p_mylist->item,buf);
+		}
+		else
+		{
+		   tmpbuf++;
+		   strcpy(p_mylist->item,tmpbuf);
+		} 		
+		gtk_clist_get_text(GTK_CLIST(list), i, 1, &buf); //-- get type from list
+		p_mylist->type = atoi(buf);
+		gtk_clist_get_text(GTK_CLIST(list), i, 2, &buf); //-- get level from list
+		p_mylist->level = atoi(buf);
+		gtk_clist_get_text(GTK_CLIST(list), i, 3, &buf); //-- get item from list
+		strcpy(p_mylist->subitem,buf);
+		gtk_clist_get_text(GTK_CLIST(list), i, 4, &buf); //-- get item from list
+		strcpy(p_mylist->menu,buf);
+		gtk_clist_get_text(GTK_CLIST(list), i, 5, &buf); //-- get level from list
+		strcpy(p_mylist->preitem,buf);
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist)); 	
+	}
+	sprintf(rememberlastitem,"%s",p_mylist->item);
+	close(flbookmarksnew);		
+/*
 	GtkWidget *text; //-- for text widget from edit dlg
 	gchar *data;     //-- data from text widget
 	gint 	len,       //-- length of data
@@ -145,17 +308,44 @@ editbookmarksSave(GtkWidget *editdlg)  //-------------------------- save bookmar
   removemenuitems(MainFrm, remembersubtree, ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
   loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
   loadbookmarks(MainFrm); //-- let's show what we did -- GnomeSword.cpp
+*/
+}
+
+//--------------------------------------------------------------------------------------------
+void
+savebookmark(gchar *item)
+{
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	
+	p_mylist = &mylist;
+	flbookmarksnew = open(fnbookmarksnew, O_WRONLY|O_APPEND);	
+	p_mylist->type = 0;		
+	p_mylist->level = 0;
+	strcpy(p_mylist->item, item);
+	strcpy(p_mylist->preitem, rememberlastitem),
+	strcpy(p_mylist->subitem, "");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+	close(flbookmarksnew); 	
 }
 
 //--------------------------------------------------------------------------------------------
 void
 savebookmarks(void) 
-{
+{ /*
 	gint i,j;
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	p_mylist = &mylist;
+	
 	flbookmarks = fopen(fnbookmarks,"w"); //-------------------------- save bookmarks
+
 	i=0;
 	while(i<ibookmarks)
-	{
+	{ 		
 		for(j=0;j<79;j++)
 		{
 			if(bmarks[i][j] == '\0') 
@@ -167,36 +357,159 @@ savebookmarks(void)
 		}
 		fputs(bmarks[i],flbookmarks);
 		++i;
+		
 	}
 	fputs("-end-",flbookmarks);
-	fclose(flbookmarks);		
+	fclose(flbookmarks);
+	*/
+	/*
+	flbookmarksnew = open(fnbookmarksnew, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);	
+	//flbookmarksnew = fopen(fnbookmarksnew,"w");
+	
+			p_mylist->type = 1;		
+		p_mylist->level = 0;
+		strcpy(p_mylist->item	,"[What must I do to be saved?]");
+		strcpy(p_mylist->subitem	,"[What must I do to be saved?]");
+		strcpy(p_mylist->menu	,"_Bookmarks/<Separator>");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	  p_mylist->type = 0;		
+		p_mylist->level = 1;
+		strcpy(p_mylist->item	,"Romans 1:16");
+		strcpy(p_mylist->subitem	,"[What must I do to be saved?]");
+		strcpy(p_mylist->menu	,"_Bookmarks/");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+	
+   	p_mylist->type = 0;		
+		p_mylist->level = 1;
+		strcpy(p_mylist->item	,"Eph 2:8");
+		strcpy(p_mylist->subitem	,"[What must I do to be saved?]");
+		strcpy(p_mylist->menu	,"_Bookmarks/");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 0;		
+		p_mylist->level = 1;
+		strcpy(p_mylist->item	,"Acts  16:31");
+		strcpy(p_mylist->subitem	,"[What must I do to be saved?]");
+		strcpy(p_mylist->menu	,"_Bookmarks/");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 1;		
+		p_mylist->level = 0;
+		strcpy(p_mylist->item	,"[What is the Gospel?]");
+		strcpy(p_mylist->subitem	,"");
+		strcpy(p_mylist->menu	,"_Bookmarks/<Separator>");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 0;		
+		p_mylist->level = 1;
+		strcpy(p_mylist->item	,"1 Cor 15:1");
+		strcpy(p_mylist->subitem	,"[What is the Gospel?]");
+		strcpy(p_mylist->menu	,"_Bookmarks/");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 0;		
+		p_mylist->level = 0;
+		strcpy(p_mylist->item	,"Romans 8:28");
+		strcpy(p_mylist->subitem	,"");
+		strcpy(p_mylist->menu	,"_Bookmarks/<Separator>");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 0;		
+		p_mylist->level = 0;
+		strcpy(p_mylist->item	,"Rev 1:5");
+		strcpy(p_mylist->subitem	,"");
+		strcpy(p_mylist->menu	,"_Bookmarks/<Separator>");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+		p_mylist->type = 0;		
+		p_mylist->level = 0;
+		strcpy(p_mylist->item	,"-end-");
+		strcpy(p_mylist->subitem	,"-end-");
+		strcpy(p_mylist->menu	,"-end-");
+		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		close(flbookmarksnew);	
+		ibookmarks = 10;
+		*/	
 }
 
 //--------------------------------------------------------------------------------------------
 void
-createFiles(void) //--------------- files nessary for GomeSword if they do not exist
+createFiles(void) //--------------- create bookmark file nessary for GomeSword if it does not exist
 {
-	FILE *f;
-	if((f = fopen(fnbookmarks,"w"))==NULL)  //-------------------------- create bookmark file
-	{
-		printf("Can not create bookmark file");
-		gtk_exit(1);
-	}
-	else
-	{
-		fputs("[What must I do to be saved?]\n",f);
-		fputs("Romans 1:16\n",f);
-		fputs("Eph 2:8\n",f);
-		fputs("Acts  16:31\n",f);
-		fputs("[What is  the Gospel?]\n",f);
-		fputs("1 Cor 15:1\n",f);
-		fputs("<personal>\n",f);
-		fputs("Romans 8:28\n",f);
-		fputs("Rev 1:5\n",f);
-		fputs("John 3:16\n",f);
-		fputs("-end-\n",f);
-		fclose(f);	
-	} 	
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	
+	p_mylist = &mylist;	
+	flbookmarksnew = open(fnbookmarksnew, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);	
+	
+	p_mylist->type = 1;		
+	p_mylist->level = 0;
+	strcpy(p_mylist->item	,"[What must I do to be saved?]");
+	strcpy(p_mylist->preitem,"Edit Bookmarks"),
+	strcpy(p_mylist->subitem	,"");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 0;		
+	p_mylist->level = 1;
+	strcpy(p_mylist->item	,"Romans 1:16");
+	strcpy(p_mylist->preitem,""),
+	strcpy(p_mylist->subitem	,"[What must I do to be saved?]/");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+	
+ 	p_mylist->type = 0;		
+	p_mylist->level = 1;
+	strcpy(p_mylist->item	,"Eph 2:8");
+	strcpy(p_mylist->preitem,"Romans 1:16"),
+	strcpy(p_mylist->subitem	,"[What must I do to be saved?]/");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 0;		
+	p_mylist->level = 1;
+	strcpy(p_mylist->item	,"Acts  16:31");
+	strcpy(p_mylist->preitem,"Eph 2:8"),
+	strcpy(p_mylist->subitem	,"[What must I do to be saved?]/");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 1;		
+	p_mylist->level = 0;
+	strcpy(p_mylist->item	,"[What is the Gospel?]");
+	strcpy(p_mylist->preitem,"[What must I do to be saved?]"),
+	strcpy(p_mylist->subitem	,"");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 0;		
+	p_mylist->level = 1;
+	strcpy(p_mylist->item	,"1 Cor 15:1");
+	strcpy(p_mylist->preitem,""),
+	strcpy(p_mylist->subitem	,"[What is the Gospel?]/");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 0;		
+	p_mylist->level = 0;
+	strcpy(p_mylist->item	,"Romans 8:28");
+	strcpy(p_mylist->preitem,""),
+	strcpy(p_mylist->subitem	,"");
+	strcpy(p_mylist->menu	,"_Bookmarks/<Separator>");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	p_mylist->type = 0;		
+	p_mylist->level = 0;
+	strcpy(p_mylist->item	,"Rev 1:5");
+	strcpy(p_mylist->preitem,"Romans 8:28"),
+	strcpy(p_mylist->subitem	,"");
+	strcpy(p_mylist->menu	,"_Bookmarks/");
+	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
+		
+	close(flbookmarksnew);
+	ibookmarks = 8;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -419,9 +732,7 @@ createsettings(void)
 	p_settings->autosavepersonalcomments = true; //-- set autosave personal comments to on
 	p_settings->notebook3page = 0;  //-- notebook 3 page number
 	p_settings->notebook1page = 0;  //-- commentaries notebook
-	p_settings->notebook2page = 0;  //-- dict and lex notebook
-	
-	
+	p_settings->notebook2page = 0;  //-- dict and lex notebook  	
 	
 	fd = open(fnconfigure, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);  //-- create settings file (settings.cfg)
 	write(fd,(char *)&settings,sizeof(settings)); //-- save settings structrue to file
@@ -430,8 +741,44 @@ createsettings(void)
 }
 
 //---------------------------------------------------------------------------------------------
-void
-savelist(GtkWidget *list,gint howmany)
-{
-
+void					//--  save results list form search dialog *filename = pointer to filename from fileselection dialog
+savelist(gchar *filename, GtkWidget *list)    //-- *list is results list widget where results are stored
+{	
+	GtkWidget 	*label; //-- label from search dialog that show number of finds
+	gchar 			*text; //-- pointer to text in the label
+	gint				howmany; //-- integer storage for number of finds
+	FILE 	*fp; 	//-- file pointer
+ 	gint 	i = 0,  //-- counters
+ 				j = 0;
+	gchar buf[255], //-- string storage for each list item
+				*buftmp; //-- pointer for list to text
+		
+	label = lookup_widget(list,"lbSearchHits"); //-- get the label
+	text = (char *)GTK_LABEL(label)->label; //-- get text from label
+	howmany = atoi(text); //-- convert to number
+	//cout  << text;	
+	if(howmany < 1) return; //-- if less than 1 the list is empty lets quit and go back to our program
+	fp = fopen (filename, "w"); //-- open file (filename)
+  if (fp == NULL) //-- if fopen fails lets quit and return to our program
+  {   	
+   	return;
+  }
+	while(i<howmany)  //-- iterate through the results list
+	{
+		gtk_clist_get_text( GTK_CLIST(list), i, 0, &buftmp); //-- point to text data in each row (i) 
+		sprintf(buf,"%s",buftmp); //-- put text data into our buf string
+		for(j=0;j<79;j++) //-- iterate through each string
+		{
+			if(buf[j] == '\0') //-- look for  null
+			{
+				buf[j] = '\n'; //-- replace null with newline ('\n')
+				buf[j+1] = '\0'; //-- put null after newline
+				break; //-- leave for(;;) loop
+			}
+		}
+		fputs(buf,fp); //-- write string to file (filename)
+		++i; //-- increment i by one
+	}
+	fputs("-end-",fp); //-- mark end - 
+	fclose(fp);	 //-- close file (filename)
 }
