@@ -1,4 +1,10 @@
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+		
+	* 0.3pre2
+	* changed main.cpp to main.c
+
+
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added html window for dict/lex modules
 	* changed the html interlinear window to a single window that will
