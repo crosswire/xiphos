@@ -341,9 +341,9 @@ void create_mainwindow(SETTINGS *s)
 	/*
 	 * get and load books of the Bible 
 	 */
-	cbBook_items = backend_get_books();
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
-	g_list_free(cbBook_items);
+	//cbBook_items = backend_get_books();
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), s->book_items);
+	//g_list_free(cbBook_items);
 
 	s->cbeBook = GTK_COMBO(cbBook)->entry;
 	gtk_widget_ref(s->cbeBook);

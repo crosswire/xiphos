@@ -192,7 +192,9 @@ struct _settings {
 		showsplash, /* show splash on program start if true */
 		showdevotional, /* show devotional on program start if true */
 		text_tabs, /* show module tabs in text window if true  */
+		text_tool, /* show toolbar in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
+		comm_tool, /* show toolbar in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		book_tabs, /* show module tabs in books if true  */
 		percomm_tabs, /* show module tabs in personal commentary if true  */
@@ -224,6 +226,7 @@ struct _settings {
 	 * freed in backend_shutdown() gs_sword.cpp
 	 */
 	GList *settingslist;
+	GList *book_items;
 	
 	/* store $home directory */
 	char *homedir;

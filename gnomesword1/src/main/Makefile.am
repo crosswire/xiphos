@@ -60,8 +60,8 @@ COMMON_SOURCE =  \
     gs_popup_cb.h \
     gs_preferences_dlg.c \
     gs_preferences_dlg.h \
-    gs_setup.c \
-    gs_setup.h \
+    setup.c \
+    setup.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
     gs_viewcomm_dlg.c \

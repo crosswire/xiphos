@@ -52,5 +52,7 @@ libgui_a_SOURCES =  \
     link_dialog.h \
     main_menu.c \
     main_menu.h \
+    setup_druid.c \
+    setup_druid.h \
     splash.c \
     splash.h

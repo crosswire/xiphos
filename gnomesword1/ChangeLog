@@ -1,3 +1,11 @@
+2002-05-09  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* split gs_setup.* into main/setup.* and gnome/setup_druid.*
+	* the setup_druid caused a segfault after the finish button
+	  is pressed - it causes a problem with the splash screen :(
+	* added show toolbar item to Bible and commentary pane menus
+	
+
 2002-05-08  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/commentary_find_dialog.*
