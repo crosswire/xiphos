@@ -117,7 +117,7 @@ static void on_btn_open_clicked(GtkButton * button,
 		}
 		g_free(info);
 	}
-	sprintf(buf, "%s/*.pad", settings.homedir);
+	sprintf(buf, "%s/*.pad", settings.studypaddir);
 	openFile = gui_fileselection_open(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
 					buf);
@@ -145,13 +145,15 @@ static void on_btn_open_clicked(GtkButton * button,
 static void on_btn_save_clicked(GtkButton * button,
 				GSHTMLEditorControlData * ecd)
 {
+	gchar *filename = NULL;
 	if (ecd->personal_comments) {
 		gui_save_note(ecd);
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 	} else if (ecd->studypad) {
 		if (strlen(settings.studypadfilename) > 0) {
-			save_file(ecd->filename, ecd);
+			filename = g_strdup(settings.studypadfilename);
+			save_file(filename, ecd);
 		} else {
 			gui_fileselection_save(ecd);
 		}

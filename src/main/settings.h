@@ -179,9 +179,6 @@ struct _settings {
 
 	/* bookmarks directory */
 	char *swbmDir;
-	
-	/* xml bookmarks directory */
-	char *xml_bookmark_dir;
 
 	/* store dir name for shortcutbar files */
 	char *shortcutbarDir;
