@@ -563,7 +563,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label701 = gtk_label_new(NULL);
 
-	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Settings to use when GnomeSword starts"));
+	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",
+			_("Settings to use when GnomeSword starts"));
   	gtk_label_set_markup(GTK_LABEL(label701), labeltext);
 	g_free(labeltext);
 

@@ -245,8 +245,10 @@ void main_dictionary_entery_changed(char * mod_name)
 
 void main_display_book(const char * mod_name, char * key)
 {
-	if(!settings.havebook)
+	if(!settings.havebook || !mod_name)
 		return;
+	if(!settings.book_mod)
+		settings.book_mod = (char*)mod_name;
 	
 	//settings.comm_showing = FALSE;
 	settings.whichwindow = BOOK_WINDOW;
@@ -277,8 +279,10 @@ void main_display_book(const char * mod_name, char * key)
 
 void main_display_commentary(const char * mod_name, const char * key)
 {
-	if(!settings.havecomm)
+	if(!settings.havecomm || !mod_name)
 		return;
+	if(!settings.CommWindowModule)
+		settings.CommWindowModule = (char*)mod_name;
 	
 	//settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
@@ -307,8 +311,10 @@ void main_display_dictionary(char * mod_name, char * key)
 {
 	const gchar *old_key;
 	
-	if(!settings.havedict)
+	if(!settings.havedict || !mod_name)
 		return;
+	if(!settings.DictWindowModule)
+		settings.DictWindowModule = (char*)mod_name;
 	if(strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
@@ -339,14 +345,15 @@ void main_display_dictionary(char * mod_name, char * key)
 
 void main_display_bible(const char * mod_name, const char * key)
 {
-	
 	gchar *file = NULL;
 	gchar *style = NULL;
 	
-	if(!settings.havebible)
+	if(!settings.havebible || !mod_name)
 		return;
+
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	
+	if(!settings.MainWindowModule)
+		settings.MainWindowModule = (char*)mod_name;
 	if(strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "bible",
 					mod_name);
