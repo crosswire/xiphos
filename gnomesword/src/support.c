@@ -54,7 +54,7 @@ GtkWidget *lookup_widget(GtkWidget * widget, const gchar * widget_name)
 	    (GtkWidget *) gtk_object_get_data(GTK_OBJECT(widget),
 					      widget_name);
 	if (!found_widget)
-		g_warning("Widget not found: %s", widget_name);
+		g_warning(_("Widget not found: %s"), widget_name);
 	return found_widget;
 }
 
@@ -86,7 +86,7 @@ static GtkWidget *create_dummy_pixmap(GtkWidget * widget,
 	    gdk_pixmap_colormap_create_from_xpm_d(NULL, colormap, &mask,
 						  NULL, dummy_pixmap_xpm);
 	if (gdkpixmap == NULL)
-		g_error("Couldn't create replacement pixmap.");
+		g_error(_("Couldn't create replacement pixmap."));
 	pixmap = gtk_pixmap_new(gdkpixmap, mask);
 	gdk_pixmap_unref(gdkpixmap);
 	gdk_bitmap_unref(mask);
@@ -108,7 +108,7 @@ GtkWidget *create_pixmap(GtkWidget * widget,
 
 	pathname = gnome_pixmap_file(filename);
 	if (!pathname) {
-		g_warning("Couldn't find pixmap file: %s", filename);
+		g_warning(_("Couldn't find pixmap file: %s"), filename);
 		return create_dummy_pixmap(widget, gnome_pixmap);
 	}
 
@@ -123,7 +123,7 @@ GtkWidget *create_pixmap(GtkWidget * widget,
 	    gdk_pixmap_colormap_create_from_xpm(NULL, colormap, &mask,
 						NULL, pathname);
 	if (gdkpixmap == NULL) {
-		g_warning("Couldn't create pixmap from file: %s",
+		g_warning(_("Couldn't create pixmap from file: %s"),
 			  pathname);
 		g_free(pathname);
 		return create_dummy_pixmap(widget, gnome_pixmap);

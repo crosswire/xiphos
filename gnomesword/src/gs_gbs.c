@@ -798,13 +798,16 @@ void gui_setupGBS(SETTINGS *s, GList *books)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-	if(count)
+	
+	if(count) {
 		gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebookGBS_switch_page),
 			   gbs_list);
+		set_gbs_page(s->BookWindowModule, gbs_list);
+		
+	}
 	else
 		gtk_widget_hide(s->notebookGBS);
-	set_gbs_page(s->BookWindowModule, gbs_list);
 }
 
 void gui_shutdownGBS(void)
