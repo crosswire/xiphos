@@ -232,7 +232,7 @@ void frontend_display(void)
 	if(settings.setup_canceled) {
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			_("The Setup Druid was canceled."),

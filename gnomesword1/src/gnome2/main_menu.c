@@ -575,8 +575,8 @@ static GnomeUIInfo open_book_dialog1_menu_uiinfo[] = {
 
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("Open Studypad"),
-	 N_("Open the Studypad editor"),
+	 GNOME_APP_UI_ITEM, N_("Open StudyPad"),
+	 N_("Open the StudyPad editor"),
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
@@ -620,13 +620,13 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
-	 N_("Shortcut Bar Search"),
+	 N_("Shortcut bar search"),
 	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
-	 N_("Open Search Dialog"),
+	 N_("Open search dialog"),
 	 gui_do_dialog_search, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
@@ -650,7 +650,7 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
-	 N_("Show the Daily Devotion for Today"),
+	 N_("Show the Daily Devotion for today"),
 	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
@@ -672,14 +672,14 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary"),
-	 N_("Show/Hide Commentaries"),
+	 N_("Show/Hide commentaries"),
 	 (gpointer) view_upper_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lower Workbook"),
 	 N_
-	 ("Show/Hide Lower Workbook - Dictionaries, Books and parallel"),
+	 ("Show/Hide lower workbook - dictionaries and other books"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
@@ -756,7 +756,7 @@ static GnomeUIInfo about_sword_modules1_menu_uiinfo[] = {
 static GnomeUIInfo help1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Contents"),
-	 N_("Help Contents"),
+	 N_("Help contents"),
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
 	 0, 0, NULL},
@@ -769,13 +769,13 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,*/
 	{
-	 GNOME_APP_UI_ITEM, N_("About the Sword Project..."),
-	 N_("Infotmation About The Sword Project"),
+	 GNOME_APP_UI_ITEM, N_("About the Sword Project ..."),
+	 N_("Infotmation about the Sword Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("About GnomeSword..."),
+	 GNOME_APP_UI_ITEM, N_("About GnomeSword ..."),
 	 N_("About GnomeSword"),
 	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,

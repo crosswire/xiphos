@@ -645,7 +645,7 @@ void create_mainwindow(void)
 			  _("GnomeSword - Bible Study Software"));
 	gtk_object_set_data(GTK_OBJECT(widgets.app),
 			    "widgets.app", widgets.app);
-	gtk_widget_set_usize(widgets.app, 680, 480);
+	gtk_widget_set_size_request(widgets.app, 680, 480);
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_policy(GTK_WINDOW(widgets.app), TRUE,
 			      TRUE, TRUE);
@@ -980,7 +980,7 @@ void create_mainwindow(void)
 */
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
-	gtk_widget_set_usize(widgets.app, settings.gs_width,
+	gtk_widget_set_size_request(widgets.app, settings.gs_width,
 			     settings.gs_hight);
 }
 

@@ -510,7 +510,7 @@ GtkWidget *gui_create_parallel_dialog(void)
 
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-refresh", 
+			GTK_STOCK_REFRESH, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
 	buttonIntSync =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
@@ -523,7 +523,7 @@ GtkWidget *gui_create_parallel_dialog(void)
 	gtk_widget_show(cbIntBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), cbIntBook,
 				  NULL, NULL);
-	gtk_widget_set_usize(cbIntBook, 154, -2);
+	gtk_widget_set_size_request(cbIntBook, 154, -1);
 
 	/*** get and load books of the Bible ***/
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbIntBook),
@@ -554,11 +554,11 @@ GtkWidget *gui_create_parallel_dialog(void)
 	gtk_widget_show(entryIntLookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29),
 				  entryIntLookup, NULL, NULL);
-	gtk_widget_set_usize(entryIntLookup, 190, -2);
+	gtk_widget_set_size_request(entryIntLookup, 190, -1);
 	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), _("Romans 8:28"));
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-jump-to", 
+			GTK_STOCK_JUMP_TO, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
 	btnIntGotoVerse =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
@@ -586,8 +586,7 @@ GtkWidget *gui_create_parallel_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
 				  GTK_BUTTONBOX_END);
 
-	btnDockInt = gtk_button_new_from_stock ("gtk-close");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);*/
+	btnDockInt = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
 	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
