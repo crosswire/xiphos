@@ -1,3 +1,11 @@
+2000-09-06  Terry Biggs <tbiggs@users.sourceforge.net>
+        * fixed a segfault that cause gnomesword to crash while
+        displaying verses from a search. 
+
+2000-09-03  Terry Biggs <tbiggs@users.sourceforge.net>
+        * coding style changes 
+        * fixed some code problems - memory not freed
+        
 2000-08-30  Michael Meeks  <michael@helixcode.com>
 
 	* widgets/Makefile.am (SUBDIRS): add e-paned back.
