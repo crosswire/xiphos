@@ -459,7 +459,6 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 					     "button_press_event");
 		break;
-	default:
 	}
 
 	return FALSE;

@@ -29,6 +29,7 @@
 
 
 #include "gui/main_window.h"
+#include "gui/font_dialog.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -45,6 +46,7 @@
 #include "backend/properties.h"
 #include "backend/shortcutbar.h"
 #include "backend/bookmarks.h"
+#include "backend/module_fonts.h"
 
 
 /******************************************************************************
@@ -290,7 +292,50 @@ GList *get_verse_list(char* module_name, char *verse_list)
 
 char *get_module_font_name(char *mod_name)
 {
-	return backend_get_module_font_name(mod_name);
+	return backend_get_module_font_name(mod_name, settings.gSwordDir);
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
+void get_font_info(MOD_FONT *mf)
+{
+	backend_load_font_info(mf, settings.gSwordDir);
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
+void save_font_info(MOD_FONT *mf)
+{
+	backend_save_font_info(mf, settings.gSwordDir);
 }
 
 
@@ -312,7 +357,7 @@ char *get_module_font_name(char *mod_name)
 
 char *get_module_font_size(char *mod_name)
 {
-	return backend_get_module_font_size(mod_name);
+	return backend_get_module_font_size(mod_name, settings.gSwordDir);
 }
 
 
