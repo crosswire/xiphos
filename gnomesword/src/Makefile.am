@@ -31,6 +31,8 @@ COMMON_SOURCE =  \
     gs_editor_toolbar.h \
     gs_file.c \
     gs_file.h \
+    gs_find_dlg.c \
+    gs_find_dlg.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \
