@@ -5,6 +5,7 @@
 	* added global option support to gbs (for Andy's Life Time module)
 	* the footnotes in lifetimes look bad - in BT also 
 	  (may be a filter problem)
+	* added files gui/mod_global_ops.h and gnome2/mod_global_ops.c
 
 
 2004-01-06  Andy <andyp@users.sf.net>
