@@ -135,7 +135,8 @@ gint setDiretory(void)
 		dotswordDir[256],
 		*gsbmDir,		/* bookmarks directory for gnomesword-0.7.0 and up */
 		bmFile[300],
-		genbookdir[300];
+		genbookdir[300],
+		fontfile[300];
 	
 	/* get home dir */
 	if ((homedir = getenv("HOME")) == NULL) { 		
@@ -231,6 +232,7 @@ gint setDiretory(void)
 			g_warning("can't create .sword/modules/genbook/rawbook dir");
 		}
 	}
+	
 /****  end local gbs dir checks  ****/	
 	
 	

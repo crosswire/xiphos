@@ -141,7 +141,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	use_gtkhtml_font = false;
 	use_font = g_strdup(pick_font(imodule));
 	
-	use_font_size = font_size;
+	use_font_size = g_strdup(font_size);
 	//-- setup gtkhtml widget
 	GtkHTMLStreamStatus status1;	
 	GtkHTML *html = GTK_HTML(gtkText);
@@ -179,7 +179,6 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	}
 	
 	else if(isGBS) {
-	s->percomverse = (gchar*)imodule.KeyText();
 		g_string_sprintf(str,
 			"<FONT COLOR=\"%s\">[%s]</font>",
 			s->bible_verse_num_color, 
@@ -245,7 +244,8 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gtk_html_set_editable(html, was_editable); 
 	
 	g_string_free(str,TRUE);
-	if(use_font) g_free(use_font);		
+	if(use_font) g_free(use_font);	
+	if(use_font_size) g_free(use_font_size);		
 	return 0;
 }
 
@@ -331,7 +331,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 		
 	}
 	
-	use_font_size = font_size;
+	use_font_size = g_strdup(font_size);
 	
 	//-- setup gtkhtml widget
 	GtkHTMLStreamStatus status1;	
@@ -448,6 +448,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	
 	g_string_free(str,TRUE);
 	g_free(use_font);
+	g_free(use_font_size);
 	return 0;
 }
 
