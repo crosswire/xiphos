@@ -43,23 +43,20 @@ main (int argc, char *argv[])
 	gboolean 		
 		newconfigs = false,	
 		newbookmarks = false;
-	gchar 		
-		*buf,
+	gchar 
   		tmpbuf[80];
 
-
-
-			
-	if(argc > 1) buf = g_strdup(argv[1]);	
-	gnome_init("GnomeSword", VERSION, argc, argv);
-	if(!strcmp(buf,"newconfigs")) newconfigs = true;
-	if(!strcmp(buf,"newbookmarks")) newbookmarks = true;
-	if(!strcmp(buf,"newfiles"))
-	{
-  		newconfigs = true;
-  		newbookmarks = true;
-	}
-	g_free(buf);
+	
+	gnome_init("GnomeSword", VERSION, argc, argv);		
+	if(argc > 1) {			
+		if(!strcmp(argv[1],"newconfigs")) newconfigs = true;
+		if(!strcmp(argv[1],"newbookmarks")) newbookmarks = true;
+		if(!strcmp(argv[1],"newfiles"))
+		{
+  			newconfigs = true;
+  			newbookmarks = true;
+		}
+	}		
   	/*
   	setup = create_dialog1();
   	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
@@ -75,13 +72,15 @@ main (int argc, char *argv[])
   	{
   		createFiles();
   	}
-  	myset = readsettings();  //-- load settings into structure
-  	settings = &myset;       //-- set pointer to structure
+  	/* load settings into structure */
+  	myset = readsettings(); 
+  	/* set pointer to structure */
+  	settings = &myset;       
   	initSword(mainwindow);
   	initGnomeSword(mainwindow);
   	gtk_widget_show(mainwindow);
-  	UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
-  	
+  	/* set toggle state of buttons and menu items */
+  	UpdateChecks(mainwindow);    	
   	gtk_main ();  	
   	return 0;
 }

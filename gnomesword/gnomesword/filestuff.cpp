@@ -430,8 +430,11 @@ void writesettings(SETTINGS settings)
 	close(fd);		/* close file */
 }
 
-//----------------------------------------------------------------------------------------------
-/* read settings.cfg into settings structure */
+
+/**********************************************************************************************
+ * read settings.cfg into settings structure 
+ *
+ **********************************************************************************************/
 SETTINGS readsettings(void)
 {
 	int fd;			/* file handle */
@@ -458,8 +461,11 @@ SETTINGS readsettings(void)
 }
 
 
-//----------------------------------------------------------------------------------------------
-/* create settings structure and settings.cfg file */
+
+/************************************************************************************************** 
+ *create settings structure and settings.cfg file 
+ *
+ **************************************************************************************************/
 SETTINGS createsettings(void)
 {
 	SETTINGS settings;	/* gnomesword settings structure */
@@ -502,10 +508,10 @@ SETTINGS createsettings(void)
 }
 
 
-/* 
+/********************************************************************************************************** 
  * save results list form search dialog *filename = pointer to filename from fileselection dialogure
  * list is results list widget where results are stored 
- */
+ **********************************************************************************************************/
 void savelist(gchar * filename, GtkWidget * list)
 {
 	GtkWidget *label;	/* label from search dialog that show number of finds */
