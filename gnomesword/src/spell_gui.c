@@ -39,17 +39,19 @@
 #include <gtk/gtk.h>
 
 #include "debug.h"
+#include "gs_html_editor.h"
 #include "spell.h"
 #include "spell_gui.h"
 #include "support.h"
 
 extern GtkWidget *text_widget;
+extern GtkWidget *html_widget;
 
 
 static gboolean spc_is_running;
 
 static void
-spc_start_button_clicked_lcb(GtkButton * button, gpointer user_data)
+spc_start_button_clicked_lcb(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	gtk_widget_set_sensitive(spc_gui.start_button, 0);
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);
@@ -60,7 +62,7 @@ spc_start_button_clicked_lcb(GtkButton * button, gpointer user_data)
 	gtk_widget_set_sensitive(spc_gui.insert_button, 1);
 
 	spc_is_running = TRUE;
-	run_spell_checker();
+	run_spell_checker(ecd);
 }
 
 static void
@@ -120,14 +122,15 @@ on_near_misses_select_row_lcb(GtkWidget * clist,
 
 Tspc_gui spc_gui;
 
-GtkWidget *create_spc_window(void)
+GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 {
 	spc_is_running = FALSE;
-	spc_gui.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_window",
+	spc_gui.window = gtk_window_new(GTK_WINDOW_DIALOG);
+	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_gui.window",
 			    spc_gui.window);
 	gtk_window_set_title(GTK_WINDOW(spc_gui.window),
-			     ("Spell Checker"));
+			     ("GnomeSWORD Spell Checker"));
+        gtk_window_set_default_size (GTK_WINDOW (spc_gui.window), 300, 200);
 
 	spc_gui.vbox = gtk_vbox_new(FALSE, 0);
 	/*  gtk_widget_ref (spc_gui.vbox);
@@ -150,6 +153,8 @@ GtkWidget *create_spc_window(void)
 	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.text);
 	gtk_container_add(GTK_CONTAINER(spc_gui.scrollwindow), spc_gui.text);
+	gtk_text_set_word_wrap(GTK_TEXT(spc_gui.text), TRUE );
+	gtk_text_set_editable(GTK_TEXT(spc_gui.text), TRUE);
 	
 	spc_gui.hbuttonbox_top = gtk_hbutton_box_new();
 	/* gtk_widget_ref (spc_gui.hbuttonbox_top);
@@ -318,42 +323,39 @@ GtkWidget *create_spc_window(void)
 
 	gtk_signal_connect(GTK_OBJECT(spc_gui.start_button), "clicked",
 			   GTK_SIGNAL_FUNC(spc_start_button_clicked_lcb),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.close_button), "clicked",
 			   GTK_SIGNAL_FUNC(spc_close_button_clicked_lcb),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.options_button), "clicked",
 			   GTK_SIGNAL_FUNC(on_spc_options_button_clicked),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.accept_button), "clicked",
 			   GTK_SIGNAL_FUNC(on_spc_accept_button_clicked),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.insert_button), "clicked",
 			   GTK_SIGNAL_FUNC(on_spc_insert_button_clicked),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.ignore_button), "clicked",
 			   GTK_SIGNAL_FUNC(on_spc_ignore_button_clicked),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.replace_button), "clicked",
 			   GTK_SIGNAL_FUNC(on_spc_replace_button_clicked),
-			   NULL);
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.near_misses_clist),
 			   "select_row",
 			   GTK_SIGNAL_FUNC(on_near_misses_select_row_lcb),
-			   NULL);
+			   ecd);
 	return spc_gui.window;
 }
 
-void spell_check_cb(GtkWidget * w, gpointer data)
+void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
-	/* checks if the text is empty */
-	//text_widget = lookup_widget(gtk_widget_get_toplevel(w), (gchar *)data);
-//	g_warning((gchar *)data);
-	//if (gtk_text_get_length(GTK_TEXT(spc_gui.text)) != 0) {
-		spc_gui.window = create_spc_window();
-		//spc_gui.status_bar_count = bf_statusbar_message(("checking spelling"));
-		gtk_widget_show(spc_gui.window);
-	//}
+	spc_gui.window = create_spc_window(ecd);
+	load_text_for_spell_EDITOR(spc_gui.text,ecd);	
+	text_widget = spc_gui.text;
+	html_widget = ecd->htmlwidget;
+	gtk_widget_show(spc_gui.window);
 }
 
 #endif
