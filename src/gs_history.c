@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */ 
+
  /*
     * GnomeSword Bible Study Tool
     * gs_history.c
@@ -203,18 +204,11 @@ void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
 						i);
         }
         for(i=0;i<historyitems;i++) {
-#ifdef USE_OLD_GAL
-                e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						groupnum4, -1,
-						shortcut_types[3],
-						historylist[i].verseref);
-#else
 		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						groupnum4, 
 						-1,
 						NULL,
 						historylist[i].verseref,
 						NULL);
-#endif /* USE_OLD_GAL */
         }
 }

@@ -1,3 +1,10 @@
+2001-10-10 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* released 0.5.2a - mostly bug fixes
+	* requires gnome-1.4.0, gal-0.13.9 and gtkhtml-0.14.9
+	* droped the preview of search results - much to slow.
+	* added highlight to search results for word and pharase searchs
+
 2001-10-02 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* change look of search results - to give preview of verses found
