@@ -591,6 +591,9 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
                                         "fg_currentverse"),
                                         gtk_text_tag_table_lookup (
 					gtk_text_buffer_get_tag_table (buffer),
+                                        "rtl_font"),
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
 					"large"),			
                                         NULL);		
 		} else {
@@ -601,6 +604,9 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
                                         gtk_text_tag_table_lookup (
 					gtk_text_buffer_get_tag_table (buffer),
                                         "fg_verse"),
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+                                        "rtl_font"),
                                         gtk_text_tag_table_lookup (
 					gtk_text_buffer_get_tag_table (buffer),
 					"large"),		
@@ -617,7 +623,7 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 	gtk_text_buffer_get_start_iter(buffer, &startiter);
 	gtk_text_buffer_get_end_iter(buffer, &enditer);
 	gtk_text_buffer_apply_tag_by_name(buffer, 
-			"rtl_quote", 
+			"rtl_text", 
 			&startiter, 
 			&enditer);
 		

@@ -32,6 +32,7 @@
 #include "gui/sidebar.h"
 #include "gui/editor.h"
 #include "gui/bookmarks.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
@@ -340,8 +341,8 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gint count = 0;
 	GString *str;
 
-	g_warning("verse=%s mod=%s ref=%s", key, module_name,
-		  verse_list);
+/*	g_warning("verse=%s mod=%s ref=%s", key, module_name,
+		  verse_list);*/
 
 	str = g_string_new("");
 	s_module_name = g_strdup(module_name);
@@ -993,7 +994,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox_verse_list;
 	GtkWidget *vbox_viewer;
 	GObject *mod_selection;
-
+	
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
@@ -1026,7 +1027,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			  scrolledwindow4);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow4),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
 	treeview1 = gtk_tree_view_new();
@@ -1042,9 +1043,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			  scrolledwindow_bm);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_bm),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
+/*
 	widgets.bookmark_tree = gtk_ctree_new(3, 0);
 	gtk_widget_show(widgets.bookmark_tree);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_bm),
@@ -1056,7 +1057,14 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_clist_set_column_width(GTK_CLIST(widgets.bookmark_tree), 2,
 				   80);
 
-
+*/
+	widgets.bookmark_tree = gui_create_bookmark_tree();
+	//widgets.bookmark_tree = gtk_tree_view_new_with_model(model);
+	gtk_widget_show(widgets.bookmark_tree);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow_bm),
+			  widgets.bookmark_tree);
+			  
+			  
 	gui_create_search_sidebar();
 
 	create_search_results_page(widgets.notebook_sidebar);
@@ -1074,7 +1082,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	g_signal_connect(mod_selection, "changed",
 			 G_CALLBACK(mod_selection_changed), treeview1);
-	gui_load_bookmark_tree();
+//	gui_load_bookmark_tree();
 
 
 	return vbox1;
