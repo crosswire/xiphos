@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword2-2.1.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-05 20:16-0500\n"
+"POT-Creation-Date: 2005-03-07 13:40-0500\n"
 "PO-Revision-Date: 2004-01-20 15:31+0200\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -2280,6 +2280,11 @@ msgstr "Закладки"
 #: src/gnome2/sidebar.c:1655
 msgid "Verse List"
 msgstr "Список віршів"
+
+#: src/gnome2/splash.c:360
+#, fuzzy
+msgid "Powered by the SWORD Project"
+msgstr "Про проект SWORD"
 
 #: src/gnome2/splash.c:538
 msgid "Loading settings"

@@ -151,7 +151,7 @@ void frontend_display(void)
 #endif
 	gui_show_main_window();
 
-	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
+//	gui_add_history_Item(widgets.app, settings.currentverse);
 	
 	main_clear_viewer();
 	

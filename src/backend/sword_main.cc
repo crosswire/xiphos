@@ -760,6 +760,8 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 }
 
 int BackEnd::set_key(const char *key) {
+	if(!key)
+		return 0;
 	if (display_mod) {
 		char *mykey;                                                 
         	gsize bytes_read;

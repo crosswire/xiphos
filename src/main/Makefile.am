@@ -24,5 +24,6 @@ libmain_a_SOURCES =  \
     settings.c settings.h \
     sidebar.cc sidebar.h\
     sword.cc sword.h\
+    tab_history.c tab_history.h\
     url.cc url.hh\
     xml.c xml.h

@@ -37,7 +37,6 @@
 
 #include "gui/about_modules.h"
 #include "gui/html.h"
-#include "gui/history.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/hints.h"
@@ -65,9 +64,6 @@
 
 using namespace sword;
 
-
-extern HISTORY history_list[];	/* sturcture for storing history items */
-extern gint history_items;
 
 /******************************************************************************
  * Name
@@ -261,12 +257,12 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 
 /******************************************************************************
  * Name
- *   morph_uri
+ *   show_morph
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint morph_uri(const gchar * url, gboolean clicked)
+ *   gint show_morph(const gchar * type, const gchar * value, gboolean clicked)
  *
  * Description
  *  
@@ -281,19 +277,14 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	
-	//g_warning("value = %s",value);
 	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")) {
 		if(backend->is_module("Robinson")) 
 			modbuf = "Robinson";
 	} 		
 	if (clicked) {
-		if (settings.inDictpane)
-			main_display_dictionary(modbuf, (gchar*)value);
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(modbuf, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)value);		
 	} else {
-		mybuf =
-		    main_get_rendered_text(modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
 		if (mybuf) {
 			main_information_viewer(modbuf, 
 					mybuf, 
@@ -302,30 +293,28 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 					(gchar*)type,
 					NULL,
 					NULL);
-			//show_in_appbar(widgets.appbar, (gchar*)value, modbuf);
 			g_free(mybuf);
 		}
 	}
 	return 1;
-	
 }
-
 
 
  /******************************************************************************
  * Name
- *   
+ *   show_strongs
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   
+ *   gint show_strongs(const gchar * type, const gchar * value, 
+			gboolean clicked)
  *
  * Description
  *  
  *
  * Return value
- *   
+ *   gint
  */ 
  
 static gint show_strongs(const gchar * type, const gchar * value, 
@@ -342,31 +331,17 @@ static gint show_strongs(const gchar * type, const gchar * value,
 			modbuf = "NasbGreek";
 		else 
 			modbuf = "NasbHebrew";
-			
 	} else {
-		
-		//g_warning("url = %s",url);
-		if(!strcmp(type,"Greek")) {
-			if(backend->is_module(settings.lex_greek_viewer)) 
-				modbuf_viewer = settings.lex_greek_viewer;
-			if(backend->is_module(settings.lex_greek)) 
-				modbuf = settings.lex_greek;
-		} else if(!strcmp(type,"Hebrew")) {
-			if(backend->is_module(settings.lex_hebrew_viewer)) 
-				modbuf_viewer = settings.lex_hebrew_viewer;
-			if(backend->is_module(settings.lex_hebrew)) 
-				modbuf = settings.lex_hebrew;
-		}
+		if(!strcmp(type,"Greek")) 
+			modbuf = settings.lex_greek;
+		else  
+			modbuf = settings.lex_hebrew;
 	}
 	
 	if (clicked) {
-		if (settings.inDictpane)
-			main_display_dictionary(modbuf, (gchar*)value);
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(modbuf_viewer, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)value);		
 	} else {
-		mybuf =
-		    main_get_rendered_text(modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
 		if (mybuf) {
 			main_information_viewer(  
 					modbuf, 
@@ -380,24 +355,24 @@ static gint show_strongs(const gchar * type, const gchar * value,
 		}
 	}
 	return 1;
-	
 }
 
 
  /******************************************************************************
  * Name
- *   
+ *   show_strongs_morph
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   
+ *   gint show_strongs_morph(const gchar * type, const gchar * value, 
+			 const gchar * morph, gboolean clicked)
  *
  * Description
  *  
  *
  * Return value
- *   
+ *   gint
  */ 
  
 static gint show_strongs_morph(const gchar * type, const gchar * value, 
@@ -411,33 +386,25 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	guint delay;	
 	guint i;	
 	
-	//g_warning("url = %s",url);
-	if(!strcmp(settings.MainWindowModule,"NASB"))
-		g_message("module is NASB");
-	if(!strcmp(type,"Greek")) {
-		if(backend->is_module(settings.lex_greek_viewer)) 
-			modbuf_viewer = settings.lex_greek_viewer;
-		if(backend->is_module(settings.lex_greek)) 
+	if(!strcmp(settings.MainWindowModule,"NASB")) {
+		if(!strcmp(type,"Greek")) 
+			modbuf = "NasbGreek";
+		else 
+			modbuf = "NasbHebrew";
+	} else {
+		if(!strcmp(type,"Greek")) {
 			modbuf = settings.lex_greek;
-		if(backend->is_module("Robinson")) 
-			morph_mod = "Robinson";
-	} else if(!strcmp(type,"Hebrew")) {
-		if(backend->is_module(settings.lex_hebrew_viewer)) 
-			modbuf_viewer = settings.lex_hebrew_viewer;
-		if(backend->is_module(settings.lex_hebrew)) 
+			if(backend->is_module("Robinson")) 
+				morph_mod = "Robinson";
+		} else
 			modbuf = settings.lex_hebrew;
 	}
 	
 	if (clicked) {
-		if (settings.inDictpane)
-			main_display_dictionary(modbuf, (gchar*)value);
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(modbuf_viewer, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)value);		
 	} else {
-		strongs_buf =
-		    main_get_rendered_text(modbuf, (gchar*)value);
-		morph_buf =
-		    main_get_rendered_text(morph_mod, (gchar*)morph);
+		strongs_buf = main_get_rendered_text(modbuf, (gchar*)value);
+		morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
 		if (strongs_buf) {
 			main_information_viewer(  
 					modbuf, 
@@ -452,7 +419,6 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 		}
 	}
 	return 1;
-	
 }
  
 
@@ -488,7 +454,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 		module = settings.MainWindowModule;
 	
 	if(passage && (strlen(passage) < 5))
-	//if(passage && !backend->is_Bible_key(passage, settings.currentverse))
 		passage = settings.currentverse;
 	
 	if(strstr(type,"x") && clicked) {
@@ -511,7 +476,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 		buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
 		if(tmpbuf) g_free(tmpbuf);	
 		if (buf) {
-
 			main_information_viewer((gchar*)module, 
 					buf, 
 					(gchar*)value,
@@ -519,7 +483,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 					(gchar*)type,
 					NULL,
 					NULL);
-			//gui_display_in_hint_window(tmpbuf);
 			if(buf) g_free(buf);	
 		}			
 	} else if(strstr(type,"x") && !clicked) {
@@ -568,10 +531,8 @@ static gint show_note(const gchar * module, const gchar * passage,
 		str = g_string_append(str,buf);
 		if(buf) g_free(buf);
 		
-		//buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
 		if(tmpbuf) g_free(tmpbuf);	
 		if (str) {
-
 			main_information_viewer((gchar*)module, 
 					str->str, 
 					(gchar*)value,
@@ -579,12 +540,10 @@ static gint show_note(const gchar * module, const gchar * passage,
 					(gchar*)type,
 					NULL,
 					NULL);
-			//gui_display_in_hint_window(tmpbuf);
 		}			
 	}
 	g_string_free(str, 1);
 	return 1;
-	
 }
 
 
@@ -621,12 +580,13 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 
 /******************************************************************************
  * Name
- *   
+ *   show_bookmark
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint (const gchar * url)
+ *   gint show_bookmark(const gchar * module, const gchar * key, 
+						const gchar * type)
  *
  * Description
  *   
@@ -637,7 +597,7 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
  */
 
 static gint show_bookmark(const gchar * module, const gchar * key, 
-						const gchar * type)//const gchar * url, gboolean use_dialog)
+						const gchar * type)
 {
 	gchar *buf = NULL;
 	gchar *tmpkey = NULL;
@@ -645,13 +605,7 @@ static gint show_bookmark(const gchar * module, const gchar * key,
 	gint verse_count;
 	gboolean change_verse = FALSE;
 	
-	/*
-	verse_count = backend->is_Bible_key(key, settings.currentverse);
-	if(!verse_count){
-		alert_url_not_found(key);
-		return 0;
-	}
-	*/
+	
 	if(backend->is_module(module)) {
 		if(!strcmp(type,"newTab")) {
 			main_open_bookmark_in_new_tab((gchar*)module, 
@@ -689,7 +643,17 @@ static gint show_bookmark(const gchar * module, const gchar * key,
 				main_display_book((gchar*)module, (gchar*)key); 
 			break;
 		}
-	} 
+	} 	
+	/* 
+	 * add item to history 
+	 */
+/*	if (settings.addhistoryitem) {
+		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
+			gui_add_history_Item(widgets.app,
+				       settings.currentverse);
+	}*/
+	settings.addhistoryitem = TRUE;
+	
 	return 1;
 }
 
@@ -762,11 +726,18 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
 			case TEXT_TYPE:
-			case COMMENTARY_TYPE:	
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(
 						settings.CommWindowModule, key);
 				main_display_bible(work_buf[MODULE], key);
+				main_keep_bibletext_dialog_in_sync((gchar*)key);
+				if(key) g_free((gchar*)key);
+			break;				
+			case COMMENTARY_TYPE:	
+				key = main_update_nav_controls(tmpkey);
+				main_display_commentary(work_buf[MODULE],key);
+				main_display_bible(settings.MainWindowModule, 
+							key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
 			break;
@@ -802,28 +773,25 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	/* 
 	 * add item to history 
 	 */
-	if (settings.addhistoryitem) {
+/*	if (settings.addhistoryitem) {
 		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
 			gui_add_history_Item(widgets.app,
-				       GTK_WIDGET
-				       (widgets.shortcutbar),
 				       settings.currentverse);
-	}
+	}*/
 	settings.addhistoryitem = TRUE;
 	
 	return 1;
-	
 }
 
 
 /******************************************************************************
  * Name
- *   gui_url_handler
+ *   main_url_handler
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint gui_url_handler(const gchar * url)
+ *   gint main_url_handler(const gchar * url, gboolean clicked)
  *
  * Description
  *   
