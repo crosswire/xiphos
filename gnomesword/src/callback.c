@@ -55,7 +55,8 @@ gboolean firstsearch = TRUE;	/* search dialog is not running when TRUE */
 gboolean firstLE = TRUE;	/* ListEditor in not running when TRUE */
 GtkWidget *searchDlg;		/* pointer to search dialog */
 guint num1, num2, num3;
-gboolean dicttabs,
+gboolean texttabs,
+	dicttabs,
 	comtabs,
 	bar,
 	applycolor = FALSE,
@@ -86,7 +87,7 @@ extern GtkWidget *htmlCommentaries;
 extern gchar *mycolor;
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GS_LAYOUT gslayout;
-
+extern GS_TABS	*p_tabs;
 
 /*********************************************************************************
 **********************************************************************************
@@ -168,8 +169,9 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	openpropertiesbox();
-	comtabs = settings->showcomtabs;
-	dicttabs = settings->showdicttabs;
+	texttabs = p_tabs->textwindow;
+	comtabs = p_tabs->commwindow;
+	dicttabs = p_tabs->dictwindow;
 	bar = settings->showshortcutbar;
 	showtextgroup = settings->showtextgroup;
 	showcomgroup = settings->showcomgroup;
@@ -434,6 +436,20 @@ on_textDict_button_press_event (GtkWidget *widget,
         }
         return TRUE;
 }
+//----------------------------------------------------------------------------------------------
+void /* commentary notebook page changed */
+on_nbTextMods_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 gint page_num, gpointer user_data)
+{
+	GtkLabel *label;	//-- pointer to page label
+	static gboolean firsttime = TRUE;
+	if (!firsttime) {
+		label = (GtkLabel *) page->tab_label;	//-- get label
+		nbchangecurModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
+	}								//-- to function to do the work - gs_sword.cpp
+	firsttime = FALSE;
+}
 
 
 //----------------------------------------------------------------------------------------------
@@ -684,7 +700,7 @@ void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 	}
 	applycolor = FALSE;
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(MainFrm, bar, comtabs, dicttabs, showtextgroup, showcomgroup,
+	applyoptions(MainFrm, bar, texttabs, comtabs, dicttabs, showtextgroup, showcomgroup,
 		     showdictgroup, showhistorygroup);
 	gtk_widget_destroy(dlg);
 }
@@ -700,7 +716,7 @@ void on_btnPropertyboxApply_clicked(GtkButton * button, gpointer user_data)
 	}
 	applycolor = FALSE;
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(MainFrm,bar, comtabs, dicttabs, showtextgroup, showcomgroup,
+	applyoptions(MainFrm,bar, texttabs, comtabs, dicttabs, showtextgroup, showcomgroup,
 		     showdictgroup, showhistorygroup);
 }
 
@@ -942,6 +958,21 @@ on_cbtnShowSCB_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	gtk_widget_set_sensitive(btnok, TRUE);
 	gtk_widget_set_sensitive(btnapply, TRUE);
 	bar = togglebutton->active;
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowTXtabs_toggled(GtkToggleButton * togglebutton,
+			  gpointer user_data)
+{
+	GtkWidget *dlg, *btnok, *btnapply;
+
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
+	btnok = lookup_widget(dlg, "btnPropertyboxOK");
+	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
+	gtk_widget_set_sensitive(btnok, TRUE);
+	gtk_widget_set_sensitive(btnapply, TRUE);
+	texttabs = togglebutton->active;
 }
 
 //----------------------------------------------------------------------------------------------

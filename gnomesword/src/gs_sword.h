@@ -33,6 +33,7 @@ extern "C" {
 
 
 void initSWORD(GtkWidget *mainform);
+void updateinterlinearpage(void);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
 void changeVerseSWORD(gchar * ref);
@@ -42,6 +43,9 @@ void resultsListSWORD(GtkWidget * searchFrm,
 		gint column);
 void strongsSWORD(gboolean choice);
 void footnotesSWORD(gboolean choice);
+void nbchangecurModSWORD(gchar *modName, 
+						gint page_num, 
+						gboolean showchange); 
 void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);
 void changecomp1ModSWORD(gchar * modName);

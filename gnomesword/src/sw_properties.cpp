@@ -48,7 +48,11 @@ extern SETTINGS *settings;
 GS_FONTS *gsfonts,
 		mfonts;
 		
-extern GS_LAYOUT gslayout;
+extern GS_LAYOUT 		gslayout;
+extern GS_NB_PAGES 	npages,	
+					*nbpages;
+extern GS_TABS	tabs,
+				*p_tabs;
 /******************************************************************************
  * load gnomesword configuration - using sword SWConfig
  ******************************************************************************/
@@ -79,9 +83,12 @@ gboolean loadconfig(void)
 	sprintf(settings->Interlinear3Module, "%s",settingsInfo["Modules"]["Interlinear3"].c_str());
 	sprintf(settings->Interlinear4Module, "%s",settingsInfo["Modules"]["Interlinear4"].c_str()); 
 	sprintf(settings->Interlinear5Module, "%s",settingsInfo["Modules"]["Interlinear5"].c_str());
-    	sprintf(settings->personalcommentsmod, "%s",settingsInfo["Modules"]["PerComments"].c_str()); 	
-	settings->notebook1page = atoi(settingsInfo["Modules"]["CommentaryPage"].c_str());
-	settings->notebook2page = atoi(settingsInfo["Modules"]["Dict/LexPage"].c_str()); 
+    	sprintf(settings->personalcommentsmod, "%s",settingsInfo["Modules"]["PerComments"].c_str()); 
+	/* notebook pages */
+	npages.nbTextModspage = atoi(settingsInfo["Notebooks"]["BiblePage"].c_str());
+	npages.notebook1page = atoi(settingsInfo["Notebooks"]["CommentaryPage"].c_str());
+	npages.notebook2page = atoi(settingsInfo["Notebooks"]["Dict/LexPage"].c_str()); 
+	npages.notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
 	
 	sprintf(settings->currentverse, "%s",settingsInfo["Keys"]["verse"].c_str() ); 
 	sprintf(settings->dictkey, "%s",settingsInfo["Keys"]["dictionarykey"].c_str()); 
@@ -102,9 +109,14 @@ gboolean loadconfig(void)
 	settings->showbookmarksgroup = atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());	
 	settings->interlinearpage = atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
 	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
-	settings->shortcutbarsize = atoi(settingsInfo["User Options"]["shortcutbarsize"].c_str());   
+	settings->shortcutbarsize = atoi(settingsInfo["User Options"]["shortcutbarsize"].c_str());  
+	
+	tabs.textwindow= atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
+	tabs.commwindow= atoi(settingsInfo["User Options"]["CommTabs"].c_str());
+	tabs.dictwindow= atoi(settingsInfo["User Options"]["DictTabs"].c_str());
   	//g_warning(settingsInfo["TEST"]["mytest"].c_str());
-	settings->notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
+	p_tabs = &tabs;
+	nbpages = &npages;
 	gsfonts = &mfonts;
 	return true;
 }
@@ -125,11 +137,23 @@ gboolean saveconfig(void)
 	settingsInfo["Modules"]["Interlinear4"] = settings->Interlinear4Module; 
 	settingsInfo["Modules"]["Interlinear5"] = settings->Interlinear5Module; 
     	settingsInfo["Modules"]["PerComments"] = settings->personalcommentsmod; 
-	sprintf(buf, "%d",settings->notebook1page);
-	settingsInfo["Modules"]["CommentaryPage"] = buf; //-- commentaries notebook
-	sprintf(buf, "%d",settings->notebook2page);
-	settingsInfo["Modules"]["Dict/LexPage"] = buf; //-- dict - lex notebook; 
-		
+	
+	sprintf(buf, "%d",nbpages->nbTextModspage);
+	settingsInfo["Notebooks"]["BiblePage"] = buf; //-- commentaries notebook
+	sprintf(buf, "%d",nbpages->notebook1page);
+	settingsInfo["Notebooks"]["CommentaryPage"] = buf; //-- commentaries notebook
+	sprintf(buf, "%d",nbpages->notebook2page);
+	settingsInfo["Notebooks"]["Dict/LexPage"] = buf; //-- dict - lex notebook; 
+	sprintf(buf, "%d",nbpages->notebook3page);
+	settingsInfo["Notebooks"]["notebook3page"] = buf; 
+	
+	sprintf(buf, "%d",p_tabs->textwindow);
+	settingsInfo["User Options"]["BibleTabs"]=buf;
+	sprintf(buf, "%d",p_tabs->commwindow);
+	settingsInfo["User Options"]["CommTabs"]=buf;
+	sprintf(buf, "%d",p_tabs->dictwindow);
+	settingsInfo["User Options"]["DictTabs"]=buf;
+	
 	settingsInfo["Keys"]["verse"] = settings->currentverse; 
 	settingsInfo["Keys"]["dictionarykey"] = settings->dictkey; 
 	
@@ -216,8 +240,6 @@ gboolean saveconfig(void)
 	sprintf(buf, "%d",settings->shortcutbarsize);
 	settingsInfo["User Options"]["shortcutbarsize"] = buf; 
 	
-	sprintf(buf, "%d",settings->notebook3page);
-	settingsInfo["Notebooks"]["notebook3page"] = buf; 
 	
 	//settingsInfo["TEST"]["mytest"] = "KJV,ROM 3:23, MHC, John 3:16";
 	
