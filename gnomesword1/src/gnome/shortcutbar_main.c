@@ -1054,9 +1054,9 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				if (settings.havecomm) {
 					gui_change_module_and_key(modName,
 							  settings.currentverse);
-					gtk_notebook_set_page
+					/*gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (widgets.workbook_upper), 0);
+					     (widgets.workbook_upper), 0);*/
 				}
 			}
 
