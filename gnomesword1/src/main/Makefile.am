@@ -13,8 +13,6 @@ INCLUDES =  \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
-    e-splash.c \
-    e-splash.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_commentary.c \
