@@ -57,13 +57,8 @@ dnl check for GtkHtml
 dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.0 gal-2.0, have_gtkhtml=yes,have_gtkhtml=no)
-if test "x$have_gtkhtml" = xyes; then
-   AC_DEFINE(USE_GTKHTML30, 1, [Define if you want to use GtkHtml-3.0])	
-else
-   PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,exit)
-   AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
-fi
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,exit)
+AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
 AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 
