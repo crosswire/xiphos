@@ -157,10 +157,6 @@ msgstr "Предпочитан речник"
 msgid "Detach/Attach Shortcut Bar"
 msgstr "закачи/откачи инструменталната лента"
 
-# src/gs_menu.c
-msgid "Dict/Lex"
-msgstr "Речник/лексикон"
-
 # src/gs_preferences_dlg.c
 #, fuzzy
 msgid "Dock Shortcut Bar"
@@ -492,11 +488,6 @@ msgid "_Quickmarks/Clear Quickmarks"
 msgstr "Отбелязани/изтрий всички"
 
 # src/gs_gui.c
-# src/gs_html_editor.c
-msgid "Copy"
-msgstr "Копирай"
-
-# src/gs_gui.c
 msgid "Copy highlighted text from main window"
 msgstr "Копира маркирания в главния прозорец текст"
 
@@ -699,10 +690,6 @@ msgid "File"
 msgstr "Файл"
 
 # src/gs_html.c
-msgid "Show %s in main window"
-msgstr "Покажи %s в главния прозорецr"
-
-# src/gs_html.c
 #, fuzzy
 msgid "Go to Strongs %s"
 msgstr "Отиди на %s по Стронг"
@@ -710,11 +697,6 @@ msgstr "Отиди на %s по Стронг"
 # src/gs_html.c
 msgid "Go to %s"
 msgstr "отиди на %s"
-
-# src/gs_html_editor.c
-# src/gs_html_editor.c
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr "Промяна в ,,%s''. желаете ли промяната да бъде съхранена?"
 
 # src/gs_html_editor.c
 msgid "-untitled-"
@@ -990,21 +972,6 @@ msgstr ""
 # src/gs_preferences_dlg.c
 msgid "Show Shortcut bar"
 msgstr "покажи инструменталната лента"
-
-# src/gs_preferences_dlg.c
-#, fuzzy
-msgid "Show Bible Texts notebook tabs"
-msgstr "покажи етикети за Библиите"
-
-# src/gs_preferences_dlg.c
-#, fuzzy
-msgid "Show Commentary notebook tabs"
-msgstr "Покажи етикети за коментарите"
-
-# src/gs_preferences_dlg.c
-#, fuzzy
-msgid "Show Dict/Lex notebook tabs"
-msgstr "покажи етикети за речниците/лексиконите"
 
 # src/gs_preferences_dlg.c
 msgid "No, use settings saved on last GnomeSword run"
