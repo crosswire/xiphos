@@ -30,12 +30,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-05 20:16-0500\n"
-"PO-Revision-Date: 2005-02-23 19:44+0100\n"
+"PO-Revision-Date: 2005-03-09 20:54+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -239,33 +239,28 @@ msgid "Replace confirmation"
 msgstr "Confirmer le remplacement"
 
 #: src/editor/replace.c:80
-#, fuzzy
 msgid "Replace _All"
 msgstr "Remplacer tout"
 
 #: src/editor/replace.c:81
-#, fuzzy
 msgid "_Next"
-msgstr "Suivant"
+msgstr "_Suivant"
 
 #: src/editor/replace.c:83
-#, fuzzy
 msgid "_Replace"
-msgstr "Remplacer.."
+msgstr "_Remplacer"
 
 #: src/editor/replace.c:171
-#, fuzzy
 msgid "Search _backward"
 msgstr "Rechercher en arrière"
 
 #: src/editor/replace.c:172 src/editor/search.c:114
 msgid "Case _sensitive"
-msgstr ""
+msgstr "Respecter la casse"
 
 #: src/editor/replace.c:182
-#, fuzzy
 msgid "Replace:"
-msgstr "Remplacer.."
+msgstr "Remplace :"
 
 #: src/editor/replace.c:185
 #, fuzzy
@@ -278,34 +273,29 @@ msgid "_Backward"
 msgstr "Rechercher en arrière"
 
 #: src/editor/search.c:115
-#, fuzzy
 msgid "_Regular Expression"
-msgstr "Expression régulière"
+msgstr "Expression _régulière"
 
 #: src/editor/spell.c:314
 msgid "No misspelled word found"
-msgstr ""
+msgstr "Orthographe correcte"
 
 #: src/editor/spell.c:322
-#, fuzzy
 msgid "Spell checker"
 msgstr "Vérifier l'orthographe"
 
 #: src/editor/spell.c:416
-#, fuzzy
 msgid "Current _Languages"
-msgstr "Sources locales"
+msgstr "_Langages disponibles"
 
 #. #ifdef USE_GTKFILECHOOSER
 #: src/editor/toolbar_edit.c:61 src/editor/toolbar_edit.c:812
-#, fuzzy
 msgid "Insert image"
-msgstr "Insérer un signet"
+msgstr "Insére une image"
 
 #: src/editor/toolbar_edit.c:119 src/editor/toolbar_edit.c:140
-#, fuzzy
 msgid "Insert"
-msgstr "Insérer un mot"
+msgstr "Insére"
 
 #: src/editor/toolbar_edit.c:122
 #, fuzzy
@@ -313,9 +303,8 @@ msgid "Rule"
 msgstr "Module"
 
 #: src/editor/toolbar_edit.c:143
-#, fuzzy
 msgid "Table"
-msgstr "Texte biblique"
+msgstr "Table"
 
 #: src/editor/toolbar_edit.c:329 src/gnome2/note_editor.c:669
 msgid "Delete Note?"
@@ -364,16 +353,15 @@ msgstr "Rechercher et remplacer"
 
 #: src/editor/toolbar_edit.c:813
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "Insérer une image"
 
 #: src/editor/toolbar_edit.c:822
-#, fuzzy
 msgid "Insert link"
-msgstr "Insérer un mot"
+msgstr "Insére un lien"
 
 #: src/editor/toolbar_edit.c:823
 msgid "Insert link at cursor"
-msgstr ""
+msgstr "Insérer un lien"
 
 #: src/editor/toolbar_edit.c:832
 #, fuzzy
@@ -385,13 +373,12 @@ msgid "Insert rule at cursor"
 msgstr ""
 
 #: src/editor/toolbar_edit.c:843
-#, fuzzy
 msgid "Insert table"
-msgstr "Installer"
+msgstr "Insère une table"
 
 #: src/editor/toolbar_edit.c:844
 msgid "Insert table at cursor"
-msgstr ""
+msgstr "Insérer une table"
 
 #: src/editor/toolbar_edit.c:863
 msgid "Spell"
@@ -768,7 +755,6 @@ msgid "Romans 8:28"
 msgstr "Romains 8:28"
 
 #: src/gnome2/bibletext_dialog.c:1664 src/gnome2/commentary_dialog.c:1539
-#, fuzzy
 msgid "Sync with main"
 msgstr "Synchroniser avec la fenêtre principale"
 
@@ -923,34 +909,28 @@ msgid "Remove - Restore"
 msgstr "Charger - Sauver"
 
 #: src/gnome2/bookmarks_treeview.c:1139
-#, fuzzy
 msgid "Add Bookmark"
-msgstr "Signet"
+msgstr "Ajoute un signet"
 
 #: src/gnome2/bookmarks_treeview.c:1159
-#, fuzzy
 msgid "Label:"
-msgstr "Étiquette"
+msgstr "Étiquette:"
 
 #: src/gnome2/bookmarks_treeview.c:1164
-#, fuzzy
 msgid "Verse:"
 msgstr "Verset:"
 
 #: src/gnome2/bookmarks_treeview.c:1169
-#, fuzzy
 msgid "Module:"
 msgstr "Module:"
 
 #: src/gnome2/bookmarks_treeview.c:1229
-#, fuzzy
 msgid "Create new folder"
-msgstr "Créer un document"
+msgstr "Crée un nouveau dossier"
 
 #: src/gnome2/bookmarks_treeview.c:1245
-#, fuzzy
 msgid "New ..."
-msgstr "Nouveau"
+msgstr "Nouveau..."
 
 #: src/gnome2/cipher_key_dialog.c:59
 msgid "Cipher Key?"
@@ -1194,7 +1174,6 @@ msgid "Dictionary/Lexicon"
 msgstr "Dictionnaire/Lexiques"
 
 #: src/gnome2/main_menu.c:572
-#, fuzzy
 msgid "Show or hide - dictionaries and lexicons"
 msgstr "Affiche/cache le volet des dictionnaires"
 
@@ -1353,9 +1332,8 @@ msgid "Select Local Source"
 msgstr "Support local"
 
 #: src/gnome2/mod_mgr.c:1725 src/gnome2/mod_mgr.c:1864
-#, fuzzy
 msgid "Remove the selected source"
-msgstr "Supprimer le dossier sélectionné"
+msgstr "Supprime la source sélectionnée"
 
 #: src/gnome2/mod_mgr.c:1774
 msgid "Enter a remote source"
@@ -1679,9 +1657,8 @@ msgid "Display Bible text window"
 msgstr "Volet d'affichage du texte biblique"
 
 #: src/gnome2/preferences_dialog.c:1753
-#, fuzzy
 msgid "Display Commentary window"
-msgstr "Volet d'affichage du texte biblique"
+msgstr "Affiche le volet des commentaires"
 
 #: src/gnome2/preferences_dialog.c:1811 src/gnome2/setup_druid.c:614
 msgid "Use Verse style"
@@ -2333,9 +2310,8 @@ msgid "Building Interface"
 msgstr ""
 
 #: src/gnome2/splash.c:573
-#, fuzzy
 msgid "Starting Sword"
-msgstr "Démarrage de GnomeSword"
+msgstr "Démarrage de Sword"
 
 #: src/gnome2/studypad.c:483
 msgid "StudyPad"
