@@ -58,6 +58,8 @@ COMMON_SOURCE =  \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
+    gs_shortcutbar.c \
+    gs_shortcutbar.h \
     sw_gbfhtml.cpp \
     sw_gbfhtml.h \
     sw_thmlhtml.cpp \

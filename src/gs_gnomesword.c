@@ -39,6 +39,7 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
+#include "gs_shortcutbar.h"
 
 #if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
@@ -106,6 +107,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	GtkLabel *label1;
 	GtkWidget *notebook;
 	
+/* setup shortcut bar */
+	setupSB(biblemods, commentarymods ,dictionarymods);	
 /* set color for current verse */
   	myGreen.red =  settings->currentverse_red;
 	myGreen.green = settings->currentverse_green;
@@ -371,167 +374,6 @@ applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
         setupSidebar(app);
 #endif /* USE_SHORTCUTBAR */
 }
-
-/******************************************************************************
- * add_sb_group - add group to shourtcut bar
- * shortcut_bar - shortcut bar to add group to
- * group_name - name of the group to be added
- *****************************************************************************/
-#if USE_SHORTCUTBAR
-gint
-add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
-{
-	gint group_num;
-	
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
-        e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
-        return group_num;
-}
-#else
-
-
-/******************************************************************************
- * fillSBtoolbars(
- * GtkWidget *app,
- * GList *biblelist,
- * GList *commentarylist,
- * GList *dictionarylist)
-*******************************************************************************/
-void fillSBtoolbars(GtkWidget *app, GList *biblelist, GList *commentarylist, GList *dictionarylist)
-{
-	GtkWidget *button,
-		  *tmp_toolbar_icon;
-	GList *tmp = NULL;
-	gint  page = 0;
-	
-	tmp = biblelist;	
-	while (tmp != NULL) {	
-		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_OPEN);
- 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar27")),
-                                		GTK_TOOLBAR_CHILD_BUTTON,
-                                		NULL,
-                                		(gchar *) tmp->data,
-                               			(gchar *) tmp->data, NULL,
-                                		tmp_toolbar_icon, NULL, NULL);
-  		gtk_widget_ref (button);
-  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            		(GtkDestroyNotify) gtk_widget_unref);
-  		gtk_widget_show (button);
-  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      		GTK_SIGNAL_FUNC (on_textbutton_clicked),
-                     	 	(gchar *)tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	tmp = commentarylist;
-	while (tmp != NULL) {
-		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_BLUE);
- 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar28")),
-                                		GTK_TOOLBAR_CHILD_BUTTON,
-                                		NULL,
-                                		(gchar *) tmp->data,
-                               			(gchar *) tmp->data, NULL,
-                                		tmp_toolbar_icon, NULL, NULL);
-  		gtk_widget_ref (button);
-  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            		(GtkDestroyNotify) gtk_widget_unref);
-  		gtk_widget_show (button);
-  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      				GTK_SIGNAL_FUNC (on_combutton_clicked),
-                     	 			GINT_TO_POINTER(page++));
-               tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	page = 0;	
-	tmp = dictionarylist;
-	while (tmp != NULL) {	
-		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_RED);
- 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar29")),
-                                		GTK_TOOLBAR_CHILD_BUTTON,
-                                		NULL,
-                                		(gchar *) tmp->data,
-                               			(gchar *) tmp->data, NULL,
-                                		tmp_toolbar_icon, NULL, NULL);
-  		gtk_widget_ref (button);
-  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            		(GtkDestroyNotify) gtk_widget_unref);
-  		gtk_widget_show (button);
-  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      				GTK_SIGNAL_FUNC (on_dictbutton_clicked),
-                     	 			GINT_TO_POINTER(page++));
-                tmp = g_list_next(tmp);     	 			
-	}	
-        g_list_free(tmp);             	 	
-}
-
-/*
- * setupSidebar(void)
-*/
-void setupSidebar(GtkWidget *app)
-{
-
-	if(!settings->showtextgroup){
-		gtk_widget_hide(lookup_widget(app,"btsText"));
-		gtk_widget_hide(lookup_widget(app,"scrolledwindow31")); 	
-	}else{
-		gtk_widget_show(lookup_widget(app,"btsText"));
-		gtk_widget_show(lookup_widget(app,"scrolledwindow31"));
-	}	
-	if(!settings->showcomgroup){
-		gtk_widget_hide(lookup_widget(app,"btsComms"));
-		gtk_widget_hide(lookup_widget(app,"btsComms2"));
-		gtk_widget_hide(lookup_widget(app,"scrolledwindow32"));		
-	}else{			 	
-		gtk_widget_show(lookup_widget(app,"btsComms2"));
-		gtk_widget_show(lookup_widget(app,"scrolledwindow32"));	
-		if(!settings->showtextgroup){
-			 gtk_widget_show(lookup_widget(app,"btsComms"));
-			 gtk_widget_hide(lookup_widget(app,"btsComms2"));
-		}
-	}
-	if(!settings->showdictgroup){
-		gtk_widget_hide(lookup_widget(app,"btsDicts"));
-		gtk_widget_hide(lookup_widget(app,"btsDicts2"));
-		gtk_widget_hide(lookup_widget(app,"scrolledwindow33"));	 	
-	}else{		
-		gtk_widget_show(lookup_widget(app,"btsDicts2"));
-		gtk_widget_show(lookup_widget(app,"scrolledwindow33"));
-		if(!settings->showtextgroup && !settings->showcomgroup){
-			gtk_widget_show(lookup_widget(app,"btsDicts"));
-			gtk_widget_hide(lookup_widget(app,"btsDicts2"));
-		}
-	}
-	if(!settings->showbookmarksgroup){
-		gtk_widget_hide(lookup_widget(app,"btsBookmarks"));
-		gtk_widget_hide(lookup_widget(app,"btsBookmarks2"));
-		gtk_widget_hide(lookup_widget(app,"scrolledwindow34"));	 	
-	}else{
-		gtk_widget_show(lookup_widget(app,"btsBookmarks2"));
-		gtk_widget_show(lookup_widget(app,"scrolledwindow34"));
-		if(!settings->showtextgroup && !settings->showcomgroup
-				&& !settings->showdictgroup){
-			gtk_widget_show(lookup_widget(app,"btsBookmarks"));
-			gtk_widget_hide(lookup_widget(app,"btsBookmarks2"));
-		}
-	}
-	if(!settings->showhistorygroup){
-		gtk_widget_hide(lookup_widget(app,"btsHistory"));
-		gtk_widget_hide(lookup_widget(app,"btsHistory2"));
-		gtk_widget_hide(lookup_widget(app,"scrolledwindow35"));	 	
-	}else{
-		gtk_widget_show(lookup_widget(app,"btsHistory2"));
-		gtk_widget_show(lookup_widget(app,"scrolledwindow35"));
-		if(!settings->showtextgroup && !settings->showcomgroup
-				&& !settings->showdictgroup
-				&& !settings->showbookmarksgroup){
-			gtk_widget_show(lookup_widget(app,"btsHistory"));
-			gtk_widget_hide(lookup_widget(app,"btsHistory2"));
-		}
-	}
-	
-}
-#endif /* USE_SHORTCUTBAR */
-
 
 /*****************************************************************************		
  * return verse number form verse in main Bible window

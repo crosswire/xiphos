@@ -972,38 +972,6 @@ on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 	gtk_widget_set_sensitive(btnapply, TRUE);
 	dicttabs = togglebutton->active;
 }
-//----------------------------------------------------------------------------------------------
-void on_btnSB_clicked(GtkButton * button, gpointer user_data)
-{
-#if USE_SHORTCUTBAR
-	if (settings->showshortcutbar) {
-		settings->showshortcutbar = FALSE;
-		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
-	} else {
-		settings->showshortcutbar = TRUE;
-		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
-	}
-#else
-        if (settings->showshortcutbar) {
-		settings->showshortcutbar = FALSE;
-		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 0);
-	} else {
-		settings->showshortcutbar = TRUE;
-		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 106); //settings->shortcutbarsize);
-	} 	
-#endif /* USE_SHORTCUTBAR */
-}
-
-//----------------------------------------------------------------------------------------------
-#if USE_SHORTCUTBAR
-void
-on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
-			      GdkEvent * event,
-			      gint group_num, gint item_num)
-{
-	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
-}
-#endif /* USE_SHORTCUTBAR */
 
 
 //----------------------------------------------------------------------------------------------
