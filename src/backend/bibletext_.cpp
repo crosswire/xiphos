@@ -55,6 +55,30 @@ struct _backend_text {
 
 static SWMgr *mgr;
 static GList *be_text_list;
+/******************************************************************************
+ * Name
+ *  backend_get_text_module_description
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   const char* backend_get_text_module_description(int modnum)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   const char*
+ */
+ 
+const char* backend_get_text_module_description(int modnum)
+{
+	BE_TEXT *t;
+
+	t = (BE_TEXT *) g_list_nth_data(be_text_list, modnum);
+
+	return t->mod->Description(); 
+}
 
 /******************************************************************************
  * Name
