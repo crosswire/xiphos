@@ -180,6 +180,7 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gui_verselist_button_release_event(NULL,NULL,NULL);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
+	gtk_widget_grab_focus(GTK_WIDGET(sidebar.results_list));
 }
 
 
