@@ -1,5 +1,10 @@
 2003-12-05  Terry <tbiggs@users.sf.net>
 
+	* enabled printing using gnome-print.
+
+
+2003-12-05  Terry <tbiggs@users.sf.net>
+
 	* removed 'point to' and 'add to root' items form bookmark menus.
 	* removed 'view hints' from main menu.
 	
