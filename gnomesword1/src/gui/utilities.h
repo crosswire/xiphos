@@ -38,8 +38,6 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 void gui_remove_menu_items(gchar *startitem, gint numberofitems);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 				GCallback callback);
-GList *gui_fill_count_list(int count);
-void gui_free_count_list(GList *glist);
 	
 #ifdef __cplusplus
 }
