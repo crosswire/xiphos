@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _editor.c - the html editor
+ * editor.c - the html editor
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -45,7 +45,7 @@
 //#include "main/spell_gui.h"
 #endif /* USE_SPELL */
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
 #include "gui/editor_search.h"
@@ -128,12 +128,12 @@ void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
- *  update_statusbar
+ *  gui_update_statusbar
  *
  * Synopsis
  *   #include "_editor.h"
  *
- *   void update_statusbar(GSHTMLEditorControlData * ecd)
+ *   void gui_update_statusbar(GSHTMLEditorControlData * ecd)
  *
  * Description
  *    update information in editor status bar
@@ -142,7 +142,7 @@ void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
  *   void
  */ 
 
-void update_statusbar(GSHTMLEditorControlData * ecd)
+void gui_update_statusbar(GSHTMLEditorControlData * ecd)
 {
 	gint context_id2;
 	gchar buf[255], buf3[255];
@@ -150,7 +150,7 @@ void update_statusbar(GSHTMLEditorControlData * ecd)
 
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(ecd->statusbar),
-					 "GnomeSword");
+					 "GnomeSword");/* string not seen */
 	gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
 
 	if (ecd->personal_comments) {

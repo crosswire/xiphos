@@ -22,7 +22,7 @@
 #ifndef _TOOLBAR_STYLE_H
 #define _TOOLBAR_STYLE_H
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 GtkWidget *gui_toolbar_style(GSHTMLEditorControlData *ecd);
 void toolbar_update_format(GSHTMLEditorControlData *ecd);

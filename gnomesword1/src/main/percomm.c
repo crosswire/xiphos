@@ -26,9 +26,63 @@
 
 #include <glib-1.2/glib.h>
 #include "main/percomm.h"
+#include "main/settings.h"
 
 #include "backend/percomm_.h"
 #include "backend/sword.h"
+
+/******************************************************************************
+ * Name
+ *   save_percomm_options
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   int save_percomm_options(char * mod_name, char * option, 
+ *				    int choice)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int save_percomm_options(char * mod_name, char * option, 
+				    int choice)
+{
+	char *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	return backend_save_module_options(mod_name, option, on_off, 
+				settings.gSwordDir , "percomm.conf");
+}
+
+/******************************************************************************
+ * Name
+ *   load_percomm_options
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *  	int load_percomm_options(char * modName, char * option)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int load_percomm_options(char * modName, char * option)
+{
+	return backend_load_module_options(modName, option, 
+				settings.gSwordDir, "percomm.conf");
+}
 
 
 /******************************************************************************

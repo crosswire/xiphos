@@ -82,7 +82,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 	
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 "GnomeSword");
+					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
 	
 	text = get_striptext(mod, key);
@@ -888,7 +888,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
-					 "GnomeSword");
+					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(vt->statusbar), context_id2);
 
 	/***  moved out of url - clear appbar  ***/

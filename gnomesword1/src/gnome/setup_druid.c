@@ -322,7 +322,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	sprintf(gs_version, "%s-%s", _("Welcome To GnomeSword"),
 		VERSION);
-	sprintf(gs_gnomesword, "%s-%s", _("GnomeSword"), VERSION);
+	sprintf(gs_gnomesword, "%s-%s", settings.program_title, VERSION);
 
 
 
@@ -396,7 +396,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	     &druidpagestandard3_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
-					    _("GnomeSword"));
+					    settings.program_title);
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
 					   gdk_imlib_load_image
@@ -1279,7 +1279,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 						&druidpagefinish1_title_color);
 	gnome_druid_page_finish_set_title(GNOME_DRUID_PAGE_FINISH
 					  (druidpagefinish1),
-					  _("GnomeSword"));
+					  settings.program_title);
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 _

@@ -35,7 +35,7 @@
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/editor_spell.h"
 
 #include "main/spell.h"
@@ -178,7 +178,7 @@ static void correct_word(const gchar * word,
 					buf);			
 			word_corrected = 1;
 			ecd->changed = TRUE;
-			update_statusbar(ecd);
+			gui_update_statusbar(ecd);
 			break;
 		}
 		case SPC_CLOSE:
@@ -602,7 +602,7 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_gui.window",
 			    spc_gui.window);
 	gtk_window_set_title(GTK_WINDOW(spc_gui.window),
-			     _("GnomeSword Spell Checker"));
+			     _("Spell Checker"));
         gtk_window_set_default_size (GTK_WINDOW (spc_gui.window), 300, 200);
 
 	spc_gui.vbox = gtk_vbox_new(FALSE, 0);

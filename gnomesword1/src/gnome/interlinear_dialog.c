@@ -472,12 +472,15 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
+	gchar title[256];
+	
+	sprintf(title,"%s - %s", settings.program_title, _("Interlinear"));
 
 	dialog_interlinear = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_interlinear),
 			    "dialog_interlinear", dialog_interlinear);
 	gtk_window_set_title(GTK_WINDOW(dialog_interlinear),
-			     _("GnomeSword - Interlinear"));
+			     title);
 	gtk_window_set_default_size(GTK_WINDOW(dialog_interlinear), 657,
 				    361);
 	gtk_window_set_policy(GTK_WINDOW(dialog_interlinear), TRUE,
