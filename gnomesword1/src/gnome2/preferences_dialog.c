@@ -1684,7 +1684,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.show_in_viewer =
 	    gtk_check_button_new_with_label(_
-					    ("In Shortcut bar viewer"));
+					    ("In Sidebar viewer"));
 	gtk_widget_show(check_button.show_in_viewer);
 	gtk_box_pack_start(GTK_BOX(vbox53), check_button.show_in_viewer,
 			   FALSE, FALSE, 0);
