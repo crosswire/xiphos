@@ -146,7 +146,7 @@ gint setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
-	sprintf(dotswordDir, "%s/%s",homedir,".sword/bookmarks/");/* for compatability */
+	//sprintf(dotswordDir, "%s/%s",homedir,".sword/bookmarks/");/* for compatability */
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
 	gsbmDir = g_new(char, strlen(homedir) + strlen(".GnomeSword/bookmarks") + 2);
 	sprintf(gsbmDir, "%s/%s",homedir,".GnomeSword/bookmarks/");
@@ -234,7 +234,7 @@ gint setDiretory(void)
 /****  end local gbs dir checks  ****/	
 	
 	
-	if (access(dotswordDir, F_OK) == 0) {	/* if .sword/bookmarks does exist rename it to .GnomeSword/bookmarks*/
+	if (access(dotswordDir, F_OK) == 0) {	
 		if ((rename(dotswordDir, gsbmDir)) == 0) {
 			// do nothing
 		} else { 
