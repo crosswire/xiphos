@@ -35,24 +35,24 @@
 
 //typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
 
-typedef struct _GSHTMLEditorControlData            GSHTMLEditorControlData;	
+typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 struct _GSHTMLEditorControlData {
-	GtkHTML    *html;
-	GtkWidget  *htmlwidget;
-	GtkWidget  *vbox;
-	GtkWidget  *statusbar;
-	
-	GtkWidget  *cpicker;
-	GtkWidget  *combo;
-	GtkWidget  *paragraph_option;
+	GtkHTML *html;
+	GtkWidget *htmlwidget;
+	GtkWidget *vbox;
+	GtkWidget *statusbar;
 
-	GList                         *properties_types;
-	GSList                         *paragraph_group;
-	
+	GtkWidget *cpicker;
+	GtkWidget *combo;
+	GtkWidget *paragraph_option;
+
+	GList *properties_types;
+	GSList *paragraph_group;
+
 	/* search & replace dialogs */
 	//GtkHTMLSearchDialog     *search_dialog;
-	GtkHTMLReplaceDialog    *replace_dialog;
-	
+	GtkHTMLReplaceDialog *replace_dialog;
+
 	/* html/plain mode settings */
 	gboolean format_html;
 	HTMLGdkPainter *gdk_painter;
@@ -65,22 +65,18 @@ struct _GSHTMLEditorControlData {
 	guint releaseId;
 
 	/* toolbars */
-	GtkWidget 
-		*toolbar_commands, 
-		*toolbar_style;
-	/* toolbars buttons*/
-	GtkWidget 
-		*tt_button,
-		*bold_button,
-		*italic_button,
-		*underline_button,
-		*strikeout_button,
-		*left_align_button,
-		*center_button,
-		*right_align_button,
-		*unindent_button,
-		*indent_button;
-	
+	 GtkWidget * toolbar_commands, *toolbar_style;
+	/* toolbars buttons */
+	 GtkWidget
+	    * tt_button,
+	    *bold_button,
+	    *italic_button,
+	    *underline_button,
+	    *strikeout_button,
+	    *left_align_button,
+	    *center_button,
+	    *right_align_button, *unindent_button, *indent_button;
+
 	GtkWidget *bold;
 	GtkWidget *italic;
 	GtkWidget *underline;
@@ -100,36 +96,40 @@ struct _GSHTMLEditorControlData {
 	gboolean block_font_style_change;
 	gboolean changed;
 	gboolean personal_comments;
+	gboolean gbs; /** gen book support **/
 	gchar filename[256];
 
 };
 
-GSHTMLEditorControlData * gs_html_editor_control_data_new(SETTINGS *s);
-void gs_html_editor_control_data_destroy(GSHTMLEditorControlData *cd);
+GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
+void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
 
-void replace(GSHTMLEditorControlData *ecd);
+void replace(GSHTMLEditorControlData * ecd);
 /*** create editor ui ***/
-GtkWidget *create_editor(GtkWidget *htmlwidget, GtkWidget *vbox, SETTINGS *s, GSHTMLEditorControlData *necd);
-void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData *ecd);
-void savenoteEDITOR(GtkWidget *html_widget);
-gint save_file_program_end(GtkWidget *htmlwidget, gchar * filename);
-gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
+GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
+			 SETTINGS * s, GSHTMLEditorControlData * necd);
+void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
+void savenoteEDITOR(GtkWidget * html_widget);
+void savebookEDITOR(GtkWidget * html_widget);
+gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
+gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
 /*** load studypad file ***/
-gint load_file(gchar *filename, GSHTMLEditorControlData * ecd);
+gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
 
-GtkWidget *studypad_control(GtkWidget *notebook, SETTINGS *s);
-GtkWidget *percom_control(GtkWidget *notebook, SETTINGS *s);
+GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s);
+GtkWidget *percom_control(GtkWidget * notebook, SETTINGS * s);
+GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s);
 /*** link dialog create and call back ***/
-void set_link_to_module(gchar *linkref, gchar *linkmod, 
-					GSHTMLEditorControlData * ecd);
-void find_word_EDITOR(gchar *word, 
-					GSHTMLEditorControlData * ecd);
-void load_text_from_spell_EDITOR(GtkWidget *text, 
-					GSHTMLEditorControlData * ecd);
+void set_link_to_module(gchar * linkref, gchar * linkmod,
+			GSHTMLEditorControlData * ecd);
+void find_word_EDITOR(gchar * word, GSHTMLEditorControlData * ecd);
+void load_text_from_spell_EDITOR(GtkWidget * text,
+				 GSHTMLEditorControlData * ecd);
 /*** load text from html to speller ***/
-gboolean load_text_for_spell_EDITOR(GtkWidget *text, 
-					GSHTMLEditorControlData * ecd);
+gboolean load_text_for_spell_EDITOR(GtkWidget * text,
+				    GSHTMLEditorControlData * ecd);
 /*** save studypad file ***/
 void on_save_activate(GtkMenuItem * menuitem,
-			     GSHTMLEditorControlData * ecd);
+		      GSHTMLEditorControlData * ecd);
+		      
 #endif				/* __GS_HTML_EDITOR_H_ */

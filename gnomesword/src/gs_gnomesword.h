@@ -55,7 +55,8 @@ struct _settings {
 		*srhtml,  /* html widget for serch results list in shortcut bar */	
 		*htmlRP,  /* html widget for serch report shortcut bar */
 		*htmlcomm, /* html commentary widget */
-		*htmlSP, /* studypad html widger */
+		*htmlSP, /* studypad html widget */
+		*htmlBook, /* gbs html widget */
 	
 	/* popup menu item widgets */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
@@ -160,6 +161,7 @@ struct _settings {
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		editnote, /* true when percom html widget is in edit mode */
+		editgbs, /* true when percom html widget is in edit mode */
 		notefollow, /* notes follow Bible text when true */
 		modifiedSP; /* studypad file have been modified */
 		

@@ -81,13 +81,6 @@ on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook7), item_num);	/* set notebook page */
 }
 
-/*
-static void set_preferences_to_current(SETTINGS * s)
-{
-
-}
-*/
-
 
 static void applyoptions(SETTINGS * s)
 {
@@ -160,7 +153,6 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	we need to read all propertybox options here
 	*************************************************************/
 	gchar *buf, *font;
-//	gchar *token, *text;
 	gdouble color[4];
 
 	/*** read modules ***/
@@ -276,7 +268,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowHistoryGroup"))->
 	    active;
 	s->formatpercom =
-	/*    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
+	GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
+	/*
 	s->autosavepersonalcomments =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton8"))->active;
 	*/
@@ -401,30 +394,6 @@ on_font_set(GnomeFontPicker * gnomefontpicker,
 	updatehtml = TRUE;	
 }
 
-/*
-static void
-on_fpGreekFont_font_set(GnomeFontPicker * gnomefontpicker,
-			gchar * arg1, gpointer user_data)
-{
-
-}
-
-
-static void
-on_fpHebrewFont_font_set(GnomeFontPicker * gnomefontpicker,
-			 gchar * arg1, gpointer user_data)
-{
-
-}
-
-
-static void
-on_fpUnicodeFont_font_set(GnomeFontPicker * gnomefontpicker,
-			  gchar * arg1, gpointer user_data)
-{
-
-}
-*/
 
 static void
 setcolorpickersColor(SETTINGS *s,
@@ -547,7 +516,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *vbox37;
 	GtkWidget *cbtnPNformat;
 	/****************************************************************************/
-	GtkWidget *checkbutton8;
+	//GtkWidget *checkbutton8;
 	GtkWidget *frame27;
 	GtkWidget *table10;
 	GtkWidget *label165;
@@ -1968,9 +1937,11 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
+			   /*
 	gtk_signal_connect(GTK_OBJECT(checkbutton8), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
+			   */
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
