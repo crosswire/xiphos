@@ -1,0 +1,49 @@
+<!-- ============= Introduction ============================== -->
+<chapter id="introduction">
+	<title>Einleitung</title>
+  	<para>
+	<application>GnomeSword</application> ist ein Programm für das Bibelstudium und Bibel Forschung, basierend auf dem "SWORD Project" und dem GNOME Desktop.
+	Man kann <application>GnomeSword</application> benutzen um das folgende zu erreichen: :
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+			Suche nach einem bestimmten Bibelvers
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Vorbereitung von Predigt, Bibelarbeiten und persönlichen Notizen. 
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+	<application>GnomeSword</application> versucht eine einfache und
+		schlichte Benutzeroberfläche anzubieten, gleichzeitig aber ein mächtiges
+		Werkzeug zu sein mit einer komfortablen und hochgeradig personalisierten
+		Arbeitsumgebung.
+	</para>
+	<para>
+  		<figure id="anjuta-scrshot">
+   			<title>GnomeSword im Gebrauch</title>
+   			<screenshot>
+   				<screeninfo>GnomeSword im Gebrauch</screeninfo>
+   				<graphic format="PNG" fileref="figures/interface" ></graphic>
+   			</screenshot>
+		</figure>
+  	</para>
+
+ <!-- Where important notices are kept regarding Gnomesword  -->
+   	<warning>
+   		<para>
+		<application>GnomeSword</application> ist witerhin in
+			Entwicklung. Es kann daher sein das dieses Handbuch nicht den aktuellen
+			Stand adeeqaute reflektiert. Eventuelle Fehler und Lücken können als Bugs
+			auf der <ulink type="http" url="http://sourceforge.net/projects/gnomesword">
+			Projekt-Webseite</ulink>hinterlassen werden oder als Email
+			an <email>gnomesword-developers@lists.sourceforge.net</email>geschickt
+			werden.
+			Alle Mithilfe und konstruktive Kritik ist hocherwünscht. 
+		</para>
+  	</warning>
+</chapter>
