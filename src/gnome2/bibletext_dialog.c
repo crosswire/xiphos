@@ -28,7 +28,6 @@
 #include <gal/widgets/e-unicode.h>
 
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
@@ -2039,14 +2038,14 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
-	//gtk_widget_hide(file3_menu_uiinfo[1].widget);	
-	//gtk_widget_hide(file3_menu_uiinfo[2].widget);	
+	gtk_widget_hide(file3_menu_uiinfo[0].widget);	
+	gtk_widget_hide(edit3_menu_uiinfo[2].widget);	
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (file3_menu_uiinfo[2].widget),
 				       t->sync);
 
-
+/*
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
 				  view_menu);
@@ -2060,7 +2059,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 
 	gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
 				(GCallback) edit_percomm);
-
+*/
 
 
 	lookup_selection_menu = gtk_menu_new();
@@ -2242,7 +2241,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	 */
 	gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
-					t->html);
+					t->text);
 	gtk_widget_destroy(menu1);
 	//g_free(ops);
 }

@@ -25,6 +25,7 @@
 	
 #include <swmgr.h>
 #include <swbuf.h>
+#include <versekey.h>
 #include <treekeyidx.h>
 #include "main/lists.h"
 
@@ -36,26 +37,19 @@ using namespace sword;
 
 class BackEnd {
 	SWMgr *main_mgr;
-	//SWMgr *search_mgr;
-//	SWMgr *module_mgr;
-//	SWMgr *text_mgr;
-//	SWMgr *inter_mgr;
-//	SWMgr *comm_mgr;
-//	SWMgr *dict_mgr;
-//	SWMgr *gbs_mgr;
-//	SWMgr *percom_mgr;
-//	SWMgr *results;
 	SWMgr *display_mgr;
 	TreeKeyIdx *tree_key;
+	ListKey results;
+	ListKey search_range;
+	ListKey	search_scope_list; //--search list for searching verses found on last search
+	ListKey verses;
+	VerseKey search_scope_bounds; //----- sets lower and upper search bounds
+	SWKey *current_scope;
+	SWModule *search_mod;
 	typedef map < SWBuf, SWBuf > ModLanguageMap;
 	ModLanguageMap languageMap;
 	
 public:	
-//	SWModule *text_mod;
-//	SWModule *comm_mod;
-//	SWModule *dict_mod;
-//	SWModule *gbs_mod;
-//	SWModule *percom_mod;
 	SWModule *display_mod;
 		
 	const char *version;	
@@ -64,8 +58,10 @@ public:
 	SWDisplay *textDisplay;
 	SWDisplay *RTOLDisplay;
 	SWDisplay *entryDisplay;		
-	SWDisplay *chapDisplay;		
+	SWDisplay *chapDisplay;			
 	SWDisplay *dialogRTOLDisplay;
+	SWDisplay *verselistDisplay;		
+	SWDisplay *viewerDisplay;
 
 	BackEnd();
 	~BackEnd();
@@ -114,6 +110,16 @@ public:
 	int treekey_first_child(unsigned long offset);
 	char *treekey_get_local_name(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
+	
+	void set_listkey_position(char pos);
+	const char *get_next_listkey(void);
+	int clear_scope(void);
+	int clear_search_list(void);
+	int set_range(char * list);
+	void set_scope2range(void);
+	int set_scope2last_search(void);
+	int do_module_search(char *module_name, const char *search_string, 
+				int search_type, int search_params, int is_dialog);
 	
 	
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
