@@ -1,3 +1,17 @@
+2003-07-30  Terry <tbiggs@users.sf.net>
+
+	* Added chapter_display_textview to gnome2/gtkhtml_display.c
+	  for right to left support
+	* added 
+	  'AC_ARG_ENABLE(gnome2,[--enable-gnome2 build],gnome2=$enableval,gnome2="no") 
+	  to configure.in for building the gnome2 port
+
+
+2003-07-25  Terry <tbiggs@users.sf.net>
+
+	* added src/gnome2 for port to gnome2
+
+
 2003-06-28  Terry <tbiggs@users.sf.net>
 
 	* requires Sword cvs (1.5.6)
