@@ -127,7 +127,7 @@ on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
 /*** toogle global options in main text window ***/
 void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	globaloptionsSWORD((gchar *)user_data, MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active,TRUE);	
+	set_module_global_options((gchar *)user_data, MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active,TRUE);	
 }
 
 

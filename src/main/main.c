@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * start swmgrs so they can be used by setup druid
 	 */
-	backend_firstInitSWORD(); /* light-up swmgrs */
+	backend_first_init(); /* light-up swmgrs */
 	
 	/* 
 	 * check for directories and files

@@ -174,7 +174,7 @@ extern gchar *current_filename,	/* filename for open file in study pad window  *
 *mycolor, *mycolor;
 extern HISTORY historylist[];	/* sturcture for storing history items */
 
-void backend_firstInitSWORD(void)
+void backend_first_init(void)
 {
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
@@ -369,140 +369,6 @@ void initSWORD(SETTINGS * s)
 	}
 }
 
-void modNameFromDesc(gchar * modName, gchar * modDesc)
-{
-	strcpy(modName, descriptionMap[modDesc].c_str());
-}
-
-/*** new changeVerseSWORD  ***/
-void ChangeVerseSWORD(void)
-{
-	int l;
-	GList *mods;
-	gboolean searchresults = FALSE;
-	//gchar * currRef;
-
-	strcpy(current_verse, vkText);
-	ApplyChange = false;
-	//--------------------------------------------------- change main window                        
-	if (changemain && havebible) {
-		if (curMod) {
-			curMod->SetKey(vkText);
-			//----------- add verse to history menu
-			if (addhistoryitem) {
-				if (strcmp
-				    (settings->currentverse,
-				     historylist[historyitems -
-						 1].verseref))
-					addHistoryItem(settings->app,
-						       GTK_WIDGET
-						       (shortcut_bar),
-						       settings->
-						       currentverse);
-			}
-			addhistoryitem = TRUE;
-			//----------------------- remember last verse
-			strcpy(settings->currentverse,
-			       curMod->KeyText());
-			char s1[255], s2[255];
-			curVerse = vkText.Verse();
-			curChapter = vkText.Chapter();
-			sprintf(s1, "%s", (const char *) vkText);
-			//------------------------- set book, chapter,verse and freeform lookup entries to new verse
-			gtk_entry_set_text(GTK_ENTRY(lookup_widget
-						     (settings->app,
-						      "cbeBook")),
-					   vkText.books[vkText.
-							Testament() -
-							1][vkText.
-							   Book() -
-							   1].name);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON
-						  (lookup_widget
-						   (settings->app,
-						    "spbChapter")),
-						  curChapter);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON
-						  (lookup_widget
-						   (settings->app,
-						    "spbVerse")),
-						  curVerse);
-			gtk_entry_set_text(GTK_ENTRY
-					   (lookup_widget
-					    (settings->app,
-					     "cbeFreeformLookup")),
-					   vkText);
-			curMod->Display();
-		}
-	}
-	changemain = TRUE;
-
-	//--------------------------------------------------------------- change interlinear verses
-	if (settings->dockedInt)
-		updateinterlinearpage();
-	//else
-	//updateIntDlg(settings);
-
-	//------------------------------- change personal notes editor   if not in edit mode
-	if (settings->notebook3page == 1) {
-		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
-			if (!settings->editnote) {
-				if (usepersonalcomments && percomMod) {
-					percomMod->SetKey(vkComm);	//-- set personal module to current verse
-					percomMod->Display();	//-- show change
-					noteModified = false;	//-- we just loaded comment so it is not modified                                       
-				}
-			}
-		}
-	}
-	//-- set commentary module to current verse
-	gui_displayCOMM(settings->currentverse);
-	ApplyChange = TRUE;
-}
-
-/********************************************************************************************** 
- * changeVerse - this function changes all currently used sword Bible and commentary modules 
- *               to (ref)
- * gchar *ref - pointer to new module key (verse)
- *********************************************************************************************/
-void changeVerseSWORD(gchar * ref)
-{
-	VerseKey key;
-
-	key = ref;
-
-	if ((!key.Chapter()) || (!key.Verse())) {
-		vkText.AutoNormalize(0);
-		vkComm.AutoNormalize(0);
-	}
-
-	vkText = ref;
-	vkComm = ref;
-
-	ChangeVerseSWORD();
-
-	vkText.AutoNormalize(1);
-	vkComm.AutoNormalize(1);
-}
-
-void changeVerseComSWORD(void)
-{
-	VerseKey key;
-
-	key = current_verse;
-
-	if ((!key.Chapter()) || (!key.Verse())) {
-		vkComm.AutoNormalize(0);
-	}
-
-	vkComm = current_verse;
-
-	curcomMod->SetKey(vkComm);
-	curcomMod->Display();
-
-	vkComm.AutoNormalize(1);
-}
-
 GtkHTMLStream *htmlstream;
 /*** please fix me ***/
 void updateIntDlg(SETTINGS * s)
@@ -631,83 +497,48 @@ void updateIntDlg(SETTINGS * s)
  * Sets up the interlinear html widget for each 
  * interlinear module
  */
-void updateinterlinearpage(void)
+char *backend_get_interlinear_module_text(char * mod_name, char *key)
 {
-	gchar tmpBuf[256];
-	gchar *utf8str;
-	gint utf8len;
+	interlinearMod0 =
+		    mainMgr1->Modules[mod_name];
+	if (interlinearMod0)
+			interlinearMod0->SetKey(key);
+	else 
+		return NULL;
+	return g_strdup((gchar*)interlinearMod0->RenderText());	
+	
+}
 
+void backend_text_module_change_verse(gchar * key)
+{
+	vkText = key;
+	//--------------------------------------------------- change main window                        
 	if (havebible) {
-		interlinearMod0 =
-		    mainMgr1->Modules[settings->Interlinear1Module];
-		interlinearMod1 =
-		    mainMgr1->Modules[settings->Interlinear2Module];
-		interlinearMod2 =
-		    mainMgr1->Modules[settings->Interlinear3Module];
-		interlinearMod3 =
-		    mainMgr1->Modules[settings->Interlinear4Module];
-		interlinearMod4 =
-		    mainMgr1->Modules[settings->Interlinear5Module];
-		//-- setup gtkhtml widget
-		GtkHTMLStreamStatus status1;
-		GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
-		gboolean was_editable = gtk_html_get_editable(html);
-		if (was_editable)
-			gtk_html_set_editable(html, FALSE);
-		htmlstream =
-		    gtk_html_begin_content(html,
-					   "text/html; charset=utf-8");
-
-
-		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-			settings->bible_bg_color,
-			settings->bible_text_color,
-			settings->link_color);
-		utf8str =
-		    e_utf8_from_gtk_string(settings->htmlInterlinear,
-					   tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
+		if (curMod) {
+			curMod->SetKey(vkText);
+			curMod->Display();
 		}
+	}
 
-		if (interlinearMod0)
-			interlinearMod0->SetKey(current_verse);
-		if (interlinearMod1)
-			interlinearMod1->SetKey(current_verse);
-		if (interlinearMod2)
-			interlinearMod2->SetKey(current_verse);
-		if (interlinearMod3)
-			interlinearMod3->SetKey(current_verse);
-		if (interlinearMod4)
-			interlinearMod4->SetKey(current_verse);
-		if (interlinearMod0)
-			interlinearMod0->Display();
-		if (interlinearMod1)
-			interlinearMod1->Display();
-		if (interlinearMod2)
-			interlinearMod2->Display();
-		if (interlinearMod3)
-			interlinearMod3->Display();
-		if (interlinearMod4)
-			interlinearMod4->Display();
-		sprintf(tmpBuf, "</table></body></html>");
-		utf8str =
-		    e_utf8_from_gtk_string(settings->htmlInterlinear,
-					   tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
+	//------------------------------- change personal notes editor   if not in edit mode
+	if (settings->notebook3page == 1) {
+		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
+			if (!settings->editnote) {
+				if (usepersonalcomments && percomMod) {
+					percomMod->SetKey(key);	//-- set personal module to current verse
+					percomMod->Display();	//-- show change
+					noteModified = false;	//-- we just loaded comment so it is not modified                                       
+				}
+			}
 		}
-
-		gtk_html_end(GTK_HTML(html), htmlstream, status1);
-		gtk_html_set_editable(html, was_editable);
 	}
 }
 
+
+void backend_module_name_from_description(gchar * mod_name, gchar * mod_desc)
+{
+	strcpy(mod_name, descriptionMap[mod_desc].c_str());
+}
 
 //-------------------------------------------------------------------------------------------
 void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
@@ -735,122 +566,7 @@ void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
 		delete comp1Display;
 	if (FPNDisplay)
 		delete FPNDisplay;
-	g_warning("we are done with Sword");
-}
-
-/*******************************************************************************
- * toggle global options on and off
- * option - the option user wants to toggle
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void globaloptionsSWORD(gchar * option, gint window, gboolean choice,
-			gboolean showchange)
-{
-	gchar *on_off;
-	if (choice) {
-		on_off = "On";
-	} else {
-		on_off = "Off";
-	}
-	switch (window) {
-	case 0:		// main text window 
-		mainMgr->setGlobalOption(option, on_off);
-		backend_save_module_options(curMod->Name(), option,
-					    on_off);
-
-		if (!strcmp(option, "Strong's Numbers")) {
-			GTK_CHECK_MENU_ITEM(settings->strongsnum)->
-			    active = choice;
-			/* set strongs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnStrongs")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Footnotes")) {
-			GTK_CHECK_MENU_ITEM(settings->footnotes)->
-			    active = choice;
-			/* set footnotes toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnFootnotes")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Morphological Tags")) {
-			GTK_CHECK_MENU_ITEM(settings->morphs)->active =
-			    choice;
-			/* set morphs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnMorphs")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Hebrew Vowel Points")) {
-			GTK_CHECK_MENU_ITEM(settings->hebrewpoints)->
-			    active = choice;
-			//settings->hebrewpoints = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Cantillation")) {
-			GTK_CHECK_MENU_ITEM(settings->
-					    cantillationmarks)->active =
-			    choice;
-			//settings->cantillationmarks = choice;
-		}
-
-		if (!strcmp(option, "Greek Accents")) {
-			GTK_CHECK_MENU_ITEM(settings->greekaccents)->
-			    active = choice;
-			//settings->greekaccents = choice;
-		}
-
-		if (havebible && showchange) {
-			curMod->Display();
-		}
-
-		break;
-	case 1:		// interlinear window   
-		mainMgr1->setGlobalOption(option, on_off);
-
-
-		if (!strcmp(option, "Strong's Numbers")) {
-			settings->strongsint = choice;
-		}
-
-		if (!strcmp(option, "Footnotes")) {
-			settings->footnotesint = choice;
-		}
-
-		if (!strcmp(option, "Morphological Tags")) {
-			settings->morphsint = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Vowel Points")) {
-			settings->hebrewpointsint = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Cantillation")) {
-			settings->cantillationmarksint = choice;
-		}
-
-		if (!strcmp(option, "Greek Accents")) {
-			settings->greekaccentsint = choice;
-		}
-
-		if (settings->dockedInt && havebible)
-			updateinterlinearpage();
-		else
-			updateIntDlg(settings);
-
-		break;
-	}
+	g_print("\nwe are done with Sword\n");
 }
 
 /******************************************************************************
@@ -892,7 +608,7 @@ void backend_change_text_module(gchar * modName, gboolean showchange)
 				while (tmp != NULL) {
 					value =
 					    backend_load_module_options((*it).second->Name(), (gchar *) tmp->data);
-					globaloptionsSWORD((gchar *)
+					set_module_global_options((gchar *)
 							   tmp->data,
 							   MAIN_TEXT_WINDOW,
 							   value,
@@ -929,61 +645,13 @@ void backend_set_verse_style(gboolean choice)
 		curMod->Display();	//-- show the change
 }
 
-/**********************************************************************
- * Name
- *   bookSWORD
- *
- * Synopsis
- *   #include "sw_sword.h"
- *
- *   void bookSWORD(void);
- *
- * Description
- *   Change Bible book.
- *   Called if someone changed book combo.
- *
- * Return value
- *   none
- */
 
-void backend_book_changed(gchar *bookname)
+char *backend_get_valid_key(char *key)
 {
-	gchar buf[256];
-
-	
-
-	sprintf(buf, "%s %d:%d", bookname, 1, 1);
-
-	vkText = buf;
-	vkComm = buf;
-
-	ChangeVerseSWORD();
-}
-
-//-------------------------------------------------------------------------------------------
-void backend_chapter_verse_changed(char *bookname, int chapter, int verse)		//-- someone clicked the verse or chapter spin button
-{
-	char buf[256];
-	/*
-	if ((!chapter) || (!verse)) {
-		vkText.AutoNormalize(0);
-		vkComm.AutoNormalize(0);
-	}
-	
-	if (chapter < 1) {
-		++chapter;
-	}
-	if (verse < 1) {
-		++verse;
-	}
-	*/
-	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
-	vkText = buf;
-	vkComm = buf;
-
-	vkText.AutoNormalize(1);
-	vkComm.AutoNormalize(1);
-	ChangeVerseSWORD();
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	return 	g_strdup((char *) vkey.getText());
 }
 
 char *backend_get_book_from_key(char *key)
@@ -991,7 +659,7 @@ char *backend_get_book_from_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return 	(gchar *) vkey.books[vkey.Testament() - 1][vkey.Book() -
+	return 	(char *) vkey.books[vkey.Testament() - 1][vkey.Book() -
 						       1].name;
 }
 
@@ -1165,7 +833,7 @@ void backend_swap_interlinear_with_main(gchar * intmod, SETTINGS *s)
 		sprintf(s->Interlinear1Module, "%s", modname);
 	}
 	change_module_and_key(intmod, current_verse);
-	updateinterlinearpage();
+	update_interlinear_page(settings);
 }
 
 /*** the changes are already made we just need to show them ***/
@@ -1174,7 +842,7 @@ void backend_display_new_font_color_and_size(SETTINGS *s)
 	curMod->Display();
 	gui_displayCOMM(s->currentverse);
 	backend_displayinDL(s->DictWindowModule, s->dictkey);
-	updateinterlinearpage();
+	update_interlinear_page(settings);
 }
 
 /*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
@@ -1234,7 +902,7 @@ void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s)
 		mainMgr1->setCipherKey(modName, key);	/* show change on interlinear page */
 	case COMMENTARY_WINDOW:
 		mainMgr->setCipherKey(modName, key);
-		ChangeVerseSWORD();
+		//backend_text_module_change_verse(key);
 		break;
 	case DICTIONARY_WINDOW:
 		mainMgr->setCipherKey(modName, key);
@@ -1439,4 +1107,10 @@ int backend_get_module_page(char * module_name, char * module_type)
 	return -1;
 }
 
+char *backend_get_module_font_name(char *mod_name)
+{
+	SWModule *mod = mainMgr1->Modules[mod_name];
+	char *buf = (gchar*)mod->getConfigEntry("Font");
+	return buf;	
+}
 /******   end of file   ******/
