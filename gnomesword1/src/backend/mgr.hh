@@ -55,7 +55,7 @@ char *backend_get_path_to_mods(void);
 void backend_set_global_option(int manager, char *option, char *yesno);
 
 void backend_set_module_unlocked(char *mod_name, char *key);	
-void backend_get_global_options_list(GList * list);
+//void backend_get_global_options_list(GList * list);
 void backend_setup_display_mgr(void);
 
 #ifdef __cplusplus

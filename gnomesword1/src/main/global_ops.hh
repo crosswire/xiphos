@@ -49,10 +49,6 @@ struct  _global_ops {
 
 void main_set_global_options(GLOBAL_OPS * ops);
 GLOBAL_OPS *main_new_globals(gchar * mod_name);
-void main_add_global_option_items(gchar * mod_name, 
-				GtkWidget * module_options_menu, 
-				gint type_module,
-				GLOBAL_OPS * ops);
 void main_dialog_set_global_options(DIALOG_DATA * t);
 
 #ifdef __cplusplus

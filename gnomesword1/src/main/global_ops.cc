@@ -28,10 +28,13 @@
 #include <swmgr.h>
 #include <swmodule.h>
 
-#include "main/global_ops.hh"
+#include "gui/parallel_view.h"
 
+#include "main/global_ops.hh"
+#include "main/lists.h"
 #include "main/module_dialogs.h"
 #include "main/settings.h"
+#include "main/parallel_view.h"
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
@@ -94,8 +97,6 @@ static void set_global_option(int manager, char * option, gboolean choice)
 	}	
 	sw.results->setGlobalOption(option, on_off);
 }
-
-
 /******************************************************************************
  * Name
  *  gui_set_global_options
