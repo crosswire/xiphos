@@ -1,6 +1,15 @@
+2003-12-31  Andy <andyp@users.sf.net>
+
+	* update spec file
+	* fix UI (menu item ordering and access keys per RFE #866127)
+	* fix #include's of gal headers
+	* string updates
+	* preliminary support for GNOME session based on code from gedit
+
+
 2003-12-31  Terry <tbiggs@users.sf.net>
 
-	* remove pango markup form strings in bookmarks_menu.c and editor_menu.c
+	* remove pango markup from strings in bookmarks_menu.c and editor_menu.c
 
 
 2003-12-30  Terry <tbiggs@users.sf.net>

@@ -1,19 +1,16 @@
-%define name gnomesword2
-%define version	@VERSION@
 %define release 1
-%define debug_package %{nil}
 
 Summary:	GNOME-based Bible research tool
-Name:		%{name}
+Name:		gnomesword2
 Prefix:		/usr
-Version:	%{version}
+Version:	@VERSION@
 Release:	%{release}
 License:	GPL
 URL:		http://gnomesword.sourceforge.net/
 Group:		Applications/Productivity
 Source:		http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-root
-Requires:	sword >= 1.5.6
+Requires:	sword = %(rpm -q --queryformat '%%{version}' sword)
 Requires:	libgnomeui >= 2.2
 Requires:	gtkhtml3 >= 3.0
 Requires:	bonobo >= 1.0
@@ -27,11 +24,11 @@ BuildRequires:	scrollkeeper >= 0.3.5
 
 %description
 Bible Study Software for the Linux community. Lookup and search Bible texts and
-commentaries. GnomeSword uses modules and libraries from the Sword Project. 
+commentaries. GnomeSword uses modules and libraries from the SWORD Project. 
 Display multiple translations in the interlinear window. Search for passages in 
 any translation by word, phrase, or regular expression. Install this package
 if you want to browse the Bible translations and reference works distributed
-by Crosswire Bible Society through the Sword Project.
+by Crosswire Bible Society through the SWORD Project.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -49,6 +46,7 @@ make DESTDIR=$RPM_BUILD_ROOT%{prefix} install-data-local
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
 mv $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}/* $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
+rm -rf $RPM_BUILD_ROOT/%{prefix}/var
 rmdir $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}
 cd $RPM_BUILD_ROOT%{prefix}
 
@@ -74,6 +72,9 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 %{prefix}/share/applications/%{name}.desktop
 
 %changelog
+* Wed Dec 31 2003 Andy Piper <andyp@users.sf.net>
+- Better checking for SWORD version
+- tidied up macros
 * Wed Dec 10 2003 Andy Piper <andyp@users.sf.net>
 - Updated dependencies
 * Mon Dec 08 2003 Andy Piper <andyp@users.sf.net>
