@@ -351,6 +351,158 @@ char GTKMozEntryDisp::Display(SWModule &imodule)
 #endif
 }
 
+void GtkMozChapDisp::getVerseBefore(SWModule &imodule)
+{
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	GString *str = g_string_new(NULL);
+	gchar *buf;
+	gchar *utf8_key;
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+	SWMgr *mgr = be->get_main_mgr();
+	SWModule *mod_top = mgr->getModule(imodule.Name());
+		mod_top->setSkipConsecutiveLinks(true);
+	*mod_top = sword::TOP;
+	sword::VerseKey key_top( mod_top->KeyText() );
+	SWModule *mod = mgr->getModule(imodule.Name());
+	mod->setKey(imodule.getKey());
+	VerseKey *key = (VerseKey *)(SWKey *)*mod;	
+	int chapter = key->Chapter();
+	key->Verse(1);
+	//g_message("key_bottom = %s\nkey = %s",key_top.getText(),key->getText());
+	if(!key->_compare(key_top)) {
+		g_string_printf(str,
+			"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+			(mf->old_font)?mf->old_font:"", 
+			(mf->old_font_size)?mf->old_font_size:"+0", 
+			settings.bible_text_color);
+		buf = g_strdup_printf("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
+					mod->Description(),
+					_("Chapter"),
+					chapter);
+		str = g_string_append(str, buf);
+		g_free(buf);
+	} else {
+		(*mod)--;
+		
+		gboolean is_rtol = main_is_mod_rtol(mod->Name());
+		
+		utf8_key = g_convert((char*)key->getText(),
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		g_string_printf(str, "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+				utf8_key,
+				0, 
+				(settings.versestyle)
+				?settings.verse_num_font_size
+				:"-2",
+				settings.bible_verse_num_color, 
+				key->Verse());
+		g_free(utf8_key);
+				
+			
+		buf = g_strdup_printf(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"", 
+				(mf->old_font_size)?mf->old_font_size:"+0", 
+				settings.bible_text_color);
+		
+		str = g_string_append(str,buf);
+		g_free(buf);
+		buf = g_strdup_printf("%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+					(const char *)*mod,
+					_("Chapter"),
+					chapter);
+		str = g_string_append(str, buf);
+		g_free(buf);	
+	}		
+	gtk_moz_embed_append_data(new_browser, str->str, str->len);
+	g_string_free(str,TRUE);
+}
+
+void GtkMozChapDisp::getVerseAfter(SWModule &imodule)
+{
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	GString *str = g_string_new(NULL);
+	gchar *buf;
+	gchar *utf8_key;
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+	
+	SWMgr *mgr = be->get_main_mgr();
+	SWModule *mod_bottom = mgr->getModule(imodule.Name());
+		mod_bottom->setSkipConsecutiveLinks(true);
+	*mod_bottom = sword::BOTTOM;
+	sword::VerseKey key_bottom( mod_bottom->KeyText() );
+	SWModule *mod = mgr->getModule(imodule.Name());
+	mod->setKey(imodule.getKey());
+	VerseKey *key = (VerseKey *)(SWKey *)*mod;
+	g_message("key_bottom = %s\nkey = %s",key_bottom.getText(),key->getText());
+	//g_message("compare = %d",key_bottom._compare(key));
+	
+	if(key_bottom._compare(key) < 1) {
+		g_string_printf(str,
+			"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+			(mf->old_font)?mf->old_font:"", 
+			(mf->old_font_size)?mf->old_font_size:"+0", 
+			settings.bible_text_color);
+		buf = g_strdup_printf("</font><hr><div style=\"text-align: center\"><p>%s</p></div>",
+					mod->Description());
+		str = g_string_append(str, buf);
+		g_free(buf);
+	} else {
+	
+		int chapter = key->Chapter();
+		
+		g_string_printf(str,
+			"<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+			_("Chapter"),chapter);
+		
+		utf8_key = g_convert((char*)key->getText(),
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		buf = g_strdup_printf( "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+				utf8_key,
+				0, 
+				(settings.versestyle)
+				?settings.verse_num_font_size
+				:"-2",
+				settings.bible_verse_num_color, 
+				key->Verse());
+		g_free(utf8_key);
+		str = g_string_append(str,buf);
+		g_free(buf);			
+		
+		buf = g_strdup_printf(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"", 
+				(mf->old_font_size)?mf->old_font_size:"+0", 
+				settings.bible_text_color);
+		
+		str = g_string_append(str,buf);
+		g_free(buf);
+		buf = g_strdup_printf("%s</font>",
+					(const char *)*mod);
+		str = g_string_append(str, buf);
+		g_free(buf);	
+	}
+		
+	gtk_moz_embed_append_data(new_browser, str->str, str->len);
+	g_string_free(str,TRUE);
+
+}
 
 char GtkMozChapDisp::Display(SWModule &imodule) 
 {
@@ -361,7 +513,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	gfloat adjVal;
-	MOD_FONT *mf = get_font(imodule.Name());
+	mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	GString *str = g_string_new(NULL);
 	GString *str_tmp = g_string_new(NULL);
@@ -371,16 +523,18 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	gchar *preverse = NULL;
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
-	gchar heading[32];                                          
+	gchar heading[32]; 
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
 	gboolean newparagraph = FALSE;
-	
+	//char *my_key = be->get_valid_key(key->getText());
 	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
-	
+	//SWMgr *mgr = be->get_main_mgr();
+	//gchar *verse_before = getVerseBefore(imodule);
+	//g_message("verse_before = %s ", verse_before);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	
 	g_string_printf(str,	HTML_START
@@ -394,6 +548,10 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	gtk_moz_embed_append_data(new_browser, str->str, str->len);
 	
 	main_set_global_options(ops);
+	
+	// add last verse from previous chapter
+	getVerseBefore(imodule);
+
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
@@ -459,6 +617,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 			
 		buf = g_strdup_printf("%s",(const char *)imodule);
 		str = g_string_append(str, buf);
+		//g_free(buf);	
 		
 		if (settings.versestyle) {
 			/*if ((strstr(buf, "<BR") == NULL) &&
@@ -495,6 +654,10 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 		g_free(buf2);
 	}
+	
+	// add first verse from next chapter
+	getVerseAfter(imodule);
+	
 	if(is_rtol) 
 		g_string_printf(str,"</DIV></body></html>");
 	else	
