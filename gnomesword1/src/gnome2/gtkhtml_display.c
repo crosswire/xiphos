@@ -26,6 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
+#include <string.h>
 
 
 #include "gui/gtkhtml_display.h"
@@ -38,7 +39,7 @@
 #include "main/settings.h"
 #include "main/key.h"
 
-
+ 
 /******************************************************************************
  * Name
  *  set_gobal_options

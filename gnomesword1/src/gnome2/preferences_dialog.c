@@ -1616,8 +1616,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.verse_number_size = GTK_COMBO(cmbVerseNumSize)->entry;
 	gtk_widget_show(entry.verse_number_size);
 	gtk_tooltips_set_tip(tooltips, entry.verse_number_size,
-			     _
-			     ("Zero is the base font size. Increase or decrease the size."),
+		_("Zero is the base font size. Increase or decrease the size."),
 			     NULL);
 	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size), _("+0"));
 
@@ -1628,8 +1627,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   TRUE, TRUE, 0);
 	gtk_widget_set_sensitive(button.gnomesword_defaults, FALSE);
 	gtk_tooltips_set_tip(tooltips, button.gnomesword_defaults,
-			     _
-			     ("Use GnomeSword defaults for all settings on this page"),
+		_("Use GnomeSword defaults for all settings on this page"),
 			     NULL);
 	gtk_button_set_relief(GTK_BUTTON(button.gnomesword_defaults),
 			      GTK_RELIEF_HALF);
@@ -1703,8 +1701,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-					    _
-					    ("No, use settings saved the last time I used GnomeSword"));
+		   _("No, use settings saved the last time I used GnomeSword"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_show(rbtnNoDefaults);
@@ -1721,7 +1718,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Show Tabs"));
   	gtk_label_set_markup(GTK_LABEL(label802), header);
 	g_free(header);
-
+	
   	gtk_widget_show(label802);
   	gtk_frame_set_label_widget(GTK_FRAME(frame42),label802);
 	
@@ -1768,12 +1765,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame72),GTK_SHADOW_NONE);
   	 
   	label803 = gtk_label_new(NULL);
-
 	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Show"));
   	gtk_label_set_markup(GTK_LABEL(label803), header);
 	g_free(header);
 
 	gtk_widget_show(label803);
+	
   	gtk_frame_set_label_widget(GTK_FRAME(frame72),label803);
 	
 	gtk_widget_show(frame72);
@@ -1837,6 +1834,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	g_free(header);
 
 	gtk_widget_show(label804);
+	
   	gtk_frame_set_label_widget(GTK_FRAME(frame43),label804);
 
 	gtk_widget_show(frame43);
@@ -1899,6 +1897,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	g_free(header);
   	
 	gtk_widget_show(label805);
+	
   	gtk_frame_set_label_widget(GTK_FRAME(frame41),label805);
 
 	gtk_widget_show(frame41);
@@ -1939,6 +1938,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
   	gtk_label_set_markup(GTK_LABEL(label806), header);
 	g_free(header);
 	
+	
   	gtk_widget_show(label806);
   	gtk_frame_set_label_widget(GTK_FRAME(frame74),label806);
 
@@ -1969,8 +1969,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 
 	check_button.use_percomm_dialog =
-	    gtk_check_button_new_with_label(_
-					    ("Open Personal Comments editor in a dialog"));
+	    gtk_check_button_new_with_label(
+	    			_("Open Personal Comments editor in a dialog"));
 	gtk_widget_show(check_button.use_percomm_dialog);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.use_percomm_dialog, FALSE,
@@ -2323,8 +2323,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.greek_lex__module = GTK_COMBO(combo26)->entry;
 	gtk_widget_show(entry.greek_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex__module,
-			     _
-			     ("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
+		_("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
 			     NULL);
 
 	label192 = gtk_label_new(_("Hebrew Lexicon"));
@@ -2343,8 +2342,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.hebrew_lex__module = GTK_COMBO(combo27)->entry;
 	gtk_widget_show(entry.hebrew_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex__module,
-			     _
-			     ("Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
+		_("Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
 			     NULL);
 
 	label202 = gtk_label_new(_("Greek Lexicon Viewer"));
