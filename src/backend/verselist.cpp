@@ -21,7 +21,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -31,21 +31,17 @@
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gs_gnomesword.h"
-#include "sword.h"
-#include "gs_html.h"
-#include "display.h"
-#include "verselist.h"
-#include "support.h"
+#include "main/gs_gnomesword.h"
+#include "backend/sword.h"
+#include "main/gs_html.h"
+#include "backend/display.h"
+#include "backend/verselist.h"
+#include "main/support.h"
 
+/******************************************************************************
+ * static
+ *****************************************************************************/
 
-/***********************************************************************************************
- externals
-***********************************************************************************************/
-
-/***********************************************************************************************
- static
-***********************************************************************************************/
 static SWDisplay 
 	* entry_display,	/* to display modules in verselist dialog */
 	* chapter_display;

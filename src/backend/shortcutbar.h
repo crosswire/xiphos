@@ -33,24 +33,21 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
-	int backend_sb_type_from_modname(char * mod_name);
-	void backend_save_sb_iconsize(char * filename, 
-				char * large_icons);
-	GList *backend_load_sb_group(char * filename, 
-				char * group_name,
-				char * use_largeicons);
-	void backend_save_sb_group(char * filename, 
-				char * group_name,
-			       	int group_num, char * large_icons);
-	//GList *backend_get_sb_mod_list(char * modtype);
-	void backend_display_sb_dictlex(char * modName,
-				char * vlist);
-	void backend_setup_viewer(GtkWidget * html_widget);
-	void backend_shutdown_sb_viewer(void);
+int backend_sb_type_from_modname(char *mod_name);
+void backend_save_sb_iconsize(char *filename, char *large_icons);
+GList *backend_load_sb_group(char *filename, char *group_name,
+			char *use_largeicons);
+void backend_save_sb_group(char *filename, char *group_name, int group_num,
+		char *large_icons);
+void backend_display_sb_dictlex(char *modName, char *vlist);
+void backend_setup_viewer(GtkWidget *html_widget);
+void backend_shutdown_sb_viewer(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SW_SHORTCUTBAR_H__ */
+
+#endif
+

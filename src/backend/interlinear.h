@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __INTERLINEAR_H_
 #define __INTERLINEAR_H_
 
@@ -27,16 +26,16 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
-	gboolean backend_setup_interlinear(SETTINGS *s);
-	void backend_shutdown_interlinear(void);
-	char *backend_get_interlinear_module_text(char *mod_name,
-						  char *key);
-	void backend_set_interlinear_global_option(char *option,
-						   char *yesno);
+gboolean backend_setup_interlinear(SETTINGS *s);
+void backend_shutdown_interlinear(void);
+char *backend_get_interlinear_module_text(char *mod_name, char *key);
+void backend_set_interlinear_global_option(char *option, char *yesno);
 	
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __INTERLINEAR_H_ */
+
+#endif
+

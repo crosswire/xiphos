@@ -19,10 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -32,18 +30,16 @@
 #include <versekey.h>
 #include <markupfiltmgr.h>
 
-#include "viewcomm.h"
-#include "sword.h"
-#include "display.h"
-
-#include "settings.h"
+#include "backend/viewcomm.h"
+#include "backend/sword.h"
+#include "backend/display.h"
+#include "main/settings.h"
 
 static SWDisplay *display;	/* to display modules in view comm dialog */
 static SWMgr *mgr;		/* sword mgr for view comm dialog */
 static SWModule *mod;		/* module for view comm dialog */
 static ModMap::iterator mdoule_iterator;
 static VerseKey verse_key;
-
 
 /******************************************************************************
  * Name
