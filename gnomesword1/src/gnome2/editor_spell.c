@@ -34,11 +34,12 @@
 #include <gtkhtml/htmlengine-search.h>
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
-
+ 
 #include "gui/editor.h"
 #include "gui/editor_spell.h"
 
 #include "main/spell.h"
+
 
 /* messages to the spell checker */
 enum {
@@ -73,6 +74,8 @@ typedef struct {
 	GtkWidget *near_misses_scrolled_window;
 	gint status_bar_count;
 } Tspc_gui;
+
+
 
 static Tspc_gui spc_gui;
 static gboolean spc_is_running;
@@ -131,8 +134,7 @@ static void change_word_color(GSHTMLEditorControlData * ecd)
  * Synopsis
  *   #include "gui/editor_spell.h"
  *
- *   void correct_word(PspellManager * spell_checker, gchar * word,
- *					GSHTMLEditorControlData * ecd)
+ *   void correct_word()
  *
  * Description
  *   ask the user how to correct a word, and do it
@@ -141,27 +143,24 @@ static void change_word_color(GSHTMLEditorControlData * ecd)
  *   void
  */
 
-static void correct_word(const gchar * word,
-					GSHTMLEditorControlData * ecd)
+static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 {
 	gboolean word_corrected = 0;
-	gint done = 0;
+	
 	select_word(ecd);
 	do {
 		spc_message = SPC_NONE;
 		
 		while (gtk_events_pending())
 			gtk_main_iteration();
+		
 		switch (spc_message) {
 		case SPC_INSERT:			
-			done = add_to_personal(word);
-			if(!done) g_warning("word not added to personal");
-			check_for_error();
+			add_to_personal(word);
 			word_corrected = 1;
 			break;
 		case SPC_ACCEPT:
 			add_to_session(word);
-			check_for_error();
 			change_word_color(ecd);;
 			word_corrected = 1;
 			break;
@@ -296,7 +295,7 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	while(html_engine_forward_word (ecd->html->engine)){
 		if(html_engine_spell_word_is_valid (ecd->html->engine)) {
 			buf = html_engine_get_spell_word(ecd->html->engine);
-			utf8str = buf;//e_utf8_from_gtk_string(ecd->htmlwidget, buf);
+			utf8str = buf;
 			if(utf8str)	{
 				if (strlen(utf8str) > 2) {
 					word_count++;
@@ -309,19 +308,6 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");
 					}
-#ifdef USE_ISPELL
-					else if (have == 5){ /* for ispell UNKNOWN */
-						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), utf8str);
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), utf8str);
-						correct_word(utf8str, ecd);
-						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");						
-					}
-#endif /* end USE_ISPELL */
-					else if (have == -1)
-						check_for_error();
 					if (spc_message == SPC_CLOSE) {
 						break;
 					}; 
