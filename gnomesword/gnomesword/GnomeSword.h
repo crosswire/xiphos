@@ -119,6 +119,9 @@ void
 dictSearchTextChangedSWORD(gchar *mytext);
 
 void
+dictchangekeySWORD		(gint direction);
+
+void
 addHistoryItem					(void);
 
 void
@@ -132,3 +135,6 @@ setautosave							(gboolean choice);
 
 void
 clearhistory						(void);
+
+void
+printfile								(void);
