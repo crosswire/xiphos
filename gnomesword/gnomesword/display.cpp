@@ -644,7 +644,7 @@ HTMLentryDisp::Display(SWModule &imodule)
  	roman_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
 	/* Load a verse number font */
  	versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-  /* Load a greek font */
+        /* Load a greek font */
 	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 
 	sword_font = roman_font;
@@ -674,6 +674,7 @@ HTMLentryDisp::Display(SWModule &imodule)
 	        buf = g_strdup(tag);
 	        //cout << buf << '\n';
 	        i = i + strlen(buf);  //-- remove tags (we do not want to see them)
+	        g_free(buf);
 	        //-------------------------------------------------------------------------- italic
 		    if(!strcmp(tag,"<I>"))
   	        {					
@@ -765,70 +766,61 @@ HTMLChapDisp::Display(SWModule &imodule)
 	char    tmpBuf[255];
 	char    *verseBuf,
 	        *tag,
-            *buf;
+                *buf;
 	char    *myverse,
-            *font;
+                *font;
 	int     i,j;	
 	bool 	greek_on=FALSE,
-			italics_on=FALSE,
-			poetry_on=FALSE,
-			niv_on=false,
-			Fo_on=false,
-			cite_on=false;
+		italics_on=FALSE,
+		poetry_on=FALSE,
+		niv_on=false,
+		Fo_on=false,
+		cite_on=false;
 	GdkFont *sword_font,
-			*greek_font,
-			*fo_font,
-			*fo_italic_font,
-			*cite_font,
-			*cite_italic_font;;
+		*greek_font,
+		*fo_font,
+		*fo_italic_font,
+		*cite_font,
+		*cite_italic_font;;
 	ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 
 	font = "Roman";
-    if(!strcmp(imodule.Name(),"NIV-GnomeSword")) niv_on=true; //-- we need to know if we are using the niv
-    else niv_on=false;
+        if(!strcmp(imodule.Name(),"NIV-GnomeSword")) niv_on=true; //-- we need to know if we are using the niv
+        else niv_on=false;
 	
-    if ((sit = mainMgr->config->Sections.find(imodule.Name())) != mainMgr->config->Sections.end())
-    {
-        if ((eit = (*sit).second.find("Font")) != (*sit).second.end())
-		{
-			font = (char *)(*eit).second.c_str();
+        if ((sit = mainMgr->config->Sections.find(imodule.Name())) != mainMgr->config->Sections.end()){
+                if ((eit = (*sit).second.find("Font")) != (*sit).second.end()){
+			        font = (char *)(*eit).second.c_str();
 		}
 	}	
 	//-- Load an italic font
-    italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
+        italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
 	//-- Load a roman font
-    roman_font = gdk_font_load(font_mainwindow);
+        roman_font = gdk_font_load(font_mainwindow);
  	//-- Load FO font
-    fo_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
+        fo_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
  	//-- Load FO italic font
-    fo_italic_font = gdk_font_load("-adobe-helvetica-medium-o-normal-*-*-80-*-*-p-*-iso8859-1");
+        fo_italic_font = gdk_font_load("-adobe-helvetica-medium-o-normal-*-*-80-*-*-p-*-iso8859-1");
 	//-- Load cite font
 	cite_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
  	//-- Load cite italic font
  	cite_italic_font = gdk_font_load("-adobe-helvetica-medium-o-normal-*-*-100-*-*-p-*-iso8859-1");
 	//-- Load a verse number font
-	if(bVerseStyle)
-        versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-	else
-        versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
-
+	if(bVerseStyle) versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
+	else versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
 	//-- Load a greek font
 	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 	
-	if(!strcmp(font,"Symbol"))
-	{
+	if(!strcmp(font,"Symbol")){
 	    sword_font = greek_font;	
 	    greek_on=true;
 	}
-	else if(!strcmp(font,"Greek"))
-	{
+	else if(!strcmp(font,"Greek")){
 	    sword_font = greek_font;	
 	    greek_on=true;
-	}
-	else
-	{
+	}else{
 	    sword_font = roman_font;
 	     greek_on=false;
 	}
@@ -868,6 +860,7 @@ HTMLChapDisp::Display(SWModule &imodule)
 		                                buf = g_strdup(tag);
 		                                i = i + strlen(buf);  //-- remove tags (we do not want to see them)
 		                                //cout << tag << '\n';
+    	                                        g_free(buf);
 		                                if(!strcmp(tag,"<SMALL><EM>")){  //-- strongs numbers -		           		
 				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
 				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
@@ -889,191 +882,140 @@ HTMLChapDisp::Display(SWModule &imodule)
 			                                myverse[i] ='(';
 			                                j=0;
 			                                verseBuf[0]='\0';
-		                                }
-		        else if(!strcmp(tag,"</I></SMALL>")) //-- end strongs numbers - tense
-		        {  	
-		            verseBuf[j] =')';
-			        verseBuf[j+1] = '\0';	
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_italic_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);			
-			        j=0;
-			        verseBuf[0]='\0';
+		                                }else if(!strcmp(tag,"</I></SMALL>")){ //-- end strongs numbers - tense		          	
+		                                        verseBuf[j] =')';
+			                                verseBuf[j+1] = '\0';	
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_italic_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);			
+			                                j=0;
+			                                verseBuf[0]='\0';
+		                                }else if(!strcmp(tag,"<CITE><CITE><I>")){  //-- special format used in KJV for Psalms titles -- start italic		           		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                Fo_on = true;
+			                                j=0;
+			                                verseBuf[0]='\0';
+			                                //i= i+15;
+		                                }else if(!strcmp(tag,"<CITE><CITE>")){ //-- special format used in KJV for Psalms titles		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                Fo_on = true;
+			                                j=0;
+			                                verseBuf[0]='\0';
+		                                }else if(!strcmp(tag,"</CITE></CITE>")){ //-- end special format used in KJV for Psalms titles		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),fo_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                Fo_on = false;
+			                                j=0;
+			                                verseBuf[0]='\0';
+			                                myverse[i]='\n';
+		                                }else if(!strcmp(tag,"<CITE><P>")){  //-- quote OT or Poetry		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                cite_on = true;
+			                                j=0;
+			                                verseBuf[0]='\0';
+			                                if((!bVerseStyle) || poetry_on){ //-- we only need new line if we are not			                                      //-- in versestyle or poetry is on  			
+			                                        myverse[i] = '\t'; //-- add a tab to beginning of next line
+			                                        verseBuf[j] = '\n';//-- add new line to end of this line
+					                        ++j; 		
+			                                }		
+		                                }else if(!strcmp(tag,"</CITE><P>")){ //-- end quote OT or Poetry		        
+		                                        verseBuf[j] = '\n';
+			                                ++j;
+			                                verseBuf[j] = '\0';
+			                                if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), cite_italic_font, &myGreen,NULL , verseBuf, -1);
+					                else gtk_text_insert(GTK_TEXT(gtkText), cite_font, &gtkText->style->black, NULL, verseBuf, -1);
+			                                cite_on = false;
+			                                j=0;
+			                                verseBuf[0]='\0';
+			                                if((!bVerseStyle) || poetry_on){ //-- we only need new line if we are not
+			                                                              //-- in versestyle or poetry is on  			
+			                                        myverse[i] = '\t'; //-- add a tab to beginning of next line
+			                                        verseBuf[j] = '\n';//-- add new line to end of this line
+					                        ++j; 		
+			                                }			
+		                                }else if(!strcmp(tag,"<P>")){ //-- new paragraph   		        
+			                                if((!bVerseStyle) || poetry_on){ //-- we only need new line if we are not
+			                                                                 //-- in versestyle or poetry is on  			
+			                                        myverse[i] = '\t'; //-- add a tab to beginning of next line
+			                                        verseBuf[j] = '\n';//-- add new line to end of this line
+					                        ++j; 		
+			                                }
+			                        }else if(!strcmp(tag,"<I>")){ //-- italic  			    				
+				                        if(Fo_on){				   
+				                                if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
+				                                else gtk_text_insert(GTK_TEXT(gtkText),fo_font ,&gtkText->style->black, NULL, verseBuf, -1);
+				                        }else if(cite_on){				   
+				                                gtk_text_insert(GTK_TEXT(gtkText),cite_font ,&gtkText->style->black, NULL, verseBuf, -1);
+				                        }else{				    
+				                                if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                                else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+				                        }
+				                        j=0;
+				                        verseBuf[0]='\0';
+				                        italics_on = TRUE;
+    		                                }else if(!strcmp(tag,"</I>")){ //-- end italic  			   
+				                        if(Fo_on){				       				
+					                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_italic_font, &myGreen,NULL , verseBuf, -1);
+					                        else gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
+				                        }else if(cite_on){
+				                                gtk_text_insert(GTK_TEXT(gtkText),cite_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
+				                        }else{
+					                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), italic_font, &myGreen,NULL , verseBuf, -1);
+					                        else gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, verseBuf, -1);
+				                        }
+				                        j=0;
+				                        verseBuf[0]='\0';
+				                        italics_on = false;
+    		                                }else if(!strcmp(tag,"<B>")){ //-- bold  		        	
+			                                gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                j=0;
+			                                verseBuf[0]='\0';
+    	                                        }else if(!strcmp(tag,"</B>")){ //-- end bold
+			                                gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1);
+			                                j=0;
+			                                verseBuf[0]='\0';
+    	                                        }else if(!strcmp(tag,"<FONT COLOR=#800000>")){ //-- foot note color  		        	
+			                                gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                j=0;
+			                                verseBuf[0]='\0';
+    	                                        }else if(!strcmp(tag,"</FONT>")){ //-- end foot note color  		        
+			                                gtk_text_insert(GTK_TEXT(gtkText), cite_font, &colourBlue, NULL, verseBuf, -1);
+			                                j=0;
+			                                verseBuf[0]='\0';
+    	                                        }else if(!strcmp(tag,"<BR>")){ //-- new line   		        
+			                                if((!bVerseStyle) || poetry_on){			        
+			                                        verseBuf[j]='\n'; //-- we only need new line if we are not
+			                                        ++j;
+			                                }
+    	                                        }
+    	                                }
+    	                        }			
+		                verseBuf[j] = myverse[i]; 			
+	                        ++i;    		
+	    	                verseBuf[j+1] = '\0';
+	    	                ++j;
 		        }
-		
-		        if(!strcmp(tag,"<CITE><CITE><I>"))  //-- special format used in KJV for Psalms titles -- start italic
-		        {   		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        Fo_on = true;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+15;
+		        if(italics_on) sword_font = italic_font;
+		        else sword_font = roman_font;		
+		        if (key->Verse() == curVerse){
+			        gtk_text_thaw(GTK_TEXT(gtkText));
+			        adjVal = GTK_TEXT(gtkText)->vadj->upper;
+			        curPos = gtk_text_get_length(GTK_TEXT(gtkText));
+			        gtk_text_insert(GTK_TEXT(gtkText), sword_font, &myGreen, NULL, verseBuf, -1);
+			        gtk_text_freeze (GTK_TEXT(gtkText));
+	        	}else{
+			        gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);
 		        }
-		        else if(!strcmp(tag,"<CITE><CITE>")) //-- special format used in KJV for Psalms titles
-		        {
-		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        Fo_on = true;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+12;
-		        }
-		        else if(!strcmp(tag,"</CITE></CITE>")) //-- end special format used in KJV for Psalms titles
-		        {
-		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),fo_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        Fo_on = false;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+13;
-			        myverse[i]='\n';
-		        }
-		        else if(!strcmp(tag,"<CITE><P>"))  //-- quote OT or Poetry
-		        {
-		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        cite_on = true;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+9;
-			        if((!bVerseStyle) || poetry_on) //-- we only need new line if we are not
-			        {                              //-- in versestyle or poetry is on  			
-			            myverse[i] = '\t'; //-- add a tab to beginning of next line
-			            verseBuf[j] = '\n';//-- add new line to end of this line
-					    ++j; 		
-			        }		
-		        }
-		        else if(!strcmp(tag,"</CITE><P>")) //-- end quote OT or Poetry
-		        {
-		            verseBuf[j] = '\n';
-			        ++j;
-			        verseBuf[j] = '\0';
-			        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), cite_italic_font, &myGreen,NULL , verseBuf, -1);
-					    else gtk_text_insert(GTK_TEXT(gtkText), cite_font, &gtkText->style->black, NULL, verseBuf, -1);
-			        cite_on = false;
-			        j=0;
-			        verseBuf[0]='\0';
-			        //i= i+10;
-			        if((!bVerseStyle) || poetry_on) //-- we only need new line if we are not
-			        {                              //-- in versestyle or poetry is on  			
-			            myverse[i] = '\t'; //-- add a tab to beginning of next line
-			            verseBuf[j] = '\n';//-- add new line to end of this line
-					    ++j; 		
-			        }			
-		        }
-		        else if(!strcmp(tag,"<P>")) //-- new paragraph
-   		        {
-			        if((!bVerseStyle) || poetry_on) //-- we only need new line if we are not
-			        {                              //-- in versestyle or poetry is on  			
-			            myverse[i] = '\t'; //-- add a tab to beginning of next line
-			            verseBuf[j] = '\n';//-- add new line to end of this line
-					    ++j; 		
-			        }
-			    } 		
-		        else if(!strcmp(tag,"<I>"))//-- italic
-  			    {				
-				    if(Fo_on)
-				    {
-				        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
-				        else gtk_text_insert(GTK_TEXT(gtkText),fo_font ,&gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    else if(cite_on)
-				    {
-				        gtk_text_insert(GTK_TEXT(gtkText),cite_font ,&gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    else
-				    {
-				        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    j=0;
-				    verseBuf[0]='\0';
-				    italics_on = TRUE;
-    		    }
-			    else if(!strcmp(tag,"</I>")) //-- end italic
-  			    {
-				    if(Fo_on)
-				    {   				
-					    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_italic_font, &myGreen,NULL , verseBuf, -1);
-					    else gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    else if(cite_on)
-				    {
-				        gtk_text_insert(GTK_TEXT(gtkText),cite_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    else
-				    {
-					    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), italic_font, &myGreen,NULL , verseBuf, -1);
-					    else gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, verseBuf, -1);
-				    }
-				    j=0;
-				    verseBuf[0]='\0';
-				    italics_on = false;
-    		    }
-    		    else if(!strcmp(tag,"<B>")) //-- bold
-  		        {	
-			        gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        j=0;
-			        verseBuf[0]='\0';
-    	        }
-		        else if(!strcmp(tag,"</B>")) //-- end bold
-  		        {
-			        //i=i+4;
-			        gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1);
-			        j=0;
-			        verseBuf[0]='\0';
-    	        }
-    		    else if(!strcmp(tag,"<FONT COLOR=#800000>")) //-- foot note color
-  		        {	
-			        gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        j=0;
-			        verseBuf[0]='\0';
-    	        }
-		        else if(!strcmp(tag,"</FONT>")) //-- end foot note color
-  		        {
-			        gtk_text_insert(GTK_TEXT(gtkText), cite_font, &colourBlue, NULL, verseBuf, -1);
-			        j=0;
-			        verseBuf[0]='\0';
-    	        }
-    	        else if(!strcmp(tag,"<BR>")) //-- new line
-   		        {
-			        if((!bVerseStyle) || poetry_on)
-			        {
-			            verseBuf[j]='\n'; //-- we only need new line if we are not
-			            ++j;
-			        }
-    	        }
-    	        }
-    	    }			
-		    verseBuf[j] = myverse[i]; 			
-	        ++i;    		
-	    	verseBuf[j+1] = '\0';
-	    	++j;
-		}
-		if(italics_on) sword_font = italic_font;
-		    else sword_font = roman_font;		
-		if (key->Verse() == curVerse)
-		{
-			gtk_text_thaw(GTK_TEXT(gtkText));
-			adjVal = GTK_TEXT(gtkText)->vadj->upper;
-			curPos = gtk_text_get_length(GTK_TEXT(gtkText));
-			gtk_text_insert(GTK_TEXT(gtkText), sword_font, &myGreen, NULL, verseBuf, -1);
-			gtk_text_freeze (GTK_TEXT(gtkText));
-		}
-		else 
-		{
-			gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);
-		}
-		delete [] verseBuf;		
-	    verseBuf = NULL;
+		        delete [] verseBuf;		
+	                verseBuf = NULL;
+	                g_free(myverse);
 	
-	  }
-		//---------------------------------------------------------------------------- toggle paragraph style 
-		if(bVerseStyle && (!poetry_on))
-			gtk_text_insert(GTK_TEXT(gtkText), 	roman_font, &gtkText->style->black, NULL, "\n", -1); 
+                }
+                //---------------------------------------------------------------------------- toggle paragraph style 
+	        if(bVerseStyle && (!poetry_on))
+		        gtk_text_insert(GTK_TEXT(gtkText), roman_font, &gtkText->style->black, NULL, "\n", -1); 
 
 	}
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
