@@ -402,7 +402,7 @@ void initSWORD(SETTINGS * s)
 	     it != optionslist.end(); it++) {
 		//-- save options in a glist for popup menus
 		options =
-		    g_list_append(options, (gchar *) (*it).c_str());
+		    g_list_append(options, strdup((gchar *) (*it).c_str()));
 	}
 }
 
@@ -813,6 +813,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 {
 	//char *msg;
 	GtkWidget *msgbox;
+	
 	extern gchar
 	    * gSwordDir,
 	    *shortcutbarDir, *fnquickmarks, *fnconfigure, *swbmDir;
@@ -843,7 +844,12 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	g_free(fnquickmarks);
 	g_free(fnconfigure);
 	g_free(swbmDir);
-
+	
+	// free options list
+	while(options != NULL){
+		free((char*)options->data);
+		options = g_list_next(options);
+	}
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
