@@ -24,7 +24,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include "gs_sword.h"
+//#include "sw_gnomesword.h"
 	
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data);

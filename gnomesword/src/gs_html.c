@@ -40,7 +40,7 @@
 
 #include "gs_html.h"
 #include "support.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "sw_verselist_sb.h"
 

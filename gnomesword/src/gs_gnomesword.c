@@ -32,7 +32,7 @@
 
 
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "callback.h"
 #include "support.h"
 //#include "interface.h"

@@ -46,7 +46,7 @@
 
 #include "display.h"
 #include "support.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 GdkColor GTKEntryDisp::colourBlue;

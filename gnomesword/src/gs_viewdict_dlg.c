@@ -32,7 +32,8 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gs_viewdict_dlg.h"
-#include "gs_sword.h"
+#include "sw_viewdict_dlg.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 
@@ -67,7 +68,7 @@ on_btnLoadKeys_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 	gchar *buf;
-	
+	 
 	buf = gtk_entry_get_text(GTK_ENTRY(ceSDMods));
 	loadSDkeysSWORD(clKeys);
 	gtk_paned_set_position(GTK_PANED(hpaned2), 120);
