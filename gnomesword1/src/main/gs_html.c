@@ -67,7 +67,6 @@
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
-#include "backend/verselist.h"
 #include "backend/shortcutbar.h"
 #include "backend/sword.h"
 
@@ -461,7 +460,7 @@ gchar *get_word_or_selection(GtkWidget * html_widget, gboolean word)
 
 	if (html_engine_is_selection_active(html->engine)) {
 		key = html_engine_get_selection_string(html->engine);
-		key = g_strdelimit(key, ".,\"<>;:?s", ' ');
+		key = g_strdelimit(key, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		return g_strdup(key);	/* must be freed by calling function */
 	}
@@ -482,7 +481,7 @@ gchar *buttonpresslookupGS_HTML(GtkWidget * html_widget)
 		if (html_engine_is_selection_active(html->engine)) {
 			key =
 			    html_engine_get_selection_string(html->engine);
-			key = g_strdelimit(key, ".,\"<>;:?s", ' ');
+			key = g_strdelimit(key, ".,\"<>;:?", ' ');
 			key = g_strstrip(key);
 			return g_strdup(key);	/* must be freed by calling function */
 		}

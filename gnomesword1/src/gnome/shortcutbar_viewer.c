@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * create_shortcutbar_viewer.c - create viewer group gui
+ * shortcutbar_viewer.c - create viewer group gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -28,6 +28,7 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 
+#include "gui/gtkhtml_display.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 
@@ -36,6 +37,7 @@
 #include "main/gs_html.h"
 #include "main/support.h"
 #include "main/settings.h"
+#include "main/dictlex.h"
 
 extern SEARCH_OPT so, *p_so;
 extern GList *sblist;			/* for saving search results to bookmarks  */
@@ -105,17 +107,68 @@ void showSBVerseList(void)
  *   gboolean
  */
 
-gboolean gui_display_dictlex_in_viewer(char *modName, char *key) 
+gboolean gui_display_dictlex_in_viewer(char *mod_name, char *key) 
 {
 	if (settings.showshortcutbar) {	
+		gchar *text;
 		gtk_notebook_set_page(GTK_NOTEBOOK(
 			settings.verse_list_notebook), 2);
 		sprintf(settings.groupName, "%s", "Viewer");
 		showSBVerseList();
-		display_sb_dictlex(modName, key);
-		return TRUE;
+		text = get_dictlex_text(mod_name, key);
+		if(text) {
+			entry_display(sv->html_viewer_widget, mod_name,
+				   text, key, TRUE);
+			free(text);
+			return TRUE;
+		}
 	}
 	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *   on_vllink_clicked 
+ *
+ * Synopsis
+ *   #include "shortcutbar_viewer.h"
+ *
+ *   void on_vllink_clicked(GtkHTML *html, const gchar *url,
+ *						gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
+		SB_VIEWER *sv)
+{
+	int type;
+	gchar *text = NULL;
+	
+	type = get_mod_type(sv->mod_name);
+	switch(type){
+		case TEXT_TYPE:			
+			chapter_display(sv->htmlshow, sv->mod_name,
+				NULL, (gchar *) url, FALSE);
+			break;
+		case COMMENTARY_TYPE:		
+		case DICTIONARY_TYPE:	
+			text = get_module_text(sv->mod_name, (gchar *) url);
+			if(text) {
+				entry_display(sv->htmlshow, sv->mod_name,
+				   text, (gchar *) url, TRUE);
+				free(text);
+			}
+			break;
+		default:
+	}
+	
+	if(settings.showinmain)
+		change_verse((gchar *) url);	
 }
 
 /******************************************************************************
@@ -142,7 +195,10 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 		buf[256], 
 		*utf8str,
 		*colorkey;
+	gchar *first_key = NULL;
+	gint    i = 0;
 	
+	strcpy(sv->mod_name, module_name);
 	tmp = get_verse_list(module_name, verse_list);
 	
 	beginHTML(settings.vlsbhtml, TRUE);
@@ -168,6 +224,9 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 					colorkey,
 					settings.verselist_font_size,
 					(const char *)tmp->data);
+		if(i == 0)
+			first_key = g_strdup((const char *)tmp->data);
+		++i;
 		utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
 		displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
 		tmp = g_list_next(tmp);	
@@ -179,7 +238,13 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 	endHTML(settings.vlsbhtml);
 	
 	showSBVerseList();
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.verse_list_notebook), 0);	
+	gtk_notebook_set_page(GTK_NOTEBOOK
+				(settings.verse_list_notebook), 0);
+	if(first_key) {
+		verse_list_link_clicked(NULL, 
+			(const gchar *)first_key, sv);
+		g_free(first_key);
+	}
 }
 
 /******************************************************************************
@@ -272,39 +337,21 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
 		gint column, GdkEvent *event)
 {
-	gchar *key;
+	gchar *key, *text = NULL;
 
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &key);
 	settings.displaySearchResults = TRUE;
-	display_search_results_item(key);
+	
+	//display_search_results_item(key);
+	text = get_search_results_text(p_so->module_name, key);
+	if(text) {
+		entry_display(sv->html_widget, p_so->module_name,
+		   text, key, TRUE);
+		free(text);
+	}
 	if (settings.showinmain)
 		show_search_results_in_main(settings.showinmain,key);
 	settings.displaySearchResults = FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_vllink_clicked 
- *
- * Synopsis
- *   #include "shortcutbar_viewer.h"
- *
- *   void on_vllink_clicked(GtkHTML *html, const gchar *url,
- *						gpointer user_data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_vllink_clicked(GtkHTML *html, const gchar *url,
-		gpointer user_data)
-{
-	verselist_change_verse((gchar *) url);
-	if(settings.showinmain)
-		change_verse((gchar *) url);	
 }
 
 /******************************************************************************
@@ -497,7 +544,6 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 	GtkWidget *label2;
 	GtkWidget *frame5;
 	GtkWidget *label3;
-	GtkWidget *htmlshow;
 	GtkWidget *scrolledwindow5;
 	GtkWidget *frameTB;
 	GtkWidget *frameRP;
@@ -690,15 +736,15 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	htmlshow = gtk_html_new();
-	gtk_widget_ref(htmlshow);
+	sv->htmlshow = gtk_html_new();
+	gtk_widget_ref(sv->htmlshow);
 	gtk_object_set_data_full(GTK_OBJECT(settings.app),
-				 "htmlshow", htmlshow,
+				 "sv->htmlshow", sv->htmlshow,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(htmlshow);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow2), htmlshow);
-	gtk_html_load_empty(GTK_HTML(htmlshow));
+	gtk_widget_show(sv->htmlshow);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow2), sv->htmlshow);
+	gtk_html_load_empty(GTK_HTML(sv->htmlshow));
 
 	label1 = gtk_label_new(_("label1"));
 	gtk_widget_ref(label1);
@@ -887,7 +933,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 				   (GTK_NOTEBOOK(sv->notebook), 2), label3);
 
 	gtk_signal_connect(GTK_OBJECT(settings.vlsbhtml), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_vllink_clicked), NULL);
+			   GTK_SIGNAL_FUNC(verse_list_link_clicked), sv);
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->btn_save), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), NULL);
@@ -918,6 +964,6 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->html_widget), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), settings.app);
-	return htmlshow;
+	return sv->htmlshow;
 }
 

@@ -18,8 +18,6 @@ COMMON_SOURCE =  \
     commentary.h \
     dictlex.c \
     dictlex.h \
-    display_info.c \
-    display_info.h \
     find_dlg_defs.h \
     gbs.c \
     gs_bookmarks.c \

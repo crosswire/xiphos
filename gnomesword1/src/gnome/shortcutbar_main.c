@@ -497,7 +497,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 		memset(modName, 0, 16);
 		module_name_from_description(modName, (gchar *) glist->data);
 		sbtype = 0;
-		sbtype = get_sb_type_from_modname(modName);
+		sbtype = get_mod_type(modName);
 		
 		if (sbtype < 0)
 			sbtype = 0;
@@ -569,7 +569,7 @@ static void on_add_shortcut_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName, (gchar *) user_data);
 	sbtype = 0;
-	sbtype = get_sb_type_from_modname(modName);
+	sbtype = get_mod_type(modName);
 	
 	if (sbtype < 0)
 		sbtype = 0;
@@ -1021,7 +1021,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 			if (group_num == groupnum0) {
 				gint sbtype;
-				sbtype = get_sb_type_from_modname(modName);
+				sbtype = get_mod_type(modName);
 				if (sbtype == 0 || sbtype == 1)
 					change_module_and_key(modName,
 							  settings.currentverse);
@@ -1163,7 +1163,7 @@ void gui_setup_shortcut_bar(void)
 			memset(modName, 0, 16);
 			module_name_from_description(modName, (gchar *) tmp->data);
 			sbtype = 0;
-			sbtype = get_sb_type_from_modname(modName);
+			sbtype = get_mod_type(modName);
 			
 			if (sbtype < 0)
 				sbtype = 0;
@@ -1418,11 +1418,6 @@ void gui_setup_shortcut_bar(void)
 
 	/*** create viewer group and add to shortcut bar ****/
 	html = gui_create_shortcutbar_viewer(vboxVL);
-
-	
-	/* setup shortcut bar verse list sword stuff */
-	setup_shortcutbar_backend(html,sv->html_widget ,
-					sv->html_viewer_widget); 
 	
 	groupnum7 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar), vpVL,
@@ -1513,7 +1508,7 @@ void gui_update_shortcut_bar(void)
 			memset(modName, 0, 16);
 			module_name_from_description(modName, (gchar *) tmp->data);
 			sbtype = 0;
-			sbtype = get_sb_type_from_modname(modName);
+			sbtype = get_mod_type(modName);
 			if (sbtype < 0)
 				sbtype = 0;
 			switch (sbtype) {

@@ -26,12 +26,10 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
-gboolean backend_load_properties(void);
-gboolean backend_save_properties(gboolean shutdown);
-gboolean backend_create_properties_from_setup(void);
-gboolean backend_create_properties(void);
+int backend_load_properties(void);
+int backend_save_properties(int shutdown);
+int backend_create_properties_from_setup(void);
+int backend_create_properties(void);
 
 #ifdef __cplusplus
 }

@@ -6,13 +6,13 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=31
-1=8
-2=413
-3=33
-4=30
+0=1424
+1=159
+2=39
+3=1
+4=1
 5=1
-6=1242
+6=1
 7=58
 8=4
 9=31
@@ -27,7 +27,7 @@ ShowLocals=true
 
 [filemarkers]
 0=
-1=
+1=731,
 2=
 3=
 4=
@@ -46,32 +46,33 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gui/gtkhtml_display.h
-1=/home/terry/Projects/gnomesword1/ChangeLog
-2=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-4=/home/terry/Projects/gnomesword1/src/gnome/main_window.c
-5=/home/terry/Projects/gnomesword1/src/gui/main_window.h
+0=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_main.c
+1=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_viewer.c
+2=/home/terry/Projects/gnomesword1/src/gui/shortcutbar_viewer.h
+3=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_search.c
+4=/home/terry/Projects/gnomesword1/src/gui/shortcutbar_search.h
+5=/home/terry/Projects/gnomesword1/src/backend/search_.h
+6=/home/terry/Projects/gnomesword1/src/backend/search_.cpp
 
 [replace_text]
-0=p->ec->key
-1=p->ec
-2=sw_mgr->results
-3=sw_mgr->search
-4=mgr_search
-5=mgr_results
-6=html_widget
-7=comm_display
+0=get_mod_type
+1=p->ec->key
+2=p->ec
+3=sw_mgr->results
+4=sw_mgr->search
+5=mgr_search
+6=mgr_results
+7=html_widget
 
 [find_text]
-0=str
-1=p->ec->filename
-2=p->key
-3=gui_save_note
-4=text_str
-5=set_percomm_key
-6=settings.currentverse
-7=keybuf
+0=count
+1=tgs
+2=htmlshow
+3=verse_list_link_clicked
+4=on_vllink_clicked
+5=sbfiles
+6=groupnum7
+7=get_sb_type_from_modname
 
 [executer args]
 0=newconfigs

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * dictlex_.h - SHORT DESCRIPTION
+ * dictlex_.h - support for Sword dict/lex modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -32,12 +32,8 @@ int backend_set_dictlex_module(char * mod_name);
 int backend_set_dictlex_key(char * key);
 char *backend_get_dictlex_key(int direction);
 char *backend_get_dictlex_text(char * mod_name, char * key);
-	
-void backend_new_dictlex_display(GtkWidget *html, int mod_num);
 void backend_setup_dictlex(void);
-void backend_shutdown_dictlex(void);
-//void backend_display_dictlex(int mod_num, char *key);
-void backend_dictentryTextChangedDL(char *modname, char *mytext);	
+void backend_shutdown_dictlex(void);	
 	
 #ifdef __cplusplus
 }

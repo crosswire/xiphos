@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * dictlex_.cpp - support for Sword commentary modules
+ * dictlex_.cpp - support for Sword dict/lex modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -26,8 +26,6 @@
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swmodule.h>
-
-#include "main/settings.h"
 
 #include "backend/sword.h"
 #include "backend/dictlex_.h"
@@ -225,20 +223,7 @@ char *backend_get_dictlex_text(char * mod_name, char * key)
  
 void backend_setup_dictlex(void)
 {
-	ModMap::iterator it;	//-- iteratior
-	
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
-	for (it = mgr->Modules.begin();
-	     it != mgr->Modules.end(); it++) {
-		if (!strcmp
-		    ((*it).second->Type(), "Lexicons / Dictionaries")) {
-			mod = (*it).second;
-			if(!strcmp((*it).second->Name(),"Thayer"))
-				settings.havethayer = true;
-			if(!strcmp((*it).second->Name(),"BDB"))
-				settings.havebdb = true;
-		}
-	}
 }
 
 /******************************************************************************
