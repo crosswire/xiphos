@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-04-29 14:51-0400\n"
+"POT-Creation-Date: 2003-04-29 16:11-0400\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -177,7 +177,8 @@ msgid "Open Module"
 msgstr "Zobrazi» modul"
 
 #: src/gnome/bibletext_menu.c:1185 src/gnome/commentary_menu.c:1234
-#: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:528
+#: src/gnome/editor_menu.c:1057 src/gnome/html.c:928
+#: src/gnome/toolbar_edit.c:528
 msgid "Print"
 msgstr "Tlaèi»"
 
@@ -564,7 +565,7 @@ msgstr "UloŸi»"
 msgid "Save AS"
 msgstr "UloŸi» ako"
 
-#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:764
+#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:763
 msgid "_Edit"
 msgstr "_Upravi»"
 
@@ -760,6 +761,11 @@ msgstr "_História/_Vymaza»"
 #, fuzzy
 msgid "Unlock "
 msgstr "VloŸi» otvárací kµúè"
+
+#: src/gnome/html.c:949
+#, fuzzy
+msgid "GnomeSword Print Preview"
+msgstr "Interlineárna stránka GnomeSWORDu"
 
 #: src/gnome/interlinear.c:1181
 msgid "Detach/Attach"
@@ -978,52 +984,52 @@ msgstr "O GnomeSword"
 msgid "_File"
 msgstr "Súbor"
 
-#: src/gnome/main_menu.c:771
+#: src/gnome/main_menu.c:769
 #, fuzzy
 msgid "H_istory"
 msgstr "História"
 
-#: src/gnome/main_menu.c:778
+#: src/gnome/main_menu.c:775
 #, fuzzy
 msgid "_View"
 msgstr "Prehliadaè"
 
-#: src/gnome/main_menu.c:785
+#: src/gnome/main_menu.c:781
 msgid "_Help"
 msgstr ""
 
-#: src/gnome/main_menu.c:816
+#: src/gnome/main_menu.c:811
 msgid "_File/Open Bibletext Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:821
+#: src/gnome/main_menu.c:816
 #, fuzzy
 msgid "_File/Open Commentary Dialog/"
 msgstr "Zobrazi» u¹ká komentárov"
 
-#: src/gnome/main_menu.c:826
+#: src/gnome/main_menu.c:821
 #, fuzzy
 msgid "_File/Open Dictionary Dialog/"
 msgstr "Prida» Slovník"
 
-#: src/gnome/main_menu.c:831
+#: src/gnome/main_menu.c:826
 #, fuzzy
 msgid "_File/Open Book Dialog/"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome/main_menu.c:845
+#: src/gnome/main_menu.c:841
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr "_Pomocník/O Sword moduloch/Biblické texty/"
 
-#: src/gnome/main_menu.c:849
+#: src/gnome/main_menu.c:846
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr "_Pomocník/O Sword moduloch/Komentáre/"
 
-#: src/gnome/main_menu.c:853
+#: src/gnome/main_menu.c:851
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr "_Pomocník/O Sword moduloch/Slovníky-lexikóny/"
 
-#: src/gnome/main_menu.c:857
+#: src/gnome/main_menu.c:855
 msgid "_Help/About Sword Modules/Books/"
 msgstr "_Pomocník/O Sword moduloch/Knihy/"
 
@@ -2352,10 +2358,6 @@ msgstr "Zväè¹í odsadenie odstavcov"
 #, fuzzy
 #~ msgid "GnomeSword - Find"
 #~ msgstr "GnomeSword - nastavenia"
-
-#, fuzzy
-#~ msgid "GnomeSword - Interlinear"
-#~ msgstr "Interlineárna stránka GnomeSWORDu"
 
 #~ msgid "Use Formatting"
 #~ msgstr "PouŸi» formátovanie"
