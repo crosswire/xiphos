@@ -35,7 +35,7 @@
 #include <string.h>
 
 /*
-   backend
+ * backend
  */
 #include "bibletext_.h"
 
@@ -52,6 +52,7 @@ struct _backend_text {
 /******************************************************************************
  * globals to this file only 
  */
+
 static SWMgr *mgr;
 static GList *be_text_list;
 
@@ -70,6 +71,7 @@ static GList *be_text_list;
  * Return value
  *   void
  */
+ 
 void backend_nav_text_module(int modnum, int direction)
 {
 	BE_TEXT *t;
@@ -85,7 +87,7 @@ void backend_nav_text_module(int modnum, int direction)
 		break;
 	}
 
-	t->mod->Error();	//-- clear any errors
+	t->mod->Error(); /* clear any errors */
 	t->mod->Display();
 }
 
@@ -104,6 +106,7 @@ void backend_nav_text_module(int modnum, int direction)
  * Return value
  *   void
  */
+
 void backend_new_text_display(GtkWidget * html, char *modname,
 			      SETTINGS * s)
 {
@@ -137,9 +140,10 @@ void backend_new_text_display(GtkWidget * html, char *modname,
  * Return value
  *   void
  */
+
 void backend_setup_text(SETTINGS * s)
 {
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	gint count = 0;
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
@@ -171,11 +175,12 @@ void backend_setup_text(SETTINGS * s)
  * Return value
  *   void
  */
+
 void backend_shutdown_text(void)
 {
 	delete mgr;
 	/*
-	   free the backend stuff
+	 * free the backend stuff
 	 */
 	be_text_list = g_list_first(be_text_list);
 	while (be_text_list != NULL) {
@@ -203,6 +208,7 @@ void backend_shutdown_text(void)
  * Return value
  *   void
  */
+
 void backend_display_text(int modnum, char *key)
 {
 	BE_TEXT *t;
@@ -227,10 +233,11 @@ void backend_display_text(int modnum, char *key)
  * Return value
  *   void
  */
+
 void backend_set_text_global_option(char * option, char * yesno)
 {
 	/* 
-	   turn option on or off 
+	 * turn option on or off 
 	 */
 	mgr->setGlobalOption(option, yesno);
 }
@@ -250,6 +257,7 @@ void backend_set_text_global_option(char * option, char * yesno)
  * Return value
  *   void
  */
+
 void backend_set_module_unlocked(char *mod_name, char *key)
 {	/* this does not work */
 	g_warning("module is %s\nkey = %s",mod_name,key);
@@ -271,9 +279,11 @@ void backend_set_module_unlocked(char *mod_name, char *key)
  * Return value
  *   gboolean
  */
+
 gboolean backend_check_for_global_option(int mod_num, char *option)
 {		
 	BE_TEXT *t = (BE_TEXT *) g_list_nth_data(be_text_list, mod_num);
 	return t->mod->getConfig().has("GlobalOptionFilter",option);
 }
+
 /******   end of file   ******/

@@ -167,6 +167,12 @@ libgui_a_SOURCES = \
     create_shortcutbar_viewer.h \
     cipher_key_dialog.c \
     cipher_key_dialog.h \
+    _editor.c \
+    _editor.h \
+    editor_menu.c \
+    editor_menu.h \
+    link_dialog.c \
+    link_dialog.h \
     splash.c \
     splash.h
 
@@ -182,6 +188,7 @@ am_libgui_a_OBJECTS = _bibletext.$(OBJEXT) about_gnomesword.$(OBJEXT) \
 	about_modules.$(OBJEXT) about_sword.$(OBJEXT) \
 	create_shortcutbar_search.$(OBJEXT) \
 	create_shortcutbar_viewer.$(OBJEXT) cipher_key_dialog.$(OBJEXT) \
+	_editor.$(OBJEXT) editor_menu.$(OBJEXT) link_dialog.$(OBJEXT) \
 	splash.$(OBJEXT)
 libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
 
@@ -191,12 +198,13 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
-@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/_bibletext.Po \
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/_bibletext.Po $(DEPDIR)/_editor.Po \
 @AMDEP_TRUE@	$(DEPDIR)/about_gnomesword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/about_modules.Po $(DEPDIR)/about_sword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/cipher_key_dialog.Po \
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_viewer.Po \
+@AMDEP_TRUE@	$(DEPDIR)/editor_menu.Po $(DEPDIR)/link_dialog.Po \
 @AMDEP_TRUE@	$(DEPDIR)/splash.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -247,12 +255,15 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/_bibletext.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/_editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_modules.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_sword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/cipher_key_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/create_shortcutbar_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/create_shortcutbar_viewer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/editor_menu.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/link_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/splash.Po@am__quote@
 
 distclean-depend:

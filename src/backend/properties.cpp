@@ -231,6 +231,10 @@ gboolean backend_load_properties(SETTINGS * s)
 	    atoi(settingsInfo["User Options"]["CommTabs"].c_str());
 	s->dict_tabs =
 	    atoi(settingsInfo["User Options"]["DictTabs"].c_str());
+	s->book_tabs =
+	    atoi(settingsInfo["User Options"]["BookTabs"].c_str());
+	s->percomm_tabs =
+	    atoi(settingsInfo["User Options"]["PercommTabs"].c_str());
 	s->notefollow =
 	    atoi(settingsInfo["User Options"]["NoteScroll"].c_str());
 	s->inViewer =
@@ -417,6 +421,8 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 		    isON(s->comm_tabs);
 		settingsInfo["User Options"]["DictTabs"] =
 		    isON(s->dict_tabs);
+		settingsInfo["User Options"]["BookTabs"] = isON(s->book_tabs);
+	        settingsInfo["User Options"]["PercommTabs"] = isON(s->percomm_tabs);
 		settingsInfo["User Options"]["InViewer"] =
 		    isON(s->inViewer);
 		settingsInfo["User Options"]["InDictPane"] =

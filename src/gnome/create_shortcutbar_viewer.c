@@ -26,6 +26,7 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 #include <gal/e-paned/e-hpaned.h>
 
 #include "gs_gnomesword.h"
@@ -60,7 +61,7 @@ on_vllink_clicked(GtkHTML * html, const gchar * url, SETTINGS * s)
 static void
 on_srlink_clicked(GtkHTML * html, const gchar * url, SETTINGS * s)
 {
-	srlink_clicked(html, url, s);	
+	srlink_clicked(GTK_WIDGET(html), url, s);	
 }
 
 /*** save verse list as bookmarks ***/

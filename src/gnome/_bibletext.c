@@ -26,24 +26,25 @@
 #include <gnome.h>
 
 /*
-   frontend
+ * frontend
  */
 #include "_bibletext.h"
+#include "cipher_key_dialog.h"
 /*
-   main
+ * main
  */
 #include "bibletext.h"
 
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_viewtext_dlg.h"
-#include "cipher_key_dialog.h"
 
 
 
 /******************************************************************************
  * externs
  */
+ 
 extern SETTINGS *settings;
 extern gboolean isrunningVT;
 extern GList *options;
@@ -57,10 +58,39 @@ extern gboolean display_change;
 
 /******************************************************************************
  * Name
+ *  gui_set_text_frame_label
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void gui_set_text_frame_label(void)	
+ *
+ * Description
+ *   sets text frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_text_frame_label(void)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings->text_tabs)
+		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
+	
+}
+
+/******************************************************************************
+ * Name
  *  on_notebook_text_switch_page
  *
  * Synopsis
- *   #include "bibletext.h"
+ *   #include "_bibletext.h"
  *
  *   void on_notebook_text_switch_page(GtkNotebook * notebook,
  *				  GtkNotebookPage * page,
@@ -72,6 +102,7 @@ extern gboolean display_change;
  * Return value
  *   void
  */
+
 void on_notebook_text_switch_page(GtkNotebook * notebook,
 				  GtkNotebookPage * page,
 				  gint page_num, GList * tl)
@@ -79,30 +110,24 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 	TEXT_DATA *t;
 	gchar title[200];
 	/*
-	   get data structure for new module 
+	 * get data structure for new module 
 	 */
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
 	/*
-	   do work that's non gui
+	 * do work that's non gui
 	 */
 	text_page_changed(page_num, t);
 	/*
-	   set program title to GnomeSWORD + current text module name 
+	 * set program title to GnomeSWORD + current text module name 
 	 */
 	sprintf(title, "GnomeSWORD - %s", t->mod_description);
 	gtk_window_set_title(GTK_WINDOW(settings->app), title);
 	/*
-	   keep showtabs menu item current 
+	 *  keep showtabs menu item current 
 	 */
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings->text_tabs;
-	/*
-	   set frame label to NULL if tabs are showing
-	   else set frame label to module name
-	 */
-	if (settings->text_tabs)
-		gtk_frame_set_label(GTK_FRAME(t->frame), NULL);
-	else
-		gtk_frame_set_label(GTK_FRAME(t->frame), t->mod_name);
+	
+	gui_set_text_frame_label();	
 }
 
 /******************************************************************************
@@ -110,7 +135,7 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
  *  on_copy_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *   void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)	
  *
@@ -120,8 +145,8 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
  * Return value
  *   void
  */
-static
-void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+
+static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	copyGS_HTML(t->html);
 }
@@ -141,8 +166,8 @@ void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  * Return value
  *   
  */
-static
-void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+
+static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	//searchGS_FIND_DLG(c, FALSE, NULL);
 }
@@ -162,8 +187,8 @@ void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  * Return value
  *   void
  */
-static
-void on_lookup_selection_activate(GtkMenuItem * menuitem,
+
+static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 				  gchar * dict_mod_description)
 {
 	gchar *dict_key, *dict_mod;
@@ -172,7 +197,11 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	    get_module_name_from_description(dict_mod_description);
 	dict_key = get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key) {
-		display_dictlex_in_viewer(dict_mod, dict_key, settings);
+		if (settings->inViewer)
+			display_dictlex_in_viewer(dict_mod, dict_key,
+						  settings);
+		if (settings->inDictpane)
+			change_module_and_key(dict_mod, dict_key);
 		g_free(dict_key);
 		g_free(dict_mod);
 	}
@@ -183,7 +212,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
  *  on_same_lookup_selection_activate				       
  *
  * Synopsis
- *  #include "gs_bibletext.h"
+ *  #include "_bibletext.h"
  *
  *  void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				       TEXT_DATA * t) 	
@@ -194,14 +223,20 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
-static
-void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
+
+static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				       TEXT_DATA * t)
 {
-	gchar *dict_key = get_word_or_selection(t->html, FALSE);	/* gs_html.c */
+	gchar *dict_key = get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
-		display_dictlex_in_viewer(settings->DictWindowModule,
-					  dict_key, settings);
+		if (settings->inViewer)
+			display_dictlex_in_viewer(settings->
+						  DictWindowModule,
+						  dict_key, settings);
+		if (settings->inDictpane)
+			change_module_and_key(settings->
+					      DictWindowModule,
+					      dict_key);
 		g_free(dict_key);
 	}
 }
@@ -211,7 +246,7 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
  *  on_view_mod_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *   void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
@@ -221,6 +256,7 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
+
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
@@ -236,7 +272,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *  on_text_showtabs_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *  void on_text_showtabs_activate(GtkMenuItem * menuitem,SETTINGS * s)	
  *
@@ -246,12 +282,14 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
+
 static void on_text_showtabs_activate(GtkMenuItem * menuitem,
 				      SETTINGS * s)
 {
 	s->text_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_text),
-				   s->text_tabs);
+				   s->text_tabs); 
+	gui_set_text_frame_label();
 }
 
 /******************************************************************************
@@ -259,7 +297,7 @@ static void on_text_showtabs_activate(GtkMenuItem * menuitem,
  *  on_view_new_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *  void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)	
  *
@@ -269,6 +307,7 @@ static void on_text_showtabs_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
+
 static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	static GtkWidget *dlg;
@@ -293,7 +332,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
  *  on_unlock_key_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *  void on_unlock_key_activate(GtkMenuItem * menuitem,TEXT_DATA * t) 	
  *
@@ -303,6 +342,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
  * Return value
  *   void
  */
+
 static void on_unlock_key_activate(GtkMenuItem * menuitem,
 				   TEXT_DATA * t)
 {
@@ -317,7 +357,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem,
  *  gui_create_pm_text
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *   GtkWidget *gui_create_pm_text(TEXT_DATA * t)
  *
@@ -471,7 +511,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	view_text_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
 	/*
-	   if module has cipher key include this item
+	 * if module has cipher key include this item
 	 */
 	if (t->is_locked) {
 		GtkWidget *add_module_key;
@@ -504,7 +544,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   (on_unlock_key_activate), t);
 	}
 
-	tmp = mod_lists->dict_descriptions;	
+	tmp = mod_lists->dict_descriptions;
 	while (tmp != NULL) {
 		item4 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -546,7 +586,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	g_list_free(tmp);
 
 	/*
-	   for using the current dictionary for lookup 
+	 * for using the current dictionary for lookup 
 	 */
 	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   GTK_SIGNAL_FUNC
@@ -570,7 +610,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
  *  on_button_release_event
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
 			    GdkEventButton * event, TEXT_DATA * t)	
@@ -581,6 +621,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
  * Return value
  *   gboolean
  */
+
 static gboolean on_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					TEXT_DATA * t)
@@ -631,7 +672,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  *  on_t_btn_toggled
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *
  *  void on_t_btn_toggled(GtkToggleButton *togglebutton, gchar *option)	
  *
@@ -641,6 +682,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  * Return value
  *   void
  */
+
 static void on_t_btn_toggled(GtkToggleButton * togglebutton,
 			     gchar * option)
 {
@@ -714,7 +756,7 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
  *  gui_create_text_pane
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *   void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
  *  	
  *
@@ -724,6 +766,7 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
  * Return value
  *   void
  */
+
 void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 {
 	GtkWidget *vbox;
@@ -764,7 +807,6 @@ void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
 	gtk_container_add(GTK_CONTAINER(frame), toolbar);
-	//gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, TRUE, 0);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
 				      GTK_RELIEF_NONE);
 

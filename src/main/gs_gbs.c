@@ -44,35 +44,41 @@
 #include "gs_html.h"
 #include "gs_find_dlg.h"
 #include "cipher_key_dialog.h"
+#include "gs_bookmarks.h"
 
-
-/***  externs  ***/
+/******************************************************************************
+ *  externs  
+ */
 extern GdkPixmap *pixmap1;
 extern GdkPixmap *pixmap2;
 extern GdkPixmap *pixmap3;
 extern GdkBitmap *mask1;
 extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
-extern GList *sbbookmods, *sbdictmods;
-extern SETTINGS *settings;
 extern gboolean in_url;
 
-/***  globals  ***/
+/******************************************************************************
+ * globals 
+ */
+/*
+   list of gbs data structures
+ */
 GList *gbs_list;
-gboolean show_tabs_gbs;
+/*
+   gbs (books) data structure
+   for current book
+ */
+GBS_DATA *cur_g;
 
+gboolean show_tabs_gbs;
 /***  start code  ***/
 
 
 void gui_set_book_page_and_key(gint page_num, gchar * key)
 {
-	//GBS_DATA * g;
-
-	//g = (GBS_DATA *) g_list_nth_data(gbs_list, page_num);
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
 			      page_num);
 	backend_display_book(page_num, key);
-
 }
 
 static
@@ -241,10 +247,13 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 				gint page_num, GList * data_gbs)
 {
 	GBS_DATA *g, *g_old;
+	gchar *key;
+	
 	g_old =
 	    (GBS_DATA *) g_list_nth_data(data_gbs,
 					 settings->gbsLastPage);
 	g = (GBS_DATA *) g_list_nth_data(data_gbs, page_num);
+	cur_g = g;
 	//-- change tab label to current book name
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
 					(settings->workbook_lower),
@@ -258,7 +267,16 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 					 (GTK_NOTEBOOK
 					  (settings->workbook_lower),
 					  1), g->bookName);
-
+	/*
+	   get the book key and store in settings->book_key
+	   for adding bookmarks
+	 */
+	key = backend_get_book_key(g->booknum);
+	if(key) {
+		sprintf(settings->book_key, "%s", key);
+		g_free(key);
+	}
+	
 	sprintf(settings->BookWindowModule, "%s", g->bookName);
 
 	if (settings->finddialog) {
@@ -274,6 +292,16 @@ static
 void on_copy_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 {
 	copyGS_HTML(gbs->html);
+}
+
+static
+void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
+{
+	gchar *key = backend_get_book_key(gbs->booknum);
+	if(key){
+		add_bookmark_to_tree(NULL, gbs->bookName, key);
+		g_free(key);
+	}
 }
 
 static
@@ -355,6 +383,9 @@ on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event, GBS_DATA * g)
 {
 	gchar *key;
+	
+	settings->whichwindow = BOOK_WINDOW;
+	
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -399,6 +430,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 	GtkAccelGroup *pmGBS_accels;
 	GtkWidget *copy;
 	GtkWidget *separator;
+	GtkWidget *bookmark;
 	GtkWidget *lookup_word;
 	GtkWidget *lookup_word_menu;
 	GtkAccelGroup *lookup_word_menu_accels;
@@ -429,6 +461,13 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(copy);
 	gtk_container_add(GTK_CONTAINER(pmGBS), copy);
+	
+	bookmark = gtk_menu_item_new_with_label(_("Bookmark"));
+	gtk_widget_ref(bookmark);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS), "bookmark", bookmark,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(bookmark);
+	gtk_container_add(GTK_CONTAINER(pmGBS), bookmark);
 
 	find = gtk_menu_item_new_with_label(_("Find"));
 	gtk_widget_ref(find);
@@ -632,6 +671,8 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 
 	gtk_signal_connect(GTK_OBJECT(copy), "activate",
 			   GTK_SIGNAL_FUNC(on_copy_activate), gbs);
+	gtk_signal_connect(GTK_OBJECT(bookmark), "activate",
+			   GTK_SIGNAL_FUNC(on_bookmark_activate), gbs);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
 			   GTK_SIGNAL_FUNC(on_find_activate), gbs);
 	gtk_signal_connect(GTK_OBJECT(gbs->showtabs), "activate",

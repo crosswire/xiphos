@@ -38,7 +38,7 @@
 #include <gal/widgets/e-unicode.h>
 
 
-#include "search.h"
+#include "search_.h"
 #include "gs_shortcutbar.h"
 #include "gs_gnomesword.h"
 #include "support.h"
@@ -80,7 +80,7 @@ gint
 	groupnum5 = -1, 
 	groupnum6 = -1, 
 	groupnum7 = -1, 
-	groupnum8 = -1;	/* GBS books tree group */
+	groupnum8 = -1;	
 
 
 static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
@@ -105,6 +105,17 @@ static void on_item_removed(EShortcutModel * shortcut_model,
 static void on_add_all_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 static void remove_all_items(gint group_num);
+
+
+
+void search_module(SETTINGS * s, SEARCH_OPT * so)
+{
+	if (sblist)
+		g_list_free(sblist);
+	sblist = NULL;
+	sblist = backend_do_search(s, (gpointer*)so);
+	fill_search_results_clist(sblist, so, s);
+}
 
 gboolean display_dictlex_in_viewer(char * modName, char * key, 
 						SETTINGS * s)
@@ -1147,11 +1158,13 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 
 void
-srlink_clicked(GtkHTML * html, const gchar * url, SETTINGS * s)
+srlink_clicked(GtkWidget *html_widget, const gchar * url, SETTINGS * s)
 {
 	gchar *buf, *modbuf = NULL, newmod[80], newref[80];
 	gint i = 0, havemod = 0;
-
+	GtkHTML *html;
+	
+	html = GTK_HTML(html_widget);
 	if (!strncmp(url, "version=", 7)
 	    || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;

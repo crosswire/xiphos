@@ -35,6 +35,7 @@
 
 extern gboolean havebible;
 
+GtkHTMLStreamStatus status1;
 GtkHTMLStream *htmlstream;
 
 void update_interlinear_page(SETTINGS * s)
@@ -46,8 +47,6 @@ void update_interlinear_page(SETTINGS * s)
 	
 	if (havebible) {
 		/* setup gtkhtml widget */
-		//GtkHTMLStream *htmlstream;
-		GtkHTMLStreamStatus status1;
 		GtkHTML *html = GTK_HTML(s->htmlInterlinear);
 		was_editable = gtk_html_get_editable(html);
 		if (was_editable)
@@ -302,7 +301,6 @@ void update_interlinear_page_detached(SETTINGS * s)
 	gint utf8len;
 
 	//-- setup gtkhtml widget
-	GtkHTMLStreamStatus status1;
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)

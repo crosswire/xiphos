@@ -204,29 +204,6 @@ void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *notebook;
-	gint modNum;
-
-	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings->app, "nbTextMods");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page  
-}
-
-/*
-//----------------------------------------------------------------------------------------------
-void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	if (GTK_TOGGLE_BUTTON(lookup_widget(settings->app, "btnEditNote"))->
-	    active) {
-		text = lookup_widget(settings->app, "textComments");
-		gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-	}
-}
-*/
-//----------------------------------------------------------------------------------------------
 void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
@@ -297,22 +274,11 @@ void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 	else
 		gtk_widget_hide(lookup_widget
 				(settings->app, (gchar *) user_data));
-	if (!strcmp((gchar *) user_data, "nbTextMods"))
-		settings->text_tabs =
-		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 	if (!strcmp((gchar *) user_data, "notebook4"))
 		settings->dict_tabs =
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
 
-/*******************************************************************************
- *
- *******************************************************************************/
-void on_change_module_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
-{
-	backend_change_percom_module((gchar *) user_data);
-}
 
 /*******************************************************************************
  *

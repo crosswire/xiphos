@@ -41,8 +41,6 @@ typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
 #define RUN_DIALOG(name,title) run_dialog ((GnomeDialog ***)&ecd-> name ## _dialog, ecd->html, (DialogCtor) gs_editor_ ## name ## _dialog_new, title)
 
 
-//typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
-
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 struct _GSHTMLEditorControlData {
 	GtkHTML *html;
@@ -73,13 +71,35 @@ struct _GSHTMLEditorControlData {
 	guint releaseId;
 
 	/* toolbars */
-	 GtkWidget * toolbar_commands, *toolbar_style;
-	/* toolbars buttons */
+	GtkWidget 
+		*toolbar_commands, 
+		*handlebox_toolbar,
+		*toolbar_style;
+	GtkWidget *frame_toolbar;
+	/* menu items */
 	 GtkWidget
 	    *editnote,
 	    *file,
 	    *edit2,
-	    *link,
+	    *link;
+	/* 
+	   toolbar_commands buttons 
+	 */	
+	GtkWidget *btn_open;
+	GtkWidget *btn_save;
+	GtkWidget *btn_delete;
+	GtkWidget *btn_print;
+	GtkWidget *btn_cut;
+	GtkWidget *btn_copy;
+	GtkWidget *btn_paste;
+	GtkWidget *btn_undo;
+	GtkWidget *btn_Find;
+	GtkWidget *btn_replace;
+	GtkWidget *btn_spell;
+	/* 
+	   toolbar_style buttons 
+	 */    
+	GtkWidget
 	    * tt_button,
 	    *bold_button,
 	    *italic_button,
@@ -87,8 +107,9 @@ struct _GSHTMLEditorControlData {
 	    *strikeout_button,
 	    *left_align_button,
 	    *center_button,
-	    *right_align_button, *unindent_button, *indent_button;
-
+	    *right_align_button, 
+	    *unindent_button, 
+	    *indent_button;
 	GtkWidget *bold;
 	GtkWidget *italic;
 	GtkWidget *underline;
@@ -109,10 +130,12 @@ struct _GSHTMLEditorControlData {
 	gboolean changed;
 	gboolean personal_comments;
 	gboolean gbs; /** gen book support **/
+	gboolean studypad; 
 	gchar filename[256];
 
 };
 
+void update_statusbar(GSHTMLEditorControlData * ecd);
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
 
@@ -123,7 +146,7 @@ void search_next(GSHTMLEditorControlData *ecd);
 GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			 SETTINGS * s, GSHTMLEditorControlData * necd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
-void savenoteEDITOR(GtkWidget * html_widget);
+void editor_save_note(GtkWidget * html_widget);
 void savebookEDITOR(GtkWidget * html_widget);
 gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
 gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
@@ -131,7 +154,8 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
 
 GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s);
-GtkWidget *percom_control(GtkWidget * notebook, SETTINGS * s);
+GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, gchar *mod_name, 
+						gint page_num);
 GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s);
 /*** link dialog create and call back ***/
 void set_link_to_module(gchar * linkref, gchar * linkmod,

@@ -29,7 +29,7 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-        void backend_nav_commentary_COMM ( gint modnum,
+        char* backend_nav_commentary_COMM ( gint modnum,
                                            gint direction );
         void backend_newDisplayCOMM ( GtkWidget * html, char *modname,
                                       SETTINGS * s );
