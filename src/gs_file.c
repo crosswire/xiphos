@@ -54,11 +54,11 @@ char
 	*shortcutbarDir,		/* store dir name for shortcutbar files */
 	*fnquickmarks,
 	*fnconfigure;		/* store filename for configure file - options */
-FILE 	*configfile,		/*  file pointer to configuration file - options */
-	*flbookmarks;
-gint 	ibookmarks;		/* number of bookmark menu items */
-gchar 	remembersubtree[256],	/* we need to use this when add to bookmarks */
- 	rememberlastitem[255];	/* we need to use this when add to bookmarks */
+FILE 	*configfile;		/*  file pointer to configuration file - options */
+	//*flbookmarks;
+gint 	iquickmarks;		/* number of quickmark menu items */
+gchar 	remembersubtree[256],	/* we need to use this when add to quickmarks */
+ 	rememberlastitem[255];	/* we need to use this when add to quickmarks */
 
 LISTITEM mylistitem;
 LISTITEM *p_mylistitem;
@@ -213,11 +213,11 @@ gint setDiretory(void)
 /*****************************************************************************
  * load bookmarks program start
  *****************************************************************************/
-void loadbookmarks_programstart(void)
+void loadquickmarks_programstart(void)
 {
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
-	int flbookmarksnew;
+	int flquickmarksnew;
 	gchar subtreelabel[255];
 	gint i = 0;
 	long filesize;
@@ -225,71 +225,67 @@ void loadbookmarks_programstart(void)
 
 	stat(fnquickmarks, &stat_p);
 	filesize = stat_p.st_size;
-	ibookmarks = (filesize / (sizeof(mylist)));
+	iquickmarks = (filesize / (sizeof(mylist)));
 	p_mylist = &mylist;
         /* try to open file */
-	if ((flbookmarksnew = open(fnquickmarks, O_RDONLY)) == -1) {	
+	if ((flquickmarksnew = open(fnquickmarks, O_RDONLY)) == -1) {	
 	        /* create bookmark file if we cannot open the file */
 		createFiles();	
 	}
-	flbookmarksnew = open(fnquickmarks, O_RDONLY);
-	while (i < ibookmarks) {
-		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));	
+	flquickmarksnew = open(fnquickmarks, O_RDONLY);
+	while (i < iquickmarks) {
+		read(flquickmarksnew, (char *) &mylist, sizeof(mylist));	
 		sprintf(subtreelabel, "%s%s", p_mylist->menu,
 				p_mylist->preitem);	/* create subitem label */
 		additemtosubtree(MainFrm, subtreelabel, p_mylist->item);  /* add menu item to subtree */
 		++i;
 	}
-	if(ibookmarks < 1)
+	if(iquickmarks < 1)
 		sprintf(rememberlastitem, "%s","<Separator>");
 		
 	else
 		sprintf(rememberlastitem, "%s", p_mylist->item);
-	close(flbookmarksnew);
+	close(flquickmarksnew);
 }
 
 /*****************************************************************************
  * load bookmarks after menu separator
  *****************************************************************************/
-void loadbookmarks_afterSeparator(void)
+void loadquickmarks_afterSeparator(void)
 {
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
-	int flbookmarksnew;
+	int flquickmarksnew;
 	gchar subtreelabel[255];
 	gint i = 0;
 
 	p_mylist = &mylist;
-	flbookmarksnew = open(fnquickmarks, O_RDONLY);
-	while (i < ibookmarks) {
-		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));
+	flquickmarksnew = open(fnquickmarks, O_RDONLY);
+	while (i < iquickmarks) {
+		read(flquickmarksnew, (char *) &mylist, sizeof(mylist));
 		sprintf(subtreelabel, "%s%s", p_mylist->menu,
 				p_mylist->preitem);	/* create subitem label */
 			additemtosubtree(MainFrm, subtreelabel, p_mylist->item);	/*- add menu item to subtree */
 		++i;
 	}
-	if(ibookmarks < 1)
+	if(iquickmarks < 1)
 		sprintf(rememberlastitem, "%s", "<Separator>");
 	else
 		sprintf(rememberlastitem, "%s", p_mylist->item);
-	//ibookmarks = i+1;
-	close(flbookmarksnew);
+	//iquickmarks = i+1;
+	close(flquickmarksnew);
 }
 
 void clearquickmarks(void)
 {				
 	int flquickmarks;	/* bookmark file handle */
-	
-	g_print("we got to clearquickmarks()");
+		
 	remove(fnquickmarks);
 	flquickmarks = open(fnquickmarks, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);
-
-	//remove(fnquickmarks);
-	//flquickmarks = open(fnquickmarks, O_WRONLY | O_APPEND);	/* open file to append one record  */
-	close(flquickmarks);	/* close the file we are done for now */
-	//loadbookmarks_afterSeparator();
-	
+	close(flquickmarks);	/* close the file we are done for now */	
 }
+
+
 /*****************************************************************************
  * save a quickkmark that has been added to the quickkmark menu
  * by the add quickkmark item
@@ -298,15 +294,16 @@ void savequickmark(gchar * item)
 {				
 	LISTITEM mylist;	/* structure for bookmark item */
 	LISTITEM *p_mylist;	/* pointer to structure */
-	int flbookmarksnew;	/* bookmark file handle */
+	int flquickmarksnew;	/* bookmark file handle */
 
 	p_mylist = &mylist;	/* set pointer to structure */
-	flbookmarksnew = open(fnquickmarks, O_WRONLY | O_APPEND);	/* open file to append one record  */
+	flquickmarksnew = open(fnquickmarks, O_WRONLY | O_APPEND);	/* open file to append one record  */
 	strcpy(p_mylist->item, item);	/* bookmark label (verse) */
 	strcpy(p_mylist->preitem, rememberlastitem);	/* item in menu to follow (you have to tell gnome where to insert the item) */
-	strcpy(p_mylist->menu, "_Quickmarks/");	/* item does belong to the bookmark menu */
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));	/* write the record to the bookmark file */
-	close(flbookmarksnew);	/* close the file we are done for now */
+	strcpy(p_mylist->menu, "_Quickmarks/");	/* item belongs to the quickmark menu */
+	write(flquickmarksnew, (char *) &mylist, sizeof(mylist));	/* write the record to the bookmark file */
+	close(flquickmarksnew);	/* close the file we are done for now */
+	sprintf(rememberlastitem,"%s",item);
 }
 
 /*****************************************************************************
@@ -333,7 +330,7 @@ void createFiles(void)
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	close(flbookmarksnew);
-	ibookmarks = 2;
+	iquickmarks = 2;
 }
 
 /*****************************************************************************
