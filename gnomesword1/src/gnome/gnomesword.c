@@ -85,6 +85,7 @@ void init_gnomesword(void)
 	/*
 	 *  interlinear stuff 
 	 */
+	gui_check_interlinear_modules();
 	gui_set_interlinear_options_at_start();
 	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
 	

@@ -1,6 +1,7 @@
 2002-08-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed one module and settings set to first module crash
+	* fixed crash when interlinear module was not available
 	
 	
 
