@@ -67,7 +67,7 @@ gboolean
 gchar 
 	*current_filename= NULL;	/* filename for open file in study pad window */
 gchar 
-	current_verse[80]="Romans 8:28",	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
+	current_verse[80]=N_("Romans 8:28"),	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 	bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
 gint 
 	dictpages,
@@ -122,7 +122,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		commpage,
 		dictpage;
 	
-	g_print("Initiating GnomeSword\n");
+	g_print("%s\n", "Initiating GnomeSword\n");
 	/* set the main window size */
 	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 	/* setup shortcut bar */
@@ -162,17 +162,17 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
 	/* Add options to Options Menu and get toggle item widget */
-	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments",
+	autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
 				(GtkMenuCallback)on_auto_save_notes1_activate);
-	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page",
+	notepage  = additemtooptionmenu(app, _("_Settings/"), _("Show Interlinear Page"),
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
-	settings->versestyle_item = additemtooptionmenu(app, "_Settings/", "Verse Style",
+	settings->versestyle_item = additemtooptionmenu(app, _("_Settings/"), _("Verse Style"),
 				(GtkMenuCallback)on_verse_style1_activate);
-	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes",
+	footnotes   = additemtooptionmenu(app, _("_Settings/"), _("Show Footnotes"),
 				(GtkMenuCallback)on_footnotes1_activate);
-	morphs   = additemtooptionmenu(app, "_Settings/", "Show Morphological Tags",
+	morphs   = additemtooptionmenu(app, _("_Settings/"), _("Show Morphological Tags"),
 				(GtkMenuCallback)on_morphs_activate);
- 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers",
+ 	strongsnum   = additemtooptionmenu(app, _("_Settings/"), _("Show Strongs Numbers"),
  				(GtkMenuCallback)on_strongs_numbers1_activate); 		
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
@@ -280,7 +280,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}
 	/*if(savefontinfoSWORD("KJV", "GSFont", "helvetica"))
 		g_warning("we wrote something");*/
-	g_print("done\n");
+	g_print("%s\n", "done\n");
 }
 
 /**********************************************************************************************
@@ -446,18 +446,24 @@ void addQuickmark(GtkWidget *app)
 	gint     iVerse,         /* verse we want to mark */
 		 iChap;          /* chapter we want to mark */
 	gchar	 buf[255];
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(app,"cbeBook"))); /* get book name */
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbVerse"))); /* get verse number */
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbChapter"))); /* get chapter */
-	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' ); /* put book chapter and verse into bookmarks array */
-	 ++ibookmarks;  /* increment number of bookmark item + 1 */	
-	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
-	removemenuitems(app, "_Quickmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
-        sprintf(buf,"%s%s", "_Quickmarks/",remembersubtree);
+	/* get book name */
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(app,"cbeBook"))); 
+	/* get verse number */
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbVerse"))); 
+	/* get chapter */
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbChapter"))); 
+	/* put book chapter and verse into bookmarks array */
+	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' );
+	/* increment number of bookmark item + 1 */
+	 ++ibookmarks; 
+	 /* save to file so we dont forget -- function in filestuff.cpp */
+	savebookmark(buf); 
+	//-- remove old bookmarks from menu -- menustuff.cpp 
+	removemenuitems(app, _("_Quickmarks/<Separator>"), ibookmarks); 
+        sprintf(buf,"%s%s", _("_Quickmarks/"),remembersubtree);
         addseparator(app, buf);
-        /* loadbookmarkarray(); */ /* load edited bookmarks  -- filestuff.cpp */
-        loadbookmarks_afterSeparator(); /* let's show what we did -- GnomeSword.cpp */
+	/* let's show what we did -- GnomeSword.cpp */
+        loadbookmarks_afterSeparator(); 
 }
 
 /*****************************************************************************
