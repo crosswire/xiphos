@@ -419,6 +419,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 								     != NULL) {
 			sprintf(buf,"<br><b>%s</b><br><br>",preverse);
 			str = g_string_append(str, buf);
+			g_free(preverse);				  
 			++x;
 		}
 		
