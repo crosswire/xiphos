@@ -1161,7 +1161,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_widget_show(label64);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook3),0), label64);
-	
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
+                                    gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook3),0), _("Commentaries"));
+
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox2", vbox2,
@@ -1269,9 +1271,14 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label85);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (notebook3),
-							     1), label85);			     
+				gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							(notebook3),
+							1), label85);	
+							     
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
+                                gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							(notebook3),
+							1), _("Personal Comments"));			     						     
 	/********************************************************************** studypad editor */
 	s->htmlSP = studypad_control(notebook3, s);
 	gtk_box_pack_start(GTK_BOX(hboxToolbar), s->toolbarStudypad, TRUE,
@@ -1293,6 +1300,11 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     2), label41);
+	
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
+                                gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							(notebook3),
+							2), _("Study Pad"));							     
 	/************************************************************** end studypad editor */
 	
 	/******************************************************************** interlinear page */
@@ -1355,6 +1367,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (s->workbook_lower);
 	gtk_box_pack_start (GTK_BOX (hbox8), s->workbook_lower, TRUE, TRUE, 0);
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->workbook_lower));
 
 	frame10 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame10);
@@ -1504,7 +1517,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	  gtk_widget_show (labelDict);
 	  gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->workbook_lower), 
 			gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->workbook_lower), 0), labelDict);
-	
+			
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_lower),
+                                   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							    (s->workbook_lower),
+							    0), _("Dict/Lex"));
+ 	
 	
 	/************************************************************************** GBS html editor/display */
 	
@@ -1531,6 +1549,10 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (s->workbook_lower),
 							     1), label185);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_lower),
+                                  gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							    (s->workbook_lower),
+							    1), _("Books"));
 	/*********************************************************************** end GBS html editor/display */
 	
 	
@@ -1575,7 +1597,11 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	  gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->workbook_lower), 
 		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->workbook_lower), 2), label197);
 
-
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_lower),
+                                    gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							    (s->workbook_lower),
+							    2), _("Interlinear"));
+ 
 
 	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gtk_widget_ref(appbar1);

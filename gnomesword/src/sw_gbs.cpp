@@ -43,6 +43,7 @@
 #include <treekeyidx.h>
 #include <rawgenbook.h>
 
+#include "gs_gnomesword.h"
 #include "sw_sword.h"
 #include "sw_display.h"
 #include "sw_gbs.h"
@@ -69,15 +70,6 @@ SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 list <SWDisplay *> displays;	// so we can delete each display we create
 GList *gbs_data;
-
-
-struct _gbsdata {
-	GtkWidget *html;
-	GtkWidget *ctree;
-	gchar *bookName;
-	gchar *bookDescription;
-	gchar *searchstring;
-};	
 
 /***   ***/
 
@@ -157,7 +149,7 @@ void on_ctreeGBS_select_row(GtkCList * clist,
 	gboolean 
 		is_leaf = false;
 		
-	ModMap::iterator it;	
+	ModMap::iterator it;
 	
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
 	settings->ctree_widget_books = gbs->ctree;	
@@ -218,9 +210,9 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 			 gint page_num, 
 			GList *data_gbs)
 {	
-	GBS_DATA *g;
-	
-	g = (GBS_DATA*)g_list_nth_data(data_gbs, page_num);	
+	GBS_DATA *g, *g_old;
+	g_old = (GBS_DATA*)g_list_nth_data(data_gbs, settings->gbsLastPage);
+	g = (GBS_DATA*)g_list_nth_data(data_gbs, page_num);
 	//-- change tab label to current book name
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook_lower),
 		gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
@@ -228,7 +220,15 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings->workbook_lower),
                 gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
 		g->bookName);
+	
 	sprintf(settings->BookWindowModule,"%s",g->bookName);
+	
+	if(settings->finddialog) {
+		gnome_dialog_close(g_old->find_dialog->dialog);
+		searchGS_FIND_DLG(g, FALSE, settings->findText);
+	}
+	
+	settings->gbsLastPage = page_num;
 }
 
 /****  popup menu call backs  ****/
@@ -244,7 +244,7 @@ static
 void on_find_activate(GtkMenuItem *menuitem,
 			       GBS_DATA *gbs)
 {
-	searchGS_FIND_DLG(gbs->html, FALSE, NULL);
+	searchGS_FIND_DLG(gbs, FALSE, NULL);
 }
 
 static
@@ -586,7 +586,8 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs
 	displays.insert(displays.begin(), disp);
 	addbooktoCTree(p_gbs->ctree, (gchar*)mod->Name());
 	popupmenu = create_pmGBS(p_gbs);
-	gnome_popup_menu_attach(popupmenu,p_gbs->html,NULL);	
+	gnome_popup_menu_attach(popupmenu,p_gbs->html,NULL);
+	p_gbs->find_dialog = NULL;
 	return hpanedGBS;
 }
 
@@ -613,6 +614,8 @@ void setupSW_GBS(SETTINGS *s)
 	gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebookGBS_switch_page),
 			   gbs_data);
+	
+	settings->gbsLastPage = 0;
 }
 
 void shutdownSW_GBS(void)
@@ -625,6 +628,8 @@ void shutdownSW_GBS(void)
 	
 	gbs_data = g_list_first(gbs_data);
 	while(gbs_data != NULL) {
+		GBS_DATA *g = (GBS_DATA *)gbs_data->data;
+		if(g->find_dialog) g_free(g->find_dialog); //-- free any search dialogs created
 		delete (GBS_DATA *) gbs_data->data;
 		gbs_data = g_list_next(gbs_data);
 	}
@@ -731,5 +736,6 @@ void displayinGBS(gchar *key)
 		(*it).second->Display();
 	}
 }
+
 
 /******   end of file   ******/
