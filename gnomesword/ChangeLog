@@ -1,5 +1,10 @@
 2001-09-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* fixed shortcut-bar crash on changing groups
+	  which started with gal snapshot 200109150708 release
+
+2001-09-13 Terry Biggs <tbiggs@users.sourceforge.net>
+
 	*  gs will now display book introductions for thml commentaries
 	   that have them.
 
