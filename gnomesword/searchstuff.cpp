@@ -24,6 +24,7 @@
 #include <swmodule.h>
 #include <versekey.h>
 #include <plainhtml.h>
+#include <gbfhtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -37,7 +38,6 @@
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
 #include "gs_thmlplain.h"
-#include "gs_gbfhtml.h"
 
 SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
@@ -50,7 +50,7 @@ SearchWindow::SearchWindow ()
 	searchMgr = new SWMgr ();
 	searchMod = NULL;
 	plaintohtml = new PLAINHTML ();	/* sword renderfilter Plain to html */
-	gbftohtml = new GS_GBFHTML ();	/* sword renderfilter gbf to html */
+	gbftohtml = new GBFHTML ();	/* sword renderfilter gbf to html */
 	rwphtml = new GS_RWPHTML();  /* sword renderfilter rwp to html */
 	PLAINsearchDisplay = 0;	/* set in create */
 	HTMLsearchDisplay = 0;
