@@ -42,7 +42,6 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "main/bibletext.h"
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/search_dialog.h"
@@ -348,10 +347,10 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 
 static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
 {
-	hint.use_hints = GTK_CHECK_MENU_ITEM(menuitem)->active;
+/*	hint.use_hints = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	
 	if(!hint.use_hints)
-		gui_destroy_hint_window();
+		gui_destroy_hint_window();*/
 	/*
 	if(hint.use_hints)
 		gui_open_hint_viewer();*/

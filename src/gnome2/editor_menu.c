@@ -49,7 +49,6 @@
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
 #include "gui/editor_spell.h"
-//#include "gui/percomm.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
@@ -59,7 +58,6 @@
 #include "gui/find_dialog.h"
 #include "gui/widgets.h"
 
-#include "main/percomm.h"
 #include "main/settings.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"

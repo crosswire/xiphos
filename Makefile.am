@@ -25,6 +25,7 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
+	sword.m4 \
 	COPYING-DOCS
 
 gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@

@@ -27,49 +27,10 @@ extern "C" {
 #endif
 
 #include "main/module_dialogs.h"
-//#include "gui/dictlex.h"
-/*
-typedef struct _dldata DL_DATA;
-struct _dldata {
-        GtkWidget *dialog;
-        GtkWidget *vbox;
-        GtkWidget *html;
-        GtkWidget *frame;
-        GtkWidget *clist;
-        GtkWidget *listview;
-        GtkWidget *entry;
-        GtkWidget *showtabs;
-        GtkWidget *module_options_menu;
-
-#ifdef USE_GNOME2
-        GObject *mod_selection;
-#endif
-        gchar *mod_name;
-        gchar *search_string;
-        gchar *key;
-        gchar *cipher_key;
-        gchar *cipher_old;
-
-        int mod_num;
-        gulong sig_id;
-
-        gboolean has_key;
-        gboolean is_locked;
-        gboolean is_dialog;
-        gboolean is_rtol;
-};
-extern DL_DATA *cur_d;
-*/
 
 void gui_create_dictlex_dialog(DIALOG_DATA *dlg);
-//void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_lookup_dictlex_dialog_selection
     (GtkMenuItem * menuitem, gchar * dict_mod_description);
-//void gui_open_dictlex_dialog(gchar * mod_name);
-//void initSD(gchar * modName);
-//void gui_setup_dictlex_dialog(GList *mods);
-//void gui_shutdown_dictlex_dialog(void) ;
-//void gui_close_dict_dialog(DL_DATA * dlg);
 
 #ifdef __cplusplus
 }

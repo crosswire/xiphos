@@ -45,39 +45,17 @@
 #include "gui/tabbed_browser.h"
 #include "gui/widgets.h"
 
-#include "main/bibletext.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/global_ops.hh"
 
+gboolean shift_key_presed = FALSE;
+
 static void create_menu(GdkEventButton * event);
 
 static GtkTextBuffer *text_buffer;
-
-/******************************************************************************
- * Name
- *  update_text_global_ops
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void update_text_global_ops(gchar * option, gboolean choice)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_update_text_global_ops(gchar * option, gboolean choice)
-{
-	/*g_warning("gui_update_text_global_ops");
-	save_module_options(settings.MainWindowModule, option, choice);
-	gui_display_text(settings.currentverse);*/
-}
 
 /******************************************************************************
  * Name
@@ -101,7 +79,7 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 	gchar *url = g_strdup_printf(	"sword://%s/%s",
 					settings.MainWindowModule,
 					settings.currentverse);
-	save_module_options(settings.MainWindowModule, (gchar *) data,
+	main_save_module_options(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
 	/* show the change */
 	main_url_handler(url, TRUE);		
@@ -289,15 +267,53 @@ gboolean on_motion_notify_event
                                         GdkEventMotion  *event,
                                         gpointer         user_data)
 {
-	static gulong delay = 5000000;	
+	/*static gulong delay = 5000000;	
 			
 	while(delay != 0) {
 			--delay;
 	} 
-	delay = 5000000; //g_warning("on_motion_notify_event");
+	delay = 5000000; 
+	//g_warning("on_motion_notify_event");*/
 	return FALSE;
 }
 
+static gboolean
+on_enter_notify_event        (GtkWidget       *widget,
+                                        GdkEventCrossing *event,
+                                        gpointer         user_data)
+{
+	gtk_widget_grab_focus (widgets.html_text);
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	gui_change_window_title(settings.MainWindowModule);
+  	return FALSE;
+}
+
+static gboolean on_key_press_event           (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	switch(event->hardware_keycode) {
+		case 50:
+		case 62:
+			shift_key_presed = TRUE;
+		break;
+	}
+  	return FALSE;
+}
+
+
+static gboolean on_key_release_event         (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	switch(event->hardware_keycode) {
+		case 50:
+		case 62:
+			shift_key_presed = FALSE;
+		break;
+	}
+  	return FALSE;
+}
 
 
 static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
@@ -525,6 +541,16 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview),
 						GTK_WRAP_WORD);
 
+	g_signal_connect ((gpointer) widgets.html_text, "enter_notify_event",
+		    G_CALLBACK (on_enter_notify_event),
+		    NULL);
+	g_signal_connect ((gpointer) widgets.html_text, "key_press_event",
+		    G_CALLBACK (on_key_press_event),
+		    NULL);
+	g_signal_connect ((gpointer) widgets.html_text, "key_release_event",
+		    G_CALLBACK (on_key_release_event),
+		    NULL);
+		    
 	g_signal_connect(GTK_OBJECT(widgets.textview),
 				   "button_release_event",
 				   G_CALLBACK
@@ -539,7 +565,7 @@ GtkWidget *gui_create_bible_pane(void)
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
 	g_signal_connect ((gpointer)widgets.html_text , 
-			"motion_notify_event",
+		    "motion_notify_event",
                     G_CALLBACK (on_motion_notify_event),
                     NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",

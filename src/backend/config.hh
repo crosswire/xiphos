@@ -46,14 +46,6 @@ char *backend_get_module_font_size(char *mod_name, char * dir);
 char *backend_get_conf_item(const char * file, const char * mod_name, const char * item);
 void backend_save_conf_item(const char * file, const char * mod_name, const char * item,
 				const char * value);
-
-
-int backend_load_module_options(char * modName, char * option, 
-					char * dir, char * conf);
-int backend_save_module_options(char * modName, char * option, 
-			char * value, char * dir, char * conf);
-
-GNode * backend_load_bookmarks(char *dir);
 #ifdef __cplusplus
 }
 #endif

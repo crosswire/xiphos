@@ -25,7 +25,8 @@
 
 #include <gnome.h>
 #include <swmgr.h>
-#include <swmodule.h>
+#include <swmodule.h>	
+#include <url.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,9 +38,6 @@ extern "C" {
 
 #include <string.h>
 
-#ifdef USE_SWORD_CVS	
-#include <url.h>
-#endif
 
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
@@ -57,7 +55,6 @@ extern "C" {
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "main/bibletext.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/sidebar.h"
@@ -873,11 +870,6 @@ static gint note_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	
 	work_buf = g_strsplit (url,"/",6);
 	
-	if (hint.in_popup) {
-		gtk_widget_destroy(hint.hint_window);
-		hint.in_popup = FALSE;
-	}
-	
 	if(be->is_module(work_buf[2])) 
 		module = work_buf[2];
 	else
@@ -1109,7 +1101,6 @@ static gint new_url_handler(const gchar * url, gboolean clicked)
 	gchar* module = NULL;
 	gchar* passage = NULL;
 	gchar *buf = NULL;
-#ifdef USE_SWORD_CVS	
 	URL* m_url;
 	
 #ifdef DEBUG	
@@ -1153,7 +1144,6 @@ static gint new_url_handler(const gchar * url, gboolean clicked)
 	if(action) g_free(action);
 	if(type) g_free(type);
 	if(value) g_free(value);
-#endif
 	return 1;
 }
 
@@ -1176,10 +1166,8 @@ static gint new_url_handler(const gchar * url, gboolean clicked)
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
-#ifdef USE_SWORD_CVS
 	if(strstr(url,"passagestudy.jsp")) /* passagestudy.jsp?action=showStrongs&type= */
 		return new_url_handler(url,clicked);
-#endif
 	if(strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);
 	if(strstr(url,"strongs://"))

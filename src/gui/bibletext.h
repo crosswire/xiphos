@@ -25,8 +25,6 @@
 #include <gnome.h>
 
 void gui_setup_bibletext(void);
-void gui_update_text_global_ops(gchar * option, gboolean choice);
-//void gui_display_text(const gchar * val_key);
 gboolean gui_text_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data);

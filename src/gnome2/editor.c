@@ -49,7 +49,6 @@
 #include "gui/studypad.h"
 #include "gui/html.h"
 
-#include "main/percomm.h"
 #include "main/settings.h"
 
 /******************************************************************************
