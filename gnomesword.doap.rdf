@@ -10,8 +10,8 @@
     <doap:shortname>GnomeSword</doap:shortname>
     <doap:homepage rdf:resource="http://gnomesword.sourceforge.net"/>
     <doap:created>2000-09-05</doap:created>
-    <doap:description>Gnomesword is a Bible study application for GNOME. It is based on SWORD by the CrossWire Bible Society, a framework providing the possibility to study the Bible and additional information like commentaries, dictionaries and other texts using your computer. GnomeSword lets you read, search, add formatted notes to verses, bookmark passages, and reference commentary and lexicon modules.</doap:description>
-    <doap:shortdesc>Gnomesword is a Bible study application for GNOME.</doap:shortdesc>
+    <doap:description>GnomeSword is a Bible study application for GNOME. It is based on SWORD by the CrossWire Bible Society, a framework providing the possibility to study the Bible and additional information like commentaries, dictionaries and other texts using your computer. GnomeSword lets you read, search, add formatted notes to verses, bookmark passages, and reference commentary and lexicon modules.</doap:description>
+    <doap:shortdesc>GnomeSword is a Bible study application for GNOME.</doap:shortdesc>
     <doap:bug-database rdf:resource="http://sourceforge.net/tracker/?group_id=5528&amp;atid=105528"/>
     <doap:mailing-list rdf:resource="http://sourceforge.net/mail/?group_id=5528"/>
     <doap:screenshots rdf:resource="http://gnomesword.sourceforge.net/about.html"/>
