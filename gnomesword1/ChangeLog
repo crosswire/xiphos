@@ -1,3 +1,9 @@
+2003-12-15  Terry <tbiggs@users.sf.net>
+
+	* fixed bug 860510
+	* enabled footnote hints for osis modules
+
+
 2003-12-14  Terry <tbiggs@users.sf.net>
 
 	* added support for preverse headings
