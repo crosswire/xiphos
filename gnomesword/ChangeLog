@@ -1,14 +1,21 @@
+2000-09-20  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * added module lists to commentary and dictionary window popup menus
+
 2000-09-15  Terry Biggs <tbiggs@users.sourceforge.net>
+
         * release 0.2.4
         *display.cpp changed to handle upper or lower case tags
         *fixed history menu - clicking on verse ref will no longer
         send you to Gen 1:1.
 
 2000-09-06  Terry Biggs <tbiggs@users.sourceforge.net>
+
         * fixed a segfault that cause gnomesword to crash while
         displaying verses from a search. 
 
 2000-09-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
         * coding style changes 
         * fixed some code problems - memory not freed
         
@@ -18,8 +25,8 @@
 
 2000-08-27  Michael Meeks  <michael@helixcode.com> 
  
- * configure.in: Added sword seek and use logic, from 'BibleTime' 
- * gnomesword/Makefile.am: Rationalize the conditionals, sort. 
+        * configure.in: Added sword seek and use logic, from 'BibleTime'
+        * gnomesword/Makefile.am: Rationalize the conditionals, sort.
  
 2000-08-28  - you can now change the size of the search dialog
             - note editor will now save note when formatting is off

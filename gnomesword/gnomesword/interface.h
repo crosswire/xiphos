@@ -43,8 +43,8 @@ extern "C" {
 	GtkWidget *create_dlgSettings(void);
 	GtkWidget *create_dialog1(void);
 	GtkWidget *create_listeditor(void);
-	GtkWidget *create_pmComments(void);
-	GtkWidget *create_pmDict(void);
+//	GtkWidget *create_pmComments(void);
+//	GtkWidget *create_pmDict(void);
 
 
 
