@@ -56,9 +56,7 @@ struct  _sword {
 	SWModule *percom_mod;
 	
 	TreeKeyIdx *treeKey;	
-};
-
-	
+};	
 extern SWORD sw;
 
 #ifdef __cplusplus

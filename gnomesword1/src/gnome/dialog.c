@@ -39,11 +39,7 @@ static GtkWidget *entry5 = NULL;
 static GtkWidget *entry6 = NULL;
 static gint retval = 3;
 
-/*
-gnome_dialog_new();
 
-gnome_dialog_run_and_close 
-*/
 
 /******************************************************************************
  * Name

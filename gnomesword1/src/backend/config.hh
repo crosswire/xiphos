@@ -51,6 +51,7 @@ int backend_load_module_options(char * modName, char * option,
 int backend_save_module_options(char * modName, char * option, 
 			char * value, char * dir, char * conf);
 
+GNode * backend_load_bookmarks(char *dir);
 #ifdef __cplusplus
 }
 #endif

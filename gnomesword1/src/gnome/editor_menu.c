@@ -52,7 +52,6 @@
 #include "gui/toolbar_style.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
-#include "gui/editor_search.h"
 #include "gui/editor_spell.h"
 #include "gui/percomm.h"
 #include "gui/fileselection.h"
@@ -61,6 +60,7 @@
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
 #include "gui/dialog.h"
+#include "gui/find_dialog.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"
@@ -442,31 +442,11 @@ static void on_undo_activate(GtkMenuItem * menuitem,
 static void on_find_activate(GtkMenuItem * menuitem,
 			     GSHTMLEditorControlData * ecd)
 {
-	search(ecd, FALSE, NULL);
+	gui_find_dlg(ecd->htmlwidget, ecd->filename,
+		  FALSE, NULL);
+	//search(ecd, FALSE, NULL);
 }
 
-/******************************************************************************
- * Name
- *  on_find_again_activate
- *
- * Synopsis
- *   #include "editor_menu.h"
- *
- *   void on_find_again_activate(GtkMenuItem * menuitem,
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    find same text as previous find
- *
- * Return value
- *   void
- */
-
-static void on_find_again_activate(GtkMenuItem * menuitem,
-				   GSHTMLEditorControlData * ecd)
-{
-	search_next(ecd);
-}
 
 /******************************************************************************
  * Name
@@ -825,7 +805,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	GtkWidget *spell;
 	GtkWidget *undo;
 	GtkWidget *find;
-	GtkWidget *find_again;
 	GtkWidget *replace;
 	GtkAccelGroup *accel_group;
 
@@ -1174,17 +1153,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(find);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), find);
 
-	find_again = gtk_menu_item_new_with_label(_("Find Next"));
-	gtk_widget_ref(find_again);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "find_again",
-				 find_again,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(find_again);
-	gtk_container_add(GTK_CONTAINER(edit2_menu), find_again);
-	gtk_widget_add_accelerator(find_again, "activate", accel_group,
-				   GDK_n, GDK_CONTROL_MASK,
-				   GTK_ACCEL_VISIBLE);
-
 
 	replace = gtk_menu_item_new_with_label(_("Replace"));
 	gtk_widget_ref(replace);
@@ -1269,9 +1237,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			   GTK_SIGNAL_FUNC(on_undo_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
 			   GTK_SIGNAL_FUNC(on_find_activate), ecd);
-	gtk_signal_connect(GTK_OBJECT(find_again), "activate",
-			   GTK_SIGNAL_FUNC(on_find_again_activate),
-			   ecd);
 	gtk_signal_connect(GTK_OBJECT(replace), "activate",
 			   GTK_SIGNAL_FUNC(on_replace_activate), ecd);
 
