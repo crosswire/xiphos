@@ -39,7 +39,8 @@
 #include "gui/info_box.h"
 #include "gui/gbs.h"
 #include "gui/bibletext.h"
-#include "gui/_commentary.h"
+#include "gui/commentary.h"
+#include "gui/_dictlex.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -136,7 +137,7 @@ void init_gnomesword(void)
 	 *  setup Dict/Lex gui support 
 	 */
 	if (havedict) {
-		setup_dictlex(get_list(DICT_LIST));
+		gui_setup_dictlex(get_list(DICT_LIST));
 	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
@@ -216,7 +217,7 @@ void gnomesword_shutdown(void)
 	if(havecomm)
 		gui_shutdown_commentary();
 	if(havedict)
-		shutdown_dictlex();
+		gui_shutdown_dictlex();
 	if(havepercomm)
 		shutdown_percomm();
 	
@@ -747,7 +748,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			page_num =
 			    backend_get_module_page(module_name, 
 							DICT_MODS);
-			set_dictionary_page_and_key(page_num, key);
+			gui_set_dictionary_page_and_key(page_num, key);
 		}
 		break;
 	case BOOK_TYPE:
