@@ -824,6 +824,8 @@ void create_mainwindow(void)
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
 			  widgets.notebook_gbs);
 	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_gbs, GTK_CAN_FOCUS);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK
+				    (widgets.notebook_gbs), TRUE);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 				   (widgets.notebook_gbs), FALSE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
