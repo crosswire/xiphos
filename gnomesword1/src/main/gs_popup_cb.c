@@ -431,7 +431,7 @@ void on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 	static GtkWidget *dlg;
 
 	if (!isrunningVT) {
-		dlg = create_dlgViewText(options);
+		dlg = create_dlgViewText(mod_lists->options);
 	}
 	gtk_widget_show(dlg);
 }

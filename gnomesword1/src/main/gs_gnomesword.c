@@ -50,7 +50,7 @@
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
-#include "gs_bibletext.h"
+#include "bibletext.h"
 #include "about_modules.h"
 #include "search.h"
 #include "interlinear.h"
@@ -71,15 +71,13 @@ gchar *current_filename = NULL;	/* filename for open file in study pad window */
 gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 
 gint dictpages, compages, textpages, bookpages;
-
+MOD_LISTS *mod_lists;
 SETTINGS *settings;
-GList *sblist,			/* for saving search results to bookmarks  */
-*biblemods,
-    *commentarymods,
-    *dictionarymods, *bookmods, *percommods, *sbbiblemods, *options;
+GList *sblist;			/* for saving search results to bookmarks  */
+
 /*****************************************************************************
-* externs
-*****************************************************************************/
+ * externs
+ */
 extern gchar *mydictmod, *shortcut_types[], rememberlastitem[];
 
 extern gboolean havedict,	/* let us know if we have at least one lex-dict module */
@@ -95,30 +93,38 @@ extern GtkWidget *shortcut_bar;
 
 static
 gchar *update_nav_controls(gchar * key);
-
+MOD_LISTS mods;
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
 void initGnomeSword(SETTINGS * s)
-{
+{	
+	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
+	mod_lists = &mods;
 	/*
 	   set glist to null 
 	 */
-	biblemods = NULL;
-	commentarymods = NULL;
-	dictionarymods = NULL;
-	percommods = NULL;
-	sbbiblemods = NULL;
-	bookmods = NULL;
-
+	mod_lists->biblemods = NULL;
+	mod_lists->commentarymods = NULL;
+	mod_lists->dictionarymods = NULL;
+	mod_lists->percommods = NULL;
+	mod_lists->bookmods = NULL;
+	mod_lists->options = NULL;
+	mod_lists->text_descriptions = NULL;
+	mod_lists->comm_descriptions = NULL;
+	mod_lists->dict_descriptions = NULL;
+	mod_lists->book_descriptions = NULL;
 	/*
 	   fill module lists
 	 */
-	sbbiblemods = backend_get_mod_description_list_SWORD(TEXT_MODS);
-
-	percommods = backend_get_list_of_percom_modules();
-	if (percommods) {
+	mod_lists->options = backend_get_global_options_list();
+	mod_lists->text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
+	mod_lists->comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
+	mod_lists->dict_descriptions = backend_get_mod_description_list_SWORD(DICT_MODS);
+	mod_lists->book_descriptions = backend_get_mod_description_list_SWORD(BOOK_MODS);
+	mod_lists->percommods = backend_get_list_of_percom_modules();
+	if (mod_lists->percommods) {
 		/*
 		   show personal comments page 
 		 */
@@ -135,25 +141,25 @@ void initGnomeSword(SETTINGS * s)
 	/*
 	   create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(s, sbbiblemods, options);
-	additemstooptionsmenu(options, s);
+	createpopupmenus(s, mod_lists->text_descriptions, mod_lists->options);
+	//additemstooptionsmenu(options, s);
 	/*
 	   setup Bible text gui 
 	 */
-	biblemods = gui_setup_text(s);
+	mod_lists->biblemods = setup_text(s);
 
 	/*
 	   setup commentary gui support 
 	 */
-	commentarymods = gui_setup_comm(s);
+	mod_lists->commentarymods = gui_setup_comm(s);
 	/*
 	   setup general book gui support 
 	 */
-	bookmods = gui_setup_gbs(s);
+	mod_lists->bookmods = gui_setup_gbs(s);
 	/*
 	   setup Dict/Lex gui support 
 	 */
-	dictionarymods = gui_setup_dict(s);
+	mod_lists->dictionarymods = gui_setup_dict(s);
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
@@ -161,13 +167,11 @@ void initGnomeSword(SETTINGS * s)
 	   add modules to about modules menus -- gs_menu.c 
 	 */
 	addmodstomenus(s,
-		       biblemods,
-		       commentarymods, dictionarymods, bookmods);
-	/*
-	   create popup menus -- gs_menu.c 
-	 */
-	createpopupmenus(s, sbbiblemods, options);
-	//additemstooptionsmenu(options, s);    
+		       mod_lists->biblemods,
+		       mod_lists->commentarymods, 
+		       mod_lists->dictionarymods, 
+		       mod_lists->bookmods);
+	 
 
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(s->app, "nbPerCom")), 0);
@@ -186,20 +190,6 @@ void initGnomeSword(SETTINGS * s)
 	    additemtooptionmenu(s->app, _("_Settings/"),
 				_("Verse Style"), (GtkMenuCallback)
 				on_verse_style1_activate);
-
-
-	/*
-	   free module lists 
-	 */
-	g_list_free(biblemods);
-	g_list_free(commentarymods);
-	g_list_free(dictionarymods);
-	g_list_free(percommods);
-	g_list_free(sbbiblemods);
-	g_list_free(bookmods);
-	/* 
-	   options list freed on exit 
-	 */
 
 	g_print("done\n");
 
@@ -239,17 +229,30 @@ void gnomesword_shutdown(SETTINGS * s)
 		default:
 			break;
 		}
-	}
-	//-- free dir and file stuff 
+	}/*
+	   free lists 
+	 */
+	
+	g_list_free(mod_lists->biblemods);
+	g_list_free(mod_lists->commentarymods);
+	g_list_free(mod_lists->dictionarymods);
+	g_list_free(mod_lists->bookmods);
+	g_list_free(mod_lists->percommods);
+	g_list_free(mod_lists->text_descriptions);
+	g_list_free(mod_lists->dict_descriptions);
+	g_list_free(mod_lists->comm_descriptions);
+	g_list_free(mod_lists->book_descriptions);
+	g_list_free(mod_lists->options);
+	g_list_free(s->settingslist);
+	/*
+	   free dir and file stuff 
+	 */
 	g_free(gSwordDir);
 	g_free(shortcutbarDir);
 	g_free(fnconfigure);
 	g_free(swbmDir);
-
-	//-- free glist
-	g_list_free(options);
-	g_list_free(s->settingslist);
-	gui_shutdown_text();
+	
+	shutdown_text();
 	gui_shutdownGBS();
 	gui_shutdownDL();
 	gui_shutdownCOMM();
@@ -786,6 +789,22 @@ gchar *get_module_name(SETTINGS * s)
 	}
 	return NULL;
 }
+/******************************************************************************
+ *
+ * 
+ * 
+ */
+gchar *get_module_name_from_description(gchar *description)
+{
+	gchar mod_name[16];
+
+	memset(mod_name, 0, 16);
+	backend_module_name_from_description(mod_name, description);
+	if(mod_name)
+		return g_strdup(mod_name);
+	else 
+		return NULL;
+}
 
 static
 gchar *update_nav_controls(gchar * key)
@@ -830,7 +849,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 		page_num =
 		    backend_get_module_page(module_name, TEXT_MODS);
 		val_key = update_nav_controls(key);
-		gui_set_text_page_and_key(page_num, val_key);
+		set_text_page_and_key(page_num, val_key);
 		g_free(val_key);
 		break;
 	case COMMENTARY_TYPE:
@@ -877,7 +896,7 @@ void change_verse(gchar * key)
 		/* 
 		   change main window 
 		 */
-		gui_display_text(val_key);
+		display_text(val_key);
 	}
 
 	/* 
@@ -918,7 +937,7 @@ void set_verse_style(gboolean choice)
 {
 	settings->versestyle = choice;	//-- remember our choice for the next program startup
 	if (havebible)
-		gui_display_text(settings->currentverse);	//-- show the change
+		display_text(settings->currentverse);	//-- show the change
 }
 
 /*****   end of file   ******/

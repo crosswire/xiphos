@@ -31,17 +31,10 @@ extern "C" {
 #include <gnome.h>
 #include "gs_gnomesword.h"
 
-/* 
-   these strings are not seen by users
- */
-#define TEXT_MODS "Biblical Texts"
-#define COMM_MODS "Commentaries"
-#define DICT_MODS "Lexicons / Dictionaries"
-#define BOOK_MODS "Generic Books"
-#define CIPHER_KEY_LEN 16
 
 	void backend_first_init(void);
 	void backend_init_sword(SETTINGS * s);
+	GList * backend_get_global_options_list(void);
 	void backend_change_verse_percom(char *key);
 	void backend_module_name_from_description(gchar * mod_name,
 						  gchar * mod_desc);

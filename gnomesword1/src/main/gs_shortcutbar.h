@@ -60,7 +60,7 @@ extern "C" {
 	void update_shortcut_bar(SETTINGS * s);
 	void create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 				   GtkWidget * shortcut_menu_widget,
-				   gchar * modtype);
+				   gint mod_type);
 	void gs_shortcut_model_get_item_info(GtkWidget *
 					     shortcutbar_widget,
 					     gint group_num,

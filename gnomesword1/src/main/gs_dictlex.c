@@ -226,7 +226,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
 	GtkWidget *dlg;
 	
-	dlg = gui_create_unlock_key_dialog(d->modName);
+	dlg = gui_create_cipher_key_dialog(d->modName);
 	gtk_widget_show(dlg);
 }
 static
@@ -341,7 +341,7 @@ GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 	}
 
 	i = 0;
-	tmp = mods;
+	tmp = mod_lists->dict_descriptions;
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

@@ -100,7 +100,7 @@ static void on_btnUKcancel_clicked(GtkButton * button, gpointer user_data)
  * Return value
  *   GtkWidget*
  */
-GtkWidget *gui_create_unlock_key_dialog(gchar *mod_name)
+GtkWidget *gui_create_cipher_key_dialog(gchar *mod_name)
 {
 	GtkWidget *dialog_unlock_key;
 	GtkWidget *dialog_vbox;
@@ -185,6 +185,6 @@ GtkWidget *gui_create_unlock_key_dialog(gchar *mod_name)
 			   (gchar*)mod_name);
 	gtk_signal_connect(GTK_OBJECT(btnUKcancel), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnUKcancel_clicked), NULL);
-
+	
 	return dialog_unlock_key;
 }

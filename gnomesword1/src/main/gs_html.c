@@ -515,10 +515,10 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gtk_html_copy(html);
 }
 
-/***************************************************************************************************
- *lookup word in dict/lex module
- ***************************************************************************************************/
-gchar *lookupGS_HTML(GtkWidget * html_widget, gboolean word)
+/******************************************************************************
+ * get word or selection from html widget
+ */
+gchar *get_word_or_selection(GtkWidget * html_widget, gboolean word)
 {
 	gchar *key = NULL;
 	GtkHTML *html;
@@ -576,7 +576,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 		sprintf(modName, "%s", settings->DictWindowModule);
 	}
 
-	key = lookupGS_HTML(usehtml, TRUE);
+	key = get_word_or_selection(usehtml, TRUE);
 					/***  usehtml is set when a button is pressed
 						in a html window  ***/
 	if (key) {
@@ -607,7 +607,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 		sprintf(modName, "%s", settings->DictWindowModule);
 	}
 
-	key = lookupGS_HTML(usehtml, FALSE);
+	key = get_word_or_selection(usehtml, FALSE);
 					 /***  usehtml is set when a button is pressed
 						in a html window  ***/
 	if (key) {

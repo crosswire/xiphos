@@ -293,7 +293,7 @@ void on_lookup_word_activate(GtkMenuItem * menuitem,
 	g = getgbs(gbs_list);
 	memset(modName, 0, 16);
 	backend_module_name_from_description(modName, modDescription);
-	key = lookupGS_HTML(g->html, TRUE);
+	key = get_word_or_selection(g->html, TRUE);
 	if (key) {
 		display_dictlex_in_viewer(modName, key, settings);
 		g_free(key);
@@ -311,7 +311,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	g = getgbs(gbs_list);
 	memset(modName, 0, 16);
 	backend_module_name_from_description(modName, modDescription);
-	key = lookupGS_HTML(g->html, FALSE);
+	key = get_word_or_selection(g->html, FALSE);
 	if (key) {
 		display_dictlex_in_viewer(modName, key, settings);
 		g_free(key);
@@ -320,7 +320,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 static
 void on_same_lookup_word_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 {
-	gchar *key = lookupGS_HTML(g->html, TRUE);
+	gchar *key = get_word_or_selection(g->html, TRUE);
 	if (key) {
 		display_dictlex_in_viewer(settings->DictWindowModule,
 					  key, settings);
@@ -332,7 +332,7 @@ static
 void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				       GBS_DATA * g)
 {
-	gchar *key = lookupGS_HTML(g->html, FALSE);
+	gchar *key = get_word_or_selection(g->html, FALSE);
 	if (key) {
 		display_dictlex_in_viewer(settings->DictWindowModule,
 					  key, settings);
@@ -389,7 +389,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 {
 	GtkWidget *dlg;
 	
-	dlg = gui_create_unlock_key_dialog(g->bookName);
+	dlg = gui_create_cipher_key_dialog(g->bookName);
 	gtk_widget_show(dlg);
 }
 static
@@ -569,7 +569,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
                       	gbs);
 	}
 	
-	tmp = backend_get_mod_description_list_SWORD(DICT_MODS);
+	tmp = mod_lists->dict_descriptions; //backend_get_mod_description_list_SWORD(DICT_MODS);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -604,7 +604,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = backend_get_mod_description_list_SWORD(COMM_MODS);
+	tmp = mod_lists->book_descriptions;
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

@@ -204,18 +204,10 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo module_options_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
+
 
 static GnomeUIInfo settings1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Module Options"),
-	 NULL,
-	 module_options_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
-	 0, (GdkModifierType) 0, NULL},
+	
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
 };
@@ -327,9 +319,9 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *toolbarOptions;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSBDock;
-	GtkWidget *btnStrongs;
-	GtkWidget *btnMorphs;
-	GtkWidget *btnFootnotes;
+//	GtkWidget *btnStrongs;
+//	GtkWidget *btnMorphs;
+//	GtkWidget *btnFootnotes;
 	GtkWidget *btnSB;
 	GtkWidget *cbBook;
 	GList *cbBook_items = NULL;
@@ -348,6 +340,7 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *toolbarNav;
 	GtkWidget *hpaned1;
 	GtkWidget *vbox32;
+	GtkWidget *vbox_text;
 	GtkWidget *notebook3;
 	GtkWidget *vbox22;
 	GtkWidget *label64;
@@ -619,7 +612,7 @@ void create_mainwindow(SETTINGS *s)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarOptions),
 				  vseparator13, NULL, NULL);
 	gtk_widget_set_usize(vseparator13, 7, 7);
-
+/*
 	tmp_toolbar_icon =
 		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/strongs.xpm");
 	btnStrongs =
@@ -661,7 +654,7 @@ void create_mainwindow(SETTINGS *s)
 				 btnFootnotes,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnFootnotes);
-
+*/
 
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox25);
@@ -863,13 +856,13 @@ void create_mainwindow(SETTINGS *s)
 	gtk_box_pack_start(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
 
 
-	vbox32 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox32);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox32",
-				 vbox32,
+	vbox_text = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox_text);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox_text",
+				 vbox_text,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox32);
-	e_paned_pack1(E_PANED(hpaned1), vbox32, FALSE, TRUE);
+	gtk_widget_show(vbox_text);
+	e_paned_pack1(E_PANED(hpaned1), vbox_text, FALSE, TRUE);
 	
 	/**********************************************************************
 	 * text notebook
@@ -880,7 +873,7 @@ void create_mainwindow(SETTINGS *s)
 				 s->notebook_text,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(s->notebook_text);
-	gtk_box_pack_start(GTK_BOX(vbox32), s->notebook_text, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox_text), s->notebook_text, TRUE, TRUE, 0);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(s->notebook_text), TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebook_text));
 	
@@ -1223,12 +1216,14 @@ void create_mainwindow(SETTINGS *s)
 	gtk_signal_connect(GTK_OBJECT(btnSBDock), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSBDock_clicked),
 			   s);
+			   /*
 	gtk_signal_connect(GTK_OBJECT(btnStrongs), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnStrongs_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnMorphs), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnMorphs_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnFootnotes), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnFootnotes_toggled), NULL);
+			   */
 	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSB_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(s->cbeBook), "changed",
