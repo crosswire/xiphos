@@ -1,3 +1,12 @@
+2002-03-30  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed on_link2_clicked from gs_html.c because
+	  it was no longer used.
+	* added view in viewer and/or Dict/Lex pane option to
+	  preferences dialog.
+	* added choice for viewer lex modules - you can now view one 
+	  module in the viewer and another in the Dict/Lex pane.
+
 2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* shortcut bar viewer is made visible when a word is clicked
