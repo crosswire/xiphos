@@ -826,7 +826,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
 
 	g_string_printf(str, "%s", HTML_START "<body><br>");
-	//utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	//utf8len = strlen(utf8str);
 	if (str->len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, str->str,

@@ -685,7 +685,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lower Workbook"),
 	 N_
-	 ("Show/Hide Lower Workbook - Dictionaries, Books and Interlinear"),
+	 ("Show/Hide Lower Workbook - Dictionaries, Books and parallel"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},

@@ -114,8 +114,8 @@ int xml_create_settings_file(char *path)
 
 
 	section_node =
-	    xmlNewChild(root_node, NULL, "interlinear", NULL);
-	xmlNewTextChild(section_node, NULL, "interlinear", "1");
+	    xmlNewChild(root_node, NULL, "parallel", NULL);
+	xmlNewTextChild(section_node, NULL, "parallel", "1");
 	xmlNewTextChild(section_node, NULL, "cantillation", "0");
 	xmlNewTextChild(section_node, NULL, "points", "0");
 	xmlNewTextChild(section_node, NULL, "footnotes", "0");

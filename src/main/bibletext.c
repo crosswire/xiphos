@@ -208,12 +208,12 @@ void set_text_global_option(gchar * option, gchar * choice)
 
 /******************************************************************************
  * Name
- *  get_interlinear_module_text
+ *  get_parallel_module_text
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   char *get_interlinear_module_text(char * mod_name, char * tmpkey)	
+ *   char *get_parallel_module_text(char * mod_name, char * tmpkey)	
  *
  * Description
  *    
@@ -222,19 +222,19 @@ void set_text_global_option(gchar * option, gchar * choice)
  *   char*
  */ 
 
-char *get_interlinear_module_text(char * mod_name, char * tmpkey)
+char *get_parallel_module_text(char * mod_name, char * tmpkey)
 {
 	return backend_get_module_text(8, mod_name, tmpkey);
 }
 
 /******************************************************************************
  * Name
- *  set_interlinear_global_option
+ *  set_parallel_global_option
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   void set_interlinear_global_option(char * option, char * yesno)	
+ *   void set_parallel_global_option(char * option, char * yesno)	
  *
  * Description
  *    
@@ -243,8 +243,8 @@ char *get_interlinear_module_text(char * mod_name, char * tmpkey)
  *   char*
  */ 
 
-void set_interlinear_global_option(char * option, char * yesno)
+void set_parallel_global_option(char * option, char * yesno)
 {
 	backend_set_global_option(8, option, yesno);
-	/*backend_set_interlinear_global_option(option, yesno);*/
+	/*backend_set_parallel_global_option(option, yesno);*/
 }

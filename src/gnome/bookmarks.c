@@ -790,8 +790,8 @@ static gchar *get_module_key(void)
 		case DICTIONARY_WINDOW:
 			return (gchar *) settings.dictkey;
 			break;
-		case INTERLINEAR_WINDOW:
-			return (gchar *) settings.cvInterlinear;
+		case parallel_WINDOW:
+			return (gchar *) settings.cvparallel;
 			break;
 		case BOOK_WINDOW:
 			return (gchar *) settings.book_key;
