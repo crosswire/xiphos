@@ -350,19 +350,19 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	gtk_widget_hide(settings->toolbarComments);
 	gtk_widget_hide(settings->toolbarStudypad);
 	
-	if(page_num == 2 && settings->editnote) {
+	if(page_num == 1 && settings->editnote) {
 		gtk_widget_show(settings->toolbarComments);
 	}
-	
+	/*
 	else if(page_num == 1 && settings->editgbs) {
 		gtk_widget_show(settings->toolbarBooks);
 	}
-	/*
+	
 	else if(page_num == 3 && !settings->dockedInt) {
 		gtk_widget_show(settings->toolbarStudypad);	
 	}	
 	*/
-	else if(page_num == 3) {
+	else if(page_num == 2) {
 		gtk_widget_show(settings->toolbarStudypad);	
 	}		
 }
