@@ -401,19 +401,19 @@ static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_html_print(widgets.html_comm, FALSE);
+	gui_html_print(widgets.html_book, FALSE);
 }
 
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_copy_html(widgets.html_comm);
+	gui_copy_html(widgets.html_book);
 }
 
 
 static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_find_dlg(widgets.html_comm, settings.book_mod, FALSE, NULL);
+	gui_find_dlg(widgets.html_book, settings.book_mod, FALSE, NULL);
 }
 
 
@@ -871,10 +871,18 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
 	gtk_widget_hide(menu1_uiinfo[7].widget);
 	gtk_widget_hide(menu1_uiinfo[8].widget);
-	gtk_widget_hide(file3_menu_uiinfo[0].widget);
-	gtk_widget_hide(file3_menu_uiinfo[1].widget);
-	gtk_widget_hide(edit3_menu_uiinfo[2].widget);
+	//gtk_widget_hide(file3_menu_uiinfo[0].widget);
+	//gtk_widget_hide(file3_menu_uiinfo[1].widget);
+	//gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 				
+	
+	
+	view_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+				  view_menu);
+	
+	gui_add_mods_2_gtk_menu(GBS_DESC_LIST, view_menu,
+				(GCallback) on_view_mod_activate);
 								
 	
 	lookup_selection_menu = gtk_menu_new();
