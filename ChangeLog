@@ -2,6 +2,8 @@
 
 	* fix bug reporting URL in configure.in (the project is not hosted at 
 	  gnome.org.... yet...)
+	* updated spec file
+	* fixed e-mail addresses in various files
 	
 
 2003-12-10  Terry <tbiggs@users.sf.net>
