@@ -671,11 +671,13 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 	case TABBED_BROWSING:	
 		if (GTK_TOGGLE_BUTTON(check_button.enable_tabbed_browsing)->active) {
 			xml_set_value("GnomeSword", "tabs", "browsing", "1");
+			settings.browsing = TRUE;
 			gui_notebook_main_setup(NULL);
 			gtk_widget_show(widgets.hboxtb);
 		} else {
 			xml_set_value("GnomeSword", "tabs", "browsing", "0");
 			gtk_widget_hide(widgets.hboxtb);
+			settings.browsing = FALSE;
 			gui_close_all_tabs();//gui_notebook_main_shutdown();
 		}
 		settings.browsing = atoi(xml_get_value("tabs", "browsing"));
