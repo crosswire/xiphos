@@ -47,7 +47,6 @@ static SWModule
 gboolean
 displaydictlexSBSWORD(gchar *modName, gchar *key, SETTINGS *s)
 {
-	//gboolean retval = FALSE;
 	gchar 
 		buf[256], 
 		*utf8str,
@@ -61,16 +60,24 @@ displaydictlexSBSWORD(gchar *modName, gchar *key, SETTINGS *s)
 			s->bible_verse_num_color,
 			modName);
 	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));	
-	
-	//showSBVerseList(s);
-	ModMap::iterator it; 	
-	it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
-		verselistsbMod = (*it).second;  //-- change module to new module
-		//g_warning("in verselist key = %s",key);
+	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
+	sprintf(buf,"</body</html>");	
+	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
+	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
+	endHTML(s->vlsbhtml);	
+	if(!strcmp(modName,verselistsbMod->Name())){
+		g_warning("in verselist key = %s",key);
 		verselistsbMod->SetKey(key); //-- set key to the first one in the list
 		verselistsbMod->Display(); 
+	}else{
+		ModMap::iterator it; 	
+		it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+		if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
+			verselistsbMod = (*it).second;  //-- change module to new module
+			g_warning("in verselist key = %s mod = %s",key,verselistsbMod->Name());
+			verselistsbMod->SetKey(key); //-- set key to the first one in the list
+			verselistsbMod->Display(); 
+		}
 	}
 	return TRUE;	
 }
