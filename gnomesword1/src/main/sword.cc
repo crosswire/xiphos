@@ -28,6 +28,10 @@
 #include <swmgr.h>
 #include <swmodule.h>
 
+#ifdef USE_SWORD_CVS
+#include <stringmgr.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -699,17 +703,25 @@ void main_dictionary_entery_changed(char * mod_name)
 	gint count = 7, i;
 	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
+	gchar *key2 = NULL;
 	static gboolean firsttime = TRUE;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 	gint height;
+	//StringMgr *strmgr;
 	
+	//strmgr = new StringMgr();
 	key = (gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
 	//g_warning(key);
-	key = g_ascii_strup(key,strlen(key));
+	key2 = g_utf8_strup(key,strlen(key));
+	//key2 = toupperstr(key);
+	g_warning(key2);
+	
+	//key = g_ascii_strup(key,strlen(key));
 	//g_warning(key);
-	backend->set_module_key(mod_name, key);
+	backend->set_module_key(mod_name, key2);
+	g_free(key2);
 	//g_warning("mod = %s key = %s",mod_name, key);
 	key = backend->get_module_key();
 	//g_warning(key);
@@ -883,6 +895,10 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.currentverse = xml_get_value(
 					"keys", "verse");
 	}
+	
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	gui_change_window_title(settings.MainWindowModule);
+	
 	style = get_conf_file_item(file, mod_name, "style");
 	if((style) && strcmp(style,"verse"))
 		settings.versestyle = FALSE;
