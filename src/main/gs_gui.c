@@ -185,7 +185,7 @@ static gint button_release_event(GtkWidget * html, GdkEventButton * event,
 
 static void on_btnSBDock_clicked(GtkButton * button, gpointer user_data)
 {
-	gui_attach_detach_shortcutbar(&settings);
+	gui_attach_detach_shortcutbar();
 }
 
 /******************************************************************************
@@ -229,7 +229,7 @@ static void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 
 static void on_btn_search_clicked(GtkButton *button, gpointer user_data)
 {
-	showSBGroup(&settings, settings.searchbargroup);
+	showSBGroup(settings.searchbargroup);
 } 
 
 /******************************************************************************
@@ -304,7 +304,11 @@ static void workbook_upper_switch_page(GtkNotebook * notebook,
 	extern gboolean havepercomm;
 	
 	if (!firsttime) {
-		changepagenotebook(notebook, page_num);	
+		/*
+		 * Store the page number so we can open to it the next
+		 * time we start.
+		 */
+		settings.notebook3page = page_num;
 	}
 	firsttime = FALSE;	
 	

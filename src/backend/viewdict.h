@@ -27,6 +27,7 @@
 extern "C" {
 #endif
 #include "gs_gnomesword.h"
+#include "settings.h"
 
 	void backend_setup_viewdict(GtkWidget * text, SETTINGS * s);
 	void backend_shutdown_viewdict(void);

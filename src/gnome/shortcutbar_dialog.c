@@ -34,7 +34,7 @@
 /* main */ 
 #include "gs_gnomesword.h"
 #include "support.h"
-
+#include "settings.h"
 
 /******************************************************************************
  * Name
@@ -43,7 +43,7 @@
  * Synopsis
  *   #include "shortcutbar_dialog.h"
  *   
- *   void gui_attach_detach_shortcutbar(SETTINGS * s)
+ *   void gui_attach_detach_shortcutbar(void)
  *
  * Description
  *   dock/undock shortcut bar
@@ -53,36 +53,36 @@
  *   
  */
 
-void gui_attach_detach_shortcutbar(SETTINGS * s)
+void gui_attach_detach_shortcutbar(void)
 {
 	gint biblepanesize;
 
-	if (s->docked) {
-		s->docked = FALSE;
-		biblepanesize = s->gs_width / 2;
-		s->dockSB = gui_create_shortcutbar_dialog(s);
-		gtk_widget_reparent(s->shortcut_bar, s->vboxDock);
+	if (settings.docked) {
+		settings.docked = FALSE;
+		biblepanesize = settings.gs_width / 2;
+		settings.dockSB = gui_create_shortcutbar_dialog();
+		gtk_widget_reparent(settings.shortcut_bar, settings.vboxDock);
 		settings.showshortcutbar = TRUE;
-		gtk_widget_show(s->shortcut_bar);
-		e_paned_set_position(E_PANED(s->epaned), 0);
+		gtk_widget_show(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned), 0);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
-				      (s->app, "hpaned1")),
+				      (settings.app, "hpaned1")),
 				     biblepanesize);
-		gtk_widget_show(s->dockSB);
+		gtk_widget_show(settings.dockSB);
 	} else {
-		s->docked = TRUE;
+		settings.docked = TRUE;
 		biblepanesize =
-		    (s->gs_width - s->shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(s->epaned),
-				     s->shortcutbar_width);
+		    (settings.gs_width - settings.shortcutbar_width) / 2;
+		e_paned_set_position(E_PANED(settings.epaned),
+				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
-				      (s->app, "hpaned1")),
+				      (settings.app, "hpaned1")),
 				     biblepanesize);
-		gtk_widget_reparent(s->shortcut_bar,
-				    s->epaned);
-		gtk_widget_destroy(s->dockSB);
+		gtk_widget_reparent(settings.shortcut_bar,
+				    settings.epaned);
+		gtk_widget_destroy(settings.dockSB);
 	}
 }
 
@@ -93,7 +93,7 @@ void gui_attach_detach_shortcutbar(SETTINGS * s)
  * Synopsis
  *   #include "shortcutbar_dialog.h"
  *   
- *   void on_dlgDock_destroy(GtkObject *object, SETTINGS *s)
+ *   void on_dlgDock_destroy(GtkObject *object, gpointer user_data)
  *
  * Description
  *   send the shortcut bar back to the main window before we 
@@ -104,10 +104,11 @@ void gui_attach_detach_shortcutbar(SETTINGS * s)
  *   void
  */
 
-static void on_dlgDock_destroy(GtkObject *object, SETTINGS *s)
+static void on_dlgDock_destroy(GtkObject *object, gpointer user_data)
 {
-	if(!s->docked) /* we need the if to prevent a loop */
-		gui_attach_detach_shortcutbar(s);
+	/* we need the if to prevent a loop */
+	if(!settings.docked)
+		gui_attach_detach_shortcutbar();
 }
 
 /******************************************************************************
@@ -117,7 +118,7 @@ static void on_dlgDock_destroy(GtkObject *object, SETTINGS *s)
  * Synopsis
  *   #include "shortcutbar_dialog.h"
  *   
- *   GtkWidget* gui_create_shortcutbar_dialog (SETTINGS *s)
+ *   GtkWidget* gui_create_shortcutbar_dialog (void)
  *
  * Description
  *   create dialog to hold the shortcut bar when detached
@@ -127,27 +128,27 @@ static void on_dlgDock_destroy(GtkObject *object, SETTINGS *s)
  *   GtkWidget*
  */
 
-GtkWidget* gui_create_shortcutbar_dialog (SETTINGS *s)
+GtkWidget* gui_create_shortcutbar_dialog(void)
 {
-  GtkWidget *dlgDock; 
+	GtkWidget *dlgDock; 
 
-  dlgDock = gtk_window_new (GTK_WINDOW_DIALOG);
-  gtk_object_set_data (GTK_OBJECT (dlgDock), "dlgDock", dlgDock);
-  gtk_window_set_title (GTK_WINDOW (dlgDock), _("GnomeSWORD"));
-  gtk_window_set_policy (GTK_WINDOW (dlgDock), TRUE, TRUE, FALSE);
-  gtk_widget_set_usize(dlgDock, s->shortcutbar_width, s->gs_hight);
-	
-  s->vboxDock = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (s->vboxDock);
-  gtk_object_set_data_full (GTK_OBJECT (dlgDock), "s->vboxDock", s->vboxDock,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (s->vboxDock);
-  gtk_container_add (GTK_CONTAINER (dlgDock), s->vboxDock);
-	
-  gtk_signal_connect (GTK_OBJECT (dlgDock), "destroy",
-                      GTK_SIGNAL_FUNC (on_dlgDock_destroy),
-                      s);
+	dlgDock = gtk_window_new(GTK_WINDOW_DIALOG);
+	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
+	gtk_window_set_title(GTK_WINDOW(dlgDock), _("GnomeSWORD"));
+	gtk_window_set_policy(GTK_WINDOW(dlgDock), TRUE, TRUE, FALSE);
+	gtk_widget_set_usize(dlgDock, settings.shortcutbar_width,
+			settings.gs_hight);
 
-  return dlgDock;
+	settings.vboxDock = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(settings.vboxDock);
+	gtk_object_set_data_full(GTK_OBJECT (dlgDock), "settings.vboxDock",
+		  settings.vboxDock, (GtkDestroyNotify)gtk_widget_unref);
+	gtk_widget_show(settings.vboxDock);
+	gtk_container_add(GTK_CONTAINER(dlgDock), settings.vboxDock);
+
+	gtk_signal_connect(GTK_OBJECT(dlgDock), "destroy",
+			GTK_SIGNAL_FUNC(on_dlgDock_destroy), NULL);
+
+	return dlgDock;
 }
 

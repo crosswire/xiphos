@@ -230,6 +230,9 @@ struct _settings {
 
 	/* store filename for configure file - options */
 	char *fnconfigure;
+
+	/* apply changes to what? */
+	gboolean apply_change;
 };
 
 extern SETTINGS settings;

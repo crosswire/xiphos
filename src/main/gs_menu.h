@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-//#include "sword.h"
+#include "settings.h"
 
 	/*** add sword global options to menus ***/
 	void additemstooptionsmenu(GList * options, SETTINGS * s);

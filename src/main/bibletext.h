@@ -27,6 +27,7 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
+#include "settings.h"
 
 typedef struct _text_find_dialog Text_Find_Dialog;
 struct _text_find_dialog {
