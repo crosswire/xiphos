@@ -129,6 +129,7 @@ struct _settings {
 		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
 		useDefaultDict,
 		strip_words_in_red,
+		browsing, /* true for tabbed browsing */
 		
 		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */

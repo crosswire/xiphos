@@ -605,7 +605,8 @@ void create_mainwindow(void)
 	 * between similar to bookmarks
 	 */
 	widgets.notebook_main = gtk_notebook_new();
-	gtk_widget_show(widgets.notebook_main);
+	if(settings.browsing)
+		gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(vboxMain),
 			   widgets.notebook_main, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 20);
@@ -649,6 +650,7 @@ void create_mainwindow(void)
 	gtk_paned_pack1(GTK_PANED(widgets.hpaned), 
 					widgets.vbox_text, FALSE, TRUE);
 
+	 
 	/*
 	 * text/parallel notebook
 	 */

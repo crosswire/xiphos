@@ -645,6 +645,14 @@ void load_settings_structure(void)
 		settings.docked =  atoi(buf);
 	
 	
+	if(xml_get_value("tabs", "browsing")) {
+		buf = xml_get_value("tabs", "browsing");
+		settings.browsing =  atoi(buf);
+	} else {
+		xml_add_new_item_to_section("tabs","browsing","1");
+		settings.browsing = 1;
+	}
+	
 	buf = xml_get_value("tabs", "bible");
 	if(buf)
 		settings.text_tabs =  atoi(buf);

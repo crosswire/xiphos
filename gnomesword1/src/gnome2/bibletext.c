@@ -705,11 +705,12 @@ void gui_update_text_global_ops(gchar * option, gboolean choice)
 
 void gui_set_text_page_and_key(gint page_num, gchar * key)
 {
+	page_num;
+	
 	/*
 	 * we don't want backend_dispaly_text to be
 	 * called by on_notebook_text_switch_page
 	 */
-	page_num;
 	display_change = FALSE;
 	if (text_last_page != page_num) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
@@ -892,10 +893,7 @@ void gui_setup_text(GList * mods)
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);
 			t->cipher_old = get_cipher_key(t->mod_name);
-		}
-
-		else {
-
+		} else {
 			t->is_locked = 0;
 			t->cipher_old = NULL;
 		}

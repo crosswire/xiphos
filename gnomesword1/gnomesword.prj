@@ -294,7 +294,9 @@ module.po.files=\
 	fr.po\
 	sk.po\
 	ru.po\
-	en_GB.po
+	en_GB.po\
+	ru_RU.po\
+	uk_UK.po
 
 compiler.options.supports=
 compiler.options.include.paths=\
