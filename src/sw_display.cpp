@@ -403,7 +403,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	(const char *) imodule;
 	if (row == 1) {
 		sprintf(tmpBuf,
-			"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i>",
+			"<tr><td><i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i></td></tr>",
 			settings->bible_verse_num_color,
 			settings->verse_num_font_size, imodule.KeyText());
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
