@@ -1,30 +1,23 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * sw_shortcutbar.cpp
-     * -------------------
-     * Sat June 30 2001
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * shortcutbar.cpp - support for Sword commentary modules
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -49,6 +42,7 @@
 #include "gs_shortcutbar.h"
 #include "display.h"
 #include "shortcutbar.h"
+#include "sword.h"
 #include "support.h"
 
 extern gint groupnum7;
@@ -61,7 +55,7 @@ static SWDisplay *display;	//-- to display modules in viewer
 static SWMgr *mgr;
 static SWModule *mod;	//-- module for viewer 
 
-gint sbtypefromModNameSBSW(gchar * modName)
+int backend_sb_type_from_modname(char * mod_name)
 {
     ModMap::iterator it;	//-- iteratior
     SWMgr *mgr;
@@ -71,23 +65,23 @@ gint sbtypefromModNameSBSW(gchar * modName)
 
     mgr = new SWMgr();		//-- create sword mgrs
 	/*** get module type ***/
-    it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName
+    it = mgr->Modules.find(mod_name);	//-- iterate through the modules until we find modName
     if (it != mgr->Modules.end()) {
 	modType = (*it).second->Type();
 
-	if (!strcmp(modType, "Biblical Texts")) {
+	if (!strcmp(modType, TEXT_MODS)) {
 	    retval = 0;
 	}
 
-	if (!strcmp(modType, "Commentaries")) {
+	if (!strcmp(modType, COMM_MODS)) {
 	    retval = 1;
 	}
 
-	if (!strcmp(modType, "Lexicons / Dictionaries")) {
+	if (!strcmp(modType, DICT_MODS)) {
 	    retval = 2;
 	}
 
-	if (!strcmp(modType, "Generic Books")) {
+	if (!strcmp(modType, BOOK_MODS)) {
 	    retval = 3;
 	}
     }
@@ -96,10 +90,10 @@ gint sbtypefromModNameSBSW(gchar * modName)
     return retval;
 }
 
-void save_iconsizeSW(gchar * filename, gchar * large_icons)
+void backend_save_sb_iconsize(char * filename, char * large_icons)
 {
-    gchar conffile[256];
-    gint j = 0;
+    char conffile[256];
+    int j = 0;
 
     sprintf(conffile, "%s/%s", shortcutbarDir, filename);
     SWConfig sbInfo(conffile);
@@ -108,15 +102,15 @@ void save_iconsizeSW(gchar * filename, gchar * large_icons)
 }
 
 
-GList *loadshortcutbarSW(gchar * filename, gchar * group_name,
-			 gchar * use_largeicons)
+GList *backend_load_sb_group(char * filename, char * group_name,
+			 char * use_largeicons)
 {
     SectionMap::iterator sit;
     ConfigEntMap::iterator eit;
     SWConfig *sbconf;
     ConfigEntMap emap;
-    gchar *buf, conffile[256];
-    gint j = 0;
+    char *buf, conffile[256];
+    int j = 0;
     GList *list;
 
     list = NULL;
@@ -143,17 +137,15 @@ GList *loadshortcutbarSW(gchar * filename, gchar * group_name,
     return list;
 }
 
-
-void
-saveshortcutbarSW(gchar * filename, gchar * group_name, gint group_num,
-		  gchar * large_icons)
+void backend_save_sb_group(char * filename, char * group_name, int group_num,
+		  char * large_icons)
 {
     SectionMap::iterator sit;
     ConfigEntMap::iterator eit;
     SWConfig *sbconf;
     ConfigEntMap emap;
-    gchar buf[500], conffile[256], *item_url, *item_name;
-    gint j = 0, number_of_items;
+    char buf[500], conffile[256], *item_url, *item_name;
+    int j = 0, number_of_items;
 
     sprintf(conffile, "%s/%s", shortcutbarDir, filename);
     unlink(conffile);
@@ -175,8 +167,8 @@ saveshortcutbarSW(gchar * filename, gchar * group_name, gint group_num,
 					j, &item_url, &item_name);
 	sprintf(buf, "branch%d", j);
 	emap.erase(buf);
-	emap.insert(ConfigEntMap::value_type(buf, (gchar *) item_name));
-	g_print("saving list item: %s\n", (gchar *) item_name);
+	emap.insert(ConfigEntMap::value_type(buf, (char *) item_name));
+	g_print("saving list item: %s\n", (char *) item_name);
     }
 
     sbconf->Sections["ROOT"] = emap;
@@ -184,18 +176,18 @@ saveshortcutbarSW(gchar * filename, gchar * group_name, gint group_num,
     delete sbconf;
 }
 
-GList *getModlistSW(gchar * modtype)
+GList *backend_get_sb_mod_list(char * modtype)
 {
     GList *list;
     ModMap::iterator it;
     SWMgr *mgr;
-    gchar *buf;
+    char *buf;
 
     mgr = new SWMgr();		//-- create sword mgrs
     list = NULL;
     for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 	if (!strcmp((*it).second->Type(), modtype)) {
-	    buf = g_strdup((gchar *) (*it).second->Description());
+	    buf = g_strdup((char *) (*it).second->Description());
 	    list = g_list_append(list, buf);	/* calling function must free each item */
 	}
     }
@@ -207,22 +199,12 @@ GList *getModlistSW(gchar * modtype)
  * 
  * 
  */
-gboolean displaydictlexSBSW(gchar * modName, gchar * key, SETTINGS * s)
+void backend_display_sb_dictlex(char * modName, char * key)
 {
-    if (s->showshortcutbar) {
-	gchar buf[256], *utf8str, tmpbuf[256];
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->verse_list_notebook),
-			      2);
-	sprintf(s->groupName, "%s", "Viewer");
-	showSBVerseList(s);
-
-	if (!strcmp(modName, mod->Name())) {
+    	if (!strcmp(modName, mod->Name())) {
 	    mod->SetKey(key);	//-- set key to the first one in the list
 	    mod->Display();
-	}
-
-	else {
+	} else {
 	    ModMap::iterator it;
 	    it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
 	    if (it != mgr->Modules.end()) {	//-- if we find the module       
@@ -230,10 +212,7 @@ gboolean displaydictlexSBSW(gchar * modName, gchar * key, SETTINGS * s)
 		mod->SetKey(key);	//-- set key
 		mod->Display();
 	    }
-	}
-	return TRUE;
-    }
-    return FALSE;
+	}    
 }
 
 /****************************************************************************************
@@ -258,7 +237,7 @@ void backend_setup_viewer(GtkWidget * html_widget)
 }
 
 /*** close down viewer dialog ***/
-void shutdownviewerSBSW(void)
+void backend_shutdown_sb_viewer(void)
 {
     delete mgr;
     if (display)

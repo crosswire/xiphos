@@ -31,7 +31,8 @@
 #endif
 #include <gnome.h>
 #include <ctype.h>
-
+#include <gal/e-paned/e-hpaned.h>
+#include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
 #include "sword.h"
@@ -42,14 +43,13 @@
 #include "gs_mainmenu_cb.h"
 #include "support.h"
 #include "gs_file.h"
+#include "gs_info_box.h"
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
 #include "about_modules.h"
 #include "search.h"
 
-#include <gal/e-paned/e-hpaned.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 /*****************************************************************************
 * globals
@@ -107,7 +107,7 @@ initGnomeSword(SETTINGS * s,
 {
         GtkWidget *notebook;
 
-        gint biblepage, commpage;
+        gint biblepage;
 
 
         g_print("%s\n", "Initiating GnomeSword\n");
@@ -222,14 +222,53 @@ initGnomeSword(SETTINGS * s,
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */
-	UpdateChecks(settings);
+	UpdateChecks(s);
 	
 	/* showing the devotional must come after the the app is shown or
 	   it will mess up the shortcut bar display */
 	/* FIXME: maybe we need to move the devotional ? */
-	if (settings->showdevotional) {
-		displayDevotional();
+	if (s->showdevotional) {
+		backend_display_devotional(s);
 	}
+}
+
+void gnomesword_shutdown(SETTINGS * s)
+{
+	GtkWidget *msgbox;
+	extern gchar
+		*gSwordDir,
+		*shortcutbarDir,
+		*fnconfigure,
+		*swbmDir;
+	gint answer = 0;
+	
+	if (s->modifiedSP) {	//-- if study pad file has changed since last save  
+		msgbox = create_InfoBox();
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		
+		switch (answer) {
+		case 0:
+			if (s->studypadfilename) 
+				save_file_program_end(s->htmlSP, s->studypadfilename);
+			break;
+		default:
+			break;
+		}
+	}
+	g_warning("we are done with Gnomesword");
+	//-- free dir and file stuff 
+	g_free(gSwordDir);
+	g_free(shortcutbarDir);
+	g_free(fnconfigure);
+	g_free(swbmDir);
+	
+	//-- free glist
+	g_list_free(options);
+	g_list_free(s->settingslist);
+	gui_shutdownGBS();
+	gui_shutdownDL();
+	gui_shutdownCOMM();
 }
 
 /*****************************************************************************

@@ -521,7 +521,7 @@ void gui_setupDL(SETTINGS * s)
 
 	dl_list = NULL;
 
-	mods = backend_getModListOfTypeSWORD(DICT_MODS);
+	mods = backend_get_list_of_mods_by_type(DICT_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {

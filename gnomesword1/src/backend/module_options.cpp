@@ -44,21 +44,21 @@
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern gchar *gSwordDir;
+extern char *gSwordDir;
 extern SETTINGS *settings;
 
 /******************************************************************************
  * load module option - using sword SWConfig
  ******************************************************************************/
-bool load_module_options(gchar * modName, gchar * option)
+bool backend_load_module_options(char * modName, char * option)
 {
-	gchar buf[255], *yesno;
+	char buf[255], *yesno;
 	bool retval = false;
 
 	sprintf(buf, "%s/modops.conf", gSwordDir);
 	SWConfig module_options(buf);
 	module_options.Load();
-	yesno = (gchar *) module_options[modName][option].c_str();
+	yesno = (char *) module_options[modName][option].c_str();
 	if (!strcmp(yesno, "On"))
 		retval = true;
 	else
@@ -69,9 +69,9 @@ bool load_module_options(gchar * modName, gchar * option)
 /******************************************************************************
  * save module option - using sword SWConfig
  ******************************************************************************/
-bool save_module_options(gchar * modName, gchar * option, gchar * value)
+bool backend_save_module_options(char * modName, char * option, char * value)
 {
-	gchar buf[80], buf2[255];
+	char buf[80], buf2[255];
 
 	sprintf(buf, "%s/modops.conf", gSwordDir);
 	SWConfig module_options(buf);

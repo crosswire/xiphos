@@ -45,11 +45,6 @@ extern "C" {
 #define GS_DOCK_PC "dockPCEditor"
 #define GS_DOCK_SP "dockSPEditor"
     
-/* these strings are not seen by users */
-#define TEXT_MODS "Biblical Texts"
-#define COMM_MODS "Commentaries"
-#define DICT_MODS "Lexicons / Dictionaries"
-#define BOOK_MODS "Generic Books"
     
     
 typedef struct _settings SETTINGS;
@@ -230,7 +225,7 @@ struct _settings {
 		modifiedSP; /* studypad file modified */
 		
 	GList 
-		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
+		*settingslist; /* glist for saveing verse lists - freed in backend_shutdown() gs_sword.cpp*/
 };
 
 typedef struct _search_opt SEARCH_OPT;
@@ -264,6 +259,7 @@ void initGnomeSword(SETTINGS *settings,
 		GList *commentarymods , 
 		GList *dictionarymods, 
 		GList *percommods);
+void gnomesword_shutdown(SETTINGS * s);
 gint addnotebookpages(GtkWidget *notebook, 
 		GList *list,
 		gchar *modName); 

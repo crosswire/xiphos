@@ -40,19 +40,18 @@
 
 gint modwindow;
 
-static void on_btkUKok_clicked(GtkButton * button, gpointer user_data);
+static GtkWidget *entryKey;
+static void on_btkUKok_clicked(GtkButton * button, SETTINGS *s);
 static void on_btnUKcancel_clicked(GtkButton * button, gpointer user_data);
 
-
 /***  ***/
-static void on_btkUKok_clicked(GtkButton * button, gpointer user_data)
+static void on_btkUKok_clicked(GtkButton * button, SETTINGS *s)
 {
-	GtkWidget *dlg, *entry;
+	GtkWidget *dlg;
 	gchar *buf;
-
-	entry = GTK_WIDGET(user_data);
-	buf = gtk_entry_get_text(GTK_ENTRY(entry));
-	savekeySWORD(modwindow, buf);
+	
+	buf = gtk_entry_get_text(GTK_ENTRY(entryKey));
+	backend_save_module_key(modwindow, buf, s);
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(dlg);
 }
@@ -67,7 +66,7 @@ static void on_btnUKcancel_clicked(GtkButton * button, gpointer user_data)
 }
 
 /*** create dialog to add key to unlock a module ***/
-GtkWidget *create_dlgUnlockKey(gint window)
+GtkWidget *create_dlgUnlockKey(gint window, SETTINGS *s)
 {
 	GtkWidget *dlgUnlockKey;
 	GtkWidget *dialog_vbox15;
@@ -151,7 +150,7 @@ GtkWidget *create_dlgUnlockKey(gint window)
 
 	gtk_signal_connect(GTK_OBJECT(btkUKok), "clicked",
 			   GTK_SIGNAL_FUNC(on_btkUKok_clicked),
-			   GTK_WIDGET(entryKey));
+			   s);
 	gtk_signal_connect(GTK_OBJECT(btnUKcancel), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnUKcancel_clicked), NULL);
 

@@ -111,7 +111,7 @@ void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dlg;
 	
-	dlg = create_dlgUnlockKey(GPOINTER_TO_INT(user_data));
+	dlg = create_dlgUnlockKey(GPOINTER_TO_INT(user_data),settings);
 	gtk_widget_show(dlg);
 }
 
