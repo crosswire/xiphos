@@ -83,8 +83,10 @@ module.source.files=\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
+	src/gnome/create_shortcutbar_search.c\
+	src/gnome/create_shortcutbar_viewer.c\
+	src/gnome/splash.c\
 	src/main/char_table.c\
-	src/main/e-splash.c\
 	src/main/gs_bookmarks.c\
 	src/main/gs_commentary.c\
 	src/main/gs_detach_int.c\
@@ -116,8 +118,6 @@ module.source.files=\
 	src/main/gs_viewdict_dlg.c\
 	src/main/gs_viewtext_dlg.c\
 	src/main/main.c\
-	src/main/create_shortcutbar_search.c\
-	src/main/create_shortcutbar_search.h\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c

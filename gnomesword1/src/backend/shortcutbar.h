@@ -48,7 +48,7 @@ extern "C" {
 	gboolean displaydictlexSBSW(gchar * modName,
 				gchar * vlist, 
 				SETTINGS * s);
-	void setupviewerSBSW(GtkWidget * html_widget);
+	void backend_setup_viewer(GtkWidget * html_widget);
 	void shutdownviewerSBSW(void);
 
 #ifdef __cplusplus

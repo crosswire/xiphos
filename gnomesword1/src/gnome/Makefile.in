@@ -161,6 +161,8 @@ libgui_a_SOURCES = \
     about_sword.h \
     create_shortcutbar_search.c \
     create_shortcutbar_search.h \
+    create_shortcutbar_viewer.c \
+    create_shortcutbar_viewer.h \
     splash.c \
     splash.h
 
@@ -174,7 +176,7 @@ libgui_a_AR = $(AR) cru
 libgui_a_LIBADD =
 am_libgui_a_OBJECTS = about_gnomesword.$(OBJEXT) about_modules.$(OBJEXT) \
 	about_sword.$(OBJEXT) create_shortcutbar_search.$(OBJEXT) \
-	splash.$(OBJEXT)
+	create_shortcutbar_viewer.$(OBJEXT) splash.$(OBJEXT)
 libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -186,6 +188,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/about_gnomesword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/about_modules.Po $(DEPDIR)/about_sword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_search.Po \
+@AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_viewer.Po \
 @AMDEP_TRUE@	$(DEPDIR)/splash.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -239,6 +242,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_modules.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_sword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/create_shortcutbar_search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/create_shortcutbar_viewer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/splash.Po@am__quote@
 
 distclean-depend:

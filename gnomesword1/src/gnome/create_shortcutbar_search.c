@@ -1,7 +1,7 @@
 
 /*
  * GnomeSword Bible Study Tool
- * create_shortcutbar_search.c - create the shortcut bar search pane
+ * create_shortcutbar_search.c - create search group gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -26,20 +26,14 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
-#include  <gal/shortcut-bar/e-vscrolled-bar.h>
-#include <gal/widgets/e-unicode.h>
 
-#include  "gs_shortcutbar.h"
-#include  "gs_gnomesword.h"
-#include  "create_shortcutbar_search.h"
-#include "search.h"
+#include "gs_gnomesword.h"
+#include "create_shortcutbar_search.h"
 
 extern SEARCH_OPT so, *p_so;
 
-GList *sblist;			/* for saving search results to bookmarks  */
+
 	
 static  GtkWidget *rrbUseBounds;
 static 	GtkWidget *entrySearch;
@@ -91,11 +85,8 @@ static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 	p_so->search_params =
 			  GTK_TOGGLE_BUTTON(ckbCaseSensitive)->
 			  active ? 0 : 1;	/* get search params - case sensitive */
-		//-- give search string to sword for search
-	
-	sblist = backend_do_search(s, p_so);
-	//if(p_so->found_count)
-		fill_search_results_clist(sblist, p_so, s);
+			
+	search_module(s, p_so);
 }
 
 /******************************************************************************
