@@ -1,6 +1,4 @@
 INCLUDES =  \
-    $(GNOME_INCLUDEDIR) \
-    $(PIXBUF_CFLAGS) \
     $(GNOME_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
@@ -67,14 +65,6 @@ gnomesword_1_0_SOURCES =  \
     utilities.c
     
 gnomesword_1_0_LDADD = \
-    $(GNOME_LIBDIR) \
-    $(GNOMEUI_LIBS) \
-    $(EXTRA_GNOME_LIBS) \
     $(GNOME_LIBS)\
-    $(GNOME_PRINT_LIBS) \
-    $(PIXBUF_LIBS) \
-    $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/backend/libbackend.a\
-    $(SWORD_LIBRARY_PATH) \
-    $(LIB_SWORD)
+    $(top_builddir)/src/backend/libbackend.a
