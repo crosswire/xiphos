@@ -1,3 +1,4 @@
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                           callback.cpp  -  description
                              -------------------
@@ -56,13 +57,13 @@
 
 LISTITEM listitem;		//-- structure for ListEditor items (verse lists and bookmarks)
 gint listrow;			//-- current row in ListEditor clist widget
-bool firstsearch = TRUE;	//-- search dialog is not running when true
-bool firstLE = true;		//-- ListEditor in not running when true
+gboolean firstsearch = true;	//-- search dialog is not running when true
+gboolean firstLE = true;		//-- ListEditor in not running when true
 GtkWidget *searchDlg;		//-- pointer to search dialog
 GtkWidget *listeditor;		//-- pointer to ListEditor
 extern SETTINGS *settings;	//-- pointer to settings structure - (declared in GnomeSword.cpp)
-extern bool ApplyChange;	//-- to keep form looping when book combobox is changed - do we still need this ???
-extern bool file_changed;	//-- ???
+extern gboolean ApplyChange;	//-- to keep form looping when book combobox is changed - do we still need this ???
+extern gboolean file_changed;	//-- ???
 extern gchar *current_filename;	//-- file in studypad
 extern GtkWidget *MainFrm;	//-- GnomeSword widget (gnome app)(declared and set in GnomeSword.cpp)
 extern GtkWidget *NEtext;
@@ -73,7 +74,7 @@ extern gchar *font_mainwindow,	//--
 *font_interlinear,		//--
 *font_currentverse;		//--
 extern GdkColor myGreen;	//-- current verse color for main text window - declared in display.cpp
-extern bool noteModified;	//-- personal comments window changed
+extern gboolean noteModified;	//-- personal comments window changed
 
 extern gboolean autoSave;	//-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
 extern gint answer;		//-- do we save file on exit
@@ -90,8 +91,8 @@ extern gboolean autoscroll;
 extern gboolean isstrongs;	//-- main window selection is not storngs number (GnomeSword.cpp)
 extern char *homedir;
 guint num1, num2, num3;
-bool 	buttonpressed = false;
-bool 	dicttabs,
+gboolean 	buttonpressed = false;
+gboolean 	dicttabs,
 	comtabs,
 	bar,
 	applycolor = false,
@@ -139,10 +140,10 @@ void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
 	saveFile(filename);
 }
 
-//----------------------------------------------------------------------------------------------
-void
-//-- save verse list fileselection dialog ok button clicked-------------------------------------
-on_ok_button4_clicked(GtkButton * button, gpointer user_data) //-- user data is the list widgetn dialog ok button clicked-------------------------------------
+ //----------------------------------------------------------------------------------------------
+ //-- save verse list - fileselection dialog ok button clicke
+ //-- user data - the list widget dialog ok button clicked
+void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *filesel;	//-- pointer to fileselection dialog
 	gchar filename[255];	//-- string to store filename from fileselection dialog
@@ -220,7 +221,7 @@ void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 	if (firstsearch) {
 		searchDlg = create_dlgSearch();
 		searchWindow->initsearchWindow(searchDlg);
-		firstsearch = FALSE;
+		firstsearch = false;
 		gtk_signal_connect(GTK_OBJECT(searchDlg), "destroy",
 				   GTK_SIGNAL_FUNC(on_dlgSearch_destroy),
 				   NULL);
@@ -235,9 +236,9 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 
 	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
 	if (togglebutton->active)
-		strongsSWORD(TRUE);	//-- trun strongs numbers on (GnomeSword.cpp)
+		strongsSWORD(true);	//-- trun strongs numbers on (GnomeSword.cpp)
 	else
-		strongsSWORD(FALSE);	//-- trun strongs numbers off (GnomeSword.cpp)
+		strongsSWORD(false);	//-- trun strongs numbers off (GnomeSword.cpp)
 }
 
 //----------------------------------------------------------------------------------------------
@@ -268,9 +269,9 @@ void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_footnotes_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		footnotesSWORD(TRUE);
+		footnotesSWORD(true);
 	else
-		footnotesSWORD(FALSE);
+		footnotesSWORD(false);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -320,9 +321,9 @@ void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		setversestyleSWORD(TRUE);
+		setversestyleSWORD(true);
 	else
-		setversestyleSWORD(FALSE);
+		setversestyleSWORD(false);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -332,9 +333,9 @@ on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 {
 
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		showIntPage(TRUE);
+		showIntPage(true);
 	else
-		showIntPage(FALSE);
+		showIntPage(false);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -372,7 +373,7 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   gpointer user_data)
 {
 	chapterSWORD();
-	return TRUE;
+	return true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -382,7 +383,7 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 				 gpointer user_data)
 {
 	verseSWORD();
-	return TRUE;
+	return true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -398,7 +399,7 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 				     gpointer user_data)
 {
 	freeformlookupSWORD(event);
-	return TRUE;
+	return true;
 }
 
 
@@ -471,7 +472,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			 gint page_num, gpointer user_data)
 {
 	GtkLabel *label;	//-- pointer to page label
-	static bool firsttime = true;
+	static gboolean firsttime = true;
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- get label
 		changcurcomModSWORD((char *) label->label, page_num);	//-- pass label text and page number 
@@ -492,7 +493,7 @@ on_textComments_button_release_event(GtkWidget * widget,
 				     gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -527,7 +528,7 @@ on_textComp1_button_press_event(GtkWidget * widget,
 				GdkEventButton * event, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -536,7 +537,7 @@ on_textComp2_button_press_event(GtkWidget * widget,
 				GdkEventButton * event, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -545,7 +546,7 @@ on_textComp3_button_press_event(GtkWidget * widget,
 				GdkEventButton * event, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -657,9 +658,9 @@ on_notebook4_switch_page(GtkNotebook * notebook,
 			 gint page_num, gpointer user_data)
 {
 	GtkLabel *label;	//-- pointer to tab label
-	string keyText;		//-- string for verse key text
+	gchar *keyText;		//-- string for verse key text
 	gchar *entryText;	//-- pointer to dict key
-	static bool firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+	static gboolean firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- set label to tab label
 		entryText =
@@ -681,7 +682,7 @@ on_moduleText_selection_notify_event(GtkWidget * widget,
 				     gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -818,9 +819,9 @@ on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		footnotesSWORD(TRUE);
+		footnotesSWORD(true);
 	else
-		footnotesSWORD(FALSE);
+		footnotesSWORD(false);
 }
 
 
@@ -835,7 +836,7 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void
 on_fontpicker2_font_set(GnomeFontPicker * gnomefontpicker,
-			string arg1, gpointer user_data)
+			GString arg1, gpointer user_data)
 {
 
 }
@@ -1085,8 +1086,8 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	text1 = lookup_widget(dlg, "txtAboutSword");
 	text2 = lookup_widget(dlg, "text6");
 	label = lookup_widget(dlg, "label96");
-	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
-	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
+	gtk_text_set_word_wrap(GTK_TEXT(text1), true);
+	gtk_text_set_word_wrap(GTK_TEXT(text2), true);
 	showinfoSWORD(text2, GTK_LABEL(label));
 	gtk_widget_show(dlg);
 }
@@ -1197,7 +1198,7 @@ void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if (firstsearch) {
 		searchDlg = create_dlgSearch();
 		searchWindow->initsearchWindow(searchDlg);
-		firstsearch = FALSE;
+		firstsearch = false;
 		gtk_signal_connect(GTK_OBJECT(searchDlg), "destroy",
 				   GTK_SIGNAL_FUNC(on_dlgSearch_destroy),
 				   NULL);
@@ -1315,7 +1316,7 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
-	static bool firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+	static gboolean firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
 	if (!firsttime) {
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
 	}
@@ -1802,7 +1803,7 @@ on_cbeFreeformLookup_drag_drop(GtkWidget * widget,
 			       gint y, guint time, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1942,7 +1943,7 @@ on_textComments_drag_drop(GtkWidget * widget,
 			  gint x, gint y, guint time, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2001,7 +2002,7 @@ on_moduleText_enter_notify_event(GtkWidget * widget,
 				 gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2183,7 +2184,7 @@ gboolean
 		dictSearchTextChangedSWORD(mytext);
 		return true;
 	}
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2192,7 +2193,7 @@ on_list1_button_press_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer user_data)
 {
 
-	return FALSE;
+	return false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2360,6 +2361,6 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                gpointer         user_data)
 {
         settings->shortcutbarsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
-        if(settings->shortcutbarsize) return TRUE;
-        return FALSE;
+        if(settings->shortcutbarsize) return true;
+        return false;
 }

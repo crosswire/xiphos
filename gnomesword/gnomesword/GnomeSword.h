@@ -24,8 +24,9 @@
 #ifndef __GNOMESWORD_H__
 #define __GNOMESWORD_H__
 
+
 #include <gnome.h>
-#include <string>
+//#include <string>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
 typedef struct _settings SETTINGS;
@@ -78,13 +79,7 @@ void ShutItDown(void);
 
 void UpdateChecks(GtkWidget * mainform);
 
-
-void
-initSword(GtkWidget * mainform,
-	  GtkWidget * menu2,
-	  GtkWidget * menu3,
-	  GtkWidget * menu4,
-	  GtkWidget * menu5);
+void initSword(GtkWidget *mainform);
 
 void searchSWORD(GtkWidget * searchFrm);
 
@@ -92,13 +87,13 @@ void resultsListSWORD(GtkWidget * searchFrm, gint row, gint column);
 
 void setupSearchDlg(GtkWidget * searchDlg);
 
-void strongsSWORD(bool choice);
+void strongsSWORD(gboolean choice);
 
 void addBookmark(void);
 
 void editbookmarksLoad(GtkWidget * editdlg);
 
-void footnotesSWORD(bool choice);
+void footnotesSWORD(gboolean choice);
 
 void changecurModSWORD(gchar * modName);
 
@@ -110,9 +105,9 @@ void changecomp2ModSWORD(gchar * modName);
 
 void changecomp3ModSWORD(gchar * modName);
 
-void setversestyleSWORD(bool choice);
+void setversestyleSWORD(gboolean choice);
 
-void showIntPage(bool choice);
+void showIntPage(gboolean choice);
 
 void chapterSWORD(void);
 
@@ -124,13 +119,13 @@ void freeformlookupSWORD(GdkEventKey * event);
 
 void changcurcomModSWORD(gchar * modName, gint page_num);
 
-void editnoteSWORD(bool editbuttonactive);
+void editnoteSWORD(gboolean editbuttonactive);
 
-void savenoteSWORD(bool noteModified);
+void savenoteSWORD(gboolean noteModified);
 
 void deletenoteSWORD(void);
 
-void changcurdictModSWORD(gchar * modName, string keyText, gint page_num);
+void changcurdictModSWORD(gchar * modName, gchar* keyText, gint page_num);
 void dictSearchTextChangedSWORD(gchar * mytext);
 
 void dictchangekeySWORD(gint direction);
@@ -166,14 +161,17 @@ gint getdictnumber(GtkWidget * text);
 void sbchangeModSword(gint group_num, gint item_num);
 
 void
-applyoptions(bool showshortcut,
-	     bool showcomtabs,
-	     bool showdicttabs,
-	     bool showtextgroup, bool showcomgroup, bool showdictgroup);
+applyoptions(gboolean showshortcut,
+	     gboolean showcomtabs,
+	     gboolean showdicttabs,
+	     gboolean showtextgroup, 
+	     gboolean showcomgroup, 
+	     gboolean showdictgroup);
 
 void add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
 
 void lookupStrongsSWORD(gint theNumber);
+
 
 
 #endif	/* __GNOMESWORD_H__ */
