@@ -49,13 +49,12 @@
 #include "gui/hints.h"
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
-//#include "gui/toolbar_nav.h"
+#include "gui/mod_mgr.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/xml.h"
-
 
 
 /******************************************************************************
@@ -78,7 +77,7 @@
 void frontend_init(void)
 {
 	guint number_of_pages = 0; 
-	g_print("%s\n", "Initiating GnomeSword\n");
+	g_print("%s\n", _("Initiating GnomeSword"));
 	
 	hint.in_popup = FALSE;
 	hint.use_hints = FALSE;
@@ -175,7 +174,7 @@ void frontend_display(void)
 	GS_DIALOG *info;
 	GString *str;
 	
-	g_print("%s\n", "Displaying GnomeSword\n");
+	g_print("%s\n", _("Displaying GnomeSword"));
 	gui_show_main_window();
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
@@ -255,7 +254,7 @@ void frontend_display(void)
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
 	gtk_widget_grab_focus (sidebar.module_list);
-	g_print("done\n");
+	g_print("%s\n\n", _("done"));
 }
 
 
@@ -333,5 +332,5 @@ void shutdown_frontend(void)
 	if (settings.havepercomm)
 		gui_shutdown_percomm();
 
-	g_print("\nGnomeSword is shutdown\n");
+	g_print("\n%s\n", _("GnomeSword is shutdown"));
 }

@@ -31,6 +31,8 @@
 #endif
 #include <string.h>
 
+#include <gnome.h>
+
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
@@ -227,21 +229,21 @@ void init_lists(void)
 	backend_delete_module_mgr();
 
 	settings.havebible = g_list_length(mods.biblemods);
-	g_print("\nNumber of Text modules = %d\n", settings.havebible);
+	g_print("\n%s = %d\n", _("Number of Text modules"), settings.havebible);
 	
 	settings.havecomm = g_list_length(mods.commentarymods);
-	g_print("Number of Commentary modules = %d\n", settings.havecomm);
+	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);
 
 	settings.havedict = g_list_length(mods.dictionarymods);
-	g_print("Number of Dict/lex modules = %d\n", settings.havedict);
+	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
 
 	settings.havebook = g_list_length(mods.bookmods);
-	g_print("Number of Book modules = %d\n", settings.havebook);
+	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
 
 	settings.havepercomm = g_list_length(mods.percommods);
-	g_print("Number of Percomm modules = %d\n", settings.havepercomm);
+	g_print("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm);
 
-	g_print("Number of Devotion modules = %d\n\n", 
+	g_print("%s = %d\n\n", _("Number of Devotion modules"), 
 					g_list_length(mods.devotionmods));
 }
 

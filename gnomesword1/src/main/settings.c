@@ -422,14 +422,19 @@ int init_bookmarks(int new_bookmarks, int have_old)
  *   
  */
 
+
 void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
 {
+#ifdef USE_GNOME2
+	/* do nothing */
+#else
 	gchar group_name[256], icon_size[10];
 	GList *glist = NULL;
 
 	glist = load_sb_group(old_file, group_name, icon_size);
 	save_sb_group(glist, new_file, group_name, icon_size);
 	g_list_free(glist);
+#endif
 }
 
 
