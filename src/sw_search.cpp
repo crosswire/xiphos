@@ -32,6 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
+#include <swmarkupmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <plainhtml.h>
@@ -69,7 +70,7 @@ static char printed = 0;
 static SWDisplay 
 	*searchresultssbDisplay,	/* to display modules in searchresults */
 	*searchresultstextsbDisplay;
-static SWMgr 
+static SWMarkupMgr 
 	*searchresultssbMgr; 
 static SWModule 
 	*searchresultssbMod;   /* module for searchresults */
@@ -117,7 +118,8 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		
 	tmpbuf = g_string_new("");	
 	list = NULL;	
-	searchMgr = new SWMgr();	//-- create sword mgrs
+	searchMgr = new SWMgr();	//-- create sword mgr
+	
 	searchMod = NULL;
 	searchText = lookup_widget (widget, "entrySearch");	//-- pointer to text entry
 	regexSearch = lookup_widget (widget, "rbRegExp");	//-- pointer to radio button
@@ -173,7 +175,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 			  GTK_TOGGLE_BUTTON (caseSensitive)->
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
 		beginHTML(s->srhtml, TRUE);
-		sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\" vlink=\"#459BD0\" alink=\"#208796\"><font color=\"%s\"><b>[%s]</b><br></font>",
+		sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\" vlink=\"#459BD0\" alink=\"#208796\">",
 		s->bible_bg_color, 
 		s->bible_text_color,
 		s->link_color,
@@ -237,7 +239,9 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		endHTML(s->srhtml);		
 	}
 	beginHTML(s->htmlRP, TRUE);
-	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found!</center></body</html>", count, s->found_color,s->searchText);	
+	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
+				count, s->found_color,s->searchText,
+				s->bible_verse_num_color,searchresultssbMod->Name());	
 	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
 	displayHTML(s->htmlRP, utf8str, strlen(utf8str));
 	endHTML(s->htmlRP);			
@@ -276,7 +280,8 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	searchresultssbMgr	= new SWMgr();
+	searchresultssbMgr	= new SWMarkupMgr();
+	searchresultssbMgr->Markup(FMT_HTMLHREF);	
 	searchresultssbMod     = NULL;
 	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
@@ -285,7 +290,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 		searchresultssbMod = (*it).second;
 		sit = searchresultssbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
 		ConfigEntMap &section = (*sit).second;
-		addrenderfiltersSWORD(searchresultssbMod, section);
+		//addrenderfiltersSWORD(searchresultssbMod, section);
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			searchresultssbMod->Disp(searchresultstextsbDisplay);			
 		}else{
