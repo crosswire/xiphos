@@ -74,7 +74,9 @@ extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.
 extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
 extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
 extern gint ibookmarks;    //-- number of bookmark menu items
-
+guint		num1,
+				num2,
+				num3;
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -1271,9 +1273,6 @@ on_fpMainwindow_font_set               (GnomeFontPicker *gnomefontpicker,
                                         gpointer         user_data)
 {
 	font_mainwindow = arg1.str;
-	gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
-
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1283,7 +1282,6 @@ on_fbCurrentverse_font_set             (GnomeFontPicker *gnomefontpicker,
                                         gpointer         user_data)
 {
   font_currentverse = arg1.str;
-  gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1293,7 +1291,6 @@ on_fbInerlinear_font_set               (GnomeFontPicker *gnomefontpicker,
                                         gpointer         user_data)
 {
   font_interlinear = arg1.str;
-  gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1305,8 +1302,19 @@ on_cpfgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg4,
                                         gpointer         user_data)
 {
-	setcurrentversecolor(arg1,arg2,arg3);
-	gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomecolorpicker))));
+	GtkWidget	*dlg,
+						*btnok,
+						*btnapply;
+	
+	num1 = arg1;
+	num2 = arg2;
+	num3 = arg3;
+						
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (gnomecolorpicker));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true); 		
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1823,7 +1831,11 @@ void
 on_btnPropertyboxOK_clicked            (GtkButton       *button,
                                         gpointer         user_data)
 {
+ 	GtkWidget	*dlg;
 
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
+	setcurrentversecolor(num1,num2,num3);		
+	gtk_widget_destroy(dlg);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1831,7 +1843,7 @@ void
 on_btnPropertyboxApply_clicked         (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+	setcurrentversecolor(num1,num2,num3); 	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1839,7 +1851,10 @@ void
 on_btnPropertyboxCancel_clicked        (GtkButton       *button,
                                         gpointer         user_data)
 {
+ 	GtkWidget	*dlg;
 
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));	
+	gtk_widget_destroy(dlg);
 }
 
 //----------------------------------------------------------------------------------------------
