@@ -232,32 +232,30 @@ void savebookmarks(GtkWidget *ctree_widget)
     /***************************************************************************/	
 }
 
-
-/******************************************************************************
- * load bookmarks file into listeditor
- *****************************************************************************/
-static gint
-conv_oldmenubookmarks(void)
-{
-	gint retval=0;
-	
-	return retval;
-}
-
-
-
 /******************************************************************************
  * no bookmark dir found on startup
  ******************************************************************************/
 void 
-createbookmarksBM(void)
+createbookmarksBM(gchar *dir)
 {
-	gint oldbookmarks;
+	gchar buf[255];
+
+	sprintf(buf, "%s/Personal.conf", dir);
+	SWConfig bmInfo(buf);
 	
-	oldbookmarks = conv_oldmenubookmarks();
-	if(oldbookmarks)
-		return;
+	bmInfo["ROOT"]["branch0"] = "Personal,Personal.conf";
+	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?],GROUP";
+	bmInfo["branch0"]["branch5"]="[What is the Gospel?],GROUP";
+	bmInfo["branch0"]["branch7"]="Romans 8:28,KJV";
+	bmInfo["branch0"]["branch8"]="Rev 1:5,KJV";
 	
+	bmInfo["branch1"]["branch2"]="Romans 1:16,KJV";
+	bmInfo["branch1"]["branch3"]="Eph 2:8,KJV";
+	bmInfo["branch1"]["branch4"]="Acts  16:31,KJV";
+	
+	bmInfo["branch5"]["branch6"]="1 Cor 15:1,KJV";
+	
+	bmInfo.Save(); 	
 }
 
 

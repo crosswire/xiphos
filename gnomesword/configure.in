@@ -67,7 +67,7 @@ for i in $2; do
   done
 done
 ])
- 
+
 dnl looking for general SWORD path 
  
 AC_ARG_WITH(sworddir, 
@@ -267,6 +267,7 @@ AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" 
 AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" = xyes && test "x$have_speller" = xyes && test "x$have_gal" = xno)
 AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$have_speller" = xno && test "x$have_gal" = xno)
 
+
 AC_OUTPUT([
 Makefile
 help/Makefile
@@ -278,10 +279,11 @@ src/Makefile
 echo
 echo "Summary of GnomeSword configuration:"
 echo
+
 if test "x$have_speller" = xyes; then
-        echo "Spellchecking:                    enabled"
+        echo "Spellchecking:                enabled"
 else
-        echo "Spellchecking:                    disabled"
+        echo "Spellchecking:                disabled"
 fi
 
 if test "x$have_gnomeprint" = xyes; then

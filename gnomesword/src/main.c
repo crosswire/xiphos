@@ -32,6 +32,7 @@
 #include "sw_properties.h"
 #include "gs_setup.h"
 #include "gs_bookmarks.h"
+#include "sw_bookmarks.h"
 #include "e-splash.h"
 
 extern SETTINGS *settings;
@@ -39,7 +40,9 @@ SETTINGS myset;
 extern GList 	*biblemods,
 	*commentarymods,
 	*dictionarymods,
-	*percommods;
+	*percommods;	
+extern gchar *swbmDir;
+
 int
 main (int argc, char *argv[])
 {
@@ -97,8 +100,10 @@ main (int argc, char *argv[])
 		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash);
 	if(icreatefiles == 2 || icreatefiles == 3 ){		
-		if(loadoldbookmarks() == 0)
+		if(loadoldbookmarks() == 0){
 			g_warning("loadoldbookmarks failed!");
+			createbookmarksBM(swbmDir);
+		}
 	}
   	if(settings->showsplash)
 		gtk_widget_unref (splash);
