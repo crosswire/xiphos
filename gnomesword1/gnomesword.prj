@@ -1,4 +1,4 @@
-# Anjuta Version 1.2.0 
+# Anjuta Version 1.1.98 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.2.0
+anjuta.version=1.1.98
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -146,7 +146,8 @@ module.include.files=\
 	src/gui/parallel_dialog.h\
 	src/gui/parallel_view.h\
 	src/gui/widgets.h\
-	src/gui/preferences_cell_renderer.h
+	src/gui/preferences_cell_renderer.h\
+	src/gui/session.h
 
 module.source.name=.
 module.source.type=
@@ -226,7 +227,8 @@ module.source.files=\
 	src/gnome2/bookmarks_treeview.c\
 	src/gnome2/preferences_cell_renderer.c\
 	src/gnome2/bookmarks_menu.c\
-	src/gnome2/spell_gnome_spell.c
+	src/gnome2/spell_gnome_spell.c\
+	src/gnome2/session.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

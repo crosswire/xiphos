@@ -24,7 +24,7 @@
 #endif
 
 #include <gnome.h>
-#include <gal-2.0/gal/widgets/e-unicode.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
@@ -483,7 +483,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	cbe_book = GTK_COMBO(cbBook)->entry;
 	gtk_widget_show(cbe_book);
-	gtk_tooltips_set_tip (tooltips, cbe_book, _("Change book of the Bible"), 
+	gtk_tooltips_set_tip (tooltips, cbe_book, _("Select a Book of the Bible"), 
 				NULL);
 	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
 
@@ -498,7 +498,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spb_chapter_adj), 1, 0);
 	gtk_widget_show(spb_chapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), spb_chapter,
-				  _("Change chapter"), NULL);
+				  _("Change Chapter"), NULL);
 
 	label = gtk_label_new ("");
 	gtk_widget_show (label);
@@ -511,7 +511,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spb_verse_adj), 1, 0);
 	gtk_widget_show(spb_verse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), spb_verse,
-				  _("Change verse"), NULL);
+				  _("Change Verse"), NULL);
 
 	label = gtk_label_new ("");
 	gtk_widget_show (label);
@@ -523,7 +523,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(cbe_freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  cbe_freeform_lookup, 
-		_("Enter desired verse in 'book 1:1' format and hit return or click Goto button")
+		_("Enter a Verse reference in Book 1:1 format and press Return or click the Go to Verse button")
 		, NULL);
 	//gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
 	nav_bar.lookup_entry = cbe_freeform_lookup;

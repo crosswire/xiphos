@@ -239,7 +239,7 @@ void frontend_display(void)
 		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
-			_("The Setup Druid was canceled."),
+			_("The Setup Druid was cancelled."),
 			_("Do you wish to set preferences now?"));
 		info->label_top = str->str;
 		info->yes = TRUE;
