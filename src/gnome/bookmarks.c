@@ -336,7 +336,7 @@ void gui_new_xml_bookmark_file(void)
  * Return value
  *   xmlNodePtr
  */
-
+/*
 static xmlNodePtr create_xml_bookmark_file(gchar * filename,
 					   gchar * caption)
 {
@@ -370,7 +370,7 @@ static xmlNodePtr create_xml_bookmark_file(gchar * filename,
 	xmlFreeDoc(xml_doc);
 	return xml_node;
 }
-
+*/
 
 /******************************************************************************
  * Name

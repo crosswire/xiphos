@@ -26,7 +26,8 @@
 extern "C"
 {
 #endif
-       
+#include <glib-1.2/glib.h>
+	
 /* list types */
 #define TEXT_LIST 0 
 #define TEXT_DESC_LIST 1 
@@ -51,4 +52,3 @@ void shutdown_list(void);
 #endif
 
 #endif
-

@@ -26,9 +26,15 @@
 #include <gnome.h>
 #include <gal/e-paned/e-hpaned.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
+
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
+#include "gui/gbs_display.h"
 #include "gui/gbs_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
@@ -45,6 +51,7 @@
 #include "main/lists.h"
 #include "main/gbs.h"
 #include "main/sword.h"
+#include "main/xml.h"
 
 /******************************************************************************
  *  externs  
@@ -55,19 +62,26 @@ extern GdkPixmap *pixmap3;
 extern GdkBitmap *mask1;
 extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
+extern gboolean in_url;
 
 /******************************************************************************
  *  static   
  */
-static void add_node_children(GtkCTreeNode *node, gchar *bookname,
+static void add_node_children(GtkCTreeNode *node, GBS_DATA *gbs,
 					unsigned long offset);
-static gboolean in_url;
 static gboolean gbs_find_running;
 static GtkCTreeNode *rootnode;	
 static GBS_DATA *cur_g;
+static gint tree_level;	
 /* list of gbs data structures */
 static GList *gbs_list;	
 
+/*
+static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+{
+	
+}
+*/
 
 /******************************************************************************
  * Name
@@ -155,7 +169,7 @@ static GtkCTreeNode *add_node_gbs(NODEDATA * data)
  *   void
  */ 
  
-static void add_node_children(GtkCTreeNode *node, gchar *bookname,
+static void add_node_children(GtkCTreeNode *node, GBS_DATA * gbs,
 		unsigned long offset)
 {
 	gchar buf[256];
@@ -166,7 +180,7 @@ static void add_node_children(GtkCTreeNode *node, gchar *bookname,
 	
 	p_nodedata = &nodedata;
 	p_nodedata->sibling = NULL;
-	p_nodedata->buf[1] = bookname;
+	p_nodedata->buf[1] = gbs->mod_name;
 
 	if (gbs_treekey_first_child(offset)) {
 		offset = gbs_get_treekey_offset();
@@ -249,8 +263,18 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
 	text = display_gbs(cur_g->mod_name, key);
 	
 	if(text){
+#ifdef USE_GTKEMBEDMOZ	
+		if(!cur_g->is_rtol) 
+			entry_display(cur_g->html, cur_g->mod_name,
+		   		text, key, TRUE);
+		else
+			entry_display_mozilla(cur_g->html, cur_g->mod_name,
+		   		text, key, TRUE);
+
+#else	
 		entry_display(cur_g->html, cur_g->mod_name,
-		   text, key, TRUE);
+		   		text, key, TRUE);
+#endif	
 		free(text);
 	}
 }
@@ -305,51 +329,39 @@ void gui_set_gbs_frame_label(void)
 static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 			gint column, GdkEvent * event, GBS_DATA * gbs)
 {
-	gchar *bookname, *nodename, *offset, *key, *text = NULL;
+	gchar *bookname, *nodename, *offset;
 	GtkCTreeNode *treeNode;
+	GtkCTreeRow *treerow;
 	
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
 	widgets.ctree_widget_books = gbs->ctree;
-
+	treerow = GTK_CTREE_ROW(treeNode); 
+	
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 					cell[0])->text;
 	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 					cell[1])->text;
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 					cell[2])->text;
+	tree_level = treerow->level;
+	
 	gbs->offset = strtoul(offset, NULL, 0);
 	
 	change_book(bookname, gbs->offset);
 	
-	
-	text = get_text_from_offset(gbs->mod_name, offset);
-	if (text) {
-	/** fill ctree node with children **/
+	if (tree_level >= 1) {		
+		/** fill ctree node with children **/
 		if ((GTK_CTREE_ROW(treeNode)->children == NULL)
 		    && (!GTK_CTREE_ROW(treeNode)->is_leaf)) {
-			add_node_children(treeNode, bookname, 
-				    strtoul(offset, NULL, 0));     
+			add_node_children(treeNode, gbs, 
+				    gbs->offset);     
 			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
 					 treeNode);
-		}
-		key = get_book_key(gbs->mod_name);
-		if(key) {
-			settings.book_key = key;
-			xml_set_value("GnomeSword", "key", "book", key);
-		} else {
-			settings.book_key[0] = '\0';
-			xml_set_value("GnomeSword", "key", "book",NULL);
-		}	
-		
-		entry_display(gbs->html, gbs->mod_name,
-		   text, key, TRUE);
-		if(key) 
-			free(key);
-		free(text);
-	} else {
-		settings.book_key[0] = '\0';
+		} 
+		gbs_display(gbs, offset, tree_level, treerow->is_leaf);
 	}
 }
+
 
 /******************************************************************************
  * Name
@@ -465,14 +477,6 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	cur_g = g;
 	settings.whichwindow = BOOK_WINDOW;
 	gui_change_window_title(g->mod_name);
-	/*
-	 * set search module to current gbs module 
-	 */
-//	strcpy(settings.sb_search_mod, g->mod_name);
-	/*
-	 * set search frame label to current gbs module 
-	 */
-//	gui_set_search_label();
 	
 	switch (event->button) {
 	case 1:
@@ -566,6 +570,52 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	gtk_widget_show(frameGBS);
 	e_paned_pack2(E_PANED(hpanedGBS), frameGBS, TRUE, TRUE);
 
+
+
+#ifdef USE_GTKEMBEDMOZ
+	if (!p_gbs->is_rtol) {
+		scrolledwindowHTML_GBS = gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(scrolledwindowHTML_GBS);
+		gtk_container_add(GTK_CONTAINER(frameGBS),
+				  scrolledwindowHTML_GBS);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+					       (scrolledwindowHTML_GBS),
+					       GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
+	
+		p_gbs->html = gtk_html_new();
+		gtk_widget_show(p_gbs->html);
+		gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
+				  p_gbs->html);
+		gtk_html_load_empty(GTK_HTML(p_gbs->html));
+		gtk_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
+				   GTK_SIGNAL_FUNC(gui_link_clicked), 
+				   NULL);
+		gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
+				   GTK_SIGNAL_FUNC(gui_url), 
+				   (gpointer) widgets.app);
+		gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+				   "button_release_event",
+				   GTK_SIGNAL_FUNC(on_button_release_event),
+				   p_gbs);
+	}
+	else {
+		//gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1");
+		p_gbs->html = gtk_moz_embed_new();
+		gtk_widget_show(p_gbs->html);
+		gtk_container_add(GTK_CONTAINER(frameGBS),
+				  p_gbs->html);
+		gtk_widget_realize(p_gbs->html);
+/*
+		gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+				   "dom_mouse_click",
+				   GTK_SIGNAL_FUNC(mozilla_mouse_click),
+				   NULL);
+*/
+	}
+
+
+#else
 	scrolledwindowHTML_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowHTML_GBS);
 	gtk_container_add(GTK_CONTAINER(frameGBS),
@@ -580,11 +630,6 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
 			  p_gbs->html);
 	gtk_html_load_empty(GTK_HTML(p_gbs->html));
-
-
-	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
-			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row),
-			   p_gbs);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), 
 			   NULL);
@@ -594,6 +639,12 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),
+			   p_gbs);
+#endif			   
+
+
+	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
+			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row),
 			   p_gbs);
 }
 
@@ -695,7 +746,8 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 	
 	create_gbs_pane(g);
 	popupmenu = gui_create_pm_gbs(g); 
-	gnome_popup_menu_attach(popupmenu, g->html, NULL);
+	if (!g->is_rtol)
+		gnome_popup_menu_attach(popupmenu, g->html, NULL);
 	add_book_to_ctree(g->ctree, g->mod_name);
 	gtk_ctree_select(GTK_CTREE(g->ctree),rootnode);
 	on_ctreeGBS_select_row((GtkCList *) g->ctree,0,
@@ -794,6 +846,9 @@ void gui_setup_gbs(GList *mods)
 			gbs->is_locked = 0;
 			gbs->cipher_old = NULL;
 		}
+		gbs->is_rtol = is_module_rtl(gbs->mod_name);
+		gbs->display_level = get_display_level(gbs->mod_name);
+		//g_warning("DisplayLevel %s = %d",gbs->mod_name, gbs->display_level);
 		add_vbox_to_notebook(gbs);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
 		++count;

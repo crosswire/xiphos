@@ -369,28 +369,6 @@ static void button_cancel_clicked(GtkButton * button,
 	gtk_widget_hide(d->dialog);
 }
 
-
-/******************************************************************************
- * Name
- *   entry_activate
- *
- * Synopsis
- *   #include "editor_replace.h"
- *
- *   void entry_activate (GtkWidget *entry, GtkHTMLReplaceDialog *d)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void entry_activate(GtkWidget * entry, GtkHTMLReplaceDialog * d)
-{
-	button_replace_cb(NULL, d);
-}
-
 /******************************************************************************
  * Name
  *   gs_editor_replace_dialog_new

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <glib-1.2/glib.h>
+//#include <glib-1.2/glib.h>
 
 #include "main/module.h"
 #include "main/key.h"	
@@ -35,7 +35,7 @@ extern "C" {
 	
 /* module types */
 #define TEXT_TYPE 0 
-#define COMMENTARY_TYPE 1
+#define COMMENTARY_TYPE 1 
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
        
@@ -50,13 +50,14 @@ extern "C" {
 
 /*** function prototypes ***/
 
+int gbs_treekey_get_parent(unsigned long offset);
 void module_name_from_description(char *mod_name, char *description);
 const char *get_sword_version(void);
 char *get_search_results_text(char * mod_name, char * key);
 char *get_path_to_mods(void);
 void init_sword(void);
 void shutdown_sword(void);
-char *get_text_from_offset(char * module_name, char * offset);
+char *get_text_from_offset(char * module_name, unsigned long offset);
 int set_module(int manager, char * module_name);
 
 

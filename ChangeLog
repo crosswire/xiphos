@@ -1,3 +1,21 @@
+2003-05-12  Terry <tbiggs@users.sf.net>
+
+	* added m4/gnomesword.m4
+	* added macros - AC_CHECK_STATIC_LINKING, AC_CHECK_SWORD
+	  and AC_FIND_ZLIB from BibleTime to gnomesword.m4
+	* moved GS_CHECK_LIB and AC_FIND_FILE to gnomesword.m4 from
+	  configure.in
+	* moved macros/autogen.sh to m4/autogen.sh
+	* removed macros directory
+
+
+2003-05-05  Terry <tbiggs@users.sf.net>
+
+	* added gui/gbs_display.h and gnome/gbs_display.c
+	  to support the disply of Genreal Books
+
+
+
 2003-05-01  Terry <tbiggs@users.sf.net>
 
 	* added url_requested() to gnome/html.c to display images

@@ -31,6 +31,7 @@
 #include "gui/studypad.h"
 
 #include "main/settings.h"
+#include "main/xml.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 

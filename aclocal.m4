@@ -4326,23 +4326,6 @@ AC_DEFUN([AM_PROG_NM],        [AC_PROG_NM])
 # This is just to silence aclocal about the macro not being used
 ifelse([AC_DISABLE_FAST_INSTALL])
 
-# aclocal-include.m4
-# 
-# This macro adds the name macrodir to the set of directories
-# that `aclocal' searches for macros.  
-
-# serial 1
-
-dnl AM_ACLOCAL_INCLUDE(macrodir)
-AC_DEFUN([AM_ACLOCAL_INCLUDE],
-[
-	AM_CONDITIONAL(INSIDE_GNOME_COMMON, false)
-
-	test -n "$ACLOCAL_FLAGS" && ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
-
-	for k in $1 ; do ACLOCAL="$ACLOCAL -I $k" ; done
-])
-
 # isc-posix.m4 serial 2 (gettext-0.11.2)
 dnl Copyright (C) 1995-2002 Free Software Foundation, Inc.
 dnl This file is free software, distributed under the terms of the GNU
@@ -4371,7 +4354,7 @@ AC_DEFUN([AC_ISC_POSIX],
 )
 
 # Macro to add for using GNU gettext.
-# Ulrich Drepper <drepper@cygnus.com>, 1995.
+# Ulrich Drepper <drepper@cygnus.com>, 1995, 1996
 #
 # Modified to never use included libintl. 
 # Owen Taylor <otaylor@redhat.com>, 12/15/1998
@@ -4381,359 +4364,28 @@ AC_DEFUN([AC_ISC_POSIX],
 # be used in projects which are not available under the GNU Public License
 # but which still want to provide support for the GNU gettext functionality.
 # Please note that the actual code is *not* freely available.
+#
+#
+# If you make changes to this file, you MUST update the copy in
+# acinclude.m4. [ aclocal dies on duplicate macros, so if
+# we run 'aclocal -I macros/' then we'll run into problems
+# once we've installed glib-gettext.m4 :-( ]
+#
 
-# serial 5
-
-AC_DEFUN([AM_GNOME_WITH_NLS],
-  [AC_MSG_CHECKING([whether NLS is requested])
-    dnl Default is enabled NLS
-    AC_ARG_ENABLE(nls,
-      [  --disable-nls           do not use Native Language Support],
-      USE_NLS=$enableval, USE_NLS=yes)
-    AC_MSG_RESULT($USE_NLS)
-    AC_SUBST(USE_NLS)
-
-    BUILD_INCLUDED_LIBINTL=no
-    USE_INCLUDED_LIBINTL=no
-
-    dnl If we use NLS figure out what method
-    if test "$USE_NLS" = "yes"; then
-#      AC_DEFINE(ENABLE_NLS)
-#      AC_MSG_CHECKING([whether included gettext is requested])
-#      AC_ARG_WITH(included-gettext,
-#        [  --with-included-gettext use the GNU gettext library included here],
-#        nls_cv_force_use_gnu_gettext=$withval,
-#        nls_cv_force_use_gnu_gettext=no)
-#      AC_MSG_RESULT($nls_cv_force_use_gnu_gettext)
-      nls_cv_force_use_gnu_gettext="no"
-
-      nls_cv_use_gnu_gettext="$nls_cv_force_use_gnu_gettext"
-      if test "$nls_cv_force_use_gnu_gettext" != "yes"; then
-        dnl User does not insist on using GNU NLS library.  Figure out what
-        dnl to use.  If gettext or catgets are available (in this order) we
-        dnl use this.  Else we have to fall back to GNU NLS library.
-	dnl catgets is only used if permitted by option --with-catgets.
-	nls_cv_header_intl=
-	nls_cv_header_libgt=
-	CATOBJEXT=NONE
-
-	AC_CHECK_HEADER(libintl.h,
-	  [AC_CACHE_CHECK([for gettext in libc], gt_cv_func_gettext_libc,
-	    [AC_TRY_LINK([#include <libintl.h>], [return (int) gettext ("")],
-	       gt_cv_func_gettext_libc=yes, gt_cv_func_gettext_libc=no)])
-
-	   if test "$gt_cv_func_gettext_libc" != "yes"; then
-	     AC_CHECK_LIB(intl, bindtextdomain,
-	       [AC_CACHE_CHECK([for gettext in libintl],
-		 gt_cv_func_gettext_libintl,
-		 [AC_CHECK_LIB(intl, gettext,
-		  gt_cv_func_gettext_libintl=yes,
-		  gt_cv_func_gettext_libintl=no)],
-		 gt_cv_func_gettext_libintl=no)])
-	   fi
-
-	   if test "$gt_cv_func_gettext_libc" = "yes" \
-	      || test "$gt_cv_func_gettext_libintl" = "yes"; then
-	      AC_DEFINE(HAVE_GETTEXT)
-	      AM_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
-		[test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)dnl
-	      if test "$MSGFMT" != "no"; then
-		AC_CHECK_FUNCS(dcgettext)
-		AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
-		AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
-		  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
-		AC_TRY_LINK(, [extern int _nl_msg_cat_cntr;
-			       return _nl_msg_cat_cntr],
-		  [CATOBJEXT=.gmo
-		   DATADIRNAME=share],
-		  [CATOBJEXT=.mo
-		   DATADIRNAME=lib])
-		INSTOBJEXT=.mo
-	      fi
-	    fi
-
-	    # Added by Martin Baulig 12/15/98 for libc5 systems
-	    if test "$gt_cv_func_gettext_libc" != "yes" \
-	       && test "$gt_cv_func_gettext_libintl" = "yes"; then
-	       INTLLIBS=-lintl
-	       LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-	    fi
-	])
-
-        if test "$CATOBJEXT" = "NONE"; then
-	  AC_MSG_CHECKING([whether catgets can be used])
-	  AC_ARG_WITH(catgets,
-	    [  --with-catgets          use catgets functions if available],
-	    nls_cv_use_catgets=$withval, nls_cv_use_catgets=no)
-	  AC_MSG_RESULT($nls_cv_use_catgets)
-
-	  if test "$nls_cv_use_catgets" = "yes"; then
-	    dnl No gettext in C library.  Try catgets next.
-	    AC_CHECK_LIB(i, main)
-	    AC_CHECK_FUNC(catgets,
-	      [AC_DEFINE(HAVE_CATGETS)
-	       INTLOBJS="\$(CATOBJS)"
-	       AC_PATH_PROG(GENCAT, gencat, no)dnl
-#	       if test "$GENCAT" != "no"; then
-#		 AC_PATH_PROG(GMSGFMT, gmsgfmt, no)
-#		 if test "$GMSGFMT" = "no"; then
-#		   AM_PATH_PROG_WITH_TEST(GMSGFMT, msgfmt,
-#		    [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)
-#		 fi
-#		 AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
-#		   [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
-#		 USE_INCLUDED_LIBINTL=yes
-#		 CATOBJEXT=.cat
-#		 INSTOBJEXT=.cat
-#		 DATADIRNAME=lib
-#		 INTLDEPS='$(top_builddir)/intl/libintl.a'
-#		 INTLLIBS=$INTLDEPS
-#		 LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-#		 nls_cv_header_intl=intl/libintl.h
-#		 nls_cv_header_libgt=intl/libgettext.h
-#              fi
-            ])
-	  fi
-        fi
-
-        if test "$CATOBJEXT" = "NONE"; then
-	  dnl Neither gettext nor catgets in included in the C library.
-	  dnl Fall back on GNU gettext library.
-	  nls_cv_use_gnu_gettext=yes
-        fi
-      fi
-
-      if test "$nls_cv_use_gnu_gettext" != "yes"; then
-        AC_DEFINE(ENABLE_NLS)
-      else
-         # Unset this variable since we use the non-zero value as a flag.
-         CATOBJEXT=
-#        dnl Mark actions used to generate GNU NLS library.
-#        INTLOBJS="\$(GETTOBJS)"
-#        AM_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
-#	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], msgfmt)
-#        AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
-#        AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
-#	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
-#        AC_SUBST(MSGFMT)
-#	USE_INCLUDED_LIBINTL=yes
-#        CATOBJEXT=.gmo
-#        INSTOBJEXT=.mo
-#        DATADIRNAME=share
-#	INTLDEPS='$(top_builddir)/intl/libintl.a'
-#	INTLLIBS=$INTLDEPS
-#	LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-#        nls_cv_header_intl=intl/libintl.h
-#        nls_cv_header_libgt=intl/libgettext.h
-      fi
-
-      dnl Test whether we really found GNU xgettext.
-      if test "$XGETTEXT" != ":"; then
-	dnl If it is no GNU xgettext we define it as : so that the
-	dnl Makefiles still can work.
-	if $XGETTEXT --omit-header /dev/null 2> /dev/null; then
-	  : ;
-	else
-	  AC_MSG_RESULT(
-	    [found xgettext program is not GNU xgettext; ignore it])
-	  XGETTEXT=":"
-	fi
-      fi
-
-      # We need to process the po/ directory.
-      POSUB=po
-    else
-      DATADIRNAME=share
-      nls_cv_header_intl=intl/libintl.h
-      nls_cv_header_libgt=intl/libgettext.h
+AC_DEFUN([AM_GLIB_LC_MESSAGES],
+  [if test $ac_cv_header_locale_h = yes; then
+    AC_CACHE_CHECK([for LC_MESSAGES], am_cv_val_LC_MESSAGES,
+      [AC_TRY_LINK([#include <locale.h>], [return LC_MESSAGES],
+       am_cv_val_LC_MESSAGES=yes, am_cv_val_LC_MESSAGES=no)])
+    if test $am_cv_val_LC_MESSAGES = yes; then
+      AC_DEFINE(HAVE_LC_MESSAGES, 1,
+        [Define if your <locale.h> file defines LC_MESSAGES.])
     fi
-    AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
-    AC_OUTPUT_COMMANDS(
-     [case "$CONFIG_FILES" in *po/Makefile.in*)
-        sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
-      esac])
+  fi])
 
-
-#    # If this is used in GNU gettext we have to set USE_NLS to `yes'
-#    # because some of the sources are only built for this goal.
-#    if test "$PACKAGE" = gettext; then
-#      USE_NLS=yes
-#      USE_INCLUDED_LIBINTL=yes
-#    fi
-
-    dnl These rules are solely for the distribution goal.  While doing this
-    dnl we only have to keep exactly one list of the available catalogs
-    dnl in configure.in.
-    for lang in $ALL_LINGUAS; do
-      GMOFILES="$GMOFILES $lang.gmo"
-      POFILES="$POFILES $lang.po"
-    done
-
-    dnl Make all variables we use known to autoconf.
-    AC_SUBST(BUILD_INCLUDED_LIBINTL)
-    AC_SUBST(USE_INCLUDED_LIBINTL)
-    AC_SUBST(CATALOGS)
-    AC_SUBST(CATOBJEXT)
-    AC_SUBST(DATADIRNAME)
-    AC_SUBST(GMOFILES)
-    AC_SUBST(INSTOBJEXT)
-    AC_SUBST(INTLDEPS)
-    AC_SUBST(INTLLIBS)
-    AC_SUBST(INTLOBJS)
-    AC_SUBST(POFILES)
-    AC_SUBST(POSUB)
-  ])
-
-AC_DEFUN([AM_GNOME_GETTEXT],
-  [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
-   AC_REQUIRE([AC_PROG_CC])dnl
-   AC_REQUIRE([AC_PROG_RANLIB])dnl
-   AC_REQUIRE([AC_ISC_POSIX])dnl
-   AC_REQUIRE([AC_HEADER_STDC])dnl
-   AC_REQUIRE([AC_C_CONST])dnl
-   AC_REQUIRE([AC_C_INLINE])dnl
-   AC_REQUIRE([AC_TYPE_OFF_T])dnl
-   AC_REQUIRE([AC_TYPE_SIZE_T])dnl
-   AC_REQUIRE([AC_FUNC_ALLOCA])dnl
-   AC_REQUIRE([AC_FUNC_MMAP])dnl
-
-   AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h string.h \
-unistd.h sys/param.h])
-   AC_CHECK_FUNCS([getcwd munmap putenv setenv setlocale strchr strcasecmp \
-strdup __argz_count __argz_stringify __argz_next])
-
-   if test "${ac_cv_func_stpcpy+set}" != "set"; then
-     AC_CHECK_FUNCS(stpcpy)
-   fi
-   if test "${ac_cv_func_stpcpy}" = "yes"; then
-     AC_DEFINE(HAVE_STPCPY)
-   fi
-
-   AM_LC_MESSAGES
-   AM_GNOME_WITH_NLS
-
-   if test "x$CATOBJEXT" != "x"; then
-     if test "x$ALL_LINGUAS" = "x"; then
-       LINGUAS=
-     else
-       AC_MSG_CHECKING(for catalogs to be installed)
-       NEW_LINGUAS=
-       if test "x$LINGUAS" = "x"; then
-           LINGUAS=$ALL_LINGUAS
-       fi
-       for lang in $LINGUAS; do
-         case "$ALL_LINGUAS" in
-          *\ $lang\ *|$lang\ *|*\ $lang) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
-         esac
-       done
-       LINGUAS=$NEW_LINGUAS
-       AC_MSG_RESULT($LINGUAS)
-     fi
-
-     dnl Construct list of names of catalog files to be constructed.
-     if test -n "$LINGUAS"; then
-       for lang in $LINGUAS; do CATALOGS="$CATALOGS $lang$CATOBJEXT"; done
-     fi
-   fi
-
-   dnl The reference to <locale.h> in the installed <libintl.h> file
-   dnl must be resolved because we cannot expect the users of this
-   dnl to define HAVE_LOCALE_H.
-   if test $ac_cv_header_locale_h = yes; then
-     INCLUDE_LOCALE_H="#include <locale.h>"
-   else
-     INCLUDE_LOCALE_H="\
-/* The system does not provide the header <locale.h>.  Take care yourself.  */"
-   fi
-   AC_SUBST(INCLUDE_LOCALE_H)
-
-   dnl Determine which catalog format we have (if any is needed)
-   dnl For now we know about two different formats:
-   dnl   Linux libc-5 and the normal X/Open format
-   test -d intl || mkdir intl
-   if test "$CATOBJEXT" = ".cat"; then
-     AC_CHECK_HEADER(linux/version.h, msgformat=linux, msgformat=xopen)
-
-     dnl Transform the SED scripts while copying because some dumb SEDs
-     dnl cannot handle comments.
-     sed -e '/^#/d' $srcdir/intl/$msgformat-msg.sed > intl/po2msg.sed
-   fi
-   dnl po2tbl.sed is always needed.
-   sed -e '/^#.*[^\\]$/d' -e '/^#$/d' \
-     $srcdir/intl/po2tbl.sed.in > intl/po2tbl.sed
-
-   dnl In the intl/Makefile.in we have a special dependency which makes
-   dnl only sense for gettext.  We comment this out for non-gettext
-   dnl packages.
-   if test "$PACKAGE" = "gettext"; then
-     GT_NO="#NO#"
-     GT_YES=
-   else
-     GT_NO=
-     GT_YES="#YES#"
-   fi
-   AC_SUBST(GT_NO)
-   AC_SUBST(GT_YES)
-
-   dnl If the AC_CONFIG_AUX_DIR macro for autoconf is used we possibly
-   dnl find the mkinstalldirs script in another subdir but ($top_srcdir).
-   dnl Try to locate is.
-   MKINSTALLDIRS=
-   if test -n "$ac_aux_dir"; then
-     MKINSTALLDIRS="$ac_aux_dir/mkinstalldirs"
-   fi
-   if test -z "$MKINSTALLDIRS"; then
-     MKINSTALLDIRS="\$(top_srcdir)/mkinstalldirs"
-   fi
-   AC_SUBST(MKINSTALLDIRS)
-
-   dnl *** For now the libtool support in intl/Makefile is not for real.
-   l=
-   AC_SUBST(l)
-
-   dnl Generate list of files to be processed by xgettext which will
-   dnl be included in po/Makefile.
-   test -d po || mkdir po
-   if test "x$srcdir" != "x."; then
-     if test "x`echo $srcdir | sed 's@/.*@@'`" = "x"; then
-       posrcprefix="$srcdir/"
-     else
-       posrcprefix="../$srcdir/"
-     fi
-   else
-     posrcprefix="../"
-   fi
-   rm -f po/POTFILES
-   sed -e "/^#/d" -e "/^\$/d" -e "s,.*,	$posrcprefix& \\\\," -e "\$s/\(.*\) \\\\/\1/" \
-	< $srcdir/po/POTFILES.in > po/POTFILES
-  ])
-
-
-# progtest.m4 serial 2 (gettext-0.10.40)
-dnl Copyright (C) 1996-2002 Free Software Foundation, Inc.
-dnl This file is free software, distributed under the terms of the GNU
-dnl General Public License.  As a special exception to the GNU General
-dnl Public License, this file may be distributed as part of a program
-dnl that contains a configuration script generated by Autoconf, under
-dnl the same distribution terms as the rest of that program.
-dnl
-dnl This file can can be used in projects which are not available under
-dnl the GNU General Public License or the GNU Library General Public
-dnl License but which still want to provide support for the GNU gettext
-dnl functionality.
-dnl Please note that the actual code of the GNU gettext library is covered
-dnl by the GNU Library General Public License, and the rest of the GNU
-dnl gettext package package is covered by the GNU General Public License.
-dnl They are *not* in the public domain.
-
-dnl Authors:
-dnl   Ulrich Drepper <drepper@cygnus.com>, 1996.
-
-# Search path for a program which passes the given test.
-
-dnl AM_PATH_PROG_WITH_TEST(VARIABLE, PROG-TO-CHECK-FOR,
+dnl AM_GLIB_PATH_PROG_WITH_TEST(VARIABLE, PROG-TO-CHECK-FOR,
 dnl   TEST-PERFORMED-ON-FOUND_PROGRAM [, VALUE-IF-NOT-FOUND [, PATH]])
-AC_DEFUN([AM_PATH_PROG_WITH_TEST],
+AC_DEFUN([AM_GLIB_PATH_PROG_WITH_TEST],
 [# Extract the first word of "$2", so it can be a program name with args.
 set dummy $2; ac_word=[$]2
 AC_MSG_CHECKING([for $ac_word])
@@ -4769,443 +4421,222 @@ fi
 AC_SUBST($1)dnl
 ])
 
-# lcmessage.m4 serial 3 (gettext-0.11.3)
-dnl Copyright (C) 1995-2002 Free Software Foundation, Inc.
-dnl This file is free software, distributed under the terms of the GNU
-dnl General Public License.  As a special exception to the GNU General
-dnl Public License, this file may be distributed as part of a program
-dnl that contains a configuration script generated by Autoconf, under
-dnl the same distribution terms as the rest of that program.
-dnl
-dnl This file can can be used in projects which are not available under
-dnl the GNU General Public License or the GNU Library General Public
-dnl License but which still want to provide support for the GNU gettext
-dnl functionality.
-dnl Please note that the actual code of the GNU gettext library is covered
-dnl by the GNU Library General Public License, and the rest of the GNU
-dnl gettext package package is covered by the GNU General Public License.
-dnl They are *not* in the public domain.
+# serial 5
 
-dnl Authors:
-dnl   Ulrich Drepper <drepper@cygnus.com>, 1995.
+AC_DEFUN(AM_GLIB_WITH_NLS,
+  dnl NLS is obligatory
+  [USE_NLS=yes
+    AC_SUBST(USE_NLS)
 
-# Check whether LC_MESSAGES is available in <locale.h>.
+    dnl Figure out what method
+    nls_cv_force_use_gnu_gettext="no"
 
-AC_DEFUN([AM_LC_MESSAGES],
-[
-  AC_CACHE_CHECK([for LC_MESSAGES], am_cv_val_LC_MESSAGES,
-    [AC_TRY_LINK([#include <locale.h>], [return LC_MESSAGES],
-       am_cv_val_LC_MESSAGES=yes, am_cv_val_LC_MESSAGES=no)])
-  if test $am_cv_val_LC_MESSAGES = yes; then
-    AC_DEFINE(HAVE_LC_MESSAGES, 1,
-      [Define if your <locale.h> file defines LC_MESSAGES.])
-  fi
-])
+    nls_cv_use_gnu_gettext="$nls_cv_force_use_gnu_gettext"
+    if test "$nls_cv_force_use_gnu_gettext" != "yes"; then
+      dnl User does not insist on using GNU NLS library.  Figure out what
+      dnl to use.  If gettext or catgets are available (in this order) we
+      dnl use this.  Else we have to fall back to GNU NLS library.
+      dnl catgets is only used if permitted by option --with-catgets.
+      nls_cv_header_intl=
+      nls_cv_header_libgt=
+      CATOBJEXT=NONE
+      XGETTEXT=:
 
-dnl GNOME_COMPILE_WARNINGS
-dnl Turn on many useful compiler warnings
-dnl For now, only works on GCC
-AC_DEFUN([GNOME_COMPILE_WARNINGS],[
-  AC_ARG_ENABLE(compile-warnings, 
-    [  --enable-compile-warnings=[no/minimum/yes]	Turn on compiler warnings.],,enable_compile_warnings=minimum)
+      AC_CHECK_HEADER(libintl.h,
+        [AC_CACHE_CHECK([for dgettext in libc], gt_cv_func_dgettext_libc,
+	  [AC_TRY_LINK([#include <libintl.h>], [return (int) dgettext ("","")],
+	    gt_cv_func_dgettext_libc=yes, gt_cv_func_dgettext_libc=no)])
 
-  AC_MSG_CHECKING(what warning flags to pass to the C compiler)
-  warnCFLAGS=
-  if test "x$GCC" != xyes; then
-    enable_compile_warnings=no
-  fi
+          gt_cv_func_dgettext_libintl="no"
+          libintl_extra_libs=""
 
-  if test "x$enable_compile_warnings" != "xno"; then
-    if test "x$GCC" = "xyes"; then
-      case " $CFLAGS " in
-      *[\ \	]-Wall[\ \	]*) ;;
-      *) warnCFLAGS="-Wall -Wunused" ;;
-      esac
+	  if test "$gt_cv_func_dgettext_libc" != "yes" ; then
+	    AC_CHECK_LIB(intl, bindtextdomain,
+              [AC_CHECK_LIB(intl, dgettext,
+                            gt_cv_func_dgettext_libintl=yes)])
 
-      ## -W is not all that useful.  And it cannot be controlled
-      ## with individual -Wno-xxx flags, unlike -Wall
-      if test "x$enable_compile_warnings" = "xyes"; then
-	warnCFLAGS="$warnCFLAGS -Wmissing-prototypes -Wmissing-declarations"
+	    if test "$gt_cv_func_dgettext_libc" != "yes" ; then
+              AC_MSG_CHECKING([if -liconv is needed to use gettext])
+              AC_MSG_RESULT([])
+              AC_CHECK_LIB(intl, dcgettext,
+                           [gt_cv_func_dgettext_libintl=yes
+                            libintl_extra_libs=-liconv],
+                           :,-liconv)
+            fi
+          fi
+
+          if test "$gt_cv_func_dgettext_libintl" = "yes"; then
+	    LIBS="$LIBS -lintl $libintl_extra_libs";
+          fi
+
+	  if test "$gt_cv_func_dgettext_libc" = "yes" \
+	    || test "$gt_cv_func_dgettext_libintl" = "yes"; then
+	    AC_DEFINE(HAVE_GETTEXT,1,
+              [Define if the GNU gettext() function is already present or preinstalled.])
+	    AM_GLIB_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
+ 	      [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)dnl
+	    if test "$MSGFMT" != "no"; then
+	      AC_CHECK_FUNCS(dcgettext)
+	      AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+	      AM_GLIB_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
+	        [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
+	      AC_TRY_LINK(, [extern int _nl_msg_cat_cntr;
+		 	     return _nl_msg_cat_cntr],
+	        [CATOBJEXT=.gmo
+	         DATADIRNAME=share],
+	        [CATOBJEXT=.mo
+	         DATADIRNAME=lib])
+	      INSTOBJEXT=.mo
+	    fi
+	  fi
+
+	  # Added by Martin Baulig 12/15/98 for libc5 systems
+	  if test "$gt_cv_func_dgettext_libc" != "yes" \
+	    && test "$gt_cv_func_dgettext_libintl" = "yes"; then
+	    INTLLIBS="-lintl $libintl_extra_libs"
+	    LIBS=`echo $LIBS | sed -e 's/-lintl//'`
+	  fi
+      ])
+
+      if test "$CATOBJEXT" = "NONE"; then
+        dnl Neither gettext nor catgets in included in the C library.
+        dnl Fall back on GNU gettext library.
+        nls_cv_use_gnu_gettext=yes
       fi
     fi
-  fi
-  AC_MSG_RESULT($warnCFLAGS)
 
-  AC_ARG_ENABLE(iso-c,
-    [  --enable-iso-c          Try to warn if code is not ISO C ],,
-    enable_iso_c=no)
-
-  AC_MSG_CHECKING(what language compliance flags to pass to the C compiler)
-  complCFLAGS=
-  if test "x$enable_iso_c" != "xno"; then
-    if test "x$GCC" = "xyes"; then
-      case " $CFLAGS " in
-      *[\ \	]-ansi[\ \	]*) ;;
-      *) complCFLAGS="$complCFLAGS -ansi" ;;
-      esac
-
-      case " $CFLAGS " in
-      *[\ \	]-pedantic[\ \	]*) ;;
-      *) complCFLAGS="$complCFLAGS -pedantic" ;;
-      esac
+    if test "$nls_cv_use_gnu_gettext" != "yes"; then
+      AC_DEFINE(ENABLE_NLS, 1,
+        [always defined to indicate that i18n is enabled])
+    else
+      dnl Unset this variable since we use the non-zero value as a flag.
+      CATOBJEXT=
     fi
-  fi
-  AC_MSG_RESULT($complCFLAGS)
-  if test "x$cflags_set" != "xyes"; then
-    CFLAGS="$CFLAGS $warnCFLAGS $complCFLAGS"
-    cflags_set=yes
-    AC_SUBST(cflags_set)
-  fi
-])
 
-dnl For C++, do basically the same thing.
-
-AC_DEFUN([GNOME_CXX_WARNINGS],[
-  AC_ARG_ENABLE(cxx-warnings, 
-    [  --enable-cxx-warnings=[no/minimum/yes]	Turn on compiler warnings.],,enable_cxx_warnings=minimum)
-
-  AC_MSG_CHECKING(what warning flags to pass to the C++ compiler)
-  warnCXXFLAGS=
-  if test "x$GCC" != xyes; then
-    enable_compile_warnings=no
-  fi
-  if test "x$enable_cxx_warnings" != "xno"; then
-    if test "x$GCC" = "xyes"; then
-      case " $CXXFLAGS " in
-      *[\ \	]-Wall[\ \	]*) ;;
-      *) warnCXXFLAGS="-Wall -Wno-unused" ;;
-      esac
-
-      ## -W is not all that useful.  And it cannot be controlled
-      ## with individual -Wno-xxx flags, unlike -Wall
-      if test "x$enable_cxx_warnings" = "xyes"; then
-	warnCXXFLAGS="$warnCXXFLAGS -Wmissing-prototypes -Wmissing-declarations -Wshadow -Woverloaded-virtual"
+    dnl Test whether we really found GNU xgettext.
+    if test "$XGETTEXT" != ":"; then
+      dnl If it is no GNU xgettext we define it as : so that the
+      dnl Makefiles still can work.
+      if $XGETTEXT --omit-header /dev/null 2> /dev/null; then
+        : ;
+      else
+        AC_MSG_RESULT(
+	  [found xgettext program is not GNU xgettext; ignore it])
+        XGETTEXT=":"
       fi
     fi
-  fi
-  AC_MSG_RESULT($warnCXXFLAGS)
 
-   AC_ARG_ENABLE(iso-cxx,
-     [  --enable-iso-cxx          Try to warn if code is not ISO C++ ],,
-     enable_iso_cxx=no)
+    # We need to process the po/ directory.
+    POSUB=po
 
-   AC_MSG_CHECKING(what language compliance flags to pass to the C++ compiler)
-   complCXXFLAGS=
-   if test "x$enable_iso_cxx" != "xno"; then
-     if test "x$GCC" = "xyes"; then
-      case " $CXXFLAGS " in
-      *[\ \	]-ansi[\ \	]*) ;;
-      *) complCXXFLAGS="$complCXXFLAGS -ansi" ;;
-      esac
+    AC_OUTPUT_COMMANDS(
+      [case "$CONFIG_FILES" in *po/Makefile.in*)
+        sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
+      esac])
 
-      case " $CXXFLAGS " in
-      *[\ \	]-pedantic[\ \	]*) ;;
-      *) complCXXFLAGS="$complCXXFLAGS -pedantic" ;;
-      esac
+    dnl These rules are solely for the distribution goal.  While doing this
+    dnl we only have to keep exactly one list of the available catalogs
+    dnl in configure.in.
+    for lang in $ALL_LINGUAS; do
+      GMOFILES="$GMOFILES $lang.gmo"
+      POFILES="$POFILES $lang.po"
+    done
+
+    dnl Make all variables we use known to autoconf.
+    AC_SUBST(CATALOGS)
+    AC_SUBST(CATOBJEXT)
+    AC_SUBST(DATADIRNAME)
+    AC_SUBST(GMOFILES)
+    AC_SUBST(INSTOBJEXT)
+    AC_SUBST(INTLDEPS)
+    AC_SUBST(INTLLIBS)
+    AC_SUBST(INTLOBJS)
+    AC_SUBST(POFILES)
+    AC_SUBST(POSUB)
+  ])
+
+AC_DEFUN(AM_GLIB_GNU_GETTEXT,
+  [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
+   AC_REQUIRE([AC_PROG_CC])dnl
+   AC_REQUIRE([AC_PROG_RANLIB])dnl
+   AC_REQUIRE([AC_HEADER_STDC])dnl
+   AC_REQUIRE([AC_C_CONST])dnl
+   AC_REQUIRE([AC_C_INLINE])dnl
+   AC_REQUIRE([AC_TYPE_OFF_T])dnl
+   AC_REQUIRE([AC_TYPE_SIZE_T])dnl
+   AC_REQUIRE([AC_FUNC_ALLOCA])dnl
+   AC_REQUIRE([AC_FUNC_MMAP])dnl
+
+   AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h string.h \
+unistd.h sys/param.h])
+   AC_CHECK_FUNCS([getcwd munmap putenv setenv setlocale strchr strcasecmp \
+strdup __argz_count __argz_stringify __argz_next])
+
+   AM_GLIB_LC_MESSAGES
+   AM_GLIB_WITH_NLS
+
+   if test "x$CATOBJEXT" != "x"; then
+     if test "x$ALL_LINGUAS" = "x"; then
+       LINGUAS=
+     else
+       AC_MSG_CHECKING(for catalogs to be installed)
+       NEW_LINGUAS=
+       for lang in ${LINGUAS=$ALL_LINGUAS}; do
+         case "$ALL_LINGUAS" in
+          *$lang*) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
+         esac
+       done
+       LINGUAS=$NEW_LINGUAS
+       AC_MSG_RESULT($LINGUAS)
+     fi
+
+     dnl Construct list of names of catalog files to be constructed.
+     if test -n "$LINGUAS"; then
+       for lang in $LINGUAS; do CATALOGS="$CATALOGS $lang$CATOBJEXT"; done
      fi
    fi
-  AC_MSG_RESULT($complCXXFLAGS)
-  if test "x$cxxflags_set" != "xyes"; then
-    CXXFLAGS="$CXXFLAGS $warnCXXFLAGS $complCXXFLAGS"
-    cxxflags_set=yes
-    AC_SUBST(cxxflags_set)
-  fi
-])
 
-dnl GNOME_X_CHECKS
-dnl
-dnl Basic X11 related checks for X11.  At the end, the following will be
-dnl defined/changed:
-dnl   GTK_{CFLAGS,LIBS}      From AM_PATH_GTK
-dnl   CPPFLAGS		     Will include $X_CFLAGS
-dnl   GNOME_HAVE_SM	     `true' or `false' depending on whether session
-dnl                          management is available.  It is available if
-dnl                          both -lSM and X11/SM/SMlib.h exist.  (Some
-dnl                          Solaris boxes have the library but not the header)
-dnl   XPM_LIBS               -lXpm if Xpm library is present, otherwise ""
-dnl
-dnl The following configure cache variables are defined (but not used):
-dnl   gnome_cv_passdown_{x_libs,X_LIBS,X_CFLAGS}
-dnl
-AC_DEFUN([GNOME_X_CHECKS],
-[
-	AM_PATH_GTK(1.2.0,,AC_MSG_ERROR(GTK not installed, or gtk-config not in path))
-	dnl Hope that GTK_CFLAGS have only -I and -D.  Otherwise, we could
-	dnl   test -z "$x_includes" || CPPFLAGS="$CPPFLAGS -I$x_includes"
-	dnl
-	dnl Use CPPFLAGS instead of CFLAGS because AC_CHECK_HEADERS uses
-	dnl CPPFLAGS, not CFLAGS
-        CPPFLAGS="$CPPFLAGS $GTK_CFLAGS"
+   dnl Determine which catalog format we have (if any is needed)
+   dnl For now we know about two different formats:
+   dnl   Linux libc-5 and the normal X/Open format
+   test -d po || mkdir po
+   if test "$CATOBJEXT" = ".cat"; then
+     AC_CHECK_HEADER(linux/version.h, msgformat=linux, msgformat=xopen)
 
-        saved_ldflags="$LDFLAGS"
-        LDFLAGS="$LDFLAGS $GTK_LIBS"
+     dnl Transform the SED scripts while copying because some dumb SEDs
+     dnl cannot handle comments.
+     sed -e '/^#/d' $srcdir/po/$msgformat-msg.sed > po/po2msg.sed
+   fi
 
-	gnome_cv_passdown_x_libs="$GTK_LIBS"
-	gnome_cv_passdown_X_LIBS="$GTK_LIBS"
-	gnome_cv_passdown_X_CFLAGS="$GTK_CFLAGS"
-	gnome_cv_passdown_GTK_LIBS="$GTK_LIBS"
+   dnl If the AC_CONFIG_AUX_DIR macro for autoconf is used we possibly
+   dnl find the mkinstalldirs script in another subdir but ($top_srcdir).
+   dnl Try to locate is.
+   MKINSTALLDIRS=
+   if test -n "$ac_aux_dir"; then
+     MKINSTALLDIRS="$ac_aux_dir/mkinstalldirs"
+   fi
+   if test -z "$MKINSTALLDIRS"; then
+     MKINSTALLDIRS="\$(top_srcdir)/mkinstalldirs"
+   fi
+   AC_SUBST(MKINSTALLDIRS)
 
-        LDFLAGS="$saved_ldflags $GTK_LIBS"
-
-dnl We are requiring GTK >= 1.1.1, which means this will be fine anyhow.
-	USE_DEVGTK=true
-
-dnl	AC_MSG_CHECKING([whether to use features from (unstable) GTK+ 1.1.x])
-dnl	AC_EGREP_CPP(answer_affirmatively,
-dnl	[#include <gtk/gtkfeatures.h>
-dnl	#ifdef GTK_HAVE_FEATURES_1_1_0
-dnl	   answer_affirmatively
-dnl	#endif
-dnl	], dev_gtk=yes, dev_gtk=no)
-dnl	if test "$dev_gtk" = "yes"; then
-dnl	   USE_DEVGTK=true
-dnl	fi
-dnl	AC_MSG_RESULT("$dev_gtk")
-
-	GNOME_HAVE_SM=true
-	case "$GTK_LIBS" in
-	 *-lSM*)
-	    dnl Already found it.
-	    ;;
-	 *)
-	    dnl Assume that if we have -lSM then we also have -lICE.
-	    AC_CHECK_LIB(SM, SmcSaveYourselfDone,
-	        [GTK_LIBS="-lSM -lICE $GTK_LIBS"],GNOME_HAVE_SM=false,
-		$x_libs -lICE)
-	    ;;
-	esac
-
-	if test "$GNOME_HAVE_SM" = true; then
-	   AC_CHECK_HEADERS(X11/SM/SMlib.h,,GNOME_HAVE_SM=false)
-	fi
-
-	if test "$GNOME_HAVE_SM" = true; then
-	   AC_DEFINE(HAVE_LIBSM)
-	fi
-
-	XPM_LIBS=""
-	AC_CHECK_LIB(Xpm, XpmFreeXpmImage, [XPM_LIBS="-lXpm"], , $x_libs)
-	AC_SUBST(XPM_LIBS)
-
-	AC_REQUIRE([GNOME_PTHREAD_CHECK])
-        LDFLAGS="$saved_ldflags"
-
-	AC_PROVIDE([GNOME_X_CHECKS])
-])
-
-# Configure paths for GTK+
-# Owen Taylor     97-11-3
-
-dnl AM_PATH_GTK([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND [, MODULES]]]])
-dnl Test for GTK, and define GTK_CFLAGS and GTK_LIBS
-dnl
-AC_DEFUN(AM_PATH_GTK,
-[dnl 
-dnl Get the cflags and libraries from the gtk-config script
-dnl
-AC_ARG_WITH(gtk-prefix,[  --with-gtk-prefix=PFX   Prefix where GTK is installed (optional)],
-            gtk_config_prefix="$withval", gtk_config_prefix="")
-AC_ARG_WITH(gtk-exec-prefix,[  --with-gtk-exec-prefix=PFX Exec prefix where GTK is installed (optional)],
-            gtk_config_exec_prefix="$withval", gtk_config_exec_prefix="")
-AC_ARG_ENABLE(gtktest, [  --disable-gtktest       Do not try to compile and run a test GTK program],
-		    , enable_gtktest=yes)
-
-  for module in . $4
-  do
-      case "$module" in
-         gthread) 
-             gtk_config_args="$gtk_config_args gthread"
-         ;;
-      esac
-  done
-
-  if test x$gtk_config_exec_prefix != x ; then
-     gtk_config_args="$gtk_config_args --exec-prefix=$gtk_config_exec_prefix"
-     if test x${GTK_CONFIG+set} != xset ; then
-        GTK_CONFIG=$gtk_config_exec_prefix/bin/gtk-config
-     fi
-  fi
-  if test x$gtk_config_prefix != x ; then
-     gtk_config_args="$gtk_config_args --prefix=$gtk_config_prefix"
-     if test x${GTK_CONFIG+set} != xset ; then
-        GTK_CONFIG=$gtk_config_prefix/bin/gtk-config
-     fi
-  fi
-
-  AC_PATH_PROG(GTK_CONFIG, gtk-config, no)
-  min_gtk_version=ifelse([$1], ,0.99.7,$1)
-  AC_MSG_CHECKING(for GTK - version >= $min_gtk_version)
-  no_gtk=""
-  if test "$GTK_CONFIG" = "no" ; then
-    no_gtk=yes
-  else
-    GTK_CFLAGS=`$GTK_CONFIG $gtk_config_args --cflags`
-    GTK_LIBS=`$GTK_CONFIG $gtk_config_args --libs`
-    gtk_config_major_version=`$GTK_CONFIG $gtk_config_args --version | \
-           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
-    gtk_config_minor_version=`$GTK_CONFIG $gtk_config_args --version | \
-           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
-    gtk_config_micro_version=`$GTK_CONFIG $gtk_config_args --version | \
-           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
-    if test "x$enable_gtktest" = "xyes" ; then
-      ac_save_CFLAGS="$CFLAGS"
-      ac_save_LIBS="$LIBS"
-      CFLAGS="$CFLAGS $GTK_CFLAGS"
-      LIBS="$GTK_LIBS $LIBS"
-dnl
-dnl Now check if the installed GTK is sufficiently new. (Also sanity
-dnl checks the results of gtk-config to some extent
-dnl
-      rm -f conf.gtktest
-      AC_TRY_RUN([
-#include <gtk/gtk.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int 
-main ()
-{
-  int major, minor, micro;
-  char *tmp_version;
-
-  system ("touch conf.gtktest");
-
-  /* HP/UX 9 (%@#!) writes to sscanf strings */
-  tmp_version = g_strdup("$min_gtk_version");
-  if (sscanf(tmp_version, "%d.%d.%d", &major, &minor, &micro) != 3) {
-     printf("%s, bad version string\n", "$min_gtk_version");
-     exit(1);
-   }
-
-  if ((gtk_major_version != $gtk_config_major_version) ||
-      (gtk_minor_version != $gtk_config_minor_version) ||
-      (gtk_micro_version != $gtk_config_micro_version))
-    {
-      printf("\n*** 'gtk-config --version' returned %d.%d.%d, but GTK+ (%d.%d.%d)\n", 
-             $gtk_config_major_version, $gtk_config_minor_version, $gtk_config_micro_version,
-             gtk_major_version, gtk_minor_version, gtk_micro_version);
-      printf ("*** was found! If gtk-config was correct, then it is best\n");
-      printf ("*** to remove the old version of GTK+. You may also be able to fix the error\n");
-      printf("*** by modifying your LD_LIBRARY_PATH enviroment variable, or by editing\n");
-      printf("*** /etc/ld.so.conf. Make sure you have run ldconfig if that is\n");
-      printf("*** required on your system.\n");
-      printf("*** If gtk-config was wrong, set the environment variable GTK_CONFIG\n");
-      printf("*** to point to the correct copy of gtk-config, and remove the file config.cache\n");
-      printf("*** before re-running configure\n");
-    } 
-#if defined (GTK_MAJOR_VERSION) && defined (GTK_MINOR_VERSION) && defined (GTK_MICRO_VERSION)
-  else if ((gtk_major_version != GTK_MAJOR_VERSION) ||
-	   (gtk_minor_version != GTK_MINOR_VERSION) ||
-           (gtk_micro_version != GTK_MICRO_VERSION))
-    {
-      printf("*** GTK+ header files (version %d.%d.%d) do not match\n",
-	     GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION);
-      printf("*** library (version %d.%d.%d)\n",
-	     gtk_major_version, gtk_minor_version, gtk_micro_version);
-    }
-#endif /* defined (GTK_MAJOR_VERSION) ... */
-  else
-    {
-      if ((gtk_major_version > major) ||
-        ((gtk_major_version == major) && (gtk_minor_version > minor)) ||
-        ((gtk_major_version == major) && (gtk_minor_version == minor) && (gtk_micro_version >= micro)))
-      {
-        return 0;
-       }
+   dnl Generate list of files to be processed by xgettext which will
+   dnl be included in po/Makefile.
+   test -d po || mkdir po
+   if test "x$srcdir" != "x."; then
+     if test "x`echo $srcdir | sed 's@/.*@@'`" = "x"; then
+       posrcprefix="$srcdir/"
      else
-      {
-        printf("\n*** An old version of GTK+ (%d.%d.%d) was found.\n",
-               gtk_major_version, gtk_minor_version, gtk_micro_version);
-        printf("*** You need a version of GTK+ newer than %d.%d.%d. The latest version of\n",
-	       major, minor, micro);
-        printf("*** GTK+ is always available from ftp://ftp.gtk.org.\n");
-        printf("***\n");
-        printf("*** If you have already installed a sufficiently new version, this error\n");
-        printf("*** probably means that the wrong copy of the gtk-config shell script is\n");
-        printf("*** being found. The easiest way to fix this is to remove the old version\n");
-        printf("*** of GTK+, but you can also set the GTK_CONFIG environment to point to the\n");
-        printf("*** correct copy of gtk-config. (In this case, you will have to\n");
-        printf("*** modify your LD_LIBRARY_PATH enviroment variable, or edit /etc/ld.so.conf\n");
-        printf("*** so that the correct libraries are found at run-time))\n");
-      }
-    }
-  return 1;
-}
-],, no_gtk=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
-       CFLAGS="$ac_save_CFLAGS"
-       LIBS="$ac_save_LIBS"
+       posrcprefix="../$srcdir/"
      fi
-  fi
-  if test "x$no_gtk" = x ; then
-     AC_MSG_RESULT(yes)
-     ifelse([$2], , :, [$2])     
-  else
-     AC_MSG_RESULT(no)
-     if test "$GTK_CONFIG" = "no" ; then
-       echo "*** The gtk-config script installed by GTK could not be found"
-       echo "*** If GTK was installed in PREFIX, make sure PREFIX/bin is in"
-       echo "*** your path, or set the GTK_CONFIG environment variable to the"
-       echo "*** full path to gtk-config."
-     else
-       if test -f conf.gtktest ; then
-        :
-       else
-          echo "*** Could not run GTK test program, checking why..."
-          CFLAGS="$CFLAGS $GTK_CFLAGS"
-          LIBS="$LIBS $GTK_LIBS"
-          AC_TRY_LINK([
-#include <gtk/gtk.h>
-#include <stdio.h>
-],      [ return ((gtk_major_version) || (gtk_minor_version) || (gtk_micro_version)); ],
-        [ echo "*** The test program compiled, but did not run. This usually means"
-          echo "*** that the run-time linker is not finding GTK or finding the wrong"
-          echo "*** version of GTK. If it is not finding GTK, you'll need to set your"
-          echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
-          echo "*** to the installed location  Also, make sure you have run ldconfig if that"
-          echo "*** is required on your system"
-	  echo "***"
-          echo "*** If you have an old version installed, it is best to remove it, although"
-          echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH"
-          echo "***"
-          echo "*** If you have a RedHat 5.0 system, you should remove the GTK package that"
-          echo "*** came with the system with the command"
-          echo "***"
-          echo "***    rpm --erase --nodeps gtk gtk-devel" ],
-        [ echo "*** The test program failed to compile or link. See the file config.log for the"
-          echo "*** exact error that occured. This usually means GTK was incorrectly installed"
-          echo "*** or that you have moved GTK since it was installed. In the latter case, you"
-          echo "*** may want to edit the gtk-config script: $GTK_CONFIG" ])
-          CFLAGS="$ac_save_CFLAGS"
-          LIBS="$ac_save_LIBS"
-       fi
-     fi
-     GTK_CFLAGS=""
-     GTK_LIBS=""
-     ifelse([$3], , :, [$3])
-  fi
-  AC_SUBST(GTK_CFLAGS)
-  AC_SUBST(GTK_LIBS)
-  rm -f conf.gtktest
-])
+   else
+     posrcprefix="../"
+   fi
+   rm -f po/POTFILES
+   sed -e "/^#/d" -e "/^\$/d" -e "s,.*,	$posrcprefix& \\\\," -e "\$s/\(.*\) \\\\/\1/" \
+	< $srcdir/po/POTFILES.in > po/POTFILES
+  ])
 
-dnl
-dnl And better, use gthreads instead...
-dnl
-
-AC_DEFUN([GNOME_PTHREAD_CHECK],[
-	PTHREAD_LIB=""
-	AC_CHECK_LIB(pthread, pthread_create, PTHREAD_LIB="-lpthread",
-		[AC_CHECK_LIB(pthreads, pthread_create, PTHREAD_LIB="-lpthreads",
-		    [AC_CHECK_LIB(c_r, pthread_create, PTHREAD_LIB="-lc_r",
-			[AC_CHECK_LIB(pthread, __pthread_attr_init_system, PTHREAD_LIB="-lpthread",
-				[AC_CHECK_FUNC(pthread_create)]
-			)]
-		    )]
-		)]
-	)
-	AC_SUBST(PTHREAD_LIB)
-	AC_PROVIDE([GNOME_PTHREAD_CHECK])
-])
 
 
 dnl PKG_CHECK_MODULES(GSTUFF, gtk+-2.0 >= 1.3 glib = 1.3.4, action-if, action-not)
@@ -5264,4 +4695,213 @@ AC_DEFUN(PKG_CHECK_MODULES, [
 ])
 
 
+
+
+dnl 
+dnl code from Evolution configure.in
+dnl
+AC_DEFUN(GS_CHECK_LIB, [
+	dispname="$1"
+	pkgname="$2"
+	minvers="$3"
+	maxvers="$4"
+
+	AC_MSG_CHECKING(for $dispname)
+
+	if gnome-config --libs $pkgname > /dev/null 2>&1; then
+		pkgvers=`gnome-config --modversion $pkgname | sed -e 's/^[[^0-9]]*//'`
+	else
+		pkgvers=not
+	fi
+	AC_MSG_RESULT($pkgvers found)
+
+	pkgvers=`echo $pkgvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	cmpminvers=`echo $minvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	cmpmaxvers=`echo $maxvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	ok=yes
+	if test "$pkgvers" -lt $cmpminvers; then
+		ok=no
+	elif test -n "$maxvers"; then
+		if test "$pkgvers" -gt $cmpmaxvers; then
+			ok=no
+		elif test "$maxvers" != "$minvers" -a "$cmpmaxvers" -eq "$pkgvers"; then
+			ok=no
+		fi
+	fi
+	if test $ok = no; then
+		case $maxvers in
+		"$(top_builddir)/src")
+			dispvers="$minvers or higher"
+			;;
+		$minvers)
+			dispvers="$minvers (exactly)"
+			;;
+		*)
+			dispvers="$minvers or higher, but less than $maxvers,"
+			;;
+		esac
+
+		AC_MSG_ERROR([
+""
+"You need $dispname $dispvers to build GnomeSword"
+"If you think you already have this installed, consult the README."])
+	fi
+])
+
+
+dnl ------------------------------------------------------------------------
+dnl Find a file (or one of more files in a list of dirs)
+dnl ------------------------------------------------------------------------
+dnl
+AC_DEFUN(AC_FIND_FILE,
+[
+$3=NO
+for i in $2; do
+  for j in $1; do
+    if test -r "$i/$j"; then
+      $3=$i
+      break 2
+    fi
+  done
+done
+])
+
+
+dnl taken from BibleTime
+
+AC_DEFUN(AC_FIND_ZLIB,
+[
+AC_MSG_CHECKING([for libz])
+AC_CACHE_VAL(ac_cv_lib_z,
+[
+AC_LANG_C
+kde_save_LIBS="$LIBS"
+LIBS="$all_libraries $USER_LDFLAGS -lz $LIBSOCKET"
+kde_save_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS $all_includes $USER_INCLUDES"
+AC_TRY_LINK(dnl
+[
+#include<zlib.h>
+],
+            [return (zlibVersion() == ZLIB_VERSION); ],
+            eval "ac_cv_lib_z='-lz'",
+            eval "ac_cv_lib_z=no")
+LIBS="$kde_save_LIBS"
+CFLAGS="$kde_save_CFLAGS"
+])dnl
+if test ! "$ac_cv_lib_z" = no; then
+  AC_DEFINE_UNQUOTED(HAVE_LIBZ, 1, [Define if you have libz])
+  LIBZ="$ac_cv_lib_z"
+  AC_SUBST(LIBZ)
+  AC_MSG_RESULT($ac_cv_lib_z)
+else
+  AC_MSG_ERROR(not found. Check your installation and look into config.log)
+  LIBZ=""
+  AC_SUBST(LIBZ)
+fi
+])
+
+
+dnl This file was created by Joachim Ansorg <joachim@ansorgs.de>
+dnl It provides macord for the autoconf package to find the Sword library on your system.
+
+dnl ----------------------------------------------------------------------
+dnl		Check wheter to use static linking
+dnl		first parameter is the required version
+dnl		second is whether to use static sword library
+dnl ----------------------------------------------------------------------
+AC_DEFUN(AC_CHECK_SWORD,
+[
+dnl AC_MSG_CHECKING([for a Sword installation])
+
+dnl The option for the configure script
+AC_ARG_WITH(sword-dir,
+[  --with-sword-dir=DIR     Path where Sword is being installed (default=/usr) ],
+[
+  ac_sword_dir=$withval
+],ac_sword_dir=/usr
+)
+
+AC_ARG_ENABLE(static-sword,
+[  --enable-static-sword    Link to the static Sword library],
+ 	ac_static_sword="YES",
+ 	[ ac_static_sword="$2" ]
+)
+
+dnl try to find Sword library files
+AC_MSG_CHECKING([for Sword library files])
+AC_REQUIRE([AC_FIND_ZLIB])
+ac_sword_library_dirs="$ac_sword_dir/lib /usr/lib /usr/lib/sword /usr/local/lib /usr/local/lib/sword /usr/local/sword/lib"
+
+if test "x$ac_static_sword" = "xYES"; then
+	SEARCH_LIBS="libsword.a";
+else
+	SEARCH_LIBS="libsword.a libsword.so";
+fi
+
+
+AC_CACHE_VAL(ac_cv_sword_libdir, AC_FIND_FILE($SEARCH_LIBS, $ac_sword_library_dirs, ac_cv_sword_libdir))
+
+if test "x$ac_cv_sword_libdir" = "xNO"; then
+  AC_MSG_ERROR(SWORD library not found. Try to use configure with --with-sword-dir=/your/SWORD/path!);
+fi
+
+if test "x$ac_static_sword" = "xYES"; then
+	LIB_SWORD="$ac_cv_sword_libdir/libsword.a";
+else
+	LIB_SWORD="-lsword";
+fi
+
+AC_SUBST(SWORD_LIBRARY_PATH)
+AC_SUBST(LIB_SWORD)
+all_libraries="$all_libraries -L$ac_cv_sword_libdir"
+
+if test "x$ac_static_sword" = "xYES"; then
+	MESSAGE="static library $ac_cv_sword_libdir/libsword.a";
+else
+	MESSAGE="$ac_cv_sword_libdir";
+fi
+AC_MSG_RESULT([$MESSAGE])
+
+dnl -- try to find Swords include files --
+AC_MSG_CHECKING([for Sword include files])
+ac_sword_include_dirs="$ac_sword_dir/include/sword $ac_sword_dir/include /usr/include/sword /usr/include /usr/local/include/sword /usr/local/include /usr/local/sword/include /usr/local/sword/include/sword"
+
+AC_CACHE_VAL(ac_cv_sword_incdir, AC_FIND_FILE(swmgr.h, $ac_sword_include_dirs, ac_cv_sword_incdir))
+
+if test "x$ac_cv_sword_incdir" = "xNO"; then
+	AC_MSG_ERROR([The Sword include file files were not found.
+Please try to use configure with --with-sword-dir=/your/SWORD/path !
+])
+fi
+
+SWORD_INCLUDES="-I$ac_cv_sword_incdir"
+AC_SUBST(SWORD_INCLUDES)
+
+AC_MSG_RESULT([$ac_cv_sword_incdir])
+])
+
+dnl -------------------------------------------------------------------------------
+dnl		Check wheter to use static linking, first parameter is the result (YES/NO)
+dnl -------------------------------------------------------------------------------
+AC_DEFUN(AC_CHECK_STATIC_LINKING,
+[
+$1="NO"
+
+AC_MSG_CHECKING(whether to use static linking)
+AC_ARG_ENABLE(static-linking,
+      [  --enable-static-linking	use static linking],
+      USE_STATIC_LINKING=$enableval, USE_STATIC_LINKING="no")
+
+if test "$USE_STATIC_LINKING" = "yes"; then
+dnl	BT_LDFLAGS="-all-static -Wl,-Bstatic";
+dnl	AC_SUBST(BT_LDFLAGS)
+dnl	CPPFLAGS="-DSTATIC_BUILD $CPPFLAGS";
+	$1="YES";
+else
+	$1="NO";
+fi
+
+AC_MSG_RESULT($USE_STATIC_LINKING)
+])
 

@@ -43,6 +43,7 @@ struct _dldata {
 	gboolean has_key;
 	gboolean is_locked;
 	gboolean is_dialog;
+	gboolean is_rtol;
 };
 
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
@@ -60,4 +61,3 @@ void on_clistDictLex_select_row(GtkCList * clist, gint row,
 			   gint column, GdkEvent * event, DL_DATA * d);
 
 #endif
-

@@ -39,11 +39,13 @@ struct _gbsdata {
 	gchar *cipher_key;
 	gchar *cipher_old;
 	gint mod_num;
+	gint display_level;
 	unsigned long offset;
 	
 	gboolean has_key;
 	gboolean is_locked;
 	gboolean is_dialog;
+	gboolean is_rtol;
 };
 
 typedef struct _nodedata NODEDATA;
@@ -69,4 +71,3 @@ void gui_setup_gbs(GList *mods);
 void gui_shutdown_gbs(void);
 
 #endif
-
