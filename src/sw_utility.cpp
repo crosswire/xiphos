@@ -50,21 +50,23 @@ extern SWFilter *lattoutf8;
 
 /********************************************************************************************** 
  * addrenderfilters - 
- *           code taken form BibleTime 0.31    
+ *           code originally taken form BibleTime 0.31    
  * 
  *********************************************************************************************/
-void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
+gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 {
 	string sourceformat;
 	string moduleDriver;
 	string encoding;
+	string lang;
+	gchar *retval;
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;
  	bool isGBF = false;
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	encoding = ((entry = section.find("Encoding")) != section.end()) ? (*entry).second : (string) "";
-
+	lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);
@@ -100,6 +102,8 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	if(!module->isUnicode()) {                                                     //(stricmp(encoding.c_str(), "UTF-8")){ // &&( !isGBF)) {
 		module->AddRenderFilter(lattoutf8);
 	}
+	retval = (char*)lang.c_str();
+	return retval;
 }
 
 void
