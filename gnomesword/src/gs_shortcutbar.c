@@ -122,6 +122,8 @@ void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
 	e_group_bar_set_group_button_label(E_GROUP_BAR(bar1),
 					   groupNum, label);
 }
+
+
 static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 {
 	gchar *group_name, *item_url, *item_name;
@@ -704,62 +706,63 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	gchar *type, *ref;
 	gchar modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
-
-	if (event->button.button == 1) {
-		app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
+	if(item_num > 0) {
+		if (event->button.button == 1) {
+			app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
 #ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num, item_num, &type,
-					       &ref);
+			e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+						       (shortcut_bar)->model,
+						       group_num, item_num, &type,
+						       &ref);
 #else				/* USE_OLD_GAL */
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num, item_num, &type,
-					       &ref, &icon_pixbuf);
+			e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+						       (shortcut_bar)->model,
+						       group_num, item_num, &type,
+						       &ref, &icon_pixbuf);
 #endif				/* USE_OLD_GAL */
-		memset(modName, 0, 16);
-		modNameFromDesc(modName, ref);
-		if (group_num == groupnum0) {
-			gint sbtype;
-			sbtype = sbtypefromModNameSBSW(modName);
-			if (sbtype == 0 || sbtype == 1)
-				gotoBookmarkSWORD(modName,
-						  settings->currentverse);
+			memset(modName, 0, 16);
+			modNameFromDesc(modName, ref);
+			if (group_num == groupnum0) {
+				gint sbtype;
+				sbtype = sbtypefromModNameSBSW(modName);
+				if (sbtype == 0 || sbtype == 1)
+					gotoBookmarkSWORD(modName,
+							  settings->currentverse);
+				else
+					gotoBookmarkSWORD(modName,
+							  settings->dictkey);
+			}
+			if (group_num == groupnum1) {
+				if (havebible) {
+					gotoBookmarkSWORD(modName,
+							  settings->currentverse);
+				}
+			}
+			if (group_num == groupnum2) {
+				if (havecomm) {
+					gotoBookmarkSWORD(modName,
+							  settings->currentverse);
+				}
+			}
+			if (group_num == groupnum3) {
+				if (havedict) {
+					gotoBookmarkSWORD(modName,
+							  settings->dictkey);
+				}
+			}
+			if (group_num == groupnum4) {
+				changeVerseSWORD(ref);
+			}
+			g_free(type);
+			g_free(ref);
+		} else if (event->button.button == 3) {
+			if (item_num == -1)
+				show_standard_popup(shortcut_bar, event,
+						    group_num);
 			else
-				gotoBookmarkSWORD(modName,
-						  settings->dictkey);
+				show_context_popup(shortcut_bar, event, group_num,
+						   item_num);
 		}
-		if (group_num == groupnum1) {
-			if (havebible) {
-				gotoBookmarkSWORD(modName,
-						  settings->currentverse);
-			}
-		}
-		if (group_num == groupnum2) {
-			if (havecomm) {
-				gotoBookmarkSWORD(modName,
-						  settings->currentverse);
-			}
-		}
-		if (group_num == groupnum3) {
-			if (havedict) {
-				gotoBookmarkSWORD(modName,
-						  settings->dictkey);
-			}
-		}
-		if (group_num == groupnum4) {
-			changeVerseSWORD(ref);
-		}
-		g_free(type);
-		g_free(ref);
-	} else if (event->button.button == 3) {
-		if (item_num == -1)
-			show_standard_popup(shortcut_bar, event,
-					    group_num);
-		else
-			show_context_popup(shortcut_bar, event, group_num,
-					   item_num);
 	}
 }
 
