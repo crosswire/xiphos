@@ -4,7 +4,8 @@
 	  directory.
 	* added progress bar for refresh remote
 	* added dialog to warn user to restart gs when modules have been changed
-	  util we can do better.
+	  until we can do better.
+	* changed dialog to restart gs if user answers yes.
 	
 
 2004-01-05  Terry <tbiggs@users.sf.net>
