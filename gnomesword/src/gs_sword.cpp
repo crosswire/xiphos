@@ -118,7 +118,10 @@ GnomeSword globals
 GList 	*biblemods,
 	*commentarymods,
 	*dictionarymods,
-	*percommods;
+	*percommods,
+	*sbbiblemods,
+	*sbdictmods,
+	*sbcommods;
 GtkWidget *NEtext;  /* note edit widget */
 gboolean ApplyChange = true;	/* should we make changes when cbBook is changed */
 gboolean bVerseStyle = true;	/* should we show verses or paragraphs in main text window */
@@ -149,7 +152,8 @@ GS_MODS textmodule;
 ***********************************************************************************************/
 extern gboolean changemain; /* change verse of Bible text window */
 extern gint 	dictpages, /* number of dictionaries */
-	 		compages;  /* number of commentaries */
+	 		compages,  /* number of commentaries */
+			textpages;/* number of Bible text */
 extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved */
 extern SETTINGS *settings;
 extern SETTINGS myset;
@@ -167,6 +171,7 @@ extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GS_APP gs;
+extern GS_NB_PAGES *nbpages;
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -218,14 +223,18 @@ initSWORD(GtkWidget *mainform)
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
 	UTF8Display	= 0;
-	
+	/* set glist to null */
 	biblemods = NULL;
 	commentarymods = NULL;
 	dictionarymods = NULL;
 	percommods = NULL;
+	sbbiblemods = NULL;
+	sbcommods = NULL;
+	sbdictmods = NULL;
+	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
-	mycolor = settings->currentverse_color;
+	mycolor = settings->currentverse_color; /* for GtkHTML widgets */
 	textmodule.name = NULL;
 	textmodule.type = NULL;
 	textmodule.description = NULL;
@@ -251,29 +260,28 @@ initSWORD(GtkWidget *mainform)
 			curMod = (*it).second;
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			//encoding = ((cit = section.find("Encoding")) != section.end()) ? (*cit).second : (string) "";
 			havebible = TRUE;
+			++textpages;
 			biblemods = g_list_append(biblemods,curMod->Name());
-			addrenderfiltersSWORD(curMod, section);
-			//if (!stricmp(encoding.c_str(), "UTF-8")) {				
-				curMod->Disp(UTF8Display);
-			/*}else{
-				curMod->Disp(HTMLchapDisplay);
-			}*/
-		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
+			sbbiblemods = g_list_append(sbbiblemods,curMod->Description());
+			addrenderfiltersSWORD(curMod, section);			
+			curMod->Disp(UTF8Display);
+		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
+			sbcommods = g_list_append(sbcommods,curcomMod->Description());
 			havecomm = TRUE; //-- we have at least one commentay module
 			++compages; //-- how many pages do we have  
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(curcomMod, section);
+			addrenderfiltersSWORD(curcomMod, section); 
 			curcomMod->Disp(HTMLDisplay);
-		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
+		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules	
 			havedict = TRUE; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());
+			sbdictmods = g_list_append(sbdictmods,curdictMod->Description());
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
@@ -363,17 +371,9 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	}
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
-	if(settings->notebook3page == 2){
-		beginHTML(lookup_widget(MainFrm,"textComp1"),TRUE);		
-		changecomp1ModSWORD(settings->Interlinear1Module);
-		changecomp1ModSWORD(settings->Interlinear2Module);
-		changecomp1ModSWORD(settings->Interlinear3Module);
-		changecomp1ModSWORD(settings->Interlinear4Module);
-		changecomp1ModSWORD(settings->Interlinear5Module);
-		endHTML(lookup_widget(MainFrm,"textComp1"));
-	}
+	updateinterlinearpage();
 	//---------------------------------------------------------------- change personal notes editor
-	if(settings->notebook3page == 1){ 		
+	if(nbpages->notebook3page == 1){ 		
 		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"tbtnFollow"))->active){ //-- if personal notes follow button is active (on)			
 			if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave)){
 					//-- do nothing
@@ -386,7 +386,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			}
 		}
 	}
-	if(settings->notebook3page == 0 && autoscroll){
+	if(nbpages->notebook3page == 0 && autoscroll){
 		if(curcomMod){	
 			curcomMod->SetKey(current_verse); //keyText.c_str()); //-- set comments module to current verse
 			curcomMod->Display(); //-- show change
@@ -397,6 +397,22 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	ApplyChange = TRUE;	
 }
 
+/*
+ *
+ */
+void
+updateinterlinearpage(void)
+{
+	if(nbpages->notebook3page == 2){
+		beginHTML(lookup_widget(MainFrm,"textComp1"),TRUE);		
+		changecomp1ModSWORD(settings->Interlinear1Module);
+		changecomp1ModSWORD(settings->Interlinear2Module);
+		changecomp1ModSWORD(settings->Interlinear3Module);
+		changecomp1ModSWORD(settings->Interlinear4Module);
+		changecomp1ModSWORD(settings->Interlinear5Module);
+		endHTML(lookup_widget(MainFrm,"textComp1"));
+	}
+}
 //-------------------------------------------------------------------------------------------
 void 
 FillDictKeysSWORD(void)  //-- fill clist with dictionary keys -
@@ -716,17 +732,25 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
 	}	
 }
 
+void
+nbchangecurModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
+{
+	nbpages->nbTextModspage = page_num;
+	changecurModSWORD(modName, showchange); 
+}
+
+
 //-------------------------------------------------------------------------------------------
 void
 changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
 	ModMap::iterator it;
-	GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
-	GtkWidget *label;
+	//GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
+	//GtkWidget *label;
 	if(havebible) {			
 	        //notebook = lookup_widget(MainFrm,"notebook1"); //-- set notebook pointer to commentary notebook
-	        frame = lookup_widget(MainFrm,"framecom"); //-- set frame to commentary frame
-	        settings->notebook1page = page_num; //-- save current page
+	        //frame = lookup_widget(MainFrm,"framecom"); //-- set frame to commentary frame
+	        nbpages->notebook1page = page_num; //-- save current page
 	        //g_print("page=%d\n",settings->notebook1page);
 	        it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
 	        if (it != mainMgr->Modules.end()){	
@@ -813,7 +837,7 @@ changcurdictModSWORD(gchar *modName, gchar *keyText, gint page_num) //-- someone
         //GtkWidget   *frame;  //-- pointer to dict&lex frame
             						
 	//frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
-	settings->notebook2page = page_num; //-- save current page
+	nbpages->notebook2page = page_num; //-- save current page
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != mainMgr->Modules.end()){	
 		curdictMod = (*it).second;  //-- set curdictMod to new choice

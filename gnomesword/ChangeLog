@@ -1,3 +1,10 @@
+2001-07-11 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added module descriptions as tooltips to popup menus
+	* changed from module names to module descriptions on shourtcut bar
+	* added a number of settings to the preferences.conf
+
+
 2001-07-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* worked on unicode support stuff - help

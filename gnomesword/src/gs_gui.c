@@ -351,10 +351,11 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *btnExit;
 	GtkWidget *mainPanel;
 	GtkWidget *epaned;
-
 	GtkWidget *vpaned1;
 	GtkWidget *hbox2;
 	GtkWidget *hpaned1;
+  	GtkWidget *vbox32;
+  	GtkWidget *nbTextMods;
 	GtkWidget *frame9;
 	GtkWidget *nbText;
 	GtkWidget *swHtmlBible;
@@ -368,14 +369,10 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *framecom;
 	GtkWidget *nbCom;
 	GtkWidget *swHtmlCom;
-
 	GtkWidget *label;
 	GtkWidget *vbox23;
 	GtkWidget *scrolledwindow28;
 	GtkWidget *textCommentaries;
-
-
-
 	GtkWidget *handlebox17;
 	GtkWidget *toolbar26;
 	GtkWidget *btnComPrev;
@@ -439,7 +436,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *label58;
 	GtkWidget *hbox25;
 //#if USE_SHORTCUTBAR
-	gint i;
+	gint i; 
 	gchar *pathname;
 //#endif				/* USE_SHORTCUTBAR */
 	mainwindow =
@@ -940,16 +937,33 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_set_usize (hpaned1, -2, 380);
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
-
+	
+	
+  	vbox32 = gtk_vbox_new (FALSE, 0);
+  	gtk_widget_ref (vbox32);
+  	gtk_object_set_data_full (GTK_OBJECT (mainwindow), "vbox32", vbox32,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (vbox32);
+  	//gtk_paned_pack1 (GTK_PANED (hpaned1), vbox32, FALSE, TRUE);
+	e_paned_pack1(E_PANED(hpaned1), vbox32, FALSE, TRUE);
+	
+  	nbTextMods = gtk_notebook_new ();
+  	gtk_widget_ref (nbTextMods);
+  	gtk_object_set_data_full (GTK_OBJECT (mainwindow), "nbTextMods", nbTextMods,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (nbTextMods);
+  	gtk_box_pack_start (GTK_BOX (vbox32), nbTextMods, FALSE, TRUE, 0);
+  	gtk_widget_set_usize (nbTextMods, -2, 31);
+  	gtk_notebook_set_scrollable (GTK_NOTEBOOK (nbTextMods), TRUE);
+	
 
 	frame9 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame9);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame9", frame9,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame9);
-
-	e_paned_pack1(E_PANED(hpaned1), frame9, FALSE, TRUE);
-
+	gtk_box_pack_start (GTK_BOX (vbox32), frame9, TRUE, TRUE, 0);
+	
 	gtk_widget_set_usize(frame9, 380, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(frame9), 2);
 
@@ -1430,7 +1444,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow15),
 				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
+				       GTK_POLICY_ALWAYS);
 				       
 	label12 = gtk_label_new("Interlinear");
 	gtk_widget_ref(label12);
@@ -1924,10 +1938,11 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_button_press_event), NULL);
-	
+	 
 	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_enter_notify_event), NULL);
+   
 	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
 			   NULL);
