@@ -25,13 +25,8 @@
 	<sect1 id="toolbars">
    		<title>La barre d'outils</title>
    		<para>
-    		<!--	The function of the Toolbar is to allow quick and easy control over the Bible Pane.
-			Activation of the Toolbar option is done by simply moving the mouse cursor over the 
-			desired toolbar button and selecting it. A tooltip will appear if the mouse cursor 
-			is held stationary over a toolbar button, describing the function of the button. 
-		-->
-		La barre d'outils permet une navigation rapide et aisée parmi les versets de la Bible.
-    	</para>
+			La barre d'outils permet une navigation rapide et aisée parmi les versets de la Bible.
+    		</para>
 		<figure id="toolbar">
 			<title>La barre d'outils</title>
 			<screenshot>
@@ -140,22 +135,15 @@
      		</screenshot>
 		</figure>
 		<para>
-<!--     	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
-     	user can quickly and easily switch between the different Bible texts,
-     	commentaries, dictionaries and general books. You can also select and
-     	edit your bookmarks, view search results, view verse lists and view your
-     	daily devotional book by simply clicking on the <guibutton>module</guibutton>
-     	icon and select your selection. -->
 			Le volet latéral se situe sur la partie gauche de la fenêtre principale de 
-			<application>&app;</application>. La fenêtre d'information affiche le culte
-			quotidien. Un click sur le bouton 
-			<guibutton>Modules</guibutton> active les options suivantes : 
+			<application>&app;</application>. Sur le bas du volet latéral, 4 boutons donnent 
+			accès aux fonctionnalités suivantes : 
 			<guibutton>Modules</guibutton> permet de facilement changer de version de la 
 			Bible, de commentaire, de dictionnaire ou de livre d'étude, 
 			<guibutton>Signets</guibutton> permet de gérer les signets
 			d'accès aux passages préférés, 
 			<guibutton>Rechercher</guibutton> présente le formulaire de recherche 
-			simplifiée dans la Bible ou les commentaires, 
+			simplifiée dans la Bible ou le commentaire en cours, 
 			<guibutton>Liste de versets</guibutton> affiche le résultat de la recherche.  
    		</para>
 	</sect1>
