@@ -46,6 +46,28 @@ extern int search_dialog;
 
 /******************************************************************************
  * Name
+ *  get_preverse_header
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   char *get_preverse_header(char * module_name, char * key, int pvHeading)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+
+char *get_preverse_header(char * module_name, char * key, int pvHeading)
+{
+	backend_get_preverse_header(module_name, key, pvHeading);
+}
+
+
+/******************************************************************************
+ * Name
  *  get_module_key
  *
  * Synopsis
