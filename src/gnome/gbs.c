@@ -67,6 +67,42 @@ static GBS_DATA *cur_g;
 static gboolean in_url;
 static gboolean gbs_find_running;
 
+
+/******************************************************************************
+ * Name
+ *  get_gbs
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   GBS_DATA *get_gbs(GList * gbs)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GBS_DATA*
+ */ 
+ 
+GBS_DATA *get_gbs(GList * gbs)
+{
+	GList *tmp;
+	GBS_DATA *g = NULL;
+
+	tmp = NULL;
+	tmp = gbs;
+	tmp = g_list_first(tmp);
+	while (tmp != NULL) {
+		g = (GBS_DATA *) tmp->data;
+		if (!strcmp(g->bookName, settings.BookWindowModule)) {
+			break;
+		}
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	return g;
+}
+
 /******************************************************************************
  * Name
  *  add_node_gbs

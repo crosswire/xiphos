@@ -42,6 +42,7 @@
 #include "main/support.h"
 #include "main/gs_gnomesword.h"
 #include "main/lists.h"
+#include "main/settings.h"
  
 /*****************************************************************************
  * externs

@@ -127,8 +127,7 @@ void backend_nav_text_module(int modnum, int direction)
  *   void
  */
 
-void backend_new_text_display(GtkWidget * html, char *modname,
-			      SETTINGS * s)
+void backend_new_text_display(GtkWidget * html, char *modname)
 {
 	GList *tmp = NULL;
 	BE_TEXT *t;
@@ -152,7 +151,7 @@ void backend_new_text_display(GtkWidget * html, char *modname,
  * Synopsis
  *   #include "bibletext.h"
  *   
- *   void backend_setup_text(SETTINGS * s)	
+ *   void backend_setup_text(void)	
  *
  * Description
  *   setup sword text module support
@@ -161,7 +160,7 @@ void backend_new_text_display(GtkWidget * html, char *modname,
  *   void
  */
 
-void backend_setup_text(SETTINGS * s)
+void backend_setup_text(void)
 {
 	ModMap::iterator it;
 	gint count = 0;
@@ -291,16 +290,16 @@ void backend_set_module_unlocked(char *mod_name, char *key)
  * Synopsis
  *   #include "bibletext.h"
  *   
- *   gboolean backend_check_for_global_option(int mod_num, char *option)	
+ *   int backend_check_for_global_option(int mod_num, char *option)	
  *
  * Description
  *   returns true is module has option
  *
  * Return value
- *   gboolean
+ *   int
  */
 
-gboolean backend_check_for_global_option(int mod_num, char *option)
+int backend_check_for_global_option(int mod_num, char *option)
 {		
 	BE_TEXT *t = (BE_TEXT *) g_list_nth_data(be_text_list, mod_num);
 	return t->mod->getConfig().has("GlobalOptionFilter",option);
