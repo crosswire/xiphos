@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gnomesword.h - support for commentary modules
+ * gnomesword.h - glue
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -33,7 +33,7 @@ extern "C" {
 #define BOOK_WINDOW 4
     
 /* 
-   module types 
+ * module types 
  */
 #define TEXT_TYPE 0 
 #define COMMENTARY_TYPE 1
@@ -41,7 +41,7 @@ extern "C" {
 #define BOOK_TYPE 3
 	
 /* 
-   these strings are not seen by users 
+ * these strings are not seen by users 
  */    
 #define GS_DOCK_OPTIONS "dockOptions"
 #define GS_DOCK_GBS "dockGBSEditor"
@@ -49,7 +49,7 @@ extern "C" {
 #define GS_DOCK_SP "dockSPEditor"
        
 /* 
-   these strings are not seen by users
+ * these strings are not seen by users
  */
 #define TEXT_MODS "Biblical Texts"
 #define COMM_MODS "Commentaries"
@@ -62,6 +62,7 @@ struct _settings {
 	GtkWidget
 		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
+		*epaned, /* shortcut bar and main panle */
 		*shortcut_bar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
@@ -274,26 +275,15 @@ extern SETTINGS *settings;
 extern MOD_LISTS *mod_lists;
 /*** function prototypes ***/
 
-void initGnomeSword(SETTINGS *settings);
+void init_gnomesword(SETTINGS *settings);
 void gnomesword_shutdown(SETTINGS * s);
-gint addnotebookpages(GtkWidget *notebook, 
-		GList *list,
-		gchar *modName); 
 void UpdateChecks(SETTINGS *);
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
-void addQuickmark(GtkWidget *app);
-void showIntPage(GtkWidget *app, 
-		gboolean choice);
 void setautosave(gboolean choice);
 void percent_update(char percent, void *userData);
 void set_appbar_progress(gint unit);
-void fillSBtoolbars(GtkWidget *app,
-		GList *biblelist,
-		GList *commentarylist,
-		GList *dictionarylist);
-void setupSidebar(GtkWidget *app);
 gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
@@ -305,6 +295,7 @@ gchar *get_module_name_from_description(gchar *description);
 void change_module_and_key(gchar *module_name, gchar *key);
 void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
+void save_module_key(gchar * mod_name, gchar * key);
 
 #ifdef __cplusplus
 }
