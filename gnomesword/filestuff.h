@@ -36,7 +36,19 @@ void
 loadbookmarkarray		(void);
 
 void
+loadbookmarksnew		(GtkWidget *list);
+
+void
+loadbookmarks_programstart		(void);
+
+void
+loadbookmarks_afterSeparator	(void);
+
+void
 loadoptionarray			(void);
+
+void
+savebookmark				(gchar *item);
 
 void
 savebookmarks				(void);
@@ -63,5 +75,7 @@ void
 loadStudyPadFile 		(gchar *filename);
 
 void
-savelist						(GtkWidget *list,
-										gint howmany);
+savelist						(gchar *filename,
+										GtkWidget *list);
+										
+										
