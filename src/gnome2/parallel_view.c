@@ -620,8 +620,8 @@ void gui_update_parallel_page(void)
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);
 	}
-	gtk_frame_set_label(GTK_FRAME(widgets.frame_parallel),
-			    settings.currentverse);
+/*	gtk_frame_set_label(GTK_FRAME(widgets.frame_parallel),
+			    settings.currentverse);*/
 	if (font_name)
 		free(font_name);
 	if (font_size)
@@ -1302,9 +1302,10 @@ void gui_create_parallel_page(guint page_num)
 	/*
 	 * parallel page 
 	 */
-	widgets.frame_parallel = gtk_frame_new(NULL);
+	widgets.frame_parallel = gtk_frame_new(_("Parallel View"));
 	gtk_widget_show(widgets.frame_parallel);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
+	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_parallel_text),
 			  widgets.frame_parallel);
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
@@ -1326,19 +1327,12 @@ void gui_create_parallel_page(guint page_num)
 
 	label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_text),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK
-				    (widgets.notebook_text), 
-				    settings.parallel_page),
+				    (widgets.notebook_parallel_text), 
+				    1),
 				   label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.notebook_text),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.notebook_text),
-					  settings.parallel_page), 
-					  _("Parallel View"));
 	
 	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", G_CALLBACK(gui_url),

@@ -50,7 +50,7 @@ void xml_set_value(char *type_doc, char *section, const char *item,
 		  const char *value);
 void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
-
+void xml_add_new_item_to_section(char * section, char * item_name, char * value);
 
 #ifdef __cplusplus
 }
