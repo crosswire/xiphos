@@ -21,14 +21,20 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-#include <iostream.h>
+
 #include <gnome.h>
 #include "menustuff.h"
 #include "interface.h"
 #include "callback.h"
-#include "listeditor.h"
 
-//----------------------------------------------------------------------------------
+/*
+ * additemtognomemenu - add item to gnome menu 
+ * adds an item to the main menu bar
+ * MainFrm - the main window - app widget
+ * itemname - the item label and also used for user data
+ * menuname - the gnome menu path 
+ * mycallback - the callback to call when item is selected 
+*/
 void
 additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 		   gchar * menuname, GtkMenuCallback mycallback)
@@ -50,14 +56,23 @@ additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 	//g_free(menuitem);
 }
 
-//----------------------------------------------------------------------------------
+
+/**************************************************************************************
+ * additemtopopupmenu - add item to popup menu
+ * add one item to a popup menu
+ * cannot be used to add an item to a submenu item ????
+ * MainFrm - main window - app
+ * menu - popup menu to add item to
+ * itemname - menu item -used for label and user data
+ * mycallback - callback function to call when menu item pressed
+**************************************************************************************/
 void
 additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 		   GtkMenuCallback mycallback)
 {
 	GtkWidget *menuChoice;
 	gchar menuName[64];
-	int viewNumber(1);
+	int viewNumber = 0;
 
 	menuChoice = gtk_menu_item_new_with_label(itemname);	//----------- popup menu               
 	sprintf(menuName, "viewMod%d", viewNumber++);
@@ -65,8 +80,7 @@ additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 	gtk_widget_show(menuChoice);
 	gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 			   GTK_SIGNAL_FUNC(mycallback),
-			   g_strdup(itemname));
-	//gtk_container_add (GTK_CONTAINER (menu), menuChoice);         
+			   g_strdup(itemname));        
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
 			      GTK_WIDGET(menuChoice));
 }
@@ -159,8 +173,8 @@ GtkWidget *additemtooptionmenu(GtkWidget * MainFrm, gchar * subtreelabel,
 //-------------------------------------------------------------------------------------------
 void
 removemenuitems(GtkWidget * MainFrm, gchar * startitem, gint numberofitems)
-//-- remove a number(numberofitems) of items form-----------------------------------------------------------------//                                                                  //
-{				//-- a menu or submenu(startitem)
+//-- remove a number(numberofitems) of items form a menu or submenu(startitem)                                                  //
+{				
 	gnome_app_remove_menus(GNOME_APP(MainFrm), startitem,
 			       numberofitems);
 }
@@ -180,7 +194,10 @@ GtkWidget *create_pmComments2(GList * mods)
 	GtkAccelGroup *view_module1_menu_accels;
 	GtkWidget *separator22, *item1;
 	GtkTooltips *tooltips;
-
+	GList *tmp = NULL;
+	gint i = 0;
+	gchar buf[80];
+	
 	tooltips = gtk_tooltips_new();
 
 	pmComments2 = gtk_menu_new();
@@ -267,10 +284,9 @@ GtkWidget *create_pmComments2(GList * mods)
 	gtk_container_add(GTK_CONTAINER(view_module1_menu), separator22);
 	gtk_widget_set_sensitive(separator22, FALSE);
 
-	GList *tmp;
+
 	tmp = mods;
-	gint i = 0;
-	gchar buf[80];
+	
 	while (tmp != NULL) {
 		item1 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item1);
@@ -331,6 +347,9 @@ GtkWidget *create_pmDict(GList * mods)
 	GtkAccelGroup *view_module2_menu_accels;
 	GtkWidget *item3;
 	GtkTooltips *tooltips;
+	GList *tmp = NULL;
+	gint i = 0;
+	gchar buf[80];
 
 	tooltips = gtk_tooltips_new();
 	pmDict = gtk_menu_new();
@@ -404,10 +423,8 @@ GtkWidget *create_pmDict(GList * mods)
 				  view_module2_menu);
 	view_module2_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module2_menu));
-	GList *tmp;
+	    
 	tmp = mods;
-	gint i = 0;
-	gchar buf[80];
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item3);
@@ -449,67 +466,69 @@ GtkWidget *create_pmDict(GList * mods)
 GtkWidget*
 create_pmBible(GList *mods)
 {
-  GtkWidget *pmBible;
-  GtkAccelGroup *pmBible_accels;
-  GtkWidget *copy7;
-  GtkWidget *lookup_selection;
-  GtkWidget *about_this_module1;
-  GtkWidget *separator2;
-  GtkWidget *view_module3;
-  GtkWidget *view_module3_menu;
-  GtkAccelGroup *view_module3_menu_accels;
-  GtkWidget *item3;
-
-  pmBible = gtk_menu_new ();
-  gtk_object_set_data (GTK_OBJECT (pmBible), "pmBible", pmBible);
-  pmBible_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmBible));
-
-  copy7 = gtk_menu_item_new_with_label ("Copy");
-  gtk_widget_ref (copy7);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "copy7", copy7,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (copy7);
-  gtk_container_add (GTK_CONTAINER (pmBible), copy7);
-
-  lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
-  gtk_widget_ref (lookup_selection);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "lookup_selection", lookup_selection,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (lookup_selection);
-  gtk_container_add (GTK_CONTAINER (pmBible), lookup_selection);
-
-  about_this_module1 = gtk_menu_item_new_with_label ("About this module");
-  gtk_widget_ref (about_this_module1);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "about_this_module1", about_this_module1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (about_this_module1);
-  gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
-
-  separator2 = gtk_menu_item_new ();
-  gtk_widget_ref (separator2);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (separator2);
-  gtk_container_add (GTK_CONTAINER (pmBible), separator2);
-  gtk_widget_set_sensitive (separator2, FALSE);
-
-  view_module3 = gtk_menu_item_new_with_label ("View Module");
-  gtk_widget_ref (view_module3);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3", view_module3,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (view_module3);
-  gtk_container_add (GTK_CONTAINER (pmBible), view_module3);
-
-  view_module3_menu = gtk_menu_new ();
-  gtk_widget_ref (view_module3_menu);
-  gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3_menu", view_module3_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
-  view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
+	GtkWidget *pmBible;
+	GtkAccelGroup *pmBible_accels;
+	GtkWidget *copy7;
+	GtkWidget *lookup_selection;
+	GtkWidget *about_this_module1;
+	GtkWidget *separator2;
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;
+	GtkWidget *item3;
 	GList *tmp;
-	tmp = mods;
 	gint i = 0;
-	gchar buf[80];
+	//gchar buf[80];
+
+	pmBible = gtk_menu_new ();
+	gtk_object_set_data (GTK_OBJECT (pmBible), "pmBible", pmBible);
+	pmBible_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmBible));
+
+	copy7 = gtk_menu_item_new_with_label ("Copy");
+	gtk_widget_ref (copy7);
+	gtk_object_set_data_full (GTK_OBJECT (pmBible), "copy7", copy7,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (copy7);
+	gtk_container_add (GTK_CONTAINER (pmBible), copy7);
+
+	lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
+	gtk_widget_ref (lookup_selection);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "lookup_selection", lookup_selection,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (lookup_selection);
+  	gtk_container_add (GTK_CONTAINER (pmBible), lookup_selection);
+
+  	about_this_module1 = gtk_menu_item_new_with_label ("About this module");
+  	gtk_widget_ref (about_this_module1);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "about_this_module1", about_this_module1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (about_this_module1);
+  	gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
+
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmBible), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+
+  	view_module3 = gtk_menu_item_new_with_label ("View Module");
+  	gtk_widget_ref (view_module3);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3", view_module3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (view_module3);
+  	gtk_container_add (GTK_CONTAINER (pmBible), view_module3);
+
+  	view_module3_menu = gtk_menu_new ();
+  	gtk_widget_ref (view_module3_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3_menu", view_module3_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
+  	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
+
+	
+	tmp = mods;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item3);
@@ -529,14 +548,14 @@ create_pmBible(GList *mods)
 	}
 	g_list_free(tmp);
 
-  gtk_signal_connect (GTK_OBJECT (copy7), "activate",
-                      GTK_SIGNAL_FUNC (on_copy3_activate),
-                      (gchar *)"moduleText");
-  gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
-                      GTK_SIGNAL_FUNC (on_lookup_selection_activate),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
-                      GTK_SIGNAL_FUNC (on_about_this_module1_activate),
-                      NULL);
+  	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      	GTK_SIGNAL_FUNC (on_copy3_activate),
+                      	(gchar *)"moduleText");
+  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+                      	GTK_SIGNAL_FUNC (on_lookup_selection_activate),
+                      	NULL);
+  	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
+                      	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
+                      	NULL);
   return pmBible;
 }

@@ -430,7 +430,8 @@ on_moduleText_button_press_event(GtkWidget * widget,
 				gtk_spin_button_set_value(GTK_SPIN_BUTTON
 							  (lookup_widget
 							   (MainFrm,
-							    "spbVerse")), versenum);	//-- set verse spin button to new number
+							    "spbVerse")), 
+							    versenum);	//-- set verse spin button to new number
 				verseSWORD();	//-- change modules to the new verse
 			}
 		}
