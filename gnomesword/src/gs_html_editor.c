@@ -66,6 +66,7 @@ extern char *homedir;
 extern gchar * current_filename;	/* filename for open file in study pad window  */
 extern GtkWidget *htmlComments;
 extern GtkWidget *toolbarComments;
+extern GtkWidget *toolbarBooks;
 extern GtkWidget *toolbarStudypad;
 
 static GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd);
@@ -117,6 +118,10 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 
 	if (ecd->personal_comments)
 		buf2 = settings->percomverse;
+	
+	else if(ecd->gbs)
+		buf2 = "";
+	
 	else
 		buf2 = ecd->filename;
 
@@ -244,8 +249,26 @@ void savenoteEDITOR(GtkWidget * html_widget)
 	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
 	} else {
-		g_print("file writen");
 		savenoteSWORD(gstr->str);
+		g_print("file writen");
+	}
+	g_string_free(gstr, 1);
+	gtk_html_set_editable(html, TRUE);
+}
+void savebookEDITOR(GtkWidget * html_widget)
+{
+	GtkHTML *html;
+
+	html = GTK_HTML(html_widget);
+	gtk_html_set_editable(html, FALSE);
+	gstr = g_string_new("");
+	if (!gtk_html_save
+	    (html, (GtkHTMLSaveReceiverFn) save_note_receiver,
+	     GINT_TO_POINTER(0))) {
+		g_warning("file not writen");
+	} else {
+		g_print("file writen");
+		savebookSWORD(gstr->str);
 	}
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);
@@ -453,7 +476,7 @@ on_html_enter_notify_event(GtkWidget * widget,
 			   GdkEventCrossing * event,
 			   GSHTMLEditorControlData * ecd)
 {
-	if (!ecd->personal_comments)
+	if (!ecd->personal_comments && !ecd->gbs)
 		if (!gtk_html_get_editable(ecd->html))
 			gtk_html_set_editable(ecd->html, TRUE);
 	return TRUE;
@@ -540,15 +563,21 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarComments, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarComments);
 	}
+			   
+	else if(necd->gbs){
+		toolbarBooks = toolbar_style(necd);
+		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarBooks, FALSE, FALSE, 0);
+		gtk_widget_hide(toolbarBooks);
+	}
 	
-	else{
+	else {
 		toolbarStudypad = toolbar_style(necd);
 		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarStudypad, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarStudypad);
 		if(settings->studypadfilename)
 			load_file(settings->studypadfilename,necd);
 	}
-	
+		
 	return necd->htmlwidget;
 }
 
@@ -622,7 +651,10 @@ static void on_open_activate(GtkMenuItem * menuitem,
 static void
 on_savenote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
-	savenoteEDITOR(ecd->htmlwidget);
+	if(ecd->personal_comments)
+		savenoteEDITOR(ecd->htmlwidget);
+	else
+		savebookEDITOR(ecd->htmlwidget);
 	ecd->changed = FALSE;
 	updatestatusbar(ecd);
 }
@@ -752,15 +784,29 @@ on_autoscroll_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 static void
 on_editnote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {	
-	settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_html_set_editable(GTK_HTML(htmlComments), GTK_CHECK_MENU_ITEM(menuitem)->active);
-	if(GTK_CHECK_MENU_ITEM(menuitem)->active){
-		gtk_widget_show(toolbarComments);
+	if(ecd->personal_comments) {
+		settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
+		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
+			gtk_widget_show(toolbarComments);
+		}
+	
+		else {
+			gtk_widget_hide(toolbarComments);
+		}
 	}
 	
-	else {
-		gtk_widget_hide(toolbarComments);
+	if(ecd->gbs) {
+		settings->editgbs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
+			gtk_widget_show(toolbarBooks);
+		}
+	
+		else {
+			gtk_widget_hide(toolbarBooks);
+		}
 	}
+	gtk_html_set_editable(GTK_HTML(ecd->html), GTK_CHECK_MENU_ITEM(menuitem)->active);
+
 }
 
 GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
@@ -832,7 +878,28 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 		gtk_container_add (GTK_CONTAINER (pmEditor), separator);
 		gtk_widget_set_sensitive (separator, FALSE);		    
 	}
+	    
+	if (ecd->gbs) {
 				       
+		editnote = gtk_check_menu_item_new_with_label("Edit");
+		gtk_widget_ref(editnote);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "editnote",
+				 editnote,
+				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show(editnote);
+		gtk_container_add(GTK_CONTAINER(pmEditor), editnote);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(editnote),
+				       FALSE);	
+				       
+		separator = gtk_menu_item_new ();
+		gtk_widget_ref (separator);
+		gtk_object_set_data_full (GTK_OBJECT (pmEditor), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show (separator);
+		gtk_container_add (GTK_CONTAINER (pmEditor), separator);
+		gtk_widget_set_sensitive (separator, FALSE);		    
+	}
+				  			       
 	file = gtk_menu_item_new_with_label("");
 	tmp_key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(file)->child),
 					_("File"));
@@ -865,6 +932,37 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 
 		delete_note =
 		    gtk_menu_item_new_with_label(_("Delete Note"));
+		gtk_widget_ref(delete_note);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "delete_note", delete_note,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(delete_note);
+		gtk_container_add(GTK_CONTAINER(file_menu), delete_note);
+	}
+	
+	else if (ecd->gbs) {
+
+		open = gtk_menu_item_new_with_label(_("Open File"));
+		gtk_widget_ref(open);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "open",
+					 open,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(open);
+		gtk_container_add(GTK_CONTAINER(file_menu), open);
+
+		save_note = gtk_menu_item_new_with_label(_("Save Entry"));
+		gtk_widget_ref(save_note);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "save_note",
+					 save_note,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(save_note);
+		gtk_container_add(GTK_CONTAINER(file_menu), save_note);
+
+		delete_note =
+		    gtk_menu_item_new_with_label(_("Delete Entry"));
 		gtk_widget_ref(delete_note);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
 					 "delete_note", delete_note,
@@ -1021,6 +1119,19 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 		gtk_signal_connect(GTK_OBJECT(editnote), "activate",
 			   GTK_SIGNAL_FUNC(on_editnote_activate), 
 				   ecd);
+	} else if (ecd->gbs) {
+		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
+				   GTK_SIGNAL_FUNC(on_savenote_activate),
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
+				   GTK_SIGNAL_FUNC(on_deletenote_activate),
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(editnote), "activate",
+			   GTK_SIGNAL_FUNC(on_editnote_activate), 
+				   ecd);
+		gtk_signal_connect(GTK_OBJECT(open), "activate",
+				   GTK_SIGNAL_FUNC(on_open_activate), 
+				  ecd);
 	} else {
 		gtk_signal_connect(GTK_OBJECT(new), "activate",
 				   GTK_SIGNAL_FUNC(on_new_activate), ecd);
@@ -1466,4 +1577,48 @@ GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 	
 	create_editor(htmlComments, vboxPC, s, pcecd);
 	return htmlComments;
+}
+
+/************************************************************************************ studypad editor control */
+/*** create studypad editor control ***/
+GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
+{
+	GtkWidget *frame12;
+	GtkWidget *vbox6;
+	GSHTMLEditorControlData *specd =
+	    gs_html_editor_control_data_new(s);
+	GtkWidget *vboxSP;
+	GtkWidget *htmlwidget;
+	
+	//GtkWidget *htmlwidget;
+	
+	specd = gs_html_editor_control_data_new(s);
+	specd->gbs = TRUE;
+
+	frame12 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame12);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
+				 frame12,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame12);
+	gtk_container_add(GTK_CONTAINER(notebook), frame12);
+
+	vbox6 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox6);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox6", vbox6,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox6);
+	gtk_container_add(GTK_CONTAINER(frame12), vbox6);
+
+	vboxSP = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vboxSP);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxSP", vboxSP,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vboxSP);
+	gtk_box_pack_start(GTK_BOX(vbox6), vboxSP, TRUE, TRUE, 0);
+
+	htmlwidget = gtk_html_new();
+	create_editor(htmlwidget, vboxSP, s, specd);
+
+	return htmlwidget;
 }

@@ -239,7 +239,7 @@ void initSWORD(GtkWidget * mainform)
 	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
-	bookDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlBooks"));
+	bookDisplay = new GtkHTMLEntryDisp(settings->htmlBook);
 	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
 	FPNDisplay = new ComEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
@@ -988,6 +988,14 @@ void savenoteSWORD(gchar *buf)	//-- save personal comments
 	if(buf)
 		*percomMod << (const char *) buf;	//-- save note!
 	noteModified = false;	//-- we just saved the note so it has not been modified 
+}
+
+
+//-------------------------------------------------------------------------------------------
+void savebookSWORD(gchar *buf)	//-- save personal comments
+{
+	if(buf)
+		*curbookMod << (const char *) buf;	//-- save note!
 }
 
 //-------------------------------------------------------------------------------------------

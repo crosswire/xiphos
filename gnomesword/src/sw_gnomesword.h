@@ -60,6 +60,7 @@ extern "C" {
 	void changcurcomModSWORD(gchar * modName, gboolean showchange);
 //	void editnoteSWORD(gboolean editbuttonactive);
 	void savenoteSWORD(gchar *buf);
+	void savebookSWORD(gchar *buf)	;
 	void deletenoteSWORD(void);
 	void changcurdictModSWORD(gchar * modName, gchar * keyText);
 	void dictSearchTextChangedSWORD(gchar * mytext);
