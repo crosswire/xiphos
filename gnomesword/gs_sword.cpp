@@ -612,12 +612,10 @@ FillDictKeysSWORD(void)  //-- fill clist with dictionary keys -
 //-------------------------------------------------------------------------------------------
 void
 shutdownSDSWORD(void)  //-- close down GnomeSword program
-{
-	
+{	
 	delete SDMgr;	
 	if(SDDisplay)
-		delete SDDisplay;		
-
+		delete SDDisplay;	
 }
 
 
@@ -731,7 +729,7 @@ changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module 
 	        gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")), //-- set main window frame label of
                                  curMod->Name());                  //-- to current Module name
 	*/
-		sprintf(title,"GnomeSword - %s",curMod->Name());
+		sprintf(title,"GnomeSword - %s", (gchar*)curMod->Description());
 		
 		gtk_window_set_title(GTK_WINDOW(MainFrm),
 						title);

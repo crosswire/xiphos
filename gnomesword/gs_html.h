@@ -21,11 +21,12 @@ extern "C" {
 #include <gnome.h>
 #ifdef USE_GTKHTML
 #include <gtkhtml/gtkhtml.h>
-#endif				/* USE_GTKHTML */
 	
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
 	void on_link_clicked(GtkHTML * html, const gchar * url,
 			     gpointer data);
+#endif				/* USE_GTKHTML */
+
 	void add_gtkhtml_widgets(GtkWidget * app);
 	void beginHTML(GtkWidget * html);
 	void endHTML(GtkWidget * html);

@@ -25,6 +25,7 @@
 #include "callback.h"
 #include "support.h"
 #include "gs_gnomesword.h"
+#include "interface.h"
 
 #if USE_GNOMEPRINT
 #include "printstuff.h"
@@ -41,6 +42,7 @@ extern gchar *current_filename;	/* file in studypad */
 extern char *homedir;
 extern gboolean file_changed;	/* ??? */
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern gint answer; /* do we want to save studybad file on shutdown */
 
 /******************************************************************************
  * StudyPad callbacks
@@ -75,8 +77,23 @@ void on_btnPrint_clicked(GtkButton * button, gpointer user_data)
 void on_btnOpenFile_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *openFile;
-	gchar buf[255];
-
+	gchar *msg, buf[255];
+	GtkWidget *msgbox;
+	
+	/* if study pad file has changed let's ask about saving it */
+	if(file_changed){ 	
+		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
+		msgbox = create_InfoBox();
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		g_free (msg);
+		switch (answer){		
+			case 0: saveFile(current_filename);
+				break;
+			default:
+				break;
+		}
+	}   	
 	sprintf(buf,"%s/*.pad",homedir);
 	openFile = create_fileselection1();
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
@@ -193,7 +210,23 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 void newSP(GtkWidget *text) 
 {
         GtkWidget *statusbar;
-
+	GtkWidget *msgbox;
+	gchar *msg;
+	
+	/* if study pad file has changed let's ask about saving it */
+	if(file_changed){ 	
+		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
+		msgbox = create_InfoBox();
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		g_free (msg);
+		switch (answer){		
+			case 0: saveFile(current_filename);
+				break;
+			default:
+				break;
+		}
+	}   	
         current_filename = NULL;
         gtk_text_set_point(GTK_TEXT(text), 0);
 	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
@@ -201,5 +234,4 @@ void newSP(GtkWidget *text)
 	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
 	file_changed = FALSE;	
 }
-
 
