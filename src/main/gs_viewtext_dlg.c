@@ -155,7 +155,8 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		modbuf = getmodnameSWORD(0);
+		settings->whichwindow = 0;
+		modbuf = get_module_name(settings);
 		display_verse_list(modbuf, buf, settings);
 		g_free(buf);
 
@@ -675,7 +676,7 @@ GtkWidget *create_dlgViewText(GList * glist)
 	}
 	g_list_free(textList);	
 	
-	gtk_entry_set_text(GTK_ENTRY(cbeModule), gettextmodSWORD());
+	gtk_entry_set_text(GTK_ENTRY(cbeModule), settings->MainWindowModule);
 	cbBook_items = backend_get_books();
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), cbBook_items);
 	backend_goto_verse_viewtext(current_verse);

@@ -177,7 +177,7 @@ initGnomeSword(SETTINGS * s,
          */
         if (havebible) {
                 if (biblepage == 0)
-                        changecurModSWORD(s->MainWindowModule, TRUE);
+                        backend_change_text_module(s->MainWindowModule, TRUE);
                 /*
                    get notebook 
                  */
@@ -200,7 +200,7 @@ initGnomeSword(SETTINGS * s,
                 /*
                    change personal comments module 
                  */
-                changepercomModSWORD(s->personalcommentsmod);
+                backend_change_percom_module(s->personalcommentsmod);
         }
 
         /*
@@ -324,49 +324,49 @@ void UpdateChecks(SETTINGS * s)
         GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 
         if (s->footnotesint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Footnotes", "On");       /* keep footnotes in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "On");       /* keep footnotes in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Footnotes", "Off");      /* keep footnotes in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "Off");      /* keep footnotes in sync with menu */
 
         /*
            set interlinear Strong's Numbers to last setting used 
          */
         if (s->strongsint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Strong's Numbers", "On");        /* keep Strongs in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "On");        /* keep Strongs in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");       /* keep Strongs in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");       /* keep Strongs in sync with menu */
 
         /*
            set interlinear morph tags to last setting used 
          */
         if (s->morphsint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Morphological Tags", "On");      /* keep Morph Tags in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "On");      /* keep Morph Tags in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Morphological Tags", "Off");     /* keep Morph Tag in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "Off");     /* keep Morph Tag in sync with menu */
 
         /*
            set interlinear Hebrew Vowel Points to last setting used 
          */
         if (s->hebrewpointsint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");     /* keep Hebrew Vowel Points in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");     /* keep Hebrew Vowel Points in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");    /* keep Hebrew Vowel Points in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");    /* keep Hebrew Vowel Points in sync with menu */
 
         /*
            set interlinear Hebrew Cantillation to last setting used 
          */
         if (s->cantillationmarksint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");     /* keep Hebrew Cantillation in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");     /* keep Hebrew Cantillation in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");    /* keep Hebrew Cantillation in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");    /* keep Hebrew Cantillation in sync with menu */
 
         /*
            set interlinear Greek Accents to last setting used 
          */
         if (s->greekaccentsint)
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Greek Accents", "On");   /* keep Greek Accents in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "On");   /* keep Greek Accents in sync with menu */
         else
-                setglobalopsSWORD(INTERLINEAR_WINDOW, "Greek Accents", "Off");  /* keep Greek Accents in sync with menu */
+                backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "Off");  /* keep Greek Accents in sync with menu */
 
         /*
            set auto save personal comments to last setting 
@@ -752,5 +752,98 @@ void search_module(SETTINGS *s, SEARCH_OPT *so)
 	sblist = backend_do_search(s, so);
 	fill_search_results_clist(sblist, so, s);	
 }
+
+/******************************************************************************
+ *
+ * num
+ * returns module key
+******************************************************************************/
+gchar *get_module_key(SETTINGS *s)
+{
+	if (havebible) {
+		switch(s->whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (gchar *) s->currentverse;
+			break;
+		case COMMENTARY_WINDOW:
+			return (gchar *) s->comm_key;
+			break;
+		case DICTIONARY_WINDOW:
+			return (gchar *) s->dictkey;
+			break;
+		case INTERLINEAR_WINDOW:
+			return (gchar *) s->cvInterlinear;
+			break;
+		case BOOK_WINDOW:
+			return (gchar *) s->book_key;
+			break;
+		}
+	}
+	return NULL;
+}
+/******************************************************************************
+ *
+ * num
+ * returns module name
+******************************************************************************/
+gchar *get_module_name(SETTINGS *s)
+{
+	if (havebible) {
+		switch(s->whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (gchar *) s->MainWindowModule;
+			break;
+		case COMMENTARY_WINDOW:
+			return (gchar *) s->CommWindowModule;
+			break;
+		case DICTIONARY_WINDOW:
+			return (gchar *) s->DictWindowModule;
+			break;
+		case BOOK_WINDOW:
+			return (gchar *) s->BookWindowModule;
+			break;
+		}
+	}
+	return NULL;
+}
+
+void gui_set_text_mod_page(gint page)
+{
+	GtkWidget *notebook = lookup_widget(settings->app,
+						  "nbTextMods");
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
+	ChangeVerseSWORD();
+}
+
+void change_module_and_key(gchar *module_name, gchar *key)
+{
+	gint mod_type;
+	gint page_num;
+	GtkWidget *notebook;
+	
+	mod_type = backend_get_mod_type(module_name);
+	
+	switch(mod_type) {
+		case TEXT_TYPE:
+			page_num = backend_get_module_page(module_name, TEXT_MODS);
+			notebook = lookup_widget(settings->app, "nbTextMods");
+			gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page_num);
+			changeVerseSWORD(key);
+			break;
+		case COMMENTARY_TYPE:
+			page_num = backend_get_module_page(module_name, COMM_MODS);
+			gui_set_commentary_page_and_key(page_num, key);
+			break;
+		case DICTIONARY_TYPE:
+			page_num = backend_get_module_page(module_name, DICT_MODS);
+			gui_set_dictionary_page_and_key(page_num, key);
+			break;
+		case BOOK_TYPE:
+			page_num = backend_get_module_page(module_name, BOOK_MODS);
+			gui_set_book_page_and_key(page_num, key);
+			break;		
+	}
+}
+
 
 /*****   end of file   ******/

@@ -149,7 +149,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	if (*url == '@') {
 		++url;
-		swapmodsSWORD((gchar *) url);
+		backend_swap_interlinear_with_main((gchar *) url, settings);
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {
@@ -217,7 +217,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 		sprintf(settings->groupName, "%s", "Verse List");
 
-		if (backend_get_mod_type(modbuf) == 2) {
+		if (backend_get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
 			display_dictlex_in_viewer(modbuf, buf, settings);
@@ -253,7 +253,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		buf = g_strdup(mybuf);
 		if (settings->inDictpane)
-			gotoBookmarkSWORD(modbuf, buf);
+			change_module_and_key(modbuf, buf);
 		if (settings->inViewer)
 			display_dictlex_in_viewer(modbuf, buf, settings);
 		g_free(buf);
@@ -284,7 +284,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 		buf = g_strdup(newref);
 		if (settings->inDictpane)
-			gotoBookmarkSWORD(modbuf, buf);
+			change_module_and_key(modbuf, buf);
 		if (settings->inViewer)
 			display_dictlex_in_viewer(modbuf, buf, settings);
 		g_free(buf);
@@ -300,7 +300,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings->havethayer) {
 					buf = g_strdup(url);
 					if (settings->inDictpane)
-						gotoBookmarkSWORD("Thayer",
+						change_module_and_key("Thayer",
 								  buf);
 					if (settings->inViewer)
 						display_dictlex_in_viewer
@@ -319,7 +319,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings->havebdb) {
 					buf = g_strdup(url);
 					if (settings->inDictpane)
-						gotoBookmarkSWORD("BDB",
+						change_module_and_key("BDB",
 								  buf);
 					if (settings->inViewer)
 						display_dictlex_in_viewer("BDB",
@@ -341,7 +341,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings->havethayer) {
 					buf = g_strdup(url);
 					if (settings->inDictpane)
-						gotoBookmarkSWORD("Thayer",
+						change_module_and_key("Thayer",
 								  buf);
 					if (settings->inViewer)
 						display_dictlex_in_viewer
@@ -356,7 +356,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 			else {
 				if (settings->inDictpane)
-					gotoBookmarkSWORD(settings->
+					change_module_and_key(settings->
 							  lex_greek, buf);
 				if (settings->inViewer)
 					display_dictlex_in_viewer(settings->
@@ -373,7 +373,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings->havebdb) {
 					buf = g_strdup(url);
 					if (settings->inDictpane)
-						gotoBookmarkSWORD("BDB",
+						change_module_and_key("BDB",
 								  buf);
 					if (settings->inViewer)
 						display_dictlex_in_viewer("BDB",
@@ -389,7 +389,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 			else {
 				if (settings->inDictpane)
-					gotoBookmarkSWORD(settings->
+					change_module_and_key(settings->
 							  lex_hebrew, buf);
 				if (settings->inViewer)
 					display_dictlex_in_viewer(settings->
@@ -404,7 +404,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		++url;		/* remove M */
 		buf = g_strdup(url);
 		if (settings->inDictpane)
-			gotoBookmarkSWORD("Packard", buf);
+			change_module_and_key("Packard", buf);
 		if (settings->inViewer)
 			display_dictlex_in_viewer("Packard", buf, settings);
 		g_free(buf);
@@ -462,7 +462,7 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 					display_dictlex_in_viewer(dict, key,
 							   settings);
 				if (settings->inDictpane)
-					gotoBookmarkSWORD(dict, key);
+					change_module_and_key(dict, key);
 				g_free(key);
 				if (dict)
 					g_free(dict);
@@ -582,7 +582,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 		if (settings->inViewer)
 			display_dictlex_in_viewer(modName, key, settings);
 		if (settings->inDictpane)
-			gotoBookmarkSWORD(modName, key);
+			change_module_and_key(modName, key);
 		g_free(key);
 	}
 
@@ -613,7 +613,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 		if (settings->inViewer)
 			display_dictlex_in_viewer(modName, key, settings);
 		if (settings->inDictpane)
-			gotoBookmarkSWORD(modName, key);
+			change_module_and_key(modName, key);
 		g_free(key);
 	}
 
@@ -639,7 +639,8 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));
 	buf = gtk_entry_get_text(GTK_ENTRY(entry));
 	/* get name for current text module */
-	modbuf = getmodnameSWORD(0);
+	settings->whichwindow = MAIN_TEXT_WINDOW;
+	modbuf = get_module_name(settings);
 	display_verse_list(modbuf, buf, settings);
 }
 

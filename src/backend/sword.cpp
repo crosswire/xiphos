@@ -853,88 +853,11 @@ void globaloptionsSWORD(gchar * option, gint window, gboolean choice,
 	}
 }
 
-/* 
- * gotoBookmarkSWORD - bad hack but it works
- * bad name since we now use it for more than bookmarks
- *
- * searchs for module by modName - increments bibleindex, commindex or dictindex
- * until module is found then sets the text, comm or dict notebook page to index. 
- * key is new verse key or dict/lex key
- */
-void gotoBookmarkSWORD(gchar * modName, gchar * key)
-{
-	GtkWidget *notebook, *entry;
-	ModMap::iterator it;
-	gint bibleindex = 0, commindex = 0, dictindex = 0, bookindex =
-	    0;
-
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-
-			if (!strcmp((*it).second->Name(), modName)) {
-				notebook =
-				    lookup_widget(settings->app,
-						  "nbTextMods");
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (notebook),
-						      bibleindex);
-				vkText = key;
-				if (settings->notebook3page == 0
-				    && autoscroll)
-					vkComm = key;
-				ChangeVerseSWORD();
-				return;
-			}
-			++bibleindex;
-
-		}
-
-		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
-			if (!strcmp((*it).second->Name(), modName)) {
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (settings->
-						       notebookCOMM),
-						      commindex);
-				vkComm = key;
-				if (autoscroll)
-					vkText = key;
-				ChangeVerseSWORD();
-				return;
-			}
-			++commindex;
-
-		}
-
-		else if (!strcmp
-			 ((*it).second->Type(),
-			  "Lexicons / Dictionaries")) {
-			if (!strcmp((*it).second->Name(), modName)) {
-				gui_setPageandKey_DL(dictindex, key);
-				return;
-			}
-			++dictindex;
-		}
-
-		else if (!strcmp((*it).second->Type(), "Generic Books")) {
-			if (!strcmp((*it).second->Name(), modName)) {
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (settings->
-						       notebookGBS),
-						      bookindex);
-				return;
-			}
-			++bookindex;
-		}
-	}
-}
-
 /******************************************************************************
 * change text module for main window
 * someone clicked 
 *******************************************************************************/
-void changecurModSWORD(gchar * modName, gboolean showchange)
+void backend_change_text_module(gchar * modName, gboolean showchange)
 {
 	ModMap::iterator it;	//-- or clicked the mainwindow popup menu and the callback sent us here
 	GtkWidget *frame;
@@ -997,26 +920,9 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 }
 
 /******************************************************************************
-* change sword module for interlinear window
-* sent here by updateinterlinearpage()
-*******************************************************************************/
-void changecomp1ModSWORD(gchar * modName)
-{
-	ModMap::iterator it;
-
-	it = mainMgr1->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-		comp1Mod->SetKey(current_verse);	//-- set key to current verse
-		comp1Mod->Display();	//-- show it to the world
-	}
-}
-
-
-/******************************************************************************
 * set verse style -- verses or paragraphs
 *******************************************************************************/
-void setversestyleSWORD(gboolean choice)
+void backend_set_verse_style(gboolean choice)
 {
 	settings->versestyle = choice;	//-- remember our choice for the next program startup
 	if (havebible)
@@ -1040,15 +946,11 @@ void setversestyleSWORD(gboolean choice)
  *   none
  */
 
-void bookSWORD(void)
+void backend_book_changed(gchar *bookname)
 {
-	gchar *bookname;
 	gchar buf[256];
 
-	bookname =
-	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget
-				(settings->app, "cbeBook")));
+	
 
 	sprintf(buf, "%s %d:%d", bookname, 1, 1);
 
@@ -1058,206 +960,58 @@ void bookSWORD(void)
 	ChangeVerseSWORD();
 }
 
-/*
 //-------------------------------------------------------------------------------------------
-void chapterSWORD(void)		//-- someone clicked the chapter spin button
+void backend_chapter_verse_changed(char *bookname, int chapter, int verse)		//-- someone clicked the verse or chapter spin button
 {
-	gchar *bookname, buf[256];
-	gint iChap, iVerse;
-	
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")));
-	
-	if((!iChap)||(!iVerse)){
+	char buf[256];
+	/*
+	if ((!chapter) || (!verse)) {
 		vkText.AutoNormalize(0);
 		vkComm.AutoNormalize(0);
 	}
-		
-	if(iChap < 0){
-		++iChap;
+	
+	if (chapter < 1) {
+		++chapter;
 	}
-	sprintf(buf,"%s %d:%d", bookname, iChap, 1);
-	vkText = buf;
-	vkComm = buf;
-		
-	ChangeVerseSWORD();
-	vkText.AutoNormalize(1);
-	vkComm.AutoNormalize(1);
-}
-*/
-//-------------------------------------------------------------------------------------------
-void verseSWORD(void)		//-- someone clicked the verse spin button
-{
-	gchar *bookname, buf[256];
-	gint iChap, iVerse;
-
-	bookname =
-	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget
-				(settings->app, "cbeBook")));
-	iChap =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
-					      (settings->app,
-					       "spbChapter")));
-	iVerse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
-					      (settings->app,
-					       "spbVerse")));
-	if ((!iChap) || (!iVerse)) {
-		vkText.AutoNormalize(0);
-		vkComm.AutoNormalize(0);
+	if (verse < 1) {
+		++verse;
 	}
-
-	if (iVerse < 0) {
-		++iVerse;
-	}
-	if (iChap < 0) {
-		++iChap;
-	}
-	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
+	*/
+	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 	vkText = buf;
 	vkComm = buf;
 
-	ChangeVerseSWORD();
 	vkText.AutoNormalize(1);
 	vkComm.AutoNormalize(1);
+	ChangeVerseSWORD();
 }
 
-//-------------------------------------------------------------------------------------------
-gchar *intchangeverseSWORD(GtkWidget * book, GtkWidget * chapter, GtkWidget * verse, GtkWidget * entry)	//-- someone clicked the verse spin button
+char *backend_get_book_from_key(char *key)
 {
 	VerseKey vkey;
-	gchar *retval;
-	gchar *bookname, *newbook, buf[256];
-	gint iChap, iVerse;
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(book));
-	iChap =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(chapter));
-	iVerse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(verse));
-
-	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
-	vkey.AutoNormalize(1);
-	vkey = buf;
-	iChap = vkey.Chapter();
-	iVerse = vkey.Verse();
-	newbook =
-	    (gchar *) vkey.books[vkey.Testament() - 1][vkey.Book() -
-						       1].name;
-	if (strcmp(bookname, newbook))
-		gtk_entry_set_text(GTK_ENTRY(book), newbook);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(chapter), iChap);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(verse), iVerse);
-	strcpy(buf, vkey);
-	gtk_entry_set_text(GTK_ENTRY(entry), buf);
-	retval = buf;
-	return retval;
-}
-
-//-------------------------------------------------------------------------------------------
-gchar *intsyncSWORD(GtkWidget * book,	//-- someone clicked the sync button on the interlinary
-		    GtkWidget * chapter,
-		    GtkWidget * verse, GtkWidget * entry, gchar * key)
-{
-	VerseKey vkey;
-
-	gchar * bookname, *newbook, *retval, buf[256];
-
-	gint iChap, iVerse;
-
-	cout << "key = " << key << "\n";
 	vkey.AutoNormalize(1);
 	vkey = key;
-	iChap = vkey.Chapter();
-	iVerse = vkey.Verse();
-	newbook =
-	    (gchar *) vkey.books[vkey.Testament() - 1][vkey.Book() -
+	return 	(gchar *) vkey.books[vkey.Testament() - 1][vkey.Book() -
 						       1].name;
-	if (strcmp(bookname, newbook))
-		gtk_entry_set_text(GTK_ENTRY(book), newbook);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(chapter), iChap);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(verse), iVerse);
-	strcpy(buf, vkey);
-	gtk_entry_set_text(GTK_ENTRY(entry), buf);
-	retval = g_strdup(buf);
-	return retval;
 }
 
-//-------------------------------------------------------------------------------------------
-void btnlookupSWORD(void)
+int backend_get_chapter_from_key(char *key)
 {
-	gchar *buf;		//-- pointer to entry string
-
-	//ApplyChange = false;  //-- do not want to start loop with book combo box
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")));	//-- set pointer to entry text
-	changeVerseSWORD(buf);	//-- change verse to entry text 
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	return vkey.Chapter();	
 }
 
-//-------------------------------------------------------------------------------------------
-void freeformlookupSWORD(GdkEventKey * event)	//-- change to verse in freeformlookup entry
+int backend_get_verse_from_key(char *key)
 {
-	gchar *buf;		//-- pointer to entry string
-
-	//ApplyChange = false;  //-- do not want to start loop with book combo box
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")));	//-- set pointer to entry text
-	if (event->keyval == 65293 || event->keyval == 65421) {	//-- if user hit return key continue
-		changeVerseSWORD(buf);	//-- change verse to entry text         
-	}
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	return vkey.Verse();	
 }
-
 //-------------------------------------------------------------------------------------------
-void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone changed commentary notebook page (sent here by callback function notebook page change)
-{
-	ModMap::iterator it;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
-	GtkWidget *frame;
-	gchar *cKey;
-
-	if (havecomm) {
-		curcomMod = mainMgr->Modules[modName];
-		cKey = (gchar *) curcomMod->getConfigEntry("CipherKey");
-		//-- change tab label to current commentary name
-		gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
-						(settings->workbook),
-						gtk_notebook_get_nth_page
-						(GTK_NOTEBOOK
-						 (settings->workbook),
-						 0),
-						(gchar *) curcomMod->
-						Name());
-
-		if (cKey)
-			gtk_widget_set_sensitive(settings->
-						 unlockcommmod_item,
-						 TRUE);
-		else
-			gtk_widget_set_sensitive(settings->
-						 unlockcommmod_item,
-						 FALSE);
-
-		if (curcomMod) {
-			if (showchange) {
-				if (autoscroll)
-					curcomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
-				curcomMod->Display();	//-- show the change
-				strcpy(settings->CommWindowModule,
-				       curcomMod->Name());
-			}
-
-		}
-
-	}
-
-	frame = lookup_widget(settings->app, "frameCom");
-	gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
-}
-
-//-------------------------------------------------------------------------------------------
-void savenoteSWORD(gchar * buf)	//-- save personal comments
+void backend_save_personal_comment(gchar * buf)	//-- save personal comments
 {
 	if (buf)
 		*percomMod << (const char *) buf;	//-- save note!
@@ -1266,7 +1020,7 @@ void savenoteSWORD(gchar * buf)	//-- save personal comments
 
 
 //-------------------------------------------------------------------------------------------
-void deletenoteSWORD(void)	//-- delete personal comment
+void backend_delete_personal_comment(void)	//-- delete personal comment
 {
 	GtkWidget * label1, *label2, *label3, *msgbox;
 
@@ -1293,37 +1047,15 @@ void deletenoteSWORD(void)	//-- delete personal comment
 }
 
 
-/*void dictchangekeySWORD(gint direction)
 //-------------------------------------------------------------------------------------------
-void dictchangekeySWORD(gint direction)	//-- dict change key up or down -- arrow buttons
-{
-	gchar *buf;
-
-	if (direction == 1) {	//-- next key  
-		(*curdictMod)++;	//-- move up one
-	} else if (direction == 0) {	//-- previous key  
-		(*curdictMod)--;	//-- move down one
-	}
-	curdictMod->Display();	//-- show the changes
-	//-- put new key into dictionary text entry
-	gtk_entry_set_text(GTK_ENTRY
-			   (lookup_widget
-			    (settings->app, "dictionarySearchText")),
-			   curdictMod->KeyText());
-	buf = g_strdup(curdictMod->KeyText());
-	dictSearchTextChangedSWORD(buf);
-	g_free(buf);
-}
-*/
-//-------------------------------------------------------------------------------------------
-void changepercomModSWORD(gchar * modName)	//-- change personal comments module
+void backend_change_percom_module(gchar * modName)	//-- change personal comments module
 {
 	GtkWidget *notebook,	//-- pointer to a notebook widget
 	*label;			//-- pointer to a label widget
 	ModMap::iterator it;	//-- module iterator
 
 	if (noteModified)
-		return;		//savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
+		return;		//backend_save_personal_comment(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
 	it = percomMgr->Modules.find(modName);	//-- find commentary module (modName from page label)
 	if (it != percomMgr->Modules.end()) {	//-- if we don't run out of mods before we find the one we are looking for 
 		percomMod = (*it).second;	//-- set curcomMod to modName
@@ -1343,106 +1075,21 @@ void changepercomModSWORD(gchar * modName)	//-- change personal comments module
 
 
 /******************************************************************************
- * setglobalopsSWORD
+ * 
  * option - option to set
  * yesno - yes or no
 ******************************************************************************/
-void setglobalopsSWORD(gint window, gchar * option, gchar * yesno)
+void backend_set_global_option(gint window, gchar * option, gchar * yesno)
 {
 	/* turn option on or off */
 	switch (window) {
-	case 0:/*** Bible text window ***/
+	case MAIN_TEXT_WINDOW:/*** Bible text window ***/
 		mainMgr->setGlobalOption(option, yesno);
 		break;
-	case 1:/*** interlinear window ***/
+	case INTERLINEAR_WINDOW:/*** interlinear window ***/
 		mainMgr1->setGlobalOption(option, yesno);
 		break;
 	}
-}
-
-/******************************************************************************
- *redisplayTextSWORD - display Bible text in main window
-******************************************************************************/
-void redisplayTextSWORD(void)
-{
-	if (havebible)
-		curMod->Display();
-}
-
-/******************************************************************************
- *getmodnameSWORD
- * num
- * returns module name
-******************************************************************************/
-gchar *getmodnameSWORD(gint num)
-{
-	if (havebible) {
-		switch (num) {
-		case 0:
-			return curMod->Name();
-			break;
-		case 1:
-			return curcomMod->Name();
-			break;
-		case 2:
-			return curdictMod->Name();
-			break;
-		case 3:
-			return comp1Mod->Name();
-			break;
-		}
-	}
-}
-
-/******************************************************************************
- *getmodkeySWORD
- * num
- * returns module key
-******************************************************************************/
-gchar *getmodkeySWORD(gint num)
-{
-	if (havebible) {
-		switch (num) {
-		case 0:
-			return (gchar *) curMod->KeyText();
-			break;
-		case 1:
-			return (gchar *) curcomMod->KeyText();
-			break;
-		case 2:
-			return (gchar *) curdictMod->KeyText();
-			break;
-		case 3:
-			return (gchar *) comp1Mod->KeyText();
-			break;
-		}
-	}
-
-}
-
-/*** returns the name of the current commentary module ***/
-gchar *getcommodSWORD(void)
-{
-	return curcomMod->Name();
-}
-
-/*** returns the name of the current dict/lex module ***/
-gchar *getdictmodSWORD(void)
-{
-	return curdictMod->Name();
-}
-
-/*** returns the name of the current Bible text module ***/
-gchar *gettextmodSWORD(void)
-{
-	return curMod->Name();
-}
-
-
-/*** returns the description of the current commentary module ***/
-gchar *getcommodDescriptionSWORD(void)
-{
-	return (char *) curcomMod->Description();;
 }
 
 /**********************************************************************
@@ -1485,7 +1132,7 @@ GList *backend_get_books(void)
 }
 
 /*** returns the version number of the sword libs ***/
-const char *getSwordVerionSWORD(void)
+const char *backend_get_sword_verion(void)
 {
 	SWVersion retval;
 
@@ -1497,108 +1144,28 @@ const char *getSwordVerionSWORD(void)
  * swaps interlinear mod with mod in main text window
  * intmod - interlinear mod name
  ******************************************************************************/
-void swapmodsSWORD(gchar * intmod)
+void backend_swap_interlinear_with_main(gchar * intmod, SETTINGS *s)
 {
 	gchar *modname;
 
-	modname = curMod->Name();
-	if (!stricmp(settings->Interlinear5Module, intmod)) {
-		sprintf(settings->Interlinear5Module, "%s", modname);
+	modname = s->MainWindowModule;
+	if (!stricmp(s->Interlinear5Module, intmod)) {
+		sprintf(s->Interlinear5Module, "%s", modname);
 	}
-	if (!stricmp(settings->Interlinear4Module, intmod)) {
-		sprintf(settings->Interlinear4Module, "%s", modname);
+	if (!stricmp(s->Interlinear4Module, intmod)) {
+		sprintf(s->Interlinear4Module, "%s", modname);
 	}
-	if (!stricmp(settings->Interlinear3Module, intmod)) {
-		sprintf(settings->Interlinear3Module, "%s", modname);
+	if (!stricmp(s->Interlinear3Module, intmod)) {
+		sprintf(s->Interlinear3Module, "%s", modname);
 	}
-	if (!stricmp(settings->Interlinear2Module, intmod)) {
-		sprintf(settings->Interlinear2Module, "%s", modname);
+	if (!stricmp(s->Interlinear2Module, intmod)) {
+		sprintf(s->Interlinear2Module, "%s", modname);
 	}
-	if (!stricmp(settings->Interlinear1Module, intmod)) {
-		sprintf(settings->Interlinear1Module, "%s", modname);
+	if (!stricmp(s->Interlinear1Module, intmod)) {
+		sprintf(s->Interlinear1Module, "%s", modname);
 	}
-	gotoBookmarkSWORD(intmod, current_verse);
+	change_module_and_key(intmod, current_verse);
 	updateinterlinearpage();
-}
-
-/*** we come here first to get module list to pass to the preferences dialog ***/
-void loadpreferencemodsSWORD(void)
-{
-	GtkWidget *dlg;
-	ModMap::iterator it;	//-- iteratior
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
-	SWMgr *Mgr;
-	GList *textMods = NULL;
-	GList *commMods = NULL;
-	GList *dictMods = NULL;
-	GList *percomMods = NULL;
-	GList *devotionMods = NULL;
-	string feature;
-	gint devotionals = 0;
-	Mgr = new SWMgr();	//-- create sword mgr
-	for (it = Mgr->Modules.begin(); it != Mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-			textMods =
-			    g_list_append(textMods,
-					  (*it).second->Name());
-		}
-		if (!strcmp((*it).second->Type(), "Commentaries")) {
-			commMods =
-			    g_list_append(commMods,
-					  (*it).second->Name());
-		}
-		if (!strcmp
-		    ((*it).second->Type(), "Lexicons / Dictionaries")) {
-			sit =
-			    Mgr->config->Sections.find((*it).second->
-						       Name());
-			ConfigEntMap & section = (*sit).second;
-			feature =
-			    ((entry =
-			      section.find("Feature")) !=
-			     section.end())? (*entry).
-			    second : (string) "";
-			dictMods =
-			    g_list_append(dictMods,
-					  (*it).second->Name());
-			if (!stricmp(feature.c_str(), "DailyDevotion")) {
-				devotionMods =
-				    g_list_append(devotionMods,
-						  (*it).second->Name());
-				++devotionals;
-			}
-		}
-	}
-
-	if (!devotionals)
-		settings->showdevotional = FALSE;
-
-	//-- set up percom editor module
-	for (it = Mgr->Modules.begin(); it != Mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- if type is 
-			//-- if driver is RawFiles                     
-			if ((*Mgr->config->
-			     Sections[(*it).second->Name()].
-			     find("ModDrv")).second == "RawFiles") {
-				percomMods =
-				    g_list_append(percomMods,
-						  (*it).second->Name());
-			}
-		}
-	}
-	/* create preferences dialog */
-	dlg = create_dlgSettings(settings,
-				 textMods, commMods, dictMods,
-				 percomMods, devotionMods);
-	gtk_widget_show(dlg);	/* show preferences dialog */
-
-	g_list_free(textMods);	//-- free GLists
-	g_list_free(commMods);
-	g_list_free(dictMods);
-	g_list_free(percomMods);
-	g_list_free(devotionMods);
-	delete Mgr;		//-- delete Sword manager         
 }
 
 /*** the changes are already made we just need to show them ***/
@@ -1712,26 +1279,26 @@ int backend_get_mod_type(gchar * mod_name)
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 		    /*** delete Sword manager ***/
 			delete mgr;
-			return 0;
+			return TEXT_TYPE;
 		}
 
 		if (!strcmp((*it).second->Type(), COMM_MODS)) {
 		    /*** delete Sword manager ***/
 			delete mgr;
-			return 1;
+			return COMMENTARY_TYPE;
 		}
 
 		if (!strcmp
 		    ((*it).second->Type(), DICT_MODS)) {
 		    /*** delete Sword manager ***/
 			delete mgr;
-			return 2;
+			return DICTIONARY_TYPE;
 		}
 
 		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
 		    /*** delete Sword manager ***/
 			delete mgr;
-			return 3;
+			return BOOK_TYPE;
 		}
 	}
 	/*** delete Sword manager ***/
@@ -1751,6 +1318,46 @@ GList *backend_get_list_of_mods_by_type(char *mod_type)
 			    g_list_append(mods,
 					  (gchar *) (*it).second->
 					  Name());
+		}
+	}
+	return mods;
+}
+
+GList *backend_get_list_of_devotion_modules(void)
+{
+	ModMap::iterator it;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;	
+	
+	string feature;
+	GList *mods = NULL;
+	for (it = mainMgr->Modules.begin();
+	     it != mainMgr->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+			sit = mainMgr->config->Sections.find((*it).second->Name());
+			ConfigEntMap & section = (*sit).second;
+			feature = ((entry = section.find("Feature")) !=
+			     section.end())? (*entry).
+			    second : (string) "";
+			if(!stricmp(feature.c_str(), "DailyDevotion")) {
+				mods = g_list_append(mods, (*it).second->Name());
+			}
+		}
+	}
+	return mods;
+}
+
+GList *backend_get_list_of_percom_modules(void)
+{
+	ModMap::iterator it;
+	GList *mods = NULL;
+	for (it = mainMgr->Modules.begin();it != mainMgr->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), COMM_MODS)) {	
+			//-- if driver is RawFiles                     
+			if ((*percomMgr->config->Sections[(*it).second->Name()].
+			     find("ModDrv")).second == "RawFiles") {
+				mods = g_list_append(mods, (*it).second->Name());
+			}	
 		}
 	}
 	return mods;
@@ -1812,6 +1419,24 @@ gchar *backend_get_mod_aboutSWORD(gchar * modname)
 {
 	return g_strdup((gchar *) mainMgr->Modules[modname]->
 			getConfigEntry("About"));
+}
+
+int backend_get_module_page(char * module_name, char * module_type)
+{	
+	ModMap::iterator it;
+	gint module_index = 0;
+
+	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
+		     
+		if (!strcmp((*it).second->Type(), module_type)) {
+			
+			if (!strcmp((*it).second->Name(), module_name)) {
+				return module_index;
+			}
+			++module_index;		
+		}
+	}
+	return -1;
 }
 
 /******   end of file   ******/

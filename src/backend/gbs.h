@@ -28,7 +28,8 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
-
+	
+	void backend_display_book(gint booknum, gchar * key);
 	gboolean backend_treekey_next_sibling(gchar *bookname, 
 			unsigned long offset);
 	gboolean backend_treekeyHasChildrenGBS(gchar *bookname, 

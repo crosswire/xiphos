@@ -35,39 +35,39 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-        typedef struct _COMMFindDialog COMMFindDialog;
-        struct _COMMFindDialog {
-                GnomeDialog *dialog;
-                GtkWidget *htmlwidget;
-                GtkWidget *entry;
-                GtkWidget *backward;
-                GtkWidget *case_sensitive;
-                gboolean regular;
-        };
+	typedef struct _COMMFindDialog COMMFindDialog;
+	struct _COMMFindDialog {
+		GnomeDialog *dialog;
+		GtkWidget *htmlwidget;
+		GtkWidget *entry;
+		GtkWidget *backward;
+		GtkWidget *case_sensitive;
+		gboolean regular;
+	};
 
-        typedef struct _commdata COMM_DATA;
-        struct _commdata {
-                GtkWidget *html;
-                GtkWidget *btnCOMMSync;
-                GtkWidget *btnCOMMBack;
-                GtkWidget *btnCOMMForward;
-                GtkWidget *btnCOMMPrint;
-                GtkWidget *showtabs;
-                gchar *modName;
-                gchar *modDescription;
-                gchar *searchstring;
-                gchar *key;
-                gint modnum;
-                COMMFindDialog *find_dialog;
-        };
-
-
-        void gui_setupCOMM ( SETTINGS * s );
-        void gui_shutdownCOMM ( void );
-        void gui_displayCOMM ( gchar * key );
+	typedef struct _commdata COMM_DATA;
+	struct _commdata {
+		GtkWidget *html;
+		GtkWidget *btnCOMMSync;
+		GtkWidget *btnCOMMBack;
+		GtkWidget *btnCOMMForward;
+		GtkWidget *btnCOMMPrint;
+		GtkWidget *showtabs;
+		gchar *modName;
+		gchar *modDescription;
+		gchar *searchstring;
+		gchar *key;
+		gint modnum;
+		COMMFindDialog *find_dialog;
+	};
+	void gui_set_commentary_page_and_key(gint page_num,
+					     gchar * key);
+	void gui_setupCOMM(SETTINGS * s);
+	void gui_shutdownCOMM(void);
+	void gui_displayCOMM(gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-#endif                          /* __GS_COMMENTARY_H_ */
+#endif				/* __GS_COMMENTARY_H_ */
 /******  end of file  ******/

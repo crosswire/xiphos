@@ -61,6 +61,19 @@ GList *gbs_list;
 gboolean show_tabs_gbs;
 
 /***  start code  ***/
+
+
+void gui_set_book_page_and_key(gint page_num, gchar * key)
+{
+	//GBS_DATA * g;
+
+	//g = (GBS_DATA *) g_list_nth_data(gbs_list, page_num);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
+			      page_num);
+	backend_display_book(page_num,key);
+
+}
+
 static
 void gui_add_node_children(SETTINGS * s,
 			    GtkCTreeNode * node,
