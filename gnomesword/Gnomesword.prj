@@ -42,11 +42,11 @@ project.menu.comment=No comment
 project.menu.icon=
 project.menu.need.terminal=1
 
-project.configure.options=
+project.configure.options=--prefix=/usr
 
 anjuta.program.arguments=
 
-project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 0 
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 
@@ -102,8 +102,6 @@ module.source.files=\
 	sw_properties.h\
 	gs_bookmarks.c\
 	gs_bookmarks.h\
-	sw_latin1utf8.cpp\
-	sw_latin1utf8.h\
 	sw_bookmarks.cpp\
 	sw_bookmarks.h\
 	gs_information_dlg.c\
@@ -132,10 +130,6 @@ module.source.files=\
 	sw_viewcomm_dlg.h\
 	sw_gnomesword.cpp\
 	sw_gnomesword.h\
-	thmlhtmlhref.cpp\
-	thmlhtmlhref.h\
-	gbfhtmlhref.cpp\
-	gbfhtmlhref.h\
 	sw_display.cpp\
 	sw_display.h\
 	gs_unlockkey_dlg.c\

@@ -69,6 +69,8 @@ extern gboolean
 	noteModified;	/* personal comments window changed */
 extern GtkWidget 
 	*NEtext,
+	*morphs,
+	*footnotes,
 	*strongsnum;	/* menu check item (declared in gs_gnomesword.c) */
 extern gint 
 	answer;		/* do we save file on exit */
@@ -80,12 +82,12 @@ extern gint
 *********************************************************************************/
 
 void
-on_mainwindow_draw                     (GtkWidget       *widget,
-                                        GdkRectangle    *area,
-                                        gpointer         user_data)
+on_mainwindow_size_allocate(GtkWidget *widget,
+                                        GtkAllocation   *allocation,
+                                        gpointer  user_data)
 {
-	settings->gs_width = area->width;
-	settings->gs_hight = area->height;
+	settings->gs_width = allocation->width;
+	settings->gs_hight = allocation->height;
 	g_warning("gs hight = %d\ngs width = %d", settings->gs_hight,settings->gs_width);
 }
 
@@ -95,6 +97,20 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
 	globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+}
+//----------------------------------------------------------------------------------------------
+void
+on_btnMorphs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	GTK_CHECK_MENU_ITEM(morphs)->active = togglebutton->active;	//-- change menu check item to match button
+	globaloptionsSWORD("Morphological Tags", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+}
+//----------------------------------------------------------------------------------------------
+void
+on_btnFootnotes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	GTK_CHECK_MENU_ITEM(footnotes)->active = togglebutton->active;	//-- change menu check item to match button
+	globaloptionsSWORD("Footnotes", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -488,4 +504,18 @@ void on_listeditor_destroy(GtkObject * object, gpointer user_data)
 {
 	firstLE = TRUE;
 }
+
+void on_btnCommSyn_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	changeVerseComSWORD();
+}
+
+
+void on_btnCommPrint_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
 
