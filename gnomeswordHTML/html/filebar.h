@@ -1,7 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*  This file is part of the GtkHTML library.
-
-    Copyright (C) 2000 Helix Code, Inc.
+/* 
+     filebar.h  20001-04-24
+     
+    Copyright (C) 2001 Terry Biggs
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,18 +19,17 @@
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
 
-    Author: Ettore Perazzoli <ettore@helixcode.com>
+    
 */
 
-#ifndef _TOOLBAR_H
-#define _TOOLBAR_H
-
-//#include <bonobo.h>
+#ifndef _FILEBAR_H
+#define _FILEBAR_H
 
 #include <gtkhtml.h>
 
 #include "control-data.h"
 
-GtkWidget *toolbar_style  (GtkHTMLControlData *cd);
-GtkWidget *toolbar_edit (GtkHTMLControlData *cd);
-#endif /* _TOOLBAR_H */
+GtkWidget *toolbar_file (GtkHTMLControlData *cd);
+
+#endif /* _FILEBAR_H */
+

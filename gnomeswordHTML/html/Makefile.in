@@ -113,7 +113,7 @@ noinst_LIBRARIES = libhtmleditor.a
 INCLUDES =      $(GNOME_INCLUDEDIR) 	-I$(top_srcdir) 	-I$(top_srcdir)/html 	-I$(top_srcdir)/src         -I /usr/include/gtkhtml 	$(EXTRA_GNOME_CFLAGS)
 
 
-libhtmleditor_a_SOURCES =          gs_editor.c 	gs_editor.h         body.c         body.h         control-data.c         control-data.h         dialog.c         dialog.h         image.c         image.h         link.c         link.h         paragraph.c         paragraph.h         popup.c         popup.h         properties.c         properties.h         replace.c         replace.h         rule.c         rule.h         search.c         search.h         text.c         text.h         toolbar.c         toolbar.h         utils.c         utils.h
+libhtmleditor_a_SOURCES =          gs_editor.c         gs_editor.h         body.c         body.h         control-data.c         control-data.h         dialog.c         dialog.h         filebar.c         filebar.h         insertbar.c         insertbar.h         editbar.c         editbar.h         image.c         image.h         link.c         link.h         paragraph.c         paragraph.h         popup.c         popup.h         properties.c         properties.h         replace.c         replace.h         rule.c         rule.h         search.c         search.h         text.c         text.h         toolbar.c         toolbar.h         utils.c         utils.h
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -127,8 +127,8 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libhtmleditor_a_LIBADD = 
 libhtmleditor_a_OBJECTS =  gs_editor.o body.o control-data.o dialog.o \
-image.o link.o paragraph.o popup.o properties.o replace.o rule.o \
-search.o text.o toolbar.o utils.o
+filebar.o insertbar.o editbar.o image.o link.o paragraph.o popup.o \
+properties.o replace.o rule.o search.o text.o toolbar.o utils.o
 AR = ar
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -143,9 +143,10 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/body.P .deps/control-data.P .deps/dialog.P \
-.deps/gs_editor.P .deps/image.P .deps/link.P .deps/paragraph.P \
-.deps/popup.P .deps/properties.P .deps/replace.P .deps/rule.P \
-.deps/search.P .deps/text.P .deps/toolbar.P .deps/utils.P
+.deps/editbar.P .deps/filebar.P .deps/gs_editor.P .deps/image.P \
+.deps/insertbar.P .deps/link.P .deps/paragraph.P .deps/popup.P \
+.deps/properties.P .deps/replace.P .deps/rule.P .deps/search.P \
+.deps/text.P .deps/toolbar.P .deps/utils.P
 SOURCES = $(libhtmleditor_a_SOURCES)
 OBJECTS = $(libhtmleditor_a_OBJECTS)
 

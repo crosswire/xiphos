@@ -21,15 +21,13 @@
     Author: Ettore Perazzoli <ettore@helixcode.com>
 */
 
-#ifndef _TOOLBAR_H
-#define _TOOLBAR_H
-
-//#include <bonobo.h>
+#ifndef _EDITBAR_H
+#define _EDITBAR_H
 
 #include <gtkhtml.h>
 
 #include "control-data.h"
 
-GtkWidget *toolbar_style  (GtkHTMLControlData *cd);
 GtkWidget *toolbar_edit (GtkHTMLControlData *cd);
-#endif /* _TOOLBAR_H */
+#endif /* _EDITBAR_H */
+
