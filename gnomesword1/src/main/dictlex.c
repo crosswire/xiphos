@@ -33,11 +33,11 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/cipher_key_dialog.h"
+#include "gui/html.h"
 
 #include "main/settings.h"
 #include "main/dictlex.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 
 /******************************************************************************
  * Name

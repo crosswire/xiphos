@@ -32,9 +32,9 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/bookmarks.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/dictlex.h"
 
@@ -200,7 +200,7 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 	strcpy(sv->mod_name, module_name);
 	tmp = get_verse_list(module_name, verse_list);
 	
-	beginHTML(settings.vlsbhtml, TRUE);
+	gui_begin_html(settings.vlsbhtml, TRUE);
 	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
 			settings.bible_bg_color, 
 			settings.bible_text_color,
@@ -208,7 +208,7 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 			settings.bible_verse_num_color,
 			module_name);
 	utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
-	displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
+	gui_display_html(settings.vlsbhtml, utf8str, strlen(utf8str));
 	
 	while(tmp != NULL) {		
 		if(oddkey){
@@ -227,14 +227,14 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 			first_key = g_strdup((const char *)tmp->data);
 		++i;
 		utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
-		displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
+		gui_display_html(settings.vlsbhtml, utf8str, strlen(utf8str));
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
 	sprintf(buf,"</table></body</html>");	
 	utf8str = e_utf8_from_gtk_string(settings.vlsbhtml, buf);
-	displayHTML(settings.vlsbhtml, utf8str, strlen(utf8str));
-	endHTML(settings.vlsbhtml);
+	gui_display_html(settings.vlsbhtml, utf8str, strlen(utf8str));
+	gui_end_html(settings.vlsbhtml);
 	
 	showSBVerseList();
 	gtk_notebook_set_page(GTK_NOTEBOOK
@@ -962,7 +962,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 			   (on_clistSearchResults_select_row), NULL);
 			   
 	gtk_signal_connect(GTK_OBJECT(sv->html_widget), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), settings.app);
+			   GTK_SIGNAL_FUNC(gui_url), settings.app);
 	return sv->htmlshow;
 }
 

@@ -129,7 +129,7 @@ void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
 				     gchar ** item_name);
 int module_is_locked(char * mod_name);
 char *get_valid_key(char *key);
-int get_module_page(char *module_name, char *module_type);
+int get_module_number(char *module_name, char *module_type);
 char *get_module_text(char * mod_name, char * key);
 char *get_search_results_text(char * mod_name, char * key);
 

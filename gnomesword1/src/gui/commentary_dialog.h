@@ -45,7 +45,7 @@ struct _viewcomm {
 	gboolean chapter_heading;
 };
 
-void gui_open_commentary_dialog(gint mod_num);
+void gui_open_commentary_dialog(gchar * mod_name);
 void gui_setup_commentary_dialog(GList *mods);
 void gui_shutdown_commentary_dialog(void);
 

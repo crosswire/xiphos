@@ -24,13 +24,12 @@
 #endif
 
 #include <gnome.h>
+
+#include "gui/html.h"
+
 #include "main/gs_gnomesword.h"
 #include "main/gs_menu.h"
-#include "backend/sword.h"
 #include "main/gs_popup_cb.h"
-#include "main/gs_html.h"
-//#include "main/support.h"
-//#include "main/gs_bookmarks.h"
 #include "main/settings.h"
 
 GtkWidget *module_options_menu;
@@ -157,34 +156,6 @@ additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 	//g_free(menuitem->user_data); 
 	//g_free(menuitem);
 }
-/******************************************************************************
- * add_item_to_gnome_menu_w_num - add item to gnome menu 
- * adds an item to the main menu bar
- * MainFrm - the main window - app widget
- * itemname - the item label and also used for user data
- * menuname - the gnome menu path 
- * mycallback - the callback to call when item is selected 
- ******************************************************************************/
-static void
-add_item_to_gnome_menu_w_num(GtkWidget * MainFrm, gchar * item_name, gint item_num,
-		   gchar * menu_name, GtkMenuCallback mycallback)
-{
-	GnomeUIInfo *menuitem;
-
-	menuitem = g_new(GnomeUIInfo, 2);
-	menuitem->type = GNOME_APP_UI_ITEM;
-	menuitem->moreinfo = (gpointer) mycallback;
-	menuitem->user_data = GINT_TO_POINTER(item_num);
-	menuitem->label = item_name;
-	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-	menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
-	menuitem->accelerator_key = 0;
-	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menu_name,
-					 menuitem, NULL);
-}
-
-
 /******************************************************************************
  * additemtopopupmenu - add item to popup menu
  * add one item to a popup menu
@@ -380,12 +351,13 @@ void add_mods_to_menus(GList * modlist, gchar * menu,
 	
 	tmp = modlist;
 	while (tmp != NULL) {	
-
-		add_item_to_gnome_menu_w_num(settings.app, 
+		additemtognomemenu(settings.app, (gchar *) tmp->data, (gchar *) tmp->data,
+		   view_remember_last_item, callback);
+		/*add_item_to_gnome_menu_w_num(settings.app, 
 				(gchar *) tmp->data, 
 				i, 
 				view_remember_last_item , 
-				(GtkMenuCallback) callback);
+				(GtkMenuCallback) callback);*/
 		//-- remember last item - so next item will be place below it   
 		sprintf(view_remember_last_item,"%s%s", 
 				menu, 
@@ -506,8 +478,8 @@ create_pmInt(GList *mods, gchar *intWindow)
 	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 5"), (GtkMenuCallback)on_changeint5mod_activate );
 
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
-                      	GTK_SIGNAL_FUNC (on_copyhtml_activate),
-                      	(gchar *)intWindow);
+                      	GTK_SIGNAL_FUNC (gui_copyhtml_activate),
+                      	NULL);
 	gtk_signal_connect (GTK_OBJECT (undockInt), "activate",
                       	GTK_SIGNAL_FUNC (on_undockInt_activate), 
                       	&settings);

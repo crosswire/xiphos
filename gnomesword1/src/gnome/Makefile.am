@@ -44,6 +44,7 @@ libgui_a_SOURCES =  \
     gtkhtml_display.c \
     gui.c \
     history.c \
+    html.c \
     info_box.c \
     interlinear.c \
     interlinear_dialog.c \
