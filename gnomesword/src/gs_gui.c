@@ -210,6 +210,12 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 
 static GnomeUIInfo settings1_menu_uiinfo[] = {
 	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Verse Style"),
+	 NULL,
+	 (gpointer) on_verse_style1_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL },
+	{
 	 GNOME_APP_UI_SUBTREE, N_("Module Options"),
 	 NULL,
 	 module_options_menu_uiinfo, NULL, NULL,
@@ -537,7 +543,13 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 menubar1_uiinfo[4].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(settings1_menu_uiinfo[0].widget);
+	gtk_widget_ref (settings1_menu_uiinfo[0].widget);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "verse_style",
+                            settings1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	s->versestyle_item = settings1_menu_uiinfo[0].widget;
+
+	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "preferences1",
 				 settings1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
