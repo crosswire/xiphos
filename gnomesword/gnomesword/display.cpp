@@ -844,65 +844,52 @@ HTMLChapDisp::Display(SWModule &imodule)
 	int len;
 
 	gtk_text_freeze (GTK_TEXT(gtkText));
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) 
-	{
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++){
 		sprintf(tmpBuf, " %d. ", key->Verse());
 		gtk_text_insert(GTK_TEXT(gtkText), versenum_font, &colourBlue, NULL, tmpBuf, -1);
-	  if(greek_on)
-	  {
-	     if (key->Verse() == curVerse)
-	     {
-	        gtk_text_thaw(GTK_TEXT(gtkText));
-			adjVal = GTK_TEXT(gtkText)->vadj->upper;
-			curPos = gtk_text_get_length(GTK_TEXT(gtkText));
-	        gtk_text_insert(GTK_TEXT(gtkText), sword_font, &myGreen, NULL, (const char *)imodule, -1);
-	        gtk_text_freeze (GTK_TEXT(gtkText));	
-	     }
-	     else gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL,(const char *)imodule , -1);
-	  }
-	  else
-	  {
-		i=j=0;
-		myverse = g_strdup((const char *)imodule);
-		len = strlen(myverse);
-		verseBuf = new char[len+1];
-	    verseBuf[0]='\0';
-		while(i<len)
-		{
-		    if(myverse[i] == '<')
-		    {   		
-		        tag = gettags(myverse,i); //-- get html tags
-		        buf = g_strdup(tag);
-		        i = i + strlen(buf);  //-- remove tags (we do not want to see them)
-		        //cout << tag << '\n';
-		        if(!strcmp(tag,"<SMALL><EM>"))  //-- strongs numbers -
-		        {   		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        --i;
-			        myverse[i] ='<';
-			        j=0;
-			        verseBuf[0]='\0';
-		        }
-		        else if(!strcmp(tag,"</EM></SMALL>")) //-- end strongs numbers -
-		        {  		
-				
-			        verseBuf[j] ='>';
-			        verseBuf[j+1] = '\0';
-			        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),fo_font , &gtkText->style->black, NULL, verseBuf, -1);			
-			        j=0;
-			        verseBuf[0]='\0';
-		        }
-		        else if(!strcmp(tag,"<SMALL><I>")) //-- strongs numbers - tense
-		        {   		
-				    if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
-				    else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-			        --i;
-			        myverse[i] ='(';
-			        j=0;
-			        verseBuf[0]='\0';
-		        }
+	        if(greek_on){
+	                if (key->Verse() == curVerse){
+	                        gtk_text_thaw(GTK_TEXT(gtkText));
+			        adjVal = GTK_TEXT(gtkText)->vadj->upper;
+			        curPos = gtk_text_get_length(GTK_TEXT(gtkText));
+	                        gtk_text_insert(GTK_TEXT(gtkText), sword_font, &myGreen, NULL, (const char *)imodule, -1);
+	                        gtk_text_freeze (GTK_TEXT(gtkText));	
+	                }else gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL,(const char *)imodule , -1);
+	        }else{
+		        i=j=0;
+	        	myverse = g_strdup((const char *)imodule);
+		        len = strlen(myverse);
+		        verseBuf = new char[len+1];
+	                verseBuf[0]='\0';
+		        while(i<len){
+		                if(myverse[i] == '<'){   		
+		                        tag = gettags(myverse,i); //-- get html tags
+		                        if(tag){
+		                                buf = g_strdup(tag);
+		                                i = i + strlen(buf);  //-- remove tags (we do not want to see them)
+		                                //cout << tag << '\n';
+		                                if(!strcmp(tag,"<SMALL><EM>")){  //-- strongs numbers -		           		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                --i;
+			                                myverse[i] ='<';
+			                                j=0;
+			                                verseBuf[0]='\0';
+		                                }else if(!strcmp(tag,"</EM></SMALL>")){ //-- end strongs numbers -		          					
+			                                verseBuf[j] ='>';
+			                                verseBuf[j+1] = '\0';
+			                                if(key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), fo_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),fo_font , &gtkText->style->black, NULL, verseBuf, -1);			
+			                                j=0;
+			                                verseBuf[0]='\0';
+		                                }else if(!strcmp(tag,"<SMALL><I>")){ //-- strongs numbers - tense		           		
+				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+			                                --i;
+			                                myverse[i] ='(';
+			                                j=0;
+			                                verseBuf[0]='\0';
+		                                }
 		        else if(!strcmp(tag,"</I></SMALL>")) //-- end strongs numbers - tense
 		        {  	
 		            verseBuf[j] =')';
@@ -1058,6 +1045,7 @@ HTMLChapDisp::Display(SWModule &imodule)
 			            verseBuf[j]='\n'; //-- we only need new line if we are not
 			            ++j;
 			        }
+    	        }
     	        }
     	    }			
 		    verseBuf[j] = myverse[i]; 			
