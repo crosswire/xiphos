@@ -470,13 +470,19 @@ static void unset_focus(GtkWidget * w, gpointer data)
 static void set_color_combo(GtkHTML * html,
 			    DIALOG_DATA * d)
 {
-#ifdef USE_GTKHTML30
-
 	GSHTMLEditorControlData *cd = d->editor;
+#ifdef USE_GTKHTML30
 	color_combo_set_color(COLOR_COMBO(cd->combo),
 			      &html_colorset_get_color_allocated
 			      (html->engine->painter,
 			       HTMLTextColor)->color);
+#endif
+#ifdef USE_GTKHTML31
+	color_combo_set_color (COLOR_COMBO (cd->combo),
+			       &html_colorset_get_color_allocated 
+				(html->engine->settings->color_set,
+				html->engine->painter, 
+				HTMLTextColor)->color);
 #endif
 }
 
@@ -553,10 +559,8 @@ static void load_done(GtkHTML * html, DIALOG_DATA * d)
 static GtkWidget *setup_color_combo(DIALOG_DATA * d)
 {
 
-#ifdef USE_GTKHTML30
 	GSHTMLEditorControlData *cd = d->editor;
 	HTMLColor *color;
-
 	color = html_colorset_get_color (
 				cd->html->engine->settings->color_set, 
 				HTMLTextColor);
@@ -570,20 +574,20 @@ static GtkWidget *setup_color_combo(DIALOG_DATA * d)
         g_signal_connect (cd->html, "load_done", 
 				G_CALLBACK (load_done), 
 				(DIALOG_DATA *) d);
-
 	cd->combo = color_combo_new (	NULL, 
 				     	_("Automatic"),
 			  		&color->color, 
 					color_group_fetch ("toolbar_text",d));
+	
+#ifdef USE_GTKHTML30
 	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
+#endif
         g_signal_connect (cd->combo, "color_changed", 
 				G_CALLBACK (color_changed), 
 				(DIALOG_DATA *) d);
-
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
-#endif
 }
 
 /******************************************************************************
@@ -1248,7 +1252,15 @@ static void toolbar_item_update_sensitivity(GtkWidget * widget,
 
 static void toolbar_update_format(DIALOG_DATA * d)
 {
-	GSHTMLEditorControlData *cd = d->editor;
+	GSHTMLEditorControlData *cd = d->editor;	
+	
+	if (cd->toolbar_style)
+		gtk_container_foreach (GTK_CONTAINER (cd->toolbar_style), 
+		toolbar_item_update_sensitivity, cd);
+
+	if (cd->paragraph_option)
+		paragraph_style_option_menu_set_mode (cd->paragraph_option, 
+						      cd->format_html);
 	/*if (cd->toolbar_style)
 		gtk_container_forall(GTK_CONTAINER(cd->toolbar_style),
 			     toolbar_item_update_sensitivity, cd);

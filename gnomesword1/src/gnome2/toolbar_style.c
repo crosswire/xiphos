@@ -468,6 +468,13 @@ static void set_color_combo(GtkHTML * html,
 			      (html->engine->painter,
 			       HTMLTextColor)->color);
 #endif
+#ifdef USE_GTKHTML31
+	color_combo_set_color (COLOR_COMBO (cd->combo),
+			       &html_colorset_get_color_allocated 
+				(html->engine->settings->color_set,
+				html->engine->painter, 
+				HTMLTextColor)->color);
+#endif
 }
 
 /******************************************************************************
@@ -540,7 +547,6 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 {
 	HTMLColor *color;
 
-#ifdef USE_GTKHTML30
 	color = html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor);
 	if (GTK_WIDGET_REALIZED (cd->html))
 		html_color_alloc (color, cd->html->engine->painter);
@@ -549,36 +555,15 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
         g_signal_connect (cd->html, "load_done", G_CALLBACK (load_done), cd);
 
 	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
+
+#ifdef USE_GTKHTML30	
 	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
+#endif	
         g_signal_connect (cd->combo, "color_changed", G_CALLBACK (color_changed), cd);
 
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
-#endif	
-/*	HTMLColor *color;
-
-	color =
-	    html_colorset_get_color(cd->html->engine->settings->
-				    color_set, HTMLTextColor);
-	if (GTK_WIDGET_REALIZED(cd->html))
-		html_color_alloc(color, cd->html->engine->painter);
-	else
-		g_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   G_CALLBACK(realize_engine), cd);
-	g_signal_connect(GTK_OBJECT(cd->html), "load_done",
-			   G_CALLBACK(load_done), cd);
-
-	cd->combo = color_combo_new(NULL, _("Automatic"), &color->color,
-				    color_group_fetch("toolbar_text",
-						      cd));
-	GTK_WIDGET_UNSET_FLAGS(cd->combo, GTK_CAN_FOCUS);
-	gtk_container_forall(GTK_CONTAINER(cd->combo),
-			     unset_focus, NULL);
-
-	gtk_widget_show_all(cd->combo);
-	return cd->combo;
-	*/
 }
 
 /******************************************************************************
