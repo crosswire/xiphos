@@ -277,6 +277,7 @@ AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf
 
 AC_OUTPUT([
 Makefile
+intl/Makefile
 po/Makefile.in
 help/Makefile
 macros/Makefile

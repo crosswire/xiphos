@@ -625,28 +625,3 @@ gchar *gethtmlfontnameHTML(gchar *xfontname)
 }
 
 
-/*** marks search words or phrase in search results html ***/
-void markSearchWordsHTML(GtkWidget *html_widget, gchar *words)
-{
-	gtk_html_set_editable  (GTK_HTML(html_widget),
-				  TRUE);
-	if(gtk_html_engine_search(GTK_HTML(html_widget),
-					       words,
-					       FALSE,
-					       TRUE,
-					       FALSE)){		
-		gtk_html_set_font_style (GTK_HTML (html_widget),
-						 GTK_HTML_FONT_STYLE_MAX,
-						 GTK_HTML_FONT_STYLE_BOLD);	 
-		//gtk_html_set_color (GTK_HTML(html_widget), html_color_new_from_rgb(178, 34, 34));
-		
-		while(gtk_html_engine_search_next(GTK_HTML(html_widget))){
-			gtk_html_set_font_style (GTK_HTML (html_widget),
-						 GTK_HTML_FONT_STYLE_MAX,
-						 GTK_HTML_FONT_STYLE_BOLD);
-		}
-	}
-	gtk_html_set_editable  (GTK_HTML(html_widget),
-				  FALSE);
-}
-
