@@ -22,6 +22,7 @@ gnomesword_1_0_SOURCES =  \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \
+    dummy.cpp \
     editor_menu.c \
     editor_replace.c \
     editor_search.c \
@@ -62,8 +63,8 @@ gnomesword_1_0_LDADD = \
     $(GTKHTML_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
-    $(PSPELL_LIBS) \
     $(PIXBUF_LIBS) \
     $(SWORD_LIBS) \
+    $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/backend/libbackend.a
+    $(top_builddir)/src/backend/libbackend.a 
