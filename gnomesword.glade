@@ -2891,6 +2891,160 @@ Revelation
 	</widget>
 
 	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox28</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowSCB</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowSCB_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:46:45 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Shortcut bar</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowCOMtabs</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowCOMtabs_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:47:08 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Commentary notebook tabs</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowDLtabs</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowDLtabs_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:47:18 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Dict/Lex notebook tabs</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <child_name>Notebook:tab</child_name>
+	  <name>label123</name>
+	  <label>Interface</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox29</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowTextgroup</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowTextgroup_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:47:27 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Bible Text Group in Shortcut Bar</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowComGroup</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowComGroup_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:47:34 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Commentary Group in Shortcut Bar</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>cbtnShowDictGroup</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_cbtnShowDictGroup_toggled</handler>
+	      <last_modification_time>Sat, 19 Aug 2000 22:47:42 GMT</last_modification_time>
+	    </signal>
+	    <label>Show Dict/Lex Group in Shortcut bar</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <child_name>Notebook:tab</child_name>
+	  <name>label124</name>
+	  <label>Shortcut Bar</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	</widget>
+
+	<widget>
 	  <class>GtkHBox</class>
 	  <name>hbox24</name>
 	  <homogeneous>False</homogeneous>
@@ -4638,6 +4792,38 @@ Revelation
     <label>Auto Scroll</label>
     <active>True</active>
     <always_show_toggle>False</always_show_toggle>
+  </widget>
+
+  <widget>
+    <class>GtkCheckMenuItem</class>
+    <name>show_tabs1</name>
+    <tooltip>Show notebook tabs</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_show_tabs1_activate</handler>
+      <last_modification_time>Sat, 19 Aug 2000 22:54:20 GMT</last_modification_time>
+    </signal>
+    <label>Show Tabs</label>
+    <active>False</active>
+    <always_show_toggle>False</always_show_toggle>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>view_module1</name>
+    <label>View Module</label>
+    <right_justify>False</right_justify>
+
+    <widget>
+      <class>GtkMenu</class>
+      <name>view_module1_menu</name>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>separator22</name>
+	<right_justify>False</right_justify>
+      </widget>
+    </widget>
   </widget>
 </widget>
 

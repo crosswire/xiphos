@@ -1,6 +1,5 @@
 
 noinst_LIBRARIES = libshortcut-bar.a
-noinst_PROGRAMS = test-shortcut-bar
 
 INCLUDES = 					\
 	-I$(top_srcdir)				\
@@ -23,16 +22,4 @@ libshortcut_bar_a_SOURCES = 	\
 	e-vscrolled-bar.c	\
 	e-vscrolled-bar.h
 
-test_shortcut_bar_SOURCES = 	\
-	test-shortcut-bar.c
 
-test_shortcut_bar_LDADD = 		\
-	./libshortcut-bar.a		\
-	$(top_builddir)/widgets/e-paned/libepaned.a		\
-	../e-text/libetext.a		\
-	../misc/libemiscwidgets.a	\
-	../../e-util/libeutil.la	\
-	$(EXTRA_GNOME_LIBS)
-
-test_shortcut_bar_LDFLAGS =	\
-	`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`

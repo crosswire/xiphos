@@ -63,8 +63,8 @@ AS = @AS@
 CC = gcc
 CXX = c++
 DLLTOOL = @DLLTOOL@
-EXTRA_GNOME_CFLAGS = -I/usr/include/gnome-xml -I/usr/include -I/usr/lib/glib/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/X11R6/include  
-EXTRA_GNOME_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lglade-gnome -lglade -lxml -lgdk_pixbuf -ltiff -ljpeg -lpng -lz -lgnomecanvaspixbuf -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl  
+EXTRA_GNOME_CFLAGS = -I/usr/include/gnome-xml -I/usr/include -I/usr/lib/glib/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/X11R6/include  -DUNICODE_USE_SYSTEM_ICONV
+EXTRA_GNOME_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lglade-gnome -lglade -lxml -lgdk_pixbuf -ltiff -ljpeg -lpng -lz -lgnomecanvaspixbuf -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl  -L/usr/lib -lunicode
 GNOMEGNORBA_LIBS = -rdynamic -lgnorba -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lnsl -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNOMEUI_LIBS = -rdynamic -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNOME_APPLETS_LIBS = 
@@ -94,13 +94,13 @@ PACKAGE = gnomesword
 PACKAGE_PIXMAPS_DIR = /usr/share/pixmaps/gnomesword
 PTHREAD_LIB = -lpthread
 RANLIB = ranlib
-VERSION = 0.2.0
+VERSION = 0.2.1
 XPM_LIBS = -lXpm
 ZVT_LIBS = -rdynamic -lzvt -lutil -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
 cflags_set = yes
 cxxflags_set = @cxxflags_set@
 
-SUBDIRS =  	misc				e-paned				e-text				shortcut-bar
+SUBDIRS =  	misc				e-text				shortcut-bar
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h

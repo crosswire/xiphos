@@ -2,7 +2,7 @@
 # Generated automatically by configure.
 # Run this file to recreate the current configuration.
 # This directory was configured as follows,
-# on host house:
+# on host office:
 #
 # ./configure  --enable-spellchecking --enable-printing
 #
@@ -34,7 +34,6 @@ macros/Makefile
 gnomesword/Makefile
 e-util/Makefile
 widgets/Makefile
-widgets/e-paned/Makefile
 widgets/e-text/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
@@ -72,7 +71,7 @@ s%@INSTALL_PROGRAM@%${INSTALL}%g
 s%@INSTALL_SCRIPT@%${INSTALL_PROGRAM}%g
 s%@INSTALL_DATA@%${INSTALL} -m 644%g
 s%@PACKAGE@%gnomesword%g
-s%@VERSION@%0.2.0%g
+s%@VERSION@%0.2.1%g
 s%@ACLOCAL@%aclocal -I macros%g
 s%@AUTOCONF@%autoconf%g
 s%@AUTOMAKE@%automake%g
@@ -127,8 +126,8 @@ s%@LIBTOOL@%$(SHELL) $(top_builddir)/libtool%g
 s%@CXX@%c++%g
 s%@GNOME_PRINT_LIBS@%-rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeprint -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -lxml -lz%g
 s%@GNOME_PRINT_CFLAGS@%-I/usr/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/lib/glib/include -I/usr/X11R6/include -I/usr/include/gnome-xml%g
-s%@EXTRA_GNOME_LIBS@%-rdynamic -L/usr/lib -L/usr/X11R6/lib -lglade-gnome -lglade -lxml -lgdk_pixbuf -ltiff -ljpeg -lpng -lz -lgnomecanvaspixbuf -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl  %g
-s%@EXTRA_GNOME_CFLAGS@%-I/usr/include/gnome-xml -I/usr/include -I/usr/lib/glib/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/X11R6/include  %g
+s%@EXTRA_GNOME_LIBS@%-rdynamic -L/usr/lib -L/usr/X11R6/lib -lglade-gnome -lglade -lxml -lgdk_pixbuf -ltiff -ljpeg -lpng -lz -lgnomecanvaspixbuf -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl  -L/usr/lib -lunicode%g
+s%@EXTRA_GNOME_CFLAGS@%-I/usr/include/gnome-xml -I/usr/include -I/usr/lib/glib/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/X11R6/include  -DUNICODE_USE_SYSTEM_ICONV%g
 s%@SPELLING_TRUE@%#%g
 s%@SPELLING_FALSE@%%g
 s%@PRINTING_TRUE@%#%g
@@ -177,7 +176,6 @@ macros/Makefile
 gnomesword/Makefile
 e-util/Makefile
 widgets/Makefile
-widgets/e-paned/Makefile
 widgets/e-text/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
@@ -278,9 +276,9 @@ for ac_file in .. $CONFIG_HEADERS; do if test "x$ac_file" != x..; then
 ${ac_dA}PACKAGE${ac_dB}PACKAGE${ac_dC}"gnomesword"${ac_dD}
 ${ac_uA}PACKAGE${ac_uB}PACKAGE${ac_uC}"gnomesword"${ac_uD}
 ${ac_eA}PACKAGE${ac_eB}PACKAGE${ac_eC}"gnomesword"${ac_eD}
-${ac_dA}VERSION${ac_dB}VERSION${ac_dC}"0.2.0"${ac_dD}
-${ac_uA}VERSION${ac_uB}VERSION${ac_uC}"0.2.0"${ac_uD}
-${ac_eA}VERSION${ac_eB}VERSION${ac_eC}"0.2.0"${ac_eD}
+${ac_dA}VERSION${ac_dB}VERSION${ac_dC}"0.2.1"${ac_dD}
+${ac_uA}VERSION${ac_uB}VERSION${ac_uC}"0.2.1"${ac_uD}
+${ac_eA}VERSION${ac_eB}VERSION${ac_eC}"0.2.1"${ac_eD}
 ${ac_dA}STDC_HEADERS${ac_dB}STDC_HEADERS${ac_dC}1${ac_dD}
 ${ac_uA}STDC_HEADERS${ac_uB}STDC_HEADERS${ac_uC}1${ac_uD}
 ${ac_eA}STDC_HEADERS${ac_eB}STDC_HEADERS${ac_eC}1${ac_eD}
