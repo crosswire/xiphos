@@ -59,8 +59,7 @@ char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 			// process desired tokens
 			switch (*token) {
 				case 'W':	// Strongs
-					switch(token[1])
-					{
+					switch(token[1]){
 						case 'G':               // Greek
 						case 'H':               // Hebrew
 							strcpy(to," <small><em>&lt;<a href=\"#");
@@ -75,19 +74,30 @@ char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 							to += strlen(to);
 							continue;
 						case 'T':               // Tense	-- morphological tags		
-							
-							strcpy(to," <small><em>(<a href=\"#");
-							to += strlen(to);					
-							for (i = 1;
-					     			i < strlen(token); i++)
-							*to++ = token[i];
-							strcpy(to," \">");
-							to += strlen(to);
-							for (i = 2;	i < strlen(token); i++)
-								if(isdigit(token[i])) *to++ = token[i];
-							strcpy(to,"</a>)</em></small> ");
-							to += strlen(to);	
-					}
+							switch (token[2]) {
+									case 'G':
+									case 'H':
+										strcpy(to," <small><em>(<a href=\"#");
+										to += strlen(to);					
+										for (i = 1;	i < strlen(token); i++)
+											*to++ = token[i];
+										strcpy(to," \">");
+										to += strlen(to);
+										for (i = 2;	i < strlen(token); i++)
+											if(isdigit(token[i])) *to++ = token[i];
+										strcpy(to,"</a>)</em></small> ");
+										to += strlen(to);              
+										break;
+									default: //-- morphological tags
+										strcpy(to," <small><em>(");	
+										to += strlen(to);
+										for (i=2; i < strlen(token); i++) 
+							       				*to++ = token[i];
+										strcpy(to,")</em></small> ");
+										to += strlen(to);  
+							}
+						continue; 	
+					}										
 					break;
 				case 'R':
 					switch(token[1])

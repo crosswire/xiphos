@@ -113,7 +113,13 @@ module.source.files=\
 	gs_shortcutbar.c\
 	gs_shortcutbar.h\
 	gs_gui.c\
-	gs_gui.h
+	gs_gui.h\
+	sw_thmlhtml.cpp\
+	sw_gbfhtml.cpp\
+	gs_viewtext_dlg.c\
+	gs_viewtext_dlg.h\
+	gs_viewtext_sw.cpp\
+	gs_viewtext_sw.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

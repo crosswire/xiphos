@@ -23,16 +23,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/*********************************************************************
-**********************************************************************
-**  this code was taken from the Sword Cheatah program 	    **
-**  and modified to handle some of the GBF stuff. Also added**
-**  suport for the x symbol font when using greek modules.    **
-**  2000/07/10 - added some support for the RWP module    **
-**  2001-02-25 added support for html                              ** 
-**********************************************************************
-*********************************************************************/
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -219,7 +209,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	strbuf =
 	    g_string_new("");
-	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">","+2");
+	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">","+1");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 
@@ -387,17 +377,17 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		const gchar **end;
 		      
 		 if(g_utf8_validate ((const char *)imodule , strlen((const char *)imodule) , end) ){
-			 /*sprintf(tmpBuf,
-					 " <b> </b><A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A>",
+			sprintf(tmpBuf,
+					 "&nbsp;&nbsp;<A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A>",
 					 imodule.Description(),
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 			utf8len = g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); */
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 			 sprintf(tmpBuf,
-					 "<font face=\"%s\">",
-					 "caslon");	
+					 "<font size=\"%s\">",
+					 "+2");	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 			utf8len = g_utf8_strlen (utf8str , -1) ;
 			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
@@ -405,11 +395,11 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			utf8len = g_utf8_strlen ( (const char *)imodule , strlen((const char *)imodule) ) ;
 			 g_warning("utf8len = %d - %d",utf8len, strlen((const char *)imodule)); 
 			displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
-			 /* sprintf(tmpBuf, " %s", "</font><br>");
+			 sprintf(tmpBuf, " %s", "</font><br>");
 			 
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 			utf8len = g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); */
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 			 
 		 }else{
 			 g_warning("not utf8 string!");
@@ -425,7 +415,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	key->Verse(curVerse);
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
-	//gotoanchorHTML(gtkText, tmpBuf);
+	gotoanchorHTML(gtkText, tmpBuf);
 	return 0;
 }
 /* --------------------------------------------------------------------------------------------- */
@@ -453,7 +443,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	} 
 	(const char *) imodule;
 	strbuf = g_string_new("");
-	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+3");
+	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+1");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
@@ -464,7 +454,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		
 		g_warning(font);
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+3");
+		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+1");
 	} 
 	/* body */
 	strbuf = g_string_append(strbuf, (const char *) imodule);
