@@ -35,8 +35,7 @@
 #include "viewcomm.h"
 #include "sword.h"
 #include "display.h"
-
-extern SETTINGS *settings;
+#include "settings.h"
 
 static SWDisplay *display;	/* to display modules in view comm dialog */
 static SWMgr *mgr;		/* sword mgr for view comm dialog */
@@ -67,7 +66,7 @@ void backend_setup_viewcomm(GtkWidget * text)
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
-	display = new GtkHTMLEntryDisp(text, settings);
+	display = new GtkHTMLEntryDisp(text, &settings);
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Commentaries")) {

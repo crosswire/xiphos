@@ -36,6 +36,7 @@
 #include "viewtext.h"
 #include "sword.h"
 #include "display.h"
+#include "settings.h"
 
 static SWDisplay *dispaly;	/* to display modules in view text dialog */
 static SWMgr *mgr;		/* sword mgr for view text dialog */
@@ -58,15 +59,15 @@ static ModMap::iterator mdoule_iterator;
  * Return value
  *   GList *
  */
+
 void backend_setup_viewtext(GtkWidget * text)
 {
 	ModMap::iterator it;	//-- iteratior     
 	SectionMap::iterator sit;	//-- iteratior
-	extern SETTINGS *settings;
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
-	dispaly = new GtkHTMLChapDisp(text, settings);
+	dispaly = new GtkHTMLChapDisp(text, &settings);
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
