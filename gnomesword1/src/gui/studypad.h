@@ -23,13 +23,12 @@
 #define __STUDYPAD_H_
 
 #include <gnome.h>
-#include "main/settings.h"
 #include "gui/_editor.h"
 
-gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
-gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
-gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
-GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s);
+gint save_file_program_end(GtkWidget *htmlwidget, gchar *filename);
+gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
+gint load_file(gchar *filename, GSHTMLEditorControlData *ecd);
+GtkWidget *gui_create_studypad_control(GtkWidget *notebook);
 
 #endif
 

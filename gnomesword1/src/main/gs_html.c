@@ -210,9 +210,9 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (backend_get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
-			gui_display_dictlex_in_viewer(modbuf, buf, &settings);
+			gui_display_dictlex_in_viewer(modbuf, buf);
 		} else {
-			gui_display_verse_list(modbuf, buf, &settings);
+			gui_display_verse_list(modbuf, buf);
 		}
 		g_free(buf);
 
@@ -245,7 +245,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf, buf, &settings);
+			gui_display_dictlex_in_viewer(modbuf, buf);
 		g_free(buf);
 	}
 	/*** thml strongs ***/
@@ -276,7 +276,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf, buf, &settings);
+			gui_display_dictlex_in_viewer(modbuf, buf);
 		g_free(buf);
 
 	}
@@ -294,8 +294,8 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 								  buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer
-						    ("Thayer", buf,
-						     &settings);
+						    ("Thayer", buf
+						     );
 					g_free(buf);
 					return;
 				}
@@ -313,8 +313,8 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 								  buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer("BDB",
-								   buf,
-								   &settings);
+								   buf
+								   );
 					g_free(buf);
 					return;
 				}
@@ -335,8 +335,8 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 								  buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer
-						    ("Thayer", buf,
-						     &settings);
+						    ("Thayer", buf
+						     );
 					g_free(buf);
 					return;
 				} else
@@ -349,7 +349,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					change_module_and_key(settings.lex_greek, buf);
 				if (settings.inViewer)
 					gui_display_dictlex_in_viewer(settings.lex_greek_viewer,
-							   buf, &settings);
+							   buf);
 				g_free(buf);
 			}
 		}
@@ -365,8 +365,8 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 								  buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer("BDB",
-								   buf,
-								   &settings);
+								   buf
+								   );
 					g_free(buf);
 					return;
 				}
@@ -380,7 +380,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					change_module_and_key(settings.lex_hebrew, buf);
 				if (settings.inViewer)
 					gui_display_dictlex_in_viewer(settings.lex_hebrew_viewer,
-							   buf, &settings);
+							   buf);
 				g_free(buf);
 			}
 		}
@@ -392,7 +392,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			change_module_and_key("Packard", buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer("Packard", buf, &settings);
+			gui_display_dictlex_in_viewer("Packard", buf);
 		g_free(buf);
 	}
 }
@@ -513,7 +513,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 						in a html window  ***/
 	if (key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modName, key, &settings);
+			gui_display_dictlex_in_viewer(modName, key);
 		if (settings.inDictpane)
 			change_module_and_key(modName, key);
 		g_free(key);
@@ -544,7 +544,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 						in a html window  ***/
 	if (key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modName, key, &settings);
+			gui_display_dictlex_in_viewer(modName, key);
 		if (settings.inDictpane)
 			change_module_and_key(modName, key);
 		g_free(key);
@@ -574,7 +574,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	/* get name for current text module */
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	modbuf = get_module_name();
-	gui_display_verse_list(modbuf, buf, &settings);
+	gui_display_verse_list(modbuf, buf);
 }
 
 /***************************************************************************************************

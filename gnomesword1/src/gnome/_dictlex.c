@@ -280,7 +280,7 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "_dictlex.h"
  *
- *   void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)	
+ *   void on_showtabs_activate(GtkMenuItem *menuitem, gpointer user_data)
  *
  * Description
  *    hide/show dictlex notebook tabs
@@ -289,11 +289,11 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
+static void on_showtabs_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	s->dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL),
-				   s->dict_tabs);
+	settings.dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebookDL),
+			settings.dict_tabs);
 }
 
 /******************************************************************************
@@ -303,7 +303,7 @@ static void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
  * Synopsis
  *   #include "_dictlex.h"
  *
- *   void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)	
+ *   void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *    open view dictionary dialog
@@ -312,28 +312,28 @@ static void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+static void on_view_new_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	extern GtkWidget *frameShowDict;
 	static GtkWidget *dlg;
 	gchar *modName;
         GdkCursor *cursor;	
-	gtk_widget_show(s->app);
+	gtk_widget_show(settings.app);
 	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(s->app->window,cursor);
+	gdk_window_set_cursor(settings.app->window,cursor);
 	
 	if(!isrunningSD) {
-		dlg = gui_create_dictlex_dialog(s->app);
-		modName = s->DictWindowModule;
+		dlg = gui_create_dictlex_dialog(settings.app);
+		modName = settings.DictWindowModule;
 		/* set frame label to current Module name  */
 		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  				
 		//initSD(modName);
 		isrunningSD = TRUE;
 	}
 	gtk_widget_show(dlg);
-	gtk_widget_show(s->app);
+	gtk_widget_show(settings.app);
 	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(s->app->window,cursor);
+	gdk_window_set_cursor(settings.app->window,cursor);
 }
 
 /******************************************************************************
@@ -589,8 +589,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  * Synopsis
  *   #include "_dictlex.h"
  *
- *   GtkWidget *gui_create_dictlex_pane(SETTINGS * s, 
- *				     DL_DATA * dl, gint count)	
+ *   GtkWidget *gui_create_dictlex_pane(DL_DATA *dl, gint count)	
  *
  * Description
  *    create a pane for displaying a dictionary of lexicom
@@ -599,8 +598,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  *   void
  */
 
-void gui_create_dictlex_pane(SETTINGS * s, 
-				     DL_DATA * dl, gint count)
+void gui_create_dictlex_pane(DL_DATA *dl, gint count)
 {
 
 	GtkWidget *hpaned7;
@@ -615,15 +613,15 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(dl->frame);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "dl->frame",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->frame",
 				 dl->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->frame);
-	gtk_container_add(GTK_CONTAINER(s->notebookDL), dl->frame);
+	gtk_container_add(GTK_CONTAINER(settings.notebookDL), dl->frame);
 
 	hpaned7 = gtk_hpaned_new();
 	gtk_widget_ref(hpaned7);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "hpaned7",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "hpaned7",
 				 hpaned7,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned7);
@@ -632,7 +630,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox56);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox56",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox56",
 				 vbox56,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox56);
@@ -643,7 +641,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbarDLKey);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbarDLKey",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbarDLKey",
 				 toolbarDLKey,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarDLKey);
@@ -653,7 +651,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
+	    gnome_stock_pixmap_widget(settings.app,
 				      GNOME_STOCK_PIXMAP_REFRESH);
 	btnSyncDL =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
@@ -662,7 +660,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnSyncDL);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSyncDL",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnSyncDL",
 				 btnSyncDL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSyncDL);
@@ -672,7 +670,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	dl->entry = gtk_entry_new();
 	gtk_widget_ref(dl->entry);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "dl->entry",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->entry",
 				 dl->entry,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->entry);
@@ -681,7 +679,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	dl->clist = gtk_clist_new(1);
 	gtk_widget_ref(dl->clist);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "dl->clist",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->clist",
 				 dl->clist,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->clist);
@@ -691,7 +689,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	label205 = gtk_label_new(_("label205"));
 	gtk_widget_ref(label205);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label205",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label205",
 				 label205,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label205);
@@ -699,7 +697,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_ref(frameDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "frameDictHTML", frameDictHTML,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frameDictHTML);
@@ -707,7 +705,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindowDictHTML",
 				 scrolledwindowDictHTML,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -722,7 +720,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	dl->html = gtk_html_new();
 	gtk_widget_ref(dl->html);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "dl->html", dl->html,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->html);
@@ -732,16 +730,16 @@ void gui_create_dictlex_pane(SETTINGS * s,
 
 	label = gtk_label_new(dl->modName);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebookDL),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebookDL),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(s->notebookDL), count),
+				   (GTK_NOTEBOOK(settings.notebookDL), count),
 				   label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->notebookDL),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings.notebookDL),
 					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK(s->notebookDL),
+					 (GTK_NOTEBOOK(settings.notebookDL),
 					  count),
 					 (gchar *) dl->modName);
 
@@ -754,7 +752,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   GTK_SIGNAL_FUNC(on_entryDictLookup_changed),
 			   dl);

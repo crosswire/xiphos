@@ -865,8 +865,8 @@ void display_devotional(void)
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
 
-	gui_display_dictlex_in_viewer(settings.devotionalmod, buf, &settings);
-	set_sb_for_daily_devotion(&settings);
+	gui_display_dictlex_in_viewer(settings.devotionalmod, buf);
+	set_sb_for_daily_devotion();
 }
 
 /*** the changes are already made we just need to show them ***/

@@ -26,11 +26,9 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
-void gui_undock_interlinear_page(SETTINGS *s);
-void gui_btnDockInt_clicked(GtkButton *button, SETTINGS *s);
-GtkWidget *gui_create_interlinear_dialog(SETTINGS *s);
+void gui_undock_interlinear_page(void);
+void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data);
+GtkWidget *gui_create_interlinear_dialog(void);
 
 #ifdef __cplusplus
 }

@@ -397,7 +397,7 @@ void setup_gbs(GList *mods)
 		gbs->booknum = count;
 		gbs->find_dialog = NULL;	
 		gbs->has_key = backend_module_is_locked(gbs->bookName);
-		gui_create_gbs_pane(bookname, &settings, count, gbs);
+		gui_create_gbs_pane(bookname, count, gbs);
 		popupmenu = gui_create_pm_gbs(gbs);
 		gnome_popup_menu_attach(popupmenu, gbs->html, NULL);
 		backend_new_gbs_display(gbs->html, gbs->bookName, &settings);

@@ -250,7 +250,7 @@ void setup_commentary(GList *mods)
 		c->key[0] = '\0';
 		c->find_dialog = NULL;		
 		c->has_key = backend_module_is_locked(c->modName);
-		gui_create_commentary_pane(&settings, c, count);
+		gui_create_commentary_pane(c, count);
 		popupmenu = gui_create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
 		backend_new_display_commentary(c->html, c->modName, &settings);

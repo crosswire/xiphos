@@ -23,15 +23,13 @@
 #define ___PERCOMM_H_
 
 #include <gnome.h>
-#include "main/settings.h"
 #include "main/percomm.h"
 
-void gui_set_percomm_frame_label(GtkWidget * frame, gchar *mod_name);
+void gui_set_percomm_frame_label(GtkWidget *frame, gchar *mod_name);
 void tabs(gboolean choice);
-void on_notebook_percomm_switch_page(GtkNotebook * notebook,
-		GtkNotebookPage * page, gint page_num, GList * pcl);
-GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
-					gchar *mod_name, gint page_num);
+void on_notebook_percomm_switch_page(GtkNotebook *notebook,
+		GtkNotebookPage *page, gint page_num, GList *pcl);
+GSHTMLEditorControlData *gui_percomm_control(gchar *mod_name, gint page_num);
 
 #endif
 
