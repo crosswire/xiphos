@@ -51,7 +51,11 @@ extern "C" {
 using std::string;
 using namespace sword;
 #include "sw_display.h"
+#include "sw_sword.h"
+#include "sw_font.h"
+#include "font_dialog.h"
 
+static char *font_size;
 /*
  *  EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key
  *  imodule - the Sword module to display
@@ -128,17 +132,16 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 		isGBS = false,
 		isPerCom = false;
 		
+	font_size = NULL;
+	
 	if(!strcmp(imodule.Type(),"Generic Books"))
 		isGBS = true;
 	if(!strcmp((gchar*)imodule.getConfigEntry("ModDrv"),"RawFiles"))
 		isPerCom = true;
 	use_gtkhtml_font = false;
 	use_font = g_strdup(pick_font(imodule));
-	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size");
 	
-	if(!use_font_size) {
-		use_font_size = s->bible_font_size;
-	}
+	use_font_size = font_size;
 	//-- setup gtkhtml widget
 	GtkHTMLStreamStatus status1;	
 	GtkHTML *html = GTK_HTML(gtkText);
@@ -248,40 +251,43 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 
 gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 {
-	gchar *font, *lang, *use_font, *gsfont,*retval = "";
-	string gsfontsize;
+	gchar *use_font, *gsfont,*retval = "";
+	MOD_FONT *mf;
+	
+	font_size = NULL;
+	
+	mf = g_new(MOD_FONT,1);
+	mf->mod_name = (gchar*) imodule.Name();
+	mf->old_font = NULL;
+	mf->old_font_size = NULL;
+	mf->new_font = NULL;
+	mf->new_font_size = NULL;
+	mf->no_font = 0;
+	
+	load_module_font_info(mf);
 	
 	gsfont = NULL;
-	lang = NULL;
-	gsfont = (gchar*)imodule.getConfigEntry("Font"); //load_module_font((gchar*)imodule.Name(),"GSFont");
-	lang = (gchar*)imodule.getConfigEntry("Lang"); //get_module_lang_UTILITY((gchar*)imodule.Name());	
+	gsfont = mf->old_font;  
+	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+		font_size = mf->old_font_size;
+	else
+		font_size = "+1";
 	
-	font = g_strdup("-adobe-helvetica-*-*");
+	if(!strncmp(gsfont,"none",4)){
+		//g_warning("gsfont = %s",gsfont);
+		gsfont = NULL;
+		//g_warning("gsfont = %s",gsfont);
+		
+	}
 	
-	if (gsfont) {
+	if (gsfont) {		
 		retval = gsfont;
 		use_gtkhtml_font = false;
 	} else {
-		if ((!lang) || !stricmp(lang, "en") || !stricmp(lang, "de")) {
-			use_gtkhtml_font = true;
-			font = g_strdup(s->default_font);
-		} else if (!stricmp(lang, "grc")) {
-			font = g_strdup(s->greek_font);
-			use_gtkhtml_font = false;
-		} else if (!stricmp(lang, "he")) {
-			font = g_strdup(s->hebrew_font);
-			use_gtkhtml_font = false;
-		} else {
-			font = g_strdup(s->unicode_font);
-			use_gtkhtml_font = false;
-		}
-		gchar *xfontname = font;
-		++xfontname;
-		gchar *token = strtok(xfontname,"-");
-		token = strtok(NULL,"-");
-		retval = token;
+		use_gtkhtml_font = true;
 	}
-	g_free(font);	
+	//g_warning("retval = %s",retval);
+	g_free(mf);
 	return retval;
 }
 
@@ -313,12 +319,19 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	  
 	paragraphMark = "&para;";  
 	use_font = g_strdup(pick_font(imodule));
-	
-	use_font_size = NULL;
-	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size"); //load_module_font((gchar*)imodule.Name(),"GSFont size");
-	if (!use_font_size){ 
-		use_font_size = s->bible_font_size;
+	if(use_font) {
+		if(!strncmp(use_font,"none",4))
+			use_gtkhtml_font = TRUE;
+		else
+			use_gtkhtml_font = FALSE;
+		
 	}
+	else {
+		use_gtkhtml_font = TRUE;
+		
+	}
+	
+	use_font_size = font_size;
 	
 	//-- setup gtkhtml widget
 	GtkHTMLStreamStatus status1;	
@@ -696,24 +709,16 @@ char IntDisplay(SETTINGS *s)
 // ---------------------------------------------
 char InterlinearDisp::Display(SWModule & imodule)
 {
-	bool 
-		utf = false,
-		use_gtkhtml_font = false;
+	bool 	utf = false;
 	
-	gint 	
-		len,
+	gint 	len,
 		i,
 		utf8len;
 	
-	gchar 
-		tmpBuf[800], 
+	gchar 	tmpBuf[800], 
 		*buf, 
-		*swfont, 
 		*rowcolor,
-		*utf8str, 
-		*font, 
-		*token, 
-		*lang = NULL, 
+		*utf8str,
 		*use_font = NULL, 
 		*use_font_size = NULL;
 	
@@ -721,37 +726,9 @@ char InterlinearDisp::Display(SWModule & imodule)
 	static gint row = 1;
 	
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
-	swfont = (gchar*)imodule.getConfigEntry("Font"); //load_module_font((gchar*)imodule.Name(),"GSFont");
-	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size"); //load_module_font((gchar*)imodule.Name(),"GSFont size");
-	lang = (gchar*)imodule.getConfigEntry("Lang"); //get_module_lang_UTILITY((gchar*)imodule.Name());	
-	
-	if (!use_font_size) 
-		use_font_size = s->interlinear_font_size;	
-	
-	font = g_strdup("-adobe-helvetica-*-*");
-	if (swfont) {
-		use_font = swfont;
-		use_gtkhtml_font = false;
-	} else {
-		if ((!lang) || !stricmp(lang, "en") || !stricmp(lang, "de")) {
-			font = g_strdup(s->default_font);
-			use_gtkhtml_font = true;			    
-		} else if (!stricmp(lang, "grc")) {
-			font = g_strdup(s->greek_font);
-			use_gtkhtml_font = false;
-		} else if (!stricmp(lang, "he")) {
-			font = g_strdup(s->hebrew_font);
-			use_gtkhtml_font = false;
-		} else {
-			font = g_strdup(s->unicode_font);
-			use_gtkhtml_font = false;
-		}
+	use_font = pick_font(imodule);
+	use_font_size = font_size; 
 		
-		gchar *xfontname = font;
-		gchar *token=strtok(xfontname,"-");
-		token = strtok(NULL,"-");
-		use_font = token;
-	}
 	if (row == 6)
 		row = 1;
 	if (row == 1 || row == 3 || row == 5)
@@ -808,7 +785,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 	}
-	g_free(font);
+	//g_free(font);
 	return 0;
 }
 
