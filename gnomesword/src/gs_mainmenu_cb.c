@@ -58,7 +58,7 @@ extern gboolean
 extern GtkWidget 
 	*listeditor;		/* pointer to ListEditor */
 extern gint 
-	ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
+	iquickmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
 	
 /******************************************************************************
 
@@ -146,10 +146,10 @@ on_clear_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar buf[80];
 	
-	gnome_app_remove_menus(GNOME_APP(settings->app), "_Quickmarks/<Separator>", ibookmarks+1);        
-	sprintf(buf,"%s%s", _("_Quickmarks/"),"Clear Quickmarks");
+	gnome_app_remove_menus(GNOME_APP(settings->app), "_Quickmarks/<Separator>", iquickmarks+1);        
+	sprintf(buf,"%s", _("_Quickmarks/Clear Quickmarks"));
         addseparator(settings->app, buf);	
-	ibookmarks = 0;
+	iquickmarks = 0;
 	clearquickmarks();
 }
 
