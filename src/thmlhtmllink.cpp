@@ -16,18 +16,20 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "sw_thmlhtml.h"
+
+#include "thmlhtmllink.h"
 
 
-SW_ThMLHTML::SW_ThMLHTML()
+ThMLHTMLLINK::ThMLHTMLLINK()
 {
 }
 
 
-char SW_ThMLHTML::ProcessText(char *text, int maxlen)
+char ThMLHTMLLINK::ProcessText(char *text, int maxlen)
 {
-  char *to, *from, token[2048], tokpos = 0;
+  char *to, *from, token[2048], verseRef[500], tokpos = 0, refpos = 0;
   bool intoken 	= false;
+  bool inreference = false;
   int len;
   bool ampersand = false;
 
@@ -42,7 +44,7 @@ char SW_ThMLHTML::ProcessText(char *text, int maxlen)
       if (*from == '<') {
 	intoken = true;
 	tokpos = 0;
-	memset(token, 0, 2048);
+	memset(token, 0, 2048);  
 	ampersand = false;
 	continue;
       }
@@ -211,30 +213,65 @@ char SW_ThMLHTML::ProcessText(char *text, int maxlen)
 	  *to++ = '>';
 	}
 	else if (!strncmp(token, "scripRef", 8)) {
-	  *to++ = '<';
-	  *to++ = 'A';
-	  *to++ = ' ';
-	  *to++ = 'H';
-	  *to++ = 'R';
-	  *to++ = 'E';	
-	  *to++ = 'F';	
-	  *to++ = '=';
-	  *to++ = '\"';	
-	  if (!strncmp(token, "scripRef", 8)) {
-	  	for (unsigned int i = 9; i < strlen(token); i++){
-			if(token[i] != '\"') 
-				*to++ = token[i];
+		if(strlen(token) == 8){
+			inreference = true;
+			refpos = 0;
+			memset(verseRef, 0, 500);	 
+		}else{
+	  		*to++ = '<';
+	  		*to++ = 'A';
+	  		*to++ = ' ';
+	  		*to++ = 'H';
+	  		*to++ = 'R';
+	  		*to++ = 'E';	
+	  		*to++ = 'F';	
+	  		*to++ = '=';
+	  		*to++ = '\"';	
+	  		if (!strncmp(token, "scripRef", 8)) {
+	  			for (unsigned int i = 9; i < strlen(token); i++){
+					if(token[i] != '\"') 
+						*to++ = token[i];
+				}
+	  		}
+	  		*to++ = '\"';
+	  		*to++ = '>';
 		}
-	  }
-	  *to++ = '\"';
-	  *to++ = '>';
   	} 
 	else if (!strncmp(token, "/scripRef", 9)) { 
-	  *to++ = ' ';
-	  *to++ = '<';
-	  *to++ = '/';
-	  *to++ = 'A';
-	  *to++ = '>';	  
+		if(inreference){
+			inreference = false;	
+			*to++ = '<';
+	  		*to++ = 'A';
+	  		*to++ = ' ';
+	  		*to++ = 'H';
+	  		*to++ = 'R';
+	  		*to++ = 'E';	
+	  		*to++ = 'F';	
+	  		*to++ = '=';
+	  		*to++ = '\"';
+			*to++ = 'p';
+	  		*to++ = 'a';
+	  		*to++ = 's';
+	  		*to++ = 's';
+	  		*to++ = 'a';
+	  		*to++ = 'g';	
+	  		*to++ = 'e';	
+	  		*to++ = '=';		
+			for (unsigned int i = 0; i < refpos; i++){
+			if(verseRef[i] != '\"') 
+				*to++ = verseRef[i];
+			}
+	  		*to++ = '\"';
+	  		*to++ = '>';
+			for (unsigned int i = 0; i < refpos; i++){
+			if(verseRef[i] != '\"') 
+				*to++ = verseRef[i];
+			}
+		}
+	  	*to++ = '<';
+	  	*to++ = '/';
+	  	*to++ = 'A';
+	  	*to++ = '>';
 	}	
 	else if (!strncmp(token, "sync type=\"Strongs\" value=\"T", 28)) {
 	  *to++ = '<';
@@ -352,10 +389,13 @@ char SW_ThMLHTML::ProcessText(char *text, int maxlen)
 	}
         continue;
       }
-      if (intoken)
+      if (intoken){
 	token[tokpos++] = *from;
-      else
+      }else if(inreference){
+	      verseRef[refpos++] = *from;
+      }else{
 	*to++ = *from;
+      }
     }
   *to = 0;
   return 0;
