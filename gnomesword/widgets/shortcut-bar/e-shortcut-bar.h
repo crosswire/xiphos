@@ -89,10 +89,20 @@ struct _EShortcutBarClass
 {
 	EGroupBarClass parent_class;
 
-	void   (*selected_item)        (EShortcutBar   *shortcut_bar,
+	void   (*item_selected)        (EShortcutBar   *shortcut_bar,
 					GdkEvent       *event,
 					gint		group_num,
 					gint		item_num);
+
+	void   (*shortcut_dropped)     (EShortcutBar   *shortcut_bar,
+					gint            group_num,
+					gint            position,
+					const gchar    *item_url,
+					const char     *item_name);
+
+	void   (*shortcut_dragged)     (EShortcutBar   *shortcut_bar,
+					gint            group_num,
+					gint            item_num);
 };
 
 

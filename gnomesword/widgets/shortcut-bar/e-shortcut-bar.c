@@ -35,7 +35,7 @@
 
 #include <config.h>
 #include <string.h>
-#include <e-util/e-util.h>
+#include <gal/util/e-util.h>
 #include "e-shortcut-bar.h"
 #include "e-clipped-label.h"
 #include "e-vscrolled-bar.h"
@@ -134,6 +134,8 @@ static GdkPixbuf* e_shortcut_bar_load_image	(const gchar	*filename);
 enum
 {
   ITEM_SELECTED,
+  SHORTCUT_DROPPED,
+  SHORTCUT_DRAGGED,
   LAST_SIGNAL
 };
 
@@ -141,6 +143,21 @@ static guint e_shortcut_bar_signals[LAST_SIGNAL] = {0};
 
 static EGroupBarClass *parent_class;
 
+static void
+e_shortcut_bar_marshal_NONE__INT_INT_STRING_STRING (GtkObject *object,
+						    GtkSignalFunc func,
+						    gpointer func_data,
+						    GtkArg *args)
+{
+	void (*rfunc) (GtkObject *, gint, gint, gchar *, gchar *, gpointer) = func;
+
+	(*rfunc) (object,
+		  GTK_VALUE_INT (args[0]),
+		  GTK_VALUE_INT (args[1]),
+		  GTK_VALUE_STRING (args[2]),
+		  GTK_VALUE_STRING (args[3]),
+		  func_data);
+}
 
 E_MAKE_TYPE(e_shortcut_bar, "EShortcutBar", EShortcutBar,
 	    e_shortcut_bar_class_init, e_shortcut_bar_init,
@@ -163,10 +180,32 @@ e_shortcut_bar_class_init (EShortcutBarClass *class)
 				GTK_RUN_LAST | GTK_RUN_ACTION,
 				object_class->type,
 				GTK_SIGNAL_OFFSET (EShortcutBarClass,
-						   selected_item),
+						   item_selected),
 				gtk_marshal_NONE__POINTER_INT_INT,
 				GTK_TYPE_NONE, 3, GTK_TYPE_GDK_EVENT,
 				GTK_TYPE_INT, GTK_TYPE_INT);
+
+	e_shortcut_bar_signals[SHORTCUT_DROPPED] =
+		gtk_signal_new ("shortcut_dropped",
+				GTK_RUN_LAST | GTK_RUN_ACTION,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (EShortcutBarClass, shortcut_dropped),
+				e_shortcut_bar_marshal_NONE__INT_INT_STRING_STRING,
+				GTK_TYPE_NONE, 4,
+				GTK_TYPE_INT,
+				GTK_TYPE_INT,
+				GTK_TYPE_STRING,
+				GTK_TYPE_STRING);
+
+	e_shortcut_bar_signals[SHORTCUT_DRAGGED] =
+		gtk_signal_new ("shortcut_dragged",
+				GTK_RUN_LAST | GTK_RUN_ACTION,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (EShortcutBarClass, shortcut_dragged),
+				gtk_marshal_NONE__INT_INT,
+				GTK_TYPE_NONE, 2,
+				GTK_TYPE_INT,
+				GTK_TYPE_INT);
 
 	gtk_object_class_add_signals (object_class, e_shortcut_bar_signals,
 				      LAST_SIGNAL);
@@ -204,6 +243,8 @@ e_shortcut_bar_destroy (GtkObject *object)
 	EShortcutBar *shortcut_bar;
 
 	shortcut_bar = E_SHORTCUT_BAR (object);
+
+	e_shortcut_bar_disconnect_model (shortcut_bar);
 
 	g_array_free (shortcut_bar->groups, TRUE);
 
@@ -387,7 +428,9 @@ e_shortcut_bar_add_group	(EShortcutBar	*shortcut_bar,
 			    GTK_SIGNAL_FUNC (e_shortcut_bar_on_drag_end),
 			    shortcut_bar);
 
+#ifndef E_USE_STYLES
 	e_shortcut_bar_set_canvas_style (shortcut_bar, group->icon_bar);
+#endif
 
 	button = gtk_button_new ();
 	label = e_clipped_label_new (group_name);
@@ -409,7 +452,7 @@ e_shortcut_bar_add_group	(EShortcutBar	*shortcut_bar,
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE);
 
 	e_group_bar_add_group (E_GROUP_BAR (shortcut_bar),
-			       group->vscrolled_bar, button, -1);
+			       group->vscrolled_bar, button, group_num);
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
@@ -621,8 +664,9 @@ e_shortcut_bar_on_drag_data_received  (GtkWidget          *widget,
 		group_num = e_group_bar_get_group_num (E_GROUP_BAR (shortcut_bar),
 						       GTK_WIDGET (icon_bar)->parent);
 
-		e_shortcut_model_add_item (shortcut_bar->model, group_num,
-					   position, item_url, item_name);
+		gtk_signal_emit (GTK_OBJECT (shortcut_bar),
+				 e_shortcut_bar_signals[SHORTCUT_DROPPED],
+				 group_num, position, item_url, item_name);
 
 		gtk_drag_finish (context, TRUE, TRUE, time);
 		return;
@@ -645,8 +689,8 @@ e_shortcut_bar_on_drag_data_delete (GtkWidget          *widget,
 	group_num = e_group_bar_get_group_num (E_GROUP_BAR (shortcut_bar),
 					       widget->parent);
 
-	e_shortcut_model_remove_item (shortcut_bar->model, group_num,
-				      icon_bar->dragged_item_num);
+	gtk_signal_emit (GTK_OBJECT (shortcut_bar), e_shortcut_bar_signals[SHORTCUT_DRAGGED],
+			 group_num, icon_bar->dragged_item_num);
 }
 
 
