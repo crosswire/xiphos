@@ -478,7 +478,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 		gtk_widget_show(ecd->btn_save);
 
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-trash", 
+			"gtk-delete", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_delete =
 		    gtk_toolbar_append_element(GTK_TOOLBAR

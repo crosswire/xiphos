@@ -389,25 +389,27 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
  */
 
 static void color_changed(GtkWidget * w, GdkColor * gdk_color,
+			gboolean custom,	
 			  gboolean by_user,
+			  gboolean is_default,
 			  GSHTMLEditorControlData * cd)
 {
 	HTMLColor *color;
 
-	/* If the color was changed programatically there's no need to set things */
+	/* If the color was changed programatically 
+	   there's no need to set things */ 
 	if (!by_user)
 		return;
 
-	color = gdk_color
-	    && gdk_color !=
+	color = gdk_color && gdk_color !=
 	    &html_colorset_get_color(cd->html->engine->settings->
 				     color_set,
 				     HTMLTextColor)->
 	    color ? html_color_new_from_gdk_color(gdk_color) : NULL;
-
-	gtk_html_set_color(cd->html, color);
-	if (color)
+	if (color) {
+		gtk_html_set_color(cd->html, color);
 		html_color_unref(color);
+	}
 }
 
 /******************************************************************************
@@ -544,8 +546,6 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 	GTK_WIDGET_UNSET_FLAGS(cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall(GTK_CONTAINER(cd->combo),
 			     unset_focus, NULL);
-	gtk_signal_connect(GTK_OBJECT(cd->combo), "changed",
-			   G_CALLBACK(color_changed), cd);
 
 	gtk_widget_show_all(cd->combo);
 	return cd->combo;
@@ -1066,33 +1066,33 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 
 static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 {
+	GtkWidget *fontitem;
+	GtkWidget *coloritem;
 	cd->toolbar_style =
 	    gtk_toolbar_new();
 	gtk_widget_show_all(cd->toolbar_style);
 	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
-
-//	gtk_toolbar_set_button_relief();
-
 
 	cd->paragraph_option =
 	    setup_paragraph_style_option_menu(cd->html),
 	    gtk_toolbar_prepend_widget(GTK_TOOLBAR(cd->toolbar_style),
 				       cd->paragraph_option, NULL,
 				       NULL);
-
+	fontitem = setup_font_size_option_menu(cd);
 	gtk_toolbar_prepend_widget(GTK_TOOLBAR(cd->toolbar_style),
-				   setup_font_size_option_menu(cd),
+				   fontitem,
 				   NULL, NULL);
 
 	gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(cd->toolbar_style),
 					 editor_toolbar_style_uiinfo,
 					 NULL, cd);
+	coloritem = setup_color_combo(cd);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
-				  setup_color_combo(cd), NULL, NULL);
+				  coloritem, NULL, NULL);
 
 	cd->font_style_changed_connection_id
 	    =
-	    gtk_signal_connect(GTK_OBJECT(cd->html),
+	    g_signal_connect(G_OBJECT(cd->htmlwidget),
 			       "insertion_font_style_changed",
 			       G_CALLBACK
 			       (insertion_font_style_changed_cb), cd);
@@ -1119,6 +1119,8 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 			   G_CALLBACK
 			   (paragraph_alignment_changed_cb), cd);
 
+	gtk_signal_connect(GTK_OBJECT(cd->combo), "color_changed",
+			   G_CALLBACK(color_changed), cd);
 	return cd->toolbar_style;
 }
 

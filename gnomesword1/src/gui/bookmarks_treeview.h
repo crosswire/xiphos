@@ -58,7 +58,8 @@ extern GtkTreeView *bookmark_tree;
 
 	
 GtkWidget *gui_create_bookmark_tree(void);
-
+void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
+			    GtkTreeIter *parent);
 
 #ifdef __cplusplus
 }

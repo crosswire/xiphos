@@ -30,6 +30,7 @@ struct _bookmark_menu {
 	GtkWidget *in_dialog;
 	GtkWidget *new;
 	GtkWidget *insert;
+	GtkWidget *add;
 	GtkWidget *edit;
 	GtkWidget *point;
 	GtkWidget *delete;
@@ -44,6 +45,7 @@ extern BOOKMARK_MENU menu;
 extern GtkTreeSelection *current_selection;
 extern GtkTreeStore *model;
 extern gboolean use_dialog;
+extern gboolean bookmarks_changed;
 
 void gui_create_bookmark_menu(void);
 void gui_save_bookmarks_treeview(void);
