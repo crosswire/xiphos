@@ -1,7 +1,12 @@
+2003-12-13  Pierre <pierrebenz@users.sf.net>
+
+	* updated manual
+
 2003-12-12  Terry <tbiggs@users.sf.net>
 
 	* made preferences dialog instant apply and replaced the apply, ok and
 	  cancel buttons with a close button
+	* updated spell check dialog
 
 
 2003-12-10  Andy <andyp@users.sf.net>
