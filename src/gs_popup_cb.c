@@ -43,7 +43,7 @@
 #include "gs_editor.h"
 #include "gs_unlockkey_dlg.h"
 #include "gs_gnomesword.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"
 #include "gs_viewtext_dlg.h"

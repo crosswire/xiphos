@@ -2,7 +2,7 @@
 
   /*
      * GnomeSword Bible Study Tool
-     * sw_gnomesword.h
+     * sw_sword.h
      * -------------------
      * Mon May 8 2000
      * copyright (C) 2000 by Terry Biggs
@@ -69,7 +69,6 @@ extern "C" {
 	void changepercomModSWORD(gchar * modName);
 	void redisplayTextSWORD(void);
 	gchar *getmodnameSWORD(gint num);
-	void navcurcommModSWORD(gint backfoward);
 	gchar *getdictmodSWORD(void);
 	gchar *gettextmodSWORD(void);
 	gchar *getcommodSWORD(void);

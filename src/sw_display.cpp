@@ -46,7 +46,7 @@
 
 #include "sw_display.h"
 #include "support.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 #include "sw_module_options.h"

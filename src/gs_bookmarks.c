@@ -41,7 +41,7 @@
 
 #include "gs_bookmarks.h"
 #include "sw_bookmarks.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 
