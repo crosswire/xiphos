@@ -51,6 +51,7 @@ public:
 	virtual void getVerseAfter(SWModule &imodule);
 	MOD_FONT *mf;
 	GString *str;
+	SWBuf swbuf;
 };
 
 #ifdef USE_MOZILLA

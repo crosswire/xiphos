@@ -44,7 +44,7 @@
 #include "cell.h"
 #include "utils.h"
 
-#define ICONDIR "./art"
+//#define ICONDIR "./art"
 
 typedef enum
 {
@@ -337,16 +337,16 @@ cell_widget (GtkHTMLEditCellProperties *d)
 	cell_page          = glade_xml_get_widget (xml, "cell_page");
 
 	gtk_table_attach (GTK_TABLE (glade_xml_get_widget (xml, "cell_scope_table1")),
-			  gtk_image_new_from_file (gnome_icon_theme_lookup_icon (d->cd->icon_theme, "stock_select-cell", 16, NULL, NULL)),
+			  gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR"/stock_select-cell"),
 			  0, 1, 0, 1, 0, 0, 0, 0);
 	gtk_table_attach (GTK_TABLE (glade_xml_get_widget (xml, "cell_scope_table1")),
-			  gtk_image_new_from_file (ICONDIR "/table-table-16.png"),
+			  gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/table-table-16.png"),
 			  0, 1, 1, 2, 0, 0, 0, 0);
 	gtk_table_attach (GTK_TABLE (glade_xml_get_widget (xml, "cell_scope_table2")),
-			  gtk_image_new_from_file (ICONDIR "/table-row-16.png"),
+			  gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/table-row-16.png"),
 			  0, 1, 0, 1, 0, 0, 0, 0);
 	gtk_table_attach (GTK_TABLE (glade_xml_get_widget (xml, "cell_scope_table2")),
-			  gtk_image_new_from_file (ICONDIR "/table-column-16.png"),
+			  gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/table-column-16.png"),
 			  0, 1, 1, 2, 0, 0, 0, 0);
 
 	d->combo_bg_color = color_combo_new (NULL, _("Transparent"), NULL,

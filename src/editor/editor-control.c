@@ -26,7 +26,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
- 
+
 #include <glib.h>
 #include <gtkhtml/gtkhtml.h>
 #include "gtkhtml/gtkhtml-properties.h"
@@ -69,20 +69,21 @@ GSHTMLEditorControlData *editor_cd;
 
 
 static gboolean
-editor_api_command (GtkHTML *html, GtkHTMLCommandType com_type, gpointer data)
+editor_api_command(GtkHTML * html, GtkHTMLCommandType com_type,
+		   gpointer data)
 {
 	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *) data;
 	gboolean rv = TRUE;
-printf ("editor_api_command\n"); 
+	printf("editor_api_command\n");
 	switch (com_type) {
 	case GTK_HTML_COMMAND_POPUP_MENU:
-		popup_show_at_cursor (cd);
+		popup_show_at_cursor(cd);
 		break;
 	case GTK_HTML_COMMAND_PROPERTIES_DIALOG:
-		property_dialog_show (cd);
+		property_dialog_show(cd);
 		break;
 	case GTK_HTML_COMMAND_TEXT_COLOR_APPLY:
-		toolbar_apply_color (cd);
+		toolbar_apply_color(cd);
 		break;
 	default:
 		rv = FALSE;
@@ -91,15 +92,22 @@ printf ("editor_api_command\n");
 	return rv;
 }
 
-		  
-static GValue *
-editor_api_event (GtkHTML *html, GtkHTMLEditorEventType event_type, GValue *args, gpointer data)
+
+static GValue *editor_api_event(GtkHTML * html,
+				GtkHTMLEditorEventType event_type,
+				GValue * args, gpointer data)
 {
 	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *) data;
 	GValue *retval = NULL;
-	
-	printf ("editor_api_event\n"); 
-	
+/*	if(args)
+		if(G_VALUE_TYPE(args)== 64) {
+			g_message("value type = %d",G_VALUE_TYPE(args));
+			g_message("value type = %s",G_VALUE_TYPE_NAME(args)); 
+			g_message("value  = %s",g_strdup_value_contents(args));
+		}
+*/
+//      printf ("editor_api_event\n"); 
+
 /*
 
 	if (cd->editor_bonobo_engine) {
@@ -138,32 +146,31 @@ editor_api_event (GtkHTML *html, GtkHTMLEditorEventType event_type, GValue *args
 
 
 
-static GtkWidget *
-editor_api_create_input_line (GtkHTML *html, gpointer data)
+static GtkWidget *editor_api_create_input_line(GtkHTML * html,
+					       gpointer data)
 {
 	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *) data;
 	GtkWidget *entry;
 
-	entry = gtk_entry_new ();
-	gtk_box_pack_end (GTK_BOX (cd->vbox), entry, FALSE, FALSE, 0);
-	gtk_widget_show (entry);
+	entry = gtk_entry_new();
+	gtk_box_pack_end(GTK_BOX(cd->vbox), entry, FALSE, FALSE, 0);
+	gtk_widget_show(entry);
 
 	return entry;
 }
 
-static void
-new_editor_api ()
+static void new_editor_api()
 {
-	editor_api = g_new (GtkHTMLEditorAPI, 1);
+	editor_api = g_new(GtkHTMLEditorAPI, 1);
 
-	editor_api->check_word         = spell_check_word;
+	editor_api->check_word = spell_check_word;
 	editor_api->suggestion_request = spell_suggestion_request;
-	editor_api->add_to_personal    = spell_add_to_personal;
-	editor_api->add_to_session     = spell_add_to_session;
-	editor_api->set_language       = spell_set_language;
-	editor_api->command            = editor_api_command;
-	editor_api->event              = editor_api_event;
-	editor_api->create_input_line  = editor_api_create_input_line;
+	editor_api->add_to_personal = spell_add_to_personal;
+	editor_api->add_to_session = spell_add_to_session;
+	editor_api->set_language = spell_set_language;
+	editor_api->command = editor_api_command;
+	editor_api->event = editor_api_event;
+	editor_api->create_input_line = editor_api_create_input_line;
 }
 
 /******************************************************************************
@@ -189,18 +196,25 @@ static gint release(GtkWidget * widget, GdkEventButton * event,
 
 	return FALSE;
 }
+
 static gint
-html_button_pressed2 (GtkWidget *html, GdkEventButton *event, GSHTMLEditorControlData *cd)
+html_button_pressed2(GtkWidget * html, GdkEventButton * event,
+		     GSHTMLEditorControlData * cd)
 {
 	HTMLEngine *engine = cd->html->engine;
 	guint offset;
 
-	cd->obj = html_engine_get_object_at (engine, event->x, event->y, &offset, FALSE);
+	cd->obj =
+	    html_engine_get_object_at(engine, event->x, event->y,
+				      &offset, FALSE);
 	switch (event->button) {
 	case 1:
-		if (event->type == GDK_2BUTTON_PRESS && cd->obj && event->state & GDK_CONTROL_MASK) {
-			cd->releaseId = g_signal_connect (html, "button_release_event",
-							  G_CALLBACK (release), cd);
+		if (event->type == GDK_2BUTTON_PRESS && cd->obj
+		    && event->state & GDK_CONTROL_MASK) {
+			cd->releaseId =
+			    g_signal_connect(html,
+					     "button_release_event",
+					     G_CALLBACK(release), cd);
 			return TRUE;
 		}
 		break;
@@ -208,14 +222,17 @@ html_button_pressed2 (GtkWidget *html, GdkEventButton *event, GSHTMLEditorContro
 		/* pass this for pasting */
 		return FALSE;
 	case 3:
-		if (!html_engine_is_selection_active (engine) || !html_engine_point_in_selection (engine, cd->obj, offset)) {
-			html_engine_disable_selection (engine);
-			html_engine_jump_at (engine, event->x, event->y);
-			gtk_html_update_styles (cd->html);
+		if (!html_engine_is_selection_active(engine)
+		    || !html_engine_point_in_selection(engine, cd->obj,
+						       offset)) {
+			html_engine_disable_selection(engine);
+			html_engine_jump_at(engine, event->x, event->y);
+			gtk_html_update_styles(cd->html);
 		}
 
-		if (popup_show (cd, event)) {
-			g_signal_stop_emission_by_name (html, "button_press_event");
+		if (popup_show(cd, event)) {
+			g_signal_stop_emission_by_name(html,
+						       "button_press_event");
 			return TRUE;
 		}
 		break;
@@ -227,35 +244,53 @@ html_button_pressed2 (GtkWidget *html, GdkEventButton *event, GSHTMLEditorContro
 }
 
 static gint
-html_button_pressed_after (GtkWidget *html, GdkEventButton *event, GSHTMLEditorControlData *cd)
+html_button_pressed_after(GtkWidget * html, GdkEventButton * event,
+			  GSHTMLEditorControlData * cd)
 {
 	HTMLEngine *e = cd->html->engine;
 	HTMLObject *obj = e->cursor->object;
 
-	if (event->button == 1 && event->type == GDK_BUTTON_PRESS && obj && obj->parent && !html_engine_is_selection_active (e)) {
-		if (html_object_is_text (obj) && html_object_get_data (obj->parent, "template_text")) {
-			html_object_set_data_full (obj->parent, "template_text", NULL, NULL);
-			html_cursor_jump_to_position (e->cursor, e, e->cursor->position - e->cursor->offset);
-			html_engine_set_mark (e);
-			html_cursor_jump_to_position (e->cursor, e, e->cursor->position + html_object_get_length (obj));
-			html_engine_select_interval (e, html_interval_new_from_cursor (e->mark, e->cursor));
+	if (event->button == 1 && event->type == GDK_BUTTON_PRESS && obj
+	    && obj->parent && !html_engine_is_selection_active(e)) {
+		if (html_object_is_text(obj)
+		    && html_object_get_data(obj->parent,
+					    "template_text")) {
+			html_object_set_data_full(obj->parent,
+						  "template_text", NULL,
+						  NULL);
+			html_cursor_jump_to_position(e->cursor, e,
+						     e->cursor->
+						     position -
+						     e->cursor->offset);
+			html_engine_set_mark(e);
+			html_cursor_jump_to_position(e->cursor, e,
+						     e->cursor->
+						     position +
+						     html_object_get_length
+						     (obj));
+			html_engine_select_interval(e,
+						    html_interval_new_from_cursor
+						    (e->mark,
+						     e->cursor));
 			/* printf ("delete template text\n"); */
-			html_engine_delete (cd->html->engine);
-		} else if (HTML_IS_IMAGE (obj) && html_object_get_data (obj->parent, "template_image"))
-			property_dialog_show (cd);
+			html_engine_delete(cd->html->engine);
+		} else if (HTML_IS_IMAGE(obj)
+			   && html_object_get_data(obj->parent,
+						   "template_image"))
+			property_dialog_show(cd);
 	}
-typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
+//typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
 
 	return FALSE;
 }
 
 static gboolean
-html_show_popup(GtkWidget *html, GSHTMLEditorControlData *cd)
+html_show_popup(GtkWidget * html, GSHTMLEditorControlData * cd)
 {
 #ifdef DEBUG
 	g_message("html_show_popup");
-#endif	
-	popup_show_at_cursor (cd);
+#endif
+	popup_show_at_cursor(cd);
 
 	return TRUE;
 }
@@ -286,16 +321,16 @@ static gint html_key_pressed(GtkWidget * html, GdkEventKey * event,
 }
 
 
-static gboolean on_delete              (GtkWidget       *widget,
-                                        GdkEvent        *event,
-                                        GSHTMLEditorControlData *ecd)
+static gboolean on_delete(GtkWidget * widget,
+			  GdkEvent * event,
+			  GSHTMLEditorControlData * ecd)
 {
 	gchar *filename = NULL;
 	gchar *buf = NULL;
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
-	
+
 	if (settings.modifiedSP) {
 		str = g_string_new("");
 		info = gui_new_dialog();
@@ -305,9 +340,10 @@ static gboolean on_delete              (GtkWidget       *widget,
 		else
 			buf = N_("File");
 		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			buf,
-			_("has been modified. Do you wish to save it?"));
+				"<span weight=\"bold\">%s</span>\n\n%s",
+				buf,
+				_
+				("has been modified. Do you wish to save it?"));
 		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -315,60 +351,62 @@ static gboolean on_delete              (GtkWidget       *widget,
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			if (settings.studypadfilename) {
-				filename = g_strdup(settings.studypadfilename);
+				filename =
+				    g_strdup(settings.studypadfilename);
 				save_file(filename, ecd);
 			} else {
-				gui_fileselection_save(ecd,TRUE);
+				gui_fileselection_save(ecd, TRUE);
 			}
 		}
 		settings.modifiedSP = FALSE;
 		g_free(info);
-		g_string_free(str,TRUE);
+		g_string_free(str, TRUE);
 	}
 	return FALSE;
 }
 
 
-static 
-GSHTMLEditorControlData *new_control(GtkWidget * container, int type, char * filename)
+static
+GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
+				     char *filename)
 {
- 	GtkWidget *toolbar_box;
+	GtkWidget *toolbar_box;
 	GtkWidget *frame34;
 	GtkWidget *scrolledwindow17;
 	GtkWidget *toolbar;
 	GtkWidget *htmlwidget = gtk_html_new();
 	GtkWidget *vboxSP = gtk_vbox_new(FALSE, 0);
 	GSHTMLEditorControlData *cd =
-	    editor_control_data_new(GTK_HTML(htmlwidget),vboxSP);
-	
-	switch(type) {
-		case STUDYPAD:
-			cd->personal_comments = FALSE;
-			cd->studypad = TRUE;
+	    editor_control_data_new(GTK_HTML(htmlwidget), vboxSP);
+
+	switch (type) {
+	case STUDYPAD:
+		cd->personal_comments = FALSE;
+		cd->studypad = TRUE;
 		break;
-		case PERCOM:
-			cd->personal_comments = TRUE;
-			cd->studypad = FALSE;
+	case PERCOM:
+		cd->personal_comments = TRUE;
+		cd->studypad = FALSE;
 		break;
 	}
 
 #ifdef DEBUG
 	g_message("gui_create_studypad_control");
-#endif	
+#endif
 
-//	cd->stylebar = settings.show_style_bar_sp;
+//      cd->stylebar = settings.show_style_bar_sp;
 	cd->editbar = settings.show_edit_bar_sp;
 
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
-	
+
 	g_signal_connect(GTK_OBJECT(container), "delete-event",
-                G_CALLBACK(on_delete),
-			   cd);
-			   
+			 G_CALLBACK(on_delete), cd);
+
 	toolbar_box = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(toolbar_box);
-	gtk_box_pack_start(GTK_BOX(vboxSP), toolbar_box, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vboxSP), toolbar_box, FALSE, TRUE,
+			   0);
 
 
 	frame34 = gtk_frame_new(NULL);
@@ -382,8 +420,9 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type, char * fil
 				       (scrolledwindow17),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow17,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow17,
+					    settings.shadow_type);
 
 	cd->htmlwidget = htmlwidget;
 	gtk_widget_show(cd->htmlwidget);
@@ -396,54 +435,58 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type, char * fil
 			   TRUE, 0);
 
 	cd->vbox = vboxSP;
-//	cd->pm = gui_create_editor_popup(cd);
-//	gnome_popup_menu_attach(cd->pm, cd->htmlwidget, NULL);
-	
+//      cd->pm = gui_create_editor_popup(cd);
+//      gnome_popup_menu_attach(cd->pm, cd->htmlwidget, NULL);
 
-	g_signal_connect(G_OBJECT(cd->htmlwidget),"key_press_event",
-			   G_CALLBACK(html_key_pressed), 
-			   cd);
-	g_signal_connect(G_OBJECT(cd->htmlwidget), "link_clicked", 
-			G_CALLBACK(gui_link_clicked),	
-			   NULL);
-	g_signal_connect(G_OBJECT(cd->htmlwidget), "on_url", 
-			G_CALLBACK(gui_url),	
-			   NULL);
-	g_signal_connect (G_OBJECT(cd->htmlwidget), "popup_menu", G_CALLBACK(html_show_popup), cd);
-	g_signal_connect (G_OBJECT(cd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed2), cd);
-	g_signal_connect_after (G_OBJECT(cd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed_after), cd);
-	
+
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "key_press_event",
+			 G_CALLBACK(html_key_pressed), cd);
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "link_clicked",
+			 G_CALLBACK(gui_link_clicked), NULL);
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "on_url",
+			 G_CALLBACK(gui_url), NULL);
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "popup_menu",
+			 G_CALLBACK(html_show_popup), cd);
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "button_press_event",
+			 G_CALLBACK(html_button_pressed2), cd);
+	g_signal_connect_after(G_OBJECT(cd->htmlwidget),
+			       "button_press_event",
+			       G_CALLBACK(html_button_pressed_after),
+			       cd);
+
 	/* create toolbars */
-	
+
 	widgets.toolbar_studypad = gui_toolbar_style(cd);
-	gtk_widget_show(widgets.toolbar_studypad);	
-	gtk_box_pack_start(GTK_BOX(toolbar_box), widgets.toolbar_studypad,
-			   FALSE, FALSE, 0);
+	gtk_widget_show(widgets.toolbar_studypad);
+	gtk_box_pack_start(GTK_BOX(toolbar_box),
+			   widgets.toolbar_studypad, FALSE, FALSE, 0);
 	toolbar = gui_toolbar_edit(cd);
 	gtk_widget_show(toolbar);
-	gtk_box_pack_start(GTK_BOX(toolbar_box), toolbar, FALSE, FALSE, 0);
-		
+	gtk_box_pack_start(GTK_BOX(toolbar_box), toolbar, FALSE, FALSE,
+			   0);
+
 	/* load last file */
-	if (filename) 
+	if (filename)
 		load_file(filename, cd);
-	else 
-		gtk_html_load_from_string(cd->html,"  ",2);
-		
-	editor_cd = cd;	
-	
-	new_editor_api ();
-	gtk_html_set_editor_api (GTK_HTML (cd->html), editor_api, cd);
+	else
+		gtk_html_load_from_string(cd->html, "  ", 2);
+
+	editor_cd = cd;
+
+	new_editor_api();
+	gtk_html_set_editor_api(GTK_HTML(cd->html), editor_api, cd);
 	/* GNOME Spell Dictionary */
-	cd->dict = spell_new_dictionary ();
-	spell_set_language (cd->html, settings.spell_language, cd);
-	gtk_html_set_editable(cd->html,TRUE);
-	gtk_html_set_inline_spelling (cd->html, TRUE);
-	return cd;	
+	cd->dict = spell_new_dictionary();
+	spell_set_language(cd->html, settings.spell_language, cd);
+	gtk_html_set_editable(cd->html, TRUE);
+	gtk_html_set_inline_spelling(cd->html, TRUE);
+	return cd;
 }
 
-GSHTMLEditorControlData *editor_new_editor (GtkWidget * container, int type, char * filename)
+GSHTMLEditorControlData *editor_new_editor(GtkWidget * container,
+					   int type, char *filename)
 {
-	if(!container)
+	if (!container)
 		return NULL;
 	return new_control(container, type, filename);
 }

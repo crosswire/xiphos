@@ -137,7 +137,8 @@ gtk_html_search_dialog_new (GtkHTML *html, GSHTMLEditorControlData *cd)
 	gtk_widget_show (dialog->entry);
 	gtk_widget_show_all (hbox);
 
-	gnome_window_icon_set_from_file (GTK_WINDOW (dialog->dialog), gnome_icon_theme_lookup_icon (cd->icon_theme, "stock_search", 16, NULL, NULL));
+	gnome_window_icon_set_from_file (GTK_WINDOW (dialog->dialog), 
+					PACKAGE_PIXMAPS_DIR"stock_search");
 
 	gtk_widget_grab_focus (dialog->entry);
 
