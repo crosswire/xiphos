@@ -77,8 +77,10 @@ struct  _app_widgets {
 		*html_book, /* gbs html widget */
 		*html_studypad, /* studypad html widget */
 		
+	/* popup menu submenu widgets */	
+		*add_bookmark_submenu,
+		
 	/* popup menu item widgets */
-	
                 *viewtexts_item, /* widget to access toggle menu - for showtexts */
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */

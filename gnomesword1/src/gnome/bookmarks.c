@@ -39,17 +39,23 @@
 #include "gui/utilities.h"
 #include "gui/main_window.h"
 #include "gui/dialog.h"
+#include "gui/bibletext_dialog.h"
+#include "gui/commentary_dialog.h"
+#include "gui/dictlex_dialog.h"
+#include "gui/gbs_dialog.h"
 
 #include "main/settings.h"
+#include "main/sword.h"
 
 
 /******************************************************************************
  * structures
  */
 struct _bookmark_data {
-	gchar *label;
+	gchar *caption;
 	gchar *key;
 	gchar *module;
+	gchar *mod_desc;
 	gboolean is_leaf;
 };
 typedef struct _bookmark_data BOOKMARK_DATA;
@@ -112,15 +118,9 @@ static void add_node(xmlNodePtr cur, GtkCTree * ctree,
 /* !! CHANGING THIS DON'T FORGET ALSO CHANGE create_bookmark_menu !! */
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("New Group"),
-	 N_("Add a new root group and file"),
-	 (gpointer) on_add_new_group1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("New SubGroup"),
-	 N_("Add new SubGroup to selected group"),
-	 (gpointer) on_new_subgroup_activate, NULL, NULL,
+	 GNOME_APP_UI_ITEM, N_("New Folder"),
+	 N_("Add new Folder to selected Folder"),
+	 (gpointer) on_new_folder_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
@@ -240,7 +240,7 @@ static xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent,
 	cur_node = xmlNewChild(parent,
 			       NULL, (const xmlChar *) "Folder", NULL);
 	xml_attr = xmlNewProp(cur_node,
-			      "caption", (const xmlChar *) es->label);
+			      "caption", (const xmlChar *) es->caption);
 	return cur_node;
 }
 
@@ -270,18 +270,20 @@ static void add_xml_bookmark_to_parent(xmlNodePtr parent,
 
 	xml_node = xmlNewChild(parent,
 			       NULL,
-			       (const xmlChar *) "Bookmark", NULL);
+			       (const xmlChar *) "Bookmark", NULL);	
 	xml_attr = xmlNewProp(xml_node,
 			      "modulename",
-			      (const xmlChar *) es->module);
+			      (const xmlChar *) es->module);	
 	xml_attr =
 	    xmlNewProp(xml_node, "key", (const xmlChar *) es->key);
 	xml_attr =
 	    xmlNewProp(xml_node, "moduledescription",
-		       (const xmlChar *) "");
+		       (const xmlChar *) es->mod_desc);	
 	xml_attr =
-	    xmlNewProp(xml_node, "description",
-		       (const xmlChar *) es->label);
+	    xmlNewProp(xml_node, "description",(const xmlChar *) "");	
+	xml_attr =
+	    xmlNewProp(xml_node, "caption",
+		       (const xmlChar *) es->caption);
 }
 
 /******************************************************************************
@@ -312,7 +314,8 @@ void gui_new_xml_bookmark_file(void)
 	BOOKMARK_DATA * es, data;
 	
 	es = &data;
-	sprintf(buf, "%s/%s/bookmarks.xml", settings.gSwordDir, "bookmarks");
+	sprintf(buf, "%s/%s/bookmarks.xml", settings.gSwordDir, 
+						"bookmarks");
 	xml_filename = (const xmlChar *) buf;
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
@@ -327,34 +330,38 @@ void gui_new_xml_bookmark_file(void)
 			      (const xmlChar *) "1.0");
 	xmlDocSetRootElement(xml_doc, xml_node);
 	
-	es->label = "Personal";
+	es->caption = "Personal";
 	xml_root = add_xml_folder_to_parent(xml_node,es);
 	
-	es->label = "What must I do to be saved?";
+	es->caption = "What must I do to be saved?";
 	xml_folder = add_xml_folder_to_parent(xml_root,es);
 	
-	es->label = "Acts 16:31";
+	es->caption = "Acts 16:31";
 	es->module = "KJV";
 	es->key = "Acts 16:31";
+	es->mod_desc = "";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
-	es->label = "Eph 2:8";
+	es->caption = "Eph 2:8";
 	es->module = "KJV";
 	es->key = "Eph 2:8";
+	es->mod_desc = "";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
-	es->label = "Romans 1:16";
+	es->caption = "Romans 1:16";
 	es->module = "KJV";
 	es->key = "Romans 1:16";
+	es->mod_desc = "";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
 	
-	es->label = "What is the Gospel?";
+	es->caption = "What is the Gospel?";
 	xml_folder = add_xml_folder_to_parent(xml_root,es);
 		       
-	es->label = "1 Cor 15:1-4";
+	es->caption = "1 Cor 15:1-4";
 	es->module = "KJV";
 	es->key = "1 Cor 15:1";
+	es->mod_desc = "";
 	add_xml_bookmark_to_parent(xml_folder, es);
 		       
 	
@@ -503,7 +510,7 @@ void gui_save_gnode_to_xml_bookmarks(GNode * node)
 	
 	if ((!strcmp(es->module, "ROOT")) ||
 	    (!strcmp(es->module, "GROUP"))) {
-		    cur_node =
+		cur_node =
 			add_xml_folder_to_parent(root_node,es);
 		parse_bookmark_tree(gnode, cur_node);
 	}
@@ -549,15 +556,16 @@ static GtkCTreeNode *add_node_to_ctree(GtkCTree * ctree,
 				    GtkCTreeNode * node,
 				    BOOKMARK_DATA * data)
 {
-	gchar *text[3];
+	gchar *text[4];
 	GdkPixmap *pixmap_closed;
 	GdkBitmap *mask_closed;
 	GdkPixmap *pixmap_opened;
 	GdkBitmap *mask_opened;
 
-	text[0] = data->label;
+	text[0] = data->caption;
 	text[1] = data->key;
 	text[2] = data->module;
+	text[3] = data->mod_desc;
 
 	if (data->is_leaf) {
 		pixmap_closed = NULL;
@@ -606,9 +614,10 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *folder;
 
 	folder = xmlGetProp(cur, "caption");
-	data->label = g_strdup(folder);
+	data->caption = g_strdup(folder);
 	data->key = g_strdup("GROUP");
 	data->module = g_strdup("GROUP");
+	data->mod_desc = g_strdup(" ");
 	data->is_leaf = FALSE;
 }
 
@@ -633,22 +642,27 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *mod1;
 	xmlChar *key;
 	xmlChar *mod_desc;
-	xmlChar *desc;
+	xmlChar *caption;
 	gchar buf[500];
 
 	mod1 = xmlGetProp(cur, "modulename");
 	key = xmlGetProp(cur, "key");
 	mod_desc = xmlGetProp(cur, "moduledescription");
-	desc = xmlGetProp(cur, "description");
-	if (strlen(desc) > 0) {
-		//g_warning("desc = %s",desc);
-		data->label = g_strdup(desc);
-	} else {
-		sprintf(buf, "%s, %s", key, mod1);
-		data->label = g_strdup(buf);
-	}
+	caption = xmlGetProp(cur, "caption");
+	if(caption) {
+		if (strlen(caption) > 0) {
+			//g_warning("desc = %s",desc);
+			data->caption = g_strdup(caption);
+		} else {
+			sprintf(buf, "%s, %s", key, mod1);
+			data->caption = g_strdup(buf);
+		}
+	} 
+	else
+		data->caption = g_strdup(key);
 	data->key = g_strdup(key);
 	data->module = g_strdup(mod1);
+	data->mod_desc = g_strdup(mod_desc);
 	data->is_leaf = TRUE;
 }
 
@@ -671,9 +685,10 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 
 static void free_bookmark_data(BOOKMARK_DATA * data)
 {
-	g_free(data->label);
+	g_free(data->caption);
 	g_free(data->key);
 	g_free(data->module);
+	g_free(data->mod_desc);
 }
 
 
@@ -884,12 +899,6 @@ static void get_path_to_xml_bookmarks(GtkCTree * ctree,
 	g_string_sprintf(str, "%s/bookmarks.xml", settings.swbmDir);
 	file = (const xmlChar *) str->str;
 	parse_bookmarks(ctree, file, node);
-	
-	/*   g_string_sprintf(str,"%s/%s",settings.homedir,
-	   ".kde/share/apps/bibletime/bookmarks.xml");
-	   file = (const xmlChar*) str->str;
-	parse_bookmarks(ctree, file, node);*/
-	 
 	g_string_free(str, TRUE);
 }
 
@@ -999,7 +1008,7 @@ static void addnewgrouptoMenus(GtkWidget * pmMenu,
 	if (!node)
 		return;
 
-	item = gtk_menu_item_new_with_label(str);
+	item = gtk_menu_item_new_with_caption(str);
 	gtk_widget_ref(item);
 	gtk_object_set_data_full(GTK_OBJECT(pmMenu), "item",
 				 item, (GtkDestroyNotify)
@@ -1053,6 +1062,62 @@ gboolean button_press_event(GtkWidget * widget,
 	return FALSE;
 }
 
+
+/******************************************************************************
+ * Name
+ *   goto_bookmark
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void goto_bookmark(gchar * mod_name, gchar * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void goto_bookmark(gchar * mod_name, gchar * key)
+{
+	gint module_type;
+	
+	module_type = get_mod_type(mod_name);
+	
+	switch(module_type) {
+		case TEXT_TYPE: 
+			if(settings.bibletext_in_dialog)
+				gui_bibletext_dialog_goto_bookmark(
+							mod_name,key);
+			else
+				gui_change_module_and_key(mod_name,key);
+			break;
+		case COMMENTARY_TYPE: 
+			if(settings.commentary_in_dialog)
+				gui_commentary_dialog_goto_bookmark(
+							mod_name, key);
+			else
+				gui_change_module_and_key(mod_name,key);
+			break;				
+		case DICTIONARY_TYPE: 
+			if(settings.dictionary_in_dialog)
+				gui_dictionary_dialog_goto_bookmark(
+							mod_name, key);
+			else
+				gui_change_module_and_key(mod_name,key);
+			break;				
+		case BOOK_TYPE: 
+			if(settings.book_in_dialog)
+				gui_gbs_dialog_goto_bookmark(
+							mod_name,key);
+			else
+				gui_change_module_and_key(mod_name,key);
+			break;				
+	}
+}
+
+
 /******************************************************************************
  * Name
  *   on_ctree_select_row
@@ -1097,7 +1162,8 @@ static void on_ctree_select_row(GtkCTree * ctree,
 				     cell[2])->text;
 		gtk_widget_set_sensitive(new_widget, FALSE);
 		gtk_widget_set_sensitive(insert_item_widget, FALSE);
-		gui_change_module_and_key(modName, key);
+		//gui_bibletext_dialog_goto_bookmark(modName, key);
+		goto_bookmark(modName, key);
 	} else {
 		gtk_widget_set_sensitive(new_widget, TRUE);
 		gtk_widget_set_sensitive(insert_item_widget, TRUE);
@@ -1236,7 +1302,7 @@ static void remove_selection(GtkWidget * widget, GtkCTree * ctree)
 
 static void stringCallback(gchar * str, gpointer data)
 {
-	gchar *text[3];
+	gchar *text[4];
 	gchar buf[80], buf2[80];
 	gint length, i = 0, j = 0;
 	GtkCList *clist;
@@ -1252,6 +1318,7 @@ static void stringCallback(gchar * str, gpointer data)
 			text[0] = str;
 			text[1] = "GROUP";
 			text[2] = "GROUP";
+			text[3] = " ";
 			first_child = GTK_CTREE_ROW(selected_node)->children;
 			newnode = gtk_ctree_insert_node(p_bmtree->ctree,
 							selected_node,
@@ -1283,6 +1350,7 @@ static void stringCallback(gchar * str, gpointer data)
 			sprintf(buf, "%s%s", buf2, ".conf");
 			text[1] = buf;
 			text[2] = "ROOT";
+			text[3] = " ";
 			newrootnode =
 			    gtk_ctree_insert_node(p_bmtree->ctree,
 						  selected_node, NULL,
@@ -1421,7 +1489,7 @@ static void on_insert_bookmark_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_new_subgroup_activate(GtkMenuItem * menuitem,
+void on_new_folder_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
 	char *t, *buf;
@@ -1430,9 +1498,9 @@ void on_new_subgroup_activate(GtkMenuItem * menuitem,
 
 	t = "|";
 	info = gui_new_dialog();
-	info->label_top = N_("Enter SubGroup Name - use no \'|\'");
-	info->text1 = g_strdup(_("Group Name"));
-	info->label1 = N_("Group: ");
+	info->label_top = N_("Enter Folder Name - use no \'|\'");
+	info->text1 = g_strdup(_("Folder Name"));
+	info->label1 = N_("Folder: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	/*** open dialog to get name for root node ***/
@@ -1444,50 +1512,6 @@ void on_new_subgroup_activate(GtkMenuItem * menuitem,
 	g_free(info->text1);
 	g_free(info);
 }
-
-
-/******************************************************************************
- * Name
- *   on_add_new_group1_activate
- *
- * Synopsis
- *   #include "gui/bookmarks.h"
- *
- *   void on_add_new_group1_activate(GtkMenuItem * menuitem,
- *				gpointer user_data)
- *
- * Description
- *   add new root group to tree
- *
- * Return value
- *   void
- */
-
-void on_add_new_group1_activate(GtkMenuItem * menuitem,
-				gpointer user_data)
-{
-	char *t, *buf;
-	gint test;
-	GS_DIALOG *info;
-
-	t = "|";
-	info = gui_new_dialog();
-	info->label_top = N_("Enter Group Name - use no \'|\'");
-	info->text1 = g_strdup(_("Group Name"));
-	info->label1 = N_("Group: ");
-	info->ok = TRUE;
-	info->cancel = TRUE;
-	/*** open dialog to get name for root node ***/
-	test = gui_gs_dialog(info);
-	if (test == GS_OK) {
-		buf = g_strdelimit(info->text1, t, ' ');
-		stringCallback(buf, GINT_TO_POINTER(1));
-	}
-	g_free(info->text1);
-	g_free(info);
-}
-
-
 
 
 /******************************************************************************
@@ -1519,12 +1543,14 @@ static gboolean ctree2gnode(GtkCTree * ctree, guint depth,
 	es = g_new(BOOKMARK_DATA, 1);
 	gnode->data = (BOOKMARK_DATA *) es;
 	es->is_leaf = GTK_CTREE_ROW(cnode)->is_leaf;
-	es->label =
+	es->caption =
 	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(cnode)->row.cell[0])->text;
 	es->key =
 	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(cnode)->row.cell[1])->text;
 	es->module =
 	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(cnode)->row.cell[2])->text;
+	es->mod_desc =
+	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(cnode)->row.cell[3])->text;
 	return TRUE;
 }
 
@@ -1550,7 +1576,7 @@ void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 {
 	GString *str;
 	const xmlChar *file;
-	gchar *text[3];
+	gchar *text[4];
 	GtkCTreeNode *node;
 	
 	str = g_string_new(settings.swbmDir);	
@@ -1559,6 +1585,7 @@ void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 	text[0] = "BibleTime";
 	text[1] = str->str;
 	text[2] = "ROOT";
+	text[3] = " ";
 	node =
 	    gtk_ctree_insert_node(bmtree.ctree, NULL, NULL,
 				  text, 3, pixmap1, mask1,
@@ -1819,7 +1846,7 @@ void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 {
 	gint test;
 	GS_DIALOG *info;
-	gchar *text[3], buf[256];
+	gchar *text[4], buf[256];
 	sprintf(buf, "%s, %s", verse, modName);
 
 	info = gui_new_dialog();
@@ -1840,6 +1867,7 @@ void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 		text[0] = info->text1;
 		text[1] = info->text2;
 		text[2] = info->text3;
+		text[3] = get_module_description(text[2]);
 		newnode = gtk_ctree_insert_node(p_bmtree->ctree,
 						node,
 						NULL,
@@ -1878,7 +1906,7 @@ void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 
 void gui_verselist_to_bookmarks(GList * list)
 {
-	char *token, *text[3], *t, *buf;
+	char *token, *text[4], *t, *buf;
 	GtkCTreeNode *node;
 	GtkCTree *ctree;
 	GList *tmp;
@@ -1908,6 +1936,7 @@ void gui_verselist_to_bookmarks(GList * list)
 			text[1] = token;
 			token = strtok(NULL, t);
 			text[2] = token;
+			text[3] = get_module_description(text[2]);
 			node = gtk_ctree_insert_node(ctree,
 						     newrootnode,
 						     node,
@@ -2005,7 +2034,7 @@ void gui_load_bookmark_tree(void)
 	GtkWidget *new_widget, *insert_item_widget;
 //	GNode *gnode = NULL;
 	GtkCTreeNode *node = NULL;
-	gchar *text[3];
+	gchar *text[4];
 	bmtree.ctree = GTK_CTREE(widgets.ctree_widget);
 	bmtree.ctree_widget = widgets.ctree_widget;
 	p_bmtree = &bmtree;
@@ -2042,6 +2071,7 @@ void gui_load_bookmark_tree(void)
 	text[0] = "Bookmarks";
 	text[1] = "ROOT";
 	text[2] = "ROOT";
+	text[3] = " ";
 	node =
 	    gtk_ctree_insert_node(bmtree.ctree, NULL, NULL,
 				  text, 3, pixmap1, mask1,
@@ -2098,13 +2128,13 @@ void create_bookmark_menu(void)
 			    "pmBookmarkTree", pmBookmarkTree);
 	gnome_app_fill_menu(GTK_MENU_SHELL(pmBookmarkTree),
 			    pmBookmarkTree_uiinfo, NULL, FALSE, 0);
-
+/*
 	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree),
 				 "add_new_group1",
 				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+*/
 	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "new",
 				 pmBookmarkTree_uiinfo[i++].widget,

@@ -28,7 +28,7 @@ extern "C" {
 
 #include "gui/dictlex.h"
 	
-
+void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_lookup_dictlex_dialog_selection
     (GtkMenuItem * menuitem, gchar * dict_mod_description);
 void gui_open_dictlex_dialog(gchar * mod_name);

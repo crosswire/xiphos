@@ -567,6 +567,53 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   gui_gbs_dialog_goto_bookmark
+ *
+ * Synopsis
+ *   #include "gbs_dialog.h"
+ *
+ *   void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)
+{
+	gchar *text;
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		GBS_DATA *dlg = (GBS_DATA *) tmp->data;
+		if(!strcmp(dlg->mod_name, mod_name)) {
+			dlg->key = key;
+			text = display_gbs(dlg->mod_name, key);	
+			if(text){
+				entry_display(dlg->html, dlg->mod_name,
+				   text, key, TRUE);
+				free(text);
+			}
+			
+			return;
+		}		
+		tmp = g_list_next(tmp);
+	}
+	gui_open_gbs_dialog(mod_name);
+	cur_dlg->key = key;
+	text = display_gbs(cur_dlg->mod_name, key);	
+	if(text){
+		entry_display(cur_dlg->html, cur_dlg->mod_name,
+		   text, key, TRUE);
+		free(text);
+	}
+}
+
 /******************************************************************************
  * Name
  *   gui_open_gbs_dialog

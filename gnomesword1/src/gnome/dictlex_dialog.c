@@ -478,6 +478,41 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 
 /******************************************************************************
  * Name
+ *   gui_dictionary_dialog_goto_bookmark
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
+{
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		DL_DATA *dlg = (DL_DATA *) tmp->data;
+		if(!strcmp(dlg->mod_name, mod_name)) {
+			dlg->key = key;
+			gtk_entry_set_text(GTK_ENTRY(dlg->entry),
+								key);
+			return;
+		}		
+		tmp = g_list_next(tmp);
+	}
+	gui_open_dictlex_dialog(mod_name);
+	cur_dlg->key = key;
+	gtk_entry_set_text(GTK_ENTRY(cur_dlg->entry),key);
+}
+
+/******************************************************************************
+ * Name
  *   gui_open_dictlex_dialog
  *
  * Synopsis
@@ -512,6 +547,7 @@ void gui_open_dictlex_dialog(gchar * mod_name)
 		dlg->is_locked = 0;
 		dlg->cipher_old = NULL;
 	}
+	cur_dlg = dlg;
 	popupmenu = gui_create_pm_dict(dlg);
 	gnome_popup_menu_attach(popupmenu, dlg->html, NULL);
 	gtk_widget_show(dlg->dialog);
