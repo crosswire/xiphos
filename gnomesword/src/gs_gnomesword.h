@@ -56,6 +56,18 @@ struct _settings {
 		*unlockcommmod_item, /* unlock module menu item */
 		*unlockdictmod_item, /* unlock module menu item */
 		*htmlcomm; /* html commentary widget */
+	
+	GtkWidget  /* global option menu check items */
+		*strongsnum,
+		*footnotes,
+		*hebrewpoints,
+		*cantillationmarks,
+		*greekaccents,
+		*morphs,
+		*crossrefs,
+		*lemmas,
+		*headings;
+		
 	gchar	
 		gs_version[16],
 		MainWindowModule[80],	/* modules to open at program startup  */
@@ -93,6 +105,7 @@ struct _settings {
 		unicode_font[126],
 		groupName[50],
 		searchText[256];			
+		
 	gint 
       		currentverse_red,	/* current verse colors */
 	        currentverse_green, 
@@ -108,15 +121,14 @@ struct _settings {
 		searchType,
 		whichwindow;      /* which of the main form html window is active */
 						/* 0=text, 1= comm, 2=dict */
+						
 	gboolean   
 		usedefault,
 		strongs,	//-- toogle button and check menu states
-		morphs,
-		hebrewpoints,
-		cantillationmarks,
-		greekaccents,
-	        footnotes,
-		strongsint,	
+		strongsint,
+		headingsint,	
+		crossrefint,	
+		lemmasint,		
 		morphsint,
 		hebrewpointsint,
 		cantillationmarksint,
@@ -142,6 +154,7 @@ struct _settings {
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain; /* when verse list item clicked show in main form if true */
+		
 	GList *settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
 

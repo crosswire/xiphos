@@ -42,7 +42,7 @@ project.menu.comment=No comment
 project.menu.icon=
 project.menu.need.terminal=1
 
-project.configure.options=--prefix=/usr
+project.configure.options=
 
 anjuta.program.arguments=
 
@@ -139,7 +139,9 @@ module.source.files=\
 	gs_gui_cb.c\
 	gs_gui_cb.h\
 	gs_information_sw.cpp\
-	gs_information_sw.h
+	gs_information_sw.h\
+	sw_module_options.cpp\
+	sw_module_options.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

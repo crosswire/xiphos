@@ -68,10 +68,7 @@ extern gboolean
 	ApplyChange,	/* to keep form looping when book combobox is changed */
 	noteModified;	/* personal comments window changed */
 extern GtkWidget 
-	*NEtext,
-	*morphs,
-	*footnotes,
-	*strongsnum;	/* menu check item (declared in gs_gnomesword.c) */
+	*NEtext;	/* menu check item (declared in gs_gnomesword.c) */
 extern gint 
 	answer;		/* do we save file on exit */
 
@@ -95,22 +92,22 @@ on_mainwindow_size_allocate(GtkWidget *widget,
 void
 on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+	GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
+	globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active,TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 //----------------------------------------------------------------------------------------------
 void
 on_btnMorphs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	GTK_CHECK_MENU_ITEM(morphs)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Morphological Tags", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+	GTK_CHECK_MENU_ITEM(settings->morphs)->active = togglebutton->active;	//-- change menu check item to match button
+	globaloptionsSWORD("Morphological Tags", 0, togglebutton->active,TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 //----------------------------------------------------------------------------------------------
 void
 on_btnFootnotes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	GTK_CHECK_MENU_ITEM(footnotes)->active = togglebutton->active;	//-- change menu check item to match button
-	globaloptionsSWORD("Footnotes", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+	GTK_CHECK_MENU_ITEM(settings->footnotes)->active = togglebutton->active;	//-- change menu check item to match button
+	globaloptionsSWORD("Footnotes", 0, togglebutton->active,TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 
 //----------------------------------------------------------------------------------------------

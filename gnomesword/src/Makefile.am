@@ -64,6 +64,8 @@ COMMON_SOURCE =  \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
+    sw_module_options.cpp \
+    sw_module_options.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
     sw_gnomesword.cpp \
