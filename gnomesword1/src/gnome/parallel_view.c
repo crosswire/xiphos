@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_interlinear.c - support for displaying multiple modules
+ * gs_parallel.c - support for displaying multiple modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -27,8 +27,8 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gui/interlinear.h"
-#include "gui/interlinear_dialog.h"
+#include "gui/parallel_view.h"
+#include "gui/parallel_dialog.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
@@ -48,25 +48,25 @@
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
 static GtkWidget *module_options_menu;
-static gboolean interlinear1;
-static gboolean interlinear2;
-static gboolean interlinear3;
-static gboolean interlinear4;
-static gboolean interlinear5;
+static gboolean parallel1;
+static gboolean parallel2;
+static gboolean parallel3;
+static gboolean parallel4;
+static gboolean parallel5;
 
 
 
 /******************************************************************************
  * Name
- *   gui_check_interlinear_modules
+ *   gui_check_parallel_modules
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_check_interlinear_modules(void)
+ *   void gui_check_parallel_modules(void)
  *
  * Description
- *   check for interlinear modules on program start
+ *   check for parallel modules on program start
  *   we don't want to try to display modules we don't have
  *   it makes bad things happen
  *
@@ -74,48 +74,48 @@ static gboolean interlinear5;
  *   void
  */
 
-void gui_check_interlinear_modules(void)
+void gui_check_parallel_modules(void)
 {
-	if (strlen(settings.Interlinear1Module) > 1)
-		interlinear1 =
-		    check_for_module(settings.Interlinear1Module);
+	if (strlen(settings.parallel1Module) > 1)
+		parallel1 =
+		    check_for_module(settings.parallel1Module);
 	else
-		interlinear1 = FALSE;
+		parallel1 = FALSE;
 
-	if (strlen(settings.Interlinear2Module) > 1)
-		interlinear2 =
-		    check_for_module(settings.Interlinear2Module);
+	if (strlen(settings.parallel2Module) > 1)
+		parallel2 =
+		    check_for_module(settings.parallel2Module);
 	else
-		interlinear2 = FALSE;
+		parallel2 = FALSE;
 
-	if (strlen(settings.Interlinear3Module) > 1)
-		interlinear3 =
-		    check_for_module(settings.Interlinear3Module);
+	if (strlen(settings.parallel3Module) > 1)
+		parallel3 =
+		    check_for_module(settings.parallel3Module);
 	else
-		interlinear3 = FALSE;
+		parallel3 = FALSE;
 
-	if (strlen(settings.Interlinear4Module) > 1)
-		interlinear4 =
-		    check_for_module(settings.Interlinear4Module);
+	if (strlen(settings.parallel4Module) > 1)
+		parallel4 =
+		    check_for_module(settings.parallel4Module);
 	else
-		interlinear4 = FALSE;
+		parallel4 = FALSE;
 
-	if (strlen(settings.Interlinear5Module) > 1)
-		interlinear5 =
-		    check_for_module(settings.Interlinear5Module);
+	if (strlen(settings.parallel5Module) > 1)
+		parallel5 =
+		    check_for_module(settings.parallel5Module);
 	else
-		interlinear5 = FALSE;
+		parallel5 = FALSE;
 
 }
 
 /******************************************************************************
  * Name
- *   gui_set_interlinear_options_at_start
+ *   gui_set_parallel_options_at_start
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_set_interlinear_options_at_start(void)
+ *   void gui_set_parallel_options_at_start(void)
  *
  * Description
  *   
@@ -124,53 +124,53 @@ void gui_check_interlinear_modules(void)
  *   void
  */
 
-void gui_set_interlinear_options_at_start(void)
+void gui_set_parallel_options_at_start(void)
 {
 
 	if (settings.footnotesint)
-		set_interlinear_global_option("Footnotes", "On");	/* keep footnotes in sync with menu */
+		set_parallel_global_option("Footnotes", "On");	/* keep footnotes in sync with menu */
 	else
-		set_interlinear_global_option("Footnotes", "Off");	/* keep footnotes in sync with menu */
+		set_parallel_global_option("Footnotes", "Off");	/* keep footnotes in sync with menu */
 
 	/*
-	   set interlinear Strong's Numbers to last setting used 
+	   set parallel Strong's Numbers to last setting used 
 	 */
 	if (settings.strongsint)
-		set_interlinear_global_option("Strong's Numbers", "On");	/* keep Strongs in sync with menu */
+		set_parallel_global_option("Strong's Numbers", "On");	/* keep Strongs in sync with menu */
 	else
-		set_interlinear_global_option("Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
+		set_parallel_global_option("Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
 
 	/*
-	   set interlinear morph tags to last setting used 
+	   set parallel morph tags to last setting used 
 	 */
 	if (settings.morphsint)
-		set_interlinear_global_option("Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
+		set_parallel_global_option("Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
 	else
-		set_interlinear_global_option("Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
+		set_parallel_global_option("Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
 
 	/*
-	   set interlinear Hebrew Vowel Points to last setting used 
+	   set parallel Hebrew Vowel Points to last setting used 
 	 */
 	if (settings.hebrewpointsint)
-		set_interlinear_global_option("Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
+		set_parallel_global_option("Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
 	else
-		set_interlinear_global_option("Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
+		set_parallel_global_option("Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
 
 	/*
-	   set interlinear Hebrew Cantillation to last setting used 
+	   set parallel Hebrew Cantillation to last setting used 
 	 */
 	if (settings.cantillationmarksint)
-		set_interlinear_global_option("Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
+		set_parallel_global_option("Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
 	else
-		set_interlinear_global_option("Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
+		set_parallel_global_option("Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
 
 	/*
-	   set interlinear Greek Accents to last setting used 
+	   set parallel Greek Accents to last setting used 
 	 */
 	if (settings.greekaccentsint)
-		set_interlinear_global_option("Greek Accents", "On");	/* keep Greek Accents in sync with menu */
+		set_parallel_global_option("Greek Accents", "On");	/* keep Greek Accents in sync with menu */
 	else
-		set_interlinear_global_option("Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
+		set_parallel_global_option("Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
 
 
 }
@@ -181,12 +181,12 @@ void gui_set_interlinear_options_at_start(void)
  *   on_undockInt_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_undockInt_activate(GtkMenuItem *menuitem)
  *
  * Description
- *   undock/dock interlinear page
+ *   undock/dock parallel page
  *
  * Return value
  *   void
@@ -196,7 +196,7 @@ static void on_undockInt_activate(GtkMenuItem * menuitem)
 {
 	if (settings.dockedInt) {
 		settings.dockedInt = FALSE;
-		gui_undock_interlinear_page();
+		gui_undock_parallel_page();
 
 	} else {
 		settings.dockedInt = TRUE;
@@ -211,7 +211,7 @@ static void on_undockInt_activate(GtkMenuItem * menuitem)
  *   on_changeint1mod_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_changeint1mod_activate(GtkMenuItem * menuitem,
  *			       gpointer user_data)
@@ -232,14 +232,14 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	if (mod_name) {
 		xml_set_value("GnomeSword", "modules", "int1",
 			      mod_name);
-		settings.Interlinear1Module =
+		settings.parallel1Module =
 		    xml_get_value("modules", "int1");
-		interlinear1 =
-		    check_for_module(settings.Interlinear1Module);
+		parallel1 =
+		    check_for_module(settings.parallel1Module);
 		if (settings.dockedInt)
-			gui_update_interlinear_page();
+			gui_update_parallel_page();
 		else
-			gui_update_interlinear_page_detached();
+			gui_update_parallel_page_detached();
 		g_free(mod_name);
 	}
 }
@@ -251,7 +251,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
  *   on_changeint2mod_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_changeint2mod_activate(GtkMenuItem * menuitem,
  *			       gpointer user_data)
@@ -272,14 +272,14 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	if (mod_name) {
 		xml_set_value("GnomeSword", "modules", "int2",
 			      mod_name);
-		settings.Interlinear2Module =
+		settings.parallel2Module =
 		    xml_get_value("modules", "int2");
-		interlinear2 =
-		    check_for_module(settings.Interlinear2Module);
+		parallel2 =
+		    check_for_module(settings.parallel2Module);
 		if (settings.dockedInt)
-			gui_update_interlinear_page();
+			gui_update_parallel_page();
 		else
-			gui_update_interlinear_page_detached();
+			gui_update_parallel_page_detached();
 		g_free(mod_name);
 	}
 }
@@ -290,7 +290,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
  *   on_changeint3mod_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_changeint3mod_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
@@ -311,14 +311,14 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	if (mod_name) {
 		xml_set_value("GnomeSword", "modules", "int3",
 			      mod_name);
-		settings.Interlinear3Module =
+		settings.parallel3Module =
 		    xml_get_value("modules", "int3");
-		interlinear3 =
-		    check_for_module(settings.Interlinear3Module);
+		parallel3 =
+		    check_for_module(settings.parallel3Module);
 		if (settings.dockedInt)
-			gui_update_interlinear_page();
+			gui_update_parallel_page();
 		else
-			gui_update_interlinear_page_detached();
+			gui_update_parallel_page_detached();
 		g_free(mod_name);
 	}
 }
@@ -329,7 +329,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
  *   on_changeint4mod_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_changeint4mod_activate(GtkMenuItem * menuitem,
  *			       gpointer user_data)
@@ -350,14 +350,14 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	if (mod_name) {
 		xml_set_value("GnomeSword", "modules", "int4",
 			      mod_name);
-		settings.Interlinear4Module =
+		settings.parallel4Module =
 		    xml_get_value("modules", "int4");
-		interlinear4 =
-		    check_for_module(settings.Interlinear4Module);
+		parallel4 =
+		    check_for_module(settings.parallel4Module);
 		if (settings.dockedInt)
-			gui_update_interlinear_page();
+			gui_update_parallel_page();
 		else
-			gui_update_interlinear_page_detached();
+			gui_update_parallel_page_detached();
 		g_free(mod_name);
 	}
 }
@@ -368,7 +368,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
  *   on_changeint5mod_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_changeint5mod_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
@@ -388,12 +388,12 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	mod_name = module_name_from_description((gchar *) user_data);
 
 	xml_set_value("GnomeSword", "modules", "int5", mod_name);
-	settings.Interlinear5Module = xml_get_value("modules", "int5");
-	interlinear5 = check_for_module(settings.Interlinear5Module);
+	settings.parallel5Module = xml_get_value("modules", "int5");
+	parallel5 = check_for_module(settings.parallel5Module);
 	if (settings.dockedInt)
-		gui_update_interlinear_page();
+		gui_update_parallel_page();
 	else
-		gui_update_interlinear_page_detached();
+		gui_update_parallel_page_detached();
 	if (mod_name)
 		g_free(mod_name);
 }
@@ -405,13 +405,13 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
  *   on_int_global_options_activate
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void on_int_global_options_activate(GtkMenuItem * menuitem,
  *				    gpointer user_data)
  *
  * Description
- *   toogle global options in interlinear window
+ *   toogle global options in parallel window
  *
  * Return value
  *   void
@@ -420,7 +420,7 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 static void on_int_global_options_activate(GtkMenuItem * menuitem,
 					   gpointer user_data)
 {
-	gui_set_interlinear_module_global_options((gchar *) user_data,
+	gui_set_parallel_module_global_options((gchar *) user_data,
 						  GTK_CHECK_MENU_ITEM
 						  (menuitem)->active);
 }
@@ -428,12 +428,12 @@ static void on_int_global_options_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *   gui_update_interlinear_page
+ *   gui_update_parallel_page
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_update_interlinear_page(void)
+ *   void gui_update_parallel_page(void)
  *
  * Description
  *   
@@ -442,7 +442,7 @@ static void on_int_global_options_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void gui_update_interlinear_page(void)
+void gui_update_parallel_page(void)
 {
 	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
@@ -451,7 +451,7 @@ void gui_update_interlinear_page(void)
 
 	if (settings.havebible) {
 		/* setup gtkhtml widget */
-		GtkHTML *html = GTK_HTML(widgets.html_interlinear);
+		GtkHTML *html = GTK_HTML(widgets.html_parallel);
 		was_editable = gtk_html_get_editable(html);
 		if (was_editable)
 			gtk_html_set_editable(html, FALSE);
@@ -462,50 +462,50 @@ void gui_update_interlinear_page(void)
 			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings.bible_bg_color,
 			settings.bible_text_color, settings.link_color);
-		/*utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
-					   tmpBuf);*/
-		utf8len = strlen(tmpBuf);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   tmpBuf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, utf8len);
+				       utf8str, utf8len);
 		}
 
 		for (i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch (i) {
 			case 0:
-				if (interlinear1)
+				if (parallel1)
 					mod_name =
-					    settings.Interlinear1Module;
+					    settings.parallel1Module;
 				else
 					mod_name = NULL;
 				break;
 			case 1:
-				if (interlinear2)
+				if (parallel2)
 					mod_name =
-					    settings.Interlinear2Module;
+					    settings.parallel2Module;
 				else
 					mod_name = NULL;
 				break;
 			case 2:
-				if (interlinear3)
+				if (parallel3)
 					mod_name =
-					    settings.Interlinear3Module;
+					    settings.parallel3Module;
 				else
 					mod_name = NULL;
 				break;
 			case 3:
-				if (interlinear4)
+				if (parallel4)
 					mod_name =
-					    settings.Interlinear4Module;
+					    settings.parallel4Module;
 				else
 					mod_name = NULL;
 				break;
 			case 4:
-				if (interlinear5)
+				if (parallel5)
 					mod_name =
-					    settings.Interlinear5Module;
+					    settings.parallel5Module;
 				else
 					mod_name = NULL;
 				break;
@@ -545,12 +545,15 @@ void gui_update_interlinear_page(void)
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size,
 					settings.currentverse);
-				
-				utf8len = strlen(tmpBuf);
+				utf8str =
+				    e_utf8_from_gtk_string(widgets.
+							   html_parallel,
+							   tmpBuf);
+				utf8len = strlen(utf8str);
 				if (utf8len) {
 					gtk_html_write(GTK_HTML(html),
 						       htmlstream,
-						       tmpBuf,
+						       utf8str,
 						       utf8len);
 				}
 			}
@@ -562,11 +565,14 @@ void gui_update_interlinear_page(void)
 				get_module_description(mod_name),
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size, mod_name);
-			
-			utf8len = strlen(tmpBuf);
+			utf8str =
+			    e_utf8_from_gtk_string(widgets.
+						   html_parallel,
+						   tmpBuf);
+			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
+					       htmlstream, utf8str,
 					       utf8len);
 			}
 
@@ -578,16 +584,19 @@ void gui_update_interlinear_page(void)
 					"<font face=\"%s\"size=\"%s\">",
 					font_name, font_size);
 
-			
-			utf8len = strlen(tmpBuf);
+			utf8str =
+			    e_utf8_from_gtk_string(widgets.
+						   html_parallel,
+						   tmpBuf);
+			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
+					       htmlstream, utf8str,
 					       utf8len);
 			}
 
 			utf8str =
-			    get_interlinear_module_text(mod_name,
+			    get_parallel_module_text(mod_name,
 							settings.
 							currentverse);
 			//g_warning(utf8str);
@@ -601,27 +610,32 @@ void gui_update_interlinear_page(void)
 			sprintf(tmpBuf,
 				"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 				mod_name);
-			
-			utf8len = strlen(tmpBuf);
+			utf8str =
+			    e_utf8_from_gtk_string(widgets.
+						   html_parallel,
+						   tmpBuf);
+			utf8len = strlen(utf8str);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
-					       htmlstream, tmpBuf,
+					       htmlstream, utf8str,
 					       utf8len);
 			}
 		}
 
 		sprintf(tmpBuf, "</table></body></html>");
-		
-		utf8len = strlen(tmpBuf);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   tmpBuf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       tmpBuf, utf8len);
+				       utf8str, utf8len);
 		}
 
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);
 	}
-	gtk_frame_set_label(GTK_FRAME(widgets.frame_interlinear),
+	gtk_frame_set_label(GTK_FRAME(widgets.frame_parallel),
 			    settings.currentverse);
 	if (font_name)
 		free(font_name);
@@ -635,7 +649,7 @@ void gui_update_interlinear_page(void)
  *   int_display
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void int_display(gchar *key)
  *
@@ -653,7 +667,6 @@ static void int_display(gchar * key)
 	    *bgColor,
 	    *textColor,
 	    buf[500], *tmpkey, tmpbuf[256], *mod_name, *use_font_size;
-	GString *str;
 
 	gboolean evenRow = FALSE;
 
@@ -662,9 +675,8 @@ static void int_display(gchar * key)
 
 	const char *cur_book;
 
-	GtkHTML *html = GTK_HTML(widgets.html_interlinear);
+	GtkHTML *html = GTK_HTML(widgets.html_parallel);
 
-	str = g_string_new("");
 	tmpkey = get_valid_key(key);
 
 	bgColor = "#f1f1f1";
@@ -679,10 +691,14 @@ static void int_display(gchar * key)
 		tmpkey = get_valid_key(tmpbuf);
 		if (cur_chapter != get_chapter_from_key(tmpkey))
 			break;
-		g_string_printf(str, "%s", "<tr valign=\"top\">");
-		if (str->len) {
+		sprintf(buf, "%s", "<tr valign=\"top\">");
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
+				       utf8str, utf8len);
 		}
 
 		if (i == cur_verse)
@@ -704,29 +720,29 @@ static void int_display(gchar * key)
 			mod_name = NULL;
 			switch (j) {
 			case 0:
-				if (interlinear1)
+				if (parallel1)
 					mod_name =
-					    settings.Interlinear1Module;
+					    settings.parallel1Module;
 				break;
 			case 1:
-				if (interlinear2)
+				if (parallel2)
 					mod_name =
-					    settings.Interlinear2Module;
+					    settings.parallel2Module;
 				break;
 			case 2:
-				if (interlinear3)
+				if (parallel3)
 					mod_name =
-					    settings.Interlinear3Module;
+					    settings.parallel3Module;
 				break;
 			case 3:
-				if (interlinear4)
+				if (parallel4)
 					mod_name =
-					    settings.Interlinear4Module;
+					    settings.parallel4Module;
 				break;
 			case 4:
-				if (interlinear5)
+				if (parallel5)
 					mod_name =
-					    settings.Interlinear5Module;
+					    settings.parallel5Module;
 				break;
 			}
 
@@ -734,7 +750,7 @@ static void int_display(gchar * key)
 			if (strlen(use_font_size) < 2)
 				use_font_size = g_strdup("+0");
 
-			g_string_printf(str,
+			sprintf(buf,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
 				"<A HREF=\"I%s\" NAME=\"%d\">"
 				"<font color=\"%s\">%d. </font></A>"
@@ -744,15 +760,21 @@ static void int_display(gchar * key)
 				i,
 				settings.bible_verse_num_color,
 				i, use_font_size, textColor);
-			if (str->len) {
+
+			utf8str =
+			    e_utf8_from_gtk_string(widgets.
+						   html_parallel,
+						   buf);
+			utf8len = strlen(utf8str);
+			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
-					       htmlstream, str->str,
-					       str->len);
+					       htmlstream, utf8str,
+					       utf8len);
 			}
 
 			if (mod_name) {
 				utf8str =
-				    get_interlinear_module_text
+				    get_parallel_module_text
 				    (mod_name, tmpkey);
 				if (strlen(utf8str)) {
 					gtk_html_write(GTK_HTML(html),
@@ -763,20 +785,29 @@ static void int_display(gchar * key)
 				}
 			}
 
-			g_string_printf(str, "%s", "</font></td>");
-			if (str->len) {
+			sprintf(buf, "%s", "</font></td>");
+			utf8str =
+			    e_utf8_from_gtk_string(widgets.
+						   html_parallel,
+						   buf);
+			utf8len = strlen(utf8str);
+			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
-					       htmlstream, str->str,
-					       str->len);
+					       htmlstream, utf8str,
+					       utf8len);
 			}
 			if (use_font_size)
 				free(use_font_size);
 		}
 
-		g_string_printf(str, "%s", "</tr>");
-		if (str->len) {
+		sprintf(buf, "%s", "</tr>");
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
+				       utf8str, utf8len);
 		}
 	}
 	free(tmpkey);
@@ -785,12 +816,12 @@ static void int_display(gchar * key)
 
 /******************************************************************************
  * Name
- *   gui_update_interlinear_page_detached
+ *   gui_update_parallel_page_detached
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_update_interlinear_page_detached(void)
+ *   void gui_update_parallel_page_detached(void)
  *
  * Description
  *   
@@ -799,13 +830,13 @@ static void int_display(gchar * key)
  *   void
  */
 
-void gui_update_interlinear_page_detached(void)
+void gui_update_parallel_page_detached(void)
 {
 	gchar *utf8str, buf[500];
 	gint utf8len;
 
 	//-- setup gtkhtml widget
-	GtkHTML *html = GTK_HTML(widgets.html_interlinear);
+	GtkHTML *html = GTK_HTML(widgets.html_parallel);
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -817,90 +848,100 @@ void gui_update_interlinear_page_detached(void)
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-//	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
 
-	if (settings.Interlinear1Module) {
+	if (settings.parallel1Module) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			settings.Interlinear1Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+			settings.parallel1Module);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+				       utf8str, utf8len);
 		}
 	}
 
-	if (settings.Interlinear2Module) {
+	if (settings.parallel2Module) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			settings.Interlinear2Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+			settings.parallel2Module);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+				       utf8str, utf8len);
 		}
 	}
 
-	if (settings.Interlinear3Module) {
+	if (settings.parallel3Module) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			settings.Interlinear3Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+			settings.parallel3Module);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+				       utf8str, utf8len);
 		}
 	}
 
-	if (widgets.html_interlinear) {
+	if (widgets.html_parallel) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			settings.Interlinear4Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+			settings.parallel4Module);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+				       utf8str, utf8len);
 		}
 	}
 
-	if (settings.Interlinear5Module) {
+	if (settings.parallel5Module) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			settings.Interlinear5Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+			settings.parallel5Module);
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_parallel,
+					   buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+				       utf8str, utf8len);
 		}
 	}
 
 	sprintf(buf, "%s", "</tr>");
-	//utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
 
 
 	/******      ******/
-	int_display(settings.cvInterlinear);
+	int_display(settings.cvparallel);
 
 	sprintf(buf, "%s", "</table></body></html>");
-	//utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
 
@@ -912,53 +953,53 @@ void gui_update_interlinear_page_detached(void)
 
 /******************************************************************************
  * Name
- *   gui_swap_interlinear_with_main
+ *   gui_swap_parallel_with_main
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_swap_interlinear_with_main(char * intmod)
+ *   void gui_swap_parallel_with_main(char * intmod)
  *
  * Description
- *   swaps interlinear mod with mod in main text window
+ *   swaps parallel mod with mod in main text window
  *
  * Return value
  *   void
  */
 
-void gui_swap_interlinear_with_main(char *intmod)
+void gui_swap_parallel_with_main(char *intmod)
 {
 	char *modname;
 
 	modname = xml_get_value("modules", "text");	//settings.MainWindowModule;
-	if (!strcmp(settings.Interlinear5Module, intmod)) {
-		settings.Interlinear5Module = modname;
+	if (!strcmp(settings.parallel5Module, intmod)) {
+		settings.parallel5Module = modname;
 	}
-	if (!strcmp(settings.Interlinear4Module, intmod)) {
-		settings.Interlinear4Module = modname;
+	if (!strcmp(settings.parallel4Module, intmod)) {
+		settings.parallel4Module = modname;
 	}
-	if (!strcmp(settings.Interlinear3Module, intmod)) {
-		settings.Interlinear3Module = modname;
+	if (!strcmp(settings.parallel3Module, intmod)) {
+		settings.parallel3Module = modname;
 	}
-	if (!strcmp(settings.Interlinear2Module, intmod)) {
-		settings.Interlinear2Module = modname;
+	if (!strcmp(settings.parallel2Module, intmod)) {
+		settings.parallel2Module = modname;
 	}
-	if (!strcmp(settings.Interlinear1Module, intmod)) {
-		settings.Interlinear1Module = modname;
+	if (!strcmp(settings.parallel1Module, intmod)) {
+		settings.parallel1Module = modname;
 	}
 	gui_change_module_and_key(intmod, settings.currentverse);
-	gui_update_interlinear_page();
+	gui_update_parallel_page();
 }
 
 
 /******************************************************************************
  * Name
- *   gui_set_interlinear_module_global_options
+ *   gui_set_parallel_module_global_options
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_set_interlinear_module_global_options(gchar *option, 
+ *   void gui_set_parallel_module_global_options(gchar *option, 
  *						gboolean choice)
  *
  * Description
@@ -968,7 +1009,7 @@ void gui_swap_interlinear_with_main(char *intmod)
  *   void
  */
 
-void gui_set_interlinear_module_global_options(gchar * option,
+void gui_set_parallel_module_global_options(gchar * option,
 					       gboolean choice)
 {
 	gchar *on_off;
@@ -1003,13 +1044,13 @@ void gui_set_interlinear_module_global_options(gchar * option,
 		settings.greekaccentsint = choice;
 	}
 
-	set_interlinear_global_option(option, on_off);
+	set_parallel_global_option(option, on_off);
 
 	/* display change */
 	if (settings.dockedInt) {
-		gui_update_interlinear_page();
+		gui_update_parallel_page();
 	} else {
-		gui_update_interlinear_page_detached();
+		gui_update_parallel_page_detached();
 	}
 }
 
@@ -1019,7 +1060,7 @@ void gui_set_interlinear_module_global_options(gchar * option,
  *   add_items_to_options_menu
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void add_items_to_options_menu(void)
  *
@@ -1044,7 +1085,7 @@ static void add_items_to_options_menu(void)
 	while (tmp != NULL) {
 		shellmenu = module_options_menu;
 
-		/* add global option items to interlinear popup menu */
+		/* add global option items to parallel popup menu */
 		menuChoice =
 		    gtk_check_menu_item_new_with_label((gchar *) tmp->
 						       data);
@@ -1053,7 +1094,7 @@ static void add_items_to_options_menu(void)
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
-				   G_CALLBACK
+				   GTK_SIGNAL_FUNC
 				   (on_int_global_options_activate),
 				   (gchar *) tmp->data);
 		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
@@ -1116,7 +1157,7 @@ static void add_items_to_options_menu(void)
  *   load_menu_formmod_list
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
  *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,  
  *			gchar *label, GtkMenuCallback mycallback)
@@ -1145,16 +1186,16 @@ static void load_menu_formmod_list(GtkWidget * pmInt, GList * mods,
 	view_module_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_module),
 				  view_module_menu);
-/*	view_module_menu_accels =
+	view_module_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (view_module_menu));*/
+					      (view_module_menu));
 	tmp = mods;
 	while (tmp != NULL) {
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   G_CALLBACK(mycallback),
+				   GTK_SIGNAL_FUNC(mycallback),
 				   g_strdup((gchar *) tmp->data));
 
 		gtk_container_add(GTK_CONTAINER(view_module_menu),
@@ -1167,21 +1208,21 @@ static void load_menu_formmod_list(GtkWidget * pmInt, GList * mods,
 
 /******************************************************************************
  * Name
- *   create_interlinear_popup
+ *   create_parallel_popup
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   GtkWidget * create_interlinear_popup(GList * mods)
+ *   GtkWidget * create_parallel_popup(GList * mods)
  *
  * Description
- *   create popup menu for interlinear window
+ *   create popup menu for parallel window
  *
  * Return value
  *   GtkWidget *
  */
 
-static GtkWidget *create_interlinear_popup(GList * mods)
+static GtkWidget *create_parallel_popup(GList * mods)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
@@ -1195,8 +1236,8 @@ static GtkWidget *create_interlinear_popup(GList * mods)
 	tooltips = gtk_tooltips_new();
 	pmInt = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmInt), "pmInt", pmInt);
-/*	pmInt_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));*/
+	pmInt_accels =
+	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));
 
 	copy7 = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_show(copy7);
@@ -1224,28 +1265,28 @@ static GtkWidget *create_interlinear_popup(GList * mods)
 	gtk_widget_show(separator2);
 	gtk_container_add(GTK_CONTAINER(pmInt), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
-	/* build change interlinear modules submenu */
-	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 1"),
+	/* build change parallel modules submenu */
+	load_menu_formmod_list(pmInt, mods, _("Change parallel 1"),
 			       (GtkMenuCallback)
 			       on_changeint1mod_activate);
-	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 2"),
+	load_menu_formmod_list(pmInt, mods, _("Change parallel 2"),
 			       (GtkMenuCallback)
 			       on_changeint2mod_activate);
-	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 3"),
+	load_menu_formmod_list(pmInt, mods, _("Change parallel 3"),
 			       (GtkMenuCallback)
 			       on_changeint3mod_activate);
-	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 4"),
+	load_menu_formmod_list(pmInt, mods, _("Change parallel 4"),
 			       (GtkMenuCallback)
 			       on_changeint4mod_activate);
-	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 5"),
+	load_menu_formmod_list(pmInt, mods, _("Change parallel 5"),
 			       (GtkMenuCallback)
 			       on_changeint5mod_activate);
 
 	gtk_signal_connect(GTK_OBJECT(copy7), "activate",
-			   G_CALLBACK(gui_copyhtml_activate),
+			   GTK_SIGNAL_FUNC(gui_copyhtml_activate),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(undockInt), "activate",
-			   G_CALLBACK(on_undockInt_activate),
+			   GTK_SIGNAL_FUNC(on_undockInt_activate),
 			   &settings);
 
 	return pmInt;
@@ -1254,28 +1295,28 @@ static GtkWidget *create_interlinear_popup(GList * mods)
 
 /******************************************************************************
  * Name
- *   gui_create_interlinear_popup
+ *   gui_create_parallel_popup
  *
  * Synopsis
- *   #include "gui/interlinear.h
+ *   #include "gui/parallel.h
  *
- *   void gui_create_interlinear_popup(GList *bible_description) 
+ *   void gui_create_parallel_popup(GList *bible_description) 
  *
  * Description
- *   call create_interlinear_popup() and attach menu to int html widget
+ *   call create_parallel_popup() and attach menu to int html widget
  *
  * Return value
  *   void
  */
 
-void gui_create_interlinear_popup(GList * bible_description)
+void gui_create_parallel_popup(GList * bible_description)
 {
-	/* create popup menu for interlinear window */
+	/* create popup menu for parallel window */
 	GtkWidget *menu_inter =
-	    create_interlinear_popup(bible_description);
+	    create_parallel_popup(bible_description);
 	/* attach popup menus */
 	gnome_popup_menu_attach(menu_inter,
-				widgets.html_interlinear,
+				widgets.html_parallel,
 				(gchar *) "1");
 	add_items_to_options_menu();
 }

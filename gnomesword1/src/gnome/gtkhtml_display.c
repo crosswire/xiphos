@@ -1024,7 +1024,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
 
 	sprintf(buf, "%s", HTML_START "<body><br>");
-	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(utf8str);
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
@@ -1037,7 +1037,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 			"<b>",
 			mod_name, "</b>", _("module is locked."));
 		utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
+		    e_utf8_from_gtk_string(widgets.html_parallel,
 					   buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
@@ -1053,7 +1053,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 			mod_name,
 			"</b>", _("module has been unlocked."));
 		utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
+		    e_utf8_from_gtk_string(widgets.html_parallel,
 					   buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
@@ -1075,7 +1075,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 			_("click here"),
 			" </a>", _("to unlock the module"));
 		utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
+		    e_utf8_from_gtk_string(widgets.html_parallel,
 					   buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
@@ -1089,7 +1089,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 			("You will have to restart GnomeSword after you unlock it."));
 
 		utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
+		    e_utf8_from_gtk_string(widgets.html_parallel,
 					   buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
@@ -1103,7 +1103,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 			"<br><br>",
 			_("You need to restart GnomeSword to view it"));
 		utf8str =
-		    e_utf8_from_gtk_string(widgets.html_interlinear,
+		    e_utf8_from_gtk_string(widgets.html_parallel,
 					   buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {

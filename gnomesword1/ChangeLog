@@ -104,7 +104,7 @@
 2003-03-27  Terry <tbiggs@users.sf.net>
 
 	* removed backend/shortcutbar.*
-	* removed backend/interlinear.*
+	* removed backend/parallel.*
 	
 
 2003-03-13  Terry <tbiggs@users.sf.net>
@@ -286,7 +286,7 @@
 2002-08-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed one module and settings set to first module crash
-	* fixed crash when interlinear module was not available	
+	* fixed crash when parallel module was not available	
 	
 
 2002-08-09  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -402,8 +402,8 @@
 
 	* renamed gui/_percomm.h to gui/percomm.h
 	* renamed gnome/_percomm.c to gnome/percomm.c
-	* moved main/gs_interlinear.c to gnome/interlinear.c
-	* moved main/gs_interlinear.h to gui/interlinear.h
+	* moved main/gs_parallel.c to gnome/parallel.c
+	* moved main/gs_parallel.h to gui/parallel.h
 	* moved main/gs_gui.c to gnome/main_window.c
 	* moved main/gs_gui.h to gui/main_window.h
 
@@ -462,12 +462,12 @@
 	* fixed src/main/commentary.c: crashed displaying the commentary
 	when no commentary
 
-	* fixed src/main/gs_interlinear.c: again works when not all
-	interlinear modules are present
+	* fixed src/main/gs_parallel.c: again works when not all
+	parallel modules are present
 
 2002-06-06  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added frame label to docked interlinear and studypad to
+	* added frame label to docked parallel and studypad to
 	  give a more uniform look.
 	
 
@@ -530,7 +530,7 @@
 
 2002-05-11  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* moved main/gs_detach_int.* to gnome/interlinear_dialog.*
+	* moved main/gs_detach_int.* to gnome/parallel_dialog.*
 	
 
 2002-05-10  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -657,8 +657,8 @@
 
 2002-04-01  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* fixed detach interlinear crash when Main Text module
-	  is duplicated in interlinear.
+	* fixed detach parallel crash when Main Text module
+	  is duplicated in parallel.
 	* added use default dictionary choice to preferences dialog
 	  for left clicking on a word.
 
@@ -670,7 +670,7 @@
 	  preferences dialog.
 	* added choice for viewer lex modules - you can now view one 
 	  module in the viewer and another in the Dict/Lex pane.
-	* hopefully fixed the detach interlinear crash.
+	* hopefully fixed the detach parallel crash.
 
 2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -696,7 +696,7 @@
 
 2002-03-26 Victor Porton <porton@narod.ru>
 
-	* fixed crash if an interlinear module is NULL
+	* fixed crash if an parallel module is NULL
 
 2002-03-21 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -709,7 +709,7 @@
 
 	* adding a new bookmark group now adds a menu item to
 	  the add bookmark menus.
-	* fixed the detached interlinear not changing modules bug
+	* fixed the detached parallel not changing modules bug
 	* setup druid now shows correct gnomesword version number
 	* notebook tab menus now display last item correctly.
 	* added find dialog that can be used outside of html editor
@@ -723,7 +723,7 @@
 2002-03-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added notebook to lower pane area (lex/dict).
-	* added Dict/Lex, GBS and Interlinear page to notebook
+	* added Dict/Lex, GBS and parallel page to notebook
 	* removed gs_gbs.* - all gbs code is in sw_gbs.*
 	* removed editor functions from gbs - will add back later.
 
@@ -750,7 +750,7 @@
 
 2002-02-15 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* made interlinear page undockable
+	* made parallel page undockable
 	* when int page is undocked it displays a chapter at 
 	 a time with the mods side by side in an html table 
 	 like BibleTime.
@@ -771,7 +771,7 @@
 
 	* added some GBS support
 	* added book viewer to main notebook w/ commentaries, note editor,
-	  Interlinear page and studypad.
+	  parallel page and studypad.
 	* added book ctree to shortcutbar
 
 
@@ -883,7 +883,7 @@
 2001-09-10 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*  fixed bug that cause gs to crash when selecting text
-	   in interlinear page
+	   in parallel page
 	
 
 2001-09-04 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -935,7 +935,7 @@
 	* fix gconf_init bug
 	* fix to work with gal-0.10.99.2 and under to 0.4.99
 	* view text dialog is now resizeable
-	* interlinear verses are now in an html table 
+	* parallel verses are now in an html table 
 
 
 2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -954,7 +954,7 @@
 	   and sw_gnomesword.h
 	* added files sw_viewcomm_dlg.cpp, sw_viewcomm_dlg.h, sw_viewdict_dlg.cpp,
 	   and sw_viewdict_dlg.h
-	* Strongs and footnotes settings for the interlinear window are now saved 
+	* Strongs and footnotes settings for the parallel window are now saved 
 	   and used on program start.
 
 
@@ -1012,9 +1012,9 @@
 
 2001-07-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added [view context] link to each interlinear verse that will swap 
+	* added [view context] link to each parallel verse that will swap 
 	 it with the module in the main window. 
-	* added Strongs, Footnotes and Morph Tags to interlinear popup menu.
+	* added Strongs, Footnotes and Morph Tags to parallel popup menu.
 
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -1068,8 +1068,8 @@
 
 	* release 0.4.1
 	* added include for stricmp <>
-	* fixed view/interlinear menu bug - caused segfault and crash.
-	* add 4th and 5th view/interlinear menus
+	* fixed view/parallel menu bug - caused segfault and crash.
+	* add 4th and 5th view/parallel menus
 
 
 2001-04-05 Terry Biggs <tbiggs@users.sourceforge.net>
@@ -1116,7 +1116,7 @@
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added html window for dict/lex modules
-	* changed the html interlinear window to a single window that will
+	* changed the html parallel window to a single window that will
 	  display five Bible text modules
 		
 	

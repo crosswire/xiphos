@@ -42,10 +42,10 @@
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/percomm.h"
-#include "gui/interlinear.h"
+#include "gui/parallel.h"
 #include "gui/bookmarks.h"
 #include "gui/studypad.h"
-#include "gui/interlinear.h"
+#include "gui/parallel_view.h"
 #include "gui/dialog.h"
 #include "gui/hints.h"
 #include "gui/widgets.h"
@@ -91,11 +91,11 @@ void frontend_init(void)
 	gui_setup_shortcut_bar();
 
 	/*
-	 *  interlinear stuff 
+	 *  parallel stuff 
 	 */
-	gui_check_interlinear_modules();
-	gui_set_interlinear_options_at_start();
-	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
+	gui_check_parallel_modules();
+	gui_set_parallel_options_at_start();
+	gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 
 	/*
 	 *  setup commentary gui support 

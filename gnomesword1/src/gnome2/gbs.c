@@ -348,6 +348,7 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 	gbs->offset = strtoul(offset, NULL, 0);
 	
 	change_book(bookname, gbs->offset);
+	settings.book_key = gbs_get_treekey_local_name(gbs->offset);
 	
 	if (tree_level >= 1) {		
 		/** fill ctree node with children **/

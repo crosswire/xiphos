@@ -222,7 +222,7 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	/*
 	   settings.autosavepersonalcomments =
 	   GTK_TOGGLE_BUTTON(widgets.checkbutton1)->active;
-	   settings.interlinearpage =
+	   settings.parallelpage =
 	   GTK_TOGGLE_BUTTON(widgets.checkbutton3)->active;
 	 */
 }
@@ -847,21 +847,21 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	widgets.combo_entry_comm = GTK_COMBO(combo_comm)->entry;
 	gtk_widget_show(widgets.combo_entry_comm);
 
-	label139 = gtk_label_new(_("Interlinear 5"));
+	label139 = gtk_label_new(_("parallel 5"));
 	gtk_widget_show(label139);
 	gtk_table_attach(GTK_TABLE(table7), label139, 0, 1, 5, 6,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label139), 0, 0.5);
 
-	label138 = gtk_label_new(_("Interlinear 4"));
+	label138 = gtk_label_new(_("parallel 4"));
 	gtk_widget_show(label138);
 	gtk_table_attach(GTK_TABLE(table7), label138, 0, 1, 4, 5,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label138), 0, 0.5);
 
-	label107 = gtk_label_new(_("Interlinear 3"));
+	label107 = gtk_label_new(_("parallel 3"));
 	gtk_widget_show(label107);
 	gtk_table_attach(GTK_TABLE(table7), label107, 0, 1, 3, 4,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -870,7 +870,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_misc_set_alignment(GTK_MISC(label107), 7.45058e-09,
 			       7.45058e-09);
 
-	label106 = gtk_label_new(_("Interlinear 2"));
+	label106 = gtk_label_new(_("parallel 2"));
 	gtk_widget_show(label106);
 	gtk_table_attach(GTK_TABLE(table7), label106, 0, 1, 2, 3,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -879,7 +879,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_misc_set_alignment(GTK_MISC(label106), 7.45058e-09,
 			       7.45058e-09);
 
-	label105 = gtk_label_new(_("Interlinear 1"));
+	label105 = gtk_label_new(_("parallel 1"));
 	gtk_widget_show(label105);
 	gtk_table_attach(GTK_TABLE(table7), label105, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
