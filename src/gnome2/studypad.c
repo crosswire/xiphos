@@ -76,6 +76,7 @@ void gui_studypad_can_close(void)
 	
 	if (settings.modifiedSP) {
 		info = gui_new_dialog();
+		info->title = N_("Save File?");
 		if (settings.studypadfilename)
 			info->label_top = settings.studypadfilename;
 		else
