@@ -61,9 +61,10 @@
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
+#include "gs_info_box.h"
 
 #include "sw_utility.h"
-
+#include "sw_properties.h"
 
 /***********************************************************************************************
 Sword global to this file
@@ -465,6 +466,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 
         sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	writesettings(myset); //-- save setting (myset structure) to use when we start back up
+	saveconfig();
 	if(file_changed){ //-- if study pad file has changed since last save		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
 		msgbox = create_InfoBox();
@@ -896,6 +898,8 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
     		*label;     //-- pointer to label in dialog
 	char 	*buf,       //-- pointer to text buffer for label (mod name)
  		*bufabout;  //-- pointer to text buffer for text widget (mod about)
+	GString *string;
+	
         ModMap::iterator it; //-- module iterator
 	SectionMap::iterator sit; //--
 	ConfigEntMap::iterator cit; //--
@@ -907,7 +911,7 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	        if (sit !=mainMgr->config->Sections.end()){
 	                cit = (*sit).second.find("About");
 			if (cit != (*sit).second.end()) 				
-				bufabout = (char *)(*cit).second.c_str(); //-- get module about information
+				string = g_string_new((char *)(*cit).second.c_str()); //-- get module about information
 				//cout << bufabout << '\n';
 	        }
 	}
@@ -915,9 +919,13 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
 	label = lookup_widget(aboutbox,"lbModName");    //-- get label
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
-	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to TRUE for text widget
-	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
-	gtk_widget_show(aboutbox); //-- show the about dialog   	
+	//gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to TRUE for text widget
+	AboutModsDisplayHTML(string) ; //-- send about info and text widget to display function (display.cpp)
+	beginHTML(text, FALSE);
+	displayHTML(text, string->str,string->len);
+	endHTML(text);
+	gtk_widget_show(aboutbox); //-- show the about dialog   
+	if(string->str != NULL) g_string_free(string,FALSE);
 }
 
 

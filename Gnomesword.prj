@@ -119,7 +119,11 @@ module.source.files=\
 	gs_viewtext_dlg.c\
 	gs_viewtext_dlg.h\
 	gs_viewtext_sw.cpp\
-	gs_viewtext_sw.h
+	gs_viewtext_sw.h\
+	gs_info_box.c\
+	gs_info_box.h\
+	sw_properties.cpp\
+	sw_properties.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
