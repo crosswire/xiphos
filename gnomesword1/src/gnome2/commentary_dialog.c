@@ -374,7 +374,8 @@ static gboolean html_key_press_event(GtkWidget * widget,
 	
 }
 
-void html_cursor_move(GtkHTML *html, GtkDirectionType dir_type, GtkHTMLCursorSkipType skip)
+void html_cursor_move(GtkHTML *html, GtkDirectionType dir_type, 
+				     GtkHTMLCursorSkipType skip)
 {
 	g_warning("html_cursor_move");
 }
@@ -1026,6 +1027,42 @@ void gui_keep_comm_dialog_in_sync(gchar * key)
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+
+static void set_new_globals(GLOBAL_OPS * ops)
+{	
+	ops->module_type = 1;
+	ops->words_in_red = TRUE;
+	ops->strongs = TRUE;
+	ops->morphs = TRUE;
+	ops->footnotes = TRUE;
+	ops->greekaccents = TRUE;
+	ops->lemmas = TRUE;
+	ops->scripturerefs = TRUE;
+	ops->hebrewpoints = TRUE;
+	ops->hebrewcant = TRUE;
+	ops->headings = TRUE;
+	ops->variants_all = TRUE;
+	ops->variants_primary = TRUE;
+	ops->variants_secondary = TRUE;
+}
+
+
+
+/******************************************************************************
+ * Name
  *   gui_open_commentary_dialog
  *
  * Synopsis
@@ -1049,7 +1086,8 @@ void gui_open_commentary_dialog(gchar * mod_name)
 	vc = g_new0(COMM_DATA, 1);
 
 	vc = g_new0(COMM_DATA, 1);
-	vc->cgs = g_new0(COMM_GLOBALS, 1);
+	vc->ops = gui_new_globals();
+	set_new_globals(vc->ops);
 	vc->ec = NULL;
 	vc->dialog = NULL;
 	vc->mod_name = g_strdup(mod_name);
@@ -1112,7 +1150,8 @@ void gui_open_commentary_editor(gchar * mod_name)
 	}
 
 	vc = g_new0(COMM_DATA, 1);
-	vc->cgs = g_new0(COMM_GLOBALS, 1);
+	vc->ops = gui_new_globals();
+	set_new_globals(vc->ops);
 	vc->ec = gs_html_editor_control_data_new();
 	vc->dialog = NULL;
 	vc->is_dialog = TRUE;
@@ -1191,8 +1230,7 @@ void gui_shutdown_commentary_dialog(void)
 		COMM_DATA *vc = (COMM_DATA *) dialog_list->data;
 		dialog_freed = TRUE;
 		if (vc->ec)
-			gui_html_editor_control_data_destroy(NULL,
-							     vc->ec);
+			gui_html_editor_control_data_destroy(NULL, vc->ec);
 		/* 
 		 *  destroy any dialogs created 
 		 */
@@ -1202,7 +1240,7 @@ void gui_shutdown_commentary_dialog(void)
 		 * free each COMM_DATA item created 
 		 */
 		g_free(vc->mod_name);
-		g_free(vc->cgs);
+		g_free(vc->ops);
 		g_free(vc);
 		dialog_list = g_list_next(dialog_list);
 	}

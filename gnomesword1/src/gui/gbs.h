@@ -24,24 +24,6 @@
 
 #include "gui/mod_global_ops.h"
 
-typedef struct _gbs_global_ops GBS_GLOBALS;
-struct  _gbs_global_ops {
-	gboolean
-	    words_in_red,
-	    strongs,
-	    morphs,
-	    footnotes,
-	    greekaccents,
-	    lemmas,
-	    scripturerefs,
-	    hebrewpoints, 
-	    hebrewcant, 
-	    headings, 
-	    variants_all, 
-	    variants_primary, 
-	    variants_secondary;
-};
-
 typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
 	GtkWidget *dialog;
@@ -64,10 +46,11 @@ struct _gbsdata {
 	
 	gboolean has_key;
 	gboolean is_locked;
+	gboolean is_leaf;
 	gboolean is_dialog;
 	gboolean is_rtol;
 	
-	GLOBAL_OPS *bgo;
+	GLOBAL_OPS *ops;
 };
 
 typedef struct _nodedata NODEDATA;
