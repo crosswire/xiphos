@@ -212,6 +212,8 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *book = NULL;
 	gchar *buf = NULL;
 	GtkTreeIter iter;
+	GSHTMLEditorControlData *ec
+	    = (GSHTMLEditorControlData *) c->editor;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
 	if (!do_display)
@@ -229,6 +231,11 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	main_navbar_set(c->navbar, buf);
 	g_free(url);
 	g_free(book);
+	if (ec) {
+		if (ec->key)
+			g_free(ec->key);
+		ec->key = g_strdup_printf("%s", buf);
+	}
 	g_free(buf);
 }
 
@@ -241,6 +248,8 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *buf = NULL;
 	GtkTreeIter iter;
 
+	GSHTMLEditorControlData *ec
+	    = (GSHTMLEditorControlData *) c->editor;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	GtkTreeModel *book_model =
 	    gtk_combo_box_get_model(GTK_COMBO_BOX
@@ -271,6 +280,11 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	g_free(url);
 	g_free(book);
 	g_free(chapter);
+	if (ec) {
+		if (ec->key)
+			g_free(ec->key);
+		ec->key = g_strdup_printf("%s", buf);
+	}
 	g_free(buf);
 }
 
@@ -284,6 +298,8 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *buf = NULL;
 	GtkTreeIter iter;
 
+	GSHTMLEditorControlData *ec
+	    = (GSHTMLEditorControlData *) c->editor;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	GtkTreeModel *book_model =
 	    gtk_combo_box_get_model(GTK_COMBO_BOX
@@ -323,6 +339,11 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	g_free(book);
 	g_free(chapter);
 	g_free(verse);
+	if (ec) {
+		if (ec->key)
+			g_free(ec->key);
+		ec->key = g_strdup_printf("%s", buf);
+	}
 	g_free(buf);
 }
 
@@ -355,7 +376,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
 	main_navbar_set(c->navbar, c->navbar.key);
-
+	
 	if (!ec)
 		return;
 	if (ec->key)

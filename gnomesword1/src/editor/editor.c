@@ -95,6 +95,7 @@ GSHTMLEditorControlData *editor_control_data_new(GtkHTML * html, GtkWidget * vbo
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
+	necd->format_html = TRUE;
 	necd->be = NULL;
 	//necd->icon_theme              = gnome_icon_theme_new ();
 	

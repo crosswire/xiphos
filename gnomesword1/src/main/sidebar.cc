@@ -462,13 +462,28 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	VerseKey key;
 	gint j = 0;
 	GtkTreeIter child_iter;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
+	gchar *buf = NULL;
 	
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
 	if (backend->module_has_testament(mod_name, 1)) {		
 		//tmp = get_list(BOOKS_LIST);
 		while(j < key.BMAX[0]) {
-			gchar *buf = (gchar *) key.books[0][j].name;
+			buf = g_convert((const char *)key.books[0][j].name,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     &error);
+			if(buf == NULL) {
+				g_print ("error: %s\n", error->message);
+				g_error_free (error);
+				continue;
+			}//(gchar *) key.books[0][j].name;
 			gchar *key =
 			    g_strdup_printf("book://%s/%s 1:1",
 					    mod_name, buf);
@@ -485,13 +500,25 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 					   COL_OFFSET, (gchar *) key,
 					   -1);
 			g_free(key);
+			g_free(buf);
 			++j;
 		}
 	}
 	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
 		while(j < key.BMAX[1]) {
-			gchar *buf = (gchar *) key.books[1][j].name;
+			buf = g_convert((const char *)key.books[1][j].name,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     &error);
+			if(buf == NULL) {
+				g_print ("error: %s\n", error->message);
+				g_error_free (error);
+				continue;
+			}//(gchar *) key.books[1][j].name;
 			gchar *key =
 			    g_strdup_printf("book://%s/%s 1:1",
 					    mod_name, buf);
@@ -508,6 +535,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 					   COL_OFFSET, (gchar *) key,
 					   -1);
 			g_free(key);
+			g_free(buf);
 			++j;
 		}
 	}
