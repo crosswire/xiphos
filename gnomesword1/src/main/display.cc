@@ -119,6 +119,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;
+	//gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean was_editable = gtk_html_get_editable(html);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
@@ -128,6 +129,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color);
+	//if(is_rtol) 
+	//	str = g_string_append(str,"<DIV ALIGN=right>");			
+	
+
 
 	main_set_global_options(ops);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
@@ -204,9 +209,12 @@ char GTKChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 		g_free(buf2);
 	}
-	buf = g_strdup_printf("%s", "</body></html>");
-	str = g_string_append(str, buf);
-	g_free(buf);
+	//if(is_rtol) 
+	//	str = g_string_append(str,"</DIV>");
+		
+	//buf = g_strdup_printf("%s", "</body></html>");
+	str = g_string_append(str, "</body></html>");
+	//g_free(buf);
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}

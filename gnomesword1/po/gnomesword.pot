@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 16:14-0400\n"
+"POT-Creation-Date: 2004-07-13 15:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,53 +48,53 @@ msgstr ""
 msgid "Number of Devotion modules"
 msgstr ""
 
-#: src/main/sidebar.cc:355
+#: src/main/sidebar.cc:356
 msgid "verse"
 msgstr ""
 
-#: src/main/sidebar.cc:415
+#: src/main/sidebar.cc:416
 msgid "chapter"
 msgstr ""
 
 #.
 #. * parallel page
 #.
-#: src/main/sidebar.cc:543 src/main/sidebar.cc:790 src/main/sidebar.cc:791
-#: src/main/sidebar.cc:792 src/gnome2/parallel_dialog.c:133
+#: src/main/sidebar.cc:544 src/main/sidebar.cc:791 src/main/sidebar.cc:792
+#: src/main/sidebar.cc:793 src/gnome2/parallel_dialog.c:133
 #: src/gnome2/parallel_dialog.c:135 src/gnome2/parallel_view.c:365
 #: src/gnome2/parallel_view.c:390 src/gnome2/sidebar.c:642
 #: src/gnome2/sidebar.c:651 src/gnome2/utilities.c:177
 msgid "Parallel View"
 msgstr ""
 
-#: src/main/sidebar.cc:549 src/main/sidebar.cc:798 src/main/sidebar.cc:799
-#: src/main/sidebar.cc:800
+#: src/main/sidebar.cc:550 src/main/sidebar.cc:799 src/main/sidebar.cc:800
+#: src/main/sidebar.cc:801
 msgid "Standard View"
 msgstr ""
 
-#: src/main/sidebar.cc:555 src/main/sidebar.cc:827 src/main/sidebar.cc:829
+#: src/main/sidebar.cc:556 src/main/sidebar.cc:828 src/main/sidebar.cc:830
 #: src/gnome2/mod_mgr.c:614 src/gnome2/preferences_dialog.c:1739
 #: src/gnome2/utilities.c:199
 msgid "Commentaries"
 msgstr ""
 
-#: src/main/sidebar.cc:564 src/main/sidebar.cc:884 src/main/sidebar.cc:886
+#: src/main/sidebar.cc:565 src/main/sidebar.cc:885 src/main/sidebar.cc:887
 #: src/gnome2/mod_mgr.c:624 src/gnome2/utilities.c:242
 msgid "General Books"
 msgstr ""
 
-#: src/main/sidebar.cc:666 src/main/sidebar.cc:718 src/gnome2/mod_mgr.c:445
+#: src/main/sidebar.cc:667 src/main/sidebar.cc:719 src/gnome2/mod_mgr.c:445
 #: src/gnome2/mod_mgr.c:513 src/gnome2/utilities.c:69
 #: src/gnome2/utilities.c:119
 msgid "Unknown"
 msgstr ""
 
-#: src/main/sidebar.cc:782 src/main/sidebar.cc:784 src/gnome2/mod_mgr.c:610
+#: src/main/sidebar.cc:783 src/main/sidebar.cc:785 src/gnome2/mod_mgr.c:610
 #: src/gnome2/utilities.c:171
 msgid "Biblical Texts"
 msgstr ""
 
-#: src/main/sidebar.cc:855 src/main/sidebar.cc:857 src/gnome2/mod_mgr.c:619
+#: src/main/sidebar.cc:856 src/main/sidebar.cc:858 src/gnome2/mod_mgr.c:619
 #: src/gnome2/utilities.c:220
 msgid "Dictionaries"
 msgstr ""
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Variants"
 msgstr ""
 
-#: src/gnome2/bibletext.c:943 src/gnome2/bibletext.c:1056
+#: src/gnome2/bibletext.c:943 src/gnome2/bibletext.c:1057
 #: src/gnome2/bibletext_dialog.c:1833 src/gnome2/bibletext_dialog.c:1942
 #: src/gnome2/commentary.c:687 src/gnome2/commentary.c:806
 #: src/gnome2/commentary_dialog.c:1515 src/gnome2/commentary_dialog.c:1619
@@ -807,11 +807,11 @@ msgstr ""
 msgid "Do you wish to set preferences now?"
 msgstr ""
 
-#: src/gnome2/gnomesword.c:219
+#: src/gnome2/gnomesword.c:220
 msgid "done"
 msgstr ""
 
-#: src/gnome2/gnomesword.c:281
+#: src/gnome2/gnomesword.c:282
 msgid "GnomeSword is shutdown"
 msgstr ""
 
@@ -1455,7 +1455,7 @@ msgstr ""
 
 #: src/gnome2/preferences_dialog.c:1007 src/gnome2/search_dialog.c:1375
 #: src/gnome2/search_dialog.c:2037 src/gnome2/sidebar.c:208
-#: src/gnome2/sidebar.c:1409
+#: src/gnome2/sidebar.c:1470
 msgid "Modules"
 msgstr ""
 
@@ -2172,23 +2172,23 @@ msgstr ""
 msgid "View information about the selected dialog"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1260
+#: src/gnome2/sidebar.c:1321
 msgid "_Modules"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1268
+#: src/gnome2/sidebar.c:1329
 msgid "_Bookmarks"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1276
+#: src/gnome2/sidebar.c:1337
 msgid "_Search"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1285
+#: src/gnome2/sidebar.c:1346
 msgid "Verse _List"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1295
+#: src/gnome2/sidebar.c:1356
 msgid "_Viewer"
 msgstr ""
 

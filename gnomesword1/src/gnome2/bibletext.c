@@ -993,7 +993,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_show_tabs_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
+	 0, (GdkModifierType) 0, NULL},	
 	GNOMEUIINFO_END
 };
 
@@ -1003,6 +1003,7 @@ static void create_menu(GdkEventButton * event)
 	GtkWidget *lookup_selection_menu;
 	GtkWidget *usecurrent;
 	GtkWidget *view_menu;
+	GtkWidget *bookmark_menu;
 	GtkWidget *separator;
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
