@@ -32,8 +32,8 @@ extern "C" {
 typedef struct _percomm_data PC_DATA;
 struct _percomm_data {
 	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *showtabs;
+	//GtkWidget *frame;
+	//GtkWidget *showtabs;
 	gchar *mod_name;
 	gchar *mod_description;
 	gchar *search_string;
@@ -47,6 +47,7 @@ void editor_save_note(GtkWidget * html_widget);
 void save_percomm_note(gchar *note);
 void delete_percomm_note(void);
 void percomm_page_changed(gint page_num, PC_DATA * p);
+void tabs(gboolean choice);
 void set_percomm_page_and_key(gint page_num, gchar * key);
 void display_percomm(gchar * key);
 void setup_percomm(SETTINGS * s, GList *mods);

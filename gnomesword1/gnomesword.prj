@@ -206,7 +206,6 @@ module.source.files=\
 	src/main/gs_html.c\
 	src/main/gs_info_box.c\
 	src/main/gs_information_dlg.c\
-	src/main/gs_mainmenu_cb.c\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/gs_preferences_dlg.c\
