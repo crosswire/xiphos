@@ -37,34 +37,28 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
-
-/******************************************************************************
- * externs
- */
-extern gint groupnum4;
 
 /******************************************************************************
  * global
  */
-HISTORY historylist[25];
-gint historyitems = 0;
+HISTORY history_list[25];
+gint history_items = 0;
 
 /******************************************************************************
  * static 
  */
-static gint currenthistoryitem = 0;
-static gboolean firstbackclick = TRUE;
+static gint current_history_item = 0;
+static gboolean first_back_click = TRUE;
 
 
 /******************************************************************************
  * Name
- *  clearhistory
+ *  gui_clear_history
  *
  * Synopsis
  *   #include "gui/history.h"
  *
- *   void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)	
+ *   void gui_clear_history(GtkWidget * app, GtkWidget * shortcut_bar)	
  *
  * Description
  *    
@@ -73,160 +67,20 @@ static gboolean firstbackclick = TRUE;
  *   void
  */
 
-void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)
+void gui_clear_history(GtkWidget * app, GtkWidget * shortcut_bar)
 {
 	gint i;
 
 	gui_remove_menu_items(_("_History/<Separator>"),
-			      historyitems + 1);
+			      history_items + 1);
 	gui_add_separator2menu(app, _("_History/C_lear"));
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-	historyitems = 0;
-	currenthistoryitem = 0;
-	firstbackclick = TRUE;
-}
-
-
-/******************************************************************************
- * Name
- *  addHistoryItem
- *
- * Synopsis
- *   #include "gui/history.h"
- *
- *   void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
- *		    gchar * ref)	
- *
- * Description
- *    add an item to the history menu
- *
- * Return value
- *   void
- */
-
-void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref)
-{
-	gint i;
-
-	/* check to see if item is already in list  
-	   if so do nothing */
-	for (i = 0; i < historyitems; i++) {
-		if (!strcmp(historylist[i].verseref, ref))
-			return;
-	}
-	/* add item to history menu */
-	if (historyitems >= 24) {
-		for (i = 0; i < 24; i++) {
-			historylist[i] = historylist[i + 1];
-		}
-		historyitems = 23;
-	}
-	historylist[historyitems].itemnum = historyitems;
-	historylist[historyitems].compagenum =
-	    gtk_notebook_get_current_page(GTK_NOTEBOOK
-					  (widgets.notebook_comm));
-	sprintf(historylist[historyitems].verseref, "%s", ref);
-	sprintf(historylist[historyitems].textmod, "%s",
-		xml_get_value("modules", "bible"));
-	sprintf(historylist[historyitems].commod, "%s",
-		xml_get_value("modules", "comm"));
-
-	++historyitems;
-	currenthistoryitem = historyitems;
-	/* set sensitivity of history buttons */
-	if (currenthistoryitem > 1)
-		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
-	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-	updatehistorymenu(app);
-	firstbackclick = TRUE;
-}
-
-
-/******************************************************************************
- * Name
- *  changeverseHistory
- *
- * Synopsis
- *   #include "gui/history.h"
- *
- *   void changeverseHistory(gint historynum)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-void changeverseHistory(gint historynum)
-{
-	currenthistoryitem = historynum;
-	if (firstbackclick) {
-		settings.addhistoryitem = TRUE;
-	} else {
-		settings.addhistoryitem = FALSE;
-	}
-	/* change text mod */
-	gui_change_module_and_key(historylist[historynum].textmod,
-				  historylist[historynum].verseref);
-	/* change commentary mod */
-	gui_change_module_and_key(historylist[historynum].commod,
-				  historylist[historynum].verseref);
-}
-
-
-/******************************************************************************
- * Name
- *  historynav
- *
- * Synopsis
- *   #include "gui/history.h"
- *
- *   void historynav(GtkWidget * app, gint direction)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-void historynav(GtkWidget * app, gint direction)
-{
-	settings.addhistoryitem = FALSE;
-	if (direction) {
-		if (currenthistoryitem < historyitems - 1) {
-			++currenthistoryitem;
-			changeverseHistory(currenthistoryitem);
-		}
-		/* set sensitivity of history buttons */
-		if (currenthistoryitem >= historyitems - 1)
-			gtk_widget_set_sensitive(nav_bar.button_forward,
-						 FALSE);
-		if (currenthistoryitem >= 0)
-			gtk_widget_set_sensitive(nav_bar.button_back,
-						 TRUE);
-	} else {
-		if (currenthistoryitem > 0) {
-			--currenthistoryitem;
-			if (firstbackclick)
-				--currenthistoryitem;
-			
-			changeverseHistory(currenthistoryitem);
-			firstbackclick = FALSE;
-		}
-		/* set sensitivity of history buttons */
-		if (currenthistoryitem < 1)
-			gtk_widget_set_sensitive(nav_bar.button_back,
-						 FALSE);
-		if (currenthistoryitem < historyitems)
-			gtk_widget_set_sensitive(nav_bar.button_forward,
-						 TRUE);
-	}
-	settings.addhistoryitem = TRUE;
-	
+	history_items = 0;
+	current_history_item = 0;
+	first_back_click = TRUE;
+	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
 }
 
 
@@ -237,7 +91,7 @@ void historynav(GtkWidget * app, gint direction)
  * Synopsis
  *   #include "gui/history.h"
  *
- *   void updatehistorymenu(GtkWidget * app)	
+ *   void update_history_menu(GtkWidget * app)	
  *
  * Description
  *    
@@ -246,22 +100,22 @@ void historynav(GtkWidget * app, gint direction)
  *   void
  */
 
-void updatehistorymenu(GtkWidget * app)
+static void update_history_menu(GtkWidget * app)
 {
 	gint i;
 	gchar buf[80];
 	GnomeUIInfo *menuitem;
 	
 	gui_remove_menu_items(_("_History/<Separator>"),
-			      historyitems + 1);
+			      history_items + 1);
 	gui_add_separator2menu(app, _("_History/C_lear"));
 	
-	for (i = 0; i < historyitems; i++) {
+	for (i = 0; i < history_items; i++) {
 		menuitem = g_new(GnomeUIInfo, 2);
 		menuitem->type = GNOME_APP_UI_ITEM;
 		menuitem->moreinfo = (gpointer) on_mnuHistoryitem1_activate;
-		menuitem->user_data = GINT_TO_POINTER(historylist[i].itemnum);
-		menuitem->label = historylist[i].verseref;
+		menuitem->user_data = GINT_TO_POINTER(history_list[i].itemnum);
+		menuitem->label = history_list[i].verseref;
 		menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
 		menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
 		menuitem->accelerator_key = 0;
@@ -270,4 +124,144 @@ void updatehistorymenu(GtkWidget * app)
 						_("_History/<Separator>"),
 						menuitem, NULL);
 	}
+}
+
+/******************************************************************************
+ * Name
+ *  gui_add_history_Item
+ *
+ * Synopsis
+ *   #include "gui/history.h"
+ *
+ *   void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar,
+ *		    gchar * ref)	
+ *
+ * Description
+ *    add an item to the history menu
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref)
+{
+	gint i;
+
+	/* check to see if item is already in list  
+	   if so do nothing */
+	for (i = 0; i < history_items; i++) {
+		if (!strcmp(history_list[i].verseref, ref))
+			return;
+	}
+	/* add item to history menu */
+	if (history_items >= 24) {
+		for (i = 0; i < 24; i++) {
+			history_list[i] = history_list[i + 1];
+		}
+		history_items = 23;
+	}
+	history_list[history_items].itemnum = history_items;
+	history_list[history_items].compagenum =
+	    gtk_notebook_get_current_page(GTK_NOTEBOOK
+					  (widgets.notebook_comm));
+	sprintf(history_list[history_items].verseref, "%s", ref);
+	sprintf(history_list[history_items].textmod, "%s",
+		xml_get_value("modules", "bible"));
+	sprintf(history_list[history_items].commod, "%s",
+		xml_get_value("modules", "comm"));
+
+	++history_items;
+	current_history_item = history_items;
+	/* set sensitivity of history buttons */
+	if (current_history_item > 1)
+		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
+	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
+	update_history_menu(app);
+	first_back_click = TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_change_verse_history
+ *
+ * Synopsis
+ *   #include "gui/history.h"
+ *
+ *   void gui_change_verse_history(gint historynum)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void gui_change_verse_history(gint historynum)
+{
+	current_history_item = historynum;
+	if (first_back_click) {
+		settings.addhistoryitem = TRUE;
+	} else {
+		settings.addhistoryitem = FALSE;
+	}
+	/* change text mod */
+	gui_change_module_and_key(history_list[historynum].textmod,
+				  history_list[historynum].verseref);
+	/* change commentary mod */
+	gui_change_module_and_key(history_list[historynum].commod,
+				  history_list[historynum].verseref);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_navigate_history
+ *
+ * Synopsis
+ *   #include "gui/history.h"
+ *
+ *   void gui_navigate_history(GtkWidget * app, gint direction)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void gui_navigate_history(GtkWidget * app, gint direction)
+{
+	settings.addhistoryitem = FALSE;
+	if (direction) {
+		if (current_history_item < history_items - 1) {
+			++current_history_item;
+			gui_change_verse_history(current_history_item);
+		}
+		/* set sensitivity of history buttons */
+		if (current_history_item >= history_items - 1)
+			gtk_widget_set_sensitive(nav_bar.button_forward,
+						 FALSE);
+		if (current_history_item >= 0)
+			gtk_widget_set_sensitive(nav_bar.button_back,
+						 TRUE);
+	} else {
+		if (current_history_item > 0) {
+			--current_history_item;
+			if (first_back_click)
+				--current_history_item;
+			
+			gui_change_verse_history(current_history_item);
+			first_back_click = FALSE;
+		}
+		/* set sensitivity of history buttons */
+		if (current_history_item < 1)
+			gtk_widget_set_sensitive(nav_bar.button_back,
+						 FALSE);
+		if (current_history_item < history_items)
+			gtk_widget_set_sensitive(nav_bar.button_forward,
+						 TRUE);
+	}
+	settings.addhistoryitem = TRUE;
+	
 }

@@ -126,7 +126,7 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	changeverseHistory(GPOINTER_TO_INT(user_data));
+	gui_change_verse_history(GPOINTER_TO_INT(user_data));
 }
 
 /******************************************************************************
@@ -287,7 +287,7 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   remove all items from history list by calling
- *   clearhistory();
+ *   gui_clear_history();
  *
  * Return value
  *   void
@@ -295,7 +295,7 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	clearhistory(widgets.app, GTK_WIDGET(widgets.shortcutbar));
+	gui_clear_history(widgets.app, GTK_WIDGET(widgets.shortcutbar));
 }
 
 /******************************************************************************
