@@ -617,7 +617,7 @@ create_mainwindow (void)
   gtk_widget_show (cbeBook);
   gtk_entry_set_text (GTK_ENTRY (cbeBook), "Romans");
 
-  spbChapter_adj = gtk_adjustment_new (8, 0, 100, 1, 10, 10);
+  spbChapter_adj = gtk_adjustment_new (8, 0, 150, 1, 10, 10);
   spbChapter = gtk_spin_button_new (GTK_ADJUSTMENT (spbChapter_adj), 1, 0);
   gtk_widget_ref (spbChapter);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "spbChapter", spbChapter,
@@ -626,7 +626,7 @@ create_mainwindow (void)
   gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar20), spbChapter, NULL, NULL);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (spbChapter), TRUE);
 
-  spbVerse_adj = gtk_adjustment_new (28, 1, 100, 1, 10, 10);
+  spbVerse_adj = gtk_adjustment_new (28, 0, 100, 1, 10, 10);
   spbVerse = gtk_spin_button_new (GTK_ADJUSTMENT (spbVerse_adj), 1, 0);
   gtk_widget_ref (spbVerse);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "spbVerse", spbVerse,
@@ -1237,7 +1237,6 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
-  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
 
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
