@@ -25,9 +25,11 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
+*/
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
