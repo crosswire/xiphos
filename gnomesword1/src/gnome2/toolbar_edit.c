@@ -608,7 +608,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Spell"),
-				       _("Spell check note"), NULL,
+				       _("Check spelling in this note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(ecd->btn_spell);
 
