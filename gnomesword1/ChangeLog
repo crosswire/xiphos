@@ -8,6 +8,11 @@
 	* removed gui/gbs_menu.h and gnome2/gbs_menu.c
 	* removed gui/gbs_display.h and gnome2/gbs_display.c
 	* removed main/gbs.h and main/gbs.c
+	* added pixmaps from the Epiphany project
+	* epiphany-bookmark-page.png
+	* epiphany-bookmarks.png
+	* epiphany-secure.png
+	* epiphany-unsecure.png
 
 
 2004-03-15  Terry <tbiggs@users.sf.net>

@@ -81,16 +81,13 @@ module.include.files=\
 	src/gui/bookmarks_treeview.h\
 	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
-	src/gui/commentary_menu.h\
 	src/gui/dialog.h\
 	src/gui/dictlex.h\
 	src/gui/dictlex_dialog.h\
-	src/gui/dictlex_menu.h\
 	src/gui/display_info.h\
 	src/gui/font_dialog.h\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
-	src/gui/gbs_menu.h\
 	src/gui/percomm.h\
 	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
@@ -138,7 +135,6 @@ module.include.files=\
 	src/main/configs.h\
 	src/backend/tree.hh\
 	src/main/xml.h\
-	src/gui/gbs_display.h\
 	src/gui/sidebar.h\
 	src/gui/parallel_dialog.h\
 	src/gui/parallel_view.h\
@@ -153,8 +149,7 @@ module.include.files=\
 	src/main/global_ops.hh\
 	src/main/url.h\
 	src/backend/sword_main.hh\
-	src/main/module_dialogs.h\
-	src/main/gbs_main.h
+	src/main/module_dialogs.h
 
 module.source.name=.
 module.source.type=
@@ -177,7 +172,6 @@ module.source.files=\
 	src/main/key.c\
 	src/main/configs.c\
 	src/main/xml.c\
-	src/gnome2/gbs_display.c\
 	src/gnome2/about_gnomesword.c\
 	src/gnome2/about_modules.c\
 	src/gnome2/about_sword.c\
@@ -185,16 +179,12 @@ module.source.files=\
 	src/gnome2/bibletext_dialog.c\
 	src/gnome2/commentary.c\
 	src/gnome2/commentary_dialog.c\
-	src/gnome2/commentary_menu.c\
 	src/gnome2/dialog.c\
 	src/gnome2/dictlex.c\
 	src/gnome2/dictlex_dialog.c\
-	src/gnome2/dictlex_menu.c\
 	src/gnome2/display_info.c\
 	src/gnome2/font_dialog.c\
 	src/gnome2/gbs.c\
-	src/gnome2/gbs_dialog.c\
-	src/gnome2/gbs_menu.c\
 	src/gnome2/gnomesword.c\
 	src/gnome2/hints.c\
 	src/gnome2/history.c\
@@ -247,7 +237,7 @@ module.source.files=\
 	src/main/module_dialogs.cc\
 	src/main/commentary.cc\
 	src/backend/dialogs.cc\
-	src/main/gbs_main.cc
+	src/gnome2/gbs_dialog.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
@@ -266,7 +256,8 @@ module.pixmap.files=\
 	sword3.png\
 	epiphany-bookmark-page.png\
 	epiphany-secure.png\
-	epiphany-unsecure.png
+	epiphany-unsecure.png\
+	epiphany-bookmarks.png
 
 module.data.name=.
 module.data.type=
