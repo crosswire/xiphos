@@ -79,7 +79,7 @@ GtkWidget *create_about(void)
 	about = gnome_about_new("gnomesword", VERSION,
 				 "                   Copyright\t  2000-2001",
 				 authors,
-				"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project.",
+				_("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."),
 				 "gnomesword/about.png");
 	gtk_object_set_data(GTK_OBJECT(about), "about", about);
 	gtk_container_set_border_width(GTK_CONTAINER(about), 4);
@@ -166,7 +166,7 @@ GtkWidget *create_AboutSword(void)
 
 	label95 =
 	    gtk_label_new
-	    ("Modules can be downloaded from the Sword Project ");
+	    (_("Modules can be downloaded from the Sword Project "));
 	gtk_widget_ref(label95);
 	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "label95",
 				 label95,

@@ -158,7 +158,7 @@ void initSWORD(GtkWidget * mainform)
 	 j;			//-- counter 
 	gchar * lang;
  
-	g_print("Initiating Sword\n");
+	g_print("%s\n","Initiating Sword\n");
 
 	mainMgr = new SWMgr();	//-- create sword mgrs
 	mainMgr1 = new SWMgr();
@@ -211,8 +211,8 @@ void initSWORD(GtkWidget * mainform)
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	}
-	g_print("Loading SWORD Moudules\n");
-	g_print("gnomesword-%s\n", VERSION);
+	g_print("%s\n", "Loading SWORD Moudules\n");
+	g_print("%s\n", "gnomesword-%s\n", VERSION);
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());

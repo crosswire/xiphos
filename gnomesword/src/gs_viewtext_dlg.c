@@ -173,7 +173,7 @@ on_tbtnVTFootnotes_toggled(GtkToggleButton * togglebutton,
 		/* turn footnotes on  */
 		VTsetGlobalOptionsSWORD("Footnotes","On");
 	}else{  /* we don't want footnotes  */
-	              /* turn footnotes off */
+	        /* turn footnotes off */
 		VTsetGlobalOptionsSWORD("Footnotes","Off");	
 	}
 }
@@ -188,8 +188,8 @@ on_tbtnVTMorf_toggled                  (GtkToggleButton *togglebutton,
 	if(togglebutton->active){ //-- if choice is TRUE - we want morphs
 		//-- turn morphs on
 		VTsetGlobalOptionsSWORD("Morphological Tags","On");
-	}else{   //-- we don't want morphs	
-	              //-- turn morphs off
+	}else{   /* we don't want morphs */
+	        //-- turn morphs off
 		VTsetGlobalOptionsSWORD("Morphological Tags","Off");
 	}
 }

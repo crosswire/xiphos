@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-21 12:55-0400\n"
+"POT-Creation-Date: 2001-09-21 21:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,12 +14,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: ENCODING\n"
 
+#: src/gs_abouts.c:82
+msgid ""
+"We would like to thank Troy Griffitts and all the other folks who have given "
+"us The SWORD Project."
+msgstr ""
+
+#: src/gs_abouts.c:169
+msgid "Modules can be downloaded from the Sword Project "
+msgstr ""
+
 #: src/gs_bookmarks.c:191
 msgid "_New SubGroup"
 msgstr ""
 
 #: src/gs_bookmarks.c:192
-msgid "Add new SubGroup to selected gourp"
+msgid "Add new SubGroup to selected group"
 msgstr ""
 
 #: src/gs_bookmarks.c:195
@@ -39,7 +49,7 @@ msgid "Save all bookmark files"
 msgstr ""
 
 #: src/gs_bookmarks.c:207
-msgid "Eidt Item"
+msgid "Edit Item"
 msgstr ""
 
 #: src/gs_bookmarks.c:208
@@ -87,11 +97,301 @@ msgid "Label"
 msgstr ""
 
 #: src/gs_bookmarks.c:959
-msgid "Reference  "
+msgid "Reference "
 msgstr ""
 
 #: src/gs_bookmarks.c:970
 msgid "Module"
+msgstr ""
+
+#: src/gs_file.c:538
+msgid "GnomeSword - Open Note File"
+msgstr ""
+
+#: src/gs_file.c:573
+msgid "GomeSword - Save Note File"
+msgstr ""
+
+#: src/gs_gnomesword.c:70 src/gs_gui.c:606
+msgid "Romans 8:28"
+msgstr ""
+
+#. Add options to Options Menu and get toggle item widget
+#: src/gs_gnomesword.c:165 src/gs_gnomesword.c:167 src/gs_gnomesword.c:169
+#: src/gs_gnomesword.c:171 src/gs_gnomesword.c:173 src/gs_gnomesword.c:175
+msgid "_Settings/"
+msgstr ""
+
+#: src/gs_gnomesword.c:165
+msgid "Auto Save Personal Comments"
+msgstr ""
+
+#: src/gs_gnomesword.c:167 src/gs_setup.c:796
+msgid "Show Interlinear Page"
+msgstr ""
+
+#: src/gs_gnomesword.c:169
+msgid "Verse Style"
+msgstr ""
+
+#: src/gs_gnomesword.c:171
+msgid "Show Footnotes"
+msgstr ""
+
+#: src/gs_gnomesword.c:173
+msgid "Show Morphological Tags"
+msgstr ""
+
+#: src/gs_gnomesword.c:175
+msgid "Show Strongs Numbers"
+msgstr ""
+
+#: src/gs_gnomesword.c:462
+msgid "_Quickmarks/<Separator>"
+msgstr ""
+
+#: src/gs_gnomesword.c:463
+msgid "_Quickmarks/"
+msgstr ""
+
+#: src/gs_gui.c:77 src/gs_gui.c:1296
+msgid "Copy"
+msgstr ""
+
+#: src/gs_gui.c:78
+msgid "Copy highlighted text form main window"
+msgstr ""
+
+#: src/gs_gui.c:84
+msgid "Search"
+msgstr ""
+
+#: src/gs_gui.c:85
+msgid "Open search dialog"
+msgstr ""
+
+#: src/gs_gui.c:94
+msgid "Add Quickmark"
+msgstr ""
+
+#: src/gs_gui.c:95
+msgid "Add current verse to Quickmarks menu"
+msgstr ""
+
+#: src/gs_gui.c:100 src/gs_gui.c:101
+msgid "Edit Quickmarks"
+msgstr ""
+
+#: src/gs_gui.c:111
+msgid "C_lear"
+msgstr ""
+
+#: src/gs_gui.c:112
+msgid "Clear history list"
+msgstr ""
+
+#: src/gs_gui.c:142
+msgid "Bible Texts"
+msgstr ""
+
+#: src/gs_gui.c:143
+msgid "Information about Bible texts"
+msgstr ""
+
+#: src/gs_gui.c:148 src/gs_gui.c:892
+msgid "Commentaries"
+msgstr ""
+
+#: src/gs_gui.c:154
+msgid "Dictionaries-Lexicons"
+msgstr ""
+
+#: src/gs_gui.c:164
+msgid "Contents"
+msgstr ""
+
+#: src/gs_gui.c:165
+msgid "Help Contents"
+msgstr ""
+
+#: src/gs_gui.c:170
+msgid "About the Sword Project..."
+msgstr ""
+
+#: src/gs_gui.c:171
+msgid "Infotmation About The Sword Project"
+msgstr ""
+
+#: src/gs_gui.c:176
+msgid "About Sword Modules"
+msgstr ""
+
+#: src/gs_gui.c:177
+msgid "Information about the installed modules"
+msgstr ""
+
+#: src/gs_gui.c:183
+msgid "About GnomeSword..."
+msgstr ""
+
+#: src/gs_gui.c:184
+msgid "About GnomeSword"
+msgstr ""
+
+#: src/gs_gui.c:195
+msgid "_Quickmarks"
+msgstr ""
+
+#: src/gs_gui.c:201
+msgid "_History"
+msgstr ""
+
+#: src/gs_gui.c:337
+msgid "GnomeSword - Bible Study Software"
+msgstr ""
+
+#: src/gs_gui.c:572
+msgid "Romans"
+msgstr ""
+
+#: src/gs_gui.c:614
+msgid "Goto verse"
+msgstr ""
+
+#: src/gs_gui.c:615
+msgid "Go to verse in free form lookup and add verse to history"
+msgstr ""
+
+#: src/gs_gui.c:629
+msgid "Back"
+msgstr ""
+
+#: src/gs_gui.c:630
+msgid "Go backward through history list"
+msgstr ""
+
+#: src/gs_gui.c:645
+msgid "Foward"
+msgstr ""
+
+#: src/gs_gui.c:646
+msgid "Go foward through history list"
+msgstr ""
+
+#: src/gs_gui.c:671
+msgid "Exit"
+msgstr ""
+
+#: src/gs_gui.c:672
+msgid "Exit GnomeSword"
+msgstr ""
+
+#: src/gs_gui.c:1024
+msgid "Follow Main Text Window"
+msgstr ""
+
+#: src/gs_gui.c:1039
+msgid "Edit"
+msgstr ""
+
+#: src/gs_gui.c:1039
+msgid "Edit note"
+msgstr ""
+
+#: src/gs_gui.c:1053 src/gs_gui.c:1221
+msgid "Save"
+msgstr ""
+
+#: src/gs_gui.c:1053
+msgid "Save note"
+msgstr ""
+
+#: src/gs_gui.c:1067
+msgid "Delete"
+msgstr ""
+
+#: src/gs_gui.c:1067
+msgid "Delete note"
+msgstr ""
+
+#: src/gs_gui.c:1081 src/gs_gui.c:1334
+msgid "Spell Check"
+msgstr ""
+
+#: src/gs_gui.c:1081 src/gs_gui.c:1334
+msgid "Start Spell Check"
+msgstr ""
+
+#: src/gs_gui.c:1089 src/gs_preferences_dlg.c:1306
+msgid "Personal Comments"
+msgstr ""
+
+#: src/gs_gui.c:1138
+msgid "Interlinear"
+msgstr ""
+
+#: src/gs_gui.c:1193
+msgid "New"
+msgstr ""
+
+#: src/gs_gui.c:1193
+msgid "Start new document"
+msgstr ""
+
+#: src/gs_gui.c:1207
+msgid "Open"
+msgstr ""
+
+#: src/gs_gui.c:1207
+msgid "Open File"
+msgstr ""
+
+#: src/gs_gui.c:1235
+msgid "Save As"
+msgstr ""
+
+#: src/gs_gui.c:1235
+msgid "Save as"
+msgstr ""
+
+#: src/gs_gui.c:1259
+msgid "Print"
+msgstr ""
+
+#: src/gs_gui.c:1259
+msgid "Print current file"
+msgstr ""
+
+#: src/gs_gui.c:1282
+msgid "Cut"
+msgstr ""
+
+#: src/gs_gui.c:1282
+msgid "Cut to clipboard"
+msgstr ""
+
+#: src/gs_gui.c:1296
+msgid "Copy to clipboard"
+msgstr ""
+
+#: src/gs_gui.c:1310
+msgid "Paste"
+msgstr ""
+
+#: src/gs_gui.c:1310
+msgid "Paste from clipborad"
+msgstr ""
+
+#: src/gs_gui.c:1370
+msgid "Study Pad"
+msgstr ""
+
+#: src/gs_history.c:65 src/gs_history.c:184 src/gs_history.c:188
+msgid "_History/<Separator>"
+msgstr ""
+
+#: src/gs_history.c:66 src/gs_history.c:185
+msgid "_History/C_lear"
 msgstr ""
 
 #: src/gs_mainmenu_cb.c:81
@@ -280,10 +580,6 @@ msgstr ""
 msgid "Show History Group"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:1306
-msgid "Personal Comments"
-msgstr ""
-
 #: src/gs_preferences_dlg.c:1322
 msgid "Use Formatting"
 msgstr ""
@@ -380,7 +676,7 @@ msgstr ""
 msgid "This guide will take you through the initial setup of GnomeSword"
 msgstr ""
 
-#: src/gs_setup.c:231 src/gs_setup.c:855
+#: src/gs_setup.c:231 src/gs_setup.c:854
 msgid "GnomeSword-0.5.0"
 msgstr ""
 
@@ -436,21 +732,17 @@ msgstr ""
 msgid "Show Commentary Tabs"
 msgstr ""
 
-#: src/gs_setup.c:796
-msgid "Show Interlinear Page"
-msgstr ""
-
 #: src/gs_setup.c:808
 msgid "Show Dict/Lex Tabs"
 msgstr ""
 
-#: src/gs_setup.c:822
+#: src/gs_setup.c:821
 msgid ""
 "These setting will be the default settings if you chose to use default "
 "settings. "
 msgstr ""
 
-#: src/gs_setup.c:859
+#: src/gs_setup.c:857
 msgid ""
 "            Thank-you for using GnomeSword.\n"
 "Click Finish to close this dialog and run GnomeSword."
@@ -597,52 +889,16 @@ msgstr ""
 msgid "Enter Unlock Key"
 msgstr ""
 
-#: src/gs_viewtext_dlg.c:339
-msgid "Add"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:353
-msgid "Sync"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:354
-msgid "Sync with main window"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:377
-msgid "Strongs"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:378
-msgid "Toggle Strongs Numbers"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:391
-msgid "Footnotes"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:392
-msgid "Toggle Footnotes"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:405
-msgid "togglebutton1"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:406
-msgid "toggle Morf "
+#: src/gs_viewcomm_dlg.c:153
+msgid "GnomeSword - View Commentary"
 msgstr ""
 
 #: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:472
 msgid "button7"
 msgstr ""
 
-#: src/gs_viewtext_dlg.c:472
-msgid "Go to verse"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:153
-msgid "GnomeSword - View Commentary"
+#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:354
+msgid "Sync with main window"
 msgstr ""
 
 #: src/gs_viewcomm_dlg.c:220
@@ -669,6 +925,10 @@ msgstr ""
 msgid "GnomeSwrod - View Dictionary"
 msgstr ""
 
+#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:353
+msgid "Sync"
+msgstr ""
+
 #: src/gs_viewdict_dlg.c:229
 msgid "Lookup key from main window"
 msgstr ""
@@ -687,4 +947,36 @@ msgstr ""
 
 #: src/gs_viewdict_dlg.c:333
 msgid "label125"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:339
+msgid "Add"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:377
+msgid "Strongs"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:378
+msgid "Toggle Strongs Numbers"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:391
+msgid "Footnotes"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:392
+msgid "Toggle Footnotes"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:405
+msgid "togglebutton1"
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:406
+msgid "toggle Morf "
+msgstr ""
+
+#: src/gs_viewtext_dlg.c:472
+msgid "Go to verse"
 msgstr ""
