@@ -38,8 +38,8 @@ typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
 
 	
 
-GtkHTMLReplaceDialog * gtk_html_replace_dialog_new     (GtkHTML *html);
-void                   gtk_html_replace_dialog_destroy (GtkHTMLReplaceDialog *d);
+GtkHTMLReplaceDialog * gs_editor_replace_dialog_new     (GtkHTML *html);
+void                   gs_editor_replace_dialog_destroy (GtkHTMLReplaceDialog *d);
 
 
 #endif /* _GS_EDITOR_REPLACE_H_ */

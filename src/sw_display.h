@@ -30,6 +30,7 @@
 
 #include <gnome.h>
 #include <swmodule.h>
+#include "gs_gnomesword.h"
 
 
 
@@ -70,7 +71,7 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);
-char IntDisplay(GList *modList);
+char IntDisplay(SETTINGS *s);
 
 
 #endif /* __SW_DISPLAY_H_ */

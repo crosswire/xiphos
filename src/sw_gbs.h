@@ -35,20 +35,26 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 	
-	void addchildSW_GBS(SETTINGS *s, gchar *name);
-	void addSiblingSW_GBS(SETTINGS *s, gchar *name);
+typedef struct _nodedata NODEDATA;
+struct _nodedata {
+	GtkCTreeNode *parent;
+	GtkCTreeNode *sibling;
+	gchar *buf[3];
+	GdkPixmap *pixmap1;
+	GdkPixmap *pixmap2;
+	GdkBitmap *mask1;
+	GdkBitmap *mask2;
+	gboolean is_leaf;
+	gboolean expanded;
+};
+
 	void setupSW_GBS(SETTINGS *s);
 	void shutdownSW_GBS(void);
-	void loadBookListSW_GBS(SETTINGS *s);
-	void savebookSW_GBS(gchar *buf);
-	void changeNodeNameSW_GBS(SETTINGS *s, gchar *name);
-	gint deleteNodeSW_GBS(SETTINGS *s);
-	void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *filename);
-	void on_ctreeBooks_select_row(GtkCList * clist,
-		    	gint row,
-		    	gint column, 
+	void on_ctreeGBS_select_row(GtkCList * clist,
+			gint row,
+			gint column, 
 			GdkEvent * event, 
-			SETTINGS *s);
+			GtkCTree *ctree);
 	void load_book_tree(SETTINGS *s,
 			GtkCTreeNode *node, 
 			gchar *bookName, 

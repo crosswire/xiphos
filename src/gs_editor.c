@@ -280,7 +280,7 @@ void savebookEDITOR(GtkWidget * html_widget)
 		g_warning("file not writen");
 	} else {
 		g_print("file writen");
-		savebookSW_GBS(gstr->str);
+		//savebookSW_GBS(gstr->str);
 	}
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);

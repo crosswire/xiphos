@@ -8,7 +8,6 @@ src/gs_editor.c
 src/gs_editor_replace.c 
 src/gs_editor_toolbar.c 
 src/gs_file.c 
-src/gs_gbs.c 
 src/gs_getinfo_dlg.c
 src/gs_gnomesword.c 
 src/gs_gui.c 
@@ -26,3 +25,4 @@ src/gs_viewdict_dlg.c
 src/gs_viewtext_dlg.c 
 src/spell.c 
 src/spell_gui.c 
+src/sw_gbs.cpp

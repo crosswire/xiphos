@@ -78,11 +78,18 @@ GtkWidget *usehtml;
 extern GtkWidget *textDict;
 extern SETTINGS *settings;
 
+GtkWidget *gs_new_html_widget(SETTINGS *s) {
+	GtkWidget *html;
+	
+	html = gtk_html_new();
+	gtk_html_load_empty(GTK_HTML(html));
+	return html;
+}
+
 /***************************************************************************************************
  *
  ***************************************************************************************************/
-void on_url(GtkHTML * html, const gchar * url, gpointer data)
-{
+void on_url(GtkHTML * html, const gchar * url, gpointer data) {
 	//GnomeApp *app;
 	gchar buf[255];	
 	
