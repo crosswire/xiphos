@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                           menustuff.cpp  -  description
                              -------------------
@@ -26,15 +27,29 @@
 #include "menustuff.h"
 #include "interface.h"
 #include "callback.h"
+#include "GnomeSword.h"
+#include "support.h"
 
-/*
+/******************************************************************************
+ * function prototypes only visible to this file
+ ******************************************************************************/
+static GtkWidget* create_pmInt(GList *mods, gchar *intWindow, 
+			GtkMenuCallback cbchangemod, 
+			GtkMenuCallback mycallback);
+static GtkWidget *create_pmComments2(GList * mods);
+static GtkWidget *create_pmDict(GList * mods);
+static GtkWidget* create_pmBible(GList *mods);
+static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods);
+/******************************************************************************/
+
+/******************************************************************************
  * additemtognomemenu - add item to gnome menu 
  * adds an item to the main menu bar
  * MainFrm - the main window - app widget
  * itemname - the item label and also used for user data
  * menuname - the gnome menu path 
  * mycallback - the callback to call when item is selected 
-*/
+ ******************************************************************************/
 void
 additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 		   gchar * menuname, GtkMenuCallback mycallback)
@@ -57,7 +72,7 @@ additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
 }
 
 
-/**************************************************************************************
+/******************************************************************************
  * additemtopopupmenu - add item to popup menu
  * add one item to a popup menu
  * cannot be used to add an item to a submenu item ????
@@ -65,7 +80,7 @@ additemtognomemenu(GtkWidget * MainFrm, gchar * itemname, gchar * itemdata,
  * menu - popup menu to add item to
  * itemname - menu item -used for label and user data
  * mycallback - callback function to call when menu item pressed
-**************************************************************************************/
+ ******************************************************************************/
 void
 additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 		   GtkMenuCallback mycallback)
@@ -74,7 +89,7 @@ additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 	gchar menuName[64];
 	int viewNumber = 0;
 
-	menuChoice = gtk_menu_item_new_with_label(itemname);	//----------- popup menu               
+	menuChoice = gtk_menu_item_new_with_label(itemname);	/* popup menu */
 	sprintf(menuName, "viewMod%d", viewNumber++);
 	gtk_object_set_data(GTK_OBJECT(MainFrm), menuName, menuChoice);
 	gtk_widget_show(menuChoice);
@@ -84,8 +99,11 @@ additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
 			      GTK_WIDGET(menuChoice));
 }
-
-//-------------------------------------------------------------------------------------------
+/******************************************************************************
+ * addseparato - add separator line to menu
+ * MainFrm - main window - app
+ * subtreelabel - path to menu item
+ ******************************************************************************/ 
 void addseparator(GtkWidget * MainFrm, gchar * subtreelabel)
 {
 	GnomeUIInfo *bookmarkitem;
@@ -104,7 +122,7 @@ void
 addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
 	       gchar * subtreelabel)
 {
-	static GnomeUIInfo marks1_menu_uiinfo[] = {	// this struct is here to keep from getting compiler error                                                                                                                            //
+	static GnomeUIInfo marks1_menu_uiinfo[] = { /* this struct is here to keep from getting compiler error */                                                                                                                            //
 		GNOMEUIINFO_SEPARATOR,
 		GNOMEUIINFO_END
 	};
@@ -122,6 +140,57 @@ addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
 					 bookmarkitem, NULL);
 	//g_free(bookmarkitem);         
 }
+
+/******************************************************************************
+ * createpopupmenus(GList *, GList *, GList *) - create popup menus
+ * app - main window
+ * settings - gnomesword settings structure
+ * biblelist - list of Bible modules - from initSword
+ * commentarylist - list of commentary modules - from initSword
+ * dictionarylist - list of dict/lex modules - from initSword 
+ ******************************************************************************/
+void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist, 
+			GList *commentarylist, GList *dictionarylist,
+			GList *percomlist) 
+{
+	GtkWidget 
+		*menu2, 
+		*menu3, 
+		*menu4, 
+		*menu5,
+		*menuCom,
+		*menuDict,
+		*menuBible;	
+	
+	menu2 = create_pmInt(biblelist, "textComp1",
+				(GtkMenuCallback)on_1st_interlinear_window1_activate,
+				(GtkMenuCallback)on_about_this_module2_activate);
+	menu3 =create_pmInt(biblelist, "textComp2",
+				(GtkMenuCallback)on_2nd_interlinear_window1_activate,
+				(GtkMenuCallback)on_about_this_module3_activate); 
+	menu4 =create_pmInt(biblelist, "textComp3",
+				(GtkMenuCallback)on_3rd_interlinear_window1_activate,
+				(GtkMenuCallback)on_about_this_module4_activate); 
+	menu5 = create_pmEditnote(app, percomlist);
+	/* create pop menu for commentaries */
+	menuCom = create_pmComments2(commentarylist);
+	/* create popup menu for dict/lex window */
+	menuDict = create_pmDict(dictionarylist);
+	/* create popup menu for Bible window */
+	menuBible = create_pmBible(biblelist);	
+		
+	//-------------------------------------------------------- attach popup menus
+	gnome_popup_menu_attach(menuBible,lookup_widget(app,"moduleText"),(gchar*)"1");
+	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");
+	gnome_popup_menu_attach(menu3,lookup_widget(app,"textComp2"),(gchar*)"1");
+	gnome_popup_menu_attach(menu4,lookup_widget(app,"textComp3"),(gchar*)"1");
+	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
+	gnome_popup_menu_attach(menuDict,lookup_widget(app,"textDict"),(gchar*)"1");
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
+	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
+}
+
 
 //-------------------------------------------------------------------------------------------
 void
@@ -146,7 +215,7 @@ additemtosubtree(GtkWidget * MainFrm, gchar * subtreelabel,
 }
 
 //-------------------------------------------------------------------------------------------
-//----------------- we need to return a widget so we can use it later as a toggle menu item ----------------------//
+//-- we need to return a widget so we can use it later as a toggle menu item
 GtkWidget *additemtooptionmenu(GtkWidget * MainFrm, gchar * subtreelabel,
 			       gchar * itemlabel,
 			       GtkMenuCallback mycallback)
@@ -180,7 +249,7 @@ removemenuitems(GtkWidget * MainFrm, gchar * startitem, gint numberofitems)
 }
 
 //-------------------------------------------------------------------------------------------
-GtkWidget *create_pmComments2(GList * mods)
+static GtkWidget *create_pmComments2(GList * mods)
 {
 	GtkWidget *pmComments2;
 	GtkWidget *copy6;
@@ -333,7 +402,7 @@ GtkWidget *create_pmComments2(GList * mods)
 }
 
 //-------------------------------------------------------------------------------------------
-GtkWidget *create_pmDict(GList * mods)
+static GtkWidget *create_pmDict(GList * mods)
 {
 	GtkWidget *pmDict;
 	GtkWidget *copy5;
@@ -463,8 +532,7 @@ GtkWidget *create_pmDict(GList * mods)
 }
 
 //-------------------------------------------------------------------------------------------
-GtkWidget*
-create_pmBible(GList *mods)
+static GtkWidget* create_pmBible(GList *mods)
 {
 	GtkWidget *pmBible;
 	GtkAccelGroup *pmBible_accels;
@@ -558,4 +626,255 @@ create_pmBible(GList *mods)
                       	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
                       	NULL);
   return pmBible;
+}
+
+
+/******************************************************************************
+ * create_pmInt1(GList *mods) - create popup menu for first interlinear window
+ * GList *mods - list of Bible modules
+ * gchar *intWindow - the interlinear window to build the menu for
+ * GtkMenuCallback cbchangemod - callback to change modules form view submenu
+ * GtkMenuCallback mycallback - callback for copy text
+ ******************************************************************************/
+static GtkWidget*
+create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod, 
+		GtkMenuCallback mycallback)
+{
+	GtkWidget *pmInt;
+	GtkAccelGroup *pmInt_accels;
+	GtkWidget *copy7;
+	//GtkWidget *lookup_selection;
+	GtkWidget *about_this_module1;
+	GtkWidget *separator2;
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;
+	GtkWidget *item3;
+	GList *tmp;
+	gint i = 0;
+
+	pmInt = gtk_menu_new ();
+	gtk_object_set_data (GTK_OBJECT (pmInt), "pmInt", pmInt);
+	pmInt_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmInt));
+
+	copy7 = gtk_menu_item_new_with_label ("Copy");
+	gtk_widget_ref (copy7);
+	gtk_object_set_data_full (GTK_OBJECT (pmInt), "copy7", copy7,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (copy7);
+	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
+/*
+	lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
+	gtk_widget_ref (lookup_selection);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "lookup_selection", lookup_selection,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (lookup_selection);
+  	gtk_container_add (GTK_CONTAINER (pmInt), lookup_selection);
+*/
+  	about_this_module1 = gtk_menu_item_new_with_label ("About this module");
+  	gtk_widget_ref (about_this_module1);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "about_this_module1", about_this_module1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (about_this_module1);
+  	gtk_container_add (GTK_CONTAINER (pmInt), about_this_module1);
+
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+
+  	view_module3 = gtk_menu_item_new_with_label ("View Module");
+  	gtk_widget_ref (view_module3);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module3", view_module3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (view_module3);
+  	gtk_container_add (GTK_CONTAINER (pmInt), view_module3);
+
+  	view_module3_menu = gtk_menu_new ();
+  	gtk_widget_ref (view_module3_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module3_menu", view_module3_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
+  	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
+
+	
+	tmp = mods;
+	while (tmp != NULL) {
+		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item3);
+		gtk_object_set_data_full(GTK_OBJECT(pmInt), "item3",
+					 item3,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item3);		
+		gtk_signal_connect(GTK_OBJECT(item3), "activate",
+				   GTK_SIGNAL_FUNC(cbchangemod),
+				   g_strdup((gchar *)tmp->data ));
+
+		gtk_container_add(GTK_CONTAINER(view_module3_menu), item3);
+		++i;
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+
+  	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      	GTK_SIGNAL_FUNC (on_copy3_activate),
+                      	(gchar *)intWindow);
+        /*
+  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+                      	GTK_SIGNAL_FUNC (on_lookup_selection_activate),
+                      	NULL);
+        */
+  	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
+                      	GTK_SIGNAL_FUNC (mycallback),
+                      	NULL);
+  return pmInt;
+}
+
+
+
+static GnomeUIInfo edit2_menu_uiinfo[] = {
+	GNOMEUIINFO_MENU_CUT_ITEM(on_cut1_activate, NULL),
+	GNOMEUIINFO_MENU_COPY_ITEM(on_copy4_activate, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM(on_paste1_activate, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo pmEditnote_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_EDIT_TREE(edit2_menu_uiinfo),
+	{
+	 GNOME_APP_UI_ITEM, "Bold",
+	 "Make selected text bold",
+	 on_boldNE_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, "Italic",
+	 "Make selected text Italic",
+	 on_italicNE_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, "Reference",
+	 "Make selected text a reference",
+	 on_referenceNE_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, "Underline",
+	 "Underline selected text",
+	 on_underlineNE_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, "Greek",
+	 "Use greek font",
+	 on_greekNE_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, "Goto Reference",
+	 "Go to selected reference",
+	 on_goto_reference_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, "Lookup Selection",
+	 NULL,
+	 on_lookup_selection4_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+	 0, 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
+{
+	GtkWidget *pmEditnote;
+	GList *tmp;
+	
+	pmEditnote = gtk_menu_new();
+	gtk_object_set_data(GTK_OBJECT(pmEditnote), "pmEditnote",
+			    pmEditnote);
+	gnome_app_fill_menu(GTK_MENU_SHELL(pmEditnote), pmEditnote_uiinfo,
+			    NULL, FALSE, 0);
+
+	gtk_widget_ref(pmEditnote_uiinfo[0].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "separator19",
+				 pmEditnote_uiinfo[0].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[1].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "edit2",
+				 pmEditnote_uiinfo[1].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(edit2_menu_uiinfo[0].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "cut1",
+				 edit2_menu_uiinfo[0].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(edit2_menu_uiinfo[1].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "copy4",
+				 edit2_menu_uiinfo[1].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(edit2_menu_uiinfo[2].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "paste1",
+				 edit2_menu_uiinfo[2].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[2].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "boldNE",
+				 pmEditnote_uiinfo[2].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[3].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "italicNE",
+				 pmEditnote_uiinfo[3].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[4].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "referenceNE",
+				 pmEditnote_uiinfo[4].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[5].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "underlineNE",
+				 pmEditnote_uiinfo[5].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[6].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "greekNE",
+				 pmEditnote_uiinfo[6].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[7].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "separator18",
+				 pmEditnote_uiinfo[7].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[8].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "goto_reference",
+				 pmEditnote_uiinfo[8].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmEditnote_uiinfo[9].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditnote),
+				 "lookup_selection4",
+				 pmEditnote_uiinfo[9].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	tmp = mods;	
+	while (tmp != NULL) { /* add personal comments modules to popup menu */
+		additemtopopupmenu(app, pmEditnote,(gchar *) tmp->data , 
+			(GtkMenuCallback)on_change_module_activate); 
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+
+	return pmEditnote;
 }
