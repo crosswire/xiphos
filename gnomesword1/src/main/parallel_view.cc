@@ -52,6 +52,11 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 
+extern GtkWidget *entrycbIntBook;
+extern GtkWidget *sbIntChapter;
+extern GtkWidget *sbIntVerse;
+extern GtkWidget *entryIntLookup;
+
 /******************************************************************************
  * static
  */
@@ -64,7 +69,8 @@ static gboolean parallel3;
 static gboolean parallel4;
 static gboolean parallel5;
 static GLOBAL_OPS *ops;
-static BackEnd *backend_p;
+
+BackEnd *backend_p;
 
 static gchar *tf2of(int true_false)
 {
@@ -83,6 +89,101 @@ static void set_global_option(char * option, gboolean choice)
 	mgr->setGlobalOption(option, on_off);
 }
 
+
+/******************************************************************************
+ * Name
+ *   main_parallel_change_verse
+ *
+ * Synopsis
+ *   #include ".h"
+ *   
+ *   gchar *main_parallel_change_verse(void)
+ *
+ * Description
+ *   this is for the parallel dialog only
+ *
+ *   
+ *
+ * Return value
+ *   gchar *
+ */
+
+gchar *main_parallel_change_verse(void)
+{
+	gchar *retval;
+	const gchar *bookname;
+	gchar buf[256];
+	gint chapter, verse;
+	char *newbook;
+
+	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
+	chapter =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (sbIntChapter));
+	verse =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (sbIntVerse));
+
+	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
+
+	newbook = backend_p->key_get_book(buf);
+	chapter = backend_p->key_get_chapter(buf);
+	verse = backend_p->key_get_verse(buf);
+
+	if (strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
+				  chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
+	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
+	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
+	retval = buf;
+	g_free(newbook);
+	return retval;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_parallel_update_controls
+ *
+ * Synopsis
+ *   #include ".h"
+ *   
+ *   gchar *main_parallel_update_controls(gchar * ref)
+ *
+ * Description
+ *   
+ *
+ *
+ *   
+ *
+ * Return value
+ *   gchar*
+ */
+
+gchar *main_parallel_update_controls(const gchar * ref)
+{
+	const gchar *bookname;
+	gchar buf[256];
+	gint chapter, verse;
+	char *newbook;
+
+	newbook = backend_p->key_get_book(ref); 
+	chapter = backend_p->key_get_chapter(ref);
+	verse = backend_p->key_get_verse(ref);
+
+	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
+	if (strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
+				  chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
+	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
+	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
+	g_free(newbook);
+	return g_strdup(buf);
+}
 
 
 /******************************************************************************
@@ -671,19 +772,19 @@ static void int_display(gchar * key)
 	GtkHTML *html = GTK_HTML(widgets.html_parallel);
 
 	str = g_string_new("");
-	tmpkey = get_valid_key(key);
+	tmpkey = backend_p->get_valid_key(key);
 
 	bgColor = "#f1f1f1";
-	cur_verse = get_verse_from_key(tmpkey);
+	cur_verse = backend_p->key_get_verse(tmpkey);
 	settings.intCurVerse = cur_verse;
-	cur_chapter = get_chapter_from_key(tmpkey);
-	cur_book = get_book_from_key(tmpkey);
+	cur_chapter = backend_p->key_get_chapter(tmpkey);
+	cur_book = backend_p->key_get_book(tmpkey);
 
 	for (i = 1;; i++) {
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		free(tmpkey);
-		tmpkey = get_valid_key(tmpbuf);
-		if (cur_chapter != get_chapter_from_key(tmpkey))
+		tmpkey = backend_p->get_valid_key(tmpbuf);
+		if (cur_chapter != backend_p->key_get_chapter(tmpkey))
 			break;
 		g_string_printf(str, "%s", "<tr valign=\"top\">");
 		if (str->len) {

@@ -50,6 +50,7 @@
 #include "main/configs.h"
 #include "main/module_dialogs.h"
 #include "main/parallel_view.h"
+#include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
@@ -207,7 +208,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		if(clicked) {
 		//g_warning(work_buf[3]);
 			settings.cvparallel = 
-				gui_update_controls_parallel(work_buf[3]);
+				main_parallel_update_controls(work_buf[3]);
 			main_update_parallel_page_detached();
 		} 
 	}
@@ -367,7 +368,7 @@ static gint note_uri(const gchar * url, gboolean clicked)
 							work_buf[5],
 							"refList");
 		if (tmpbuf) {
-			gui_display_verse_list_in_sidebar(settings.
+			main_display_verse_list_in_sidebar(settings.
 					  currentverse,
 					  module,
 					  tmpbuf);
@@ -419,7 +420,7 @@ static gint reference_uri(const gchar * url, gboolean clicked)
 	else
 		module = settings.MainWindowModule;
 	
-	gui_display_verse_list_in_sidebar(settings.currentverse,
+	main_display_verse_list_in_sidebar(settings.currentverse,
 						  module,
 						  work_buf[3]); 
 	g_strfreev(work_buf);
@@ -483,7 +484,7 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
 					main_dialog_goto_bookmark(
 								(gchar*)url);
 				else {
-					key = gui_update_nav_controls(tmpkey);
+					key = main_update_nav_controls(tmpkey);
 					main_display_bible(work_buf[MODULE], key);
 					main_display_commentary(
 							settings.CommWindowModule, key);
@@ -496,7 +497,7 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
 					main_dialog_goto_bookmark(
 								(gchar*)url);
 				else {				
-					key = gui_update_nav_controls(tmpkey);
+					key = main_update_nav_controls(tmpkey);
 					main_display_bible(
 							settings.MainWindowModule, key);
 					main_display_commentary(work_buf[MODULE], key);
@@ -595,7 +596,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
 			case TEXT_TYPE:	
-				key = gui_update_nav_controls(tmpkey);
+				key = main_update_nav_controls(tmpkey);
 				main_display_bible(work_buf[MODULE], key);
 				main_display_commentary(
 						settings.CommWindowModule, key);
@@ -603,7 +604,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				if(key) g_free((gchar*)key);
 			break;
 			case COMMENTARY_TYPE:				
-				key = gui_update_nav_controls(tmpkey);
+				key = main_update_nav_controls(tmpkey);
 				main_display_bible(
 						settings.MainWindowModule, key);
 				main_display_commentary(work_buf[MODULE], key);
@@ -619,7 +620,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		}
 	} else { /* module name not found or not given */
 		if(verse_count) { 
-			key = gui_update_nav_controls(tmpkey);
+			key = main_update_nav_controls(tmpkey);
 			/* display in current Bible and Commentary */
 			main_display_bible(settings.MainWindowModule, key);
 			main_display_commentary(settings.CommWindowModule, key);

@@ -28,7 +28,8 @@ extern "C" {
 
 #include <glib-2.0/glib.h>
 
-void main_dialog_search_percent_update(char percent, void *userData);	
+void main_dialog_search_percent_update(char percent, void *userData);
+void main_range_text_changed(GtkEditable * editable);	
 void main_save_modlist(void);
 void main_save_range(void);
 void main_delete_range(void);
