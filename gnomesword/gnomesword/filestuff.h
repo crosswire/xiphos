@@ -21,6 +21,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#include "GnomeSword.h"
 
 void
 saveFile 					(gchar *filename);
@@ -48,3 +49,12 @@ saveoptions				 (void) ;
 
 void
 createFiles					(void);
+
+void
+writesettings				(SETTINGS settings);
+
+SETTINGS
+readsettings				(void);
+
+SETTINGS
+createsettings			(void);
