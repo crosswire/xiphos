@@ -26,13 +26,14 @@
 extern "C" {
 #endif
 
+const char *get_mod_config_entry(const char * module_name, const char * entry);
 char *get_key_from_module(int manager, char *module_name);
 char *get_preverse_header(char * module_name, char * key, int pvHeading);
 char *get_module_key(void);
 char *get_module_name(void);
-const char *get_footnote_type(char * module_name, char * key, char * note);
-char *get_crossref(char *note);
-char *get_footnote_body(char *note);
+const char *get_footnote_type(char * module_name, char * key, char * note_number);
+char *get_crossref(char * mod_name, char * key, char * note_number);
+char *get_footnote_body(char * mod_name, char * key, char * note_number);
 int get_display_level(char * module_name);	
 int is_module_rtl(char * mod_name);
 int get_module_number(const char *module_name, const char *module_type);

@@ -33,6 +33,7 @@
 #include "gui/widgets.h"
 
 #include "main/sword.h"
+#include "main/module.h"
 #include "main/settings.h"
 
 /******************************************************************************
@@ -77,17 +78,11 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void about_module_display(gchar * to, gchar * text)
+static void about_module_display(GString * str, gchar * text)
 {
-	gint len, maxlen, i;
+	gint i;
 	gboolean center = FALSE;
-
-	len = strlen(text);
-
-	maxlen = len * 80;
-
-
-	// -------------------------------
+	
 	for (i = 0; i < strlen(text) - 1; i++) {
 		if (text[i] == '\\')	// a RTF command
 		{
@@ -97,15 +92,7 @@ static void about_module_display(gchar * to, gchar * text)
 			    (text[i + 4] == 'd')) {
 
 				if (center) {
-					*to++ = '<';
-					*to++ = '/';
-					*to++ = 'C';
-					*to++ = 'E';
-					*to++ = 'N';
-					*to++ = 'T';
-					*to++ = 'E';
-					*to++ = 'R';
-					*to++ = '>';
+					str = g_string_append(str, "</center>");
 					center = FALSE;
 				}
 				i += 4;
@@ -113,11 +100,7 @@ static void about_module_display(gchar * to, gchar * text)
 			}
 			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
 			    && (text[i + 3] == 'r')) {
-				*to++ = '<';
-				*to++ = 'b';
-				*to++ = 'r';
-				*to++ = '>';
-				*to++ = '\n';
+				str = g_string_append(str, "<br>\n");
 				i += 3;
 				continue;
 			}
@@ -132,23 +115,15 @@ static void about_module_display(gchar * to, gchar * text)
 			if ((text[i + 1] == 'q')
 			    && (text[i + 2] == 'c')) {
 				if (!center) {
-					*to++ = '<';
-					*to++ = 'C';
-					*to++ = 'E';
-					*to++ = 'N';
-					*to++ = 'T';
-					*to++ = 'E';
-					*to++ = 'R';
-					*to++ = '>';
+					str = g_string_append(str, "<center>");
 					center = TRUE;
 				}
 				i += 2;
 				continue;
 			}
 		}
-		*to++ = text[i];
+		str = g_string_append_c(str, text[i]);
 	}
-	*to++ = 0;
 }
 
 
@@ -282,19 +257,25 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 {
 	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
 	GtkWidget *text;	//-- pointer to text widget of dialog
-	gchar *buf, *to = NULL,	//-- pointer to text buffer for label (mod name)
-	*bufabout,		//-- pointer to text buffer for text widget (mod about)
-	 discription[500];
+	gchar *buf = NULL,	//-- pointer to text buffer for label (mod name)
+	*bufabout;		//-- pointer to text buffer for text widget (mod about)
+	// discription[500];
 	gint len, maxlen;
+	GString *str = g_string_new(NULL);
+	GString *discription = g_string_new(NULL);
+	const gchar * version = NULL;
 
 	bufabout = NULL;
 
 	buf = get_module_description(modname);
 	bufabout = get_mod_about_info(modname);
-
-	sprintf(discription,
-		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
-		buf);
+	version = get_mod_config_entry(modname, "Version");
+	
+	g_string_printf(discription,
+		"<center><FONT COLOR=\"#000FCF\"><b>%s</b></font><HR>%s %s</center><br>",
+		buf,
+		(version)?"<br>Sword module version":"",
+		(version)?version:"");
 	if (!isGBS) {
 		aboutbox = gui_create_about_modules();
 		gtk_widget_show(aboutbox);
@@ -305,34 +286,28 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		len = strlen(bufabout);
 		maxlen = len * 8;
 
-		if ((to = (gchar *) malloc(maxlen)) == NULL) {
-			return;
-		}
-
 		if (!isGBS) {
 			text = text_html;	/* get text widget */
 		} else {
 			text = widgets.html_book;
 		}
 
-		about_module_display(to, bufabout);	/* send about info to display function */
+		about_module_display(str, bufabout);	/* send about info to display function */
 		gui_begin_html(text, FALSE);
 		gui_display_html(text, "<html><body>",
 				 strlen("<html><body>"));
-		gui_display_html(text, discription,
-				 strlen(discription));
-		if (to)
-			gui_display_html(text, to, strlen(to));
+		gui_display_html(text, discription->str,
+				 discription->len);
+		gui_display_html(text, str->str, str->len);
+		
 		gui_display_html(text, "</body></html>",
 				 strlen("</body></html>"));
 		gui_end_html(text);
-	}
-
-	else
+	} else
 		g_warning("oops");
 
 	if (bufabout)
 		g_free(bufabout);
-	if (to)
-		free(to);
+	g_string_free(str,TRUE);
+	g_string_free(discription,TRUE);
 }

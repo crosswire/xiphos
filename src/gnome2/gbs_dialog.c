@@ -787,7 +787,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	create_pixbufs();
 	dlg = g_new0(GBS_DATA, 1);
-	dlg->ops = gui_new_globals();
+	dlg->ops = gui_new_globals(mod_name);
 	set_new_globals(dlg->ops);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;

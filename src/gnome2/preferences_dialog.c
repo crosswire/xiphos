@@ -399,8 +399,8 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 		g_free(buf2);
 
 
-	if (settings.havebible)
-		gui_display_text(settings.currentverse);
+//	if (settings.havebible)
+//		gui_display_text(settings.currentverse);
 	if (settings.havecomm)
 		gui_display_commentary(settings.currentverse);
 	if (settings.havedict)
@@ -560,8 +560,8 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 					   (widgets.notebook_text),
 					   settings.text_tabs);
-		if (settings.havebible)
-			gui_set_text_frame_label(cur_t);
+/*		if (settings.havebible)
+			gui_set_text_frame_label(cur_t);*/
 		break;
 	case SHOW_COMMENTARY_TABS:
 		if (togglebutton->active)

@@ -57,7 +57,7 @@
  * static - global to this file only
  */
 static GList *dialog_list;
-static TEXT_DATA *cur_vt;
+//static TEXT_DATA *cur_vt;
 static gboolean dialog_freed;
 static gboolean apply_change;
 static gboolean in_url;

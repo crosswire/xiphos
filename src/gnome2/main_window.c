@@ -24,8 +24,12 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlengine.h>
+
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 #include "gui/gnomesword.h"
 #include "gui/main_window.h"
@@ -257,10 +261,16 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 					      NULL, 
 					      NULL, 
 					      NULL);
-			page_num =
-			    get_module_number(module_name, TEXT_MODS);
 			val_key = gui_update_nav_controls(key);
-			gui_set_text_page_and_key(page_num, val_key);
+			if(!strcmp(settings.MainWindowModule,module_name))
+				gui_change_verse((gchar*)val_key);
+			else {
+				xml_set_value("GnomeSword", "modules", "bible", 
+							module_name);
+				settings.MainWindowModule = xml_get_value(
+							"modules", "bible");
+				gui_set_text_mod_and_key(module_name, val_key);
+			}
 			free(val_key);
 		}
 		break;
@@ -354,7 +364,6 @@ void gui_change_verse(const gchar * key)
 					       settings.currentverse);
 		}
 		settings.addhistoryitem = TRUE;
-
 		/* change main window */
 		gui_display_text(val_key);
 		gui_keep_bibletext_dialog_in_sync(val_key);
@@ -554,6 +563,114 @@ static gboolean on_configure_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
+ *  on_text_button_press_event
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *  gboolean on_text_button_press_event(GtkWidget * widget,
+			    GdkEventButton * event, TEXT_DATA * t)	
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+static gboolean on_text_button_press_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	switch (event->button) {
+	case 1:		
+		break;
+	case 2:
+		break;
+	case 3:		
+		gui_popup_pm_text(settings.MainWindowModule, event);
+		break;
+	}
+	return FALSE;
+}
+/******************************************************************************
+ * Name
+ *  on_button_release_event
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *  gboolean on_button_release_event(GtkWidget * widget,
+			    GdkEventButton * event, TEXT_DATA * t)	
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_text_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					TEXT_DATA * t)
+{
+	extern gboolean in_url;
+	gchar *key;
+	const gchar *url;
+	gchar *buf = NULL;
+
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to current text module name 
+	 */
+	gui_change_window_title(settings.MainWindowModule);
+
+	switch (event->button) {
+	case 1:
+		if (!in_url) {
+			key = gui_button_press_lookup(widgets.html_text);
+			if (key) {
+				gchar *dict = NULL;
+				if (settings.useDefaultDict)
+					dict =
+					    g_strdup(settings.
+						     DefaultDict);
+				else
+					dict =
+					    g_strdup(settings.
+						     DictWindowModule);
+				if (settings.inViewer)
+					gui_display_dictlex_in_sidebar
+					    (dict, key);
+				if (settings.inDictpane)
+					gui_change_module_and_key(dict,
+								  key);
+				g_free(key);
+				if (dict)
+					g_free(dict);
+			}
+		}
+		break;
+	case 2:
+		if (!in_url) 
+			break;
+		url = html_engine_get_link_at (GTK_HTML(widgets.html_text)->engine,
+					 event->x,
+					 event->y);
+		if(strstr(url,"sword://")) {
+			gchar **work_buf = g_strsplit (url,"/",4);			
+			gui_open_verse_in_new_tab(work_buf[3]);
+			g_strfreev(work_buf);
+		}
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *   create_mainwindow
  *
  * Synopsis
@@ -582,6 +699,7 @@ void create_mainwindow(void)
 	GtkWidget *label197;
 	GtkWidget *hbox25;
 	GtkWidget *hboxtb;
+	GtkWidget *scrolledwindow;
 	GtkWidget *tab_button_icon;
 	GdkColor transparent = { 0 };
 	gint page_num = 0;
@@ -721,9 +839,42 @@ void create_mainwindow(void)
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK
 				    (widgets.notebook_text), TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.notebook_text), FALSE);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
+				     
+	
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
+			  scrolledwindow);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
 
+	widgets.html_text = gtk_html_new();
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.html_text);
+
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
+				   G_CALLBACK(gui_link_clicked),
+				   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
+				   G_CALLBACK(gui_url),
+				   GINT_TO_POINTER(TEXT_TYPE));
+	g_signal_connect(GTK_OBJECT(widgets.html_text),
+				   "button_press_event",
+				   G_CALLBACK
+				   (on_text_button_press_event),
+				   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text),
+				   "button_release_event",
+				   G_CALLBACK
+				   (on_text_button_release_event),
+				   NULL);
+	
+	
 	/*
 	 * commentary notebook
 	 */

@@ -119,7 +119,7 @@ static gchar *change_verse_parallel(void)
  *   gchar*
  */
 
-static gchar *update_controls_parallel(const gchar * ref)
+gchar *gui_update_controls_parallel(const gchar * ref)
 {
 	const gchar *bookname;
 	gchar buf[256];
@@ -169,7 +169,7 @@ void gui_undock_parallel_page(void)
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 				 1);
 	settings.cvparallel =
-	    update_controls_parallel(settings.currentverse);
+	    gui_update_controls_parallel(settings.currentverse);
 	gtk_widget_show(parallel_UnDock_Dialog);
 	gui_update_parallel_page_detached();
 	g_free(settings.cvparallel);
@@ -265,7 +265,7 @@ static void on_buttonIntSync_clicked(GtkButton * button,
 {
 	ApplyChangeBook = FALSE;
 	settings.cvparallel =
-	    update_controls_parallel(settings.currentverse);
+	    gui_update_controls_parallel(settings.currentverse);
 	gui_update_parallel_page_detached();
 	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
@@ -400,7 +400,7 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		settings.cvparallel =
-		    update_controls_parallel(buf); 
+		    gui_update_controls_parallel(buf); 
 		gui_update_parallel_page_detached();
 		g_free(settings.cvparallel);
 		ApplyChangeBook = TRUE;
@@ -436,7 +436,7 @@ static void on_btnIntGotoVerse_clicked(GtkButton * button,
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
 
-	settings.cvparallel = update_controls_parallel(buf);
+	settings.cvparallel = gui_update_controls_parallel(buf);
 
 	gui_update_parallel_page_detached();	//-- change verse to entry text 
 	g_free(settings.cvparallel);

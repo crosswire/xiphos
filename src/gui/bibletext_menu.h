@@ -26,11 +26,10 @@
 extern "C" {
 #endif
 
-GtkWidget *gui_create_pm_text(TEXT_DATA * t);
+//GtkWidget *gui_create_pm_text(TEXT_DATA * t);
 	
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

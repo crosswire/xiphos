@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 		/*
 		 * this arg is a sword uri
 		 */
-		if (!strncmp(argv[1], "sword://",8)) {
+		if (!strncmp(argv[1], "sword:/",7)) {
 			have_sword_url = TRUE;
 		}
 		
@@ -104,10 +104,10 @@ int main(int argc, char *argv[])
 	
 	frontend_display();
 	
-	if(have_sword_url)
-		gui_url_handler(argv[1]);
-	
 	gui_splash_done();
+	
+	if(have_sword_url)
+		gui_url_handler(argv[1], TRUE);
 
 	gui_main();
 

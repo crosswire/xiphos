@@ -14,4 +14,8 @@ libbackend_a_SOURCES =  \
     module.cc module.hh \
     module_manager.cc module_manager.hh \
     sword.cpp sword.h\
-    tree.cc tree.hh
+    tree.cc tree.hh\
+    gs_gbfhtmlhref.cpp gs_gbfhtmlhref.h \
+    gs_osishtmlhref.cpp gs_osishtmlhref.h \
+    gs_thmlhtmlhref.cpp gs_thmlhtmlhref.h \
+    gs_markupfiltmgr.cpp gs_markupfiltmgr.h
