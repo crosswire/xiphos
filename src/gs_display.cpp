@@ -47,7 +47,7 @@ gchar *mycolor;
  ****************************************************************************************/
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
-extern bool bVerseStyle;
+//extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
@@ -82,8 +82,8 @@ char ComEntryDisp::Display(SWModule & imodule)
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
 	/* show verse ref in text widget  */
-	/* show module text for current key */ 
-	beginHTML(GTK_WIDGET(gtkText),TRUE);
+	/* show module text for current key */
+	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	if (!strcmp(font, "Symbol")) {
@@ -120,44 +120,42 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	
+
 	/*gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbCom")), 0);*/
-	
+	   (lookup_widget(MainFrm, "nbCom")), 0); */
+
 	(const char *) imodule;	/* snap to entry */
-	beginHTML(GTK_WIDGET(gtkText),TRUE);
-	sprintf(tmpBuf,"<html><body>");
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = strlen(utf8str);//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-	
+	beginHTML(GTK_WIDGET(gtkText), TRUE);
+	sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings->bible_bg_color, settings->bible_text_color,
+		settings->link_color);
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	/* show verse ref in text widget  */
-	sprintf(tmpBuf,"<A HREF=\"[%s] %s\"><B>[%s]</A>[%s] </B>",
-					imodule.Name(),
-					 imodule.Description(),
-					imodule.Name(),
-					 imodule.KeyText() );	
-			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-			
-			 sprintf(tmpBuf, "<font size=\"%s\">",
-					settings->dictionary_font_size);	
-			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
-			
-			displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
-						 
-			 sprintf(tmpBuf, " %s", "</font></body></html>");			 
-			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-			 /*
-			 g_warning("utf8 string!");
-		}else{ 
-			 g_warning("not utf8 string!");*/
-		//}		
+	sprintf(tmpBuf,
+		"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\"><B>[%s]</B></A></font>[%s] ",
+		imodule.Name(), imodule.Description(),
+		settings->bible_verse_num_color, imodule.Name(),
+		imodule.KeyText());
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+	sprintf(tmpBuf, "<font size=\"%s\">",
+		settings->dictionary_font_size);
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
+		    strlen((const char *) imodule));
+
+	sprintf(tmpBuf, " %s", "</font></body></html>");
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
 	return 0;
 }
@@ -195,10 +193,11 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			font = (char *) (*eit).second.c_str();
 		}
 	}
-	beginHTML(GTK_WIDGET(gtkText),FALSE);
-	strbuf =
-	    g_string_new("");
-	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">","+1");
+	beginHTML(GTK_WIDGET(gtkText), FALSE);
+	strbuf = g_string_new("");
+	g_string_sprintf(strbuf,
+			 "<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">",
+			 "+1");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 
@@ -220,7 +219,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());
 		}
-		
+
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 		if (key->Verse() == curVerse) {
@@ -233,37 +232,44 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				g_string_sprintf(strbuf,
 						 "<FONT SIZE=\"+5\" COLOR=\"%s\" FACE=\"greek1\">",
 						 mycolor);
-			
+
 			} else if (!stricmp(font, "BSTHebrew")) {
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\" FACE=\"bsthebrew\">",
-						 mycolor);				
+						 mycolor);
 			} else {
-				if (bVerseStyle && newparagraph) {				
-					g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">%c", mycolor,182);				
+				if (settings->versestyle && newparagraph) {
+					g_string_sprintf(strbuf,
+							 "<FONT COLOR=\"%s\">%c",
+							 mycolor, 182);
 					newparagraph = false;
 				} else
-				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\">",
-						 mycolor);
+					g_string_sprintf(strbuf,
+							 "<FONT COLOR=\"%s\">",
+							 mycolor);
 			}
-			if (newparagraph) {			
+			if (newparagraph) {
 				newparagraph = false;
-			} 	
-			strbuf = g_string_append(strbuf, (const char *)imodule);
-			if (bVerseStyle) {
+			}
+			strbuf =
+			    g_string_append(strbuf,
+					    (const char *) imodule);
+			if (settings->versestyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
 				    && strstr(strbuf->str, "<P>") == NULL)
 					strbuf =
 					    g_string_append(strbuf,
 							    "</font><br>");
-				else if(strstr(strbuf->str, "<P>") != NULL) {
+				else if (strstr(strbuf->str, "<P>") !=
+					 NULL) {
 					mybuf = strstr(strbuf->str, "<P>");
 					mybuflen = strlen(mybuf);
-					mybuflen =strbuf->len - mybuflen; 
-					strbuf = g_string_truncate(strbuf,mybuflen);
-					    g_string_append(strbuf,
-							    "</font><br>");
+					mybuflen = strbuf->len - mybuflen;
+					strbuf =
+					    g_string_truncate(strbuf,
+							      mybuflen);
+					g_string_append(strbuf,
+							"</font><br>");
 					newparagraph = true;
 				} else
 					strbuf =
@@ -277,36 +283,55 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			g_string_free(strbuf, TRUE);
 		} else {
 			if (!stricmp(font, "Symbol")) {
-				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */				
+				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */
 			} else if (!stricmp(font, "greek1")) {
-				strbuf = g_string_new("<FONT SIZE=\"+5\"  COLOR=\"#000000\" FONT FACE=\"greek1\">");
+				strbuf =
+				    g_string_new
+				    ("<FONT SIZE=\"+5\"  COLOR=\"#000000\" FONT FACE=\"greek1\">");
 			} else if (!stricmp(font, "BSTHebrew")) {
-				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");					
+				strbuf =
+				    g_string_new
+				    ("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");
 			} else {
 				strbuf = g_string_new("");
-				if (bVerseStyle && newparagraph) {
-					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >%c",c);
+				if (settings->versestyle && newparagraph) {
+					g_string_sprintf(strbuf,
+							 "<FONT COLOR=\"#000000\" >%c",
+							 c);
 					newparagraph = false;
 				} else
-					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >");
+					g_string_sprintf(strbuf,
+							 "<FONT COLOR=\"#000000\" >");
 			}
-			strbuf = g_string_append(strbuf, (const char *)imodule);
-			if (bVerseStyle) {
+			strbuf =
+			    g_string_append(strbuf,
+					    (const char *) imodule);
+			if (settings->versestyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
-					    && strstr(strbuf->str, "<P>") == NULL)
-						strbuf = g_string_append(strbuf, "</font><br>");
-				else if(strstr(strbuf->str, "<P>") != NULL) {
-						mybuf = strstr(strbuf->str, "<P>");
-						mybuflen = strlen(mybuf);
-						mybuflen =strbuf->len - mybuflen; 
-						strbuf = g_string_truncate(strbuf,mybuflen);
-					    	g_string_append(strbuf, "</font><br>");
-						newparagraph = true;
+				    && strstr(strbuf->str, "<P>") == NULL)
+					strbuf =
+					    g_string_append(strbuf,
+							    "</font><br>");
+				else if (strstr(strbuf->str, "<P>") !=
+					 NULL) {
+					mybuf = strstr(strbuf->str, "<P>");
+					mybuflen = strlen(mybuf);
+					mybuflen = strbuf->len - mybuflen;
+					strbuf =
+					    g_string_truncate(strbuf,
+							      mybuflen);
+					g_string_append(strbuf,
+							"</font><br>");
+					newparagraph = true;
 				} else
-					strbuf = g_string_append(strbuf, "</font>"); 
-			} else 
-				strbuf = g_string_append(strbuf, "</font>");	
-			displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
+					strbuf =
+					    g_string_append(strbuf,
+							    "</font>");
+			} else
+				strbuf =
+				    g_string_append(strbuf, "</font>");
+			displayHTML(GTK_WIDGET(gtkText), strbuf->str,
+				    strbuf->len);
 			g_string_free(strbuf, TRUE);
 		}
 	}
@@ -343,58 +368,65 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	 
-	//c = 182;	 
-	
+
+	//c = 182;       
+
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbText")), 1);
-	
-	beginHTML(GTK_WIDGET(gtkText),TRUE);	
-	
-	sprintf(tmpBuf,"<html><body bgcolor=\"%s\" text=\"#151515\" link=\"#898989\">",
-		settings->bible_bg_color);
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-	
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter
-	      && !imodule.Error()); imodule++) {		
+
+	beginHTML(GTK_WIDGET(gtkText), TRUE);
+
+	sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings->bible_bg_color, settings->bible_text_color,
+		settings->link_color);
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+	for (key->Verse(1);
+	     (key->Book() == curBook && key->Chapter() == curChapter
+	      && !imodule.Error()); imodule++) {
 		if (key->Verse() == curVerse)
-			sprintf(versecolor,"%s",settings->currentverse_color);
+			sprintf(versecolor, "%s",
+				settings->currentverse_color);
 		else
-			sprintf(versecolor,"%s", settings->bible_text_color);
-		sprintf(tmpBuf, "&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>%d</B></font></A> ",
-					imodule.Description(),
-					imodule.KeyText(), 
-					key->Verse(),
-					settings->bible_verse_num_color,
-					key->Verse());	
-		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-			 
+			sprintf(versecolor, "%s",
+				settings->bible_text_color);
+		sprintf(tmpBuf,
+			"&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>  %d</B></font></A> ",
+			imodule.Description(), imodule.KeyText(),
+			key->Verse(), settings->bible_verse_num_color,
+			key->Verse());
+		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
 		sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">",
-					versecolor,
-			 		settings->bible_font_size);	
-		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
-			
-		displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
-		if(bVerseStyle){
-			if (strstr((const char *)imodule, "<BR>") == NULL
-					    && strstr((const char *)imodule, "<P>") == NULL)
-					sprintf(tmpBuf, " %s", "</font><br>");	
-			else sprintf(tmpBuf, " %s", "</font>");	
-		} else sprintf(tmpBuf, " %s", "</font>");			 
-		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
+			versecolor, settings->bible_font_size);
+		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+		displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
+			    strlen((const char *) imodule));
+		if (settings->versestyle) {
+			if (strstr((const char *) imodule, "<BR>") == NULL
+			    && strstr((const char *) imodule,
+				      "<P>") == NULL)
+				sprintf(tmpBuf, " %s", "</font><br>");
+			else
+				sprintf(tmpBuf, " %s", "</font>");
+		} else
+			sprintf(tmpBuf, " %s", "</font>");
+		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	}
-	sprintf(tmpBuf, " %s", "</body></html>");			 
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
+	sprintf(tmpBuf, " %s", "</body></html>");
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	key->Verse(1);
 	key->Chapter(1);
 	key->Book(curBook);
@@ -405,41 +437,46 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gotoanchorHTML(gtkText, tmpBuf);
 	return 0;
 }
+
 /* --------------------------------------------------------------------------------------------- */
 char InterlinearDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[800], 
-		*buf;
+	gchar tmpBuf[800], *buf;
 	gint i;
 	bool utf = false;
 	gint len;
 	gchar *utf8str;
 	gint utf8len;
-	
-	
-	//buf = (char *) imodule.Description();	
-	(const char *) imodule;		
-	sprintf(tmpBuf, 
-		"<B><A HREF=\"[%s]%s\"><FONT COLOR=\"#000FCF\" SIZE=\"%s\"> [%s]</font></a></b><FONT COLOR=\"#000FCF\">[%s] </font>",
-				imodule.Name(), 
-				 imodule.Description(),
-				settings->interlinear_font_size,
-				imodule.Name(), 
-				imodule.KeyText());	
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);	
-		
-	sprintf(tmpBuf,	 "<font size=\"%s\">",
-				settings->interlinear_font_size);	
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	
-			
-	displayHTML(GTK_WIDGET(gtkText), (const char *)imodule, strlen((const char *)imodule) );
-		
-	sprintf(tmpBuf," [<A HREF=\"@%s\">view context</a>]</font><br><hr>",imodule.Name());
-	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+
+
+	//buf = (char *) imodule.Description(); 
+	(const char *) imodule;
+	sprintf(tmpBuf,
+		"<B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b><FONT COLOR=\"%s\">[%s] </font>",
+		imodule.Name(),
+		imodule.Description(),
+		settings->bible_verse_num_color,
+		settings->bible_font_size,
+		imodule.Name(), 
+		settings->bible_verse_num_color,
+		imodule.KeyText());
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+	sprintf(tmpBuf, "<font size=\"%s\">",
+		settings->interlinear_font_size);
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+
+	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
+		    strlen((const char *) imodule));
+
+	sprintf(tmpBuf,
+		" [<A HREF=\"@%s\">view context</a>]</font><br><hr>",
+		imodule.Name());
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
 	return 0;
 }
@@ -449,18 +486,16 @@ char InterlinearDisp::Display(SWModule & imodule)
  *****************************************************************************/
 void AboutModsDisplayHTML(char *to, char *text)
 {
-    	int len,i;
+	int len, i;
 	bool center = false;
-								// shift string to right of buffer
-								// -------------------------------
-	for (i = 0; i < strlen(text) -1; i++) {
-		if (text[i] == '\\') // a RTF command
+	// shift string to right of buffer
+	// -------------------------------
+	for (i = 0; i < strlen(text) - 1; i++) {
+		if (text[i] == '\\')	// a RTF command
 		{
-			if ((text[i+1] == 'p') && (text[i+2] == 'a') && (text[i+3] == 'r') && (text[i+4] == 'd'))
-			{ // switch all modifier off
-				
-				if (center)
-				{
+			if ((text[i + 1] == 'p') && (text[i + 2] == 'a') && (text[i + 3] == 'r') && (text[i + 4] == 'd')) {	// switch all modifier off
+
+				if (center) {
 					*to++ = '<';
 					*to++ = '/';
 					*to++ = 'C';
@@ -475,8 +510,8 @@ void AboutModsDisplayHTML(char *to, char *text)
 				i += 4;
 				continue;
 			}
-			if ((text[i+1] == 'p') && (text[i+2] == 'a') && (text[i+3] == 'r'))
-			{
+			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
+			    && (text[i + 3] == 'r')) {
 				*to++ = '<';
 				*to++ = 'b';
 				*to++ = 'r';
@@ -485,20 +520,17 @@ void AboutModsDisplayHTML(char *to, char *text)
 				i += 3;
 				continue;
 			}
-			if (text[i+1] == ' ')
-			{
+			if (text[i + 1] == ' ') {
 				i += 1;
 				continue;
 			}
-			if (text[i+1] == '\n')
-			{
+			if (text[i + 1] == '\n') {
 				i += 1;
 				continue;
-			}			
-			if ((text[i+1] == 'q') && (text[i+2] == 'c')) // center on
+			}
+			if ((text[i + 1] == 'q') && (text[i + 2] == 'c'))	// center on
 			{
-				if (!center)
-				{
+				if (!center) {
 					*to++ = '<';
 					*to++ = 'C';
 					*to++ = 'E';
@@ -517,7 +549,5 @@ void AboutModsDisplayHTML(char *to, char *text)
 	}
 	*to++ = 0;
 	//return to;
-	
+
 }
-
-
