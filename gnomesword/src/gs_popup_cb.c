@@ -37,6 +37,8 @@ extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.
 extern gboolean autoscroll;
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern gboolean isrunningVC;    /* is the view dictionary dialog runing */
+extern gboolean isrunningVT;    /* is the view text dialog runing */
+
 extern gchar current_verse[80];
 
 //----------------------------------------------------------------------------------------------
@@ -542,9 +544,11 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 void
 on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *dlg;
+	static GtkWidget *dlg;
 	
-	dlg = create_dlgViewText ();
+	if(!isrunningVT) {
+		dlg = create_dlgViewText ();
+	}
 	gtk_widget_show(dlg);
 }
 
