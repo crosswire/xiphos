@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * abouts_gnomesword.c - GnomeSword about dialog
+ * about_gnomesword.c - GnomeSword about dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -26,10 +26,11 @@
 #include <gnome.h>
 
 #include "gui/about_gnomesword.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * public
- *****************************************************************************/
+ */
 
 /******************************************************************************
  * Name
@@ -65,13 +66,13 @@ GtkWidget *gui_create_about_gnomesword(void)
         GtkWidget *about;
 
         about = gnome_about_new(
-                "gnomesword", VERSION,
-                "Copyright 2000-2002", authors,
+                settings.program_title, VERSION,
+                "Copyright 2000-2003", authors,
                 _(
                 "We would like to thank Troy Griffitts and all the other "
                 "folks who have given us The SWORD Project."
 		),
-                "gnomesword/about.png"
+                PACKAGE_PIXMAPS_DIR"/about.png"
         );
         gtk_object_set_data(GTK_OBJECT(about), "about", about);
         gtk_container_set_border_width(GTK_CONTAINER(about), 4);

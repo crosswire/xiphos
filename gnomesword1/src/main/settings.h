@@ -136,6 +136,7 @@ struct _settings {
 		inViewer, /* display dict/lex in viewer when word or link clicked */
 		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
 		useDefaultDict,
+		strip_words_in_red,
 		
 		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */

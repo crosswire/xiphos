@@ -38,6 +38,7 @@
 #include "gui/shortcutbar_search.h"
 #include "gui/dialog.h"
 #include "gui/font_dialog.h"
+#include "gui/dictlex.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -79,14 +80,22 @@ static gboolean display_change = TRUE;
 
 void gui_get_module_global_options(TEXT_DATA * t)
 {
-	t->tgs->gbfstrongs =
+	t->tgs->strongs =
 	    check_for_global_option(t->mod_name, "GBFStrongs");
-	t->tgs->thmlstrongs =
-	    check_for_global_option(t->mod_name, "ThMLStrongs");
-	t->tgs->gbfmorphs =
+	if(!t->tgs->strongs)
+		t->tgs->strongs =
+	    	    check_for_global_option(t->mod_name, "ThMLStrongs");
+	if(!t->tgs->strongs)
+		t->tgs->strongs =
+	   	    check_for_global_option(t->mod_name, "OSISStrongs");
+	t->tgs->morphs =
 	    check_for_global_option(t->mod_name, "GBFMorph");
-	t->tgs->thmlmorphs =
-	    check_for_global_option(t->mod_name, "ThMLMorph");
+	if(!t->tgs->morphs)
+		t->tgs->morphs =
+		    check_for_global_option(t->mod_name, "OSISSMorph");
+	if(!t->tgs->morphs)
+		t->tgs->morphs =
+	    	    check_for_global_option(t->mod_name, "ThMLMorph");
 	t->tgs->gbffootnotes =
 	    check_for_global_option(t->mod_name, "GBFFootnotes");
 	t->tgs->thmlfootnotes =
@@ -270,6 +279,10 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 		gtk_widget_hide(t->frame_toolbar);
 	GTK_CHECK_MENU_ITEM(t->showtoolbar)->active =
 	    settings.text_tool;
+	/*
+	 *  set words_in_red
+	 */
+	settings.strip_words_in_red = t->strip_words_in_red;
 	/*
 	 *  keep showtabs menu item current 
 	 */
@@ -1219,7 +1232,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 	GtkWidget *variant_menu;
 	GtkWidget *tmp_toolbar_icon;
 
-	if (tgs->gbfstrongs || tgs->thmlstrongs) {
+	if (tgs->strongs) {
 		tmp_toolbar_icon =
 		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					       "/s.xpm");
@@ -1252,7 +1265,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 				   GTK_SIGNAL_FUNC(callback),
 				   "Strong's Numbers");
 	}
-	if (tgs->gbfmorphs || tgs->thmlmorphs) {
+	if (tgs->morphs) {
 		tmp_toolbar_icon =
 		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					       "/m.xpm");
@@ -1673,7 +1686,7 @@ static void create_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *frame_text;
 	GtkWidget *scrolledwindow;
-
+	
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame",
@@ -1711,6 +1724,7 @@ static void create_pane(TEXT_DATA * t)
 	gtk_widget_show(frame_text);
 	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE, 0);
 
+	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -1740,7 +1754,7 @@ static void create_pane(TEXT_DATA * t)
 			   (TEXT_DATA *) t);
 	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
 			   GTK_SIGNAL_FUNC(gui_url),
-			   (gpointer) widgets.app);
+			   (TEXT_DATA *) t);
 	gtk_signal_connect(GTK_OBJECT(t->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),
 			   (TEXT_DATA *) t);
@@ -1954,7 +1968,9 @@ void gui_setup_text(GList * mods)
 		t->key = NULL;
 		t->cipher_key = NULL;
 		t->find_dialog = NULL;
-
+		t->strip_words_in_red 
+			= load_module_options(t->mod_name, 
+				"Strip Words in Red");
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);
 			t->cipher_old = get_cipher_key(t->mod_name);

@@ -32,6 +32,7 @@ struct _viewtext {
 	GtkWidget *cbe_book;
 	GtkWidget *spb_chapter;
 	GtkWidget *spb_verse;
+	GtkWidget *freeform_lookup;
 	GtkWidget *html;
 	GtkWidget *btn_print;
 	GtkWidget *statusbar;
