@@ -1359,7 +1359,7 @@ void gui_setup_shortcut_bar(void)
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 				  scrolledwindow1, button, -1);
 
-	loadtree(&settings);
+	loadtree();
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow2);

@@ -34,7 +34,7 @@ extern "C" {
 #include "main/settings.h"
 
 /*** add sword global options to menus ***/
-void additemstooptionsmenu(GList * options, SETTINGS * s);
+void additemstooptionsmenu(GList *options);
 
 void additemtognomemenu(GtkWidget * MainFrm,
 		    gchar * itemname,
@@ -60,18 +60,11 @@ GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
 			       gchar * itemlabel,
 			       GtkMenuCallback mycallback);
 
-void removemenuitems(GtkWidget * MainFrm,
-		 gchar * startitem, gint numberofitems);
+void removemenuitems(GtkWidget *MainFrm, gchar *startitem, gint numberofitems);
 
-void createpopupmenus(SETTINGS * s,
-		      GList * bilbeDescription,
-		      GList * options);
-
-void addmodstomenus(SETTINGS * s,
-		    GList * biblelist,
-		    GList * commentarylist,
-		    GList * dictionarylist,
-		    GList * booklist);
+void createpopupmenus(GList * bilbeDescription, GList * options);
+void addmodstomenus(GList * biblelist, GList * commentarylist,
+		GList * dictionarylist, GList * booklist);
 
 GtkWidget *create_shortcutbarMenu(gint barnum);
 
