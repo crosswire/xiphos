@@ -23,11 +23,9 @@ gnomesword2_SOURCES =  \
     cipher_key_dialog.c \
     commentary.c \
     commentary_dialog.c \
-    commentary_menu.c \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \
-    dictlex_menu.c \
     display_info.c \
     dummy.cpp \
     editor.c \
@@ -39,8 +37,6 @@ gnomesword2_SOURCES =  \
     font_dialog.c \
     gbs.c \
     gbs_dialog.c \
-    gbs_display.c \
-    gbs_menu.c \
     gnomesword.c \
     gtkhtml_display.c \
     gui.c \

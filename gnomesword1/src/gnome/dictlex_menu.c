@@ -67,7 +67,7 @@
 
 static void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * t)
 {
-	gui_copy_html(t->html);
+//	gui_copy_html(t->html);
 }
 
 /******************************************************************************

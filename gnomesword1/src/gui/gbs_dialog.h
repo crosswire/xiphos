@@ -25,7 +25,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+#include "main/module_dialogs.h"
+/*
 #include "gui/gbs.h"
 
 #include "main/global_ops.hh"
@@ -57,14 +59,10 @@ struct _gbsdata {
 	
 	GLOBAL_OPS *ops;
 };
-	
-void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key);
-void gui_open_gbs_dialog(gchar * mod_name);
-void gui_setup_gbs_dialog(GList *mods);
-void gui_shutdown_gbs_dialog(void) ;
-void gui_close_gbs_dialog(GBS_DATA * dlg);
-void gui_update_gbs_dialog_display(void);
-	
+*/	
+
+void gui_create_gbs_dialog(DIALOG_DATA * dlg);
+
 #ifdef __cplusplus
 }
 #endif

@@ -25,6 +25,13 @@ extern "C" {
 	
 #include <gnome.h>
 
+typedef struct {
+	GdkPixbuf *pixbuf_opened;
+	GdkPixbuf *pixbuf_closed;
+	GdkPixbuf *pixbuf_helpdoc;
+} TreePixbufs;
+extern TreePixbufs *pixbufs;
+
 void main_create_pixbufs(void);
 void main_load_module_tree(GtkWidget * tree);
 void main_add_mod_tree_columns(GtkTreeView * tree);

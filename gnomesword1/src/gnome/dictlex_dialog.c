@@ -40,12 +40,13 @@
 #include "main/lists.h"
 
 
+extern gboolean dialog_freed;
+
 /******************************************************************************
  * static - global to this file only
  */
 static GList * dialog_list;
-static gboolean dialog_freed;
-static DL_DATA *cur_dlg;
+static DIALOG_DATA *cur_dlg;
 
 /******************************************************************************
  * Name
@@ -102,7 +103,7 @@ void gui_lookup_dictlex_dialog_selection
  */
 
 static void on_entry_lookup_changed(GtkEditable * editable,
-						DL_DATA * d)
+						DIALOG_DATA * d)
 {
 	gint count, i;
 	gchar *key, *new_key, *text;
@@ -162,7 +163,7 @@ static void on_entry_lookup_changed(GtkEditable * editable,
  */
 
 static gint button_press_event(GtkWidget * html,
-			       GdkEventButton * event, DL_DATA * dlg)
+			       GdkEventButton * event, DIALOG_DATA * dlg)
 {
 	cur_dlg = dlg;
 	return FALSE;
@@ -177,7 +178,7 @@ static gint button_press_event(GtkWidget * html,
  *   #include "dictlex_dialog.h"
  *
  *   void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
-                                        DL_DATA * dlg)
+                                        DIALOG_DATA * dlg)
  *
  * Description
  *    
@@ -187,7 +188,7 @@ static gint button_press_event(GtkWidget * html,
  */
 
 static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
-                                        DL_DATA * dlg)
+                                        DIALOG_DATA * dlg)
 {
 	cur_dlg = dlg;
 //	g_warning("current module = %s",cur_dlg->mod_name);
@@ -201,7 +202,7 @@ static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void free_on_destroy(DL_DATA * dlg)
+ *   void free_on_destroy(DIALOG_DATA * dlg)
  *
  * Description
  *   removes dialog from dialog_list when dialog is destroyed other than
@@ -211,9 +212,9 @@ static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
  *   void
  */
 
-static void free_on_destroy(DL_DATA * dlg)
+static void free_on_destroy(DIALOG_DATA * dlg)
 {	
-	dialog_list = g_list_remove(dialog_list, (DL_DATA *) dlg);
+	dialog_list = g_list_remove(dialog_list, (DIALOG_DATA *) dlg);
 //		g_warning("shuting down %s dialog",dlg->mod_name);
 	g_free(dlg);
 }
@@ -226,7 +227,7 @@ static void free_on_destroy(DL_DATA * dlg)
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void dialog_destroy(GtkObject *object, DL_DATA * dlg)
+ *   void dialog_destroy(GtkObject *object, DIALOG_DATA * dlg)
  *
  * Description
  *    
@@ -235,10 +236,10 @@ static void free_on_destroy(DL_DATA * dlg)
  *   void
  */
 
-static void dialog_destroy(GtkObject *object, DL_DATA * dlg)
-{
-	if(!dialog_freed)
-		free_on_destroy(dlg);
+static void dialog_destroy(GtkObject *object, DIALOG_DATA * dlg)
+{	
+	if (!dialog_freed)
+		main_free_on_destroy(dlg);
 	dialog_freed = FALSE;
 }
 
@@ -250,7 +251,7 @@ static void dialog_destroy(GtkObject *object, DL_DATA * dlg)
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void on_btn_close_clicked(GtkButton *button, DL_DATA *dlg)
+ *   void on_btn_close_clicked(GtkButton *button, DIALOG_DATA *dlg)
  *
  * Description
  *    
@@ -259,7 +260,7 @@ static void dialog_destroy(GtkObject *object, DL_DATA * dlg)
  *   void
  */
 
-static void on_btn_close_clicked(GtkButton *button, DL_DATA *dlg)
+static void on_btn_close_clicked(GtkButton *button, DIALOG_DATA *dlg)
 {
 	//cur_dlg = dlg;
 	gui_close_dict_dialog(dlg);
@@ -273,7 +274,7 @@ static void on_btn_close_clicked(GtkButton *button, DL_DATA *dlg)
  * Synopsis
  *   #include "dictlex_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, DL_DATA * d)	
+ *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * d)	
  *
  * Description
  *   
@@ -282,7 +283,7 @@ static void on_btn_close_clicked(GtkButton *button, DL_DATA *dlg)
  *   void
  */
 
-static void dialog_url(GtkHTML * html, const gchar * url, DL_DATA *dlg)
+static void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA *dlg)
 {
 
 	cur_dlg = dlg;
@@ -331,7 +332,7 @@ static void dialog_url(GtkHTML * html, const gchar * url, DL_DATA *dlg)
  *   GtkWidget *
  */
 
-static void create_dictlex_dialog(DL_DATA *dlg)
+void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *hpaned7;
 	GtkWidget *vbox;
@@ -496,13 +497,13 @@ static void create_dictlex_dialog(DL_DATA *dlg)
  * Return value
  *   void
  */
-
+/*
 void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 {
 	GList *tmp = NULL;
 	tmp = g_list_first(dialog_list);
 	while (tmp != NULL) {
-		DL_DATA *dlg = (DL_DATA *) tmp->data;
+		DIALOG_DATA *dlg = (DIALOG_DATA *) tmp->data;
 		if(!strcmp(dlg->mod_name, mod_name)) {
 			dlg->key = g_strdup(key);
 			gtk_entry_set_text(GTK_ENTRY(dlg->entry),
@@ -516,7 +517,7 @@ void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 	cur_dlg->key = g_strdup(key);
 	gtk_entry_set_text(GTK_ENTRY(cur_dlg->entry),key);
 }
-
+*/
 /******************************************************************************
  * Name
  *   gui_open_dictlex_dialog
@@ -532,20 +533,20 @@ void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
  * Return value
  *   void
  */
-
+/*
 void gui_open_dictlex_dialog(gchar * mod_name)
 {		
-	DL_DATA *dlg;
+	DIALOG_DATA *dlg;
 	GtkWidget *popupmenu;
 	
-	dlg = g_new(DL_DATA, 1);
+	dlg = g_new(DIALOG_DATA, 1);
 	dlg->mod_num = get_module_number(mod_name, DICT_MODS);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->key = g_strdup(settings.dictkey);
 	dlg->mod_name = g_strdup(mod_name);
 	dlg->is_dialog = TRUE;
-	dialog_list = g_list_append(dialog_list, (DL_DATA*) dlg);
+	dialog_list = g_list_append(dialog_list, (DIALOG_DATA*) dlg);
 	create_dictlex_dialog(dlg);
 	if (has_cipher_tag(dlg->mod_name)) {
 		dlg->is_locked = module_is_locked(dlg->mod_name);
@@ -562,7 +563,7 @@ void gui_open_dictlex_dialog(gchar * mod_name)
 	gtk_widget_show(dlg->dialog);
 	on_btnSyncDL_clicked(NULL, dlg);	
 }
-
+*/
 /******************************************************************************
  * Name
  *   
@@ -578,13 +579,13 @@ void gui_open_dictlex_dialog(gchar * mod_name)
  * Return value
  *   void
  */
-
+/*
 void gui_setup_dictlex_dialog(GList *mods)
 {	
 	dialog_list = NULL;
 	dialog_freed = FALSE;
 }
-
+*/
 /******************************************************************************
  * Name
  *   gui_close_dict_dialog
@@ -600,8 +601,8 @@ void gui_setup_dictlex_dialog(GList *mods)
  * Return value
  *   void
  */
-
-void gui_close_dict_dialog(DL_DATA * dlg)
+/*
+void gui_close_dict_dialog(DIALOG_DATA * dlg)
 {
 	if(dlg->dialog) {
 		dialog_freed = FALSE;
@@ -609,7 +610,7 @@ void gui_close_dict_dialog(DL_DATA * dlg)
 	}
 	
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -626,25 +627,19 @@ void gui_close_dict_dialog(DL_DATA * dlg)
  * Return value
  *   void
  */
-
+/*
 void gui_shutdown_dictlex_dialog(void) 
 {
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
-		DL_DATA *dlg = (DL_DATA *) dialog_list->data;
+		DIALOG_DATA *dlg = (DIALOG_DATA *) dialog_list->data;
 		dialog_freed = TRUE;		
 		if(dlg->key) g_free(dlg->key);
 		if(dlg->mod_name)
 			g_free(dlg->mod_name);
-		/* 
-		 *  destroy any dialogs created 
-		 */
 		if (dlg->dialog)
 			 gtk_widget_destroy(dlg->dialog);
-		/* 
-		 * free each DL_DATA item created 
-		 */
-		g_free((DL_DATA *) dialog_list->data);
+		g_free((DIALOG_DATA *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
 	} 
 	g_list_free(dialog_list);

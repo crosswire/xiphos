@@ -47,7 +47,7 @@
 
 #include "main/url.h"
 #include "main/sword.h"
-#include "main/gbs.h"
+//#include "main/gbs.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
@@ -985,23 +985,7 @@ static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 
 static void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gint module_type;
-
-	module_type = get_mod_type(buf_module);
-	switch (module_type) {
-	case -1:
-		break;
-	case TEXT_TYPE:
-	case COMMENTARY_TYPE:
-		main_dialogs_open(buf_module);
-		break;
-	case DICTIONARY_TYPE:
-		gui_open_dictlex_dialog(buf_module);
-		break;
-	case BOOK_TYPE:
-		gui_open_gbs_dialog(buf_module);
-		break;
-	}
+	main_dialogs_open(buf_module);
 	g_free(buf_module);
 }
 

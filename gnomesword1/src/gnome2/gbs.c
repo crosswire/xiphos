@@ -29,8 +29,6 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
-#include "gui/gbs_display.h"
-#include "gui/gbs_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/find_dialog.h"
@@ -46,7 +44,6 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/global_ops.hh"
-#include "main/gbs.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
