@@ -67,6 +67,7 @@ extern GdkBitmap *mask3;
  * globals
  ******************************************************************************
 */
+GtkWidget *pmBookmarkTree;
 GtkStyle *style;
 BM_TREE bmtree;
 BM_TREE *p_bmtree;
@@ -106,25 +107,37 @@ static void on_btnBMok_clicked(GtkButton * button, gchar * buf[3]);
 static void on_btnBMapply_clicked(GtkButton * button, gchar * buf[3]);
 static void on_add_bookmark_activate(GtkMenuItem * menuitem, 
 					gpointer user_data);
+static void on_insert_bookmark_activate(GtkMenuItem * menuitem, 
+					gpointer user_data);
 static void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
 static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 /*** bookmark tree popup menu items  ***/
+/* !! CHANGING THIS DON'T FORGET ALSO CHANGE create_pmBookmarkTree !! */
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
-	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New SubGroup"),
-	  N_("Add new SubGroup to selected group"),
-	  on_new_activate, NULL),
 	{
-	 GNOME_APP_UI_ITEM, N_("Add New Group"),
+	 GNOME_APP_UI_ITEM, N_("New _Group"),
 	 N_("Add a new root group and file"),
 	 (gpointer) on_add_new_group1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Save Bookmarks"),
-	 N_("Save all bookmark files"),
-	 (gpointer) on_save_bookmarks1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+	 GNOME_APP_UI_ITEM, N_("New _SubGroup"),
+	 N_("Add new SubGroup to selected group"),
+	 (gpointer) on_new_subgroup_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Insert Item"),
+	 N_("Insert new bookmark here"),
+	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Add Item at Root"),
+	 N_("Add new bookmark item"),
+	 (gpointer) on_add_bookmark_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Edit Item"),
@@ -139,6 +152,12 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("Save Bookmarks"),
+	 N_("Save all bookmark files"),
+	 (gpointer) on_save_bookmarks1_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Expand All"),
 	 N_("Expand all Bookmarks groups"),
@@ -225,9 +244,14 @@ on_ctree_select_row(GtkCList * clist,
 	//GtkCTreeNode *node;
 	gchar *label, *modName, *key;
 	GtkCTree *ctree;
+	GtkWidget *new_widget, *insert_item_widget;
 
 	ctree = user_data;
 	selected_node = gtk_ctree_node_nth(p_bmtree->ctree, row);
+
+	new_widget         = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "new");
+	insert_item_widget = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "insert_item");
+
 	if (GTK_CTREE_ROW(selected_node)->is_leaf) {	/* if node is leaf we need to change mod and key */
 
 		label =
@@ -240,14 +264,12 @@ on_ctree_select_row(GtkCList * clist,
 		modName =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[2])->text;
-		gtk_widget_set_sensitive(GTK_WIDGET
-					 (pmBookmarkTree_uiinfo[0].widget),
-					 FALSE);
+		gtk_widget_set_sensitive(new_widget,         FALSE);
+		gtk_widget_set_sensitive(insert_item_widget, FALSE);
 		gotoBookmarkSWORD(modName, key);
 	} else {
-		gtk_widget_set_sensitive(GTK_WIDGET
-					 (pmBookmarkTree_uiinfo[0].widget),
-					 TRUE);
+		gtk_widget_set_sensitive(new_widget,         TRUE);
+		gtk_widget_set_sensitive(insert_item_widget, TRUE);
 	}
 }
 
@@ -342,15 +364,18 @@ static void stringCallback(gchar * str, gpointer data)
 	if ((str == NULL) || (strlen(str) == 0)) {
 		(gchar *) data = NULL;
 	} else {
+		GtkCTreeNode *newnode;
 		switch (GPOINTER_TO_INT(data)) {
 		case 0:
 			text[0] = str;
 			text[1] = "GROUP";
 			text[2] = "GROUP";
-			gtk_ctree_insert_node(p_bmtree->ctree,
+			newnode = gtk_ctree_insert_node(p_bmtree->ctree,
 					      selected_node, NULL, text, 3,
 					      pixmap1, mask1, pixmap2,
 					      mask2, FALSE, FALSE);
+			gtk_ctree_select(p_bmtree->ctree, newnode);
+			gtk_ctree_expand(p_bmtree->ctree, selected_node);
 			break;
 		case 1:
 			sprintf(buf, "%s", str);	  /*** make file name ***/
@@ -375,6 +400,7 @@ static void stringCallback(gchar * str, gpointer data)
 						  NULL, text, 3, pixmap1,
 						  mask1, pixmap2, mask2,
 						  FALSE, FALSE);
+			gtk_ctree_select(p_bmtree->ctree, newrootnode);
 			addnewgrouptoMenus(settings->menuBible, newrootnode, str);
 			addnewgrouptoMenus(settings->menuhtmlcom, newrootnode, str);
 			addnewgrouptoMenus(settings->menuDict, newrootnode, str);
@@ -491,6 +517,13 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 	addbookmarktotree(node, modName, key);
 }
 
+static void
+on_insert_bookmark_activate(GtkMenuItem * menuitem, 
+				gpointer user_data)
+{
+	on_add_bookmark_activate(menuitem, selected_node);
+}
+
 
 /*
  *****************************************************************************
@@ -503,7 +536,7 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 /*
  * add new sub group to selected group
  */
-void on_new_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_new_subgroup_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dialog;
 	gchar *buf;
@@ -613,15 +646,18 @@ void addbookmarktotree(GtkCTreeNode *node, gchar *modName, gchar *verse)
 	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
 	if (applychangestobookmark) {
-		gtk_ctree_insert_node(p_bmtree->ctree,
-				      node,
-				      NULL, text,
-				      3,
-				      pixmap3,
-				      mask3, NULL, NULL, TRUE, FALSE);
+		GtkCTreeNode *newnode;
+		newnode = gtk_ctree_insert_node(p_bmtree->ctree,
+					     node,
+					     NULL, text,
+					     3,
+					     pixmap3,
+					     mask3, NULL, NULL, TRUE, FALSE);
 		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/
 		g_free(text[1]);
 		g_free(text[2]);
+		gtk_ctree_select(p_bmtree->ctree, newnode);
+		gtk_ctree_expand(p_bmtree->ctree, node);
 		applychangestobookmark = FALSE;
 	}
 }
@@ -679,7 +715,8 @@ void addverselistBM(SETTINGS * s, GList * list)
  */
 void loadtree(SETTINGS * s)
 {
-	GtkWidget *menu;
+	GtkWidget *menu, *new_widget, *insert_item_widget;
+
 	bmtree.ctree = GTK_CTREE(s->ctree_widget);
 	bmtree.ctree_widget = s->ctree_widget;
 	p_bmtree = &bmtree;
@@ -722,8 +759,11 @@ void loadtree(SETTINGS * s)
 	menu = create_pmBookmarkTree();
 	gnome_popup_menu_attach(menu, p_bmtree->ctree_widget,
 				(gchar *) "1");
-	gtk_widget_set_sensitive(GTK_WIDGET
-				 (pmBookmarkTree_uiinfo[0].widget), FALSE);
+
+	new_widget         = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "new");
+	insert_item_widget = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "insert_item");
+	gtk_widget_set_sensitive(new_widget,         FALSE);
+	gtk_widget_set_sensitive(insert_item_widget, FALSE);
 }
 
 /*
@@ -731,7 +771,7 @@ void loadtree(SETTINGS * s)
  */
 GtkWidget *create_pmBookmarkTree(void)
 {
-	GtkWidget *pmBookmarkTree;
+	int i = 0;
 
 	pmBookmarkTree = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmBookmarkTree), "pmBookmarkTree",
@@ -739,32 +779,57 @@ GtkWidget *create_pmBookmarkTree(void)
 	gnome_app_fill_menu(GTK_MENU_SHELL(pmBookmarkTree),
 			    pmBookmarkTree_uiinfo, NULL, FALSE, 0);
 
-	gtk_widget_ref(pmBookmarkTree_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "new",
-				 pmBookmarkTree_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmBookmarkTree_uiinfo[1].widget);
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree),
 				 "add_new_group1",
-				 pmBookmarkTree_uiinfo[1].widget,
+				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(pmBookmarkTree_uiinfo[2].widget);
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "new",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "insert_item",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "add_item",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "edit_item",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "delete_item",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree),
 				 "save_bookmarks1",
-				 pmBookmarkTree_uiinfo[2].widget,
+				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(pmBookmarkTree_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "delete_item",
-				 pmBookmarkTree_uiinfo[3].widget,
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "expand_all",
+				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(pmBookmarkTree_uiinfo[4].widget);
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "collapse_all",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree),
 				 "allow_reordering",
-				 pmBookmarkTree_uiinfo[4].widget,
+				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	return pmBookmarkTree;
@@ -789,7 +854,8 @@ GtkWidget *create_dlgEditBookMark(gchar * text[3], gboolean newbookmark)
 	GtkWidget *btnEBMcancel;
 
 	dlgEditBookMark =
-	    gnome_dialog_new(_("GnomeSword - Edit Bookmark"), NULL);
+	    gnome_dialog_new(newbookmark ? _("GnomeSword - New Bookmark") :
+			                   _("GnomeSword - Edit Bookmark"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgEditBookMark), "dlgEditBookMark",
 			    dlgEditBookMark);
 	gtk_window_set_policy(GTK_WINDOW(dlgEditBookMark), FALSE, FALSE,

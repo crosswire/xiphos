@@ -49,7 +49,7 @@ extern "C" {
 	 loadtree(SETTINGS * s);
 	GtkWidget *create_pmBookmarkTree(void);
 	void
-	 on_new_activate(GtkMenuItem * menuitem, gpointer user_data);
+	 on_new_subgroup_activate(GtkMenuItem * menuitem, gpointer user_data);
 	void
 	 on_add_new_group1_activate(GtkMenuItem * menuitem,
 				    	gpointer user_data);
