@@ -77,11 +77,31 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 			sprintf(buf,"Show %s in main window",url);
 		}else if (*url == '#') {
 			++url;
+			if(*url == 'T') ++url;
+			if(*url == 'G'){
+				gchar *tmpbuf;
+				++url; 
+				tmpbuf = g_strdup(url);
+				displaydictlexSBSWORD(settings->lex_greek, tmpbuf, settings);
+			//gotoBookmarkSWORD(settings->lex_greek, buf);  
+				g_free(tmpbuf);
+			}
+			if(*url == 'H'){
+				gchar *tmpbuf;
+				++url;  		
+				tmpbuf = g_strdup(url);
+				displaydictlexSBSWORD(settings->lex_hebrew, tmpbuf, settings);
+				//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
+				g_free(tmpbuf);
+			}		  		
 			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf,"Go to Strongs %s",url);
 		}else if (*url == 'M') {
+			gchar *tmpbuf;
 			++url;
-			//str = showfirstlineStrongsSWORD(atoi(url));
+			tmpbuf = g_strdup(url);
+			displaydictlexSBSWORD("Packard", tmpbuf, settings);
+			g_free(tmpbuf);
 			sprintf(buf,"Morph Tag: %s",url);	
 		} else if(*url == '[') {
 			++url;
@@ -107,7 +127,7 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar 
 		*buf,
-		*modbuf, 
+		*modbuf=NULL,
 		tmpbuf[255];
 	gchar 
 		newmod[80], 
@@ -128,9 +148,8 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}		
 		showmoduleinfoSWORD(tmpbuf); 
 	 /*** let's seperate mod version and passage ***/	
-	} else if(!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7) ) {	 	
+	} else if(!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7)) {	 	
 		gchar *mybuf = NULL;
-		//g_warning(url);
 		mybuf = strstr(url, "version=") ;
 		if(mybuf){
 			mybuf = strchr(mybuf,'=');
@@ -166,26 +185,73 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		buf = g_strdup(newref);
 		getVerseListSBSWORD(modbuf, buf, settings);
+		g_free(buf);		
+	 /*** let's seperate mod version and passage ***/	
+	} else if(!strncmp(url, "type=", 5)) {	 	
+		gchar *mybuf = NULL;
+		gint type=0;
+		mybuf = strstr(url, "type=") ;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			i=0;
+			while(mybuf[i] != ' ') {
+				newmod[i] = mybuf[i];
+				newmod[i+1] = '\0';
+				++i;
+				++havemod;
+			}
+			//g_warning(newmod);
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "value=") ;
+		i = 0;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			if(mybuf[0] == 'H') type = 0;
+			if(mybuf[0] == 'G') type = 1;	
+			++mybuf;
+			sprintf(newref,"%5.5d",atoi(mybuf));
+			//g_warning(newref);
+		} 
+		if(havemod>2){ 
+			if(!strcmp(newmod,"Strongs") && type == 0)
+				modbuf = "StrongsHebrew";
+			if(!strcmp(newmod,"Strongs") && type == 1)
+				modbuf = "StrongsGreek";
+			
+		}else{ 
+			modbuf = "";
+			return;
+		}
+		buf = g_strdup(newref);
+		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
+		displaydictlexSBSWORD(modbuf, buf, settings);
 		g_free(buf);
+			
 	}else if (*url == '#') {
 		++url;		/* remove # */
 		if(*url == 'T') ++url;
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(settings->lex_greek, buf);  
+			displaydictlexSBSWORD(settings->lex_greek, buf, settings);
+			//gotoBookmarkSWORD(settings->lex_greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(settings->lex_hebrew, buf);  
+			displaydictlexSBSWORD(settings->lex_hebrew, buf, settings);
+			//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url); 
-		gotoBookmarkSWORD("Packard", buf);  
+		displaydictlexSBSWORD("Packard", buf, settings);
+		//gotoBookmarkSWORD("Packard", buf);  
 		g_free(buf);
 	} 
 	
@@ -206,18 +272,21 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
+			//displaydictlexSBSWORD(settings->lex_greek, buf, settings);
 			gotoBookmarkSWORD(settings->lex_greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
+			//displaydictlexSBSWORD(settings->lex_hebrew, buf, settings);
 			gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
+		//displaydictlexSBSWORD("Packard", buf, settings);
 		gotoBookmarkSWORD("Packard", buf);  
 		g_free(buf);
 	} else  if(*url == '*')   {
