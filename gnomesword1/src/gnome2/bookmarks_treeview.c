@@ -212,8 +212,10 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				gui_gbs_dialog_goto_bookmark(mod_name, key);
 				break;
 		}
-	} else
+	} else  {
 		gui_change_module_and_key(mod_name, key);
+		gui_change_verse(key);
+	}
 }
 
 /******************************************************************************
