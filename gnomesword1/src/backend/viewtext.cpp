@@ -40,6 +40,7 @@
 static SWDisplay *dispaly;	/* to display modules in view text dialog */
 static SWMgr *mgr;		/* sword mgr for view text dialog */
 static SWModule *mod;		/* module for view text dialog */
+static ModMap::iterator mdoule_iterator;
 
 
 /******************************************************************************
@@ -57,9 +58,8 @@ static SWModule *mod;		/* module for view text dialog */
  * Return value
  *   GList *
  */
-GList *backend_setup_viewtext(GtkWidget * text)
+void backend_setup_viewtext(GtkWidget * text)
 {
-	GList *glist;
 	ModMap::iterator it;	//-- iteratior     
 	SectionMap::iterator sit;	//-- iteratior
 	extern SETTINGS *settings;
@@ -67,17 +67,13 @@ GList *backend_setup_viewtext(GtkWidget * text)
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
 	dispaly = new GtkHTMLChapDisp(text, settings);
-	glist = NULL;
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			mod = (*it).second;
-			glist = g_list_append(glist, mod->Name());
 			mod->Disp(dispaly);
 		}
 	}
-
-	return glist;
 }
 
 
@@ -118,7 +114,7 @@ void backend_shutdown_viewtext(void)
  * Return value
  *   void
  */
-void backend_goto_verse_viewtext(gchar * newkey)
+void backend_goto_verse_viewtext(char * newkey)
 {
 	mod->SetKey(newkey);	//-- set key to our text
 	mod->Display();
@@ -140,7 +136,7 @@ void backend_goto_verse_viewtext(gchar * newkey)
  * Return value
  *   void
  */
-void backend_load_module_viewtext(gchar * module_name)
+void backend_load_module_viewtext(char * module_name)
 {
 	ModMap::iterator it;
 
@@ -242,8 +238,77 @@ int backend_get_verse_viewtext(void)
  * Return value
  *   void
  */
-void backend_set_global_options_viewtext(gchar * option, gchar * onoff)
+void backend_set_global_options_viewtext(char * option, char * onoff)
 {
 	mgr->setGlobalOption(option, onoff);
 	mod->Display();		//-- we need to show change
+}
+
+/******************************************************************************
+ * Name
+ *   backend_get_first_module_viewtext
+ *
+ * Synopsis
+ *   #include "viewdict.h"
+ *
+ *   char * backend_get_first_module_viewtext(void)	
+ *
+ * Description
+ *    returns the first module in the modmap
+ * 
+ * Return value
+ *   char *
+ */
+char *backend_get_first_module_viewtext(void)
+{
+	char *retval = NULL;
+
+	for (mdoule_iterator = mgr->Modules.begin();
+	     mdoule_iterator != mgr->Modules.end(); mdoule_iterator++) {
+		if (!strcmp
+		    ((*mdoule_iterator).second->Type(),
+		     "Biblical Texts")) {
+			//- retval must be freed by calling function
+			retval =
+			    g_strdup((const char *) (*mdoule_iterator).
+				     second->Name());
+			return retval;
+		}
+	}
+	return retval;
+}
+
+/******************************************************************************
+ * Name
+ *   backend_get_next_module_viewtext
+ *
+ * Synopsis
+ *   #include "viewtext.h"
+ *
+ *   char * backend_get_next_module_viewtext(void)	
+ *
+ * Description
+ *    returns the first module in the modmap
+ * 
+ * Return value
+ *   char *
+ */
+char *backend_get_next_module_viewtext(void)
+{
+	char *retval = NULL;
+
+	++mdoule_iterator;
+
+	for (; mdoule_iterator != mgr->Modules.end(); mdoule_iterator++) {
+		if (!strcmp
+		    ((*mdoule_iterator).second->Type(),
+		     "Biblical Texts")) {
+			//- retval must be freed by calling function
+			retval =
+			    g_strdup((const char *) (*mdoule_iterator).
+				     second->Name());
+			return retval;
+		}
+	}
+	return retval;
 }
