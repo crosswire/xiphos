@@ -37,7 +37,7 @@ struct _settings {
 		*shortcut_bar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
-		*workbook, /* notebook - commentaries and editors */	
+		*workbook_upper, /* notebook - commentaries and editors */	
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
 		*notebook_gbs, /* notebook - gbs */
 		*notebookDL,  /* notebook - dict/lex */

@@ -26,14 +26,10 @@ COMMON_SOURCE =  \
     gbs.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
-    gs_getinfo_dlg.c \
-    gs_getinfo_dlg.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
     gs_gui.c \
     gs_gui.h \
-    gs_gui_cb.c \
-    gs_gui_cb.h \
     gs_history.c \
     gs_history.h \
     gs_html.c \
