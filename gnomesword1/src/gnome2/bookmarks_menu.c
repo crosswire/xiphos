@@ -787,7 +787,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	str = g_string_new("");
 	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = "gtk-dialog-warning";
+	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
 	yes_no_dialog->title = N_("Bookmark");	
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
 		g_string_printf(str,
@@ -1131,7 +1131,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("New Folder"),
-	 N_("Add new Folder to selected Folder"),
+	 N_("Add new folder to selected folder"),
 	 (gpointer) on_new_folder_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
@@ -1148,8 +1148,8 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Delete Item(s)"),
-	 N_("Delete item and it's siblings"),
+	 GNOME_APP_UI_ITEM, N_("Delete Item"),
+	 N_("Delete item"),
 	 (gpointer) on_delete_item_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
 	 0, (GdkModifierType) 0, NULL},
@@ -1170,14 +1170,14 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Allow Reordering"),
 	 N_
-	 ("Toggle Reording - allow items to be moved from one folder to another"),
+	 ("Allow items to be moved from one folder to another"),
 	 (gpointer) on_allow_reordering_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("Bibletime Bookmarks"),
-	 N_("Load Bibletime Bookmarks"),
+	 GNOME_APP_UI_ITEM, N_("Import Bibletime Bookmarks"),
+	 N_("Load Bookmarks from Bibletime"),
 	 (gpointer) bibletime_bookmarks_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
