@@ -40,24 +40,15 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
-#include <markupfiltmgr.h>
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
 
+extern "C" {
+#include <gtkhtml/gtkhtml.h>
+}
+
 #include "sw_display.h"
-#include "support.h"
-#include "sw_sword.h"
-#include "gs_html.h"
-#include "gs_gnomesword.h"
-#include "sw_module_options.h"
-#include "sw_utility.h"
 
-gchar *mycolor;
-
-/****************************************************************************************
- * externs
- ****************************************************************************************/
-extern SETTINGS *settings;
 
 /***************************************************************************** 
  * EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key
@@ -68,25 +59,37 @@ char EntryDisp::Display(SWModule & imodule)
 	gchar tmpBuf[255], *utf8str;
 	GString *strbuf;
 	gint utf8len;
-
+	GtkHTMLStream *htmlstream;
+	GtkHTMLStreamStatus status1;
 			
 	(const char *) imodule;	/* snap to entry */
-	settings->percomverse = (gchar*)imodule.KeyText();
+	s->percomverse = (gchar*)imodule.KeyText();
 	/* show module text for current key */
-	beginHTML(GTK_WIDGET(gtkText), TRUE);
+	GtkHTML *html = GTK_HTML(gtkText);
+	gboolean was_editable = gtk_html_get_editable (html);
+	
+	if (was_editable)
+	   gtk_html_set_editable (html, FALSE); 
+	htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
+	
 	sprintf(tmpBuf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings->bible_bg_color, settings->bible_text_color,
-		settings->link_color);
-	
+		s->bible_bg_color, s->bible_text_color,
+		s->link_color);	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	strbuf = g_string_new((const char *) imodule);
-	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
+	utf8len = strlen(utf8str);	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
+	strbuf = g_string_new((const char *) imodule);	
+	if (strbuf->len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, strbuf->str, strbuf->len);
+	}
 	g_string_free(strbuf, TRUE);
 	
-	endHTML(GTK_WIDGET(gtkText));
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);	
+	gtk_html_set_editable (html, was_editable); 
 	return 0;
 }
 
@@ -105,13 +108,17 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 		*use_font_size = NULL, 
 		*token,
 		*utf8str;
+	
 	gint 
 		mybuflen, 
 		utf8len;
+	
 	const gchar 
 		**end;
+	
 	string 
 		swfontsize;
+	
 	GString 
 		*str;
 	
@@ -120,29 +127,40 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size");
 	
 	if(!use_font_size) {
-		use_font_size = settings->bible_font_size;
+		use_font_size = s->bible_font_size;
 	}
+	//-- setup gtkhtml widget
+	GtkHTMLStreamStatus status1;	
+	GtkHTML *html = GTK_HTML(gtkText);
+	gboolean was_editable = gtk_html_get_editable (html);	
+	if (was_editable)
+	   gtk_html_set_editable (html, FALSE); 
+	GtkHTMLStream *htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
 	
-	(const char *) imodule;	/* snap to entry */
-	beginHTML(GTK_WIDGET(gtkText), TRUE);
+	//-- snap to entry
+	(const char *) imodule;	
+	
 	sprintf(tmpBuf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings->bible_bg_color, 
-		settings->bible_text_color,
-		settings->link_color);
+		s->bible_bg_color, 
+		s->bible_text_color,
+		s->link_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}	
+	
 	str = g_string_new("");
 	
 	/* show verse ref in html widget  */
 	strkey = g_strdup((const char *)imodule.KeyText());
-	if((settings->displaySearchResults)){	
+	if((s->displaySearchResults)){	
 		g_string_sprintf(str,
 			"<A HREF=\"version=%s passage=%s\"><FONT COLOR=\"%s\">[%s] %s </font></A>",
 			(const char *)imodule.Name(), 
 			strkey,
-			settings->bible_verse_num_color, 
+			s->bible_verse_num_color, 
 			(const char *)imodule.Name(),
 			strkey);
 	}
@@ -152,15 +170,17 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 			"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
 			(const char *)imodule.Name(), 
 			(const char *)imodule.Description(),
-			settings->bible_verse_num_color, 
+			s->bible_verse_num_color, 
 			(const char *)imodule.Name(),
 			strkey);
 	}
 	g_free(strkey);
 	
 	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-	utf8len = strlen(utf8str);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	utf8len = strlen(utf8str);	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}		
 	g_string_free(str,TRUE);
 	
 	if(use_gtkhtml_font)
@@ -169,10 +189,12 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);
 	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	utf8len = strlen(utf8str);	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}		
 	
-	if((settings->displaySearchResults)){	
+	if((s->displaySearchResults)){	
 		str = g_string_new((const char *) imodule);
 		marksearchwords(str);
 		utf8str = str->str;			
@@ -180,16 +202,23 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 		str = g_string_new((const char *) imodule);		
 		utf8str = str->str;			
 	}
-		
-	displayHTML(GTK_WIDGET(gtkText), utf8str,
-		    strlen(utf8str));
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	endHTML(GTK_WIDGET(gtkText));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	gtk_html_set_editable(html, was_editable); 
+	
 	g_string_free(str,TRUE);
-	if(use_font) g_free(use_font);
+	if(use_font) g_free(use_font);		
 	return 0;
 }
 
@@ -211,18 +240,22 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 	} else {
 		if ((!lang) || !stricmp(lang, "en") || !stricmp(lang, "de")) {
 			use_gtkhtml_font = true;
-			font = g_strdup(settings->default_font);
+			font = g_strdup(s->default_font);
 		} else if (!stricmp(lang, "grc")) {
-			font = g_strdup(settings->greek_font);
+			font = g_strdup(s->greek_font);
 			use_gtkhtml_font = false;
 		} else if (!stricmp(lang, "he")) {
-			font = g_strdup(settings->hebrew_font);
+			font = g_strdup(s->hebrew_font);
 			use_gtkhtml_font = false;
 		} else {
-			font = g_strdup(settings->unicode_font);
+			font = g_strdup(s->unicode_font);
 			use_gtkhtml_font = false;
 		}
-		retval = gethtmlfontnameHTML(font);
+		gchar *xfontname = font;
+		++xfontname;
+		gchar *token = strtok(xfontname,"-");
+		token = strtok(NULL,"-");
+		retval = token;
 	}
 	g_free(font);	
 	return retval;
@@ -234,7 +267,7 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
  * - the mods need to be filtered to html first
  * imodule - the Sword module to display
  ******************************************************************************/
-char GTKutf8ChapDisp::Display(SWModule & imodule)
+char GtkHTMLChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[80], *buf, *mybuf, versecolor[80];
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
@@ -260,31 +293,42 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	use_font_size = NULL;
 	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size"); //load_module_font((gchar*)imodule.Name(),"GSFont size");
 	if (!use_font_size){ 
-		use_font_size = settings->bible_font_size;
+		use_font_size = s->bible_font_size;
 	}
 	
-	beginHTML(GTK_WIDGET(gtkText), TRUE);
+	//-- setup gtkhtml widget
+	GtkHTMLStreamStatus status1;	
+	GtkHTML *html = GTK_HTML(gtkText);
+	gboolean was_editable = gtk_html_get_editable (html);	
+	if (was_editable)
+	   gtk_html_set_editable (html, FALSE); 
+	GtkHTMLStream *htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
+	
 	g_string_sprintf(str,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings->bible_bg_color, settings->bible_text_color,
-		settings->link_color);
+		s->bible_bg_color, s->bible_text_color,
+		s->link_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-	utf8len = strlen(utf8str);	
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
 
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) {
 		if (key->Verse() == curVerse)			
-			sprintf(versecolor, "%s", settings->currentverse_color);
+			sprintf(versecolor, "%s", s->currentverse_color);
 		else
-			sprintf(versecolor, "%s", settings->bible_text_color);
+			sprintf(versecolor, "%s", s->bible_text_color);
 		g_string_sprintf(str,
 			"&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>  %d</B></font></A> ",
 			imodule.Description(), imodule.KeyText(),
-			key->Verse(), settings->bible_verse_num_color,
+			key->Verse(), s->bible_verse_num_color,
 			key->Verse());
 		utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-		utf8len = strlen(utf8str);	
-		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 
 		if(use_gtkhtml_font)
 			g_string_sprintf(str, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);    
@@ -292,17 +336,22 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			g_string_sprintf(str, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   
 		
 		utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-		utf8len = strlen(utf8str);	
-		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-		
-		if(newparagraph && settings->versestyle) {
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}	
+						
+		if(newparagraph && s->versestyle) {
 			newparagraph = false;
 			sprintf(tmpBuf,  "%c ", c);
 			utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-			utf8len = strlen(utf8str);	
-			displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+			utf8len = strlen(utf8str);		
+			if (utf8len) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			}	
 		} 
-		if((settings->displaySearchResults) && (key->Verse() == curVerse)){			
+		
+		if((s->displaySearchResults) && (key->Verse() == curVerse)){			
 			g_string_free(str,TRUE);
 			str = g_string_new((const char *) imodule);
 			marksearchwords(str);
@@ -312,9 +361,12 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			str = g_string_new((const char *) imodule);		
 			utf8str = str->str;			
 		}
-		displayHTML(GTK_WIDGET(gtkText), utf8str,
-			    strlen(utf8str));
-		if (settings->versestyle) {
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+		
+		if (s->versestyle) {
 			if ((strstr((const char *) imodule, "<BR>") == NULL ) && (strstr((const char *) imodule, "<!P>") == NULL))  {
 				sprintf(tmpBuf, " %s", "</font><br>");
 			} else {
@@ -325,27 +377,38 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			} else {
 				newparagraph = true;
 			}
-		} else
+		} 
+		
+		else
 			if (strstr((const char *) imodule, "<!P>") == NULL)
 				sprintf(tmpBuf, " %s", "</font>");
 			else 
 				sprintf(tmpBuf, " %s", "</font><p>");
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	
-		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}	
 	}
+	
 	sprintf(tmpBuf, " %s", "</body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}		
+	
 	key->Verse(1);
 	key->Chapter(1);
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 	sprintf(tmpBuf, "%d", curVerse);
-	endHTML(GTK_WIDGET(gtkText));
-	gotoanchorHTML(gtkText, tmpBuf);
+	
+	gtk_html_end(html, htmlstream, status1);
+	gtk_html_set_editable(html, was_editable); 
+	gtk_html_jump_to_anchor(html, tmpBuf);
+	
 	g_string_free(str,TRUE);
 	g_free(use_font);
 	return 0;
@@ -362,19 +425,19 @@ void GtkHTMLEntryDisp::marksearchwords( GString *str )
 	gchar closestr[40], openstr[40];
 	
 	//-- regular expression search results         ***fixme***
-	if(settings->searchType == 0) {
+	if(s->searchType == 0) {
 		return;
 	}
 	//-- close tags
 	sprintf(closestr,"</b></font>");
 	//-- open tags
-	sprintf(openstr,"<font color=\"%s\"><b>",settings->found_color);
+	sprintf(openstr,"<font color=\"%s\"><b>",s->found_color);
 	//-- point buf to found verse
 	buf = str->str;
-	searchbuf = g_strdup(settings->searchText);
+	searchbuf = g_strdup(s->searchText);
 		
 	//-- if we have a muti word search go here
-	if(settings->searchType == -2) {
+	if(s->searchType == -2) {
 		char *token;
 		GList *list;
 		gint count=0, i=0;
@@ -448,13 +511,15 @@ static void DisplayIndividualMod(SWModule *m,
 	
 	string 
 		swfontsize;
-	
+	gint utf8len;
+	extern GtkHTMLStream *htmlstream;
+	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
 	m->SetKey(k);
 	
 	use_font_size = (gchar*)m->getConfigEntry("GSFont size"); //load_module_font((gchar*)m->Name(),"GSFont size");	
 	
 	if (!use_font_size) {
-		use_font_size = settings->bible_font_size;
+		use_font_size = s->bible_font_size;
 	}
 		
 	sprintf(buf,
@@ -468,12 +533,21 @@ static void DisplayIndividualMod(SWModule *m,
 		textColor);	
 	
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
 	utf8str = (gchar*)m->RenderText();
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
 	sprintf(buf, "%s", "</font></td>");	
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	utf8len = strlen(utf8str);		
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
 }
 
 extern SWModule
@@ -500,7 +574,11 @@ char IntDisplay(SETTINGS *s)
 	
 	extern SWMgr
 		*mainMgr1;
-		
+	extern GtkHTMLStream *htmlstream;
+	gint utf8len;
+	
+	
+	GtkHTML *html = GTK_HTML(s->htmlInterlinear);	
 	SWModule *mod = mainMgr1->Modules[curMod->Name()];
 	
 	tmpkey = g_strdup(s->cvInterlinear);
@@ -515,7 +593,11 @@ char IntDisplay(SETTINGS *s)
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !mod->Error()); (*mod)++) {
 		sprintf(buf,"%s","<tr valign=\"top\">");		
 		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+		
 				
 		if(key->Verse() == curVerse)
 			textColor = s->currentverse_color;
@@ -568,12 +650,14 @@ char IntDisplay(SETTINGS *s)
 				
 		sprintf(buf,"%s","</tr>");		
 		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}	
 	g_free(tmpkey);
 	return 0;
 }
-
 
 // ---------------------------------------------
 char InterlinearDisp::Display(SWModule & imodule)
@@ -584,7 +668,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	
 	gint 	
 		len,
-		i;
+		i,
+		utf8len;
 	
 	gchar 
 		tmpBuf[800], 
@@ -598,15 +683,16 @@ char InterlinearDisp::Display(SWModule & imodule)
 		*use_font = NULL, 
 		*use_font_size = NULL;
 	
-	gint utf8len;
+	extern GtkHTMLStream *htmlstream;
 	static gint row = 1;
 	
+	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
 	swfont = (gchar*)imodule.getConfigEntry("Font"); //load_module_font((gchar*)imodule.Name(),"GSFont");
 	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size"); //load_module_font((gchar*)imodule.Name(),"GSFont size");
 	lang = (gchar*)imodule.getConfigEntry("Lang"); //get_module_lang_UTILITY((gchar*)imodule.Name());	
 	
 	if (!use_font_size) 
-		use_font_size = settings->interlinear_font_size;	
+		use_font_size = s->interlinear_font_size;	
 	
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (swfont) {
@@ -614,35 +700,41 @@ char InterlinearDisp::Display(SWModule & imodule)
 		use_gtkhtml_font = false;
 	} else {
 		if ((!lang) || !stricmp(lang, "en") || !stricmp(lang, "de")) {
-			font = g_strdup(settings->default_font);
+			font = g_strdup(s->default_font);
 			use_gtkhtml_font = true;			    
 		} else if (!stricmp(lang, "grc")) {
-			font = g_strdup(settings->greek_font);
+			font = g_strdup(s->greek_font);
 			use_gtkhtml_font = false;
 		} else if (!stricmp(lang, "he")) {
-			font = g_strdup(settings->hebrew_font);
+			font = g_strdup(s->hebrew_font);
 			use_gtkhtml_font = false;
 		} else {
-			font = g_strdup(settings->unicode_font);
+			font = g_strdup(s->unicode_font);
 			use_gtkhtml_font = false;
 		}
-		use_font = gethtmlfontnameHTML(font);
+		
+		gchar *xfontname = font;
+		gchar *token=strtok(xfontname,"-");
+		token = strtok(NULL,"-");
+		use_font = token;
 	}
 	if (row == 6)
 		row = 1;
 	if (row == 1 || row == 3 || row == 5)
 		rowcolor = "#F1F1F1";
 	else
-		rowcolor = settings->bible_bg_color;
+		rowcolor = s->bible_bg_color;
 	(const char *) imodule;
 	if (row == 1) {
 		sprintf(tmpBuf,
 			"<tr><td><i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i></td></tr>",
-			settings->bible_verse_num_color,
-			settings->verse_num_font_size, imodule.KeyText());
+			s->bible_verse_num_color,
+			s->verse_num_font_size, imodule.KeyText());
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	
-		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}	
 	}
 	++row;
 	sprintf(tmpBuf,
@@ -650,12 +742,15 @@ char InterlinearDisp::Display(SWModule & imodule)
 		rowcolor,
 		imodule.Name(),
 		imodule.Description(),
-		settings->bible_verse_num_color,
-		settings->verse_num_font_size,
-		imodule.Name(), settings->bible_verse_num_color);
+		s->bible_verse_num_color,
+		s->verse_num_font_size,
+		imodule.Name(), s->bible_verse_num_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}	
+	
 
 	if(use_gtkhtml_font)
 		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
@@ -663,14 +758,22 @@ char InterlinearDisp::Display(SWModule & imodule)
 		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
-		    strlen((const char *) imodule));
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}	
+	
+	if (strlen((const char *) imodule)) {
+		gtk_html_write(GTK_HTML(html), htmlstream, (const char *) imodule, strlen((const char *) imodule));
+	}
+	
 	sprintf(tmpBuf,
 		"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 		imodule.Name());
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
 	g_free(font);
 	return 0;
 }

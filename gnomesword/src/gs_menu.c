@@ -80,27 +80,10 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
 	tmp = NULL;
 
 	tmp = options;
-	while (tmp != NULL) {	
-		if(!strcmp((gchar *) tmp->data, _("Hebrew Vowel Points"))) {
-			menu = _("_Settings/Module Options/");
-			shellmenu = module_options_menu;
-		}
-		
-		else if(!strcmp((gchar *) tmp->data, _("Hebrew Cantillation"))) {
-			menu = _("_Settings/Module Options/");
-			shellmenu = module_options_menu;
-		}
-		
-		else if(!strcmp((gchar *) tmp->data, _("Greek Accents"))) {
-			menu = _("_Settings/Module Options/");
-			shellmenu = module_options_menu;
-		}
-		
-		else {
-			menu = _("_Settings/Module Options/");
-			shellmenu =  module_options_menu;
-		}
-		
+	while (tmp != NULL) {
+		menu = _("_Settings/Module Options/");
+		shellmenu =  module_options_menu;
+				
 		menuitem = g_new(GnomeUIInfo, 2);
 		menuitem->type = GNOME_APP_UI_TOGGLEITEM;
 		menuitem->user_data = (gchar *)(gchar *) tmp->data;
