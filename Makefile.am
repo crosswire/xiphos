@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   intl \
-            macros \
+SUBDIRS =   macros \
             po \
             help \
 	    src

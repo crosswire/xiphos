@@ -117,7 +117,20 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
+static GnomeUIInfo language_options1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
 static GnomeUIInfo settings1_menu_uiinfo[] = {
+  {
+    GNOME_APP_UI_SUBTREE, N_("Language Options"),
+    NULL,
+    language_options1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
+    0, (GdkModifierType) 0, NULL
+  },
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
 };

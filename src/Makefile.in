@@ -60,17 +60,11 @@ POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
 AS = @AS@
-CATALOGS = @CATALOGS@
-CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CXX = @CXX@
-DATADIRNAME = @DATADIRNAME@
 DLLTOOL = @DLLTOOL@
 EXTRA_GNOME_CFLAGS = @EXTRA_GNOME_CFLAGS@
 EXTRA_GNOME_LIBS = @EXTRA_GNOME_LIBS@
-GENCAT = @GENCAT@
-GMOFILES = @GMOFILES@
-GMSGFMT = @GMSGFMT@
 GNOMEGNORBA_LIBS = @GNOMEGNORBA_LIBS@
 GNOMEUI_LIBS = @GNOMEUI_LIBS@
 GNOME_APPLETS_LIBS = @GNOME_APPLETS_LIBS@
@@ -92,17 +86,9 @@ GTKXMHTML_LIBS = @GTKXMHTML_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_CONFIG = @GTK_CONFIG@
 GTK_LIBS = @GTK_LIBS@
-GT_NO = @GT_NO@
-GT_YES = @GT_YES@
-INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
-INSTOBJEXT = @INSTOBJEXT@
-INTLDEPS = @INTLDEPS@
-INTLLIBS = @INTLLIBS@
-INTLOBJS = @INTLOBJS@
 LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
-MKINSTALLDIRS = @MKINSTALLDIRS@
 OBJDUMP = @OBJDUMP@
 ORBIT_CFLAGS = @ORBIT_CFLAGS@
 ORBIT_CONFIG = @ORBIT_CONFIG@
@@ -114,14 +100,10 @@ PACKAGE_MENU_DIR = @PACKAGE_MENU_DIR@
 PACKAGE_PIXMAPS_DIR = @PACKAGE_PIXMAPS_DIR@
 PIXBUF_CFLAGS = @PIXBUF_CFLAGS@
 PIXBUF_LIBS = @PIXBUF_LIBS@
-POFILES = @POFILES@
-POSUB = @POSUB@
 PTHREAD_LIB = @PTHREAD_LIB@
 RANLIB = @RANLIB@
 SWORD_CPPFLAGS = @SWORD_CPPFLAGS@
 SWORD_LIBS = @SWORD_LIBS@
-USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
-USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XML_I18N_EXTRACT = @XML_I18N_EXTRACT@
 XML_I18N_MERGE = @XML_I18N_MERGE@
@@ -131,14 +113,13 @@ XPM_LIBS = @XPM_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
-l = @l@
 
 INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     $(GTKHTML_CFLAGS)
 
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =      e-splash.c     e-splash.h     gs_gui.c     gs_gui.h     gs_setup.c     gs_setup.h     gs_abouts.c     gs_abouts.h     gs_info_box.c     gs_info_box.h     gs_mainmenu_cb.c     gs_mainmenu_cb.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_bookmarks.c     gs_bookmarks.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     gs_gui_cb.c     gs_gui_cb.h     sw_display.cpp     sw_display.h     gs_file.c     gs_file.h     gs_preferences_dlg.c     gs_preferences_dlg.h     gs_unlockkey_dlg.c     gs_unlockkey_dlg.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     sw_viewtext_dlg.cpp     sw_viewtext_dlg.h     gs_information_dlg.c     gs_information_dlg.h     gs_information_sw.cpp     gs_information_sw.h     gs_shortcutbar.c     gs_shortcutbar.h     sw_gnomesword.cpp     sw_gnomesword.h     sw_utility.cpp     sw_utility.h     sw_properties.cpp     sw_properties.h     sw_bookmarks.cpp     sw_bookmarks.h     sw_search.cpp     sw_search.h     sw_shortcutbar.cpp     sw_shortcutbar.h     sw_verselist_sb.cpp     sw_verselist_sb.h     sw_viewcomm_dlg.cpp     sw_viewcomm_dlg.h     sw_viewdict_dlg.cpp     sw_viewdict_dlg.h     gbfhtmlhref.cpp     gbfhtmlhref.h     thmlhtmlhref.cpp     thmlhtmlhref.h     sw_latin1utf8.cpp     sw_latin1utf8.h     printstuff.c     printstuff.h
+COMMON_SOURCE =      e-splash.c     e-splash.h     gs_gui.c     gs_gui.h     gs_setup.c     gs_setup.h     gs_abouts.c     gs_abouts.h     gs_info_box.c     gs_info_box.h     gs_mainmenu_cb.c     gs_mainmenu_cb.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_bookmarks.c     gs_bookmarks.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     gs_gui_cb.c     gs_gui_cb.h     sw_display.cpp     sw_display.h     gs_file.c     gs_file.h     gs_preferences_dlg.c     gs_preferences_dlg.h     gs_unlockkey_dlg.c     gs_unlockkey_dlg.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     support.c     support.h     gs_html.c     gs_html.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     sw_viewtext_dlg.cpp     sw_viewtext_dlg.h     gs_information_dlg.c     gs_information_dlg.h     gs_information_sw.cpp     gs_information_sw.h     gs_shortcutbar.c     gs_shortcutbar.h     sw_gnomesword.cpp     sw_gnomesword.h     sw_utility.cpp     sw_utility.h     sw_properties.cpp     sw_properties.h     sw_bookmarks.cpp     sw_bookmarks.h     sw_search.cpp     sw_search.h     sw_shortcutbar.cpp     sw_shortcutbar.h     sw_verselist_sb.cpp     sw_verselist_sb.h     sw_viewcomm_dlg.cpp     sw_viewcomm_dlg.h     sw_viewdict_dlg.cpp     sw_viewdict_dlg.h     printstuff.c     printstuff.h     gbfhtmlhref.cpp     gbfhtmlhref.h     thmlhtmlhref.cpp     thmlhtmlhref.h     sw_latin1utf8.cpp     sw_latin1utf8.h
 
 
 SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell_gui.h     char_table.c     char_table.h 
@@ -147,7 +128,7 @@ SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell
 EXTRA_DIST =      $(SPELLING_SOURCE)
 
 
-COMMON_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GTKHTML_LIBS)     $(GNOME_APP_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)
+COMMON_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GTKHTML_LIBS)     $(GNOME_APP_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     -L /usr/lib -licuuc -licui18n
 
 
 @SHORTCUTBAR_SPELL_TRUE@gnomesword_SOURCES =     $(SPELLING_SOURCE)     $(COMMON_SOURCE)
@@ -180,8 +161,8 @@ LIBS = @LIBS@
 @SHORTCUTBAR_TRUE@gs_information_sw.o gs_shortcutbar.o sw_gnomesword.o \
 @SHORTCUTBAR_TRUE@sw_utility.o sw_properties.o sw_bookmarks.o \
 @SHORTCUTBAR_TRUE@sw_search.o sw_shortcutbar.o sw_verselist_sb.o \
-@SHORTCUTBAR_TRUE@sw_viewcomm_dlg.o sw_viewdict_dlg.o gbfhtmlhref.o \
-@SHORTCUTBAR_TRUE@thmlhtmlhref.o sw_latin1utf8.o printstuff.o
+@SHORTCUTBAR_TRUE@sw_viewcomm_dlg.o sw_viewdict_dlg.o printstuff.o \
+@SHORTCUTBAR_TRUE@gbfhtmlhref.o thmlhtmlhref.o sw_latin1utf8.o
 @SHORTCUTBAR_SPELL_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o \
 @SHORTCUTBAR_SPELL_TRUE@char_table.o e-splash.o gs_gui.o gs_setup.o \
 @SHORTCUTBAR_SPELL_TRUE@gs_abouts.o gs_info_box.o gs_mainmenu_cb.o \
@@ -196,9 +177,9 @@ LIBS = @LIBS@
 @SHORTCUTBAR_SPELL_TRUE@sw_gnomesword.o sw_utility.o sw_properties.o \
 @SHORTCUTBAR_SPELL_TRUE@sw_bookmarks.o sw_search.o sw_shortcutbar.o \
 @SHORTCUTBAR_SPELL_TRUE@sw_verselist_sb.o sw_viewcomm_dlg.o \
-@SHORTCUTBAR_SPELL_TRUE@sw_viewdict_dlg.o gbfhtmlhref.o thmlhtmlhref.o \
-@SHORTCUTBAR_SPELL_TRUE@sw_latin1utf8.o printstuff.o
-gnomesword_DEPENDENCIES = 
+@SHORTCUTBAR_SPELL_TRUE@sw_viewdict_dlg.o printstuff.o gbfhtmlhref.o \
+@SHORTCUTBAR_SPELL_TRUE@thmlhtmlhref.o sw_latin1utf8.o
+gnomesword_DEPENDENCIES =  /usr/lib
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
