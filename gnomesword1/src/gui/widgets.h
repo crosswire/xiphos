@@ -31,9 +31,10 @@ struct  _app_widgets {
 	GtkWidget
 		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
-		*epaned, /* shortcut bar and main panle */
-		*vpaned, /* shortcut bar and main panle */
-		*hpaned, /* shortcut bar and main panle */
+		*epaned, /* sidebar bar and main panle */
+		*vpaned, /* bible/previewer paned */
+		*vpaned2, /* commentary/dictionary paned */
+		*hpaned, /* bible/commentary paned */
 		*bible_info_paned, /* shortcut bar and main panle */
 		*shortcutbar,  /* the shortcut bar widget */
 		*bookmark_tree, /* bookmarks tree */
@@ -42,10 +43,11 @@ struct  _app_widgets {
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
 		*box_comm,  /* notebook - commentaries */
-		*notebook_parallel_text,  /* notebook -  */
-		*notebook_text,  /* notebook - texts */
+		*notebook_bible_parallel,  /* notebook -  */
+		*notebook_text,  /* notebook - bible texts */
 		*notebook_percomm,  /* notebook - personal comments */
 		*notebook_sidebar,  /* notebook - sidebar */
+		*notebook_comm_book,
 		*notebook_main,	/* main notebook to have multiple passages open at once */
 		*vbox_percomm,  /* vbox for personal comments notebook */
 		*vbox_text,  /* vbox for  */
@@ -84,10 +86,14 @@ struct  _app_widgets {
 		*textview,
 	/* listview widget */
 		*listview_dict,
+		*store,
 		
 	/* label widgets */
 		*label_comm,
 		*label_dict,
+		
+	/* comboboxentry widgets */
+		*comboboxentry_dict,
 		
 	/* popup menu submenu widgets */	
 		*add_bookmark_submenu,

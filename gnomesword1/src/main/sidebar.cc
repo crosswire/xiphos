@@ -41,6 +41,7 @@
 #include "main/lists.h"
 #include "main/settings.h"
 #include "main/sword.h"
+//#include "main/tab_struct.h"
 #include "main/url.hh"
 #include "main/xml.h"
 
@@ -457,16 +458,16 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 			       const gchar * mod_name)
 {
 	GList *tmp = NULL;
-	gint i;
+	VerseKey key;
+	gint j = 0;
 	GtkTreeIter child_iter;
-
+	
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	if (backend->module_has_testament(mod_name, 1)) {
-		tmp = get_list(BOOKS_LIST);
-		for (i = 0; i < 39; i++) {
-			gchar *buf =
-			    (gchar *) (g_list_nth(tmp, i))->data;
+	if (backend->module_has_testament(mod_name, 1)) {		
+		//tmp = get_list(BOOKS_LIST);
+		while(j < key.BMAX[0]) {
+			gchar *buf = (gchar *) key.books[0][j].name;
 			gchar *key =
 			    g_strdup_printf("book://%s/%s 1:1",
 					    mod_name, buf);
@@ -483,13 +484,13 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 					   COL_OFFSET, (gchar *) key,
 					   -1);
 			g_free(key);
+			++j;
 		}
 	}
+	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
-		tmp = get_list(BOOKS_LIST);
-		for (i = 39; i < 66; i++) {
-			gchar *buf =
-			    (gchar *) (g_list_nth(tmp, i))->data;
+		while(j < key.BMAX[1]) {
+			gchar *buf = (gchar *) key.books[1][j].name;
 			gchar *key =
 			    g_strdup_printf("book://%s/%s 1:1",
 					    mod_name, buf);
@@ -506,6 +507,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 					   COL_OFFSET, (gchar *) key,
 					   -1);
 			g_free(key);
+			++j;
 		}
 	}
 }
@@ -544,33 +546,37 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		return;
 	if (!g_utf8_collate(cap, _("Parallel View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.
-					       notebook_parallel_text),
+					      (widgets.notebook_bible_parallel),
 					      1);
 
 	if (!g_utf8_collate(cap, _("Standard View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.
-					       notebook_parallel_text),
+					      (widgets.notebook_bible_parallel),
 					      0);
 
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
 			settings.comm_showing = TRUE;
-			main_display_commentary(settings.
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+					      (widgets.notebook_comm_book),
+					      0);
+			/*main_display_commentary(settings.
 						CommWindowModule,
-						settings.currentverse);
+						settings.currentverse);*/
 		}
 	}
 
 	if (!g_utf8_collate(cap, _("General Books"))) {
 		if (settings.comm_showing) {
 			settings.comm_showing = FALSE;
-			offset =
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+					      (widgets.notebook_comm_book),
+					      1);
+			/*offset =
 			    g_strdup_printf("%lu",
 					    settings.book_offset);
 			main_display_book(settings.book_mod, offset);
-			g_free(offset);
+			g_free(offset);*/
 		}
 	}
 
@@ -581,9 +587,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	switch (sbtype) {
 	case TEXT_TYPE:
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.
-					       notebook_parallel_text),
-					      0);
+					     (widgets.notebook_bible_parallel),
+					     0);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
@@ -603,6 +608,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		break;
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
+					(widgets.notebook_comm_book),
+					0);
 		settings.comm_showing = TRUE;
 		main_display_commentary(mod, settings.currentverse);
 		break;
@@ -611,9 +619,14 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		break;
 	case BOOK_TYPE:
 		settings.comm_showing = FALSE;
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
+					(widgets.notebook_comm_book),
+					1);
+		backend->set_module(mod);
+		backend->set_treekey(atoi((key) ? key : (gchar *) "0"));
 		main_display_book(mod, (key) ? key : (gchar *) "0");
-		if (!gtk_tree_model_iter_has_child
-		    (GTK_TREE_MODEL(model), &selected)
+		if (!gtk_tree_model_iter_has_child(
+			GTK_TREE_MODEL(model), &selected)
 		    && !key) {
 			add_children_to_tree(model,
 					     selected,
@@ -621,7 +634,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					     backend->
 					     get_treekey_offset());
 		}
-		if (!gtk_tree_model_iter_has_child(model, &selected)
+		if (!gtk_tree_model_iter_has_child(
+			GTK_TREE_MODEL(model), &selected)
 		    && backend->treekey_has_children(atoi(key))) {
 			add_children_to_tree(model,
 					     selected, mod, atol(key));

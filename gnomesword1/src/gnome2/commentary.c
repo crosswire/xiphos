@@ -241,7 +241,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
-
+/*
 	widgets.label_comm = gtk_label_new(settings.CommWindowModule);
 	gtk_widget_show(widgets.label_comm);
 	gtk_box_pack_start(GTK_BOX(box_comm),
@@ -249,7 +249,7 @@ GtkWidget *gui_create_commentary_pane(void)
 			   FALSE, 0);
 	gtk_label_set_justify (GTK_LABEL (widgets.label_comm), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment (GTK_MISC (widgets.label_comm), 0, 0.5);
-
+*/
 #ifdef USE_MOZILLA	
 	eventbox1 = gtk_event_box_new ();
 	gtk_widget_show (eventbox1);
