@@ -32,53 +32,43 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include <gtkhtml/gtkhtml.h>
 #include "gs_gnomesword.h"
 
-        typedef struct _search_opt SEARCH_OPT;
-        struct _search_opt {
-                GtkWidget
-                        *ckbCommentary,
-                        *ckbPerCom, 
-                        *ckbGBS, 
-                        *rbPhraseSearch;
-		gchar 
-			*module_name,
-			*upper_bond,
-			*lower_bond,
-			*search_string;
-		
-		int 
-			search_type,
-			search_params,
-			found_count;
-		
-		gboolean 
-			use_bonds,
-			use_lastsearch_for_bonds;
-        };
-	void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s);
-        void setupforDailyDevotion ( SETTINGS * s );
-        void showSBVerseList ( SETTINGS * s );
-        void showSBGroup ( SETTINGS * s, gint groupnum );
-        void changegroupnameSB ( SETTINGS * s,
-                                 gchar * groupName, gint groupNum );
-        void on_btnSBDock_clicked ( GtkButton * button, SETTINGS * s );
-        void on_btnSB_clicked ( GtkButton * button, SETTINGS * s );
-        void setupSB ( SETTINGS * s );
-        void update_shortcut_bar ( SETTINGS * s );
-        void create_modlistmenu_sb ( gint group_num, GtkWidget * menu,
-                                     GtkWidget * shortcut_menu_widget,
-                                     gchar * modtype );
-        void gs_shortcut_model_get_item_info ( GtkWidget *
-                                               shortcutbar_widget,
-                                               gint group_num,
-                                               gint item_num,
-                                               gchar ** item_url,
-                                               gchar ** item_name );
-        gint gs_shortcut_model_get_num_items ( GtkWidget *
-                                               shortcutbar_widget,
-                                               gint group_num );
+	void display_verse_list(gchar * module_name, gchar * verse_list,
+				SETTINGS * s);
+	void search_results_select_row(GtkCList * clist, gint row,
+				       gint column, GdkEvent * event,
+				       SETTINGS * s);
+	void save_verse_list_clicked(SETTINGS * s);
+	void vl_link_clicked(const gchar * url, SETTINGS * s);
+	void srlink_clicked(GtkHTML * html, const gchar * url,
+			    SETTINGS * s);
+	void change_viewer_page(GtkWidget * notebook, gint page);
+	void fill_search_results_clist(GList * glist, SEARCH_OPT * so,
+				       SETTINGS * s);
+	void setupforDailyDevotion(SETTINGS * s);
+	void showSBVerseList(SETTINGS * s);
+	void showSBGroup(SETTINGS * s, gint groupnum);
+	void changegroupnameSB(SETTINGS * s,
+			       gchar * groupName, gint groupNum);
+	void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s);
+	void on_btnSB_clicked(GtkButton * button, SETTINGS * s);
+	void setupSB(SETTINGS * s);
+	void update_shortcut_bar(SETTINGS * s);
+	void create_modlistmenu_sb(gint group_num, GtkWidget * menu,
+				   GtkWidget * shortcut_menu_widget,
+				   gchar * modtype);
+	void gs_shortcut_model_get_item_info(GtkWidget *
+					     shortcutbar_widget,
+					     gint group_num,
+					     gint item_num,
+					     gchar ** item_url,
+					     gchar ** item_name);
+	gint gs_shortcut_model_get_num_items(GtkWidget *
+					     shortcutbar_widget,
+					     gint group_num);
 #ifdef __cplusplus
 }
 #endif
-#endif                          /* __GS_SHORTCUTBAR_H_ */
+#endif				/* __GS_SHORTCUTBAR_H_ */

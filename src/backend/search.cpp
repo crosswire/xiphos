@@ -29,57 +29,40 @@
 #include <markupfiltmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
-#include <plainhtml.h>
-#include <gbfhtml.h>
-#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#include <gtkhtml/gtkhtml.h>
-#include <gal/widgets/e-unicode.h>
 
-#include "search.h"
 #include "display.h"
-#include "gs_gnomesword.h"
-#include "shortcutbar.h"
-#include "gs_html.h"
-#include "gs_editor.h"
 #include "sword.h"
-#include "support.h"
-#include "verselist_sb.h"
-#include "gbs.h"
-
+#include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
+#include "search.h"
 
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern SWModule *curMod, *curcomMod, *percomMod;
-extern gboolean firstsearch;
 extern SETTINGS *settings;
-extern GtkWidget *clistSearchResults;
+
 /***********************************************************************************************
  static
 ***********************************************************************************************/
-static void percentUpdate(char percent, void *userData) ;
-static char printed = 0;
 static SWDisplay 
-	*searchresultssbDisplay;	/* to display modules in searchresults */
-	//*searchresultstextsbDisplay;
+	*display;	/* to display modules in searchresults */
+	
 static SWMgr 
-	*searchresultssbMgr; 
+	*mgr; 
 static SWModule 
-	*searchresultssbMod;   /* module for searchresults */
-
-
+	*mod;   /* module for searchresults */
 
 /******************************************************************************
  * Name
  *   backend_do_search
  *
  * Synopsis
- *   #include "backend_do_search.h"
+ *   #include "search.h"
  *
- *   void backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)	
+ *   GList* backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)	
  *
  * Description
  *   search Sword module for word(s), phrase, or reg_ex.
@@ -87,10 +70,9 @@ static SWModule
  * Return value
  *   GList *
  */
-GList*   /* search Bible text, commentaries or generic books*/
-backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)	
+GList* backend_do_search(SETTINGS *s, gpointer *usr_data)	
 {	
-	
+	SEARCH_OPT *search_opts;
 	VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
         ListKey	searchScopeList; //----------- search list for searching verses found on last search
         SWKey	*currentScope; //----------- use to set scope of search	
@@ -115,13 +97,12 @@ backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)
 	GString 
 		*tmpbuf;
 		
+	search_opts = (SEARCH_OPT *)usr_data;	
 	tmpbuf = g_string_new("");	
 	list = NULL;	
 	searchMgr = new SWMgr();	//-- create sword mgr
 	
 	searchMod = NULL;
-
-	g_warning("module name = %s",search_opts->module_name);
 	
 	if(search_opts->module_name) {
 		  it = searchMgr->Modules.find (search_opts->module_name);
@@ -152,7 +133,6 @@ backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)
 	
 	char progressunits = 70;
 	count = 0;		/* we have not found anything yet */
-	printed = 0;
 	
 	sprintf(s->searchText, "%s",search_opts->search_string);
 	
@@ -165,7 +145,7 @@ backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)
 				searchType,
 				searchParams,
 				currentScope, 0,
-				&percentUpdate,
+				&percent_update,
 				(void*)&progressunits);
 				!searchResults.Error ();
 				searchResults++) {		
@@ -187,9 +167,9 @@ backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)
 	
 	if(count){
 		ModMap::iterator it; 	
-		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
-		if (it != searchresultssbMgr->Modules.end()){ //-- if we find the module	
-			searchresultssbMod = (*it).second;  //-- change module to new module
+		it = mgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
+		if (it != mgr->Modules.end()){ //-- if we find the module	
+			mod = (*it).second;  //-- change module to new module
 		}
 	}
 			
@@ -198,65 +178,77 @@ backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)
 	return list;
 }
 
-//-------------------------------------------------------------------------------------------
-static void percentUpdate(char percent, void *userData) 
-{	
-	char maxHashes = *((char *)userData);
-	float num;
-	char buf[80];
-	
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-	while ((((float)percent)/100) * maxHashes > printed) {
-		sprintf(buf,"%f",(((float)percent)/100));
-		num = (float)percent/100;
-		gnome_appbar_set_progress ((GnomeAppBar *)settings->appbar,
-					  num );
-		printed++;	
-	} 
-	while (gtk_events_pending ())
-		gtk_main_iteration (); 
-}
 
-/****************************************************************************************
- *setupVLSWORD - set up the sword stuff for the searchresults dialog
- ****************************************************************************************/
-void setupsearchresultsSBSW(GtkWidget *html_widget)
+/******************************************************************************
+ * Name
+ *   backend_setup_search_results_display
+ *
+ * Synopsis
+ *   #include "search.h"
+ *
+ *   backend_setup_search_results_display(GtkWidget *html_widget)	
+ *
+ * Description
+ *   set up sword module and display for viewing search results
+ *
+ * Return value
+ *   void
+ */
+void backend_setup_search_results_display(GtkWidget *html_widget)
 {	
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
-	searchresultssbMod     = NULL;
-	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget,settings);
-	//searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
+	mgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
+	mod     = NULL;
+	display = new  GtkHTMLEntryDisp(html_widget,settings);
 	
-	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
-		searchresultssbMod = (*it).second;
-		/*if(!strcmp((*it).second->Type(), "Biblical Texts")){
-			searchresultssbMod->Disp(searchresultstextsbDisplay);			
-		}else{*/
-			searchresultssbMod->Disp(searchresultssbDisplay);
-		//}
+	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
+		mod = (*it).second;
+			mod->Disp(display);
 	}
 }
 
-/*** close down searchresults ***/
-void shutdownsearchresultsSBSW(void) 
+/******************************************************************************
+ * Name
+ *   backend_shutdown_search_results_display
+ *
+ * Synopsis
+ *   #include "search.h"
+ *
+ *   void backend_shutdown_search_results_display(void)
+ *
+ * Description
+ *   delete sword mgr and display use for viewing search results
+ *
+ * Return value
+ *   void
+ */
+void backend_shutdown_search_results_display(void) 
 {	
-	delete searchresultssbMgr;	
-	if(searchresultssbDisplay)
-		delete searchresultssbDisplay;	
-	/*
-	if(searchresultstextsbDisplay)
-		delete searchresultstextsbDisplay;
-	*/
+	delete mgr;	
+	if(display)
+		delete display;	
 }
 
-void
-backend_search_results_item_display(gchar *url)
+/******************************************************************************
+ * Name
+ *   backend_search_results_item_display
+ *
+ * Synopsis
+ *   #include "search.h"
+ *
+ *   void backend_search_results_item_display(gchar *url)
+ *
+ * Description
+ *   display a new key (result item) in search results display
+ *
+ * Return value
+ *   void
+ */
+void backend_search_results_item_display(gchar *key)
 {	
-	searchresultssbMod->SetKey(url);
-	searchresultssbMod->Display();
+	mod->SetKey(key);
+	mod->Display();
 }
 

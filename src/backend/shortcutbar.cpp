@@ -57,9 +57,9 @@ extern SETTINGS *settings;
 
 list < string > sbfiles;
 
-static SWDisplay *viewersbDisplay;	//-- to display modules in viewer 
-static SWMgr *viewersbMgr;
-static SWModule *viewersbMod;	//-- module for viewer 
+static SWDisplay *display;	//-- to display modules in viewer 
+static SWMgr *mgr;
+static SWModule *mod;	//-- module for viewer 
 
 gint sbtypefromModNameSBSW(gchar * modName)
 {
@@ -71,7 +71,6 @@ gint sbtypefromModNameSBSW(gchar * modName)
 
     mgr = new SWMgr();		//-- create sword mgrs
 	/*** get module type ***/
-    //modType = mgr->Modules[modName]->Type();
     it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName
     if (it != mgr->Modules.end()) {
 	modType = (*it).second->Type();
@@ -213,23 +212,23 @@ gboolean displaydictlexSBSW(gchar * modName, gchar * key, SETTINGS * s)
     if (s->showshortcutbar) {
 	gchar buf[256], *utf8str, tmpbuf[256];
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")),
+	gtk_notebook_set_page(GTK_NOTEBOOK(s->verse_list_notebook),
 			      2);
 	sprintf(s->groupName, "%s", "Viewer");
 	showSBVerseList(s);
 
-	if (!strcmp(modName, viewersbMod->Name())) {
-	    viewersbMod->SetKey(key);	//-- set key to the first one in the list
-	    viewersbMod->Display();
+	if (!strcmp(modName, mod->Name())) {
+	    mod->SetKey(key);	//-- set key to the first one in the list
+	    mod->Display();
 	}
 
 	else {
 	    ModMap::iterator it;
-	    it = viewersbMgr->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	    if (it != viewersbMgr->Modules.end()) {	//-- if we find the module       
-		viewersbMod = (*it).second;	//-- change module to new module
-		viewersbMod->SetKey(key);	//-- set key
-		viewersbMod->Display();
+	    it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	    if (it != mgr->Modules.end()) {	//-- if we find the module       
+		mod = (*it).second;	//-- change module to new module
+		mod->SetKey(key);	//-- set key
+		mod->Display();
 	    }
 	}
 	return TRUE;
@@ -240,20 +239,20 @@ gboolean displaydictlexSBSW(gchar * modName, gchar * key, SETTINGS * s)
 /****************************************************************************************
  *setupVLSWORD - set up the sword stuff for the viewer dialog
  ****************************************************************************************/
-void setupviewerSBSW(GtkWidget * html_widget)
+void backend_setup_viewer(GtkWidget * html_widget)
 {
     ModMap::iterator it;	//-- iteratior     
     SectionMap::iterator sit;	//-- iteratior
 
-    viewersbMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
-    viewersbMod = NULL;
-    viewersbDisplay = new GtkHTMLEntryDisp(html_widget, settings);
+    mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
+    mod = NULL;
+    display = new GtkHTMLEntryDisp(html_widget, settings);
 
-    for (it = viewersbMgr->Modules.begin();
-	 it != viewersbMgr->Modules.end(); it++) {
-	viewersbMod = (*it).second;
+    for (it = mgr->Modules.begin();
+	 it != mgr->Modules.end(); it++) {
+	mod = (*it).second;
 	if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {
-	    viewersbMod->Disp(viewersbDisplay);
+	    mod->Disp(display);
 	}
     }
 }
@@ -261,7 +260,7 @@ void setupviewerSBSW(GtkWidget * html_widget)
 /*** close down viewer dialog ***/
 void shutdownviewerSBSW(void)
 {
-    delete viewersbMgr;
-    if (viewersbDisplay)
-	delete viewersbDisplay;
+    delete mgr;
+    if (display)
+	delete display;
 }
