@@ -31,5 +31,7 @@
 #include "control-data.h"
 
 GtkWidget *toolbar_style  (GtkHTMLControlData *cd);
-
+GtkWidget *toolbar_edit (GtkHTMLControlData *cd);
+GtkWidget *toolbar_file (GtkHTMLControlData *cd);
+GtkWidget *toolbar_insert (GtkHTMLControlData *cd);
 #endif /* _TOOLBAR_H */

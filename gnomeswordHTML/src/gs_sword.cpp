@@ -79,7 +79,7 @@ SWDisplay *HTMLDisplay; /* to display formatted html */
 SWDisplay *HTMLchapDisplay; /* to display formatted html */
 SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
-SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
+SWDisplay *percomtextDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
@@ -95,6 +95,7 @@ SWModule *curMod; /* module for main text window */
 SWModule *comp1Mod; /* module for first interlinear window */
 SWModule *curcomMod; /* module for commentary  window */	
 SWModule *percomMod; /* module for personal commentary  window */	
+SWModule *percomtextMod; /* module for personal commentary  code view window */
 SWModule *curdictMod; /* module for dict window */
 SWModule *listMod;   /* module for ListEditor */
 SWModule *SDMod;   /* module for view dict dialog */
@@ -163,6 +164,8 @@ extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GtkWidget *htmlComments;
+extern GtkWidget *textComments;
+
 //extern EDITOR *ed1;
 
 
@@ -197,7 +200,8 @@ initSWORD(GtkWidget *mainform)
 	comp1Mod      = NULL;
 	curcomMod     = NULL;
 	curdictMod      = NULL; 	
-	percomMod     = NULL;
+	percomMod     = NULL;	
+	percomtextMod     = NULL;
 	 
 	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
@@ -205,6 +209,7 @@ initSWORD(GtkWidget *mainform)
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create	
 	percomDisplay   = 0;// set in create
+	percomtextDisplay = 0;// set in create
 	FPNDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
@@ -240,7 +245,7 @@ initSWORD(GtkWidget *mainform)
 //	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 //	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  ComEntryDisp(htmlComments);
-
+	percomtextDisplay = new  GTKPerComDisp(textComments);
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
@@ -317,12 +322,16 @@ initSWORD(GtkWidget *mainform)
 		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is 
 		 	 //-- if driver is RawFiles			
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
-				 percomMod = (*it).second;
-				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if TRUE use formatted display
-				 else percomMod->Disp(percomDisplay);                     //-- else standard display
+				percomMod = (*it).second;
+				percomtextMod = (*it).second;
+				 if(settings->formatpercom) {
+					 percomMod->Disp(FPNDisplay);  //-- if TRUE use formatted display
+					 percomtextMod->Disp(percomtextDisplay);
+				 } else percomMod->Disp(percomDisplay);                     //-- else standard display
 				 percommods = g_list_append(percommods,percomMod->Name());
-				 usepersonalcomments = TRUE; //-- used by verseChange function (GnomeSword.cpp)
+				 usepersonalcomments = TRUE; //-- used by verseChange function (gs_sword.cpp)
 				 percomMod->SetKey(settings->currentverse);
+				 percomtextMod->SetKey(settings->currentverse);
 				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
 	  	}
@@ -412,7 +421,9 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			}else{
 				if(usepersonalcomments && percomMod){
 					percomMod->SetKey(current_verse); //-- set personal module to current verse
+					percomtextMod->SetKey(current_verse); //-- set personal module to current verse
 					percomMod->Display();            //-- show change
+					percomtextMod->Display();            //-- show change
 					noteModified = false; //-- we just loaded comment so it is not modified	
 				}
 			}
@@ -531,8 +542,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete HTMLDisplay;
 	if(HTMLchapDisplay)
 		delete HTMLchapDisplay;	
-	if(RWPDisplay)
-		delete RWPDisplay;		
+	if(percomtextDisplay)
+		delete percomtextDisplay;		
 	/*if(noteeditor)
 		delete noteeditor;	*/
 	gtk_exit(0);           //-- exit	
@@ -735,15 +746,14 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 {
  	if(editbuttonactive){
 		percomMod->Disp(percomDisplay);
-		//gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
 		}
-		//gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 	}
-	percomMod->Display(); 	
+	percomMod->Display(); 
+	percomtextMod->Display(); 
 }
 
 //-------------------------------------------------------------------------------------------
@@ -754,6 +764,8 @@ savenoteSWORD(const gchar *data) //-- save personal comments
 		//VerseKey mykey; //-- verse key text
 		*percomMod << data; //-- save note!
 	}
+	percomMod->Display(); 
+	percomtextMod->Display(); 
 	noteModified = false; 
 }
 
@@ -763,6 +775,7 @@ deletenoteSWORD(void)  //-- delete personal comment
 {
 	percomMod->deleteEntry();        //-- delete note
 	percomMod->Display();        //-- show change
+	percomtextMod->Display(); 
 }
 
 //-------------------------------------------------------------------------------------------

@@ -68,6 +68,7 @@
 
 GtkHTMLControlData *cd;
 GtkWidget *statusbar;
+GtkWidget *notebookEDITOR;
 
 /******************************************************************************
  * this code taken form GtkHTML
@@ -202,6 +203,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 	return FALSE;
 }
 
+
 /******************************************************************************
  * updatestatusbar - 
  ******************************************************************************/
@@ -229,13 +231,12 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	GtkWidget *handlebox4;
 	GtkWidget *FileBar;
 	GtkWidget *vbox2;
-	GtkWidget *notebookEDITOR;
 	GtkWidget *frame1;
 	GtkWidget *scrolledwindowHTML;
 	//GtkWidget *html_widget;
 	GtkWidget *label1;
 	GtkWidget *scrolledwindowTEXT;
-	GtkWidget *gtktext;
+	//GtkWidget *gtktext;
 	GtkWidget *label2;
 	ed = &ed_widgets;
 
@@ -290,15 +291,8 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 				 handlebox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(handlebox2);
-	gtk_box_pack_start(GTK_BOX(hbox1), handlebox2, TRUE, TRUE, 0);
-
-	EditBar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(EditBar);
-	gtk_object_set_data_full(GTK_OBJECT(app1), "EditBar", EditBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(EditBar);
-	gtk_container_add(GTK_CONTAINER(handlebox2), EditBar);
+	gtk_box_pack_start(GTK_BOX(hbox1), handlebox2, FALSE, FALSE, 0);
+	/* edit  buttons */
 
 	handlebox3 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox3);
@@ -306,31 +300,17 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 				 handlebox3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(handlebox3);
-	gtk_box_pack_start(GTK_BOX(hbox1), handlebox3, TRUE, TRUE, 0);
-
-	InsertBar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(InsertBar);
-	gtk_object_set_data_full(GTK_OBJECT(app1), "InsertBar", InsertBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(InsertBar);
-	gtk_container_add(GTK_CONTAINER(handlebox3), InsertBar);
-
+	gtk_box_pack_start(GTK_BOX(hbox1), handlebox3, FALSE, FALSE, 0);
+	/* insert  buttons */
 	handlebox4 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox4);
 	gtk_object_set_data_full(GTK_OBJECT(app1), "handlebox4",
 				 handlebox4,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(handlebox4);
-	gtk_box_pack_start(GTK_BOX(hbox1), handlebox4, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox1), handlebox4, FALSE, FALSE, 0);
+	/* file buttons */
 
-	FileBar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(FileBar);
-	gtk_object_set_data_full(GTK_OBJECT(app1), "FileBar", FileBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(FileBar);
-	gtk_container_add(GTK_CONTAINER(handlebox4), FileBar);
 
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
@@ -339,23 +319,24 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(vbEditor), vbox2, TRUE, TRUE, 0);
 
-	notebookEDITOR = gtk_notebook_new();
-	gtk_widget_ref(notebookEDITOR);
-	gtk_object_set_data_full(GTK_OBJECT(app1), "notebookEDITOR",
-				 notebookEDITOR,
+	//notebookEDITOR = gtk_notebook_new();
+	
+	gtk_widget_ref(ed->notebook);
+	gtk_object_set_data_full(GTK_OBJECT(app1), "ed->notebook",
+				 ed->notebook,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(notebookEDITOR);
-	gtk_box_pack_start(GTK_BOX(vbox2), notebookEDITOR, TRUE, TRUE, 0);
-	GTK_WIDGET_UNSET_FLAGS(notebookEDITOR, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(notebookEDITOR), FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebookEDITOR), FALSE);
+	gtk_widget_show(ed->notebook);
+	gtk_box_pack_start(GTK_BOX(vbox2), ed->notebook, TRUE, TRUE, 0);
+	GTK_WIDGET_UNSET_FLAGS(ed->notebook, GTK_CAN_FOCUS);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(ed->notebook), FALSE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(ed->notebook), FALSE);
 
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame1);
 	gtk_object_set_data_full(GTK_OBJECT(app1), "frame1", frame1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame1);
-	gtk_container_add(GTK_CONTAINER(notebookEDITOR), frame1);
+	gtk_container_add(GTK_CONTAINER(ed->notebook), frame1);
 
 	scrolledwindowHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowHTML);
@@ -373,25 +354,35 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	
 	gtk_widget_show(ed->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML), ed->htmlwidget);
-	gtk_html_load_empty(GTK_HTML(ed->htmlwidget));
+	gtk_html_load_empty(GTK_HTML(ed->htmlwidget));	
+	gtk_html_set_editable (GTK_HTML(ed->htmlwidget), TRUE );
 	
 	cd =
 	    gtk_html_control_data_new(GTK_HTML
 				      (ed->htmlwidget), vbox3);
 	
+	cd->notebook = ed->notebook;
+	
 	FormatBar = toolbar_style(cd);
 	gtk_box_pack_start(GTK_BOX(cd->vbox), FormatBar, FALSE, FALSE,
 			   0);
-
+	EditBar = toolbar_edit(cd);
+	gtk_container_add(GTK_CONTAINER(handlebox3), EditBar); 
+	
+	FileBar = toolbar_file(cd);
+	gtk_container_add(GTK_CONTAINER(handlebox2), FileBar); 
+	
+	InsertBar = toolbar_insert(cd);
+	gtk_container_add(GTK_CONTAINER(handlebox4), InsertBar);
 	
 	label1 = gtk_label_new(_("label1"));
 	gtk_widget_ref(label1);
 	gtk_object_set_data_full(GTK_OBJECT(app1), "label1", label1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label1);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebookEDITOR),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(ed->notebook),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (notebookEDITOR),
+							     (ed->notebook),
 							     0), label1);
 
 	scrolledwindowTEXT = gtk_scrolled_window_new(NULL, NULL);
@@ -400,28 +391,29 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 				 scrolledwindowTEXT,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindowTEXT);
-	gtk_container_add(GTK_CONTAINER(notebookEDITOR),
+	gtk_container_add(GTK_CONTAINER(ed->notebook),
 			  scrolledwindowTEXT);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowTEXT),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	gtktext = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(gtktext);
-	gtk_object_set_data_full(GTK_OBJECT(app1), "gtktext", gtktext,
+	//gtktext = gtk_text_new(NULL, NULL);
+	gtk_widget_ref(ed->text);
+	gtk_object_set_data_full(GTK_OBJECT(app1), "ed->text", ed->text,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(gtktext);
-	gtk_container_add(GTK_CONTAINER(scrolledwindowTEXT), gtktext);
-
+	gtk_widget_show(ed->text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowTEXT), ed->text);
+	gtk_text_set_word_wrap(GTK_TEXT (ed->text) , TRUE );
+	
 	label2 = gtk_label_new(_("label2"));
 	gtk_widget_ref(label2);
 	gtk_object_set_data_full(GTK_OBJECT(app1), "label2", label2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label2);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebookEDITOR),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(ed->notebook),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (notebookEDITOR),
+							     (ed->notebook),
 							     1), label2);
 
 	//ed->statusbar = gtk_statusbar_new();
