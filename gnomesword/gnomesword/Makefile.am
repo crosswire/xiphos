@@ -45,9 +45,7 @@ COMMON_SOURCE =  \
     gs_thmlhtml.cpp \
     gs_thmlhtml.h \
     gs_thmlplain.cpp \
-    gs_thmlplain.h\
-    gs_gbfhtml.cpp \
-    gs_gbfhtml.h
+    gs_thmlplain.h
 
 SPELLING_SOURCE =  \
     debug.h \
