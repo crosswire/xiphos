@@ -54,7 +54,7 @@ void changcurcomModSWORD(gchar * modName,
 		gint page_num,
 		gboolean showchange);
 void editnoteSWORD(gboolean editbuttonactive);
-void savenoteSWORD(const gchar *data);
+void savenoteSWORD(const gchar *data, gboolean noteModified);
 void deletenoteSWORD(void);
 void changcurdictModSWORD(gchar * modName, 
 		gchar* keyText, 
@@ -91,6 +91,9 @@ void gotoverseVCSWORD(gchar *newkey);
 void navVCModSWORD(gint direction);
 gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
+gboolean saveconfig(void);
+gboolean loadconfig(void);
+
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }

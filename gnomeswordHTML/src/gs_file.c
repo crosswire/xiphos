@@ -152,7 +152,8 @@ void setDiretory(void)
         /* set fnconfigure to gSwordDir + gsword.cfg */
 	fnconfigure =
 	    g_new(char, strlen(gSwordDir) + strlen("settings3.cfg") + 2);	
-	sprintf(fnconfigure, "%s/%s", gSwordDir, "settings3.cfg");
+	sprintf(fnconfigure, "%s/%s", gSwordDir, "settings3.cfg");// "preferences.conf");
+	
 	if (access(gSwordDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
 		if ((mkdir(gSwordDir, S_IRWXU)) == 0) {
 			createFiles();
@@ -580,6 +581,8 @@ SETTINGS createsettings(void)
 	p_settings->showdictgroup = TRUE;	/* show dict/lex group */
 	p_settings->showbookmarksgroup = FALSE;	/* show bookmark group */
 	p_settings->showhistorygroup = TRUE;	/* show history group */
+	//saveconfig();
+	
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* create settings file (settings.cfg) */
 	write(fd, (char *) &settings, sizeof(settings));	/* save settings strucTRUE to file */
 	close(fd);		/* close the file */

@@ -29,6 +29,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
+#include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <gbfplain.h>
@@ -165,7 +166,10 @@ extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GtkWidget *htmlComments;
 extern GtkWidget *textComments;
-
+extern gchar *gSwordDir,		/* store GnomeSword directory */
+	*fnbookmarks,		/* store filename for bookmark file */
+	*fnbookmarksnew,
+	*fnconfigure;
 //extern EDITOR *ed1;
 
 
@@ -498,9 +502,10 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 {
         char *msg;
         GtkWidget *msgbox;
-
+	
+	saveconfig();
         sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
-	writesettings(myset); //-- save setting (myset structure) to use when we start back up
+	//writesettings(myset); //-- save setting (myset structure) to use when we start back up
 	if(file_changed){ //-- if study pad file has changed since last save		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
 		msgbox = create_InfoBox();
@@ -513,7 +518,11 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 			default:
 				break;
 		}
-	}   	
+	} 
+  	g_free(gSwordDir);
+	g_free(fnbookmarks);	
+	g_free(fnbookmarksnew);
+	g_free(fnconfigure);
 	g_string_free(gs_clipboard,TRUE);
 	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
@@ -758,7 +767,7 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 
 //-------------------------------------------------------------------------------------------
 void
-savenoteSWORD(const gchar *data) //-- save personal comments
+savenoteSWORD(const gchar *data, gboolean noteModified) //-- save personal comments
 {  	
         if(noteModified){ //-- if note modified save the changes
 		//VerseKey mykey; //-- verse key text
@@ -992,6 +1001,7 @@ void setglobalopsSWORD(gchar *option, gchar *yesno)
 {
 	/* turn option on or off */
 	mainMgr->setGlobalOption(option, yesno);	
+	mainMgr1->setGlobalOption(option, yesno);	
 }
 
 /******************************************************************************
@@ -1318,5 +1328,156 @@ void navVCModSWORD(gint direction)  //-- navigate the current commentary module
         }
         VCMod->Error(); //-- clear any errors
         VCMod->Display();
+}
+
+/******************************************************************************
+ * load gnomesword configuration - using sword SWConfig
+ ******************************************************************************/
+gboolean loadconfig(void)
+{	
+	gchar buf[255];
+	
+	sprintf(buf,"%s/preferences.conf",gSwordDir); 
+	SWConfig settingsInfo(buf); 
+	settingsInfo.Load();
+	//g_warning("buf = %s",buf);
+    	sprintf(settings->MainWindowModule, "%s",settingsInfo["Modules"]["MainWindow"].c_str());
+    	sprintf(settings->Interlinear1Module, "%s",settingsInfo["Modules"]["Interlinear1"].c_str());
+	sprintf(settings->Interlinear2Module, "%s",settingsInfo["Modules"]["Interlinear2"].c_str() );
+	sprintf(settings->Interlinear3Module, "%s",settingsInfo["Modules"]["Interlinear3"].c_str());
+	sprintf(settings->Interlinear4Module, "%s",settingsInfo["Modules"]["Interlinear4"].c_str()); 
+	sprintf(settings->Interlinear5Module, "%s",settingsInfo["Modules"]["Interlinear5"].c_str());
+    	sprintf(settings->personalcommentsmod, "%s",settingsInfo["Modules"]["PerComments"].c_str()); 
+	//sprintf(settings->settingsInfo["Modules"]["Commentary"] = curcomMod->Name(); 
+	//sprintf(settings->settingsInfo["Modules"]["Dict/Lex"] = curdictMod->Name(); 
+	
+	sprintf(settings->currentverse, "%s",settingsInfo["Keys"]["verse"].c_str() ); 
+	sprintf(settings->dictkey, "%s",settingsInfo["Keys"]["dictionarykey"].c_str()); 
+	
+	//settingsInfo["StudyPad"]["lastfile"] = settings->studypadfilename;
+	
+	sprintf(settings->currentverse_color, "%s",settingsInfo["User Options"]["currentVerseColor"].c_str()); 
+	 
+	settings->strongs = atoi(settingsInfo["User Options"]["strongs"].c_str());
+	settings->footnotes = atoi(settingsInfo["User Options"]["footnotes"].c_str());	
+	settings->versestyle = atoi(settingsInfo["User Options"]["versestyle"].c_str());
+	settings->autosavepersonalcomments = atoi(settingsInfo["User Options"]["autosavepersonalcomments"].c_str());
+	settings->formatpercom = atoi(settingsInfo["User Options"]["formatpercom"].c_str());
+	settings->showshortcutbar = atoi(settingsInfo["User Options"]["showshortcutbar"].c_str());
+	settings->showtextgroup = atoi(settingsInfo["User Options"]["showtextgroup"].c_str());	
+	settings->showcomgroup = atoi(settingsInfo["User Options"]["showcomgroup"].c_str());
+	settings->showdictgroup = atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
+	settings->showbookmarksgroup = atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());	
+	settings->interlinearpage = atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
+	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
+	settings->shortcutbarsize = atoi(settingsInfo["User Options"]["shortcutbarsize"].c_str());   
+  	
+	settings->notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
+	settings->notebook1page = atoi(settingsInfo["Notebooks"]["notebook1page"].c_str());
+	settings->notebook2page = atoi(settingsInfo["Notebooks"]["notebook2page"].c_str()); 
+	
+	return true;
+}
+
+/******************************************************************************
+ * save gnomesword configuration - using sword SWConfig
+ ******************************************************************************/
+gboolean saveconfig(void)
+{
+	gchar buf[80], buf2[255];	
+	
+	sprintf(buf2,"%s/preferences.conf",gSwordDir); 
+	SWConfig settingsInfo(buf2); 
+g_warning("buf2 = %s",buf2);
+    	settingsInfo["Modules"]["MainWindow"] = settings->MainWindowModule;
+    	settingsInfo["Modules"]["Interlinear1"] = settings->Interlinear1Module;
+	settingsInfo["Modules"]["Interlinear2"] = settings->Interlinear2Module;
+	settingsInfo["Modules"]["Interlinear3"] = settings->Interlinear3Module; 
+	settingsInfo["Modules"]["Interlinear4"] = settings->Interlinear4Module; 
+	settingsInfo["Modules"]["Interlinear5"] = settings->Interlinear5Module; 
+    	settingsInfo["Modules"]["PerComments"] = settings->personalcommentsmod; 
+	settingsInfo["Modules"]["Commentary"] = curcomMod->Name(); 
+	settingsInfo["Modules"]["Dict/Lex"] = curdictMod->Name(); 
+	
+	settingsInfo["Keys"]["verse"] = settings->currentverse; 
+	settingsInfo["Keys"]["dictionarykey"] = settings->dictkey; 
+	
+	settingsInfo["StudyPad"]["lastfile"] = settings->studypadfilename;
+	
+	settingsInfo["User Options"]["currentVerseColor"] = settings->currentverse_color;
+	
+	if(settings->strongs)
+		settingsInfo["User Options"]["strongs"] = "1";
+	else
+		settingsInfo["User Options"]["strongs"] = "0";
+	
+	if(settings->footnotes)
+		settingsInfo["User Options"]["footnotes"] = "1";
+	else
+		settingsInfo["User Options"]["footnotes"] = "0";
+	
+	if(settings->versestyle)
+		settingsInfo["User Options"]["versestyle"] = "1";
+	else
+		settingsInfo["User Options"]["versestyle"] = "0";
+	
+	if(settings->autosavepersonalcomments)
+		settingsInfo["User Options"]["autosavepersonalcomments"] = "1";
+	else
+		settingsInfo["User Options"]["autosavepersonalcomments"] = "0";
+	
+	if(settings->formatpercom)
+		settingsInfo["User Options"]["formatpercom"] = "1";
+	else
+		settingsInfo["User Options"]["formatpercom"] = "0";
+	
+	if(settings->showshortcutbar)
+		settingsInfo["User Options"]["showshortcutbar"] = "1";
+	else
+		settingsInfo["User Options"]["showshortcutbar"] = "0";
+	
+	if(settings->showtextgroup)
+		settingsInfo["User Options"]["showtextgroup"] = "1";
+	else
+		settingsInfo["User Options"]["showtextgroup"] = "0";
+	
+	if(settings->showcomgroup)
+		settingsInfo["User Options"]["showcomgroup"] = "1";
+	else
+		settingsInfo["User Options"]["showcomgroup"] = "0";
+	
+	if(settings->showdictgroup)
+		settingsInfo["User Options"]["showdictgroup"] = "1";
+	else
+		settingsInfo["User Options"]["showdictgroup"] = "0";
+	
+	if(settings->showbookmarksgroup)
+		settingsInfo["User Options"]["showbookmarksgroup"] = "1";
+	else
+		settingsInfo["User Options"]["showbookmarksgroup"] = "0";
+	
+	if(settings->interlinearpage)
+		settingsInfo["User Options"]["interlinearpage"] = "1";
+	else
+		settingsInfo["User Options"]["interlinearpage"] = "0";
+	
+	if(settings->showhistorygroup)
+		settingsInfo["User Options"]["showhistorygroup"] = "1";
+	else
+		settingsInfo["User Options"]["showhistorygroup"] = "0";
+		
+	sprintf(buf, "%d",settings->shortcutbarsize);
+	settingsInfo["User Options"]["shortcutbarsize"] = buf; 
+	
+	sprintf(buf, "%d",settings->notebook3page);
+	settingsInfo["Notebooks"]["notebook3page"] = buf; 
+	sprintf(buf, "%d",settings->notebook1page);
+	settingsInfo["Notebooks"]["notebook1page"] = buf; 
+	sprintf(buf, "%d",settings->notebook2page);
+	settingsInfo["Notebooks"]["notebook2page"] = buf; 
+	
+    	settingsInfo.Save(); 
+	//g_free(buf2);
+	return true;
 }
 

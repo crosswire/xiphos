@@ -46,6 +46,7 @@ struct _GtkHTMLControlData {
 				*cpicker, 
 				*combo, 
 				*notebook,
+				*gtktext,
 				*statusbar;
 
 	GtkHTMLEditPropertiesDialog   *properties_dialog;

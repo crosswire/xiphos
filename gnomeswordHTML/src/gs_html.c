@@ -552,9 +552,9 @@ void gotoanchorHTML(gchar * verse)
 /***************************************************************************************************
  *sethtmltoeditHTML
  ***************************************************************************************************/
-void sethtmltoeditHTML(gboolean choice)
+void sethtmltoeditHTML(GtkWidget *html_widget, gboolean choice)
 {
 	/* gtk_html_set_default_background_color (GTK_HTML (html_widget), &bgColor); */
-	gtk_html_set_editable (GTK_HTML (htmlComments), choice);
+	gtk_html_set_editable (GTK_HTML (html_widget), choice);
 }
 
