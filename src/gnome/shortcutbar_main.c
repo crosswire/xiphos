@@ -34,7 +34,7 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/shortcutbar_viewer.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/html.h"

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 GtkWidget *gui_fileselection_open(GSHTMLEditorControlData *ecd);
 gint gui_fileselection_save(GSHTMLEditorControlData *ecd);

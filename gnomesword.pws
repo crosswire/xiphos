@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=670
-1=27
-2=68
-3=507
-4=1
-5=623
-6=497
-7=130
-8=382
-9=339
+0=730
+1=721
+2=459
+3=31
+4=153
+5=83
+6=60
+7=62
+8=42
+9=27
 10=35
 11=1
 12=610
@@ -31,7 +31,7 @@ ShowLocals=true
 2=
 3=
 4=
-5=759,918,1205,
+5=
 6=
 7=
 8=
@@ -45,16 +45,15 @@ ShowLocals=true
 16=
 17=
 
+[breakpoints]
+0=3,,1,0,0,,editor_menu.c,698,2,0,edit_bar_activate,,1041110734,
+
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/toolbar_style.c
-1=/home/terry/Projects/gnomesword1/src/gui/toolbar_edit.h
-2=/home/terry/Projects/gnomesword1/src/gui/_editor.h
-3=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
-4=/home/terry/Projects/gnomesword1/src/gui/studypad.h
-5=/home/terry/Projects/gnomesword1/src/gnome/editor_menu.c
-6=/home/terry/Projects/gnomesword1/src/gnome/percomm.c
-7=/home/terry/Projects/gnomesword1/src/main/settings.h
-8=/home/terry/Projects/gnomesword1/src/gnome/main_window.c
+0=/home/terry/Projects/gnomesword1/src/gnome/editor_menu.c
+1=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
+2=/home/terry/Projects/gnomesword1/src/gnome/main_menu.c
+3=/home/terry/Projects/gnomesword1/src/gui/studypad.h
+4=/home/terry/Projects/gnomesword1/src/gnome/editor.c
 
 [replace_text]
 0=vbox
@@ -67,24 +66,24 @@ ShowLocals=true
 7=cbtnShowGBSTabs
 
 [find_text]
-0=vboxPC
-1=vbox_toolbars
-2=cbtnPNformat
-3=checkbutton8
-4=Auto
-5=autoscroll
-6=on_autoscroll_activate
-7=view_menu_accels
+0=notebook
+1=showstylebar
+2=on_new_activate
+3=HAVE_SWORD_LIB
+4=sword_namespace
+5=vboxPC
+6=vbox_toolbars
+7=cbtnPNformat
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=REG_ICASE
-1=gs_gui.h
-2=gs_interlinear.h
-3=_percomm.h
-4=set_percomm_page_and_key
-5=mainMgr
-6=SWMgr *mainMgr
-7=backend/viewdict.h
+0="GnomeSword"
+1=GnomeSword
+2=SWORD_NAMESPACE
+3=REG_ICASE
+4=gs_gui.h
+5=gs_interlinear.h
+6=_percomm.h
+7=set_percomm_page_and_key

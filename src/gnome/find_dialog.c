@@ -180,6 +180,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	GtkWidget *hbox66;
 	GtkWidget *dialog_action_area29;
 	GtkWidget *hbuttonbox8;
+	gchar title[80];
+	
+	sprintf(title,"%s - %s", settings.program_title, _("Find"));
 	
 	dialog = g_new(FIND_DIALOG, 1);	/* must be freed */
 	dialog->regular = FALSE;
@@ -190,7 +193,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
 			    "dialog->dialog", dialog->dialog);
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog),
-			     _("GnomeSword - Find"));
+			     title);
 	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_DIALOG;
 	gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
 			      FALSE);

@@ -545,9 +545,6 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.docked =
 	    GTK_TOGGLE_BUTTON(gui_lookup_widget
 			      (d, "checkbuttonSBDock"))->active;
-	settings.formatpercom =
-	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnPNformat"))->
-	    active;
 	settings.inViewer =
 	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnInViewer"))->
 	    active;
@@ -557,6 +554,25 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.showdevotional =
 	    GTK_TOGGLE_BUTTON(gui_lookup_widget
 			      (d, "cbtnShowDevotion"))->active;
+
+	settings.formatpercom =
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnPNformat"))->
+	    active;
+	settings.use_studypad =
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget
+			      (d, "checkbutton_use_studypad"))->active;
+	settings.use_studypad_dialog =
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget
+			      (d,
+			       "checkbutton_use_studypad_dialog"))->
+	    active;
+	settings.use_percomm_dialog =
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget
+			      (d,
+			       "checkbutton_use_percomm_dialog"))->
+	    active;
+
+
 
 	/*** read layout spin buttons ***/
 	settings.gs_width =
@@ -757,7 +773,7 @@ static void on_Entry_changed(GtkEditable * editable, gpointer user_data)
 static void on_button_toggled(GtkToggleButton * togglebutton,
 			      gpointer user_data)
 {
-	set_buttons_sensitive(GTK_WIDGET(togglebutton), TRUE);
+	set_buttons_sensitive(NULL, TRUE);
 	switch (GPOINTER_TO_INT(user_data)) {
 	case 0:
 		/*  */
@@ -951,6 +967,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *frame41;
 	GtkWidget *vbox53;
 	GtkWidget *cbtnInViewer;
+	GtkWidget *frame74;
+	GtkWidget *vbox89;
+	GtkWidget *checkbutton_use_studypad;
+	GtkWidget *checkbutton_use_studypad_dialog;
+	GtkWidget *checkbutton_use_percomm_dialog;
 	GtkWidget *cbtnInDictPane;
 	GtkWidget *frame25;
 	GtkWidget *vbox37;
@@ -1097,8 +1118,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(notebook7);
 	gtk_box_pack_end(GTK_BOX(hbox22), notebook7, TRUE, TRUE, 0);
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook7), FALSE);
-	
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(notebook7), FALSE);
+
 	scrolledwindow56 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow56);
 	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
@@ -1134,180 +1155,218 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox35);
 	gtk_container_add(GTK_CONTAINER(frame26), vbox35);
-	
+
 /**********************************************************************************/
-  table13 = gtk_table_new (7, 2, FALSE);
-  gtk_widget_ref (table13);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "table13", table13,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (table13);
-  gtk_box_pack_start (GTK_BOX (vbox35), table13, TRUE, TRUE, 0);
+	table13 = gtk_table_new(7, 2, FALSE);
+	gtk_widget_ref(table13);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "table13",
+				 table13,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(table13);
+	gtk_box_pack_start(GTK_BOX(vbox35), table13, TRUE, TRUE, 0);
 
-  label149 = gtk_label_new (_("Background Color"));
-  gtk_widget_ref (label149);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label149", label149,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label149);
-  gtk_table_attach (GTK_TABLE (table13), label149, 0, 1, 0, 1,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label149), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label149), 0, 0.5);
+	label149 = gtk_label_new(_("Background Color"));
+	gtk_widget_ref(label149);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label149",
+				 label149,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label149);
+	gtk_table_attach(GTK_TABLE(table13), label149, 0, 1, 0, 1,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label149), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label149), 0, 0.5);
 
-  label145 = gtk_label_new (_("Text Color"));
-  gtk_widget_ref (label145);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label145", label145,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label145);
-  gtk_table_attach (GTK_TABLE (table13), label145, 0, 1, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label145), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label145), 0, 0.5);
+	label145 = gtk_label_new(_("Text Color"));
+	gtk_widget_ref(label145);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label145",
+				 label145,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label145);
+	gtk_table_attach(GTK_TABLE(table13), label145, 0, 1, 1, 2,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label145), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label145), 0, 0.5);
 
-  label103 = gtk_label_new (_("Current Verse Color"));
-  gtk_widget_ref (label103);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label103", label103,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label103);
-  gtk_table_attach (GTK_TABLE (table13), label103, 0, 1, 3, 4,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label103), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label103), 0, 0.5);
+	label103 = gtk_label_new(_("Current Verse Color"));
+	gtk_widget_ref(label103);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label103",
+				 label103,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label103);
+	gtk_table_attach(GTK_TABLE(table13), label103, 0, 1, 3, 4,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label103), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label103), 0, 0.5);
 
-  label150 = gtk_label_new (_("Current Verse Background Color"));
-  gtk_widget_ref (label150);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label150", label150,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label150);
-  gtk_table_attach (GTK_TABLE (table13), label150, 0, 1, 2, 3,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (label150, 218, -2);
-  gtk_label_set_justify (GTK_LABEL (label150), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label150), 0, 0.5);
+	label150 = gtk_label_new(_("Current Verse Background Color"));
+	gtk_widget_ref(label150);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label150",
+				 label150,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label150);
+	gtk_table_attach(GTK_TABLE(table13), label150, 0, 1, 2, 3,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_widget_set_usize(label150, 218, -2);
+	gtk_label_set_justify(GTK_LABEL(label150), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label150), 0, 0.5);
 
-  label146 = gtk_label_new (_("Verse Numbers"));
-  gtk_widget_ref (label146);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label146", label146,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label146);
-  gtk_table_attach (GTK_TABLE (table13), label146, 0, 1, 4, 5,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label146), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label146), 0, 0.5);
+	label146 = gtk_label_new(_("Verse Numbers"));
+	gtk_widget_ref(label146);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label146",
+				 label146,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label146);
+	gtk_table_attach(GTK_TABLE(table13), label146, 0, 1, 4, 5,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label146), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label146), 0, 0.5);
 
-  label152 = gtk_label_new (_("Verse Number Font Size"));
-  gtk_widget_ref (label152);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label152", label152,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label152);
-  gtk_table_attach (GTK_TABLE (table13), label152, 0, 1, 5, 6,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label152), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label152), 0, 0.5);
+	label152 = gtk_label_new(_("Verse Number Font Size"));
+	gtk_widget_ref(label152);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label152",
+				 label152,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label152);
+	gtk_table_attach(GTK_TABLE(table13), label152, 0, 1, 5, 6,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label152), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label152), 0, 0.5);
 
-  label147 = gtk_label_new (_("Link Color"));
-  gtk_widget_ref (label147);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "label147", label147,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label147);
-  gtk_table_attach (GTK_TABLE (table13), label147, 0, 1, 6, 7,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label147), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label147), 0, 0.5);
+	label147 = gtk_label_new(_("Link Color"));
+	gtk_widget_ref(label147);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label147",
+				 label147,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label147);
+	gtk_table_attach(GTK_TABLE(table13), label147, 0, 1, 6, 7,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label147), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label147), 0, 0.5);
 
-  gcpTextBG = gnome_color_picker_new ();
-  gtk_widget_ref (gcpTextBG);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpTextBG", gcpTextBG,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpTextBG);
-  gtk_table_attach (GTK_TABLE (table13), gcpTextBG, 1, 2, 0, 1,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gnome_color_picker_set_title (GNOME_COLOR_PICKER (gcpTextBG), _("Pick a color for Background"));
+	gcpTextBG = gnome_color_picker_new();
+	gtk_widget_ref(gcpTextBG);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "gcpTextBG",
+				 gcpTextBG,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpTextBG);
+	gtk_table_attach(GTK_TABLE(table13), gcpTextBG, 1, 2, 0, 1,
+			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpTextBG),
+				     _("Pick a color for Background"));
 
-  gcpText = gnome_color_picker_new ();
-  gtk_widget_ref (gcpText);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpText", gcpText,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpText);
-  gtk_table_attach (GTK_TABLE (table13), gcpText, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gnome_color_picker_set_title (GNOME_COLOR_PICKER (gcpText), _("Pick a color for Bible Text"));
+	gcpText = gnome_color_picker_new();
+	gtk_widget_ref(gcpText);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "gcpText",
+				 gcpText,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpText);
+	gtk_table_attach(GTK_TABLE(table13), gcpText, 1, 2, 1, 2,
+			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpText),
+				     _("Pick a color for Bible Text"));
 
-  gcpCurrentverseBG = gnome_color_picker_new ();
-  gtk_widget_ref (gcpCurrentverseBG);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpCurrentverseBG", gcpCurrentverseBG,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpCurrentverseBG);
-  gtk_table_attach (GTK_TABLE (table13), gcpCurrentverseBG, 1, 2, 2, 3,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gnome_color_picker_set_title (GNOME_COLOR_PICKER (gcpCurrentverseBG), _("Pick a color - CurrentVerse BG"));
+	gcpCurrentverseBG = gnome_color_picker_new();
+	gtk_widget_ref(gcpCurrentverseBG);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "gcpCurrentverseBG", gcpCurrentverseBG,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpCurrentverseBG);
+	gtk_table_attach(GTK_TABLE(table13), gcpCurrentverseBG, 1, 2, 2,
+			 3, (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER
+				     (gcpCurrentverseBG),
+				     _
+				     ("Pick a color - CurrentVerse BG"));
 
-  gcpCurrentverse = gnome_color_picker_new ();
-  gtk_widget_ref (gcpCurrentverse);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpCurrentverse", gcpCurrentverse,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpCurrentverse);
-  gtk_table_attach (GTK_TABLE (table13), gcpCurrentverse, 1, 2, 3, 4,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gnome_color_picker_set_title (GNOME_COLOR_PICKER (gcpCurrentverse), _("Pick a color for Current Verse"));
+	gcpCurrentverse = gnome_color_picker_new();
+	gtk_widget_ref(gcpCurrentverse);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "gcpCurrentverse", gcpCurrentverse,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpCurrentverse);
+	gtk_table_attach(GTK_TABLE(table13), gcpCurrentverse, 1, 2, 3,
+			 4, (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gnome_color_picker_set_title(GNOME_COLOR_PICKER
+				     (gcpCurrentverse),
+				     _
+				     ("Pick a color for Current Verse"));
 
-  gcpTextVerseNums = gnome_color_picker_new ();
-  gtk_widget_ref (gcpTextVerseNums);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpTextVerseNums", gcpTextVerseNums,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpTextVerseNums);
-  gtk_table_attach (GTK_TABLE (table13), gcpTextVerseNums, 1, 2, 4, 5,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gtk_widget_set_usize (gcpTextVerseNums, 41, -2);
+	gcpTextVerseNums = gnome_color_picker_new();
+	gtk_widget_ref(gcpTextVerseNums);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "gcpTextVerseNums", gcpTextVerseNums,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpTextVerseNums);
+	gtk_table_attach(GTK_TABLE(table13), gcpTextVerseNums, 1, 2, 4,
+			 5, (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gtk_widget_set_usize(gcpTextVerseNums, 41, -2);
 
-  gcpTextLinks = gnome_color_picker_new ();
-  gtk_widget_ref (gcpTextLinks);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "gcpTextLinks", gcpTextLinks,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (gcpTextLinks);
-  gtk_table_attach (GTK_TABLE (table13), gcpTextLinks, 1, 2, 6, 7,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gtk_tooltips_set_tip (tooltips, gcpTextLinks, _("Strongs Numbers & Morph Tags"), NULL);
+	gcpTextLinks = gnome_color_picker_new();
+	gtk_widget_ref(gcpTextLinks);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "gcpTextLinks", gcpTextLinks,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(gcpTextLinks);
+	gtk_table_attach(GTK_TABLE(table13), gcpTextLinks, 1, 2, 6, 7,
+			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gtk_tooltips_set_tip(tooltips, gcpTextLinks,
+			     _("Strongs Numbers & Morph Tags"), NULL);
 
-  cmbVerseNumSize = gtk_combo_new ();
-  gtk_widget_ref (cmbVerseNumSize);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "cmbVerseNumSize", cmbVerseNumSize,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cmbVerseNumSize);
-  gtk_table_attach (GTK_TABLE (table13), cmbVerseNumSize, 1, 2, 5, 6,
-                    (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
-                    (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-  gtk_combo_set_value_in_list (GTK_COMBO (cmbVerseNumSize), TRUE, TRUE);
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("-2"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("-1"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+0"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+1"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+2"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+3"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+4"));
-  cmbVerseNumSize_items = g_list_append (cmbVerseNumSize_items, (gpointer) _("+5\r"));
-  gtk_combo_set_popdown_strings (GTK_COMBO (cmbVerseNumSize), cmbVerseNumSize_items);
-  g_list_free (cmbVerseNumSize_items);
+	cmbVerseNumSize = gtk_combo_new();
+	gtk_widget_ref(cmbVerseNumSize);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "cmbVerseNumSize", cmbVerseNumSize,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cmbVerseNumSize);
+	gtk_table_attach(GTK_TABLE(table13), cmbVerseNumSize, 1, 2, 5,
+			 6, (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
+			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
+	gtk_combo_set_value_in_list(GTK_COMBO(cmbVerseNumSize), TRUE,
+				    TRUE);
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-2"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-1"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+0"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+1"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+2"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+3"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+4"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+5\r"));
+	gtk_combo_set_popdown_strings(GTK_COMBO(cmbVerseNumSize),
+				      cmbVerseNumSize_items);
+	g_list_free(cmbVerseNumSize_items);
 
-  cmbEentryVNSize = GTK_COMBO (cmbVerseNumSize)->entry;
-  gtk_widget_ref (cmbEentryVNSize);
-  gtk_object_set_data_full (GTK_OBJECT (dialog_prefs), "cmbEentryVNSize", cmbEentryVNSize,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cmbEentryVNSize);
-  gtk_tooltips_set_tip (tooltips, cmbEentryVNSize, _("Zero is base font size Go up or down from there"), NULL);
-  gtk_entry_set_text (GTK_ENTRY (cmbEentryVNSize), _("+0"));
+	cmbEentryVNSize = GTK_COMBO(cmbVerseNumSize)->entry;
+	gtk_widget_ref(cmbEentryVNSize);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "cmbEentryVNSize", cmbEentryVNSize,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cmbEentryVNSize);
+	gtk_tooltips_set_tip(tooltips, cmbEentryVNSize,
+			     _
+			     ("Zero is base font size Go up or down from there"),
+			     NULL);
+	gtk_entry_set_text(GTK_ENTRY(cmbEentryVNSize), _("+0"));
 
 /*******************************************************************************/
 
@@ -1403,7 +1462,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	rbtnUsedefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-				_("Yes, use defaults that I select"));
+					    _
+					    ("Yes, use defaults that I select"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnUsedefaults));
 	gtk_widget_ref(rbtnUsedefaults);
@@ -1416,7 +1476,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-			_("No, use settings saved on last GnomeSword run"));
+					    _
+					    ("No, use settings saved on last GnomeSword run"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_ref(rbtnNoDefaults);
@@ -1640,6 +1701,81 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox53), cbtnInDictPane, FALSE,
 			   FALSE, 0);
 
+/******************************************************************************/
+	frame74 = gtk_frame_new(_("Editors"));
+	gtk_widget_ref(frame74);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "frame74",
+				 frame74,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame74);
+	gtk_box_pack_start(GTK_BOX(vbox41), frame74, TRUE, TRUE, 0);
+
+	vbox89 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox89);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "vbox89",
+				 vbox89,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox89);
+	gtk_container_add(GTK_CONTAINER(frame74), vbox89);
+
+	checkbutton_use_studypad =
+	    gtk_check_button_new_with_label(_("Use StudyPad"));
+	gtk_widget_ref(checkbutton_use_studypad);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "checkbutton_use_studypad",
+				 checkbutton_use_studypad,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(checkbutton_use_studypad);
+	gtk_box_pack_start(GTK_BOX(vbox89), checkbutton_use_studypad,
+			   FALSE, FALSE, 0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (checkbutton_use_studypad), TRUE);
+
+	checkbutton_use_studypad_dialog =
+	    gtk_check_button_new_with_label(_
+					    ("Open StudyPad in a Dialog"));
+	gtk_widget_ref(checkbutton_use_studypad_dialog);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "checkbutton_use_studypad_dialog",
+				 checkbutton_use_studypad_dialog,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(checkbutton_use_studypad_dialog);
+	gtk_box_pack_start(GTK_BOX(vbox89),
+			   checkbutton_use_studypad_dialog, FALSE,
+			   FALSE, 0);
+
+	checkbutton_use_percomm_dialog =
+	    gtk_check_button_new_with_label(_
+					    ("Open Personal Comments Editor in a Dialog"));
+	gtk_widget_ref(checkbutton_use_percomm_dialog);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "checkbutton_use_percomm_dialog",
+				 checkbutton_use_percomm_dialog,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(checkbutton_use_percomm_dialog);
+	gtk_box_pack_start(GTK_BOX(vbox89),
+			   checkbutton_use_percomm_dialog, FALSE, FALSE,
+			   0);
+
+	cbtnPNformat =
+	    gtk_check_button_new_with_label(_
+					    ("Use Formatting in Personal Comments"));
+	gtk_widget_ref(cbtnPNformat);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
+				 "cbtnPNformat", cbtnPNformat,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cbtnPNformat);
+	gtk_box_pack_start(GTK_BOX(vbox89), cbtnPNformat, FALSE, FALSE,
+			   0);
+	gtk_tooltips_set_tip(tooltips, cbtnPNformat,
+			     _("Use HTML tags to format notes"), NULL);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
+				     TRUE);
+
+/******************************************************************************/
+
+
+/*
 	frame25 = gtk_frame_new(_("Personal Comments"));
 	gtk_widget_ref(frame25);
 	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "frame25",
@@ -1669,7 +1805,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			     _("Use HTML tags to format notes"), NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
 				     TRUE);
-				     
+*/
+
 	label123 = gtk_label_new(_("Interface"));
 	gtk_widget_ref(label123);
 	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label123",
@@ -1750,7 +1887,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label167), 0, 0.5);
 
-	
+
 	sbtnAppWidth =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnAppWidth_adj), 1, 0);
 	gtk_widget_ref(sbtnAppWidth);
@@ -2534,7 +2671,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	updatehtml = FALSE;
 	updateSB = FALSE;
 	updatelayout = FALSE;
-	
+
 
 	/** add module list to combo boxs **/
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo17), biblelist);
@@ -2559,7 +2696,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	gtk_entry_set_text(GTK_ENTRY(cmbEentryVNSize),
 			   settings.verse_num_font_size);
-			   
+
 	/* set toggle buttons */
 	if (settings.usedefault)
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -2613,14 +2750,24 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     settings.docked);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
 				     settings.formatpercom);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (checkbutton_use_studypad),
+				     settings.use_studypad);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (checkbutton_use_studypad_dialog),
+				     settings.use_studypad_dialog);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (checkbutton_use_percomm_dialog),
+				     settings.use_percomm_dialog);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnInViewer),
 				     settings.inViewer);
+
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnInDictPane),
 				     settings.inDictpane);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (cbtnUseDefaultDict),
 				     settings.useDefaultDict);
-				     
+
 	gtk_entry_set_text(GTK_ENTRY(entry3),
 			   settings.MainWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry4),
@@ -2651,7 +2798,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   settings.devotionalmod);
 
 	/********************************************* end settings */
-	
+
 	/*** color pickers ***/
 	gtk_signal_connect(GTK_OBJECT(gcpTextBG), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
@@ -2745,6 +2892,17 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
 
+
+	gtk_signal_connect(GTK_OBJECT(checkbutton_use_studypad),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled), NULL);
+	gtk_signal_connect(GTK_OBJECT(checkbutton_use_studypad_dialog),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled), NULL);
+	gtk_signal_connect(GTK_OBJECT(checkbutton_use_percomm_dialog),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled), NULL);
+			   
 	/*** spin buttons layout ***/
 	gtk_signal_connect(GTK_OBJECT(sbtnAppWidth), "changed",
 			   GTK_SIGNAL_FUNC(on_spinbutton_changed),

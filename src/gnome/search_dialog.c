@@ -2012,6 +2012,9 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *appbar_search;
 	GtkWidget *label207;
 	GtkTooltips *tooltips;
+	gchar title[256];
+	
+	sprintf(title,"%s - %s", settings.program_title, _("Search"));
 
 	tooltips = gtk_tooltips_new();
 
@@ -2019,7 +2022,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_object_set_data(GTK_OBJECT(search_dialog), "search_dialog",
 			    search_dialog);
 	gtk_window_set_title(GTK_WINDOW(search_dialog),
-			     _("Search - GnomeSword"));
+			     title);
 	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598,
 				    337);
 

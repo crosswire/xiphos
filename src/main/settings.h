@@ -147,10 +147,13 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
-		show_style_bar, /* show style toolbar for percomm editors */
-		show_edit_bar, /* show edit toolbar for percomm editors */
 		show_style_bar_sp, /* show style toolbar for studypad */
 		show_edit_bar_sp, /* show edit toolbar for studypad */
+		use_studypad, /* use studypad */
+		use_studypad_dialog, /* display studypad in a dialog */
+		studypad_dialog_exist, /* studypad dialog has been created */
+		use_percomm_dialog, /* display personal 
+					comments editor in a dialog */
 		
 		/** do we have these modules **/
 		havebible, 
@@ -161,7 +164,10 @@ struct _settings {
 		
 		/* do we need to add item to history */
 		addhistoryitem;
-		
+	
+	/* store program title */
+	char program_title[256];
+	
 	/* store $home directory */
 	char *homedir;
 

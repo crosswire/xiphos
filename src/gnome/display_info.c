@@ -30,6 +30,7 @@
 #include "gui/display_info.h"
 
 #include "main/sword.h"
+#include "main/settings.h"
 
 gboolean gsI_isrunning = FALSE;
 
@@ -138,7 +139,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			    "dialog_display_information",
 			    dialog_display_information);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_information),
-			     _("GnomeSword"));
+			     settings.program_title);
 	GTK_WINDOW(dialog_display_information)->type =
 	    GTK_WINDOW_DIALOG;
 	gtk_window_set_default_size(GTK_WINDOW
