@@ -842,6 +842,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	GString *str;
 	
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
@@ -850,24 +851,28 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   2, &caption, 3, &key, 4, &module, -1);
 	name_string = caption;
 
+	str = g_string_new("");
 	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = "gtk-delete";
+	yes_no_dialog->stock_icon = "gtk-dialog-warning";
 	yes_no_dialog->title = N_("Bookmark");	
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		yes_no_dialog->label_top = 
-					N_("Really REMOVE the selected folder");
-		yes_no_dialog->label_middle = name_string;
-		yes_no_dialog->label_bottom = N_("(and all its contents)?");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Remove the selected folder"),
+			name_string,
+			_("(and all its contents)?"));
 	}
 	else {
-		yes_no_dialog->label_top = 
-				N_("Really REMOVE the selected bookmark");
-		yes_no_dialog->label_middle = name_string;
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			_("Remove the selected bookmark"),
+			name_string);
 	}
+	yes_no_dialog->label_top = str->str;
 	yes_no_dialog->yes = TRUE;
 	yes_no_dialog->no = TRUE;
 
-	test = gui_gs_dialog(yes_no_dialog);
+	test = gui_alert_dialog(yes_no_dialog);
 	if (test == GS_YES) {
 		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 		bookmarks_changed = TRUE;
@@ -877,6 +882,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(caption);
 	g_free(key);
 	g_free(module);
+	g_string_free(str,TRUE);
 }
 
 

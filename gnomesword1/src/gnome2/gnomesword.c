@@ -171,6 +171,7 @@ void frontend_display(void)
 {
 	gint test;
 	GS_DIALOG *info;
+	GString *str;
 	
 	g_print("%s\n", "Displaying GnomeSword\n");
 	gui_show_main_window();
@@ -231,20 +232,23 @@ void frontend_display(void)
 	}
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	if(settings.setup_canceled) {
+		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-properties";
-		info->title = N_("Question?");
-		info->label_top = N_("The Setup Druid");
-		info->label_middle = N_("was canceled. Do you wish");
-		info->label_bottom = N_("to set preferences now?");
+		info->stock_icon = "gtk-dialog-warning";
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			_("The Setup Druid was canceled."),
+			_("Do you wish to set preferences now?"));
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			gui_setup_preferences_dialog();
 		}		
 		g_free(info);
+		g_string_free(str,TRUE);
 		settings.setup_canceled = FALSE;
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}

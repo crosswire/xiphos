@@ -71,34 +71,39 @@ GSHTMLEditorControlData *editor_cd;
 void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
 {
 	gchar *filename = NULL;
+	gchar *buf = NULL;
 	gint test;
 	GS_DIALOG *info;
+	GString *str;
 	
 	if (settings.modifiedSP) {
+		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-save";
-		info->title = N_("Studypad");
+		info->stock_icon = "gtk-dialog-warning";
 		if (settings.studypadfilename)
-			info->label_top = settings.studypadfilename;
+			buf = settings.studypadfilename;
 		else
-			info->label_top = N_("File");
-		info->label_middle = N_("has been modified. ");
-		info->label_bottom = N_("Do you wish to save it?");
+			buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			buf,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			if (settings.studypadfilename) {
 				filename = g_strdup(settings.studypadfilename);
 				save_file(filename, ecd);
 			} else {
-				gui_fileselection_save(ecd);
+				gui_fileselection_save(ecd,TRUE);
 			}
 		}
 		settings.modifiedSP = FALSE;
 		g_free(info);
-		//if(filename) g_free(filename);
+		g_string_free(str,TRUE);
 	}
 }
 
@@ -302,14 +307,61 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		if (fd == -1)
 			return -1;
 
-		if (!gtk_html_save
-		    (ecd->html, (GtkHTMLSaveReceiverFn) save_receiver,
-		     GINT_TO_POINTER(fd)))
+		if (!gtk_html_export (ecd->html, "text/html",
+		 (GtkHTMLSaveReceiverFn) save_receiver,
+		 GINT_TO_POINTER(fd))) {		 
 			retval = -1;
+		 }
 		else {
 			retval = 0;
 			ecd->changed = FALSE;
 			gui_update_statusbar(ecd);
+		}
+
+		close(fd);
+		g_free(filename);
+	}
+	return retval;
+}
+
+
+/******************************************************************************
+ * Name
+ *   save_file_plain_text
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   gint save_file_plain_text(gchar * filename, GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    save studypad file
+ *
+ * Return value
+ *   gint
+ */
+
+gint save_file_plain_text(gchar * filename, GSHTMLEditorControlData * ecd)
+{
+	int retval = -1;
+	int fd;
+
+	if (filename) {
+					
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+		if (fd == -1)
+			return -1;
+
+		if (!gtk_html_export (ecd->html, "text/plain",
+		 		(GtkHTMLSaveReceiverFn) save_receiver,
+		 			GINT_TO_POINTER(fd))) {
+			retval = -1;
+		 }
+		else {
+			retval = 0;
+			//ecd->changed = FALSE;
+			//gui_update_statusbar(ecd);
 		}
 
 		close(fd);
