@@ -9,8 +9,6 @@ AC_ARG_ENABLE(gnome2,[--enable-gnome2 build for gnome2],gnome2=$enableval,gnome2
 
 if test "x$gnome2" = xyes; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
-	GNOMESWORD_POTFILES="POTFILES2.in"
-	AC_SUBST(GNOMESWORD_POTFILES)	
 	DIRS="backend main gnome2"
 	AC_SUBST(DIRS)
 	GNAME="GnomeSword2 Bible Study Tool"
@@ -19,8 +17,6 @@ if test "x$gnome2" = xyes; then
 	AC_SUBST(gnomesword_exec)	
 	PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0 sword,,exit)
 else		
-	GNOMESWORD_POTFILES="POTFILES.in"
-	AC_SUBST(GNOMESWORD_POTFILES)	
 	DIRS="backend main gnome"
 	AC_SUBST(DIRS)
 	GNAME="GnomeSword Bible Study Tool"
@@ -52,10 +48,28 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTTEXT_PACKAGE", [Package name for gettext])
 
 dnl Languages which your application supports
-ALL_LINGUAS="bg de es es_ES fr ru2 sk"
+ALL_LINGUAS="bg de es es_ES fr ru sk"
 AM_GLIB_GNU_GETTEXT
 dnl AM_GNU_GETTEXT
 dnl AM_GNU_GETTEXT_VERSION(0.11.4)
+
+AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],,enable_debug=no)
+CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
+
+if test x$enable_debug = xyes; then
+  if test x$ac_cv_prog_cc_g = xyes; then
+    CFLAGS="-g3 -O0"
+  else
+    CFLAGS="-O0"
+  fi
+  if test x$ac_cv_prog_cxx_g = xyes; then
+    CXXFLAGS="-g3 -O0"
+  else
+    CXXFLAGS="-O0"
+  fi
+  CFLAGS="$CFLAGS -Werror"
+  CXXFLAGS="$CXXFLAGS -Werror"
+fi
 
 
 AC_ARG_ENABLE(spell_check,[--enable-spell_check enable spell_check],spell_check=$enableval,spell_check="no") 
