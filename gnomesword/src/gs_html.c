@@ -82,7 +82,11 @@ GtkWidget *gs_new_html_widget(SETTINGS *s) {
 	GtkWidget *html;
 	
 	html = gtk_html_new();
-	gtk_html_load_empty(GTK_HTML(html));
+	gtk_html_load_empty(GTK_HTML(html));	
+	gtk_signal_connect(GTK_OBJECT(html), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(html), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
 	return html;
 }
 
@@ -446,6 +450,17 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 	return 0;
 
 }
+/***************************************************************************************************
+ *copy menu item clicked in gbs
+ *html_widget - (GtkHTML widget) to copy from
+ ***************************************************************************************************/
+void copyGS_HTML(GtkWidget *html_widget)
+{
+	GtkHTML *html;
+			
+	html = GTK_HTML(html_widget);
+	gtk_html_copy(html);
+}
 
 /***************************************************************************************************
  *copy menu item clicked in any html window
@@ -463,6 +478,30 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
+}
+
+/***************************************************************************************************
+ *lookup word in dict/lex module
+ ***************************************************************************************************/
+void lookupGS_HTML(GtkWidget *html_widget, gchar *modName, gboolean word)
+{
+	GtkWidget *entry;
+	gchar *key;
+	GtkHTML *html;
+
+	
+	html = GTK_HTML(html_widget);
+	if(word)
+		gtk_html_select_word(GTK_HTML(html));
+	
+	gtk_html_copy(html); /* copy selected word to clipboard */
+	entry = lookup_widget(settings->app, "dictionarySearchText");
+	/* clear dictionary entry */
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+	/* put selected word in dictionary entry */
+	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));
+	key = gtk_entry_get_text(GTK_ENTRY(entry));
+	displaydictlexSBSW(modName, key, settings);
 }
 
 /***************************************************************************************************

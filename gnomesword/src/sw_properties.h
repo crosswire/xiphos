@@ -37,7 +37,7 @@ extern "C" {
 #include "gs_gnomesword.h"
 	
 	gboolean loadconfig(SETTINGS *s);
-	gboolean saveconfig(void);
+	gboolean saveconfig(gboolean shutdown);
 	gboolean createfromsetupconfig(GtkWidget * setup);
 	gboolean createconfig(void);
 

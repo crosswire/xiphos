@@ -48,6 +48,7 @@
 #include "gs_editor.h"
 #include "sw_gbs.h"
 #include "gs_html.h"
+#include "gs_editor_search.h"
 
 
 /***  externs  ***/
@@ -59,7 +60,8 @@ extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
 extern GList 
 	*bookmods,
-	*sbbookmods;
+	*sbbookmods,
+	*sbdictmods;
 extern SETTINGS *settings;
 
 /***  globals  ***/
@@ -68,6 +70,7 @@ SWModule *curbookMod;
 SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 list <SWDisplay *> displays;	// so we can delete each display we create
+GList *gbs_data;
 /***   ***/
 
 static TreeKeyIdx* getTreeKey(SWModule *mod)
@@ -127,157 +130,12 @@ GtkCTreeNode *addnodeSW_GBS(SETTINGS *s, NODEDATA *data)
 	return retval;
 }
 
-
 static
-GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count) {
-	
-	GtkWidget *hpanedGBS;
-	GtkWidget *scrolledwindowCTREE_GBS;
-	GtkWidget *ctreeGBS;
-	GtkWidget *label;
-	GtkWidget *frameGBS;
-	GtkWidget *scrolledwindowHTML_GBS;	
-	GtkWidget *htmlGBS;
-	
-	
-	hpanedGBS = gtk_hpaned_new ();
-	gtk_widget_ref (hpanedGBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "hpanedGBS", hpanedGBS,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (hpanedGBS);
-	gtk_container_add (GTK_CONTAINER (s->notebookGBS), hpanedGBS);
-	gtk_paned_set_position (GTK_PANED (hpanedGBS), 239);
-	
-	scrolledwindowCTREE_GBS = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_ref (scrolledwindowCTREE_GBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), 
-			"scrolledwindowCTREE_GBS", 
-			scrolledwindowCTREE_GBS,
-			(GtkDestroyNotify) gtk_widget_unref);			
-	gtk_widget_show (scrolledwindowCTREE_GBS);
-	gtk_paned_pack1 (GTK_PANED (hpanedGBS), scrolledwindowCTREE_GBS, FALSE, TRUE);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowCTREE_GBS), 
-			GTK_POLICY_AUTOMATIC, 
-			GTK_POLICY_AUTOMATIC);
-	
-	ctreeGBS = gtk_ctree_new (3, 0);
-	gtk_widget_ref (ctreeGBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "ctreeGBS", ctreeGBS,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (ctreeGBS);
-	gtk_container_add (GTK_CONTAINER (scrolledwindowCTREE_GBS), ctreeGBS);
-	gtk_container_set_border_width (GTK_CONTAINER (ctreeGBS), 1);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 0, 680);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 1, 1);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 2, 1);
-	gtk_clist_column_titles_hide (GTK_CLIST (ctreeGBS));
-	
-	label = gtk_label_new (_("label"));
-	gtk_widget_ref (label);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (label);
-	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 0, label);
-	
-	label = gtk_label_new (_("label200"));
-	gtk_widget_ref (label);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (label);
-	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 1, label);
-	
-	label = gtk_label_new (_("label"));
-	gtk_widget_ref (label);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (label);
-	gtk_clist_set_column_widget (GTK_CLIST (ctreeGBS), 2, label);
-	
-	frameGBS = gtk_frame_new (NULL);
-	gtk_widget_ref (frameGBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "frameGBS", frameGBS,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (frameGBS);
-	gtk_paned_pack2 (GTK_PANED (hpanedGBS), frameGBS, TRUE, TRUE);
-	
-	scrolledwindowHTML_GBS = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_ref (scrolledwindowHTML_GBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), 
-			"scrolledwindowHTML_GBS", 
-			scrolledwindowHTML_GBS,
-			(GtkDestroyNotify) gtk_widget_unref);			
-	gtk_widget_show (scrolledwindowHTML_GBS);
-	gtk_container_add (GTK_CONTAINER (frameGBS), scrolledwindowHTML_GBS);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowHTML_GBS), 
-			GTK_POLICY_AUTOMATIC, 
-			GTK_POLICY_AUTOMATIC);
-	
-	htmlGBS = gs_new_html_widget(s);	
-	gtk_widget_ref(htmlGBS);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "htmlGBS", htmlGBS,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlGBS);
-	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
-			  htmlGBS);
-			  
-	label = gtk_label_new ((gchar*)mod->Name());
-	gtk_widget_ref (label);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (label);
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->notebookGBS), 
-		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->notebookGBS), count++), label);
-	
-	gtk_signal_connect(GTK_OBJECT(ctreeGBS), "select_row",
-			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row), GTK_CTREE(ctreeGBS));
-	
-	SWDisplay *disp = new EntryDisp(htmlGBS);
-	mod->Disp(disp);
-	displays.insert(displays.begin(), disp);
-	addbooktoCTree(ctreeGBS, (gchar*)mod->Name());
-	return hpanedGBS;
-}
-
-void setupSW_GBS(SETTINGS *s)
-{
-	ModMap::iterator 
-		it;	//-- iteratior
-	gint count = 0;
-	
-	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
-	curbookMod = NULL;
-	displays.clear();	
-	bookmods = NULL;	
-	sbbookmods = NULL;
-	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Generic Book")) {  
-			//curbookMod = (*it).second;
-			bookmods = g_list_append(bookmods, (*it).second->Name());
-			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
-			createGBS_Pane((*it).second, s, count) ;
-			curbookMod = (*it).second;
-		}
-	}
-}
-
-void shutdownSW_GBS(void)
-{
-	list <SWDisplay *>::iterator it;
-	
-	g_list_free(bookmods);
-	g_list_free(sbbookmods);
-	delete swmgrBook;
-	for (it = displays.begin(); it != displays.end(); it++)
-		delete *it;
-}
-
-void
-on_ctreeGBS_select_row(GtkCList * clist,
+void on_ctreeGBS_select_row(GtkCList * clist,
 		    gint row,
 		    gint column, 
 		GdkEvent * event, 
-		GtkCTree *ctree)
+		GBS_DATA *gbs)
 {	
 	gchar 
 		*bookname, 
@@ -290,14 +148,12 @@ on_ctreeGBS_select_row(GtkCList * clist,
 	
 	gboolean 
 		is_leaf = false;
-	
-	static gchar 
-		*lastbook = "oldbook";	
-	
+		
 	ModMap::iterator it;	
 	
-	treeNode = gtk_ctree_node_nth(ctree, row);
-	settings->ctree_widget_books = GTK_WIDGET(ctree);	
+	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
+	settings->ctree_widget_books = gbs->ctree;	
+	settings->htmlBook = gbs->html;
 	current_node = treeNode;
 	
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
@@ -325,12 +181,419 @@ on_ctreeGBS_select_row(GtkCList * clist,
 			/** fill ctree node with children **/
 			if((GTK_CTREE_ROW(treeNode)->children == NULL)&&(!GTK_CTREE_ROW(treeNode)->is_leaf)){
 				load_book_tree(settings, treeNode, bookname,nodename,strtoul(offset,NULL,0));	
-				gtk_ctree_expand(ctree, treeNode);
+				gtk_ctree_expand(GTK_CTREE(gbs->ctree), treeNode);
 			}
 		}
 	}
 }
 
+static
+GBS_DATA *getgbs(GList *gbs)
+{
+	guint bookindex = 0;	
+	ModMap::iterator it;
+	
+	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), "Generic Book")) {
+			if (!strcmp((*it).second->Name(), curbookMod->Name())) {
+				break;
+			}
+			++bookindex;
+		}
+	}
+	return  (GBS_DATA*)g_list_nth_data(gbs, bookindex);
+}
+
+static
+void on_notebookGBS_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 gint page_num, 
+			GList *data_gbs)
+{	
+	GBS_DATA *g;
+	
+	g = (GBS_DATA*)g_list_nth_data(data_gbs, page_num);	
+	//-- change tab label to current book name
+	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook_lower),
+		gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
+		g->bookName); 
+	curbookMod = swmgrBook->Modules[g->bookName];
+}
+
+/****  popup menu call backs  ****/
+
+static
+void on_copy_activate(GtkMenuItem *menuitem,
+			       GBS_DATA *gbs)
+{
+	copyGS_HTML(gbs->html);
+}
+
+static
+void on_lookup_word_activate(GtkMenuItem * menuitem,
+				gchar *modDescription)
+{	
+	GBS_DATA *g;
+	gchar modName[16];
+	
+	g = getgbs(gbs_data);
+	memset(modName, 0, 16);
+	modNameFromDesc(modName, modDescription);
+	g_warning("modName = %s",modName);
+	lookupGS_HTML(g->html, modName, true);
+}
+
+static
+void on_lookup_selection_activate(GtkMenuItem * menuitem,
+				gchar *modDescription)
+{
+	GBS_DATA *g;
+	gchar modName[16];
+	
+	g = getgbs(gbs_data);
+	memset(modName, 0, 16);
+	modNameFromDesc(modName, modDescription);
+	g_warning("modName = %s",modName);
+	lookupGS_HTML(g->html, modName, false);
+}
+
+static
+void
+on_view_book_activate(GtkMenuItem * menuitem, 
+				gpointer user_data)
+{	
+	gint page;
+	
+	page = GPOINTER_TO_INT(user_data);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), page);
+}
+
+static
+GtkWidget* create_pmGBS(GBS_DATA *gbs)
+{
+	GtkWidget *pmGBS;
+	GtkAccelGroup *pmGBS_accels;
+	GtkWidget *copy;
+	GtkWidget *separator;
+	GtkWidget *lookup_word;
+	GtkWidget *lookup_word_menu;
+	GtkAccelGroup *lookup_word_menu_accels;
+	GtkWidget *usecurrent1;
+	GtkWidget *lookup_selection;
+	GtkWidget *lookup_selection_menu;
+	GtkAccelGroup *lookup_selection_menu_accels;
+	GtkWidget *usecurrent2;
+	GtkWidget *item3;
+	GtkWidget *item4;
+	GtkWidget *view_book;
+	GtkWidget *view_book_menu;
+	GtkAccelGroup *view_book_menu_accels;
+	GtkWidget *item6;
+	GList *tmp;
+	gint i;
+	
+	tmp = NULL;
+	
+	pmGBS = gtk_menu_new ();
+	gtk_object_set_data (GTK_OBJECT (pmGBS), "pmGBS", pmGBS);
+	pmGBS_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmGBS));
+	
+	copy = gtk_menu_item_new_with_label (_("Copy"));
+	gtk_widget_ref (copy);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "copy", copy,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (copy);
+	gtk_container_add (GTK_CONTAINER (pmGBS), copy);
+	
+	separator = gtk_menu_item_new ();
+	gtk_widget_ref (separator);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "separator", separator,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (separator);
+	gtk_container_add (GTK_CONTAINER (pmGBS), separator);
+	gtk_widget_set_sensitive (separator, FALSE);
+	
+	lookup_word = gtk_menu_item_new_with_label (_("Lookup Word"));
+	gtk_widget_ref (lookup_word);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "lookup_word", lookup_word,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (lookup_word);
+	gtk_container_add (GTK_CONTAINER (pmGBS), lookup_word);
+	
+	lookup_word_menu = gtk_menu_new ();
+	gtk_widget_ref (lookup_word_menu);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "lookup_word_menu", lookup_word_menu,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_word), lookup_word_menu);
+	lookup_word_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (lookup_word_menu));
+	
+	usecurrent1 = gtk_menu_item_new_with_label ("Use Current Dictionary");
+	gtk_widget_ref (usecurrent1);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "usecurrent1", usecurrent1,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (usecurrent1);
+	gtk_container_add (GTK_CONTAINER (lookup_word_menu), usecurrent1);	
+	
+	
+	lookup_selection = gtk_menu_item_new_with_label (_("Lookup Selection"));
+	gtk_widget_ref (lookup_selection);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "lookup_selection", lookup_selection,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (lookup_selection);
+	gtk_container_add (GTK_CONTAINER (pmGBS), lookup_selection);
+	
+	lookup_selection_menu = gtk_menu_new ();
+	gtk_widget_ref (lookup_selection_menu);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "lookup_selection_menu", lookup_selection_menu,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_selection), lookup_selection_menu);
+	lookup_selection_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (lookup_selection_menu));
+	
+	usecurrent2 = gtk_menu_item_new_with_label ("Use Current Dictionary");
+	gtk_widget_ref (usecurrent2);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "usecurrent2", usecurrent2,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (usecurrent2);
+	gtk_container_add (GTK_CONTAINER (lookup_selection_menu), usecurrent2);
+	
+	
+	separator = gtk_menu_item_new ();
+	gtk_widget_ref (separator);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "separator", separator,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (separator);
+	gtk_container_add (GTK_CONTAINER (pmGBS), separator);
+	gtk_widget_set_sensitive (separator, FALSE);
+	
+	view_book = gtk_menu_item_new_with_label (_("View Book"));
+	gtk_widget_ref (view_book);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "view_book", view_book,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (view_book);
+	gtk_container_add (GTK_CONTAINER (pmGBS), view_book);
+	
+	view_book_menu = gtk_menu_new ();
+	gtk_widget_ref (view_book_menu);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "view_book_menu", view_book_menu,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_book), view_book_menu);
+	view_book_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_book_menu));
+
+	tmp = sbdictmods;
+	while (tmp != NULL) {
+		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		item4 = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item3);
+		gtk_widget_ref(item4);
+		gtk_object_set_data_full(GTK_OBJECT(pmGBS), "item3", item3,
+					 (GtkDestroyNotify)gtk_widget_unref);
+		gtk_object_set_data_full(GTK_OBJECT(pmGBS), "item4", item4,
+					 (GtkDestroyNotify)gtk_widget_unref);
+		gtk_widget_show(item3);	
+		gtk_widget_show(item4);
+		gtk_signal_connect(GTK_OBJECT(item3), "activate",
+				   GTK_SIGNAL_FUNC(on_lookup_word_activate),
+				   (gchar *) tmp->data);
+		gtk_signal_connect(GTK_OBJECT(item4), "activate",
+				   GTK_SIGNAL_FUNC(on_lookup_selection_activate),
+				   (gchar *) tmp->data);
+		gtk_container_add(GTK_CONTAINER(lookup_word_menu), item3);
+		gtk_container_add(GTK_CONTAINER(lookup_selection_menu), item4);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	
+	i = 0;
+	tmp = sbbookmods;
+	while (tmp != NULL) {
+		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item3);
+		gtk_object_set_data_full(GTK_OBJECT(pmGBS), "item3",
+					 item3,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item3);		
+		gtk_signal_connect(GTK_OBJECT(item3), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_view_book_activate),
+				   GINT_TO_POINTER(i));
+		gtk_container_add(GTK_CONTAINER(view_book_menu), item3);
+		++i;
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);	
+	/*** these two are for using the current dictionary for lookup ***/
+	/*gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_html_lookup_word_activate),
+				   GINT_TO_POINTER(1001));
+	gtk_signal_connect(GTK_OBJECT(usecurrent2), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_html_lookup_selection_activate),
+				   GINT_TO_POINTER(1001));*/
+	gtk_signal_connect (GTK_OBJECT (copy), "activate",
+                      GTK_SIGNAL_FUNC (on_copy_activate),
+                      gbs);
+  return pmGBS;
+}
+
+static
+GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs) {
+	
+	GtkWidget *hpanedGBS;
+	GtkWidget *scrolledwindowCTREE_GBS;
+	GtkWidget *label;
+	GtkWidget *frameGBS;
+	GtkWidget *scrolledwindowHTML_GBS;
+	GtkWidget *popupmenu;
+	
+	hpanedGBS = gtk_hpaned_new ();
+	gtk_widget_ref (hpanedGBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "hpanedGBS", hpanedGBS,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (hpanedGBS);
+	gtk_container_add (GTK_CONTAINER (s->notebookGBS), hpanedGBS);
+	gtk_paned_set_position (GTK_PANED (hpanedGBS), 239);
+	
+	scrolledwindowCTREE_GBS = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_ref (scrolledwindowCTREE_GBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), 
+			"scrolledwindowCTREE_GBS", 
+			scrolledwindowCTREE_GBS,
+			(GtkDestroyNotify) gtk_widget_unref);			
+	gtk_widget_show (scrolledwindowCTREE_GBS);
+	gtk_paned_pack1 (GTK_PANED (hpanedGBS), scrolledwindowCTREE_GBS, FALSE, TRUE);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowCTREE_GBS), 
+			GTK_POLICY_AUTOMATIC, 
+			GTK_POLICY_AUTOMATIC);
+	
+	p_gbs->ctree = gtk_ctree_new (3, 0);
+	gtk_widget_ref (p_gbs->ctree);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "p_gbs->ctree", p_gbs->ctree,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (p_gbs->ctree);
+	gtk_container_add (GTK_CONTAINER (scrolledwindowCTREE_GBS), p_gbs->ctree);
+	gtk_container_set_border_width (GTK_CONTAINER (p_gbs->ctree), 1);
+	gtk_clist_set_column_width (GTK_CLIST (p_gbs->ctree), 0, 680);
+	gtk_clist_set_column_width (GTK_CLIST (p_gbs->ctree), 1, 1);
+	gtk_clist_set_column_width (GTK_CLIST (p_gbs->ctree), 2, 1);
+	gtk_clist_column_titles_hide (GTK_CLIST (p_gbs->ctree));
+	
+	label = gtk_label_new (_("label"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (p_gbs->ctree), 0, label);
+	
+	label = gtk_label_new (_("label200"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (p_gbs->ctree), 1, label);
+	
+	label = gtk_label_new (_("label"));
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_clist_set_column_widget (GTK_CLIST (p_gbs->ctree), 2, label);
+	
+	frameGBS = gtk_frame_new (NULL);
+	gtk_widget_ref (frameGBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "frameGBS", frameGBS,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (frameGBS);
+	gtk_paned_pack2 (GTK_PANED (hpanedGBS), frameGBS, TRUE, TRUE);
+	
+	scrolledwindowHTML_GBS = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_ref (scrolledwindowHTML_GBS);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), 
+			"scrolledwindowHTML_GBS", 
+			scrolledwindowHTML_GBS,
+			(GtkDestroyNotify) gtk_widget_unref);			
+	gtk_widget_show (scrolledwindowHTML_GBS);
+	gtk_container_add (GTK_CONTAINER (frameGBS), scrolledwindowHTML_GBS);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowHTML_GBS), 
+			GTK_POLICY_AUTOMATIC, 
+			GTK_POLICY_AUTOMATIC);
+	
+	p_gbs->html = gs_new_html_widget(s);	
+	gtk_widget_ref(p_gbs->html);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "p_gbs->html", p_gbs->html,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(p_gbs->html);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
+			  p_gbs->html);
+			  
+	label = gtk_label_new ((gchar*)mod->Name());
+	gtk_widget_ref (label);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label);
+	gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->notebookGBS), 
+		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->notebookGBS), count++), label);
+	
+	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
+			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row), p_gbs);
+	
+	SWDisplay *disp = new EntryDisp(p_gbs->html);
+	mod->Disp(disp);
+	displays.insert(displays.begin(), disp);
+	addbooktoCTree(p_gbs->ctree, (gchar*)mod->Name());
+	popupmenu = create_pmGBS(p_gbs);
+	gnome_popup_menu_attach(popupmenu,p_gbs->html,NULL);	
+	return hpanedGBS;
+}
+
+void setupSW_GBS(SETTINGS *s)
+{
+	ModMap::iterator 
+		it;	//-- iteratior
+	gint count = 0;
+	
+	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
+	curbookMod = NULL;
+	displays.clear();
+	gbs_data = NULL;
+	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), "Generic Book")) { 
+			GBS_DATA *gbs = new GBS_DATA;
+			gbs->bookName = (*it).second->Name();			
+			gbs->bookDescription = (*it).second->Description();
+			createGBS_Pane((*it).second, s, count, gbs) ;
+			gbs_data = g_list_append(gbs_data, (GBS_DATA *) gbs);
+			curbookMod = (*it).second;
+		}
+	}
+	gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",
+			   GTK_SIGNAL_FUNC(on_notebookGBS_switch_page),
+			   gbs_data);
+	//gtk_notebook_set_page(GTK_NOTEBOOK(s->notebookGBS), 1);
+}
+
+void shutdownSW_GBS(void)
+{
+	list <SWDisplay *>::iterator it;
+	
+	delete swmgrBook;
+	for (it = displays.begin(); it != displays.end(); it++)
+		delete *it;
+	
+	gbs_data = g_list_first(gbs_data);
+	while(gbs_data != NULL) {
+		delete (GBS_DATA *) gbs_data->data;
+		gbs_data = g_list_next(gbs_data);
+	}
+	g_list_free(gbs_data);
+}
+
+void searchgbsSW_GBS(gchar *searchText)
+{
+	
+}
 
 static void addNodeChildren(SETTINGS *s, 
 			GtkCTreeNode *node, 

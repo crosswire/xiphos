@@ -53,6 +53,14 @@
 extern gchar *gSwordDir;
 extern SETTINGS *settings;
 
+static
+gchar *isON(bool value)
+{
+	if(value)
+		return "1";
+	else
+		return "0";
+}
 /******************************************************************************
  * load gnomesword configuration - using sword SWConfig
  ******************************************************************************/
@@ -214,7 +222,7 @@ gboolean loadconfig(SETTINGS *s)
 /******************************************************************************
  * save gnomesword configuration - using sword SWConfig
  ******************************************************************************/
-gboolean saveconfig(void)
+gboolean saveconfig(gboolean shutdown)
 {
 	gchar buf[80], buf2[255];
 
@@ -222,7 +230,8 @@ gboolean saveconfig(void)
 	SWConfig settingsInfo(buf2);
 	
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
-	if (settings->usedefault) {
+	
+	if (settings->usedefault && shutdown) {
 		settingsInfo["StudyPad"]["Lastfile"] =
 		    	settings->studypadfilename;
 		settingsInfo["Keys"]["verse"] = 
@@ -289,168 +298,69 @@ gboolean saveconfig(void)
 		 settingsInfo["Fonts"]["Unicode"] =
 		    settings->unicode_font;   
 		    
-		    
+		/* layout */    
 		sprintf(buf, "%d", settings->shortcutbar_width);
 		settingsInfo["LAYOUT"]["Shortcutbar"] = buf;
+		
 		sprintf(buf, "%d", settings->upperpane_hight);
 		settingsInfo["LAYOUT"]["UperPane"] = buf;
+	
 		sprintf(buf, "%d", settings->biblepane_width);
 		settingsInfo["LAYOUT"]["BiblePane"] = buf;
+		
 		sprintf(buf, "%d", settings->gs_width);
 		settingsInfo["LAYOUT"]["AppWidth"] = buf;
+		
 		sprintf(buf, "%d", settings->gs_hight);
-		settingsInfo["LAYOUT"]["AppHight"] = buf;
-		if (settings->docked)
-			settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
-		else
-			settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "0";
-
+		settingsInfo["LAYOUT"]["AppHight"] = buf;		
+		
+		settingsInfo["LAYOUT"]["ShortcutbarDocked"] = isON(settings->docked);
+		
+		
+		/* User Options */
 		settingsInfo["User Options"]["currentVerseColor"] =
 		    settings->currentverse_color;
+		
 		settingsInfo["User Options"]["BibleTextColor"] =
 		    settings->bible_text_color;
+		
 		settingsInfo["User Options"]["BibleBGColor"] =
 		    settings->bible_bg_color;
+		
 		settingsInfo["User Options"]["BibleVerseNumColor"] =
 		    settings->bible_verse_num_color;
+		
 		 settingsInfo["User Options"]["LinkColor"] = 
 		 	settings->link_color;   
+		
 		settingsInfo["User Options"]["FoundColor"] =
 			settings->found_color;
 		
-		if (settings->usedefault)
-			settingsInfo["User Options"]["UseDefault"] = "1";
-		else
-			settingsInfo["User Options"]["UseDefault"] = "0";
-
-		if (settings->strongs)
-			settingsInfo["User Options"]["strongs"] = "1";
-		else
-			settingsInfo["User Options"]["strongs"] = "0";
-		
-		if (settings->strongsint)
-			settingsInfo["User Options"]["strongs interlinear"] = "1";
-		else
-			settingsInfo["User Options"]["strongs interlinear"] = "0";
-
-		if (settings->morphsint)
-			settingsInfo["User Options"]["morphs interlinear"] = "1";
-		else
-			settingsInfo["User Options"]["morphs interlinear"] = "0";
-
-		if (settings->hebrewpoints)
-			settingsInfo["User Options"]["Hebrew Points Interlinear"] = "1";
-		else
-			settingsInfo["User Options"]["Hebrew Points Interlinear"] = "0";
-
-		if (settings->cantillationmarks)
-			settingsInfo["User Options"]["Cantillation Marks Interlinear"] = "1";
-		else
-			settingsInfo["User Options"]["Cantillation Marks Interlinear"] = "0";
-
-		if (settings->footnotesint)
-			settingsInfo["User Options"]["footnotes interlinear"] = "1";
-		else
-			settingsInfo["User Options"]["footnotes interlinear"] = "0";
-
-		if (settings->versestyle)
-			settingsInfo["User Options"]["versestyle"] = "1";
-		else
-			settingsInfo["User Options"]["versestyle"] = "0";
-
-		if (settings->autosavepersonalcomments)
-			settingsInfo["User Options"]
-			    ["autosavepersonalcomments"] = "1";
-		else
-			settingsInfo["User Options"]
-			    ["autosavepersonalcomments"] = "0";
-
-		if (settings->formatpercom)
-			settingsInfo["User Options"]["formatpercom"] = "1";
-		else
-			settingsInfo["User Options"]["formatpercom"] = "0";
-
-		if (settings->showshortcutbar)
-			settingsInfo["User Options"]["showshortcutbar"] =
-			    "1";
-		else
-			settingsInfo["User Options"]["showshortcutbar"] =
-			    "0";
-
-		if (settings->showfavoritesgroup)
-			settingsInfo["User Options"]["showfavogroup"] =
-			    "1";
-		else
-			settingsInfo["User Options"]["showfavogroup"] =
-			    "0";
-
-		if (settings->showtextgroup)
-			settingsInfo["User Options"]["showtextgroup"] =
-			    "1";
-		else
-			settingsInfo["User Options"]["showtextgroup"] =
-			    "0";
-
-		if (settings->showcomgroup)
-			settingsInfo["User Options"]["showcomgroup"] = "1";
-		else
-			settingsInfo["User Options"]["showcomgroup"] = "0";
-
-		if (settings->showdictgroup)
-			settingsInfo["User Options"]["showdictgroup"] = "1";
-		else
-			settingsInfo["User Options"]["showdictgroup"] = "0";
-
-		if (settings->showbookgroup)
-			settingsInfo["User Options"]["showbookgroup"] = "1";
-		else
-			settingsInfo["User Options"]["showbookgroup"] = "0";
-
-		if (settings->showbookmarksgroup)
-			settingsInfo["User Options"]["showbookmarksgroup"]
-			    = "1";
-		else
-			settingsInfo["User Options"]["showbookmarksgroup"]
-			    = "0";
-
-		if (settings->interlinearpage)
-			settingsInfo["User Options"]["interlinearpage"] =
-			    "1";
-		else
-			settingsInfo["User Options"]["interlinearpage"] =
-			    "0";
-
-		if (settings->showhistorygroup)
-			settingsInfo["User Options"]["showhistorygroup"] =
-			    "1";
-		else
-			settingsInfo["User Options"]["showhistorygroup"] =
-			    "0";
-
-		if (settings->showsplash)
-			settingsInfo["User Options"]["ShowSplash"] = "1";
-		else
-			settingsInfo["User Options"]["ShowSplash"] = "0";
-		
-		if (settings->showdevotional)
-			settingsInfo["User Options"]["Daily Devotional"] = "1";
-		else
-			settingsInfo["User Options"]["Daily Devotional"] = "0";
-		
-		if (settings->notefollow)
-			settingsInfo["User Options"]["NoteScroll"] = "1";
-		else
-			settingsInfo["User Options"]["NoteScroll"] = "0";
-		
-
-
-		sprintf(buf, "%d", settings->text_tabs);
-		settingsInfo["User Options"]["BibleTabs"] = buf;
-
-		sprintf(buf, "%d", settings->comm_tabs);
-		settingsInfo["User Options"]["CommTabs"] = buf;
-		sprintf(buf, "%d", settings->dict_tabs);
-		settingsInfo["User Options"]["DictTabs"] = buf;
+		settingsInfo["User Options"]["UseDefault"] = isON(settings->usedefault);
+		settingsInfo["User Options"]["strongs"] = isON(settings->strongs);
+		settingsInfo["User Options"]["strongs interlinear"] = isON(settings->strongsint);
+		settingsInfo["User Options"]["morphs interlinear"] = isON(settings->morphsint);
+		settingsInfo["User Options"]["Hebrew Points Interlinear"] = isON(settings->hebrewpoints);
+		settingsInfo["User Options"]["Cantillation Marks Interlinear"] = isON(settings->cantillationmarks);
+		settingsInfo["User Options"]["footnotes interlinear"] = isON(settings->footnotesint);
+		settingsInfo["User Options"]["versestyle"] = isON(settings->versestyle);
+		settingsInfo["User Options"]["autosavepersonalcomments"] = isON(settings->autosavepersonalcomments);
+		settingsInfo["User Options"]["formatpercom"] = isON(settings->formatpercom);
+		settingsInfo["User Options"]["showshortcutbar"] = isON(settings->showshortcutbar);
+		settingsInfo["User Options"]["showfavogroup"] = isON(settings->showfavoritesgroup);
+		settingsInfo["User Options"]["showtextgroup"] = isON(settings->showtextgroup);
+		settingsInfo["User Options"]["showcomgroup"] = isON(settings->showcomgroup);
+		settingsInfo["User Options"]["showdictgroup"] = isON(settings->showdictgroup);
+		settingsInfo["User Options"]["showbookgroup"] = isON(settings->showbookgroup);
+		settingsInfo["User Options"]["showbookmarksgroup"] = isON(settings->showbookmarksgroup);
+		settingsInfo["User Options"]["interlinearpage"] = isON(settings->interlinearpage);
+		settingsInfo["User Options"]["showhistorygroup"] = isON(settings->showhistorygroup);
+		settingsInfo["User Options"]["ShowSplash"] =  isON(settings->showsplash);
+		settingsInfo["User Options"]["Daily Devotional"] = isON(settings->showdevotional);
+		settingsInfo["User Options"]["NoteScroll"] = isON(settings->notefollow);
+		settingsInfo["User Options"]["BibleTabs"] = isON(settings->text_tabs);
+		settingsInfo["User Options"]["CommTabs"] = isON(settings->comm_tabs);
+		settingsInfo["User Options"]["DictTabs"] = isON(settings->dict_tabs);
 	}
 	settingsInfo.Save();
 	return true;
@@ -507,43 +417,20 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["LAYOUT"]["AppHight"] = "550";
 	settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
 
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "radiobutton1"))->
-	    active)
-		settingsInfo["User Options"]["UseDefault"] = "1";
-	else
-		settingsInfo["User Options"]["UseDefault"] = "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton4"))->
-	    active)
-		settingsInfo["User Options"]["BibleTabs"] = "1";
-	else
-		settingsInfo["User Options"]["BibleTabs"] = "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton5"))->
-	    active)
-		settingsInfo["User Options"]["CommTabs"] = "1";
-	else
-		settingsInfo["User Options"]["CommTabs"] = "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton6"))->
-	    active)
-		settingsInfo["User Options"]["DictTabs"] = "1";
-	else
-		settingsInfo["User Options"]["DictTabs"] = "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton2"))->
-	    active)
-		settingsInfo["User Options"]["versestyle"] = "1";
-	else
-		settingsInfo["User Options"]["versestyle"] = "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton1"))->
-	    active)
-		settingsInfo["User Options"]["autosavepersonalcomments"] =
-		    "1";
-	else
-		settingsInfo["User Options"]["autosavepersonalcomments"] =
-		    "0";
-	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton3"))->
-	    active)
-		settingsInfo["User Options"]["interlinearpage"] = "1";
-	else
-		settingsInfo["User Options"]["interlinearpage"] = "0";
+	settingsInfo["User Options"]["UseDefault"] = 
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "radiobutton1"))->active);	
+	settingsInfo["User Options"]["BibleTabs"] =  
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton4"))->active);
+	settingsInfo["User Options"]["CommTabs"] = 
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton5"))->active);
+	settingsInfo["User Options"]["DictTabs"] = 
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton6"))->active);
+	settingsInfo["User Options"]["versestyle"] =
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton2"))->active);
+	settingsInfo["User Options"]["autosavepersonalcomments"] =
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton1"))->active);
+	settingsInfo["User Options"]["interlinearpage"] = 
+		isON(GTK_TOGGLE_BUTTON(lookup_widget(setup, "checkbutton3"))->active);		
 	settingsInfo["User Options"]["strongs"] = "0";
 	settingsInfo["User Options"]["footnotes"] = "0";
 	settingsInfo["User Options"]["formatpercom"] = "0";

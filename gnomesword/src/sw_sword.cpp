@@ -235,7 +235,9 @@ void initSWORD(SETTINGS *s)
 	sbfavoritesmods = NULL;
 	sbbiblemods = NULL;
 	sbcommods = NULL;
-	sbdictmods = NULL;
+	sbdictmods = NULL;	
+	bookmods = NULL;	
+	sbbookmods = NULL;
 	options = NULL;
 	
 	settings->displaySearchResults = false;
@@ -262,6 +264,7 @@ void initSWORD(SETTINGS *s)
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());
+		
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			curMod = (*it).second;
 			havebible = TRUE;
@@ -270,7 +273,9 @@ void initSWORD(SETTINGS *s)
 			sbbiblemods = g_list_append(sbbiblemods, curMod->Description());
 			curMod->Disp(UTF8Display);
 			curMod->SetKey(vkText);
-		} else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
+		} 
+		
+		else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
 			curcomMod = (*it).second;
 			commentarymods =  g_list_append(commentarymods, curcomMod->Name());
 			sbcommods = g_list_append(sbcommods, curcomMod->Description());
@@ -278,7 +283,9 @@ void initSWORD(SETTINGS *s)
 			++compages;	//-- how many pages do we have  
 			curcomMod->Disp(commDisplay);
 			curcomMod->SetKey(vkComm);    
-		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
+		} 
+		
+		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
 			curdictMod = (*it).second;
@@ -286,6 +293,11 @@ void initSWORD(SETTINGS *s)
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
 			curdictMod->Disp(dictDisplay);			
 		} 
+		
+		else if (!strcmp((*it).second->Type(), "Generic Book")) { 			
+			bookmods = g_list_append(bookmods, (*it).second->Name());
+			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
+		}
 	}
 	setupSW_GBS(s);
 	
@@ -381,7 +393,7 @@ void ChangeVerseSWORD(void)
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 	
 	//------------------------------- change personal notes editor	 if not in edit mode
 	if (settings->notebook3page == 1) {
@@ -458,10 +470,50 @@ void changeVerseComSWORD(void)
 }
 
 /*** please fix me ***/
-void updateIntDlg(void)
+void updateIntDlg(SETTINGS *s)
 {	
+	gchar 
+		*utf8str,
+		*bgColor,
+		*textColor,
+		buf[500], 
+		*tmpkey;
 	
+	beginHTML(settings->htmlInterlinear, TRUE);
+	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+			settings->bible_bg_color,
+			settings->bible_text_color, settings->link_color);
+	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
+	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	sprintf(buf,"%s","</tr>");		
+	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
+	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+	
+	/******      ******/
 	IntDisplay(settings);
+	
+	sprintf(buf,"%s","</table></body></html>");		
+	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
+	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+	endHTML(settings->htmlInterlinear);	
+	sprintf(buf, "%d", curVerse);
+	gotoanchorHTML(settings->htmlInterlinear, buf);
 }
 
 /*
@@ -500,13 +552,6 @@ void updateinterlinearpage(void)
 	interlinearMod2->Display();
 	interlinearMod3->Display();
 	interlinearMod4->Display();
-	/*
-	changecomp1ModSWORD(settings->Interlinear1Module);
-	changecomp1ModSWORD(settings->Interlinear2Module);
-	changecomp1ModSWORD(settings->Interlinear3Module);
-	changecomp1ModSWORD(settings->Interlinear4Module);
-	changecomp1ModSWORD(settings->Interlinear5Module);
-	*/
 	sprintf(tmpBuf, "</table></body></html>");
 	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
@@ -575,7 +620,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		*swbmDir;
 	
 	savebookmarks(settings->ctree_widget);
-	saveconfig();
+	saveconfig(true);
 	
 	if (settings->modifiedSP) {	//-- if study pad file has changed since last save  
 		msgbox = create_InfoBox();
@@ -709,7 +754,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 		if(settings->dockedInt && havebible)
 			updateinterlinearpage();
 		else
-			updateIntDlg();
+			updateIntDlg(settings);
 		
 		break;
 	}
@@ -777,7 +822,7 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 		
 		else if (!strcmp((*it).second->Type(), "Generic Book")) {
 			if (!strcmp((*it).second->Name(), modName)) {				
-				gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), bookindex);
+				gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), bookindex);	
 				return;
 			}
 			++bookindex;
@@ -971,6 +1016,10 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 	if (havecomm) {
 		curcomMod = mainMgr->Modules[modName];
 		cKey = (gchar*)curcomMod->getConfigEntry("CipherKey");
+		//-- change tab label to current commentary name
+		gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook),
+			gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook),0), 
+			(gchar*)curcomMod->Name());
 		
 		if(cKey)
 			gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
@@ -991,11 +1040,7 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 	}
 	
 	frame = lookup_widget(settings->app, "frameCom");
-	if (settings->comm_tabs) {
-		gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
-	} else {
-		gtk_frame_set_label(GTK_FRAME(frame), curcomMod->Name());	//-- set frame label
-	}
+	gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1050,13 +1095,15 @@ void changcurdictModSWORD(gchar * modName, gchar * keyText)	//-- someone changed
 		curdictMod->Display();	//-- display new dict
 		FillDictKeysSWORD();	//-- fill the list widget with keys
 		strcpy(settings->DictWindowModule, curdictMod->Name());
+		
+		//-- change tab label to current dict/lex name
+		gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook_lower),
+			gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),0), 
+			settings->DictWindowModule);
+		
 	}
 	frame = lookup_widget(settings->app, "frame10");
-	if (settings->dict_tabs) {
-		gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
-	} else {
-		gtk_frame_set_label(GTK_FRAME(frame), curdictMod->Name());	//-- set frame label
-	}
+	gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
 }
 
 /*

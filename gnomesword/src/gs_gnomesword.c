@@ -72,6 +72,7 @@ gint
 SETTINGS 
 	*settings;
 		
+
 /*****************************************************************************
 * externs
 *****************************************************************************/
@@ -119,12 +120,15 @@ initGnomeSword(SETTINGS *s,
 {
 	GtkWidget 
 		*notebook;
+	
 	gint		
 		biblepage,
 		commpage,
 		dictpage;
 	
-	g_print("%s\n", "Initiating GnomeSword\n");
+	
+	g_print("%s\n", "Initiating GnomeSword\n");	
+	
 	/* setup shortcut bar */
 	setupSB(s);
 	s->settingslist = NULL;
@@ -156,22 +160,14 @@ initGnomeSword(SETTINGS *s,
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app,"nbPerCom")),0);	
 	/*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(s->app,"textComments")) , TRUE );
-	/* set main notebook page */
-	//gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app,"notebook3")), s->notebook3page );
 	/* store text widgets for spell checker */
 	notes =  lookup_widget(s->app,"textComments");		
-	/* Add options to Options Menu and get toggle item widget */
-	/*autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
-				(GtkMenuCallback)on_auto_save_notes1_activate);
-	*/
-	/*notepage  = additemtooptionmenu(app, _("_Settings/"), _("Show Interlinear Page"),
-				(GtkMenuCallback)on_show_interlinear_page1_activate);*/
+	
 	s->versestyle_item = additemtooptionmenu(s->app, _("_Settings/"), _("Verse Style"),
 				(GtkMenuCallback)on_verse_style1_activate);
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(s->app,"dictionarySearchText")),s->dictkey);
-        loadquickmarks_programstart(s->app); /* add quickmarks to menubar */
-	
+        loadquickmarks_programstart(s->app); /* add quickmarks to menubar */	
 	
 	/* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
@@ -241,6 +237,8 @@ initGnomeSword(SETTINGS *s,
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
+	g_list_free(bookmods);
+	g_list_free(sbbookmods);
        // options list freed on exit
 	
 	if(s->showsplash){	

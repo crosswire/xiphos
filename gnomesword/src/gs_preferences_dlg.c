@@ -239,13 +239,9 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 				 (lookup_widget(d, "cmbEentryVNSize")));
 	sprintf(s->verse_num_font_size, "%s", buf);
 	/*** read radio buttons ***/
-	s->usedefault = GTK_TOGGLE_BUTTON(lookup_widget(d,
-							"rbtnUsedefaults"))->
-	    active;
+	s->usedefault = GTK_TOGGLE_BUTTON(lookup_widget(d,"rbtnUsedefaults"))->active;
 	/*** read check buttons ***/
-	s->showshortcutbar = GTK_TOGGLE_BUTTON(lookup_widget(d,
-							     "cbtnShowSCB"))->
-	    active;
+	s->showshortcutbar = GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowSCB"))->active;
 	s->text_tabs =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBibletabs"))->
 	    active;
@@ -283,8 +279,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	   GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton8"))->active;
 	 */
 	s->showdevotional =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDevotion"))->
-	    active;
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDevotion"))->active;
+	    
 	/*** read layout spin buttons ***/
 	s->gs_width =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -306,7 +302,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (lookup_widget
 					      (d, "sbtnUpPaneHight")));
-	saveconfig();
+	
+	saveconfig(FALSE);
 	applyoptions(s);
 
 }
@@ -2018,8 +2015,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 					s->default_font);
 	
 	/* set toggle buttons */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnNoDefaults), 
-					s->usedefault);
+	if(s->usedefault)
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnUsedefaults), 
+						TRUE);
+	else
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnNoDefaults), 
+						TRUE);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowSCB),
 				     s->showshortcutbar);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowBibletabs),
