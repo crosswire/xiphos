@@ -40,7 +40,6 @@
 #include <thmlgbf.h>
 #include <gbfplain.h>
 
-
 #include "display.h"
 #include "support.h"
 #include "interface.h"
@@ -631,11 +630,22 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	gchar tmpBuf[256];
 	GdkFont *sword_font, *greek_font, *foreign_font;
 	gchar *myname;
-	bool greek, findclose, italics_on = FALSE;
+	bool greek, greek_on, findclose, italics_on = FALSE, scriptureref=FALSE;
 	gchar *verseBuf, *buf, *myverse, *font, *sourceType, tag[256];
 	int i, j, len, taglen;
-
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+	
 	font = "Roman";
+	
+	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
+	    mainMgr->config->Sections.end()) {
+		if ((eit = (*sit).second.find("Font")) !=
+		    (*sit).second.end()) {
+			font = (char *) (*eit).second.c_str();
+		}
+	}
+	//cout << gtk_widget_get_name(gtkText) << '\n';
 	/* Load a italic font */
 	italic_font =
 	    gdk_font_load
@@ -656,7 +666,15 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	greek_font =
 	    gdk_font_load
 	    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-
+	    	    
+	if (!strcmp(font, "Symbol")) {
+		greek_on = true;
+	} else if (!strcmp(font, "Greek")) {
+		greek_on = true;
+	} else {
+		greek_on = false;
+	}	
+	
 	sword_font = roman_font;
 	findclose = FALSE;
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
@@ -666,7 +684,11 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	(const char *) imodule;	/* snap to entry */
 	gtk_text_freeze(GTK_TEXT(gtkText));
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
-	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
+	gtk_text_insert(GTK_TEXT(gtkText),
+			NULL,
+			&colourBlue,
+			NULL,
+			tmpBuf,
 			-1);
 	i = j = 0;
 	len = strlen((const char *) imodule);
@@ -675,11 +697,28 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	verseBuf = new char[len + 1];
 	verseBuf[0] = '\0';
 	if ((!strcmp(imodule.Name(), "TFG"))
-	    && (!strcmp(imodule.KeyText(), "Romans 1:1"))) {
+	    && (!strcmp(imodule.KeyText(), "Romans 1:1"))) { /* gnomeswrod will crash in TFG mod at Rom 1:1 */
 		sprintf(myverse, "%s", " ");
-	} else
+	} else {
 		sprintf(myverse, "%s", (const char *) imodule);
+		if(greek_on) {
+			gtk_text_insert(GTK_TEXT(gtkText), greek_font,
+			&gtkText->style->black, NULL, myverse, -1);
+			delete[]verseBuf;
+			verseBuf = NULL;
+			delete[]myverse;
+			myverse = NULL;
+			gtk_text_set_point(GTK_TEXT(gtkText), curPos);
+			gtk_text_thaw(GTK_TEXT(gtkText));
+			return 't';	
+		}		
+	}
 	while (i < len) {
+		if(myverse[i] == '\n') myverse[i] = ' ';
+		if((myverse[i] == '&') &&  (myverse[i+1] == 'n') && (myverse[i+2] == 'b') && (myverse[i+3] == 's') && 
+			(myverse[i+4] == 'p')  && (myverse[i+5] == ';')) {
+			i = i+6;		
+		}
 		if (myverse[i] == '<') {
 			tag[0] = '\0';
 			taglen = gettags(myverse, tag, i);	/* get html tags */
@@ -715,19 +754,21 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strncmp(tag, "<A HREF", 6)) {	/*  reference */
+			} else if ((!strncmp(tag, "<A HREF", 6)) || (!strncmp(tag,"<SCRIPREF",9))) {	/*  reference */
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
+				scriptureref = TRUE;
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</A>")) {
+			} else if ((!strcmp(tag, "</A>")) || (!strcmp(tag, "</SCRIPREF>"))) { /*  end reference */
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font, &colourRed,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
+				scriptureref = FALSE;
 			} else if (!strcmp(tag, "<FONT FACE=\"SYMBOL\">")) {	/*  greek */
 				foreign_font = greek_font;
 				gtk_text_insert(GTK_TEXT(gtkText),
@@ -758,7 +799,7 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 				j = 0;
 				verseBuf[0] = '\0';
 			} else if (!strcmp(tag, "<BR>")
-				   || !strcmp(tag, "<BR><B>")) {	/* new line */
+				   || !strcmp(tag, "<BR><B>") || !strcmp(tag, "<P>") || !strcmp(tag, "</P>")) {	/* new line */
 				--i;
 				myverse[i] = '\n';
 			}
@@ -1399,7 +1440,11 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 	len = strlen(text);
 	tag[0] = '\0';
 	for (i = pos; i < len; i++) {
-		tag[j] = toupper(text[i]); /*** make all tags upper case ***/
+		if(isalpha(text[i])) {
+			tag[j] = toupper(text[i]); /*** make all tags upper case ***/
+		} else {
+			tag[j] = text[i];
+		}
 		++j;
 		tag[j] = '\0';
 		if (text[i] == '>' && text[i + 1] != '<') {

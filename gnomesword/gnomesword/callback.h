@@ -19,8 +19,11 @@ extern "C" {
 #endif
 
 #include <gnome.h>
+	
+#if USE_SHORTCUTBAR
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-
+#endif /* USE_SHORTCUTBAR */
+	
 GtkWidget *create_fileselection1(void);
 GtkWidget *create_fileselectionSave(void);
 GtkWidget *create_menu1(void);
@@ -32,7 +35,7 @@ GtkWidget *create_AboutSword(void);
 GtkWidget *create_aboutmodules(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
-
+	
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
 		gpointer user_data);
 void on_ok_button1_clicked(GtkButton * button, 
@@ -590,11 +593,12 @@ void
 	 on_show_tabs2_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 
-
+#if USE_SHORTCUTBAR
 	void
 	 on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				       GdkEvent * event,
 				       gint group_num, gint item_num);
+#endif /* USE_SHORTCUTBAR */
 
 	void
 	 on_com_select_activate(GtkMenuItem * menuitem,
@@ -623,7 +627,68 @@ gboolean on_epaned_button_release_event(GtkWidget *widget,
 		gpointer  user_data);                   
 void on_cbtnShowHistoryGroup_toggled(GtkToggleButton *togglebutton,
 		gpointer user_data);
-		
+
+
+						
+void
+on_btsText_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsComms_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsDicts_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsBookmarks_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsHistory_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnClearHistory_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+
+void
+on_btsComms2_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_historybutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsDicts2_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsBookmarks2_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btsHistory2_clicked                 (GtkButton       *button,
+                 		gpointer         user_data);
+                 		
+void
+on_textbutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_combutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_dictbutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void on_view_in_new_window_activate(GtkMenuItem * menuitem,
+		gpointer user_data);                 		
 
 #ifdef __cplusplus
 }

@@ -28,27 +28,24 @@
 #endif
 
 #include <gnome.h>
+
+#if USE_SHORTCUTBAR
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-#include  <widgets/e-paned/e-paned.h>
-#include  <widgets/e-paned/e-hpaned.h>
-#include  <widgets/e-paned/e-vpaned.h>
+#include <gal/e-paned/e-hpaned.h>
+#endif /* USE_SHORTCUTBAR */
 
 #include "callback.h"
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
+#include "gs_viewdict.h"
 #include "support.h"
 #include "interface.h"
 #include "gs_file.h"
-//#include "display.h"
 #include "gs_listeditor.h"
 #include "noteeditor.h"
 #include "searchstuff.h"
 #include "printstuff.h"
 
-
-#ifdef USE_ASPELL
-#include "spellcheck.h"
-#endif /* USE_ASPELL */
 
 /******************************************************************************
  * globals
@@ -84,7 +81,7 @@ extern gint answer;		/* do we save file on exit */
 extern NoteEditor *noteeditor;
 extern gboolean autoscroll;
 extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
-
+extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 /******************************************************************************
 *******************************************************************************
  *callbacks fileselection dialogs
@@ -183,10 +180,9 @@ void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void
 on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar *buf;
-	buf = (gchar *) user_data;
-	changeVerse(buf);
+{       	
+	//g_warning("user data = %d\n", atoi((gchar *)user_data));
+	changeverseHistory(atoi((gchar *)user_data));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -243,7 +239,7 @@ on_edit_bookmarks1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	changeVerse((gchar *) user_data);
+	changeVerseSWORD((gchar *) user_data);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -334,7 +330,7 @@ void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 				   (lookup_widget
 				    (GTK_WIDGET(editable),
 				     "cbeFreeformLookup")), ref);
-		changeVerse(ref);
+		changeVerseSWORD(ref);
 	}
 }
 
@@ -448,7 +444,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- get label
 		changcurcomModSWORD((char *) label->label, page_num);	//-- pass label text and page number
-	}								//-- to function to do the work - GnomeSword.cpp
+	}								//-- to function to do the work - gs_sword.cpp
 	firsttime = FALSE;
 }
 
@@ -710,18 +706,18 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	showinfoSWORD(text2, GTK_LABEL(label));
 	gtk_widget_show(dlg);
 }
-
+/*
 //----------------------------------------------------------------------------------------------
 void on_btnSpellNotes_clicked(GtkButton * button, gpointer user_data)
 {
 #ifdef USE_ASPELL
 	GtkWidget *speller;
 	if (GTK_TOGGLE_BUTTON
-	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active)
-		speller = spellcheck(1);
-#endif				/* USE_ASPELL */
+	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {};
+		//speller = spellcheck(1);
+#endif				
 }
-
+*/
 //----------------------------------------------------------------------------------------------
 void
 on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -1029,8 +1025,8 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
 				   GTK_EDITABLE(NEtext)->selection_start_pos,
 				   GTK_EDITABLE(NEtext)->selection_end_pos);
-
-	changeVerse(buf);	
+	changeVerseSWORD(buf);
+		
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1048,7 +1044,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_start_pos,
 				   GTK_EDITABLE(text)->selection_end_pos);
 
-	changeVerse(buf);
+	changeVerseSWORD(buf);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1182,13 +1178,13 @@ void on_lookup_word1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-	navcurcommModSWORD(0);
+	historynav(MainFrm, 0);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-	navcurcommModSWORD(1);
+	historynav(MainFrm, 1);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1302,8 +1298,8 @@ on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    gtk_editable_get_chars(GTK_EDITABLE(text),
 				   GTK_EDITABLE(text)->selection_start_pos,
 				   GTK_EDITABLE(text)->selection_end_pos);
-
-	changeVerse(buf);
+	
+	changeVerseSWORD(buf);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1400,6 +1396,7 @@ on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
+#if USE_SHORTCUTBAR
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
@@ -1407,9 +1404,19 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 		settings->showshortcutbar = TRUE;
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
 	}
+#else
+        if (settings->showshortcutbar) {
+		settings->showshortcutbar = false;
+		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 0);
+	} else {
+		settings->showshortcutbar = true;
+		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 106); //settings->shortcutbarsize);
+	} 	
+#endif /* USE_SHORTCUTBAR */
 }
 
 //----------------------------------------------------------------------------------------------
+#if USE_SHORTCUTBAR
 void
 on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
@@ -1417,7 +1424,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 {
 	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
 }
-
+#endif /* USE_SHORTCUTBAR */
 //----------------------------------------------------------------------------------------------
 void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -1490,6 +1497,7 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 }
 
 //----------------------------------------------------------------------------------------------
+#if USE_SHORTCUTBAR
 gboolean
 on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
@@ -1504,7 +1512,224 @@ on_epaned_button_release_event(GtkWidget       *widget,
         }
         return TRUE;
 }
+#else
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_btsText_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),0);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
+	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms2"));
+	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
+	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
+	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
+	
+	
+	
+}
 
+
+void
+on_btsComms_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),1);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
+	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
+	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
+	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));	
+}
+
+
+void
+on_btsDicts_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),2);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
+	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
+	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));	
+}
+
+
+void
+on_btsBookmarks_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),3);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
+	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
+}
+
+
+void
+on_btsHistory_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),4);
+}
+/*
+ *
+*/
+void
+on_btnClearHistory_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	clearhistory(MainFrm,MainFrm);
+}
+
+
+void
+on_btsComms2_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),1);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
+	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
+}
+
+
+void
+on_btsDicts2_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),2);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
+	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
+	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
+}
+
+
+void
+on_btsBookmarks2_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),3);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
+	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
+	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
+	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
+}
+
+
+void
+on_btsHistory2_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *sidebar;
+	
+	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
+	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),4);
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
+	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
+	
+	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
+	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
+	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
+	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory"));
+}
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    GtkWidget	*dlg,
+				*btnok,
+				*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	
+//	showbookmarksgroup = togglebutton->active;
+	
+}
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_textbutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	changecurModSWORD((char *) user_data);
+}
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_combutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	sbchangeModSword(MainFrm,MainFrm,1,gint(user_data));
+}
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_dictbutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	sbchangeModSword(MainFrm,MainFrm,2,gint(user_data));
+}
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void
+on_historybutton_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	changeverseHistory((gint)user_data);
+}
+
+
+
+#endif /* USE_SHORTCUTBAR */
 //----------------------------------------------------------------------------------------------
 void
 on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
@@ -1541,6 +1766,7 @@ void on_btnSearch1_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *searchFrm;
 	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	gtk_clist_clear(GTK_CLIST(searchWindow->resultList));
 	searchWindow->searchSWORD(searchFrm);
 }
 
@@ -1554,3 +1780,32 @@ on_resultList_select_row(GtkCList * clist,
 	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
 	searchWindow->resultsListSWORD(searchFrm, row, column);
 }
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void on_view_in_new_window_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	extern GtkWidget *frameShowDict;
+	static GtkWidget *dlg;
+	gchar *modName;
+        GdkCursor *cursor;	
+	gtk_widget_show(MainFrm);
+	cursor = gdk_cursor_new(GDK_WATCH);
+	gdk_window_set_cursor(MainFrm->window,cursor);
+	
+	if(!isrunningSD) {
+		dlg = create_dlgShowDict();
+		modName = getdictmodSWORD();
+		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  /* set frame label to current Module name  */				
+		initSD(modName);
+		isrunningSD = true;
+	}
+	gtk_widget_show(dlg);
+	gtk_widget_show(MainFrm);
+	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor(MainFrm->window,cursor);
+}		
+		
+		

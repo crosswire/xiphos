@@ -39,7 +39,7 @@ programs also.
 The printing code is from gedit-0.7.9. I only change what I had to to
 make it work with GnomeSword.
 
-The code for spell checking is from gaspell
+The code for spell checking is from the Bluefish HTML editor 0.6
 
 The code for the shortcut bar is from the Evolution project without
 any changes - I just copied the subdirs 'e-util' and 'widgets' into
