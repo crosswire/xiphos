@@ -30,8 +30,8 @@ libbackend_a_SOURCES =  \
     display.h \
     display_info.cpp \
     display_info.h \
-    gbs.cpp \
-    gbs.h \
+    gbs_.cpp \
+    gbs_.h \
     interlinear.cpp \
     interlinear.h \
     module_options.cpp \
