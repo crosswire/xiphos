@@ -41,7 +41,7 @@ extern "C" {
 					gpointer user_data);
 	void on_add_quickmark_activate(GtkMenuItem * menuitem,
 				       	gpointer user_data);
-	void on_edit_quickmarks_activate(GtkMenuItem * menuitem,
+	void on_clear_quickmarks_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
 	void on_verse_style1_activate(GtkMenuItem * menuitem,
 				      	gpointer user_data);

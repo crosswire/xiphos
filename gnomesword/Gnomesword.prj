@@ -66,7 +66,6 @@ module.source.files=\
 	gs_history.c\
 	gs_html.c\
 	gs_html.h\
-	gs_listeditor.c\
 	gs_menu.c\
 	spell.c\
 	spell.h\
@@ -81,7 +80,6 @@ module.source.files=\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
 	gs_gnomesword.h\
-	gs_listeditor.h\
 	gs_menu.h\
 	gs_history.h\
 	sw_utility.cpp\

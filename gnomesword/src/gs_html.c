@@ -70,7 +70,6 @@ GtkWidget *htmlComments;
 GtkWidget *usehtml;
 
 extern GtkWidget *textDict;
-extern GString *gs_clipboard;	/* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern SETTINGS *settings;
 
 /***************************************************************************************************
