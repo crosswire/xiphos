@@ -1,13 +1,18 @@
+2003-01-30  Terry Biggs <tbiggs@users.sf.net>
+
+	* in main_menu moved View/New * Dialog to
+	  File/Open * Dialog
+
 2003-01-28  Terry Biggs <tbiggs@users.sf.net>
 
 	* revomed toolbar from commentary pane put
-	  all option in popup menu.
+	  all options in popup menu.
 	* added same popup menu to commentary dialog
 
 2003-01-24  Terry Biggs <tbiggs@users.sf.net>
 
 	* revomed toolbar from Bible text pane put
-	  all option in popup menu.
+	  all options in popup menu.
 	* added same popup menu to Bible text dialog
 
 2003-01-22  Terry Biggs <tbiggs@users.sf.net>
