@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * url.c - support functions
+ * url.cc - support functions
  *
  * Copyright (C) 2004 GnomeSword Developer Team
  *
@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+ 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -30,7 +30,9 @@
 
 #include <gnome.h>
 
+#include "gui/about_modules.h"
 #include "gui/html.h"
+#include "gui/gtkhtml_display.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/hints.h"
@@ -39,6 +41,8 @@
 #include "gui/dialog.h"
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
+#include "gui/main_window.h"
+#include "gui/toolbar_nav.h"
 
 #include "main/url.h"
 #include "main/lists.h"
@@ -47,6 +51,8 @@
 #include "main/module.h"
 #include "main/sword.h"
 #include "main/xml.h"
+
+#include "backend/sword_main.hh"
 
 
 
@@ -228,7 +234,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	gchar **work_buf = g_strsplit (url,"/",4);
 	
 	if(!strcmp(work_buf[2],"Greek") || strstr(work_buf[2],"x-Robinson")) {
-		if(check_for_module("Robinson")) 
+		if(backend->is_module("Robinson")) 
 			modbuf = "Robinson";
 	} 		
 	if (clicked) {
@@ -278,14 +284,14 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 	gchar **work_buf = g_strsplit (url,"/",4);
 	
 	if(!strcmp(work_buf[2],"Greek")) {
-		if(check_for_module(settings.lex_greek_viewer)) 
+		if(backend->is_module(settings.lex_greek_viewer)) 
 			modbuf_viewer = settings.lex_greek_viewer;
-		if(check_for_module(settings.lex_greek)) 
+		if(backend->is_module(settings.lex_greek)) 
 			modbuf = settings.lex_greek;
 	} else if(!strcmp(work_buf[2],"Hebrew")) {
-		if(check_for_module(settings.lex_hebrew_viewer)) 
+		if(backend->is_module(settings.lex_hebrew_viewer)) 
 			modbuf_viewer = settings.lex_hebrew_viewer;
-		if(check_for_module(settings.lex_hebrew)) 
+		if(backend->is_module(settings.lex_hebrew)) 
 			modbuf = settings.lex_hebrew;
 	}
 		
@@ -337,7 +343,7 @@ static gint note_uri(const gchar * url, gboolean clicked)
 	gchar *tmpbuf = NULL;
 	
 	if(!in_url)
-		return;
+		return 1;
 	
 	work_buf = g_strsplit (url,"/",6);
 	
@@ -346,7 +352,7 @@ static gint note_uri(const gchar * url, gboolean clicked)
 		hint.in_popup = FALSE;
 	}
 	
-	if(check_for_module(work_buf[2])) 
+	if(backend->is_module(work_buf[2])) 
 		module = work_buf[2];
 	else
 		module = settings.MainWindowModule;
@@ -398,7 +404,7 @@ static gint reference_uri(const gchar * url, gboolean clicked)
 		return 1;
 	work_buf = g_strsplit (url,"/",4);
 	
-	if(check_for_module(work_buf[2])) 
+	if(backend->is_module(work_buf[2])) 
 		module = work_buf[2];
 	else
 		module = settings.MainWindowModule;
@@ -456,34 +462,22 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	} else
 		tmpkey = work_buf[KEY];
 	
-	verse_count = start_parse_verse_list(tmpkey, settings.currentverse);
+	verse_count = backend->is_Bible_key(tmpkey, settings.currentverse);
 	if(!work_buf[3] && !verse_count){
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
 		return 0;
 	}
-	if(check_for_module(work_buf[MODULE])) {
-		mod_type = get_mod_type(work_buf[MODULE]);
+	if(backend->is_module(work_buf[MODULE])) {
+		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
-			case TEXT_TYPE:			
-				key = get_valid_key(tmpkey);
-				xml_set_value("GnomeSword", "modules", "bible",
-				      work_buf[MODULE]);
-				settings.MainWindowModule 
-					= xml_get_value("modules", "bible");
-				if(strcmp(key,settings.currentverse))
-					change_verse = TRUE;
-				gui_change_module_and_key(
-					settings.MainWindowModule, 
-					key);
-				if(change_verse) {
-					settings.currentverse = (gchar*)key;
-					gui_change_verse(settings.currentverse);
-				}
+			case TEXT_TYPE:	
+				key = gui_update_nav_controls(tmpkey);
+				main_display_bible(work_buf[MODULE], key);
 				if(key) g_free((gchar*)key);
 			break;
 			case COMMENTARY_TYPE:				
-				key = get_valid_key(tmpkey);
+				key = backend->get_valid_key(tmpkey);
 				xml_set_value("GnomeSword", "modules", "comm",
 				      work_buf[MODULE]);
 				settings.CommWindowModule = work_buf[2];
@@ -491,7 +485,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 					change_verse = TRUE;
 				gui_change_module_and_key(
 					settings.CommWindowModule,
-					key);
+					(gchar*)key);
 				if(change_verse) {
 					settings.currentverse = (gchar*)key;
 					gui_change_verse(settings.currentverse);
@@ -499,15 +493,15 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				if(key) g_free((gchar*)key);	
 			break;
 			case DICTIONARY_TYPE:
-				settings.dictkey = tmpkey;
+				settings.dictkey = tmpkey;/*
 				xml_set_value("GnomeSword", "modules", "dict",
 				      work_buf[MODULE]);
 				settings.DictWindowModule = work_buf[2];
 				gui_change_module_and_key(
 					settings.DictWindowModule,
-					settings.dictkey);
-				/*gtk_notebook_set_current_page(
-					GTK_NOTEBOOK(widgets.workbook_lower),0);*/
+					settings.dictkey);*/
+				main_display_dictionary(work_buf[MODULE],
+							tmpkey);
 			break;
 			case BOOK_TYPE:
 				settings.book_key = tmpkey;
@@ -516,14 +510,12 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				settings.book_mod = work_buf[2];
 				gui_change_module_and_key(
 					settings.book_mod,
-					settings.book_key);
-				/*gtk_notebook_set_current_page(
-					GTK_NOTEBOOK(widgets.workbook_lower),1);*/ 
+					settings.book_key); 
 			break;
 		}
 	} else { /* module name not found or not given */
 		if(verse_count) { 
-			key = get_valid_key(tmpkey); 
+			key = backend->get_valid_key(tmpkey); 
 			settings.currentverse = (gchar*)key;
 			/* display in current Bible and Commentary */
 			gui_change_verse(settings.currentverse);
@@ -553,7 +545,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
  *   gint
  */
 
-gint gui_url_handler(const gchar * url, gboolean clicked)
+gint main_url_handler(const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
 	if(strstr(url,"sword://"))
