@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_dialog.c - 
+ * dialog.c - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -629,6 +629,13 @@ GS_DIALOG *gui_new_dialog(void)
 	info->cancel = FALSE;
 	info->yes = FALSE;
 	info->no = FALSE;
+	/* set entrys to null */
+	entry1 = NULL;
+	entry2 = NULL;
+	entry3 = NULL;
+	entry4 = NULL;
+	entry5 = NULL;
+	entry6 = NULL;
 	
 	return info;
 }

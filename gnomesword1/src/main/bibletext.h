@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+void set_module_unlocked(char * mod_name, char * key);
 char *get_bibletext_text(char *mod_name, char *key);
 char *get_bibletext_striptext(char *mod_name, char *key);
 void set_text_global_option(char * option, char * choice);
