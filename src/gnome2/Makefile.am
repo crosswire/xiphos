@@ -50,6 +50,7 @@ gnomesword2_SOURCES =  \
     parallel_view.c \
     parallel_dialog.c \
     percomm.c \
+    preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \
     search_sidebar.c \
