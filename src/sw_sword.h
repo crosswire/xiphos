@@ -35,6 +35,7 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
+	gchar *backend_getmodDescriptionSWORD(gchar *modName); 
 	void initSWORD(SETTINGS *s);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
 	void updateIntDlg(SETTINGS *s);
@@ -81,7 +82,7 @@ extern "C" {
 	gchar *gettextmodSWORD(void);
 	gchar *getcommodSWORD(void);
 	gchar *getcommodDescriptionSWORD(void);
-	GList *getBibleBooksSWORD(void);
+	GList *backend_getBibleBooksSWORD(void);
 	void gotoBookmarkSWORD(gchar * modName, gchar * key);
 	gchar *getmodkeySWORD(gint num);
 	const char *getSwordVerionSWORD(void);
