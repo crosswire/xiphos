@@ -20,22 +20,16 @@
  */
 
 #include <swmgr.h>
-//#include <markupfiltmgr.h>
+#include <markupfiltmgr.h>
 
 #include <gnome.h>
 #include <versekey.h>
 #include <regex.h>
-#include <gbfplain.h>
-#include <thmlplain.h>
 #include <string.h>
 #include <utf8html.h>
-
-#ifdef USE_SWORD_CVS	
 #include <url.h>
-#endif
 
 #include "backend/sword_main.hh"
-#include "backend/gs_markupfiltmgr.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -49,10 +43,10 @@ BackEnd *backend = NULL;
 
 
 //static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
-
+ 
 BackEnd::BackEnd() {
-	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mod = NULL;
 	
 	tree_key = NULL;
@@ -309,6 +303,18 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 	return NULL;	
 }
 
+char *BackEnd::render_this_text(const char * module_name, const char * text) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = display_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != display_mgr->Modules.end()) {
+		mod = (*it).second;		
+		return strdup((char *) mod->RenderText(text));
+	}
+	return NULL;	
+}
 
 char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 	SWModule *mod;
@@ -832,10 +838,10 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	key.setText(m_current_key);
 	vs = key.ParseVerseList(list, key);
 	g_free(m_current_key);
-	error = NULL;
 	if(!vs.Count())
 		return retlist;
 	while(!vs.Error()) {
+		error = NULL;
 		char *m_key = g_convert((char*)vs.getText(),
 				     -1,
 				     UTF_8,
@@ -878,9 +884,20 @@ void BackEnd::set_listkey_position(char pos) {
 }
 
 const char *BackEnd::get_next_listkey(void) {
-	const char *retval = NULL;	
-	while(!results.Error()) {
-		retval = results.getText();
+	const char *retval = NULL;                                                  
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error = NULL;	
+	
+	while(!results.Error()) {		
+		retval = g_convert((char*)results.getText(),
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		//retval = results.getText();
 		results++;
 		return retval;
 	}
@@ -932,14 +949,11 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 	return results.Count();
 }
 char *BackEnd::url_encode(const char * pram) {
-#ifdef USE_SWORD_CVS
 	gchar *retval;
 	retval = strdup(URL::encode(pram).c_str());
 	return retval;
-#else
-	return g_strdup("");
-#endif
 }
+
 void BackEnd::init_language_map(void) {
 	/* --list form Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");

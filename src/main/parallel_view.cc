@@ -41,7 +41,6 @@ extern "C" {
 #include "gui/widgets.h"
 
 #include "main/parallel_view.h"
-#include "main/bibletext.h"
 #include "main/global_ops.hh"
 #include "main/lists.h"
 #include "main/sword.h"

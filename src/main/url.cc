@@ -26,11 +26,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <string.h>
-
-#ifdef USE_SWORD_CVS	
+#include <string.h>	
 #include <url.h>
-#endif
+
 
 #include <swbuf.h>
 #include <gnome.h>
@@ -52,7 +50,6 @@
 #include "main/url.hh"
 #include "main/lists.h"
 #include "main/settings.h"
-#include "main/configs.h"
 #include "main/module_dialogs.h"
 #include "main/parallel_view.h"
 #include "main/sidebar.h"
@@ -73,7 +70,7 @@ extern gint history_items;
  *   
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   
  *
@@ -90,7 +87,7 @@ extern gint history_items;
  *   
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   
  *
@@ -157,7 +154,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   about_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint about_uri(const gchar * url, gboolean clicked)
  *
@@ -186,7 +183,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   parallel_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint parallel_uri(const gchar * url, gboolean clicked)
  *
@@ -223,58 +220,13 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	return 1;
 }
 
-/******************************************************************************
- * Name
- *   morph_uri
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   gint morph_uri(const gchar * url, gboolean clicked)
- *
- * Description
- *  
- *
- * Return value
- *   gint
- */
- 
- static gint morph_uri(const gchar * url, gboolean clicked)
-{	
-	gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
-	gchar **work_buf = g_strsplit (url,"/",4);
-	
-	if(!strcmp(work_buf[2],"Greek") || strstr(work_buf[2],"x-Robinson")) {
-		if(backend->is_module("Robinson")) 
-			modbuf = "Robinson";
-	} 		
-	if (clicked) {
-		if (settings.inDictpane)
-			main_display_dictionary(modbuf, work_buf[3]);
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(modbuf, work_buf[3]);		
-	} else {
-		mybuf =
-		    main_get_rendered_text(modbuf, work_buf[3]);
-		if (mybuf) {
-			show_in_appbar(widgets.appbar, work_buf[3], modbuf);
-			//gui_display_in_hint_window(mybuf);
-			g_free(mybuf);
-		}
-	}
-	g_strfreev(work_buf);
-	return 1;
-	
-}
- 
 
 /******************************************************************************
  * Name
  *   morph_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint morph_uri(const gchar * url, gboolean clicked)
  *
@@ -285,7 +237,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
  
- static gint new_morph_uri(const gchar * type, const gchar * value, 
+ static gint morph_uri(const gchar * type, const gchar * value, 
 				gboolean clicked)
 {	
 	gchar *modbuf = NULL;
@@ -305,83 +257,27 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		mybuf =
 		    main_get_rendered_text(modbuf, (gchar*)value);
 		if (mybuf) {
-			show_in_appbar(widgets.appbar, (gchar*)value, modbuf);
-			g_free(mybuf);
-		}
-	}
-	return 1;
-	
-}
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   
- *
- * Description
- *  
- *
- * Return value
- *   
- */ 
- 
-static gint strongs_uri(const gchar * url, gboolean clicked)
-{	
-	gchar *modbuf_viewer = NULL;
-	gchar *modbuf = NULL;
-	gchar *mybuf = NULL;
-	guint delay;	
-	guint i;	
-	gchar **work_buf = g_strsplit (url,"/",4);
-	//g_warning("url = %s",url);
-	if(!strcmp(work_buf[2],"Greek")) {
-		if(backend->is_module(settings.lex_greek_viewer)) 
-			modbuf_viewer = settings.lex_greek_viewer;
-		if(backend->is_module(settings.lex_greek)) 
-			modbuf = settings.lex_greek;
-	} else if(!strcmp(work_buf[2],"Hebrew")) {
-		if(backend->is_module(settings.lex_hebrew_viewer)) 
-			modbuf_viewer = settings.lex_hebrew_viewer;
-		if(backend->is_module(settings.lex_hebrew)) 
-			modbuf = settings.lex_hebrew;
-	}
-	
-	if (clicked) {
-		if (settings.inDictpane)
-			main_display_dictionary(modbuf, work_buf[3]);
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(modbuf_viewer, work_buf[3]);		
-	} else {
-		mybuf =
-		    main_get_rendered_text(modbuf, work_buf[3]);
-		if (mybuf) {
-			main_entry_display(sidebar.html_viewer_widget,  
-					modbuf, 
+			main_information_viewer(modbuf, 
 					mybuf, 
-					work_buf[3], 
-					TRUE);
-			//show_in_appbar(widgets.appbar, work_buf[3], modbuf);
-			//gui_display_in_hint_window(mybuf);
+					(gchar*)value, 
+					"showMorph",
+					(gchar*)type);
+			//show_in_appbar(widgets.appbar, (gchar*)value, modbuf);
 			g_free(mybuf);
 		}
 	}
-	g_strfreev(work_buf);
 	return 1;
 	
 }
 
- 
+
+
  /******************************************************************************
  * Name
  *   
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   
  *
@@ -392,7 +288,7 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
  *   
  */ 
  
-static gint new_strongs_uri(const gchar * type, const gchar * value, 
+static gint strongs_uri(const gchar * type, const gchar * value, 
 			gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
@@ -423,11 +319,12 @@ static gint new_strongs_uri(const gchar * type, const gchar * value,
 		mybuf =
 		    main_get_rendered_text(modbuf, (gchar*)value);
 		if (mybuf) {
-			main_entry_display(sidebar.html_viewer_widget,  
+			main_information_viewer(  
 					modbuf, 
 					mybuf, 
 					(gchar*)value, 
-					TRUE);
+					"showStrongs",
+					(gchar*)type);
 			g_free(mybuf);
 		}
 	}
@@ -435,77 +332,13 @@ static gint new_strongs_uri(const gchar * type, const gchar * value,
 	
 }
  
-/******************************************************************************
- * Name
- *   note_uri
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   gint note_uri(const gchar * url)
- *
- * Description
- *  
- *
- * Return value
- *   gint
- */
- 
-static gint note_uri(const gchar * url, gboolean clicked)
-{	
-	gchar **work_buf = NULL;
-	gchar *module = NULL;
-	gchar *tmpbuf = NULL;
-	
-	//g_warning(url);
-	if(!in_url)
-		return 1;
-	
-	work_buf = g_strsplit (url,"/",6);
-	
-	if (hint.in_popup) {
-		gtk_widget_destroy(hint.hint_window);
-		hint.in_popup = FALSE;
-	}
-	
-	if(backend->is_module(work_buf[2])) 
-		module = work_buf[2];
-	else
-		module = settings.MainWindowModule;
-	if(strstr(work_buf[4],"x") && clicked) {
-		backend->set_module_key(module,work_buf[3]);
-		tmpbuf = backend->get_entry_attribute("Footnote",
-							work_buf[5],
-							"refList");
-		if (tmpbuf) {
-			main_display_verse_list_in_sidebar(settings.
-					  currentverse,
-					  module,
-					  tmpbuf);
-			g_free(tmpbuf);
-		}
-	} else if(!clicked) {
-		backend->set_module_key(module,work_buf[3]);		
-		tmpbuf = backend->get_entry_attribute("Footnote",
-						work_buf[5],
-						"body");
-		if (tmpbuf) {
-			gui_display_in_hint_window(tmpbuf);
-			g_free(tmpbuf);	
-		}			
-	}
-	g_strfreev(work_buf);
-	return 1;
-	
-}
 
- 
 /******************************************************************************
  * Name
  *   note_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint note_uri(const gchar * url)
  *
@@ -516,21 +349,20 @@ static gint note_uri(const gchar * url, gboolean clicked)
  *   gint
  */
  
-static gint new_note_uri(const gchar * module, const gchar * passage, 
+static gint note_uri(const gchar * module, const gchar * passage, 
 		const gchar * type, const gchar * value, gboolean clicked)
 {	
 	gchar *tmpbuf = NULL;
-	
+	gchar *buf = NULL;
 	
 	if(!in_url)
-		return 1;
-	
-	
+		return 1;	
+/*	
 	if (hint.in_popup) {
 		gtk_widget_destroy(hint.hint_window);
 		hint.in_popup = FALSE;
 	}
-	
+*/	
 	if(!backend->is_module((gchar*)module)) 
 		module = settings.MainWindowModule;
 	
@@ -550,22 +382,31 @@ static gint new_note_uri(const gchar * module, const gchar * passage,
 		backend->set_module_key((gchar*)module, (gchar*)passage);		
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						(gchar*)value,
-						"body");
-		if (tmpbuf) {
-			gui_display_in_hint_window(tmpbuf);
-			g_free(tmpbuf);	
+						"body");		
+		buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
+		if(tmpbuf) g_free(tmpbuf);	
+		if (buf) {
+
+			main_information_viewer((gchar*)module, 
+					buf, 
+					(gchar*)value,
+					"showNote",			
+					(gchar*)type);
+			//gui_display_in_hint_window(tmpbuf);
+			if(buf) g_free(buf);	
 		}			
 	}
 	return 1;
 	
 }
- 
+
+
 /******************************************************************************
  * Name
  *   reference_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint reference_uri(const gchar * url)
  *
@@ -576,45 +417,7 @@ static gint new_note_uri(const gchar * module, const gchar * passage,
  *   gint
  */
  
-static gint reference_uri(const gchar * url, gboolean clicked)
-{	
-	static gchar **work_buf = NULL;
-	gchar *module = NULL;
-	
-	if(!clicked)
-		return 1;
-	work_buf = g_strsplit (url,"/",4);
-	
-	if(backend->is_module(work_buf[2])) 
-		module = work_buf[2];
-	else
-		module = settings.MainWindowModule;
-	g_warning(work_buf[3]);
-	main_display_verse_list_in_sidebar(settings.currentverse,
-						  module,
-						  work_buf[3]); 
-	g_strfreev(work_buf);
-	return 1;
-}
-
-
-/******************************************************************************
- * Name
- *   reference_uri
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   gint reference_uri(const gchar * url)
- *
- * Description
- *  
- *
- * Return value
- *   gint
- */
- 
-static gint new_reference_uri(const gchar * module, const gchar * list, gboolean clicked)
+static gint reference_uri(const gchar * module, const gchar * list, gboolean clicked)
 {	
 	if(!clicked)
 		return 1;
@@ -634,7 +437,7 @@ static gint new_reference_uri(const gchar * module, const gchar * list, gboolean
  *   
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint (const gchar * url)
  *
@@ -747,7 +550,7 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
  *   sword_uri
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint sword_uri(const gchar * url)
  *
@@ -869,66 +672,14 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	return 1;
 	
 }
-static gint new_url_handler(const gchar * url, gboolean clicked)
-{
-
-	gchar* action = NULL;
-	gchar* type = NULL;
-	gchar* value = NULL;
-	gchar* module = NULL;
-	gchar* passage = NULL;
-	gchar *buf = NULL;
-#ifdef USE_SWORD_CVS	
-	URL* m_url;
-	
-#ifdef DEBUG	
-	//g_warning("url = %s",url);
-#endif
-	m_url = new URL((const char*)url);	
-	action = g_strdup(m_url->getParameterValue("action"));
-	type = g_strdup((gchar*)m_url->getParameterValue("type"));
-	value = g_strdup((gchar*)m_url->getParameterValue("value"));
-	
-#ifdef DEBUG
-	g_warning("action = %s",action);
-	g_warning("type = %s",type);  
-	g_warning("value = %s",value);
-#endif	
 
 
-	if(!strcmp(action,"showStrongs")) 
-		new_strongs_uri(type,value,clicked);
-	
-	
-	if(!strcmp(action,"showMorph"))
-		new_morph_uri(type, value,clicked);
-	
-	if(!strcmp(action,"showNote")) {	
-		module = g_strdup(m_url->getParameterValue("module"));
-		passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
-		new_note_uri(module, passage, type, value, clicked);
-		if(module) g_free(module);
-		if(passage) g_free(passage);
-	}
-	
-	if(!strcmp(action,"showRef")) {	
-		module = g_strdup(m_url->getParameterValue("module"));
-		new_reference_uri(module,value,clicked);
-		if(module) g_free(module);
-	}
-	
-	if(action) g_free(action);
-	if(type) g_free(type);
-	if(value) g_free(value);
-#endif
-	return 1;
-}
 /******************************************************************************
  * Name
  *   gui_url_handler
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint gui_url_handler(const gchar * url)
  *
@@ -940,12 +691,59 @@ static gint new_url_handler(const gchar * url, gboolean clicked)
  */
 
 gint main_url_handler(const gchar * url, gboolean clicked)
-{		
-	//g_warning(url);
-#ifdef USE_SWORD_CVS
-	if(strstr(url,"passagestudy.jsp")) /* passagestudy.jsp?action=showStrongs&type= */
-		return new_url_handler(url,clicked);
-#endif
+{	
+	gchar* action = NULL;
+	gchar* type = NULL;
+	gchar* value = NULL;
+	gchar* module = NULL;
+	gchar* passage = NULL;
+	gchar *buf = NULL;
+	URL* m_url;
+	
+	if(strstr(url,"passagestudy.jsp")) {/* passagestudy.jsp?action=showStrongs&type= */
+		m_url = new URL((const char*)url);	
+		action = g_strdup(m_url->getParameterValue("action"));
+		type = g_strdup((gchar*)m_url->getParameterValue("type"));
+		value = g_strdup((gchar*)m_url->getParameterValue("value"));
+/*
+#ifdef DEBUG
+		g_warning("main_url_handler()");
+		g_warning("url = %s",url);
+		g_warning("action = %s",action);
+		g_warning("type = %s",type);  
+		g_warning("value = %s",value);
+#endif	
+*/	
+		if(!strcmp(action,"showStrongs")) 
+			strongs_uri(type,value,clicked);
+		
+		
+		if(!strcmp(action,"showMorph"))
+			morph_uri(type, value,clicked);
+		
+		if(!strcmp(action,"showNote")) {	
+			module = g_strdup(m_url->getParameterValue("module"));
+			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
+			note_uri(module, passage, type, value, clicked);
+			if(module) g_free(module);
+			if(passage) g_free(passage);
+		}
+		
+		if(!strcmp(action,"showRef")) {	
+			module = g_strdup(m_url->getParameterValue("module"));
+			if(!strcmp(type,"scripRef"))
+				reference_uri(module,value,clicked);
+			if(!strcmp(type,"swordURL")) {
+				
+			}
+			if(module) g_free(module);
+		}
+		
+		if(action) g_free(action);
+		if(type) g_free(type);
+		if(value) g_free(value);
+		return 1;
+	}
 	if(strstr(url,"sword://"))
 		return sword_uri(url,clicked);
 	if(strstr(url,"bookmark://"))
@@ -954,20 +752,10 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		return sword_uri(url,clicked);
 	if(strstr(url,"chapter://"))
 		return sword_uri(url,clicked);
-	if(strstr(url,"reference://"))
-		return reference_uri(url,clicked);
-	if(strstr(url,"noteID://"))
-		return note_uri(url,clicked);
-	if(strstr(url,"strongs://"))
-		return strongs_uri(url,clicked);
-	if(strstr(url,"morph://"))
-		return morph_uri(url,clicked);
 	if(strstr(url,"about://"))
 		return about_uri(url,clicked);
 	if(strstr(url,"parallel://"))
 		return parallel_uri(url,clicked);
-	/*if(clicked)
-		alert_url_not_found(url);*/
 	return 0;
 }
 
@@ -977,7 +765,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
  *   main_main_get_mod_type_from_url
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   gint main_main_get_mod_type_from_url(const gchar * url)
  *
@@ -1007,7 +795,7 @@ gint main_main_get_mod_type_from_url(const gchar * url)
  *   
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/url.hh"
  *
  *   
  *
@@ -1020,14 +808,12 @@ gint main_main_get_mod_type_from_url(const gchar * url)
  
 const gchar *main_url_encode(const gchar * pram)
 {
-#ifdef USE_SWORD_CVS	
 	SWBuf retval;
 	retval = URL::encode(pram);
 	g_warning(retval.c_str());
 	if(retval.length())
 		return g_strdup(retval.c_str());
 	else
-#endif	
 		return g_strdup("");
 }		
 

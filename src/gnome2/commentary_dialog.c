@@ -27,7 +27,6 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dialog.h"
 #include "gui/html.h"
@@ -39,8 +38,6 @@
 #include "gui/toolbar_edit.h"
 #include "gui/widgets.h"
 
-#include "main/commentary.h"
-#include "main/percomm.h"
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/settings.h"

@@ -35,13 +35,12 @@
 #include "gui/widgets.h"
 
 #include "main/parallel_view.h"
-#include "main/bibletext.h"
 #include "main/global_ops.hh"
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
-
+extern gboolean shift_key_presed;
 
 /******************************************************************************
  * static
@@ -339,6 +338,46 @@ void gui_create_parallel_popup(void)
 }
 
 
+static gboolean
+on_enter_notify_event        (GtkWidget       *widget,
+                                        GdkEventCrossing *event,
+                                        gpointer         user_data)
+{
+	gtk_widget_grab_focus (widgets.html_parallel);
+	//settings.whichwindow = MAIN_TEXT_WINDOW;
+	//gui_change_window_title(settings.MainWindowModule);
+  	return FALSE;
+}
+
+static gboolean on_key_press_event           (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	switch(event->hardware_keycode) {
+		case 50:
+		case 62:
+			shift_key_presed = TRUE;
+		break;
+	}
+  	return FALSE;
+}
+
+
+static gboolean on_key_release_event         (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	switch(event->hardware_keycode) {
+		case 50:
+		case 62:
+			shift_key_presed = FALSE;
+		break;
+	}
+  	return FALSE;
+}
+
+
+
 /******************************************************************************
  * Name
  *   gui_create_parallel_page
@@ -397,6 +436,17 @@ void gui_create_parallel_page(void)
 				    (widgets.notebook_parallel_text), 
 				    1),
 				   label);
+							
+
+	g_signal_connect ((gpointer) widgets.html_parallel, "enter_notify_event",
+		    G_CALLBACK (on_enter_notify_event),
+		    NULL);
+	g_signal_connect ((gpointer) widgets.html_parallel, "key_press_event",
+		    G_CALLBACK (on_key_press_event),
+		    NULL);
+	g_signal_connect ((gpointer) widgets.html_parallel, "key_release_event",
+		    G_CALLBACK (on_key_release_event),
+		    NULL);
 	
 	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", G_CALLBACK(gui_url),

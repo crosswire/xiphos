@@ -41,8 +41,6 @@
 #include "main/lists.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#include "main/commentary.h"
-#include "main/bibletext.h"
 #include "main/xml.h"
 
 #define SEARCHING N_("Searching the ")
