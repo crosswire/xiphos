@@ -134,6 +134,10 @@ on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
 gint setDiretory(void)
 {
 	gint retval = 0;
+	gchar 
+		swDir[256],
+		bmFile[300];
+	
 	/* get home dir */
 	if ((homedir = getenv("HOME")) == NULL) { 		
 		g_error("$HOME is not set!");	
@@ -143,6 +147,8 @@ gint setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
+	/* set bookmarks dir to swbmDir + .sword */
+	sprintf(swDir, "%s/%s",homedir,".sword/");
 	/* set bookmarks dir to swbmDir + .sword/bookmarks */
 	swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
 	sprintf(swbmDir, "%s/%s",homedir,".sword/bookmarks/");
@@ -168,18 +174,29 @@ gint setDiretory(void)
 		}
 	}
 	if (access(fnconfigure, F_OK) == -1) {
-		++retval;
+		retval = 1; 
 		//createconfig();
 	}
-	if (access(swbmDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
-		//sprintf(swbmDir, "%s/%s",homedir,".sword/");
-		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
-			//createbookmarks();
-			++retval;
+	if (access(swDir, F_OK) == -1) {	/* if .sword does not exist create it */
+		if ((mkdir(swDir, S_IRWXU)) == 0) {
+			// do nothing
 		} else {
 			printf("can't create bookmarks dir and files");
 		}
 	} 
+	if (access(swbmDir, F_OK) == -1) {	/* if swbmDir does not exist create it */
+		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
+			//have_bookmarks = 0;
+		} else { 
+			printf("can't create bookmarks dir and files");
+		}
+	} 
+	sprintf(bmFile, "%s/%s",swbmDir,"Personal.conf");
+	if (access(bmFile, F_OK) == -1) {	
+		if(retval == 1) retval = 3;
+			else retval = 2;		
+	} 
+	//g_warning("retval = %d",retval);
 	return retval; 
 }
 
@@ -516,19 +533,6 @@ void loadStudyPadFile(gchar * filename)
 	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
 			   current_filename);
 }
-
-/*****************************************************************************
- * save our program settings
- *****************************************************************************/
-void writesettings(SETTINGS settings)
-{
-	int fd;	/* file handle */
-        //g_warning("saved com page = %d",settings.notebook1page);
-	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* open file (settings.cfg) */
-	write(fd, (char *) &settings, sizeof(settings));	/* save structure to disk */
-	close(fd);		/* close file */
-}
-
 
 /********************************************************************************************************** 
  * save results list form search dialog *filename = pointer to filename from fileselection dialogure

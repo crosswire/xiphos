@@ -31,6 +31,7 @@
 #include "gs_gui.h"
 #include "sw_properties.h"
 #include "gs_setup.h"
+#include "gs_bookmarks.h"
 #include "e-splash.h"
 
 extern SETTINGS *settings;
@@ -72,7 +73,7 @@ main (int argc, char *argv[])
   		createFiles();
   	}
 	//icreatefiles = 1;/* please remove me - i am for testing */
-	if(icreatefiles == 1){		
+	if(icreatefiles == 1 || icreatefiles == 3 ){		
 		gs_firstrunSWORD();
 	}
   	/* set pointer to structure */
@@ -85,15 +86,20 @@ main (int argc, char *argv[])
 		gtk_object_ref (GTK_OBJECT (splash));
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
-	}  	
+	}  	 
 	mainwindow = create_mainwindow (splash);
   	add_gtkhtml_widgets(mainwindow);
+	
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),1, TRUE);
   	initSWORD(mainwindow);
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash);
+	if(icreatefiles == 2 || icreatefiles == 3 ){		
+		if(loadoldbookmarks() == 0)
+			g_warning("loadoldbookmarks failed!");
+	}
   	if(settings->showsplash)
 		gtk_widget_unref (splash);
 	gtk_widget_destroy (splash);
