@@ -279,7 +279,8 @@ void main_display_book(const char * mod_name, char * key)
 
 void main_display_commentary(const char * mod_name, const char * key)
 {
-	if(!settings.havecomm || !mod_name)
+	
+	if(!settings.havecomm || !mod_name || !settings.comm_showing)
 		return;
 	if(!settings.CommWindowModule)
 		settings.CommWindowModule = (char*)mod_name;
