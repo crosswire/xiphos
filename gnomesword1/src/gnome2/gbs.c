@@ -144,7 +144,7 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 
 
 
-/**  Main Commentary menu stuff
+/**  Main Book menu stuff
  **
  **
  **
@@ -171,7 +171,7 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 
 static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
-	main_save_module_options_comm(settings.book_mod, (gchar *) data,
+	main_save_module_options(settings.book_mod, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
 	main_display_book(settings.book_mod,settings.book_key);
 	//gui_set_book_mod_and_key(settings.book_mod, settings.book_key);

@@ -25,11 +25,7 @@
 
 #ifdef USE_PSPELL
 
-#ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 #include <pspell/pspell.h>
 #include <string.h>
 

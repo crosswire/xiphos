@@ -33,8 +33,6 @@
 
 #include <glib-2.0/glib.h>
 #include <gnome.h>
-#include <swmgr.h>
-#include <markupfiltmgr.h>
 #include <swversion.h>
 #include <swmodule.h>
 #include <localemgr.h>
@@ -56,11 +54,7 @@ static char *get_sword_locale(void)
 	char buf[32];
 	int i = 0;
 	
-#ifdef USE_SWORD_CVS
 	sys_local = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
-#else	
-	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();	
-#endif
 	
 	if(!strncmp(sys_local,"ru_RU",5)) {
 		/*if(strlen(sys_local) > 12 ) {
@@ -126,7 +120,6 @@ static char *get_sword_locale(void)
 	}
 	retval = strdup(sys_local);
 	
-#ifdef USE_SWORD_CVS
 	LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_local);
 	SWLocale *sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_local);
 	if(sw_locale)
@@ -135,10 +128,6 @@ static char *get_sword_locale(void)
 		OLD_CODESET = "iso8859-1";
 		g_warning("locale not found");
 	}
-#else	
-	LocaleMgr::systemLocaleMgr.setDefaultLocaleName(sys_local);
-	OLD_CODESET = "iso8859-1";	
-#endif
 	return retval;
 }
 
@@ -170,11 +159,8 @@ void backend_init(void)
 	g_print("%s\n\n", _("Initiating SWORD"));
 #endif
 	 
-#ifdef USE_SWORD_CVS
 	sys_locale = strdup((char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
-#else		
-	sys_locale = strdup((char*)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
-#endif
+
 	sword_locale = get_sword_locale();
 #ifdef DEBUG	
 	g_print("%s %s\n", _("System locale is"),sys_locale);

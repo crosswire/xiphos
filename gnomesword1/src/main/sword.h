@@ -72,6 +72,9 @@ void main_locked_module_display(GtkWidget * html_widget,
 				  gchar * mod_name, gchar * cipher_key);
 void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key);
+void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
+		             gchar * action ,gchar * type);
+void main_clear_viewer(void);
 void main_setup_displays(void);
 void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);

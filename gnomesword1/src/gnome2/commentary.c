@@ -31,7 +31,6 @@
 #include "gui/commentary.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
-//#include "gui/commentary_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
@@ -39,8 +38,6 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
-#include "main/commentary.h"
-#include "main/percomm.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
@@ -72,7 +69,7 @@ static void create_menu(GdkEventButton * event);
 static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
 	
-	main_save_module_options_comm(settings.MainWindowModule, (gchar *) data,
+	main_save_module_options(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
 	main_display_commentary(settings.CommWindowModule,settings.comm_key);
 }

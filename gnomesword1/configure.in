@@ -1,5 +1,5 @@
 
-AC_INIT(gnomesword, 2.1.1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword, 2.1.2, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -9,15 +9,17 @@ AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
 
-AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
+dnl AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
 DIRS="backend main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0 sword,,exit)
+PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
+dnl AC_ENABLE_STATIC(yes)
 
+AC_CHECK_SWORD(1.5.8, [NO])
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
@@ -46,10 +48,11 @@ dnl Languages which your application supports
 
 AM_GLIB_GNU_GETTEXT
 
-AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
-if test "x$sword_cvs" = xyes; then
-  AC_DEFINE(USE_SWORD_CVS, 1, [Define if you want to use cvs sword])
-fi
+
+dnl AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
+dnl if test "x$sword_cvs" = xyes; then
+dnl   AC_DEFINE(USE_SWORD_CVS, 1, [Define if you want to use cvs sword])
+dnl fi
 
 AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],debug=$enableval,debug=no)
 CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
@@ -211,8 +214,6 @@ AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}",[packa
 AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}",[package menu directory])
 AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}",[package source directory])
 
-dnl src/gnome/Makefile
-
 AC_OUTPUT([ m4/Makefile 
 Makefile
 po/Makefile.in
@@ -246,6 +247,12 @@ if test "x$sword_cvs" = xyes; then
   echo "Sword CVS:             enabled"
 fi
 
+if test "x$ac_static_sword" = xYES; then
+  echo "Static link to Sword:           enabled"
+else  
+  echo "Dynamic link to Sword:          enabled"
+fi
+echo "Sword libs              $LIB_SWORD"
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
 fi

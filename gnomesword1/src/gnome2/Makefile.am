@@ -70,6 +70,7 @@ gnomesword2_LDADD = \
     $(GNOME_LIBS)\
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
+    $(LIB_SWORD) \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/backend/libbackend.a
 

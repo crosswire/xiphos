@@ -881,6 +881,8 @@ static void add_to_found_list(gchar * result_text, gchar * module)
 			"&nbsp; <A HREF=\"version=%s passage=%s\"NAME=\"%s\" >%s, %s</A><br>",
 			module, result_text, module, module,
 			result_text);
+	if(result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
+		g_free(result_text);
 	if (str->len) {
 		gui_display_html(search.results_html, str->str,
 				 str->len);
@@ -1140,7 +1142,7 @@ void main_do_dialog_search(gpointer user_data)
 	check_search_global_options();
 
 	search_mods = g_list_first(search_mods);
-	//g_warning((gchar *) search_mods->data);
+	
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
 
