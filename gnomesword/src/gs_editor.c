@@ -58,7 +58,7 @@
 #include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
 #include "support.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "sw_gbs.h"
 
 GSHTMLEditorControlData *specd;

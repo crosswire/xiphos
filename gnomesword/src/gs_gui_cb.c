@@ -39,7 +39,7 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_popup_cb.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
 #include "support.h"

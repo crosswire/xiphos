@@ -233,8 +233,6 @@ AC_SUBST(GTKHTML_LIBS)
 dnl ******************************
 dnl Gnome App Lib 
 dnl ******************************
-
-AC_MSG_RESULT($vers found)
 GNOME_APP_LIBS=`gnome-config --libs gal`
 GNOME_APP_CFLAGS=`gnome-config --cflags gal`
 AC_SUBST(GNOME_APP_LIBS)

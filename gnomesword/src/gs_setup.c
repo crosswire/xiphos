@@ -33,7 +33,7 @@
 #include <gnome.h>
 
 #include "gs_setup.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "sw_properties.h"
 #include "support.h"
 
