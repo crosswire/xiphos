@@ -62,15 +62,15 @@ extern SETTINGS *settings;
 
 #define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
-	"english:", "greek:", "hebrew:",
-	"deutch:","unknown:"
+	"bible:", "commentary:", "dictionary:",
+	"greek:","hebrew:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
-	"gnomesword/book-en.png",
+	"gnomesword/book-un.png",
+	"gnomesword/book-un.png",
+	"gnomesword/book-un.png",
 	"gnomesword/book-gr.png",
-	"gnomesword/book-he.png",
-	"gnomesword/book-de.png",
-	"gnomesword/book-un.png"
+	"gnomesword/book-he.png"
 };
 
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
@@ -872,7 +872,7 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_box_pack_start(GTK_BOX(hbox25), epaned, TRUE, TRUE, 0);
 	e_paned_set_position(E_PANED(epaned), 120);
 
-	shortcut_model = e_shortcut_model_new();
+	shortcut_model = e_shortcut_model_new();	
 
 	shortcut_bar = e_shortcut_bar_new();
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
@@ -1850,10 +1850,6 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_cbeFreeformLookup_key_press_event), NULL);
-/*	gtk_signal_connect(GTK_OBJECT(cbeFreeformLookup), "drag_drop",
-			   GTK_SIGNAL_FUNC(on_cbeFreeformLookup_drag_drop),
-			   NULL);
-*/			   
 	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLookup_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnBack), "clicked",
@@ -1862,13 +1858,6 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnExit), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnExit_clicked), NULL);
-/*	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_moduleText_button_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(moduleText), "drag_begin",
-			   GTK_SIGNAL_FUNC(on_moduleText_drag_begin),
-			   NULL);
-*/			   
 	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_enter_notify_event), NULL);
@@ -1893,19 +1882,6 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_button_release_event), NULL);
-/*	gtk_signal_connect(GTK_OBJECT(textComments), "drag_begin",
-			   GTK_SIGNAL_FUNC(on_textComments_drag_begin),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(textComments), "drag_data_get",
-			   GTK_SIGNAL_FUNC(on_textComments_drag_data_get),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(textComments), "drag_data_received",
-			   GTK_SIGNAL_FUNC
-			   (on_textComments_drag_data_received), NULL);
-	gtk_signal_connect(GTK_OBJECT(textComments), "drag_drop",
-			   GTK_SIGNAL_FUNC(on_textComments_drag_drop),
-			   NULL);
-*/
 	gtk_signal_connect(GTK_OBJECT(textComments), "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_key_press_event), NULL);
@@ -1922,7 +1898,7 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
 			   (gchar *) "textComments");
-#endif				/* USE_SPELL */
+#endif	/* USE_SPELL */
 
 	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
 			   GTK_SIGNAL_FUNC

@@ -41,6 +41,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <gal/widgets/e-unicode.h>
+//#include <g++-3/string>
 
 #include "sw_gbfhtml.h"
 #include "sw_thmlhtml.h"
@@ -67,6 +68,8 @@
 #include "sw_bookmarks.h"
 #include "sw_verselist_sb.h"
 
+
+typedef map<string, string> modDescMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
@@ -110,6 +113,8 @@ SWFilter
 	*rwptohtml,
 	*lattoutf8;
 
+modDescMap descriptionMap;
+
 /***********************************************************************************************
  * GnomeSword globals
 ***********************************************************************************************/ 	
@@ -118,6 +123,7 @@ GList
 	*commentarymods,
 	*dictionarymods,
 	*percommods,
+	*sbfavoritesmods,
 	*sbbiblemods,
 	*sbdictmods,
 	*sbcommods;
@@ -173,6 +179,7 @@ extern GString
 extern HISTORY 
 	historylist[];  /* sturcture for storing history items */
 extern GList 
+	*langlistfavorites,
 	*langlisttext,
 	*langlistcomm,
 	*langlistdict;
@@ -224,16 +231,18 @@ initSWORD(GtkWidget *mainform)
 	UTF8Display	= 0;	
 	
 	/* set glist to null */
-	biblemods 	= NULL;
-	commentarymods = NULL;
-	dictionarymods = NULL;
-	percommods 	= NULL;
-	sbbiblemods 	= NULL;
-	sbcommods 	= NULL;
-	sbdictmods 	= NULL;
-	langlisttext 	= NULL;
-	langlistcomm 	= NULL;
-	langlistdict	= NULL;
+	biblemods 		= NULL;
+	commentarymods 	= NULL;
+	dictionarymods 	= NULL;
+	percommods 		= NULL;
+	sbfavoritesmods 	= NULL;
+	sbbiblemods 		= NULL;
+	sbcommods 		= NULL;
+	sbdictmods 		= NULL;
+	langlistfavorites	= NULL;
+	langlisttext 		= NULL;
+	langlistcomm 		= NULL;
+	langlistdict		= NULL;
 	
 	MainFrm = lookup_widget(mainform,"settings->app"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
@@ -253,9 +262,10 @@ initSWORD(GtkWidget *mainform)
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}
-	g_print("Loading SWORD Moudules\n");
+	g_print("Loading SWORD Moudules\n"); 
 	
-	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
+	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){		
+		descriptionMap[string((char *)(*it).second->Description())] = string((char *)(*it).second->Name());
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
@@ -324,6 +334,11 @@ initSWORD(GtkWidget *mainform)
 	
 }
 
+void
+modNameFromDesc(gchar* modName, gchar* modDesc)
+{
+    strcpy(modName, descriptionMap[modDesc].c_str());
+}
 
 /********************************************************************************************** 
  * changeVerse - this function changes all currently used sword Bible and commentary modules 
@@ -729,6 +744,7 @@ void
 changecurModSWORD(gchar *modName, gboolean showchange) 
 {                                 
 	ModMap::iterator it;            //-- or clicked the mainwindow popup menu and the callback sent us here
+	GtkWidget *frame;
 	gchar title[200];
 	
         if(havebible) {
@@ -743,7 +759,13 @@ changecurModSWORD(gchar *modName, gboolean showchange)
 	        strcpy(settings->MainWindowModule, (gchar*)curMod->Name()); //-- remember where we are so we can open here next time we startup
 		sprintf(title,"GnomeSword - %s", (gchar*)curMod->Description()); //curMod->Description());		
 		gtk_window_set_title(GTK_WINDOW(settings->app), title);
-        }
+        }	
+	frame = lookup_widget(settings->app,"frame9");
+	if(!settings->text_tabs)	
+		gtk_frame_set_label( GTK_FRAME(frame),curMod->Name()); //-- set frame label
+	else
+		gtk_frame_set_label( GTK_FRAME(frame),NULL); //-- set frame label
+	
 }
 
 /******************************************************************************
@@ -842,6 +864,7 @@ void
 changcurcomModSWORD(gchar *modName, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
 	ModMap::iterator it;
+	GtkWidget *frame;
 	
 	if(havebible) {	
 	        it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
@@ -854,6 +877,12 @@ changcurcomModSWORD(gchar *modName, gboolean showchange)  //-- someone changed c
 		        }
 	        }
 	}	
+	frame = lookup_widget(settings->app,"framecom");
+	if(settings->comm_tabs){		
+		gtk_frame_set_label( GTK_FRAME(frame),NULL); //-- set frame label
+	}else{
+		gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -920,7 +949,8 @@ void
 changcurdictModSWORD(gchar *modName, gchar *keyText) //-- someone changed dict notebook page - sent here by notebook callback
 {	                    //-- modName form page label - keyText from dict lookup entry
 	ModMap::iterator it;
-            						
+        GtkWidget *frame;
+	
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != mainMgr->Modules.end()){	
 		curdictMod = (*it).second;  //-- set curdictMod to new choice
@@ -928,6 +958,12 @@ changcurdictModSWORD(gchar *modName, gchar *keyText) //-- someone changed dict n
 		curdictMod->Display();	 //-- display new dict
 		FillDictKeysSWORD(); //-- fill the list widget with keys
 		strcpy(settings->DictWindowModule, curdictMod->Name()); 
+	}	
+	frame = lookup_widget(settings->app,"frame10");
+	if(settings->dict_tabs){		
+		gtk_frame_set_label( GTK_FRAME(frame),NULL); //-- set frame label
+	}else{
+		gtk_frame_set_label( GTK_FRAME(frame),curdictMod->Name()); //-- set frame label
 	}
 }
 
@@ -1642,7 +1678,7 @@ updateshortcutbarSWORD(void)
 {
 	ModMap::iterator it; //-- iteratior
 	SWMgr *mgr;
-	
+	GList *favoMods = NULL;
 	GList *textMods = NULL;
 	GList *commMods = NULL;
 	GList *dictMods = NULL;
@@ -1661,6 +1697,7 @@ updateshortcutbarSWORD(void)
 	}
 	/*** send the lists to the shortcut bar ***/
   	update_shortcut_bar(settings,
+				favoMods,
 				textMods, 
 				commMods, 
 				dictMods);

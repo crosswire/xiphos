@@ -29,8 +29,11 @@ extern "C" {
 #endif
  
 #include <gnome.h>
-
+	
+	
+	
 void initSWORD(GtkWidget *mainform);
+void modNameFromDesc(gchar* modName, gchar* modDesc);
 void updateinterlinearpage(void);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
