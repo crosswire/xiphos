@@ -276,7 +276,7 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
   	btnLoadKeys = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar27),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                _("button6"),
+                                _("Load Keys"),
                                 _("Load all keys for this module"), NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   	gtk_widget_ref (btnLoadKeys);
