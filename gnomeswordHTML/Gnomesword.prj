@@ -62,16 +62,13 @@ module.source.files=\
 	callback.h\
 	char_table.c\
 	char_table.h\
-	display.cpp\
 	gs_file.c\
 	gs_gnomesword.c\
 	gs_history.c\
 	gs_html.c\
 	gs_html.h\
-	gs_listeditor.c\
 	gs_menu.c\
 	gs_studypad.c\
-	gs_sword.cpp\
 	interface.c\
 	printstuff.c\
 	spell.c\
@@ -85,41 +82,20 @@ module.source.files=\
 	gs_search.cpp\
 	gs_search_cb.h\
 	gs_search_cb.cpp\
-	gs_abouts.c\
-	gs_abouts.h\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
-	display.h\
-	gs_display.cpp\
-	gs_display.h\
-	gs_sword.h\
 	gs_studypad.h\
 	gs_gnomesword.h\
-	gs_listeditor.h\
 	gs_menu.h\
 	gs_search.h\
 	gs_history.h\
 	printstuff.h\
 	interface.h\
-	sw_utility.cpp\
-	sw_utility.h\
 	gs_toolbarEditor.c\
 	gs_toolbarEditor.h\
-	gs_gbfhtml.cpp\
-	gs_gbfhtml.h\
-	gs_wgsil.cpp\
-	gs_wgsil.h\
-	gs_viewcomm_dlg.c\
-	gs_viewcomm_dlg.h\
-	gs_viewdict_dlg.c\
-	gs_viewdict_dlg.h\
-	gs_viewtext_dlg.c\
-	gs_viewtext_dlg.h\
 	gs_ui.c\
-	gs_ui.h\
-	gs_viewtext_sw.cpp\
-	gs_viewtext_sw.h
+	gs_ui.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

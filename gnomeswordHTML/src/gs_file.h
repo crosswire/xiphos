@@ -25,7 +25,7 @@
 extern "C" {
 #endif
 
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 	
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data);

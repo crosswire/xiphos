@@ -73,7 +73,7 @@
 
 #include "callback.h"
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
 #include "support.h"
@@ -180,6 +180,12 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
 	showinfoSWORD(text2, GTK_LABEL(label));
 	gtk_widget_show(dlg);
+}
+
+//----------------------------------------------------------------------------------------------
+void on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	morphsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 
@@ -995,11 +1001,3 @@ void on_listeditor_destroy(GtkObject * object, gpointer user_data)
 	firstLE = TRUE;
 	destroyListEditorSWORD();
 }
-
-void
-on_btnInfoOK_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-

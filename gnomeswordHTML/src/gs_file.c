@@ -34,7 +34,7 @@
 #include "support.h"
 #include "gs_file.h"
 #include "gs_menu.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_listeditor.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */

@@ -31,7 +31,7 @@
 #include "gs_menu.h"
 #include "interface.h"
 #include "callback.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "support.h"

@@ -64,7 +64,7 @@
 #include "gs_abouts.h"
 #include "gs_editor.h"
 #include "sw_utility.h"
-#include "gs_viewtext_dlg.h"
+#include "gsdialogs/gs_viewtext_dlg.h"
 
 
 /***********************************************************************************************
@@ -560,19 +560,28 @@ strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have 
 {
 	if(choice){ //-- if choice is TRUE - we want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 	
-		mainMgr->setGlobalOption("Morphological Tags","On");  //-- turn strongs on		
-		mainMgr1->setGlobalOption("Strong's Numbers","On");
-		mainMgr1->setGlobalOption("Morphological Tags","On");  //-- turn strongs on	
+		mainMgr1->setGlobalOption("Strong's Numbers","On");	
 	}else{   //-- we don't want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
-		mainMgr->setGlobalOption("Morphological Tags","Off");  //-- turn strongs on	
+		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off
 		mainMgr1->setGlobalOption("Strong's Numbers","Off");
-		mainMgr1->setGlobalOption("Morphological Tags","Off");  //-- turn strongs on
 	}
 	settings->strongs = choice;   //-- store choice in settings
 	if(havebible) curMod->Display(); //-- we need to show change
 }
 
+//-------------------------------------------------------------------------------------------
+void
+morphsSWORD(gboolean choice) //-- toogle morphological tags for modules that have them
+{
+	if(choice){ //-- if choice is TRUE - we want strongs numbers		
+		mainMgr->setGlobalOption("Morphological Tags","On");  
+		mainMgr1->setGlobalOption("Morphological Tags","On");  
+	}else{   //-- we don't want strongs numbers
+		mainMgr->setGlobalOption("Morphological Tags","Off");  
+		mainMgr1->setGlobalOption("Morphological Tags","Off");  
+	}
+	if(havebible) curMod->Display(); //-- we need to show change
+}
 /******************************************************************************
  * toogle gbf footnotes for modules that have them
  ******************************************************************************/

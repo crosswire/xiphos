@@ -2,7 +2,7 @@
 
 SUBDIRS = 	macros \
             html \
-	    src
+            src
 
 EXTRA_DIST = gnomesword.glade Gnomesword.prj gnomesword.desktop
 
