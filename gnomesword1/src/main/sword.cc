@@ -72,6 +72,7 @@ extern "C" {
 //#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
+char *OLD_CODESET;
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
