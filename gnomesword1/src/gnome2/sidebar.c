@@ -45,13 +45,13 @@
 #include "gui/html.h"
 
 
-#include "main/url.h"
+#include "main/url.hh"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
 #include "main/sidebar.h"
-#include "main/url.h"
+#include "main/url.hh"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 

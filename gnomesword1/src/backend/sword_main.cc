@@ -30,6 +30,10 @@
 #include <string.h>
 #include <utf8html.h>
 
+#ifdef USE_SWORD_CVS	
+#include <url.h>
+#endif
+
 #include "backend/sword_main.hh"
 #include "backend/gs_markupfiltmgr.h"
 
@@ -44,6 +48,7 @@ using namespace std;
 BackEnd *backend = NULL;
 
 
+//static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 
 BackEnd::BackEnd() {
 	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
@@ -192,7 +197,7 @@ GList *BackEnd::fill_Bible_books(int testament) {
 	char *book = NULL;
 	unsigned int bytes_read;
 	unsigned int bytes_written;
-	GError *error;
+	GError *error = NULL;
 	int i = 0, j = 0, x = 2;
 	
 	switch(testament) {
@@ -206,7 +211,7 @@ GList *BackEnd::fill_Bible_books(int testament) {
 	
 	while(i < x) {
 		while(j < key.BMAX[i]) { 
-			book = g_convert((const char *)key.books[i][j++].name,
+			book = g_convert((const char *)key.books[i][j].name,
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -218,7 +223,10 @@ GList *BackEnd::fill_Bible_books(int testament) {
 				g_error_free (error);
 				continue;
 			}
+			//printf("%s\n",(const char *)key.books[i][j].name);
+			//printf("%s\n",book);
 			retlist = g_list_append(retlist, (char *)book);
+			++j;
 		}
 		j = 0;
 		i++;
@@ -307,37 +315,121 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 
 char *BackEnd::get_valid_key(const char *key) {
 	VerseKey vkey;
+	char *mykey;                                                 
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	
 	vkey.AutoNormalize(1);
-	vkey = key;
-	return strdup((char *) vkey.getText());
+	vkey = mykey;       
+	g_free(mykey);
+	mykey = g_convert((char*)vkey.getText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+			     
+	//g_warning("valkey = %s",mykey);
+	//g_warning("vkey.getText() = %s",(char*)vkey.getText());
+	return strdup(mykey);
 }
 
 char *BackEnd::key_get_book(const char *key) {
 	VerseKey vkey;
+	char *mykey;                                                 
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	vkey.AutoNormalize(1);
-	vkey = key;
-	return (char*) vkey.books[vkey.Testament() - 1][vkey.Book() -1].name;
+	vkey = mykey;
+	      
+	g_free(mykey);
+	mykey = g_convert((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name,
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	return mykey;
 }
 
 
 int BackEnd::key_get_chapter(const char *key) {
 	VerseKey vkey;
+	char *mykey;                                                 
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	vkey.AutoNormalize(1);
-	vkey = key;
+	vkey = mykey;
+	g_free(mykey);
 	return vkey.Chapter();
 }
 
 int BackEnd::key_get_verse(const char *key) {
 	VerseKey vkey;
+	char *mykey;                                                 
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(   key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	vkey.AutoNormalize(1);
-	vkey = key;
+	vkey = mykey;
+	g_free(mykey);
 	return vkey.Verse();
 }
 
 const unsigned int BackEnd::key_chapter_count(const char *key) {
 	VerseKey vkey;
+	char *mykey;                                                 
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(   key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	vkey.AutoNormalize(1);
-	vkey = key;
+	vkey = mykey;
+	g_free(mykey);
 	
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
@@ -346,9 +438,22 @@ const unsigned int BackEnd::key_chapter_count(const char *key) {
 
 
 const unsigned int BackEnd::key_verse_count(const char *key) {
-	VerseKey vkey;
+	VerseKey vkey;  
+	char *mykey;                                                   
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+	
+	mykey = g_convert(   key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	vkey.AutoNormalize(1);
-	vkey = key;
+	vkey = mykey;
+	g_free(mykey);
 	
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
@@ -357,9 +462,21 @@ const unsigned int BackEnd::key_verse_count(const char *key) {
 }
 
 
-char *BackEnd::get_module_key() {
+char *BackEnd::get_module_key() { 
+	char *mykey;                                                   
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
 	(const char *) *display_mod;
-	return strdup(display_mod->KeyText());
+	
+	mykey = g_convert(   (char*)display_mod->KeyText(),
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	return mykey;
 }
 
 void BackEnd::save_entry(const char * entry) {
@@ -520,8 +637,23 @@ int BackEnd::set_module(const char *module_name) {
 
 int BackEnd::set_module_key(const char *module_name, const char *key) {
 	display_mod = display_mgr->Modules[module_name];
+	
 	if (display_mod) {
-		display_mod->setKey(key);
+		char *mykey;                                                 
+        	gsize bytes_read;
+       	 	gsize bytes_written;
+        	GError **error;
+		//g_message(f_message,583,"key",key);
+		mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		display_mod->setKey(mykey);
+		//g_message(f_message,592,"mykey",mykey);
+		g_free(mykey);
 		return 1;
 	}
 	else 
@@ -745,7 +877,15 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 	search_scope_list = results;
 	return results.Count();
 }
-
+char *BackEnd::url_encode(const char * pram) {
+#ifdef USE_SWORD_CVS
+	gchar *retval;
+	retval = strdup(URL::encode(pram).c_str());
+	return retval;
+#else
+	return g_strdup("");
+#endif
+}
 void BackEnd::init_language_map(void) {
 	/* --list form Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");

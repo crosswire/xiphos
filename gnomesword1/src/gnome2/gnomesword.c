@@ -79,8 +79,12 @@
 void frontend_init(void)
 {
 	guint number_of_pages = 0;
+//#ifdef DEBUG	
 	g_print("%s\n", _("Initiating GnomeSword"));
+//#endif
 
+	settings.shadow_type = 1;
+	
 	hint.in_popup = FALSE;
 	hint.use_hints = FALSE;
 	
@@ -142,7 +146,9 @@ void frontend_display(void)
 	GString *str;
 	gchar *url;
 
+//#ifdef DEBUG	
 	g_print("%s\n", _("Displaying GnomeSword"));
+//#endif
 	gui_show_main_window();
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
@@ -184,10 +190,10 @@ void frontend_display(void)
 				       settings.showdicts);
 
 	/* showing the devotional must come after the the app is shown or
-	 *  it will mess up the shortcut bar display
+	 *  it will mess up the sidebar display
 	 */
 	/*
-	 * FIXME: maybe we need to move the devotional ?
+	 * FIXME: maybe we need to move the devotional?
 	 */
 	if (settings.showdevotional) {
 		gui_display_devotional_in_sidebar();
@@ -217,7 +223,9 @@ void frontend_display(void)
 	}
 	gtk_widget_grab_focus (sidebar.module_list);
 	
+//#ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
+//#endif
 }
 
 
@@ -278,7 +286,8 @@ void shutdown_frontend(void)
 	
 	if(settings.browsing)
 		gui_notebook_main_shutdown();
-
+//#ifdef DEBUG	
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
+//#endif
 
 }

@@ -7,6 +7,9 @@
 #undef HAVE_STPCPY
 #undef HAVE_LIBSM
 
+/* Define if you want to see debug messages */
+#undef DEBUG
+
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 

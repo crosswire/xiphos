@@ -136,7 +136,6 @@ module.include.files=\
 	src/gui/tabbed_browser.h\
 	src/main/display.hh\
 	src/main/global_ops.hh\
-	src/main/url.h\
 	src/backend/sword_main.hh\
 	src/main/module_dialogs.h\
 	src/gui/note_editor.h\
@@ -147,7 +146,8 @@ module.include.files=\
 	src/main/search_dialog.h\
 	src/main/search_sidebar.h\
 	src/gui/splash.h\
-	src/main/parallel_view.h
+	src/main/parallel_view.h\
+	src/main/url.hh
 
 module.source.name=.
 module.source.type=
