@@ -45,10 +45,9 @@
 
 #include "sw_sword.h"
 #include "sw_display.h"
-#include "gs_editor.h"
 #include "sw_gbs.h"
 #include "gs_html.h"
-#include "gs_editor_search.h"
+#include "gs_find_dlg.h"
 
 
 /***  externs  ***/
@@ -71,6 +70,16 @@ SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 list <SWDisplay *> displays;	// so we can delete each display we create
 GList *gbs_data;
+
+
+struct _gbsdata {
+	GtkWidget *html;
+	GtkWidget *ctree;
+	gchar *bookName;
+	gchar *bookDescription;
+	gchar *searchstring;
+};	
+
 /***   ***/
 
 static TreeKeyIdx* getTreeKey(SWModule *mod)
@@ -170,7 +179,7 @@ void on_ctreeGBS_select_row(GtkCList * clist,
 			TreeKeyIdx treenode = *treeKey;
 			treenode.setOffset(strtoul(offset,NULL,0));
 			curbookMod = (*it).second; //-- for search
-			//g_warning("Lang = %s" ,(const char *)curbookMod->getConfigEntry("Lang"));
+			
 			/** if not root node then display **/
 			if(treenode.getOffset() > 0) {	
 				(*it).second->SetKey(treenode);
@@ -217,6 +226,9 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook_lower),
 		gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
 		g->bookName); 
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings->workbook_lower),
+                gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
+		g->bookName);
 	curbookMod = swmgrBook->Modules[g->bookName];
 }
 
@@ -227,6 +239,13 @@ void on_copy_activate(GtkMenuItem *menuitem,
 			       GBS_DATA *gbs)
 {
 	copyGS_HTML(gbs->html);
+}
+
+static
+void on_find_activate(GtkMenuItem *menuitem,
+			       GBS_DATA *gbs)
+{
+	searchGS_FIND_DLG(gbs->html, FALSE, NULL);
 }
 
 static
@@ -255,6 +274,20 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	modNameFromDesc(modName, modDescription);
 	g_warning("modName = %s",modName);
 	lookupGS_HTML(g->html, modName, false);
+}
+static
+void on_same_lookup_word_activate(GtkMenuItem * menuitem,
+				GBS_DATA *g)
+{	
+	
+	lookupGS_HTML(g->html, settings->DictWindowModule, true);
+}
+
+static
+void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
+				GBS_DATA *g)
+{
+	lookupGS_HTML(g->html, settings->DictWindowModule, false);
 }
 
 static
@@ -289,6 +322,7 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	GtkWidget *view_book_menu;
 	GtkAccelGroup *view_book_menu_accels;
 	GtkWidget *item6;
+	GtkWidget *find;
 	GList *tmp;
 	gint i;
 	
@@ -304,6 +338,13 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy);
 	gtk_container_add (GTK_CONTAINER (pmGBS), copy);
+
+	find = gtk_menu_item_new_with_label (_("Find"));
+	gtk_widget_ref (find);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "find", find,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (find);
+	gtk_container_add (GTK_CONTAINER (pmGBS), find);
 	
 	separator = gtk_menu_item_new ();
 	gtk_widget_ref (separator);
@@ -378,7 +419,7 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_book), view_book_menu);
 	view_book_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_book_menu));
-
+	
 	tmp = sbdictmods;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -423,16 +464,18 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	}
 	g_list_free(tmp);	
 	/*** these two are for using the current dictionary for lookup ***/
-	/*gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_word_activate),
-				   GINT_TO_POINTER(1001));
+	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
+			GTK_SIGNAL_FUNC(on_same_lookup_word_activate),
+			gbs);
 	gtk_signal_connect(GTK_OBJECT(usecurrent2), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_selection_activate),
-				   GINT_TO_POINTER(1001));*/
+			GTK_SIGNAL_FUNC(on_same_lookup_selection_activate),
+			gbs);
+	
 	gtk_signal_connect (GTK_OBJECT (copy), "activate",
                       GTK_SIGNAL_FUNC (on_copy_activate),
+                      gbs);
+	gtk_signal_connect (GTK_OBJECT (find), "activate",
+                      GTK_SIGNAL_FUNC (on_find_activate),
                       gbs);
   return pmGBS;
 }
@@ -562,7 +605,8 @@ void setupSW_GBS(SETTINGS *s)
 		if (!strcmp((*it).second->Type(), "Generic Book")) { 
 			GBS_DATA *gbs = new GBS_DATA;
 			gbs->bookName = (*it).second->Name();			
-			gbs->bookDescription = (*it).second->Description();
+			gbs->bookDescription = (*it).second->Description();		
+			gbs->searchstring = NULL;
 			createGBS_Pane((*it).second, s, count, gbs) ;
 			gbs_data = g_list_append(gbs_data, (GBS_DATA *) gbs);
 			curbookMod = (*it).second;
@@ -571,7 +615,6 @@ void setupSW_GBS(SETTINGS *s)
 	gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebookGBS_switch_page),
 			   gbs_data);
-	//gtk_notebook_set_page(GTK_NOTEBOOK(s->notebookGBS), 1);
 }
 
 void shutdownSW_GBS(void)
@@ -588,11 +631,6 @@ void shutdownSW_GBS(void)
 		gbs_data = g_list_next(gbs_data);
 	}
 	g_list_free(gbs_data);
-}
-
-void searchgbsSW_GBS(gchar *searchText)
-{
-	
 }
 
 static void addNodeChildren(SETTINGS *s, 
