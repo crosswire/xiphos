@@ -281,7 +281,12 @@ addnotebookpages(GtkWidget *notebook,
 			retVal = pg;
 		gtk_widget_show (label);
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook),
-			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label);
+			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 
+								pg), label);
+		gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook),
+                        gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook),
+							pg), (gchar *) tmp->data);
+		++pg;
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);

@@ -157,6 +157,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	GtkWidget *dialog_action_area10;
 	gchar *homedir, version[40];
 	const char *ver;
+	gchar gs_version[80];
+	
+	sprintf(gs_version,"%s-%s", _("Welcome To GnomeSword"),VERSION);
 	
 	dlgSetup = gnome_dialog_new(_("GnomeSword - Setup"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSetup), "dlgSetup", dlgSetup);
@@ -199,7 +202,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					       &druidpagestart1_title_color);
 	gnome_druid_page_start_set_title(GNOME_DRUID_PAGE_START
 					 (druidpagestart1),
-					 _("Welcome To GnomeSword-0.5.2a"));
+					 gs_version);
 	gnome_druid_page_start_set_text(GNOME_DRUID_PAGE_START
 					(druidpagestart1),
 					_

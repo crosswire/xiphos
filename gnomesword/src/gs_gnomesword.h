@@ -33,7 +33,6 @@
 extern "C" {
 #endif
 
-
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
 #define COMMENTARY_WINDOW 2
@@ -115,7 +114,8 @@ struct _settings {
 	        studypadfilename[255],   /* name of file in studypad when we closed */
 		studypaddir[255],	    /* directory for studypad files */
 		groupName[50], /* ??? */
-		searchText[256], /* ??? */	
+		searchText[256], /* ??? */
+		findText[256],
 		
 	/* fonts, font colors and font sizes */
 	        bible_text_color[15], /* color for text */
@@ -148,6 +148,7 @@ struct _settings {
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
 						/* 0=text, 1= comm, 2=dict */
+		gbsLastPage,    /* last notebook page before change */
 		iquickmarks;	/* number of items in bookmark menu */
 						
 	gboolean   
@@ -187,16 +188,21 @@ struct _settings {
 		docked, /* true when shortcut bar is docked */
 		dockedInt, /* true when interlinear page is docked */
 		
+		/**  find dialogs info  **/
+		finddialog, /* if finddialog open (showing) */
+		
 		/** editors **/
 		editnote, /* true when percom html widget is in edit mode */
 		editgbs, /* true when percom html widget is in edit mode */
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
-		modifiedSP; /* studypad file have been modified */
+		modifiedSP; /* studypad file modified */
 		
 	GList 
 		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
+
+
 
 /*** function prototypes ***/
 
