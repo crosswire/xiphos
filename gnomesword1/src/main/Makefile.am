@@ -13,6 +13,8 @@ INCLUDES =  \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
+    gs_bibletext.c \
+    gs_bibletext.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_commentary.c \
@@ -67,8 +69,6 @@ COMMON_SOURCE =  \
     gs_setup.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
-    gs_unlockkey_dlg.c \
-    gs_unlockkey_dlg.h \
     gs_viewcomm_dlg.c \
     gs_viewcomm_dlg.h \
     gs_viewdict_dlg.c \

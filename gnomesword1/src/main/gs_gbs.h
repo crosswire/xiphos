@@ -35,47 +35,49 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-typedef struct _GSFindDialog  GSFindDialog;
-struct _GSFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget   *htmlwidget;
-	GtkWidget   *entry;
-	GtkWidget   *backward;
-	GtkWidget   *case_sensitive;
-	gboolean     regular;
-};
+	typedef struct _GSFindDialog GSFindDialog;
+	struct _GSFindDialog {
+		GnomeDialog *dialog;
+		GtkWidget *htmlwidget;
+		GtkWidget *entry;
+		GtkWidget *backward;
+		GtkWidget *case_sensitive;
+		gboolean regular;
+	};
 
-typedef struct _gbsdata GBS_DATA;
-struct _gbsdata {
-	GtkWidget *html;
-	GtkWidget *ctree;
-	GtkWidget *showtabs;
-	gchar *bookName;
-	gchar *bookDescription;
-	gchar *searchstring;
-	gint booknum;
-	GSFindDialog *find_dialog;
-};	
+	typedef struct _gbsdata GBS_DATA;
+	struct _gbsdata {
+		GtkWidget *html;
+		GtkWidget *ctree;
+		GtkWidget *showtabs;
+		gchar *bookName;
+		gchar *bookDescription;
+		gchar *searchstring;
+		gint booknum;
+		gboolean has_key;
+		GSFindDialog *find_dialog;
+	};
 
 
-typedef struct _nodedata NODEDATA;
-struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
-	gchar *buf[3];
-	GdkPixmap *pixmap1;
-	GdkPixmap *pixmap2;
-	GdkBitmap *mask1;
-	GdkBitmap *mask2;
-	gboolean is_leaf;
-	gboolean expanded;
-};
-void gui_set_book_page_and_key(gint page_num, gchar * key);
-void gui_setupGBS(SETTINGS *s);
-void gui_shutdownGBS(void);
-GtkWidget *createGBS_Pane(gchar *modName, SETTINGS *s,gint count, GBS_DATA *p_gbs);
-GtkCTreeNode *gui_addnodeGBS(SETTINGS *s, NODEDATA *data);
-void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS *s);
+	typedef struct _nodedata NODEDATA;
+	struct _nodedata {
+		GtkCTreeNode *parent;
+		GtkCTreeNode *sibling;
+		gchar *buf[3];
+		GdkPixmap *pixmap1;
+		GdkPixmap *pixmap2;
+		GdkBitmap *mask1;
+		GdkBitmap *mask2;
+		gboolean is_leaf;
+		gboolean expanded;
+	};
+	void gui_set_book_page_and_key(gint page_num, gchar * key);
+	void gui_setupGBS(SETTINGS * s);
+	void gui_shutdownGBS(void);
+	GtkWidget *createGBS_Pane(gchar * modName, SETTINGS * s,
+				  gint count, GBS_DATA * p_gbs);
+	GtkCTreeNode *gui_addnodeGBS(SETTINGS * s, NODEDATA * data);
+	void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s);
 
 #ifdef __cplusplus
 }

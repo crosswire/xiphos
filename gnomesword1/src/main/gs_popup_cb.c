@@ -41,7 +41,7 @@
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "gs_editor.h"
-#include "gs_unlockkey_dlg.h"
+#include "cipher_key_dialog.h"
 #include "gs_gnomesword.h"
 #include "sword.h"
 #include "gs_viewdict_dlg.h"
@@ -106,16 +106,6 @@ void on_save_book_activate(GtkMenuItem * menuitem, gchar *user_data)
 }
 
 	
-
-//----------------------------------------------------------------------------------------------
-void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *dlg;
-	
-	dlg = create_dlgUnlockKey(GPOINTER_TO_INT(user_data),settings);
-	gtk_widget_show(dlg);
-}
-
 
 //----------------------------------------------------------------------------------------------
 void on_print_item_activate(GtkMenuItem * menuitem, gchar * html)

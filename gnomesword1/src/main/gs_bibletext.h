@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_commentary.h - support for commentary modules
+ * gs_bibletext.h - support for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_COMMENTARY_H_
-#define __GS_COMMENTARY_H_
+#ifndef __GS_BIBLETEXT_H_
+#define __GS_BIBLETEXT_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,8 +28,8 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-	typedef struct _COMMFindDialog COMMFindDialog;
-	struct _COMMFindDialog {
+	typedef struct _text_find_dialog Text_Find_Dialog;
+	struct _text_find_dialog {
 		GnomeDialog *dialog;
 		GtkWidget *htmlwidget;
 		GtkWidget *entry;
@@ -38,30 +38,36 @@ extern "C" {
 		gboolean regular;
 	};
 
-	typedef struct _commdata COMM_DATA;
-	struct _commdata {
+	typedef struct _text_data TEXT_DATA;
+	struct _text_data {
 		GtkWidget *html;
-		GtkWidget *btnCOMMSync;
-		GtkWidget *btnCOMMBack;
-		GtkWidget *btnCOMMForward;
-		GtkWidget *btnCOMMPrint;
 		GtkWidget *showtabs;
-		gchar *modName;
-		gchar *modDescription;
-		gchar *searchstring;
+		gchar *mod_name;
+		gchar *mod_description;
+		gchar *search_string;
 		gchar *key;
-		gint modnum;
-		gboolean has_key;
-		COMMFindDialog *find_dialog;
+		gint mod_num;
+		gboolean is_locked;
+		/*
+		gboolean
+		    strongs,
+		    morphs,
+		    footnotes,
+		    greekaccents,
+		    lemmas,
+		    scripturerefs, 
+		    hebrewpoints, 
+		    hebrewcant, 
+		    headings;
+		*/
+		Text_Find_Dialog *find_dialog;
 	};
-	void gui_set_commentary_page_and_key(gint page_num,
-					     gchar * key);
-	void gui_setupCOMM(SETTINGS * s);
-	void gui_shutdownCOMM(void);
-	void gui_displayCOMM(gchar * key);
+	void gui_set_text_page_and_key(gint page_num, gchar * key);
+	void gui_setup_text(SETTINGS * s);
+	void gui_shutdown_text(void);
+	void gui_display_text(gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_COMMENTARY_H_ */
-/******  end of file  ******/
+#endif				/* __GS_BIBLETEXT_H_ */
