@@ -2,7 +2,8 @@
 
 SUBDIRS =   macros \
             help \
-	    src
+	    po \
+	    src 
 
 EXTRA_DIST = gnomesword.glade \
         Gnomesword.prj \

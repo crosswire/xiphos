@@ -203,8 +203,6 @@ GList *getModlistSW(gchar *modtype)
 	return list;
 }
 
-
-
 /*
  * 
  * 
@@ -221,7 +219,6 @@ displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
 	sprintf(s->groupName,"%s","Viewer");
 	changegroupnameSB(s, s->groupName, groupnum7);
 	if(!strcmp(modName,viewersbMod->Name())){
-//		g_warning("in viewer key = %s",key);
 		viewersbMod->SetKey(key); //-- set key to the first one in the list
 		viewersbMod->Display(); 
 	}else{
@@ -229,7 +226,6 @@ displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
 		it = viewersbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != viewersbMgr->Modules.end()){ //-- if we find the module	
 			viewersbMod = (*it).second;  //-- change module to new module
-//			g_warning("in viewer key = %s mod = %s",key,viewersbMod->Name());
 			viewersbMod->SetKey(key); //-- set key to the first one in the list
 			viewersbMod->Display(); 
 		}
@@ -246,7 +242,7 @@ void setupviewerSBSW(GtkWidget *html_widget)
 	SectionMap::iterator sit; //-- iteratior
 	
 	viewersbMgr	= new SWMarkupMgr();	//-- create sword mgrs
-	viewersbMgr->Markup(FMT_HTMLHREF);
+	//viewersbMgr->Markup(FMT_HTMLHREF);
 	viewersbMod     = NULL;
 	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	
@@ -254,7 +250,7 @@ void setupviewerSBSW(GtkWidget *html_widget)
 		viewersbMod = (*it).second;
 		sit = viewersbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
 		ConfigEntMap &section = (*sit).second;
-		//addrenderfiltersSWORD(viewersbMod, section);
+		addrenderfiltersSWORD(viewersbMod, section);
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			viewersbMod->Disp(viewersbDisplay);
 		}
