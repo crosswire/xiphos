@@ -25,7 +25,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+#include <libxml/parser.h>
+
+void xml_new_bookmark_file(void);	
+xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);	
+void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
+					gchar * key, gchar * module);
+void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf);
 char *xml_get_list_from_label(char * section, char * item, const char * label);
 int xml_set_section_ptr(char * section);
 void xml_set_list_item(char * section, char * item, char * label, 
