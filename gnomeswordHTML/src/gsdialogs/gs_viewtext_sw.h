@@ -43,9 +43,8 @@ gchar* VTgetmodDescriptionSWORD(void);
 void VTchangeverseSWORD(gchar * verse);
 gchar *VTgetbookSWORD(void);
 gint VTgetchapterSWORD(void);
-gint VTgetverseSWORD(void);	
-void VTstrongsSWORD(gboolean choice);	
-void VTfootnotesSWORD(gboolean choice) ;
+gint VTgetverseSWORD(void);
+void VTsetGlobalOptionsSWORD(gchar *option, gchar *onoff);
 	
 	
 #ifdef __cplusplus
