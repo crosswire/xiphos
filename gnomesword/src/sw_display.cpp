@@ -359,7 +359,7 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 	buf = str->str;
 	searchbuf = g_strdup(settings->searchText);
 		
-	// if we have a muti word search
+	// if we have a muti word search go here
 	if(settings->searchType == -2) {
 		char *token;
 		GList *list;

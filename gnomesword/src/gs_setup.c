@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
   /*
     * GnomeSword Bible Study Tool
     * gs_setup.c
@@ -198,7 +199,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					       &druidpagestart1_title_color);
 	gnome_druid_page_start_set_title(GNOME_DRUID_PAGE_START
 					 (druidpagestart1),
-					 _("Welcome To GnomeSword-0.5.0"));
+					 _("Welcome To GnomeSword-0.5.2a"));
 	gnome_druid_page_start_set_text(GNOME_DRUID_PAGE_START
 					(druidpagestart1),
 					_
@@ -228,7 +229,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 						  &druidpagestandard3_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
-					    _("GnomeSword-0.5.0"));
+					    _("GnomeSword-0.5.2a"));
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
 					   create_image
@@ -851,7 +852,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 						&druidpagefinish1_title_color);
 	gnome_druid_page_finish_set_title(GNOME_DRUID_PAGE_FINISH
 					  (druidpagefinish1),
-					  _("GnomeSword-0.5.0"));
+					  _("GnomeSword-0.5.2a"));
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 _("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));

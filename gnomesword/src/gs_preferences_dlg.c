@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_preferences_dlg.c
@@ -49,39 +50,6 @@
 GtkWidget *notebook7;
 extern gchar *tmpcolor;
 static gboolean updatehtml, updateSB, updatelayout;
-
-#ifdef USE_OLD_GAL
-#define NUM_SHORTCUT_TYPES1 3
-static gchar *shortcut_types[NUM_SHORTCUT_TYPES1] = {
-	"font:", "misc:", "modules:"
-};
-static gchar *icon_filenames[NUM_SHORTCUT_TYPES1] = {
-	"gnome-ccwindowmanager.png",
-	"gnome-settings.png",
-	"gdict.png"
-};
-
-static GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES1];
-//static GtkWidget *main_label;
-static EShortcutModel *shortcut_model;
-static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
-				 const gchar * url, gpointer data);
-
-static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
-				 const gchar * url, gpointer data)
-{
-	gint i;
-
-	for (i = 0; i < NUM_SHORTCUT_TYPES1; i++) {
-		if (!strncmp(url, shortcut_types[i],
-			     strlen(shortcut_types[i]))) {
-			gdk_pixbuf_ref(icon_pixbufs[i]);
-			return icon_pixbufs[i];
-		}
-	}
-	return NULL;
-}
-#endif /* USE_OLD_GAL  */
 
 static EShortcutModel *shortcut_model;
 
@@ -507,9 +475,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			      GList * commlist,
 			      GList * dictlist, GList * percomlist)
 {
-#ifdef USE_OLD_GAL
-	gint i;
-#endif /* USE_OLD_GAL */
 	gint groupnum;
 	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
@@ -2008,30 +1973,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
 			   NULL);
-#ifdef USE_OLD_GAL			   
-	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-					 icon_callback1, NULL);
-
-	for (i = 0; i < NUM_SHORTCUT_TYPES1; i++) {
-		pathname = gnome_pixmap_file(icon_filenames[i]);
-		if (pathname)
-			icon_pixbufs[i] =
-			    gdk_pixbuf_new_from_file(pathname);
-		else
-			icon_pixbufs[i] = NULL;
-	}
-	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
-				     groupnum, E_ICON_BAR_LARGE_ICONS);
-	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-				  groupnum, -1, shortcut_types[0],
-				  _("Font Colors and Sizes"));
-	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-				  groupnum, -1, shortcut_types[1],
-				  _("Misc Interface Settings"));
-	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-				  groupnum, -1, shortcut_types[2],
-				  _("Sword Modules"));
-#else /* USE_OLD_GAL */
 	pathname = gnome_pixmap_file("gnome-ccwindowmanager.png");
 	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
@@ -2050,7 +1991,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				  groupnum, -1, "Sword Mods",
 				  _("Sword Modules"),
 				  icon_pixbuf);	
-#endif /* USE_OLD_GAL */
 	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
 				     groupnum, E_ICON_BAR_LARGE_ICONS);
 	setcolorpickersColor(s,

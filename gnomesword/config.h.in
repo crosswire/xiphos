@@ -209,6 +209,3 @@
 /* Define if you want to use spell checking */
 #undef USE_SPELL
 
-/* Define if you want to use pre 0.10.99.2 gal */
-#undef USE_OLD_GAL
-
