@@ -1,3 +1,9 @@
+2003-12-13  Terry <tbiggs@users.sf.net>
+
+	* Made editors use dialogs - removed options
+	* editors toolbar are shown - removed options
+
+
 2003-12-13  Pierre <pierrebenz@users.sf.net>
 
 	* updated manual

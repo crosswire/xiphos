@@ -1099,10 +1099,8 @@ void gui_open_commentary_editor(gchar * mod_name)
 	vc->is_dialog = TRUE;
 	vc->mod_name = g_strdup(mod_name);
 
-	vc->ec->stylebar =
-	    load_percomm_options(vc->mod_name, "Style bar");
-	vc->ec->editbar =
-	    load_percomm_options(vc->mod_name, "Edit bar");
+	vc->ec->stylebar = TRUE;
+	vc->ec->editbar = TRUE;
 	vc->ec->personal_comments = TRUE;
 	strcpy(vc->ec->filename, vc->mod_name);
 	vc->book_heading = FALSE;
@@ -1118,7 +1116,6 @@ void gui_open_commentary_editor(gchar * mod_name)
 	if (vc->ec->editbar)
 		gtk_widget_show(vc->ec->toolbar_edit);
 	gtk_widget_show(vc->dialog);	
-	gtk_widget_set_sensitive(vc->ec->toolbars, TRUE);
 	gtk_html_set_editable(GTK_HTML(vc->ec->html), TRUE);
 	settings.percomm_dialog_exist = TRUE;
 }
