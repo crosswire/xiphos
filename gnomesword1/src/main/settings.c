@@ -36,6 +36,7 @@
 
 #include "gui/bookmarks.h"
 #include "gui/setup_druid.h"
+#include "gui/tabbed_browser.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
@@ -85,6 +86,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	int need_old = FALSE;
 	char *sword_dir = NULL;
 	char *gs_old = NULL;
+	char *tabs = NULL;
 
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
@@ -115,6 +117,13 @@ int settings_init(int new_configs, int new_bookmarks)
 		} 
 		g_free(gs_old);
 	}
+
+	/* check for tabs dir -- if directory does not exist create it */
+/*	tabs = g_strdup_printf("%s/tabs",settings.gSwordDir);
+	if (access(tabs, F_OK) == -1)
+		gui_save_tabs(NULL);
+	g_free(tabs);
+*/
 	
 	
 	/* if .sword does not exist create it */
@@ -165,6 +174,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
+	
 	
 	return retval;
 }
@@ -406,11 +416,11 @@ void load_settings_structure(void)
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
 
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));
-#else	
-	settings.showsplash = FALSE;	
-#endif
+//#else	
+	//settings.showsplash = FALSE;	
+//#endif
 	
 	settings.showdevotional =
 	    atoi(xml_get_value("misc", "dailydevotional"));

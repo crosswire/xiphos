@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <gnome.h>
+	
 typedef struct _passage_tab_info PASSAGE_TAB_INFO;
 struct _passage_tab_info {
 	GtkWidget *page_widget;
@@ -43,8 +44,8 @@ struct _passage_tab_info {
 };
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
 
-void gui_save_tabs(gchar *filename);
-void gui_load_tabs(gchar *filename);
+void gui_save_tabs(const gchar *filename);
+void gui_load_tabs(const gchar *filename);
 void gui_set_tab_label(const gchar *key);
 void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
