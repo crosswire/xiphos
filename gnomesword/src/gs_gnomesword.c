@@ -277,7 +277,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(sbdictmods);
 	
 	if(settings->showsplash){
-		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);	
+		//e_splash_set_icon_highlight (E_SPLASH(splash),4, TRUE);	
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}
