@@ -54,6 +54,12 @@ extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
 extern GtkCTreeNode *personal_node;
 extern gchar *fnquickmarks;
+extern GdkPixmap *pixmap1;
+extern GdkPixmap *pixmap2;
+extern GdkPixmap *pixmap3;
+extern GdkBitmap *mask1;
+extern GdkBitmap *mask2;
+extern GdkBitmap *mask3;
 
 
 /*
@@ -61,12 +67,6 @@ extern gchar *fnquickmarks;
  * globals
  ******************************************************************************
 */
-GdkPixmap *pixmap1;
-GdkPixmap *pixmap2;
-GdkPixmap *pixmap3;
-GdkBitmap *mask1;
-GdkBitmap *mask2;
-GdkBitmap *mask3;
 GtkStyle *style;
 BM_TREE bmtree;
 BM_TREE *p_bmtree;
@@ -80,79 +80,6 @@ GtkCTreeNode *newrootnode;
 static GtkCTreeNode *node2;
 static GtkCTreeNode *selected_node;
 static gboolean applychangestobookmark;
-static char *book_open_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c #808080",
-	"o      c white",
-	"                ",
-	"  ..            ",
-	" .Xo.    ...    ",
-	" .Xoo. ..oo.    ",
-	" .Xooo.Xooo...  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	"  .Xoo.Xoo..X.  ",
-	"   .Xo.o..ooX.  ",
-	"    .X..XXXXX.  ",
-	"    ..X.......  ",
-	"     ..         ",
-	"                "
-};
-
-static char *book_closed_xpm[] = {
-	"16 16 6 1",
-	"       c None s None",
-	".      c black",
-	"X      c red",
-	"o      c yellow",
-	"O      c #808080",
-	"#      c white",
-	"                ",
-	"       ..       ",
-	"     ..XX.      ",
-	"   ..XXXXX.     ",
-	" ..XXXXXXXX.    ",
-	".ooXXXXXXXXX.   ",
-	"..ooXXXXXXXXX.  ",
-	".X.ooXXXXXXXXX. ",
-	".XX.ooXXXXXX..  ",
-	" .XX.ooXXX..#O  ",
-	"  .XX.oo..##OO. ",
-	"   .XX..##OO..  ",
-	"    .X.#OO..    ",
-	"     ..O..      ",
-	"      ..        ",
-	"                "
-};
-
-static char *mini_page_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c white",
-	"o      c #808080",
-	"                ",
-	"   .......      ",
-	"   .XXXXX..     ",
-	"   .XoooX.X.    ",
-	"   .XXXXX....   ",
-	"   .XooooXoo.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   ..........o  ",
-	"    oooooooooo  ",
-	"                "
-};
 
 /*
  *****************************************************************************
@@ -729,21 +656,10 @@ void addverselistBM(SETTINGS * s, GList * list)
 void loadtree(SETTINGS * s)
 {
 	GtkWidget *menu;
-	GdkColor transparent = { 0 };
 	bmtree.ctree = GTK_CTREE(s->ctree_widget);
 	bmtree.ctree_widget = s->ctree_widget;
 	p_bmtree = &bmtree;
 	
-	pixmap1 =
-	    gdk_pixmap_create_from_xpm_d(s->shortcut_bar->window, &mask1,
-					 &transparent, book_closed_xpm);
-	pixmap2 =
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
-					 &transparent, book_open_xpm);
-	pixmap3 =
-	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
-					 &transparent, mini_page_xpm);
-
 	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
 				 "button_press_event",
 				 GTK_SIGNAL_FUNC(after_press), NULL);

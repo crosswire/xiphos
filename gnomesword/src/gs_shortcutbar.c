@@ -48,6 +48,87 @@
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
 EShortcutModel *shortcut_model;
+
+static char *book_open_xpm[] = {
+	"16 16 4 1",
+	"       c None s None",
+	".      c black",
+	"X      c #808080",
+	"o      c white",
+	"                ",
+	"  ..            ",
+	" .Xo.    ...    ",
+	" .Xoo. ..oo.    ",
+	" .Xooo.Xooo...  ",
+	" .Xooo.oooo.X.  ",
+	" .Xooo.Xooo.X.  ",
+	" .Xooo.oooo.X.  ",
+	" .Xooo.Xooo.X.  ",
+	" .Xooo.oooo.X.  ",
+	"  .Xoo.Xoo..X.  ",
+	"   .Xo.o..ooX.  ",
+	"    .X..XXXXX.  ",
+	"    ..X.......  ",
+	"     ..         ",
+	"                "
+};
+
+static char *book_closed_xpm[] = {
+	"16 16 6 1",
+	"       c None s None",
+	".      c black",
+	"X      c red",
+	"o      c yellow",
+	"O      c #808080",
+	"#      c white",
+	"                ",
+	"       ..       ",
+	"     ..XX.      ",
+	"   ..XXXXX.     ",
+	" ..XXXXXXXX.    ",
+	".ooXXXXXXXXX.   ",
+	"..ooXXXXXXXXX.  ",
+	".X.ooXXXXXXXXX. ",
+	".XX.ooXXXXXX..  ",
+	" .XX.ooXXX..#O  ",
+	"  .XX.oo..##OO. ",
+	"   .XX..##OO..  ",
+	"    .X.#OO..    ",
+	"     ..O..      ",
+	"      ..        ",
+	"                "
+};
+
+static char *mini_page_xpm[] = {
+	"16 16 4 1",
+	"       c None s None",
+	".      c black",
+	"X      c white",
+	"o      c #808080",
+	"                ",
+	"   .......      ",
+	"   .XXXXX..     ",
+	"   .XoooX.X.    ",
+	"   .XXXXX....   ",
+	"   .XooooXoo.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   ..........o  ",
+	"    oooooooooo  ",
+	"                "
+};
+GdkPixmap *pixmap1;
+GdkPixmap *pixmap2;
+GdkPixmap *pixmap3;
+GdkBitmap *mask1;
+GdkBitmap *mask2;
+GdkBitmap *mask3;
+
 extern gchar *shortcut_types[];
 extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
@@ -55,12 +136,9 @@ extern gboolean havedict;	/* let us know if we have at least one lex-dict module
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 extern GList *bookmods;
-extern GdkPixmap *pixmap1;
-extern GdkPixmap *pixmap2;
-extern GdkPixmap *pixmap3;
-extern GdkBitmap *mask1;
-extern GdkBitmap *mask2;
-extern GdkBitmap *mask3;
+
+
+
 GList *sblist; /* for saving search results to bookmarks  */
 gint groupnum0 = -1,
     groupnum1 = -1,
@@ -114,7 +192,7 @@ static void remove_all_items(gint group_num);
 
 static void on_buttonBooks_clicked(GtkButton * button, SETTINGS *s)
 {
-	gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(s->app,"notebookBooksDicts")),1);	
+	gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(s->app,"notebook3")),1);	
 }
 
 void
@@ -1684,7 +1762,18 @@ void setupSB(SETTINGS * s)
 	gchar *buf[2];
 	GdkPixbuf *icon_pixbuf = NULL;
 	GtkCTreeNode *node;
+	GdkColor transparent = { 0 };
 	
+	pixmap1 =
+	    gdk_pixmap_create_from_xpm_d(s->shortcut_bar->window, &mask1,
+					 &transparent, book_closed_xpm);
+	pixmap2 =
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
+					 &transparent, book_open_xpm);
+	pixmap3 =
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
+					 &transparent, mini_page_xpm);
+
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
@@ -1848,6 +1937,34 @@ void setupSB(SETTINGS * s)
 	gtk_widget_show(buttonBooks);
 	groupnum8 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 					  scrolledwindow1, buttonBooks, -1);	
+					  
+	
+	/* load book after bookmarks so pixmap are created */
+	tmp = bookmods;
+	while (tmp != NULL) {
+		buf[0] = (gchar *) tmp->data;
+		buf[1] = (gchar *) tmp->data;
+		buf[2] = "0";
+		
+		//g_warning("bookmods = %s", (gchar *) tmp->data);
+		node = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
+				NULL, NULL, buf, 3,
+				pixmap1, mask1, pixmap2,
+				mask2, FALSE, FALSE);
+		/* load first level of books treekey */
+		load_book_tree(s->ctree_widget_books, node, (gchar *) tmp->data, "root",0);
+		tmp = g_list_next(tmp);
+	}
+	/* end load books */
+	
+	gtk_signal_connect (GTK_OBJECT (s->ctree_widget_books), "select_row",
+                      GTK_SIGNAL_FUNC (on_ctreeBooks_select_row),
+                      s);
+	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
+                      GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
+                      s);
+	g_list_free(tmp);
+					  
 	
 	/*** end books group ***/
 	
@@ -1881,31 +1998,6 @@ void setupSB(SETTINGS * s)
 
 	loadtree(settings);
 
-	/* load book after bookmarks so pixmap are created */
-	tmp = bookmods;
-	while (tmp != NULL) {
-		buf[0] = (gchar *) tmp->data;
-		buf[1] = (gchar *) tmp->data;
-		buf[2] = "0";
-		
-		g_warning("bookmods = %s", (gchar *) tmp->data);
-		node = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
-				NULL, NULL, buf, 3,
-				pixmap1, mask1, pixmap2,
-				mask2, FALSE, FALSE);
-		load_book_tree(s->ctree_widget_books, node, (gchar *) tmp->data, "root",0);
-		tmp = g_list_next(tmp);
-	}
-	/* end load books */
-	
-	gtk_signal_connect (GTK_OBJECT (s->ctree_widget_books), "select_row",
-                      GTK_SIGNAL_FUNC (on_ctreeBooks_select_row),
-                      s);
-	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
-                      GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
-                      s);
-	g_list_free(tmp);
-	
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);	//gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow2);
 	gtk_object_set_data_full(GTK_OBJECT(s->app),
