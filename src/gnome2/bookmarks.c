@@ -303,7 +303,7 @@ void gui_new_xml_bookmark_file(void)
 
 	xml_node = xmlNewNode(NULL, (const xmlChar *) "SwordBookmarks");
 	xml_attr = xmlNewProp(xml_node, "syntaxVersion",
-			      (const xmlChar *) "1.0");
+			      (const xmlChar *) "1");
 	xmlDocSetRootElement(xml_doc, xml_node);
 
 	es->caption = "Personal";
@@ -337,7 +337,7 @@ void gui_new_xml_bookmark_file(void)
 	add_xml_bookmark_to_parent(xml_folder, es);
 
 
-	xmlSaveFile(xml_filename, xml_doc);
+	xmlSaveFormatFile(xml_filename, xml_doc,1);
 	xmlFreeDoc(xml_doc);
 }
 
@@ -407,13 +407,15 @@ static void save_gnode_to_xml_bookmarks(GNode * gnode, gchar * file_buf)
 			return;
 		xml_filename = (const xmlChar *) file_buf;
 		root_doc = xmlNewDoc((const xmlChar *) "1.0");
-
+		/*xmlNewDocProp(root_doc,"encoding",
+					 "UTF-8");*/
+		
 		if (root_doc != NULL) {
 			root_node = xmlNewNode(NULL, (const xmlChar *)
 					       "SwordBookmarks");
 			root_attr =
 			    xmlNewProp(root_node, "syntaxVersion",
-				       (const xmlChar *) "1.0");
+				       (const xmlChar *) "1");
 			xmlDocSetRootElement(root_doc, root_node);
 		}
 
@@ -445,7 +447,7 @@ static void save_gnode_to_xml_bookmarks(GNode * gnode, gchar * file_buf)
 			}
 		}
 		g_print("\nsaving = %s\n", xml_filename);
-		xmlSaveFile(xml_filename, root_doc);
+		xmlSaveFormatFile(xml_filename, root_doc,1);
 		xmlFreeDoc(root_doc);
 		g_free(file_buf);
 	}
