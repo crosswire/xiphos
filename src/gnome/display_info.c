@@ -26,10 +26,43 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/_display_info.h"
-#include "main/display_info.h"
+#include "gui/gtkhtml_display.h"
+#include "gui/display_info.h"
+
+#include "main/gs_gnomesword.h"
 
 gboolean gsI_isrunning = FALSE;
+
+static GtkWidget *html_widget;
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "display_info.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void gui_display_mod_and_key(gchar * mod_name, gchar * key)
+{
+	gchar *text = NULL;
+	
+	text = get_module_text(mod_name, key);
+	if(text) {
+		entry_display(html_widget, mod_name,
+		   text, key, TRUE);
+		free(text);
+	}
+}
 
 /******************************************************************************
  * Name
@@ -52,7 +85,6 @@ static void on_dlgInformation_destroy(GtkObject * object,
 						gpointer user_data)
 {
 	gsI_isrunning = FALSE;
-	dispaly_info_shutdown(); 
 }
 
 /******************************************************************************
@@ -99,7 +131,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	GtkWidget *scwnInfo;
 	GtkWidget *dialog_action_area15;
 	GtkWidget *btnInfoOK;
-	GtkWidget *text;
 
 	dlgInformation = gnome_dialog_new(NULL, NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgInformation), "dlgInformation",
@@ -126,12 +157,12 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
-	text = gtk_html_new();
-	gtk_widget_ref(text);
-	gtk_object_set_data_full(GTK_OBJECT(dlgInformation), "text", text,
+	html_widget = gtk_html_new();
+	gtk_widget_ref(html_widget);
+	gtk_object_set_data_full(GTK_OBJECT(dlgInformation), "html_widget", html_widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(text);
-	gtk_container_add(GTK_CONTAINER(scwnInfo), text);
+	gtk_widget_show(html_widget);
+	gtk_container_add(GTK_CONTAINER(scwnInfo), html_widget);
 
 	dialog_action_area15 = GNOME_DIALOG(dlgInformation)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dlgInformation),
@@ -160,7 +191,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			   GTK_SIGNAL_FUNC(on_btnInfoOK_clicked), NULL);
 	gsI_isrunning = TRUE;
         
-	display_info_setup(text);
         
 	return dlgInformation;
 }

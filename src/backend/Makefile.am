@@ -25,10 +25,6 @@ libbackend_a_SOURCES =  \
     commentary_.h \
     dictlex_.cpp \
     dictlex_.h \
-    display.cpp \
-    display.h \
-    display_info_.cpp \
-    display_info_.h \
     gbs_.cpp \
     gbs_.h \
     interlinear.cpp \
@@ -45,5 +41,3 @@ libbackend_a_SOURCES =  \
     shortcutbar.h \
     sword.cpp \
     sword.h \
-    verselist.cpp \
-    verselist.h \

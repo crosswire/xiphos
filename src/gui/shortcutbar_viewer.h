@@ -33,8 +33,10 @@ struct _shortcutbar_viewer {
 		*notebook,
 		*tbtn_view_main,
 		*btn_save,
+		*htmlshow,
 		*html_widget,
 		*html_viewer_widget;
+	gchar   mod_name[80];
 };
 
 void set_sb_for_daily_devotion(void);
