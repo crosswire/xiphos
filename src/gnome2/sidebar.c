@@ -1286,7 +1286,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (gpointer) on_search_results_activate, NULL,
 	 NULL,
 	 GNOME_APP_PIXMAP_STOCK,
-	 "gtk-find",
+	 "gnome-stock-text-bulleted-list",
 	 0,
 	 (GdkModifierType) 0, NULL},
 	{
