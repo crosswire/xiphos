@@ -246,7 +246,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	}
 	
 	beginHTML(s->htmlRP, TRUE);
-	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
+	sprintf(buf,HTML_START "<body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
 				count, s->found_color,s->searchText,
 				s->bible_verse_num_color,searchresultssbMod->Name());	
 	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
