@@ -129,7 +129,7 @@ static void applyoptions(SETTINGS * s)
 	
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 	if (updatehtml)
-		applyfontcolorandsizeSWORD();
+		backend_display_new_font_color_and_size(s);
 	if (updateSB)
 		update_shortcut_bar(s);
 	updatehtml = FALSE;

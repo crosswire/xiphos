@@ -40,8 +40,8 @@ libbackend_a_SOURCES =  \
     shortcutbar.h \
     sword.cpp \
     sword.h \
-    verselist_sb.cpp \
-    verselist_sb.h\
+    verselist.cpp \
+    verselist.h\
     viewcomm.cpp \
     viewcomm.h\
     viewdict.cpp \

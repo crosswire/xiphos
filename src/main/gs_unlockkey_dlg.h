@@ -32,8 +32,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-	GtkWidget *create_dlgUnlockKey(gint window);
+#include "gs_gnomesword.h"
+	GtkWidget *create_dlgUnlockKey(gint window, SETTINGS *s);
 
 #ifdef __cplusplus
 }

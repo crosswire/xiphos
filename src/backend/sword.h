@@ -26,8 +26,8 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __SW_GNOMESWORD_H__
-#define __SW_GNOMESWORD_H__
+#ifndef __SWORD_H__
+#define __SWORD_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,85 +35,82 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
-    void backend_firstInitSWORD(void);
-    void initSWORD(SETTINGS * s);
-    void modNameFromDesc(gchar * modName, gchar * modDesc);
-    void updateIntDlg(SETTINGS * s);
-    void updateinterlinearpage(void);
-    void shutdownSWORD(void);
-    void FillDictKeysSWORD(void);
-    void changeVerseSWORD(gchar * ref);
-    void ChangeVerseSWORD(void);
-    void changeVerseComSWORD(void);
-    void resultsListSWORD(GtkWidget * searchFrm, 
-			  gint row, 
-			  gint column);
-    void globaloptionsSWORD(gchar * option, gint window, gboolean choice,
-			    gboolean showchange);
-    void changecurModSWORD(gchar * modName, gboolean showchange);
-    void navcurcomModSWORD(gint direction);
-    void changecomp1ModSWORD(gchar * modName);
-    void changecomp2ModSWORD(gchar * modName);
-    void changecomp3ModSWORD(gchar * modName);
-    void setversestyleSWORD(gboolean choice);
-    void backend_set_locale(char *locale);
+
+/* these strings are not seen by users */
+#define TEXT_MODS "Biblical Texts"
+#define COMM_MODS "Commentaries"
+#define DICT_MODS "Lexicons / Dictionaries"
+#define BOOK_MODS "Generic Books"
+
+
+
+	void backend_firstInitSWORD(void);
+	void initSWORD(SETTINGS * s);
+	void modNameFromDesc(gchar * modName, gchar * modDesc);
+	void updateIntDlg(SETTINGS * s);
+	void updateinterlinearpage(void);
+	void backend_shutdown(SETTINGS * s);
+	void FillDictKeysSWORD(void);
+	void changeVerseSWORD(gchar * ref);
+	void ChangeVerseSWORD(void);
+	void changeVerseComSWORD(void);
+	void resultsListSWORD(GtkWidget * searchFrm,
+			      gint row, gint column);
+	void globaloptionsSWORD(gchar * option, gint window,
+				gboolean choice, gboolean showchange);
+	void changecurModSWORD(gchar * modName, gboolean showchange);
+	void navcurcomModSWORD(gint direction);
+	void changecomp1ModSWORD(gchar * modName);
+	void changecomp2ModSWORD(gchar * modName);
+	void changecomp3ModSWORD(gchar * modName);
+	void setversestyleSWORD(gboolean choice);
+	void backend_set_locale(char *locale);
 	/*** change Bible book ***/
-    void bookSWORD(void);
-    gchar *intchangeverseSWORD(GtkWidget * book,
-			       GtkWidget * chapter,
-			       GtkWidget * verse, 
-			       GtkWidget * entry);
-    gchar *intsyncSWORD(GtkWidget * book,
-			GtkWidget * chapter,
-			GtkWidget * verse, 
-			GtkWidget * entry, 
-			gchar * key);
-    void verseSWORD(void);
-    void btnlookupSWORD(void);
-    void freeformlookupSWORD(GdkEventKey * event);
-    void changcurcomModSWORD(gchar * modName, gboolean showchange);
-    void savenoteSWORD(gchar * buf);
-    void deletenoteSWORD(void);
-    void changcurdictModSWORD(gchar * modName, gchar * keyText);
-    void dictSearchTextChangedSWORD(gchar * mytext);
-    void dictchangekeySWORD(gint direction);
-    void setglobalopsSWORD(gint window, gchar * option, gchar * yesno);
-    void changepercomModSWORD(gchar * modName);
-    void redisplayTextSWORD(void);
-    gchar *getmodnameSWORD(gint num);
-    gchar *getdictmodSWORD(void);
-    gchar *gettextmodSWORD(void);
-    gchar *getcommodSWORD(void);
-    gchar *getcommodDescriptionSWORD(void);
-    GList *backend_get_books(void);
-    void gotoBookmarkSWORD(gchar * modName, gchar * key);
-    gchar *getmodkeySWORD(gint num);
-    const char *getSwordVerionSWORD(void);
-    void swapmodsSWORD(gchar * intmod);
-    void loadpreferencemodsSWORD(void);
-    void gs_firstrunSWORD(void);
-    void applyfontcolorandsizeSWORD(void);
-	/*** write individual module key to <module>.conf ***/
-    void savekeySWORD(gint modwindow, gchar * key);
-	/*** write individual module font information to <module>.conf ***/
-    gboolean savefontinfoSWORD(gchar * modName, gchar * modtag,
-			       gchar * fontinfo);
-	/*** display daily devotional ***/
-    void displayDevotional(void);
-	/******************************************************************************
-	 * get module type - Bible text, Commentary or Dict/Lex
-	 ******************************************************************************/
-    gint get_mod_typeSWORD(gchar * modName);
-    /* returns a glist of module names */
-    GList *backend_getModListOfTypeSWORD(char *modType);
-    /* returns a glist of module descriptions */
-    GList* backend_get_mod_description_list_SWORD(char *modType);
-    gchar *backend_get_module_description(gchar * modName);
-    gchar *backend_getPathToModsSWORD(void);
-    gchar *backend_get_mod_aboutSWORD(gchar *modname);
-    
+	void bookSWORD(void);
+	gchar *intchangeverseSWORD(GtkWidget * book,
+				   GtkWidget * chapter,
+				   GtkWidget * verse,
+				   GtkWidget * entry);
+	gchar *intsyncSWORD(GtkWidget * book,
+			    GtkWidget * chapter,
+			    GtkWidget * verse,
+			    GtkWidget * entry, gchar * key);
+	void verseSWORD(void);
+	void btnlookupSWORD(void);
+	void freeformlookupSWORD(GdkEventKey * event);
+	void changcurcomModSWORD(gchar * modName, gboolean showchange);
+	void savenoteSWORD(gchar * buf);
+	void deletenoteSWORD(void);
+	void changcurdictModSWORD(gchar * modName, gchar * keyText);
+	void dictSearchTextChangedSWORD(gchar * mytext);
+	void dictchangekeySWORD(gint direction);
+	void setglobalopsSWORD(gint window, gchar * option,
+			       gchar * yesno);
+	void changepercomModSWORD(gchar * modName);
+	void redisplayTextSWORD(void);
+	gchar *getmodnameSWORD(gint num);
+	gchar *getdictmodSWORD(void);
+	gchar *gettextmodSWORD(void);
+	gchar *getcommodSWORD(void);
+	gchar *getcommodDescriptionSWORD(void);
+	GList *backend_get_books(void);
+	void gotoBookmarkSWORD(gchar * modName, gchar * key);
+	gchar *getmodkeySWORD(gint num);
+	const char *getSwordVerionSWORD(void);
+	void swapmodsSWORD(gchar * intmod);
+	void loadpreferencemodsSWORD(void);
+	void backend_display_new_font_color_and_size(SETTINGS *s);
+	void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s);
+	void backend_display_devotional(SETTINGS * s);
+	int backend_get_mod_type(gchar * modName);
+	GList *backend_get_list_of_mods_by_type(char *mod_type);
+	GList *backend_get_mod_description_list_SWORD(char *mod_type);
+	gchar *backend_get_module_description(gchar * modName);
+	gchar *backend_get_path_to_mods(void);
+	gchar *backend_get_mod_aboutSWORD(gchar * modname);
+
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SW_GNOMESWORD_H__ */
+#endif				/* __SWORD_H__ */
 /*****  end of file    ******/

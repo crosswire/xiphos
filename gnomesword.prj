@@ -58,12 +58,12 @@ project.config.extra.modules.after=
 
 module.include.name=.
 module.include.type=
-module.include.expanded=0
+module.include.expanded=1
 module.include.files=\
 	src/backend/viewtext.h\
 	src/backend/viewdict.h\
 	src/backend/viewcomm.h\
-	src/backend/verselist_sb.h\
+	src/backend/verselist.h\
 	src/backend/sword.h\
 	src/backend/search.h\
 	src/backend/properties.h\
@@ -116,7 +116,6 @@ module.include.files=\
 	src/main/spell_gui.h\
 	src/main/support.h
 
-
 module.source.name=.
 module.source.type=
 module.source.expanded=1
@@ -124,7 +123,7 @@ module.source.files=\
 	src/backend/viewtext.cpp\
 	src/backend/viewdict.cpp\
 	src/backend/viewcomm.cpp\
-	src/backend/verselist_sb.cpp\
+	src/backend/verselist.cpp\
 	src/backend/sword.cpp\
 	src/backend/search.cpp\
 	src/backend/properties.cpp\
