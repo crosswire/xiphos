@@ -113,7 +113,7 @@ static gboolean bible_in_url;
  * externs
  */
 extern gboolean gsI_isrunning;	/* information dialog */
-
+extern gboolean do_display;
 
 
 /******************************************************************************
@@ -796,6 +796,10 @@ void main_dialogs_shutdown(void)
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
 		}
+		if(t->navbar.key)
+			g_free(t->navbar.key);
+		if(t->navbar.module_name)
+			g_free(t->navbar.module_name);
 		g_free(t->mod_name);
 		g_free(t->ops);
 		g_free(t->key);
@@ -1202,7 +1206,7 @@ void main_dialogs_open(gchar * mod_name)
 	gchar *direction = NULL;
 	gchar *url;
 	GSHTMLEditorControlData *ec;
-	
+	do_display = TRUE;
 	if(!backend->is_module(mod_name))
 		return;
 	type = backend->module_type(mod_name);
@@ -1259,7 +1263,11 @@ void main_dialogs_open(gchar * mod_name)
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
 			be->init_SWORD(1);
 			t->key = g_strdup(settings.currentverse);
-			main_dialog_update_controls(t);
+			t->navbar.is_dialog = TRUE;
+			t->navbar.key = g_strdup(settings.currentverse);
+			t->navbar.module_name = g_strdup(mod_name);
+			main_navbar_fill_book_combo(t->navbar);
+			//main_dialog_update_controls(t);
 		break;
 		case PERCOM_TYPE:
 			t->editor = (GSHTMLEditorControlData *) 
