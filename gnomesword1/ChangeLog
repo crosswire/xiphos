@@ -1,3 +1,9 @@
+2004-01-14  Andy <andyp@users.sf.net>
+
+	* added gnomesword.doap.rdf, the DOAP description for the project
+	  currently used on the website and may gain wider usage in time, 
+	  either way it is useful to have it maintained in CVS
+
 2004-07-14  terry <tbiggs@users.sf.net>
 
 	* fixed broken include in /backend/sword.cpp
