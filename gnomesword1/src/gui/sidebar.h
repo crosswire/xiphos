@@ -52,7 +52,9 @@ gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key);
 GtkWidget *gui_create_sidebar(GtkWidget * paned);
 void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name, 
 						gchar * verse_list);	
-	
+gboolean gui_verselist_button_release_event(GtkWidget * widget,
+						 GdkEventButton * event,
+						 gpointer user_data);	
 
 #ifdef __cplusplus
 }
