@@ -145,7 +145,8 @@ gboolean loadconfig(SETTINGS *s)
 	sprintf(s->devotionalmod, "%s",
 		settingsInfo["Modules"]["Devotional"].c_str());
 	strcpy(s->default_text, settingsInfo["Modules"]["Default Bible Text"].c_str());
-		
+	strcpy(s->BookWindowModule ,settingsInfo["Modules"]["BookWindow"].c_str());
+	
 	/* main notebook page */
 	s->notebook3page =
 	    atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
@@ -285,6 +286,9 @@ gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 		settingsInfo["Modules"]["Default Bible Text"] =
 		    s->default_text;
 
+		settingsInfo["Modules"]["BookWindow"] =
+		    s->BookWindowModule;
+		    
 		settingsInfo["LEXICONS"]["Greek"] = s->lex_greek;
 		settingsInfo["LEXICONS"]["Hebrew"] = s->lex_hebrew;
 	/* which lexicon to open in viewer when storngs numbers are clicked */

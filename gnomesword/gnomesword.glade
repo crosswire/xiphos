@@ -3266,7 +3266,7 @@ Revelation
 		<widget>
 		  <class>GtkTable</class>
 		  <name>table13</name>
-		  <rows>12</rows>
+		  <rows>6</rows>
 		  <columns>2</columns>
 		  <homogeneous>False</homogeneous>
 		  <row_spacing>0</row_spacing>
@@ -3276,32 +3276,6 @@ Revelation
 		    <expand>True</expand>
 		    <fill>True</fill>
 		  </child>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label151</name>
-		    <label>Font Size</label>
-		    <justify>GTK_JUSTIFY_LEFT</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>3</top_attach>
-		      <bottom_attach>4</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
 
 		  <widget>
 		    <class>GtkLabel</class>
@@ -3316,8 +3290,8 @@ Revelation
 		    <child>
 		      <left_attach>0</left_attach>
 		      <right_attach>1</right_attach>
-		      <top_attach>1</top_attach>
-		      <bottom_attach>2</bottom_attach>
+		      <top_attach>0</top_attach>
+		      <bottom_attach>1</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3342,8 +3316,8 @@ Revelation
 		    <child>
 		      <left_attach>0</left_attach>
 		      <right_attach>1</right_attach>
-		      <top_attach>2</top_attach>
-		      <bottom_attach>3</bottom_attach>
+		      <top_attach>1</top_attach>
+		      <bottom_attach>2</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3368,35 +3342,8 @@ Revelation
 		    <child>
 		      <left_attach>0</left_attach>
 		      <right_attach>1</right_attach>
-		      <top_attach>5</top_attach>
-		      <bottom_attach>6</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label150</name>
-		    <width>218</width>
-		    <label>Current Verse Background Color</label>
-		    <justify>GTK_JUSTIFY_LEFT</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>4</top_attach>
-		      <bottom_attach>5</bottom_attach>
+		      <top_attach>2</top_attach>
+		      <bottom_attach>3</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3421,175 +3368,14 @@ Revelation
 		    <child>
 		      <left_attach>0</left_attach>
 		      <right_attach>1</right_attach>
-		      <top_attach>6</top_attach>
-		      <bottom_attach>7</bottom_attach>
+		      <top_attach>3</top_attach>
+		      <bottom_attach>4</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
 		      <yexpand>False</yexpand>
 		      <xshrink>False</xshrink>
 		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label152</name>
-		    <label>Verse Number Font Size</label>
-		    <justify>GTK_JUSTIFY_LEFT</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>7</top_attach>
-		      <bottom_attach>8</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label147</name>
-		    <label>Link Color</label>
-		    <justify>GTK_JUSTIFY_LEFT</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>8</top_attach>
-		      <bottom_attach>9</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label174</name>
-		    <label>Greek Font</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>9</top_attach>
-		      <bottom_attach>10</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label175</name>
-		    <label>Hebrew Font</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>10</top_attach>
-		      <bottom_attach>11</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <name>label176</name>
-		    <label>Unicode Font</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <child>
-		      <left_attach>0</left_attach>
-		      <right_attach>1</right_attach>
-		      <top_attach>11</top_attach>
-		      <bottom_attach>12</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>False</xshrink>
-		      <yshrink>False</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GnomeFontPicker</class>
-		    <name>fpDefaultFont</name>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>font_set</name>
-		      <handler>on_fpDefaultFont_font_set</handler>
-		      <last_modification_time>Thu, 09 Aug 2001 18:27:08 GMT</last_modification_time>
-		    </signal>
-		    <title>Pick a Font</title>
-		    <preview_text>AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</preview_text>
-		    <mode>GNOME_FONT_PICKER_MODE_FONT_INFO</mode>
-		    <show_size>True</show_size>
-		    <use_font>False</use_font>
-		    <use_font_size>14</use_font_size>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>0</top_attach>
-		      <bottom_attach>1</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
 		      <xfill>True</xfill>
 		      <yfill>False</yfill>
 		    </child>
@@ -3610,8 +3396,8 @@ Revelation
 		    <child>
 		      <left_attach>1</left_attach>
 		      <right_attach>2</right_attach>
-		      <top_attach>1</top_attach>
-		      <bottom_attach>2</bottom_attach>
+		      <top_attach>0</top_attach>
+		      <bottom_attach>1</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3638,86 +3424,8 @@ Revelation
 		    <child>
 		      <left_attach>1</left_attach>
 		      <right_attach>2</right_attach>
-		      <top_attach>2</top_attach>
-		      <bottom_attach>3</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkCombo</class>
-		    <name>cmbTextFontSize</name>
-		    <value_in_list>True</value_in_list>
-		    <ok_if_empty>True</ok_if_empty>
-		    <case_sensitive>False</case_sensitive>
-		    <use_arrows>True</use_arrows>
-		    <use_arrows_always>False</use_arrows_always>
-		    <items>-2
--1
-+0
-+1
-+2
-+3
-+4
-+5
-</items>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>3</top_attach>
-		      <bottom_attach>4</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-
-		    <widget>
-		      <class>GtkEntry</class>
-		      <child_name>GtkCombo:entry</child_name>
-		      <name>cmbEntryTextSize</name>
-		      <tooltip>Zero is base font size Go up or down from there</tooltip>
-		      <can_focus>True</can_focus>
-		      <signal>
-			<name>changed</name>
-			<handler>on_cmbEntryTextSize_changed</handler>
-			<last_modification_time>Fri, 27 Jul 2001 15:05:47 GMT</last_modification_time>
-		      </signal>
-		      <editable>True</editable>
-		      <text_visible>True</text_visible>
-		      <text_max_length>0</text_max_length>
-		      <text>+0</text>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GnomeColorPicker</class>
-		    <name>gcpCurrentverseBG</name>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>color_set</name>
-		      <handler>on_gcpCurrentverseBG_color_set</handler>
-		      <last_modification_time>Fri, 27 Jul 2001 14:52:35 GMT</last_modification_time>
-		    </signal>
-		    <dither>True</dither>
-		    <use_alpha>False</use_alpha>
-		    <title>Pick a color - CurrentVerse BG</title>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>4</top_attach>
-		      <bottom_attach>5</bottom_attach>
+		      <top_attach>1</top_attach>
+		      <bottom_attach>2</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3744,8 +3452,8 @@ Revelation
 		    <child>
 		      <left_attach>1</left_attach>
 		      <right_attach>2</right_attach>
-		      <top_attach>5</top_attach>
-		      <bottom_attach>6</bottom_attach>
+		      <top_attach>2</top_attach>
+		      <bottom_attach>3</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3773,8 +3481,8 @@ Revelation
 		    <child>
 		      <left_attach>1</left_attach>
 		      <right_attach>2</right_attach>
-		      <top_attach>6</top_attach>
-		      <bottom_attach>7</bottom_attach>
+		      <top_attach>3</top_attach>
+		      <bottom_attach>4</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
@@ -3787,122 +3495,26 @@ Revelation
 		  </widget>
 
 		  <widget>
-		    <class>GnomeColorPicker</class>
-		    <name>gcpTextLinks</name>
-		    <tooltip>Strongs Numbers &amp; Morph Tags</tooltip>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>color_set</name>
-		      <handler>on_gcpTextLinks_color_set</handler>
-		      <last_modification_time>Fri, 27 Jul 2001 14:56:18 GMT</last_modification_time>
-		    </signal>
-		    <dither>True</dither>
-		    <use_alpha>False</use_alpha>
-		    <title>Pick a color</title>
+		    <class>GtkLabel</class>
+		    <name>label152</name>
+		    <label>Verse Number Font Size</label>
+		    <justify>GTK_JUSTIFY_LEFT</justify>
+		    <wrap>False</wrap>
+		    <xalign>0</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
 		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>8</top_attach>
-		      <bottom_attach>9</bottom_attach>
+		      <left_attach>0</left_attach>
+		      <right_attach>1</right_attach>
+		      <top_attach>5</top_attach>
+		      <bottom_attach>6</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
 		      <xexpand>False</xexpand>
 		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GnomeFontPicker</class>
-		    <name>fpGreekFont</name>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>font_set</name>
-		      <handler>on_fpGreekFont_font_set</handler>
-		      <last_modification_time>Thu, 09 Aug 2001 18:28:26 GMT</last_modification_time>
-		    </signal>
-		    <title>Pick a Font</title>
-		    <preview_text>AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</preview_text>
-		    <mode>GNOME_FONT_PICKER_MODE_FONT_INFO</mode>
-		    <show_size>True</show_size>
-		    <use_font>False</use_font>
-		    <use_font_size>14</use_font_size>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>9</top_attach>
-		      <bottom_attach>10</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GnomeFontPicker</class>
-		    <name>fpHebrewFont</name>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>font_set</name>
-		      <handler>on_fpHebrewFont_font_set</handler>
-		      <last_modification_time>Thu, 09 Aug 2001 18:29:07 GMT</last_modification_time>
-		    </signal>
-		    <title>Pick a Font</title>
-		    <preview_text>AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</preview_text>
-		    <mode>GNOME_FONT_PICKER_MODE_FONT_INFO</mode>
-		    <show_size>True</show_size>
-		    <use_font>False</use_font>
-		    <use_font_size>14</use_font_size>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>10</top_attach>
-		      <bottom_attach>11</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
-		      <xfill>True</xfill>
-		      <yfill>False</yfill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GnomeFontPicker</class>
-		    <name>fpUnicodeFont</name>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>font_set</name>
-		      <handler>on_fpUnicodeFont_font_set</handler>
-		      <last_modification_time>Thu, 09 Aug 2001 18:29:49 GMT</last_modification_time>
-		    </signal>
-		    <title>Pick a Font</title>
-		    <preview_text>AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</preview_text>
-		    <mode>GNOME_FONT_PICKER_MODE_FONT_INFO</mode>
-		    <show_size>True</show_size>
-		    <use_font>False</use_font>
-		    <use_font_size>14</use_font_size>
-		    <child>
-		      <left_attach>1</left_attach>
-		      <right_attach>2</right_attach>
-		      <top_attach>11</top_attach>
-		      <bottom_attach>12</bottom_attach>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
-		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
+		      <xshrink>False</xshrink>
+		      <yshrink>False</yshrink>
 		      <xfill>True</xfill>
 		      <yfill>False</yfill>
 		    </child>
@@ -3928,14 +3540,14 @@ Revelation
 		    <child>
 		      <left_attach>1</left_attach>
 		      <right_attach>2</right_attach>
-		      <top_attach>7</top_attach>
-		      <bottom_attach>8</bottom_attach>
+		      <top_attach>5</top_attach>
+		      <bottom_attach>6</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
-		      <xexpand>False</xexpand>
+		      <xexpand>True</xexpand>
 		      <yexpand>False</yexpand>
-		      <xshrink>True</xshrink>
-		      <yshrink>True</yshrink>
+		      <xshrink>False</xshrink>
+		      <yshrink>False</yshrink>
 		      <xfill>True</xfill>
 		      <yfill>False</yfill>
 		    </child>
@@ -3960,9 +3572,9 @@ Revelation
 
 		  <widget>
 		    <class>GtkLabel</class>
-		    <name>label173</name>
-		    <label>Default Font</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <name>label147</name>
+		    <label>Link Color</label>
+		    <justify>GTK_JUSTIFY_LEFT</justify>
 		    <wrap>False</wrap>
 		    <xalign>0</xalign>
 		    <yalign>0.5</yalign>
@@ -3971,11 +3583,40 @@ Revelation
 		    <child>
 		      <left_attach>0</left_attach>
 		      <right_attach>1</right_attach>
-		      <top_attach>0</top_attach>
-		      <bottom_attach>1</bottom_attach>
+		      <top_attach>4</top_attach>
+		      <bottom_attach>5</bottom_attach>
 		      <xpad>0</xpad>
 		      <ypad>0</ypad>
-		      <xexpand>True</xexpand>
+		      <xexpand>False</xexpand>
+		      <yexpand>False</yexpand>
+		      <xshrink>False</xshrink>
+		      <yshrink>False</yshrink>
+		      <xfill>True</xfill>
+		      <yfill>False</yfill>
+		    </child>
+		  </widget>
+
+		  <widget>
+		    <class>GnomeColorPicker</class>
+		    <name>gcpTextLinks</name>
+		    <tooltip>Strongs Numbers &amp; Morph Tags</tooltip>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>color_set</name>
+		      <handler>on_gcpTextLinks_color_set</handler>
+		      <last_modification_time>Fri, 27 Jul 2001 14:56:18 GMT</last_modification_time>
+		    </signal>
+		    <dither>True</dither>
+		    <use_alpha>False</use_alpha>
+		    <title>Pick a color</title>
+		    <child>
+		      <left_attach>1</left_attach>
+		      <right_attach>2</right_attach>
+		      <top_attach>4</top_attach>
+		      <bottom_attach>5</bottom_attach>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		      <xexpand>False</xexpand>
 		      <yexpand>False</yexpand>
 		      <xshrink>False</xshrink>
 		      <yshrink>False</yshrink>
@@ -10744,6 +10385,294 @@ Revelation
 	</signal>
 	<label>item</label>
 	<right_justify>False</right_justify>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkDialog</class>
+  <name>dialog_mod_font</name>
+  <signal>
+    <name>destroy</name>
+    <handler>dialog_destroy</handler>
+    <last_modification_time>Thu, 14 Nov 2002 20:24:10 GMT</last_modification_time>
+  </signal>
+  <title>Set Module Font - GnomeSWORD</title>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>315</default_width>
+  <default_height>169</default_height>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>Dialog:vbox</child_name>
+    <name>dialog-vbox21</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <child_name>Dialog:action_area</child_name>
+      <name>dialog-action_area21</name>
+      <border_width>10</border_width>
+      <homogeneous>True</homogeneous>
+      <spacing>5</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkHButtonBox</class>
+	<name>hbuttonbox1</name>
+	<layout_style>GTK_BUTTONBOX_EDGE</layout_style>
+	<spacing>30</spacing>
+	<child_min_width>85</child_min_width>
+	<child_min_height>27</child_min_height>
+	<child_ipad_x>7</child_ipad_x>
+	<child_ipad_y>0</child_ipad_y>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>button_ok</name>
+	  <sensitive>False</sensitive>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>ok_clicked</handler>
+	    <last_modification_time>Thu, 14 Nov 2002 21:32:00 GMT</last_modification_time>
+	  </signal>
+	  <stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>button_cancel</name>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>cancel_clicked</handler>
+	    <last_modification_time>Thu, 14 Nov 2002 21:31:48 GMT</last_modification_time>
+	  </signal>
+	  <stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame44</name>
+      <height>53</height>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox56</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox67</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap6</name>
+	    <filename>gnome-fontsel.xpm</filename>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVBox</class>
+	    <name>vbox57</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label206</name>
+	      <label>Change font for</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label_mod</name>
+	      <label>Module</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label_current_font</name>
+	      <label>Current font: </label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox_picker</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomeFontPicker</class>
+	    <name>fontpicker</name>
+	    <width>264</width>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>font_set</name>
+	      <handler>font_set</handler>
+	      <last_modification_time>Thu, 14 Nov 2002 20:29:23 GMT</last_modification_time>
+	    </signal>
+	    <title>Pick a Font</title>
+	    <preview_text>AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</preview_text>
+	    <mode>GNOME_FONT_PICKER_MODE_FONT_INFO</mode>
+	    <show_size>False</show_size>
+	    <use_font>True</use_font>
+	    <use_font_size>14</use_font_size>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo_size</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items>+5
++4
++3
++2
++1
++0
+-1
+-2
+-3
+</items>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>combo-entry_size</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>size_changed</handler>
+		<last_modification_time>Sat, 16 Nov 2002 16:28:01 GMT</last_modification_time>
+	      </signal>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text>+1</text>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton_no_font</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>no_font_toggled</handler>
+	    <last_modification_time>Thu, 14 Nov 2002 20:34:19 GMT</last_modification_time>
+	  </signal>
+	  <label>Do not set a font for this module - use default font</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
       </widget>
     </widget>
   </widget>
