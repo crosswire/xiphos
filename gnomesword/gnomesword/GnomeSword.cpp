@@ -127,13 +127,17 @@ bool usepersonalcomments = false; //-- do we setup for personal comments - defau
 //gboolean saveChanges = true; //-- save changes to personal comments
 gboolean autoSave = true; //-- we want to auto save changes to personal comments
 //gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
+gboolean havedict = false; //-- let us know if we have at least one lex-dict module
+gboolean havecomm = false; //-- let us know if we have at least one commentary module
 extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
 extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
 gint historyitems = 0;
 gint answer;
+gint dictpages,
+	 compages;
 //----------------------------------------------------------------------------------------------
 void
-initSword(GtkWidget *mainform,  //-- app's main form
+initSword(GtkWidget *mainform,  //-- apps main form
 				GtkWidget *menu1,  //-- main text window's popup menu
 				GtkWidget *menu2,  //-- 1st inetrlinear window's popup menu
 				GtkWidget *menu3,  //-- 2nd inetrlinear window's popup menu
@@ -238,7 +242,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
 	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
 	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
-	
+	compages = 0;
+	dictpages = 0;
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++)
 	{
 
@@ -258,6 +263,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 		}
 		else if (!strcmp((*it).second->Type(), "Commentaries")) //-- set commentary modules and add to notebook
 		{
+			havecomm = true; //-- we have at least one commentay module
+			++compages; //-- how many pages do we have
 			curcomMod = (*it).second;
 			notebook = lookup_widget(mainform,"notebook1");
 			empty_notebook_page = gtk_vbox_new (FALSE, 0);
@@ -275,6 +282,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 		}
 		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) //-- set dictionary modules and add to notebook
 		{	
+			havedict = true; //-- we have at least one lex / dict module
+			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
 			notebook = lookup_widget(mainform,"notebook4");
 			additemtognomemenu(MainFrm,curdictMod->Name(), aboutrememberlastitem3 , (GtkMenuCallback)on_kjv1_activate );
@@ -360,32 +369,47 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	}
 
 	//----------------------------------------------------------------------------- set dict module to open notebook page
-	GtkLabel *label1;		
-	notebook = lookup_widget(mainform,"notebook4");
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),settings->notebook2page );	
-	label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),settings->notebook2page));
-	it = mainMgr->Modules.find((char *)label1->label); 	
-	if (it != mainMgr->Modules.end()) 
-	{
-		curdictMod = (*it).second;
-		curdictMod->SetKey("GRACE");
-		curdictMod->Display();	
-		FillDictKeys(curdictMod->Name()); 	
+	GtkLabel *label1;
+	if(havedict)
+	{		
+		gint pagenum = 0;
+		
+		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page;
+		notebook = lookup_widget(mainform,"notebook4");
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );	
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
+						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
+		it = mainMgr->Modules.find((char *)label1->label); 	
+		if (it != mainMgr->Modules.end()) 
+		{
+			curdictMod = (*it).second;
+			curdictMod->SetKey("GRACE");
+			curdictMod->Display();	
+			FillDictKeys(curdictMod->Name()); 	
+		}
 	}
+	else gtk_widget_hide(lookup_widget(MainFrm,"hbox8"));
 	//---------------------------------------------------------------------------- set com module to open notebook page	
-	notebook = lookup_widget(mainform,"notebook1");	
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),settings->notebook1page );
-	label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),settings->notebook1page));
-	it = mainMgr->Modules.find((char *)label1->label); 
-	if (it != mainMgr->Modules.end()) 
+	if(havecomm)
 	{
-		curcomMod = (*it).second;	
-	}	
-	gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
+		gint pagenum = 0;
+		
+		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
+		notebook = lookup_widget(mainform,"notebook1");	
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
+						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
+		it = mainMgr->Modules.find((char *)label1->label); 
+		if (it != mainMgr->Modules.end()) 
+		{
+			curcomMod = (*it).second;	
+		}	
+		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                       NULL);
+    }
+    else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")) , 0);
+                                    // gtk_widget_hide(lookup_widget(MainFrm,"notebook1"));
 	//---------------------------------------------------------------- set main notebook page
 	notebook = lookup_widget(mainform,"notebook3");	
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),settings->notebook3page );
@@ -460,11 +484,11 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
 		
-#ifdef  USE_GNOMEPRINT                   //-- don't show print button if printing not enabled
+#ifdef  USE_GNOMEPRINT                   //-- do not show print button if printing not enabled
   gtk_widget_show(lookup_widget(MainFrm,"btnPrint"));
 #endif /* USE_GNOMEPRINT */
 
-#ifdef USE_ASPELL                         //-- don't show spell buttons if spellcheck not enabled
+#ifdef USE_ASPELL                         //-- do not show spell buttons if spellcheck not enabled
   gtk_widget_show (lookup_widget(MainFrm,"btnSpell"));
   gtk_widget_show (lookup_widget(MainFrm,"btnSpellNotes"));
 #endif /* USE_ASPELL */
@@ -636,7 +660,7 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 		mainMgr->setGlobalOption("Strong's Numbers","Off"); //-- keep strongs numbers in sync with menu
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(mainform,"btnStrongs")), settings->strongs);	//-- set strongs toogle button
 	
-  FillDictKeys(curdictMod->Name()); //-- fill the dict key clist
+  if(havedict) FillDictKeys(curdictMod->Name()); //-- fill the dict key clist
   changeVerse(settings->currentverse); //--------------------------------------- set Text - apply changes
 }
 

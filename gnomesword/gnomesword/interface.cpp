@@ -146,14 +146,6 @@ static GnomeUIInfo edit1_menu_uiinfo[] =
     GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
-  GNOMEUIINFO_SEPARATOR,
-  {
-    GNOME_APP_UI_ITEM, "Verse List",
-    "Open Verse List ",
-    on_verse_list1_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX,
-    0, 0, NULL
-  },
   GNOMEUIINFO_END
 };
 
@@ -493,16 +485,6 @@ create_mainwindow (void)
   gtk_widget_ref (edit1_menu_uiinfo[2].widget);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "search1",
                             edit1_menu_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (edit1_menu_uiinfo[3].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator14",
-                            edit1_menu_uiinfo[3].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (edit1_menu_uiinfo[4].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "verse_list1",
-                            edit1_menu_uiinfo[4].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (menubar1_uiinfo[2].widget);
@@ -1480,7 +1462,6 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
-  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
 
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
@@ -2700,33 +2681,13 @@ create_dlgSettings (void)
 {
   GtkWidget *dlgSettings;
   GtkWidget *dialog_vbox9;
+  GtkWidget *hbox22;
+  GtkWidget *pixmap5;
   GtkWidget *notebook7;
-  GtkWidget *table4;
-  GtkWidget *cpfgMainwindow;
-  GtkWidget *fpMainwindow;
-  GtkWidget *label79;
-  GtkWidget *fpMainwindowitalic;
-  GtkWidget *label84;
-  GtkWidget *entry2;
-  GtkWidget *entry3;
+  GtkWidget *hbox23;
+  GtkWidget *label103;
   GtkWidget *cpfgCurrentverse;
-  GtkWidget *fbMainwindowbold;
-  GtkWidget *entry5;
-  GtkWidget *label80;
-  GtkWidget *label78;
   GtkWidget *label98;
-  GtkWidget *empty_notebook_page;
-  GtkWidget *label99;
-  GtkWidget *table7;
-  GtkWidget *label88;
-  GtkWidget *entryfontSP;
-  GtkWidget *fpStudypad;
-  GtkWidget *label89;
-  GtkWidget *entryfontSPPrinter;
-  GtkWidget *fpSPPrinter;
-  GtkWidget *label100;
-  GtkWidget *paperselector1;
-  GtkWidget *label102;
   GtkWidget *dialog_action_area9;
   GtkWidget *btnPropertyboxOK;
   GtkWidget *btnPropertyboxApply;
@@ -2740,131 +2701,49 @@ create_dlgSettings (void)
   gtk_object_set_data (GTK_OBJECT (dlgSettings), "dialog_vbox9", dialog_vbox9);
   gtk_widget_show (dialog_vbox9);
 
+  hbox22 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox22);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "hbox22", hbox22,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox22);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox9), hbox22, TRUE, TRUE, 0);
+
+  pixmap5 = create_pixmap (dlgSettings, "gnomesword/GnomeSword.xpm", FALSE);
+  gtk_widget_ref (pixmap5);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "pixmap5", pixmap5,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (pixmap5);
+  gtk_box_pack_start (GTK_BOX (hbox22), pixmap5, TRUE, TRUE, 0);
+
   notebook7 = gtk_notebook_new ();
   gtk_widget_ref (notebook7);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "notebook7", notebook7,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (notebook7);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox9), notebook7, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox22), notebook7, TRUE, TRUE, 0);
 
-  table4 = gtk_table_new (4, 4, FALSE);
-  gtk_widget_ref (table4);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "table4", table4,
+  hbox23 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox23);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "hbox23", hbox23,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (table4);
-  gtk_container_add (GTK_CONTAINER (notebook7), table4);
+  gtk_widget_show (hbox23);
+  gtk_container_add (GTK_CONTAINER (notebook7), hbox23);
 
-  cpfgMainwindow = gnome_color_picker_new ();
-  gtk_widget_ref (cpfgMainwindow);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cpfgMainwindow", cpfgMainwindow,
+  label103 = gtk_label_new ("Current Verse Color");
+  gtk_widget_ref (label103);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label103", label103,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cpfgMainwindow);
-  gtk_table_attach (GTK_TABLE (table4), cpfgMainwindow, 3, 4, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  fpMainwindow = gnome_font_picker_new ();
-  gtk_widget_ref (fpMainwindow);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "fpMainwindow", fpMainwindow,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (fpMainwindow);
-  gtk_table_attach (GTK_TABLE (table4), fpMainwindow, 2, 3, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label79 = gtk_label_new ("Standard font");
-  gtk_widget_ref (label79);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label79", label79,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label79);
-  gtk_table_attach (GTK_TABLE (table4), label79, 0, 1, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label79), GTK_JUSTIFY_LEFT);
-
-  fpMainwindowitalic = gnome_font_picker_new ();
-  gtk_widget_ref (fpMainwindowitalic);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "fpMainwindowitalic", fpMainwindowitalic,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (fpMainwindowitalic);
-  gtk_table_attach (GTK_TABLE (table4), fpMainwindowitalic, 2, 3, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label84 = gtk_label_new ("Italics font");
-  gtk_widget_ref (label84);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label84", label84,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label84);
-  gtk_table_attach (GTK_TABLE (table4), label84, 0, 1, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label84), GTK_JUSTIFY_LEFT);
-
-  entry2 = gtk_entry_new ();
-  gtk_widget_ref (entry2);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entry2", entry2,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entry2);
-  gtk_table_attach (GTK_TABLE (table4), entry2, 1, 2, 0, 1,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entry3 = gtk_entry_new ();
-  gtk_widget_ref (entry3);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entry3", entry3,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entry3);
-  gtk_table_attach (GTK_TABLE (table4), entry3, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
+  gtk_widget_show (label103);
+  gtk_box_pack_start (GTK_BOX (hbox23), label103, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label103, 216, -2);
+  gtk_label_set_justify (GTK_LABEL (label103), GTK_JUSTIFY_LEFT);
 
   cpfgCurrentverse = gnome_color_picker_new ();
   gtk_widget_ref (cpfgCurrentverse);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cpfgCurrentverse", cpfgCurrentverse,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (cpfgCurrentverse);
-  gtk_table_attach (GTK_TABLE (table4), cpfgCurrentverse, 3, 4, 3, 4,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  fbMainwindowbold = gnome_font_picker_new ();
-  gtk_widget_ref (fbMainwindowbold);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "fbMainwindowbold", fbMainwindowbold,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (fbMainwindowbold);
-  gtk_table_attach (GTK_TABLE (table4), fbMainwindowbold, 2, 3, 2, 3,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entry5 = gtk_entry_new ();
-  gtk_widget_ref (entry5);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entry5", entry5,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entry5);
-  gtk_table_attach (GTK_TABLE (table4), entry5, 1, 2, 2, 3,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label80 = gtk_label_new ("Bold font");
-  gtk_widget_ref (label80);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label80", label80,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label80);
-  gtk_table_attach (GTK_TABLE (table4), label80, 0, 1, 2, 3,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label80), GTK_JUSTIFY_LEFT);
-
-  label78 = gtk_label_new ("Current verse");
-  gtk_widget_ref (label78);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label78", label78,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label78);
-  gtk_table_attach (GTK_TABLE (table4), label78, 0, 1, 3, 4,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label78), GTK_JUSTIFY_LEFT);
+  gtk_box_pack_start (GTK_BOX (hbox23), cpfgCurrentverse, TRUE, FALSE, 0);
 
   label98 = gtk_label_new ("Main window");
   gtk_widget_ref (label98);
@@ -2872,99 +2751,6 @@ create_dlgSettings (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label98);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 0), label98);
-
-  empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (empty_notebook_page);
-  gtk_container_add (GTK_CONTAINER (notebook7), empty_notebook_page);
-
-  label99 = gtk_label_new ("Interlinear");
-  gtk_widget_ref (label99);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label99", label99,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label99);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 1), label99);
-
-  table7 = gtk_table_new (3, 3, FALSE);
-  gtk_widget_ref (table7);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "table7", table7,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (table7);
-  gtk_container_add (GTK_CONTAINER (notebook7), table7);
-
-  label88 = gtk_label_new ("Screen Font ");
-  gtk_widget_ref (label88);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label88", label88,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label88);
-  gtk_table_attach (GTK_TABLE (table7), label88, 0, 1, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entryfontSP = gtk_entry_new ();
-  gtk_widget_ref (entryfontSP);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entryfontSP", entryfontSP,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entryfontSP);
-  gtk_table_attach (GTK_TABLE (table7), entryfontSP, 1, 2, 0, 1,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  fpStudypad = gnome_font_picker_new ();
-  gtk_widget_ref (fpStudypad);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "fpStudypad", fpStudypad,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (fpStudypad);
-  gtk_table_attach (GTK_TABLE (table7), fpStudypad, 2, 3, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label89 = gtk_label_new ("Printer Font");
-  gtk_widget_ref (label89);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label89", label89,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label89);
-  gtk_table_attach (GTK_TABLE (table7), label89, 0, 1, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entryfontSPPrinter = gtk_entry_new ();
-  gtk_widget_ref (entryfontSPPrinter);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entryfontSPPrinter", entryfontSPPrinter,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entryfontSPPrinter);
-  gtk_table_attach (GTK_TABLE (table7), entryfontSPPrinter, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  fpSPPrinter = gnome_font_picker_new ();
-  gtk_widget_ref (fpSPPrinter);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "fpSPPrinter", fpSPPrinter,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (fpSPPrinter);
-  gtk_table_attach (GTK_TABLE (table7), fpSPPrinter, 2, 3, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label100 = gtk_label_new ("StudyPad");
-  gtk_widget_ref (label100);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label100", label100,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label100);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 2), label100);
-
-  paperselector1 = gnome_paper_selector_new ();
-  gtk_widget_ref (paperselector1);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "paperselector1", paperselector1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (paperselector1);
-  gtk_container_add (GTK_CONTAINER (notebook7), paperselector1);
-
-  label102 = gtk_label_new ("Paper");
-  gtk_widget_ref (label102);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label102", label102,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label102);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 3), label102);
 
   dialog_action_area9 = GNOME_DIALOG (dlgSettings)->action_area;
   gtk_object_set_data (GTK_OBJECT (dlgSettings), "dialog_action_area9", dialog_action_area9);
@@ -2998,26 +2784,8 @@ create_dlgSettings (void)
   gtk_widget_show (btnPropertyboxCancel);
   GTK_WIDGET_SET_FLAGS (btnPropertyboxCancel, GTK_CAN_DEFAULT);
 
-  gtk_signal_connect (GTK_OBJECT (cpfgMainwindow), "color_set",
-                      GTK_SIGNAL_FUNC (on_cpfgMainwindow_color_set),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (fpMainwindow), "font_set",
-                      GTK_SIGNAL_FUNC (on_fpMainwindow_font_set),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (fpMainwindowitalic), "font_set",
-                      GTK_SIGNAL_FUNC (on_fpMainwindowitalic_font_set),
-                      NULL);
   gtk_signal_connect (GTK_OBJECT (cpfgCurrentverse), "color_set",
                       GTK_SIGNAL_FUNC (on_cpfgCurrentverse_color_set),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (fbMainwindowbold), "font_set",
-                      GTK_SIGNAL_FUNC (on_fbMainwindowbold_font_set),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (fpStudypad), "font_set",
-                      GTK_SIGNAL_FUNC (on_fpStudypad_font_set),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (fpSPPrinter), "font_set",
-                      GTK_SIGNAL_FUNC (on_fpSPPrinter_font_set),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnPropertyboxOK), "clicked",
                       GTK_SIGNAL_FUNC (on_btnPropertyboxOK_clicked),
