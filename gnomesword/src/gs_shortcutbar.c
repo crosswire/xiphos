@@ -37,7 +37,7 @@ extern gchar *shortcut_types[];
 extern GtkWidget *shortcut_bar;
 extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
-extern BM_TREE bmtree;
+//extern BM_TREE bmtree;
 extern GS_APP gs;
 extern gboolean havedict; /* let us know if we have at least one lex-dict module */
 extern gboolean havecomm; /* let us know if we have at least one commentary module */
@@ -129,6 +129,8 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	if(!strcmp(type,"history:")) {
 		changeVerseSWORD(ref);
 	}
+	g_free(type);
+	g_free(ref);
 }
 
 void setupSB(GList *textlist, 
@@ -202,7 +204,7 @@ void setupSB(GList *textlist,
   	gtk_clist_set_column_width (GTK_CLIST (ctree), 1, 40);
   	//gtk_clist_column_titles_show (GTK_CLIST (ctree1));
 	gs.ctree_widget = ctree;
-	
+	settings->ctree_widget = lookup_widget(MainFrm,"ctree");
 	button = gtk_button_new_with_label("Bookmarks");
 	gtk_widget_ref (button);
 	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "button", button,

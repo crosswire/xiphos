@@ -24,8 +24,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "gs_sword.h"
+//#include "gs_sword.h"
 	
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
@@ -37,12 +36,8 @@ void loadbookmarks_programstart(void);
 void loadbookmarks_afterSeparator(void);
 void loadoptionarray(void);
 void savebookmark(gchar * item);
-//void savebookmarks(void);
 void saveoptions(void);
 void createFiles(void);
-void writesettings(SETTINGS settings);
-//SETTINGS readsettings(void);
-//SETTINGS createsettings(void);
 void loadStudyPadFile(gchar * filename);
 void savelist(gchar * filename, GtkWidget * list);
 GtkWidget *create_fileselection1(void);
