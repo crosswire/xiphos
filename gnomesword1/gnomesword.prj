@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug
+project.configure.options=--prefix=/usr --enable-debug --enable-sword_cvs
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -70,7 +70,6 @@ module.include.name=.
 module.include.type=
 module.include.files=\
 	src/backend/sword.h\
-	src/backend/sword_defs.h\
 	src/gui/about_gnomesword.h\
 	src/gui/about_modules.h\
 	src/gui/about_sword.h\
@@ -123,7 +122,6 @@ module.include.files=\
 	src/main/settings.h\
 	src/main/spell.h\
 	src/main/sword.h\
-	src/backend/mgr.hh\
 	src/backend/config.hh\
 	src/main/configs.h\
 	src/main/xml.h\
@@ -155,7 +153,6 @@ module.source.name=.
 module.source.type=
 module.source.files=\
 	src/backend/config.cc\
-	src/backend/mgr.cc\
 	src/backend/sword.cpp\
 	src/main/bibletext.c\
 	src/main/dictlex.c\

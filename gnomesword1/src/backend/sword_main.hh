@@ -73,6 +73,7 @@ public:
 	GList *fill_Bible_books(int testament);
 	GList *get_module_options(void);
 	int has_global_option(char *mod_name, char *option);
+	void set_cipher_key(char * mod_name, char * key);
 	char *get_config_entry(char * module_name, char * entry);
 	int is_Bible_key(const char * list, char * current_key);
 	char *get_render_text(const char *module_name, const char *key);

@@ -47,7 +47,6 @@
 #include "main/display.hh"
 
 #include "backend/sword.h"
-#include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
 
 using namespace sword;
@@ -158,10 +157,10 @@ static char *get_sword_locale(void)
 void backend_init(void)
 {	
 	char *sword_locale = NULL;
-	sw.version = get_sword_version();
+	const char *sword_version = get_sword_version();
 	ModMap::iterator it; 
 	g_print("gnomesword-%s\n", VERSION);
-	g_print("sword-%s\n", sw.version);
+	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
 	g_print("%s %s\n", _("System locale is"),
 #ifdef USE_SWORD_CVS
@@ -175,12 +174,12 @@ void backend_init(void)
 	free((char*)sword_locale);
 	//backend_init_language_map();
 	/* create sword mgrs */
-	backend_init_managers();
+//	backend_init_managers();
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
 //	backend_setup_treekey();
-	backend_setup_display_mgr();
+//	backend_setup_display_mgr();
 }
 
 
@@ -204,12 +203,12 @@ void backend_shutdown(int save_properties)
 {
 //	backend_shutdown_treekey();
 	//main_delete_displays();
-	if(sw.entryDisplay)
+/*	if(sw.entryDisplay)
 		delete sw.entryDisplay;
 	if(sw.dictDisplay)
-		delete sw.dictDisplay;
+		delete sw.dictDisplay;*/
 	/* delete Sword managers */
-	backend_delete_managers();
+//	backend_delete_managers();
 	delete backend;
 	g_print("%s\n", _("SWORD is shutdown"));
 }

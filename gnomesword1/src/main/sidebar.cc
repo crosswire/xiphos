@@ -43,7 +43,6 @@
 #include "main/url.h"
 
 #include "backend/sword.h"
-#include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
 
 
@@ -83,7 +82,7 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	GList *tmp = NULL;
 	gboolean oddkey = TRUE;
 	gchar buf[256], *utf8str, *colorkey;
-	gchar *first_key = NULL;
+	//gchar *first_key = NULL;
 	gchar *next_verse = NULL;
 	gint i = 0;
 	gint count = 0;
@@ -138,8 +137,8 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 		gtk_list_store_set(list_store, &iter, 0,
 					   (const char *) tmp->data, -1);
 		
-		if (i == 0)
-			first_key = g_strdup((const char *) tmp->data);
+		/*if (i == 0)
+			first_key = g_strdup((const char *) tmp->data);*/
 		++i;
 		tmp = g_list_next(tmp);
 	}
