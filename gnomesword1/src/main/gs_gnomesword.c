@@ -34,7 +34,6 @@
 #include "gs_history.h"
 #include "gs_gui_cb.h"
 #include "gs_gbs.h"
-#include "gs_dictlex.h"
 #include "support.h"
 #include "gs_info_box.h"
 #include "gs_html.h"
@@ -53,6 +52,7 @@
 #include "bibletext.h"
 #include "settings.h"
 #include "commentary.h"
+#include "dictlex.h"
  
 /*
  * backend
@@ -63,7 +63,7 @@
 #include "bibletext_.h"
 #include "percomm_.h"
 #include "gbs.h"
-#include "dictlex.h"
+#include "dictlex_.h"
  
  
 /*****************************************************************************
@@ -163,7 +163,7 @@ void init_gnomesword(SETTINGS * s)
 	 *  setup Dict/Lex gui support 
 	 */
 	if(havedict)
-		mod_lists->dictionarymods = gui_setup_dict(s);
+		mod_lists->dictionarymods = setup_dictlex(s);
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
@@ -247,7 +247,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	if(havebook)
 		gui_shutdownGBS();
 	if(havedict)
-		gui_shutdownDL();
+		shutdown_dictlex();
 	if(havecomm)
 		shutdown_commentary();
 	if(havepercomm)
@@ -799,7 +799,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			page_num =
 			    backend_get_module_page(module_name, 
 							DICT_MODS);
-			gui_set_dictionary_page_and_key(page_num, key);
+			set_dictionary_page_and_key(page_num, key);
 		}
 		break;
 	case BOOK_TYPE:

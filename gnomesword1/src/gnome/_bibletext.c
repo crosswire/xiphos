@@ -115,7 +115,7 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 	/*
 	 * set program title to GnomeSWORD + current text module name 
 	 */
-	sprintf(title, "GnomeSWORD - %s", t->mod_description);
+	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_num));
 	gtk_window_set_title(GTK_WINDOW(settings.app), title);
 	/*
 	 *  keep showtabs menu item current 

@@ -24,8 +24,8 @@ libbackend_a_SOURCES =  \
     bookmarks.h \
     commentary_.cpp \
     commentary_.h \
-    dictlex.cpp \
-    dictlex.h \
+    dictlex_.cpp \
+    dictlex_.h \
     display.cpp \
     display.h \
     display_info.cpp \

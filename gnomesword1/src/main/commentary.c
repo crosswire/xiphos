@@ -208,8 +208,6 @@ GList* setup_commentary(SETTINGS * s)
 		modname = (gchar *) tmp->data;
 		c = g_new(COMM_DATA, 1);
 		c->modName = modname;
-		c->modDescription =
-		    backend_get_module_description(modname);
 		c->modnum = count;
 		c->searchstring = NULL;
 		c->key[0] = '\0';

@@ -15,16 +15,16 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     bibletext.c \
     bibletext.h \
-    gs_bookmarks.c \
-    gs_bookmarks.h \
     commentary.c \
     commentary.h \
+    dictlex.c \
+    dictlex.h \
+    gs_bookmarks.c \
+    gs_bookmarks.h \
     gs_detach_int.c \
     gs_detach_int.h \
     gs_detach_sb.c \
     gs_detach_sb.h \
-    gs_dictlex.c \
-    gs_dictlex.h \
     gs_editor.c \
     gs_editor.h \
     gs_editor_replace.c \

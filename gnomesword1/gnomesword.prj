@@ -73,7 +73,7 @@ module.include.files=\
 	src/backend/bibletext_.h\
 	src/backend/interlinear.h\
 	src/backend/display.h\
-	src/backend/dictlex.h\
+	src/backend/dictlex_.h\
 	src/backend/commentary_.h\
 	src/backend/bookmarks.h\
 	src/backend/display_info.h\
@@ -83,6 +83,7 @@ module.include.files=\
 	src/gnome/about_sword.h\
 	src/gnome/_bibletext.h\
 	src/gnome/_commentary.h\
+	src/gnome/_dictlex.h\
 	src/gnome/_editor.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
@@ -99,7 +100,7 @@ module.include.files=\
 	src/main/commentary.h\
 	src/main/gs_detach_int.h\
 	src/main/gs_detach_sb.h\
-	src/main/gs_dictlex.h\
+	src/main/dictlex.h\
 	src/main/gs_editor.h\
 	src/main/gs_editor_replace.h\
 	src/main/gs_editor_search.h\
@@ -147,7 +148,7 @@ module.source.files=\
 	src/backend/bibletext_.cpp\
 	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
-	src/backend/dictlex.cpp\
+	src/backend/dictlex_.cpp\
 	src/backend/commentary_.cpp\
 	src/backend/bookmarks.cpp\
 	src/backend/display_info.cpp\
@@ -157,6 +158,7 @@ module.source.files=\
 	src/gnome/about_sword.c\
 	src/gnome/_bibletext.c\
 	src/gnome/_commentary.c\
+	src/gnome/_dictlex.c\
 	src/gnome/_editor.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
@@ -173,7 +175,7 @@ module.source.files=\
 	src/main/commentary.c\
 	src/main/gs_detach_int.c\
 	src/main/gs_detach_sb.c\
-	src/main/gs_dictlex.c\
+	src/main/dictlex.c\
 	src/main/gs_editor.c\
 	src/main/gs_editor_replace.c\
 	src/main/gs_editor_search.c\

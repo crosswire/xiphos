@@ -26,44 +26,44 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __GS_DICTLEX_H_
-#define __GS_DICTLEX_H_
+#ifndef __DICTLEX_H_
+#define __DICTLEX_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "settings.h"
 
-	typedef struct _DLFindDialog DLFindDialog;
-	struct _DLFindDialog {
-		GnomeDialog *dialog;
-		GtkWidget *htmlwidget;
-		GtkWidget *entry;
-		GtkWidget *backward;
-		GtkWidget *case_sensitive;
-		gboolean regular;
-	};
+typedef struct _DLFindDialog DLFindDialog;
+struct _DLFindDialog {
+	GnomeDialog *dialog;
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+};
 
-	typedef struct _dldata DL_DATA;
-	struct _dldata {
-		GtkWidget *html;
-		GtkWidget *clist;
-		GtkWidget *entry;
-		GtkWidget *showtabs;
-		gchar *modName;
-		gchar *modDescription;
-		gchar *searchstring;
-		gboolean has_key;
-		DLFindDialog *find_dialog;
-	};
-
-
-	GList* gui_setup_dict(SETTINGS * s);
-	void gui_shutdownDL(void);
-	void gui_set_dictionary_page_and_key(gint page_num,
-					     gchar * key);
+typedef struct _dldata DL_DATA;
+struct _dldata {
+	GtkWidget *html;
+	GtkWidget *clist;
+	GtkWidget *entry;
+	GtkWidget *showtabs;
+	gchar *modName;
+	gchar *searchstring;
+	int mod_num;
+	gboolean has_key;
+	DLFindDialog *find_dialog;
+};
+void display_dictionary_page_and_key(gint page_num, gchar * key);
+GList *fill_dictlex_keys(int mod_num, int count);
+GList* setup_dictlex(SETTINGS * s);
+void shutdown_dictlex(void);
+void set_dictionary_page_and_key(gint page_num,
+				     gchar * key);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_DICTLEX_H_ */
+#endif	/* __DICTLEX_H_ */
