@@ -1,9 +1,14 @@
+2001-03-28 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added check for save if studypad file is modified on open and new
+
+
 2001-03-27 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* 0.3pre2
 	* added dialog for viewing commentary modules
-	* fixed delete note bug
 	* added files - gs_viewcomm.c and gs_viewcomm.h
+	* fixed delete note bug
 	
 
 2001-03-20 Terry Biggs <tbiggs@users.sourceforge.net>
