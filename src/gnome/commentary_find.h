@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * viewtext.h - sword support for veiwtext dialog
+ * commentary_find.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,28 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __VIEWTEXT_H__
-#define __VIEWTEXT_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef _COMMENTARY_FIND_H_
+#define _COMMENTARY_FIND_H_
 
 #include <gnome.h>
 
-	void backend_setup_viewtext(GtkWidget * text);
-	void backend_shutdown_viewtext(void);
-	void backend_goto_verse_viewtext(char * newkey);
-	void backend_load_module_viewtext(char * modName);
-	char *backend_get_book_viewtext(void);
-	int backend_get_chapter_viewtext(void);
-	int backend_get_verse_viewtext(void);
-	void backend_set_global_options_viewtext(char * option,
-						 char * onoff);
-	char *backend_get_first_module_viewtext(void);
-	char *backend_get_next_module_viewtext(void);
-	
-#ifdef __cplusplus
-}
-#endif
-#endif				/* __VIEWTEXT_H__ */
+/* main */
+#include "find_dlg_defs.h"
+typedef struct _gs_find_dialog COMMFindDialog;
+/* main */
+#include "commentary.h"	
+
+void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d);
+void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text);
+			
+#endif /* _COMMENTARY_FIND_H_ */

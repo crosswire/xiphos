@@ -1,3 +1,13 @@
+2002-05-10  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed gnome/commentary_find_dialog.* to gnome/commentary_find.*
+	* renamed gnome/gbs_find_dialog.* to gnome/gbs_find.*
+	* added gnome/_bibletext_view.*
+	* renamed main/gs_viewtext_dlg.* to main/bibletext_view.*
+	* renamed backend/viewtext.* to backend/bibletext_view_.*
+	* added main/lists.* to handle lists - module, option and Bible books
+
+
 2002-05-09  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* split gs_setup.* into main/setup.* and gnome/setup_druid.*

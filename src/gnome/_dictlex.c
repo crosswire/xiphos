@@ -31,6 +31,7 @@
 
 /* main */
 #include "settings.h"
+#include "lists.h"
 #include "dictlex.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
@@ -477,7 +478,7 @@ GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods)
 	}
 
 	i = 0;
-	tmp = mod_lists->dict_descriptions;
+	tmp = get_list(DICT_DESC_LIST);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

@@ -36,10 +36,11 @@
 /* frontend */
 #include "_gbs.h"
 #include "cipher_key_dialog.h"
-#include "gbs_find_dialog.h"
+#include "gbs_find.h"
 
 /* main */
 #include "settings.h"
+#include "lists.h"
 #include "gbs.h"
 #include "gs_bookmarks.h"
 #include "gs_gnomesword.h"
@@ -668,7 +669,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * gbs)
                       	gbs);
 	}
 	
-	tmp = mod_lists->dict_descriptions; //backend_get_mod_description_list_SWORD(DICT_MODS);
+	tmp = get_list(DICT_DESC_LIST);//mod_lists->dict_descriptions; //backend_get_mod_description_list_SWORD(DICT_MODS);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -703,7 +704,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * gbs)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = mod_lists->book_descriptions;
+	tmp = get_list(GBS_DESC_LIST);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

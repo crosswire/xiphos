@@ -28,7 +28,7 @@
 /* gnome */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
-#include "commentary_find_dialog.h"
+#include "commentary_find.h"
 
 /* main */
 #include "commentary.h"
@@ -36,6 +36,7 @@
 #include "gs_html.h"
 #include "gs_viewcomm_dlg.h"
 #include "settings.h"
+#include "lists.h"
 
 
 /******************************************************************************
@@ -576,7 +577,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
                       	GTK_SIGNAL_FUNC (on_unlock_key_activate),
                       	c);
 	}
-	tmp = mod_lists->dict_descriptions;
+	tmp = get_list(DICT_DESC_LIST);
 	while (tmp != NULL) {
 		item4 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -597,7 +598,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = mod_lists->comm_descriptions;
+	tmp = get_list(COMM_DESC_LIST);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

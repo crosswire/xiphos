@@ -9,17 +9,18 @@ INCLUDES =  \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src/main/
 
-noinst_LIBRARIES = libbackend.a  
-
+noinst_LIBRARIES = libbackend.a
 
 
 CXXFLAGS =  \
     $(GTK_CFLAGS) \
     $(SWORD_CPPFLAGS)
-    
+
 libbackend_a_SOURCES =  \
     bibletext_.cpp \
     bibletext_.h \
+    bibletext_view_.cpp \
+    bibletext_view_.h \
     bookmarks.cpp \
     bookmarks.h \
     commentary_.cpp \
@@ -47,11 +48,8 @@ libbackend_a_SOURCES =  \
     sword.cpp \
     sword.h \
     verselist.cpp \
-    verselist.h\
+    verselist.h \
     viewcomm.cpp \
-    viewcomm.h\
-    viewdict.cpp\
-    viewdict.h\
-    viewtext.cpp \
-    viewtext.h 
-
+    viewcomm.h \
+    viewdict.cpp \
+    viewdict.h
