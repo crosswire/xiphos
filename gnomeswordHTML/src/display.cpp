@@ -1098,7 +1098,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
 	/* check for personal comments by finding ModDrv=RawFiles */
-	if (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active) {	/* check for edit mode */
+	//if (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active) {	/* check for edit mode */
 		//GtkWidget *statusbar;	/* pointer to comments statusbar */
 		//gint context_id2;	/* statusbar context_id ??? */
 		//sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* add module name and verse to edit note statusbar */
@@ -1116,10 +1116,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 					gtk_text_get_length(
 							    (GTK_TEXT
 							     (gtkText))));
-	} else {		/* not useing personal comment module in edit mode */
-		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL,
-				tmpBuf, -1);	/* show modName and verse ref in text widget */
-	}
+	
 	/* show module text for current key */
 	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
 			&gtkText->style->black, NULL,

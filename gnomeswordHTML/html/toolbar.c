@@ -46,6 +46,7 @@
 #include "utils.h"
 #include "properties.h"
 #include "text.h"
+#include "gs_sword.h" /*  add by tb 2001-04-18  */
 #include "gs_editor.h" /*  add by tb 2001-04-18  */
 #include "tt.xpm"
 
@@ -492,8 +493,6 @@ static GnomeUIInfo editor_toolbar_alignment_group[] = {
 };
 
 static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
-	{ GNOME_APP_UI_TOGGLEITEM, N_("Code"), N_("Toggle code view"),  /*  add by tb 2001-04-18  */
-	  editor_toolbar_code_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PREFERENCES },
 	{ GNOME_APP_UI_TOGGLEITEM, N_("Typewriter"), N_("Toggle typewriter font style"),
 	  editor_toolbar_tt_cb, NULL, NULL, GNOME_APP_PIXMAP_DATA, tt_xpm },
 	{ GNOME_APP_UI_TOGGLEITEM, N_("Bold"), N_("Makes the text bold"),
@@ -504,7 +503,11 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 	  editor_toolbar_underline_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_TEXT_UNDERLINE },
 	{ GNOME_APP_UI_TOGGLEITEM, N_("Strikeout"), N_("Strikes out the text"),
 	  editor_toolbar_strikeout_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT },
-
+	
+	/*
+	{ GNOME_APP_UI_TOGGLEITEM, N_("Code"), N_("Toggle code view"),
+	  editor_toolbar_code_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PREFERENCES},
+	*/
 	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_RADIOLIST (editor_toolbar_alignment_group),
@@ -558,6 +561,10 @@ static GnomeUIInfo editor_toolbar_edit_uiinfo[] = {
 				editor_toolbar_cut_cb, GNOME_STOCK_PIXMAP_CUT),
 	GNOMEUIINFO_ITEM_STOCK (N_("Paste"), N_("Paste from clipboard"),
 				editor_toolbar_paste_cb, GNOME_STOCK_PIXMAP_PASTE),
+	GNOMEUIINFO_SEPARATOR,
+	{ GNOME_APP_UI_TOGGLEITEM, N_("Code"), N_("Toggle code view"),
+	  editor_toolbar_code_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PREFERENCES },
+	
 	GNOMEUIINFO_END
 };
 
@@ -575,7 +582,12 @@ loadFILE(GtkWidget *filesel, GtkHTMLControlData *cd)
 	ssize_t count;
 	gboolean was_editable = TRUE;
 	int fd;		
-	
+	gint context_id2;
+
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(cd->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(cd->statusbar), context_id2);
 	sprintf(filename, "%s",
 		gtk_file_selection_get_filename(GTK_FILE_SELECTION
 						(filesel)));
@@ -607,11 +619,14 @@ loadFILE(GtkWidget *filesel, GtkHTMLControlData *cd)
 	if (count == 0) {
 		gtk_html_end (cd->html, stream, GTK_HTML_STREAM_OK);
 		if (was_editable)
-			gtk_html_set_editable (cd->html, TRUE);		
+			gtk_html_set_editable (cd->html, TRUE);
+		cd->filename = filename;		
+		gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, filename);
 	} else {
 		gtk_html_end (cd->html, stream, GTK_HTML_STREAM_ERROR);
 		if (was_editable)
 			gtk_html_set_editable (cd->html, TRUE);
+		gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, "error loading file");
 	}	
 	gtk_widget_destroy(filesel);	
 }
@@ -706,7 +721,14 @@ save(gchar *file, GtkHTMLControlData *cd)
 {
 	int retval;
 	int fd;
+	gint context_id2;
+	gchar buf[255];
 
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(cd->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(cd->statusbar), context_id2);
+	
 	fd = open (file, O_WRONLY | O_CREAT, 0600);
 
 	if (fd == -1)
@@ -714,8 +736,12 @@ save(gchar *file, GtkHTMLControlData *cd)
 
 	if (!gtk_html_save (cd->html, (GtkHTMLSaveReceiverFn)save_receiver, GINT_TO_POINTER (fd)))
 		retval = -1;
-	else
+	else {
 		retval = 0;
+		sprintf(buf,"%s - saved",filename);
+		cd->filename = filename;
+		gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, buf);
+	}
 
 	close (fd);		
 	return retval;
@@ -851,7 +877,63 @@ editor_toolbar_print_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 	gtk_object_unref (GTK_OBJECT (print_master));
 }
 
+static void
+editor_toolbar_sync_cb (GtkWidget *widget, GtkHTMLControlData *cd)
+{
+	
+}
+GString *gstr;
+static gboolean
+save_note_receiver  (const HTMLEngine *engine,
+		const char *data,
+		unsigned int len,
+		void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+		
+	if(!strncmp(data,"</BODY>",7)) startgrabing = FALSE;
+	if(startgrabing)
+		gstr = g_string_append(gstr,data);
+	if(!strcmp(data,"<BODY>")) startgrabing = TRUE;
+	
+	return TRUE;
+}
 
+static void
+editor_toolbar_savenote_cb (GtkWidget *widget, GtkHTMLControlData *cd)
+{
+	gtk_html_set_editable(cd->html,FALSE); 
+	gstr = g_string_new("");
+	if (!gtk_html_save(cd->html, (GtkHTMLSaveReceiverFn)save_note_receiver, GINT_TO_POINTER (0)))
+		g_warning("file not writen");		
+	else
+		g_warning("file writen");
+	g_warning(gstr->str);
+	savenoteSWORD(gstr->str);
+	g_string_free(gstr,1);
+	gtk_html_set_editable(cd->html,TRUE); 		
+}
+
+static void
+editor_toolbar_deletenote_cb (GtkWidget *widget, GtkHTMLControlData *cd)
+{
+	deletenoteSWORD() ;
+}
+
+
+
+static GnomeUIInfo editor_toolbar_file_note_uiinfo[] = {
+	GNOMEUIINFO_ITEM_STOCK (N_("Sync"), N_("Follow Main Text Window"),
+				editor_toolbar_sync_cb, GNOME_STOCK_PIXMAP_JUMP_TO),
+	GNOMEUIINFO_ITEM_STOCK (N_("Save"), N_("Save Note"),
+				editor_toolbar_savenote_cb, GNOME_STOCK_PIXMAP_ADD),
+	GNOMEUIINFO_ITEM_STOCK (N_("Delete"), N_("Delete Note"),
+				editor_toolbar_deletenote_cb, GNOME_STOCK_PIXMAP_REMOVE),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_STOCK (N_("Print"), N_("Print document"),
+				editor_toolbar_print_cb, GNOME_STOCK_PIXMAP_PRINT),
+	GNOMEUIINFO_END
+};
 
 static GnomeUIInfo editor_toolbar_file_uiinfo[] = {
 	GNOMEUIINFO_ITEM_STOCK (N_("New"), N_("New document"),
@@ -969,7 +1051,10 @@ create_file_toolbar (GtkHTMLControlData *cd)
 	gtk_box_pack_start (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (hbox);
-	gnome_app_fill_toolbar_with_data (GTK_TOOLBAR (cd->toolbar_file), editor_toolbar_file_uiinfo, NULL, cd);
+	if(cd->note_editor)
+		gnome_app_fill_toolbar_with_data (GTK_TOOLBAR (cd->toolbar_file), editor_toolbar_file_note_uiinfo, NULL, cd);
+	else
+		gnome_app_fill_toolbar_with_data (GTK_TOOLBAR (cd->toolbar_file), editor_toolbar_file_uiinfo, NULL, cd);
 	
 	return hbox;
 }

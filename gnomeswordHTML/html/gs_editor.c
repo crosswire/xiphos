@@ -66,9 +66,26 @@
 //#include "editor-control-factory.h"
 //#include "gtkhtmldebug.h"
 
-GtkHTMLControlData *cd;
+
 GtkWidget *statusbar;
 GtkWidget *notebookEDITOR;
+extern gchar filename[240];
+
+/******************************************************************************
+ * updatestatusbar - 
+ ******************************************************************************/
+static void updatestatusbar(GtkHTMLControlData * cd)
+{ 
+	gint context_id2;
+	gchar buf[255];
+
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(cd->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(cd->statusbar), context_id2);
+	sprintf(buf,"%s - modified",cd->filename);
+	gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, buf);
+}
 
 /******************************************************************************
  * this code taken form GtkHTML
@@ -163,6 +180,19 @@ release(GtkWidget * widget, GdkEventButton * event,
 	gtk_signal_disconnect(GTK_OBJECT(widget), cd->releaseId);
 	return FALSE;
 }
+/******************************************************************************
+ * 
+ ******************************************************************************/
+static gint
+html_key_pressed(GtkWidget * html, GdkEventButton * event,
+		    GtkHTMLControlData * cd)
+{
+	extern gchar sbNoteEditorText[];
+	
+	if(cd->note_editor) cd->filename = sbNoteEditorText;
+	updatestatusbar(cd);
+}
+
 
 /******************************************************************************
  * this code taken form GtkHTML
@@ -204,20 +234,13 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 }
 
 
-/******************************************************************************
- * updatestatusbar - 
- ******************************************************************************/
-/*GtkWidget *updatestatusbar(GtkWidget *app ,gchar *text)
-{ 
-	
-	
-}*/
 
 /******************************************************************************
  * create_editor - create html editor
  ******************************************************************************/
 GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
-{ 
+{ 	
+	GtkHTMLControlData *cd;
 	EDITOR *ed;
 	GtkWidget *vbEditor;
 	GtkWidget *vbox3;
@@ -362,6 +385,8 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 				      (ed->htmlwidget), vbox3);
 	
 	cd->notebook = ed->notebook;
+	cd->statusbar = ed->statusbar;
+	cd->note_editor = ed->note_editor;
 	
 	FormatBar = toolbar_style(cd);
 	gtk_box_pack_start(GTK_BOX(cd->vbox), FormatBar, FALSE, FALSE,
@@ -424,7 +449,10 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	gtk_widget_show(ed->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbEditor), ed->statusbar, FALSE, FALSE, 0);
 
-	
+	gtk_signal_connect(GTK_OBJECT
+			   (ed->htmlwidget),
+			   "key_press_event",
+			   GTK_SIGNAL_FUNC(html_key_pressed), cd);
 	gtk_signal_connect(GTK_OBJECT
 			   (ed->htmlwidget),
 			   "button_press_event",

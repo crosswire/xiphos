@@ -453,7 +453,9 @@ void loadStudyPadFile(gchar * filename)
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
 					 "GnomeSword");
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+/*	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+			   current_filename);*/
+	
 	gtk_text_freeze(GTK_TEXT(text3));
 	gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 	g_free(current_filename);

@@ -58,7 +58,7 @@ GtkWidget *statusbarNE;
 
 static gboolean was_editable;
 
-GString *gstr;
+//GString *gstr;
 extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
 GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
@@ -78,7 +78,7 @@ static GtkHTMLFontStyle styles [STYLES] = {
 	GTK_HTML_FONT_STYLE_STRIKEOUT,
 };
 */
-
+/*
 static gboolean
 save_receiver  (const HTMLEngine *engine,
 		const char *data,
@@ -94,14 +94,14 @@ save_receiver  (const HTMLEngine *engine,
 	
 	return TRUE;
 }
-
+*/
 /*****************************************************************************
  * savenoteGS - someone clicked save personal  comments
  * choice
 *****************************************************************************/
 void savenoteHTML(GtkWidget *app)    
 {
-	//GtkWidget *html_widget;
+/*	//GtkWidget *html_widget;
 	GtkHTML *html;
 	
 	//html_widget = lookup_widget(app,"htmlComments");
@@ -115,7 +115,7 @@ void savenoteHTML(GtkWidget *app)
 	g_warning(gstr->str);
 	savenoteSWORD(gstr->str);
 	g_string_free(gstr,1);
-	gtk_html_set_editable(html,TRUE); 		
+	gtk_html_set_editable(html,TRUE); 	*/	
 }
 
 /*****************************************************************************
@@ -448,6 +448,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	ed.text = gtk_text_new(NULL, NULL);
 	ed.statusbar = gtk_statusbar_new();
 	ed.notebook = gtk_notebook_new();
+	ed.note_editor = TRUE;
 	
 	htmlComments = create_editor(app, ed);	  
 	statusbarNE = ed.statusbar;

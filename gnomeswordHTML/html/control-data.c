@@ -41,6 +41,8 @@ gtk_html_control_data_new (GtkHTML *html, GtkWidget *vbox)
 	ncd->gdk_painter             = NULL;
 	ncd->plain_painter           = NULL;
 	ncd->format_html             = FALSE;
+	ncd->html_modified	= FALSE;
+	ncd->note_editor	= FALSE;
 
 	return ncd;
 }
