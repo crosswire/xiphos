@@ -441,72 +441,6 @@ static gint button_release_event(GtkWidget * html, GdkEventButton * event,
 
 /******************************************************************************
  * Name
- *   on_btnSBDock_clicked
- *
- * Synopsis
- *   #include "gs_gui.h"
- *
- *   void on_btnSBDock_clicked(GtkButton *button, gpointer user_data)
- *
- * Description
- *    toogle shortcut bar - attached/detached 
- *
- * Return value
- *   void
- */ 
-
-static void on_btnSBDock_clicked(GtkButton * button, gpointer user_data)
-{
-	gui_attach_detach_shortcutbar();
-}
-
-/******************************************************************************
- * Name
- *    on_btnSB_clicked
- *
- * Synopsis
- *   #include "gs_gui.h"
- *
- *   void on_btnSB_clicked(GtkButton * button, gpointer user_data)
- *
- * Description
- *   show hide shortcut bar
- *
- * Return value
- *   void
- */
-
-static void on_btnSB_clicked(GtkButton * button, gpointer user_data)
-{
-	gui_shortcutbar_showhide();
-}
-
-/******************************************************************************
- * Name
- *   on_btn_search_clicked
- *
- * Synopsis
- *   #include "gs_gui.h"
- *
- *   void on_btn_search_clicked(GtkButton * button, gpointer user_data)
- *
- * Description
- *    displays the shortcut bar search group 
- *    will open the new search dialog (FIXME: build new search dialog)
- *
- * Return value
- *   void
- */ 
-
-
-static void on_btn_search_clicked(GtkButton *button, gpointer user_data)
-{
-	gui_do_dialog_search();
-	//showSBGroup(settings.searchbargroup);
-} 
-
-/******************************************************************************
- * Name
  *   on_mainwindow_size_allocate
  *
  * Synopsis
@@ -685,12 +619,6 @@ void create_mainwindow(void)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
-	GtkWidget *handleboxOptionsBar;
-	GtkWidget *toolbarOptions;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *btnSBDock;
-	GtkWidget *btnSB;
-	GtkWidget *btn_search;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
 	GtkWidget *vpaned1;
@@ -707,7 +635,6 @@ void create_mainwindow(void)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
-	GtkWidget *vseparator13;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
@@ -747,90 +674,6 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.hbox_toolbar,
 			FALSE, TRUE, 0);
 
-
-	/*
-	 * begin options toolbar 
-	 */
-
-	handleboxOptionsBar = gtk_handle_box_new();
-	gtk_widget_ref(handleboxOptionsBar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "handleboxOptionsBar",
-				 handleboxOptionsBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(handleboxOptionsBar);
-	gtk_box_pack_start(GTK_BOX(widgets.hbox_toolbar),
-			handleboxOptionsBar, TRUE, TRUE, 0);
-
-	toolbarOptions =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbarOptions);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "toolbarOptions", toolbarOptions,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbarOptions);
-	gtk_container_add(GTK_CONTAINER(handleboxOptionsBar),toolbarOptions);
-	gtk_widget_set_usize(toolbarOptions, -2, 34);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarOptions),
-				      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon =
-		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/dock.xpm");
-    
-	btnSBDock =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Detach",
-				       _("Detach/Attach Shortcut Bar"),
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSBDock);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnSBDock",
-				 btnSBDock,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSBDock);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_INDEX);
-	btnSB =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Shortcut Bar", 
-				       _("Hide/Show Shortcut Bar"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSB);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnSB", btnSB,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSB);
-
-
-	vseparator13 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator13);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator13",
-				 vseparator13,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator13);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarOptions),
-				  vseparator13, NULL, NULL);
-	gtk_widget_set_usize(vseparator13, 7, 7);
-	
-	tmp_toolbar_icon = 
-		gnome_stock_pixmap_widget (widgets.app, 
-			GNOME_STOCK_PIXMAP_SEARCH);
-	btn_search = gtk_toolbar_append_element (GTK_TOOLBAR 
-				(toolbarOptions),
-				GTK_TOOLBAR_CHILD_BUTTON,
-				NULL,
-				_("Search"),
-				NULL, NULL,
-				tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btn_search);
-	gtk_object_set_data_full(GTK_OBJECT (widgets.app), "btn_search",
-			btn_search, (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btn_search);
-	
-	
-
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox25);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hbox25",
@@ -846,7 +689,7 @@ void create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.epaned);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
-	
+
 	/*
 	 * shortcut bar 
 	 */
@@ -1211,12 +1054,6 @@ void create_mainwindow(void)
 	gtk_signal_connect (GTK_OBJECT (widgets.app), "set_focus",
                         GTK_SIGNAL_FUNC(on_mainwindow_set_focus),
                         NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSBDock), "clicked",
-			GTK_SIGNAL_FUNC(on_btnSBDock_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",
-			GTK_SIGNAL_FUNC(on_btnSB_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btn_search), "clicked",
-			GTK_SIGNAL_FUNC(on_btn_search_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(widgets.workbook_upper), "switch_page",
 			GTK_SIGNAL_FUNC(workbook_upper_switch_page), NULL);
 

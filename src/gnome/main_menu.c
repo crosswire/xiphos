@@ -41,7 +41,9 @@
 #include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
+#include "gui/shortcutbar_dialog.h"
 #include "gui/gnomesword.h"
+#include "gui/search_dialog.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
@@ -471,6 +473,14 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
+	 NULL,
+	 gui_do_dialog_search, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -559,21 +569,25 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 new_book_dialog1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
-
-
-static GnomeUIInfo settings1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Verse Style"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
-					  NULL),
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Detach/Attach Shortcut Bar"),
+	 NULL,
+	 gui_attach_detach_shortcutbar, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Hide/Show Shortcut Bar"),
+	 NULL,
+	 gui_shortcutbar_showhide, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -664,7 +678,6 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_MENU_VIEW_TREE(view1_menu_uiinfo),
-	GNOMEUIINFO_MENU_SETTINGS_TREE(settings1_menu_uiinfo),
 	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
 	GNOMEUIINFO_END
 };
@@ -817,35 +830,17 @@ void gui_create_main_menu(GtkWidget * app)
 			      _("_View/New Book Dialog/"),
 			      (GtkMenuCallback) on_book_item_activate);
 
-	gtk_widget_ref(menubar1_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "settings1",
-				 menubar1_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(settings1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "verse_style",
-				 settings1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	widgets.versestyle_item = settings1_menu_uiinfo[0].widget;
-
-
-
+	widgets.versestyle_item = view1_menu_uiinfo[11].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
 
-	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "preferences1",
-				 settings1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[5].widget);
+	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "help1",
-				 menubar1_uiinfo[5].widget,
+				 menubar1_uiinfo[4].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_right_justify(GTK_MENU_ITEM
-				    (menubar1_uiinfo[5].widget));
+				    (menubar1_uiinfo[4].widget));
 
 	gtk_widget_ref(help1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
