@@ -119,6 +119,14 @@ on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				      (MainFrm, "btnStrongs")),
 				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
 }
+
+//----------------------------------------------------------------------------------------------
+void
+on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	morphsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+
 //----------------------------------------------------------------------------------------------
 void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,

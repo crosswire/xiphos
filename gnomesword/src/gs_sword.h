@@ -94,6 +94,7 @@ void navVCModSWORD(gint direction);
 gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
+void morphsSWORD(gboolean choice) ;
 
 
 #endif	/* __GNOMESWORD_H__ */
