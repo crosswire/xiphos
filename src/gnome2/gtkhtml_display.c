@@ -490,8 +490,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
-	sprintf(buf, "%d", cur_verse);
-	gtk_html_jump_to_anchor(html, buf);
+	if(cur_verse > 1) {
+		sprintf(buf, "%d", cur_verse - 1);
+		gtk_html_jump_to_anchor(html, buf);
+	}
+	
 
 	g_string_free(str, TRUE);
 	if (use_font_size)
