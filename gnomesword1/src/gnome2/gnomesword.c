@@ -82,11 +82,17 @@ void frontend_init(void)
 
 	hint.in_popup = FALSE;
 	hint.use_hints = FALSE;
-
+	
+	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
-
+	
+	/*
+	 * get and load books of the Bible 
+	 */
+	gtk_combo_set_popdown_strings(GTK_COMBO(widgets.cb_books),
+				      get_list(BOOKS_LIST));
 	/*
 	 *  setup sidebar
 	 */
@@ -126,7 +132,7 @@ void frontend_init(void)
 	 *  setup general book gui support
 	 */
 	if (settings.havebook) {
-		gui_setup_gbs(get_list(GBS_LIST),number_of_pages);
+		//gui_setup_gbs(get_list(GBS_LIST),number_of_pages);
 		gui_setup_gbs_dialog(get_list(GBS_LIST));
 	}
 
@@ -205,19 +211,20 @@ void frontend_display(void)
 		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
 		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
 	}
-	if((!settings.havedict)&&(settings.havebook)) {
+/*	if((!settings.havedict)&&(settings.havebook)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.workbook_lower),
 					      1);
 		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
 	}
-	if((settings.havedict)&&(!settings.havebook)) {
+*/
+/*	if((settings.havedict)&&(!settings.havebook)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.workbook_lower),
 					      0);
 		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
 	}
-
+*/
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -322,7 +329,7 @@ void shutdown_frontend(void)
 	}
 
 	if (settings.havebook) {
-		gui_shutdown_gbs();
+		//gui_shutdown_gbs();
 		gui_shutdown_gbs_dialog();
 	}
 

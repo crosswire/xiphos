@@ -47,9 +47,13 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
+#include "main/display.hh"
 #include "main/lists.h"
 #include "main/search.h"
 #include "main/sword.h"
+
+
+#include "gui/widgets.h"
 
 using std::string;
 using std::map;
@@ -82,6 +86,60 @@ extern ListKey search_scope_list;
 extern SWKey *current_scope;
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   c
+ */
+
+int backend_module_has_testament(const char * module_name,  int testament)
+{
+	ModMap::iterator it;
+	SWModule *module;
+	int ot = 0;
+	int nt = 0;
+	
+	it = sw.main_mgr->Modules.find(module_name);
+	if (it != sw.main_mgr->Modules.end()) {
+		SWModule *module = (*it).second;
+		module->setSkipConsecutiveLinks(true);
+			*module = sword::TOP; //position to first entry
+			sword::VerseKey key( module->KeyText() );
+			if (key.Testament() == 1) { // OT && NT
+				ot = 1;
+			} else if (key.Testament() == 2) { //no OT
+				ot = 0;
+			}
+	
+			*module = sword::BOTTOM;
+			key = module->KeyText();
+			if (key.Testament() == 1) { // only OT, no NT
+				nt = 0;
+			} else if (key.Testament() == 2) { //has NT
+				nt = 1;
+			}
+	         module->setSkipConsecutiveLinks(false);
+	}
+	switch (testament) {
+		case 1:
+			return ot>0;
+		case 2:
+			return nt>0;
+
+		default:
+			return false;
+	}
+}
 
 /******************************************************************************
  * Name
@@ -519,7 +577,6 @@ char *backend_get_search_results_text(char *mod_name, char *key)
 void backend_get_module_lists(MOD_LISTS * mods)
 {
 	ModMap::iterator it;
-	
 	for (it = sw.module_mgr->Modules.begin(); it != 
 				sw.module_mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
@@ -576,7 +633,6 @@ void backend_get_module_lists(MOD_LISTS * mods)
 	}	
 	
 }
-
 
 /******************************************************************************
  * Name
@@ -1236,10 +1292,10 @@ char *backend_get_book_heading(int manager, char *module_name,
 
 void backend_set_commentary_key(char *mod_name, char *key)
 {
-	SWModule *mod = sw.comm_mgr->Modules[mod_name];
-	if (mod) {
+	sw.comm_mod = sw.display_mgr->Modules[mod_name];
+	if (sw.comm_mod) {
 		versekey = key;
-		mod->SetKey(versekey);
+		sw.comm_mod->SetKey(versekey);
 	}
 }
 
@@ -1263,7 +1319,7 @@ void backend_set_commentary_key(char *mod_name, char *key)
 
 char *backend_get_commentary_key(char *mod_name)
 {
-	SWModule *mod = sw.comm_mgr->Modules[mod_name];
+	SWModule *mod = sw.display_mgr->Modules[mod_name];
 	if (mod) {
 		char *key = (char *) mod->KeyText();
 		if (key)
@@ -1371,7 +1427,11 @@ char *backend_get_key_from_module(int manager, char *module_name)
 	return NULL;
 }
 
-
+char *backend_get_book_key(void)
+{
+	sw.gbs_mod->KeyText();;
+	return strdup(sw.gbs_mod->KeyText());
+}
 /******************************************************************************
  * Name
  *  backend_set_module
@@ -1397,7 +1457,7 @@ int backend_set_module(int manager, char *module_name)
 			return 1;
 		break;
 	case COMM_MGR:
-		sw.comm_mod = sw.comm_mgr->Modules[module_name];
+		sw.comm_mod = sw.display_mgr->Modules[module_name];
 		if (sw.comm_mod)
 			return 1;
 		break;
@@ -1412,7 +1472,7 @@ int backend_set_module(int manager, char *module_name)
 			return 1;
 		break;
 	case GBS_MGR:
-		sw.gbs_mod = sw.gbs_mgr->Modules[module_name];
+		sw.gbs_mod = sw.display_mgr->Modules[module_name];
 		if (sw.gbs_mod)
 			return 1;
 		break;

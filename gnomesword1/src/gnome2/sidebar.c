@@ -45,13 +45,17 @@
 #include "gui/html.h"
 #include "gui/url.h"
 
+
+
 #include "main/sword.h"
 #include "main/gbs.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
 #include "main/module.h"
+#include "main/sidebar.h"
 #include "main/xml.h"
+
 
 SIDEBAR sidebar;
 static GtkWidget *vl_html;
@@ -796,84 +800,49 @@ static gboolean on_modules_list_button_release(GtkWidget * widget,
 						   gpointer user_data)
 {
 	GtkTreeSelection * selection;
-	gint sbtype;
 	GtkTreeIter selected;
-	gchar *mod = NULL;
-	gint mod_type;
 	GtkTreeModel *model;
+	gchar *mod = NULL;
 	
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.module_list));
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.module_list));
 	
-	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
-		return FALSE;
-	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected))
-		return FALSE;
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &mod, -1);
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return FALSE;	
+	
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 
+				3, &mod, 
+				-1);
 
-	if (!mod)
-		return FALSE;
+	
 	
 	button_mod_list = 1;
 
 	switch (event->button) {
 	case 1:
+		main_mod_treeview_button_one(model, selected);
 		button_mod_list = 1;
 		break;
 	case 2:
-		if (!g_utf8_collate(mod, _("Parallel View"))) {
-			g_free(mod);
-			return FALSE;
+		if (mod) {
+			if (!g_utf8_collate(mod, _("Parallel View"))) {
+				g_free(mod);
+				return FALSE;
+			}
+			gui_open_module_in_new_tab(mod);
 		}
-		gui_open_module_in_new_tab(mod);
-		g_free(mod);
-		return FALSE;
 		break;
 	case 3:
-		if (!g_utf8_collate(mod, _("Parallel View"))) {
-			g_free(mod);
-			return FALSE;
+		if (mod) {
+			if (!g_utf8_collate(mod, _("Parallel View"))) {
+				g_free(mod);
+				return FALSE;
+			}
+			buf_module = g_strdup(mod);
+			gtk_menu_popup(GTK_MENU
+				       (sidebar.menu_modules),
+				       NULL, NULL, NULL, NULL,
+				       0, gtk_get_current_event_time());
 		}
-		buf_module = g_strdup(mod);
-		gtk_menu_popup(GTK_MENU
-			       (sidebar.menu_modules),
-			       NULL, NULL, NULL, NULL,
-			       0, gtk_get_current_event_time());
-		return FALSE;
-			
-		break;
-	}
-	
-	
-	if (!g_utf8_collate(mod, _("Parallel View"))) 
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-					     (widgets. button_parallel_view),
-					     TRUE);
-	
-	sbtype = get_mod_type(mod);
-	switch (sbtype) {
-	case 0:
-		if (GTK_TOGGLE_BUTTON(widgets.button_parallel_view)->
-		    active) {
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (widgets.
-						      button_parallel_view),
-						     FALSE);
-		}
-		gui_change_module_and_key(mod, settings.currentverse);
-		break;
-	case 1:
-		gui_change_module_and_key(mod, settings.currentverse);
-		break;
-	case 2:
-		gtk_notebook_set_current_page
-		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
-		gui_change_module_and_key(mod, settings.dictkey);
-		break;
-	case 3:
-		gtk_notebook_set_current_page
-		    	(GTK_NOTEBOOK(widgets.workbook_lower), 1);
-		gui_change_module_and_key(mod, NULL);
 		break;
 	}
 	g_free(mod);
@@ -1610,7 +1579,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *shortcut_box;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	//GObject *mod_selection;
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
@@ -1709,16 +1677,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			  sidebar.module_list);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
 					  (sidebar.module_list), FALSE);
-
-	renderer = gtk_cell_renderer_text_new();
-	column = gtk_tree_view_column_new_with_attributes("Found",
-							     renderer,
-							     "text", 0,
-							     NULL);
-	gtk_tree_view_column_set_sort_column_id(column, 0);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(sidebar.module_list),
-					    column);
-
+	main_create_pixbufs();
+	main_add_mod_tree_columns(GTK_TREE_VIEW(sidebar.module_list));
+	
 	scrolledwindow_bm = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_bm);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
@@ -1739,7 +1700,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	create_search_results_page(widgets.notebook_sidebar);
 	create_viewer_page(widgets.notebook_sidebar);
 	
-	gui_load_module_tree(sidebar.module_list, TRUE);
+	main_load_module_tree(sidebar.module_list);
 		     
 	g_signal_connect_after((gpointer) sidebar.module_list,
 			 "button_release_event",

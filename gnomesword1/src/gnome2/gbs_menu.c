@@ -269,7 +269,7 @@ static void on_showtabs_activate(GtkMenuItem * menuitem,
 	settings.book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
-	gui_set_gbs_frame_label();
+//	gui_set_gbs_frame_label();
 }
 
 
@@ -313,8 +313,8 @@ static void on_view_new_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 
 static void on_view_current_dict_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 {
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.workbook_lower), 0);
+/*	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.workbook_lower), 0);*/
 }
 
 /******************************************************************************
@@ -371,8 +371,9 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 	gui_set_module_font(t->mod_name);
 	if(t->is_dialog)
 		gui_update_gbs_dialog_display();
-	else
+/*	else
 		gui_update_gbs_display(t);
+*/
 }
 
 

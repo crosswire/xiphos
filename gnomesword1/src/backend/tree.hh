@@ -36,7 +36,7 @@ char * backend_get_text_from_offset(char * module_name, unsigned long offset);
 void backend_set_treekey(char * module_name, unsigned long offset);
 void backend_setup_treekey(void);
 void backend_shutdown_treekey(void);
-
+char * backend_get_key_from_offset(unsigned long offset);
 
 #ifdef __cplusplus
 }

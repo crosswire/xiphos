@@ -27,6 +27,36 @@ extern "C" {
 #endif
 
 #include "gui/gbs.h"
+
+#include "gui/mod_global_ops.h"
+	
+typedef struct _gbsdata GBS_DATA;
+struct _gbsdata {
+	GtkWidget *dialog;
+	GtkWidget *statusbar;	
+	GtkWidget *vbox;
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *tree; 
+	GtkWidget *showtabs;
+	GtkWidget *module_options_menu;
+	gchar *mod_name;
+	gchar *search_string;
+	gchar *key;
+	gchar *cipher_key;
+	gchar *cipher_old;
+	gint mod_num;
+	gint display_level;
+	unsigned long offset;
+	
+	gboolean has_key;
+	gboolean is_locked;
+	gboolean is_leaf;
+	gboolean is_dialog;
+	gboolean is_rtol;
+	
+	GLOBAL_OPS *ops;
+};
 	
 void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_open_gbs_dialog(gchar * mod_name);

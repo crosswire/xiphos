@@ -33,7 +33,6 @@ struct _settings {
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
-		*BookWindowModule,	/* module to open at program startup  */
 	        *parallel1Module,	/* module to open at program startup  */
 	        *parallel2Module,	/* module to open at program startup  */
 	        *parallel3Module, /* module to open at program startup  */
@@ -49,7 +48,6 @@ struct _settings {
 		*lex_hebrew_viewer, /* module to use for hebrew lexicon - strongs or BDB - in viewer */
 	        *currentverse,	/* verse to use at program startup */
 		comm_key[80],	/*  */
-		*book_key,     /*  */
 	        *cvparallel,	/* current verse for detached parallel */
 		*percomverse, /* current verse for personal comments */
 	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
@@ -162,6 +160,16 @@ struct _settings {
 		
 		/* do we need to add item to history */
 		addhistoryitem;
+	
+	
+		
+	/* gbs */	
+	char *book_mod;	/* module to open at program startup  */
+	char *book_key;    /*  */
+	unsigned long book_offset;
+	
+	
+	int comm_showing;
 	
 	/* store program title */
 	char program_title[256];

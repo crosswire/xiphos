@@ -497,7 +497,7 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 		if (offset) {
 			//g_warning("%s in %s at %s",name,book,offset);
 			g->offset = strtoul(offset, NULL, 0);
-			change_book(book, g->offset);
+			main_set_book_mod(book, g->offset);
 			settings.book_key = gbs_get_treekey_local_name(g->offset);
 			if( !gtk_tree_model_iter_has_child(model, &selected) &&
 				gbs_treekey_has_children(g->offset)) {
@@ -540,7 +540,7 @@ static void add_book_to_tree(GBS_DATA * g)
 				    COL_BOOK,g->mod_name,
 				    COL_OFFSET,NULL,
 				    -1);
-	change_book(g->mod_name, 0);
+	main_set_book_mod(g->mod_name, 0);
 	add_children_to_tree(g, iter, gbs_get_treekey_offset());
 	
 }

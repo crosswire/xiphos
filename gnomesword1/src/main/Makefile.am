@@ -13,6 +13,7 @@ libmain_a_SOURCES =  \
     commentary.c commentary.h \
     configs.c configs.h \
     dictlex.c dictlex.h \
+    display.cc display.hh \
     gbs.c gbs.h \
     key.c key.h \
     lists.c lists.h \
@@ -22,7 +23,8 @@ libmain_a_SOURCES =  \
     percomm.c percomm.h \
     search.c search.h \
     settings.c settings.h \
+    sidebar.c sidebar.h\
     spell_pspell.c \
     spell.h \
-    sword.c sword.h\
+    sword.cc sword.h\
     xml.c xml.h

@@ -1,8 +1,15 @@
+2004-03-02  Terry <tbiggs@users.sf.net>
+
+	* added main/display.cc and main/display.hh
+	* changed main/sword.c to main/sword.cc
+	* completely reworked gnome2/gbs.c
+
+
 2004-02-26  Terry <tbiggs@users.sf.net>
 
 	* added attribute search to search dialog 
-	  search for Strongs numbers, morph tags and footenotes
-	  requires sword cvs (1.5.8)
+	  search for Strongs numbers, morph tags and footnotes.
+	  Requires sword cvs (1.5.8).
 
 2004-02-25  Terry <tbiggs@users.sf.net>
 
