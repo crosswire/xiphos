@@ -41,5 +41,4 @@ GtkWidget *create_aboutmodules(void);
 #ifdef __cplusplus
 }
 #endif
- 
- 
+

@@ -60,6 +60,7 @@
 //#include "noteeditor.h"
 #include "gs_html.h"
 #include "gs_search.h"
+#include "gs_abouts.h"
 
 /***********************************************************************************************
 Sword global to this file
@@ -1261,38 +1262,34 @@ GList* setupSDSWORD(GtkWidget *text)
 	return list;
 }
 
-/* 
- *
- */
+/****************************************************************************** 
+ * returns the name of the current dict/lex module
+ ******************************************************************************/
 gchar* getdictmodSWORD(void)
 {
 	return curdictMod->Name();
 }
 
-/*
- *
- */
+/******************************************************************************
+ * returns the name of the current Bible text module
+ ******************************************************************************/
 gchar* gettextmodSWORD(void)
-{      	
-	
-	gchar buf[80];
-	
-	strcpy(buf,curMod->Name());
-	return buf;
+{     
+	return curMod->Name();    
 }
 
-/*
- *
- */
+/******************************************************************************
+ * returns the name of the current commentary module
+ ******************************************************************************/
 gchar* getcommodSWORD(void)
 {
 	return curcomMod->Name();
 }
 
-/*
+/******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *returns a list of keys
- */
+ ******************************************************************************/
 void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
 {
 
@@ -1322,19 +1319,20 @@ void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
 	}
 }
 
-/*
+/******************************************************************************
  *gotokeySWORD - find new key for view dictionary dialog
  *
- */
+ ******************************************************************************/
 void gotokeySWORD(gchar *newkey)
 {
         SDMod->SetKey(newkey); //-- set key to our text
         SDMod->Display();
 }
-/*
+
+/******************************************************************************
  * SDdictSearchTextChangedSWORD - dict lookup text changed
  *  newkey from the dict lookup entry
- */
+ ******************************************************************************/
 void SDdictSearchTextChangedSWORD(char* newkey)
 {	
 	strcpy(settings->dictkey,newkey); //-- remember the key
@@ -1346,9 +1344,9 @@ void SDdictSearchTextChangedSWORD(char* newkey)
 	}
 }
 
-/*  
+/******************************************************************************  
  * 
- */
+ ******************************************************************************/
 GtkWidget *createSearchDlgSWORD(void)
 {
 	GtkWidget* searchDlg;
@@ -1362,18 +1360,18 @@ GtkWidget *createSearchDlgSWORD(void)
 	return searchDlg;
 }
 
-/* 
+/* *****************************************************************************
  *
- */
+ ******************************************************************************/
 void startsearchSWORD(GtkWidget *searchFrm)
 {	
 	gtk_clist_clear(GTK_CLIST(searchWindow->resultList));
 	searchWindow->searchSWORD(searchFrm);	
 }
 
-/* 
+/****************************************************************************** 
  *searchWindow->resultsListSWORD(searchFrm, row, column);
- */
+ ******************************************************************************/
 void rlclickedSWORD(GtkWidget *searchFrm)
 {	
 	

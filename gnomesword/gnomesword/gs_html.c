@@ -71,7 +71,7 @@ static void
 on_url (GtkHTML *html, const gchar *url, gpointer data)
 {
 	GnomeApp *app;
-	gchar *str, buf[255];
+	gchar buf[255];
 	
 	app = GNOME_APP (data);
 	if (url == NULL)
@@ -204,8 +204,6 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 void add_gtkhtml_widgets(GtkWidget * app)
 {
 	GtkWidget *textComp1;
-	GtkWidget *textComp2;
-	GtkWidget *textComp3;
 
 #ifdef USE_GTKHTML
 	GtkWidget *htmlComments;
@@ -280,6 +278,9 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);			   
 
 #else	/* !USE_GTKHTML */
+	GtkWidget *textComp2;
+	GtkWidget *textComp3;
+
 	textComp1 = gtk_text_new(NULL, NULL);
 	gtk_widget_ref(textComp1);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",

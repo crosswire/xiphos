@@ -691,3 +691,4 @@ SearchWindow::create ()
 
 	return dlgSearch;
 }
+
