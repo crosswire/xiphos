@@ -128,6 +128,7 @@ static GtkWidget *create_hint_window(void)
 	gtk_widget_show(hint.html_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow72),
 			  hint.html_widget);
+
 	hint.in_popup = TRUE;
 	return hint_window;
 }
@@ -175,16 +176,6 @@ void gui_display_in_hint_window(gchar * note)
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
-	gdk_window_get_position	 (hint.hint_window->window,
-					  &x,
-					  &y);
-	g_warning("x = %d y = %d",x,y);
-	x += 100;
-	y += 50;
-	gtk_window_reposition((GtkWindow *)hint.hint_window,
-						x,
-						y);
-	
 	g_string_free(str, TRUE);
 }
 
