@@ -30,7 +30,7 @@
 #include <gnome.h>
 
 #if USE_SHORTCUTBAR
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
@@ -477,8 +477,7 @@ void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 {
 	if (GTK_TOGGLE_BUTTON
 	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-		//saveChanges = TRUE; //-- we know we want to save the changes - thats how we got here
-		savenoteSWORD(noteModified);
+		savenoteSWORD(TRUE);
 	}
 }
 
