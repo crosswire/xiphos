@@ -2,6 +2,7 @@ INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
     $(PIXBUF_CFLAGS) \
     $(GTKHTML_CFLAGS) \
+    -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
 bin_PROGRAMS = gnomesword-1.0

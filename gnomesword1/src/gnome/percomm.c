@@ -166,7 +166,7 @@ void gui_percomm_tabs(gboolean choice)
 	settings.percomm_tabs = choice;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_percomm),
 				   settings.percomm_tabs);	
-	set_percomm_frame_label(cur_p->ec->frame, cur_p->mod_name);
+	//set_percomm_frame_label(cur_p->ec->frame, cur_p->mod_name);
 }
 
 
@@ -208,7 +208,7 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	strcpy(p->ec->key,settings.currentverse);
 	set_percomm_key(p->ec->key);
 	
-	if(!p->ec->frame)
+	if(!p->ec->htmlwidget)
 		gui_add_new_percomm_pane(p);
 	
 	/*
@@ -239,7 +239,6 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	}*/
 	if(GTK_CHECK_MENU_ITEM(p->ec->editnote)->active){
 		gtk_widget_show(p->ec->frame_toolbar);
-		gtk_widget_show(p->ec->handlebox_toolbar);
 	}
 	
 	widgets.html_percomm = p->ec->htmlwidget;
@@ -714,9 +713,8 @@ static void create_percomm_pane(PC_DATA *p)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;	
 	
-	
 	p->ec->personal_comments = TRUE;
-	
+	/*
 	p->ec->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(p->ec->frame);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->frame",
@@ -724,13 +722,14 @@ static void create_percomm_pane(PC_DATA *p)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->frame);
 	gtk_box_pack_start(GTK_BOX(p->vbox), p->ec->frame, TRUE, TRUE, 0);
-
+	*/
 	vboxPC = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxPC);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxPC", vboxPC,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxPC);
-	gtk_container_add(GTK_CONTAINER(p->ec->frame), vboxPC);
+	gtk_box_pack_start(GTK_BOX(p->vbox), vboxPC, TRUE, TRUE, 0);
+	//gtk_container_add(GTK_CONTAINER(p->ec->frame), vboxPC);
 
 		
 	
@@ -1023,9 +1022,10 @@ static void create_percomm_pane(PC_DATA *p)
 #ifdef USE_SPELL			   
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_spell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb), p->ec);
-#endif	
+#endif	/*
 	widgets.toolbar_comments = toolbar_style(p->ec);
 	gtk_widget_hide(p->ec->handlebox_toolbar);
+	*/
 }
 
 /******************************************************************************
@@ -1240,7 +1240,7 @@ void gui_setup_percomm(GList *mods)
 		p->search_string = NULL;
 		p->ec = gs_html_editor_control_data_new();
 		strcpy(p->ec->key, settings.currentverse);
-		p->ec->frame = NULL;
+		p->ec->htmlwidget = NULL;
 		strcpy(p->ec->filename,p->mod_name);
 		add_vbox_to_notebook(p);
 		percomm_list =

@@ -64,7 +64,7 @@ struct _GSHTMLEditorControlData {
 	/* toolbars */
 	GtkWidget 
 		*toolbar_commands, 
-		*handlebox_toolbar,
+		*toolbar_edit, 
 		*toolbar_style;
 	GtkWidget *frame_toolbar;
 	/* menu items */
@@ -121,6 +121,8 @@ struct _GSHTMLEditorControlData {
 	gboolean block_font_style_change;
 	gboolean changed;
 	gboolean personal_comments;
+	gboolean stylebar;
+	gboolean editbar;
 	gboolean gbs; /** gen book support **/
 	gboolean studypad; 
 	gchar filename[256];

@@ -108,7 +108,7 @@ static void on_new_activate(GtkMenuItem * menuitem,
 	gtk_html_cut(ecd->html);
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), 1,
 			   _("-untitled-"));
-	gtk_frame_set_label(GTK_FRAME(ecd->frame), _("-untitled-"));
+	//gtk_frame_set_label(GTK_FRAME(ecd->frame), _("-untitled-"));
 	ecd->changed = FALSE;
 }
 
@@ -613,11 +613,11 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(ecd->frame_toolbar);
-			gtk_widget_show(ecd->handlebox_toolbar);
+			//gtk_widget_show(ecd->handlebox_toolbar);
 		}
 
 		else {
-			gtk_widget_hide(ecd->handlebox_toolbar);
+			//gtk_widget_hide(ecd->handlebox_toolbar);
 			gtk_widget_hide(ecd->frame_toolbar);
 		}
 	}
@@ -628,12 +628,10 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(ecd->frame_toolbar);
-			//gtk_widget_show(settings.toolbarBooks);
 		}
 
 		else {
 			gtk_widget_show(ecd->frame_toolbar);
-			//gtk_widget_hide(settings.toolbarBooks);
 		}
 	}
 	gtk_html_set_editable(GTK_HTML(ecd->html),
@@ -688,6 +686,10 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	guint tmp_key;
 	GtkWidget *autoscroll = NULL;
 	GtkWidget *separator;
+	GtkWidget *view;
+	GtkWidget *view_menu;
+	GtkAccelGroup *view_menu_accels;
+	GtkWidget *style_toolbar;
 	GtkWidget *file_menu;
 	GtkAccelGroup *file_menu_accels;
 	GtkWidget *save_note = NULL;
@@ -766,7 +768,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				  ecd->show_tabs);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 					       (ecd->show_tabs), FALSE);
-
+					       
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
@@ -794,7 +796,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 					       (ecd->editnote), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(ecd->editnote),
 					 FALSE);
-
+		
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
@@ -805,7 +807,43 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
 	}
+	
+	
+	if (ecd->gbs)
+		gtk_widget_set_sensitive(GTK_WIDGET(ecd->file), FALSE);
 
+	view = gtk_menu_item_new_with_label("");
+	tmp_key =
+	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(view)->child),
+				  _("View"));
+	gtk_widget_add_accelerator(view, "activate_item",
+				   pmEditor_accels, tmp_key, 0, 0);
+	gtk_widget_ref(view);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "view",
+				 view,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(view);
+	gtk_container_add(GTK_CONTAINER(pmEditor), view);	
+	
+	view_menu = gtk_menu_new();
+	gtk_widget_ref(view_menu);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "view_menu",
+				 view_menu,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view), view_menu);
+	view_menu_accels =
+	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_menu));
+	
+	style_toolbar =
+	    gtk_check_menu_item_new_with_label(_("Style Toolbar"));
+	gtk_widget_ref(style_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+				 "style_toolbar", style_toolbar,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(style_toolbar);
+	gtk_container_add(GTK_CONTAINER(view_menu), style_toolbar);
+ 
 	ecd->file = gtk_menu_item_new_with_label("");
 	tmp_key =
 	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->file)->child),
@@ -818,19 +856,18 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->file);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->file);
-
-	if (ecd->gbs)
-		gtk_widget_set_sensitive(GTK_WIDGET(ecd->file), FALSE);
-
+	
 	file_menu = gtk_menu_new();
 	gtk_widget_ref(file_menu);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "file_menu",
 				 file_menu,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->file), file_menu);
+	
 	file_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(file_menu));
 
+	   
 	if (ecd->personal_comments) {
 		save_note =
 		    gtk_menu_item_new_with_label(_("Save Note"));

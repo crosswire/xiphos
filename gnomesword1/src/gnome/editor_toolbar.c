@@ -1007,16 +1007,16 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 
 static GtkWidget *create_style_toolbar (GSHTMLEditorControlData *cd)
 {
-	cd->handlebox_toolbar = gtk_handle_box_new ();
+	//cd->handlebox_toolbar = gtk_handle_box_new ();
 
 	cd->toolbar_style = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(cd->toolbar_style),
 				      GTK_RELIEF_NONE);
 	
-	gtk_container_add (GTK_CONTAINER (cd->handlebox_toolbar), cd->toolbar_style);
+	//gtk_container_add (GTK_CONTAINER (cd->handlebox_toolbar), cd->toolbar_style);
 	
-	gtk_widget_show_all(cd->handlebox_toolbar);
+	gtk_widget_show_all(cd->toolbar_style);
 
 	cd->paragraph_option = setup_paragraph_style_option_menu (cd->html),
 	gtk_toolbar_prepend_widget (GTK_TOOLBAR (cd->toolbar_style),
@@ -1053,9 +1053,9 @@ static GtkWidget *create_style_toolbar (GSHTMLEditorControlData *cd)
 	gtk_signal_connect (GTK_OBJECT (cd->html), "current_paragraph_alignment_changed",
 			    GTK_SIGNAL_FUNC (paragraph_alignment_changed_cb), cd);
 
-	gtk_box_pack_start(GTK_BOX(widgets.hbox_toolbar), cd->handlebox_toolbar, TRUE,
-			   TRUE, 0);
-	return cd->handlebox_toolbar;
+	/*gtk_box_pack_start(GTK_BOX(widgets.hbox_toolbar), cd->handlebox_toolbar, TRUE,
+			   TRUE, 0);*/
+	return cd->toolbar_style;
 }
 
 /******************************************************************************

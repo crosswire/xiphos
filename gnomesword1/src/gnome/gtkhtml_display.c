@@ -710,7 +710,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 	
 		sprintf(buf,"%s%s",
 			"<br><br>",
-			_("You will have to restart GnomeSWORD after you unlock it."));
+			_("You will have to restart GnomeSword after you unlock it."));
 		
 		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);     
@@ -723,7 +723,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 	else {
 		sprintf(buf,"%s%s" ,
 			"<br><br>",
-			_("You need to restart GnomeSWORD to view it"));
+			_("You need to restart GnomeSword to view it"));
 		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 		utf8len = strlen(utf8str);     
 		if (utf8len) {

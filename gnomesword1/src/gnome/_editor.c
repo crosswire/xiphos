@@ -144,7 +144,7 @@ void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
 void update_statusbar(GSHTMLEditorControlData * ecd)
 {
 	gint context_id2;
-	gchar buf[255];
+	gchar buf[255], buf3[255];
 	gchar *buf2;
 
 	context_id2 =
@@ -152,9 +152,10 @@ void update_statusbar(GSHTMLEditorControlData * ecd)
 					 "GnomeSword");
 	gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
 
-	if (ecd->personal_comments)
-		buf2 = ecd->key;
-			
+	if (ecd->personal_comments) {
+		sprintf(buf3,"[%s] %s", ecd->filename, ecd->key);
+		buf2 = buf3;
+	}		
 	else
 		buf2 = ecd->filename;
 

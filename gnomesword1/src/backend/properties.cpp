@@ -248,6 +248,10 @@ int backend_load_properties(char * path)
            atoi(settingsInfo["User Options"]["showcomms"].c_str());
        settings.showdicts =
            atoi(settingsInfo["User Options"]["showdicts"].c_str());
+       settings.show_style_bar =
+           atoi(settingsInfo["User Options"]["showstylebar"].c_str());
+       settings.show_edit_bar =
+           atoi(settingsInfo["User Options"]["showeditbar"].c_str());
 
 	return true;
 }
@@ -447,6 +451,8 @@ int backend_save_properties(int shutdown)
                settingsInfo["User Options"]["showtexts"] = isON(settings.showtexts);
                settingsInfo["User Options"]["showcomms"] = isON(settings.showcomms);
                settingsInfo["User Options"]["showdicts"] = isON(settings.showdicts);
+	       settingsInfo["User Options"]["showstylebar"] = isON(settings.show_style_bar);
+	       settingsInfo["User Options"]["showeditbar"] = isON(settings.show_edit_bar);
 	}
 	settingsInfo.Save();
 	return true;
@@ -546,6 +552,8 @@ int backend_create_properties_from_setup(void)
        settingsInfo["User Options"]["showtexts"] = "1";
        settingsInfo["User Options"]["showcomms"] = "1";
        settingsInfo["User Options"]["showdicts"] = "1";
+       settingsInfo["User Options"]["showeditbar"] = "1";
+       settingsInfo["User Options"]["showstylebar"] = "1";
 	
 	settingsInfo.Save();
 	return true;
@@ -642,6 +650,8 @@ int backend_create_properties(void)
        settingsInfo["User Options"]["showtexts"] = "1";
        settingsInfo["User Options"]["showcomms"] = "1";
        settingsInfo["User Options"]["showdicts"] = "1";
+       settingsInfo["User Options"]["showeditbar"] = "1";
+       settingsInfo["User Options"]["showstylebar"] = "1";
 
 	settingsInfo.Save();
 	return true;
