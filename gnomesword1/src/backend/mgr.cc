@@ -32,6 +32,8 @@
 
 #include <swmgr.h>
 #include <gs_markupfiltmgr.h>
+#include <gnome.h>
+#include <glib-2.0/glib.h>
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
@@ -60,7 +62,7 @@ SWORD sw;
  * static  global to this file only 
  */
 
-static StringList optionslist;
+//static StringList optionslist;
 static StringList::iterator it;
 
 
@@ -92,6 +94,7 @@ void backend_init_managers(void)
 	sw.search_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	sw.results = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	sw.percom_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));	
+	sw.display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));	
 }
 
 /******************************************************************************
@@ -121,6 +124,7 @@ void backend_delete_managers(void)
 	delete sw.search_mgr;
 	delete sw.results; 
 	delete sw.percom_mgr; 
+	delete sw.display_mgr; 
 }
 /******************************************************************************
  * Name
@@ -212,12 +216,12 @@ void backend_delete_module_mgr(void)
 
 /******************************************************************************
  * Name
- *  backend_set_global_option_iterator 
+ *   backend_get_global_options_list
  *
  * Synopsis
  *   #include "backend/mgr.hh"
  *
- *   void backend_set_global_option_iterator(void)	
+ *   	void backend_get_global_options_list(GList * list)
  *
  * Description
  *   
@@ -226,40 +230,14 @@ void backend_delete_module_mgr(void)
  *   void
  */
  
-void backend_set_global_option_iterator(void)
+void backend_get_global_options_list(GList * list)
 {
-	optionslist = sw.module_mgr->getGlobalOptions();
-	it = optionslist.begin();
-}
-
-
-/******************************************************************************
- * Name
- *   backend_get_next_global_option
- *
- * Synopsis
- *   #include "backend/mgr.hh"
- *
- *   char *backend_get_next_global_option(void)	
- *
- * Description
- *   
- *
- * Return value
- *   int
- */
- 
-char *backend_get_next_global_option(void)
-{
-	char *retval = NULL;
+	StringList optionslist = sw.module_mgr->getGlobalOptions();
 	
-	if(it != optionslist.end()) {
-		retval = strdup((char *) (*it).c_str());
-		it++;
-		return retval;	
+	for (StringList::iterator it = optionslist.begin(); 
+		it != optionslist.end(); it++) {
+		list = g_list_append(list, strdup((char *) (*it).c_str()));
 	}
-	else
-		return NULL;
 }
 
 

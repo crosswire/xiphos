@@ -26,8 +26,54 @@
 extern "C" {
 #endif
 
-#include "gui/commentary.h"
+#include "gui/editor.h"
+#include "gui/mod_global_ops.h"
+//#include "gui/commentary.h"
 	
+typedef struct _commdata COMM_DATA;
+struct _commdata {
+	/* for commentary dialogs */
+	GtkWidget *dialog;	
+	GtkWidget *cbe_book;
+	GtkWidget *spb_chapter;
+	GtkWidget *spb_verse;
+	GtkWidget *freeform_lookup;
+	GtkWidget *statusbar;
+	
+	/* for personal comments editor */
+	GSHTMLEditorControlData *ec;
+	
+	/* for commentary panes */
+	GtkWidget *vbox;
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *btnCOMMSync;
+	GtkWidget *btnCOMMBack;
+	GtkWidget *btnCOMMForward;
+	GtkWidget *btnCOMMPrint;
+	GtkWidget *btn_book_heading;
+	GtkWidget *btn_chap_heading;
+	GtkWidget *showtabs;
+	GtkWidget *module_options_menu;
+	
+	gchar *mod_name;
+	gchar *search_string;
+	gchar *cipher_key;
+	gchar *cipher_old;
+	gchar key[80];
+	
+	gint modnum;
+	
+	gboolean is_locked;
+	gboolean is_percomm;
+	gboolean is_dialog;
+	gboolean book_heading;
+	gboolean chapter_heading;
+	gboolean sync;
+	
+	GLOBAL_OPS *ops;
+};
+extern COMM_DATA *cur_c;
 void gui_keep_comm_dialog_in_sync(gchar * key);	
 void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_on_lookup_commentary_dialog_selection

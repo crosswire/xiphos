@@ -1,8 +1,31 @@
+2004-02-26  Terry <tbiggs@users.sf.net>
+
+	* added attribute search to search dialog 
+	  search for Strongs numbers, morph tags and footenotes
+	  requires sword cvs (1.5.8)
+
+2004-02-25  Terry <tbiggs@users.sf.net>
+
+	* reworked main/lists.c
+	
+	
+2004-02-21  Terry <tbiggs@users.sf.net>
+
+	* completely reworked gnome2/dictlex.c
+
+
+2004-02-19  Terry <tbiggs@users.sf.net>
+
+	* completely reworked gnome2/commentary.c
+	
+
 2004-02-12  Terry <tbiggs@users.sf.net>
 
 	* add sword filters to /backend until the changes are added to the SWORD
 	  project filters.
 	* completely reworked gnome2/bibletext.c
+	* added files gnome2/url.c and gui/url.h
+	* moved url handler to gnome2/url.c
 	
 
 2004-02-07  Terry <tbiggs@users.sf.net>

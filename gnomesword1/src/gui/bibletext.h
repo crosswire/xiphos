@@ -25,28 +25,8 @@
 #include <gnome.h>
 
 #include "gui/mod_global_ops.h"
-	
-/*
-typedef struct _text_data_new TEXT_DATA_NEW;
-struct _text_data_new {
-	GtkWidget *showtabs;
-	GtkWidget *menu;
-	
-	gchar *mod_name;
-	gchar *search_string;
-	gchar *key;
-	gchar *cipher_key;
-	gchar *cipher_old;
-	
-	gboolean is_locked;
-	gboolean is_dialog;
-	gboolean is_rtol;
-	//gboolean sync;
-	
-	GLOBAL_OPS *ops;
-};
-extern TEXT_DATA_NEW *cur_t_new;
-*/
+
+
 void gui_setup_bibletext(void);
 void gui_update_text_global_ops(gchar * option, gboolean choice);
 void gui_display_text(const gchar * val_key);
@@ -54,6 +34,7 @@ gboolean gui_text_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data);
 void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event);
+GtkWidget *gui_create_bible_pane(void);
 
 
 #endif

@@ -85,6 +85,7 @@ struct _search_dialog {
 	GtkWidget *rb_words;
 	GtkWidget *rb_regexp;
 	GtkWidget *rb_exact_phrase;
+	GtkWidget *rb_attribute;
 	GtkWidget *cb_case_sensitive;
 	GtkWidget *ctree;
 	GtkWidget *treeview;
@@ -794,7 +795,8 @@ static void on_button_begin_search(GtkButton * button,
 
 	search_type = GTK_TOGGLE_BUTTON
 	    (search.rb_regexp)->active ? 0 :
-	    GTK_TOGGLE_BUTTON(search.rb_exact_phrase)->active ? -1 : -2;
+	    GTK_TOGGLE_BUTTON(search.rb_exact_phrase)->active ? -1 :
+	    GTK_TOGGLE_BUTTON(search.rb_words)->active ? -2 : -3;
 
 	settings.searchType = search_type;
 
@@ -2454,6 +2456,21 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(rb_exact_phrase);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_exact_phrase, FALSE,
 			   FALSE, 0);
+			   
+	
+	search.rb_attribute = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_words,
+                                             _("Attributes"));
+	gtk_widget_show(search.rb_attribute);
+	header = g_strdup_printf("%s:\n%s\n%s",_("examples"),
+				"Word//Strongs/G1722",
+				"Footnote//body/love");
+	gtk_tooltips_set_tip(tooltips, search.rb_attribute,
+			     header, NULL);
+	gtk_box_pack_start(GTK_BOX(vbox63), search.rb_attribute, FALSE,
+			   FALSE, 0);	
+	g_free(header);			   
+			   
 
 	frame57 = gtk_frame_new(NULL);
 	gtk_widget_show(frame57);

@@ -450,7 +450,15 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[500];
-	
+	/*static guint delay = 500000;	
+			
+	while(delay != 0) {
+			--delay;
+		if (url == NULL)
+			return;
+	} 
+	delay = 500000;
+*/
 	if (url == NULL) { /* moved out of url - clear appbar */
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
@@ -460,6 +468,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 	} else {
 		in_url = TRUE;	/* we need this for html_button_released */
+		//g_print("url = %s\n",url);
 		if(gui_url_handler(url, FALSE))
 			return;
 		

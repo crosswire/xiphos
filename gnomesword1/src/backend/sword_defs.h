@@ -47,7 +47,8 @@ struct  _sword {
 	SWMgr *dict_mgr;
 	SWMgr *gbs_mgr;
 	SWMgr *percom_mgr;
-	SWMgr * results;
+	SWMgr *results;
+	SWMgr *display_mgr;
 	
 	SWModule *text_mod;
 	SWModule *comm_mod;
