@@ -1,3 +1,14 @@
+2004-02-04  Terry <tbiggs@users.sf.net>
+
+	* added tabbed browsing option to preferences dialog
+	
+
+2004-02-03  Moses <m-mcknight@users.sf.net>
+
+	* started work on tabbed browsing
+	* added gnome2/tabbed_browser.c and gui/tabbed_browser.h
+
+
 2004-01-20  Terry <tbiggs@users.sf.net>
 
 	* added a 'Sources' item to the module manager - for adding and removing
