@@ -2,6 +2,7 @@
 
 	* added new sidebar menu button
 	* cleand up the html.c code
+	* changed <back> and <foward> buttons on nav toolbar to stock buttons
 
 
 2003-12-21  Terry <tbiggs@users.sf.net>
