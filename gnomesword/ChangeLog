@@ -1,3 +1,7 @@
+2002-04-02  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* split sw_gbs.* into sw_gbs.* and gs_gbs.*
+
 2002-04-01  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed detach interlinear crash when Main Text module

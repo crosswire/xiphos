@@ -2,7 +2,7 @@
 
 SUBDIRS =   help macros intl po src
 
-EXTRA_DIST = gnomesword.glade \
+EXTRA_DIST = Gnomesword.glade \
         Gnomesword.prj \
         gnomesword.desktop
 

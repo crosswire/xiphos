@@ -34,51 +34,24 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
-	
-typedef struct _GSFindDialog  GSFindDialog;
-struct _GSFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget   *htmlwidget;
-	GtkWidget   *entry;
-	GtkWidget   *backward;
-	GtkWidget   *case_sensitive;
 
-	gboolean     regular;
-};
-
-typedef struct _gbsdata GBS_DATA;
-struct _gbsdata {
-	GtkWidget *html;
-	GtkWidget *ctree;
-	GtkWidget *showtabs;
-	gchar *bookName;
-	gchar *bookDescription;
-	gchar *searchstring;
-	GSFindDialog *find_dialog;
-};	
-
-
-typedef struct _nodedata NODEDATA;
-struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
-	gchar *buf[3];
-	GdkPixmap *pixmap1;
-	GdkPixmap *pixmap2;
-	GdkBitmap *mask1;
-	GdkBitmap *mask2;
-	gboolean is_leaf;
-	gboolean expanded;
-};
-
-	void setupSW_GBS(SETTINGS *s);
-	void shutdownSW_GBS(void);
-	void load_book_tree(SETTINGS *s,
-			GtkCTreeNode *node, 
-			gchar *bookName, 
-			gchar *treekey,
+	gboolean backend_treekeyNextSiblingGBS(gchar *bookname, 
 			unsigned long offset);
-	void displayinGBS(gchar *key);
+	gboolean backend_treekeyHasChildrenGBS(gchar *bookname, 
+			unsigned long offset);
+	char *backend_treekeyGetLocalNameGBS(gchar *bookname, 
+			unsigned long offset);
+	unsigned long backend_treekeyGetOffsetGBS(gchar *bookname);
+	void backend_newDisplayGBS(GtkWidget *html, 
+			char *bookName, 
+			SETTINGS *s);
+	gboolean backend_treekeyFirstChildGBS(char *bookname,  
+			unsigned long offset);
+	gboolean backend_displayRowGBS(gchar *bookname,
+			gchar *offset);
+	void backend_setupGBS(SETTINGS *s);
+	void backend_shutdownGBS(void);
+	//void displayinGBS(gchar *key);
 
 #ifdef __cplusplus
 }

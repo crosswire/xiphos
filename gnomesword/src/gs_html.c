@@ -404,8 +404,8 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 {
 	gchar *key;
 	
-	usehtml = html;
-	settings->whichwindow = GPOINTER_TO_INT(data);
+	//usehtml = html;
+	//settings->whichwindow = GPOINTER_TO_INT(data);
 	
 	switch (event->button) {
 	case 1:if(!in_url) {
