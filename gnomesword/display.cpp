@@ -107,7 +107,7 @@ char GTKEntryDisp::Display(SWModule & imodule)
 	gtk_text_freeze(GTK_TEXT(gtkText));
 	/* let's find out if we have a comment or dict module */
 	it = mainMgr->Modules.find(imodule.Name());
-	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
+	sprintf(tmpBuf, "[%s][%s] ", imodule.Name(), imodule.KeyText());
 	/* show verse ref in text widget  */
 	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
 			-1);
@@ -452,7 +452,7 @@ char HTMLentryDisp::Display(SWModule & imodule)
 	int curPos = 0;
 	(const char *) imodule;	/* snap to entry */
 	gtk_text_freeze(GTK_TEXT(gtkText));
-	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
+	sprintf(tmpBuf, "[%s][%s] ",  imodule.Name(),imodule.KeyText());
 	gtk_text_insert(GTK_TEXT(gtkText),
 			NULL, &colourBlue, NULL, tmpBuf, -1);
 	i = j = 0;
@@ -1267,8 +1267,6 @@ char HTMLChapDisp::Display(SWModule & imodule)
 }
 
 #ifndef USE_GTKHTML
-
-
 /*****************************************************************************
 * to handle Robertson's Word Pictures in the New Testament (RWP module)
 * imodule - text to format for gtktext widget
@@ -1312,6 +1310,9 @@ char GTKRWPDisp::Display(SWModule & imodule)
 	gtk_text_forward_delete(GTK_TEXT(gtkText),
 				gtk_text_get_length((GTK_TEXT(gtkText))));	/* clear to end of text */
 	gtk_text_freeze(GTK_TEXT(gtkText));	/* to pervent flicker and movement */
+	sprintf(tmpBuf, "[%s][%s] ",  imodule.Name(),imodule.KeyText());
+	gtk_text_insert(GTK_TEXT(gtkText),
+			NULL, &colourBlue, NULL, tmpBuf, -1);
 
 	(const char *) imodule;	/*  snap to entry */
 
