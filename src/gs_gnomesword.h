@@ -43,6 +43,7 @@ struct _settings {
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu; /* add bookmark menu item */
 	gchar	
+		gs_version[16],
 		MainWindowModule[80],	/* modules to open at program startup  */
 		CommWindowModule[80],
 		DictWindowModule[80],
@@ -69,7 +70,11 @@ struct _settings {
 		dictionary_font_size[4],
 		interlinear_font_size[4],
 		verselist_font_size[4],
-		verse_num_font_size[4];			
+		verse_num_font_size[4],
+		default_font[126],
+		greek_font[126],
+		hebrew_font[126],
+		unicode_font[126];			
 	gint 
       		currentverse_red,	/* current verse colors */
 	        currentverse_green, 

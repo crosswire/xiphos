@@ -62,6 +62,7 @@ gboolean loadconfig(void)
 	SWConfig settingsInfo(buf);
 	settingsInfo.Load();
 	/* app size on open ,epane sizes and shortcut bar width */
+	sprintf(settings->gs_version,"%s",settingsInfo["GnomeSword"]["Version"].c_str());
 	settings->shortcutbar_width =
 	    atoi(settingsInfo["LAYOUT"]["Shortcutbar"].c_str());
 	settings->upperpane_hight =
@@ -90,6 +91,11 @@ gboolean loadconfig(void)
 		settingsInfo["FontSize"]["VerseListWindow"].c_str());
 	sprintf(settings->verse_num_font_size, "%s",
 		settingsInfo["FontSize"]["VerseNum"].c_str());
+	/*** fonts ***/	
+	sprintf(settings->default_font,"%s",settingsInfo["Fonts"]["Default"].c_str());
+	sprintf(settings->greek_font,"%s", settingsInfo["Fonts"]["Greek"].c_str());
+	sprintf(settings->hebrew_font,"%s",settingsInfo["Fonts"]["Hebrew"].c_str());
+	sprintf(settings->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());
 	
 	
 	/* modules to use on startup */
@@ -187,6 +193,8 @@ gboolean saveconfig(void)
 
 	sprintf(buf2, "%s/preferences.conf", gSwordDir);
 	SWConfig settingsInfo(buf2);
+	
+	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	if (settings->usedefault) {
 		settingsInfo["StudyPad"]["Lastfile"] =
 		    	settings->studypadfilename;
@@ -195,7 +203,6 @@ gboolean saveconfig(void)
 		settingsInfo["Keys"]["dictionarykey"] = 
 			settings->dictkey;
 	} else {
-
 		settingsInfo["Modules"]["MainWindow"] =
 		    settings->MainWindowModule;
 		settingsInfo["Modules"]["CommWindow"] =
@@ -244,6 +251,15 @@ gboolean saveconfig(void)
 		    settings->verselist_font_size;
 		settingsInfo["FontSize"]["VerseNum"] =
 		    settings->verse_num_font_size;
+		 settingsInfo["Fonts"]["Default"] =
+		    settings->default_font;   
+		 settingsInfo["Fonts"]["Greek"] =
+		    settings->greek_font;   
+		 settingsInfo["Fonts"]["Hebrew"] =
+		    settings->hebrew_font;   
+		 settingsInfo["Fonts"]["Unicode"] =
+		    settings->unicode_font;   
+		    
 		    
 		sprintf(buf, "%d", settings->shortcutbar_width);
 		settingsInfo["LAYOUT"]["Shortcutbar"] = buf;
@@ -381,6 +397,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 
 	sprintf(buf2, "%s/preferences.conf", gSwordDir);
 	SWConfig settingsInfo(buf2);
+	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry1")));	/* get mod name */
 	settingsInfo["Modules"]["CommWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry12")));	/* get mod name */
 	settingsInfo["Modules"]["DictWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry13")));	/* get mod name */
@@ -407,6 +424,11 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["FontSize"]["InterlinearWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseListWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseNum"] = "+0";
+		 
+	settingsInfo["Fonts"]["Default"] =  "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";   
+	settingsInfo["Fonts"]["Greek"] =	"-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
+	settingsInfo["Fonts"]["Hebrew"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
+	settingsInfo["Fonts"]["Unicode"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
 	
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";
@@ -481,6 +503,7 @@ gboolean createconfig(void)
 
 	sprintf(buf2, "%s/preferences.conf", gSwordDir);
 	SWConfig settingsInfo(buf2);
+	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = "KJV";
 	settingsInfo["Modules"]["CommWindow"] = "Personal";
 	settingsInfo["Modules"]["DictWindow"] = "Eastons";
@@ -507,6 +530,11 @@ gboolean createconfig(void)
 	settingsInfo["FontSize"]["InterlinearWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseListWindow"] = "+0";
 	settingsInfo["FontSize"]["VerseNum"] = "+0";
+	
+	settingsInfo["Fonts"]["Default"] =  "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";   
+	settingsInfo["Fonts"]["Greek"] =	"-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
+	settingsInfo["Fonts"]["Hebrew"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
+	settingsInfo["Fonts"]["Unicode"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
 	
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";
