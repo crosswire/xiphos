@@ -19,6 +19,14 @@
 #define __LISTEDITOR_H__
 
 void
+editbookmarksSave							(GtkWidget *editdlg);
+
+void
+loadbookmarkslevel						(GtkWidget *list,
+															gint level,
+															gchar *submenu);
+
+void
 addsubitme										(GtkWidget *list,
 															gint row);
 
@@ -28,13 +36,22 @@ addverse											(GtkWidget *list,
 															gchar *item);
 
 void
+deleteitem										(GtkWidget *list);
+
+void
 changeLEverse									(gchar *verse);
 
 GtkWidget *
 createListEditor							(void);
 
 void
+editbookmarks									(GtkWidget *editdlg);
+
+void
 destroyListEditor							(void);
+
+void
+applychanges									(GtkWidget *widget);
 
 void
 applylistchanges							(GtkWidget *widget,
@@ -46,9 +63,20 @@ selectrow											(GtkWidget *widget,
 															gint column);
 
 void
-movelistitem									(GtkWidget *widget,
+movelistitem									(GtkWidget *list,
 															gint direction,
 															gint listrow);
+
+void
+getrow												(GtkWidget *list,
+															gint listrow,
+															gchar *buf[6]);
+															
+void
+getcolumn											(GtkWidget *list,
+															gint row,
+															gint column,
+															gchar *buf);
 
 GtkWidget*
 create_ListEditor   					(void);

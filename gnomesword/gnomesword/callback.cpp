@@ -74,12 +74,15 @@ extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.
 extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
 extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
 extern gint ibookmarks;    //-- number of bookmark menu items
+
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	changeVerse(user_data);
+	gchar *buf;
+	buf = (gchar *)user_data;
+	changeVerse(buf);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -310,7 +313,7 @@ void
 on_romans_1_1_activate                 (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-  	changeVerse(user_data);
+  	changeVerse((gchar*)user_data);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -318,7 +321,7 @@ void
 on_luke_1_1_activate                   (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
- 	changeVerse(user_data);
+ 	changeVerse((gchar*)user_data);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1726,13 +1729,6 @@ on_btnBMEDelete_clicked                (GtkButton       *button,
 
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_btnBMEsave_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
 
 //----------------------------------------------------------------------------------------------
 void
@@ -1981,7 +1977,8 @@ void
 on_btnLEok_clicked                     (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+    applychanges(GTK_WIDGET(button));
+    gtk_widget_hide(listeditor);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1989,7 +1986,7 @@ void
 on_btnLEapply_clicked                  (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+    applychanges(GTK_WIDGET(button));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2025,3 +2022,170 @@ on_btnLEcancelistchanges_clicked       (GtkButton       *button,
 }
 
 //==============================================================================================
+//----------------------------------------------------------------------------------------------
+void
+on_new1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_open1_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+//----------------------------------------------------------------------------------------------
+void
+on_close1_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEup1_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist1");
+	movelistitem(list, 0, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEdown1_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist1");
+	movelistitem(list, 1, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEup2_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist2");
+	movelistitem(list, 0, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEdown2_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist2");
+	movelistitem(list, 1, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEup3_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist3");
+	movelistitem(list, 0, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEdown3_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clist3");
+	movelistitem(list, 1, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEaddmenu_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEdelete_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *list;
+
+   list = lookup_widget(GTK_WIDGET(button),"clLElist");
+   deleteitem(list);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEnew_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEopen_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEclose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEprev_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEnext_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLErefresh_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEsave_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *listeditor;
+
+   listeditor = gtk_widget_get_toplevel (GTK_WIDGET (button));	
+   editbookmarksSave(listeditor);
+}
