@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = m4 intl doc po src
+SUBDIRS = m4 doc po src
 
 gnomesworddoc_DATA = \
  	   README\
