@@ -246,8 +246,12 @@ void backend_module_mgr_list_local_modules_init()
 int backend_uninstall_module(const char *dir, const char *modName)
 {
 	SWModule *module;
+	SWMgr  *tmp_mgr;
 	int retval = -1;
-	SWMgr  *tmp_mgr = new SWMgr(dir);
+	if(dir)
+		tmp_mgr = new SWMgr(dir);
+	else
+		tmp_mgr = new SWMgr();
 	
 	ModMap::iterator it = tmp_mgr->Modules.find(modName);
 	if (it == tmp_mgr->Modules.end()) {
