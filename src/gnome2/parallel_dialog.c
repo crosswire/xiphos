@@ -32,6 +32,7 @@
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/parallel_view.h"
 #include "main/key.h"
 #include "main/settings.h"
 
@@ -171,7 +172,7 @@ void gui_undock_parallel_page(void)
 	settings.cvparallel =
 	    gui_update_controls_parallel(settings.currentverse);
 	gtk_widget_show(parallel_UnDock_Dialog);
-	gui_update_parallel_page_detached();
+	main_update_parallel_page_detached();
 	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }
@@ -238,7 +239,7 @@ static void on_dlgparallel_destroy(GtkObject * object,
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text), 
 					1);
 	settings.dockedInt = TRUE;
-	gui_update_parallel_page();
+	main_update_parallel_page();
 }
 
 /******************************************************************************
@@ -266,7 +267,7 @@ static void on_buttonIntSync_clicked(GtkButton * button,
 	ApplyChangeBook = FALSE;
 	settings.cvparallel =
 	    gui_update_controls_parallel(settings.currentverse);
-	gui_update_parallel_page_detached();
+	main_update_parallel_page_detached();
 	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }
@@ -304,7 +305,7 @@ static void on_entrycbIntBook_changed(GtkEditable * editable,
 					  1);
 		gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
 		settings.cvparallel = buf;
-		gui_update_parallel_page_detached();
+		main_update_parallel_page_detached();
 	}
 }
 
@@ -336,7 +337,7 @@ static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
 	settings.cvparallel = change_verse_parallel();
-	gui_update_parallel_page_detached();
+	main_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
 	return FALSE;
 }
@@ -367,7 +368,7 @@ static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
 {
 	ApplyChangeBook = FALSE;
 	settings.cvparallel = change_verse_parallel();
-	gui_update_parallel_page_detached();
+	main_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
 	return FALSE;
 }
@@ -401,7 +402,7 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		settings.cvparallel =
 		    gui_update_controls_parallel(buf); 
-		gui_update_parallel_page_detached();
+		main_update_parallel_page_detached();
 		g_free(settings.cvparallel);
 		ApplyChangeBook = TRUE;
 	}
@@ -438,7 +439,7 @@ static void on_btnIntGotoVerse_clicked(GtkButton * button,
 
 	settings.cvparallel = gui_update_controls_parallel(buf);
 
-	gui_update_parallel_page_detached();	//-- change verse to entry text 
+	main_update_parallel_page_detached();	//-- change verse to entry text 
 	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }

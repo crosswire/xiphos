@@ -46,6 +46,7 @@
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/parallel_view.h"
 #include "main/settings.h"
 #include "main/xml.h"
 
@@ -409,7 +410,7 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 		main_display_dictionary(settings.DictWindowModule, 
 			settings.dictkey);
 	if (settings.havebible)
-		gui_update_parallel_page();
+		main_update_parallel_page();
 	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
@@ -448,19 +449,19 @@ static void on_entry_changed(GtkEditable * editable, gpointer user_data)
 		g_free(url);
 		break;
 	case PARALLEL_1_MODULE:
-		gui_change_parallel_module(PARALLEL1, buf);
+		main_change_parallel_module(PARALLEL1, buf);
 		break;
 	case PARALLEL_2_MODULE:
-		gui_change_parallel_module(PARALLEL2, buf);
+		main_change_parallel_module(PARALLEL2, buf);
 		break;
 	case PARALLEL_3_MODULE:
-		gui_change_parallel_module(PARALLEL3, buf);
+		main_change_parallel_module(PARALLEL3, buf);
 		break;
 	case PARALLEL_4_MODULE:
-		gui_change_parallel_module(PARALLEL4, buf);
+		main_change_parallel_module(PARALLEL4, buf);
 		break;
 	case PARALLEL_5_MODULE:
-		gui_change_parallel_module(PARALLEL5, buf);
+		main_change_parallel_module(PARALLEL5, buf);
 		break;
 	case COMMENTARY_MODULE:
 		url = g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
