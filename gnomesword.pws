@@ -6,9 +6,9 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=305
-1=32
-2=31
+0=302
+1=106
+2=1
 3=660
 4=432
 5=38
@@ -36,38 +36,35 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/viewtext.cpp
-1=/home/terry/Projects/gnomesword1/src/backend/viewdict.cpp
-2=/home/terry/Projects/gnomesword1/src/backend/viewtext.h
-3=/home/terry/Projects/gnomesword1/src/main/gs_viewtext_dlg.c
-4=/home/terry/Projects/gnomesword1/src/main/gs_viewdict_dlg.c
+0=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+1=/home/terry/Projects/gnomesword1/src/backend/dictlex.cpp
 
 [replace_text]
-0=mod
-1=mgr
-2=display
-3=chapter_display
-4=entry_display
-5=sv->html_viewer_widget
-6=sv->tbtn_view_main
-7=sv->btn_save
+0=s->app
+1=verse_key
+2=mod
+3=mgr
+4=display
+5=chapter_display
+6=entry_display
+7=sv->html_viewer_widget
 
 [find_text]
-0=backend_setup_viewdict
-1=backend_setup_viewtext
-2=ModList_iterator_next
-3=SWMgr_getModulesIterator
-4=backend_loadkeys_viewdict
-5=text
-6=clKeys
-7=The SWORD Project is an effort
+0=on_mainwindow_destroy
+1=app
+2=shutdownVCSWORD
+3=getCOMM
+4=setupCommSWORD
+5=DefaultVCKey
+6=VCMod
+7=VCMgr
 
 [find_in_files]
-0=SDdictSearchTextChangedSWORD
-1=gotokeySWORD
-2=loadSDmodSWORD
-3=loadSDkeysSWORD
-4=getSDmodDescriptionSWORD
-5=shutdownSDSWORD
-6=setupSDSWORD
-7=form main window
+0=shutdownSWORD
+1=shutdownviewerSBSW
+2=displaydictlexSBSW
+3=getModlistSW
+4=saveshortcutbarSW
+5=loadshortcutbarSW
+6=save_iconsizeSW
+7=sbtypefromModNameSBSW

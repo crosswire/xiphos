@@ -35,21 +35,20 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-	gint sbtypefromModNameSBSW(gchar * description);
-	void save_iconsizeSW(gchar * filename, 
-				gchar * large_icons);
-	GList *loadshortcutbarSW(gchar * filename, 
-				gchar * group_name,
-				gchar * use_largeicons);
-	void saveshortcutbarSW(gchar * filename, 
-				gchar * group_name,
-			       	gint group_num, gchar * large_icons);
-	GList *getModlistSW(gchar * modtype);
-	gboolean displaydictlexSBSW(gchar * modName,
-				gchar * vlist, 
-				SETTINGS * s);
+	int backend_sb_type_from_modname(char * mod_name);
+	void backend_save_sb_iconsize(char * filename, 
+				char * large_icons);
+	GList *backend_load_sb_group(char * filename, 
+				char * group_name,
+				char * use_largeicons);
+	void backend_save_sb_group(char * filename, 
+				char * group_name,
+			       	int group_num, char * large_icons);
+	GList *backend_get_sb_mod_list(char * modtype);
+	void backend_display_sb_dictlex(char * modName,
+				char * vlist);
 	void backend_setup_viewer(GtkWidget * html_widget);
-	void shutdownviewerSBSW(void);
+	void backend_shutdown_sb_viewer(void);
 
 #ifdef __cplusplus
 }

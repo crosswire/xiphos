@@ -1278,7 +1278,8 @@ void create_mainwindow(SETTINGS *s)
 
 
 	gtk_signal_connect(GTK_OBJECT(s->app), "destroy",
-			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
+			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), 
+			   (gpointer) s);
 	gtk_signal_connect(GTK_OBJECT(s->app), "size_allocate",
 			   GTK_SIGNAL_FUNC(on_mainwindow_size_allocate),
 			   NULL);

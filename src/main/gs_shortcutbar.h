@@ -35,6 +35,8 @@ extern "C" {
 #include <gtkhtml/gtkhtml.h>
 #include "gs_gnomesword.h"
 
+	gboolean display_dictlex_in_viewer(char * modName, 
+				char * key, SETTINGS * s);
 	void display_verse_list(gchar * module_name, gchar * verse_list,
 				SETTINGS * s);
 	void search_results_select_row(GtkCList * clist, gint row,
@@ -47,7 +49,7 @@ extern "C" {
 	void change_viewer_page(GtkWidget * notebook, gint page);
 	void fill_search_results_clist(GList * glist, SEARCH_OPT * so,
 				       SETTINGS * s);
-	void setupforDailyDevotion(SETTINGS * s);
+	void set_sb_for_daily_devotion(SETTINGS * s);
 	void showSBVerseList(SETTINGS * s);
 	void showSBGroup(SETTINGS * s, gint groupnum);
 	void changegroupnameSB(SETTINGS * s,
