@@ -416,7 +416,7 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), entrySearch, TRUE, TRUE, 0);
 	gtk_widget_set_usize(entrySearch, 130, -2);;	
 	
-	btnSearch = gtk_button_new_from_stock("gtk-find");
+	btnSearch = gtk_button_new_from_stock(GTK_STOCK_FIND);
 	gtk_widget_show (btnSearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
 	gtk_tooltips_set_tip (tooltips, btnSearch, _("Click to begin the search"), NULL);
