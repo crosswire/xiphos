@@ -43,9 +43,7 @@ COMMON_SOURCE =  \
     gs_rwphtml.cpp \
     gs_rwphtml.h \
     gs_thmlhtml.cpp \
-    gs_thmlhtml.h \
-    gs_thmlplain.cpp \
-    gs_thmlplain.h
+    gs_thmlhtml.h 
 
 SPELLING_SOURCE =  \
     debug.h \
