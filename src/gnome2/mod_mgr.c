@@ -1745,7 +1745,8 @@ void gui_open_mod_mgr(void)
 	
 	path = get_path_to_mods();	
 	gtk_label_set_text(GTK_LABEL(label_system), path);
-	if(!access(path, 06)){
+	if(access(path, W_OK) == -1){
+		g_print("%s is write protected\n",path);
 		gtk_widget_set_sensitive(label_system,FALSE);
 		gtk_widget_set_sensitive(radiobutton4,FALSE);
 	} else {
