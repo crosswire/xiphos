@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Name=Gnomesword Bible Study
+Comment=The GNOME bibly study application
+Exec=gnomesword
+Icon=@pixmapdir@/GnomeSword.png
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Application;Accessories;
