@@ -1,51 +1,52 @@
 <chapter id="familiar">
-	<title>Getting Started with GnomeSword</title>
+	<title>Débuter avec &app;</title>
 <!-- ============= Getting Started with GnomeSword  ============-->
 	<sect1 id="gnomesword-getting-started">
-  		<title>Starting GnomeSword</title>
+  		<title>Démarrage</title>
 			<para>
-			You can start <application>GnomeSword</application> in the following ways:
+				Vous pouvez démarrer <application>&app;</application> en utilisant l'une des méthodes suivantes :
 			</para>
 			<variablelist>
 				<varlistentry>
-					<term>Applications menu</term>
+					<term>Menu Applications</term>
 					<listitem>
 						<para>
-						Choose <menuchoice><guisubmenu>Accessories</guisubmenu>
-						<guimenuitem>Gnomesword2 Bible Study Guide</guimenuitem>
-						</menuchoice>.
-			            </para>
+							Sélectionnez <menuchoice><guisubmenu>Accessoires</guisubmenu><guimenuitem>
+							Gnomesword</guimenuitem>
+							</menuchoice>.
+			         		</para>
     				</listitem>
     			</varlistentry>
     			<varlistentry>
-    				<term>Command line</term>
+    				<term>Ligne de commande</term>
     				<listitem>
     					<para>
-						Type <command>gnomesword2</command>, then press <keycap>Return</keycap>.
-						</para>
+						Entrez <command>gnomesword2</command>, puis appuyez sur <keycap>Return</keycap>.
+					</para>
     				</listitem>
     			</varlistentry>
   		  	</variablelist>
     </sect1>
 <!--Starting Gnomesword for the First Time  -->
   	<sect1 id="gnomesword-first-start">
-  		<title>Starting GnomeSword For The First Time</title>
+  		<title>Premier démarrage de &app;</title>
 		<para>
-		When you start <application>GnomeSword</application> for the first time, a simple
-		<interface>Setup Assistant</interface> appears. This will enable you to configure your choice of 
-		<application>SWORD Project</application> modules. It also enables you to set basic user interface 
-		options. Once your done with this, you should be presented with the <application>GnomeSword</application>
-		interface.
+			Un <interface>assistant</interface> de configuration apparaît au premier démarrage de 
+			<application>&app;</application>. Il permet de choisir les modules à installer parmi 
+			les nombreux modules du <application>SWORD Project</application> et de définir les 
+			options de base de l'interface utilisateur.
+			Une fois configuré, <application>&app;</application> affiche ensuite la fenêtre principale.
+			
 		</para>
 	 </sect1>
 <!-- GnomeSword on first time use -->
    	 <sect1 id="gnomesword-when-you-start">
-	 <title>Launching GnomeSword</title>
+	 <title>Après avoir démarré &app;</title>
 		<para>
-		When you start <application>GnomeSword</application>, the following interface is displayed:
+			Quand vous démarrez <application>&app;</application>, l'écran suivant est affiché : 
 		</para>
 		<figure id="gnomesword-start-interface">
-			<title>GnomeSword interface</title>
+			<title>Interface de &app;</title>
 			<screenshot>
 				<mediaobject>
 			 		<imageobject>
@@ -58,65 +59,71 @@
 			</screenshot>
 		</figure>
 		<para>
-		The <application>GnomeSword</application> interface contains the following elements:
+			L'interface de <application>&app;</application> est constituée des éléments suivants :
 		</para>
 		<variablelist>
 			<varlistentry>
-				<term>Menubar</term>
+				<term>Barre de menu</term>
 				<listitem>
 					<para>
-					The menus on the menubar contain several commands which extend the use of <application>GnomeSword
-					</application>. These include the StudyPad and advanced search functions.The menus also allow you to customize
-					your use of <application>GnomeSword</application>.
-			        </para>
+						Les menus donnent accès au bloc notes d'étude et aux fonctions de 
+						recherche avancée. Les menus permettent aussi de personnaliser 
+						l'utilisation de <application>&app;</application>.
+			 		</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Barre d'outils</term>
+				<listitem>
+					<para>
+					 	La <interface>barre d'outils</interface> permet de naviguer 
+						facilement parmi les versets de la Bible.
+					</para>
 				</listitem>
 		 	</varlistentry>
-	        <varlistentry>
-				<term>Toolbar</term>
-					<listitem>
-						<para>
-						 The <interface>toolbar</interface> contains buttons that let you quickly navigate through the Bible.
-						</para>
-					</listitem>
-		 		</varlistentry>
-                <varlistentry>
-					<term>Sidebar</term>
-					<listitem>
-						<para>
-						The <interface>Sidebar</interface> provides access to several features. 
-						It contains your bookmarks and the list of installed books. It can also be 
-						used to perform simple searches.
+                	<varlistentry>
+				<term>Volet latéral</term>
+				<listitem>
+					<para>
+						Le <interface>volet latéral</interface> permet de gérer les 
+						modules de textes installés, d'enregistrer et d'utiliser des
+						signets pointant sur les versets de la Bible, et offre la 
+						possibilité de réaliser des recherches simples. 
 					</para>
 				</listitem>
 		  	</varlistentry>
 		  	<varlistentry>
-				<term>Bible Text pane</term>
+				<term>Volet d'affichage des textes bibliques</term>
 				<listitem>
 					<para>
-					The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed.
+						Le <interface>volet d'affichage des textes bibliques</interface> présente 
+						le texte de la version de la Bible préalablement sélectionnée.
 					</para>
 			    </listitem>
 		  	 </varlistentry>
 		  	 <varlistentry>
-			 	<term>Commentary pane</term>
+			 	<term>Volet d'affichage des commentaires</term>
 			 	<listitem>
 					<para>
-					The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used.
+						Le <interface>volet d'affichage des commentaires</interface> affiche 
+						le commentaire relatif au texte biblique présenté.
 					</para>
 			 	</listitem>
-		     </varlistentry>
-			 <varlistentry>
-			 	<term>Dictionary/Book Pane</term>
+			</varlistentry>
+			<varlistentry>
+			 	<term>Volet d'affichage des dictionnaires et livres d'étude</term>
 			 	<listitem>
 					<para>
-					The <interface>Dictionary/Book Pane</interface> displays dictionary information
-					on selected words in the <interface>Bible Text Pane</interface>.
+						Le <interface>volet d'affichage des dictionnaires et livres d'étude</interface> 
+						affiche l'entrée du dictionnaire relative au mot selectionné ou affiche le 
+						contenu du livre d'étude choisi.
 					</para>
 			 	</listitem>
-		     </varlistentry>
-			 </variablelist>
-		     <para>
-			When you right-click in the different interface sections, the interface displays a popup menu. 
+			</varlistentry>
+			</variablelist>
+			<para>
+				Un click du bouton droit sur les différents volets d'affichage provoque
+				l'apparition d'un menu de commande par <application>&app;</application>
 			</para>
 	</sect1>
 </chapter>
