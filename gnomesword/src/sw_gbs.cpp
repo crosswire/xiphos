@@ -342,6 +342,7 @@ on_button_release_event (GtkWidget *widget,
 	return false;
 }
 
+
 void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS *s)
 {
 	show_tabs_gbs = GTK_CHECK_MENU_ITEM(menuitem)->active;

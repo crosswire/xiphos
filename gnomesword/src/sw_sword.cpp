@@ -241,8 +241,9 @@ void initSWORD(SETTINGS *s)
 	sbbookmods = NULL;
 	options = NULL;
 	
-	settings->displaySearchResults = false;
-	
+	s->displaySearchResults = false;
+	s->havethayer = false;
+	s->havebdb = false;
 	//LocaleMgr::systemLocaleMgr.setDefaultLocaleName( "de" );
 	
 	MainFrm = s->app;	//-- save mainform for use latter
@@ -294,7 +295,11 @@ void initSWORD(SETTINGS *s)
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
-			curdictMod->Disp(dictDisplay);			
+			curdictMod->Disp(dictDisplay);	
+			if(!strcmp(curdictMod->Name(),"Thayer"))
+				s->havethayer = true;
+			if(!strcmp(curdictMod->Name(),"BDB"))
+				s->havebdb = true;
 		} 
 		
 		else if (!strcmp((*it).second->Type(), "Generic Books")) { 			
@@ -688,7 +693,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		*swbmDir;
 	
 	savebookmarks(settings->ctree_widget);
-	saveconfig(true);
+	saveconfig(settings, true);
 	
 	if (settings->modifiedSP) {	//-- if study pad file has changed since last save  
 		msgbox = create_InfoBox();

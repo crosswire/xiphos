@@ -813,6 +813,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 cbBook,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbBook);
+	//gtk_widget_set_usize(cbBook, 150, -2);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
 				  NULL);
 
