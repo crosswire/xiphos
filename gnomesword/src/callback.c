@@ -7,7 +7,7 @@
     email                :  tbiggs@infinet.com
  ***************************************************************************/
 
-/* 
+/*   
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -48,51 +48,50 @@
 /******************************************************************************
  * globals
 ******************************************************************************/
-gboolean firstsearch = TRUE;	/* search dialog is not running when TRUE */
-gboolean firstLE = TRUE;	/* ListEditor in not running when TRUE */
-GtkWidget *searchDlg;		/* pointer to search dialog */
-guint num1, num2, num3;
-gboolean texttabs,
-	dicttabs,
-	comtabs,
-	bar,
-	applycolor = FALSE,
-	showtextgroup,
-	showcomgroup,
-	showdictgroup,
-	showhistorygroup;
-GtkWidget *listeditor;		/* pointer to ListEditor */
-gchar *tmpcolor;
+GtkWidget 
+	*searchDlg;   /* pointer to search dialog */	
+guint 
+	num1, 
+	num2, 
+	num3;
+gboolean 
+	firstsearch = TRUE,	/* search dialog is not running when TRUE */
+	firstLE = TRUE;	  /* ListEditor in not running when TRUE */
+GtkWidget 
+	*listeditor;		/* pointer to ListEditor */
+gchar 
+	*tmpcolor;
 /******************************************************************************
  * externals
 ******************************************************************************/
-extern gchar current_verse[80];	
-extern SETTINGS *settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
-extern gboolean ApplyChange;	/* to keep form looping when book combobox is changed */
-extern GtkWidget *MainFrm;	/* GnomeSword widget (gnome app)(declared and set in gs_sword.cpp) */
-extern GtkWidget *NEtext;
-extern GtkWidget *strongsnum;	/* menu check item (declared in gs_gnomesword.c) */
-extern GtkWidget *shortcut_bar;
-extern gchar 	*font_mainwindow,	
-		*font_interlinear,		
-		*font_currentverse;
-extern gboolean noteModified;	/* personal comments window changed */
-extern gint answer;		/* do we save file on exit */
-extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
-extern GtkWidget *htmlCommentaries;
-extern gchar *mycolor;
-extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern gchar 
+	current_verse[80],
+	*mycolor;
+extern SETTINGS 
+	*settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
+extern gboolean 
+	ApplyChange,	/* to keep form looping when book combobox is changed */
+	noteModified,	/* personal comments window changed */
+	isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
+extern GtkWidget 
+	*NEtext,
+	*strongsnum,	/* menu check item (declared in gs_gnomesword.c) */
+	*htmlCommentaries;
+extern gint 
+	answer;		/* do we save file on exit */
+extern GString 
+	*gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 
 
 /*********************************************************************************
 **********************************************************************************
- *callbacks MainFrm
+ *callbacks settings->app
 **********************************************************************************
 *********************************************************************************/
 
 /**********************************************************************************
  * main menu call backs
- * popup menu call backs are located in 
+ * popup menu call backs are located in gs_popup_cb.c
  **********************************************************************************/
 /******************************************************************************
  *on_help_contents_activate - user chose an history item
@@ -109,8 +108,6 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 		g_error (_("Cannot launch gnome-help-browser"));
 	}	
 }
-
-
 
 /******************************************************************************
  *on_mnuHistoryitem1_activate - user chose an history item
@@ -130,7 +127,7 @@ on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    activate on_btnStrongs_toogled  which will do the work */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (lookup_widget
-				      (MainFrm, "btnStrongs")),
+				      (settings->app, "btnStrongs")),
 				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
 }
 
@@ -171,7 +168,7 @@ void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
-	text = lookup_widget(MainFrm, (gchar *) user_data);	
+	text = lookup_widget(settings->app, (gchar *) user_data);	
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
@@ -179,21 +176,13 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	loadpreferencemodsSWORD();
-	/*openpropertiesbox();*/
-	texttabs = settings->text_tabs;
-	comtabs = settings->comm_tabs;
-	dicttabs = settings->dict_tabs;
-	bar = settings->showshortcutbar;
-	showtextgroup = settings->showtextgroup;
-	showcomgroup = settings->showcomgroup;
-	showdictgroup = settings->showdictgroup;
 }
 
 
 //----------------------------------------------------------------------------------------------
 void on_add_bookmark1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	addBookmark(MainFrm);
+	addBookmark(settings->app);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -241,9 +230,9 @@ on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 {
 
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		showIntPage(MainFrm, TRUE);
+		showIntPage(settings->app, TRUE);
 	else
-		showIntPage(MainFrm, FALSE);
+		showIntPage(settings->app, FALSE);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -256,7 +245,7 @@ void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
 			gpointer user_data)
 {
-	clearhistory(MainFrm,GTK_WIDGET(shortcut_bar));
+	clearhistory(settings->app,GTK_WIDGET(settings->shortcut_bar));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -276,7 +265,7 @@ void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint modNum;
 
 	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(MainFrm, "notebook1");	//-- get notebook
+	notebook = lookup_widget(settings->app, "notebook1");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
@@ -287,7 +276,7 @@ void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint modNum;
 
 	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(MainFrm, "notebook4");	//-- get notebook
+	notebook = lookup_widget(settings->app, "notebook4");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
@@ -312,10 +301,20 @@ void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
-	if (firstsearch) {
+	SETTINGS *s;
+	EShortcutBar *bar1;
+		
+	s = (SETTINGS *)user_data;
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
+	s->showshortcutbar = TRUE;		
+	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
+						 s->searchbargroup,
+						 TRUE);		
+	/*if (firstsearch) {
 		searchDlg = createSearchDlgSWORD();
 	}
-	gtk_widget_show(searchDlg);
+	gtk_widget_show(searchDlg);*/
 }
 
 
@@ -411,7 +410,7 @@ on_moduleText_button_press_event(GtkWidget * widget,
 			} else {
 				gtk_spin_button_set_value(GTK_SPIN_BUTTON
 							  (lookup_widget
-							   (MainFrm,
+							   (settings->app,
 							    "spbVerse")),
 							    versenum);	//-- set verse spin button to new number
 				verseSWORD();	//-- change modules to the new verse
@@ -593,57 +592,6 @@ void on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data)
 	spell = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(spell);
 }
-//----------------------------------------------------------------------------------------------
-void
-on_fpMainwindow_font_set(GnomeFontPicker * gnomefontpicker,
-			 GString arg1, gpointer user_data)
-{
-	font_mainwindow = arg1.str;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_fbCurrentverse_font_set(GnomeFontPicker * gnomefontpicker,
-			   GString arg1, gpointer user_data)
-{
-	font_currentverse = arg1.str;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_fbInerlinear_font_set(GnomeFontPicker * gnomefontpicker,
-			 GString arg1, gpointer user_data)
-{
-	font_interlinear = arg1.str;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cpfgCurrentverse_color_set(GnomeColorPicker * gnomecolorpicker,
-			      guint arg1,
-			      guint arg2,
-			      guint arg3, guint arg4, gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-	gdouble colo[4];
-        //gchar *colour;
-
-	num1 = arg1;
-	num2 = arg2;
-	num3 = arg3;
-	
-	gnome_color_picker_get_d(gnomecolorpicker, &colo[0] , &colo[1], &colo[2], &colo[3]);
-        tmpcolor = gdouble_arr_to_hex(colo, 1);
-        //g_warning(colour);
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(gnomecolorpicker));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	applycolor = TRUE;
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-}
-
-
 
 //----------------------------------------------------------------------------------------------
 void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data)
@@ -655,16 +603,6 @@ void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data)
 void on_btnKeyNext_clicked(GtkButton * button, gpointer user_data)
 {
 	dictchangekeySWORD(1);
-}
-//----------------------------------------------------------------------------------------------
-void
-on_fpStudypad_font_set(GnomeFontPicker * gnomefontpicker,
-		       GString arg1, gpointer user_data)
-{
-	//arg1.str;
-	gnome_property_box_changed(GNOME_PROPERTY_BOX
-				   (gtk_widget_get_toplevel(GTK_WIDGET
-							    (gnomefontpicker))));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -697,99 +635,6 @@ void
 on_tbtnFollow_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 
-}
-
-//----------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnPNformat_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-}
-
-//----------------------------------------------------------------------------------------------
-gboolean
-on_cbeFreeformLookup_drag_drop(GtkWidget * widget,
-			       GdkDragContext * drag_context,
-			       gint x,
-			       gint y, guint time, gpointer user_data)
-{
-
-	return FALSE;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_moduleText_drag_begin(GtkWidget * widget,
-			 GdkDragContext * drag_context, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_textCommentaries_drag_begin(GtkWidget * widget,
-			       GdkDragContext * drag_context,
-			       gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_textDict_drag_begin(GtkWidget * widget,
-		       GdkDragContext * drag_context, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_textComments_drag_begin(GtkWidget * widget,
-			   GdkDragContext * drag_context,
-			   gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_textComments_drag_data_get(GtkWidget * widget,
-			      GdkDragContext * drag_context,
-			      GtkSelectionData * data,
-			      guint info, guint time, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_textComments_drag_data_received(GtkWidget * widget,
-				   GdkDragContext * drag_context,
-				   gint x,
-				   gint y,
-				   GtkSelectionData * data,
-				   guint info,
-				   guint time, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-gboolean
-on_textComments_drag_drop(GtkWidget * widget,
-			  GdkDragContext * drag_context,
-			  gint x, gint y, guint time, gpointer user_data)
-{
-
-	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -855,13 +700,13 @@ on_moduleText_enter_notify_event(GtkWidget * widget,
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(MainFrm, 0);
+	historynav(settings->app, 0);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(MainFrm, 1);
+	historynav(settings->app, 1);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -902,122 +747,13 @@ on_list1_button_press_event(GtkWidget * widget,
 }
 
 //----------------------------------------------------------------------------------------------
-void
-on_cbtnShowSCB_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-	bar = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowTXtabs_toggled(GtkToggleButton * togglebutton,
-			  gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-	texttabs = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowCOMtabs_toggled(GtkToggleButton * togglebutton,
-			   gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-	comtabs = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
-			  gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-	dicttabs = togglebutton->active;
-}
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowTextgroup_toggled(GtkToggleButton * togglebutton,
-			     gpointer user_data)
-{
-	GtkWidget *dlg, *btnok, *btnapply;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(togglebutton));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
-	gtk_widget_set_sensitive(btnok, TRUE);
-	gtk_widget_set_sensitive(btnapply, TRUE);
-	showtextgroup = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowComGroup_toggled(GtkToggleButton * togglebutton,
-			    gpointer user_data)
-{
-    GtkWidget	*dlg,
-				*btnok,
-				*btnapply;
-							
-	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
-	btnok = lookup_widget(dlg,"btnPropertyboxOK");
-	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
-	gtk_widget_set_sensitive (btnok, TRUE);
-	gtk_widget_set_sensitive (btnapply, TRUE);
-	showcomgroup = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
-			     gpointer user_data)
-{
-    	GtkWidget	*dlg,
-				*btnok,
-				*btnapply;
-							
-	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
-	btnok = lookup_widget(dlg,"btnPropertyboxOK");
-	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
-	gtk_widget_set_sensitive (btnok, TRUE);
-	gtk_widget_set_sensitive (btnapply, TRUE);
-	showdictgroup = togglebutton->active;
-}
-
-//----------------------------------------------------------------------------------------------
 gboolean
 on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
         gint panesize;
-	panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,(gchar *)user_data)));
+	panesize = e_paned_get_position(E_PANED(lookup_widget(settings->app,(gchar *)user_data)));
 	
         if(panesize > 15 )
         {	if(!strcmp((gchar *)user_data,"epaned"))
@@ -1029,24 +765,6 @@ on_epaned_button_release_event(GtkWidget       *widget,
         }
         return TRUE;
 }
-
-//----------------------------------------------------------------------------------------------
-void
-on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-    	GtkWidget *dlg,
-		  *btnok,
-		  *btnapply;
-							
-	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
-	btnok = lookup_widget(dlg,"btnPropertyboxOK");
-	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
-	gtk_widget_set_sensitive (btnok, TRUE);
-	gtk_widget_set_sensitive (btnapply, TRUE);
-	showhistorygroup = togglebutton->active;
-}
-
 
 //----------------------------------------------------------------------------------------------
 void on_listeditor_destroy(GtkObject * object, gpointer user_data)

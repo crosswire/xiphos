@@ -207,6 +207,10 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	sprintf(s->DictWindowModule, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry11")));
 	sprintf(s->personalcommentsmod, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry12")));
+	sprintf(s->lex_greek, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry14")));
+	sprintf(s->lex_hebrew, "%s", buf);
 	/*** read html colors ***/
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
 				 (lookup_widget(d, "gcpText")), &color[0],
@@ -507,6 +511,10 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *entry10;
 	GtkWidget *combo25;
 	GtkWidget *entry11;
+	GtkWidget *combo26;
+	GtkWidget *entry12;
+	GtkWidget *combo27;
+	GtkWidget *entry14;
 	GtkWidget *label160;
 	GtkWidget *label161;
 	GtkWidget *label162;
@@ -1271,7 +1279,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (0), 0, 0);
 
 	sbtnTextWidth_adj =
-	    gtk_adjustment_new(s->biblepane_width, 100, 100, 1, 10, 10);
+	    gtk_adjustment_new(s->biblepane_width, 0, 500, 1, 10, 10);
 	sbtnTextWidth =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnTextWidth_adj), 1, 0);
 	gtk_widget_ref(sbtnTextWidth);
@@ -1307,7 +1315,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 							     (notebook7),
 							     1), label123);
 
-	table9 = gtk_table_new(9, 2, FALSE);
+	table9 = gtk_table_new(11, 2, FALSE);
 	gtk_widget_ref(table9);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "table9", table9,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -1428,7 +1436,30 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label159), 0, 0.5);
-
+	
+	label159 = gtk_label_new(_("Greek Lexicon"));
+	gtk_widget_ref(label159);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label159",
+				 label159,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label159);
+	gtk_table_attach(GTK_TABLE(table9), label159, 0, 1, 10, 11,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label159), 0, 0.5);
+	
+	
+	label159 = gtk_label_new(_("Hebrew Lexicon"));
+	gtk_widget_ref(label159);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label159",
+				 label159,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label159);
+	gtk_table_attach(GTK_TABLE(table9), label159, 0, 1, 12, 13,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label159), 0, 0.5);
+	
 	combo21 = gtk_combo_new();
 	gtk_widget_ref(combo21);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo21",
@@ -1521,6 +1552,44 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(entry11);
 	gtk_entry_set_text(GTK_ENTRY(entry11), s->personalcommentsmod);
 
+	combo26 = gtk_combo_new();
+	gtk_widget_ref(combo26);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo26",
+				 combo26,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo26);
+	gtk_table_attach(GTK_TABLE(table9), combo26, 1, 2, 10, 11,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0); 
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo26), dictlist);
+
+	entry12 = GTK_COMBO(combo26)->entry;
+	gtk_widget_ref(entry12);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "entry12",
+				 entry12,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(entry12);
+	gtk_entry_set_text(GTK_ENTRY(entry12), s->lex_greek);
+	
+	combo27 = gtk_combo_new();
+	gtk_widget_ref(combo27);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo27",
+				 combo27,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo27);
+	gtk_table_attach(GTK_TABLE(table9), combo27, 1, 2, 12, 13,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0); 
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo27), dictlist);
+
+	entry14 = GTK_COMBO(combo27)->entry;
+	gtk_widget_ref(entry14);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "entry14",
+				 entry14,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(entry14);
+	gtk_entry_set_text(GTK_ENTRY(entry14), s->lex_hebrew);
+	
 	label160 = gtk_label_new(_("Interlinear 5"));
 	gtk_widget_ref(label160);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label160",
@@ -1639,15 +1708,13 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnPropertyboxCancel);
 	GTK_WIDGET_SET_FLAGS(btnPropertyboxCancel, GTK_CAN_DEFAULT);
-
+	/*** color pickers ***/
 	gtk_signal_connect(GTK_OBJECT(gcpTextBG), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpText), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(cmbEntryTextSize), "changed",
-			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpCurrentverseBG), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
@@ -1657,14 +1724,20 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(gcpTextVerseNums), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(cmbEentryVNSize), "changed",
-			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpTextLinks), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
+			   NULL);
+	/*** combo entrys  font sizes ***/
+	gtk_signal_connect(GTK_OBJECT(cmbEntryTextSize), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(cmbEentryVNSize), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
 			   NULL);
 	/*gtk_signal_connect(GTK_OBJECT(btnSetToGSDefaults), "clicked",
 	   GTK_SIGNAL_FUNC(on_btnSetToGSDefaults_clicked),
 	   NULL); */
+	/*** toggle buttons ***/
 	gtk_signal_connect(GTK_OBJECT(rbtnUsedefaults), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
@@ -1695,7 +1768,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(cbtnShowHistoryGroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
-
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
@@ -1705,18 +1777,22 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
-
+	/*** spin buttons layout ***/
 	gtk_signal_connect(GTK_OBJECT(sbtnAppWidth), "changed",
-			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbtnAppHight), "changed",
-			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbtnSBWidth), "changed",
-			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbtnTextWidth), "changed",
-			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbtnUpPaneHight), "changed",
-			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
-	
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), 
+			   NULL);	
 	/*** module combos ***/
 	gtk_signal_connect(GTK_OBJECT(entry3), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), 
@@ -1745,7 +1821,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(entry11), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), 
 			   NULL);
-
+	gtk_signal_connect(GTK_OBJECT(entry12), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry14), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
 	/*** OK - Apply - Cancel ***/
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnPropertyboxOK_clicked),
@@ -1755,8 +1836,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   (SETTINGS *) s);
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxCancel), "clicked",
 			   GTK_SIGNAL_FUNC
-			   (on_btnPropertyboxCancel_clicked), NULL);
-
+			   (on_btnPropertyboxCancel_clicked), 
+			   NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSettings), "tooltips", tooltips);
 
 	for (i = 0; i < NUM_SHORTCUT_TYPES1; i++) {

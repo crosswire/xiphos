@@ -60,7 +60,6 @@
 #include "gs_search.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
-#include "gs_verselist_dlg.h"
 #include "gs_setup.h"
 #include "gs_shortcutbar.h"
 #include "sw_utility.h"
@@ -144,8 +143,8 @@ gchar *textmod,
         *dictmod;
 GtkWidget *MainFrm; /* main form widget  */
 //INTERLINEAR interlinearMods;
-GS_MODS *p_textmodule;
-GS_MODS textmodule;
+//GS_MODS *p_textmodule;
+//GS_MODS textmodule;
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
@@ -166,12 +165,10 @@ extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
-extern GS_APP gs;
+//extern GS_APP gs;
 //extern GS_FONTS *gsfonts;
 //extern GS_NB_PAGES *nbpages;
-extern GtkWidget *htmlVL;
-extern gboolean isrunningVL
-;
+
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -234,13 +231,6 @@ initSWORD(GtkWidget *mainform)
 	
 	MainFrm = lookup_widget(mainform,"settings->app"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
-	//mycolor = settings->currentverse_color; /* for GtkHTML widgets */
-	textmodule.name = NULL;
-	textmodule.type = NULL;
-	textmodule.description = NULL;
-	textmodule.key = NULL;
-	p_textmodule = &textmodule;
-
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	//chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
@@ -305,7 +295,7 @@ initSWORD(GtkWidget *mainform)
 				 percommods = g_list_append(percommods,percomMod->Name());
 				 usepersonalcomments = TRUE; //-- used by verseChange function (GnomeSword.cpp)
 				 percomMod->SetKey(settings->currentverse);
-				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
+				 gtk_widget_show(lookup_widget(settings->app,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
 	  	}
 	}
@@ -342,7 +332,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	GList *mods;
 	gchar 
 		*currRef;
-	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
+	if((GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
 		}
@@ -365,7 +355,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			swKey = curMod->KeyText();			
 			if(addhistoryitem){
 			        if(strcmp(settings->currentverse,historylist[historyitems-1].verseref))
-			                addHistoryItem(MainFrm,
+			                addHistoryItem(settings->app,
 			                        GTK_WIDGET(shortcut_bar),
 			                        settings->currentverse);			
 			}
@@ -382,10 +372,10 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			s2[l] = '\0';
 			//------------------------- set book, chapter,verse and freeform lookup entries to new verse
 			ApplyChange = false;
-			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")),s2);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")),curChapter);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),curVerse);
-			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")),swKey);
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")),s2);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")),curChapter);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse")),curVerse);
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget(settings->app,"cbeFreeformLookup")),swKey);
 			curMod->Display();	
 			g_free(currRef);
 		}
@@ -395,8 +385,8 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	updateinterlinearpage(); 
 	//---------------------------------------------------------------- change personal notes editor
 	if(settings->notebook3page == 1){ 		
-		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"tbtnFollow"))->active){ //-- if personal notes follow button is active (on)			
-			if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave)){
+		if(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"tbtnFollow"))->active){ //-- if personal notes follow button is active (on)			
+			if((GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnEditNote"))->active) && (!autoSave)){
 					//-- do nothing
 			}else{
 				if(usepersonalcomments && percomMod){
@@ -430,7 +420,7 @@ updateinterlinearpage(void)
 	gint utf8len;
 	
 	if(settings->notebook3page == 2){
-		html_widget = lookup_widget(MainFrm,"textComp1");
+		html_widget = lookup_widget(settings->app,"textComp1");
 		beginHTML(html_widget,TRUE);
 		sprintf(tmpBuf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -459,8 +449,8 @@ FillDictKeysSWORD(void)  //-- fill clist with dictionary keys -
 	gchar *listitem; //-- hold item until added to list
 	GtkWidget *list;     //-- list widget to display items found
 
-	list = lookup_widget(MainFrm, "list1"); //-- get pointer to list widget
-	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText"))); //-- get key to use form user
+	list = lookup_widget(settings->app, "list1"); //-- get pointer to list widget
+	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "dictionarySearchText"))); //-- get key to use form user
 	j=0;
 	it = mainMgr->Modules.find(curdictMod->Name()); //-- find module to use for search
 	if (it != mainMgr->Modules.end()){ //-- if we dont reach the end of our modules	
@@ -508,7 +498,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 
         sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	//writesettings(myset); //-- save setting (myset structure) to use when we start back up
-	savebookmarks(gs.ctree_widget);
+	savebookmarks(settings->ctree_widget); 
 	saveconfig();
 	if(file_changed){ //-- if study pad file has changed since last save		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
@@ -679,7 +669,7 @@ gotoBookmarkSWORD(gchar *modName, gchar *key)
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			if(!strcmp((*it).second->Name(), modName)){
 				//curMod = (*it).second;
-				notebook = lookup_widget(MainFrm,"nbTextMods");
+				notebook = lookup_widget(settings->app,"nbTextMods");
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),bibleindex ); 
 				changeVerseSWORD(key);
 				return;
@@ -688,7 +678,7 @@ gotoBookmarkSWORD(gchar *modName, gchar *key)
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			if(!strcmp((*it).second->Name(), modName)){
 				//curcomMod = (*it).second;  //-- change current module to new module				
-				notebook = lookup_widget(MainFrm,"notebook1");
+				notebook = lookup_widget(settings->app,"notebook1");
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),commindex ); 
 				changeVerseSWORD(key);
 				return;
@@ -698,8 +688,8 @@ gotoBookmarkSWORD(gchar *modName, gchar *key)
 			if(!strcmp((*it).second->Name(), modName)){
 				//curdictMod = (*it).second;  //-- change current module to new module
 				//curdictMod->SetKey(key);
-				entry = lookup_widget(MainFrm,"dictionarySearchText");
-				notebook = lookup_widget(MainFrm,"notebook4");
+				entry = lookup_widget(settings->app,"dictionarySearchText");
+				notebook = lookup_widget(settings->app,"notebook4");
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),dictindex );
 				gtk_entry_set_text(GTK_ENTRY(entry), key); 				
 				return;				
@@ -724,16 +714,17 @@ changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module 
 		                curMod->SetKey(current_verse); //-- set key to current verse
 		                curMod->Display();            //-- show it to the world
 		        }
-	        }			
+	        }	
+		/*
 		p_textmodule->name = (gchar*)curMod->Name(); 
 		p_textmodule->description = (gchar*)curMod->Description();
 		p_textmodule->type = (gchar*)curMod->Type();
 		p_textmodule->key = (gchar*)curMod->KeyText();
-		
-	       strcpy(settings->MainWindowModule, p_textmodule->name);  //(gchar*)curMod->Name()); //-- remember where we are so we can open here next time we startup
+		*/
+	       strcpy(settings->MainWindowModule, (gchar*)curMod->Name()); //-- remember where we are so we can open here next time we startup
 	
-		sprintf(title,"GnomeSword - %s", p_textmodule->description); //curMod->Description());		
-		gtk_window_set_title(GTK_WINDOW(MainFrm), title);
+		sprintf(title,"GnomeSword - %s", (gchar*)curMod->Description()); //curMod->Description());		
+		gtk_window_set_title(GTK_WINDOW(settings->app), title);
 		
         }
 }
@@ -770,7 +761,7 @@ chapterSWORD(void)  //-- someone clicked the chapter spin button
 	gint       iChap;
         gchar      *buf;
         //-- set iChap to value in spin button
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); 
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter"))); 
 	swKey.Chapter(iChap); //-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
 	buf = g_strdup(swKey); 
 	changeVerseSWORD(buf);	  //-- change all our modules to new chapter
@@ -784,7 +775,7 @@ verseSWORD(void)  //-- someone clicked the verse spin button
 	gint       iVerse;
         gchar      *buf;
         
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- set iVerse to value in spin button
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse"))); //-- set iVerse to value in spin button
 	swKey.Verse(iVerse ); //-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
 	buf = g_strdup(swKey);	
 	
@@ -799,7 +790,7 @@ btnlookupSWORD(void)  //-- add current verse to history menu
 	gchar *buf; //-- pointer to entry string
 
 	ApplyChange = false;	//-- do not want to start loop with book combo box
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeFreeformLookup")));	//-- set pointer to entry text
 
 	changeVerseSWORD(buf);	//-- change verse to entry text	
 	
@@ -812,7 +803,7 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
  	gchar *buf; //-- pointer to entry string
 
 	ApplyChange = false;	//-- do not want to start loop with book combo box
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeFreeformLookup")));	//-- set pointer to entry text
 	if(event->keyval == 65293 || event->keyval == 65421){  //-- if user hit return key continue
 
 		changeVerseSWORD(buf);	//-- change verse to entry text
@@ -836,8 +827,8 @@ changcurcomModSWORD(gchar *modName, gboolean showchange)  //-- someone changed c
 	//GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
 	//GtkWidget *label;
 	if(havebible) {			
-	        //notebook = lookup_widget(MainFrm,"notebook1"); //-- set notebook pointer to commentary notebook
-	        //frame = lookup_widget(MainFrm,"framecom"); //-- set frame to commentary frame
+	        //notebook = lookup_widget(settings->app,"notebook1"); //-- set notebook pointer to commentary notebook
+	        //frame = lookup_widget(settings->app,"framecom"); //-- set frame to commentary frame
 	        //nbpages->notebook1page = page_num; //-- save current page
 	        //g_print("page=%d\n",settings->notebook1page);
 	        it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
@@ -851,9 +842,9 @@ changcurcomModSWORD(gchar *modName, gboolean showchange)  //-- someone changed c
 		        //gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
 		        //label = gtk_label_new(curcomMod->Name());
 		       // gtk_widget_show(label);
-		        /*gtk_notebook_set_tab_label(GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")),
+		        /*gtk_notebook_set_tab_label(GTK_NOTEBOOK(lookup_widget(settings->app,"notebook3")),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (lookup_widget(MainFrm,"notebook3")),
+							     (lookup_widget(settings->app,"notebook3")),
 							     0), label);*/
 	        }
 	}	
@@ -878,18 +869,18 @@ void
 editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit button
 {
  	if(editbuttonactive){
- 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),1);
+ 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(settings->app,"nbPerCom")),1);
 		percomMod->Disp(percomDisplay);
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
-		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
+		gtk_text_set_editable (GTK_TEXT (lookup_widget(settings->app,"textComments")), TRUE); //-- set text widget to editable	
+		gtk_widget_show(lookup_widget(settings->app,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
-			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),0);
+			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(settings->app,"nbPerCom")),0);
 		}
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), false); //-- set text widget to not editable
-		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
+		gtk_text_set_editable (GTK_TEXT (lookup_widget(settings->app,"textComments")), false); //-- set text widget to not editable
+		gtk_widget_hide(lookup_widget(settings->app,"sbNotes"));//-- hide comments status bar
 	}
 	percomMod->Display(); 	
 }
@@ -902,7 +893,7 @@ savenoteSWORD(gboolean noteisModified) //-- save personal comments
 		VerseKey mykey; //-- verse key text
 		gchar *buf;     //-- pointer to a string 					
 		//GtkWidget *text; //-- pointer to commentary text widget		
-		//text = lookup_widget(MainFrm,"textComments"); //-- get text widget
+		//text = lookup_widget(settings->app,"textComments"); //-- get text widget
 		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
 		*percomMod << (const char *)buf; //-- save note!
 		//g_warning(buf);
@@ -925,7 +916,7 @@ changcurdictModSWORD(gchar *modName, gchar *keyText) //-- someone changed dict n
 	ModMap::iterator it;
         //GtkWidget   *frame;  //-- pointer to dict&lex frame
             						
-	//frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
+	//frame = lookup_widget(settings->app,"frame10"); //-- set frame to dict&lex frame
 	//nbpages->notebook2page = page_num; //-- save current page
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != mainMgr->Modules.end()){	
@@ -968,7 +959,7 @@ dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow bu
         }
         curdictMod->Display(); //-- show the changes
 	//-- put new key into dictionary text entry
-        gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")), curdictMod->KeyText());
+        gtk_entry_set_text(GTK_ENTRY(lookup_widget(settings->app,"dictionarySearchText")), curdictMod->KeyText());
         buf = g_strdup(curdictMod->KeyText());
         dictSearchTextChangedSWORD(buf);
         g_free(buf);
@@ -990,7 +981,7 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 		if(havebible) percomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
 		//percomMod->Display(); //-- show the change 	
 		//-- let's change the notebook label to match our percomMod (current personal comments module)
-  	        notebook = lookup_widget(MainFrm,"notebook3");  //-- get the notebook our page is in]
+  	        notebook = lookup_widget(settings->app,"notebook3");  //-- get the notebook our page is in]
 		label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
 		gtk_widget_show (label);   //-- make is visible
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label); //-- put label on personal comments page
@@ -1138,9 +1129,9 @@ lookupStrongsSWORD(gint theNumber) /* theNumber - strongs number was double clic
         if(a == 001) pagenum = hebrewpage; //-- if old testament use hebrew lex
         else pagenum = greekpage;          //-- if new testament use greek lex
         if(havedict){ /* let's don't do this if we don't have at least one dictionary / lexicon */    			            	
-                notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+                notebook = lookup_widget(settings->app,"notebook4"); //-- get notebook
                 gtk_notebook_set_page(GTK_NOTEBOOK(notebook), pagenum); //-- set notebook page
-                entry = lookup_widget(MainFrm,"dictionarySearchText"); //-- get the entry so we can send it the new key
+                entry = lookup_widget(settings->app,"dictionarySearchText"); //-- get the entry so we can send it the new key
                 sprintf(buf,"%d",theNumber); //-- put the number into a string
                 gtk_entry_set_text(GTK_ENTRY(entry),buf); //-- put key string into the dict entry (which will cause a on_dictionarySearchText_changed event)
         }
@@ -1535,46 +1526,7 @@ GList *getBibleBooks(void)
 	}
 	return list;	
 }
-/*
- * parse vlist for verses
- */
-gboolean getVerseListSWORD(gchar *vlist)
-{
-	gboolean retval=FALSE;
-	gchar buf[256];
-	ListKey tmpVerseList;
-	VerseKey DefaultVSKey;
-	gint count=0;
-	static GtkWidget *dlg;
-	
-	if(!isrunningVL){
-		dlg = create_dglVerseList();
-		isrunningVL = TRUE;
-	}		
-	for(int i=0; i<strlen(vlist); i++){
-		if(vlist[i] == '+') 
-			vlist[i] = ' ';
-		if(vlist[i] == ',') 
-			vlist[i] = ';';
-	}
-	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
-	beginHTML(htmlVL, FALSE);
-	while (!tmpVerseList.Error()) {
-		sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
-					settings->verselist_font_size,
-					(const char *)tmpVerseList,
-					(const char *)tmpVerseList);
-		displayHTML(htmlVL, buf, strlen(buf));
-		tmpVerseList++;
-		++count;
-	}
-	endHTML(htmlVL);
-	if(count>1){ 
-		gtk_widget_show(dlg);
-		retval = TRUE;
-	}
-	return retval;
-}
+
 
 gfloat 
 getSwordVerionSWORD(void)
@@ -1765,5 +1717,6 @@ updateshortcutbarSWORD(void)
 	
 	
 }
+
 
 
