@@ -1,5 +1,5 @@
 /***************************************************************************
-                          gs_history.cpp  -  description
+                                    gs_history.c
                              -------------------
     begin                : Thu Feb 1 2001
     copyright            : (C) 2001 by Terry Biggs
@@ -27,10 +27,9 @@
 #include "support.h"
 
 
-#if USE_SHORTCUTBAR
+
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
-#endif /* USE_SHORTCUTBAR */
 
 HISTORY historylist[25];
 gint historyitems = 0;
@@ -40,9 +39,8 @@ gboolean firstbackclick = TRUE;
 
 extern SETTINGS *settings;
 extern gint groupnum4;
-#if USE_SHORTCUTBAR
 extern gchar *shortcut_types[];
-#endif /* USE_SHORTCUTBAR */
+
 /*****************************************************************************
  *clearhistory - someone clicked clear history
  *app
@@ -50,12 +48,7 @@ extern gchar *shortcut_types[];
 *****************************************************************************/
 void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 {
-#if USE_SHORTCUTBAR
         gint i;
-#else
-        GtkWidget *toolbar30,
-		  *button;
-#endif /* USE_SHORTCUTBAR */
 
         removemenuitems(app, "_History/<Separator>", historyitems+1);
         addseparator(app, "_History/C_lear");
@@ -64,39 +57,11 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
 	
         if(settings->showhistorygroup){
-#if USE_SHORTCUTBAR
         	for(i = historyitems-1; i >= 0; i--) {
         		e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  groupnum4,
 						  i);
 		}
-#else
-        	gtk_widget_destroy(lookup_widget(app,"toolbar30"));
-
-        	toolbar30 = gtk_toolbar_new (GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_TEXT);
-  		gtk_widget_ref (toolbar30);
-  		gtk_object_set_data_full (GTK_OBJECT (app), "toolbar30", toolbar30,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  		gtk_widget_show (toolbar30);
-  		gtk_container_add (GTK_CONTAINER (lookup_widget(app,"viewport4")), toolbar30);
-  		gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar30), GTK_RELIEF_NONE);
-  	
-  		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Clear History",
-                                "Clear History",
-                                NULL,
-                                NULL, NULL, NULL);
-  		gtk_widget_ref (button);
-  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            	(GtkDestroyNotify) gtk_widget_unref);
-  		gtk_widget_show (button);
-		gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      		GTK_SIGNAL_FUNC (on_btnClearHistory_clicked),
-                     	 	NULL);
-
-#endif /* USE_SHORTCUTBAR */
         }
         historyitems = 0;
         currenthistoryitem = 0;
@@ -111,6 +76,12 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 {
         gint i;
 
+	/* check to see if item is already in list  
+	     if so do nothing */
+	for(i=0;i<historyitems;i++){
+		if(!strcmp(historylist[i].verseref,ref)) 
+			return;
+	}	
 	/* add item to history menu */
 	if(historyitems >= 24) {
 	        for(i=0;i<24;i++) { 	
@@ -120,9 +91,8 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	}
 	historylist[historyitems].itemnum = historyitems;	
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
-	                        GTK_NOTEBOOK(lookup_widget(app,"notebook1")));	
-	sprintf(historylist[historyitems].verseref,"%s",ref); 	
-	//g_warning("savemod = %s", getcommodSWORD());
+	                        GTK_NOTEBOOK(lookup_widget(app,"notebook1")));		
+	sprintf(historylist[historyitems].verseref,"%s",ref); 
 	sprintf(historylist[historyitems].textmod,"%s",gettextmodSWORD());	
 	sprintf(historylist[historyitems].commod,"%s", getcommodSWORD());
 	
@@ -131,15 +101,10 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
         /* set sensitivity of history buttons */
 	if(currenthistoryitem > 0) gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), TRUE);
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
-	
 	updatehistorymenu(app);
 	firstbackclick = TRUE;
 	if(settings->showhistorygroup){
-#if USE_SHORTCUTBAR
                 updatehistoryshortcutbar(app, shortcut_bar);
-#else     					
-		updatehistorysidebar(app);
-#endif /* USE_SHORTCUTBAR */						
 	}
 }
 
@@ -206,11 +171,11 @@ void updatehistorymenu(GtkWidget *app)
         addseparator(app, "_History/C_lear");
         for(i=0;i<historyitems;i++) {
                 sprintf(buf,"%d",historylist[i].itemnum);
-                additemtognomemenu(app, historylist[i].verseref, buf, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate);
+                additemtognomemenu(app, historylist[i].verseref, buf, "_History/<Separator>",
+					(GtkMenuCallback) on_mnuHistoryitem1_activate);
         }
 }
 
-#if USE_SHORTCUTBAR
 /*
  *
  */
@@ -230,59 +195,3 @@ void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
 						historylist[i].verseref);
         }
 }
-
-#else /* !USE_SHORTCUTBAR */
-/*
- *
- */
-void updatehistorysidebar(GtkWidget *app)
-{
-        GtkWidget *button,
-                *toolbar30;
-        gint i;
-
-        gtk_widget_destroy(lookup_widget(app,"toolbar30"));
-
-        toolbar30 = gtk_toolbar_new (GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_TEXT);
-        gtk_widget_ref (toolbar30);
-        gtk_object_set_data_full (GTK_OBJECT (app), "toolbar30", toolbar30,
-                            (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (toolbar30);
-        gtk_container_add (GTK_CONTAINER (lookup_widget(app,"viewport4")), toolbar30);
-        gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar30), GTK_RELIEF_NONE);
-  	
-        button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Clear History",
-                                "Clear History",
-                                NULL,
-                                NULL, NULL, NULL);
-        gtk_widget_ref (button);
-        gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            	(GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show (button);
-        gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      		GTK_SIGNAL_FUNC (on_btnClearHistory_clicked),
-                     	 	NULL);
-                     	 	
-        for(i=0;i<historyitems;i++) {
-                button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                historylist[i].verseref,
-                                historylist[i].verseref, NULL,
-                                NULL, NULL, NULL);
-  	        gtk_widget_ref (button);
-  	        gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
-                            	(GtkDestroyNotify) gtk_widget_unref);
-  	        gtk_widget_show (button);
-	        gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      		GTK_SIGNAL_FUNC (on_historybutton_clicked),
-                     	 	GINT_TO_POINTER(historylist[i].itemnum));
-         }	
-
-}
-#endif /* USE_SHORTCUTBAR */	
-
-
