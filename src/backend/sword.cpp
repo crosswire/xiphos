@@ -45,11 +45,9 @@
 
 #include "backend/sword.h"
 #include "backend/sword_main.hh"
+char *OLD_CODESET;
 
-using namespace sword;
-//#include <url.h>
-  
-  
+using namespace sword; 
   
 static char *get_sword_locale(void)
 {
@@ -130,8 +128,16 @@ static char *get_sword_locale(void)
 	
 #ifdef USE_SWORD_CVS
 	LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_local);
+	SWLocale *sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_local);
+	if(sw_locale)
+		OLD_CODESET = (char*)sw_locale->getEncoding();
+	else {
+		OLD_CODESET = "iso8859-1";
+		g_warning("locale not found");
+	}
 #else	
 	LocaleMgr::systemLocaleMgr.setDefaultLocaleName(sys_local);
+	OLD_CODESET = "iso8859-1";	
 #endif
 	return retval;
 }
@@ -156,30 +162,29 @@ void backend_init(void)
 {	
 	char *sword_locale = NULL;
 	const char *sword_version = get_sword_version();
-	ModMap::iterator it; 
-	
-	//URL *url = new URL("sword://KJV/Romans 8:28");
+	//ModMap::iterator it; 
+#ifdef DEBUG	
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
 	g_print("%s %s\n", _("System locale is"),
+#endif
+	
 #ifdef USE_SWORD_CVS
-		LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
+	LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
 #else		
-		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+	LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 #endif
 	sword_locale = get_sword_locale();
+#ifdef DEBUG	
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
 	g_print("%s\n", _("Checking for SWORD Modules"));
+	
+#endif
 	free((char*)sword_locale);
-	//backend_init_language_map();
-	/* create sword mgrs */
-//	backend_init_managers();
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
-//	backend_setup_treekey();
-//	backend_setup_display_mgr();
 }
 
 
@@ -210,7 +215,9 @@ void backend_shutdown(int save_properties)
 	/* delete Sword managers */
 //	backend_delete_managers();
 	delete backend;
+//#ifdef DEBUG	
 	g_print("%s\n", _("SWORD is shutdown"));
+//#endif
 }
 
 

@@ -37,7 +37,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/url.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 NAV_BAR nav_bar;
@@ -46,6 +46,7 @@ GtkWidget *spb_chapter;
 GtkWidget *spb_verse;
 GtkWidget *cbe_freeform_lookup;
 
+//static gchar *f_message = "toolbar_nav.c line #%d \"%s\" = %s";
 
 /******************************************************************************
  * Name
@@ -68,11 +69,14 @@ static void on_cbeBook_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
 	gchar *url;
-	gchar *bookname = NULL;
+	G_CONST_RETURN gchar *bookname;
 	if (settings.apply_change) {
-		bookname = e_utf8_gtk_editable_get_text(editable);
+		bookname = (gchar*)gtk_entry_get_text(GTK_ENTRY(editable)); // e_utf8_gtk_editable_get_text(editable);//e_utf8_
 		if (*bookname) {
+			//g_message(f_message,76,"bookname",bookname);
+			
 			url = g_strdup_printf("sword:///%s 1:1", bookname);
+			//g_message(f_message,80,"url",url);
 			main_url_handler(url, TRUE);
 			g_free(url);
 		}

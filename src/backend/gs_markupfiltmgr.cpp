@@ -18,6 +18,10 @@
  * General Public License for more details.
  *
  */
+ 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
 
 #include <thmlplain.h>
 #include <gbfplain.h>
@@ -26,17 +30,24 @@
 #include <thmlhtml.h>
 #include <gbfhtml.h>
 #include <plainhtml.h>
-#include <gs_thmlhtmlhref.h>
-#include <gs_gbfhtmlhref.h>
 #include <thmlrtf.h>
 #include <gbfrtf.h>
 #include <gbfosis.h>
 #include <thmlosis.h>
 #include <osisrtf.h>
-#include <gs_osishtmlhref.h>
 #include <gbfwebif.h>
 #include <thmlwebif.h>
 #include <osiswebif.h>
+
+#ifdef USE_SWORD_CVS
+#include <osishtmlhref.h>
+#include <thmlhtmlhref.h>
+#include <gbfhtmlhref.h>
+#else
+#include <gs_osishtmlhref.h>
+#include <gs_thmlhtmlhref.h>
+#include <gs_gbfhtmlhref.h>
+#endif
 
 #include "gs_markupfiltmgr.h"
 
@@ -220,10 +231,17 @@ void GSMarkupFilterMgr::CreateFilters(char markup) {
                         fromosis = NULL;
                         break;
                 case FMT_HTMLHREF:
-                        fromplain = new PLAINHTML();
+			fromplain = new PLAINHTML();
+#ifdef USE_SWORD_CVS
+                        fromthml = new ThMLHTMLHREF();
+                        fromgbf = new GBFHTMLHREF();
+                        fromosis = new OSISHTMLHREF();
+#else
                         fromthml = new GSThMLHTMLHREF();
                         fromgbf = new GSGBFHTMLHREF();
-                        fromosis = new GSOSISHTMLHREF();
+                        fromosis = new GSOSISHTMLHREF();			
+#endif
+
                         break;
                 case FMT_RTF:
                         fromplain = NULL;
