@@ -2462,7 +2462,6 @@ void gui_open_mod_mgr(void)
 	   if (g_thread_supported ())
 	   g_print("g_thread_supported\n");
 	 */
-	open_config_file(str->str);
 	mod_mgr_init(NULL);
 	dlg = create_dialog();
 
@@ -2482,7 +2481,6 @@ void gui_open_mod_mgr(void)
 
 	create_pixbufs();
 	load_source_treeviews();
-	close_config_file();
 	gtk_widget_show(dlg);
 	g_string_free(str, TRUE);
 }
