@@ -433,6 +433,7 @@ static gint button_release_event(GtkWidget * html, GdkEventButton * event,
 		return TRUE;
 		break;
 	default:
+		return FALSE;
 	}
 
 	return FALSE;

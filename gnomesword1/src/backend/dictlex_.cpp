@@ -29,6 +29,7 @@
 
 #include "backend/dictlex_.h"
 
+using namespace sword;
 
 /******************************************************************************
  * global to this file only 

@@ -124,7 +124,12 @@ for i in $2; do
 done
 ])
 
-
+AC_ARG_ENABLE(sword_namespace,[--enable-sword_namespace enable sword_namespace],sword_namespace=$enableval,sword_namespace="no") 
+if test "x$sword_namespace" = xyes; then
+      
+   AC_MSG_RESULT([use sword_namespace]) 
+   AC_DEFINE(SWORD_NAMESPACE, 1, [Define if you want to use sword_namespace])
+fi
 dnl looking for general SWORD path 
  
 AC_ARG_WITH(sworddir, 
@@ -284,6 +289,12 @@ src/main/Makefile
 echo
 echo "Summary of GnomeSword1 configuration:"
 echo
+
+if test "x$sword_namespace" = xyes; then
+        echo "Sword Namespace:                enabled"
+else
+        echo "Sword Namespace:                disabled"
+fi
 
 if test "x$have_speller" = xyes; then
         echo "Spellchecking:                enabled"

@@ -31,6 +31,7 @@
 #include <versekey.h>
 #include <regex.h>
 #include <pthread.h>
+#include <string.h>
 
 #include "backend/search.h"
 #include "backend/sword_defs.h"
@@ -39,6 +40,10 @@
 #include "main/sword.h"
 #include "main/search.h"
 
+using std::string;
+using std::map;
+using std::list;
+using namespace sword;
 static VerseKey search_scope_bounds; //----------- sets lower and upper search bounds
 static ListKey	search_scope_list; //----------- search list for searching verses found on last search
 static SWKey	*current_scope; //----------- use to set scope of search	

@@ -43,6 +43,12 @@
 
 #include "backend/bookmarks.h"
 
+
+using std::string;
+//using std::map;
+using std::list;
+using namespace sword;
+
 list < string > bmfiles;
 
 struct _ExportStruct {
@@ -521,7 +527,7 @@ GNode * backend_load_old_bookmarks(char *dir)
 	
         t = "|";
         sprintf(conffile, "%s/personal.conf", dir);
-	cout << conffile;
+	//cout << conffile;
         if (access(conffile, F_OK) == -1)
                 return NULL;
         bookmarkInfo = new SWConfig(conffile);
