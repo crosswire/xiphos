@@ -392,7 +392,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		// <title>
 		else if (!strcmp(tag.getName(), "title")) {
 			if ((!tag.isEndTag()) && (!tag.isEmpty())) {
-				buf += "<b>";
+				buf += "<br /><br /><b>";
 			} else if (tag.isEndTag()) {
 				buf += (settings.versestyle)?"</b>":"</b><br />";
 			}
