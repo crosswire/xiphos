@@ -122,9 +122,14 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
 /*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
-	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp1")) , TRUE );
-	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , TRUE );
-	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , TRUE );
+#ifdef USE_GTKHTML
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
+#else /* !USE_GTKHTML */
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp1")) , TRUE );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , TRUE );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , TRUE );
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),1);
+#endif /* USE_GTKHTML */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textDict")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );

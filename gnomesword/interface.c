@@ -32,7 +32,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include <gtkhtml/gtkhtml.h>
+//#include <gtkhtml/gtkhtml.h>
 
 #include <gnome.h>
 #include <gtk/gtk.h>
@@ -53,10 +53,6 @@
 #endif				/* USE_SPELL */
 
 GtkWidget *shortcut_bar;
-/* interlinear windows */
-GtkWidget *textComp1;
-GtkWidget *textComp2;
-GtkWidget *textComp3;	
 
 #ifdef  USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
@@ -1706,28 +1702,6 @@ GtkWidget *create_mainwindow(void)
   gtk_widget_show (label);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (nbCom), gtk_notebook_get_nth_page (GTK_NOTEBOOK (nbCom), 1), label);
 
-/*
-	scrolledwindow28 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow28);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
-				 "scrolledwindow28", scrolledwindow28,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow28);
-	gtk_container_add(GTK_CONTAINER(framecom), scrolledwindow28);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow28),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	textCommentaries = gtk_html_new();
-	gtk_widget_ref(textCommentaries);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
-				 "textCommentaries", textCommentaries,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textCommentaries);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow28),
-			  textCommentaries);
-*/
 	handlebox17 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox17);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "handlebox17",

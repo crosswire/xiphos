@@ -22,9 +22,11 @@
 
 
 #include <gnome.h>
+
+
+#ifdef USE_GTKHTML
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlobject.h>
-
 #include <gtkhtml/htmlengine-edit-clueflowstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
@@ -39,24 +41,26 @@
 #include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlcursor.h>
+#endif /* GTK_HTML */
 
 #include "gs_html.h"
 #include "support.h"
 #include "gs_sword.h"
 
+#ifdef USE_GTKHTML	
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1; 
+#endif /* GTK_HTML */
+
 GtkWidget *htmlCommentaries;
 GtkWidget *htmlTexts;
 
 extern  GtkWidget *MainFrm;
-extern	GtkWidget *textComp1;
-extern	GtkWidget *textComp2;
-extern	GtkWidget *textComp3;	
 
 /***************************************************************************************************
  *link in commentary module clicked
  ***************************************************************************************************/
+#ifdef USE_GTKHTML	 
 static void
 on_link_clicked (GtkHTML *html, const gchar *url, gpointer data)
 {	
@@ -75,6 +79,7 @@ on_link2_clicked (GtkHTML *html, const gchar *url, gpointer data)
 	     	lookupStrongsSWORD(atoi(url));
 	}else changeVerseSWORD(url);
 }
+
 
 /***************************************************************************************************
  *copy menu item clicked in any html window
@@ -129,15 +134,18 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 		: html_engine_get_selection_string (html->engine);
 	if(buf)changeVerseSWORD(buf);
 }
+#endif /* GTK_HTML */
 
 /***************************************************************************************************
  *add_gtkhtml_widgets -- add the gthhtml widgets
  ***************************************************************************************************/
 void add_gtkhtml_widgets(GtkWidget *app)
 {       	
+	GtkWidget *textComp1;
+	GtkWidget *textComp2;
+	GtkWidget *textComp3;	
 
-
-#ifdef GTK_HTML		
+#ifdef USE_GTKHTML		
 	GtkWidget *htmlComments;
 
 	htmlTexts = gtk_html_new();
@@ -226,9 +234,8 @@ void add_gtkhtml_widgets(GtkWidget *app)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textComp3);
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app,"scrolledwindow21")), textComp3);	
-			
-				
-								
+	
+					
 		
 #endif /* GTK_HTML */
 
@@ -239,7 +246,9 @@ void add_gtkhtml_widgets(GtkWidget *app)
  ***************************************************************************************************/
 void beginHTML(GtkWidget *html)
 {
+#ifdef USE_GTKHTML	
         htmlstream = gtk_html_begin(GTK_HTML(html));
+#endif /* GTK_HTML */        
 }
 
 /***************************************************************************************************
@@ -247,22 +256,26 @@ void beginHTML(GtkWidget *html)
  ***************************************************************************************************/
 void endHTML(GtkWidget *html)
 {
+#ifdef USE_GTKHTML	
 	gtk_html_end(GTK_HTML(html),
 		htmlstream,
 		status1);
+#endif /* GTK_HTML */		
 }
 
 /***************************************************************************************************
  *displayHTML
  ***************************************************************************************************/
 void displayHTML(GtkWidget *html, gchar *txt, gint lentxt)
-{        
+{  
+#ifdef USE_GTKHTML	      
 	if(strlen(txt)){		
 	 	gtk_html_write(GTK_HTML(html),
 			htmlstream,
 			txt,
 			lentxt);
 	}
+#endif /* GTK_HTML */	
 }
 
 /***************************************************************************************************
@@ -270,6 +283,8 @@ void displayHTML(GtkWidget *html, gchar *txt, gint lentxt)
  ***************************************************************************************************/
 void gotoanchorHTML(gchar *verse)
 {
+#ifdef USE_GTKHTML	
 	gtk_html_jump_to_anchor(GTK_HTML(htmlTexts),verse);
+#endif /* GTK_HTML */	
 }
 
