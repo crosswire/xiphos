@@ -23,6 +23,8 @@ COMMON_SOURCE =  \
     callback.h \
     display.cpp \
     display.h \
+    gs_display.cpp \
+    gs_display.h \
     gs_file.c \
     gs_file.h \
     gs_sword.cpp \
