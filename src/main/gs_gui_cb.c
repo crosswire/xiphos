@@ -36,7 +36,13 @@
 #include "settings.h"
 
 extern gboolean ApplyChange;
-
+extern gboolean 
+ havebible, 
+ havecomm, 
+ havedict, 
+ havebook, 
+ havepercomm;
+ 
 void
 on_mainwindow_size_allocate(GtkWidget * widget,
 			    GtkAllocation * allocation,
@@ -159,8 +165,9 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
 	}
 	firsttime = FALSE;	//-- remember we were here
-
-	gtk_widget_hide(settings.toolbarComments);
+	
+	if(havepercomm)
+		gtk_widget_hide(settings.toolbarComments);
 	gtk_widget_hide(settings.toolbarStudypad);
 
 	if (page_num == 1 && settings.editnote) {

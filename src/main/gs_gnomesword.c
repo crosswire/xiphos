@@ -70,8 +70,14 @@
  * externs
  */
 
-extern gboolean havebible, /* do we have at least one Bible text module */
- autoSave, addhistoryitem;	/* do we need to add item to history */
+extern gboolean 
+ havebible, 
+ havecomm, 
+ havedict, 
+ havebook, 
+ havepercomm, 
+ autoSave, 
+ addhistoryitem;	/* do we need to add item to history */
  
 extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
@@ -79,12 +85,10 @@ extern gint historyitems;
 /******************************************************************************
  * globals
  */
-gboolean changemain = TRUE; /* change verse of Bible text window */
 gboolean ApplyChange;
-gchar current_verse[80] = N_("Romans 8:28");
 MOD_LISTS *mod_lists;
-GList *sblist;			/* for saving search results to bookmarks  */
 MOD_LISTS mods;
+GList *sblist;	/* for saving search results to bookmarks */
 
 /******************************************************************************
  * static
@@ -113,10 +117,18 @@ void init_gnomesword(SETTINGS * s)
 
 	/* fill module lists */
 	mod_lists->options = backend_get_global_options_list();
-	mod_lists->text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
-	mod_lists->comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
-	mod_lists->dict_descriptions = backend_get_mod_description_list_SWORD(DICT_MODS);
-	mod_lists->book_descriptions = backend_get_mod_description_list_SWORD(BOOK_MODS);
+	if(havebible)
+		mod_lists->text_descriptions 
+		    = backend_get_mod_description_list_SWORD(TEXT_MODS);
+	if(havecomm)
+		mod_lists->comm_descriptions 
+		    = backend_get_mod_description_list_SWORD(COMM_MODS);
+	if(havedict)
+		mod_lists->dict_descriptions 
+		    = backend_get_mod_description_list_SWORD(DICT_MODS);
+	if(havebook)
+		mod_lists->book_descriptions 
+		    = backend_get_mod_description_list_SWORD(BOOK_MODS);
 	
 	/*
 	 *  setup shortcut bar 
@@ -129,24 +141,29 @@ void init_gnomesword(SETTINGS * s)
 	/*
 	 *  setup Bible text gui 
 	 */
-	mod_lists->biblemods = setup_text(s);
+	if(havebible)
+		mod_lists->biblemods = setup_text(s);
 
 	/*
 	 *  setup commentary gui support 
 	 */
-	mod_lists->commentarymods = setup_commentary(s);
+	if(havecomm)
+		mod_lists->commentarymods = setup_commentary(s);
 	/*
 	 *  setup personal comments gui support 
 	 */
-	mod_lists->percommods = setup_percomm(s);
+	if(havepercomm)
+		mod_lists->percommods = setup_percomm(s);
 	/*
 	 *  setup general book gui support 
 	 */
-	mod_lists->bookmods = gui_setup_gbs(s);
+	if(havebook)
+		mod_lists->bookmods = gui_setup_gbs(s);
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
-	mod_lists->dictionarymods = gui_setup_dict(s);
+	if(havedict)
+		mod_lists->dictionarymods = gui_setup_dict(s);
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
@@ -225,13 +242,18 @@ void gnomesword_shutdown(SETTINGS * s)
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
 	
-	shutdown_text();
-	gui_shutdownGBS();
-	gui_shutdownDL();
-	shutdown_commentary();
-	shutdown_percomm();
+	if(havebible)
+		shutdown_text();
+	if(havebook)
+		gui_shutdownGBS();
+	if(havedict)
+		gui_shutdownDL();
+	if(havecomm)
+		shutdown_commentary();
+	if(havepercomm)
+		shutdown_percomm();
 	
-	g_print("\nwe are done with Gnomesword\n");
+	g_print("\nGnomeSWORD is shutdown\n");
 }
 
 /*****************************************************************************
@@ -355,8 +377,8 @@ void setformatoption(GtkWidget * button)
 
 void changepagenotebook(GtkNotebook * notebook, gint page_num)
 {
-	settings.notebook3page = page_num;	/* store the page number so we can open to it the next time we start */
-	changemain = FALSE;	/* we don't want to cause the Bible text window to scrool */
+	settings.notebook3page = page_num;/* store the page number so we can 
+					     open to it the next time we start */
 }
 
 
@@ -727,9 +749,11 @@ static gchar *update_nav_controls(gchar * key)
 	/* 
 	 *  remember last verse 
 	 */
-	sprintf(settings.currentverse, "%s", val_key);
+	strcpy(settings.currentverse, val_key);
 	/* 
-	 *  set book, chapter,verse and freeform lookup entries to new verse 
+	 *  set book, chapter,verse and freeform lookup entries
+	 *  to new verse - ApplyChange is set to false so we don't
+	 *  start a loop
 	 */
 	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
 			   backend_get_book_from_key(val_key));
@@ -753,30 +777,43 @@ void change_module_and_key(gchar * module_name, gchar * key)
 
 	switch (mod_type) {
 	case TEXT_TYPE:
-		page_num =
-		    backend_get_module_page(module_name, TEXT_MODS);
-		val_key = update_nav_controls(key);
-		set_text_page_and_key(page_num, val_key);
-		g_free(val_key);
+		if(havebible) {
+			page_num =
+			    backend_get_module_page(module_name, 
+							TEXT_MODS);
+			val_key = update_nav_controls(key);
+			set_text_page_and_key(page_num, val_key);
+			g_free(val_key);
+		}
 		break;
 	case COMMENTARY_TYPE:
-		page_num =
-		    backend_get_module_page(module_name, COMM_MODS);
-		set_commentary_page_and_key(page_num, key);
+		if(havecomm) {
+			page_num =
+			    backend_get_module_page(module_name, 
+							COMM_MODS);
+			set_commentary_page_and_key(page_num, key);
+		}
 		break;
 	case DICTIONARY_TYPE:
-		page_num =
-		    backend_get_module_page(module_name, DICT_MODS);
-		gui_set_dictionary_page_and_key(page_num, key);
+		if(havedict) {
+			page_num =
+			    backend_get_module_page(module_name, 
+							DICT_MODS);
+			gui_set_dictionary_page_and_key(page_num, key);
+		}
 		break;
 	case BOOK_TYPE:
-		page_num =
-		    backend_get_module_page(module_name, BOOK_MODS);
-		if(key)
-			gui_set_book_page_and_key(page_num, key);
-		else {
-			gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookGBS),
-			      page_num);
+		if(havebook) {
+			page_num =
+			    backend_get_module_page(module_name, 
+							BOOK_MODS);
+			if(key)
+				gui_set_book_page_and_key(page_num, key);
+			else {
+				gtk_notebook_set_page(GTK_NOTEBOOK(
+					settings.notebookGBS),
+					page_num);
+			}
 		}
 		break;
 	}
@@ -787,7 +824,6 @@ void change_verse(gchar * key)
 	gchar *val_key;
 
 	val_key = update_nav_controls(key);
-	sprintf(current_verse, "%s", val_key);
 
 	ApplyChange = FALSE;
 	
@@ -809,22 +845,24 @@ void change_verse(gchar * key)
 	}
 
 	/* 
-	   change interlinear verses 
+	 * change interlinear verses 
 	 */
 	if (settings.dockedInt)
 		update_interlinear_page(&settings);
 
 	/* 
-	   change personal notes editor   if not in edit mode 
+	 * change personal notes editor   if not in edit mode 
 	 */
 	if (settings.notefollow) {	                  
 		if (!settings.editnote)
-			display_percomm(val_key);
+			if (havepercomm)
+				display_percomm(val_key);
 	}
 	/* 
-	   set commentary module to current verse 
+	 * set commentary module to current verse 
 	 */
-	display_commentary(settings.currentverse);
+	if (havecomm)
+		display_commentary(val_key);
 	
 	g_free(val_key);
 	ApplyChange = TRUE;
