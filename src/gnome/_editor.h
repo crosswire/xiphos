@@ -23,10 +23,116 @@
 #define ___EDITOR_H_
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
-#include "gs_editor.h"
+#include "settings.h"
 
+typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
+#include "editor_replace.h"
+#include "editor_search.h"
+
+
+typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
+
+#define RUN_DIALOG(name,title) run_dialog ((GnomeDialog ***)&ecd-> name ## _dialog, ecd->html, (DialogCtor) gs_editor_ ## name ## _dialog_new, title)
+
+struct _GSHTMLEditorControlData {
+	GtkHTML *html;
+	GtkWidget *htmlwidget;
+	GtkWidget *vbox;
+	GtkWidget *statusbar;
+
+	GtkWidget *cpicker;
+	GtkWidget *combo;
+	GtkWidget *paragraph_option;
+
+	GList *properties_types;
+	GSList *paragraph_group;
+
+	/* search & replace dialogs */
+	GSHTMLSearchDialog  *search_dialog;
+	GtkHTMLReplaceDialog *replace_dialog;
+
+	/* html/plain mode settings */
+	gboolean format_html;
+	HTMLGdkPainter *gdk_painter;
+	HTMLGdkPainter *plain_painter;
+
+	/* object from last button press event */
+	HTMLObject *obj;
+
+	/* button release signal id */
+	guint releaseId;
+
+	/* toolbars */
+	GtkWidget 
+		*toolbar_commands, 
+		*handlebox_toolbar,
+		*toolbar_style;
+	GtkWidget *frame_toolbar;
+	/* menu items */
+	 GtkWidget
+	    *editnote,
+	    *file,
+	    *edit2,
+	    *link;
+	/* 
+	   toolbar_commands buttons 
+	 */	
+	GtkWidget *btn_open;
+	GtkWidget *btn_save;
+	GtkWidget *btn_delete;
+	GtkWidget *btn_print;
+	GtkWidget *btn_cut;
+	GtkWidget *btn_copy;
+	GtkWidget *btn_paste;
+	GtkWidget *btn_undo;
+	GtkWidget *btn_Find;
+	GtkWidget *btn_replace;
+	GtkWidget *btn_spell;
+	/* 
+	   toolbar_style buttons 
+	 */    
+	GtkWidget
+	    * tt_button,
+	    *bold_button,
+	    *italic_button,
+	    *underline_button,
+	    *strikeout_button,
+	    *left_align_button,
+	    *center_button,
+	    *right_align_button, 
+	    *unindent_button, 
+	    *indent_button;
+	GtkWidget *bold;
+	GtkWidget *italic;
+	GtkWidget *underline;
+	GtkWidget *strikeout;
+
+	GtkWidget *left_align;
+	GtkWidget *center;
+	GtkWidget *right_align;
+
+	//GtkWidget *indent;
+	//GtkWidget *unindent;
+
+	GtkWidget *font_size_menu;
+	GtkWidget *pm;
+
+	guint font_style_changed_connection_id;
+	gboolean block_font_style_change;
+	gboolean changed;
+	gboolean personal_comments;
+	gboolean gbs; /** gen book support **/
+	gboolean studypad; 
+	gchar filename[256];
+
+};
+
+void update_statusbar(GSHTMLEditorControlData * ecd);
+GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
+void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
+void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
 GtkWidget *gui_create_html_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			 SETTINGS * s, GSHTMLEditorControlData * necd);
+void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
 
 #endif	/* ___EDITOR_H_ */

@@ -44,20 +44,22 @@
 #include "spell_gui.h"
 #endif	/* USE_SPELL */
 
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "gs_editor.h"
-#include "gs_info_box.h"
-#include "settings.h"
-
 /* gnome */
+#include "_editor.h"
 #include "editor_toolbar.h"
 #include "editor_menu.h"
+#include "editor_replace.h"
+#include "editor_search.h"
 #include "link_dialog.h"
 #include "fileselection.h"
+#include "studypad.h"
 
 /* main */
 #include "percomm.h"
+#include "gs_gnomesword.h"
+#include "gs_html.h"
+#include "gs_info_box.h"
+#include "settings.h"
 
 /****************************************************************************** 
  * editor popup menu and call backs 
@@ -190,8 +192,6 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 {
 	if (ecd->personal_comments)
 		editor_save_note(ecd->htmlwidget);
-	else
-		savebookEDITOR(ecd->htmlwidget);
 	ecd->changed = FALSE;
 	update_statusbar(ecd);
 }

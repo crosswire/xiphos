@@ -1,7 +1,7 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_toolbar.h - style toolbar for editors
- *               
+ * studypad.h - studypad gui
+ *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,12 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-#ifndef _EDITOR_TOOLBAR_H
-#define _EDITOR_TOOLBAR_H
 
+#ifndef __STUDYPAD_H_
+#define __STUDYPAD_H_
+
+#include <gnome.h>
+#include "settings.h"
 #include "_editor.h"
 
-GtkWidget *toolbar_style (GSHTMLEditorControlData * ecd);
-void toolbar_update_format (GSHTMLEditorControlData * ecd);
+gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
+gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
+gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
+GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s);
 
-#endif /* _EDITOR_TOOLBAR_H */
+#endif	/* __STUDYPAD_H_ */

@@ -125,6 +125,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	sprintf(settings.DictWindowModule, "%s", d->modName);
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
+	settings.html_dict = d->html;
 }
 
 /******************************************************************************
@@ -542,6 +543,49 @@ GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods)
 
 /******************************************************************************
  * Name
+ *  html_button_pressed
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
+ *					GSHTMLEditorControlData * d)	
+ *
+ * Description
+ *    mouse button pressed in dictionary / lexicon 
+ *
+ * Return value
+ *   gint
+ */ 
+
+static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
+					DL_DATA * dl)
+{	
+	settings.whichwindow = DICTIONARY_WINDOW;
+	
+	switch (event->button) {
+	case 1:
+		return TRUE;
+		break;
+	case 2:
+		/* 
+		 * pass this for pasting 
+		 */
+		return TRUE;
+		break;
+	case 3:
+		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+					     "button_press_event");
+		return TRUE;
+		break;
+	default:
+	}
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
  *  gui_create_dictlex_pane
  *
  * Synopsis
@@ -703,6 +747,10 @@ void gui_create_dictlex_pane(SETTINGS * s,
 					  count),
 					 (gchar *) dl->modName);
 
+	gtk_signal_connect(GTK_OBJECT(dl->html),
+			"button_press_event",
+			GTK_SIGNAL_FUNC(html_button_pressed), 
+			dl);
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",

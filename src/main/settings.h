@@ -68,34 +68,22 @@ struct _settings {
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
 		*srhtml,  /* html widget for serch results list in shortcut bar */	
 		*htmlRP,  /* html widget for serch report shortcut bar */
-		*htmlcomm, /* html commentary widget */
-		*htmlSP, /* studypad html widget */
-		*htmlBook, /* gbs html widget */
 		*htmlInterlinear, /* interlinear html widget */
+		*html_text, /* texts html widget */
+		*html_comm, /* html commentary widget */
+		*html_percomm, /* html personal commentary widget */
+		*html_dict, /* html dictionary widget */
+		*html_book, /* gbs html widget */
+		*html_studypad, /* studypad html widget */
 	
 	/* popup menu widgets */
-		*menuBible,
-		*menuhtmlcom,
-		*menuDict,
 		*menuInt,
 		
 	/* popup menu item widgets */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
-		*add_bookmark_menu, /* add bookmark menu item */
 		*unlocktextmod_item, /* unlock module menu item */
 		*unlockcommmod_item, /* unlock module menu item */
-		*unlockdictmod_item, /* unlock module menu item */
-	
-	/* global option menu check item widgets */
-		*strongsnum,
-		*footnotes,
-		*hebrewpoints,
-		*cantillationmarks,
-		*greekaccents,
-		*morphs,
-		*crossrefs,
-		*lemmas,
-		*headings;
+		*unlockdictmod_item; /* unlock module menu item */
 		
 	gchar	
 		gs_version[16], /* GnomeSWORD version */

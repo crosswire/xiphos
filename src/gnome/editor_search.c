@@ -31,9 +31,8 @@
 
 /* frontend */
 #include "editor_search.h"
+#include "_editor.h"
 
-/* main */
-#include "gs_editor.h"
 
 struct _GSHTMLSearchDialog {
 	GnomeDialog *dialog;

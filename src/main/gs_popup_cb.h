@@ -37,8 +37,6 @@ extern "C" {
 
 	void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s);
 	/*** toogle global options in interlinear window ***/
-	void on_edit_book_activate(GtkMenuItem * menuitem,  gchar *user_data);
-	void on_save_book_activate(GtkMenuItem * menuitem, gchar *user_data);
 	void on_print_item_activate(GtkMenuItem * menuitem, gchar * html);
 	void on_int_global_options_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);

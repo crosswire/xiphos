@@ -27,8 +27,12 @@ typedef struct _GSHTMLSearchDialog  GSHTMLSearchDialog;
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#include "_editor.h"
 GSHTMLSearchDialog * gs_editor_search_dialog_new(GtkHTML *html);
 void gs_editor_search_dialog_destroy(GSHTMLSearchDialog *d);
+void search (GSHTMLEditorControlData *ecd, 
+				gboolean regular, gchar *text);
+void search_next (GSHTMLEditorControlData *ecd);
 
 
 #endif

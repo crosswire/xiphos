@@ -27,13 +27,13 @@
 
 /* frontend */
 #include "_percomm.h"
+#include "_editor.h"
 #include "module_options.h"
 
 
 /* main */
 #include "percomm.h"
 #include "gs_gnomesword.h"
-#include "gs_editor.h"
 #include "gs_html.h"
 #include "gs_info_box.h"
 #include "support.h"
@@ -48,12 +48,85 @@
 
 /******************************************************************************
  * globals to this file only 
- */
- 
+ */ 
 static GList *percomm_list;
 static gboolean display_change = TRUE;
+static GString *gstr;
 
+/******************************************************************************
+ * globals
+ */ 
 PC_DATA *cur_p;
+
+/******************************************************************************
+ * Name
+ *   save_note_receiver
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   	gboolean save_note_receiver(const HTMLEngine * engine,
+ *		   const char *data, unsigned int len, void *user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+
+static gboolean save_note_receiver(const HTMLEngine * engine,
+		   const char *data, unsigned int len, void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+	if (!strncmp(data, "</BODY>", 7))
+		startgrabing = FALSE;
+	if (startgrabing) {
+		gstr = g_string_append(gstr, data);
+		//g_warning(gstr->str);
+	}
+	if (strstr(data, "<BODY") != NULL)
+		startgrabing = TRUE;
+
+	return TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   editor_save_note
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   void editor_save_note(GtkWidget * html_widget)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void editor_save_note(GtkWidget * html_widget)
+{
+	GtkHTML *html;
+
+	html = GTK_HTML(html_widget);
+	gtk_html_set_editable(html, FALSE);
+	gstr = g_string_new("");
+	if (!gtk_html_save
+	    (html, (GtkHTMLSaveReceiverFn) save_note_receiver,
+	     GINT_TO_POINTER(0))) {
+		g_warning("file not writen");
+	} else {
+		save_percomm_note(gstr->str);
+		g_print("\nfile writen\n");
+	}
+	g_string_free(gstr, 1);
+	gtk_html_set_editable(html, TRUE);
+}
+
 
 /******************************************************************************
  * Name
@@ -172,7 +245,7 @@ void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 		gtk_widget_show(p->ec->frame_toolbar);
 		gtk_widget_show(p->ec->handlebox_toolbar);
 	}
-		
+	settings.html_percomm = p->ec->htmlwidget;	
 }
 
 /******************************************************************************
