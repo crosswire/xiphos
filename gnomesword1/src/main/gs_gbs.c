@@ -352,11 +352,8 @@ on_button_release_event(GtkWidget * widget,
 
 void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
-    show_tabs_gbs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-    if (show_tabs_gbs)
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), TRUE);
-    else
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), FALSE);
+    s->book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+    gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), s->book_tabs);
 }
 
 static

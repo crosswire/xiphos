@@ -65,7 +65,7 @@ module.source.name=.
 module.source.type=
 module.source.expanded=1
 module.source.files=\
-	src/backend/viewtext_dlg.cpp\
+	src/backend/viewtext.cpp\
 	src/backend/viewdict_dlg.cpp\
 	src/backend/viewcomm_dlg.cpp\
 	src/backend/verselist_sb.cpp\

@@ -26,8 +26,8 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __gs_viewtext_sw_H__
-#define __gs_viewtext_sw_H__
+#ifndef __viewtext_H__
+#define __viewtext_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,18 +35,16 @@ extern "C" {
 
 #include <gnome.h>
 
-	GList *VTsetupSWORD(GtkWidget * text, GtkWidget * cbBook);
-	void VTshutdownSWORD(void);
-	void VTgotoverseSWORD(gchar * newkey);
-	void VTloadmodSWORD(gchar * modName);
-	gchar *VTgetmodDescriptionSWORD(void);
-	void VTchangeverseSWORD(gchar * verse);
-	gchar *VTgetbookSWORD(void);
-	gint VTgetchapterSWORD(void);
-	gint VTgetverseSWORD(void);
-	void VTsetGlobalOptionsSWORD(gchar * option, gchar * onoff);
+	GList *backend_setup_viewtext(GtkWidget * text);
+	void backend_shutdown_viewtext(void);
+	void backend_goto_verse_viewtext(gchar * newkey);
+	void backend_load_module_viewtext(gchar * modName);
+	gchar *backend_get_book_viewtext(void);
+	gint backend_get_chapter_viewtext(void);
+	gint backend_get_verse_viewtext(void);
+	void backend_set_global_options_viewtext(gchar * option, gchar * onoff);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __gs_viewtext_sw_H__ */
+#endif				/* __viewtext_H__ */
