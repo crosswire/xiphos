@@ -2087,7 +2087,6 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *frame_scope;
 	GtkWidget *vbox77;
 	GtkWidget *hbox77;
-	GSList *hbox77_group = NULL;
 	GtkWidget *rb_no_scope;
 	GtkWidget *rb_last;
 	GtkWidget *rb_custom_range;
@@ -2098,7 +2097,6 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *frame_modlists;
 	GtkWidget *vbox79;
 	GtkWidget *hbox79;
-	GSList *hbox79_group = NULL;
 	GtkWidget *rb_one_mod;
 	GtkWidget *rb_mod_list;
 	GtkWidget *rb_custom_list;
@@ -2109,7 +2107,6 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *vbox72;
 	GtkWidget *frame49;
 	GtkWidget *vbox63;
-	GSList *_301_group = NULL;
 	GtkWidget *rb_words;
 	GtkWidget *tb_regexp;
 	GtkWidget *rb_exact_phrase;
@@ -2302,10 +2299,8 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox77), hbox77, TRUE, TRUE, 0);
 
 	rb_no_scope =
-	    gtk_radio_button_new_with_label(hbox77_group,
+	    gtk_radio_button_new_with_label(NULL,
 					    _("Entire module"));
-	hbox77_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_no_scope));
 	gtk_widget_show(rb_no_scope);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_no_scope, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_no_scope,
@@ -2313,22 +2308,18 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rb_no_scope),
 				     TRUE);
 
-	rb_last =
-	    gtk_radio_button_new_with_label(hbox77_group,
-					    _("Current results"));
-	hbox77_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_last));
+	rb_last = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_no_scope,
+                                             _("Current results"));
 	gtk_widget_show(rb_last);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_last, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_last,
-			     _("Use the results of the last search as the scope of the search"),
+		_("Use the results of the last search as the scope of the search"),
 			     NULL);
 
-	rb_custom_range =
-	    gtk_radio_button_new_with_label(hbox77_group,
-					    _("Custom range"));
-	hbox77_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_custom_range));
+	rb_custom_range = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_no_scope,
+                                             _("Custom range"));
 	gtk_widget_show(rb_custom_range);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_custom_range, TRUE, TRUE,
 			   0);
@@ -2379,10 +2370,8 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox79), hbox79, TRUE, TRUE, 0);
 
 	rb_one_mod =
-	    gtk_radio_button_new_with_label(hbox79_group,
+	    gtk_radio_button_new_with_label(NULL,
 					    _("Single module"));
-	hbox79_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_one_mod));
 	gtk_widget_show(rb_one_mod);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_one_mod, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_one_mod,
@@ -2391,11 +2380,9 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rb_one_mod),
 				     TRUE);
 
-	rb_mod_list =
-	    gtk_radio_button_new_with_label(hbox79_group,
-					    _("Module list"));
-	hbox79_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_mod_list));
+	rb_mod_list = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_one_mod,
+                                             _("Module list"));
 	gtk_widget_show(rb_mod_list);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_mod_list, FALSE, TRUE,
 			   0);
@@ -2403,11 +2390,9 @@ static GtkWidget *create_search_dialog(void)
 			     _("Use the current module list for the search"),
 			     NULL);
 
-	rb_custom_list =
-	    gtk_radio_button_new_with_label(hbox79_group,
-					    _("Custom list"));
-	hbox79_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_custom_list));
+	rb_custom_list = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_mod_list,
+                                             _("Custom list"));
 	gtk_widget_show(rb_custom_list);
 	gtk_box_pack_start(GTK_BOX(hbox79), rb_custom_list, FALSE, TRUE,
 			   0);
@@ -2456,25 +2441,20 @@ static GtkWidget *create_search_dialog(void)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox63), 4);
 
 	rb_words =
-	    gtk_radio_button_new_with_label(_301_group,
+	    gtk_radio_button_new_with_label(NULL,
 					    _("Multi word"));
-	_301_group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_words));
 	gtk_widget_show(rb_words);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_words, FALSE, FALSE, 0);
 
-	tb_regexp =
-	    gtk_radio_button_new_with_label(_301_group,
-					    _("Regular expression"));
-	_301_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(tb_regexp));
+	tb_regexp = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_words,
+                                             _("Regular expression"));
 	gtk_widget_show(tb_regexp);
 	gtk_box_pack_start(GTK_BOX(vbox63), tb_regexp, FALSE, FALSE, 0);
 
-	rb_exact_phrase =
-	    gtk_radio_button_new_with_label(_301_group,
-					    _("Exact phrase"));
-	_301_group =
-	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb_exact_phrase));
+	rb_exact_phrase = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_words,
+                                             _("Exact phrase"));
 	gtk_widget_show(rb_exact_phrase);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_exact_phrase, FALSE,
 			   FALSE, 0);

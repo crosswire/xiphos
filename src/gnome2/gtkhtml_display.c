@@ -476,7 +476,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 				sprintf(tmpbuf, " %s", "</font><br>");
 			} else {
 				br = g_strrstr(text_str, "<br"); /* last occurance */
-				if(strlen(br) > 6)					
+				if(strlen(br) > 6) /* we have a new line that's
+						      not at the end of the string */					
 					sprintf(tmpbuf, " %s", "</font><br>");
 				else
 					sprintf(tmpbuf, " %s", "</font>");
