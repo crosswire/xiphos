@@ -13,20 +13,22 @@
 # --recheck option to rerun configure.
 #
 ac_cv_header_X11_SM_SMlib_h=${ac_cv_header_X11_SM_SMlib_h='yes'}
-ac_cv_header__usr_include_aspell_manager_hh=${ac_cv_header__usr_include_aspell_manager_hh='no'}
-ac_cv_header_aspell_manager_hh=${ac_cv_header_aspell_manager_hh='no'}
 ac_cv_header_stdc=${ac_cv_header_stdc='yes'}
 ac_cv_lib_SM_SmcSaveYourselfDone=${ac_cv_lib_SM_SmcSaveYourselfDone='yes'}
 ac_cv_lib_Xpm_XpmFreeXpmImage=${ac_cv_lib_Xpm_XpmFreeXpmImage='yes'}
 ac_cv_lib_pthread_pthread_create=${ac_cv_lib_pthread_pthread_create='yes'}
 ac_cv_path_GNOME_CONFIG=${ac_cv_path_GNOME_CONFIG='/usr/bin/gnome-config'}
 ac_cv_path_GTK_CONFIG=${ac_cv_path_GTK_CONFIG='/usr/bin/gtk-config'}
+ac_cv_path_LD=${ac_cv_path_LD='/usr/bin/ld'}
+ac_cv_path_NM=${ac_cv_path_NM='/usr/bin/nm -B'}
 ac_cv_path_ORBIT_CONFIG=${ac_cv_path_ORBIT_CONFIG='/usr/bin/orbit-config'}
 ac_cv_path_ORBIT_IDL=${ac_cv_path_ORBIT_IDL='/usr/bin/orbit-idl'}
 ac_cv_path_install=${ac_cv_path_install='/usr/bin/install -c'}
 ac_cv_prog_CC=${ac_cv_prog_CC='gcc'}
 ac_cv_prog_CPP=${ac_cv_prog_CPP='gcc -E'}
 ac_cv_prog_CXX=${ac_cv_prog_CXX='c++'}
+ac_cv_prog_LN_S=${ac_cv_prog_LN_S='ln -s'}
+ac_cv_prog_RANLIB=${ac_cv_prog_RANLIB='ranlib'}
 ac_cv_prog_cc_cross=${ac_cv_prog_cc_cross='no'}
 ac_cv_prog_cc_g=${ac_cv_prog_cc_g='yes'}
 ac_cv_prog_cc_works=${ac_cv_prog_cc_works='yes'}
@@ -34,6 +36,7 @@ ac_cv_prog_cxx_cross=${ac_cv_prog_cxx_cross='no'}
 ac_cv_prog_cxx_g=${ac_cv_prog_cxx_g='yes'}
 ac_cv_prog_cxx_works=${ac_cv_prog_cxx_works='yes'}
 ac_cv_prog_gcc=${ac_cv_prog_gcc='yes'}
+ac_cv_prog_gnu_ld=${ac_cv_prog_gnu_ld='yes'}
 ac_cv_prog_gxx=${ac_cv_prog_gxx='yes'}
 ac_cv_prog_make_make_set=${ac_cv_prog_make_make_set='yes'}
 gnome_cv_gnorba_found=${gnome_cv_gnorba_found='yes'}

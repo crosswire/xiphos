@@ -57,23 +57,35 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AS = @AS@
 CC = @CC@
 CXX = @CXX@
+DLLTOOL = @DLLTOOL@
+EXTRA_GNOME_CFLAGS = @EXTRA_GNOME_CFLAGS@
+EXTRA_GNOME_LIBS = @EXTRA_GNOME_LIBS@
 GNOMEGNORBA_LIBS = @GNOMEGNORBA_LIBS@
 GNOMEUI_LIBS = @GNOMEUI_LIBS@
 GNOME_APPLETS_LIBS = @GNOME_APPLETS_LIBS@
 GNOME_CAPPLET_LIBS = @GNOME_CAPPLET_LIBS@
 GNOME_CONFIG = @GNOME_CONFIG@
+GNOME_DOCKLETS_LIBS = @GNOME_DOCKLETS_LIBS@
 GNOME_INCLUDEDIR = @GNOME_INCLUDEDIR@
 GNOME_LIBDIR = @GNOME_LIBDIR@
 GNOME_LIBS = @GNOME_LIBS@
+GNOME_PRINT_CFLAGS = @GNOME_PRINT_CFLAGS@
+GNOME_PRINT_LIBS = @GNOME_PRINT_LIBS@
 GNORBA_CFLAGS = @GNORBA_CFLAGS@
 GNORBA_LIBS = @GNORBA_LIBS@
 GTKXMHTML_LIBS = @GTKXMHTML_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_CONFIG = @GTK_CONFIG@
 GTK_LIBS = @GTK_LIBS@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
+OBJDUMP = @OBJDUMP@
 ORBIT_CFLAGS = @ORBIT_CFLAGS@
 ORBIT_CONFIG = @ORBIT_CONFIG@
 ORBIT_IDL = @ORBIT_IDL@
@@ -81,13 +93,15 @@ ORBIT_LIBS = @ORBIT_LIBS@
 PACKAGE = @PACKAGE@
 PACKAGE_PIXMAPS_DIR = @PACKAGE_PIXMAPS_DIR@
 PTHREAD_LIB = @PTHREAD_LIB@
+RANLIB = @RANLIB@
 VERSION = @VERSION@
 XPM_LIBS = @XPM_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-SUBDIRS = macros gnomesword
+SUBDIRS = macros 		e-util 		widgets 		gnomesword
+
 
 EXTRA_DIST = gnomesword.glade gnomesword.kdevprj
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -95,8 +109,9 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = 
 DIST_COMMON =  README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
-Makefile.am Makefile.in NEWS TODO acconfig.h aclocal.m4 config.h.in \
-configure configure.in install-sh missing mkinstalldirs
+Makefile.am Makefile.in NEWS TODO acconfig.h aclocal.m4 config.guess \
+config.h.in config.sub configure configure.in install-sh ltconfig \
+ltmain.sh missing mkinstalldirs
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
@@ -349,6 +364,7 @@ clean-am:  clean-hdr clean-tags clean-generic mostlyclean-am
 clean: clean-recursive
 
 distclean-am:  distclean-hdr distclean-tags distclean-generic clean-am
+	-rm -f libtool
 
 distclean: distclean-recursive
 	-rm -f config.status

@@ -148,3 +148,19 @@ AC_DEFUN([BONOBO_CHECK], [
 	AM_PATH_BONOBO(0.1.0,,[AC_MSG_ERROR(BONOBO not found)])
 ])
 
+AC_DEFUN([AM_BONOBO_USES_OAF],
+[
+	AC_REQUIRE([AM_PATH_BONOBO])
+
+	AC_MSG_CHECKING(if Bonobo uses OAF)
+	if ( gnome-config --libs bonobo | grep oaf ) > /dev/null 2>&1 ; then
+	  using_oaf="yes"
+	  AC_DEFINE(BONOBO_USES_OAF)
+	else
+	  using_oaf="no"
+	fi
+
+	AC_MSG_RESULT("$using_oaf")
+
+	AM_CONDITIONAL(BONOBO_USES_OAF, test x"using_oaf" = "xyes")
+])

@@ -31,11 +31,12 @@ MAINTAINERCLEANFILES=macros.dep
 @MAINT@	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=macros/%)' > $@
 
 if INSIDE_GNOME_COMMON
-gnome_aclocaldir = $(datadir)/aclocal/gnome
+gnome_aclocaldir = $(datadir)/aclocal/gnome-macros
 
 gnome-macros.dep: Makefile.am
 	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=$(gnome_aclocaldir)/%)' > $@
 
-gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 autogen.sh
+gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 \
+	autogen.sh
 
 endif

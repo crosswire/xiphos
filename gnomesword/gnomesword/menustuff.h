@@ -24,7 +24,8 @@
  
  void
 additemtognomemenu		(GtkWidget *MainFrm, 
-									gchar *itemname, 
+									gchar *itemname,
+									gchar *itemdata,
 									gchar *submenuname, 
 									GtkMenuCallback mycallback);
 

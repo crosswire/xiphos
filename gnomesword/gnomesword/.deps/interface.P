@@ -181,7 +181,14 @@ interface.o: interface.c ../config.h /usr/include/sys/types.h \
  /usr/include/libgnomeui/gnome-druid-page-start.h \
  /usr/include/libgnomeui/gnome-druid-page-standard.h \
  /usr/include/libgnomeui/gnome-druid-page-finish.h callback.h \
- interface.h support.h
+ interface.h ../widgets/shortcut-bar/e-shortcut-bar.h \
+ ../widgets/shortcut-bar/e-group-bar.h \
+ ../widgets/shortcut-bar/e-icon-bar.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
+ ../widgets/shortcut-bar/../../e-util/e-canvas.h \
+ ../widgets/shortcut-bar/e-shortcut-model.h \
+ ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h support.h
 interface.c :
 ../config.h :
 /usr/include/sys/types.h :
@@ -452,4 +459,13 @@ interface.c :
 /usr/include/libgnomeui/gnome-druid-page-finish.h :
 callback.h :
 interface.h :
+../widgets/shortcut-bar/e-shortcut-bar.h :
+../widgets/shortcut-bar/e-group-bar.h :
+../widgets/shortcut-bar/e-icon-bar.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
+../widgets/shortcut-bar/../../e-util/e-canvas.h :
+../widgets/shortcut-bar/e-shortcut-model.h :
+../widgets/e-paned/e-hpaned.h :
+../widgets/e-paned/e-paned.h :
 support.h :
