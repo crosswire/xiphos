@@ -194,6 +194,11 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				++i;
 				++havemod;
 			}
+		} else {
+			if(strlen(settings->default_text) > 1){
+				strcpy(newmod,settings->default_text);	
+				havemod = 3;
+			}
 		}
 		mybuf = NULL;
 		mybuf = strstr(url, "passage=");

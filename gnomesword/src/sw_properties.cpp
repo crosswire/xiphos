@@ -143,6 +143,7 @@ gboolean loadconfig(SETTINGS *s)
 		settingsInfo["Modules"]["PerComments"].c_str());
 	sprintf(s->devotionalmod, "%s",
 		settingsInfo["Modules"]["Devotional"].c_str());
+	strcpy(s->default_text, settingsInfo["Modules"]["Default Bible Text"].c_str());
 		
 	/* main notebook page */
 	s->notebook3page =
@@ -274,6 +275,8 @@ gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 		    s->personalcommentsmod;
 		settingsInfo["Modules"]["Devotional"] =
 		    s->devotionalmod;
+		settingsInfo["Modules"]["Default Bible Text"] =
+		    s->default_text;
 
 		settingsInfo["LEXICONS"]["Greek"] = s->lex_greek;
 		settingsInfo["LEXICONS"]["Hebrew"] = s->lex_hebrew;
