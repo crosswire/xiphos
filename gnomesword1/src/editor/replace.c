@@ -28,7 +28,7 @@
 #include "dialog.h"
 #include "gtkhtml/htmlengine.h"
 
-#define ICONDIR "./art"
+//#define ICONDIR "./art"
 
 struct _GtkHTMLReplaceAskDialog {
 	GtkDialog  *dialog;
@@ -84,7 +84,7 @@ ask_dialog_new (HTMLEngine *e)
 							     NULL));
 	d->engine = e;
 
-	gnome_window_icon_set_from_file (GTK_WINDOW (d->dialog), ICONDIR "/search-and-replace-24.png");
+	gnome_window_icon_set_from_file (GTK_WINDOW (d->dialog), PACKAGE_PIXMAPS_DIR "/search-and-replace-24.png");
 	g_signal_connect (d->dialog, "response", G_CALLBACK (ask_dialog_response), d);
 
 	return d;
@@ -206,7 +206,8 @@ gtk_html_replace_dialog_new (GtkHTML *html, GSHTMLEditorControlData *cd)
 	gtk_widget_show_all (table);
 	gtk_widget_show_all (hbox);
 
-	gnome_window_icon_set_from_file (GTK_WINDOW (dialog->dialog), ICONDIR "/search-and-replace-24.png");
+	gnome_window_icon_set_from_file (GTK_WINDOW (dialog->dialog), 
+					PACKAGE_PIXMAPS_DIR"/search-and-replace-24.png");
 
 	gtk_widget_grab_focus (dialog->entry_search);
 
