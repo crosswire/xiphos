@@ -61,9 +61,15 @@ void addbooktoCTreeGS_GBS(SETTINGS * s, GList * books)
 	GList * tmp = NULL;
 	gchar * buf[3];
 	GtkCTreeNode * node;
-
-
-
+	gint i, count;	
+	
+	gtk_ctree_collapse_recursive (GTK_CTREE(s->ctree_widget_books), NULL); 
+	count = GTK_CLIST(GTK_CTREE(s->ctree_widget_books))->rows;
+	for(i=0; i< count; i++){
+		node = gtk_ctree_node_nth(GTK_CTREE(s->ctree_widget_books), i);
+		gtk_ctree_remove_node (GTK_CTREE(s->ctree_widget_books), node);
+	}
+		
 	tmp = books;
 	while (tmp != NULL) {
 		buf[0] = (gchar *) tmp->data;
@@ -112,7 +118,8 @@ GtkWidget *setupGBS(SETTINGS * s, GList * books)
 
 	/* load books */
 	//loadBookListSW_GBS(s);
-	addbooktoCTreeGS_GBS(s, books);
+	//addbooktoCTreeGS_GBS(s, books);
+	loadBookListSW_GBS(s);
 	/* create and attach popup menu */
 	pmGbs = create_pmGBS();
 	gnome_popup_menu_attach(pmGbs, s->ctree_widget_books, s);

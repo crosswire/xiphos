@@ -7,7 +7,7 @@
     * Mon May 8 2000
     * copyright (C) 2001 by Terry Biggs
     * tbiggs@users.sourceforge.net
- */
+  */
 
 /*   
  *  This program is free software; you can redistribute it and/or modify
@@ -34,9 +34,9 @@ extern "C" {
 
 #include <gnome.h>
 
-	void on_mainwindow_size_allocate(GtkWidget       *widget,
-                                        GtkAllocation   *allocation,
-                                        gpointer         user_data);
+	void on_mainwindow_size_allocate(GtkWidget * widget,
+					 GtkAllocation * allocation,
+					 gpointer user_data);
 	void on_nbTextMods_switch_page(GtkNotebook * notebook,
 				       GtkNotebookPage * page,
 				       gint page_num, gpointer user_data);
@@ -57,9 +57,9 @@ extern "C" {
 	void on_btnStrongs_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data);
 	void on_btnMorphs_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data);
+				  gpointer user_data);
 	void on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data);
+				     gpointer user_data);
 	void on_cbeBook_changed(GtkEditable * editable,
 				gpointer user_data);
 	gboolean on_spbChapter_button_release_event(GtkWidget * widget,
@@ -141,13 +141,17 @@ extern "C" {
 	gboolean on_epaned_button_release_event(GtkWidget * widget,
 						GdkEventButton * event,
 						gpointer user_data);
-	void on_btnCommSyn_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);
-	void on_btnCommPrint_clicked                (GtkButton       *button,
-                                        gpointer         user_data);
+	void on_btnCommSyn_clicked(GtkButton * button, gpointer user_data);
+	void on_btnCommPrint_clicked(GtkButton * button,
+				     gpointer user_data);
+	void on_nbDict_GBS_switch_page(GtkNotebook * notebook,
+				   GtkNotebookPage * page,
+				   gint page_num, gpointer user_data);
+	void on_ctreeGBS_tree_select_row(GtkCTree * ctree,
+				     GList * node,
+				     gint column, gpointer user_data);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __GS_GUI_CB_H_ */
+#endif				/* __GS_GUI_CB_H_ */
