@@ -48,7 +48,8 @@ char GS_RWPHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 				*to++ = '<';
 				*to++ = '/';
 				*to++ = 'I';
-				*to++ = '>';				
+				*to++ = '>';
+				*to++ = ' ';				
 				*to++ = '<';
 				*to++ = 'F';
 				*to++ = 'O';
@@ -161,6 +162,7 @@ char GS_RWPHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 					*to++ = *from;
 					from++;					
 				}
+				*to++ = ' ';
 				*to++ = '<';
 				*to++ = '/';
 				*to++ = 'F';
@@ -168,6 +170,7 @@ char GS_RWPHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 				*to++ = 'N';
 				*to++ = 'T';
 				*to++ = '>';
+				*to++ = ' ';
 				continue;
 			
 		}		

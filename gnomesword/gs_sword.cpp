@@ -33,6 +33,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
+#include <gbfhtml.h>
 
 #include <regex.h>
 #include <stdio.h>
@@ -45,7 +46,6 @@
 
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
-#include "gs_thmlplain.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -98,7 +98,6 @@ SWModule *SDMod;   /* module for view dict dialog */
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
 SWFilter *thmltohtml;
-SWFilter *thmltoplain;
 SWFilter *rwphtml;
 /***********************************************************************************************
 GnomeSword global to this file
@@ -172,9 +171,9 @@ initSWORD(GtkWidget *mainform)
   	GtkWidget *menu_items;
   	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
-  	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */
-        thmltoplain	= new GS_ThMLPlain(); /* sword renderfilter thml to plain */  	
+  	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
         rwphtml		= new GS_RWPHTML();
+        gbftohtml	= new GBFHTML();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -231,14 +230,22 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
-	comp1Display = new ComEntryDisp(lookup_widget(mainform,"textComp1"));
-	comp2Display = new ComEntryDisp(lookup_widget(mainform,"textComp2"));
-	comp3Display = new ComEntryDisp(lookup_widget(mainform,"textComp3"));
-	//RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 	
-	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
-	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
-
+#ifdef USE_GTKHTML
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
+	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
+	comp1Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp1"));
+	comp2Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp2"));
+	comp3Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp3"));
+	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
+#else /* !USE_GTKHTML */
+	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
+	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));	
+	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
+	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
+	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
+	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
+	//RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 
+#endif /* USE_GTKHTML */
 	compages = 0;
 	dictpages = 0;
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
@@ -253,8 +260,12 @@ initSWORD(GtkWidget *mainform)
 				else sourceformat = "Plain";
 				//g_warning(sourceformat);
 			}
-			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
-				//curMod->AddRenderFilter(gbftohtml);
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter
+#if 	USE_GTKHTML
+
+#else 	/* !USE_GTKHTML */	
+				curMod->AddRenderFilter(gbftohtml);
+#endif /* USE_GTKHTML */				
 				curMod->Disp(HTMLchapDisplay);
 			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);
@@ -289,7 +300,6 @@ initSWORD(GtkWidget *mainform)
 				curcomMod->AddRenderFilter(thmltohtml);
 				curcomMod->Disp(HTMLDisplay);				
 			} else if(!strcmp(sourceformat,"HTML")) {
-			        //curcomMod->AddRenderFilter(thmltoplain);
 				curcomMod->Disp(HTMLDisplay);			
 			} else if(!strcmp(sourceformat,"Plain")&& strcmp(curcomMod->Name(),"RWP")) {
 			        curcomMod->AddRenderFilter(plaintohtml);
@@ -329,7 +339,7 @@ initSWORD(GtkWidget *mainform)
 	} 		
   	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++){
-		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is Commentaries
+		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is 
 		 	 //-- if driver is RawFiles			
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				 percomMod = (*it).second;
@@ -768,6 +778,7 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 {
 	ModMap::iterator it;
 	GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
+	GtkWidget *label;
 	if(havebible) {			
 	        //notebook = lookup_widget(MainFrm,"notebook1"); //-- set notebook pointer to commentary notebook
 	        frame = lookup_widget(MainFrm,"framecom"); //-- set frame to commentary frame
@@ -781,6 +792,12 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 		                curcomMod->Display(); //-- show the change
 		        }
 		        //gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
+		        label = gtk_label_new(curcomMod->Name());
+		        gtk_widget_show(label);
+		        gtk_notebook_set_tab_label(GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (lookup_widget(MainFrm,"notebook3")),
+							     0), label);
 	        }
 	}	
 }
@@ -812,7 +829,9 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
+#ifdef USE_GTKHTML
 			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),0);
+#endif /* USE_GTKHTML */
 		}
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), false); //-- set text widget to not editable
 		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
