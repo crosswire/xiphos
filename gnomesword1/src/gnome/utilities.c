@@ -31,7 +31,6 @@
 #include <gnome.h>
 
 #include "gui/utilities.h"
-#include "main/gs_popup_cb.h"
 #include "main/settings.h"
 
 
