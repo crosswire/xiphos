@@ -55,9 +55,17 @@ AC_DEFUN(GS_CHECK_LIB, [
 	fi
 ])
 
+dnl Initialize xml-i18n-tools
+AM_PROG_XML_I18N_TOOLS 
+
+
+dnl check for libtool
+AM_PROG_LIBTOOL
+
 dnl Pick up the Gnome macros.
 AM_ACLOCAL_INCLUDE(macros)
- 
+
+
 GNOME_INIT
 AC_ISC_POSIX
 AC_PROG_CC
@@ -69,8 +77,6 @@ dnl Languages which your application supports
 ALL_LINGUAS="sk"
 AM_GNOME_GETTEXT
 
-dnl Initialize xml-i18n-tools
-AM_PROG_XML_I18N_TOOLS
 
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
@@ -86,9 +92,6 @@ AC_SUBST(PACKAGE_HELP_DIR)
 dnl Subst PACKAGE_MENU_DIR.
 PACKAGE_MENU_DIR="`gnome-config --datadir`/gnome/apps"
 AC_SUBST(PACKAGE_MENU_DIR)
-
-dnl Initialize libtool
-AM_PROG_LIBTOOL
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
