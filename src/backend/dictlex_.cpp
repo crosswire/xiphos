@@ -27,7 +27,6 @@
 #include <markupfiltmgr.h>
 #include <swmodule.h>
 
-#include "backend/sword.h"
 #include "backend/dictlex_.h"
 
 
@@ -65,7 +64,7 @@ char *backend_get_first_dictlex_key(void)
 
 	if (!mod->Error()) {
 		//- retval must be freed by calling function
-		retval = g_strdup((const char *) mod->KeyText());
+		retval = strdup((const char *) mod->KeyText());
 	}
 	return retval;
 }
@@ -93,7 +92,7 @@ char *backend_get_next_dictlex_key(void)
 	(*mod)++;
 	if (!mod->Error()) {
 		//- retval must be freed by calling function
-		retval = g_strdup((const char *) mod->KeyText());
+		retval = strdup((const char *) mod->KeyText());
 	}
 	return retval;
 }

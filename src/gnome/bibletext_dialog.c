@@ -183,7 +183,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
-		g_warning("mybuf = %s", url);
+//		g_warning("mybuf = %s", url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
@@ -855,7 +855,7 @@ void gui_open_bibletext_dialog(gint mod_num)
 	
 	vt = (VIEW_TEXT *) g_list_nth_data(dialog_list, mod_num);	
 	cur_vt = vt;
-	g_warning(vt->t->mod_name);
+//	g_warning(vt->t->mod_name);
 	if(vt->dialog == NULL){
 		create_bibletext_dialog(vt);
 		gtk_widget_show(vt->dialog);

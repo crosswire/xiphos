@@ -26,9 +26,7 @@
 extern "C" {
 #endif	
 
-
-#include <gnome.h>
-	
+#include <glib-1.2/glib.h>
 
 void backend_first_init(void);
 void backend_init_sword(void);

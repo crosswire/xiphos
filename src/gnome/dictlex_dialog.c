@@ -366,7 +366,7 @@ void gui_open_dictlex_dialog(gint mod_num)
 	
 	dlg = (DL_DIALOG *) g_list_nth_data(dialog_list, mod_num);	
 	
-	g_warning(dlg->d->mod_name);
+//	g_warning(dlg->d->mod_name);
 	if(dlg->dialog == NULL){
 		create_dictlex_dialog(dlg);
 		gtk_widget_show(dlg->dialog);

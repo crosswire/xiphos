@@ -23,19 +23,14 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <string.h>
 
 #include "backend/percomm_.h"
-#include "backend/sword.h"
 
 /******************************************************************************
  * globals to this file only 

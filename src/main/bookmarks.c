@@ -27,6 +27,7 @@
 #include <gnome.h>
 
 #include "main/bookmarks.h"
+#include "main/settings.h"
 #include "backend/bookmarks.h"
 
 /******************************************************************************
@@ -47,7 +48,7 @@
 
 void save_bookmarks(GNode * bookmark_tree)
 {
-       backend_save_bookmarks(bookmark_tree); 
+       backend_save_bookmarks(bookmark_tree, settings.swbmDir); 
 }
 
 
@@ -92,6 +93,6 @@ void create_bookmarks(char *dir)
 
 GNode * load_bookmarks(void)
 {
-	return backend_load_bookmarks();
+	return backend_load_bookmarks(settings.swbmDir);
 }
 

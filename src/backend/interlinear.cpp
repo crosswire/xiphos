@@ -28,15 +28,7 @@
 #include <markupfiltmgr.h>
 #include <swconfig.h>
 #include <swmodule.h>
-#include <versekey.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <string.h>
 
-#include "main/gs_gnomesword.h"
-
-#include "backend/sword.h"
 #include "backend/interlinear.h"
 
 /******************************************************************************

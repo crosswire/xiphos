@@ -603,7 +603,7 @@ void gui_open_commentary_dialog(gint mod_num)
 	
 	vc = (VIEW_COMM *) g_list_nth_data(dialog_list, mod_num);	
 	
-	g_warning(vc->mod_name);
+	//g_warning(vc->mod_name);
 	if(vc->dialog == NULL){
 		create_commentary_dialog(vc);
 		gtk_widget_show(vc->dialog);
