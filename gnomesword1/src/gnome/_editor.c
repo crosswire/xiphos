@@ -52,10 +52,10 @@
 #include "gui/fileselection.h"
 #include "gui/link_dialog.h"
 #include "gui/studypad.h"
+#include "gui/html.h"
 
 #include "main/percomm.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 
 /******************************************************************************

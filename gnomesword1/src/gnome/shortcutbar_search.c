@@ -30,8 +30,9 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/html.h"
+
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
@@ -96,14 +97,14 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 	showSBVerseList();
 	
 	/* report results */
-	beginHTML(settings.htmlRP, TRUE);
+	gui_begin_html(settings.htmlRP, TRUE);
 	sprintf(buf,HTML_START 
 	    "<body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
 				i, settings.found_color,settings.searchText,
 				settings.bible_verse_num_color,so->module_name);	
 	utf8str = e_utf8_from_gtk_string(settings.htmlRP, buf);
-	displayHTML(settings.htmlRP, utf8str, strlen(utf8str));
-	endHTML(settings.htmlRP);	
+	gui_display_html(settings.htmlRP, utf8str, strlen(utf8str));
+	gui_end_html(settings.htmlRP);	
 	
 	/* cleanup appbar progress */
 	gnome_appbar_set_progress ((GnomeAppBar *)settings.appbar, 0);

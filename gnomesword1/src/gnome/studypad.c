@@ -43,9 +43,9 @@
 #include "gui/editor_menu.h"
 #include "gui/link_dialog.h"
 #include "gui/info_box.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "gui/fileselection.h"
 #include "main/settings.h"
 
@@ -555,7 +555,7 @@ static void on_btn_open_clicked(GtkButton * button,
 static void on_btn_print_clicked(GtkButton * button, 
 					GSHTMLEditorControlData * ecd)
 {
-	html_print(ecd->htmlwidget);
+	gui_html_print(ecd->htmlwidget);
 }
 
 /******************************************************************************
@@ -1016,9 +1016,9 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 			   "enter_notify_event",
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   specd);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", GTK_SIGNAL_FUNC(on_link_clicked),	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", GTK_SIGNAL_FUNC(gui_link_clicked),	/* gs_html.c */
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", GTK_SIGNAL_FUNC(on_url),	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", GTK_SIGNAL_FUNC(gui_url),	/* gs_html.c */
 			   NULL);
 
 	gtk_signal_connect(GTK_OBJECT(specd->btn_save), "clicked",

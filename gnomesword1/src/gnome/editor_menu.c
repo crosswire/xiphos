@@ -54,11 +54,11 @@
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/info_box.h"
+#include "gui/html.h"
 #include "gui/utilities.h"
 
 #include "main/percomm.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 
 /****************************************************************************** 
@@ -335,7 +335,7 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 static void on_print_activate(GtkMenuItem * menuitem, 
 					GSHTMLEditorControlData * ecd)
 {
-	html_print(ecd->htmlwidget);	/* gs_html.c */
+	gui_html_print(ecd->htmlwidget);	/* gs_html.c */
 }
 
 /******************************************************************************

@@ -40,9 +40,9 @@
 #include "gui/interlinear.h"
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 #include "main/gs_popup_cb.h"
-#include "main/gs_html.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
@@ -55,7 +55,7 @@ gboolean autoscroll;
  * externals
  *****************************************************************************/
 
-extern GtkWidget * NEtext, *htmlCommentaries;
+extern GtkWidget * NEtext;
 
 extern gboolean isrunningSD,	/* is the view dictionary dialog runing */
  noteModified;			/* personal comments window changed */
@@ -77,7 +77,7 @@ void on_undockInt_activate(GtkMenuItem *menuitem)
 
 void on_print_item_activate(GtkMenuItem *menuitem, gchar *html)
 {
-	html_print(gui_lookup_widget(settings.app, html));
+	gui_html_print(gui_lookup_widget(settings.app, html));
 }
 
 void on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
