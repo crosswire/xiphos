@@ -23,7 +23,7 @@ COMMON_SOURCE = \
         listeditor.cpp \
         listeditor.h \
         main.cpp \
-        menustuff.cpp \
+        menustuff.c \
         menustuff.h \
         noteeditor.cpp \
         noteeditor.h \
