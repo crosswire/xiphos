@@ -88,7 +88,9 @@ SWMgr * mainMgr,		/* sword mgr for curMod - curcomMod - curdictMod */
     *mainMgr1,			/* sword mgr for comp1Mod - first interlinear module */
     *percomMgr,			/* sword mgr for percomMod - personal comments editor */
     *listMgr;			/* sword mgr for ListEditor */
-VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
+VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
+    vkText,
+    vkComm;
 SWModule 
     * curMod,		/* module for main text window */
     *comp1Mod,			/* module for first interlinear window */
@@ -177,7 +179,11 @@ void initSWORD(GtkWidget * mainform)
 	FPNDisplay = 0;
 	HTMLDisplay = 0;
 	UTF8Display = 0;
-
+	/* setup versekeys for text and comm windows */
+	vkText.Persist(1);
+	vkComm.Persist(1);
+	vkText = settings->currentverse;
+	vkComm = settings->currentverse;
 	/* set glist to null */
 	biblemods = NULL;
 	commentarymods = NULL;
@@ -220,6 +226,7 @@ void initSWORD(GtkWidget * mainform)
 			sbbiblemods = g_list_append(sbbiblemods, curMod->Description());
 			addrenderfiltersSWORD(curMod, section);
 			curMod->Disp(UTF8Display);
+			curMod->SetKey(vkText);
 		} else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
 			curcomMod = (*it).second;
 			commentarymods =  g_list_append(commentarymods, curcomMod->Name());
@@ -230,6 +237,7 @@ void initSWORD(GtkWidget * mainform)
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curcomMod, section);
 			curcomMod->Disp(HTMLDisplay);
+			curcomMod->SetKey(vkComm);
 		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
@@ -281,98 +289,61 @@ void modNameFromDesc(gchar * modName, gchar * modDesc)
 	strcpy(modName, descriptionMap[modDesc].c_str());
 }
 
-/********************************************************************************************** 
- * changeVerse - this function changes all currently used sword Bible and commentary modules 
- *               to (ref)
- * gchar *ref - pointer to new module key (verse)
- *********************************************************************************************/
-void changeVerseSWORD(gchar * ref)	//-- change main text, interlinear texts and commentary text together
+/*** new changeVerseSWORD  ***/
+void ChangeVerseSWORD(void)	
 {
 	int l;
 	GList * mods;
 	gchar * currRef;
-	VerseKey VSKey;
 
-	VSKey.AutoNormalize(0);
-	VSKey = ref;
-
+	
 	//-- save any changes to personal notes
 	if ((GTK_TOGGLE_BUTTON
-	     (lookup_widget(settings->app, "btnEditNote"))->active)
-	    && noteModified) {
+	     (lookup_widget(settings->app, "btnEditNote"))->active) && noteModified) {
 		if (autoSave) {	//-- if we are in edit mode
 			savenoteSWORD(noteModified);	//-- save if text in note window has changed                    
 		}
 	}
-	strcpy(current_verse, ref);
+	
+	strcpy(current_verse, vkText);
 	ApplyChange = false;
 	if (changemain && havebible) {
 		if (curMod) {	//--------------------------------------------------- change main window
-			currRef = g_strdup(curMod->KeyText());
-			curMod->SetKey(ref);
-			//-- this ugly bit of code is to keep us form going to Gen 1:1 if key is not a real verse
-			if (!stricmp(curMod->KeyText(), "Genesis 1:1")) {
-				if (!stricmp(ref, "Gen 1:1")
-				    || !stricmp(ref, "Genesis 1:1")
-				    || !stricmp(ref, "Gene 1:1")) {
-				} else {
-					ref = currRef;
-					curMod->SetKey(VSKey);
-					strcpy(current_verse, ref);
-				}
-			}
-			swKey = curMod->KeyText();
+			curMod->SetKey(vkText);
+			
 			if (addhistoryitem) {
-				if (strcmp
-				    (settings->currentverse,
-				     historylist[historyitems -
-						 1].verseref))
+				if (strcmp(settings->currentverse, historylist[historyitems - 1].verseref))
 					addHistoryItem(settings->app,
-						       GTK_WIDGET
-						       (shortcut_bar),
-						       settings->
-						       currentverse);
-			}
+							GTK_WIDGET(shortcut_bar),
+						       settings->currentverse);
+			}			
 			addhistoryitem = TRUE;
+			
 			strcpy(settings->currentverse, curMod->KeyText());	//----------------------- remember last verse
 			char s1[255], s2[255];
-			curVerse = swKey.Verse();
-			curChapter = swKey.Chapter();
-			sprintf(s1, "%s", (const char *) swKey);
-			for (l = 0; l < strlen(s1); l++) {	//------------------------ seperate book name                        
-				if (isdigit(s1[l]))
-					break;
-			}
-			strncpy(s2, s1, l);
-			s2[l] = '\0';
+			curVerse = vkText.Verse();
+			curChapter = vkText.Chapter();
+			sprintf(s1, "%s", (const char *)vkText );
 			//------------------------- set book, chapter,verse and freeform lookup entries to new verse
-			ApplyChange = false;
-			gtk_entry_set_text(GTK_ENTRY
-					   (lookup_widget
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget
 					    (settings->app, "cbeBook")),
-					   s2);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON
-						  (lookup_widget
-						   (settings->app,
-						    "spbChapter")),
+					   vkText.books[vkText.Testament()-1][vkText.Book()-1].name);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")),
 						  curChapter);
-			gtk_spin_button_set_value(GTK_SPIN_BUTTON
-						  (lookup_widget
-						   (settings->app,
-						    "spbVerse")),
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(settings->app, "spbVerse")),
 						  curVerse);
-			gtk_entry_set_text(GTK_ENTRY
-					   (lookup_widget
-					    (settings->app,
-					     "cbeFreeformLookup")), swKey);
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")), 
+						vkText);
 			curMod->Display();
-			g_free(currRef);
+			//g_free(currRef);
 		}
 	}
 	changemain = TRUE;
+	
 	//--------------------------------------------------------------- change interlinear verses
 	updateinterlinearpage();
-	//--------------------------------------------------------------- change personal notes editor
+	
+	//--------------------------------------------------------------- change personal notes editor	
 	if (settings->notebook3page == 1) {
 		if (GTK_TOGGLE_BUTTON(lookup_widget(settings->app, "tbtnFollow"))->active) {	//-- if personal notes follow button is active (on)                   
 			if ((GTK_TOGGLE_BUTTON
@@ -382,22 +353,50 @@ void changeVerseSWORD(gchar * ref)	//-- change main text, interlinear texts and 
 				//-- do nothing
 			} else {
 				if (usepersonalcomments && percomMod) {
-					percomMod->SetKey(current_verse);	//-- set personal module to current verse
+					percomMod->SetKey(vkComm);	//-- set personal module to current verse
 					percomMod->Display();	//-- show change
 					noteModified = false;	//-- we just loaded comment so it is not modified 
 				}
 			}
 		}
 	}
+	
+	//-- set commentary module to current verse
 	if (settings->notebook3page == 0 && autoscroll) {
 		if (curcomMod) {
-			curcomMod->SetKey(VSKey);	//-- set commentary module to current verse
+			curcomMod->SetKey(vkComm);	
 			curcomMod->Display();	//-- show change
-			strcpy(com_key, swKey);
+			strcpy(com_key, vkComm);		
 		}
 	}
+	
 	ApplyChange = TRUE;
-	VSKey.AutoNormalize(1);
+}
+
+/********************************************************************************************** 
+ * changeVerse - this function changes all currently used sword Bible and commentary modules 
+ *               to (ref)
+ * gchar *ref - pointer to new module key (verse)
+ *********************************************************************************************/
+void changeVerseSWORD(gchar * ref)	
+{
+	VerseKey key;
+	
+	key = ref;
+	g_warning("chapter = %d",key.Chapter());
+	
+	if((!key.Chapter()) || (!key.Verse())) {	
+		vkText.AutoNormalize(0);
+		vkComm.AutoNormalize(0);
+	}
+	
+	vkText = ref;
+	vkComm = ref;
+	
+	ChangeVerseSWORD();
+	
+	vkText.AutoNormalize(1);
+	vkComm.AutoNormalize(1);
 }
 
 /*
@@ -665,7 +664,10 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 				gtk_notebook_set_page(GTK_NOTEBOOK
 						      (notebook),
 						      bibleindex);
-				changeVerseSWORD(key);
+				vkText = key;
+				if (settings->notebook3page == 0 && autoscroll) 
+					vkComm = key;
+				ChangeVerseSWORD();
 				return;
 			}
 			++bibleindex;
@@ -677,7 +679,10 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 				gtk_notebook_set_page(GTK_NOTEBOOK
 						      (notebook),
 						      commindex);
-				changeVerseSWORD(key);
+				vkComm = key;
+				if (autoscroll) 
+					vkText = key;
+				ChangeVerseSWORD();
 				return;
 			}
 			++commindex;
@@ -794,27 +799,37 @@ void chapterSWORD(void)		//-- someone clicked the chapter spin button
 //-------------------------------------------------------------------------------------------
 void verseSWORD(void)		//-- someone clicked the verse spin button
 {
-	gint iVerse;
-	gchar *buf;
-	//-- set iVerse to value in spin button
-	iVerse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
-					      (settings->app,
-					       "spbVerse")));
-	//-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
-	swKey.Verse(iVerse);
-	buf = g_strdup(swKey);
-	changeVerseSWORD(buf);	//-- change all our modules to new verse                
-	g_free(buf);
+	gchar *bookname, buf[256];
+	gint iChap, iVerse;
+	
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")));
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse")));
+	if((!iChap) || (!iVerse)){
+		vkText.AutoNormalize(0);
+		vkComm.AutoNormalize(0);
+	}
+	
+	if (iChap < 0)
+		iChap + 1;
+	if (iVerse < 0)
+		iVerse + 1;
+	
+	sprintf(buf,"%s %d:%d", bookname, iChap, iVerse);
+	vkText = buf;
+	vkComm = buf;
+	
+	ChangeVerseSWORD();
+	vkText.AutoNormalize(1);
+	vkComm.AutoNormalize(1);
 }
 
 //-------------------------------------------------------------------------------------------
-void btnlookupSWORD(void)	//-- add current verse to history menu
+void btnlookupSWORD(void)	
 {
 	gchar *buf;		//-- pointer to entry string
 
-	ApplyChange = false;	//-- do not want to start loop with book combo box
+	//ApplyChange = false;	//-- do not want to start loop with book combo box
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")));	//-- set pointer to entry text
 	changeVerseSWORD(buf);	//-- change verse to entry text 
 }
@@ -824,7 +839,7 @@ void freeformlookupSWORD(GdkEventKey * event)	//-- change to verse in freeformlo
 {
 	gchar *buf;		//-- pointer to entry string
 
-	ApplyChange = false;	//-- do not want to start loop with book combo box
+	//ApplyChange = false;	//-- do not want to start loop with book combo box
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")));	//-- set pointer to entry text
 	if (event->keyval == 65293 || event->keyval == 65421) {	//-- if user hit return key continue
 		changeVerseSWORD(buf);	//-- change verse to entry text         
@@ -1454,16 +1469,4 @@ bool savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
 	return true;
 }
 
-/*
-if (!(StrToInt(CHBox->Text)) || (!StrToInt(VSBox->Text)))
-		DefaultVSKey.AutoNormalize(0);
 
-	if (StrToInt(CHBox->Text) < 0)
-		CHBox->Text = StrToInt(CHBox->Text) + 1;
-	if (StrToInt(VSBox->Text) < 0)
-		VSBox->Text = StrToInt(VSBox->Text) + 1;
-
-	DefaultVSKey       = (cbBook->Text + " " + CHBox->Text + ":" + VSBox->Text).c_str();
-	TextKeyChanged();
-	DefaultVSKey.AutoNormalize(1);	
-*/
