@@ -95,7 +95,7 @@ SWDisplay
 SWMgr 
     *percomMgr,			/* sword mgr for percomMod - personal comments editor */
     *listMgr,		/* sword mgr for ListEditor */
-    *mainMgr1,			/* sword mgr for comp1Mod - first interlinear module */
+    *mainMgr1,			/* sword mgr for comp1Mod - interlinear modules */
     *mainMgr;		/* sword mgr for curMod - curcomMod - curdictMod */
 
 VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
@@ -104,6 +104,11 @@ VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
 SWModule 
     * curMod,		/* module for main text window */
     *comp1Mod,			/* module for first interlinear window */
+    *interlinearMod0,			/* module for first interlinear window */
+    *interlinearMod1,			/* module for first interlinear window */
+    *interlinearMod2,			/* module for first interlinear window */
+    *interlinearMod3,			/* module for first interlinear window */
+    *interlinearMod4,			/* module for first interlinear window */
     *curcomMod,			/* module for commentary  window */
   //  *curbookMod,			/* module for gen book  window */
     *percomMod,			/* module for personal commentary  window */
@@ -206,6 +211,11 @@ void initSWORD(SETTINGS *s)
 	curcomMod = NULL;
 	curdictMod = NULL;
 	percomMod = NULL;
+	interlinearMod0 = NULL;			/* module for first interlinear window */
+	interlinearMod1 = NULL;			/* module for first interlinear window */
+	interlinearMod2 = NULL;			/* module for first interlinear window */
+	interlinearMod3 = NULL;			/* module for first interlinear window */
+	interlinearMod4 = NULL;			/* module for first interlinear window */
 
 	comp1Display = 0;	// set in create
 	dictDisplay = 0;	// set in create   
@@ -298,7 +308,17 @@ void initSWORD(SETTINGS *s)
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+			interlinearMod0 = (*it).second;
+			interlinearMod1 = (*it).second;
+			interlinearMod2 = (*it).second;
+			interlinearMod3 = (*it).second;
+			interlinearMod4 = (*it).second;
 			comp1Mod->Disp(comp1Display);
+			interlinearMod0->Disp(comp1Display);
+			interlinearMod1->Disp(comp1Display);
+			interlinearMod2->Disp(comp1Display);
+			interlinearMod3->Disp(comp1Display);
+			interlinearMod4->Disp(comp1Display);
 		}
 	} 
 	
@@ -364,7 +384,7 @@ void ChangeVerseSWORD(void)
 		updateIntDlg();
 	
 	//------------------------------- change personal notes editor	 if not in edit mode
-	if (settings->notebook3page == 2) {
+	if (settings->notebook3page == 1) {
 		if (settings->notefollow) {  //-- if personal notes follow button is active (on)                   
 			if (!settings->editnote){
 				if (usepersonalcomments && percomMod) {
@@ -439,45 +459,9 @@ void changeVerseComSWORD(void)
 
 /*** please fix me ***/
 void updateIntDlg(void)
-{
-	GList *modList = NULL;
-	ModMap::iterator it;
+{	
 	
-	it = mainMgr1->Modules.find(settings->Interlinear1Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-		comp1Mod->SetKey(current_verse);	//-- set key to current verse
-	}
-	modList = g_list_append(modList,(SWModule*)comp1Mod);
-	
-	it = mainMgr1->Modules.find(settings->Interlinear2Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-	}
-	modList = g_list_append(modList,(SWModule*)comp1Mod);
-	
-	it = mainMgr1->Modules.find(settings->Interlinear3Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-	}		
-	modList = g_list_append(modList,(SWModule*)comp1Mod);
-	
-	it = mainMgr1->Modules.find(settings->Interlinear4Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-	}		
-	modList = g_list_append(modList,(SWModule*)comp1Mod);
-	
-	it = mainMgr1->Modules.find(settings->Interlinear5Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
-		comp1Mod = (*it).second;	//-- change current module to new module
-		comp1Mod->SetKey(current_verse);	//-- set key to current verse
-	}		
-	modList = g_list_append(modList,(SWModule*)comp1Mod);		
-	
-	IntDisplay(modList);
-	g_list_free(modList);
-		
+	IntDisplay(settings);
 }
 
 /*
@@ -490,27 +474,45 @@ void updateinterlinearpage(void)
 	gchar *utf8str;
 	gint utf8len;
 
-	if (settings->notebook3page == 4) {
+	//if (settings->notebook3page == 4) {
 		//html_widget = lookup_widget(settings->app, "textComp1");
-		beginHTML(settings->htmlInterlinear, TRUE);
-		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-			settings->bible_bg_color,
-			settings->bible_text_color, settings->link_color);
-		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
-		changecomp1ModSWORD(settings->Interlinear1Module);
-		changecomp1ModSWORD(settings->Interlinear2Module);
-		changecomp1ModSWORD(settings->Interlinear3Module);
-		changecomp1ModSWORD(settings->Interlinear4Module);
-		changecomp1ModSWORD(settings->Interlinear5Module);
-		sprintf(tmpBuf, "</table></body></html>");
-		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
-		endHTML(settings->htmlInterlinear);
-	}
+	interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
+	interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
+	interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
+	interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
+	interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
+	
+	beginHTML(settings->htmlInterlinear, TRUE);
+	sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+		settings->bible_bg_color,
+		settings->bible_text_color, settings->link_color);
+	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+	interlinearMod0->SetKey(current_verse);
+	interlinearMod1->SetKey(current_verse);
+	interlinearMod2->SetKey(current_verse);
+	interlinearMod3->SetKey(current_verse);
+	interlinearMod4->SetKey(current_verse);
+	interlinearMod0->Display();
+	interlinearMod1->Display();
+	interlinearMod2->Display();
+	interlinearMod3->Display();
+	interlinearMod4->Display();
+	/*
+	changecomp1ModSWORD(settings->Interlinear1Module);
+	changecomp1ModSWORD(settings->Interlinear2Module);
+	changecomp1ModSWORD(settings->Interlinear3Module);
+	changecomp1ModSWORD(settings->Interlinear4Module);
+	changecomp1ModSWORD(settings->Interlinear5Module);
+	*/
+	sprintf(tmpBuf, "</table></body></html>");
+	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+	endHTML(settings->htmlInterlinear);
+	//}
 }
 
 
@@ -572,7 +574,6 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		*fnconfigure,
 		*swbmDir;
 	
-	//sprintf(settings->studypadfilename, "%s", current_filename);	//-- store studypad filename
 	savebookmarks(settings->ctree_widget);
 	saveconfig();
 	
@@ -583,11 +584,8 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		
 		switch (answer) {
 		case 0:
-			if (settings->studypadfilename) {
-				save_file_program_end(settings->htmlSP, settings->studypadfilename);			
-			} else {
-				//on_save_activate(NULL, specd); //-- gs_heml_editor.c 
-			}			 
+			if (settings->studypadfilename) 
+				save_file_program_end(settings->htmlSP, settings->studypadfilename);
 			break;
 		default:
 			break;
@@ -616,8 +614,6 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		delete comp1Display;
 	if (dictDisplay)
 		delete dictDisplay;
-//	if (percomDisplay)
-//		delete percomDisplay;
 	if (FPNDisplay)
 		delete FPNDisplay;
 	if (commDisplay)
@@ -958,22 +954,18 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
 	GtkWidget *frame;
+	gchar *cKey;
 
-	if (havebible) {
-		it = mainMgr->Modules.find(modName);	//-- find commentary module (modName from page label)
-		if (it != mainMgr->Modules.end()) {
-			curcomMod = (*it).second;	//-- set curcomMod to modName
-			
-			if ((sit = mainMgr->config->Sections.find(curcomMod->Name())) != mainMgr->config->Sections.end()) {				
-				ConfigEntMap &section = (*sit).second;
-				//-- do we have a CipherKey= tag?
-				if((entry = section.find("CipherKey")) != section.end()) { //-- set sensitivity of unlock mod menu item
-					gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
-				}else{
-					gtk_widget_set_sensitive(settings->unlockcommmod_item, FALSE);
-				}
-			} 
-			
+	if (havecomm) {
+		curcomMod = mainMgr->Modules[modName];
+		cKey = (gchar*)curcomMod->getConfigEntry("CipherKey");
+		
+		if(cKey)
+			gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
+		else
+			gtk_widget_set_sensitive(settings->unlockcommmod_item, FALSE);
+		
+		if(curcomMod) {
 			if (showchange) {
 				if (autoscroll)
 					curcomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
@@ -1107,12 +1099,11 @@ void changepercomModSWORD(gchar * modName)	//-- change personal comments module
 		strcpy(settings->personalcommentsmod, percomMod->Name());
 		if (havebible)
 			percomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
-		//percomMod->Display(); //-- show the change    
 		//-- let's change the notebook label to match our percomMod (current personal comments module)
 		notebook = lookup_widget(settings->app, "notebook3");	//-- get the notebook our page is in]
 		label = gtk_label_new(percomMod->Name());	//-- create new label with mod name as the text
 		gtk_widget_show(label);	//-- make is visible
-		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 2), label);	//-- put label on personal comments page
+		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook), gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), 1), label);	//-- put label on personal comments page
 		noteModified = false;
 	}
 }
@@ -1131,17 +1122,9 @@ void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module inform
 	ConfigEntMap::iterator cit;	//-- iterator
 
 	bufabout = "oops";
-	it = mainMgr->Modules.find(modName);	//-- find module (modName)
-	if (it != mainMgr->Modules.end()) {	//-- if we don't run out of mods before we find the one we are looking for   
-		buf = (char *) (*it).second->Description();	//-- get discription of module
-		sit = mainMgr->config->Sections.find((*it).second->Name());
-		if (sit != mainMgr->config->Sections.end()) {
-			cit = (*sit).second.find("About");
-			if (cit != (*sit).second.end())
-				bufabout = (char *) (*cit).second.c_str();	//-- get module about information
-		}
-	}
-
+	buf = mainMgr->Modules[modName]->Description();
+	bufabout = (gchar*)mainMgr->Modules[modName]->getConfigEntry("About");
+	
 	sprintf(discription,
 		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
 		buf);
@@ -1149,15 +1132,19 @@ void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module inform
 		aboutbox = create_aboutmodules();	//-- create about dialog
 		gtk_widget_show(aboutbox);
 	}
+	
 	if (strcmp(bufabout, "oops")) {
 		len = strlen(bufabout);
 		newbuf = new char[len + 600];
+		
 		if(!isGBS) {
 			text = lookup_widget(aboutbox, "textModAbout");	//-- get text widget
 		}
+		
 		else {
 			text = settings->htmlBook;
 		}
+		
 		AboutModsDisplayHTML(newbuf, bufabout);	//-- send about info and alocated new text buffer to display function (sw_display.cpp)
 		beginHTML(text, FALSE);
 		displayHTML(text, "<html><body>", strlen("<html><body>"));
@@ -1166,8 +1153,10 @@ void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module inform
 		displayHTML(text, "</body></html>",
 			    strlen("</body></html>"));
 		endHTML(text);
-		delete[]newbuf;
-	} else
+		delete[]newbuf;		
+	} 
+	
+	else
 		g_warning(bufabout);
 }
 

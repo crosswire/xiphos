@@ -56,6 +56,7 @@
 extern gint groupnum7;
 extern gchar *shortcutbarDir;
 extern SETTINGS *settings;
+
 list <string> sbfiles;	
 
 static SWDisplay 
@@ -71,21 +72,24 @@ sbtypefromModNameSBSW(gchar *modName)
 	ModMap::iterator it; //-- iteratior
 	SWMgr *mgr;
 	gint retval = -1;
+	gchar *modType;
 		
 	mgr = new SWMgr();	//-- create sword mgrs
-	/*** get module lists ***/
-	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
-		if(!strcmp((*it).second->Name(), modName)){
-			if(!strcmp((*it).second->Type(), "Biblical Texts")){
-				retval = 0;
-			}if(!strcmp((*it).second->Type(), "Commentaries")){
-				retval = 1;
-			}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
-				retval = 2;
-			} 
-			break;
-		}
+	/*** get module type ***/
+	modType = mgr->Modules[modName]->Type();
+	
+	if(!strcmp(modType, "Biblical Texts")){
+		retval = 0;
 	}
+	
+	if(!strcmp(modType, "Commentaries")){
+		retval = 1;
+	}
+	
+	if(!strcmp(modType, "Lexicons / Dictionaries")){
+		retval = 2;
+	} 
+	
 	/*** delete Sword manager ***/
 	delete mgr;
 	return retval;

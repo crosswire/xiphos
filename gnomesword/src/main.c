@@ -118,24 +118,33 @@ main (int argc, char *argv[])
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
 	}  	 
+	
 	mainwindow = create_mainwindow (splash, settings); /*** gs_gui.c ***/ 	
-  	add_gtkhtml_widgets(mainwindow); /*** gs_html.c ***/ 	
+  	add_gtkhtml_widgets(mainwindow); /*** gs_html.c ***/ 
+	
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
-  	initSWORD(settings); /*** sw_gnomesword.cpp ***/  
+	
+  	initSWORD(settings); /*** sw_sword.cpp ***/  
+	
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);
-  	initGnomeSword(settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
+  	
+	initGnomeSword(settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
+	
 	if(icreatefiles == 2 || icreatefiles == 3 ){		
 		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
 	}
+	
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
-  	if(settings->showsplash)
+  	
+	if(settings->showsplash)
 		gtk_widget_unref (splash);
 	gtk_widget_destroy (splash);
 	/* set the main window size */
 	gtk_widget_set_usize(settings->app, settings->gs_width, settings->gs_hight);
+	
 	if(settings->showdevotional) {
 		displayDevotional();	
 	}
