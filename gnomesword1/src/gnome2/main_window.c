@@ -553,9 +553,13 @@ void create_mainwindow(void)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
-	GtkWidget *empty_notebook_page;
+	GtkWidget *hboxtb;
+	GtkWidget *tab_button_icon;
 	GdkColor transparent = { 0 };
 	gint page_num = 0;
+	GtkTooltips *tooltips;
+	
+	tooltips = gtk_tooltips_new ();
 
 	g_print("%s\n", "Building GnomeSword interface");
 
@@ -604,23 +608,32 @@ void create_mainwindow(void)
 	 * the passages are not actually open but are switched
 	 * between similar to bookmarks
 	 */
+	hboxtb = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hboxtb);
+	gtk_box_pack_start(GTK_BOX(vboxMain), hboxtb, FALSE, FALSE, 0);
+	
+	widgets.button_new_tab = gtk_button_new();
+	//don't show button here in case !settings.browsing
+	
+//	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_NEW, 
+//					GTK_ICON_SIZE_SMALL_TOOLBAR);
+	tab_button_icon = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
+						"/new_tab_button.png");
+	gtk_widget_show(tab_button_icon);
+	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
+	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
+	gtk_box_pack_start(GTK_BOX(hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
+	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"), 
+				NULL);
+	
 	widgets.notebook_main = gtk_notebook_new();
 	if(settings.browsing)
 		gtk_widget_show(widgets.notebook_main);
-	gtk_box_pack_start(GTK_BOX(vboxMain),
-			   widgets.notebook_main, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hboxtb),
+			   widgets.notebook_main, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK(widgets.notebook_main),
                                              TRUE);
-
-//	empty_notebook_page = gtk_vbox_new (FALSE, 0);
-//	gtk_widget_show (empty_notebook_page);
-	
-//	label41 = gtk_label_new(_("//KJV/John 3:16"));
-//	gtk_widget_show(label41);
-
-//	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-//				 empty_notebook_page, label41);
 
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
