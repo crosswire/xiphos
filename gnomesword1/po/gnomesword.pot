@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-05 20:16-0500\n"
+"POT-Creation-Date: 2005-03-07 13:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2220,6 +2220,10 @@ msgstr ""
 
 #: src/gnome2/sidebar.c:1655
 msgid "Verse List"
+msgstr ""
+
+#: src/gnome2/splash.c:360
+msgid "Powered by the SWORD Project"
 msgstr ""
 
 #: src/gnome2/splash.c:538

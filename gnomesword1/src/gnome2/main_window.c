@@ -40,7 +40,6 @@
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
-#include "gui/history.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
 #include "gui/commentary.h"
@@ -52,9 +51,6 @@
 #include "gui/widgets.h"
 
 WIDGETS widgets;
-
-extern HISTORY history_list[];	/* sturcture for storing history items */
-extern gint history_items;
 
 
 static GtkWidget *nav_toolbar;
@@ -485,8 +481,7 @@ void create_mainwindow(void)
 			    "widgets.app", widgets.app);
 	gtk_widget_set_size_request(widgets.app, 680, 480);
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
-	gtk_window_set_policy(GTK_WINDOW(widgets.app), TRUE,
-			      TRUE, TRUE);
+	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 	gnome_window_icon_set_default_from_file
 	    (PACKAGE_PIXMAPS_DIR "/gs2-48x48.png");
 

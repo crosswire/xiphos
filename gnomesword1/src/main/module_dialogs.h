@@ -45,6 +45,7 @@ struct _dialog_data {
 	/* widgets for text panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
+	GtkWidget *previewer;
 	GtkWidget *text;
 	GtkWidget *frame;
         GtkWidget *entry;
@@ -90,9 +91,9 @@ void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d);
 void main_dialog_save_note(gpointer data);
 void main_dialog_delete_note(gpointer data);
 
-void main_dialog_update_controls(DIALOG_DATA * vt);
-void main_bible_dialog_display(DIALOG_DATA * t);
-void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage);
+//void main_dialog_update_controls(DIALOG_DATA * vt);
+//void main_bible_dialog_display(DIALOG_DATA * t);
+//void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage);
 void main_keep_bibletext_dialog_in_sync(gchar * key);
 void main_dialogs_setup(void);
 void main_dialogs_shutdown(void);

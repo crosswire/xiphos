@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __HISTORY_H_
-#define __HISTORY_H_
+#ifndef __TAB_HISTORY_H_
+#define __TAB_HISTORY_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,23 +28,19 @@ extern "C" {
 
 #include <gnome.h>
 
-typedef struct _history HISTORY;
-struct _history {
+typedef struct _tab_history TAB_HISTORY;
+struct _tab_history {
         gint itemnum;
         gchar verseref[80];
         gchar textmod[80];
         gchar commod[80];
 };
 
-void gui_clear_history(GtkWidget *app,
-		GtkWidget *shortcut_bar);
-void updatehistoryshortcutbar(GtkWidget *app,
-                GtkWidget *shortcut_bar);
-void gui_add_history_Item(GtkWidget *app,
-		GtkWidget *shortcut_bar,
-		gchar *ref);
-void gui_navigate_history(GtkWidget *app, gint direction);
-void gui_change_verse_history(gint historynum);		
+void main_clear_tab_history(void);
+void main_add_tab_history_item(gpointer data);
+void main_navigate_tab_history(gint direction);
+void main_update_tab_history_menu(gpointer data);		
+void main_change_verse_tab_history(gint historynum);
 
 #ifdef __cplusplus
 }

@@ -46,10 +46,11 @@
 #include "gui/dictlex.h"
 #include "gui/widgets.h"
 
-//#include "main/bibletext.h"
-#include "main/settings.h"
+
 #include "main/lists.h"
+#include "main/settings.h"
 #include "main/sword.h"
+#include "main/tab_history.h"
 #include "main/xml.h"
 
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
@@ -118,6 +119,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
+		main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
 		gtk_widget_show (pt->button_close);
 		gtk_widget_hide (pt->close_pixmap);
 	}
@@ -350,7 +352,11 @@ void gui_load_tabs(const gchar *filename)
 							xmlFree(val);					
 							val = (gchar*)xmlGetProp(tmp_node, "comm_showing");
 							pt->comm_showing = yes_no2true_false(val);
-							xmlFree(val);							
+							xmlFree(val);
+							pt->history_items = 0;	
+							pt->current_history_item = 0;
+							pt->first_back_click = TRUE;
+							main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);							
 							passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 							notebook_main_add_page(pt);
 						}
@@ -369,6 +375,10 @@ void gui_load_tabs(const gchar *filename)
 			pt->text_commentary_key = g_strdup(settings.currentverse);
 			pt->dictlex_key = g_strdup(settings.dictkey);
 			pt->book_offset = NULL; //settings.book_offset = atol(xml_get_value( "keys", "offset"));
+			pt->history_items = 0;	
+			pt->current_history_item = 0;
+			pt->first_back_click = TRUE;
+			main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 			passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 			notebook_main_add_page(pt);
 		}
@@ -526,12 +536,10 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	set_current_tab (pt);
 	
 	//sets the book mod and key
-	//if(pt->comm_showing)
 	main_display_book(pt->book_mod, pt->book_offset);
 	
 	//sets the commentary mod and key
 	main_display_commentary(pt->commentary_mod, pt->text_commentary_key);
-	//else
 	 
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
@@ -547,8 +555,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	else
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(
 					widgets.notebook_comm_book),
-					1);
-		
+					1);	
 	page_change = FALSE;
 }
 
@@ -581,10 +588,14 @@ void gui_set_tab_label(const gchar * key)
 				cur_passage_tab->text_mod,
 				cur_passage_tab->text_commentary_key); 
 	gtk_label_set_text (cur_passage_tab->tab_label,str->str);
+#ifdef DEBUG 
+	g_print("label = %s\n",str->str);	
+#endif
 	gtk_notebook_set_menu_label_text(
 					GTK_NOTEBOOK(widgets.notebook_main),
                                         cur_passage_tab->page_widget,
                                             str->str );
+	main_add_tab_history_item((PASSAGE_TAB_INFO*)cur_passage_tab);
 	g_string_free(str,TRUE);
 }
 
@@ -686,8 +697,12 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
+	pt->history_items = 0;	
+	pt->current_history_item = 0;
+	pt->first_back_click = TRUE;
+	main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 	
-	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);	
 	set_current_tab(pt);
 	notebook_main_add_page(pt);
 	
