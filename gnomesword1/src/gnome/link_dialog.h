@@ -24,7 +24,7 @@
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
-#include "gs_editor.h"
+#include "_editor.h"
 
 void set_link_to_module(gchar * linkref, gchar * linkmod,
 			GSHTMLEditorControlData * ecd);

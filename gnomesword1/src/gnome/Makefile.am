@@ -69,4 +69,6 @@ libgui_a_SOURCES =  \
     shortcutbar_dialog.c \
     shortcutbar_dialog.h \
     splash.c \
-    splash.h
+    splash.h \
+    studypad.c \
+    studypad.h

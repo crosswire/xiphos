@@ -44,24 +44,201 @@
 #include "spell_gui.h"
 #endif /* USE_SPELL */
 
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "gs_editor.h"
-#include "gs_info_box.h"
-#include "settings.h"
 
 /* gnome */
-#include "editor_toolbar.h"
+#include "_editor.h"
 #include "editor_menu.h"
-#include "link_dialog.h"
+#include "editor_replace.h"
+#include "editor_search.h"
+#include "editor_toolbar.h"
 #include "fileselection.h"
+#include "link_dialog.h"
+#include "studypad.h"
 
 /* main */
 #include "percomm.h"
+#include "gs_gnomesword.h"
+#include "gs_html.h"
+#include "gs_info_box.h"
+#include "settings.h"
 
 /******************************************************************************
- * much this code taken form GtkHTML
+ * much of this code taken form GtkHTML
  */ 
+
+/******************************************************************************
+ * Name
+ *  gs_html_editor_control_data_new
+ *
+ * Synopsis
+ *   #include "_editor.h"
+ *
+ *   GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GSHTMLEditorControlData *
+ */
+ 
+GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
+{
+	GSHTMLEditorControlData *necd =
+	    g_new0(GSHTMLEditorControlData, 1);
+
+	necd->paragraph_option = NULL;
+	necd->properties_types = NULL;
+	necd->block_font_style_change = FALSE;
+	necd->gdk_painter = NULL;
+	necd->plain_painter = NULL;
+	necd->format_html = FALSE;
+	necd->changed = FALSE;
+	necd->gbs = FALSE;
+	necd->personal_comments = FALSE;
+	necd->studypad = FALSE;
+	sprintf(necd->filename, "%s", s->studypadfilename);
+	return necd;
+}
+
+/******************************************************************************
+ * Name
+ *  gs_html_editor_control_data_destroy
+ *
+ * Synopsis
+ *   #include "_editor.h"
+ *
+ *   void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
+{
+	g_assert(ecd);
+
+	if (ecd->plain_painter)
+		gtk_object_unref(GTK_OBJECT(ecd->plain_painter));
+
+	if (ecd->gdk_painter)
+		gtk_object_unref(GTK_OBJECT(ecd->gdk_painter));
+
+	g_free(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  update_statusbar
+ *
+ * Synopsis
+ *   #include "_editor.h"
+ *
+ *   void update_statusbar(GSHTMLEditorControlData * ecd)
+ *
+ * Description
+ *    update information in editor status bar
+ *
+ * Return value
+ *   void
+ */ 
+
+void update_statusbar(GSHTMLEditorControlData * ecd)
+{
+	gint context_id2;
+	gchar buf[255];
+	gchar *buf2;
+
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(ecd->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
+
+	if (ecd->personal_comments)
+		buf2 = settings.percomverse;
+			
+	else
+		buf2 = ecd->filename;
+
+	if (ecd->changed) {
+		sprintf(buf, "%s - modified", buf2);
+		if(!ecd->personal_comments && !ecd->gbs)
+			settings.modifiedSP = TRUE;
+		if(ecd->personal_comments)
+			settings.modifiedPC = TRUE;
+		if(ecd->gbs)
+			settings.modifiedGBS = TRUE;
+	} else {
+		sprintf(buf, "%s", buf2);
+		if(!ecd->personal_comments && !ecd->gbs)
+			settings.modifiedSP = FALSE;
+		if(ecd->personal_comments)
+			settings.modifiedPC = FALSE;
+		if(ecd->gbs)
+			settings.modifiedGBS = FALSE;
+	} 
+
+	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
+			   buf);
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_editor_destroy
+ *
+ * Synopsis
+ *   #include "_editor.h"
+ *
+ *   void on_editor_destroy(GtkObject * object,
+ *				GSHTMLEditorControlData * ecd)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_editor_destroy(GtkObject * object,
+				GSHTMLEditorControlData * ecd)
+{
+	gs_html_editor_control_data_destroy(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  run_dialog
+ *
+ * Synopsis
+ *   #include "_editor.h"
+ *
+ *   void run_dialog(GnomeDialog *** dialog, GtkHTML * html, 
+ *				DialogCtor ctor, const gchar * title)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void run_dialog(GnomeDialog *** dialog, GtkHTML * html, 
+				DialogCtor ctor, const gchar * title)
+{
+	if (*dialog) {
+		gtk_window_set_title(GTK_WINDOW(**dialog), title);
+		gtk_widget_show(GTK_WIDGET(**dialog));
+		gdk_window_raise(GTK_WIDGET(**dialog)->window);
+	} else {
+		*dialog = ctor(html);
+		gtk_window_set_title(GTK_WINDOW(**dialog), title);
+		gtk_widget_show(GTK_WIDGET(**dialog));
+	}
+}
  
 /******************************************************************************
  * Name
@@ -71,7 +248,7 @@
  *   #include "_editor.h"
  *
  *   gint release(GtkWidget * widget, GdkEventButton * event,
-					GSHTMLEditorControlData * cd)	
+ *					GSHTMLEditorControlData * cd)	
  *
  * Description
  *    ?????
@@ -184,7 +361,7 @@ static void on_submit(GtkHTML * html, const gchar * method,
  *   #include "_editor.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					GSHTMLEditorControlData * cd)	
+ *					GSHTMLEditorControlData * ecd)	
  *
  * Description
  *    mouse button pressed in editor 
@@ -194,19 +371,21 @@ static void on_submit(GtkHTML * html, const gchar * method,
  */ 
 
 static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
-					GSHTMLEditorControlData * cd)
-{
-	//HTMLEngine *engine = cd->html->engine;
-
+					GSHTMLEditorControlData * ecd)
+{	
+	if (ecd->personal_comments) 
+		settings.whichwindow = PERCOMM_WINDOW;
+	if (ecd->studypad) 
+		settings.whichwindow = STUDYPAD_WINDOW;
 	switch (event->button) {
 	case 1:
-		if (event->type == GDK_2BUTTON_PRESS && cd->obj
+		if (event->type == GDK_2BUTTON_PRESS && ecd->obj
 		    && event->state & GDK_CONTROL_MASK) {
-			cd->releaseId =
+			ecd->releaseId =
 			    gtk_signal_connect(GTK_OBJECT(html),
 					       "button_release_event",
 					       GTK_SIGNAL_FUNC(release),
-					       cd);
+					       ecd);
 
 		}
 

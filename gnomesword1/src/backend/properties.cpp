@@ -385,10 +385,10 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 		    isON(s->morphsint);
 		settingsInfo["User Options"]
 		    ["Hebrew Points Interlinear"] =
-		    isON(s->hebrewpoints);
+		    isON(s->hebrewpointsint);
 		settingsInfo["User Options"]
 		    ["Cantillation Marks Interlinear"] =
-		    isON(s->cantillationmarks);
+		    isON(s->cantillationmarksint);
 		settingsInfo["User Options"]["footnotes interlinear"] =
 		    isON(s->footnotesint);
 		settingsInfo["User Options"]["versestyle"] =

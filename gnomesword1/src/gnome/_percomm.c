@@ -39,7 +39,6 @@
 /* main */
 #include "percomm.h"
 #include "settings.h"
-#include "gs_editor.h"
 #include "support.h"
 
 

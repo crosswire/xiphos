@@ -57,22 +57,26 @@
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
 
+/* frontend */
+#include "_editor.h"
+
+/* main */ 
 #include "gs_html.h"
 #include "support.h"
-#include "sword.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
-#include "gs_editor.h"
 #include "gs_interlinear.h"
+#include "settings.h"
+
+/* backend */
 #include "verselist.h"
 #include "shortcutbar.h"
-#include "settings.h"
+#include "sword.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
 
 GtkWidget *htmlCommentaries;
-GtkWidget *htmlTexts;
 GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
@@ -80,19 +84,6 @@ GtkWidget *usehtml;
 
 extern GtkWidget *textDict;
 gboolean in_url;
-
-GtkWidget *gs_new_html_widget(SETTINGS * s)
-{
-	GtkWidget *html;
-
-	html = gtk_html_new();
-	gtk_html_load_empty(GTK_HTML(html));
-	gtk_signal_connect(GTK_OBJECT(html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
-	return html;
-}
 
 /*
  *
@@ -408,76 +399,6 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	}
 }
 
-/*
- * 
- */
-static gint
-html_button_pressed(GtkWidget * html, GdkEventButton * event,
-		    gpointer * data)
-{
-	usehtml = html;
-	settings.whichwindow = GPOINTER_TO_INT(data);
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	return TRUE;
-
-}/******************************************************************************
-
- * 
- ******************************************************************************/
-static gint
-html_button_released(GtkWidget * html, GdkEventButton * event,
-		     gpointer * data)
-{
-	gchar *key;
-
-	usehtml = html;
-	settings.whichwindow = GPOINTER_TO_INT(data);
-
-	switch (event->button) {
-	case 1:
-		if (!in_url) {
-			key = buttonpresslookupGS_HTML(html);
-			if (key) {
-				gchar *dict = NULL;
-				if (settings.useDefaultDict)
-					dict =
-					    g_strdup(settings.DefaultDict);
-				else
-					dict =
-					    g_strdup(settings.DictWindowModule);
-				if (settings.inViewer)
-					display_dictlex_in_viewer(dict, key,
-							   &settings);
-				if (settings.inDictpane)
-					change_module_and_key(dict, key);
-				g_free(key);
-				if (dict)
-					g_free(dict);
-			}
-			return TRUE;
-		}
-		break;
-	case 2:
-		break;
-	case 3:		/*
-				   gnome_popup_menu_do_popup(settings.menuBible,
-				   NULL,
-				   NULL,
-				   event,
-				   NULL); */
-		break;
-	}
-	return TRUE;
-
-}
 
 /***************************************************************************************************
  *copy menu item clicked in gbs
@@ -497,15 +418,34 @@ void copyGS_HTML(GtkWidget * html_widget)
  ***************************************************************************************************/
 void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *widget;
 	GtkHTML *html;
 
-	if (!strcmp((gchar *) user_data, "textComp1"))
-		widget = settings.htmlInterlinear;
-	else
-		widget = lookup_widget(settings.app, (gchar *) user_data);
-
-	html = GTK_HTML(widget);
+	switch(settings.whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			html = GTK_HTML(settings.html_text);
+		break;
+		case INTERLINEAR_WINDOW:
+			html = GTK_HTML(settings.htmlInterlinear);
+		break;
+		case COMMENTARY_WINDOW:
+			html = GTK_HTML(settings.html_comm);
+		break;
+		case DICTIONARY_WINDOW:
+			html = GTK_HTML(settings.html_dict);
+		break;
+		case BOOK_WINDOW:
+			html = GTK_HTML(settings.html_book);
+		break;
+		case PERCOMM_WINDOW:
+			html = GTK_HTML(settings.html_percomm);
+		break;
+		case STUDYPAD_WINDOW:
+			html = GTK_HTML(settings.html_studypad);
+		break;
+		default: 
+			html = GTK_HTML(settings.html_text);
+	}
+		
 	gtk_html_copy(html);
 }
 
@@ -640,36 +580,6 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 }
 
 /***************************************************************************************************
- *add_gtkhtml_widgets -- add the gthhtml widgets
- ***************************************************************************************************/
-void add_gtkhtml_widgets(GtkWidget * app)
-{
-	htmlTexts = gtk_html_new();
-	gtk_widget_ref(htmlTexts);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "htmlTexts", htmlTexts,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlTexts);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlBible")),
-			  htmlTexts);
-	gtk_html_load_empty(GTK_HTML(htmlTexts));
-	usehtml = htmlTexts;
-
-
-	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(htmlTexts), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed),
-			   GINT_TO_POINTER(0));
-	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_release_event",
-			   GTK_SIGNAL_FUNC(html_button_released),
-			   GINT_TO_POINTER(0));
-
-}
-
-/***************************************************************************************************
  *beginHTML - start loading html widget
  ***************************************************************************************************/
 void beginHTML(GtkWidget * html_widget, gboolean isutf8)
@@ -770,7 +680,7 @@ void html_print(GtkWidget * htmlwidget)
 
 	page_num = 1;
 	font =
-	    gnome_font_new_closest("Helvetica", GNOME_FONT_BOOK, FALSE,
+	    gnome_font_new_closest("Times", GNOME_FONT_BOOK, FALSE,
 				   12);
 	gtk_html_print_with_header_footer(html, print_context, .0, .03,
 					  NULL, print_footer, NULL);

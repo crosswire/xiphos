@@ -58,12 +58,15 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlengine-search.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "spell.h"
 #include "debug.h"
 #include "char_table.h"
 #include "support.h"
-#include "gs_editor.h"
+//#include ".h"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -109,6 +112,9 @@ static FILE *in, *out;		/* streams to communicate with ispell */
 pid_t isp_pid = -1;		/* pid for the `ispell' process */
 
 static int isp_fd;
+static gboolean spell_receiver(const HTMLEngine * engine,
+		   const char *data, unsigned int len, void *user_data);
+static void find_word(gchar * word, GSHTMLEditorControlData * ecd);
 
 /* void sigchldhandler(int sig); */
 void sigchldhandler(pid_t pid, int *status);
@@ -129,6 +135,76 @@ gint spc_message;
 static gboolean end_of_text;
 
 #define SPC_CHAR_LENGTH 20
+
+static GString *gstr;
+
+static gboolean spell_receiver(const HTMLEngine * engine,
+		   const char *data, unsigned int len, void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+	if (!strncmp(data, "</BODY>", 7))
+		startgrabing = FALSE;
+	if (startgrabing) {
+		gstr = g_string_append(gstr, data);
+		//g_warning(gstr->str);
+	}
+	if (strstr(data, "<BODY") != NULL)
+		startgrabing = TRUE;
+
+	return TRUE;
+}
+
+static void find_word(gchar * word, GSHTMLEditorControlData * ecd)
+{
+	html_engine_search(ecd->html->engine, word, 0,	/* not case sen */
+			   1,	/* foward search */
+			   0);	/* not regex */
+}
+
+void load_text_from_spell(GtkWidget * text,
+				 GSHTMLEditorControlData * ecd)
+{
+	gchar *buf, *utf8str;
+	GtkHTMLStream *htmlstream;
+	GtkHTMLStreamStatus status1 = 0;
+	gboolean was_editable;
+
+	buf =
+	    gtk_editable_get_chars(GTK_EDITABLE(GTK_TEXT(text)), 0, -1);
+
+	was_editable = gtk_html_get_editable(ecd->html);
+	utf8str = e_utf8_from_gtk_string(ecd->htmlwidget, buf);
+	if (was_editable)
+		gtk_html_set_editable(ecd->html, FALSE);
+
+	htmlstream = gtk_html_begin_content(ecd->html,
+					    "text/html; charset=utf-8");
+	gtk_html_write(ecd->html, htmlstream, utf8str, strlen(utf8str));
+	gtk_html_end(ecd->html, htmlstream, status1);
+
+	gtk_html_set_editable(ecd->html, was_editable);
+}
+
+
+gboolean load_text_for_spell(GtkWidget * text,
+				    GSHTMLEditorControlData * ecd)
+{
+	gtk_html_set_editable(ecd->html, FALSE);
+	gstr = g_string_new("");
+	if (!gtk_html_save
+	    (ecd->html, (GtkHTMLSaveReceiverFn) spell_receiver,
+	     GINT_TO_POINTER(0)))
+		g_warning("file not writen");
+	else
+		g_warning("file writen");
+	//g_warning(gstr->str);
+
+	gtk_text_insert(GTK_TEXT(text), NULL,
+			&text->style->black, NULL, gstr->str, -1);
+	g_string_free(gstr, 1);
+	gtk_html_set_editable(ecd->html, TRUE);
+	return TRUE;
+}
 
 /* get_next_char:
   returns the next char in the text.
@@ -609,7 +685,7 @@ static void correct_word(Tword * word, GSHTMLEditorControlData * ecd)
 {
 	gboolean word_corrected = 0;
 	select_word(word);
-	find_word_EDITOR(word->text, ecd);
+	find_word(word->text, ecd);
 	
 	do {
 		spc_message = SPC_NONE;
@@ -802,7 +878,7 @@ gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	DEBUG_MSG("Removing status \n");
 	//statusbar_remove(GINT_TO_POINTER(spc_gui.status_bar_count));
 	DEBUG_MSG("Destroying window\n");
-	load_text_from_spell_EDITOR(spc_gui.text, 
+	load_text_from_spell(spc_gui.text, 
 					ecd);
 	gtk_widget_destroy(spc_gui.window);
 

@@ -26,8 +26,6 @@ COMMON_SOURCE =  \
     gbs.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
-    gs_editor.c \
-    gs_editor.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \
