@@ -43,6 +43,7 @@ struct _passage_tab_info {
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
 
 void gui_set_tab_label(const gchar * key);
+void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
 void gui_close_passage_tab(gint pagenum);
 void gui_update_tab_struct(const gchar * text_mod, 
