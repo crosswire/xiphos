@@ -23,7 +23,7 @@
  */
 #include <config.h>
 #include <gnome.h>
-//#include <gal/widgets/widget-color-combo.h>
+#include <gal/widgets/widget-color-combo.h>
 
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
@@ -455,10 +455,10 @@ static void unset_focus(GtkWidget * w, gpointer data)
 static void set_color_combo(GtkHTML * html,
 			    GSHTMLEditorControlData * cd)
 {
-/*	color_combo_set_color(COLOR_COMBO(cd->combo),
+	color_combo_set_color(COLOR_COMBO(cd->combo),
 			      &html_colorset_get_color_allocated
 			      (html->engine->painter,
-			       HTMLTextColor)->color);*/
+			       HTMLTextColor)->color);
 }
 
 /******************************************************************************

@@ -189,6 +189,8 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		page = 0;
 	}
 	
+	cur_d = d;
+	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_dict), page);
