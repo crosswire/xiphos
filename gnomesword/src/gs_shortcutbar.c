@@ -140,6 +140,7 @@ extern gboolean havedict;	/* let us know if we have at least one lex-dict module
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 extern GList *bookmods;
+extern GList *sbbookmods;
 
 
 GList *sblist; /* for saving search results to bookmarks  */
@@ -323,6 +324,17 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 			saveshortcutbarSW("Dictionaries.conf", group_name,
 					  group_num, "0");
 	}
+	
+	if (group_num == groupnum8) {
+		if (e_shortcut_bar_get_view_type
+		    (E_SHORTCUT_BAR(shortcut_bar),
+		     groupnum8) == E_ICON_BAR_LARGE_ICONS)
+			saveshortcutbarSW("Books.conf", group_name,
+					  group_num, "1");
+		else
+			saveshortcutbarSW("Books.conf", group_name,
+					  group_num, "0");
+	}
 }
 
 static void
@@ -495,6 +507,10 @@ on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 			break;
 		case 2:
 			pathname = gnome_pixmap_file("gnomesword/book-green.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			break;
+		case 3:
+			pathname = gnome_pixmap_file("gnomesword/book-gold.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 			break;
 		}
@@ -821,7 +837,24 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					  menu_item_menu);
 		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 				      _("Lexicons / Dictionaries"));
-	} else {
+		
+		menuitem = gtk_menu_item_new_with_label(_("Add Book"));
+		gtk_widget_show(menuitem);
+		gtk_menu_append(GTK_MENU(menu), menuitem);
+
+		menu_item_menu = gtk_menu_new();
+		gtk_widget_ref(menu_item_menu);
+		gtk_object_set_data_full(GTK_OBJECT(menu),
+					 "menu_item_menu", menu_item_menu,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
+					  menu_item_menu);
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
+				      _("Generic Book"));		      
+	} 
+	
+	else {
 		menuitem = gtk_menu_item_new_with_label(_("Add Shortcut"));
 		gtk_widget_show(menuitem);
 		gtk_menu_append(GTK_MENU(menu), menuitem);
@@ -844,6 +877,9 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 		if (group_num == groupnum3)
 			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 					      _("Lexicons / Dictionaries"));
+		if (group_num == groupnum8)
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
+					      _("Generic Book"));
 	}
 	/* Save the group num so we can get it in the callbacks. */
 	gtk_object_set_data(GTK_OBJECT(menu), "group_num",
@@ -926,40 +962,51 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 						       &ref, &icon_pixbuf);
 				memset(modName, 0, 16);
 				modNameFromDesc(modName, ref);
+				
 				if (group_num == groupnum0) {
 					gint sbtype;
 					sbtype = sbtypefromModNameSBSW(modName);
 					if (sbtype == 0 || sbtype == 1)
 						gotoBookmarkSWORD(modName,
 							  settings->currentverse);
+					else if (sbtype == 3) {
+						gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
+						gotoBookmarkSWORD(modName,NULL);
+					}
+						
 					else
 						gotoBookmarkSWORD(modName,
 							  settings->dictkey);
 				}
+				
 				if (group_num == groupnum1) {
 					if (havebible) {
 						gotoBookmarkSWORD(modName,
 							  settings->currentverse);
 					}
 				}
+				
 				if (group_num == groupnum2) {
 					if (havecomm) {
 						gotoBookmarkSWORD(modName,
 							  settings->currentverse);
 					}
 				}
+				
 				if (group_num == groupnum3) {
 					if (havedict) {
 						gotoBookmarkSWORD(modName,
 							  settings->dictkey);
 					}
 				}
+				
 				if (group_num == groupnum4) {
 					changeVerseSWORD(ref);
 				}
 				
 				if (group_num == groupnum8) {
-					gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
+					gotoBookmarkSWORD(modName,NULL);
+					//gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
 				}
 				g_free(type);
 				g_free(ref);
@@ -1839,18 +1886,14 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
 }
 
-
 void setupSB(SETTINGS * s)
 {
 	GList 
-		*tmplang, 
 		*tmp;
 	GtkWidget
 		*button,
-//		*buttonBooks,
 		*searchbutton,
 		*ctree,
-//		*scrolledwindowGBS,
 		*scrolledwindow1,
 		*scrolledwindow2, 
 		*vpSearch, 
@@ -1883,7 +1926,6 @@ void setupSB(SETTINGS * s)
 	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
 					 &transparent, mini_page_xpm);
 
-	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
 		groupnum0 =
@@ -1924,6 +1966,13 @@ void setupSB(SETTINGS * s)
 				pathname =
 				    gnome_pixmap_file
 				    ("gnomesword/book-green.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
+				break;
+			case 3:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-gold.png");
 				icon_pixbuf =
 				    gdk_pixbuf_new_from_file(pathname);
 				break;
@@ -2010,62 +2059,41 @@ void setupSB(SETTINGS * s)
 						  "dictionary",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-
 			tmp = g_list_next(tmp);
 		}
 	}
 	/* GBS */
-	groupnum8 =
-	    add_sb_group((EShortcutBar *) shortcut_bar,
-			 _("Books"));
-	//filename = "Dictionaries.conf";
-	//tmp = loadshortcutbarSW(filename, group_name, icon_size);
-	large_icons = 1; //atoi(icon_size);
-	if (large_icons == 1)
-		e_shortcut_bar_set_view_type((EShortcutBar *)
-					     shortcut_bar,
-					     groupnum8,
-					     E_ICON_BAR_LARGE_ICONS);
-	tmp = bookmods;
-	while (tmp != NULL) {
-		pathname =
-		    gnome_pixmap_file("gnomesword/book-green.png");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
-		e_shortcut_model_add_item(E_SHORTCUT_BAR
-					  (shortcut_bar)->model,
-					  groupnum8, -1,
-					  "book",
-					  (gchar *) tmp->data,
-					  icon_pixbuf);
-
-		tmp = g_list_next(tmp);
+	if (s->showbookgroup) {
+		groupnum8 =
+		    add_sb_group((EShortcutBar *) shortcut_bar,
+				 _("Book"));
+		filename = "Books.conf";
+		tmp = loadshortcutbarSW(filename, group_name, icon_size);
+		large_icons = atoi(icon_size);
+		if (large_icons == 1)
+			e_shortcut_bar_set_view_type((EShortcutBar *)
+						     shortcut_bar,
+						     groupnum8,
+						     E_ICON_BAR_LARGE_ICONS);
+		while (tmp != NULL) {
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-gold.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum8, -1,
+						  "book",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);	
+			tmp = g_list_next(tmp);
+		}
 	}
 	g_list_free(tmp);
+	
 	if (s->showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, _("History"));
 	}
-	g_list_free(tmplang);
-	
-	/*** add books group to shortcut bar ***/	/* gs_gbs.c */
-	/*scrolledwindowGBS = setupGBS(s, bookmods);  
-	
-	buttonBooks = gtk_button_new_with_label(_("Books"));
-	gtk_widget_ref(buttonBooks);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "buttonBooks",
-				 buttonBooks,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(buttonBooks);
-	
-	groupnum8 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
-					  scrolledwindowGBS, buttonBooks, -1); 
-	
-	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
-                      GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
-                      s);
-	*/
-	/*** end books group ***/
-	
 	
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
@@ -2235,6 +2263,13 @@ void update_shortcut_bar(SETTINGS * s)
 				icon_pixbuf =
 				    gdk_pixbuf_new_from_file(pathname);
 				break;
+			case 3:
+				pathname =
+				    gnome_pixmap_file
+				    ("gnomesword/book-gold.png");
+				icon_pixbuf =
+				    gdk_pixbuf_new_from_file(pathname);
+				break;
 			}
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
@@ -2320,6 +2355,34 @@ void update_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
+	
+	/* GBS */
+	if (s->showbookgroup) {
+		groupnum8 =
+		    add_sb_group((EShortcutBar *) shortcut_bar,
+				 _("Book"));
+		filename = "Books.conf";
+		tmp = loadshortcutbarSW(filename, group_name, icon_size);
+		large_icons = atoi(icon_size);
+		if (large_icons == 1)
+			e_shortcut_bar_set_view_type((EShortcutBar *)
+						     shortcut_bar,
+						     groupnum8,
+						     E_ICON_BAR_LARGE_ICONS);
+		while (tmp != NULL) {
+			pathname =
+			    gnome_pixmap_file("gnomesword/book-gold.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum8, -1,
+						  "book",
+						  (gchar *) tmp->data,
+						  icon_pixbuf);	
+			tmp = g_list_next(tmp);
+		}
+	}
+	
 	if (s->showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, _("History"));
@@ -2327,7 +2390,7 @@ void update_shortcut_bar(SETTINGS * s)
 	g_list_free(tmp);
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar),
 					  current_group, TRUE);
-	g_list_free(tmp);
+	//g_list_free(tmp);
 }
 
 void

@@ -146,7 +146,7 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count) {
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (hpanedGBS);
 	gtk_container_add (GTK_CONTAINER (s->notebookGBS), hpanedGBS);
-	gtk_paned_set_position (GTK_PANED (hpanedGBS), 189);
+	gtk_paned_set_position (GTK_PANED (hpanedGBS), 239);
 	
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_ref (scrolledwindowCTREE_GBS);
@@ -157,7 +157,7 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count) {
 	gtk_widget_show (scrolledwindowCTREE_GBS);
 	gtk_paned_pack1 (GTK_PANED (hpanedGBS), scrolledwindowCTREE_GBS, FALSE, TRUE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowCTREE_GBS), 
-			GTK_POLICY_NEVER, 
+			GTK_POLICY_AUTOMATIC, 
 			GTK_POLICY_AUTOMATIC);
 	
 	ctreeGBS = gtk_ctree_new (3, 0);
@@ -167,9 +167,9 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count) {
 	gtk_widget_show (ctreeGBS);
 	gtk_container_add (GTK_CONTAINER (scrolledwindowCTREE_GBS), ctreeGBS);
 	gtk_container_set_border_width (GTK_CONTAINER (ctreeGBS), 1);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 0, 280);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 1, 80);
-	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 2, 20);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 0, 680);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 1, 1);
+	gtk_clist_set_column_width (GTK_CLIST (ctreeGBS), 2, 1);
 	gtk_clist_column_titles_hide (GTK_CLIST (ctreeGBS));
 	
 	label = gtk_label_new (_("label"));

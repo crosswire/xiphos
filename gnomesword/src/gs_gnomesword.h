@@ -170,6 +170,7 @@ struct _settings {
 	        showtextgroup, /* display shortcut bar group if true */
 	        showcomgroup, /* display shortcut bar group if true */
 	        showdictgroup, /* display shortcut bar group if true */
+	        showbookgroup, /* display shortcut bar group if true */
 	        showbookmarksgroup, /* display shortcut bar group if true */
 	        showhistorygroup, /* display shortcut bar group if true */
 		showsplash, /* show splash on program start if true */
