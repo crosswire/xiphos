@@ -48,8 +48,92 @@
 #include "backend/sword_defs.h"
 
 using namespace sword;
-
-
+ 
+static char *get_sword_locale(void)
+{
+	const char *sys_local;
+	char *retval = NULL;
+	char buf[32];
+	int i = 0;
+	
+	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();
+	if(!strncmp(sys_local,"ru_RU-cp1251",10)) {
+		if(strlen(sys_local) > 12 ) {
+			for(i = 0; i < 12; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+		
+	}
+	else if(!strncmp(sys_local,"ru_RU-koi8-r",10)){
+		if(strlen(sys_local) >  12) {
+			for(i = 0; i < 12; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+		
+	}
+		
+	else if(!strncmp(sys_local,"uk_UA-cp1251",10)){
+		if(strlen(sys_local) > 12 ) {
+			for(i = 0; i < 12; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+		
+	}
+		
+	else if(!strncmp(sys_local,"uk_UA-koi8-u",10)){
+		if(strlen(sys_local) > 12 ) {
+			for(i = 0; i < 12; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+		
+	}
+		
+	else if(!strncmp(sys_local,"pt_BR",5)){
+		if(strlen(sys_local) > 5 ) {
+			for(i = 0; i < 5; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+		
+	}
+		
+	else if(!strncmp(sys_local,"en_GB",5)){
+		if(strlen(sys_local) > 5 ) {
+			for(i = 0; i < 5; i++) {
+				buf[i] = sys_local[i];
+				buf[i+1] = '\0';
+			}
+			sys_local = buf;
+		}
+	}
+		
+	else {
+		if(strlen(sys_local) > 2 ) {
+			buf[0] = sys_local[0];
+			buf[1] = sys_local[1];
+			buf[2] = '\0';
+			sys_local = buf;
+		}
+	}
+	retval = strdup(sys_local);
+		
+	LocaleMgr::systemLocaleMgr.setDefaultLocaleName(sys_local);
+	return retval;
+}
 
 /******************************************************************************
  * Name
@@ -69,12 +153,17 @@ using namespace sword;
  
 void backend_init(void)
 {	
+	char *sword_locale = NULL;
+	
 	ModMap::iterator it;
 	g_print("gnomesword-%s\n", VERSION);
-	g_print("%s\n", "Initiating Sword\n");		
-	g_print("Sword locale is %s\n",
+	g_print("%s\n", "Initiating Sword\n");
+	g_print("System locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+	sword_locale = get_sword_locale();
+	g_print("Sword locale is %s\n", sword_locale);
 	g_print("%s\n", "Checking for SWORD Modules");
+	free((char*)sword_locale);
 	backend_init_language_map();
 	/*
 	 *create sword mgrs

@@ -1,11 +1,15 @@
 
-AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev18)
+AC_INIT(gnomesword2, 0.9.dev18, http://bugzilla.gnome.org/enter_bug.cgi?product=gnomesword2)
+AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+dnl AC_INIT(configure.in)
+dnl AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev18)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
 
-AC_ARG_ENABLE(gnome2,[--enable-gnome1 build for gnome1],gnome1=$enableval,gnome1="no") 
+AC_ARG_ENABLE(gnome2,[  --enable-gnome1          build for gnome1],gnome1=$enableval,gnome1="no") 
 
 if test "x$gnome1" = xno; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
@@ -46,7 +50,7 @@ GETTEXT_PACKAGE=gnomesword2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 dnl Languages which your application supports
-ALL_LINGUAS="bg de en_GB es es_ES fr fr_FR ru sk"
+ALL_LINGUAS="bg de de_DE en_GB es es_ES fr fr_FR ru sk"
 AM_GLIB_GNU_GETTEXT
 
 

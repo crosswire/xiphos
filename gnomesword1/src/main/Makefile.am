@@ -17,6 +17,7 @@ $(IDL_GENERATED): $(SPELL_IDL)
 	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(top_builddir)/src/main/Spell.idl
 else
   IDL_GENERATED =
+  SPELL_IDL =
 endif
 
 libmain_a_SOURCES =  \
