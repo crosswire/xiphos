@@ -344,7 +344,9 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_ctree),
 				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);	
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_ctree,
+                                             settings.shadow_type);	
 				    
 	model = create_model();			       
 	dlg->tree = gtk_tree_view_new_with_model(model);
@@ -365,6 +367,8 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 				       (scrolledwindow_html),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_html,
+                                             settings.shadow_type);
 
 	dlg->html = gtk_html_new();
 	gtk_widget_show(dlg->html);

@@ -572,6 +572,8 @@ static void create_viewer_page(GtkWidget * notebook)
 				       (scrolledwindow),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+                                             settings.shadow_type);
 
 	sidebar.html_viewer_widget = gtk_html_new();
 	gtk_widget_show(sidebar.html_viewer_widget);
@@ -1136,6 +1138,8 @@ static void create_search_results_page(GtkWidget * notebook)
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow3,
+                                             settings.shadow_type);
 
 	/* create list model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
@@ -1172,6 +1176,8 @@ static void create_search_results_page(GtkWidget * notebook)
 				       (scrolledwindow4),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow4,
+                                             settings.shadow_type);
 
 
 	sidebar.html_widget = gtk_html_new();
@@ -1528,6 +1534,8 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				       (scrolledwindow4),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow4,
+                                             settings.shadow_type);
 
 	sidebar.module_list = gtk_tree_view_new();
 	gtk_widget_show(sidebar.module_list);
@@ -1546,7 +1554,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				       (scrolledwindow_bm),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_bm,
+                                             settings.shadow_type);
+				       
 	widgets.bookmark_tree = gui_create_bookmark_tree();
 	gtk_widget_show(widgets.bookmark_tree);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_bm),
