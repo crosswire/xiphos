@@ -1,5 +1,5 @@
 /***************************************************************************
-                          GnomeSword.h  -  description
+                                     gs_sword.h
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -21,8 +21,8 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-#ifndef __GNOMESWORD_H__
-#define __GNOMESWORD_H__  
+#ifndef __GS_SWORD_H__
+#define __GS_SWORD_H__  
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,9 +41,11 @@ void resultsListSWORD(GtkWidget * searchFrm,
 		gint column);
 void strongsSWORD(gint window, gboolean choice);
 void footnotesSWORD(gint window, gboolean choice);
+/*
 void nbchangecurModSWORD(gchar *modName, 
 						gint page_num, 
 						gboolean showchange); 
+*/	
 void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);
 void changecomp1ModSWORD(gchar * modName);
@@ -65,7 +67,6 @@ void dictSearchTextChangedSWORD(gchar * mytext);
 void dictchangekeySWORD(gint direction);
 void showmoduleinfoSWORD(char *modName);
 void showinfoSWORD(GtkWidget * text, GtkLabel * label, GtkLabel * version_label);
-void lookupStrongsSWORD(gint theNumber);
 void setglobalopsSWORD(gchar *option, gchar *yesno);
 void changepercomModSWORD(gchar * modName);
 void redisplayTextSWORD(void);
@@ -83,7 +84,6 @@ gchar* getcommodDescriptionSWORD(void);
 void gotokeySWORD(gchar *newkey);
 void shutdownSDSWORD(void);
 void SDdictSearchTextChangedSWORD(char* newkey);
-gchar *showfirstlineStrongsSWORD(gint theNumber);
 GtkWidget *createSearchDlgSWORD(void);
 void startsearchSWORD(GtkWidget *searchFrm);
 GList* setupCommSWORD(GtkWidget *text);
@@ -108,4 +108,4 @@ void updateshortcutbarSWORD(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __GNOMESWORD_H__ */
+#endif	/* __GS_SWORD_H__ */

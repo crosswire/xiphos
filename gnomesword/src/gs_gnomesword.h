@@ -31,17 +31,6 @@ extern "C" {
 #endif
 
 #include "gs_sword.h"
-	
-/*
-typedef struct _mods GS_MODS;
-struct _mods {
-	gchar	*name,
-			*type,
-			*key,
-			*description;
-	gint		modnum;
-};
-*/
  
 typedef struct _settings SETTINGS;
 struct _settings {
