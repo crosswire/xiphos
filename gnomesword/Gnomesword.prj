@@ -130,7 +130,9 @@ module.source.files=\
 	sw_bookmarks.cpp\
 	sw_bookmarks.h\
 	gs_information_dlg.c\
-	gs_information_dlg.h
+	gs_information_dlg.h\
+	gs_verselist_dlg.c\
+	gs_verselist_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

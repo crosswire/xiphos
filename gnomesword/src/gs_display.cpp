@@ -348,14 +348,14 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gint mybuflen, utf8len;
 	const gchar **end;
 	
-	//c = 182;	
+	//c = 182;	 
 	
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbText")), 1);
 	
 	beginHTML(GTK_WIDGET(gtkText),TRUE);	
 	
-	sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">",
+	sprintf(tmpBuf,"<html><META HTTP-Equiv=\"Content-Type\" CONTENT=\"text/html; charset=iso-8859-7\"><body text=\"#151515\" link=\"#898989\">",
 		gsfonts->bible_font_size);
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 	utf8len = g_utf8_strlen (utf8str , -1) ;
