@@ -493,6 +493,7 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
 				}
 			break;
 			case COMMENTARY_TYPE:
+			case PERCOM_TYPE:
 				if(use_dialog)
 					main_dialog_goto_bookmark(
 								(gchar*)url);

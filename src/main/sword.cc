@@ -716,7 +716,7 @@ void main_dictionary_entery_changed(char * mod_name)
 	//g_warning(key);
 	key2 = g_utf8_strup(key,strlen(key));
 	//key2 = toupperstr(key);
-	g_warning(key2);
+//	g_warning(key2);
 	
 	//key = g_ascii_strup(key,strlen(key));
 	//g_warning(key);
