@@ -26,7 +26,9 @@ extern "C" {
 #endif
 
 #include "gs_sword.h"
-
+	
+void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
+void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 void loadFile(GtkWidget * filesel);
 void setDiretory(void);
@@ -43,6 +45,8 @@ SETTINGS readsettings(void);
 SETTINGS createsettings(void);
 void loadStudyPadFile(gchar * filename);
 void savelist(gchar * filename, GtkWidget * list);
+GtkWidget *create_fileselection1(void);
+GtkWidget *create_fileselectionSave(void);
 
 #ifdef __cplusplus
 }
