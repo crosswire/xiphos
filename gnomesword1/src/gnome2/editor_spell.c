@@ -275,7 +275,6 @@ inline static void update_progress_bar(gint end, gint current)
 	
 	/* percentage is betweeen 0 and 1 */
 	percentage = current_position / text_length;
-	//g_warning("precentage = %f",percentage);
 	if(percentage > 1) percentage = 1.0;
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(spc_gui.progress_bar),
 				percentage);
@@ -322,9 +321,12 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 					if (have == 0){
 						fill_near_misses_clist(utf8str);
 						correct_word(utf8str, ecd);
-						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
-						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");
+						gtk_clist_clear(GTK_CLIST(
+						    spc_gui.near_misses_clist));							
+						gtk_entry_set_text(GTK_ENTRY(
+						       spc_gui.word_entry), "");
+						gtk_entry_set_text(GTK_ENTRY(
+						    spc_gui.replace_entry), "");
 					}
 					if (spc_message == SPC_CLOSE) {
 						break;
@@ -373,7 +375,6 @@ static void spc_start_button_clicked_lcb(GtkButton * button,
 	gboolean enabled;
 	
 	gtk_widget_set_sensitive(spc_gui.start_button, 0);
-	gtk_widget_set_sensitive(spc_gui.options_button, 0);
 	gtk_widget_set_sensitive(spc_gui.close_button, 0);
 	
 	gtk_widget_set_sensitive(spc_gui.accept_button, 1);
@@ -645,47 +646,48 @@ void on_language_entry_changed(GtkEditable * editable, gpointer user_data)
 static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 {
 	GList *tmp = NULL;
+	GtkWidget *dialog_vbox;
+	GtkWidget *label;
+	gchar *header;
 	
 	spc_is_running = FALSE;
-	spc_gui.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_gui.window",
-			    spc_gui.window);
+	spc_gui.window = gtk_dialog_new(); 
 	gtk_window_set_title(GTK_WINDOW(spc_gui.window),
 			     _("Spell Checker"));
         gtk_window_set_default_size (GTK_WINDOW (spc_gui.window), 300, 200);
+	gtk_container_set_border_width(GTK_CONTAINER(spc_gui.window), 12);
+ 
+	dialog_vbox = GTK_DIALOG(spc_gui.window)->vbox;
+	gtk_object_set_data(GTK_OBJECT(dialog_vbox), "dialog_vbox",
+			    dialog_vbox);
+	gtk_widget_show(dialog_vbox);
+	
 
+	spc_gui.close_button = gtk_dialog_add_button(GTK_DIALOG(spc_gui.window),
+				      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
+	spc_gui.start_button = gtk_dialog_add_button(GTK_DIALOG(spc_gui.window),
+				      GTK_STOCK_SPELL_CHECK, 101);
 	spc_gui.vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(spc_gui.vbox);
-	gtk_container_add(GTK_CONTAINER(spc_gui.window), spc_gui.vbox);
-	
-	spc_gui.hbuttonbox_top = gtk_hbutton_box_new();
-	gtk_widget_show(spc_gui.hbuttonbox_top);
-	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.hbuttonbox_top,
-			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox), spc_gui.vbox, TRUE, TRUE, 0);
 
-	spc_gui.start_button = gtk_button_new_with_label(_("Start"));
-	gtk_widget_show(spc_gui.start_button);
-	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
-			  spc_gui.start_button);
-	GTK_WIDGET_SET_FLAGS(spc_gui.start_button, GTK_CAN_DEFAULT);
-
-	spc_gui.close_button = gtk_button_new_with_label(_("Close"));
-	gtk_widget_show(spc_gui.close_button);
-	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
-			  spc_gui.close_button);
-	GTK_WIDGET_SET_FLAGS(spc_gui.close_button, GTK_CAN_DEFAULT);
-
-	spc_gui.options_button = gtk_button_new_with_label(_("Options"));
-	gtk_widget_show(spc_gui.options_button);
-	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
-			  spc_gui.options_button);
-	GTK_WIDGET_SET_FLAGS(spc_gui.options_button, GTK_CAN_DEFAULT);
 
 #ifdef USE_GNOME_SPELL	
-	spc_gui.language_frame = gtk_frame_new(_("Language"));
+	spc_gui.language_frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(spc_gui.language_frame),
+					GTK_SHADOW_NONE);	
+	
+	label = gtk_label_new(NULL);
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Language"));
+  	gtk_label_set_markup(GTK_LABEL(label), header);
+	g_free(header);
+	gtk_widget_show(label);
+	gtk_frame_set_label_widget(GTK_FRAME(spc_gui.language_frame),label);
+	
 	gtk_widget_show(spc_gui.language_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.language_frame, TRUE,
 			   TRUE, 0);
+			   
 	spc_gui.language_combo = gtk_combo_new();
 	gtk_widget_show(spc_gui.language_combo);
 	gtk_container_add(GTK_CONTAINER(spc_gui.language_frame),
@@ -706,7 +708,17 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
                     NULL);
 #endif	
 	
-	spc_gui.word_frame = gtk_frame_new(_("Word"));
+	spc_gui.word_frame = gtk_frame_new(NULL);	
+	gtk_frame_set_shadow_type(GTK_FRAME(spc_gui.word_frame),
+					GTK_SHADOW_NONE);	
+	
+	label = gtk_label_new(NULL);
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Word"));
+  	gtk_label_set_markup(GTK_LABEL(label), header);
+	g_free(header);
+	gtk_widget_show(label);
+	gtk_frame_set_label_widget(GTK_FRAME(spc_gui.word_frame),label);
+	
 	gtk_widget_show(spc_gui.word_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.word_frame, TRUE,
 			   TRUE, 0);
@@ -717,7 +729,16 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_container_add(GTK_CONTAINER(spc_gui.word_frame),
 			  spc_gui.word_entry);
 
-	spc_gui.replace_frame = gtk_frame_new(_("Replace"));
+	spc_gui.replace_frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(spc_gui.replace_frame),
+					GTK_SHADOW_NONE);	
+	
+	label = gtk_label_new(NULL);
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Replace"));
+  	gtk_label_set_markup(GTK_LABEL(label), header);
+	g_free(header);
+	gtk_widget_show(label);
+	gtk_frame_set_label_widget(GTK_FRAME(spc_gui.replace_frame),label);
 	gtk_widget_show(spc_gui.replace_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.replace_frame,
 			   FALSE, FALSE, 0);
@@ -734,11 +755,12 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 					near_misses_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(spc_gui.near_misses_scrolled_window, 20, 100);
 	gtk_widget_show(spc_gui.near_misses_scrolled_window);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox),
 			   spc_gui.near_misses_scrolled_window, TRUE, TRUE,
 			   0);
+	gtk_container_set_border_width(GTK_CONTAINER(
+				spc_gui.near_misses_scrolled_window), 2);
 
 	spc_gui.near_misses_clist = gtk_clist_new(1);
 	gtk_clist_set_selection_mode(GTK_CLIST(spc_gui.near_misses_clist),
@@ -747,8 +769,18 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_container_add(GTK_CONTAINER
 			  (spc_gui.near_misses_scrolled_window),
 			  spc_gui.near_misses_clist);
+			  			  
 
-	spc_gui.progress_frame = gtk_frame_new(_("Progress"));
+	spc_gui.progress_frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(spc_gui.progress_frame),
+					GTK_SHADOW_NONE);	
+	
+	label = gtk_label_new(NULL);
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Progress"));
+  	gtk_label_set_markup(GTK_LABEL(label), header);
+	g_free(header);
+	gtk_widget_show(label);
+	gtk_frame_set_label_widget(GTK_FRAME(spc_gui.progress_frame),label);
 	gtk_widget_show(spc_gui.progress_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.progress_frame,
 			   TRUE, TRUE, 0);
@@ -805,9 +837,6 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_signal_connect(GTK_OBJECT(spc_gui.close_button), "clicked",
 			   G_CALLBACK(spc_close_button_clicked_lcb),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.options_button), "clicked",
-			   G_CALLBACK(on_spc_options_button_clicked),
-			   ecd);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.accept_button), "clicked",
 			   G_CALLBACK(on_spc_accept_button_clicked),
 			   ecd);
@@ -847,14 +876,10 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
 	if(init_spell() == -1) {
-		//gtk_widget_destroy(spc_gui.window);
 		return;
-	}
-	
-	spc_gui.window = create_spc_window(ecd);
-	gtk_widget_set_sensitive(spc_gui.options_button, 0);	
+	}	
+	spc_gui.window = create_spc_window(ecd);	
 	gtk_widget_show(spc_gui.window);
-
 }
 
 
