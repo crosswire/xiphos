@@ -227,6 +227,8 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	char *Buf;
 
 	font = "Roman";
+	sourceformat = "plain";
+	
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
@@ -1819,6 +1821,7 @@ char GTKRWPDisp::Display(SWModule & imodule)
 	/* finish with the text widget */
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+	return 0;
 }
 
 

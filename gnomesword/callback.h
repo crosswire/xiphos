@@ -24,8 +24,6 @@ extern "C" {
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 	
-GtkWidget *create_fileselection1(void);
-GtkWidget *create_fileselectionSave(void);
 GtkWidget *create_menu1(void);
 GtkWidget *create_mainwindow(void);
 GtkWidget *create_wdwEditBookmarks(void);
@@ -41,7 +39,6 @@ void on_cancel_button1_clicked(GtkButton * button,
 		gpointer user_data);
 void on_ok_button2_clicked(GtkButton * button, 
 		gpointer user_data);
-void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
 void on_cancel_button2_clicked(GtkButton * button, gpointer user_data);
 void on_btnSearch1_clicked(GtkButton * button, gpointer user_data);
 void on_resultList_select_row(GtkCList * clist, gint row,
@@ -57,28 +54,11 @@ void on_add_bookmark1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
 void on_edit_bookmarks1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
-void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
 void on_verse_style1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
 void on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
-void on_changeint1mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_changeint2mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_changeint3mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_changeint4mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_changeint5mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
+
 
 void
  on_cbeBook_changed(GtkEditable * editable, gpointer user_data);
@@ -268,14 +248,6 @@ void
 	void
 	 on_btnBack_clicked(GtkButton * button, gpointer user_data);
 
-	void
-	 on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 	void
 	 on_change_module_activate(GtkMenuItem * menuitem,
@@ -310,27 +282,6 @@ void
 
 	
 
-	void
-	 on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	
-
-	
-	void
-	 on_about_this_module1_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module2_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module3_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module4_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
 
 	void
 	 on_btnPropertyboxOK_clicked(GtkButton * button,
@@ -343,24 +294,6 @@ void
 	void
 	 on_btnPropertyboxCancel_clicked(GtkButton * button,
 					 gpointer user_data);
-
-	void
-	 on_about_this_module1_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module2_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module3_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	void
-	 on_about_this_module4_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-
-	
 
 //==============================================================================================
 
@@ -439,31 +372,7 @@ void
 				gpointer user_data);
 
 
-	void
-	 on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data);
 
-	void
-	 on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_referenceNE_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-
-	void
-	 on_underlineNE_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-
-	void
-	 on_greekNE_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_goto_reference_activate(GtkMenuItem * menuitem,
-				    gpointer user_data);
-
-
-	void
-	 on_goto_reference2_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
 
 
 	void
@@ -500,13 +409,7 @@ void
 					    GdkEventKey * event,
 					    gpointer user_data);
 
-	void
-	 on_lookup_selection2_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
 
-	void
-	 on_about_this_module6_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
 
 
 	 gboolean
@@ -514,24 +417,13 @@ void
 					     GdkEventCrossing * event,
 					     gpointer user_data);
 
-	void
-	 on_about_this_module5_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
 
-	void
-	 on_lookup_word1_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
 
 	void
 	 on_btnBack_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnFoward_clicked(GtkButton * button, gpointer user_data);
-
-
-	void
-	 on_lookup_selection_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
 
 
 	void
@@ -544,17 +436,8 @@ void
 	void
 	 on_btnComNext_clicked(GtkButton * button, gpointer user_data);
 
-	void
-	 on_auto_scroll1_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
 
-	void
-	 on_lookup_selection4_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
 
-	void
-	 on_goto_reference3_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
 
 	 gboolean
 	    on_dictionarySearchText_key_press_event
@@ -580,13 +463,6 @@ void
 	 on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data);
 
-	void
-	 on_show_tabs1_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-
-	void
-	 on_show_tabs2_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
 
 #if USE_SHORTCUTBAR
 	void
@@ -668,7 +544,7 @@ on_btsBookmarks2_clicked               (GtkButton       *button,
 
 void
 on_btsHistory2_clicked                 (GtkButton       *button,
-                 		gpointer         user_data);
+                 			gpointer         user_data);
                  		
 void
 on_textbutton_clicked                     (GtkButton       *button,
@@ -682,8 +558,10 @@ void
 on_dictbutton_clicked                     (GtkButton       *button,
                                         gpointer         user_data);
 
-void on_view_in_new_window_activate(GtkMenuItem * menuitem,
-		gpointer user_data);                 		
+    		
+void
+on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
 
 #ifdef __cplusplus
 }

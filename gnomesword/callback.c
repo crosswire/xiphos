@@ -85,72 +85,11 @@ extern gchar 	*font_mainwindow,
 		*font_currentverse;
 extern gboolean noteModified;	/* personal comments window changed */
 extern gint answer;		/* do we save file on exit */
-//extern NoteEditor *noteeditor;
-extern gboolean autoscroll;
 extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
-extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
+//extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern GtkWidget *htmlCommentaries;
 extern gchar *mycolor;
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
-/******************************************************************************
-*******************************************************************************
- *callbacks fileselection dialogs
-*******************************************************************************
-******************************************************************************/
-
-/******************************************************************************
- *on_ok_button1_clicked - fileselection dialog
-******************************************************************************/
-void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *filesel;
-
-	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	loadFile(filesel);
-	gtk_widget_destroy(filesel);
-}
-
-//----------------------------------------------
-void on_cancel_button1_clicked(GtkButton * button, gpointer user_data)
-{
-	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
-}
-
-//----------------------------------------------
-void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *filesel;
-	gchar filename[255];
-
-	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	sprintf(filename, "%s",
-		gtk_file_selection_get_filename(GTK_FILE_SELECTION
-						(filesel)));
-	gtk_widget_destroy(filesel);
-	saveFile(filename);
-}
-
- //------------------------------------------
- //-- save verse list - fileselection dialog ok button clicke
- //-- user data - the list widget dialog ok button clicked
-void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *filesel;	//-- pointer to fileselection dialog
-	gchar filename[255];	//-- string to store filename from fileselection dialog
-
-	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));	//-- get fileselection dialog
-	sprintf(filename, "%s",
-		gtk_file_selection_get_filename(GTK_FILE_SELECTION(filesel)));	//-- get filename
-	gtk_widget_destroy(filesel);	//-- destroy fileselection dialog
-	savelist(filename, (GtkWidget *) user_data);	//-- send filename and list widget to savelist function (gs_file.c)
-}
-
-/* fileselection dialog cancel button clicked */
-void
-on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
-{	//--destroy fileselection dialog
-	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
-}
 
 
 /*********************************************************************************
@@ -158,6 +97,11 @@ on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
  *callbacks MainFrm
 **********************************************************************************
 *********************************************************************************/
+
+/**********************************************************************************
+ * main menu call backs
+ * popup menu call backs are located in 
+ **********************************************************************************/
 
 /******************************************************************************
  *on_mnuHistoryitem1_activate - user chose an history item
@@ -170,32 +114,64 @@ on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
+void
+on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	shutdownSWORD();
+	/* we change the state of strongs toogle buttn to match the menu item this will 
+	    activate on_btnStrongs_toogled  which will do the work */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (lookup_widget
+				      (MainFrm, "btnStrongs")),
+				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
 }
-
-
-//----------------------------------------------------------------------------------------------
-void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
-{
-	if (firstsearch) {
-		searchDlg = createSearchDlgSWORD();
-	}
-	gtk_widget_show(searchDlg);
-}
-
 //----------------------------------------------------------------------------------------------
 void
-on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
+				     gpointer user_data)
 {
+	GtkWidget *dlg, *text1, *text2, *label;
 
-	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-	if (togglebutton->active)
-		strongsSWORD(TRUE);	//-- trun strongs numbers on (GnomeSword.cpp)
-	else
-		strongsSWORD(FALSE);	//-- trun strongs numbers off (GnomeSword.cpp)
+	dlg = create_AboutSword();
+	text1 = lookup_widget(dlg, "txtAboutSword");
+	text2 = lookup_widget(dlg, "text6");
+	label = lookup_widget(dlg, "label96");
+	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
+	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
+	showinfoSWORD(text2, GTK_LABEL(label));
+	gtk_widget_show(dlg);
 }
+
+
+//----------------------------------------------------------------------------------------------
+void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
+		footnotesSWORD(TRUE);
+	else
+		footnotesSWORD(FALSE);
+}
+
+
+//----------------------------------------------------------------------------------------------
+void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *text;
+	text = lookup_widget(MainFrm, (gchar *) user_data);	
+	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
+}
+
+//----------------------------------------------------------------------------------------------
+void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	openpropertiesbox();
+	comtabs = settings->showcomtabs;
+	dicttabs = settings->showdicttabs;
+	bar = settings->showshortcutbar;
+	showtextgroup = settings->showtextgroup;
+	showcomgroup = settings->showcomgroup;
+	showdictgroup = settings->showdictgroup;
+}
+
 
 //----------------------------------------------------------------------------------------------
 void on_add_bookmark1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -214,54 +190,22 @@ on_edit_bookmarks1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	gtk_widget_show(listeditor);
 }
-
 //----------------------------------------------------------------------------------------------
-void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	changeVerseSWORD((gchar *) user_data);
+	if (firstsearch) {
+		searchDlg = createSearchDlgSWORD();
+		firstsearch = FALSE;
+	}
+	gtk_widget_show(searchDlg);
 }
-
-//----------------------------------------------------------------------------------------------
-void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecurModSWORD(modName,TRUE);
-}
-
 //----------------------------------------------------------------------------------------------
 void
-on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
+on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp1ModSWORD(modName);
+	setautosave(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp2ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp3ModSWORD(modName);
-}
 
 //----------------------------------------------------------------------------------------------
 void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -284,6 +228,82 @@ on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 	else
 		showIntPage(MainFrm, FALSE);
 }
+
+//----------------------------------------------------------------------------------------------
+void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	shutdownSWORD();
+}
+
+//----------------------------------------------------------------------------------------------
+void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
+			gpointer user_data)
+{
+	clearhistory(MainFrm,GTK_WIDGET(shortcut_bar));
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *AboutBox;
+
+	AboutBox = create_about2();
+	gtk_widget_show(AboutBox);
+}
+
+//----------------------------------------------------------------------------------------------
+void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *notebook;
+	gchar *modNum;
+
+	modNum = (gchar *) user_data;
+	notebook = lookup_widget(MainFrm, "notebook1");	//-- get notebook
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
+}
+
+//----------------------------------------------------------------------------------------------
+void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *notebook;
+	gchar *modNum;
+
+	modNum = (gchar *) user_data;
+	notebook = lookup_widget(MainFrm, "notebook4");	//-- get notebook
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
+}
+
+
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+
+	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
+	if (togglebutton->active)
+		strongsSWORD(TRUE);	//-- trun strongs numbers on (GnomeSword.cpp)
+	else
+		strongsSWORD(FALSE);	//-- trun strongs numbers off (GnomeSword.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
+{
+	shutdownSWORD();
+}
+
+
+//----------------------------------------------------------------------------------------------
+void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
+{
+	if (firstsearch) {
+		searchDlg = createSearchDlgSWORD();
+	}
+	gtk_widget_show(searchDlg);
+}
+
 
 //----------------------------------------------------------------------------------------------
 void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
@@ -548,74 +568,6 @@ void on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data)
 	spell = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(spell);
 }
-
-//----------------------------------------------------------------------------------------------
-void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	shutdownSWORD();
-}
-
-//----------------------------------------------------------------------------------------------
-void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
-			gpointer user_data)
-{
-	clearhistory(MainFrm,GTK_WIDGET(shortcut_bar));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *AboutBox;
-
-	AboutBox = create_about2();
-	gtk_widget_show(AboutBox);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	/* we change the state of strongs toogle buttn to match the menu item this will 
-	    activate on_btnStrongs_toogled  which will do the work */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (lookup_widget
-				      (MainFrm, "btnStrongs")),
-				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		footnotesSWORD(TRUE);
-	else
-		footnotesSWORD(FALSE);
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	text = lookup_widget(MainFrm, (gchar *) user_data);
-	
-	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-}
-
-//----------------------------------------------------------------------------------------------
-void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	openpropertiesbox();
-	comtabs = settings->showcomtabs;
-	dicttabs = settings->showdicttabs;
-	bar = settings->showshortcutbar;
-	showtextgroup = settings->showtextgroup;
-	showcomgroup = settings->showcomgroup;
-	showdictgroup = settings->showdictgroup;
-}
-
 //----------------------------------------------------------------------------------------------
 void
 on_fpMainwindow_font_set(GnomeFontPicker * gnomefontpicker,
@@ -666,82 +618,7 @@ on_cpfgCurrentverse_color_set(GnomeColorPicker * gnomecolorpicker,
 	gtk_widget_set_sensitive(btnapply, TRUE);
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
-{
-	GtkWidget *dlg, *text1, *text2, *label;
 
-	dlg = create_AboutSword();
-	text1 = lookup_widget(dlg, "txtAboutSword");
-	text2 = lookup_widget(dlg, "text6");
-	label = lookup_widget(dlg, "label96");
-	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
-	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
-	showinfoSWORD(text2, GTK_LABEL(label));
-	gtk_widget_show(dlg);
-}
-/*
-//----------------------------------------------------------------------------------------------
-void on_btnSpellNotes_clicked(GtkButton * button, gpointer user_data)
-{
-#ifdef USE_ASPELL
-	GtkWidget *speller;
-	if (GTK_TOGGLE_BUTTON
-	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {};
-		//speller = spellcheck(1);
-#endif				
-}
-*/
-//----------------------------------------------------------------------------------------------
-void
-on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	setautosave(GTK_CHECK_MENU_ITEM(menuitem)->active);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	if (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->
-	    active) {
-		text = lookup_widget(MainFrm, "textComments");
-		gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	text = lookup_widget(MainFrm, "textComments");
-	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-}
-
-//----------------------------------------------------------------------------------------------
-void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-
-	text = lookup_widget(MainFrm, "textComments");
-#ifdef USE_GTKHTML
-
-	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
-			NULL, NULL,
-			gs_clipboard->str, -1);
-#else /* !USE_GTKHTML */
-	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-#endif /* USE_GTKHTML */
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	changepercomModSWORD((gchar *) user_data);
-}
 
 //----------------------------------------------------------------------------------------------
 void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data)
@@ -754,17 +631,6 @@ void on_btnKeyNext_clicked(GtkButton * button, gpointer user_data)
 {
 	dictchangekeySWORD(1);
 }
-
-//----------------------------------------------------------------------------------------------
-void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (firstsearch) {
-		searchDlg = createSearchDlgSWORD();
-		firstsearch = FALSE;
-	}
-	gtk_widget_show(searchDlg);
-}
-
 //----------------------------------------------------------------------------------------------
 void
 on_fpStudypad_font_set(GnomeFontPicker * gnomefontpicker,
@@ -800,41 +666,6 @@ void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data)
 {
 	answer = 1;
 }
-
-//----------------------------------------------------------------------------------------------
-void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD((char *) user_data);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(0));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(3));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module3_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(4));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(5));
-}
-
 //----------------------------------------------------------------------------------------------
 void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 {
@@ -945,117 +776,6 @@ on_textDict_drag_begin(GtkWidget * widget,
 }
 
 //----------------------------------------------------------------------------------------------
-void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
-	}
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar	*buf,
-			tmpbuf[256];
-	
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-		sprintf(tmpbuf,"<a href=\"%s\">",buf);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_underlineNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
-		noteModified = TRUE;
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_greekNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-	  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
-		noteModified = TRUE;
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar *buf;
-
-	if (!GTK_EDITABLE(NEtext)->has_selection)
-		return;		//-- do we have a selection?
-	buf =
-	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
-				   GTK_EDITABLE(NEtext)->selection_start_pos,
-				   GTK_EDITABLE(NEtext)->selection_end_pos);
-	changeVerseSWORD(buf);
-		
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	gchar *buf;
-
-	text = lookup_widget(MainFrm, "textCommentaries");
-	if (!GTK_EDITABLE(text)->has_selection)
-		return;		//-- do we have a selection?
-	buf =
-	    gtk_editable_get_chars(GTK_EDITABLE(text),
-				   GTK_EDITABLE(text)->selection_start_pos,
-				   GTK_EDITABLE(text)->selection_end_pos);
-
-	changeVerseSWORD(buf);
-}
-
-//----------------------------------------------------------------------------------------------
 void
 on_textComments_drag_begin(GtkWidget * widget,
 			   GdkDragContext * drag_context,
@@ -1102,7 +822,7 @@ gboolean
 on_textComments_key_press_event(GtkWidget * widget,
 				GdkEventKey * event, gpointer user_data)
 {
-	gchar *buf;
+//	gchar *buf;
 	static gboolean needsecond = FALSE;
 
 	if (!settings->formatpercom){	/* do we want formatting?	*/
@@ -1157,34 +877,6 @@ on_moduleText_enter_notify_event(GtkWidget * widget,
 
 	return FALSE;
 }
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(2));
-}
-
-//----------------------------------------------------------------------------------------------
-void on_lookup_word1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(MainFrm, "dictionarySearchText");
-	text = lookup_widget(MainFrm, "textDict");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		dictSearchTextChangedSWORD(buf);
-	}
-}
-
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
@@ -1198,55 +890,6 @@ void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void
-on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(MainFrm, "dictionarySearchText");
-	text = lookup_widget(MainFrm, "moduleText");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		dictSearchTextChangedSWORD(buf);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(MainFrm, "dictionarySearchText");
-	text = lookup_widget(MainFrm, "textCommentaries");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		dictSearchTextChangedSWORD(buf);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module6_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(1));
-}
-
-//----------------------------------------------------------------------------------------------
 void on_btnComPrev_clicked(GtkButton * button, gpointer user_data)
 {
 	navcurcomModSWORD(0);
@@ -1256,60 +899,6 @@ void on_btnComPrev_clicked(GtkButton * button, gpointer user_data)
 void on_btnComNext_clicked(GtkButton * button, gpointer user_data)
 {
 	navcurcomModSWORD(1);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *toolbar;
-
-	toolbar = lookup_widget(MainFrm, "handlebox17");
-
-	autoscroll = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if (autoscroll)
-		gtk_widget_hide(toolbar);
-	else
-		gtk_widget_show(toolbar);
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_lookup_selection4_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(MainFrm, "dictionarySearchText");
-	text = lookup_widget(MainFrm, "textComments");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		dictSearchTextChangedSWORD(buf);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	gchar *buf;
-
-	text = lookup_widget(MainFrm, "textDict");
-	if (!GTK_EDITABLE(text)->has_selection)
-		return;		//-- do we have a selection?
-	buf =
-	    gtk_editable_get_chars(GTK_EDITABLE(text),
-				   GTK_EDITABLE(text)->selection_start_pos,
-				   GTK_EDITABLE(text)->selection_end_pos);
-	
-	changeVerseSWORD(buf);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1380,29 +969,6 @@ on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 	gtk_widget_set_sensitive(btnapply, TRUE);
 	dicttabs = togglebutton->active;
 }
-
-//----------------------------------------------------------------------------------------------
-void
-//-- show hide commentary notebook tabs - popup menu choice
-on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget(MainFrm, "notebook1"));
-	else
-		gtk_widget_hide(lookup_widget(MainFrm, "notebook1"));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-//-- show hide dict/lex notebook tabs - popup menu choice
-on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget(MainFrm, "notebook4"));
-	else
-		gtk_widget_hide(lookup_widget(MainFrm, "notebook4"));
-}
-
 //----------------------------------------------------------------------------------------------
 void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
@@ -1435,27 +1001,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
 }
 #endif /* USE_SHORTCUTBAR */
-//----------------------------------------------------------------------------------------------
-void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *notebook;
-	gchar *modNum;
 
-	modNum = (gchar *) user_data;
-	notebook = lookup_widget(MainFrm, "notebook1");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
-}
-
-//----------------------------------------------------------------------------------------------
-void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *notebook;
-	gchar *modNum;
-
-	modNum = (gchar *) user_data;
-	notebook = lookup_widget(MainFrm, "notebook4");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
-}
 
 //----------------------------------------------------------------------------------------------
 void
@@ -1763,66 +1309,5 @@ void on_listeditor_destroy(GtkObject * object, gpointer user_data)
 {
 	firstLE = TRUE;
 	destroyListEditorSWORD();
-}
-/*******************************************************************************
- *
- *******************************************************************************/
-void on_view_in_new_window_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	extern GtkWidget *frameShowDict;
-	static GtkWidget *dlg;
-	gchar *modName;
-        GdkCursor *cursor;	
-	gtk_widget_show(MainFrm);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(MainFrm->window,cursor);
-	
-	if(!isrunningSD) {
-		dlg = create_dlgShowDict();
-		modName = getdictmodSWORD();
-		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  /* set frame label to current Module name  */				
-		initSD(modName);
-		isrunningSD = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(MainFrm);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(MainFrm->window,cursor);
-}		
-		
-void on_changeint1mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	sprintf(settings->Interlinear1Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);
-}		
-void on_changeint2mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	sprintf(settings->Interlinear2Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);	
-
-}
-void on_changeint3mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	sprintf(settings->Interlinear3Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);
-
-}
-void on_changeint4mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	sprintf(settings->Interlinear4Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);
-
-}
-void on_changeint5mod_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	sprintf(settings->Interlinear5Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);
-
 }
 
