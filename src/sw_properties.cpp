@@ -196,6 +196,8 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["User Options"]["CommTabs"].c_str());
 	settings->dict_tabs =
 	    atoi(settingsInfo["User Options"]["DictTabs"].c_str());
+	settings->notefollow =
+	    atoi(settingsInfo["User Options"]["NoteScroll"].c_str());
 
 
 	return true;
@@ -419,6 +421,11 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["Daily Devotional"] = "1";
 		else
 			settingsInfo["User Options"]["Daily Devotional"] = "0";
+		
+		if (settings->notefollow)
+			settingsInfo["User Options"]["NoteScroll"] = "1";
+		else
+			settingsInfo["User Options"]["NoteScroll"] = "0";
 
 
 		sprintf(buf, "%d", settings->text_tabs);
@@ -538,7 +545,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	settingsInfo["User Options"]["ShowSplash"] = "1";
 	settingsInfo["User Options"]["Daily Devotional"] = "1";
-
+	settingsInfo["User Options"]["NoteScroll"] = "1";
 	settingsInfo.Save();
 	return true;
 }
@@ -617,7 +624,8 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	settingsInfo["User Options"]["ShowSplash"] = "1";
 	settingsInfo["User Options"]["Daily Devotional"] = "1";
-
+	settingsInfo["User Options"]["NoteScroll"] = "1";
+	
 	settingsInfo.Save();
 	return true;
 }

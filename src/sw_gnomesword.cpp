@@ -521,7 +521,13 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 {
 	char *msg;
 	GtkWidget *msgbox;
-
+	extern gchar
+		*gSwordDir,
+		*shortcutbarDir,
+		*fnbookmarksnew,
+		*fnconfigure,
+		*swbmDir;
+	
 	sprintf(settings->studypadfilename, "%s", current_filename);	//-- store studypad filename
 	savebookmarks(settings->ctree_widget);
 	saveconfig();
@@ -542,6 +548,12 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 			break;
 		}
 	}
+	g_free(gSwordDir);
+	g_free(shortcutbarDir);
+	g_free(fnbookmarksnew);
+	g_free(fnconfigure);
+	g_free(swbmDir);
+	
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
@@ -1578,24 +1590,50 @@ void displayDevotional(void)
 {
 	gchar buf[80];
 	time_t curtime;
-	struct tm *loctime;
+	struct tm *loctime;	
 	
-	if(settings->showdevotional) {
-		/* Get the current time. */
-		curtime = time (NULL);
+	/* Get the current time. */
+	curtime = time (NULL);
 
-		/* Convert it to local time representation. */
-		loctime = localtime (&curtime);
+	/* Convert it to local time representation. */
+	loctime = localtime (&curtime);
 
-		/* Print out the date and time in the standard format. */
-		fputs (asctime (loctime), stdout);
+	/* Print it out in a nice format. */
+	strftime (buf, 80, "%m.%d", loctime);
 
-		/* Print it out in a nice format. */
-		strftime (buf, 80, "%m.%d", loctime);
-		//g_warning("date = %s",buf);
+	displaydictlexSBSW(settings->devotionalmod, buf, settings);
+	setupforDailyDevotion(settings);
+}
+
+/******************************************************************************
+ * we come here to get module type - Bible text, Commentary or Dict/Lex
+ ******************************************************************************/
+gint get_mod_typeSWORD(gchar *modName)
+{
 	
-		displaydictlexSBSW(settings->devotionalmod, buf, settings);
-		setupforDailyDevotion(settings);
+	ModMap::iterator it;	//-- iteratior
+	SectionMap::iterator sit;	//-- iteratior
+	ConfigEntMap::iterator cit;	//-- iteratior
+	SWMgr *mgr;
+	
+	mgr = new SWMgr();	//-- create sword mgrs
+	it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName
+	if (it != mgr->Modules.end()) {	//-- if we find the module   
+	
+			if (!strcmp((*it).second->Type(), "Biblical Texts")) {				
+				return 0;
+			}
+		
+			if (!strcmp((*it).second->Type(), "Commentaries")) {				
+				return 1;				
+			}
+			
+			if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {				
+				return 2;				
+			}
 	}
+	return -1;
+	/*** delete Sword manager ***/
+	delete mgr;
 }
 

@@ -33,6 +33,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/gtkhtmlfontstyle.h>
+#include <gtkhtml/htmlform.h>
 #include <gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
@@ -197,7 +198,7 @@ save_note_receiver(const HTMLEngine * engine,
 		gstr = g_string_append(gstr, data);
 		//g_warning(gstr->str);
 	}
-	if (strstr(data, "<BODY>") != NULL)
+	if (strstr(data, "<BODY") != NULL)
 		startgrabing = TRUE;
 
 	return TRUE;
@@ -237,12 +238,13 @@ void savenoteEDITOR(GtkWidget * html_widget)
 	gstr = g_string_new("");
 	if (!gtk_html_save
 	    (html, (GtkHTMLSaveReceiverFn) save_note_receiver,
-	     GINT_TO_POINTER(0)))
+	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
-	else
+	} else {
 		g_warning("file writen");
-	//g_warning(gstr->str);
-	savenoteSWORD(gstr->str);
+		//g_warning(gstr->str);
+		savenoteSWORD(gstr->str);
+	}
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);
 }
@@ -325,6 +327,7 @@ gboolean load_text_for_spell_EDITOR(GtkWidget * text,
 			&text->style->black, NULL, gstr->str, -1);
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(ecd->html, TRUE);
+	return TRUE;
 }
 #endif				/* USE_SPELL */
 
@@ -360,6 +363,26 @@ html_key_pressed(GtkWidget * html, GdkEventButton * event,
 static void html_load_done(GtkWidget * html, GSHTMLEditorControlData * ecd)
 {
 	updatestatusbar(ecd);
+}
+
+static void on_submit(GtkHTML * html, const gchar *method, const gchar *url, const gchar *encoding, GSHTMLEditorControlData * ecd)
+{	
+	/*
+	GList *l;
+	
+	l = NULL;
+	
+	l=html->engine->form->elements;
+	while (l != NULL) {	
+		g_warning((gchar *) l->data);
+		l = g_list_next(l);
+	}
+	g_list_free(l);
+	*/
+	g_warning(method);
+	g_warning(url);
+	g_warning(encoding);
+	
 }
 
 /******************************************************************************
@@ -460,6 +483,9 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 	necd->vbox = vbox;
 	necd->pm = create_pmEditor(necd);
 	gnome_popup_menu_attach(necd->pm, necd->htmlwidget, NULL);
+	gtk_signal_connect(GTK_OBJECT(necd->html), "submit",
+			   GTK_SIGNAL_FUNC(on_submit), 
+			   necd);
 	gtk_signal_connect(GTK_OBJECT
 			   (necd->htmlwidget),
 			   "load_done",
@@ -729,12 +755,14 @@ on_link_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 	dlg = create_dlgLink(ecd);
 	gtk_widget_show(dlg);
 }
-void
+
+static void
 on_autoscroll_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {	
 	settings->notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
-void
+
+static void
 on_editnote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {	
 	settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
