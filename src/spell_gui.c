@@ -39,7 +39,7 @@
 #include <gtk/gtk.h>
 
 #include "debug.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "spell.h"
 #include "spell_gui.h"
 #include "support.h"

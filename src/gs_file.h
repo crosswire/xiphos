@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 
 typedef struct _listitem LISTITEM;
 struct _listitem {

@@ -74,7 +74,8 @@
 #include "sw_bookmarks.h"
 #include "sw_verselist_sb.h"
 #include "sw_module_options.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
+#include "sw_gbs.h"
 
 
 typedef map < string, string > modDescMap;
@@ -88,7 +89,7 @@ SWDisplay
     *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *commDisplay,		/* to display commentary modules */
-    *bookDisplay,		/* to display gbs modules */
+   // *bookDisplay,		/* to display gbs modules */
     *UTF8Display;		/* to display modules in utf8 */
     
 SWMgr 
@@ -104,7 +105,7 @@ SWModule
     * curMod,		/* module for main text window */
     *comp1Mod,			/* module for first interlinear window */
     *curcomMod,			/* module for commentary  window */
-    *curbookMod,			/* module for gen book  window */
+  //  *curbookMod,			/* module for gen book  window */
     *percomMod,			/* module for personal commentary  window */
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
@@ -203,7 +204,6 @@ void initSWORD(SETTINGS *s)
 	curMod = NULL;		//-- set mods to null
 	comp1Mod = NULL;
 	curcomMod = NULL;
-	curbookMod = NULL;
 	curdictMod = NULL;
 	percomMod = NULL;
 
@@ -211,7 +211,6 @@ void initSWORD(SETTINGS *s)
 	dictDisplay = 0;	// set in create   
 	FPNDisplay = 0;
 	commDisplay = 0;
-	bookDisplay = 0;
 	UTF8Display = 0;
 	/* setup versekeys for text and comm windows */
 	vkText.Persist(1);
@@ -236,7 +235,6 @@ void initSWORD(SETTINGS *s)
 	//-- setup displays for sword modules
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(s->app, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"));
-	bookDisplay = new EntryDisp(s->htmlBook);
 	comp1Display = new InterlinearDisp(s->htmlInterlinear);
 	FPNDisplay = new EntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"));
@@ -276,14 +274,18 @@ void initSWORD(SETTINGS *s)
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
-			curdictMod->Disp(dictDisplay);
-		} else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
+			curdictMod->Disp(dictDisplay);			
+		} 
+		
+		/*else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
 			curbookMod = (*it).second;
 			bookmods = g_list_append(bookmods, curbookMod->Name());
 			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
 			curbookMod->Disp(bookDisplay);
-		}
+		}*/
 	}
+	setupSW_GBS(s);
+	
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
 	     it != percomMgr->Modules.end(); it++) {
@@ -608,7 +610,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
-	
+	shutdownSW_GBS();
 
 	//-- delete Sword managers
 	delete mainMgr;
@@ -1025,13 +1027,6 @@ void savenoteSWORD(gchar *buf)	//-- save personal comments
 
 
 //-------------------------------------------------------------------------------------------
-void savebookSWORD(gchar *buf)	//-- save personal comments
-{
-	if(buf)
-		*curbookMod << (const char *) buf;	//-- save note!
-}
-
-//-------------------------------------------------------------------------------------------
 void deletenoteSWORD(void)	//-- delete personal comment
 {	
 	GtkWidget 
@@ -1146,7 +1141,7 @@ void changepercomModSWORD(gchar * modName)	//-- change personal comments module
 }
 
 //-------------------------------------------------------------------------------------------
-void showmoduleinfoSWORD(char *modName)	//--  show module information in an about dialog
+void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module information in an about dialog
 {
 	GtkWidget * aboutbox;	//-- pointer to about dialog        
 	GtkWidget * text;	//-- pointer to text widget of dialog
@@ -1173,13 +1168,20 @@ void showmoduleinfoSWORD(char *modName)	//--  show module information in an abou
 	sprintf(discription,
 		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
 		buf);
-	aboutbox = create_aboutmodules();	//-- create about dialog
-	gtk_widget_show(aboutbox);
+	if(!isGBS) {
+		aboutbox = create_aboutmodules();	//-- create about dialog
+		gtk_widget_show(aboutbox);
+	}
 	if (strcmp(bufabout, "oops")) {
 		len = strlen(bufabout);
 		newbuf = new char[len + 600];
-		text = lookup_widget(aboutbox, "textModAbout");	//-- get text widget
-		AboutModsDisplayHTML(newbuf, bufabout);	//-- send about info and alocated new text buffer to display function (gs_display.cpp)
+		if(!isGBS) {
+			text = lookup_widget(aboutbox, "textModAbout");	//-- get text widget
+		}
+		else {
+			text = settings->htmlBook;
+		}
+		AboutModsDisplayHTML(newbuf, bufabout);	//-- send about info and alocated new text buffer to display function (sw_display.cpp)
 		beginHTML(text, FALSE);
 		displayHTML(text, "<html><body>", strlen("<html><body>"));
 		displayHTML(text, discription, strlen(discription));

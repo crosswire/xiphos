@@ -28,7 +28,7 @@
 #define _GS_EDITOR_REPLACE_H_
 
 #include <gnome.h>
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
 

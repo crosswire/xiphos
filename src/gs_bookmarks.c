@@ -109,11 +109,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 static void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
 static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 
-/*
- ******************************************************************************
- * bookmark tree popup menu items
- ******************************************************************************
-*/
+/*** bookmark tree popup menu items  ***/
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New SubGroup"),
 				  N_("Add new SubGroup to selected group"),
