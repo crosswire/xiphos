@@ -240,7 +240,7 @@ static void ctree_select_row(GtkCTree *ctree, GList *node, gint column,
 					cell[2])->text;
 	dlg->g->offset = strtoul(offset, NULL, 0);
 	
-	g_warning("bookname = %s mod_name = %s",bookname,dlg->g->mod_name);
+//	g_warning("bookname = %s mod_name = %s",bookname,dlg->g->mod_name);
 	
 	change_book(bookname, dlg->g->offset);
 	
@@ -286,7 +286,7 @@ static void free_on_destroy(GBS_DIALOG * dlg)
 {
 	g_free(dlg->g);
 	dialog_list = g_list_remove(dialog_list, (GBS_DIALOG *) dlg);
-	g_warning("shuting down %s dialog", dlg->g->mod_name);
+//	g_warning("shuting down %s dialog", dlg->g->mod_name);
 	g_free(dlg);
 }
 
@@ -747,14 +747,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	GtkWidget *label243;
 	GtkWidget *scrolledwindow_html;
 	GtkWidget *statusbar5;
-
+	
+	
 	gbs_dialog = gtk_window_new(GTK_WINDOW_DIALOG);
 	gtk_object_set_data(GTK_OBJECT(gbs_dialog), "gbs_dialog",
 			    gbs_dialog);
 	gtk_window_set_title(GTK_WINDOW(gbs_dialog),
-			     _("GnomeSword - GBS"));
+			     get_module_description(dlg->g->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(gbs_dialog), 525, 306);
-
+	
 	vbox_dialog = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox_dialog);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vbox_dialog",
@@ -1256,8 +1257,6 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	dlg = g_new(GBS_DIALOG, 1);
 	dlg->g = g_new(GBS_DATA, 1);
-	//dlg->g->find_dialog = NULL;
-	//dlg->g->mod_num = get_module_number(mod_name, GBS_MODS);
 	dlg->g->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->g->mod_name = mod_name;
@@ -1314,17 +1313,12 @@ void gui_shutdown_gbs_dialog(void)
 		GBS_DIALOG *dlg = (GBS_DIALOG *) dialog_list->data;
 		dialog_freed = TRUE;
 
-		g_warning("shuting down %s dialog", dlg->g->mod_name);
+//		g_warning("shuting down %s dialog", dlg->g->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
 		if (dlg->dialog)
 			gtk_widget_destroy(dlg->dialog);
-		/* 
-		 * free any search dialogs created 
-		 */
-		//if (dlg->g->find_dialog)
-			//g_free(dlg->g->find_dialog);
 		/* 
 		 * free each TEXT_DATA item created 
 		 */

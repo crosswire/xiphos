@@ -175,7 +175,7 @@ void backend_save_personal_comment(char * note)
 void backend_delete_personal_comment(void)
 {
 	mod->deleteEntry();
-	g_warning("key %s of module %s has been deleted",mod->KeyText(),mod->Name());
+	g_print("\nkey %s of module %s has been deleted\n",mod->KeyText(),mod->Name());
 }
 /******************************************************************************
  * Name

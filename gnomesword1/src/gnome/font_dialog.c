@@ -69,7 +69,7 @@ static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 	if (!mf->no_font && new_font_set) {
 		gchar *new_font = g_strdup(mf->new_gdk_font);
 		mf->new_font = get_html_font_name(new_font);
-		g_warning(mf->new_font);
+//		g_warning(mf->new_font);
 		g_free(new_font);
 	} else {
 		mf->new_font = "none";
@@ -79,10 +79,10 @@ static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
 	save_font_info(mf);
 
-	g_warning(mf->new_font);
+/*	g_warning(mf->new_font);
 	g_warning(mf->new_gdk_font);
 	g_warning(mf->new_font_size);
-
+*/
 	gtk_widget_destroy(dlg);
 }
 
@@ -127,7 +127,7 @@ static void cancel_clicked(GtkButton * button, MOD_FONT * mf)
 
 static void dialog_destroy(GtkObject * object, MOD_FONT * mf)
 {
-	g_warning("font dialog destroyed");
+//	g_warning("font dialog destroyed");
 	g_free(mf);
 	new_font_set = 0;
 }
@@ -469,7 +469,7 @@ void gui_set_module_font(gchar * mod_name)
 
 	mf = g_new(MOD_FONT, 1);
 	mf->mod_name = mod_name;
-	g_warning(mf->mod_name);
+//	g_warning(mf->mod_name);
 	mf->old_font = NULL;
 	mf->old_gdk_font = NULL;
 	mf->old_font_size = NULL;
@@ -495,7 +495,7 @@ void gui_set_module_font(gchar * mod_name)
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), buf);
 	if(mf->old_gdk_font[0] == '-'){
-		g_warning("old_gdk_font = %s",mf->old_gdk_font);
+		//g_warning("old_gdk_font = %s",mf->old_gdk_font);
 		gnome_font_picker_set_font_name ((GnomeFontPicker *)fontpicker,
                                              mf->old_gdk_font);
 	}
