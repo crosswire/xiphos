@@ -1,4 +1,4 @@
-# Anjuta Version 1.0.1 
+# Anjuta Version 1.0.2 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,32 +23,34 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.0.1
+anjuta.version=1.0.2
 anjuta.compatibility.level=1
 
-project.name=gnomesword
+project.name=gnomesword-1.0
 project.type=GNOME
 project.target.type=EXECUTABLE
-project.version=0.7.1
-project.author=The GnomeSWORD Team
+project.version=0.9.1
+project.author=The GnomeSword Team
 project.source.target=src/gnome/gnomesword-1.0
 project.has.gettext=1
 project.programming.language=C
-project.excluded.modules=	intl
+project.excluded.modules=intl
 
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 project.config.blocked=1
 project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
-project.menu.entry=gnomesword Version 0.7.1
+project.menu.entry=gnomesword Version 0.9.1
 project.menu.group=Application
-project.menu.comment=gnomesword Version 0.7.1
+project.menu.comment=gnomesword Version 0.9.1
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
 project.configure.options=--enable-use_aspell
 anjuta.program.arguments=
+filter.file.ignore.hidden=0
+filter.dir.ignore.hidden=0
 preferences.indent.automatic=1
 preferences.use.tabs=1
 preferences.indent.opening=0
@@ -78,21 +80,26 @@ module.include.files=\
 	src/backend/new_bookmarks.h\
 	src/backend/shortcutbar.h\
 	src/backend/sword_defs.h\
+	src/gnome/shortcutbar.h\
 	src/gui/about_gnomesword.h\
 	src/gui/about_modules.h\
 	src/gui/about_sword.h\
 	src/gui/bibletext.h\
 	src/gui/bibletext_dialog.h\
+	src/gui/bibletext_menu.h\
 	src/gui/bookmarks.h\
 	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
+	src/gui/commentary_menu.h\
 	src/gui/dialog.h\
 	src/gui/dictlex.h\
 	src/gui/dictlex_dialog.h\
+	src/gui/dictlex_menu.h\
 	src/gui/display_info.h\
 	src/gui/font_dialog.h\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
+	src/gui/gbs_menu.h\
 	src/gui/percomm.h\
 	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
@@ -158,23 +165,26 @@ module.source.files=\
 	src/gnome/about_sword.c\
 	src/gnome/bibletext.c\
 	src/gnome/bibletext_dialog.c\
+	src/gnome/bibletext_menu.c\
 	src/gnome/bookmarks.c\
 	src/gnome/commentary.c\
 	src/gnome/commentary_dialog.c\
+	src/gnome/commentary_menu.c\
 	src/gnome/dialog.c\
 	src/gnome/dictlex.c\
 	src/gnome/dictlex_dialog.c\
+	src/gnome/dictlex_menu.c\
 	src/gnome/display_info.c\
 	src/gnome/font_dialog.c\
 	src/gnome/gbs.c\
 	src/gnome/gbs_dialog.c\
+	src/gnome/gbs_menu.c\
 	src/gnome/gnomesword.c\
 	src/gnome/gtkhtml_display.c\
 	src/gnome/history.c\
 	src/gnome/html.c\
 	src/gnome/percomm.c\
 	src/gnome/cipher_key_dialog.c\
-	src/gnome/text_view.c\
 	src/gnome/editor.c\
 	src/gnome/editor_menu.c\
 	src/gnome/editor_replace.c\
@@ -298,4 +308,3 @@ compiler.options.other.c.flags=
 compiler.options.other.l.flags=
 compiler.options.other.l.libs=
 project.source.paths=
-

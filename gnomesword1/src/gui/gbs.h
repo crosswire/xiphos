@@ -25,16 +25,25 @@
 
 typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
+	GtkWidget *dialog;
+	GtkWidget *statusbar;	
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *ctree;
 	GtkWidget *showtabs;
+	GtkWidget *module_options_menu;
 	gchar *mod_name;
 	gchar *search_string;
+	gchar *key;
+	gchar *cipher_key;
+	gchar *cipher_old;
 	gint mod_num;
 	unsigned long offset;
+	
 	gboolean has_key;
+	gboolean is_locked;
+	gboolean is_dialog;
 };
 
 typedef struct _nodedata NODEDATA;
@@ -52,7 +61,7 @@ struct _nodedata {
 
 GBS_DATA *get_gbs(GList * gbs);
 void gui_set_book_page_and_key(gint page_num, gchar * key);
-void gui_set_gbs_frame_label(GBS_DATA *g);
+void gui_set_gbs_frame_label(void);
 void on_notebook_gbs_switch_page(GtkNotebook *notebook, 
 		GtkNotebookPage *page, gint page_num, GList *data_gbs);
 void gui_add_new_gbs_pane(GBS_DATA * g);

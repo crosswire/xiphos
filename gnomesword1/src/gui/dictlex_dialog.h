@@ -28,17 +28,14 @@ extern "C" {
 
 #include "gui/dictlex.h"
 	
-typedef struct _dl_dialog DL_DIALOG;
-struct  _dl_dialog{
-	GtkWidget *dialog;	
-	GtkWidget *btn_close;
-	DL_DATA *d;
-};
 
+void gui_lookup_dictlex_dialog_selection
+    (GtkMenuItem * menuitem, gchar * dict_mod_description);
 void gui_open_dictlex_dialog(gchar * mod_name);
 void initSD(gchar * modName);
 void gui_setup_dictlex_dialog(GList *mods);
 void gui_shutdown_dictlex_dialog(void) ;
+void gui_close_dict_dialog(DL_DATA * dlg);
 
 #ifdef __cplusplus
 }

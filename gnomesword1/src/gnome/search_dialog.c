@@ -2094,7 +2094,7 @@ static GtkWidget *create_search_dialog(void)
 	button_begin_search =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar37),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button23"), _("Begin search"),
+				       _("Begin"), _("Begin search"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(button_begin_search);
@@ -2680,7 +2680,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_width(GTK_CLIST(clist_mod_lists), 1, 80);
 	gtk_clist_column_titles_hide(GTK_CLIST(clist_mod_lists));
 
-	label236 = gtk_label_new(_("label236"));
+	label236 = gtk_label_new("");
 	gtk_widget_ref(label236);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label236",
 				 label236,
@@ -2689,7 +2689,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_widget(GTK_CLIST(clist_mod_lists), 0,
 				    label236);
 
-	label237 = gtk_label_new(_("label237"));
+	label237 = gtk_label_new("");
 	gtk_widget_ref(label237);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label237",
 				 label237,
@@ -2828,7 +2828,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 1, 80);
 	gtk_clist_column_titles_hide(GTK_CLIST(clist_modules));
 
-	label232 = gtk_label_new(_("label232"));
+	label232 = gtk_label_new("");
 	gtk_widget_ref(label232);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label232",
 				 label232,
@@ -2837,7 +2837,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 0,
 				    label232);
 
-	label233 = gtk_label_new(_("label233"));
+	label233 = gtk_label_new("");
 	gtk_widget_ref(label233);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label233",
 				 label233,
@@ -2981,7 +2981,7 @@ static GtkWidget *create_search_dialog(void)
 				   80);
 	gtk_clist_column_titles_hide(GTK_CLIST(clist_custom_range));
 
-	label234 = gtk_label_new(_("label234"));
+	label234 = gtk_label_new("");
 	gtk_widget_ref(label234);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label234",
 				 label234,
@@ -2990,7 +2990,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_widget(GTK_CLIST(clist_custom_range), 0,
 				    label234);
 
-	label235 = gtk_label_new(_("label235"));
+	label235 = gtk_label_new("");
 	gtk_widget_ref(label235);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label235",
 				 label235,
@@ -3085,7 +3085,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_clist_set_column_width(GTK_CLIST(clist_ranges), 0, 80);
 	gtk_clist_column_titles_hide(GTK_CLIST(clist_ranges));
 
-	label226 = gtk_label_new(_("label226"));
+	label226 = gtk_label_new("");
 	gtk_widget_ref(label226);
 	gtk_object_set_data_full(GTK_OBJECT(search_dialog), "label226",
 				 label226,

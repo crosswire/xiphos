@@ -51,7 +51,7 @@ void on_delete_item_activate(GtkMenuItem * menuitem,
 void on_allow_reordering_activate(GtkMenuItem * menuitem,
 			      gpointer user_data);
 void gui_verselist_to_bookmarks(GList *list);
-void create_add_bookmark_menu(GtkWidget * menu,
+void gui_create_add_bookmark_menu(GtkWidget * menu,
 			  GtkWidget * bookmark_menu_widget);
 
 

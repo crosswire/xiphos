@@ -47,7 +47,6 @@ struct  _app_widgets {
 		*shortcutbar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
-		//*workbook_upper, /* notebook - commentaries and editors */	
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
@@ -65,7 +64,6 @@ struct  _app_widgets {
 		*studypad_dialog,
 	
 	/* toolbars */
-		*hbox_toolbar,
 		*toolbar_comments,
 		*toolbar_studypad,
 	

@@ -73,7 +73,8 @@ static gboolean apply_change;
  */
 
 void gui_on_lookup_commentary_dialog_selection
-    (GtkMenuItem * menuitem, gchar * dict_mod_description) {
+    (GtkMenuItem * menuitem, gchar * dict_mod_description) 
+{
 	gchar *dict_key, mod_name[16];
 
 	memset(mod_name, 0, 16);
