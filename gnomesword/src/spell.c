@@ -411,8 +411,10 @@ void create_ispell_pipe()
 	   the right typecast. */
 
 	retval = select((SELECT_TYPE_ARG1) (pipeout[0] + 1),
-			SELECT_TYPE_ARG234(&infds),
-			0, 0, SELECT_TYPE_ARG5(&tv));
+			SELECT_TYPE_ARG234 (&infds),
+			0, 
+			0, 
+			SELECT_TYPE_ARG5(&tv));
 
 	if (retval > 0) {
 		/* Ok, do the reading. We don't have to FD_ISSET since

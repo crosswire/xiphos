@@ -191,7 +191,7 @@ gint setDiretory(void)
 			printf("can't create bookmarks dir and files");
 		}
 	} 
-	sprintf(bmFile, "%s/%s",swbmDir,"Personal.conf");
+	sprintf(bmFile, "%s/%s",swbmDir,"personal.conf");
 	if (access(bmFile, F_OK) == -1) {	
 		if(retval == 1) retval = 3;
 			else retval = 2;		
