@@ -5,11 +5,11 @@
 # **************************************************************************
 
 Anjuta: 0.1.5
-No of Tags: 753
+No of Tags: 749
 ALL_THE_STRING 6 585 src/spell.c
 ANY_CHAR_SET 6 39 src/char_table.h
 AboutModsDisplay 0 1130 src/display.cpp
-ApplyChange 5 121 src/gs_sword.cpp
+ApplyChange 5 120 src/gs_sword.cpp
 BGcolor 5 59 src/display.cpp
 BUFFER_SIZE 6 40 src/gs_file.c
 ComEntryDisp 0 44 src/gs_display.h
@@ -25,8 +25,8 @@ Display 0 407 src/display.cpp
 Display 0 180 src/display.cpp
 Display 0 127 src/display.cpp
 Display 0 86 src/display.cpp
-FPNDisplay 5 77 src/gs_sword.cpp
-FillDictKeysSWORD 0 446 src/gs_sword.cpp
+FPNDisplay 5 79 src/gs_sword.cpp
+FillDictKeysSWORD 0 447 src/gs_sword.cpp
 GS_GBFHTML 1 31 src/gs_gbfhtml.h
 GS_GBFHTML 0 22 src/gs_gbfhtml.cpp
 GS_GBFHTML::GS_GBFHTML 0 22 src/gs_gbfhtml.cpp
@@ -63,8 +63,8 @@ HTMLChapDisp 0 99 src/display.h
 HTMLChapDisp 1 97 src/display.h
 HTMLChapDisp::Display 0 407 src/display.cpp
 HTMLChapDisp::HTMLChapDisp 0 99 src/display.h
-HTMLDisplay 5 78 src/gs_sword.cpp
-HTMLchapDisplay 5 79 src/gs_sword.cpp
+HTMLDisplay 5 80 src/gs_sword.cpp
+HTMLchapDisplay 5 81 src/gs_sword.cpp
 HTMLentryDisp 0 105 src/display.h
 HTMLentryDisp 1 104 src/display.h
 HTMLentryDisp::Display 0 180 src/display.cpp
@@ -75,15 +75,15 @@ InterlinearDisp 1 55 src/gs_display.h
 InterlinearDisp::Display 0 342 src/gs_display.cpp
 InterlinearDisp::InterlinearDisp 0 56 src/gs_display.h
 MY_DEBUG_MSG 6 53 src/spell.c
-MainFrm 5 146 src/gs_sword.cpp
-NEtext 5 120 src/gs_sword.cpp
+MainFrm 5 145 src/gs_sword.cpp
+NEtext 5 119 src/gs_sword.cpp
 NUM_SHORTCUT_TYPES 6 66 src/gs_ui.c
 ProcessText 0 27 src/gs_wgsil.cpp
 ProcessText 0 27 src/gs_gbfhtml.cpp
-SDDisplay 5 81 src/gs_sword.cpp
-SDMgr 5 90 src/gs_sword.cpp
+SDDisplay 5 83 src/gs_sword.cpp
+SDMgr 5 91 src/gs_sword.cpp
 SDMod 5 103 src/gs_sword.cpp
-SDdictSearchTextChangedSWORD 0 1249 src/gs_sword.cpp
+SDdictSearchTextChangedSWORD 0 1242 src/gs_sword.cpp
 SPC_CHAR_LENGTH 6 131 src/spell.c
 SPECIAL_CHAR_LENGTH 6 218 src/spell.c
 SearchWindow 1 30 src/gs_search.h
@@ -94,12 +94,9 @@ SearchWindow::initsearchWindow 0 93 src/gs_search.cpp
 SearchWindow::searchSWORD 0 116 src/gs_search.cpp
 SearchWindow::~SearchWindow 0 64 src/gs_search.cpp
 UpdateChecks 0 280 src/gs_gnomesword.c
-VCDisplay 5 83 src/gs_sword.cpp
-VCMgr 5 91 src/gs_sword.cpp
+VCDisplay 5 85 src/gs_sword.cpp
+VCMgr 5 92 src/gs_sword.cpp
 VCMod 5 104 src/gs_sword.cpp
-VTDisplay 5 84 src/gs_sword.cpp
-VTMgr 5 92 src/gs_sword.cpp
-VTMod 5 105 src/gs_sword.cpp
 WORD_BUFFER_SIZE 6 198 src/spell.c
 _GNU_SOURCE 6 29 src/spell.c
 _PrintJobInfo 2 65 src/printstuff.c
@@ -132,23 +129,23 @@ addrenderfiltersSWORD 0 60 src/sw_utility.cpp
 addseparator 0 119 src/gs_menu.c
 addsubitme 0 401 src/gs_listeditor.c
 addsubtreeitem 0 134 src/gs_menu.c
-addtoModList 0 1586 src/gs_sword.cpp
+addtoModList 0 1513 src/gs_sword.cpp
 addverse 0 432 src/gs_listeditor.c
-answer 5 135 src/gs_sword.cpp
+answer 5 134 src/gs_sword.cpp
 appbar1 5 55 src/gs_ui.c
 applychanges 0 505 src/gs_listeditor.c
 applycolor 5 105 src/callback.c
 applylistchanges 0 531 src/gs_listeditor.c
 applyoptions 0 325 src/gs_gnomesword.c
 ascii_charset 5 30 src/char_table.c
-autoSave 5 129 src/gs_sword.cpp
+autoSave 5 128 src/gs_sword.cpp
 autosaveitem 5 57 src/gs_gnomesword.c
-autoscroll 5 133 src/gs_sword.cpp
-bVerseStyle 5 122 src/gs_sword.cpp
+autoscroll 5 132 src/gs_sword.cpp
+bVerseStyle 5 121 src/gs_sword.cpp
 bar 5 104 src/callback.c
 beginHTML 0 508 src/gs_html.c
 bible_texts1_menu_uiinfo 5 249 src/gs_ui.c
-biblemods 5 116 src/gs_sword.cpp
+biblemods 5 115 src/gs_sword.cpp
 block_font_style_change 5 47 src/gs_toolbarEditor.c
 bmarks 5 72 src/gs_gnomesword.c
 boldHTML 0 125 src/gs_html.c
@@ -161,37 +158,38 @@ btnBold 5 37 src/gs_toolbarEditor.c
 btnItalic 5 38 src/gs_toolbarEditor.c
 btnStrikeout 5 40 src/gs_toolbarEditor.c
 btnUnderline 5 39 src/gs_toolbarEditor.c
-btnlookupSWORD 0 701 src/gs_sword.cpp
+btnlookupSWORD 0 707 src/gs_sword.cpp
 cbChangeMod 5 43 src/gs_viewcomm_dlg.c
 cbEntry 5 44 src/gs_viewcomm_dlg.c
 cbSDMods 5 44 src/gs_viewdict_dlg.c
+cbeBook 5 48 src/gs_viewtext_dlg.c
 ceSDMods 5 45 src/gs_viewdict_dlg.c
-changcurcomModSWORD 0 729 src/gs_sword.cpp
-changcurdictModSWORD 0 811 src/gs_sword.cpp
-changeLEverseSWORD 0 1103 src/gs_sword.cpp
-changeVerseSWORD 0 368 src/gs_sword.cpp
+changcurcomModSWORD 0 735 src/gs_sword.cpp
+changcurdictModSWORD 0 813 src/gs_sword.cpp
+changeLEverseSWORD 0 1105 src/gs_sword.cpp
+changeVerseSWORD 0 369 src/gs_sword.cpp
 change_word_color 0 601 src/spell.c
-changecomp1ModSWORD 0 618 src/gs_sword.cpp
-changecurModSWORD 0 589 src/gs_sword.cpp
+changecomp1ModSWORD 0 624 src/gs_sword.cpp
+changecurModSWORD 0 595 src/gs_sword.cpp
 changemain 5 67 src/gs_gnomesword.c
 changepagenotebook 0 667 src/gs_gnomesword.c
-changepercomModSWORD 0 866 src/gs_sword.cpp
+changepercomModSWORD 0 868 src/gs_sword.cpp
 changeverseHistory 0 149 src/gs_history.c
-chapDisplay 5 71 src/gs_sword.cpp
-chapterSWORD 0 672 src/gs_sword.cpp
+chapDisplay 5 73 src/gs_sword.cpp
+chapterSWORD 0 678 src/gs_sword.cpp
 check_word 0 656 src/spell.c
 clKeys 5 42 src/gs_viewdict_dlg.c
 clearhistory 0 51 src/gs_history.c
 color_changed 0 207 src/gs_toolbarEditor.c
-comDisplay 5 74 src/gs_sword.cpp
-com_key 5 136 src/gs_sword.cpp
+comDisplay 5 76 src/gs_sword.cpp
+com_key 5 135 src/gs_sword.cpp
 combo 5 45 src/gs_toolbarEditor.c
 commList 5 45 src/gs_viewcomm_dlg.c
 commentaries1_menu_uiinfo 5 254 src/gs_ui.c
 commentary_window1_menu_uiinfo 5 181 src/gs_ui.c
-commentarymods 5 117 src/gs_sword.cpp
-commod 5 144 src/gs_sword.cpp
-comp1Display 5 73 src/gs_sword.cpp
+commentarymods 5 116 src/gs_sword.cpp
+commod 5 143 src/gs_sword.cpp
+comp1Display 5 75 src/gs_sword.cpp
 comp1Mod 5 97 src/gs_sword.cpp
 compages 5 69 src/gs_gnomesword.c
 comtabs 5 103 src/callback.c
@@ -203,7 +201,7 @@ correct_word 0 612 src/spell.c
 create 0 245 src/gs_search.cpp
 createFiles 0 269 src/gs_file.c
 createListEditor 0 474 src/gs_listeditor.c
-createSearchDlgSWORD 0 1262 src/gs_sword.cpp
+createSearchDlgSWORD 0 1255 src/gs_sword.cpp
 create_AboutSword 0 91 src/gs_abouts.c
 create_InfoBox 0 36 src/interface.c
 create_about2 0 70 src/gs_abouts.c
@@ -212,7 +210,7 @@ create_dlgSearch 0 83 src/gs_search.cpp
 create_dlgSettings 0 144 src/interface.c
 create_dlgViewComm 0 133 src/gs_viewcomm_dlg.c
 create_dlgViewDict 0 155 src/gs_viewdict_dlg.c
-create_dlgViewText 0 162 src/gs_viewtext_dlg.c
+create_dlgViewText 0 161 src/gs_viewtext_dlg.c
 create_dummy_pixmap 0 73 src/support.c
 create_fileselection1 0 636 src/gs_file.c
 create_fileselectionSave 0 671 src/gs_file.c
@@ -229,9 +227,9 @@ create_pmInt 0 833 src/gs_menu.c
 create_spc_window 0 127 src/spell_gui.c
 createpopupmenus 0 165 src/gs_menu.c
 createsettings 0 545 src/gs_file.c
-curChapter 5 123 src/gs_sword.cpp
+curChapter 5 122 src/gs_sword.cpp
 curMod 5 96 src/gs_sword.cpp
-curVerse 5 124 src/gs_sword.cpp
+curVerse 5 123 src/gs_sword.cpp
 curcomMod 5 98 src/gs_sword.cpp
 curdictMod 5 101 src/gs_sword.cpp
 current_filename 5 65 src/gs_gnomesword.c
@@ -241,36 +239,36 @@ currenthistoryitem 5 37 src/gs_history.c
 currentrow 5 57 src/gs_listeditor.c
 delete_event_lcb 0 107 src/spell_gui.c
 deleteitem 0 423 src/gs_listeditor.c
-deletenoteSWORD 0 802 src/gs_sword.cpp
-destroyListEditorSWORD 0 1112 src/gs_sword.cpp
-dictDisplay 5 76 src/gs_sword.cpp
+deletenoteSWORD 0 806 src/gs_sword.cpp
+destroyListEditorSWORD 0 1114 src/gs_sword.cpp
+dictDisplay 5 78 src/gs_sword.cpp
 dictList 5 47 src/gs_viewdict_dlg.c
-dictSearchTextChangedSWORD 0 833 src/gs_sword.cpp
+dictSearchTextChangedSWORD 0 835 src/gs_sword.cpp
 dict_lex_window1_menu_uiinfo 5 186 src/gs_ui.c
-dictchangekeySWORD 0 847 src/gs_sword.cpp
+dictchangekeySWORD 0 849 src/gs_sword.cpp
 dictionaries_lexicons1_menu_uiinfo 5 259 src/gs_ui.c
-dictionarymods 5 118 src/gs_sword.cpp
-dictmod 5 145 src/gs_sword.cpp
+dictionarymods 5 117 src/gs_sword.cpp
+dictmod 5 144 src/gs_sword.cpp
 dictpages 5 68 src/gs_gnomesword.c
 dicttabs 5 102 src/callback.c
 displayHTML 0 536 src/gs_html.c
 dlgViewComm 5 46 src/gs_viewcomm_dlg.c
 dlgViewDict 5 48 src/gs_viewdict_dlg.c
-dlgViewText 5 45 src/gs_viewtext_dlg.c
+dlgViewText 5 46 src/gs_viewtext_dlg.c
 dummy_pixmap_xpm 5 63 src/support.c
 edit1_menu_uiinfo 5 106 src/gs_ui.c
 edit2_menu_uiinfo 5 914 src/gs_menu.c
 editbookmarks 0 494 src/gs_listeditor.c
 editbookmarksLoad 0 727 src/gs_gnomesword.c
 editbookmarksSave 0 247 src/gs_listeditor.c
-editnoteSWORD 0 773 src/gs_sword.cpp
+editnoteSWORD 0 779 src/gs_sword.cpp
 editor_toolbar_alignment_group 5 422 src/gs_toolbarEditor.c
 editortoolbar 5 111 src/callback.c
 endHTML 0 522 src/gs_html.c
 end_of_text 5 129 src/spell.c
-entryDisplay 5 72 src/gs_sword.cpp
+entryDisplay 5 74 src/gs_sword.cpp
 file1_menu_uiinfo 5 100 src/gs_ui.c
-file_changed 5 126 src/gs_sword.cpp
+file_changed 5 125 src/gs_sword.cpp
 file_print 0 140 src/printstuff.c
 fillSBtoolbars 0 391 src/gs_gnomesword.c
 findhowmany 0 835 src/gs_listeditor.c
@@ -293,45 +291,44 @@ font_mainwindow 5 63 src/display.cpp
 font_size_changed 0 369 src/gs_toolbarEditor.c
 font_size_menu 5 44 src/gs_toolbarEditor.c
 footnotes 5 54 src/gs_gnomesword.c
-footnotesSWORD 0 574 src/gs_sword.cpp
+footnotesSWORD 0 580 src/gs_sword.cpp
 frameShowDict 5 46 src/gs_viewdict_dlg.c
 free_word 0 211 src/spell.c
-freeformlookupSWORD 0 714 src/gs_sword.cpp
+freeformlookupSWORD 0 720 src/gs_sword.cpp
 gSwordDir 5 46 src/gs_file.c
-gbftohtml 5 107 src/gs_sword.cpp
+gbftohtml 5 106 src/gs_sword.cpp
 gdouble_arr_to_hex 0 824 src/gs_gnomesword.c
-getSDmodDescriptionSWORD 0 1189 src/gs_sword.cpp
-getVCmodDescriptionSWORD 0 1181 src/gs_sword.cpp
-getVTmodDescriptionSWORD 0 1197 src/gs_sword.cpp
+getBibleBooks 0 1518 src/gs_sword.cpp
+getSDmodDescriptionSWORD 0 1191 src/gs_sword.cpp
+getVCmodDescriptionSWORD 0 1183 src/gs_sword.cpp
 get_next_char 0 139 src/spell.c
 get_next_word 0 247 src/spell.c
 get_widget 6 40 src/support.h
 getcolumn 0 826 src/gs_listeditor.c
-getcommodDescriptionSWORD 0 1173 src/gs_sword.cpp
-getcommodSWORD 0 1165 src/gs_sword.cpp
-getdictmodSWORD 0 1149 src/gs_sword.cpp
+getcommodDescriptionSWORD 0 1175 src/gs_sword.cpp
+getcommodSWORD 0 1167 src/gs_sword.cpp
+getdictmodSWORD 0 1151 src/gs_sword.cpp
 getdictnumber 0 568 src/gs_gnomesword.c
 getitem 0 276 src/gs_listeditor.c
-getmodnameSWORD 0 1039 src/gs_sword.cpp
+getmodnameSWORD 0 1041 src/gs_sword.cpp
 getrow 0 805 src/gs_listeditor.c
 gettags 0 1055 src/display.cpp
-gettextmodSWORD 0 1157 src/gs_sword.cpp
+gettextmodSWORD 0 1159 src/gs_sword.cpp
 getversenumber 0 532 src/gs_gnomesword.c
 gotoanchorHTML 0 546 src/gs_html.c
-gotokeySWORD 0 1239 src/gs_sword.cpp
-gotoverseVCSWORD 0 1406 src/gs_sword.cpp
-gotoverseVTSWORD 0 1324 src/gs_sword.cpp
-greekpage 5 141 src/gs_sword.cpp
-groupnum1 5 137 src/gs_sword.cpp
-groupnum2 5 138 src/gs_sword.cpp
-groupnum3 5 139 src/gs_sword.cpp
-groupnum4 5 140 src/gs_sword.cpp
+gotokeySWORD 0 1232 src/gs_sword.cpp
+gotoverseVCSWORD 0 1333 src/gs_sword.cpp
+greekpage 5 140 src/gs_sword.cpp
+groupnum1 5 136 src/gs_sword.cpp
+groupnum2 5 137 src/gs_sword.cpp
+groupnum3 5 138 src/gs_sword.cpp
+groupnum4 5 139 src/gs_sword.cpp
 gs_clipboard 5 64 src/gs_html.c
 gs_clipboard 5 62 src/gs_gnomesword.c
-havebible 5 130 src/gs_sword.cpp
-havecomm 5 132 src/gs_sword.cpp
-havedict 5 131 src/gs_sword.cpp
-hebrewpage 5 142 src/gs_sword.cpp
+havebible 5 129 src/gs_sword.cpp
+havecomm 5 131 src/gs_sword.cpp
+havedict 5 130 src/gs_sword.cpp
+hebrewpage 5 141 src/gs_sword.cpp
 help1_menu_uiinfo 5 286 src/gs_ui.c
 history1_menu_uiinfo 5 140 src/gs_ui.c
 historyitems 5 36 src/gs_history.c
@@ -351,7 +348,7 @@ icon_pixbufs 5 78 src/gs_ui.c
 in 5 108 src/spell.c
 initGnomeSword 0 106 src/gs_gnomesword.c
 initSD 0 143 src/gs_viewdict_dlg.c
-initSWORD 0 187 src/gs_sword.cpp
+initSWORD 0 186 src/gs_sword.cpp
 initsearchWindow 0 93 src/gs_search.cpp
 insert_item 0 910 src/gs_listeditor.c
 insert_items 0 895 src/gs_listeditor.c
@@ -373,33 +370,32 @@ ispell_terminate 0 735 src/spell.c
 ispell_terse_mode 0 443 src/spell.c
 isrunningSD 5 49 src/gs_viewdict_dlg.c
 isrunningVC 5 41 src/gs_viewcomm_dlg.c
-isrunningVT 5 42 src/gs_viewtext_dlg.c
+isrunningVT 5 43 src/gs_viewtext_dlg.c
 isstrongs 5 64 src/gs_gnomesword.c
 italicHTML 0 188 src/gs_html.c
 italic_font 5 60 src/display.cpp
 linkHTML 0 142 src/gs_html.c
-listDisplay 5 80 src/gs_sword.cpp
-listMgr 5 89 src/gs_sword.cpp
+listDisplay 5 82 src/gs_sword.cpp
+listMgr 5 90 src/gs_sword.cpp
 listMod 5 102 src/gs_sword.cpp
 listeditor 5 110 src/callback.c
 listitem 5 51 src/gs_listeditor.c
 listrow 5 53 src/gs_listeditor.c
 loadFile 0 389 src/gs_file.c
-loadSDmodSWORD 0 1206 src/gs_sword.cpp
+loadSDmodSWORD 0 1199 src/gs_sword.cpp
 loadStudyPadFile 0 447 src/gs_file.c
-loadVCmodSWORD 0 1389 src/gs_sword.cpp
-loadVTmodSWORD 0 1372 src/gs_sword.cpp
+loadVCmodSWORD 0 1316 src/gs_sword.cpp
 load_done 0 239 src/gs_toolbarEditor.c
 loadbookmarks_afterSeparator 0 220 src/gs_file.c
 loadbookmarks_programstart 0 171 src/gs_file.c
 loadbookmarksnew 0 356 src/gs_listeditor.c
-loadconfig 0 1427 src/gs_sword.cpp
+loadconfig 0 1354 src/gs_sword.cpp
 loadmenuformmodlist 0 873 src/gs_menu.c
-lookupStrongsSWORD 0 992 src/gs_sword.cpp
+lookupStrongsSWORD 0 994 src/gs_sword.cpp
 lookup_widget 0 39 src/support.c
 main 0 41 src/main.c
-mainMgr 5 86 src/gs_sword.cpp
-mainMgr1 5 87 src/gs_sword.cpp
+mainMgr 5 87 src/gs_sword.cpp
+mainMgr1 5 88 src/gs_sword.cpp
 main_label 5 79 src/gs_ui.c
 main_window1_menu_uiinfo 5 151 src/gs_ui.c
 menubar1_uiinfo 5 308 src/gs_ui.c
@@ -409,14 +405,14 @@ myGreen 5 58 src/display.cpp
 mycolor 5 61 src/display.cpp
 mylistitem 5 49 src/gs_listeditor.c
 myset 5 35 src/main.c
-navVCModSWORD 0 1412 src/gs_sword.cpp
-navcurcomModSWORD 0 759 src/gs_sword.cpp
-navcurcommModSWORD 0 1061 src/gs_sword.cpp
+navVCModSWORD 0 1339 src/gs_sword.cpp
+navcurcomModSWORD 0 765 src/gs_sword.cpp
+navcurcommModSWORD 0 1063 src/gs_sword.cpp
 newSP 0 199 src/gs_studypad.c
 new_word 0 200 src/spell.c
 newsave 5 56 src/gs_listeditor.c
 noteEditor 5 56 src/gs_html.c
-noteModified 5 125 src/gs_sword.cpp
+noteModified 5 124 src/gs_sword.cpp
 notepage 5 56 src/gs_gnomesword.c
 notes 5 59 src/gs_gnomesword.c
 num1 5 99 src/callback.c
@@ -451,7 +447,7 @@ on_btnDeleteNote_clicked 0 526 src/callback.c
 on_btnEditNote_toggled 0 509 src/callback.c
 on_btnExit_clicked 0 415 src/callback.c
 on_btnFoward_clicked 0 803 src/callback.c
-on_btnGotoVerse_clicked 0 98 src/gs_viewtext_dlg.c
+on_btnGotoVerse_clicked 0 90 src/gs_viewtext_dlg.c
 on_btnGoto_clicked 0 105 src/gs_viewcomm_dlg.c
 on_btnIndent_clicked 0 128 src/gs_toolbarEditor.c
 on_btnInfoBoxNo_clicked 0 708 src/callback.c
@@ -497,24 +493,22 @@ on_btnSearch_clicked 0 340 src/callback.c
 on_btnSpellCancel_clicked 0 607 src/callback.c
 on_btnStrikeout_toggled 0 76 src/gs_toolbarEditor.c
 on_btnStrongs_toggled 0 322 src/callback.c
-on_btnSync_clicked 0 126 src/gs_viewtext_dlg.c
+on_btnSync_clicked 0 119 src/gs_viewtext_dlg.c
 on_btnSync_clicked 0 78 src/gs_viewcomm_dlg.c
 on_btnUnIndent_clicked 0 136 src/gs_toolbarEditor.c
 on_btnUnderline_toggled 0 67 src/gs_toolbarEditor.c
 on_btnVCClose_clicked 0 60 src/gs_viewcomm_dlg.c
 on_btnVDSync_clicked 0 72 src/gs_viewdict_dlg.c
-on_btnVTAdd_clicked 0 144 src/gs_viewtext_dlg.c
-on_btnVTClose_clicked 0 151 src/gs_viewtext_dlg.c
+on_btnVTAdd_clicked 0 137 src/gs_viewtext_dlg.c
+on_btnVTClose_clicked 0 144 src/gs_viewtext_dlg.c
 on_cancel_button1_clicked 0 87 src/gs_file.c
 on_cancel_button2_clicked 0 123 src/gs_file.c
 on_cbEntry_changed 0 86 src/gs_viewcomm_dlg.c
-on_cbeBook_changed 0 90 src/gs_viewtext_dlg.c
+on_cbeBook_changed 0 82 src/gs_viewtext_dlg.c
 on_cbeBook_changed 0 350 src/callback.c
-on_cbeChapter_changed 0 74 src/gs_viewtext_dlg.c
 on_cbeFreeformLookup_drag_drop 0 787 src/callback.c
 on_cbeFreeformLookup_key_press_event 0 405 src/callback.c
-on_cbeModule_changed 0 107 src/gs_viewtext_dlg.c
-on_cbeVerse_changed 0 82 src/gs_viewtext_dlg.c
+on_cbeModule_changed 0 100 src/gs_viewtext_dlg.c
 on_cbtnPNformat_toggled 0 774 src/callback.c
 on_cbtnShowCOMtabs_toggled 0 861 src/callback.c
 on_cbtnShowComGroup_toggled 0 927 src/callback.c
@@ -545,7 +539,7 @@ on_dictionarySearchText_key_press_event 0 822 src/callback.c
 on_dlgSearch_destroy 0 64 src/gs_search_cb.cpp
 on_dlgViewComm_destroy 0 69 src/gs_viewcomm_dlg.c
 on_dlgViewDict_destroy 0 81 src/gs_viewdict_dlg.c
-on_dlgViewText_destroy 0 136 src/gs_viewtext_dlg.c
+on_dlgViewText_destroy 0 129 src/gs_viewtext_dlg.c
 on_edit_bookmarks1_activate 0 225 src/callback.c
 on_entrySDLookup_changed 0 108 src/gs_viewdict_dlg.c
 on_entrySDLookup_key_release_event 0 118 src/gs_viewdict_dlg.c
@@ -603,9 +597,9 @@ on_spc_insert_button_clicked 0 90 src/spell_gui.c
 on_spc_options_button_clicked 0 79 src/spell_gui.c
 on_spc_replace_button_clicked 0 102 src/spell_gui.c
 on_strongs_numbers1_activate 0 159 src/callback.c
-on_tbtVTStrongs_toggled 0 58 src/gs_viewtext_dlg.c
+on_tbtVTStrongs_toggled 0 66 src/gs_viewtext_dlg.c
 on_tbtnFollow_toggled 0 765 src/callback.c
-on_tbtnVTFootnotes_toggled 0 66 src/gs_viewtext_dlg.c
+on_tbtnVTFootnotes_toggled 0 74 src/gs_viewtext_dlg.c
 on_text3_changed 0 175 src/gs_studypad.c
 on_textComments_button_release_event 0 499 src/callback.c
 on_textComments_changed 0 492 src/callback.c
@@ -621,7 +615,7 @@ openWidth 5 63 src/gs_ui.c
 openpropertiesbox 0 680 src/gs_gnomesword.c
 out 5 108 src/spell.c
 p_mylistitem 5 50 src/gs_listeditor.c
-p_textmodule 5 148 src/gs_sword.cpp
+p_textmodule 5 147 src/gs_sword.cpp
 page_num 5 49 src/gs_popup_cb.c
 paragraph_alignment_changed_cb 0 184 src/gs_toolbarEditor.c
 paragraph_style_changed_cb 0 289 src/gs_toolbarEditor.c
@@ -629,13 +623,13 @@ paragraph_style_items 5 272 src/gs_toolbarEditor.c
 paragraph_style_menu_item_activated_cb 0 309 src/gs_toolbarEditor.c
 pasteHTML 0 368 src/gs_html.c
 percentUpdate 0 221 src/gs_search.cpp
-percomDisplay 5 75 src/gs_sword.cpp
-percomMgr 5 88 src/gs_sword.cpp
+percomDisplay 5 77 src/gs_sword.cpp
+percomMgr 5 89 src/gs_sword.cpp
 percomMod 5 99 src/gs_sword.cpp
-percommods 5 119 src/gs_sword.cpp
-percomtextDisplay 5 82 src/gs_sword.cpp
+percommods 5 118 src/gs_sword.cpp
+percomtextDisplay 5 84 src/gs_sword.cpp
 percomtextMod 5 100 src/gs_sword.cpp
-plaintohtml 5 108 src/gs_sword.cpp
+plaintohtml 5 107 src/gs_sword.cpp
 pmEditnote_uiinfo 5 921 src/gs_menu.c
 preview_destroy_cb 0 835 src/printstuff.c
 print_determine_lines 0 579 src/printstuff.c
@@ -654,7 +648,7 @@ print_setfont 0 804 src/printstuff.c
 print_start_job 0 748 src/printstuff.c
 readsettings 0 514 src/gs_file.c
 realize_engine 0 232 src/gs_toolbarEditor.c
-redisplayTextSWORD 0 1029 src/gs_sword.cpp
+redisplayTextSWORD 0 1031 src/gs_sword.cpp
 rememberlastitem 5 54 src/gs_file.c
 remembersubtree 5 53 src/gs_file.c
 remfirstsub 5 54 src/gs_listeditor.c
@@ -663,14 +657,14 @@ removemenuitems 0 393 src/gs_menu.c
 replace_word_with 0 588 src/spell.c
 roman_font 5 60 src/display.cpp
 run_spell_checker 0 747 src/spell.c
-rwptohtml 5 110 src/gs_sword.cpp
+rwptohtml 5 109 src/gs_sword.cpp
 safe_set_active 0 169 src/gs_toolbarEditor.c
 saveFile 0 349 src/gs_file.c
 savebookmark 0 248 src/gs_file.c
-saveconfig 0 1480 src/gs_sword.cpp
+saveconfig 0 1407 src/gs_sword.cpp
 savelist 0 597 src/gs_file.c
 savenoteHTML 0 102 src/gs_html.c
-savenoteSWORD 0 789 src/gs_sword.cpp
+savenoteSWORD 0 795 src/gs_sword.cpp
 sbNoteEditorText 5 56 src/gs_display.cpp
 sbchangeModSword 0 603 src/gs_gnomesword.c
 searchDlg 5 98 src/callback.c
@@ -685,83 +679,85 @@ setautosave 0 809 src/gs_gnomesword.c
 setbuttonson 0 234 src/gs_listeditor.c
 setcurrentversecolor 0 793 src/gs_gnomesword.c
 setformatoption 0 654 src/gs_gnomesword.c
-setglobalopsSWORD 0 1019 src/gs_sword.cpp
+setglobalopsSWORD 0 1021 src/gs_sword.cpp
 sethtmltoeditHTML 0 554 src/gs_html.c
 settings 5 70 src/gs_gnomesword.c
 settings1_menu_uiinfo 5 244 src/gs_ui.c
-setupCommSWORD 0 1336 src/gs_sword.cpp
-setupSDSWORD 0 1123 src/gs_sword.cpp
+setupCommSWORD 0 1280 src/gs_sword.cpp
+setupSDSWORD 0 1125 src/gs_sword.cpp
 setupSidebar 0 461 src/gs_gnomesword.c
-setupVTSWORD 0 1296 src/gs_sword.cpp
 setup_color_combo 0 245 src/gs_toolbarEditor.c
 setup_font_size_option_menu 0 380 src/gs_toolbarEditor.c
 setup_paragraph_style_option_menu 0 324 src/gs_toolbarEditor.c
-setuplisteditSWORD 0 1075 src/gs_sword.cpp
-setversestyleSWORD 0 659 src/gs_sword.cpp
+setuplisteditSWORD 0 1077 src/gs_sword.cpp
+setversestyleSWORD 0 665 src/gs_sword.cpp
 shortcut_bar 5 55 src/gs_ui.c
 shortcut_model 5 80 src/gs_ui.c
 shortcut_types 5 67 src/gs_ui.c
 showIntPage 0 773 src/gs_gnomesword.c
 showcomgroup 5 107 src/callback.c
 showdictgroup 5 108 src/callback.c
-showfirstlineStrongsSWORD 0 950 src/gs_sword.cpp
+showfirstlineStrongsSWORD 0 952 src/gs_sword.cpp
 showhistorygroup 5 109 src/callback.c
-showinfoSWORD 0 924 src/gs_sword.cpp
-showmoduleinfoSWORD 0 890 src/gs_sword.cpp
+showinfoSWORD 0 926 src/gs_sword.cpp
+showmoduleinfoSWORD 0 892 src/gs_sword.cpp
 showtextgroup 5 106 src/callback.c
-shutdownSDSWORD 0 486 src/gs_sword.cpp
-shutdownSWORD 0 495 src/gs_sword.cpp
-shutdownVCSWORD 0 1361 src/gs_sword.cpp
-shutdownVTSWORD 0 1285 src/gs_sword.cpp
+shutdownSDSWORD 0 487 src/gs_sword.cpp
+shutdownSWORD 0 496 src/gs_sword.cpp
+shutdownVCSWORD 0 1305 src/gs_sword.cpp
+spbVTChapter 5 49 src/gs_viewtext_dlg.c
+spbVTVerse 5 50 src/gs_viewtext_dlg.c
 spc_close_button_clicked_lcb 0 71 src/spell_gui.c
 spc_gui 5 125 src/spell_gui.c
 spc_is_running 5 53 src/spell_gui.c
 spc_message 5 126 src/spell.c
 spc_start_button_clicked_lcb 0 56 src/spell_gui.c
 spell_check_cb 0 336 src/spell_gui.c
-startsearchSWORD 0 1278 src/gs_sword.cpp
+startsearchSWORD 0 1271 src/gs_sword.cpp
 status1 5 48 src/gs_html.c
 statusbar2 5 58 src/gs_ui.c
 statusbarNE 5 57 src/gs_html.c
 store_char_in_word 0 220 src/spell.c
 strikeoutHTML 0 223 src/gs_html.c
-strongsSWORD 0 557 src/gs_sword.cpp
+strongsSWORD 0 559 src/gs_sword.cpp
 strongsnum 5 55 src/gs_gnomesword.c
 studypad 5 58 src/gs_gnomesword.c
 swKey 5 94 src/gs_sword.cpp
 symbolHTML 0 164 src/gs_html.c
-text 5 43 src/gs_viewtext_dlg.c
+text 5 44 src/gs_viewtext_dlg.c
 text1 5 62 src/printstuff.c
 text3 5 57 src/gs_ui.c
 text8 5 42 src/gs_viewcomm_dlg.c
 textComments 5 55 src/gs_html.c
 textDict 5 53 src/gs_html.c
-textList 5 44 src/gs_viewtext_dlg.c
+textList 5 45 src/gs_viewtext_dlg.c
 textSDmodule 5 43 src/gs_viewdict_dlg.c
 text_widget 5 94 src/spell.c
-textmod 5 143 src/gs_sword.cpp
-textmodule 5 149 src/gs_sword.cpp
-thmltohtml 5 109 src/gs_sword.cpp
+textmod 5 142 src/gs_sword.cpp
+textmodule 5 148 src/gs_sword.cpp
+thmltohtml 5 108 src/gs_sword.cpp
 title 5 55 src/gs_listeditor.c
 tmpcolor 5 112 src/callback.c
 underlineHTML 0 206 src/gs_html.c
 unset_focus 0 219 src/gs_toolbarEditor.c
 update_progress_bar 0 717 src/spell.c
+updatecontrols 0 149 src/gs_viewtext_dlg.c
 updatehistorymenu 0 200 src/gs_history.c
 updatehistoryshortcutbar 0 217 src/gs_history.c
 updatehistorysidebar 0 238 src/gs_history.c
-usepersonalcomments 5 127 src/gs_sword.cpp
-verseSWORD 0 686 src/gs_sword.cpp
+usepersonalcomments 5 126 src/gs_sword.cpp
+verseSWORD 0 692 src/gs_sword.cpp
 versenum_font 5 60 src/display.cpp
 versestyle 5 53 src/gs_gnomesword.c
 view1_menu_uiinfo 5 191 src/gs_ui.c
+vt_current_verse 5 47 src/gs_viewtext_dlg.c
 was_editable 5 59 src/gs_html.c
-wgreektosil 5 111 src/gs_sword.cpp
+wgreektosil 5 110 src/gs_sword.cpp
 writesettings 0 500 src/gs_file.c
 ~SearchWindow 0 64 src/gs_search.cpp
 No of Tags Files: 59
 src/callback.c 990030528.000000
-src/callback.h 991420256.000000
+src/callback.h 991420288.000000
 src/char_table.c 990030528.000000
 src/char_table.h 990030528.000000
 src/display.cpp 990030528.000000
@@ -792,23 +788,23 @@ src/gs_search_cb.cpp 990030528.000000
 src/gs_search_cb.h 990030528.000000
 src/gs_studypad.c 990030528.000000
 src/gs_studypad.h 990030528.000000
-src/gs_sword.cpp 991417267.000000
-src/gs_sword.h 991417232.000000
+src/gs_sword.cpp 992366271.000000
+src/gs_sword.h 992365674.000000
 src/gs_toolbarEditor.c 990030528.000000
 src/gs_toolbarEditor.h 990030528.000000
-src/gs_ui.c 991420643.000000
-src/gs_ui.h 991420252.000000
+src/gs_ui.c 991420672.000000
+src/gs_ui.h 991420224.000000
 src/gs_viewcomm_dlg.c 990030528.000000
 src/gs_viewcomm_dlg.h 990030528.000000
 src/gs_viewdict_dlg.c 990030528.000000
 src/gs_viewdict_dlg.h 990030528.000000
-src/gs_viewtext_dlg.c 991419264.000000
+src/gs_viewtext_dlg.c 992366753.000000
 src/gs_viewtext_dlg.h 990030528.000000
 src/gs_wgsil.cpp 990030528.000000
 src/gs_wgsil.h 990030528.000000
-src/interface.c 991420708.000000
+src/interface.c 991420736.000000
 src/interface.h 990030528.000000
-src/main.c 991420613.000000
+src/main.c 991420608.000000
 src/printstuff.c 990030528.000000
 src/printstuff.h 990030528.000000
 src/spell.c 990030528.000000

@@ -16,6 +16,8 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_ui.c \
     gs_ui.h \
+    gs_viewtext_sw.cpp \
+    gs_viewtext_sw.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     gs_viewcomm_dlg.c \

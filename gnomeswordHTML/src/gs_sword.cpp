@@ -83,7 +83,6 @@ SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *percomtextDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
-SWDisplay *VTDisplay;	/* to display modules in view comm dialog */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - interlinear module */
@@ -91,7 +90,6 @@ SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 SWMgr *listMgr;	/* sword mgr for ListEditor */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
 SWMgr *VCMgr;	/* sword mgr for view comm dialog */
-SWMgr *VTMgr;	/* sword mgr for view comm dialog */
 
 VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
@@ -104,7 +102,6 @@ SWModule *curdictMod; /* module for dict window */
 SWModule *listMod;   /* module for ListEditor */
 SWModule *SDMod;   /* module for view dict dialog */
 SWModule *VCMod;   /* module for view comm dialog */
-SWModule *VTMod;   /* module for view text dialog */
 
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
@@ -254,8 +251,7 @@ initSWORD(GtkWidget *mainform)
 	}
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
-//	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
-//	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
+	
 	percomDisplay = new  ComEntryDisp(htmlComments);
 	percomtextDisplay = new  GTKPerComDisp(textComments);
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
@@ -799,11 +795,9 @@ void
 savenoteSWORD(const gchar *data, gboolean noteModified) //-- save personal comments
 {  	
         if(noteModified){ //-- if note modified save the changes
-		//VerseKey mykey; //-- verse key text
-		*percomMod << data; //-- save note!
+		savepersonalcommentsSWORD(percomMod, data); //-- save note!savepersonalcommentsSWORD
 	}
-	percomMod->Display(); 
-	//percomtextMod->Display(); 
+	//percomMod->Display(); 
 	noteModified = false; 
 }
 
@@ -811,9 +805,7 @@ savenoteSWORD(const gchar *data, gboolean noteModified) //-- save personal comme
 void
 deletenoteSWORD(void)  //-- delete personal comment
 {
-	percomMod->deleteEntry();        //-- delete note
-	percomMod->Display();        //-- show change
-	//percomtextMod->Display(); 
+	deletepersonalcommentsSWORD(percomMod);        //-- delete note
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1200,25 +1192,6 @@ gchar* getSDmodDescriptionSWORD(void)
 {
 	return (char *) SDMod->Description();;
 }
-
-/******************************************************************************
- * returns the description of the view text dialog module
- ******************************************************************************/
-gchar* getVTmodDescriptionSWORD(void)
-{
-	return (char *) VTMod->Description();;
-}
-
-/******************************************************************************
- * change verse in VT dialog
- ******************************************************************************/
-void changeVTverseSWORD(gchar * verse)
-{
-	if (VTMod) {
-		VTMod->SetKey(verse);
-		VTMod->Display();
-	}
-}
 /******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *returns a list of keys
@@ -1300,58 +1273,6 @@ void startsearchSWORD(GtkWidget *searchFrm)
 	gtk_clist_clear(GTK_CLIST(searchWindow->resultList));
 	searchWindow->searchSWORD(searchFrm);	
 }
-
-//-------------------------------------------------------------------------------------------
-void shutdownVTSWORD(void)  //-- close down viewtext dialog program
-{	
-	delete VTMgr;	
-	if(VTDisplay)
-		delete VTDisplay;	
-}
-
-/****************************************************************************************
- *setupVTSWORD - set up the sword stuff for the viewtext dialog
- *returns a list of text modules
- ****************************************************************************************/
-GList* setupVTSWORD(GtkWidget *text, GtkWidget *cbBook)
-{
-	GList *list;
-	ModMap::iterator it; //-- iteratior	
-	SectionMap::iterator sit; //-- iteratior
-	
-	/* fill book combo box */
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
-	VTMgr	= new SWMgr();
-	VTMod     = NULL;
-	VTDisplay = new  GTKhtmlChapDisp(text);
-	list = NULL;
-	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
-		if(!strcmp((*it).second->Type(), "Biblical Texts")){
-			VTMod = (*it).second;
-			sit = VTMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(VTMod, section);
-			havebible = TRUE;		
-			list = g_list_append(list,VTMod->Name());
-			VTMod->Disp(VTDisplay);
-		}
-	}
-	return list;
-}
-
-/******************************************************************************
- *gotoverseVTSWORD - find new verse for view text dialog
- *
- ******************************************************************************/
-void gotoverseVTSWORD(gchar *newkey)
-{
-        VTMod->SetKey(newkey); //-- set key to our text
-        VTMod->Display();
-	
-}
-
-
-
 /****************************************************************************************
  *setupCommSWORD - set up the sword stuff for the view dictionary dialog
  *returns a list of commentary modules
@@ -1386,23 +1307,6 @@ void shutdownVCSWORD(void)  //-- close down view comm dialog program
 	delete VCMgr;	
 	if(VCDisplay)
 		delete VCDisplay;	
-}
-
-/******************************************************************************
- *loadVTmodSWORD - load a text module into the view commentary dialog
- *
- ******************************************************************************/
-void loadVTmodSWORD(gchar *modName)
-{
-        ModMap::iterator it;
-        
-        it = VTMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != VTMgr->Modules.end()){
-		
-		VTMod = (*it).second;  //-- set curdictMod to new choice
-		VTMod->SetKey("");		
-		VTMod->Display();	 //-- display new dict
-	}
 }
 
 /******************************************************************************
@@ -1610,16 +1514,6 @@ void addtoModList(SWModule *mod, GList *list)
 {
 	g_list_append(list,(SWModule *)mod); 
 }
-
-void getvtrefSWORD(VT_REF *vtref)
-{
-	VT_REF ref;	
-	sprintf(ref.book ,"%s", "Romans");
-	ref.chapter = 8;
-	ref.verse = 28;
-	vtref = &ref;
-}
-
 
 GList *getBibleBooks(void)
 {	

@@ -996,3 +996,10 @@ void on_listeditor_destroy(GtkObject * object, gpointer user_data)
 	destroyListEditorSWORD();
 }
 
+void
+on_btnInfoOK_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
