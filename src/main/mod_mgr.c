@@ -141,9 +141,9 @@ GList *mod_mgr_list_local_sources(void)
  *   int
  */
 
-int mod_mgr_uninstall(const char *mod_name)
+int mod_mgr_uninstall(const char *dir, const char *mod_name)
 {
-	return backend_uninstall_module(mod_name);
+	return backend_uninstall_module(dir, mod_name);
 }
 
 

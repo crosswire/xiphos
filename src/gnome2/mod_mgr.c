@@ -236,11 +236,8 @@ static void remove_install_modules(GList * modules, gboolean install)
 			g_string_printf(mods, "%s: %s", _("Removing: "), buf);
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar1),
 					  	mods->str);
-		}
-		if (buf[0] == '*') {
-			++buf;
 			g_print("uninstalling %s\n", buf);
-			if (!mod_mgr_uninstall(buf)) {
+			/*if (!mod_mgr_uninstall(destination, buf)) {
 				mod_mgr_shut_down();
 				g_warning("destination = %s",
 					  destination);
@@ -252,9 +249,9 @@ static void remove_install_modules(GList * modules, gboolean install)
 					mod_mgr_init(gtk_label_get_text
 						     (GTK_LABEL
 						      (label_home)));
-				}
-				failed = mod_mgr_uninstall(buf);
-			}
+				}*/
+				failed = mod_mgr_uninstall(destination, buf);
+			//}
 
 			while (gtk_events_pending()) {
 				gtk_main_iteration();

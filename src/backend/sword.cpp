@@ -58,7 +58,7 @@ char *backend_get_text(const char * module_name, const char *key)
 	SWHANDLE module;
 	char *retval = NULL;
 	
-	mgr = SWMgr_new();
+	mgr = SWMgr_new(FMT_HTMLHREF);
 	module = SWMgr_getModuleByName(mgr, module_name);
 	SWModule_setKeyText(module, key);
 	retval = strdup(SWModule_getRenderText(module));
