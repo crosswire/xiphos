@@ -58,6 +58,35 @@ extern gboolean gbs_find_running;
 
 /******************************************************************************
  * Name
+ *  gui_set_gbs_frame_label
+ *
+ * Synopsis
+ *   #include "_gbs.h"
+ *
+ *   void gui_set_gbs_frame_label(void)	
+ *
+ * Description
+ *   sets gbs frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_gbs_frame_label(GBS_DATA *g)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings.book_tabs)
+		gtk_frame_set_label(GTK_FRAME(g->frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(g->frame), g->bookName);
+	
+}
+
+/******************************************************************************
+ * Name
  *  on_ctreeGBS_select_row
  *
  * Synopsis
@@ -99,6 +128,9 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
 					 treeNode);
 		}
+		strcpy(settings.book_key, get_book_key(gbs->booknum));
+	} else {
+		settings.book_key[0] = '\0';
 	}
 }
 
@@ -130,7 +162,11 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 					 settings.book_last_page);
 	g = (GBS_DATA *) g_list_nth_data(data_gbs, page_num);
 	cur_g = g;
+	
+	gui_set_gbs_frame_label(g);
+	
 	//-- change tab label to current book name
+	/*
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
 					(settings.workbook_lower),
 					gtk_notebook_get_nth_page
@@ -143,17 +179,21 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 					 (GTK_NOTEBOOK
 					  (settings.workbook_lower),
 					  1), g->bookName);
+					  */
 	/*
 	 *  get the book key and store in settings.book_key
 	 *  for adding bookmarks
 	 */
 	key = get_book_key(g->booknum);
 	if(key) {
-		sprintf(settings.book_key, "%s", key);
+		strcpy(settings.book_key, key);
 		g_free(key);
+	} else {
+		settings.book_key[0] = '\0';
 	}
 	
-	sprintf(settings.BookWindowModule, "%s", g->bookName);
+	
+	strcpy(settings.BookWindowModule, g->bookName);
 
 	if (gbs_find_running) {
 		gbs_find_close_dialog(NULL, g_old->find_dialog);
@@ -438,11 +478,12 @@ static gboolean on_button_release_event(GtkWidget * widget,
  *   void
  */ 
 
-void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
+static void on_showtabs_activate(GtkMenuItem * menuitem, GBS_DATA * g)
 {
-	s->book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_gbs),
-				   s->book_tabs);
+	settings.book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+				   settings.book_tabs);
+	gui_set_gbs_frame_label(g);
 }
 
 /******************************************************************************
@@ -738,7 +779,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * gbs)
 			   GTK_SIGNAL_FUNC(on_find_activate), gbs);
 	gtk_signal_connect(GTK_OBJECT(gbs->showtabs), "activate",
 			   GTK_SIGNAL_FUNC(on_showtabs_activate),
-			   &settings);
+			   gbs);
 	return pmGBS;
 }
 
@@ -769,13 +810,21 @@ void gui_create_gbs_pane(gchar * modName, SETTINGS * s, gint count,
 	GtkWidget *frameGBS;
 	GtkWidget *scrolledwindowHTML_GBS;
 
+	p_gbs->frame = gtk_frame_new(NULL);
+	gtk_widget_ref(p_gbs->frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "p_gbs->frame",
+				 p_gbs->frame,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(p_gbs->frame);
+	gtk_container_add(GTK_CONTAINER(s->notebook_gbs), p_gbs->frame);
+	
 	hpanedGBS = gtk_hpaned_new();
 	gtk_widget_ref(hpanedGBS);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "hpanedGBS",
 				 hpanedGBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpanedGBS);
-	gtk_container_add(GTK_CONTAINER(s->notebook_gbs), hpanedGBS);
+	gtk_container_add(GTK_CONTAINER(p_gbs->frame), hpanedGBS);
 	gtk_paned_set_position(GTK_PANED(hpanedGBS), 239);
 
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new(NULL, NULL);

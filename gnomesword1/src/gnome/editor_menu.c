@@ -47,11 +47,11 @@
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_editor.h"
-#include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
 #include "settings.h"
 
 /* gnome */
+#include "editor_toolbar.h"
 #include "editor_menu.h"
 #include "link_dialog.h"
 #include "fileselection.h"

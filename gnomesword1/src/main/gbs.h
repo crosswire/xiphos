@@ -34,6 +34,7 @@ typedef struct _gbsdata GBS_DATA;
 #include "gbs_find.h"
 struct _gbsdata {
 	GtkWidget *html;
+	GtkWidget *frame;
 	GtkWidget *ctree;
 	GtkWidget *showtabs;
 	gchar *bookName;

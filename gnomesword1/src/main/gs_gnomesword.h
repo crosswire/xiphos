@@ -34,29 +34,24 @@ extern "C" {
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4
     
-/* 
- * module types 
- */
+/* module types */
 #define TEXT_TYPE 0 
 #define COMMENTARY_TYPE 1
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
 	
-/* 
- * these strings are not seen by users 
- */    
+/* these strings are not seen by users */    
 #define GS_DOCK_OPTIONS "dockOptions"
 #define GS_DOCK_GBS "dockGBSEditor"
 #define GS_DOCK_PC "dockPCEditor"
 #define GS_DOCK_SP "dockSPEditor"
        
-/* 
- * these strings are not seen by users
- */
+/* these strings are not seen by users */
 #define TEXT_MODS "Biblical Texts"
 #define COMM_MODS "Commentaries"
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
+
 #define CIPHER_KEY_LEN 16
  
 /*** function prototypes ***/
@@ -86,6 +81,9 @@ const char *get_sword_version(void);
 void display_devotional(SETTINGS * s);
 void display_new_font_color_and_size(SETTINGS * s);
 gchar *get_module_description(gchar * mod_name);
+const char *get_book_from_key(char *key);
+int get_chapter_from_key(char *key);
+int get_verse_from_key(char *key);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,7 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_editor.c - SHORT DESCRIPTION
+ * editor.c - html editor for personal comments and studypad 
+ *               (generic book support - to be added)
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -48,29 +49,18 @@
 #include "fileselection.h"
 #include "gs_html.h"
 #include "gs_editor.h"
-#include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
 #include "support.h"
-/*
- * gnome
- */
+
+/* gnome */
 #include "_editor.h"
+#include "editor_toolbar.h"
 #include "editor_menu.h"
 #include "link_dialog.h"
-/*
- * backend
- */
-#include "sword.h"
-/*
- * main
- */
+
+/* main */
 #include "percomm.h"
 #include "settings.h"
-
-GSHTMLEditorControlData *specd;
-GSHTMLEditorControlData *gbsecd;
-
-extern GtkWidget *htmlComments;
 
 
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
@@ -266,9 +256,6 @@ void editor_save_note(GtkWidget * html_widget)
 	gtk_html_set_editable(html, TRUE);
 }
 
-
-
-
 void savebookEDITOR(GtkWidget * html_widget)
 {
 	GtkHTML *html;
@@ -407,12 +394,11 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
-	//GSHTMLEditorControlData *specd =
-	// gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
-
-	specd = gs_html_editor_control_data_new(s);
+	GSHTMLEditorControlData *specd =
+		gs_html_editor_control_data_new(s);
+	
 	specd->studypad = TRUE;
 
 	frame12 = gtk_frame_new(NULL);
@@ -448,84 +434,18 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	return htmlwidget;
 }
 
-/******************************************************************************
- * create personal commentary editor control 
- */
-GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, gchar *mod_name, 
-						gint page_num)
-{
-	GtkWidget * vbox;
-	GtkWidget *frame12;
-	GSHTMLEditorControlData *pcecd =
-	    gs_html_editor_control_data_new(s);
-	GtkWidget *vboxPC;
-	GtkWidget *label85;
-	
-	pcecd->personal_comments = TRUE;
-
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox",
-				 vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox);
-	gtk_container_add(GTK_CONTAINER(s->notebook_percomm), vbox);
-	
-	frame12 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame12);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
-				 frame12,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame12);
-	gtk_box_pack_start(GTK_BOX(vbox), frame12, TRUE, TRUE, 0);
-
-	vboxPC = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxPC);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxPC", vboxPC,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vboxPC);
-	gtk_container_add(GTK_CONTAINER(frame12), vboxPC);
-
-							
-	htmlComments = gtk_html_new();
-
-	gui_create_html_editor(htmlComments, vboxPC, s, pcecd);
-	
-	
-	label85 = gtk_label_new(mod_name);
-	gtk_widget_ref(label85);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label85",
-				 label85,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label85);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebook_percomm),
-				gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(s->notebook_percomm),
-							page_num), label85);	
-							     
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->notebook_percomm),
-                                gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(s->notebook_percomm),
-							page_num), mod_name);
-	
-	
-	s->toolbarComments = toolbar_style(pcecd);
-	gtk_widget_hide(pcecd->handlebox_toolbar);
-	return pcecd;
-}
-
 /************************************************************************************ studypad editor control */
 /*** create studypad editor control ***/
 GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
-	//GSHTMLEditorControlData *gbsecd =
-	// gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
+	GSHTMLEditorControlData *gbsecd =
+		gs_html_editor_control_data_new(s);
 
-	gbsecd = gs_html_editor_control_data_new(s);
+	
 	gbsecd->gbs = TRUE;
 
 	frame12 = gtk_frame_new(NULL);
@@ -572,10 +492,4 @@ run_dialog(GnomeDialog *** dialog, GtkHTML * html, DialogCtor ctor,
 		gtk_window_set_title(GTK_WINDOW(**dialog), title);
 		gtk_widget_show(GTK_WIDGET(**dialog));
 	}
-}
-
-
-void searchgbsGS_EDITOR(gchar * searchstring)
-{
-	search(gbsecd, FALSE, searchstring);
 }

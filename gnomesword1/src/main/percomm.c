@@ -25,26 +25,22 @@
 
 #include <gnome.h>
 
+/* frontend */
+#include "_percomm.h"
+#include "module_options.h"
+
+
+/* main */
+#include "percomm.h"
 #include "gs_gnomesword.h"
 #include "gs_editor.h"
 #include "gs_html.h"
-#include "sword.h"
-#include "module_options.h"
 #include "gs_info_box.h"
 #include "support.h"
 
-/*
- * gnome
- */
-
-/*
- * main
- */
-#include "percomm.h"
-/*
- * backend
- */
+/* backend */
 #include "percomm_.h"
+#include "sword.h"
 
 /******************************************************************************
  * externs
@@ -338,8 +334,7 @@ void setup_percomm(SETTINGS * s, GList *mods)
 	gint count = 0;
 
 	percomm_list = NULL;
-
-	//mods = backend_get_list_of_percom_modules();
+	
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -351,7 +346,6 @@ void setup_percomm(SETTINGS * s, GList *mods)
 		p->mod_num = count;
 		p->search_string = NULL;
 		p->key = NULL;
-		p->find_dialog = NULL;
 		p->ec = gui_percomm_control(s,p->mod_name,count);
 		p->html = p->ec->htmlwidget;
 		backend_new_percomm_display(p->ec->htmlwidget,
@@ -401,9 +395,11 @@ void shutdown_percomm(void)
 		PC_DATA *p = (PC_DATA *) percomm_list->data;
 		/* 
 		 * free any search dialogs created 
-		 */
-		if (p->find_dialog)
-			g_free(p->find_dialog);
+		 */		
+		if (p->ec->search_dialog)
+			g_free(p->ec->search_dialog);		
+		if (p->ec->replace_dialog)
+			g_free(p->ec->replace_dialog);		
 		/* 
 		 * free editor controls 
 		 */

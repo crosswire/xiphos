@@ -32,20 +32,24 @@
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
 
+/* frontend */
+#include "interlinear_dialog.h"
+#include "cipher_key_dialog.h"
+
+/* main */ 
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "gs_editor.h"
-#include "cipher_key_dialog.h"
 #include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-#include "sword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"
 #include "gs_bookmarks.h"
-#include "gs_detach_int.h"
 #include "gs_interlinear.h"
 #include "support.h"
 #include "settings.h"
+
+/* backend */
+#include "sword.h"
 
 /* is commentary window set to scroll with text window */
 gboolean autoscroll;
@@ -54,7 +58,7 @@ gboolean autoscroll;
  * externals
  *****************************************************************************/
 
-extern GtkWidget * NEtext, *htmlComments, *htmlCommentaries;
+extern GtkWidget * NEtext, *htmlCommentaries;
 
 extern gboolean isrunningSD,	/* is the view dictionary dialog runing */
  isrunningVC,			/* is the view commentary dialog runing */
@@ -68,11 +72,11 @@ void on_undockInt_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	if (s->dockedInt) {
 		s->dockedInt = FALSE;
-		undock_interlinear_page(s);	/* gs_interlinear_dlg.c */
+		gui_undock_interlinear_page(s);	/* gs_interlinear_dlg.c */
 
 	} else {
 		s->dockedInt = TRUE;
-		on_btnDockInt_clicked(NULL, s);	/* gs_interlinear_dlg.c */
+		gui_btnDockInt_clicked(NULL, s);	/* gs_interlinear_dlg.c */
 	}
 }
 

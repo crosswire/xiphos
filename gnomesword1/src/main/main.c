@@ -97,12 +97,12 @@ int main(int argc, char *argv[])
 	gui_splash_init();
 
 	gui_splash_step1();
-
-	create_mainwindow(&settings);
-
-	gui_splash_step2();
 	
 	backend_init_sword(&settings);
+
+	gui_splash_step2();
+		
+	create_mainwindow(&settings);
 
 	gui_splash_step3();
 
