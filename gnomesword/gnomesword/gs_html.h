@@ -20,9 +20,10 @@ extern "C" {
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKHTML	
 #include <gtkhtml/gtkhtml.h>
+#endif /* USE_GTKHTML */
 
-//void on_link_clicked (GtkHTML *html, const gchar *url, gpointer data);
 void add_gtkhtml_widgets(GtkWidget *app);
 void beginHTML(GtkWidget *html);
 void endHTML(GtkWidget *html);

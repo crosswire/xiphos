@@ -22,13 +22,19 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <gnome.h>
 #include "gs_gnomesword.h"
 #include "gs_menu.h"
 #include "interface.h"
 #include "callback.h"
 #include "gs_sword.h"
+#ifdef USE_GTKHTML
 #include "gs_html.h"
+#endif /* USE_GTKHTML */
 #include "support.h"
 
 /******************************************************************************
@@ -38,9 +44,9 @@ static GtkWidget* create_pmInt(GList *mods, gchar *intWindow,
 			GtkMenuCallback cbchangemod, 
 			GtkMenuCallback mycallback);
 static GtkWidget *create_pmComments2(GList * mods);
-#ifdef GTK_HTML
+#ifdef USE_GTKHTML
 static GtkWidget *create_pmCommentsHtml(GList * mods);
-#endif /* GTK_HTML */
+#endif /* USE_GTKHTML */
 static GtkWidget *create_pmDict(GList * mods);
 static GtkWidget* create_pmBible(GList *mods);
 static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods);
@@ -190,7 +196,6 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	menuBible = create_pmBible(biblelist);	
 		
 	/* attach popup menus */
-	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(app,"textComp2"),(gchar*)"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(app,"textComp3"),(gchar*)"1");
@@ -199,11 +204,15 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
 	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
-#ifdef GTK_HTML
+	
+#ifdef USE_GTKHTML
+	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	menuhtmlcom = create_pmCommentsHtml(commentarylist);	
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->showcomtabs;
-#endif /* GTK_HTML */		
+#else
+	gnome_popup_menu_attach(menuBible,lookup_widget(app,"moduleText"),(gchar*)"1");
+#endif /* USE_GTKHTML */
 }
 
 /******************************************************************************
@@ -380,7 +389,7 @@ GtkWidget *additemtooptionmenu(GtkWidget * MainFrm, gchar * subtreelabel,
 //-------------------------------------------------------------------------------------------
 void
 removemenuitems(GtkWidget * MainFrm, gchar * startitem, gint numberofitems)
-//-- remove a number(numberofitems) of items form a menu or submenu(startitem)                                                  //
+/* remove a number(numberofitems) of items form a menu or submenu(startitem)   */
 {				
 	gnome_app_remove_menus(GNOME_APP(MainFrm), startitem,
 			       numberofitems);
@@ -534,11 +543,10 @@ static GtkWidget *create_pmComments2(GList * mods)
 			   GTK_SIGNAL_FUNC(on_show_tabs1_activate), NULL);
 
 	gtk_object_set_data(GTK_OBJECT(pmComments2), "tooltips", tooltips);
-
-
 	return pmComments2;
 }
-#ifdef GTK_HTML
+
+#ifdef USE_GTKHTML
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmCommentsHtml(GList * mods)
 {
@@ -687,7 +695,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "tooltips", tooltips);
 	return pmCommentsHtml;
 }
-#endif /* GTK_HTML */
+#endif /* USE_GTKHTML */
 
 //-------------------------------------------------------------------------------------------
 static GtkWidget *create_pmDict(GList * mods)
@@ -918,20 +926,22 @@ static GtkWidget* create_pmBible(GList *mods)
 	}
 	g_list_free(tmp);
 
-#ifdef GTK_HTML
+#ifdef USE_GTKHTML
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");
-                      	
-  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+          gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
                       	GTK_SIGNAL_FUNC (on_html_lookup_selection_activate),
-                      	(gchar *)"htmlTexts");
-                      	
-#else
-  	gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+                      	(gchar *)"htmlTexts");             	
+#else /* !USE_GTKHTML */
+gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      	GTK_SIGNAL_FUNC (on_copy3_activate),
+                      	(gchar *)"moduleTexts");                      	
+             gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
                       	GTK_SIGNAL_FUNC (on_lookup_selection_activate),
-                      	NULL);
-#endif /* GTK_HTML */
+                      	(gchar *)"moduleTexts");                 	
+#endif /* USE_GTKHTML */                      	
+ 
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
                       	NULL);
@@ -1021,15 +1031,15 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-#ifdef GTK_HTML
+#ifdef USE_GTKHTML
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
-#else
+#else /* !USE_GTKHTML */
 	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
-                      	GTK_SIGNAL_FUNC (on_copy2_activate),
+                      	GTK_SIGNAL_FUNC (on_copy3_activate),
                       	(gchar *)intWindow);
-#endif /* GTK_HTML */
+#endif /* USE_GTKHTML */
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (mycallback),
                       	NULL);

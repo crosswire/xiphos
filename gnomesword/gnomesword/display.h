@@ -89,6 +89,12 @@ class ComEntryDisp:public GTKEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
+class GtkHTMLEntryDisp:public GTKEntryDisp { public:
+	GtkHTMLEntryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
 class GTKhtmlChapDisp:public GTKEntryDisp { public:
 	GTKhtmlChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);

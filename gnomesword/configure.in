@@ -216,13 +216,9 @@ fi
 
 if $gtkhtml_ok; then
 	AC_MSG_RESULT($vers found)
-	GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
-	GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
-	AC_SUBST(GTKHTML_CFLAGS)
-	AC_SUBST(GTKHTML_LIBS)
         AC_DEFINE(USE_GTKHTML, 1, [Define if you want to use the GtkHTML])
 else
-	AC_MSG_ERROR(GtkHTML 0.8 is required to build gnomesword with GtkHtml)
+	AC_MSG_RESULT(GtkHTML 0.8.0 is required to build gnomesword with GtkHtml support)
 fi
 
 
@@ -238,8 +234,13 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-EXTRA_GNOME_LIBS="`gnome-config --libs libglade gtkhtml gnomeui` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+if $gtkhtml_ok; then
+    EXTRA_GNOME_LIBS="`gnome-config --libs libglade gtkhtml gnomeui` $THREADS_LIBS `unicode-config --libs`"
+    EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+else
+    EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
+    EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+fi
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
 
@@ -267,7 +268,6 @@ AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking
 AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xyes && test "x$have_gal" = xno)
 AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$spellchecking" = xno && test "x$have_gal" = xno)
 
-#if test "x$have_gal" = xyes; then
 AC_OUTPUT([
 Makefile
 macros/Makefile
@@ -288,6 +288,12 @@ if test "x$have_gnomeprint" = xyes; then
         echo "Printing:                         enabled"
 else
 	echo "Printing:                         disabled"
+fi
+
+if $gtkhtml_ok; then
+       echo "GnomeSword will be built with GtkHTML"
+else
+        echo "GnomeSword will be built without GtkHTML"
 fi
 if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes; then
         echo "GnomeSword will be built with the Evolution shortcut bar"
