@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * tabbed_browser.c - functions to facilitate tabbed browsing of different passages at once
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -435,12 +435,12 @@ void gui_close_all_tabs(void)
 		g_free(pt->book_key);
 		g_free(pt);
 		gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), i);
-		g_warning("i = %d",i);
 	}
 	
 	g_list_free(passage_list);
 	passage_list = NULL;
 	cur_passage_tab = NULL;
+	gui_set_text_frame_label(cur_t);
 }
 
 
@@ -541,7 +541,7 @@ void gui_notebook_main_setup(GList *ptlist)
 	 * we don't need to connect or bad things happen since we are already
 	 * connected.
 	 *
-	*/
+	 */
 	if(!connected) {
 		g_signal_connect(GTK_OBJECT(widgets.notebook_main),
 				   "switch_page",
@@ -554,6 +554,7 @@ void gui_notebook_main_setup(GList *ptlist)
 		
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
+	gui_set_text_frame_label(cur_t);
 	gtk_widget_show(widgets.button_new_tab);
 	g_list_free(tmp);
 }
