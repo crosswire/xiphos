@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-03-28 11:25-0500\n"
+"POT-Creation-Date: 2002-03-28 13:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Module"
 msgstr ""
 
-#: src/gs_detach_int.c:72 src/gs_gui.c:1592 src/gs_gui.c:1603
+#: src/gs_detach_int.c:72 src/gs_gui.c:1589 src/gs_gui.c:1600
 msgid "Interlinear"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgid "Cut"
 msgstr ""
 
 #: src/gs_editor.c:1070 src/gs_gui.c:154 src/gs_menu.c:789 src/gs_menu.c:963
-#: src/gs_menu.c:1212 src/sw_gbs.cpp:375
+#: src/gs_menu.c:1212 src/sw_gbs.cpp:385
 msgid "Copy"
 msgstr ""
 
@@ -256,7 +256,7 @@ msgid "Undo"
 msgstr ""
 
 #: src/gs_editor.c:1100 src/gs_editor_search.c:86 src/gs_editor_search.c:129
-#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/sw_gbs.cpp:382
+#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/sw_gbs.cpp:392
 msgid "Find"
 msgstr ""
 
@@ -486,7 +486,7 @@ msgstr ""
 msgid "Copy highlighted text form main window"
 msgstr ""
 
-#: src/gs_gui.c:161 src/gs_shortcutbar.c:2079
+#: src/gs_gui.c:161 src/gs_shortcutbar.c:2070
 msgid "Search"
 msgstr ""
 
@@ -539,7 +539,7 @@ msgid "Information about Bible texts"
 msgstr ""
 
 #: src/gs_gui.c:251 src/gs_gui.c:1156 src/gs_gui.c:1165
-#: src/gs_shortcutbar.c:1953 src/gs_shortcutbar.c:2248
+#: src/gs_shortcutbar.c:1944 src/gs_shortcutbar.c:2239
 msgid "Commentaries"
 msgstr ""
 
@@ -547,9 +547,7 @@ msgstr ""
 msgid "Dictionaries-Lexicons"
 msgstr ""
 
-#. s->htmlBook = gbs_control(s->workbook_lower, s);	
-#. gtk_box_pack_start(GTK_BOX(hboxToolbar), s->toolbarBooks, TRUE,TRUE, 0);
-#: src/gs_gui.c:263 src/gs_gui.c:1542 src/gs_gui.c:1555
+#: src/gs_gui.c:263 src/gs_gui.c:1539 src/gs_gui.c:1552
 msgid "Books"
 msgstr ""
 
@@ -669,7 +667,7 @@ msgid "Study Pad"
 msgstr ""
 
 #: src/gs_gui.c:1513 src/gs_gui.c:1524 src/gs_preferences_dlg.c:1661
-#: src/gs_setup.c:562 src/gs_shortcutbar.c:1978 src/gs_shortcutbar.c:2273
+#: src/gs_setup.c:562 src/gs_shortcutbar.c:1969 src/gs_shortcutbar.c:2264
 msgid "Dict/Lex"
 msgstr ""
 
@@ -792,7 +790,7 @@ msgstr ""
 msgid "Goto Reference"
 msgstr ""
 
-#: src/gs_menu.c:804 src/gs_menu.c:970 src/sw_gbs.cpp:397
+#: src/gs_menu.c:804 src/gs_menu.c:970 src/sw_gbs.cpp:414
 msgid "Lookup Word"
 msgstr ""
 
@@ -809,7 +807,7 @@ msgstr ""
 msgid "About this module"
 msgstr ""
 
-#: src/gs_menu.c:839 src/gs_menu.c:1047
+#: src/gs_menu.c:839 src/gs_menu.c:1047 src/sw_gbs.cpp:399
 msgid "Show Tabs"
 msgstr ""
 
@@ -834,7 +832,7 @@ msgstr ""
 msgid "Use Current Dictionary"
 msgstr ""
 
-#: src/gs_menu.c:998 src/sw_gbs.cpp:419
+#: src/gs_menu.c:998 src/sw_gbs.cpp:436
 msgid "Lookup Selection"
 msgstr ""
 
@@ -1288,171 +1286,163 @@ msgstr ""
 msgid "Remove from Shortcut Bar"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1005 src/gs_shortcutbar.c:2107
+#: src/gs_shortcutbar.c:999 src/gs_shortcutbar.c:2098
 msgid "Verse List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1012
+#: src/gs_shortcutbar.c:1006
 msgid "Search Results"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1019 src/gs_shortcutbar.c:1260
+#: src/gs_shortcutbar.c:1013 src/gs_shortcutbar.c:1254
 msgid "Viewer"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1176
+#: src/gs_shortcutbar.c:1170
 msgid "Save List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1177
+#: src/gs_shortcutbar.c:1171
 msgid "Save the current verse list as a bookmark file"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1191
+#: src/gs_shortcutbar.c:1185
 msgid "Main Form"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1192
+#: src/gs_shortcutbar.c:1186
 msgid "Toggle to show results in Main Form"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1205
-msgid "UpdateMain"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1206
-msgid "Show current verse list verse in Main Form"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1230
+#: src/gs_shortcutbar.c:1224
 msgid "VerseList"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1231
+#: src/gs_shortcutbar.c:1225
 msgid "View Verse List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1245
+#: src/gs_shortcutbar.c:1239
 msgid "SearchResults"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1246
+#: src/gs_shortcutbar.c:1240
 msgid "View Search Results"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1339
+#: src/gs_shortcutbar.c:1333
 msgid "label1"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1450
+#: src/gs_shortcutbar.c:1444
 msgid "label2"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1490
+#: src/gs_shortcutbar.c:1484
 msgid "label3"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1614
+#: src/gs_shortcutbar.c:1605
 msgid "Begin Search"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1617
+#: src/gs_shortcutbar.c:1608
 msgid "Search Type"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1632
+#: src/gs_shortcutbar.c:1623
 msgid "Multi Word"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1646
+#: src/gs_shortcutbar.c:1637
 msgid "Regular Expression"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1657
+#: src/gs_shortcutbar.c:1648
 msgid "Exact Phrase"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1669
+#: src/gs_shortcutbar.c:1660
 msgid "Search Options"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1684
+#: src/gs_shortcutbar.c:1675
 msgid "Case Sensitive"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1695
+#: src/gs_shortcutbar.c:1686
 msgid "Search Commentary"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1704
+#: src/gs_shortcutbar.c:1695
 msgid "Search Personal"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1713
+#: src/gs_shortcutbar.c:1704
 msgid "Search Book"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1719
+#: src/gs_shortcutbar.c:1710
 msgid "Search Current Book"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1723
+#: src/gs_shortcutbar.c:1714
 msgid "Search Scope"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1738
+#: src/gs_shortcutbar.c:1729
 msgid "No Scope"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1750
+#: src/gs_shortcutbar.c:1741
 msgid "Use Bounds"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1762
+#: src/gs_shortcutbar.c:1753
 msgid "Last Search"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1773
+#: src/gs_shortcutbar.c:1764
 msgid "Bounds"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1787
+#: src/gs_shortcutbar.c:1778
 msgid "Lower"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1797
+#: src/gs_shortcutbar.c:1788
 msgid "Upper "
 msgstr ""
 
-#: src/gs_shortcutbar.c:1817
+#: src/gs_shortcutbar.c:1808
 msgid "Genesis"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1829
+#: src/gs_shortcutbar.c:1820
 msgid "Revelation"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1868 src/gs_shortcutbar.c:2164
+#: src/gs_shortcutbar.c:1859 src/gs_shortcutbar.c:2155
 msgid "Favorites"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1928 src/gs_shortcutbar.c:2223
+#: src/gs_shortcutbar.c:1919 src/gs_shortcutbar.c:2214
 msgid "Bible Text"
 msgstr ""
 
-#: src/gs_shortcutbar.c:2004 src/gs_shortcutbar.c:2300
+#: src/gs_shortcutbar.c:1995 src/gs_shortcutbar.c:2291
 msgid "Book"
 msgstr ""
 
-#: src/gs_shortcutbar.c:2030 src/gs_shortcutbar.c:2325
+#: src/gs_shortcutbar.c:2021 src/gs_shortcutbar.c:2316
 msgid "History"
 msgstr ""
 
-#: src/gs_shortcutbar.c:2053
+#: src/gs_shortcutbar.c:2044
 msgid "Bookmarks"
 msgstr ""
 
-#: src/gs_shortcutbar.c:2340
+#: src/gs_shortcutbar.c:2331
 msgid "Add All Modules"
 msgstr ""
 
@@ -1524,14 +1514,14 @@ msgstr ""
 msgid "Go to verse"
 msgstr ""
 
-#: src/sw_gbs.cpp:449
+#: src/sw_gbs.cpp:466
 msgid "View Book"
 msgstr ""
 
-#: src/sw_gbs.cpp:565 src/sw_gbs.cpp:579
+#: src/sw_gbs.cpp:585 src/sw_gbs.cpp:599
 msgid "label"
 msgstr ""
 
-#: src/sw_gbs.cpp:572
+#: src/sw_gbs.cpp:592
 msgid "label200"
 msgstr ""

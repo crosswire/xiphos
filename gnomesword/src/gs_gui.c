@@ -1524,7 +1524,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 							    0), _("Dict/Lex"));
  	
 	
-	/************************************************************************** GBS html editor/display */
+	/****************************************************** GBS html editor/display */
 	
 	s->notebookGBS = gtk_notebook_new ();
 	gtk_widget_ref (s->notebookGBS);
@@ -1533,12 +1533,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_widget_show (s->notebookGBS);
 	gtk_container_add (GTK_CONTAINER (s->workbook_lower), s->notebookGBS);
 	GTK_WIDGET_UNSET_FLAGS (s->notebookGBS, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (s->notebookGBS), FALSE);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), FALSE);	
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebookGBS));	
 	
-	
-	//s->htmlBook = gbs_control(s->workbook_lower, s);	
-	//gtk_box_pack_start(GTK_BOX(hboxToolbar), s->toolbarBooks, TRUE,TRUE, 0);
-			   
 	label185 = gtk_label_new(_("Books"));
 	gtk_widget_ref(label185);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "label185",
