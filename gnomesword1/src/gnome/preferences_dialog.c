@@ -34,17 +34,14 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-/* frontend */
-#include "_bibletext.h"
-#include "shortcutbar_main.h"
-#include "shortcutbar_dialog.h"
-#include "preferences_dialog.h"
+#include "gui/_bibletext.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_dialog.h"
+#include "gui/preferences_dialog.h"
 
-/* main */ 
-#include "support.h"
-#include "gs_gnomesword.h"
-#include "lists.h"
-
+#include "main/support.h"
+#include "main/gs_gnomesword.h"
+#include "main/lists.h"
  
 /*****************************************************************************
  * externs

@@ -25,18 +25,15 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_dictlex.h"
-#include "cipher_key_dialog.h"
-#include "shortcutbar_main.h"
-#include "dictlex_dialog.h"
+#include "gui/_dictlex.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/dictlex_dialog.h"
 
-/* main */
-#include "settings.h"
-#include "lists.h"
-#include "dictlex.h"
-#include "gs_html.h"
-
+#include "main/settings.h"
+#include "main/lists.h"
+#include "main/dictlex.h"
+#include "main/gs_html.h"
 
 /******************************************************************************
  * externs

@@ -19,25 +19,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 
-
-/* frontend */
-#include "shortcutbar_main.h"
-#include "shortcutbar_search.h"
-#include "shortcutbar_viewer.h"
-
-/* main */ 
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_search.h"
+#include "gui/shortcutbar_viewer.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 

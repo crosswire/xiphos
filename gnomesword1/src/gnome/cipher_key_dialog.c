@@ -26,10 +26,9 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "cipher_key_dialog.h"
-#include "gs_gnomesword.h"
-#include "support.h"
-
+#include "gui/cipher_key_dialog.h"
+#include "main/gs_gnomesword.h"
+#include "main/support.h"
 
 static GtkWidget *entryKey;
 static void on_btkUKok_clicked(GtkButton * button, gchar *mod_name);

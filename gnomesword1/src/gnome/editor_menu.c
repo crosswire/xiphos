@@ -40,27 +40,25 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "spell.h"
-#include "spell_gui.h"
+#include "main/spell.h"
+#include "main/spell_gui.h"
 #endif	/* USE_SPELL */
 
-/* frontend */
-#include "_editor.h"
-#include "editor_toolbar.h"
-#include "editor_menu.h"
-#include "editor_replace.h"
-#include "editor_search.h"
-#include "_percomm.h"
-#include "link_dialog.h"
-#include "fileselection.h"
-#include "studypad.h"
-#include "info_box.h"
+#include "gui/_editor.h"
+#include "gui/editor_toolbar.h"
+#include "gui/editor_menu.h"
+#include "gui/editor_replace.h"
+#include "gui/editor_search.h"
+#include "gui/_percomm.h"
+#include "gui/link_dialog.h"
+#include "gui/fileselection.h"
+#include "gui/studypad.h"
+#include "gui/info_box.h"
 
-/* main */
-#include "percomm.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "settings.h"
+#include "main/percomm.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
 
 /****************************************************************************** 
  * editor popup menu and call backs 

@@ -28,18 +28,14 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_viewer.h"
 
-/* frontend */
-#include "shortcutbar_main.h"
-#include "shortcutbar_viewer.h"
-
-/* main */ 
-#include "gs_gnomesword.h"
-#include "gs_bookmarks.h"
-#include "gs_html.h"
-#include "support.h"
-#include "settings.h"
-
+#include "main/gs_gnomesword.h"
+#include "main/gs_bookmarks.h"
+#include "main/gs_html.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 extern SEARCH_OPT so, *p_so;
 extern GList *sblist;			/* for saving search results to bookmarks  */

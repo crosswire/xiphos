@@ -30,12 +30,8 @@
 #include <unistd.h>
 #include <string.h>
 
-/* frontend */
-#include "info_box.h"
-
-/* main */
-#include "support.h"
-
+#include "gui/info_box.h"
+#include "main/support.h"
 
 /******************************************************************************
  * Name

@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "about_modules.h"
+#include "gui/about_modules.h"
 
 /******************************************************************************
  * privat
