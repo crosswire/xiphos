@@ -1,3 +1,10 @@
+2001-07-20 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added [view context] link to each interlinear verse that will swap 
+	 it with the module in the main window. 
+	* added Strongs, Footnotes and Morph Tags to interlinear popup menu.
+
+
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added a verse list dialog that pops up when you  click

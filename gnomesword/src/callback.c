@@ -126,7 +126,7 @@ on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	morphsSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active);	
+	morphsSWORD(0, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -151,10 +151,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 //----------------------------------------------------------------------------------------------
 void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		footnotesSWORD(TRUE);
-	else
-		footnotesSWORD(FALSE);
+	footnotesSWORD(0, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 
@@ -289,10 +286,7 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 
 	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-	if (togglebutton->active)
-		strongsSWORD(TRUE);	//-- trun strongs numbers on (GnomeSword.cpp)
-	else
-		strongsSWORD(FALSE);	//-- trun strongs numbers off (GnomeSword.cpp)
+	strongsSWORD(0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 
 //----------------------------------------------------------------------------------------------
