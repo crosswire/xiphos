@@ -28,21 +28,269 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gui/interlinear.h"
+#include "gui/interlinear_dialog.h"
 #include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
-#include "main/gs_popup_cb.h"
 #include "main/lists.h"
 
 
 extern gboolean havebible;
 
+/******************************************************************************
+ * static
+ */
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
-
 static GtkWidget *module_options_menu;
-void gui_update_interlinear_page()
+
+
+/******************************************************************************
+ * Name
+ *   on_undockInt_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_undockInt_activate(GtkMenuItem *menuitem)
+ *
+ * Description
+ *   undock/dock interlinear page
+ *
+ * Return value
+ *   void
+ */
+
+static void on_undockInt_activate(GtkMenuItem *menuitem)
+{
+	if (settings.dockedInt) {
+		settings.dockedInt = FALSE;
+		gui_undock_interlinear_page();
+
+	} else {
+		settings.dockedInt = TRUE;
+		gui_btnDockInt_clicked(NULL, NULL);
+	}
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint1mod_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_changeint1mod_activate(GtkMenuItem * menuitem,
+ *			       gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint1mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gchar modName[16];
+
+	memset(modName, 0, 16);
+	module_name_from_description(modName,
+					     (gchar *) user_data);
+	sprintf(settings.Interlinear1Module, "%s", modName);
+	
+	if (settings.dockedInt)
+		gui_update_interlinear_page();
+	else
+		gui_update_interlinear_page_detached();
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint2mod_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_changeint2mod_activate(GtkMenuItem * menuitem,
+ *			       gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint2mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gchar modName[16];
+
+	memset(modName, 0, 16);
+	module_name_from_description(modName,
+					     (gchar *) user_data);
+	sprintf(settings.Interlinear2Module, "%s", modName);
+	
+	if (settings.dockedInt)
+		gui_update_interlinear_page();
+	else
+		gui_update_interlinear_page_detached();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint3mod_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_changeint3mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint3mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gchar modName[16];
+
+	memset(modName, 0, 16);
+	module_name_from_description(modName,
+					     (gchar *) user_data);
+	sprintf(settings.Interlinear3Module, "%s", modName);
+	
+	if (settings.dockedInt)
+		gui_update_interlinear_page();
+	else
+		gui_update_interlinear_page_detached();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint4mod_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_changeint4mod_activate(GtkMenuItem * menuitem,
+ *			       gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint4mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gchar modName[16];
+
+	memset(modName, 0, 16);
+	module_name_from_description(modName,
+					     (gchar *) user_data);
+	sprintf(settings.Interlinear4Module, "%s", modName);
+	
+	if (settings.dockedInt)
+		gui_update_interlinear_page();
+	else
+		gui_update_interlinear_page_detached();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_changeint5mod_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_changeint5mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_changeint5mod_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
+{
+	gchar modName[16];
+
+	memset(modName, 0, 16);
+	module_name_from_description(modName,
+					     (gchar *) user_data);
+	sprintf(settings.Interlinear5Module, "%s", modName);
+	
+	if (settings.dockedInt)
+		gui_update_interlinear_page();
+	else
+		gui_update_interlinear_page_detached();
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   on_int_global_options_activate
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void on_int_global_options_activate(GtkMenuItem * menuitem,
+ *				    gpointer user_data)
+ *
+ * Description
+ *   toogle global options in interlinear window
+ *
+ * Return value
+ *   void
+ */
+
+static void on_int_global_options_activate(GtkMenuItem * menuitem,
+				    gpointer user_data)
+{
+	gui_set_interlinear_module_global_options((gchar *) user_data,
+					      GTK_CHECK_MENU_ITEM
+					      (menuitem)->active);
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_update_interlinear_page
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_update_interlinear_page(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_interlinear_page(void)
 {
 	gchar tmpBuf[256], *rowcolor, *font_size;
 	gchar *utf8str,*mod_name, *font_name = NULL;
@@ -180,6 +428,23 @@ void gui_update_interlinear_page()
 		free(font_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *   int_display
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void int_display(gchar *key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 static void int_display(gchar *key)
 {
 	gchar 
@@ -307,6 +572,23 @@ static void int_display(gchar *key)
 	free(tmpkey);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_update_interlinear_page_detached
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_update_interlinear_page_detached(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 void gui_update_interlinear_page_detached(void)
 {
 	gchar * utf8str, buf[500];
@@ -421,10 +703,23 @@ void gui_update_interlinear_page_detached(void)
 	sprintf(buf, "%d", settings.intCurVerse);
 	gtk_html_jump_to_anchor(html, buf);	
 }
+
 /******************************************************************************
- * swaps interlinear mod with mod in main text window
- * intmod - interlinear mod name
- ******************************************************************************/
+ * Name
+ *   gui_swap_interlinear_with_main
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_swap_interlinear_with_main(char * intmod)
+ *
+ * Description
+ *   swaps interlinear mod with mod in main text window
+ *
+ * Return value
+ *   void
+ */
+
 void gui_swap_interlinear_with_main(char * intmod)
 {
 	char *modname;
@@ -449,7 +744,26 @@ void gui_swap_interlinear_with_main(char * intmod)
 	gui_update_interlinear_page();
 }
 
-void gui_set_interlinear_module_global_options(gchar *option, gboolean choice)
+
+/******************************************************************************
+ * Name
+ *   gui_set_interlinear_module_global_options
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_set_interlinear_module_global_options(gchar *option, 
+ *						gboolean choice)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_interlinear_module_global_options(gchar *option, 
+						gboolean choice)
 {
 	gchar *on_off;
 
@@ -493,6 +807,23 @@ void gui_set_interlinear_module_global_options(gchar *option, gboolean choice)
 		gui_update_interlinear_page_detached();
 	}
 }
+
+
+/******************************************************************************
+ * Name
+ *   add_items_to_options_menu
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void add_items_to_options_menu(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 static void add_items_to_options_menu(void)
 {
@@ -572,21 +903,21 @@ static void add_items_to_options_menu(void)
 }
 
 
-
 /******************************************************************************
  * Name
- *   
+ *   load_menu_formmod_list
  *
  * Synopsis
  *   #include "gui/interlinear.h
  *
- *   
+ *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,  
+ *			gchar *label, GtkMenuCallback mycallback)
  *
  * Description
- *   create popup menu for interlinear window
+ *   
  *
  * Return value
- *   
+ *   void
  */
 
 static void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,  
@@ -633,18 +964,18 @@ static void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
 
 /******************************************************************************
  * Name
- *   
+ *   create_interlinear_popup
  *
  * Synopsis
  *   #include "gui/interlinear.h
  *
- *   
+ *   GtkWidget * create_interlinear_popup(GList * mods)
  *
  * Description
  *   create popup menu for interlinear window
  *
  * Return value
- *   
+ *   GtkWidget *
  */
 
 GtkWidget * create_interlinear_popup(GList * mods)
@@ -724,18 +1055,18 @@ GtkWidget * create_interlinear_popup(GList * mods)
 
 /******************************************************************************
  * Name
- *   
+ *   gui_create_interlinear_popup
  *
  * Synopsis
  *   #include "gui/interlinear.h
  *
- *   
+ *   void gui_create_interlinear_popup(GList *bible_description) 
  *
  * Description
- *   create popup menu for interlinear window
+ *   call create_interlinear_popup() and attach menu to int html widget
  *
  * Return value
- *   
+ *   void
  */
 
 void gui_create_interlinear_popup(GList *bible_description) 
