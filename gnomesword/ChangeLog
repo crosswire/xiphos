@@ -1,4 +1,11 @@
-2002-09-07  Terry Biggs <tbiggs@users.sourceforge.net>
+2002-11-16  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed gnome fontpickers from preferences dialog.
+	* added font_dialog.* and sw_font.* to set font for individual 
+	  modules.
+
+
+2002-10-31  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* updated to use sword-1.5.5
 	* bumped to 0.7.6
