@@ -1,13 +1,13 @@
 # Slovak translation for GnomeSWORD
-# Copyright (C) 2001 Zdenko Podobnı
-# FIRST Zdenko Podobnı <zdpo@mailbox.sk>, 2001.
+# Copyright (C) 2001 Zdenko PodobnÃ½
+# FIRST Zdenko PodobnÃ½ <zdpo@mailbox.sk>, 2001.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2002-03-28 23:48+0100\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
-"Last-Translator: Zdenko Podobnı <zdpo@mailbox.sk>\n"
+"Last-Translator: Zdenko PodobnÃ½ <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
@@ -19,7 +19,7 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Radi by sme sa poïakovali Troy Griffitts a v¹etkım ostatnım µuïom, ktorı nám "
+"Radi by sme sa poÃ¯akovali Troy Griffitts a vÂ¹etkÃ½m ostatnÃ½m ÂµuÃ¯om, ktorÃ½ nÃ¡m "
 "dali Sword projekt."
 
 #: src/gs_abouts.c:105
@@ -34,105 +34,105 @@ msgid ""
 "dictionaries, etc.  Many frontends are build using this framework.  An "
 "installed module set may be shared between any frontend using the framework."
 msgstr ""
-"SWORD projekt je úsilie o vytvorenie rozsiahleho softvérového balíka na "
-"vıskum a ¹túdium Boha a Jeho Slova.  Biblickı rámec SWORDu umo¾òuje µahké "
-"ovládanie textu biblie, komentárov, lexikónov, slovníkov atï.  Veµa "
-"frontendov je budovanıch na tomto rámci.  Nain¹talovaná sada modulov mô¾e "
-"by» zdielaná medzi frontendom s pou¾itím rámca."
+"SWORD projekt je Ãºsilie o vytvorenie rozsiahleho softvÃ©rovÃ©ho balÃ­ka na "
+"vÃ½skum a Â¹tÃºdium Boha a Jeho Slova.  BiblickÃ½ rÃ¡mec SWORDu umoÅ¸Ã²uje ÂµahkÃ© "
+"ovlÃ¡danie textu biblie, komentÃ¡rov, lexikÃ³nov, slovnÃ­kov atÃ¯.  VeÂµa "
+"frontendov je budovanÃ½ch na tomto rÃ¡mci.  NainÂ¹talovanÃ¡ sada modulov mÃ´Å¸e "
+"byÂ» zdielanÃ¡ medzi frontendom s pouÅ¸itÃ­m rÃ¡mca."
 
 #: src/gs_abouts.c:170
 msgid "Modules can be downloaded from the Sword Project "
-msgstr "Moduly mô¾u by» stiahnuté zo Sword projektu "
+msgstr "Moduly mÃ´Å¸u byÂ» stiahnutÃ© zo Sword projektu "
 
 #: src/gs_bookmarks.c:117
 msgid "New _Group"
-msgstr "_Nová skupina"
+msgstr "_NovÃ¡ skupina"
 
 #: src/gs_bookmarks.c:118
 msgid "Add a new root group and file"
-msgstr "Prida» novú hlavnú skupinu a súbor"
+msgstr "PridaÂ» novÃº hlavnÃº skupinu a sÃºbor"
 
 #: src/gs_bookmarks.c:123
 msgid "New _SubGroup"
-msgstr "_Nová podskupina"
+msgstr "_NovÃ¡ podskupina"
 
 #: src/gs_bookmarks.c:124
 msgid "Add new SubGroup to selected group"
-msgstr "Prida» novú podskupinu"
+msgstr "PridaÂ» novÃº podskupinu"
 
 #: src/gs_bookmarks.c:129
 msgid "_Insert Item"
-msgstr "_Vlo¾i» polo¾ku"
+msgstr "_VloÅ¸iÂ» poloÅ¸ku"
 
 #: src/gs_bookmarks.c:130
 msgid "Insert new bookmark here"
-msgstr "Sem vlo¾i» novú zálo¾ku"
+msgstr "Sem vloÅ¸iÂ» novÃº zÃ¡loÅ¸ku"
 
 #: src/gs_bookmarks.c:135
 msgid "_Add Item at Root"
-msgstr "_Prida» novú polo¾ku ako koreò"
+msgstr "_PridaÂ» novÃº poloÅ¸ku ako koreÃ²"
 
 #: src/gs_bookmarks.c:136
 msgid "Add new bookmark item"
-msgstr "Prida» novú zálo¾kovú polo¾ku"
+msgstr "PridaÂ» novÃº zÃ¡loÅ¸kovÃº poloÅ¸ku"
 
 #: src/gs_bookmarks.c:141
 msgid "Edit Item"
-msgstr "Upravi» polo¾ku"
+msgstr "UpraviÂ» poloÅ¸ku"
 
 #: src/gs_bookmarks.c:142
 msgid "Edit bookmark item"
-msgstr "Upravi» polo¾ku zálo¾ky"
+msgstr "UpraviÂ» poloÅ¸ku zÃ¡loÅ¸ky"
 
 #: src/gs_bookmarks.c:147
 msgid "Delete Item(s)"
-msgstr "Zmaza» polo¾ku"
+msgstr "ZmazaÂ» poloÅ¸ku"
 
 #: src/gs_bookmarks.c:148
 msgid "Delete item and it's siblings"
-msgstr "Zmaza» polo¾ku a jej súrodencov"
+msgstr "ZmazaÂ» poloÅ¸ku a jej sÃºrodencov"
 
 #: src/gs_bookmarks.c:154
 msgid "Save Bookmarks"
-msgstr "Ulo¾i» zálo¾ky"
+msgstr "UloÅ¸iÂ» zÃ¡loÅ¸ky"
 
 #: src/gs_bookmarks.c:155
 msgid "Save all bookmark files"
-msgstr "Ulo¾í v¹etky súbory so zálo¾kami"
+msgstr "UloÅ¸Ã­ vÂ¹etky sÃºbory so zÃ¡loÅ¸kami"
 
 #: src/gs_bookmarks.c:160
 msgid "Expand All"
-msgstr "V¹etko rozbali»"
+msgstr "VÂ¹etko rozbaliÂ»"
 
 #: src/gs_bookmarks.c:161
 msgid "Expand all Bookmarks groups"
-msgstr "Rozbali» v¹etky skupiny zálo¾iek"
+msgstr "RozbaliÂ» vÂ¹etky skupiny zÃ¡loÅ¸iek"
 
 #: src/gs_bookmarks.c:166
 msgid "Collapse All"
-msgstr "Zbali» v¹etko"
+msgstr "ZbaliÂ» vÂ¹etko"
 
 #: src/gs_bookmarks.c:167
 msgid "Collapse all Bookmarks groups"
-msgstr "Zbali» v¹etky skupiny zálo¾iek"
+msgstr "ZbaliÂ» vÂ¹etky skupiny zÃ¡loÅ¸iek"
 
 #: src/gs_bookmarks.c:172
 msgid "Allow Reordering"
-msgstr "Povoli» preusporiadanie"
+msgstr "PovoliÂ» preusporiadanie"
 
 #: src/gs_bookmarks.c:173
 msgid "Toggle Reording - allow items to be moved by draging"
 msgstr ""
-"Prepnú» preusporiadanie - povoli» polo¾kám, aby mohli by» premiestòované "
-"»ahaním"
+"PrepnÃºÂ» preusporiadanie - povoliÂ» poloÅ¸kÃ¡m, aby mohli byÂ» premiestÃ²ovanÃ© "
+"Â»ahanÃ­m"
 
 #: src/gs_bookmarks.c:836
 msgid "GnomeSword - New Bookmark"
-msgstr "GnomeSword - Nová zálo¾ka"
+msgstr "GnomeSword - NovÃ¡ zÃ¡loÅ¸ka"
 
 #: src/gs_bookmarks.c:837
 msgid "GnomeSword - Edit Bookmark"
-msgstr "GnomeSword - Úprava zálo¾iek"
+msgstr "GnomeSword - Ãšprava zÃ¡loÅ¸iek"
 
 #: src/gs_bookmarks.c:856
 msgid "Label"
@@ -148,19 +148,19 @@ msgstr "Modul"
 
 #: src/gs_detach_int.c:72 src/gs_gui.c:1589 src/gs_gui.c:1600
 msgid "Interlinear"
-msgstr "Interlineárne"
+msgstr "InterlineÃ¡rne"
 
 #: src/gs_detach_int.c:74
 msgid "Interlinear Page"
-msgstr "Interlineárna stránka"
+msgstr "InterlineÃ¡rna strÃ¡nka"
 
 #: src/gs_detach_int.c:210
 msgid "GnomeSWORD - Interlinear Page"
-msgstr "Interlineárna stránka GnomeSWORDu"
+msgstr "InterlineÃ¡rna strÃ¡nka GnomeSWORDu"
 
 #: src/gs_detach_int.c:238 src/gs_viewdict_dlg.c:279
 msgid "button6"
-msgstr "tlaèítko6"
+msgstr "tlaÃ¨Ã­tko6"
 
 #: src/gs_detach_int.c:265 src/gs_gui.c:831
 msgid "Romans"
@@ -172,11 +172,11 @@ msgstr "Rimanom 8:28"
 
 #: src/gs_detach_int.c:298 src/gs_gui.c:872
 msgid "Goto verse"
-msgstr "Ís» na ver¹"
+msgstr "ÃsÂ» na verÂ¹"
 
 #: src/gs_detach_int.c:299 src/gs_gui.c:874
 msgid "Go to verse in free form lookup and add verse to history"
-msgstr "Ís» na ver¹ vo voµnej forme a prida» ver¹ do histórie"
+msgstr "ÃsÂ» na verÂ¹ vo voÂµnej forme a pridaÂ» verÂ¹ do histÃ³rie"
 
 #: src/gs_detach_int.c:313
 msgid "Dock"
@@ -189,72 +189,72 @@ msgstr "GnomeSWORD"
 #: src/gs_editor.c:606 src/gs_editor.c:640
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr "``%s'' bolo modifikované. Prajete si to ulo¾i»?"
+msgstr "``%s'' bolo modifikovanÃ©. Prajete si to uloÅ¸iÂ»?"
 
 #: src/gs_editor.c:624
 msgid "-untitled-"
-msgstr "-bez_názvu-"
+msgstr "-bez_nÃ¡zvu-"
 
 #: src/gs_editor.c:919
 msgid "File"
-msgstr "Súbor"
+msgstr "SÃºbor"
 
 #: src/gs_editor.c:942
 msgid "Save Note"
-msgstr "Ulo¾i» poznámku"
+msgstr "UloÅ¸iÂ» poznÃ¡mku"
 
 #: src/gs_editor.c:952
 msgid "Delete Note"
-msgstr "Zmaza» poznámku"
+msgstr "ZmazaÂ» poznÃ¡mku"
 
 #: src/gs_editor.c:964
 msgid "Open File"
-msgstr "Otvori» súbor"
+msgstr "OtvoriÂ» sÃºbor"
 
 #: src/gs_editor.c:973
 msgid "Save Entry"
-msgstr "Ulo¾i» záznam"
+msgstr "UloÅ¸iÂ» zÃ¡znam"
 
 #: src/gs_editor.c:983
 msgid "Delete Entry"
-msgstr "Zmaza» záznam"
+msgstr "ZmazaÂ» zÃ¡znam"
 
 #: src/gs_editor.c:994
 msgid "New"
-msgstr "Novı"
+msgstr "NovÃ½"
 
 #: src/gs_editor.c:1002
 msgid "Open"
-msgstr "Otvori»"
+msgstr "OtvoriÂ»"
 
 #: src/gs_editor.c:1011
 msgid "Save"
-msgstr "Ulo¾i»"
+msgstr "UloÅ¸iÂ»"
 
 #: src/gs_editor.c:1021
 msgid "Save AS"
-msgstr "Ulo¾i» ako"
+msgstr "UloÅ¸iÂ» ako"
 
 #: src/gs_editor.c:1031 src/gs_gui.c:1113
 msgid "Print"
-msgstr "Tlaèi»"
+msgstr "TlaÃ¨iÂ»"
 
 #: src/gs_editor.c:1041
 msgid "_Edit"
-msgstr "_Upravi»"
+msgstr "_UpraviÂ»"
 
 #: src/gs_editor.c:1063
 msgid "Cut"
-msgstr "Vystrihnú»"
+msgstr "VystrihnÃºÂ»"
 
 #: src/gs_editor.c:1070 src/gs_gui.c:154 src/gs_menu.c:789 src/gs_menu.c:963
 #: src/gs_menu.c:1212 src/sw_gbs.cpp:385
 msgid "Copy"
-msgstr "Kopírova»"
+msgstr "KopÃ­rovaÂ»"
 
 #: src/gs_editor.c:1077
 msgid "Paste"
-msgstr "Vlo¾i»"
+msgstr "VloÅ¸iÂ»"
 
 #: src/gs_editor.c:1085
 msgid "Spell Check"
@@ -262,22 +262,22 @@ msgstr "Kontrola pravopisu"
 
 #: src/gs_editor.c:1093
 msgid "Undo"
-msgstr "Spä»"
+msgstr "SpÃ¤Â»"
 
 #: src/gs_editor.c:1100 src/gs_editor_search.c:86 src/gs_editor_search.c:129
 #: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/gs_find_dlg.c:144
 #: src/sw_gbs.cpp:392
 msgid "Find"
-msgstr "Nájs»"
+msgstr "NÃ¡jsÂ»"
 
 #: src/gs_editor.c:1107 src/gs_editor_search.c:86 src/gs_find_dlg.c:96
 msgid "Find Next"
-msgstr "Nájs» ïal¹í"
+msgstr "NÃ¡jsÂ» Ã¯alÂ¹Ã­"
 
 #: src/gs_editor.c:1119 src/gs_editor_replace.c:88 src/gs_editor_replace.c:150
 #: src/gs_editor_replace.c:162 src/gs_editor_replace.c:208
 msgid "Replace"
-msgstr "Nahradi»"
+msgstr "NahradiÂ»"
 
 #: src/gs_editor.c:1127
 msgid "Link..."
@@ -285,7 +285,7 @@ msgstr "Odkaz..."
 
 #: src/gs_editor.c:1270
 msgid "GnomeSWORD Add Reference Link"
-msgstr "GnomeSword pridanie referenèného odkazu"
+msgstr "GnomeSword pridanie referenÃ¨nÃ©ho odkazu"
 
 #: src/gs_editor.c:1286
 msgid "Reference"
@@ -294,11 +294,11 @@ msgstr "Referencia"
 #: src/gs_editor.c:1302
 msgid "Bible Reference or Module key to display when link is clicked"
 msgstr ""
-"Biblická referencia alebo kµúè modulu, ktorı sa zobrazí pri kliknutí na odkaz"
+"BiblickÃ¡ referencia alebo kÂµÃºÃ¨ modulu, ktorÃ½ sa zobrazÃ­ pri kliknutÃ­ na odkaz"
 
 #: src/gs_editor.c:1326
 msgid "Name of module to show when link is clicked"
-msgstr "Názov modulu, ktorı sa zobrazí pri kliknutí na odkaz"
+msgstr "NÃ¡zov modulu, ktorÃ½ sa zobrazÃ­ pri kliknutÃ­ na odkaz"
 
 #: src/gs_editor_replace.c:87
 msgid "Replace confirmation"
@@ -306,19 +306,19 @@ msgstr "Potvrdenie nahradenia"
 
 #: src/gs_editor_replace.c:88
 msgid "Replace all"
-msgstr "Nahradi» v¹etky"
+msgstr "NahradiÂ» vÂ¹etky"
 
 #: src/gs_editor_replace.c:88
 msgid "Next"
-msgstr "Nasledujúca"
+msgstr "NasledujÃºca"
 
 #: src/gs_editor_replace.c:156
 msgid "search backward"
-msgstr "hµada» dozadu"
+msgstr "hÂµadaÂ» dozadu"
 
 #: src/gs_editor_replace.c:157 src/gs_editor_search.c:89 src/gs_find_dlg.c:99
 msgid "case sensitive"
-msgstr "rozli¹ova» veµkos» písmen"
+msgstr "rozliÂ¹ovaÂ» veÂµkosÂ» pÃ­smen"
 
 #: src/gs_editor_replace.c:165
 msgid "with"
@@ -326,43 +326,43 @@ msgstr "s"
 
 #: src/gs_editor_search.c:88 src/gs_find_dlg.c:98
 msgid "backward"
-msgstr "hµada» dozadu"
+msgstr "hÂµadaÂ» dozadu"
 
 #: src/gs_editor_search.c:129 src/gs_find_dlg.c:144
 msgid "Find Regular Expression"
-msgstr "Hµada» regulárny vıraz"
+msgstr "HÂµadaÂ» regulÃ¡rny vÃ½raz"
 
 #: src/gs_editor_toolbar.c:51
 msgid "Normal"
-msgstr "Normálne"
+msgstr "NormÃ¡lne"
 
 #: src/gs_editor_toolbar.c:52
 msgid "Preformat"
-msgstr "Predformátova»"
+msgstr "PredformÃ¡tovaÂ»"
 
 #: src/gs_editor_toolbar.c:53
 msgid "Header 1"
-msgstr "Hlavièka 1"
+msgstr "HlaviÃ¨ka 1"
 
 #: src/gs_editor_toolbar.c:54
 msgid "Header 2"
-msgstr "Hlavièka 2"
+msgstr "HlaviÃ¨ka 2"
 
 #: src/gs_editor_toolbar.c:55
 msgid "Header 3"
-msgstr "Hlavièka 3"
+msgstr "HlaviÃ¨ka 3"
 
 #: src/gs_editor_toolbar.c:56
 msgid "Header 4"
-msgstr "Hlavièka 4"
+msgstr "HlaviÃ¨ka 4"
 
 #: src/gs_editor_toolbar.c:57
 msgid "Header 5"
-msgstr "Hlavièka 5"
+msgstr "HlaviÃ¨ka 5"
 
 #: src/gs_editor_toolbar.c:58
 msgid "Header 6"
-msgstr "Hlavièka 6"
+msgstr "HlaviÃ¨ka 6"
 
 #: src/gs_editor_toolbar.c:59
 msgid "Address"
@@ -374,27 +374,27 @@ msgstr "Zoznam"
 
 #: src/gs_editor_toolbar.c:61
 msgid "Num List"
-msgstr "Èíslovanı zoznam"
+msgstr "ÃˆÃ­slovanÃ½ zoznam"
 
 #: src/gs_editor_toolbar.c:62
 msgid "Roman List"
-msgstr "Zoznam s rímskymi èíslicami"
+msgstr "Zoznam s rÃ­mskymi Ã¨Ã­slicami"
 
 #: src/gs_editor_toolbar.c:63
 msgid "Alpha List"
-msgstr "Zoznam s písmenami"
+msgstr "Zoznam s pÃ­smenami"
 
 #: src/gs_editor_toolbar.c:291
 msgid "Automatic"
-msgstr "Automatické"
+msgstr "AutomatickÃ©"
 
 #: src/gs_editor_toolbar.c:499
 msgid "Left align"
-msgstr "Zarovna» vµavo"
+msgstr "ZarovnaÂ» vÂµavo"
 
 #: src/gs_editor_toolbar.c:499
 msgid "Left justifies the paragraphs"
-msgstr "Zarovná odstavce vµavo"
+msgstr "ZarovnÃ¡ odstavce vÂµavo"
 
 #: src/gs_editor_toolbar.c:501
 msgid "Center"
@@ -402,63 +402,63 @@ msgstr "Na stred"
 
 #: src/gs_editor_toolbar.c:501
 msgid "Center justifies the paragraphs"
-msgstr "Zarovná odstavce na stred"
+msgstr "ZarovnÃ¡ odstavce na stred"
 
 #: src/gs_editor_toolbar.c:503
 msgid "Right align"
-msgstr "Zarovna» vpravo"
+msgstr "ZarovnaÂ» vpravo"
 
 #: src/gs_editor_toolbar.c:503
 msgid "Right justifies the paragraphs"
-msgstr "Zarovná odstavce vpravo"
+msgstr "ZarovnÃ¡ odstavce vpravo"
 
 #: src/gs_editor_toolbar.c:510
 msgid "Typewriter"
-msgstr "Pevná ¹írka"
+msgstr "PevnÃ¡ Â¹Ã­rka"
 
 #: src/gs_editor_toolbar.c:510
 msgid "Toggle typewriter font style"
-msgstr "Prepne ¹tıl písma na pevnú ¹írku"
+msgstr "Prepne Â¹tÃ½l pÃ­sma na pevnÃº Â¹Ã­rku"
 
 #: src/gs_editor_toolbar.c:512
 msgid "Bold"
-msgstr "Tuèné"
+msgstr "TuÃ¨nÃ©"
 
 #: src/gs_editor_toolbar.c:512
 msgid "Makes the text bold"
-msgstr "Nastaví vıber na tuèné písmo"
+msgstr "NastavÃ­ vÃ½ber na tuÃ¨nÃ© pÃ­smo"
 
 #: src/gs_editor_toolbar.c:514
 msgid "Italic"
-msgstr "©ikmé"
+msgstr "Â©ikmÃ©"
 
 #: src/gs_editor_toolbar.c:514
 msgid "Makes the text italic"
-msgstr "Nastaví vıber na ¹ikmé písmo"
+msgstr "NastavÃ­ vÃ½ber na Â¹ikmÃ© pÃ­smo"
 
 #: src/gs_editor_toolbar.c:516
 msgid "Underline"
-msgstr "Podèiarknuté"
+msgstr "PodÃ¨iarknutÃ©"
 
 #: src/gs_editor_toolbar.c:516
 msgid "Underlines the text"
-msgstr "Podèiarkne text"
+msgstr "PodÃ¨iarkne text"
 
 #: src/gs_editor_toolbar.c:518
 msgid "Strikeout"
-msgstr "Preèiarknuté"
+msgstr "PreÃ¨iarknutÃ©"
 
 #: src/gs_editor_toolbar.c:518
 msgid "Strikes out the text"
-msgstr "Preèiarkne text"
+msgstr "PreÃ¨iarkne text"
 
 #: src/gs_editor_toolbar.c:527
 msgid "Unindent"
-msgstr "Zru¹i» odsadenie"
+msgstr "ZruÂ¹iÂ» odsadenie"
 
 #: src/gs_editor_toolbar.c:527
 msgid "Indents the paragraphs less"
-msgstr "Zmen¹í odsadenie odstavcov"
+msgstr "ZmenÂ¹Ã­ odsadenie odstavcov"
 
 #: src/gs_editor_toolbar.c:529
 msgid "Indent"
@@ -466,75 +466,75 @@ msgstr "Odsadenie"
 
 #: src/gs_editor_toolbar.c:529
 msgid "Indents the paragraphs more"
-msgstr "Zväè¹í odsadenie odstavcov"
+msgstr "ZvÃ¤Ã¨Â¹Ã­ odsadenie odstavcov"
 
 #: src/gs_file.c:398
 msgid "GnomeSword - Open Note File"
-msgstr "GnomeSword - Otvori» poznámkovı súbor"
+msgstr "GnomeSword - OtvoriÂ» poznÃ¡mkovÃ½ sÃºbor"
 
 #: src/gs_file.c:433
 msgid "GomeSword - Save Note File"
-msgstr "GnomeSword - Ulo¾i» poznámkovı súbor"
+msgstr "GnomeSword - UloÅ¸iÂ» poznÃ¡mkovÃ½ sÃºbor"
 
 #: src/gs_gnomesword.c:161
 msgid "_Settings/"
-msgstr "_Nastavenia/"
+msgstr "_Nastavenie/"
 
 #: src/gs_gnomesword.c:161
 msgid "Verse Style"
-msgstr "©tıl ver¹a"
+msgstr "Â©tÃ½l verÂ¹a"
 
 #: src/gs_gnomesword.c:411
 msgid "_Quickmarks/<Separator>"
-msgstr "_Rıchle znaèky/<Separator>"
+msgstr "_RÃ½chle znaÃ¨ky/<Separator>"
 
 #: src/gs_gnomesword.c:412 src/gs_mainmenu_cb.c:151
 msgid "_Quickmarks/Clear Quickmarks"
-msgstr "_Rıchle znaèky/Zmaza» Rıchle znaèky"
+msgstr "_RÃ½chle znaÃ¨ky/ZmazaÂ» RÃ½chle znaÃ¨ky"
 
 #: src/gs_gui.c:155
 msgid "Copy highlighted text from main window"
-msgstr "Kopírova» vyznaèenú textovú formu v hlavnom okne"
+msgstr "KopÃ­rovaÂ» vyznaÃ¨enÃº textovÃº formu v hlavnom okne"
 
 #: src/gs_gui.c:161 src/gs_shortcutbar.c:2070
 msgid "Search"
-msgstr "Hµada»"
+msgstr "HÂµadaÂ»"
 
 #: src/gs_gui.c:162
 msgid "Open search dialog"
-msgstr "Otvori» dialóg vyhµadávania"
+msgstr "OtvoriÂ» dialÃ³g vyhÂµadÃ¡vania"
 
 #: src/gs_gui.c:171
 msgid "Add Quickmark"
-msgstr "Prida» Rıchlu znaèku"
+msgstr "PridaÂ» RÃ½chlu znaÃ¨ku"
 
 #: src/gs_gui.c:172
 msgid "Add current verse to Quickmarks menu"
-msgstr "Prida» aktuálny ver¹ do ponuky Rıchlych  znaèiek"
+msgstr "PridaÂ» aktuÃ¡lny verÂ¹ do ponuky RÃ½chlych  znaÃ¨iek"
 
-#: src/gs_gui.c:177
+#: src/gs_gui.c:177Nastavenie
 msgid "Clear Quickmarks"
-msgstr "Zmaza» rıchle znaèky"
+msgstr "ZmazaÂ» rÃ½chle znaÃ¨ky"
 
 #: src/gs_gui.c:178
 msgid "Edit Quickmarks"
-msgstr "Upravi» Rıchle znaèky"
+msgstr "UpraviÂ» RÃ½chle znaÃ¨ky"
 
 #: src/gs_gui.c:188
 msgid "C_lear"
-msgstr "Vyèis_ti»"
+msgstr "VyÃ¨is_tiÂ»"
 
 #: src/gs_gui.c:189
 msgid "Clear history list"
-msgstr "Vymaza» históriu"
+msgstr "VymazaÂ» histÃ³riu"
 
 #: src/gs_gui.c:199
 msgid "Daily Devotion"
-msgstr "Denné zamyslenie"
+msgstr "DennÃ© zamyslenie"
 
 #: src/gs_gui.c:200
 msgid "Show the Daily Devotion for Today"
-msgstr "Zobrazi» dne¹né denné zamyslenie"
+msgstr "ZobraziÂ» dneÂ¹nÃ© dennÃ© zamyslenie"
 
 #: src/gs_gui.c:214 src/gs_menu.c:1234 src/gs_viewtext_dlg.c:473
 msgid "Module Options"
@@ -542,20 +542,20 @@ msgstr "Nastavenia modulov"
 
 #: src/gs_gui.c:245
 msgid "Bible Texts"
-msgstr "Biblické texty"
+msgstr "BiblickÃ© texty"
 
 #: src/gs_gui.c:246
 msgid "Information about Bible texts"
-msgstr "Informácie o biblickıch textoch"
+msgstr "InformÃ¡cie o biblickÃ½ch textoch"
 
 #: src/gs_gui.c:251 src/gs_gui.c:1156 src/gs_gui.c:1165
 #: src/gs_shortcutbar.c:1944
 msgid "Commentaries"
-msgstr "Komentáre"
+msgstr "KomentÃ¡re"
 
 #: src/gs_gui.c:257
 msgid "Dictionaries-Lexicons"
-msgstr "Slovníky-lexikóny"
+msgstr "SlovnÃ­ky-lexikÃ³ny"
 
 #: src/gs_gui.c:263 src/gs_gui.c:1539 src/gs_gui.c:1552
 msgid "Books"
@@ -567,7 +567,7 @@ msgstr "Obsah"
 
 #: src/gs_gui.c:274
 msgid "Help Contents"
-msgstr "Obsah pomocníka"
+msgstr "Obsah pomocnÃ­ka"
 
 #: src/gs_gui.c:279
 msgid "About the Sword Project..."
@@ -575,7 +575,7 @@ msgstr "O Sword projekte..."
 
 #: src/gs_gui.c:280
 msgid "Infotmation About The Sword Project"
-msgstr "Informácie o Sword projekte"
+msgstr "InformÃ¡cie o Sword projekte"
 
 #: src/gs_gui.c:285
 msgid "About Sword Modules"
@@ -583,7 +583,7 @@ msgstr "O Sword moduloch"
 
 #: src/gs_gui.c:286
 msgid "Information about the installed modules"
-msgstr "Informácie o nain¹talovanıch moduloch"
+msgstr "InformÃ¡cie o nainÂ¹talovanÃ½ch moduloch"
 
 #: src/gs_gui.c:292
 msgid "About GnomeSword..."
@@ -595,75 +595,75 @@ msgstr "O GnomeSword"
 
 #: src/gs_gui.c:304
 msgid "_Quickmarks"
-msgstr "_Rıchle znaèky"
+msgstr "_RÃ½chle znaÃ¨ky"
 
 #: src/gs_gui.c:310
 msgid "_History"
-msgstr "_História"
+msgstr "_HistÃ³ria"
 
 #: src/gs_gui.c:436
 msgid "GnomeSWORD - Bible Study Software"
-msgstr "GnomeSword - softvér na ¹túdium biblie"
+msgstr "GnomeSword - softvÃ©r na Â¹tÃºdium biblie"
 
 #: src/gs_gui.c:669
 msgid "Detach/Attach Shortcut Bar"
-msgstr "Prida»/Odobra» panel so skratkami"
+msgstr "PridaÂ»/OdobraÂ» panel so skratkami"
 
 #: src/gs_gui.c:684
 msgid "Hide/Show Shortcut Bar"
-msgstr "Zobrazi»/Skry» panel so skratkami"
+msgstr "ZobraziÂ»/SkryÂ» panel so skratkami"
 
 #: src/gs_gui.c:708
 msgid "Toggle Strongs Numbers"
-msgstr "Prepnú» Strongové èísla"
+msgstr "PrepnÃºÂ» StrongovÃ© Ã¨Ã­sla"
 
 #: src/gs_gui.c:722
 msgid "Toggle Morphological Tags"
-msgstr "Zobrazi» morfologické znaèky"
+msgstr "ZobraziÂ» morfologickÃ© znaÃ¨ky"
 
 #: src/gs_gui.c:736
 msgid "Toggle Footnotes"
-msgstr "Prenú» poznámky pod èiarou"
+msgstr "PrenÃºÂ» poznÃ¡mky pod Ã¨iarou"
 
 #: src/gs_gui.c:888
 msgid "Back"
-msgstr "Predchádzajúci"
+msgstr "PredchÃ¡dzajÃºci"
 
 #: src/gs_gui.c:890
 msgid "Go backward through history list"
-msgstr "Ís» na na predchádzajúcu polo¾ku v histórií"
+msgstr "ÃsÂ» na na predchÃ¡dzajÃºcu poloÅ¸ku v histÃ³riÃ­"
 
 #: src/gs_gui.c:905
 msgid "Foward"
-msgstr "Nasledujúci"
+msgstr "NasledujÃºci"
 
 #: src/gs_gui.c:906
 msgid "Go foward through history list"
-msgstr "Ís» na nasledujúcu polo¾ku v histórií"
+msgstr "ÃsÂ» na nasledujÃºcu poloÅ¸ku v histÃ³riÃ­"
 
 #: src/gs_gui.c:1059
 msgid "Synchronize"
-msgstr "Synchronizova»"
+msgstr "SynchronizovaÂ»"
 
 #: src/gs_gui.c:1061
 msgid "Synchronize Commentary with Bible Text"
-msgstr "Synchronizova» komentár s textom biblie"
+msgstr "SynchronizovaÂ» komentÃ¡r s textom biblie"
 
 #: src/gs_gui.c:1075
 msgid "button2"
-msgstr "tlaèítko2"
+msgstr "tlaÃ¨Ã­tko2"
 
 #: src/gs_gui.c:1089
 msgid "button3"
-msgstr "tlaèítko3"
+msgstr "tlaÃ¨Ã­tko3"
 
 #: src/gs_gui.c:1113
 msgid "Print this Comment"
-msgstr "Vytlaèi» tento komentár"
+msgstr "VytlaÃ¨iÂ» tento komentÃ¡r"
 
 #: src/gs_gui.c:1267 src/gs_gui.c:1281 src/gs_preferences_dlg.c:1204
 msgid "Personal Comments"
-msgstr "Osobné komentáre"
+msgstr "OsobnÃ© komentÃ¡re"
 
 #.
 #. gnome_app_add_toolbar (GNOME_APP (s->app),
@@ -674,66 +674,66 @@ msgstr "Osobné komentáre"
 #.
 #: src/gs_gui.c:1293 src/gs_gui.c:1307
 msgid "Study Pad"
-msgstr "©tudijnı blok"
+msgstr "Â©tudijnÃ½ blok"
 
 #: src/gs_gui.c:1513 src/gs_gui.c:1524 src/gs_preferences_dlg.c:1661
 #: src/gs_setup.c:562 src/gs_shortcutbar.c:1969
 msgid "Dict/Lex"
-msgstr "Slovník-Lexikón"
+msgstr "SlovnÃ­k-LexikÃ³n"
 
 #: src/gs_history.c:66 src/gs_history.c:185 src/gs_history.c:189
 msgid "_History/<Separator>"
-msgstr "_História/<Separator>"
+msgstr "_HistÃ³ria/<Separator>"
 
 #: src/gs_history.c:67 src/gs_history.c:186
 msgid "_History/C_lear"
-msgstr "_História/_Vymaza»"
+msgstr "_HistÃ³ria/_VymazaÂ»"
 
 #: src/gs_html.c:112
 #, c-format
 msgid "Show %s in main window"
-msgstr "Zobrazi» %s v hlavnom okne"
+msgstr "ZobraziÂ» %s v hlavnom okne"
 
 #: src/gs_html.c:175
 #, c-format
 msgid "Go to %s"
-msgstr "Ís» na %s"
+msgstr "ÃsÂ» na %s"
 
 #: src/gs_info_box.c:58
 msgid "GnomeSword - InfoBox"
-msgstr "GnomeSword - Informácie"
+msgstr "GnomeSword - InformÃ¡cie"
 
 #: src/gs_info_box.c:99
 msgid "in StudyPad is not saved!"
-msgstr "v ©tudijnom bloku nie je ulo¾ené!"
+msgstr "v Â©tudijnom bloku nie je uloÅ¸enÃ©!"
 
 #: src/gs_info_box.c:107
 msgid "Shall I save it?"
-msgstr "Mám to ulo¾i»?"
+msgstr "MÃ¡m to uloÅ¸iÂ»?"
 
 #: src/gs_mainmenu_cb.c:84
 msgid "Cannot launch gnome-help-browser"
-msgstr "Gnome-prehliadaè-pomocníka sa nedá spusti»"
+msgstr "Gnome-prehliadaÃ¨-pomocnÃ­ka sa nedÃ¡ spustiÂ»"
 
 #: src/gs_menu.c:84
 msgid "_Settings/Module Options/"
-msgstr "_Nastavenia/Nastavenia modulov/"
+msgstr "_Nastavenie/Nastavenia modulov/"
 
 #: src/gs_menu.c:113
 msgid "Strong's Numbers"
-msgstr "Zobrazi» Strongové èísla"
+msgstr "ZobraziÂ» StrongovÃ© Ã¨Ã­sla"
 
 #: src/gs_menu.c:118
 msgid "Footnotes"
-msgstr "Poznámky pod èiarou"
+msgstr "PoznÃ¡mky pod Ã¨iarou"
 
 #: src/gs_menu.c:123
 msgid "Morphological Tags"
-msgstr "Morfologické znaèky"
+msgstr "MorfologickÃ© znaÃ¨ky"
 
 #: src/gs_menu.c:128
 msgid "Hebrew Vowel Points"
-msgstr "Body hebrejskıch samohlások"
+msgstr "Body hebrejskÃ½ch samohlÃ¡sok"
 
 #: src/gs_menu.c:133
 msgid "Hebrew Cantillation"
@@ -741,11 +741,11 @@ msgstr ""
 
 #: src/gs_menu.c:138
 msgid "Greek Accents"
-msgstr "Grécke akcenty"
+msgstr "GrÃ©cke akcenty"
 
 #: src/gs_menu.c:143
 msgid "Scripture Cross-references"
-msgstr "Krí¾ové referencie Písma"
+msgstr "KrÃ­Å¸ovÃ© referencie PÃ­sma"
 
 #: src/gs_menu.c:148
 msgid "Lemmas"
@@ -753,65 +753,65 @@ msgstr "Nadpisy"
 
 #: src/gs_menu.c:153
 msgid "Headings"
-msgstr "Hlavièky"
+msgstr "HlaviÃ¨ky"
 
 #: src/gs_menu.c:329
 msgid "_Help/About Sword Modules/Bible Texts/<Separator>"
-msgstr "_Pomocník/O Sword moduloch/Texty biblií/<Oddelovaè>"
+msgstr "_PomocnÃ­k/O Sword moduloch/BiblickÃ© texty/<Separator>"
 
 #: src/gs_menu.c:330
 msgid "_Help/About Sword Modules/Commentaries/<Separator>"
-msgstr "_Pomocník/O Sword moduloch/Komentáre/<Oddelovaè>"
+msgstr "_PomocnÃ­k/O Sword moduloch/KomentÃ¡re/<Separator>"
 
 #: src/gs_menu.c:331
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>"
-msgstr "_Pomocník/O Sword moduloch/Slovníky-lexikóny/<Oddelovaè>"
+msgstr "_PomocnÃ­k/O Sword moduloch/SlovnÃ­ky-lexikÃ³ny/<Separator>"
 
 #: src/gs_menu.c:343
 msgid "_Help/About Sword Modules/Bible Texts/"
-msgstr "_Pomocník/O Sword moduloch/Texty biblií"
+msgstr "_PomocnÃ­k/O Sword moduloch/BiblickÃ© texty/"
 
 #: src/gs_menu.c:356
 msgid "_Help/About Sword Modules/Commentaries/"
-msgstr "_Pomocník/O Sword moduloch/Komentáre"
+msgstr "_PomocnÃ­k/O Sword moduloch/KomentÃ¡re/"
 
 #: src/gs_menu.c:366
 msgid "StrongsHebrew"
-msgstr "Hebrejské strongy"
+msgstr "HebrejskÃ© strongy"
 
 #: src/gs_menu.c:367
 msgid "StrongsGreek"
-msgstr "Grécke strongy"
+msgstr "GrÃ©cke strongy"
 
 #: src/gs_menu.c:371
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
-msgstr "_Pomocník/O Sword moduloch/Slovníky-lexikóny/"
+msgstr "_PomocnÃ­k/O Sword moduloch/SlovnÃ­ky-lexikÃ³ny/"
 
 #. * book modules *
 #: src/gs_menu.c:378
 msgid "_Help/About Sword Modules/Books/<Separator>"
-msgstr "_Pomocník/O Sword moduloch/<Oddelovaè>"
+msgstr "_PomocnÃ­k/O Sword moduloch/Knihy/<Separator>"
 
 #: src/gs_menu.c:384
 msgid "_Help/About Sword Modules/Books/"
-msgstr "_Pomocník/O Sword moduloch/Knihy/"
+msgstr "_PomocnÃ­k/O Sword moduloch/Knihy/"
 
 #: src/gs_menu.c:796
 msgid "Goto Reference"
-msgstr "Ís» na referenciu"
+msgstr "ÃsÂ» na referenciu"
 
 #: src/gs_menu.c:804 src/gs_menu.c:970 src/sw_gbs.cpp:414
 msgid "Lookup Word"
-msgstr "Hµada» slovo"
+msgstr "HÂµadaÂ» slovo"
 
 #. ** add bookmark menu **
 #: src/gs_menu.c:812 src/gs_menu.c:1028
 msgid "Add Bookmark"
-msgstr "Prida» zálo¾ku"
+msgstr "PridaÂ» zÃ¡loÅ¸ku"
 
 #: src/gs_menu.c:819
 msgid "Add dict/lex key and module to Presonal Bookmarks"
-msgstr "Prida» kµúè slovníka/lexikónu a modul do Osobnıch zálo¾iek"
+msgstr "PridaÂ» kÂµÃºÃ¨ slovnÃ­ka/lexikÃ³nu a modul do OsobnÃ½ch zÃ¡loÅ¸iek"
 
 #: src/gs_menu.c:831 src/gs_menu.c:1057
 msgid "About this module"
@@ -819,47 +819,47 @@ msgstr "O tomto module"
 
 #: src/gs_menu.c:839 src/gs_menu.c:1047 src/sw_gbs.cpp:399
 msgid "Show Tabs"
-msgstr "Zobrazi» u¹ká"
+msgstr "ZobraziÂ» uÂ¹kÃ¡"
 
 #: src/gs_menu.c:846 src/gs_menu.c:1054
 msgid "Show notebook tabs"
-msgstr "Ukáza» zálo¾ky notesu"
+msgstr "UkÃ¡zaÂ» zÃ¡loÅ¸ky notesu"
 
 #: src/gs_menu.c:849
 msgid "View in New Window"
-msgstr "Zobrazi» v novom okne"
+msgstr "ZobraziÂ» v novom okne"
 
 #: src/gs_menu.c:856
 msgid "View this module in a new window"
-msgstr "Zobrazi» tento modul v novom okne"
+msgstr "ZobraziÂ» tento modul v novom okne"
 
 #: src/gs_menu.c:868 src/gs_menu.c:1095
 msgid "View Module"
-msgstr "Zobrazi» modul"
+msgstr "ZobraziÂ» modul"
 
 #: src/gs_menu.c:983 src/gs_menu.c:1012
 msgid "Use Current Dictionary"
-msgstr "Pou¾i» aktuálny slovník"
+msgstr "PouÅ¸iÂ» aktuÃ¡lny slovnÃ­k"
 
 #: src/gs_menu.c:998 src/sw_gbs.cpp:436
 msgid "Lookup Selection"
-msgstr "Hµada» vıber"
+msgstr "HÂµadaÂ»Â vÃ½ber"
 
 #: src/gs_menu.c:1035
 msgid "Add current verse to Presonal Bookmarks"
-msgstr "Prida» aktuálny ver¹ do osobnıch zálo¾iek"
+msgstr "PridaÂ» aktuÃ¡lny verÂ¹ do osobnÃ½ch zÃ¡loÅ¸iek"
 
 #: src/gs_menu.c:1064
 msgid "View Text in new window"
-msgstr "Zobrazi» text v novom okne"
+msgstr "ZobraziÂ» text v novom okne"
 
 #: src/gs_menu.c:1079
 msgid "Unlock This Module"
-msgstr "Odomknú» tento modul"
+msgstr "OdomknÃºÂ» tento modul"
 
 #: src/gs_menu.c:1227
 msgid "Detach/Attach"
-msgstr "Pripoji»/Odobra»"
+msgstr "PripojiÂ»/OdobraÂ»"
 
 #: src/gs_preferences_dlg.c:617
 msgid "GnomeSword - Settings"
@@ -867,11 +867,11 @@ msgstr "GnomeSword - nastavenia"
 
 #: src/gs_preferences_dlg.c:665 src/gs_preferences_dlg.c:2225
 msgid "Font Colors and Sizes"
-msgstr "Farba písma a veµkos»"
+msgstr "Farba pÃ­sma a veÂµkosÂ»"
 
 #: src/gs_preferences_dlg.c:688
 msgid "Font Size"
-msgstr "Veµkos» písma"
+msgstr "VeÂµkosÂ» pÃ­sma"
 
 #: src/gs_preferences_dlg.c:700
 msgid "Background Color"
@@ -883,19 +883,19 @@ msgstr "Farba textu"
 
 #: src/gs_preferences_dlg.c:724
 msgid "Current Verse Color"
-msgstr "Aktuálna farba ver¹u"
+msgstr "AktuÃ¡lna farba verÂ¹u"
 
 #: src/gs_preferences_dlg.c:736
 msgid "Current Verse Background Color"
-msgstr "Farba pozadia aktuálneho ver¹a"
+msgstr "Farba pozadia aktuÃ¡lneho verÂ¹a"
 
 #: src/gs_preferences_dlg.c:749
 msgid "Verse Numbers"
-msgstr "Èíslo ver¹a"
+msgstr "ÃˆÃ­slo verÂ¹a"
 
 #: src/gs_preferences_dlg.c:761
 msgid "Verse Number Font Size"
-msgstr "Veµkos» písma èísel ver¹ov"
+msgstr "VeÂµkosÂ» pÃ­sma Ã¨Ã­sel verÂ¹ov"
 
 #: src/gs_preferences_dlg.c:773
 msgid "Link Color"
@@ -903,23 +903,23 @@ msgstr "Farba odkazu"
 
 #: src/gs_preferences_dlg.c:785
 msgid "Greek Font"
-msgstr "Grécke písmo"
+msgstr "GrÃ©cke pÃ­smo"
 
 #: src/gs_preferences_dlg.c:796
 msgid "Hebrew Font"
-msgstr "Hebrejské písmo"
+msgstr "HebrejskÃ© pÃ­smo"
 
 #: src/gs_preferences_dlg.c:807
 msgid "Unicode Font"
-msgstr "Písmo pre unicode"
+msgstr "PÃ­smo pre unicode"
 
 #: src/gs_preferences_dlg.c:840
 msgid "Pick a color for Background"
-msgstr "Zvoµte farbu pre pozadie"
+msgstr "ZvoÂµte farbu pre pozadie"
 
 #: src/gs_preferences_dlg.c:852
 msgid "Pick a color for Bible Text"
-msgstr "Zvoµte farbu pre biblickı text"
+msgstr "ZvoÂµte farbu pre biblickÃ½ text"
 
 #: src/gs_preferences_dlg.c:866 src/gs_preferences_dlg.c:992
 msgid "-2"
@@ -956,31 +956,31 @@ msgstr "+5\r"
 
 #: src/gs_preferences_dlg.c:893 src/gs_preferences_dlg.c:1019
 msgid "Zero is base font size Go up or down from there"
-msgstr "Nula je základná veµkos» písma Choïte hore alebo dolu z tadiaµto"
+msgstr "Nula je zÃ¡kladnÃ¡ veÂµkosÂ» pÃ­sma ChoÃ¯te hore alebo dolu z tadiaÂµto"
 
 #: src/gs_preferences_dlg.c:907
 msgid "Pick a color - CurrentVerse BG"
-msgstr "Zvoµte farbu - Aktuálny ver¹ pozadie"
+msgstr "ZvoÂµte farbu - AktuÃ¡lny verÂ¹ pozadie"
 
 #: src/gs_preferences_dlg.c:919
 msgid "Pick a color for Current Verse"
-msgstr "Zvoµte farbu pre aktuálny ver¹"
+msgstr "ZvoÂµte farbu pre aktuÃ¡lny verÂ¹"
 
 #: src/gs_preferences_dlg.c:942
 msgid "Strongs Numbers & Morph Tags"
-msgstr "Strongové èísla a morf oznaèenia"
+msgstr "StrongovÃ© Ã¨Ã­sla a morf oznaÃ¨enia"
 
 #: src/gs_preferences_dlg.c:1023
 msgid "Default Font"
-msgstr "©tandardné písmo"
+msgstr "Â©tandardnÃ© pÃ­smo"
 
 #: src/gs_preferences_dlg.c:1035
 msgid "GnomeSword Defaults"
-msgstr "©tandardné GnomeSword"
+msgstr "Â©tandardnÃ© GnomeSword"
 
 #: src/gs_preferences_dlg.c:1045
 msgid "Use GnomeSword defaults for all settings on this page"
-msgstr "Pou¾i» ¹tandard GnomeSword pre v¹etky nastavenia na tejto strane"
+msgstr "PouÅ¸iÂ» Â¹tandard GnomeSword pre vÂ¹etky nastavenia na tejto strane"
 
 #: src/gs_preferences_dlg.c:1050
 msgid "Bible Text Window"
@@ -988,55 +988,55 @@ msgstr "Okno s textom Biblie"
 
 #: src/gs_preferences_dlg.c:1102
 msgid "Use Defaults When Opening GnomeSword"
-msgstr "Pri otvorení GnomeSword pou¾i»¹tandardné nastavenia"
+msgstr "Pri otvorenÃ­ GnomeSword pouÅ¸iÂ»Â¹tandardnÃ© nastavenia"
 
 #: src/gs_preferences_dlg.c:1120
 msgid "Yes, use defaults that I select"
-msgstr "Áno, pou¾i» ¹tandardné, ktoré som zvolil"
+msgstr "Ãno, pouÅ¸iÂ» Â¹tandardnÃ©, ktorÃ© som zvolil"
 
 #: src/gs_preferences_dlg.c:1134
 msgid ""
 "No, use settings saved\n"
 "on last GnomeSword run"
 msgstr ""
-"Nie, pou¾i nastavenie, ktoré ulo¾ené\n"
-"pri poslednom spustení GnomeSword"
+"Nie, pouÅ¸i nastavenie, ktorÃ© uloÅ¸enÃ©\n"
+"pri poslednom spustenÃ­ GnomeSword"
 
 #: src/gs_preferences_dlg.c:1147
 msgid "Show Bible Texts notebook tabs"
-msgstr "Zobrazi» u¹ká Biblií"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ BibliÃ­"
 
 #: src/gs_preferences_dlg.c:1158
 msgid "Show Commentary notebook tabs"
-msgstr "Zobrazi» u¹ká Komentárov"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ KomentÃ¡rov"
 
 #: src/gs_preferences_dlg.c:1169
 msgid "Show Dict/Lex notebook tabs"
-msgstr "Zobrazi» u¹ká Lexikónov"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ LexikÃ³nov"
 
 #: src/gs_preferences_dlg.c:1179 src/gs_setup.c:739
 msgid "Use Verse Style"
-msgstr "Pou¾i» ¹tıl ver¹a"
+msgstr "PouÅ¸iÂ» Â¹tÃ½l verÂ¹a"
 
 #: src/gs_preferences_dlg.c:1191
 msgid "Show Daily Devotion"
-msgstr "Zobrazi» Denné zamyslenia"
+msgstr "ZobraziÂ» DennÃ© zamyslenia"
 
 #: src/gs_preferences_dlg.c:1201
 msgid "Show Daily Devotion if you have a Devotion module"
-msgstr "Zobrazí Denné zamyslenia, ak máte modul Zamyslenia (Devotion)"
+msgstr "ZobrazÃ­ DennÃ© zamyslenia, ak mÃ¡te modul Zamyslenia (Devotion)"
 
 #: src/gs_preferences_dlg.c:1220
 msgid "Use Formatting"
-msgstr "Pou¾i» formátovanie"
+msgstr "PouÅ¸iÂ» formÃ¡tovanie"
 
 #: src/gs_preferences_dlg.c:1228
 msgid "Use HTML tags to format notes"
-msgstr "Pou¾i» HTML znaèky pre formátovanie poznámok"
+msgstr "PouÅ¸iÂ» HTML znaÃ¨ky pre formÃ¡tovanie poznÃ¡mok"
 
 #: src/gs_preferences_dlg.c:1230
 msgid "Auto Save"
-msgstr "Automaticky ulo¾i»"
+msgstr "Automaticky uloÅ¸iÂ»"
 
 #: src/gs_preferences_dlg.c:1241
 msgid "Interface"
@@ -1044,27 +1044,27 @@ msgstr "Rozhranie"
 
 #: src/gs_preferences_dlg.c:1272 src/gs_preferences_dlg.c:2236
 msgid "Layout"
-msgstr "Rozlo¾enie"
+msgstr "RozloÅ¸enie"
 
 #: src/gs_preferences_dlg.c:1288
 msgid "App Width"
-msgstr "©írka Ap."
+msgstr "Â©Ã­rka Ap."
 
 #: src/gs_preferences_dlg.c:1299
 msgid "ShortCut Bar Width"
-msgstr "©írka panela skratiek"
+msgstr "Â©Ã­rka panela skratiek"
 
 #: src/gs_preferences_dlg.c:1310
 msgid "Upper Pane Height"
-msgstr "Horná vı¹ka sekcie"
+msgstr "HornÃ¡ vÃ½Â¹ka sekcie"
 
 #: src/gs_preferences_dlg.c:1357
 msgid "App Height"
-msgstr "©írka Ap."
+msgstr "Â©Ã­rka Ap."
 
 #: src/gs_preferences_dlg.c:1380
 msgid "Bible Pane Width"
-msgstr "©írka sekcie biblia"
+msgstr "Â©Ã­rka sekcie biblia"
 
 #: src/gs_preferences_dlg.c:1403
 msgid "label190"
@@ -1076,35 +1076,35 @@ msgstr "Panel skratiek"
 
 #: src/gs_preferences_dlg.c:1457
 msgid "Show Shortcut bar"
-msgstr "Zobrazi» panel so skratkami"
+msgstr "ZobraziÂ» panel so skratkami"
 
 #: src/gs_preferences_dlg.c:1466
 msgid "Show Favorites Group"
-msgstr "Zobrazi» skupinu obµúbenıch"
+msgstr "ZobraziÂ» skupinu obÂµÃºbenÃ½ch"
 
 #: src/gs_preferences_dlg.c:1476
 msgid "Show Bible Text Group"
-msgstr "Zobrazi» skupinu Biblii"
+msgstr "ZobraziÂ» skupinu Biblii"
 
 #: src/gs_preferences_dlg.c:1486
 msgid "Show Commentary Group"
-msgstr "Zobrazi» skupinu Komentárov"
+msgstr "ZobraziÂ» skupinu KomentÃ¡rov"
 
 #: src/gs_preferences_dlg.c:1496
 msgid "Show Dict/Lex Group"
-msgstr "Zobrazi» skupinu Lexikónov"
+msgstr "ZobraziÂ» skupinu LexikÃ³nov"
 
 #: src/gs_preferences_dlg.c:1506
 msgid "Show Book Group"
-msgstr "Zobrazi» skupinu kníh"
+msgstr "ZobraziÂ» skupinu knÃ­h"
 
 #: src/gs_preferences_dlg.c:1516
 msgid "Show History Group"
-msgstr "Zobrazi» skupinu História"
+msgstr "ZobraziÂ» skupinu HistÃ³ria"
 
 #: src/gs_preferences_dlg.c:1527
 msgid "Dock Shortcut Bar"
-msgstr "Panel so skratkami da» do doku"
+msgstr "Panel so skratkami daÂ» do doku"
 
 #: src/gs_preferences_dlg.c:1538
 msgid "label189"
@@ -1112,15 +1112,15 @@ msgstr "popis189"
 
 #: src/gs_preferences_dlg.c:1576 src/gs_setup.c:473
 msgid "Main Text Module"
-msgstr "Hlavnı textovı modul"
+msgstr "HlavnÃ½ textovÃ½ modul"
 
 #: src/gs_preferences_dlg.c:1650 src/gs_setup.c:551
 msgid "Commentary"
-msgstr "Komentár"
+msgstr "KomentÃ¡r"
 
 #: src/gs_preferences_dlg.c:1672 src/gs_setup.c:573
 msgid "Personal"
-msgstr "Osobné"
+msgstr "OsobnÃ©"
 
 #: src/gs_preferences_dlg.c:1748 src/gs_setup.c:664
 msgid "Interlinear 5"
@@ -1144,15 +1144,15 @@ msgstr "Interlinearny 1"
 
 #: src/gs_preferences_dlg.c:1808
 msgid "Daily Devotional"
-msgstr "Denné zamyslenie"
+msgstr "DennÃ© zamyslenie"
 
 #: src/gs_preferences_dlg.c:1836
 msgid "Greek Lexicon"
-msgstr "Grécky lexikón"
+msgstr "GrÃ©cky lexikÃ³n"
 
 #: src/gs_preferences_dlg.c:1881
 msgid "Hebrew Lexicon"
-msgstr "Hebrejskı lexikón"
+msgstr "HebrejskÃ½ lexikÃ³n"
 
 #: src/gs_preferences_dlg.c:1909 src/gs_preferences_dlg.c:2246
 msgid "Sword Modules"
@@ -1164,7 +1164,7 @@ msgstr "Nastavenia"
 
 #: src/gs_preferences_dlg.c:2230
 msgid "Misc Interface Settings"
-msgstr "Ostatné nastavenia rozhrania"
+msgstr "OstatnÃ© nastavenia rozhrania"
 
 #: src/gs_preferences_dlg.c:2241
 msgid "Shortcut Bar Settings"
@@ -1184,11 +1184,11 @@ msgstr "GnomeSword - Nastavenia"
 
 #: src/gs_setup.c:211
 msgid "This guide will take you through the initial setup of GnomeSword"
-msgstr "Tento sprievodca vás prevedie cez poèiatoèné nastavenie GnomeSword"
+msgstr "Tento sprievodca vÃ¡s prevedie cez poÃ¨iatoÃ¨nÃ© nastavenie GnomeSword"
 
 #: src/gs_setup.c:257
 msgid "Your Home Directory:"
-msgstr "Vá¹ domovskı prieèinok:"
+msgstr "VÃ¡Â¹ domovskÃ½ prieÃ¨inok:"
 
 #: src/gs_setup.c:278
 msgid "SWORD verson"
@@ -1196,102 +1196,102 @@ msgstr "Verzia SWORD"
 
 #: src/gs_setup.c:298
 msgid "Sword Directory:"
-msgstr "Sword prieèinok:"
+msgstr "Sword prieÃ¨inok:"
 
 #: src/gs_setup.c:314
 msgid "Number of Bible Text Modules:"
-msgstr "Poèet modulov Biblickıch textov:"
+msgstr "PoÃ¨et modulov BiblickÃ½ch textov:"
 
 #: src/gs_setup.c:330
 msgid "Number of Commentary Modules:"
-msgstr "Poèet modulov Komentárov:"
+msgstr "PoÃ¨et modulov KomentÃ¡rov:"
 
 #: src/gs_setup.c:347
 msgid "Number of Lexicon / Dictionary Modules"
-msgstr "Poèet modulov Lexikónov / Slovníkov"
+msgstr "PoÃ¨et modulov LexikÃ³nov / SlovnÃ­kov"
 
 #: src/gs_setup.c:384
 msgid "Do you want GnomeSword to open with"
-msgstr "Prejete si otvori» GnomeSword s"
+msgstr "Prejete si otvoriÂ» GnomeSword s"
 
 #: src/gs_setup.c:407
 msgid "Settings you choose as default"
-msgstr "Nastavenia, ktoré ste oznaèili ako ¹tandardné"
+msgstr "Nastavenia, ktorÃ© ste oznaÃ¨ili ako Â¹tandardnÃ©"
 
 #: src/gs_setup.c:420
 msgid "Settings used the last time GnomeSword ran"
-msgstr "Nastavenie, ktoré boli pou¾ité pri poslednom spustení GnomeSword"
+msgstr "Nastavenie, ktorÃ© boli pouÅ¸itÃ© pri poslednom spustenÃ­ GnomeSword"
 
 #: src/gs_setup.c:453
 msgid "Settings to use on first program run"
-msgstr "Nastavenia, ktoré sa pou¾ijú pri prvom spustení programu"
+msgstr "Nastavenia, ktorÃ© sa pouÅ¸ijÃº pri prvom spustenÃ­ programu"
 
 #: src/gs_setup.c:751
 msgid "Show Bible Tabs"
-msgstr "Zobrazi» u¹ká Biblií"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ BibliÃ­"
 
 #: src/gs_setup.c:771
 msgid "Auto Save Personal comments "
-msgstr "Automaticky ulo¾i» osobné komentáre"
+msgstr "Automaticky uloÅ¸iÂ» osobnÃ© komentÃ¡re"
 
 #: src/gs_setup.c:783
 msgid "Show Commentary Tabs"
-msgstr "Zobrazi» u¹ká komentárov"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ komentÃ¡rov"
 
 #: src/gs_setup.c:802
 msgid "Show Interlinear Page"
-msgstr "Zobrazi» interlineárnu stránku"
+msgstr "ZobraziÂ» interlineÃ¡rnu strÃ¡nku"
 
 #: src/gs_setup.c:814
 msgid "Show Dict/Lex Tabs"
-msgstr "Zobrazi» u¹ká Slov/Lex"
+msgstr "ZobraziÂ» uÂ¹kÃ¡ Slov/Lex"
 
 #: src/gs_setup.c:827
 msgid ""
 "These setting will be the default settings if you chose to use default "
 "settings. "
 msgstr ""
-"Tieto nastavenie budú ¹tandardnımi nastaveniami, ak si zvolíte pou¾itie "
-"¹tandardnıch nastavení. "
+"Tieto nastavenie budÃº Â¹tandardnÃ½mi nastaveniami, ak si zvolÃ­te pouÅ¸itie "
+"Â¹tandardnÃ½ch nastavenÃ­. "
 
 #: src/gs_setup.c:863
 msgid ""
 "            Thank-you for using GnomeSword.\n"
 "Click Finish to close this dialog and run GnomeSword."
 msgstr ""
-"            Ïakujeme vám za pou¾ívanie GnomeSword.\n"
-"Po kliknutí na Ukonèi» sa uzavrie tento dialóg a spustí GnomeSword."
+"            Ãakujeme vÃ¡m za pouÅ¸Ã­vanie GnomeSword.\n"
+"Po kliknutÃ­ na UkonÃ¨iÂ» sa uzavrie tento dialÃ³g a spustÃ­ GnomeSword."
 
 #: src/gs_shortcutbar.c:714
 msgid "Large Icons"
-msgstr "Veµké ikony"
+msgstr "VeÂµkÃ© ikony"
 
 #: src/gs_shortcutbar.c:720
 msgid "Small Icons"
-msgstr "Malé ikony"
+msgstr "MalÃ© ikony"
 
 #: src/gs_shortcutbar.c:732
 msgid "Add Bible Text"
-msgstr "Prida» text Biblie"
+msgstr "PridaÂ» text Biblie"
 
 #. this string is used internally
 #: src/gs_shortcutbar.c:747
 msgid "Add Commentary"
-msgstr "Prida» komentár"
+msgstr "PridaÂ» komentÃ¡r"
 
 #. this string is used internally
 #: src/gs_shortcutbar.c:763
 msgid "Add Dictionary"
-msgstr "Prida» Slovník"
+msgstr "PridaÂ» SlovnÃ­k"
 
 #. this string is used internally
 #: src/gs_shortcutbar.c:779
 msgid "Add Book"
-msgstr "Prida» knihu"
+msgstr "PridaÂ» knihu"
 
 #: src/gs_shortcutbar.c:797
 msgid "Add Shortcut"
-msgstr "Prida» prida» skratku"
+msgstr "PridaÂ» pridaÂ» skratku"
 
 #: src/gs_shortcutbar.c:844
 msgid "About this Module"
@@ -1299,51 +1299,51 @@ msgstr "O tomto module"
 
 #: src/gs_shortcutbar.c:857
 msgid "Remove from Shortcut Bar"
-msgstr "Odstráni» z panela skratiek"
+msgstr "OdstrÃ¡niÂ» z panela skratiek"
 
 #: src/gs_shortcutbar.c:999 src/gs_shortcutbar.c:2098
 msgid "Verse List"
-msgstr "Zoznam ver¹ov"
+msgstr "Zoznam verÂ¹ov"
 
 #: src/gs_shortcutbar.c:1006
 msgid "Search Results"
-msgstr "Prehµadáva» vısledky"
+msgstr "PrehÂµadÃ¡vaÂ» vÃ½sledky"
 
 #: src/gs_shortcutbar.c:1013 src/gs_shortcutbar.c:1254
 msgid "Viewer"
-msgstr "Prehliadaè"
+msgstr "PrehliadaÃ¨"
 
 #: src/gs_shortcutbar.c:1170
 msgid "Save List"
-msgstr "Ulo¾i» zoznam"
+msgstr "UloÅ¸iÂ» zoznam"
 
 #: src/gs_shortcutbar.c:1171
 msgid "Save the current verse list as a bookmark file"
-msgstr "Ulo¾i» aktuálny zoznam ver¹ov ako súbor so zálo¾kami"
+msgstr "UloÅ¸iÂ» aktuÃ¡lny zoznam verÂ¹ov ako sÃºbor so zÃ¡loÅ¸kami"
 
 #: src/gs_shortcutbar.c:1185
 msgid "Main Form"
-msgstr "Hlavná forma"
+msgstr "HlavnÃ¡ forma"
 
 #: src/gs_shortcutbar.c:1186
 msgid "Toggle to show results in Main Form"
-msgstr "Prepnú» medzi zobrazením vısledkov v hlavnej forme"
+msgstr "PrepnÃºÂ» medzi zobrazenÃ­m vÃ½sledkov v hlavnej forme"
 
 #: src/gs_shortcutbar.c:1224
 msgid "VerseList"
-msgstr "Zoznam ver¹ov"
+msgstr "Zoznam verÂ¹ov"
 
 #: src/gs_shortcutbar.c:1225
 msgid "View Verse List"
-msgstr "Zobrazi» zoznam ver¹ov"
+msgstr "ZobraziÂ» zoznam verÂ¹ov"
 
 #: src/gs_shortcutbar.c:1239
 msgid "SearchResults"
-msgstr "Vısledky hµadania"
+msgstr "VÃ½sledky hÂµadania"
 
 #: src/gs_shortcutbar.c:1240
 msgid "View Search Results"
-msgstr "Zobrazi» vısledky hµadania"
+msgstr "ZobraziÂ» vÃ½sledky hÂµadania"
 
 #: src/gs_shortcutbar.c:1333
 msgid "label1"
@@ -1359,11 +1359,11 @@ msgstr "label3"
 
 #: src/gs_shortcutbar.c:1605
 msgid "Begin Search"
-msgstr "Zaèa» hµadanie"
+msgstr "ZaÃ¨aÂ» hÂµadanie"
 
 #: src/gs_shortcutbar.c:1608
 msgid "Search Type"
-msgstr "Typ hµadania"
+msgstr "Typ hÂµadania"
 
 #: src/gs_shortcutbar.c:1623
 msgid "Multi Word"
@@ -1371,39 +1371,39 @@ msgstr "Multi slovo"
 
 #: src/gs_shortcutbar.c:1637
 msgid "Regular Expression"
-msgstr "Regulárny vıraz"
+msgstr "RegulÃ¡rny vÃ½raz"
 
 #: src/gs_shortcutbar.c:1648
 msgid "Exact Phrase"
-msgstr "Presná fráza"
+msgstr "PresnÃ¡ frÃ¡za"
 
 #: src/gs_shortcutbar.c:1660
 msgid "Search Options"
-msgstr "Nastavenie hµadania"
+msgstr "Nastavenie hÂµadania"
 
 #: src/gs_shortcutbar.c:1675
 msgid "Case Sensitive"
-msgstr "Rozli¹ova» veµkos» písmen"
+msgstr "RozliÂ¹ovaÂ» veÂµkosÂ» pÃ­smen"
 
 #: src/gs_shortcutbar.c:1686
 msgid "Search Commentary"
-msgstr "Hµada» v komentároch"
+msgstr "HÂµadaÂ» v komentÃ¡roch"
 
 #: src/gs_shortcutbar.c:1695
 msgid "Search Personal"
-msgstr "Hµada» v osobnıch"
+msgstr "HÂµadaÂ» v osobnÃ½ch"
 
 #: src/gs_shortcutbar.c:1704
 msgid "Search Book"
-msgstr "Hµada» v knihách"
+msgstr "HÂµadaÂ» v knihÃ¡ch"
 
 #: src/gs_shortcutbar.c:1710
 msgid "Search Current Book"
-msgstr "Hµada» v aktuálnej knihe"
+msgstr "HÂµadaÂ» v aktuÃ¡lnej knihe"
 
 #: src/gs_shortcutbar.c:1714
 msgid "Search Scope"
-msgstr "Rozsah hµadania"
+msgstr "Rozsah hÂµadania"
 
 #: src/gs_shortcutbar.c:1729
 msgid "No Scope"
@@ -1411,23 +1411,23 @@ msgstr "Bez rozsahu"
 
 #: src/gs_shortcutbar.c:1741
 msgid "Use Bounds"
-msgstr "Pou¾i» ohranièenie"
+msgstr "PouÅ¸iÂ» ohraniÃ¨enie"
 
 #: src/gs_shortcutbar.c:1753
 msgid "Last Search"
-msgstr "Posledné hµadanie"
+msgstr "PoslednÃ© hÂµadanie"
 
 #: src/gs_shortcutbar.c:1764
 msgid "Bounds"
-msgstr "Ohranièenie"
+msgstr "OhraniÃ¨enie"
 
 #: src/gs_shortcutbar.c:1778
 msgid "Lower"
-msgstr "Dolné"
+msgstr "DolnÃ©"
 
 #: src/gs_shortcutbar.c:1788
 msgid "Upper "
-msgstr "Horné"
+msgstr "HornÃ©"
 
 #: src/gs_shortcutbar.c:1808
 msgid "Genesis"
@@ -1439,7 +1439,7 @@ msgstr "Zjavenie"
 
 #: src/gs_shortcutbar.c:1859
 msgid "Favorites"
-msgstr "Obµúbené"
+msgstr "ObÂµÃºbenÃ©"
 
 #: src/gs_shortcutbar.c:1919
 msgid "Bible Text"
@@ -1451,55 +1451,55 @@ msgstr "Kniha"
 
 #: src/gs_shortcutbar.c:2021 src/gs_shortcutbar.c:2316
 msgid "History"
-msgstr "História"
+msgstr "HistÃ³ria"
 
 #: src/gs_shortcutbar.c:2044
 msgid "Bookmarks"
-msgstr "Zálo¾ky"
+msgstr "ZÃ¡loÅ¸ky"
 
 #: src/gs_shortcutbar.c:2331
 msgid "Add All Modules"
-msgstr "Prida» v¹etky moduly"
+msgstr "PridaÂ» vÂ¹etky moduly"
 
 #: src/gs_unlockkey_dlg.c:102
 msgid "Enter Unlock Key"
-msgstr "Vlo¾i» otvárací kµúè"
+msgstr "VloÅ¸iÂ» otvÃ¡racÃ­ kÂµÃºÃ¨"
 
 #: src/gs_viewcomm_dlg.c:153
 msgid "GnomeSword - View Commentary"
-msgstr "GnomeSword - Prehliadaè komentárov"
+msgstr "GnomeSword - PrehliadaÃ¨ komentÃ¡rov"
 
 #: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:554
 msgid "button7"
-msgstr "tlaèítko7"
+msgstr "tlaÃ¨Ã­tko7"
 
 #: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:446
 msgid "Sync with main window"
-msgstr "Synchr. s hlavnım oknom"
+msgstr "Synchr. s hlavnÃ½m oknom"
 
 #: src/gs_viewcomm_dlg.c:220
 msgid "Enter a verse"
-msgstr "Vlo¾i» ver¹"
+msgstr "VloÅ¸iÂ» verÂ¹"
 
 #: src/gs_viewcomm_dlg.c:228
 msgid "button10"
-msgstr "tlaèítko10"
+msgstr "tlaÃ¨Ã­tko10"
 
 #: src/gs_viewcomm_dlg.c:228
 msgid "Goto Verse"
-msgstr "Ís» na ver¹"
+msgstr "ÃsÂ» na verÂ¹"
 
 #: src/gs_viewcomm_dlg.c:242
 msgid "button9"
-msgstr "tlaèítko9"
+msgstr "tlaÃ¨Ã­tko9"
 
 #: src/gs_viewcomm_dlg.c:255
 msgid "button8"
-msgstr "tlaèítko8"
+msgstr "tlaÃ¨Ã­tko8"
 
 #: src/gs_viewdict_dlg.c:193
 msgid "GnomeSwrod - View Dictionary"
-msgstr "GnomeSword - Prehliadaè slovníka"
+msgstr "GnomeSword - PrehliadaÃ¨ slovnÃ­ka"
 
 #: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:445
 msgid "Sync"
@@ -1507,15 +1507,15 @@ msgstr "Synchr"
 
 #: src/gs_viewdict_dlg.c:229
 msgid "Lookup key from main window"
-msgstr "Hµada» slovo z hlavného okna"
+msgstr "HÂµadaÂ» slovo z hlavnÃ©ho okna"
 
 #: src/gs_viewdict_dlg.c:255
 msgid "Lookup: "
-msgstr "Hµada»: "
+msgstr "HÂµadaÂ»: "
 
 #: src/gs_viewdict_dlg.c:280
 msgid "Load all keys for this module"
-msgstr "Naèíta» v¹etky kµúèe pre tento modul"
+msgstr "NaÃ¨Ã­taÂ» vÂ¹etky kÂµÃºÃ¨e pre tento modul"
 
 #: src/gs_viewdict_dlg.c:333
 msgid "label125"
@@ -1523,15 +1523,15 @@ msgstr "label125"
 
 #: src/gs_viewtext_dlg.c:431
 msgid "Add"
-msgstr "Prida»"
+msgstr "PridaÂ»"
 
 #: src/gs_viewtext_dlg.c:554
 msgid "Go to verse"
-msgstr "Prejs» na ver¹"
+msgstr "PrejsÂ» na verÂ¹"
 
 #: src/sw_gbs.cpp:466
 msgid "View Book"
-msgstr "Zobrazi» knihu"
+msgstr "ZobraziÂ» knihu"
 
 #: src/sw_gbs.cpp:585 src/sw_gbs.cpp:599
 msgid "label"
@@ -1542,62 +1542,62 @@ msgid "label200"
 msgstr "popis200"
 
 #~ msgid "UpdateMain"
-#~ msgstr "Aktualizova» hlavné"
+#~ msgstr "AktualizovaÂ» hlavnÃ©"
 
 #~ msgid "Add New Group"
-#~ msgstr "Predaè novú skupinu"
+#~ msgstr "PredaÃ¨ novÃº skupinu"
 
 #~ msgid "Auto Save Personal Comments"
-#~ msgstr "Automaticky uklada» osobné komentáre"
+#~ msgstr "Automaticky ukladaÂ» osobnÃ© komentÃ¡re"
 
 #~ msgid "_Quickmarks/"
-#~ msgstr "_Rıchle znaèky/"
+#~ msgstr "_RÃ½chle znaÃ¨ky/"
 
 #, fuzzy
 #~ msgid "Language Options"
-#~ msgstr "Nájs»"
+#~ msgstr "NÃ¡jsÂ»"
 
 #~ msgid "Exit"
 #~ msgstr "Koniec"
 
 #~ msgid "Exit GnomeSword"
-#~ msgstr "Ukonèí GnomeSword"
+#~ msgstr "UkonÃ¨Ã­ GnomeSword"
 
 #~ msgid "Go to Strongs %s"
-#~ msgstr "Ís» na Strong %s"
+#~ msgstr "ÃsÂ» na Strong %s"
 
 #, fuzzy
 #~ msgid "Enter Word or Phrase"
-#~ msgstr "Vlo¾i»"
+#~ msgstr "VloÅ¸iÂ»"
 
 #, fuzzy
 #~ msgid "Foward Search"
-#~ msgstr "Nasledujúci"
+#~ msgstr "NasledujÃºci"
 
 #, fuzzy
 #~ msgid "Regular Expresion"
-#~ msgstr "Regulárny vıraz"
+#~ msgstr "RegulÃ¡rny vÃ½raz"
 
 #~ msgid "GnomeSword - Quickmark Editor"
-#~ msgstr "GnomeSword - Editor Rıchlych znaèiek"
+#~ msgstr "GnomeSword - Editor RÃ½chlych znaÃ¨iek"
 
 #~ msgid "GnomeSword - Quickmarks Editor"
-#~ msgstr "GnomeSword - Editor Rıchlych znaèiek"
+#~ msgstr "GnomeSword - Editor RÃ½chlych znaÃ¨iek"
 
 #~ msgid "Previous Level"
-#~ msgstr "Predchádzajúca úroveò"
+#~ msgstr "PredchÃ¡dzajÃºca ÃºroveÃ²"
 
 #~ msgid "Next level"
-#~ msgstr "Nasledujúca úroveò"
+#~ msgstr "NasledujÃºca ÃºroveÃ²"
 
 #~ msgid "Edit items"
-#~ msgstr "Upravi» polo¾ky"
+#~ msgstr "UpraviÂ» poloÅ¸ky"
 
 #~ msgid "Add Menu"
-#~ msgstr "Prida» ponuku"
+#~ msgstr "PridaÂ» ponuku"
 
 #~ msgid "Apply Changes to List"
-#~ msgstr "Pou¾i» zmeny na zoznam"
+#~ msgstr "PouÅ¸iÂ» zmeny na zoznam"
 
 #~ msgid "GnomeSword - Preferences"
 #~ msgstr "GnomeSword - Nastavenia"
@@ -1606,43 +1606,43 @@ msgstr "popis200"
 #~ msgstr "GnomeSword-0.5.2a"
 
 #~ msgid "Biblical Texts"
-#~ msgstr "Bibleké texty"
+#~ msgstr "BiblekÃ© texty"
 
 #~ msgid "Lexicons / Dictionaries"
-#~ msgstr "Lexikóny / Slovníky"
+#~ msgstr "LexikÃ³ny / SlovnÃ­ky"
 
 #~ msgid "Edit note"
-#~ msgstr "Upravi» poznámku"
+#~ msgstr "UpraviÂ» poznÃ¡mku"
 
 #~ msgid "Delete"
-#~ msgstr "Zmaza»"
+#~ msgstr "ZmazaÂ»"
 
 #~ msgid "Start Spell Check"
-#~ msgstr "Spusti» kontrolu pravopisu"
+#~ msgstr "SpustiÂ» kontrolu pravopisu"
 
 #~ msgid "Start new document"
-#~ msgstr "Zaèa» novı dokument"
+#~ msgstr "ZaÃ¨aÂ» novÃ½ dokument"
 
 #~ msgid "Save as"
-#~ msgstr "Ulo¾i» ako"
+#~ msgstr "UloÅ¸iÂ» ako"
 
 #~ msgid "Print current file"
-#~ msgstr "Tlaèi» aktuálny súbor"
+#~ msgstr "TlaÃ¨iÂ» aktuÃ¡lny sÃºbor"
 
 #~ msgid "Cut to clipboard"
-#~ msgstr "Vystrihnú» do schránky"
+#~ msgstr "VystrihnÃºÂ» do schrÃ¡nky"
 
 #~ msgid "Copy to clipboard"
-#~ msgstr "Kopírova» do schránky"
+#~ msgstr "KopÃ­rovaÂ» do schrÃ¡nky"
 
 #~ msgid "Paste from clipborad"
-#~ msgstr "Vlo¾i» zo schránky"
+#~ msgstr "VloÅ¸iÂ» zo schrÃ¡nky"
 
 #~ msgid "togglebutton1"
-#~ msgstr "prepínacie tlaèíko1"
+#~ msgstr "prepÃ­nacie tlaÃ¨Ã­ko1"
 
 #~ msgid "toggle Morf "
-#~ msgstr "prepnú» Morf "
+#~ msgstr "prepnÃºÂ» Morf "
 
 #~ msgid "Show Footnotes"
-#~ msgstr "Zobrazi» poznámky pod èiarou"
+#~ msgstr "ZobraziÂ» poznÃ¡mky pod Ã¨iarou"

@@ -789,6 +789,8 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 {
 	GtkWidget *pmDict;
 	GtkWidget *copy5;
+	GtkWidget *print_item;
+	GtkWidget *separator;
 	GtkWidget *goto_reference3;
 	GtkWidget *lookup_word1;
 	GtkWidget *about_this_module5;
@@ -817,6 +819,24 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(copy5);
 	gtk_container_add(GTK_CONTAINER(pmDict), copy5);
+
+	print_item = gtk_menu_item_new_with_label(_("Print"));
+	gtk_widget_ref(print_item);
+	gtk_object_set_data_full(GTK_OBJECT(pmDict),
+				 "print_item", print_item,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print_item);
+	gtk_container_add(GTK_CONTAINER(pmDict),print_item);
+		
+	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pmDict), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pmDict), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
+	
+
 
 	goto_reference3 = gtk_menu_item_new_with_label(_("Goto Reference"));
 	gtk_widget_ref(goto_reference3);
@@ -952,6 +972,11 @@ static GtkWidget *create_pmDict(GList *modsdesc)
   	gtk_signal_connect (GTK_OBJECT (copy5), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlDict");
+	
+	gtk_signal_connect(GTK_OBJECT(print_item), "activate",	
+			   GTK_SIGNAL_FUNC(on_print_item_activate),
+			   (gchar *) "htmlDict");
+	
           gtk_signal_connect (GTK_OBJECT (goto_reference3), "activate",
                       	GTK_SIGNAL_FUNC (on_html_goto_reference_activate),
                       	(gchar *)"htmlDict");   
@@ -978,6 +1003,8 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	GtkWidget *pmBible;
 	GtkAccelGroup *pmBible_accels;
 	GtkWidget *copy7;
+	GtkWidget *print_item;
+	GtkWidget *separator;
 	GtkWidget *show_tabs;
 	GtkWidget *lookup_word;
 	GtkWidget *lookup_word_menu;
@@ -1014,6 +1041,23 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
                             (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmBible), copy7);
+	
+	
+	print_item = gtk_menu_item_new_with_label(_("Print Chapter"));
+	gtk_widget_ref(print_item);
+	gtk_object_set_data_full(GTK_OBJECT(pmBible),
+				 "print_item", print_item,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print_item);
+	gtk_container_add(GTK_CONTAINER(pmBible),print_item);
+		
+	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pmBible), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
 	
 	lookup_word = gtk_menu_item_new_with_label (_("Lookup Word"));
 	gtk_widget_ref (lookup_word);
@@ -1241,6 +1285,10 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");
+	gtk_signal_connect(GTK_OBJECT(print_item), "activate",	
+			   GTK_SIGNAL_FUNC(on_print_item_activate),
+			   (gchar *) "htmlTexts");
+	
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module_activate),
                       	"Bible");
@@ -1267,6 +1315,7 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
 	GtkWidget *copy7;
+	GtkWidget *print_item;
 	GtkWidget *undockInt;
 	GtkWidget *module_options;
 	GtkWidget *separator2;
@@ -1284,6 +1333,14 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
 
+	print_item = gtk_menu_item_new_with_label(_("Print"));
+	gtk_widget_ref(print_item);
+	gtk_object_set_data_full(GTK_OBJECT(pmInt),
+				 "print_item", print_item,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print_item);
+	gtk_container_add(GTK_CONTAINER(pmInt),print_item);
+		
 	separator2 = gtk_menu_item_new ();
   	gtk_widget_ref (separator2);
   	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
@@ -1329,6 +1386,11 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
+	
+	gtk_signal_connect(GTK_OBJECT(print_item), "activate",	
+			   GTK_SIGNAL_FUNC(on_print_item_activate),
+			   (gchar *) "s->htmlInterlinear");		
+			
 	gtk_signal_connect (GTK_OBJECT (undockInt), "activate",
                       	GTK_SIGNAL_FUNC (on_undockInt_activate), 
                       	settings);
