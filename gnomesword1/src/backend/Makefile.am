@@ -28,8 +28,8 @@ libbackend_a_SOURCES =  \
     display.h \
     gbs.cpp \
     gbs.h \
-    information_dlg.cpp \
-    information_dlg.h \
+    display_info.cpp \
+    display_info.h \
     module_options.cpp \
     module_options.h \
     properties.cpp \
