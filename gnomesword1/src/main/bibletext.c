@@ -39,6 +39,7 @@
 
 /* backend */
 #include "bibletext_.h"
+#include "bibletext_view_.h"
 #include "sword.h"
 #include "shortcutbar.h"
 
@@ -47,6 +48,7 @@
  */
 
 extern gboolean isrunningVT;
+extern gboolean gsI_isrunning;
 extern GList *options;
 
 /******************************************************************************
@@ -483,4 +485,178 @@ void shutdown_text(void)
 		 g_free((TEXT_DATA *) text_list->data);
 		 text_list = g_list_next(text_list);
 	} g_list_free(text_list);
+}
+
+/******************************************************************************
+ * Name
+ *  get_book_viewtext 
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *    const char *get_book_viewtext(void)	
+ *
+ * Description
+ *   get current book displayed in veiw text dialog
+ *
+ * Return value
+ *   const char *
+ */
+
+const char *get_book_viewtext(void)
+{
+	return backend_get_book_viewtext();
+}
+
+/******************************************************************************
+ * Name
+ *  get_chapter_viewtext 
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   int get_chapter_viewtext(void)	
+ *
+ * Description
+ *   get current chapter displayed in veiw text dialog
+ *
+ * Return value
+ *   int
+ */
+
+int get_chapter_viewtext(void)
+{
+	return backend_get_chapter_viewtext();
+}
+
+/******************************************************************************
+ * Name
+ *   get_verse_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   int get_verse_viewtext(void)	
+ *
+ * Description
+ *   get current verse displayed in veiw text dialog
+ *
+ * Return value
+ *   int
+ */
+
+int get_verse_viewtext(void)
+{	
+	return backend_get_verse_viewtext();
+}
+
+/******************************************************************************
+ * Name
+ *   goto_verse_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void goto_verse_viewtext(gchar * verse)	
+ *
+ * Description
+ *   find and display new verse for view text dialog
+ *
+ * Return value
+ *   void
+ */
+
+void goto_verse_viewtext(char * verse)
+{
+	backend_goto_verse_viewtext(verse);
+}
+
+/******************************************************************************
+ * Name
+ *   load_module_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void load_module_viewtext(gchar * modName)	
+ *
+ * Description
+ *   load a text module into the view text dialog
+ *
+ * Return value
+ *   void
+ */
+
+void load_module_viewtext(char * module_name)
+{
+	backend_load_module_viewtext(module_name);
+}
+
+/******************************************************************************
+ * Name
+ *   shutdown_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void shutdown_viewtext(void)	
+ *
+ * Description
+ *   shutdown down sword viewtext support
+ *
+ * Return value
+ *   void
+ */
+
+void shutdown_viewtext(void)
+{
+	backend_shutdown_viewtext();
+}
+
+/******************************************************************************
+ * Name
+ *   set_global_options_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void set_global_options_viewtext(gchar *option, gboolean choice)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void set_global_options_viewtext(gchar *option, gboolean choice)
+{
+	if (choice) {	
+		backend_set_global_options_viewtext(option,
+						    "On");
+	} else {		
+		backend_set_global_options_viewtext(option,
+						    "Off");
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   setup_viewtext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void setup_viewtext(GtkWidget * text)	
+ *
+ * Description
+ *   setup the viewtext sword display
+ *
+ * Return value
+ *   void
+ */
+
+void setup_viewtext(GtkWidget * text)
+{
+	backend_setup_viewtext(text);
 }

@@ -18,8 +18,6 @@ CXXFLAGS =  \
 libgui_a_SOURCES =  \
     _bibletext.c \
     _bibletext.h \
-    _bibletext_view.c \
-    _bibletext_view.h \
     _commentary.c \
     _commentary.h \
     _dictlex.c \
@@ -38,6 +36,8 @@ libgui_a_SOURCES =  \
     about_modules.h \
     about_sword.c \
     about_sword.h \
+    bibletext_dialog.c \
+    bibletext_dialog.h \
     cipher_key_dialog.c \
     cipher_key_dialog.h \
     commentary_dialog.c \
