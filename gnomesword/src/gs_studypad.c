@@ -26,10 +26,7 @@
 #include "support.h"
 #include "gs_gnomesword.h"
 #include "gs_info_box.h"
-
-#if USE_GNOMEPRINT
 #include "printstuff.h"
-#endif /* USE_GNOMEPRINT */
 
 #include "gs_file.h"
 #include "gs_studypad.h"
@@ -65,10 +62,8 @@ void on_btnSPnew_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_btnPrint_clicked(GtkButton * button, gpointer user_data)
 {
-#if USE_GNOMEPRINT
 	/* pass studypad text widget to print */
 	file_print(GTK_WIDGET(button), current_filename, 1);
-#endif /* USE_GNOMEPRINT */
 }
 
 /******************************************************************************

@@ -35,7 +35,7 @@ extern "C" {
 void showSBVerseList(SETTINGS *s);
 void	 changegroupnameSB(SETTINGS *s, gchar *groupName, gint groupNum);
 void on_btnSB_clicked(GtkButton * button, 
-					gpointer user_data);
+					SETTINGS *s);
 void setupSB(SETTINGS *s);
 void update_shortcut_bar(SETTINGS *s);
 void create_modlistmenu_sb(GtkWidget *menu, 
