@@ -197,16 +197,17 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 
 gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 {
-	gchar *font, *use_font, *retval = "";
-	string lang, gsfont, gsfontsize;	
+	gchar *font, *use_font, *gsfont,*retval = "";
+	string lang, gsfontsize;
 	
-	gsfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	gsfont = NULL;
+	gsfont = (gchar*)imodule.getConfigEntry("Font"); //load_module_font((gchar*)imodule.Name(),"GSFont");
 	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
 	
 	font = g_strdup("-adobe-helvetica-*-*");
 	
-	if (strcmp(gsfont.c_str(), "")) {
-		retval = (gchar *)gsfont.c_str();
+	if (gsfont) {
+		retval = gsfont;
 		//g_warning("retval = %s",retval);
 		use_gtkhtml_font = false;
 	} else {
@@ -582,17 +583,18 @@ char IntDisplay(SETTINGS *s)
 // ---------------------------------------------
 char InterlinearDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[800], *buf, *rowcolor;
+	gchar tmpBuf[800], *buf, *swfont,*rowcolor;
 	gint i;
 	bool utf = false,
 		use_gtkhtml_font = false;
 	gint len;
 	gchar *utf8str, *use_font, *use_font_size, *font, *token;
 	gint utf8len;
-	string lang, swfont, swfontsize;
+	string lang, swfontsize;
 	static gint row = 1;
 	
-	swfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	swfont = NULL;
+	swfont = (gchar*)imodule.getConfigEntry("Font"); //load_module_font((gchar*)imodule.Name(),"GSFont");
 	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
 	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
 	
@@ -603,8 +605,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	}
 	
 	font = g_strdup("-adobe-helvetica-*-*");
-	if (strcmp(swfont.c_str(), "")) {
-		use_font = (gchar *) swfont.c_str();
+	if (swfont) {
+		use_font = swfont;
 		use_gtkhtml_font = false;
 	} else {
 		font = "-adobe-helvetica-*-*";

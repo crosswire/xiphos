@@ -46,6 +46,7 @@
 #include "gs_gnomesword.h"
 #include "sw_sword.h"
 #include "sw_display.h"
+#include "sw_shortcutbar.h"
 #include "sw_gbs.h"
 #include "gs_html.h"
 #include "gs_find_dlg.h"
@@ -63,6 +64,7 @@ extern GList
 	*sbbookmods,
 	*sbdictmods;
 extern SETTINGS *settings;
+extern gboolean in_url;
 
 /***  globals  ***/
 GtkCTreeNode *current_node;
@@ -253,12 +255,17 @@ void on_lookup_word_activate(GtkMenuItem * menuitem,
 {	
 	GBS_DATA *g;
 	gchar modName[16];
+	gchar *key;
 	
 	g = getgbs(gbs_data);
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, modDescription);
 	g_warning("modName = %s",modName);
-	lookupGS_HTML(g->html, modName, true);
+	key = lookupGS_HTML(g->html, true);
+	if(key) {
+		displaydictlexSBSW(modName, key, settings);
+		g_free(key); 
+	}
 }
 
 static
@@ -266,31 +273,41 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 				gchar *modDescription)
 {
 	GBS_DATA *g;
-	gchar modName[16];
+	gchar modName[16];	
+	gchar *key;
 	
 	g = getgbs(gbs_data);
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, modDescription);
-	g_warning("modName = %s",modName);
-	lookupGS_HTML(g->html, modName, false);
+	key = lookupGS_HTML(g->html, false);
+	if(key) {
+		displaydictlexSBSW(modName, key, settings);
+		g_free(key);
+	}
 }
 static
 void on_same_lookup_word_activate(GtkMenuItem * menuitem,
 				GBS_DATA *g)
 {	
-	
-	lookupGS_HTML(g->html, settings->DictWindowModule, true);
+	gchar *key = lookupGS_HTML(g->html, true);
+	if(key) {
+		displaydictlexSBSW(settings->DictWindowModule, key, settings);
+		g_free(key);
+	}
 }
 
 static
 void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				GBS_DATA *g)
 {
-	lookupGS_HTML(g->html, settings->DictWindowModule, false);
+	gchar *key = lookupGS_HTML(g->html, false);
+	if(key) {
+		displaydictlexSBSW(settings->DictWindowModule, key, settings);
+		g_free(key);
+	}	
 }
 
-static
-void
+static void
 on_view_book_activate(GtkMenuItem * menuitem, 
 				gpointer user_data)
 {	
@@ -298,6 +315,30 @@ on_view_book_activate(GtkMenuItem * menuitem,
 	
 	page = GPOINTER_TO_INT(user_data);
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), page);
+}
+
+static gboolean
+on_button_release_event (GtkWidget *widget,
+				GdkEventButton  *event,
+				GBS_DATA *g)
+{
+	gchar *key;
+	switch (event->button) {
+	  case 1:if(!in_url) {
+			key = buttonpresslookupGS_HTML(g->html);
+			if(key) {
+				displaydictlexSBSW(settings->DictWindowModule, key, settings);
+				g_free(key);
+			}
+			return true;
+		}
+		break;
+	  case 2: 
+		break;
+	  case 3:
+		break;
+	}
+	return false;
 }
 
 static
@@ -581,6 +622,9 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs
 	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row), p_gbs);
 	
+	gtk_signal_connect (GTK_OBJECT (p_gbs->html), "button_release_event",
+                      GTK_SIGNAL_FUNC (on_button_release_event), p_gbs);
+		      
 	SWDisplay *disp = new EntryDisp(p_gbs->html);
 	mod->Disp(disp);
 	displays.insert(displays.begin(), disp);
