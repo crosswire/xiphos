@@ -929,8 +929,8 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	if (!gtk_tree_selection_get_selected(current_selection,NULL,&selected))
 		return;
 
-	mod_name = get_module_name();
-	key = get_module_key();		
+	mod_name = main_get_active_pane_module();
+	key = main_get_active_pane_key();		
 	data = g_new(BOOKMARK_DATA,1);
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");

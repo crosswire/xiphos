@@ -33,7 +33,6 @@
 #include "gui/widgets.h"
 
 #include "main/sword.h"
-#include "main/module.h"
 #include "main/settings.h"
 
 /******************************************************************************

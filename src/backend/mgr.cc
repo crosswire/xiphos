@@ -39,7 +39,6 @@
 #include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
 
-#include "main/search.h"
 #include "main/sword.h"
 
 //using std::string;
