@@ -133,8 +133,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 /* add modules to menus -- menu.c */
 	addmodstomenus(app, 
 				settings, 
-				biblemods, /* list of mod names */
-				sbbiblemods, /* list of mod descriptions */
+				biblemods, 
+				sbbiblemods, 
 				commentarymods,
 				sbcommods, 
 				dictionarymods,

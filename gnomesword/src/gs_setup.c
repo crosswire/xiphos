@@ -29,16 +29,16 @@
 
 #include <gnome.h>
 #include "gs_setup.h"
+#include "sw_properties.h"
 #include "support.h"
 
 static void
 on_finish_clicked                    (GnomeDialog     *gnomedialog,
                                         gint             arg1,
                                         gpointer         user_data)
-{
-	
-	
-	g_warning("arg1 = %d",arg1);
+{	
+	createfromsetupconfig(gtk_widget_get_toplevel(GTK_WIDGET(gnomedialog)));
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(gnomedialog)));
 }
 
 static void
@@ -46,12 +46,15 @@ on_cancel_clicked                    (GnomeDialog     *gnomedialog,
                                         gint             arg1,
                                         gpointer         user_data)
 {
-	g_warning("arg1 = %d",arg1);
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(gnomedialog)));
 }
 
 GtkWidget*
-create_dlgSetup (void)
+create_dlgSetup (GList *biblemods, 
+			GList *commmods, 
+			GList *dictmods)
 {
+		
   GtkWidget *dlgSetup;
   GtkWidget *dialog_vbox10;
   GtkWidget *druid1;
@@ -130,7 +133,7 @@ create_dlgSetup (void)
   GdkColor druidpagefinish1_logo_bg_color = { 0, 6425, 3855, 27242 };
   GdkColor druidpagefinish1_title_color = { 0, 65535, 65535, 65535 };
   GtkWidget *dialog_action_area10;
-
+  
   dlgSetup = gnome_dialog_new (_("GnomeSword - Setup"), NULL);
   gtk_object_set_data (GTK_OBJECT (dlgSetup), "dlgSetup", dlgSetup);
   gtk_container_set_border_width (GTK_CONTAINER (dlgSetup), 2);
@@ -359,7 +362,8 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo1, 1, 2, 0, 1,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), biblemods);
+	
   combo_entry1 = GTK_COMBO (combo1)->entry;
   gtk_widget_ref (combo_entry1);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry1", combo_entry1,
@@ -374,7 +378,8 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo2, 1, 2, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo2), biblemods);
+	
   combo_entry2 = GTK_COMBO (combo2)->entry;
   gtk_widget_ref (combo_entry2);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry2", combo_entry2,
@@ -389,7 +394,8 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo3, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo3), biblemods);
+	
   combo_entry3 = GTK_COMBO (combo3)->entry;
   gtk_widget_ref (combo_entry3);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry3", combo_entry3,
@@ -404,6 +410,7 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo4, 1, 2, 3, 4,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo4), biblemods);
 
   combo_entry4 = GTK_COMBO (combo4)->entry;
   gtk_widget_ref (combo_entry4);
@@ -469,7 +476,7 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo10, 1, 2, 4, 5,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), biblemods);
   combo_entry10 = GTK_COMBO (combo10)->entry;
   gtk_widget_ref (combo_entry10);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry10", combo_entry10,
@@ -484,7 +491,7 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo11, 1, 2, 5, 6,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), biblemods);
   combo_entry11 = GTK_COMBO (combo11)->entry;
   gtk_widget_ref (combo_entry11);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry11", combo_entry11,
@@ -499,7 +506,7 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo12, 1, 2, 6, 7,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo12), commmods);
   combo_entry12 = GTK_COMBO (combo12)->entry;
   gtk_widget_ref (combo_entry12);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry12", combo_entry12,
@@ -514,13 +521,13 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo13, 1, 2, 7, 8,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo13), dictmods);
   combo_entry13 = GTK_COMBO (combo13)->entry;
   gtk_widget_ref (combo_entry13);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry13", combo_entry13,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (combo_entry13);
-
+ 
   combo14 = gtk_combo_new ();
   gtk_widget_ref (combo14);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo14", combo14,
@@ -529,7 +536,7 @@ create_dlgSetup (void)
   gtk_table_attach (GTK_TABLE (table7), combo14, 1, 2, 8, 9,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo14), commmods);
   combo_entry14 = GTK_COMBO (combo14)->entry;
   gtk_widget_ref (combo_entry14);
   gtk_object_set_data_full (GTK_OBJECT (dlgSetup), "combo_entry14", combo_entry14,

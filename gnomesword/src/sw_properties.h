@@ -28,6 +28,7 @@ extern "C" {
 
 gboolean loadconfig(void);
 gboolean saveconfig(void);
+gboolean createfromsetupconfig(GtkWidget *setup);
 gboolean createconfig(void);	
 
 #ifdef __cplusplus
