@@ -36,6 +36,7 @@
 #include "gs_gnomesword.h"
 #include "sw_sword.h"
 #include "gs_gui_cb.h"
+#include "gs_gbs.h"
 #include "gs_mainmenu_cb.h"
 #include "support.h"
 #include "gs_file.h"
@@ -130,6 +131,7 @@ initGnomeSword(SETTINGS *s,
 	
 	/* setup shortcut bar */
 	setupSB(s);
+	gui_setupGBS(s, bookmods);
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
 	/* add modules to menus -- gs_menu.c */
