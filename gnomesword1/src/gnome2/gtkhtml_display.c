@@ -542,6 +542,12 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
 	tmpkey = get_valid_key(key);
 	
+	/*
+	 * set global options for current module 
+	 */
+	if (use_globals)
+		set_global_options(tgs);
+	
 	cur_verse = get_verse_from_key(tmpkey);
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
@@ -568,7 +574,8 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
                                                                "verseNumber"),
                                         NULL);		
 		text_str = get_module_text(0, mod_name, tmpkey);
-		g_string_printf(str, ". %s", text_str);
+		g_string_printf(str, " %s\n", text_str);
+			
 		if(i == cur_verse) {
 		        gtk_text_buffer_get_end_iter(buffer, &iter);
 			mark = gtk_text_buffer_create_mark (buffer,
@@ -598,9 +605,12 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 					gtk_text_buffer_get_tag_table (buffer),
 					"large"),		
                                         NULL);		
-		} 
+		} /*
 		gtk_text_buffer_get_end_iter(buffer, &iter);
-		gtk_text_buffer_insert(buffer, &iter, "\n", 1);
+		if (settings.versestyle) 
+			gtk_text_buffer_insert(buffer, &iter, "\n", 1);
+		else
+			gtk_text_buffer_insert(buffer, &iter, " ", 1);*/
 	}
 	g_string_free(str,0);
 	

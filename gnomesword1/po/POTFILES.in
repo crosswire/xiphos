@@ -28,10 +28,10 @@ src/gnome/gui.c
 src/gnome/history.c
 src/gnome/hints.c
 src/gnome/html.c
-src/gnome/interlinear.c
-src/gnome/interlinear_dialog.c
 src/gnome/main_menu.c
 src/gnome/main_window.c
+src/gnome/parallel_view.c
+src/gnome/parallel_dialog.c
 src/gnome/percomm.c
 src/gnome/preferences_dialog.c
 src/gnome/search_dialog.c

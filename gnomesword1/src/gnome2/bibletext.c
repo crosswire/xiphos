@@ -630,6 +630,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	 * we don't want backend_dispaly_text to be
 	 * called by on_notebook_text_switch_page
 	 */
+	page_num;
 	display_change = FALSE;
 	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
@@ -792,7 +793,6 @@ void gui_setup_text(GList * mods)
 		t = g_new(TEXT_DATA, 1);
 		t->tgs = g_new(TEXT_GLOBALS, 1);
 		t->mod_name = (gchar *) tmp->data;
-//		printf("mod_name = %s\n",t->mod_name);
 		t->mod_num = count;
 		t->search_string = NULL;
 		t->key = NULL;

@@ -4,6 +4,7 @@ INCLUDES =  \
     -I$(top_builddir)/src
 
 EXTRA_DIST =  \
+	$(top_builddir)/src/gnome2/*.* \
 	$(top_builddir)/src/gui/*.h \
 	shortcutbar.h 
 

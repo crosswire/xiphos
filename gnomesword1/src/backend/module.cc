@@ -48,13 +48,10 @@ using std::map;
 using std::list;
 using namespace sword;
 
-//typedef map < string, string > modDescMap;
 #include "backend/mgr.hh"
 
 #define CIPHER_KEY_LEN 16
 
-
-//modDescMap descriptionMap;
 
 /******************************************************************************
  * static  global to this file only 
@@ -95,14 +92,15 @@ extern SWKey *current_scope;
 char *backend_get_footnote_body(char * module_name, 
 				char * key, char * note)
 {	
+	SWKey *keybuf;
 	SWModule *module = sw.main_mgr->Modules[module_name];
 	module->SetKey(key);
 	module->RenderText();
-	
+	keybuf = module->getKey();
 	SWBuf body =
 	    module->getEntryAttributes()["Footnote"][note]["body"].
 	    c_str();
-	//printf("\n%s %s\n%s\n",key,note,body.c_str());
+	module->renderFilter(body, keybuf);
 	if(body)
 		return strdup(body.c_str());
 	else
