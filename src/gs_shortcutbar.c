@@ -456,16 +456,26 @@ static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name)
 /*** show hide shortcut bar ***/
 void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 {
+	gint biblepanesize;
+	
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
+		biblepanesize = settings->gs_width / 2;
 		e_paned_set_position(E_PANED
 				     (lookup_widget(s->app, "epaned")),
 				     0);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "hpaned1")),
+				     biblepanesize);
 	} else {
 		settings->showshortcutbar = TRUE;
+		biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
 		e_paned_set_position(E_PANED
 				     (lookup_widget(s->app, "epaned")),
 				     settings->shortcutbar_width);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "hpaned1")),
+				     biblepanesize);
 	}
 }
 

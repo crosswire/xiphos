@@ -32,7 +32,10 @@ extern "C" {
 #endif
 
 #include "sw_gnomesword.h"
-
+		
+	/*** add sword global options to menus ***/	
+	void additemstooptionsmenu(GList *options);
+	
 	void
 	 additemtognomemenu(GtkWidget * MainFrm,
 			    gchar * itemname,
@@ -68,7 +71,9 @@ extern "C" {
 			      SETTINGS * settings,
 			      GList * bilbeDescription,
 			      GList * comDescription,
-			      GList * dictDescription, GList * percomlist);
+			      GList * dictDescription, 
+			      GList * percomlist, 
+			      GList * options);
 
 	void addmodstomenus(GtkWidget * app,
 			    SETTINGS * settings,

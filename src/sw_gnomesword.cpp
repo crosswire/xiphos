@@ -57,6 +57,8 @@
 #include "gs_preferences_dlg.h"
 #include "gs_file.h"
 #include "gs_menu.h"
+#include "gs_popup_cb.h"
+#include "gs_mainmenu_cb.h"
 #include "gs_listeditor.h"
 #include "gs_html.h"
 #include "gs_abouts.h"
@@ -108,7 +110,12 @@ GList
     * biblemods,
     *commentarymods,
     *dictionarymods,
-    *percommods, *sbfavoritesmods, *sbbiblemods, *sbdictmods, *sbcommods;
+    *percommods, 
+    *sbfavoritesmods, 
+    *sbbiblemods, 
+    *sbdictmods, 
+    *sbcommods,
+    *options;
 GtkWidget * NEtext,		/* note edit widget */
     *MainFrm;			/* main form widget  */
 gint curChapter = 8,		/* keep up with current chapter */
@@ -138,7 +145,16 @@ extern gint dictpages,		/* number of dictionaries */
  textpages,			/* number of Bible text */
  historyitems;			/* number of history items */
 extern SETTINGS * settings, myset;
-extern GtkWidget * shortcut_bar;
+extern GtkWidget 
+        *lang_options_menu,
+	*menuInt,
+	*shortcut_bar,
+	*strongsnum,
+	*footnotes,
+	*hebrewpoints,
+	*cantillationmarks,
+	*greekaccents,
+	*morphs;
 extern gchar * current_filename,	/* filename for open file in study pad window  */
  current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
 *mycolor, *mycolor;
@@ -193,6 +209,7 @@ void initSWORD(GtkWidget * mainform)
 	sbbiblemods = NULL;
 	sbcommods = NULL;
 	sbdictmods = NULL;
+	options = NULL;
 	settings->displaySearchResults = false;
 	
 	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
@@ -286,6 +303,12 @@ void initSWORD(GtkWidget * mainform)
 				comp1Mod->Disp(comp1Display);
 			}
 		}
+	}
+	//-- add globalOptions to menus
+	OptionsList optionslist = mainMgr->getGlobalOptions();
+	for (OptionsList::iterator it = optionslist.begin(); it != optionslist.end(); it++) {	
+		//-- save options in a glist for popup menus
+		options = g_list_append(options, (gchar *)(*it).c_str());
 	}
 }
 
@@ -544,184 +567,83 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 }
 
 /*******************************************************************************
- * toggle gbf morphological tags on and off
+ * toggle global options on and off
+ * option - the option user wants to toggle
  * window - the window to effect - text or interlinear
  * choice - true = on, false = off
  ******************************************************************************/
-void morphsSWORD(gint window, gboolean choice)
+void globaloptionsSWORD(gchar *option, gint window, gboolean choice)
 {
 	switch (window) {
 	case 0:		// main text window     
 		if (choice) {
-			mainMgr->setGlobalOption("Morphological Tags",
-						 "On");
+			mainMgr->setGlobalOption(option, "On");
 		} else {
-			mainMgr->setGlobalOption("Morphological Tags",
-						 "Off");
+			mainMgr->setGlobalOption(option, "Off");
 		}
-		settings->morphs = choice;	//-- store choice in settings
-		if (havebible) {
-			curMod->Display();	//-- we need to show change
+		
+		if(!strcmp(option, "Strong's Numbers")) {		
+			settings->strongs = choice;				
+			/* set strongs toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), settings->strongs);	
 		}
-		break;
-	case 1:		// interlinear window   
-		if (choice) {
-			mainMgr1->setGlobalOption("Morphological Tags",
-						  "On");
-		} else {
-			mainMgr1->setGlobalOption("Morphological Tags",
-						  "Off");
+		
+		if(!strcmp(option,"Footnotes" )) {
+			settings->footnotes = choice;
 		}
-		settings->morphsint = choice;	//-- store choice in settings
-		if (havebible) {
-			updateinterlinearpage();
+		
+		if(!strcmp(option, "Morphological Tags")) {
+			settings->morphs = choice;
+		}			
+		
+		if(!strcmp(option, "Hebrew Vowel Points")) {
+			settings->hebrewpoints = choice;
 		}
-		break;
-	}
-}
-
-/*******************************************************************************
- * toggle hebrew points on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void hebrewpointsSWORD(gint window, gboolean choice)
-{
-	switch (window) {
-	case 0:		//--  main text window     
-		if (choice) {
-			mainMgr->setGlobalOption("Hebrew Vowel Points",
-						 "On");
-		} else {
-			mainMgr->setGlobalOption("Hebrew Vowel Points",
-						 "Off");
+		
+		if(!strcmp(option, "Hebrew Cantillation")) {
+			settings->cantillationmarks = choice;
 		}
-		settings->hebrewpoints = choice;
-		//-- settings->morphs = choice;	//-- store choice in settings
-		if (havebible) {
-			curMod->Display();	//-- we need to show change
+		
+		if(!strcmp(option, "Greek Accents")) {
+			settings->greekaccents = choice;
 		}
-		break;
-	case 1:		//-- interlinear window   
-		if (choice) {
-			mainMgr1->setGlobalOption("Hebrew Vowel Points",
-						  "On");
-		} else {
-			mainMgr1->setGlobalOption("Hebrew Vowel Points",
-						  "Off");
-		}
-		settings->hebrewpointsint = choice;
-		//-- settings->morphsint = choice;	//-- store choice in settings
-		if (havebible) {
-			updateinterlinearpage();
-		}
-		break;
-	}
-}
-
-/*******************************************************************************
- * toggle hebrew cantillation marks on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void cantillationmarksSWORD(gint window, gboolean choice)
-{
-	switch (window) {
-	case 0:		//--  main text window     
-		if (choice) {
-			mainMgr->setGlobalOption("Hebrew Cantillation",
-						 "On");
-		} else {
-			mainMgr->setGlobalOption("Hebrew Cantillation",
-						 "Off");
-		}
-		settings->cantillationmarks = choice;
-		//-- settings->morphs = choice;	//-- store choice in settings
-		if (havebible) {
-			curMod->Display();	//-- we need to show change
-		}
-		break;
-	case 1:		//-- interlinear window   
-		if (choice) {
-			mainMgr1->setGlobalOption("Hebrew Cantillation",
-						  "On");
-		} else {
-			mainMgr1->setGlobalOption("Hebrew Cantillation",
-						  "Off");
-		}
-		settings->cantillationmarksint = choice;
-		//-- settings->morphsint = choice;	//-- store choice in settings
-		if (havebible) {
-			updateinterlinearpage();
-		}
-		break;
-	}
-}
-
-
-
-/*******************************************************************************
- * toggle gbf Strongs numbers on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void strongsSWORD(gint window, gboolean choice)
-{
-	switch (window) {
-	case 0:		// main text window     
-		if (choice) {	//-- if choice is TRUE - we want strongs numbers    
-			mainMgr->setGlobalOption("Strong's Numbers", "On");
-		} else {	//-- we don't want strongs numbers     
-			mainMgr->setGlobalOption("Strong's Numbers",
-						 "Off");
-		}
-		settings->strongs = choice;	//-- store choice in settings
-		if (havebible) {
-			curMod->Display();	//-- we need to show change
-		}
-		break;
-	case 1:		// interlinear window   
-		if (choice) {	//-- if choice is TRUE - we want strongs numbers
-			mainMgr1->setGlobalOption("Strong's Numbers",
-						  "On");
-		} else {	//-- we don't want strongs numbers                                     
-			mainMgr1->setGlobalOption("Strong's Numbers",
-						  "Off");
-		}
-		settings->strongsint = choice;	//-- store choice in settings
-		if (havebible) {
-			updateinterlinearpage();
-		}
-		break;
-	}
-}
-
-/*******************************************************************************
- * toggle gbf footnotes on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void footnotesSWORD(gint window, gboolean choice)
-{
-	switch (window) {
-	case 0:		// main text window     
-		if (choice) {
-			mainMgr->setGlobalOption("Footnotes", "On");
-		} else {
-			mainMgr->setGlobalOption("Footnotes", "Off");
-		}
-		settings->footnotes = choice;
+		
 		if (havebible) {
 			curMod->Display();
 		}
+		
 		break;
 	case 1:		// interlinear window   
 		if (choice) {
-			mainMgr1->setGlobalOption("Footnotes", "On");
+			mainMgr1->setGlobalOption(option, "On");
 		} else {
-			mainMgr1->setGlobalOption("Footnotes", "Off");
+			mainMgr1->setGlobalOption(option, "Off");
 		}
-		settings->footnotesint = choice;
+		
+		if(!strcmp(option, "Strong's Numbers")) {		
+			settings->strongsint = choice;	
+		}
+		
+		if(!strcmp(option,"Footnotes" )) {
+			settings->footnotesint = choice;
+		}
+		
+		if(!strcmp(option, "Morphological Tags")) {
+			settings->morphsint = choice;
+		}			
+		
+		if(!strcmp(option, "Hebrew Vowel Points")) {
+			settings->hebrewpointsint = choice;
+		}
+		
+		if(!strcmp(option, "Hebrew Cantillation")) {
+			settings->cantillationmarksint = choice;
+		}
+		
+		if(!strcmp(option, "Greek Accents")) {
+			settings->greekaccentsint = choice;
+		}
+		
 		if (havebible) {
 			updateinterlinearpage();
 		}
@@ -824,7 +746,7 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 			}
 		}
 		strcpy(settings->MainWindowModule, (gchar *) curMod->Name());	//-- remember where we are so we can open here next time we startup
-		sprintf(title, "GnomeSword - %s", (gchar *) curMod->Description());	//curMod->Description());              
+		sprintf(title, "GnomeSWORD - %s", (gchar *) curMod->Description());	//curMod->Description());              
 		gtk_window_set_title(GTK_WINDOW(settings->app), title);
 	}
 	frame = lookup_widget(settings->app, "frame9");

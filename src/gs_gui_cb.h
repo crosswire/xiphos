@@ -34,6 +34,9 @@ extern "C" {
 
 #include <gnome.h>
 
+	void on_mainwindow_draw(GtkWidget *widget,
+                                        GdkRectangle    *area,
+                                        gpointer         user_data);
 	void on_nbTextMods_switch_page(GtkNotebook * notebook,
 				       GtkNotebookPage * page,
 				       gint page_num, gpointer user_data);

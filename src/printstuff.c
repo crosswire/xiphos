@@ -63,13 +63,13 @@
 #include "printstuff.h"
 #include "support.h"
 
-#include <libgnomeprint/gnome-printer.h>
-#include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-printer-dialog.h>
+#include <gnome-1.0/libgnomeprint/gnome-printer.h>
+#include <gnome-1.0/libgnomeprint/gnome-print.h>
+#include <gnome-1.0/libgnomeprint/gnome-printer-dialog.h>
 
-#include <libgnomeprint/gnome-print-master.h>
-#include <libgnomeprint/gnome-print-master-preview.h>
-#include <libgnomeprint/gnome-print-preview.h>
+#include <gnome-1.0/libgnomeprint/gnome-print-master.h>
+#include <gnome-1.0/libgnomeprint/gnome-print-master-preview.h>
+#include <gnome-1.0/libgnomeprint/gnome-print-preview.h>
 
 GtkWidget *text1;
 gchar *currentfilename;
