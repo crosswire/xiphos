@@ -339,6 +339,10 @@ char GBFHTMLHREF::ProcessText(char *text, int maxlen, const SWKey *key)
 							continue;
 						case 'M':               // new paragraph
 							*to++ = '<';
+							*to++ = '!';
+							*to++ = 'P';
+							*to++ = '>';
+							*to++ = '<';
 							*to++ = 'B';
 							*to++ = 'R';
 							*to++ = '>';

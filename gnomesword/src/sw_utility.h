@@ -38,6 +38,8 @@ extern "C" {
 
 	gchar *addrenderfiltersSWORD(SWModule * module,
 				ConfigEntMap & section);
+	/* path to sword mods */
+	char *pathtomods(void);
 	void changeModuleUTILITY(SWModule * module, 
 				SWMgr * Mgr,
 				char *modName);
