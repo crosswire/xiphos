@@ -37,7 +37,7 @@ extern "C" {
 #include "gs_gnomesword.h"
 	void initSWORD(SETTINGS *s);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
-	void updateIntDlg(void);
+	void updateIntDlg(SETTINGS *s);
 	void updateinterlinearpage(void);
 	void shutdownSWORD(void);
 	void FillDictKeysSWORD(void);

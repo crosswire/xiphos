@@ -57,6 +57,87 @@
 GtkWidget *appbar1;
 GtkWidget *main_label;
 
+
+static char *book_open_xpm[] = {
+	"16 16 4 1",
+	"       c None s None",
+	".      c black",
+	"X      c #808080",
+	"o      c white",
+	"                ",
+	"  ..            ",
+	" .Xo.    ...    ",
+	" .Xoo. ..oo.    ",
+	" .Xooo.Xooo...  ",
+	" .Xooo.oooo.X.  ",
+	" .Xooo.Xooo.X.  ",
+	" .Xooo.oooo.X.  ",
+	" .Xooo.Xooo.X.  ",
+	" .Xooo.oooo.X.  ",
+	"  .Xoo.Xoo..X.  ",
+	"   .Xo.o..ooX.  ",
+	"    .X..XXXXX.  ",
+	"    ..X.......  ",
+	"     ..         ",
+	"                "
+};
+
+static char *book_closed_xpm[] = {
+	"16 16 6 1",
+	"       c None s None",
+	".      c black",
+	"X      c red",
+	"o      c yellow",
+	"O      c #808080",
+	"#      c white",
+	"                ",
+	"       ..       ",
+	"     ..XX.      ",
+	"   ..XXXXX.     ",
+	" ..XXXXXXXX.    ",
+	".ooXXXXXXXXX.   ",
+	"..ooXXXXXXXXX.  ",
+	".X.ooXXXXXXXXX. ",
+	".XX.ooXXXXXX..  ",
+	" .XX.ooXXX..#O  ",
+	"  .XX.oo..##OO. ",
+	"   .XX..##OO..  ",
+	"    .X.#OO..    ",
+	"     ..O..      ",
+	"      ..        ",
+	"                "
+};
+
+static char *mini_page_xpm[] = {
+	"16 16 4 1",
+	"       c None s None",
+	".      c black",
+	"X      c white",
+	"o      c #808080",
+	"                ",
+	"   .......      ",
+	"   .XXXXX..     ",
+	"   .XoooX.X.    ",
+	"   .XXXXX....   ",
+	"   .XooooXoo.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   .XooooooX.o  ",
+	"   .XXXXXXXX.o  ",
+	"   ..........o  ",
+	"    oooooooooo  ",
+	"                "
+};
+GdkPixmap *pixmap1;
+GdkPixmap *pixmap2;
+GdkPixmap *pixmap3;
+GdkBitmap *mask1;
+GdkBitmap *mask2;
+GdkBitmap *mask3;
+
 extern GtkWidget *shortcut_bar;
 extern EShortcutModel *shortcut_model;
 //extern SETTINGS *settings;
@@ -245,7 +326,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *handleboxOptionsBar;
 	GtkWidget *toolbarOptions;
 	GtkWidget *tmp_toolbar_icon;
-  GtkWidget *btnSBDock;
+	GtkWidget *btnSBDock;
 	GtkWidget *btnStrongs;
 	GtkWidget *btnMorphs;
 	GtkWidget *btnFootnotes;
@@ -262,7 +343,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *btnBack;
 	GtkWidget *btnFoward;
 	GtkWidget *vseparator13;
-//	GtkWidget *btnExit;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
 	GtkWidget *epaned;
@@ -303,7 +383,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *label85;
 	GtkWidget *swInt;
 	GtkWidget *framedict;
-//	GtkWidget *label12;
 	GtkWidget *label41;
 	GtkWidget *label;
 	GtkWidget *hbox8;
@@ -319,7 +398,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *dictionarySearchText;
 	GtkWidget *btnKeyNext;
 	GtkWidget *list1;
-//	GtkWidget *notebookGBS;
 	GtkWidget *label58;
 	GtkWidget *label185;
 	GtkWidget *label197;
@@ -327,7 +405,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *hbox25;
 	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
-
+	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
 	if (s->showsplash) {
@@ -1082,9 +1160,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label64);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (notebook3),
-							     0), label64);
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook3),0), label64);
 	
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
@@ -1510,6 +1586,20 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gnome_app_set_statusbar(GNOME_APP(s->app), appbar1);
 
 	s->appbar = lookup_widget(s->app, "appbar1");
+
+        /**** create pixmaps of ctrees  ****/
+		
+	gtk_widget_realize(s->app); /** added to stop annoying gdk warning on startup **/
+	pixmap1 =                   /** when these pixmaps are created **/
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask1,
+					 &transparent, book_closed_xpm);
+	pixmap2 =
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask2,
+					 &transparent, book_open_xpm);
+	pixmap3 =
+	    gdk_pixmap_create_from_xpm_d(s->app->window, &mask3,
+					 &transparent, mini_page_xpm);
+
 
 
 	gtk_signal_connect(GTK_OBJECT(s->app), "destroy",

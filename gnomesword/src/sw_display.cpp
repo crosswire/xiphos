@@ -438,6 +438,14 @@ void GtkHTMLEntryDisp::marksearchwords( GString *str )
 	g_free(searchbuf);
 }
 
+extern SWModule
+    *interlinearMod0,			/* module for first interlinear window */
+    *interlinearMod1,			/* module for first interlinear window */
+    *interlinearMod2,			/* module for first interlinear window */
+    *interlinearMod3,			/* module for first interlinear window */
+    *interlinearMod4;			/* module for first interlinear window */
+
+
 char IntDisplay(SETTINGS *s)
 {
 	gchar 
@@ -447,121 +455,139 @@ char IntDisplay(SETTINGS *s)
 		buf[500], 
 		*tmpkey;
 	
-	SWMgr 	*mgr;
-	
 	bool 
 		evenRow = FALSE;
 	
 	extern SWModule 
 		*curMod;
 	
-	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	extern SWMgr
+		*mainMgr1;
+		
+	SWModule *mod = mainMgr1->Modules[curMod->Name()];
 	
-	SWModule *mod = mgr->Modules[curMod->Name()];
-	
-	tmpkey = g_strdup(settings->currentverse);
+	tmpkey = g_strdup(s->currentverse);
 	mod->SetKey(tmpkey);
-	VerseKey *key = (VerseKey *) (SWKey *) *mod;
+	VerseKey *key = (VerseKey *) (SWKey *) *mod;	
 	
-	beginHTML(settings->htmlInterlinear, TRUE);
-	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
-			settings->bible_bg_color,
-			settings->bible_text_color, settings->link_color);
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-
-
-	sprintf(buf,"%s","</tr>");		
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
 	bgColor = "#f1f1f1";
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !mod->Error()); (*mod)++) {
 		sprintf(buf,"%s","<tr valign=\"top\">");		
-		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-		displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
 				
 		if(key->Verse() == curVerse)
-			textColor = settings->currentverse_color;
+			textColor = s->currentverse_color;
 		else 
-			textColor = settings->bible_text_color;
+			textColor = s->bible_text_color;
 		
 		if(evenRow) {
 			evenRow = false;
-			bgColor = settings->bible_bg_color;
+			bgColor = s->bible_bg_color;
 		}
 			
 		else {
 			evenRow = true;
 			bgColor = "#f1f1f1";				
-		}
-		
-		for(int i=0;i< 5; i++) {
-			SWModule *m;
-			
-			switch(i) {
-				case 0: m = mgr->Modules[s->Interlinear1Module];
-					break;
-				case 1: m = mgr->Modules[s->Interlinear2Module];
-					break;
-				case 2: m = mgr->Modules[s->Interlinear3Module];
-					break;
-				case 3: m = mgr->Modules[s->Interlinear4Module];
-					break;
-				case 4: m = mgr->Modules[s->Interlinear5Module];
-					break;
-			}
-			
-			mgr->setGlobalOption("Strong's Numbers", "Yes");
-			
-			m->SetKey(key);
-			sprintf(buf,
-				"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
-				bgColor,
-				m->KeyText(),
-				key->Verse(),				 
-				settings->bible_verse_num_color, 
-				key->Verse(),
-				textColor);
-			utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-			displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-			utf8str = (gchar*)m->RenderText();
-			displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-			sprintf(buf, "%s", "</font></td>");	
-			utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);			
-			displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
 		}	
-		sprintf(buf,"%s","</tr>");		
-		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-		displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-	}
+		//--interlinearMod0
+		interlinearMod0->SetKey(key);
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
+			bgColor,
+			interlinearMod0->KeyText(),
+			key->Verse(),				 
+			s->bible_verse_num_color, 
+			key->Verse(),
+			textColor);
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = (gchar*)interlinearMod0->RenderText();
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		sprintf(buf, "%s", "</font></td>");	
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
 	
-	sprintf(buf,"%s","</table></body></html>");		
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-	endHTML(settings->htmlInterlinear);	
-	sprintf(buf, "%d", curVerse);
-	gotoanchorHTML(settings->htmlInterlinear, buf);
+		//--interlinearMod1
+		interlinearMod1->SetKey(key);
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
+			bgColor,
+			interlinearMod1->KeyText(),
+			key->Verse(),				 
+			s->bible_verse_num_color, 
+			key->Verse(),
+			textColor);
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = (gchar*)interlinearMod1->RenderText();
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		sprintf(buf, "%s", "</font></td>");	
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		
+		//--interlinearMod2
+		interlinearMod2->SetKey(key);
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
+			bgColor,
+			interlinearMod2->KeyText(),
+			key->Verse(),				 
+			s->bible_verse_num_color, 
+			key->Verse(),
+			textColor);
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = (gchar*)interlinearMod2->RenderText();
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		sprintf(buf, "%s", "</font></td>");	
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		
+		//--interlinearMod3
+		interlinearMod3->SetKey(key);
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
+			bgColor,
+			interlinearMod3->KeyText(),
+			key->Verse(),				 
+			s->bible_verse_num_color, 
+			key->Verse(),
+			textColor);
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = (gchar*)interlinearMod3->RenderText();
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		sprintf(buf, "%s", "</font></td>");	
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		
+		//--interlinearMod4
+		interlinearMod4->SetKey(key);
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font color=\"%s\">", 
+			bgColor,
+			interlinearMod4->KeyText(),
+			key->Verse(),				 
+			s->bible_verse_num_color, 
+			key->Verse(),
+			textColor);
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		utf8str = (gchar*)interlinearMod4->RenderText();
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+		sprintf(buf, "%s", "</font></td>");	
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);			
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));		
+		
+		sprintf(buf,"%s","</tr>");		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	}	
 	g_free(tmpkey);
-	delete mgr;		//-- delete Sword manager   
 	return 0;
 }
 

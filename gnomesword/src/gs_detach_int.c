@@ -46,7 +46,7 @@ undock_interlinear_page(SETTINGS *s)
 	gtk_widget_reparent(s->frameInt , vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(s->workbook_lower),
                                              2);
-	updateIntDlg();
+	updateIntDlg(s);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
 }
 
