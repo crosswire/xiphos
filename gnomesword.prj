@@ -58,7 +58,7 @@ project.config.extra.modules.after=
 
 module.include.name=.
 module.include.type=
-module.include.expanded=0
+module.include.expanded=1
 module.include.files=\
 	src/backend/viewdict.h\
 	src/backend/viewcomm.h\
@@ -217,7 +217,6 @@ module.source.files=\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c
-
 
 module.pixmap.name=.
 module.pixmap.type=

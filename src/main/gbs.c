@@ -221,42 +221,6 @@ gboolean display_row_gbs(gint book_num, gchar *offset)
 
 /******************************************************************************
  * Name
- *  get_gbs
- *
- * Synopsis
- *   #include "gbs.h"
- *
- *   GBS_DATA *get_gbs(GList * gbs)	
- *
- * Description
- *    
- *
- * Return value
- *   GBS_DATA*
- */ 
- 
-GBS_DATA *get_gbs(GList * gbs)
-{
-	GList *tmp;
-	GBS_DATA *g = NULL;
-
-	tmp = NULL;
-	tmp = gbs;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		g = (GBS_DATA *) tmp->data;
-		if (!strcmp(g->bookName, settings.BookWindowModule)) {
-			break;
-		}
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	return g;
-}
-
-
-/******************************************************************************
- * Name
  *  new_gbs_display 
  *
  * Synopsis
