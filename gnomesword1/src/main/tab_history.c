@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * history.c - add, remove and nav history
+ * tab_history.c - add, remove and navigate history
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2005 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,27 +40,15 @@
 #include "main/xml.h"
 
 
-/******************************************************************************
- * global
- */
-
-//gint history_items = 0;
-
-/******************************************************************************
- * static 
- */
-//static gint current_history_item = 0;
-//static gboolean first_back_click = TRUE;
-
 
 /******************************************************************************
  * Name
- *  gui_clear_history
+ *   main_clear_tab_history
  *
  * Synopsis
- *   #include "gui/history.h"
+ *   #include "main/tab_history.h"
  *
- *   void gui_clear_history(GtkWidget * app)	
+ *   void main_clear_tab_history(void)	
  *
  * Description
  *    
@@ -89,12 +77,12 @@ void main_clear_tab_history(void)
 
 /******************************************************************************
  * Name
- *  updatehistorymenu
+ *   main_update_tab_history_menu
  *
  * Synopsis
- *   #include "gui/history.h"
+ *   #include "main/tab_history.h"
  *
- *   void update_history_menu(GtkWidget * app)	
+ *   void main_update_tab_history_menu(gpointer data)	
  *
  * Description
  *    
@@ -140,12 +128,12 @@ void main_update_tab_history_menu(gpointer data)
 
 /******************************************************************************
  * Name
- *  gui_add_history_Item
+ *   main_add_tab_history_item
  *
  * Synopsis
- *   #include "gui/history.h"
+ *   #include "main/tab_history.h"
  *
- *   void gui_add_history_Item(GtkWidget * app, gchar * ref)	
+ *   void main_add_tab_history_item(gpointer data)	
  *
  * Description
  *    add an item to the history menu
@@ -158,7 +146,7 @@ void main_add_tab_history_item(gpointer data)
 {
 	gint i;
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
-	//g_message("history = %s",ref);
+	
 	/* check to see if item is already in list  
 	   if so do nothing */
 	for (i = 0; i < tab->history_items; i++) {
@@ -184,19 +172,19 @@ void main_add_tab_history_item(gpointer data)
 	if (tab->current_history_item > 1)
 		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-	main_update_tab_history_menu(data); //update_history_menu(app);
+	main_update_tab_history_menu(data);
 	tab->first_back_click = TRUE;
 }
 
 
 /******************************************************************************
  * Name
- *  gui_change_verse_history
+ *   main_change_verse_tab_history
  *
  * Synopsis
- *   #include "gui/history.h"
+ *   #include "main/tab_history.h"
  *
- *   void gui_change_verse_history(gint historynum)	
+ *   void main_change_verse_tab_history(gint historynum)	
  *
  * Description
  *    
@@ -236,12 +224,12 @@ void main_change_verse_tab_history(gint historynum)
 
 /******************************************************************************
  * Name
- *  gui_navigate_history
+ *   main_navigate_tab_history
  *
  * Synopsis
- *   #include "gui/history.h"
+ *   #include "main/tab_history.h"
  *
- *   void gui_navigate_history(GtkWidget * app, gint direction)	
+ *   void main_navigate_tab_history(gint direction)
  *
  * Description
  *    
