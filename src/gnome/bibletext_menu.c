@@ -353,6 +353,8 @@ static void global_option_red_words(GtkMenuItem * menuitem,
 				    TEXT_DATA * t)
 {
 	t->tgs->words_in_red = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Red letter words", 
+				    t->tgs->words_in_red);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -377,6 +379,8 @@ static void global_option_red_words(GtkMenuItem * menuitem,
 static void global_option_strongs(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->strongs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Strong's Numbers", 
+				    t->tgs->strongs);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -401,6 +405,8 @@ static void global_option_strongs(GtkMenuItem * menuitem, TEXT_DATA * t)
 static void global_option_morph(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->morphs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Morphological Tags", 
+				    t->tgs->morphs);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -426,6 +432,8 @@ static void global_option_footnotes(GtkMenuItem * menuitem,
 				    TEXT_DATA * t)
 {
 	t->tgs->footnotes = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Footnotes", 
+				    t->tgs->footnotes);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -450,6 +458,8 @@ static void global_option_greekaccents(GtkMenuItem * menuitem,
 				       TEXT_DATA * t)
 {
 	t->tgs->greekaccents = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Greek Accents", 
+				    t->tgs->greekaccents);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -474,6 +484,8 @@ static void global_option_greekaccents(GtkMenuItem * menuitem,
 static void global_option_lemmas(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->lemmas = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Lemmas", 
+				    t->tgs->lemmas);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -499,6 +511,8 @@ static void global_option_scripturerefs(GtkMenuItem * menuitem,
 					TEXT_DATA * t)
 {
 	t->tgs->scripturerefs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Scripture Cross-references", 
+				    t->tgs->scripturerefs);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -524,6 +538,8 @@ static void global_option_hebrewpoints(GtkMenuItem * menuitem,
 				       TEXT_DATA * t)
 {
 	t->tgs->hebrewpoints = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Hebrew Vowel Points", 
+				    t->tgs->hebrewpoints);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -549,6 +565,8 @@ static void global_option_hebrewcant(GtkMenuItem * menuitem,
 				     TEXT_DATA * t)
 {
 	t->tgs->hebrewcant = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Hebrew Cantillation", 
+				    t->tgs->hebrewcant);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -574,6 +592,8 @@ static void global_option_headings(GtkMenuItem * menuitem,
 				   TEXT_DATA * t)
 {
 	t->tgs->headings = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Headings", 
+				    t->tgs->headings);
 	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
@@ -600,6 +620,8 @@ static void global_option_variants_all(GtkMenuItem * menuitem,
 				       TEXT_DATA * t)
 {
 	t->tgs->variants_all = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "All Readings", 
+				    t->tgs->variants_all);
 	if (t->tgs->variants_all)
 		chapter_display(t->html, t->mod_name,
 				t->tgs, t->key, TRUE);
@@ -628,6 +650,8 @@ static void global_option_variants_primary(GtkMenuItem * menuitem,
 {
 	t->tgs->variants_primary =
 	    GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Primary Reading", 
+				    t->tgs->variants_primary);
 	if (t->tgs->variants_primary)
 		chapter_display(t->html, t->mod_name,
 				t->tgs, t->key, TRUE);
@@ -656,6 +680,8 @@ static void global_option_variants_scondary(GtkMenuItem * menuitem,
 {
 	t->tgs->variants_secondary =
 	    GTK_CHECK_MENU_ITEM(menuitem)->active;
+	save_module_options(t->mod_name, "Secondary Reading", 
+				    t->tgs->variants_secondary);
 	if (t->tgs->variants_secondary)
 		chapter_display(t->html, t->mod_name,
 				t->tgs, t->key, TRUE);

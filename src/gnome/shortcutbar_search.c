@@ -136,7 +136,7 @@ static void fill_search_results_clist(int finds)
 
 	
 	gtk_clist_clear(GTK_CLIST(sv->clist));
-	
+	set_results_position((char) 1);	/* TOP */
 	while((key_buf = get_next_result_key()) != NULL) {
 		tmpbuf = (gchar*)key_buf;
 		gtk_clist_insert(GTK_CLIST(sv->clist), i++, &tmpbuf);

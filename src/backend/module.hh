@@ -33,6 +33,7 @@ struct _name_type {
 };
 
 
+int backend_is_module_rtl(char * mod_name);
 void backend_module_name_from_description(char * mod_name, 
 						char * mod_desc);
 int backend_do_module_search(char * module_name ,char *search_string, 
