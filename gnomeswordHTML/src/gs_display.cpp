@@ -242,7 +242,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 						 mycolor);
 			} else if (!stricmp(font, "greek1")) {
 				g_string_sprintf(strbuf,
-						 "<FONT SIZE=\"+2\" COLOR=\"%s\" FACE=\"greek1\">",
+						 "<FONT SIZE=\"+5\" COLOR=\"%s\" FACE=\"greek1\">",
 						 mycolor);
 			
 			} else if (!stricmp(font, "BSTHebrew")) {
@@ -290,7 +290,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			if (!stricmp(font, "Symbol")) {
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */				
 			} else if (!stricmp(font, "greek1")) {
-				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"greek1\">");
+				strbuf = g_string_new("<FONT SIZE=\"+5\"  COLOR=\"#000000\" FONT FACE=\"greek1\">");
 			} else if (!stricmp(font, "BSTHebrew")) {
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");					
 			} else {
@@ -346,31 +346,32 @@ char InterlinearDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-	bool gbf = false;
+	//bool gbf = false;
 	gint len;
 	gchar *sourceformat;
-	char *Buf;
-
+	char *Buf, *modName;	
+		
 	font = "Roman";
 	buf = (char *) imodule.Description();
 	if ((sit = mainMgr1->config->Sections.find(comp1Mod->Name())) !=
-	    mainMgr1->config->Sections.end()) {
+	    		mainMgr1->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
-		    (*sit).second.end()) {
-			font = (char *) (*eit).second.c_str();
+		    	(*sit).second.end()) {
+				font = (char *) (*eit).second.c_str();
 		}
+		/*
 		eit = (*sit).second.find("SourceType");
 		if (eit != (*sit).second.end())
-			sourceformat = (char *) (*eit).second.c_str();
+				sourceformat = (char *) (*eit).second.c_str();
 		if (!stricmp(sourceformat, "GBF"))
-			gbf = true;
+				gbf = true;
+		*/
 	} 
 	(const char *) imodule;
 	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
-
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	/* heading */
@@ -402,7 +403,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_append(strbuf, "<BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
-	}
+	}	
 	return 0;
 }
 

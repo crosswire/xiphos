@@ -40,14 +40,16 @@
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
+#include "filebar.h"
 
 #include "editbar.h"
 #include "toolbar.h"
 #include "utils.h"
 #include "properties.h"
 #include "text.h"
-#include "gs_sword.h" 
+//#include "gs_sword.h" 
 #include "gs_editor.h" 
+#include "control-data.h"
 
 static void
 edit_toolbar_copy_cb (GtkWidget *widget, GtkHTMLControlData *cd)
@@ -58,11 +60,15 @@ static void
 edit_toolbar_cut_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 {
 	html_engine_cut(cd->html->engine);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 static void
 edit_toolbar_paste_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 {
 	html_engine_paste(cd->html->engine);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 

@@ -42,15 +42,15 @@
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
 
+#include "control-data.h"
 #include "toolbar.h"
 #include "filebar.h"
 #include "utils.h"
 #include "properties.h"
 #include "text.h"
-#include "gs_sword.h" /*  add by tb 2001-04-18  */
+//#include "gs_sword.h" /*  add by tb 2001-04-18  */
 #include "gs_editor.h" /*  add by tb 2001-04-18  */
 #include "tt.xpm"
-
 
 
 #define EDITOR_TOOLBAR_PATH "/HTMLEditor"
@@ -155,6 +155,7 @@ set_font_size (GtkWidget *w, GtkHTMLControlData *cd)
 	if (!cd->block_font_style_change)
 		gtk_html_set_font_style (cd->html, GTK_HTML_FONT_STYLE_MAX & ~GTK_HTML_FONT_STYLE_SIZE_MASK, style);
 	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -167,6 +168,7 @@ font_size_changed (GtkWidget *w, GtkHTMLParagraphStyle style, GtkHTMLControlData
 				     (style & GTK_HTML_FONT_STYLE_SIZE_MASK) - GTK_HTML_FONT_STYLE_SIZE_1);
 	cd->block_font_style_change = FALSE;
 	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static GtkWidget *
@@ -221,6 +223,7 @@ color_changed (GtkWidget *w, GdkColor *gdk_color, GtkHTMLControlData *cd)
 	if (color)
 		html_color_unref (color);
 	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -284,6 +287,8 @@ editor_toolbar_tt_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 		else
 			gtk_html_set_font_style (GTK_HTML (cd->html), ~GTK_HTML_FONT_STYLE_FIXED, 0);
 	}
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -297,6 +302,8 @@ editor_toolbar_bold_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 		else
 			gtk_html_set_font_style (GTK_HTML (cd->html), ~GTK_HTML_FONT_STYLE_BOLD, 0);
 	}
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -310,6 +317,8 @@ editor_toolbar_italic_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 		else
 			gtk_html_set_font_style (GTK_HTML (cd->html), ~GTK_HTML_FONT_STYLE_ITALIC, 0);
 	}
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -323,6 +332,8 @@ editor_toolbar_underline_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 		else
 			gtk_html_set_font_style (GTK_HTML (cd->html), ~GTK_HTML_FONT_STYLE_UNDERLINE, 0);
 	}
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -336,6 +347,8 @@ editor_toolbar_strikeout_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 		else
 			gtk_html_set_font_style (GTK_HTML (cd->html), ~GTK_HTML_FONT_STYLE_STRIKEOUT, 0);
 	}
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -385,6 +398,8 @@ editor_toolbar_left_align_cb (GtkWidget *widget,
 
 	gtk_html_set_paragraph_alignment (GTK_HTML (cd->html),
 					  GTK_HTML_PARAGRAPH_ALIGNMENT_LEFT);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -398,6 +413,8 @@ editor_toolbar_center_cb (GtkWidget *widget,
 
 	gtk_html_set_paragraph_alignment (GTK_HTML (cd->html),
 					  GTK_HTML_PARAGRAPH_ALIGNMENT_CENTER);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -411,6 +428,8 @@ editor_toolbar_right_align_cb (GtkWidget *widget,
 
 	gtk_html_set_paragraph_alignment (GTK_HTML (cd->html),
 					  GTK_HTML_PARAGRAPH_ALIGNMENT_RIGHT);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -456,6 +475,8 @@ editor_toolbar_indent_cb (GtkWidget *widget,
 			  GtkHTMLControlData *cd)
 {
 	gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), +1);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -463,6 +484,8 @@ editor_toolbar_unindent_cb (GtkWidget *widget,
 			    GtkHTMLControlData *cd)
 {
 	gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), -1);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 

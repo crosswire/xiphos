@@ -49,7 +49,7 @@
 //#include "menubar.h"
 //#include "persist-file-impl.h"
 //#include "persist-stream-impl.h"
-
+#include "gs_sword.h"
 #include "gs_editor.h"
 #include "control-data.h"
 #include "popup.h"
@@ -62,6 +62,7 @@
 #include "paragraph.h"
 #include "link.h"
 #include "body.h"
+#include "filebar.h"
 //#include "spell.h"
 //#include "resolver-progressive-impl.h"
 
@@ -70,25 +71,11 @@
 //#include "gtkhtmldebug.h"
 
 
+
 GtkWidget *statusbar;
 GtkWidget *notebookEDITOR;
-extern gchar filename[240];
 
-/******************************************************************************
- * updatestatusbar - 
- ******************************************************************************/
-static void updatestatusbar(GtkHTMLControlData * cd)
-{ 
-	gint context_id2;
-	gchar buf[255];
 
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(cd->statusbar),
-					 "GnomeSword");
-	gtk_statusbar_pop(GTK_STATUSBAR(cd->statusbar), context_id2);
-	sprintf(buf,"%s - modified",cd->filename);
-	gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, buf);
-}
 
 /******************************************************************************
  * this code taken form GtkHTML
@@ -147,7 +134,7 @@ release(GtkWidget * widget, GdkEventButton * event,
 				     HTML_TYPE_TEXT) ?
 				    GTK_HTML_EDIT_PROPERTY_TEXT :
 				    GTK_HTML_EDIT_PROPERTY_LINK;
-
+ 
 				break;
 			case HTML_TYPE_RULE:
 				gtk_html_edit_properties_dialog_add_entry
@@ -193,6 +180,8 @@ html_key_pressed(GtkWidget * html, GdkEventButton * event,
 	extern gchar sbNoteEditorText[];
 	
 	if(cd->note_editor) cd->filename = sbNoteEditorText;
+	updatestatusbar(cd);
+	cd->html_modified = TRUE;
 	updatestatusbar(cd);
 	return 1;
 }

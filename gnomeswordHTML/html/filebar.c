@@ -54,6 +54,32 @@
 gchar filename[240];
 GString *gstr;
 
+
+extern gboolean noteModified;
+extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved  */
+/******************************************************************************
+ * updatestatusbar - 
+ ******************************************************************************/
+void updatestatusbar(GtkHTMLControlData * cd)
+{ 
+	gint context_id2;
+	gchar buf[255];
+
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(cd->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(cd->statusbar), context_id2);
+	if(cd->html_modified)
+		sprintf(buf,"%s - modified",cd->filename);
+	else 
+		sprintf(buf,"%s",cd->filename);
+	gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, buf);
+	if(cd->note_editor)
+		noteModified = cd->html_modified;
+	else
+		file_changed = cd->html_modified;
+	
+}
 static gboolean
 save_note_receiver  (const HTMLEngine *engine,
 		const char *data,
@@ -126,7 +152,9 @@ loadFILE(GtkWidget *filesel, GtkHTMLControlData *cd)
 			gtk_html_set_editable (cd->html, TRUE);
 		gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, "error loading file");
 	}	
-	gtk_widget_destroy(filesel);	
+	gtk_widget_destroy(filesel);
+	cd->html_modified = FALSE;
+	updatestatusbar(cd);
 }
 
 static void on_ok_button1_clicked(GtkButton * button, GtkHTMLControlData *cd)
@@ -238,7 +266,8 @@ save(gchar *file, GtkHTMLControlData *cd)
 		gtk_statusbar_push(GTK_STATUSBAR(cd->statusbar), context_id2, buf);
 	}
 	cd->html_modified = FALSE;
-	close (fd);		
+	updatestatusbar(cd);
+	close (fd);
 	return retval;
 }
 
@@ -376,17 +405,24 @@ file_toolbar_sync_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 static void
 file_toolbar_savenote_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 {
-	gtk_html_set_editable(cd->html,FALSE); 
-	gstr = g_string_new("");
-	if (!gtk_html_save(cd->html, (GtkHTMLSaveReceiverFn)save_note_receiver, GINT_TO_POINTER (0)))
-		g_warning("file not writen");		
-	else
-		g_warning("file writen");
-	g_warning(gstr->str);
-	savenoteSWORD(gstr->str,cd->html_modified);
-	g_string_free(gstr,1);
-	gtk_html_set_editable(cd->html,TRUE); 
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cd->code_view_button))) {
+		gtk_html_set_editable(cd->html,FALSE); 
+		gstr = g_string_new("");
+		if (!gtk_html_save(cd->html, (GtkHTMLSaveReceiverFn)save_note_receiver, GINT_TO_POINTER (0)))
+			g_warning("file not writen");		
+		else
+			g_warning("file writen");
+		g_warning(gstr->str);
+		savenoteSWORD(gstr->str,cd->html_modified);
+		g_string_free(gstr,1);
+		gtk_html_set_editable(cd->html,TRUE); 
+	} else {
+		gchar *buf;
+		buf = gtk_editable_get_chars((GtkEditable *)cd->gtktext,0,-1); //-- get comments from text widget
+		savenoteSWORD(buf,cd->html_modified);
+	}
 	cd->html_modified = FALSE;
+	updatestatusbar(cd);
 }
 
 /*  add by tb 2001-04-18  */
@@ -493,11 +529,13 @@ create_file_toolbar (GtkHTMLControlData *cd)
 	gtk_box_pack_start (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (hbox);
-	if(cd->note_editor)
+	if(cd->note_editor) {
 		gnome_app_fill_toolbar_with_data (GTK_TOOLBAR (cd->toolbar_file), file_toolbar_file_note_uiinfo, NULL, cd);
-	else
+		cd->code_view_button = file_toolbar_file_note_uiinfo[0].widget;
+	} else {
 		gnome_app_fill_toolbar_with_data (GTK_TOOLBAR (cd->toolbar_file), file_toolbar_file_uiinfo, NULL, cd);
-	
+		cd->code_view_button = file_toolbar_file_uiinfo[0].widget;
+	}
 	return hbox;
 }
 

@@ -44,7 +44,7 @@ void strongsSWORD(gboolean choice);
 void footnotesSWORD(gboolean choice);
 void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);
-void changecomp1ModSWORD(gchar * modName);
+void changecomp1ModSWORD(gint num);
 void setversestyleSWORD(gboolean choice);
 void chapterSWORD(void);
 void verseSWORD(void);
@@ -93,6 +93,8 @@ gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
 gboolean saveconfig(void);
 gboolean loadconfig(void);
+void shutdownVTSWORD(void);
+GList* setupVTSWORD(GtkWidget *text);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
