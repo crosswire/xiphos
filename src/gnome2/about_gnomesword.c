@@ -63,6 +63,7 @@ gui_create_about_gnomesword(void)
   const gchar *documenters[] = { 
     "Pierre Benz",
     "Andy Piper",
+    "Peter von Kaehne",
     NULL
   };
   gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat";
