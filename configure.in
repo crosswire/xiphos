@@ -55,6 +55,8 @@ AC_DEFUN(GS_CHECK_LIB, [
 	fi
 ])
 
+AC_PROG_CC
+
 dnl Initialize xml-i18n-tools
 dnl AM_PROG_XML_I18N_TOOLS 
 
@@ -68,7 +70,6 @@ AM_ACLOCAL_INCLUDE(macros)
 
 GNOME_INIT
 AC_ISC_POSIX
-AC_PROG_CC
 AC_HEADER_STDC
 AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h getopt.h math.h time.h sys/types.h fcntl.h netdb.h netinet/in.h sys/socket.h arpa/inet.h dirent.h sys/select.h sys/time.h sys/ipc.h)
 
