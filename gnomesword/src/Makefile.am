@@ -21,6 +21,8 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_editor_replace.c \
     gs_editor_replace.h \
+    gs_editor_toolbar.c \
+    gs_editor_toolbar.h \
     gs_html_editor.c \
     gs_html_editor.h \
     gs_info_box.c \
