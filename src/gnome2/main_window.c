@@ -106,9 +106,9 @@ void gui_show_hide_comms(gboolean choice)
 {
 	settings.showcomms = choice;
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.box_comm);
+		gtk_widget_hide(widgets.notebook_comm_book);
 	} else {
-		gtk_widget_show(widgets.box_comm);
+		gtk_widget_show(widgets.notebook_comm_book);
 	}
 	gui_set_bible_comm_layout();
 }
@@ -168,22 +168,28 @@ void gui_set_bible_comm_layout(void)
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 				       settings.commpane_hight);
 	
-/*	if ((settings.showtexts == FALSE)
-	    && (settings.showcomms == FALSE)) {
-		gtk_paned_set_position(GTK_PANED(widgets.vpaned), 0);
+	if (settings.showtexts == FALSE) {
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
+
 	} else if (settings.showdicts == FALSE) {
 		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned),
+				       (widgets.vpaned2),
 				       settings.gs_hight);
 	} else {
 		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned),
-				       settings.upperpane_hight);
+				       (widgets.vpaned2),
+				       settings.commpane_hight);
 	}
-
-	if ((settings.showtexts == FALSE)
-	    && (settings.showcomms == TRUE)) {
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
+	if ((settings.showcomms == FALSE)
+		   && (settings.showdicts == FALSE)) {
+		gtk_paned_set_position(GTK_PANED
+				       (widgets.hpaned),
+				       settings.gs_width);	   
+	}
+	
+/*
+	if (settings.showcomms == TRUE) {
+		gtk_paned_set_position(GTK_PANED(widgets.vpaned2), settings.commpane_hight);
 	} else if (settings.showtexts == FALSE) {
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				       settings.gs_width);
