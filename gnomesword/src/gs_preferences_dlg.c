@@ -182,6 +182,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	sprintf(s->DictWindowModule, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry11")));
 	sprintf(s->personalcommentsmod, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entryDevotion")));
+	sprintf(s->devotionalmod, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry12")));
 	sprintf(s->lex_greek, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry14")));
@@ -277,6 +279,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
 	s->autosavepersonalcomments =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton8"))->active;
+	s->showdevotional =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDevotion"))->active;
 	/*** read layout spin buttons ***/
 	s->gs_width =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -473,7 +477,9 @@ setcolorpickersColor(SETTINGS *s,
 GtkWidget *create_dlgSettings(SETTINGS * s,
 			      GList * biblelist,
 			      GList * commlist,
-			      GList * dictlist, GList * percomlist)
+			      GList * dictlist, 
+				GList * percomlist,
+				GList *devotionlist)
 {
 	gint groupnum;
 	gchar *pathname;
@@ -527,6 +533,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *cbtnShowCOMtabs;
 	GtkWidget *cbtnShowDLtabs;
 	GtkWidget *checkbutton9;
+  GtkWidget *cbtnShowDevotion;
 	GtkWidget *vbox41;
 	GtkWidget *frame24;
 	GtkWidget *vbox29;
@@ -585,6 +592,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *entry12;
 	GtkWidget *combo27;
 	GtkWidget *entry14;
+	GtkWidget *comboDevotion;
+	GtkWidget *entryDevotion;
+	GtkWidget *labelDevotion;
 	GtkWidget *label160;
 	GtkWidget *label161;
 	GtkWidget *label162;
@@ -1177,6 +1187,17 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton9),
 				     s->versestyle);
 
+
+  cbtnShowDevotion = gtk_check_button_new_with_label (_("Show Daily Devotion"));
+  gtk_widget_ref (cbtnShowDevotion);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowDevotion", cbtnShowDevotion,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnShowDevotion);
+  gtk_box_pack_start (GTK_BOX (vbox28), cbtnShowDevotion, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, cbtnShowDevotion, _("Show Daily Devotion if you have a Devotion module"), NULL);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDevotion),
+				     s->showdevotional);
+
 	vbox41 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox41);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "vbox41", vbox41,
@@ -1723,6 +1744,35 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(entry14);
 	gtk_entry_set_text(GTK_ENTRY(entry14), s->lex_hebrew);
 
+  labelDevotion = gtk_label_new (_("Daily Devotional"));
+  gtk_widget_ref (labelDevotion);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "labelDevotion", labelDevotion,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (labelDevotion);
+  gtk_table_attach (GTK_TABLE (table9), labelDevotion, 0, 1, 9, 10,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (labelDevotion), 0, 0.5);
+  
+	comboDevotion = gtk_combo_new();
+	gtk_widget_ref(comboDevotion);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "comboDevotion",
+				 comboDevotion,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(comboDevotion);
+  gtk_table_attach (GTK_TABLE (table9), comboDevotion, 1, 2, 9, 10,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+	gtk_combo_set_popdown_strings(GTK_COMBO(comboDevotion), devotionlist);
+
+	entryDevotion = GTK_COMBO(comboDevotion)->entry;
+	gtk_widget_ref(entryDevotion);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "entryDevotion",
+				entryDevotion ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(entryDevotion);
+	gtk_entry_set_text(GTK_ENTRY(entryDevotion), s->devotionalmod);
+
 	label160 = gtk_label_new(_("Interlinear 5"));
 	gtk_widget_ref(label160);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label160",
@@ -1923,6 +1973,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
+	gtk_signal_connect(GTK_OBJECT(cbtnShowDevotion), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
 	/*** spin buttons layout ***/
 	gtk_signal_connect(GTK_OBJECT(sbtnAppWidth), "changed",
 			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
@@ -1956,6 +2009,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(entry12), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(entry14), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(entryDevotion), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	/*** OK - Apply - Cancel ***/
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",

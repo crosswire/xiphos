@@ -119,6 +119,8 @@ gboolean loadconfig(void)
 		settingsInfo["Modules"]["Interlinear5"].c_str());
 	sprintf(settings->personalcommentsmod, "%s",
 		settingsInfo["Modules"]["PerComments"].c_str());
+	sprintf(settings->devotionalmod, "%s",
+		settingsInfo["Modules"]["Devotional"].c_str());
 	/* main notebook page */
 	settings->notebook3page =
 	    atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
@@ -194,6 +196,8 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
 	settings->showsplash =
 	    atoi(settingsInfo["User Options"]["ShowSplash"].c_str());
+	settings->showdevotional =
+	    atoi(settingsInfo["User Options"]["Daily Devotional"].c_str());
 	settings->text_tabs =
 	    atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
 	settings->comm_tabs =
@@ -242,6 +246,8 @@ gboolean saveconfig(void)
 		    settings->Interlinear5Module;
 		settingsInfo["Modules"]["PerComments"] =
 		    settings->personalcommentsmod;
+		settingsInfo["Modules"]["Devotional"] =
+		    settings->devotionalmod;
 
 		settingsInfo["LEXICONS"]["Greek"] = settings->lex_greek;
 		settingsInfo["LEXICONS"]["Hebrew"] = settings->lex_hebrew;
@@ -436,6 +442,12 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["ShowSplash"] = "1";
 		else
 			settingsInfo["User Options"]["ShowSplash"] = "0";
+		
+		if (settings->showdevotional)
+			settingsInfo["User Options"]["Daily Devotional"] = "1";
+		else
+			settingsInfo["User Options"]["Daily Devotional"] = "0";
+
 
 		sprintf(buf, "%d", settings->text_tabs);
 		settingsInfo["User Options"]["BibleTabs"] = buf;
@@ -469,7 +481,8 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["Modules"]["Interlinear4"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry10")));	/* get mod name */
 	settingsInfo["Modules"]["Interlinear5"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry11")));	/* get mod name */
 	settingsInfo["Modules"]["PerComments"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry14")));	/* get mod name */
-
+	//settingsInfo["Modules"]["Devotional"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "comboDevotional")));	/* get mod name */
+	
 	settingsInfo["LEXICONS"]["Greek"] = "StrongsGreek";
 	settingsInfo["LEXICONS"]["Hebrew"] = "StrongsHebrew";
 
@@ -552,6 +565,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["FoundColor"] = "#D02898";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	settingsInfo["User Options"]["ShowSplash"] = "1";
+	settingsInfo["User Options"]["Daily Devotional"] = "1";
 
 	settingsInfo.Save();
 	return true;
@@ -576,7 +590,8 @@ gboolean createconfig(void)
 	settingsInfo["Modules"]["Interlinear4"] = "WEB";
 	settingsInfo["Modules"]["Interlinear5"] = "BBE";
 	settingsInfo["Modules"]["PerComments"] = "Personal";
-
+	settingsInfo["Modules"]["Devotional"] = "SME";
+	
 	settingsInfo["LEXICONS"]["Greek"] = "StrongsGreek";
 	settingsInfo["LEXICONS"]["Hebrew"] = "StrongsHebrew";
 
@@ -629,6 +644,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["interlinearpage"] = "1";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	settingsInfo["User Options"]["ShowSplash"] = "1";
+	settingsInfo["User Options"]["Daily Devotional"] = "1";
 
 	settingsInfo.Save();
 	return true;

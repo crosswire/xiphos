@@ -86,7 +86,8 @@ extern "C" {
 	
 	/*** write individual module font information to <module>.conf ***/
 	gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo);
-	
+	/*** display daily devotional ***/
+	void displayDevotional(void);
 #ifdef __cplusplus
 }
 #endif
