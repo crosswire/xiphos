@@ -1,11 +1,21 @@
+2000-09-29  Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*patch supplied by Chad Thomas <cbthomas@students.uiuc.edu>
+	to allow lookup of Strongs numbers in dict/lex text by
+	double clicking the number.
+
+2000-09-27  Terry Biggs <tbiggs@users.sourceforge.net>
+        
+        *changed panes to e-panes from the evolution package
+
 2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
         *note editor no longer adds spaces to beginning of note
-        *open and save dialog for studypad look in home dir
+        *studypad's open and save dialogs look in home dir
 
 2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
-        * added module lists to submenu of Bible window popup menu
+        * moved module lists to submenu of Bible window popup menu
 
 2000-09-20  Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -14,7 +24,7 @@
 2000-09-15  Terry Biggs <tbiggs@users.sourceforge.net>
 
         * release 0.2.4
-        *display.cpp changed to handle upper or lower case tags
+        *display.cpp changed to handle upper or lower case html tags
         *fixed history menu - clicking on verse ref will no longer
         send you to Gen 1:1.
 
