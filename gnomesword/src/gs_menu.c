@@ -64,18 +64,10 @@ extern gint	greekpage,
         	hebrewpage;
 extern SETTINGS *settings;
 
-extern GtkWidget 
-	*strongsnum,
-	*footnotes,
-	*hebrewpoints,
-	*cantillationmarks,
-	*greekaccents,
-	*morphs;		
-		
 		
 /*** add sword global options to menus ***/	
 void
-additemstooptionsmenu(GList *options)
+additemstooptionsmenu(GList *options, SETTINGS *s)
 {
 	GtkWidget *item;
 	gchar *menu;
@@ -141,44 +133,66 @@ additemstooptionsmenu(GList *options)
 		
 		
 		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
-			strongsnum =  menuitem[0].widget;
-			GTK_CHECK_MENU_ITEM(item)->active = settings->strongs;	
+			s->strongsnum =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(s->strongsnum)->active = settings->strongs;	
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->strongsint;		
 			/* set strongs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), settings->strongs);
+			//gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), settings->strongs);
 		}
 		
 		if(!strcmp((gchar *) tmp->data,"Footnotes" )) {
-			footnotes =  menuitem[0].widget;			
-			GTK_CHECK_MENU_ITEM(item)->active = settings->footnotes;			
+			s->footnotes =  menuitem[0].widget;			
+			//GTK_CHECK_MENU_ITEM(s->footnotes)->active = settings->footnotes;			
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->footnotesint;
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), settings->footnotes);
+			//gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), settings->footnotes);
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
-			morphs =  menuitem[0].widget;
-			GTK_CHECK_MENU_ITEM(item)->active = settings->morphs;
+			s->morphs =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(s->morphs)->active = settings->morphs;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->morphsint;
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);
+			//gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
-			hebrewpoints =  menuitem[0].widget;
-			GTK_CHECK_MENU_ITEM(item)->active = settings->hebrewpoints;
+			s->hebrewpoints =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->hebrewpoints;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->hebrewpointsint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
-			cantillationmarks =  menuitem[0].widget;
-			GTK_CHECK_MENU_ITEM(item)->active = settings->cantillationmarks;
+			s->cantillationmarks =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->cantillationmarks;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->cantillationmarksint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
-			greekaccents =  menuitem[0].widget;
-			GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
+			s->greekaccents =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
 		}	
+		
+		if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
+			s->crossrefs =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
+			//GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->crossrefint;
+		}	
+		
+		if(!strcmp((gchar *) tmp->data, "Lemmas")) {
+			s->lemmas =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
+			//GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->lemmasint;
+		}		
+		
+		if(!strcmp((gchar *) tmp->data, "Headings")) {
+			s->headings =  menuitem[0].widget;
+			//GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
+			//GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->headingsint;
+		}	
+		
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
