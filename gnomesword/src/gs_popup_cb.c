@@ -492,7 +492,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	
 	memset(modName,0,16); 
 	modNameFromDesc(modName, (gchar *) user_data);
-	g_warning(modName);
+//	g_warning(modName);
 	sprintf(settings->Interlinear1Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }	
@@ -508,7 +508,7 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	
 	memset(modName,0,16); 
 	modNameFromDesc(modName, (gchar *) user_data);
-	g_warning(modName);
+//	g_warning(modName);
 	sprintf(settings->Interlinear2Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }		
@@ -523,7 +523,7 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	
 	memset(modName,0,16); 
 	modNameFromDesc(modName, (gchar *) user_data);
-	g_warning(modName);
+//	g_warning(modName);
 	sprintf(settings->Interlinear3Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }		
@@ -538,7 +538,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	
 	memset(modName,0,16); 
 	modNameFromDesc(modName, (gchar *) user_data);
-	g_warning(modName);
+//	g_warning(modName);
 	sprintf(settings->Interlinear4Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }		
@@ -553,7 +553,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	
 	memset(modName,0,16); 
 	modNameFromDesc(modName, (gchar *) user_data);
-	g_warning(modName);
+//	g_warning(modName);
 	sprintf(settings->Interlinear5Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }

@@ -106,7 +106,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modName = g_strdup(settings->lex_greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-			g_warning(modName);
+//			g_warning(modName);
 			g_free(buf);
 			g_free(modName);
 		}   		
@@ -115,7 +115,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modName =  g_strdup(settings->lex_hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-			g_warning(modName);
+//			g_warning(modName);
 			g_free(buf);
 			g_free(modName);
 		} 
