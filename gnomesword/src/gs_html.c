@@ -50,6 +50,12 @@
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/gtkhtml-search.h>
 #include <gal/widgets/e-unicode.h>
+#include <libgnomeprint/gnome-printer.h>
+#include <libgnomeprint/gnome-print.h>
+#include <libgnomeprint/gnome-printer-dialog.h>
+#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-master-preview.h>
+#include <libgnomeprint/gnome-print-preview.h>
 
 #include "gs_html.h"
 #include "support.h"
@@ -682,5 +688,61 @@ void set_gtkhtml_default_font_HTML(GtkWidget *html_widget, gchar *xfontname)
 {
 	
 }
+
+static gint page_num;
+static GnomeFont *font;
+static void
+print_footer(GtkHTML * html, GnomePrintContext * context,
+	     gdouble x, gdouble y, gdouble width, gdouble height,
+	     gpointer user_data)
+{
+	gchar *text = g_strdup_printf("- %d -", page_num);
+	gdouble tw = gnome_font_get_width_string(font, "text");
+
+	if (font) {
+		gnome_print_newpath(context);
+		gnome_print_setrgbcolor(context, .0, .0, .0);
+		gnome_print_moveto(context, x + (width - tw) / 2,
+				   y - (height +
+					gnome_font_get_ascender(font)) /
+				   2);
+		gnome_print_setfont(context, font);
+		gnome_print_show(context, text);
+	}
+
+	g_free(text);
+	page_num++;
+}
+
+void
+html_print(GtkWidget *htmlwidget)
+{
+	GnomePrintMaster *print_master;
+	GnomePrintContext *print_context;
+	GtkWidget *preview;
+	GtkHTML *html;
+	
+	html = GTK_HTML(htmlwidget);
+
+	print_master = gnome_print_master_new();
+	print_context = gnome_print_master_get_context(print_master);
+
+	page_num = 1;
+	font =
+	    gnome_font_new_closest("Helvetica", GNOME_FONT_BOOK, FALSE,
+				   12);
+	gtk_html_print_with_header_footer(html, print_context, .0,
+					  .03, NULL, print_footer, NULL);
+	if (font)
+		gtk_object_unref(GTK_OBJECT(font));
+
+	preview =
+	    GTK_WIDGET(gnome_print_master_preview_new
+		       (print_master, "GnomeSword Print Preview"));
+	gtk_widget_show(preview);
+
+	gtk_object_unref(GTK_OBJECT(print_master));
+}
+
 
 

@@ -39,6 +39,7 @@
 #include <libgnomeprint/gnome-print-preview.h>
 
 #include "gs_popup_cb.h"
+#include "gs_html.h"
 #include "gs_unlockkey_dlg.h"
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
@@ -54,16 +55,19 @@
 ******************************************************************************/
 extern SETTINGS 
 	*settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
+	
 extern GtkWidget 
 	*NEtext,
 	*htmlComments,
 	*htmlCommentaries;
+	
 extern gboolean 
 	autoscroll,  /* is commentary window set to scroll with text window */
 	isrunningSD,    /* is the view dictionary dialog runing */
 	isrunningVC,    /* is the view commentary dialog runing */
 	isrunningVT,    /* is the view text dialog runing */
 	noteModified;	/* personal comments window changed */
+	
 extern gchar 
 	current_verse[80];
 
@@ -81,128 +85,13 @@ void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gtk_widget_show(dlg);
 }
 
-//----------------------------------------------------------------------------------------------
-void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
-	}
-}
-static gint page_num;
-static GnomeFont *font;
-
-static void
-print_footer (GtkHTML *html, GnomePrintContext *context,
-	      gdouble x, gdouble y, gdouble width, gdouble height, gpointer user_data)
-{
-	gchar *text = g_strdup_printf ("- %d -", page_num);
-	gdouble tw = gnome_font_get_width_string (font, "text");
-
-	if (font) {
-		gnome_print_newpath     (context);
-		gnome_print_setrgbcolor (context, .0, .0, .0);
-		gnome_print_moveto      (context, x + (width - tw)/2, y - (height + gnome_font_get_ascender (font))/2);
-		gnome_print_setfont     (context, font);
-		gnome_print_show        (context, text);
-	}
-
-	g_free (text);
-	page_num++;
-}
 
 //----------------------------------------------------------------------------------------------
-void on_print_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_print_item_activate(GtkMenuItem * menuitem, gchar * html)
 {
-	GnomePrintMaster *print_master;
-	GnomePrintContext *print_context;
-	GtkWidget *preview;
-	
-	print_master = gnome_print_master_new ();
-	/*  gnome_print_master_set_paper (master, gnome_paper_with_name ("A4")); */
-
-	print_context = gnome_print_master_get_context (print_master);
-
-	page_num = 1;
-	font = gnome_font_new_closest ("Helvetica", GNOME_FONT_BOOK, FALSE, 12);
-	gtk_html_print_with_header_footer (GTK_HTML(htmlCommentaries), print_context, .0, .03, NULL, print_footer, NULL);
-	if (font) gtk_object_unref (GTK_OBJECT (font));
-
-	preview = GTK_WIDGET (gnome_print_master_preview_new (print_master, "HTML Print Preview"));
-	gtk_widget_show (preview);
-
-	gtk_object_unref (GTK_OBJECT (print_master));
-	
-	
-}
-//----------------------------------------------------------------------------------------------
-void on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
-	}
-
+	html_print(lookup_widget(settings->app,html));		
 }
 
-//----------------------------------------------------------------------------------------------
-void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar	*buf,
-			tmpbuf[256];
-	
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?	
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-		sprintf(tmpbuf,"<a href=\"passage=%s\">",buf);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_underlineNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
-		noteModified = TRUE;
-	}
-}
-
-//----------------------------------------------------------------------------------------------
-void on_greekNE_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (!settings->formatpercom)
-		return;		//-- do we want formatting?
-	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
-	{
-	  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
-		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
-		noteModified = TRUE;
-	}
-}
 
 //----------------------------------------------------------------------------------------------
 void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)

@@ -32,23 +32,12 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-	void on_print_item_activate(GtkMenuItem * menuitem, 
-				gpointer user_data);
 	/*** toogle global options in interlinear window ***/
+	void on_print_item_activate(GtkMenuItem * menuitem, gchar * html);
 	void on_int_global_options_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);
 	void on_unlock_key_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-	void on_boldNE_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-	void on_italicNE_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
-	void on_referenceNE_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
-	void on_underlineNE_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
-	void on_greekNE_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
 	void on_goto_reference_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
 	void on_goto_reference2_activate(GtkMenuItem * menuitem,
