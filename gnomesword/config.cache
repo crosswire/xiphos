@@ -13,6 +13,8 @@
 # --recheck option to rerun configure.
 #
 ac_cv_header_X11_SM_SMlib_h=${ac_cv_header_X11_SM_SMlib_h='yes'}
+ac_cv_header__usr_include_aspell_manager_hh=${ac_cv_header__usr_include_aspell_manager_hh='no'}
+ac_cv_header_aspell_manager_hh=${ac_cv_header_aspell_manager_hh='no'}
 ac_cv_header_stdc=${ac_cv_header_stdc='yes'}
 ac_cv_lib_SM_SmcSaveYourselfDone=${ac_cv_lib_SM_SmcSaveYourselfDone='yes'}
 ac_cv_lib_Xpm_XpmFreeXpmImage=${ac_cv_lib_Xpm_XpmFreeXpmImage='yes'}
@@ -36,7 +38,7 @@ ac_cv_prog_gxx=${ac_cv_prog_gxx='yes'}
 ac_cv_prog_make_make_set=${ac_cv_prog_make_make_set='yes'}
 gnome_cv_gnorba_found=${gnome_cv_gnorba_found='yes'}
 gnome_cv_orbit_found=${gnome_cv_orbit_found='yes'}
-gnome_cv_passdown_GTK_LIBS=${gnome_cv_passdown_GTK_LIBS='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm'}
-gnome_cv_passdown_X_CFLAGS=${gnome_cv_passdown_X_CFLAGS='-I/usr/lib/glib/include -I/usr/X11R6/include'}
-gnome_cv_passdown_X_LIBS=${gnome_cv_passdown_X_LIBS='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm'}
-gnome_cv_passdown_x_libs=${gnome_cv_passdown_x_libs='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm'}
+gnome_cv_passdown_GTK_LIBS=${gnome_cv_passdown_GTK_LIBS='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -L/usr/local/lib -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm'}
+gnome_cv_passdown_X_CFLAGS=${gnome_cv_passdown_X_CFLAGS='-I/usr/local/lib/glib/include -I/usr/local/include -I/usr/X11R6/include'}
+gnome_cv_passdown_X_LIBS=${gnome_cv_passdown_X_LIBS='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -L/usr/local/lib -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm'}
+gnome_cv_passdown_x_libs=${gnome_cv_passdown_x_libs='-L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -L/usr/local/lib -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm'}
