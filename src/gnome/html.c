@@ -108,8 +108,8 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key,
  
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar buf[255], *buf1;
-
+	gchar buf[255], *buf1;	
+	
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),

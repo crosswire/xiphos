@@ -45,14 +45,15 @@
 /******************************************************************************
  * static - global to this file only
  */
-static GList * dialog_list;
-static VIEW_TEXT * cur_vt;
+static GList *dialog_list;
+static VIEW_TEXT *cur_vt;
 static gboolean dialog_freed;
+static gboolean apply_change;
 
 /******************************************************************************
  * externs
- *****************************************************************************/
-extern gboolean gsI_isrunning; /* information dialog */
+ */
+extern gboolean gsI_isrunning;	/* information dialog */
 
 
 
@@ -73,23 +74,23 @@ extern gboolean gsI_isrunning; /* information dialog */
  *   void
  */
 
-static void show_in_statusbar(GtkWidget * statusbar, gchar * key, 
-							gchar * mod)
+static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
+			      gchar * mod)
 {
 	gchar *str;
 	gchar *text;
 	gint context_id2;
-	
+
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
 					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	
+
 	text = get_striptext(mod, key);
 	str = remove_linefeeds(text);
-	if(str) {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-					str);
+	if (str) {
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar),
+				   context_id2, str);
 		g_free(str);
 	}
 	g_free(text);
@@ -114,11 +115,8 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 
 static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
 {
-	chapter_display(vt->t->html, 
-			vt->t->mod_name, 
-			vt->t->tgs, 
-			key, 
-			show_key);
+	chapter_display(vt->t->html,
+			vt->t->mod_name, vt->t->tgs, key, show_key);
 }
 
 
@@ -140,15 +138,29 @@ static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
 
 static void update_controls(VIEW_TEXT * vt)
 {
-	const gchar *buf;
+	gchar *val_key;
+	gint cur_chapter, cur_verse;
+
 	cur_vt = vt;
-	
-	buf = get_book_from_key(vt->key);
-	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), buf);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(vt->spb_chapter),
-				  get_chapter_from_key(vt->key));
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(vt->spb_verse),
-				  get_verse_from_key(vt->key));
+	apply_change = FALSE;
+	val_key = get_valid_key(vt->key);
+	cur_chapter = get_chapter_from_key(val_key);
+	cur_verse = get_verse_from_key(val_key);
+	/* 
+	 *  set book, chapter,verse and freeform lookup entries
+	 *  to new verse - settings.apply_change is set to false so we don't
+	 *  start a loop
+	 */
+	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book),
+			   get_book_from_key(val_key));
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (vt->spb_chapter), cur_chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (vt->spb_verse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY(vt->freeform_lookup), val_key);
+	g_free(val_key);
+
+	apply_change = TRUE;
 }
 
 /******************************************************************************
@@ -168,14 +180,14 @@ static void update_controls(VIEW_TEXT * vt)
  *   void
  */
 
-static void link_clicked(GtkHTML * html, const gchar * url, 
-						VIEW_TEXT * vt)
+static void link_clicked(GtkHTML * html, const gchar * url,
+			 VIEW_TEXT * vt)
 {
 	gchar *buf, *modName;
 	gchar newref[80];
 	static GtkWidget *dlg;
 	cur_vt = vt;
-	
+
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
@@ -219,8 +231,9 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 	else if (*url == '*') {
 		++url;
-//		g_warning(url);
+//              g_warning(url);
 		buf = g_strdup(url);
+		strcpy(vt->key, buf);
 		display(vt, buf, TRUE);
 		update_controls(vt);
 		g_free(buf);
@@ -240,7 +253,6 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
-//		g_warning("mybuf = %s", url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
@@ -262,7 +274,9 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			++mybuf;
 			buf = g_strdup(mybuf);
 			if (!gsI_isrunning) {
-				dlg = gui_create_display_informtion_dialog();
+				dlg =
+				    gui_create_display_informtion_dialog
+				    ();
 			}
 			gui_display_mod_and_key(modbuf, buf);
 		}
@@ -274,10 +288,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		gint type = 0;
-		//buf = g_strdup(url);
 		mybuf = NULL;
 		mybuf = strstr(url, "value=");
-		//i = 0;
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
@@ -287,14 +299,16 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 				type = 1;
 			++mybuf;
 			sprintf(newref, "%5.5d", atoi(mybuf));
-		
+
 			if (type)
 				modbuf = settings.lex_greek;
 			else
 				modbuf = settings.lex_hebrew;
-	
+
 			if (!gsI_isrunning) {
-				dlg = gui_create_display_informtion_dialog();
+				dlg =
+				    gui_create_display_informtion_dialog
+				    ();
 			}
 			buf = g_strdup(newref);
 			gui_display_mod_and_key(modbuf, buf);
@@ -305,68 +319,160 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	}
 }
 
+
 /******************************************************************************
  * Name
- *   cbe_book_changed
+ *   book_changed
  *
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void cbe_book_changed(GtkEditable * editable,
- *					       gpointer user_data)
+ *   void book_changed(GtkEditable * editable, gpointer user_data)	
  *
  * Description
+ *   change book 
+ *
+ * Return value
+ *   void
+ */
+
+static void book_changed(GtkEditable * editable, VIEW_TEXT * vt)
+{
+	if (apply_change) {
+		gchar buf[256], *val_key;
+		gchar *bookname =
+		    gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
+		sprintf(buf, "%s 1:1", bookname);
+		val_key = get_valid_key(buf);
+		display(vt, val_key, TRUE);
+		strcpy(vt->key, val_key);
+		update_controls(vt);
+		g_free(val_key);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   chapter_button_release_event
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   gboolean chapter_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event,   gpointer user_data)	
+ *
+ * Description
+ *    change chapter 
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean chapter_button_release_event(GtkWidget * widget,
+					     GdkEventButton * event,
+					     VIEW_TEXT * vt)
+{
+	if (apply_change) {
+		gchar *bookname, *val_key;
+		gchar buf[256];
+		gint chapter;
+
+		bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vt->spb_chapter));
+		sprintf(buf, "%s %d:1", bookname, chapter);
+		val_key = get_valid_key(buf);
+		display(vt, val_key, TRUE);
+		strcpy(vt->key, val_key);
+		update_controls(vt);
+		g_free(val_key);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *   
  *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   gboolean (GtkWidget * widget, 
+ *			GdkEventButton * event,  gpointer user_data)	
+ *
+ * Description
+ *    change verse
+ *
  * Return value
- *   void
+ *   gboolean
  */
 
-static void cbe_book_changed(GtkEditable * editable,
-					       VIEW_TEXT * vt)
+static gboolean verse_button_release_event(GtkWidget * widget,
+					   GdkEventButton * event,
+					   VIEW_TEXT * vt)
 {
+	if (apply_change) {
+		gchar *bookname, buf[256], *val_key;
+		gint chapter, verse;
 
+		bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vt->spb_chapter));
+		verse =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vt->spb_verse));
+		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
+
+		val_key = get_valid_key(buf);
+		display(vt, val_key, TRUE);
+		strcpy(vt->key, val_key);
+		update_controls(vt);
+		g_free(val_key);
+		return TRUE;
+	}
+	return FALSE;
 }
+
 
 /******************************************************************************
  * Name
- *   btn_goto_verse_clicked
+ *   entry_key_press_event
  *
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void btn_goto_verse_clicked(GtkButton * button,
- *						gpointer user_data)
+ *   gboolean entry_key_press_event(GtkWidget * widget,
+ *				GdkEventKey * event, gpointer user_data)	
  *
  * Description
- *   change verse
+ *   go to verse in free form entry if user hit <enter>
  *
  * Return value
- *   void
+ *   gboolean
  */
 
-static void btn_goto_verse_clicked(GtkButton * button,
-						VIEW_TEXT * vt)
+static gboolean entry_key_press_event(GtkWidget * widget,
+				      GdkEventKey * event,
+				      VIEW_TEXT * vt)
 {
-	gchar *bookname, buf[120], *val_key;
-	gint iChap, iVerse;
-	cur_vt = vt;
-	
-	bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
-	iChap =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (vt->spb_chapter));
-	iVerse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (vt->spb_verse));
-	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
-	val_key = get_valid_key(buf);
-	//g_warning(buf);
-	display(vt, val_key, TRUE);
-	strcpy(vt->key,val_key);
-	update_controls(vt);
-	g_free(val_key);
+	/* if <enter> key */
+	if (event->keyval == 65293 || event->keyval == 65421) {
+		gchar *buf, *val_key;
+		buf = gtk_entry_get_text(GTK_ENTRY(widget));
+		val_key = get_valid_key(buf);
+		display(vt, val_key, TRUE);
+		strcpy(vt->key, val_key);
+		update_controls(vt);
+		g_free(val_key);
+	}
+	return TRUE;
 }
+
 
 /******************************************************************************
  * Name
@@ -385,10 +491,10 @@ static void btn_goto_verse_clicked(GtkButton * button,
  *   void
  */
 
-static void module_new_activate(GtkMenuItem * menuitem, 
-					    gpointer user_data)
-{	
-	gui_open_bibletext_dialog((gchar *)user_data);
+static void module_new_activate(GtkMenuItem * menuitem,
+				gpointer user_data)
+{
+	gui_open_bibletext_dialog((gchar *) user_data);
 }
 
 /******************************************************************************
@@ -410,8 +516,8 @@ static void module_new_activate(GtkMenuItem * menuitem,
 static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
 {
 	cur_vt = vt;
-	display(vt, settings.currentverse, TRUE);	
-	strcpy(vt->key,settings.currentverse);
+	display(vt, settings.currentverse, TRUE);
+	strcpy(vt->key, settings.currentverse);
 	update_controls(vt);
 }
 
@@ -434,11 +540,10 @@ static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
  */
 
 static void free_on_destroy(VIEW_TEXT * vt)
-{	
+{
 	g_free(vt->t->tgs);
 	g_free(vt->t);
 	dialog_list = g_list_remove(dialog_list, (VIEW_TEXT *) vt);
-//		g_warning("shuting down %s dialog",vt->t->mod_name);
 	g_free(vt);
 }
 
@@ -459,10 +564,9 @@ static void free_on_destroy(VIEW_TEXT * vt)
  *   void
  */
 
-static void dialog_destroy(GtkObject *object, VIEW_TEXT * vt)
-{	
-	
-	if(!dialog_freed)
+static void dialog_destroy(GtkObject * object, VIEW_TEXT * vt)
+{
+	if (!dialog_freed)
 		free_on_destroy(vt);
 	dialog_freed = FALSE;
 }
@@ -487,7 +591,7 @@ static void dialog_destroy(GtkObject *object, VIEW_TEXT * vt)
 
 static void btn_close_clicked(GtkButton * button, VIEW_TEXT * vt)
 {
-	if(vt->dialog) {
+	if (vt->dialog) {
 		dialog_freed = FALSE;
 		gtk_widget_destroy(vt->dialog);
 	}
@@ -523,25 +627,28 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 
 		/* add module name items to menu */
 		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) 
-				(gchar *)tmp->data);
+		    gtk_check_menu_item_new_with_label((gchar *)
+						       (gchar *) tmp->
+						       data);
 		sprintf(menuName, "ModuleNum%d", view_number);
 		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 				   GTK_SIGNAL_FUNC(module_new_activate),
-				   (gchar *)tmp->data);
+				   (gchar *) tmp->data);
 		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
-				      GTK_WIDGET(menuChoice), view_number);
+				      GTK_WIDGET(menuChoice),
+				      view_number);
 		++view_number;
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
 }
 
-static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                        GdkEventMotion  *event, VIEW_TEXT * vt)
+static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
+					      GdkEventMotion * event,
+					      VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	return TRUE;
@@ -565,11 +672,11 @@ static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
  */
 
 static void morphs_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+			   VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Morphological Tags",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -590,12 +697,12 @@ static void morphs_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static void strongs_toggled(GtkToggleButton * togglebutton, 
-						VIEW_TEXT * vt)
+static void strongs_toggled(GtkToggleButton * togglebutton,
+			    VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Strong's Numbers",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -618,11 +725,11 @@ static void strongs_toggled(GtkToggleButton * togglebutton,
  */
 
 static void footnotes_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+			      VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Footnotes",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -645,11 +752,11 @@ static void footnotes_toggled(GtkToggleButton * togglebutton,
  */
 
 static void greek_accents_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+				  VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Greek Accents",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -671,12 +778,11 @@ static void greek_accents_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static void lemmas_toggled(GtkToggleButton * togglebutton, 
-						VIEW_TEXT * vt)
+static void lemmas_toggled(GtkToggleButton * togglebutton,
+			   VIEW_TEXT * vt)
 {
 	cur_vt = vt;
-	set_text_module_global_option("Lemmas",
-				togglebutton->active);
+	set_text_module_global_option("Lemmas", togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -699,11 +805,11 @@ static void lemmas_toggled(GtkToggleButton * togglebutton,
  */
 
 static void cross_references_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+				     VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Scripture Cross-references",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -726,11 +832,11 @@ static void cross_references_toggled(GtkToggleButton * togglebutton,
  */
 
 static void vowel_points_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+				 VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Hebrew Vowel Points",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -753,11 +859,11 @@ static void vowel_points_toggled(GtkToggleButton * togglebutton,
  */
 
 static void cantillation_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+				 VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	set_text_module_global_option("Hebrew Cantillation",
-				togglebutton->active);
+				      togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -780,11 +886,10 @@ static void cantillation_toggled(GtkToggleButton * togglebutton,
  */
 
 static void headings_toggled(GtkToggleButton * togglebutton,
-						VIEW_TEXT * vt)
+			     VIEW_TEXT * vt)
 {
 	cur_vt = vt;
-	set_text_module_global_option("Headings",
-				togglebutton->active);
+	set_text_module_global_option("Headings", togglebutton->active);
 	display(vt, vt->key, TRUE);
 }
 
@@ -807,10 +912,10 @@ static void headings_toggled(GtkToggleButton * togglebutton,
  */
 
 static void on_primary_reading_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+					gpointer user_data)
 {
 	/*set_text_variant_global_option("Textual Variants",
-				       "Primary Reading");*/
+	   "Primary Reading"); */
 }
 
 /******************************************************************************
@@ -831,10 +936,10 @@ static void on_primary_reading_activate(GtkMenuItem * menuitem,
  */
 
 static void on_secondary_reading_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+					  gpointer user_data)
 {
 	/*set_text_variant_global_option("Textual Variants",
-				       "Secondary Reading");*/
+	   "Secondary Reading"); */
 }
 
 /******************************************************************************
@@ -855,10 +960,10 @@ static void on_secondary_reading_activate(GtkMenuItem * menuitem,
  */
 
 static void on_all_readings_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+				     gpointer user_data)
 {
 	/*set_text_variant_global_option("Textual Variants",
-				       "All Readings");*/
+	   "All Readings"); */
 }
 
 /******************************************************************************
@@ -877,96 +982,114 @@ static void on_all_readings_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void dialog_url(GtkHTML * html, const gchar * url, 
-						VIEW_TEXT * vt)
+static void dialog_url(GtkHTML * html, const gchar * url,
+		       VIEW_TEXT * vt)
 {
 	gchar buf[255], *buf1;
 	gint context_id2;
-	
-	
+
+
 	cur_vt = vt;
-	
+
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
 					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(vt->statusbar), context_id2);
 
 	/***  moved out of url - clear appbar  ***/
-	if (url == NULL) {		
-		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
-			   "");
+	if (url == NULL) {
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
+				   context_id2, "");
 		//in_url = FALSE;
 	}
 	/***  we are in an url  ***/
 	else {
-		
+
 		if (*url == '#') {
-			++url;		/* remove # */
+			++url;	/* remove # */
 			if (*url == 'T') {
 				++url;	/* remove T */
 				if (*url == 'G') {
 					++url;	/* remove G */
 					if (settings.havethayer) {
 						buf1 = g_strdup(url);
-						show_in_statusbar(vt->statusbar, buf1, "Thayer");
+						show_in_statusbar(vt->
+								  statusbar,
+								  buf1,
+								  "Thayer");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
-	
+
 				if (*url == 'H') {
 					++url;	/* remove H */
 					if (settings.havebdb) {
 						buf1 = g_strdup(url);
-						show_in_statusbar(vt->statusbar, buf1, "BDB");
+						show_in_statusbar(vt->
+								  statusbar,
+								  buf1,
+								  "BDB");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
 			}
-	
+
 			if (*url == 'G') {
 				++url;	/* remove G */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 5624) {
 					if (settings.havethayer) {
-						show_in_statusbar(vt->statusbar, buf1, "Thayer");
-						g_free(buf1);						
+						show_in_statusbar(vt->
+								  statusbar,
+								  buf1,
+								  "Thayer");
+						g_free(buf1);
 						return;
 					} else
 						return;
-	
+
 				}
-	
+
 				else {
-					show_in_statusbar(vt->statusbar, buf1, settings.lex_greek);
-					g_free(buf1);		
+					show_in_statusbar(vt->statusbar,
+							  buf1,
+							  settings.
+							  lex_greek);
+					g_free(buf1);
 					return;
 				}
 			}
-	
+
 			if (*url == 'H') {
 				++url;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
 					if (settings.havebdb) {
-						show_in_statusbar(vt->statusbar, buf1, "BDB");
+						show_in_statusbar(vt->
+								  statusbar,
+								  buf1,
+								  "BDB");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
-	
+
 				else {
-					show_in_statusbar(vt->statusbar, buf1, settings.lex_hebrew);
+					show_in_statusbar(vt->statusbar,
+							  buf1,
+							  settings.
+							  lex_hebrew);
 					g_free(buf1);
 					return;
 				}
@@ -989,7 +1112,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 					}
 				}
 			}
-	
+
 			mybuf = NULL;
 			mybuf = strstr(buf1, "value=");
 			if (mybuf) {
@@ -997,7 +1120,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 				++mybuf;
 			}
 			buf1 = g_strdup(mybuf);
-			show_in_statusbar(vt->statusbar, buf1, modbuf);			
+			show_in_statusbar(vt->statusbar, buf1, modbuf);
 			g_free(buf1);
 			return;
 		}
@@ -1025,17 +1148,17 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 				modbuf = settings.lex_greek;
 			else
 				modbuf = settings.lex_hebrew;
-	
+
 			buf1 = g_strdup(newref);
-			show_in_statusbar(vt->statusbar, buf1, modbuf);				
+			show_in_statusbar(vt->statusbar, buf1, modbuf);
 			g_free(buf1);
-			return;	
+			return;
 		}
 		/***  any other link  ***/
 		else
 			sprintf(buf, _("Go to %s"), url);
-		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
-			  buf);
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
+				   context_id2, buf);
 	}
 }
 
@@ -1100,14 +1223,14 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
  *   void
  */
 
-static void add_global_option_buttons(GtkWidget * toolbar, 
-				gchar * mod_name, VIEW_TEXT * vt)
-{	
-	gint active = 0;	
+static void add_global_option_buttons(GtkWidget * toolbar,
+				      gchar * mod_name, VIEW_TEXT * vt)
+{
+	gint active = 0;
 	GtkWidget *variant_menu;
 	GtkWidget *tmp_toolbar_icon;
-	
-	if (vt->t->tgs->gbfstrongs || vt->t->tgs->thmlstrongs) {
+
+	if (vt->t->tgs->strongs) {
 		tmp_toolbar_icon =
 		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					       "/s.xpm");
@@ -1117,8 +1240,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, _("S"),
 					       _
 					       ("Toggle Strongs Numbers"),
-					       NULL, tmp_toolbar_icon, 
-					NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_strongs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_strongs",
@@ -1127,29 +1250,31 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_strongs);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_strongs, 24, 24);
-		
-		active = load_module_options(mod_name, "Strong's Numbers");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_strongs),
-                                        active);
-		
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_strongs),
+
+		active =
+		    load_module_options(mod_name, "Strong's Numbers");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->
+					      t_btn_strongs), active);
+
+		gtk_signal_connect(GTK_OBJECT
+				   (vt->t->tgs->t_btn_strongs),
 				   "toggled",
 				   GTK_SIGNAL_FUNC(strongs_toggled),
 				   vt);
 	}
-	if (vt->t->tgs->gbfmorphs || vt->t->tgs->thmlmorphs) {
+	if (vt->t->tgs->morphs) {
 		tmp_toolbar_icon =
 		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					       "/m.xpm");
 		vt->t->tgs->t_btn_morphs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-					GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-					NULL, _("M"),
-					_("Toggle Morph Tags"),
-					NULL, tmp_toolbar_icon, 
-					NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("M"),
+					       _("Toggle Morph Tags"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_morphs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_morphs",
@@ -1158,17 +1283,17 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_morphs);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_morphs, 24, 24);
-		
-		active = load_module_options(mod_name, "Morphological Tags");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_morphs),
-                                        active);
+
+		active =
+		    load_module_options(mod_name, "Morphological Tags");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->t_btn_morphs),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_morphs),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(morphs_toggled),
-				   vt);
+				   GTK_SIGNAL_FUNC(morphs_toggled), vt);
 	}
 	if (vt->t->tgs->gbffootnotes || vt->t->tgs->thmlfootnotes) {
 		tmp_toolbar_icon =
@@ -1179,7 +1304,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("F"),
 					       _("Toggle Footnotes"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_footnotes);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_footnotes",
@@ -1187,15 +1313,17 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_footnotes);
-		gtk_widget_set_usize(vt->t->tgs->t_btn_footnotes, 24, 24);
-		
-		active = load_module_options(mod_name, "Footnotes");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_footnotes),
-                                        active);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_footnotes, 24,
+				     24);
 
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_footnotes),
+		active = load_module_options(mod_name, "Footnotes");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->
+					      t_btn_footnotes), active);
+
+		gtk_signal_connect(GTK_OBJECT
+				   (vt->t->tgs->t_btn_footnotes),
 				   "toggled",
 				   GTK_SIGNAL_FUNC(footnotes_toggled),
 				   vt);
@@ -1210,7 +1338,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, _("A"),
 					       _
 					       ("Toggle Greek Accents"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_accents);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_accents",
@@ -1219,17 +1348,18 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_accents);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_accents, 24, 24);
-		
-		active = load_module_options(mod_name, "Greek Accents");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_accents),
-                                        active);
 
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_accents),
+		active = load_module_options(mod_name, "Greek Accents");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->
+					      t_btn_accents), active);
+
+		gtk_signal_connect(GTK_OBJECT
+				   (vt->t->tgs->t_btn_accents),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(greek_accents_toggled),
-				   vt);
+				   GTK_SIGNAL_FUNC
+				   (greek_accents_toggled), vt);
 
 	}
 	if (vt->t->tgs->lemmas) {
@@ -1241,7 +1371,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("L"),
 					       _("Toggle Lemmas"), NULL,
-					       tmp_toolbar_icon, NULL, NULL);
+					       tmp_toolbar_icon, NULL,
+					       NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_lemmas);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_lemmas",
@@ -1250,17 +1381,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_lemmas);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_lemmas, 24, 24);
-		
+
 		active = load_module_options(mod_name, "Lemmas");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_lemmas),
-                                        active);
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->t_btn_lemmas),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_lemmas),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(lemmas_toggled),
-				   vt);
+				   GTK_SIGNAL_FUNC(lemmas_toggled), vt);
 
 	}
 	if (vt->t->tgs->scripturerefs) {
@@ -1273,27 +1403,34 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, _("R"),
 					       _
 					       ("Toggle Scripture References"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_scripturerefs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_scripturerefs",
-					 vt->t->tgs->t_btn_scripturerefs,
+					 vt->t->tgs->
+					 t_btn_scripturerefs,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_scripturerefs);
-		gtk_widget_set_usize(vt->t->tgs->t_btn_scripturerefs, 24, 24);
-		
-		active = load_module_options(mod_name, "Scripture Cross-references");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_scripturerefs),
-                                        active);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_scripturerefs,
+				     24, 24);
+
+		active =
+		    load_module_options(mod_name,
+					"Scripture Cross-references");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->
+					      t_btn_scripturerefs),
+					     active);
 
 
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_scripturerefs),
+		gtk_signal_connect(GTK_OBJECT
+				   (vt->t->tgs->t_btn_scripturerefs),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(cross_references_toggled),
-				   vt);
+				   GTK_SIGNAL_FUNC
+				   (cross_references_toggled), vt);
 
 	}
 	if (vt->t->tgs->hebrewpoints) {
@@ -1306,7 +1443,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, _("P"),
 					       _
 					       ("Toggle Hebrew Vowel Points"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_points);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_points",
@@ -1315,17 +1453,19 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_points);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_points, 24, 24);
-		
-		active = load_module_options(mod_name, "Hebrew Vowel Points");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_points),
-                                        active);
+
+		active =
+		    load_module_options(mod_name,
+					"Hebrew Vowel Points");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->t_btn_points),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_points),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(vowel_points_toggled),
-				   vt);
+				   GTK_SIGNAL_FUNC
+				   (vowel_points_toggled), vt);
 
 	}
 	if (vt->t->tgs->hebrewcant) {
@@ -1338,24 +1478,29 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, _("C"),
 					       _
 					       ("Toggle Hebrew Cantillation"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_cant);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "vt->t->tgs->t_btn_cant", vt->t->tgs->t_btn_cant,
+					 "vt->t->tgs->t_btn_cant",
+					 vt->t->tgs->t_btn_cant,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_cant);
 		gtk_widget_set_usize(vt->t->tgs->t_btn_cant, 24, 24);
-		
-		active = load_module_options(mod_name, "Hebrew Cantillation");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_cant),
-                                        active);
 
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_cant), "toggled",
-				   GTK_SIGNAL_FUNC(cantillation_toggled),
-				   vt);
+		active =
+		    load_module_options(mod_name,
+					"Hebrew Cantillation");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->t_btn_cant),
+					     active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_cant),
+				   "toggled",
+				   GTK_SIGNAL_FUNC
+				   (cantillation_toggled), vt);
 
 	}
 	if (vt->t->tgs->headings) {
@@ -1367,7 +1512,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("H"),
 					       _("Toggle Headings"),
-					       NULL, tmp_toolbar_icon, NULL, NULL);
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_headings);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_headings",
@@ -1375,15 +1521,17 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(vt->t->tgs->t_btn_headings);
-		gtk_widget_set_usize(vt->t->tgs->t_btn_headings, 24, 24);
-		
-		active = load_module_options(mod_name, "Headings");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_headings),
-                                        active);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_headings, 24,
+				     24);
 
-		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_headings),
+		active = load_module_options(mod_name, "Headings");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->
+					      t_btn_headings), active);
+
+		gtk_signal_connect(GTK_OBJECT
+				   (vt->t->tgs->t_btn_headings),
 				   "toggled",
 				   GTK_SIGNAL_FUNC(headings_toggled),
 				   vt);
@@ -1419,8 +1567,9 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       (primary_reading_uiinfo
 						[0].widget), TRUE);
 
-		vt->t->tgs->t_btn_primary = primary_reading_uiinfo[0].widget;
-		
+		vt->t->tgs->t_btn_primary =
+		    primary_reading_uiinfo[0].widget;
+
 
 		gtk_widget_ref(primary_reading_uiinfo[1].widget);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -1429,7 +1578,8 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 widget, (GtkDestroyNotify)
 					 gtk_widget_unref);
 
-		vt->t->tgs->t_btn_secondary = primary_reading_uiinfo[1].widget;
+		vt->t->tgs->t_btn_secondary =
+		    primary_reading_uiinfo[1].widget;
 
 		gtk_widget_ref(primary_reading_uiinfo[2].widget);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -1438,10 +1588,129 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					 widget, (GtkDestroyNotify)
 					 gtk_widget_unref);
 
-		vt->t->tgs->t_btn_all = primary_reading_uiinfo[2].widget;
+		vt->t->tgs->t_btn_all =
+		    primary_reading_uiinfo[2].widget;
 	}
 
 }
+
+
+/******************************************************************************
+ * Name
+ *   create_nav_toolbar
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   GtkWidget *create_nav_toolbar(void)	
+ *
+ * Description
+ *    create navigation toolbar and 
+ *
+ * Return value
+ *   void
+ */
+
+GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
+{
+	GtkWidget *toolbar_nav;
+	GtkWidget *cbBook;
+	GtkObject *spbChapter_adj;
+	GtkObject *spbVerse_adj;
+
+	toolbar_nav =
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
+	gtk_widget_ref(toolbar_nav);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar_nav",
+				 toolbar_nav,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(toolbar_nav);
+	gtk_widget_set_usize(toolbar_nav, -2, 34);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
+				      GTK_RELIEF_NONE);
+
+	cbBook = gtk_combo_new();
+	gtk_widget_ref(cbBook);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "cbBook",
+				 cbBook,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cbBook);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
+				  NULL, NULL);
+
+	/*
+	 * get and load books of the Bible 
+	 */
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
+				      get_list(BOOKS_LIST));
+
+	vt->cbe_book = GTK_COMBO(cbBook)->entry;
+	gtk_widget_ref(vt->cbe_book);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "vt->cbe_book", vt->cbe_book,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_set_usize(vt->cbe_book, 100, -2);
+	gtk_widget_show(vt->cbe_book);
+	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), _("Romans"));
+
+	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
+	vt->spb_chapter =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
+	gtk_widget_ref(vt->spb_chapter);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "vt->spb_chapter",
+				 vt->spb_chapter,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vt->spb_chapter);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vt->spb_chapter, NULL, NULL);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
+				    (vt->spb_chapter), TRUE);
+
+	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
+	vt->spb_verse =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
+	gtk_widget_ref(vt->spb_verse);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "vt->spb_verse", vt->spb_verse,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vt->spb_verse);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vt->spb_verse, NULL, NULL);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vt->spb_verse),
+				    TRUE);
+
+	vt->freeform_lookup = gtk_entry_new();
+	gtk_widget_ref(vt->freeform_lookup);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "vt->freeform_lookup",
+				 vt->freeform_lookup,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vt->freeform_lookup);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vt->freeform_lookup, NULL, NULL);
+	gtk_entry_set_text(GTK_ENTRY(vt->freeform_lookup),
+			   _("Romans 8:28"));
+
+	gtk_signal_connect(GTK_OBJECT(vt->cbe_book),
+			   "changed",
+			   GTK_SIGNAL_FUNC(book_changed), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->spb_chapter),
+			   "button_release_event",
+			   GTK_SIGNAL_FUNC
+			   (chapter_button_release_event), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->spb_verse),
+			   "button_release_event",
+			   GTK_SIGNAL_FUNC
+			   (verse_button_release_event), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->freeform_lookup),
+			   "key_press_event",
+			   GTK_SIGNAL_FUNC(entry_key_press_event), vt);
+	return toolbar_nav;
+}
+
+
 
 /******************************************************************************
  * Name
@@ -1470,20 +1739,17 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	GtkWidget *module_new;
 	GtkWidget *module_new_menu;
 	GtkAccelGroup *module_new_menu_accels;
-	GtkWidget *toolbar30;
-	GtkWidget *combo11;
-	GtkObject *spbVTChapter_adj;
-	GtkObject *spbVTVerse_adj;
-	GtkWidget *btnGotoVerse;
+	GtkWidget *toolbar_nav;
 	GtkWidget *frame21;
 	GtkWidget *swVText;
-			      
-	vt->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
-	    
+
+	vt->dialog = gtk_window_new(GTK_WINDOW_DIALOG);
+
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
 			    vt->dialog);
-	gtk_window_set_title (GTK_WINDOW (vt->dialog), get_module_description(vt->t->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 335, 400);
+	gtk_window_set_title(GTK_WINDOW(vt->dialog),
+			     get_module_description(vt->t->mod_name));
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 380, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
 
@@ -1494,7 +1760,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox33);
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
-	
+
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -1508,7 +1774,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_toolbar_set_space_size(GTK_TOOLBAR(toolbar), 3);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
 				      GTK_RELIEF_NONE);
-	
+
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(vt->dialog,
 				      GNOME_STOCK_PIXMAP_REFRESH);
@@ -1533,12 +1799,11 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator16,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator16, 7, 13);
-	
 
-	/* add global option buttons to toolbar */			 
-	add_global_option_buttons(toolbar, vt->t->mod_name, 
-				vt);	
-	
+
+	/* add global option buttons to toolbar */
+	add_global_option_buttons(toolbar, vt->t->mod_name, vt);
+
 
 
 	vseparator16 = gtk_vseparator_new();
@@ -1594,7 +1859,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator16, 7, 13);
 
-	
+
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(vt->dialog,
 				      GNOME_STOCK_PIXMAP_EXIT);
@@ -1610,75 +1875,12 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->btn_close);
 
-	toolbar30 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar30);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "toolbar30",
-				 toolbar30,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar30);
-	gtk_box_pack_start(GTK_BOX(vbox33), toolbar30, FALSE, FALSE, 0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar30),
+	toolbar_nav = create_nav_toolbar(vt);
+	gtk_widget_show(toolbar_nav);
+	gtk_box_pack_start(GTK_BOX(vbox33), toolbar_nav, FALSE, FALSE,
+			   0);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);
-
-	combo11 = gtk_combo_new();
-	gtk_widget_ref(combo11);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "combo11",
-				 combo11,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo11);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar30), combo11, NULL,
-				  NULL);
-
-	vt->cbe_book = GTK_COMBO(combo11)->entry;
-	gtk_widget_ref(vt->cbe_book);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->cbe_book",
-				 vt->cbe_book,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->cbe_book);
-
-
-	spbVTChapter_adj = gtk_adjustment_new(1, 0, 100, 1, 10, 10);
-	vt->spb_chapter =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVTChapter_adj), 1, 0);
-	gtk_widget_ref(vt->spb_chapter);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "vt->spb_chapter", vt->spb_chapter,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->spb_chapter);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar30), vt->spb_chapter,
-				  NULL, NULL);
-	gtk_widget_set_usize(vt->spb_chapter, 53, -2);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vt->spb_chapter),
-				    TRUE);
-
-	spbVTVerse_adj = gtk_adjustment_new(1, 0, 100, 1, 10, 10);
-	vt->spb_verse =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVTVerse_adj), 1, 0);
-	gtk_widget_ref(vt->spb_verse);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->spb_verse",
-				 vt->spb_verse,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vt->spb_verse);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar30),
-				  GTK_WIDGET(vt->spb_verse), NULL, NULL);
-	gtk_widget_set_usize(vt->spb_verse, 51, -2);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vt->dialog,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	btnGotoVerse =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar30),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button7"), _("Go to verse"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(btnGotoVerse);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "btnGotoVerse", btnGotoVerse,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnGotoVerse);
 
 	frame21 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame21);
@@ -1702,56 +1904,43 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 
 	vt->t->html = gtk_html_new();
 	gtk_widget_ref(vt->t->html);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->t->html", vt->t->html,
+	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->t->html",
+				 vt->t->html,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->t->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->t->html);
 	gtk_html_load_empty(GTK_HTML(vt->t->html));
-	
-	vt->statusbar = gtk_statusbar_new ();
-	gtk_widget_ref (vt->statusbar);
-	gtk_object_set_data_full (GTK_OBJECT (vt->dialog), "vt->statusbar", vt->statusbar,
-			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (vt->statusbar);
-	gtk_box_pack_start (GTK_BOX (vbox33), vt->statusbar, FALSE, FALSE, 0);
-	
 
-	
-	gtk_signal_connect (GTK_OBJECT (vt->dialog), "destroy",
-                      GTK_SIGNAL_FUNC (dialog_destroy),
-			   vt);
+	vt->statusbar = gtk_statusbar_new();
+	gtk_widget_ref(vt->statusbar);
+	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
+				 "vt->statusbar", vt->statusbar,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vt->statusbar);
+	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
+			   0);
 
-	gtk_signal_connect (GTK_OBJECT (vt->t->html), "motion_notify_event",
-			   GTK_SIGNAL_FUNC (on_dialog_motion_notify_event),
-			   vt);
-	gtk_signal_connect (GTK_OBJECT (vt->dialog), "motion_notify_event",
-			   GTK_SIGNAL_FUNC (on_dialog_motion_notify_event),
-			   vt);
+
+
+	gtk_signal_connect(GTK_OBJECT(vt->dialog),
+			   "destroy",
+			   GTK_SIGNAL_FUNC(dialog_destroy), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->t->html),
+			   "motion_notify_event",
+			   GTK_SIGNAL_FUNC
+			   (on_dialog_motion_notify_event), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->dialog),
+			   "motion_notify_event",
+			   GTK_SIGNAL_FUNC
+			   (on_dialog_motion_notify_event), vt);
 	gtk_signal_connect(GTK_OBJECT(vt->t->html), "on_url",
-			   GTK_SIGNAL_FUNC(dialog_url), 
-			   (gpointer) vt);
+			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);
 	gtk_signal_connect(GTK_OBJECT(vt->t->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(link_clicked), 
-			   vt);
+			   GTK_SIGNAL_FUNC(link_clicked), vt);
 	gtk_signal_connect(GTK_OBJECT(vt->btn_sync), "clicked",
-			   GTK_SIGNAL_FUNC(btn_sync_clicked), 
-			   vt);
-	gtk_signal_connect(GTK_OBJECT(vt->cbe_book), "changed",
-			   GTK_SIGNAL_FUNC(cbe_book_changed), 
-			   vt);
-	gtk_signal_connect(GTK_OBJECT(btnGotoVerse), "clicked",
-			   GTK_SIGNAL_FUNC(btn_goto_verse_clicked),
-			   vt);
-			   
+			   GTK_SIGNAL_FUNC(btn_sync_clicked), vt);
 	gtk_signal_connect(GTK_OBJECT(vt->btn_close), "clicked",
-			   GTK_SIGNAL_FUNC(btn_close_clicked),
-			   vt);	
-			   
-	
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), get_list(BOOKS_LIST));
-	strcpy(vt->key, settings.currentverse);
-	display(vt, settings.currentverse, TRUE);	
-	update_controls(vt);
+			   GTK_SIGNAL_FUNC(btn_close_clicked), vt);
 }
 
 /******************************************************************************
@@ -1771,9 +1960,9 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
  */
 
 void gui_open_bibletext_dialog(gchar * mod_name)
-{		
-	VIEW_TEXT * vt;
-	
+{
+	VIEW_TEXT *vt;
+
 	vt = g_new(VIEW_TEXT, 1);
 	vt->t = g_new(TEXT_DATA, 1);
 	vt->t->tgs = g_new(TEXT_GLOBALS, 1);
@@ -1805,10 +1994,11 @@ void gui_open_bibletext_dialog(gchar * mod_name)
  *   void
  */
 
-void gui_setup_bibletext_dialog(GList *mods)
+void gui_setup_bibletext_dialog(GList * mods)
 {
 	dialog_list = NULL;
 	dialog_freed = FALSE;
+	apply_change = FALSE;
 }
 
 /******************************************************************************
@@ -1827,23 +2017,23 @@ void gui_setup_bibletext_dialog(GList *mods)
  *   void
  */
 
-void gui_shutdown_bibletext_dialog(void) 
+void gui_shutdown_bibletext_dialog(void)
 {
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		VIEW_TEXT *vt = (VIEW_TEXT *) dialog_list->data;
 		dialog_freed = TRUE;
-//		g_warning("shuting down %s dialog",vt->t->mod_name);
+//              g_warning("shuting down %s dialog",vt->t->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
 		if (vt->dialog)
-			 gtk_widget_destroy(vt->dialog);
+			gtk_widget_destroy(vt->dialog);
 		/* 
 		 * free any search dialogs created 
 		 */
 		if (vt->t->find_dialog)
-			 g_free(vt->t->find_dialog);
+			g_free(vt->t->find_dialog);
 		/* 
 		 * free each TEXT_DATA item created 
 		 */
@@ -1851,7 +2041,7 @@ void gui_shutdown_bibletext_dialog(void)
 		g_free(vt->t);
 		g_free((VIEW_TEXT *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
-	} 
+	}
 	g_list_free(dialog_list);
 }
 
