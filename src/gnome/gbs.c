@@ -137,19 +137,22 @@ GBS_DATA *get_gbs(GList * gbs)
  
 static GtkCTreeNode *add_node_gbs(NODEDATA * data)
 {
+	GtkCTree *ctree;
 	GtkCTreeNode *retval;
-
-	retval = gtk_ctree_insert_node(GTK_CTREE(
-					widgets.ctree_widget_books),
-				       	data->parent,
-				      	data->sibling,
-				    	data->buf,
-				       	3,
-				       	data->pixmap1,
-				       	data->mask1,
-				       	data->pixmap2,
-				       	data->mask2,
-				       	data->is_leaf, data->expanded);
+ 
+	ctree = GTK_CTREE(widgets.ctree_widget_books);
+	retval = gtk_ctree_insert_node(
+			ctree,
+			data->parent,
+			data->sibling,
+			data->buf,
+			3,
+			data->pixmap1,
+			data->mask1,
+			data->pixmap2,
+			data->mask2,
+			data->is_leaf, 
+			data->expanded);
 	return retval;
 }
 		

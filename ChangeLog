@@ -1,3 +1,10 @@
+2003-09-27  Terry <tbiggs@users.sf.net>
+
+	* changed ctree to treeview in gnome2/gbs.c and gnome2/gbs_dialog.c
+	* changed search results clist to listview in gnome2/sidebar.c
+	* cleaned up ui (I hope)
+
+
 2003-09-17  Terry <tbiggs@users.sf.net>
 
 	* changed clist to listview in gnome2/dictlex.c and gnome2/dictlex_dialog.c

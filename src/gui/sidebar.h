@@ -29,7 +29,7 @@ extern "C" {
 typedef struct _sitebar SIDEBAR;
 struct _sitebar {
 	GtkWidget
-		*clist,
+		*results_list,
 		*notebook,
 		*tbtn_view_main,
 		*btn_save,
