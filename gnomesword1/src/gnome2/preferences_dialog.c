@@ -1464,9 +1464,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    gtk_radio_button_new_with_label(vbox36_group,
 					    _
 					    ("Yes, use defaults"));
-/*	vbox36_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (check_button.use_defaults));*/
+	vbox36_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON
+				   (check_button.use_defaults));
 	gtk_widget_show(check_button.use_defaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), check_button.use_defaults,
 			   FALSE, FALSE, 0);
@@ -1474,8 +1474,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
 		   _("No, use settings saved the last time I used GnomeSword"));
-/*	vbox36_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));*/
+	vbox36_group =
+	    gtk_radio_button_get_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_show(rbtnNoDefaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), rbtnNoDefaults, FALSE,
 			   FALSE, 0);

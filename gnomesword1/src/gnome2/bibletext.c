@@ -576,7 +576,7 @@ static void create_pane(TEXT_DATA * t)
 				   (TEXT_DATA *) t);
 		g_signal_connect(GTK_OBJECT(t->html), "on_url",
 				   G_CALLBACK(gui_url),
-				   (TEXT_DATA *) t);
+				   GINT_TO_POINTER(TEXT_TYPE));
 		g_signal_connect(GTK_OBJECT(t->html),
 				   "button_release_event",
 				   G_CALLBACK

@@ -45,6 +45,10 @@
 extern int search_dialog;
 
 
+char *get_key_from_module(int manager, char *module_name)
+{
+	return backend_get_key_from_module(manager, module_name);
+}
 /******************************************************************************
  * Name
  *  get_preverse_header
