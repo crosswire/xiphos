@@ -267,7 +267,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 
 			if (gbf) {
 				len = strlen((const char *) imodule);
-				len = len * 5;
+				len = len * 8;
 				Buf = new char[len];
 				strcpy(Buf, (const char *) imodule);
 				gbftohtml(Buf, len);
@@ -326,7 +326,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				if (gbf) {
 					len =
 					    strlen((const char *) imodule);
-					len = len * 5;
+					len = len * 8;
 					Buf = new char[len];
 					strcpy(Buf,
 					       (const char *) imodule);
@@ -365,7 +365,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	g_string_free(strbuf, TRUE);
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
-	gotoanchorHTML(tmpBuf);
+	gotoanchorHTML(gtkText, tmpBuf);
 	return 0;
 }
 
@@ -463,10 +463,41 @@ gchar *GtkHTMLEntryDisp::gbftohtml(gchar * text, gint maxlen)
 			continue;
 		}
 		if (*from == '>') {
+		               unsigned int i;
 			intoken = false;
 			// process desired tokens
 			switch (*token) {
-			case 'W':	// Strongs
+			case 'W':	// Strongs case 'W':	// Strongs
+					switch(token[1])
+					{
+						case 'G':               // Greek
+						case 'H':               // Hebrew
+							strcpy(to," <small><em>&lt;<a href=\"#");
+							to += strlen(to);					
+							for (i = 1; i < strlen(token); i++)
+								*to++ = token[i];
+							strcpy(to,"\">");
+							to += strlen(to);
+							for (i = 2; i < strlen(token); i++)								
+								if(isdigit(token[i])) *to++ = token[i];
+							strcpy(to,"</a>&gt;</em></small> ");
+							to += strlen(to);
+							continue;
+						case 'T':               // Tense	-- morphological tags		
+							
+							strcpy(to," <small><em>(<a href=\"#");
+							to += strlen(to);					
+							for (i = 1;
+					     			i < strlen(token); i++)
+							*to++ = token[i];
+							strcpy(to," \">");
+							to += strlen(to);
+							for (i = 2;	i < strlen(token); i++)
+								if(isdigit(token[i])) *to++ = token[i];
+							strcpy(to,"</a>)</em></small> ");
+							to += strlen(to);	
+					}
+					break; /*
 				switch (token[1]) {
 				case 'G':	// Greek
 				case 'H':	// Hebrew
@@ -501,7 +532,7 @@ gchar *GtkHTMLEntryDisp::gbftohtml(gchar * text, gint maxlen)
 					to += strlen(to);
 					continue;
 				}
-				break;
+				break; */
 			case 'R':
 				switch (token[1]) {
 				case 'B':	//word(s) explained in footnote

@@ -93,6 +93,9 @@ void gotoverseVCSWORD(gchar *newkey);
 void navVCModSWORD(gint direction);
 gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
+GList *getBibleBooks(void);
+
+
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }

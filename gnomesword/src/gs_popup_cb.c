@@ -25,6 +25,7 @@
 #include "gs_sword.h"
 #include "gs_viewdict.h"
 #include "gs_viewcomm.h"
+#include "gs_viewtext_dlg.h"
 #include "support.h"
 
 
@@ -536,3 +537,13 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 
 }
 
+
+
+void
+on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *dlg;
+	
+	dlg = create_dlgViewText ();
+	gtk_widget_show(dlg);
+}

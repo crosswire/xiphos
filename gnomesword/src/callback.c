@@ -45,9 +45,6 @@
 #include "gs_file.h"
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
-
-//#include "noteeditor.h"
-//#include "searchstuff.h"
 #include "printstuff.h"
 
 
