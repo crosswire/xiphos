@@ -48,6 +48,74 @@ static GtkWidget *module_options_menu;
 
 /******************************************************************************
  * Name
+ *   gui_set_interlinear_options_at_start
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_set_interlinear_options_at_start(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_interlinear_options_at_start(void)
+{
+	
+	if (settings.footnotesint)
+		set_interlinear_global_option("Footnotes", "On");	/* keep footnotes in sync with menu */
+	else
+		set_interlinear_global_option("Footnotes", "Off");	/* keep footnotes in sync with menu */
+
+	/*
+	   set interlinear Strong's Numbers to last setting used 
+	 */
+	if (settings.strongsint)
+		set_interlinear_global_option("Strong's Numbers", "On");	/* keep Strongs in sync with menu */
+	else
+		set_interlinear_global_option("Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
+
+	/*
+	   set interlinear morph tags to last setting used 
+	 */
+	if (settings.morphsint)
+		set_interlinear_global_option("Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
+	else
+		set_interlinear_global_option("Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
+
+	/*
+	   set interlinear Hebrew Vowel Points to last setting used 
+	 */
+	if (settings.hebrewpointsint)
+		set_interlinear_global_option("Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
+	else
+		set_interlinear_global_option("Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
+
+	/*
+	   set interlinear Hebrew Cantillation to last setting used 
+	 */
+	if (settings.cantillationmarksint)
+		set_interlinear_global_option("Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
+	else
+		set_interlinear_global_option("Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
+
+	/*
+	   set interlinear Greek Accents to last setting used 
+	 */
+	if (settings.greekaccentsint)
+		set_interlinear_global_option("Greek Accents", "On");	/* keep Greek Accents in sync with menu */
+	else
+		set_interlinear_global_option("Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
+	
+	
+}
+
+
+/******************************************************************************
+ * Name
  *   on_undockInt_activate
  *
  * Synopsis
@@ -978,7 +1046,7 @@ static void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
  *   GtkWidget *
  */
 
-GtkWidget * create_interlinear_popup(GList * mods)
+static GtkWidget * create_interlinear_popup(GList * mods)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
@@ -987,7 +1055,8 @@ GtkWidget * create_interlinear_popup(GList * mods)
 	GtkWidget *module_options;
 	GtkWidget *separator2;
 	GtkTooltips *tooltips;
-
+	
+	
 	tooltips = gtk_tooltips_new();
 	pmInt = gtk_menu_new ();
 	gtk_object_set_data (GTK_OBJECT (pmInt), "pmInt", pmInt);

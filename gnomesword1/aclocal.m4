@@ -1166,7 +1166,7 @@ if test x"$compiler_c_o" = x"yes"; then
   CFLAGS="$save_CFLAGS"
   ])
   compiler_o_lo=$lt_cv_compiler_o_lo
-  AC_MSG_RESULT([$compiler_o_lo])
+  AC_MSG_RESULT([$compiler_c_lo])
 else
   compiler_o_lo=no
 fi
@@ -1549,7 +1549,7 @@ else
         hardcode_libdir_flag_spec='${wl}-bnolibpath ${wl}-blibpath:$libdir:/usr/lib:/lib'
         # Warning - without using the other run time loading flags, -berok will
         #           link without error, but may produce a broken library.
-        allow_undefined_flag='${wl}-berok'
+        allow_undefined_flag='${wl}-berok"
         # This is a bit strange, but is similar to how AIX traditionally builds
         # it's shared libraries.
         archive_expsym_cmds="\$CC $shared_flag"' -o $output_objdir/$soname $libobjs $deplibs $compiler_flags ${allow_undefined_flag} '"\${wl}$no_entry_flag \${wl}$exp_sym_flag:\$export_symbols"' ~$AR -crlo $objdir/$libname$release.a $objdir/$soname'
@@ -3260,7 +3260,7 @@ irix5* | irix6*)
 # This must be Linux ELF.
 linux-gnu*)
   case $host_cpu in
-  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* )
+  alpha* | i*86 | powerpc* | sparc* | ia64* )
     lt_cv_deplibs_check_method=pass_all ;;
   *)
     # glibc up to 2.1.1 does not perform some relocations on ARM

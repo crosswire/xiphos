@@ -20,12 +20,9 @@ COMMON_SOURCE =  \
     commentary.h \
     dictlex.c \
     dictlex.h \
-    find_dlg_defs.h \
     gbs.c \
     gs_gnomesword.c \
     gs_gnomesword.h \
-    setup.c \
-    setup.h \
     lists.c \
     lists.h \
     main.c \

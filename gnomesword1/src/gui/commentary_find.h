@@ -24,7 +24,7 @@
 
 #include <gnome.h>
 
-#include "main/find_dlg_defs.h"
+#include "gui/find_dlg_defs.h"
 
 typedef struct _gs_find_dialog COMMFindDialog;
 
