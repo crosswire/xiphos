@@ -82,6 +82,8 @@
 #include "commentary.h"
 #include "gs_commentary.h"
 #include "search.h"
+#include "interlinear.h"
+#include "gs_interlinear.h"
 
 
 typedef map < string, string > modDescMap;
@@ -90,10 +92,7 @@ typedef map < string, string > bookAbrevMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
-//SWDisplay *chapDisplay;               /* to display modules using GtkText a chapter at a time */
-SWDisplay * comp1Display,	/* to display interlinear modules  a verse at a time */
-    *FPNDisplay,		/* to display formatted personal notes using GtkText */
-    //*commDisplay,             /* to display commentary modules */
+SWDisplay *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *UTF8Display;		/* to display modules in utf8 */
 
 SWMgr * percomMgr,		/* sword mgr for percomMod - personal comments editor */
@@ -121,31 +120,17 @@ bookAbrevMap abrevationMap;
 /***********************************************************************************************
  * GnomeSword globals
 ***********************************************************************************************/
-GList
-    * biblemods,
-    *commentarymods,
-    *dictionarymods,
-    *percommods,
-    *bookmods,
-    *sbfavoritesmods,
-    *sbbiblemods, *sbdictmods, *sbcommods, *sbbookmods, *options;
+
 
 GtkWidget *NEtext,		/* note edit widget */
 *MainFrm;			/* main form widget  */
 
-gint curChapter = 8,		/* keep up with current chapter */
-    curVerse = 28,		/* keep up with current verse */
-    answer,			/* do we want to save studybad file on shutdown */
-    hebrewpage = 0, greekpage = 0;
-
 gboolean noteModified = false,	/* set to true is personal note has changed */
     usepersonalcomments = false,	/* do we setup for personal comments - default is false  */
-    ApplyChange = true,		/* should we make changes when cbBook is changed */
     autoSave = true,		/* we want to auto save changes to personal comments */
     havebible = false,		/* let us know if we have at least one bibletext module */
     havedict = false,		/* let us know if we have at least one lex-dict module */
-    havecomm = false,		/* let us know if we have at least one commentary module */
-    autoscroll = true;		/* commentary module auto scroll when true -- in sync with main text window */
+    havecomm = false;		/* let us know if we have at least one commentary module */
 
 gchar com_key[80] = "Rom 8:28",	/* current commentary key */
     *textmod, *commod, *dictmod;
@@ -153,33 +138,39 @@ gchar com_key[80] = "Rom 8:28",	/* current commentary key */
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern gboolean changemain,	/* change verse of Bible text window */
- addhistoryitem,		/* do we need to add item to history */
- file_changed,			/* set to true if text is study pad has changed - and file is not saved */
- firstsearch;
-extern gint dictpages,		/* number of dictionaries */
- compages,			/* number of commentaries */
- textpages,			/* number of Bible text */
- historyitems;			/* number of history items */
-extern SETTINGS *settings, myset;
+extern GList
+    *options;
+
+extern gint 
+   dictpages,	/* number of dictionaries */
+   compages,	/* number of commentaries */
+   textpages,	/* number of Bible text */
+   bookpages;
+ 
+extern SETTINGS 
+    *settings, myset;
 extern GtkWidget
-    * lang_options_menu,
-    *shortcut_bar,
-    *strongsnum,
-    *footnotes,
-    *hebrewpoints,
-    *cantillationmarks, *greekaccents, *morphs, *htmlComments;
-extern gchar *current_filename,	/* filename for open file in study pad window  */
- current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
-*mycolor, *mycolor;
-extern HISTORY historylist[];	/* sturcture for storing history items */
+    *htmlComments;    
+extern gchar 
+    current_verse[80];	/* current verse showing in main window, interlinear window - commentary window */    
+
 
 void backend_first_init(void)
 {
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	percomMgr = new SWMgr();
-
+	
+	char locale_name[40];
+	sprintf(locale_name,"%s",(char *)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+	cout << locale_name << "\n";
+	if(strlen(locale_name) > 2) {
+		char buf[40];
+		strncpy(buf,locale_name,2);
+		buf[2] = '\0';
+		LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
+	}
+	
 	curMod = NULL;		//-- set mods to null
 	comp1Mod = NULL;
 	curcomMod = NULL;
@@ -191,7 +182,6 @@ void backend_first_init(void)
 	interlinearMod3 = NULL;
 	interlinearMod4 = NULL;
 
-	comp1Display = 0;
 	FPNDisplay = 0;
 	UTF8Display = 0;
 
@@ -201,7 +191,7 @@ void backend_first_init(void)
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
  ***********************************************************************************************/
-void initSWORD(SETTINGS * s)
+void backend_init_sword(SETTINGS * s)
 {
 	ModMap::iterator it;	//-- iteratior
 	ConfigEntMap::iterator eit;	//-- iteratior
@@ -219,34 +209,22 @@ void initSWORD(SETTINGS * s)
 	vkComm = settings->currentverse;
 
 	//-- set glist to null 
-	biblemods = NULL;
-	commentarymods = NULL;
-	dictionarymods = NULL;
-	percommods = NULL;
-	sbfavoritesmods = NULL;
-	sbbiblemods = NULL;
-	sbcommods = NULL;
-	sbdictmods = NULL;
-	bookmods = NULL;
-	sbbookmods = NULL;
 	options = NULL;
 
 	s->displaySearchResults = false;
 	s->havethayer = false;
 	s->havebdb = false;
-	//LocaleMgr::systemLocaleMgr.setDefaultLocaleName( "de" );
 
 	MainFrm = s->app;	//-- save mainform for use latter
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
 	UTF8Display =
 	    new GtkHTMLChapDisp(lookup_widget(s->app, "htmlTexts"), s);
-	//commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"),s);
-	comp1Display = new InterlinearDisp(s->htmlInterlinear, s);
 	FPNDisplay = new GtkHTMLEntryDisp(htmlComments, s);
-	//dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
 	compages = 0;
 	dictpages = 0;
+	textpages = 0;
+	bookpages = 0;
 
 
 	if (s->showsplash) {
@@ -257,7 +235,7 @@ void initSWORD(SETTINGS * s)
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 
-	g_print("%s\n", "Loading SWORD Moudules");
+	g_print("%s\n", "Loading SWORD Modules");
 
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
@@ -269,93 +247,66 @@ void initSWORD(SETTINGS * s)
 			curMod = (*it).second;
 			havebible = TRUE;
 			++textpages;
-			biblemods =
-			    g_list_append(biblemods, curMod->Name());
-			sbbiblemods =
-			    g_list_append(sbbiblemods,
-					  curMod->Description());
+			
 			curMod->Disp(UTF8Display);
 			curMod->SetKey(vkText);
 		}
 
-		else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
+		else if (!strcmp((*it).second->Type(), "Commentaries")) {               
 			curcomMod = (*it).second;
-			commentarymods =
-			    g_list_append(commentarymods,
-					  (*it).second->Name());
-			sbcommods =
-			    g_list_append(sbcommods,
-					  (*it).second->Description());
+			
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have 
 		}
 
-		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
+		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {        
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
 			curdictMod = (*it).second;
-			dictionarymods =
-			    g_list_append(dictionarymods,
-					  (*it).second->Name());
-			sbdictmods =
-			    g_list_append(sbdictmods,
-					  (*it).second->Description());
+			
 		}
 
 		else if (!strcmp((*it).second->Type(), "Generic Books")) {
-			bookmods =
-			    g_list_append(bookmods,
-					  (*it).second->Name());
-			sbbookmods =
-			    g_list_append(sbbookmods,
-					  (*it).second->Description());
+			++bookpages;
 		}
 	}
+	
+	g_print("\nNumber of Text modules = %d\n",textpages);
+	g_print("Number of Commentary modules = %d\n",compages);
+	g_print("Number of Dict/Lex modules = %d\n",dictpages);
+	g_print("Number of Book modules = %d\n\n",bookpages);
+	
 	//-- setup Commentary Support, Generic Book Support and Dict/Lex Support
 	backend_setupCOMM(s);
 	backend_setupDL(s);
 	backend_setupGBS(s);
+	backend_setup_interlinear(s);
+	
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
 	     it != percomMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- if type is 
+		if (!strcmp((*it).second->Type(), "Commentaries")) {	
 			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->
-			     Sections[(*it).second->Name()].
+			if ((*percomMgr->config->Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
-				percomMod->Disp(FPNDisplay);
-				percommods =
-				    g_list_append(percommods,
-						  percomMod->Name());
+				percomMod->Disp(FPNDisplay);				
 				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
-				percomMod->SetKey(s->currentverse);
-				gtk_widget_show(lookup_widget(s->app, "vbox2"));	//-- show personal comments page because we
-			}	//-- have at least one personl module
+				percomMod->SetKey(s->currentverse);				
+			}	
 		}
 	}
 
 	//-- interlinear        
 	for (it = mainMgr1->Modules.begin();
 	     it != mainMgr1->Modules.end(); it++) {
-		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			interlinearMod0 = (*it).second;
 			interlinearMod1 = (*it).second;
 			interlinearMod2 = (*it).second;
 			interlinearMod3 = (*it).second;
 			interlinearMod4 = (*it).second;
-			comp1Mod->Disp(comp1Display);
-			if (interlinearMod0)
-				interlinearMod0->Disp(comp1Display);
-			if (interlinearMod1)
-				interlinearMod1->Disp(comp1Display);
-			if (interlinearMod2)
-				interlinearMod2->Disp(comp1Display);
-			if (interlinearMod3)
-				interlinearMod3->Disp(comp1Display);
-			if (interlinearMod4)
-				interlinearMod4->Disp(comp1Display);
+			comp1Mod = (*it).second;
 		}
 	}
 
@@ -367,146 +318,6 @@ void initSWORD(SETTINGS * s)
 		options =
 		    g_list_append(options, (gchar *) (*it).c_str());
 	}
-}
-
-GtkHTMLStream *htmlstream;
-/*** please fix me ***/
-void updateIntDlg(SETTINGS * s)
-{
-	gchar * utf8str, *bgColor, *textColor, buf[500], *tmpkey;
-	gint utf8len;
-
-	//-- setup gtkhtml widget
-	GtkHTMLStreamStatus status1;
-	GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-
-	interlinearMod0 = mainMgr1->Modules[s->Interlinear1Module];
-	interlinearMod1 = mainMgr1->Modules[s->Interlinear2Module];
-	interlinearMod2 = mainMgr1->Modules[s->Interlinear3Module];
-	interlinearMod3 = mainMgr1->Modules[s->Interlinear4Module];
-	interlinearMod4 = mainMgr1->Modules[s->Interlinear5Module];
-
-
-	sprintf(buf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
-		s->bible_bg_color, s->bible_text_color, s->link_color);
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
-	}
-
-	if (interlinearMod0) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			s->Interlinear1Module);
-		utf8str =
-		    e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-	}
-
-	if (interlinearMod1) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			s->Interlinear2Module);
-		utf8str =
-		    e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-	}
-
-	if (interlinearMod2) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			s->Interlinear3Module);
-		utf8str =
-		    e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-	}
-
-	if (interlinearMod3) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			s->Interlinear4Module);
-		utf8str =
-		    e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-	}
-
-	if (interlinearMod4) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
-			s->Interlinear5Module);
-		utf8str =
-		    e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-	}
-
-	sprintf(buf, "%s", "</tr>");
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
-	}
-
-
-	/******      ******/
-	IntDisplay(s);
-
-	sprintf(buf, "%s", "</table></body></html>");
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;        
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
-	}
-
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	gtk_html_set_editable(html, was_editable);
-	sprintf(buf, "%d", s->intCurVerse);
-	gtk_html_jump_to_anchor(html, buf);
-}
-
-/*
- * Sets up the interlinear html widget for each 
- * interlinear module
- */
-char *backend_get_interlinear_module_text(char * mod_name, char *key)
-{
-	interlinearMod0 =
-		    mainMgr1->Modules[mod_name];
-	if (interlinearMod0)
-			interlinearMod0->SetKey(key);
-	else 
-		return NULL;
-	return g_strdup((gchar*)interlinearMod0->RenderText());	
-	
 }
 
 void backend_text_module_change_verse(gchar * key)
@@ -521,7 +332,7 @@ void backend_text_module_change_verse(gchar * key)
 	}
 
 	//------------------------------- change personal notes editor   if not in edit mode
-	if (settings->notebook3page == 1) {
+	//if (settings->notebook3page == 1) {
 		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
 			if (!settings->editnote) {
 				if (usepersonalcomments && percomMod) {
@@ -531,7 +342,7 @@ void backend_text_module_change_verse(gchar * key)
 				}
 			}
 		}
-	}
+	//}
 }
 
 
@@ -552,7 +363,7 @@ void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
 	backend_shutdownCOMM();
 	backend_shutdown_search_results_display();
 	backend_shutdown_sb_viewer();
-
+	backend_shutdown_interlinear();
 
 	//-- delete Sword managers
 	delete mainMgr;
@@ -562,8 +373,6 @@ void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
 	//-- delete Sword displays
 	if (UTF8Display)
 		delete UTF8Display;
-	if (comp1Display)
-		delete comp1Display;
 	if (FPNDisplay)
 		delete FPNDisplay;
 	g_print("\nwe are done with Sword\n");
@@ -691,7 +500,8 @@ void backend_save_personal_comment(gchar * buf)	//-- save personal comments
 void backend_delete_personal_comment(void)	//-- delete personal comment
 {
 	GtkWidget * label1, *label2, *label3, *msgbox;
-
+	gint answer = -1;
+	
 	msgbox = create_InfoBox();
 	label1 = lookup_widget(msgbox, "lbInfoBox1");
 	label2 = lookup_widget(msgbox, "lbInfoBox2");
@@ -755,7 +565,7 @@ void backend_set_global_option(gint window, gchar * option, gchar * yesno)
 		mainMgr->setGlobalOption(option, yesno);
 		break;
 	case INTERLINEAR_WINDOW:/*** interlinear window ***/
-		mainMgr1->setGlobalOption(option, yesno);
+		backend_set_interlinear_global_option(option, yesno);
 		break;
 	}
 }
@@ -806,34 +616,6 @@ const char *backend_get_sword_verion(void)
 
 	retval = SWVersion::currentVersion;
 	return retval;
-}
-
-/******************************************************************************
- * swaps interlinear mod with mod in main text window
- * intmod - interlinear mod name
- ******************************************************************************/
-void backend_swap_interlinear_with_main(gchar * intmod, SETTINGS *s)
-{
-	gchar *modname;
-
-	modname = s->MainWindowModule;
-	if (!stricmp(s->Interlinear5Module, intmod)) {
-		sprintf(s->Interlinear5Module, "%s", modname);
-	}
-	if (!stricmp(s->Interlinear4Module, intmod)) {
-		sprintf(s->Interlinear4Module, "%s", modname);
-	}
-	if (!stricmp(s->Interlinear3Module, intmod)) {
-		sprintf(s->Interlinear3Module, "%s", modname);
-	}
-	if (!stricmp(s->Interlinear2Module, intmod)) {
-		sprintf(s->Interlinear2Module, "%s", modname);
-	}
-	if (!stricmp(s->Interlinear1Module, intmod)) {
-		sprintf(s->Interlinear1Module, "%s", modname);
-	}
-	change_module_and_key(intmod, current_verse);
-	update_interlinear_page(settings);
 }
 
 /*** the changes are already made we just need to show them ***/

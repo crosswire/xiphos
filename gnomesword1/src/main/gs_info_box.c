@@ -139,12 +139,12 @@ GtkWidget *create_InfoBox(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnInfoBoxNo);
 	GTK_WIDGET_SET_FLAGS(btnInfoBoxNo, GTK_CAN_DEFAULT);
-
+/*
 	gtk_signal_connect(GTK_OBJECT(btnInfoBoxYes), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnInfoBoxYes_clicked),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnInfoBoxNo), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnInfoBoxNo_clicked), NULL);
-
+*/
 	return InfoBox;
 }

@@ -36,6 +36,7 @@
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
+#include "gs_interlinear.h"
 #include "gs_history.h"
 #include "sword.h"
 #include "gs_gui_cb.h"
@@ -51,6 +52,7 @@
 #include "gs_shortcutbar.h"
 #include "about_modules.h"
 #include "search.h"
+#include "interlinear.h"
 
 
 /*****************************************************************************
@@ -61,28 +63,30 @@ GtkWidget *notepage,		/* widget to access toggle menu - for interlinear notebook
 *notes;				/* notes text widget */
 
 gboolean file_changed = FALSE,	/* set to true if text is study pad has changed - and file is not saved  */
- changemain = TRUE;		/* change verse of Bible text window */
-
+ changemain = TRUE,		/* change verse of Bible text window */
+   ApplyChange = TRUE;
 gchar *current_filename = NULL;	/* filename for open file in study pad window */
 
 gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 
-gint dictpages, compages, textpages;
+gint dictpages, compages, textpages, bookpages;
 
 SETTINGS *settings;
-GList *sblist;			/* for saving search results to bookmarks  */
-/*****************************************************************************
-* externs
-*****************************************************************************/
-extern GList
-    * biblemods,
+GList *sblist, /* for saving search results to bookmarks  */
+    *biblemods,
     *commentarymods,
     *dictionarymods,
     *bookmods,
     *percommods,
     *sbfavoritesmods,
-    *sbbiblemods, *sbdictmods, *sbcommods, *sbbookmods, *options;
-
+    *sbbiblemods, 
+    *sbdictmods, 
+    *sbcommods, 
+    *sbbookmods, 
+    *options;			
+/*****************************************************************************
+* externs
+*****************************************************************************/
 extern gchar *mydictmod, *shortcut_types[], rememberlastitem[];
 
 extern gboolean havedict,	/* let us know if we have at least one lex-dict module */
@@ -100,18 +104,54 @@ extern GtkWidget *shortcut_bar;
  * initGnomeSword - sets up the interface
  *****************************************************************************/
 void
-initGnomeSword(SETTINGS * s,
-	       GList * biblemods,
-	       GList * commentarymods,
-	       GList * dictionarymods, GList * percommods)
+initGnomeSword(SETTINGS * s)
 {
 	GtkWidget *notebook;
 
 	gint biblepage;
 
 
-	g_print("%s\n", "Initiating GnomeSword\n");
-
+	g_print("%s\n", "Initiating GnomeSWORD\n");
+	/*
+	   set glist to null 
+	 */
+	biblemods = NULL;
+	commentarymods = NULL;
+	dictionarymods = NULL;
+	percommods = NULL;
+	sbfavoritesmods = NULL;
+	sbbiblemods = NULL;
+	sbcommods = NULL;
+	sbdictmods = NULL;
+	bookmods = NULL;
+	sbbookmods = NULL;
+	
+	/*
+	   fill module lists
+	 */
+	biblemods = backend_get_list_of_mods_by_type(TEXT_MODS);
+	sbbiblemods = backend_get_mod_description_list_SWORD(TEXT_MODS);
+	
+	commentarymods = backend_get_list_of_mods_by_type(COMM_MODS);
+	sbcommods = backend_get_mod_description_list_SWORD(COMM_MODS);
+	
+	dictionarymods = backend_get_list_of_mods_by_type(DICT_MODS);	
+	sbdictmods = backend_get_mod_description_list_SWORD(DICT_MODS);
+	
+	bookmods = backend_get_list_of_mods_by_type(BOOK_MODS);
+	sbbookmods = backend_get_mod_description_list_SWORD(BOOK_MODS);
+	
+	percommods = backend_get_list_of_percom_modules();
+	if (percommods) {
+		/*
+		   show personal comments page 
+		 */
+		gtk_widget_show(lookup_widget(s->app, "vbox2"));
+		/*
+		   change personal comments module 
+		 */
+		backend_change_percom_module(s->personalcommentsmod);
+	}
 	/*
 	   setup shortcut bar 
 	 */
@@ -196,12 +236,8 @@ initGnomeSword(SETTINGS * s,
 			gtk_widget_hide(notebook);
 	}
 
-	if (usepersonalcomments) {
-		/*
-		   change personal comments module 
-		 */
-		backend_change_percom_module(s->personalcommentsmod);
-	}
+	//if (usepersonalcomments) {
+		
 
 	/*
 	   free module lists 
@@ -215,7 +251,9 @@ initGnomeSword(SETTINGS * s,
 	g_list_free(sbdictmods);
 	g_list_free(bookmods);
 	g_list_free(sbbookmods);
-	// options list freed on exit
+	/* 
+	   options list freed on exit 
+	 */
 
 	g_print("done\n");
 
@@ -416,14 +454,7 @@ void UpdateChecks(SETTINGS * s)
 	}
 	gtk_widget_show(s->app); /** display the whole thing **/
 
-	/*
-	   fill the dict key clist 
-	 */
-	/*
-	   if (havedict)
-	   FillDictKeysSWORD();
-	 */
-
+	
 	addhistoryitem = FALSE;
 	change_verse(s->currentverse);
 }
@@ -957,7 +988,7 @@ void set_module_global_options(gchar * option, gint window,
 		if (settings->dockedInt && havebible)	/* display change */
 			update_interlinear_page(settings);
 		else
-			updateIntDlg(settings);
+			update_interlinear_page_detached(settings);
 
 		break;
 	}
@@ -1024,139 +1055,6 @@ void change_verse(gchar * key)
 	gui_displayCOMM(settings->currentverse);
 	g_free(val_key);
 	ApplyChange = TRUE;
-}
-
-void update_interlinear_page(SETTINGS * s)
-{
-	gchar tmpBuf[256], *rowcolor, *font_size;
-	gchar *utf8str,*mod_name, *font_name;
-	gint utf8len, i;
-	gboolean was_editable, use_gtkhtml_font;
-	
-	if (havebible) {
-		/* setup gtkhtml widget */
-		GtkHTMLStream *htmlstream;
-		GtkHTMLStreamStatus status1;
-		GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
-		was_editable = gtk_html_get_editable(html);
-		if (was_editable)
-			gtk_html_set_editable(html, FALSE);
-		htmlstream =
-		    gtk_html_begin_content(html,
-					   "text/html; charset=utf-8");
-		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-			settings->bible_bg_color,
-			settings->bible_text_color,
-			settings->link_color);
-		utf8str =
-		    e_utf8_from_gtk_string(settings->htmlInterlinear,
-					   tmpBuf);
-		utf8len = strlen(utf8str);      
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-		
-		for(i = 0; i < 5; i++) {
-			mod_name = NULL;
-			switch(i) {
-				case 0:
-					mod_name = settings->Interlinear1Module;					
-				break;
-				case 1:
-					mod_name = settings->Interlinear2Module;
-				break;
-				case 2:
-					mod_name = settings->Interlinear3Module;
-				break;
-				case 3:
-					mod_name = settings->Interlinear4Module;
-				break;
-				case 4:
-					mod_name = settings->Interlinear5Module;
-				break;
-			}
-			
-			if((font_name = backend_get_module_font_name(mod_name)) != NULL)
-				use_gtkhtml_font = FALSE;
-			else
-				use_gtkhtml_font = TRUE;
-			
-			font_size = s->interlinear_font_size; 
-			
-			if (i == 0 || i == 2 || i == 4)
-				rowcolor = "#F1F1F1";
-			else
-				rowcolor = s->bible_bg_color;
-			
-			if (i == 0) {
-				sprintf(tmpBuf,
-					"<tr><td><i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i></td></tr>",
-					s->bible_verse_num_color,
-					s->verse_num_font_size, 
-					current_verse);
-				utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
-				utf8len = strlen(utf8str);
-				if (utf8len) {
-					gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-				}	
-			}
-			
-			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b>",
-				rowcolor,
-				mod_name,
-				backend_get_module_description(mod_name),
-				s->bible_verse_num_color,
-				s->verse_num_font_size,
-				mod_name);
-			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
-			utf8len = strlen(utf8str);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-			}			
-				
-			if(use_gtkhtml_font)
-				sprintf(tmpBuf, "<font size=\"%s\">", font_size);
-			else
-				sprintf(tmpBuf, "<font face=\"%s\"size=\"%s\">", font_name, font_size);
-				
-			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
-			utf8len = strlen(utf8str);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-			}
-				
-			 utf8str = backend_get_interlinear_module_text(mod_name, current_verse);
-			if (strlen(utf8str)) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-				g_free(utf8str);
-			}
-			
-			sprintf(tmpBuf,
-				"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
-				mod_name);
-			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
-			utf8len = strlen(utf8str);
-			if (utf8len) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-			}
-		}		
-		
-		sprintf(tmpBuf, "</table></body></html>");
-		utf8str =
-		    e_utf8_from_gtk_string(settings->htmlInterlinear,
-					   tmpBuf);
-		utf8len = strlen(utf8str);       
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       utf8str, utf8len);
-		}
-
-		gtk_html_end(GTK_HTML(html), htmlstream, status1);
-		gtk_html_set_editable(html, was_editable);
-	}
 }
 
 /*****   end of file   ******/

@@ -191,6 +191,8 @@ COMMON_SOURCE = \
     gs_info_box.h\
     gs_information_dlg.c \
     gs_information_dlg.h \
+    gs_interlinear.c \
+    gs_interlinear.h \
     gs_mainmenu_cb.c \
     gs_mainmenu_cb.h\
     gs_menu.c \
@@ -268,12 +270,13 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_find_dlg.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
 	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
 	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
-	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
-	gs_menu.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
-	gs_preferences_dlg.$(OBJEXT) gs_setup.$(OBJEXT) \
-	gs_shortcutbar.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
-	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
-	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT)
+	gs_information_dlg.$(OBJEXT) gs_interlinear.$(OBJEXT) \
+	gs_mainmenu_cb.$(OBJEXT) gs_menu.$(OBJEXT) \
+	gs_popup_cb.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
+	gs_setup.$(OBJEXT) gs_shortcutbar.$(OBJEXT) \
+	gs_unlockkey_dlg.$(OBJEXT) gs_viewcomm_dlg.$(OBJEXT) \
+	gs_viewdict_dlg.$(OBJEXT) gs_viewtext_dlg.$(OBJEXT) \
+	main.$(OBJEXT) support.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES = $(top_builddir)/src/backend/libbackend.a \
 	$(top_builddir)/src/gnome/libgui.a
@@ -300,6 +303,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_gui_cb.Po $(DEPDIR)/gs_history.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_html.Po $(DEPDIR)/gs_info_box.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_information_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_interlinear.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_mainmenu_cb.Po $(DEPDIR)/gs_menu.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_popup_cb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_preferences_dlg.Po \
@@ -397,6 +401,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_html.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_info_box.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_interlinear.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_mainmenu_cb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_popup_cb.Po@am__quote@

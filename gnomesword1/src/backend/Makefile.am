@@ -26,10 +26,12 @@ libbackend_a_SOURCES =  \
     dictlex.h \
     display.cpp \
     display.h \
-    gbs.cpp \
-    gbs.h \
     display_info.cpp \
     display_info.h \
+    gbs.cpp \
+    gbs.h \
+    interlinear.cpp \
+    interlinear.h \
     module_options.cpp \
     module_options.h \
     properties.cpp \

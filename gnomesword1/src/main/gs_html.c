@@ -63,6 +63,7 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_editor.h"
+#include "gs_interlinear.h"
 #include "verselist.h"
 #include "shortcutbar.h"
 
@@ -149,7 +150,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	if (*url == '@') {
 		++url;
-		backend_swap_interlinear_with_main((gchar *) url, settings);
+		swap_interlinear_with_main((gchar *) url, settings);
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {
