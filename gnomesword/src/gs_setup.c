@@ -156,7 +156,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	GdkColor druidpagefinish1_title_color = { 0, 65535, 65535, 65535 };
 	GtkWidget *dialog_action_area10;
 	gchar *homedir, version[40];
-	gfloat ver;
+	const char *ver;
 	
 	dlgSetup = gnome_dialog_new(_("GnomeSword - Setup"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSetup), "dlgSetup", dlgSetup);
@@ -280,7 +280,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	
 	/* get sword version */
 	ver = getSwordVerionSWORD();	
-	sprintf(version,"Sword-%.2f",ver);
+	sprintf(version,"Sword-%s",ver);
 	
 	label144 = gtk_label_new(_(version));
 	gtk_widget_ref(label144);

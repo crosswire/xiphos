@@ -77,7 +77,7 @@ extern "C" {
 	GList *getBibleBooks(void);
 	void gotoBookmarkSWORD(gchar * modName, gchar * key);
 	gchar *getmodkeySWORD(gint num);
-	gfloat getSwordVerionSWORD(void);
+	const char *getSwordVerionSWORD(void);
 	void swapmodsSWORD(gchar * intmod);
 	void loadpreferencemodsSWORD(void);
 	void gs_firstrunSWORD(void);
