@@ -45,7 +45,14 @@ struct _mods {
 //extern MODULES *textmodule;
 //extern MODULES *commmodule;
 //extern MODULES *dictmodule;
-
+typedef struct _gsfonts GS_FONTS;
+struct _gsfonts {
+	gchar	bible_font_size[4], /*** html font sizes ***/
+			commentary_font_size[4],
+			dictionary_font_size[4],
+			interlinear_font_size[4];
+};
+ 
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	   MainWindowModule[80],	/* modules to open at program startup  */

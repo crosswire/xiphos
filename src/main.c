@@ -31,6 +31,8 @@
 #include "gs_file.h"
 #include "gs_html.h"
 #include "gs_gui.h"
+#include "sw_properties.h"
+
 
 extern SETTINGS *settings;
 SETTINGS myset;	
@@ -75,9 +77,10 @@ main (int argc, char *argv[])
   		createFiles();
   	}
   	/* load settings into structure */
-  	myset = readsettings(); 
+  	//myset = readsettings(); 
   	/* set pointer to structure */
-  	settings = &myset;       
+  	settings = &myset; 
+	loadconfig(); /* new */      
   	initSWORD(mainwindow);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
   	

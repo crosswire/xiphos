@@ -42,6 +42,8 @@
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 
+
+
 /****************************************************************************************
  * externs
  ****************************************************************************************/
@@ -53,6 +55,7 @@ extern SWModule *comp1Mod;
 extern gchar *current_verse;
 extern INTERLINEAR interlinearMods;
 extern gchar *mycolor;
+extern GS_FONTS *gsfonts;
 
 /***************************************************************************** 
  * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
@@ -443,18 +446,17 @@ char InterlinearDisp::Display(SWModule & imodule)
 	} 
 	(const char *) imodule;
 	strbuf = g_string_new("");
-	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+1");
+	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","3");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	/* heading */
-	if (font) {
-		
+	if (font) {		
 		g_warning(font);
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+1");
+		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, gsfonts->interlinear_font_size);
 	} 
 	/* body */
 	strbuf = g_string_append(strbuf, (const char *) imodule);
@@ -465,6 +467,82 @@ char InterlinearDisp::Display(SWModule & imodule)
 		g_string_free(strbuf, TRUE);
 	} 
 	return 0;
+}
+
+/* ***************************************************************************
+ * to display Sword module about information
+ *****************************************************************************/
+void AboutModsDisplayHTML(GString *text)
+{
+    char *to, *from;
+	int len;
+	bool center = false;
+	int maxlen;
+	
+	maxlen = text->len * 10;
+	len = text->len + 1;						// shift string to right of buffer
+	if (len < maxlen) {
+		memmove(&text->str[maxlen - len], text->str, len);
+		from = &text->str[maxlen - len];
+	}
+	else	from = text->str;							// -------------------------------
+	for (to = text->str; *from; from++) {
+		if (*from == '\\') // a RTF command
+		{
+			if ((from[1] == 'p') && (from[2] == 'a') && (from[3] == 'r') && (from[4] == 'd'))
+			{ // switch all modifier off
+				if (center)
+				{
+					*to++ = '<';
+					*to++ = '/';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = false;
+				}
+				from += 4;
+				continue;
+			}
+			if ((from[1] == 'p') && (from[2] == 'a') && (from[3] == 'r'))
+			{
+				*to++ = '<';
+				*to++ = 'P';
+				*to++ = '>';
+				*to++ = '\n';
+				from += 3;
+				continue;
+			}
+			if (from[1] == ' ')
+			{
+				from += 1;
+				continue;
+			}
+			if ((from[1] == 'q') && (from[2] == 'c')) // center on
+			{
+				if (!center)
+				{
+					*to++ = '<';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = true;
+				}
+				from += 2;
+				continue;
+			}
+		}
+
+		*to++ = *from;
+	}
+	*to = 0;
 }
 
 

@@ -7,12 +7,14 @@ INCLUDES =  \
     $(SWORD_CPPFLAGS)
 
 bin_PROGRAMS = gnomesword
-
+ 
 COMMON_SOURCE =  \
     gs_gui.c \
     gs_gui.h \
     gs_abouts.c \
     gs_abouts.h \
+    gs_info_box.c \
+    gs_info_box.h\
     gs_viewcomm.c \
     gs_viewcomm.h \
     gs_viewdict.c \
@@ -50,8 +52,6 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
-    sw_utility.cpp\
-    sw_utility.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     gs_viewtext_sw.cpp \
@@ -62,6 +62,10 @@ COMMON_SOURCE =  \
     gs_information_sw.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
+    sw_utility.cpp\
+    sw_utility.h \
+    sw_properties.cpp \
+    sw_properties.h \
     sw_gbfhtml.cpp \
     sw_gbfhtml.h \
     sw_thmlhtml.cpp \
