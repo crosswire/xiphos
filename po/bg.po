@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
-"POT-Creation-Date: 2003-04-29 14:51-0400\n"
+"POT-Creation-Date: 2003-04-29 16:11-0400\n"
 "PO-Revision-Date: 2002-08-25 14:50 +0200\n"
 "Last-Translator: Andrew Ivanov <gnome@mail.orbitel.bg>\n"
 "Language-Team:Gnomesword Project \n"
@@ -176,7 +176,8 @@ msgid "Open Module"
 msgstr "Покажи модул"
 
 #: src/gnome/bibletext_menu.c:1185 src/gnome/commentary_menu.c:1234
-#: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:528
+#: src/gnome/editor_menu.c:1057 src/gnome/html.c:928
+#: src/gnome/toolbar_edit.c:528
 msgid "Print"
 msgstr "печат"
 
@@ -565,7 +566,7 @@ msgstr "Съхрани"
 msgid "Save AS"
 msgstr "Съхрани като"
 
-#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:764
+#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:763
 msgid "_Edit"
 msgstr "_редактирай"
 
@@ -766,6 +767,11 @@ msgstr "История/забрави"
 #, fuzzy
 msgid "Unlock "
 msgstr "Въведи ключ и отключи"
+
+#: src/gnome/html.c:949
+#, fuzzy
+msgid "GnomeSword Print Preview"
+msgstr "GnomeSword - отваряне на бележки"
 
 #: src/gnome/interlinear.c:1181
 msgid "Detach/Attach"
@@ -993,52 +999,52 @@ msgstr "за GnomeSword"
 msgid "_File"
 msgstr "Файл"
 
-#: src/gnome/main_menu.c:771
+#: src/gnome/main_menu.c:769
 #, fuzzy
 msgid "H_istory"
 msgstr "История"
 
-#: src/gnome/main_menu.c:778
+#: src/gnome/main_menu.c:775
 #, fuzzy
 msgid "_View"
 msgstr "Преглед"
 
-#: src/gnome/main_menu.c:785
+#: src/gnome/main_menu.c:781
 msgid "_Help"
 msgstr ""
 
-#: src/gnome/main_menu.c:816
+#: src/gnome/main_menu.c:811
 msgid "_File/Open Bibletext Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:821
+#: src/gnome/main_menu.c:816
 msgid "_File/Open Commentary Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:826
+#: src/gnome/main_menu.c:821
 msgid "_File/Open Dictionary Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:831
+#: src/gnome/main_menu.c:826
 msgid "_File/Open Book Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:845
+#: src/gnome/main_menu.c:841
 #, fuzzy
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr "За модулите на SWORD"
 
-#: src/gnome/main_menu.c:849
+#: src/gnome/main_menu.c:846
 #, fuzzy
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr "За модулите на SWORD"
 
-#: src/gnome/main_menu.c:853
+#: src/gnome/main_menu.c:851
 #, fuzzy
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr "Речници/лексикони"
 
-#: src/gnome/main_menu.c:857
+#: src/gnome/main_menu.c:855
 #, fuzzy
 msgid "_Help/About Sword Modules/Books/"
 msgstr "За модулите на SWORD"
@@ -2374,9 +2380,6 @@ msgstr ""
 
 #~ msgid "GnomeSword - Edit Bookmark"
 #~ msgstr "GnomeSword - редактиране на отметки"
-
-#~ msgid "GnomeSword - Open Note File"
-#~ msgstr "GnomeSword - отваряне на бележки"
 
 #~ msgid "_Settings/"
 #~ msgstr "_Настройки/"

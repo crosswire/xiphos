@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-0.9.1\n"
-"POT-Creation-Date: 2003-04-29 14:51-0400\n"
+"POT-Creation-Date: 2003-04-29 16:11-0400\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Jorge Chacón <jgchacon@itelgua.com>\n"
 "Language-Team: Gnomesword Project <tbiggs@users.sf.net>\n"
@@ -210,7 +210,8 @@ msgstr "Ver módulo"
 # src/gs_gui.c
 # src/gs_html_editor.c
 #: src/gnome/bibletext_menu.c:1185 src/gnome/commentary_menu.c:1234
-#: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:528
+#: src/gnome/editor_menu.c:1057 src/gnome/html.c:928
+#: src/gnome/toolbar_edit.c:528
 msgid "Print"
 msgstr "Imprimir"
 
@@ -655,7 +656,7 @@ msgid "Save AS"
 msgstr "Guardar COMO"
 
 # src/gs_html_editor.c
-#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:764
+#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:763
 msgid "_Edit"
 msgstr "_Editar"
 
@@ -887,6 +888,12 @@ msgstr "_Historia/_Borrar"
 #, fuzzy
 msgid "Unlock "
 msgstr "Ingrese Clave"
+
+# src/gs_html_editor.c
+#: src/gnome/html.c:949
+#, fuzzy
+msgid "GnomeSword Print Preview"
+msgstr "Búsqueda de GnomeSword"
 
 #: src/gnome/interlinear.c:1181
 msgid "Detach/Attach"
@@ -1150,63 +1157,63 @@ msgstr "Fichero"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/main_menu.c:771
+#: src/gnome/main_menu.c:769
 #, fuzzy
 msgid "H_istory"
 msgstr "Historia"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/main_menu.c:778
+#: src/gnome/main_menu.c:775
 #, fuzzy
 msgid "_View"
 msgstr "Visualizador"
 
-#: src/gnome/main_menu.c:785
+#: src/gnome/main_menu.c:781
 msgid "_Help"
 msgstr ""
 
-#: src/gnome/main_menu.c:816
+#: src/gnome/main_menu.c:811
 msgid "_File/Open Bibletext Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:821
+#: src/gnome/main_menu.c:816
 #, fuzzy
 msgid "_File/Open Commentary Dialog/"
 msgstr "Ver Comentario"
 
 # src/gs_shortcutbar.c
-#: src/gnome/main_menu.c:826
+#: src/gnome/main_menu.c:821
 #, fuzzy
 msgid "_File/Open Dictionary Dialog/"
 msgstr "Añadir un Diccionario"
 
 # src/gs_gui.c
-#: src/gnome/main_menu.c:831
+#: src/gnome/main_menu.c:826
 #, fuzzy
 msgid "_File/Open Book Dialog/"
 msgstr "Abrir el diálogo de búsqueda"
 
 # src/gs_abouts.c
-#: src/gnome/main_menu.c:845
+#: src/gnome/main_menu.c:841
 #, fuzzy
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr "Acerca de los Módulos de Sword"
 
 # src/gs_abouts.c
-#: src/gnome/main_menu.c:849
+#: src/gnome/main_menu.c:846
 #, fuzzy
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr "Acerca de los Módulos de Sword"
 
 # src/gs_gui.c
-#: src/gnome/main_menu.c:853
+#: src/gnome/main_menu.c:851
 #, fuzzy
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr "Diccionarios y Léxica"
 
 # src/gs_abouts.c
-#: src/gnome/main_menu.c:857
+#: src/gnome/main_menu.c:855
 #, fuzzy
 msgid "_Help/About Sword Modules/Books/"
 msgstr "Acerca de los Módulos de Sword"
@@ -2887,11 +2894,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "GnomeSword - Find"
 #~ msgstr "GnomeSword - Opciones"
-
-# src/gs_html_editor.c
-#, fuzzy
-#~ msgid "GnomeSword - Interlinear"
-#~ msgstr "Búsqueda de GnomeSword"
 
 # src/gs_preferences_dlg.c
 #~ msgid "Use Formatting"
