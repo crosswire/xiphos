@@ -34,10 +34,11 @@ extern "C" {
 #endif
 
 #define MAIN_TEXT_WINDOW 0 
-#define INTERLINEAR_WINDOW 1
-#define COMMENTARY_WINDOW 2
-#define DICTIONARY_WINDOW 3
+#define COMMENTARY_WINDOW 1
+#define DICTIONARY_WINDOW 2
+#define INTERLINEAR_WINDOW 3
 #define BOOK_WINDOW 4
+    
 #define GS_DOCK_OPTIONS "dockOptions"
 #define GS_DOCK_GBS "dockGBSEditor"
 #define GS_DOCK_PC "dockPCEditor"
