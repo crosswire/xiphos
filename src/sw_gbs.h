@@ -57,7 +57,7 @@ struct _nodedata {
 			gchar *bookName, 
 			gchar *treekey,
 			unsigned long offset);
-
+	void displayinGBS(gchar *key);
 
 #ifdef __cplusplus
 }

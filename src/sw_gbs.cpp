@@ -65,7 +65,6 @@ extern SETTINGS *settings;
 
 /***  globals  ***/
 GtkCTreeNode *current_node;
-SWModule *curbookMod;
 SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 list <SWDisplay *> displays;	// so we can delete each display we create
@@ -178,7 +177,7 @@ void on_ctreeGBS_select_row(GtkCList * clist,
 			TreeKeyIdx *treeKey =  getTreeKey((*it).second);
 			TreeKeyIdx treenode = *treeKey;
 			treenode.setOffset(strtoul(offset,NULL,0));
-			curbookMod = (*it).second; //-- for search
+			sprintf(settings->BookWindowModule,"%s",(gchar*)(*it).second->Name());
 			
 			/** if not root node then display **/
 			if(treenode.getOffset() > 0) {	
@@ -204,7 +203,7 @@ GBS_DATA *getgbs(GList *gbs)
 	
 	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Generic Book")) {
-			if (!strcmp((*it).second->Name(), curbookMod->Name())) {
+			if (!strcmp((*it).second->Name(), settings->BookWindowModule)) {
 				break;
 			}
 			++bookindex;
@@ -229,7 +228,7 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings->workbook_lower),
                 gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
 		g->bookName);
-	curbookMod = swmgrBook->Modules[g->bookName];
+	sprintf(settings->BookWindowModule,"%s",g->bookName);
 }
 
 /****  popup menu call backs  ****/
@@ -598,7 +597,6 @@ void setupSW_GBS(SETTINGS *s)
 	gint count = 0;
 	
 	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
-	curbookMod = NULL;
 	displays.clear();
 	gbs_data = NULL;
 	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
@@ -609,7 +607,7 @@ void setupSW_GBS(SETTINGS *s)
 			gbs->searchstring = NULL;
 			createGBS_Pane((*it).second, s, count, gbs) ;
 			gbs_data = g_list_append(gbs_data, (GBS_DATA *) gbs);
-			curbookMod = (*it).second;
+			sprintf(s->BookWindowModule,"%s",gbs->bookName);
 		}
 	}
 	gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",
@@ -720,3 +718,18 @@ void load_book_tree(SETTINGS *s,
 		cout << "oops\n";	
 }
 
+void displayinGBS(gchar *key)
+{
+	GBS_DATA *g;
+	ModMap::iterator it;	
+	
+	g = getgbs(gbs_data);
+	it = swmgrBook->Modules.find(g->bookName);
+	if (it != swmgrBook->Modules.end()) {
+		(*it).second->SetKey(key);
+		(*it).second->KeyText(); //snap to entry
+		(*it).second->Display();
+	}
+}
+
+/******   end of file   ******/
