@@ -541,7 +541,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "offset", "0");
 
 	section_node = xmlNewChild(root_node, NULL, "keys", NULL);
-	xmlNewTextChild(section_node, NULL, "book", "");
+	xmlNewTextChild(section_node, NULL, "book", "0");
 	xmlNewTextChild(section_node, NULL, "dictionary", "Grace");
 	xmlNewTextChild(section_node, NULL, "verse", "Romans 8:28");
 
