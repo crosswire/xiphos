@@ -29,6 +29,7 @@
 #include <gal/widgets/e-unicode.h>
 #include <regex.h>
 #include <string.h>
+#include <glib.h>
 
 #include "gui/search_dialog.h"
 #include "gui/html.h"
@@ -901,75 +902,74 @@ static void on_togglebutton_show_main(GtkToggleButton * togglebutton,
 
 static void url(GtkHTML * html, const gchar * url, gpointer data)
 {
+	gchar *buf = NULL;
+	gchar *modbuf = NULL;
+	gchar *text = NULL;
+	gchar *newmod;
+	gchar *newref;
+	gint i = 0, havemod = 0;
+	
 	/***  moved out of url  ***/
-	if (url == NULL) {
-
-
-	}
+	if (url == NULL) 
+		return;
+	
 	/***  we are in an url  ***/
-	else {
-		gchar *buf = NULL, *modbuf = NULL;
-		gchar newmod[80], newref[80];
-		gint i = 0, havemod = 0;
-		gchar *text = NULL;
-
-		/*** thml verse reference ***/
-		if (!strncmp(url, "version=", 7)
-		    || !strncmp(url, "passage=", 7)) {
-			gchar *mybuf = NULL;
-			mybuf = strstr(url, "version=");
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				i = 0;
-				while (mybuf[i] != ' ') {
-					newmod[i] = mybuf[i];
-					newmod[i + 1] = '\0';
-					++i;
-					++havemod;
-				}
-			}
-			mybuf = NULL;
-			mybuf = strstr(url, "passage=");
+	newmod = g_new0(gchar, strlen(url));
+	newref = g_new0(gchar, strlen(url));
+	/*** thml verse reference ***/
+	if (!strncmp(url, "version=", 7)
+	    || !strncmp(url, "passage=", 7)) {
+		gchar *mybuf = NULL;
+		mybuf = strstr(url, "version=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
 			i = 0;
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				while (i < strlen(mybuf)) {
-					newref[i] = mybuf[i];
-					newref[i + 1] = '\0';
-					++i;
-				}
+			while (mybuf[i] != ' ') {
+				newmod[i] = mybuf[i];
+				newmod[i + 1] = '\0';
+				++i;
+				++havemod;
 			}
-			if (havemod > 2) {
-				modbuf = newmod;
-			} else {
-				modbuf = settings.MainWindowModule;
-			}
-			buf = g_strdup(newref);
-
-			if (buf) {/*
-				settings.displaySearchResults = TRUE;
-				text = get_module_text(5, modbuf, buf);
-				entry_display(search.preview_html, modbuf,
-			      		text, buf, TRUE);
-				settings.displaySearchResults = FALSE;*/
-				gchar *str;
-				text = get_striptext(4, modbuf, buf);
-				str = remove_linefeeds(text);
-				gnome_appbar_set_status(GNOME_APPBAR
-							(search.
-							 progressbar),
-							str);
-				g_free(str);
-				g_free(buf);
-			}
-			if (text)
-				free(text);
-
 		}
+		mybuf = NULL;
+		mybuf = strstr(url, "passage=");
+		i = 0;
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			while (i < strlen(mybuf)) {
+				newref[i] = mybuf[i];
+				newref[i + 1] = '\0';
+				++i;
+			}
+		}
+		if (havemod > 2) {
+			modbuf = newmod;
+		} else {
+			modbuf = settings.MainWindowModule;
+		}
+		buf = g_strdup(newref);
 
+		if (buf) {
+			gchar *str;
+			text = get_striptext(4, modbuf, buf);
+			if(text) {
+				str = remove_linefeeds(text);
+				g_free(text);
+			} else
+				str = g_strdup(" ");
+			
+			gnome_appbar_set_status(GNOME_APPBAR
+						(search.
+						 progressbar),
+						str);
+			g_free(str);
+			g_free(buf);
+		}
 	}
+	g_free(newmod);
+	g_free(newref);
 }
 
 
@@ -993,10 +993,12 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			 gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL;
-	gchar newmod[80], newref[80];
+	gchar *newmod, *newref;
 	gint i = 0, havemod = 0;
 	gchar *text = NULL;
 
+	newmod = g_new0(gchar, strlen(url));
+	newref = g_new0(gchar, strlen(url));
 	/*** thml verse reference ***/
 	if (!strncmp(url, "version=", 7)
 	    || !strncmp(url, "passage=", 7)) {
@@ -1034,32 +1036,30 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		settings.displaySearchResults = TRUE;
 		
 		switch(GPOINTER_TO_INT(data)) {
-			case 0:
+		case 0:
 			if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
 			    active) {
 				gui_change_module_and_key(modbuf, buf);
 	
-			}
-	
+			}	
 			text = get_module_text(5, modbuf, buf);
-			entry_display(search.preview_html, modbuf,
+			if (text) {
+				entry_display(search.preview_html, modbuf,
 				      text, buf, TRUE);
-	
+				free(text);
+			}
 			if (search.show_in_main)
 				gui_change_module_and_key(modbuf, buf);
 			break;
-			case 1:
+		case 1:
 				gui_change_module_and_key(modbuf, buf);
 			break;
 		}
-	
 		settings.displaySearchResults = FALSE;
-
-		/*if (text)
-			free(text);*/
 		g_free(buf);
-
 	}
+	g_free(newmod);
+	g_free(newref);
 }
 
 
