@@ -1047,7 +1047,7 @@ void
 on_menu_deactivate(GtkMenuShell * menushell, TEXT_DATA * t)
 {
 #ifdef USE_GTKEMBEDMOZ	
-	g_warning("on_menu_deactivate");
+	//g_warning("on_menu_deactivate");
 	//if(t->is_rtol)
 		//gtk_widget_destroy(GTK_WIDGET(menushell));
 #endif
