@@ -132,13 +132,13 @@ static void on_add_all_activate(GtkMenuItem * menuitem,
 static void remove_all_items(gint group_num);
 
 
-/*
-static void on_buttonBooks_clicked(GtkButton * button, 
+
+static void on_VLbutton_clicked(GtkButton * button, 
 					SETTINGS *s)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->workbook_lower),1);	
+		
 }
-*/
+
 void
 on_clistSearchResults_select_row(GtkCList *clist,
                                         gint row,
@@ -885,14 +885,15 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	GdkPixbuf *icon_pixbuf = NULL;
 	
 	remItemNum = item_num;
-	if(item_num == -1) {
-		if(group_num == groupnum2) /* change work space notebook to commentary page */
-			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook),0);
-		if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),0);
-		if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
-			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
-	}
+	
+//	if(item_num == -1) {
+//		if(group_num == groupnum2) /* change work space notebook to commentary page */
+//			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook),0);
+//		if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
+//			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),0);
+//		if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
+//			gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
+//	}
 	
 	if (event->button.button == 1) {
 		if(item_num > -1) {
@@ -931,6 +932,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				if (havecomm) {
 					gotoBookmarkSWORD(modName,
 						  settings->currentverse);
+					gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook),0);
 				}
 			}
 			
@@ -938,6 +940,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				if (havedict) {
 					gotoBookmarkSWORD(modName,
 						  settings->dictkey);
+					gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),0);
 				}
 			}
 			
@@ -947,7 +950,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			
 			if (group_num == groupnum8) {
 				gotoBookmarkSWORD(modName,NULL);
-				//gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),item_num);
+				gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
 			}
 			g_free(type);
 			g_free(ref);
@@ -1113,7 +1116,7 @@ on_nbVL_switch_page                    (GtkNotebook     *notebook,
 
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 {
-	GtkWidget *toolbar1;
+	GtkWidget *toolbarVL;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSBSaveVL;
 	GtkWidget *tbtnSBViewMain;
@@ -1153,20 +1156,20 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_widget_show(frameTB);
 	gtk_box_pack_start(GTK_BOX(vboxVL), frameTB, FALSE, TRUE, 0);
 
-	toolbar1 =
+	toolbarVL =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar1", toolbar1,
+	gtk_widget_ref(toolbarVL);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbarVL", toolbarVL,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar1);
-	gtk_container_add(GTK_CONTAINER(frameTB), toolbar1);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar1),
+	gtk_widget_show(toolbarVL);
+	gtk_container_add(GTK_CONTAINER(frameTB), toolbarVL);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarVL),
 				      GTK_RELIEF_NONE);
-
+	
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_SAVE);
 	btnSBSaveVL =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save List"),
 				       _("Save the current verse list as a bookmark file"),
@@ -1181,7 +1184,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_JUMP_TO);
 	tbtnSBViewMain =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, _("Main Form"),
 				       _("Toggle to show results in Main Form"),
@@ -1195,7 +1198,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_REFRESH);
 	btnSBShowCV =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("UpdateMain"),
 				       _("Show current verse list verse in Main Form"),
@@ -1213,14 +1216,14 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 vseparator1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar1), vseparator1, NULL,
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarVL), vseparator1, NULL,
 				  NULL);
 	gtk_widget_set_usize(vseparator1, 12, 12);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_BOOK_RED);
 	btnViewVL =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("VerseList"),
 				       _("View Verse List"), NULL,
@@ -1235,7 +1238,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	    gnome_stock_pixmap_widget(s->app,
 				      GNOME_STOCK_PIXMAP_BOOK_GREEN);
 	btnViewSR =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("SearchResults"),
 				       _("View Search Results"), NULL,
@@ -1250,7 +1253,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	    gnome_stock_pixmap_widget(s->app,
 				      GNOME_STOCK_PIXMAP_BOOK_BLUE);
 	btnViewer =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar1),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarVL),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Viewer"), _("Viewer"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
@@ -1492,6 +1495,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 							     (nbVL), 2),
 				   label3);
 
+	
 	gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_vllink_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(btnSBSaveVL), "clicked",
@@ -2113,7 +2117,9 @@ void setupSB(SETTINGS * s)
 					 vpVL , VLbutton, -1);
 	e_shortcut_bar_set_enable_drags((EShortcutBar *) shortcut_bar,
 					TRUE);
-
+	gtk_signal_connect(GTK_OBJECT(VLbutton), "clicked",
+			   GTK_SIGNAL_FUNC(on_VLbutton_clicked),
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);

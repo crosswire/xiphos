@@ -290,7 +290,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	
 	searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
 	searchresultssbMod     = NULL;
-	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
+	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget,settings);
 	//searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
 	
 	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
