@@ -53,6 +53,37 @@ static GtkHTMLStreamStatus status1;
 
 gboolean in_url;
 
+/******************************************************************************
+ * Name
+ *   show_in_appbar
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void show_in_appbar(GtkWidget * appbar, gchar * key, 
+ *							gchar * mod)
+ *
+ * Description
+ *   display information (morph or strongs) in appbar
+ *
+ * Return value
+ *   void
+ */
+
+static void show_in_appbar(GtkWidget * appbar, gchar * key, 
+							gchar * mod)
+{
+	gchar *str;
+	gchar *text;
+	text = get_striptext(mod, key);
+	str = remove_linefeeds(text);
+	if(str) {
+		gnome_appbar_set_status(GNOME_APPBAR(appbar),
+			str);
+		g_free(str);
+	}
+	g_free(text);
+}
 
 
 /******************************************************************************
@@ -73,7 +104,7 @@ gboolean in_url;
  
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar buf[255];
+	gchar buf[255], *buf1;
 
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
@@ -102,6 +133,137 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		else if (*url == '*') {
 			++url;
 			sprintf(buf, "%s", url);
+		}/***  gbf strongs  ***/
+		else if (*url == '#') {
+			++url;		/* remove # */
+			if (*url == 'T') {
+				++url;	/* remove T */
+				if (*url == 'G') {
+					++url;	/* remove G */
+					if (settings.havethayer) {
+						buf1 = g_strdup(url);
+						show_in_appbar(widgets.appbar, buf1, "Thayer");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
+	
+				if (*url == 'H') {
+					++url;	/* remove H */
+					if (settings.havebdb) {
+						buf1 = g_strdup(url);
+						show_in_appbar(widgets.appbar, buf1, "BDB");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
+			}
+	
+			if (*url == 'G') {
+				++url;	/* remove G */
+				buf1 = g_strdup(url);
+				if (atoi(buf1) > 5624) {
+					if (settings.havethayer) {
+						show_in_appbar(widgets.appbar, buf1, "Thayer");
+						g_free(buf1);						
+						return;
+					} else
+						return;
+	
+				}
+	
+				else {
+					show_in_appbar(widgets.appbar, buf1, settings.lex_greek);
+					g_free(buf1);		
+					return;
+				}
+			}
+	
+			if (*url == 'H') {
+				++url;	/* remove H */
+				buf1 = g_strdup(url);
+				if (atoi(buf1) > 8674) {
+					if (settings.havebdb) {
+						show_in_appbar(widgets.appbar, buf1, "BDB");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
+	
+				else {
+					show_in_appbar(widgets.appbar, buf1, settings.lex_hebrew);
+					g_free(buf1);
+					return;
+				}
+			}
+		}
+		/***  thml morph tag  ***/
+		else if (!strncmp(url, "type=morph", 10)) {
+			gchar *modbuf = NULL;
+			gchar *mybuf = NULL;
+			buf1 = g_strdup(url);
+			mybuf = strstr(url, "class=");
+			if (mybuf) {
+				gint i;
+				modbuf = strchr(mybuf, '=');
+				++modbuf;
+				for (i = 0; i < strlen(modbuf); i++) {
+					if (modbuf[i] == ' ') {
+						modbuf[i] = '\0';
+						break;
+					}
+				}
+			}
+	
+			mybuf = NULL;
+			mybuf = strstr(buf1, "value=");
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+			}
+			buf1 = g_strdup(mybuf);
+			show_in_appbar(widgets.appbar, buf1, modbuf);			
+			g_free(buf1);
+			return;
+		}
+		/*** thml strongs ***/
+		else if (!strncmp(url, "type=Strongs", 12)) {
+			gchar *modbuf = NULL;
+			gchar *mybuf = NULL;
+			gchar newref[80];
+			gint type = 0;
+			//buf = g_strdup(url);
+			mybuf = NULL;
+			mybuf = strstr(url, "value=");
+			//i = 0;
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+				if (mybuf[0] == 'H')
+					type = 0;
+				if (mybuf[0] == 'G')
+					type = 1;
+				++mybuf;
+				sprintf(newref, "%5.5d", atoi(mybuf));
+			}
+			if (type)
+				modbuf = settings.lex_greek;
+			else
+				modbuf = settings.lex_hebrew;
+	
+			buf1 = g_strdup(newref);
+			show_in_appbar(widgets.appbar, buf1, modbuf);				
+			g_free(buf1);
+			return;	
 		}
 		/***  any other link  ***/
 		else
@@ -109,6 +271,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
+		
 	}
 }
 

@@ -46,6 +46,7 @@
 #include "gui/commentary.h"
 #include "gui/gbs.h"
 #include "gui/dictlex.h"
+#include "gui/search_dialog.h"
 
 WIDGETS widgets;
 
@@ -376,7 +377,8 @@ static void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 
 static void on_btn_search_clicked(GtkButton *button, gpointer user_data)
 {
-	showSBGroup(settings.searchbargroup);
+	gui_do_dialog_search();
+	//showSBGroup(settings.searchbargroup);
 } 
 
 /******************************************************************************

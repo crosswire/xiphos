@@ -35,6 +35,37 @@
 #include "main/settings.h"
 
 
+
+/******************************************************************************
+ * Name
+ *   remove_linefeeds
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   gchar * remove_linefeeds(gchar * buf)
+ *
+ * Description
+ *   remove line feeds so we can display string in appbar
+ *
+ * Return value
+ *   gchar * 
+ */
+ 
+gchar * remove_linefeeds(gchar * buf)
+{	
+	gchar * key = NULL;
+	
+	key = g_strdelimit(buf, "\n", ' ');
+	
+	if(key)
+		return g_strdup(key);
+	else
+		return NULL;
+		
+}
+
+
 /******************************************************************************
  * Name
  *   gui_lookup_widget

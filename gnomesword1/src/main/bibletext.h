@@ -27,6 +27,7 @@ extern "C" {
 #endif
 
 char *get_bibletext_text(char *mod_name, char *key);
+char *get_bibletext_striptext(char *mod_name, char *key);
 void set_text_global_option(char * option, char * choice);
 void set_text_module_global_option(char * option,
 				   int choice);

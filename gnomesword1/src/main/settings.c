@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "main/settings.h"
+#include "main/search.h"
 
 /* input buffer size */
 #define BUFFER_SIZE 8192
@@ -178,6 +179,6 @@ gint settings_init(void)
 			retval = 2;
 		}
 	}
-
+		
 	return retval;
 }

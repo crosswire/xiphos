@@ -61,7 +61,7 @@ module.include.type=
 module.include.expanded=1
 module.include.files=\
 	src/backend/sword.h\
-	src/backend/search_.h\
+	src/backend/search.h\
 	src/backend/percomm_.h\
 	src/backend/properties.h\
 	src/backend/module_options.h\
@@ -112,6 +112,7 @@ module.include.files=\
 	src/gui/link_dialog.h\
 	src/gui/preferences_dialog.h\
 	src/gui/setup_druid.h\
+	src/gui/search_dialog.h\
 	src/gui/shortcutbar_dialog.h\
 	src/gui/shortcutbar_main.h\
 	src/gui/shortcutbar_search.h\
@@ -135,7 +136,7 @@ module.source.type=
 module.source.expanded=1
 module.source.files=\
 	src/backend/sword.cpp\
-	src/backend/search_.cpp\
+	src/backend/search.cpp\
 	src/backend/percomm_.cpp\
 	src/backend/properties.cpp\
 	src/backend/module_options.cpp\
@@ -183,6 +184,7 @@ module.source.files=\
 	src/gnome/main_menu.c\
 	src/gnome/main_window.c\
 	src/gnome/preferences_dialog.c\
+	src/gnome/search_dialog.c\
 	src/gnome/setup_druid.c\
 	src/gnome/shortcutbar_dialog.c\
 	src/gnome/shortcutbar_main.c\
@@ -202,6 +204,7 @@ module.source.files=\
 	src/main/percomm.c\
 	src/main/settings.c\
 	src/main/shortcutbar.c\
+	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
 	src/main/sword.c
 
