@@ -139,19 +139,18 @@ void deleteRenderfilters(void)
 		delete lattoutf8;
 }
 
-/* path to sword modules */
-char *pathtomods(void)
+/* path to sword modules 
+void pathtomods(char *path)
 {		
 	SWMgr *mgr;
-	gchar buf[255], *retval;
+	gchar buf[255];
 	
 	mgr = new SWMgr();	//-- create sword mgrs
 	sprintf(buf,"%s",mgr->prefixPath);
-	retval = buf;
+	path = g_strdup(buf); 
 	delete mgr;
-	return retval;
 }
-
+*/
 void
 changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 {

@@ -51,38 +51,27 @@
 /******************************************************************************
  * globals
 ******************************************************************************/
-guint 
-	num1, 
-	num2, 
-	num3;
 gboolean 
 	firstsearch = TRUE,	/* search dialog is not running when TRUE */
 	firstLE = TRUE;	  /* ListEditor in not running when TRUE */
 GtkWidget 
-	*listeditor;		/* pointer to ListEditor */
-gchar 
-	*tmpcolor;
+	*listeditor;
+	
 /******************************************************************************
  * externals
 ******************************************************************************/
 extern gchar 
-	current_verse[80],
-	*mycolor;
+	current_verse[80];
 extern SETTINGS 
 	*settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
 extern gboolean 
 	ApplyChange,	/* to keep form looping when book combobox is changed */
-	noteModified,	/* personal comments window changed */
-	isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
+	noteModified;	/* personal comments window changed */
 extern GtkWidget 
 	*NEtext,
-	*strongsnum,	/* menu check item (declared in gs_gnomesword.c) */
-	*htmlCommentaries;
+	*strongsnum;	/* menu check item (declared in gs_gnomesword.c) */
 extern gint 
 	answer;		/* do we save file on exit */
-extern GString 
-	*gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
-
 
 /*********************************************************************************
 **********************************************************************************
@@ -117,13 +106,7 @@ void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 {
-	gchar *bookname, ref[255];
-
 	if (ApplyChange) {
-		/*bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(editable),
-					 "cbeBook")));
-		sprintf(ref, "%s 1:1", bookname);
-		changeVerseSWORD(ref);*/
 		verseSWORD();
 	}
 }
@@ -422,15 +405,6 @@ on_textComments_key_press_event(GtkWidget * widget,
 	return TRUE;
 }
 
-//----------------------------------------------------------------------------------------------
-gboolean
-on_moduleText_enter_notify_event(GtkWidget * widget,
-				 GdkEventCrossing * event,
-				 gpointer user_data)
-{
-
-	return FALSE;
-}
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {

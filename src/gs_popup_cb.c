@@ -75,7 +75,7 @@ void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *dlg;
 	
-	dlg = create_dlgUnlockKey();
+	dlg = create_dlgUnlockKey(GPOINTER_TO_INT(user_data));
 	gtk_widget_show(dlg);
 }
 
@@ -221,7 +221,7 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *text;
+/*	GtkWidget *text;
 	gchar *buf;
 
 	text = lookup_widget(settings->app, "textCommentaries");
@@ -232,7 +232,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_start_pos,
 				   GTK_EDITABLE(text)->selection_end_pos);
 
-	changeVerseSWORD(buf);
+	changeVerseSWORD(buf);*/
 }
 
 //----------------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ void on_lookup_word1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *entry, *text;
+/*	GtkWidget *entry, *text;
 	gchar *buf;
 
 	entry = lookup_widget(settings->app, "dictionarySearchText");
@@ -279,14 +279,14 @@ on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
 					   selection_end_pos);
 		dictSearchTextChangedSWORD(buf);
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-	}
+	}*/
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *entry, *text;
+/*	GtkWidget *entry, *text;
 	gchar *buf;
 
 	entry = lookup_widget(settings->app, "dictionarySearchText");
@@ -300,7 +300,7 @@ on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 					   selection_end_pos);
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);
 		dictSearchTextChangedSWORD(buf);
-	}
+	}*/
 }
 
 

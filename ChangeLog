@@ -1,7 +1,14 @@
+2001-09-18 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added horz scroll bar to commentary window.
+	* fixed the last fix - right this time I hope.
+
+
 2001-09-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed shortcut-bar crash on changing groups
 	  which started with gal snapshot 200109150708 release
+	  
 
 2001-09-13 Terry Biggs <tbiggs@users.sourceforge.net>
 

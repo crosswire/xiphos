@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-	GtkWidget *create_dlgUnlockKey(void);
+	GtkWidget *create_dlgUnlockKey(gint window);
 
 #ifdef __cplusplus
 }
