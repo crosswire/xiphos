@@ -247,8 +247,8 @@ GNOME_APP_CFLAGS=`gnome-config --cflags gal`
 AC_SUBST(GNOME_APP_LIBS)
 AC_SUBST(GNOME_APP_CFLAGS)
   
-EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+EXTRA_GNOME_LIBS="`gnome-config --libs ` $THREADS_LIBS `unicode-config --libs`"
+EXTRA_GNOME_CFLAGS="`gnome-config --cflags ` $THREADS_CFLAGS `unicode-config --cflags`"
 
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
