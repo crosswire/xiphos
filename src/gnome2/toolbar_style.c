@@ -42,22 +42,21 @@ static struct {
 	GtkHTMLParagraphStyle style;
 	const gchar *description;
 } paragraph_style_items[] = {
-	{
-	GTK_HTML_PARAGRAPH_STYLE_NORMAL, N_("Normal")}, {
-	GTK_HTML_PARAGRAPH_STYLE_PRE, N_("Preformat")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H1, N_("Header 1")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H2, N_("Header 2")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H3, N_("Header 3")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H4, N_("Header 4")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H5, N_("Header 5")}, {
-	GTK_HTML_PARAGRAPH_STYLE_H6, N_("Header 6")}, {
-	GTK_HTML_PARAGRAPH_STYLE_ADDRESS, N_("Address")}, {
-	GTK_HTML_PARAGRAPH_STYLE_ITEMDOTTED, N_("List")}, {
-	GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT, N_("Num List")}, {
-	GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN, N_("Roman List")}, {
-	GTK_HTML_PARAGRAPH_STYLE_ITEMALPHA, N_("Alpha List")}, {
-GTK_HTML_PARAGRAPH_STYLE_NORMAL, NULL},};
-
+	{ GTK_HTML_PARAGRAPH_STYLE_NORMAL, N_("Normal") },
+	{ GTK_HTML_PARAGRAPH_STYLE_PRE, N_("Preformat") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMDOTTED, N_("Bulleted List") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT, N_("Numbered List") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN, N_("Roman List") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMALPHA, N_("Alphabetical List") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H1, N_("Header 1") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H2, N_("Header 2") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H3, N_("Header 3") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H4, N_("Header 4") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H5, N_("Header 5") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H6, N_("Header 6") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ADDRESS, N_("Address") },
+	{ GTK_HTML_PARAGRAPH_STYLE_NORMAL, NULL },
+};
 /******************************************************************************
  * Name
  *   paragraph_style_changed_cb
@@ -1114,6 +1113,7 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	cd->indent_button = editor_toolbar_style_uiinfo[9].widget;
 
 	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
+	
 	gtk_signal_connect(GTK_OBJECT(cd->html),
 			   "current_paragraph_alignment_changed",
 			   G_CALLBACK
