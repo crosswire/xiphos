@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-16 15:59-0500\n"
+"POT-Creation-Date: 2005-03-19 19:08-0500\n"
 "PO-Revision-Date: 2003-12-9 12:21:00+0200\n"
 "Last-Translator: Andy Piper <andyp@users.sf.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -65,7 +65,7 @@ msgid "Parallel View"
 msgstr ""
 
 #: src/main/sidebar.cc:580 src/main/sidebar.cc:854 src/main/sidebar.cc:855
-#: src/main/sidebar.cc:856 src/gnome2/main_window.c:603
+#: src/main/sidebar.cc:856 src/gnome2/main_window.c:604
 msgid "Standard View"
 msgstr ""
 
@@ -1052,10 +1052,6 @@ msgstr ""
 msgid "Note for"
 msgstr ""
 
-#: src/gnome2/dialog.c:159
-msgid " "
-msgstr ""
-
 #: src/gnome2/dialog.c:799
 msgid "Close _without Saving"
 msgstr ""
@@ -1327,19 +1323,27 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
-#: src/gnome2/main_window.c:479
+#: src/gnome2/main_window.c:472
+msgid "Starting"
+msgstr ""
+
+#: src/gnome2/main_window.c:473
+msgid "Building GnomeSword interface"
+msgstr ""
+
+#: src/gnome2/main_window.c:480
 msgid "GnomeSword - Bible Study Software"
 msgstr ""
 
-#: src/gnome2/main_window.c:533
+#: src/gnome2/main_window.c:534
 msgid "Open a new tab"
 msgstr ""
 
-#: src/gnome2/main_window.c:669
+#: src/gnome2/main_window.c:670
 msgid "Commentary View"
 msgstr ""
 
-#: src/gnome2/main_window.c:686
+#: src/gnome2/main_window.c:687
 msgid "Book View"
 msgstr ""
 
@@ -1549,7 +1553,7 @@ msgstr ""
 msgid "Delete Note"
 msgstr ""
 
-#: src/gnome2/parallel_dialog.c:590 src/gnome2/preferences_dialog.c:945
+#: src/gnome2/parallel_dialog.c:591 src/gnome2/preferences_dialog.c:945
 msgid "Parallel"
 msgstr ""
 

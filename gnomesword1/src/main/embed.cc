@@ -249,16 +249,9 @@ gint embed_dom_mouse_down_cb(GtkMozEmbed *embed, gpointer dom_event, gpointer da
 		}
 	} else if(pane == COMMENTARY_TYPE) {
 		switch(button) {
-			case 0:	
-				/*if(aShiftKey) {
-					shift_key_presed = TRUE;
-					return TRUE;
-				}
-				else
-					shift_key_presed = FALSE;*/
+			case 0:
 				break;
-			case 1:/*
-				shift_key_presed = TRUE;*/
+			case 1:
 				break;
 			case 2:
 				gui_create_pm_commentary(); 
@@ -267,15 +260,8 @@ gint embed_dom_mouse_down_cb(GtkMozEmbed *embed, gpointer dom_event, gpointer da
 	} else if(pane == BOOK_TYPE) {
 		switch(button) {
 			case 0:	
-				/*if(aShiftKey) {
-					shift_key_presed = TRUE;
-					return TRUE;
-				}
-				else
-					shift_key_presed = FALSE;*/
 				break;
-			case 1:/*
-				shift_key_presed = TRUE;*/
+			case 1:
 				break;
 			case 2:
 				gui_popup_menu_gbs();
@@ -283,24 +269,16 @@ gint embed_dom_mouse_down_cb(GtkMozEmbed *embed, gpointer dom_event, gpointer da
 		}
 	} else if(pane == DICTIONARY_TYPE) {
 		switch(button) {
-			case 0:	
-				/*if(aShiftKey) {
-					shift_key_presed = TRUE;
-					return TRUE;
-				}
-				else
-					shift_key_presed = FALSE;*/
+			case 0:
 				break;
-			case 1:/*
-				shift_key_presed = TRUE;*/
+			case 1:
 				break;
 			case 2:
 				gui_create_pm_dictionary();
 				break;
 		}
 	}
-	return FALSE;	
-	
+	return FALSE;
 }
 
 
