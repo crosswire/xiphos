@@ -27,6 +27,11 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/about_modules.h"
+#include "gui/html.h"
+#include "gui/utilities.h"
+
+#include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * privat
@@ -51,9 +56,97 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
         gtk_widget_destroy(dlg);
 }
 
+
 /******************************************************************************
- * public
- *****************************************************************************/
+ * Name
+ *   about_module_display
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void about_module_display(gchar * to, gchar * text)
+ *
+ * Description
+ *   to filter rtf to html
+ *
+ * Return value
+ *   void
+ */ 
+
+static void about_module_display(gchar * to, gchar * text)
+{
+	gint len, maxlen, i;
+	gboolean center = FALSE;
+
+	len = strlen(text);
+
+	maxlen = len * 80;
+
+
+	// -------------------------------
+	for (i = 0; i < strlen(text) - 1; i++) {
+		if (text[i] == '\\')	// a RTF command
+		{
+			if ((text[i + 1] == 'p') &&
+			    (text[i + 2] == 'a') &&
+			    (text[i + 3] == 'r') &&
+			    (text[i + 4] == 'd')) {
+
+				if (center) {
+					*to++ = '<';
+					*to++ = '/';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = FALSE;
+				}
+				i += 4;
+				continue;
+			}
+			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
+			    && (text[i + 3] == 'r')) {
+				*to++ = '<';
+				*to++ = 'b';
+				*to++ = 'r';
+				*to++ = '>';
+				*to++ = '\n';
+				i += 3;
+				continue;
+			}
+			if (text[i + 1] == ' ') {
+				i += 1;
+				continue;
+			}
+			if (text[i + 1] == '\n') {
+				i += 1;
+				continue;
+			}
+			if ((text[i + 1] == 'q')
+			    && (text[i + 2] == 'c')) {
+				if (!center) {
+					*to++ = '<';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = TRUE;
+				}
+				i += 2;
+				continue;
+			}
+		}
+		*to++ = text[i];
+	}
+	*to++ = 0;
+}
+
 
 /******************************************************************************
  * Name
@@ -71,7 +164,7 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
  *   GtkWidget *
  */
  
-GtkWidget *gui_create_about_modules(void)
+static GtkWidget *gui_create_about_modules(void)
 {
         GtkWidget *aboutmodules;
         GtkWidget *dialog_vbox8;
@@ -191,3 +284,82 @@ GtkWidget *gui_create_about_modules(void)
 
         return aboutmodules;
 }
+
+/******************************************************************************
+ * public
+ *****************************************************************************/
+
+/******************************************************************************
+ * Name
+ *   gui_display_about_module_dialog
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *   void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
+{
+	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
+	GtkWidget *text;	//-- pointer to text widget of dialog
+	gchar *buf, *to = NULL,	//-- pointer to text buffer for label (mod name)
+	*bufabout,		//-- pointer to text buffer for text widget (mod about)
+	 discription[500];
+	gint len, maxlen;
+
+	bufabout = NULL;
+
+	buf = get_module_description(modname);
+	bufabout = get_mod_about_info(modname);
+
+	sprintf(discription,
+		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
+		buf);
+	if (!isGBS) {
+		aboutbox = gui_create_about_modules();
+		gtk_widget_show(aboutbox);
+	}
+
+	if (bufabout) {
+
+		len = strlen(bufabout);
+		maxlen = len * 8;
+
+		if ((to = (gchar *) malloc(maxlen)) == NULL) {
+			return;
+		}
+
+		if (!isGBS) {
+			text = gui_lookup_widget(aboutbox, "text");	/* get text widget */
+		} else {
+			text = settings.html_book;
+		}
+
+		about_module_display(to, bufabout);	/* send about info to display function */
+		gui_begin_html(text, FALSE);
+		gui_display_html(text, "<html><body>",
+			    strlen("<html><body>"));
+		gui_display_html(text, discription, strlen(discription));
+		if (to)
+			gui_display_html(text, to, strlen(to));
+		gui_display_html(text, "</body></html>",
+			    strlen("</body></html>"));
+		gui_end_html(text);
+	}
+
+	else
+		g_warning("oops");
+
+	if (bufabout)
+		g_free(bufabout);
+	if (to)
+		free(to);
+}
+

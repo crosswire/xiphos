@@ -61,7 +61,6 @@
 #include "main/commentary.h"
 #include "main/percomm.h"
 #include "main/dictlex.h"
-#include "main/settings.h"
  
 #include "backend/search_.h"
 #include "backend/sword.h"
@@ -84,8 +83,7 @@ extern gboolean
  havecomm, 
  havedict, 
  havebook, 
- havepercomm, 
- autoSave, 
+ havepercomm,
  addhistoryitem;	/* do we need to add item to history */
  
 extern HISTORY historylist[];	/* sturcture for storing history items */
@@ -107,8 +105,9 @@ void init_gnomesword(void)
 	gui_setup_shortcut_bar();
 
 	/*
-	 *  create interlinear popup menu 
+	 *  interlinear stuff 
 	 */
+	gui_set_interlinear_options_at_start();
 	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
 	/*
 	 *  setup Bible text gui 
@@ -150,26 +149,14 @@ void init_gnomesword(void)
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 
-	/*
-	 *  add modules to about modules menus
-	 */	
-	gui_add_mods_to_menus(get_list(TEXT_LIST), 
-			_("_Help/About Sword Modules/Bible Texts/"),
-			(GtkMenuCallback)gui_about_activate);
-	gui_add_mods_to_menus(get_list(COMM_LIST), 
-			_("_Help/About Sword Modules/Commentaries/"),
-			(GtkMenuCallback)gui_about_activate);
-	gui_add_mods_to_menus(get_list(DICT_LIST), 
-			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
-			(GtkMenuCallback)gui_about_activate);
-	gui_add_mods_to_menus(get_list(GBS_LIST), 
-			_("_Help/About Sword Modules/Books/"),
-			(GtkMenuCallback)gui_about_activate);
-	/*
-	 * Set toggle state of buttons and menu items.
-	 */
-	UpdateChecks();
-
+	gui_set_shortcutbar_porgram_start();
+	
+	gui_show_main_window();
+	
+	addhistoryitem = FALSE;
+	
+	change_verse(settings.currentverse);
+	
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
 	 */
@@ -185,29 +172,11 @@ void init_gnomesword(void)
 
 void gnomesword_shutdown(void)
 {
-	GtkWidget *msgbox;
-	gint answer = 0;
-
-	//backend_save_bookmarks(settings.ctree_widget);
 	gui_save_bookmarks(NULL,NULL);
-	/* if study pad file has changed since last save */
-	if (settings.modifiedSP) {
-		msgbox = gui_create_info_box();
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer =
-		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-
-		switch (answer) {
-		case 0:
-			if (settings.studypadfilename)
-				save_file_program_end(settings.html_studypad,
-						      settings.studypadfilename);
-			break;
-		default:
-			break;
-		}
-	}
 	
+	/* if study pad file has changed since last save */
+	gui_studypad_can_close();
+		
 	/* shutdown the sword stuff */
 	backend_shutdown();
 	
@@ -239,147 +208,9 @@ void gnomesword_shutdown(void)
 	g_print("\nGnomeSWORD is shutdown\n");
 }
 
-/*****************************************************************************
- * UpdateChecks(GtkWidget *app) update chech menu items
- * and toggle buttons - called on start up
- *****************************************************************************/
-
-void UpdateChecks(void)
+void search_percent_update(char percent, void *userData)
 {
-	/* does user want verses or paragraphs */
-	GTK_CHECK_MENU_ITEM(settings.versestyle_item)->active = settings.versestyle;
-
-	if (settings.footnotesint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "On");	/* keep footnotes in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "Off");	/* keep footnotes in sync with menu */
-
-	/*
-	   set interlinear Strong's Numbers to last setting used 
-	 */
-	if (settings.strongsint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "On");	/* keep Strongs in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
-
-	/*
-	   set interlinear morph tags to last setting used 
-	 */
-	if (settings.morphsint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
-
-	/*
-	   set interlinear Hebrew Vowel Points to last setting used 
-	 */
-	if (settings.hebrewpointsint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
-
-	/*
-	   set interlinear Hebrew Cantillation to last setting used 
-	 */
-	if (settings.cantillationmarksint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
-
-	/*
-	   set interlinear Greek Accents to last setting used 
-	 */
-	if (settings.greekaccentsint)
-		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "On");	/* keep Greek Accents in sync with menu */
-	else
-		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
-
-	/*
-	   set auto save personal comments to last setting 
-	 */
-	autoSave = settings.autosavepersonalcomments;
-	/*
-	   set auto save menu check item 
-	 */
-	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings.autosavepersonalcomments;  
-
-	/*
-	   show hide shortcut bar - set to options setting 
-	 */
-	if (settings.showshortcutbar) {
-		gtk_widget_show(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned),
-				     settings.shortcutbar_width);
-	}
-
-	else if (!settings.showshortcutbar && settings.showdevotional) {
-		gtk_widget_show(settings.shortcut_bar);
-		gui_shortcutbar_showhide();
-	}
-
-	else {
-		gtk_widget_hide(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned),
-				     1);
-	}
-
-	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "vpaned1")),
-			     settings.upperpane_hight);
-
-	/* set width of bible pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "hpaned1")),
-			     settings.biblepane_width);
-
-	if (!settings.docked) {
-		settings.docked = TRUE;
-		gui_attach_detach_shortcutbar();
-	}
-	gtk_widget_show(settings.app);
-
-	addhistoryitem = FALSE;
-	change_verse(settings.currentverse);
-}
-
-/******************************************************************************
- * setautosave - someone clicked auto save personal  comments
- * choice
- *****************************************************************************/
-
-void setautosave(gboolean choice)
-{
-	if (choice) {
-		/* if choice was to autosave */
-		autoSave = TRUE;
-	} else {
-		/* if choice was not to autosave */
-		autoSave = FALSE;
-	}
-
-	/* remember our choice for next startup */
-	settings.autosavepersonalcomments = choice;
-}
-
-
-
-void percent_update(char percent, void *userData)
-{
-	char maxHashes = *((char *) userData);
-	float num;
-	char buf[80];
-	static char printed = 0;
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
-		gnome_appbar_set_progress((GnomeAppBar *) settings.appbar, num);
-		printed++;
-	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	printed = 0;
+	gui_search_appbar_update(percent, userData);
 }
 
 /******************************************************************************
@@ -486,141 +317,6 @@ gdouble *hex_to_gdouble_arr(gchar * color)
 }
 
 
-/*
- * to display Sword module about information
- */
-static void about_module_display(gchar * to, gchar * text)
-{
-	gint len, maxlen, i;
-	gboolean center = FALSE;
-
-	len = strlen(text);
-
-	maxlen = len * 80;
-
-
-	// -------------------------------
-	for (i = 0; i < strlen(text) - 1; i++) {
-		if (text[i] == '\\')	// a RTF command
-		{
-			if ((text[i + 1] == 'p') &&
-			    (text[i + 2] == 'a') &&
-			    (text[i + 3] == 'r') &&
-			    (text[i + 4] == 'd')) {
-
-				if (center) {
-					*to++ = '<';
-					*to++ = '/';
-					*to++ = 'C';
-					*to++ = 'E';
-					*to++ = 'N';
-					*to++ = 'T';
-					*to++ = 'E';
-					*to++ = 'R';
-					*to++ = '>';
-					center = FALSE;
-				}
-				i += 4;
-				continue;
-			}
-			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
-			    && (text[i + 3] == 'r')) {
-				*to++ = '<';
-				*to++ = 'b';
-				*to++ = 'r';
-				*to++ = '>';
-				*to++ = '\n';
-				i += 3;
-				continue;
-			}
-			if (text[i + 1] == ' ') {
-				i += 1;
-				continue;
-			}
-			if (text[i + 1] == '\n') {
-				i += 1;
-				continue;
-			}
-			if ((text[i + 1] == 'q')
-			    && (text[i + 2] == 'c')) {
-				if (!center) {
-					*to++ = '<';
-					*to++ = 'C';
-					*to++ = 'E';
-					*to++ = 'N';
-					*to++ = 'T';
-					*to++ = 'E';
-					*to++ = 'R';
-					*to++ = '>';
-					center = TRUE;
-				}
-				i += 2;
-				continue;
-			}
-		}
-		*to++ = text[i];
-	}
-	*to++ = 0;
-}
-
-void display_about_module_dialog(gchar * modname, gboolean isGBS)
-{
-	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
-	GtkWidget *text;	//-- pointer to text widget of dialog
-	gchar *buf, *to = NULL,	//-- pointer to text buffer for label (mod name)
-	*bufabout,		//-- pointer to text buffer for text widget (mod about)
-	 discription[500];
-	gint len, maxlen;
-
-	bufabout = NULL;
-
-	buf = backend_get_module_description(modname);
-	bufabout = backend_get_mod_aboutSWORD(modname);
-
-	sprintf(discription,
-		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
-		buf);
-	if (!isGBS) {
-		aboutbox = gui_create_about_modules();
-		gtk_widget_show(aboutbox);
-	}
-
-	if (bufabout) {
-
-		len = strlen(bufabout);
-		maxlen = len * 8;
-
-		if ((to = (gchar *) malloc(maxlen)) == NULL) {
-			return;
-		}
-
-		if (!isGBS) {
-			text = gui_lookup_widget(aboutbox, "text");	/* get text widget */
-		} else {
-			text = settings.html_book;
-		}
-
-		about_module_display(to, bufabout);	/* send about info to display function */
-		gui_begin_html(text, FALSE);
-		gui_display_html(text, "<html><body>",
-			    strlen("<html><body>"));
-		gui_display_html(text, discription, strlen(discription));
-		if (to)
-			gui_display_html(text, to, strlen(to));
-		gui_display_html(text, "</body></html>",
-			    strlen("</body></html>"));
-		gui_end_html(text);
-	}
-
-	else
-		g_warning("oops");
-
-	if (bufabout)
-		g_free(bufabout);
-	if (to)
-		free(to);
-}
-
 
 /******************************************************************************
  *
@@ -707,6 +403,7 @@ int get_module_number(char *module_name, char *module_type)
 {
 	return backend_get_module_page(module_name, module_type);
 }
+
 void change_module_and_key(gchar * module_name, gchar * key)
 {
 	gint mod_type;
@@ -976,12 +673,8 @@ int get_mod_type(char * mod_name)
 void get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
      gint group_num, gint item_num, gchar **item_url, gchar **item_name)
 {
-	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-				       (shortcutbar_widget)->model,
-				       group_num,
-				       item_num,
-				       item_url, item_name, NULL);
-
+	gui_get_shortcut_item_info(shortcutbar_widget, 
+	     group_num, item_num, item_url, item_name);
 
 }
 
@@ -1005,9 +698,8 @@ void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
 gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
 						gint group_num)
 {
-	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
-					      (shortcutbar_widget)->
-					      model, group_num);
+	return gui_get_num_shortcut_items(shortcutbar_widget,
+						group_num);
 
 }
 
@@ -1077,4 +769,57 @@ char *get_module_text(char * mod_name, char * key)
 char *get_search_results_text(char * mod_name, char * key)	
 {
 	return backend_get_search_results_text(mod_name, key);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+
+int create_properties_from_setup(void)
+{
+	return backend_create_properties_from_setup();
+}
+
+
+/******************************************************************************
+ * Name
+ *  get_path_to_mods
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   	gchar *get_path_to_mods(void)
+ *
+ * Description
+ *    returns the path to the sword modules
+ *
+ * Return value
+ *   get_path_to_mods
+ */ 
+
+gchar *get_path_to_mods(void)
+{
+	return backend_get_path_to_mods();
+}
+GList *get_list_of_mods_by_type(char *mod_type)
+{
+	return backend_get_list_of_mods_by_type(mod_type);
+}
+
+gchar *get_mod_about_info(char * mod_name)
+{
+	return backend_get_mod_about_info(mod_name);
 }

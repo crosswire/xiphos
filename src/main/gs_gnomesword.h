@@ -59,7 +59,7 @@ extern "C" {
 typedef struct _search_opt SEARCH_OPT;
 struct _search_opt {
 	GtkWidget
-	    * ckbCommentary,
+	    *ckbCommentary,
 	    *ckbPerCom, 
 	    *ckbGBS, 
 	    *rbPhraseSearch;
@@ -83,21 +83,16 @@ struct _search_opt {
 
 void init_gnomesword(void);
 void gnomesword_shutdown(void);
-void UpdateChecks(void);
-void setautosave(gboolean choice);
-void percent_update(char percent, void *userData);
-void set_appbar_progress(gint unit);
+void search_percent_update(char percent, void *userData);
 gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
-void display_about_module_dialog(gchar *modname, gboolean isGBS);
 gchar *get_module_key(void);
 gchar *get_module_name(void);
 int get_mod_type(char * mod_name);
 char *get_module_font_name(char *mod_name);
 char *get_module_font_size(char *mod_name);
-//gchar *get_module_name_from_description(gchar *description);
 void module_name_from_description(gchar *mod_name, gchar *description);
 void change_module_and_key(gchar *module_name, gchar *key);
 void change_verse(gchar *key);
@@ -118,10 +113,8 @@ GList *load_sb_group(gchar *filename, gchar *group_name,
 void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
 						     char *large_icons);
 void save_sb_iconsize(gchar *file_name, char *icons);
-gint get_sb_type_from_modname(gchar *modName);
 gint get_num_shortcut_items(GtkWidget *shortcutbar_widget,
-				     gint group_num);
-
+				     gint group_num); 
 void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
 				     gint group_num,
 				     gint item_num,
@@ -132,6 +125,10 @@ char *get_valid_key(char *key);
 int get_module_number(char *module_name, char *module_type);
 char *get_module_text(char * mod_name, char * key);
 char *get_search_results_text(char * mod_name, char * key);
+int create_properties_from_setup(void);
+gchar *get_path_to_mods(void);
+GList *get_list_of_mods_by_type(char *mod_type);
+gchar *get_mod_about_info(char * mod_name);
 
 #ifdef __cplusplus
 }

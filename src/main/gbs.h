@@ -26,8 +26,6 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
 char * display_gbs(char * book_name, char * key);
 int treekey_next_sibling(unsigned long offset);
 int gbs_treekey_has_children(unsigned long offset);

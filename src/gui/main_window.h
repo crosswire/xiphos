@@ -27,8 +27,10 @@ extern "C" {
 #endif
 
 #include "main/settings.h"
-
+	
+void gui_search_appbar_update(char percent, void *userData);
 void create_mainwindow(void);
+void gui_show_main_window(void);
 
 #ifdef __cplusplus
 }

@@ -28,11 +28,11 @@
 #include "gui/gui.h"
 #include "gui/main_window.h"
 #include "gui/splash.h"
+#include "gui/setup_druid.h"
 
 #include "backend/sword.h"
 #include "backend/properties.h"
 
-#include "main/setup.h"
 #include "main/gs_gnomesword.h"
 #include "main/bookmarks.h"
 #include "main/settings.h"
@@ -84,18 +84,17 @@ int main(int argc, char *argv[])
 	/* 
 	 * check for directories and files
 	 */    
-	icreatefiles = settings_init();
-
+	icreatefiles = settings_init();	
 	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
 		create_bookmarks(settings.swbmDir);
 	}
 
-	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs) {
-		first_run();
+	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs)  {
+		gui_first_run();
 	}
 
 	backend_load_properties();
-
+	
 	gui_splash_init();
 
 	gui_splash_step1();
