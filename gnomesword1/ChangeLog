@@ -1,3 +1,9 @@
+2005-01-18  pierre <pierrebenz@uses.sf.net>
+
+	* added documentation guidelines (still incomplete)
+	* added gnomesword-manual.xml + manual updates
+
+
 2004-09-26  terry <terry470@users.sf.net>
 
 	* gnomesword can be build using gtkmozembed for the Bible, commentary 

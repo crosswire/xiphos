@@ -1,4 +1,6 @@
 TODO:
+	*Remove documentation figures that have prefix "gnomesword"
+	*Remove gnomesword.xml 
 	*Update graphics
 	*SWORD module installer - needs testing
 	*Revamp spell checker dialog
