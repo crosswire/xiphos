@@ -55,6 +55,7 @@
 #include "main/sidebar.h"
 #include "main/url.h"
 #include "main/xml.h"
+#include "main/module_dialogs.h"
 
 
 SIDEBAR sidebar;
@@ -991,7 +992,7 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_dat
 	case -1:
 		break;
 	case TEXT_TYPE:
-		gui_open_bibletext_dialog(buf_module);
+		main_open_bibletext_dialog(buf_module);
 		break;
 	case COMMENTARY_TYPE:
 		gui_open_commentary_dialog(buf_module);

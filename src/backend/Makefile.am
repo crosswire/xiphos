@@ -9,6 +9,7 @@ EXTRA_DIST =  \
 
 libbackend_a_SOURCES =  \
     config.cc config.hh \
+    dialogs.cc dialogs.hh \
     key.cc key.hh \
     mgr.cc mgr.hh \
     module.cc module.hh \

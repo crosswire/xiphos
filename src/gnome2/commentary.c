@@ -345,7 +345,7 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_set_module_font((settings.comm_showing)?
 			settings.CommWindowModule:settings.book_mod);
-	gui_display_text(settings.currentverse);
+	//gui_display_text(settings.currentverse);
 }
 
 

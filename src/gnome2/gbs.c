@@ -222,7 +222,7 @@ static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_set_module_font(settings.book_mod);
-	gui_display_text(settings.currentverse);
+	//gui_display_text(settings.currentverse);
 }
 
 
@@ -237,7 +237,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.
+			main_display_dictionary(settings.
 						  DictWindowModule,
 						  dict_key);
 		g_free(dict_key);
@@ -320,7 +320,7 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
+			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -371,7 +371,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	module_name = module_name_from_description((gchar *) user_data);
 	if(module_name) {
-		gui_change_module_and_key(module_name, settings.currentverse);
+		main_display_book(module_name, "0");
 		g_free(module_name);
 	}
 }
