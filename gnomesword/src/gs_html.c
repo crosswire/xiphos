@@ -147,7 +147,7 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		} 
 		buf = g_strdup(newref);
 		if(getVerseListSWORD(buf)){
-			g_warning("this is good");
+			/* do nothing */
 		}else{
 			changeVerseSWORD(buf);
 		}
