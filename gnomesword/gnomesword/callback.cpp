@@ -228,8 +228,8 @@ on_resultList_select_row               (GtkCList        *clist,
                                         GdkEvent        *event,
                                         gpointer         user_data)
 {
-	GtkWidget	*searchFrm;
-	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
+        GtkWidget	*searchFrm;
+        searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
 	searchWindow->resultsListSWORD(searchFrm, row, column);
 }
 
