@@ -106,6 +106,7 @@ module.include.files=\
 	src/gnome/setup_druid.h\
 	src/gnome/shortcutbar_dialog.h\
 	src/gnome/studypad.h\
+	src/gnome/toolbar_nav.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/bibletext_view.h\
@@ -115,10 +116,8 @@ module.include.files=\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_interlinear.h\
-	src/main/gs_getinfo_dlg.h\
 	src/main/gs_gnomesword.h\
 	src/main/gs_gui.h\
-	src/main/gs_gui_cb.h\
 	src/main/gs_history.h\
 	src/main/gs_html.h\
 	src/main/gs_info_box.h\
@@ -189,6 +188,7 @@ module.source.files=\
 	src/gnome/shortcutbar_dialog.c\
 	src/gnome/studypad.c\
 	src/gnome/splash.c\
+	src/gnome/toolbar_nav.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
 	src/main/bibletext_view.c\
@@ -197,10 +197,8 @@ module.source.files=\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/gs_interlinear.c\
-	src/main/gs_getinfo_dlg.c\
 	src/main/gs_gnomesword.c\
 	src/main/gs_gui.c\
-	src/main/gs_gui_cb.c\
 	src/main/gs_history.c\
 	src/main/gs_html.c\
 	src/main/gs_info_box.c\

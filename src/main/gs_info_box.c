@@ -38,7 +38,6 @@
 #include <string.h>
 
 #include "gs_info_box.h"
-#include "gs_gui_cb.h"
 #include "support.h"
 
 GtkWidget *create_InfoBox(void)

@@ -1,5 +1,12 @@
 2002-05-16  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* removed main/gs_gui_cb.*
+	* added gnome/toolbar_nav.*
+	* removed gs_getinfo_dlg.* - was not used
+
+
+2002-05-16  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* removed main/gs_editor.* all the functions moved to other files
 	* added gnome/studypad.*
 	

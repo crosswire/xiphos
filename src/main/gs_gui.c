@@ -27,18 +27,19 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
+/* main */ 
 #include "gs_gui.h"
-#include "gs_gui_cb.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_shortcutbar.h"
 #include "settings.h"
-#include "lists.h"
+#include "support.h"
 
 /* frontend */
 #include "main_menu.h"
 #include "shortcutbar_dialog.h"
 #include "studypad.h"
+#include "toolbar_nav.h"
 
 
 static char *book_open_xpm[] = {
@@ -114,12 +115,14 @@ static char *mini_page_xpm[] = {
 	"    oooooooooo  ",
 	"                "
 };
+
 GdkPixmap *pixmap1;
 GdkPixmap *pixmap2;
 GdkPixmap *pixmap3;
 GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
+
 
 /******************************************************************************
  * Name
@@ -164,10 +167,195 @@ static gint button_release_event(GtkWidget * html, GdkEventButton * event,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   on_btnSBDock_clicked
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
+ *
+ * Description
+ *    toogle shortcut bar - attached/detached 
+ *
+ * Return value
+ *   void
+ */ 
+
 static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 {
 	gui_attach_detach_shortcutbar(s);
 }
+
+/******************************************************************************
+ * Name
+ *   on_btn_search_clicked
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void on_btn_search_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *    displays the shortcut bar search group 
+ *    will open the new search dialog (FIXME: build new search dialog)
+ *
+ * Return value
+ *   void
+ */ 
+
+
+static void on_btn_search_clicked(GtkButton *button, gpointer user_data)
+{
+	showSBGroup(&settings, settings.searchbargroup);
+} 
+
+/******************************************************************************
+ * Name
+ *   on_mainwindow_size_allocate
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void on_mainwindow_size_allocate(GtkWidget * widget,
+ *			GtkAllocation * allocation, gpointer user_data)
+ *
+ * Description
+ *    store the app size when size is changed 
+ *
+ * Return value
+ *   void
+ */ 
+
+static void on_mainwindow_size_allocate(GtkWidget * widget,
+			GtkAllocation * allocation, gpointer user_data)
+{
+	settings.gs_width = allocation->width;
+	settings.gs_hight = allocation->height;
+}
+
+/******************************************************************************
+ * Name
+ *   on_mainwindow_destroy
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
+ *
+ * Description
+ *    shutdown gnomesword 
+ *
+ * Return value
+ *   void
+ */ 
+
+static void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
+{
+	gnomesword_shutdown(s);
+	gtk_exit(0);
+}
+
+/******************************************************************************
+ * Name
+ *   workbook_upper_switch_page
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void workbook_upper_switch_page(GtkNotebook * notebook,
+ *			 GtkNotebookPage * page,
+ *			 gint page_num, gpointer user_data)
+ *
+ * Description
+ *    notebook page changed (commentary, percomm and studypad pages) 
+ *
+ * Return value
+ *   void
+ */ 
+
+static void workbook_upper_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 gint page_num, gpointer user_data)
+{
+	static gboolean firsttime = TRUE;	
+	extern gboolean havepercomm;
+	
+	if (!firsttime) {
+		changepagenotebook(notebook, page_num);	
+	}
+	firsttime = FALSE;	
+	
+	if(havepercomm)
+		gtk_widget_hide(settings.toolbarComments);
+	gtk_widget_hide(settings.toolbarStudypad);
+
+	if (page_num == 1 && settings.editnote) {
+		gtk_widget_show(settings.toolbarComments);
+	}
+
+	else if (page_num == 2) {
+		gtk_widget_show(settings.toolbarStudypad);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   on_epaned_button_release_event
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   gboolean on_epaned_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event, gpointer user_data)
+ *
+ * Description
+ *    get and store pane sizes 
+ *
+ * Return value
+ *   void
+ */ 
+
+static gboolean epaned_button_release_event(GtkWidget * widget,
+			GdkEventButton * event, gpointer user_data)
+{
+	gint panesize;
+	if(!strcmp((gchar*)user_data,"epaned")) 
+		panesize = 
+		    e_paned_get_position(E_PANED(settings.epaned));
+	else
+		panesize =
+		    e_paned_get_position(E_PANED(lookup_widget
+				  (settings.app,
+				   (gchar *) user_data)));
+
+	if (panesize > 15) {
+		if (!strcmp((gchar *) user_data, "epaned"))
+			settings.shortcutbar_width = panesize;
+		if (!strcmp((gchar *) user_data, "vpaned1"))
+			settings.upperpane_hight = panesize;
+		if (!strcmp((gchar *) user_data, "hpaned1"))
+			settings.biblepane_width = panesize;
+	}
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *   create_mainwindow
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void create_mainwindow(SETTINGS *s)
+ *
+ * Description
+ *    create gnomesword gui 
+ *
+ * Return value
+ *   void
+ */ 
 
 void create_mainwindow(SETTINGS *s)
 {
@@ -178,22 +366,14 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSBDock;
 	GtkWidget *btnSB;
-	GtkWidget *cbBook;
-	GtkObject *spbChapter_adj;
-	GtkObject *spbVerse_adj;
-	GtkWidget *btnLookup;
-	GtkWidget *btnBack;
-	GtkWidget *btnFoward;
-	GtkWidget *vseparator13;
+	GtkWidget *btn_search;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
 	GtkWidget *vpaned1;
 	GtkWidget *hbox2;
-	GtkWidget *handleboxNavBar;
-	GtkWidget *toolbarNav;
+	GtkWidget *nav_toolbar;
 	GtkWidget *hpaned1;
 	GtkWidget *vbox_text;
-	GtkWidget *notebook3;
 	GtkWidget *vbox22;
 	GtkWidget *label64;
 	GtkWidget *vbox2;
@@ -201,10 +381,10 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *swInt;
 	GtkWidget *label41;
 	GtkWidget *hbox8;
-//	GtkWidget *frame10;
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
+	GtkWidget *vseparator13;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
@@ -309,7 +489,23 @@ void create_mainwindow(SETTINGS *s)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarOptions),
 				  vseparator13, NULL, NULL);
 	gtk_widget_set_usize(vseparator13, 7, 7);
-
+	
+	tmp_toolbar_icon = 
+		gnome_stock_pixmap_widget (s->app, 
+			GNOME_STOCK_PIXMAP_SEARCH);
+	btn_search = gtk_toolbar_append_element (GTK_TOOLBAR 
+				(toolbarOptions),
+				GTK_TOOLBAR_CHILD_BUTTON,
+				NULL,
+				_("Search"),
+				NULL, NULL,
+				tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref (btn_search);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "btn_search", btn_search,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (btn_search);
+	
+	
 
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox25);
@@ -344,132 +540,13 @@ void create_mainwindow(SETTINGS *s)
 	gtk_box_pack_start(GTK_BOX(mainPanel), vboxMain, TRUE, TRUE, 0);
 
 	/*
-	 * start nav toolbar 
+	 * nav toolbar 
 	 */
-	handleboxNavBar = gtk_handle_box_new();
-	gtk_widget_ref(handleboxNavBar);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "handleboxNavBar", handleboxNavBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(handleboxNavBar);
-	gtk_box_pack_start(GTK_BOX(vboxMain), handleboxNavBar, FALSE,
+	
+	nav_toolbar = gui_create_nav_toolbar();	
+	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
 			   FALSE, 0);
-
-	toolbarNav =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbarNav);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbarNav",
-				 toolbarNav,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbarNav);
-	gtk_container_add(GTK_CONTAINER(handleboxNavBar), toolbarNav);
-	gtk_widget_set_usize(toolbarNav, -2, 34);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarNav),
-				      GTK_RELIEF_NONE);
-
-	cbBook = gtk_combo_new();
-	gtk_widget_ref(cbBook);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "cbBook",
-				 cbBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(cbBook);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
-				  NULL);
-
-	/*
-	 * get and load books of the Bible 
-	 */	
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), get_list(BOOKS_LIST));
-
-	s->cbeBook = GTK_COMBO(cbBook)->entry;
-	gtk_widget_ref(s->cbeBook);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->cbeBook",
-				 s->cbeBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(s->cbeBook);
-	gtk_entry_set_text(GTK_ENTRY(s->cbeBook), _("Romans"));
-
-	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
-	s->spbChapter =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_ref(s->spbChapter);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->spbChapter",
-				 s->spbChapter,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(s->spbChapter);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), s->spbChapter,
-				  NULL, NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(s->spbChapter), TRUE);
-
-	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
-	s->spbVerse = gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_ref(s->spbVerse);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->spbVerse",
-				 s->spbVerse,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(s->spbVerse);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), s->spbVerse, NULL,
-				  NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(s->spbVerse), TRUE);
-
-	s->cbeFreeformLookup = gtk_entry_new();
-	gtk_widget_ref(s->cbeFreeformLookup);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "s->cbeFreeformLookup", s->cbeFreeformLookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(s->cbeFreeformLookup);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
-				  s->cbeFreeformLookup, NULL, NULL);
-	gtk_entry_set_text(GTK_ENTRY(s->cbeFreeformLookup), _("Romans 8:28"));
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	btnLookup =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Goto verse"),
-				       _
-				       ("Go to verse in free form lookup and add verse to history"),
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnLookup);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnLookup",
-				 btnLookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnLookup);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
-				      GNOME_STOCK_PIXMAP_BACK);
-	btnBack =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Back"),
-				       _
-				       ("Go backward through history list"),
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnBack);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnBack",
-				 btnBack,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnBack);
-	gtk_widget_set_sensitive(btnBack, FALSE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
-				      GNOME_STOCK_PIXMAP_FORWARD);
-	btnFoward =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Foward"),
-				       _("Go foward through history list"),
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnFoward);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnFoward",
-				 btnFoward,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnFoward);
-	gtk_widget_set_sensitive(btnFoward, FALSE);
+	 
 	/*
 	 * end nav toolbar 
 	 */
@@ -524,19 +601,19 @@ void create_mainwindow(SETTINGS *s)
 	
 	
 
-	notebook3 = gtk_notebook_new();
-	gtk_widget_ref(notebook3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "notebook3",
-				 notebook3,
+	s->workbook_upper = gtk_notebook_new();
+	gtk_widget_ref(s->workbook_upper);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->workbook_upper",
+				 s->workbook_upper,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(notebook3);
-	s->workbook = notebook3;
+	gtk_widget_show(s->workbook_upper);
 	
-	e_paned_pack2(E_PANED(hpaned1), notebook3, TRUE, TRUE);
+	
+	e_paned_pack2(E_PANED(hpaned1), s->workbook_upper, TRUE, TRUE);
 
-	gtk_container_set_border_width(GTK_CONTAINER(notebook3), 2);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK(notebook3), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(notebook3));
+	gtk_container_set_border_width(GTK_CONTAINER(s->workbook_upper), 2);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK(s->workbook_upper), TRUE);
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->workbook_upper));
 
 	vbox22 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox22);
@@ -544,7 +621,7 @@ void create_mainwindow(SETTINGS *s)
 				 vbox22,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox22);
-	gtk_container_add(GTK_CONTAINER(notebook3), vbox22);
+	gtk_container_add(GTK_CONTAINER(s->workbook_upper), vbox22);
 
 	s->notebook_comm = gtk_notebook_new();
 	gtk_widget_ref(s->notebook_comm);
@@ -560,17 +637,21 @@ void create_mainwindow(SETTINGS *s)
 				 label64,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label64);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
-				   gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook3),0), label64);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
-                                    gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook3),0), _("Commentaries"));
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->workbook_upper),
+				   gtk_notebook_get_nth_page(
+				   GTK_NOTEBOOK(s->workbook_upper),0), 
+				   label64);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_upper),
+                                    gtk_notebook_get_nth_page(
+				    GTK_NOTEBOOK(s->workbook_upper),0), 
+				    _("Commentaries"));
 
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox2", vbox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox2);
-	gtk_container_add(GTK_CONTAINER(notebook3), vbox2);
+	gtk_container_add(GTK_CONTAINER(s->workbook_upper), vbox2);
 
 	s->notebook_percomm = gtk_notebook_new();
 	gtk_widget_ref(s->notebook_percomm);
@@ -594,21 +675,21 @@ void create_mainwindow(SETTINGS *s)
 				 label85,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label85);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->workbook_upper),
 				gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(notebook3),
+							(s->workbook_upper),
 							1), label85);	
 							     
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_upper),
                                 gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(notebook3),
+							(s->workbook_upper),
 							1), _("Personal Comments"));
 	
 		
 	/*
 	 * studypad editor 
 	 */
-	s->html_studypad = studypad_control(notebook3, s);
+	s->html_studypad = studypad_control(s->workbook_upper, s);
 	
 				
 	label41 = gtk_label_new(_("Study Pad"));
@@ -617,14 +698,14 @@ void create_mainwindow(SETTINGS *s)
 				 label41,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label41);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook3),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->workbook_upper),
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							     (notebook3),
+							     (s->workbook_upper),
 							     2), label41);
 	
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook3),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_upper),
                                 gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(notebook3),
+							(s->workbook_upper),
 							2), _("Study Pad"));		
 							
 	/*
@@ -828,37 +909,21 @@ void create_mainwindow(SETTINGS *s)
 			   s);
 	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSB_clicked), s);
-	gtk_signal_connect(GTK_OBJECT(s->cbeBook), "changed",
-			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(s->spbChapter), "button_release_event",
-			   GTK_SIGNAL_FUNC
-			   (on_spbChapter_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(s->spbVerse), "button_release_event",
-			   GTK_SIGNAL_FUNC
-			   (on_spbVerse_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(s->cbeFreeformLookup),
-			   "key_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_cbeFreeformLookup_key_press_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnLookup_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnBack), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnBack_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnFoward), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
-		   
-	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",
-			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
+	gtk_signal_connect (GTK_OBJECT (btn_search), "clicked",
+                      GTK_SIGNAL_FUNC (on_btn_search_clicked),
+                      NULL);
+	gtk_signal_connect(GTK_OBJECT(s->workbook_upper), "switch_page",
+			   GTK_SIGNAL_FUNC(workbook_upper_switch_page),
 			   NULL);	   
 			   
 	gtk_signal_connect(GTK_OBJECT(s->epaned), "button_release_event",
-			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
+			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "epaned");
 	gtk_signal_connect(GTK_OBJECT(vpaned1), "button_release_event",
-			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
+			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "vpaned1");
 	gtk_signal_connect(GTK_OBJECT(hpaned1), "button_release_event",
-			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
+			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
 	gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "on_url",
