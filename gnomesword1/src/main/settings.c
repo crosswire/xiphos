@@ -405,7 +405,13 @@ void load_settings_structure(void)
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
+
+#ifdef USE_GTKHTML30	
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+#else	
+	settings.showsplash = FALSE;	
+#endif
+	
 	settings.showdevotional =
 	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
