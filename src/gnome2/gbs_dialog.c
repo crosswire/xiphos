@@ -709,6 +709,45 @@ void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *  new_globals
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   GBS_GLOBALS *new_globals(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GBS_GLOBALS*
+ */
+static GBS_GLOBALS *new_globals(void)
+{
+	GBS_GLOBALS *retval = NULL;
+	
+	retval = g_new0(GBS_GLOBALS, 1);
+	retval->words_in_red = FALSE;
+	retval->strongs = FALSE;
+	retval->morphs = FALSE;
+	retval->footnotes = FALSE;
+	retval->greekaccents = FALSE;
+	retval->lemmas = FALSE;
+	retval->scripturerefs = FALSE;
+	retval->hebrewpoints = FALSE;
+	retval->hebrewcant = FALSE;
+	retval->headings = FALSE;
+	retval->variants_all = FALSE;
+	retval->variants_primary = FALSE;
+	retval->variants_secondary = FALSE;
+	
+	return retval;
+}
+
+
 /******************************************************************************
  * Name
  *   gui_open_gbs_dialog
@@ -732,6 +771,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	create_pixbufs();
 	dlg = g_new0(GBS_DATA, 1);
+	dlg->bgo = new_globals();
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->is_dialog = TRUE;

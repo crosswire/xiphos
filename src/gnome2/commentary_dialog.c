@@ -658,6 +658,7 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	GtkObject *spbVerse_adj;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;
+	GtkWidget *label;
 
 	toolbar_nav =
 	    gtk_toolbar_new();
@@ -684,7 +685,7 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_widget_show(vseparator);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
 				  vseparator, NULL, NULL);
-	gtk_widget_set_size_request(vseparator, 5, 7);
+	gtk_widget_set_size_request(vseparator, 6, 7);
 	
 	
 	cbBook = gtk_combo_new();
@@ -702,6 +703,12 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_widget_set_size_request(vc->cbe_book, 100, -1);
 	gtk_widget_show(vc->cbe_book);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
 	vc->spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
@@ -710,7 +717,13 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 				  vc->spb_chapter, NULL, NULL);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
 				    (vc->spb_chapter), TRUE);
-
+				    
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
 	vc->spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
@@ -720,6 +733,12 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vc->spb_verse),
 				    TRUE);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	vc->freeform_lookup = gtk_entry_new();
 	gtk_widget_show(vc->freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
