@@ -481,7 +481,7 @@ void gui_splash_init() {
 		gtk_object_ref(GTK_OBJECT(splash));
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/sword.xpm", &error);
+				PACKAGE_PIXMAPS_DIR "/sword.png", &error);
 		if(!icon_pixbuf){
 			fprintf (stderr, "pixmap file error: %s\n", error->message);
 			g_error_free (error);
@@ -510,7 +510,7 @@ void gui_splash_init() {
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/GnomeSword.png", &error);
+				PACKAGE_PIXMAPS_DIR "/gs2-48x48.png", &error);
 		if(!icon_pixbuf){
 			fprintf (stderr, "pixmap file error: %s\n", error->message);
 			g_error_free (error);

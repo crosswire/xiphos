@@ -515,6 +515,8 @@ int xml_create_settings_file(char *path)
 	section_node = xmlNewChild(root_node, NULL, "layout", NULL);
 	xmlNewTextChild(section_node, NULL, "hight", "480");
 	xmlNewTextChild(section_node, NULL, "width", "640");
+	xmlNewTextChild(section_node, NULL, "app_x", "40");
+	xmlNewTextChild(section_node, NULL, "app_y", "40");
 	xmlNewTextChild(section_node, NULL, "textpane", "240");
 	xmlNewTextChild(section_node, NULL, "shortcutbar", "178");
 	xmlNewTextChild(section_node, NULL, "uperpane", "210");
@@ -1046,7 +1048,7 @@ void xml_save_settings_doc(char *file_name)
 	const xmlChar *file;
 
 	file = (const xmlChar *) file_name;
-	xmlSaveFile(file, xml_settings_doc);
+	xmlSaveFormatFile(file, xml_settings_doc,1);
 }
 
 
@@ -1069,4 +1071,32 @@ void xml_save_settings_doc(char *file_name)
 void xml_free_settings_doc(void)
 {
 	xmlFreeDoc(xml_settings_doc);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void xml_add_new_item_to_section(char * section, char * item_name, char * value)
+{
+	xmlNodePtr section_node = NULL;
+	
+	section_node = xml_find_section((xmlChar *) "GnomeSword",
+				    (xmlChar *) section);
+	
+	if(section_node) 		
+		xmlNewTextChild(section_node, NULL, item_name, value);
 }

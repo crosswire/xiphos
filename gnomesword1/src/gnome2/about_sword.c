@@ -122,7 +122,7 @@ GtkWidget *gui_create_about_sword(void)
 			   0);
 
 	pixmap1 = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/sword3.xpm");
+					     "/sword3.png");
 	gtk_widget_show(pixmap1);
 	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 4);
 

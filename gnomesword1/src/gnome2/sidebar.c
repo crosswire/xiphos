@@ -455,64 +455,82 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
-	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
-		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
-						  &selected))
-			return;
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return;
 
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0,
-				   &mod, -1);
+	if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected))
+		return;
 
-		if (mod) {
-			if (button_mod_list == 3) {
-				if (!g_utf8_collate(mod, _("Parallel Page"))) {
-					g_free(mod);
-					return;
-				}
-				buf_module = g_strdup(mod);
-				gtk_menu_popup(GTK_MENU
-					       (sidebar.menu_modules),
-					       NULL, NULL, NULL, NULL,
-					       0,
-					       gtk_get_current_event_time
-					       ());
-				return;
-			}
-			if (!g_utf8_collate(mod, _("Parallel Page"))) {
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (widgets.
-						       notebook_text),
-						      settings.
-						      parallel_page);
-				//g_warning("Parallel Page");
-			}
-			sbtype = get_mod_type(mod);
-			switch (sbtype) {
-			case 0:
-			case 1:
-				gui_change_module_and_key(mod,
-							  settings.
-							  currentverse);
-				break;
-			case 2:
-				gtk_notebook_set_page
-				    (GTK_NOTEBOOK
-				     (widgets.workbook_lower), 0);
-				gui_change_module_and_key(mod,
-							  settings.
-							  dictkey);
-				break;
-			case 3:
-				gtk_notebook_set_page
-				    (GTK_NOTEBOOK
-				     (widgets.workbook_lower), 1);
-				gui_change_module_and_key(mod, NULL);
-				break;
-				//g_warning("mod = %s\nkey = %s",mod,settings.dictkey);
-			}
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &mod, -1);
+
+	if (!mod)
+		return;
+
+	if (button_mod_list == 3) {
+		if (!g_utf8_collate(mod, _("Parallel View"))) {
 			g_free(mod);
+			return;
 		}
+		buf_module = g_strdup(mod);
+		gtk_menu_popup(GTK_MENU
+			       (sidebar.menu_modules),
+			       NULL, NULL, NULL, NULL,
+			       0, gtk_get_current_event_time());
+		return;
 	}
+	
+	if (!g_utf8_collate(mod, _("Parallel View"))) {
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (widgets.
+					      button_parallel_view),
+					     TRUE);
+	}
+	
+	sbtype = get_mod_type(mod);
+	switch (sbtype) {
+	case 0:
+		if(button_mod_list == 2) {
+			gui_open_bibletext_dialog(mod);
+			break;
+		}
+		if (GTK_TOGGLE_BUTTON(widgets.button_parallel_view)->
+		    active) {
+			//settings.MainWindowModule = mod;
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (widgets.
+						      button_parallel_view),
+						     FALSE);
+			    
+		}
+		gui_change_module_and_key(mod, settings. currentverse);
+		break;
+	case 1:
+		if(button_mod_list == 2) {
+			gui_open_commentary_dialog(mod);
+			break;
+		}
+		gui_change_module_and_key(mod, settings.currentverse);
+		break;
+	case 2:
+		if(button_mod_list == 2) {
+			gui_open_dictlex_dialog(mod);
+			break;
+		}
+		gtk_notebook_set_page
+		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
+		gui_change_module_and_key(mod, settings.dictkey);
+		break;
+	case 3:
+		if(button_mod_list == 2) {
+			gui_open_gbs_dialog(mod);
+			break;
+		}
+		gtk_notebook_set_page
+		    	(GTK_NOTEBOOK(widgets.workbook_lower), 1);
+		gui_change_module_and_key(mod, NULL);
+		break;
+	}
+	g_free(mod);
 }
 
 
@@ -955,30 +973,62 @@ void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *   on_open_in_dialog_activate
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
 void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gint module_type;
-	
+
 	module_type = get_mod_type(buf_module);
 	switch (module_type) {
-		case -1:
-			break;
-		case TEXT_TYPE:
-			gui_open_bibletext_dialog(buf_module);
-			break;
-		case COMMENTARY_TYPE:
-			gui_open_commentary_dialog(buf_module);
-			break;
-		case DICTIONARY_TYPE:
-			gui_open_dictlex_dialog(buf_module);			
-			break;
-		case BOOK_TYPE:
-			gui_open_gbs_dialog(buf_module);
-			break;
+	case -1:
+		break;
+	case TEXT_TYPE:
+		gui_open_bibletext_dialog(buf_module);
+		break;
+	case COMMENTARY_TYPE:
+		gui_open_commentary_dialog(buf_module);
+		break;
+	case DICTIONARY_TYPE:
+		gui_open_dictlex_dialog(buf_module);
+		break;
+	case BOOK_TYPE:
+		gui_open_gbs_dialog(buf_module);
+		break;
 	}
 	g_free(buf_module);
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_about2_activate
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_about2_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
 
 void on_about2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {

@@ -196,7 +196,7 @@ void frontend_display(void)
 	if (settings.showdevotional) {
 		gui_display_devotional_in_sidebar();
 	}
-
+ 	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	g_print("done\n");
 }
 
