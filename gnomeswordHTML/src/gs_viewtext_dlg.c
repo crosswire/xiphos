@@ -48,7 +48,7 @@ GtkWidget *dlgViewText;
  * externs
  ****************************************************************************************/
 extern gchar current_verse[];
-
+//extern GList *cbBook_items;
 /******************************************************************************
  * viewtext callbacks
  ******************************************************************************/
@@ -98,7 +98,8 @@ static void
 on_btnGotoVerse_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+	//gchar *, *, *;
+	
 }
 
 
@@ -421,7 +422,7 @@ create_dlgViewText (void)
 
 		      
 	textList = NULL;
-	textList = setupVTSWORD(text);
+	textList = setupVTSWORD(text, combo11);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), textList);
 	gtk_entry_set_text(GTK_ENTRY(cbeModule), gettextmodSWORD());
 	//loadVTmodSWORD(gettextmodSWORD());
