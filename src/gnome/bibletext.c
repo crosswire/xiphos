@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _bibletext.c - gui for Bible text modules
+ * bibletext.c - gui for Bible text modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -43,7 +43,6 @@
 
 extern gboolean isrunningVT;
 extern gboolean gsI_isrunning;
-//extern GList *options;
 
 /******************************************************************************
  * globals to this file only 
@@ -52,6 +51,70 @@ static GList *text_list;
 static TEXT_DATA *cur_t;
 static gboolean display_change = TRUE;
 
+/******************************************************************************
+ * Name
+ *  set_options_on_page_change
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *  void set_options_on_page_change(TEXT_DATA * t)	
+ *
+ * Description
+ *   set module global options on page change
+ *
+ * Return value
+ *   void
+ */
+
+static void set_options_on_page_change(TEXT_DATA * t)
+{
+	if (t->gbfstrongs || t->thmlstrongs)
+		set_text_module_global_option("Strong's Numbers",
+				GTK_TOGGLE_BUTTON(t->t_btn_strongs)->
+					       active);
+	if (t->gbfmorphs || t->thmlmorphs)
+		set_text_module_global_option("Morphological Tags",
+				GTK_TOGGLE_BUTTON(t->t_btn_morphs)->
+						active);
+	if (t->gbffootnotes || t->thmlfootnotes)
+		set_text_module_global_option("Footnotes",
+				GTK_TOGGLE_BUTTON(t->t_btn_footnotes)->
+					       active);
+	if (t->greekaccents)
+		set_text_module_global_option("Greek Accents",
+				GTK_TOGGLE_BUTTON(t->t_btn_accents)->
+					       active);
+	if (t->lemmas)
+		set_text_module_global_option("Lemmas",
+				GTK_TOGGLE_BUTTON(t->t_btn_lemmas)->
+					       active);
+	if (t->scripturerefs)
+		set_text_module_global_option("Scripture Cross-references",
+				GTK_TOGGLE_BUTTON(t->t_btn_scripturerefs)->
+						active);
+	if (t->hebrewpoints)
+		set_text_module_global_option("Hebrew Vowel Points",
+				GTK_TOGGLE_BUTTON(t->t_btn_points)->
+					       active);
+	if (t->hebrewcant)
+		set_text_module_global_option("Hebrew Cantillation",
+				GTK_TOGGLE_BUTTON(t->t_btn_cant)->
+					       active);
+	if (t->headings)
+		set_text_module_global_option("Headings",
+				GTK_TOGGLE_BUTTON(t->t_btn_headings)->
+					       active);
+	if (t->variants) {
+		if(GTK_RADIO_MENU_ITEM(t->t_btn_primary)->check_menu_item.active)
+			set_text_global_option("Textual Variants", "Primary Reading");
+		else if(GTK_RADIO_MENU_ITEM(t->t_btn_secondary)->check_menu_item.active)
+			set_text_global_option("Textual Variants", "Secondary Reading");
+		else if(GTK_RADIO_MENU_ITEM(t->t_btn_all)->check_menu_item.active)
+			set_text_global_option("Textual Variants", "All Readings");
+		display_text(settings.currentverse);
+	}
+}
 
 /******************************************************************************
  * Name
@@ -140,74 +203,6 @@ static void set_page_text(gchar * modname, GList * text_list)
 
 /******************************************************************************
  * Name
- *  gui_set_text_frame_label
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *   void gui_set_text_frame_label(void)	
- *
- * Description
- *   sets text frame label to module name or null
- *
- * Return value
- *   void
- */
-
-void gui_set_text_frame_label(void)
-{
-	/*
-	 * set frame label to NULL if tabs are showing
-	 * else set frame label to module name
-	 */	
-	if (settings.text_tabs)
-		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
-	else
-		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
-	
-}
-
-/******************************************************************************
- * Name
- *  gui_set_text_page_and_key
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *  void gui_set_text_page_and_key(gint page_num, gchar * key)	
- *
- * Description
- *   change text module notebook page and display new key (reference)
- *
- * Return value
- *   void
- */
-
-void gui_set_text_page_and_key(gint page_num, gchar * key) 
-{
-	/*
-	 * we don't want backend_dispaly_text to be
-	 * called by on_notebook_text_switch_page
-	 */
-	display_change = FALSE;
-	if (settings.text_last_page != page_num) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (settings.notebook_text),
-				      page_num);
-	}
-
-	if (cur_t->is_locked) {
-		GtkWidget *dlg;	
-		dlg = gui_create_cipher_key_dialog(cur_t->mod_name);
-		gtk_widget_show(dlg);
-
-	} else
-		display_text(key);
-	display_change = TRUE;
-}
-
-/******************************************************************************
- * Name
  *  text_page_changed
  *
  * Synopsis
@@ -222,7 +217,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
  *   void
  */
  
-void text_page_changed(gint page_num, TEXT_DATA *t)
+static void text_page_changed(gint page_num, TEXT_DATA *t)
 {
 	/*
 	 * remember new module name
@@ -264,76 +259,12 @@ void text_page_changed(gint page_num, TEXT_DATA *t)
  *   void
  */
 
-void set_text_variant_global_option(gchar * option, gchar * choice)
+static void set_text_variant_global_option(gchar * option, gchar * choice)
 {
 	set_text_global_option(option, choice);
 	display_text(settings.currentverse);
 }
 
-/******************************************************************************
- * Name
- *  set_options_on_page_change
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *  void set_options_on_page_change(TEXT_DATA * t)	
- *
- * Description
- *   set module global options on page change
- *
- * Return value
- *   void
- */
-
-void set_options_on_page_change(TEXT_DATA * t)
-{
-	if (t->gbfstrongs || t->thmlstrongs)
-		set_text_module_global_option("Strong's Numbers",
-				GTK_TOGGLE_BUTTON(t->t_btn_strongs)->
-					       active);
-	if (t->gbfmorphs || t->thmlmorphs)
-		set_text_module_global_option("Morphological Tags",
-				GTK_TOGGLE_BUTTON(t->t_btn_morphs)->
-						active);
-	if (t->gbffootnotes || t->thmlfootnotes)
-		set_text_module_global_option("Footnotes",
-				GTK_TOGGLE_BUTTON(t->t_btn_footnotes)->
-					       active);
-	if (t->greekaccents)
-		set_text_module_global_option("Greek Accents",
-				GTK_TOGGLE_BUTTON(t->t_btn_accents)->
-					       active);
-	if (t->lemmas)
-		set_text_module_global_option("Lemmas",
-				GTK_TOGGLE_BUTTON(t->t_btn_lemmas)->
-					       active);
-	if (t->scripturerefs)
-		set_text_module_global_option("Scripture Cross-references",
-				GTK_TOGGLE_BUTTON(t->t_btn_scripturerefs)->
-						active);
-	if (t->hebrewpoints)
-		set_text_module_global_option("Hebrew Vowel Points",
-				GTK_TOGGLE_BUTTON(t->t_btn_points)->
-					       active);
-	if (t->hebrewcant)
-		set_text_module_global_option("Hebrew Cantillation",
-				GTK_TOGGLE_BUTTON(t->t_btn_cant)->
-					       active);
-	if (t->headings)
-		set_text_module_global_option("Headings",
-				GTK_TOGGLE_BUTTON(t->t_btn_headings)->
-					       active);
-	if (t->variants) {
-		if(GTK_RADIO_MENU_ITEM(t->t_btn_primary)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "Primary Reading");
-		else if(GTK_RADIO_MENU_ITEM(t->t_btn_secondary)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "Secondary Reading");
-		else if(GTK_RADIO_MENU_ITEM(t->t_btn_all)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "All Readings");
-		display_text(settings.currentverse);
-	}
-}
 
 /******************************************************************************
  * Name
@@ -353,7 +284,7 @@ void set_options_on_page_change(TEXT_DATA * t)
  *   void
  */
 
-void on_notebook_text_switch_page(GtkNotebook * notebook,
+static void on_notebook_text_switch_page(GtkNotebook * notebook,
 				  GtkNotebookPage * page,
 				  gint page_num, GList * tl)
 {
@@ -651,7 +582,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem,
  *   GtkWidget*
  */
 
-GtkWidget *gui_create_pm_text(TEXT_DATA * t)
+static GtkWidget *create_pm_text(TEXT_DATA * t)
 {
 	GtkWidget *pm_text;
 	GtkAccelGroup *pm_text_accels;
@@ -982,23 +913,73 @@ static void on_t_btn_toggled(GtkToggleButton * togglebutton,
 	set_text_module_global_option(option, togglebutton->active);
 }
 
-void
-on_primary_reading_activate(GtkMenuItem * menuitem, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_primary_reading_activate
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void on_primary_reading_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_primary_reading_activate(GtkMenuItem * menuitem,
+						gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "Primary Reading");
 }
 
-void
-on_secondary_reading_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_secondary_reading_activate
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void on_secondary_reading_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_secondary_reading_activate(GtkMenuItem * menuitem,
+						gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "Secondary Reading");
 }
 
-void
-on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_all_readings_activate
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void on_all_readings_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_all_readings_activate(GtkMenuItem * menuitem,
+						gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "All Readings");
@@ -1060,7 +1041,7 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
  *   void
  */
 
-void gui_create_text_pane(TEXT_DATA * t)
+static void create_text_pane(TEXT_DATA * t)
 {
 	GtkWidget *vbox;
 	GtkWidget *toolbar;
@@ -1401,6 +1382,76 @@ void gui_create_text_pane(TEXT_DATA * t)
 			   GTK_SIGNAL_FUNC
 			   (on_button_release_event), (TEXT_DATA *) t);
 }
+
+/******************************************************************************
+ * Name
+ *  gui_set_text_frame_label
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void gui_set_text_frame_label(void)	
+ *
+ * Description
+ *   sets text frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_text_frame_label(void)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings.text_tabs)
+		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
+	
+}
+
+/******************************************************************************
+ * Name
+ *  gui_set_text_page_and_key
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *  void gui_set_text_page_and_key(gint page_num, gchar * key)	
+ *
+ * Description
+ *   change text module notebook page and display new key (reference)
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_text_page_and_key(gint page_num, gchar * key) 
+{
+	/*
+	 * we don't want backend_dispaly_text to be
+	 * called by on_notebook_text_switch_page
+	 */
+	display_change = FALSE;
+	if (settings.text_last_page != page_num) {
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (settings.notebook_text),
+				      page_num);
+	}
+
+	if (cur_t->is_locked) {
+		GtkWidget *dlg;	
+		dlg = gui_create_cipher_key_dialog(cur_t->mod_name);
+		gtk_widget_show(dlg);
+
+	} else
+		display_text(key);
+	display_change = TRUE;
+}
+
+
 /******************************************************************************
  * Name
  *  gui_setup_text
@@ -1440,8 +1491,8 @@ void gui_setup_text(GList *mods)
 		t->find_dialog = NULL;
 		t->is_locked = module_is_locked(t->mod_name);
 		get_module_global_options(t);
-		gui_create_text_pane(t);
-		popupmenu = gui_create_pm_text(t);
+		create_text_pane(t);
+		popupmenu = create_pm_text(t);
 		gnome_popup_menu_attach(popupmenu, t->html, NULL);
 		new_text_display(t->html, t->mod_name);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);

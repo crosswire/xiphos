@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _bibletext.h - gui for Bible text modules
+ * bibletext.h - gui for Bible text modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,8 +25,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-//#include "main/bibletext.h"
 
 typedef struct _text_find_dialog Text_Find_Dialog;
 struct _text_find_dialog {
@@ -58,7 +56,6 @@ struct _text_data {
 	GtkWidget *t_btn_secondary;
 	GtkWidget *t_btn_all;
 	gchar *mod_name;
-	//gchar *mod_description;
 	gchar *search_string;
 	gchar *key;
 	gint mod_num;
@@ -80,16 +77,8 @@ struct _text_data {
 	Text_Find_Dialog *find_dialog;
 };
 
-void set_options_on_page_change(TEXT_DATA * t);	
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
-void text_page_changed(gint page_num, TEXT_DATA *t);
-void set_text_variant_global_option(gchar * option,
-				    gchar * choice);
-void on_notebook_text_switch_page(GtkNotebook *notebook,
-		GtkNotebookPage *page, gint page_num, GList *tl);
-void gui_create_text_pane(TEXT_DATA * t);
-GtkWidget *gui_create_pm_text(TEXT_DATA * t);
 void gui_setup_text(GList *mods);
 void gui_shutdown_text(void);
 	
