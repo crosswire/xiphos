@@ -99,6 +99,23 @@ extern GS_TABS	*p_tabs;
  * main menu call backs
  * popup menu call backs are located in 
  **********************************************************************************/
+/******************************************************************************
+ *on_help_contents_activate - user chose an history item
+******************************************************************************/
+void
+on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
+{       
+	pid_t pid;	
+	
+	if ((pid = fork ()) == 0)
+	{
+		execlp ("gnome-help-browser", "gnome-help-browser",
+			"ghelp:gnomesword");
+		g_error (_("Cannot launch gnome-help-browser"));
+	}	
+}
+
+
 
 /******************************************************************************
  *on_mnuHistoryitem1_activate - user chose an history item
