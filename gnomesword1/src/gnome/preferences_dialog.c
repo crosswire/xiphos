@@ -154,6 +154,7 @@ static gboolean updatehtml, updateSB, updatelayout;
 static EShortcutModel *shortcut_model;
 static GtkWidget *notebook7;
 static GtkWidget *dlg;
+static GtkWidget *font_picker;
 static ENTRY entry;
 static COLOR_PICKERS color_picker;
 static CHECK_BUTTONS check_button;
@@ -1494,6 +1495,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			     ("Zero is base font size Go up or down from there"),
 			     NULL);
 	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size), _("+0"));
+
+
+
 
 	button.gnomesword_defaults =
 	    gtk_button_new_with_label(_("GnomeSword Defaults"));

@@ -1,28 +1,23 @@
-dnl Process this file with autoconf to produce a configure script.
-dnl Created by Anjuta - will be overwritten
-dnl If you don't want it to overwrite it,
-dnl 	Please disable it in the Anjuta project configuration
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.9.0)
+AM_INIT_AUTOMAKE(gnomesword, 0.9.1)
 AM_CONFIG_HEADER(config.h)
 
+AC_PROG_MAKE_SET
 
 AC_ARG_ENABLE(gnome2,[--enable-gnome2 build for gnome2],gnome2=$enableval,gnome2="no") 
 
 if test "x$gnome2" = xyes; then
-
-	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
-	AC_DEFINE_UNQUOTED(SRC_MAKEFILE_AM, "backend main gnome2", [subdirctories for src makefile.am])
-	AC_SUBST(SRC_MAKEFILE_AM)
+	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])	
+	DIRS="backend main gnome2"
+	AC_SUBST(DIRS)
 	PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 libxml-2.0 sword,,exit)
 	
-else
-	AC_DEFINE_UNQUOTED(SRC_MAKEFILE_AM, "backend main gnome", [subdirctories for src makefile.am])
-	AC_SUBST(SRC_MAKEFILE_AM)
+else		
+	DIRS="backend main gnome"
+	AC_SUBST(DIRS)
 	PKG_CHECK_MODULES(GNOME, gtkhtml-1.1 gal libxml sword,,exit)
 fi
-
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 
@@ -41,7 +36,7 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-GETTEXT_PACKAGE=gnomesword
+GETTEXT_PACKAGE=gnomesword-1.0
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTTEXT_PACKAGE", [Package name for gettext])
 
@@ -67,9 +62,9 @@ fi
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
 else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
 fi
 
 

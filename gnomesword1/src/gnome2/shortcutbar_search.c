@@ -237,7 +237,8 @@ static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
 	GString *str;
 	gint search_params, finds;
-	gchar *search_string, *search_module;
+	const gchar *search_string;
+	gchar *search_module;
 
 	search_module = settings.sb_search_mod;
 	p_so->module_name = search_module;
