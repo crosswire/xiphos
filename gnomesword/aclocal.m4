@@ -692,6 +692,8 @@ AC_DEFUN([GNOME_INIT_HOOK],[
 	      *)
 		AC_MSG_RESULT(unknown library)
 	    esac
+            EXTRA_INCLUDEDIR=`$GNOME_CONFIG --cflags $i`
+            GNOME_INCLUDEDIR="$GNOME_INCLUDEDIR $EXTRA_INCLUDEDIR"
 	  done
 	fi
 ])
@@ -1200,6 +1202,98 @@ AC_DEFUN([AM_LC_MESSAGES],
     fi
   fi])
 
+
+AC_DEFUN(XML_I18N_TOOLS_NEWER_THAN_0_9,[ true ])
+
+dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION [,"G2" if always using --utf8] ])
+# serial 1 AC_PROG_XML_I18N_TOOLS
+AC_DEFUN(AC_PROG_XML_I18N_TOOLS,
+[
+  AC_DEFUN(X18T_PFORG1,  dnl and -u for G2
+        ifelse([$2],[G2],[ -u ], [ -p ]))
+  AC_DEFUN(X18T_XML_KIND, 
+        ifelse([$2],[G2],[ -u ],[ $(XML_I18N_XML_KIND) ]))
+  AC_DEFUN(X18T_KEYS_KIND, 
+        ifelse([$2],[G2],[ -u ],[ $(XML_I18N_KEYS_KIND) ]))
+
+  XML_I18N_MERGE_DESKTOP_RULE='%.desktop:   %.desktop.in   $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+XML_I18N_MERGE_DIRECTORY_RULE='%.directory: %.directory.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+     XML_I18N_MERGE_KEYS_RULE='%.keys:      %.keys.in      $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -k X18T_KEYS_KIND'
+      XML_I18N_MERGE_OAF_RULE='%.oaf:       %.oaf.in       $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -o -p'
+     XML_I18N_MERGE_PONG_RULE='%.pong:      %.pong.in      $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x X18T_PFORG1'
+   XML_I18N_MERGE_SERVER_RULE='%.server:    %.server.in    $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -o -u'
+    XML_I18N_MERGE_SHEET_RULE='%.sheet:     %.sheet.in     $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x -u'
+XML_I18N_MERGE_SOUNDLIST_RULE='%.soundlist: %.soundlist.in $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -d X18T_PFORG1'
+      XML_I18N_MERGE_XML_RULE='%.xml:       %.xml.in       $(top_builddir)/xml-i18n-merge $(wildcard $(top_srcdir)/po/*.po) ; $(top_builddir)/xml-i18n-merge $(top_srcdir)/po $< [$]@ -x X18T_XML_KIND'
+
+AC_SUBST(XML_I18N_MERGE_DESKTOP_RULE)
+AC_SUBST(XML_I18N_MERGE_DIRECTORY_RULE)
+AC_SUBST(XML_I18N_MERGE_KEYS_RULE)
+AC_SUBST(XML_I18N_MERGE_OAF_RULE)
+AC_SUBST(XML_I18N_MERGE_PONG_RULE)
+AC_SUBST(XML_I18N_MERGE_SERVER_RULE)
+AC_SUBST(XML_I18N_MERGE_SHEET_RULE)
+AC_SUBST(XML_I18N_MERGE_SOUNDLIST_RULE)
+AC_SUBST(XML_I18N_MERGE_XML_RULE)
+
+# Use the tools built into the package, not the ones that are installed.
+
+XML_I18N_EXTRACT='$(top_builddir)/xml-i18n-extract'
+AC_SUBST(XML_I18N_EXTRACT)dnl
+
+XML_I18N_MERGE='$(top_builddir)/xml-i18n-merge'
+AC_SUBST(XML_I18N_MERGE)dnl
+
+XML_I18N_UPDATE='$(top_builddir)/xml-i18n-update'
+AC_SUBST(XML_I18N_UPDATE)dnl
+
+AC_PATH_PROG(INTLTOOL_PERL, perl)
+if test -z "$INTLTOOL_PERL"; then
+   AC_MSG_ERROR([perl not found; required for xml-i18n-tools])
+fi
+if test -z "`$INTLTOOL_PERL -v | fgrep '5.' 2> /dev/null`"; then
+   AC_MSG_ERROR([perl 5.x required for xml-i18n-tools])
+fi
+
+dnl  manually sed perl in so people don't have to put the xml-i18n-tools scripts in their 
+dnl  AC_OUTPUT
+AC_OUTPUT_COMMANDS([
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-extract.in > xml-i18n-extract.out
+if cmp -s xml-i18n-extract xml-i18n-extract.out 2>/dev/null; then
+  rm -f xml-i18n-extract.out
+else
+  mv -f xml-i18n-extract.out xml-i18n-extract
+fi
+chmod ugo+x xml-i18n-extract
+chmod u+w xml-i18n-extract
+
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-merge.in > xml-i18n-merge.out
+if cmp -s xml-i18n-merge xml-i18n-merge.out 2>/dev/null; then
+  rm -f xml-i18n-merge.out
+else
+  mv -f xml-i18n-merge.out xml-i18n-merge
+fi
+chmod ugo+x xml-i18n-merge
+chmod u+w xml-i18n-merge
+
+sed -e "s:@INTLTOOL_PERL@:${INTLTOOL_PERL}:;" < ${srcdir}/xml-i18n-update.in > xml-i18n-update.out
+if cmp -s xml-i18n-update xml-i18n-update.out 2>/dev/null; then
+  rm -f xml-i18n-update.out
+else
+  mv -f xml-i18n-update.out xml-i18n-update
+fi
+chmod ugo+x xml-i18n-update
+chmod u+w xml-i18n-update
+], INTLTOOL_PERL=${INTLTOOL_PERL})
+
+# Redirect the config.log output again, so that the ltconfig log is not
+# clobbered by the next message.
+exec 5>>./config.log
+])
+
+dnl old names
+AC_DEFUN(AM_PROG_XML_I18N_TOOLS, [indir([AC_PROG_XML_I18N_TOOLS])])dnl
+
 dnl GNOME_COMPILE_WARNINGS
 dnl Turn on many useful compiler warnings
 dnl For now, only works on GCC
@@ -1595,7 +1689,9 @@ AC_DEFUN([GNOME_PTHREAD_CHECK],[
 	AC_CHECK_LIB(pthread, pthread_create, PTHREAD_LIB="-lpthread",
 		[AC_CHECK_LIB(pthreads, pthread_create, PTHREAD_LIB="-lpthreads",
 		    [AC_CHECK_LIB(c_r, pthread_create, PTHREAD_LIB="-lc_r",
-			[AC_CHECK_FUNC(pthread_create)]
+			[AC_CHECK_LIB(pthread, __pthread_attr_init_system, PTHREAD_LIB="-lpthread",
+				[AC_CHECK_FUNC(pthread_create)]
+			)]
 		    )]
 		)]
 	)

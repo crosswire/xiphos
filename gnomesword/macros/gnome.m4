@@ -115,6 +115,8 @@ AC_DEFUN([GNOME_INIT_HOOK],[
 	      *)
 		AC_MSG_RESULT(unknown library)
 	    esac
+            EXTRA_INCLUDEDIR=`$GNOME_CONFIG --cflags $i`
+            GNOME_INCLUDEDIR="$GNOME_INCLUDEDIR $EXTRA_INCLUDEDIR"
 	  done
 	fi
 ])
