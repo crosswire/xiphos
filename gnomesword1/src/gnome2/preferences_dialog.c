@@ -1203,6 +1203,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				       (scrolledwindow_treeview),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_treeview,
+                                             settings.shadow_type);
 
 	model = create_model();
 	treeview = gtk_tree_view_new_with_model(model);
@@ -1308,6 +1310,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				       (scrolledwindow56),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow56,
+                                             0);
 
 	viewport9 = gtk_viewport_new(NULL, NULL);
 	gtk_widget_show(viewport9);

@@ -320,21 +320,21 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(box_dict), hpaned, TRUE, TRUE, 0);
 	gtk_paned_set_position(GTK_PANED(hpaned), 195);
 
+	
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
+	gtk_paned_pack1(GTK_PANED(hpaned), vbox, TRUE, TRUE);
+	
+	widgets.entry_dict = gtk_entry_new();
+	gtk_widget_show(widgets.entry_dict);
+	gtk_box_pack_start(GTK_BOX(vbox), widgets.entry_dict, FALSE, TRUE, 0);
 
 	frame_entry = gtk_frame_new(NULL);
 	gtk_widget_show(frame_entry);
 	gtk_frame_set_shadow_type((GtkFrame *)frame_entry,
                                     settings.shadow_type);
-	gtk_paned_pack1(GTK_PANED(hpaned), frame_entry, TRUE, TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox), frame_entry, TRUE, TRUE, 0);
 	
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_container_add(GTK_CONTAINER(frame_entry), vbox);
-
-	widgets.entry_dict = gtk_entry_new();
-	gtk_widget_show(widgets.entry_dict);
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.entry_dict, FALSE, TRUE, 0);
-
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
@@ -344,8 +344,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(widgets.listview_dict);
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW
 				     (widgets.listview_dict), TRUE);
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.listview_dict, TRUE,
-			   TRUE, 0);
+	
+	gtk_container_add(GTK_CONTAINER(frame_entry), widgets.listview_dict);
+	
+	
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
 					  (widgets.listview_dict),
 					  FALSE);
