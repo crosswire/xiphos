@@ -18,8 +18,8 @@ COMMON_SOURCE = \
         display.h \
         filestuff.cpp \
         filestuff.h \
-        GnomeSword.cpp \
-        GnomeSword.h \
+        gs_sword.cpp \
+        gs_sword.h \
         interface.c \
         interface.h \
         listeditor.cpp \

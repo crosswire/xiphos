@@ -1,3 +1,10 @@
+2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.3.5
+	* split GnomeSword.cpp into gs_sword.cpp and gs_gnomesword.c
+	* split GnomeSword.h into gs_sword.h and gs_gnomesword.h
+
+
 2000-12-04 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*release 0.3.4
