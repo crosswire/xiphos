@@ -1,9 +1,9 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/menustuff.cpp,/home/tb/Projects2/gnomesword/gnomesword/filestuff.cpp,/home/tb/Projects2/gnomesword/gnomesword/menustuff.h,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.h,/home/tb/Projects2/gnomesword/gnomesword/support.cpp,/home/tb/Projects2/gnomesword/ChangeLog,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,
 show_outputview=true
 show_treeview=true
-header_file=/home/tb/Projects2/gnomesword/ChangeLog
+header_file=Untitled.h
 cpp_file=/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp
 browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/funcref.htm#NONANSIUNIX
 [COPYING]
@@ -30,6 +30,11 @@ install_location=
 dist=true
 install=false
 type=DATA
+[gnomesword/printstuff.h]
+install_location=
+dist=true
+install=false
+type=HEADER
 [gnomesword/interface.h]
 install_location=
 dist=true
@@ -64,6 +69,11 @@ dist=true
 install=false
 type=HEADER
 [gnomesword/filestuff.cpp]
+install_location=
+dist=true
+install=false
+type=SOURCE
+[gnomesword/printstuff.cpp]
 install_location=
 dist=true
 install=false
@@ -151,7 +161,7 @@ type=DATA
 sub_dirs=
 type=normal
 [gnomesword/Makefile.am]
-files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.cpp,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.cpp,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,
+files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.cpp,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.cpp,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,gnomesword/printstuff.h,gnomesword/printstuff.cpp,
 sub_dirs=
 type=prog_main
 [gnomesword.lsm]

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.1.7)
+AM_INIT_AUTOMAKE(gnomesword, 0.1.8)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -23,6 +23,7 @@ AC_SUBST(PACKAGE_PIXMAPS_DIR)
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking w/aspell],spellchecking=$enableval,spellchecking="no")
+AC_ARG_ENABLE(printing,[--enable-printing		enable printing w/gnome-print-0.20],printing=$enableval,printing="no")
 
 LIBS="$LIBS -L/usr/local/lib -L/usr/lib -lsword -lz"
 
@@ -38,7 +39,20 @@ fi
 if test "x$spellchecking" = xyes; then
 	AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell spell checking])
 fi
-AM_CONDITIONAL(SPELLING,test x$spellchecking = xyes) 
+
+if test "x$printing" = xyes; then
+	LIBS="$LIBS -lgnomeprint `gnome-config --libs gnomeui` `xml-config --libs`"
+fi
+if test "x$printing" = xyes; then
+	AC_DEFINE(USE_GNOMEPRINT, 1, [Define if you want to use printing w/gnome-print])
+fi
+
+AM_CONDITIONAL(SPELLING,test x$spellchecking = xyes && test "x$printing" = xno)
+AM_CONDITIONAL(PRINTING,test x$printing = xyes && test "x$spellchecking" = xno)
+AM_CONDITIONAL(SPELLING_PRINTING,test x$printing = xyes && test "x$spellchecking" = xyes)
+AM_CONDITIONAL(NO_OPS,test x$printing = xno && test "x$spellchecking" = xno)
+
+
 AC_OUTPUT([
 Makefile
 macros/Makefile
@@ -53,4 +67,10 @@ if test "x$spellchecking" = xyes; then
         echo "Spellchecking with Aspell:                    enabled"
 else
         echo "Spellchecking with Aspell:                    disabled"
+fi
+
+if test "x$printing" = xyes; then
+        echo "printing with gnome-print:                    enabled"
+else
+        echo "printing with gnome-print:                    disabled"
 fi

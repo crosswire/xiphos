@@ -381,7 +381,7 @@ GTKChapDisp::Display(SWModule &imodule)
     	if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='o') //-- begin gbf italic
    		{				
 				i=i+7;
-				//-- we print what we have so far in standard font
+				//-- we print what we have so far in FO font
 				gtk_text_insert(GTK_TEXT(gtkText), fo_font, &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				myverse[i]='\n';
@@ -451,12 +451,12 @@ GTKChapDisp::Display(SWModule &imodule)
 				if((!bVerseStyle) || poetry_on || niv_on) //-- we only need new line if we are not
 				{                                         //-- in verse style or poetry is on or
 					i=i+3;                                  //-- we are using the niv
-					myverse[i] = '\t';
-					verseBuf[j] = '\n';
-					++j;
+					myverse[i] = '\t'; //-- add a tab to beginning of next line
+					verseBuf[j] = '\n';//-- add new line to end of this line
+					++j; 					
 				}
 			}		
-			if(myverse[i] == '<' && myverse[i+1] =='C')
+			if(myverse[i] == '<' && myverse[i+1] =='C') //-- catch any C format stuff left
     		{				
     			while(myverse[i] != '>')
     			{
