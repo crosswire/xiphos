@@ -555,7 +555,7 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_widget_show (btnSyncDL);
 	gtk_box_pack_start (GTK_BOX (hbox), btnSyncDL, FALSE, TRUE, 0);
 	
-	tmp_toolbar_icon = gtk_image_new_from_stock ("gtk-refresh", 
+	tmp_toolbar_icon = gtk_image_new_from_stock (GTK_STOCK_REFRESH, 
 						GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show (tmp_toolbar_icon);
 	gtk_container_add (GTK_CONTAINER (btnSyncDL), tmp_toolbar_icon);
