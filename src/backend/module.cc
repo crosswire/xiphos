@@ -766,7 +766,7 @@ int backend_get_mod_type(char *mod_name)
 {
 
 	ModMap::iterator it;	//-- iteratior
-	if((!mod_name) || (strlen(mod_name) < 3)) 
+	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
 	//-- iterate through the modules until we find modName 
 	it = sw.main_mgr->Modules.find(mod_name);
