@@ -59,16 +59,22 @@ extern gchar current_verse[];
 
 extern gboolean gsI_isrunning;
 
-
+/****************************************************************************************
+ * update the book, chapter and verse contorls
+ ****************************************************************************************/
 static void updatecontrols(void)
 {
-	/*g_warning("%s %d:%d\n", VTgetbookSWORD(), VTgetchapterSWORD(),
-		  VTgetverseSWORD());*/
-	gtk_entry_set_text(GTK_ENTRY(cbeBook), VTgetbookSWORD());
+	gchar *buf;
+	
+	buf =  VTgetbookSWORD();
+	gtk_entry_set_text(GTK_ENTRY(cbeBook), buf);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spbVTChapter),
 				  VTgetchapterSWORD());
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spbVTVerse),
 				  VTgetverseSWORD());
+	/*** buf was allocated with g_strdup() in gs_viewtext_sw.cpp
+	       so we free it here ***/
+	g_free(buf);
 }
 
 

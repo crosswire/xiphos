@@ -38,6 +38,19 @@ gint groupnum1 = 0,
         groupnum3 = 0,
         groupnum4 = 0;
 
+
+/*****************************************************************************
+ *      for any shortcut bar item clicked
+ *****************************************************************************/
+void
+on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
+			      GdkEvent * event,
+			      gint group_num, gint item_num)
+{
+	sbchangeModSword(gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar)),
+			GTK_WIDGET(shortcut_bar), group_num, item_num);
+}
+
 void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 {
 	GList *tmp;
