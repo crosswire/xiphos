@@ -1494,7 +1494,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/GnomeSword.png", &error);
+				     "/gs2-48x48.png", &error);
 	if (!icon_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
 			error->message);
@@ -1506,7 +1506,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/GnomeSword.png", &error);
+				     "/gs2-48x48.png", &error);
 	if (!icon_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
 			error->message);
@@ -1517,7 +1517,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	icon_pixbuf = NULL;
 	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.xpm",
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.png",
 				     &error);
 	if (!icon_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
