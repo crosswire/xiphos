@@ -54,6 +54,7 @@ GtkWidget
 	*footnotes,	/* widget to access toggle menu - for footnotes */
   	*strongsnum,/* widget to access toggle menu - for strongs numbers */
 	*hebrewpoints,
+	*cantillationmarks,
 	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
 	*studypad,  /* studypad text widget */
@@ -175,8 +176,12 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_morphs_activate);
  	strongsnum   = additemtooptionmenu(app, _("_Settings/"), _("Show Strongs Numbers"),
  				(GtkMenuCallback)on_strongs_numbers1_activate); 
- 	hebrewpoints   = additemtooptionmenu(app, _("_Settings/"), _("Show Hebrew Points"),
- 				(GtkMenuCallback)on_hebrew_points_activate); 		
+	/*
+ 	hebrewpoints   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Hebrew Points"),
+ 				(GtkMenuCallback)on_hebrew_points_activate); 	
+ 	cantillationmarks   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Cantillation Marks"),
+ 				(GtkMenuCallback)on_cantillation_marks_activate); 	
+	*/
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
@@ -338,7 +343,27 @@ void UpdateChecks(GtkWidget *app)
 	else
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */
 	/* set footnote menu checkitem */			
-	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;	
+	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
+	
+	//GTK_CHECK_MENU_ITEM (hebrewpoints)->active = settings->hebrewpoints;
+	//GTK_CHECK_MENU_ITEM (cantillationmarks)->active = settings->cantillationmarks;
+	
+	/* set Hebrew Vowel Point to last setting */
+	if(settings->hebrewpoints)	
+		/* keep  in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","On");  
+	else
+		/* keep in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","Off");	
+	
+	/* set Hebrew Cantillation to last setting */
+	if(settings->cantillationmarks)	
+		/* keep  in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Cantillation","On");  
+	else
+		/* keep  in sync with menu */
+		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Cantillation","Off");	
+	
 	/* set Strong's numbers to last setting */
 	if(settings->strongs)	
 		/* keep strongs numbers in sync with menu */

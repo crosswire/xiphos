@@ -1,3 +1,7 @@
+2001-10-19 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*  fixed to build using gtkhtml-0.15.99-snap.ximian.200110181519
+
 2001-10-10 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* released 0.5.2a - mostly bug fixes

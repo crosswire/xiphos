@@ -9,7 +9,7 @@
     * tbiggs@users.sourceforge.net
     *
  */
- 
+  
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -359,19 +359,11 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *widget;
-	gchar *buf;
 	GtkHTML *html;
 
 	widget = lookup_widget(settings->app, (gchar *) user_data);
-
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
-	buf = html->engine->clipboard
-	    ? html_object_get_selection_string(html->engine->clipboard)
-	    : html_engine_get_selection_string(html->engine);
-	g_string_free(gs_clipboard, TRUE);
-	gs_clipboard = g_string_new(buf);
-	//g_print(gs_clipboard->str);
 }
 
 /***************************************************************************************************
@@ -381,7 +373,6 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
 	GtkWidget *entry, *notebook;
-	gchar *buf;
 	GtkHTML *html;
 	gint page;
 
@@ -393,16 +384,13 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem,
 	}
 	html = GTK_HTML(usehtml);
 	gtk_html_select_word(GTK_HTML(html));
-	buf = NULL;
-	buf = html->engine->clipboard
-	    ? html_object_get_selection_string(html->engine->clipboard)
-	    : html_engine_get_selection_string(html->engine);
-	if (buf) {
-		entry =
-		    lookup_widget(settings->app, "dictionarySearchText");
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		//dictSearchTextChangedSWORD(buf);
-	}
+	gtk_html_copy(html); /* copy selected word to clipboard */
+	entry = lookup_widget(settings->app, "dictionarySearchText");
+	/* clear dictionary entry */
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+	/* put selected word in dictionary entry */
+	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));
+	
 }
 
 /***************************************************************************************************
@@ -412,7 +400,6 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
 	GtkWidget *entry, *notebook;
-	gchar *buf;
 	GtkHTML *html;
 	gint page;
 
@@ -422,19 +409,15 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
 	}
-	//widget = lookup_widget(settings->app, htmlname);      
+	      
 	html = GTK_HTML(usehtml);
-	//gtk_html_select_word(GTK_HTML(html));
-	buf = NULL;
-	buf = html->engine->clipboard
-	    ? html_object_get_selection_string(html->engine->clipboard)
-	    : html_engine_get_selection_string(html->engine);
-	if (buf) {
-		entry =
-		    lookup_widget(settings->app, "dictionarySearchText");
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		//dictSearchTextChangedSWORD(buf);
-	}
+	gtk_html_copy(html);
+	entry = lookup_widget(settings->app, "dictionarySearchText");
+	/* clear dictionary entry */
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+	/* put selected word in dictionary entry */
+	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));	
+	
 }
 
 /***************************************************************************************************
@@ -450,9 +433,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	widget = lookup_widget(settings->app, (gchar *) user_data);
 	html = GTK_HTML(widget);
 	buf = NULL;
-	buf = html->engine->clipboard
-	    ? html_object_get_selection_string(html->engine->clipboard)
-	    : html_engine_get_selection_string(html->engine);
+	buf = html_object_get_selection_string(html->engine->clipboard, html->engine);
 	if (buf)
 		changeVerseSWORD(buf);
 }

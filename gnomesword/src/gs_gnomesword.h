@@ -110,9 +110,13 @@ struct _settings {
 		usedefault,
 		strongs,	//-- toogle button and check menu states
 		morphs,
+		hebrewpoints,
+		cantillationmarks,
 	        footnotes,
 		strongsint,	
 		morphsint,
+		hebrewpointsint,
+		cantillationmarksint,
 	        footnotesint,
 	        versestyle,
 	        interlinearpage,

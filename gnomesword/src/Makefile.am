@@ -83,14 +83,14 @@ COMMON_SOURCE =  \
     sw_viewcomm_dlg.h\
     sw_viewdict_dlg.cpp \
     sw_viewdict_dlg.h \
+    printstuff.c \
+    printstuff.h\
     gbfhtmlhref.cpp \
     gbfhtmlhref.h\
     thmlhtmlhref.cpp \
     thmlhtmlhref.h\
     sw_latin1utf8.cpp \
-    sw_latin1utf8.h\
-    printstuff.c \
-    printstuff.h
+    sw_latin1utf8.h
 
 SPELLING_SOURCE =  \
     debug.h \
@@ -113,7 +113,8 @@ COMMON_LDADD = \
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS) \
-    $(GNOME_APP_LIBS)
+    $(GNOME_APP_LIBS) \
+    -L /usr/lib -licuuc -licui18n
 
 if SHORTCUTBAR_SPELL
 gnomesword_SOURCES = \

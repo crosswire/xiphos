@@ -42,6 +42,7 @@
 //#include <thmlhtmlhref.h>
 #include "thmlhtmlhref.h"
 //#include <latin1utf8.h>
+#include "sw_latin1utf8.h"
 
 #ifndef __GNUC__
 #include <io.h>
@@ -50,7 +51,6 @@
 #include <unixstr.h>
 #endif
 
-#include "sw_latin1utf8.h"
 #include "sw_gnomesword.h"
 #include "sw_utility.h"
 
