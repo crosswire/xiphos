@@ -30,7 +30,7 @@ EXTRA_DIST = \
 gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
 
 gnomemenudir = $(datadir)/applications
-gnomemenu_premerge_file = gnomesword2.desktop.in
+gnomemenu_premerge_file = gnomesword.desktop.in
 gnomemenu_DATA = $(gnomemenu_premerge_file:.desktop.in=.desktop)
 
 install-data-local:
