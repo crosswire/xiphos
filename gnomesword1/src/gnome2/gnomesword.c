@@ -50,6 +50,7 @@
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
 #include "gui/mod_mgr.h"
+#include "gui/tabbed_browser.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -334,6 +335,8 @@ void shutdown_frontend(void)
 
 	if (settings.havepercomm)
 		gui_shutdown_percomm();
+	
+	gui_notebook_main_shutdown();
 
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
 	
