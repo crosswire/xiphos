@@ -41,8 +41,8 @@
 #include "support.h"
 
 #include  <widgets/e-paned/e-paned.h>
-#include  <widgets/e-paned/e-hpaned.h/>
-#include  <widgets/e-paned/e-vpaned.h/>
+#include  <widgets/e-paned/e-hpaned.h>
+#include  <widgets/e-paned/e-vpaned.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
