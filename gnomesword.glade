@@ -108,46 +108,69 @@
   <name>menu1</name>
 
   <widget>
-    <class>GtkPixmapMenuItem</class>
-    <name>copy1</name>
+    <class>GtkMenuItem</class>
+    <name>copy7</name>
     <signal>
       <name>activate</name>
       <handler>on_copy3_activate</handler>
-      <last_modification_time>Mon, 17 Apr 2000 09:31:23 GMT</last_modification_time>
+      <last_modification_time>Thu, 21 Sep 2000 16:33:50 GMT</last_modification_time>
     </signal>
-    <stock_item>GNOMEUIINFO_MENU_COPY_ITEM</stock_item>
+    <label>Copy</label>
+    <right_justify>False</right_justify>
   </widget>
 
   <widget>
-    <class>GtkPixmapMenuItem</class>
-    <name>lookup_selection1</name>
+    <class>GtkMenuItem</class>
+    <name>lookup_selection</name>
     <signal>
       <name>activate</name>
       <handler>on_lookup_selection_activate</handler>
-      <last_modification_time>Sat, 22 Jul 2000 13:45:06 GMT</last_modification_time>
+      <last_modification_time>Thu, 21 Sep 2000 16:34:16 GMT</last_modification_time>
     </signal>
     <label>Lookup Selection</label>
     <right_justify>False</right_justify>
-    <stock_icon>GNOME_STOCK_MENU_SEARCH</stock_icon>
   </widget>
 
   <widget>
-    <class>GtkPixmapMenuItem</class>
+    <class>GtkMenuItem</class>
     <name>about_this_module1</name>
     <signal>
       <name>activate</name>
       <handler>on_about_this_module1_activate</handler>
-      <last_modification_time>Mon, 19 Jun 2000 19:15:15 GMT</last_modification_time>
+      <last_modification_time>Thu, 21 Sep 2000 16:35:09 GMT</last_modification_time>
     </signal>
     <label>About this module</label>
     <right_justify>False</right_justify>
-    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
   </widget>
 
   <widget>
     <class>GtkMenuItem</class>
     <name>separator2</name>
     <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>view_module3</name>
+    <label>View Module</label>
+    <right_justify>False</right_justify>
+
+    <widget>
+      <class>GtkMenu</class>
+      <name>view_module3_menu</name>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>item4</name>
+	<signal>
+	  <name>activate</name>
+	  <handler>on_mainText_activate</handler>
+	  <last_modification_time>Thu, 21 Sep 2000 16:38:32 GMT</last_modification_time>
+	</signal>
+	<label>item4</label>
+	<right_justify>False</right_justify>
+      </widget>
+    </widget>
   </widget>
 </widget>
 

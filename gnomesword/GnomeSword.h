@@ -76,9 +76,10 @@ void UpdateChecks(GtkWidget * mainform);
 
 void
 initSword(GtkWidget * mainform,
-	  GtkWidget * menu1,
 	  GtkWidget * menu2,
-	  GtkWidget * menu3, GtkWidget * menu4, GtkWidget * menu5);
+	  GtkWidget * menu3,
+	  GtkWidget * menu4,
+	  GtkWidget * menu5);
 
 void searchSWORD(GtkWidget * searchFrm);
 

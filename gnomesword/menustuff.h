@@ -55,3 +55,5 @@ removemenuitems(GtkWidget * MainFrm,
 GtkWidget *create_pmComments2(GList * mods);
 
 GtkWidget *create_pmDict(GList * mods);
+
+GtkWidget* create_pmBible(GList * mods);

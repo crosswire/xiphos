@@ -65,7 +65,7 @@ main (int argc, char *argv[])
    * the project. Delete any components that you don't want shown initially.
    */
 
-  menu1 = create_menu1();
+  //menu1 = create_menu1();
   menu2 = create_menuInt1();
   menu3 = create_menuInt2();
   menu4 = create_menuInt3();
@@ -81,7 +81,7 @@ main (int argc, char *argv[])
   {
   	createFiles();
   }
-  initSword(mainwindow,menu1,menu2,menu3,menu4,menu5);
+  initSword(mainwindow,menu2,menu3,menu4,menu5);
   gtk_widget_show(mainwindow);
   UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
   gtk_main ();
