@@ -66,7 +66,7 @@ char GS_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 						case 'T':               // Tense	
 							strcpy(to," <a href=\"#");
 							to += strlen(to);					
-							for (i = 2;
+							for (i = 1;
 					     			i < strlen(token); i++)
 							*to++ = token[i];
 							strcpy(to," \"><small><em>");

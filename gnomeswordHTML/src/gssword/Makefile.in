@@ -110,10 +110,10 @@ cxxflags_set = @cxxflags_set@
 
 noinst_LIBRARIES = libgssword.a
 
-INCLUDES =      $(GNOME_INCLUDEDIR)         $(SWORD_CPPFLAGS) 	-I$(top_srcdir) 	-I$(top_srcdir)/html 	-I$(top_srcdir)/src         -I$(top_srcdir)/src/gsdialogs 	-I$(top_srcdir)/src/gssword         -I /usr/include/gtkhtml 	$(EXTRA_GNOME_CFLAGS)
+INCLUDES =      $(GNOME_INCLUDEDIR)         $(SWORD_CPPFLAGS)     $(EXTRA_APP_CFLAGS) 	-I$(top_srcdir) 	-I$(top_srcdir)/html 	-I$(top_srcdir)/src         -I$(top_srcdir)/src/gsdialogs 	-I$(top_srcdir)/src/gssword         -I /usr/include/gtkhtml 	$(EXTRA_GNOME_CFLAGS)
 
 
-libgssword_a_SOURCES =      display.cpp     display.h     gs_display.cpp     gs_display.h     gs_sword.cpp     gs_sword.h     sw_utility.cpp     sw_utility.h     gs_gbfhtml.cpp     gs_gbfhtml.h     gs_wgsil.cpp     gs_wgsil.h
+libgssword_a_SOURCES =        display.cpp       display.h       gs_display.cpp       gs_display.h       gs_sword.cpp       gs_sword.h       sw_utility.cpp       sw_utility.h       gs_gbfhtml.cpp       gs_gbfhtml.h       gs_viewtext_sw.cpp        gs_viewtext_sw.h        gs_information_sw.cpp        gs_information_sw.h       gs_wgsil.cpp       gs_wgsil.h
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -127,7 +127,7 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libgssword_a_LIBADD = 
 libgssword_a_OBJECTS =  display.o gs_display.o gs_sword.o sw_utility.o \
-gs_gbfhtml.o gs_wgsil.o
+gs_gbfhtml.o gs_viewtext_sw.o gs_information_sw.o gs_wgsil.o
 AR = ar
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -147,7 +147,8 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/display.P .deps/gs_display.P .deps/gs_gbfhtml.P \
-.deps/gs_sword.P .deps/gs_wgsil.P .deps/sw_utility.P
+.deps/gs_information_sw.P .deps/gs_sword.P .deps/gs_viewtext_sw.P \
+.deps/gs_wgsil.P .deps/sw_utility.P
 SOURCES = $(libgssword_a_SOURCES)
 OBJECTS = $(libgssword_a_OBJECTS)
 

@@ -346,6 +346,7 @@ void on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	
 	if (*url == '#') {
 		++url;		/* remove # */
+		if(*url == 'T') ++url;
 		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
 		lookupStrongsSWORD(atoi(url));
 	} else  if(*url == '*')   {

@@ -110,10 +110,10 @@ cxxflags_set = @cxxflags_set@
 
 noinst_LIBRARIES = libgsdialogs.a
 
-INCLUDES =      $(GNOME_INCLUDEDIR)         $(SWORD_CPPFLAGS) 	-I$(top_srcdir) 	-I$(top_srcdir)/html 	-I$(top_srcdir)/src     	-I$(top_srcdir)/src/gssword         -I$(top_srcdir)/src/gsdialogs         -I /usr/include/gtkhtml 	$(EXTRA_GNOME_CFLAGS)
+INCLUDES =       $(GNOME_INCLUDEDIR)      $(SWORD_CPPFLAGS)      $(EXTRA_APP_CFLAGS)      -I$(top_srcdir)      -I$(top_srcdir)/html      -I$(top_srcdir)/src      -I$(top_srcdir)/src/gssword      -I$(top_srcdir)/src/gsdialogs      -I /usr/include/gtkhtml      $(EXTRA_GNOME_CFLAGS)
 
 
-libgsdialogs_a_SOURCES =         gs_abouts.c        gs_abouts.h        gs_listeditor.c        gs_listeditor.h        gs_information_dlg.c        gs_viewcomm_dlg.h        gs_viewtext_dlg.c        gs_viewtext_sw.h        gs_information_dlg.h        gs_viewdict_dlg.c        gs_viewtext_dlg.h        gs_viewcomm_dlg.c        gs_viewdict_dlg.h        gs_viewtext_sw.cpp
+libgsdialogs_a_SOURCES =         gs_abouts.c        gs_abouts.h        gs_listeditor.c        gs_listeditor.h        gs_information_dlg.c        gs_information_dlg.h        gs_viewcomm_dlg.h        gs_viewtext_dlg.c        gs_viewdict_dlg.c        gs_viewtext_dlg.h        gs_viewcomm_dlg.c        gs_viewdict_dlg.h
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -128,13 +128,8 @@ LIBS = @LIBS@
 libgsdialogs_a_LIBADD = 
 libgsdialogs_a_OBJECTS =  gs_abouts.o gs_listeditor.o \
 gs_information_dlg.o gs_viewtext_dlg.o gs_viewdict_dlg.o \
-gs_viewcomm_dlg.o gs_viewtext_sw.o
+gs_viewcomm_dlg.o
 AR = ar
-CXXFLAGS = @CXXFLAGS@
-CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -149,13 +144,13 @@ TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/gs_abouts.P .deps/gs_information_dlg.P \
 .deps/gs_listeditor.P .deps/gs_viewcomm_dlg.P .deps/gs_viewdict_dlg.P \
-.deps/gs_viewtext_dlg.P .deps/gs_viewtext_sw.P
+.deps/gs_viewtext_dlg.P
 SOURCES = $(libgsdialogs_a_SOURCES)
 OBJECTS = $(libgsdialogs_a_OBJECTS)
 
 all: all-redirect
 .SUFFIXES:
-.SUFFIXES: .S .c .cpp .lo .o .s
+.SUFFIXES: .S .c .lo .o .s
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu src/gsdialogs/Makefile
 
@@ -209,10 +204,6 @@ libgsdialogs.a: $(libgsdialogs_a_OBJECTS) $(libgsdialogs_a_DEPENDENCIES)
 	-rm -f libgsdialogs.a
 	$(AR) cru libgsdialogs.a $(libgsdialogs_a_OBJECTS) $(libgsdialogs_a_LIBADD)
 	$(RANLIB) libgsdialogs.a
-.cpp.o:
-	$(CXXCOMPILE) -c $<
-.cpp.lo:
-	$(LTCXXCOMPILE) -c $<
 
 tags: TAGS
 
@@ -289,25 +280,6 @@ maintainer-clean-depend:
 %.lo: %.c
 	@echo '$(LTCOMPILE) -c $<'; \
 	$(LTCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
-	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
-	  < .deps/$(*F).pp > .deps/$(*F).P; \
-	tr ' ' '\012' < .deps/$(*F).pp \
-	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
-	    >> .deps/$(*F).P; \
-	rm -f .deps/$(*F).pp
-
-%.o: %.cpp
-	@echo '$(CXXCOMPILE) -c $<'; \
-	$(CXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
-	@-cp .deps/$(*F).pp .deps/$(*F).P; \
-	tr ' ' '\012' < .deps/$(*F).pp \
-	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
-	    >> .deps/$(*F).P; \
-	rm .deps/$(*F).pp
-
-%.lo: %.cpp
-	@echo '$(LTCXXCOMPILE) -c $<'; \
-	$(LTCXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
 	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
 	  < .deps/$(*F).pp > .deps/$(*F).P; \
 	tr ' ' '\012' < .deps/$(*F).pp \

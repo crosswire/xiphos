@@ -57,6 +57,8 @@ GtkWidget *spbVTVerse;
 extern gchar current_verse[];
 //extern GList *cbBook_items;
 
+extern gboolean gsI_isrunning;
+
 
 static void updatecontrols(void)
 {
@@ -81,18 +83,39 @@ static void updatecontrols(void)
 static
 void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf;
+	gchar *buf,*modName;
 	
 	if (*url == '#') {
-		GtkWidget *dlg;
+		static GtkWidget *dlg;
+		
+		if(!gsI_isrunning){
+		 	dlg = create_dlgInformation();
+		 }
 		++url;		/* remove # */
-		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
-		 //dlg = create_dlgInformation();
-		  //gtk_widget_show(dlg);
+		if(*url == 'T') ++url;
+		if(*url == 'G' ) {
+			++url;
+			modName = g_strdup("StrongsGreek");
+			buf = g_strdup(url);
+			loadmodandkey(modName, buf);
+			g_warning(modName);
+			g_free(buf);
+			g_free(modName);
+		}   		
+		if(*url == 'H') {
+			++url;
+			modName =  g_strdup("StrongsHebrew");
+			buf = g_strdup(url);
+			loadmodandkey(modName, buf);
+			g_warning(modName);
+			g_free(buf);
+			g_free(modName);
+		}
+		 gtk_widget_show(dlg);
 		//lookupStrongsSWORD(atoi(url));
 	} else  if(*url == '*')   {
 		++url;
-		while(*url != ']') {			
+		while(*url != ']') {
 			++url;
 		} 
 		++url;
