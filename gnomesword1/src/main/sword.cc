@@ -457,6 +457,7 @@ void main_init_backend(void)
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
 #ifdef DEBUG	
+	g_print("date: %s\n", getenv("DATE"));
 	g_print("%s sword-%s\n", _("Starting"), backend->get_sword_version());
 	g_print("%s\n", _("Initiating SWORD"));
 	g_print("%s: %s\n",_("path to sword"),mgr.prefixPath);
