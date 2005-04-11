@@ -440,6 +440,46 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 }
 
 
+
+
+
+struct _info {
+	GnomeFont *local_font;
+	gint page_num, pages;
+	gchar *header_title;
+	gchar *footer_title;
+	gboolean header_date;
+	gboolean header_page_num;
+	gboolean footer_date;
+	gboolean footer_page_num;
+};
+
+static void print_header(GtkHTML * html,
+			 GnomePrintContext * print_context, gdouble x,
+			 gdouble y, gdouble width, gdouble height,
+			 gpointer user_data)
+{
+/*	struct _info *info = (struct  _info*) user_data;
+	
+	if (info->local_font) {
+		gnome_print_line_stroked(print_context, x, y, width, y);
+		
+		gnome_print_gsave(print_context);
+		gnome_print_newpath(print_context);
+		gnome_print_setrgbcolor(print_context, .0, .0, .0);		
+		gnome_print_moveto(print_context, x,
+				   y -
+				   gnome_font_get_ascender(info->local_font));
+		gnome_print_setfont(print_context, info->local_font);
+		gnome_print_show(print_context, info->header_title);
+		gnome_print_grestore(print_context);
+		
+	
+		info->page_num++;
+	}*/
+}
+
+
 /******************************************************************************
  * Name
  *   print_footer
@@ -457,56 +497,79 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
  * Return value
  *   void
  */
-
-struct footer_info {
-	GnomeFont *local_font;
-	gint page_num, pages;
-};
-
 static void print_footer(GtkHTML * html,
 			 GnomePrintContext * print_context, gdouble x,
 			 gdouble y, gdouble width, gdouble height,
 			 gpointer user_data)
 {
-	struct footer_info *info = (struct footer_info *) user_data;
+	gdouble h = height - 10.0;
+	struct _info *info = (struct _info *) user_data;
 
 	if (info->local_font) {
-		char *text =
-		    g_strdup_printf(_("Page %d of %d"), info->page_num,
-				    info->pages);
-		gdouble tw = strlen(text) * 8;
-
+		//gnome_print_setfont(print_context, info->local_font);
+		//gnome_print_line_stroked(print_context, x, y, width, y);
 		gnome_print_gsave(print_context);
 		gnome_print_newpath(print_context);
-		gnome_print_setrgbcolor(print_context, .0, .0, .0);
-		gnome_print_moveto(print_context, x + width - tw,
+		gnome_print_setrgbcolor(print_context, .0, .0, .0);		
+		/*gnome_print_moveto(print_context, x,
 				   y -
-				   gnome_font_get_ascender(info->
-							   local_font));
+				   gnome_font_get_ascender(info->local_font));
 		gnome_print_setfont(print_context, info->local_font);
-		gnome_print_show(print_context, text);
+		gnome_print_show(print_context, info->footer_title);*/
+		
+		
+		if(info->footer_page_num) {
+			char *text =
+			    g_strdup_printf(_("Page %d of %d"), info->page_num,
+					    info->pages);
+			gdouble tw = strlen(text) * 8;
+			
+			gnome_print_moveto(print_context, x + width - tw,
+					   y -
+					   gnome_font_get_ascender(info->
+								   local_font));
+			gnome_print_setfont(print_context, info->local_font);
+			gnome_print_show(print_context, text);
+			g_free(text);
+		}
+		if(info->footer_date) {
+			char *text =
+			    g_strdup_printf("%s", "April 08, 2005");
+			gdouble tw = strlen(text) * 6;
+			
+			gnome_print_moveto(print_context, x + width - tw,
+					   y -
+					   gnome_font_get_ascender(info->
+								   local_font));
+			gnome_print_setfont(print_context, info->local_font);
+			gnome_print_show(print_context, text);	
+			g_free(text);
+		}
 		gnome_print_grestore(print_context);
-
-		g_free(text);
 		info->page_num++;
 	}
+
 }
 
-static void footer_info_free(struct footer_info *info)
+static void info_free(struct _info *info)
 {
 	if (info->local_font)
 		gnome_font_unref(info->local_font);
+	if(info->header_title)
+		g_free(info->header_title);
+	if(info->footer_title)
+		g_free(info->footer_title);
 	g_free(info);
 }
 
-static struct footer_info *footer_info_new(GtkHTML * html,
+static struct _info *info_new(GtkHTML * html,
 					   GnomePrintContext * pc,
 					   gdouble * line)
 {
-	struct footer_info *info;
+	struct _info *info;
 
-	info = g_new(struct footer_info, 1);
-	info->local_font = gnome_font_find_closest("Luxi Sans", 10.0);
+	info = g_new(struct _info, 1);
+	info->local_font = gnome_font_find_closest("Sans Regular", 10.0);
 
 	if (info->local_font)
 		*line =
@@ -515,8 +578,13 @@ static struct footer_info *footer_info_new(GtkHTML * html,
 
 	info->page_num = 1;
 	info->pages =
-	    gtk_html_print_get_pages_num(html, pc, 0.0, *line);
-
+	    gtk_html_print_get_pages_num(html, pc, *line, *line);
+	info->header_title = g_strdup("");
+	info->footer_title = g_strdup("");
+	info->header_date = FALSE;
+	info->header_page_num = TRUE;
+	info->footer_date = FALSE;
+	info->footer_page_num = TRUE;
 	return info;
 }
 
@@ -546,7 +614,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	GnomePrintConfig *config = NULL;
 	GtkDialog *dialog;
 	gdouble line = 0.0;
-	struct footer_info *info;
+	struct _info *info;
 
 	if (!preview) {
 		dialog =
@@ -571,7 +639,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 			return;
 		}
 
-		config =
+		//config = gnome_print_config_default();
 		    gnome_print_dialog_get_config((GnomePrintDialog *)
 						  dialog);
 		gtk_widget_destroy((GtkWidget *) dialog);
@@ -589,11 +657,11 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 
 	gtk_html_print_set_master(html, print_master);
 
-	info = footer_info_new(html, print_context, &line);
-	gtk_html_print_with_header_footer(html, print_context, 0.0,
-					  line, NULL, print_footer,
+	info = info_new(html, print_context, &line);
+	gtk_html_print_with_header_footer(html, print_context, line,
+					  line, print_header, print_footer,
 					  info);
-	footer_info_free(info);
+	info_free(info);
 
 	gnome_print_job_close(print_master);
 
