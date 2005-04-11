@@ -133,6 +133,9 @@
 /* Define if you want to use GtkHtml-3.1 */
 #undef USE_GTKHTML31
 
+/* Define if you want to use GtkHtml-3.6 */
+#undef USE_GTKHTML36
+
 /* Define if you want to use gtkmozembed */
 #undef USE_GTKMOZEMBED
 

@@ -19,7 +19,7 @@ AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
 
-PKG_CHECK_MODULES(SWORD, sword >= 1.5.8, , exit)
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.7.100, , exit)
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
 
@@ -62,12 +62,23 @@ dnl check for GtkHtml
 dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,exit)
-AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
 
-dnl gtkhtml_datadir
-GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
-AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,have_gtkhtml=no)
+if test "x$have_gtkhtml" = xyes; then
+	AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
+
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
+	AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+else
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.6, have_gtkhtml=yes,exit)
+	AC_DEFINE(USE_GTKHTML36, 1, [Define if you want to use GtkHtml-3.6])
+
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.6`"
+	AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+
+fi
 AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_DATA_DIR)
@@ -77,29 +88,35 @@ dnl check for gtkmozembed
 MOZILLA_LIBS=""
 MOZILLA_CFLAGS=""
 AC_ARG_ENABLE(moz_embed,[  --enable-moz_embed    use moz_embed [default=no]],moz_embed=$enableval,moz_embed=no)
-if test "x$moz_embed" = xyes; then
-   AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])	
-   PKG_CHECK_MODULES(MOZILLA, mozilla-gtkmozembed mozilla-xpcom mozilla-nspr,,exit)
-   AC_SUBST(MOZILLA_LIBS)
-   AC_SUBST(MOZILLA_CFLAGS)
-   mozilla_include_root="`$PKG_CONFIG --variable=includedir mozilla-gtkmozembed`"
-dnl    AC_SUBST(mozilla_include_root)
-dnl   echo "mozilla_include_root = $mozilla_include_root"
-   MOZILLA_CFLAGS="$MOZILLA_CFLAGS \
-   -I$mozilla_include_root/gfx \
-   -I$mozilla_include_root/dom \
-   -I$mozilla_include_root/layout \
-   -I$mozilla_include_root/content \
-   -I$mozilla_include_root/docshell \
-   -I$mozilla_include_root/widget \
-   -I$mozilla_include_root/webbrwsr \
-   -I$mozilla_include_root/necko \
-   -I$mozilla_include_root/webbrowserpersist \
-   -I$mozilla_include_root/find \
-   -I$mozilla_include_root/uconv \
-   -I$mozilla_include_root/shistory \
-   -I$mozilla_include_root/webshell \
-   -I$mozilla_include_root/htmlparser" 
+if test "x$moz_embed" = xyes; then	
+  
+  PKG_CHECK_MODULES(MOZILLA, mozilla-gtkmozembed mozilla-xpcom mozilla-nspr,have_mozilla=yes,have_mozilla=no)
+  if test "x$have_mozilla" = xyes; then   
+    mozilla_include_root="`$PKG_CONFIG --variable=includedir mozilla-gtkmozembed`"
+  else
+    PKG_CHECK_MODULES(MOZILLA, firefox-gtkmozembed firefox-xpcom firefox-nspr,have_mozilla=yes,exit)
+    mozilla_include_root="`$PKG_CONFIG --variable=includedir firefox-gtkmozembed`"
+  fi
+
+  AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
+  AC_SUBST(MOZILLA_LIBS)
+  AC_SUBST(MOZILLA_CFLAGS)
+  MOZILLA_CFLAGS="$MOZILLA_CFLAGS \
+  -I$mozilla_include_root \
+  -I$mozilla_include_root/gfx \
+  -I$mozilla_include_root/dom \
+  -I$mozilla_include_root/layout \
+  -I$mozilla_include_root/content \
+  -I$mozilla_include_root/docshell \
+  -I$mozilla_include_root/widget \
+  -I$mozilla_include_root/webbrwsr \
+  -I$mozilla_include_root/necko \
+  -I$mozilla_include_root/webbrowserpersist \
+  -I$mozilla_include_root/find \
+  -I$mozilla_include_root/uconv \
+  -I$mozilla_include_root/shistory \
+  -I$mozilla_include_root/webshell \
+  -I$mozilla_include_root/htmlparser" 
 fi
  
 
