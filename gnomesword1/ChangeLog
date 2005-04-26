@@ -1,3 +1,8 @@
+2005-04-25  terry <tbiggs@users.sf.net>
+
+	* added main/previewer.cc and main/previewer.h
+	
+	
 2005-03-26  terry <tbiggs@users.sf.net>
 
 	* fixed resize bug

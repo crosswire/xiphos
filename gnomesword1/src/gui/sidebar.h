@@ -51,7 +51,6 @@ struct _search_results {
 
 extern GList *list_of_verses;
 
-void gui_display_devotional_in_sidebar(void);
 void gui_set_sidebar_porgram_start(void);
 void gui_sidebar_showhide(void);
 //gboolean main_sidebar_display_dictlex(char *mod_name, char *key);

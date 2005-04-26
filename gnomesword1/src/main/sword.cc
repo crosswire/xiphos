@@ -64,6 +64,7 @@ extern "C" {
 #include "main/display.hh"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
@@ -457,7 +458,7 @@ void main_init_backend(void)
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
 #ifdef DEBUG	
-	g_print("date: %s\n", getenv("DATE"));
+	//g_print("date: %s\n", getenv("DATE"));
 	g_print("%s sword-%s\n", _("Starting"), backend->get_sword_version());
 	g_print("%s\n", _("Initiating SWORD"));
 	g_print("%s: %s\n",_("path to sword"),mgr.prefixPath);
@@ -602,372 +603,6 @@ void main_locked_module_display(gpointer data,
 	g_string_free(str,TRUE);
 
 }
-
-
-/******************************************************************************
- * Name
- *   mark_search_words
- *
- * Synopsis
- *   #include ".h"
- *
- *   void mark_search_words( GString *str )	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void mark_search_words(GString * str)
-{
-	gchar *tmpbuf, *buf, *searchbuf;
-	gint len1, len2, len3, len4;
-	gchar closestr[40], openstr[40];
-
-	/* regular expression search results         **fixme** */
-	if (settings.searchType == 0) {
-		return;
-	}
-	/* close tags */
-	sprintf(closestr, "</b></font>");
-	/* open tags */
-	sprintf(openstr, "<font color=\"%s\"><b>",
-		settings.found_color);
-	/* point buf to found verse */
-	buf = str->str;
-	searchbuf = g_strdup(settings.searchText);
-
-	/* if we have a muti word search go here */
-	if (settings.searchType == -2) {
-		char *token;
-		GList *list;
-		gint count = 0, i = 0;
-
-		list = NULL;
-		/* seperate the search words and add them to a glist */
-		if ((token = strtok(searchbuf, " ")) != NULL) {
-			list = g_list_append(list, token);
-			++count;
-			while ((token = strtok(NULL, " ")) != NULL) {
-				list = g_list_append(list, token);
-				++count;
-			}
-			/* if we have only one word */
-		} else {
-			list = g_list_append(list, searchbuf);
-			count = 1;
-		}
-		list = g_list_first(list);
-		/* find each word in the list and mark it */
-		for (i = 0; i < count; i++) {
-			/* set len1 to length of verse */
-			len1 = strlen(buf);
-			/* set len2 to length of search word */
-			len2 = strlen((gchar *) list->data);
-			/* find search word in verse */
-			if ((tmpbuf =
-			     strstr(buf,
-				    (gchar *) list->data)) != NULL) {
-				/* set len3 to length of tmpbuf 
-				   (tmpbuf points to first occurance of 
-				   search word in verse) */
-				len3 = strlen(tmpbuf);
-				//-- set len4 to diff between len1 and len3
-				len4 = len1 - len3;
-				/* add end tags first 
-				   (position to add tag to is len4 + len2) */
-				str =
-				    g_string_insert(str, (len4 + len2),
-						    closestr);
-				/* then add start tags 
-				   (position to add tag to is len4) */
-				str =
-				    g_string_insert(str, len4, openstr);
-			}
-			/* point buf to changed str */
-			buf = str->str;
-			list = g_list_next(list);
-		}
-		g_list_free(list);
-
-		/* else we have a phrase and only need to mark it */
-	} else {
-		len1 = strlen(buf);
-		len2 = strlen(searchbuf);
-		tmpbuf = strstr(buf, searchbuf);
-		if (tmpbuf) {
-			len3 = strlen(tmpbuf);
-			len4 = len1 - len3;
-			/* place end tag first */
-			str =
-			    g_string_insert(str, (len4 + len2),
-					    closestr);
-			/* then place start tag */
-			str = g_string_insert(str, len4, openstr);
-		}
-	}
-	/* free searchbuf */
-	g_free(searchbuf);
-}
-
-
-/******************************************************************************
- * Name
- *   main_entry_display
- *
- * Synopsis
- *   #include ".h"
- *
- *   void main_entry_display(GtkWidget * html_widget, gchar * mod_name, 
- *					      gchar * text, gchar *key)
- *
- * Description
- *   display Sword modules one verse (entry) at a time
- *
- * Return value
- *   void
- */
-
-void main_entry_display(gpointer data, gchar * mod_name,
-		   gchar * text, gchar * key, gboolean show_key)
-{
-	GtkWidget *html_widget = (GtkWidget *) data;
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	GString *search_str;
-	gboolean was_editable = FALSE;
-	MOD_FONT *mf = get_font(mod_name);
-	GtkHTML *html = GTK_HTML(html_widget);
-
-	/* setup gtkhtml widget */
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-
-	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	/* show key in html widget  */
-	if (show_key) {
-		if ((settings.displaySearchResults)) {
-			g_string_printf(tmp_str,
-				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">[%s] %s </font></A>",
-				mod_name,
-				key,
-				settings.bible_verse_num_color,
-				mod_name, key);
-		} else {
-			g_string_printf(tmp_str,
-				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"<font color=\"%s\">[%s]</a></font>[%s] ",
-				backend->module_description(mod_name),
-				mod_name,
-				settings.bible_verse_num_color,
-				mod_name, 
-				key);
-		}
-		str = g_string_append(str, tmp_str->str);
-	}
-	
-	g_string_printf(tmp_str, 
-			"<font face=\"%s\" size=\"%s\">",
-			(mf->old_font)?mf->old_font:"none", 
-			(mf->old_font_size)?mf->old_font_size:"+0");
-	str = g_string_append(str, tmp_str->str);
-	
-	if (settings.displaySearchResults) {
-		search_str = g_string_new(text);
-		mark_search_words(search_str);
-		str = g_string_append(str, search_str->str);
-	} else {
-		str = g_string_append(str, text);
-	}
-
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
-	str = g_string_append(str, tmp_str->str);
-
-	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
-	}
-	gtk_html_set_editable(html, was_editable);
-
-	/* andyp - inserted for debugging, remove */
-	//g_print(str->str); 
-	
-	free_font(mf);
-	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
-}
-
-/******************************************************************************
- * Name
- *   main_information_viewer
- *
- * Synopsis
- *   #include "main/sword.h.h"
- *
- *   void main_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
- *		    gchar * text, gchar *key, gchar * type)
- *
- * Description
- *   display information in the information previewer
- *
- * Return value
- *   void
- */
-
-void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type ,gchar * morph_text,
-			     gchar * morph)
-{
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	GString *search_str;
-	MOD_FONT *mf = get_font(mod_name);
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
-
-
-	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	if(type) {
-		if(!strcmp(type,"n")) {
-			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
-					_("Footnote"));
-			str = g_string_append(str, tmp_str->str);
-		}
-		if(!strcmp(type,"x")) {
-			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
-					_("Cross Reference"));
-			str = g_string_append(str, tmp_str->str);
-		}
-		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
-					_("Strongs"),key);
-			str = g_string_append(str, tmp_str->str);
-		}
-		if(!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
-			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
-					_("Morphology"),key);
-			str = g_string_append(str, tmp_str->str);
-		}
-	}
-	
-	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
-		g_string_printf(tmp_str,
-			"<font color=\"grey\">%s: %s<HR></font><br>",
-				_("Strongs"),key);
-		str = g_string_append(str, tmp_str->str);
-		g_string_printf(tmp_str, 
-				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none", 
-				(mf->old_font_size)?mf->old_font_size:"+0");
-		str = g_string_append(str, tmp_str->str);
-		str = g_string_append(str, text);
-		
-		g_string_printf(tmp_str,
-			"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
-					_("Morphology"),morph);
-		str = g_string_append(str, tmp_str->str);
-		str = g_string_append(str, morph_text);
-		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
-		str = g_string_append(str, tmp_str->str);
-		
-		
-	} else {
-		g_string_printf(tmp_str, 
-				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none", 
-				(mf->old_font_size)?mf->old_font_size:"+0");
-		str = g_string_append(str, tmp_str->str);
-		str = g_string_append(str, text);
-	
-		g_string_printf(tmp_str, " %s", "</font></body></html>");
-		str = g_string_append(str, tmp_str->str);
-	
-	}
-	
-	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
-	}
-	
-	free_font(mf);
-	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
-}
-
-
-/******************************************************************************
- * Name
- *   main_clear_viewer
- *
- * Synopsis
- *   #include "main/sword.h"
- *
- *   void main_clear_viewer(VOID)
- *
- * Description
- *   clear the information viewer
- *
- * Return value
- *   void
- */
-
-void main_clear_viewer(void)
-{
-	GString *tmp_str = g_string_new(NULL);
-	GString *str;
-	GString *search_str;
-	gboolean was_editable = FALSE;
-	gchar *buf;
-	
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
-
-	/* setup gtkhtml widget */
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-
-	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
-
-	str = g_string_new(tmp_str->str);
-	buf = N_("Previewer");
-	g_string_printf(tmp_str,
-	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
-	str = g_string_append(str, tmp_str->str);
-		
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
-	str = g_string_append(str, tmp_str->str);
-
-	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
-	}
-	gtk_html_set_editable(html, was_editable);
-	
-	//free_font(mf);
-	g_string_free(str, TRUE);
-	g_string_free(tmp_str, TRUE);
-}
-
 
 /******************************************************************************
  * Name
@@ -1286,6 +921,55 @@ void main_display_bible(const char * mod_name, const char * key)
 		main_update_parallel_page();
 	else
 		gui_keep_parallel_dialog_in_sync();
+}
+
+
+
+
+/******************************************************************************
+ * Name
+ *   main_display_devotional
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_display_devotional(void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void main_display_devotional(void)
+{
+	gchar buf[80];
+	time_t curtime;
+	struct tm *loctime;
+	gchar *text;
+
+	/*
+	 * Get the current time.
+	 */
+	curtime = time(NULL);
+
+	/*
+	 * Convert it to local time representation.
+	 */
+	loctime = localtime(&curtime);
+
+	/*
+	 * Print it out in a nice format.
+	 */
+	strftime(buf, 80, "%m.%d", loctime);
+	
+	text = backend->get_render_text(settings.devotionalmod, buf);
+	if (text) {
+		main_entry_display(sidebar.html_viewer_widget,
+			      settings.devotionalmod, text, buf, TRUE);
+		free(text);
+	}
 }
 
 

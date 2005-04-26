@@ -52,6 +52,7 @@
 
 #include "main/url.hh"
 #include "main/lists.h"
+#include "main/previewer.h"
 #include "main/settings.h"
 #include "main/module_dialogs.h"
 #include "main/parallel_view.h"

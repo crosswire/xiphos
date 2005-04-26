@@ -245,24 +245,7 @@ static gint html_button_released(GtkWidget * html,
 				g_free((gchar*)url);
 				g_free(key);
 				break;
-			}/*
-			gchar *dict = NULL;
-			if (settings.useDefaultDict)
-				dict =
-				    g_strdup(settings.
-					     DefaultDict);
-			else
-				dict =
-				    g_strdup(settings.
-					     DictWindowModule);
-			if (settings.inViewer)
-				main_sidebar_display_dictlex
-				    (dict, key);
-			if (settings.inDictpane)
-				main_display_dictionary(dict, key);
-			g_free(key);
-			if (dict)
-				g_free(dict);*/
+			}
 		}
 		break;
 	}

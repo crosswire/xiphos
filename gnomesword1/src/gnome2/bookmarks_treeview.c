@@ -439,7 +439,7 @@ void parse_bookmarks(GtkTreeView * tree, const xmlChar * file,
  *   void gui_load_removed()
  *
  * Description
- *   
+ *    restore bookmarks that have been removed and saved
  *
  * Return value
  *   void
