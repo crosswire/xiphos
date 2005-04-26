@@ -27,7 +27,7 @@ noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
 
-libeditor_a_SOURCES =				\
+libeditor_a_SOURCES = Spell.idl				\
 	$(SPELL_IDL_GENERATED)			\
 	body.c body.h				\
 	cell.c cell.h				\

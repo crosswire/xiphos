@@ -72,16 +72,11 @@ char *main_get_footnote_body(char * mod_name, char * key,
 char *main_get_search_results_text(char * mod_name, char * key);
 void main_locked_module_display(gpointer data,
 				  char * mod_name, char * cipher_key);
-void main_entry_display(gpointer data, char * mod_name,
-		   char * text, char * key, gboolean show_key);
-void main_information_viewer(char * mod_name, char * text, char * key,
-		             char * action ,char * type ,char * morph_text,
-			     char * morph);
-void main_clear_viewer(void);
 void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);
 void main_display_dictionary(char * mod_name, char * key);
 void main_display_bible(const char * mod_name, const char * key);
+void main_display_devotional(void);
 void main_change_verse(const char * bible, const char * commentary, 
 						const char * key);
 void main_setup_displays(void);
