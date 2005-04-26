@@ -312,8 +312,8 @@ void load_settings_structure(void)
 	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
 	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
 	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
-	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
-	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
+//	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
+//	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
 	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
 
 
@@ -447,12 +447,12 @@ void load_settings_structure(void)
 		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
 	}
 
-	settings.use_studypad =
+/*	settings.use_studypad =
 	    atoi(xml_get_value("editor", "UseStudyPad"));
 	settings.use_studypad_dialog =
 	    atoi(xml_get_value("editor", "UseStudypadDialog"));
 	settings.use_percomm_dialog =
-	    atoi(xml_get_value("editor", "UsePercommDialog"));
+	    atoi(xml_get_value("editor", "UsePercommDialog"));*/
 	if(xml_get_value("editor", "spell_language"))
 	     settings.spell_language = xml_get_value("editor","spell_language");
 	else {

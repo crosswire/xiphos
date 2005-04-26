@@ -308,46 +308,6 @@ static void add_columns(GtkTreeView * treeview)
 
 /******************************************************************************
  * Name
- *   gui_display_devotional_in_sidebar
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void gui_display_devotional_in_sidebar(void)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-void gui_display_devotional_in_sidebar(void)
-{
-	gchar buf[80];
-	time_t curtime;
-	struct tm *loctime;
-
-	/*
-	 * Get the current time.
-	 */
-	curtime = time(NULL);
-
-	/*
-	 * Convert it to local time representation.
-	 */
-	loctime = localtime(&curtime);
-
-	/*
-	 * Print it out in a nice format.
-	 */
-	strftime(buf, 80, "%m.%d", loctime);
-	main_sidebar_display_dictlex(settings.devotionalmod, buf);
-}
-
-
-/******************************************************************************
- * Name
  *   gui_set_sidebar_porgram_start
  *
  * Synopsis

@@ -163,11 +163,7 @@ void gui_on_lookup_commentary_dialog_selection
 
 	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						     dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
+		main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -1065,12 +1061,7 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(settings.
-						     DictWindowModule,
-						     dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(settings.
+		main_display_dictionary(settings.
 						DictWindowModule,
 						dict_key);
 		g_free(dict_key);
@@ -1144,11 +1135,7 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 	    main_module_name_from_description(dict_mod_description);
 	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						     dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
+		main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}

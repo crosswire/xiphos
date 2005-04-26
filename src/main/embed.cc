@@ -78,6 +78,7 @@
 
 
 #include "main/embed.h"
+#include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/url.hh"
