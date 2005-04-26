@@ -124,14 +124,14 @@ struct _settings {
 		showinmain, /* when verse list item clicked show in main form if true */
 		havethayer, /* for greek morph tags */
 		havebdb, /* for hebrew morph tags */
-		inViewer, /* display dict/lex in viewer when word or link clicked */
-		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
+//		inViewer, /* display dict/lex in viewer when word or link clicked */
+//		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
 		useDefaultDict,
-		strip_words_in_red,
+//		strip_words_in_red,
 		browsing, /* true for tabbed browsing */
 		
 		/** if items are docked **/
-		docked, /* true when shortcut bar is docked */
+		docked, /* true when sidebar is docked */
 		dockedInt, /* true when parallel page is docked */
 		
 		/**  find dialogs info  **/
@@ -143,11 +143,10 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
-		use_studypad, /* use studypad */
-		use_studypad_dialog, /* display studypad in a dialog */
+//		use_studypad, /* use studypad */
+//		use_studypad_dialog, /* display studypad in a dialog */
 		studypad_dialog_exist, /* studypad dialog has been created */
-		use_percomm_dialog, /* display personal 
-					comments editor in a dialog */
+//		use_percomm_dialog, /* display personal comments editor in a dialog */
 		percomm_dialog_exist, /* percomm dialog has been created */
 		
 		/** do we have these modules **/

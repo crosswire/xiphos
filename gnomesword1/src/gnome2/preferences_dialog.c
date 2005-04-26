@@ -146,27 +146,10 @@ struct _preferences_check_buttons {
 	GtkWidget *show_bible_pane;
 	GtkWidget *show_commentary_pane;
 	GtkWidget *show_dictionary_pane;
-	//GtkWidget *show_lower_workbook;
-
-	//GtkWidget *show_favorites;
-	//GtkWidget *show_text_group;
-	//GtkWidget *show_commentary_group;
-	//GtkWidget *show_dictionary_group;
-	//GtkWidget *show_book_group;
-	//GtkWidget *show_history_group;
-	//GtkWidget *dock_shortcut_bar;
 
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
-	//GtkWidget *percomm_formatting;
-	//GtkWidget *use_studypad;
-	//GtkWidget *use_studypad_dialog;
-	//GtkWidget *use_percomm_dialog;
-
-	//GtkWidget *commentary_in_dialog;
-	//GtkWidget *dictionary_in_dialog;
-	//GtkWidget *book_in_dialog;
 };
 
 
@@ -637,17 +620,6 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		    settings.showdicts;
 		gui_set_bible_comm_layout();
 		break;
-	case SHOW_IN_DICTIONARY:
-		if (GTK_TOGGLE_BUTTON(check_button.show_in_dictionary)->
-		    active)
-			xml_set_value("GnomeSword", "lexicons",
-				      "indictpane", "1");
-		else
-			xml_set_value("GnomeSword", "lexicons",
-				      "indictpane", "0");
-		settings.inDictpane =
-		    atoi(xml_get_value("lexicons", "indictpane"));
-		break;
 	case SHOW_DEVOTION:
 		if (GTK_TOGGLE_BUTTON(check_button.show_devotion)->
 		    active)
@@ -678,42 +650,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		settings.browsing =
 		    atoi(xml_get_value("tabs", "browsing"));
 		break;
-
-		/*
-		   case USE_STUDYPAD:   
-		   if (GTK_TOGGLE_BUTTON(check_button.use_studypad)->active)
-		   xml_set_value("GnomeSword", "editor", "UseStudyPad",
-		   "1");
-		   else
-		   xml_set_value("GnomeSword", "editor", "UseStudyPad",
-		   "0");
-		   settings.use_studypad =
-		   atoi(xml_get_value("editor", "UseStudyPad"));
-		   break;
-		   case USE_STUDYPAD_DIALOG:    
-		   if (GTK_TOGGLE_BUTTON(check_button.use_studypad_dialog)->active)
-		   xml_set_value("GnomeSword", "editor",
-		   "UseStudypadDialog", "1");
-		   else
-		   xml_set_value("GnomeSword", "editor",
-		   "UseStudypadDialog", "0");
-		   settings.use_studypad_dialog =
-		   atoi(xml_get_value("editor", "UseStudypadDialog"));
-		   break;
-		   case USE_PERCOMM_DIALOG:
-		   if (GTK_TOGGLE_BUTTON(check_button.use_percomm_dialog)->active)
-		   xml_set_value("GnomeSword", "editor",
-		   "UsePercommDialog", "1");
-		   else
-		   xml_set_value("GnomeSword", "editor",
-		   "UsePercommDialog", "0");
-		   settings.use_percomm_dialog =
-		   atoi(xml_get_value("editor", "UsePercommDialog"));
-		   break; */
 	}
-	xml_set_value("GnomeSword", "editor", "UseStudyPad", "1");
-	xml_set_value("GnomeSword", "editor", "UseStudypadDialog", "1");
-	xml_set_value("GnomeSword", "editor", "UsePercommDialog", "1");
 }
 
 
@@ -2408,13 +2345,13 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 	   (check_button.use_percomm_dialog),
 	   settings.use_percomm_dialog);
-	 */
+	 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_in_viewer),
 				     settings.inViewer);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_in_dictionary),
-				     settings.inDictpane);
+				     settings.inDictpane);*/
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.
 				      use_default_dictionary),

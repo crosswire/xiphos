@@ -1023,40 +1023,4 @@ void main_add_mod_tree_columns(GtkTreeView * tree)
 	gtk_tree_view_column_set_visible(column, FALSE);
 }
 
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "main/sidebar.h"
- *
- *   gboolean (char *mod_name, char *key)
- *
- * Description
- *
- *
- * Return value
- *   gboolean
- */
-
-gboolean main_sidebar_display_dictlex(char *mod_name, char *key)
-{
-	if (settings.showshortcutbar) {
-		gchar *text;
-		/*gtk_option_menu_set_history(GTK_OPTION_MENU
-					    (sidebar.optionmenu1), 4);*/
-		/*gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_sidebar), 4);*/
-		text = backend->get_render_text(mod_name, key);
-		if (text) {
-			main_entry_display(sidebar.html_viewer_widget,
-				      mod_name, text, key, TRUE);
-			free(text);
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
-
 /******   end of file   ******/

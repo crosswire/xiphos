@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 		/*
 		 * this arg is a sword uri
 		 */
-		if (!strncmp(argv[1], "sword:/",7)) {
+		if ((!strncmp(argv[1], "sword:/",7)) || (strstr(argv[1],"studypad"))) {
 			have_sword_url = TRUE;
 		}
 	}

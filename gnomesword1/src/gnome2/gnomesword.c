@@ -205,7 +205,7 @@ void frontend_display(void)
 	 * FIXME: maybe we need to move the devotional?
 	 */
 	if (settings.showdevotional) {
-		gui_display_devotional_in_sidebar();
+		main_display_devotional();
 	}
 	
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);

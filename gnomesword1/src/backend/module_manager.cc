@@ -19,6 +19,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+
+/*
+ *  Sword must be built with curl support for gnomesword's module manager to
+ *  work as expected
+*/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -32,7 +38,6 @@
 
 
 #include <glib-2.0/glib.h>
-//#include <gnome.h>
 #include <swmgr.h>
 #include <installmgr.h>
 #include <filemgr.h>

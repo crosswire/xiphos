@@ -39,12 +39,12 @@ static GtkWidget * vbox_dock;
 
 /******************************************************************************
  * Name
- *   gui_attach_detach_shortcutbar
+ *   gui_attach_detach_sidebar
  *
  * Synopsis
- *   #include "shortcutbar_dialog.h"
+ *   #include "sidebar_dialog.h"
  *   
- *   void gui_attach_detach_shortcutbar(void)
+ *   void gui_attach_detach_sidebar(void)
  *
  * Description
  *   dock/undock shortcut bar
@@ -89,12 +89,12 @@ void gui_attach_detach_sidebar(void)
  *   on_dialog_destroy
  *
  * Synopsis
- *   #include "shortcutbar_dialog.h"
+ *   #include "sidebar_dialog.h"
  *   
  *   void on_dialog_destroy(GtkObject *object, gpointer user_data)
  *
  * Description
- *   send the shortcut bar back to the main window before we 
+ *   send the sidebar back to the main window before we 
  *   destroy the dialog
  *   
  *
@@ -111,15 +111,15 @@ static void on_dialog_destroy(GtkObject *object, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   gui_create_shortcutbar_dialog
+ *   create_sidebar_dialog
  *
  * Synopsis
- *   #include "shortcutbar_dialog.h"
+ *   #include "sidebar_dialog.h"
  *   
- *   GtkWidget* gui_create_shortcutbar_dialog (void)
+ *   GtkWidget*  create_sidebar_dialog(void)
  *
  * Description
- *   create dialog to hold the shortcut bar when detached
+ *   create dialog to hold the sidebar when detached
  *   
  *
  * Return value
