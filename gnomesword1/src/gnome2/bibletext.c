@@ -192,14 +192,8 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 						     DefaultDict);
 				else
 					dict =
-					    g_strdup(settings.
-						     DictWindowModule);
-				if (settings.inViewer)
-					main_sidebar_display_dictlex
-					    (dict, key);
-				if (settings.inDictpane)
-					main_display_dictionary(dict,
-								  key);
+					    g_strdup(settings.DictWindowModule);
+				main_display_dictionary(dict, key);
 				g_free(key);
 				if (dict)
 					g_free(dict);

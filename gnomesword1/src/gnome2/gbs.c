@@ -144,14 +144,9 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 				    g_strdup(settings.
 					     DefaultDict);
 			else
-				dict =
-				    g_strdup(settings.
-					     DictWindowModule);
-			if (settings.inViewer)
-				main_sidebar_display_dictlex
-				    (dict, key);
-			if (settings.inDictpane)
-				main_display_dictionary(dict, key);
+				dict = g_strdup(settings.DictWindowModule);
+			
+			main_display_dictionary(dict, key);
 			g_free(key);
 			if (dict)
 				g_free(dict);
@@ -548,24 +543,8 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 		g_free(dict_key);
 		g_free(mod_name);
 	}
-/*	gchar *dict_key = NULL;
-	gchar *mod_name = NULL;
-	
-	//if(!cur_t->html) return;
-	
-	mod_name = main_module_name_from_description(dict_mod_description);
-	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
-	if (dict_key && mod_name) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
-		g_free(dict_key);
-		g_free(mod_name);
-	}
-*/
 }
+
 
 /******************************************************************************
  * Name
