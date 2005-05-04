@@ -90,7 +90,7 @@ static void set_label(gchar * mod_name)
 
 void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
 {
-	main_dictionary_entery_changed(settings.DictWindowModule);
+	main_dictionary_entry_changed(settings.DictWindowModule);
 }
 
 
@@ -369,13 +369,114 @@ static void on_entry_activate(GtkEntry * entry,
 	g_message("on_entry_activate");
 }
 
-static void on_comboboxentry_dict_key_changed(GtkComboBox * combobox,
-					gpointer user_data)
-{
-	//g_message("on_comboboxentry_dict_key_changed");
-	gtk_widget_activate(widgets.entry_dict);
 
+/******************************************************************************
+ * Name
+ *   menu_deactivate_callback
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
+{
+	GtkWidget *menu_button;
+	
+	menu_button = GTK_WIDGET (user_data);
+		
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
 }
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   
+ */
+
+static void menu_position_under (GtkMenu *menu, 
+		     int *x, 
+		     int *y,
+		     gboolean *push_in,
+		     gpointer user_data)
+{
+	GtkWidget *widget;
+	
+	g_return_if_fail (GTK_IS_BUTTON (user_data));
+	g_return_if_fail (GTK_WIDGET_NO_WINDOW (user_data));
+
+	widget = GTK_WIDGET (user_data);
+	
+	gdk_window_get_origin (widget->window, x, y);
+	
+	*x += widget->allocation.x;
+	*y += widget->allocation.y + widget->allocation.height;
+
+	*push_in = FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   select_button_press_callback
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   gboolean select_button_press_callback (GtkWidget *widget,
+ *			      GdkEventButton *event,
+ *			      gpointer user_data)
+ *
+ * Description
+ *    make the tooglebutton act like a gtk optionmenu by dropping a popup
+ *    under the button
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean select_button_press_callback (GtkWidget *widget,
+			      GdkEventButton *event,
+			      gpointer user_data)
+{
+	GtkWidget *menu = main_dictionary_drop_down_new(settings.DictWindowModule,
+						settings.dictkey);
+	
+	g_signal_connect (menu, "deactivate",
+			  G_CALLBACK (menu_deactivate_callback),
+			  widget);
+	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
+		gtk_widget_grab_focus (widget);
+		
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+		gtk_menu_popup (GTK_MENU (menu),
+				NULL, NULL, menu_position_under, widget, 
+				event->button, event->time);
+
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
@@ -387,8 +488,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *comboboxentry1;
 	GtkWidget *button11;
 	GtkWidget *image2;
+	GtkWidget *arrow1;
 	GtkWidget *frame_entry;
 	GtkWidget *toolbarDLKey;
+	GtkWidget *dict_drop_down;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *label205;
 	GtkWidget *scrolledwindow;
@@ -416,16 +519,19 @@ GtkWidget *gui_create_dictionary_pane(void)
 				     GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(button10), image1);
+	
+  	widgets.entry_dict = gtk_entry_new ();
+  	gtk_widget_show (widgets.entry_dict);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.entry_dict, TRUE, TRUE, 0);
+	
+		   
+  	dict_drop_down = gtk_toggle_button_new ();
+ 	 gtk_widget_show (dict_drop_down);
+	gtk_box_pack_start(GTK_BOX(hbox2), dict_drop_down, FALSE, TRUE, 0);
 
-	store = 
-	    gtk_list_store_new(1, G_TYPE_STRING);
-	    
-	widgets.comboboxentry_dict = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(
-				store),0);
-	gtk_widget_show(widgets.comboboxentry_dict);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.comboboxentry_dict, TRUE, TRUE,
-			   0);
-	widgets.entry_dict = GTK_WIDGET(GTK_BIN(widgets.comboboxentry_dict)->child);
+  	arrow1 = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+  	gtk_widget_show (arrow1);
+  	gtk_container_add (GTK_CONTAINER (dict_drop_down), arrow1);
 	
 	button11 = gtk_button_new();
 	gtk_widget_show(button11);
@@ -488,9 +594,10 @@ GtkWidget *gui_create_dictionary_pane(void)
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
  
-	settings.signal_id = g_signal_connect ((gpointer) widgets.comboboxentry_dict, "changed",
-                    G_CALLBACK (on_comboboxentry_dict_key_changed),
-                    NULL);
+	g_signal_connect (dict_drop_down, 
+			  "button_press_event",
+			  G_CALLBACK (select_button_press_callback),
+			  NULL);
 	g_signal_connect(G_OBJECT(widgets.entry_dict), "activate",
 			 G_CALLBACK(dict_key_entry_changed), NULL);
 			 
@@ -1073,7 +1180,6 @@ void gui_create_pm_dictionary(void)
 		gtk_widget_show(all_readings_uiinfo[1].widget);	//"primary_reading");
 
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
-
 	}
 	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[7].widget);
@@ -1081,10 +1187,6 @@ void gui_create_pm_dictionary(void)
 	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
 		     			gtk_get_current_event_time());
 	
-	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
-					NULL, event, NULL,
-					widgets.html_text);
-	gtk_widget_destroy(menu1);*/
 	g_free(ops);
 }
 
