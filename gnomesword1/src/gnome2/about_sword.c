@@ -102,7 +102,7 @@ GtkWidget *gui_create_about_sword(void)
 	/* 
 	 * get sword version 
 	 */
-	ver = get_sword_version();
+	ver = main_get_sword_version();
 	sprintf(version, "<b>SWORD-%s</b>", ver);
 	
 	dialog_about_sword = gtk_dialog_new();

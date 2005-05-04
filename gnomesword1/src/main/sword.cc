@@ -70,7 +70,6 @@ extern "C" {
 #include "main/xml.h"
  
 #include "main/parallel_view.h"
-//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 extern char *OLD_CODESET;
@@ -85,27 +84,6 @@ extern GtkWidget *cbe_freeform_lookup;
 extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
-
-/******************************************************************************
- * Name
- *  main_is_bible_ref
- *
- * Synopsis
- *   #include ".h"
- *   
- *   	int main_is_bible_ref(char * key)
- *
- * Description
- *   
- *
- * Return value
- *   int
- */
-
-int main_is_bible_ref(char * key)
-{
-	return backend->is_Bible_key(key, settings.currentverse);	
-}
 
 	
 /******************************************************************************
@@ -264,6 +242,7 @@ char *main_get_active_pane_module(void)
 	}
 	return NULL;
 }
+
 /******************************************************************************
  * Name
  *  module_name_from_description
@@ -287,12 +266,12 @@ char *main_module_name_from_description(char *description)
 
 /******************************************************************************
  * Name
- *  get_sword_version
+ *  main_get_sword_version
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   const char *get_sword_version(void)	
+ *   const char *main_get_sword_version(void)	
  *
  * Description
  *    
@@ -301,35 +280,9 @@ char *main_module_name_from_description(char *description)
  *   const char *
  */ 
 
-const char *get_sword_version(void)
+const char *main_get_sword_version(void)
 {
 	return backend->get_sword_version();
-}
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "main/.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *main_get_crossref(char * mod_name, char * key, char * note_number)
-{
-	
-		backend->set_module_key(mod_name, key);
-		return g_strdup(backend->get_entry_attribute("Footnote",
-							note_number,
-							"refList"));
 }
 
 
@@ -358,32 +311,6 @@ char *main_get_treekey_local_name(unsigned long offset)
 
 /******************************************************************************
  * Name
- *   
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *main_get_footnote_body(char * mod_name, char * key, char * note_number)
-{
-	
-	backend->set_module_key(mod_name, key);
-	return g_strdup(backend->get_entry_attribute("Footnote",
-							note_number,
-							"body"));
-}
-
-
-/******************************************************************************
- * Name
  *   get_search_results_text
  *
  * Synopsis
@@ -407,12 +334,12 @@ char *main_get_search_results_text(char * mod_name, char * key)
 
 /******************************************************************************
  * Name
- *  get_path_to_mods
+ *  main_get_path_to_mods
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   	gchar *get_path_to_mods(void)
+ *   	gchar *main_get_path_to_mods(void)
  *
  * Description
  *    returns the path to the sword modules
@@ -421,7 +348,7 @@ char *main_get_search_results_text(char * mod_name, char * key)
  *   gchar *
  */ 
 
-char *get_path_to_mods(void)
+char *main_get_path_to_mods(void)
 {
 	SWMgr *mgr = backend->get_main_mgr();
 	char *path = mgr->prefixPath;
@@ -491,7 +418,7 @@ void main_init_backend(void)
  *   void
  */
 
-void shutdown_backend(void)
+void main_shutdown_backend(void)
 {
 	delete backend; 
 #ifdef DEBUG	
@@ -606,12 +533,12 @@ void main_locked_module_display(gpointer data,
 
 /******************************************************************************
  * Name
- *   main_dictionary_entery_changed
+ *   main_dictionary_entry_changed
  *
  * Synopsis
  *   #include "main/sword.h"
  *
- *   void main_dictionary_entery_changed(char * mod_name)
+ *   void main_dictionary_entry_changed(char * mod_name)
  *
  * Description
  *   text in the dictionary entry has changed and the entry activated
@@ -620,18 +547,12 @@ void main_locked_module_display(gpointer data,
  *   void
  */
 
-void main_dictionary_entery_changed(char * mod_name)
+void main_dictionary_entry_changed(char * mod_name)
 {	
-	gint count = 9, i;
-	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
 	gchar *key2 = NULL;
-	gint height;
-	GtkTreeIter iter; 
-	GtkTreeModel *model;
-	GtkListStore *list_store;
 	
-	g_signal_handler_block(widgets.comboboxentry_dict,settings.signal_id);
+	
 	if(strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
@@ -654,37 +575,110 @@ void main_dictionary_entery_changed(char * mod_name)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	model = gtk_combo_box_get_model(GTK_COMBO_BOX(widgets.comboboxentry_dict));
-	list_store = GTK_LIST_STORE(model);
-	gtk_list_store_clear(GTK_LIST_STORE(list_store));
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	g_free(key);
+} 
+
+
+
+static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), (gchar*) user_data);
+	gtk_widget_activate(widgets.entry_dict);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   
+ *
+ * Description
+ *   text in the dictionary entry has changed and the entry activated
+ *
+ * Return value
+ *   void
+ */
+
+GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
+{	
+	gint count = 9, i;
+	gchar *new_key, *text = NULL;
+	gchar *key = NULL;
+	gchar *key2 = NULL;
+	gint height;
+        gsize bytes_written;
+	GtkWidget *menu;
+	GtkWidget * item;
+	
+	menu = gtk_menu_new();
+	
+	if(strcmp(settings.DictWindowModule,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "dict",
+					mod_name);
+		settings.DictWindowModule = xml_get_value(
+					"modules", "dict");
+	}	
+	
+	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
+	
+	key2 = g_utf8_strup(key,strlen(key));
+	
+	backend->set_module_key(mod_name, key2);
+	g_free(key2);
+	g_free(key);
+	key = backend->get_module_key();
+	
+	xml_set_value("GnomeSword", "keys", "dictionary", key);
+	settings.dictkey = xml_get_value("keys", "dictionary");
+	
+	backend->set_module_key(mod_name, key);
+	backend->display_mod->Display();
+	/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
+                                             -1,
+                                             NULL,
+                                             &bytes_written,
+                                             NULL);*/
 	
 	new_key = g_strdup((char*)backend->display_mod->KeyText());
 	
 	for (i = 0; i < (count / 2)+1; i++) {
 		free(new_key);
 		(*backend->display_mod)--;
+		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
+                                             -1,
+                                             NULL,
+                                             &bytes_written,
+                                             NULL);*/
 		new_key = g_strdup((char*)backend->display_mod->KeyText());
 	}
 
 	for (i = 0; i < count; i++) {
 		free(new_key);			
 		(*backend->display_mod)++;
+		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
+                                             -1,
+                                             NULL,
+                                             &bytes_written,
+                                             NULL);*/
 		new_key = g_strdup((char*)backend->display_mod->KeyText());
-		gtk_list_store_append (GTK_LIST_STORE(list_store), &iter);
-		gtk_list_store_set(	GTK_LIST_STORE(list_store), 
-					&iter, 
-					0, 
-					(const char *)new_key, 
-					-1);
+		/* add menu item */
+		item =
+		    gtk_menu_item_new_with_label((gchar *) new_key);
+		gtk_widget_show(item);
+		g_signal_connect(GTK_OBJECT(item), "activate",
+				   G_CALLBACK(dict_key_list_select),
+				   g_strdup(new_key));		
+		gtk_container_add(GTK_CONTAINER(menu), item); 
 	}
 	
-	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	free(new_key);
 	g_free(key);
-	g_signal_handler_unblock(widgets.comboboxentry_dict,
-					settings.signal_id);
+	return menu;
 } 
-
 
 /******************************************************************************
  * Name
@@ -812,7 +806,7 @@ void main_display_dictionary(char * mod_name, char * key)
 	
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
 	if(!strcmp(old_key, key))
-		main_dictionary_entery_changed(settings.DictWindowModule);
+		main_dictionary_entry_changed(settings.DictWindowModule);
 	else {
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 		gtk_widget_activate(widgets.entry_dict);
@@ -971,15 +965,6 @@ void main_display_devotional(void)
 		free(text);
 	}
 }
-
-
-void main_change_verse(const char * bible, const char * commentary, 
-						const char * key)
-{
-	
-}
-
-
 
 
 void main_setup_displays(void)

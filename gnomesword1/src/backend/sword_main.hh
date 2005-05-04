@@ -71,9 +71,7 @@ public:
 	void init_lists(MOD_LISTS * mods);
 	void init_language_map(void);
 	const char *get_sword_version(void);
-	void setup_displays(void);
 
-	//GList *fill_Bible_books(int testament);
 	GList *get_module_options(void);
 	int has_global_option(char *mod_name, char *option);
 	void set_cipher_key(char * mod_name, char * key);
@@ -132,7 +130,6 @@ public:
 	int do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog);
 	
-	char *url_encode(const char * pram);
 	char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
 	void save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value);
 	void save_module_key(char *mod_name, char *key);
