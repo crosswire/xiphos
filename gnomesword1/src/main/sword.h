@@ -25,13 +25,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include <gnome.h>
+#include <gnome.h>
 #include <glib/gi18n.h>
 #include <glib-2.0/glib.h>
-//#include <libgnome/libgnome.h>
-//#include <libgnomeui/libgnomeui.h>
 	
 #include "main/configs.h"	
+	
 /*** these defs need to be seen by gui and backend ***/
 	
 /* module types */
@@ -53,22 +52,18 @@ extern char *OLD_CODESET;
 
 /*** function prototypes ***/
 
-int main_is_bible_ref(char * key);
+GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key);
+char *main_get_path_to_mods(void);
+const char *main_get_sword_version(void);
+void main_shutdown_backend(void);
 void main_set_module_unlocked(char * mod_name, char * key);
 void main_save_module_key(char * mod_name, char * key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
-const char *get_sword_version(void);
-char *get_path_to_mods(void);
 void main_init_backend(void);
-void shutdown_backend(void);
 int main_is_mod_rtol(const char * module_name);
 char *main_module_name_from_description(char *description);
-char *main_get_crossref(char * mod_name, char * key, 
-						char * note_number);
-char *main_get_footnote_body(char * mod_name, char * key, 
-						char * note_number);
 char *main_get_search_results_text(char * mod_name, char * key);
 void main_locked_module_display(gpointer data,
 				  char * mod_name, char * cipher_key);
@@ -77,16 +72,15 @@ void main_display_commentary(const char * mod_name, const char * key);
 void main_display_dictionary(char * mod_name, char * key);
 void main_display_bible(const char * mod_name, const char * key);
 void main_display_devotional(void);
-void main_change_verse(const char * bible, const char * commentary, 
-						const char * key);
 void main_setup_displays(void);
-void main_dictionary_entery_changed(char * mod_name);
+void main_dictionary_entry_changed(char * mod_name);
 void main_dictionary_button_clicked(gint direction);
 const char *main_get_module_language(const char *module_name);
 int main_check_for_global_option(char * mod_name, char * option);
 int main_has_cipher_tag(char *mod_name);
 int main_is_module(char * mod_name);
-const char *main_get_mod_config_entry(const char * module_name, const char * entry);
+const char *main_get_mod_config_entry(const char * module_name, 
+					const char * entry);
 char *main_get_mod_about_info(char * mod_name);
 char *main_get_striptext(char *module_name, char *key);
 char *main_get_rendered_text(char *module_name, char *key);

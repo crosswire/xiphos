@@ -393,7 +393,7 @@ static GtkWidget *create_setup_druid(GList * biblemods,
 	sprintf(gcommmods, "%d", g_list_length(commmods));
 	sprintf(gdictmods, "%d", g_list_length(dictmods));
 
-	pathtomods = get_path_to_mods();
+	pathtomods = main_get_path_to_mods();
 
 	sprintf(gs_version, "%s-%s", _("Welcome To GnomeSword"),
 		VERSION);
@@ -492,7 +492,7 @@ static GtkWidget *create_setup_druid(GList * biblemods,
 	/*
 	 * get sword version
 	 */
-	ver = get_sword_version();
+	ver = main_get_sword_version();
 	sprintf(version, "%s-%s", _("Sword"), ver);
 
 
