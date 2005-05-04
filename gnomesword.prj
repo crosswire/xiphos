@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug
+project.configure.options=--prefix=/home/teeb --enable-moz_embed --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -253,7 +253,8 @@ module.source.files=\
 	src/editor/editor-control.c\
 	src/backend/sword_main.cc\
 	src/gnome2/note_editor.c\
-	src/main/tab_history.c
+	src/main/tab_history.c\
+	src/main/previewer.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -107,7 +107,7 @@ client_die_cb (GnomeClient *client, gpointer data)
 	
 	shutdown_frontend();
 	/* shutdown the sword stuff */
-	shutdown_backend();
+	main_shutdown_backend();
 
 	gtk_main_quit ();
 }
