@@ -631,7 +631,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 			tmp = mod_mgr_remote_list_modules(source);
 	} else {
 
-		tmp = mod_mgr_list_local_modules(get_path_to_mods());
+		tmp = mod_mgr_list_local_modules(main_get_path_to_mods());
 	}
 
 	store = GTK_TREE_STORE(gtk_tree_view_get_model(treeview));
@@ -2564,7 +2564,7 @@ void gui_open_mod_mgr(void)
 	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
 	gtk_label_set_text(GTK_LABEL(label_home), str->str);
 
-	path = get_path_to_mods();
+	path = main_get_path_to_mods();
 	gtk_label_set_text(GTK_LABEL(label_system), path);
 	if (access(path, W_OK) == -1) {
 		g_print("%s is write protected\n", path);

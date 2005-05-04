@@ -475,6 +475,8 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
 	gtk_box_pack_start(GTK_BOX(toolbar_box),
 			   widgets.toolbar_studypad, FALSE, FALSE, 0);
 	toolbar = gui_toolbar_edit(cd);
+#include <gnome.h>
+#include <glade/glade.h>
 	gtk_widget_show(toolbar);
 	gtk_box_pack_start(GTK_BOX(toolbar_box), toolbar, FALSE, FALSE,
 			   0);

@@ -946,11 +946,6 @@ char *BackEnd::navigate_module(int direction) {
 	return retval; //strdup((char *) display_mod->KeyText());
 }
 
-
-void BackEnd::setup_displays(void) {
-	
-}
-
 GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	GList *retlist = NULL;
 	VerseKey key;
@@ -1108,12 +1103,6 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 				(void *) &progressunits);
 	search_scope_list = results;
 	return results.Count();
-}
-
-char *BackEnd::url_encode(const char * pram) {
-	gchar *retval;
-	retval = strdup(URL::encode(pram).c_str());
-	return retval;
 }
  
 void BackEnd::init_language_map(void) {
