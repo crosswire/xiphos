@@ -29,14 +29,6 @@
 #include <config.h>
 #endif
 
-#ifndef __GNUC__
-#include <io.h>
-#else
-#include <unistd.h>
-#include <unixstr.h>
-#endif
-
-
 #include <glib-2.0/glib.h>
 #include <swmgr.h>
 #include <installmgr.h>
