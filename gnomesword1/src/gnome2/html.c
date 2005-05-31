@@ -529,7 +529,7 @@ static void print_footer(GtkHTML * html,
 					   gnome_font_get_ascender(info->
 								   local_font));
 			gnome_print_setfont(print_context, info->local_font);
-			gnome_print_show(print_context, text);
+			gnome_print_show(print_context, (const guchar *)text);
 			g_free(text);
 		}
 		if(info->footer_date) {
@@ -542,7 +542,7 @@ static void print_footer(GtkHTML * html,
 					   gnome_font_get_ascender(info->
 								   local_font));
 			gnome_print_setfont(print_context, info->local_font);
-			gnome_print_show(print_context, text);	
+			gnome_print_show(print_context, (const guchar *)text);	
 			g_free(text);
 		}
 		gnome_print_grestore(print_context);
@@ -569,7 +569,7 @@ static struct _info *info_new(GtkHTML * html,
 	struct _info *info;
 
 	info = g_new(struct _info, 1);
-	info->local_font = gnome_font_find_closest("Sans Regular", 10.0);
+	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
 
 	if (info->local_font)
 		*line =
@@ -619,7 +619,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	if (!preview) {
 		dialog =
 		    (GtkDialog *) gnome_print_dialog_new(NULL,
-						 _("Print"),
+						(const guchar *) _("Print"),
 						 GNOME_PRINT_DIALOG_COPIES);
 		gtk_dialog_set_default_response(dialog,
 					GNOME_PRINT_DIALOG_RESPONSE_PRINT);
@@ -669,7 +669,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 		GtkWidget *pw;
 
 		pw = gnome_print_job_preview_new(print_master,
-						 _("Print Preview"));
+						(const guchar *) _("Print Preview"));
 		gtk_widget_show(pw);
 	} else {
 		int result = gnome_print_job_print(print_master);

@@ -747,8 +747,6 @@ void create_mainwindow(void)
 	gtk_window_set_default_size((GtkWindow *)widgets.app,
                                              settings.gs_width,
                                              settings.gs_hight);
-	/*gtk_widget_set_size_request(widgets.app, settings.gs_width,
-			     settings.gs_hight);*/
 }
 
 

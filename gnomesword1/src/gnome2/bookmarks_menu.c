@@ -143,9 +143,9 @@ static void save_iter_to_xml_removed(GtkTreeIter * iter)
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
-	const xmlChar *xml_filename;
+	//const xmlChar *xml_filename;
 	gchar *caption = NULL;
-	gchar buf[256];
+	gchar filename[256];
 	GtkTreeIter child;
 	
 	if (!bookmarks_changed) 
@@ -153,15 +153,15 @@ static void save_iter_to_xml_removed(GtkTreeIter * iter)
 	
 	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
 			   2, &caption, -1);
-	sprintf(buf, "%s/bookmarks/removed/%s.xml", settings.gSwordDir,caption);
-	xml_filename = (const xmlChar *) buf;
+	sprintf(filename, "%s/bookmarks/removed/%s.xml", settings.gSwordDir,caption);
+	//xml_filename = (const xmlChar *) buf;
 	root_doc = xmlNewDoc((const xmlChar *) "1.0");
 	
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
 		root_attr =
-		    xmlNewProp(root_node, "syntaxVersion",
+		    xmlNewProp(root_node, (const xmlChar *)"syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
 	}
@@ -172,7 +172,7 @@ static void save_iter_to_xml_removed(GtkTreeIter * iter)
 			parse_treeview(cur_node, iter);
 		}
 	g_free(caption);
-	xmlSaveFormatFile(xml_filename, root_doc,1);
+	xmlSaveFormatFile(filename, root_doc,1);
 	xmlFreeDoc(root_doc);
 	
 	bookmarks_changed = FALSE;
@@ -200,7 +200,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
-	const xmlChar *xml_filename;
+	//const xmlChar *xml_filename;
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
@@ -210,14 +210,14 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	if (!bookmarks_changed) 
 		return;
 	
-	xml_filename = (const xmlChar *) filename;
+	//xml_filename = (const xmlChar *) filename;
 	root_doc = xmlNewDoc((const xmlChar *) "1.0");
 	
 	if (root_doc != NULL) {
 		root_node = xmlNewNode(NULL, (const xmlChar *)
 				       "SwordBookmarks");
 		root_attr =
-		    xmlNewProp(root_node, "syntaxVersion",
+		    xmlNewProp(root_node, (const xmlChar *) "syntaxVersion",
 			       (const xmlChar *) "1");
 		xmlDocSetRootElement(root_doc, root_node);
 	}
@@ -247,7 +247,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 		g_free(description);	
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model),iter));
 	
-	xmlSaveFormatFile(xml_filename, root_doc,1);
+	xmlSaveFormatFile(filename, root_doc,1);
 	xmlFreeDoc(root_doc);
 	g_free(filename);	
 	bookmarks_changed = FALSE;
