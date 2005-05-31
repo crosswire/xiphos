@@ -54,7 +54,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event);
  * static - global to this file only
  */
 static DIALOG_DATA *cur_vt;
-static gboolean in_url;
+//static gboolean in_url;
 static GtkWidget *sync_button;
 GtkTextBuffer *text_buffer;
 /******************************************************************************
