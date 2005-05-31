@@ -193,7 +193,7 @@ void gui_save_tabs(const gchar *filename)
 	xmlNodePtr cur_node;
 	xmlNodePtr section_node;
 	xmlAttrPtr xml_attr;
-	const xmlChar *xml_filename;
+	//const xmlChar *xml_filename;
 	gchar *tabs_dir;
 	gchar *file;
 	GList *tmp = NULL;
@@ -210,7 +210,7 @@ void gui_save_tabs(const gchar *filename)
 		}
 	}
 	file = g_strdup_printf("%s%s",tabs_dir,filename);
-	xml_filename = (const xmlChar *) file;
+	//xml_filename = (const xmlChar *) file;
 	
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
@@ -221,7 +221,7 @@ void gui_save_tabs(const gchar *filename)
 	}
 
 	root_node = xmlNewNode(NULL, (const xmlChar *) "GnomeSword_Tabs");
-	xml_attr = xmlNewProp(root_node, "Version", VERSION);
+	xml_attr = xmlNewProp(root_node, (const xmlChar *)"Version", (const xmlChar *) VERSION);
 	xmlDocSetRootElement(xml_doc, root_node);
 	
 	section_node = xmlNewChild(root_node, NULL,
@@ -233,25 +233,25 @@ void gui_save_tabs(const gchar *filename)
 		
 		cur_node = xmlNewChild(section_node,
 				NULL, (const xmlChar *) "tab", NULL);
-		xmlNewProp(cur_node,"text_mod",
+		xmlNewProp(cur_node,(const xmlChar *)"text_mod",
 				(const xmlChar *)pt->text_mod);		
-		xmlNewProp(cur_node, "commentary_mod", 
+		xmlNewProp(cur_node, (const xmlChar *)"commentary_mod", 
 				(const xmlChar *)pt->commentary_mod);
-		xmlNewProp(cur_node, "dictlex_mod",
+		xmlNewProp(cur_node, (const xmlChar *)"dictlex_mod",
 				(const xmlChar *)pt->dictlex_mod);		
-		xmlNewProp(cur_node, "book_mod", 
+		xmlNewProp(cur_node, (const xmlChar *)"book_mod", 
 				(const xmlChar *)pt->book_mod);
-		xmlNewProp(cur_node, "text_commentary_key",
+		xmlNewProp(cur_node, (const xmlChar *)"text_commentary_key",
 				(const xmlChar *)pt->text_commentary_key);		
-		xmlNewProp(cur_node, "dictlex_key", 
+		xmlNewProp(cur_node, (const xmlChar *)"dictlex_key", 
 				(const xmlChar *)pt->dictlex_key);		
-		xmlNewProp(cur_node, "book_offset", 
+		xmlNewProp(cur_node, (const xmlChar *)"book_offset", 
 				(const xmlChar *)pt->book_offset);		
-		xmlNewProp(cur_node, "comm_showing", 
+		xmlNewProp(cur_node, (const xmlChar *)"comm_showing", 
 				(const xmlChar *)true_false2yes_no(pt->comm_showing));
 		tmp = g_list_next(tmp);
 	}
-	xmlSaveFormatFile(xml_filename, xml_doc,1);
+	xmlSaveFormatFile(file, xml_doc,1);
 	xmlFreeDoc(xml_doc);
 }
 
@@ -274,7 +274,7 @@ void gui_load_tabs(const gchar *filename)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr tmp_node, childnode;
-	const xmlChar *xml_filename;
+	//const xmlChar *xml_filename;
 	gchar *tabs_dir, *file, *val;
 	gboolean error = FALSE;
 
@@ -295,8 +295,8 @@ void gui_load_tabs(const gchar *filename)
 		}	
 		file = g_strdup_printf("%s%s",tabs_dir,filename);
 
-		xml_filename = (const xmlChar *) file;
-		xml_doc = xmlParseFile(xml_filename);
+		//xml_filename = (const xmlChar *) file;
+		xml_doc = xmlParseFile(file);
 		if (xml_doc == NULL) {
 			fprintf(stderr, "Document not parsed successfully. \n");
 			error = TRUE;
@@ -328,28 +328,28 @@ void gui_load_tabs(const gchar *filename)
 						{
 							pt = g_new0(PASSAGE_TAB_INFO, 1);
 							
-							val = (gchar*)xmlGetProp(tmp_node, "text_mod");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"text_mod");
 							pt->text_mod = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "commentary_mod");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"commentary_mod");
 							pt->commentary_mod = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "dictlex_mod");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"dictlex_mod");
 							pt->dictlex_mod = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "book_mod");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"book_mod");
 							pt->book_mod = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "text_commentary_key");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"text_commentary_key");
 							pt->text_commentary_key = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "dictlex_key");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"dictlex_key");
 							pt->dictlex_key = g_strdup(val);
 							xmlFree(val);
-							val = (gchar*)xmlGetProp(tmp_node, "book_offset");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"book_offset");
 							pt->book_offset = g_strdup(val);
 							xmlFree(val);					
-							val = (gchar*)xmlGetProp(tmp_node, "comm_showing");
+							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"comm_showing");
 							pt->comm_showing = yes_no2true_false(val);
 							xmlFree(val);
 							pt->history_items = 0;	

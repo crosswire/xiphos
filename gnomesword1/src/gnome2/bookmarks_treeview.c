@@ -193,8 +193,8 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 {
 	xmlChar *folder;
 
-	folder = xmlGetProp(cur, "caption");
-	data->caption = g_strdup(folder);
+	folder = xmlGetProp(cur, (const xmlChar *) "caption");
+	data->caption = g_strdup((char *)folder);
 	data->key = NULL;	//g_strdup("GROUP");
 	data->module = NULL;	//g_strdup("GROUP");
 	data->module_desc = NULL;	//g_strdup("GROUP");
@@ -233,11 +233,11 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 
 	data->opened = bm_pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
-	mod1 = xmlGetProp(cur, "modulename");
-	key = xmlGetProp(cur, "key");
+	mod1 = xmlGetProp(cur, (const xmlChar *)"modulename");
+	key = xmlGetProp(cur, (const xmlChar *)"key");
 	//caption = xmlGetProp(cur, "caption"); 
-	mod_desc = xmlGetProp(cur, "moduledescription");
-	description = xmlGetProp(cur, "description");
+	mod_desc = xmlGetProp(cur, (const xmlChar *)"moduledescription");
+	description = xmlGetProp(cur, (const xmlChar *)"description");
 /*	if (caption) {
 		if (strlen(caption) > 0) {
 			data->caption = g_strdup(caption);
@@ -246,26 +246,26 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 			data->caption = g_strdup(buf);
 		}
 	} else {*/
-	caption = xmlGetProp(cur, "description");
-	if (caption) {
-		if (strlen(caption) > 0) {
-			data->caption = g_strdup(caption);
+	caption = xmlGetProp(cur, (const xmlChar *)"description");
+	if ((char *)caption) {
+		if (strlen((char *)caption) > 0) {
+			data->caption = g_strdup((char *)caption);
 		} else {
 			sprintf(buf, "%s, %s", key, mod1);
-			data->caption = g_strdup(buf);
+			data->caption = g_strdup((char *)buf);
 		}
 	} else
-		data->caption = g_strdup(key);
+		data->caption = g_strdup((char *)key);
 //      }
 /*	if(strstr(key,"sword://"))
 		url = g_strdup(key);
 	else 
 		url = g_strdup_printf("sword://%s/%s",mod1,key);
 */
-	data->key = g_strdup(key);
-	data->module = g_strdup(mod1);
-	data->description = g_strdup(description);
-	data->module_desc = g_strdup(mod_desc);
+	data->key = g_strdup((char *)key);
+	data->module = g_strdup((char *)mod1);
+	data->description = g_strdup((char *)description);
+	data->module_desc = g_strdup((char *)mod_desc);
 	data->is_leaf = TRUE;
 //      if(url) g_free(url);
 }
