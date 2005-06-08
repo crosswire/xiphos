@@ -1,0 +1,22 @@
+Source: gnomesword
+Section: gnome
+Priority: optional
+Maintainer: Daniel Glassey <danglassey@yahoo.com>
+Standards-Version: 2.1.2
+
+Package: gnomesword
+Architecture: any
+Depends: ${shlibs:Depends}
+Provides: sword-frontend
+Description: A bible study program for GNOME using the SWORD library. Features:
+ Search Bible and Commentary
+ Search Personal notes
+ Add personal notes to verses
+ Bookmarks
+ Interlinear Page - Display up to five versions
+ StudyPad for keeping notes
+ Spellcheck for StudyPad and Personal notes (uses gnome-spell)
+ Uses modules from the SWORD Project
+ Support for Sword Bible, Commentary, Lexicon and General Book modules
+
+  
