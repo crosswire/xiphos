@@ -26,23 +26,29 @@
 extern "C" {
 #endif
 
+void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_folder_changed(GtkFileChooser  *filechooser, gpointer user_data);
 void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data);
-//void on_combobox3_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data);
-//void on_combobox5_changed(GtkComboBox * combobox, gpointer user_data);
-//void on_combobox6_changed(GtkComboBox * combobox, gpointer user_data);
+void on_combobox5_changed(GtkComboBox * combobox, gpointer user_data);
+void on_combobox6_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox7_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox8_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox9_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox10_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox11_changed(GtkComboBox * combobox, gpointer user_data);
-/*void on_combobox12_changed(GtkComboBox * combobox, gpointer user_data);
+void on_combobox12_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox13_changed(GtkComboBox * combobox, gpointer user_data);
-void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data);*/
+void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data);
-//void on_combobox16_changed(GtkComboBox * combobox, gpointer user_data);
 
 void on_colorbutton1_color_set(GtkColorButton *colorbutton, gpointer user_data);
 void gui_setup_preferences_dialog(void);
