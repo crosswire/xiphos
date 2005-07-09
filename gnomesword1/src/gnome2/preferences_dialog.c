@@ -1597,7 +1597,6 @@ static void create_preferences_dialog(void)
 
 	glade_file = gui_general_user_file ("prefs.glade", TRUE);
 	g_return_if_fail(glade_file != NULL);
-	g_message(glade_file);
 	
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);

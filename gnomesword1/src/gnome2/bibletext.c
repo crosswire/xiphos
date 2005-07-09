@@ -35,6 +35,7 @@
 #include "gui/gnomesword.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
+#include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
@@ -817,8 +818,11 @@ void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	gchar *label = g_strdup_printf("%s, %s",settings.currentverse,
 					settings.MainWindowModule);
-	gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
-			settings.MainWindowModule, settings.currentverse));
+	//gint result = gtk_dialog_run((GtkDialog *)
+	gui_bookmark_dialog(label,
+			settings.MainWindowModule, settings.currentverse);
+	
+	
 	g_free(label);	
 }
 

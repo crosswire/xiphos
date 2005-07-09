@@ -10,7 +10,7 @@ AM_CONFIG_HEADER(config.h)
 AC_PROG_MAKE_SET
 
 dnl AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
-DIRS="backend editor main gnome2 gui"
+DIRS="backend editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
@@ -274,7 +274,7 @@ src/backend/Makefile
 src/editor/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-src/gui/Makefile
+ui/Makefile
 gnomesword.desktop.in
 gnomesword.spec
 ])
