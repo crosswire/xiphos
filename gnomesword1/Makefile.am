@@ -2,7 +2,7 @@
 
 @INTLTOOL_DESKTOP_RULE@
 
-SUBDIRS = m4 doc po src
+SUBDIRS = m4 doc po src ui
 
 gnomesworddoc_DATA = \
 	README \

@@ -64,6 +64,7 @@
 #include "gtkhtml/gtkhtmldebug.h"
 #endif
 
+#include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 static void
 undo (GtkWidget *mi, GSHTMLEditorControlData *cd)
@@ -344,23 +345,19 @@ bookmark_item (GtkWidget *mi, GSHTMLEditorControlData *cd)
 	gchar *label = NULL;
 	
 	if(cd->studypad) {
-		label = g_strdup_printf("%s, %s",cd->filename,
-					"studypad");
-		gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
-				"studypad", cd->filename));
+		label = g_strdup_printf("%s, %s",cd->filename, "studypad");
+		gui_bookmark_dialog(label, "studypad", cd->filename);
 		g_free(label);
-		g_message("studypad");
 	} else if(cd->personal_comments) {
-		label = g_strdup_printf("%s, %s",cd->key,
-					cd->filename);
-		gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
-				cd->filename, cd->key));
+		label = g_strdup_printf("%s, %s",cd->key, cd->filename);
+		gui_bookmark_dialog(label, cd->filename, cd->key);
 		g_free(label);	
 	}
 }
 
 #define ADD_ITEM_BASE(f,t) \
-                g_object_set_data (G_OBJECT (menuitem), "type", GINT_TO_POINTER (GTK_HTML_EDIT_PROPERTY_ ## t)); \
+                g_object_set_data (G_OBJECT (menuitem), "type",  \
+		GINT_TO_POINTER (GTK_HTML_EDIT_PROPERTY_ ## t)); \
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem); \
 		gtk_widget_show (menuitem); \
 		g_signal_connect (menuitem, "activate", G_CALLBACK (f), cd); \
