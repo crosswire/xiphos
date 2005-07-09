@@ -6,7 +6,8 @@ INCLUDES =  \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
-    -DLIBDIR=\""$(libdir)"\" 
+    -DLIBDIR=\""$(libdir)"\" \
+    -DSHARE_DIR=\"$(pkgdatadir)\" 
 
 
 bin_PROGRAMS = gnomesword2
