@@ -2,7 +2,7 @@
 
 	* added gui/prefs.glade gui/Makefile.am and gui/logo.png 
 	* now trying libglade to build the preferences dialog.
-	* if this works out we will put the *.glade files in thier own dir.
+	* if this works out we will put the *.glade files in their own dir.
 
 
 2005-04-25  terry <tbiggs@users.sf.net>

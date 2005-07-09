@@ -41,6 +41,76 @@
 
 
 
+/*
+ * taken from galeon 
+ * glade_signal_connect_func: used by glade_xml_signal_autoconnect_full
+ */
+void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
+			   const gchar *signal_name, const gchar *signal_data,
+			   GObject *conn_obj, gboolean conn_after,
+			   gpointer user_data)
+{
+	/** Module with all the symbols of the program */
+	static GModule *mod_self = NULL;
+	gpointer handler_func;
+
+ 	/* initialize gmodule */
+	if (mod_self == NULL)
+	{
+		mod_self = g_module_open (NULL, 0);
+		g_assert (mod_self != NULL);
+	}
+
+	/*g_print( "glade_signal_connect_func: cb_name = '%s', signal_name = '%s', signal_data = '%s'\n",
+	  cb_name, signal_name, signal_data ); */
+	
+	if (g_module_symbol (mod_self, cb_name, &handler_func))
+	{
+		/* found callback */
+		if (conn_obj)
+		{
+			if (conn_after)
+			{
+				g_signal_connect_object
+                                        (obj, signal_name, 
+                                         handler_func, conn_obj,
+                                         G_CONNECT_AFTER);
+			}
+			else
+			{
+				g_signal_connect_object
+                                        (obj, signal_name, 
+                                         handler_func, conn_obj,
+                                         G_CONNECT_SWAPPED);
+			}
+		}
+		else
+		{
+			/* no conn_obj; use standard connect */
+			gpointer data = NULL;
+			
+			data = user_data;
+			
+			if (conn_after)
+			{
+				g_signal_connect_after
+					(obj, signal_name, 
+					 handler_func, data);
+			}
+			else
+			{
+				g_signal_connect
+					(obj, signal_name, 
+					 handler_func, data);
+			}
+		}
+	}
+	else
+	{
+		g_warning("callback function not found: %s", cb_name);
+	}
+}
+
 
 /**
  * taken form galeon-1.3.21
@@ -97,8 +167,8 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 #ifdef MAINTAINER_MODE
 	/* generally only developers have any use for these */
 	alternative[i++] = g_build_filename ("..", fname, NULL);
-	alternative[i++] = g_build_filename ("gui", fname, NULL);
-	alternative[i++] = g_build_filename ("..", "gui", fname, NULL);
+	alternative[i++] = g_build_filename ("src/gui", fname, NULL);
+	alternative[i++] = g_build_filename ("..", "src/gui", fname, NULL);
 #endif
 	alternative[i++] = g_build_filename (SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
