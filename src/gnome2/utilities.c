@@ -40,6 +40,116 @@
 #include "main/sword.h"
 
 
+
+
+/**
+ * taken form galeon-1.3.21
+ * misc_general_user_file: returns the pathname of galeon shared files
+ * (e.g., galeon.glade)
+ *
+ * fname: just the filename with no path information
+ * critical: critical file? (halt if not found)
+ */
+gchar * gui_general_user_file (const char *fname, gboolean critical)
+{
+	static GHashTable *already_found = NULL;
+	gchar *alternative[6];
+	gchar *file;
+	gint i;
+	
+	/* create cache hash table if it doesnt already exist */
+	if (already_found == NULL)
+	{
+		already_found = g_hash_table_new_full (g_str_hash, g_str_equal,
+						       g_free, g_free);
+	}
+
+        /* Have we already found this? */
+	file = g_hash_table_lookup (already_found, fname);
+	if (file != NULL)
+	{
+		if (g_file_test (file, G_FILE_TEST_EXISTS))
+		{
+			return g_strdup (file);
+		}
+		else
+		{
+			g_hash_table_remove (already_found, fname);
+		}
+	}
+
+	/* try the default */
+	file = g_build_filename (g_get_home_dir (), ".gnomesword-2.0", fname, NULL);
+	
+	/* success? */
+	if (g_file_test (file, G_FILE_TEST_EXISTS))
+	{
+		/* add it to the set of found files */
+		g_hash_table_insert (already_found, g_strdup (fname), 
+				     g_strdup (file));
+		return file;
+	}
+	g_free(file);
+
+	/* specify alternate locations in order of precedence */
+	i = 0;
+	alternative[i++] = g_strdup (fname);
+#ifdef MAINTAINER_MODE
+	/* generally only developers have any use for these */
+	alternative[i++] = g_build_filename ("..", fname, NULL);
+	alternative[i++] = g_build_filename ("gui", fname, NULL);
+	alternative[i++] = g_build_filename ("..", "gui", fname, NULL);
+#endif
+	alternative[i++] = g_build_filename (SHARE_DIR, fname, NULL);
+	alternative[i++] = NULL;  /* NULL terminator needed */
+	
+	/* select one of the alternatives */
+	file = NULL;
+	for (i = 0; alternative[i] != NULL; i++)
+	{
+		if (file == NULL && g_file_test (alternative[i], G_FILE_TEST_EXISTS)) 
+		{
+			file = alternative[i];
+		}
+		else
+		{
+			/* free unused string */
+			g_free (alternative[i]);
+		}
+	}
+
+	/* check for success */
+	if (file != NULL)
+	{
+		/* warn if we're using other than the install default */
+		if (!g_path_is_absolute (file))
+		{
+			gchar * cwd, *file1;
+			g_message ("Using %s (usually OK)", file);
+
+			/* Make it absolute */
+			cwd = g_get_current_dir();
+			file1 = g_build_filename (cwd, file, NULL);
+			g_free (file);
+			g_free (cwd);
+			file = file1;
+		}
+
+		/* add it to the set of found files */
+		g_hash_table_insert (already_found, g_strdup (fname), 
+				     g_strdup (file));
+	}
+	/* if nothing then theres an error */
+	else if (critical)
+	{
+		g_error(_("%s not found"), fname);
+	}
+
+	/* return result */
+	return file;
+}
+
+
 /******************************************************************************
  * Name
  *   add_language_folder
@@ -292,6 +402,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
 }
+
 
 /******************************************************************************
  * Name

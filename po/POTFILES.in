@@ -59,3 +59,5 @@ src/gnome2/studypad.c
 src/gnome2/tabbed_browser.c
 src/gnome2/toolbar_nav.c
 src/gnome2/utilities.c
+# Glade files
+src/gui/prefs.glade
