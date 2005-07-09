@@ -26,6 +26,10 @@ extern "C" {
 #include <gnome.h>
 #include "main/configs.h"
 
+void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
+			   const gchar *signal_name, const gchar *signal_data,
+			   GObject *conn_obj, gboolean conn_after,
+			   gpointer user_data);
 gchar *gui_general_user_file (const char *fname, gboolean critical);
 void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar);
 MOD_FONT *get_font(gchar * mod_name);
