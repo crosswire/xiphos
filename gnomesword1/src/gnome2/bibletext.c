@@ -613,7 +613,11 @@ void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_GTKMOZEMBED
+	embed_print(TRUE, GTK_MOZ_EMBED(widgets.html_text));
+#else
 	gui_html_print(widgets.html_text, FALSE);
+#endif
 }
 
 

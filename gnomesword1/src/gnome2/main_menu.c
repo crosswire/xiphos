@@ -248,7 +248,6 @@ static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
 		save_conf_file_item(file, settings.MainWindowModule, "style",
 				(menuitem->active)?"verse":"paragraph");
 		if (settings.havebible) {
-			/* show the change */
 			main_url_handler(url, TRUE);		
 		}
 		g_free(url);
