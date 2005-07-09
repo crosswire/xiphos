@@ -167,8 +167,8 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 #ifdef MAINTAINER_MODE
 	/* generally only developers have any use for these */
 	alternative[i++] = g_build_filename ("..", fname, NULL);
-	alternative[i++] = g_build_filename ("src/gui", fname, NULL);
-	alternative[i++] = g_build_filename ("..", "src/gui", fname, NULL);
+	alternative[i++] = g_build_filename ("ui", fname, NULL);
+	alternative[i++] = g_build_filename ("..", "ui", fname, NULL);
 #endif
 	alternative[i++] = g_build_filename (SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */

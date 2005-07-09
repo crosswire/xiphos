@@ -34,6 +34,7 @@
 #endif
 
 //#include "gui/gtkhtml_display.h"
+#include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
@@ -604,8 +605,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	gchar *local_name = main_get_treekey_local_name(settings.book_offset);
 	gchar *label = g_strdup_printf("%s, %s",local_name,settings.book_mod);
 
-	gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
-			settings.book_mod, key));
+	gui_bookmark_dialog(label, settings.book_mod, key);
 	g_free(label);	
 	g_free(local_name);		
 	g_free(key);	
