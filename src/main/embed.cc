@@ -72,7 +72,7 @@
 #include <nsIEventStateManager.h>
 #include <nsIClipboardCommands.h>
 #include <nsIParserNode.h>
-//#include "nsIWebBrowserPrint.h"
+#include "nsIWebBrowserPrint.h"
 
 #endif
 
@@ -99,29 +99,57 @@ extern gboolean shift_key_presed;
 
 
 #ifdef USE_GTKMOZEMBED
-/*
-nsresult GaleonWrapper::Print (nsIPrintSettings *options, PRBool preview, GtkWindow *parent)
+
+static
+nsresult embed_get_print_settings (nsIWebBrowser *mWebBrowser, nsIPrintSettings **options)
+{
+	g_return_val_if_fail (mWebBrowser, NS_ERROR_FAILURE);
+
+	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(mWebBrowser));
+	NS_ENSURE_TRUE (print, NS_ERROR_FAILURE);
+
+	return print->GetGlobalPrintSettings(options);
+}
+static
+nsresult embed_print_real(nsIPrintSettings *options, PRBool preview, 
+			nsIWebBrowser *wb, GtkWindow *parent)
 {
 	nsresult rv;
 
-	g_return_val_if_fail (mWebBrowser, NS_ERROR_FAILURE);
+	g_return_val_if_fail (wb, NS_ERROR_FAILURE);
 
-	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(mWebBrowser, &rv));
+	g_message("not a NS_ERROR_FAILURE 1");
+	
+	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(wb, &rv));
 	if (NS_FAILED(rv) || !print) return NS_ERROR_FAILURE;
 
+	g_message("not a NS_ERROR_FAILURE 2");
 	if (!preview)
 	{
-		GPrintListener *listener = new GPrintListener(print, options, parent);
-		rv = print->Print (options, listener);
+		//GPrintListener *listener = new GPrintListener(print, options, parent);
+		//rv = print->Print (options, listener);
 	}
 	else
 	{
-		rv = print->PrintPreview(options, nsnull, nsnull);
+		rv = print->PrintPreview(options, nsnull, nsnull);//options, nsnull, nsnull);
 	}
 
 	return rv;
 }
-*/
+
+void embed_print(gboolean preview, GtkMozEmbed *embed)
+{
+	nsIPrintSettings *options;
+	nsIWebBrowser *wb;
+	
+	gtk_moz_embed_get_nsIWebBrowser (embed, &wb);
+	embed_get_print_settings (wb, &options);
+
+	
+	embed_print_real(options, preview, wb, NULL);
+}
+
+
 static 
 gint embed_dom_key_down(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 {
