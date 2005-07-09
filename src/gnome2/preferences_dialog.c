@@ -264,6 +264,438 @@ static gchar *gdkcolor_to_hex(GdkColor color, gint websafe)
 }
 
 
+static void apply_color_settings(void)
+{	
+	if (settings.havebible)
+	      main_display_bible(settings.MainWindowModule, 
+      			settings.currentverse);
+	if (settings.havecomm)
+		main_display_commentary(settings.CommWindowModule, 
+			settings.currentverse);
+	if (settings.havedict)
+		main_display_dictionary(settings.DictWindowModule, 
+			settings.dictkey);
+	if (settings.havebible)
+		main_update_parallel_page();
+	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
+}
+
+
+
+
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton1_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton1_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton1_color_set(GtkColorButton  * colorbutton, 
+							gpointer user_data)
+{
+	gchar *buf = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "background", buf);
+	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
+	if (buf)
+		g_free(buf);
+	apply_color_settings();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton2_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton2_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton2_color_set(GtkColorButton * colorbutton,
+                                        		gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "text_fg", buf2);
+	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton3_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton3_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton3_color_set(GtkColorButton * colorbutton,
+                                       			gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "currentverse", buf2);
+	settings.currentverse_color = 
+		xml_get_value("HTMLcolors", "currentverse");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton4_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton4_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton4_color_set(GtkColorButton * colorbutton,
+                                    		    gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "versenum", buf2);
+	settings.bible_verse_num_color =
+		xml_get_value("HTMLcolors", "versenum");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton5_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton5_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton5_color_set(GtkColorButton * colorbutton,
+                                       			 gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "link", buf2);
+	settings.link_color = xml_get_value("HTMLcolors", "link");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton1_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if (togglebutton->active) {
+		xml_set_value("GnomeSword", "tabs", "browsing", "1");
+		settings.browsing = TRUE;
+		gui_open_tabs();
+		gtk_widget_show(widgets.hboxtb);
+	} else {
+		xml_set_value("GnomeSword", "tabs", "browsing", "0");
+		gtk_widget_hide(widgets.hboxtb);
+		settings.browsing = FALSE;
+		gui_close_all_tabs();
+	}
+	settings.browsing = atoi(xml_get_value("tabs", "browsing"));
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton2_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "showtexts", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showtexts", "0");
+	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
+	GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active =
+	    settings.showtexts;
+	gui_show_hide_texts(togglebutton->active);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton3_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "showcomms", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showcomms", "0");
+	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
+	GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active =
+	    settings.showcomms;
+	gui_show_hide_comms(togglebutton->active);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton4_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+{
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "showdicts", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showdicts", "0");
+	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
+	GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active =
+	    settings.showdicts;
+	gui_show_hide_dicts(togglebutton->active);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton5_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+
+void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	extern gboolean style_display;
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "versestyle", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "versestyle", "0");
+	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
+	
+	style_display = TRUE;	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.versestyle_item),
+			       settings.versestyle);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton6_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "lexicons", "usedefaultdict", "1");
+	else
+		xml_set_value("GnomeSword", "lexicons", "usedefaultdict", "0");
+	settings.useDefaultDict =
+			atoi(xml_get_value("lexicons", "usedefaultdict"));
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton7_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if(togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "dailydevotional", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "dailydevotional", "0");
+	settings.showdevotional = atoi(xml_get_value("misc","dailydevotional"));
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton8_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "splash", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "splash", "0");
+	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+}
+
+
 /******************************************************************************
  * Name
  *   on_folder_changed
@@ -288,76 +720,6 @@ void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
 	settings.studypaddir = xml_get_value("studypad", "directory");
 	//g_message("on__folder_changed to %s", directory);
 	g_free(directory);
-}
-
-
-/******************************************************************************
- * Name
- *   on_colorbutton1_color_set
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_colorbutton1_color_set(GtkColorButton * colorbutton, gpointer user_data)
- *
- * Description
- *   a color picker has changed
- *   
- *
- * Return value
- *   void
- */
- 
-void on_colorbutton_color_set(GtkColorButton * colorbutton, gpointer user_data)
-{
-	gchar *buf2 = NULL;
- 	GdkColor color;
-	
-	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
-
-	switch (GPOINTER_TO_INT(user_data)) {
-	case TEXT_FORGROUND:
-		xml_set_value("GnomeSword", "HTMLcolors", "text_fg", buf2);
-		settings.bible_text_color =
-				xml_get_value("HTMLcolors", "text_fg");
-		break;
-	case TEXT_BACKGROUND:
-		xml_set_value("GnomeSword", "HTMLcolors", "background", buf2);
-		settings.bible_bg_color =
-		    xml_get_value("HTMLcolors", "background");
-		break;
-	case TEXT_CURRENT_VERSE:
-		xml_set_value("GnomeSword", "HTMLcolors", "currentverse", buf2);
-		settings.currentverse_color =
-		    xml_get_value("HTMLcolors", "currentverse");
-		break;
-	case VERSE_NUMBERS:
-		xml_set_value("GnomeSword", "HTMLcolors", "versenum", buf2);
-		settings.bible_verse_num_color =
-		    xml_get_value("HTMLcolors", "versenum");
-		break;
-	case HREF_LINKS:
-		xml_set_value("GnomeSword", "HTMLcolors", "link", buf2);
-		settings.link_color =
-		    xml_get_value("HTMLcolors", "link");
-		break;
-	}
-	if (buf2)
-		g_free(buf2);
-
-	if (settings.havebible)
-	      main_display_bible(settings.MainWindowModule, 
-      			settings.currentverse);
-	if (settings.havecomm)
-		main_display_commentary(settings.CommWindowModule, 
-			settings.currentverse);
-	if (settings.havedict)
-		main_display_dictionary(settings.DictWindowModule, 
-			settings.dictkey);
-	if (settings.havebible)
-		main_update_parallel_page();
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -837,142 +1199,6 @@ void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data)
 }
 
 
-
-
-/******************************************************************************
- * Name
- *   on_button_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_button_toggled(GtkToggleButton * togglebutton,
- *						gpointer user_data)	
- *
- * Description
- *   a toggle button has changed
- *   set ok - apply button sensitive
- *
- * Return value
- *   void
- */
-
-static void on_button_toggled(GtkToggleButton * togglebutton,
-			      gpointer user_data)
-{
-	extern gboolean style_display;
-	switch (GPOINTER_TO_INT(user_data)) {
-	
-	case USE_DEFAULT_DICTIONARY:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "lexicons",
-				      "usedefaultdict", "1");
-		else
-			xml_set_value("GnomeSword", "lexicons",
-				      "usedefaultdict", "0");
-		settings.useDefaultDict =
-		    atoi(xml_get_value("lexicons", "usedefaultdict"));
-
-		break;
-	case USE_VERSE_STYLE:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "misc",
-				      "versestyle", "1");
-		else
-			xml_set_value("GnomeSword", "misc",
-				      "versestyle", "0");
-		settings.versestyle =
-		    atoi(xml_get_value("misc", "versestyle"));
-		
-		style_display = TRUE;
-		
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.versestyle_item),
-				       settings.versestyle);
-		break;
-	case SHOW_SPLASH_SCREEN:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "misc", "splash",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "misc", "splash",
-				      "0");
-		settings.showsplash =
-		    atoi(xml_get_value("misc", "splash"));
-		break;
-	case SHOW_BIBLE_PANE:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "misc", "showtexts",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "misc", "showtexts",
-				      "0");
-		settings.showtexts =
-		    atoi(xml_get_value("misc", "showtexts"));
-		GTK_CHECK_MENU_ITEM(widgets.viewtexts_item)->active =
-		    settings.showtexts;
-		gui_set_bible_comm_layout();
-		break;
-	case SHOW_COMMENTARY_PANE:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "misc", "showcomms",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "misc", "showcomms",
-				      "0");
-		settings.showcomms =
-		    atoi(xml_get_value("misc", "showcomms"));
-		GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active =
-		    settings.showcomms;
-		gui_set_bible_comm_layout();
-		break;
-	case SHOW_DICTIONARY_PANE:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "misc", "showdicts",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "misc", "showdicts",
-				      "0");
-		settings.showdicts =
-		    atoi(xml_get_value("misc", "showdicts"));
-		GTK_CHECK_MENU_ITEM(widgets.viewdicts_item)->active =
-		    settings.showdicts;
-		gui_set_bible_comm_layout();
-		break;
-	case SHOW_DEVOTION:
-		if (GTK_TOGGLE_BUTTON(check_button.show_devotion)->
-		    active)
-			xml_set_value("GnomeSword", "misc",
-				      "dailydevotional", "1");
-		else
-			xml_set_value("GnomeSword", "misc",
-				      "dailydevotional", "0");
-		settings.showdevotional =
-		    atoi(xml_get_value("misc", "dailydevotional"));
-		break;
-	case TABBED_BROWSING:
-		if (GTK_TOGGLE_BUTTON
-		    (check_button.enable_tabbed_browsing)->active) {
-			xml_set_value("GnomeSword", "tabs", "browsing",
-				      "1");
-			settings.browsing = TRUE;
-			//gui_notebook_main_setup();
-			gui_open_tabs();
-			gtk_widget_show(widgets.hboxtb);
-		} else {
-			xml_set_value("GnomeSword", "tabs", "browsing",
-				      "0");
-			gtk_widget_hide(widgets.hboxtb);
-			settings.browsing = FALSE;
-			gui_close_all_tabs();	//gui_notebook_main_shutdown();
-		}
-		settings.browsing =
-		    atoi(xml_get_value("tabs", "browsing"));
-		break;
-	}
-}
-
-
 /******************************************************************************
  * Name
  *   add_columns
@@ -1115,77 +1341,6 @@ static GtkTreeModel *create_model(void)
 }
 
 
-/*
- * taken from galeon 
- * glade_signal_connect_func: used by glade_xml_signal_autoconnect_full
- */
-static void
-glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
-			   const gchar *signal_name, const gchar *signal_data,
-			   GObject *conn_obj, gboolean conn_after,
-			   gpointer user_data)
-{
-	/** Module with all the symbols of the program */
-	static GModule *mod_self = NULL;
-	gpointer handler_func;
-
- 	/* initialize gmodule */
-	if (mod_self == NULL)
-	{
-		mod_self = g_module_open (NULL, 0);
-		g_assert (mod_self != NULL);
-	}
-
-	/*g_print( "glade_signal_connect_func: cb_name = '%s', signal_name = '%s', signal_data = '%s'\n",
-	  cb_name, signal_name, signal_data ); */
-	
-	if (g_module_symbol (mod_self, cb_name, &handler_func))
-	{
-		/* found callback */
-		if (conn_obj)
-		{
-			if (conn_after)
-			{
-				g_signal_connect_object
-                                        (obj, signal_name, 
-                                         handler_func, conn_obj,
-                                         G_CONNECT_AFTER);
-			}
-			else
-			{
-				g_signal_connect_object
-                                        (obj, signal_name, 
-                                         handler_func, conn_obj,
-                                         G_CONNECT_SWAPPED);
-			}
-		}
-		else
-		{
-			/* no conn_obj; use standard connect */
-			gpointer data = NULL;
-			
-			data = user_data;
-			
-			if (conn_after)
-			{
-				g_signal_connect_after
-					(obj, signal_name, 
-					 handler_func, data);
-			}
-			else
-			{
-				g_signal_connect
-					(obj, signal_name, 
-					 handler_func, data);
-			}
-		}
-	}
-	else
-	{
-		g_warning("callback function not found: %s", cb_name);
-	}
-}
-
 
 /******************************************************************************
  * Name
@@ -1263,22 +1418,6 @@ static void setup_color_pickers(void)
 			GTK_COLOR_BUTTON(color_picker.href_links),
                                         &color);
 	}
-
-	g_signal_connect(color_picker.text_background, "color-set",
-			 G_CALLBACK(on_colorbutton_color_set), 
-			 GINT_TO_POINTER(TEXT_BACKGROUND));
-	g_signal_connect(color_picker.text, "color-set",
-			 G_CALLBACK(on_colorbutton_color_set), 
-			 GINT_TO_POINTER(TEXT_FORGROUND));
-	g_signal_connect(color_picker.text_current_verse, "color-set",
-			 G_CALLBACK(on_colorbutton_color_set), 
-			 GINT_TO_POINTER(TEXT_CURRENT_VERSE));
-	g_signal_connect(color_picker.verse_numbers, "color-set",
-			 G_CALLBACK(on_colorbutton_color_set), 
-			 GINT_TO_POINTER(VERSE_NUMBERS));
-	g_signal_connect(color_picker.href_links, "color-set",
-			 G_CALLBACK(on_colorbutton_color_set), 
-			 GINT_TO_POINTER(HREF_LINKS));
 }
 
 
@@ -1308,40 +1447,6 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_splash_screen),
 				     settings.showsplash);
-	g_signal_connect(GTK_OBJECT
-			 (check_button.use_default_dictionary),
-			 "toggled",
-			 G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(USE_DEFAULT_DICTIONARY));
-	g_signal_connect(GTK_OBJECT
-			 (check_button.show_splash_screen),
-			 "toggled",
-			 G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_SPLASH_SCREEN));
-			 
-	g_signal_connect(GTK_OBJECT(check_button.use_verse_style), "toggled",
-			 G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(USE_VERSE_STYLE));
-			 
-	g_signal_connect(GTK_OBJECT(check_button.show_devotion),
-			 "toggled",
-			 G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_DEVOTION));
-	g_signal_connect(GTK_OBJECT
-			 (check_button.enable_tabbed_browsing),
-			 "toggled", G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(TABBED_BROWSING));
-
-	g_signal_connect(GTK_OBJECT(check_button.show_bible_pane),
-			 "toggled", G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_BIBLE_PANE));
-	g_signal_connect(GTK_OBJECT
-			 (check_button.show_commentary_pane),
-			 "toggled", G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_COMMENTARY_PANE));
-	g_signal_connect(GTK_OBJECT(check_button.show_dictionary_pane),
-			 "toggled", G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_DICTIONARY_PANE));
 }
 
 
@@ -1481,7 +1586,6 @@ void setup_module_comboboxs(void)
 
 static void create_preferences_dialog(void)
 {
-
 	GladeXML *gxml;
 	gchar *glade_file;
 	GtkWidget *dialog_prefs;
@@ -1493,8 +1597,6 @@ static void create_preferences_dialog(void)
 
 	glade_file = gui_general_user_file ("prefs.glade", TRUE);
 	g_return_if_fail(glade_file != NULL);
-	//glade_file = gui_general_user_file ("", TRUE);
-	//g_return_val_if_fail (glade_file != NULL, NULL);
 	g_message(glade_file);
 	
 	/* build the widget */
@@ -1566,7 +1668,7 @@ static void create_preferences_dialog(void)
 	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)glade_signal_connect_func, NULL);	
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);	
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), model);
