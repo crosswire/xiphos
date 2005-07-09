@@ -19,6 +19,7 @@ gnomesword2_SOURCES =  \
     about_sword.c \
     bibletext.c \
     bibletext_dialog.c \
+    bookmark_dialog.c \
     bookmarks_menu.c \
     bookmarks_treeview.c \
     cipher_key_dialog.c \

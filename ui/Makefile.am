@@ -1,4 +1,5 @@
-ui_DATA = prefs.glade \
+ui_DATA = bookmarks.glade \
+	prefs.glade \
 	logo.png
 
 uidir = $(pkgdatadir)

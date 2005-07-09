@@ -36,6 +36,7 @@
 #endif
 
 #include "gui/commentary.h"
+#include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
@@ -525,8 +526,8 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	gchar *label = g_strdup_printf("%s, %s",settings.currentverse,
 					settings.CommWindowModule);
 
-	gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
-			settings.CommWindowModule, settings.currentverse));
+	gui_bookmark_dialog(label,
+			settings.CommWindowModule, settings.currentverse);
 	g_free(label);	
 	
 }
