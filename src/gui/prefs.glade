@@ -215,6 +215,7 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
+			      <signal name="color_set" handler="on_colorbutton1_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:37 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -267,6 +268,7 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
+			      <signal name="color_set" handler="on_colorbutton2_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:47 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -319,6 +321,7 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
+			      <signal name="color_set" handler="on_colorbutton3_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:55 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -371,6 +374,7 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
+			      <signal name="color_set" handler="on_colorbutton4_color_set" last_modification_time="Sat, 09 Jul 2005 15:25:01 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -423,6 +427,7 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
+			      <signal name="color_set" handler="on_colorbutton5_color_set" last_modification_time="Sat, 09 Jul 2005 15:25:08 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -640,6 +645,7 @@
 		      <property name="active">True</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
+		      <signal name="toggled" handler="on_checkbutton1_toggled" last_modification_time="Sat, 09 Jul 2005 00:31:44 GMT"/>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -691,6 +697,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton2_toggled" last_modification_time="Sat, 09 Jul 2005 00:31:55 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -710,6 +717,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton3_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:02 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -729,6 +737,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton4_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:12 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -823,6 +832,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton5_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:25 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -842,6 +852,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton6_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:33 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -861,6 +872,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton7_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:43 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -880,6 +892,7 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton8_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:54 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>

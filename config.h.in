@@ -73,6 +73,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if you wish to enable 'maintainer-only' behavior. */
+#undef MAINTAINER_MODE
+
 /* Name of package */
 #undef PACKAGE
 
