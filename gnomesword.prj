@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/teeb --enable-moz_embed --enable-debug
+project.configure.options=--prefix=/home/tee --enable-moz_embed --enable-debug --enable-maintainer-mode
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -153,7 +153,8 @@ module.include.files=\
 	src/editor/popup.h\
 	src/editor/dialog.h\
 	src/main/tab_history.h\
-	src/gui/parallel_dialog.h
+	src/gui/parallel_dialog.h\
+	src/gui/bookmark_dialog.h
 
 module.source.name=.
 module.source.type=
@@ -254,7 +255,8 @@ module.source.files=\
 	src/backend/sword_main.cc\
 	src/gnome2/note_editor.c\
 	src/main/tab_history.c\
-	src/main/previewer.cc
+	src/main/previewer.cc\
+	src/gnome2/bookmark_dialog.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
