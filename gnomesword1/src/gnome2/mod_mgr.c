@@ -33,6 +33,7 @@
 
 #include <bonobo.h>
 #include <gnome.h>
+#include <glade/glade-xml.h>
 
 #include "gui/mod_mgr.h"
 #include "gui/dialog.h"
@@ -82,8 +83,8 @@ static GtkWidget *button6;
 static GtkWidget *button7;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
-static GtkWidget *progressbar;
-static GtkWidget *progressbar1;
+//static GtkWidget *progressbar;
+//static GtkWidget *progressbar1;
 static GtkWidget *progressbar_refresh;
 static GtkWidget *radiobutton_source;
 static GtkWidget *radiobutton2;
@@ -113,6 +114,7 @@ static GdkPixbuf *BLANK;
 static gchar *current_mod;
 
 
+GladeXML *gxml;
 
 /******************************************************************************
  * Name
@@ -221,16 +223,34 @@ static void remove_install_modules(GList * modules, gboolean install)
 
 	test = gui_alert_dialog(yes_no_dialog);
 	if (test != GS_YES) {
+		tmp = modules; /* free list data */
+		while (tmp) {
+			g_free((gchar*)tmp->data);
+			tmp = g_list_next(tmp);
+		}
 		g_list_free(tmp);
 		g_free(yes_no_dialog);
 		g_string_free(mods, TRUE);
 		g_string_free(dialog_text, TRUE);
 		return;
 	}
+	if(install)
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+						  _("Preparing to install"));
+	else
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+						  _("Preparing to remove"));
+	gtk_widget_show(progressbar_refresh);	
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
 	g_free(yes_no_dialog);
 	g_string_free(dialog_text, TRUE);
 	gtk_widget_queue_draw(dialog);
 	gtk_widget_hide(button_close);
+	gtk_widget_hide(button5);
+	gtk_widget_hide(button6);
+	gtk_widget_hide(button7);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -244,13 +264,13 @@ static void remove_install_modules(GList * modules, gboolean install)
 			g_string_printf(mods, "%s: %s",
 					_("Installing: "), buf);
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR
-						  (progressbar),
+						  (progressbar_refresh),
 						  mods->str);
 		} else {
 			g_string_printf(mods, "%s: %s", _("Removing: "),
 					buf);
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR
-						  (progressbar1),
+						  (progressbar_refresh),
 						  mods->str);
 			g_print("uninstalling %s from %s\n", buf,
 				destination);
@@ -278,8 +298,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 			g_print("installing %s\n", buf);
 			if (local)
 				failed =
-				    mod_mgr_local_install_module(source,
-								 buf);
+				    mod_mgr_local_install_module(source, buf);
 			else
 				failed =
 				    mod_mgr_remote_install(source, buf);
@@ -298,22 +317,22 @@ static void remove_install_modules(GList * modules, gboolean install)
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
-	if (install) {
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
-					  mods->str);
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
-					      (progressbar), 0);
-	} else {
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
-					  (progressbar1), mods->str);
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR
-					      (progressbar1), 0);
-	}
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	g_string_free(mods, TRUE);
 	gtk_widget_hide(button_cancel);
 	gtk_widget_show(button_close);
-
+	switch(current_page) {
+		case 3:
+			gtk_widget_show(button5);
+			gtk_widget_show(button6);
+		break;
+		case 4:
+			gtk_widget_show(button7);
+		break;		
+	}
 }
+
 
 /******************************************************************************
  * Name
@@ -334,7 +353,6 @@ static void remove_install_modules(GList * modules, gboolean install)
 static GList *parse_treeview(GList * list, GtkTreeModel * model,
 			     GtkTreeIter * tree_parent)
 {
-	//GList *retval 
 	GtkTreeIter child;
 	gchar *name = NULL;
 	gboolean fixed;
@@ -354,10 +372,10 @@ static GList *parse_treeview(GList * list, GtkTreeModel * model,
 				    g_list_append(list, (gchar *) name);
 			}
 		}
-
-		//g_free (name);
 	}
 	while (gtk_tree_model_iter_next(model, &child));
+	/*if(name)
+		g_free(name);*/
 	return list;
 }
 
@@ -406,14 +424,14 @@ static GList *get_list_mods_to_remove_install(gboolean install)
 			retval = parse_treeview(retval, model, &root);
 		} else {
 			if (fixed) {
-				retval = g_list_append(retval,
-						       (gchar *) name);
+				retval = g_list_append(retval, (gchar *)name);
 			}
 
 		}
-		//g_free (name);
 	}
 	while (gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &root));
+	/*if(name)
+		g_free(name);*/
 	return retval;
 }
 
@@ -615,14 +633,11 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	if (install) {
 		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
 			source =
-			    gtk_entry_get_text(GTK_ENTRY
-					       (gnome_entry_gtk_entry
-						((GnomeEntry *)
-						 combo_entry1)));
+			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry1)->child));
 			local = TRUE;
 		} else {
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(combo_entry2));
+			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child));
 			local = FALSE;
 		}
 		if (local)
@@ -731,44 +746,28 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 
 static void response_refresh(void)
 {
-	GtkProgressBar *pbar;
-	GThread *gthread = NULL;
-	GError *error = NULL;
 	gint failed = 1;
-	switch (current_page) {
-	case 1:
-		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
-		break;
-	case 2:
-		pbar = GTK_PROGRESS_BAR(progressbar);
-		break;
-	}
-	gtk_progress_bar_set_text(pbar, _("Refreshing remote"));
-	gtk_progress_bar_set_fraction(pbar, 0);
-
-	/*gthread = g_thread_create((GThreadFunc)backend_module_mgr_refresh_remote_source,
-	   (gchar*)gtk_entry_get_text(GTK_ENTRY(combo_entry2)),
-	   TRUE,
-	   &error); 
-
-	   if(!gthread) {
-	   fprintf (stderr, "thread error: %s\n", error->message);
-	   g_error_free (error);
-	   error = NULL;
-	   } */
-
+	
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), 
+					_("Refreshing remote"));
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	gtk_widget_show(progressbar_refresh);	
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}	
+	
 	failed =
-	    mod_mgr_refresh_remote_source(gtk_entry_get_text
-					  (GTK_ENTRY(combo_entry2)));
-	/*failed = GPOINTER_TO_INT(g_thread_join(gthread)); */
+	    mod_mgr_refresh_remote_source(
+	    	gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child)));
 	if (failed) {
-		gtk_progress_bar_set_text(pbar, _("Remote not found"));
-		gtk_progress_bar_set_fraction(pbar, 0);
+		gtk_progress_bar_set_text(
+			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 		return;
 	}
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-	gtk_progress_bar_set_text(pbar, _("Finished"));
-	gtk_progress_bar_set_fraction(pbar, 0);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 }
 
 /******************************************************************************
@@ -789,95 +788,14 @@ static void response_refresh(void)
 
 static void response_close(void)
 {
-	//gint test;
-	//GS_DIALOG *yes_no_dialog;
 	GString *str = g_string_new(NULL);
-	/*if (have_changes) {
-		yes_no_dialog = gui_new_dialog();
-		yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-		g_string_printf(str,
-				"<span weight=\"bold\">%s</span>\n\n%s",
-				_("Restart GnomeSword?"),
-				_("The modules are out of sync!"));
-		yes_no_dialog->label_top = str->str;
-		yes_no_dialog->yes = TRUE;
-		yes_no_dialog->no = TRUE;
-
-		test = gui_alert_dialog(yes_no_dialog);
-		if (test == GS_YES) {
-			g_string_free(str, TRUE);
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-			mod_mgr_shut_down();
-			xml_save_settings_doc(settings.fnconfigure);
-			gnome_execute_shell(NULL, "gnomesword2");
-			gtk_widget_destroy(widgets.app);
-		}
-	}*/
+	
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 	g_string_printf(str, "%s/dirlist", settings.homedir);
 	if (mod_mgr_check_for_file(str->str))
 		g_warning(str->str);
 	g_string_free(str,TRUE);
 }
-
-/******************************************************************************
- * Name
- *   on_dialog_response
- *
- * Synopsis
- *   #include "gui/mod_mgr.h"
- *
- *   void on_dialog_response(GtkDialog * dialog, gint response_id,
-			       gpointer data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_dialog_response(GtkDialog * dialog, gint response_id,
-			       gpointer data)
-{
-	GList *modules = NULL;
-	gint test;
-	GS_DIALOG *yes_no_dialog;
-	GString *str = g_string_new(NULL);
-
-	switch (response_id) {
-	case GTK_RESPONSE_CANCEL:
-		mod_mgr_terminate();
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-		break;
-	case GTK_RESPONSE_REFRESH:
-		response_refresh();
-		break;
-	case GTK_RESPONSE_CLOSE:
-		response_close();
-		break;
-	case GTK_RESPONSE_INSTALL:
-		modules = get_list_mods_to_remove_install(INSTALL);
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-		remove_install_modules(modules, INSTALL);
-		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-		break;
-	case GTK_RESPONSE_REMOVE:
-		modules = get_list_mods_to_remove_install(REMOVE);
-		remove_install_modules(modules, REMOVE);
-		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
-		break;
-	}
-	g_string_free(str, TRUE);
-}
-
 
 
 /******************************************************************************
@@ -904,13 +822,10 @@ static void fixed_toggled(GtkCellRendererToggle * cell,
 	GtkTreeIter iter;
 	GtkTreePath *path = gtk_tree_path_new_from_string(path_str);
 	gboolean fixed;
-	gchar *name;
-	gchar *buf;
 
 	/* get toggled iter */
 	gtk_tree_model_get_iter(model, &iter, path);
 	gtk_tree_model_get(model, &iter, COLUMN_FIXED, &fixed, -1);
-	buf = g_strdup(name);
 
 	/* do something with the value */
 	fixed ^= 1;
@@ -1159,18 +1074,19 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_set(model, &child_iter, 0, "Configure", 1, 1,
 			   -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Sources", 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Sources", 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, "Modules", -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Install", 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Install", 1, 3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Remove", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Remove", 1, 4, -1);
 
 	return GTK_TREE_MODEL(model);
 }
+
 
 /******************************************************************************
  * Name
@@ -1222,77 +1138,6 @@ static GtkTreeModel *create_remote_source_treeview_model(void)
 
 }
 
-/******************************************************************************
- * Name
- *   button_press_event
- *
- * Synopsis
- *   #include "gui/mod_mgr.h"
- *
- *   gboolean button_press_event(GtkWidget * widget,
- *				   GdkEventButton * event,
- *				   gpointer data)
- *
- * Description
- *   
- *
- * Return value
- *   gboolean
- */
-
-static gboolean button_press_event(GtkWidget * widget,
-				   GdkEventButton * event,
-				   gpointer data)
-{
-	GtkTreeSelection *selection = NULL;
-	GtkTreeIter selected;
-	gboolean is_selected = FALSE;
-	gint sel;
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
-	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
-	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   1, &sel, -1);
-		if (!gtk_tree_model_iter_has_child
-		    (GTK_TREE_MODEL(model), &selected)) {
-			gtk_notebook_set_current_page(GTK_NOTEBOOK
-						      (notebook1), sel);
-			switch (sel) {
-			case 1:
-				if (GTK_TOGGLE_BUTTON(radiobutton2)->
-				    active)
-					gtk_widget_show(button5);
-				else
-					gtk_widget_hide(button5);
-				gtk_widget_hide(button6);
-				gtk_widget_hide(button7);
-				break;
-			case 2:
-				if (GTK_TOGGLE_BUTTON(radiobutton2)->
-				    active)
-					gtk_widget_show(button5);
-				else
-					gtk_widget_hide(button5);
-				gtk_widget_show(button6);
-				gtk_widget_hide(button7);
-				break;
-			case 3:
-				gtk_widget_show(button7);
-				gtk_widget_hide(button5);
-				gtk_widget_hide(button6);
-				break;
-			case 4:
-				gtk_widget_hide(button5);
-				gtk_widget_hide(button6);
-				gtk_widget_hide(button7);
-				break;
-			}
-
-		}
-	}
-}
 
 static void load_source_treeviews(void)
 {
@@ -1300,14 +1145,19 @@ static void load_source_treeviews(void)
 	GList *tmp2 = NULL;
 	GList *combo1_items = NULL;
 	GtkTreeIter iter;
+	GtkTreeIter combo_iter;
 	MOD_MGR_SOURCE *mms;
-	GtkTreeModel *remote_model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
+	GtkTreeModel *remote_model = 
+		gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	GtkTreeModel *local_model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
-
+		gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
+	GtkTreeModel* module_box_local = 
+		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry1));
+	GtkTreeModel* module_box_remote = 
+		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry2));
 	/* remote */
 	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
+	gtk_list_store_clear(GTK_LIST_STORE(module_box_remote));
 	tmp = mod_mgr_list_remote_sources();
 	tmp2 = g_list_first(tmp);
 	while (tmp) {
@@ -1320,12 +1170,15 @@ static void load_source_treeviews(void)
 				   COLUMN_SOURCE, mms->source,
 				   COLUMN_DIRECTORY, mms->directory,
 				   -1);
-		combo1_items =
-		    g_list_append(combo1_items, (gchar *) mms->caption);
+		gtk_list_store_append(GTK_LIST_STORE(module_box_remote), &combo_iter);
+		gtk_list_store_set(GTK_LIST_STORE(module_box_remote), 
+					&combo_iter, 
+					0, 
+					(gchar*)mms->caption, 
+					-1);
 		tmp = g_list_next(tmp);
 	}
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);
-	g_list_free(combo1_items);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2), 0);
 	while (tmp2) {
 		mms = (MOD_MGR_SOURCE *) tmp2->data;
 		g_free((gchar*)mms->type);
@@ -1342,13 +1195,14 @@ static void load_source_treeviews(void)
 
 	/* local */
 	gtk_list_store_clear(GTK_LIST_STORE(local_model));
+	gtk_list_store_clear(GTK_LIST_STORE(module_box_local));
 	tmp = mod_mgr_list_local_sources();
-	if (tmp) {
+	/*if (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gnome_file_entry_set_filename((GnomeFileEntry *)
 					      fileentry1,
 					      mms->directory);
-	}
+	}*/
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gtk_list_store_append(GTK_LIST_STORE(local_model),
@@ -1359,15 +1213,45 @@ static void load_source_treeviews(void)
 				   COLUMN_SOURCE, mms->source,
 				   COLUMN_DIRECTORY, mms->directory,
 				   -1);
-		gnome_entry_append_history((GnomeEntry *) combo_entry1,
-					   TRUE, mms->directory);
+		gtk_list_store_append(GTK_LIST_STORE(module_box_local), &combo_iter);
+		gtk_list_store_set(GTK_LIST_STORE(module_box_local), 
+					&combo_iter, 
+					0, 
+					(gchar*)mms->caption, 
+					-1);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry1), 0);
 	g_list_free(tmp);
 
 
 }
+
+
+/******************************************************************************
+ * Name
+ *   clear_and_hide_progress_bar
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void clear_and_hide_progress_bar(void) 
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void clear_and_hide_progress_bar(void)
+{
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), "");
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh),0);
+	gtk_widget_hide(progressbar_refresh);	
+}
+
 
 /******************************************************************************
  * Name
@@ -1386,8 +1270,8 @@ static void load_source_treeviews(void)
  * Return value
  *   void
  */
-
-static void on_notebook1_switch_page(GtkNotebook * notebook,
+            
+void on_notebook1_switch_page(GtkNotebook * notebook,
 				     GtkNotebookPage * page,
 				     guint page_num, gpointer user_data)
 {
@@ -1398,11 +1282,16 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 	current_page = page_num;
 	switch (page_num) {
 	case 0:
+		clear_and_hide_progress_bar();
 		break;
 	case 1:
-
+		clear_and_hide_progress_bar();		
 		break;
 	case 2:
+		clear_and_hide_progress_bar();
+		break;
+	case 3:
+		clear_and_hide_progress_bar();
 		if (!have_configs) {
 			yes_no_dialog = gui_new_dialog();
 			yes_no_dialog->stock_icon =
@@ -1432,7 +1321,8 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 		mod_mgr_init(destination);
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
-	case 3:
+	case 4:
+		clear_and_hide_progress_bar();
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
@@ -1444,9 +1334,6 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 		mod_mgr_shut_down();
 		mod_mgr_init(destination);
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
-		break;
-	case 4:
-		//load_source_treeviews();
 		break;
 	}
 
@@ -1475,7 +1362,7 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button5);
-		gtk_widget_show(progressbar_refresh);
+		//gtk_widget_show(progressbar_refresh);
 	} else {
 		gtk_widget_hide(button5);
 		gtk_widget_hide(progressbar_refresh);
@@ -1662,21 +1549,110 @@ GtkWidget *create_fileselection_local_source(void)
 
 /******************************************************************************
  * Name
- *   on_button_add_local_clicked
+ *   on_dialog_destroy
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
+ *   void on_dialog_destroy(GtkObject * object, gpointer user_data)
  *
  * Description
- *   
+ *   when the dialog is destroyed and changes have been made 
+ *   Sword is shut down and restarted
+ *   module lists are cleared and refilled with current modules
+ *   the sidebar module tree is reloaded 
  *
  * Return value
  *   void
  */
 
-void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
+void on_dialog_destroy(GtkObject * object, gpointer user_data)
+{
+	g_message("on_destroy");
+	mod_mgr_shut_down();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	} 
+	if(have_changes) {
+		main_update_module_lists();
+		main_load_module_tree(sidebar.module_list);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_mod_mgr_response
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data)
+ *
+ * Description
+ *   these are local defines
+ *   GTK_RESPONSE_REFRESH = 301
+ *   GTK_RESPONSE_INSTALL = 303
+ *   GTK_RESPONSE_REMOVE  = 302
+ *
+ * Return value
+ *   void
+ */
+
+void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data)
+{
+	GList *modules = NULL;
+
+	switch (response_id) {
+	case GTK_RESPONSE_CANCEL:
+		mod_mgr_terminate();
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		break;
+	case GTK_RESPONSE_REFRESH:
+		response_refresh();
+		break;
+	case GTK_RESPONSE_CLOSE:
+		response_close();
+		break;
+	case GTK_RESPONSE_INSTALL:
+		modules = get_list_mods_to_remove_install(INSTALL);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		remove_install_modules(modules, INSTALL);
+		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+		break;
+	case GTK_RESPONSE_REMOVE:
+		modules = get_list_mods_to_remove_install(REMOVE);
+		remove_install_modules(modules, REMOVE);
+		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
+		break;
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_button5_clicked
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_button5_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   add local source
+ *
+ * Return value
+ *   void
+ */
+
+void on_button5_clicked(GtkButton * button, gpointer  user_data)
 {
 	GtkWidget *dlg = create_fileselection_local_source();
 	gtk_widget_show(dlg);
@@ -1685,22 +1661,21 @@ void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   on_button_remove_local_clicked
+ *   on_button6_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
+ *   void on_button6_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   
+ *   remove local source
  *
  * Return value
  *   void
  */
 
-static void on_button_remove_local_clicked(GtkButton * button,
-					   gpointer user_data)
+void on_button6_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -1755,22 +1730,21 @@ static void on_button_remove_local_clicked(GtkButton * button,
 
 /******************************************************************************
  * Name
- *   on_button_add_remote_clicked
+ *   on_button7_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
+ *   void on_button7_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   
+ *   add remote source
  *
  * Return value
  *   void
  */
 
-void on_button_add_remote_clicked(GtkButton * button,
-				  gpointer user_data)
+void on_button7_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
@@ -1824,22 +1798,21 @@ void on_button_add_remote_clicked(GtkButton * button,
 
 /******************************************************************************
  * Name
- *   on_button_remove_remote_clicked
+ *   on_button8_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
+ *   void on_button8_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   
+ *   remove remote source
  *
  * Return value
  *   void
  */
 
-void on_button_remove_remote_clicked(GtkButton * button,
-				     gpointer user_data)
+void on_button8_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -1888,640 +1861,207 @@ void on_button_remove_remote_clicked(GtkButton * button,
 	g_free(source);
 	g_free(directory);
 	g_string_free(str, TRUE);
-
 }
 
-
-static gboolean on_destroy(GtkWidget * widget, GdkEvent * event, gpointer data)
-{
-	g_message("on_delete");
-	mod_mgr_shut_down();
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	} 
-	if(have_changes) {
-		main_update_module_lists();
-		main_load_module_tree(sidebar.module_list);
-	}
-	return FALSE;
-}
 
 /******************************************************************************
  * Name
- *   create_dialog
+ *   on_treeview1_button_release_event
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   GtkWidget *create_dialog (void)
+ *   gboolean on_treeview1_button_release_event(GtkWidget * widget,
+ *                           GdkEventButton * event, gpointer user_data)
  *
  * Description
- *   
+ *   button release in main treeview 
+ *   change notebook page to 'sel' returned from selection
+ *   show hide dialog responce buttons as needed
  *
  * Return value
- *   GtkWidget *
+ *   void
  */
 
-GtkWidget *create_dialog(void)
+gboolean on_treeview1_button_release_event(GtkWidget * widget,
+                            GdkEventButton * event, gpointer user_data)
+{
+	GtkTreeSelection *selection = NULL;
+	GtkTreeIter selected;
+	gboolean is_selected = FALSE;
+	gint sel;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
+	selection =
+	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+				   1, &sel, -1);
+		if (!gtk_tree_model_iter_has_child
+		    (GTK_TREE_MODEL(model), &selected)) {
+			gtk_notebook_set_current_page(GTK_NOTEBOOK
+						      (notebook1), sel);
+			switch (sel) {
+			case 1:
+				if (GTK_TOGGLE_BUTTON(radiobutton2)->
+				    active)
+					gtk_widget_show(button5);
+				else
+					gtk_widget_hide(button5);
+				gtk_widget_hide(button6);
+				gtk_widget_hide(button7);
+				break;
+			case 2:
+				gtk_widget_hide(button5);
+				gtk_widget_hide(button6);
+				gtk_widget_hide(button7);
+				break;
+			case 3:
+				if (GTK_TOGGLE_BUTTON(radiobutton2)->
+				    active)
+					gtk_widget_show(button5);
+				else
+					gtk_widget_hide(button5);
+				gtk_widget_show(button6);
+				gtk_widget_hide(button7);
+				break;
+			case 4:
+				gtk_widget_show(button7);
+				gtk_widget_hide(button5);
+				gtk_widget_hide(button6);
+				break;
+			}
+
+		}
+	}
+  return FALSE;
+}
+
+
+void
+on_filechooserdialog_selection_changed (GtkFileChooser  *filechooser,
+                                        gpointer         user_data)
 {
 
-	GtkWidget *dialog_vbox1;
-	GtkWidget *hpaned1;
-	GtkWidget *scrolledwindow2;
-	GtkWidget *vbox6;
-	GtkWidget *label12;
-	GtkWidget *image5;
-	GtkWidget *label13;
-	GtkWidget *label14;
-	GtkWidget *label11;
-	GtkWidget *vbox3;
-	GtkWidget *label5;
-	GtkWidget *vbox4;
-	GtkWidget *hbox4;
-	GtkWidget *hbox2;
-	GtkWidget *label6;
-	GtkWidget *vbox5;
-	GtkWidget *hbox9;
-	GtkWidget *image4;
-	GtkWidget *label10;
-	GtkWidget *label2;
-	GtkWidget *vbox1;
-	GtkWidget *scrolledwindow1;
-	GtkWidget *label3;
-	GtkWidget *vbox2;
-	GtkWidget *scrolledwindow3;
-	GtkWidget *label4;
-	GtkWidget *vbox7;
-	GtkWidget *label16;
-
-	GtkWidget *hbox12;
-	GtkWidget *vbox14;
-	GtkWidget *label26;
-	GtkWidget *scrolledwindow6;
-	GtkWidget *vbox15;
-	GtkWidget *label27;
-	GtkWidget *button_add_local;
-	GtkWidget *button_remove_local;
-
-	GtkWidget *hbox11;
-	GtkWidget *vbox9;
-	GtkWidget *label18;
-	GtkWidget *scrolledwindow5;
-	GtkWidget *vbox11;
-	GtkWidget *label20;
-	GtkWidget *label15;
-
-	GtkWidget *dialog_action_area1;
-	GtkWidget *alignment3;
-	GtkWidget *hbox8;
-	GtkWidget *image3;
-	GtkWidget *label9;
-	GtkWidget *alignment2;
-	GtkWidget *hbox7;
-	GtkWidget *image2;
-	GtkWidget *label8;
-
-	GtkTreeModel *model;
-	GError *error = NULL;
-	GtkTooltips *tooltips;
-	tooltips = gtk_tooltips_new();
-	GString *str = g_string_new(NULL);
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-
-	dialog = gtk_dialog_new();
-	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
-	gtk_window_set_title(GTK_WINDOW(dialog), _("Module Manager"));
-	gtk_window_set_default_size(GTK_WINDOW(dialog), 600, 259);
-	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
-
-	dialog_vbox1 = GTK_DIALOG(dialog)->vbox;
-	gtk_widget_show(dialog_vbox1);
-
-	hpaned1 = gtk_hpaned_new();
-	gtk_widget_show(hpaned1);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox1), hpaned1, TRUE, TRUE,
-			   0);
-	gtk_container_set_border_width(GTK_CONTAINER(hpaned1), 6);
-	gtk_paned_set_position(GTK_PANED(hpaned1), 145);
-
-	scrolledwindow2 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow2);
-	gtk_paned_pack1(GTK_PANED(hpaned1), scrolledwindow2, FALSE,
-			TRUE);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow2),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow2,
-					    settings.shadow_type);
-
-	model = create_model_to_first();
-	treeview1 = gtk_tree_view_new_with_model(model);
-	gtk_widget_show(treeview1);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow2), treeview1);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview1),
-					  FALSE);
-	add_columns_to_first(GTK_TREE_VIEW(treeview1));
-	gtk_tree_view_expand_all(GTK_TREE_VIEW(treeview1));
-
-	notebook1 = gtk_notebook_new();
-	gtk_widget_show(notebook1);
-	gtk_paned_pack2(GTK_PANED(hpaned1), notebook1, TRUE, TRUE);
-	GTK_WIDGET_UNSET_FLAGS(notebook1, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(notebook1), FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook1), FALSE);
-
-	vbox6 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox6);
-	gtk_container_add(GTK_CONTAINER(notebook1), vbox6);
-
-	g_string_printf(str, "<b>%s</b>", _("SWORD"));
-	label12 = gtk_label_new(str->str);
-	gtk_widget_show(label12);
-	gtk_box_pack_start(GTK_BOX(vbox6), label12, TRUE, TRUE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label12), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label12), 0.5, 0.81);
-
-	image5 =
-	    gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.png");
-	gtk_widget_show(image5);
-	gtk_box_pack_start(GTK_BOX(vbox6), image5, TRUE, TRUE, 0);
-
-	g_string_printf(str, "<b>%s</b>", _("Module Manager"));
-	label13 = gtk_label_new(str->str);
-	gtk_widget_show(label13);
-	gtk_box_pack_start(GTK_BOX(vbox6), label13, TRUE, TRUE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label13), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label13), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label13), 0.5, 0.28);
-
-	g_string_printf(str, "<b>%s</b> %s", _("WARNING:"),
-			_
-			("If you live in a persecuted country use with care."));
-	label14 = gtk_label_new(str->str);
-	gtk_widget_show(label14);
-	gtk_box_pack_start(GTK_BOX(vbox6), label14, FALSE, FALSE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label14), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label14), GTK_JUSTIFY_LEFT);
-	gtk_label_set_line_wrap(GTK_LABEL(label14), TRUE);
-
-	label11 = gtk_label_new(_("Cover"));
-	gtk_widget_show(label11);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook1),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook1), 0),
-				   label11);
-	gtk_label_set_justify(GTK_LABEL(label11), GTK_JUSTIFY_LEFT);
-
-	vbox3 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox3);
-	gtk_container_add(GTK_CONTAINER(notebook1), vbox3);
-	gtk_notebook_set_tab_label_packing(GTK_NOTEBOOK(notebook1),
-					   vbox3, TRUE, TRUE,
-					   GTK_PACK_START);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox3), 4);
-
-	g_string_printf(str, "<b>%s</b>", _("Install Source"));
-	label5 = gtk_label_new(str->str);
-	gtk_widget_show(label5);
-	gtk_box_pack_start(GTK_BOX(vbox3), label5, FALSE, FALSE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label5), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label5), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label5), 0, 0.5);
-
-	vbox4 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox4);
-	gtk_box_pack_start(GTK_BOX(vbox3), vbox4, FALSE, FALSE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox4), 10);
-
-	hbox4 = gtk_hbox_new(FALSE, 21);
-	gtk_widget_show(hbox4);
-	gtk_box_pack_start(GTK_BOX(vbox4), hbox4, FALSE, TRUE, 0);
-
-
-	radiobutton_source =
-	    gtk_radio_button_new_with_mnemonic(NULL, _("Local"));
-	gtk_widget_show(radiobutton_source);
-	gtk_box_pack_start(GTK_BOX(hbox4), radiobutton_source, FALSE,
-			   FALSE, 0);
-
-	fileentry1 = gnome_file_entry_new(NULL, _("Local Source"));
-	gtk_widget_show(fileentry1);
-	gtk_box_pack_start(GTK_BOX(hbox4), fileentry1, TRUE, TRUE, 0);
-	gnome_file_entry_set_directory_entry(GNOME_FILE_ENTRY
-					     (fileentry1), TRUE);
-
-	combo_entry1 =
-	    gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(fileentry1));
-	gtk_widget_show(combo_entry1);
-
-	hbox2 = gtk_hbox_new(FALSE, 6);
-	gtk_widget_show(hbox2);
-	gtk_box_pack_start(GTK_BOX(vbox4), hbox2, FALSE, TRUE, 0);
-
-	radiobutton2 =
-	    gtk_radio_button_new_with_mnemonic_from_widget((GtkRadioButton *)
-							   radiobutton_source,
-							   _("Remote"));
-	gtk_widget_show(radiobutton2);
-	gtk_box_pack_start(GTK_BOX(hbox2), radiobutton2, FALSE, FALSE,
-			   0);
-
-	combo1 = gtk_combo_new();
-	g_object_set_data(G_OBJECT(GTK_COMBO(combo1)->popwin),
-			  "GladeParentKey", combo1);
-	gtk_widget_show(combo1);
-	gtk_box_pack_start(GTK_BOX(hbox2), combo1, TRUE, TRUE, 0);
-
-	combo_entry2 = GTK_COMBO(combo1)->entry;
-	gtk_widget_show(combo_entry2);
-
-	g_string_printf(str, "<b>%s</b>", _("Install Destination"));
-	label6 = gtk_label_new(str->str);
-	gtk_widget_show(label6);
-	gtk_box_pack_start(GTK_BOX(vbox3), label6, FALSE, FALSE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label6), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label6), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label6), 0, 0.5);
-
-	vbox5 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox5);
-	gtk_box_pack_start(GTK_BOX(vbox3), vbox5, FALSE, FALSE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox5), 10);
-
-	label_home = gtk_label_new(NULL);
-	gtk_widget_show(label_home);
-	radiobutton_dest = gtk_radio_button_new_from_widget(NULL);
-	gtk_widget_show(radiobutton_dest);
-	gtk_box_pack_start(GTK_BOX(vbox5), radiobutton_dest, FALSE,
-			   FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(radiobutton_dest), label_home);
-
-
-	label_system = gtk_label_new(NULL);
-	gtk_widget_show(label_system);
-	radiobutton4 =
-	    gtk_radio_button_new_from_widget((GtkRadioButton *)
-					     radiobutton_dest);
-	gtk_widget_show(radiobutton4);
-	gtk_box_pack_start(GTK_BOX(vbox5), radiobutton4, FALSE, FALSE,
-			   0);
-	gtk_container_add(GTK_CONTAINER(radiobutton4), label_system);
-
-	hbox9 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hbox9);
-	gtk_box_pack_start(GTK_BOX(vbox3), hbox9, FALSE, FALSE, 0);
-
-	image4 = gtk_image_new_from_stock("gtk-dialog-warning",
-					  GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show(image4);
-	gtk_box_pack_start(GTK_BOX(hbox9), image4, FALSE, TRUE, 0);
-	gtk_misc_set_alignment(GTK_MISC(image4), 0, 0);
-
-	g_string_printf(str, "<b>%s</b> %s", _("WARNING:"),
-			_
-			("If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "));
-	label10 = gtk_label_new(str->str);
-	gtk_widget_show(label10);
-	gtk_box_pack_start(GTK_BOX(hbox9), label10, TRUE, TRUE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label10), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
-	gtk_label_set_line_wrap(GTK_LABEL(label10), TRUE);
-
-	progressbar_refresh = gtk_progress_bar_new();
-	gtk_box_pack_start(GTK_BOX(vbox3), progressbar_refresh, FALSE,
-			   FALSE, 0);
-
-	label2 = gtk_label_new(_("Configure"));
-	gtk_widget_show(label2);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook1),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook1), 1),
-				   label2);
-	gtk_label_set_justify(GTK_LABEL(label2), GTK_JUSTIFY_LEFT);
-
-	vbox1 = gtk_vbox_new(FALSE, 12);
-	gtk_widget_show(vbox1);
-	gtk_container_add(GTK_CONTAINER(notebook1), vbox1);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox1), 6);
-
-	scrolledwindow1 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow1);
-	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow1, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow1),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow1,
-					    settings.shadow_type);
-
-	model = create_model();
-
-	treeview = gtk_tree_view_new_with_model(model);
-	gtk_widget_show(treeview);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), treeview);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview),
-					  TRUE);
-
-	/* add columns to the tree view */
-	add_columns(GTK_TREE_VIEW(treeview), FALSE);
-
-//dlg-un.png
-	progressbar = gtk_progress_bar_new();
-	gtk_widget_show(progressbar);
-	gtk_box_pack_start(GTK_BOX(vbox1), progressbar, FALSE, FALSE,
-			   0);
-
-	label3 = gtk_label_new(_("Install Modules"));
-	gtk_widget_show(label3);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook1),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook1), 2),
-				   label3);
-	gtk_label_set_justify(GTK_LABEL(label3), GTK_JUSTIFY_LEFT);
-
-	vbox2 = gtk_vbox_new(FALSE, 12);
-	gtk_widget_show(vbox2);
-	gtk_container_add(GTK_CONTAINER(notebook1), vbox2);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox2), 6);
-
-	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow3);
-	gtk_box_pack_start(GTK_BOX(vbox2), scrolledwindow3, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow3),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow3,
-					    settings.shadow_type);
-	model = create_model();
-
-	treeview2 = gtk_tree_view_new_with_model(model);
-	gtk_widget_show(treeview2);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), treeview2);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview2),
-					  TRUE);
-	/* add columns to the tree view */
-	add_columns(GTK_TREE_VIEW(treeview2), TRUE);
-
-	progressbar1 = gtk_progress_bar_new();
-	gtk_widget_show(progressbar1);
-	gtk_box_pack_start(GTK_BOX(vbox2), progressbar1, FALSE, FALSE,
-			   0);
-
-	label4 = gtk_label_new(_("Remove Modules"));
-	gtk_widget_show(label4);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook1),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook1), 3),
-				   label4);
-	gtk_label_set_justify(GTK_LABEL(label4), GTK_JUSTIFY_LEFT);
-
-	vbox7 = gtk_vbox_new(FALSE, 5);
-	gtk_widget_show(vbox7);
-	gtk_container_add(GTK_CONTAINER(notebook1), vbox7);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox7), 6);
-
-	label16 = gtk_label_new(_("<b>Add and Remove Sources</b>"));
-	gtk_widget_show(label16);
-	gtk_box_pack_start(GTK_BOX(vbox7), label16, FALSE, FALSE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label16), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label16), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label16), 0, 0.5);
-
-	hbox12 = gtk_hbox_new(FALSE, 6);
-	gtk_widget_show(hbox12);
-	gtk_box_pack_start(GTK_BOX(vbox7), hbox12, TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox12), 12);
-
-	vbox14 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox14);
-	gtk_box_pack_start(GTK_BOX(hbox12), vbox14, TRUE, TRUE, 0);
-
-	label26 = gtk_label_new(_("Current local sources"));
-	gtk_widget_show(label26);
-	gtk_box_pack_start(GTK_BOX(vbox14), label26, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label26), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label26), 0, 0.5);
-
-	scrolledwindow6 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow6);
-	gtk_box_pack_start(GTK_BOX(vbox14), scrolledwindow6, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow6),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow6,
-					    settings.shadow_type);
-
-	model = create_remote_source_treeview_model();
-	treeview_local = gtk_tree_view_new_with_model(model);
-	gtk_widget_show(treeview_local);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow6),
-			  treeview_local);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview_local),
-					  FALSE);
-	add_columns_to_remote_treeview(GTK_TREE_VIEW(treeview_local));
-
-	vbox15 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox15);
-	gtk_box_pack_start(GTK_BOX(hbox12), vbox15, TRUE, TRUE, 0);
-
-	label27 = gtk_label_new("");
-	gtk_widget_show(label27);
-	gtk_box_pack_start(GTK_BOX(vbox15), label27, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label27), GTK_JUSTIFY_LEFT);
-
-	button_add_local = gtk_button_new_from_stock("gtk-add");
-	gtk_widget_show(button_add_local);
-	gtk_box_pack_start(GTK_BOX(vbox15), button_add_local, FALSE,
-			   FALSE, 0);
-
-	button_remove_local = gtk_button_new_from_stock("gtk-remove");
-	gtk_widget_show(button_remove_local);
-	gtk_box_pack_start(GTK_BOX(vbox15), button_remove_local, FALSE,
-			   FALSE, 0);
-
-	hbox11 = gtk_hbox_new(FALSE, 6);
-	gtk_widget_show(hbox11);
-	gtk_box_pack_start(GTK_BOX(vbox7), hbox11, TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox11), 12);
-
-	vbox9 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox9);
-	gtk_box_pack_start(GTK_BOX(hbox11), vbox9, TRUE, TRUE, 0);
-
-	label18 = gtk_label_new(_("Current Remote Sources"));
-	gtk_widget_show(label18);
-	gtk_box_pack_start(GTK_BOX(vbox9), label18, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label18), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label18), 0, 0.5);
-
-	scrolledwindow5 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow5);
-	gtk_box_pack_start(GTK_BOX(vbox9), scrolledwindow5, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow5),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
-					    scrolledwindow5,
-					    settings.shadow_type);
-
-	model = create_remote_source_treeview_model();
-	treeview_remote = gtk_tree_view_new_with_model(model);
-	gtk_widget_show(treeview_remote);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow5),
-			  treeview_remote);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
-					  (treeview_remote), FALSE);
-	add_columns_to_remote_treeview(GTK_TREE_VIEW(treeview_remote));
-
-	vbox11 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox11);
-	gtk_box_pack_start(GTK_BOX(hbox11), vbox11, TRUE, TRUE, 0);
-
-	label20 = gtk_label_new("");
-	gtk_widget_show(label20);
-	gtk_box_pack_start(GTK_BOX(vbox11), label20, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label20), GTK_JUSTIFY_LEFT);
-
-	button_add_remote = gtk_button_new_from_stock("gtk-add");
-	gtk_widget_show(button_add_remote);
-	gtk_box_pack_start(GTK_BOX(vbox11), button_add_remote, FALSE,
-			   FALSE, 0);
-
-	button_remove_remote = gtk_button_new_from_stock("gtk-remove");
-	gtk_widget_show(button_remove_remote);
-	gtk_box_pack_start(GTK_BOX(vbox11), button_remove_remote, FALSE,
-			   FALSE, 0);
-
-	label15 = gtk_label_new(_("Sources"));
-	gtk_widget_show(label15);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook1),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook1), 4),
-				   label15);
-	gtk_label_set_justify(GTK_LABEL(label15), GTK_JUSTIFY_LEFT);
-
-	dialog_action_area1 = GTK_DIALOG(dialog)->action_area;
-	gtk_widget_show(dialog_action_area1);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area1),
-				  GTK_BUTTONBOX_END);
-
-	button_cancel = gtk_button_new_from_stock("gtk-cancel");
-//	gtk_widget_show(button_cancel);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button_cancel,
-				     GTK_RESPONSE_CANCEL);
-	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
-	gtk_tooltips_set_tip(tooltips, button_cancel,
-			     _("Cancel current operation"), NULL);
-	
-	button_close = gtk_button_new_from_stock("gtk-close");
-	gtk_widget_show(button_close);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button_close,
-				     GTK_RESPONSE_CLOSE);
-	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
-
-	button5 = gtk_button_new_from_stock("gtk-refresh");
-	//gtk_widget_show (button5);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button5,
-				     GTK_RESPONSE_REFRESH);
-	GTK_WIDGET_SET_FLAGS(button5, GTK_CAN_DEFAULT);
-	gtk_tooltips_set_tip(tooltips, button5,
-			     _("Refresh remote sources"), NULL);
-
-	button6 = gtk_button_new();
-	//gtk_widget_show (button6);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button6,
-				     GTK_RESPONSE_INSTALL);
-	GTK_WIDGET_SET_FLAGS(button6, GTK_CAN_DEFAULT);
-	gtk_tooltips_set_tip(tooltips, button6,
-			     _("Upgrade or install selected modules"),
-			     NULL);
-
-	alignment3 = gtk_alignment_new(0.5, 0.5, 0, 0);
-	gtk_widget_show(alignment3);
-	gtk_container_add(GTK_CONTAINER(button6), alignment3);
-
-	hbox8 = gtk_hbox_new(FALSE, 2);
-	gtk_widget_show(hbox8);
-	gtk_container_add(GTK_CONTAINER(alignment3), hbox8);
-
-	image3 =
-	    gtk_image_new_from_stock("gtk-add", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image3);
-	gtk_box_pack_start(GTK_BOX(hbox8), image3, FALSE, FALSE, 0);
-
-	label9 = gtk_label_new_with_mnemonic(_("Install"));
-	gtk_widget_show(label9);
-	gtk_box_pack_start(GTK_BOX(hbox8), label9, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label9), GTK_JUSTIFY_LEFT);
-
-	button7 = gtk_button_new();
-	//gtk_widget_show (button7);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button7,
-				     GTK_RESPONSE_REMOVE);
-	GTK_WIDGET_SET_FLAGS(button7, GTK_CAN_DEFAULT);
-	gtk_tooltips_set_tip(tooltips, button7,
-			     _("Remove selected module(s)"), NULL);
-
-	alignment2 = gtk_alignment_new(0.5, 0.5, 0, 0);
-	gtk_widget_show(alignment2);
-	gtk_container_add(GTK_CONTAINER(button7), alignment2);
-
-	hbox7 = gtk_hbox_new(FALSE, 2);
-	gtk_widget_show(hbox7);
-	gtk_container_add(GTK_CONTAINER(alignment2), hbox7);
-
-	image2 = gtk_image_new_from_stock("gtk-remove",
-					  GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image2);
-	gtk_box_pack_start(GTK_BOX(hbox7), image2, FALSE, FALSE, 0);
-
-	label8 = gtk_label_new_with_mnemonic(_("Remove"));
-	gtk_widget_show(label8);
-	gtk_box_pack_start(GTK_BOX(hbox7), label8, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label8), GTK_JUSTIFY_LEFT);
-
-	//dialog
-	g_signal_connect((gpointer) dialog, "destroy",
-			 G_CALLBACK(on_destroy), NULL);
-	g_signal_connect((gpointer) dialog, "response",
-			 G_CALLBACK(on_dialog_response), NULL);
-	g_signal_connect(G_OBJECT(treeview1),
-			 "button_release_event",
-			 G_CALLBACK(button_press_event), NULL);
-	g_signal_connect((gpointer) notebook1, "switch_page",
-			 G_CALLBACK(on_notebook1_switch_page), NULL);
-	g_signal_connect((gpointer) radiobutton2, "toggled",
-			 G_CALLBACK(on_radiobutton2_toggled), NULL);
-
-
-	g_signal_connect((gpointer) button_add_local, "clicked",
-			 G_CALLBACK(on_button_add_local_clicked), NULL);
-	g_signal_connect((gpointer) button_remove_local, "clicked",
-			 G_CALLBACK(on_button_remove_local_clicked),
-			 NULL);
-	g_signal_connect((gpointer) button_add_remote, "clicked",
-			 G_CALLBACK(on_button_add_remote_clicked),
-			 NULL);
-	g_signal_connect((gpointer) button_remove_remote, "clicked",
-			 G_CALLBACK(on_button_remove_remote_clicked),
-			 NULL);
-	return dialog;
 }
+
+
+void
+on_filechooserdialog_response          (GtkDialog       *dialog,
+                                        gint             response_id,
+                                        gpointer         user_data)
+{
+
+}
+
+
+static
+void setup_treeview_main(GtkTreeView * tree_view)
+{
+	GtkTreeModel *model;
+	
+	model = create_model_to_first();	
+	gtk_tree_view_set_model(tree_view, model);
+	add_columns_to_first(tree_view);
+	gtk_tree_view_expand_all(tree_view); 
+}
+
+static
+void setup_treeviews_local_remote(GtkTreeView * local, GtkTreeView * remote)
+{
+	GtkTreeModel *model;
+	
+	model = create_remote_source_treeview_model();	
+	gtk_tree_view_set_model(local, model);
+	add_columns_to_remote_treeview(local);
+	model = create_remote_source_treeview_model();	
+	gtk_tree_view_set_model(remote, model);
+	add_columns_to_remote_treeview(remote);
+}
+
+static
+void setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
+{
+	GtkTreeModel *model;
+	
+	model = create_model();
+	gtk_tree_view_set_model(install, model);
+	add_columns(install, FALSE);
+	model =  create_model();	
+	gtk_tree_view_set_model(remove, model);
+	add_columns(remove, TRUE);
+}
+
+static
+void set_combobox(GtkComboBox * combo)
+{	
+	GtkTreeIter iter;
+	GtkListStore *store;
+	GtkCellRenderer *renderer;
+	gint index = 0;
+	gint i = 0;
+	
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+}
+
+
+static
+void create_module_manager_dialog(void)
+{
+	gchar *glade_file;
+	GtkWidget *chooser;
+	gint index = 0;
+
+	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+	g_message(glade_file);
+	
+	/* build the widget */
+	gxml = glade_xml_new (glade_file, "dialog", NULL);
+	g_free (glade_file);
+	g_return_if_fail (gxml != NULL);
+
+	/* lookup the root widget */
+	dialog = glade_xml_get_widget (gxml, "dialog");
+	/* treeviews */
+	treeview1 = glade_xml_get_widget (gxml, "treeview1");
+	setup_treeview_main(GTK_TREE_VIEW(treeview1));
+	treeview_local = glade_xml_get_widget (gxml, "treeview2");
+	treeview_remote = glade_xml_get_widget (gxml, "treeview3");
+	setup_treeviews_local_remote(GTK_TREE_VIEW(treeview_local), GTK_TREE_VIEW(treeview_remote));
+	treeview = glade_xml_get_widget (gxml, "treeview4");
+	treeview2 = glade_xml_get_widget (gxml, "treeview5");
+	setup_treeviews_install_remove(GTK_TREE_VIEW(treeview), GTK_TREE_VIEW(treeview2));
+	/* notebook */	
+	notebook1 = glade_xml_get_widget (gxml, "notebook1");
+	/* labels */
+	label_home = glade_xml_get_widget (gxml, "label_home");
+	label_system = glade_xml_get_widget (gxml, "label_sword_sys");
+	/* responce buttons */
+	button_close = glade_xml_get_widget (gxml, "button1"); /* close */
+	button_cancel = glade_xml_get_widget (gxml, "button12"); /* close */
+	button5 = glade_xml_get_widget (gxml, "button2"); /* refresh */
+	button6 = glade_xml_get_widget (gxml, "button3"); /* install */
+	button7 = glade_xml_get_widget (gxml, "button9"); /* remove */
+	/* combo box entrys */
+	combo_entry1 = glade_xml_get_widget (gxml, "comboboxentry1"); /* local soruce */
+	set_combobox(GTK_COMBO_BOX(combo_entry1));
+	combo_entry2 = glade_xml_get_widget (gxml, "comboboxentry2"); /* remote source */
+	set_combobox(GTK_COMBO_BOX(combo_entry2));
+	/* radio buttons */
+	radiobutton_source = glade_xml_get_widget (gxml, "radiobutton1"); /* local */
+	radiobutton2 = glade_xml_get_widget (gxml, "radiobutton2"); /* remote */
+	radiobutton_dest = glade_xml_get_widget (gxml, "radiobutton3"); /* homedir */
+	radiobutton4 = glade_xml_get_widget (gxml, "radiobutton4"); /* homedir */
+	/* progress bars */
+	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
+	
+	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+}
+
 
 /******************************************************************************
  * Name
@@ -2541,7 +2081,7 @@ GtkWidget *create_dialog(void)
 
 void gui_open_mod_mgr(void)
 {
-	GtkWidget *dlg;
+	//GtkWidget *dlg;
 	GString *str = g_string_new(NULL);
 	gchar *path = NULL;
 
@@ -2559,8 +2099,9 @@ void gui_open_mod_mgr(void)
 	   g_print("g_thread_supported\n");
 	 */
 	mod_mgr_init(NULL);
-	dlg = create_dialog();
-
+	//dlg = create_dialog();
+	create_module_manager_dialog();
+	
 	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
 	gtk_label_set_text(GTK_LABEL(label_home), str->str);
 
@@ -2577,7 +2118,6 @@ void gui_open_mod_mgr(void)
 
 	create_pixbufs();
 	load_source_treeviews();
-	gtk_widget_show(dlg);
 	g_string_free(str, TRUE);
 }
 
@@ -2602,30 +2142,9 @@ void gui_update_install_status(glong total, glong done,
 			       const gchar * message)
 {
 	gchar *buf;
-	GtkProgressBar *pbar = NULL;
 	
-	switch (current_page) {
-	case 1:
-		if(!progressbar_refresh) {
-			return;
-		}
-		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
-		break;
-	case 2:
-		if(!progressbar) {
-			return;
-		}
-		pbar = GTK_PROGRESS_BAR(progressbar);
-		break;
-	case 3:
-		if(!progressbar1) {
-			return;
-		}
-		pbar = GTK_PROGRESS_BAR(progressbar1);
-		break;
-	}
 	buf = g_strdup_printf("%s: %s",current_mod,message);
-	gtk_progress_bar_set_text(pbar, buf);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
@@ -2651,25 +2170,7 @@ void gui_update_install_status(glong total, glong done,
 
 void gui_update_install_progressbar(gdouble fraction)
 {
-	GtkProgressBar *pbar;
-	switch (current_page) {
-	case 1:
-		if(!progressbar_refresh)
-			return;
-		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
-		break;
-	case 2:
-		if(!progressbar)
-			return;
-		pbar = GTK_PROGRESS_BAR(progressbar);
-		break;
-	case 3:
-		if(!progressbar1)
-			return;
-		pbar = GTK_PROGRESS_BAR(progressbar1);
-		break;
-	}
-	gtk_progress_bar_set_fraction(pbar, fraction);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), fraction);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
