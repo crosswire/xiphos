@@ -1,3 +1,9 @@
+2005-07-12 terry <tbiggs@users.sf.net>
+
+	* added ui/module-manager.glade and ui/sword3.png
+	* the module manager is built by libglade
+	
+
 2005-07-09 terry <tbiggs@users.sf.net> 
 
 	* added gnomesword1/ui directory.
