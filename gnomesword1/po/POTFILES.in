@@ -62,3 +62,4 @@ src/gnome2/utilities.c
 # Glade files
 ui/bookmarks.glade
 ui/prefs.glade
+ui/module-manager.glade

@@ -1,6 +1,9 @@
-ui_DATA = bookmarks.glade \
+ui_DATA = \
+	bookmarks.glade \
 	prefs.glade \
-	logo.png
+	module-manager.glade \
+	logo.png \
+	sword3.png
 
 uidir = $(pkgdatadir)
 
