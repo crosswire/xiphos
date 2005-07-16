@@ -330,6 +330,107 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_save_tabs
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_save_tabs(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   ask for a file name (with file-chooser) and save the current tabs to that file
+ *
+ * Return value
+ *   void
+ */
+void on_save_tabs(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *dialog;
+	gchar *tabs_dir;
+
+	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+	
+	if (access(tabs_dir, F_OK) == -1) {
+		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
+			fprintf(stderr, "can't create tabs dir");
+			return;
+		}
+	}
+	
+	dialog = gtk_file_chooser_dialog_new ("Save Session",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_SAVE,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+				      NULL);
+	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+  	{
+    		char *filename;
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		filename = g_path_get_basename(filename);
+		gui_save_tabs(filename);
+		g_free (filename);
+	}
+
+	gtk_widget_destroy (dialog);
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_load_tabs
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   ask for file name (with file-chooser) and load tabs from that file
+ *
+ * Return value
+ *   void
+ */
+void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *dialog;
+	gchar *tabs_dir;
+
+	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
+	
+	if (access(tabs_dir, F_OK) == -1) {
+		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
+			fprintf(stderr, "can't create tabs dir");
+			return;
+		}
+	}
+
+	dialog = gtk_file_chooser_dialog_new ("Open Session",
+				      NULL,
+				      GTK_FILE_CHOOSER_ACTION_OPEN,
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+				      NULL);
+	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, tabs_dir);
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+  	{
+    		char *filename;
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		filename = g_path_get_basename(filename);
+		gui_close_all_tabs();
+		gui_load_tabs(filename);
+		g_free (filename);
+	}
+
+	gtk_widget_destroy (dialog);
+}
+
+
+/******************************************************************************
+ * Name
  *  view_hints
  *
  * Synopsis
@@ -488,6 +589,17 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{ GNOME_APP_UI_ITEM, N_("Open Session"),
+	  N_("Open a saved session"),
+	  on_load_tabs, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
+	  0, 0, NULL},
+  	{ GNOME_APP_UI_ITEM, N_("Save Session"),
+	  N_("Save the current session to a file"),
+	  on_save_tabs, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_SAVE,
+	  0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
 	GNOMEUIINFO_END
