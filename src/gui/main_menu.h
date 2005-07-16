@@ -49,6 +49,10 @@ void on_auto_save_notes1_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_search_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
+void on_save_tabs(GtkMenuItem * menuitem,
+				gpointer user_data);
+void on_load_tabs(GtkMenuItem * menuitem,
+				gpointer user_data);
 void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
 
