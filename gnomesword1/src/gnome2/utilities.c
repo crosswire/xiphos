@@ -38,7 +38,46 @@
 #include "main/settings.h"
 #include "main/configs.h"
 #include "main/sword.h"
+ 
 
+
+void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
+{
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(pb), text);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}  
+}
+
+
+void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction)
+{
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(pb), fraction);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}  
+}
+
+
+void gui_set_combo_index(GtkWidget * combo, gint index)
+{
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo), index);
+}
+
+
+void gui_clear_combo(GtkWidget * combo)
+{
+	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));	
+	gtk_list_store_clear(GTK_LIST_STORE(model));
+}
+
+void gui_add_item_to_combo(GtkWidget * combo, gchar * item)
+{
+	GtkTreeIter iter;	
+	GtkTreeModel* model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+	gtk_list_store_append(GTK_LIST_STORE(model), &iter);
+	gtk_list_store_set(GTK_LIST_STORE(model), &iter, 0, (gchar*)item, -1);
+}
 
 
 /*

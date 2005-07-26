@@ -1995,11 +1995,11 @@ void setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
 static
 void set_combobox(GtkComboBox * combo)
 {	
-	GtkTreeIter iter;
+	//GtkTreeIter iter;
 	GtkListStore *store;
-	GtkCellRenderer *renderer;
-	gint index = 0;
-	gint i = 0;
+	//GtkCellRenderer *renderer;
+	//gint index = 0;
+	//gint i = 0;
 	
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
@@ -2144,10 +2144,11 @@ void gui_update_install_status(glong total, glong done,
 	gchar *buf;
 	
 	buf = g_strdup_printf("%s: %s",current_mod,message);
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
+	gui_set_progressbar_text(progressbar_refresh,buf);
+/*	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
-	}
+	}*/
 	g_free(buf);
 }
 
@@ -2170,8 +2171,9 @@ void gui_update_install_status(glong total, glong done,
 
 void gui_update_install_progressbar(gdouble fraction)
 {
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), fraction);
+	gui_set_progressbar_fraction(progressbar_refresh, fraction);
+	/*gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), fraction);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
-	}
+	}*/
 }
