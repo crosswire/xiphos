@@ -40,7 +40,7 @@ void main_selection_modules_lists_changed(GtkTreeSelection *
 				    selection, gpointer data);
 void main_mod_selection_changed(GtkTreeSelection * selection,
 				     GtkWidget * tree_widget);
-void main_do_dialog_search(gpointer user_data);
+void main_do_dialog_search(void);
 void main_open_search_dialog(void);
 void main_close_search_dialog(void);
 char *main_get_search_rendered_text(char *module_name, char *key);

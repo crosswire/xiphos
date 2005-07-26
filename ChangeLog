@@ -1,3 +1,9 @@
+2005-07-26 terry <tbiggs@users.sf.net>
+
+	* added ui/search-dialog.glade
+	* the advanced search dialog is now built by libglade
+
+
 2005-07-12 terry <tbiggs@users.sf.net>
 
 	* added ui/module-manager.glade and ui/sword3.png
