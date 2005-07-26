@@ -26,6 +26,11 @@ extern "C" {
 #include <gnome.h>
 #include "main/configs.h"
 
+void gui_set_progressbar_text(GtkWidget * pb, gchar * text);
+void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction);
+void gui_set_combo_index(GtkWidget * combo, gint index);	
+void gui_clear_combo(GtkWidget * combo);
+void gui_add_item_to_combo(GtkWidget * combo, gchar * item);
 void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj, 
 			   const gchar *signal_name, const gchar *signal_data,
 			   GObject *conn_obj, gboolean conn_after,

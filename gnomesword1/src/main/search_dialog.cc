@@ -44,6 +44,7 @@ extern "C" {
 #include "gui/widgets.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
+#include "gui/utilities.h"
 
 #include "backend/sword_main.hh"
 
@@ -92,8 +93,9 @@ void main_dialog_search_percent_update(char percent, void *userData)
 	while ((((float) percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float) percent) / 100));
 		num = (float) percent / 100;
-		gnome_appbar_set_progress_percentage(
-			(GnomeAppBar *)search1.progressbar, num);
+		gui_set_progressbar_fraction(search1.progressbar, (gdouble)num);
+		/*gnome_appbar_set_progress_percentage(
+			(GnomeAppBar *)search1.progressbar, num);*/
 		printed++;
 	}
 	while (gtk_events_pending())
@@ -381,12 +383,10 @@ void main_delete_range(void)
 
 static void add_ranges(void)
 {
-	GList *items = NULL;
 	gchar *buf[2];
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
-
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
@@ -401,42 +401,37 @@ static void add_ranges(void)
 			buf[1] = xml_get_list();
 
 			gtk_list_store_append(list_store, &iter);
-			gtk_list_store_set(list_store, &iter,
-					   0, buf[0], 1, buf[1], -1);
-			items = g_list_append(items, g_strdup(buf[0]));
+			gtk_list_store_set(list_store, 
+					   &iter,
+					   0, buf[0], 
+					   1, buf[1], 
+					   -1);
 			g_free(buf[0]);
 			g_free(buf[1]);
 		}
-
+		
+		gui_clear_combo(search1.combo_range);
 		while (xml_next_item()) {
 			if (xml_get_label()) {
 				buf[0] = xml_get_label();
 				buf[1] = xml_get_list();
 
-				gtk_list_store_append(list_store,
-						      &iter);
-				gtk_list_store_set(list_store, &iter, 0,
-						   buf[0], 1, buf[1],
+				gtk_list_store_append(list_store, &iter);
+				gtk_list_store_set(list_store, 
+						   &iter, 
+						   0, buf[0], 
+						   1, buf[1],
 						   -1);
-				items =
-				    g_list_append(items,
-						  g_strdup(buf[0]));
+				gui_add_item_to_combo(search1.combo_range,
+						   buf[0]);
 				g_free(buf[0]);
 				g_free(buf[1]);
 			}
 		}
+		gui_set_combo_index(search1.combo_range,0);
 	}
-
-	if (items != NULL)
-		gtk_combo_set_popdown_strings(GTK_COMBO
-					      (search1.combo_range),
-					      items);
-	while (items != NULL) {
-		g_free((gchar *) items->data);
-		items = g_list_next(items);
-	}
-	g_list_free(items);
 }
+
 
 /******************************************************************************
  * Name
@@ -456,15 +451,12 @@ static void add_ranges(void)
 
 static void add_modlist(void)
 {
-	GList *items = NULL;
 	gchar *buf[2];
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
 
-
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 
 	gtk_list_store_clear(list_store);
@@ -475,43 +467,38 @@ static void add_modlist(void)
 			buf[1] = xml_get_list();
 
 			gtk_list_store_append(list_store, &iter);
-			gtk_list_store_set(list_store, &iter,
-					   0, buf[0], 1, buf[1], -1);
-			items = g_list_append(items, g_strdup(buf[0]));
+			gtk_list_store_set(list_store, 
+					   &iter,
+					   0, buf[0], 
+					   1, buf[1], 
+					   -1);
 			g_free(buf[0]);
 			g_free(buf[1]);
 		}
 
+		gui_clear_combo(search1.combo_list);
 		while (xml_next_item()) {
 			if (xml_get_label()) {
 				buf[0] = xml_get_label();
 				buf[1] = xml_get_list();
 
-				gtk_list_store_append(list_store,
-						      &iter);
-				gtk_list_store_set(list_store, &iter, 0,
-						   buf[0], 1, buf[1],
+				gtk_list_store_append(list_store, &iter);
+				gtk_list_store_set(list_store, 
+						   &iter, 
+						   0, buf[0], 
+						   1, buf[1],
 						   -1);
-				items =
-				    g_list_append(items,
-						  g_strdup(buf[0]));
+				gui_add_item_to_combo(search1.combo_list,
+						   buf[0]);
+				g_message(buf[0]);
 				g_free(buf[0]);
 				g_free(buf[1]);
 			}
 		}
+		gui_set_combo_index(search1.combo_list,0);
 	}
-
-	if (items != NULL)
-		gtk_combo_set_popdown_strings(GTK_COMBO
-					      (search1.combo_list),
-					      items);
-
-	while (items != NULL) {
-		g_free((gchar *) items->data);
-		items = g_list_next(items);
-	}
-	g_list_free(items);
 }
+
 
 /******************************************************************************
  * Name
@@ -1107,7 +1094,7 @@ char *main_get_search_rendered_text(char *module_name, char *key)
 }
 
 
-void main_do_dialog_search(gpointer user_data)
+void main_do_dialog_search(void)
 {
 	gint search_type, search_params, finds;
 	const gchar *search_string;
@@ -1125,7 +1112,7 @@ void main_do_dialog_search(gpointer user_data)
 
 	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(search1.search_entry));
-
+	//g_message(search_string);
 	if (strlen(search_string) < 1)
 		return;
 	str = g_string_new("");
@@ -1162,8 +1149,8 @@ void main_do_dialog_search(gpointer user_data)
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;
 		name =
-		    gtk_entry_get_text(GTK_ENTRY
-				       (search1.combo_entry_list));
+		    gtk_entry_get_text(GTK_ENTRY(
+				GTK_BIN(search1.combo_list)->child));
 		search_mods = get_custom_list_from_name(name);
 	} else if (GTK_TOGGLE_BUTTON(search1.rb_mod_list)->active) {
 		search_mods = get_current_list();
@@ -1182,8 +1169,10 @@ void main_do_dialog_search(gpointer user_data)
 		module = (gchar *) search_mods->data;
 
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
-		gnome_appbar_set_status(GNOME_APPBAR
-					(search1.progressbar), buf);
+		
+		gui_set_progressbar_text(search1.progressbar, buf);
+		/*gnome_appbar_set_status(GNOME_APPBAR
+					(search1.progressbar), buf);*/
 
 		if(search_type == -2)
 			search_type = backendSearch->check_for_optimal_search(module);
@@ -1211,8 +1200,10 @@ void main_do_dialog_search(gpointer user_data)
 
 	gtk_html_end(GTK_HTML(html), htmlstream2, status2);
 	gui_end_html(search1.results_html);
-	gnome_appbar_set_status(GNOME_APPBAR(search1.progressbar),
-				_("Search finished"));
+	gui_set_progressbar_text(search1.progressbar, _("Search finished"));
+	gui_set_progressbar_fraction(search1.progressbar, 0);
+/*	gnome_appbar_set_status(GNOME_APPBAR(search1.progressbar),
+				_("Search finished"));*/
 	g_string_free(str, TRUE);	
 }
 
@@ -1238,13 +1229,11 @@ void main_open_search_dialog(void)
 		GtkTreeModel *model;
 		GtkListStore *list_store;
 		GtkTreeIter iter;
-		GtkWidget *dlg;
 		
 		backendSearch = new BackEnd();
 
 		/* create and show search dialog */
-		dlg = gui_create_search_dialog();
-		gtk_widget_show(dlg);
+		gui_create_search_dialog();
 
 		/* initiate module count to 0 */
 		search1.module_count = 0;
@@ -1256,11 +1245,6 @@ void main_open_search_dialog(void)
 		add_modlist();
 
 		/* set search module to current module  */
-		//model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_modules));
-		//list_store = GTK_LIST_STORE(model);
-
-		//gtk_list_store_clear(list_store);
-
 		search1.search_mod = settings.MainWindowModule;
 		main_change_mods_select_label(settings.MainWindowModule);
 		/* add one to module count */
