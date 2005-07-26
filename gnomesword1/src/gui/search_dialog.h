@@ -92,8 +92,7 @@ struct _search_dialog1 {
 };
 extern SEARCH_DIALOG1 search1;
 
-GtkWidget *gui_create_search_dialog(void);
-void gui_do_dialog_search(void);
+void gui_create_search_dialog(void);
 	
 #ifdef __cplusplus
 }
