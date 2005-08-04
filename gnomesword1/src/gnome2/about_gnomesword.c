@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * about_gnomesword.c - GnomeSword about dialog
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2005 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,11 +23,31 @@
 #include <config.h>
 #endif
 
-#include <bonobo.h>
 #include <gnome.h>
 
 #include "gui/about_gnomesword.h"
 #include "main/settings.h"
+
+static const gchar *authors[] = {
+    "Terry Biggs",
+    "Moses McKnight",
+    "Jan Paul Schmidt",
+    "Victor Porton",
+    "Stephen Binks",
+    "Carl Constantine",
+    "Jp Robinson",
+    "Andy Piper",
+    NULL
+};
+  
+static const gchar *documenters[] = { 
+    "Pierre Benz",
+    "Andy Piper",
+    "Peter von Kaehne",
+    NULL
+};
+
+static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat";
 
 /******************************************************************************
  * Name
@@ -48,36 +68,31 @@
 GtkWidget*
 gui_create_about_gnomesword(void)
 {
-  const gchar *authors[] = {
-    "Terry Biggs",
-    "Moses McKnight",
-    "Jan Paul Schmidt",
-    "Victor Porton",
-    "Stephen Binks",
-    "Carl Constantine",
-    "Jp Robinson",
-    "Andy Piper",
-    NULL
-  };
-  
-  const gchar *documenters[] = { 
-    "Pierre Benz",
-    "Andy Piper",
-    "Peter von Kaehne",
-    NULL
-  };
-  gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat";
   GdkPixbuf *about1_logo_pixbuf;
   GtkWidget *about1;
   GError *error = NULL;
 
   about1_logo_pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR"/about.png", &error);
-  about1 = gnome_about_new (PACKAGE, VERSION,
-                        _("Copyright 2003 The GnomeSword Development team"),
-                        _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."),
-                        authors,
-                        documenters,
-                        translators,
-                        about1_logo_pixbuf);
+
+  about1 = gtk_about_dialog_new ();
+  gtk_about_dialog_set_name
+          (GTK_ABOUT_DIALOG (about1), PACKAGE);
+  gtk_about_dialog_set_version
+          (GTK_ABOUT_DIALOG (about1), VERSION);
+  gtk_about_dialog_set_copyright
+          (GTK_ABOUT_DIALOG (about1),
+           _("Copyright 2000-2005 The GnomeSword Development Team"));
+  gtk_about_dialog_set_comments
+          (GTK_ABOUT_DIALOG (about1),
+           _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
+  gtk_about_dialog_set_authors
+          (GTK_ABOUT_DIALOG (about1), authors);
+  gtk_about_dialog_set_documenters
+          (GTK_ABOUT_DIALOG (about1), documenters);
+  gtk_about_dialog_set_translator_credits
+          (GTK_ABOUT_DIALOG (about1), translators);
+  gtk_about_dialog_set_logo
+          (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
+
   return about1;
 }
