@@ -1,3 +1,8 @@
+2005-08-04 terry <tbiggs@users.sf.net>
+
+	* added about_gnomesword.c.patch from Eicke Godehardt - ported about 
+	  dialog from 'gnome about dialog' to 'gtk about dialog.'
+
 2005-07-26 terry <tbiggs@users.sf.net>
 
 	* added ui/search-dialog.glade
