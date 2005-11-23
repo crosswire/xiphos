@@ -22,7 +22,11 @@
 #ifndef __EDITOR_MENU_H_
 #define __EDITOR_MENU_H_
 
+#include <config.h>
+#ifndef USE_GTKHTML38
+
 #include <gnome.h>
+
 #include "editor/editor.h"
 
 void gui_new_activate(GtkMenuItem * menuitem, 
@@ -31,4 +35,5 @@ void on_save_activate(GtkMenuItem * menuitem,
 				GSHTMLEditorControlData * ecd);
 GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd);
 
+#endif
 #endif

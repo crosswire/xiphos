@@ -289,7 +289,10 @@ void shutdown_frontend(void)
 	gui_save_bookmarks_treeview();
 
 	/* if study pad file has changed since last save */
+
+#ifndef USE_GTKHTML38
 	gui_studypad_can_close();
+#endif
 
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();

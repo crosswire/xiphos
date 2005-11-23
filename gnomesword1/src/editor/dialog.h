@@ -23,6 +23,9 @@
 #ifndef _GTK_HTML_DIALOG_H_
 #define _GTK_HTML_DIALOG_H_
 
+#include <config.h>
+#ifndef USE_GTKHTML38
+
 #include "editor/editor.h"
 
 typedef GtkDialog ** (*DialogCtor)(GtkHTML *html, GSHTMLEditorControlData *cd);
@@ -36,4 +39,5 @@ void       run_dialog         (GtkDialog          ***dialog,
 			       const gchar          *title);
 GtkWindow *get_parent_window  (GtkWidget            *w);
 
+#endif
 #endif

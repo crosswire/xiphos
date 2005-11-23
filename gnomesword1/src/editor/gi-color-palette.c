@@ -28,6 +28,8 @@
  */
 
 #include <config.h>
+
+#ifndef USE_GTKHTML38
 #include <string.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtksignal.h>
@@ -40,7 +42,7 @@
 #include "gi-color-palette.h"
 #include "gi-colors.h"
 #include "gi-utils.h"
-#include "gtkhtml/htmlmarshal.h"
+//#include "gtkhtml/htmlmarshal.h"
 
 #define COLOR_PREVIEW_WIDTH 15
 #define COLOR_PREVIEW_HEIGHT 15
@@ -665,3 +667,4 @@ color_palette_new (const char *no_color_label,
 					    default_color_set, default_color,
 					    color_group);
 }
+#endif

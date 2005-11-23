@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include "gtkhtml/htmlengine-edit-clueflowstyle.h"
 #include "gtkhtml/htmlengine-save.h"
@@ -144,3 +145,4 @@ paragraph_close_cb (GSHTMLEditorControlData *cd, gpointer get_data)
 {
 	g_free (get_data);
 }
+#endif

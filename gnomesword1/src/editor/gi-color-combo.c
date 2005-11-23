@@ -30,6 +30,7 @@
 
 #include <config.h>
 
+#ifndef USE_GTKHTML38
 #include <gtk/gtkentry.h>
 #include <gtk/gtksignal.h>
 #include <libgnomecanvas/gnome-canvas.h>
@@ -306,3 +307,4 @@ color_combo_new (GdkPixbuf *icon, char const *no_color_label,
 
 	return GTK_WIDGET (cc);
 }
+#endif

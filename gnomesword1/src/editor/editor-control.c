@@ -28,7 +28,11 @@
 #include <fcntl.h>
 
 #include <glib.h>
+#include <Editor.h>
 #include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/gtkhtml-properties.h>
+
+#ifndef USE_GTKHTML38
 #include "gtkhtml/gtkhtml-properties.h"
 #include "gtkhtml/htmlcursor.h"
 #include "gtkhtml/htmlengine.h"
@@ -45,24 +49,679 @@
 #include "gtkhtml/htmlplainpainter.h"
 
 #include "editor/editor.h"
-#include "editor/editor-control.h"
 #include "editor/popup.h"
 #include "editor/spell.h"
 #include "editor/toolbar_style.h"
 #include "editor/toolbar_edit.h"
 #include "editor/editor_menu.h"
-//#include "editor/htmlsourceview.h"
 
+#include "gui/dialog.h"
+#include "gui/fileselection.h"
+#endif
+
+
+#ifndef USE_GTKHTML38
+
+#endif
+
+#include "editor/editor-control.h"
 
 #include "main/settings.h"
+#include "main/sword.h"
 
 
 #include "gui/html.h"
-#include "gui/dialog.h"
-#include "gui/fileselection.h"
 #include "gui/widgets.h"
 #include "gui/gnomesword.h"
 
+
+
+#ifdef USE_GTKHTML38
+
+#define CONTROL_FACTORY_ID "OAFIID:GNOME_GtkHTML_Editor_Factory:" GTKHTML_API_VERSION
+#define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
+
+static GtkWidget *control;
+static gint formatHTML = 1;
+static GtkWidget *win;
+static	GtkHTML *html;
+static	BonoboWindow *app;
+
+/* Saving/loading through PersistStream.  */
+
+static void
+load_through_persist_stream (const gchar *text,
+			     Bonobo_PersistStream pstream)
+{
+	BonoboObject *smem;
+	BonoboWidget *control;
+	CORBA_Object interface;
+	CORBA_Environment ev;	
+	
+	CORBA_exception_init (&ev);
+	
+	control = BONOBO_WIDGET(bonobo_window_get_contents(app));
+	
+	smem = bonobo_stream_mem_create (text, strlen(text), FALSE, TRUE);
+	CORBA_exception_init (&ev);
+	interface = Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (control),
+						   "IDL:Bonobo/PersistStream:1.0", &ev);
+	if (BONOBO_EX (&ev) || interface == CORBA_OBJECT_NIL) {
+		g_warning ("Couldn't find persist stream interface");
+		return;
+	}
+	Bonobo_PersistStream_load (interface, BONOBO_OBJREF (smem), "text/html", &ev);
+		
+	bonobo_object_unref (BONOBO_OBJECT (smem));
+	CORBA_exception_free (&ev);
+}
+
+
+void
+editor_load_note(const gchar * module_name, const gchar * key)
+{
+	gchar *text = main_get_rendered_text((gchar *)module_name, (gchar *)key);
+	load_through_persist_stream (text, NULL);
+#ifdef DEBUG
+	g_message(text);
+#endif
+	if(text)
+		g_free(text);
+	
+}
+
+
+static void
+save_through_persist_stream_cb (GtkWidget * widget,
+			     gpointer data)
+{
+	BonoboObject *smem;
+	BonoboWidget *control;
+	CORBA_Environment ev;
+	CORBA_Object interface;
+	const char *text;
+	size_t len;
+	EDITOR *ed = (EDITOR*) data;
+	CORBA_exception_init (&ev);
+	control = BONOBO_WIDGET(bonobo_window_get_contents(app)); //BONOBO_WINDOW(ed->window)));
+	interface = Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (control),
+						   "IDL:Bonobo/PersistStream:1.0", &ev);
+	if (BONOBO_EX (&ev) || interface == CORBA_OBJECT_NIL) {
+		g_warning ("Couldn't find persist stream interface");
+		return;
+	}
+	smem = bonobo_stream_mem_create (NULL, 1, FALSE, TRUE);
+	Bonobo_PersistStream_save (interface, BONOBO_OBJREF (smem), "text/html", &ev);
+	/* Terminate the buffer for e_text_to_html */
+	bonobo_stream_client_write (BONOBO_OBJREF (smem), "", 1, &ev);
+
+        text = bonobo_stream_mem_get_buffer (BONOBO_STREAM_MEM (smem));
+	len  = bonobo_stream_mem_get_size (BONOBO_STREAM_MEM (smem));
+	g_message(text);
+	main_save_note(ed->module, ed->key, text);
+
+	bonobo_object_unref (BONOBO_OBJECT (smem));
+	CORBA_exception_free (&ev);
+}
+
+static void
+save_through_plain_persist_stream_cb (const gchar *filename,
+			     Bonobo_PersistStream pstream)
+{
+	BonoboObject *stream = NULL;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	/* FIX2 stream = bonobo_stream_open (BONOBO_IO_DRIVER_FS, filename,
+				     Bonobo_Storage_WRITE |
+				     Bonobo_Storage_CREATE |
+				     Bonobo_Storage_FAILIFEXIST, 0); */
+
+	if (stream == NULL) {
+		g_warning ("Couldn't create `%s'\n", filename);
+	} else {
+		Bonobo_Stream corba_stream;
+
+		corba_stream = bonobo_object_corba_objref (stream);
+		Bonobo_Stream_truncate (corba_stream, 0, &ev);
+		Bonobo_PersistStream_save (pstream, corba_stream, "text/plain", &ev);
+	}
+
+	Bonobo_Unknown_unref (pstream, &ev);
+	CORBA_Object_release (pstream, &ev);
+
+	CORBA_exception_free (&ev);
+}
+
+
+/* Loading/saving through PersistFile.  */
+
+static void
+load_through_persist_file (const gchar *filename,
+			   Bonobo_PersistFile pfile)
+{
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+	
+	
+	Bonobo_PersistFile_load (pfile, filename, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION)
+		g_warning ("Cannot load.");
+
+	CORBA_exception_free (&ev);
+}
+
+static void
+save_through_persist_file (const gchar *filename,
+			   Bonobo_PersistFile pfile)
+{
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	Bonobo_PersistFile_save (pfile, filename, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION)
+		g_warning ("Cannot save.");
+
+	CORBA_exception_free (&ev);
+}
+
+
+/* Common file selection widget.  We make sure there is only one open at a
+   given time.  */
+
+enum _FileSelectionOperation {
+	OP_NONE,
+	OP_SAVE_THROUGH_PERSIST_STREAM,
+	OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM,
+	OP_LOAD_THROUGH_PERSIST_STREAM,
+	OP_SAVE_THROUGH_PERSIST_FILE,
+	OP_LOAD_THROUGH_PERSIST_FILE
+};
+typedef enum _FileSelectionOperation FileSelectionOperation;
+
+struct _FileSelectionInfo {
+	BonoboWidget *control;
+	GtkWidget *widget;
+
+	FileSelectionOperation operation;
+};
+typedef struct _FileSelectionInfo FileSelectionInfo;
+
+static FileSelectionInfo file_selection_info = {
+	NULL,
+	NULL,
+	OP_NONE
+};
+
+static void
+file_selection_destroy_cb (GtkWidget *widget,
+			   gpointer data)
+{
+	file_selection_info.widget = NULL;
+}
+
+static void
+view_source_dialog (BonoboWindow *app, char *type, gboolean as_html)
+{
+	//load_through_persist_stream ("<b>bold</b><br>not so bold",NULL);
+}    
+
+static void
+view_html_source_cb (GtkWidget *widget,
+		     gpointer data)
+{
+	view_source_dialog (data, "text/html", FALSE);
+}
+
+static void
+view_plain_source_cb (GtkWidget *widget,
+		      gpointer data)
+{
+	view_source_dialog (data, "text/plain", FALSE);
+}
+
+static void
+view_html_source_html_cb (GtkWidget *widget,
+			  gpointer data)
+{
+	view_source_dialog (data, "text/html", TRUE);
+}
+
+static void
+file_selection_cancel_cb (GtkWidget *widget, gpointer data)
+{
+	gtk_widget_destroy (GTK_WIDGET (data));
+}
+
+static void
+file_selection_ok_cb (GtkWidget *widget,
+		      gpointer data)
+{
+	CORBA_Object interface;
+	const gchar *interface_name;
+	CORBA_Environment ev;
+
+	if (file_selection_info.operation == OP_SAVE_THROUGH_PERSIST_FILE
+	    || file_selection_info.operation == OP_LOAD_THROUGH_PERSIST_FILE)
+		interface_name = "IDL:Bonobo/PersistFile:1.0";
+	else
+		interface_name = "IDL:Bonobo/PersistStream:1.0";
+
+	CORBA_exception_init (&ev);
+	interface = Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (file_selection_info.control),
+						   interface_name, &ev);
+	CORBA_exception_free (&ev);
+	
+	if (interface == CORBA_OBJECT_NIL) {
+		g_warning ("The Control does not seem to support `%s'.", interface_name);
+	} else 	 {
+		const gchar *fname;
+
+		fname = gtk_file_selection_get_filename
+			(GTK_FILE_SELECTION (file_selection_info.widget));
+
+		switch (file_selection_info.operation) {
+		case OP_LOAD_THROUGH_PERSIST_STREAM:
+			load_through_persist_stream (fname, interface);
+			break;
+		case OP_SAVE_THROUGH_PERSIST_STREAM:
+			//save_through_persist_stream (fname, interface);
+			break;
+		case OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM:
+			//save_through_plain_persist_stream (fname, interface);
+			break;
+		case OP_LOAD_THROUGH_PERSIST_FILE:
+			load_through_persist_file (fname, interface);
+			break;
+		case OP_SAVE_THROUGH_PERSIST_FILE:
+			save_through_persist_file (fname, interface);
+			break;
+		default:
+			g_assert_not_reached ();
+		}
+	} 
+
+	gtk_widget_destroy (file_selection_info.widget);
+}
+
+
+static void
+open_or_save_as_dialog (BonoboWindow *app,
+			FileSelectionOperation op)
+{
+	GtkWidget    *widget;
+	BonoboWidget *control;
+
+	control = BONOBO_WIDGET (bonobo_window_get_contents (app));
+	
+	if (file_selection_info.widget != NULL) {
+		gdk_window_show (GTK_WIDGET (file_selection_info.widget)->window);
+		return;
+	}
+
+	if (op == OP_LOAD_THROUGH_PERSIST_FILE || op == OP_LOAD_THROUGH_PERSIST_STREAM)
+		widget = gtk_file_selection_new (_("Open file..."));
+	else
+		widget = gtk_file_selection_new (_("Save file as..."));
+
+	gtk_window_set_transient_for (GTK_WINDOW (widget),
+				      GTK_WINDOW (app));
+
+	file_selection_info.widget = widget;
+	file_selection_info.control = control;
+	file_selection_info.operation = op;
+
+	g_signal_connect (GTK_FILE_SELECTION (widget)->cancel_button, "clicked", G_CALLBACK (file_selection_cancel_cb), widget);
+	g_signal_connect (GTK_FILE_SELECTION (widget)->ok_button, "clicked", G_CALLBACK (file_selection_ok_cb), NULL);
+	g_signal_connect (file_selection_info.widget, "destroy", G_CALLBACK (file_selection_destroy_cb), NULL);
+
+	gtk_widget_show (file_selection_info.widget);
+}
+
+/* "Open through persist stream" dialog.  */
+static void
+open_through_persist_stream_cb (GtkWidget *widget,
+				gpointer data)
+{
+	open_or_save_as_dialog (BONOBO_WINDOW (data), OP_LOAD_THROUGH_PERSIST_STREAM);
+}
+
+/* "Save through persist stream" dialog.  */
+/*static void
+save_through_persist_stream_cb (GtkWidget *widget,
+				gpointer data)
+{
+	open_or_save_as_dialog (BONOBO_WINDOW (data), OP_SAVE_THROUGH_PERSIST_STREAM);
+}
+*/
+/* "Save through persist stream" dialog.  */
+/*
+static void
+save_through_plain_persist_stream_cb (GtkWidget *widget,
+				gpointer data)
+{
+	open_or_save_as_dialog (BONOBO_WINDOW (data), OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM);
+}
+*/
+/* "Open through persist file" dialog.  */
+static void
+open_through_persist_file_cb (GtkWidget *widget,
+			      gpointer data)
+{
+	EDITOR *ed = (EDITOR*)data;
+	g_message("open_through_persist_file_cb");
+	
+	open_or_save_as_dialog (BONOBO_WINDOW (ed->window), OP_LOAD_THROUGH_PERSIST_FILE);
+}
+
+/* "Save through persist file" dialog.  */
+static void
+save_through_persist_file_cb (GtkWidget *widget,
+			      gpointer data)
+{
+	EDITOR *ed = (EDITOR*)data;
+	g_message("save_through_persist_file_cb");
+	open_or_save_as_dialog (BONOBO_WINDOW (ed->window), OP_SAVE_THROUGH_PERSIST_FILE);
+}
+
+
+static void
+exit_cb (GtkWidget *widget, gpointer data)
+{
+	EDITOR *ed = (EDITOR*)data;
+	if(ed->is_changed)
+		return;
+#ifdef DEBUG
+	g_message("exit_cb");
+	g_message(ed->filename);
+	g_message(ed->module);
+	g_message(ed->key);
+#endif
+	if(ed->studypad)
+		settings.studypad_dialog_exist = FALSE;
+	if(ed->filename) {
+		g_free(ed->filename);
+	}
+	if(ed->module) {
+		g_free(ed->module);
+	}
+	if(ed->key) {
+		g_free(ed->key);
+	}
+	gtk_widget_destroy (GTK_WIDGET (ed->window));
+	g_free(ed);
+}
+
+
+static BonoboUIVerb verbs [] = {
+	BONOBO_UI_UNSAFE_VERB ("OpenFile",   open_through_persist_file_cb),
+	BONOBO_UI_UNSAFE_VERB ("SaveFile",   save_through_persist_file_cb),
+	BONOBO_UI_UNSAFE_VERB ("OpenStream", open_through_persist_stream_cb),
+	BONOBO_UI_UNSAFE_VERB ("SaveNote", save_through_persist_stream_cb),
+	BONOBO_UI_UNSAFE_VERB ("SavePlainStream",save_through_plain_persist_stream_cb ),
+	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSource", view_html_source_cb),
+	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSourceHTML", view_html_source_html_cb),
+	BONOBO_UI_UNSAFE_VERB ("ViewPlainSource", view_plain_source_cb),
+	BONOBO_UI_UNSAFE_VERB ("FileExit", exit_cb),
+
+	BONOBO_UI_VERB_END
+};
+
+static void
+menu_format_html_cb (BonoboUIComponent           *component,
+		     const char                  *path,
+		     Bonobo_UIComponent_EventType type,
+		     const char                  *state,
+		     gpointer                     user_data)
+
+{
+	if (type != Bonobo_UIComponent_STATE_CHANGED)
+		return;
+	formatHTML = *state == '0' ? 0 : 1;
+
+	bonobo_widget_set_property (BONOBO_WIDGET (user_data), "FormatHTML", TC_CORBA_boolean, formatHTML, NULL);
+	bonobo_widget_set_property (BONOBO_WIDGET (user_data), "HTMLTitle", TC_CORBA_string, "testing", NULL);
+}
+ 
+/* A dirty, non-translatable hack */
+static char ui [] = 
+"<Root>"
+"	<commands>"
+"	        <cmd name=\"FileExit\" _label=\"Exit\" _tip=\"Exit the program\""
+"	         pixtype=\"stock\" pixname=\"Exit\" accel=\"*Control*q\"/>"
+"	        <cmd name=\"FormatHTML\" _label=\"HTML mode\" type=\"toggle\" _tip=\"HTML Format switch\"/>"
+"	</commands>"
+"	<menu>"
+"		<submenu name=\"File\" _label=\"_File\">"
+"			<menuitem name=\"OpenFile\" verb=\"\" _label=\"Open (PersistFile)\" _tip=\"Open using the PersistFile interface\""
+"			pixtype=\"stock\" pixname=\"Open\"/>"
+"			<menuitem name=\"SaveFile\" verb=\"\" _label=\"Save (PersistFile)\" _tip=\"Save using the PersistFile interface\""
+"			pixtype=\"stock\" pixname=\"Save\"/>"
+"			<separator/>"
+"			<menuitem name=\"SaveNote\" verb=\"\" _label=\"_Save (Personal Comment)\" _tip=\"Save using the PersistStream interface\""
+"			pixtype=\"stock\" pixname=\"Save\"/>"
+"			<separator/>"
+"			<menuitem name=\"FileExit\" verb=\"\" _label=\"E_xit\"/>"
+"		</submenu>"
+"		<placeholder name=\"Component\"/>"
+"		<submenu name=\"Format\" _label=\"For_mat\">"
+"			<menuitem name=\"FormatHTML\" verb=\"\"/>"
+"                       <separator/>"
+"                       <placeholder name=\"FormatParagraph\"/>"
+"               </submenu>"
+"	</menu>"
+"	<dockitem name=\"Toolbar\" behavior=\"exclusive\">"
+"		<placeholder name=\"Editbar\"/>"
+
+"	</dockitem>"
+"</Root>";
+
+/*"			<separator/>"
+"			<menuitem name=\"OpenStream\" verb=\"\" _label=\"_Open (PersistStream)\" _tip=\"Open using the PersistStream interface\""
+"			pixtype=\"stock\" pixname=\"Open\"/>"
+"			<menuitem name=\"SaveNote\" verb=\"\" _label=\"_Save (Personal Comment)\" _tip=\"Save using the PersistStream interface\""
+"			pixtype=\"stock\" pixname=\"Save\"/>"
+"			<menuitem name=\"SavePlainStream\" verb=\"\" _label=\"Save _plain(PersistStream)\" _tip=\"Save using the PersistStream interface\""
+"			pixtype=\"stock\" pixname=\"Save\"/>"
+"			<separator/>"
+"                       <menuitem name=\"ViewHTMLSource\" verb=\"\" _label=\"View HTML Source\" _tip=\"View the html source of the current document\"/>"
+"                       <menuitem name=\"ViewHTMLSourceHTML\" verb=\"\" _label=\"View HTML Output\" _tip=\"View the html source of the current document as html\"/>"
+"                       <menuitem name=\"ViewPlainSource\" verb=\"\" _label=\"View PLAIN Source\" _tip=\"View the plain text source of the current document\"/>"
+*/
+
+static int
+app_delete_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
+{	
+	/* do can close here */
+	
+	
+	EDITOR *ed = (EDITOR*) data;
+	if(ed->is_changed)
+		return TRUE;
+	
+#ifdef DEBUG
+	g_message("app_delete_cb");
+	g_message(ed->filename);
+	g_message(ed->module);
+	g_message(ed->key);
+#endif
+	if(ed->studypad)
+		settings.studypad_dialog_exist = FALSE;
+	if(ed->filename) {
+		g_free(ed->filename);
+	}
+	if(ed->module) {
+		g_free(ed->module);
+	}
+	if(ed->key) {
+		g_free(ed->key);
+	}
+	g_free(ed);
+	gtk_widget_destroy (GTK_WIDGET (widget));
+	return FALSE;
+}
+
+void change_window_title(const gchar * window_title)
+{	
+	gtk_window_set_title(GTK_WINDOW(app), window_title);
+}
+
+
+static void        
+ui_event                (BonoboUIComponent *bonobouicomponent,
+                                            gchar *arg1,
+                                            gint arg2,
+                                            gchar *arg3,
+                                            gpointer user_data)
+{
+	g_message("ui_event");
+	
+}
+
+static GtkWidget *
+container_create (const gchar * window_title, EDITOR * editor)
+{
+	GtkWindow *window;
+	GtkWidget *vbox;
+	BonoboUIComponent *component;
+	BonoboUIContainer *container;
+	CORBA_Environment ev;
+	GNOME_GtkHTML_Editor_Engine engine;
+	gpointer servant;
+	BonoboObject *impl;
+	
+	
+	win = bonobo_window_new ("Editor", window_title);
+	
+	app = BONOBO_WINDOW(win);
+	window = GTK_WINDOW (win);
+	editor->window = win;
+	container = bonobo_window_get_ui_container (BONOBO_WINDOW (win));
+
+	g_signal_connect (window, "delete-event", G_CALLBACK (app_delete_cb), (EDITOR*)editor);
+	
+	gtk_window_set_default_size (window, 600, 440);
+	gtk_window_set_resizable (window, TRUE);
+
+	component = bonobo_ui_component_new ("Editor");
+	//bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (component));
+	g_signal_connect(G_OBJECT(component), "ui-event",
+	                     G_CALLBACK(ui_event), (EDITOR*)editor);
+	bonobo_ui_component_set_container (component, BONOBO_OBJREF (container), NULL);
+	bonobo_ui_component_add_verb_list_with_data (component, verbs, editor);
+	bonobo_ui_component_set_translate (component, "/", ui, NULL);
+
+	
+	control = bonobo_widget_new_control (CONTROL_ID, BONOBO_OBJREF (container));
+#ifdef DEBUG
+	g_message(CONTROL_ID);
+#endif
+	if (control == NULL)
+		g_error ("Cannot get `%s'.", CONTROL_ID);
+
+	bonobo_widget_set_property (BONOBO_WIDGET (control), "FormatHTML", TC_CORBA_boolean, formatHTML, NULL);
+	bonobo_ui_component_set_prop (component, "/commands/FormatHTML", "state", formatHTML ? "1" : "0", NULL);
+	bonobo_ui_component_add_listener (component, "FormatHTML", menu_format_html_cb, control);
+
+
+	bonobo_window_set_contents (BONOBO_WINDOW (win), control);
+
+	gtk_widget_show_all (GTK_WIDGET (window));
+
+	CORBA_exception_init (&ev);
+	engine = (GNOME_GtkHTML_Editor_Engine) Bonobo_Unknown_queryInterface
+		(bonobo_widget_get_objref (BONOBO_WIDGET (control)), "IDL:GNOME/GtkHTML/Editor/Engine:1.0", &ev);
+	
+	
+	servant = ORBit_small_get_servant (engine);
+    	if (servant) {
+		impl = bonobo_object (servant);
+		if(impl) {
+			g_message("impl");
+			editor->html_widget = g_object_get_data (G_OBJECT(impl), "html-widget");
+		}
+	}
+
+	if (editor->html_widget) {
+		g_message("we have the html_widget!!!");
+	}
+	GNOME_GtkHTML_Editor_Engine_runCommand (engine, "grab-focus", &ev);
+	bonobo_object_release_unref (engine, &ev);
+	CORBA_exception_free (&ev);
+/*
+	editor->statusbar = gtk_statusbar_new();
+	gtk_widget_show(editor->statusbar);
+	gtk_box_pack_start(GTK_BOX(vbox), editor->statusbar, TRUE, TRUE, 0);
+*/	
+	bonobo_widget_set_property (BONOBO_WIDGET (control),
+				    "MagicSmileys", TC_CORBA_boolean, TRUE,
+				    NULL);
+	bonobo_widget_set_property (BONOBO_WIDGET (control),
+				    "MagicLinks", TC_CORBA_boolean, TRUE,
+				    NULL);
+	bonobo_widget_set_property (BONOBO_WIDGET (control),
+				   "InlineSpelling", TC_CORBA_boolean, TRUE,
+				   NULL);
+	return win;
+}
+
+gint 
+editor_create_new(const gchar * filename, const gchar * key, gint note)
+{
+	gchar *title = NULL;
+	EDITOR *editor;
+	
+	editor = g_new(EDITOR,1);
+	editor->html_widget = NULL;
+	//bonobo_ui_component_new_default
+	if(note) {
+		editor->studypad = FALSE;
+		editor->filename = NULL;
+		editor->module = g_strdup(filename);
+		editor->key = g_strdup(key);
+		container_create (_("Note Editor"),editor);
+		editor_load_note(filename, key);
+	} else {
+		editor->studypad = TRUE;
+		editor->filename = g_strdup(filename);
+		editor->module = NULL;
+		editor->key = NULL;
+		widgets.studypad_dialog = container_create (_("StudyPad"),editor);
+		if(filename)
+			load_file(filename);
+		settings.studypad_dialog_exist = TRUE;	
+	}
+	editor->is_changed = FALSE;
+}
+
+gint
+load_file (const gchar *fname)
+{
+	CORBA_Object interface;
+	CORBA_Environment ev;
+
+	BonoboWidget *control;
+
+	control = BONOBO_WIDGET (bonobo_window_get_contents (app));
+
+	printf ("loading: %s\n", fname);
+	CORBA_exception_init (&ev);
+	interface = Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (BONOBO_WIDGET (control)),
+						   "IDL:Bonobo/PersistFile:1.0", &ev);
+	CORBA_exception_free (&ev);
+	load_through_persist_file (fname, interface);
+
+	return FALSE;
+}
+
+
+
+#else
 static GtkHTMLEditorAPI *editor_api;
 
 GSHTMLEditorControlData *editor_cd;
@@ -475,8 +1134,6 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
 	gtk_box_pack_start(GTK_BOX(toolbar_box),
 			   widgets.toolbar_studypad, FALSE, FALSE, 0);
 	toolbar = gui_toolbar_edit(cd);
-#include <gnome.h>
-#include <glade/glade.h>
 	gtk_widget_show(toolbar);
 	gtk_box_pack_start(GTK_BOX(toolbar_box), toolbar, FALSE, FALSE,
 			   0);
@@ -506,3 +1163,4 @@ GSHTMLEditorControlData *editor_new(GtkWidget * container,
 		return NULL;
 	return new_control(container, type, filename);
 }
+#endif

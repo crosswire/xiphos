@@ -25,8 +25,11 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+
+#ifndef USE_GTKHTML38
 #include <gtkhtml/htmlengine-print.h>
 #include <gtkhtml/htmlselection.h>
+#endif
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
@@ -298,17 +301,24 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 {
 	gchar *key = NULL;
 	GtkHTML *html;
+	gint len;
 
 	html = GTK_HTML(html_widget);
 	if (word)
-		gtk_html_select_word(html);
-
-	if (html_engine_is_selection_active(html->engine)) {
-		key = html_engine_get_selection_string(html->engine);
+		gtk_html_select_word(html);	
+#ifdef USE_GTKHTML38		
+		key = gtk_html_get_selection_html ( html, &len);
 		key = g_strdelimit(key, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		return g_strdup(key);	/* must be freed by calling function */
-	}
+#else
+		if (html_engine_is_selection_active(html->engine)) {
+			key = html_engine_get_selection_string(html->engine);
+			key = g_strdelimit(key, ".,\"<>;:?", ' ');
+			key = g_strstrip(key);
+			return g_strdup(key);	/* must be freed by calling function */
+		}
+#endif
 	return key;
 }
 
@@ -336,7 +346,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 	gint len;
 
 	html = GTK_HTML(html_widget);
-	if (!html_engine_is_selection_active(html->engine)) {
+/*	if (!html_engine_is_selection_active(html->engine)) {
 		gtk_html_select_word(html);
 		if (html_engine_is_selection_active(html->engine)) {
 			key =
@@ -350,10 +360,11 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 			if (key[len - 1] == 'h' && key[len - 2] == 't'
 			    && key[len - 3] == 'e')
 				key[len - 3] = '\0';
-			return g_strdup(key);	/* must be freed by calling function */
+			return g_strdup(key);	// * must be freed by calling function *
 		}
 
 	}
+*/
 	return key;
 }
 

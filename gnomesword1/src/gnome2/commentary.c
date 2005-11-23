@@ -25,7 +25,10 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+
+#ifndef USE_GTKHTML38
 #include <gtkhtml/htmlengine.h>
+#endif
 /*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
@@ -46,6 +49,8 @@
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
+
+#include "editor/editor-control.h"
 
 #include "main/embed.h"
 #include "main/settings.h"
@@ -181,9 +186,15 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
+#ifdef USE_GTKHTML38
+		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
+								event->x,
+								event->y);
+#else
 		url = html_engine_get_link_at (GTK_HTML(widgets.html_comm)->engine,
 					 event->x,
 					 event->y);
+#endif
 		if(strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);
 			gui_open_passage_in_new_tab(work_buf[3]);
@@ -483,8 +494,12 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_GTKHTML38
+	editor_create_new((gchar *)user_data,(gchar *)settings.currentverse,TRUE);
+#else
 //	gui_open_commentary_editor((gchar *) user_data);
 	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
+#endif
 }
 
 /******************************************************************************
