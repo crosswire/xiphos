@@ -25,6 +25,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#include <config.h>
+#ifndef USE_GTKHTML38
 #include <gnome.h>
 #include "editor/editor.h"
 
@@ -36,6 +39,7 @@ gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint load_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint gui_open_studypad(gchar * file_name);
 
+#endif
 #ifdef __cplusplus
 }
 #endif	

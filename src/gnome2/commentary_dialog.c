@@ -34,13 +34,15 @@
 #include "gui/dialog.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
-#include "editor/editor_menu.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
-#include "editor/toolbar_style.h"
-#include "editor/toolbar_edit.h"
 #include "gui/widgets.h"
 
+#ifndef USE_GTKHTML38
+#include "editor/editor_menu.h"
+#include "editor/toolbar_style.h"
+#include "editor/toolbar_edit.h"
+#endif
 #include "main/lists.h"
 #include "main/navbar.h"
 #include "main/settings.h"
@@ -101,7 +103,7 @@ void gui_display_commentary_with_struct(DIALOG_DATA * c, gchar * key)
  * Return value
  *   void
  */
-
+/*
 void gui_note_can_close(GSHTMLEditorControlData * ecd)
 {
 	gchar *filename = NULL;
@@ -133,7 +135,7 @@ void gui_note_can_close(GSHTMLEditorControlData * ecd)
 		g_string_free(str, TRUE);
 	}
 }
-
+*/
 /******************************************************************************
  * Name
  *  
@@ -308,6 +310,10 @@ static gboolean html_key_press_event(GtkWidget * widget,
 				     GdkEventKey * event,
 				     DIALOG_DATA * c)
 {
+
+#ifndef USE_GTKHTML38
+
+	
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) c->editor;
 	cur_c = c;
@@ -315,6 +321,7 @@ static gboolean html_key_press_event(GtkWidget * widget,
 	//g_warning("html_key_press_event");
 	gui_update_statusbar(ec);
 	return FALSE;
+#endif
 
 }
 
@@ -345,18 +352,25 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * c)
 {
 	gchar *url;
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
+
+
+#ifndef USE_GTKHTML38
+
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) c->editor;
+#endif
 	if (*bookname) {
 		url = g_strdup_printf("sword:///%s 1:1", bookname);
 		main_dialogs_url_handler(c, url, TRUE);
 		g_free(url);
 	}
+#ifndef USE_GTKHTML38
 	if (!ec)
 		return;
 	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s 1:1", bookname);
+#endif
 }
 
 
@@ -385,9 +399,10 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	gchar *url;
 	gchar *val_key;
 	gint chapter;
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) c->editor;
-
+#endif
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -396,11 +411,13 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
 
+#ifndef USE_GTKHTML38
 	if (!ec)
 		return FALSE;
 	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s %d:1", bookname, chapter);
+#endif
 	return FALSE;
 }
 
@@ -430,9 +447,10 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	gchar *url;
 	gchar *val_key;
 	gint chapter, verse;
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) c->editor;
-
+#endif
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -447,11 +465,13 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
 
+#ifndef USE_GTKHTML38
 	if (!ec)
 		return FALSE;
 	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s %d:%d", bookname, chapter, verse);
+#endif
 	return FALSE;
 }
 
@@ -479,8 +499,10 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 {
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
+#ifndef USE_GTKHTML38
 		GSHTMLEditorControlData *ec
 		    = (GSHTMLEditorControlData *) c->editor;
+#endif
 		const gchar *buf =
 		    gtk_entry_get_text(GTK_ENTRY(widget));
 		gchar *url = g_strdup_printf("sword:///%s", buf);
@@ -488,11 +510,13 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 		g_free(url);
 		main_navbar_set(c->navbar, c->navbar.key);
 
+#ifndef USE_GTKHTML38
 		if (!ec)
 			return;
 		if (ec->key)
 			g_free(ec->key);
 		ec->key = g_strdup_printf("%s", buf);
+#endif
 	}
 	return FALSE;
 }
@@ -516,8 +540,10 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec
 	    = (GSHTMLEditorControlData *) c->editor;
+#endif
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (c->navbar.key)
 		g_free(c->navbar.key);
@@ -527,12 +553,13 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 	g_free(url);
 	main_navbar_set(c->navbar, c->navbar.key);
 
+#ifndef USE_GTKHTML38
 	if (!ec)
 		return;
 	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s", buf);
-
+#endif
 }
 
 
@@ -874,9 +901,10 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
 	GtkWidget *scrolledwindow38;
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) c->editor;
-
+#endif
 	c->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
 	gtk_object_set_data(GTK_OBJECT(c->dialog), "c->dialog",
@@ -923,6 +951,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 
 
 	if (do_edit) {
+#ifndef USE_GTKHTML38
 		ec->htmlwidget = gtk_html_new();
 		ec->html = GTK_HTML(ec->htmlwidget);
 		gtk_widget_show(ec->htmlwidget);
@@ -981,7 +1010,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
 				   ec->toolbar_edit, FALSE, FALSE, 0);
 		gtk_widget_show(ec->toolbar_edit);
-
+#endif
 	} else {
 		c->html = gtk_html_new();
 		gtk_widget_show(c->html);

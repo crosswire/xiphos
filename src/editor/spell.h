@@ -23,6 +23,11 @@
 #ifndef _GTK_HTML_EDIT_SPELL_H_
 #define _GTK_HTML_EDIT_SPELL_H_
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef USE_GTKHTML38
+
 #include <gtkhtml/gtkhtml.h>
 #include "Spell.h"
 #include "editor/editor.h"
@@ -51,4 +56,5 @@ void                    spell_init                  (GtkHTML            *html,
 void                    spell_create_language_menu  (GSHTMLEditorControlData *cd);
 
 extern char *spell_language;
+#endif
 #endif

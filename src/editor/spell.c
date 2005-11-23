@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <glib.h>
 #include <libgnome/gnome-i18n.h>
 
@@ -433,3 +434,4 @@ spell_create_language_menu (GSHTMLEditorControlData *cd)
 		g_string_free (str, TRUE);
 	}
 }
+#endif

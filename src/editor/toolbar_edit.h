@@ -22,8 +22,14 @@
 #ifndef _TOOLBAR_EDIT_H
 #define _TOOLBAR_EDIT_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef USE_GTKHTML38
+
 #include "editor/editor.h"
 
 GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData *ecd);
 
+#endif
 #endif

@@ -10,14 +10,14 @@
 /* Define if you want to see debug messages */
 #undef DEBUG
 
-/* Editor API Version */
-#undef EDITOR_API_VERSION
-
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 
 /* Gettext package */
 #undef GETTEXT_PACKAGE
+
+/* The gtkhtml api version */
+#undef GTKHTML_API_VERSION
 
 /* GtkHTML data directory */
 #undef GTKHTML_DATA_DIR
@@ -138,6 +138,9 @@
 
 /* Define if you want to use GtkHtml-3.6 */
 #undef USE_GTKHTML36
+
+/* Define if you want to use GtkHtml-3.8 */
+#undef USE_GTKHTML38
 
 /* Define if you want to use gtkmozembed */
 #undef USE_GTKMOZEMBED

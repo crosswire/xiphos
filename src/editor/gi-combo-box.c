@@ -25,6 +25,8 @@
  */
  
 #include <config.h>
+
+#ifndef USE_GTKHTML38
 #include <gdk/gdkwindow.h>
 #include <gdk/gdkdrawable.h>
 #include <gtk/gtkhbox.h>
@@ -42,7 +44,6 @@
 #include "gi-combo-box.h"
 #include "gi-utils.h"
 #include "gtkhtml/htmlmarshal.h"
-
 #define PARENT_TYPE GTK_TYPE_HBOX
 static GObjectClass *gal_combo_box_parent_class;
 
@@ -835,3 +836,5 @@ gal_combo_box_set_tearable (GalComboBox *combo, gboolean tearable)
 		gtk_widget_hide (combo->priv->tearable);
 	}
 }
+
+#endif

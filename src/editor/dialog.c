@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include <libgnome/gnome-i18n.h>
+#ifndef USE_GTKHTML38
 #include "editor/dialog.h"
 
 /*
@@ -55,3 +56,4 @@ run_dialog (GtkDialog ***dialog, GtkHTML *html, GSHTMLEditorControlData *cd, Dia
 	}
 	gtk_dialog_run (**dialog);
 }
+#endif

@@ -6,6 +6,7 @@ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 dnl AC_INIT(configure.in)
 dnl AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev18)
 AM_CONFIG_HEADER(config.h)
+dnl AC_CONFIG_HEADERS(config.h)
 
 AC_PROG_MAKE_SET
 
@@ -41,10 +42,6 @@ AM_PROG_LIBTOOL
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
-EDITOR_API_VERSION=3.1
-AC_DEFINE_UNQUOTED(EDITOR_API_VERSION, "${EDITOR_API_VERSION}", [Editor API Version])
-AC_SUBST(EDITOR_API_VERSION)
-
 
 dnl ================================================================
 dnl Gettext stuff.
@@ -58,7 +55,7 @@ dnl Languages which your application supports
 AM_GLIB_GNU_GETTEXT
 
 dnl ================================================================
-dnl check for GtkHtml
+dnl check for GtkHTML
 dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
@@ -69,16 +66,40 @@ if test "x$have_gtkhtml" = xyes; then
 
 	dnl gtkhtml_datadir
 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
-	AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+	
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.1`
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+fi
+
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+if test "x$have_gtkhtml" = xyes; then
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
 else
 	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.6, have_gtkhtml=yes,exit)
 	AC_DEFINE(USE_GTKHTML36, 1, [Define if you want to use GtkHtml-3.6])
 
 	dnl gtkhtml_datadir
 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.6`"
-	AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
 
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.6`
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
 fi
+AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+
 AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_DATA_DIR)
@@ -284,12 +305,12 @@ echo "Summary of GnomeSword configuration:"
 echo
   echo "Building for Gnome:  2.x"  
 
-if test "x$have_speller" = xyes; then
-  echo "Spellchecking:         enabled"
-  echo "using:                      $speller"
-else
-  echo "Spellchecking:         disabled"
-fi
+dnl if test "x$have_speller" = xyes; then
+dnl   echo "Spellchecking:         enabled"
+dnl   echo "using:                      $speller"
+dnl else
+dnl   echo "Spellchecking:         disabled"
+dnl fi
 
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
@@ -310,13 +331,14 @@ if test "x$debug" = xyes; then
   else  
     echo "Dynamic link to Sword:          enabled"
   fi
-dnl   echo "Sword libs              $LIB_SWORD"
+  
   echo "SWORD_LIBS:   $SWORD_LIBS"
   echo "SWORD_CFLAGS: $SWORD_CFLAGS"
   echo "CFLAGS: $CFLAGS"
   echo "CPPFLAGS: $CPPFLAGS"
   echo "CXXFLAGS: $CXXFLAGS"GNOME_CFLAGS
   echo "GNOME_CFLAGS: $GNOME_CFLAGS"
-  echo "install directory:     ${prefix}/bin"
+  echo "install directory:      ${prefix}/bin"
   echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
+  echo "GTKHTML_API_VERSION     $GTKHTML_API_VERSION"
 fi
