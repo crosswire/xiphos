@@ -21,10 +21,12 @@
 */
 
 #include <config.h>
+#ifndef USE_GTKHTML38
+
 #include <libgnome/gnome-i18n.h>
 #include <string.h>
 #include "gi-color-combo.h"
-#include <gtkhtml/htmlengine-edit.h>
+<gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-edit-clueflowstyle.h>
 #include <gtkhtml/htmlimage.h>
 #include <gtkhtml/htmlcolor.h>
@@ -328,3 +330,4 @@ body_close_cb (GSHTMLEditorControlData *cd, gpointer get_data)
 {
 	g_free (get_data);
 }
+#endif

@@ -394,6 +394,15 @@ static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 					3, &key, 
 					4, &module, 
 					-1);
+#ifdef USE_GTKHTML38
+		if(module && (main_get_mod_type(module) == PERCOM_TYPE)) {			
+			editor_create_new(module,key,TRUE);			
+			use_dialog = FALSE;
+			g_free(module);
+			g_free(key);
+			return;
+		}
+#endif
 		url = g_strdup_printf("gnomesword.url?action=showBookmark&"
 					"type=%s&value=%s&module=%s",
 					"newDialog",

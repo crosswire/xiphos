@@ -33,7 +33,11 @@
 #include <swbuf.h>
 #include <gnome.h>
 
+#ifdef USE_GTKHTML38
+#include "editor/editor-control.h"
+#else
 #include "editor/editor.h"
+#endif
 
 #include "gui/about_modules.h"
 #include "gui/html.h"
@@ -46,7 +50,6 @@
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
-#include "gui/studypad.h"
 #include "gui/studypad.h"
 #include "gui/toolbar_nav.h"
 
@@ -167,6 +170,9 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  
  static gint show_studypad(const gchar * filename, gboolean clicked)
 {
+#ifdef USE_GTKHTML38
+	editor_create_new(filename, NULL, FALSE);
+#else
 	if (settings.studypad_dialog_exist) {
 		gtk_widget_show(widgets.studypad_dialog);
 		load_file((gchar*) filename, editor_cd);
@@ -176,6 +182,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		settings.studypad_dialog_exist =
 			  gui_open_studypad((gchar*)filename);
 	}
+#endif
 	return 1;
 }
 
@@ -622,6 +629,12 @@ static int show_module_and_key(const char * module, const char * key,
 			return 1;
 		}
 		if(!strcmp(type,"newDialog"))  {
+#ifdef USE_GTKHTML38
+			if(module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
+				editor_create_new(module,key,TRUE);
+				return 1;
+			}
+#endif
 			main_dialog_goto_bookmark((gchar*)module,
 						(gchar*)key);
 			return 1;

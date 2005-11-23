@@ -52,6 +52,8 @@ extern char *OLD_CODESET;
 
 /*** function prototypes ***/
 
+void main_save_note(const gchar * module_name, const gchar * key_str, 
+				               const gchar * note_str );
 GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key);
 char *main_get_path_to_mods(void);
 const char *main_get_sword_version(void);

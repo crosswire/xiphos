@@ -85,6 +85,40 @@ extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
 
+/******************************************************************************
+ * Name
+ *   main_save_note
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_save_note(const gchar * module_name, 
+ *				          const gchar * key_str , 
+ *				          const gchar * note_str )	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_save_note(	const gchar * module_name, 
+			const gchar * key_str, 
+			const gchar * note_str )
+{
+#ifdef USE_GTKHTML38
+	backend->set_module_key(module_name, key_str);
+#ifdef DEBUG
+	g_message("note module %s\nnote key %s\nnote text%s",
+				module_name,
+				key_str,
+				note_str);
+#endif
+	backend->save_entry(note_str);
+#endif
+}
+
 	
 /******************************************************************************
  * Name

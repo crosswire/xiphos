@@ -22,6 +22,7 @@
  * most of this code is from the GtkHTML library.
  */
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <gnome.h>
 #ifdef USE_GTKHTML30
 #include <gal/widgets/widget-color-combo.h>
@@ -1298,3 +1299,4 @@ GtkWidget *gui_toolbar_style(GSHTMLEditorControlData * cd)
 	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
 	return create_style_toolbar(cd);
 }
+#endif

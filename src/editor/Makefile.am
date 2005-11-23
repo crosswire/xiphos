@@ -9,6 +9,20 @@ INCLUDES = \
 
 
 # CORBA stuff
+
+HTML_EDITOR_GENERATED =		\
+	Editor.h		\
+	Editor-common.c	\
+	Editor-skels.c	\
+	Editor-stubs.c
+
+Editor-commmon.c: $(GTKHTML_DATA_DIR)/Editor.idl
+
+$(HTML_EDITOR_GENERATED): $(GTKHTML_DATA_DIR)/Editor.idl
+	$(ORBIT_IDL) -I $(srcdir) $(BONOBO_IDL_INCLUDES) -I $(GTKHTML_DATA_DIR)/gtkhtml $(GTKHTML_DATA_DIR)/Editor.idl
+
+
+
 SPELL_IDLS = Spell.idl
 SPELL_IDL_GENERATED_H =		\
 	Spell.h
@@ -28,7 +42,8 @@ noinst_LIBRARIES = libeditor.a
 # The Editor Control
 
 libeditor_a_SOURCES = Spell.idl				\
-	$(SPELL_IDL_GENERATED)			\
+	$(SPELL_IDL_GENERATED) 			\
+	$(HTML_EDITOR_GENERATED)		\
 	body.c body.h				\
 	cell.c cell.h				\
 	dialog.c dialog.h			\
@@ -61,8 +76,10 @@ libeditor_a_SOURCES = Spell.idl				\
 # Extra stuff to distribute.
 
 EXTRA_DIST = \
-    $(SPELL_IDL_GENERATED)
+    $(SPELL_IDL_GENERATED)\
+    $(HTML_EDITOR_GENERATED)
     
 
 CLEANFILES = \
-    $(SPELL_IDL_GENERATED)
+    $(SPELL_IDL_GENERATED) \
+    $(HTML_EDITOR_GENERATED)

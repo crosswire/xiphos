@@ -22,6 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifndef USE_GTKHTML38
 
 #include <gnome.h>
 #include <stdio.h>
@@ -339,3 +340,4 @@ gint gui_fileselection_save(GSHTMLEditorControlData *ecd, gboolean to_html)
 	
 	
 }
+#endif
