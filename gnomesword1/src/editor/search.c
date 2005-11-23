@@ -21,6 +21,7 @@
 */
 
 #include <config.h> 
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
@@ -183,3 +184,4 @@ search_next (GSHTMLEditorControlData *cd)
 		search (cd);
 	}
 }
+#endif

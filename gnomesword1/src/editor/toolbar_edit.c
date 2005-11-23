@@ -22,6 +22,7 @@
  * this code originally came from the GtkHTML library.
  */
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <gnome.h>
 
 #include <gtkhtml/htmlcolor.h>
@@ -929,3 +930,4 @@ GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData * cd)
 	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
 	return create_toolbar_edit(cd);
 }
+#endif

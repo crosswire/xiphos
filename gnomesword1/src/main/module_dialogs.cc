@@ -38,9 +38,12 @@ extern "C" {
 
 #include <string.h>
 
+
+#ifndef USE_GTKHTML38
 #include "editor/editor.h"
 #include "editor/editor-control.h"
 //#include "editor/note_editor.h"
+#endif
 
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
@@ -567,6 +570,7 @@ void main_dialog_save_note(gpointer data)
 //	gsize bytes_read;
 //	gsize bytes_written;
 //	GError **error = NULL;
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
 	BackEnd *be = (BackEnd*)e->be;
 	
@@ -596,6 +600,7 @@ void main_dialog_save_note(gpointer data)
 	}
 	g_string_free(note_str, 0);
 	gtk_html_set_editable(e->html, TRUE);
+#endif
 }
 
 /******************************************************************************
@@ -616,12 +621,14 @@ void main_dialog_save_note(gpointer data)
 
 void main_dialog_delete_note(gpointer data)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
 	BackEnd *be = (BackEnd*)e->be;
 	
 	if(!be)
 		return;	
-	be->delete_entry();	
+	be->delete_entry();
+#endif	
 }
 
 
@@ -648,12 +655,14 @@ void main_free_on_destroy(DIALOG_DATA * t)
 	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) t);
 	g_free(t->ops); 
 	g_free(t->key);
-	g_free(t->mod_name); 
+	g_free(t->mod_name);
+#ifndef USE_GTKHTML38 
 	if((GSHTMLEditorControlData*)t->editor) {
 		editor_control_data_destroy(NULL, 
 				(GSHTMLEditorControlData*)t->editor);		
 		dlg_percom = NULL;
 	}
+#endif
 	if((BackEnd*)t->backend) {
 		BackEnd* be = (BackEnd*)t->backend;
 		delete be;
@@ -813,10 +822,11 @@ void main_dialogs_shutdown(void)
 		/* 
 		 * free each DIALOG_DATA item created 
 		 */
+#ifndef USE_GTKHTML38
 		if((GSHTMLEditorControlData*)t->editor) 
 			editor_control_data_destroy(NULL, 
 					(GSHTMLEditorControlData*)t->editor);
-		
+#endif		
 		if((BackEnd*)t->backend) {
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
@@ -1296,7 +1306,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	gint type;
 	gchar *direction = NULL;
 	gchar *url;
+
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec;
+#endif
 	do_display = TRUE;
 	if(!backend->is_module(mod_name))
 		return NULL;
@@ -1370,6 +1383,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			t->navbar.module_name = g_strdup(mod_name);
 			main_navbar_fill_book_combo(t->navbar);
 		break;
+#ifndef USE_GTKHTML38
 		case PERCOM_TYPE:
 			t->mod_type = PERCOM_TYPE;
 			gui_create_note_editor(t);
@@ -1392,6 +1406,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			t->navbar.module_name = g_strdup(mod_name);
 			main_navbar_fill_book_combo(t->navbar);
 		break;
+#endif
 		case DICTIONARY_TYPE:
 			t->mod_type = DICTIONARY_TYPE;
 			gui_create_dictlex_dialog(t);
@@ -1438,9 +1453,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	be->display_mod->Display();
 	bible_apply_change = TRUE;
 	
-	if(type == PERCOM_TYPE){
+#ifndef USE_GTKHTML38
+	if(type == PERCOM_TYPE)
 		gtk_html_set_editable(ec->html, TRUE);
-	}
+#endif
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	return t;

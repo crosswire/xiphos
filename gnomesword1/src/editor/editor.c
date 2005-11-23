@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#ifndef USE_GTKHTML38
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/gtkhtmlfontstyle.h>
@@ -238,3 +239,4 @@ guint editor_create (void)
 	
 
 }
+#endif

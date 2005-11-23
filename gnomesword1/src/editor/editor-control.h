@@ -29,6 +29,32 @@
 extern "C"
 {
 #endif
+
+#include <config.h>	
+#ifdef USE_GTKHTML38
+
+typedef struct _editor EDITOR;
+struct _editor {
+	GtkWidget *window;
+	GtkWidget *toolbar;
+	GtkWidget *html_widget;
+	GtkWidget *statusbar;
+	
+	gboolean studypad;
+	gboolean is_changed;
+	
+	gchar *filename;
+	gchar *module;
+	gchar *key;
+};
+
+gint 
+editor_create_new(const gchar * filename, const gchar * key, gint note);
+gint
+load_file (const gchar *fname);	
+		
+#else
+	
 #include "editor/editor.h"	
 enum {
 	STUDYPAD,
@@ -36,6 +62,8 @@ enum {
 };
 
 GSHTMLEditorControlData *editor_new(GtkWidget * container, int type, char * filename);
+
+#endif
 
 #ifdef __cplusplus
 }

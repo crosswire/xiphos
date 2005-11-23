@@ -103,11 +103,13 @@ static gboolean html_key_press_event(GtkWidget * widget,
 				      GdkEventKey * event,
 				      DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) d->editor;
 	//cur_vc = vc;
 	ec->changed = TRUE;
 	//g_warning("html_key_press_event");
 	gui_update_statusbar(ec);
+#endif
 	return FALSE;
 	
 }
@@ -135,6 +137,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 				      DIALOG_DATA * c)
 {
 	/* if <enter> key */
+#ifndef USE_GTKHTML38
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		GSHTMLEditorControlData *ec 
 				= (GSHTMLEditorControlData*) c->editor;
@@ -149,6 +152,8 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 			g_free(ec->key);
 		ec->key = g_strdup_printf("%s", buf); 
 	}
+#endif
+
 	return FALSE;
 }
 
@@ -208,6 +213,7 @@ static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * d)
 
 static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
+#ifndef USE_GTKHTML38
 	gchar *url = NULL;
 	gchar *book = NULL;
 	gchar *buf = NULL;
@@ -237,11 +243,13 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 		ec->key = g_strdup_printf("%s", buf);
 	}
 	g_free(buf);
+#endif
 }
 
 
 static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
+#ifndef USE_GTKHTML38
 	gchar *url = NULL;
 	gchar *book = NULL;
 	gchar *chapter = NULL;
@@ -286,11 +294,13 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 		ec->key = g_strdup_printf("%s", buf);
 	}
 	g_free(buf);
+#endif
 }
 
 
 static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
+#ifndef USE_GTKHTML38
 	gchar *url = NULL;
 	gchar *book = NULL;
 	gchar *chapter = NULL;
@@ -345,6 +355,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 		ec->key = g_strdup_printf("%s", buf);
 	}
 	g_free(buf);
+#endif
 }
 
 
@@ -366,6 +377,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec
 	    = (GSHTMLEditorControlData *) c->editor;
 	const gchar *buf = gtk_entry_get_text(entry);
@@ -382,7 +394,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s", buf);
-
+#endif
 }
 
 
@@ -535,6 +547,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 
 void gui_create_note_editor(DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GtkWidget *vbox;
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
@@ -567,6 +580,7 @@ void gui_create_note_editor(DIALOG_DATA * d)
 
 	g_signal_connect(GTK_OBJECT(d->dialog), "destroy",
 			   G_CALLBACK(on_dialog_destroy), d);
+#endif
 }
 
 /***** menu stuff *****/
@@ -592,12 +606,14 @@ void gui_create_note_editor(DIALOG_DATA * d)
 static void on_savenote_activate(GtkMenuItem * menuitem,
 				 DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	if (ecd->personal_comments) {
 		main_dialog_save_note(d);
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 	}
+#endif
 }
 
 /******************************************************************************
@@ -621,6 +637,7 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 static void on_exportnote_activate(GtkMenuItem * menuitem,
 				 DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	if (ecd->personal_comments) {
 		if(ecd->changed) {
@@ -630,7 +647,10 @@ static void on_exportnote_activate(GtkMenuItem * menuitem,
 		}
 		gui_fileselection_save(ecd,TRUE);
 	}
+#endif
 }
+
+
 /******************************************************************************
  * Name
  *  on_deletenote_activate
@@ -651,6 +671,7 @@ static void on_exportnote_activate(GtkMenuItem * menuitem,
 static void on_deletenote_activate(GtkMenuItem * menuitem,
 				   DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
@@ -687,6 +708,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		g_free(info);
 		g_string_free(str,TRUE);
 	}
+#endif
 }
 
 
@@ -710,6 +732,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 static void on_save_activate(GtkMenuItem * menuitem,
 		      DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	if (ecd->filename) {
 		save_file(ecd->filename, ecd);
@@ -717,6 +740,7 @@ static void on_save_activate(GtkMenuItem * menuitem,
 	} else {
 		gui_fileselection_save(ecd,TRUE);
 	}
+#endif
 }
 
 
@@ -740,8 +764,10 @@ static void on_save_activate(GtkMenuItem * menuitem,
 static void on_export_plain_activate(GtkMenuItem * menuitem,
 		      DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gui_fileselection_save(ecd,FALSE);
+#endif
 }
 
 
@@ -765,8 +791,10 @@ static void on_export_plain_activate(GtkMenuItem * menuitem,
 static void on_save_as_activate(GtkMenuItem * menuitem,
 				DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gui_fileselection_save(ecd,TRUE);
+#endif
 }
 
 /******************************************************************************
@@ -789,8 +817,10 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 static void on_print_activate(GtkMenuItem * menuitem,
 			      DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gui_html_print(ecd->htmlwidget, FALSE);	/* gs_html.c */
+#endif
 }
 
 /******************************************************************************
@@ -813,10 +843,12 @@ static void on_print_activate(GtkMenuItem * menuitem,
 static void on_cut_activate(GtkMenuItem * menuitem,
 			    DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gtk_html_cut(ecd->html);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
+#endif
 }
 
 /******************************************************************************
@@ -839,8 +871,10 @@ static void on_cut_activate(GtkMenuItem * menuitem,
 static void on_copy_activate(GtkMenuItem * menuitem,
 			     DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gtk_html_copy(ecd->html);
+#endif
 }
  
 /******************************************************************************
@@ -863,10 +897,12 @@ static void on_copy_activate(GtkMenuItem * menuitem,
 static void on_paste_activate(GtkMenuItem * menuitem,
 			      DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gtk_html_paste(ecd->html,FALSE);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
+#endif
 }
 
 /******************************************************************************
@@ -889,10 +925,12 @@ static void on_paste_activate(GtkMenuItem * menuitem,
 static void on_undo_activate(GtkMenuItem * menuitem,
 			     DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gtk_html_undo(ecd->html);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
+#endif
 }
 
 /******************************************************************************
@@ -915,10 +953,12 @@ static void on_undo_activate(GtkMenuItem * menuitem,
 static void on_find_activate(GtkMenuItem * menuitem,
 			     DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	gui_find_dlg(ecd->htmlwidget, ecd->filename,
 		  FALSE, NULL);
 	//search(ecd, FALSE, NULL);
+#endif
 }
 
 
@@ -942,8 +982,10 @@ static void on_find_activate(GtkMenuItem * menuitem,
 static void on_replace_activate(GtkMenuItem * menuitem,
 				DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	replace(ecd);
+#endif
 }
 
 /******************************************************************************
@@ -966,6 +1008,7 @@ static void on_replace_activate(GtkMenuItem * menuitem,
 static void set_link_to_module(gchar * linkref, gchar * linkmod,
 			       DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	const gchar *url;
 	const gchar *text;
@@ -1001,6 +1044,7 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 					 g_utf8_strlen(text, -1));*/
 		g_free(url_copy);
 	}
+#endif
 }
 
 /******************************************************************************
@@ -1112,6 +1156,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 
 static GtkWidget *create_menu(DIALOG_DATA * d)
 {
+#ifndef USE_GTKHTML38
 	GtkWidget *pmEditor;
 	guint tmp_key;
 	GtkWidget *separator;
@@ -1284,6 +1329,7 @@ static GtkWidget *create_menu(DIALOG_DATA * d)
 	g_signal_connect(GTK_OBJECT(ecd->link), "activate",
 			   G_CALLBACK(on_link_activate), (DIALOG_DATA *) d);
 	return pmEditor;
+#endif
 }
 
 

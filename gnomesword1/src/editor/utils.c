@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include <string.h>
 #include "gtkhtml/gtkhtml-compat.h"
@@ -241,3 +242,4 @@ editor_has_html_object (GSHTMLEditorControlData *cd, HTMLObject *o)
 	html_cursor_jump_to_position (e->cursor, e, position);
 	return TRUE;
 }
+#endif

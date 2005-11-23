@@ -22,6 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifndef USE_GTKHTML38
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
@@ -453,3 +454,4 @@ gint gui_open_studypad(gchar * file_name)
 					STUDYPAD, 
 					file_name); 
 }
+#endif

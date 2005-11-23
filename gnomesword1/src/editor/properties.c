@@ -22,6 +22,7 @@
 
 
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-window-icon.h>
 #include "editor/dialog.h"
@@ -200,3 +201,4 @@ gtk_html_edit_properties_dialog_set_page (GtkHTMLEditPropertiesDialog *d, GtkHTM
 	if (pos >= 0)
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (d->notebook), pos);
 }
+#endif
