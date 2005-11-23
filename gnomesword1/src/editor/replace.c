@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
@@ -227,3 +228,4 @@ replace (GSHTMLEditorControlData *cd)
 	gtk_html_replace_dialog_destroy (cd->replace_dialog);
 	cd->replace_dialog = NULL;
 }
+#endif

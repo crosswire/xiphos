@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#ifndef USE_GTKHTML38
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/gtkhtmlfontstyle.h>
@@ -812,7 +813,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			   G_CALLBACK(on_link_activate), ecd);
 	return pmEditor;
 }
-
+#endif
 
 
 /******   end of file   ******/

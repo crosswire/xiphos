@@ -26,11 +26,13 @@
 extern "C" {
 #endif
 
+#include <config.h>
+#ifndef USE_GTKHTML38
+	
 #include <gnome.h>
-#ifdef USE_GNOME_SPELL	
+	
 #include <bonobo.h>
 #include "editor/Spell.h"
-#endif
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
@@ -175,8 +177,9 @@ void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor,
 						const gchar *title);*/
 guint editor_container_create (void);
 
+#endif  //USE_GTKHTML38
 #ifdef __cplusplus
 }
 #endif	
 
-#endif
+#endif  //__E__EDITOR_H_DITOR_H_

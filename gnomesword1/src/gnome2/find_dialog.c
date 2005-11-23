@@ -25,9 +25,11 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#ifndef USE_GTKHTML38
 #include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlengine-search.h>
+#endif
 /*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
@@ -135,8 +137,10 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
+#ifndef USE_GTKHTML38
 	if (html->engine->search_info)
 		html_engine_search_next(html->engine);
+#endif
 }
 
 

@@ -26,11 +26,12 @@
 extern "C" {
 #endif
 
+#ifndef USE_GTKHTML38
 #include "editor/editor.h"
 
 GtkWidget *gui_fileselection_open(GSHTMLEditorControlData *ecd);
 gint gui_fileselection_save(GSHTMLEditorControlData *ecd, gboolean to_html);
-
+#endif
 #ifdef __cplusplus
 }
 #endif

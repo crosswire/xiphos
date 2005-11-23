@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#ifndef USE_GTKHTML38
 #include <libgnome/gnome-i18n.h>
 #include <string.h>
 #include "gtkhtml/gtkhtml.h"
@@ -646,3 +647,4 @@ property_dialog_show (GSHTMLEditorControlData *cd)
 	if (props)
 		show_prop_dialog (cd, GTK_HTML_EDIT_PROPERTY_NONE);
 }
+#endif

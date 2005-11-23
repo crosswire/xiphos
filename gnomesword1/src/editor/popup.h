@@ -23,6 +23,10 @@
 #ifndef _POPUP_H_
 #define _POPUP_H_
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef USE_GTKHTML38
 #include "editor/editor.h"
 
 gint  popup_show            (GSHTMLEditorControlData *cd,
@@ -30,4 +34,5 @@ gint  popup_show            (GSHTMLEditorControlData *cd,
 gint  popup_show_at_cursor  (GSHTMLEditorControlData *cd);
 void  property_dialog_show  (GSHTMLEditorControlData *cd);
 
+#endif
 #endif
