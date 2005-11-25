@@ -34,24 +34,11 @@ extern "C"
 #ifdef USE_GTKHTML38
 
 typedef struct _editor EDITOR;
-struct _editor {
-	GtkWidget *window;
-	GtkWidget *toolbar;
-	GtkWidget *html_widget;
-	GtkWidget *statusbar;
-	
-	gboolean studypad;
-	gboolean is_changed;
-	
-	gchar *filename;
-	gchar *module;
-	gchar *key;
-};
 
 gint 
 editor_create_new(const gchar * filename, const gchar * key, gint note);
 gint
-load_file (const gchar *fname);	
+load_file (EDITOR * e);	
 		
 #else
 	
