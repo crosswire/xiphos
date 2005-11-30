@@ -55,7 +55,6 @@
 #include "editor/toolbar_edit.h"
 #include "editor/editor_menu.h"
 
-#include "gui/dialog.h"
 #include "gui/fileselection.h"
 #endif
 
@@ -70,6 +69,7 @@
 #include "main/sword.h"
 
 
+#include "gui/dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
 #include "gui/gnomesword.h"
@@ -88,6 +88,8 @@ struct _editor {
 	GtkWidget *statusbar;
 	
 	GNOME_GtkHTML_Editor_Engine engine;
+	Bonobo_PersistFile       persist_file_interface;
+	Bonobo_PersistStream     persist_stream_interface;
 	
 	gboolean studypad;
 	gboolean is_changed;
@@ -105,11 +107,6 @@ static	BonoboWindow *app;
 
 /* Saving/loading through PersistStream.  */
 
-static
-void change_window_title(GtkWidget * window, const gchar * window_title)
-{	
-	gtk_window_set_title(GTK_WINDOW(window), window_title);
-}
 
 gboolean
 editor_is_dirty (EDITOR *e)
@@ -125,6 +122,14 @@ editor_is_dirty (EDITOR *e)
 	CORBA_exception_free (&ev);
 
 	return rv;
+}
+
+
+
+static
+void change_window_title(GtkWidget * window, const gchar * window_title)
+{	
+	gtk_window_set_title(GTK_WINDOW(window), window_title);
 }
 
 static void
@@ -199,7 +204,9 @@ save_through_persist_stream_cb (GtkWidget * widget,
 
         text = bonobo_stream_mem_get_buffer (BONOBO_STREAM_MEM (smem));
 	len  = bonobo_stream_mem_get_size (BONOBO_STREAM_MEM (smem));
+#ifdef DEBUG
 	g_message(text);
+#endif
 	main_save_note(ed->module, ed->key, text);
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
 	bonobo_object_unref (BONOBO_OBJECT (smem));
@@ -252,11 +259,14 @@ load_through_persist_file (EDITOR * e, const gchar *filename,
 
 	if (ev._major != CORBA_NO_EXCEPTION)
 		g_warning ("Cannot load.");
+	if(e->filename)
+		g_free(e->filename);
+	e->filename = g_strdup(filename);
 	change_window_title(e->window,filename);
 	CORBA_exception_free (&ev);
 }
 
-static void
+static gboolean
 save_through_persist_file (EDITOR * e, const gchar *filename,
 			   Bonobo_PersistFile pfile)
 {
@@ -266,11 +276,18 @@ save_through_persist_file (EDITOR * e, const gchar *filename,
 
 	Bonobo_PersistFile_save (pfile, filename, &ev);
 
-	if (ev._major != CORBA_NO_EXCEPTION)
-		g_warning ("Cannot save.");
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("Cannot save.");		
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+	if(e->filename)
+		g_free(e->filename);
+	e->filename = g_strdup(filename);
 	change_window_title(e->window,filename);
 
 	CORBA_exception_free (&ev);
+	return TRUE;
 }
 
 
@@ -399,7 +416,7 @@ open_or_save_as_dialog (EDITOR * e,
 {
 	GtkWidget    *widget;
 	BonoboWidget *control;
-	gchar *directory;
+	gchar *directory = NULL;
 
 	control = BONOBO_WIDGET (bonobo_window_get_contents (BONOBO_WINDOW(e->window)));
 	
@@ -412,12 +429,18 @@ open_or_save_as_dialog (EDITOR * e,
 		widget = gtk_file_selection_new (_("Open file..."));
 		if(settings.studypaddir) {
 			directory = g_strdup_printf("%s/", settings.studypaddir);
-			gtk_file_selection_set_filename ((GtkFileSelection *)widget, settings.studypaddir);
+			gtk_file_selection_set_filename ((GtkFileSelection *)widget, directory);
+			g_free(directory);
 		}
 	} else {
 		widget = gtk_file_selection_new (_("Save file as..."));
 		if(e->filename)
 			gtk_file_selection_set_filename ((GtkFileSelection *)widget, e->filename);
+		else {
+			directory = g_strdup_printf("%s/", settings.studypaddir);
+			gtk_file_selection_set_filename ((GtkFileSelection *)widget, directory);
+			g_free(directory);
+		}
 	}
 	gtk_window_set_transient_for (GTK_WINDOW (widget),
 				      GTK_WINDOW (app));
@@ -458,6 +481,30 @@ save_through_plain_persist_stream_cb (GtkWidget *widget,
 	open_or_save_as_dialog (BONOBO_WINDOW (data), OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM);
 }
 */
+
+static void
+open_new_document_cb (GtkWidget *widget,
+			      gpointer data)
+{
+	gchar *template = NULL;
+	EDITOR *e = (EDITOR*)data;
+	
+	template = g_strdup_printf("%s/template.pad",settings.gSwordDir);
+	if(g_file_test(template, G_FILE_TEST_EXISTS)) {
+		if(e->filename)
+			g_free(e->filename);
+		e->filename = g_strdup(template);
+		load_through_persist_file (data, e->filename, e->persist_file_interface);
+		g_free(e->filename);
+		e->filename = NULL;
+#ifdef DEBUG
+		g_message(template);
+#endif		
+	}
+	g_free(template);
+}
+
+
 /* "Open through persist file" dialog.  */
 static void
 open_through_persist_file_cb (GtkWidget *widget,
@@ -481,32 +528,110 @@ save_through_persist_file_cb (GtkWidget *widget,
 	open_or_save_as_dialog ((EDITOR*)data, OP_SAVE_THROUGH_PERSIST_FILE);
 }
 
+static
+gint ask_about_saving(EDITOR *e)
+{
+	CORBA_Object interface;
+	CORBA_Environment ev;
+	gint test;
+	GS_DIALOG *info;
+	GString *str;
+	gchar *buf = NULL;
+		
+	if(!e->studypad)
+		save_through_persist_stream_cb (NULL,e);
+	else {
+		str = g_string_new("");
+		info = gui_new_dialog();
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		if (settings.studypadfilename)
+			buf = settings.studypadfilename;
+		else
+			buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			buf,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
+		info->yes = TRUE;
+		info->no = TRUE;
+
+		test = gui_alert_dialog(info);
+		if (test == GS_YES) {
+			if (e->filename) {
+				save_through_persist_file (e, 
+						e->filename, 
+						e->persist_file_interface);
+				
+			} else {
+				open_or_save_as_dialog(e, 
+						OP_SAVE_THROUGH_PERSIST_FILE);
+			}
+		}
+		g_free(info);
+		g_string_free(str,TRUE);
+		
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+	}	
+}
+
+
+static
+void do_exit(EDITOR *e)
+{
+	CORBA_Environment ev;
+	
+	CORBA_exception_init (&ev);
+	
+	if (e->engine != CORBA_OBJECT_NIL) {
+		Bonobo_Unknown_unref (e->engine, &ev);
+		CORBA_Object_release (e->engine, &ev);
+		e->engine = CORBA_OBJECT_NIL;
+	}
+	
+	if (e->persist_stream_interface != CORBA_OBJECT_NIL) {
+		Bonobo_Unknown_unref (e->persist_stream_interface, &ev);
+		CORBA_Object_release (e->persist_stream_interface, &ev);
+		e->persist_stream_interface = CORBA_OBJECT_NIL;
+	}
+	
+	
+	if (e->persist_file_interface != CORBA_OBJECT_NIL) {
+		Bonobo_Unknown_unref (e->persist_file_interface, &ev);
+		CORBA_Object_release (e->persist_file_interface, &ev);
+		e->persist_file_interface = CORBA_OBJECT_NIL;
+	}
+	
+	
+#ifdef DEBUG
+	g_message("app_delete_cb");
+	g_message(e->filename);
+	g_message(e->module);
+	g_message(e->key);
+#endif
+	if(e->studypad)
+		settings.studypad_dialog_exist = FALSE;
+	if(e->filename) {
+		g_free(e->filename);
+	}
+	if(e->module) {
+		g_free(e->module);
+	}
+	if(e->key) {
+		g_free(e->key);
+	}
+	gtk_widget_destroy (GTK_WIDGET (e->window));
+	g_free(e);
+	CORBA_exception_free (&ev);
+}
+
 
 static void
 exit_cb (GtkWidget *widget, gpointer data)
 {
-	EDITOR *ed = (EDITOR*)data;
-	if(ed->is_changed)
-		return;
-#ifdef DEBUG
-	g_message("exit_cb");
-	g_message(ed->filename);
-	g_message(ed->module);
-	g_message(ed->key);
-#endif
-	if(ed->studypad)
-		settings.studypad_dialog_exist = FALSE;
-	if(ed->filename) {
-		g_free(ed->filename);
-	}
-	if(ed->module) {
-		g_free(ed->module);
-	}
-	if(ed->key) {
-		g_free(ed->key);
-	}
-	gtk_widget_destroy (GTK_WIDGET (ed->window));
-	g_free(ed);
+	do_exit((EDITOR*)data);
 }
 
 
@@ -515,7 +640,8 @@ static BonoboUIVerb verbs [] = {
 	BONOBO_UI_UNSAFE_VERB ("SaveFile",   save_through_persist_file_cb),
 	BONOBO_UI_UNSAFE_VERB ("OpenStream", open_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB ("SaveNote", save_through_persist_stream_cb),
-	BONOBO_UI_UNSAFE_VERB ("SavePlainStream",save_through_plain_persist_stream_cb ),
+	BONOBO_UI_UNSAFE_VERB ("NewDoc", open_new_document_cb),
+	BONOBO_UI_UNSAFE_VERB ("SavePlainStream",save_through_plain_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSource", view_html_source_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSourceHTML", view_html_source_html_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewPlainSource", view_plain_source_cb),
@@ -553,6 +679,9 @@ static char ui_studypad [] =
 "			<menuitem name=\"OpenFile\" verb=\"\" _label=\"Open (PersistFile)\" _tip=\"Open using the PersistFile interface\""
 "			pixtype=\"stock\" pixname=\"Open\"/>"
 "			<menuitem name=\"SaveFile\" verb=\"\" _label=\"Save (PersistFile)\" _tip=\"Save using the PersistFile interface\""
+"			pixtype=\"stock\" pixname=\"Save\"/>"
+"			<separator/>"
+"			<menuitem name=\"NewDoc\" verb=\"\" _label=\"New Document\" _tip=\"Create a new document\""
 "			pixtype=\"stock\" pixname=\"Save\"/>"
 "			<separator/>"
 "			<menuitem name=\"FileExit\" verb=\"\" _label=\"E_xit\"/>"
@@ -626,45 +755,11 @@ static char ui_note [] =
 static int
 app_delete_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
 {	
-	/* do can close here */
-	EDITOR *ed = (EDITOR*) data;
-	CORBA_Environment ev;
-	
-	
-	if(editor_is_dirty(ed)) {
-		g_message("editor has changes");
-		return TRUE;
-	}
-	
-	CORBA_exception_init (&ev);
-	
-	if (ed->engine != CORBA_OBJECT_NIL) {
-		Bonobo_Unknown_unref (ed->engine, &ev);
-		CORBA_Object_release (ed->engine, &ev);
-		ed->engine = CORBA_OBJECT_NIL;
-	}
-	
-	
-#ifdef DEBUG
-	g_message("app_delete_cb");
-	g_message(ed->filename);
-	g_message(ed->module);
-	g_message(ed->key);
-#endif
-	if(ed->studypad)
-		settings.studypad_dialog_exist = FALSE;
-	if(ed->filename) {
-		g_free(ed->filename);
-	}
-	if(ed->module) {
-		g_free(ed->module);
-	}
-	if(ed->key) {
-		g_free(ed->key);
-	}
-	g_free(ed);
-	gtk_widget_destroy (GTK_WIDGET (widget));
-	CORBA_exception_free (&ev);
+	if(editor_is_dirty((EDITOR*)data)) {
+		if(!ask_about_saving((EDITOR*)data))
+			return TRUE;
+	}		
+	do_exit((EDITOR*)data);
 	return FALSE;
 }
 
@@ -723,6 +818,13 @@ container_create (const gchar * window_title, EDITOR * editor)
 	
 	bonobo_window_set_contents (BONOBO_WINDOW (win), control);
 
+	/* FIXME: handle exceptions */
+	CORBA_exception_init (&ev);
+	editor->persist_file_interface
+		= Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (BONOBO_WIDGET (control)), "IDL:Bonobo/PersistFile:1.0", &ev);
+	editor->persist_stream_interface
+		= Bonobo_Unknown_queryInterface (bonobo_widget_get_objref (BONOBO_WIDGET (control)), "IDL:Bonobo/PersistStream:1.0", &ev);
+	CORBA_exception_free (&ev);
 	//gtk_widget_show(GTK_WIDGET (vbox));
 	//gtk_box_pack_start (GTK_BOX (vbox), p->eeditor, TRUE, TRUE, 0);
 	gtk_widget_show_all (GTK_WIDGET (window));
@@ -773,6 +875,8 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 	
 	editor = g_new(EDITOR,1);
 	editor->html_widget = NULL;
+	editor->persist_file_interface   = CORBA_OBJECT_NIL;
+	editor->persist_stream_interface = CORBA_OBJECT_NIL;
 	//bonobo_ui_component_new_default
 	if(note) {
 		editor->studypad = FALSE;
