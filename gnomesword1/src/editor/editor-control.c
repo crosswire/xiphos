@@ -694,7 +694,8 @@ static char ui_studypad [] =
 "	</menu>"
 "	<dockitem name=\"Toolbar\" behavior=\"exclusive\">"
 "		<placeholder name=\"Editbar\"/>"
-
+"              <toolitem name=\"FileExit\" verb=\"\" pixtype=\"pixbuf\" priority=\"1\"/>"
+"		<separator/>"
 "	</dockitem>"
 "</Root>";
 
