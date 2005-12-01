@@ -1,5 +1,4 @@
 /* 
-
     Copyright (C) 2000 Helix Code, Inc.
 
     This library is free software; you can redistribute it and/or
@@ -763,6 +762,11 @@ app_delete_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
 	return FALSE;
 }
 
+static void size_changed (GtkHTML *html, gpointer data)
+{
+	g_message("size_changed");
+	
+}
 
 static GtkWidget *
 container_create (const gchar * window_title, EDITOR * editor)
@@ -842,11 +846,13 @@ container_create (const gchar * window_title, EDITOR * editor)
 			editor->html_widget = g_object_get_data (G_OBJECT(impl), "html-widget");
 		}
 	}
-#ifdef DEBUG
+//#ifdef DEBUG
 	if (editor->html_widget) {
+		g_signal_connect (editor->html_widget, "size-changed", G_CALLBACK (size_changed), (EDITOR*)editor);
+	
 		g_message("we have the html_widget!!!");
 	}
-#endif
+//#endif
 	GNOME_GtkHTML_Editor_Engine_runCommand (editor->engine, "grab-focus", &ev);
 	//bonobo_object_release_unref (editor->engine, &ev);
 	CORBA_exception_free (&ev);
