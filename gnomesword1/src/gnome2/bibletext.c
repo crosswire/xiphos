@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * bibletext.c - gui for Bible text modules
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004,2005 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,8 +31,11 @@
 #endif
 
 
-#ifndef USE_GTKHTML38
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#else
 #include <gtkhtml/htmlengine.h>
+#include "editor/editor-control.h"
 #endif
 
 #include "gui/gnomesword.h"
@@ -60,7 +63,6 @@
 #include "main/global_ops.hh"
 #include "main/embed.h"
 
-#include "editor/editor-control.h"
 
 gboolean shift_key_presed = FALSE;
 

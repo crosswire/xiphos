@@ -1,3 +1,11 @@
+2005-12-01 terry <tbiggs@users.sf.net>
+
+	* changed to use gtkhtml editor componet for building with gtkhtml-3.8
+	* added gui/editor_studypad.xml and gui/editor_note.xml for use 
+	  with editor componet.
+	* added editor/html-editor.c and editor/html-editor.h
+	
+
 2005-08-04 terry <tbiggs@users.sf.net>
 
 	* added about_gnomesword.c.patch from Eicke Godehardt - ported about 
