@@ -51,7 +51,7 @@
 
 #ifdef USE_GTKHTML38
 
-#define CONTROL_FACTORY_ID "OAFIID:GNOME_GtkHTML_Editor_Factory:" GTKHTML_API_VERSION
+//#define CONTROL_FACTORY_ID "OAFIID:GNOME_GtkHTML_Editor_Factory:" GTKHTML_API_VERSION
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
 
 struct _editor {
@@ -631,6 +631,20 @@ exit_cb (GtkWidget *widget, gpointer data)
 	do_exit((EDITOR*)data);
 }
 
+static 
+void  print_message_cb(GtkWidget *widget, gpointer data)
+{
+	EDITOR *e = (EDITOR* ) data;
+	gui_html_print(e->html_widget, FALSE);
+}
+
+static 
+void print_preview_message_cb (GtkWidget *widget, gpointer data)
+{
+	EDITOR *e = (EDITOR*) data;
+	gui_html_print(e->html_widget, TRUE);
+}
+
 
 static BonoboUIVerb verbs [] = {
 	BONOBO_UI_UNSAFE_VERB ("OpenFile",   open_through_persist_file_cb),
@@ -639,6 +653,8 @@ static BonoboUIVerb verbs [] = {
 	BONOBO_UI_UNSAFE_VERB ("SaveNote", save_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB ("NewDoc", open_new_document_cb),
 	BONOBO_UI_UNSAFE_VERB ("SavePlainStream",save_through_plain_persist_stream_cb),
+	BONOBO_UI_UNSAFE_VERB ("PrintMessage", print_message_cb),
+	BONOBO_UI_UNSAFE_VERB ("PrintPreviewMessage", print_preview_message_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSource", view_html_source_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewHTMLSourceHTML", view_html_source_html_cb),
 	BONOBO_UI_UNSAFE_VERB ("ViewPlainSource", view_plain_source_cb),
