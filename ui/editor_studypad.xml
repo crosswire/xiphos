@@ -1,8 +1,8 @@
 <Root>
 	<commands>
 	        <cmd name="FileExit" _label="Exit" _tip="Exit the program" pixtype="stock" pixname="Exit" accel="*Control*q"/>
-	        <cmd name="PrintMessage"   _tip="Print this message" accel="*Control*p"  pixtype="stock" pixname="gtk-print"/>
-		<cmd name="PrintPreviewMessage"   _tip="Preview the message to be printed"  accel="*Control**Shift*p" pixtype="stock" pixname="gtk-print-preview"/>
+	        <cmd name="PrintMessage"   _tip="Print this document" accel="*Control*p"  pixtype="stock" pixname="gtk-print"/>
+		<cmd name="PrintPreviewMessage"   _tip="Preview the document to be printed"  accel="*Control**Shift*p" pixtype="stock" pixname="gtk-print-preview"/>
 		<cmd name="FormatHTML" _label="HTML mode" type="toggle" _tip="HTML Format switch"/>
 	</commands>
 	<menu>
