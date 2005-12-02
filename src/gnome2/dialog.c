@@ -150,6 +150,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	GtkWidget *image5;
 	GtkWidget *vbox2;
 	GtkWidget *label7;
+	GtkWidget *label10;
 	GtkWidget *dialog_action_area2;
 	GtkWidget *cancelbutton1;
 	GtkWidget *okbutton2;
@@ -191,10 +192,24 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
 	gtk_misc_set_alignment(GTK_MISC(label7), 0.5, 0);
 
+	if (info->label2) {
+		label10 = gtk_label_new(info->label2);
+		gtk_widget_show(label10);
+		gtk_box_pack_start(GTK_BOX(vbox2), label10, FALSE, FALSE, 0);
+		gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
+
+	}
+	
 	dialog_action_area2 = GTK_DIALOG(dialog_alert)->action_area;
 	gtk_widget_show(dialog_action_area2);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
+
+	if (info->no_save)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+                                             _("Close without Saving"),
+                                             GTK_RESPONSE_NO);
 
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
@@ -210,6 +225,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
+	
+
+	if (info->save)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+                                             GTK_STOCK_SAVE,
+                                             GTK_RESPONSE_YES);
+
 
 	g_signal_connect((gpointer) dialog_alert, "response",
 			 G_CALLBACK(on_dialog_response), info);

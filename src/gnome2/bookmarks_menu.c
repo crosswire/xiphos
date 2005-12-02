@@ -53,6 +53,9 @@
 #include "main/module_dialogs.h"
 
 
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#endif
 
 BOOKMARK_MENU menu;
 
