@@ -25,13 +25,16 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#ifndef USE_GTKHTML38
+
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#else
 #include <gtkhtml/htmlengine.h>
+#include "editor/editor.h"
 #endif
 
 
 #include "gui/sidebar.h"
-#include "editor/editor.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"

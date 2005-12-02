@@ -26,6 +26,10 @@
 #include <gnome.h>
 //#include <gal/shortcut-bar/e-shortcut-bar.h>
 
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#endif
+
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "gui/gnomesword.h"

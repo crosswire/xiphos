@@ -26,14 +26,14 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifndef USE_GTKHTML38
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#else
 #include <gtkhtml/htmlengine.h>
+#include "editor/editor-control.h"
 #endif
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
+
+
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif
@@ -50,7 +50,6 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
-#include "editor/editor-control.h"
 
 #include "main/embed.h"
 #include "main/settings.h"
