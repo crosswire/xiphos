@@ -302,7 +302,9 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 			shift_key_presed = TRUE;
 		break;
 	}
+#ifdef DEBUG
 	g_message("on_key_press_event");
+#endif
   	return FALSE;
 }
 
