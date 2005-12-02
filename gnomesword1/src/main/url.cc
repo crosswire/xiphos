@@ -34,7 +34,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKHTML38
-#include "editor/editor-control.h"
+#include "editor/html-editor.h"
 #else
 #include "editor/editor.h"
 #endif

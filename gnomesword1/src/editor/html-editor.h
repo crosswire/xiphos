@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * dialog.h - 
+ * html-editor.h - the html editor
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2005 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,60 +18,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef _DIALOG_H_
-#define _DIALOG_H_
+ 
+#ifndef _HTML_EDITOR_H
+#define _HTML_EDITOR_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-#define GS_YES 0
-#define GS_NO 1
-#define GS_OK 2
-#define GS_CANCEL 3
-	
-typedef struct _gs_dialog GS_DIALOG;
-struct _gs_dialog {
-	
-	GtkWidget *dialog;
-	
-	gchar *stock_icon;
-	
-	gchar *title;
-	
-	gchar *text1;
-	gchar *text2;
-	gchar *text3;
-	gchar *text4;
-	gchar *text5;
-	gchar *text6;
-	
-	gchar *label_top;
-	gchar *label_middle;
-	gchar *label1;
-	gchar *label2;
-	gchar *label3;
-	gchar *label4;
-	gchar *label5;
-	gchar *label6;
-	gchar *label_bottom;
-	
-	gboolean no_save;
-	gboolean save;
-	gboolean ok;
-	gboolean cancel;
-	gboolean yes;
-	gboolean no;
-	gboolean apply;
-};
+#include <config.h>	
+#ifdef USE_GTKHTML38
 
-GS_DIALOG *gui_new_dialog(void);
-gint gui_gs_dialog(GS_DIALOG * info);
-gint gui_alert_dialog(GS_DIALOG * info);
+typedef struct _editor EDITOR;
+
+gint 
+editor_create_new(const gchar * filename, const gchar * key, gint note);
+gint
+load_file (EDITOR * e);	
+
+#endif	/*  USE_GTKHTML38 */	
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif /* _HTML_EDITOR_H */

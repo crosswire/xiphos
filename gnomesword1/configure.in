@@ -237,6 +237,11 @@ else
   packageprefix=${prefix}
 fi
 
+INSTALL_PREFIX="${packageprefix}/"
+AC_SUBST(INSTALL_PREFIX)
+AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "${packageprefix}/",[install prefix])
+
+
 dnl Set PACKAGE DATA & DOC DIR
 packagedatadir=share/${PACKAGE}
 packagedocdir=share/doc/${PACKAGE}

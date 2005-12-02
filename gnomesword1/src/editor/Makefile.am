@@ -41,7 +41,7 @@ noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
 
-libeditor_a_SOURCES = Spell.idl				\
+libeditor_a_SOURCES = Spell.idl			\
 	$(SPELL_IDL_GENERATED) 			\
 	$(HTML_EDITOR_GENERATED)		\
 	body.c body.h				\
@@ -56,6 +56,7 @@ libeditor_a_SOURCES = Spell.idl				\
 	gi-color-group.c gi-color-group.h	\
 	gi-combo-box.c	 gi-combo-box.h		\
 	gi-color-combo.c gi-color-combo.h	\
+	html-editor.c html-editor.h     	\
 	image.c	image.h				\
 	link.c link.h				\
 	paragraph.c paragraph.h			\
