@@ -1,25 +1,22 @@
-/***************************************************************************
- *            editor-control.h
- *
- *  Thu Feb 10 09:07:42 2005
- *  Copyright  2005  terry
- *  tbiggs@users.sf.net
- ****************************************************************************/
-
 /*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * GnomeSword Bible Study Tool
+ * editor-control.c - the html editor
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * Copyright (C) 2004, 2005 GnomeSword Developer Team
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
 #ifndef _EDITOR_CONTROL_H
@@ -31,16 +28,7 @@ extern "C"
 #endif
 
 #include <config.h>	
-#ifdef USE_GTKHTML38
-
-typedef struct _editor EDITOR;
-
-gint 
-editor_create_new(const gchar * filename, const gchar * key, gint note);
-gint
-load_file (EDITOR * e);	
-		
-#else
+#ifndef USE_GTKHTML38
 	
 #include "editor/editor.h"	
 enum {
@@ -50,7 +38,7 @@ enum {
 
 GSHTMLEditorControlData *editor_new(GtkWidget * container, int type, char * filename);
 
-#endif
+#endif /* !USE_GTKHTML38 */
 
 #ifdef __cplusplus
 }

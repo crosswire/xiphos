@@ -63,3 +63,6 @@ src/gnome2/utilities.c
 ui/bookmarks.glade
 ui/prefs.glade
 ui/module-manager.glade
+ui/search-dialog.glade
+ui/editor_note.xml
+ui/editor_studypad.xml
