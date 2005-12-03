@@ -180,7 +180,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
 	}
 
-	vbox2 = gtk_vbox_new(FALSE, 0);
+	vbox2 = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
 
@@ -190,7 +190,7 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
-	gtk_misc_set_alignment(GTK_MISC(label7), 0.5, 0);
+	gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 
 	if (info->label2) {
 		label10 = gtk_label_new(info->label2);
@@ -214,14 +214,14 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_NO, GTK_RESPONSE_NO);
-	if (info->yes)
-		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      GTK_STOCK_YES, GTK_RESPONSE_YES);
-
 	if (info->cancel)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_CANCEL,
 				      GTK_RESPONSE_CANCEL);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_YES, GTK_RESPONSE_YES);
+
 	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
