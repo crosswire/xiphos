@@ -119,6 +119,36 @@ void main_save_note(	const gchar * module_name,
 #endif
 }
 
+/******************************************************************************
+ * Name
+ *   main_delete_note
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_delete_note(DIALOG_DATA * d)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_delete_note(	const gchar * module_name, 
+								const gchar * key_str)
+{
+#ifdef USE_GTKHTML38
+	backend->set_module_key(module_name, key_str);
+#ifdef DEBUG
+	g_message("note module %s\nnote key %s\n",
+				module_name,
+				key_str);
+#endif
+	backend->delete_entry();
+#endif	
+}
+
 	
 /******************************************************************************
  * Name
