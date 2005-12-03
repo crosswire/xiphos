@@ -146,6 +146,34 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		g_free(title);
 }
 
+static void
+delete_note_cb(GtkWidget * widget, gpointer data)
+{	
+	gint test;
+	GS_DIALOG *info;
+	gchar *buf = NULL;
+	EDITOR *e = (EDITOR *) data;
+	
+	if(e->studypad)
+		return;
+	
+	info = gui_new_dialog();
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		buf = g_strdup_printf
+		    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
+		    _("Are you sure you want to delete the note for") , e->key);
+		info->label_top = buf;
+		info->label2 =  N_("It will be lost permanently!");
+		info->yes = TRUE;
+		info->cancel = TRUE;
+
+		test = gui_alert_dialog(info);
+		if (test == GS_YES) {
+			main_delete_note(e->module, e->key);
+		}
+		g_free(info);
+		g_free(buf);
+}
 
 static void
 save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
@@ -631,6 +659,7 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_UNSAFE_VERB("SaveFile", save_through_persist_file_cb),
 	BONOBO_UI_UNSAFE_VERB("OpenStream",open_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB("SaveNote",save_through_persist_stream_cb),
+	BONOBO_UI_UNSAFE_VERB("DeleteNote",delete_note_cb),
 	BONOBO_UI_UNSAFE_VERB("NewDoc", open_new_document_cb),
 	BONOBO_UI_UNSAFE_VERB("SavePlainStream",
 			      save_through_plain_persist_stream_cb),
