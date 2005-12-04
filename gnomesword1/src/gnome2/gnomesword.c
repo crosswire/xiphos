@@ -28,6 +28,10 @@
 #include <ctype.h>
 #include <time.h>
 
+#ifdef USE_GTKHTML38
+#include "editor/html-editor.h"
+#endif
+
 #include "gui/gnomesword.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/main_window.h"
@@ -290,7 +294,9 @@ void shutdown_frontend(void)
 
 	/* if study pad file has changed since last save */
 
-#ifndef USE_GTKHTML38
+#ifdef USE_GTKHTML38
+	editor_close_all();
+#else
 	gui_studypad_can_close();
 #endif
 

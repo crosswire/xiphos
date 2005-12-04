@@ -265,6 +265,18 @@ static void on_mainwindow_destroy(GtkObject * object,
 }
 
 
+static gboolean  delete_event (GtkWidget *widget,
+                                            GdkEvent *event,
+                                            gpointer user_data)
+{
+	shutdown_frontend();
+	/* shutdown the sword stuff */
+	main_shutdown_backend();
+	gtk_main_quit();
+	gtk_exit(0);
+	return FALSE;	
+}
+
 /******************************************************************************
  * Name
  *   on_epaned_button_release_event
@@ -716,8 +728,10 @@ void create_mainwindow(void)
 			   (on_notebook_comm_book_switch_page), 
 			   NULL);
 
-	g_signal_connect(GTK_OBJECT(widgets.app), "destroy",
-			   G_CALLBACK(on_mainwindow_destroy), NULL);
+	g_signal_connect(GTK_OBJECT(widgets.app), "delete_event",
+			   G_CALLBACK(delete_event), NULL);
+			   
+			   
 	g_signal_connect((gpointer) widgets.app,
 			 "configure_event",
 			 G_CALLBACK(on_configure_event), NULL);
