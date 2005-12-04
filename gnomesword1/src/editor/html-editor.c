@@ -72,13 +72,13 @@ struct _editor {
 	gchar *module;
 	gchar *key;
 };
-
+static GList *editors_all = NULL;
 static GtkWidget *control;
 static gint formatHTML = 1;
 static GtkWidget *win;
 static GtkHTML *html;
 static BonoboWindow *app;
-
+
 /* Saving/loading through PersistStream.  */
 
 
@@ -615,11 +615,29 @@ void do_exit(EDITOR * e)
 	if (e->key) {
 		g_free(e->key);
 	}
-	gtk_widget_destroy(GTK_WIDGET(e->window));
 	g_free(e);
 	CORBA_exception_free(&ev);
 }
-
+
+
+gboolean editor_close_all(void)
+{
+	GList *tmp = NULL;
+	EDITOR *e = NULL;
+	
+	tmp = g_list_first(editors_all);
+#ifdef DEBUG
+	g_message("number of editors = %d",g_list_length(tmp));
+#endif
+	while(tmp != NULL) {
+		e = (EDITOR*)tmp->data;
+		if(e->window)
+			do_exit(e);			
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(editors_all);
+}
+
 
 static void exit_cb(GtkWidget * widget, gpointer data)
 {
@@ -637,6 +655,7 @@ static void exit_cb(GtkWidget * widget, gpointer data)
 		}
 	}
 	do_exit((EDITOR *) data);
+	gtk_widget_destroy(widget);
 }
 
 static
@@ -918,6 +937,7 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 		settings.studypad_dialog_exist = TRUE;
 	}
 	editor->is_changed = FALSE;
+	editors_all = g_list_append(editors_all,(EDITOR*) editor);
 }
 
 gint load_file(EDITOR * e)
