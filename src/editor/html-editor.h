@@ -32,10 +32,10 @@ extern "C"
 
 typedef struct _editor EDITOR;
 
-gint 
-editor_create_new(const gchar * filename, const gchar * key, gint note);
-gint
-load_file (EDITOR * e);	
+gboolean editor_close_all(void);
+gint editor_create_new(const gchar * filename, 
+						const gchar * key, gint note);
+gint load_file (EDITOR * e);	
 
 #endif	/*  USE_GTKHTML38 */	
 
