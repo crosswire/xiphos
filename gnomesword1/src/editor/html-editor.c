@@ -251,6 +251,7 @@ load_through_persist_file(EDITOR * e, const gchar * filename)
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	change_window_title(e->window, e->filename);
+	GNOME_GtkHTML_Editor_Engine_dropUndo(e->engine, &ev);
 	CORBA_exception_free(&ev);
 	g_free((gchar *) filename);
 	e->is_changed = FALSE;
@@ -281,7 +282,7 @@ save_through_persist_file(EDITOR * e, const gchar * filename)
 	change_window_title(e->window, filename);
 	e->is_changed = FALSE;
 	g_free((gchar *) filename);
-
+	GNOME_GtkHTML_Editor_Engine_dropUndo(e->engine, &ev);
 	CORBA_exception_free(&ev);
 	return TRUE;
 }
@@ -578,7 +579,7 @@ void do_exit(EDITOR * e)
 	CORBA_Environment ev;
 
 	CORBA_exception_init(&ev);
-
+	editors_all = g_list_remove(editors_all, (EDITOR*) e);
 	if (e->engine != CORBA_OBJECT_NIL) {
 		Bonobo_Unknown_unref(e->engine, &ev);
 		CORBA_Object_release(e->engine, &ev);
@@ -639,6 +640,13 @@ gboolean editor_close_all(void)
 }
 
 
+static void insert_link_cb(GtkWidget * widget, gpointer data)
+{
+	g_message("insert_link_cb");
+	
+}
+
+
 static void exit_cb(GtkWidget * widget, gpointer data)
 {
 	if (editor_is_dirty((EDITOR *) data)) {
@@ -687,6 +695,9 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_UNSAFE_VERB("ViewHTMLSource", view_html_source_cb),
 	BONOBO_UI_UNSAFE_VERB("ViewHTMLSourceHTML",view_html_source_html_cb),
 	BONOBO_UI_UNSAFE_VERB("ViewPlainSource", view_plain_source_cb),
+	BONOBO_UI_UNSAFE_VERB("InsertLink", insert_link_cb),
+	
+	
 	BONOBO_UI_UNSAFE_VERB("FileExit", exit_cb),
 
 	BONOBO_UI_VERB_END
@@ -875,18 +886,6 @@ static GtkWidget *container_create(const gchar * window_title,
 					      "html-widget");
 		}
 	}
-	if (editor->html_widget) {
-		g_signal_connect(editor->html_widget, "size-changed",
-				 G_CALLBACK(size_changed),
-				 (EDITOR *) editor);
-		g_signal_connect(editor->html_widget,
-				 "key_release_event",
-				 G_CALLBACK(on_key_release_event),
-				 (EDITOR *) editor);
-#ifdef DEBUG
-		g_message("we have the html_widget!!!");
-#endif
-	}
 	GNOME_GtkHTML_Editor_Engine_runCommand(editor->engine,
 					       "grab-focus", &ev);
 	CORBA_exception_free(&ev);
@@ -936,7 +935,19 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 		load_through_persist_file(editor, g_strdup(filename));
 		settings.studypad_dialog_exist = TRUE;
 	}
-	editor->is_changed = FALSE;
+	if (editor->html_widget) {
+		g_signal_connect(editor->html_widget,
+				 "key_release_event",
+				 G_CALLBACK(on_key_release_event),
+				 (EDITOR *) editor);
+	/*	g_signal_connect(editor->html_widget, "size-changed",
+				 G_CALLBACK(size_changed),
+				 (EDITOR *) editor);*/
+#ifdef DEBUG
+		g_message("we have the html_widget!!!");
+#endif
+	}
+	editor->is_changed = FALSE;		
 	editors_all = g_list_append(editors_all,(EDITOR*) editor);
 }
 
