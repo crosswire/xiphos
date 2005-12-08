@@ -42,7 +42,7 @@
 #include "gi-color-palette.h"
 #include "gi-colors.h"
 #include "gi-utils.h"
-//#include "gtkhtml/htmlmarshal.h"
+#include "gtkhtml/htmlmarshal.h"
 
 #define COLOR_PREVIEW_WIDTH 15
 #define COLOR_PREVIEW_HEIGHT 15
