@@ -579,7 +579,6 @@ void do_exit(EDITOR * e)
 	CORBA_Environment ev;
 
 	CORBA_exception_init(&ev);
-	editors_all = g_list_remove(editors_all, (EDITOR*) e);
 	if (e->engine != CORBA_OBJECT_NIL) {
 		Bonobo_Unknown_unref(e->engine, &ev);
 		CORBA_Object_release(e->engine, &ev);
@@ -600,7 +599,7 @@ void do_exit(EDITOR * e)
 	}
 
 #ifdef DEBUG
-	g_message("app_delete_cb");
+	g_message("do_exit");
 	g_message(e->filename);
 	g_message(e->module);
 	g_message(e->key);
@@ -651,19 +650,20 @@ static void exit_cb(GtkWidget * widget, gpointer data)
 {
 	if (editor_is_dirty((EDITOR *) data)) {
 		switch (ask_about_saving((EDITOR *) data)) {
-		case GS_YES:	/* exit saving */
+		case GS_YES:	// * exit saving *
 
 			break;
-		case GS_NO:	/* exit without saving */
+		case GS_NO:	// * exit without saving *
 
 			break;
-		case GS_CANCEL:	/* don't exit */
+		case GS_CANCEL:	// * don't exit *
 			return;
 			break;
 		}
 	}
+	editors_all = g_list_remove(editors_all, (EDITOR*) data);
+	gtk_widget_destroy(((EDITOR*) data)->window);
 	do_exit((EDITOR *) data);
-	gtk_widget_destroy(widget);
 }
 
 static
@@ -737,6 +737,7 @@ app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data)
 			break;
 		}
 	}
+	editors_all = g_list_remove(editors_all, (EDITOR*) data);
 	do_exit((EDITOR *) data);
 	return FALSE;
 }
