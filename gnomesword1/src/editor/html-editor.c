@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #include <config.h>
 #include <libgnome/gnome-i18n.h>
 
@@ -44,7 +43,6 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-
 #include "gui/dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
@@ -52,8 +50,6 @@
 #include "gui/utilities.h"
 
 
-
-//#define CONTROL_FACTORY_ID "OAFIID:GNOME_GtkHTML_Editor_Factory:" GTKHTML_API_VERSION
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
 
 extern gboolean do_display;
@@ -79,14 +75,12 @@ struct _editor {
 	gchar *module;
 	gchar *key;
 };
+
 static GList *editors_all = NULL;
-//static GtkWidget *control;
 static gint formatHTML = 1;
 static GtkWidget *win;
 static GtkHTML *html;
-//static BonoboWindow *app;
 
-/* Saving/loading through PersistStream.  */
 
 
 gboolean editor_is_dirty(EDITOR * e)
@@ -132,41 +126,6 @@ static void load_through_persist_stream(const gchar * text, EDITOR * e)
 	CORBA_exception_free(&ev);
 }
 
-
-void
-editor_load_note(EDITOR * e, const gchar * module_name,
-		 const gchar * key)
-{
-	gchar *title;
-	gchar *text;
-	
-	if(module_name) {
-		if(e->module)
-			g_free(e->module);
-		e->module = g_strdup(module_name);
-	}
-	if(key) {	
-		if(e->key) 
-			g_free(e->key);
-		e->key = g_strdup(key);
-	}
-		
-	
-	title = g_strdup_printf("%s - %s", e->module, e->key);
-	text = main_get_rendered_text((gchar *) e->module,
-				   (gchar *) e->key);
-
-	load_through_persist_stream(text, e);
-	change_window_title(e->window, title);
-	main_navbar_set(e->navbar, e->key);
-#ifdef DEBUG
-	g_message(text);
-#endif
-	if (text)
-		g_free(text);
-	if (title)
-		g_free(title);
-}
 
 static void
 delete_note_cb(GtkWidget * widget, gpointer data)
@@ -397,7 +356,7 @@ static void file_selection_ok_cb(GtkWidget * widget, gpointer data)
 	}
 	gtk_widget_destroy(file_selection_info.widget);
 }
-
+
 
 static void
 open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
@@ -407,9 +366,7 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 	gchar *directory = NULL;
 
 	control = e->control;
-	 /*   BONOBO_WIDGET(bonobo_window_get_contents
-			  (BONOBO_WINDOW(e->window)));*/
-
+	
 	if (file_selection_info.widget != NULL) {
 		gdk_window_show(GTK_WIDGET(file_selection_info.widget)->
 				window);
@@ -471,25 +428,6 @@ open_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 			       OP_LOAD_THROUGH_PERSIST_STREAM);
 }
 
-/* "Save through persist stream" dialog.  */
-/*static void
-save_through_persist_stream_cb (GtkWidget *widget,
-				gpointer data)
-{
-	open_or_save_as_dialog (BONOBO_WINDOW (data), 
-					      OP_SAVE_THROUGH_PERSIST_STREAM);
-}
-*/
-/* "Save through persist stream" dialog.  */
-/*
-static void
-save_through_plain_persist_stream_cb (GtkWidget *widget,
-				gpointer data)
-{
-	open_or_save_as_dialog (BONOBO_WINDOW (data), 
-					OP_SAVE_THROUGH_PLAIN_PERSIST_STREAM);
-}
-*/
 
 static void open_new_document_cb(GtkWidget * widget, gpointer data)
 {
@@ -519,9 +457,6 @@ static void
 open_through_persist_file_cb(GtkWidget * widget, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
-#ifdef DEBUG
-	g_message("open_through_persist_file_cb");
-#endif
 	open_or_save_as_dialog(e, OP_LOAD_THROUGH_PERSIST_FILE);
 	e->is_changed = FALSE;
 }
@@ -530,9 +465,6 @@ open_through_persist_file_cb(GtkWidget * widget, gpointer data)
 static void
 save_through_persist_file_cb(GtkWidget * widget, gpointer data)
 {
-#ifdef DEBUG
-	g_message("save_through_persist_file_cb");
-#endif
 	open_or_save_as_dialog((EDITOR *) data,
 			       OP_SAVE_THROUGH_PERSIST_FILE);
 }
@@ -665,6 +597,42 @@ static void insert_link_cb(GtkWidget * widget, gpointer data)
 {
 	g_message("insert_link_cb");
 	
+}
+
+void
+editor_load_note(EDITOR * e, const gchar * module_name,
+		 const gchar * key)
+{
+	gchar *title;
+	gchar *text;
+	
+	if(editor_is_dirty(e))
+		save_through_persist_stream_cb(NULL, e);
+	
+	if(module_name) {
+		if(e->module)
+			g_free(e->module);
+		e->module = g_strdup(module_name);
+	}
+	if(key) {	
+		if(e->key) 
+			g_free(e->key);
+		e->key = g_strdup(key);
+	}
+		
+	
+	title = g_strdup_printf("%s - %s", e->module, e->key);
+	text = main_get_rendered_text((gchar *) e->module,
+				   (gchar *) e->key);
+
+	load_through_persist_stream(text, e);
+	change_window_title(e->window, title);
+	main_navbar_set(e->navbar, e->key);
+	
+	if (text)
+		g_free(text);
+	if (title)
+		g_free(title);
 }
 
 
@@ -813,9 +781,7 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox, EDITOR * e)
 
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry4_changed");
-#endif
+	
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
 
@@ -840,9 +806,7 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, EDITOR * e)
 				    (e->navbar.comboboxentry_book));
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry5_changed");
-#endif
+	
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (e->navbar.comboboxentry_book),
 				      &iter);
@@ -881,9 +845,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, EDITOR * e)
 
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry6_changed");
-#endif
+	
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (e->navbar.comboboxentry_book),
 				      &iter);
@@ -955,7 +917,6 @@ static void sync_toggled(GtkToggleButton * button, EDITOR * e)
 {
 	if(button->active) {
 		editor_load_note(e, NULL,settings.currentverse);
-		//sync_with_main(e);
 		e->sync = TRUE;
 	}
 	else		
@@ -1263,10 +1224,7 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 		widgets.studypad_dialog =
 		    container_create(_("StudyPad"), editor);
 		if (filename)
-#ifdef DEBUG
-			g_message("filename = %s", filename);
-#endif
-		editor->filename = g_strdup(filename);
+			editor->filename = g_strdup(filename);
 		load_through_persist_file(editor, g_strdup(filename));
 		settings.studypad_dialog_exist = TRUE;
 	}
@@ -1278,9 +1236,6 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 	/*	g_signal_connect(editor->html_widget, "size-changed",
 				 G_CALLBACK(size_changed),
 				 (EDITOR *) editor);*/
-#ifdef DEBUG
-		g_message("we have the html_widget!!!");
-#endif
 	}
 	editor->is_changed = FALSE;		
 	editors_all = g_list_append(editors_all,(EDITOR*) editor);
