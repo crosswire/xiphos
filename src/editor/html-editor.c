@@ -39,6 +39,7 @@
 
 #include "editor/html-editor.h"
 
+#include "main/navbar.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
@@ -55,29 +56,35 @@
 //#define CONTROL_FACTORY_ID "OAFIID:GNOME_GtkHTML_Editor_Factory:" GTKHTML_API_VERSION
 #define CONTROL_ID         "OAFIID:GNOME_GtkHTML_Editor:" GTKHTML_API_VERSION
 
+extern gboolean do_display;
+
 struct _editor {
 	GtkWidget *window;
 	GtkWidget *toolbar;
 	GtkWidget *html_widget;
 	GtkWidget *statusbar;
-
+	
+	NAVBAR navbar;
+	
+	BonoboWidget *control;
 	GNOME_GtkHTML_Editor_Engine engine;
 	Bonobo_PersistFile persist_file_interface;
 	Bonobo_PersistStream persist_stream_interface;
 
 	gboolean studypad;
 	gboolean is_changed;
+	gboolean sync;
 
 	gchar *filename;
 	gchar *module;
 	gchar *key;
 };
 static GList *editors_all = NULL;
-static GtkWidget *control;
+//static GtkWidget *control;
 static gint formatHTML = 1;
 static GtkWidget *win;
 static GtkHTML *html;
-static BonoboWindow *app;
+//static BonoboWindow *app;
 
 /* Saving/loading through PersistStream.  */
 
@@ -130,13 +137,28 @@ void
 editor_load_note(EDITOR * e, const gchar * module_name,
 		 const gchar * key)
 {
-	gchar *title = g_strdup_printf("%s - %s", module_name, key);
-	gchar *text =
-	    main_get_rendered_text((gchar *) module_name,
-				   (gchar *) key);
+	gchar *title;
+	gchar *text;
+	
+	if(module_name) {
+		if(e->module)
+			g_free(e->module);
+		e->module = g_strdup(module_name);
+	}
+	if(key) {	
+		if(e->key) 
+			g_free(e->key);
+		e->key = g_strdup(key);
+	}
+		
+	
+	title = g_strdup_printf("%s - %s", e->module, e->key);
+	text = main_get_rendered_text((gchar *) e->module,
+				   (gchar *) e->key);
 
 	load_through_persist_stream(text, e);
 	change_window_title(e->window, title);
+	main_navbar_set(e->navbar, e->key);
 #ifdef DEBUG
 	g_message(text);
 #endif
@@ -384,9 +406,9 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 	BonoboWidget *control;
 	gchar *directory = NULL;
 
-	control =
-	    BONOBO_WIDGET(bonobo_window_get_contents
-			  (BONOBO_WINDOW(e->window)));
+	control = e->control;
+	 /*   BONOBO_WIDGET(bonobo_window_get_contents
+			  (BONOBO_WINDOW(e->window)));*/
 
 	if (file_selection_info.widget != NULL) {
 		gdk_window_show(GTK_WIDGET(file_selection_info.widget)->
@@ -423,7 +445,7 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 		}
 	}
 	gtk_window_set_transient_for(GTK_WINDOW(widget),
-				     GTK_WINDOW(app));
+				     GTK_WINDOW(e->window));
 
 	file_selection_info.widget = widget;
 	file_selection_info.control = control;
@@ -781,11 +803,304 @@ static gboolean on_key_release_event(GtkWidget * widget,
 }
 
 
+
+static void on_comboboxentry4_changed(GtkComboBox * combobox, EDITOR * e)
+{
+	gchar *book = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry4_changed");
+#endif
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
+
+	buf = g_strdup_printf("%s 1:1", book);
+	editor_load_note(e, NULL, buf);
+	
+	main_navbar_set(e->navbar, buf);
+	g_free(book);
+	g_free(buf);
+}
+
+
+static void on_comboboxentry5_changed(GtkComboBox * combobox, EDITOR * e)
+{
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (e->navbar.comboboxentry_book));
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry5_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (e->navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
+			   0, &chapter, -1);
+
+	buf = g_strdup_printf("%s %s:1", book, chapter);
+	editor_load_note(e, NULL, buf);
+	main_navbar_set(e->navbar, buf);
+
+	g_free(book);
+	g_free(chapter);
+	g_free(buf);
+}
+
+
+static void on_comboboxentry6_changed(GtkComboBox * combobox, EDITOR * e)
+{
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *verse = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (e->navbar.comboboxentry_book));
+	GtkTreeModel *chapter_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (e->navbar.comboboxentry_chapter));
+
+
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry6_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (e->navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (e->navbar.comboboxentry_chapter),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
+			   &chapter, -1);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
+
+	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
+	editor_load_note(e, NULL, buf);
+	main_navbar_set(e->navbar, buf);
+
+	g_free(book);
+	g_free(chapter);
+	g_free(verse);
+	g_free(buf);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "/.h"
+ *
+ *   void on_entry_activate(GtkEntry * entry, EDITOR * e)	
+ *
+ * Description
+ *   this is called when user hits enter key in the lookup entry
+ *
+ * Return value
+ *   void
+ */
+
+static void on_entry_activate(GtkEntry * entry, EDITOR * e)
+{
+	const gchar *buf = gtk_entry_get_text(entry);
+	if (e->navbar.key)
+		g_free(e->navbar.key);
+	e->navbar.key = g_strdup(buf);
+	editor_load_note(e, NULL, buf);
+}
+
+
+/******************************************************************************
+ * Name
+ *   sync_toggled
+ *
+ * Synopsis
+ *   #include "/.h"
+ *
+ *   void sync_toggled(GtkToggleButton * button, DIALOG_DATA * vc)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void sync_toggled(GtkToggleButton * button, EDITOR * e)
+{
+	if(button->active) {
+		editor_load_note(e, NULL,settings.currentverse);
+		//sync_with_main(e);
+		e->sync = TRUE;
+	}
+	else		
+		e->sync = FALSE;
+}
+
+
+static GtkWidget *navebar_create(EDITOR * editor)
+{
+	GtkWidget *hbox3;
+	GtkWidget *image;
+	GtkWidget *separatortoolitem;
+	GtkListStore *store;
+	GtkCellRenderer *renderer;
+	GtkWidget *sync_button;
+
+	hbox3 = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox3);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
+
+	sync_button = gtk_toggle_button_new();
+	gtk_widget_show(sync_button);
+	gtk_box_pack_start(GTK_BOX(hbox3), sync_button, FALSE, FALSE,
+			   0);
+	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
+
+	image =
+	    gtk_image_new_from_stock("gtk-refresh",
+				     GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image);
+	gtk_container_add(GTK_CONTAINER(sync_button), image);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	editor->navbar.comboboxentry_book =
+	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+	gtk_widget_show(editor->navbar.comboboxentry_book);
+	gtk_box_pack_start(GTK_BOX(hbox3), editor->navbar.comboboxentry_book,
+			   TRUE, TRUE, 0);
+	gtk_widget_set_size_request(editor->navbar.comboboxentry_book, -1,
+				    6);
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (editor->navbar.comboboxentry_book),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (editor->navbar.comboboxentry_book),
+				       renderer, "text", 0, NULL);
+
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+
+	editor->navbar.comboboxentry_chapter = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(editor->navbar.comboboxentry_chapter);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   editor->navbar.comboboxentry_chapter, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(editor->navbar.comboboxentry_chapter, 61,
+				    -1);
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (editor->navbar.comboboxentry_chapter),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (editor->navbar.
+					comboboxentry_chapter),
+				       renderer, "text", 0, NULL);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	editor->navbar.comboboxentry_verse = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(editor->navbar.comboboxentry_verse);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   editor->navbar.comboboxentry_verse, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(editor->navbar.comboboxentry_verse, 61,
+				    -1);
+
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (editor->navbar.comboboxentry_verse),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (editor->navbar.comboboxentry_verse),
+				       renderer, "text", 0, NULL);
+
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+
+	editor->navbar.lookup_entry = gtk_entry_new();
+	gtk_widget_show(editor->navbar.lookup_entry);
+	gtk_box_pack_start(GTK_BOX(hbox3), editor->navbar.lookup_entry, TRUE,
+			   TRUE, 0);
+	
+	g_signal_connect(GTK_OBJECT(sync_button),
+			 "toggled", G_CALLBACK(sync_toggled), editor);
+	
+	g_signal_connect((gpointer) editor->navbar.comboboxentry_book,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry4_changed),editor);
+	g_signal_connect((gpointer) editor->navbar.comboboxentry_chapter,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry5_changed),editor);
+	g_signal_connect((gpointer) editor->navbar.comboboxentry_verse,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry6_changed),editor);
+	
+	g_signal_connect((gpointer) editor->navbar.lookup_entry, "activate",
+			 G_CALLBACK(on_entry_activate), editor);
+	return hbox3;
+}
+
+
 static GtkWidget *container_create(const gchar * window_title,
 				   EDITOR * editor)
 {
 	GtkWindow *window;
 	GtkWidget *vbox;
+	GtkWidget *toolbar_nav = NULL;
 	BonoboUIComponent *component;
 	BonoboUIContainer *container;
 	CORBA_Environment ev;
@@ -795,9 +1110,17 @@ static GtkWidget *container_create(const gchar * window_title,
 
 
 	win = bonobo_window_new("Editor", window_title);
+	
 	vbox = gtk_vbox_new(FALSE, 6);
+	gtk_widget_show(vbox);
+	if(!editor->studypad) {
+		toolbar_nav = navebar_create(editor);
+		gtk_widget_show(toolbar_nav);
+		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
+		editor->navbar.module_name = editor->module;
+		main_navbar_fill_book_combo(editor->navbar);
+	}
 
-	app = BONOBO_WINDOW(win);
 	window = GTK_WINDOW(win);
 	editor->window = win;
 	container = bonobo_window_get_ui_container(BONOBO_WINDOW(win));
@@ -809,7 +1132,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	gtk_window_set_resizable(window, TRUE);
 
 	component = bonobo_ui_component_new("Editor");
-	//bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (component));   
+	
 	bonobo_ui_component_set_container(component,
 					  BONOBO_OBJREF(container),
 					  NULL);
@@ -832,36 +1155,45 @@ static GtkWidget *container_create(const gchar * window_title,
 	}
 	CORBA_exception_free(&ev);
 
-	control =
-	    bonobo_widget_new_control(CONTROL_ID,
-				      BONOBO_OBJREF(container));
+	editor->control =
+	    BONOBO_WIDGET(bonobo_widget_new_control(CONTROL_ID,
+				      BONOBO_OBJREF(container)));
 #ifdef DEBUG
 	g_message(CONTROL_ID);
 #endif
-	if (control == NULL)
+	if (editor->control == NULL)
 		g_error("Cannot get `%s'.", CONTROL_ID);
 
-	bonobo_widget_set_property(BONOBO_WIDGET(control), "FormatHTML",
+	bonobo_widget_set_property(BONOBO_WIDGET(editor->control), "FormatHTML",
 				   TC_CORBA_boolean, formatHTML, NULL);
 	bonobo_ui_component_set_prop(component, "/commands/FormatHTML",
 				     "state", formatHTML ? "1" : "0",
 				     NULL);
 	bonobo_ui_component_add_listener(component, "FormatHTML",
-					 menu_format_html_cb, control);
-
-	bonobo_window_set_contents(BONOBO_WINDOW(win), control);
+					 menu_format_html_cb, editor->control);
+	
+	
+	/* add editor control to vbox */
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
+	
+	/* add a statusbar */
+	editor->statusbar = gtk_statusbar_new();
+	gtk_widget_show(editor->statusbar);
+	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->statusbar), FALSE, TRUE, 0);
+	
+	bonobo_window_set_contents(BONOBO_WINDOW(win), GTK_WIDGET(vbox));
 
 	/* FIXME: handle exceptions */
 	CORBA_exception_init(&ev);
 	editor->persist_file_interface
 	    =
 	    Bonobo_Unknown_queryInterface(bonobo_widget_get_objref
-					  (BONOBO_WIDGET(control)),
+					  (BONOBO_WIDGET(editor->control)),
 					  "IDL:Bonobo/PersistFile:1.0",
 					  &ev);
 	editor->persist_stream_interface =
 	    Bonobo_Unknown_queryInterface(bonobo_widget_get_objref
-					  (BONOBO_WIDGET(control)),
+					  (BONOBO_WIDGET(editor->control)),
 					  "IDL:Bonobo/PersistStream:1.0",
 					  &ev);
 	CORBA_exception_free(&ev);
@@ -872,7 +1204,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
 	    Bonobo_Unknown_queryInterface(bonobo_widget_get_objref
-					(BONOBO_WIDGET(control)),
+					(BONOBO_WIDGET(editor->control)),
 					"IDL:GNOME/GtkHTML/Editor/Engine:1.0",
 					&ev);
 
@@ -891,13 +1223,13 @@ static GtkWidget *container_create(const gchar * window_title,
 					       "grab-focus", &ev);
 	CORBA_exception_free(&ev);
 
-	bonobo_widget_set_property(BONOBO_WIDGET(control),
+	bonobo_widget_set_property(BONOBO_WIDGET(editor->control),
 				   "MagicSmileys", TC_CORBA_boolean,
 				   TRUE, NULL);
-	bonobo_widget_set_property(BONOBO_WIDGET(control), "MagicLinks",
+	bonobo_widget_set_property(BONOBO_WIDGET(editor->control), "MagicLinks",
 				   TC_CORBA_boolean, 
 				   TRUE, NULL);
-	bonobo_widget_set_property(BONOBO_WIDGET(control),
+	bonobo_widget_set_property(BONOBO_WIDGET(editor->control),
 				   "InlineSpelling", TC_CORBA_boolean,
 				   TRUE, NULL);
 	return win;
@@ -913,14 +1245,16 @@ editor_create_new(const gchar * filename, const gchar * key, gint note)
 	editor->html_widget = NULL;
 	editor->persist_file_interface = CORBA_OBJECT_NIL;
 	editor->persist_stream_interface = CORBA_OBJECT_NIL;
-
+	editor->sync = FALSE;
+	
 	if (note) {
 		editor->studypad = FALSE;
 		editor->filename = NULL;
 		editor->module = g_strdup(filename);
 		editor->key = g_strdup(key);
+		editor->navbar.key = NULL;
 		container_create(_("Note Editor"), editor);
-		editor_load_note(editor, filename, key);
+		editor_load_note(editor, NULL, NULL);
 	} else {
 		editor->studypad = TRUE;
 		editor->module = NULL;
