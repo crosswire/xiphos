@@ -155,7 +155,8 @@ module.include.files=\
 	src/main/tab_history.h\
 	src/gui/parallel_dialog.h\
 	src/gui/bookmark_dialog.h\
-	src/editor/html-editor.h
+	src/editor/html-editor.h\
+	src/main/navbar.h
 
 module.source.name=.
 module.source.type=
