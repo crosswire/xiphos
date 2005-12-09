@@ -1,3 +1,9 @@
+2005-12-09 terry <tbiggs@users.sf.net>
+
+	* added status bar to new editors
+	* added navbar to new note editor
+
+
 2005-12-01 terry <tbiggs@users.sf.net>
 
 	* changed to use gtkhtml editor componet for building with gtkhtml-3.8
