@@ -34,7 +34,7 @@ struct _search_dialog1 {
 	GtkWidget *notebook;
 	GtkWidget *togglebutton_show_main;
 	GtkWidget *combo_list;
-	GtkWidget *combo_entry_list;
+//	GtkWidget *combo_entry_list;
 	GtkWidget *module_lists;
 	GtkWidget *listview_modules;
 	GtkWidget *entry_list_name;
@@ -48,7 +48,7 @@ struct _search_dialog1 {
 	GtkWidget *rb_no_scope;
 	GtkToggleButton *which_scope;
 	GtkWidget *combo_range;
-	GtkWidget *combo_entry_range;
+//	GtkWidget *combo_entry_range;
 	GtkWidget *list_range_name;
 	GtkWidget *list_ranges;
 	GtkWidget *entry_range_name;

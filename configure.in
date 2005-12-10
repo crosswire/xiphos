@@ -60,18 +60,18 @@ dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
 
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,have_gtkhtml=no)
-if test "x$have_gtkhtml" = xyes; then
-	AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
-
-	dnl gtkhtml_datadir
-	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
-	
-	dnl gtkhtml api version
-	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.1`
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
-fi
+dnl PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,have_gtkhtml=no)
+dnl if test "x$have_gtkhtml" = xyes; then
+dnl 	AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
+dnl 
+dnl 	dnl gtkhtml_datadir
+dnl 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
+dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+dnl 	
+dnl 	dnl gtkhtml api version
+dnl 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.1`
+dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+dnl fi
 
 PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
 if test "x$have_gtkhtml" = xyes; then
