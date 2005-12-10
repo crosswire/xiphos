@@ -840,6 +840,24 @@ void main_add_modlist_to_label(void)
 }
 
 
+
+void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
+{
+	GList *mod_list = NULL;
+	gchar *str = NULL;
+	gchar *mod_list_str = NULL;
+	const gchar *name = NULL;
+	
+	if(!GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+		return;
+	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)); 
+	mod_list = get_custom_list_from_name(name);
+	mod_list_str = get_modlist_string(mod_list);
+	str = g_strdup_printf("<b>%s: </b>%s",_("Search"),mod_list_str);
+	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
+	g_free(mod_list_str);
+	g_free(str);
+}
 /******************************************************************************
  * Name
  *   gui_add_to_found_list
@@ -1049,8 +1067,7 @@ static void set_up_dialog_search(void)
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active) {
 		backendSearch->clear_search_list();
 		label =
-		    gtk_entry_get_text(GTK_ENTRY
-				       (search1.combo_entry_range));
+		    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(search1.combo_range)->child));
 		range =
 		    (gchar *) xml_get_list_from_label("ranges", "range",
 						      label);
