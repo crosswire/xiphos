@@ -50,7 +50,7 @@
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
-#define FINDS N_("found in ")	
+#define FINDS N_("found in ")
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 
@@ -61,6 +61,14 @@ SEARCH_DIALOG1 search1;
 static GtkWidget *dialog;
 static gboolean _preview_on;
 static gboolean _in_url;
+
+
+
+void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
+{
+	main_comboboxentry2_changed(combobox, user_data);
+	//g_message("on_comboboxentry2_changed");
+}
 
 
 /******************************************************************************
@@ -93,7 +101,8 @@ void button_clean(GtkButton * button, gpointer user_data)
 	gtk_html_set_editable(GTK_HTML(search1.report_html), editable);
 
 
-	editable = gtk_html_get_editable(GTK_HTML(search1.results_html));
+	editable =
+	    gtk_html_get_editable(GTK_HTML(search1.results_html));
 	if (!editable)
 		gtk_html_set_editable(GTK_HTML(search1.results_html),
 				      TRUE);
@@ -101,7 +110,8 @@ void button_clean(GtkButton * button, gpointer user_data)
 	gtk_html_cut(GTK_HTML(search1.results_html));
 	gtk_html_set_editable(GTK_HTML(search1.results_html), editable);
 
-	editable = gtk_html_get_editable(GTK_HTML(search1.preview_html));
+	editable =
+	    gtk_html_get_editable(GTK_HTML(search1.preview_html));
 	if (!editable)
 		gtk_html_set_editable(GTK_HTML(search1.preview_html),
 				      TRUE);
@@ -201,9 +211,8 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
  *   void
  */
 
-
 void on_togglebutton_show_main(GtkToggleButton * togglebutton,
-				      gpointer user_data)
+			       gpointer user_data)
 {
 	search1.show_in_main = togglebutton->active;
 }
@@ -233,16 +242,16 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
 	gchar *newmod;
 	gchar *newref;
 	gint i = 0, havemod = 0;
-	
-	
+
+
 	/***  moved out of url  ***/
-	if(url == NULL) {
+	if (url == NULL) {
 		_in_url = FALSE;
 		return;
-	} else 
+	} else
 		_in_url = TRUE;
-	
-	if(!_preview_on)
+
+	if (!_preview_on)
 		return;
 	/***  we are in an url  ***/
 	newmod = g_new0(gchar, strlen(url));
@@ -284,11 +293,13 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
 
 		if (buf) {
 			gchar *str;
-					
-			text = main_get_search_rendered_text(modbuf, buf);
+
+			text =
+			    main_get_search_rendered_text(modbuf, buf);
 			if (text) {
-				main_entry_display(search1.preview_html, modbuf,
-				      text, buf, TRUE);
+				main_entry_display(search1.preview_html,
+						   modbuf, text, buf,
+						   TRUE);
 				free(text);
 			}
 			g_free(buf);
@@ -316,20 +327,20 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
  */
 
 static void _link_clicked(GtkHTML * html, const gchar * url,
-			 gpointer data)
+			  gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL;
 	gchar *newmod, *newref;
 	gint i = 0, havemod = 0;
 	gchar *text = NULL;
 	gchar *url2 = NULL;
-	
-	if(_preview_on)
+
+	if (_preview_on)
 		_preview_on = FALSE;
-	else 
+	else
 		_preview_on = TRUE;
-	
-	
+
+
 	newmod = g_new0(gchar, strlen(url));
 	newref = g_new0(gchar, strlen(url));
 	/*** thml verse reference ***/
@@ -367,28 +378,30 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
 		}
 		buf = g_strdup(newref);
 		settings.displaySearchResults = TRUE;
-		
-		url2 = g_strdup_printf("sword://%s/%s",modbuf,buf);
-		
-		switch(GPOINTER_TO_INT(data)) {
+
+		url2 = g_strdup_printf("sword://%s/%s", modbuf, buf);
+
+		switch (GPOINTER_TO_INT(data)) {
 		case 0:
-			if (search1.show_in_main || 
-				gtk_toggle_tool_button_get_active(
-				GTK_TOGGLE_TOOL_BUTTON(
-				search1.togglebutton_show_main))) {
-				
-					main_url_handler(url2,TRUE); 
+			if (search1.show_in_main ||
+			    gtk_toggle_tool_button_get_active
+			    (GTK_TOGGLE_TOOL_BUTTON
+			     (search1.togglebutton_show_main))) {
+
+				main_url_handler(url2, TRUE);
 			}
-						
-			text = main_get_search_rendered_text(modbuf, buf);
+
+			text =
+			    main_get_search_rendered_text(modbuf, buf);
 			if (text) {
-				main_entry_display(search1.preview_html, modbuf,
-				      text, buf, TRUE);
+				main_entry_display(search1.preview_html,
+						   modbuf, text, buf,
+						   TRUE);
 				free(text);
 			}
 			break;
 		case 1:
-				main_url_handler(url2,TRUE);
+			main_url_handler(url2, TRUE);
 			break;
 		}
 		settings.displaySearchResults = FALSE;
@@ -442,8 +455,7 @@ static void report_link_clicked(GtkHTML * html, const gchar * url,
  *   void
  */
 
-void list_name_changed(GtkEditable * editable,
-			      gpointer user_data)
+void list_name_changed(GtkEditable * editable, gpointer user_data)
 {
 	const gchar *text;
 	GtkTreeModel *model;
@@ -452,7 +464,8 @@ void list_name_changed(GtkEditable * editable,
 	GtkTreeIter selected;
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
@@ -485,8 +498,7 @@ void list_name_changed(GtkEditable * editable,
  *   void
  */
 
-void range_name_changed(GtkEditable * editable,
-			       gpointer user_data)
+void range_name_changed(GtkEditable * editable, gpointer user_data)
 {
 	const gchar *text;
 	GtkTreeModel *model;
@@ -532,8 +544,7 @@ void range_name_changed(GtkEditable * editable,
  *   void
  */
 
-void range_text_changed(GtkEditable * editable,
-			       gpointer user_data)
+void range_text_changed(GtkEditable * editable, gpointer user_data)
 {
 	main_range_text_changed(editable);
 }
@@ -577,7 +588,8 @@ void new_modlist(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 
 	model2 =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.module_lists));
 	list_store2 = GTK_LIST_STORE(model2);
 
 	sprintf(buf, "New List%d", search1.list_rows);
@@ -636,27 +648,29 @@ void clear_modules(GtkButton * button, gpointer user_data)
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			_("Clear List?"),
-			_("Are you sure you want to clear the module list?"));
+			_
+			("Are you sure you want to clear the module list?"));
 	info->label_top = str->str;
 	info->yes = TRUE;
 	info->no = TRUE;
 
 	test = gui_alert_dialog(info);
-	if (test != GS_YES){
+	if (test != GS_YES) {
 		g_free(info);
-		g_string_free(str,TRUE);		
+		g_string_free(str, TRUE);
 		return;
 	}
 
 	gtk_list_store_clear(list_store);
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected))
 		gtk_list_store_set(list_store, &selected, 1, "", -1);
 	g_free(info);
-	g_string_free(str,TRUE);
+	g_string_free(str, TRUE);
 }
 
 
@@ -752,7 +766,8 @@ void new_range(GtkButton * button, gpointer user_data)
 	gtk_tree_selection_select_path(selection, path);
 	gtk_tree_path_free(path);
 
-	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_name), text[0]);
+	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_name),
+			   text[0]);
 	gtk_entry_set_text(GTK_ENTRY(search1.entry_range_text), "");
 }
 
@@ -830,7 +845,8 @@ void delete_list(GtkButton * button, gpointer user_data)
 
 
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.module_lists));
 	list_store = GTK_LIST_STORE(model);
 	selection = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search1.module_lists));
@@ -866,7 +882,7 @@ void delete_list(GtkButton * button, gpointer user_data)
 
 	g_free(info);
 	g_free(name_string);
-	g_string_free(str,TRUE);
+	g_string_free(str, TRUE);
 }
 
 
@@ -888,8 +904,7 @@ void delete_list(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void scope_toggled(GtkToggleButton * togglebutton,
-			  gpointer user_data)
+void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	search1.which_scope = togglebutton;
 }
@@ -913,10 +928,12 @@ void scope_toggled(GtkToggleButton * togglebutton,
  */
 
 void mod_list_toggled(GtkToggleButton * togglebutton,
-			     gpointer user_data)
+		      gpointer user_data)
 {
-	if(togglebutton->active) {
-		main_add_modlist_to_label();
+	if (togglebutton->active) {
+		main_comboboxentry2_changed((GtkComboBox*)search1.combo_list, 
+						user_data);
+		//main_add_modlist_to_label();
 	}
 }
 
@@ -941,26 +958,42 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
  */
 
 void current_module_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data)
+			    gpointer user_data)
 {
 	if (togglebutton->active) {
 		main_change_mods_select_label(search1.search_mod);
 		gtk_widget_set_sensitive(search1.rb_last, TRUE);
-	}
-	else {
+	} else {
 		gtk_widget_set_sensitive(search1.rb_last, FALSE);
 		gtk_toggle_button_set_active(search1.which_scope, TRUE);
 	}
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
 gboolean _on_button_release_event(GtkWidget * widget,
-                            GdkEventButton * event, gpointer data)
+				  GdkEventButton * event, gpointer data)
 {
-	if(_in_url)	
+	if (_in_url)
 		return FALSE;
-		
-	if(GPOINTER_TO_INT(data)) 
+
+	if (GPOINTER_TO_INT(data))
 		_preview_on = TRUE;
 	return FALSE;
 }
@@ -985,7 +1018,7 @@ gboolean _on_button_release_event(GtkWidget * widget,
  */
 
 static void indexed_word_toggled(GtkToggleButton * togglebutton,
-				   gpointer user_data)
+				 gpointer user_data)
 {
 /*	if (togglebutton->active) {
 		//main_change_mods_select_label(search1.search_mod);
@@ -1053,7 +1086,7 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 static void selection_modules_lists_changed(GtkTreeSelection *
 					    selection, gpointer data)
 {
-	main_selection_modules_lists_changed(selection,data);
+	main_selection_modules_lists_changed(selection, data);
 }
 
 
@@ -1134,37 +1167,91 @@ static void _add_two_text_columns(GtkTreeView * treeview)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
 static
 void _setup_combobox(GtkComboBox * combo)
-{	
+{
 	GtkListStore *store;
-	
+
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo), 0);
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo),
+					    0);
 }
 
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
 
 static
 void _setup_listviews(GtkWidget * listview, GCallback callback)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkListStore *model;	
+	GtkListStore *model;
 	GObject *selection;
-	
+
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
-                                             GTK_TREE_MODEL(model)); 
+				GTK_TREE_MODEL(model));
 	_add_two_text_columns(GTK_TREE_VIEW(listview));
-	if(!callback)
+	if (!callback)
 		return;
 	selection =
-	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(listview)));
-	g_signal_connect(selection, "changed", G_CALLBACK(callback), NULL);
-	
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(listview)));
+	g_signal_connect(selection, "changed", G_CALLBACK(callback),
+			 NULL);
+
 }
 
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
 
 static
 void _setup_treetview(GtkWidget * treeview)
@@ -1172,31 +1259,47 @@ void _setup_treetview(GtkWidget * treeview)
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	//GtkListStore *model;
-	GObject *selection;	
-	
+	GObject *selection;
+
 	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Found",
 							  renderer,
-							  "text", 
-							  0,
-							  NULL);
+							  "text",
+							  0, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);	
-	gui_load_module_tree(treeview, FALSE);	
-	
+	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
+	gui_load_module_tree(treeview, FALSE);
+
 	selection =
-	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));	
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(treeview)));
 	g_signal_connect(selection, "changed",
-			 G_CALLBACK(mod_selection_changed),
-			 treeview);
-	
+			 G_CALLBACK(mod_selection_changed), treeview);
+
 }
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
 
 /* add html widgets */
 static
 void _add_html_widgets(GtkWidget * scrolledwindow_report,
-		      GtkWidget * scrolledwindow_preview,
-		      GtkWidget * scrolledwindow_results)
+		       GtkWidget * scrolledwindow_preview,
+		       GtkWidget * scrolledwindow_results)
 {
 	search1.report_html = gtk_html_new();
 	gtk_widget_show(search1.report_html);
@@ -1215,13 +1318,11 @@ void _add_html_widgets(GtkWidget * scrolledwindow_report,
 	gtk_html_load_empty(GTK_HTML(search1.results_html));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_results),
 			  search1.results_html);
-	
-	g_signal_connect(G_OBJECT(search1.results_html),"link_clicked",
-			 G_CALLBACK(_link_clicked), 
-			 GINT_TO_POINTER(0));
-	g_signal_connect(G_OBJECT(search1.preview_html),"link_clicked",
-			 G_CALLBACK(_link_clicked), 
-			 GINT_TO_POINTER(1));
+
+	g_signal_connect(G_OBJECT(search1.results_html), "link_clicked",
+			 G_CALLBACK(_link_clicked), GINT_TO_POINTER(0));
+	g_signal_connect(G_OBJECT(search1.preview_html), "link_clicked",
+			 G_CALLBACK(_link_clicked), GINT_TO_POINTER(1));
 	g_signal_connect(G_OBJECT(search1.results_html), "on_url",
 			 G_CALLBACK(_url), GINT_TO_POINTER(0));
 	g_signal_connect(G_OBJECT(search1.preview_html), "on_url",
@@ -1229,127 +1330,182 @@ void _add_html_widgets(GtkWidget * scrolledwindow_report,
 	g_signal_connect(G_OBJECT(search1.report_html),
 			 "link_clicked",
 			 G_CALLBACK(report_link_clicked), NULL);
-			 
-	g_signal_connect(G_OBJECT(search1.results_html), "button_release_event",
-			 G_CALLBACK(_on_button_release_event), 
+
+	g_signal_connect(G_OBJECT(search1.results_html),
+			 "button_release_event",
+			 G_CALLBACK(_on_button_release_event),
 			 GINT_TO_POINTER(1));
-	g_signal_connect(G_OBJECT(search1.preview_html), "button_release_event",
-			 G_CALLBACK(_on_button_release_event), 
+	g_signal_connect(G_OBJECT(search1.preview_html),
+			 "button_release_event",
+			 G_CALLBACK(_on_button_release_event),
 			 GINT_TO_POINTER(1));
-			 
+
 }
 
 
-void _on_dialog_response(GtkDialog * dialog,gint response_id,gpointer user_data)
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void _on_dialog_response(GtkDialog * dialog, gint response_id,
+			 gpointer user_data)
 {
-	switch(response_id) {
-		case GTK_RESPONSE_CLOSE:
-			on_destroy(GTK_WIDGET(dialog), user_data);
+	switch (response_id) {
+	case GTK_RESPONSE_CLOSE:
+		on_destroy(GTK_WIDGET(dialog), user_data);
 		break;
 	}
 }
 
 
-
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
 
 static
 void _create_search_dialog(void)
 {
 	gchar *glade_file;
 	GladeXML *gxml;
-	
+
 	_preview_on = TRUE;
-	
-	glade_file = gui_general_user_file ("search-dialog.glade", FALSE);
+
+	glade_file =
+	    gui_general_user_file("search-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
 	g_message(glade_file);
-	
+
 	/* build the widget */
-	gxml = glade_xml_new (glade_file, "dialog", NULL);
-	g_free (glade_file);
-	g_return_if_fail (gxml != NULL);
+	gxml = glade_xml_new(glade_file, "dialog", NULL);
+	g_free(glade_file);
+	g_return_if_fail(gxml != NULL);
 
 	/* lookup the root widget */
-	search1.dialog = glade_xml_get_widget (gxml, "dialog");
-	search1.label_search_module = glade_xml_get_widget(gxml, "label5");
+	search1.dialog = glade_xml_get_widget(gxml, "dialog");
+	search1.label_search_module =
+	    glade_xml_get_widget(gxml, "label5");
 	search1.search_entry = glade_xml_get_widget(gxml, "entry1");
 	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
-	
+
 	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
 	_setup_treetview(search1.treeview);
-	
-	search1.list_range_name = glade_xml_get_widget(gxml, "treeview4");
-	_setup_listviews(search1.list_range_name, 
-			(GCallback)selection_range_lists_changed);
-	
+
+	search1.list_range_name =
+	    glade_xml_get_widget(gxml, "treeview4");
+	_setup_listviews(search1.list_range_name,
+			 (GCallback) selection_range_lists_changed);
+
 	search1.list_ranges = glade_xml_get_widget(gxml, "treeview5");
-	_setup_listviews(search1.list_ranges, NULL);	
-	
+	_setup_listviews(search1.list_ranges, NULL);
+
 	search1.module_lists = glade_xml_get_widget(gxml, "treeview6");
-	_setup_listviews(search1.module_lists, 
-			(GCallback)selection_modules_lists_changed);	
-	
-	search1.listview_modules = glade_xml_get_widget(gxml, "treeview7");
+	_setup_listviews(search1.module_lists,
+			 (GCallback) selection_modules_lists_changed);
+
+	search1.listview_modules =
+	    glade_xml_get_widget(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
-	
-	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
+
+	search1.rb_no_scope =
+	    glade_xml_get_widget(gxml, "radiobutton1");
 	search1.rb_last = glade_xml_get_widget(gxml, "radiobutton2");
 	search1.which_scope = GTK_TOGGLE_BUTTON(search1.rb_no_scope);
-	search1.rb_custom_range = glade_xml_get_widget(gxml, "radiobutton3");
-	
-	search1.rb_current_module = glade_xml_get_widget(gxml, "radiobutton4");
-	search1.rb_mod_list = glade_xml_get_widget(gxml, "radiobutton5");
-	search1.rb_custom_list = glade_xml_get_widget(gxml, "radiobutton6");
-	
+	search1.rb_custom_range =
+	    glade_xml_get_widget(gxml, "radiobutton3");
+	/* modules radio buttons */
+	search1.rb_current_module =
+	    glade_xml_get_widget(gxml, "radiobutton4");
+	search1.rb_mod_list =
+	    glade_xml_get_widget(gxml, "radiobutton5");
+	search1.rb_custom_list =
+	    glade_xml_get_widget(gxml, "radiobutton6");
+	/*  */
 	search1.rb_words = glade_xml_get_widget(gxml, "radiobutton9");
 	search1.rb_regexp = glade_xml_get_widget(gxml, "radiobutton10");
-	search1.rb_exact_phrase = glade_xml_get_widget(gxml, "radiobutton11");
-	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");	
-	
-	search1.cb_case_sensitive = glade_xml_get_widget(gxml, "checkbutton1");
-	search1.cb_include_strongs = glade_xml_get_widget(gxml, "checkbutton2");
-	search1.cb_include_morphs = glade_xml_get_widget(gxml, "checkbutton3");
-	search1.cb_include_footnotes = glade_xml_get_widget(gxml, "checkbutton4");
-	
-	search1.togglebutton_show_main = glade_xml_get_widget(gxml, "toggletoolbutton1");
+	search1.rb_exact_phrase =
+	    glade_xml_get_widget(gxml, "radiobutton11");
+	search1.rb_attributes =
+	    glade_xml_get_widget(gxml, "radiobutton12");
 
-	search1.combo_list = glade_xml_get_widget(gxml, "comboboxentry2");
+	search1.cb_case_sensitive =
+	    glade_xml_get_widget(gxml, "checkbutton1");
+	search1.cb_include_strongs =
+	    glade_xml_get_widget(gxml, "checkbutton2");
+	search1.cb_include_morphs =
+	    glade_xml_get_widget(gxml, "checkbutton3");
+	search1.cb_include_footnotes =
+	    glade_xml_get_widget(gxml, "checkbutton4");
+
+	search1.togglebutton_show_main =
+	    glade_xml_get_widget(gxml, "toggletoolbutton1");
+
+	search1.combo_list =
+	    glade_xml_get_widget(gxml, "comboboxentry2");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_list));
 
 	search1.entry_list_name = glade_xml_get_widget(gxml, "entry4");
-	
-	search1.combo_range = glade_xml_get_widget(gxml, "comboboxentry1");
+
+	search1.combo_range =
+	    glade_xml_get_widget(gxml, "comboboxentry1");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_range));
-	
+
 	search1.entry_range_name = glade_xml_get_widget(gxml, "entry2");
 	search1.entry_range_text = glade_xml_get_widget(gxml, "entry3");
-			 
-	search1.progressbar = glade_xml_get_widget(gxml, "progressbar1");
+
+	search1.progressbar =
+	    glade_xml_get_widget(gxml, "progressbar1");
 	search1.label_mod_select = glade_xml_get_widget(gxml, "label5");
-	
+
 	_add_html_widgets(glade_xml_get_widget(gxml, "scrolledwindow2"),
-		         glade_xml_get_widget(gxml, "scrolledwindow9"),
-		         glade_xml_get_widget(gxml, "scrolledwindow3"));
+			  glade_xml_get_widget(gxml, "scrolledwindow9"),
+			  glade_xml_get_widget(gxml,
+					       "scrolledwindow3"));
 
 	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
+	     NULL);
 }
 
 
 /******************************************************************************
  * Name
- *   create_search_dialog
+ *   gui_create_search_dialog
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   GtkWidget *create_search_dialog(void)
+ *   void gui_create_search_dialog(void)
  *
  * Description
- *   creates and returns the search dialog
+ *   calls _create_search_dialog() to create the search dialog
  *
  * Return value
- *   GtkWidget *
+ *   void
  */
 
 void gui_create_search_dialog(void)
