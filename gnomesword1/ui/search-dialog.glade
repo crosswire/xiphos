@@ -527,6 +527,7 @@
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
+				  <signal name="changed" handler="on_comboboxentry2_changed" last_modification_time="Sat, 10 Dec 2005 17:48:18 GMT"/>
 				</widget>
 			      </child>
 			    </widget>

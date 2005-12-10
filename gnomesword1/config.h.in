@@ -136,9 +136,6 @@
 /* Define if you want to use gnome-spell */
 #undef USE_GNOME_SPELL
 
-/* Define if you want to use GtkHtml-3.1 */
-#undef USE_GTKHTML31
-
 /* Define if you want to use GtkHtml-3.6 */
 #undef USE_GTKHTML36
 
