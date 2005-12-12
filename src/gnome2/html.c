@@ -341,12 +341,33 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 
 gchar *gui_button_press_lookup(GtkWidget * html_widget)
 {
+	gchar *rtval = NULL;
 	gchar *key = NULL;
+	gchar *buf = NULL;
 	GtkHTML *html;
 	gint len;
 
 	html = GTK_HTML(html_widget);
-/*	if (!html_engine_is_selection_active(html->engine)) {
+#ifdef USE_GTKHTML38
+	if (!html->in_selection) {
+		gtk_html_select_word(html);
+		key = gtk_html_get_selection_html(html, &len);
+		buf = main_get_striptext_from_string(settings.MainWindowModule, 
+						key);		
+		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
+		key = g_strstrip(key);
+		len = strlen(key);
+		if (key[len - 1] == 's' || key[len - 1] == 'd')
+			key[len - 1] = '\0';
+		if (key[len - 1] == 'h' && key[len - 2] == 't'
+		    && key[len - 3] == 'e')
+			key[len - 3] = '\0';
+		rtval = g_strdup(key);
+		g_free(buf);
+		return rtval;	// * must be freed by calling function *
+	}
+#else
+	if (!html_engine_is_selection_active(html->engine)) {
 		gtk_html_select_word(html);
 		if (html_engine_is_selection_active(html->engine)) {
 			key =
@@ -364,7 +385,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		}
 
 	}
-*/
+#endif
 	return key;
 }
 
