@@ -32,6 +32,7 @@ extern "C"
 
 typedef struct _editor EDITOR;
 
+void editor_sync_with_main(void);
 gboolean editor_close_all(void);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 gint load_file (EDITOR * e);	

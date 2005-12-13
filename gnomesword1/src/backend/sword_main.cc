@@ -367,6 +367,20 @@ char *BackEnd::render_this_text(const char * module_name, const char * text) {
 	return NULL;	
 }
 
+char *BackEnd::get_strip_text_from_string(const char * module_name, const char *string) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+		mod = (*it).second;
+		//mod->setKey(mykey);
+		//g_free(mykey);
+		return strdup((char *) mod->StripText(string));
+	}
+	return NULL;	
+}
 char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior

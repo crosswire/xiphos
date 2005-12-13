@@ -646,6 +646,7 @@ static int show_module_and_key(const char * module, const char * key,
 				main_display_bible(module, tmpkey);
 				main_display_commentary(NULL, tmpkey);
 				main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+				editor_sync_with_main();
 				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case COMMENTARY_TYPE:
@@ -741,6 +742,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				main_display_commentary(NULL, key);
 				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
+				editor_sync_with_main();
 				if(key) g_free((gchar*)key);
 			break;				
 			case COMMENTARY_TYPE:	
@@ -765,6 +767,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			main_display_commentary(NULL, key);
 			main_display_bible(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar*)key);
+			editor_sync_with_main();
 			if(key) g_free((gchar*)key);
 		} else {
 			alert_url_not_found(url);
