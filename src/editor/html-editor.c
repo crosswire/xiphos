@@ -221,10 +221,9 @@ load_through_persist_file(EDITOR * e, const gchar * filename)
 {
 	CORBA_Environment ev;
 
-	if(editor_is_dirty(e))
-		save_through_persist_file(e, g_strdup(filename));	
-	
 	CORBA_exception_init(&ev);
+	
+	g_message(filename);
 
 	Bonobo_PersistFile_load(e->persist_file_interface, filename, &ev);
 
