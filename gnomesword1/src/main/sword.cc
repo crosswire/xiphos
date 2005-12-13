@@ -1183,6 +1183,27 @@ char *main_get_striptext(char *module_name, char *key)
 
 /******************************************************************************
  * Name
+ *   main_get_striptext
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   char *main_get_striptext(char *module_name, char *key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_get_striptext_from_string(char *module_name, char *string)
+{
+	return backend->get_strip_text_from_string(module_name, string);
+}
+
+/******************************************************************************
+ * Name
  *   main_get_rendered_text
  *
  * Synopsis
