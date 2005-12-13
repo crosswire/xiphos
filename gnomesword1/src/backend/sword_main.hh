@@ -80,6 +80,7 @@ public:
 	char *get_render_text(const char *module_name, const char *key);
 	char *render_this_text(const char * module_name, const char * text);
 	char *get_strip_text(const char *module_name, const char *key);
+	char *get_strip_text_from_string(const char * module_name, const char *string);
 	char *get_valid_key(const char *key);
 	char *key_get_book(const char *key);
 	int key_get_chapter(const char *key);
