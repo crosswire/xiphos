@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-09 21:00-0500\n"
+"POT-Creation-Date: 2005-12-12 16:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,7 +169,7 @@ msgid "Export"
 msgstr ""
 
 #: ../src/editor/editor_menu.c:720 ../src/editor/toolbar_edit.c:689
-#: ../src/gnome2/html.c:633 ../src/gnome2/note_editor.c:1241
+#: ../src/gnome2/html.c:654 ../src/gnome2/note_editor.c:1241
 msgid "Print"
 msgstr ""
 
@@ -1156,16 +1156,16 @@ msgstr ""
 msgid "Unlock "
 msgstr ""
 
-#: ../src/gnome2/html.c:534
+#: ../src/gnome2/html.c:555
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/gnome2/html.c:683
+#: ../src/gnome2/html.c:704
 msgid "Print Preview"
 msgstr ""
 
-#: ../src/gnome2/html.c:689
+#: ../src/gnome2/html.c:710
 msgid "Failed to print the document"
 msgstr ""
 
@@ -1551,19 +1551,19 @@ msgstr ""
 msgid "found in "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:638
+#: ../src/gnome2/search_dialog.c:650
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:639
+#: ../src/gnome2/search_dialog.c:652
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:848
+#: ../src/gnome2/search_dialog.c:864
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:849
+#: ../src/gnome2/search_dialog.c:865
 msgid "Are you sure you want to delete:"
 msgstr ""
 
