@@ -279,11 +279,6 @@ static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
 
 void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	shutdown_frontend();
-	/* shutdown the sword stuff */
-	main_shutdown_backend();
-	gtk_main_quit();
-	gtk_exit(0);
 	gtk_widget_destroy(widgets.app);
 }
 
