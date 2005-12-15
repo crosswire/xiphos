@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 16:40-0500\n"
+"POT-Creation-Date: 2005-12-13 23:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: ../src/editor/editor_menu.c:728 ../src/gnome2/main_menu.c:757
+#: ../src/editor/editor_menu.c:728 ../src/gnome2/main_menu.c:762
 #: ../src/gnome2/note_editor.c:1249
 msgid "_Edit"
 msgstr ""
@@ -184,7 +184,7 @@ msgid "Cut"
 msgstr ""
 
 #: ../src/editor/editor_menu.c:740 ../src/editor/toolbar_edit.c:749
-#: ../src/gnome2/main_menu.c:619 ../src/gnome2/note_editor.c:1261
+#: ../src/gnome2/main_menu.c:624 ../src/gnome2/note_editor.c:1261
 #: ../src/gnome2/parallel_view.c:260
 msgid "Copy"
 msgstr ""
@@ -1169,150 +1169,150 @@ msgstr ""
 msgid "Failed to print the document"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:596
+#: ../src/gnome2/main_menu.c:601
 msgid "Open StudyPad"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:597
+#: ../src/gnome2/main_menu.c:602
 msgid "Open the StudyPad editor"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:602
+#: ../src/gnome2/main_menu.c:607
 msgid "Open Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:603
+#: ../src/gnome2/main_menu.c:608
 msgid "Open a saved session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:607
+#: ../src/gnome2/main_menu.c:612
 msgid "Save Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:608
+#: ../src/gnome2/main_menu.c:613
 msgid "Save the current session to a file"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:620
+#: ../src/gnome2/main_menu.c:625
 msgid "Copy highlighted text from main window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:626 ../src/gnome2/sidebar.c:1623
+#: ../src/gnome2/main_menu.c:631 ../src/gnome2/sidebar.c:1623
 msgid "Search"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:627
+#: ../src/gnome2/main_menu.c:632
 msgid "Search using the shortcut bar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:632 ../ui/search-dialog.glade.h:14
+#: ../src/gnome2/main_menu.c:637 ../ui/search-dialog.glade.h:14
 msgid "Advanced Search"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:633
+#: ../src/gnome2/main_menu.c:638
 msgid "Advanced search using the search dialog"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:641 ../ui/module-manager.glade.h:15
+#: ../src/gnome2/main_menu.c:646 ../ui/module-manager.glade.h:15
 msgid "Module Manager"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:642
+#: ../src/gnome2/main_menu.c:647
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:651
+#: ../src/gnome2/main_menu.c:656
 msgid "C_lear"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:652
+#: ../src/gnome2/main_menu.c:657
 msgid "Clear history list"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:662
+#: ../src/gnome2/main_menu.c:667
 msgid "Daily Devotion"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:663
+#: ../src/gnome2/main_menu.c:668
 msgid "Show the Daily Devotion for today"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:678 ../ui/prefs.glade.h:19
+#: ../src/gnome2/main_menu.c:683 ../ui/prefs.glade.h:19
 msgid "Bible Texts"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:679
+#: ../src/gnome2/main_menu.c:684
 msgid "Show or hide Bible texts window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:684 ../src/gnome2/search_sidebar.c:215
+#: ../src/gnome2/main_menu.c:689 ../src/gnome2/search_sidebar.c:215
 #: ../src/gnome2/setup_druid.c:807 ../ui/prefs.glade.h:24
 msgid "Commentary"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:685
+#: ../src/gnome2/main_menu.c:690
 msgid "Show or hide commentaries"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:690 ../src/gnome2/setup_druid.c:929
+#: ../src/gnome2/main_menu.c:695 ../src/gnome2/setup_druid.c:929
 #: ../ui/prefs.glade.h:30
 msgid "Dictionary/Lexicon"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:692
+#: ../src/gnome2/main_menu.c:697
 msgid "Show or hide - dictionaries and lexicons"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:698
+#: ../src/gnome2/main_menu.c:703
 msgid "Verse Style"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:705
+#: ../src/gnome2/main_menu.c:710
 msgid "Attach/Detach Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:711
+#: ../src/gnome2/main_menu.c:716
 msgid "Show/Hide Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:721
+#: ../src/gnome2/main_menu.c:726
 msgid "Contents"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:722
+#: ../src/gnome2/main_menu.c:727
 msgid "Open the GnomeSword manual"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:735
+#: ../src/gnome2/main_menu.c:740
 msgid "About the SWORD Project ..."
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:736
+#: ../src/gnome2/main_menu.c:741
 msgid "More information about the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:741
+#: ../src/gnome2/main_menu.c:746
 msgid "About GnomeSword ..."
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:742
+#: ../src/gnome2/main_menu.c:747
 msgid "About this application"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:751 ../ui/editor_note.xml.h:14
+#: ../src/gnome2/main_menu.c:756 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:17
 msgid "_File"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:763
+#: ../src/gnome2/main_menu.c:768
 msgid "_View"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:769
+#: ../src/gnome2/main_menu.c:774
 msgid "Hi_story"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:775
+#: ../src/gnome2/main_menu.c:780
 msgid "_Help"
 msgstr ""
 

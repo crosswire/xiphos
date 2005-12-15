@@ -268,6 +268,7 @@ void frontend_display(void)
 
 void shutdown_frontend(void)
 {
+	RESULTS *list_item;
 	if(pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);
 	if(pixbufs->pixbuf_opened)
@@ -283,7 +284,10 @@ void shutdown_frontend(void)
 	/* free verse list used for saving search results */
 	if(list_of_verses) {
 		while(list_of_verses) {
-			g_free(list_of_verses->data);
+			list_item = (RESULTS*)list_of_verses->data;
+			g_free(list_item->module);
+			g_free(list_item->key);
+			g_free(list_item);
 			list_of_verses = g_list_next(list_of_verses);
 		}
 		g_list_free(list_of_verses);
