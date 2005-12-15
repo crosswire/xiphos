@@ -1,3 +1,9 @@
+2005-12-15 terry <tbiggs@users.sf.net>
+
+	* added m4/gnomesword-mozilla.m4 which contains a macro for finding
+	  mozilla - taken from gtkmozedit-0.3.1
+	  
+
 2005-12-09 terry <tbiggs@users.sf.net>
 
 	* added status bar to new editors
