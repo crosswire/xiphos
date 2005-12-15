@@ -1451,7 +1451,7 @@ void _create_search_dialog(void)
 	    glade_xml_get_widget(gxml, "radiobutton11");
 	search1.rb_attributes =
 	    glade_xml_get_widget(gxml, "radiobutton12");
-
+	
 	search1.cb_case_sensitive =
 	    glade_xml_get_widget(gxml, "checkbutton1");
 	search1.cb_include_strongs =
