@@ -663,6 +663,8 @@
 				      <child>
 					<widget class="GtkRadioButton" id="radiobutton12">
 					  <property name="visible">True</property>
+					  <property name="tooltip">Word//Strongs/G1722,
+Footnote//body/love</property>
 					  <property name="can_focus">True</property>
 					  <property name="label" translatable="yes">Attributes</property>
 					  <property name="use_underline">True</property>

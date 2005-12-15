@@ -716,7 +716,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%s",(const char *)imodule);
 		str = g_string_append(str, buf);
 		//g_free(buf);	
-		
+		//g_message((const char *)imodule.getRawEntry());
 		if (settings.versestyle) {
 			/*if ((strstr(buf, "<BR") == NULL) &&
 			    (strstr(buf, "<br") == NULL) &&

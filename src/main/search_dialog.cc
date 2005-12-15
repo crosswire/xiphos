@@ -1155,9 +1155,11 @@ void main_do_dialog_search(void)
 	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
 	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
-	   // GTK_TOGGLE_BUTTON(search1.rb_indexed_word)->active ? -4 : -3;
+	   // GTK_TOGGLE_BUTTON(search1.rb_attributes)->active ? -4 : -3;
 
-	
+#ifdef DEBUG
+	g_message("search_type = %d",search_type);
+#endif
 
 	search_params = GTK_TOGGLE_BUTTON
 	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;

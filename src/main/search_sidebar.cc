@@ -138,7 +138,10 @@ static void fill_search_results_list(int finds)
 	
 	if(list_of_verses) {
 		while(list_of_verses) {
-			g_free(list_of_verses->data);
+			list_item = (RESULTS*)list_of_verses->data;
+			g_free(list_item->module);
+			g_free(list_item->key);
+			g_free(list_item);
 			list_of_verses = g_list_next(list_of_verses);
 		}
 		g_list_free(list_of_verses);
@@ -157,8 +160,8 @@ static void fill_search_results_list(int finds)
 		gtk_list_store_set(list_store, &iter, 0,
 					   tmpbuf, -1);
 		list_item = g_new(RESULTS,1);
-		list_item->module = settings.sb_search_mod;
-		list_item->key = tmpbuf;
+		list_item->module = g_strdup(settings.sb_search_mod);
+		list_item->key = g_strdup(tmpbuf);
 		list_of_verses = g_list_append(list_of_verses, 
 						(RESULTS *) list_item);
 		if(key_buf) /* allocated by g_convert() in BackEnd::get_next_listkey() */
