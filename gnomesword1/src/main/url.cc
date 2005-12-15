@@ -454,6 +454,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 	GString *str = g_string_new(NULL);
 	GList *tmp = NULL;
 	gint i = 0;
+	RESULTS *list_item;
 	
 	if(!in_url)
 		return 1;
@@ -503,7 +504,10 @@ static gint show_note(const gchar * module, const gchar * passage,
 		list_of_verses = g_list_first(list_of_verses);
 		if(list_of_verses) {
 			while(list_of_verses) {
-				g_free(list_of_verses->data);
+				list_item = (RESULTS*)list_of_verses->data;
+				g_free(list_item->module);
+				g_free(list_item->key);
+				g_free(list_item);
 				list_of_verses = g_list_next(list_of_verses);
 			}
 			g_list_free(list_of_verses);
