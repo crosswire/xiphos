@@ -407,7 +407,7 @@ void gui_popup_menu_parallel(void)
 
 void gui_create_parallel_popup(void)
 {
-#ifndef USE_GTKHTML38
+#ifndef USE_GTKMOZEMBED
 	/* create popup menu for parallel window */
 	GtkWidget *menu_inter =
 	    create_parallel_popup();
