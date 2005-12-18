@@ -48,6 +48,7 @@ typedef enum
 //void gui_set_parallel_module_global_options(gchar * option, gboolean choice);
 void gui_create_parallel_page(void);
 void gui_create_parallel_popup(void);
+void gui_popup_menu_parallel(void);
 	
 #ifdef __cplusplus
 }

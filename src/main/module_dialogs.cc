@@ -28,6 +28,9 @@
 #include <swmodule.h>	
 #include <url.h>
 
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#endif
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -70,6 +73,8 @@ extern "C" {
 #include "main/global_ops.hh"
 
 #include "backend/sword_main.hh"
+	
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 
 typedef struct _treeitem TreeItem;
@@ -123,6 +128,194 @@ extern gboolean do_display;
 
 /******************************************************************************
  * Name
+ *   main_dialogs_clear_viewer
+ *
+ * Synopsis
+ *   #include "main/module_dialogs.h"
+ *
+ *   void main_dialogs_clear_viewer(DIALOG_DATA *d)
+ *
+ * Description
+ *   clear the information viewer
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_clear_viewer(DIALOG_DATA *d)
+{
+	GString *tmp_str = g_string_new(NULL);
+	GString *str;
+	GString *search_str;
+	gboolean was_editable = FALSE;
+	gchar *buf;
+
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(d->previewer);
+#else	
+	/* setup gtkhtml widget */
+	GtkHTML *html = GTK_HTML(d->previewer);
+	was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif	
+	g_string_printf(tmp_str,
+		HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color,
+		settings.link_color);
+
+	str = g_string_new(tmp_str->str);
+	buf = N_("Previewer");
+	g_string_printf(tmp_str,
+	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
+	str = g_string_append(str, tmp_str->str);
+		
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
+	str = g_string_append(str, tmp_str->str);
+
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	gtk_html_set_editable(html, was_editable);
+#endif	
+	//free_font(mf);
+	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_dialogs_information_viewer
+ *
+ * Synopsis
+ *   #include "main/previewer.h"
+ *
+ *   void main_dialogs_information_viewer(GtkWidget * html_widget, gchar * mod_name, 
+ *		    gchar * text, gchar *key, gchar * type)
+ *
+ * Description
+ *   display information in the information previewer
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name, 
+				     gchar * text, gchar * key,
+		             	     gchar * action ,gchar * type ,
+			     	     gchar * morph_text, gchar * morph)
+{
+	GString *tmp_str = g_string_new(NULL);
+	GString *str;
+	GString *search_str;
+	MOD_FONT *mf = get_font(mod_name);
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+#else	
+	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
+#endif
+
+	g_string_printf(tmp_str,
+		HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color,
+		settings.link_color);
+
+	str = g_string_new(tmp_str->str);
+	if(type) {
+		if(!strcmp(type,"n")) {
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s<HR></font><br>",
+					_("Footnote"));
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(type,"x")) {
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s<HR></font><br>",
+					_("Cross Reference"));
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Strongs"),key);
+			str = g_string_append(str, tmp_str->str);
+		}
+		if(!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
+			g_string_printf(tmp_str,
+				"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Morphology"),key);
+			str = g_string_append(str, tmp_str->str);
+		}
+	}
+	
+	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
+		g_string_printf(tmp_str,
+			"<font color=\"grey\">%s: %s<HR></font><br>",
+				_("Strongs"),key);
+		str = g_string_append(str, tmp_str->str);
+		g_string_printf(tmp_str, 
+				"<font face=\"%s\" size=\"%s\">",
+				(mf->old_font)?mf->old_font:"none", 
+				(mf->old_font_size)?mf->old_font_size:"+0");
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, text);
+		
+		g_string_printf(tmp_str,
+			"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+					_("Morphology"),morph);
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, morph_text);
+		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
+		
+		
+	} else {
+		g_string_printf(tmp_str, 
+				"<font face=\"%s\" size=\"%s\">",
+				(mf->old_font)?mf->old_font:"none", 
+				(mf->old_font_size)?mf->old_font_size:"+0");
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, text);
+	
+		g_string_printf(tmp_str, " %s", "</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
+	
+	}
+	
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	//gtk_html_set_editable(html, was_editable);
+#endif	
+/*	if (str->len) {
+		gtk_html_load_from_string(html,str->str,str->len);
+	}
+*/	
+	free_font(mf);
+	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
+}
+
+
+
+
+
+
+/******************************************************************************
+ * Name
  *   main_dialog_information_viewer
  *
  * Synopsis
@@ -146,15 +339,21 @@ void main_dialog_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *str;
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
-	GtkHTML *html;
-	
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser;
+#else	
+	GtkHTML *html;	
+#endif	
 	if(!d->previewer)
 		return;
-	
+#ifdef USE_GTKMOZEMBED
+	new_browser = GTK_MOZ_EMBED(d->previewer);
+#else	
 	html = GTK_HTML(d->previewer);
-	
+#endif	
+		
 	g_string_printf(tmp_str,
-		//HTML_START
+		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
@@ -215,9 +414,16 @@ void main_dialog_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	
 	}
 	
-	if (str->len) {
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
-	}
+#endif	
+	
 	
 	free_font(mf);
 	g_string_free(str, TRUE);
@@ -1203,6 +1409,64 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	
 }
 
+static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar * value, 
+			 const gchar * morph, gboolean clicked)
+{	
+	gchar *modbuf_viewer = NULL;
+	gchar *modbuf = NULL;
+	gchar *morph_mod = NULL;
+	gchar *strongs_buf = NULL;
+	gchar *morph_buf = NULL;
+	guint delay;	
+	guint i;
+	static GtkWidget *dlg;	
+	
+	if(!strcmp(d->mod_name,"NASB")) {
+		if(!strcmp(type,"Greek")) 
+			modbuf = "NasbGreek";
+		else 
+			modbuf = "NasbHebrew";
+	} else {
+		if(!strcmp(type,"Greek")) {
+			modbuf = settings.lex_greek;
+			if(backend->is_module("Robinson")) 
+				morph_mod = "Robinson";
+		} else
+			modbuf = settings.lex_hebrew;
+	}
+	
+	if (clicked) {
+		if (!gsI_isrunning) 
+			dlg = gui_create_display_informtion_dialog();
+		else
+			gtk_widget_show(dlg);
+		
+		gui_display_mod_and_key(modbuf, (gchar*)value);
+		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+		     modbuf);		
+	} else {
+		strongs_buf =
+		    main_get_rendered_text(modbuf, (gchar*)value);
+		morph_buf = 
+		    main_get_rendered_text(morph_mod, (gchar*)morph);
+		if (strongs_buf) {
+			main_dialog_information_viewer(  
+					modbuf, 
+					strongs_buf, 
+					(gchar*)value, 
+					"showStrongs",
+					(gchar*)type,
+					(gchar*)morph_buf,
+					(gchar*)morph,
+					d);
+			g_free(strongs_buf);
+			if(morph_buf) g_free(morph_buf);
+		}
+	}
+	return 1;
+}
+ 
+
 
 static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {
@@ -1212,23 +1476,33 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	gchar* value = NULL;
 	gchar* module = NULL;
 	gchar* passage = NULL;
+	gchar* strongs = NULL;
+	gchar* morph = NULL;
 	gchar *buf = NULL;
 	URL* m_url;
 	
 #ifdef DEBUG	
-	//g_warning("url = %s",url);
+	g_message("new_url_handler url = %s",url);
 #endif
 	m_url = new URL((const char*)url);	
 	action = g_strdup(m_url->getParameterValue("action"));
 	type = g_strdup((gchar*)m_url->getParameterValue("type"));
 	value = g_strdup((gchar*)m_url->getParameterValue("value"));
+	morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
+	strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 	
 #ifdef DEBUG
-	g_warning("action = %s",action);
-	g_warning("type = %s",type);  
-	g_warning("value = %s",value);
+	g_message("action = %s",action);
+	g_message("type = %s",type);  
+	g_message("value = %s",value);
 #endif	
 
+	
+	if(strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
+		show_strongs_morph(t, type,strongs,morph,clicked);
+	} else if(strlen(strongs) >= 1 && strlen(morph) < 1) {
+		show_strongs(t, type,strongs,clicked);			
+	}
  
 	if(!strcmp(action,"showStrongs")) {
 		show_strongs(t, type, value, clicked);
@@ -1277,7 +1551,7 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
-	g_message(url);
+	g_message("main_dialogs_url_handler url = %s",url);
 	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url"))
 		return new_url_handler(t,url,clicked);
 	if(strstr(url,"sword://"))
@@ -1356,12 +1630,16 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		case TEXT_TYPE:
 			t->mod_type = TEXT_TYPE;
 			gui_create_bibletext_dialog(t);
+#ifdef USE_GTKMOZEMBED
+			be->chapDisplay = new DialogChapDisp(t->html, be);
+#else
 			if(t->is_rtol)
 				be->dialogRTOLDisplay 
-				      = new DialogTextviewChapDisp(t->text, be);
+				   = new DialogTextviewChapDisp(t->text, be);
 			else	
 				be->chapDisplay 
 				      = new DialogChapDisp(t->html, be); 
+#endif
 			be->init_SWORD(1);
 			if(key)
 				t->key = g_strdup(key);
@@ -1437,7 +1715,8 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	gtk_widget_show(t->dialog);
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
 	be->set_module(t->mod_name);
-	
+	if(type == TEXT_TYPE) 
+		main_dialogs_clear_viewer(t);
 	if(type == BOOK_TYPE) {
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
 			     TRUE, t);

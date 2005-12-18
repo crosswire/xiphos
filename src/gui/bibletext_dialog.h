@@ -31,9 +31,8 @@ extern "C" {
 
 
 void gui_create_bibletext_dialog(DIALOG_DATA * vt);
-void gui_on_lookup_bibletext_dialog_selection
-	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-
+void gui_text_dialog_create_menu(DIALOG_DATA * d);
+	
 #ifdef __cplusplus
 }
 #endif
