@@ -929,10 +929,17 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	const gchar *keytext = NULL;
 	int curPos = 0;
 	int type = be->module_type(imodule.Name());
-	GtkHTML *html = GTK_HTML(gtkText);
+	//GtkHTML *html = GTK_HTML(gtkText);
 	MOD_FONT *mf = get_font(imodule.Name());
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());	
+#ifdef USE_GTKMOZEMBED	
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif	
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	
@@ -972,13 +979,17 @@ char DialogEntryDisp::Display(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				(const char *)imodule);	
-	
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
+
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
 	gtk_html_set_editable(html, was_editable);
+#endif
 	g_string_free(str, TRUE);
 	free_font(mf);	
 	g_free(ops);
@@ -994,7 +1005,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
-	GtkHTML *html = GTK_HTML(gtkText);
 	GString *str = g_string_new(NULL);
 	gchar *buf;
 	gchar *buf2;
@@ -1003,8 +1013,12 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;
+#ifdef USE_GTKMOZEMBED	
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
 	gboolean was_editable = gtk_html_get_editable(html);
-	
+#endif	
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
@@ -1088,6 +1102,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf("%s", "</body></html>");
 	str = g_string_append(str, buf);
 	g_free(buf);
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+	if(curVerse > 1) {
+		buf = g_strdup_printf("%d", curVerse);
+		embed_go_to_anchor(new_browser, buf);
+		g_free(buf);
+	}
+#else
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
@@ -1097,7 +1122,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}	
-
+#endif
 	g_string_free(str, TRUE);
 	key->Verse(1);
 	key->Chapter(1);

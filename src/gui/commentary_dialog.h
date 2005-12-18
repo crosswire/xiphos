@@ -30,14 +30,13 @@ extern "C" {
 #include "main/module_dialogs.h"
 	
 	
-void gui_keep_comm_dialog_in_sync(gchar * key);	
-void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
-void gui_on_lookup_commentary_dialog_selection
-	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-void gui_close_comm_dialog(DIALOG_DATA * vc);
-void gui_display_commentary_in_dialog(gchar * key);
-void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit);
-
+//void gui_keep_comm_dialog_in_sync(gchar * key);	
+//void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
+//void gui_close_comm_dialog(DIALOG_DATA * vc);
+//void gui_display_commentary_in_dialog(gchar * key);
+void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit);
+void gui_commentary_dialog_create_menu(DIALOG_DATA * d);
+	
 #ifdef __cplusplus
 }
 #endif

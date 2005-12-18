@@ -89,6 +89,7 @@ extern "C" {
 #include "gui/commentary.h"
 #include "gui/dictlex.h"
 #include "gui/gbs.h"
+#include "gui/parallel_view.h"
 }
 #endif
 
@@ -99,6 +100,96 @@ extern gboolean shift_key_presed;
 
 
 #ifdef USE_GTKMOZEMBED
+/*
+nsresult
+EmbedPrintInfoToPrintSettings(const EmbedPrintInfo *info,
+					   nsIPrintSettings **aPrintSettings)
+{
+	nsresult rv = NS_OK;
+
+	nsCOMPtr<nsIPrintSettingsService> pss =
+		do_GetService("@mozilla.org/gfx/printsettings-service;1", &rv);
+	NS_ENSURE_SUCCESS(rv, rv);
+
+	nsCOMPtr<nsIPrintSettings> options;
+	rv = pss->GetNewPrintSettings(getter_AddRefs(options));
+	NS_ENSURE_SUCCESS(rv, rv);
+
+	GulString printerName (info->name);
+	rv = pss->InitPrintSettingsFromPrinter (printerName.get(), options);
+	NS_ENSURE_SUCCESS(rv, rv);
+
+	// Name field isn't inited. How dumb can we get?
+	rv = options->SetPrinterName (printerName.get());
+	NS_ENSURE_SUCCESS(rv, rv);
+
+	const static int frame_types[] = {
+		nsIPrintSettings::kFramesAsIs,
+		nsIPrintSettings::kSelectedFrame,
+		nsIPrintSettings::kEachFrameSep
+	};
+
+	switch (info->pages)
+	{
+	case 0:
+		break;
+	case 1:
+		options->SetPrintRange (nsIPrintSettings::kRangeSpecifiedPageRange);
+		options->SetStartPageRange (info->from_page);
+		options->SetEndPageRange (info->to_page);
+		break;
+	case 2:
+		options->SetPrintRange (nsIPrintSettings::kRangeSelection);
+		break;
+	}
+
+	options->SetMarginTop (info->top_margin);
+	options->SetMarginBottom (info->bottom_margin);
+	options->SetMarginLeft (info->left_margin);
+	options->SetMarginRight (info->right_margin);
+
+        options->SetHeaderStrLeft(GulString(info->header_left_string).get());
+
+        options->SetHeaderStrCenter(GulString(info->header_center_string).get());
+
+        options->SetHeaderStrRight(GulString(info->header_right_string).get());
+
+        options->SetFooterStrLeft(GulString(info->footer_left_string).get());
+
+        options->SetFooterStrCenter(GulString(info->footer_center_string).get());
+
+        options->SetFooterStrRight(GulString(info->footer_right_string).get());
+
+        options->SetToFileName (GulString(info->file).get());
+
+	options->SetPrintCommand (GulString(info->command).get());
+
+	
+	if (info->preview)
+	{
+		options->SetPrintToFile (PR_FALSE);
+	}
+	else
+	{
+		options->SetPrintToFile (info->print_to_file);
+	}
+
+	// native paper size formats. Our dialog does not support custom yet //
+	options->SetPaperSize (nsIPrintSettings::kPaperSizeNativeData);
+
+	gchar *paperName = (gchar *)g_ptr_array_index(info->paper_array, info->paper);
+	options->SetPaperName (GulString (paperName).get());
+
+	options->SetPrintInColor (info->print_color);
+	options->SetOrientation (info->orientation);
+	options->SetPrintFrameType (frame_types[info->frame_type]);
+
+	NS_ADDREF(*aPrintSettings = options);
+
+	return NS_OK;
+}
+*/
+
 
 static
 nsresult embed_get_print_settings (nsIWebBrowser *mWebBrowser, nsIPrintSettings **options)
@@ -117,23 +208,18 @@ nsresult embed_print_real(nsIPrintSettings *options, PRBool preview,
 	nsresult rv;
 
 	g_return_val_if_fail (wb, NS_ERROR_FAILURE);
-
-	g_message("not a NS_ERROR_FAILURE 1");
 	
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(wb, &rv));
 	if (NS_FAILED(rv) || !print) return NS_ERROR_FAILURE;
 
-	g_message("not a NS_ERROR_FAILURE 2");
-	if (!preview)
-	{
+	g_message("not a NS_ERROR_FAILURE");
+	
+	if(preview) {
+		rv = print->PrintPreview(options, nsnull, nsnull);
+	} else {
 		//GPrintListener *listener = new GPrintListener(print, options, parent);
 		//rv = print->Print (options, listener);
 	}
-	else
-	{
-		rv = print->PrintPreview(options, nsnull, nsnull);//options, nsnull, nsnull);
-	}
-
 	return rv;
 }
 
@@ -205,10 +291,14 @@ gint embed_dom_mouse_over(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 {
 	nsresult result;
 	nsIDOMEventTarget *aCurrentTarget;
-	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) dom_event;
+	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) dom_event;	
+	gint pane = GPOINTER_TO_INT(data);
 	
 	if(shift_key_presed)
 		return FALSE;
+	if(pane == VIEWER_TYPE)
+		return FALSE;
+	
 	main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
@@ -304,6 +394,16 @@ gint embed_dom_mouse_down_cb(GtkMozEmbed *embed, gpointer dom_event, gpointer da
 				break;
 			case 2:
 				gui_create_pm_dictionary();
+				break;
+		}
+	} else if(pane == PARALLEL_TYPE) {
+		switch(button) {
+			case 0:
+				break;
+			case 1:
+				break;
+			case 2:
+				gui_popup_menu_parallel();
 				break;
 		}
 	}

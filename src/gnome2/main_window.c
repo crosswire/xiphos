@@ -26,6 +26,10 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#endif
+#include "main/embed.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -470,6 +474,7 @@ void create_mainwindow(void)
 	GtkWidget *label;
 	GtkWidget *scrolledwindow;
 	GtkWidget *box_book;
+	GtkWidget *frame;
 	/*
 	GTK_SHADOW_NONE
   	GTK_SHADOW_IN
@@ -630,6 +635,16 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), vbox, FALSE, TRUE);
 	
+#ifdef USE_GTKMOZEMBED 
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_box_pack_start(GTK_BOX(vbox), frame, 
+				TRUE, TRUE,
+			   	0);
+	sidebar.html_viewer_widget = embed_new(VIEWER_TYPE);
+	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
+#else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
@@ -641,16 +656,16 @@ void create_mainwindow(void)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow,
 					    settings.shadow_type);
-
 	sidebar.html_viewer_widget = gtk_html_new();
-	gtk_widget_show(sidebar.html_viewer_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
-
 	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
 			 NULL);
+#endif
 
+	gtk_widget_show(sidebar.html_viewer_widget);
+			  
 	/*
 	 * commentary/book notebook
 	 */
