@@ -24,6 +24,14 @@
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#include "main/embed.h"
+#include "main/embed-dialogs.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif  /* USE_GTKMOZEMBED */
 
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
@@ -55,6 +63,7 @@ static gboolean ApplyChangeBook;
 static GtkWidget *sync_button;
 static NAVBAR navbar;
 
+static GtkWidget *create_parallel_dialog(void);
 
 /******************************************************************************
  * Name
@@ -78,15 +87,18 @@ static NAVBAR navbar;
 void gui_undock_parallel_page(void)
 {
 	ApplyChangeBook = FALSE;
-	parallel_UnDock_Dialog = gui_create_parallel_dialog();
-	gtk_widget_reparent(widgets.frame_parallel, vboxInt);
-	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
-				 1);
-	//settings.cvparallel =
-	//    main_parallel_update_controls(settings.currentverse);
+	parallel_UnDock_Dialog = create_parallel_dialog();
+	
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+                                             FALSE);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
+					0);
+	
+	
 	gtk_widget_show(parallel_UnDock_Dialog);
-	main_update_parallel_page_detached();
-	g_free(settings.cvparallel);
+	//main_update_parallel_page_detached();
+	//g_free(settings.cvparallel);
+	settings.dockedInt = FALSE;
 	ApplyChangeBook = TRUE;
 }
 
@@ -136,19 +148,10 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
 static void on_dlgparallel_destroy(GtkObject * object,
 				      gpointer user_data)
 {
-	GtkWidget *tab_label, *menu_label, *vbox;
-	tab_label = gtk_label_new(_("Parallel View"));
-	gtk_widget_show(tab_label);
-	menu_label = gtk_label_new(_("Parallel View"));
-	gtk_widget_show(menu_label);
-
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_notebook_insert_page_menu(GTK_NOTEBOOK
-				      (widgets.notebook_bible_parallel), vbox,
-				      tab_label, menu_label, 
-					1);
-	gtk_widget_reparent(widgets.frame_parallel, vbox);
+	
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+                                             TRUE);
+	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel), 
 					1);
 	settings.dockedInt = TRUE;
@@ -571,8 +574,8 @@ static GtkWidget *create_nav_toolbar(void)
  * Return value
  *   GtkWidget *
  */
-
-GtkWidget *gui_create_parallel_dialog(void)
+static
+GtkWidget *create_parallel_dialog(void)
 {
 	GtkWidget *dialog_parallel;
 	GtkWidget *dialog_vbox25;
@@ -586,6 +589,9 @@ GtkWidget *gui_create_parallel_dialog(void)
 	GtkWidget *dialog_action_area25;
 	GtkWidget *hbuttonbox4;
 	GtkWidget *btnDockInt;
+	GtkWidget *eventbox;
+	GtkWidget *frame;
+	GtkWidget *scrolled_window;
 	gchar title[256];
 	
 	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
@@ -618,6 +624,36 @@ GtkWidget *gui_create_parallel_dialog(void)
 	navbar.module_name = g_strdup(settings.parallel1Module);	   
 	main_navbar_fill_book_combo(navbar);
 	
+#ifdef USE_GTKMOZEMBED
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);	
+	gtk_box_pack_start(GTK_BOX(vboxInt), frame, TRUE, TRUE,0);
+	
+	eventbox = gtk_event_box_new ();
+	gtk_widget_show (eventbox);
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
+	
+	widgets.html_parallel_dialog = embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	gtk_widget_show(widgets.html_parallel_dialog);					   
+	gtk_container_add(GTK_CONTAINER(eventbox),
+			  widgets.html_parallel_dialog);
+#else
+	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolled_window);	
+	gtk_box_pack_start(GTK_BOX(vboxInt), scrolled_window, TRUE, TRUE,0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
+                                             settings.shadow_type);
+		
+	widgets.html_parallel_dialog = gtk_html_new();
+	gtk_widget_show(widgets.html_parallel_dialog);
+	gtk_html_load_empty(GTK_HTML(widgets.html_parallel_dialog));
+	gtk_container_add(GTK_CONTAINER(scrolled_window),
+			  widgets.html_parallel_dialog);
+#endif
 	dialog_action_area25 =
 	    GTK_DIALOG(dialog_parallel)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog_parallel),

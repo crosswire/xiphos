@@ -87,14 +87,16 @@ void main_clear_viewer(void)
 	GString *search_str;
 	gboolean was_editable = FALSE;
 	gchar *buf;
-	
-	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+#else	
 	/* setup gtkhtml widget */
+	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-
+#endif	
 	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -110,11 +112,16 @@ void main_clear_viewer(void)
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	if (str->len) {
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
-	}
 	gtk_html_set_editable(html, was_editable);
-	
+#endif	
 	//free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -146,8 +153,11 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *str;
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+#else	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
-
+#endif
 
 	g_string_printf(tmp_str,
 		HTML_START
@@ -217,10 +227,20 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	
 	}
 	
-	if (str->len) {
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	//gtk_html_set_editable(html, was_editable);
+#endif	
+/*	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
-	
+*/	
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -362,13 +382,16 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GString *search_str;
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
+#ifdef USE_GTKMOZEMBED
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+#else	
 	GtkHTML *html = GTK_HTML(html_widget);
 
 	/* setup gtkhtml widget */
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-
+#endif
 	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -416,11 +439,21 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
-	if (str->len) {
+#ifdef USE_GTKMOZEMBED
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, str->str, str->len,
+					"file:///sword", 
+					"text/html");
+#else	
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	gtk_html_set_editable(html, was_editable);
+#endif	
+/*	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
 	gtk_html_set_editable(html, was_editable);
-
+*/
 	/* andyp - inserted for debugging, remove */
 	//g_print(str->str); 
 	
