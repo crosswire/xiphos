@@ -80,6 +80,11 @@ struct _dialog_data {
 	GLOBAL_OPS *ops;
 };
 
+void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name, 
+				     gchar * text, gchar * key,
+		             	     gchar * action ,gchar * type ,
+			     	     gchar * morph_text, gchar * morph);
+void main_dialogs_clear_viewer(DIALOG_DATA *d);
 void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d);
 void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name, 

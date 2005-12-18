@@ -110,8 +110,8 @@ void frontend_init(void)
 	 */
 	if (settings.havebible) {
 		main_check_parallel_modules();
-		//main_set_parallel_options_at_start();
 		main_init_paraellel_view();
+		//main_set_parallel_options_at_start();
 		//gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
 

@@ -259,7 +259,8 @@ module.source.files=\
 	src/main/tab_history.c\
 	src/main/previewer.cc\
 	src/gnome2/bookmark_dialog.c\
-	src/editor/html-editor.c
+	src/editor/html-editor.c\
+	src/main/embed-dialogs.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
