@@ -24,14 +24,19 @@
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#else
 #include <gtkhtml/gtkhtml.h>
+#endif
 
-//#include "gui/gtkhtml_display.h"
+
 #include "gui/dictlex_dialog.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
 
+#include "main/embed-dialogs.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/settings.h"
@@ -383,6 +388,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
+	GtkWidget *scrolledwindow;
 	GtkWidget *label;
 	GtkListStore *model;
 
@@ -452,14 +458,26 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	
+	gtk_box_pack_start(GTK_BOX(vbox56), scrolledwindow, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow,
+					    settings.shadow_type);
+
 	/* create tree view */
 	dlg->listview =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(dlg->listview);
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dlg->listview),
 				     TRUE);
-	gtk_box_pack_start(GTK_BOX(vbox56), dlg->listview, TRUE, TRUE,
-			   0);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow), dlg->listview);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dlg->listview),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(dlg->listview));
@@ -471,6 +489,12 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_widget_show(frameDictHTML);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
+#ifdef USE_GTKMOZEMBED
+	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);	
+	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
+	gtk_container_add(GTK_CONTAINER(frameDictHTML), dlg->html);
+	gtk_widget_show(dlg->html);
+#else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -489,11 +513,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
-
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "set_focus",
-			 G_CALLBACK(dialog_set_focus), dlg);
-	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
-			 G_CALLBACK(dialog_destroy), dlg);
+	
 	g_signal_connect(GTK_OBJECT(dlg->html),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
@@ -502,6 +522,11 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	g_signal_connect(GTK_OBJECT(dlg->html),
 			 "button_press_event",
 			 G_CALLBACK(button_press_event), dlg);
+#endif
+	g_signal_connect(GTK_OBJECT(dlg->dialog), "set_focus",
+			 G_CALLBACK(dialog_set_focus), dlg);
+	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+			 G_CALLBACK(dialog_destroy), dlg);
 	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
 	g_signal_connect(GTK_OBJECT(dlg->entry), "changed",

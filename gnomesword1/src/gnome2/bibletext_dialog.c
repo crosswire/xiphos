@@ -24,23 +24,24 @@
 #endif
 
 #include <gnome.h>
+
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#else
 #include <gtkhtml/gtkhtml.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
+#include "gui/html.h"
 #endif
-*/
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
+#include "main/embed-dialogs.h"
 #include "main/navbar.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -84,7 +85,7 @@ extern gboolean do_display;
  * Return value
  *   void
  */
-
+/*
 void gui_on_lookup_bibletext_dialog_selection
 		(GtkMenuItem * menuitem, gchar * dict_mod_description)
 {
@@ -102,7 +103,7 @@ void gui_on_lookup_bibletext_dialog_selection
 		g_free(mod_name);
 	}
 }
-
+*/
 /******************************************************************************
  * Name
  *   gui_close_text_dialog
@@ -169,6 +170,8 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 }
 
 
+
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *   link_clicked
@@ -192,7 +195,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	cur_vt = vt;	
 	main_dialogs_url_handler(vt, url, TRUE);
 }
-
+#endif
 
 /******************************************************************************
  * Name
@@ -370,6 +373,8 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 	return FALSE;
 }
 
+
+#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *   dialog_url
@@ -574,7 +579,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	if(url_buf) 
 		g_free(url_buf);
 }
-
+#endif
 
 
 /******************************************************************************
@@ -924,6 +929,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 }
 
 
+#ifndef USE_GTKMOZEMBED
 
 /******************************************************************************
  * Name
@@ -1207,7 +1213,7 @@ static void create_text_tags(GtkTextBuffer *buffer)
 		"scale", PANGO_SCALE_XX_LARGE,
                 NULL);			
 }
-	
+#endif	
 
 /******************************************************************************
  * Name
@@ -1257,14 +1263,29 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	paned = gtk_vpaned_new();	
 	gtk_box_pack_start(GTK_BOX(vbox33), paned, TRUE, TRUE, 0);
 	gtk_widget_show(paned);
-
 	   
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
-	gtk_paned_add1((GtkPaned *)paned,frame);	
-	//gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
+	gtk_paned_add1((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 400);
 
+#ifdef USE_GTKMOZEMBED		
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	vt->html = embed_dialogs_new((DIALOG_DATA*) vt);
+	gtk_widget_show(vt->html);
+	gtk_container_add(GTK_CONTAINER(frame), vt->html);
+	   
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_paned_add2((GtkPaned *)paned,frame);
+	gtk_widget_set_size_request(frame, -1, 100);	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	
+	vt->previewer = embed_dialogs_new((DIALOG_DATA*) vt);
+	gtk_widget_show(vt->previewer);
+	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
+	
+#else
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
 	gtk_container_add(GTK_CONTAINER(frame), swVText);
@@ -1320,14 +1341,12 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 				   (textview_button_release_event),
 				   (DIALOG_DATA *) vt);
 	}
-	
 
 	   
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);	
-	//gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
-	//gtk_widget_set_size_request(frame, -1, 400);
+	gtk_paned_add2((GtkPaned *)paned,frame);
+	
 
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
@@ -1339,14 +1358,15 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
                                              settings.shadow_type);
 	
 	vt->previewer = gtk_html_new();
-		gtk_widget_show(vt->previewer);
-		gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
-		gtk_html_load_empty(GTK_HTML(vt->previewer));
+	gtk_widget_show(vt->previewer);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
+	gtk_html_load_empty(GTK_HTML(vt->previewer));
 	
 				   
 	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
-	
+
+#endif		
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
@@ -1425,6 +1445,12 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   		gpointer user_data)
 {
+#ifdef USE_GTKMOZEMBED	
+	embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);
+#else
 	gchar *dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key) {
 		main_display_dictionary(settings.
@@ -1432,6 +1458,7 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						  dict_key);
 		g_free(dict_key);
 	}
+#endif
 }
 
 
@@ -1504,7 +1531,18 @@ static void lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description(dict_mod_description);
+#ifdef USE_GTKMOZEMBED	
+	embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);
+	dict_key = 
+		g_strdup(gtk_editable_get_chars(
+			(GtkEditable *)widgets.entry_dict,0,-1));
+
+#else
 	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
+#endif
 	if (dict_key && mod_name) {
 		main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
@@ -2130,7 +2168,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = t->mod_name;
-	//GLOBAL_OPS *ops = main_new_globals(mod_name);
+	
 	cur_vt = t;
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
@@ -2327,37 +2365,19 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	}
 	if(t->is_locked)
 		gtk_widget_show(menu1_uiinfo[6].widget);
-
-
-	/*
-	 * menu1_uiinfo[0].widget, "about");
-	 * menu1_uiinfo[1].widget, "separator4");
-	 * menu1_uiinfo[2].widget, "file3");
-	 * file3_menu_uiinfo[0].widget, "view_text");
-	 * view_text_menu_uiinfo[0].widget, "item1");
-	 * file3_menu_uiinfo[1].widget, "separator8");
-	 * file3_menu_uiinfo[2].widget, "print1");
-	 * menu1_uiinfo[3].widget, "edit3");
-	 * edit3_menu_uiinfo[0].widget, "copy2");
-	 * edit3_menu_uiinfo[1].widget, "find1");
-	 * edit3_menu_uiinfo[2].widget, "note");
-	 * note_menu_uiinfo[0].widget, "item2");
-	 * menu1_uiinfo[4].widget, "module_options");
-	 * module_options_menu_uiinfo[0].widget, "set_module_font");
-	 * module_options_menu_uiinfo[1].widget, "separator5");
-	 * menu1_uiinfo[5].widget, "lookup_selection");
-	 * lookup_selection_menu_uiinfo[0].widget, "use_current_dictionary");
-	 * lookup_selection_menu_uiinfo[1].widget, "separator6");
-	 * menu1_uiinfo[7].widget, "separator7");
-	 * menu1_uiinfo[8].widget, "show_tabs");
-	 */
-	gnome_popup_menu_do_popup_modal(menu1, NULL,
+	 
+	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
 					t->text);
-	gtk_widget_destroy(menu1);
-	//g_free(ops);
+	gtk_widget_destroy(menu1);*/
 }
 
+void gui_text_dialog_create_menu(DIALOG_DATA * d)
+{
+	create_menu(d ,NULL);
+}
 
 
 

@@ -69,6 +69,7 @@ struct  _app_widgets {
 	/* html widgets */	
 		*html_search_report,  /* html widget for serch report shortcut bar */
 		*html_parallel, /* parallel html widget */
+		*html_parallel_dialog, /* undocked parallel html widget */
 		*html_text, /* texts html widget */
 		*html_comm, /* html commentary widget */
 		*html_percomm, /* html personal commentary widget */

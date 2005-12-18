@@ -24,13 +24,18 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#else
+#include <gtkhtml/gtkhtml.h>
+#endif
 //#include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
 
+#include "main/embed-dialogs.h"
 #include "main/module_dialogs.h"
 #include "main/sidebar.h"
 #include "main/sword.h"
@@ -309,6 +314,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	GtkWidget *label242;
 	GtkWidget *label243;
 	GtkWidget *scrolledwindow_html;
+	GtkWidget *frame;
 	GObject *selection;
 
 
@@ -359,6 +365,18 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->tree)));
 
+#ifdef USE_GTKMOZEMBED  
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
+	
+	
+	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
+	gtk_container_add(GTK_CONTAINER(frame), dlg->html);
+	gtk_widget_show(dlg->html);
+	
+#else
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, FALSE, TRUE);
@@ -387,7 +405,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 			   "button_press_event",
 			   G_CALLBACK(button_press),
 			   (DIALOG_DATA *) dlg);
-
+#endif
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed),
 			   (DIALOG_DATA *) dlg);

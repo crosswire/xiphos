@@ -39,6 +39,14 @@ extern "C" {
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
 #define PERCOM_TYPE 4
+	
+#define PARALLEL_TYPE 5
+#define VIEWER_TYPE 6
+	
+#define DIALOG_TEXT_TYPE 7
+#define DIALOG_COMMENTARY_TYPE 8 
+#define DIALOG_DICTIONARY_TYPE 9
+#define DIALOG_BOOK_TYPE 10
        
 /* these strings are not seen by users */
 #define TEXT_MODS "Biblical Texts"

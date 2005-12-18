@@ -25,22 +25,23 @@
 
 #include <gnome.h>
 
+#ifdef USE_GTKMOZEMBED
+#include <gtkmozembed.h>
+#include "main/embed.h"
+#include "main/embed-dialogs.h"
+#else
 #ifdef __cplusplus
 extern "C" {
-#endif
 #include <gtkhtml/gtkhtml.h>
-#ifdef __cplusplus
 }
-#endif
+#endif  /* __cplusplus */
+#include "gui/html.h"
+#endif  /* USE_GTKMOZEMBED */
 
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
+
+
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
-#include "gui/html.h"
 #include "gui/widgets.h"
 
 #include "main/parallel_view.h"
@@ -54,6 +55,8 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE></head>"
+
 extern GtkWidget *entrycbIntBook;
 extern GtkWidget *sbIntChapter;
 extern GtkWidget *sbIntVerse;
@@ -62,8 +65,10 @@ extern GtkWidget *entryIntLookup;
 /******************************************************************************
  * static
  */
+#ifndef USE_GTKMOZEMBED
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
+#endif
 static GtkWidget *module_options_menu;
 static gboolean parallel1;
 static gboolean parallel2;
@@ -495,7 +500,217 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		main_update_parallel_page_detached();
 }
 
+#ifdef USE_GTKMOZEMBED
+/******************************************************************************
+ * Name
+ *   gui_update_parallel_page
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void gui_update_parallel_page(void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
 
+void main_update_parallel_page(void)
+{
+	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
+	gchar *utf8str, *mod_name, *font_name = NULL;
+	gint utf8len, i, j;
+	gboolean was_editable, use_gtkhtml_font;
+	gboolean is_rtol = FALSE;
+	gchar *buf;
+	gchar *file = NULL;
+	gchar *data = NULL;
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(widgets.html_parallel);
+	
+	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+	settings.cvparallel = settings.currentverse;
+	
+	if (settings.havebible) {	
+		sprintf(tmpBuf, HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+			settings.bible_bg_color,
+			settings.bible_text_color, settings.link_color);
+		
+		utf8len = strlen(tmpBuf);
+		if (utf8len) {	
+			data = g_strconcat(tmpBuf,NULL);
+		}
+
+		for (i = 0, j = 0; i < 5; i++) {
+			mod_name = NULL;
+			switch (i) {
+			case 0:
+				if (parallel1)
+					mod_name =
+					    settings.parallel1Module;
+				else
+					mod_name = NULL;
+				break;
+			case 1:
+				if (parallel2)
+					mod_name =
+					    settings.parallel2Module;
+				else
+					mod_name = NULL;
+				break;
+			case 2:
+				if (parallel3)
+					mod_name =
+					    settings.parallel3Module;
+				else
+					mod_name = NULL;
+				break;
+			case 3:
+				if (parallel4)
+					mod_name =
+					    settings.parallel4Module;
+				else
+					mod_name = NULL;
+				break;
+			case 4:
+				if (parallel5)
+					mod_name =
+					    settings.parallel5Module;
+				else
+					mod_name = NULL;
+				break;
+			}
+//                      g_warning("mod_name = %s",mod_name);
+			if (!mod_name)
+				continue;
+
+			++j;
+			is_rtol = main_is_mod_rtol(mod_name);
+			
+			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
+			font_name = get_conf_file_item(file, mod_name, "Font");
+			if (!font_name)
+				font_name = g_strdup("none");
+			if (strlen(font_name) < 2) {
+				use_gtkhtml_font = TRUE;
+			} else {
+				if (!strncmp(font_name, "none", 4)) {
+					use_gtkhtml_font = TRUE;
+				} else {
+					use_gtkhtml_font = FALSE;
+				}
+			}
+						
+			font_size = get_conf_file_item(file, mod_name, "Fontsize");
+			g_free(file);		
+			if(!font_size)
+				font_size = g_strdup("+0");
+			if (strlen(font_size) < 2){
+				free(font_size);
+				font_size = g_strdup("+0");
+			}
+
+			if (j == 0 || j == 2 || j == 4)
+				rowcolor = "#F1F1F1";
+			else
+				rowcolor = settings.bible_bg_color;
+
+			if (j == 0) {
+				sprintf(tmpBuf,
+					"<tr><td><i><font color=\"%s\" size=\"%s\">[%s]</font></i></td></tr>",
+					settings.bible_verse_num_color,
+					settings.verse_num_font_size,
+					settings.currentverse);
+
+				utf8len = strlen(tmpBuf);
+				if (utf8len) {
+					data = g_strconcat(data, tmpBuf, NULL);	
+				}
+			}
+
+			sprintf(tmpBuf,
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
+				rowcolor,
+				main_get_module_description(mod_name),
+				mod_name,
+				settings.bible_verse_num_color,
+				settings.verse_num_font_size, mod_name);
+
+			utf8len = strlen(tmpBuf);
+			if (utf8len) {
+					data = g_strconcat(data, tmpBuf, NULL);	
+			}
+
+			if (use_gtkhtml_font)
+				sprintf(tmpBuf, "<font size=\"%s\">",
+					font_size);
+			else
+				sprintf(tmpBuf,
+					"<font face=\"%s\" size=\"%s\">",
+					font_name, font_size);
+
+
+			utf8len = strlen(tmpBuf);
+			if (utf8len) {
+				data = g_strconcat(data, tmpBuf, NULL);	
+			}
+
+			utf8str =
+			    backend_p->get_render_text(mod_name,
+							settings.
+							currentverse);
+			if(is_rtol) {
+				buf = g_strdup_printf(
+					"%s","<br><DIV ALIGN=right>");			
+				if (strlen(buf)) {
+					data = g_strconcat(data, buf, NULL);
+					free(buf);
+				}
+			}	
+			if (strlen(utf8str)) {
+				data = g_strconcat(data, utf8str, NULL);
+				free(utf8str);
+			}
+
+			if(is_rtol) {
+				buf = g_strdup_printf(
+					"%s","</DIV><br>");			
+				if (strlen(buf)) {
+					data = g_strconcat(data, buf, NULL);
+					free(buf);
+				}
+			}	
+			sprintf(tmpBuf,
+				"</font><small>[<a href=\"gnomesword.url?action=showParallel&"
+				"type=swap&value=%s\">view context</a>]</small></td></tr>",
+				mod_name);
+
+			utf8len = strlen(tmpBuf);
+			if (utf8len) {
+				data = g_strconcat(data, tmpBuf, NULL);	
+			}
+		}
+
+		sprintf(tmpBuf, "</table></body></html>");
+
+		utf8len = strlen(tmpBuf);
+		if (utf8len) {
+			data = g_strconcat(data, tmpBuf, NULL);	
+			gtk_moz_embed_append_data(new_browser, data, strlen(data));
+		}	
+	}
+	gtk_moz_embed_close_stream(new_browser);
+	if(data)
+		g_free(data);		
+	if (font_name)
+		free(font_name);
+	if (font_size)
+		free(font_size);
+}
+
+#else
 /******************************************************************************
  * Name
  *   gui_update_parallel_page
@@ -736,6 +951,7 @@ void main_update_parallel_page(void)
 		free(font_size);
 }
 
+#endif
 
 /******************************************************************************
  * Name
@@ -753,7 +969,11 @@ void main_update_parallel_page(void)
  *   void
  */
 
-static void int_display(gchar * key)
+#ifdef USE_GTKMOZEMBED	
+static void int_display(GtkMozEmbed *new_browser, gchar * key)	
+#else
+static void int_display(GtkHTML *html, gchar * key)
+#endif
 {
 	gchar  	* utf8str,
 	   	*bgColor,
@@ -770,8 +990,8 @@ static void int_display(gchar * key)
 	gchar *file = NULL;
 	gint utf8len, cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
-	GtkHTML *html = GTK_HTML(widgets.html_parallel);
-
+	
+	
 	str = g_string_new("");
 	tmpkey = backend_p->get_valid_key(key);
 
@@ -789,8 +1009,11 @@ static void int_display(gchar * key)
 			break;
 		g_string_printf(str, "%s", "<tr valign=\"top\">");
 		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
+#ifdef USE_GTKMOZEMBED	
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);
+#else
+		gtk_html_write(html, htmlstream, str->str,str->len);
+#endif
 		}
 
 		if (i == cur_verse)
@@ -866,17 +1089,27 @@ static void int_display(gchar * key)
 				use_font_size, 
 				textColor);
 			if (str->len) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, str->str,
-					       str->len);
+#ifdef USE_GTKMOZEMBED	
+				gtk_moz_embed_append_data(new_browser, 
+							str->str, str->len);
+#else
+				gtk_html_write(html, htmlstream, 
+							str->str,str->len);
+#endif
 			}
 			if(is_rtol) {
 				buf2 = g_strdup_printf(
 					"%s","<br><DIV ALIGN=right>");			
 				if (strlen(buf2)) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream, buf2,
-						       strlen(buf2));
+#ifdef USE_GTKMOZEMBED	
+					gtk_moz_embed_append_data(new_browser, 
+							buf2, 
+							strlen(buf2));
+#else
+					gtk_html_write(html, htmlstream, 
+							buf2,
+							strlen(buf2));
+#endif
 					free(buf2);
 				}
 			}
@@ -886,10 +1119,15 @@ static void int_display(gchar * key)
 				    main_get_rendered_text
 				    (mod_name, tmpkey);
 				if (strlen(utf8str)) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream,
-						       utf8str,
-						       strlen(utf8str));
+#ifdef USE_GTKMOZEMBED	
+					gtk_moz_embed_append_data(new_browser, 
+							utf8str, 
+							strlen(utf8str));
+#else
+					gtk_html_write(html, htmlstream, 
+							utf8str,
+							strlen(utf8str));
+#endif
 					free(utf8str);
 				}
 			}
@@ -897,17 +1135,27 @@ static void int_display(gchar * key)
 				buf2 = g_strdup_printf(
 					"%s","</DIV>");			
 				if (strlen(buf2)) {
-					gtk_html_write(GTK_HTML(html),
-						       htmlstream, buf2,
-						       strlen(buf2));
+#ifdef USE_GTKMOZEMBED	
+					gtk_moz_embed_append_data(new_browser, 
+							buf2, 
+							strlen(buf2));
+#else
+					gtk_html_write(html, htmlstream, 
+							buf2,
+							strlen(buf2));
+#endif
 					free(buf2);
 				}
 			}
 			g_string_printf(str, "%s", "</font></td>");
 			if (str->len) {
-				gtk_html_write(GTK_HTML(html),
-					       htmlstream, str->str,
-					       str->len);
+#ifdef USE_GTKMOZEMBED	
+				gtk_moz_embed_append_data(new_browser, 
+							str->str, str->len);
+#else
+				gtk_html_write(html, htmlstream, 
+							str->str,str->len);
+#endif
 			}
 			//if (use_font_size)
 			g_free(use_font_size);
@@ -915,8 +1163,13 @@ static void int_display(gchar * key)
 
 		g_string_printf(str, "%s", "</tr>");
 		if (str->len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       str->str, str->len);
+#ifdef USE_GTKMOZEMBED	
+				gtk_moz_embed_append_data(new_browser, 
+							str->str, str->len);
+#else
+				gtk_html_write(html, htmlstream, 
+							str->str,str->len);
+#endif
 		}
 	}
 	g_free(tmpkey);
@@ -944,25 +1197,30 @@ void main_update_parallel_page_detached(void)
 {
 	gchar *utf8str, buf[500];
 	gint utf8len;
-
+#ifdef USE_GTKMOZEMBED	
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(widgets.html_parallel_dialog);	
+	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+#else
 	//-- setup gtkhtml widget
-	GtkHTML *html = GTK_HTML(widgets.html_parallel);
+	GtkHTML *html = GTK_HTML(widgets.html_parallel_dialog);
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-
-
-	sprintf(buf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+#endif
+	sprintf(buf,HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
 //	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
-			       utf8len);
+#ifdef USE_GTKMOZEMBED	
+		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 	}
 
 	if (settings.parallel1Module) {
@@ -972,8 +1230,11 @@ void main_update_parallel_page_detached(void)
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+#ifdef USE_GTKMOZEMBED	
+			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 		}
 	}
 
@@ -984,8 +1245,11 @@ void main_update_parallel_page_detached(void)
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+#ifdef USE_GTKMOZEMBED	
+			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 		}
 	}
 
@@ -996,8 +1260,11 @@ void main_update_parallel_page_detached(void)
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+#ifdef USE_GTKMOZEMBED	
+			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 		}
 	}
 
@@ -1008,8 +1275,11 @@ void main_update_parallel_page_detached(void)
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+#ifdef USE_GTKMOZEMBED	
+			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 		}
 	}
 
@@ -1020,8 +1290,11 @@ void main_update_parallel_page_detached(void)
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream,
-				       buf, utf8len);
+#ifdef USE_GTKMOZEMBED	
+			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 		}
 	}
 
@@ -1029,26 +1302,36 @@ void main_update_parallel_page_detached(void)
 	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
-			       utf8len);
+#ifdef USE_GTKMOZEMBED	
+		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 	}
 
-
-	/******      ******/
-	int_display(settings.cvparallel);
-
+#ifdef USE_GTKMOZEMBED
+	int_display(new_browser, settings.cvparallel);
+#else
+	int_display(html, settings.cvparallel);	
+#endif
 	sprintf(buf, "%s", "</table></body></html>");
-	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, buf,
-			       utf8len);
+#ifdef USE_GTKMOZEMBED	
+		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+#else
+		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+#endif
 	}
-
+	sprintf(buf, "%d", settings.intCurVerse);
+#ifdef USE_GTKMOZEMBED	
+	gtk_moz_embed_close_stream(new_browser);
+	embed_go_to_anchor(new_browser, buf);
+#else
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
-	sprintf(buf, "%d", settings.intCurVerse);
 	gtk_html_jump_to_anchor(html, buf);
+#endif 
 }
 
 /******************************************************************************
@@ -1148,6 +1431,8 @@ void main_init_paraellel_view(void)
 {
 	backend_p = new BackEnd();
 	gui_create_parallel_page();
+	gtk_widget_realize(widgets.html_parallel);
+	
 	gui_create_parallel_popup();
 }
 
