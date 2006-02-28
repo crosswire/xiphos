@@ -29,6 +29,7 @@
 #include <swmodule.h>
 
 #include "gui/parallel_view.h"
+#include "gui/utilities.h"
 
 #include "main/global_ops.hh"
 #include "main/lists.h"
@@ -38,8 +39,8 @@
 
 //#include "backend/sword.h"
 #include "backend/sword_main.hh"
-
-static int of2tf(const gchar * on_off)
+/*
+static int gui_of2tf(const gchar * on_off)
 {
 	if (!strcmp(on_off, "On"))
 		return true;
@@ -47,22 +48,22 @@ static int of2tf(const gchar * on_off)
 		return false;
 }
 
-static gchar *tf2of(int true_false)
+static gchar *gui_tf2of(int true_false)
 {
 	if (true_false)
 		return "On";
 	else
 		return "Off";
 }
+*/
 
-
-static void set_dialog_global_option(DIALOG_DATA * t, char * option, gboolean choice)
+static void set_dialog_global_option(BackEnd* be, char * option, gboolean choice)
 {
-	BackEnd* be = (BackEnd*)t->backend;	
+	//BackEnd* be = (BackEnd*)t->backend;	
 	SWMgr *mgr = be->get_display_mgr();
 	char *on_off;
 
-	on_off = tf2of(choice);
+	on_off = gui_tf2of(choice);
 	
 	mgr->setGlobalOption(option, on_off);
 }
@@ -74,7 +75,7 @@ static void set_global_option(int manager, char * option, gboolean choice)
 	SWMgr *main_mgr = backend->get_main_mgr();
 	char *on_off;
 
-	on_off = tf2of(choice);
+	on_off = gui_tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
 	main_mgr->setGlobalOption(option, on_off);
 }
@@ -135,28 +136,30 @@ int main_save_module_options(char * mod_name, char * option, int choice)
  *   void
  */
 
-void main_dialog_set_global_options(DIALOG_DATA * t)
+void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops)
 {
-	set_dialog_global_option(t, "Strong's Numbers",
-			  t->ops->strongs);
-	set_dialog_global_option(t, "Morphological Tags",
-			  t->ops->morphs);
-	set_dialog_global_option(t, "Footnotes",
-			  t->ops->footnotes);
-	set_dialog_global_option(t, "Greek Accents",
-			  t->ops->greekaccents);
-	set_dialog_global_option(t, "Lemmas", 
-			  t->ops->lemmas);
-	set_dialog_global_option(t, "Cross-references",
-			  t->ops->scripturerefs);
-	set_dialog_global_option(t, "Hebrew Vowel Points",
-			  t->ops->hebrewpoints);
-	set_dialog_global_option(t, "Hebrew Cantillation",
-			  t->ops->hebrewcant);
-	set_dialog_global_option(t, "Headings", 
-			  t->ops->headings);
-	set_dialog_global_option(t, "Words of Christ in Red",
-			  t->ops->words_in_red);
+	BackEnd* b = (BackEnd*)backend;
+	
+	set_dialog_global_option(b, "Strong's Numbers",
+			  ops->strongs);
+	set_dialog_global_option(b, "Morphological Tags",
+			  ops->morphs);
+	set_dialog_global_option(b, "Footnotes",
+			  ops->footnotes);
+	set_dialog_global_option(b, "Greek Accents",
+			  ops->greekaccents);
+	set_dialog_global_option(b, "Lemmas", 
+			  ops->lemmas);
+	set_dialog_global_option(b, "Cross-references",
+			  ops->scripturerefs);
+	set_dialog_global_option(b, "Hebrew Vowel Points",
+			  ops->hebrewpoints);
+	set_dialog_global_option(b, "Hebrew Cantillation",
+			  ops->hebrewcant);
+	set_dialog_global_option(b, "Headings", 
+			  ops->headings);
+	set_dialog_global_option(b, "Words of Christ in Red",
+			  ops->words_in_red);
 	
 }
 
@@ -248,9 +251,61 @@ void main_set_strongs_morphs_off(GLOBAL_OPS * ops)
 void main_set_strongs_morphs(GLOBAL_OPS * ops)
 {
 	set_global_option(ops->module_type, "Strong's Numbers",
-			  ops->strongs);
+			  TRUE); //ops->strongs);
 	set_global_option(ops->module_type, "Morphological Tags",
-			  ops->morphs);
+			  TRUE); //ops->morphs);
+
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   main_set_dialog_strongs_morphs_off
+ *
+ * Synopsis
+ *   #include "gui/mod_global_ops.h"
+ *
+ *   void main_set_dialog_strongs_morphs_off(GLOBAL_OPS * ops)	
+ *
+ * Description
+ *   set module global options 
+ *
+ * Return value
+ *   void
+ */
+
+void main_set_dialog_strongs_morphs_off(gpointer backend, GLOBAL_OPS * ops)
+{
+	BackEnd* be = (BackEnd*)backend;
+	
+	set_dialog_global_option(be, "Strong's Numbers", FALSE);
+	set_dialog_global_option(be, "Morphological Tags", FALSE);
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_set_dialog_strongs_morphs
+ *
+ * Synopsis
+ *   #include "gui/mod_global_ops.h"
+ *
+ *   void main_set_dialog_strongs_morphs(GLOBAL_OPS * ops)	
+ *
+ * Description
+ *   set module global options 
+ *
+ * Return value
+ *   void
+ */
+
+void main_set_dialog_strongs_morphs(gpointer backend, GLOBAL_OPS * ops)
+{
+	BackEnd* be = (BackEnd*)backend;
+	
+	set_dialog_global_option(be, "Strong's Numbers", TRUE);
+	set_dialog_global_option(be, "Morphological Tags", TRUE);
 
 }
 
@@ -284,31 +339,31 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	ops = g_new0(GLOBAL_OPS, 1);
 	ops->module_type = 0;
 	ops->words_in_red = 
-	      of2tf(module_options[mod_name]["Words of Christ in Red"].c_str());
+	      gui_of2tf(module_options[mod_name]["Words of Christ in Red"].c_str());
 	ops->strongs =  
-		of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
+		gui_of2tf(module_options[mod_name]["Strong's Numbers"].c_str());
 	ops->morphs =  
-		of2tf(module_options[mod_name]["Morphological Tags"].c_str());
+		gui_of2tf(module_options[mod_name]["Morphological Tags"].c_str());
 	ops->footnotes =  
-		of2tf(module_options[mod_name]["Footnotes"].c_str());
+		gui_of2tf(module_options[mod_name]["Footnotes"].c_str());
 	ops->greekaccents =  
-		of2tf(module_options[mod_name]["Greek Accents"].c_str());
+		gui_of2tf(module_options[mod_name]["Greek Accents"].c_str());
 	ops->lemmas =  
-		of2tf(module_options[mod_name]["Lemmas"].c_str());
+		gui_of2tf(module_options[mod_name]["Lemmas"].c_str());
 	ops->scripturerefs =  
-	  of2tf(module_options[mod_name]["Scripture Cross-references"].c_str());
+	  gui_of2tf(module_options[mod_name]["Scripture Cross-references"].c_str());
 	ops->hebrewpoints =  
-		of2tf(module_options[mod_name]["Hebrew Vowel Points"].c_str());
+		gui_of2tf(module_options[mod_name]["Hebrew Vowel Points"].c_str());
 	ops->hebrewcant =  
-		of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
+		gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
 	ops->headings =  
-		of2tf(module_options[mod_name]["Headings"].c_str());
+		gui_of2tf(module_options[mod_name]["Headings"].c_str());
 	ops->variants_all =  
-		of2tf(module_options[mod_name]["All Readings"].c_str());
+		gui_of2tf(module_options[mod_name]["All Readings"].c_str());
 	ops->variants_primary =  
-		of2tf(module_options[mod_name]["Primary Reading"].c_str());
+		gui_of2tf(module_options[mod_name]["Primary Reading"].c_str());
 	ops->variants_secondary =  
-		of2tf(module_options[mod_name]["Secondary Reading"].c_str());
+		gui_of2tf(module_options[mod_name]["Secondary Reading"].c_str());
 	
 	g_free(buf);	
 	return ops;

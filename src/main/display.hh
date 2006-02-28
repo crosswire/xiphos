@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
+#include "main/global_ops.hh"
 #include "backend/sword_main.hh"
 #include "gui/utilities.h"
 
@@ -53,49 +54,34 @@ public:
 	SWBuf swbuf;
 };
 
-#ifdef USE_GTKMOZEMBED
-class GTKMozEntryDisp : public  SWDisplay{
-protected:
-	GtkWidget *gtkText;
-	BackEnd *be;
-public:
-	GTKMozEntryDisp(GtkWidget *gtkText, BackEnd *be) {this->gtkText = gtkText;this->be = be;}
-	virtual char Display(SWModule &imodule);
-};
-
-class GtkMozChapDisp : public GTKMozEntryDisp {
-public:
-	GtkMozChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKMozEntryDisp(gtkText,be) {}
-	virtual char Display(SWModule &imodule);
-	virtual void getVerseBefore(SWModule &imodule);
-	virtual void getVerseAfter(SWModule &imodule);
-	MOD_FONT *mf;
-};
-#endif
-
-
+#ifndef USE_GTKMOZEMBED
 class GTKTextviewChapDisp : public GTKEntryDisp {
 public:
 	GTKTextviewChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };
+#endif
 
 class DialogEntryDisp : public SWDisplay {
 protected:
 	GtkWidget *gtkText;
 	BackEnd *be;
+	GLOBAL_OPS * ops;
 public:
-	DialogEntryDisp(GtkWidget *gtkText, BackEnd *be) {this->gtkText = gtkText;this->be = be;}
+	DialogEntryDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) {this->gtkText = gtkText;this->be = be;this->ops = ops;}
 	virtual char Display(SWModule &imodule);
 };
 
 class DialogChapDisp : public  DialogEntryDisp {
 public:
-	DialogChapDisp(GtkWidget *gtkText, BackEnd *be) : DialogEntryDisp(gtkText,be) {}
+	DialogChapDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,be,ops) {}
 	virtual char Display(SWModule &imodule);
 };
+
+#ifndef USE_GTKMOZEMBED
 class DialogTextviewChapDisp : public  DialogEntryDisp {
 public:
-	DialogTextviewChapDisp(GtkWidget *gtkText, BackEnd *be) : DialogEntryDisp(gtkText,be) {}
+	DialogTextviewChapDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,be,ops) {}
 	virtual char Display(SWModule &imodule);
 };
+#endif

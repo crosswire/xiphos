@@ -68,9 +68,12 @@ BackEnd::BackEnd() {
 	bookDisplay          = 0;
 	dictDisplay          = 0;
 	textDisplay          = 0;
+#ifndef USE_GTKMOZEMBED
+	RTOLDisplay          = 0;
+	dialogRTOLDisplay    = 0;
+#endif
 	entryDisplay         = 0;
 	chapDisplay          = 0;
-	dialogRTOLDisplay    = 0;
 	verselistDisplay     = 0;
 	viewerDisplay        = 0;
 }
@@ -87,13 +90,17 @@ BackEnd::~BackEnd() {
 	if (dictDisplay)
 		delete dictDisplay;
 	if (textDisplay)
-		delete textDisplay;	
+		delete textDisplay;
+#ifndef USE_GTKMOZEMBED
+	if (RTOLDisplay)
+		delete RTOLDisplay;
+	if(dialogRTOLDisplay)
+		delete dialogRTOLDisplay;
+#endif	
 	if(entryDisplay)
 		delete entryDisplay;
 	if(chapDisplay)
 		delete chapDisplay;
-	if(dialogRTOLDisplay)
-		delete dialogRTOLDisplay;
 	if(verselistDisplay)
 		delete verselistDisplay;
 	if(viewerDisplay)
@@ -109,11 +116,15 @@ void BackEnd::init_SWORD(int gsType) {
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+#ifdef USE_GTKMOZEMBED
+				display_mod->setDisplay(textDisplay);
+#else
 				const char *direction = display_mod->getConfigEntry("Direction");
 				if(direction && !strcmp(direction,"RtoL" ))
 					display_mod->setDisplay(RTOLDisplay);
 				else
 					display_mod->setDisplay(textDisplay);
+#endif
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
 				display_mod->setDisplay(commDisplay);
@@ -129,11 +140,16 @@ void BackEnd::init_SWORD(int gsType) {
 	} else if(gsType == 1) {
 		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
-			if (!strcmp(display_mod->Type(), TEXT_MODS)) {const char *direction = display_mod->getConfigEntry("Direction");
+			if (!strcmp(display_mod->Type(), TEXT_MODS)) {				
+#ifdef USE_GTKMOZEMBED
+				display_mod->setDisplay(chapDisplay);
+#else
+				const char *direction = display_mod->getConfigEntry("Direction");
 				if(direction && !strcmp(direction,"RtoL" ))
 					display_mod->setDisplay(dialogRTOLDisplay);
 				else
 					display_mod->setDisplay(chapDisplay);
+#endif
 			} else {
 				display_mod->setDisplay(entryDisplay);
 			}
@@ -1078,7 +1094,8 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	if (!search_mod)
 		return -1;
 	char progressunits = 70;
-	
+	if (!search_mod->hasSearchFramework())
+		return 0;
 	search_mod->createSearchFramework((is_dialog)
 					?main_dialog_search_percent_update
 					:main_sidebar_search_percent_update,
@@ -1092,7 +1109,7 @@ int BackEnd::check_for_optimal_search(char * module_name) {
 	if (!search_mod)
 		return -2;
 	if (search_mod->hasSearchFramework() && search_mod->isSearchOptimallySupported("God", -4, 0, 0))
-		return -4;
+		return -4; // ** indexed search - clucene ** 
 	else
 		return -2; // ** word search **
 }

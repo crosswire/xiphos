@@ -40,6 +40,22 @@
 #include "main/sword.h"
  
 
+gint gui_of2tf(const gchar * on_off)
+{
+	if (!strcmp(on_off, "On"))
+		return TRUE;
+	else
+		return FALSE;
+}
+
+gchar *gui_tf2of(gint true_false)
+{
+	if (true_false)
+		return "On";
+	else
+		return "Off";
+}
+
 
 void gui_set_progressbar_text(GtkWidget * pb, gchar * text)
 {
