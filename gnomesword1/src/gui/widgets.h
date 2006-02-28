@@ -66,7 +66,8 @@ struct  _app_widgets {
 		*toolbar_comments,
 		*toolbar_studypad,
 	
-	/* html widgets */	
+	/* html widgets */
+		*eventbox1,	
 		*html_search_report,  /* html widget for serch report shortcut bar */
 		*html_parallel, /* parallel html widget */
 		*html_parallel_dialog, /* undocked parallel html widget */

@@ -1190,12 +1190,11 @@ void main_do_dialog_search(void)
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 		
 		gui_set_progressbar_text(search1.progressbar, buf);
-		/*gnome_appbar_set_status(GNOME_APPBAR
-					(search1.progressbar), buf);*/
 
-		if(search_type == -2)
+		if(search_type == -2 || search_type == -4)
 			search_type = backendSearch->check_for_optimal_search(module);
-
+		//g_message("search_type = %d",search_type);
+		
 		finds = backendSearch->do_module_search(module, search_string,
 					 search_type, search_params, TRUE);
 

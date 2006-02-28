@@ -10,6 +10,8 @@
 			<menuitem name="OpenFile" verb="" _label="Open (PersistFile)" _tip="Open using the PersistFile interface" pixtype="stock" pixname="Open"/>
 			<menuitem name="SaveFile" verb="" _label="Save (PersistFile)" _tip="Save using the PersistFile interface" pixtype="stock" pixname="Save"/>
 			<separator/>
+			<menuitem name="BookMark" verb="" _label="Bookmark" _tip="Add this file to your bookmarks" pixtype="stock" pixname="gtk-jump-to"/>
+			<separator/>
 			<menuitem name="NewDoc" verb="" _label="New Document" _tip="Create a new document" pixtype="stock" pixname="New"/>
 			<separator/>
        		 	<menuitem name="PrintPreviewMessage" verb="" _label="Print Pre_view"/>
