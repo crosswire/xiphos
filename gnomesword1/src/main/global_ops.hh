@@ -52,7 +52,9 @@ void main_set_global_options(GLOBAL_OPS * ops);
 void main_set_strongs_morphs_off(GLOBAL_OPS * ops);
 void main_set_strongs_morphs(GLOBAL_OPS * ops);
 GLOBAL_OPS *main_new_globals(gchar * mod_name);
-void main_dialog_set_global_options(DIALOG_DATA * t);
+void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops);
+void main_set_dialog_strongs_morphs_off(gpointer backend, GLOBAL_OPS * ops);
+void main_set_dialog_strongs_morphs(gpointer backend, GLOBAL_OPS * ops);
 
 #ifdef __cplusplus
 }

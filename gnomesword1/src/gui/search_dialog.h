@@ -30,6 +30,7 @@ extern "C" {
 typedef struct _search_dialog1 SEARCH_DIALOG1;
 struct _search_dialog1 {
 	GtkWidget *dialog;
+	GtkWidget *mod_sel_dialog;
 	GtkWidget *label_search_module;
 	GtkWidget *notebook;
 	GtkWidget *togglebutton_show_main;
@@ -65,6 +66,7 @@ struct _search_dialog1 {
 	GtkWidget *cb_case_sensitive;
 	GtkWidget *ctree;
 	GtkWidget *treeview;
+	GtkWidget *mod_sel_dlg_treeview;
 	GtkWidget *progressbar;
 	GtkWidget *cb_include_strongs;
 	GtkWidget *cb_include_morphs;
