@@ -67,6 +67,7 @@ extern "C" {
 #include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/url.hh"
 #include "main/xml.h"
  
 #include "main/parallel_view.h"
@@ -884,7 +885,42 @@ void main_display_dictionary(char * mod_name, char * key)
 				      key,
 				      NULL,
 				      settings.comm_showing);
-} 
+}
+
+
+void main_display_prev_verse(const char * mod_name, char * current_verse)
+{
+	char *url = NULL;
+	char *key = NULL;
+	
+	backend->set_module_key(mod_name, current_verse);
+	(*backend->display_mod)--;
+	//backend->display_mod
+	key = (char*)backend->display_mod->getKeyText();
+	url = g_strdup_printf("sword://%s/%s", mod_name,key);
+	main_url_handler(url, TRUE);
+	g_free(url);
+	gtk_widget_grab_focus(widgets.html_text);
+/*	url = g_strdup_printf("gnomesword.url?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"newTab",
+					main_url_encode(key), 
+					main_url_encode(mod_name));*/
+}
+
+
+void main_display_next_verse(const char * mod_name, char * current_verse)
+{
+	char *url = NULL;
+	char *key = NULL;
+	
+	backend->set_module_key(mod_name, current_verse);
+	(*backend->display_mod)++;
+	url = g_strdup_printf("sword://%s/%s", mod_name,key);
+	main_url_handler(url, TRUE);
+	g_free(url);
+	gtk_widget_grab_focus(widgets.html_text);
+}
 
 
 void main_display_bible(const char * mod_name, const char * key)
@@ -1033,20 +1069,23 @@ void main_display_devotional(void)
 
 void main_setup_displays(void)
 { 
-
+/*
 #ifdef USE_GTKMOZEMBED
 	backend->textDisplay = new GtkMozChapDisp(widgets.html_text,backend);
-	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
+//	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKMozEntryDisp(widgets.html_comm,backend);
 	backend->bookDisplay = new GTKMozEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKMozEntryDisp(widgets.html_dict,backend);
-#else
+
+#else*/
+#ifndef USE_GTKMOZEMBED
 	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
+#endif
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
-#endif
+//#endif
 }
 
 const char *main_get_module_language(const char *module_name)

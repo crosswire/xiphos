@@ -239,11 +239,14 @@ void embed_print(gboolean preview, GtkMozEmbed *embed)
 static 
 gint embed_dom_key_down(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 {
-	PRBool shift = FALSE;
-	nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
+	//PRBool shift = FALSE;
+	//PRUint32 aKeyCode;
+	//nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
+	//event->GetKeyCode(&aKeyCode);
 	
-	//g_message("main_dom_key_down");
+	//g_message("main_dom_key_down=%d",aKeyCode);
 	shift_key_presed = TRUE;
+	return FALSE;
 }
 
 static 
@@ -251,12 +254,34 @@ gint embed_dom_key_up(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 {
 	//g_message("main_dom_key_up");
 	shift_key_presed = FALSE;
+	return FALSE;
 }
 
 static 
 gint embed_dom_key_press(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 {
-	//g_message("main_dom_key_press");
+/*	PRBool shift = FALSE;
+	PRUint32 aKeyCode;
+	nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
+	event->GetKeyCode(&aKeyCode);
+	if(GPOINTER_TO_INT(data) != TEXT_TYPE)
+		return -1;
+	switch(aKeyCode) {
+	case 38: //DOM_VK_UP:	
+		main_display_prev_verse(settings.MainWindowModule, 
+					settings.currentverse);
+		g_message("DOM_VK_UP");
+	break;
+		
+	case 40:  //DOM_VK_DOWN:
+		main_display_next_verse(settings.MainWindowModule, 
+					settings.currentverse);	
+		g_message("DOM_VK_DOWN");
+	break;//main_url_handler(url, FALSE))
+	}*/
+	return FALSE;
+	
+	//g_message("main_dom_key_press=%d",aKeyCode);
 }
 
 
