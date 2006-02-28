@@ -459,6 +459,25 @@ static void open_new_document_cb(GtkWidget * widget, gpointer data)
 	e->is_changed = TRUE;
 }
 
+/* "Open through persist file" dialog.  */
+static void
+add_bookmark_cb(GtkWidget * widget, gpointer data)
+{
+	EDITOR *e = (EDITOR *) data;
+	gchar *label = NULL;
+	
+	if(e->studypad) {
+		label = g_strdup_printf("%s, %s",e->filename, "studypad");
+		gui_bookmark_dialog(label, "studypad", e->filename);
+		g_free(label);
+	} /* else {
+		label = g_strdup_printf("%s, %s",e->key, ->filename);
+		gui_bookmark_dialog(label, e->filename, e->key);
+		g_free(label);	
+	}
+*/
+}
+
 
 /* "Open through persist file" dialog.  */
 static void
@@ -682,12 +701,12 @@ void print_preview_message_cb(GtkWidget * widget, gpointer data)
 static BonoboUIVerb verbs[] = {
 	BONOBO_UI_UNSAFE_VERB("OpenFile", open_through_persist_file_cb),
 	BONOBO_UI_UNSAFE_VERB("SaveFile", save_through_persist_file_cb),
+	BONOBO_UI_UNSAFE_VERB("BookMark",add_bookmark_cb),
 	BONOBO_UI_UNSAFE_VERB("OpenStream",open_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB("SaveNote",save_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB("DeleteNote",delete_note_cb),
 	BONOBO_UI_UNSAFE_VERB("NewDoc", open_new_document_cb),
-	BONOBO_UI_UNSAFE_VERB("SavePlainStream",
-			      save_through_plain_persist_stream_cb),
+	BONOBO_UI_UNSAFE_VERB("SavePlainStream",save_through_plain_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB("PrintMessage", print_message_cb),
 	BONOBO_UI_UNSAFE_VERB("PrintPreviewMessage",print_preview_message_cb),
 	BONOBO_UI_UNSAFE_VERB("ViewHTMLSource", view_html_source_cb),

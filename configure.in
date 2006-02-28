@@ -2,14 +2,11 @@ AC_INIT(gnomesword, 2.1.6, http://sourceforge.net/tracker/?group_id=5528&atid=10
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-dnl AC_INIT(configure.in)
-dnl AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev18)
+
 AM_CONFIG_HEADER(config.h)
-dnl AC_CONFIG_HEADERS(config.h)
 
 AC_PROG_MAKE_SET
 
-dnl AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
 DIRS="backend editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
@@ -30,7 +27,7 @@ dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
 AC_HEADER_TIME
 
-AC_PROG_INTLTOOL([0.23])
+AC_PROG_INTLTOOL()
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -106,6 +103,11 @@ AC_SUBST(GTKHTML_DATA_DIR)
 AC_ARG_ENABLE(moz_embed,[  --enable-moz_embed    use moz_embed [default=no]],moz_embed=$enableval,moz_embed=no)
 if test "x$moz_embed" = xyes; then	
   GS_CHECK_MOZILLA
+else
+  MOZILLA_LIBS=""
+  MOZILLA_CFLAGS=""
+  AC_SUBST(MOZILLA_LIBS)
+  AC_SUBST(MOZILLA_CFLAGS)
 fi
 
 dnl AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
@@ -121,12 +123,12 @@ if test "x$enable_maintainer_mode" = "xyes"; then
   AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
   disable_werror=no
   enable_debug=yes
-dnl   AM_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
+dnl   A_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 else
   disable_werror=yes
-  AM_CPPFLAGS=
+  A_CPPFLAGS=
 fi
-AC_SUBST(AM_CPPFLAGS)
+AC_SUBST(A_CPPFLAGS)
 
 if test x$debug = xyes; then
   AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])

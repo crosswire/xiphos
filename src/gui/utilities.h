@@ -26,6 +26,8 @@ extern "C" {
 #include <gnome.h>
 #include "main/configs.h"
 
+gint gui_of2tf(const gchar * on_off);
+gchar *gui_tf2of(gint true_false);
 void gui_set_progressbar_text(GtkWidget * pb, gchar * text);
 void gui_set_progressbar_fraction(GtkWidget * pb, gdouble fraction);
 void gui_set_combo_index(GtkWidget * combo, gint index);	
