@@ -44,7 +44,7 @@ EXIT_FAILURE=1
 PROGRAM=ltmain.sh
 PACKAGE=libtool
 VERSION=1.5.6
-TIMESTAMP=" (1.1220.2.95 2004/04/11 05:50:42) Debian$Rev: 224 $"
+TIMESTAMP=" (1.1220.2.95 2004/04/11 05:50:42) Debian$Rev$"
 
 
 # Check that we have a working $echo.
