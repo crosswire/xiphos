@@ -1,313 +1,313 @@
-dnl Process this file with autoconf to produce a configure script.
- 
-AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.7.10)
+AC_INIT(gnomesword, 2.1.6, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+
 AM_CONFIG_HEADER(config.h)
 
-AC_PROG_CC
+AC_PROG_MAKE_SET
 
-dnl 
-dnl code from Evolution configure.in
-dnl
-AC_DEFUN(GS_CHECK_LIB, [
-	dispname="$1"
-	pkgname="$2"
-	minvers="$3"
-	maxvers="$4"
+DIRS="backend editor main gnome2"
+AC_SUBST(DIRS)
+gnomesword_exec="gnomesword2"
+AC_SUBST(gnomesword_exec)	
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 ,,exit)
+AC_SUBST(GNOME_LIBS)
+AC_SUBST(GNOME_CFLAGS)
+dnl AC_ENABLE_STATIC(yes)
 
-	AC_MSG_CHECKING(for $dispname)
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.7.100, , exit)
+AC_SUBST(SWORD_LIBS)
+AC_SUBST(SWORD_CFLAGS)
 
-	if gnome-config --libs $pkgname > /dev/null 2>&1; then
-		pkgvers=`gnome-config --modversion $pkgname | sed -e 's/^[[^0-9]]*//'`
-	else
-		pkgvers=not
-	fi
-	AC_MSG_RESULT($pkgvers found)
+dnl AC_CHECK_SWORD(1.5.8, [NO])
 
-	pkgvers=`echo $pkgvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
-	cmpminvers=`echo $minvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
-	cmpmaxvers=`echo $maxvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
-	ok=yes
-	if test "$pkgvers" -lt $cmpminvers; then
-		ok=no
-	elif test -n "$maxvers"; then
-		if test "$pkgvers" -gt $cmpmaxvers; then
-			ok=no
-		elif test "$maxvers" != "$minvers" -a "$cmpmaxvers" -eq "$pkgvers"; then
-			ok=no
-		fi
-	fi
-	if test $ok = no; then
-		case $maxvers in
-		"")
-			dispvers="$minvers or higher"
-			;;
-		$minvers)
-			dispvers="$minvers (exactly)"
-			;;
-		*)
-			dispvers="$minvers or higher, but less than $maxvers,"
-			;;
-		esac
-
-		AC_MSG_ERROR([
-""
-"You need $dispname $dispvers to build GnomeSword"
-"If you think you already have this installed, consult the README."])
-	fi
-])
-
-dnl Initialize xml-i18n-tools
-dnl AM_PROG_XML_I18N_TOOLS 
-
-
-dnl check for libtool
-AM_PROG_LIBTOOL
-
-dnl Pick up the Gnome macros.
-dnl AM_ACLOCAL_INCLUDE(macros)
-
-
-GNOME_INIT
-AC_ISC_POSIX
-AC_HEADER_STDC
-AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h getopt.h math.h time.h sys/types.h fcntl.h netdb.h netinet/in.h sys/socket.h arpa/inet.h dirent.h sys/select.h sys/time.h sys/ipc.h)
-
-
-dnl Languages which your application supports
-ALL_LINGUAS="bg de es es_ES fr ru sk"
-dnl AM_GNOME_GETTEXT
-AM_GLIB_GNU_GETTEXT
-
-dnl Set PACKAGE_*_DIR in config.h.
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
-  AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/pixmaps/${PACKAGE}")
-  AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${ac_default_prefix}/${DATADIRNAME}/gnome/help/${PACKAGE}")
-  AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${ac_default_prefix}/${DATADIRNAME}/gnome/apps")
-  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}")
-else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
-  AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/pixmaps/${PACKAGE}")
-  AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${prefix}/${DATADIRNAME}/gnome/help/${PACKAGE}")
-  AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${prefix}/${DATADIRNAME}/gnome/apps")
-  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}")
-fi
-
-GNOME_COMPILE_WARNINGS
-GNOME_X_CHECKS
-
-dnl ******************************
-dnl GtkHTML checking
-dnl ******************************
-gtkhtml_ok="false"
-AC_MSG_CHECKING(for GtkHTML)
-  if gnome-config --libs gtkhtml > /dev/null 2>&1; then
-	vers=`gnome-config --modversion gtkhtml`
-	case $vers
-	in
-	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
-	    *) gtkhtml_ok=true ;;
-	esac
-  else
-	gtkhtml_ok=false
-  fi
-
-if $gtkhtml_ok; then
-	AC_MSG_RESULT($vers found)
-else	
-	pkg_modules="gtkhtml-1.1"
-	PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
-	AC_SUBST(PACKAGE_CFLAGS)
-	AC_SUBST(PACKAGE_LIBS)
-	AC_DEFINE(USE_GTKHTML1, 1, [Define if you want to use the GtkHTML-1.1])
-fi
-
-if $gtkhtml_ok; then
-    PACKAGE_LIBS="`gnome-config --libs gtkhtml ` $THREADS_LIBS `unicode-config --libs`"
-    PACKAGE_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
-    
-	AC_SUBST(PACKAGE_LIBS)
-	AC_SUBST(PACKAGE_CFLAGS)
-fi
-
-
-GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
-GS_CHECK_LIB(GAL, gal, 0.18.0.0)
-GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
-
-dnl **************************
-dnl  For the spell checker
-dnl **************************
-
-dnl don't define WITH_SPC if you want to build without spell-checker
-AC_DEFINE(WITH_SPC, 1, [Define if you want to use spell checking])
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
 AC_HEADER_TIME
 
+AC_PROG_INTLTOOL()
+
+AC_ISC_POSIX
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+AM_PROG_LIBTOOL
+
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
-dnl ------------------------------------------------------------------------
-dnl Find a file (or one of more files in a list of dirs)
-dnl ------------------------------------------------------------------------
-dnl
-AC_DEFUN(AC_FIND_FILE,
-[
-$3=NO
-for i in $2; do
-  for j in $1; do
-    if test -r "$i/$j"; then
-      $3=$i
-      break 2
-    fi
-  done
-done
-])
 
-dnl looking for general SWORD path 
- 
-AC_ARG_WITH(sworddir, 
-[  --with-sworddir=DIR     path where swordlib is installed (default=/usr/local/sword) ], 
-[ 
-  ac_sword_dir=$withval 
-], ac_sword_dir=/usr/local/sword 
-) 
- 
-dnl looking for sword includes 
-AC_MSG_CHECKING([for sword headers]) 
-sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/sword/include/sword  /usr/local/sword/include/sword /opt/sword/include/sword" 
-AC_FIND_FILE(swmgr.h, $sword_incdirs, sword_incdir) 
- 
-AC_MSG_RESULT([$sword_incdir]) 
- 
-dnl looking for sword library 
-AC_MSG_CHECKING([for sword library]) 
-sword_libdirs="${prefix}/lib $ac_sword_dir/lib /usr/lib /usr/sword/lib /usr/local/lib /usr/local/sword/lib /usr/lib/sword/lib /usr/local/share/sword/lib /opt/sword/lib" 
- 
-AC_FIND_FILE(libsword.so, $sword_libdirs, sword_libdir) 
-if test -r $sword_libdir/libsword.so; then 
- HAVE_SWORD_LIB=yes 
- SWORD_LIB_TYPE="shared" 
-elif test ! -r $sword_libdir/libsword.so; then 
- HAVE_SWORD_LIB=no 
-fi 
- 
-if test $HAVE_SWORD_LIB = no; then 
- AC_FIND_FILE(libsword.a, $sword_libdirs, sword_libdir) 
- if test -r $sword_libdir/libsword.a; then 
- HAVE_SWORD_LIB=yes 
- SWORD_LIB_TYPE="static" 
- fi 
-fi 
- 
-if test $HAVE_SWORD_LIB = no; then 
- AC_MSG_ERROR(SWORD library not found.Try to use configure with --with-sworddir=/your/sword/prefix) 
-fi 
- 
-SWORD_CPPFLAGS="'-I$sword_incdir' -g" 
-SWORD_LIBS="-L$sword_libdir -lsword -lz" 
- 
-AC_SUBST(SWORD_CPPFLAGS) 
-AC_SUBST(SWORD_LIBS) 
- 
-AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
+dnl ================================================================
+dnl Gettext stuff.
+dnl ================================================================
+GETTEXT_PACKAGE=gnomesword
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
+dnl Languages which your application supports
+	ALL_LINGUAS="de de_DE en_GB fr_FR ru uk"
 
-have_speller="no"
-dnl looking for aspell 
+AM_GLIB_GNU_GETTEXT
 
-  AC_MSG_CHECKING([for aspell]) 
-  aspell_dirs="${prefix}/bin $ac_aspell_dir/bin /usr/bin /usr/local/bin" 
-  AC_FIND_FILE(aspell, $aspell_dirs, aspell_dir) 
-  if test -r $aspell_dir/aspell; then 
-   HAVE_ASPELL=yes 
-   have_speller="yes"
-   AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
-#   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
-   echo "found"
+dnl ================================================================
+dnl check for GtkHTML
+dnl ================================================================
+GTKHTML_LIBS=""
+GTKHTML_CFLAGS=""
+
+dnl PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,have_gtkhtml=no)
+dnl if test "x$have_gtkhtml" = xyes; then
+dnl 	AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
+dnl 
+dnl 	dnl gtkhtml_datadir
+dnl 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
+dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+dnl 	
+dnl 	dnl gtkhtml api version
+dnl 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.1`
+dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+dnl fi
+
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+if test "x$have_gtkhtml" = xyes; then
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+else
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.6, have_gtkhtml=yes,exit)
+	AC_DEFINE(USE_GTKHTML36, 1, [Define if you want to use GtkHtml-3.6])
+
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.6`"
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.6`
+	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+fi
+AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
+AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
+
+AC_SUBST(GTKHTML_LIBS)
+AC_SUBST(GTKHTML_CFLAGS)
+AC_SUBST(GTKHTML_DATA_DIR)
+
+AC_ARG_ENABLE(moz_embed,[  --enable-moz_embed    use moz_embed [default=no]],moz_embed=$enableval,moz_embed=no)
+if test "x$moz_embed" = xyes; then	
+  GS_CHECK_MOZILLA
+else
+  MOZILLA_LIBS=""
+  MOZILLA_CFLAGS=""
+  AC_SUBST(MOZILLA_LIBS)
+  AC_SUBST(MOZILLA_CFLAGS)
+fi
+
+dnl AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
+dnl if test "x$sword_cvs" = xyes; then
+dnl   AC_DEFINE(USE_SWORD_CVS, 1, [Define if you want to use cvs sword])
+dnl fi
+
+AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],debug=$enableval,debug=no)
+CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
+
+AM_MAINTAINER_MODE
+if test "x$enable_maintainer_mode" = "xyes"; then
+  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
+  disable_werror=no
+  enable_debug=yes
+dnl   A_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
+else
+  disable_werror=yes
+  A_CPPFLAGS=
+fi
+AC_SUBST(A_CPPFLAGS)
+
+if test x$debug = xyes; then
+  AC_DEFINE(DEBUG, 1, [Define if you want to see debug messages])
+  if test x$ac_cv_prog_cc_g = xyes; then
+    CFLAGS="-g3 -O0"
   else
-   AC_MSG_CHECKING([for ispell]) 
-   ispell_dirs="${prefix}/bin $ac_ispell_dir/bin /usr/bin /usr/local/bin" 
-   AC_FIND_FILE(ispell, $ispell_dirs, ispell_dir) 
-   if test -r $ispell_dir/ispell; then 
-    HAVE_ISPELL=yes 
-    have_speller="yes"
-    AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
-#    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
-    echo "found"
-   fi
+    CFLAGS="-O0"
   fi
-if test $have_speller="yes"; then
-   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
+  if test x$ac_cv_prog_cxx_g = xyes; then
+    CXXFLAGS="$CXXFLAGS -g3 -O0"
+  else
+    CXXFLAGS="$CXXFLAGS -O0"
+  fi
+  CFLAGS="$CFLAGS -Werror"
+  CXXFLAGS="$CXXFLAGS -Werror"
 fi
 
-dnl ******************************
-dnl GdkPixbuf
-dnl ******************************
-PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
-PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf `
-AC_SUBST(PIXBUF_LIBS)
-AC_SUBST(PIXBUF_CFLAGS)
-have_pixbuf="yes"
 
-dnl ******************************
-dnl GnomePrint 
-dnl ******************************
-GNOME_PRINT_LIBS=`gnome-config --libs print`
-GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
-AC_SUBST(GNOME_PRINT_LIBS)
-AC_SUBST(GNOME_PRINT_CFLAGS)
-have_gnomeprint="yes"
-
-dnl ******************************
-dnl GtkHTML
-dnl ******************************
-dnl GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
-dnl GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
-dnl AC_SUBST(GTKHTML_CFLAGS)
-dnl AC_SUBST(GTKHTML_LIBS)
-
-dnl ******************************
-dnl Gnome App Lib 
-dnl ******************************
-GNOME_APP_LIBS=`gnome-config --libs gal`
-GNOME_APP_CFLAGS=`gnome-config --cflags gal`
-AC_SUBST(GNOME_APP_LIBS)
-AC_SUBST(GNOME_APP_CFLAGS)
+GNOME_SPELL_CFLAGS=""
+GNOME_SPELL_LIBS=""
+AC_SUBST(GNOME_SPELL_CFLAGS)
+AC_SUBST(GNOME_SPELL_LIBS)
   
-EXTRA_GNOME_LIBS="`gnome-config --libs ` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags ` $THREADS_CFLAGS `unicode-config --cflags`"
+GNOME_SPELL_MODULES="libgnomeui-2.0 >= 1.112.1 libbonoboui-2.0 >= 1.112.1 libglade-2.0 >= 1.99.9"
+PKG_CHECK_MODULES(GNOME_SPELL, $GNOME_SPELL_MODULES)
+AC_SUBST(GNOME_SPELL_CFLAGS)
+AC_SUBST(GNOME_SPELL_LIBS)
+have_speller="yes"
+speller="gnome-spell"
+use_gnome_spell="true"
+AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
+AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
+AC_SUBST(ORBIT_IDL)
 
-AC_SUBST(EXTRA_GNOME_LIBS)
-AC_SUBST(EXTRA_GNOME_CFLAGS)
+BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
+AC_SUBST(BONOBO_IDL_INCLUDES)
 
-LIBS="$LIBS -L/usr/local/lib -L/usr/lib `xml-config --libs`"
 
-dnl Only use -Wall if we have gcc
-if test "x$GCC" = "xyes"; then
-  if test -z "`echo "$CFLAGS" | grep "\-Wall" 2> /dev/null`" ; then
-    CFLAGS="$CFLAGS -Wall"
-  fi
+AM_CONDITIONAL(GNOME_SPELL, test x$use_gnome_spell = xtrue)
+
+SPELL_LIBS=""
+AC_SUBST(SPELL_LIBS)
+
+dnl ====================================
+dnl = Begin tests for scrollkeeper
+dnl ====================================
+AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+if test x$SCROLLKEEPER_CONFIG = xno; then
+  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
+fi
+dnl ====================================
+dnl = End tests for scrollkeeper
+dnl ====================================Y
+SCROLLKEEPER_BUILD_REQUIRED=0.3.5
+AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
+
+
+dnl Set PACKAGE_LOCALE_DIR in config.h.
+if test "x${prefix}" = "xNONE"; then
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
+else
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale",[package LOCALE directory])
 fi
 
-AM_CONDITIONAL(SHORTCUTBAR,test "x$have_speller" = xno)
-AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_speller" = xyes)
+
+dnl Set PACKAGE SOURCE DIR in config.h.
+packagesrcdir=`cd $srcdir && pwd`
+
+dnl Set PACKAGE PREFIX
+if test "x${prefix}" = "xNONE"; then
+  packageprefix=${ac_default_prefix}
+else
+  packageprefix=${prefix}
+fi
+
+INSTALL_PREFIX="${packageprefix}/"
+AC_SUBST(INSTALL_PREFIX)
+AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "${packageprefix}/",[install prefix])
+
+
+dnl Set PACKAGE DATA & DOC DIR
+packagedatadir=share/${PACKAGE}
+packagedocdir=share/doc/${PACKAGE}
+
+dnl Set PACKAGE DIRs in config.h.
+packagepixmapsdir=share/pixmaps/${PACKAGE}
+packagehelpdir=share/gnome/help/${PACKAGE}
+packagemenudir=share/applications
+
+dnl Subst PACKAGE_DATA_DIR.
+NO_PREFIX_PACKAGE_DATA_DIR="${packagedatadir}"
+AC_SUBST(NO_PREFIX_PACKAGE_DATA_DIR)
+PACKAGE_DATA_DIR="${packageprefix}/${packagedatadir}"
+AC_SUBST(PACKAGE_DATA_DIR)
+
+dnl Subst PACKAGE_DOC_DIR.
+NO_PREFIX_PACKAGE_DOC_DIR="${packagedocdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_DOC_DIR)
+PACKAGE_DOC_DIR="${packageprefix}/${packagedocdir}"
+AC_SUBST(PACKAGE_DOC_DIR)
+
+dnl Subst PACKAGE_PIXMAPS_DIR.
+NO_PREFIX_PACKAGE_PIXMAPS_DIR="${packagepixmapsdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_PIXMAPS_DIR)
+PACKAGE_PIXMAPS_DIR="${packageprefix}/${packagepixmapsdir}"
+AC_SUBST(PACKAGE_PIXMAPS_DIR)
+
+dnl Subst PACKAGE_HELP_DIR.
+NO_PREFIX_PACKAGE_HELP_DIR="${packagehelpdir}"
+AC_SUBST(NO_PREFIX_PACKAGE_HELP_DIR)
+PACKAGE_HELP_DIR="${packageprefix}/${packagehelpdir}"
+AC_SUBST(PACKAGE_HELP_DIR)
+
+dnl Subst PACKAGE_MENU_DIR.
+NO_PREFIX_PACKAGE_MENU_DIR="${packagemenudir}"
+AC_SUBST(NO_PREFIX_PACKAGE_MENU_DIR)
+PACKAGE_MENU_DIR="${packageprefix}/${packagemenudir}"
+AC_SUBST(PACKAGE_MENU_DIR)
+
+AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${packageprefix}/${packagedatadir}",[package data directory])
+AC_DEFINE_UNQUOTED(PACKAGE_DOC_DIR, "${packageprefix}/${packagedocdir}",[package doc directory])
+AC_DEFINE_UNQUOTED(PACKAGE_PIXMAPS_DIR, "${packageprefix}/${packagepixmapsdir}",[package pixmap directory])
+AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}",[package help directory])
+AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}",[package menu directory])
+AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}",[package source directory])
 
 AC_OUTPUT([ m4/Makefile 
 Makefile
 po/Makefile.in
-help/Makefile
+doc/Makefile
+doc/help/Makefile
+doc/help/C/Makefile
+doc/help/fr/Makefile
 src/Makefile
+src/backend/Makefile
+src/editor/Makefile
+src/gnome2/Makefile
+src/main/Makefile
+ui/Makefile
+gnomesword.desktop.in
+gnomesword.spec
 ])
 
 echo
 echo "Summary of GnomeSword configuration:"
-echo
 
-if test "x$have_speller" = xyes; then
-        echo "Spellchecking:                enabled"
+if test "x$moz_embed" = xyes; then
+    echo "use mozilla:              enabled"
 else
-        echo "Spellchecking:                disabled"
+    echo "not using mozilla"
+fi
+echo "install directory:      ${prefix}/bin"
+
+if test "x$debug" = xyes; then
+  echo "debug:                    enabled"
+  if test "x$have_gtkhtml" = xyes; then
+    echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
+  fi
+
+  if test "x$moz_embed" = xyes; then
+    echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
+  fi
+  if test "x$sword_cvs" = xyes; then
+    echo "Sword CVS:             enabled"
+  fi
+
+  if test "x$ac_static_sword" = xYES; then
+    echo "Static link to Sword:           enabled"
+  else  
+    echo "Dynamic link to Sword:          enabled"
+  fi
+  
+  echo "SWORD_LIBS:   $SWORD_LIBS"
+  echo "SWORD_CFLAGS: $SWORD_CFLAGS"
+  echo "CFLAGS: $CFLAGS"
+  echo "CPPFLAGS: $CPPFLAGS"
+  echo "CXXFLAGS: $CXXFLAGS"
+  echo "GNOME_CFLAGS: $GNOME_CFLAGS"
+  echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
+  echo "GTKHTML_API_VERSION     $GTKHTML_API_VERSION"
 fi

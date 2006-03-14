@@ -1,0 +1,40 @@
+<!-- Authors -->
+<chapter id="authors" lang="fr">
+	<title>Auteurs</title>
+		<para>
+    	Ce manuel a été ecrit par:
+		</para>
+		<itemizedlist>
+		<listitem>
+			<para>
+			Andy Piper
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Pierre Benz
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Peter von Kaehne
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		Pour nous signaler un problème ou nous faire part de suggestions concernant l'application 
+		<application>GnomeSword</application> ou le présent manuel, envoyez un message sur la liste de diffusion 
+    		 <email>gnomesword-developers@lists.sourceforge.net</email>. 
+		Vous pouvez aussi soumettre vos commentaires sur la page Tracker du site Internet 
+		de développement de <application>GnomeSword</application> à <ulink type="http" 
+		url="http://sourceforge.net/projects/gnomesword/">
+		http://sourceforge.net/projects/gnomesword/</ulink>.
+   	</para> 
+	<para>
+		Pour plus d'informations, visitez le site Internet de <application>GnomeSword</application> à 
+		<ulink type="http" url="http://gnomesword.sf.net/">http://gnomesword.sf.net</ulink>.
+		Les rapports de bogue sont à soumettre à la page Bug du site Internet de développement du projet à 
+		<ulink type="http" url="http://www.sourceforge.net/projects/gnomesword">
+		http://www.sourceforge.net/projects/gnomesword</ulink>.
+	</para>
+</chapter>

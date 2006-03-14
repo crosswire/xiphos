@@ -1,1 +1,68 @@
-
+# application files
+gnomesword.desktop.in
+# backend source files
+#src/backend/sword.cpp
+#src/backend/sword_main.cc
+# shared source files
+src/main/lists.cc
+src/main/sidebar.cc
+src/main/tab_history.c
+# editor Source files
+src/editor/editor.c
+src/editor/editor-control.c
+src/editor/editor_menu.c
+src/editor/popup.c
+src/editor/replace.c
+src/editor/search.c
+src/editor/spell.c
+src/editor/toolbar_edit.c
+src/editor/toolbar_style.c
+# GNOME2 Source files
+src/gnome2/about_gnomesword.c
+src/gnome2/about_modules.c
+src/gnome2/about_sword.c
+src/gnome2/bibletext.c
+src/gnome2/bibletext_dialog.c
+src/gnome2/bookmarks_menu.c
+src/gnome2/bookmarks_treeview.c
+src/gnome2/cipher_key_dialog.c
+src/gnome2/commentary.c
+src/gnome2/commentary_dialog.c
+src/gnome2/dialog.c
+src/gnome2/dictlex.c
+src/gnome2/dictlex_dialog.c
+src/gnome2/display_info.c
+src/gnome2/fileselection.c
+src/gnome2/find_dialog.c
+src/gnome2/font_dialog.c
+src/gnome2/gbs.c
+src/gnome2/gbs_dialog.c
+src/gnome2/gnomesword.c
+src/gnome2/gui.c
+src/gnome2/hints.c
+src/gnome2/html.c
+src/gnome2/main_menu.c
+src/gnome2/main_window.c
+src/gnome2/mod_mgr.c
+src/gnome2/note_editor.c
+src/gnome2/parallel_dialog.c
+src/gnome2/parallel_view.c
+src/gnome2/preferences_cell_renderer.c
+src/gnome2/preferences_dialog.c
+src/gnome2/search_dialog.c
+src/gnome2/search_sidebar.c
+src/gnome2/setup_druid.c
+src/gnome2/sidebar_dialog.c
+src/gnome2/sidebar.c
+src/gnome2/splash.c
+src/gnome2/studypad.c
+src/gnome2/tabbed_browser.c
+src/gnome2/toolbar_nav.c
+src/gnome2/utilities.c
+# Glade files
+ui/bookmarks.glade
+ui/prefs.glade
+ui/module-manager.glade
+ui/search-dialog.glade
+ui/editor_note.xml
+ui/editor_studypad.xml

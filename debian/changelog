@@ -1,0 +1,232 @@
+gnomesword (2.1.2-1) unstable; urgency=low
+
+  * Non Maintainer Upgrade
+
+ -- Dominique Corbex <domcox@sourceforge.net>  Sat, 08 Jun 2005 09:02:26 +0100
+ 
+gnomesword (2.0.0-5) unstable; urgency=low
+
+  * another rebuild - this time for gcrypt/gnutls changes, Closes: #263692
+
+ -- Daniel Glassey <wdg@debian.org>  Thu,  5 Aug 2004 15:12:11 +0100
+
+gnomesword (2.0.0-4) unstable; urgency=low
+
+  * really remove the DISABLE_DEPRECATED defines
+
+ -- Daniel Glassey <wdg@debian.org>  Thu, 15 Jul 2004 10:35:10 +0100
+
+gnomesword (2.0.0-3) unstable; urgency=low
+
+  * Rebuild because of libgal and libgtkhtml, Closes: #245662, #244616
+
+ -- Daniel Glassey <wdg@debian.org>  Sat, 24 Apr 2004 19:26:23 +0100
+
+gnomesword (2.0.0-2) unstable; urgency=low
+
+  * Brown paper typo in description s/sudy/study/
+
+ -- Daniel Glassey <wdg@debian.org>  Thu, 15 Jan 2004 18:57:09 +0000
+
+gnomesword (2.0.0-1) unstable; urgency=low
+
+  * New upstream version (yes, 1.0 was skipped in favour of 2.0
+     for gnome2), Closes: #225644
+  * Improve the debian/copyright file
+  * remove the useless manpage, Closes: #164664
+  * package is being built for unstable using pbuilder, so once it is
+      ready it will build, Closes: #162866
+  * Added features to the package description to make it a bit more
+      descriptive, Closes: #209531
+
+ -- Daniel Glassey <wdg@debian.org>  Fri,  9 Jan 2004 18:05:03 +0000
+
+gnomesword (0.7.9-2) unstable; urgency=low
+
+  * Need to build depend on >= libsword-dev 1.5.5-3 to catch icu
+     stuff, Closes: #189677
+
+ -- Daniel Glassey <wdg@debian.org>  Sat, 19 Apr 2003 15:53:44 +0100
+
+gnomesword (0.7.9-1) unstable; urgency=low
+
+  * New upstream release
+  * add libzvt-dev to build depends
+  * change section to gnome
+  * New version doesn't crash on startup, Closes: #159693
+  * New version is more stable, Closes: #169319
+  * Use autotools-dev to get right config.*
+
+ -- Daniel Glassey <wdg@debian.org>  Tue, 25 Mar 2003 21:04:42 +0000
+
+gnomesword (0.7.1-4) unstable; urgency=high
+
+  * SWORD_CPPFLAGS should not contain -g
+  * This ought to allow building on alpha, Closes: #143416
+
+ -- Daniel Glassey <wdg@debian.org>  Mon, 22 Apr 2002 11:27:38 +0100
+
+gnomesword (0.7.1-3) unstable; urgency=high
+
+  * use AM_CXXFLAGS not  CXXFLAGS in src/Makefile so that CXXFLAGS
+     will work for alpha
+  * rebuild on arm
+  * build depend on sword 1.5.3-3
+
+ -- Daniel Glassey <wdg@debian.org>  Fri, 19 Apr 2002 10:03:04 +0100
+
+gnomesword (0.7.1-2) unstable; urgency=high
+
+  * Hopefully I've learnt my lesson this time, sorry!
+      make sure it builds with gcc-3.0, Closes: #143214
+  * also add the compiler flag workaround to compile on alpha
+      in debian/rules
+
+ -- Daniel Glassey <wdg@debian.org>  Wed, 17 Apr 2002 00:57:09 +0100
+
+gnomesword (0.7.1-1) unstable; urgency=high
+
+  * New upstream release
+  * add a patch to stop occasional segfaults when you press option
+       buttons
+
+ -- Daniel Glassey <wdg@debian.org>  Tue,  9 Apr 2002 23:50:51 +0100
+
+gnomesword (0.7.0-1) unstable; urgency=low
+
+  * New upstream version using sword 1.5.3
+  * build-depend on libbonobo-dev
+
+ -- Daniel Glassey <wdg@debian.org>  Tue,  9 Apr 2002 00:29:43 +0100
+
+gnomesword (0.5.2c-8) unstable; urgency=medium
+
+  * ok, just use ispell | aspell since the autobuilders can't cope
+      with alternative build deps. attempting to get into testing 
+      before the freeze
+
+ -- Daniel Glassey <wdg@debian.org>  Sat, 16 Feb 2002 22:36:21 +0000
+
+gnomesword (0.5.2c-7) unstable; urgency=low
+
+  * Wait to upload it until the new sword gets in to try and be nicer to
+     buildds, sorry
+  * got appropriate spell build deps from debian-mentors - see below
+  * build dep on sword 1.5.2-9
+  * aspell | ispell again, buildds for mips and mipsel must just
+      have failed to notice the change in dependency for 0.5.2c-4
+      Closes: #132765
+
+ -- Daniel Glassey <wdg@debian.org>  Mon,  4 Feb 2002 23:16:52 +0000
+
+gnomesword (0.5.2c-6) unstable; urgency=low
+
+  * Try again with mips, mipsel build depends
+  * rebuild against autotooled sword 1.5.2-8
+  * build with newer gal libs etc
+
+ -- Daniel Glassey <wdg@debian.org>  Fri, 25 Jan 2002 00:22:11 +0000
+
+gnomesword (0.5.2c-5) unstable; urgency=low
+
+  * change build depends to aspell [!mips !mipsel], ispell [mips mipsel]
+
+ -- Daniel Glassey <wdg@debian.org>  Thu,  3 Jan 2002 20:38:46 +0000
+
+gnomesword (0.5.2c-4) unstable; urgency=low
+
+  * Bump standards version to 3.5.6.0
+  * Build depend on aspell | ispell since aspell isn't built for mips or mipsel
+
+ -- Daniel Glassey <wdg@debian.org>  Wed, 19 Dec 2001 19:12:03 +0000
+
+gnomesword (0.5.2c-3) unstable; urgency=low
+
+  * Fix to compile on hppa for gcc-3.0 by including ctype where necessary, Closes: #124338
+
+ -- Daniel Glassey <wdg@debian.org>  Mon, 17 Dec 2001 18:36:56 +0000
+
+gnomesword (0.5.2c-2) unstable; urgency=low
+
+  * Build-Depend on sword >= 1.5.2-4, Closes: #123419
+  * Depend on libsword >= 1.5.2-4 (change in libsword1's shlibs), Closes: #123418
+
+ -- Daniel Glassey <wdg@debian.org>  Tue, 11 Dec 2001 22:41:20 +0000
+
+gnomesword (0.5.2c-1) unstable; urgency=low
+
+  * New upstream release
+  * Use config.sub and config.guess from /usr/share/misc, Closes: #120111
+  * Compiling against newer gnome libs, Closes: #119167
+  * Compile problem fixed upstream, Closes: #121382
+  * Enabling spell support, Closes: #117790
+  * initial manpage
+
+ -- Daniel Glassey <wdg@debian.org>  Fri, 30 Nov 2001 19:21:13 +0000
+
+gnomesword (0.5.2a-1) unstable; urgency=low
+
+  * New upstream release, Closes: #116026
+  * Removed build dependency on autoconf, automake
+  * Base sword modules now available, Closes: #93039
+
+ -- Daniel Glassey <wdg@debian.org>  Tue, 23 Oct 2001 23:42:56 +0100
+
+gnomesword (0.5.1a-1.1) unstable; urgency=low
+
+  * Non-maintainer upload
+  * Recompiled with updated libgal (libgal11)
+
+ -- Norbert Veber <nveber@pyre.virge.net>  Fri, 31 Aug 2001 23:45:19 -0400
+
+gnomesword (0.5.1a-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Daniel Glassey <wdg@debian.org>  Mon, 27 Aug 2001 11:50:00 +0000
+
+gnomesword (0.4.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Daniel Glassey <wdg@debian.org>  Thu, 14 Jun 2001 20:06:04 +0000
+
+gnomesword (0.3.7c-3) unstable; urgency=low
+
+  * Add build dependency on libgdk-pixbuf-dev (temporarily) Closes: #87360
+  * Change email to wdg@debian.org
+  * Add dependency on text, dict and comm to avoid segfault, Closes: #83994
+  * Upload text, dict and comm, Closes: #83869
+  * recompile with newer gnome libs since libgnomeui33 was removed, Closes: #86517 
+
+ -- Daniel Glassey <wdg@debian.org>  Wed, 28 Feb 2001 23:52:44 +0000
+
+gnomesword (0.3.7c-2) unstable; urgency=low
+
+  * Standards 3.2.1 then
+  * Added provides, recommends and build-depends
+
+ -- Daniel Glassey <danglassey@yahoo.com>  Mon, 22 Jan 2001 22:26:03 +0000
+
+gnomesword (0.3.7c-1) unstable; urgency=low
+
+  * New upstream release
+  * up standards version to 3.2.0
+
+ -- Daniel Glassey <danglassey@yahoo.com>  Sat, 13 Jan 2001 17:20:53 +0000
+
+gnomesword (0.3.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Daniel Glassey <danglassey@yahoo.com>  Thu, 23 Nov 2000 20:52:21 +0000
+
+gnomesword (0.2.3-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Daniel Glassey <danglassey@yahoo.com>  Wed,  6 Sep 2000 23:35:41 +0100
+
+Local variables:
+mode: debian-changelog
+End:
