@@ -1,5 +1,25 @@
-add printing    - Bible verses
-		- StudyPad <done>
-		- Notes
-Help file
-add scroll buttons for dictionary keys <done>
+TODO:
+	*Remove documentation figures that have prefix "gnomesword"
+	*Remove gnomesword.xml 
+	*Update graphics
+	*SWORD module installer - needs testing
+	*Revamp spell checker dialog
+	*Reorder / enhance Unlock Module menu item	
+	*First time wizard module check/downloader
+	*Enhance link to Strong's numbers
+	*Support SWORD URI's
+	*Minor enhancements for advanced search
+	*Search dialog improvements
+	*Tabs for different passages - in progress
+	*Scroll to new chapter
+	*Implement GConf
+	*Change all popup menus to GNOME from GTK+
+	*Add icons to context menus
+	*Work on Preferences dialog
+	*Finish Manual 
+
+for more information on feature requests, go to :
+https://sourceforge.net/tracker/?group_id=5528&atid=355528
+
+for more bug information, go to:
+https://sourceforge.net/tracker/?atid=105528&group_id=5528&func=browse

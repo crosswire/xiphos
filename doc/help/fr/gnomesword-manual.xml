@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE manual PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY introduction SYSTEM "introduction.xml">
+<!ENTITY start SYSTEM "start.xml"><!-- done -->
+<!ENTITY interface SYSTEM "interface.xml"><!-- done -->
+<!ENTITY preferences SYSTEM "preferences.xml"><!-- done -->
+<!ENTITY modules SYSTEM "modules.xml"><!-- done -->
+<!ENTITY search SYSTEM "search.xml">
+<!ENTITY studypad SYSTEM "studypad.xml"> 
+<!ENTITY personal SYSTEM "personal.xml">
+<!ENTITY authors SYSTEM "authors.xml"><!-- done -->
+<!ENTITY legal SYSTEM "legal.xml"><!-- done -->
+<!ENTITY app "GnomeSword2">
+<!ENTITY appversion "2.1.1">
+<!ENTITY manrevision "2.1">
+<!ENTITY gnomesword "the GnomeSword Team">
+<!ENTITY license SYSTEM "license.xml">
+<!ENTITY date "September 2003">
+]>
+
+<!-- =============Document Header ============================= -->
+<book id="index" lang="fr">
+	<bookinfo>
+		<title>Manuel de GnomeSword2</title>
+		<copyright>
+			<year>2003-2005</year>
+   	 		<holder>The GnomeSword Team</holder>
+  	 	</copyright>
+		<legalnotice>
+			<para>
+	  			L'utilisateur est libre de copier, distribuer et/ou modifier le pr&eacute;sent document 
+				dans les termes de la GFDL (GNU Free Documentation License), Version 1.1 ou toute autre version 
+				ult&eacute;rieure publi&eacute;e par la Free Software Foundation sans section invariante, sans 
+				texte de page de couverture et sans textes de plat verso.  Vous trouverez un exemplaire de la 
+				GFDL au <ulink type="help" url="ghelp:fdl">lien</ulink> suivant ou dans le fichier COPYING-DOCS 
+				fourni avec le pr&eacute;sent manuel.
+      			</para>
+			<para> 
+				Le pr&eacute;sent manuel fait partie d'une collection de manuels GNOME distribu&eacute;s dans 
+				les termes de la GFDL.  Vous pouvez, si vous le souhaitez, le distribuer ind&eacute;pendamment 
+				de la collection en incluant un exemplaire de la licence du manuel, comme le d&eacute;crit la 
+				section 6 de la licence.
+			</para>
+
+			<para>
+	  			La plupart des noms utilis&eacute;s par les entreprises pour leurs produits et leurs services 
+				sont des marques d&eacute;pos&eacute;es. Lorsque ces noms apparaissent dans la documentation 
+				GNOME et que les membres du projet de documentation GNOME sont inform&eacute;s de l'existence 
+				de ces marques d&eacute;pos&eacute;es, ces noms apparaissent en majuscules, ou la premi&egrave;re 
+				lettre en majuscule.
+			</para>
+  		</legalnotice>
+		<abstract>
+			<para>
+				Gnomesword est un logiciel d'aide à l'étude de la Bible..
+			</para>
+		</abstract>
+		<keywordset>
+			<keyword>gnome</keyword>
+			<keyword>gnomesword</keyword>
+			<keyword>gnomesword2</keyword>
+			<keyword>sword</keyword>
+			<keyword>crosswire</keyword>
+			<keyword>help dialog</keyword>
+		</keywordset>
+
+		<!-- this is the version of manual, not application --> 
+		<releaseinfo>Ceci est la version 2.1.1 du manuel de GnomeSword</releaseinfo>
+ 	</bookinfo>
+
+	<!-- Document Body -->
+	<!-- Introduction -->
+		&introduction;
+	<!-- Getting Started with GnomeSword -->
+		&start;
+	<!-- Interface -->
+		&interface;
+	<!-- Preferences -->
+		&preferences;
+	<!-- Modules -->
+		&modules;
+	<!-- Searching -->
+		&search;
+	<!-- Studypad -->
+		&studypad;
+	<!-- Personal Commentary -->
+		&personal;
+	<!-- Authors -->
+		&authors;
+	<!-- License -->
+		&license;
+</book>

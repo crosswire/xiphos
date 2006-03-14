@@ -1,4 +1,4 @@
-2003-09-05  gettextize  <bug-gnu-gettext@gnu.org>
+2003-02-07  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* codeset.m4: New file, from gettext-0.11.4.
 	* gettext.m4: New file, from gettext-0.11.4.

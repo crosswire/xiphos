@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword 0.7.9\n"
-"POT-Creation-Date: 2002-03-28 23:48+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-12-13 23:16-0500\n"
 "PO-Revision-Date: 2003-06-05 15:31+0300\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -14,1622 +15,3199 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/gs_abouts.c:83
+#: ../gnomesword.desktop.in.h:1
+#, fuzzy
+msgid "GnomeSword2 Bible Guide"
+msgstr "GnomeSWORD - программа по изучению Библии"
+
+#: ../gnomesword.desktop.in.h:2
+msgid "Study the Bible"
+msgstr ""
+
+#: ../src/main/lists.cc:138
+#, fuzzy
+msgid "Number of Text modules"
+msgstr "Количество модулей текста Библии:"
+
+#: ../src/main/lists.cc:139
+#, fuzzy
+msgid "Number of Commentary modules"
+msgstr "Количество модулей комментария:"
+
+#: ../src/main/lists.cc:140
+#, fuzzy
+msgid "Number of Dict/lex modules"
+msgstr "Количество модулей текста Библии:"
+
+#: ../src/main/lists.cc:141
+#, fuzzy
+msgid "Number of Book modules"
+msgstr "Количество модулей текста Библии:"
+
+#: ../src/main/lists.cc:142
+#, fuzzy
+msgid "Number of Percomm modules"
+msgstr "Количество модулей комментария:"
+
+#: ../src/main/lists.cc:143
+#, fuzzy
+msgid "Number of Devotion modules"
+msgstr "Количество модулей словаря/лексикона"
+
+#: ../src/main/sidebar.cc:359
+#, fuzzy
+msgid "verse"
+msgstr "Перейти к стиху"
+
+#: ../src/main/sidebar.cc:419
+msgid "chapter"
+msgstr ""
+
+#: ../src/main/sidebar.cc:575 ../src/main/sidebar.cc:846
+#: ../src/main/sidebar.cc:847 ../src/main/sidebar.cc:848
+#: ../src/gnome2/parallel_dialog.c:140 ../src/gnome2/parallel_dialog.c:142
+#: ../src/gnome2/parallel_view.c:436 ../src/gnome2/sidebar.c:652
+#: ../src/gnome2/sidebar.c:661 ../src/gnome2/utilities.c:426
+msgid "Parallel View"
+msgstr ""
+
+#: ../src/main/sidebar.cc:580 ../src/main/sidebar.cc:854
+#: ../src/main/sidebar.cc:855 ../src/main/sidebar.cc:856
+#: ../src/gnome2/main_window.c:616
+msgid "Standard View"
+msgstr ""
+
+#: ../src/main/sidebar.cc:585 ../src/main/sidebar.cc:883
+#: ../src/main/sidebar.cc:885 ../src/gnome2/mod_mgr.c:664
+#: ../src/gnome2/utilities.c:448 ../ui/prefs.glade.h:23
+msgid "Commentaries"
+msgstr ""
+
+#: ../src/main/sidebar.cc:597 ../src/main/sidebar.cc:940
+#: ../src/main/sidebar.cc:942 ../src/gnome2/mod_mgr.c:674
+#: ../src/gnome2/utilities.c:491
+#, fuzzy
+msgid "General Books"
+msgstr "Поиск книги"
+
+#: ../src/main/sidebar.cc:722 ../src/main/sidebar.cc:774
+#: ../src/gnome2/mod_mgr.c:470 ../src/gnome2/mod_mgr.c:539
+#: ../src/gnome2/utilities.c:292 ../src/gnome2/utilities.c:368
+msgid "Unknown"
+msgstr ""
+
+#: ../src/main/sidebar.cc:838 ../src/main/sidebar.cc:840
+#: ../src/gnome2/mod_mgr.c:660 ../src/gnome2/utilities.c:420
+#, fuzzy
+msgid "Biblical Texts"
+msgstr "Тексты Библии"
+
+#: ../src/main/sidebar.cc:911 ../src/main/sidebar.cc:913
+#: ../src/gnome2/mod_mgr.c:669 ../src/gnome2/utilities.c:469
+#, fuzzy
+msgid "Dictionaries"
+msgstr "Словари-Лексиконы"
+
+#: ../src/main/tab_history.c:65 ../src/main/tab_history.c:101
+#: ../src/main/tab_history.c:116
+#, fuzzy
+msgid "H_istory/<Separator>"
+msgstr "История/<Separator>"
+
+#. tab->history_items + 1);
+#: ../src/main/tab_history.c:67 ../src/main/tab_history.c:103
+#, fuzzy
+msgid "H_istory/C_lear"
+msgstr "История/Очистить"
+
+#: ../src/editor/editor-control.c:354 ../src/editor/editor_menu.c:108
+#: ../src/editor/editor_menu.c:183 ../src/editor/editor_menu.c:689
+#: ../src/editor/toolbar_edit.c:234 ../src/gnome2/bibletext.c:1051
+#: ../src/gnome2/bibletext_dialog.c:2091 ../src/gnome2/commentary.c:751
+#: ../src/gnome2/commentary_dialog.c:1746 ../src/gnome2/dictlex.c:1008
+#: ../src/gnome2/gbs.c:827 ../src/gnome2/note_editor.c:1192
+#: ../src/gnome2/studypad.c:103
+msgid "File"
+msgstr "Файл"
+
+#: ../src/editor/editor-control.c:359 ../src/editor/toolbar_edit.c:238
+#: ../src/gnome2/studypad.c:107
+#, fuzzy
+msgid "has been modified. Do you wish to save it?"
+msgstr "``%s'' был изменен.  Хотите сохранить?"
+
+#: ../src/editor/editor_menu.c:141
+msgid "-untitled-"
+msgstr "-без заголовка-"
+
+#: ../src/editor/editor_menu.c:532
+#, fuzzy
+msgid "Add reference Link"
+msgstr "GnomeSWORD Добавить сноску на ссылку"
+
+#: ../src/editor/editor_menu.c:538
+#, fuzzy
+msgid "Link text: "
+msgstr "Продолжить поиск"
+
+#: ../src/editor/editor_menu.c:540
+#, fuzzy
+msgid "Reference: "
+msgstr "Сноска "
+
+#: ../src/editor/editor_menu.c:542 ../src/gnome2/bookmarks_menu.c:480
+#: ../src/gnome2/bookmarks_menu.c:919
+#, fuzzy
+msgid "Module: "
+msgstr "Модуль"
+
+#: ../src/editor/editor_menu.c:696 ../src/editor/toolbar_edit.c:586
+#: ../src/gnome2/mod_mgr.c:958 ../src/gnome2/note_editor.c:1217
+msgid "New"
+msgstr "Новый"
+
+#: ../src/editor/editor_menu.c:700 ../src/editor/toolbar_edit.c:614
+#: ../src/gnome2/note_editor.c:1221
+msgid "Open"
+msgstr "Открыть"
+
+#: ../src/editor/editor_menu.c:704 ../src/editor/toolbar_edit.c:642
+#: ../src/editor/toolbar_edit.c:656 ../src/gnome2/note_editor.c:1225
+#: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:14
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../src/editor/editor_menu.c:709 ../src/gnome2/note_editor.c:1230
+#, fuzzy
+msgid "Save As ..."
+msgstr "Сохранить как"
+
+#: ../src/editor/editor_menu.c:714 ../src/gnome2/note_editor.c:1235
+msgid "Export"
+msgstr ""
+
+#: ../src/editor/editor_menu.c:720 ../src/editor/toolbar_edit.c:689
+#: ../src/gnome2/html.c:654 ../src/gnome2/note_editor.c:1241
+msgid "Print"
+msgstr "Печать"
+
+#: ../src/editor/editor_menu.c:728 ../src/gnome2/main_menu.c:762
+#: ../src/gnome2/note_editor.c:1249
+msgid "_Edit"
+msgstr "Правка"
+
+#: ../src/editor/editor_menu.c:736 ../src/editor/toolbar_edit.c:727
+#: ../src/gnome2/note_editor.c:1257
+msgid "Cut"
+msgstr "Вырезать"
+
+#: ../src/editor/editor_menu.c:740 ../src/editor/toolbar_edit.c:749
+#: ../src/gnome2/main_menu.c:624 ../src/gnome2/note_editor.c:1261
+#: ../src/gnome2/parallel_view.c:260
+msgid "Copy"
+msgstr "Копировать"
+
+#: ../src/editor/editor_menu.c:744 ../src/editor/toolbar_edit.c:759
+#: ../src/gnome2/note_editor.c:1265
+msgid "Paste"
+msgstr "Вставить"
+
+#: ../src/editor/editor_menu.c:748 ../src/gnome2/note_editor.c:1269
+msgid "Spell Check"
+msgstr "Проверка орфографии"
+
+#: ../src/editor/editor_menu.c:759 ../src/editor/toolbar_edit.c:769
+#: ../src/gnome2/note_editor.c:1280
+msgid "Undo"
+msgstr "Отменить действие"
+
+#. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
+#: ../src/editor/editor_menu.c:763 ../src/editor/search.c:109
+#: ../src/editor/search.c:168 ../src/editor/toolbar_edit.c:785
+#: ../src/gnome2/find_dialog.c:209 ../src/gnome2/find_dialog.c:374
+#: ../src/gnome2/note_editor.c:1284
+msgid "Find"
+msgstr "Найти"
+
+#. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
+#: ../src/editor/editor_menu.c:768 ../src/editor/replace.c:164
+#: ../src/editor/replace.c:227 ../src/editor/toolbar_edit.c:796
+#: ../src/gnome2/note_editor.c:1289
+msgid "Replace"
+msgstr "Переместить"
+
+#: ../src/editor/editor_menu.c:772 ../src/gnome2/note_editor.c:1293
+msgid "Link..."
+msgstr "Ссылка..."
+
+#: ../src/editor/popup.c:201 ../src/editor/popup.c:278
+msgid "Properties"
+msgstr ""
+
+#: ../src/editor/popup.c:209 ../src/gnome2/preferences_cell_renderer.c:399
+#, fuzzy
+msgid "Text"
+msgstr "Следующий"
+
+#: ../src/editor/popup.c:215 ../src/editor/popup.c:281
+#, fuzzy
+msgid "Link"
+msgstr "Список"
+
+#: ../src/editor/popup.c:221
+msgid "Image"
+msgstr ""
+
+#: ../src/editor/popup.c:227
+msgid "Paragraph"
+msgstr ""
+
+#: ../src/editor/popup.c:233
+#, fuzzy
+msgid "Page"
+msgstr "Вставить"
+
+#: ../src/editor/popup.c:239 ../src/editor/toolbar_edit.c:123
+#, fuzzy
+msgid "Rule"
+msgstr "Модуль"
+
+#: ../src/editor/popup.c:245 ../src/editor/popup.c:535
+#: ../src/editor/popup.c:547 ../src/editor/toolbar_edit.c:144
+#, fuzzy
+msgid "Table"
+msgstr "Показать вкладки"
+
+#: ../src/editor/popup.c:251
+#, fuzzy
+msgid "Cell"
+msgstr "Проверка орфографии"
+
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: ../src/editor/popup.c:466 ../src/gnome2/bibletext.c:1044
+#: ../src/gnome2/bookmarks_menu.c:470 ../src/gnome2/bookmarks_menu.c:736
+#: ../src/gnome2/bookmarks_menu.c:910 ../src/gnome2/bookmarks_menu.c:1008
+#: ../src/gnome2/bookmarks_treeview.c:102 ../src/gnome2/commentary.c:744
+#: ../src/gnome2/dictlex.c:1001 ../src/gnome2/gbs.c:820
+#: ../src/gnome2/mod_mgr.c:1707 ../src/gnome2/mod_mgr.c:1844
+#, fuzzy
+msgid "Bookmark"
+msgstr "Закладки"
+
+#: ../src/editor/popup.c:472
+msgid "Paste Quotation"
+msgstr ""
+
+#: ../src/editor/popup.c:476
+#, fuzzy
+msgid "Insert Link"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/editor/popup.c:483
+#, fuzzy
+msgid "Remove Link"
+msgstr "Модуль"
+
+#: ../src/editor/popup.c:490
+#, fuzzy
+msgid "Style"
+msgstr "Стиль стиха"
+
+#: ../src/editor/popup.c:493
+msgid "Text Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:495 ../src/editor/popup.c:501
+#: ../src/editor/popup.c:511
+msgid "Paragraph Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:499
+#, fuzzy
+msgid "Link Style..."
+msgstr "Ссылка..."
+
+#: ../src/editor/popup.c:505
+msgid "Rule Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:509
+msgid "Image Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:520
+msgid "Cell Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:523
+msgid "Table Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:529
+msgid "Page Style..."
+msgstr ""
+
+#: ../src/editor/popup.c:534
+msgid "Table insert"
+msgstr ""
+
+#: ../src/editor/popup.c:537
+msgid "Row above"
+msgstr ""
+
+#: ../src/editor/popup.c:538
+msgid "Row below"
+msgstr ""
+
+#: ../src/editor/popup.c:540
+msgid "Column before"
+msgstr ""
+
+#: ../src/editor/popup.c:541
+msgid "Column after"
+msgstr ""
+
+#: ../src/editor/popup.c:546
+msgid "Table delete"
+msgstr ""
+
+#: ../src/editor/popup.c:548
+msgid "Row"
+msgstr ""
+
+#: ../src/editor/popup.c:549
+msgid "Column"
+msgstr ""
+
+#: ../src/editor/popup.c:550
+#, fuzzy
+msgid "Cell contents"
+msgstr "Помощь по содержаниям"
+
+#: ../src/editor/popup.c:558
+msgid "Check Word Spelling..."
+msgstr ""
+
+#: ../src/editor/popup.c:563
+msgid "Add Word to"
+msgstr ""
+
+#: ../src/editor/popup.c:567
+#, fuzzy, c-format
+msgid "%s Dictionary"
+msgstr "Словари-Лексиконы"
+
+# src/gs_preferences_dlg.c
+#: ../src/editor/popup.c:576
+#, fuzzy
+msgid "Add Word to Dictionary"
+msgstr "Использовать словарь по умолчанию"
+
+#: ../src/editor/popup.c:579
+msgid "Ignore Misspelled Word"
+msgstr ""
+
+#: ../src/editor/popup.c:583
+msgid "Input Methods"
+msgstr ""
+
+#. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
+#: ../src/editor/replace.c:80
+msgid "Replace confirmation"
+msgstr "Подтверждение перемещения"
+
+#: ../src/editor/replace.c:81
+#, fuzzy
+msgid "Replace _All"
+msgstr "Переместить все"
+
+#: ../src/editor/replace.c:82
+#, fuzzy
+msgid "_Next"
+msgstr "Следующий"
+
+#: ../src/editor/replace.c:84
+#, fuzzy
+msgid "_Replace"
+msgstr "Переместить"
+
+#: ../src/editor/replace.c:172
+#, fuzzy
+msgid "Search _backward"
+msgstr "обратный поиск"
+
+#: ../src/editor/replace.c:173 ../src/editor/search.c:115
+#, fuzzy
+msgid "Case _sensitive"
+msgstr "Чувствительный к регистру"
+
+#: ../src/editor/replace.c:183
+#, fuzzy
+msgid "Replace:"
+msgstr "Переместить"
+
+#: ../src/editor/replace.c:186
+#, fuzzy
+msgid "With:"
+msgstr "с"
+
+#: ../src/editor/search.c:114
+#, fuzzy
+msgid "_Backward"
+msgstr "Последний поиск"
+
+#: ../src/editor/search.c:116
+#, fuzzy
+msgid "_Regular Expression"
+msgstr "Постоянные выражения"
+
+#: ../src/editor/spell.c:315
+msgid "No misspelled word found"
+msgstr ""
+
+#: ../src/editor/spell.c:323
+#, fuzzy
+msgid "Spell checker"
+msgstr "Проверка орфографии"
+
+#: ../src/editor/spell.c:417
+#, fuzzy
+msgid "Current _Languages"
+msgstr "Цвет текущего стиха"
+
+#. #ifdef USE_GTKFILECHOOSER
+#: ../src/editor/toolbar_edit.c:62 ../src/editor/toolbar_edit.c:813
+#, fuzzy
+msgid "Insert image"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/editor/toolbar_edit.c:120 ../src/editor/toolbar_edit.c:141
+#, fuzzy
+msgid "Insert"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/editor/toolbar_edit.c:330 ../src/gnome2/note_editor.c:689
+#, fuzzy
+msgid "Delete Note?"
+msgstr "Удалить заметку"
+
+#: ../src/editor/toolbar_edit.c:331 ../src/gnome2/note_editor.c:690
+msgid "Are you sure you want to delete the note for\n"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:587
+msgid "Create a new file"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:615
+#, fuzzy
+msgid "Open a file"
+msgstr "Открыть файл"
+
+#: ../src/editor/toolbar_edit.c:643
+#, fuzzy
+msgid "Save the current file"
+msgstr "Открыть файл"
+
+#: ../src/editor/toolbar_edit.c:657
+#, fuzzy
+msgid "Save note"
+msgstr "Сохранить заметку"
+
+#: ../src/editor/toolbar_edit.c:669
+#, fuzzy
+msgid "Delete"
+msgstr "Удалить заметку"
+
+#: ../src/editor/toolbar_edit.c:670
+#, fuzzy
+msgid "Delete note"
+msgstr "Удалить заметку"
+
+#: ../src/editor/toolbar_edit.c:690
+#, fuzzy
+msgid "Print window contents"
+msgstr "Печать этого комментария"
+
+#: ../src/editor/toolbar_edit.c:786
+msgid "Find in this note"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:797
+#, fuzzy
+msgid "Find and Replace"
+msgstr "Переместить"
+
+#: ../src/editor/toolbar_edit.c:814
+msgid "Insert image at cursor"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:823
+#, fuzzy
+msgid "Insert link"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/editor/toolbar_edit.c:824
+msgid "Insert link at cursor"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:833
+#, fuzzy
+msgid "Insert rule"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/editor/toolbar_edit.c:834
+msgid "Insert rule at cursor"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:844
+#, fuzzy
+msgid "Insert table"
+msgstr "Курсив"
+
+#: ../src/editor/toolbar_edit.c:845
+msgid "Insert table at cursor"
+msgstr ""
+
+#: ../src/editor/toolbar_edit.c:864
+#, fuzzy
+msgid "Spell"
+msgstr "Проверка орфографии"
+
+#: ../src/editor/toolbar_edit.c:865
+msgid "Check spelling in this note"
+msgstr ""
+
+#: ../src/editor/toolbar_style.c:51
+msgid "Normal"
+msgstr "Нормальный"
+
+#: ../src/editor/toolbar_style.c:52
+msgid "Preformat"
+msgstr "Предформатирование"
+
+#: ../src/editor/toolbar_style.c:53
+#, fuzzy
+msgid "Bulleted List"
+msgstr "Опции модуля"
+
+#: ../src/editor/toolbar_style.c:54
+#, fuzzy
+msgid "Numbered List"
+msgstr "Нумерованый список"
+
+#: ../src/editor/toolbar_style.c:55
+msgid "Roman List"
+msgstr "Список римскими цифрами"
+
+#: ../src/editor/toolbar_style.c:56
+#, fuzzy
+msgid "Alphabetical List"
+msgstr "Альфа список"
+
+#: ../src/editor/toolbar_style.c:57
+msgid "Header 1"
+msgstr "Заголовок 1"
+
+#: ../src/editor/toolbar_style.c:58
+msgid "Header 2"
+msgstr "Заголовок 2"
+
+#: ../src/editor/toolbar_style.c:59
+msgid "Header 3"
+msgstr "Заголовок 3"
+
+#: ../src/editor/toolbar_style.c:60
+msgid "Header 4"
+msgstr "Заголовок 4"
+
+#: ../src/editor/toolbar_style.c:61
+msgid "Header 5"
+msgstr "Заголовок 5"
+
+#: ../src/editor/toolbar_style.c:62
+msgid "Header 6"
+msgstr "Заголовок 6"
+
+#: ../src/editor/toolbar_style.c:63
+msgid "Address"
+msgstr "Адрес"
+
+#: ../src/editor/toolbar_style.c:601
+msgid "Automatic"
+msgstr "Автоматический"
+
+#: ../src/editor/toolbar_style.c:1058
+msgid "Left align"
+msgstr "Выравнивание по левому краю"
+
+#: ../src/editor/toolbar_style.c:1059
+msgid "Left justifies the paragraphs"
+msgstr "Выравнивание параграфа по левому краю"
+
+#: ../src/editor/toolbar_style.c:1062
+msgid "Center"
+msgstr "По центру"
+
+#: ../src/editor/toolbar_style.c:1063
+msgid "Center justifies the paragraphs"
+msgstr "Выравнивание параграфа по центру"
+
+#: ../src/editor/toolbar_style.c:1066
+msgid "Right align"
+msgstr "Выравнивание по правому краю"
+
+#: ../src/editor/toolbar_style.c:1067
+msgid "Right justifies the paragraphs"
+msgstr "Выравнивание параграфа по правому краю"
+
+#: ../src/editor/toolbar_style.c:1079
+msgid "Typewriter"
+msgstr "Редактор"
+
+#: ../src/editor/toolbar_style.c:1080
+msgid "Toggle typewriter font style"
+msgstr "Выбрать тип шрифта в редакторе"
+
+#: ../src/editor/toolbar_style.c:1083
+msgid "Bold"
+msgstr "Жирный"
+
+#: ../src/editor/toolbar_style.c:1083
+msgid "Makes the text bold"
+msgstr "Сделать текст жирным"
+
+#: ../src/editor/toolbar_style.c:1086
+msgid "Italic"
+msgstr "Курсив"
+
+#: ../src/editor/toolbar_style.c:1087
+msgid "Makes the text italic"
+msgstr "Сделать текст курсивом"
+
+#: ../src/editor/toolbar_style.c:1090
+msgid "Underline"
+msgstr "Подчеркивание"
+
+#: ../src/editor/toolbar_style.c:1091
+msgid "Underlines the text"
+msgstr "Подчеркнуть текст"
+
+#: ../src/editor/toolbar_style.c:1094
+msgid "Strikeout"
+msgstr "Зачеркнуть"
+
+#: ../src/editor/toolbar_style.c:1095
+msgid "Strikes out the text"
+msgstr "Зачеркнуть текст"
+
+#: ../src/editor/toolbar_style.c:1105
+msgid "Unindent"
+msgstr "Без отступа"
+
+#: ../src/editor/toolbar_style.c:1106
+msgid "Indents the paragraphs less"
+msgstr "Меньший отспуп параграфов"
+
+#: ../src/editor/toolbar_style.c:1109
+msgid "Indent"
+msgstr "Оступ"
+
+#: ../src/editor/toolbar_style.c:1110
+msgid "Indents the paragraphs more"
+msgstr "Больший отступ параграфов"
+
+#: ../src/gnome2/about_gnomesword.c:84
+msgid "Copyright 2000-2005 The GnomeSword Development Team"
+msgstr ""
+
+#: ../src/gnome2/about_gnomesword.c:87
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Нам нужно поблагодарить Troy Griffitts и всех других людей, "
-"давших нам проект SWORD."
+"Нам нужно поблагодарить Troy Griffitts и всех других людей, давших нам "
+"проект SWORD."
 
-#: src/gs_abouts.c:105
-msgid "About The Sword Project"
+#: ../src/gnome2/about_modules.c:162
+#, fuzzy
+msgid "About Sword Module"
+msgstr "О модулях Sword"
+
+#: ../src/gnome2/about_sword.c:94
+#, fuzzy
+msgid ""
+"The SWORD Project is an effort to create an ever-expanding software package "
+"for research and study of God and His Word. The SWORD Bible Framework allows "
+"easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and "
+"other books. Many frontends are built using this framework. An installed "
+"module set may be shared between any frontend using the framework."
+msgstr ""
+"Проект SWORD является попыткой создания всеобъемлющей программы для "
+"исследования и изучения Бога и Его Слова. Структура SWORD Библии позволяет "
+"легко манипулировать библейскими текстами, комментариями, лексиконами, "
+"словарями и т.д. Большинство фронтендов созданы с использованием этой "
+"структуры. Набор инсталлированных модулей, используя структуру, может быть "
+"распределен между какими-либо фронтендами."
+
+#: ../src/gnome2/about_sword.c:112
+#, fuzzy
+msgid "About the SWORD Project"
 msgstr "О проекте Sword"
 
-#: src/gs_abouts.c:165
-msgid "The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework. An installed module set may be shared between any frontend using the framework."
-msgstr "Проект SWORD является попыткой создания всеобъемлющей программы для исследования и изучения Бога и Его Слова. Структура SWORD Библии позволяет легко манипулировать библейскими текстами, комментариями, лексиконами, словарями и т.д. Большинство фронтендов созданы с использованием этой структуры. Набор инсталлированных модулей, используя структуру, может быть распределен между какими-либо фронтендами."
+#: ../src/gnome2/about_sword.c:130
+#, fuzzy
+msgid "Sword Version"
+msgstr "Версия SWORD'а:"
 
-#: src/gs_abouts.c:170
-msgid "Modules can be downloaded from the Sword Project "
+#: ../src/gnome2/about_sword.c:161
+#, fuzzy
+msgid "Modules can be downloaded from the SWORD Project"
 msgstr "Модули могут загружаться с проекта SWORD."
 
-#: src/gs_bookmarks.c:117
-msgid "New _Group"
-msgstr "Новая группа"
+#: ../src/gnome2/about_sword.c:167
+#, fuzzy
+msgid "The SWORD Project"
+msgstr "О проекте Sword"
 
-#: src/gs_bookmarks.c:118
-msgid "Add a new root group and file"
-msgstr "Добавить новую корневую группу и файл"
+#: ../src/gnome2/bibletext.c:851 ../src/gnome2/bibletext_dialog.c:1884
+#: ../src/gnome2/commentary.c:551 ../src/gnome2/commentary_dialog.c:1539
+#: ../src/gnome2/dictlex.c:823 ../src/gnome2/gbs.c:627
+msgid "item1"
+msgstr ""
 
-#: src/gs_bookmarks.c:123
-msgid "New _SubGroup"
-msgstr "Новая подгруппа"
+#: ../src/gnome2/bibletext.c:861 ../src/gnome2/bibletext_dialog.c:1894
+#: ../src/gnome2/commentary.c:561 ../src/gnome2/commentary_dialog.c:1549
+#: ../src/gnome2/dictlex.c:833 ../src/gnome2/gbs.c:637
+#, fuzzy
+msgid "Open Module"
+msgstr "Просмотр модуля"
 
-#: src/gs_bookmarks.c:124
-msgid "Add new SubGroup to selected group"
+#: ../src/gnome2/bibletext.c:873 ../src/gnome2/bibletext_dialog.c:1920
+#: ../src/gnome2/commentary.c:573 ../src/gnome2/commentary_dialog.c:1575
+#: ../src/gnome2/gbs.c:649
+msgid "item2"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:885 ../src/gnome2/bibletext_dialog.c:1932
+#: ../src/gnome2/commentary.c:585 ../src/gnome2/commentary_dialog.c:1587
+#: ../src/gnome2/gbs.c:661
+#, fuzzy
+msgid "Note"
+msgstr "Сохранить заметку"
+
+#: ../src/gnome2/bibletext.c:895 ../src/gnome2/bibletext_dialog.c:1942
+#: ../src/gnome2/commentary.c:595 ../src/gnome2/commentary_dialog.c:1597
+#: ../src/gnome2/dictlex.c:852 ../src/gnome2/gbs.c:671
+#, fuzzy
+msgid "All Readings"
+msgstr "Допустить преобразование"
+
+#: ../src/gnome2/bibletext.c:901 ../src/gnome2/bibletext_dialog.c:1948
+#: ../src/gnome2/commentary.c:601 ../src/gnome2/commentary_dialog.c:1603
+#: ../src/gnome2/dictlex.c:858 ../src/gnome2/gbs.c:677
+#, fuzzy
+msgid "Primary Reading"
+msgstr "Заголовки"
+
+#: ../src/gnome2/bibletext.c:907 ../src/gnome2/bibletext_dialog.c:1954
+#: ../src/gnome2/commentary.c:607 ../src/gnome2/commentary_dialog.c:1609
+#: ../src/gnome2/dictlex.c:864 ../src/gnome2/gbs.c:683
+msgid "Secondary Reading"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:925 ../src/gnome2/bibletext_dialog.c:1972
+#: ../src/gnome2/commentary.c:625 ../src/gnome2/commentary_dialog.c:1627
+#: ../src/gnome2/dictlex.c:882 ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/gbs.c:701
+msgid "Set Module Font"
+msgstr "Установка шрифта модуля"
+
+#: ../src/gnome2/bibletext.c:932 ../src/gnome2/bibletext_dialog.c:1979
+#: ../src/gnome2/commentary.c:632 ../src/gnome2/commentary_dialog.c:1634
+#: ../src/gnome2/dictlex.c:889 ../src/gnome2/gbs.c:708
+msgid "Words of Christ in Red"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:941 ../src/gnome2/bibletext_dialog.c:1988
+#: ../src/gnome2/commentary.c:641 ../src/gnome2/commentary_dialog.c:1643
+#: ../src/gnome2/dictlex.c:898 ../src/gnome2/gbs.c:717
+msgid "Strong's Numbers"
+msgstr "Номера Стронга"
+
+#: ../src/gnome2/bibletext.c:952 ../src/gnome2/bibletext_dialog.c:1999
+#: ../src/gnome2/commentary.c:652 ../src/gnome2/commentary_dialog.c:1654
+#: ../src/gnome2/dictlex.c:909 ../src/gnome2/gbs.c:728
+msgid "Morphological Tags"
+msgstr "Морфологические теги"
+
+#: ../src/gnome2/bibletext.c:960 ../src/gnome2/bibletext_dialog.c:2007
+#: ../src/gnome2/commentary.c:660 ../src/gnome2/commentary_dialog.c:1662
+#: ../src/gnome2/dictlex.c:917 ../src/gnome2/gbs.c:736
+msgid "Footnotes"
+msgstr "Нижние заметки"
+
+#: ../src/gnome2/bibletext.c:968 ../src/gnome2/bibletext_dialog.c:2015
+#: ../src/gnome2/commentary.c:668 ../src/gnome2/commentary_dialog.c:1670
+#: ../src/gnome2/dictlex.c:925 ../src/gnome2/gbs.c:744
+msgid "Greek Accents"
+msgstr "Греческие ударения"
+
+#: ../src/gnome2/bibletext.c:976 ../src/gnome2/bibletext_dialog.c:2023
+#: ../src/gnome2/commentary.c:676 ../src/gnome2/commentary_dialog.c:1678
+#: ../src/gnome2/dictlex.c:933 ../src/gnome2/gbs.c:752
+msgid "Lemmas"
+msgstr "Аннотации"
+
+#: ../src/gnome2/bibletext.c:984 ../src/gnome2/bibletext_dialog.c:2031
+#: ../src/gnome2/commentary.c:684 ../src/gnome2/commentary_dialog.c:1686
+#: ../src/gnome2/dictlex.c:941 ../src/gnome2/gbs.c:760
+msgid "Scripture Cross-references"
+msgstr "Перекрестные ссылки Писания"
+
+#: ../src/gnome2/bibletext.c:992 ../src/gnome2/bibletext_dialog.c:2039
+#: ../src/gnome2/commentary.c:692 ../src/gnome2/commentary_dialog.c:1694
+#: ../src/gnome2/dictlex.c:949 ../src/gnome2/gbs.c:768
+msgid "Hebrew Vowel Points"
+msgstr "Черты гласных иврита"
+
+#: ../src/gnome2/bibletext.c:1000 ../src/gnome2/bibletext_dialog.c:2047
+#: ../src/gnome2/commentary.c:700 ../src/gnome2/commentary_dialog.c:1702
+#: ../src/gnome2/dictlex.c:957 ../src/gnome2/gbs.c:776
+msgid "Hebrew Cantillation"
+msgstr "Кантиляции иврита"
+
+#: ../src/gnome2/bibletext.c:1008 ../src/gnome2/bibletext_dialog.c:2055
+#: ../src/gnome2/commentary.c:708 ../src/gnome2/commentary_dialog.c:1710
+#: ../src/gnome2/dictlex.c:965 ../src/gnome2/gbs.c:784
+msgid "Headings"
+msgstr "Заголовки"
+
+#: ../src/gnome2/bibletext.c:1016 ../src/gnome2/bibletext_dialog.c:2063
+#: ../src/gnome2/commentary.c:716 ../src/gnome2/commentary_dialog.c:1718
+#: ../src/gnome2/dictlex.c:973 ../src/gnome2/gbs.c:792
+#, fuzzy
+msgid "Variants"
+msgstr "Печать"
+
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/bibletext.c:1026 ../src/gnome2/bibletext.c:1148
+#: ../src/gnome2/bibletext_dialog.c:2073 ../src/gnome2/bibletext_dialog.c:2182
+#: ../src/gnome2/commentary.c:726 ../src/gnome2/commentary.c:847
+#: ../src/gnome2/commentary_dialog.c:1728
+#: ../src/gnome2/commentary_dialog.c:1834 ../src/gnome2/dictlex.c:983
+#: ../src/gnome2/dictlex.c:1094 ../src/gnome2/gbs.c:802
+#: ../src/gnome2/gbs.c:916
+#, fuzzy
+msgid "Use Current Dictionary"
+msgstr "Использовать словарь по умолчанию"
+
+#: ../src/gnome2/bibletext.c:1037 ../src/gnome2/bibletext_dialog.c:2084
+#: ../src/gnome2/commentary.c:737 ../src/gnome2/commentary_dialog.c:1739
+#: ../src/gnome2/dictlex.c:994 ../src/gnome2/gbs.c:813
+#: ../src/gnome2/sidebar.c:985
+msgid "About"
+msgstr ""
+
+#: ../src/gnome2/bibletext.c:1057 ../src/gnome2/bibletext_dialog.c:2097
+#: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/commentary.c:757
+#: ../src/gnome2/commentary_dialog.c:1752 ../src/gnome2/dictlex.c:1014
+#: ../src/gnome2/gbs.c:833
+#, fuzzy
+msgid "Edit"
+msgstr "Правка"
+
+#: ../src/gnome2/bibletext.c:1063 ../src/gnome2/bibletext_dialog.c:2103
+#: ../src/gnome2/commentary.c:763 ../src/gnome2/commentary_dialog.c:1758
+#: ../src/gnome2/dictlex.c:1020 ../src/gnome2/gbs.c:839
+#, fuzzy
+msgid "_Module Options"
+msgstr "Опции модуля"
+
+#: ../src/gnome2/bibletext.c:1069 ../src/gnome2/bibletext_dialog.c:2109
+#: ../src/gnome2/commentary.c:769 ../src/gnome2/commentary_dialog.c:1764
+#: ../src/gnome2/dictlex.c:1026 ../src/gnome2/gbs.c:845
+msgid "Lookup Selection"
+msgstr "Выборочный просмотр"
+
+#: ../src/gnome2/bibletext.c:1075 ../src/gnome2/bibletext_dialog.c:2115
+#: ../src/gnome2/commentary.c:775 ../src/gnome2/commentary_dialog.c:1770
+#: ../src/gnome2/dictlex.c:1032 ../src/gnome2/gbs.c:851
+msgid "Unlock This Module"
+msgstr "Разблокировать модуль"
+
+#: ../src/gnome2/bibletext.c:1082 ../src/gnome2/commentary.c:782
+#: ../src/gnome2/dictlex.c:1039 ../src/gnome2/gbs.c:858
+msgid "Show Tabs"
+msgstr "Показать вкладки"
+
+#: ../src/gnome2/bibletext_dialog.c:570
+#, fuzzy
+msgid "Go to "
+msgstr "Перейти к %s"
+
+#: ../src/gnome2/bibletext_dialog.c:1900
+#: ../src/gnome2/commentary_dialog.c:1555
+#, fuzzy
+msgid "Sync with main"
+msgstr "Синхронизировать с главным окном"
+
+#: ../src/gnome2/bibletext_dialog.c:1906
+#: ../src/gnome2/commentary_dialog.c:1561
+msgid "Stay in sync"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:473
+#, fuzzy
+msgid "Folder name: "
+msgstr "Ввести стих"
+
+#: ../src/gnome2/bookmarks_menu.c:476
+#, fuzzy
+msgid "Bookmark name: "
+msgstr "Закладки"
+
+#: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:918
+#, fuzzy
+msgid "Verse: "
+msgstr "Список стиха"
+
+#: ../src/gnome2/bookmarks_menu.c:664
+msgid "Restore Bookmark Folder"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:740
+#, fuzzy
+msgid "Remove the selected folder"
 msgstr "Добавить новую подгруппу в выбранную группу"
 
-#: src/gs_bookmarks.c:129
-msgid "_Insert Item"
-msgstr "Вставить элемент"
+#: ../src/gnome2/bookmarks_menu.c:742
+msgid "(and all its contents)?"
+msgstr ""
 
-#: src/gs_bookmarks.c:130
+#: ../src/gnome2/bookmarks_menu.c:747
+#, fuzzy
+msgid "Remove the selected bookmark"
+msgstr "Просмотр поиска результатов"
+
+#: ../src/gnome2/bookmarks_menu.c:911
+msgid "Add"
+msgstr "Добавить"
+
+#: ../src/gnome2/bookmarks_menu.c:917
+#, fuzzy
+msgid "Label: "
+msgstr "Метка"
+
+#: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
+#, fuzzy
+msgid "Enter Folder Name"
+msgstr "Ввести стих"
+
+#: ../src/gnome2/bookmarks_menu.c:1012
+msgid "Folder Name"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1013 ../src/gnome2/bookmarks_treeview.c:105
+msgid "Folder: "
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1103
+msgid "Remove Folder"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1104
+msgid "Remove folder and save it"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1110
+msgid "Restore Folder"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1111
+msgid "Restore saved folder"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:972
+#, fuzzy
+msgid "Open in a new tab"
+msgstr "Открыть диалог поиска"
+
+#: ../src/gnome2/bookmarks_menu.c:1121 ../src/gnome2/bookmarks_menu.c:1127
+#, fuzzy
+msgid "Open this bookmark in a dialog"
+msgstr "Открыть диалог поиска"
+
+#: ../src/gnome2/bookmarks_menu.c:1126
+#, fuzzy
+msgid "Open in a dialog"
+msgstr "Открыть диалог поиска"
+
+#: ../src/gnome2/bookmarks_menu.c:1132
+msgid "New Folder"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_menu.c:1133
+#, fuzzy
+msgid "Add new folder to selected folder"
+msgstr "Добавить новую подгруппу в выбранную группу"
+
+#: ../src/gnome2/bookmarks_menu.c:1138
+#, fuzzy
+msgid "Insert Bookmark"
+msgstr "Вставить здесь новую закладку"
+
+#: ../src/gnome2/bookmarks_menu.c:1139
 msgid "Insert new bookmark here"
 msgstr "Вставить здесь новую закладку"
 
-#: src/gs_bookmarks.c:135
-msgid "_Add Item at Root"
-msgstr "Добавить элемент в корень"
-
-#: src/gs_bookmarks.c:136
-msgid "Add new bookmark item"
-msgstr "Добавить новый елемент закладки"
-
-#: src/gs_bookmarks.c:141
-msgid "Edit Item"
+#: ../src/gnome2/bookmarks_menu.c:1144
+#, fuzzy
+msgid "_Edit Item"
 msgstr "Правка элемента"
 
-#: src/gs_bookmarks.c:142
+#: ../src/gnome2/bookmarks_menu.c:1145
 msgid "Edit bookmark item"
 msgstr "Правка элемента закладки"
 
-#: src/gs_bookmarks.c:147
-msgid "Delete Item(s)"
+#: ../src/gnome2/bookmarks_menu.c:1150
+#, fuzzy
+msgid "Delete Item"
 msgstr "Удалить элемент(ы)"
 
-#: src/gs_bookmarks.c:148
-msgid "Delete item and it's siblings"
-msgstr "Удалить элемент и его уровни"
+#: ../src/gnome2/bookmarks_menu.c:1151
+#, fuzzy
+msgid "Delete item"
+msgstr "Удалить заметку"
 
-#: src/gs_bookmarks.c:154
-msgid "Save Bookmarks"
-msgstr "Сохранить закладки"
-
-#: src/gs_bookmarks.c:155
-msgid "Save all bookmark files"
-msgstr "Сохранить все файлы закладок"
-
-#: src/gs_bookmarks.c:160
+#: ../src/gnome2/bookmarks_menu.c:1157
 msgid "Expand All"
 msgstr "Выделить все"
 
-#: src/gs_bookmarks.c:161
+#: ../src/gnome2/bookmarks_menu.c:1158
 msgid "Expand all Bookmarks groups"
 msgstr "Выделить все группы закладок"
 
-#: src/gs_bookmarks.c:166
+#: ../src/gnome2/bookmarks_menu.c:1163
 msgid "Collapse All"
 msgstr "Уничтожить все"
 
-#: src/gs_bookmarks.c:167
+#: ../src/gnome2/bookmarks_menu.c:1164
 msgid "Collapse all Bookmarks groups"
 msgstr "Уничтожить все группы закладок"
 
-#: src/gs_bookmarks.c:172
+#: ../src/gnome2/bookmarks_menu.c:1170
 msgid "Allow Reordering"
 msgstr "Допустить преобразование"
 
-#: src/gs_bookmarks.c:173
-msgid "Toggle Reording - allow items to be moved by draging"
-msgstr "Переключать преобразование - допускать перемещение пунктов перетягиванием"
+#: ../src/gnome2/bookmarks_menu.c:1172
+#, fuzzy
+msgid "Allow items to be moved from one folder to another"
+msgstr ""
+"Переключать преобразование - допускать перемещение пунктов перетягиванием"
 
-#: src/gs_bookmarks.c:836
-msgid "GnomeSword - New Bookmark"
-msgstr "GnomeSword - Новая закладка"
+#: ../src/gnome2/bookmarks_menu.c:1178
+#, fuzzy
+msgid "Import Bibletime Bookmarks"
+msgstr "Сохранить закладки"
 
-#: src/gs_bookmarks.c:837
-msgid "GnomeSword - Edit Bookmark"
-msgstr "GnomeSword - Правка закладки"
+#: ../src/gnome2/bookmarks_menu.c:1179
+msgid "Load Bookmarks from Bibletime"
+msgstr ""
 
-#: src/gs_bookmarks.c:856
-msgid "Label"
-msgstr "Метка"
+#: ../src/gnome2/bookmarks_menu.c:1184
+msgid "Remove - Restore"
+msgstr ""
 
-#: src/gs_bookmarks.c:867
-msgid "Reference "
-msgstr "Сноска "
+#: ../src/gnome2/cipher_key_dialog.c:59
+msgid "Cipher Key?"
+msgstr ""
 
-#: src/gs_bookmarks.c:878 src/gs_editor.c:1310
-msgid "Module"
-msgstr "Модуль"
+#: ../src/gnome2/cipher_key_dialog.c:60
+msgid "for:"
+msgstr ""
 
-#: src/gs_detach_int.c:72 src/gs_gui.c:1589 src/gs_gui.c:1600
-msgid "Interlinear"
-msgstr "Подстрочный"
+#: ../src/gnome2/cipher_key_dialog.c:63
+msgid "Enter Cipher Key: "
+msgstr ""
 
-#: src/gs_detach_int.c:74
-msgid "Interlinear Page"
-msgstr "Подстрочная страница"
+#: ../src/gnome2/dialog.c:211
+msgid "Close without Saving"
+msgstr ""
 
-#: src/gs_detach_int.c:210
-msgid "GnomeSWORD - Interlinear Page"
-msgstr "GnomeSWORD - Подстрочная страница"
+#: ../src/gnome2/dialog.c:821
+msgid "Close _without Saving"
+msgstr ""
 
-#: src/gs_detach_int.c:238 src/gs_viewdict_dlg.c:279
-msgid "button6"
-msgstr "кнопка6"
-
-#: src/gs_detach_int.c:265 src/gs_gui.c:831
-msgid "Romans"
-msgstr "Римлянам"
-
-#: src/gs_detach_int.c:292 src/gs_gnomesword.c:65 src/gs_gui.c:864
-msgid "Romans 8:28"
-msgstr "Римлянам 8:28"
-
-#: src/gs_detach_int.c:298 src/gs_gui.c:872
-msgid "Goto verse"
-msgstr "Перейти к стиху"
-
-#: src/gs_detach_int.c:299 src/gs_gui.c:874
-msgid "Go to verse in free form lookup and add verse to history"
-msgstr "Перейти к стиху в свободной форме просмотра и добавить стих в историю"
-
-#: src/gs_detach_int.c:313
-msgid "Dock"
-msgstr "Документ"
-
-#: src/gs_detach_sb.c:56
-msgid "GnomeSWORD"
-msgstr "GnomeSWORD"
-
-#: src/gs_editor.c:606 src/gs_editor.c:640
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr "``%s'' был изменен.  Хотите сохранить?"
-
-#: src/gs_editor.c:624
-msgid "-untitled-"
-msgstr "-без заголовка-"
-
-#: src/gs_editor.c:919
-msgid "File"
-msgstr "Файл"
-
-#: src/gs_editor.c:942
-msgid "Save Note"
-msgstr "Сохранить заметку"
-
-#: src/gs_editor.c:952
-msgid "Delete Note"
-msgstr "Удалить заметку"
-
-#: src/gs_editor.c:964
-msgid "Open File"
+#: ../src/gnome2/fileselection.c:216
+#, fuzzy
+msgid "Open StudyPad File"
 msgstr "Открыть файл"
 
-#: src/gs_editor.c:973
-msgid "Save Entry"
-msgstr "Сохранить поле"
+#: ../src/gnome2/fileselection.c:266
+#, fuzzy
+msgid "Save StudyPad File"
+msgstr "Открыть файл"
 
-#: src/gs_editor.c:983
-msgid "Delete Entry"
-msgstr "Удалить поле"
+#: ../src/gnome2/find_dialog.c:227
+#, fuzzy
+msgid "Enter Word or Phrase"
+msgstr "Ввести стих"
 
-#: src/gs_editor.c:994
-msgid "New"
-msgstr "Новый"
+#: ../src/gnome2/find_dialog.c:242 ../src/gnome2/search_sidebar.c:289
+#: ../ui/search-dialog.glade.h:35
+msgid "Match case"
+msgstr ""
 
-#: src/gs_editor.c:1002
-msgid "Open"
-msgstr "Открыть"
+#: ../src/gnome2/find_dialog.c:248
+#, fuzzy
+msgid "Search backwards"
+msgstr "обратный поиск"
 
-#: src/gs_editor.c:1011
-msgid "Save"
-msgstr "Сохранить"
+#: ../src/gnome2/find_dialog.c:256 ../src/gnome2/search_sidebar.c:254
+#: ../ui/search-dialog.glade.h:40
+#, fuzzy
+msgid "Regular expression"
+msgstr "Постоянные выражения"
 
-#: src/gs_editor.c:1021
-msgid "Save AS"
-msgstr "Сохранить как"
-
-#: src/gs_editor.c:1031 src/gs_gui.c:1113
-msgid "Print"
-msgstr "Печать"
-
-#: src/gs_editor.c:1041
-msgid "_Edit"
-msgstr "Правка"
-
-#: src/gs_editor.c:1063
-msgid "Cut"
-msgstr "Вырезать"
-
-#: src/gs_editor.c:1070 src/gs_gui.c:154 src/gs_menu.c:789 src/gs_menu.c:963
-#: src/gs_menu.c:1212 src/sw_gbs.cpp:385
-msgid "Copy"
-msgstr "Копировать"
-
-#: src/gs_editor.c:1077
-msgid "Paste"
-msgstr "Вставить"
-
-#: src/gs_editor.c:1085
-msgid "Spell Check"
-msgstr "Проверка орфографии"
-
-#: src/gs_editor.c:1093
-msgid "Undo"
-msgstr "Отменить действие"
-
-#: src/gs_editor.c:1100 src/gs_editor_search.c:86 src/gs_editor_search.c:129
-#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/gs_find_dlg.c:144
-#: src/sw_gbs.cpp:392
-msgid "Find"
-msgstr "Найти"
-
-#: src/gs_editor.c:1107 src/gs_editor_search.c:86 src/gs_find_dlg.c:96
+#: ../src/gnome2/find_dialog.c:297
 msgid "Find Next"
 msgstr "Продолжить поиск"
 
-#: src/gs_editor.c:1119 src/gs_editor_replace.c:88 src/gs_editor_replace.c:150
-#: src/gs_editor_replace.c:162 src/gs_editor_replace.c:208
-msgid "Replace"
-msgstr "Переместить"
-
-#: src/gs_editor.c:1127
-msgid "Link..."
-msgstr "Ссылка..."
-
-#: src/gs_editor.c:1270
-msgid "GnomeSWORD Add Reference Link"
-msgstr "GnomeSWORD Добавить сноску на ссылку"
-
-#: src/gs_editor.c:1286
-msgid "Reference"
-msgstr "Сноска"
-
-#: src/gs_editor.c:1302
-msgid "Bible Reference or Module key to display when link is clicked"
-msgstr "Библейская сноска или ключ модуля для показа при щелчке на ссылку"
-
-#: src/gs_editor.c:1326
-msgid "Name of module to show when link is clicked"
-msgstr "Название модуля для показа при щелчке на ссылку"
-
-#: src/gs_editor_replace.c:87
-msgid "Replace confirmation"
-msgstr "Подтверждение перемещения"
-
-#: src/gs_editor_replace.c:88
-msgid "Replace all"
-msgstr "Переместить все"
-
-#: src/gs_editor_replace.c:88
-msgid "Next"
-msgstr "Следующий"
-
-#: src/gs_editor_replace.c:156
-msgid "search backward"
-msgstr "обратный поиск"
-
-#: src/gs_editor_replace.c:157 src/gs_editor_search.c:89 src/gs_find_dlg.c:99
-msgid "case sensitive"
-msgstr "Чувствительный к регистру"
-
-#: src/gs_editor_replace.c:165
-msgid "with"
-msgstr "с"
-
-#: src/gs_editor_search.c:88 src/gs_find_dlg.c:98
-msgid "backward"
-msgstr "обратный"
-
-#: src/gs_editor_search.c:129 src/gs_find_dlg.c:144
-msgid "Find Regular Expression"
-msgstr "Поиск постоянного выражения"
-
-#: src/gs_editor_toolbar.c:51
-msgid "Normal"
-msgstr "Нормальный"
-
-#: src/gs_editor_toolbar.c:52
-msgid "Preformat"
-msgstr "Предформатирование"
-
-#: src/gs_editor_toolbar.c:53
-msgid "Header 1"
-msgstr "Заголовок 1"
-
-#: src/gs_editor_toolbar.c:54
-msgid "Header 2"
-msgstr "Заголовок 2"
-
-#: src/gs_editor_toolbar.c:55
-msgid "Header 3"
-msgstr "Заголовок 3"
-
-#: src/gs_editor_toolbar.c:56
-msgid "Header 4"
-msgstr "Заголовок 4"
-
-#: src/gs_editor_toolbar.c:57
-msgid "Header 5"
-msgstr "Заголовок 5"
-
-#: src/gs_editor_toolbar.c:58
-msgid "Header 6"
-msgstr "Заголовок 6"
-
-#: src/gs_editor_toolbar.c:59
-msgid "Address"
-msgstr "Адрес"
-
-#: src/gs_editor_toolbar.c:60
-msgid "List"
-msgstr "Список"
-
-#: src/gs_editor_toolbar.c:61
-msgid "Num List"
-msgstr "Нумерованый список"
-
-#: src/gs_editor_toolbar.c:62
-msgid "Roman List"
-msgstr "Список римскими цифрами"
-
-#: src/gs_editor_toolbar.c:63
-msgid "Alpha List"
-msgstr "Альфа список"
-
-#: src/gs_editor_toolbar.c:291
-msgid "Automatic"
-msgstr "Автоматический"
-
-#: src/gs_editor_toolbar.c:499
-msgid "Left align"
-msgstr "Выравнивание по левому краю"
-
-#: src/gs_editor_toolbar.c:499
-msgid "Left justifies the paragraphs"
-msgstr "Выравнивание параграфа по левому краю"
-
-#: src/gs_editor_toolbar.c:501
-msgid "Center"
-msgstr "По центру"
-
-#: src/gs_editor_toolbar.c:501
-msgid "Center justifies the paragraphs"
-msgstr "Выравнивание параграфа по центру"
-
-#: src/gs_editor_toolbar.c:503
-msgid "Right align"
-msgstr "Выравнивание по правому краю"
-
-#: src/gs_editor_toolbar.c:503
-msgid "Right justifies the paragraphs"
-msgstr "Выравнивание параграфа по правому краю"
-
-#: src/gs_editor_toolbar.c:510
-msgid "Typewriter"
-msgstr "Редактор"
-
-#: src/gs_editor_toolbar.c:510
-msgid "Toggle typewriter font style"
-msgstr "Выбрать тип шрифта в редакторе"
-
-#: src/gs_editor_toolbar.c:512
-msgid "Bold"
-msgstr "Жирный"
-
-#: src/gs_editor_toolbar.c:512
-msgid "Makes the text bold"
-msgstr "Сделать текст жирным"
-
-#: src/gs_editor_toolbar.c:514
-msgid "Italic"
-msgstr "Курсив"
-
-#: src/gs_editor_toolbar.c:514
-msgid "Makes the text italic"
-msgstr "Сделать текст курсивом"
-
-#: src/gs_editor_toolbar.c:516
-msgid "Underline"
-msgstr "Подчеркивание"
-
-#: src/gs_editor_toolbar.c:516
-msgid "Underlines the text"
-msgstr "Подчеркнуть текст"
-
-#: src/gs_editor_toolbar.c:518
-msgid "Strikeout"
-msgstr "Зачеркнуть"
-
-#: src/gs_editor_toolbar.c:518
-msgid "Strikes out the text"
-msgstr "Зачеркнуть текст"
-
-#: src/gs_editor_toolbar.c:527
-msgid "Unindent"
-msgstr "Без отступа"
-
-#: src/gs_editor_toolbar.c:527
-msgid "Indents the paragraphs less"
-msgstr "Меньший отспуп параграфов"
-
-#: src/gs_editor_toolbar.c:529
-msgid "Indent"
-msgstr "Оступ"
-
-#: src/gs_editor_toolbar.c:529
-msgid "Indents the paragraphs more"
-msgstr "Больший отступ параграфов"
-
-#: src/gs_file.c:398
-msgid "GnomeSword - Open Note File"
-msgstr "GnomeSword - Открыть файл заметки"
-
-#: src/gs_file.c:433
-msgid "GomeSword - Save Note File"
-msgstr "GomeSword - Сохранить файл заметки"
-
-#: src/gs_gnomesword.c:161
-msgid "Settings/"
-msgstr "Настройки/"
-
-#: src/gs_gnomesword.c:161
-msgid "Verse Style"
-msgstr "Стиль стиха"
-
-#: src/gs_gnomesword.c:411
-msgid "_Quickmarks/<Separator>"
-msgstr "Быстрые метки/<Separator>"
-
-#: src/gs_gnomesword.c:412 src/gs_mainmenu_cb.c:151
-msgid "_Quickmarks/Clear Quickmarks"
-msgstr "Быстрые метки/Очистить метки"
-
-#: src/gs_gui.c:155
-msgid "Copy highlighted text from main window"
-msgstr "Копировать выделенный текст из главного окна"
-
-#: src/gs_gui.c:161 src/gs_shortcutbar.c:2070
-msgid "Search"
-msgstr "Поиск"
-
-#: src/gs_gui.c:162
-msgid "Open search dialog"
-msgstr "Открыть диалог поиска"
-
-#: src/gs_gui.c:171
-msgid "Add Quickmark"
-msgstr "Добавить быструю метку"
-
-#: src/gs_gui.c:172
-msgid "Add current verse to Quickmarks menu"
-msgstr "Добавить текущий стих в меню быстрых меток"
-
-#: src/gs_gui.c:177
-msgid "Clear Quickmarks"
-msgstr "Очистить быстрые метки"
-
-#: src/gs_gui.c:178
-msgid "Edit Quickmarks"
-msgstr "Правка быстрых меток"
-
-#: src/gs_gui.c:188
-msgid "C_lear"
-msgstr "Очистить"
-
-#: src/gs_gui.c:189
-msgid "Clear history list"
-msgstr "Очистить список истории"
-
-#: src/gs_gui.c:199
-msgid "Daily Devotion"
-msgstr "Ежедневная молитва"
-
-#: src/gs_gui.c:200
-msgid "Show the Daily Devotion for Today"
-msgstr "Показать молитву на сегодня"
-
-#: src/gs_gui.c:214 src/gs_menu.c:1234 src/gs_viewtext_dlg.c:473
-msgid "Module Options"
-msgstr "Опции модуля"
-
-#: src/gs_gui.c:245
-msgid "Bible Texts"
-msgstr "Тексты Библии"
-
-#: src/gs_gui.c:246
-msgid "Information about Bible texts"
-msgstr "Информация о текстах Библии"
-
-#: src/gs_gui.c:251 src/gs_gui.c:1156 src/gs_gui.c:1165
-#: src/gs_shortcutbar.c:1944
-msgid "Commentaries"
+#: ../src/gnome2/font_dialog.c:322
+msgid "Change font for"
 msgstr ""
 
-#: src/gs_gui.c:257
-msgid "Dictionaries-Lexicons"
-msgstr "Словари-Лексиконы"
+#: ../src/gnome2/font_dialog.c:326
+#, fuzzy
+msgid "Module"
+msgstr "Модуль"
 
-#: src/gs_gui.c:263 src/gs_gui.c:1539 src/gs_gui.c:1552
-msgid "Books"
-msgstr "Книги"
+#: ../src/gnome2/font_dialog.c:330
+#, fuzzy
+msgid "Current font: "
+msgstr "Цвет текущего стиха"
 
-#: src/gs_gui.c:273
-msgid "Contents"
-msgstr "Содержание"
+#: ../src/gnome2/font_dialog.c:359
+#, fuzzy
+msgid "+5"
+msgstr "+5\r"
 
-#: src/gs_gui.c:274
-msgid "Help Contents"
-msgstr "Помощь по содержаниям"
+#: ../src/gnome2/font_dialog.c:361
+msgid "+4"
+msgstr "+4"
 
-#: src/gs_gui.c:279
-msgid "About the Sword Project..."
-msgstr "О проекте Sword..."
+#: ../src/gnome2/font_dialog.c:363
+msgid "+3"
+msgstr "+3"
 
-#: src/gs_gui.c:280
-msgid "Infotmation About The Sword Project"
-msgstr "Информация о проекте Sword"
+#: ../src/gnome2/font_dialog.c:365
+msgid "+2"
+msgstr "+2"
 
-#: src/gs_gui.c:285
-msgid "About Sword Modules"
-msgstr "О модулях Sword"
+#: ../src/gnome2/font_dialog.c:367
+msgid "+1"
+msgstr "+1"
 
-#: src/gs_gui.c:286
-msgid "Information about the installed modules"
-msgstr "Информация об инсталлированных модулях"
+#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
+msgid "+0"
+msgstr "+0"
 
-#: src/gs_gui.c:292
-msgid "About GnomeSword..."
-msgstr "О GnomeSword..."
+#: ../src/gnome2/font_dialog.c:371
+msgid "-1"
+msgstr "-1"
 
-#: src/gs_gui.c:293
-msgid "About GnomeSword"
-msgstr "О GnomeSword"
+#: ../src/gnome2/font_dialog.c:373
+msgid "-2"
+msgstr "-2"
 
-#: src/gs_gui.c:304
-msgid "_Quickmarks"
-msgstr "Быстрые метки"
+#: ../src/gnome2/font_dialog.c:375
+msgid "-3"
+msgstr ""
 
-#: src/gs_gui.c:310
-msgid "_History"
-msgstr "История"
+#: ../src/gnome2/font_dialog.c:386
+#, fuzzy
+msgid "Use the default font for this module"
+msgstr "Об этом модуле"
 
-#: src/gs_gui.c:436
-msgid "GnomeSWORD - Bible Study Software"
-msgstr "GnomeSWORD - программа по изучению Библии"
-
-#: src/gs_gui.c:669
-msgid "Detach/Attach Shortcut Bar"
-msgstr "Отсоединить/Присоединить панель ярлыков"
-
-#: src/gs_gui.c:684
-msgid "Hide/Show Shortcut Bar"
-msgstr "Скрыть/Показать панель ярлыков"
-
-#: src/gs_gui.c:708
-msgid "Toggle Strongs Numbers"
-msgstr "Переключить номера Стронга"
-
-#: src/gs_gui.c:722
-msgid "Toggle Morphological Tags"
-msgstr "Переключить морфологические теги"
-
-#: src/gs_gui.c:736
-msgid "Toggle Footnotes"
-msgstr "Переключить нижние заметки"
-
-#: src/gs_gui.c:888
-msgid "Back"
-msgstr "Назад"
-
-#: src/gs_gui.c:890
-msgid "Go backward through history list"
-msgstr "Вернуться назад по списку истории"
-
-#: src/gs_gui.c:905
-msgid "Foward"
-msgstr "Вперед"
-
-#: src/gs_gui.c:906
-msgid "Go foward through history list"
-msgstr "Перейти вперед по списку истории"
-
-#: src/gs_gui.c:1059
-msgid "Synchronize"
-msgstr "Синхронизировать"
-
-#: src/gs_gui.c:1061
-msgid "Synchronize Commentary with Bible Text"
-msgstr "Синхронизировать комментарии с текстом Библии"
-
-#: src/gs_gui.c:1075
-msgid "button2"
-msgstr "кнопка2"
-
-#: src/gs_gui.c:1089
-msgid "button3"
-msgstr "кнопка3"
-
-#: src/gs_gui.c:1113
-msgid "Print this Comment"
-msgstr "Печать этого комментария"
-
-#: src/gs_gui.c:1267 src/gs_gui.c:1281 src/gs_preferences_dlg.c:1204
-msgid "Personal Comments"
-msgstr "Персональные комментарии"
-
-#.
-#. gnome_app_add_toolbar (GNOME_APP (s->app),
-#. GTK_TOOLBAR (s->toolbarStudypad),
-#. GS_DOCK_SP,
-#. GNOME_DOCK_ITEM_BEH_NORMAL,
-#. GNOME_DOCK_TOP, 1, 3, 0);
-#.
-#: src/gs_gui.c:1293 src/gs_gui.c:1307
-msgid "Study Pad"
-msgstr "Блокнот изучения"
-
-#: src/gs_gui.c:1513 src/gs_gui.c:1524 src/gs_preferences_dlg.c:1661
-#: src/gs_setup.c:562 src/gs_shortcutbar.c:1969
-msgid "Dict/Lex"
-msgstr "Словари/Лексиконы"
-
-#: src/gs_history.c:66 src/gs_history.c:185 src/gs_history.c:189
-msgid "_History/<Separator>"
-msgstr "История/<Separator>"
-
-#: src/gs_history.c:67 src/gs_history.c:186
-msgid "_History/C_lear"
-msgstr "История/Очистить"
-
-#: src/gs_html.c:112
+#: ../src/gnome2/gbs_dialog.c:124
 #, c-format
 msgid "Show %s in main window"
 msgstr "Показать %s в главном окне"
 
-#: src/gs_html.c:175
+#: ../src/gnome2/gbs_dialog.c:142
 #, c-format
 msgid "Go to %s"
 msgstr "Перейти к %s"
 
-#: src/gs_info_box.c:58
-msgid "GnomeSword - InfoBox"
-msgstr "GnomeSword - Инфоящик"
+#: ../src/gnome2/gnomesword.c:87
+#, fuzzy
+msgid "Initiating GnomeSword"
+msgstr "О GnomeSword"
 
-#: src/gs_info_box.c:99
-msgid "in StudyPad is not saved!"
-msgstr "в блокноте изучения не сохранено!"
-
-#: src/gs_info_box.c:107
-msgid "Shall I save it?"
-msgstr "Будете сохранять?"
-
-#: src/gs_mainmenu_cb.c:84
-msgid "Cannot launch gnome-help-browser"
-msgstr "Невозможно запустить браузер помощи Гнома"
-
-#: src/gs_menu.c:84
-msgid "_Settings/Module Options/"
-msgstr "Свойства/Опции модуля/"
-
-#: src/gs_menu.c:113
-msgid "Strong's Numbers"
-msgstr "Номера Стронга"
-
-#: src/gs_menu.c:118
-msgid "Footnotes"
-msgstr "Нижние заметки"
-
-#: src/gs_menu.c:123
-msgid "Morphological Tags"
-msgstr "Морфологические теги"
-
-#: src/gs_menu.c:128
-msgid "Hebrew Vowel Points"
-msgstr "Черты гласных иврита"
-
-#: src/gs_menu.c:133
-msgid "Hebrew Cantillation"
-msgstr "Кантиляции иврита"
-
-#: src/gs_menu.c:138
-msgid "Greek Accents"
-msgstr "Греческие ударения"
-
-#: src/gs_menu.c:143
-msgid "Scripture Cross-references"
-msgstr "Перекрестные ссылки Писания"
-
-#: src/gs_menu.c:148
-msgid "Lemmas"
-msgstr "Аннотации"
-
-#: src/gs_menu.c:153
-msgid "Headings"
-msgstr "Заголовки"
-
-#: src/gs_menu.c:329
-msgid "_Help/About Sword Modules/Bible Texts/<Separator>"
-msgstr "Помощь/О модулях Sword/Тексты Библии/<Separator>"
-
-#: src/gs_menu.c:330
-msgid "_Help/About Sword Modules/Commentaries/<Separator>"
-msgstr "Помощь/О модулях Sword/Комментарии/<Separator>"
-
-#: src/gs_menu.c:331
-msgid "_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>"
-msgstr "Помощь/О модулях Sword/Словари-Лексиконы/<Separator>"
-
-#: src/gs_menu.c:343
-msgid "_Help/About Sword Modules/Bible Texts/"
-msgstr "Помощь/О модулях Sword/Тексты Библии/"
-
-#: src/gs_menu.c:356
-msgid "_Help/About Sword Modules/Commentaries/"
-msgstr "Помощь/О модулях Sword/Комментарии/"
-
-#: src/gs_menu.c:366
-msgid "StrongsHebrew"
-msgstr "Стронги иврита"
-
-#: src/gs_menu.c:367
-msgid "StrongsGreek"
-msgstr "Стронги греческого"
-
-#: src/gs_menu.c:371
-msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
-msgstr "Помощь/О модулях Sword/Словари-Лексиконы/"
-
-#. * book modules *
-#: src/gs_menu.c:378
-msgid "_Help/About Sword Modules/Books/<Separator>"
-msgstr "Помощь/О модулях Sword/Книги/<Separator>"
-
-#: src/gs_menu.c:384
-msgid "_Help/About Sword Modules/Books/"
-msgstr "Помощь/О модулях Sword/Книги/"
-
-#: src/gs_menu.c:796
-msgid "Goto Reference"
-msgstr "Перейти к сноскам"
-
-#: src/gs_menu.c:804 src/gs_menu.c:970 src/sw_gbs.cpp:414
-msgid "Lookup Word"
-msgstr "Посмотреть слово"
-
-#. ** add bookmark menu **
-#: src/gs_menu.c:812 src/gs_menu.c:1028
-msgid "Add Bookmark"
-msgstr "Добавить закладку"
-
-#: src/gs_menu.c:819
-msgid "Add dict/lex key and module to Presonal Bookmarks"
-msgstr "Добавить ключ словаря/лексикона и модуль в персональные закладки"
-
-#: src/gs_menu.c:831 src/gs_menu.c:1057
-msgid "About this module"
-msgstr "Об этом модуле"
-
-#: src/gs_menu.c:839 src/gs_menu.c:1047 src/sw_gbs.cpp:399
-msgid "Show Tabs"
-msgstr "Показать вкладки"
-
-#: src/gs_menu.c:846 src/gs_menu.c:1054
-msgid "Show notebook tabs"
-msgstr "Показать вкладки блокнота"
-
-#: src/gs_menu.c:849
-msgid "View in New Window"
-msgstr "Просмотр в новом окне"
-
-#: src/gs_menu.c:856
-msgid "View this module in a new window"
-msgstr "Просмотр этого модуля в новом окне"
-
-#: src/gs_menu.c:868 src/gs_menu.c:1095
-msgid "View Module"
-msgstr "Просмотр модуля"
-
-#: src/gs_menu.c:983 src/gs_menu.c:1012
-msgid "Use Current Dictionary"
-msgstr "Использовать текущий словарь"
-
-#: src/gs_menu.c:998 src/sw_gbs.cpp:436
-msgid "Lookup Selection"
-msgstr "Выборочный просмотр"
-
-#: src/gs_menu.c:1035
-msgid "Add current verse to Presonal Bookmarks"
-msgstr "Добавить текущий стих в персональные закладки"
-
-#: src/gs_menu.c:1064
-msgid "View Text in new window"
-msgstr "Просмотр текста в новом окне"
-
-#: src/gs_menu.c:1079
-msgid "Unlock This Module"
-msgstr "Разблокировать модуль"
-
-#: src/gs_menu.c:1227
-msgid "Detach/Attach"
-msgstr "Отсоединить/Присоединить"
-
-#: src/gs_preferences_dlg.c:617
-msgid "GnomeSword - Settings"
-msgstr "GnomeSword - Настройки"
-
-#: src/gs_preferences_dlg.c:665 src/gs_preferences_dlg.c:2225
-msgid "Font Colors and Sizes"
+#: ../src/gnome2/gnomesword.c:152 ../src/gnome2/splash.c:590
+msgid "Displaying GnomeSword"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:688
-msgid "Font Size"
-msgstr "Размер шрифта"
+#: ../src/gnome2/gnomesword.c:222
+msgid "The Setup Druid was cancelled."
+msgstr ""
 
-#: src/gs_preferences_dlg.c:700
-msgid "Background Color"
-msgstr "Цвет фона"
+#: ../src/gnome2/gnomesword.c:223
+#, fuzzy
+msgid "Do you wish to set preferences now?"
+msgstr "``%s'' был изменен.  Хотите сохранить?"
 
-#: src/gs_preferences_dlg.c:712
-msgid "Text Color"
-msgstr "Цвет текста"
+#: ../src/gnome2/gnomesword.c:248
+msgid "done"
+msgstr ""
 
-#: src/gs_preferences_dlg.c:724
-msgid "Current Verse Color"
-msgstr "Цвет текущего стиха"
-
-#: src/gs_preferences_dlg.c:736
-msgid "Current Verse Background Color"
-msgstr "Цвет фона текущего стиха"
-
-#: src/gs_preferences_dlg.c:749
-msgid "Verse Numbers"
-msgstr "Номера стихов"
-
-#: src/gs_preferences_dlg.c:761
-msgid "Verse Number Font Size"
-msgstr "Размер шрифта номера стиха"
-
-#: src/gs_preferences_dlg.c:773
-msgid "Link Color"
-msgstr "Цвет ссылки"
-
-#: src/gs_preferences_dlg.c:785
-msgid "Greek Font"
-msgstr "Греческий шрифт"
-
-#: src/gs_preferences_dlg.c:796
-msgid "Hebrew Font"
-msgstr "Шрифт иврита"
-
-#: src/gs_preferences_dlg.c:807
-msgid "Unicode Font"
-msgstr "Уникод шрифт"
-
-#: src/gs_preferences_dlg.c:840
-msgid "Pick a color for Background"
-msgstr "Выбрать цвет фона"
-
-#: src/gs_preferences_dlg.c:852
-msgid "Pick a color for Bible Text"
-msgstr "Выбрать цвет текста Библии"
-
-#: src/gs_preferences_dlg.c:866 src/gs_preferences_dlg.c:992
-msgid "-2"
-msgstr "-2"
-
-#: src/gs_preferences_dlg.c:868 src/gs_preferences_dlg.c:994
-msgid "-1"
-msgstr "-1"
-
-#: src/gs_preferences_dlg.c:870 src/gs_preferences_dlg.c:895
-#: src/gs_preferences_dlg.c:996 src/gs_preferences_dlg.c:1021
-msgid "+0"
-msgstr "+0"
-
-#: src/gs_preferences_dlg.c:872 src/gs_preferences_dlg.c:998
-msgid "+1"
-msgstr "+1"
-
-#: src/gs_preferences_dlg.c:874 src/gs_preferences_dlg.c:1000
-msgid "+2"
-msgstr "+2"
-
-#: src/gs_preferences_dlg.c:876 src/gs_preferences_dlg.c:1002
-msgid "+3"
-msgstr "+3"
-
-#: src/gs_preferences_dlg.c:878 src/gs_preferences_dlg.c:1004
-msgid "+4"
-msgstr "+4"
-
-#: src/gs_preferences_dlg.c:880 src/gs_preferences_dlg.c:1006
-msgid "+5\r"
-msgstr "+5\r"
-
-#: src/gs_preferences_dlg.c:893 src/gs_preferences_dlg.c:1019
-msgid "Zero is base font size Go up or down from there"
-msgstr "Ноль - основной размер шрифта, увеличить или уменьшить"
-
-#: src/gs_preferences_dlg.c:907
-msgid "Pick a color - CurrentVerse BG"
-msgstr "Выбрать цвет фона текущего стиха"
-
-#: src/gs_preferences_dlg.c:919
-msgid "Pick a color for Current Verse"
-msgstr "Выбрать цвет текущего стиха"
-
-#: src/gs_preferences_dlg.c:942
-msgid "Strongs Numbers & Morph Tags"
-msgstr "Номера Стронга и морфологических тегов"
-
-#: src/gs_preferences_dlg.c:1023
-msgid "Default Font"
-msgstr "Шрифт по умолчанию"
-
-#: src/gs_preferences_dlg.c:1035
-msgid "GnomeSword Defaults"
+#: ../src/gnome2/gnomesword.c:322
+#, fuzzy
+msgid "GnomeSword is shutdown"
 msgstr "GnomeSword по умолчанию"
 
-#: src/gs_preferences_dlg.c:1045
-msgid "Use GnomeSword defaults for all settings on this page"
-msgstr "Использовать GnomeSword по умолчанию для всех настроек на этой странице"
+#: ../src/gnome2/html.c:156
+#, fuzzy
+msgid "Unlock "
+msgstr "Ввести разблокирующий ключ"
 
-#: src/gs_preferences_dlg.c:1050
-msgid "Bible Text Window"
-msgstr "Окно текста Библии"
-
-#: src/gs_preferences_dlg.c:1102
-msgid "Use Defaults When Opening GnomeSword"
-msgstr "Использовать по умолчанию, когда открывается GnomeSword"
-
-#: src/gs_preferences_dlg.c:1120
-msgid "Yes, use defaults that I select"
-msgstr "Да, использовать по умолчанию то, что я выбираю"
-
-#: src/gs_preferences_dlg.c:1134
-msgid "No, use settings saved on last GnomeSword run"
-msgstr "Нет, использовать настройки, сохраненные при последнем запуске GnomeSword"
-
-#: src/gs_preferences_dlg.c:1147
-msgid "Show Bible Texts notebook tabs"
-msgstr "Показать вкладки блокнота текста Библии"
-
-#: src/gs_preferences_dlg.c:1158
-msgid "Show Commentary notebook tabs"
-msgstr "Показать вкладки блокнота комментариев"
-
-#: src/gs_preferences_dlg.c:1169
-msgid "Show Dict/Lex notebook tabs"
-msgstr "Показать вкладки блокнота словаря/лексикона"
-
-#: src/gs_preferences_dlg.c:1179 src/gs_setup.c:739
-msgid "Use Verse Style"
-msgstr "Использовать стиль стиха"
-
-#: src/gs_preferences_dlg.c:1191
-msgid "Show Daily Devotion"
-msgstr "Показать ежедневную молитву"
-
-#: src/gs_preferences_dlg.c:1201
-msgid "Show Daily Devotion if you have a Devotion module"
-msgstr "Показать ежедневную молитву, если у вас еть такой модуль"
-
-#: src/gs_preferences_dlg.c:1220
-msgid "Use Formatting"
-msgstr "Использовать форматирование"
-
-#: src/gs_preferences_dlg.c:1228
-msgid "Use HTML tags to format notes"
-msgstr "Использовать HTML теги при форматировании заметок"
-
-#: src/gs_preferences_dlg.c:1230
-msgid "Auto Save"
-msgstr "Автосохранение"
-
-#: src/gs_preferences_dlg.c:1241
-msgid "Interface"
-msgstr "Интерфейс"
-
-#: src/gs_preferences_dlg.c:1272 src/gs_preferences_dlg.c:2236
-msgid "Layout"
+#: ../src/gnome2/html.c:555
+#, c-format
+msgid "Page %d of %d"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:1288
-msgid "App Width"
-msgstr "Ширина приложения"
+#: ../src/gnome2/html.c:704
+#, fuzzy
+msgid "Print Preview"
+msgstr "GnomeSword - Открыть файл заметки"
 
-#: src/gs_preferences_dlg.c:1299
-msgid "ShortCut Bar Width"
-msgstr "Ширина панели ярлыков"
+#: ../src/gnome2/html.c:710
+msgid "Failed to print the document"
+msgstr ""
 
-#: src/gs_preferences_dlg.c:1310
-msgid "Upper Pane Height"
-msgstr "Высота верхнего окна"
+#: ../src/gnome2/main_menu.c:601
+#, fuzzy
+msgid "Open StudyPad"
+msgstr "Блокнот изучения"
 
-#: src/gs_preferences_dlg.c:1357
-msgid "App Height"
-msgstr "Высота приложения"
+#: ../src/gnome2/main_menu.c:602
+#, fuzzy
+msgid "Open the StudyPad editor"
+msgstr "Открыть файл"
 
-#: src/gs_preferences_dlg.c:1380
-msgid "Bible Pane Width"
-msgstr "Ширина окна Библии"
+#: ../src/gnome2/main_menu.c:607
+#, fuzzy
+msgid "Open Session"
+msgstr "Открыть диалог поиска"
 
-#: src/gs_preferences_dlg.c:1403
-msgid "label190"
-msgstr "метка190"
+#: ../src/gnome2/main_menu.c:608
+msgid "Open a saved session"
+msgstr ""
 
-#: src/gs_preferences_dlg.c:1441
-msgid "Shortcut Bar"
-msgstr "Панель ярлыков"
+#: ../src/gnome2/main_menu.c:612
+#, fuzzy
+msgid "Save Session"
+msgstr "Поиск результатов"
 
-#: src/gs_preferences_dlg.c:1457
-msgid "Show Shortcut bar"
-msgstr "Показать панель ярлыков"
+#: ../src/gnome2/main_menu.c:613
+#, fuzzy
+msgid "Save the current session to a file"
+msgstr "Открыть файл"
 
-#: src/gs_preferences_dlg.c:1466
-msgid "Show Favorites Group"
-msgstr "Показать группу Избранное"
+#: ../src/gnome2/main_menu.c:625
+msgid "Copy highlighted text from main window"
+msgstr "Копировать выделенный текст из главного окна"
 
-#: src/gs_preferences_dlg.c:1476
-msgid "Show Bible Text Group"
-msgstr "Показать группу текста Библии"
+#: ../src/gnome2/main_menu.c:631 ../src/gnome2/sidebar.c:1623
+msgid "Search"
+msgstr "Поиск"
 
-#: src/gs_preferences_dlg.c:1486
-msgid "Show Commentary Group"
-msgstr "Показать группу комментария"
+#: ../src/gnome2/main_menu.c:632
+#, fuzzy
+msgid "Search using the shortcut bar"
+msgstr "Тип поиска"
 
-#: src/gs_preferences_dlg.c:1496
-msgid "Show Dict/Lex Group"
-msgstr "Показать группу словаря/лексикона"
+#: ../src/gnome2/main_menu.c:637 ../ui/search-dialog.glade.h:14
+#, fuzzy
+msgid "Advanced Search"
+msgstr "Последний поиск"
 
-#: src/gs_preferences_dlg.c:1506
-msgid "Show Book Group"
-msgstr "Показать группу книги"
+#: ../src/gnome2/main_menu.c:638
+msgid "Advanced search using the search dialog"
+msgstr ""
 
-#: src/gs_preferences_dlg.c:1516
-msgid "Show History Group"
-msgstr "Показать группу истории"
+#: ../src/gnome2/main_menu.c:646 ../ui/module-manager.glade.h:15
+#, fuzzy
+msgid "Module Manager"
+msgstr "Модуль"
 
-#: src/gs_preferences_dlg.c:1527
-msgid "Dock Shortcut Bar"
-msgstr "Документы панели ярлыков"
+#: ../src/gnome2/main_menu.c:647
+msgid "Use module manager to install and remove Sword modules"
+msgstr ""
 
-#: src/gs_preferences_dlg.c:1538
-msgid "label189"
-msgstr "метка189"
+#: ../src/gnome2/main_menu.c:656
+msgid "C_lear"
+msgstr "Очистить"
 
-#: src/gs_preferences_dlg.c:1576 src/gs_setup.c:473
-msgid "Main Text Module"
-msgstr "Главный текстовый модуль"
+#: ../src/gnome2/main_menu.c:657
+msgid "Clear history list"
+msgstr "Очистить список истории"
 
-#: src/gs_preferences_dlg.c:1650 src/gs_setup.c:551
+#: ../src/gnome2/main_menu.c:667
+msgid "Daily Devotion"
+msgstr "Ежедневная молитва"
+
+#: ../src/gnome2/main_menu.c:668
+#, fuzzy
+msgid "Show the Daily Devotion for today"
+msgstr "Показать молитву на сегодня"
+
+#: ../src/gnome2/main_menu.c:683 ../ui/prefs.glade.h:19
+msgid "Bible Texts"
+msgstr "Тексты Библии"
+
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/main_menu.c:684
+#, fuzzy
+msgid "Show or hide Bible texts window"
+msgstr "Показывать тексты Библии"
+
+#: ../src/gnome2/main_menu.c:689 ../src/gnome2/search_sidebar.c:215
+#: ../src/gnome2/setup_druid.c:807 ../ui/prefs.glade.h:24
 msgid "Commentary"
 msgstr "Комментарии"
 
-#: src/gs_preferences_dlg.c:1672 src/gs_setup.c:573
-msgid "Personal"
-msgstr "Персональный"
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/main_menu.c:690
+#, fuzzy
+msgid "Show or hide commentaries"
+msgstr "Показывать комментарии"
 
-#: src/gs_preferences_dlg.c:1748 src/gs_setup.c:664
-msgid "Interlinear 5"
-msgstr "Подстрочный 5"
+#: ../src/gnome2/main_menu.c:695 ../src/gnome2/setup_druid.c:929
+#: ../ui/prefs.glade.h:30
+#, fuzzy
+msgid "Dictionary/Lexicon"
+msgstr "Словари-Лексиконы"
 
-#: src/gs_preferences_dlg.c:1759 src/gs_setup.c:675
-msgid "Interlinear 4"
-msgstr "Подстрочный 4"
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/main_menu.c:697
+#, fuzzy
+msgid "Show or hide - dictionaries and lexicons"
+msgstr "Показывать комментарии"
 
-#: src/gs_preferences_dlg.c:1770 src/gs_setup.c:686
-msgid "Interlinear 3"
-msgstr "Подстрочный 3"
+#: ../src/gnome2/main_menu.c:703
+msgid "Verse Style"
+msgstr "Стиль стиха"
 
-#: src/gs_preferences_dlg.c:1783 src/gs_setup.c:699
-msgid "Interlinear 2"
-msgstr "Подстрочный 2"
+#: ../src/gnome2/main_menu.c:710
+#, fuzzy
+msgid "Attach/Detach Sidebar"
+msgstr "Отсоединить/Присоединить панель ярлыков"
 
-#: src/gs_preferences_dlg.c:1796 src/gs_setup.c:712
-msgid "Interlinear 1"
-msgstr "Подстрочный 1"
+#: ../src/gnome2/main_menu.c:716
+#, fuzzy
+msgid "Show/Hide Sidebar"
+msgstr "Скрыть/Показать панель ярлыков"
 
-#: src/gs_preferences_dlg.c:1808
-msgid "Daily Devotional"
-msgstr "Ежедневная молитва"
+#: ../src/gnome2/main_menu.c:726
+msgid "Contents"
+msgstr "Содержание"
 
-#: src/gs_preferences_dlg.c:1836
-msgid "Greek Lexicon"
-msgstr "Греческий лексикон"
+#: ../src/gnome2/main_menu.c:727
+#, fuzzy
+msgid "Open the GnomeSword manual"
+msgstr "GnomeSword по умолчанию"
 
-#: src/gs_preferences_dlg.c:1881
-msgid "Hebrew Lexicon"
-msgstr "Лексикон иврита"
+#: ../src/gnome2/main_menu.c:740
+#, fuzzy
+msgid "About the SWORD Project ..."
+msgstr "О проекте Sword"
 
-#: src/gs_preferences_dlg.c:1909 src/gs_preferences_dlg.c:2246
-msgid "Sword Modules"
+#: ../src/gnome2/main_menu.c:741
+#, fuzzy
+msgid "More information about the SWORD Project"
+msgstr "Информация о проекте Sword"
+
+#: ../src/gnome2/main_menu.c:746
+#, fuzzy
+msgid "About GnomeSword ..."
+msgstr "О GnomeSword..."
+
+#: ../src/gnome2/main_menu.c:747
+msgid "About this application"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:2216
+#: ../src/gnome2/main_menu.c:756 ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:17
+#, fuzzy
+msgid "_File"
+msgstr "Файл"
+
+#: ../src/gnome2/main_menu.c:768
+#, fuzzy
+msgid "_View"
+msgstr "Просмоторщик"
+
+#: ../src/gnome2/main_menu.c:774
+#, fuzzy
+msgid "Hi_story"
+msgstr "История"
+
+#: ../src/gnome2/main_menu.c:780
+msgid "_Help"
+msgstr ""
+
+#: ../src/gnome2/main_window.c:484
+#, fuzzy
+msgid "Starting"
+msgstr "О GnomeSword"
+
+#: ../src/gnome2/main_window.c:485
+#, fuzzy
+msgid "Building GnomeSword interface"
+msgstr "Интерфейс"
+
+#: ../src/gnome2/main_window.c:492
+#, fuzzy
+msgid "GnomeSword - Bible Study Software"
+msgstr "GnomeSWORD - программа по изучению Библии"
+
+#: ../src/gnome2/main_window.c:546
+#, fuzzy
+msgid "Open a new tab"
+msgstr "Открыть файл"
+
+#: ../src/gnome2/main_window.c:682
+#, fuzzy
+msgid "Commentary View"
+msgstr "Комментарии"
+
+#: ../src/gnome2/main_window.c:699
+msgid "Book View"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:212
+msgid "Install the following modules:"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:217
+msgid "Remove the following modules:"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:239
+msgid "Preparing to install"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:242
+#, fuzzy
+msgid "Preparing to remove"
+msgstr "GnomeSword - Открыть файл заметки"
+
+#: ../src/gnome2/mod_mgr.c:265
+msgid "Installing: "
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:270
+msgid "Removing: "
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:314
+msgid "Install failed"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:316
+#, fuzzy
+msgid "Remove failed"
+msgstr "Модуль"
+
+#: ../src/gnome2/mod_mgr.c:318 ../src/gnome2/mod_mgr.c:769
+#, fuzzy
+msgid "Finished"
+msgstr "Найти"
+
+#: ../src/gnome2/mod_mgr.c:752
+msgid "Refreshing remote"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:764
+msgid "Remote not found"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:867
+#, fuzzy
+msgid "Module Name"
+msgstr "Модуль"
+
+#: ../src/gnome2/mod_mgr.c:944
+msgid "Old"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:993
+msgid "Configure"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1027
+msgid "Type"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1035
+#, fuzzy
+msgid "Caption"
+msgstr "Опции модуля"
+
+#: ../src/gnome2/mod_mgr.c:1044
+msgid "Source"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1053
+#, fuzzy
+msgid "Directory"
+msgstr "Каталог SWORD'а:"
+
+#: ../src/gnome2/mod_mgr.c:1301
+msgid "Please Refresh"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1303
+msgid "Your module list is not up to date!"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1515
+msgid "Select Local Source"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1710 ../src/gnome2/mod_mgr.c:1847
+#, fuzzy
+msgid "Remove the selected source"
+msgstr "Добавить новую подгруппу в выбранную группу"
+
+#: ../src/gnome2/mod_mgr.c:1758
+msgid "Enter a remote source"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1762
+#, fuzzy
+msgid "Caption:"
+msgstr "Опции модуля"
+
+#: ../src/gnome2/mod_mgr.c:1763
+msgid "Type:"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1764
+msgid "URL:"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1765
+#, fuzzy
+msgid "Directory:"
+msgstr "Каталог SWORD'а:"
+
+#: ../src/gnome2/note_editor.c:1200
+msgid "Save Note"
+msgstr "Сохранить заметку"
+
+#: ../src/gnome2/note_editor.c:1205
+msgid "Export Note"
+msgstr ""
+
+#: ../src/gnome2/note_editor.c:1210
+msgid "Delete Note"
+msgstr "Удалить заметку"
+
+#: ../src/gnome2/parallel_dialog.c:591 ../src/gnome2/preferences_dialog.c:1335
+msgid "Parallel"
+msgstr ""
+
+#: ../src/gnome2/parallel_view.c:269
+msgid "Detach/Attach"
+msgstr "Отсоединить/Присоединить"
+
+#: ../src/gnome2/parallel_view.c:274
+msgid "Module Options"
+msgstr "Опции модуля"
+
+#. build change parallel modules submenu
+#: ../src/gnome2/parallel_view.c:289
+#, fuzzy
+msgid "Change parallel 1"
+msgstr "Изменить подстрочный 1"
+
+#: ../src/gnome2/parallel_view.c:292
+#, fuzzy
+msgid "Change parallel 2"
+msgstr "Изменить подстрочный 2"
+
+#: ../src/gnome2/parallel_view.c:295
+#, fuzzy
+msgid "Change parallel 3"
+msgstr "Изменить подстрочный 3"
+
+#: ../src/gnome2/parallel_view.c:298
+#, fuzzy
+msgid "Change parallel 4"
+msgstr "Изменить подстрочный 4"
+
+#: ../src/gnome2/parallel_view.c:301
+#, fuzzy
+msgid "Change parallel 5"
+msgstr "Изменить подстрочный 5"
+
+#: ../src/gnome2/preferences_cell_renderer.c:401
+msgid "Text to render"
+msgstr ""
+
+#: ../src/gnome2/preferences_cell_renderer.c:407
+msgid "Pixbuf Object"
+msgstr ""
+
+#: ../src/gnome2/preferences_cell_renderer.c:409
+msgid "The pixbuf to render."
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1225 ../ui/prefs.glade.h:46
 msgid "Preferences"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:2230
-msgid "Misc Interface Settings"
+#: ../src/gnome2/preferences_dialog.c:1305
+#, fuzzy
+msgid "Fonts"
+msgstr "Нижние заметки"
+
+#: ../src/gnome2/preferences_dialog.c:1308
+#, fuzzy
+msgid "Color"
+msgstr "Цвет ссылки"
+
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/preferences_dialog.c:1311
+#: ../src/gnome2/preferences_dialog.c:1325
+#: ../src/gnome2/preferences_dialog.c:1338
+msgid "Misc"
+msgstr "Прочее"
+
+#: ../src/gnome2/preferences_dialog.c:1315
+#, fuzzy
+msgid "General"
+msgstr "По центру"
+
+#: ../src/gnome2/preferences_dialog.c:1318 ../ui/prefs.glade.h:50
+msgid "Tabs and Panes"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:2241
-msgid "Shortcut Bar Settings"
+#: ../src/gnome2/preferences_dialog.c:1329 ../src/gnome2/sidebar.c:1644
+#, fuzzy
+msgid "Modules"
+msgstr "Модуль"
+
+#: ../src/gnome2/preferences_dialog.c:1332
+msgid "Main"
 msgstr ""
 
-#: src/gs_setup.c:163
+#: ../src/gnome2/search_dialog.c:51
+#, fuzzy
+msgid "Searching the "
+msgstr "Тип поиска"
+
+#: ../src/gnome2/search_dialog.c:52
+#, fuzzy
+msgid " Module"
+msgstr "Модуль"
+
+#: ../src/gnome2/search_dialog.c:53
+msgid "found in "
+msgstr ""
+
+#: ../src/gnome2/search_dialog.c:650
+#, fuzzy
+msgid "Clear List?"
+msgstr "Очистить список истории"
+
+#: ../src/gnome2/search_dialog.c:652
+msgid "Are you sure you want to clear the module list?"
+msgstr ""
+
+#: ../src/gnome2/search_dialog.c:864
+#, fuzzy
+msgid "Delete list?"
+msgstr "Удалить заметку"
+
+#: ../src/gnome2/search_dialog.c:865
+msgid "Are you sure you want to delete:"
+msgstr ""
+
+#: ../src/gnome2/search_sidebar.c:176 ../ui/search-dialog.glade.h:50
+#, fuzzy
+msgid "Start searching"
+msgstr "Тип поиска"
+
+#: ../src/gnome2/search_sidebar.c:192
+#, fuzzy
+msgid "Search Module"
+msgstr "Опции поиска"
+
+#: ../src/gnome2/search_sidebar.c:206
+#, fuzzy
+msgid "Bible"
+msgstr "Файл"
+
+#: ../src/gnome2/search_sidebar.c:229
+#, fuzzy
+msgid "Search Type"
+msgstr "Поиск"
+
+#: ../src/gnome2/search_sidebar.c:243 ../ui/search-dialog.glade.h:38
+#, fuzzy
+msgid "Multi word"
+msgstr "Многословный"
+
+#: ../src/gnome2/search_sidebar.c:262 ../ui/search-dialog.glade.h:28
+#, fuzzy
+msgid "Exact phrase"
+msgstr "Точная фраза"
+
+#: ../src/gnome2/search_sidebar.c:276
+#, fuzzy
+msgid "Search Options"
+msgstr "Опции поиска"
+
+#: ../src/gnome2/search_sidebar.c:304
+#, fuzzy
+msgid "Search Scope"
+msgstr "Поиск"
+
+#: ../src/gnome2/search_sidebar.c:317
+#, fuzzy
+msgid "No scope"
+msgstr "Без контекста"
+
+#: ../src/gnome2/search_sidebar.c:327
+#, fuzzy
+msgid "Use bounds"
+msgstr "С ограничением"
+
+#: ../src/gnome2/search_sidebar.c:336
+#, fuzzy
+msgid "Last search"
+msgstr "Последний поиск"
+
+#: ../src/gnome2/search_sidebar.c:351
+#, fuzzy
+msgid "Bounds"
+msgstr "Ограничения"
+
+#: ../src/gnome2/search_sidebar.c:365
+msgid "Lower"
+msgstr "Нижнее"
+
+#: ../src/gnome2/search_sidebar.c:372
+#, fuzzy
+msgid "Upper"
+msgstr "Верхнее"
+
+#: ../src/gnome2/search_sidebar.c:385
+msgid "Genesis"
+msgstr "Бытие"
+
+#: ../src/gnome2/search_sidebar.c:393
+msgid "Revelation"
+msgstr "Откровение"
+
+#: ../src/gnome2/setup_druid.c:398
 msgid "Welcome To GnomeSword"
 msgstr "Добро пожаловать в GnomeSword"
 
-#: src/gs_setup.c:164 src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:380
-msgid "GnomeSword"
-msgstr "GnomeSword"
+#: ../src/gnome2/setup_druid.c:408
+msgid "Setup"
+msgstr ""
 
-#: src/gs_setup.c:166
-msgid "GnomeSword - Setup"
-msgstr "Установка GnomeSword"
+#: ../src/gnome2/setup_druid.c:423
+msgid "GnomeSword Configuration - Page 1 of 5"
+msgstr ""
 
-#: src/gs_setup.c:211
-msgid "This guide will take you through the initial setup of GnomeSword"
-msgstr "Это руководство доступно через\n" 
-"инициализированую установку GnomeSword"
+#: ../src/gnome2/setup_druid.c:427
+msgid ""
+"Since this is the first time you have run GnomeSword, this assistant will "
+"guide you through the initial setup by asking a few simple questions.\n"
+"\n"
+"Once you have completed these steps, you can always change the settings "
+"later by using the Preferences dialog."
+msgstr ""
 
-#: src/gs_setup.c:257
-msgid "Your Home Directory:"
+#: ../src/gnome2/setup_druid.c:447
+msgid "GnomeSword Configuration - Page 2 of 5"
+msgstr ""
+
+#: ../src/gnome2/setup_druid.c:466
+msgid "These values have been detected automatically"
+msgstr ""
+
+#: ../src/gnome2/setup_druid.c:473
+#, fuzzy
+msgid "Your home directory:"
 msgstr "Ваш домашний каталог:"
 
-#: src/gs_setup.c:278
-msgid "SWORD verson"
-msgstr "Версия SWORD"
+#: ../src/gnome2/setup_druid.c:496
+#, fuzzy
+msgid "Sword"
+msgstr "GnomeSword"
 
-#: src/gs_setup.c:298
-msgid "Sword Directory:"
+#: ../src/gnome2/setup_druid.c:499
+msgid "SWORD version"
+msgstr "Версия SWORD'а:"
+
+#: ../src/gnome2/setup_druid.c:507
+#, fuzzy
+msgid "SWORD Directory:"
 msgstr "Каталог SWORD'а:"
 
-#: src/gs_setup.c:314
-msgid "Number of Bible Text Modules:"
+#: ../src/gnome2/setup_druid.c:515
+#, fuzzy
+msgid "Number of Bible text modules:"
 msgstr "Количество модулей текста Библии:"
 
-#: src/gs_setup.c:330
-msgid "Number of Commentary Modules:"
+#: ../src/gnome2/setup_druid.c:523
+#, fuzzy
+msgid "Number of Commentary modules:"
 msgstr "Количество модулей комментария:"
 
-#: src/gs_setup.c:347
-msgid "Number of Lexicon / Dictionary Modules"
+#: ../src/gnome2/setup_druid.c:532
+#, fuzzy
+msgid "Number of Dictionary/Lexicon modules:"
 msgstr "Количество модулей словаря/лексикона"
 
-#: src/gs_setup.c:384
-msgid "Do you want GnomeSword to open with"
-msgstr "Хотите ли вы открыть GnomeSword с помощью"
+#: ../src/gnome2/setup_druid.c:547
+msgid "GnomeSword Configuration - Page 3 of 5"
+msgstr ""
 
-#: src/gs_setup.c:407
-msgid "Settings you choose as default"
-msgstr "Настройки, которые вы выбрали по умолчанию"
-
-#: src/gs_setup.c:420
-msgid "Settings used the last time GnomeSword ran"
+#: ../src/gnome2/setup_druid.c:567
+#, fuzzy
+msgid "Settings to use when GnomeSword starts"
 msgstr "Настройки, используемые при последнем запуске GnomeSword"
 
-#: src/gs_setup.c:453
-msgid "Settings to use on first program run"
-msgstr "Настройки используемые при первом запуске!"
+#: ../src/gnome2/setup_druid.c:614 ../ui/prefs.glade.h:51
+#, fuzzy
+msgid "Use Verse style"
+msgstr "Использовать стиль стиха"
 
-#: src/gs_setup.c:751
-msgid "Show Bible Tabs"
+#: ../src/gnome2/setup_druid.c:625
+#, fuzzy
+msgid "Show Bible tabs"
 msgstr "Вкладки Библии"
 
-#: src/gs_setup.c:771
-msgid "Auto Save Personal comments "
-msgstr "Автсохр персон комментариев"
+#: ../src/gnome2/setup_druid.c:633
+#, fuzzy
+msgid "Show Bible window"
+msgstr "Окно текста Библии"
 
-#: src/gs_setup.c:783
-msgid "Show Commentary Tabs"
+#: ../src/gnome2/setup_druid.c:651
+#, fuzzy
+msgid "Show Commentary tabs"
 msgstr "Вкладки комментариев"
 
-#: src/gs_setup.c:802
-msgid "Show Interlinear Page"
-msgstr "Показать подстр. страницу"
+#: ../src/gnome2/setup_druid.c:660
+msgid "Show upper workbook"
+msgstr ""
 
-#: src/gs_setup.c:814
-msgid "Show Dict/Lex Tabs"
+#: ../src/gnome2/setup_druid.c:679
+#, fuzzy
+msgid "Show Dictionary/Lexicon tabs"
 msgstr "Вкладки словаря/лексикона"
 
-#: src/gs_setup.c:827
-msgid ""
-"These setting will be the default settings if you chose to use default "
-"settings. "
-msgstr "Эти настройки будут настройками по умолчанию, если вы выбрали использование настроек по умолчанию."
+#: ../src/gnome2/setup_druid.c:687
+msgid "Show lower workbook"
+msgstr ""
 
-#: src/gs_setup.c:863
+#: ../src/gnome2/setup_druid.c:707
+#, fuzzy
+msgid "Show book tabs"
+msgstr "Показать вкладки"
+
+#: ../src/gnome2/setup_druid.c:726
+msgid "GnomeSword Configuration - Page 4 of 5"
+msgstr ""
+
+#: ../src/gnome2/setup_druid.c:740
+#, fuzzy
+msgid "Choose default SWORD modules"
+msgstr "О модулях Sword"
+
+#: ../src/gnome2/setup_druid.c:751
+#, fuzzy
+msgid "Text Module       "
+msgstr "Главный текстовый модуль"
+
+#: ../src/gnome2/setup_druid.c:850 ../ui/prefs.glade.h:44
+#, fuzzy
+msgid "Parallel 5"
+msgstr "Изменить подстрочный 5"
+
+#: ../src/gnome2/setup_druid.c:857 ../ui/prefs.glade.h:43
+#, fuzzy
+msgid "Parallel 4"
+msgstr "Изменить подстрочный 4"
+
+#: ../src/gnome2/setup_druid.c:864 ../ui/prefs.glade.h:42
+#, fuzzy
+msgid "Parallel 3"
+msgstr "Изменить подстрочный 3"
+
+#: ../src/gnome2/setup_druid.c:873 ../ui/prefs.glade.h:41
+#, fuzzy
+msgid "Parallel 2"
+msgstr "Изменить подстрочный 2"
+
+#: ../src/gnome2/setup_druid.c:882 ../ui/prefs.glade.h:40
+#, fuzzy
+msgid "Parallel 1"
+msgstr "Изменить подстрочный 1"
+
+#: ../src/gnome2/setup_druid.c:890
+#, fuzzy
+msgid "Generic book"
+msgstr "Поиск книги"
+
+#: ../src/gnome2/setup_druid.c:909
+msgid "Personal"
+msgstr "Персональный"
+
+#: ../src/gnome2/setup_druid.c:948
+msgid "Greek Lexicon"
+msgstr "Греческий лексикон"
+
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/setup_druid.c:969
+#, fuzzy
 msgid ""
-"            Thank-you for using GnomeSword.\n"
-"Click Finish to close this dialog and run GnomeSword."
+"Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
+"word is clicked"
+msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+#: ../src/gnome2/setup_druid.c:972 ../ui/prefs.glade.h:35
+msgid "Hebrew Lexicon"
+msgstr "Лексикон иврита"
+
+# src/gs_preferences_dlg.c
+#: ../src/gnome2/setup_druid.c:994
+#, fuzzy
+msgid ""
+"Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or "
+"word is clicked"
+msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+#: ../src/gnome2/setup_druid.c:997 ../ui/prefs.glade.h:27
+msgid "Daily Devotional"
+msgstr "Ежедневная молитва"
+
+#: ../src/gnome2/setup_druid.c:1034
+msgid "GnomeSword Configuration - Page 5 of 5"
+msgstr ""
+
+#: ../src/gnome2/setup_druid.c:1037
+#, fuzzy
+msgid ""
+"Thank you for using GnomeSword.\n"
+"\n"
+"Click Apply to close this dialog and run GnomeSword."
 msgstr ""
 "           Благодарим вас за использование GnomeSword.\n"
 "           Щелкните Закончить для закрытия этого диалога\n"
 "           и запуска GnomeSword."
 
-#: src/gs_shortcutbar.c:714
-msgid "Large Icons"
-msgstr "Большие иконки"
+#: ../src/gnome2/sidebar_dialog.c:135
+#, fuzzy
+msgid "Sidebar"
+msgstr "Поиск"
 
-#: src/gs_shortcutbar.c:720
-msgid "Small Icons"
-msgstr "Маленькие иконки"
-
-#: src/gs_shortcutbar.c:732
-msgid "Add Bible Text"
-msgstr "Добавить текст Библии"
-
-#. this string is used internally
-#: src/gs_shortcutbar.c:747
-msgid "Add Commentary"
-msgstr "Добавить комментарии"
-
-#. this string is used internally
-#: src/gs_shortcutbar.c:763
-msgid "Add Dictionary"
-msgstr "Добавить словарь"
-
-#. this string is used internally
-#: src/gs_shortcutbar.c:779
-msgid "Add Book"
-msgstr "Добавить книгу"
-
-#: src/gs_shortcutbar.c:797
-msgid "Add Shortcut"
-msgstr "Добавить ярлык"
-
-#: src/gs_shortcutbar.c:844
-msgid "About this Module"
-msgstr "Об этом модуле"
-
-#: src/gs_shortcutbar.c:857
-msgid "Remove from Shortcut Bar"
-msgstr "Удалить из панели ярлыков"
-
-#: src/gs_shortcutbar.c:999 src/gs_shortcutbar.c:2098
-msgid "Verse List"
-msgstr "Список стиха"
-
-#: src/gs_shortcutbar.c:1006
-msgid "Search Results"
-msgstr "Поиск результатов"
-
-#: src/gs_shortcutbar.c:1013 src/gs_shortcutbar.c:1254
-msgid "Viewer"
-msgstr "Просмоторщик"
-
-#: src/gs_shortcutbar.c:1170
+#: ../src/gnome2/sidebar.c:933
 msgid "Save List"
 msgstr "Сохранить список"
 
-#: src/gs_shortcutbar.c:1171
-msgid "Save the current verse list as a bookmark file"
-msgstr "Сохранить список текущего стиха как файл закладки"
-
-#: src/gs_shortcutbar.c:1185
-msgid "Main Form"
-msgstr "Главная форма"
-
-#: src/gs_shortcutbar.c:1186
-msgid "Toggle to show results in Main Form"
-msgstr "Переключатель показа результатов в главной форме"
-
-#: src/gs_shortcutbar.c:1224
-msgid "VerseList"
-msgstr "Список стиха"
-
-#: src/gs_shortcutbar.c:1225
-msgid "View Verse List"
-msgstr "Просмотр списока стиха"
-
-#: src/gs_shortcutbar.c:1239
-msgid "SearchResults"
-msgstr "Поиск результатов"
-
-#: src/gs_shortcutbar.c:1240
-msgid "View Search Results"
+#: ../src/gnome2/sidebar.c:934
+#, fuzzy
+msgid "Save the search results as bookmarks"
 msgstr "Просмотр поиска результатов"
 
-#: src/gs_shortcutbar.c:1333
-msgid "label1"
-msgstr "метка1"
+#: ../src/gnome2/sidebar.c:973
+#, fuzzy
+msgid "Open selected module in a new tab"
+msgstr "Открыть диалог поиска"
 
-#: src/gs_shortcutbar.c:1444
-msgid "label2"
-msgstr "метка2"
+#: ../src/gnome2/sidebar.c:979
+#, fuzzy
+msgid "Open in dialog"
+msgstr "Открыть диалог поиска"
 
-#: src/gs_shortcutbar.c:1484
-msgid "label3"
-msgstr "метка3"
+#: ../src/gnome2/sidebar.c:980
+#, fuzzy
+msgid "Open selected module in a dialog"
+msgstr "Открыть диалог поиска"
 
-#: src/gs_shortcutbar.c:1605
-msgid "Begin Search"
-msgstr "Начать поиск"
+#: ../src/gnome2/sidebar.c:986
+#, fuzzy
+msgid "View information about the selected dialog"
+msgstr "Информация об инсталлированных модулях"
 
-#: src/gs_shortcutbar.c:1608
-msgid "Search Type"
-msgstr "Тип поиска"
+#: ../src/gnome2/sidebar.c:1373
+#, fuzzy
+msgid "_Modules"
+msgstr "Модуль"
 
-#: src/gs_shortcutbar.c:1623
-msgid "Multi Word"
-msgstr "Многословный"
+#: ../src/gnome2/sidebar.c:1381
+#, fuzzy
+msgid "_Bookmarks"
+msgstr "Закладки"
 
-#: src/gs_shortcutbar.c:1637
-msgid "Regular Expression"
-msgstr "Постоянные выражения"
+#: ../src/gnome2/sidebar.c:1389
+#, fuzzy
+msgid "_Search"
+msgstr "Поиск"
 
-#: src/gs_shortcutbar.c:1648
-msgid "Exact Phrase"
-msgstr "Точная фраза"
+#: ../src/gnome2/sidebar.c:1398
+#, fuzzy
+msgid "Verse _List"
+msgstr "Список стиха"
 
-#: src/gs_shortcutbar.c:1660
-msgid "Search Options"
-msgstr "Опции поиска"
-
-#: src/gs_shortcutbar.c:1675
-msgid "Case Sensitive"
-msgstr "Регистрозависимый"
-
-#: src/gs_shortcutbar.c:1686
-msgid "Search Commentary"
-msgstr "Поиск комментария"
-
-#: src/gs_shortcutbar.c:1695
-msgid "Search Personal"
-msgstr "Поиск персонального"
-
-#: src/gs_shortcutbar.c:1704
-msgid "Search Book"
-msgstr "Поиск книги"
-
-#: src/gs_shortcutbar.c:1710
-msgid "Search Current Book"
-msgstr "Поиск текущей книги"
-
-#: src/gs_shortcutbar.c:1714
-msgid "Search Scope"
-msgstr "Контекст поиска"
-
-#: src/gs_shortcutbar.c:1729
-msgid "No Scope"
-msgstr "Без контекста"
-
-#: src/gs_shortcutbar.c:1741
-msgid "Use Bounds"
-msgstr "С ограничением"
-
-#: src/gs_shortcutbar.c:1753
-msgid "Last Search"
-msgstr "Последний поиск"
-
-#: src/gs_shortcutbar.c:1764
-msgid "Bounds"
-msgstr "Ограничения"
-
-#: src/gs_shortcutbar.c:1778
-msgid "Lower"
-msgstr "Нижнее"
-
-#: src/gs_shortcutbar.c:1788
-msgid "Upper "
-msgstr "Верхнее"
-
-#: src/gs_shortcutbar.c:1808
-msgid "Genesis"
-msgstr "Бытие"
-
-#: src/gs_shortcutbar.c:1820
-msgid "Revelation"
-msgstr "Откровение"
-
-#: src/gs_shortcutbar.c:1859
-msgid "Favorites"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1919
-msgid "Bible Text"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1995 src/gs_shortcutbar.c:2291
-msgid "Book"
-msgstr ""
-
-#: src/gs_shortcutbar.c:2021 src/gs_shortcutbar.c:2316
-msgid "History"
-msgstr ""
-
-#: src/gs_shortcutbar.c:2044
+#: ../src/gnome2/sidebar.c:1612
+#, fuzzy
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/gs_shortcutbar.c:2331
-msgid "Add All Modules"
-msgstr "Добавить все модули"
+#: ../src/gnome2/sidebar.c:1633
+#, fuzzy
+msgid "Verse List"
+msgstr "Список стиха"
 
-#: src/gs_unlockkey_dlg.c:102
-msgid "Enter Unlock Key"
-msgstr "Ввести разблокирующий ключ"
+#: ../src/gnome2/splash.c:361
+#, fuzzy
+msgid "Powered by the SWORD Project"
+msgstr "О проекте Sword"
 
-#: src/gs_viewcomm_dlg.c:153
-msgid "GnomeSword - View Commentary"
-msgstr "GnomeSword - Просмотр комментария"
+#: ../src/gnome2/splash.c:538
+msgid "Loading settings"
+msgstr ""
 
-#: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:554
-msgid "button7"
-msgstr "кнопка7"
+#: ../src/gnome2/splash.c:556
+#, fuzzy
+msgid "Building Interface"
+msgstr "Интерфейс"
 
-#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:446
-msgid "Sync with main window"
-msgstr "Синхронизировать с главным окном"
+#: ../src/gnome2/splash.c:573
+#, fuzzy
+msgid "Starting Sword"
+msgstr "О GnomeSword"
 
-#: src/gs_viewcomm_dlg.c:220
-msgid "Enter a verse"
-msgstr "Ввести стих"
+#: ../src/gnome2/studypad.c:184
+msgid "not loaded"
+msgstr ""
 
-#: src/gs_viewcomm_dlg.c:228
-msgid "button10"
-msgstr "кнопка10"
+#: ../src/gnome2/studypad.c:422
+#, fuzzy
+msgid "StudyPad"
+msgstr "Блокнот изучения"
 
-#: src/gs_viewcomm_dlg.c:228
-msgid "Goto Verse"
-msgstr "Перейти к стиху"
+#: ../src/gnome2/toolbar_nav.c:390
+msgid "Move backwards through history"
+msgstr ""
 
-#: src/gs_viewcomm_dlg.c:242
-msgid "button9"
-msgstr "кнопка9"
+#: ../src/gnome2/toolbar_nav.c:412
+msgid "Move foward through history"
+msgstr ""
 
-#: src/gs_viewcomm_dlg.c:255
-msgid "button8"
-msgstr "кнопка8"
+#: ../src/gnome2/toolbar_nav.c:439
+msgid "Select a Book of the Bible"
+msgstr ""
 
-#: src/gs_viewdict_dlg.c:193
-msgid "GnomeSwrod - View Dictionary"
-msgstr "GnomeSwrod - Просмотр словаря"
+#: ../src/gnome2/toolbar_nav.c:470
+msgid "Change Chapter"
+msgstr ""
 
-#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:445
-msgid "Sync"
-msgstr "Синхронизация"
-
-#: src/gs_viewdict_dlg.c:229
-msgid "Lookup key from main window"
-msgstr "Ключ просмотра из главного окна"
-
-#: src/gs_viewdict_dlg.c:255
-msgid "Lookup: "
-msgstr "Просмотр:"
-
-#: src/gs_viewdict_dlg.c:280
-msgid "Load all keys for this module"
-msgstr "Загрузить все ключи для этого модуля"
-
-#: src/gs_viewdict_dlg.c:333
-msgid "label125"
-msgstr "метка125"
-
-#: src/gs_viewtext_dlg.c:431
-msgid "Add"
-msgstr "Добавить"
-
-#: src/gs_viewtext_dlg.c:554
-msgid "Go to verse"
-msgstr "Перейти к стиху"
-
-#: src/sw_gbs.cpp:466
-msgid "View Book"
-msgstr "Просмотр книги"
-
-#: src/sw_gbs.cpp:585 src/sw_gbs.cpp:599
-msgid "label"
-msgstr "метка"
-
-#: src/sw_gbs.cpp:592
-msgid "label200"
-msgstr "метка200"
-
-# src/gs_preferences_dlg.c
-msgid "Use Default Dictionary"
-msgstr "Использовать словарь по умолчанию"
-
-# src/gs_preferences_dlg.c
-msgid "Misc"
-msgstr "Прочее"
-
-# src/gs_preferences_dlg.c
-msgid "where to View Dict/Lex When Link or Word Clicked"
-msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
-
-# src/gs_preferences_dlg.c
-msgid "In Dict/Lex Window"
-msgstr "В окне словаря/лексикона"
-
-# src/gs_preferences_dlg.c
-msgid "In Shortcut bar Viewer"
-msgstr "В просмотрщике панели ярлыков"
-
-# src/gs_preferences_dlg.c
-msgid "Default Dictionary"
-msgstr "Словарь по умолчанию"
-
-# src/gs_preferences_dlg.c
-msgid "Greek Lex Viewer"
-msgstr "Просмотрщик греческого лексикона"
-
-# src/gs_preferences_dlg.c
-msgid "Hebrew Lex Viewer"
-msgstr "Просмотрщик лексикона иврита"
-
-# src/gs_preferences_dlg.c
-msgid "Show Books Group"
-msgstr "Показать группу книг"
-
-# src/gs_preferences_dlg.c
-msgid "Default Text Module"
-msgstr "Текстовый модуль по умолчанию"
-
-# src/gs_preferences_dlg.c
-msgid "Show"
-msgstr "Показывать"
-
-# src/gs_preferences_dlg.c
-msgid "Show Bible Texts"
-msgstr "Показывать тексты Библии"
-
-# src/gs_preferences_dlg.c
-msgid "Show Commentaries"
-msgstr "Показывать комментарии"
-
-# src/gs_preferences_dlg.c
-msgid "Show Dictionaries"
-msgstr "Показывать словари"
-
-#: src/gs_setup.c
-msgid "SWORD version"
-msgstr "Версия SWORD'а:"
-
-#: src/gs_menu.c
-msgid "Print Chapter"
-msgstr "Печатать главу"
-
-#: src/gs_menu.c
-msgid "Print Comment"
-msgstr "Печатать комментарий"
-
-#: src/gs_menu.c
-msgid "Auto Scroll"
-msgstr "Автопрокручивание"
-
-#: src/gs_menu.c
-msgid "Set Module Font"
-msgstr "Установка шрифта модуля"
-
-#: src/gs_gui.c
-msgid "Add current verse and module to Presonal Bookmarks"
-msgstr "Добавить текущий стих и модуль в персональные закладки"
-
-#: src/gs_detach_int.c
-msgid "Set Module Font - GnomeSWORD"
-msgstr "Установка шрифта модуля - GnomeSWORD"
-
-#: src/gs_detach_int.c
-msgid "Do not set a font for this module - use default font"
-msgstr "Использовать шрифт по умолчанию"
-
-#: src/gs_menu.c
-msgid "Change Interlinear 1"
+#: ../src/gnome2/toolbar_nav.c:504
+#, fuzzy
+msgid "Change Verse"
 msgstr "Изменить подстрочный 1"
 
-#: src/gs_menu.c
-msgid "Change Interlinear 2"
-msgstr "Изменить подстрочный 2"
+#: ../src/gnome2/toolbar_nav.c:539
+msgid "Enter a Verse reference in Book 1:1 format and press Return"
+msgstr ""
 
-#: src/gs_menu.c
-msgid "Change Interlinear 3"
-msgstr "Изменить подстрочный 3"
+#: ../src/gnome2/utilities.c:254
+#, c-format
+msgid "%s not found"
+msgstr ""
 
-#: src/gs_menu.c
-msgid "Change Interlinear 4"
-msgstr "Изменить подстрочный 4"
+#. *****   end of file   *****
+#: ../ui/bookmarks.glade.h:1
+#, fuzzy
+msgid "Add Bookmark"
+msgstr "Закладки"
 
-#: src/gs_menu.c
-msgid "Change Interlinear 5"
-msgstr "Изменить подстрочный 5"
+#: ../ui/bookmarks.glade.h:2
+#, fuzzy
+msgid "Create new folder"
+msgstr "Очистить список истории"
 
+#: ../ui/bookmarks.glade.h:3
+#, fuzzy
+msgid "Label:"
+msgstr "Метка"
 
+#: ../ui/bookmarks.glade.h:4
+#, fuzzy
+msgid "Module:"
+msgstr "Модуль"
+
+#: ../ui/bookmarks.glade.h:5
+#, fuzzy
+msgid "New ..."
+msgstr "Новый"
+
+#: ../ui/bookmarks.glade.h:6
+#, fuzzy
+msgid "Verse:"
+msgstr "Список стиха"
+
+#: ../ui/prefs.glade.h:1
+msgid ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
+msgstr ""
+
+#: ../ui/prefs.glade.h:9
+#, fuzzy
+msgid "<b>Font Colors</b>"
+msgstr "Цвет текста"
+
+#: ../ui/prefs.glade.h:10
+#, fuzzy
+msgid "<b>Font Miscellaneous</b>"
+msgstr "Модуль"
+
+#: ../ui/prefs.glade.h:11
+#, fuzzy
+msgid "<b>General</b>"
+msgstr "По центру"
+
+#: ../ui/prefs.glade.h:12
+#, fuzzy
+msgid "<b>Main Window Modules</b>"
+msgstr "Модуль"
+
+#: ../ui/prefs.glade.h:13
+#, fuzzy
+msgid "<b>Miscellaneous Modules</b>"
+msgstr "Модуль"
+
+#: ../ui/prefs.glade.h:14
+#, fuzzy
+msgid "<b>Parallel View</b>"
+msgstr "Изменить подстрочный 1"
+
+#: ../ui/prefs.glade.h:15
+#, fuzzy
+msgid "<b>Show</b>"
+msgstr "Опции модуля"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:16
+#, fuzzy
+msgid "<b>StudyPad default directory</b>"
+msgstr "Словарь по умолчанию"
+
+#: ../ui/prefs.glade.h:17
+#, fuzzy
+msgid "<b>Tabs</b>"
+msgstr "Опции модуля"
+
+#: ../ui/prefs.glade.h:18
+#, fuzzy
+msgid "Background"
+msgstr "Цвет фона"
+
+#: ../ui/prefs.glade.h:20
+#, fuzzy
+msgid "Bible text"
+msgstr "Тексты Библии"
+
+#: ../ui/prefs.glade.h:21
+#, fuzzy
+msgid "Biblical Text"
+msgstr "Тексты Библии"
+
+#: ../ui/prefs.glade.h:22
+#, fuzzy
+msgid "Book"
+msgstr "Книги"
+
+#: ../ui/prefs.glade.h:25
+#, fuzzy
+msgid "Cover"
+msgstr "Нижнее"
+
+#: ../ui/prefs.glade.h:26
+#, fuzzy
+msgid "Current Verse text"
+msgstr "Цвет текущего стиха"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:28
+#, fuzzy
+msgid "Default Dictionary"
+msgstr "Использовать словарь по умолчанию"
+
+#: ../ui/prefs.glade.h:29
+#, fuzzy
+msgid "Dictionary"
+msgstr "Словари-Лексиконы"
+
+#: ../ui/prefs.glade.h:31
+#, fuzzy
+msgid "Font Colors"
+msgstr "Цвет текста"
+
+#: ../ui/prefs.glade.h:32
+#, fuzzy
+msgid "Font Misc"
+msgstr "Нижние заметки"
+
+#: ../ui/prefs.glade.h:33
+#, fuzzy
+msgid "General Misc"
+msgstr "По центру"
+
+#: ../ui/prefs.glade.h:34
+#, fuzzy
+msgid "Greed Lexicon"
+msgstr "Греческий лексикон"
+
+#: ../ui/prefs.glade.h:36
+#, fuzzy
+msgid "Links"
+msgstr "Список"
+
+#: ../ui/prefs.glade.h:37
+#, fuzzy
+msgid "Modules Main"
+msgstr "Модуль"
+
+#: ../ui/prefs.glade.h:38
+#, fuzzy
+msgid "Modules Misc"
+msgstr "Опции модуля"
+
+#: ../ui/prefs.glade.h:39
+#, fuzzy
+msgid "Modules Parallel"
+msgstr "Модуль"
+
+#: ../ui/prefs.glade.h:45
+#, fuzzy
+msgid "Personal Notes"
+msgstr "Персональные комментарии"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:47
+#, fuzzy
+msgid "Select A Directory"
+msgstr "Словарь по умолчанию"
+
+#: ../ui/prefs.glade.h:48
+#, fuzzy
+msgid "Show Daily Devotion at start up"
+msgstr "Показать ежедневную молитву"
+
+#: ../ui/prefs.glade.h:49
+#, fuzzy
+msgid "Show splash screen at start up"
+msgstr "Показать ежедневную молитву"
+
+# src/gs_preferences_dlg.c
+#: ../ui/prefs.glade.h:52
+#, fuzzy
+msgid "Use default Dictionary"
+msgstr "Использовать словарь по умолчанию"
+
+#: ../ui/prefs.glade.h:53
+msgid "Use tabbed browsing"
+msgstr ""
+
+#: ../ui/prefs.glade.h:54
+#, fuzzy
+msgid "Verse number font size"
+msgstr "Размер шрифта номера стиха"
+
+#: ../ui/prefs.glade.h:55
+#, fuzzy
+msgid "Verse numbers"
+msgstr "Номера стихов"
+
+#: ../ui/module-manager.glade.h:1
+msgid "<b>Add and Remove Sources</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:2
+msgid "<b>Install Destination</b>"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:3
+#, fuzzy
+msgid "<b>Install Source</b>"
+msgstr "Модуль"
+
+#: ../ui/module-manager.glade.h:4
+#, fuzzy
+msgid "<b>Module Manager</b>"
+msgstr "Модуль"
+
+#. do not translate <b> and </b> they are html formating
+#: ../ui/module-manager.glade.h:6
+#, fuzzy
+msgid "<b>Sword</b>"
+msgstr "Опции модуля"
+
+#: ../ui/module-manager.glade.h:7
+msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
+msgstr ""
+
+#: ../ui/module-manager.glade.h:8
+msgid ""
+"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
+"detection you should NOT use  the remote installation feature! "
+msgstr ""
+
+#: ../ui/module-manager.glade.h:9
+#, fuzzy
+msgid "Current Remote Sources"
+msgstr "Цвет текущего стиха"
+
+#: ../ui/module-manager.glade.h:10
+#, fuzzy
+msgid "Current local sources"
+msgstr "Цвет текущего стиха"
+
+#: ../ui/module-manager.glade.h:11
+msgid "Home dir"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:12
+#, fuzzy
+msgid "Install"
+msgstr "Курсив"
+
+#: ../ui/module-manager.glade.h:13
+msgid "Local"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:14
+#, fuzzy
+msgid "Local Install Folder"
+msgstr "Модуль"
+
+#: ../ui/module-manager.glade.h:16
+#, fuzzy
+msgid "Remote"
+msgstr "Сохранить заметку"
+
+#: ../ui/module-manager.glade.h:17
+#, fuzzy
+msgid "Sword sys dir"
+msgstr "Версия SWORD'а:"
+
+#: ../ui/search-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Found</b>"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:2
+#, fuzzy
+msgid "<b>List Name</b>"
+msgstr "Список"
+
+#: ../ui/search-dialog.glade.h:3
+#, fuzzy
+msgid "<b>Module Lists</b>"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:4
+#, fuzzy
+msgid "<b>Modules</b>"
+msgstr "Модуль"
+
+#: ../ui/search-dialog.glade.h:5
+#, fuzzy
+msgid "<b>Options</b>"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:6
+#, fuzzy
+msgid "<b>Preview</b>"
+msgstr "Изменить подстрочный 1"
+
+#: ../ui/search-dialog.glade.h:7
+msgid "<b>Range Name</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:8
+msgid "<b>Range Text</b>"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:9
+#, fuzzy
+msgid "<b>Ranges</b>"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:10
+#, fuzzy
+msgid "<b>Scope</b>"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:11
+#, fuzzy
+msgid "<b>Search Results</b>"
+msgstr "Поиск результатов"
+
+#: ../ui/search-dialog.glade.h:12
+#, fuzzy
+msgid "<b>Search Type</b>"
+msgstr "Поиск"
+
+#: ../ui/search-dialog.glade.h:13
+#, fuzzy
+msgid "Add Modules"
+msgstr "Модуль"
+
+#: ../ui/search-dialog.glade.h:15
+msgid "Attributes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:16
+#, fuzzy
+msgid "Clear all modules from the list"
+msgstr "Очистить список истории"
+
+#: ../ui/search-dialog.glade.h:17
+msgid "Clear lists for new search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:18
+#, fuzzy
+msgid "Create a new module list"
+msgstr "Очистить список истории"
+
+#: ../ui/search-dialog.glade.h:19
+msgid "Create new custom range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:20
+#, fuzzy
+msgid "Current results"
+msgstr "Цвет текущего стиха"
+
+#: ../ui/search-dialog.glade.h:21
+#, fuzzy
+msgid "Custom Lists"
+msgstr "Нумерованый список"
+
+#: ../ui/search-dialog.glade.h:22
+msgid "Custom Ranges"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:23
+#, fuzzy
+msgid "Custom list"
+msgstr "Нумерованый список"
+
+#: ../ui/search-dialog.glade.h:24
+#, fuzzy
+msgid "Custom range"
+msgstr "Нумерованый список"
+
+#: ../ui/search-dialog.glade.h:25
+msgid "Delete selected range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:26
+#, fuzzy
+msgid "Delete the selected list"
+msgstr "Добавить новую подгруппу в выбранную группу"
+
+#: ../ui/search-dialog.glade.h:27
+#, fuzzy
+msgid "Entire module"
+msgstr "Просмотр модуля"
+
+#: ../ui/search-dialog.glade.h:29
+msgid "In modules that have Footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:30
+#, fuzzy
+msgid "In modules that have Morphological Tags"
+msgstr "Переключить номера Стронга"
+
+#: ../ui/search-dialog.glade.h:31
+#, fuzzy
+msgid "In modules that have Strong's Numbers"
+msgstr "Переключить номера Стронга"
+
+#: ../ui/search-dialog.glade.h:32
+#, fuzzy
+msgid "Include Footnotes"
+msgstr "Переключить нижние заметки"
+
+#: ../ui/search-dialog.glade.h:33
+#, fuzzy
+msgid "Include Morphological Tags"
+msgstr "Морфологические теги"
+
+#: ../ui/search-dialog.glade.h:34
+#, fuzzy
+msgid "Include Strong's Numbers"
+msgstr "Переключить номера Стронга"
+
+#: ../ui/search-dialog.glade.h:36
+#, fuzzy
+msgid "Module Selection"
+msgstr "Выборочный просмотр"
+
+#: ../ui/search-dialog.glade.h:37
+#, fuzzy
+msgid "Module list"
+msgstr "Опции модуля"
+
+#: ../ui/search-dialog.glade.h:39
+#, fuzzy
+msgid "Open a dialog to select modules to add to the list"
+msgstr "Добавить новую подгруппу в выбранную группу"
+
+#: ../ui/search-dialog.glade.h:41
+#, fuzzy
+msgid "Remove the selected module from the list"
+msgstr "Добавить новую подгруппу в выбранную группу"
+
+#: ../ui/search-dialog.glade.h:42
+#, fuzzy
+msgid "Results"
+msgstr "Поиск результатов"
+
+#: ../ui/search-dialog.glade.h:43
+msgid "Save custom range"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:44
+#, fuzzy
+msgid "Save search results as bookmarks"
+msgstr "Просмотр поиска результатов"
+
+#: ../ui/search-dialog.glade.h:45
+#, fuzzy
+msgid "Save the module list"
+msgstr "Установка шрифта модуля"
+
+#: ../ui/search-dialog.glade.h:46
+#, fuzzy
+msgid "Search  Criteria"
+msgstr "Поиск персонального"
+
+#: ../ui/search-dialog.glade.h:47
+#, fuzzy
+msgid "Search entire module"
+msgstr "Опции поиска"
+
+#: ../ui/search-dialog.glade.h:48
+#, fuzzy
+msgid "Show in main window"
+msgstr "Показать %s в главном окне"
+
+#: ../ui/search-dialog.glade.h:49
+#, fuzzy
+msgid "Single module"
+msgstr "Просмотр модуля"
+
+#: ../ui/search-dialog.glade.h:51
+msgid "Use a custom module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:52
+msgid "Use a custom range for the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:53
+msgid "Use a single module for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:54
+msgid "Use the current module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:55
+msgid "Use the results of the last search as the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:56
+msgid "e.g. Matt-John;Rev4"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:57
+msgid "for "
+msgstr ""
+
+#: ../ui/editor_note.xml.h:1
+#, fuzzy
+msgid "Delete the current note"
+msgstr "Открыть файл"
+
+#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
+#, fuzzy
+msgid "E_xit"
+msgstr "Правка"
+
+#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:3
+#, fuzzy
+msgid "Exit"
+msgstr "Правка"
+
+#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:4
+msgid "Exit the program"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
+#, fuzzy
+msgid "For_mat"
+msgstr "Предформатирование"
+
+#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+msgid "HTML Format switch"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:7
+msgid "HTML mode"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:8
+msgid "Preview the note to be printed"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:12
+#, fuzzy
+msgid "Print Pre_view"
+msgstr "GnomeSword - Открыть файл заметки"
+
+#: ../ui/editor_note.xml.h:10
+#, fuzzy
+msgid "Print this note"
+msgstr "Печать этого комментария"
+
+#: ../ui/editor_note.xml.h:12
+msgid "Save using the PersistStream interface"
+msgstr ""
+
+#: ../ui/editor_note.xml.h:13
+#, fuzzy
+msgid "_Delete Personal Comment"
+msgstr "Персональные комментарии"
+
+#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:18
+#, fuzzy
+msgid "_Print..."
+msgstr "Печать"
+
+#: ../ui/editor_note.xml.h:16
+#, fuzzy
+msgid "_Save (Personal Comment)"
+msgstr "Персональные комментарии"
+
+#: ../ui/editor_studypad.xml.h:1
+#, fuzzy
+msgid "Create a new document"
+msgstr "Очистить список истории"
+
+#: ../ui/editor_studypad.xml.h:8
+#, fuzzy
+msgid "New Document"
+msgstr "Печатать комментарий"
+
+#: ../ui/editor_studypad.xml.h:9
+#, fuzzy
+msgid "Open (PersistFile)"
+msgstr "Открыть файл"
+
+#: ../ui/editor_studypad.xml.h:10
+msgid "Open using the PersistFile interface"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:11
+msgid "Preview the document to be printed"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:13
+#, fuzzy
+msgid "Print this document"
+msgstr "Печать этого комментария"
+
+#: ../ui/editor_studypad.xml.h:15
+msgid "Save (PersistFile)"
+msgstr ""
+
+#: ../ui/editor_studypad.xml.h:16
+msgid "Save using the PersistFile interface"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Note for"
+#~ msgstr "Сохранить заметку"
+
+#, fuzzy
+#~ msgid "Restart GnomeSword?"
+#~ msgstr "О GnomeSword"
+
+#, fuzzy
+#~ msgid "Remove Modules"
+#~ msgstr "Модуль"
+
+#, fuzzy
+#~ msgid "Remove selected module(s)"
+#~ msgstr "Добавить новую подгруппу в выбранную группу"
+
+#, fuzzy
+#~ msgid "Remove"
+#~ msgstr "Модуль"
+
+#, fuzzy
+#~ msgid "Pick the background color"
+#~ msgstr "Цвет фона"
+
+#, fuzzy
+#~ msgid "Pick the current Verse color"
+#~ msgstr "Цвет текущего стиха"
+
+#, fuzzy
+#~ msgid "Strong's Numbers & Morphological Tags"
+#~ msgstr "Номера Стронга и морфологических тегов"
+
+#~ msgid "GnomeSword Defaults"
+#~ msgstr "GnomeSword по умолчанию"
+
+#~ msgid "Bible Text Window"
+#~ msgstr "Окно текста Библии"
+
+#, fuzzy
+#~ msgid "Zero is the base font size. Increase or decrease the size."
+#~ msgstr "Ноль - основной размер шрифта, увеличить или уменьшить"
+
+#, fuzzy
+#~ msgid "Use Defaults When Starting GnomeSword"
+#~ msgstr "Использовать по умолчанию, когда открывается GnomeSword"
+
+#, fuzzy
+#~ msgid "Yes, use defaults"
+#~ msgstr "Да, использовать по умолчанию то, что я выбираю"
+
+#, fuzzy
+#~ msgid "No, use settings saved the last time I used GnomeSword"
+#~ msgstr ""
+#~ "Нет, использовать настройки, сохраненные при последнем запуске GnomeSword"
+
+#, fuzzy
+#~ msgid "Bible texts"
+#~ msgstr "Тексты Библии"
+
+# src/gs_preferences_dlg.c
+#~ msgid "Show"
+#~ msgstr "Показывать"
+
+#, fuzzy
+#~ msgid "Display Bible text window"
+#~ msgstr "Окно текста Библии"
+
+#, fuzzy
+#~ msgid "Display Commentary window"
+#~ msgstr "Окно текста Библии"
+
+#~ msgid "Show Daily Devotion if you have a Devotion module"
+#~ msgstr "Показать ежедневную молитву, если у вас еть такой модуль"
+
+#, fuzzy
+#~ msgid "Show Dictionary / Lexicon"
+#~ msgstr "Вкладки словаря/лексикона"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "In Sidebar viewer"
+#~ msgstr "В просмотрщике панели ярлыков"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "In Dictionary/Lexicon window"
+#~ msgstr "В окне словаря/лексикона"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid ""
+#~ "Which Greek Lexicon to display in Dictionary/Lexicon window when a link "
+#~ "or word is clicked"
+#~ msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Hebrew Lexicon Viewer"
+#~ msgstr "Просмотрщик лексикона иврита"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Greek Lexicon Viewer"
+#~ msgstr "Просмотрщик греческого лексикона"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid ""
+#~ "Which Greek Lexicon to display in viewer when a link or word is clicked"
+#~ msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+#, fuzzy
+#~ msgid "Scope"
+#~ msgstr "Без контекста"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Опции модуля"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Show Context"
+#~ msgstr "Показывать комментарии"
+
+#, fuzzy
+#~ msgid "Clear"
+#~ msgstr "Очистить"
+
+#, fuzzy
+#~ msgid "Preview"
+#~ msgstr "GnomeSword - Открыть файл заметки"
+
+#, fuzzy
+#~ msgid "Found"
+#~ msgstr "Найти"
+
+#, fuzzy
+#~ msgid "Clear Module List"
+#~ msgstr "Очистить список истории"
+
+#, fuzzy
+#~ msgid "Clear the module list"
+#~ msgstr "Очистить список истории"
+
+#, fuzzy
+#~ msgid "Initiating SWORD"
+#~ msgstr "О GnomeSword"
+
+#, fuzzy
+#~ msgid "Checking for SWORD Modules"
+#~ msgstr "О модулях Sword"
+
+#~ msgid "Sync"
+#~ msgstr "Синхронизация"
+
+#~ msgid "Romans"
+#~ msgstr "Римлянам"
+
+#~ msgid "Romans 8:28"
+#~ msgstr "Римлянам 8:28"
+
+#~ msgid "Goto verse"
+#~ msgstr "Перейти к стиху"
+
+#~ msgid "Go to verse in free form lookup and add verse to history"
+#~ msgstr ""
+#~ "Перейти к стиху в свободной форме просмотра и добавить стих в историю"
+
+#, fuzzy
+#~ msgid "Toggle sync with main window"
+#~ msgstr "Синхронизировать с главным окном"
+
+#, fuzzy
+#~ msgid "Search Backwards"
+#~ msgstr "обратный поиск"
+
+#, fuzzy
+#~ msgid "Replace with"
+#~ msgstr "Переместить"
+
+#, fuzzy
+#~ msgid "Replace word"
+#~ msgstr "Переместить"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Insert word into Personal Dictionary"
+#~ msgstr "Использовать словарь по умолчанию"
+
+#, fuzzy
+#~ msgid "Viewer"
+#~ msgstr "Просмоторщик"
+
+#, fuzzy
+#~ msgid "Information Viewer"
+#~ msgstr "Информация о текстах Библии"
+
+#, fuzzy
+#~ msgid "Go to verse"
+#~ msgstr "Перейти к стиху"
+
+#, fuzzy
+#~ msgid "_Viewer"
+#~ msgstr "Просмоторщик"
+
+#, fuzzy
+#~ msgid "in a dialog"
+#~ msgstr "Открыть диалог поиска"
+
+#, fuzzy
+#~ msgid "Open New Dialog"
+#~ msgstr "Открыть диалог поиска"
+
+#, fuzzy
+#~ msgid "Set font for this module"
+#~ msgstr "Об этом модуле"
+
+#, fuzzy
+#~ msgid "Previous Comment"
+#~ msgstr "Печатать комментарий"
+
+#, fuzzy
+#~ msgid "Book Heading"
+#~ msgstr "Заголовки"
+
+#~ msgid "Save Entry"
+#~ msgstr "Сохранить поле"
+
+#~ msgid "Delete Entry"
+#~ msgstr "Удалить поле"
+
+#, fuzzy
+#~ msgid "to unlock the module"
+#~ msgstr "Разблокировать модуль"
+
+#, fuzzy
+#~ msgid "You will need to restart GnomeSword after you unlock it."
+#~ msgstr "Хотите ли вы открыть GnomeSword с помощью"
+
+#, fuzzy
+#~ msgid "You need to restart GnomeSword to view it"
+#~ msgstr "Хотите ли вы открыть GnomeSword с помощью"
+
+#~ msgid "Dictionaries-Lexicons"
+#~ msgstr "Словари-Лексиконы"
+
+#~ msgid "Dict/Lex"
+#~ msgstr "Словари/Лексиконы"
+
+#, fuzzy
+#~ msgid "GnomeSword Preferences"
+#~ msgstr "GnomeSword - Открыть файл заметки"
+
+#~ msgid "Main Text Module"
+#~ msgstr "Главный текстовый модуль"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid ""
+#~ "Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link "
+#~ "or word is clicked"
+#~ msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+#, fuzzy
+#~ msgid "Search finished"
+#~ msgstr "Опции поиска"
+
+#, fuzzy
+#~ msgid "Delete Range?"
+#~ msgstr "Удалить заметку"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Toggle Dictionary View"
+#~ msgstr "Показывать словари"
+
+#, fuzzy
+#~ msgid "button5"
+#~ msgstr "кнопка8"
+
+#~ msgid "button6"
+#~ msgstr "кнопка6"
+
+#, fuzzy
+#~ msgid "Edit Bar"
+#~ msgstr "Правка"
+
+#, fuzzy
+#~ msgid "Editors"
+#~ msgstr "Правка"
+
+#, fuzzy
+#~ msgid "Use StudyPad"
+#~ msgstr "Блокнот изучения"
+
+#, fuzzy
+#~ msgid "Open StudyPad in a dialog"
+#~ msgstr "Открыть диалог поиска"
+
+#, fuzzy
+#~ msgid "Open Personal Comments editor in a dialog"
+#~ msgstr "Открыть диалог поиска"
+
+#~ msgid "Use HTML tags to format notes"
+#~ msgstr "Использовать HTML теги при форматировании заметок"
+
+#, fuzzy
+#~ msgid "Settings you select as the defaults"
+#~ msgstr "Настройки, которые вы выбрали по умолчанию"
+
+#, fuzzy
+#~ msgid "Settings used the last time GnomeSword was opened"
+#~ msgstr "Настройки, используемые при последнем запуске GnomeSword"
+
+#, fuzzy
+#~ msgid ""
+#~ "These settings will be the defaults if you choose to use default settings."
+#~ msgstr ""
+#~ "Эти настройки будут настройками по умолчанию, если вы выбрали "
+#~ "использование настроек по умолчанию."
+
+#, fuzzy
+#~ msgid "Current Verse background"
+#~ msgstr "Цвет фона текущего стиха"
+
+#, fuzzy
+#~ msgid "Pick the current Verse background color"
+#~ msgstr "Цвет фона текущего стиха"
+
+#~ msgid "Use GnomeSword defaults for all settings on this page"
+#~ msgstr ""
+#~ "Использовать GnomeSword по умолчанию для всех настроек на этой странице"
+
+#, fuzzy
+#~ msgid "<span weight=\"bold\">Search Type</span>"
+#~ msgstr "Тип поиска"
+
+#, fuzzy
+#~ msgid "<span weight=\"bold\">Search Results</span>"
+#~ msgstr "Поиск результатов"
+
+#, fuzzy
+#~ msgid "<span weight=\"bold\">Search Module</span>"
+#~ msgstr "Контекст поиска"
+
+#, fuzzy
+#~ msgid "<span weight=\"bold\">Search Options</span>"
+#~ msgstr "Опции поиска"
+
+#, fuzzy
+#~ msgid "<span weight=\"bold\">Search Scope</span>"
+#~ msgstr "Контекст поиска"
+
+#, fuzzy
+#~ msgid "The Sword Project"
+#~ msgstr "О проекте Sword"
+
+#~ msgid "Delete item and it's siblings"
+#~ msgstr "Удалить элемент и его уровни"
+
+#, fuzzy
+#~ msgid "Load Bibletime Bookmarks"
+#~ msgstr "Сохранить закладки"
+
+#~ msgid "Case Sensitive"
+#~ msgstr "Регистрозависимый"
+
+#, fuzzy
+#~ msgid "Shortcut Bar Search"
+#~ msgstr "Панель ярлыков"
+
+#~ msgid "About the Sword Project..."
+#~ msgstr "О проекте Sword..."
+
+#~ msgid "Text Color"
+#~ msgstr "Цвет текста"
+
+#~ msgid "Pick a color for Background"
+#~ msgstr "Выбрать цвет фона"
+
+#~ msgid "Pick a color for Bible Text"
+#~ msgstr "Выбрать цвет текста Библии"
+
+#~ msgid "Pick a color - CurrentVerse BG"
+#~ msgstr "Выбрать цвет фона текущего стиха"
+
+#~ msgid "Pick a color for Current Verse"
+#~ msgstr "Выбрать цвет текущего стиха"
+
+#, fuzzy
+#~ msgid "Dict/Lex "
+#~ msgstr "Словари/Лексиконы"
+
+# src/gs_preferences_dlg.c
+#~ msgid "where to View Dict/Lex When Link or Word Clicked"
+#~ msgstr "Где смотреть словарь/лексикон, когда щелкаешь на линк или слово"
+
+#~ msgid "App Width"
+#~ msgstr "Ширина приложения"
+
+#~ msgid "ShortCut Bar Width"
+#~ msgstr "Ширина панели ярлыков"
+
+#~ msgid "Upper Pane Height"
+#~ msgstr "Высота верхнего окна"
+
+#~ msgid "Bible Pane Width"
+#~ msgstr "Ширина окна Библии"
+
+#~ msgid "App Height"
+#~ msgstr "Высота приложения"
+
+# src/gs_preferences_dlg.c
+#, fuzzy
+#~ msgid "Default Dict"
+#~ msgstr "Словарь по умолчанию"
+
+#, fuzzy
+#~ msgid "Include Morph Tags"
+#~ msgstr "Номера Стронга и морфологических тегов"
+
+#, fuzzy
+#~ msgid "Show In Main window"
+#~ msgstr "Показать %s в главном окне"
+
+#, fuzzy
+#~ msgid "Save Search Results as Bookmarks"
+#~ msgstr "Просмотр поиска результатов"
+
+#~ msgid "This guide will take you through the initial setup of GnomeSword"
+#~ msgstr ""
+#~ "Это руководство доступно через\n"
+#~ "инициализированую установку GnomeSword"
+
+#~ msgid "Do you want GnomeSword to open with"
+#~ msgstr "Хотите ли вы открыть GnomeSword с помощью"
+
+#~ msgid "Study Pad"
+#~ msgstr "Блокнот изучения"
+
+#, fuzzy
+#~ msgid "New File"
+#~ msgstr "Открыть файл"
+
+#, fuzzy
+#~ msgid "Cut "
+#~ msgstr "Вырезать"
+
+#, fuzzy
+#~ msgid "Spell check note"
+#~ msgstr "Проверка орфографии"

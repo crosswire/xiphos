@@ -1,0 +1,28 @@
+# watch control file for uscan
+
+# in the package directory :
+# uscan
+# uupdate 
+
+# format version number, currently 2; this line is compulsory!
+version=2
+
+# Line continuations are performed with \
+
+# This the format for an FTP site:
+# Full-site-with-pattern  [Version  [Action]]
+# ftp://ftp.tex.ac.uk/tex-archive/web/c_cpp/cweb/cweb-(.*)\.tar\.gz debian  uupdate
+
+# This can be used if you want to override the PASV setting
+# for a specific site
+# opts=pasv ftp://.../...
+
+# This is one format for an HTTP site, which is the same
+# as the FTP format
+# http://www.cpan.org/modules/by-module/Text/Text-CSV_XS-(.*)\.tar\.gz
+http://prdownloads.sourceforge.net/gnomesword/gnomesword2-(.*)\.tar.gz
+
+# This is a variant HTTP format with more possibilities:
+# Homepage  Pattern  [Version  [Action]]
+# http://www.dataway.ch/~lukasl/amph/amph.html \
+# files/amphetamine-([\d\.]*).tar.bz2
