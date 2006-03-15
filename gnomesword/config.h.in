@@ -142,6 +142,9 @@
 /* Define if you want to use GtkHtml-3.8 */
 #undef USE_GTKHTML38
 
+/* Define if you want to use gtkmozembed */
+#undef USE_GTKMOZEMBED
+
 /* Define if you want to spell checking */
 #undef USE_SPELL
 
