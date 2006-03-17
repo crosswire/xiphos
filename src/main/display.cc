@@ -25,6 +25,7 @@
 
 
 #include <swmgr.h>
+#include <swmodule.h>
 #include <versekey.h>
 #include <gbfosis.h>
 #include <thmlosis.h>
@@ -60,6 +61,8 @@ extern "C" {
 using namespace sword;
 using namespace std;
 	
+int strongs_on;
+
 //static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
  
 char GTKEntryDisp::Display(SWModule &imodule) 
@@ -326,6 +329,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 #endif	
 	swbuf = "";
 	main_set_global_options(ops);
+	strongs_on = ops->strongs;
 	getVerseBefore(imodule);
 #ifdef USE_GTKMOZEMBED 
 	gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());

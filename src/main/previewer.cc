@@ -195,7 +195,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	
 	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
-			"<font color=\"grey\">%s: %s<HR></font><br>",
+			"<font color=\"grey\">%s: %s<HR></font>",
 				_("Strongs"),key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str, 
@@ -206,7 +206,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 		str = g_string_append(str, text);
 		
 		g_string_printf(tmp_str,
-			"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+			"<font color=\"grey\"><br><br>%s: %s<HR></font>",
 					_("Morphology"),morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
@@ -235,12 +235,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
-	//gtk_html_set_editable(html, was_editable);
-#endif	
-/*	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
-	}
-*/	
+#endif
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);

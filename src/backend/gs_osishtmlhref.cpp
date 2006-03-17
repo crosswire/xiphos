@@ -28,6 +28,7 @@
 
 #include "main/settings.h"
 
+extern int strongs_on;
 SWORD_NAMESPACE_START 
 GS_OSISHTMLHREF::MyUserData::MyUserData(const SWModule * module, const SWKey * key):
 BasicFilterUserData(module, key)
@@ -68,7 +69,8 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 	if (!substituteToken(buf, token)) {
 		MyUserData     *u = (MyUserData *) userData;
 		XMLTag tag(token);
-
+		
+		
 		if (!tag.getName()) {
 			return false;
 		}
@@ -128,10 +130,8 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 					outTag.appendFormatted("gloss=%s&", val);
 				}
 				if ((attrib = tag.getAttribute("lemma"))) {
-					const int
-					                count = tag.getAttributePartCount("lemma");
-					int
-					                i = (count > 1) ? 0 : -1;	
+					const int  count = tag.getAttributePartCount("lemma", ' ');
+					int  i = (count > 1) ? 0 : -1;	
 					attrValue = "";
 
 					do {
@@ -139,7 +139,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 							attrValue += "|";
 						}
 
-						attrib = tag.getAttribute("lemma", i);
+						attrib = tag.getAttribute("lemma", i,' ');
 						if (i < 0) {	// to handle our -1 condition
 							i = 0;
 						}
@@ -153,8 +153,8 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 							
 						if ((*val == 'H') || (*val == 'G')) {
 							++val;
-							attrValue.append(val);
 						}
+							attrValue.append(val);
 					}
 					while (++i < count);
 					
@@ -167,7 +167,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 				}
 				if ((attrib = tag.getAttribute("morph"))) {
 					//printf("%s\n",token);
-					const int  count = tag.getAttributePartCount("morph");
+					const int  count = tag.getAttributePartCount("morph", ' ');
 					int i = (count > 1) ? 0 : -1;	// -1 for whole value cuz it's faster, but does the same thing as 0
 					attrValue = "";
 					do {
@@ -175,13 +175,13 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 							attrValue += "|";
 						}
 
-						attrib = tag.getAttribute("morph", i);
+						attrib = tag.getAttribute("morph", i, ' ');
 						if (i < 0) {
 							i = 0;	// to handle our -1 condition
 						}
 						val = strchr(attrib, ':');
 						val = (val) ? (val + 1) : attrib;
-						if (!strncmp(attrib, "x-Robinson", 10)) {	// robinson 
+						if (!strncmp(attrib, "robinson", 8)) {	// robinson 
 							// 
 							// 
 							// codes
@@ -212,7 +212,6 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 #else
 		// <w> tag
 		else if (!strcmp(tag.getName(), "w")) {
- 
 			// start <w> tag
 			if ((!tag.isEmpty()) && (!tag.isEndTag())) {
 				u->w = token;
@@ -222,7 +221,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 			else {
 				bool endTag = tag.isEndTag();
 				SWBuf lastText;
-				bool show = true;	// to handle unplaced article in kjv2003-- temporary till combined
+				//bool show = true;	// to handle unplaced article in kjv2003-- temporary till combined
 
 				if (endTag) {
 					tag = u->w.c_str();
@@ -242,11 +241,13 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 					val = (val) ? (val + 1) : attrib;
 					buf.appendFormatted(" %s", val);
 				}
-				if (attrib = tag.getAttribute("lemma")) {
-					int count = tag.getAttributePartCount("lemma");
+					int mycount = 0;
+				if ((attrib = tag.getAttribute("lemma")) && strongs_on) {
+					int count = tag.getAttributePartCount("lemma", ' ');
+				//	g_message("AttributePartCount = %d\nmycount = %d",count,++mycount);
 					int i = (count > 1) ? 0 : -1;		// -1 for whole value cuz it's faster, but does the same thing as 0
 					do {
-						attrib = tag.getAttribute("lemma", i);
+						attrib = tag.getAttribute("lemma", i, ' ');
 						if (i < 0) i = 0;	// to handle our -1 condition
 						val = strchr(attrib, ':');
 						val = (val) ? (val + 1) : attrib;
@@ -258,36 +259,38 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 						const char *val2 = val;
 						if ((strchr("GH", *val)) && (isdigit(val[1])))
 							val2++;
-						if ((!strcmp(val2, "3588")) && (lastText.length() < 1))
-							show = false;
-						else buf.appendFormatted(" <small><em>&lt;<a href=\"passagestudy.jsp?action=showStrongs&type=%s&value=%s\">%s</a>&gt;</em></small> ", 
+						if (!strcmp(val2, "3588"))  gh = "Greek"; // untill kjv module adds G to 3588
+						
+						if (!u->suspendTextPassThru)
+						buf.appendFormatted(" <small><em>&lt;<a href=\"passagestudy.jsp?action=showStrongs&type=%s&value=%s\">%s</a>&gt;</em></small> ", 
 							(gh.length()) ? gh.c_str() : "", 
 							URL::encode(val2).c_str(), 
 							val2);
 						
 					} while (++i < count);
 				}
-				if ((attrib = tag.getAttribute("morph")) && (show)) {
-					SWBuf savelemma = tag.getAttribute("savlm");
+				if ((attrib = tag.getAttribute("morph"))) { // && (show)) {
+					/*SWBuf savelemma = tag.getAttribute("savlm");
 					if ((strstr(savelemma.c_str(), "3588")) && (lastText.length() < 1))
 						show = false;
-					if (show) {
-						int count = tag.getAttributePartCount("morph");
+					if (show) {*/
+						int count = tag.getAttributePartCount("morph", ' ');
 						int i = (count > 1) ? 0 : -1;		// -1 for whole value cuz it's faster, but does the same thing as 0
 						do {
-							attrib = tag.getAttribute("morph", i);
+							attrib = tag.getAttribute("morph", i, ' ');
 							if (i < 0) i = 0;	// to handle our -1 condition
 							val = strchr(attrib, ':');
 							val = (val) ? (val + 1) : attrib;
 							const char *val2 = val;
 							if ((*val == 'T') && (strchr("GH", val[1])) && (isdigit(val[2])))
 								val2+=2;
+						if (!u->suspendTextPassThru)
 							buf.appendFormatted(" <small><em>(<a href=\"passagestudy.jsp?action=showMorph&type=%s&value=%s\">%s</a>)</em></small> ", 
 								URL::encode(tag.getAttribute("morph")).c_str(),
 								URL::encode(val).c_str(), 
 								val2);
 						} while (++i < count);
-					}
+					//}
 				}
 				if (attrib = tag.getAttribute("POS")) {
 					val = strchr(attrib, ':');
