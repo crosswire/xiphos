@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--enable-debug --enable-maintainer-mode
+project.configure.options=--enable-sword_cvs --prefix=/home/tee --enable-moz_embed --enable-debug --enable-maintainer-mode
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -156,7 +156,8 @@ module.include.files=\
 	src/gui/parallel_dialog.h\
 	src/gui/bookmark_dialog.h\
 	src/editor/html-editor.h\
-	src/main/navbar.h
+	src/main/navbar.h\
+	src/main/previewer.h
 
 module.source.name=.
 module.source.type=

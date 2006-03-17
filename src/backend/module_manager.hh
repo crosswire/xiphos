@@ -22,9 +22,18 @@
 #ifndef __MODULE_MANAGER_HH__
 #define __MODULE_MANAGER_HH__
 
+//#include <defs.h>
+//#include <swbuf.h>
+//#include <map>
+//#include <set>
 #include <swmgr.h>
+#include <swmodule.h>
 #include <installmgr.h>
 #include <filemgr.h>
+
+#ifdef USE_SWORD_CVS
+#include <ftptrans.h>
+#endif
 
 using namespace std;
 using namespace sword;

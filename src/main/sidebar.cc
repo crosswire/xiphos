@@ -82,19 +82,19 @@ TreePixbufs *pixbufs;
 void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
 {
 	gint module_type = backend->module_type(mod_name);
-	
+
 	switch (module_type) {
 	case -1:
 		return;
 		break;
 	case TEXT_TYPE:
-	case COMMENTARY_TYPE:		
-		if(strcmp(settings.currentverse, key)) {
+	case COMMENTARY_TYPE:
+		if (strcmp(settings.currentverse, key)) {
 			xml_set_value("GnomeSword", "keys", "verse",
-						key);
-			settings.currentverse = xml_get_value(
-						"keys", "verse");
-		}		
+				      key);
+			settings.currentverse =
+			    xml_get_value("keys", "verse");
+		}
 		break;
 	case DICTIONARY_TYPE:
 		xml_set_value("GnomeSword", "keys", "dictionary", key);
@@ -102,7 +102,8 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
 		break;
 	case BOOK_TYPE:
 		xml_set_value("GnomeSword", "keys", "offset", key);
-		settings.book_offset = atol(xml_get_value( "keys", "offset"));
+		settings.book_offset =
+		    atol(xml_get_value("keys", "offset"));
 		break;
 	}
 	gui_open_module_in_new_tab(mod_name);
@@ -126,23 +127,24 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
  *   void
  */
 
-void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
-				       gchar * verse_list)
+void main_display_verse_list_in_sidebar(gchar * key,
+					gchar * module_name,
+					gchar * verse_list)
 {
 	GList *tmp = NULL;
 	gint i = 0;
 	GtkTreeModel *model;
-	GtkListStore *list_store;	
+	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	RESULTS *list_item;	
-	
+	RESULTS *list_item;
+
 	//g_warning("verse_list = %s",verse_list);
 	list_of_verses = g_list_first(list_of_verses);
-	if(list_of_verses) {
-		while(list_of_verses) {
-			list_item = (RESULTS*)list_of_verses->data;
+	if (list_of_verses) {
+		while (list_of_verses) {
+			list_item = (RESULTS *) list_of_verses->data;
 			g_free(list_item->module);
 			g_free(list_item->key);
 			g_free(list_item);
@@ -151,42 +153,43 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 		g_list_free(list_of_verses);
 	}
 	list_of_verses = NULL;
-	
-	strcpy(settings.sb_search_mod,module_name);
-	
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+
+	strcpy(settings.sb_search_mod, module_name);
+
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (sidebar.results_list));
 	list_store = GTK_LIST_STORE(model);
 	gtk_list_store_clear(list_store);
-	
+
 	strcpy(sidebar.mod_name, module_name);
-	
+
 	if (verse_list[0] == 'S' && verse_list[1] == 'e'
 	    && verse_list[2] == 'e') {
 		verse_list += 4;
 	}
 	i = 0;
-	tmp = backend->parse_verse_list(verse_list, key);  
+	tmp = backend->parse_verse_list(verse_list, key);
 	while (tmp != NULL) {
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
-					   (const char *) tmp->data, -1);
+				   (const char *) tmp->data, -1);
 		++i;
 		tmp = g_list_next(tmp);
 	}
-	
+
 	selection = gtk_tree_view_get_selection
-                                          (GTK_TREE_VIEW(sidebar.results_list));
-	if(!gtk_tree_model_get_iter_first(model,&iter))
+	    (GTK_TREE_VIEW(sidebar.results_list));
+	if (!gtk_tree_model_get_iter_first(model, &iter))
 		return;
-	path = gtk_tree_model_get_path(model,&iter);				
-	gtk_tree_selection_select_path(selection,
-                                             path);
+	path = gtk_tree_model_get_path(model, &iter);
+	gtk_tree_selection_select_path(selection, path);
 
 	gtk_tree_path_free(path);
-	
-	gui_verselist_button_release_event(NULL,NULL,NULL);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
-			      3);
+
+	gui_verselist_button_release_event(NULL, NULL, NULL);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_sidebar), 3);
 	gtk_widget_grab_focus(GTK_WIDGET(sidebar.results_list));
 }
 
@@ -470,26 +473,23 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	gsize bytes_written;
 	GError *error = NULL;
 	gchar *buf = NULL;
-	
+
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
 	if (backend->module_has_testament(mod_name, 1)) {
-		while(j < key.BMAX[0]) {
-			buf = g_convert((const char *)key.books[0][j].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-			if(buf == NULL) {
-				g_print ("error: %s\n", error->message);
-				g_error_free (error);
+		while (j < key.BMAX[0]) {
+			buf =
+			    g_convert((const char *) key.books[0][j].
+				      name, -1, UTF_8, OLD_CODESET,
+				      &bytes_read, &bytes_written,
+				      &error);
+			if (buf == NULL) {
+				g_print("error: %s\n", error->message);
+				g_error_free(error);
 				continue;
-			}//(gchar *) key.books[0][j].name;
-			gchar *key =
-			    g_strdup_printf("book://%s/%s 1:1",
-					    mod_name, buf);
+			}	//(gchar *) key.books[0][j].name;
+			gchar *key = g_strdup_printf("book://%s/%s 1:1",
+						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model),
@@ -509,22 +509,19 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	}
 	j = 0;
 	if (backend->module_has_testament(mod_name, 2)) {
-		while(j < key.BMAX[1]) {
-			buf = g_convert((const char *)key.books[1][j].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-			if(buf == NULL) {
-				g_print ("error: %s\n", error->message);
-				g_error_free (error);
+		while (j < key.BMAX[1]) {
+			buf =
+			    g_convert((const char *) key.books[1][j].
+				      name, -1, UTF_8, OLD_CODESET,
+				      &bytes_read, &bytes_written,
+				      &error);
+			if (buf == NULL) {
+				g_print("error: %s\n", error->message);
+				g_error_free(error);
 				continue;
-			}//(gchar *) key.books[1][j].name;
-			gchar *key =
-			    g_strdup_printf("book://%s/%s 1:1",
-					    mod_name, buf);
+			}	//(gchar *) key.books[1][j].name;
+			gchar *key = g_strdup_printf("book://%s/%s 1:1",
+						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model),
@@ -572,29 +569,32 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gint mod_type;
 	GtkTreePath *path;
 
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-			   2, &cap, 3, &mod, 4, &key, -1);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &cap, 3,
+			   &mod, 4, &key, -1);
 	if (!cap)
 		return;
 	if (!g_utf8_collate(cap, _("Parallel View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_bible_parallel),
+					      (widgets.
+					       notebook_bible_parallel),
 					      1);
 
 	if (!g_utf8_collate(cap, _("Standard View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_bible_parallel),
+					      (widgets.
+					       notebook_bible_parallel),
 					      0);
 
 	if (!g_utf8_collate(cap, _("Commentaries"))) {
 		if (!settings.comm_showing) {
 			settings.comm_showing = TRUE;
 			gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_comm_book),
-					      0);
+						      (widgets.
+						       notebook_comm_book),
+						      0);
 			/*main_display_commentary(settings.
-						CommWindowModule,
-						settings.currentverse);*/
+			   CommWindowModule,
+			   settings.currentverse); */
 		}
 	}
 
@@ -602,13 +602,14 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		if (settings.comm_showing) {
 			settings.comm_showing = FALSE;
 			gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_comm_book),
-					      1);
+						      (widgets.
+						       notebook_comm_book),
+						      1);
 			/*offset =
-			    g_strdup_printf("%lu",
-					    settings.book_offset);
-			main_display_book(settings.book_mod, offset);
-			g_free(offset);*/
+			   g_strdup_printf("%lu",
+			   settings.book_offset);
+			   main_display_book(settings.book_mod, offset);
+			   g_free(offset); */
 		}
 	}
 
@@ -619,8 +620,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	switch (sbtype) {
 	case TEXT_TYPE:
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					     (widgets.notebook_bible_parallel),
-					     0);
+					      (widgets.
+					       notebook_bible_parallel),
+					      0);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
@@ -633,23 +635,23 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
-		
+
 		if (key)
 			main_url_handler(key, TRUE);
 		else {
-			if(navbar_main.module_name) 
+			if (navbar_main.module_name)
 				g_free(navbar_main.module_name);
 			navbar_main.module_name = g_strdup(mod);
 			main_navbar_fill_book_combo(navbar_main);
 			main_display_bible(mod, settings.currentverse);
 		}
-			
+
 		break;
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					(widgets.notebook_comm_book),
-					0);
+					      (widgets.
+					       notebook_comm_book), 0);
 		settings.comm_showing = TRUE;
 		main_display_commentary(mod, settings.currentverse);
 		break;
@@ -659,14 +661,14 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	case BOOK_TYPE:
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					(widgets.notebook_comm_book),
-					1);
+					      (widgets.
+					       notebook_comm_book), 1);
 		backend->set_module(mod);
 		backend->set_treekey(atoi((key) ? key : (gchar *) "0"));
 		main_display_book(mod, (key) ? key : (gchar *) "0");
-		path = gtk_tree_model_get_path(model,&selected);
-		if (!gtk_tree_model_iter_has_child(
-			GTK_TREE_MODEL(model), &selected)
+		path = gtk_tree_model_get_path(model, &selected);
+		if (!gtk_tree_model_iter_has_child
+		    (GTK_TREE_MODEL(model), &selected)
 		    && !key) {
 			add_children_to_tree(model,
 					     selected,
@@ -674,15 +676,15 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					     backend->
 					     get_treekey_offset());
 		}
-		if (!gtk_tree_model_iter_has_child(
-			GTK_TREE_MODEL(model), &selected)
+		if (!gtk_tree_model_iter_has_child
+		    (GTK_TREE_MODEL(model), &selected)
 		    && backend->treekey_has_children(atoi(key))) {
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
-		gtk_tree_view_expand_row(GTK_TREE_VIEW(sidebar.module_list),
-                                             path,
-                                             FALSE);
+		gtk_tree_view_expand_row(GTK_TREE_VIEW
+					 (sidebar.module_list), path,
+					 FALSE);
 		gtk_tree_path_free(path);
 		break;
 	}
