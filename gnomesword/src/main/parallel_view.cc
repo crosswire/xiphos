@@ -891,7 +891,9 @@ void main_update_parallel_page(void)
 			    backend_p->get_render_text(mod_name,
 							settings.
 							currentverse);
-			//g_warning(utf8str);
+			/*g_message("RAW: %s\nRENDERED: %s", 
+						backend_p->get_raw_text(mod_name,
+								settings.currentverse),utf8str);*/
 			if(is_rtol) {
 				buf = g_strdup_printf(
 					"%s","<br><DIV ALIGN=right>");			

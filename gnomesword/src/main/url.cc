@@ -331,8 +331,19 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	gchar *modbuf_viewer = NULL;
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
+	gchar *val = NULL;
+	gchar *val1 = NULL;
+	gchar *val2 = NULL;
+	gchar *buf = g_new(gchar,strlen(value));
 	guint delay;	
 	guint i;	
+	
+	val = g_strdup(value);
+	g_message("buf len = %d",strlen(buf));
+	/*if((val1 = strchar(val,'|')) != NULL)	{
+		val1 = (val1) ? (val1 + 1) : val;
+		
+	}*/
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
 		if(!strcmp(type,"Greek")) 
@@ -362,6 +373,7 @@ static gint show_strongs(const gchar * type, const gchar * value,
 			g_free(mybuf);
 		}
 	}
+	g_free(val);
 	return 1;
 }
 
@@ -390,9 +402,17 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	gchar *modbuf = NULL;
 	gchar *morph_mod = NULL;
 	gchar *strongs_buf = NULL;
+	gchar *strongs_buf2 = NULL;
 	gchar *morph_buf = NULL;
+	gchar *morph_buf2 = NULL;
 	guint delay;	
 	guint i;	
+	gchar *buf = NULL;
+	gchar *val = g_new(gchar,strlen(value));
+	gchar *val2 = NULL;
+	
+	
+	
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
 		if(!strcmp(type,"Greek")) 
@@ -408,11 +428,60 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 			modbuf = settings.lex_hebrew;
 	}
 	
+	buf = g_strdup(value);
+	//g_message("buf len = %d",strlen(buf));
+	if(strchr(buf,'|')) {
+		//g_message("buf = %s", buf);
+		for(i=0;i<(strlen(value));i++) {
+			if(value[i] == '|') {
+				val[i] = '\0';
+				break;
+			}
+			val[i] = value[i];
+		}
+		val2 = strchr(buf,'|');
+		++val2;
+		strongs_buf = g_strdup_printf("%s<br /><br />%s",
+					main_get_rendered_text(modbuf, (gchar*)val),
+					main_get_rendered_text(modbuf, (gchar*)val2));
+	} else { 
+		strongs_buf = main_get_rendered_text(modbuf, (gchar*)value);
+	}
+	
+	// morph stuff
+	g_free(buf);	
+	g_free(val);	
+	buf = g_strdup(morph);			
+	val = g_new(gchar,strlen(morph));
+	if(morph_mod)  {		
+		if(strchr(buf,'|')) {
+			g_message("buf = %s", buf);	
+			for(i=0;i<(strlen(morph));i++) {
+				if(morph[i] == '|') {
+					val[i] = '\0';
+					break;
+				}
+				val[i] = morph[i];
+			}
+			val2 = strchr(buf,'|');
+			++val2;
+			
+			g_message("val = %s", val);
+			g_message("val2 = %s", val2);
+			morph_buf = g_strdup_printf("%s<br />%s<br /><br />%s<br />%s",
+					val,
+					main_get_rendered_text(morph_mod, (gchar*)val),
+					val2,
+					main_get_rendered_text(morph_mod, (gchar*)val2));		
+		} else { 
+			morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
+		}
+	}
+	
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar*)value);		
 	} else {
-		strongs_buf = main_get_rendered_text(modbuf, (gchar*)value);
-		morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
+		//morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
 		if (strongs_buf) {
 			main_information_viewer(  
 					modbuf, 
@@ -422,10 +491,12 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 					(gchar*)type,
 					(gchar*)morph_buf,
 					(gchar*)morph);
-			g_free(strongs_buf);
-			if(morph_buf) g_free(morph_buf);
 		}
 	}
+	if(morph_buf) g_free(morph_buf);
+	g_free(buf);
+	g_free(val);
+	g_free(strongs_buf);
 	return 1;
 }
  
