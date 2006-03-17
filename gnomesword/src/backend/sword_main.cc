@@ -23,9 +23,13 @@
 #endif
 
 #include <swmgr.h>
+#include <swmodule.h>
 #include <localemgr.h>
 #include <swversion.h>
 
+#ifdef USE_SWORD_CVS
+#include <swlocale.h>
+#endif
 //#ifdef USE_GTKMOZEMBED
 #include "backend/gs_markupfiltmgr.h"
 //#else
@@ -59,8 +63,13 @@ static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {
+//#ifdef USE_GTKMOZEMBED
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+//#else
+//	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+//	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+//#endif
 	
 	display_mod = NULL;	
 	tree_key = NULL;	
@@ -366,6 +375,31 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 		mod->setKey(mykey);
 		g_free(mykey);
 		return strdup((char *) mod->RenderText());
+	}
+	return NULL;	
+}
+char *BackEnd::get_raw_text(const char *module_name, const char *key) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = display_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != display_mgr->Modules.end()) {
+		char *mykey;                                                 
+		gsize bytes_read;
+		gsize bytes_written;
+		GError **error = NULL;		
+		mykey = g_convert(key,
+				     -1,
+				     OLD_CODESET,
+				     UTF_8,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		mod = (*it).second;
+		mod->setKey(mykey);
+		g_free(mykey);
+		return strdup((char *) mod->getRawEntry());
 	}
 	return NULL;	
 }

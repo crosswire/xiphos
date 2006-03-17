@@ -42,6 +42,7 @@
 #include "backend/gs_markupfiltmgr.h"
 
 #include <swmgr.h>
+#include <swmodule.h>
 
 SWORD_NAMESPACE_START
 
