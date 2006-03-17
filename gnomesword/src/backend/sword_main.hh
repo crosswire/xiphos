@@ -27,6 +27,11 @@
 #include <swbuf.h>
 #include <versekey.h>
 #include <treekeyidx.h>
+
+#ifdef USE_SWORD_CVS
+#include <swdisp.h>
+#endif
+
 #include "main/lists.h"
 
 using std::string;
@@ -78,6 +83,7 @@ public:
 	char *get_config_entry(char * module_name, char * entry);
 	int is_Bible_key(const char * list, char * current_key);
 	char *get_render_text(const char *module_name, const char *key);
+	char *get_raw_text(const char *module_name, const char *key);
 	char *render_this_text(const char * module_name, const char * text);
 	char *get_strip_text(const char *module_name, const char *key);
 	char *get_strip_text_from_string(const char * module_name, const char *string);
