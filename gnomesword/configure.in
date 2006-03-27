@@ -114,9 +114,9 @@ else
   AC_SUBST(MOZILLA_CFLAGS)
 fi
 
-AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
-if test "x$sword_cvs" = xyes; then
-   AC_DEFINE(USE_SWORD_CVS, 1, [Define if you want to use cvs sword])
+AC_ARG_ENABLE(sword_svn,[  --enable-sword_svn        use svn sword [default=no]],sword_svn=$enableval,sword_svn=no)
+if test "x$sword_svn" = xyes; then
+   AC_DEFINE(USE_SWORD_SVN, 1, [Define if you want to use svn sword])
 fi
 
 AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],debug=$enableval,debug=no)
@@ -296,8 +296,8 @@ if test "x$debug" = xyes; then
   if test "x$moz_embed" = xyes; then
     echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
   fi
-  if test "x$sword_cvs" = xyes; then
-    echo "Sword CVS:             enabled"
+  if test "x$sword_svn" = xyes; then
+    echo "Sword SVN:             enabled"
   fi
 
   if test "x$ac_static_sword" = xYES; then

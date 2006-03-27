@@ -66,6 +66,7 @@ GS_OSISHTMLHREF::GS_OSISHTMLHREF()
 bool
 GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData * userData) {
 	// manually process if it wasn't a simple substitution
+	// g_message(token);
 	if (!substituteToken(buf, token)) {
 		MyUserData     *u = (MyUserData *) userData;
 		XMLTag tag(token);
@@ -75,6 +76,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 			return false;
 		}
 		// <q> quote
+	//	g_message("token: %s", token);
 		if (!strcmp(tag.getName(), "q")) {
 			SWBuf type = tag.getAttribute("type");
 			SWBuf who = tag.getAttribute("who");
@@ -304,6 +306,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		}
 #endif		
 /*************************************************************************************************************/
+		
 		// <note> tag
 		else if (!strcmp(tag.getName(), "note")) {
 			if (!tag.isEndTag()) {
@@ -400,12 +403,15 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 			}
 		}
 		// <milestone type="line"/>
-		else if ((!strcmp(tag.getName(), "milestone"))
-			 && (tag.getAttribute("type"))
-			 && (!strcmp(tag.getAttribute("type"), "line")) 
-			 && !settings.versestyle) {
-			buf += "<br />";
-			userData->supressAdjacentWhitespace = true;
+		// <milestone type="x-p" marker="&#182;"/>
+		else if (!strcmp(tag.getName(), "milestone")&& tag.getAttribute("type")) {
+			if(!strcmp(tag.getAttribute("type"),"x-p")) 
+				buf += tag.getAttribute("marker");
+			else if(!strcmp(tag.getAttribute("type"), "line"))  {
+				buf += "<br />";
+				//g_message("\ntoken: %s\ntag: %s\ntype: %s",token,tag.getName(),tag.getAttribute("type"));
+				userData->supressAdjacentWhitespace = true;
+			}
 		}
 		// <title>
 		else if (!strcmp(tag.getName(), "title")) {

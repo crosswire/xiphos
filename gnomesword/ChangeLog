@@ -1,3 +1,12 @@
+2006-03-26 terry <tbiggs@users.sf.net>
+
+	* fixed bug 1419024 'segfault when clicking \"book view\" tab'
+	* fixed bug 1419034 'commentary window is visible even if unchecked in view menu'
+	* fixed bug 1419041 'highlighting a word and doing \"Lookup Selection\" broken'
+	* fixed bug 1419045 'clicking \"general books\" in modules window segfaults'	
+	* closed bug 1437634 'crashes when I try to search' could not duplicate
+	
+
 2005-12-15 terry <tbiggs@users.sf.net>
 
 	* added m4/gnomesword-mozilla.m4 which contains a macro for finding

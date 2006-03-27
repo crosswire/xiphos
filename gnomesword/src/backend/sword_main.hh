@@ -28,7 +28,7 @@
 #include <versekey.h>
 #include <treekeyidx.h>
 
-#ifdef USE_SWORD_CVS
+#ifdef USE_SWORD_SVN
 #include <swdisp.h>
 #endif
 
