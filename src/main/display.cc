@@ -180,7 +180,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 			(mf->old_font_size)?mf->old_font_size:"+0", 
 			settings.bible_text_color);
 		
-		swbuf.appendFormatted("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
+		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+			swbuf.appendFormatted("</font><div style=\"text-align: center\">%s<hr></div>", 
+					mod->Description());
+		else
+			swbuf.appendFormatted("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
 					mod->Description(),
 					_("Chapter"),
 					chapter);
@@ -210,10 +214,13 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				settings.bible_text_color);		
 		//g_message(mod->getRawEntry());
-		swbuf.appendFormatted("%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
-					(const char *)*mod,
-					_("Chapter"),
-					chapter);
+		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+			swbuf.appendFormatted("%s</font><br><hr>",
+					(const char *)*mod);
+		else		
+			swbuf.appendFormatted(
+				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+					(const char *)*mod, _("Chapter"), chapter);
 	}
 }
 
@@ -244,10 +251,15 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 					mod->Description());
 	} else {
 	
-		int chapter = key->Chapter();		
-		swbuf.appendFormatted(
-			"<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
-			_("Chapter"),chapter);
+		int chapter = key->Chapter();	
+		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+			swbuf.appendFormatted(
+				"<hr><b>%s %d.</b><br><br>",
+				_("Chapter"),chapter);
+		else		
+			swbuf.appendFormatted(
+				"<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				_("Chapter"),chapter);
 		
 		utf8_key = g_convert((char*)key->getText(),
 				     -1,
@@ -386,20 +398,21 @@ char GTKChapDisp::Display(SWModule &imodule)
 			main_set_strongs_morphs_off(ops);
 		}
 #endif		
-		if (newparagraph && settings.versestyle) {
+/*		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			swbuf += paragraphMark;;
 		}
+*/
 		swbuf += (const char *)imodule;		
 		buf = g_strdup_printf("%s",(const char *)imodule);
 		
 		if (settings.versestyle) { 
-			if(g_strstr_len(buf,strlen(buf),"<!p>")||
+			/*if(g_strstr_len(buf,strlen(buf),"<!p>")||
 			   g_strstr_len(buf,strlen(buf),"<p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
-			}
+			}*/
 			swbuf.append("</font><br>");
 		} else {
 			swbuf.append("</font>");
