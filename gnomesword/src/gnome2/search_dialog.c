@@ -61,7 +61,53 @@ static gboolean _in_url;
 
 
 
-void on_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
+
+void
+on_treeview9_row_activated(GtkTreeView * treeview,
+			   GtkTreePath * path,
+			   GtkTreeViewColumn * column,
+			   gpointer user_data)
+{
+	g_message("on_treeview9_row_activated");
+}
+
+
+gboolean
+on_treeview9_select_cursor_row(GtkTreeView * treeview,
+			       gboolean start_editing,
+			       gpointer user_data)
+{
+	g_message("on_treeview9_select_cursor_row");
+
+	return FALSE;
+}
+
+
+gboolean
+on_treeview10_select_cursor_row(GtkTreeView * treeview,
+				gboolean start_editing,
+				gpointer user_data)
+{
+	g_message("on_treeview10_select_cursor_row");
+
+	return FALSE;
+}
+
+
+void
+on_treeview10_row_activated(GtkTreeView * treeview,
+			    GtkTreePath * path,
+			    GtkTreeViewColumn * column,
+			    gpointer user_data)
+{
+	g_message("on_treeview10_row_activated");
+
+}
+
+
+
+void on_comboboxentry2_changed(GtkComboBox * combobox,
+			       gpointer user_data)
 {
 	main_comboboxentry2_changed(combobox, user_data);
 	//g_message("on_comboboxentry2_changed");
@@ -159,10 +205,9 @@ void button_save(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void on_destroy(GtkWidget * dialog, gpointer user_data)
+void _on_destroy(GtkWidget * dialog, gpointer user_data)
 {
 	main_close_search_dialog();
-	gtk_widget_destroy(search1.dialog);
 }
 
 
@@ -186,7 +231,7 @@ void on_destroy(GtkWidget * dialog, gpointer user_data)
 
 void on_button_begin_search(GtkButton * button, gpointer user_data)
 {
-	g_message("on_button_begin_search");
+	//g_message("on_button_begin_search");
 	main_do_dialog_search();
 }
 
@@ -929,8 +974,8 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 		      gpointer user_data)
 {
 	if (togglebutton->active) {
-		main_comboboxentry2_changed((GtkComboBox*)search1.combo_list, 
-						user_data);
+		main_comboboxentry2_changed((GtkComboBox *) search1.
+					    combo_list, user_data);
 		//main_add_modlist_to_label();
 	}
 }
@@ -1064,6 +1109,31 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 	main_mod_selection_changed(selection, tree_widget);
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void (GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void _selection_finds_list_changed(GtkTreeSelection *
+					    selection, gpointer data)
+{
+	main_selection_finds_list_changed(selection, data);
+}
+
+
 /******************************************************************************
  * Name
  *   selection_modules_lists_changed
@@ -1081,10 +1151,34 @@ static void mod_selection_changed(GtkTreeSelection * selection,
  *   void
  */
 
-static void selection_modules_lists_changed(GtkTreeSelection *
+static void _selection_modules_lists_changed(GtkTreeSelection *
 					    selection, gpointer data)
 {
 	main_selection_modules_lists_changed(selection, data);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void (GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void _finds_verselist_selection_changed(GtkTreeSelection *
+					    selection, gpointer data)
+{
+	main_finds_verselist_selection_changed(selection, data);
 }
 
 
@@ -1151,17 +1245,23 @@ static void _add_two_text_columns(GtkTreeView * treeview)
 	GtkTreeViewColumn *column;
 	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 
-	/* column for fixed toggles */
+	
 	renderer = gtk_cell_renderer_text_new();
 
 	column = gtk_tree_view_column_new_with_attributes("Module",
 							  renderer,
 							  "text", 0,
+							  NULL);
+	gtk_tree_view_append_column(treeview, column);
+	renderer = gtk_cell_renderer_text_new();
+
+	column = gtk_tree_view_column_new_with_attributes("Module",
+							  renderer,
 							  "text", 1,
 							  NULL);
+	gtk_tree_view_append_column(treeview, column);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 
-	gtk_tree_view_append_column(treeview, column);
 }
 
 
@@ -1191,6 +1291,109 @@ void _setup_combobox(GtkComboBox * combo)
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(combo),
 					    0);
+}
+
+
+static void setup_tag (GtkTextTag *tag, gpointer user_data)
+{
+/*	g_signal_connect (G_OBJECT (tag),
+		    "event",
+		    G_CALLBACK (tag_event_handler),
+		    user_data);*/
+}
+
+static void create_text_tags(GtkTextBuffer * buffer)
+{
+	GtkTextTag *tag;
+	GdkColor color;
+	GdkColor color2;
+	GdkColor color_red;
+	GdkColor colorLink;
+	PangoFontDescription *font_desc;
+
+
+
+	/* verse number tag verse style*/
+	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
+	setup_tag (tag, buffer);
+	color.red = color.green = 0;
+	color.blue = 0xffff;
+		"scale", PANGO_SCALE_XX_SMALL,
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+
+	/* verse number tag verse style*/
+	/*tag = gtk_text_buffer_create_tag (buffer, "verse", NULL);
+	setup_tag (tag, buffer);
+	g_object_set (G_OBJECT (tag),
+                NULL);	*/
+
+	/* current verse color tag */
+	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
+	color.blue = 0;
+	color.green = 0xbbbb;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+
+	/*  verse color tag */
+	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
+	color.blue = 0;
+	color.green = 0;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+
+	/* right to left tag */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", rtl_font,
+                "wrap_mode", GTK_WRAP_WORD,
+                "direction", GTK_TEXT_DIR_RTL,
+                "indent", 0,
+                "left_margin", 0,
+                "right_margin", 0,
+                NULL);
+
+	/* large tag */
+	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
+        g_object_set (G_OBJECT (tag),
+		"scale", (double)1.928, //PANGO_SCALE_XX_LARGE,
+                NULL);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+static
+void _setup_textview(GtkWidget *textview , GCallback callback, GtkTextBuffer * buf)
+{
+	
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (textview), FALSE);
+	create_text_tags(buf);
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (textview),
+						GTK_WRAP_WORD);
+	
+	
+	if (!callback)
+		return;
+
 }
 
 
@@ -1234,7 +1437,43 @@ void _setup_listviews(GtkWidget * listview, GCallback callback)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+/*
+static
+void _setup_listview_results(GtkWidget * listview, GCallback callback)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkListStore *model;
+	GObject *selection;
 
+	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
+				GTK_TREE_MODEL(model));
+	_add_two_text_columns(GTK_TREE_VIEW(listview));
+	if (!callback)
+		return;
+	selection =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(listview)));
+	g_signal_connect(selection, "changed", G_CALLBACK(callback),
+			 NULL);
+}
+*/
 /******************************************************************************
  * Name
  *   
@@ -1293,30 +1532,28 @@ void _setup_treetview2(GtkWidget * treeview)
 	gui_load_module_tree(treeview, FALSE);
 
 	/*selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(treeview)));
-	g_signal_connect(selection, "changed",
-			 G_CALLBACK(mod_selection_changed), treeview);*/
+	   G_OBJECT(gtk_tree_view_get_selection
+	   (GTK_TREE_VIEW(treeview)));
+	   g_signal_connect(selection, "changed",
+	   G_CALLBACK(mod_selection_changed), treeview); */
 
 }
 
 
 void
-on_treeview8_drag_begin                (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gpointer         user_data)
+on_treeview8_drag_begin(GtkWidget * widget,
+			GdkDragContext * drag_context,
+			gpointer user_data)
 {
 	g_message("on_treeview8_drag_begin");
 }
 
 
 void
-on_treeview8_drag_data_get             (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        GtkSelectionData *data,
-                                        guint            info,
-                                        guint            time,
-                                        gpointer         user_data)
+on_treeview8_drag_data_get(GtkWidget * widget,
+			   GdkDragContext * drag_context,
+			   GtkSelectionData * data,
+			   guint info, guint time, gpointer user_data)
 {
 	g_message("on_treeview8_drag_data_get");
 
@@ -1324,14 +1561,13 @@ on_treeview8_drag_data_get             (GtkWidget       *widget,
 
 
 void
-on_treeview7_drag_data_received        (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gint             x,
-                                        gint             y,
-                                        GtkSelectionData *data,
-                                        guint            info,
-                                        guint            time,
-                                        gpointer         user_data)
+on_treeview7_drag_data_received(GtkWidget * widget,
+				GdkDragContext * drag_context,
+				gint x,
+				gint y,
+				GtkSelectionData * data,
+				guint info,
+				guint time, gpointer user_data)
 {
 	g_message("on_treeview7_drag_data_received");
 
@@ -1339,40 +1575,33 @@ on_treeview7_drag_data_received        (GtkWidget       *widget,
 
 
 gboolean
-on_treeview7_drag_drop                 (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gint             x,
-                                        gint             y,
-                                        guint            time,
-                                        gpointer         user_data)
+on_treeview7_drag_drop(GtkWidget * widget,
+		       GdkDragContext * drag_context,
+		       gint x, gint y, guint time, gpointer user_data)
 {
 
 	g_message("on_treeview7_drag_drop");
-  return FALSE;
+	return FALSE;
 }
 
 
 void
-on_treeview7_drag_end                  (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gpointer         user_data)
+on_treeview7_drag_end(GtkWidget * widget,
+		      GdkDragContext * drag_context, gpointer user_data)
 {
 	g_message("on_treeview7_drag_end");
 
 }
 
 
-void
-on_closebutton2_clicked                (GtkButton       *button,
-                                        gpointer         user_data)
+void on_closebutton2_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_hide(search1.mod_sel_dialog);
 }
 
 
 void
-on_toolbutton12_clicked                (GtkToolButton   *toolbutton,
-                                        gpointer         user_data)
+on_toolbutton12_clicked(GtkToolButton * toolbutton, gpointer user_data)
 {
 	gtk_widget_show(search1.mod_sel_dialog);
 }
@@ -1400,17 +1629,23 @@ void _add_html_widgets(GtkWidget * vbox_report,
 		       GtkWidget * vbox_preview,
 		       GtkWidget * vbox_results)
 {
-	
+
 	GtkWidget *scrolledwindow;
 /*	
 #ifdef USE_GTKMOZEMBED 
 	
 #else	
-*/	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	gtk_box_pack_start (GTK_BOX (vbox_report), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
+*/ scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox_report), scrolledwindow, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
+					    (scrolledwindow),
+					    GTK_SHADOW_IN);
 
 	search1.report_html = gtk_html_new();
 	gtk_widget_show(search1.report_html);
@@ -1418,25 +1653,37 @@ void _add_html_widgets(GtkWidget * vbox_report,
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  search1.report_html);
 
-	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	gtk_box_pack_start (GTK_BOX (vbox_preview), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox_preview), scrolledwindow, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
+					    (scrolledwindow),
+					    GTK_SHADOW_IN);
 
 	search1.preview_html = gtk_html_new();
 	gtk_widget_show(search1.preview_html);
 	gtk_html_load_empty(GTK_HTML(search1.preview_html));
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  search1.preview_html);
-			  
-	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_show (scrolledwindow);
-	gtk_box_pack_start (GTK_BOX (vbox_results), scrolledwindow, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
-	
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox_results), scrolledwindow, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
+					    (scrolledwindow),
+					    GTK_SHADOW_IN);
+
+
 	search1.results_html = gtk_html_new();
 	gtk_widget_show(search1.results_html);
 	gtk_html_load_empty(GTK_HTML(search1.results_html));
@@ -1451,7 +1698,7 @@ void _add_html_widgets(GtkWidget * vbox_report,
 			 "button_release_event",
 			 G_CALLBACK(_on_button_release_event),
 			 GINT_TO_POINTER(1));
-			 
+
 	g_signal_connect(G_OBJECT(search1.preview_html), "link_clicked",
 			 G_CALLBACK(_link_clicked), GINT_TO_POINTER(1));
 	g_signal_connect(G_OBJECT(search1.preview_html), "on_url",
@@ -1460,11 +1707,11 @@ void _add_html_widgets(GtkWidget * vbox_report,
 			 "button_release_event",
 			 G_CALLBACK(_on_button_release_event),
 			 GINT_TO_POINTER(1));
-			 
+
 	g_signal_connect(G_OBJECT(search1.report_html),
 			 "link_clicked",
 			 G_CALLBACK(report_link_clicked), NULL);
-//#endif			 
+//#endif                         
 
 
 }
@@ -1492,7 +1739,8 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
-		on_destroy(GTK_WIDGET(dialog), user_data);
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		//_on_destroy(GTK_WIDGET(dialog), user_data);
 		break;
 	}
 }
@@ -1500,18 +1748,18 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 
 /******************************************************************************
  * Name
- *   
+ *   _create_search_dialog
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   
+ *   void _create_search_dialog(void)
  *
  * Description
  *   
  *
  * Return value
- *   
+ *   void
  */
 
 static
@@ -1520,7 +1768,6 @@ void _create_search_dialog(void)
 	gchar *glade_file;
 	GladeXML *gxml;
 	GladeXML *gxml2;
-	//GtkWidget *mod_sel_dialog;
 
 	_preview_on = TRUE;
 
@@ -1531,13 +1778,14 @@ void _create_search_dialog(void)
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
-	
+
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
-	search1.mod_sel_dlg_treeview = glade_xml_get_widget(gxml2, "treeview8");
+	search1.mod_sel_dlg_treeview =
+	    glade_xml_get_widget(gxml2, "treeview8");
 	_setup_treetview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
-	
+
 	g_free(glade_file);
 	g_return_if_fail(gxml != NULL);
 
@@ -1561,7 +1809,7 @@ void _create_search_dialog(void)
 
 	search1.module_lists = glade_xml_get_widget(gxml, "treeview6");
 	_setup_listviews(search1.module_lists,
-			 (GCallback) selection_modules_lists_changed);
+			 (GCallback) _selection_modules_lists_changed);
 
 	search1.listview_modules =
 	    glade_xml_get_widget(gxml, "treeview7");
@@ -1587,7 +1835,7 @@ void _create_search_dialog(void)
 	    glade_xml_get_widget(gxml, "radiobutton11");
 	search1.rb_attributes =
 	    glade_xml_get_widget(gxml, "radiobutton12");
-	
+
 	search1.cb_case_sensitive =
 	    glade_xml_get_widget(gxml, "checkbutton1");
 	search1.cb_include_strongs =
@@ -1617,10 +1865,17 @@ void _create_search_dialog(void)
 	    glade_xml_get_widget(gxml, "progressbar1");
 	search1.label_mod_select = glade_xml_get_widget(gxml, "label5");
 
-	_add_html_widgets(glade_xml_get_widget(gxml, "vbox11"),
+	search1.listview_results = glade_xml_get_widget(gxml, "treeview9");
+	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
+	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
+	_setup_listviews(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
+	search1.textview_preview = glade_xml_get_widget(gxml, "textview1");
+	search1.text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (search1.textview_preview));
+	_setup_textview(search1.textview_preview, NULL, search1.text_buffer);
+/*	_add_html_widgets(glade_xml_get_widget(gxml, "vbox11"),
 			  glade_xml_get_widget(gxml, "vbox12"),
 			  glade_xml_get_widget(gxml, "vbox13"));
-
+*/
 	glade_xml_signal_autoconnect_full
 	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
 	     NULL);
