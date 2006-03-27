@@ -31,7 +31,7 @@
 #include <installmgr.h>
 #include <filemgr.h>
 
-#ifdef USE_SWORD_CVS
+#ifdef USE_SWORD_SVN
 #include <ftptrans.h>
 #endif
 

@@ -759,6 +759,9 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 			(GtkEditable *)widgets.entry_dict,0,-1));
 #else
 	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
+#ifdef DEBUG
+	g_message("gui_lookup_bibletext_selection\ndict_key: %s",dict_key);
+#endif
 #endif
 	if (dict_key && mod_name) {
 		main_display_dictionary(mod_name, dict_key);
