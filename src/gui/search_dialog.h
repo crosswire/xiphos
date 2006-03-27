@@ -71,6 +71,10 @@ struct _search_dialog1 {
 	GtkWidget *cb_include_strongs;
 	GtkWidget *cb_include_morphs;
 	GtkWidget *cb_include_footnotes;
+	GtkWidget *listview_results;
+	GtkWidget *listview_verses;
+	GtkWidget *textview_preview;
+	GtkTextBuffer *text_buffer;
 	GSList *_201_group;
 
 	gint text_group;

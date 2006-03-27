@@ -300,24 +300,43 @@ void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 {
 	gchar *key = NULL;
+	gchar *buf = NULL;
+	gchar *buf2 = NULL;
 	GtkHTML *html;
-	gint len;
+	gint len,i;
 
 	html = GTK_HTML(html_widget);
 	if (word)
 		gtk_html_select_word(html);	
 #ifdef USE_GTKHTML38		
-		key = gtk_html_get_selection_html ( html, &len);
+	key = gtk_html_get_selection_html ( html, &len);
+	key = strchr(key,'>');
+	++key;
+	buf = g_new(gchar,strlen(key));
+	
+	for(i=0;i<strlen(key);i++) {
+		if(key[i] == '<')  {
+			buf[i] = '\0';
+			break;
+		}
+		buf[i] = key[i];
+	}
+	
+#ifdef DEBUG
+	g_message("gui_get_word_or_selection\nkey: %s",key);
+#endif
+	key = g_strdelimit(buf, ".,\"<>;:?", ' ');
+	key = g_strstrip(key);
+	buf2= g_strdup(key);
+	g_free(buf);
+	return buf2; /* must be freed by calling function */
+#else
+	if (html_engine_is_selection_active(html->engine)) {
+		key = html_engine_get_selection_string(html->engine);
 		key = g_strdelimit(key, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		return g_strdup(key);	/* must be freed by calling function */
-#else
-		if (html_engine_is_selection_active(html->engine)) {
-			key = html_engine_get_selection_string(html->engine);
-			key = g_strdelimit(key, ".,\"<>;:?", ' ');
-			key = g_strstrip(key);
-			return g_strdup(key);	/* must be freed by calling function */
-		}
+	}
 #endif
 	return key;
 }

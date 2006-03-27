@@ -285,7 +285,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	
-	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")) {
+	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")  || strstr(type,"robinson")) {
 		if(backend->is_module("Robinson")) 
 			modbuf = "Robinson";
 	} 		

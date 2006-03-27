@@ -446,6 +446,7 @@ void main_init_backend(void)
 	const char *lang = getenv("LANG");
 	SWMgr mgr;
 	
+	if (!lang) lang="C";
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
@@ -851,7 +852,9 @@ void main_display_commentary(const char * mod_name, const char * key)
 void main_display_dictionary(char * mod_name, char * key)
 {
 	const gchar *old_key;
-	
+#ifdef DEBUG
+	g_message("main_display_dictionary\nmod_name: %s\nkey: %s",mod_name,key);
+#endif
 	if(!settings.havedict || !mod_name)
 		return;
 	if(!backend->is_module(mod_name))
