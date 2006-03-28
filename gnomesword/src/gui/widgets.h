@@ -105,7 +105,7 @@ struct  _app_widgets {
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*button_dict_book,      /* main toolbar togglebutton */
-		*button_parallel_view,  /* main toolbar togglebutton */
+//		*button_parallel_view,  /* main toolbar togglebutton */
 		*button_new_tab,	/* creates a new passage tab */
 		*hboxtb;		/* container for browsing notebook and button */
 };
