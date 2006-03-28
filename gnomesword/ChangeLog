@@ -1,3 +1,8 @@
+2006-03-28  terry <tbiggs@users.sf.net>
+
+	* fixed bug 1174943 'gtkmozembed ISBE crash' 
+	
+
 2006-03-26 terry <tbiggs@users.sf.net>
 
 	* fixed bug 1419024 'segfault when clicking \"book view\" tab'

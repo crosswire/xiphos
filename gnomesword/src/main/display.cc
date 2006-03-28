@@ -129,6 +129,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 #endif				
 	if(backend->module_type(imodule.Name()) == PERCOM_TYPE)
 		swbuf.append((const char *)(const char *)imodule.getRawEntry());  //keytext);
+	else if(!strcmp(imodule.Name() ,"ISBE"))		
+		swbuf.append((const char *)(const char *)imodule.StripText());  //keytext);
 	else
 		swbuf.append((const char *)imodule);
 	swbuf.append("</font></body></html>");	

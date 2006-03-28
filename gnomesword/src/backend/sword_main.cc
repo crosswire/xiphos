@@ -27,11 +27,14 @@
 #include <localemgr.h>
 #include <swversion.h>
 
+#ifdef USE_GTKMOZEMBED 
+#include "backend/gs_markupfiltmgr.h"
+#else
+#include <markupfiltmgr.h>
+#endif
+
 #ifdef USE_SWORD_SVN
 #include <swlocale.h>
-#include <markupfiltmgr.h>
-#else
-#include "backend/gs_markupfiltmgr.h"
 #endif
 
 #include <gnome.h>
@@ -61,12 +64,17 @@ static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {
+#ifdef USE_GTKMOZEMBED 		
+	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+#else	
 #ifdef USE_SWORD_SVN
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 #else
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+#endif
 #endif
 	
 	display_mod = NULL;	
