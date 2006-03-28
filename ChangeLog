@@ -1,6 +1,7 @@
 2006-03-28  terry <tbiggs@users.sf.net>
 
 	* fixed bug 1174943 'gtkmozembed ISBE crash' 
+	* fixed bug 1419036 'clicking \"view context\" in parallel view segfaults'
 	
 
 2006-03-26 terry <tbiggs@users.sf.net>
