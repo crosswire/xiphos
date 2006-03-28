@@ -1375,8 +1375,8 @@ void main_swap_parallel_with_main(char *intmod)
 	}
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widgets.
-						   button_parallel_view),FALSE);
+/*	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widgets.
+						   button_parallel_view),FALSE); */
 }
 
 
