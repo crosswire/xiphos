@@ -26,14 +26,24 @@
 extern "C"
 {
 #endif
-
+/*
+typedef struct _spinbuttons SPINBUTTONS;
+struct  _spinbuttons{	
+	GtkWidget *up;
+	GtkWidget *down;
+	gint combo;
+};
+*/
 typedef struct _navbar NAVBAR;
 struct _navbar {	
 	GtkWidget *button_back;
 	GtkWidget *button_forward;
 	GtkWidget *comboboxentry_book;
+//	SPINBUTTONS book;
 	GtkWidget *comboboxentry_chapter;
+//	SPINBUTTONS chapter;
 	GtkWidget *comboboxentry_verse;
+//	SPINBUTTONS verse;
 	GtkWidget *lookup_entry;
 	gchar *key;
 	gchar *module_name;

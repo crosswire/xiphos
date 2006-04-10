@@ -66,7 +66,7 @@ GS_OSISHTMLHREF::GS_OSISHTMLHREF()
 bool
 GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData * userData) {
 	// manually process if it wasn't a simple substitution
-	// g_message(token);
+	//g_message(token);
 	if (!substituteToken(buf, token)) {
 		MyUserData     *u = (MyUserData *) userData;
 		XMLTag tag(token);
@@ -76,7 +76,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 			return false;
 		}
 		// <q> quote
-	//	g_message("token: %s", token);
+		//g_message("\ntoken: %s", token);
 		if (!strcmp(tag.getName(), "q")) {
 			SWBuf type = tag.getAttribute("type");
 			SWBuf who = tag.getAttribute("who");
@@ -323,6 +323,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 						// to turn
 						// different note
 						// types on or off
+						u->inNote = true;
 						SWBuf footnoteNumber = tag.getAttribute("swordFootnote");
 						VerseKey       *vkey;
 						// see if we have a VerseKey * or descendant
@@ -351,6 +352,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 				u->suspendTextPassThru = true;
 			}
 			if (tag.isEndTag()) {
+				u->inNote = false;
 				u->suspendTextPassThru = false;
 			}
 		}
@@ -421,6 +423,33 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 				buf += (settings.versestyle)?"</b>":"</b><br />";
 			}
 		}
+		// divineName  
+		else if (!strcmp(tag.getName(), "divineName")) {
+			SWBuf type = tag.getAttribute("type");
+			if ((!tag.isEndTag()) && (!tag.isEmpty())) {
+				if (type == "x-yhwh") {
+					u->inName = true;
+					u->suspendTextPassThru = true;
+				} else {
+					u->inName = false;
+				}
+			} else if (tag.isEndTag()) {
+				if(u->inName) {
+					char firstChar = *u->lastTextNode.c_str();
+					const char *name = u->lastTextNode.c_str();
+			g_message("\nverse: %s\ntoken: %s\nname: %s",(char*)u->key->getText(), token,name);
+					++name;
+					buf += firstChar;
+					buf += "<font size=\"-1\">";
+					for(int i=0;i<strlen(name);i++)
+						buf += toupper(name[i]);
+					buf += "</font>";
+					u->inName = false;
+					u->suspendTextPassThru = false;
+				}
+			} 
+		}
+
 		// <hi> hi? hi contrast?
 		else if (!strcmp(tag.getName(), "hi")) {
 			SWBuf type = tag.getAttribute("type");
