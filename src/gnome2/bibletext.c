@@ -690,11 +690,8 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 //	cipher_old = get_cipher_key(settings.MainWindowModule);
 	cipher_key = gui_add_cipher_key(settings.MainWindowModule, cipher_old);
-	if (cipher_key) {
-		main_locked_module_display(widgets.html_text,
-					     settings.MainWindowModule,
-					     cipher_key);
-	}
+	if (cipher_key) 
+		main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
 
 

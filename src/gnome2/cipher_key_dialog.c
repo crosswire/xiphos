@@ -27,6 +27,7 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/cipher_key_dialog.h"
+#include "main/settings.h"
 #include "main/sword.h"
 #include "gui/dialog.h"
 
@@ -68,6 +69,7 @@ gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	if (test == GS_OK) {
 		main_set_module_unlocked(mod_name, info->text1);
 		main_save_module_key(mod_name, info->text1);
+		main_update_module_lists();
 		retval = g_strdup(info->text1);
 	}
 	g_free(info->text1);

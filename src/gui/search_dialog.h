@@ -54,8 +54,8 @@ struct _search_dialog1 {
 	GtkWidget *list_ranges;
 	GtkWidget *entry_range_name;
 	GtkWidget *entry_range_text;
-	GtkWidget *results_html;
-	GtkWidget *report_html;
+//	GtkWidget *results_html;
+//	GtkWidget *report_html;
 	GtkWidget *preview_html;
 	GtkWidget *search_entry;
 	GtkWidget *rb_words;
@@ -73,8 +73,8 @@ struct _search_dialog1 {
 	GtkWidget *cb_include_footnotes;
 	GtkWidget *listview_results;
 	GtkWidget *listview_verses;
-	GtkWidget *textview_preview;
-	GtkTextBuffer *text_buffer;
+//	GtkWidget *textview_preview;
+//	GtkTextBuffer *text_buffer;
 	GSList *_201_group;
 
 	gint text_group;

@@ -180,7 +180,7 @@ static void on_entry_activate(GtkEntry * entry, gpointer data)
 static void on_button_back_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	main_navigate_tab_history(0); //gui_navigate_history(widgets.app, 0);
+	main_navigate_tab_history(0);	//gui_navigate_history(widgets.app, 0);
 }
 
 /******************************************************************************
@@ -202,8 +202,145 @@ static void on_button_back_clicked(GtkButton * button,
 static void on_button_forward_clicked(GtkButton * button,
 				      gpointer user_data)
 {
-	main_navigate_tab_history(1); //gui_navigate_history(widgets.app, 1);
+	main_navigate_tab_history(1);	//gui_navigate_history(widgets.app, 1);
 }
+
+
+static void handle_spinbutton_click(gint button, gint direction)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *verse = NULL;
+	gchar *new = NULL;
+	gchar *buf = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
+	GtkTreeIter iter;
+	gint index = 0;
+
+	if (!do_display)
+		return;
+
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar_main.comboboxentry_book));
+	GtkTreeModel *chapter_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar_main.
+				     comboboxentry_chapter));
+	GtkTreeModel *model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar_main.comboboxentry_verse));
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar_main.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar_main.
+				       comboboxentry_chapter), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
+			   &chapter, -1);
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar_main.comboboxentry_verse),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
+	switch (button) {
+	case 0:		/*    books     */
+		index = gtk_combo_box_get_active(GTK_COMBO_BOX
+						 (navbar_main.
+						  comboboxentry_book));
+		if (direction) {
+			if (index < 65)
+				gtk_combo_box_set_active(GTK_COMBO_BOX
+							 (navbar_main.
+							  comboboxentry_book),
+							 index + 1);
+		} else {
+			if (index > 0)
+				gtk_combo_box_set_active(GTK_COMBO_BOX
+							 (navbar_main.
+							  comboboxentry_book),
+							 index - 1);
+		}
+		break;
+	case 1:		/*    chapters     */
+		if (direction)
+			new = g_strdup_printf("%d", atoi(chapter) + 1);
+		else
+			new = g_strdup_printf("%d", atoi(chapter) - 1);
+
+		url = g_strdup_printf("sword:///%s %s:1", book, new);
+		break;
+	case 2:		/*    verses     */
+		if (direction)
+			new = g_strdup_printf("%d", atoi(verse) + 1);
+		else
+			new = g_strdup_printf("%d", atoi(verse) - 1);
+
+		url = g_strdup_printf("sword:///%s %s:%s",
+				      book, chapter, new);
+		break;
+	}
+	if (url) {
+		main_url_handler(url, TRUE);
+		g_free(url);
+	}
+
+	g_free(book);
+	g_free(chapter);
+	g_free(verse);
+	if(new) g_free(new);
+}
+
+
+static void on_verse_button_up_clicked(GtkButton * button,
+				       gpointer user_data)
+{
+	handle_spinbutton_click(2, 0);
+}
+
+
+static void on_verse_button_down_clicked(GtkButton * button,
+					 gpointer user_data)
+{
+	handle_spinbutton_click(2, 1);
+}
+
+
+static void on_chapter_button_up_clicked(GtkButton * button,
+					 gpointer user_data)
+{
+	handle_spinbutton_click(1, 0);
+}
+
+
+static void on_chapter_button_down_clicked(GtkButton * button,
+					   gpointer user_data)
+{
+	handle_spinbutton_click(1, 1);
+}
+
+
+static void on_book_button_up_clicked(GtkButton * button,
+				      gpointer user_data)
+{
+	g_message("on_book_button_up_clicked");
+	handle_spinbutton_click(0, 0);
+}
+
+
+static void on_book_button_down_clicked(GtkButton * button,
+					gpointer user_data)
+{
+	handle_spinbutton_click(0, 1);
+}
+
 
 static void on_comboboxentry4_changed(GtkComboBox * combobox,
 				      gpointer data)
@@ -225,7 +362,7 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox,
 #endif
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
-	//	g_error_free (error);
+	//      g_error_free (error);
 /*	key = g_convert(book,
 			     -1,
 			     OLD_CODESET,
@@ -367,18 +504,25 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox,
 GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 {
 	GtkWidget *hbox3;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
 	GtkWidget *eventbox;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
 	GtkTooltips *tooltips = gtk_tooltips_new();
+	GtkWidget *vbox3;
+	GtkWidget *button4;
+	GtkWidget *arrow4;
+	GtkWidget *button3;
+	GtkWidget *arrow3;
 
 	navbar_main.is_dialog = FALSE;
 	navbar_main.testaments = -1;
 	navbar_main.key = g_strdup(settings.currentverse);
 	navbar_main.module_name = g_strdup(settings.MainWindowModule);
-	
+
 	hbox3 = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox3);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
@@ -426,26 +570,62 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(image);
 	gtk_container_add(GTK_CONTAINER(navbar_main.button_forward),
 			  image);
-
+/*
 	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
 	gtk_widget_show(separatortoolitem);
 	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
 			   TRUE, 0);
-
+*/
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox,
 			     _("Select a Book of the Bible"), NULL);
 
+	hbox = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox);
+	gtk_container_add(GTK_CONTAINER(eventbox), hbox);
+
+
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	navbar_main.comboboxentry_book =
 	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
 	gtk_widget_show(navbar_main.comboboxentry_book);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  navbar_main.comboboxentry_book);
+	gtk_box_pack_start(GTK_BOX(hbox),
+			   navbar_main.comboboxentry_book, FALSE, TRUE,
+			   0);
+	//gtk_container_add(GTK_CONTAINER(eventbox),  navbar_main.comboboxentry_book);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_book, -1,
 				    6);
+
+	vbox3 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox3);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
+//  gtk_widget_set_size_request (vbox3, 20, 40);
+
+	button4 = gtk_button_new();
+	gtk_widget_show(button4);
+	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button4, 18, 18);
+	g_signal_connect(GTK_OBJECT(button4), "clicked",
+			 G_CALLBACK(on_book_button_up_clicked), NULL);
+
+	arrow4 = gtk_arrow_new(GTK_ARROW_UP, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow4);
+	gtk_container_add(GTK_CONTAINER(button4), arrow4);
+
+	button3 = gtk_button_new();
+	gtk_widget_show(button3);
+	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button3, 18, 18);
+	g_signal_connect(GTK_OBJECT(button3), "clicked",
+			 G_CALLBACK(on_book_button_down_clicked), NULL);
+	//navbar_main.book.down = button3;
+	//navbar_main.book.combo = 1;
+
+	arrow3 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow3);
+	gtk_container_add(GTK_CONTAINER(button3), arrow3);
 
 	renderer = gtk_cell_renderer_text_new();
 	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
@@ -470,13 +650,19 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_tooltips_set_tip(tooltips, eventbox, _("Change Chapter"),
 			     NULL);
 
+	hbox = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox);
+	gtk_container_add(GTK_CONTAINER(eventbox), hbox);
+
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 
 	navbar_main.comboboxentry_chapter =
 	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
 	gtk_widget_show(navbar_main.comboboxentry_chapter);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  navbar_main.comboboxentry_chapter);
+	gtk_box_pack_start(GTK_BOX(hbox),
+			   navbar_main.comboboxentry_chapter, FALSE,
+			   TRUE, 0);
+	//gtk_container_add(GTK_CONTAINER(eventbox), navbar_main.comboboxentry_chapter);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_chapter,
 				    61, -1);
 
@@ -488,6 +674,36 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				       (navbar_main.
 					comboboxentry_chapter),
 				       renderer, "text", 0, NULL);
+
+	vbox3 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox3);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
+//  gtk_widget_set_size_request (vbox3, 20, 40);
+
+	button4 = gtk_button_new();
+	gtk_widget_show(button4);
+	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button4, 18, 18);
+	g_signal_connect(GTK_OBJECT(button4), "clicked",
+			 G_CALLBACK(on_chapter_button_up_clicked),
+			 NULL);
+
+	arrow4 = gtk_arrow_new(GTK_ARROW_UP, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow4);
+	gtk_container_add(GTK_CONTAINER(button4), arrow4);
+
+	button3 = gtk_button_new();
+	gtk_widget_show(button3);
+	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button3, 18, 18);
+	g_signal_connect(GTK_OBJECT(button3), "clicked",
+			 G_CALLBACK(on_chapter_button_down_clicked),
+			 NULL);
+
+	arrow3 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow3);
+	gtk_container_add(GTK_CONTAINER(button3), arrow3);
+
 
 	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
 	gtk_widget_show(separatortoolitem);
@@ -504,15 +720,52 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_tooltips_set_tip(tooltips, eventbox, _("Change Verse"),
 			     NULL);
 
+	hbox = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox);
+	gtk_container_add(GTK_CONTAINER(eventbox), hbox);
+	//gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
+
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 
 	navbar_main.comboboxentry_verse =
 	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
 	gtk_widget_show(navbar_main.comboboxentry_verse);
-	gtk_container_add(GTK_CONTAINER(eventbox),
-			  navbar_main.comboboxentry_verse);
+	gtk_box_pack_start(GTK_BOX(hbox),
+			   navbar_main.comboboxentry_verse, FALSE, TRUE,
+			   0);
+//      gtk_container_add(GTK_CONTAINER(eventbox), navbar_main.comboboxentry_verse);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_verse, 61,
 				    -1);
+
+	vbox3 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox3);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
+//  gtk_widget_set_size_request (vbox3, 20, 40);
+
+	button4 = gtk_button_new();
+	gtk_widget_show(button4);
+	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button4, 18, 18);
+	g_signal_connect(GTK_OBJECT(button4), "clicked",
+			 G_CALLBACK(on_verse_button_up_clicked), NULL);
+//	navbar_main.verse.up = button4;
+
+	arrow4 = gtk_arrow_new(GTK_ARROW_UP, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow4);
+	gtk_container_add(GTK_CONTAINER(button4), arrow4);
+
+	button3 = gtk_button_new();
+	gtk_widget_show(button3);
+	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
+	gtk_widget_set_size_request(button3, 18, 18);
+//	navbar_main.verse.down = button3;
+	g_signal_connect(GTK_OBJECT(button3), "clicked",
+			 G_CALLBACK(on_verse_button_down_clicked),
+			 NULL);
+
+	arrow3 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_widget_show(arrow3);
+	gtk_container_add(GTK_CONTAINER(button3), arrow3);
 
 
 	renderer = gtk_cell_renderer_text_new();
@@ -536,9 +789,10 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			   TRUE, TRUE, 0);
 
 	gtk_tooltips_set_tip(tooltips, navbar_main.lookup_entry,
-	    _("Enter a Verse reference in Book 1:1 format and press Return"),
-	// or click the Go to Verse button"), 
-		NULL);
+			     _
+			     ("Enter a Verse reference in Book 1:1 format and press Return"),
+			     // or click the Go to Verse button"), 
+			     NULL);
 	nav_bar.lookup_entry = navbar_main.lookup_entry;
 
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
