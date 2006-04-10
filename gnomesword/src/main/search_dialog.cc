@@ -817,7 +817,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	GtkTreeModel *model;
 	GtkTreeIter selected;
 	GtkTextIter iter, startiter, enditer;
-	GtkTextBuffer *tbuf = search1.text_buffer;
+//	GtkTextBuffer *tbuf = search1.text_buffer;
  	if (!gtk_tree_selection_get_selected (selection,&model,&selected))
 		return;
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
@@ -835,14 +835,17 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	buf = strchr(text,':');
 	++buf;
 	++buf;
-	text_str = backendSearch->get_strip_text(module,buf);
-	gtk_text_buffer_get_start_iter(tbuf, &startiter);
+	text_str = backendSearch->get_render_text(module,buf);
+	
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
+	
+/*	gtk_text_buffer_get_start_iter(tbuf, &startiter);
 	gtk_text_buffer_get_end_iter(tbuf, &enditer);
 	gtk_text_buffer_delete(tbuf, &startiter, &enditer);
 	
 	gtk_text_buffer_get_end_iter(tbuf, &iter);
 	gtk_text_buffer_insert_with_tags(tbuf, &iter,text_str,strlen(text_str),NULL);
-	
+*/	
 	if(text) g_free(text);	
 	g_free(module);
 	g_free(text_str);
@@ -1387,10 +1390,9 @@ void main_do_dialog_search(void)
 		tmp_list = NULL;
 		
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
-				//backendSearch->set_module_key(module, key_buf);
-				g_string_printf(str, "%s: %s", module, key_buf);
+				g_string_printf(str, "%s: %s %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
 									
-				tmp_list = g_list_append(tmp_list,(char*) g_strdup(str->str));
+				tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
 				g_free((char*)key_buf);	
 		}
 		list_of_finds = g_list_append(list_of_finds, (GList*)tmp_list);

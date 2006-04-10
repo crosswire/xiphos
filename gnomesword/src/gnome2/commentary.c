@@ -393,14 +393,9 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 /*	cipher_old = get_cipher_key((settings.comm_showing)?
 			settings.CommWindowModule:settings.book_mod);*/
-	cipher_key = gui_add_cipher_key((settings.comm_showing)?
-			settings.CommWindowModule:settings.book_mod, cipher_old);
-	if (cipher_key) {
-		main_locked_module_display(widgets.html_text,
-				(settings.comm_showing)?
-			settings.CommWindowModule:settings.book_mod,
-					     cipher_key);
-	}
+	cipher_key = gui_add_cipher_key(settings.CommWindowModule, cipher_old);
+	if (cipher_key) 
+		main_display_commentary(settings.CommWindowModule, settings.currentverse);
 }
 
 
