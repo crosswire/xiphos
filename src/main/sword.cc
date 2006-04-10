@@ -193,8 +193,6 @@ void main_set_module_unlocked(char * mod_name, char * key)
 void main_save_module_key(char * mod_name, char * key)
 {
 	backend->save_module_key(mod_name, key);
-
-	/* FIXME: we need to display change */
 }
 
 

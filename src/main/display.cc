@@ -62,7 +62,7 @@ using namespace sword;
 using namespace std;
 	
 int strongs_on;
-
+//T<font size=\"small\" >EST</font>  /* small caps */
 //static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
  
 char GTKEntryDisp::Display(SWModule &imodule) 
