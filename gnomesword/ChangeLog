@@ -1,3 +1,9 @@
+2006-04-10  terry <tbiggs@users.sf.net>
+
+	* added spin buttons to main navigation bar
+	* added filter to display changes in KJV markup
+
+
 2006-03-28  terry <tbiggs@users.sf.net>
 
 	* fixed bug 1174943 'gtkmozembed ISBE crash' 

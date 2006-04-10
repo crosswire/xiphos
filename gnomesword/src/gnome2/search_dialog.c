@@ -134,7 +134,7 @@ void on_comboboxentry2_changed(GtkComboBox * combobox,
 void button_clean(GtkButton * button, gpointer user_data)
 {
 	gboolean editable;
-
+/*
 	editable = gtk_html_get_editable(GTK_HTML(search1.report_html));
 	if (!editable)
 		gtk_html_set_editable(GTK_HTML(search1.report_html),
@@ -161,7 +161,7 @@ void button_clean(GtkButton * button, gpointer user_data)
 	gtk_html_select_all(GTK_HTML(search1.preview_html));
 	gtk_html_cut(GTK_HTML(search1.preview_html));
 	gtk_html_set_editable(GTK_HTML(search1.preview_html), editable);
-
+*/
 
 }
 
@@ -476,7 +476,7 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
 static void report_link_clicked(GtkHTML * html, const gchar * url,
 				gpointer data)
 {
-	gtk_html_jump_to_anchor(GTK_HTML(search1.results_html), url);
+//	gtk_html_jump_to_anchor(GTK_HTML(search1.results_html), url);
 }
 
 
@@ -1635,7 +1635,7 @@ void _add_html_widgets(GtkWidget * vbox_report,
 #ifdef USE_GTKMOZEMBED 
 	
 #else	
-*/ scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox_report), scrolledwindow, TRUE,
 			   TRUE, 0);
@@ -1711,6 +1711,56 @@ void _add_html_widgets(GtkWidget * vbox_report,
 	g_signal_connect(G_OBJECT(search1.report_html),
 			 "link_clicked",
 			 G_CALLBACK(report_link_clicked), NULL);
+//#endif                         
+*/
+
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+/* add html widgets */
+static
+void _add_html_widget(GtkWidget * vbox)
+{
+
+	GtkWidget *scrolledwindow;
+/*	
+#ifdef USE_GTKMOZEMBED 
+	
+#else	
+*/ 
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE,
+			   TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
+					    (scrolledwindow),
+					    GTK_SHADOW_IN);
+
+	search1.preview_html = gtk_html_new();
+	gtk_widget_show(search1.preview_html);
+	gtk_html_load_empty(GTK_HTML(search1.preview_html));
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  search1.preview_html);
 //#endif                         
 
 
@@ -1869,9 +1919,10 @@ void _create_search_dialog(void)
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
 	_setup_listviews(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
-	search1.textview_preview = glade_xml_get_widget(gxml, "textview1");
+	/*search1.textview_preview = glade_xml_get_widget(gxml, "textview1");
 	search1.text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (search1.textview_preview));
-	_setup_textview(search1.textview_preview, NULL, search1.text_buffer);
+	_setup_textview(search1.textview_preview, NULL, search1.text_buffer);*/
+	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
 /*	_add_html_widgets(glade_xml_get_widget(gxml, "vbox11"),
 			  glade_xml_get_widget(gxml, "vbox12"),
 			  glade_xml_get_widget(gxml, "vbox13"));

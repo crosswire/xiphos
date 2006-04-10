@@ -27,11 +27,12 @@
 #include <localemgr.h>
 #include <swversion.h>
 
-#ifdef USE_GTKMOZEMBED 
+//#ifdef USE_GTKMOZEMBED 
 #include "backend/gs_markupfiltmgr.h"
-#else
+//#endif
+//#ifdef USE_SWORD_SVN
 #include <markupfiltmgr.h>
-#endif
+//#endif
 
 #ifdef USE_SWORD_SVN
 #include <swlocale.h>
@@ -64,9 +65,11 @@ static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {
+
 #ifdef USE_GTKMOZEMBED 		
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+
 #else	
 #ifdef USE_SWORD_SVN
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
@@ -76,6 +79,7 @@ BackEnd::BackEnd() {
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 #endif
 #endif
+
 	
 	display_mod = NULL;	
 	tree_key = NULL;	
@@ -1388,41 +1392,22 @@ void BackEnd::save_conf_file_item(const char * file, const char * mod_name, cons
 void BackEnd::save_module_key(char *mod_name, char *key) {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
-	return; // this needs help
+	char *mod_name_lower =  g_ascii_strdown(mod_name, strlen(mod_name));	
+	char *conffile = g_strdup_printf("%s/%s.conf",main_mgr->configPath,mod_name_lower);
+	SWConfig *myConfig = new SWConfig(conffile);
 	
-	DIR *dir;
-	char buf[256], conffile[256];
-	struct dirent *ent;
-
-//	strcpy(buf, sw.main_mgr->configPath);
-	dir = opendir(buf);
-	if (dir) {		//-- find and update .conf file
-		rewinddir(dir);
-		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "."))
-			    && (strcmp(ent->d_name, ".."))) {
-				sprintf(conffile, "%s/%s", buf,
-					ent->d_name);
-				SWConfig *myConfig =
-				    new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(mod_name);
-				if (section != myConfig->Sections.end()) {
-					entry =
-					    section->second.
-					    find("CipherKey");
-					if (entry !=
-					    section->second.end()) {
-						//-- set cipher key
-						entry->second = key;
-						//-- save config file						    
-						myConfig->Save();
-					}
-				}
-				delete myConfig;
-			}
+	section = myConfig->Sections.find(mod_name);
+	if (section != myConfig->Sections.end()) {
+		entry =  section->second. find("CipherKey");
+		if (entry != section->second.end()) {
+			//-- set cipher key
+			entry->second = key;
+			//-- save config file						    
+			myConfig->Save();
 		}
 	}
-	closedir(dir);
+	free(conffile);
+	free(mod_name_lower);
+	delete myConfig;
 }
 /* end of file */
