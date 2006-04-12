@@ -88,6 +88,34 @@ void gui_show_hide_texts(gboolean choice)
 
 /******************************************************************************
  * Name
+ *  gui_show_hide_preview
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   void gui_show_hide_preview(gboolean choice)
+ *
+ * Description
+ *    Show/hide bible texts
+ *
+ * Return value
+ *   void
+ */
+
+void gui_show_hide_preview(gboolean choice)
+{
+	settings.showpreview = choice;
+	if (choice == FALSE) {
+		gtk_widget_hide(widgets.vbox_previewer);
+	} else {
+		gtk_widget_show(widgets.vbox_previewer);
+	}
+	//gui_set_bible_comm_layout();
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_show_hide_comms
  *
  * Synopsis
@@ -630,16 +658,16 @@ void create_mainwindow(void)
 	/*
 	 * previewer
 	 */
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 1);
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned), vbox, FALSE, TRUE);
+	widgets.vbox_previewer = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(widgets.vbox_previewer);
+	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, FALSE, TRUE);
 	
 #ifdef USE_GTKMOZEMBED 
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(vbox), frame, 
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame, 
 				TRUE, TRUE,
 			   	0);
 	sidebar.html_viewer_widget = embed_new(VIEWER_TYPE);
@@ -647,7 +675,7 @@ void create_mainwindow(void)
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), scrolledwindow, TRUE, TRUE,
 			   0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),

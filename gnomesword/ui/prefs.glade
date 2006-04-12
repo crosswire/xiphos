@@ -19,6 +19,7 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
   <property name="has_separator">True</property>
   <signal name="response" handler="on_dialog_prefs_response" last_modification_time="Tue, 05 Jul 2005 18:54:56 GMT"/>
 
@@ -707,6 +708,26 @@
 		      </child>
 
 		      <child>
+			<widget class="GtkCheckButton" id="checkbutton9">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="label" translatable="yes">Previewer</property>
+			  <property name="use_underline">True</property>
+			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
+			  <property name="active">True</property>
+			  <property name="inconsistent">False</property>
+			  <property name="draw_indicator">True</property>
+			  <signal name="toggled" handler="on_checkbutton9_toggled" last_modification_time="Wed, 12 Apr 2006 17:17:23 GMT"/>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
 			<widget class="GtkCheckButton" id="checkbutton3">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
@@ -947,6 +968,7 @@
 			  <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
 			  <property name="local_only">True</property>
 			  <property name="show_hidden">False</property>
+			  <property name="do_overwrite_confirmation">False</property>
 			  <property name="width_chars">-1</property>
 			  <signal name="current_folder_changed" handler="on_folder_changed" last_modification_time="Thu, 07 Jul 2005 19:16:27 GMT"/>
 			</widget>

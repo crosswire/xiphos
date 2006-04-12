@@ -487,6 +487,11 @@ static void view_bible_texts(GtkMenuItem * menuitem, gpointer user_data)
 	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
+static void view_previewer(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
+}
+
 
 /******************************************************************************
  * Name
@@ -685,6 +690,12 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 (gpointer) view_bible_texts, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+ 	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Preview"),
+	 N_("Show or hide Preview window"),
+	 (gpointer) view_previewer, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary"),
 	 N_("Show or hide commentaries"),
@@ -807,9 +818,10 @@ void gui_create_main_menu(GtkWidget * app)
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 	
 	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
-	widgets.viewcomms_item = view1_menu_uiinfo[3].widget;
-	widgets.viewdicts_item = view1_menu_uiinfo[4].widget;
-	widgets.versestyle_item = view1_menu_uiinfo[6].widget;
+	widgets.viewpreview_item = view1_menu_uiinfo[3].widget; 
+	widgets.viewcomms_item = view1_menu_uiinfo[4].widget;
+	widgets.viewdicts_item = view1_menu_uiinfo[5].widget;
+	widgets.versestyle_item = view1_menu_uiinfo[7].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);

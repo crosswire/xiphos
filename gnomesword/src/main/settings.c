@@ -427,6 +427,11 @@ void load_settings_structure(void)
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
+	if(xml_get_value("misc", "showpreview"))
+		settings.showpreview = atol(xml_get_value("misc", "showpreview"));
+	else {
+		xml_add_new_item_to_section("misc", "showpreview", "1");
+	}
 
 //#ifdef USE_GTKHTML30	
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));

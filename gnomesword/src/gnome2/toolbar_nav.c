@@ -98,10 +98,10 @@ static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
  *   gboolean
  */
 
-static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
-						     GdkEventKey *
-						     event,
-						     gpointer user_data)
+static gboolean
+on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
+				     GdkEventKey * event,
+				     gpointer user_data)
 {
 	const gchar *buf;
 	gchar *url;
@@ -177,8 +177,8 @@ static void on_entry_activate(GtkEntry * entry, gpointer data)
  *   void
  */
 
-static void on_button_back_clicked(GtkButton * button,
-				   gpointer user_data)
+static void
+on_button_back_clicked(GtkButton * button, gpointer user_data)
 {
 	main_navigate_tab_history(0);	//gui_navigate_history(widgets.app, 0);
 }
@@ -199,8 +199,8 @@ static void on_button_back_clicked(GtkButton * button,
  *   void
  */
 
-static void on_button_forward_clicked(GtkButton * button,
-				      gpointer user_data)
+static void
+on_button_forward_clicked(GtkButton * button, gpointer user_data)
 {
 	main_navigate_tab_history(1);	//gui_navigate_history(widgets.app, 1);
 }
@@ -295,55 +295,56 @@ static void handle_spinbutton_click(gint button, gint direction)
 	g_free(book);
 	g_free(chapter);
 	g_free(verse);
-	if(new) g_free(new);
+	if (new)
+		g_free(new);
 }
 
 
-static void on_verse_button_up_clicked(GtkButton * button,
-				       gpointer user_data)
+static void
+on_verse_button_up_clicked(GtkButton * button, gpointer user_data)
 {
 	handle_spinbutton_click(2, 0);
 }
 
 
-static void on_verse_button_down_clicked(GtkButton * button,
-					 gpointer user_data)
+static void
+on_verse_button_down_clicked(GtkButton * button, gpointer user_data)
 {
 	handle_spinbutton_click(2, 1);
 }
 
 
-static void on_chapter_button_up_clicked(GtkButton * button,
-					 gpointer user_data)
+static void
+on_chapter_button_up_clicked(GtkButton * button, gpointer user_data)
 {
 	handle_spinbutton_click(1, 0);
 }
 
 
-static void on_chapter_button_down_clicked(GtkButton * button,
-					   gpointer user_data)
+static void
+on_chapter_button_down_clicked(GtkButton * button, gpointer user_data)
 {
 	handle_spinbutton_click(1, 1);
 }
 
 
-static void on_book_button_up_clicked(GtkButton * button,
-				      gpointer user_data)
+static void
+on_book_button_up_clicked(GtkButton * button, gpointer user_data)
 {
 	g_message("on_book_button_up_clicked");
 	handle_spinbutton_click(0, 0);
 }
 
 
-static void on_book_button_down_clicked(GtkButton * button,
-					gpointer user_data)
+static void
+on_book_button_down_clicked(GtkButton * button, gpointer user_data)
 {
 	handle_spinbutton_click(0, 1);
 }
 
 
-static void on_comboboxentry4_changed(GtkComboBox * combobox,
-				      gpointer data)
+static void
+on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -387,8 +388,8 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox,
 }
 
 
-static void on_comboboxentry5_changed(GtkComboBox * combobox,
-				      gpointer data)
+static void
+on_comboboxentry5_changed(GtkComboBox * combobox, gpointer data)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -414,8 +415,8 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox,
 			   -1);
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
-			   0, &chapter, -1);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &chapter,
+			   -1);
 
 	url = g_strdup_printf("sword:///%s %s:1", book, chapter);
 	buf = g_strdup_printf("%s %s:1", book, chapter);
@@ -429,8 +430,8 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox,
 }
 
 
-static void on_comboboxentry6_changed(GtkComboBox * combobox,
-				      gpointer data)
+static void
+on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -472,8 +473,8 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox,
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
 
-	url = g_strdup_printf("sword:///%s %s:%s",
-			      book, chapter, verse);
+	url =
+	    g_strdup_printf("sword:///%s %s:%s", book, chapter, verse);
 	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
 	main_url_handler(url, TRUE);
 	main_navbar_set(navbar_main, buf);
@@ -542,9 +543,8 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	nav_bar.button_back = navbar_main.button_back;
 
-	image =
-	    gtk_image_new_from_stock("gtk-go-back",
-				     GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_stock("gtk-go-back",
+					 GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image);
 	gtk_container_add(GTK_CONTAINER(navbar_main.button_back),
 			  image);
@@ -564,18 +564,12 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	nav_bar.button_forward = navbar_main.button_forward;
 
-	image =
-	    gtk_image_new_from_stock("gtk-go-forward",
-				     GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_stock("gtk-go-forward",
+					 GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image);
 	gtk_container_add(GTK_CONTAINER(navbar_main.button_forward),
 			  image);
-/*
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
-			   TRUE, 0);
-*/
+
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
 	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
@@ -594,19 +588,18 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_box_pack_start(GTK_BOX(hbox),
 			   navbar_main.comboboxentry_book, FALSE, TRUE,
 			   0);
-	//gtk_container_add(GTK_CONTAINER(eventbox),  navbar_main.comboboxentry_book);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_book, -1,
 				    6);
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
 	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
-//  gtk_widget_set_size_request (vbox3, 20, 40);
 
 	button4 = gtk_button_new();
 	gtk_widget_show(button4);
 	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button4, 18, 18);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button4), FALSE);
 	g_signal_connect(GTK_OBJECT(button4), "clicked",
 			 G_CALLBACK(on_book_button_up_clicked), NULL);
 
@@ -618,10 +611,9 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(button3);
 	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button3, 18, 18);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button3), FALSE);
 	g_signal_connect(GTK_OBJECT(button3), "clicked",
 			 G_CALLBACK(on_book_button_down_clicked), NULL);
-	//navbar_main.book.down = button3;
-	//navbar_main.book.combo = 1;
 
 	arrow3 = gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_OUT);
 	gtk_widget_show(arrow3);
@@ -662,7 +654,6 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_box_pack_start(GTK_BOX(hbox),
 			   navbar_main.comboboxentry_chapter, FALSE,
 			   TRUE, 0);
-	//gtk_container_add(GTK_CONTAINER(eventbox), navbar_main.comboboxentry_chapter);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_chapter,
 				    61, -1);
 
@@ -678,12 +669,12 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
 	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
-//  gtk_widget_set_size_request (vbox3, 20, 40);
 
 	button4 = gtk_button_new();
 	gtk_widget_show(button4);
 	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button4, 18, 18);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button4), FALSE);
 	g_signal_connect(GTK_OBJECT(button4), "clicked",
 			 G_CALLBACK(on_chapter_button_up_clicked),
 			 NULL);
@@ -696,6 +687,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(button3);
 	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button3, 18, 18);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button3), FALSE);
 	g_signal_connect(GTK_OBJECT(button3), "clicked",
 			 G_CALLBACK(on_chapter_button_down_clicked),
 			 NULL);
@@ -723,7 +715,6 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	hbox = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox);
 	gtk_container_add(GTK_CONTAINER(eventbox), hbox);
-	//gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 
@@ -733,22 +724,20 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_box_pack_start(GTK_BOX(hbox),
 			   navbar_main.comboboxentry_verse, FALSE, TRUE,
 			   0);
-//      gtk_container_add(GTK_CONTAINER(eventbox), navbar_main.comboboxentry_verse);
 	gtk_widget_set_size_request(navbar_main.comboboxentry_verse, 61,
 				    -1);
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
 	gtk_box_pack_start(GTK_BOX(hbox), vbox3, FALSE, TRUE, 0);
-//  gtk_widget_set_size_request (vbox3, 20, 40);
 
 	button4 = gtk_button_new();
 	gtk_widget_show(button4);
 	gtk_box_pack_start(GTK_BOX(vbox3), button4, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button4, 18, 18);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button4), FALSE);
 	g_signal_connect(GTK_OBJECT(button4), "clicked",
 			 G_CALLBACK(on_verse_button_up_clicked), NULL);
-//	navbar_main.verse.up = button4;
 
 	arrow4 = gtk_arrow_new(GTK_ARROW_UP, GTK_SHADOW_OUT);
 	gtk_widget_show(arrow4);
@@ -758,7 +747,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_show(button3);
 	gtk_box_pack_start(GTK_BOX(vbox3), button3, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(button3, 18, 18);
-//	navbar_main.verse.down = button3;
+	gtk_button_set_focus_on_click(GTK_BUTTON(button3), FALSE);
 	g_signal_connect(GTK_OBJECT(button3), "clicked",
 			 G_CALLBACK(on_verse_button_down_clicked),
 			 NULL);
@@ -777,7 +766,6 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 					comboboxentry_verse), renderer,
 				       "text", 0, NULL);
 
-
 	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
 	gtk_widget_show(separatortoolitem);
 	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
@@ -789,8 +777,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			   TRUE, TRUE, 0);
 
 	gtk_tooltips_set_tip(tooltips, navbar_main.lookup_entry,
-			     _
-			     ("Enter a Verse reference in Book 1:1 format and press Return"),
+		 _("Enter a Verse reference in Book 1:1 format and press Return"),
 			     // or click the Go to Verse button"), 
 			     NULL);
 	nav_bar.lookup_entry = navbar_main.lookup_entry;
@@ -818,14 +805,4 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			 G_CALLBACK(on_button_forward_clicked), NULL);
 
 	return hbox3;
-/*
-	btnLookup = gtk_toolbar_insert_stock(GTK_TOOLBAR(toolbarNav),
-					     GTK_STOCK_JUMP_TO,
-						_("Go to verse"),
-					     NULL, NULL, NULL, -1);
-	gtk_widget_show(btnLookup);
-	
-	g_signal_connect(GTK_OBJECT(btnLookup), "clicked",
-			   G_CALLBACK(on_btnLookup_clicked), NULL);
-*/
 }
