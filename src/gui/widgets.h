@@ -51,6 +51,7 @@ struct  _app_widgets {
 		*vbox_percomm,  /* vbox for personal comments notebook */
 		*vbox_text,  /* vbox for  */
 		*box_dict,
+		*vbox_previewer,
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
@@ -101,6 +102,7 @@ struct  _app_widgets {
 		
 	/* popup menu item widgets */
                 *viewtexts_item, /* widget to access toggle menu - for showtexts */
+		*viewpreview_item, 
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */

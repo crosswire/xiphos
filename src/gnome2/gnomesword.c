@@ -201,7 +201,10 @@ void frontend_display(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewdicts_item),
 				       settings.showdicts);
-
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewpreview_item),
+				       settings.showpreview);
+	gui_show_hide_preview(settings.showpreview);
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the sidebar display
 	 */
