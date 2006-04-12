@@ -118,6 +118,7 @@ struct _settings {
 		showdevotional, /* show devotional on program start if true */
 		text_tool, /* show toolbar in text window if true  */
                 showtexts, /* show bible texts if true  */
+                showpreview, /* show preview pane if true  */
                 showcomms, /* show commentaries if true  */
                 showdicts, /* show dictionaries/lexicons if true */
 		displaySearchResults, /* are we displaying search results in chap display */

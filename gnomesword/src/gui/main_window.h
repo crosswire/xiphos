@@ -29,6 +29,7 @@ extern "C" {
 #include "main/settings.h"
 
 void gui_show_hide_texts(int choice);
+void gui_show_hide_preview(int choice);
 void gui_show_hide_comms(int choice);
 void gui_show_hide_dicts(int choice);
 void gui_set_bible_comm_layout(void);	
