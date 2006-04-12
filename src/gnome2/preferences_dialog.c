@@ -146,6 +146,7 @@ struct _preferences_check_buttons {
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
+	GtkWidget *show_preview_pane;
 	GtkWidget *show_commentary_pane;
 	GtkWidget *show_dictionary_pane;
 
@@ -547,6 +548,36 @@ void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	GTK_CHECK_MENU_ITEM(widgets.viewcomms_item)->active =
 	    settings.showcomms;
 	gui_show_hide_comms(togglebutton->active);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton9_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{	
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "showpreview", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showpreview", "0");
+	settings.showpreview = atoi(xml_get_value("misc", "showpreview"));
+	GTK_CHECK_MENU_ITEM(widgets.viewpreview_item)->active =
+	    settings.showpreview;	
+	gui_show_hide_preview(togglebutton->active);
 }
 
 
@@ -1433,6 +1464,9 @@ static void setup_check_buttons(void)
 				     (check_button.show_bible_pane),
 				     settings.showtexts);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.show_preview_pane),
+				     settings.showpreview);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_commentary_pane),
 				     settings.showcomms);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1617,6 +1651,8 @@ static void create_preferences_dialog(void)
 				glade_xml_get_widget(gxml, "checkbutton1");
 	check_button.show_bible_pane = 
 				glade_xml_get_widget(gxml, "checkbutton2");
+	check_button.show_preview_pane = 
+				glade_xml_get_widget(gxml, "checkbutton9");
 	check_button.show_commentary_pane = 
 				glade_xml_get_widget(gxml, "checkbutton3");
 	check_button.show_dictionary_pane = 
