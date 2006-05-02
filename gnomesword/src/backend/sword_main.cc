@@ -486,7 +486,8 @@ char *BackEnd::get_valid_key(const char *key) {
 	vkey.AutoNormalize(1);
 	vkey = mykey;       
 	g_free(mykey);
-	mykey = g_convert((char*)vkey.getText(),
+	
+	mykey = g_convert((char*)vkey.getShortText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,

@@ -511,8 +511,8 @@ void gui_create_parallel_page(void)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
-                                             settings.shadow_type);
+/*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
+                                             settings.shadow_type);*/
 	widgets.frame_parallel = scrolled_window;
 	
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
