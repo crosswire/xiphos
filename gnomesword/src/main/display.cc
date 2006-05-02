@@ -400,21 +400,20 @@ char GTKChapDisp::Display(SWModule &imodule)
 			main_set_strongs_morphs_off(ops);
 		}
 #endif		
-/*		if (newparagraph && settings.versestyle) {
+		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			swbuf += paragraphMark;;
 		}
-*/
+
 		swbuf += (const char *)imodule;		
 		buf = g_strdup_printf("%s",(const char *)imodule);
 		
 		if (settings.versestyle) { 
-			/*if(g_strstr_len(buf,strlen(buf),"<!p>")||
-			   g_strstr_len(buf,strlen(buf),"<p>")) {
+			if(g_strstr_len(buf,strlen(buf),"<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
-			}*/
+			}
 			swbuf.append("</font><br>");
 		} else {
 			swbuf.append("</font>");

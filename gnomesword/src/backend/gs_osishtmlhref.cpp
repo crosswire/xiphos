@@ -408,7 +408,10 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		// <milestone type="x-p" marker="&#182;"/>
 		else if (!strcmp(tag.getName(), "milestone")&& tag.getAttribute("type")) {
 			if(!strcmp(tag.getAttribute("type"),"x-p")) 
-				buf += tag.getAttribute("marker");
+				if( tag.getAttribute("marker"))
+					buf += tag.getAttribute("marker");
+				else
+					buf +=  "<!p>";
 			else if(!strcmp(tag.getAttribute("type"), "line"))  {
 				buf += "<br />";
 				//g_message("\ntoken: %s\ntag: %s\ntype: %s",token,tag.getName(),tag.getAttribute("type"));
@@ -437,7 +440,7 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 				if(u->inName) {
 					char firstChar = *u->lastTextNode.c_str();
 					const char *name = u->lastTextNode.c_str();
-			g_message("\nverse: %s\ntoken: %s\nname: %s",(char*)u->key->getText(), token,name);
+			//g_message("\nverse: %s\ntoken: %s\nname: %s",(char*)u->key->getText(), token,name);
 					++name;
 					buf += firstChar;
 					buf += "<font size=\"-1\">";

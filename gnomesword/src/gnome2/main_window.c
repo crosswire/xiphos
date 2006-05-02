@@ -806,6 +806,24 @@ void create_mainwindow(void)
                                              settings.gs_hight);
 }
 
+/*
+void new_main_window(void)
+{
+	gchar *glade_file;
+	GladeXML *gxml;
+	
+	glade_file =
+	    gui_general_user_file("main-window.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+	g_message(glade_file);
+
+	// ** build the widget **
+	gxml = glade_xml_new(glade_file, "main-window", NULL);
+
+	
+	
+}
+
 
 /******************************************************************************
  * Name
