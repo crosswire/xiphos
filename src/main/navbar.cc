@@ -137,6 +137,7 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 void main_navbar_fill_book_combo(NAVBAR navbar)
 {
 	VerseKey key; 
+	VerseKey key_abrev; 
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
@@ -155,15 +156,16 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			GTK_COMBO_BOX(navbar.comboboxentry_book));
 	gtk_list_store_clear(GTK_LIST_STORE(book_model));
 	if (backend->module_has_testament(navbar.module_name, 1)) {
-		while(i < key.BMAX[0]) { 
-			
-			book = g_convert((const char *)key.books[0][i].name,
+		while(i < key.BMAX[0]) { 			
+			key_abrev = key.books[0][i].name;
+			book = g_convert((const char *)key_abrev.getBookAbbrev(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
 				     &error);
+
 			if(book == NULL) {
 				g_print ("error: %s\n", error->message);
 				g_error_free (error);
@@ -181,9 +183,9 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	}
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name, 2)) {
-		while(i < key.BMAX[1]) {
-			//g_message((const char *)key.books[1][i].name);
-			book = g_convert((const char *)key.books[1][i].name,
+		while(i < key.BMAX[1]) {			
+			key_abrev = key.books[1][i].name;
+			book = g_convert((const char *)key_abrev.getBookAbbrev(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
