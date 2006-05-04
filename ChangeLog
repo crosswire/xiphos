@@ -1,7 +1,7 @@
 2006-05-01  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.7
-	* fixed crash when using KJV 2.2
+	* fixed bug 1480183 - crash when using KJV 2.2
 	
 
 2006-04-12  terry <tbiggs@users.sf.net>
