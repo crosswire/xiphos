@@ -817,7 +817,7 @@ void new_main_window(void)
 	g_return_if_fail(glade_file != NULL);
 	g_message(glade_file);
 
-	// ** build the widget **
+//	** build the widget **
 	gxml = glade_xml_new(glade_file, "main-window", NULL);
 
 	
