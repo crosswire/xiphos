@@ -333,6 +333,13 @@ void load_settings_structure(void)
 		settings.book_offset = 0;
 	}
 
+	if(xml_get_value("tab", "page"))
+		settings.tab_page = atol(xml_get_value("tab", "page"));
+	else {
+		xml_add_new_item_to_section("tab", "page", "0");
+		settings.tab_page = 0;
+	}
+
 	settings.sidebar_width =
 		atoi(xml_get_value("layout", "shortcutbar"));
 	if(xml_get_value("layout", "vltoppaneheight"))

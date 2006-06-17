@@ -26,6 +26,54 @@
 extern "C" {
 #endif
 
+#include <gnome.h>
+#include "gui/toolbar_nav.h"
+typedef struct _tab_page TAB_PAGE;
+struct  _tab_page {
+	GtkWidget *vbox;
+	GtkWidget *paned_text_preview;
+	GtkWidget *paned_text;
+	GtkWidget *paned_comm;
+	GtkWidget *paned_book;
+	
+	// ***** html widgets *****
+	GtkWidget *html_text;
+	GtkWidget *html_parallel;
+	GtkWidget *html_comm;
+	GtkWidget *html_dict;
+	GtkWidget *html_book;
+	GtkWidget *html_preview;
+	
+	// ***** backend  *****
+	gpointer backend;
+	// **** modules *****
+	gchar *mod_text;
+	gchar *mod_comm;
+	gchar *mod_dict;
+	gchar *mod_book;
+	// **** parallel modules *****
+	gchar *mod_par1;
+	gchar *mod_par2;
+	gchar *mod_par3;
+	gchar *mod_par4;
+	gchar *mod_par5;
+	// ***** keys *****
+	gchar *text_comm_key;
+	gchar *dict_key;
+	gchar *book_key;
+	NAV_BAR nav_bar;
+};
+
+typedef struct _main_window MAIN_WINDOW;
+struct  _main_window {
+	GtkWidget *main_window;
+	GtkWidget *status_bar;
+	
+	GtkWidget *nb_sidebar;
+	
+	TAB_PAGE current_page;
+};
+
 #include "main/settings.h"
 
 void gui_show_hide_texts(int choice);
