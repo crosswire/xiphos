@@ -113,12 +113,14 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 	PASSAGE_TAB_INFO *ot = cur_passage_tab;
 	
 	if (ot != NULL && ot->button_close != NULL) {
+		//gtk_widget_set_sensitive(ot->button_close, FALSE);
 		gtk_widget_hide (ot->button_close);
 		gtk_widget_show (ot->close_pixmap);
 	}
 	cur_passage_tab = pt;
 	if (pt != NULL && pt->button_close != NULL) {
 		main_update_tab_history_menu((PASSAGE_TAB_INFO*)pt);
+		//gtk_widget_set_sensitive(pt->button_close, TRUE);
 		gtk_widget_show (pt->button_close);
 		gtk_widget_hide (pt->close_pixmap);
 	}
@@ -393,10 +395,18 @@ void gui_load_tabs(const gchar *filename)
 			settings.dictkey = g_strdup(pt->dictlex_key);
 			settings.book_offset = atol(pt->book_offset);
 		}
-	}
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
-			gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
+	}			//gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
 	set_current_tab(pt);
+	
+/*	if(pt->comm_showing)
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(
+					widgets.notebook_comm_book),
+					0);
+	else
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(
+					widgets.notebook_comm_book),
+					1);	
+*/
 }
 
 
@@ -459,10 +469,11 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_widget_set_usize (tbinf->button_close, 16, 16);
 	
 	tbinf->close_pixmap = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
-					GTK_ICON_SIZE_SMALL_TOOLBAR);
+					GTK_ICON_SIZE_MENU);
 	gtk_widget_size_request (tbinf->button_close, &r);
 	gtk_widget_set_usize (tbinf->close_pixmap, r.width, r.height);
 	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
+	gtk_widget_show(tbinf->close_pixmap);
 	
 	tbinf->tab_label = GTK_LABEL(gtk_label_new (label_text));
 	gtk_widget_show (GTK_WIDGET(tbinf->tab_label));
@@ -476,7 +487,6 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_ACTIVE, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
 	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
-	gtk_widget_show(tbinf->button_close);
 	
 	box = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label), TRUE, 
@@ -632,12 +642,14 @@ void gui_update_tab_struct(const gchar * text_mod,
 		cur_passage_tab->text_mod = g_strdup(text_mod);	
 				
 	}
+	//g_message("commentary_mod = %s",commentary_mod);
 	if(commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
 		if(cur_passage_tab->commentary_mod)
 			g_free(cur_passage_tab->commentary_mod);
 		cur_passage_tab->commentary_mod = g_strdup(commentary_mod);		
 	} 
+	//g_message("cur_passage_tab->commentary_mod = %s",cur_passage_tab->commentary_mod);
 	if(dictlex_mod) {
 		if(cur_passage_tab->dictlex_mod)
 			g_free(cur_passage_tab->dictlex_mod);
@@ -929,6 +941,10 @@ void gui_notebook_main_setup(void)
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
 	gtk_widget_show(widgets.button_new_tab);
+	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
+					 NULL,
+					 settings.tab_page, 
+					&passage_list);
 }
 
 /******************************************************************************

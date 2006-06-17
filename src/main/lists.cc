@@ -25,18 +25,12 @@
 
 #include <gnome.h>
 #include <glib-2.0/glib.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
 #include <string.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
 
-//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 
@@ -87,11 +81,10 @@ GList *get_list(gint type)
 }
 
 
-
 void main_init_lists(void)
 {	
 	gboolean start_backend = FALSE;
-	
+	char *sword_locale = FALSE;
 	mod_lists = &mods;
 	
 	/* set glist to null */
@@ -119,11 +112,13 @@ void main_init_lists(void)
 		const char* lang = getenv("LANG");
 		start_backend = TRUE;
 		backend = new BackEnd();
-		backend->set_sword_locale(lang);		
+		sword_locale = backend->set_sword_locale(lang);
 	}
 	backend->init_lists(mod_lists);
-	if(start_backend)
+	if(start_backend) {
+		free((char*)sword_locale);
 		delete backend;
+	}
 
 	settings.havebible = g_list_length(mods.biblemods);
 	
