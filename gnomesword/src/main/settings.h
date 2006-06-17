@@ -87,7 +87,7 @@ struct _settings {
 		whichwindow,      	/* which of the main form html windows is active */
 		intCurVerse,    /* detached parallel current verse */
 		parallel_page,   /* parallel workbook page number */
-		studypad_page,   /* studypad workbook page number */
+		tab_page,   /* studypad workbook page number */
 		percomm_page;   /* percomm editor workbook page number */
 						
 	int   
