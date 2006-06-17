@@ -157,6 +157,8 @@ void frontend_display(void)
 	
 	main_clear_viewer();
 	
+	//gtk_widget_realize(widgets.html_comm);
+	
 	gtk_widget_realize(widgets.html_dict);
 	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 					      settings.dictkey);
@@ -238,14 +240,10 @@ void frontend_display(void)
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
 	
-	/*
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
+/*	gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.notebook_comm_book),
 					      0);
-	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
-					 NULL,
-					 0, 
-					 &passage_list);*/
+*/
 	gtk_widget_grab_focus (sidebar.module_list);
 #ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
