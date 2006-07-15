@@ -303,18 +303,19 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	gchar *buf = NULL;
 	gchar *buf2 = NULL;
 	GtkHTML *html;
-	gint len,i;
+	gint len, i, keylen;
 
 	html = GTK_HTML(html_widget);
 	if (word)
 		gtk_html_select_word(html);	
 #ifdef USE_GTKHTML38		
-	key = gtk_html_get_selection_html ( html, &len);
+	key = gtk_html_get_selection_html (html, &len);
 	key = strchr(key,'>');
 	++key;
-	buf = g_new(gchar,strlen(key));
+	keylen = strlen(key);
+	buf = g_new(gchar, keylen);
 	
-	for(i=0;i<strlen(key);i++) {
+	for (i = 0; i < keylen; i++) {
 		if(key[i] == '<')  {
 			buf[i] = '\0';
 			break;

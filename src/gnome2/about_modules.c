@@ -79,10 +79,10 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
 
 static void about_module_display(GString * str, gchar * text)
 {
-	gint i;
+	gint i, len = strlen(text);
 	gboolean center = FALSE;
 	
-	for (i = 0; i < strlen(text) - 1; i++) {
+	for (i = 0; i < len; i++) {
 		if (text[i] == '\\')	// a RTF command
 		{
 			if ((text[i + 1] == 'p') &&
@@ -176,7 +176,7 @@ static GtkWidget *gui_create_about_modules(void)
 
 	hbox21 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox21);
-	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, FALSE, TRUE, 0);
 
 	pixmap =
 	    gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
@@ -259,10 +259,10 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	GtkWidget *text;	//-- pointer to text widget of dialog
 	gchar *buf = NULL,	//-- pointer to text buffer for label (mod name)
 	*bufabout;		//-- pointer to text buffer for text widget (mod about)
-	// discription[500];
+	// description[500];
 	gint len, maxlen;
 	GString *str = g_string_new(NULL);
-	GString *discription = g_string_new(NULL);
+	GString *description = g_string_new(NULL);
 	const gchar * version = NULL;
 
 	bufabout = NULL;
@@ -271,7 +271,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	bufabout = main_get_mod_about_info(modname);
 	version = main_get_mod_config_entry(modname, "Version");
 	
-	g_string_printf(discription,
+	g_string_printf(description,
 		"<center><FONT COLOR=\"#000FCF\"><b>%s</b></font><HR>%s %s</center><br>",
 		buf,
 		(version)?"<br>Sword module version":"",
@@ -296,8 +296,8 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gui_begin_html(text, FALSE);
 		gui_display_html(text, "<html><body>",
 				 strlen("<html><body>"));
-		gui_display_html(text, discription->str,
-				 discription->len);
+		gui_display_html(text, description->str,
+				 description->len);
 		gui_display_html(text, str->str, str->len);
 		
 		gui_display_html(text, "</body></html>",
@@ -309,5 +309,5 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	if (bufabout)
 		g_free(bufabout);
 	g_string_free(str,TRUE);
-	g_string_free(discription,TRUE);
+	g_string_free(description,TRUE);
 }
