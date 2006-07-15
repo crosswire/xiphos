@@ -813,7 +813,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
                                                                       gpointer data)
 {
 	gchar *text, *text_str, *buf, *module;
-	gint i;
+	gint i, textlen;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
 	GtkTextIter iter, startiter, enditer;
@@ -824,8 +824,9 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 #ifdef DEBUG
 	g_message("\ntext: %s",text);
 #endif
-	module = g_new(gchar,strlen(text));
-	for(i=0;i<strlen(text);i++){
+	textlen = strlen(text);
+	module = g_new(gchar, textlen);
+	for (i = 0; i < textlen; i++){
 		if(text[i] == ':') {
 			module[i] = '\0';
 			break;

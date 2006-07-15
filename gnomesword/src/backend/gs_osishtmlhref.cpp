@@ -440,11 +440,12 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 				if(u->inName) {
 					char firstChar = *u->lastTextNode.c_str();
 					const char *name = u->lastTextNode.c_str();
+					int namelen = strlen(name);
 			//g_message("\nverse: %s\ntoken: %s\nname: %s",(char*)u->key->getText(), token,name);
 					++name;
 					buf += firstChar;
 					buf += "<font size=\"-1\">";
-					for(int i=0;i<strlen(name);i++)
+					for (int i = 0; i < namelen; i++)
 						buf += toupper(name[i]);
 					buf += "</font>";
 					u->inName = false;
