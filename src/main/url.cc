@@ -432,7 +432,8 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	//g_message("buf len = %d",strlen(buf));
 	if(strchr(buf,'|')) {
 		//g_message("buf = %s", buf);
-		for(i=0;i<(strlen(value));i++) {
+		gint valuelen = strlen(value);
+		for (i = 0; i < valuelen; i++) {
 			if(value[i] == '|') {
 				val[i] = '\0';
 				break;
@@ -455,8 +456,9 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	val = g_new(gchar,strlen(morph));
 	if(morph_mod)  {		
 		if(strchr(buf,'|')) {
+			gint morphlen = strlen(morph);
 			g_message("buf = %s", buf);	
-			for(i=0;i<(strlen(morph));i++) {
+			for (i = 0; i < morphlen; i++) {
 				if(morph[i] == '|') {
 					val[i] = '\0';
 					break;
