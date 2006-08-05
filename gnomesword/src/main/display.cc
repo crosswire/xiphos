@@ -359,7 +359,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		while((preverse 
 			= backend->get_entry_attribute("Heading","Preverse",
 							    heading)) != NULL) {
-			swbuf.appendFormatted("<br><b>%s</b><br><br>",preverse);
+			const char *preverse2 = imodule.RenderText(preverse);
+			swbuf.appendFormatted("<br><b>%s</b><br><br>",preverse2);
 			g_free(preverse);					     
 			++x;
 			sprintf(heading,"%d",x);
