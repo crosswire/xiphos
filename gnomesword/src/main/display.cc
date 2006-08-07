@@ -463,8 +463,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 	}
 #endif
-	key->Verse(1);
-	key->Chapter(1);
+//	key->Verse(1);
+//	key->Chapter(1);
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
