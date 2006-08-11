@@ -65,10 +65,10 @@ gnomesword2_LDADD = \
     $(MOZILLA_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
-    $(SWORD_LIBS) \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/editor/libeditor.a \
-    $(top_builddir)/src/backend/libbackend.a
+    $(top_builddir)/src/backend/libbackend.a \
+    $(SWORD_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h
