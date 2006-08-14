@@ -429,6 +429,12 @@ char GTKChapDisp::Display(SWModule &imodule)
 	}
 	swbuf = "";
 	getVerseAfter(imodule);	
+
+	// Reset the Bible location before GTK gets access:
+	// Mouse activity destroys this key, so we must be finished with it.
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
 	
 	if(is_rtol) 
 		swbuf += ("</DIV></body></html>");
@@ -449,7 +455,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 	}
 #else	
-	gtk_html_flush (html); 
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 	if (swbuf.length())
@@ -457,17 +462,13 @@ char GTKChapDisp::Display(SWModule &imodule)
 		//gtk_html_load_from_string(html,swbuf.c_str(),swbuf.length());
 	gtk_html_end(html,stream,status);
 	gtk_html_set_editable(html, was_editable);
-	if(curVerse > 1) {
-		buf = g_strdup_printf("%d", curVerse - 1);
+	if(curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}
+	gtk_html_flush (html); 
 #endif
-//	key->Verse(1);
-//	key->Chapter(1);
-	key->Book(curBook);
-	key->Chapter(curChapter);
-	key->Verse(curVerse);
 	free_font(mf);	
 	g_free(ops);
 }
