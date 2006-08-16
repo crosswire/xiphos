@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * setup_druid.h gnomesword fristrun druid
+ * setup_druid.h gnomesword firstrun druid
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *

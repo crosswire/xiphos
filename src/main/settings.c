@@ -449,6 +449,10 @@ void load_settings_structure(void)
 	settings.showdevotional =
 	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
+
+	buf = xml_get_value("misc", "pinnedtabs");
+	settings.pinnedtabs = (buf ? atoi(buf) : 0);
+
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 	
 		
