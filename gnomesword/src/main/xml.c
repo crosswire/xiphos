@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * configs.c - 
+ * xml.c - 
  *
  * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
@@ -577,6 +577,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showdicts", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showtexts", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versestyle", (const xmlChar *)"1");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"setup_canceled",(const xmlChar *)"0");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"modules", NULL);

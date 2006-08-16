@@ -54,6 +54,7 @@ extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one o
 void gui_save_tabs(const gchar *filename);
 void gui_load_tabs(const gchar *filename);
 void gui_set_tab_label(const gchar *key);
+void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt);
 void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
 void gui_close_passage_tab(gint pagenum);

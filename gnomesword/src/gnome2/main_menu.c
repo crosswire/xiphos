@@ -231,7 +231,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
- *   toogle between verse and paragraph style
+ *   toggle between verse and paragraph style
  *
  * Return value
  *   void
@@ -257,6 +257,30 @@ static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
 		g_free(url);
 		g_free(file);
 	}
+}
+
+/******************************************************************************
+ * Name
+ *  on_pinned_tabs_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_pinned_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toggle pinning tabs together.
+ *
+ * Return value
+ *   void
+ */
+
+static void on_pinned_tabs_activate(GtkCheckMenuItem * menuitem,
+				    gpointer user_data)
+{
+	settings.pinnedtabs = menuitem->active;
+	xml_set_value("GnomeSword", "misc", "pinnedtabs",
+		      (settings.pinnedtabs ? "1" : "0"));
 }
 
 /******************************************************************************
@@ -448,7 +472,7 @@ void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)
  *   void view_hints(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
- *    toogle view hints in texts window
+ *    toggle view hints in texts window
  *
  * Return value
  *   void
@@ -476,7 +500,7 @@ static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
  *   void view_bible_texts(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
- *    toogle Bibletext window
+ *    toggle Bibletext window
  *
  * Return value
  *   void
@@ -503,7 +527,7 @@ static void view_previewer(GtkMenuItem * menuitem, gpointer user_data)
  *   void view_upper_workbook(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
- *    toogle commentary window *** we need to change the name of this
+ *    toggle commentary window *** we need to change the name of this
  *    function because there no longer an upper_workbook
  *
  * Return value
@@ -527,7 +551,7 @@ static void view_upper_workbook(GtkMenuItem * menuitem,
  *   void view_lower_workbook(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
- *    toogle lower_workbook view (on or off)
+ *    toggle lower_workbook view (on or off)
  *
  * Return value
  *   void
@@ -626,20 +650,20 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 
 static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("Copy"),
+	 GNOME_APP_UI_ITEM, N_("_Copy"),
 	 N_("Copy highlighted text from main window"),
 	 gui_copyhtml_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_COPY,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("Search"),
+	 GNOME_APP_UI_ITEM, N_("_Search"),
 	 N_("Search using the shortcut bar"),
 	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
+	 GNOME_APP_UI_ITEM, N_("_Advanced Search"),
 	 N_("Advanced search using the search dialog"),
 	 main_open_search_dialog, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
@@ -648,7 +672,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
 					  NULL),
 	{
-	 GNOME_APP_UI_ITEM, N_("Module Manager"),
+	 GNOME_APP_UI_ITEM, N_("_Module Manager"),
 	 N_("Use module manager to install and remove Sword modules"),
 	 on_mod_mgr, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
@@ -669,7 +693,7 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 
 static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
+	 GNOME_APP_UI_ITEM, N_("_Daily Devotion"),
 	 N_("Show the Daily Devotion for today"),
 	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
@@ -685,25 +709,25 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 */
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Bible Texts"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Bible Texts"),
 	 N_("Show or hide Bible texts window"),
 	 (gpointer) view_bible_texts, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
  	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Preview"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("P_review"),
 	 N_("Show or hide Preview window"),
 	 (gpointer) view_previewer, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Commentary"),
 	 N_("Show or hide commentaries"),
 	 (gpointer) view_upper_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Dictionary/Lexicon"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("Dictionary/_Lexicon"),
 	 N_
 	 ("Show or hide - dictionaries and lexicons"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
@@ -711,20 +735,26 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Verse Style"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Verse Style"),
+	 NULL,
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Pin Tabs"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("Attach/Detach Sidebar"),
+	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
 	 NULL,
 	 gui_attach_detach_sidebar, NULL, NULL, 
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Show/Hide Sidebar"),
+	 GNOME_APP_UI_ITEM, N_("_Show/Hide Sidebar"),
 	 NULL,
 	 gui_sidebar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -734,7 +764,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 
 static GnomeUIInfo help1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("Contents"),
+	 GNOME_APP_UI_ITEM, N_("_Contents"),
 	 N_("Open the GnomeSword manual"),
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
@@ -748,13 +778,13 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,*/
 	{
-	 GNOME_APP_UI_ITEM, N_("About the SWORD Project ..."),
+	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project ..."),
 	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("About GnomeSword ..."),
+	 GNOME_APP_UI_ITEM, N_("About _GnomeSword ..."),
 	 N_("About this application"),
 	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
@@ -822,13 +852,21 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.viewcomms_item = view1_menu_uiinfo[4].widget;
 	widgets.viewdicts_item = view1_menu_uiinfo[5].widget;
 	widgets.versestyle_item = view1_menu_uiinfo[7].widget;
+	widgets.pinnedtabs_item = view1_menu_uiinfo[8].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.pinnedtabs_item),
+				       settings.pinnedtabs);
 	
 	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
 			   G_CALLBACK(on_verse_style1_activate),
+			   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.pinnedtabs_item),
+			   "toggled",
+			   G_CALLBACK(on_pinned_tabs_activate),
 			   NULL);
 }
 
