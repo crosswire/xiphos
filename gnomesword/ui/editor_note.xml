@@ -27,7 +27,7 @@
 	</menu>
 
 	<dockitem name="Toolbar">
-		<toolitem name="SaveNote" verb="" _label="Save" _tip="" pixtype="stock" pixname="Save"/>
+		<toolitem name="SaveNote" verb="" _label="Save" _tip="Save" pixtype="stock" pixname="Save"/>
 
 		<separator/>
 	</dockitem>
