@@ -58,6 +58,7 @@ typedef enum {
 	SHOW_BOOK_TABS,
 	USE_DEFAULT_DICTIONARY,
 	USE_VERSE_STYLE,
+	USE_PINNED_TABS,
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
@@ -143,6 +144,7 @@ struct _preferences_check_buttons {
 
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_verse_style;
+	GtkWidget *use_pinned_tabs;
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
@@ -282,9 +284,6 @@ static void apply_color_settings(void)
 }
 
 
-
-
-
 /******************************************************************************
  * Name
  *   on_colorbutton1_color_set
@@ -318,7 +317,6 @@ void on_colorbutton1_color_set(GtkColorButton  * colorbutton,
 	apply_color_settings();
 }
 
-
 /******************************************************************************
  * Name
  *   on_colorbutton2_color_set
@@ -351,7 +349,6 @@ void on_colorbutton2_color_set(GtkColorButton * colorbutton,
 		g_free(buf2);
 	apply_color_settings();
 }
-
 
 /******************************************************************************
  * Name
@@ -387,7 +384,6 @@ void on_colorbutton3_color_set(GtkColorButton * colorbutton,
 	apply_color_settings();
 }
 
-
 /******************************************************************************
  * Name
  *   on_colorbutton4_color_set
@@ -422,7 +418,6 @@ void on_colorbutton4_color_set(GtkColorButton * colorbutton,
 	apply_color_settings();
 }
 
-
 /******************************************************************************
  * Name
  *   on_colorbutton5_color_set
@@ -455,7 +450,6 @@ void on_colorbutton5_color_set(GtkColorButton * colorbutton,
 		g_free(buf2);
 	apply_color_settings();
 }
-
 
 /******************************************************************************
  * Name
@@ -490,7 +484,6 @@ void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	settings.browsing = atoi(xml_get_value("tabs", "browsing"));
 }
 
-
 /******************************************************************************
  * Name
  *   on_checkbutton2_toggled
@@ -519,7 +512,6 @@ void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	    settings.showtexts;
 	gui_show_hide_texts(togglebutton->active);
 }
-
 
 /******************************************************************************
  * Name
@@ -550,7 +542,6 @@ void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	gui_show_hide_comms(togglebutton->active);
 }
 
-
 /******************************************************************************
  * Name
  *   on_checkbutton9_toggled
@@ -579,7 +570,6 @@ void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	    settings.showpreview;	
 	gui_show_hide_preview(togglebutton->active);
 }
-
 
 /******************************************************************************
  * Name
@@ -610,7 +600,6 @@ void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 	gui_show_hide_dicts(togglebutton->active);
 }
 
-
 /******************************************************************************
  * Name
  *   on_checkbutton5_toggled
@@ -628,7 +617,6 @@ void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
  *   void
  */
 
-
 void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	extern gboolean style_display;
@@ -642,6 +630,34 @@ void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.versestyle_item),
 			       settings.versestyle);
+}
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton10_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "pinnedtabs",
+		      (togglebutton->active ? "1" : "0"));
+	settings.pinnedtabs = atoi(xml_get_value("misc", "pinnedtabs"));
+	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.pinnedtabs_item),
+			       settings.pinnedtabs);
 }
 
 
@@ -1461,6 +1477,9 @@ static void setup_check_buttons(void)
 				     (check_button.use_verse_style),
 				     settings.versestyle);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.use_pinned_tabs),
+				     settings.pinnedtabs);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_bible_pane),
 				     settings.showtexts);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1659,6 +1678,8 @@ static void create_preferences_dialog(void)
 				glade_xml_get_widget(gxml, "checkbutton4");
 	check_button.use_verse_style = 
 				glade_xml_get_widget(gxml, "checkbutton5");
+	check_button.use_pinned_tabs = 
+				glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.use_default_dictionary = 
 				glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = 

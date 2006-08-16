@@ -106,6 +106,7 @@ struct  _app_widgets {
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
+		*pinnedtabs_item,	/* widget to access toggle menu - for pinnedtabs */
 		*button_dict_book,      /* main toolbar togglebutton */
 //		*button_parallel_view,  /* main toolbar togglebutton */
 		*button_new_tab,	/* creates a new passage tab */
