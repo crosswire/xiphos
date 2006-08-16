@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * setup_druid.c gnomesword fristrun druid
+ * setup_druid.c gnomesword firstrun druid
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -51,6 +51,7 @@ struct _settings_druid {
 	GtkWidget *combo_entry_devotion;
 	GtkWidget *radiobutton_use_default;
 	GtkWidget *checkbutton_verse_style;
+	GtkWidget *checkbutton_pinned_tabs;
 	GtkWidget *checkbutton_text_tabs;
 	GtkWidget *checkbutton_text_window;
 	GtkWidget *checkbutton_comm_tabs;
@@ -73,12 +74,12 @@ static GtkWidget *dialog_setup;
 
 /******************************************************************************
  * Name
- *  save_frist_run_settings
+ *  save_first_run_settings
  *
  * Synopsis
  *   #include "setup_druid.h"
  *
- *   void save_frist_run_settings(SETTINGS_DRUID widgets)
+ *   void save_first_run_settings(SETTINGS_DRUID widgets)
  *
  * Description
  *   gets settings from druid widgets and stores them in
@@ -89,7 +90,7 @@ static GtkWidget *dialog_setup;
  *   void
  */
 
-static void save_frist_run_settings(SETTINGS_DRUID widgets)
+static void save_first_run_settings(SETTINGS_DRUID widgets)
 {
 
 	xml_set_value("GnomeSword", "modules", "bible",
@@ -193,6 +194,12 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	else
 		xml_set_value("GnomeSword", "misc", "versestyle", "0");
 
+	settings.pinnedtabs =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_pinned_tabs)->active;
+	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_pinned_tabs)->active)
+		xml_set_value("GnomeSword", "misc", "pinnedtabs", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "pinnedtabs", "0");
 
 	settings.showtexts =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active;
@@ -254,7 +261,7 @@ static void dialog_destroy(GtkObject * object, gpointer user_data)
 static void on_finish_clicked(GtkWidget * dialog, gint arg1,
 			      gpointer user_data)
 {
-	save_frist_run_settings(widgets);
+	save_first_run_settings(widgets);
 
 	gtk_widget_destroy(dialog_setup);
 }
@@ -619,6 +626,17 @@ static GtkWidget *create_setup_druid(GList * biblemods,
 	gtk_widget_set_size_request(widgets.checkbutton_verse_style, 212, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.checkbutton_verse_style),
+				     TRUE);
+
+	widgets.checkbutton_pinned_tabs =
+	    gtk_check_button_new_with_label(_("Use Pinned Tabs"));
+	gtk_widget_show(widgets.checkbutton_pinned_tabs);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_pinned_tabs, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(widgets.checkbutton_pinned_tabs, 212, -1);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.checkbutton_pinned_tabs),
 				     TRUE);
 
 	widgets.checkbutton_text_tabs =
