@@ -23,19 +23,21 @@
 # <>, 2004.
 # Dominique Corbex <domcox@sourceforge.net>, 2004.
 # <>, 2004.
+# Dominique Corbex <domcox@sourceforge.net>, 2006.
+# , fuzzy 
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2 2.1.2\n"
+"Project-Id-Version: GnomeSword 2 2.1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-13 23:16-0500\n"
-"PO-Revision-Date: 2005-07-30 19:36+0200\n"
-"Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
-"Language-Team: French <gnomefr@traduc.org>\n"
+"PO-Revision-Date: 2006-08-16 22:52+0200\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=\n"
+"Content-Transfer-Encoding: "
 
 #: ../gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -680,9 +682,8 @@ msgid "Indents the paragraphs more"
 msgstr "Augmenter l'indentation"
 
 #: ../src/gnome2/about_gnomesword.c:84
-#, fuzzy
 msgid "Copyright 2000-2005 The GnomeSword Development Team"
-msgstr "Copyright 2003 L'équipe de développement GnomeSword"
+msgstr "Copyright 2000-2005 L'équipe de développement GnomeSword"
 
 #: ../src/gnome2/about_gnomesword.c:87
 msgid ""
@@ -1061,9 +1062,8 @@ msgid "Enter Cipher Key: "
 msgstr "Entrer la clé de déverouillage:"
 
 #: ../src/gnome2/dialog.c:211
-#, fuzzy
 msgid "Close without Saving"
-msgstr "Ferme la fenêtre de sortie"
+msgstr "Fermer sans sauvegarder"
 
 #: ../src/gnome2/dialog.c:821
 msgid "Close _without Saving"
@@ -1212,21 +1212,19 @@ msgstr "Ouvre le bloc-notes d'étude"
 
 #: ../src/gnome2/main_menu.c:607
 msgid "Open Session"
-msgstr ""
+msgstr "Ouvrir une session"
 
 #: ../src/gnome2/main_menu.c:608
 msgid "Open a saved session"
-msgstr ""
+msgstr "Ouvre une session enregistrée"
 
 #: ../src/gnome2/main_menu.c:612
-#, fuzzy
 msgid "Save Session"
-msgstr "Enregistre les résultats de la recherche"
+msgstr "Enregistrer la session"
 
 #: ../src/gnome2/main_menu.c:613
-#, fuzzy
 msgid "Save the current session to a file"
-msgstr "Enregistrer le fichier"
+msgstr "Enregistre la session actuelle dans un fichier"
 
 #: ../src/gnome2/main_menu.c:625
 msgid "Copy highlighted text from main window"
@@ -1250,13 +1248,12 @@ msgstr "Utilise la fenêtre de recherche avancée"
 
 #: ../src/gnome2/main_menu.c:646 ../ui/module-manager.glade.h:15
 msgid "Module Manager"
-msgstr "Gestionnaire de modules"
+msgstr "Gérer les modules"
 
 #: ../src/gnome2/main_menu.c:647
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
-"Le gestionnaire de modules permet d'installer ou de supprimer les modules de "
-"textes du SWORD Project"
+"Installer ou supprimer des modules de textes du SWORD Project"
 
 #: ../src/gnome2/main_menu.c:656
 msgid "C_lear"
@@ -1268,7 +1265,7 @@ msgstr "Efface l'historique des versets consultés"
 
 #: ../src/gnome2/main_menu.c:667
 msgid "Daily Devotion"
-msgstr "Lecture quotidienne"
+msgstr "Méditation quotidienne"
 
 #: ../src/gnome2/main_menu.c:668
 msgid "Show the Daily Devotion for today"
@@ -1841,7 +1838,7 @@ msgstr ""
 
 #: ../src/gnome2/setup_druid.c:997 ../ui/prefs.glade.h:27
 msgid "Daily Devotional"
-msgstr "Lecture quotidienne"
+msgstr "Méditation quotidienne"
 
 #: ../src/gnome2/setup_druid.c:1034
 msgid "GnomeSword Configuration - Page 5 of 5"
@@ -1960,9 +1957,9 @@ msgstr ""
 "Saisir un verset au format <livre> <chap>:<verset>(ex: Jn 3:16) puis valider"
 
 #: ../src/gnome2/utilities.c:254
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found"
-msgstr "Serveur non trouvé"
+msgstr "%s non trouvé"
 
 #. *****   end of file   *****
 #: ../ui/bookmarks.glade.h:1
@@ -2002,19 +1999,16 @@ msgid ""
 msgstr ""
 
 #: ../ui/prefs.glade.h:9
-#, fuzzy
 msgid "<b>Font Colors</b>"
-msgstr "Couleurs des polices"
+msgstr "<b>Couleurs des polices</b>"
 
 #: ../ui/prefs.glade.h:10
-#, fuzzy
 msgid "<b>Font Miscellaneous</b>"
-msgstr "Divers polices"
+msgstr "<b>Divers polices</b>"
 
 #: ../ui/prefs.glade.h:11
-#, fuzzy
 msgid "<b>General</b>"
-msgstr "Général"
+msgstr "<b>Général</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
@@ -2030,17 +2024,16 @@ msgstr "<b>Vue parallèle</b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Show</b>"
-msgstr ""
+msgstr "<b>Afficher</b>"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:16
-#, fuzzy
 msgid "<b>StudyPad default directory</b>"
-msgstr "Répertoire par défaut du bloc-notes d'étude"
+msgstr "<b>Répertoire par défaut du bloc-notes d'étude</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
-msgstr ""
+msgstr "<b>Onglets</b>"
 
 #: ../ui/prefs.glade.h:18
 msgid "Background"
@@ -2055,9 +2048,8 @@ msgid "Biblical Text"
 msgstr "Texte biblique"
 
 #: ../ui/prefs.glade.h:22
-#, fuzzy
 msgid "Book"
-msgstr "Livres d'étude"
+msgstr "Livre d'étude"
 
 #: ../ui/prefs.glade.h:25
 msgid "Cover"
@@ -2100,9 +2092,8 @@ msgid "Links"
 msgstr "Liens"
 
 #: ../ui/prefs.glade.h:37
-#, fuzzy
 msgid "Modules Main"
-msgstr "Gestionnaire de modules"
+msgstr ""
 
 #: ../ui/prefs.glade.h:38
 #, fuzzy
@@ -2164,14 +2155,13 @@ msgid "<b>Install Source</b>"
 msgstr "Support d'installation"
 
 #: ../ui/module-manager.glade.h:4
-#, fuzzy
 msgid "<b>Module Manager</b>"
-msgstr "Gestionnaire de modules"
+msgstr "<b>Gérer les modules</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
 msgid "<b>Sword</b>"
-msgstr ""
+msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 #, fuzzy
@@ -2181,12 +2171,11 @@ msgstr ""
 "présente des risques"
 
 #: ../ui/module-manager.glade.h:8
-#, fuzzy
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"Ne pas utiliser le support d'installation à distance dans les pays où cela "
+"<b>Attention</b>Ne pas utiliser le support d'installation à distance dans les pays où cela "
 "peut représenter un danger"
 
 #: ../ui/module-manager.glade.h:9
@@ -2225,65 +2214,55 @@ msgstr "Version de Sword"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Found</b>"
-msgstr ""
+msgstr "<b>Résultats</b>"
 
 #: ../ui/search-dialog.glade.h:2
-#, fuzzy
 msgid "<b>List Name</b>"
-msgstr "Nom de la liste"
+msgstr "<b>Nom de la liste</b>"
 
 #: ../ui/search-dialog.glade.h:3
-#, fuzzy
 msgid "<b>Module Lists</b>"
-msgstr "Liste de modules"
+msgstr "<b>Listes de modules</b>"
 
 #: ../ui/search-dialog.glade.h:4
-#, fuzzy
 msgid "<b>Modules</b>"
-msgstr "<Module>"
+msgstr "<b>Module</b>"
 
 #: ../ui/search-dialog.glade.h:5
-#, fuzzy
 msgid "<b>Options</b>"
-msgstr "Options"
+msgstr "<b>Options</b>"
 
 #: ../ui/search-dialog.glade.h:6
-#, fuzzy
 msgid "<b>Preview</b>"
-msgstr "<b>Vue parallèle</b>"
+msgstr "<b>Aperçu</b>"
 
 #: ../ui/search-dialog.glade.h:7
-#, fuzzy
 msgid "<b>Range Name</b>"
-msgstr "Nom de la sélecion"
+msgstr "<b>Nom de la sélection</b>"
 
 #: ../ui/search-dialog.glade.h:8
-#, fuzzy
 msgid "<b>Range Text</b>"
-msgstr "Limites du texte"
+msgstr "<b>Étendue de la sélection</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Ranges</b>"
-msgstr ""
+msgstr "<b>Sélections</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Scope</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:11
-#, fuzzy
 msgid "<b>Search Results</b>"
-msgstr "Résultats de la recherche"
+msgstr "<b>Résultats de recherche</b>"
 
 #: ../ui/search-dialog.glade.h:12
-#, fuzzy
 msgid "<b>Search Type</b>"
-msgstr "Type de recherche :"
+msgstr "<b>Type de recherche </b>"
 
 #: ../ui/search-dialog.glade.h:13
-#, fuzzy
 msgid "Add Modules"
-msgstr "Modules"
+msgstr "Ajout de modules"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Attributes"
@@ -2303,7 +2282,7 @@ msgstr "Crée une nouvelle liste de modules"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Create new custom range"
-msgstr "Crée de nouvelles limites personnalisées"
+msgstr "Crée une nouvelle sélection personnalisée"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Current results"
@@ -2363,18 +2342,16 @@ msgid "Include Strong's Numbers"
 msgstr "Afficher les nombres de Strong"
 
 #: ../ui/search-dialog.glade.h:36
-#, fuzzy
 msgid "Module Selection"
-msgstr "Définition du mot selectionné"
+msgstr "Sélection de module"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Module list"
 msgstr "Liste de modules"
 
 #: ../ui/search-dialog.glade.h:39
-#, fuzzy
 msgid "Open a dialog to select modules to add to the list"
-msgstr "Supprime le module sélectionné de la liste"
+msgstr "Sélectionne les modules à ajouter à la liste"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Remove the selected module from the list"
@@ -2397,9 +2374,8 @@ msgid "Save the module list"
 msgstr "Enregistre la liste des modules"
 
 #: ../ui/search-dialog.glade.h:46
-#, fuzzy
 msgid "Search  Criteria"
-msgstr "Recherche Critères"
+msgstr "Critères de recherche"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Search entire module"
@@ -2438,28 +2414,24 @@ msgid "e.g. Matt-John;Rev4"
 msgstr "ex Mat-Jean, Ap4"
 
 #: ../ui/search-dialog.glade.h:57
-#, fuzzy
 msgid "for "
-msgstr " pour "
+msgstr "pour "
 
 #: ../ui/editor_note.xml.h:1
-#, fuzzy
 msgid "Delete the current note"
-msgstr "Enregistrer le fichier"
+msgstr "Supprime la note actuelle"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
-#, fuzzy
 msgid "E_xit"
-msgstr "Éditer"
+msgstr "Quitter"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:3
-#, fuzzy
 msgid "Exit"
-msgstr "Éditer"
+msgstr "Quitter"
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:4
 msgid "Exit the program"
-msgstr ""
+msgstr "Quitte l'application"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
 #, fuzzy
@@ -2472,21 +2444,19 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:7
 msgid "HTML mode"
-msgstr ""
+msgstr "mode HTML"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr ""
+msgstr "Aperçu avant impression de la note"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:12
-#, fuzzy
 msgid "Print Pre_view"
-msgstr "Prévisualisation"
+msgstr "Aperçu avant impression"
 
 #: ../ui/editor_note.xml.h:10
-#, fuzzy
 msgid "Print this note"
-msgstr "Rechercher"
+msgstr "Imprime cette note"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save using the PersistStream interface"
@@ -2497,7 +2467,6 @@ msgid "_Delete Personal Comment"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:18
-#, fuzzy
 msgid "_Print..."
 msgstr "Imprimer..."
 
@@ -2506,13 +2475,12 @@ msgid "_Save (Personal Comment)"
 msgstr ""
 
 #: ../ui/editor_studypad.xml.h:1
-#, fuzzy
 msgid "Create a new document"
-msgstr "Crée une nouvelle liste de modules"
+msgstr "Crée un nouveau document"
 
 #: ../ui/editor_studypad.xml.h:8
 msgid "New Document"
-msgstr ""
+msgstr "Nouveau document"
 
 #: ../ui/editor_studypad.xml.h:9
 msgid "Open (PersistFile)"
@@ -2524,12 +2492,11 @@ msgstr ""
 
 #: ../ui/editor_studypad.xml.h:11
 msgid "Preview the document to be printed"
-msgstr ""
+msgstr "Aperçu avant impression"
 
 #: ../ui/editor_studypad.xml.h:13
-#, fuzzy
 msgid "Print this document"
-msgstr "Le document n'a pas pu être imprimé"
+msgstr "Imprime ce document"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Save (PersistFile)"
