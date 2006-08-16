@@ -229,8 +229,8 @@ void gui_save_tabs(const gchar *filename)
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) "tabs", NULL);
 	
-	tmp = g_list_first(passage_list);
-	while (tmp != NULL) {
+	for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp)) {
+
 		pt = (PASSAGE_TAB_INFO*) tmp->data;
 		
 		cur_node = xmlNewChild(section_node,
@@ -251,7 +251,6 @@ void gui_save_tabs(const gchar *filename)
 				(const xmlChar *)pt->book_offset);		
 		xmlNewProp(cur_node, (const xmlChar *)"comm_showing", 
 				(const xmlChar *)true_false2yes_no(pt->comm_showing));
-		tmp = g_list_next(tmp);
 	}
 	xmlSaveFormatFile(file, xml_doc,1);
 	xmlFreeDoc(xml_doc);
@@ -576,10 +575,11 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  * Synopsis
  *   #include "tabbed_browser.h"
  *
- *   void gui_set_tab_label(TABED_PAGE *p)	
+ *   void gui_set_tab_label(const char *key)	
  *
  * Description
- *   sets current tab label to current verse
+ *   sets tab label(s) to current verse.
+ *   dependent on pinnedtabs setting, either just cur or all.
  *
  * Return value
  *   void
@@ -587,24 +587,53 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  
 void gui_set_tab_label(const gchar * key)
 {
+	if (settings.pinnedtabs) {
+		GList *tmp = NULL;
+		for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp))
+			gui_set_named_tab_label(key, (PASSAGE_TAB_INFO*)tmp->data);
+	}
+	else
+	{
+		gui_set_named_tab_label(key, cur_passage_tab);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *  gui_set_named_tab_label
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_set_named_tab_label(const char *key, PASSAGE_TAB_INFO *pt)	
+ *
+ * Description
+ *   sets specified tab label to current verse
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt)
+{
 	GString *str = g_string_new(NULL);
 	
-	if(cur_passage_tab->text_commentary_key)
-		g_free(cur_passage_tab->text_commentary_key);
-	cur_passage_tab->text_commentary_key = g_strdup(key);
+	if (pt->text_commentary_key)
+		g_free(pt->text_commentary_key);
+	pt->text_commentary_key = g_strdup(key);
 		
 	g_string_printf(str,"%s: %s",
-				cur_passage_tab->text_mod,
-				cur_passage_tab->text_commentary_key); 
-	gtk_label_set_text (cur_passage_tab->tab_label,str->str);
+				pt->text_mod,
+				pt->text_commentary_key); 
+	gtk_label_set_text (pt->tab_label,str->str);
 #ifdef DEBUG 
 	g_print("label = %s\n",str->str);	
 #endif
 	gtk_notebook_set_menu_label_text(
 					GTK_NOTEBOOK(widgets.notebook_main),
-                                        cur_passage_tab->page_widget,
+                                        pt->page_widget,
                                             str->str );
-	main_add_tab_history_item((PASSAGE_TAB_INFO*)cur_passage_tab);
+	main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 	g_string_free(str,TRUE);
 }
 
