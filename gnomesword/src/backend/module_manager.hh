@@ -31,9 +31,9 @@
 #include <installmgr.h>
 #include <filemgr.h>
 
-#ifdef USE_SWORD_SVN
+//#ifdef USE_SWORD_SVN
 #include <ftptrans.h>
-#endif
+//#endif
 
 using namespace std;
 using namespace sword;
