@@ -32,7 +32,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-13 23:16-0500\n"
-"PO-Revision-Date: 2006-08-16 22:52+0200\n"
+"PO-Revision-Date: 2006-09-03 23:02+0200\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1228,7 +1228,7 @@ msgstr "Enregistre la session actuelle dans un fichier"
 
 #: ../src/gnome2/main_menu.c:625
 msgid "Copy highlighted text from main window"
-msgstr "Copie le texte mis en surbrillance dans la fenêtre principale"
+msgstr "Copie le texte biblique mis en surbrillance dans la fenêtre principale"
 
 #: ../src/gnome2/main_menu.c:631 ../src/gnome2/sidebar.c:1623
 msgid "Search"
@@ -1253,7 +1253,7 @@ msgstr "Gérer les modules"
 #: ../src/gnome2/main_menu.c:647
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
-"Installer ou supprimer des modules de textes du SWORD Project"
+"Installe ou supprime des modules de textes du SWORD Project"
 
 #: ../src/gnome2/main_menu.c:656
 msgid "C_lear"
@@ -1269,7 +1269,7 @@ msgstr "Méditation quotidienne"
 
 #: ../src/gnome2/main_menu.c:668
 msgid "Show the Daily Devotion for today"
-msgstr "Affiche la lecture quotidienne du jour"
+msgstr "Affiche la méditation du jour"
 
 #: ../src/gnome2/main_menu.c:683 ../ui/prefs.glade.h:19
 msgid "Bible Texts"
@@ -1360,7 +1360,7 @@ msgstr "Construction de l'interface de Gnomesword"
 
 #: ../src/gnome2/main_window.c:492
 msgid "GnomeSword - Bible Study Software"
-msgstr "GnomeSword - Logiciel d'étude de la Bible"
+msgstr "GnomeSword - Logiciel d'études bibliques"
 
 #: ../src/gnome2/main_window.c:546
 msgid "Open a new tab"
@@ -1384,12 +1384,11 @@ msgstr "Supprimer les modules suivants :"
 
 #: ../src/gnome2/mod_mgr.c:239
 msgid "Preparing to install"
-msgstr ""
+msgstr "Préparation à l'installation"
 
 #: ../src/gnome2/mod_mgr.c:242
-#, fuzzy
 msgid "Preparing to remove"
-msgstr "Prévisualisation"
+msgstr "Préparation à la suppression"
 
 #: ../src/gnome2/mod_mgr.c:265
 msgid "Installing: "
@@ -2142,21 +2141,19 @@ msgstr "Numéro de verset"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Sources des modules</b>"
+msgstr "<b>Gestion des sources de modules </b>"
 
 #: ../ui/module-manager.glade.h:2
-#, fuzzy
 msgid "<b>Install Destination</b>"
-msgstr "Répertoire de destination"
+msgstr "<b>Répertoire d\"installation</b>"
 
 #: ../ui/module-manager.glade.h:3
-#, fuzzy
 msgid "<b>Install Source</b>"
-msgstr "Support d'installation"
+msgstr "<b>Source des modules</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
-msgstr "<b>Gérer les modules</b>"
+msgstr "<b>Gestionnaire de modules</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
@@ -2164,27 +2161,26 @@ msgid "<b>Sword</b>"
 msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
-#, fuzzy
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
 msgstr ""
-"À utiliser avec prudence dans les pays où la lecture de la Sainte Bible "
-"présente des risques"
+"<b>Attention:</b> À utiliser avec prudence dans les pays à risques"
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Attention</b>Ne pas utiliser le support d'installation à distance dans les pays où cela "
-"peut représenter un danger"
+"<b>Attention</b> Ne pas utiliser le téléchargement "
+"dans les pays où cela peut représenter un danger "
+"d'être découvert"
 
 #: ../ui/module-manager.glade.h:9
 msgid "Current Remote Sources"
-msgstr "Sources à distance"
+msgstr "Téléchargement"
 
 #: ../ui/module-manager.glade.h:10
 msgid "Current local sources"
-msgstr "Sources locales"
+msgstr "Sources  locales"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Home dir"
@@ -2196,7 +2192,7 @@ msgstr "Installer"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Local"
-msgstr "Local"
+msgstr "Source  locale"
 
 #: ../ui/module-manager.glade.h:14
 #, fuzzy
@@ -2205,7 +2201,7 @@ msgstr "Installer les modules"
 
 #: ../ui/module-manager.glade.h:16
 msgid "Remote"
-msgstr "Distant"
+msgstr "Téléchargement"
 
 #: ../ui/module-manager.glade.h:17
 #, fuzzy
