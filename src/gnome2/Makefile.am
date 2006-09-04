@@ -60,14 +60,14 @@ gnomesword2_SOURCES =  \
     utilities.c
     
 gnomesword2_LDADD = \
+    $(top_builddir)/src/main/libmain.a \
+    $(top_builddir)/src/editor/libeditor.a \
+    $(top_builddir)/src/backend/libbackend.a \
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \
     $(MOZILLA_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
-    $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/editor/libeditor.a \
-    $(top_builddir)/src/backend/libbackend.a \
     $(SWORD_LIBS)
 
 EXTRA_DIST = \

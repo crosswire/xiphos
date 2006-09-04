@@ -99,7 +99,7 @@ void frontend_init(void)
 	/*
 	 * get and load books of the Bible 
 	 */
-	main_navbar_fill_book_combo(navbar_main);
+//	main_navbar_fill_book_combo(navbar_main);
 	/*
 	 *  setup sidebar
 	 */
