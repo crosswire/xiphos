@@ -28,9 +28,9 @@
 #include <versekey.h>
 #include <treekeyidx.h>
 
-#ifdef USE_SWORD_SVN
+//#ifdef USE_SWORD_SVN
 #include <swdisp.h>
-#endif
+//#endif
 
 #include "main/lists.h"
 

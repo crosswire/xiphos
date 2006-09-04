@@ -162,7 +162,6 @@ module.include.files=\
 module.source.name=.
 module.source.type=
 module.source.files=\
-	src/backend/sword.cpp\
 	src/main/main.c\
 	src/main/settings.c\
 	src/main/xml.c\
