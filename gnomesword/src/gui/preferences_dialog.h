@@ -34,7 +34,10 @@ void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data);
 void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data);
+	
 void on_folder_changed(GtkFileChooser  *filechooser, gpointer user_data);
+	
 void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data);
@@ -51,6 +54,14 @@ void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data);
 void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data);
 
 void on_colorbutton1_color_set(GtkColorButton *colorbutton, gpointer user_data);
+void on_colorbutton2_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton3_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton4_color_set(GtkColorButton * colorbutton, gpointer user_data);
+void on_colorbutton5_color_set(GtkColorButton * colorbutton, gpointer user_data);
+
+void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, gpointer user_data);
+
+
 void gui_setup_preferences_dialog(void);
 
 #ifdef __cplusplus

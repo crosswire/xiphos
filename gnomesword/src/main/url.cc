@@ -789,6 +789,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
+	//g_message("work_buf :%s, %s",work_buf[2],work_buf[KEY]);
 	if(!work_buf[2] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
@@ -807,12 +808,12 @@ static gint sword_uri(const gchar * url, gboolean clicked)
                              &bytes_written,
                              error);
 	
-	verse_count = backend->is_Bible_key(mykey, settings.currentverse);
-	if(!work_buf[3] && !verse_count){
+	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
+	/*if(!work_buf[3] && !verse_count){
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
 		return 0;
-	}
+	}*/
 	if(backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
