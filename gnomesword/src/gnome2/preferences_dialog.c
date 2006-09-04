@@ -50,7 +50,7 @@
 #include "main/parallel_view.h"
 #include "main/settings.h"
 #include "main/xml.h"
-
+//gtk_toggle_button_set_active
 typedef enum {
 	SHOW_BIBLE_TABS,
 	SHOW_COMMENTARY_TABS,
@@ -1476,9 +1476,10 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_verse_style),
 				     settings.versestyle);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+/*	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_pinned_tabs),
 				     settings.pinnedtabs);
+*/
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_bible_pane),
 				     settings.showtexts);
