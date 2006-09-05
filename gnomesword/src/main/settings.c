@@ -458,6 +458,14 @@ void load_settings_structure(void)
 		settings.pinnedtabs = 0;
 	}
 
+	buf = xml_get_value("misc", "readaloud");
+	if (buf)
+		settings.readaloud = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "readaloud", "0");
+		settings.readaloud = 0;
+	}
+
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 	
 		
