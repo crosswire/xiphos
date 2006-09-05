@@ -285,6 +285,30 @@ static void on_pinned_tabs_activate(GtkCheckMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_read_aloud_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_read_aloud_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toggle reading scripture out loud.
+ *
+ * Return value
+ *   void
+ */
+
+static void on_read_aloud_activate(GtkCheckMenuItem * menuitem,
+				    gpointer user_data)
+{
+	settings.readaloud = menuitem->active;
+	xml_set_value("GnomeSword", "misc", "readaloud",
+		      (settings.readaloud ? "1" : "0"));
+}
+
+/******************************************************************************
+ * Name
  *  on_exit_activate
  *
  * Synopsis
@@ -746,6 +770,12 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("R_ead Aloud"),
+	 NULL,
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
@@ -853,12 +883,16 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.viewdicts_item = view1_menu_uiinfo[5].widget;
 	widgets.versestyle_item = view1_menu_uiinfo[7].widget;
 	widgets.pinnedtabs_item = view1_menu_uiinfo[8].widget;
+	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.pinnedtabs_item),
 				       settings.pinnedtabs);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.readaloud_item),
+				       settings.readaloud);
 	
 	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
@@ -867,6 +901,10 @@ void gui_create_main_menu(GtkWidget * app)
 	g_signal_connect(GTK_OBJECT(widgets.pinnedtabs_item),
 			   "toggled",
 			   G_CALLBACK(on_pinned_tabs_activate),
+			   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.readaloud_item),
+			   "toggled",
+			   G_CALLBACK(on_read_aloud_activate),
 			   NULL);
 }
 

@@ -33,6 +33,10 @@
 #include <regex.h>
 #include <string.h>
 
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <errno.h>
+
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include <nsIDOMHTMLAnchorElement.h>
@@ -290,6 +294,111 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 	}
 }
 
+//
+// Read aloud some text, i.e. the current verse.
+// Text is cleaned of '"', <tokens>, and *n/*x strings, then
+// scribbled out the local static socket with (SayText "...").
+//
+void GTKChapDisp::ReadAloud(const char *SuppliedText)
+{
+	static int tts_socket = -1;	// no initial connection.
+	static int first_time = TRUE;	// to stop the first use.
+	gchar *text = NULL;
+
+	if (settings.readaloud) {
+		gchar *s, *t;
+
+		// setup for communication.
+		if (tts_socket < 0) {
+			struct sockaddr_in service;
+
+			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+				settings.readaloud = 0;
+				return;
+			}
+
+			// festival's port (1314) on localhost (127.0.0.1).
+			memset(&service, 0, sizeof service);
+			service.sin_port = htons(1314);
+			service.sin_family = AF_INET;
+			service.sin_addr.s_addr = htonl(0x7f000001);
+			if (connect(tts_socket, (const sockaddr *)&service,
+				    sizeof(service)) != 0) {
+				close(tts_socket);
+				tts_socket = -1;
+				settings.readaloud = 0;
+				return;
+			}
+		}
+
+		if (first_time) {
+			first_time = FALSE;
+			return;
+		}
+
+		text = g_strdup(SuppliedText);
+#ifdef DEBUG
+		g_message("ReadAloud: dirty: %s\n", text);
+#endif
+
+		// clean: no quotes (conflict w/festival syntax).
+		for (s = strchr(text, '"'); s; s = strchr(s, '"'))
+			*s = ' ';
+
+		// clean: no <tokens>.
+		for (s = strchr(text, '<'); s; s = strchr(s, '<')) {
+			if (t = strchr(s, '>')) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+#ifdef DEBUG
+				g_message("ReadAloud: Unmatched <> in %s\n", s);
+#endif
+				g_free(text);
+				return;
+			}
+		}
+
+		// clean: no note/xref strings.
+		for (s = strstr(text, "*n"); s; s = strstr(s, "*n")) {
+			*s     = ' ';
+			*(s+1) = ' ';
+		}
+		for (s = strstr(text, "*x"); s; s = strstr(s, "*x")) {
+			*s     = ' ';
+			*(s+1) = ' ';
+		}
+#ifdef DEBUG
+		g_message("ReadAloud: clean: %s\n", text);
+#endif
+
+		// scribble clean text to the socket.
+		if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
+		    (write(tts_socket, text, strlen(text)) < 0) ||
+		    (write(tts_socket, "\")\r\n", 4) < 0))
+		{
+			shutdown(tts_socket, SHUT_RDWR);
+			close(tts_socket);
+			tts_socket = -1;
+			settings.readaloud = 0;
+		}
+		g_free(text);
+		return;
+
+	} else {
+
+		// Reading aloud is disabled.
+		// If we had been reading, shut it down.
+		if (tts_socket >= 0) {
+			shutdown(tts_socket, SHUT_RDWR);
+			close(tts_socket);
+			tts_socket = -1;
+		}
+		first_time = FALSE;
+		return;
+	}
+}
+
 char GTKChapDisp::Display(SWModule &imodule) 
 {
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -408,6 +517,20 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		swbuf += (const char *)imodule;		
 		buf = g_strdup_printf("%s",(const char *)imodule);
+
+		// read scripture verbally, if configured.
+		if (key->Verse() == curVerse) {
+			// buffer needs to be pretty large: some
+			// marked-up verses are impressively long.
+			char speakbuf[5120];
+			char *str = g_strdup(imodule);
+
+			snprintf(speakbuf, sizeof(speakbuf),
+				 "%d. ...  %s", key->Verse(), str);
+			// use of ". ..." is to induce proper pauses.
+			g_free(str);
+			GTKChapDisp::ReadAloud(speakbuf);
+		}
 		
 		if (settings.versestyle) { 
 			if(g_strstr_len(buf,strlen(buf),"<!p>")) {
