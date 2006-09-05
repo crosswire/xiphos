@@ -303,7 +303,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 void GTKChapDisp::ReadAloud(const char *SuppliedText)
 {
 	static int tts_socket = -1;	// no initial connection.
-	static int first_time = TRUE;	// to stop the first use.
+	static int use_counter = -2;	// to shortcircuit early uses.
 	gchar *text = NULL;
 
 	if (settings.readaloud) {
@@ -360,10 +360,11 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 			}
 		}
 
-		if (first_time) {
-			first_time = FALSE;
+		// avoid speaking the first *2* times.
+		// (2 Display() calls are made during startup.)
+		// though speaking may be intended, startup speech is annoying.
+		if (++use_counter < 1)
 			return;
-		}
 
 		text = g_strdup(SuppliedText);
 #ifdef DEBUG
@@ -431,7 +432,7 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 			close(tts_socket);
 			tts_socket = -1;
 		}
-		first_time = FALSE;
+		use_counter++;
 		return;
 	}
 }
