@@ -730,6 +730,41 @@ GS_DIALOG *gui_new_dialog(void)
 
 /******************************************************************************
  * Name
+ *   gui_generic_warning
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   GS_DIALOG *gui_generic_warning(char *message)
+ *
+ * Description
+ *   Issues a generic warning dialog box, to keep user informed.
+ *
+ * Return value
+ *   void
+ */
+
+void gui_generic_warning(char *message)
+{
+	GS_DIALOG *dialog;
+	GString *dialog_text = g_string_new(NULL);
+
+	dialog = gui_new_dialog();
+	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
+	g_string_printf(dialog_text, "<span weight=\"bold\">%s</span>\n\n%s",
+			_("GnomeSword:"),
+			message);
+	dialog->label_top = dialog_text->str;
+	dialog->ok = TRUE;
+
+	gui_alert_dialog(dialog);
+	g_free(dialog);
+	g_string_free(dialog_text, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_gs_dialog
  *
  * Synopsis
@@ -796,12 +831,12 @@ gint gui_alert_dialog(GS_DIALOG * info)
 
 /******************************************************************************
  * Name
- *   gui_alert_dialog
+ *   gui_close_confirmation_dialog
  *
  * Synopsis
  *   #include "gui/dialog.h"
  *
- *   gint gui_alert_dialog(GS_DIALOG * info)
+ *   gint gui_close_confirmation_dialog(GS_DIALOG * info)
  *
  * Description
  *   
