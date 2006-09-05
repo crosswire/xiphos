@@ -56,6 +56,7 @@ extern "C" {
 
 #include "gui/utilities.h"
 #include "gui/widgets.h"
+#include "gui/dialog.h"
 
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
@@ -313,21 +314,49 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 			struct sockaddr_in service;
 
 			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+				char msg[128];
 				settings.readaloud = 0;
+				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+							       (widgets.readaloud_item),
+							       settings.readaloud);
+
+				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
+					sys_errlist[errno]);
+				gui_generic_warning(msg);
 				return;
 			}
 
 			// festival's port (1314) on localhost (127.0.0.1).
 			memset(&service, 0, sizeof service);
-			service.sin_port = htons(1314);
 			service.sin_family = AF_INET;
+			service.sin_port = htons(1314);
 			service.sin_addr.s_addr = htonl(0x7f000001);
 			if (connect(tts_socket, (const sockaddr *)&service,
 				    sizeof(service)) != 0) {
-				close(tts_socket);
-				tts_socket = -1;
-				settings.readaloud = 0;
-				return;
+				char msg[128];
+				sprintf(msg, "TTS unavailable: %s\nAttempting TTS restart",
+					sys_errlist[errno]);
+				gui_generic_warning(msg);
+				system("festival --server &");
+
+				// give it a moment to initialize, then re-try.
+				sleep(1);
+				if (connect(tts_socket, (const sockaddr *)&service,
+					    sizeof(service)) != 0) {
+					// it still didn't work -- missing.
+					close(tts_socket);
+					tts_socket = -1;
+					settings.readaloud = 0;
+					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+								       (widgets.readaloud_item),
+								       settings.readaloud);
+
+					sprintf(msg, "%s\n%s, %s",
+						"TTS \"festival\" not started (perhaps not installed)?",
+						"TTS connect failed", sys_errlist[errno]);
+					gui_generic_warning(msg);
+					return;
+				}
 			}
 		}
 
@@ -377,10 +406,18 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 		    (write(tts_socket, text, strlen(text)) < 0) ||
 		    (write(tts_socket, "\")\r\n", 4) < 0))
 		{
+			char msg[128];
 			shutdown(tts_socket, SHUT_RDWR);
 			close(tts_socket);
 			tts_socket = -1;
 			settings.readaloud = 0;
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+						       (widgets.readaloud_item),
+						       settings.readaloud);
+
+			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
+				sys_errlist[errno]);
+			gui_generic_warning(msg);
 		}
 		g_free(text);
 		return;
