@@ -59,6 +59,7 @@ typedef enum {
 	USE_DEFAULT_DICTIONARY,
 	USE_VERSE_STYLE,
 	USE_PINNED_TABS,
+	READ_ALOUD,
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
@@ -145,6 +146,7 @@ struct _preferences_check_buttons {
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_verse_style;
 	GtkWidget *use_pinned_tabs;
+	GtkWidget *readaloud;
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
@@ -658,6 +660,35 @@ void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.pinnedtabs_item),
 			       settings.pinnedtabs);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton11_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "readaloud",
+		      (togglebutton->active ? "1" : "0"));
+	settings.readaloud = atoi(xml_get_value("misc", "readaloud"));
+	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.readaloud_item),
+			       settings.readaloud);
 }
 
 
@@ -1476,10 +1507,6 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_verse_style),
 				     settings.versestyle);
-/*	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.use_pinned_tabs),
-				     settings.pinnedtabs);
-*/
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_bible_pane),
 				     settings.showtexts);
@@ -1681,6 +1708,8 @@ static void create_preferences_dialog(void)
 				glade_xml_get_widget(gxml, "checkbutton5");
 	check_button.use_pinned_tabs = 
 				glade_xml_get_widget(gxml, "checkbutton10");
+	check_button.readaloud = 
+				glade_xml_get_widget(gxml, "checkbutton11");
 	check_button.use_default_dictionary = 
 				glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = 
