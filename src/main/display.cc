@@ -297,14 +297,15 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 //
 // Read aloud some text, i.e. the current verse.
-// Text is cleaned of '"', <tokens>, and *n/*x strings, then
+// Text is cleaned of '"', <tokens>, "&symbols;", and *n/*x strings, then
 // scribbled out the local static socket with (SayText "...").
+// Non-zero verse param is prefixed onto supplied text.
 //
-void GTKChapDisp::ReadAloud(const char *SuppliedText)
+void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 	static int tts_socket = -1;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
-	gchar *text = NULL;
+	GString *text = g_string_new(NULL);
 
 	if (settings.readaloud) {
 		gchar *s, *t;
@@ -321,7 +322,7 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 							       settings.readaloud);
 
 				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
-					sys_errlist[errno]);
+					strerror(errno));
 				gui_generic_warning(msg);
 				return;
 			}
@@ -335,12 +336,10 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 				    sizeof(service)) != 0) {
 				char msg[128];
 				sprintf(msg, "TTS unavailable: %s\nAttempting TTS restart",
-					sys_errlist[errno]);
-				gui_generic_warning(msg);
+					strerror(errno));
 				system("festival --server &");
+				gui_generic_warning(msg);
 
-				// give it a moment to initialize, then re-try.
-				sleep(1);
 				if (connect(tts_socket, (const sockaddr *)&service,
 					    sizeof(service)) != 0) {
 					// it still didn't work -- missing.
@@ -352,8 +351,8 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 								       settings.readaloud);
 
 					sprintf(msg, "%s\n%s, %s",
-						"TTS \"festival\" not started (perhaps not installed)?",
-						"TTS connect failed", sys_errlist[errno]);
+						"TTS \"festival\" not started -- perhaps not installed",
+						"TTS connect failed", strerror(errno));
 					gui_generic_warning(msg);
 					return;
 				}
@@ -366,17 +365,21 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 		if (++use_counter < 1)
 			return;
 
-		text = g_strdup(SuppliedText);
+		if (verse != 0)
+			g_string_printf(text, "%d. ...  %s", verse, suppliedtext);
+			// use of ". ..." is to induce proper pauses.
+		else
+			g_string_printf(text, "%s", suppliedtext);
 #ifdef DEBUG
 		g_message("ReadAloud: dirty: %s\n", text);
 #endif
 
 		// clean: no quotes (conflict w/festival syntax).
-		for (s = strchr(text, '"'); s; s = strchr(s, '"'))
+		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
 			*s = ' ';
 
 		// clean: no <tokens>.
-		for (s = strchr(text, '<'); s; s = strchr(s, '<')) {
+		for (s = strchr(text->str, '<'); s; s = strchr(s, '<')) {
 			if (t = strchr(s, '>')) {
 				while (s <= t)
 					*(s++) = ' ';
@@ -384,19 +387,48 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 #ifdef DEBUG
 				g_message("ReadAloud: Unmatched <> in %s\n", s);
 #endif
-				g_free(text);
+				g_string_free(text, TRUE);
+				return;
+			}
+		}
+
+		// clean: no &lt;...&gt; sequences.  (Strong's ref, "<1234>".)
+		for (s = strstr(text->str, "&lt;"); s; s = strstr(s, "&lt;")) {
+			if (t = strstr(s, "&gt;")) {
+				t += 3;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+#ifdef DEBUG
+				g_message("ReadAloud: Unmatched &lt;&gt; in %s\n", s);
+#endif
+				g_string_free(text, TRUE);
+				return;
+			}
+		}
+		
+		// clean: no other &symbols;.
+		for (s = strchr(text->str, '&'); s; s = strchr(s, '&')) {
+			if (t = strchr(s, ';')) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+#ifdef DEBUG
+				g_message("ReadAloud: Incomplete &xxx; in %s\n", s);
+#endif
+				g_string_free(text, TRUE);
 				return;
 			}
 		}
 
 		// clean: no note/xref strings.
-		for (s = strstr(text, "*n"); s; s = strstr(s, "*n")) {
-			*s     = ' ';
-			*(s+1) = ' ';
+		for (s = strstr(text->str, "*n"); s; s = strstr(s, "*n")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
 		}
-		for (s = strstr(text, "*x"); s; s = strstr(s, "*x")) {
-			*s     = ' ';
-			*(s+1) = ' ';
+		for (s = strstr(text->str, "*x"); s; s = strstr(s, "*x")) {
+			*(s++) = ' ';
+			*(s++) = ' ';
 		}
 #ifdef DEBUG
 		g_message("ReadAloud: clean: %s\n", text);
@@ -404,7 +436,7 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 
 		// scribble clean text to the socket.
 		if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
-		    (write(tts_socket, text, strlen(text)) < 0) ||
+		    (write(tts_socket, text->str, strlen(text->str)) < 0) ||
 		    (write(tts_socket, "\")\r\n", 4) < 0))
 		{
 			char msg[128];
@@ -417,10 +449,10 @@ void GTKChapDisp::ReadAloud(const char *SuppliedText)
 						       settings.readaloud);
 
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
-				sys_errlist[errno]);
+				strerror(errno));
 			gui_generic_warning(msg);
 		}
-		g_free(text);
+		g_string_free(text, TRUE);
 		return;
 
 	} else {
@@ -556,19 +588,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf += (const char *)imodule;		
 		buf = g_strdup_printf("%s",(const char *)imodule);
 
-		// read scripture verbally, if configured.
-		if (key->Verse() == curVerse) {
-			// buffer needs to be pretty large: some
-			// marked-up verses are impressively long.
-			char speakbuf[5120];
-			char *str = g_strdup(imodule);
-
-			snprintf(speakbuf, sizeof(speakbuf),
-				 "%d. ...  %s", key->Verse(), str);
-			// use of ". ..." is to induce proper pauses.
-			g_free(str);
-			GTKChapDisp::ReadAloud(speakbuf);
-		}
+		if (key->Verse() == curVerse)
+			GTKChapDisp::ReadAloud(curVerse, imodule);
 		
 		if (settings.versestyle) { 
 			if(g_strstr_len(buf,strlen(buf),"<!p>")) {
