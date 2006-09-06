@@ -50,7 +50,7 @@ public:
 	virtual char Display(SWModule &imodule);
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
-	virtual void ReadAloud(const char *SuppliedText);
+	virtual void ReadAloud(unsigned int verse, const char *suppliedtext);
 	MOD_FONT *mf;
 	SWBuf swbuf;
 };
