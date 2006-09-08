@@ -305,7 +305,6 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 	static int tts_socket = -1;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
-	GString *text = g_string_new(NULL);
 
 	if (settings.readaloud) {
 		gchar *s, *t;
@@ -365,6 +364,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		if (++use_counter < 1)
 			return;
 
+		GString *text = g_string_new(NULL);
 		if (verse != 0)
 			g_string_printf(text, "%d. ...  %s", verse, suppliedtext);
 			// use of ". ..." is to induce proper pauses.
@@ -387,8 +387,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 #ifdef DEBUG
 				g_message("ReadAloud: Unmatched <> in %s\n", s);
 #endif
-				g_string_free(text, TRUE);
-				return;
+				goto out;
 			}
 		}
 
@@ -402,8 +401,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 #ifdef DEBUG
 				g_message("ReadAloud: Unmatched &lt;&gt; in %s\n", s);
 #endif
-				g_string_free(text, TRUE);
-				return;
+				goto out;
 			}
 		}
 		
@@ -416,8 +414,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 #ifdef DEBUG
 				g_message("ReadAloud: Incomplete &xxx; in %s\n", s);
 #endif
-				g_string_free(text, TRUE);
-				return;
+				goto out;
 			}
 		}
 
@@ -452,6 +449,8 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 				strerror(errno));
 			gui_generic_warning(msg);
 		}
+
+	out:
 		g_string_free(text, TRUE);
 		return;
 
