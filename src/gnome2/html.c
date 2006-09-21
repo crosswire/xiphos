@@ -310,6 +310,11 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 		gtk_html_select_word(html);	
 #ifdef USE_GTKHTML38		
 	key = gtk_html_get_selection_html (html, &len);
+	if ((key == NULL) || (*key == '\0'))
+	{
+	    gui_generic_warning("No selection provided\nSubstituting `Jesus'");
+	    key = ">Jesus<";
+	}
 	key = strchr(key,'>');
 	++key;
 	keylen = strlen(key);
