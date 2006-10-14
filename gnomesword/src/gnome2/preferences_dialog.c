@@ -1528,6 +1528,26 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_splash_screen),
 				     settings.showsplash);
+
+	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
+			 G_CALLBACK(on_checkbutton1_toggled), NULL);
+	g_signal_connect(check_button.use_verse_style, "toggled",
+			 G_CALLBACK(on_checkbutton5_toggled), NULL);
+	g_signal_connect(check_button.show_bible_pane, "toggled",
+			 G_CALLBACK(on_checkbutton2_toggled), NULL);
+	g_signal_connect(check_button.show_preview_pane, "toggled",
+			 G_CALLBACK(on_checkbutton9_toggled), NULL);
+	g_signal_connect(check_button.show_commentary_pane, "toggled",
+			 G_CALLBACK(on_checkbutton3_toggled), NULL);
+	g_signal_connect(check_button.show_dictionary_pane, "toggled",
+			 G_CALLBACK(on_checkbutton4_toggled), NULL);
+	g_signal_connect(check_button.use_default_dictionary, "toggled",
+			 G_CALLBACK(on_checkbutton6_toggled), NULL);
+	g_signal_connect(check_button.show_devotion, "toggled",
+			 G_CALLBACK(on_checkbutton7_toggled), NULL);
+	g_signal_connect(check_button.show_splash_screen, "toggled",
+			 G_CALLBACK(on_checkbutton8_toggled), NULL);
+	
 }
 
 
@@ -1642,6 +1662,36 @@ void setup_module_comboboxs(void)
 	glist = get_list(DICT_LIST);
 	if(glist) 
 		fill_combobox(glist,GTK_COMBO_BOX(combo.greek_lex__module), settings.lex_greek);
+
+	g_signal_connect(combo.text_module, "changed",
+			 G_CALLBACK(on_combobox2_changed), NULL);
+	g_signal_connect(combo.commentary_module, "changed",
+			 G_CALLBACK(on_combobox2_changed), NULL);
+	g_signal_connect(combo.dictionary_module, "changed",
+			 G_CALLBACK(on_combobox4_changed), NULL);
+	g_signal_connect(combo.default_dictionary_module, "changed",
+			 G_CALLBACK(on_combobox5_changed), NULL);
+	g_signal_connect(combo.percomm_module, "changed",
+			 G_CALLBACK(on_combobox6_changed), NULL);
+	g_signal_connect(combo.book_module, "changed",
+			 G_CALLBACK(on_combobox15_changed), NULL);
+	g_signal_connect(combo.parallel_1_module, "changed",
+			 G_CALLBACK(on_combobox7_changed), NULL);
+	g_signal_connect(combo.parallel_2_module, "changed",
+			 G_CALLBACK(on_combobox8_changed), NULL);
+	g_signal_connect(combo.parallel_3_module, "changed",
+			 G_CALLBACK(on_combobox9_changed), NULL);
+	g_signal_connect(combo.parallel_4_module, "changed",
+			 G_CALLBACK(on_combobox10_changed), NULL);
+	g_signal_connect(combo.parallel_5_module, "changed",
+			 G_CALLBACK(on_combobox11_changed), NULL);
+	g_signal_connect(combo.devotion_module, "changed",
+			 G_CALLBACK(on_combobox12_changed), NULL);
+	g_signal_connect(combo.hebrew_lex__module, "changed",
+			 G_CALLBACK(on_combobox13_changed), NULL);
+	g_signal_connect(combo.greek_lex__module, "changed",
+			 G_CALLBACK(on_combobox14_changed), NULL);
+
 }	
 
 
@@ -1686,41 +1736,48 @@ static void create_preferences_dialog(void)
 
 	/* lookup the root widget */
 	dialog_prefs = glade_xml_get_widget (gxml, "dialog_prefs");
+	g_signal_connect(dialog_prefs, "response",
+			 G_CALLBACK(on_dialog_prefs_response), NULL);
+/*	g_signal_connect(, "",
+			 G_CALLBACK(), NULL);
+*/
 	/* color pickers */
-	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");
+	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");	
+	g_signal_connect(color_picker.text_background, "color_set",
+			 G_CALLBACK(on_colorbutton1_color_set), NULL);	
 	color_picker.text = glade_xml_get_widget (gxml, "colorbutton2");
+	g_signal_connect(color_picker.text, "color_set",
+			 G_CALLBACK(on_colorbutton2_color_set), NULL);
 	color_picker.text_current_verse = glade_xml_get_widget (gxml, "colorbutton3");
+	g_signal_connect(color_picker.text_current_verse, "color_set",
+			 G_CALLBACK(on_colorbutton3_color_set), NULL);
 	color_picker.verse_numbers = glade_xml_get_widget (gxml, "colorbutton4");
+	g_signal_connect(color_picker.verse_numbers, "color_set",
+			 G_CALLBACK(on_colorbutton4_color_set), NULL);
 	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
+	g_signal_connect(color_picker.href_links, "color_set",
+			 G_CALLBACK(on_colorbutton5_color_set), NULL);
 	setup_color_pickers();
 	/* check buttons */
-	check_button.enable_tabbed_browsing = 
-				glade_xml_get_widget(gxml, "checkbutton1");
-	check_button.show_bible_pane = 
-				glade_xml_get_widget(gxml, "checkbutton2");
-	check_button.show_preview_pane = 
-				glade_xml_get_widget(gxml, "checkbutton9");
-	check_button.show_commentary_pane = 
-				glade_xml_get_widget(gxml, "checkbutton3");
-	check_button.show_dictionary_pane = 
-				glade_xml_get_widget(gxml, "checkbutton4");
-	check_button.use_verse_style = 
-				glade_xml_get_widget(gxml, "checkbutton5");
-	check_button.use_pinned_tabs = 
-				glade_xml_get_widget(gxml, "checkbutton10");
-	check_button.readaloud = 
-				glade_xml_get_widget(gxml, "checkbutton11");
-	check_button.use_default_dictionary = 
-				glade_xml_get_widget(gxml, "checkbutton6");
-	check_button.show_devotion = 
-				glade_xml_get_widget(gxml, "checkbutton7");
-	check_button.show_splash_screen = 
-				glade_xml_get_widget(gxml, "checkbutton8");
+	check_button.enable_tabbed_browsing = glade_xml_get_widget(gxml, "checkbutton1");
+	check_button.show_bible_pane = glade_xml_get_widget(gxml,"checkbutton2");
+	check_button.show_preview_pane = glade_xml_get_widget(gxml, "checkbutton9");
+	check_button.show_commentary_pane = glade_xml_get_widget(gxml, "checkbutton3");
+	check_button.show_dictionary_pane = glade_xml_get_widget(gxml, "checkbutton4");
+	check_button.use_verse_style = glade_xml_get_widget(gxml, "checkbutton5");
+	check_button.use_pinned_tabs = glade_xml_get_widget(gxml, "checkbutton10");
+	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
+	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
+	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
+	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
 	setup_check_buttons();
 	/* verse number size */
 	index = get_verse_number_size_index();
 	combo.verse_number_size = glade_xml_get_widget(gxml, "combobox1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.verse_number_size), index);
+	g_signal_connect(combo.verse_number_size, "changed",
+			 G_CALLBACK(on_combobox1_changed), NULL);
+
 	/* module combos */				
 	combo.text_module = glade_xml_get_widget (gxml, "combobox2");
 	combo.commentary_module = glade_xml_get_widget (gxml, "combobox3");
@@ -1741,6 +1798,10 @@ static void create_preferences_dialog(void)
 	chooser = glade_xml_get_widget (gxml, "filechooserbutton1");
 	gtk_file_chooser_set_current_folder((GtkFileChooser *)chooser,
                                              settings.studypaddir);
+	g_signal_connect(chooser, "current_folder_changed",
+			 G_CALLBACK(on_folder_changed), NULL);
+
+	
 	/* prefs notebook */
 	notebook = glade_xml_get_widget (gxml, "notebook");
 	/* setup treeview */
