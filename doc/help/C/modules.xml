@@ -6,16 +6,10 @@
   		<title>Introduction To The Module Manager</title>
 		<figure>
 			<title>The Module Manager Dialog</title>
-	        <screenshot>
-	        	<mediaobject>
-	         		<imageobject>
-		     	    	<imagedata fileref="figures/module" format="PNG"/>
-					</imageobject>
-		        	<textobject>
-			        	<phrase>The Module Manager Dialog</phrase>
-					</textobject>
-		        </mediaobject>
-			</screenshot>
+	        	<screenshot>
+	        	<screeninfo>The Module Manager  Dialog</screeninfo>
+                         <graphic fileref="figures/module.png" format="PNG" ></graphic>
+                        </screenshot>
 		</figure>
 	</sect1>
 	
@@ -27,15 +21,9 @@
 			<figure>
 				<title>Sword Module Installations</title>
 	        	<screenshot>
-		        	<mediaobject>
-	         			<imageobject>
-			     	    	<imagedata fileref="figures/sword_config" format="PNG"/>
-						</imageobject>
-		        		<textobject>
-				        	<phrase></phrase>
-						</textobject>
-		        	</mediaobject>
-				</screenshot>
+		        	<screeninfo>Module Installation</screeninfo>
+                        	 <graphic fileref="figures/sword_config.png" format="PNG" ></graphic>
+                        </screenshot>
 			</figure>
 		</sect2>
 		<sect2 id="sword-sources">
@@ -43,15 +31,9 @@
 			<figure>
 				<title>Sword Sources Settings</title>
 	        	<screenshot>
-		        	<mediaobject>
-	         			<imageobject>
-			     	    	<imagedata fileref="figures/sword_sources" format="PNG"/>
-						</imageobject>
-		        		<textobject>
-				        	<phrase></phrase>
-						</textobject>
-		        	</mediaobject>
-				</screenshot>
+		        	<screeninfo>Module Installation</screeninfo>
+                        	 <graphic fileref="figures/sword_sources.png" format="PNG" ></graphic>
+                        	</screenshot>
 			</figure>
 		</sect2>
 	</sect1>
@@ -64,15 +46,9 @@
 			<figure>
 				<title></title>
 	       		<screenshot>
-			       	<mediaobject>
-	        			<imageobject>
-		     	    		<imagedata fileref="figures/sword_add" format="PNG"/>
-						</imageobject>
-		       			<textobject>
-				        	<phrase></phrase>
-						</textobject>
-			       	</mediaobject>
-				</screenshot>
+			       	<screeninfo>Module Installation</screeninfo>
+                        	 <graphic fileref="figures/sword_config.png" format="PNG" ></graphic>
+                        </screenshot>
 			</figure>
 		</sect2>
 		<sect2 id="remove-module">
@@ -80,15 +56,9 @@
 			<figure>
 				<title></title>
 	       		<screenshot>
-			       	<mediaobject>
-	        			<imageobject>
-		     	    		<imagedata fileref="figures/sword_remove" format="PNG"/>
-						</imageobject>
-		       			<textobject>
-				        	<phrase></phrase>
-						</textobject>
-			       	</mediaobject>
-				</screenshot>
+			       	<screeninfo>Removing Modules</screeninfo>
+                        	 <graphic fileref="figures/sword_remove.png" format="PNG" ></graphic>
+                        	</screenshot>
 			</figure>
 		</sect2>
 	</sect1>

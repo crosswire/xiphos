@@ -22,11 +22,12 @@
 	whilst providing a powerful tool allowing a personalized Bible study environment.
 	</para>
 	<para>
-  		<figure id="anjuta-scrshot">
+  		<figure id="anjuta-screenshot">
    			<title>GnomeSword in action</title>
    			<screenshot>
    				<screeninfo>GnomeSword in action</screeninfo>
-   				<graphic format="PNG" fileref="figures/interface" ></graphic>
+   				<graphic 
+fileref="figures/interface.png" format="PNG"></graphic>
    			</screenshot>
 		</figure>
   	</para>
