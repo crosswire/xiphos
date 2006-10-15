@@ -12,17 +12,12 @@
 		<figure>
 			<title>The Studypad</title>
 			<screenshot>
-	 			<mediaobject>
-		    		<imageobject>
-						<imagedata fileref="figures/studypad" format="PNG"/>
-					</imageobject>
-			 		<textobject>
-		     			<phrase>The Studypad</phrase>
-					</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
-		   <para> The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes.</para>
+                        	<screeninfo>The Studypad</screeninfo>
+                                <graphic fileref="figures/studypad.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                                        
+		<para> The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes.</para>
 		<para> Toolbar 1</para>
 			        	<itemizedlist>
 			     		<listitem><para>Font Size and Environment</para></listitem>

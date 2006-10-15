@@ -11,11 +11,11 @@
    		example, the file operations have been grouped into 
    		the <guisubmenu>File</guisubmenu> menu.
    		</para>
-        <figure id="menubar">
+        <figure id="menubar_figure">
 			<title>Menubar</title>
 	  		<screenshot>
 	      		<screeninfo>GnomeSword menubar</screeninfo>
-    	   		<graphic fileref="figures/interface_menubar" format="PNG" ></graphic>
+    	   		<graphic fileref="figures/interface_menubar.png" format="PNG" ></graphic>
 	      	</screenshot>
     	</figure>
 	</sect1>
@@ -29,17 +29,13 @@
 		desired toolbar button and selecting it. A tooltip will appear if the mouse cursor 
 		is held stationary over a toolbar button, describing the function of the button. 
     	</para>
-		<figure id="toolbar">
+		<figure id="toolbar_figure">
 			<title>ToolBar</title>
 			<screenshot>
-      				<mediaobject>
-						<imageobject>
-	    					<imagedata fileref="figures/interface_toolbar" format="PNG"/>
-						</imageobject>
-						<textobject>
-				        	<phrase>The Toolbar </phrase>
-						</textobject>
-			       </mediaobject>
+			<screeninfo>The Toolbar</screeninfo>
+			<graphic fileref="figures/interface_toolbar.png"
+format="PNG"/>
+						
 			</screenshot>
 		</figure>			
 		<para>
@@ -129,52 +125,37 @@
 <!-- ============= Sidepane  ============-->  
 	<sect1 id="gnomesword-sidepane">
    	 	<title>The Sidebar</title>
-		<figure>
-			<title>The Sidebar</title>
-   		  	<screenshot>
-			   	<mediaobject>
-					<imageobject>
-         				<imagedata fileref="figures/interface_sidepane" format="PNG"/>
-					</imageobject>
-	 				<textobject>
-						<phrase>The Sidebar</phrase>
-					</textobject>
-				</mediaobject>
-     		</screenshot>
-		</figure>
+		<figure id="sidepane_figure">
+			<title>Sidepane</title>
+	  		<screenshot>
+	      			<screeninfo>The Sidepane</screeninfo>
+    	   			<graphic fileref="figures/interface_sidepane.png" format="PNG" ></graphic>
+		      	</screenshot>
+	    	</figure>
 		<para>
 	     	On the left hand side of <application>GnomeSword2</application> there is the Side Pane. Here the
 	     	user can quickly and easily switch between the different Sword modules, view your bookmarks, do simple searches and view verse lists.
 		To switch between all Side Pane functions, shortcuts have been placed at the bottom of the Side Pane to allow easy access to them.Simply 
 		clicking on the shortcut activates the option.
 		</para>
-		<figure>
-			<title>Side Pane Shortcuts</title>
-			<screenshot>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="figures/interface_shortcut" format="PNG"/>
-					</imageobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+		<figure id="shortcut_figure">
+			<title>Sidepane Shortcuts</title>
+	  		<screenshot>
+	      		<screeninfo>Sidepane shortcuts</screeninfo>
+    	   		<graphic fileref="figures/interface_shortcut.png" format="PNG" ></graphic>
+	      	</screenshot>
+    	</figure>
 	</sect1>
 <!-- ============= Bible Text Pane  ============--> 
 	<sect1 id="gnomesword-bible">
    		<title>The Bible Text Pane</title>
-  		<figure>
-   			<title>The Bible Text Pane</title>
-   			<screenshot>
-       			<mediaobject>
-					<imageobject>
-          				<imagedata fileref="figures/interface_biblepane" format="PNG"/>
- 					</imageobject>
-					<textobject>
-   						<phrase>The Bible Text Pane</phrase>
-	 				</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+  		<figure id="textpane_figure">
+			<title>The Bible Textpane</title>
+	  		<screenshot>
+	      		<screeninfo>The Bible textpane</screeninfo>
+    	   		<graphic fileref="figures/interface_biblepane.png" format="PNG" ></graphic>
+	      	</screenshot>
+    	</figure>
 		<para>
 		Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
 		will be displayed for full viewing. When starting <application>GnomeSword2</application> either your default Bible translation or the translation
@@ -214,19 +195,13 @@
 			that modules that are Old Testament or New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text ) will not be able
 			to display books, chapters or verses that they don't have.  
 			</para>
-			<figure>
-   			<title>The Bible Text Pane</title>
-   			<screenshot>
-       			<mediaobject>
-					<imageobject>
-          				<imagedata fileref="figures/interface_parallel" format="PNG"/>
- 					</imageobject>
-					<textobject>
-   						<phrase>The Bible Text Pane</phrase>
-	 				</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+<figure id="parallel_figure">
+			<title>The Bible textpane</title>
+	  		<screenshot>
+	      		<screeninfo>The Bible textpane</screeninfo>
+    	   		<graphic fileref="figures/interface_parallel.png" format="PNG" ></graphic>
+	      	</screenshot>
+    	</figure>
 		</sect2>
 		
 		<sect2 id="gnomesword-bible-open-seperate">
@@ -349,18 +324,13 @@
 <!-- ============= Viewer Pane	================ -->
 	<sect1 id="gnomesword-viewer">
 		<title>Viewer Pane</title>
-	<figure>
-   			<title>The Viewer Pane</title>
-   			<screenshot>
-       			<mediaobject>
-					<imageobject>
-          				<imagedata fileref="figures/interface_viewer" format="PNG"/>
-	 				</imageobject>
-					<textobject>
-         				</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+	<figure id="viewer_figure">
+			<title>Viewer Panel</title>
+	  		<screenshot>
+	      		<screeninfo>Viewer Panel</screeninfo>
+    	   		<graphic fileref="figures/interface_viewer.png" format="PNG" ></graphic>
+	      	</screenshot>
+    	</figure>
 		<para>
 		The Viewer Pane allows the user to view strong numbers, morphological tags, footnotes and cross-references that the <interface>Bible Text
 		Pane</interface> provides. 
@@ -369,19 +339,13 @@
 <!-- ============= Commentary Pane  ============--> 
 	<sect1 id="gnomesword-commentaries">
    		<title>The Commentary Pane</title>
-  		<figure>
-   			<title>The Commentary Pane</title>
-   			<screenshot>
-       			<mediaobject>
-					<imageobject>
-          				<imagedata fileref="figures/interface_commentarypane" format="PNG"/>
-	 				</imageobject>
-					<textobject>
-         				<phrase>The Commentary Pane</phrase>
-	 				</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+		<figure id="commentary_figure">
+			<title>The Commentary Pane</title>
+	  		<screenshot>
+	      			<screeninfo>Commentary Pane</screeninfo>
+    	   			<graphic fileref="figures/interface_commentarypane.png" format="PNG" ></graphic>
+	      		</screenshot>
+    		</figure>
 		<para>
 		The <interface>Commentary pane</interface> is where the commentary modules are displayed. This provides easy
 		reading, reference and  access to different commentaries currently installed. The passage viewed by the 
@@ -434,18 +398,12 @@
 
 	<sect1 id="gnomesword-dictionary">
 		<title>Dictionary Pane</title>
-		<figure>
-   			<title>The Dictionary Pane</title>
-   			<screenshot>
-       			<mediaobject>
-					<imageobject>
-          				<imagedata fileref="figures/interface_dictionary" format="PNG"/>
-	 				</imageobject>
-					<textobject>
-         				<phrase>The Commentary Pane</phrase>
-	 				</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
+		<figure id="dict_figure">
+			<title>The Dictionary Pane</title>
+	  		<screenshot>
+	      			<screeninfo>The Dictionary Pane</screeninfo>
+    	   			<graphic fileref="figures/interface_dictionary.png" format="PNG" ></graphic>
+	      		</screenshot>
+    		</figure>
 	</sect1>
 </chapter>

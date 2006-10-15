@@ -47,17 +47,11 @@
 		<figure id="gnomesword-start-interface">
 			<title>GnomeSword interface</title>
 			<screenshot>
-				<mediaobject>
-			 		<imageobject>
-						<imagedata fileref="figures/interface" format="PNG"/>
-					</imageobject>
-					<textobject>
-        				<phrase>GnomeSword window</phrase>
-					</textobject>
-				</mediaobject>
-			</screenshot>
-		</figure>
-		<para>
+                        	<screeninfo>The Gnomesword Interface</screeninfo>
+                                <graphic fileref="figures/interface.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                <para>
 		The <application>GnomeSword</application> interface contains the following elements:
 		</para>
 		<variablelist>
