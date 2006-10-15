@@ -6,19 +6,13 @@
 		<para> To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. 	Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it.</para> 
 	
 		<figure>
-		<title>The Search Bar</title>
-		<screenshot>
-	 	       <mediaobject>
-		      		<imageobject>
-				        <imagedata fileref="figures/interface_searchpane" format="PNG"/>
-				</imageobject>
-			 	<textobject>
-		     			<phrase>The Search Bar</phrase>
-				</textobject>
-		       </mediaobject>
-		 </screenshot>
-	    </figure>
-	   <para>
+		<title>the Search Bar</title>
+                       <screenshot>
+                       		<screeninfo>The Search Bar</screeninfo>
+                       		<graphic fileref="figures/interface_searchpane.png" format="PNG" ></graphic>
+                       </screenshot>
+                </figure>
+              <para>
 		The <interface>Search Dialog</interface> consists of the following parts:
 		</para>
 			<itemizedlist>
@@ -84,8 +78,8 @@
 					as a search key. A regular expression is a pattern used 
 					to match a string of text. A regular expression can be 
 					used to find verses with words that match a particular 
-					pattern. For example the regular expression <example>
-					\ A[a-z]*iah </example> will match verses that contain
+					pattern. For example the regular expression
+					<userinput>\ A[a-z]*iah </userinput> will match verses that contain
 					the words Aiah, Ahaziah, Athaliah and Amariah.</para>
 					<para>A complete discussion of regular expressions is 
 					beyond the scope of this manual, but more information 
@@ -154,22 +148,15 @@
 	   <para> More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem></para>
 
 	 
-	     <figure>
-		<title>The Advanced Search Dialogue</title>
-		<screenshot>
-	 	       <mediaobject>
-		      		<imageobject>
-				        <imagedata fileref="figures/search_search" format="PNG"/>
-				</imageobject>
-			 	<textobject>
-		     			<phrase>The Advanced Search Dialogue</phrase>
-				</textobject>
-		       </mediaobject>
-		 </screenshot>
-	   </figure>
-	   
-	 
-	   <warning>
+	  <figure>
+	  <title>The Advanced Search Dialogue</title>
+	  <screenshot>
+		<screeninfo>The Advanced Search  Dialog</screeninfo>
+                <graphic fileref="figures/search_search.png" format="PNG" ></graphic>
+          </screenshot>
+          </figure>
+           
+	 <warning>
 	   	<para>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
 		</para>
@@ -227,7 +214,7 @@ an ordinary period.
 </itemizedlist>
 
 <sect3 id="period">
-<title>The Period .</title>
+<title>The Period</title>
 
 <para>The Period &quot;.&quot; will match any single character even
 a space or other non-alphabet character.
@@ -243,9 +230,9 @@ foot.tool </emphasis>matches <emphasis>foot</emphasis>s<emphasis>tool </emphasis
 
 
 <sect3 id="asterisk">
-<title>The Asterisk *</title>
+<title>The Asterisk</title>
 
-<para>The asterisk matches zero or more characters of the preceding:
+<para>The asterisk &quot;*&quot; matches zero or more characters of the preceding:
 set, character or indicated character. Using
 a period asterisk combination &quot;.*&quot; after a commonly
 found pattern can cause the search to take a very long time,
@@ -257,8 +244,8 @@ and She<emphasis>bn</emphasis>a.</para>
 
 
 <sect3 id="plus">
-<title>The Plus Sign +</title>
-<para>The Plus Sign matches one or more characters of the preceding:
+<title>The Plus Sign</title>
+<para>The Plus Sign &quot;+&quot; matches one or more characters of the preceding:
 set, character or indicated character. Using
 a period and plus sign combination &quot;.+&quot; after a
 commonly found pattern can cause the search to take a very long
@@ -269,8 +256,8 @@ but not <emphasis>bn</emphasis>.</para>
 
 
 <sect3 id="question">
-<title>The Question Mark ?</title>
-<para>The Question Mark matches zero or one character of the
+<title>The Question Mark</title>
+<para>The Question Mark &quot;?&quot;matches zero or one character of the
 preceding: set, character or indicated character.
 <emphasis>be?n</emphasis> matches <emphasis>ben</emphasis> and <emphasis>bn</emphasis>
 but not <emphasis>been</emphasis>.
@@ -279,8 +266,8 @@ but not <emphasis>been</emphasis>.
 
 
 <sect3 id="bracket">
-<title>The Square Brackets [ ]</title>
-<para>The Square Brackets enclose a set of characters that can
+<title>The Square Brackets </title>
+<para>The Square Brackets &quot;[]&quot; enclose a set of characters that can
 match. The period, asterisk, plus sign and question mark are not
 special inside the brackets. A minus sign can be used to indicate
 a range. If you want a caret &quot;^&quot; to be part of the
@@ -302,16 +289,16 @@ seet, siet</emphasis>, etc.
 
 
 <sect3 id="caret">
-<title>The Caret first in Square Brackets [^xxx</title>
-<para>If the Caret is the first character after the left bracket it
+<title>The Caret first in Square Brackets </title>
+<para>If the Caret is the first character after the left bracket (&quot;[^&quot;) it
 means NOT.
 <emphasis>s[^io]t</emphasis> matches <emphasis>set, sat</emphasis>, etc.,
 but not <emphasis>s</emphasis>i<emphasis>t</emphasis> and <emphasis>s</emphasis>o<emphasis>t</emphasis>.</para>
 </sect3>
 
 <sect3 id="caret-s">
-<title>The Caret as Start of Line Anchor ^xxx</title>
-<para>If the Caret is the first character in a pattern it anchors
+<title>The Caret as Start of Line Anchor </title>
+<para>If the Caret is the first character in a pattern (&quot;^xxx&quot;) it anchors
 the pattern to the start of a line. Any match must be at the
 beginning of a line. Because of unfiltered
 formatting characters in some texts, this feature does not always
@@ -324,8 +311,8 @@ start with &quot;<emphasis>In the beginning</emphasis>&quot;.
 
 
 <sect3 id="dollar">
-<title>The Dollar Sign as End of Line Anchor xxx$</title>
-<para>If the Dollar Sign is the last character in a pattern it
+<title>The Dollar Sign as End of Line Anchor </title>
+<para>If the Dollar Sign is the last character (&quot;xxx$&quot;) in a pattern it
 anchors the pattern to the end of a line. Any match must be at
 the end of a line. Because of unfiltered
 formatting characters in some texts, this feature does not always
@@ -339,8 +326,8 @@ Amen\....................$)</para>
 
 
 <sect3 id="bar">
-<title>The Vertical Bar |</title>
-<para>The Vertical Bar between patterns means OR.
+<title>The Vertical Bar </title>
+<para>The Vertical Bar &quot;|&quot; between patterns means OR.
 <emphasis>John|Peter</emphasis> matches <emphasis>John</emphasis> or <emphasis>Peter.
 John .*Peter|Peter .*John</emphasis> matches <emphasis>John</emphasis>
 ... <emphasis>Peter</emphasis> or <emphasis>Peter</emphasis> ... <emphasis>John</emphasis>.
@@ -351,15 +338,15 @@ or <emphasis>suffering</emphasis>, or <emphasis>sorrow</emphasis>.</para>
 
 
 <sect3 id="parenth">
-<title>The Parentheses ( ) </title>
-<para><emphasis>The use of Parentheses ( ) is
+<title>The Parentheses</title>
+<para><emphasis>The use of Parentheses &quot;( )&quot; is
 not supported!</emphasis></para>
 </sect3>
 
 
 <sect3 id="backslash">
-<title>The Backslash Prior to a Special Character \*</title>
-<para>The Backslash prior to a special character indicates that the
+<title>The Backslash Prior to a Special Character</title>
+<para>The Backslash prior to a special character (&quot;\*&quot;) indicates that the
 character is not being used in its special meaning, but is just
 to match itself.
 <emphasis>amen\.</emphasis> matches <emphasis>amen.</emphasis> but not <emphasis>amen</emphasis>t
@@ -367,9 +354,9 @@ and will not locate firm<emphasis>amen</emphasis>t.</para>
 </sect3>
 
 <sect3 id="backslash-o">
-<title>The Backslash Prior to an Ordinary Character \s</title>
+<title>The Backslash Prior to an Ordinary Character </title>
 
-<para>The Backslash prior to an ordinary character indicates that
+<para>The Backslash prior to an ordinary character (&quot;\o&quot;) indicates that
 the character is not being used to match itself, but has special
 meaning.</para>
 

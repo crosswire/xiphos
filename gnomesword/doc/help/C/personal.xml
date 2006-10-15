@@ -1,4 +1,4 @@
- <!-- Personal Commentary-->
+<!-- Personal Commentary-->
 <chapter id="personal" lang="en">
 	<title>The Personal Commentary </title>
 				<para> To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. 
@@ -8,14 +8,8 @@
 				<figure>
     				<title>The Personal Commentary Editor </title>
      				<screenshot>
-      					<mediaobject>
-						<imageobject>
-	      						<imagedata fileref="figures/personal" format="PNG"/>
-						</imageobject>
-						<textobject>
-					        	<phrase>Personal Commentary Editor </phrase>
-						</textobject>
-				       </mediaobject>
+      			        	<screeninfo>The Personal Commentary</screeninfo>
+                                <graphic fileref="figures/personal.png" format="PNG" ></graphic>
 			        </screenshot>
 			        </figure>
 			        <para> Locationbar</para>
