@@ -7,18 +7,12 @@
   		<title>Introduction To Preferences</title>
 		<figure>
 			<title>The Preference Dialog</title>
-	        <screenshot>
-	        	<mediaobject>
-	         		<imageobject>
-		     	    	<imagedata fileref="figures/preferences" format="PNG"/>
-					</imageobject>
-		        	<textobject>
-			        	<phrase>The Preference Dialog</phrase>
-					</textobject>
-		        </mediaobject>
-		 	</screenshot>
-		</figure>
-	</sect1>
+	        	<screenshot>
+	        		<screeninfo>The Preferenmces Dialog</screeninfo>
+                                <graphic fileref="figures/preferences.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                </sect1>
 	
 <!-- Fonts And Colors -->
 	<sect1 id="fonts-and-colors">
@@ -26,35 +20,23 @@
 		<sect2 id="font-color">
 			<title>Setting Font Colors</title>
 			<figure>
-	        	<title>Fonts Colors</title>
-     			<screenshot>
-		       		<mediaobject>
-			       		<imageobject>
-			 	       		<imagedata fileref="figures/preferences_fonts-color" format="PNG"/>
-			        	</imageobject>
-		         		<textobject>
-		     	 	    	<phrase>Font Colors Settings</phrase>
-			        	</textobject>
-				    </mediaobject>
-				</screenshot>
-			</figure>
-		</sect2>
+			<title>Font Colour Settings</title>
+	        	<screenshot>
+	        		<screeninfo>Font Colour Settings</screeninfo>
+                                <graphic fileref="figures/preferences_fonts-color.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                </sect2>
 		
 		<sect2 id="font-misc">
 			<title>Miscellaneous Font Settings</title>
 			<figure>
-	        	<title>Misc Font Settings</title>
-     			<screenshot>
-			    	<mediaobject>
-		       			<imageobject>
-				 	    	<imagedata fileref="figures/preferences_fonts-misc" format="PNG"/>
-			        	</imageobject>
-		         		<textobject>
-			     	 		<phrase>Misc Font Settings</phrase>
-			        	</textobject>
-		        	</mediaobject>
-				</screenshot>
-			</figure>
+			<title>Miscellaneous Font Settings</title>
+	        	<screenshot>
+	        		<screeninfo>Miscellaneous Font Settings</screeninfo>
+                                <graphic fileref="figures/preferences_fonts-misc.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
 		</sect2>
 	</sect1>
 	
@@ -63,20 +45,14 @@
 		<title>General Settings</title>
 		<sect2 id="tab-pane">
 			<title>Tabs and Pane Settings</title>
-			<figure>
-	        	<title>Tab and Pane Settings</title>
-	   			<screenshot>
-			    	<mediaobject>
-		       			<imageobject>
-				 	    	<imagedata fileref="figures/preferences_general-tabs" format="PNG"/>
-			        	</imageobject>	
-			         	<textobject>
-		     	 			<phrase>Tab and Pane Settings</phrase>
-			        	</textobject>
-		       		</mediaobject>
-		 		</screenshot>
-			</figure>
-		</sect2>
+		<figure>
+			<title>Tab and Pane Settings</title>
+	        	<screenshot>
+	        		<screeninfo>Tab and Pane Settings</screeninfo>
+                                <graphic fileref="figures/preferences_general-tabs.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                </sect2>
 	</sect1>
 	
 <!-- Module Settings -->
@@ -84,45 +60,27 @@
 		<title>Module Settings</title>
 		<sect2 id="main-modules">
 			<title>Main Module Settings</title>
-			<figure>
-	        	<title></title>
-    			<screenshot>
-			    	<mediaobject>
-		       			<imageobject>
-			 	       		<imagedata fileref="figures/preferences_modules-main" format="PNG"/>
-			        	</imageobject>
-		         		<textobject>
-		     	 	    	<phrase></phrase>
-			        	</textobject>
-		       		</mediaobject>
-		 		</screenshot>
-			</figure>
-			<figure>
-	        	<title></title>
-    			<screenshot>
-			    	<mediaobject>
-		       			<imageobject>
-			 	       		<imagedata fileref="figures/preferences_modules-parallel" format="PNG"/>
-			        	</imageobject>
-		         		<textobject>
-		     	 	    	<phrase></phrase>
-			        	</textobject>
-		       		</mediaobject>
-		 		</screenshot>
-			</figure>
-			<figure>
-	        	<title></title>
-    			<screenshot>
-			    	<mediaobject>
-		       			<imageobject>
-			 	       		<imagedata fileref="figures/preferences_modules-misc" format="PNG"/>
-			        	</imageobject>
-		         		<textobject>
-		     	 	    	<phrase></phrase>
-			        	</textobject>
-		       		</mediaobject>
-		 		</screenshot>
-			</figure>
-		</sect2>
+		<figure>
+			<title>The Module Preferences Dialog</title>
+	        	<screenshot>
+	        		<screeninfo>The Module Preferences Dialog</screeninfo>
+                                <graphic fileref="figures/preferences_modules-main.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+		<figure>
+			<title>Parallel Preferences</title>
+	        	<screenshot>
+	        		<screeninfo>Parallel Preferences</screeninfo>
+                                <graphic fileref="figures/preferences_modules-parallel.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                <figure>
+			<title>Various preferences Modules </title>
+	        	<screenshot>
+	        		<screeninfo>Various Preferences Modules</screeninfo>
+                                <graphic fileref="figures/preferences_modules-misc.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+          	</sect2>
 	</sect1>
 </chapter>
