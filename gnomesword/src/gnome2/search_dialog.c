@@ -1818,7 +1818,19 @@ void _create_search_dialog(void)
 	gchar *glade_file;
 	GladeXML *gxml;
 	GladeXML *gxml2;
-
+	GtkWidget *button1;
+	GtkWidget *toolbutton1;
+	GtkWidget *toolbutton2;
+	GtkWidget *toolbutton3;
+	GtkWidget *toolbutton4;
+	GtkWidget *toolbutton5;
+	GtkWidget *toolbutton6;
+	GtkWidget *toolbutton7;
+	GtkWidget *toolbutton8;
+	GtkWidget *toolbutton10;
+	GtkWidget *toolbutton11;
+	GtkWidget *toolbutton12;
+	
 	_preview_on = TRUE;
 
 	glade_file =
@@ -1828,6 +1840,7 @@ void _create_search_dialog(void)
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
+	
 
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
@@ -1839,11 +1852,27 @@ void _create_search_dialog(void)
 	g_free(glade_file);
 	g_return_if_fail(gxml != NULL);
 
+/*	g_signal_connect(search1., "",
+			 G_CALLBACK(), NULL);
+*/
+
 	/* lookup the root widget */
 	search1.dialog = glade_xml_get_widget(gxml, "dialog");
+	g_signal_connect(search1.dialog, "response",
+			 G_CALLBACK(_on_dialog_response), NULL);
+	g_signal_connect(search1.dialog, "destroy",
+			 G_CALLBACK(_on_destroy), NULL);
+			 
+	button1 = glade_xml_get_widget(gxml, "button1");	
+	g_signal_connect(button1, "clicked",
+			 G_CALLBACK(on_button_begin_search), NULL);	
+			 
 	search1.label_search_module =
 	    glade_xml_get_widget(gxml, "label5");
 	search1.search_entry = glade_xml_get_widget(gxml, "entry1");
+	g_signal_connect(search1.search_entry, "activate",
+			 G_CALLBACK(on_button_begin_search), NULL);	
+	
 	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
 
 	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
@@ -1865,19 +1894,24 @@ void _create_search_dialog(void)
 	    glade_xml_get_widget(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
 
-	search1.rb_no_scope =
-	    glade_xml_get_widget(gxml, "radiobutton1");
+	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
+	g_signal_connect(search1.rb_no_scope, "toggled",
+			 G_CALLBACK(scope_toggled), NULL);		    
 	search1.rb_last = glade_xml_get_widget(gxml, "radiobutton2");
 	search1.which_scope = GTK_TOGGLE_BUTTON(search1.rb_no_scope);
-	search1.rb_custom_range =
-	    glade_xml_get_widget(gxml, "radiobutton3");
+	search1.rb_custom_range = glade_xml_get_widget(gxml, "radiobutton3");
+	g_signal_connect(search1.rb_custom_range, "toggled",
+			 G_CALLBACK(scope_toggled), NULL);	    
 	/* modules radio buttons */
-	search1.rb_current_module =
-	    glade_xml_get_widget(gxml, "radiobutton4");
-	search1.rb_mod_list =
-	    glade_xml_get_widget(gxml, "radiobutton5");
-	search1.rb_custom_list =
-	    glade_xml_get_widget(gxml, "radiobutton6");
+	search1.rb_current_module = glade_xml_get_widget(gxml, "radiobutton4");
+	g_signal_connect(search1.rb_current_module, "toggled",
+			 G_CALLBACK(current_module_toggled), NULL);	
+	search1.rb_mod_list = glade_xml_get_widget(gxml, "radiobutton5");
+	g_signal_connect(search1.rb_mod_list, "toggled",
+			 G_CALLBACK(mod_list_toggled), NULL);	
+	search1.rb_custom_list = glade_xml_get_widget(gxml, "radiobutton6");
+	g_signal_connect(search1.rb_custom_list, "toggled",
+			 G_CALLBACK(mod_list_toggled), NULL);	
 	/*  */
 	search1.rb_words = glade_xml_get_widget(gxml, "radiobutton9");
 	search1.rb_regexp = glade_xml_get_widget(gxml, "radiobutton10");
@@ -1894,22 +1928,75 @@ void _create_search_dialog(void)
 	    glade_xml_get_widget(gxml, "checkbutton3");
 	search1.cb_include_footnotes =
 	    glade_xml_get_widget(gxml, "checkbutton4");
-
+	    
+	toolbutton1 = glade_xml_get_widget(gxml, "toolbutton1");
+	g_signal_connect(toolbutton1, "clicked",
+			 G_CALLBACK(button_save), NULL);
+	    
+	toolbutton2 = glade_xml_get_widget(gxml, "toolbutton2");
+	g_signal_connect(toolbutton2, "clicked",
+			 G_CALLBACK(button_clean), NULL);
+	    
+	toolbutton3 = glade_xml_get_widget(gxml, "toolbutton3");
+	g_signal_connect(toolbutton3, "clicked",
+			 G_CALLBACK(new_range), NULL);
+	    
+	toolbutton4 = glade_xml_get_widget(gxml, "toolbutton4");
+	g_signal_connect(toolbutton4, "clicked",
+			 G_CALLBACK(save_range), NULL);
+	    
+	toolbutton5 = glade_xml_get_widget(gxml, "toolbutton5");
+	g_signal_connect(toolbutton5, "clicked",
+			 G_CALLBACK(delete_range), NULL);
+	    
+	toolbutton6 = glade_xml_get_widget(gxml, "toolbutton6");
+	g_signal_connect(toolbutton6, "clicked",
+			 G_CALLBACK(new_modlist), NULL);
+	    
+	toolbutton7 = glade_xml_get_widget(gxml, "toolbutton7");
+	g_signal_connect(toolbutton7, "clicked",
+			 G_CALLBACK(save_modlist), NULL);
+	    
+	toolbutton8 = glade_xml_get_widget(gxml, "toolbutton8");
+	g_signal_connect(toolbutton8, "clicked",
+			 G_CALLBACK(delete_list), NULL);
+	    
+	toolbutton10 = glade_xml_get_widget(gxml, "toolbutton10");
+	g_signal_connect(toolbutton10, "clicked",
+			 G_CALLBACK(clear_modules), NULL);
+	    
+	toolbutton11 = glade_xml_get_widget(gxml, "toolbutton11");
+	g_signal_connect(toolbutton11, "clicked",
+			 G_CALLBACK(delete_module), NULL);
+	    
+	toolbutton12 = glade_xml_get_widget(gxml, "toolbutton12");
+	g_signal_connect(toolbutton12, "clicked",
+			 G_CALLBACK(on_toolbutton12_clicked), NULL);
+			 
 	search1.togglebutton_show_main =
 	    glade_xml_get_widget(gxml, "toggletoolbutton1");
-
+	g_signal_connect(search1.togglebutton_show_main, "toggled",
+			 G_CALLBACK(on_togglebutton_show_main), NULL);
 	search1.combo_list =
 	    glade_xml_get_widget(gxml, "comboboxentry2");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_list));
-
+	g_signal_connect(search1.combo_list, "changed",
+			 G_CALLBACK(on_comboboxentry2_changed), NULL);
+			 
 	search1.entry_list_name = glade_xml_get_widget(gxml, "entry4");
+	g_signal_connect(search1.entry_list_name, "changed",
+			 G_CALLBACK(list_name_changed), NULL);
 
 	search1.combo_range =
 	    glade_xml_get_widget(gxml, "comboboxentry1");
 	_setup_combobox(GTK_COMBO_BOX(search1.combo_range));
 
 	search1.entry_range_name = glade_xml_get_widget(gxml, "entry2");
+	g_signal_connect(search1.entry_range_name, "changed",
+			 G_CALLBACK(range_name_changed), NULL);
 	search1.entry_range_text = glade_xml_get_widget(gxml, "entry3");
+	g_signal_connect(search1.entry_range_text, "changed",
+			 G_CALLBACK(range_text_changed), NULL);	
 
 	search1.progressbar =
 	    glade_xml_get_widget(gxml, "progressbar1");
@@ -1927,12 +2014,14 @@ void _create_search_dialog(void)
 			  glade_xml_get_widget(gxml, "vbox12"),
 			  glade_xml_get_widget(gxml, "vbox13"));
 */
+/*
 	glade_xml_signal_autoconnect_full
 	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
 	     NULL);
 	glade_xml_signal_autoconnect_full
 	    (gxml2, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
 	     NULL);
+*/
 }
 
 
