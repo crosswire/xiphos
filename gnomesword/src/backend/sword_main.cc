@@ -1192,7 +1192,7 @@ void BackEnd::init_language_map(void) {
 	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani")); /* done */
 	//languageMap[SWBuf("ba")] = SWBuf("Bashkir");
 	languageMap[SWBuf("be")] = SWBuf(_("Belarusian")); /* done */
-	languageMap[SWBuf("bg")] = SWBuf(_("Bulgrian")); /* done */
+	languageMap[SWBuf("bg")] = SWBuf(_("Bulgarian")); /* done */
 	//languageMap[SWBuf("bh")] = SWBuf("Bihari");
 	//languageMap[SWBuf("bi")] = SWBuf("Bislama");
 	//languageMap[SWBuf("bn")] = SWBuf("Bengali");
