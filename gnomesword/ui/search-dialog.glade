@@ -22,8 +22,6 @@
   <property name="focus_on_map">True</property>
   <property name="urgency_hint">False</property>
   <property name="has_separator">False</property>
-  <signal name="response" handler="_on_dialog_response" last_modification_time="Wed, 20 Jul 2005 22:14:08 GMT"/>
-  <signal name="destroy" handler="_on_destroy" last_modification_time="Tue, 21 Mar 2006 16:51:02 GMT"/>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
@@ -137,7 +135,6 @@
 		      <property name="has_frame">True</property>
 		      <property name="invisible_char">*</property>
 		      <property name="activates_default">False</property>
-		      <signal name="activate" handler="on_button_begin_search" last_modification_time="Mon, 18 Jul 2005 20:28:57 GMT"/>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -155,7 +152,6 @@
 		      <property name="use_stock">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="focus_on_click">True</property>
-		      <signal name="clicked" handler="on_button_begin_search" last_modification_time="Mon, 18 Jul 2005 20:28:33 GMT"/>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -291,7 +287,6 @@
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
-				      <signal name="toggled" handler="scope_toggled" last_modification_time="Mon, 25 Jul 2005 21:31:09 GMT"/>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -334,7 +329,6 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton1</property>
-				      <signal name="toggled" handler="scope_toggled" last_modification_time="Mon, 25 Jul 2005 21:26:58 GMT"/>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -449,7 +443,6 @@
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
-				      <signal name="toggled" handler="current_module_toggled" last_modification_time="Mon, 25 Jul 2005 21:32:15 GMT"/>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -471,7 +464,6 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton4</property>
-				      <signal name="toggled" handler="mod_list_toggled" last_modification_time="Mon, 25 Jul 2005 21:26:11 GMT"/>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -493,7 +485,6 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton4</property>
-				      <signal name="toggled" handler="mod_list_toggled" last_modification_time="Sat, 23 Jul 2005 17:08:53 GMT"/>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -529,7 +520,6 @@
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
-				  <signal name="changed" handler="on_comboboxentry2_changed" last_modification_time="Sat, 10 Dec 2005 17:48:18 GMT"/>
 				</widget>
 			      </child>
 			    </widget>
@@ -910,7 +900,6 @@ Footnote//body/love</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
 			  <property name="active">False</property>
-			  <signal name="toggled" handler="on_togglebutton_show_main" last_modification_time="Tue, 26 Jul 2005 15:39:41 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -927,7 +916,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="button_save" last_modification_time="Tue, 26 Jul 2005 15:41:06 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -943,7 +931,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="button_clean" last_modification_time="Tue, 26 Jul 2005 15:40:37 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1225,7 +1212,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="new_range" last_modification_time="Tue, 26 Jul 2005 15:37:02 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1241,7 +1227,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="save_range" last_modification_time="Tue, 26 Jul 2005 15:37:24 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1257,7 +1242,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="delete_range" last_modification_time="Tue, 26 Jul 2005 15:37:44 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1388,7 +1372,6 @@ Footnote//body/love</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
-			      <signal name="changed" handler="range_name_changed" last_modification_time="Tue, 26 Jul 2005 15:38:27 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1433,7 +1416,6 @@ Footnote//body/love</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
-			      <signal name="changed" handler="range_text_changed" last_modification_time="Sat, 23 Jul 2005 16:25:44 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1563,7 +1545,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="new_modlist" last_modification_time="Tue, 26 Jul 2005 15:35:50 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1579,7 +1560,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="save_modlist" last_modification_time="Mon, 25 Jul 2005 21:27:31 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1595,7 +1575,6 @@ Footnote//body/love</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
-			  <signal name="clicked" handler="delete_list" last_modification_time="Tue, 26 Jul 2005 15:34:36 GMT"/>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1726,7 +1705,6 @@ Footnote//body/love</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
-			      <signal name="changed" handler="list_name_changed" last_modification_time="Tue, 26 Jul 2005 15:42:23 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1776,7 +1754,6 @@ Footnote//body/love</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
-				  <signal name="clicked" handler="clear_modules" last_modification_time="Tue, 26 Jul 2005 15:33:21 GMT"/>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
@@ -1794,7 +1771,6 @@ Footnote//body/love</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
-				  <signal name="clicked" handler="delete_module" last_modification_time="Tue, 26 Jul 2005 15:34:07 GMT"/>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
@@ -1825,7 +1801,6 @@ Footnote//body/love</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
-				  <signal name="clicked" handler="on_toolbutton12_clicked" last_modification_time="Fri, 10 Feb 2006 20:31:19 GMT"/>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
