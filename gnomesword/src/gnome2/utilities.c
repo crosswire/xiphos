@@ -31,6 +31,7 @@
 #include <gnome.h>
 
 #include "gui/utilities.h"
+#include "gui/preferences_dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
