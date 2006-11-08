@@ -187,7 +187,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 			(mf->old_font_size)?mf->old_font_size:"+0", 
 			settings.bible_text_color);
 		
-		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+		if((!strcmp(settings.MainWindowModule,"KJV")))
 			swbuf.appendFormatted("</font><div style=\"text-align: center\">%s<hr></div>", 
 					mod->Description());
 		else
@@ -209,9 +209,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
 				utf8_key,
 				0, 
-				(settings.versestyle)
-				?settings.verse_num_font_size
-				:"-2",
+				(settings.versestyle) ?settings.verse_num_font_size :"-2",
 				settings.bible_verse_num_color, 
 				key->Verse());
 		
@@ -221,10 +219,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				settings.bible_text_color);		
 		//g_message(mod->getRawEntry());
-		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+/*		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
 			swbuf.appendFormatted("%s</font><br><hr>",
 					(const char *)*mod);
-		else		
+		else	
+*/	
 			swbuf.appendFormatted(
 				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 					(const char *)*mod, _("Chapter"), chapter);
@@ -371,7 +370,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		else
 			g_string_printf(text, "%s", suppliedtext);
 #ifdef DEBUG
-		g_message("ReadAloud: dirty: %s\n", text);
+		g_message("ReadAloud: dirty: %s\n", text->str);
 #endif
 
 		// clean: no quotes (conflict w/festival syntax).
@@ -428,7 +427,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			*(s++) = ' ';
 		}
 #ifdef DEBUG
-		g_message("ReadAloud: clean: %s\n", text);
+		g_message("ReadAloud: clean: %s\n", text->str);
 #endif
 
 		// scribble clean text to the socket.
