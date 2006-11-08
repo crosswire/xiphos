@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * about_gnomesword.c - GnomeSword about dialog
  *
- * Copyright (C) 2000-2005 GnomeSword Developer Team
+ * Copyright (C) 2000-2006 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@ static const gchar *authors[] = {
     "Carl Constantine",
     "Jp Robinson",
     "Andy Piper",
+     "Karl Kleinpaste",
     NULL
 };
   
@@ -81,7 +82,7 @@ gui_create_about_gnomesword(void)
           (GTK_ABOUT_DIALOG (about1), VERSION);
   gtk_about_dialog_set_copyright
           (GTK_ABOUT_DIALOG (about1),
-           _("Copyright 2000-2005 The GnomeSword Development Team"));
+           _("Copyright 2000-2006 The GnomeSword Development Team"));
   gtk_about_dialog_set_comments
           (GTK_ABOUT_DIALOG (about1),
            _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
