@@ -133,7 +133,7 @@ void on_comboboxentry2_changed(GtkComboBox * combobox,
 
 void button_clean(GtkButton * button, gpointer user_data)
 {
-	gboolean editable;
+	gboolean editable; 
 /*
 	editable = gtk_html_get_editable(GTK_HTML(search1.report_html));
 	if (!editable)

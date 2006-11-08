@@ -21,7 +21,6 @@
   <property name="focus_on_map">True</property>
   <property name="urgency_hint">False</property>
   <property name="has_separator">True</property>
-  <signal name="response" handler="on_dialog_prefs_response" last_modification_time="Tue, 05 Jul 2005 18:54:56 GMT"/>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
@@ -216,7 +215,6 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="color_set" handler="on_colorbutton1_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:37 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -269,7 +267,6 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="color_set" handler="on_colorbutton2_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:47 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -322,7 +319,6 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="color_set" handler="on_colorbutton3_color_set" last_modification_time="Sat, 09 Jul 2005 15:24:55 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -375,7 +371,6 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="color_set" handler="on_colorbutton4_color_set" last_modification_time="Sat, 09 Jul 2005 15:25:01 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -428,7 +423,6 @@
 			      <property name="can_focus">True</property>
 			      <property name="use_alpha">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="color_set" handler="on_colorbutton5_color_set" last_modification_time="Sat, 09 Jul 2005 15:25:08 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -557,7 +551,6 @@
 +5</property>
 			  <property name="add_tearoffs">False</property>
 			  <property name="focus_on_click">True</property>
-			  <signal name="changed" handler="on_combobox1_changed" last_modification_time="Thu, 07 Jul 2005 19:54:42 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -646,7 +639,6 @@
 		      <property name="active">True</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
-		      <signal name="toggled" handler="on_checkbutton1_toggled" last_modification_time="Sat, 09 Jul 2005 00:31:44 GMT"/>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -698,7 +690,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton2_toggled" last_modification_time="Sat, 09 Jul 2005 00:31:55 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -718,7 +709,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton9_toggled" last_modification_time="Wed, 12 Apr 2006 17:17:23 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -738,7 +728,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton3_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:02 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -758,7 +747,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton4_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:12 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -853,7 +841,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton5_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:25 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -873,7 +860,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton6_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:33 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -893,7 +879,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton7_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:43 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -913,7 +898,6 @@
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_checkbutton8_toggled" last_modification_time="Sat, 09 Jul 2005 00:32:54 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -970,7 +954,6 @@
 			  <property name="show_hidden">False</property>
 			  <property name="do_overwrite_confirmation">False</property>
 			  <property name="width_chars">-1</property>
-			  <signal name="current_folder_changed" handler="on_folder_changed" last_modification_time="Thu, 07 Jul 2005 19:16:27 GMT"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -1090,7 +1073,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox2_changed" last_modification_time="Thu, 07 Jul 2005 18:41:45 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1142,7 +1124,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox2_changed" last_modification_time="Thu, 07 Jul 2005 18:57:54 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1194,7 +1175,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox4_changed" last_modification_time="Thu, 07 Jul 2005 21:29:27 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1246,7 +1226,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox5_changed" last_modification_time="Thu, 07 Jul 2005 21:39:10 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1298,7 +1277,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox15_changed" last_modification_time="Thu, 07 Jul 2005 21:30:28 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1350,7 +1328,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox6_changed" last_modification_time="Thu, 07 Jul 2005 21:35:30 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1477,7 +1454,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox7_changed" last_modification_time="Thu, 07 Jul 2005 21:07:12 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1529,7 +1505,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox8_changed" last_modification_time="Thu, 07 Jul 2005 21:17:09 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1581,7 +1556,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox9_changed" last_modification_time="Thu, 07 Jul 2005 21:23:29 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1633,7 +1607,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox10_changed" last_modification_time="Thu, 07 Jul 2005 21:23:35 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1685,7 +1658,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox11_changed" last_modification_time="Thu, 07 Jul 2005 21:23:44 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1812,7 +1784,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox12_changed" last_modification_time="Thu, 07 Jul 2005 21:42:20 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1864,7 +1835,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox13_changed" last_modification_time="Thu, 07 Jul 2005 21:45:25 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1916,7 +1886,6 @@
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
-			      <signal name="changed" handler="on_combobox14_changed" last_modification_time="Thu, 07 Jul 2005 21:45:36 GMT"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
