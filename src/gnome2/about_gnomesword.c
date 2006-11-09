@@ -52,6 +52,32 @@ static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZ
 
 /******************************************************************************
  * Name
+ *   on_dialog_response
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void on_dialog_response(GtkDialog * dialog, gint response_id, 
+					gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_dialog_response(GtkDialog * dialog, gint response_id, 
+					gpointer user_data)
+{
+	//if (response_id == GTK_RESPONSE_CLOSE) {
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+	//}
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_create_about_gnomesword
  *
  * Synopsis
@@ -76,6 +102,10 @@ gui_create_about_gnomesword(void)
   about1_logo_pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR"/about.png", &error);
 
   about1 = gtk_about_dialog_new ();
+  
+	g_signal_connect(about1, "response",
+			 G_CALLBACK(on_dialog_response), NULL);
+  
   gtk_about_dialog_set_name
           (GTK_ABOUT_DIALOG (about1), PACKAGE);
   gtk_about_dialog_set_version
