@@ -1,5 +1,10 @@
 2006-11-11  karl <karl@charcoal.com>
 
+	* fixed bug: first-time user gets ESV downloaded, so he doesn't
+	get a "(null)" module.
+
+2006-11-11  karl <karl@charcoal.com>
+
 	* updating ChangeLog for many things done in recent months:
 	* fixed bug: verse navigation crash when spinning selectors.
 	* fixed bug: Lookup Selection crash when no word is selected.
