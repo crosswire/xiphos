@@ -168,6 +168,18 @@ int settings_init(int new_configs, int new_bookmarks)
 		g_print("\nFirst Run: need to create settings!\n");
 #endif
 		settings.first_run = TRUE;
+
+		sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/modules/texts");
+		if (access(sword_dir, F_OK) == -1) {
+			gui_generic_warning
+			    ("Must invoke install manager for 1 Bible text.\nThis may take a minute or two.");
+			backend_init_module_mgr_config();
+			system("cd ; cd .sword ; installmgr -r crosswire ; installmgr -ri crosswire ESV ; rm -f dirlist");
+			gui_generic_warning
+			    ("Bible text installation complete");
+		}
+		g_free(sword_dir);
+
 		main_init_lists();
 		xml_create_settings_file(settings.fnconfigure);
 		//retval = gui_first_run();
