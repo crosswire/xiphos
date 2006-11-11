@@ -1,3 +1,19 @@
+2006-11-11  karl <karl@charcoal.com>
+
+	* updating ChangeLog for many things done in recent months:
+	* fixed bug: verse navigation crash when spinning selectors.
+	* fixed bug: Lookup Selection crash when no word is selected.
+	* added Pinned Tabs feature: all translations can track together.
+	* added Read Aloud feature: send verse text through Festival.
+	* fixed doc images: got a copy of old, still valid images from
+	  Brian Dumont to replace corrupt *.png; saw that they were very
+	  old, so regenerated a new set of images using current Gnome
+	  interface.
+	* updated doc *.xml a lot: to reflect current Parallel View
+	  habits, add module explanation outline, add footnote previewer
+	  use explanation, and include some general Sword references to
+	  the intro to connect GnomeSword to Sword generally.
+
 2006-05-01  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.7
