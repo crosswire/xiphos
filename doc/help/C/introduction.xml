@@ -16,11 +16,32 @@
 			Make sermon or personal notes on selected passages
 			</para>
 		</listitem>
+		<listitem>
+			<para>
+			Compare translations in parallel
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Work in original language study using the available Hebrew and Greek translations
+			</para>
+		</listitem>
 	</itemizedlist>
 	<para>
 	<application>GnomeSword</application> aims to provide a simple and clean user interface
 	whilst providing a powerful tool allowing a personalized Bible study environment.
 	</para>
+  		<figure id="sword-logo">
+   			<screenshot>
+   				<graphic fileref="figures/sword3.png" format="PNG"></graphic>
+   			</screenshot>
+		</figure>
+  	<para>
+	"The SWORD Project" is based at <ulink type="http" url="http://www.crosswire.org">http://www.crosswire.org</ulink>.  Other
+	applications under the same banner are <application>The SWORD Project for Windows</application> (aka
+	<application>BibleCS</application> or <application>WinSword</application>), <application>MacSword</application> for the Macintosh,
+	and <application>BibleTime</application>, another Linux program.
+  	</para>
 	<para>
   		<figure id="anjuta-screenshot">
    			<title>GnomeSword in action</title>
