@@ -76,13 +76,6 @@ format="PNG"/>
 			</para>
 		</sect2>
 			
-		<sect2 id="gnomesword-toolbar-parallel">
-			<title>Parallel View Toggle</title>
-			<para>
-			Allows quick switching between single translation and multiple translation displays.
-			</para>		
-		</sect2>
-			
 		<sect2 id="gnomesword-toolbar-book">
 			<title>Bible Book Selector</title>
 			<para>		
@@ -111,7 +104,7 @@ format="PNG"/>
 			<title>Bible Passage Summary</title>
 			<para>
 			Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and 
-			<interface>Commentary Pane</interface>. Changes only take effect once button on the right is clicked.
+			<interface>Commentary Pane</interface>. Changes take effect once Enter is typed.
 			</para>
 			<warning>
 				<para>
@@ -188,7 +181,7 @@ format="PNG"/>
 		<sect2 id="gnomesword-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
-			A nice function in <application>GnomeSword2</application> is the ability to view your specified bible text in parallel with five other
+			A nice function in <application>GnomeSword2</application> is the ability to view your specified bible text in parallel in five
 			translations of your choice. The Parallel View mode can be easily access by selecting <guimenuitem>Parallel View</guimenuitem> just
 			below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you
 			can only view one verse at a time. You can change the verse by simply selecting another verse, chapter or book at the toolbar. Please note 
@@ -202,6 +195,11 @@ format="PNG"/>
     	   		<graphic fileref="figures/interface_parallel.png" format="PNG" ></graphic>
 	      	</screenshot>
     	</figure>
+			<para>
+			Additionally, a separate Parallel View window can be selected from the right click menu with <guimenuitem>Detach/Attach</guimenuitem>.
+			Your Bible pane will return to its normal single text view, and the new Parallel View window will show the complete
+			chapter, in all 5 translations.
+			</para>
 		</sect2>
 		
 		<sect2 id="gnomesword-bible-open-seperate">
@@ -334,6 +332,17 @@ format="PNG"/>
 		<para>
 		The Viewer Pane allows the user to view strong numbers, morphological tags, footnotes and cross-references that the <interface>Bible Text
 		Pane</interface> provides. 
+		</para>
+		<para>
+		Footnote content is normally transient in the Viewer Pane: It is displayed while your mouse hovers over the footnote
+		indicator <guimenuitem>*n</guimenuitem> in the Bible text, and then disappears when your mouse moves off.  But some
+		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
+		that you can scroll it in the Viewer Pane, middle-click the indicator and move to the Viewer Pane.
+		</para>
+		<para>
+		Cross-reference indicators <guimenuitem>*x</guimenuitem> also display transiently in the Viewer Pane.  Left-clicking the
+		indicator will send the set of references to the <guimenuitem>Verse List</guimenuitem> in the
+		<guimenuitem>Sidebar</guimenuitem>, where you can click them individually for reading in the Viewer Pane.
 		</para>
 	</sect1>	
 <!-- ============= Commentary Pane  ============--> 
