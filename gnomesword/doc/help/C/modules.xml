@@ -7,7 +7,7 @@
 		<para>
 		The "module" is the unit of content in GnomeSword, and Sword generally; a Sword module is a resource available for viewing
 		in Sword applications.  There are several varieties: Most importantly, Bible texts, as well as dictionaries and lexicons,
-		commentaries, and general books, including some which have graphical content (e.g. atlases).  They are retrieved either
+		commentaries, and general books, including some which have graphical content (e.g. atlases).  They are installed either
 		from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server such as Crosswire, which
 		is the home of Sword, and from which all officially Sword-sanctioned modules are available.
 		</para>
