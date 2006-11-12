@@ -26,19 +26,20 @@
 # Dominique Corbex <domcox@sourceforge.net>, 2006.
 # , fuzzy 
 # <>, 2006.
+# Dominique Corbex <domcox@sourceforge.net>, 2006.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2 2.1.7\n"
+"Project-Id-Version: GnomeSword 2 2.1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-13 23:16-0500\n"
-"PO-Revision-Date: 2006-10-03 22:00+0200\n"
-"Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
-"Language-Team: French\n"
+"PO-Revision-Date: 2006-11-12 11:12+0100\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Type: text/plain; charset=\n"
+"Content-Transfer-Encoding: "
 
 #: ../gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -104,7 +105,7 @@ msgstr "Commentaires"
 #: ../src/main/sidebar.cc:942 ../src/gnome2/mod_mgr.c:674
 #: ../src/gnome2/utilities.c:491
 msgid "General Books"
-msgstr "Livres d'étude"
+msgstr "Livres connexes"
 
 #: ../src/main/sidebar.cc:722 ../src/main/sidebar.cc:774
 #: ../src/gnome2/mod_mgr.c:470 ../src/gnome2/mod_mgr.c:539
@@ -608,7 +609,7 @@ msgstr "Aligner à gauche"
 
 #: ../src/editor/toolbar_style.c:1059
 msgid "Left justifies the paragraphs"
-msgstr "Aligner à gauche"
+msgstr "Aligne le paragraphe sur la gauhe"
 
 #: ../src/editor/toolbar_style.c:1062
 msgid "Center"
@@ -624,7 +625,7 @@ msgstr "Aligné à droite"
 
 #: ../src/editor/toolbar_style.c:1067
 msgid "Right justifies the paragraphs"
-msgstr "Aligner à droite"
+msgstr "Aligne le paragraphe sur  à droite"
 
 #: ../src/editor/toolbar_style.c:1079
 msgid "Typewriter"
@@ -656,7 +657,7 @@ msgstr "Souligné"
 
 #: ../src/editor/toolbar_style.c:1091
 msgid "Underlines the text"
-msgstr "Souligné"
+msgstr "Souligne le texe"
 
 #: ../src/editor/toolbar_style.c:1094
 msgid "Strikeout"
@@ -664,7 +665,7 @@ msgstr "Barré"
 
 #: ../src/editor/toolbar_style.c:1095
 msgid "Strikes out the text"
-msgstr "Barré"
+msgstr "Barre le texte"
 
 #: ../src/editor/toolbar_style.c:1105
 msgid "Unindent"
@@ -691,7 +692,7 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Nos remerciements à Troy Griffitts et à tous les participants du SWORD "
+"Nos remerciements à Troy Griffitts et tous les participants du SWORD "
 "Project."
 
 #: ../src/gnome2/about_modules.c:162
@@ -706,12 +707,12 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Le SWORD Project a pour but de réaliser un ensemble extensible à souhait de "
-"logiciels destinés à l'étude de Dieu et de sa Parole. L'infrastructure SWORD-"
-"Bible permet de manier aisément les textes bibliques, commentaires, "
-"lexiques, dictionnaires, etc.. De nombreux logiciels utilisateurs sont "
-"developpés en utilisant cette infrastructure. Elle leur permet de partager "
-"le même ensemble de textes."
+"Le SWORD Project s'est donné pour objectif de créer un ensemble extensible "
+"de logiciels destinés à l'étude de la Bible. L'ossature de base "
+"SWORD-permet de naviguier aisémen tparmi les textes bibliques, commentaires, "
+"lexiques, dictionnaires.. De nombreux logiciels finaux sont developpés en "
+"utilisant cette ossature. Elle leur permet de partager les mêmes modules "
+"de textes. "
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -723,7 +724,7 @@ msgstr "Version de Sword"
 
 #: ../src/gnome2/about_sword.c:161
 msgid "Modules can be downloaded from the SWORD Project"
-msgstr "Les modules sont téléchargeables depuis le site du  SWORD Project"
+msgstr "Les extes sont disponibles sur le site du  SWORD Project"
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -1197,7 +1198,7 @@ msgstr "Page %d de %d"
 
 #: ../src/gnome2/html.c:704
 msgid "Print Preview"
-msgstr "Prévisualisation"
+msgstr "Aperçu avat impression"
 
 #: ../src/gnome2/html.c:710
 msgid "Failed to print the document"
@@ -1209,7 +1210,7 @@ msgstr "Bloc-notes..."
 
 #: ../src/gnome2/main_menu.c:602
 msgid "Open the StudyPad editor"
-msgstr "Ouvre le bloc-notes d'étude"
+msgstr "Ouvre le bloc-notes"
 
 #: ../src/gnome2/main_menu.c:607
 msgid "Open Session"
@@ -1360,7 +1361,7 @@ msgstr "Construction de l'interface de Gnomesword"
 
 #: ../src/gnome2/main_window.c:492
 msgid "GnomeSword - Bible Study Software"
-msgstr "GnomeSword - Logiciel d'études bibliques"
+msgstr "GnomeSword - Logiciel d'étude biblique"
 
 #: ../src/gnome2/main_window.c:546
 msgid "Open a new tab"
@@ -1372,7 +1373,7 @@ msgstr "Commentaires"
 
 #: ../src/gnome2/main_window.c:699
 msgid "Book View"
-msgstr "Livres d'étude"
+msgstr "Livres connexes"
 
 #: ../src/gnome2/mod_mgr.c:212
 msgid "Install the following modules:"
@@ -1573,7 +1574,7 @@ msgstr "Modules"
 
 #: ../src/gnome2/preferences_dialog.c:1332
 msgid "Main"
-msgstr "Principaux"
+msgstr "Base"
 
 #: ../src/gnome2/search_dialog.c:51
 msgid "Searching the "
@@ -1767,7 +1768,7 @@ msgstr "Afficher les dictionnaires et lexiques"
 
 #: ../src/gnome2/setup_druid.c:707
 msgid "Show book tabs"
-msgstr "Onglets des livres d'étude"
+msgstr "Onglets des livres conexes"
 
 #: ../src/gnome2/setup_druid.c:726
 msgid "GnomeSword Configuration - Page 4 of 5"
@@ -1803,7 +1804,7 @@ msgstr "Bible parallèle n°1"
 
 #: ../src/gnome2/setup_druid.c:890
 msgid "Generic book"
-msgstr "Livre d'étude"
+msgstr "Livre connexe"
 
 #: ../src/gnome2/setup_druid.c:909
 msgid "Personal"
@@ -1908,7 +1909,7 @@ msgstr "_Liste de versets"
 
 #: ../src/gnome2/splash.c:361
 msgid "Powered by the SWORD Project"
-msgstr "Architecture SWORD Project"
+msgstr "Compatible SWORD Project"
 
 #: ../src/gnome2/splash.c:538
 msgid "Loading settings"
@@ -2011,7 +2012,7 @@ msgstr "<b>Général</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr "<b>Modules principaux</b>"
+msgstr "<b>Modules de base</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Miscellaneous Modules</b>"
@@ -2028,7 +2029,7 @@ msgstr "<b>Afficher</b>"
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Répertoire par défaut du bloc-notes d'étude</b>"
+msgstr "<b>Répertoire par défaut du bloc-notes</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
@@ -2048,7 +2049,7 @@ msgstr "Texte biblique"
 
 #: ../ui/prefs.glade.h:22
 msgid "Book"
-msgstr "Livre d'étude"
+msgstr "Livre connexe"
 
 #: ../ui/prefs.glade.h:25
 msgid "Cover"
@@ -2116,7 +2117,7 @@ msgstr "Répertoire"
 
 #: ../ui/prefs.glade.h:48
 msgid "Show Daily Devotion at start up"
-msgstr "Afficher la lecture quotidienne au démarrage"
+msgstr "Afficher la méditation quotidienne au démarrage"
 
 #: ../ui/prefs.glade.h:49
 msgid "Show splash screen at start up"
@@ -2162,15 +2163,14 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>Attention:</b> À utiliser avec prudence dans les pays à risques"
+msgstr "<b>Attention:</b> Prudence dans les pays réfracaires à la Bible"
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Attention</b> Ne pas utiliser le téléchargement dans les pays où cela "
-"peut représenter un danger d'être découvert"
+"<b>Attention</b> Ne pas utiliser le téléchargement dans les pays où cela représente un danger d'être détecté"
 
 #: ../ui/module-manager.glade.h:9
 msgid "Current Remote Sources"
@@ -2178,7 +2178,7 @@ msgstr "Téléchargement"
 
 #: ../ui/module-manager.glade.h:10
 msgid "Current local sources"
-msgstr "Sources  locales"
+msgstr "Sources locales"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Home dir"
@@ -2190,7 +2190,7 @@ msgstr "Installer"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Local"
-msgstr "Source  locale"
+msgstr "Source locale"
 
 #: ../ui/module-manager.glade.h:14
 #, fuzzy
