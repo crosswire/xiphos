@@ -11,13 +11,13 @@
    		example, the file operations have been grouped into 
    		the <guisubmenu>File</guisubmenu> menu.
    		</para>
-        <figure id="menubar_figure">
+	        <figure id="menubar_figure">
 			<title>Menubar</title>
 	  		<screenshot>
 	      		<screeninfo>GnomeSword menubar</screeninfo>
     	   		<graphic fileref="figures/interface_menubar.png" format="PNG" ></graphic>
-	      	</screenshot>
-    	</figure>
+		      	</screenshot>
+	    	</figure>
 	</sect1>
 	
 <!-- ============= Toolbars  ============-->
@@ -136,8 +136,8 @@ format="PNG"/>
 	  		<screenshot>
 	      		<screeninfo>Sidepane shortcuts</screeninfo>
     	   		<graphic fileref="figures/interface_shortcut.png" format="PNG" ></graphic>
-	      	</screenshot>
-    	</figure>
+			</screenshot>
+	    	</figure>
 	</sect1>
 <!-- ============= Bible Text Pane  ============--> 
 	<sect1 id="gnomesword-bible">
@@ -147,8 +147,8 @@ format="PNG"/>
 	  		<screenshot>
 	      		<screeninfo>The Bible textpane</screeninfo>
     	   		<graphic fileref="figures/interface_biblepane.png" format="PNG" ></graphic>
-	      	</screenshot>
-    	</figure>
+			</screenshot>
+	    	</figure>
 		<para>
 		Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
 		will be displayed for full viewing. When starting <application>GnomeSword2</application> either your default Bible translation or the translation
@@ -188,22 +188,29 @@ format="PNG"/>
 			that modules that are Old Testament or New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text ) will not be able
 			to display books, chapters, or verses that they don't have.  
 			</para>
-<figure id="parallel_figure">
-			<title>The Bible textpane</title>
+		<figure id="parallel_figure">
+			<title>Bible textpane - parallel view</title>
 	  		<screenshot>
-	      		<screeninfo>The Bible textpane</screeninfo>
+	      		<screeninfo>Bible textpane - parallel view</screeninfo>
     	   		<graphic fileref="figures/interface_parallel.png" format="PNG" ></graphic>
-	      	</screenshot>
-    	</figure>
+		      	</screenshot>
+	    	</figure>
 			<para>
 			Additionally, a separate Parallel View window can be selected from the right click menu with <guimenuitem>Detach/Attach</guimenuitem>.
 			Your Bible pane will return to its normal single text view, and the new Parallel View window will show the complete
 			chapter, in all 5 translations.
 			</para>
+		<figure id="parallel_figure_separate">
+			<title>Parallel View - separate window</title>
+	  		<screenshot>
+	      		<screeninfo>Parallel View - separate window</screeninfo>
+    	   		<graphic fileref="figures/interface_parallel-separate.png" format="PNG" ></graphic>
+		      	</screenshot>
+		</figure>
 		</sect2>
 		
-		<sect2 id="gnomesword-bible-open-seperate">
-			<title>Opening A Seperate Bible Translation</title>
+		<sect2 id="gnomesword-bible-open-separate">
+			<title>Opening A Separate Bible Translation</title>
 			<para>
 			In order to view a Bible translation separate from the <application>GnomeSword2</application> interface:
 			</para>
@@ -299,7 +306,7 @@ format="PNG"/>
 		  		<screenshot>
 		      		<screeninfo>Module Options</screeninfo>
 	    	   		<graphic fileref="figures/interface_biblepane-options.png" format="PNG" ></graphic>
-		      	</screenshot>
+			      	</screenshot>
 		    	</figure>
 		</sect2>
 		
@@ -313,7 +320,7 @@ format="PNG"/>
 		  		<screenshot>
 		      		<screeninfo>View Options</screeninfo>
 	    	   		<graphic fileref="figures/interface_menubar-view.png" format="PNG" ></graphic>
-		      	</screenshot>
+			      	</screenshot>
 		    	</figure>
 			<itemizedlist>
 				<listitem>	
@@ -365,13 +372,13 @@ format="PNG"/>
 <!-- ============= Viewer Pane	================ -->
 	<sect1 id="gnomesword-viewer">
 		<title>Viewer Pane</title>
-	<figure id="viewer_figure">
+		<figure id="viewer_figure">
 			<title>Viewer Panel</title>
 	  		<screenshot>
 	      		<screeninfo>Viewer Panel</screeninfo>
     	   		<graphic fileref="figures/interface_viewer.png" format="PNG" ></graphic>
-	      	</screenshot>
-    	</figure>
+		      	</screenshot>
+		</figure>
 		<para>
 		The Viewer Pane is where the user sees Strong's numbers, morphological tags, footnotes, and cross-references that the
 		<interface>Bible Text Pane</interface> provides.
