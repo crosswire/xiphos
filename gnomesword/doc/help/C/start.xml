@@ -31,11 +31,14 @@
   	<sect1 id="gnomesword-first-start">
   		<title>Starting GnomeSword For The First Time</title>
 		<para>
-		When you start <application>GnomeSword</application> for the first time, a simple
-		<interface>Setup Assistant</interface> appears. This will enable you to configure your choice of 
-		<application>SWORD Project</application> modules. It also enables you to set basic user interface 
-		options. Once your done with this, you should be presented with the <application>GnomeSword</application>
-		interface.
+		When you start <application>GnomeSword</application> for the first time, <application>GnomeSword</application> creates a
+		default selection of options for display.  Also, if no other Sword application has ever been run, and thus there are no
+		Bible modules installed, then <application>GnomeSword</application> will automatically download one Bible module
+		from Crosswire.  <application>GnomeSword</application> then opens its interface with one tab displayed, showing Romans 8:28.
+		</para>
+		<para>
+		Once the interface is open, you can use <menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any
+		of the selections already made by default.
 		</para>
 	 </sect1>
 <!-- GnomeSword on first time use -->
@@ -60,7 +63,7 @@
 				<listitem>
 					<para>
 					The menus on the menubar contain several commands which extend the use of <application>GnomeSword
-					</application>. These include the StudyPad and advanced search functions.The menus also allow you to customize
+					</application>. These include the StudyPad and advanced search functions. The menus also help you to customize
 					your use of <application>GnomeSword</application>.
 			        </para>
 				</listitem>
@@ -95,7 +98,8 @@
 				<term>Viewer</term>
 				<listitem>
 					<para>
-					The <interface>Viewer</interface> displays bible text module options. This includes strong numbers, footnotes and 						morphological tags. It is located just below the Bible Text Pane.
+					The <interface>Viewer</interface> displays Bible text module options. These include Strong's
+					numbers, footnotes and morphological tags. It is located below the Bible Text Pane.
 					</para>
 				</listitem>
 			 </varlistentry>
@@ -128,8 +132,8 @@
 		     </varlistentry>
 			 </variablelist>
 		     <para>
-			When you right-click in the different interface sections, the interface displays a popup menu, which allows you to access more module
-			specific options. These include printing services. 
+			When you right-click in the different interface sections, the interface displays a popup menu, which provides access
+			to more module-specific options, including printing services.
 			</para>
 	</sect1>
 </chapter>
