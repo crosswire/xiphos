@@ -1,5 +1,5 @@
 Source: gnomesword
-Build-Depends: autotools-dev, quilt, patchutils (>= 0.2.25), cdbs (>= 0.4.27-1), debhelper (>= 4.1.0), debhelper (>= 4.2.21), libsword-dev (>=1.5.8-7), gnome-spell, libgtkhtml3.8-dev, scrollkeeper, gnome-core-devel, gtkhtml3.8
+Build-Depends: @cdbs@, libsword-dev (>=1.5.9-0), gnome-spell, libgtkhtml3.8-dev, scrollkeeper, gnome-core-devel, gtkhtml3.8
 Build-Conflicts: libgtkhtml3.2-dev, libgtkhtml3.6-dev
 Section: gnome
 Priority: optional
