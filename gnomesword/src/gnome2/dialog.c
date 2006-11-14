@@ -868,3 +868,36 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
 	}
 	return 4;
 }
+
+/******************************************************************************
+ * Name
+ *   gui_yes_no_dialog
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   gint gui_yes_no_dialog(char *question)
+ *
+ * Description
+ *   ask a simple synchronous yes/no question.
+ *
+ * Return value
+ *   gint
+ */
+
+gint gui_yes_no_dialog(char *question)
+{
+	GS_DIALOG *yes_no;
+	gint result;
+
+	yes_no = gui_new_dialog();
+	yes_no->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+	yes_no->label_top = question;
+	yes_no->yes = TRUE;
+	yes_no->no = TRUE;
+	//gtk_window_set_title(GTK_WINDOW(yes_no), "GnomeSword needs a Bible");
+
+	result = gui_alert_dialog(yes_no);
+	g_free(yes_no);
+	return result == GS_YES;
+}
