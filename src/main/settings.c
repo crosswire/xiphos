@@ -49,6 +49,7 @@
  */
 #define GS_DIR ".gnomesword-2.0"
 
+#define GS_NET_PERMISSION	"There are no Bible modules installed. In order to initialize, GnomeSword needs to install one Bible.\n\nWith your permission, GnomeSword will install one Bible module from Crosswire. If you wish others, especially for your language preference, you may use the Module Manager after GnomeSword has initialized.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword use Crosswire to install a Bible?"
 
 /******************************************************************************
  * globals
@@ -171,12 +172,23 @@ int settings_init(int new_configs, int new_bookmarks)
 
 		sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/modules/texts");
 		if (access(sword_dir, F_OK) == -1) {
-			gui_generic_warning
-			    ("Must invoke install manager for 1 Bible text.\nThis may take a minute or two.");
-			backend_init_module_mgr_config();
-			system("cd ; cd .sword ; installmgr -r crosswire ; installmgr -ri crosswire ESV ; rm -f dirlist");
-			gui_generic_warning
-			    ("Bible text installation complete");
+			if (gui_yes_no_dialog(GS_NET_PERMISSION)) {
+				gui_generic_warning
+				    ("Click OK to begin install.\n(This will take a minute or two.)");
+				backend_init_module_mgr_config();
+				system("cd ; cd .sword ; installmgr -r crosswire ; installmgr -ri crosswire ESV ; rm -f dirlist");
+				if (access(sword_dir, F_OK) == -1) {
+					gui_generic_warning
+					    ("Installation was unsuccessful.\n\nGnomeSword cannot proceed, and will now exit.");
+					exit(1);
+				}
+				gui_generic_warning
+				    ("Bible module installation complete.");
+			} else {
+				gui_generic_warning
+				    ("Without any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
+				exit(1);
+			}
 		}
 		g_free(sword_dir);
 
