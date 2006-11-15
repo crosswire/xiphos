@@ -1001,7 +1001,7 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if(!gtk_tree_selection_get_selected(current_selection, NULL, &selected)) 
 		return;
 	
-	t = "|";
+	t = "/_-|><.'`\"";
 	str = g_string_new("");
 	info = gui_new_dialog();
 	//info->stock_icon = GTK_STOCK_OPEN;
