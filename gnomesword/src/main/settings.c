@@ -49,7 +49,7 @@
  */
 #define GS_DIR ".gnomesword-2.0"
 
-#define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs to install one Bible.\n\nWith your permission, GnomeSword will install one Bible module from Crosswire. If you wish others, especially for your language preference, you may use the Module Manager after GnomeSword has initialized.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword use Crosswire to install a Bible?"
+#define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs to install one Bible.\n\nWith your permission, GnomeSword will install one Bible module from Crosswire. If you wish to install others, especially for your language preference, you may use the Module Manager after GnomeSword has initialized.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword use Crosswire to install a Bible?"
 
 /******************************************************************************
  * globals

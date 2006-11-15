@@ -37,6 +37,10 @@
                                 <graphic fileref="figures/preferences_fonts-misc.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
+		<para>
+		In individual modules' display, the right-click menu's <guimenuitem>Module Options</guimenuitem> selector provides font name
+		and size selection.
+		</para>
 		</sect2>
 	</sect1>
 	

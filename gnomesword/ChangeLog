@@ -1,3 +1,10 @@
+2006-11-15  karl <karl@charcoal.com>
+
+	* fixed bug #1535122 by applying reporter's supplied patch. thanx.
+	* improved grammar of first-time user download question.
+	* updated screenshot of question accordingly.
+	* added a note to preferences.xml about per-module font selection.
+
 2006-11-14  karl <karl@charcoal.com>
 
 	* updated logic for initial download of a Bible so as to ask
