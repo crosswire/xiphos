@@ -36,6 +36,13 @@
 		Bible modules installed, then <application>GnomeSword</application> will ask permission to download one Bible module from
 		Crosswire.  <application>GnomeSword</application> then opens its interface with one tab displayed, showing Romans 8:28.
 		</para>
+		<figure id="gnomesword-start-question">
+			<title>GnomeSword Download Question</title>
+			<screenshot>
+                        	<screeninfo>Gnomesword Download Question</screeninfo>
+                                <graphic fileref="figures/first_start.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
 		<para>
 		Once the interface is open, you can use <menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any
 		of the selections already made by default.
