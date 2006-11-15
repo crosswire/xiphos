@@ -317,7 +317,7 @@ static gboolean html_key_press_event(GtkWidget * widget,
 #ifndef USE_GTKHTML38
 	GSHTMLEditorControlData *ec =
 	    (GSHTMLEditorControlData *) d->editor;
-	ed->changed = TRUE;
+	ec->changed = TRUE;
 	//g_warning("html_key_press_event");
 	gui_update_statusbar(ec);
 #endif
@@ -368,9 +368,9 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * d)
 #ifndef USE_GTKHTML38
 	if (!ec)
 		return;
-	if (ed->key)
-		g_free(ed->key);
-	ed->key = g_strdup_printf("%s 1:1", bookname);
+	if (ec->key)
+		g_free(ec->key);
+	ec->key = g_strdup_printf("%s 1:1", bookname);
 #endif
 }
 
@@ -416,9 +416,9 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 #ifndef USE_GTKHTML38
 	if (!ec)
 		return FALSE;
-	if (ed->key)
-		g_free(ed->key);
-	ed->key = g_strdup_printf("%s %d:1", bookname, chapter);
+	if (ec->key)
+		g_free(ec->key);
+	ec->key = g_strdup_printf("%s %d:1", bookname, chapter);
 #endif
 	return FALSE;
 }
@@ -471,9 +471,9 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 #ifndef USE_GTKHTML38
 	if (!ec)
 		return FALSE;
-	if (ed->key)
-		g_free(ed->key);
-	ed->key = g_strdup_printf("%s %d:%d", bookname, chapter, verse);
+	if (ec->key)
+		g_free(ec->key);
+	ec->key = g_strdup_printf("%s %d:%d", bookname, chapter, verse);
 #endif
 	return FALSE;
 }
@@ -516,9 +516,9 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 #ifndef USE_GTKHTML38
 		if (!ec)
 			return;
-		if (ed->key)
-			g_free(ed->key);
-		ed->key = g_strdup_printf("%s", buf);
+		if (ec->key)
+			g_free(ec->key);
+		ec->key = g_strdup_printf("%s", buf);
 #endif
 	}
 	return FALSE;
@@ -560,9 +560,9 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * d)
 #ifndef USE_GTKHTML38
 	if (!ec)
 		return;
-	if (ed->key)
-		g_free(ed->key);
-	ed->key = g_strdup_printf("%s", buf);
+	if (ec->key)
+		g_free(ec->key);
+	ec->key = g_strdup_printf("%s", buf);
 #endif
 }
 
@@ -967,41 +967,41 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 
 	if (do_edit) {
 #ifndef USE_GTKHTML38
-		ed->htmlwidget = gtk_html_new();
-		ed->html = GTK_HTML(ed->htmlwidget);
-		gtk_widget_show(ed->htmlwidget);
+		ec->htmlwidget = gtk_html_new();
+		ec->html = GTK_HTML(ec->htmlwidget);
+		gtk_widget_show(ec->htmlwidget);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-				  ed->htmlwidget);
+				  ec->htmlwidget);
 
-		ed->vbox = vbox30;
+		ec->vbox = vbox30;
 
-		ed->pm = gui_create_editor_popup(ec);
-		gnome_popup_menu_attach(ed->pm, ed->htmlwidget, NULL);
+		ec->pm = gui_create_editor_popup(ec);
+		gnome_popup_menu_attach(ec->pm, ec->htmlwidget, NULL);
 
-		ed->statusbar = gtk_statusbar_new();
-		gtk_widget_show(ed->statusbar);
-		gtk_box_pack_start(GTK_BOX(vbox30), ed->statusbar,
+		ec->statusbar = gtk_statusbar_new();
+		gtk_widget_show(ec->statusbar);
+		gtk_box_pack_start(GTK_BOX(vbox30), ec->statusbar,
 				   FALSE, TRUE, 0);
 		
 		/* html.c */
-		g_signal_connect(G_OBJECT(ed->htmlwidget),
+		g_signal_connect(G_OBJECT(ec->htmlwidget),
 				 "key_press_event",
 				 G_CALLBACK(html_key_press_event), d);
-		g_signal_connect(GTK_OBJECT(ed->htmlwidget),
+		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
 				 "link_clicked",
 				 G_CALLBACK(gui_link_clicked), NULL);
 
-		g_signal_connect(GTK_OBJECT(ed->htmlwidget),
+		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
 				 "on_url", G_CALLBACK(gui_url), NULL);
 
 		gui_toolbar_style(ec);
 		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ed->toolbar_style, FALSE, FALSE, 0);
-		gtk_widget_show(ed->toolbar_style);
+				   ec->toolbar_style, FALSE, FALSE, 0);
+		gtk_widget_show(ec->toolbar_style);
 		gui_toolbar_edit(ec);
 		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ed->toolbar_edit, FALSE, FALSE, 0);
-		gtk_widget_show(ed->toolbar_edit);
+				   ec->toolbar_edit, FALSE, FALSE, 0);
+		gtk_widget_show(ec->toolbar_edit);
 #endif  /* USE_GTKHTML38 */
 	} else {
 		d->html = gtk_html_new();
