@@ -1,5 +1,14 @@
 2006-11-15  karl <karl@charcoal.com>
 
+	* fixed bug #1575275: expand set of g_strdelimit() chars in
+	  on_new_folder_activate() to "/_-|><.'`\"".
+
+2006-11-15  karl <karl@charcoal.com>
+
+	* fixed bug #1504139 by adding reporter's supplied cs.po.
+	
+2006-11-15  karl <karl@charcoal.com>
+
 	* fixed bug #1535122 by applying reporter's supplied patch. thanx.
 	* improved grammar of first-time user download question.
 	* updated screenshot of question accordingly.
