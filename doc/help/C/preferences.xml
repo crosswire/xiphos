@@ -53,6 +53,16 @@
                         </screenshot>
                 </figure>
                 </sect2>
+		<sect2 id="tab-pane">
+			<title>General Preferences and StudyPad directory</title>
+		<figure>
+			<title>General Preferences and StudyPad directory</title>
+	        	<screenshot>
+	        		<screeninfo>General Preferences and StudyPad directory</screeninfo>
+                                <graphic fileref="figures/preferences_general-misc.png" format="PNG" ></graphic>
+                        </screenshot>
+                </figure>
+                </sect2>
 	</sect1>
 	
 <!-- Module Settings -->
