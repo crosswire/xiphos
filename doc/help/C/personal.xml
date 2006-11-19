@@ -2,7 +2,7 @@
 <chapter id="personal" lang="en">
 	<title>The Personal Commentary </title>
 				<para> To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. 
-				Right click it and choose <guimenuitem> edit-&gt;Personal </guimenuitem> in the pop-up menus.   
+				Right click it and choose <guimenuitem> Edit-&gt;Personal </guimenuitem> in the pop-up menus.   
 				</para>
 				<para> An editor window similar to the <guimenuitem> Study Pad </guimenuitem> will appear. Edit your comment and save it, in future it will appear as your comment to the relevant verse. </para>
 				<figure>
@@ -18,7 +18,7 @@
 			        	<listitem><para>Bible Book, Chapter and Verse Selectors</para></listitem>
 			        	<listitem><para>Location Summary</para></listitem>
 			        	</itemizedlist>
-			        <para> Use the <guimenuitem>Synchronise Button</guimenuitem> to quickly change location of your editor to that of the underlying Bibletext or use the <guimenuitem> Book </guimenuitem>, <guimenuitem>Chapter </guimenuitem> and <guimenuitem>Verse selectors </guimenuitem> to choose to edit your comment to one particular verse. </para>	
+			        <para> Use the <guimenuitem>Synchronise Button</guimenuitem> to quickly change location of your editor to that of the underlying Bibletext or use the <guimenuitem>Book</guimenuitem>, <guimenuitem>Chapter</guimenuitem>, and <guimenuitem>Verse selectors</guimenuitem> to choose to edit your comment to one particular verse. </para>	
 			        <para> Toolbar 1</para>
 			        	<itemizedlist>
 			     		<listitem><para>Font Size and Environment</para></listitem>
