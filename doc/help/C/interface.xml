@@ -126,7 +126,7 @@ format="PNG"/>
 		      	</screenshot>
 	    	</figure>
 		<para>
-	     	On the left hand side of <application>GnomeSword2</application> there is the Side Pane. Here the
+	     	On the left hand side of <application>GnomeSword</application> there is the Side Pane. Here the
 	     	user can switch between the different Sword modules, view bookmarks, do simple searches and view verse lists.
 		To switch between all Side Pane functions, shortcuts have been placed at the bottom of the Side Pane.
 		Clicking on the shortcut activates the option.
@@ -151,7 +151,7 @@ format="PNG"/>
 	    	</figure>
 		<para>
 		Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
-		will be displayed for full viewing. When starting <application>GnomeSword2</application> either your default Bible translation or the translation
+		will be displayed for full viewing. When starting <application>GnomeSword</application> either your default Bible translation or the translation
 		last used will be displayed.
 		</para>
 		
@@ -181,7 +181,7 @@ format="PNG"/>
 		<sect2 id="gnomesword-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
-			A nice function in <application>GnomeSword2</application> is the ability to view your specified bible text in parallel in five
+			A nice function in <application>GnomeSword</application> is the ability to view your specified bible text in parallel in five
 			translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel View</guimenuitem> just
 			below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you
 			can only view one verse at a time. You can change the verse by selecting another verse, chapter, or book at the toolbar. Also note
@@ -212,7 +212,7 @@ format="PNG"/>
 		<sect2 id="gnomesword-bible-open-separate">
 			<title>Opening A Separate Bible Translation</title>
 			<para>
-			In order to view a Bible translation separate from the <application>GnomeSword2</application> interface:
+			In order to view a Bible translation separate from the <application>GnomeSword</application> interface:
 			</para>
 			<itemizedlist>
 				<listitem>
