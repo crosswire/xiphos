@@ -184,33 +184,27 @@ an ordinary period.
 		<sect2 id="hdbk-op-search-dialog-text-regexp-rules">
 			<title>Rules for GCC Regular Expression Search Requests</title>
 			<itemizedlist>
-<listitem><para>. The period matches any character. See <link
-	linkend="period">Details</link></para></listitem>
+<listitem><para>. The period matches any character.
 <listitem><para>* The asterisk matches 0 or more characters of the
-	preceding: set, character or indicated character. See <link
-	linkend="asterisk">Details</link></para></listitem>
+	preceding: set, character or indicated character.
 <listitem><para>+ The plus sign matches 1 or more characters of the
-	preceding: set, character or indicated character. See <link
-	linkend="plus">Details</link></para></listitem>
+	preceding: set, character or indicated character.
 <listitem><para>? The question mark matches 0 or 1 character of the
-	preceding: set, character or indicated character. See <link
-	linkend="question">Details</link></para></listitem>
+	preceding: set, character or indicated character.
 <listitem><para>[ ] Square brackets match any one of the characters
-	specified inside [ ]. See <link linkend="bracket">Details</link></para></listitem>
-<listitem><para>^ A caret as the first character inside [ ] means NOT. See
-	<link linkend="caret">Details</link></para></listitem>
+	specified inside [ ].
+<listitem><para>^ A caret as the first character inside [ ] means NOT.
 <listitem><para>^ A caret beginning a pattern anchors the beginning of a
-	line. See <link linkend="caret">Details</link></para></listitem>
+	line.
 <listitem><para>$ A dollar at the end of a pattern anchors the end of a
-	line. See <link linkend="dollar">Details</link></para></listitem>
-<listitem><para>| A vertical bar means logical OR. See <link
-	linkend="bar">Details</link></para></listitem>
+	line.
+<listitem><para>| A vertical bar means logical OR.
 <listitem><para>( ) Parentheses enclose expressions for grouping.
 <emphasis>Not supported!</emphasis></para></listitem>
 <listitem><para>\ A backslash can be used prior to any special character
-	to match that character. See <link linkend="backslash">Details</link></para></listitem>
+	to match that character.
 <listitem><para>\ A backslash can be used prior to an ordinary character
-	to make it a special character. See <link linkend="backslash">Details</link></para></listitem>
+	to make it a special character.
 </itemizedlist>
 
 <sect3 id="period">
