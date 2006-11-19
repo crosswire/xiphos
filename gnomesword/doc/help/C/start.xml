@@ -34,7 +34,7 @@
 		When you start <application>GnomeSword</application> for the first time, <application>GnomeSword</application> creates a
 		default selection of options for display.  Also, if no other Sword application has ever been run, and thus there are no
 		Bible modules installed, then <application>GnomeSword</application> will ask permission to download one Bible module from
-		Crosswire.  <application>GnomeSword</application> then opens its interface with one tab displayed, showing Romans 8:28.
+		Crosswire.
 		</para>
 		<figure id="gnomesword-start-question">
 			<title>GnomeSword Download Question</title>
@@ -44,8 +44,10 @@
                         </screenshot>
                 </figure>
 		<para>
-		Once the interface is open, you can use <menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any
-		of the selections already made by default.
+		<application>GnomeSword</application> then opens its interface with one tab displayed, showing Romans 8:28.  Once the
+		interface is open, you can use
+		<menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any of the
+		selections already made by default.
 		</para>
 	 </sect1>
 <!-- GnomeSword on first time use -->
