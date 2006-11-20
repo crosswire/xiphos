@@ -144,7 +144,7 @@
 		</sect2>
 	</sect1>
 	<sect1 id="gnomesword-advanced-search">
-	   <title> Advanced Searches</title> 
+	   <title>Advanced Searches</title> 
 	   <para> More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem></para>
 
 	 
@@ -184,27 +184,27 @@ an ordinary period.
 		<sect2 id="hdbk-op-search-dialog-text-regexp-rules">
 			<title>Rules for GCC Regular Expression Search Requests</title>
 			<itemizedlist>
-<listitem><para>. The period matches any character.
+<listitem><para>. The period matches any character.</para></listitem>
 <listitem><para>* The asterisk matches 0 or more characters of the
-	preceding: set, character or indicated character.
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>+ The plus sign matches 1 or more characters of the
-	preceding: set, character or indicated character.
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>? The question mark matches 0 or 1 character of the
-	preceding: set, character or indicated character.
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>[ ] Square brackets match any one of the characters
-	specified inside [ ].
-<listitem><para>^ A caret as the first character inside [ ] means NOT.
+	specified inside [ ].</para></listitem>
+<listitem><para>^ A caret as the first character inside [ ] means NOT.</para></listitem>
 <listitem><para>^ A caret beginning a pattern anchors the beginning of a
-	line.
+	line.</para></listitem>
 <listitem><para>$ A dollar at the end of a pattern anchors the end of a
-	line.
-<listitem><para>| A vertical bar means logical OR.
+	line.</para></listitem>
+<listitem><para>| A vertical bar means logical OR.</para></listitem>
 <listitem><para>( ) Parentheses enclose expressions for grouping.
 <emphasis>Not supported!</emphasis></para></listitem>
 <listitem><para>\ A backslash can be used prior to any special character
-	to match that character.
+	to match that character.</para></listitem>
 <listitem><para>\ A backslash can be used prior to an ordinary character
-	to make it a special character.
+	to make it a special character.</para></listitem>
 </itemizedlist>
 
 <sect3 id="period">
