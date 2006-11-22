@@ -60,6 +60,7 @@ typedef enum {
 	USE_VERSE_STYLE,
 	USE_PINNED_TABS,
 	READ_ALOUD,
+	SHOW_VERSE_NUM,
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
@@ -147,6 +148,7 @@ struct _preferences_check_buttons {
 	GtkWidget *use_verse_style;
 	GtkWidget *use_pinned_tabs;
 	GtkWidget *readaloud;
+	GtkWidget *show_verse_num;
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
@@ -689,6 +691,35 @@ void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.readaloud_item),
 			       settings.readaloud);
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton12_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "showversenum",
+		      (togglebutton->active ? "1" : "0"));
+	settings.showversenum = atoi(xml_get_value("misc", "showversenum"));
+	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.showversenum_item),
+			       settings.showversenum);
 }
 
 
@@ -1767,6 +1798,7 @@ static void create_preferences_dialog(void)
 	check_button.use_verse_style = glade_xml_get_widget(gxml, "checkbutton5");
 	check_button.use_pinned_tabs = glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
+	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
 	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");

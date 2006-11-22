@@ -205,11 +205,13 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
-		swbuf.appendFormatted("&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
-				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+		swbuf.appendFormatted(settings.showversenum
+				? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
+				: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
 				utf8_key,
 				0, 
-				(settings.versestyle) ?settings.verse_num_font_size :"-2",
+				(settings.versestyle) ? settings.verse_num_font_size : "-2",
 				settings.bible_verse_num_color, 
 				key->Verse());
 		
@@ -274,8 +276,10 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
-		swbuf.appendFormatted("&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
-				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+		swbuf.appendFormatted(settings.showversenum
+				? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
+				: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
 				utf8_key,
 				0, 
 				(settings.versestyle)
@@ -550,9 +554,10 @@ char GTKChapDisp::Display(SWModule &imodule)
                              &bytes_written,
                              error);
 		
-		swbuf.appendFormatted(
-			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
-			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+		swbuf.appendFormatted(settings.showversenum
+			? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
+			: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
 			utf8_key,
 			key->Verse(),
 			settings.verse_num_font_size,
@@ -907,9 +912,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 			++x;
 			sprintf(heading,"%d",x);
 		}
-		buf = g_strdup_printf(
-			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
-			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+		buf = g_strdup_printf(settings.showversenum
+			? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
+			: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
 			(char*)key->getText(),
 			key->Verse(),
 			settings.verse_num_font_size,

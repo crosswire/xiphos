@@ -578,6 +578,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showtexts", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versestyle", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showversenum", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"setup_canceled",(const xmlChar *)"0");
 
