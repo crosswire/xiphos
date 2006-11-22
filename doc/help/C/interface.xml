@@ -343,6 +343,12 @@ format="PNG"/>
 					widely-available TTS, often installed by default in Linux distributions.
 					</para>
 				</listitem>
+				<listitem>	
+					<para>
+					Show Verse Numbers - Normally enabled, this toggle can be disabled to prevent display of verse
+					numbers within the text.
+					</para>
+				</listitem>
 			</itemizedlist>
 		</sect2>
 		
