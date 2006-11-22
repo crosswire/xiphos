@@ -490,6 +490,14 @@ void load_settings_structure(void)
 		settings.readaloud = 0;
 	}
 
+	buf = xml_get_value("misc", "showversenum");
+	if (buf)
+		settings.showversenum = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "showversenum", "1");
+		settings.showversenum = 1;
+	}
+
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 	
 		

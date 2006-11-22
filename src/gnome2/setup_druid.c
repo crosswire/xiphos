@@ -53,6 +53,7 @@ struct _settings_druid {
 	GtkWidget *checkbutton_verse_style;
 	GtkWidget *checkbutton_pinned_tabs;
 	GtkWidget *checkbutton_readaloud;
+	GtkWidget *checkbutton_show_verse_num;
 	GtkWidget *checkbutton_text_tabs;
 	GtkWidget *checkbutton_text_window;
 	GtkWidget *checkbutton_comm_tabs;
@@ -208,6 +209,13 @@ static void save_first_run_settings(SETTINGS_DRUID widgets)
 		xml_set_value("GnomeSword", "misc", "readaloud", "1");
 	else
 		xml_set_value("GnomeSword", "misc", "readaloud", "0");
+
+	settings.showversenum =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_show_verse_num)->active;
+	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_show_verse_num)->active)
+		xml_set_value("GnomeSword", "misc", "showversenum", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showversenum", "0");
 
 	settings.showtexts =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active;
@@ -656,6 +664,17 @@ static GtkWidget *create_setup_druid(GList * biblemods,
 	gtk_widget_set_size_request(widgets.checkbutton_readaloud, 212, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.checkbutton_readaloud),
+				     TRUE);
+
+	widgets.checkbutton_show_verse_num =
+	    gtk_check_button_new_with_label(_("Show Verse Numbers"));
+	gtk_widget_show(widgets.checkbutton_show_verse_num);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_show_verse_num, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(widgets.checkbutton_show_verse_num, 212, -1);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.checkbutton_show_verse_num),
 				     TRUE);
 
 	widgets.checkbutton_text_tabs =

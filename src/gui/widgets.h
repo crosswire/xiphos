@@ -107,6 +107,7 @@ struct  _app_widgets {
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*pinnedtabs_item,	/* widget to access toggle menu - for pinnedtabs */
+		*showversenum_item,	/* widget to access toggle menu - for showversenum */
 		*readaloud_item,	/* widget to access toggle menu - for reading out loud */
 		*button_dict_book,      /* main toolbar togglebutton */
 //		*button_parallel_view,  /* main toolbar togglebutton */

@@ -104,6 +104,7 @@ struct _settings {
 		greekaccentsint, //-- check menu state parallel mods
 	        versestyle, /* use verse style if true or paragraph style if not */
 	        pinnedtabs, /* all tabs are pinned together, moving in concert */
+	        showversenum, /* display verse numbers in text (default on) */
 	        readaloud, /* pass text through (existing) "festival -server" */
 	        parallelpage, /* display parallel page */
 	        autosavepersonalcomments, /* auto save personal notes */
