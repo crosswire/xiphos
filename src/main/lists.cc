@@ -118,6 +118,7 @@ void main_init_lists(void)
 	if(start_backend) {
 		free((char*)sword_locale);
 		delete backend;
+		backend = NULL;
 	}
 
 	settings.havebible = g_list_length(mods.biblemods);
@@ -143,6 +144,8 @@ void main_init_lists(void)
 void main_shutdown_list(void)
 {
 	/* free lists */
+	if(!mod_lists) return;
+		
 	while (mod_lists->options != NULL) {
 		g_free((char *) mod_lists->options->data);
 		mod_lists->options = g_list_next(mod_lists->options);
@@ -217,4 +220,5 @@ void main_shutdown_list(void)
 		    g_list_next(mod_lists->devotionmods);
 	}
 	g_list_free(mod_lists->devotionmods);
+	mod_lists = NULL;
 }

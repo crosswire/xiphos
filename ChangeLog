@@ -1,3 +1,10 @@
+2006-11-23  terry <tbiggs@users.sf.net>
+
+	* bumped to 2.1.10
+	* fixed bug #1601744:title of module in titlebar not displaying 
+	  for GetLut1545
+	* fixed module manager to work on first run 
+
 2006-11-22  karl <karl@charcoal.com>
 
 	* added feature #861174: move Unlock Module to right-click menu end.

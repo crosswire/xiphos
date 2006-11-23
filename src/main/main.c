@@ -81,7 +81,6 @@ int main(int argc, char *argv[])
 			have_sword_url = TRUE;
 		}
 	}
-
 	/* 
 	 * check for directories and files
 	 */   
