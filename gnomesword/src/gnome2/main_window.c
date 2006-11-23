@@ -260,13 +260,14 @@ void gui_set_bible_comm_layout(void)
 
 void gui_change_window_title(gchar * module_name)
 {
-	gchar title[200];
+	gchar *title;//[200];
 	/*
 	 * set program title to current module name
 	 */
-	sprintf(title, "%s - %s", main_get_module_description(module_name),
+	title = g_strdup_printf("%s - %s", main_get_module_description(module_name),
 						settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
+	g_free(title);
 }
 
 

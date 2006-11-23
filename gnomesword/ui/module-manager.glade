@@ -9,7 +9,7 @@
   <property name="title" translatable="yes">Module Manager</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
+  <property name="modal">True</property>
   <property name="default_width">600</property>
   <property name="default_height">341</property>
   <property name="resizable">True</property>

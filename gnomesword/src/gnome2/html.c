@@ -377,8 +377,16 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 	if (!html->in_selection) {
 		gtk_html_select_word(html);
 		key = gtk_html_get_selection_html(html, &len);
+		if(!len) {
+			return NULL;
+		}
+		
+		
 		buf = main_get_striptext_from_string(settings.MainWindowModule, 
-						key);		
+						key);	
+		
+		g_message(buf);
+		if(buf == NULL) return;
 		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		len = strlen(key);
