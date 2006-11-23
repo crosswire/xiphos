@@ -445,6 +445,7 @@ void main_init_backend(void)
 	SWMgr mgr;
 	
 	if (!lang) lang="C";
+	
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
@@ -484,7 +485,10 @@ void main_init_backend(void)
 
 void main_shutdown_backend(void)
 {
-	delete backend; 
+	if(backend) 
+	        delete backend; 
+	backend = NULL;
+		
 #ifdef DEBUG	
 	g_print("%s\n", _("SWORD is shutdown"));
 #endif

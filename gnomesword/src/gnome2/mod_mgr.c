@@ -106,6 +106,7 @@ static gboolean dot_sword;
 static const gchar *destination;
 static gboolean have_configs;
 static gboolean have_changes;
+static gboolean need_update;
 static gint current_page;
 static gint response;
 static GdkPixbuf *INSTALLED;
@@ -535,6 +536,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	GError *error = NULL;
 	gboolean valid;
 
+		
 	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
 		language = N_("Unknown");
 
@@ -1573,9 +1575,45 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	} 
-	if(have_changes) {
+	if(have_changes && need_update) {
 		main_update_module_lists();
 		main_load_module_tree(sidebar.module_list);
+	}
+}
+
+
+void on_refresh_clicked(GtkButton * button, gpointer  user_data)
+{
+	response_refresh();
+}
+
+void on_install_clicked(GtkButton * button, gpointer  user_data)
+{
+	GList *modules = NULL;
+	modules = get_list_mods_to_remove_install(INSTALL);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	remove_install_modules(modules, INSTALL);
+	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	} 	
+}
+
+void on_remove_clicked(GtkButton * button, gpointer  user_data)
+{
+	GList *modules = NULL;
+	modules = get_list_mods_to_remove_install(REMOVE);
+	remove_install_modules(modules, REMOVE);
+	load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);	
+}
+
+void on_cancel_clicked(GtkButton * button, gpointer  user_data)
+{
+	mod_mgr_terminate();
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
 	}
 }
 
@@ -1998,11 +2036,7 @@ void setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
 static
 void set_combobox(GtkComboBox * combo)
 {	
-	//GtkTreeIter iter;
 	GtkListStore *store;
-	//GtkCellRenderer *renderer;
-	//gint index = 0;
-	//gint i = 0;
 	
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo, GTK_TREE_MODEL(store));
@@ -2011,27 +2045,158 @@ void set_combobox(GtkComboBox * combo)
 
 
 static
-void create_module_manager_dialog(void)
+void setup_dialog_action_area(GtkDialog * dialog)
+{	
+	GtkWidget *alignment1;
+	GtkWidget *hbox1;
+	GtkWidget *image1;
+	GtkWidget *label1;
+	GtkWidget *dialog_action_area1 = GTK_DIALOG (dialog)->action_area;
+	
+	gtk_widget_show (dialog_action_area1);
+	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
+
+	/* responce buttons */
+/* close */	
+	button_close = gtk_button_new_from_stock ("gtk-close");
+	gtk_widget_show (button_close);
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_close, GTK_RESPONSE_CLOSE);
+	GTK_WIDGET_SET_FLAGS (button_close, GTK_CAN_DEFAULT);
+/* connect/refresh */	
+	button1 = gtk_button_new_from_stock ("gtk-connect");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button1,FALSE, FALSE,0);
+	g_signal_connect(button1, "clicked", G_CALLBACK(on_refresh_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button1, 301);
+	//GTK_WIDGET_SET_FLAGS (button1, GTK_CAN_DEFAULT); 
+/* install */	
+	button2 = gtk_button_new ();
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button2,FALSE, FALSE,0);
+	g_signal_connect(button2, "clicked", G_CALLBACK(on_install_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button2, 303);
+	//GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
+
+	alignment1 = gtk_alignment_new (0.5, 0.5, 0, 0);
+	gtk_widget_show (alignment1);
+	gtk_container_add (GTK_CONTAINER (button2), alignment1);
+
+	hbox1 = gtk_hbox_new (FALSE, 2);
+	gtk_widget_show (hbox1);
+	gtk_container_add (GTK_CONTAINER (alignment1), hbox1);
+
+	image1 = gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show (image1);
+	gtk_box_pack_start (GTK_BOX (hbox1), image1, FALSE, FALSE, 0);
+
+	label1 = gtk_label_new_with_mnemonic (_("Install"));
+	gtk_widget_show (label1);
+	gtk_box_pack_start (GTK_BOX (hbox1), label1, FALSE, FALSE, 0);
+
+  
+/* remove */	
+	button3 =  gtk_button_new_from_stock ("gtk-remove");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button3,FALSE, FALSE,0);
+	g_signal_connect(button3, "clicked", G_CALLBACK(on_remove_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button3, 302);
+	//GTK_WIDGET_SET_FLAGS (button3, GTK_CAN_DEFAULT);
+/* cancel */	
+	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_cancel,FALSE, FALSE,0);
+	g_signal_connect(button_cancel, "clicked", G_CALLBACK(on_cancel_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_cancel, GTK_RESPONSE_CANCEL);
+	//GTK_WIDGET_SET_FLAGS (button_cancel, GTK_CAN_DEFAULT);
+	
+}
+
+static void setup_ui_labels()
+{
+
+	GString *str = g_string_new(NULL);
+	gchar *path = NULL;
+	gchar *homedir = NULL;
+		
+	if((homedir = getenv("HOME")) == NULL) {
+		
+		
+	}	
+	have_changes = FALSE;
+	g_string_printf(str, "%s/%s", homedir,
+			".sword/InstallMgr/InstallMgr.conf");
+	if (!mod_mgr_check_for_file(str->str)) {
+		have_configs = FALSE;
+		mod_mgr_init_config();
+	}
+	have_configs = TRUE;
+	mod_mgr_init(NULL);
+	g_string_printf(str, "%s/%s", homedir, ".sword");
+	gtk_label_set_text(GTK_LABEL(label_home), str->str);
+
+	path = main_module_mgr_get_path_to_mods();
+	gtk_label_set_text(GTK_LABEL(label_system), path);
+	if (access(path, W_OK) == -1) {
+		g_print("%s is write protected\n", path);
+		gtk_widget_set_sensitive(label_system, FALSE);
+		gtk_widget_set_sensitive(radiobutton4, FALSE);
+	} else {
+		gtk_widget_set_sensitive(label_system, TRUE);
+		gtk_widget_set_sensitive(radiobutton4, TRUE);
+	}
+	create_pixbufs();
+	load_source_treeviews();
+	g_string_free(str, TRUE);
+	g_free(path);
+}
+
+static
+GtkWidget *create_module_manager_dialog(gboolean first_run)
 {
 	gchar *glade_file;
+	GtkWidget *dialog_vbox;
+	GtkWidget *hpaned;
 	GtkWidget *chooser;
 	GtkWidget *button5;
 	GtkWidget *button6;
 	GtkWidget *button7;
 	GtkWidget *button8;
 	gint index = 0;
+	GString *str = g_string_new(NULL);
+	gchar *homedir = NULL;
+	gchar *path = NULL;
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
 	g_message(glade_file);
 	
 	/* build the widget */
-	gxml = glade_xml_new (glade_file, "dialog", NULL);
+	if(first_run) {		
+		gxml = glade_xml_new (glade_file, "hpaned1", NULL);       //"dialog", NULL);
+	} else {
+		gxml = glade_xml_new (glade_file, "dialog", NULL);
+		
+	}
+	//gxml = glade_xml_new (glade_file, "hpaned1", NULL);       //"dialog", NULL);
 	g_free (glade_file);
 	g_return_if_fail (gxml != NULL);
 
 	/* lookup the root widget */
-	dialog = glade_xml_get_widget (gxml, "dialog");
+	if(first_run) {		
+		hpaned = glade_xml_get_widget (gxml, "hpaned1"); 
+		dialog = gtk_dialog_new();
+		gtk_widget_show(dialog);
+		dialog_vbox = GTK_DIALOG(dialog)->vbox;
+		gtk_widget_show(dialog_vbox);
+		gtk_box_pack_start(GTK_BOX(dialog_vbox),hpaned, TRUE, TRUE, 6);
+		/* setup dialog action area */
+		setup_dialog_action_area(GTK_DIALOG (dialog));
+	} else {
+		dialog =  glade_xml_get_widget (gxml, "dialog");
+		/* responce buttons */
+		button_close = glade_xml_get_widget (gxml, "button1"); /* close */
+		button_cancel = glade_xml_get_widget (gxml, "button12"); /* close */
+		button1 = glade_xml_get_widget (gxml, "button2"); /* refresh */
+		button2 = glade_xml_get_widget (gxml, "button3"); /* install */
+		button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
+	}
+		
 	g_signal_connect(dialog, "response",
 			 G_CALLBACK(on_mod_mgr_response), NULL);
 	g_signal_connect(dialog, "destroy",
@@ -2060,12 +2225,8 @@ void create_module_manager_dialog(void)
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
 	label_system = glade_xml_get_widget (gxml, "label_sword_sys");
-	/* responce buttons */
-	button_close = glade_xml_get_widget (gxml, "button1"); /* close */
-	button_cancel = glade_xml_get_widget (gxml, "button12"); /* close */
-	button1 = glade_xml_get_widget (gxml, "button2"); /* refresh */
-	button2 = glade_xml_get_widget (gxml, "button3"); /* install */
-	button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
+	
+	
 	/* sources buttons */
 	button5 = glade_xml_get_widget (gxml, "button5"); /* close */
 	button6 = glade_xml_get_widget (gxml, "button6"); /* close */
@@ -2102,10 +2263,10 @@ void create_module_manager_dialog(void)
 */
 	/* progress bars */
 	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
-/*	
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
-		*/
+		
+	setup_ui_labels();
+		
+	return dialog;
 }
 
 
@@ -2127,46 +2288,39 @@ void create_module_manager_dialog(void)
 
 void gui_open_mod_mgr(void)
 {
-	//GtkWidget *dlg;
-	GString *str = g_string_new(NULL);
-	gchar *path = NULL;
-
-	have_changes = FALSE;
-	g_string_printf(str, "%s/%s", settings.homedir,
-			".sword/InstallMgr/InstallMgr.conf");
-
-	if (!mod_mgr_check_for_file(str->str)) {
-		have_configs = FALSE;
-		mod_mgr_init_config();
-	}
-	have_configs = TRUE;
-	/*
-	   if (g_thread_supported ())
-	   g_print("g_thread_supported\n");
-	 */
-	mod_mgr_init(NULL);
-	//dlg = create_dialog();
-	create_module_manager_dialog();
-	
-	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
-	gtk_label_set_text(GTK_LABEL(label_home), str->str);
-
-	path = main_get_path_to_mods();
-	gtk_label_set_text(GTK_LABEL(label_system), path);
-	if (access(path, W_OK) == -1) {
-		g_print("%s is write protected\n", path);
-		gtk_widget_set_sensitive(label_system, FALSE);
-		gtk_widget_set_sensitive(radiobutton4, FALSE);
-	} else {
-		gtk_widget_set_sensitive(label_system, TRUE);
-		gtk_widget_set_sensitive(radiobutton4, TRUE);
-	}
-
-	create_pixbufs();
-	load_source_treeviews();
-	g_string_free(str, TRUE);
+	need_update = TRUE;
+	create_module_manager_dialog(FALSE);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_open_mod_mgr_initial_run
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void gui_open_mod_mgr_initial_run(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_open_mod_mgr_initial_run(void)
+{
+	GtkWidget *dlg;
+	need_update = FALSE;
+	//const char *lang = getenv("LANG");	
+	//if (!lang) lang="C";
+	//main_module_mgr_set_sword_locale(lang);
+	//OLD_CODESET = "iso8859-1";
+	dlg = create_module_manager_dialog(TRUE);
+	gtk_dialog_run((GtkDialog *) dlg);
+	gtk_widget_destroy(dlg);
+}
 
 /******************************************************************************
  * Name
