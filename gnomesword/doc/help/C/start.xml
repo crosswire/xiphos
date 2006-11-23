@@ -33,8 +33,8 @@
 		<para>
 		When you start <application>GnomeSword</application> for the first time, <application>GnomeSword</application> creates a
 		default selection of options for display.  Also, if no other Sword application has ever been run, and thus there are no
-		Bible modules installed, then <application>GnomeSword</application> will ask permission to download one Bible module from
-		Crosswire.
+		Bible modules installed, then <application>GnomeSword</application> asks permission to start the Module Manager so
+		that you can select and install a Bible module in your language preference.
 		</para>
 		<figure id="gnomesword-start-question">
 			<title>GnomeSword Download Question</title>
