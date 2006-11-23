@@ -1,3 +1,9 @@
+2006-11-23  karl <karl@charcoal.com>
+
+	* changed first-run permission dialog to accommodate terry's MM fix.
+	* altered logic for fallback exit if user fails to install any Bible.
+	* updated doc+screenshot to reflect new first-run MM usage.
+
 2006-11-23  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.10
@@ -7,7 +13,7 @@
 	* corrected tooltip for search dialog - Search Type -> Attributes
 	  from //Word/Strongs/G1722 to //Word/Lemma/G1722 this will do a search
 	  for Strongs Numbers.
-	* added new label "Results Diaplay Options" to search dialog
+	* added new label "Results Display Options" to search dialog
 
 2006-11-22  karl <karl@charcoal.com>
 
@@ -17,7 +23,7 @@
 2006-11-15  karl <karl@charcoal.com>
 
 	* fixed bug #1575275: expand set of g_strdelimit() chars in
-	  on_new_folder_activate() to "/_-|><.'`\"".
+	  on_new_folder_activate() to "/|><.'`\"".
 
 2006-11-15  karl <karl@charcoal.com>
 

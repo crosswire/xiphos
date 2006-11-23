@@ -49,7 +49,7 @@
  */
 #define GS_DIR ".gnomesword-2.0"
 
-#define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs to install one Bible.\n\nWith your permission, GnomeSword will install one Bible module from Crosswire. If you wish to install others, especially for your language preference, you may use the Module Manager after GnomeSword has initialized.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword use Crosswire to install a Bible?"
+#define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n\nWith your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n1. Configure remote install.\n2. Connect.\n3. Select a Bible text of your language preference.\n4. Click `install'.\nClose the Module Manager when you are done.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword invoke the Module Manager so that you may install a Bible?"
 
 /******************************************************************************
  * globals
@@ -174,8 +174,13 @@ int settings_init(int new_configs, int new_bookmarks)
 		if (access(sword_dir, F_OK) == -1) {
 			if (gui_yes_no_dialog(GS_NET_PERMISSION)) {
 				gui_open_mod_mgr_initial_run();					
-				gui_generic_warning
-				    ("Bible module installation complete.");
+				if (access(sword_dir, F_OK) == -1) {
+					gui_generic_warning
+					    ("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
+					exit(1);
+				} else
+					gui_generic_warning
+					    ("Bible module installation complete.");
 			} else {
 				gui_generic_warning
 				    ("Without any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
