@@ -4,6 +4,10 @@
 	* fixed bug #1601744:title of module in titlebar not displaying 
 	  for GetLut1545
 	* fixed module manager to work on first run 
+	* corrected tooltip for search dialog - Search Type -> Attributes
+	  from //Word/Strongs/G1722 to //Word/Lemma/G1722 this will do a search
+	  for Strongs Numbers.
+	* added new label "Results Diaplay Options" to search dialog
 
 2006-11-22  karl <karl@charcoal.com>
 

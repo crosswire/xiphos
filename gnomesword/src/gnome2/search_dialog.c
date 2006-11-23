@@ -60,7 +60,7 @@ static gboolean _preview_on;
 static gboolean _in_url;
 
 
-
+ 
 
 void
 on_treeview9_row_activated(GtkTreeView * treeview,
