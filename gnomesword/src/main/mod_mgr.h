@@ -47,6 +47,8 @@ struct  _mms {
 	const char *directory;
 };
 
+char *main_module_mgr_set_sword_locale(const char *sys_locale);
+char *main_module_mgr_get_path_to_mods(void);
 void main_update_module_lists(void);
 MOD_MGR *mod_mgr_get_next_module(void);
 void update_install_status(long total, long done, const char *message);

@@ -698,21 +698,34 @@ int BackEnd::module_type(const char *mod_name) {
 
 char *BackEnd::module_description(char *mod_name) {
 	ModMap::iterator it;	//-- iteratior
+	char *description = NULL;                                                   
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error = NULL;
+	
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return NULL;
 	//-- iterate through the modules until we find modName 
 	it = main_mgr->Modules.find(mod_name);
 	//-- if we find the module
-	if (it != main_mgr->Modules.end()) {
-		return (*it).second->Description();
+	if (it != main_mgr->Modules.end()) {	
+		description = g_convert((char*)(*it).second->Description(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		//g_message((*it).second->Description());
+		return description;  //(*it).second->Description();
 	}
 	return NULL;
 }
-
+ 
 char *BackEnd::module_name_from_description(char *description) {
 	ModMap::iterator it;
 	char *retval = NULL;
-	
+	 
 	if(!description)
 		return NULL;
 	
