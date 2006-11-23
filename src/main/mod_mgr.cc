@@ -23,7 +23,12 @@
 #include <config.h>
 #endif
 
+#include <swmgr.h>
+#include <swmodule.h>
+#include <localemgr.h>
+#include <swlocale.h>
 #include "main/mod_mgr.h"
+#include "main/sword.h"
 
 #include "gui/mod_mgr.h"
 
@@ -31,8 +36,84 @@
 #include "backend/sword_main.hh"
 
 
+char *main_module_mgr_set_sword_locale(const char *sys_locale) {
+	const char *mylocale;
+	char *retval = NULL;
+	char buf[32];
+	int i = 0;
+	SWLocale *sw_locale;
+	
+	if(sys_locale) {
+		if(!strncmp(sys_locale,"ru_RU",5)) {
+			sys_locale = "ru_RU-koi8-r";		
+		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)){
+			if(strlen(sys_locale) >  12) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)){
+			if(strlen(sys_locale) > 12 ) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)){
+			if(strlen(sys_locale) > 12 ) {
+				for(i = 0; i < 12; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"pt_BR",5)){
+			if(strlen(sys_locale) > 5 ) {
+				for(i = 0; i < 5; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+			
+		} else if(!strncmp(sys_locale,"en_GB",5)){
+			if(strlen(sys_locale) > 5 ) {
+				for(i = 0; i < 5; i++) {
+					buf[i] = sys_locale[i];
+					buf[i+1] = '\0';
+				}
+				sys_locale = buf;
+			}
+		} else {
+			if(strlen(sys_locale) > 2 ) {
+				buf[0] = sys_locale[0];
+				buf[1] = sys_locale[1];
+				buf[2] = '\0';
+				sys_locale = buf;
+			}
+		}
+		retval = strdup(sys_locale);
+		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
+		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
+	}
+	if(sw_locale) {
+		OLD_CODESET = (char*)sw_locale->getEncoding();
+	} else {
+		OLD_CODESET = "iso8859-1";
+	}
+	return retval;
+}
 
-
+char *main_module_mgr_get_path_to_mods(void)
+{
+	return backend_module_mgr_get_path_to_mods();
+}
 
 /******************************************************************************
  * Name
@@ -49,7 +130,7 @@
  * Return value
  *   void
  */
-
+ 
 void main_update_module_lists(void)
 {
 	main_shutdown_list();
@@ -267,9 +348,6 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 {
 	GList *list = NULL;	
 	MOD_MGR *mod_info;
-	
-//	backend_delete_main_mgr();
-//	backend_init_main_mgr();
 	
 	backend_module_mgr_remote_list_modules_init(source_name);
 	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
