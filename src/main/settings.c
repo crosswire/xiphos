@@ -173,15 +173,7 @@ int settings_init(int new_configs, int new_bookmarks)
 		sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/modules/texts");
 		if (access(sword_dir, F_OK) == -1) {
 			if (gui_yes_no_dialog(GS_NET_PERMISSION)) {
-				gui_generic_warning
-				    ("Click OK to begin install.\n(This will take a minute or two.)");
-				backend_init_module_mgr_config();
-				system("cd ; cd .sword ; installmgr -r crosswire ; installmgr -ri crosswire ESV ; rm -f dirlist");
-				if (access(sword_dir, F_OK) == -1) {
-					gui_generic_warning
-					    ("Installation was unsuccessful.\n\nGnomeSword cannot proceed, and will now exit.");
-					exit(1);
-				}
+				gui_open_mod_mgr_initial_run();					
 				gui_generic_warning
 				    ("Bible module installation complete.");
 			} else {
