@@ -794,9 +794,12 @@ void main_display_book(const char * mod_name, char * key)
 		settings.book_mod = (char*)mod_name;
 	
 	settings.whichwindow = BOOK_WINDOW;
-	
+	if(key == NULL) key = "0";
+		
 	xml_set_value("GnomeSword", "keys", "offset", key);
 	settings.book_offset = atol(xml_get_value( "keys", "offset"));
+	
+	g_message("\nsettings.book_mod = %s\nmod_name = %s",settings.book_mod,mod_name);
 	
 	if(strcmp(settings.book_mod,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "book", mod_name);
