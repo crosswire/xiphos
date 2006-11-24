@@ -325,7 +325,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 	gtk_widget_show(button_close);
 	switch(current_page) {
 		case 3:
-			gtk_widget_show(button1);
+			if(need_update) gtk_widget_show(button1);
 			gtk_widget_show(button2);
 		break;
 		case 4:
@@ -770,6 +770,12 @@ static void response_refresh(void)
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), _("Finished"));
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+	if(!need_update) {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1), 3);
+		gtk_widget_hide(button1);
+		gtk_widget_show(button2);
+		gtk_widget_hide(button3);
+	}
 }
 
 /******************************************************************************
@@ -2157,6 +2163,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 	GtkWidget *button6;
 	GtkWidget *button7;
 	GtkWidget *button8;
+	GtkWidget *widget;
 	gint index = 0;
 	GString *str = g_string_new(NULL);
 	gchar *homedir = NULL;
@@ -2180,11 +2187,15 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 	/* lookup the root widget */
 	if(first_run) {		
 		hpaned = glade_xml_get_widget (gxml, "hpaned1"); 
+		
 		dialog = gtk_dialog_new();
 		gtk_widget_show(dialog);
+		gtk_widget_set_size_request(widgets.app, 600, 341);
 		dialog_vbox = GTK_DIALOG(dialog)->vbox;
 		gtk_widget_show(dialog_vbox);
 		gtk_box_pack_start(GTK_BOX(dialog_vbox),hpaned, TRUE, TRUE, 6);
+		widget = glade_xml_get_widget (gxml, "scrolledwindow1");
+		gtk_widget_hide(widget);
 		/* setup dialog action area */
 		setup_dialog_action_area(GTK_DIALOG (dialog));
 	} else {
@@ -2221,7 +2232,8 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 	/* notebook */
 	notebook1 = glade_xml_get_widget (gxml, "notebook1");		
 	g_signal_connect(notebook1, "switch_page",
-			 G_CALLBACK(on_notebook1_switch_page), NULL);
+			 G_CALLBACK(on_notebook1_switch_page), NULL);	
+	if(first_run) gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook1),1);
 	/* labels */
 	label_home = glade_xml_get_widget (gxml, "label_home");
 	label_system = glade_xml_get_widget (gxml, "label_sword_sys");
@@ -2256,6 +2268,9 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 			 */
 	g_signal_connect(radiobutton2, "toggled",
 			 G_CALLBACK(on_radiobutton2_toggled), NULL);
+	if(first_run) 
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+	
 /*	g_signal_connect(radiobutton_dest, "toggled",
 			 G_CALLBACK(), NULL);
 	g_signal_connect(radiobutton4, "toggled",
