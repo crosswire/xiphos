@@ -135,12 +135,12 @@ GladeXML *gxml;
 
 static void create_pixbufs(void)
 {
-	INSTALLED = gtk_widget_render_icon(widgets.app,
+	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
 	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					  "/epiphany-secure.png", NULL);
-	BLANK = gtk_widget_render_icon(widgets.app,
+	BLANK = gtk_widget_render_icon(dialog,
 				       "gnome-stock-blank",
 				       GTK_ICON_SIZE_MENU, NULL);
 }
@@ -796,13 +796,15 @@ static void response_refresh(void)
 
 static void response_close(void)
 {
-	GString *str = g_string_new(NULL);
-	
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-	g_string_printf(str, "%s/dirlist", settings.homedir);
-	if (mod_mgr_check_for_file(str->str))
-		g_warning(str->str);
-	g_string_free(str,TRUE);
+	if(need_update) {
+		GString *str = g_string_new(NULL);
+		
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		g_string_printf(str, "%s/dirlist", settings.homedir);
+		if (mod_mgr_check_for_file(str->str))
+			g_warning(str->str);
+		g_string_free(str,TRUE);
+	}
 }
 
 
@@ -2190,7 +2192,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 		
 		dialog = gtk_dialog_new();
 		gtk_widget_show(dialog);
-		gtk_widget_set_size_request(widgets.app, 600, 341);
+		gtk_widget_set_size_request(dialog, 500, 341);
 		dialog_vbox = GTK_DIALOG(dialog)->vbox;
 		gtk_widget_show(dialog_vbox);
 		gtk_box_pack_start(GTK_BOX(dialog_vbox),hpaned, TRUE, TRUE, 6);
@@ -2217,6 +2219,9 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(), NULL);
 */
 	
+	/* progress bars */
+	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
+			
 	/* treeviews */
 	treeview1 = glade_xml_get_widget (gxml, "treeview1");
 	setup_treeview_main(GTK_TREE_VIEW(treeview1));
@@ -2252,7 +2257,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(on_button7_clicked), NULL);
 	g_signal_connect(button8, "clicked",
 			 G_CALLBACK(on_button8_clicked), NULL);
-			
+	
 	/* combo box entrys */
 	combo_entry1 = glade_xml_get_widget (gxml, "comboboxentry1"); /* local soruce */
 	set_combobox(GTK_COMBO_BOX(combo_entry1));
@@ -2275,10 +2280,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 			 G_CALLBACK(), NULL);
 	g_signal_connect(radiobutton4, "toggled",
 			 G_CALLBACK(), NULL);
-*/
-	/* progress bars */
-	progressbar_refresh = glade_xml_get_widget (gxml, "progressbar1"); /* refresh */
-		
+*/	
 	setup_ui_labels();
 		
 	return dialog;
