@@ -25,6 +25,7 @@
 #include <gnome.h>
 #include <regex.h>
 #include <swbuf.h>
+#include <swmodule.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -1354,6 +1355,11 @@ void main_do_dialog_search(void)
 	search_params = GTK_TOGGLE_BUTTON
 	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
 
+	// For attribute-based searches, e.g. "Word//Lemma/G140",
+	// we must constrain the match to whole words.  Otherwise,
+	// we will inadvertently return e.g. 140 plus 1401 and 1404.
+	if (search_type == -3)
+		search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;

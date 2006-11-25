@@ -1,3 +1,7 @@
+2006-11-25  karl <karl@charcoal.com>
+
+	* fixed bug #1601897: constrain attribute search to "whole match".
+
 2006-11-23  karl <karl@charcoal.com>
 
 	* changed first-run permission dialog to accommodate terry's MM fix.
