@@ -206,11 +206,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				     &bytes_written,
 				     error);
 		swbuf.appendFormatted(settings.showversenum
-				? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
-				: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
-				utf8_key,
+				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0, 
+				utf8_key,
 				(settings.versestyle) ? settings.verse_num_font_size : "-2",
 				settings.bible_verse_num_color, 
 				key->Verse());
@@ -277,11 +277,11 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				     &bytes_written,
 				     error);
 		swbuf.appendFormatted(settings.showversenum
-				? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
-				: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
-				utf8_key,
+				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0, 
+				utf8_key,
 				(settings.versestyle)
 				?settings.verse_num_font_size
 				:"-2",
@@ -555,11 +555,11 @@ char GTKChapDisp::Display(SWModule &imodule)
                              error);
 		
 		swbuf.appendFormatted(settings.showversenum
-			? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
-			: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
-			utf8_key,
+			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
+			utf8_key,
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, 
 			key->Verse());
@@ -913,11 +913,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 			sprintf(heading,"%d",x);
 		}
 		buf = g_strdup_printf(settings.showversenum
-			? "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
-			: "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\"></A>",
-			(char*)key->getText(),
+			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
+			(char*)key->getText(),
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, 
 			key->Verse());
