@@ -42,7 +42,7 @@ if test "x$mozilla_includes" != "x" ; then
     MOZILLA_LIBS="$MOZILLA_LIBS -lgtkembedmoz -lgtksuperwin"
     LIZARD=mozilla
 else
-    if test "$use_firefox" = "yes" ; then
+dnl    if test "$use_firefox" = "yes" ; then
         PKG_CHECK_MODULES([MOZILLA], 
             [firefox-nspr >= 1.0 firefox-xpcom])
         mozilla_includes=`$PKG_CONFIG --variable=includedir firefox-xpcom`
@@ -53,29 +53,29 @@ else
         MOZILLA_LIBS="$MOZILLA_LIBS $MOZILLA_GTK_LIBS"
         LIZARD=firefox
 	GTKMOZEMBED_VERSION=`pkg-config --modversion firefox-gtkmozembed`
-    elif test "$use_seamonkey" = "yes" ; then
-        PKG_CHECK_MODULES([MOZILLA], 
-            [seamonkey-nspr >= 4.0 seamonkey-xpcom])
-        mozilla_includes=`$PKG_CONFIG --variable=includedir seamonkey-xpcom`
-        mozilla_libs=`$PKG_CONFIG --variable=libdir seamonkey-xpcom`
+dnl    elif test "$use_seamonkey" = "yes" ; then
+dnl        PKG_CHECK_MODULES([MOZILLA], 
+dnl            [seamonkey-nspr >= 4.0 seamonkey-xpcom])
+dnl        mozilla_includes=`$PKG_CONFIG --variable=includedir seamonkey-xpcom`
+dnl        mozilla_libs=`$PKG_CONFIG --variable=libdir seamonkey-xpcom`
 
-        PKG_CHECK_MODULES([MOZILLA_GTK], [seamonkey-gtkmozembed >= 1.0])
-        MOZILLA_CFLAGS="$MOZILLA_CFLAGS $MOZILLA_GTK_CFLAGS"
-        MOZILLA_LIBS="$MOZILLA_LIBS $MOZILLA_GTK_LIBS"
-        LIZARD=seamonkey
-	GTKMOZEMBED_VERSION=`pkg-config --modversion seamonkey-gtkmozembed`
-    else
-        PKG_CHECK_MODULES([MOZILLA], 
-            [mozilla-nspr >= 1.3 mozilla-xpcom])
-        mozilla_includes=`$PKG_CONFIG --variable=includedir mozilla-xpcom`
-        mozilla_libs=`$PKG_CONFIG --variable=libdir mozilla-xpcom`
-
-        PKG_CHECK_MODULES([MOZILLA_GTK], [mozilla-gtkmozembed >= 1.3])
-        MOZILLA_CFLAGS="$MOZILLA_CFLAGS $MOZILLA_GTK_CFLAGS"
-        MOZILLA_LIBS="$MOZILLA_LIBS $MOZILLA_GTK_LIBS"
-        LIZARD=mozilla
-	GTKMOZEMBED_VERSION=`pkg-config --modversion mozilla-gtkmozembed`
-    fi
+dnl        PKG_CHECK_MODULES([MOZILLA_GTK], [seamonkey-gtkmozembed >= 1.0])
+dnl        MOZILLA_CFLAGS="$MOZILLA_CFLAGS $MOZILLA_GTK_CFLAGS"
+dnl        MOZILLA_LIBS="$MOZILLA_LIBS $MOZILLA_GTK_LIBS"
+dnl        LIZARD=seamonkey
+dnl	GTKMOZEMBED_VERSION=`pkg-config --modversion seamonkey-gtkmozembed`
+dnl    else
+dnl       PKG_CHECK_MODULES([MOZILLA], 
+dnl            [mozilla-nspr >= 1.3 mozilla-xpcom])
+dnl        mozilla_includes=`$PKG_CONFIG --variable=includedir mozilla-xpcom`
+dnl        mozilla_libs=`$PKG_CONFIG --variable=libdir mozilla-xpcom`
+dnl
+dnl        PKG_CHECK_MODULES([MOZILLA_GTK], [mozilla-gtkmozembed >= 1.3])
+dnl        MOZILLA_CFLAGS="$MOZILLA_CFLAGS $MOZILLA_GTK_CFLAGS"
+dnl        MOZILLA_LIBS="$MOZILLA_LIBS $MOZILLA_GTK_LIBS"
+dnl        LIZARD=mozilla
+dnl	GTKMOZEMBED_VERSION=`pkg-config --modversion mozilla-gtkmozembed`
+dnl    fi
 fi
 GTKMOZEMBED_VERSION=${GTKMOZEMBED_VERSION:0:3} # TODO improve extraction of x.y
 GTKMOZEMBED_VERSION=${GTKMOZEMBED_VERSION//./_}

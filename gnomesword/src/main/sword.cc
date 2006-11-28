@@ -86,6 +86,68 @@ extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
 
+
+/******************************************************************************
+ * Name
+ *   main_book_heading
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   void main_book_heading(char * mod_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_book_heading(char * mod_name)
+{	
+	VerseKey *vkey;	
+	SWMgr *mgr = backend->get_display_mgr();
+	
+	backend->display_mod = mgr->Modules[mod_name];
+	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
+	vkey->Headings(1);
+	vkey->AutoNormalize(0);
+	vkey->Verse(0);
+	vkey->Chapter(0);
+	backend->display_mod->Display();
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_chapter_heading
+ *
+ * Synopsis
+ *   #include "main/module_dialogs.h"
+ *
+ *   void main_chapter_heading(char * mod_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_chapter_heading(char * mod_name)
+{	
+	VerseKey *vkey;	
+	SWMgr *mgr = backend->get_display_mgr();
+	
+	backend->display_mod = mgr->Modules[mod_name];
+	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
+	vkey->Headings(1);
+	vkey->AutoNormalize(0);
+	vkey->Verse(0);
+	backend->display_mod->Display();
+}
+
+
 /******************************************************************************
  * Name
  *   main_save_note
