@@ -140,6 +140,7 @@ void main_chapter_heading(char * mod_name)
 	SWMgr *mgr = backend->get_display_mgr();
 	
 	backend->display_mod = mgr->Modules[mod_name];
+	backend->display_mod->setKey(settings.currentverse);
 	vkey = (VerseKey*)(SWKey*)(*backend->display_mod);	
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
