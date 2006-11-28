@@ -60,57 +60,11 @@ static gboolean _preview_on;
 static gboolean _in_url;
 
 
- 
-
-void
-on_treeview9_row_activated(GtkTreeView * treeview,
-			   GtkTreePath * path,
-			   GtkTreeViewColumn * column,
-			   gpointer user_data)
-{
-	g_message("on_treeview9_row_activated");
-}
-
-
-gboolean
-on_treeview9_select_cursor_row(GtkTreeView * treeview,
-			       gboolean start_editing,
-			       gpointer user_data)
-{
-	g_message("on_treeview9_select_cursor_row");
-
-	return FALSE;
-}
-
-
-gboolean
-on_treeview10_select_cursor_row(GtkTreeView * treeview,
-				gboolean start_editing,
-				gpointer user_data)
-{
-	g_message("on_treeview10_select_cursor_row");
-
-	return FALSE;
-}
-
-
-void
-on_treeview10_row_activated(GtkTreeView * treeview,
-			    GtkTreePath * path,
-			    GtkTreeViewColumn * column,
-			    gpointer user_data)
-{
-	g_message("on_treeview10_row_activated");
-
-}
-
-
 
 void on_comboboxentry2_changed(GtkComboBox * combobox,
 			       gpointer user_data)
 {
 	main_comboboxentry2_changed(combobox, user_data);
-	//g_message("on_comboboxentry2_changed");
 }
 
 
@@ -1790,7 +1744,6 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
 		gtk_widget_destroy(GTK_WIDGET(dialog));
-		//_on_destroy(GTK_WIDGET(dialog), user_data);
 		break;
 	}
 }

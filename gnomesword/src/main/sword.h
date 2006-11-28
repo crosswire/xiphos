@@ -60,7 +60,8 @@ extern char *OLD_CODESET;
 
 /*** function prototypes ***/
 
-
+void main_book_heading(char * mod_name);
+void main_chapter_heading(char * mod_name);
 void main_display_prev_verse(const char * mod_name, char * current_verse);
 void main_display_next_verse(const char * mod_name, char * current_verse);
 void main_delete_note(	const gchar * module_name, 
