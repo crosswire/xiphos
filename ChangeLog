@@ -1,3 +1,7 @@
+2006-11-28  karl <karl@charcoal.com>
+
+	* fixed bug #1602059: massage %20 back to real space.
+
 2006-11-27  karl <karl@charcoal.com>
 
 	* fixed bug in certain OSIS modules (ESV, NASB) displaying offset
