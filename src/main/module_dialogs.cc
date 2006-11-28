@@ -182,6 +182,7 @@ void main_dialogs_chapter_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_display_mgr();
 	
 	be->display_mod = mgr->Modules[d->mod_name];
+	backend->display_mod->setKey(d->key);
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);	
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
