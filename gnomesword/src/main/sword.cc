@@ -171,6 +171,17 @@ void main_save_note(	const gchar * module_name,
 			const gchar * key_str, 
 			const gchar * note_str )
 {
+	// Massage encoded spaces ("%20") back to real spaces.
+	// This is a sick. unreliable hack that should be removed
+	// after the underlying problem is fixed in Sword.
+	gchar *rework;
+	for (rework = strstr(note_str, "%20");
+	     rework;
+	     rework = strstr(rework+1, "%20")) {
+		*rework = ' ';
+		(void) strcpy(rework+1, rework+3);
+	}
+
 #ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
 #ifdef DEBUG
