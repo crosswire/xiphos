@@ -1,3 +1,8 @@
+2006-11-27  karl <karl@charcoal.com>
+
+	* fixed bug in certain OSIS modules (ESV, NASB) displaying offset
+	  text when verse# display is turned off.
+
 2006-11-25  karl <karl@charcoal.com>
 
 	* fixed bug #1601897: constrain attribute search to "whole match".
