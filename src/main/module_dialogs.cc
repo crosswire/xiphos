@@ -128,6 +128,71 @@ extern gboolean do_display;
 
 /******************************************************************************
  * Name
+ *   main_dialogs_book_heading
+ *
+ * Synopsis
+ *   #include "main/module_dialogs.h"
+ *
+ *   void main_dialogs_book_heading(DIALOG_DATA *d)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_book_heading(DIALOG_DATA * d)
+{	
+	VerseKey *vkey;		
+	BackEnd* be = (BackEnd*)d->backend;
+	SWMgr *mgr = be->get_display_mgr();
+	
+	be->display_mod = mgr->Modules[d->mod_name];
+	//g_message((char*)be->display_mod->RenderText());
+	vkey = (VerseKey*)(SWKey*)(*be->display_mod);	
+	vkey->Headings(1);
+	vkey->AutoNormalize(0);
+	vkey->Verse(0);
+	vkey->Chapter(0);
+	be->display_mod->Display();
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_dialogs_chapter_heading
+ *
+ * Synopsis
+ *   #include "main/module_dialogs.h"
+ *
+ *   void main_dialogs_chapter_heading(DIALOG_DATA *d)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_chapter_heading(DIALOG_DATA * d)
+{	
+	VerseKey *vkey;	
+	BackEnd* be = (BackEnd*)d->backend;
+	SWMgr *mgr = be->get_display_mgr();
+	
+	be->display_mod = mgr->Modules[d->mod_name];
+	vkey = (VerseKey*)(SWKey*)(*be->display_mod);	
+	vkey->Headings(1);
+	vkey->AutoNormalize(0);
+	vkey->Verse(0);
+	//vkey->Chapter(0);
+	be->display_mod->Display();
+}
+
+
+/******************************************************************************
+ * Name
  *   main_dialogs_clear_viewer
  *
  * Synopsis
