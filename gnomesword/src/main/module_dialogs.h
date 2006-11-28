@@ -80,6 +80,8 @@ struct _dialog_data {
 	GLOBAL_OPS *ops;
 };
 
+void main_dialogs_book_heading(DIALOG_DATA * d);
+void main_dialogs_chapter_heading(DIALOG_DATA * d);
 void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name, 
 				     gchar * text, gchar * key,
 		             	     gchar * action ,gchar * type ,

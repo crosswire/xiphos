@@ -527,6 +527,49 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *  on_book_heading_activate
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *  void on_book_heading_activate(GtkMenuItem * menuitem, DIALOG_DATA * vt)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_book_heading_activate(GtkMenuItem * menuitem, gpointer data)
+{
+	main_book_heading(settings.CommWindowModule);
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_chapter_heading_activate
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *  void on_chapter_heading_activate(GtkMenuItem * menuitem, DIALOG_DATA * vt)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_chapter_heading_activate(GtkMenuItem * menuitem, gpointer data)
+{
+	main_chapter_heading(settings.CommWindowModule);
+}
+
 
 static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
@@ -778,6 +821,18 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
+	 0, (GdkModifierType) 0, NULL},
+        {
+	 GNOME_APP_UI_ITEM, N_("Display Book Heading"),
+	 NULL,
+	 (gpointer) on_book_heading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
+	 0, (GdkModifierType) 0, NULL},
+        {
+	 GNOME_APP_UI_ITEM, N_("Display Chapter Heading"),
+	 NULL,
+	 (gpointer) on_chapter_heading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
