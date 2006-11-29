@@ -523,6 +523,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
 					 gint page_num, GList **tl)
 { 
+	gboolean comm_showing;
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
 #ifdef DEBUG
@@ -545,10 +546,11 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
-	
+	comm_showing = settings.comm_showing;
+	settings.comm_showing = 1;
 	//sets the commentary mod and key
 	main_display_commentary(pt->commentary_mod, pt->text_commentary_key);
-	 
+	settings.comm_showing = comm_showing; 
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
 	main_update_nav_controls(pt->text_commentary_key);
