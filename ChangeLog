@@ -1,5 +1,10 @@
+2006-11-28  terry <tbiggs@users.sf.net>
+
+	* fixed bug #1521926: re-implement book/chapter headings.
+
 2006-11-28  karl <karl@charcoal.com>
 
+	* updated interface.xml to reflect book/chapter headings.
 	* fixed bug #1602059: massage %20 back to real space.
 
 2006-11-27  karl <karl@charcoal.com>
