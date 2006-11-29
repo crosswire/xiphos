@@ -1,6 +1,7 @@
 2006-11-29  terry <tbiggs@users.sf.net>
 
 	* trial implementation of feature resquest #889422: scroll to new chapter
+	* fixed bug #1507371: 2.1.7 forgets which commentary is in use
 
 2006-11-28  terry <tbiggs@users.sf.net>
 
