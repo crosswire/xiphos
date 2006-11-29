@@ -76,19 +76,36 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	SWBuf swbuf = "";                                        
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;
+	GError **error = NULL;	
+	gint mod_type;
+	gint width;
+	gint height;
+	GdkWindow *window;
 #ifdef USE_GTKMOZEMBED 	
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
-#endif
+#endif	
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	 
+	
 	
 	(const char *)imodule;	// snap to entry
 	//g_message((const char *)imodule.getRawEntry());
 	main_set_global_options(ops);
-	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
+	mod_type = backend->module_type(imodule.Name());
+	
+	/* sample */
+	/* get window size of commentary window*/
+	if(mod_type == COMMENTARY_TYPE) {
+		window = GDK_WINDOW(gtkText->window);
+		gdk_drawable_get_size(window, &width, &height);
+		g_message("\nCommentary Pane Size:\nwidth: %d\nheight: %d", width, height);
+	}
+	/* end sample */
+	
+	if(mod_type == BOOK_TYPE)
 		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
                              -1,
