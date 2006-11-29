@@ -206,7 +206,7 @@ on_button_forward_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-static void handle_spinbutton_click(gint button, gint direction)
+void gui_navbar_handle_spinbutton_click(gint button, gint direction)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -303,28 +303,28 @@ static void handle_spinbutton_click(gint button, gint direction)
 static void
 on_verse_button_up_clicked(GtkButton * button, gpointer user_data)
 {
-	handle_spinbutton_click(2, 0);
+	gui_navbar_handle_spinbutton_click(2, 0);
 }
 
 
 static void
 on_verse_button_down_clicked(GtkButton * button, gpointer user_data)
 {
-	handle_spinbutton_click(2, 1);
+	gui_navbar_handle_spinbutton_click(2, 1);
 }
 
 
 static void
 on_chapter_button_up_clicked(GtkButton * button, gpointer user_data)
 {
-	handle_spinbutton_click(1, 0);
+	gui_navbar_handle_spinbutton_click(1, 0);
 }
 
 
 static void
 on_chapter_button_down_clicked(GtkButton * button, gpointer user_data)
 {
-	handle_spinbutton_click(1, 1);
+	gui_navbar_handle_spinbutton_click(1, 1);
 }
 
 
@@ -332,14 +332,14 @@ static void
 on_book_button_up_clicked(GtkButton * button, gpointer user_data)
 {
 	g_message("on_book_button_up_clicked");
-	handle_spinbutton_click(0, 0);
+	gui_navbar_handle_spinbutton_click(0, 0);
 }
 
 
 static void
 on_book_button_down_clicked(GtkButton * button, gpointer user_data)
 {
-	handle_spinbutton_click(0, 1);
+	gui_navbar_handle_spinbutton_click(0, 1);
 }
 
 
