@@ -164,7 +164,7 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_widget_set_usize(label95, -2, 24);
 
 	href1 =
-	    gnome_href_new("www.crosswire.org", _("The SWORD Project"));
+	    gnome_href_new("http://www.crosswire.org/sword", _("The SWORD Project"));
 	gtk_widget_show(href1);
 	gtk_box_pack_start(GTK_BOX(vbox21), href1, FALSE, FALSE, 0);
 
