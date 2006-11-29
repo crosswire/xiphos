@@ -147,6 +147,7 @@ struct _preferences_check_buttons {
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_verse_style;
 	GtkWidget *use_pinned_tabs;
+	GtkWidget *use_chapter_scroll;
 	GtkWidget *readaloud;
 	GtkWidget *show_verse_num;
 	GtkWidget *show_splash_screen;
@@ -804,6 +805,36 @@ void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));
 }
 
+
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_scroll_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	gchar *buf;
+	
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "chapter-scroll", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "chapter-scroll", "0");
+	buf = xml_get_value("misc", "chapter-scroll");
+		settings.chapter_scroll =  atoi(buf);
+}
 
 /******************************************************************************
  * Name
@@ -1559,6 +1590,9 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_splash_screen),
 				     settings.showsplash);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.use_chapter_scroll),
+				     settings.chapter_scroll);
 
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
@@ -1578,6 +1612,8 @@ static void setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton7_toggled), NULL);
 	g_signal_connect(check_button.show_splash_screen, "toggled",
 			 G_CALLBACK(on_checkbutton8_toggled), NULL);
+	g_signal_connect(check_button.use_chapter_scroll, "toggled",
+			 G_CALLBACK(on_checkbutton_scroll_toggled), NULL);
 	
 }
 
@@ -1802,6 +1838,7 @@ static void create_preferences_dialog(void)
 	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
+	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 	setup_check_buttons();
 	/* verse number size */
 	index = get_verse_number_size_index();

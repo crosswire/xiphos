@@ -86,6 +86,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	
 	(const char *)imodule;	// snap to entry
+	//g_message((const char *)imodule.getRawEntry());
 	main_set_global_options(ops);
 	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
 		keytext = g_convert(backend->treekey_get_local_name(
