@@ -125,6 +125,69 @@ static void about_module_display(GString * str, gchar * text)
 	}
 }
 
+static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
+{
+	g_message("on_copy_activate");
+	gui_copy_html(text_html);
+}
+
+
+
+static GnomeUIInfo menu1_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_COPY_ITEM (on_copy_activate, NULL),
+  GNOMEUIINFO_END
+};
+
+static void create_menu1 (void)
+{
+  GtkWidget *menu1;
+  GtkAccelGroup *accel_group;
+
+  accel_group = gtk_accel_group_new ();
+
+  menu1 = gtk_menu_new ();
+  gnome_app_fill_menu (GTK_MENU_SHELL (menu1), menu1_uiinfo,
+                       accel_group, FALSE, 0);
+  gtk_menu_set_accel_group (GTK_MENU (menu1), accel_group);
+  gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+}
+
+/******************************************************************************
+ * Name
+ *  on_button_press_event
+ *
+ * Synopsis
+ *   #include "about_modules.h"
+ *
+ *  gboolean on_button_press_event(GtkWidget * widget,
+			    GdkEventButton * event, gpointer data)
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+static gboolean on_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		
+		break;
+	case 3:
+		create_menu1();
+		break;
+	}
+	return FALSE;
+}
+
+
 
 /******************************************************************************
  * Name
@@ -203,8 +266,11 @@ static GtkWidget *gui_create_about_modules(void)
 	text_html = gtk_html_new();
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
-	gtk_widget_set_sensitive(text_html,FALSE);
-
+	//gtk_widget_set_sensitive(text_html,FALSE);
+	    
+	g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
+				G_CALLBACK(on_button_release_event),
+				NULL);
 
 	dialog_action_area28 =
 	    GTK_DIALOG(dialog_about_mods)->action_area;
