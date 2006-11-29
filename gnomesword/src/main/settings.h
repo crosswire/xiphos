@@ -219,6 +219,9 @@ struct _settings {
 	/* widget shadow type */
 	int shadow_type;
 	
+	/* chapter scroll */
+	int chapter_scroll;
+	
 	/* signal id dictionary combo changed */
 	long signal_id;
 	

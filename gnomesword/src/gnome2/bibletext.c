@@ -65,7 +65,8 @@
 
 
 gboolean shift_key_presed = FALSE;
-
+guint scroll_adj_signal;
+GtkAdjustment* adjustment;
 static void create_menu(void); //GdkEventButton * event);
 
 static GtkTextBuffer *text_buffer;
@@ -483,6 +484,27 @@ static void create_text_tags(GtkTextBuffer * buffer)
 }
 
 
+void       adj_changed                  (GtkAdjustment *adjustment1,
+                                            gpointer       user_data) 
+
+{
+	static int scroll = 1;
+	if(!settings.chapter_scroll) return;
+	if(scroll && (adjustment1->value <= adjustment1->lower)) {
+		g_message("\ntop: %g\n",adjustment1->value);
+		//g_signal_handler_block(adjustment, scroll_adj_signal);
+		gui_navbar_handle_spinbutton_click(1, 0);
+		scroll = 0;
+		//g_signal_handler_unblock(adjustment, scroll_adj_signal);
+	} else if(scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
+		//g_signal_handler_block(adjustment, scroll_adj_signal);
+		g_message("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size);
+		gui_navbar_handle_spinbutton_click(1, 1);
+		scroll = 0;
+		//g_signal_handler_unblock(adjustment, scroll_adj_signal);
+	} else 	scroll = 1;
+}
+
 /******************************************************************************
  * Name
  *   gui_create_bible_pane
@@ -505,6 +527,7 @@ GtkWidget *gui_create_bible_pane(void)
 	GtkWidget *scrolledwindow;
 	//GtkWidget *eventbox1;
 	GtkWidget *frame;
+	//GtkAdjustment* adjustment;
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
@@ -530,6 +553,11 @@ GtkWidget *gui_create_bible_pane(void)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	adjustment = gtk_scrolled_window_get_vadjustment
+                                            (GTK_SCROLLED_WINDOW(scrolledwindow));
+	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
+				G_CALLBACK(adj_changed),
+				NULL);
 	
 	widgets.html_text = gtk_html_new();
 	gtk_widget_show(widgets.html_text);
