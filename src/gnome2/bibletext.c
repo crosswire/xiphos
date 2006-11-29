@@ -501,6 +501,7 @@ void       adj_changed                  (GtkAdjustment *adjustment1,
 		g_message("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size);
 		gui_navbar_handle_spinbutton_click(1, 1);
 		scroll = 0;
+		gtk_adjustment_set_value(adjustment,5);
 		//g_signal_handler_unblock(adjustment, scroll_adj_signal);
 	} else 	scroll = 1;
 }
