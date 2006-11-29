@@ -1,6 +1,7 @@
 2006-11-28  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1521926: re-implement book/chapter headings.
+	* fixed bug #1536274 almost: clickable links to external sources don't work
 
 2006-11-28  karl <karl@charcoal.com>
 
