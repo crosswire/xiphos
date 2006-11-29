@@ -37,6 +37,7 @@ struct  _toolbar_nav {
 extern NAV_BAR nav_bar;
 
 
+void gui_navbar_handle_spinbutton_click(gint button, gint direction);
 GtkWidget *gui_create_nav_toolbar(GtkWidget * app);
 	
 #ifdef __cplusplus

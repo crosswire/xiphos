@@ -1,3 +1,7 @@
+2006-11-29  terry <tbiggs@users.sf.net>
+
+	* trial implementation of feature resquest #889422: scroll to new chapter
+
 2006-11-28  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1521926: re-implement book/chapter headings.
