@@ -1009,6 +1009,11 @@ void main_display_bible(const char * mod_name, const char * key)
 	gchar *style = NULL;
 	gchar *val_key = NULL;
 	
+	extern guint scroll_adj_signal;
+	extern GtkAdjustment* adjustment;
+	
+	/* keeps us out of a crash causing loop */
+	g_signal_handler_block(adjustment, scroll_adj_signal);
 	
 	if(!mod_name)
 		mod_name = xml_get_value("modules", "bible");	
@@ -1095,6 +1100,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		main_update_parallel_page();
 	else
 		gui_keep_parallel_dialog_in_sync();
+	g_signal_handler_unblock(adjustment, scroll_adj_signal);
 }
 
 

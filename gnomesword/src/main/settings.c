@@ -504,6 +504,14 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("misc","setup_canceled","0");
 		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
 	}
+	
+	if(xml_get_value("misc", "chapter-scroll")) {
+		buf = xml_get_value("misc", "chapter-scroll");
+		settings.chapter_scroll = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc","chapter-scroll","0");
+		settings.chapter_scroll = 0;
+	}
 
 /*	settings.use_studypad =
 	    atoi(xml_get_value("editor", "UseStudyPad"));
