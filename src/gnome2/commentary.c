@@ -194,10 +194,14 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					 event->x,
 					 event->y);
 #endif
-		if(strstr(url,"sword://")) {
-			gchar **work_buf = g_strsplit (url,"/",4);
-			gui_open_passage_in_new_tab(work_buf[3]);
-			g_strfreev(work_buf);
+		if (url) {
+			if(strstr(url,"sword://")) {
+				gchar **work_buf = g_strsplit (url,"/",4);
+				gui_open_passage_in_new_tab(work_buf[3]);
+				g_strfreev(work_buf);
+			}
+		} else {
+			gui_generic_warning("Middle-click invalid.");
 		}
 		break;
 	case 3:
