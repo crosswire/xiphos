@@ -127,7 +127,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
  *  on_button_release_event
  *
  * Synopsis
- *   #include "_bibletext.h"
+ *   #include "commentary.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
 			    GdkEventButton * event, DIALOG_DATA * t)
@@ -186,7 +186,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 		if (!in_url)
 			break;
 #ifdef USE_GTKHTML38
-		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
+		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),		
 								event->x,
 								event->y);
 #else
@@ -242,8 +242,7 @@ GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
 	GtkWidget *scrolledwindow;
-	GtkWidget *eventbox1;	
-	
+	GtkWidget *eventbox1;
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
 /*
@@ -287,7 +286,6 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_comm);
-
 	g_signal_connect(GTK_OBJECT(widgets.html_comm), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
