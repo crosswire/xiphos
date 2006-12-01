@@ -94,11 +94,13 @@ gboolean editor_is_dirty(EDITOR * e)
 	gboolean rv;
 
 	CORBA_exception_init(&ev);
-	rv = e->is_changed
+/*	rv = e->is_changed
 	    || (GNOME_GtkHTML_Editor_Engine_hasUndo(e->engine, &ev) &&
 		!GNOME_GtkHTML_Editor_Engine_runCommand(e->engine,
 							"is-saved",
-							&ev));
+							&ev)); */
+	rv = GNOME_GtkHTML_Editor_Engine_hasUndo(e->engine, &ev);
+	
 	CORBA_exception_free(&ev);
 
 	return rv;
@@ -633,8 +635,8 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	gchar *title;
 	gchar *text;
 	
-/*	if(editor_is_dirty(e))
-		save_through_persist_stream_cb(NULL, e);*/
+	if(editor_is_dirty(e))
+		save_through_persist_stream_cb(NULL, e);
 	
 	if(module_name) {
 		if(e->module)
