@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 #include "gui/bookmarks.h"
 #include "gui/setup_druid.h"
@@ -47,7 +48,7 @@
 /******************************************************************************
  * defines
  */
-#define GS_DIR ".gnomesword-2.0"
+#define GS_DIR ".gnomesword"
 
 #define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n\nWith your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n1. Configure remote install.\n2. Connect.\n3. Select a Bible text of your language preference.\n4. Click `install'.\nClose the Module Manager when you are done.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword invoke the Module Manager so that you may install a Bible?"
 
@@ -100,23 +101,33 @@ int settings_init(int new_configs, int new_bookmarks)
 		exit(0);
 	}
 
-	/* set gSwordDir to $home + .gnomesword-2.0 */
+	/* set gSwordDir to $home + .gnomesword */
 	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
 				   strlen(GS_DIR) + 2);
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, GS_DIR);
 
-	/* if gSwordDir does not exist create it */
+	/* if gSwordDir does not exist, create it. */
 	if (access(settings.gSwordDir, F_OK) == -1) {
-		gs_old = g_strdup_printf("%s/.gnomesword-1.0",settings.homedir);		
+		gs_old = g_strdup_printf("%s/.gnomesword-2.0", settings.homedir);
 		if (access(gs_old, F_OK) == 0) {
-			if(rename(gs_old,settings.gSwordDir) != 0) {
-				printf("can not rename  .gnomesword-1.0");
+			if (rename(gs_old, settings.gSwordDir) == 0)
+				gui_generic_warning("GnomeSword has renamed .gnomesword-2.0 to .gnomesword");
+			else {
+				char msg[300];
+				sprintf(msg, "GnomeSword can not rename  .gnomesword-2.0 to .gnomesword:\n%s\n\nGnomeSword cannot continue.",
+					strerror(errno));
+				gui_generic_warning(msg);
+				/* necessarily giving up. */
+				gtk_exit(1);
 			}
 		} else if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
-			printf("can not create  .gnomesword-2.0");
+			char msg[300];
+			sprintf(msg, "GnomeSword can not create  .gnomesword:\n%s\n\nGnomeSword cannot continue.",
+				strerror(errno));
+			gui_generic_warning(msg);
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
-		} 
+		}
 		g_free(gs_old);
 	}
 
@@ -126,8 +137,7 @@ int settings_init(int new_configs, int new_bookmarks)
 		gui_save_tabs(NULL);
 	g_free(tabs);
 */
-	
-	
+
 	/* if .sword does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
 	if (access(sword_dir, F_OK) == -1) {
