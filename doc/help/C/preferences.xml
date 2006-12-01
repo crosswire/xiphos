@@ -66,6 +66,19 @@
                                 <graphic fileref="figures/preferences_general-misc.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
+		<para>
+		<guilabel>Verse style</guilabel> indicates that each verse should begin on a separate line, or (when disabled) that verses
+		should be allowed to group in paragraphs, according to the Bible module's internal markup.  Not all Bible modules have such
+		markup.
+		</para>
+		<para>
+		With <guilabel>Scroll to Previous/Next Chapter</guilabel> enabled, using the mouse to scroll to the beginning or end of a
+		chapter will cause <application>GnomeSword</application> to move automatically to the appropriate chapter.
+		</para>
+		<para>
+		If you enable <guilabel>Resize images</guilabel>, <application>GnomeSword</application> will automatically resize image
+		content in commentaries, general books, and dictionaries so as to fit the subwindow which contains them.
+		</para>
                 </sect2>
 	</sect1>
 	
