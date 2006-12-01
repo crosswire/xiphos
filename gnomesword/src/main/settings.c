@@ -471,24 +471,21 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 
-	buf = xml_get_value("misc", "pinnedtabs");
-	if (buf)
+	if (buf = xml_get_value("misc", "pinnedtabs"))
 		settings.pinnedtabs = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "pinnedtabs", "0");
 		settings.pinnedtabs = 0;
 	}
 
-	buf = xml_get_value("misc", "readaloud");
-	if (buf)
+	if (buf = xml_get_value("misc", "readaloud"))
 		settings.readaloud = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "readaloud", "0");
 		settings.readaloud = 0;
 	}
 
-	buf = xml_get_value("misc", "showversenum");
-	if (buf)
+	if (buf = xml_get_value("misc", "showversenum"))
 		settings.showversenum = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "showversenum", "1");
@@ -505,12 +502,18 @@ void load_settings_structure(void)
 		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
 	}
 	
-	if(xml_get_value("misc", "chapter-scroll")) {
-		buf = xml_get_value("misc", "chapter-scroll");
+	if (buf = xml_get_value("misc", "chapter-scroll")) {
 		settings.chapter_scroll = atoi(buf);
 	} else {
 		xml_add_new_item_to_section("misc","chapter-scroll","0");
 		settings.chapter_scroll = 0;
+	}
+
+	if (buf = xml_get_value("misc", "imageresize")) {
+		settings.imageresize = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc","imageresize","0");
+		settings.imageresize = 0;
 	}
 
 /*	settings.use_studypad =
@@ -519,8 +522,9 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("editor", "UseStudypadDialog"));
 	settings.use_percomm_dialog =
 	    atoi(xml_get_value("editor", "UsePercommDialog"));*/
-	if(xml_get_value("editor", "spell_language"))
-	     settings.spell_language = xml_get_value("editor","spell_language");
+
+	if (xml_get_value("editor", "spell_language"))
+		settings.spell_language = xml_get_value("editor","spell_language");
 	else {
 		xml_add_new_item_to_section("editor","spell_language","unknown");
 		settings.spell_language = "unknown";
@@ -531,16 +535,14 @@ void load_settings_structure(void)
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
 
-	buf = xml_get_value("shortcutbar", "shortcutbar");
-	if(buf)
+	if (buf = xml_get_value("shortcutbar", "shortcutbar"))
 		settings.showshortcutbar = atoi(buf);
 	
-	buf = xml_get_value("shortcutbar", "docked");
-	if(buf)
+	if (buf = xml_get_value("shortcutbar", "docked"))
 		settings.docked =  atoi(buf);
 	
 	
-	if(xml_get_value("tabs", "browsing")) {
+	if (xml_get_value("tabs", "browsing")) {
 		buf = xml_get_value("tabs", "browsing");
 		settings.browsing =  atoi(buf);
 	} else {
