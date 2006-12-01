@@ -1,3 +1,7 @@
+2006-12-01  karl <karl@charcoal.com>
+
+	* added image auto-resizing in commentaries, books, and dictionaries.
+
 2006-11-30  karl <karl@charcoal.com>
 
 	* fixed bug: don't crash on commentary middle-click.
