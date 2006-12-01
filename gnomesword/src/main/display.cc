@@ -69,7 +69,153 @@ using namespace std;
 int strongs_on;
 //T<font size=\"small\" >EST</font>  /* small caps */
 //static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
+
+int mod_use_counter[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+		// indexed by module type e.g. COMMENTARY_TYPE.
+		// used to avoid calling _get_size before these windows exist.
+
+// shell command to obtain size spec: prints exactly "123x456".
+#define	IDENTIFY	"identify \"%s\" 2>&1 | head -1 | sed -e 's/^.*\\(BMP\\|GIF\\|JPEG\\|PNG\\) //' -e 's/ .*$//'"
  
+int
+ImageDimensions(const char *path, int *x, int *y)
+{
+	char buf[350];	// enough for path+100 bytes of command.
+	FILE *result;
+	int retval = 0;
+
+	if (strlen(path) > 250) {		// um...no.  forget it.
+		*x = *y = 1;
+		return -1;
+	}
+
+	sprintf(buf, IDENTIFY, path);
+	if (((result = popen(buf, "r")) == NULL) ||	// can't run.
+	    (fgets(buf, 384, result) == NULL)    ||	// can't read.
+	    (buf[0] < '0')                       ||	// not ...
+	    (buf[0] > '9'))   {				// ... numeric.
+		*x = *y = 1;
+		retval = -1;
+		goto out;
+	}
+	sscanf(buf, "%dx%d\n", x, y);
+
+	// cancel absurdities.
+	if ((*x < 1) || (*x > 5000))
+		*x = 1;
+	if ((*y < 1) || (*y > 5000))
+		*y = 1;
+
+out:
+	pclose(result);
+	return retval;
+}
+
+#define	IMGSRC_LENGTH	10	// strlen('<img src="')
+
+char *
+ImgSrcStr(const char *s)
+{
+	char *p;
+
+	if ((p = strstr(s, "<IMG SRC=\"")) == 0)
+		if ((p = strstr(s, "<img src=\"")) == 0)
+			if ((p = strstr(s, "<img SRC=\"")) == 0)
+			     p = strstr(s, "<IMG src=\"");
+	return p;
+}
+
+const char *
+AnalyzeForImageSize(const char *origtext,
+		    GdkWindow *window,
+		    gint mod_type)
+{
+	static SWBuf resized;
+	SWBuf text;
+
+	const char *trail;	// "trail" trails behind ...
+	char *path;		// ... the current "path".
+	char *end, save;	// "end" is the path's end.
+	char buf[32];		// for preparing new width+height spec.
+	gint image_x, image_y, window_x, window_y;
+	int image_retval;
+
+	//if (GTK_WIDGET_VISIBLE(window)) {	// would be nicer...
+	if (++mod_use_counter[mod_type] >= 1) {
+		// call _get_size only if the window exists by now.
+		gdk_drawable_get_size(window, &window_x, &window_y);
+		window_x = (window_x * 93)/100;	// conservative.
+		window_y = (window_y * 93)/100;
+	} else {
+		window_x = window_y = 10000; // degenerate: no resize.
+	}
+	
+	text = origtext;
+	resized = "";
+	trail = text;
+
+	for (path = ImgSrcStr(text);
+             path;
+             path = ImgSrcStr(path)) {
+
+		path += IMGSRC_LENGTH;
+		save = *path;
+		*path = '\0';
+                resized += trail;
+		*path = save;
+		trail = path;
+
+		// some play fast-n-loose with proper file spec.
+		if (strncmp(path, "file:///", 8) == 0) {
+			path += 7;
+			resized += "file://";
+		} else if (strncmp(path, "file:/", 6) == 0) {
+			path += 5;
+			resized += "file:";
+		} else
+			continue;	// no file spec there -- odd.
+
+		// getting this far means we have a valid img src and file.
+		// find closing '"' to determine pathname end.
+		if ((end = strchr(path, '"')) == 0)
+			continue;
+
+		*end = '\0';
+		resized += path;
+		image_retval = ImageDimensions(path, &image_x, &image_y);
+
+		*end = '"';
+		resized += "\"";
+		path = end+1;
+		trail = path;
+
+		if (image_retval != 0) {
+			gui_generic_warning(
+			    "An image file's size could not be determined.\nIs ImageMagick's 'identify' not installed?\n(Or possibly the image is of type other than bmp/gif/jpg/png.)\nGnomeSword cannot resize images to fit window.");
+			settings.imageresize = 0;
+			continue;
+		}
+
+		// knowing image size & window size, adjust to fit.
+		if (image_x > window_x) {
+			float proportion = (float)window_x / (float)image_x;
+			image_x = window_x;
+			image_y = (int)((float)image_y * proportion);
+		}
+		if (image_y > window_y) {
+			float proportion = (float)window_y / (float)image_y;
+			image_y = window_y;
+			image_x = (int)((float)image_x * proportion);
+		}
+		sprintf(buf, " WIDTH=%d HEIGHT=%d", image_x, image_y);
+		resized += buf;
+        }
+
+	resized += trail;	// remainder of text appended.
+	return resized.c_str();
+}
+
+
 char GTKEntryDisp::Display(SWModule &imodule) 
 {
 	gchar *keytext = NULL;
@@ -78,9 +224,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gsize bytes_written;
 	GError **error = NULL;	
 	gint mod_type;
-	gint width;
-	gint height;
-	GdkWindow *window;
 #ifdef USE_GTKMOZEMBED 	
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
@@ -88,24 +231,15 @@ char GTKEntryDisp::Display(SWModule &imodule)
 #endif	
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	 
-	
-	
+
+	const char *rework;	// for image size analysis rework.
+
 	(const char *)imodule;	// snap to entry
 	//g_message((const char *)imodule.getRawEntry());
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
 	
-	/* sample */
-	/* get window size of commentary window*/
-	if(mod_type == COMMENTARY_TYPE) {
-		window = GDK_WINDOW(gtkText->window);
-		gdk_drawable_get_size(window, &width, &height);
-		g_message("\nCommentary Pane Size:\nwidth: %d\nheight: %d", width, height);
-	}
-	/* end sample */
-	
-	if(mod_type == BOOK_TYPE)
+	if (mod_type == BOOK_TYPE)
 		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
                              -1,
@@ -149,13 +283,21 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0");
-#endif				
+#endif
+
 	if(backend->module_type(imodule.Name()) == PERCOM_TYPE)
-		swbuf.append((const char *)(const char *)imodule.getRawEntry());  //keytext);
+		rework = (const char *)(const char *)imodule.getRawEntry();  //keytext);
 	else if(!strcmp(imodule.Name() ,"ISBE"))		
-		swbuf.append((const char *)(const char *)imodule.StripText());  //keytext);
+		rework = (const char *)(const char *)imodule.StripText();  //keytext);
 	else
-		swbuf.append((const char *)imodule);
+		rework = (const char *)imodule;
+
+	swbuf.append(settings.imageresize
+		     ? AnalyzeForImageSize(rework,
+					   GDK_WINDOW(gtkText->window), 
+					   mod_type)
+		     : rework /* left as-is */);
+
 	swbuf.append("</font></body></html>");	
 
 #ifdef USE_GTKMOZEMBED 		
@@ -318,8 +460,8 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 //
 // Read aloud some text, i.e. the current verse.
-// Text is cleaned of '"', <tokens>, "&symbols;", and *n/*x strings, then
-// scribbled out the local static socket with (SayText "...").
+// Text is cleaned of '"', <tokens>, "&symbols;", and *n/*x strings,
+// then scribbled out the local static socket with (SayText "...").
 // Non-zero verse param is prefixed onto supplied text.
 //
 void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
@@ -336,13 +478,12 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 
 			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
 				char msg[128];
+				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
+					strerror(errno));
 				settings.readaloud = 0;
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 							       (widgets.readaloud_item),
 							       settings.readaloud);
-
-				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
-					strerror(errno));
 				gui_generic_warning(msg);
 				return;
 			}
@@ -363,16 +504,15 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 				if (connect(tts_socket, (const sockaddr *)&service,
 					    sizeof(service)) != 0) {
 					// it still didn't work -- missing.
+					sprintf(msg, "%s\n%s, %s",
+						"TTS \"festival\" not started -- perhaps not installed",
+						"TTS connect failed", strerror(errno));
 					close(tts_socket);
 					tts_socket = -1;
 					settings.readaloud = 0;
 					gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 								       (widgets.readaloud_item),
 								       settings.readaloud);
-
-					sprintf(msg, "%s\n%s, %s",
-						"TTS \"festival\" not started -- perhaps not installed",
-						"TTS connect failed", strerror(errno));
 					gui_generic_warning(msg);
 					return;
 				}
@@ -458,6 +598,8 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		    (write(tts_socket, "\")\r\n", 4) < 0))
 		{
 			char msg[128];
+			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
+				strerror(errno));
 			shutdown(tts_socket, SHUT_RDWR);
 			close(tts_socket);
 			tts_socket = -1;
@@ -465,9 +607,6 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 						       (widgets.readaloud_item),
 						       settings.readaloud);
-
-			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
-				strerror(errno));
 			gui_generic_warning(msg);
 		}
 
@@ -831,6 +970,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif	
+
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	
@@ -840,7 +980,6 @@ char DialogEntryDisp::Display(SWModule &imodule)
 		keytext = imodule.KeyText();
 	
 	if(type == 4)
-		
 		g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 				"<font face=\"%s\" size=\"%s\">%s"
@@ -850,7 +989,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 				settings.link_color,
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
-				(const char *)imodule);	
+				(settings.imageresize
+				 ? AnalyzeForImageSize((const char *)imodule,
+						       GDK_WINDOW(gtkText->window),
+						       type)
+				 : (const char *)imodule /* untouched */));	
 		
 	else
 		g_string_printf(str, 	HTML_START
@@ -869,7 +1012,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
-				(const char *)imodule);	
+				(settings.imageresize
+				 ? AnalyzeForImageSize((const char *)imodule,
+						       GDK_WINDOW(gtkText->window),
+						       type)
+				 : (const char *)imodule /* untouched */));	
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
@@ -910,6 +1057,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	GtkHTML *html = GTK_HTML(gtkText);
 	gboolean was_editable = gtk_html_get_editable(html);
 #endif	
+
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
