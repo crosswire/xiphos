@@ -222,6 +222,9 @@ struct _settings {
 	/* chapter scroll */
 	int chapter_scroll;
 	
+	/* auto image resize in com/book/dict */
+	int imageresize;
+	
 	/* signal id dictionary combo changed */
 	long signal_id;
 	
