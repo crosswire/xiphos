@@ -677,18 +677,18 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("Open StudyPad"),
+	 GNOME_APP_UI_ITEM, N_("Open Study_Pad"),
 	 N_("Open the StudyPad editor"),
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
-	{ GNOME_APP_UI_ITEM, N_("Open Session"),
+	{ GNOME_APP_UI_ITEM, N_("_Open Session"),
 	  N_("Open a saved session"),
 	  on_load_tabs, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
 	  0, 0, NULL},
-  	{ GNOME_APP_UI_ITEM, N_("Save Session"),
+  	{ GNOME_APP_UI_ITEM, N_("_Save Session"),
 	  N_("Save the current session to a file"),
 	  on_save_tabs, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_SAVE,
