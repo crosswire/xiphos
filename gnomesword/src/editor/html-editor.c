@@ -224,8 +224,10 @@ load_through_persist_file(EDITOR * e, const gchar * filename)
 	CORBA_Environment ev;
 
 	CORBA_exception_init(&ev);
-	
+
+#ifdef DEBUG	
 	g_message(filename);
+#endif
 
 	Bonobo_PersistFile_load(e->persist_file_interface, filename, &ev);
 
@@ -1218,7 +1220,6 @@ static GtkWidget *container_create(const gchar * window_title,
 	if (servant) {
 		impl = bonobo_object(servant);
 		if (impl) {
-			g_message("impl");
 			editor->html_widget =
 			    g_object_get_data(G_OBJECT(impl),
 					      "html-widget");
@@ -1313,7 +1314,6 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 	while(tmp != NULL) {
 		e = (EDITOR*)tmp->data;
 		if(note && !e->studypad) {
-			g_message("note && !e->studypad");
 			if(editor_is_dirty(e))
 				save_through_persist_stream_cb(NULL, 
 						(EDITOR*)e);
@@ -1330,7 +1330,6 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 			return 1;
 		}
 		if(!note && e->studypad) {
-			g_message("!note && e->studypad");
 			if(editor_is_dirty(e))
 				save_through_persist_file(e, 
 						g_strdup(e->filename));
@@ -1345,7 +1344,6 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 		}
 		tmp = g_list_next(tmp);
 	}
-			g_message("_create_new");
 	return _create_new(filename, key, note);
 }
 

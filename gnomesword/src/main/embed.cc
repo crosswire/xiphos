@@ -25,6 +25,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
+#define MOZILLA_INTERNAL_API
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
@@ -37,6 +38,7 @@
 #include <nsIDocShellTreeItem.h>
 #include <nsIDocShellTreeOwner.h>
 #include <nsIDocument.h>
+//#include <nsStringAPI.h>
 #include <nsIPresShell.h>
 #include <nsIDocumentViewer.h>
 #include <nsIContent.h>
@@ -545,7 +547,7 @@ nsIDocShell *get_primary_docshell (GtkMozEmbed *b)
 
 	return ds;
 }
-
+ 
 
 void embed_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor)
 {
@@ -569,13 +571,13 @@ void embed_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor)
 		return;
 
 	/* get nsIDocument */
-
+/*
 	nsCOMPtr<nsIDocument> document;
 	result = presShell->GetDocument(getter_AddRefs(document));
 	if (!NS_SUCCEEDED(result) || (!document)) 
 		return;
 		
-	presShell->GoToAnchor(aAnchorName, 1);
+	presShell->GoToAnchor(aAnchorName, 1);*/
 }
 
 void embed_copy_selection(GtkMozEmbed *mozilla_embed)

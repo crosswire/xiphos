@@ -28,7 +28,7 @@ if test "x$mozilla_includes" != "x" ; then
     fi
     MOZILLA_CFLAGS="-I$mozilla_includes -I$mozilla_includes/xpcom -I$mozilla_includes/string -I$mozilla_includes/nspr"
 
-    MOZILLA_LIBS="-L$mozilla_libs -lxpcom -lplds4 -lnspr4 -lplc4"
+    MOZILLA_LIBS="-L$mozilla_libs -lxpcom -lplds4 -lplc4"
     case "${host}" in
       *-*-freebsd* )
           MOZILLA_LIBS="$MOZILLA_LIBS -pthread"
@@ -44,7 +44,7 @@ if test "x$mozilla_includes" != "x" ; then
 else
 dnl    if test "$use_firefox" = "yes" ; then
         PKG_CHECK_MODULES([MOZILLA], 
-            [firefox-nspr >= 1.0 firefox-xpcom])
+            [firefox-xpcom])
         mozilla_includes=`$PKG_CONFIG --variable=includedir firefox-xpcom`
         mozilla_libs=`$PKG_CONFIG --variable=libdir firefox-xpcom`
 
