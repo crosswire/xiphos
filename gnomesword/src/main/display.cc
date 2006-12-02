@@ -141,11 +141,18 @@ AnalyzeForImageSize(const char *origtext,
 	int image_retval;
 
 	//if (GTK_WIDGET_VISIBLE(window)) {	// would be nicer...
+	if (mod_type == PERCOM_TYPE)
+		mod_type = COMMENTARY_TYPE;	// equivalent for display
 	if (++mod_use_counter[mod_type] >= 1) {
 		// call _get_size only if the window exists by now.
 		gdk_drawable_get_size(window, &window_x, &window_y);
-		window_x = (window_x * 93)/100;	// conservative.
-		window_y = (window_y * 93)/100;
+		if ((window_x > 200) || (window_y > 200)) {
+			window_x -= 15;
+			window_y -= 15;
+		} else {
+			window_x = (window_x * 93)/100;
+			window_y = (window_y * 93)/100;
+		}
 	} else {
 		window_x = window_y = 10000; // degenerate: no resize.
 	}
