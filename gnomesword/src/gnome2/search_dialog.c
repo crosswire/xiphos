@@ -1428,6 +1428,42 @@ void _setup_listview_results(GtkWidget * listview, GCallback callback)
 			 NULL);
 }
 */
+
+void
+on_treeview10_drag_begin               (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data)
+{
+	g_message("on_treeview10_drag_begin");
+	
+}
+
+
+gboolean
+on_treeview10_drag_motion              (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+	g_message("on_treeview10_drag_motion");
+
+  return FALSE;
+}
+
+
+void
+on_treeview10_drag_leave               (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+	g_message("on_treeview10_drag_leave");
+
+}
+
+
 /******************************************************************************
  * Name
  *   
@@ -1783,6 +1819,8 @@ void _create_search_dialog(void)
 	GtkWidget *toolbutton10;
 	GtkWidget *toolbutton11;
 	GtkWidget *toolbutton12;
+	 GdkModifierType start_button_mask;
+	GdkDragAction actions;
 	
 	_preview_on = TRUE;
 
@@ -1959,6 +1997,22 @@ void _create_search_dialog(void)
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
 	_setup_listviews(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
+	gtk_drag_source_set             (search1.listview_verses,
+                                        start_button_mask,
+                                        NULL,
+                                        0,
+                                        actions);
+	gtk_drag_source_add_text_targets(search1.listview_verses);
+	
+  g_signal_connect ((gpointer) search1.listview_verses, "drag_begin",
+                    G_CALLBACK (on_treeview10_drag_begin),
+                    NULL);
+  g_signal_connect ((gpointer) search1.listview_verses, "drag_motion",
+                    G_CALLBACK (on_treeview10_drag_motion),
+                    NULL);
+  g_signal_connect ((gpointer) search1.listview_verses, "drag_leave",
+                    G_CALLBACK (on_treeview10_drag_leave),
+                    NULL);
 	/*search1.textview_preview = glade_xml_get_widget(gxml, "textview1");
 	search1.text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (search1.textview_preview));
 	_setup_textview(search1.textview_preview, NULL, search1.text_buffer);*/

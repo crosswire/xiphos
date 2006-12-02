@@ -1,3 +1,7 @@
+2006-12-02  terry <tbiggs@users.sf.net>
+
+	* fixed bug #1605640: Change Font does nothing
+
 2006-12-01  terry <tbiggs@users.sf.net>
 
 	* fixed bug: invoking editor on existing entry loses text.

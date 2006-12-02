@@ -44,6 +44,7 @@
 #ifdef __cplusplus
 extern "C" {
 #include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmltypes.h>
 }
 #endif /* __cplusplus */
 #endif /* USE_GTKMOZEMBED */
@@ -231,12 +232,16 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gsize bytes_written;
 	GError **error = NULL;	
 	gint mod_type;
+	MOD_FONT *mf = get_font(imodule.Name());
 #ifdef USE_GTKMOZEMBED 	
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);	
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
 #endif	
-	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -325,6 +330,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	free_font(mf);	
 	g_free(ops);
 	if(keytext) g_free(keytext);
+		
 }
 
 
@@ -651,15 +657,22 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar heading[32];                                          
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;	
+	GError **error = NULL;
+		
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
+	mf = get_font(imodule.Name());	
 #ifdef USE_GTKMOZEMBED 	
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 	gtk_moz_embed_open_stream(html, "file:///sword", "text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);	
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
+	
 	gboolean was_editable = gtk_html_get_editable(html);
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
@@ -670,9 +683,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		paragraphMark = "";
 		
 	swbuf = "";
-	mf = get_font(imodule.Name());	
-	
-	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	swbuf.appendFormatted(HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -820,6 +830,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 #endif
 	free_font(mf);	
 	g_free(ops);
+	//pango_font_description_free(desc);
 }
 
 
@@ -966,13 +977,16 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	const gchar *keytext = NULL;
 	int curPos = 0;
 	int type = be->module_type(imodule.Name());
-	//GtkHTML *html = GTK_HTML(gtkText);
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());	
 #ifdef USE_GTKMOZEMBED	
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);	
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
@@ -1062,6 +1076,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);	
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
 	gboolean was_editable = gtk_html_get_editable(html);
 #endif	
 
