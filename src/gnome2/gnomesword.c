@@ -245,6 +245,8 @@ void frontend_display(void)
 					      0);
 */
 	gtk_widget_grab_focus (sidebar.module_list);
+	
+
 #ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
 #endif
@@ -268,7 +270,7 @@ void frontend_display(void)
  */
 
 void shutdown_frontend(void)
-{
+{		
 	RESULTS *list_item;
 	if(pixbufs->pixbuf_closed)
 		g_object_unref(pixbufs->pixbuf_closed);

@@ -484,25 +484,21 @@ static void create_text_tags(GtkTextBuffer * buffer)
 }
 
 
-void       adj_changed                  (GtkAdjustment *adjustment1,
-                                            gpointer       user_data) 
+static
+void adj_changed(GtkAdjustment * adjustment1, gpointer user_data) 
 
 {
 	static int scroll = 1;
 	if(!settings.chapter_scroll) return;
 	if(scroll && (adjustment1->value <= adjustment1->lower)) {
 		g_message("\ntop: %g\n",adjustment1->value);
-		//g_signal_handler_block(adjustment, scroll_adj_signal);
 		gui_navbar_handle_spinbutton_click(1, 0);
 		scroll = 0;
-		//g_signal_handler_unblock(adjustment, scroll_adj_signal);
 	} else if(scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
-		//g_signal_handler_block(adjustment, scroll_adj_signal);
 		g_message("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size);
 		gui_navbar_handle_spinbutton_click(1, 1);
 		scroll = 0;
-		gtk_adjustment_set_value(adjustment,5);
-		//g_signal_handler_unblock(adjustment, scroll_adj_signal);
+		gtk_adjustment_set_value(adjustment,2);
 	} else 	scroll = 1;
 }
 
@@ -526,9 +522,7 @@ GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *notebook_text;
 	GtkWidget *scrolledwindow;
-	//GtkWidget *eventbox1;
 	GtkWidget *frame;
-	//GtkAdjustment* adjustment;
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
