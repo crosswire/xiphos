@@ -25,6 +25,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
+#define MOZILLA_INTERNAL_API
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
@@ -469,12 +470,12 @@ void embed_dialogs_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor)
 
 	/* get nsIDocument */
 
-	nsCOMPtr<nsIDocument> document;
+/*	nsCOMPtr<nsIDocument> document;
 	result = presShell->GetDocument(getter_AddRefs(document));
 	if (!NS_SUCCEEDED(result) || (!document)) 
 		return;
 		
-	presShell->GoToAnchor(aAnchorName, 1);
+	presShell->GoToAnchor(aAnchorName, 1);*/
 }
 /*
 void embed_dialogs_copy_selection(GtkMozEmbed *mozilla_embed)

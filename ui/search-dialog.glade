@@ -1127,6 +1127,9 @@ Footnote//body/love</property>
 				      <property name="fixed_height_mode">False</property>
 				      <property name="hover_selection">True</property>
 				      <property name="hover_expand">False</property>
+				      <signal name="drag_begin" handler="on_treeview10_drag_begin" last_modification_time="Wed, 29 Nov 2006 15:42:10 GMT"/>
+				      <signal name="drag_motion" handler="on_treeview10_drag_motion" last_modification_time="Wed, 29 Nov 2006 15:42:33 GMT"/>
+				      <signal name="drag_leave" handler="on_treeview10_drag_leave" last_modification_time="Wed, 29 Nov 2006 15:43:07 GMT"/>
 				    </widget>
 				  </child>
 				</widget>
