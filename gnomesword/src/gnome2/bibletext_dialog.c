@@ -1434,9 +1434,8 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 					cur_vt->mod_name,
 					settings.currentverse);
 	gui_set_module_font(cur_vt->mod_name);
-	//gui_display_text(settings.currentverse);
 	/* show the change */
-	//main_url_handler(url, TRUE);		
+	main_dialogs_url_handler(cur_vt, url, TRUE);
 	g_free(url);
 }
 
