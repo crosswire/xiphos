@@ -542,7 +542,7 @@
 			  <property name="border_width">4</property>
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
-			  <property name="spacing">6</property>
+			  <property name="spacing">35</property>
 
 			  <child>
 			    <widget class="GtkVBox" id="vbox6">
