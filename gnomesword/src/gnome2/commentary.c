@@ -365,6 +365,7 @@ static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_set_module_font(settings.CommWindowModule);
+	main_display_commentary(settings.CommWindowModule,settings.currentverse);
 }
 
 
