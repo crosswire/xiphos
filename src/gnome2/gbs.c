@@ -444,7 +444,7 @@ static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_set_module_font(settings.book_mod);
-	//gui_display_text(settings.currentverse);
+	main_display_book(settings.book_mod,xml_get_value( "keys", "offset"));
 }
 
 
