@@ -64,6 +64,7 @@ static GtkWidget *sync_button;
 static NAVBAR navbar;
 
 static GtkWidget *create_parallel_dialog(void);
+static void sync_with_main(void);
 
 /******************************************************************************
  * Name
@@ -100,6 +101,7 @@ void gui_undock_parallel_page(void)
 	//g_free(settings.cvparallel);
 	settings.dockedInt = FALSE;
 	ApplyChangeBook = TRUE;
+	sync_with_main();
 }
 
 /******************************************************************************
