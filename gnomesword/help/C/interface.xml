@@ -438,7 +438,22 @@ format="PNG"/>
 				</listitem>
 			</itemizedlist>
 		</sect3>
-		
+
+		<sect3 id="gnomesword-commentary-headings">
+			<title>Commentary Headings.</title>
+			<para>
+			Most commentaries have additional headings which enable introductory information about the book and chapter currently
+			being displayed in the <interface>Bible Text pane</interface>. In order to view them:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Commentary Pane</interface>. In the popup menu choose
+					<guimenuitem>Display Book Heading</guimenuitem> or <guimenuitem>Display Chapter Heading</guimenuitem>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect3>
 	</sect2>
 
 	<sect2 id="gnomesword-dictionary">
