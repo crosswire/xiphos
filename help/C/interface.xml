@@ -1,8 +1,7 @@
-<chapter id="interface">
-	<title>Interface</title>
+<!-- ============= Interface ============================== -->
 	
  <!-- ============= Menubar  ============-->
-	<sect1 id="menubar">
+	<sect2 id="menubar">
    		<title>Menubar</title>
    		<para>
    		At the top of the <application>GnomeSword</application> main window is the menubar. 
@@ -18,10 +17,10 @@
     	   		<graphic fileref="figures/interface_menubar.png" format="PNG" ></graphic>
 		      	</screenshot>
 	    	</figure>
-	</sect1>
+	</sect2>
 	
 <!-- ============= Toolbars  ============-->
-	<sect1 id="toolbars">
+	<sect2 id="toolbars">
    		<title>Toolbars</title>
    		<para>
 	    	The function of the Toolbar is to provide control over the Bible Pane.
@@ -69,38 +68,38 @@ format="PNG"/>
 			</listitem>
 		</itemizedlist>
 		
-		<sect2>
+		<sect3>
 			<title>History Forward/Backward Selector</title>
 			<para>
 			Switches between current and previous passage selections.
 			</para>
-		</sect2>
+		</sect3>
 			
-		<sect2 id="gnomesword-toolbar-book">
+		<sect3 id="gnomesword-toolbar-book">
 			<title>Bible Book Selector</title>
 			<para>		
 			Selects the Biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
 			<interface>Commentary Pane</interface>. Changes take immediate effect.
 			</para>
-		</sect2>
+		</sect3>
 			
-		<sect2 id="gnomesword-toolbar-chapter">
+		<sect3 id="gnomesword-toolbar-chapter">
 			<title>Bible Chapter Selector</title>
 			<para>
 			Selects the Biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
 			<interface>Commentary Pane</interface>. Changes take immediate effect.
 			</para>
-		</sect2>
+		</sect3>
 			
-		<sect2 id="gnomesword-toolbar-verse">
+		<sect3 id="gnomesword-toolbar-verse">
 			<title>Bible Verse Selector</title>
 			<para>
 			Selects the Biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
 			<interface>Commentary Pane</interface>. Changes take immediate effect.
 			</para>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-toolbar-summary">
+		<sect3 id="gnomesword-toolbar-summary">
 			<title>Bible Passage Summary</title>
 			<para>
 			Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and 
@@ -112,11 +111,11 @@ format="PNG"/>
 				will be displayed.
 				</para>
 			</warning>
-		</sect2>
-	</sect1>
+		</sect3>
+	</sect2>
    
 <!-- ============= Sidepane  ============-->  
-	<sect1 id="gnomesword-sidepane">
+	<sect2 id="gnomesword-sidepane">
    	 	<title>The Sidebar</title>
 		<figure id="sidepane_figure">
 			<title>Sidepane</title>
@@ -138,9 +137,9 @@ format="PNG"/>
     	   		<graphic fileref="figures/interface_shortcut.png" format="PNG" ></graphic>
 			</screenshot>
 	    	</figure>
-	</sect1>
+	</sect2>
 <!-- ============= Bible Text Pane  ============--> 
-	<sect1 id="gnomesword-bible">
+	<sect2 id="gnomesword-bible">
    		<title>The Bible Text Pane</title>
   		<figure id="textpane_figure">
 			<title>The Bible Textpane</title>
@@ -155,7 +154,7 @@ format="PNG"/>
 		last used will be displayed.
 		</para>
 		
-		<sect2 id="gnomesword-bible-open">
+		<sect3 id="gnomesword-bible-open">
 			<title>Opening A Specific Bible Translation</title>
 			<para>
 			In order to change the current Bible translation to another of your choice:
@@ -176,9 +175,9 @@ format="PNG"/>
 					</para>
 				</listitem>
 			</itemizedlist>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-parallel">
+		<sect3 id="gnomesword-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
 			A nice function in <application>GnomeSword</application> is the ability to view your specified bible text in parallel in five
@@ -207,9 +206,9 @@ format="PNG"/>
     	   		<graphic fileref="figures/interface_parallel-separate.png" format="PNG" ></graphic>
 		      	</screenshot>
 		</figure>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-open-separate">
+		<sect3 id="gnomesword-bible-open-separate">
 			<title>Opening A Separate Bible Translation</title>
 			<para>
 			In order to view a Bible translation separate from the <application>GnomeSword</application> interface:
@@ -231,9 +230,9 @@ format="PNG"/>
 					</para>
 				</listitem>
 			</itemizedlist>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-about">
+		<sect3 id="gnomesword-bible-about">
 			<title>Finding Out About The Current Translation</title>
 			<para>
 			To find out about the Bible translation currently being displayed:
@@ -246,9 +245,9 @@ format="PNG"/>
 					</para>
 				</listitem>
 			</itemizedlist>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-options">
+		<sect3 id="gnomesword-bible-options">
 			<title>Module Options</title>
 			<para>
 			Most Bible translations have additional options which the user can select.
@@ -308,9 +307,9 @@ format="PNG"/>
 	    	   		<graphic fileref="figures/interface_biblepane-options.png" format="PNG" ></graphic>
 			      	</screenshot>
 		    	</figure>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-view-options">
+		<sect3 id="gnomesword-view-options">
 			<title>View Options</title>
 			<para>
 			There are several additional modes that can be selected from the menubar's <guimenuitem>View</guimenuitem> pulldown.
@@ -350,17 +349,17 @@ format="PNG"/>
 					</para>
 				</listitem>
 			</itemizedlist>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-dictionary">
+		<sect3 id="gnomesword-bible-dictionary">
 			<title>Specific Word Meanings</title>
 			<para>
 			In order to check the meaning of a specific word, click on the desired word you wish to lookup. The word should then highlight itself and the
 			explanation should be displayed, if available, in the <interface>Dictionary Pane</interface>. 
 			</para>
-		</sect2>
+		</sect3>
 		
-		<sect2 id="gnomesword-bible-find">
+		<sect3 id="gnomesword-bible-find">
 			<title>Finding A Specific Word</title>
 			<para>
 			To find a specific word within a passage:
@@ -373,10 +372,10 @@ format="PNG"/>
 					</para>	
 				</listitem>
 			</itemizedlist>
-		</sect2>
-	</sect1>
+		</sect3>
+	</sect2>
 <!-- ============= Viewer Pane	================ -->
-	<sect1 id="gnomesword-viewer">
+	<sect2 id="gnomesword-viewer">
 		<title>Viewer Pane</title>
 		<figure id="viewer_figure">
 			<title>Viewer Panel</title>
@@ -400,9 +399,9 @@ format="PNG"/>
 		indicator will send the set of references to the <guibutton>Verse List</guibutton> in the
 		<interface>Sidebar</interface>, where you can click them individually for reading in the Viewer Pane.
 		</para>
-	</sect1>	
+	</sect2>	
 <!-- ============= Commentary Pane  ============--> 
-	<sect1 id="gnomesword-commentaries">
+	<sect2 id="gnomesword-commentaries">
    		<title>The Commentary Pane</title>
 		<figure id="commentary_figure">
 			<title>The Commentary Pane</title>
@@ -425,7 +424,7 @@ format="PNG"/>
 			</para>
 		</note>
 		
-		<sect2 id="gnomesword-commentary-about">
+		<sect3 id="gnomesword-commentary-about">
 			<title>Finding Out About The Commentary Module</title>
 			<para>
 			To find out about the commentary currently being displayed:
@@ -438,26 +437,11 @@ format="PNG"/>
 					</para>
 				</listitem>
 			</itemizedlist>
-		</sect2>
+		</sect3>
+		
+	</sect2>
 
-		<sect2 id="gnomesword-commentary-headings">
-			<title>Commentary Headings.</title>	
-			<para>
-			Most commentaries have additional headings which enable introductory information about the book and chapter currently
-			being displayed in the <interface>Bible Text pane</interface>. In order to view them:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-					right-click in the <interface>Commentary Pane</interface>. In the popup menu choose
-					<guimenuitem>Display Book Heading</guimenuitem> or <guimenuitem>Display Chapter Heading</guimenuitem>.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</sect2>
-	</sect1>
-
-	<sect1 id="gnomesword-dictionary">
+	<sect2 id="gnomesword-dictionary">
 		<title>Dictionary Pane</title>
 		<figure id="dict_figure">
 			<title>The Dictionary Pane</title>
@@ -466,5 +450,5 @@ format="PNG"/>
     	   			<graphic fileref="figures/interface_dictionary.png" format="PNG" ></graphic>
 	      		</screenshot>
     		</figure>
-	</sect1>
-</chapter>
+	</sect2>
+

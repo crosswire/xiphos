@@ -1,6 +1,5 @@
 <!-- Personal Commentary-->
-<chapter id="personal" lang="en">
-	<title>The Personal Commentary </title>
+
 				<para> To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. 
 				Right click it and choose <guimenuitem> Edit-&gt;Personal </guimenuitem> in the pop-up menus.   
 				</para>
@@ -43,4 +42,4 @@
 			        <tip>
 			        	<para>The created commentary page will be attached to an individual verse only. To write commentary pages from within the Gnomesword, attached to longer stretches of text use the <guimenuitem>Link..</guimenuitem> function to link several pages together</para> 
 			        </tip>  
-</chapter>
+

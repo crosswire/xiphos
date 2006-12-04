@@ -2,7 +2,9 @@
 
 @INTLTOOL_DESKTOP_RULE@
 
-SUBDIRS = m4 doc po src ui
+SUBDIRS = m4 doc po src ui help
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 gnomesworddoc_DATA = \
 	README \
@@ -20,12 +22,13 @@ EXTRA_DIST = \
 	${PACKAGE}.desktop.in.in \
 	${PACKAGE}.spec.in \
 	${PACKAGE}.spec \
-	xmldocs.make \
-	omf.make \
+	gnome-doc-utils.make \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
 	COPYING-DOCS
+
+DISTCLEANFILES = gnome-doc-utils.make
 
 gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
 

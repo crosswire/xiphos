@@ -178,6 +178,11 @@ SPELL_LIBS=""
 AC_SUBST(SPELL_LIBS)
 
 dnl ====================================
+dnl Gnome-doc-utils
+dnl ====================================
+GNOME_DOC_INIT
+
+dnl ====================================
 dnl = Begin tests for scrollkeeper
 dnl ====================================
 AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
@@ -264,9 +269,7 @@ AC_OUTPUT([ m4/Makefile
 Makefile
 po/Makefile.in
 doc/Makefile
-doc/help/Makefile
-doc/help/C/Makefile
-doc/help/fr/Makefile
+help/Makefile
 src/Makefile
 src/backend/Makefile
 src/editor/Makefile
