@@ -355,9 +355,14 @@ static void create_bookmark_dialog(gchar * label,
 
 	/* lookup the root widget */
 	dialog = glade_xml_get_widget (gxml, "dialog");
+	g_signal_connect(dialog, "response",
+			 G_CALLBACK(on_dialog_response), NULL);
+	
 	/* treeview */
 	treeview = glade_xml_get_widget (gxml, "treeview");
 	setup_treeview();
+	g_signal_connect(treeview, "button-release-event",
+			 G_CALLBACK(on_treeview_button_release_event), NULL);
 	/* entrys */	
 	entry_label = glade_xml_get_widget (gxml, "entry1");
 	entry_key = glade_xml_get_widget (gxml, "entry2");
@@ -367,8 +372,8 @@ static void create_bookmark_dialog(gchar * label,
 	button_new_folder = glade_xml_get_widget (gxml, "button1");
 	button_add_bookmark = glade_xml_get_widget (gxml, "button3");
 	/* connect signals and data */
-	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
+/*	glade_xml_signal_autoconnect_full
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);*/
 }
 
 
