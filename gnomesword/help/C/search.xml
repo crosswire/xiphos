@@ -1,217 +1,168 @@
 <!-- ============= Search  ============--> 
-<chapter id="search">
-	<title>Fonctions de recherche</title>
-	<sect1 id="gnomesword-searchpane">
-		<title>Recherches simples</title>
-			<para>
-				Pour rechercher rapidement un mot ou une expression dans le module en cours, 
-				le plus approprié est d'utiliser la fonction recherche du volet latéral. 
-				Cette fonction recherche est activée par le menu 
-				<guimenuitem>Editer-&gt;Rechercher</guimenuitem> ou par le bouton 
-				<guimenuitem>Search</guimenuitem> du volet latéral.
-			</para>
+
+	<sect2 id="gnomesword-searchpane">
+		<title>Simple Searches</title>
+		<para> To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. 	Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it.</para> 
+	
 		<figure>
-		<title>Le formulaire de recherche</title>
-		<screenshot>
-	 	       <mediaobject>
-		      		<imageobject>
-				        <imagedata fileref="figures/interface_searchpane" format="PNG"/>
-				</imageobject>
-			 	<textobject>
-		     			<phrase>Le formulaire de recherche</phrase>
-				</textobject>
-		       </mediaobject>
-		 </screenshot>
-	    </figure>
-	   <para>
-		Le formulaire <interface>Rechercher</interface> est constituée des parties suivantes :
+		<title>the Search Bar</title>
+                       <screenshot>
+                       		<screeninfo>The Search Bar</screeninfo>
+                       		<graphic fileref="figures/interface_searchpane.png" format="PNG" ></graphic>
+                       </screenshot>
+                </figure>
+              <para>
+		The <interface>Search Dialog</interface> consists of the following parts:
 		</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						Zone de saisie de l'expression à rechercher
+					Search Key Entry box
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Rechercher dans
+					Search Module Selector
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Type de recherche
+					Search Type Selector
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Options de la recherche
+					Search Options Checkbox
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Étendue de la recherche
+					Search Scope Selector
 					</para>
 				</listitem>
 			</itemizedlist>			
-		<sect2 id="gnomesword-search-key">
-			<title>Zone de saisie de l'expression à rechercher</title>
-			<para>
-				La zone de saisie se situe au-dessus du bouton <guibutton>Rechercher</guibutton>.
-				L'expression à rechercher peut être un mot, une partie de mot, plusieurs mots,
-				une phrase, ou une expression régulière suivant le type de recherche sélectionné.
-				Un click sur le bouton <guibutton>Rechercher</guibutton> démarre la recherche.
-			</para>
-		</sect2>
+		<sect3 id="gnomesword-search-key">
+			<title>Search Key Entry Box</title>
+			<para>Allows entry of the key for which you would like to search. The 
+			search key can be a word, part of a word, several words, a phrase, or 
+			a regular expression depending on the type of search selected. When 
+			the search key is entered and all other selections in the search dialog 
+			are complete, click the <guibutton>Find</guibutton> button to begin 
+			the search.</para>
+			</sect3>
 		
-		<sect2 id="gnomesword-search-modselect">
-			<title>Rechercher dans</title>
-			<para>
-				Cette option permet de désigner le texte dans lequel la recherche sera effectuée.
-				Les deux modules possibles, texte biblique ou commentaire, sont ceux en cours d'utilisation,
-			</para>
-		</sect2>
+		<sect3 id="gnomesword-search-modselect">
+			<title>Search Module Selector</title>
+			<para>Allows selection of which modules	you would like to search. 
+			Select <guibutton>Bible</guibutton> to search Bible versions or 
+			<guibutton>Commentary</guibutton> to search commentaries. Only 
+			the currently active module will be searched.</para>
+		</sect3>
 		
-		<sect2 id="gnomesword-search-typeselect">
-		<title>Type de recherche</title>
-		<para>
-		<!-- Allows selection of the type of search. There are three search
-		types available: -->
+		<sect3 id="gnomesword-search-typeselect">
+		<title>Search Type Selector</title>
+		<para>Allows selection of the type of search. There are three search
+		types available:
 		</para>
 			<variablelist>
 				<varlistentry>
-					<term><guibutton>Mots multiples</guibutton></term> 
-					<listitem>
-						<para>
-							Cette recherche s'effectue à l'aide d'un mot, d'une partie de mot, 
-							ou de plusieurs mots.
-							Les passages comprenant tous les mots à rechercher seront
-							obtenus, quelque soit l'ordre dans lequel ces mots apparaissent 
-							dans le texte.
-						</para>
-					</listitem>
+					<term><guibutton>Multi word</guibutton></term> 
+					<listitem><para>This type will match any verse that has 
+					all the words in the search key, regardless of where 
+					they appear in the verse.</para></listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Expression régulière</guibutton></term> 
-					<listitem>
-						<para>
-							Une expression régulière est une clé de recherche basée
-							sur un langage et une syntaxe spécifiques permettant de 
-							retrouver un mot, ou une phrase à l'aide de combinaisons 
-							complexes. Par exemple l'expression régulière <example>
-							\ A[a-z]*iah </example> permet de retrouver les passages 
-							qui contiennent les mots Aiah, Ahaziah, Athaliah et Amariah.
-						</para>
-						<para>
-							Un exposé complet de l'emploi des expressions régulières 
-							dépasse le cadre de ce manuel, cependant 
-							plus d'informations à ce sujet sont détaillées dans
-							la page man de grep.
-						</para>
-					</listitem>
+					<term><guibutton>Regular expression</guibutton></term> 
+					<listitem><para>This search uses a regular expression
+					as a search key. A regular expression is a pattern used 
+					to match a string of text. A regular expression can be 
+					used to find verses with words that match a particular 
+					pattern. For example the regular expression
+					<userinput>\ A[a-z]*iah </userinput> will match verses that contain
+					the words Aiah, Ahaziah, Athaliah and Amariah.</para>
+					<para>A complete discussion of regular expressions is 
+					beyond the scope of this manual, but more information 
+					can be found in the grep man page.</para></listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Phrase exacte</guibutton></term> 
-					<listitem>
-						<para>
-							Seuls les passages qui contiennent exactement
-							la phrase à rechercher seront obtenus.
-							Si la phrase à rechercher est <userinput>
-							en vérité</userinput>, les passages obtenus
-							contiendront  "<emphasis>en vérité</emphasis>,"
-							mais pas" <emphasis>en</emphasis> toute 
-							<emphasis>vérité</emphasis>".
-				
-						</para>
-					</listitem>
+					<term><guibutton>Exact phrase</guibutton></term> 
+					<listitem><para>This type will match the search key
+					exatly as entered. If the search key is <userinput>
+					it is good</userinput>, this search would match a verse
+					which contains "<emphasis>it is good</emphasis>," but 
+					would not match a verse	which contains "<emphasis>
+					good</emphasis>, and doeth <emphasis>it</emphasis> not, 
+					to him it <emphasis>is</emphasis> sin."</para></listitem>
 				</varlistentry>
 			</variablelist>
- 		</sect2>
+ 		</sect3>
 
-		<sect2 id="gnomesword-search-options">
-			<title>Options de la recherche</title>
-			<para>
-				La seule option disponible est l'option <guibutton>Respecter la casse</guibutton>.
-				Elle est à cocher si la recherche doit tenir compte des majuscules et des minuscules.
-			</para>
-		</sect2>
+		<sect3 id="gnomesword-search-options">
+			<title>Search Options Checkbox</title>
+			<para>Allows selecting of search options. The only available option 
+			is <guibutton>Match case</guibutton>. Check this box to make the 
+			search case sensitive.</para>
+		</sect3>
 		
-		<sect2 id="gnomesword-search-scopeselect">
-			<title>Étendue de la recherche</title>
-			<para>
-				La recherche peut s'effectuer sur l'ensemble du module sélectionné ou sur un ensemble
-				de passages plus limité. Les limites de la recherche sont définissables de trois façons :
-			</para>
+		<sect3 id="gnomesword-search-scopeselect">
+			<title>Search Scope Selector</title>
+			<para>Allows defining the range within the specificed module that will
+			be searched. There are three search scopes available:</para>
 			<variablelist>
 				<varlistentry>
-					<term><guibutton>Pas de limites</guibutton></term>
-					<listitem>
-						<para>
-							La recherche est effectuée sur le odule entier
-						</para>
+					<term><guibutton>No scope</guibutton></term>
+					<listitem><para>This button causes the search to
+					to include the entire module.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Avec limites</guibutton></term>
-					<listitem>
-						<para>
-							Deux zones supplémentaires de saisie des limites s'affichent 
-							quand cette option est sélectionnée. Le premier livre où débutera
-							la recherche est à saisir dans <guilabel>Basse</guilabel> et le
-							dernier livre où se terminera la recherche dans <guilabel>Haute
-							</guilabel>.
-						</para>
-						<para>
-							Les numéros de chapître et verset peuvent aussi être ajoutés aux noms de livres.
-						</para>
+					<term><guibutton>Use bounds</guibutton></term>
+					<listitem><para>Selecting this button produces two text 
+					entry boxes marked <guilabel>Lower</guilabel> and
+					<guilabel>Upper</guilabel>. Enter the first book 
+					to search in the <guilabel>Lower</guilabel> box and
+					the last book to search in the <guilabel>Upper</guilabel>
+					box. The search will begin with the <guilabel>Lower
+					</guilabel> book and end with the <guilabel>Upper
+					</guilabel> book and include all books in between.
+					</para>
+					<para>Chapter and verse numbers can be entered into
+					the search bound boxes as well to further narrow the
+					search. </para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Limites précédentes</guibutton></term>
-					<listitem>
-						<para>
-							Cette option est à sélectionner si une nouvelle recherche doit être
-							exécutée sur les passages obtenus comme résultats de la recherche
-							précédente. La clé de recherche doit être modifiée pour affiner
-							la liste de résultats.
-						</para>
+					<term><guibutton>Last search</guibutton></term>
+					<listitem><para>Select this button to do a new 
+					search including only the verses returned as a 
+					result of the last search. Use this with a new 
+					search key to narrow the search further.</para>
 					</listitem>
 				</varlistentry>
 			</variablelist> 
-		</sect2>
-	</sect1>
-	<sect1 id="gnomesword-advanced-search">
-	   <title>Recherches avancées</title> 
-		<para>
-			Des recherches plus complexes peuvent nécessiter l'utilisation de la boîte de dialogue 
-			recherche avancée, disponible par le menu <guimenuitem>Éditer-&gt;Recherche avancée</guimenuitem>
-		</para>
+		</sect3>
+	</sect2>
+	<sect2 id="gnomesword-advanced-search">
+	   <title>Advanced Searches</title> 
+	   <para> More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem></para>
 
 	 
-	     <figure>
-		<title>La boîte de dialogue recherche avancée</title>
-		<screenshot>
-	 	       <mediaobject>
-		      		<imageobject>
-				        <imagedata fileref="figures/gnomesword_advanced_search" format="PNG"/>
-				</imageobject>
-			 	<textobject>
-		     			<phrase>La boîte de dialogue recherche avancée</phrase>
-				</textobject>
-		       </mediaobject>
-		 </screenshot>
-	   </figure>
-	   
-	 
-	   <warning>
+	  <figure>
+	  <title>The Advanced Search Dialogue</title>
+	  <screenshot>
+		<screeninfo>The Advanced Search  Dialog</screeninfo>
+                <graphic fileref="figures/search_search.png" format="PNG" ></graphic>
+          </screenshot>
+          </figure>
+           
+	 <warning>
 	   	<para>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
-			Les changements effectués dans les options (limites de la recherche, modules, etc..) de la boite de
-			dilogue recherche avancée changent aussi les options de la recherche du volet latéral, mais pas l'inverse.
 		</para>
 	   </warning>  
-	   </sect1>
+	   </sect2>
 
-	<sect1 id="hdbk-op-search-dialog-text-regexp">
+	<sect2 id="hdbk-op-search-dialog-text-regexp">
 		<title>Search Syntax using GCC Regular Expression</title>
 
 		<para>
@@ -229,40 +180,34 @@ backslash in &quot;i. love\.&quot; means that the period following it is not to 
 an ordinary period. 
 		</para>
 
-		<sect2 id="hdbk-op-search-dialog-text-regexp-rules">
+		<sect3 id="hdbk-op-search-dialog-text-regexp-rules">
 			<title>Rules for GCC Regular Expression Search Requests</title>
 			<itemizedlist>
-<listitem><para>. The period matches any character. See <link
-	linkend="period">Details</link></para></listitem>
+<listitem><para>. The period matches any character.</para></listitem>
 <listitem><para>* The asterisk matches 0 or more characters of the
-	preceding: set, character or indicated character. See <link
-	linkend="asterisk">Details</link></para></listitem>
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>+ The plus sign matches 1 or more characters of the
-	preceding: set, character or indicated character. See <link
-	linkend="plus">Details</link></para></listitem>
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>? The question mark matches 0 or 1 character of the
-	preceding: set, character or indicated character. See <link
-	linkend="question">Details</link></para></listitem>
+	preceding: set, character or indicated character.</para></listitem>
 <listitem><para>[ ] Square brackets match any one of the characters
-	specified inside [ ]. See <link linkend="bracket">Details</link></para></listitem>
-<listitem><para>^ A caret as the first character inside [ ] means NOT. See
-	<link linkend="caret">Details</link></para></listitem>
+	specified inside [ ].</para></listitem>
+<listitem><para>^ A caret as the first character inside [ ] means NOT.</para></listitem>
 <listitem><para>^ A caret beginning a pattern anchors the beginning of a
-	line. See <link linkend="caret">Details</link></para></listitem>
+	line.</para></listitem>
 <listitem><para>$ A dollar at the end of a pattern anchors the end of a
-	line. See <link linkend="dollar">Details</link></para></listitem>
-<listitem><para>| A vertical bar means logical OR. See <link
-	linkend="bar">Details</link></para></listitem>
+	line.</para></listitem>
+<listitem><para>| A vertical bar means logical OR.</para></listitem>
 <listitem><para>( ) Parentheses enclose expressions for grouping.
 <emphasis>Not supported!</emphasis></para></listitem>
 <listitem><para>\ A backslash can be used prior to any special character
-	to match that character. See <link linkend="backslash">Details</link></para></listitem>
+	to match that character.</para></listitem>
 <listitem><para>\ A backslash can be used prior to an ordinary character
-	to make it a special character. See <link linkend="backslash">Details</link></para></listitem>
+	to make it a special character.</para></listitem>
 </itemizedlist>
 
-<sect3 id="period">
-<title>The Period .</title>
+<sect4 id="period">
+<title>The Period</title>
 
 <para>The Period &quot;.&quot; will match any single character even
 a space or other non-alphabet character.
@@ -274,13 +219,13 @@ compas<emphasis>s</emphasis>e<emphasis>t</emphasis>h and <emphasis>s</emphasis>o
 <emphasis>b</emphasis>oa<emphasis>t</emphasis> and <emphasis>b</emphasis>ea<emphasis>t
 foot.tool </emphasis>matches <emphasis>foot</emphasis>s<emphasis>tool </emphasis>and
 <emphasis>foot tool</emphasis></para>
-</sect3>
+</sect4>
 
 
-<sect3 id="asterisk">
-<title>The Asterisk *</title>
+<sect4 id="asterisk">
+<title>The Asterisk</title>
 
-<para>The asterisk matches zero or more characters of the preceding:
+<para>The asterisk &quot;*&quot; matches zero or more characters of the preceding:
 set, character or indicated character. Using
 a period asterisk combination &quot;.*&quot; after a commonly
 found pattern can cause the search to take a very long time,
@@ -288,34 +233,34 @@ making the program seem to freeze.
 <emphasis>be*n</emphasis> matches<emphasis> beeen, been, ben</emphasis>,
 and <emphasis>bn</emphasis> which could locate Reu<emphasis>ben</emphasis>
 and She<emphasis>bn</emphasis>a.</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="plus">
-<title>The Plus Sign +</title>
-<para>The Plus Sign matches one or more characters of the preceding:
+<sect4 id="plus">
+<title>The Plus Sign</title>
+<para>The Plus Sign &quot;+&quot; matches one or more characters of the preceding:
 set, character or indicated character. Using
 a period and plus sign combination &quot;.+&quot; after a
 commonly found pattern can cause the search to take a very long
 time, making the program seem to freeze.
 <emphasis>be+n</emphasis> matches <emphasis>beeen, been</emphasis> and <emphasis>ben</emphasis>,
 but not <emphasis>bn</emphasis>.</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="question">
-<title>The Question Mark ?</title>
-<para>The Question Mark matches zero or one character of the
+<sect4 id="question">
+<title>The Question Mark</title>
+<para>The Question Mark &quot;?&quot;matches zero or one character of the
 preceding: set, character or indicated character.
 <emphasis>be?n</emphasis> matches <emphasis>ben</emphasis> and <emphasis>bn</emphasis>
 but not <emphasis>been</emphasis>.
 <emphasis>trees?</emphasis> matches <emphasis>trees</emphasis> or <emphasis>tree</emphasis>.</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="bracket">
-<title>The Square Brackets [ ]</title>
-<para>The Square Brackets enclose a set of characters that can
+<sect4 id="bracket">
+<title>The Square Brackets </title>
+<para>The Square Brackets &quot;[]&quot; enclose a set of characters that can
 match. The period, asterisk, plus sign and question mark are not
 special inside the brackets. A minus sign can be used to indicate
 a range. If you want a caret &quot;^&quot; to be part of the
@@ -333,20 +278,20 @@ seet, siet</emphasis>, etc.
 <emphasis>[A-Z]</emphasis> matches any uppercase letter.
 [.;:?!] matches ., ;, :, ?, or ! but not a comma.
 [ ]^-] matches ] or ^ or -</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="caret">
-<title>The Caret first in Square Brackets [^xxx</title>
-<para>If the Caret is the first character after the left bracket it
+<sect4 id="caret">
+<title>The Caret first in Square Brackets </title>
+<para>If the Caret is the first character after the left bracket (&quot;[^&quot;) it
 means NOT.
 <emphasis>s[^io]t</emphasis> matches <emphasis>set, sat</emphasis>, etc.,
 but not <emphasis>s</emphasis>i<emphasis>t</emphasis> and <emphasis>s</emphasis>o<emphasis>t</emphasis>.</para>
-</sect3>
+</sect4>
 
-<sect3 id="caret-s">
-<title>The Caret as Start of Line Anchor ^xxx</title>
-<para>If the Caret is the first character in a pattern it anchors
+<sect4 id="caret-s">
+<title>The Caret as Start of Line Anchor </title>
+<para>If the Caret is the first character in a pattern (&quot;^xxx&quot;) it anchors
 the pattern to the start of a line. Any match must be at the
 beginning of a line. Because of unfiltered
 formatting characters in some texts, this feature does not always
@@ -355,12 +300,12 @@ account for the formatting characters.
 <emphasis>^In the beginning</emphasis> matches lines that
 start with &quot;<emphasis>In the beginning</emphasis>&quot;.
 (May need to use: <emphasis>^.....In the beginning</emphasis>)</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="dollar">
-<title>The Dollar Sign as End of Line Anchor xxx$</title>
-<para>If the Dollar Sign is the last character in a pattern it
+<sect4 id="dollar">
+<title>The Dollar Sign as End of Line Anchor </title>
+<para>If the Dollar Sign is the last character (&quot;xxx$&quot;) in a pattern it
 anchors the pattern to the end of a line. Any match must be at
 the end of a line. Because of unfiltered
 formatting characters in some texts, this feature does not always
@@ -370,41 +315,41 @@ to account for the formatting characters.
 &quot;<emphasis>Amen.</emphasis>&quot; (May
 need to use Amen\....$, Amen\..........$, or even
 Amen\....................$)</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="bar">
-<title>The Vertical Bar |</title>
-<para>The Vertical Bar between patterns means OR.
+<sect4 id="bar">
+<title>The Vertical Bar </title>
+<para>The Vertical Bar &quot;|&quot; between patterns means OR.
 <emphasis>John|Peter</emphasis> matches <emphasis>John</emphasis> or <emphasis>Peter.
 John .*Peter|Peter .*John</emphasis> matches <emphasis>John</emphasis>
 ... <emphasis>Peter</emphasis> or <emphasis>Peter</emphasis> ... <emphasis>John</emphasis>.
 (.* slows a search)
 <emphasis>pain|suffering|sorrow</emphasis> matches <emphasis>pain</emphasis>,
 or <emphasis>suffering</emphasis>, or <emphasis>sorrow</emphasis>.</para>
-</sect3>
+</sect4>
 
 
-<sect3 id="parenth">
-<title>The Parentheses ( ) </title>
-<para><emphasis>The use of Parentheses ( ) is
+<sect4 id="parenth">
+<title>The Parentheses</title>
+<para><emphasis>The use of Parentheses &quot;( )&quot; is
 not supported!</emphasis></para>
-</sect3>
+</sect4>
 
 
-<sect3 id="backslash">
-<title>The Backslash Prior to a Special Character \*</title>
-<para>The Backslash prior to a special character indicates that the
+<sect4 id="backslash">
+<title>The Backslash Prior to a Special Character</title>
+<para>The Backslash prior to a special character (&quot;\*&quot;) indicates that the
 character is not being used in its special meaning, but is just
 to match itself.
 <emphasis>amen\.</emphasis> matches <emphasis>amen.</emphasis> but not <emphasis>amen</emphasis>t
 and will not locate firm<emphasis>amen</emphasis>t.</para>
-</sect3>
+</sect4>
 
-<sect3 id="backslash-o">
-<title>The Backslash Prior to an Ordinary Character \s</title>
+<sect4 id="backslash-o">
+<title>The Backslash Prior to an Ordinary Character </title>
 
-<para>The Backslash prior to an ordinary character indicates that
+<para>The Backslash prior to an ordinary character (&quot;\o&quot;) indicates that
 the character is not being used to match itself, but has special
 meaning.</para>
 
@@ -424,7 +369,7 @@ righteous</emphasis>ness.</para></listitem>
 <listitem><para>\w means alphanumeric; same as [a-zA-Z0-9_].</para></listitem>
 <listitem><para>\W means not alphanumeric; same as [^a-zA-Z0-9_].</para></listitem>
 </itemizedlist>
+</sect4>
 </sect3>
 </sect2>
-</sect1>
-</chapter>
+

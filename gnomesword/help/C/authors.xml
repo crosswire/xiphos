@@ -1,6 +1,5 @@
 <!-- Authors -->
-<chapter id="authors" lang="en">
-	<title>Authors</title>
+
 		<para>
     	This manual was written by:
 		</para>
@@ -38,4 +37,4 @@
     	<ulink type="http" url="http://www.sourceforge.net/projects/gnomesword">
     	http://www.sourceforge.net/projects/gnomesword</ulink>
 		</para>
-</chapter>
+
