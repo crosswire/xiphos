@@ -96,7 +96,7 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 {	
 	GError *error = NULL;
 	
-	if (gnome_help_display ((const gchar*)"gnomesword-manual.xml", 
+	if (gnome_help_display ((const gchar*)"gnomesword.xml", 
 			NULL, &error) == FALSE) {
 		g_warning(error->message);
 		g_error_free (error);        

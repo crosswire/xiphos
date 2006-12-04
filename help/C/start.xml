@@ -1,7 +1,6 @@
-<chapter id="familiar">
-	<title>Getting Started with GnomeSword</title>
+
 <!-- ============= Getting Started with GnomeSword  ============-->
-	<sect1 id="gnomesword-getting-started">
+	<sect2 id="gnomesword-getting-started">
   		<title>Starting GnomeSword</title>
 			<para>
 			You can start <application>GnomeSword</application> in the following ways:
@@ -26,9 +25,9 @@
     				</listitem>
     			</varlistentry>
   		  	</variablelist>
-    </sect1>
+    </sect2>
 <!--Starting Gnomesword for the First Time  -->
-  	<sect1 id="gnomesword-first-start">
+  	<sect2 id="gnomesword-first-start">
   		<title>Starting GnomeSword For The First Time</title>
 		<para>
 		When you start <application>GnomeSword</application> for the first time, <application>GnomeSword</application> creates a
@@ -49,9 +48,9 @@
 		<menuchoice><guimenuitem>Edit</guimenuitem><guimenuitem>Preferences</guimenuitem></menuchoice> to change any of the
 		selections already made by default.
 		</para>
-	 </sect1>
+	 </sect2>
 <!-- GnomeSword on first time use -->
-   	 <sect1 id="gnomesword-when-you-start">
+   	 <sect2 id="gnomesword-when-you-start">
 	 <title>Launching GnomeSword</title>
 		<para>
 		When you start <application>GnomeSword</application>, the following interface is displayed:
@@ -144,5 +143,5 @@
 			When you right-click in the different interface sections, the interface displays a popup menu, which provides access
 			to more module-specific options, including printing services.
 			</para>
-	</sect1>
-</chapter>
+	</sect2>
+
