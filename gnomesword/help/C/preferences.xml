@@ -1,9 +1,8 @@
 <!-- Preferences -->
-<chapter id="preferences">
-	<title>Preferences</title>
+
 
 <!-- Introduction -->
-	<sect1 id="preferences-introduction">
+	<sect2 id="preferences-introduction">
   		<title>Introduction To Preferences</title>
 		<figure>
 			<title>The Preference Dialog</title>
@@ -12,12 +11,12 @@
                                 <graphic fileref="figures/preferences.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
-                </sect1>
+               </sect2>
 	
 <!-- Fonts And Colors -->
-	<sect1 id="fonts-and-colors">
+	<sect2 id="fonts-and-colors">
 		<title>Fonts And Colors</title>
-		<sect2 id="font-color">
+		<sect3 id="font-color">
 			<title>Setting Font Colors</title>
 			<figure>
 			<title>Font Colour Settings</title>
@@ -26,9 +25,9 @@
                                 <graphic fileref="figures/preferences_fonts-color.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
-                </sect2>
+                </sect3>
 		
-		<sect2 id="font-misc">
+		<sect3 id="font-misc">
 			<title>Miscellaneous Font Settings</title>
 			<figure>
 			<title>Miscellaneous Font Settings</title>
@@ -41,13 +40,13 @@
 		In individual modules' display, the right-click menu's <guimenuitem>Module Options</guimenuitem> selector provides font name
 		and size selection.
 		</para>
-		</sect2>
-	</sect1>
+		</sect3>
+	</sect2>
 	
 <!-- General Settings -->
-	<sect1 id="general-settings">
+	<sect2 id="general-settings">
 		<title>General Settings</title>
-		<sect2 id="tab-pane">
+		<sect3 id="tab-pane1">
 			<title>Tabs and Pane Settings</title>
 		<figure>
 			<title>Tab and Pane Settings</title>
@@ -56,8 +55,8 @@
                                 <graphic fileref="figures/preferences_general-tabs.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
-                </sect2>
-		<sect2 id="tab-pane">
+                </sect3>
+		<sect3 id="tab-pane2">
 			<title>General Preferences and StudyPad directory</title>
 		<figure>
 			<title>General Preferences and StudyPad directory</title>
@@ -66,26 +65,13 @@
                                 <graphic fileref="figures/preferences_general-misc.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
-		<para>
-		<guilabel>Verse style</guilabel> indicates that each verse should begin on a separate line, or (when disabled) that verses
-		should be allowed to group in paragraphs, according to the Bible module's internal markup.  Not all Bible modules have such
-		markup.
-		</para>
-		<para>
-		With <guilabel>Scroll to Previous/Next Chapter</guilabel> enabled, using the mouse to scroll to the beginning or end of a
-		chapter will cause <application>GnomeSword</application> to move automatically to the appropriate chapter.
-		</para>
-		<para>
-		If you enable <guilabel>Resize images</guilabel>, <application>GnomeSword</application> will automatically resize image
-		content in commentaries, general books, and dictionaries so as to fit the subwindow which contains them.
-		</para>
-                </sect2>
-	</sect1>
+                </sect3>
+	</sect2>
 	
 <!-- Module Settings -->
-	<sect1 id="module-settings">
+	<sect2 id="module-settings">
 		<title>Module Settings</title>
-		<sect2 id="main-modules">
+		<sect3 id="main-modules">
 			<title>Main Module Settings</title>
 		<figure>
 			<title>The Module Preferences Dialog</title>
@@ -108,6 +94,6 @@
                                 <graphic fileref="figures/preferences_modules-misc.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
-          	</sect2>
-	</sect1>
-</chapter>
+          	</sect3>
+	</sect2>
+
