@@ -1,7 +1,6 @@
-<chapter id="studypad">
-	<title>The Studypad</title>
+
 <!-- ============= The Studypad ============================= -->
-    <sect1 id="gnomesword-studypad">
+    <sect2 id="gnomesword-studypad">
 		<title>Using The Studypad</title>
 		<para>
 		The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>
@@ -34,5 +33,5 @@
 			        	<listitem><para>Find and 'Find and Replace'</para></listitem>
 			        	<listitem><para>Spellcheck</para></listitem>
 			        	</itemizedlist>
-	</sect1>
-</chapter>
+	</sect2>
+
