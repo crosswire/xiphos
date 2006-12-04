@@ -2,7 +2,10 @@ include $(top_srcdir)/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
 DOC_MODULE = 	gnomesword
-DOC_ENTITIES = 	introduction.xml \
+
+DOC_ENTITIES = 	legal.xml
+
+DOC_INCLUDES = 	introduction.xml \
 		interface.xml \
 		start.xml \
 		preferences.xml \
@@ -11,9 +14,8 @@ DOC_ENTITIES = 	introduction.xml \
 		studypad.xml \
 		personal.xml \
 		authors.xml \
-		license.xml\
-		legal.xml
-DOC_INCLUDES = 	
+		license.xml		
+
 DOC_FIGURES = 	figures/first_start.png \
 		figures/interface_biblepane-options.png \
 		figures/interface_biblepane.png \
@@ -47,4 +49,4 @@ DOC_FIGURES = 	figures/first_start.png \
 		figures/sword_remove.png \
 		figures/sword_sources.png
 
-DOC_LINGUAS =de fr
+DOC_LINGUAS =	de fr
