@@ -1,13 +1,285 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-12-03 22:16+0100\n"
+"POT-Creation-Date: 2006-12-04 19:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../C/license.xml:2(para) ../C/gnomesword.xml:2(para) 
+msgid "This program is free software; you can redistribute it and/or modify it under the terms of the <ulink type=\"ghelp\" url=\"gnome-help:gpl\">GNU General Public License</ulink> as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
+msgstr ""
+
+#. Authors
+#: ../C/authors.xml:3(para) ../C/gnomesword.xml:3(para) 
+msgid "This manual was written by:"
+msgstr ""
+
+#. Personal Commentary
+#: ../C/personal.xml:3(para) ../C/gnomesword.xml:3(para) 
+msgid "To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. Right click it and choose <guimenuitem> Edit-&gt;Personal </guimenuitem> in the pop-up menus."
+msgstr ""
+
+#: ../C/studypad.xml:4(title) ../C/gnomesword.xml:4(title) 
+msgid "Using The Studypad"
+msgstr ""
+
+#: ../C/studypad.xml:5(para) ../C/gnomesword.xml:5(para) 
+msgid "The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>"
+msgstr ""
+
+#: ../C/studypad.xml:8(para) ../C/gnomesword.xml:8(para) 
+msgid "This is what the Studypad typically looks like:"
+msgstr ""
+
+#: ../C/studypad.xml:12(title) ../C/studypad.xml:14(screeninfo) ../C/gnomesword.xml:217(title) ../C/gnomesword.xml:12(title) ../C/gnomesword.xml:14(screeninfo) 
+msgid "The Studypad"
+msgstr ""
+
+#: ../C/studypad.xml:19(para) ../C/gnomesword.xml:19(para) 
+msgid "The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes."
+msgstr ""
+
+#: ../C/studypad.xml:20(para) ../C/gnomesword.xml:20(para) ../C/gnomesword.xml:21(para) 
+msgid "Toolbar 1"
+msgstr ""
+
+#: ../C/studypad.xml:22(para) ../C/gnomesword.xml:22(para) ../C/gnomesword.xml:23(para) 
+msgid "Font Size and Environment"
+msgstr ""
+
+#: ../C/studypad.xml:23(para) ../C/gnomesword.xml:23(para) ../C/gnomesword.xml:24(para) 
+msgid "Font Type"
+msgstr ""
+
+#: ../C/studypad.xml:24(para) ../C/gnomesword.xml:24(para) ../C/gnomesword.xml:25(para) 
+msgid "Bold, Italics, Underscored, Crossed Out"
+msgstr ""
+
+#: ../C/studypad.xml:25(para) ../C/gnomesword.xml:25(para) ../C/gnomesword.xml:26(para) 
+msgid "Left, Centre and Right Bound"
+msgstr ""
+
+#: ../C/studypad.xml:26(para) ../C/gnomesword.xml:26(para) ../C/gnomesword.xml:27(para) 
+msgid "Shift Paragraph Right or Left"
+msgstr ""
+
+#: ../C/studypad.xml:27(para) ../C/gnomesword.xml:27(para) ../C/gnomesword.xml:28(para) 
+msgid "Colour Selector"
+msgstr ""
+
+#: ../C/studypad.xml:29(para) ../C/gnomesword.xml:29(para) ../C/gnomesword.xml:30(para) 
+msgid "Toolbar 2"
+msgstr ""
+
+#: ../C/studypad.xml:31(para) ../C/gnomesword.xml:31(para) 
+msgid "New, Save, Delete and Print"
+msgstr ""
+
+#: ../C/studypad.xml:32(para) ../C/gnomesword.xml:32(para) ../C/gnomesword.xml:33(para) 
+msgid "Cut, Copy, Paste and Undo"
+msgstr ""
+
+#: ../C/studypad.xml:33(para) ../C/gnomesword.xml:33(para) ../C/gnomesword.xml:34(para) 
+msgid "Find and 'Find and Replace'"
+msgstr ""
+
+#: ../C/studypad.xml:34(para) ../C/gnomesword.xml:34(para) ../C/gnomesword.xml:35(para) 
+msgid "Spellcheck"
+msgstr ""
+
+#: ../C/search.xml:4(title) ../C/gnomesword.xml:4(title) 
+msgid "Simple Searches"
+msgstr ""
+
+#: ../C/search.xml:5(para) ../C/gnomesword.xml:5(para) 
+msgid "To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it."
+msgstr ""
+
+#: ../C/search.xml:8(title) ../C/gnomesword.xml:8(title) 
+msgid "the Search Bar"
+msgstr ""
+
+#: ../C/search.xml:10(screeninfo) ../C/gnomesword.xml:10(screeninfo) 
+msgid "The Search Bar"
+msgstr ""
+
+#: ../C/search.xml:14(para) ../C/gnomesword.xml:14(para) 
+msgid "The <interface>Search Dialog</interface> consists of the following parts:"
+msgstr ""
+
+#: ../C/search.xml:19(para) ../C/gnomesword.xml:19(para) 
+msgid "Search Key Entry box"
+msgstr ""
+
+#: ../C/search.xml:24(para) ../C/search.xml:55(title) ../C/gnomesword.xml:24(para) ../C/gnomesword.xml:55(title) 
+msgid "Search Module Selector"
+msgstr ""
+
+#: ../C/search.xml:29(para) ../C/search.xml:63(title) ../C/gnomesword.xml:29(para) ../C/gnomesword.xml:63(title) 
+msgid "Search Type Selector"
+msgstr ""
+
+#: ../C/search.xml:34(para) ../C/search.xml:101(title) ../C/gnomesword.xml:34(para) ../C/gnomesword.xml:101(title) 
+msgid "Search Options Checkbox"
+msgstr ""
+
+#: ../C/search.xml:39(para) ../C/search.xml:108(title) ../C/gnomesword.xml:39(para) ../C/gnomesword.xml:108(title) 
+msgid "Search Scope Selector"
+msgstr ""
+
+#: ../C/search.xml:45(title) ../C/gnomesword.xml:45(title) 
+msgid "Search Key Entry Box"
+msgstr ""
+
+#: ../C/search.xml:46(para) ../C/gnomesword.xml:46(para) 
+msgid "Allows entry of the key for which you would like to search. The search key can be a word, part of a word, several words, a phrase, or a regular expression depending on the type of search selected. When the search key is entered and all other selections in the search dialog are complete, click the <guibutton>Find</guibutton> button to begin the search."
+msgstr ""
+
+#: ../C/search.xml:56(para) ../C/gnomesword.xml:56(para) 
+msgid "Allows selection of which modules you would like to search. Select <guibutton>Bible</guibutton> to search Bible versions or <guibutton>Commentary</guibutton> to search commentaries. Only the currently active module will be searched."
+msgstr ""
+
+#: ../C/search.xml:64(para) ../C/gnomesword.xml:64(para) 
+msgid "Allows selection of the type of search. There are three search types available:"
+msgstr ""
+
+#: ../C/search.xml:69(guibutton) ../C/gnomesword.xml:69(guibutton) 
+msgid "Multi word"
+msgstr ""
+
+#: ../C/search.xml:70(para) ../C/gnomesword.xml:70(para) 
+msgid "This type will match any verse that has all the words in the search key, regardless of where they appear in the verse."
+msgstr ""
+
+#: ../C/search.xml:75(guibutton) ../C/gnomesword.xml:75(guibutton) 
+msgid "Regular expression"
+msgstr ""
+
+#: ../C/search.xml:76(para) ../C/gnomesword.xml:76(para) 
+msgid "This search uses a regular expression as a search key. A regular expression is a pattern used to match a string of text. A regular expression can be used to find verses with words that match a particular pattern. For example the regular expression <userinput>\\ A[a-z]*iah </userinput> will match verses that contain the words Aiah, Ahaziah, Athaliah and Amariah."
+msgstr ""
+
+#: ../C/search.xml:83(para) ../C/gnomesword.xml:83(para) 
+msgid "A complete discussion of regular expressions is beyond the scope of this manual, but more information can be found in the grep man page."
+msgstr ""
+
+#: ../C/search.xml:88(guibutton) ../C/gnomesword.xml:88(guibutton) 
+msgid "Exact phrase"
+msgstr ""
+
+#: ../C/search.xml:89(para) ../C/gnomesword.xml:89(para) 
+msgid "This type will match the search key exatly as entered. If the search key is <userinput>\n\t\t\t\t\tit is good</userinput>, this search would match a verse which contains \"<emphasis>it is good</emphasis>,\" but would not match a verse which contains \"<emphasis> good</emphasis>, and doeth <emphasis>it</emphasis> not, to him it <emphasis>is</emphasis> sin.\""
+msgstr ""
+
+#: ../C/search.xml:102(para) ../C/gnomesword.xml:102(para) 
+msgid "Allows selecting of search options. The only available option is <guibutton>Match case</guibutton>. Check this box to make the search case sensitive."
+msgstr ""
+
+#: ../C/search.xml:109(para) ../C/gnomesword.xml:109(para) 
+msgid "Allows defining the range within the specificed module that will be searched. There are three search scopes available:"
+msgstr ""
+
+#: ../C/search.xml:113(guibutton) ../C/gnomesword.xml:113(guibutton) 
+msgid "No scope"
+msgstr ""
+
+#: ../C/search.xml:114(para) ../C/gnomesword.xml:114(para) 
+msgid "This button causes the search to to include the entire module."
+msgstr ""
+
+#: ../C/search.xml:119(guibutton) ../C/gnomesword.xml:119(guibutton) 
+msgid "Use bounds"
+msgstr ""
+
+#: ../C/search.xml:120(para) ../C/gnomesword.xml:120(para) 
+msgid "Selecting this button produces two text entry boxes marked <guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Enter the first book to search in the <guilabel>Lower</guilabel> box and the last book to search in the <guilabel>Upper</guilabel> box. The search will begin with the <guilabel>Lower </guilabel> book and end with the <guilabel>Upper </guilabel> book and include all books in between."
+msgstr ""
+
+#: ../C/search.xml:129(para) ../C/gnomesword.xml:129(para) 
+msgid "Chapter and verse numbers can be entered into the search bound boxes as well to further narrow the search."
+msgstr ""
+
+#: ../C/search.xml:135(guibutton) ../C/gnomesword.xml:135(guibutton) 
+msgid "Last search"
+msgstr ""
+
+#: ../C/search.xml:136(para) ../C/gnomesword.xml:136(para) 
+msgid "Select this button to do a new search including only the verses returned as a result of the last search. Use this with a new search key to narrow the search further."
+msgstr ""
+
+#: ../C/modules.xml:5(title) ../C/gnomesword.xml:5(title) 
+msgid "Introduction To The Module Manager"
+msgstr ""
+
+#: ../C/modules.xml:6(para) ../C/gnomesword.xml:6(para) 
+msgid "The \"module\" is the unit of content in GnomeSword, and Sword generally; a Sword module is a resource available for viewing in Sword applications. There are several varieties: Most importantly, Bible texts, as well as dictionaries and lexicons, commentaries, and general books, including some which have graphical content (e.g. atlases). They are installed either from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server such as Crosswire, which is the home of Sword, and from which all officially Sword-sanctioned modules are available."
+msgstr ""
+
+#: ../C/modules.xml:13(para) ../C/gnomesword.xml:13(para) 
+msgid "If you have other Sword applications installed, they will all share the same set of Sword modules that you install through the Module Manager."
+msgstr ""
+
+#: ../C/modules.xml:18(title) ../C/modules.xml:20(screeninfo) ../C/gnomesword.xml:18(title) ../C/gnomesword.xml:20(screeninfo) 
+msgid "The Module Manager Dialog"
+msgstr ""
+
+#: ../C/preferences.xml:6(title) ../C/gnomesword.xml:6(title) 
+msgid "Introduction To Preferences"
+msgstr ""
+
+#: ../C/preferences.xml:8(title) ../C/gnomesword.xml:8(title) 
+msgid "The Preference Dialog"
+msgstr ""
+
+#: ../C/preferences.xml:10(screeninfo) ../C/gnomesword.xml:10(screeninfo) 
+msgid "The Preferenmces Dialog"
+msgstr ""
+
+#: ../C/start.xml:4(title) ../C/gnomesword.xml:4(title) 
+msgid "Starting GnomeSword"
+msgstr ""
+
+#: ../C/start.xml:5(para) ../C/gnomesword.xml:5(para) 
+msgid "You can start <application>GnomeSword</application> in the following ways:"
+msgstr ""
+
+#: ../C/start.xml:10(term) ../C/gnomesword.xml:10(term) 
+msgid "Applications menu"
+msgstr ""
+
+#: ../C/start.xml:12(para) ../C/gnomesword.xml:12(para) 
+msgid "Choose <menuchoice><guisubmenu>Accessories</guisubmenu><guimenuitem>Gnomesword2 Bible Guide</guimenuitem></menuchoice>."
+msgstr ""
+
+#: ../C/start.xml:20(term) ../C/gnomesword.xml:20(term) 
+msgid "Command line"
+msgstr ""
+
+#: ../C/start.xml:22(para) ../C/gnomesword.xml:22(para) 
+msgid "Type <command>gnomesword2</command>, then press <keycap>Return</keycap>."
+msgstr ""
+
+#: ../C/interface.xml:5(title) ../C/interface.xml:14(title) ../C/gnomesword.xml:70(term) ../C/gnomesword.xml:5(title) ../C/gnomesword.xml:14(title) 
+msgid "Menubar"
+msgstr ""
+
+#: ../C/interface.xml:6(para) ../C/gnomesword.xml:6(para) 
+msgid "At the top of the <application>GnomeSword</application> main window is the menubar. Almost all of the functions are available by activating the appropriate menu item. The functions have been grouped according to their type. For example, the file operations have been grouped into the <guisubmenu>File</guisubmenu> menu."
+msgstr ""
+
+#: ../C/interface.xml:16(screeninfo) ../C/gnomesword.xml:16(screeninfo) 
+msgid "GnomeSword menubar"
+msgstr ""
+
+#. Use the Introduction section to give a brief overview of what
+#.      the application is and what it does.
+#: ../C/introduction.xml:5(para) 
+msgid "is a Bible study and research tool based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. You can use to do the following:"
+msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -201,30 +473,6 @@ msgstr ""
 msgid "Getting Started with GnomeSword"
 msgstr ""
 
-#: ../C/gnomesword.xml:4(title) 
-msgid "Starting GnomeSword"
-msgstr ""
-
-#: ../C/gnomesword.xml:5(para) 
-msgid "You can start <application>GnomeSword</application> in the following ways:"
-msgstr ""
-
-#: ../C/gnomesword.xml:10(term) 
-msgid "Applications menu"
-msgstr ""
-
-#: ../C/gnomesword.xml:12(para) 
-msgid "Choose <menuchoice><guisubmenu>Accessories</guisubmenu><guimenuitem>Gnomesword2 Bible Guide</guimenuitem></menuchoice>."
-msgstr ""
-
-#: ../C/gnomesword.xml:20(term) 
-msgid "Command line"
-msgstr ""
-
-#: ../C/gnomesword.xml:22(para) 
-msgid "Type <command>gnomesword2</command>, then press <keycap>Return</keycap>."
-msgstr ""
-
 #: ../C/gnomesword.xml:31(title) 
 msgid "Starting GnomeSword For The First Time"
 msgstr ""
@@ -263,10 +511,6 @@ msgstr ""
 
 #: ../C/gnomesword.xml:65(para) 
 msgid "The <application>GnomeSword</application> interface contains the following elements:"
-msgstr ""
-
-#: ../C/gnomesword.xml:70(term) ../C/gnomesword.xml:5(title) ../C/gnomesword.xml:14(title) 
-msgid "Menubar"
 msgstr ""
 
 #: ../C/gnomesword.xml:72(para) 
@@ -335,14 +579,6 @@ msgstr ""
 
 #: ../C/gnomesword.xml:193(title) 
 msgid "Interface"
-msgstr ""
-
-#: ../C/gnomesword.xml:6(para) 
-msgid "At the top of the <application>GnomeSword</application> main window is the menubar. Almost all of the functions are available by activating the appropriate menu item. The functions have been grouped according to their type. For example, the file operations have been grouped into the <guisubmenu>File</guisubmenu> menu."
-msgstr ""
-
-#: ../C/gnomesword.xml:16(screeninfo) 
-msgid "GnomeSword menubar"
 msgstr ""
 
 #: ../C/gnomesword.xml:24(title) 
@@ -661,18 +897,6 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: ../C/gnomesword.xml:6(title) 
-msgid "Introduction To Preferences"
-msgstr ""
-
-#: ../C/gnomesword.xml:8(title) 
-msgid "The Preference Dialog"
-msgstr ""
-
-#: ../C/gnomesword.xml:10(screeninfo) 
-msgid "The Preferenmces Dialog"
-msgstr ""
-
 #: ../C/gnomesword.xml:18(title) 
 msgid "Fonts And Colors"
 msgstr ""
@@ -737,22 +961,6 @@ msgstr ""
 msgid "Module Manager"
 msgstr ""
 
-#: ../C/gnomesword.xml:5(title) 
-msgid "Introduction To The Module Manager"
-msgstr ""
-
-#: ../C/gnomesword.xml:6(para) 
-msgid "The \"module\" is the unit of content in GnomeSword, and Sword generally; a Sword module is a resource available for viewing in Sword applications. There are several varieties: Most importantly, Bible texts, as well as dictionaries and lexicons, commentaries, and general books, including some which have graphical content (e.g. atlases). They are installed either from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server such as Crosswire, which is the home of Sword, and from which all officially Sword-sanctioned modules are available."
-msgstr ""
-
-#: ../C/gnomesword.xml:13(para) 
-msgid "If you have other Sword applications installed, they will all share the same set of Sword modules that you install through the Module Manager."
-msgstr ""
-
-#: ../C/gnomesword.xml:18(title) ../C/gnomesword.xml:20(screeninfo) 
-msgid "The Module Manager Dialog"
-msgstr ""
-
 #: ../C/gnomesword.xml:28(title) 
 msgid "Sword Module Configurations"
 msgstr ""
@@ -791,126 +999,6 @@ msgstr ""
 
 #: ../C/gnomesword.xml:211(title) 
 msgid "The Search Function"
-msgstr ""
-
-#: ../C/gnomesword.xml:4(title) 
-msgid "Simple Searches"
-msgstr ""
-
-#: ../C/gnomesword.xml:5(para) 
-msgid "To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it."
-msgstr ""
-
-#: ../C/gnomesword.xml:8(title) 
-msgid "the Search Bar"
-msgstr ""
-
-#: ../C/gnomesword.xml:10(screeninfo) 
-msgid "The Search Bar"
-msgstr ""
-
-#: ../C/gnomesword.xml:14(para) 
-msgid "The <interface>Search Dialog</interface> consists of the following parts:"
-msgstr ""
-
-#: ../C/gnomesword.xml:19(para) 
-msgid "Search Key Entry box"
-msgstr ""
-
-#: ../C/gnomesword.xml:24(para) ../C/gnomesword.xml:55(title) 
-msgid "Search Module Selector"
-msgstr ""
-
-#: ../C/gnomesword.xml:29(para) ../C/gnomesword.xml:63(title) 
-msgid "Search Type Selector"
-msgstr ""
-
-#: ../C/gnomesword.xml:34(para) ../C/gnomesword.xml:101(title) 
-msgid "Search Options Checkbox"
-msgstr ""
-
-#: ../C/gnomesword.xml:39(para) ../C/gnomesword.xml:108(title) 
-msgid "Search Scope Selector"
-msgstr ""
-
-#: ../C/gnomesword.xml:45(title) 
-msgid "Search Key Entry Box"
-msgstr ""
-
-#: ../C/gnomesword.xml:46(para) 
-msgid "Allows entry of the key for which you would like to search. The search key can be a word, part of a word, several words, a phrase, or a regular expression depending on the type of search selected. When the search key is entered and all other selections in the search dialog are complete, click the <guibutton>Find</guibutton> button to begin the search."
-msgstr ""
-
-#: ../C/gnomesword.xml:56(para) 
-msgid "Allows selection of which modules you would like to search. Select <guibutton>Bible</guibutton> to search Bible versions or <guibutton>Commentary</guibutton> to search commentaries. Only the currently active module will be searched."
-msgstr ""
-
-#: ../C/gnomesword.xml:64(para) 
-msgid "Allows selection of the type of search. There are three search types available:"
-msgstr ""
-
-#: ../C/gnomesword.xml:69(guibutton) 
-msgid "Multi word"
-msgstr ""
-
-#: ../C/gnomesword.xml:70(para) 
-msgid "This type will match any verse that has all the words in the search key, regardless of where they appear in the verse."
-msgstr ""
-
-#: ../C/gnomesword.xml:75(guibutton) 
-msgid "Regular expression"
-msgstr ""
-
-#: ../C/gnomesword.xml:76(para) 
-msgid "This search uses a regular expression as a search key. A regular expression is a pattern used to match a string of text. A regular expression can be used to find verses with words that match a particular pattern. For example the regular expression <userinput>\\ A[a-z]*iah </userinput> will match verses that contain the words Aiah, Ahaziah, Athaliah and Amariah."
-msgstr ""
-
-#: ../C/gnomesword.xml:83(para) 
-msgid "A complete discussion of regular expressions is beyond the scope of this manual, but more information can be found in the grep man page."
-msgstr ""
-
-#: ../C/gnomesword.xml:88(guibutton) 
-msgid "Exact phrase"
-msgstr ""
-
-#: ../C/gnomesword.xml:89(para) 
-msgid "This type will match the search key exatly as entered. If the search key is <userinput>\n\t\t\t\t\tit is good</userinput>, this search would match a verse which contains \"<emphasis>it is good</emphasis>,\" but would not match a verse which contains \"<emphasis> good</emphasis>, and doeth <emphasis>it</emphasis> not, to him it <emphasis>is</emphasis> sin.\""
-msgstr ""
-
-#: ../C/gnomesword.xml:102(para) 
-msgid "Allows selecting of search options. The only available option is <guibutton>Match case</guibutton>. Check this box to make the search case sensitive."
-msgstr ""
-
-#: ../C/gnomesword.xml:109(para) 
-msgid "Allows defining the range within the specificed module that will be searched. There are three search scopes available:"
-msgstr ""
-
-#: ../C/gnomesword.xml:113(guibutton) 
-msgid "No scope"
-msgstr ""
-
-#: ../C/gnomesword.xml:114(para) 
-msgid "This button causes the search to to include the entire module."
-msgstr ""
-
-#: ../C/gnomesword.xml:119(guibutton) 
-msgid "Use bounds"
-msgstr ""
-
-#: ../C/gnomesword.xml:120(para) 
-msgid "Selecting this button produces two text entry boxes marked <guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Enter the first book to search in the <guilabel>Lower</guilabel> box and the last book to search in the <guilabel>Upper</guilabel> box. The search will begin with the <guilabel>Lower </guilabel> book and end with the <guilabel>Upper </guilabel> book and include all books in between."
-msgstr ""
-
-#: ../C/gnomesword.xml:129(para) 
-msgid "Chapter and verse numbers can be entered into the search bound boxes as well to further narrow the search."
-msgstr ""
-
-#: ../C/gnomesword.xml:135(guibutton) 
-msgid "Last search"
-msgstr ""
-
-#: ../C/gnomesword.xml:136(para) 
-msgid "Select this button to do a new search including only the verses returned as a result of the last search. Use this with a new search key to narrow the search further."
 msgstr ""
 
 #: ../C/gnomesword.xml:146(title) 
@@ -1129,81 +1217,8 @@ msgstr ""
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr ""
 
-#: ../C/gnomesword.xml:217(title) ../C/gnomesword.xml:12(title) ../C/gnomesword.xml:14(screeninfo) 
-msgid "The Studypad"
-msgstr ""
-
-#: ../C/gnomesword.xml:4(title) 
-msgid "Using The Studypad"
-msgstr ""
-
-#: ../C/gnomesword.xml:5(para) 
-msgid "The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>"
-msgstr ""
-
-#: ../C/gnomesword.xml:8(para) 
-msgid "This is what the Studypad typically looks like:"
-msgstr ""
-
-#: ../C/gnomesword.xml:19(para) 
-msgid "The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes."
-msgstr ""
-
-#: ../C/gnomesword.xml:20(para) ../C/gnomesword.xml:21(para) 
-msgid "Toolbar 1"
-msgstr ""
-
-#: ../C/gnomesword.xml:22(para) ../C/gnomesword.xml:23(para) 
-msgid "Font Size and Environment"
-msgstr ""
-
-#: ../C/gnomesword.xml:23(para) ../C/gnomesword.xml:24(para) 
-msgid "Font Type"
-msgstr ""
-
-#: ../C/gnomesword.xml:24(para) ../C/gnomesword.xml:25(para) 
-msgid "Bold, Italics, Underscored, Crossed Out"
-msgstr ""
-
-#: ../C/gnomesword.xml:25(para) ../C/gnomesword.xml:26(para) 
-msgid "Left, Centre and Right Bound"
-msgstr ""
-
-#: ../C/gnomesword.xml:26(para) ../C/gnomesword.xml:27(para) 
-msgid "Shift Paragraph Right or Left"
-msgstr ""
-
-#: ../C/gnomesword.xml:27(para) ../C/gnomesword.xml:28(para) 
-msgid "Colour Selector"
-msgstr ""
-
-#: ../C/gnomesword.xml:29(para) ../C/gnomesword.xml:30(para) 
-msgid "Toolbar 2"
-msgstr ""
-
-#: ../C/gnomesword.xml:31(para) 
-msgid "New, Save, Delete and Print"
-msgstr ""
-
-#: ../C/gnomesword.xml:32(para) ../C/gnomesword.xml:33(para) 
-msgid "Cut, Copy, Paste and Undo"
-msgstr ""
-
-#: ../C/gnomesword.xml:33(para) ../C/gnomesword.xml:34(para) 
-msgid "Find and 'Find and Replace'"
-msgstr ""
-
-#: ../C/gnomesword.xml:34(para) ../C/gnomesword.xml:35(para) 
-msgid "Spellcheck"
-msgstr ""
-
 #: ../C/gnomesword.xml:223(title) ../C/gnomesword.xml:10(screeninfo) 
 msgid "The Personal Commentary"
-msgstr ""
-
-#. Personal Commentary
-#: ../C/gnomesword.xml:3(para) 
-msgid "To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. Right click it and choose <guimenuitem> Edit-&gt;Personal </guimenuitem> in the pop-up menus."
 msgstr ""
 
 #: ../C/gnomesword.xml:6(para) 
@@ -1250,11 +1265,6 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#. Authors
-#: ../C/gnomesword.xml:3(para) 
-msgid "This manual was written by:"
-msgstr ""
-
 #: ../C/gnomesword.xml:8(para) 
 msgid "Andy Piper"
 msgstr ""
@@ -1281,10 +1291,6 @@ msgstr ""
 
 #: ../C/gnomesword.xml:235(title) 
 msgid "License"
-msgstr ""
-
-#: ../C/gnomesword.xml:2(para) 
-msgid "This program is free software; you can redistribute it and/or modify it under the terms of the <ulink type=\"ghelp\" url=\"gnome-help:gpl\">GNU General Public License</ulink> as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
 msgstr ""
 
 #: ../C/gnomesword.xml:9(para) 
