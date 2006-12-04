@@ -801,12 +801,12 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	for (i = 0; i < count; i++) {
 		free(new_key);			
 		(*backend->display_mod)++;
-		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
+		new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
                                              -1,
                                              NULL,
                                              &bytes_written,
-                                             NULL);*/
-		new_key = g_strdup((char*)backend->display_mod->KeyText());
+                                             NULL);
+		//new_key = g_strdup((char*)backend->display_mod->KeyText());
 		/* add menu item */
 		item =
 		    gtk_menu_item_new_with_label((gchar *) new_key);
