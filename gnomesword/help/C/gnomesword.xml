@@ -27,23 +27,23 @@
        Use the app entity to specify the name of the application. -->
 ]>
 <!-- 
-  This is a GNOME documentation template, designed by the GNOME
-  Documentation Project Team. Please use it for writing GNOME
-  documentation, making obvious changes. In particular, all the words
-  written in UPPERCASE (with the exception of GNOME) should be
-  replaced. As for "legalnotice", please leave the reference
-  unchanged.
+This is a GNOME documentation template, designed by the GNOME
+Documentation Project Team. Please use it for writing GNOME
+documentation, making obvious changes. In particular, all the words
+written in UPPERCASE (with the exception of GNOME) should be
+replaced. As for "legalnotice", please leave the reference
+unchanged.
 
-  Remember that this is a guide, rather than a perfect model to follow
-  slavishly. Make your manual logical and readable.  And don't forget
-  to remove these comments in your final documentation!  ;-)
+Remember that this is a guide, rather than a perfect model to follow
+slavishly. Make your manual logical and readable.  And don't forget
+to remove these comments in your final documentation!  ;-)
 -->
 <!-- 
-      (Do not remove this comment block.)
-  Maintained by the GNOME Documentation Project
-  http://developer.gnome.org/projects/gdp
-  Template version: 2.0 beta
-  Template last modified Apr 11, 2002
+    (Do not remove this comment block.)
+Maintained by the GNOME Documentation Project
+http://developer.gnome.org/projects/gdp
+Template version: 2.0 beta
+Template last modified Apr 11, 2002
 -->
 <!-- =============Document Header ============================= -->
 <article id="index" lang="en">
@@ -51,31 +51,34 @@
 <!-- appropriate code -->
   <articleinfo>
     <title>GnomeSword2 Manual</title>
+    <abstract>
+      <para>Gnomesword is an application to aid in study of the Bible.</para>
+    </abstract>
     <copyright>
-	<year>2003</year>
-	<year>2006</year>
-   	<holder>The GnomeSword Team</holder>
+      <year>2003</year>
+      <year>2006</year>
+      <holder>The GnomeSword Team</holder>
     </copyright>
 
-  <!-- translators: uncomment this:
+    <!-- translators: uncomment this:
 
-  <copyright>
-   <year>2006</year>
-   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
-  </copyright>
+    <copyright>
+      <year>2006</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
 
-   -->
-<!-- An address can be added to the publisher information.  If a role is 
-     not specified, the publisher/author is the same for all versions of the 
-     document.  -->
+    -->
+    <!-- An address can be added to the publisher information.  If a role is 
+    not specified, the publisher/author is the same for all versions of the 
+    document.  -->
     <publisher> 
       <publishername> GNOME Documentation Project </publishername> 
     </publisher> 
 
-   &legal;
-   <!-- This file  contains link to license for the documentation (GNU FDL), and 
-        other legal stuff such as "NO WARRANTY" statement. Please do not change 
-	any of this. -->
+    &legal;
+    <!-- This file  contains link to license for the documentation (GNU FDL), and 
+    other legal stuff such as "NO WARRANTY" statement. Please do not change 
+    any of this. -->
 
     <authorgroup>
       <author>
@@ -95,39 +98,39 @@
         <surname>Kleinpaste</surname>
       </author>
 
-<!-- This is appropriate place for other contributors: translators,
-     maintainers,  etc. Commented out by default.
+      <!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
      
       <othercredit role="translator">
-		<firstname>Latin</firstname> 
-		<surname>Translator 1</surname> 
-		<affiliation> 
-	  		<orgname>Latin Translation Team</orgname> 
-	  		<address> <email>translator@gnome.org</email> </address> 
-		</affiliation>
-		<contrib>Latin translation</contrib>
+        <firstname>Latin</firstname> 
+        <surname>Translator 1</surname> 
+        <affiliation> 
+          <orgname>Latin Translation Team</orgname> 
+          <address> <email>translator@gnome.org</email> </address> 
+        </affiliation>
+        <contrib>Latin translation</contrib>
       </othercredit>
--->
+      -->
     </authorgroup>
 
 
-<!-- According to GNU FDL, revision history is mandatory if you are -->
-<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
-<!-- Remember to remove the &manrevision; entity from the revision entries other
--->
-<!-- than the current revision. -->
-<!-- The revision numbering system for GNOME manuals is as follows: -->
-<!-- * the revision number consists of two components -->
-<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
-<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
-<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
-<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
-<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
-<!-- to V3.0, and so on. -->  
+    <!-- According to GNU FDL, revision history is mandatory if you are -->
+    <!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+    <!-- Remember to remove the &manrevision; entity from the revision entries other
+    -->
+    <!-- than the current revision. -->
+    <!-- The revision numbering system for GNOME manuals is as follows: -->
+    <!-- * the revision number consists of two components -->
+    <!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+    <!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+    <!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+    <!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+    <!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+    <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-       <revnumber>&appname; Manual V&manrevision;</revnumber> 
-       <date>&date;</date> 
+        <revnumber>&appname; Manual V&manrevision;</revnumber> 
+        <date>&date;</date> 
       </revision> 
     </revhistory> 
 
@@ -139,17 +142,17 @@
       this manual, Use the <ulink url="http://sourceforge.net/tracker/?group_id=5528">
       Tracker on SourceForge</ulink> or the mailing lists. 
       </para>
-<!-- Translators may also add here feedback address for translations -->
+      <!-- Translators may also add here feedback address for translations -->
     </legalnotice> 
 
-<keywordset>
-  <keyword>gnome</keyword>
-  <keyword>gnomesword</keyword>
-  <keyword>gnomesword2</keyword>
-  <keyword>sword</keyword>
-  <keyword>crosswire</keyword>
-  <keyword>help dialog</keyword>
-</keywordset>
+    <keywordset>
+      <keyword>gnome</keyword>
+      <keyword>gnomesword</keyword>
+      <keyword>gnomesword2</keyword>
+      <keyword>sword</keyword>
+      <keyword>crosswire</keyword>
+      <keyword>help dialog</keyword>
+    </keywordset>
 
   </articleinfo> 
 
@@ -160,80 +163,80 @@
     <primary>mygnomeapp</primary> 
   </indexterm>
 
-<!-- ============= Document Body ============================= -->
+  <!-- ============= Document Body ============================= -->
 
-  <abstract>
-    <para>Gnomesword is an application to aid in study of the Bible.</para>
-  </abstract>
+  <!-- Please note: the headers of the included files (introduction.xml,
+  start.xml and so on) must be into this main help file. If they are not, 
+  the table of contents is not displayed by yelp.
+  -->
 
-<!-- ============= Introduction ============================== -->
-<!-- Use the Introduction section to give a brief overview of what
-     the application is and what it does. -->
-<sect1 id="gnomesword-introduction">
-   <title>Introduction</title>
-       &introduction;
-</sect1>
+  <!-- ============= Introduction ============================== -->
+  <!-- Use the Introduction section to give a brief overview of what
+  the application is and what it does. -->
+  <sect1 id="gnomesword-introduction">
+    <title>Introduction</title>
+    &introduction;
+  </sect1>
 
-<!-- =========== Getting Started ============================== -->
-<!-- Use the Getting Started section to describe the steps required
-     to start the application and to describe the user interface components
-     of the application. If there is other information that it is important
-     for readers to know before they start using the application, you should
-     also include this information here. 
-     If the information about how to get started is very short, you can 
-     include it in the Introduction and omit this section. -->
-<sect1 id="familiar">
-   <title>Getting Started with GnomeSword</title>
-	&start;
-</sect1>
+  <!-- =========== Getting Started ============================== -->
+  <!-- Use the Getting Started section to describe the steps required
+  to start the application and to describe the user interface components
+  of the application. If there is other information that it is important
+  for readers to know before they start using the application, you should
+  also include this information here. 
+  If the information about how to get started is very short, you can 
+  include it in the Introduction and omit this section. -->
+  <sect1 id="familiar">
+    <title>Getting Started with GnomeSword</title>
+    &start;
+  </sect1>
 
+  <!-- Interface -->
+  <sect1 id="interface">
+    <title>Interface</title>
+    &interface;
+  </sect1>
 
-<!-- Interface -->
-<sect1 id="interface">
-	<title>Interface</title>
-	&interface;
-</sect1>
+  <!-- Preferences -->
+  <sect1 id="preferences">
+    <title>Preferences</title>
+    &preferences;
+  </sect1>
 
-<!-- Preferences -->
-<sect1 id="preferences">
-	<title>Preferences</title>
-        &preferences;
-</sect1>
-
-<!-- Modules -->
-<sect1 id="module-manager">
-	<title>Module Manager</title>
-        &modules; 
-</sect1>
+  <!-- Modules -->
+  <sect1 id="module-manager">
+    <title>Module Manager</title>
+    &modules; 
+  </sect1>
   
-<!-- Searching -->
-<sect1 id="search">
-	<title>The Search Function</title>
-        &search;  
-</sect1>
+  <!-- Searching -->
+  <sect1 id="search">
+    <title>The Search Function</title>
+    &search;  
+  </sect1>
 
-<!-- Studypad -->
-<sect1 id="studypad">
-	<title>The Studypad</title>
-        &studypad;  
-</sect1>
+  <!-- Studypad -->
+  <sect1 id="studypad">
+    <title>The Studypad</title>
+    &studypad;  
+  </sect1>
 
-<!-- Personal Commentary -->
-<sect1 id="personal">
-	<title>The Personal Commentary </title>
-        &personal;  
-</sect1>
+  <!-- Personal Commentary -->
+  <sect1 id="personal">
+    <title>The Personal Commentary </title>
+    &personal;  
+  </sect1>
 
-<!-- Authors -->
-<sect1 id="authors">
-	<title>Authors</title>
-        &authors;
-</sect1>
+  <!-- Authors -->
+  <sect1 id="authors">
+    <title>Authors</title>
+    &authors;
+  </sect1>
  
-<!-- License -->
-<sect1 id="license">
-	<title>License</title>
-        &license;
-</sect1>
+  <!-- License -->
+  <sect1 id="license">
+    <title>License</title>
+    &license;
+  </sect1>
 
 </article>
