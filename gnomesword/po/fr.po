@@ -32,10 +32,10 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2 2.1.8\n"
+"Project-Id-Version: GnomeSword 2 2.1.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-05 21:16+0100\n"
-"PO-Revision-Date: 2006-12-05 22:03+0100\n"
+"PO-Revision-Date: 2006-12-05 22:32+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +105,7 @@ msgstr "Commentaires"
 #: ../src/main/sidebar.cc:954 ../src/gnome2/mod_mgr.c:676
 #: ../src/gnome2/utilities.c:508
 msgid "General Books"
-msgstr "Livres connexes"
+msgstr "Bibliothèque"
 
 #: ../src/main/sidebar.cc:734 ../src/main/sidebar.cc:786
 #: ../src/gnome2/mod_mgr.c:471 ../src/gnome2/mod_mgr.c:541
@@ -1406,7 +1406,7 @@ msgstr "Commentaires"
 
 #: ../src/gnome2/main_window.c:743
 msgid "Book View"
-msgstr "Livres connexes"
+msgstr "Bibliothèque"
 
 #: ../src/gnome2/mod_mgr.c:213
 msgid "Install the following modules:"
@@ -1822,7 +1822,7 @@ msgstr "Afficher les dictionnaires et lexiques"
 
 #: ../src/gnome2/setup_druid.c:763
 msgid "Show book tabs"
-msgstr "Onglets des livres conexes"
+msgstr "Onglets de la bibliothèque"
 
 #: ../src/gnome2/setup_druid.c:782
 msgid "GnomeSword Configuration - Page 4 of 5"
@@ -1858,7 +1858,7 @@ msgstr "Bible parallèle n°1"
 
 #: ../src/gnome2/setup_druid.c:946
 msgid "Generic book"
-msgstr "Livre connexe"
+msgstr "Bibliothèque"
 
 #: ../src/gnome2/setup_druid.c:965
 msgid "Personal"
@@ -2125,7 +2125,7 @@ msgstr "Texte biblique"
 
 #: ../ui/prefs.glade.h:23
 msgid "Book"
-msgstr "Livre connexe"
+msgstr "Bibliothèque"
 
 #: ../ui/prefs.glade.h:26
 msgid "Cover"

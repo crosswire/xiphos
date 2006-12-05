@@ -1,22 +1,28 @@
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Gnomesword-manual 2.1.10\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-04 19:21+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-12-05 22:27+0100\n"
+"Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../C/license.xml:2(para) ../C/gnomesword.xml:2(para) 
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the <ulink type=\"ghelp\" url=\"gnome-help:gpl\">GNU General Public License</ulink> as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
-msgstr ""
+msgstr "Ce programme est libre, vous pouvez le redistribuer et/ou le modifier "
+"selon les termes de la <ulink type=\"ghelp\" url=\"gnome-help:gpl\">"
+"Licence Publique Générale GNU</ulink> publiée par la Free Software "
+"Foundation (version 2 ou bien toute autre version ultérieure choisie "
+"par vous)."
 
 #. Authors
 #: ../C/authors.xml:3(para) ../C/gnomesword.xml:3(para) 
 msgid "This manual was written by:"
-msgstr ""
+msgstr "Ce manuel a été écrit par :"
 
 #. Personal Commentary
 #: ../C/personal.xml:3(para) ../C/gnomesword.xml:3(para) 
@@ -25,19 +31,19 @@ msgstr ""
 
 #: ../C/studypad.xml:4(title) ../C/gnomesword.xml:4(title) 
 msgid "Using The Studypad"
-msgstr ""
+msgstr "Usage du bloc-notes :"
 
 #: ../C/studypad.xml:5(para) ../C/gnomesword.xml:5(para) 
 msgid "The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>"
-msgstr ""
+msgstr "Le bloc-notes s'obtient à l'aide du menu <guibutton>Fichier-&gt;Bloc-notes..</guibutton>"
 
 #: ../C/studypad.xml:8(para) ../C/gnomesword.xml:8(para) 
 msgid "This is what the Studypad typically looks like:"
-msgstr ""
+msgstr "Présentation du bloc-notes :"
 
 #: ../C/studypad.xml:12(title) ../C/studypad.xml:14(screeninfo) ../C/gnomesword.xml:217(title) ../C/gnomesword.xml:12(title) ../C/gnomesword.xml:14(screeninfo) 
 msgid "The Studypad"
-msgstr ""
+msgstr "Bloc-notes"
 
 #: ../C/studypad.xml:19(para) ../C/gnomesword.xml:19(para) 
 msgid "The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes."
@@ -69,7 +75,7 @@ msgstr ""
 
 #: ../C/studypad.xml:27(para) ../C/gnomesword.xml:27(para) ../C/gnomesword.xml:28(para) 
 msgid "Colour Selector"
-msgstr ""
+msgstr "Choix des couleurs"
 
 #: ../C/studypad.xml:29(para) ../C/gnomesword.xml:29(para) ../C/gnomesword.xml:30(para) 
 msgid "Toolbar 2"
@@ -89,11 +95,11 @@ msgstr ""
 
 #: ../C/studypad.xml:34(para) ../C/gnomesword.xml:34(para) ../C/gnomesword.xml:35(para) 
 msgid "Spellcheck"
-msgstr ""
+msgstr "Vérification de l'orthographe"
 
 #: ../C/search.xml:4(title) ../C/gnomesword.xml:4(title) 
 msgid "Simple Searches"
-msgstr ""
+msgstr "Recherches de base"
 
 #: ../C/search.xml:5(para) ../C/gnomesword.xml:5(para) 
 msgid "To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it."
@@ -205,7 +211,7 @@ msgstr ""
 
 #: ../C/search.xml:135(guibutton) ../C/gnomesword.xml:135(guibutton) 
 msgid "Last search"
-msgstr ""
+msgstr "Recherche précédente"
 
 #: ../C/search.xml:136(para) ../C/gnomesword.xml:136(para) 
 msgid "Select this button to do a new search including only the verses returned as a result of the last search. Use this with a new search key to narrow the search further."
@@ -241,7 +247,7 @@ msgstr ""
 
 #: ../C/start.xml:4(title) ../C/gnomesword.xml:4(title) 
 msgid "Starting GnomeSword"
-msgstr ""
+msgstr "Démarrer GnomeSword"
 
 #: ../C/start.xml:5(para) ../C/gnomesword.xml:5(para) 
 msgid "You can start <application>GnomeSword</application> in the following ways:"
@@ -257,7 +263,7 @@ msgstr ""
 
 #: ../C/start.xml:20(term) ../C/gnomesword.xml:20(term) 
 msgid "Command line"
-msgstr ""
+msgstr "Ligne de commande"
 
 #: ../C/start.xml:22(para) ../C/gnomesword.xml:22(para) 
 msgid "Type <command>gnomesword2</command>, then press <keycap>Return</keycap>."
@@ -279,7 +285,9 @@ msgstr ""
 #.      the application is and what it does.
 #: ../C/introduction.xml:5(para) 
 msgid "is a Bible study and research tool based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. You can use to do the following:"
-msgstr ""
+msgstr "est un outil de recherche et d'étude biblique s'appuyant sur "
+" le 'SWORD Project' et utilisant l'environnement de bureau GNOME. Avec "
+"		GnomeSword vous pouvez :"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -289,15 +297,15 @@ msgstr ""
 
 #: ../C/gnomesword.xml:53(title) 
 msgid "GnomeSword2 Manual"
-msgstr ""
+msgstr "Manuel de GnomeSword2"
 
 #: ../C/gnomesword.xml:55(year) 
 msgid "2003"
-msgstr ""
+msgstr "2003"
 
 #: ../C/gnomesword.xml:56(year) 
 msgid "2006"
-msgstr ""
+msgstr "2006"
 
 #: ../C/gnomesword.xml:57(holder) 
 msgid "The GnomeSword Team"
@@ -305,7 +313,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:72(publishername) 
 msgid "GNOME Documentation Project"
-msgstr ""
+msgstr "GNOME·Documentation·Project"
 
 #: ../C/gnomesword.xml:2(para) 
 msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or in the file COPYING-DOCS distributed with this manual."
@@ -333,43 +341,43 @@ msgstr ""
 
 #: ../C/gnomesword.xml:82(firstname) 
 msgid "Andy"
-msgstr ""
+msgstr "Andy"
 
 #: ../C/gnomesword.xml:83(surname) 
 msgid "Piper"
-msgstr ""
+msgstr "Piper"
 
 #: ../C/gnomesword.xml:86(firstname) 
 msgid "Pierre"
-msgstr ""
+msgstr "Pierre"
 
 #: ../C/gnomesword.xml:87(surname) 
 msgid "Benz"
-msgstr ""
+msgstr "Benz"
 
 #: ../C/gnomesword.xml:90(firstname) 
 msgid "Dr Peter"
-msgstr ""
+msgstr "Dr·Peter"
 
 #: ../C/gnomesword.xml:91(surname) 
 msgid "von Kaehne"
-msgstr ""
+msgstr "von·Kaehne"
 
 #: ../C/gnomesword.xml:94(firstname) 
 msgid "Karl"
-msgstr ""
+msgstr "Karl"
 
 #: ../C/gnomesword.xml:95(surname) 
 msgid "Kleinpaste"
-msgstr ""
+msgstr "Kleinpaste"
 
 #: ../C/gnomesword.xml:129(revnumber) 
 msgid "GnomeSword Manual V2.1"
-msgstr ""
+msgstr "Manuel de GnomeSword V2.1"
 
 #: ../C/gnomesword.xml:130(date) 
 msgid "December 2006"
-msgstr ""
+msgstr "Decembre·2006"
 
 #: ../C/gnomesword.xml:134(releaseinfo) 
 msgid "This manual describes version 2.1.8 of GnomeSword."
@@ -385,23 +393,23 @@ msgstr ""
 
 #: ../C/gnomesword.xml:146(keyword) 
 msgid "gnome"
-msgstr ""
+msgstr "gnome"
 
 #: ../C/gnomesword.xml:147(keyword) 
 msgid "gnomesword"
-msgstr ""
+msgstr "gnomesword"
 
 #: ../C/gnomesword.xml:148(keyword) 
 msgid "gnomesword2"
-msgstr ""
+msgstr "gnomesword2"
 
 #: ../C/gnomesword.xml:149(keyword) 
 msgid "sword"
-msgstr ""
+msgstr "sword"
 
 #: ../C/gnomesword.xml:150(keyword) 
 msgid "crosswire"
-msgstr ""
+msgstr "crosswire"
 
 #: ../C/gnomesword.xml:151(keyword) 
 msgid "help dialog"
@@ -421,7 +429,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:173(title) 
 msgid "Introduction"
-msgstr ""
+msgstr "Introduction"
 
 #. Use the Introduction section to give a brief overview of what
 #.      the application is and what it does.
@@ -1227,7 +1235,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:8(title) 
 msgid "The Personal Commentary Editor"
-msgstr ""
+msgstr "L\"éditeur de commentaires personnels"
 
 #: ../C/gnomesword.xml:14(para) 
 msgid "Locationbar"
@@ -1235,7 +1243,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:16(para) 
 msgid "Synchronise Button"
-msgstr ""
+msgstr "Bouton de synchronisation"
 
 #: ../C/gnomesword.xml:17(para) 
 msgid "Bible Book, Chapter and Verse Selectors"
@@ -1263,23 +1271,23 @@ msgstr ""
 
 #: ../C/gnomesword.xml:229(title) 
 msgid "Authors"
-msgstr ""
+msgstr "Auteurs"
 
 #: ../C/gnomesword.xml:8(para) 
 msgid "Andy Piper"
-msgstr ""
+msgstr "Andy·Piper"
 
 #: ../C/gnomesword.xml:13(para) 
 msgid "Pierre Benz"
-msgstr ""
+msgstr "Pierre·Benz"
 
 #: ../C/gnomesword.xml:18(para) 
 msgid "Dr Peter von Kaehne"
-msgstr ""
+msgstr "Dr·Peter·von·Kaehne"
 
 #: ../C/gnomesword.xml:23(para) 
 msgid "Karl Kleinpaste"
-msgstr ""
+msgstr "Karl·Kleinpaste"
 
 #: ../C/gnomesword.xml:28(para) 
 msgid "Please send all comments and suggestions regarding this manual to GnomeSword Development list <email>gnomesword-developers@lists.sourceforge.net</email>. Comments may also be submitted via the project trackers at SourceForge."
@@ -1291,7 +1299,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:235(title) 
 msgid "License"
-msgstr ""
+msgstr "License"
 
 #: ../C/gnomesword.xml:9(para) 
 msgid "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the <citetitle>GNU General Public License</citetitle> for more details."
