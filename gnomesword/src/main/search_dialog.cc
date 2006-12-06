@@ -657,6 +657,53 @@ void main_delete_module(GtkTreeView *treeview)
 }
 
 
+void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
+{
+	GtkTreeModel *model_mods;
+	GtkTreeModel *model_modules_lists;
+	GtkTreeIter iter;
+	GtkTreeIter selected_modules_lists;
+	GtkListStore *list_store;
+	GtkListStore *store_modules_lists;
+	gchar *mod_description = NULL;
+	gchar *mod_list = NULL;
+	GList *mods = NULL;
+	GtkTreeSelection *selection_modules_lists;
+	
+	model_modules_lists =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+	store_modules_lists = GTK_LIST_STORE(model_modules_lists);
+
+	selection_modules_lists = gtk_tree_view_get_selection
+	    (GTK_TREE_VIEW(search1.module_lists));
+	    
+	model_mods =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+	list_store = GTK_LIST_STORE(model_mods);
+	mod_description = backendSearch->module_description(mod_name);
+
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter,
+					   0, mod_description,
+					   1, mod_name, -1);
+			mods = get_current_list();
+			mod_list = get_modlist_string(mods);
+
+			if (mod_list) {
+				gtk_tree_selection_get_selected
+	   			       (selection_modules_lists, NULL, 
+					          &selected_modules_lists);
+				
+				gtk_list_store_set(store_modules_lists,
+						   &selected_modules_lists,
+						   1, mod_list, -1);
+				g_free(mod_list);
+			}
+			++search1.module_count;
+
+
+}
+
 /******************************************************************************
  * Name
  *   mod_selection_changed

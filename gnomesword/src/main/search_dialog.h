@@ -28,6 +28,7 @@ extern "C" {
 
 #include <glib-2.0/glib.h>
 
+void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name);
 void main_finds_verselist_selection_changed(GtkTreeSelection * selection, gpointer data);
 void main_selection_modules_lists_changed(GtkTreeSelection * selection, gpointer data);
 void main_selection_finds_list_changed(GtkTreeSelection *  selection, gpointer data);
