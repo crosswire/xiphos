@@ -45,11 +45,36 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
+/******************************************************************************/
+#define _BYTE   8
+#define _WORD   16
+#define _DWORD  32
+
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("found in ")
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
+
+/******************************************************************************/
+/* Define a list of data types called "targets" that a destination widget will
+ * accept. The string type is arbitrary, and negotiated between DnD widgets by 
+ * the developer. An enum or GQuark can serve as the integer target id. */
+enum {
+        TARGET_INT32,
+        TARGET_STRING,
+        TARGET_ROOTWIN
+};
+
+/* datatype (string), restrictions on DnD (GtkTargetFlags), datatype (int) */
+static GtkTargetEntry target_list[] = {
+        { "INTEGER",    0, TARGET_INT32 },
+        { "STRING",     0, TARGET_STRING },     
+        { "text/plain", 0, TARGET_STRING },
+        { "application/x-rootwindow-drop", 0, TARGET_ROOTWIN }
+};
+
+static guint n_targets = G_N_ELEMENTS (target_list);
 
 
 
@@ -58,7 +83,7 @@ SEARCH_DIALOG1 search1;
 static GtkWidget *dialog;
 static gboolean _preview_on;
 static gboolean _in_url;
-
+static gchar *module_selected;
 
 
 void on_comboboxentry2_changed(GtkComboBox * combobox,
@@ -162,6 +187,7 @@ void button_save(GtkButton * button, gpointer user_data)
 void _on_destroy(GtkWidget * dialog, gpointer user_data)
 {
 	main_close_search_dialog();
+	if(module_selected) g_free(module_selected);
 }
 
 
@@ -1112,6 +1138,48 @@ static void _selection_modules_lists_changed(GtkTreeSelection *
 }
 
 
+
+
+/******************************************************************************
+ * Name
+ *   _modules_lists_changed
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void _modules_lists_changed(GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void _modules_lists_changed(GtkTreeSelection *
+				    selection, GtkTreeView * tree_widget)
+{
+	gchar *mod = NULL;
+	GList *mods = NULL;
+	GtkTreeIter selected;
+	
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return;
+	gtk_tree_model_get(model, &selected, 0, &mod, -1);
+	if (mod) {
+		
+		if(module_selected) g_free(module_selected);
+		module_selected = g_strdup(mod);
+		g_free(mod);
+	}	
+	
+}
+
+
 /******************************************************************************
  * Name
  *   
@@ -1510,7 +1578,7 @@ void _setup_treetview2(GtkWidget * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	//GObject *selection;
+	GObject *selection;
 
 	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Found",
@@ -1521,21 +1589,35 @@ void _setup_treetview2(GtkWidget * treeview)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
 	gui_load_module_tree(treeview, FALSE);
 
-	/*selection =
+	selection =
 	   G_OBJECT(gtk_tree_view_get_selection
 	   (GTK_TREE_VIEW(treeview)));
 	   g_signal_connect(selection, "changed",
-	   G_CALLBACK(mod_selection_changed), treeview); */
+	   G_CALLBACK(_modules_lists_changed), treeview);
 
 }
 
+/*
+gboolean
+on_treeview7_drag_drop                 (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data)
+{
 
+  return FALSE;
+}
+*/
 void
 on_treeview8_drag_begin(GtkWidget * widget,
 			GdkDragContext * drag_context,
 			gpointer user_data)
 {
 	g_message("on_treeview8_drag_begin");
+	gtk_drag_dest_find_target(widget,drag_context,
+                                gtk_drag_dest_get_target_list(widget));
 }
 
 
@@ -1779,9 +1861,378 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
+		gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
 	}
+}
+
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void _on_dialog2_response(GtkDialog * dialog, gint response_id,
+			 gpointer user_data)
+{
+	switch (response_id) {
+	case GTK_RESPONSE_CLOSE:
+		gtk_widget_hide(GTK_WIDGET(dialog));
+		break;
+	case GTK_RESPONSE_APPLY:
+		main_add_mod_to_list(search1.listview_modules, module_selected);
+		//gtk_widget_hide(GTK_WIDGET(dialog));
+		break;
+	}
+}
+
+/******************************************************************************/
+/* Signal receivable by destination */
+
+/* Emitted when the data has been received from the source. It should check 
+ * the GtkSelectionData sent by the source, and do something with it. Finally
+ * it needs to finish the operation by calling gtk_drag_finish, which will emit
+ * the "data-delete" signal if told to. */
+static void
+drag_data_received_handl 
+(GtkWidget *widget, GdkDragContext *context, gint x, gint y, 
+        GtkSelectionData *selection_data, guint target_type, guint time, 
+        gpointer data)
+{       
+        glong   *_idata;
+        gchar   *_sdata;
+	gchar 	*_desc;
+        
+        gboolean dnd_success = FALSE;
+        gboolean delete_selection_data = FALSE;
+        
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_data_received_handl\n", name);
+        
+        
+        /* Deal with what we are given from source */
+        if((selection_data != NULL) && (selection_data-> length >= 0))
+        {
+                if (context-> action == GDK_ACTION_ASK)
+                {
+                /* Ask the user to move or copy, then set the context action. */
+                }
+        
+                if (context-> action == GDK_ACTION_MOVE)
+                        delete_selection_data = TRUE;
+                        
+                /* Check that we got the format we can use */
+                g_print (" Receiving ");
+                switch (target_type)
+                {
+                        case TARGET_INT32:
+                                _idata = (glong*)selection_data-> data;
+                                g_print ("integer: %ld", *_idata);
+                                dnd_success = TRUE;
+                                break;
+                                        
+                        case TARGET_STRING:
+                                _sdata = (gchar*)selection_data-> data;
+				if(_sdata)
+					main_add_mod_to_list(widget, _sdata);
+                                g_print ("string: %s", _sdata);
+                                dnd_success = TRUE;
+                                break;
+                                        
+                        default:
+                                g_print ("nothing good");
+                }
+                        
+                g_print (".\n");
+        }
+
+        if (dnd_success == FALSE)
+        {
+                g_print ("DnD data transfer failed!\n");
+        }
+        
+        gtk_drag_finish (context, dnd_success, delete_selection_data, time);
+}
+
+/* Emitted when a drag is over the destination */
+static gboolean
+drag_motion_handl 
+(GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint t, 
+        gpointer user_data)
+{
+        // Fancy stuff here. This signal spams the console something horrible.
+        //const gchar *name = gtk_widget_get_name (widget);
+        //g_print ("%s: drag_motion_handl\n", name);
+        return  FALSE;
+}
+
+/* Emitted when a drag leaves the destination */
+static void
+drag_leave_handl 
+(GtkWidget *widget, GdkDragContext *context, guint time, gpointer user_data)
+{
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_leave_handl\n", name);
+}
+
+/* Emitted when the user releases (drops) the selection. It should check that
+ * the drop is over a valid part of the widget (if its a complex widget), and
+ * itself to return true if the operation should continue. Next choose the 
+ * target type it wishes to ask the source for. Finally call gtk_drag_get_data
+ * which will emit "drag-data-get" on the source. */
+static gboolean
+drag_drop_handl 
+(GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time, 
+        gpointer user_data)
+{
+        gboolean        is_valid_drop_site;
+        GdkAtom         target_type;
+        
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_drop_handl\n", name);
+        
+        /* Check to see if (x,y) is a valid drop site within widget */
+        is_valid_drop_site = TRUE;
+        
+        /* If the source offers a target */
+        if (context-> targets)
+        {
+                /* Choose the best target type */
+                target_type = GDK_POINTER_TO_ATOM 
+                        (g_list_nth_data (context-> targets, TARGET_STRING));
+                
+                /* Request the data from the source. */
+                gtk_drag_get_data 
+                (
+                        widget,         /* will receive 'drag-data-received' signal */
+                        context,        /* represents the current state of the DnD */
+                        target_type,    /* the target type we want */
+                        time            /* time stamp */
+                );
+        }
+        /* No target offered by source => error */
+        else
+        {
+                is_valid_drop_site = FALSE;
+        }
+        
+        return  is_valid_drop_site;
+}
+
+
+/******************************************************************************/
+/* Signals receivable by source */
+
+/* Emitted after "drag-data-received" is handled, and gtk_drag_finish is called
+ * with the "delete" parameter set to TRUE (when DnD is GDK_ACTION_MOVE). */
+static void
+drag_data_delete_handl 
+(GtkWidget *widget, GdkDragContext *context, gpointer user_data)
+{
+        // We aren't moving or deleting anything here
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_data_delete_handl\n", name);
+}
+
+/* Emitted when the destination requests data from the source via 
+ * gtk_drag_get_data. It should attempt to provide its data in the form 
+ * requested in the target_type passed to it from the destination. If it cannot,
+ * it should default to a "safe" type such as a string or text, even if only to
+ * print an error. Then use gtk_selection_data_set to put the source data into
+ * the allocated selection_data object, which will then be passed to the 
+ * destination. This will cause "drag-data-received" to be emitted on the 
+ * destination. GdkSelectionData is based on X's selection mechanism which, 
+ * via X properties, is only capable of storing data in blocks of 8, 16, or 
+ * 32 bit units. */
+static void
+drag_data_get_handl 
+(GtkWidget *widget, GdkDragContext *context, GtkSelectionData *selection_data, 
+        guint target_type, guint time, gpointer user_data)
+{
+        const gchar *name = gtk_widget_get_name (widget);
+        const gchar *string_data = "This is data from the source.";
+        const gchar *string_data2 = NULL;
+        const glong integer_data = 42;
+
+#ifdef DEBUG               
+        g_print ("%s: drag_data_get_handl\n", name);
+#endif
+        g_assert (selection_data != NULL);
+#ifdef DEBUG       
+        g_print (" Sending ");
+#endif
+        switch (target_type) {
+                /* case TARGET_SOME_OBJECT:
+                 * Serialize the object and send as a string of bytes. 
+                 * Pixbufs, (UTF-8) text, and URIs have their own convenience 
+                 * setter functions */
+
+        case TARGET_INT32:
+#ifdef DEBUG       
+                g_print ("integer: %ld", integer_data);
+#endif
+                gtk_selection_data_set (
+                        selection_data,         /* Allocated GdkSelectionData object */
+                        selection_data-> target,/* target type */
+                        _DWORD,                 /* number of bits per 'unit' */
+                        (guchar*) &integer_data,/* pointer to data to be sent */
+                        sizeof (integer_data)   /* length of data in units */
+                );
+                break;
+                                
+        case TARGET_STRING:
+		if(!module_selected) 
+			break;
+#ifdef DEBUG       
+                g_print ("module_selected: %s", module_selected);
+#endif
+                gtk_selection_data_set (
+                        selection_data,         
+                        selection_data-> target,
+                        _BYTE,                  
+                        (guchar*) module_selected,
+                        strlen (module_selected)
+                );
+                break;
+                
+        case TARGET_ROOTWIN:
+#ifdef DEBUG       
+                g_print ("Dropped on the root window!\n");
+#endif
+                break;
+                
+        default:
+                /* Default to some safe target instead of fail. */
+                g_assert_not_reached ();
+        }
+        
+#ifdef DEBUG       
+        g_print (".\n");
+#endif
+}
+
+/* Emitted when DnD begins. This is often used to present custom graphics. */
+static void
+drag_begin_handl 
+(GtkWidget *widget, GdkDragContext *context, gpointer user_data)
+{
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_begin_handl\n", name);
+}
+
+/* Emitted when DnD ends. This is used to clean up any leftover data. */
+static void
+drag_end_handl 
+(GtkWidget *widget, GdkDragContext *context, gpointer user_data)
+{
+        const gchar *name = gtk_widget_get_name (widget);
+        g_print ("%s: drag_end_handl\n", name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   _setup_dnd
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void _setup_dnd(void)
+ *
+ * Description
+ *   setup source and destination widgets for drag and drop
+ *
+ * Return value
+ *   void
+ */
+
+void _setup_dnd(void)
+{
+	GdkModifierType start_button_mask;
+	GdkDragAction actions;
+	GtkTargetEntry target_entry;
+	        
+        
+        /* Make the "well label" a DnD destination. */
+        gtk_drag_dest_set 
+        (
+                search1.listview_modules,              /* widget that will accept a drop */
+                GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
+                | GTK_DEST_DEFAULT_HIGHLIGHT,
+                target_list,            /* lists of target to support */
+                n_targets,              /* size of list */
+                GDK_ACTION_COPY         /* what to do with data after dropped */
+        );
+        
+        /* Make the "coin button" a DnD source. */
+        /* Why doesn't GtkLabel work here? */
+        gtk_drag_source_set 
+        (
+                search1.mod_sel_dlg_treeview,  /* widget will be drag-able */
+	        GDK_BUTTON1_MASK,       /* modifier that will start a drag */
+                target_list,            /* lists of target to support */
+                n_targets,              /* size of list */
+                GDK_ACTION_COPY         /* what to do with data after dropped */
+        );
+	       
+        /* All possible destination signals */
+        g_signal_connect (search1.listview_modules, "drag-data-received", 
+                G_CALLBACK(drag_data_received_handl), NULL);
+                        
+        g_signal_connect (search1.listview_modules, "drag-leave",
+                G_CALLBACK (drag_leave_handl), NULL);
+
+        g_signal_connect (search1.listview_modules, "drag-motion",
+                G_CALLBACK (drag_motion_handl), NULL);
+
+        g_signal_connect (search1.listview_modules, "drag-drop",
+                G_CALLBACK (drag_drop_handl), NULL);
+        
+        /* All possible source signals */
+        g_signal_connect (search1.mod_sel_dlg_treeview, "drag-data-get",
+                G_CALLBACK (drag_data_get_handl), NULL);
+               
+        g_signal_connect (search1.mod_sel_dlg_treeview, "drag-data-delete",
+                G_CALLBACK (drag_data_delete_handl), NULL);
+
+        g_signal_connect (search1.mod_sel_dlg_treeview, "drag-begin",
+                G_CALLBACK (drag_begin_handl), NULL);
+                
+        g_signal_connect (search1.mod_sel_dlg_treeview, "drag-end",
+                G_CALLBACK (drag_end_handl), NULL);
+                
+	
+                    
+/*       
+	gtk_drag_source_set (search1.mod_sel_dlg_treeview,
+		                start_button_mask,
+                                &target_entry,
+                                1,
+                                actions);
+	g_signal_connect ((gpointer) search1.mod_sel_dlg_treeview, "drag_begin",
+                     G_CALLBACK (on_treeview8_drag_begin),
+                     NULL);
+	g_signal_connect ((gpointer)search1.listview_modules , "drag_drop",
+                    G_CALLBACK (on_treeview7_drag_drop),
+                    NULL);
+	
+*/
+	
+	
 }
 
 
@@ -1819,9 +2270,8 @@ void _create_search_dialog(void)
 	GtkWidget *toolbutton10;
 	GtkWidget *toolbutton11;
 	GtkWidget *toolbutton12;
-	 GdkModifierType start_button_mask;
-	GdkDragAction actions;
 	
+	module_selected = NULL;
 	_preview_on = TRUE;
 
 	glade_file =
@@ -1835,6 +2285,8 @@ void _create_search_dialog(void)
 
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
+	g_signal_connect((gpointer)search1.mod_sel_dialog, "response",
+			 G_CALLBACK(_on_dialog2_response), NULL);
 	search1.mod_sel_dlg_treeview =
 	    glade_xml_get_widget(gxml2, "treeview8");
 	_setup_treetview2(search1.mod_sel_dlg_treeview);
@@ -1884,7 +2336,10 @@ void _create_search_dialog(void)
 	search1.listview_modules =
 	    glade_xml_get_widget(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
-
+	
+	_setup_dnd();
+	
+	
 	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
 	g_signal_connect(search1.rb_no_scope, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);		    
@@ -1997,38 +2452,7 @@ void _create_search_dialog(void)
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");
 	_setup_listviews(search1.listview_verses, (GCallback) _finds_verselist_selection_changed);
-	gtk_drag_source_set             (search1.listview_verses,
-                                        start_button_mask,
-                                        NULL,
-                                        0,
-                                        actions);
-	gtk_drag_source_add_text_targets(search1.listview_verses);
-	
-  g_signal_connect ((gpointer) search1.listview_verses, "drag_begin",
-                    G_CALLBACK (on_treeview10_drag_begin),
-                    NULL);
-  g_signal_connect ((gpointer) search1.listview_verses, "drag_motion",
-                    G_CALLBACK (on_treeview10_drag_motion),
-                    NULL);
-  g_signal_connect ((gpointer) search1.listview_verses, "drag_leave",
-                    G_CALLBACK (on_treeview10_drag_leave),
-                    NULL);
-	/*search1.textview_preview = glade_xml_get_widget(gxml, "textview1");
-	search1.text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (search1.textview_preview));
-	_setup_textview(search1.textview_preview, NULL, search1.text_buffer);*/
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
-/*	_add_html_widgets(glade_xml_get_widget(gxml, "vbox11"),
-			  glade_xml_get_widget(gxml, "vbox12"),
-			  glade_xml_get_widget(gxml, "vbox13"));
-*/
-/*
-	glade_xml_signal_autoconnect_full
-	    (gxml, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
-	     NULL);
-	glade_xml_signal_autoconnect_full
-	    (gxml2, (GladeXMLConnectFunc) gui_glade_signal_connect_func,
-	     NULL);
-*/
 }
 
 
