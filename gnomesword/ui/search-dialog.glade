@@ -1852,7 +1852,7 @@ Footnote//body/love</property>
 				  <property name="tooltip" translatable="yes">Open a dialog to select modules to add to the list</property>
 				  <property name="label" translatable="yes">Add Modules</property>
 				  <property name="use_underline">True</property>
-				  <property name="stock_id">gnome-stock-book-red</property>
+				  <property name="stock_id">gtk-add</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
@@ -2073,7 +2073,7 @@ Footnote//body/love</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
-	      <property name="response_id">0</property>
+	      <property name="response_id">-10</property>
 	    </widget>
 	  </child>
 	</widget>
