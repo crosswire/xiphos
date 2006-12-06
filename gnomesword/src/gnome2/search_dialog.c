@@ -1169,6 +1169,12 @@ static void _modules_lists_changed(GtkTreeSelection *
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return;
+	if (gtk_tree_model_iter_has_child(model, &selected)) {
+		
+		if(module_selected) g_free(module_selected);
+		module_selected = NULL;	
+		return;
+	}
 	gtk_tree_model_get(model, &selected, 0, &mod, -1);
 	if (mod) {
 		
@@ -1594,74 +1600,6 @@ void _setup_treetview2(GtkWidget * treeview)
 	   (GTK_TREE_VIEW(treeview)));
 	   g_signal_connect(selection, "changed",
 	   G_CALLBACK(_modules_lists_changed), treeview);
-
-}
-
-/*
-gboolean
-on_treeview7_drag_drop                 (GtkWidget       *widget,
-                                        GdkDragContext  *drag_context,
-                                        gint             x,
-                                        gint             y,
-                                        guint            time,
-                                        gpointer         user_data)
-{
-
-  return FALSE;
-}
-*/
-void
-on_treeview8_drag_begin(GtkWidget * widget,
-			GdkDragContext * drag_context,
-			gpointer user_data)
-{
-	g_message("on_treeview8_drag_begin");
-	gtk_drag_dest_find_target(widget,drag_context,
-                                gtk_drag_dest_get_target_list(widget));
-}
-
-
-void
-on_treeview8_drag_data_get(GtkWidget * widget,
-			   GdkDragContext * drag_context,
-			   GtkSelectionData * data,
-			   guint info, guint time, gpointer user_data)
-{
-	g_message("on_treeview8_drag_data_get");
-
-}
-
-
-void
-on_treeview7_drag_data_received(GtkWidget * widget,
-				GdkDragContext * drag_context,
-				gint x,
-				gint y,
-				GtkSelectionData * data,
-				guint info,
-				guint time, gpointer user_data)
-{
-	g_message("on_treeview7_drag_data_received");
-
-}
-
-
-gboolean
-on_treeview7_drag_drop(GtkWidget * widget,
-		       GdkDragContext * drag_context,
-		       gint x, gint y, guint time, gpointer user_data)
-{
-
-	g_message("on_treeview7_drag_drop");
-	return FALSE;
-}
-
-
-void
-on_treeview7_drag_end(GtkWidget * widget,
-		      GdkDragContext * drag_context, gpointer user_data)
-{
-	g_message("on_treeview7_drag_end");
 
 }
 
@@ -2105,7 +2043,7 @@ drag_data_get_handl
                         selection_data-> target,
                         _BYTE,                  
                         (guchar*) module_selected,
-                        strlen (module_selected)
+                        (module_selected)?strlen(module_selected):0
                 );
                 break;
                 
