@@ -945,7 +945,6 @@ Footnote//body/love</property>
 
 		      <child>
 			<widget class="GtkToggleToolButton" id="toggletoolbutton1">
-			  <property name="visible">True</property>
 			  <property name="tooltip" translatable="yes">Show in main window</property>
 			  <property name="stock_id">gtk-jump-to</property>
 			  <property name="visible_horizontal">True</property>
