@@ -1,3 +1,8 @@
+2006-12-06  terry <tbiggs@users.sf.net>
+
+	* fixed broken add module to mod list in search dialog
+	* added dnd support to add module to mod list in search dialog
+
 2006-12-03  karl <karl@charcoal.com>
 
 	* fixed bug: detached parallel view initially blank; sync_with_main().
