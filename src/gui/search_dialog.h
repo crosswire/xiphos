@@ -97,6 +97,8 @@ struct _search_dialog1 {
 	gchar *search_mod;
 };
 extern SEARCH_DIALOG1 search1;
+extern gchar *verse_selected;
+
 
 void gui_create_search_dialog(void);
 	
