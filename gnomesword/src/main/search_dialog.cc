@@ -38,6 +38,7 @@ extern "C" {
 
 #include "main/search_dialog.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/xml.h"
  
 #include "gui/search_dialog.h"
@@ -887,7 +888,11 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	text_str = backendSearch->get_render_text(module,buf);
 	
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
-	
+	if(verse_selected) g_free(verse_selected);
+		verse_selected = g_strdup_printf("sword://%s/%s",module,buf);
+#ifdef DEBUG
+	g_message("main_finds_verselist_selection_changed: %s",verse_selected);
+#endif
 /*	gtk_text_buffer_get_start_iter(tbuf, &startiter);
 	gtk_text_buffer_get_end_iter(tbuf, &enditer);
 	gtk_text_buffer_delete(tbuf, &startiter, &enditer);
@@ -1362,6 +1367,7 @@ void main_do_dialog_search(void)
 	GtkListStore *list_store2;
 	GtkTreeIter iter2;
 	gint x = 0;
+	gint mod_type;
 	
 	_clear_find_lists();
 	model =
@@ -1444,10 +1450,14 @@ void main_do_dialog_search(void)
 		tmp_list = NULL;
 		
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
+			/* test for mod type */
+			mod_type = backendSearch->module_type(module);	
+			if(mod_type == TEXT_TYPE)			
 				g_string_printf(str, "%s: %s %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
-									
-				tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
-				g_free((char*)key_buf);	
+			else			
+				g_string_printf(str, "%s: %s", module,  key_buf);				
+			tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
+			g_free((char*)key_buf);	
 		}
 		list_of_finds = g_list_append(list_of_finds, (GList*)tmp_list);
 		// add number of hits in each module to finds listview

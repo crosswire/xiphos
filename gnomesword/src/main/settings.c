@@ -360,7 +360,7 @@ void load_settings_structure(void)
 	if(xml_get_value("keys", "offset"))
 		settings.book_offset = atol(xml_get_value("keys", "offset"));
 	else {
-		xml_add_new_item_to_section("keys", "offset", "0");
+		xml_add_new_item_to_section("keys", "offset", "");
 		settings.book_offset = 0;
 	}
 
