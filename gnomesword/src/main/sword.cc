@@ -860,6 +860,7 @@ void main_dictionary_button_clicked(gint direction)
 
 void main_display_book(const char * mod_name, char * key)
 {
+	gboolean use_offset = FALSE;
 	if(!settings.havebook || !mod_name)
 		return;
 	if(!backend->is_module(mod_name))
@@ -867,18 +868,29 @@ void main_display_book(const char * mod_name, char * key)
 	if(!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
 	
+	
 	settings.whichwindow = BOOK_WINDOW;
 	if(key == NULL) key = "0";
-		
-	xml_set_value("GnomeSword", "keys", "offset", key);
-	settings.book_offset = atol(xml_get_value( "keys", "offset"));
+	if(isalpha(key[0])) {
+		xml_set_value("GnomeSword", "keys", "book", key);
+		settings.book_key = xml_get_value( "keys", "book");
+		use_offset = FALSE;
+	} else {
+		xml_set_value("GnomeSword", "keys", "offset", key);
+		settings.book_offset = atol(xml_get_value( "keys", "offset"));
+		use_offset = TRUE;
+	}
 	
 	if(strcmp(settings.book_mod,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "book", mod_name);
 		settings.book_mod = xml_get_value( "modules", "book");
 	}
-	backend->set_module(mod_name);
-	backend->set_treekey(settings.book_offset);
+	if(use_offset) {
+		backend->set_module(mod_name);	
+		backend->set_treekey(settings.book_offset);
+	} else {
+		backend->set_module_key(mod_name, key);
+	}
 	backend->display_mod->Display();
 	
 	if(settings.browsing)

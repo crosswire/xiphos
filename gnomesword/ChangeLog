@@ -1,5 +1,10 @@
 2006-12-06  terry <tbiggs@users.sf.net>
 
+	* search dialog: added dnd suport to verse list on results table
+	  drag verse to main text window to display verse in main window.
+	  
+2006-12-06  terry <tbiggs@users.sf.net>
+
 	* fixed broken add module to mod list in search dialog
 	* added dnd support to add module to mod list in search dialog
 
