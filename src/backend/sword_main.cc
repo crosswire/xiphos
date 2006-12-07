@@ -842,7 +842,7 @@ char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const
 	return NULL;	
 }
 
-
+ 
 int BackEnd::set_module(const char *module_name) {
 	display_mod = display_mgr->Modules[module_name];
 	if (display_mod) 
