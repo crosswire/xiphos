@@ -1901,9 +1901,7 @@ static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context,
                                 break;
                                         
                         default:
-#ifdef DEBUG
                                 g_print ("nothing good");
-#endif
                 }                      
 #ifdef DEBUG  
                 g_print (".\n");
@@ -2149,9 +2147,7 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
                                 break;
                                         
                         default:
-#ifdef DEBUG
                                 g_print ("nothing good");
-#endif
                 }
                         
 #ifdef DEBUG
