@@ -889,17 +889,14 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
 	if(verse_selected) g_free(verse_selected);
+	if(backendSearch->module_type(module) == BOOK_TYPE)
+		verse_selected = g_strdup_printf("sword://%s/%lu",module,
+		       backendSearch->get_treekey_offset_from_key(module, buf));
+	else 
 		verse_selected = g_strdup_printf("sword://%s/%s",module,buf);
 #ifdef DEBUG
 	g_message("main_finds_verselist_selection_changed: %s",verse_selected);
 #endif
-/*	gtk_text_buffer_get_start_iter(tbuf, &startiter);
-	gtk_text_buffer_get_end_iter(tbuf, &enditer);
-	gtk_text_buffer_delete(tbuf, &startiter, &enditer);
-	
-	gtk_text_buffer_get_end_iter(tbuf, &iter);
-	gtk_text_buffer_insert_with_tags(tbuf, &iter,text_str,strlen(text_str),NULL);
-*/	
 	if(text) g_free(text);	
 	g_free(module);
 	g_free(text_str);
