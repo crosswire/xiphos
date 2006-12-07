@@ -1803,6 +1803,9 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
 		gtk_drag_dest_unset(widgets.html_text);
+		gtk_drag_dest_unset(widgets.html_comm);
+		gtk_drag_dest_unset(widgets.html_dict);
+		gtk_drag_dest_unset(widgets.html_book);
 		gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
@@ -1860,7 +1863,9 @@ static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context,
         gboolean delete_selection_data = FALSE;
         
         const gchar *name = gtk_widget_get_name (widget);
+#ifdef DEBUG
         g_print ("%s: drag_data_received_handl\n", name);
+#endif
         
         
         /* Deal with what we are given from source */
@@ -1873,11 +1878,15 @@ static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context,
                         delete_selection_data = TRUE;
                         
                 /* Check that we got the format we can use */
+#ifdef DEBUG
                 g_print (" Receiving ");
+#endif
                 switch (target_type) {
                         case TARGET_INT32:
                                 _idata = (glong*)selection_data-> data;
+#ifdef DEBUG
                                 g_print ("integer: %ld", *_idata);
+#endif
                                 dnd_success = TRUE;
                                 break;
                                         
@@ -1885,19 +1894,26 @@ static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context,
                                 _sdata = (gchar*)selection_data-> data;
 				if(_sdata)
 					main_add_mod_to_list(widget, _sdata);
+#ifdef DEBUG
                                 g_print ("string: %s", _sdata);
+#endif
                                 dnd_success = TRUE;
                                 break;
                                         
                         default:
+#ifdef DEBUG
                                 g_print ("nothing good");
-                }
-                        
+#endif
+                }                      
+#ifdef DEBUG  
                 g_print (".\n");
+#endif
         }
 
         if (dnd_success == FALSE) {
+#ifdef DEBUG
                 g_print ("DnD data transfer failed!\n");
+#endif
         }
         
         gtk_drag_finish (context, dnd_success, delete_selection_data, time);
@@ -1933,7 +1949,9 @@ static gboolean drag_drop_handl(GtkWidget *widget, GdkDragContext *context,
         GdkAtom         target_type;
         
         const gchar *name = gtk_widget_get_name (widget);
+#ifdef DEBUG
         g_print ("%s: drag_drop_handl\n", name);
+#endif
         
         /* Check to see if (x,y) is a valid drop site within widget */
         is_valid_drop_site = TRUE;
@@ -1988,7 +2006,6 @@ static void drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
 {
         const gchar *name = gtk_widget_get_name (widget);
         const gchar *string_data = "This is data from the source.";
-        const gchar *string_data2 = NULL;
         const glong integer_data = 42;
 
 #ifdef DEBUG               
@@ -2093,7 +2110,9 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
         gboolean delete_selection_data = FALSE;
         
         const gchar *name = gtk_widget_get_name (widget);
+#ifdef DEBUG
         g_print ("%s: verses_drag_data_received_handl\n", name);
+#endif
         
         
         /* Deal with what we are given from source */
@@ -2106,11 +2125,15 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
                         delete_selection_data = TRUE;
                         
                 /* Check that we got the format we can use */
+#ifdef DEBUG
                 g_print ("verses_ Receiving ");
+#endif
                 switch (target_type) {
                         case TARGET_INT32:
                                 _idata = (glong*)selection_data-> data;
+#ifdef DEBUG
                                 g_print ("integer: %ld", *_idata);
+#endif
                                 dnd_success = TRUE;
                                 break;
                                         
@@ -2118,21 +2141,28 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
                                 _sdata = (gchar*)selection_data-> data;
 				if(_sdata) {
 					main_url_handler(verse_selected,TRUE);
-					//main_add_mod_to_list(widget, _sdata);
+#ifdef DEBUG
                                 	g_print ("string: %s", _sdata);
+#endif
 				}
                                 dnd_success = TRUE;
                                 break;
                                         
                         default:
+#ifdef DEBUG
                                 g_print ("nothing good");
+#endif
                 }
                         
+#ifdef DEBUG
                 g_print (".\n");
+#endif
         }
 
         if (dnd_success == FALSE) {
+#ifdef DEBUG
                 g_print ("verses_DnD data transfer failed!\n");
+#endif
         }
         
         gtk_drag_finish (context, dnd_success, delete_selection_data, time);
@@ -2151,7 +2181,9 @@ static gboolean verses_drag_drop_handl(GtkWidget *widget, GdkDragContext *contex
         GdkAtom         target_type;
         
         const gchar *name = gtk_widget_get_name (widget);
+#ifdef DEBUG
         g_print ("%s: verses_drag_drop_handl\n", name);
+#endif
         
         /* Check to see if (x,y) is a valid drop site within widget */
         is_valid_drop_site = TRUE;
@@ -2292,6 +2324,27 @@ void _setup_dnd(void)
                 	target_list,            /* lists of target to support */
                 	n_targets,              /* size of list */
                 	GDK_ACTION_COPY);         /* what to do with data after dropped */
+	
+        gtk_drag_dest_set(widgets.html_comm,              /* widget that will accept a drop */
+                	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
+                	| GTK_DEST_DEFAULT_HIGHLIGHT,
+                	target_list,            /* lists of target to support */
+                	n_targets,              /* size of list */
+                	GDK_ACTION_COPY);         /* what to do with data after dropped */
+	
+        gtk_drag_dest_set(widgets.html_dict,              /* widget that will accept a drop */
+                	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
+                	| GTK_DEST_DEFAULT_HIGHLIGHT,
+                	target_list,            /* lists of target to support */
+                	n_targets,              /* size of list */
+                	GDK_ACTION_COPY);         /* what to do with data after dropped */
+	
+        gtk_drag_dest_set(widgets.html_book,              /* widget that will accept a drop */
+                	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
+                	| GTK_DEST_DEFAULT_HIGHLIGHT,
+                	target_list,            /* lists of target to support */
+                	n_targets,              /* size of list */
+                	GDK_ACTION_COPY);         /* what to do with data after dropped */
 
 	gtk_drag_source_set(search1.listview_verses,  /* widget will be drag-able */
 	        		GDK_BUTTON1_MASK,       /* modifier that will start a drag */
@@ -2330,6 +2383,24 @@ void _setup_dnd(void)
         g_signal_connect (widgets.html_text, "drag-data-received", 
                 G_CALLBACK(verses_drag_data_received_handl), NULL);
         g_signal_connect (widgets.html_text, "drag-drop",
+                G_CALLBACK (verses_drag_drop_handl), NULL); 
+      
+      /* All possible destination signals verses*/
+        g_signal_connect (widgets.html_comm, "drag-data-received", 
+                G_CALLBACK(verses_drag_data_received_handl), NULL);
+        g_signal_connect (widgets.html_comm, "drag-drop",
+                G_CALLBACK (verses_drag_drop_handl), NULL); 
+      
+      /* All possible destination signals verses*/
+        g_signal_connect (widgets.html_dict, "drag-data-received", 
+                G_CALLBACK(verses_drag_data_received_handl), NULL);
+        g_signal_connect (widgets.html_dict, "drag-drop",
+                G_CALLBACK (verses_drag_drop_handl), NULL); 
+      
+      /* All possible destination signals verses*/
+        g_signal_connect (widgets.html_book, "drag-data-received", 
+                G_CALLBACK(verses_drag_data_received_handl), NULL);
+        g_signal_connect (widgets.html_book, "drag-drop",
                 G_CALLBACK (verses_drag_drop_handl), NULL); 
 		
         /* All possible source signals verses*/
