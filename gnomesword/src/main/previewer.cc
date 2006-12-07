@@ -104,7 +104,7 @@ void main_clear_viewer(void)
 		settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-	buf = N_("Previewer");
+	buf = _("Previewer");
 	g_string_printf(tmp_str,
 	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
 	str = g_string_append(str, tmp_str->str);
