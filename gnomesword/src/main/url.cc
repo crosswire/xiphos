@@ -789,7 +789,10 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	}
 	
 	work_buf = g_strsplit (url,"/",4);
-	//g_message("work_buf :%s, %s",work_buf[2],work_buf[KEY]);
+	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
+#ifdef DEBUG
+	g_message("work_buf :%s, %s",work_buf[2],work_buf[KEY]);
+#endif
 	if(!work_buf[2] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
