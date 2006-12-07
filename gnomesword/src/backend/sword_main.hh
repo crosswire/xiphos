@@ -118,11 +118,11 @@ public:
 	char *get_key_form_offset(unsigned long offset);
 	void set_treekey(unsigned long offset);
 	unsigned long get_treekey_offset(void);
+	unsigned long get_treekey_offset_from_key(const char * mod_name, const char * key);
 	int treekey_has_children(unsigned long offset);
 	int treekey_first_child(unsigned long offset);
 	char *treekey_get_local_name(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
-	
 	GList *parse_verse_list(const char * list, char * current_key);
 	GList *parse_range_list(const char * list);
 	void set_listkey_position(char pos);

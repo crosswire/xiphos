@@ -958,6 +958,41 @@ void BackEnd::set_treekey(unsigned long offset) {
         }
 }
 
+unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, const char * key) {
+        SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	char *mykey;                                                 
+        gsize bytes_read;
+       	gsize bytes_written;
+        GError *error = NULL;
+	unsigned long retval = 0;
+	//-- iterate through the modules until we find modName  
+	it = main_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {		
+		mod = (*it).second;
+		mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             &error);
+		if(error) {
+			g_print ("error: %s\n", error->message);
+			g_error_free (error);	
+		}		
+		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();
+		tree_key_idx->setText(mykey);
+                mod->SetKey(tree_key_idx);
+		(char*)mod;
+		retval = tree_key_idx->getOffset();
+		delete tree_key_idx;
+	}
+        return retval;
+}
+
+
 unsigned long BackEnd::get_treekey_offset(void) {
         if (tree_key) 
                 return tree_key->getOffset();
