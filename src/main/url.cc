@@ -803,14 +803,14 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	} else
 		tmpkey = work_buf[KEY];
 	
-	mykey = g_convert(tmpkey,
+/*	mykey = g_convert(tmpkey,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
                              error);
-	
+*/	
 	verse_count = 1; //backend->is_Bible_key(mykey, settings.currentverse);
 	/*if(!work_buf[3] && !verse_count){
 		alert_url_not_found(url);
