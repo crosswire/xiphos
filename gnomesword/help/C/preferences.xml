@@ -7,7 +7,7 @@
 		<figure>
 			<title>The Preference Dialog</title>
 	        	<screenshot>
-	        		<screeninfo>The Preferenmces Dialog</screeninfo>
+	        		<screeninfo>The Preferences Dialog</screeninfo>
                                 <graphic fileref="figures/preferences.png" format="PNG" ></graphic>
                         </screenshot>
                 </figure>
