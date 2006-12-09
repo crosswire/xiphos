@@ -361,6 +361,7 @@
 			      <child>
 				<widget class="GtkComboBoxEntry" id="comboboxentry1">
 				  <property name="visible">True</property>
+				  <property name="sensitive">False</property>
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
@@ -517,6 +518,7 @@
 			      <child>
 				<widget class="GtkComboBoxEntry" id="comboboxentry2">
 				  <property name="visible">True</property>
+				  <property name="sensitive">False</property>
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
