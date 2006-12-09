@@ -701,9 +701,8 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 				g_free(mod_list);
 			}
 			++search1.module_count;
-
-
 }
+
 
 /******************************************************************************
  * Name
@@ -1503,10 +1502,12 @@ void main_open_search_dialog(void)
 		GtkTreeIter iter;
 		
 		backendSearch = new BackEnd();
-
+		
 		/* create and show search dialog */
 		gui_create_search_dialog();
-
+		backendSearch->init_SWORD(2);
+		
+		
 		/* initiate module count to 0 */
 		search1.module_count = 0;
 

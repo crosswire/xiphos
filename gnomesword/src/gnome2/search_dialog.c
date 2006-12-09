@@ -932,7 +932,11 @@ void delete_list(GtkButton * button, gpointer user_data)
 
 void scope_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	search1.which_scope = togglebutton;
+	search1.which_scope = togglebutton;  
+	if(GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active)
+		gtk_widget_set_sensitive(search1.combo_range,TRUE);
+	else
+		gtk_widget_set_sensitive(search1.combo_range,FALSE);
 }
 
 
@@ -959,8 +963,13 @@ void mod_list_toggled(GtkToggleButton * togglebutton,
 	if (togglebutton->active) {
 		main_comboboxentry2_changed((GtkComboBox *) search1.
 					    combo_list, user_data);
-		//main_add_modlist_to_label();
 	}
+	if(GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+		gtk_widget_set_sensitive(search1.combo_list,TRUE);
+	else
+		gtk_widget_set_sensitive(search1.combo_list,FALSE);
+		
+		
 }
 
 
@@ -989,6 +998,7 @@ void current_module_toggled(GtkToggleButton * togglebutton,
 	if (togglebutton->active) {
 		main_change_mods_select_label(search1.search_mod);
 		gtk_widget_set_sensitive(search1.rb_last, TRUE);
+		gtk_widget_set_sensitive(search1.combo_list,FALSE);
 	} else {
 		gtk_widget_set_sensitive(search1.rb_last, FALSE);
 		gtk_toggle_button_set_active(search1.which_scope, TRUE);
@@ -2511,7 +2521,7 @@ void _create_search_dialog(void)
 	_setup_listviews(search1.listview_modules, NULL);
 	
 	
-	
+	/* scope radio buttons */
 	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
 	g_signal_connect(search1.rb_no_scope, "toggled",
 			 G_CALLBACK(scope_toggled), NULL);		    
