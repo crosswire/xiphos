@@ -870,8 +870,6 @@ void main_display_book(const char * mod_name, char * key)
 	
 	
 	settings.whichwindow = BOOK_WINDOW;
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
-						      1);
 	if(key == NULL) key = "0";
 	if(isalpha(key[0])) {
 		xml_set_value("GnomeSword", "keys", "book", key);
@@ -920,9 +918,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 		settings.CommWindowModule = (char*)mod_name;
 	
 	settings.comm_showing = TRUE;
-	settings.whichwindow = COMMENTARY_WINDOW;	
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(
-						widgets.notebook_comm_book), 0);
+	settings.whichwindow = COMMENTARY_WINDOW;
 						
 	if(strcmp(settings.CommWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
