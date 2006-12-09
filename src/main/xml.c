@@ -500,6 +500,13 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) "modlists", NULL);
+	cur_node = xmlNewChild(section_node,
+			       NULL, (const xmlChar *) "modlist", NULL);
+	xml_attr = xmlNewProp(cur_node,
+			      (const xmlChar *) "label",
+			      (const xmlChar *) "Sample Module List");
+	xml_attr =
+	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) "Select the modules you want");
 
 
 	section_node = xmlNewChild(root_node, NULL,
