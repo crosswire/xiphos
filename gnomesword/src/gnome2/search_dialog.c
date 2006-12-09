@@ -88,6 +88,7 @@ static gboolean _in_url;
 static gchar *module_selected;
 gchar *verse_selected;
 
+extern int drag_module_type;
 
 void on_comboboxentry2_changed(GtkComboBox * combobox,
 			       gpointer user_data)
@@ -2148,6 +2149,16 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
                         case TARGET_STRING:
                                 _sdata = (gchar*)selection_data-> data;
 				if(_sdata) {
+					if(drag_module_type == COMMENTARY_TYPE)						
+						gtk_notebook_set_current_page(
+						GTK_NOTEBOOK(
+						widgets.notebook_comm_book),
+						0);
+					if(drag_module_type == BOOK_TYPE)						
+						gtk_notebook_set_current_page(
+						GTK_NOTEBOOK(
+						widgets.notebook_comm_book),
+						1);						
 					main_url_handler(verse_selected,TRUE);
 #ifdef DEBUG
                                 	g_print ("string: %s", _sdata);
