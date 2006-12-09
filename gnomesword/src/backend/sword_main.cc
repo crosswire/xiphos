@@ -170,6 +170,11 @@ void BackEnd::init_SWORD(int gsType) {
 				display_mod->setDisplay(entryDisplay);
 			}
 		}	
+	} else if(gsType == 2) {	
+		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
+			display_mod = (*it).second;
+			display_mod->setDisplay(entryDisplay);
+		}	
 	}
 }
 
