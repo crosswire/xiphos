@@ -58,7 +58,6 @@ extern "C" {
 static BackEnd *backendSearch;
 
 static gboolean is_running = FALSE;
-
 extern int search_dialog;
 static GList *get_current_list(void);
 static gchar *get_modlist_string(GList * mods);
@@ -66,6 +65,7 @@ static GList *get_custom_list_from_name(const gchar * label);
 static void add_ranges(void);
 static void add_modlist(void);
 
+int drag_module_type;
 
 static GList *list_of_finds;
 /******************************************************************************
@@ -703,6 +703,15 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 			++search1.module_count;
 }
 
+void main_drag_drop_display_in_main(const char * uri)
+{
+
+
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+						      1);
+
+}
+
 
 /******************************************************************************
  * Name
@@ -888,9 +897,11 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
 	if(verse_selected) g_free(verse_selected);
-	if(backendSearch->module_type(module) == BOOK_TYPE)
+	drag_module_type = backendSearch->module_type(module);
+	if(drag_module_type == BOOK_TYPE)
 		verse_selected = g_strdup_printf("sword://%s/%lu",module,
-		       backendSearch->get_treekey_offset_from_key(module, buf));
+		       		backendSearch->get_treekey_offset_from_key(
+						module, buf));
 	else 
 		verse_selected = g_strdup_printf("sword://%s/%s",module,buf);
 #ifdef DEBUG
