@@ -831,6 +831,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				if(key) g_free((gchar*)key);
 			break;				
 			case COMMENTARY_TYPE:	
+				settings.comm_showing = TRUE;
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
 				main_display_bible(NULL, key);
