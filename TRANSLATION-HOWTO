@@ -81,7 +81,7 @@ $ vi YOUR-LANG.po
 directory.
 
 # When the source files change, updating the po file is easy :
-$ xml2po -u YOUR-LANG.po ../C/*xml
+$ xml2po -e -u YOUR-LANG.po ../C/*xml
 
 
 Don't forget to send YOUR-LANG.po files to gnomesword-developers@lists.sourceforge.net.
