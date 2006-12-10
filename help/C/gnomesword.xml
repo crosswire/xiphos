@@ -157,11 +157,9 @@ Template last modified Apr 11, 2002
   </articleinfo> 
 
   <indexterm zone="index"> 
-    <primary>MY-GNOME-APP</primary> 
+    <primary>&appname;</primary> 
   </indexterm> 
-  <indexterm zone="index"> 
-    <primary>mygnomeapp</primary> 
-  </indexterm>
+
 
   <!-- ============= Document Body ============================= -->
 
