@@ -206,12 +206,9 @@ void frontend_display(void)
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
 	gui_show_hide_preview(settings.showpreview);
-	/* showing the devotional must come after the the app is shown or
-	 *  it will mess up the sidebar display
-	 */
-	/*
-	 * FIXME: maybe we need to move the devotional?
-	 */
+	gui_show_hide_texts(settings.showtexts);
+	gui_show_hide_dicts(settings.showdicts);
+	gui_show_hide_comms(settings.showcomms);
 	if (settings.showdevotional) {
 		main_display_devotional();
 	}
