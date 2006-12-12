@@ -49,7 +49,6 @@
 #include "gui/studypad.h"
 #include "gui/parallel_view.h"
 #include "gui/dialog.h"
-#include "gui/hints.h"
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
 #include "gui/mod_mgr.h"
@@ -88,8 +87,8 @@ void frontend_init(void)
 #endif
 
 	
-	hint.in_popup = FALSE;
-	hint.use_hints = FALSE;
+//	hint.in_popup = FALSE;
+//	hint.use_hints = FALSE;
 	
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;

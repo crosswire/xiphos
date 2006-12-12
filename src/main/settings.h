@@ -110,6 +110,7 @@ struct _settings {
 	        autosavepersonalcomments, /* auto save personal notes */
 	        formatpercom, /* use html to format personal notes */
 	        showshortcutbar, /* display shortcut bar if true */
+	        showsidebar, /* display sidebar bar if true */
 		showfavoritesgroup, /* display shortcut bar group if true */
 	        showtextgroup, /* display shortcut bar group if true */
 	        showcomgroup, /* display shortcut bar group if true */

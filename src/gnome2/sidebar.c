@@ -332,22 +332,22 @@ void gui_set_sidebar_porgram_start(void)
 	/*
 	 *  show hide shortcut bar - set to options setting
 	 */
-/*	if (settings.showshortcutbar) {
+	if (settings.showshortcutbar) {
 		gtk_widget_show(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				       settings.sidebar_width);
 	}
-
+/*
 	else if (!settings.showshortcutbar && settings.showdevotional) {
 		gtk_widget_show(widgets.shortcutbar);
 		gui_sidebar_showhide();
 	}
-
+*/
 	else {
 		gtk_widget_hide(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 1);
 	}
-*/
+
 	/* set hight of bible and commentary pane */
 	//gtk_paned_set_position(GTK_PANED(widgets.vpaned),settings.upperpane_hight);
 
@@ -385,6 +385,7 @@ void gui_sidebar_showhide(void)
 	}
 
 	if (settings.showshortcutbar) {
+		xml_set_value("GnomeSword", "misc", "show_sidebar",	"0");
 		settings.showshortcutbar = FALSE;
 		settings.biblepane_width = settings.gs_width / 2;
 		gtk_widget_hide(widgets.shortcutbar);
@@ -393,6 +394,7 @@ void gui_sidebar_showhide(void)
 				       (widgets.hpaned),
 				       settings.biblepane_width);
 	} else {
+		xml_set_value("GnomeSword", "misc", "show_sidebar",	"1");
 		settings.showshortcutbar = TRUE;
 		settings.biblepane_width =
 		    (settings.gs_width -
@@ -403,7 +405,6 @@ void gui_sidebar_showhide(void)
 				       settings.biblepane_width);
 		gtk_widget_show(widgets.shortcutbar);
 	}
-
 }
 
 
