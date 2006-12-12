@@ -43,7 +43,6 @@
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
-#include "gui/hints.h"
 #include "gui/utilities.h"
 #include "gui/sidebar.h"
 #include "gui/dialog.h"
@@ -339,7 +338,9 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	guint i;	
 	
 	val = g_strdup(value);
+#ifdef DEBUG 
 	g_message("buf len = %d",strlen(buf));
+#endif
 	/*if((val1 = strchar(val,'|')) != NULL)	{
 		val1 = (val1) ? (val1 + 1) : val;
 		
