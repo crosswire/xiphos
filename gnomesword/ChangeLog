@@ -1,3 +1,7 @@
+2006-12-12  karl <karl@charcoal.com>
+
+	* fixed bug: avoid gratuitous text redraw when turning off read-aloud.
+
 2006-12-12  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1613439: Sidebar setting does not survive program restart
