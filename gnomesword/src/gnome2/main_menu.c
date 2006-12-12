@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-//#include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
@@ -33,7 +32,6 @@
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "gui/gnomesword.h"
-#include "gui/hints.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"

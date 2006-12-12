@@ -45,7 +45,6 @@ extern "C" {
 #ifndef USE_GTKHTML38
 #include "editor/editor.h"
 #include "editor/editor-control.h"
-//#include "editor/note_editor.h"
 #endif
 
 #include "gui/bibletext_dialog.h"
@@ -55,7 +54,6 @@ extern "C" {
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/hints.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/note_editor.h"
