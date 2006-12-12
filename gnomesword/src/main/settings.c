@@ -544,13 +544,28 @@ void load_settings_structure(void)
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
-
+/*
 	if (buf = xml_get_value("shortcutbar", "shortcutbar"))
 		settings.showshortcutbar = atoi(buf);
 	
 	if (buf = xml_get_value("shortcutbar", "docked"))
 		settings.docked =  atoi(buf);
 	
+*/		
+	if (xml_get_value("misc", "show_sidebar")) {
+		buf = xml_get_value("misc", "show_sidebar");
+		settings.showshortcutbar = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc","show_sidebar","1");
+		settings.showshortcutbar = 1;
+	}		
+	if (xml_get_value("misc", "sidebar_docked")) {
+		buf = xml_get_value("misc", "sidebar_docked");
+		settings.docked = atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc","sidebar_docked","1");
+		settings.docked = 1;
+	}
 	
 	if (xml_get_value("tabs", "browsing")) {
 		buf = xml_get_value("tabs", "browsing");

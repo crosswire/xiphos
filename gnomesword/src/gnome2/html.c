@@ -47,7 +47,6 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/dialog.h"
 #include "gui/bibletext.h"
-#include "gui/hints.h"
 #include "gui/widgets.h"
 #include "gui/tabbed_browser.h"
 
