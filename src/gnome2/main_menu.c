@@ -303,7 +303,8 @@ static void on_read_aloud_activate(GtkCheckMenuItem * menuitem,
 	settings.readaloud = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "readaloud",
 		      (settings.readaloud ? "1" : "0"));
-	main_display_bible(NULL, settings.currentverse);
+	if (settings.readaloud)
+		main_display_bible(NULL, settings.currentverse);
 }
 
 /******************************************************************************
