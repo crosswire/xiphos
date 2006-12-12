@@ -469,6 +469,7 @@ void load_settings_structure(void)
 		settings.showpreview = atol(xml_get_value("misc", "showpreview"));
 	else {
 		xml_add_new_item_to_section("misc", "showpreview", "1");
+		settings.showpreview = 1;
 	}
 
 //#ifdef USE_GTKHTML30	
