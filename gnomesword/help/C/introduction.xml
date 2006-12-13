@@ -33,6 +33,15 @@
 	    <imageobject>
               <imagedata fileref="figures/sword3.png" format="PNG" />
 	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/sword3.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The SWORD Project logo</phrase> 
+	    </textobject> 
         </mediaobject> 
       </screenshot>
       </figure>
@@ -47,9 +56,21 @@
       <para>
       <figure id="anjuta-screenshot">
       <title>GnomeSword in action</title>
-      <screenshot>
-         <screeninfo>GnomeSword in action</screeninfo>
-           <graphic fileref="figures/interface.png" format="PNG"></graphic>
+      <screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/interface.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>GnomeSword in action</phrase> 
+	    </textobject> 
+	  </mediaobject> 
          </screenshot>
        </figure>
        </para>

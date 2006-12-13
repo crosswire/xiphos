@@ -10,10 +10,24 @@
 		</para>
 		<figure>
 			<title>The Studypad</title>
-			<screenshot>
-                        	<screeninfo>The Studypad</screeninfo>
-                                <graphic fileref="figures/studypad.png" format="PNG" ></graphic>
+			<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/studypad.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/studypad.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Studypad</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
                                         
 		<para> The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes.</para>

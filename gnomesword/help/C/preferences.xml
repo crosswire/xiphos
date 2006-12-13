@@ -6,9 +6,21 @@
   		<title>Introduction To Preferences</title>
 		<figure>
 			<title>The Preference Dialog</title>
-	        	<screenshot>
-	        		<screeninfo>The Preferences Dialog</screeninfo>
-                                <graphic fileref="figures/preferences.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Preferences Dialog</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         </screenshot>
                 </figure>
                </sect2>
@@ -20,10 +32,23 @@
 			<title>Setting Font Colors</title>
 			<figure>
 			<title>Font Colour Settings</title>
-	        	<screenshot>
-	        		<screeninfo>Font Colour Settings</screeninfo>
-                                <graphic fileref="figures/preferences_fonts-color.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_fonts-color.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Font Colour Settings</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         </screenshot>
+
                 </figure>
                 </sect3>
 		
@@ -31,11 +56,25 @@
 			<title>Miscellaneous Font Settings</title>
 			<figure>
 			<title>Miscellaneous Font Settings</title>
-	        	<screenshot>
-	        		<screeninfo>Miscellaneous Font Settings</screeninfo>
-                                <graphic fileref="figures/preferences_fonts-misc.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_fonts-misc.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_fonts-misc.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Miscellaneous Font Settings</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
                 </figure>
+
 		<para>
 		In individual modules' display, the right-click menu's <guimenuitem>Module Options</guimenuitem> selector provides font name
 		and size selection.
@@ -50,20 +89,48 @@
 			<title>Tabs and Pane Settings</title>
 		<figure>
 			<title>Tab and Pane Settings</title>
-	        	<screenshot>
-	        		<screeninfo>Tab and Pane Settings</screeninfo>
-                                <graphic fileref="figures/preferences_general-tabs.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_general-tabs.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_general-tabs.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Tab and Pane Settings</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
                 </sect3>
 		<sect3 id="tab-pane2">
 			<title>General Preferences and StudyPad directory</title>
 		<figure>
 			<title>General Preferences and StudyPad directory</title>
-	        	<screenshot>
-	        		<screeninfo>General Preferences and StudyPad directory</screeninfo>
-                                <graphic fileref="figures/preferences_general-misc.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_general-misc.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_general-misc.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>General Preferences and StudyPad directory</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
 		<para>
 		<guilabel>Verse style</guilabel> indicates that each verse should begin on a separate line, or (when disabled) that verses
@@ -88,24 +155,64 @@
 			<title>Main Module Settings</title>
 		<figure>
 			<title>The Module Preferences Dialog</title>
-	        	<screenshot>
-	        		<screeninfo>The Module Preferences Dialog</screeninfo>
-                                <graphic fileref="figures/preferences_modules-main.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_modules-main.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_modules-main.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Module Preferences Dialog</phrase> 
+	    </textobject> 
+	  </mediaobject>
                         </screenshot>
+
                 </figure>
 		<figure>
 			<title>Parallel Preferences</title>
-	        	<screenshot>
-	        		<screeninfo>Parallel Preferences</screeninfo>
-                                <graphic fileref="figures/preferences_modules-parallel.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_modules-parallel.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_modules-parallel.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Parallel Preferences</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         </screenshot>
+
                 </figure>
                 <figure>
 			<title>Various preferences Modules </title>
-	        	<screenshot>
-	        		<screeninfo>Various Preferences Modules</screeninfo>
-                                <graphic fileref="figures/preferences_modules-misc.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/preferences_modules-misc.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/preferences_modules-misc.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Various Preferences Modules</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
           	</sect3>
 	</sect2>

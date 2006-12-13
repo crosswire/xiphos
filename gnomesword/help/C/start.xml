@@ -37,10 +37,24 @@
 		</para>
 		<figure id="gnomesword-start-question">
 			<title>GnomeSword Download Question</title>
-			<screenshot>
-                        	<screeninfo>Gnomesword Download Question</screeninfo>
-                                <graphic fileref="figures/first_start.png" format="PNG" ></graphic>
+			<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/first_start.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/first_start.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Gnomesword Download Question</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
 		<para>
 		<application>GnomeSword</application> then opens its interface with one tab displayed, showing Romans 8:28.  Once the
@@ -57,10 +71,24 @@
 		</para>
 		<figure id="gnomesword-start-interface">
 			<title>GnomeSword interface</title>
-			<screenshot>
-                        	<screeninfo>The Gnomesword Interface</screeninfo>
-                                <graphic fileref="figures/interface.png" format="PNG" ></graphic>
+			<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/interface.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Gnomesword Interface</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
+
                 </figure>
                 <para>
 		The <application>GnomeSword</application> interface contains the following elements:
