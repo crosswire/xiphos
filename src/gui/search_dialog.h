@@ -26,7 +26,8 @@
 extern "C" {
 #endif
 #include <gnome.h>	
-	
+
+
 typedef struct _search_dialog1 SEARCH_DIALOG1;
 struct _search_dialog1 {
 	GtkWidget *dialog;
