@@ -6,9 +6,21 @@
 				<para> An editor window similar to the <guimenuitem> Study Pad </guimenuitem> will appear. Edit your comment and save it, in future it will appear as your comment to the relevant verse. </para>
 				<figure>
     				<title>The Personal Commentary Editor </title>
-     				<screenshot>
-      			        	<screeninfo>The Personal Commentary</screeninfo>
-                                <graphic fileref="figures/personal.png" format="PNG" ></graphic>
+     				<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/personal.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/personal.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Personal Commentary</phrase> 
+	    </textobject> 
+	  </mediaobject> 
 			        </screenshot>
 			        </figure>
 			        <para> Locationbar</para>
