@@ -158,8 +158,10 @@
 	</sect2>
 	<sect2 id="gnomesword-advanced-search">
 	   <title>Advanced Searches</title> 
-	   <para> More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem></para>
-
+	   <para>
+		More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced
+		Search</guimenuitem>.
+	   </para>
 	 
 	  <figure>
 	  <title>The Advanced Search Dialogue</title>
@@ -183,15 +185,44 @@
 
           </figure>
            
-	 <warning>
+	   <para>
+		In <guimenuitem>Advanced Search</guimenuitem>, much more complex queries can be constructed, involving custom search ranges,
+		custom lists of modules over which to search, regular expression matching (see next section), and attribute-based searches
+		such as are found in footnotes or Strong's Hebrew and Greek dictionary references.
+	   </para>
+
+	   <para>
+		By default, two standard search ranges are defined, for Old and New Testament; you may wish to define others for
+		e.g. "Gospels" or "Paul's Epistles".  One (fake) custom module list is present, as a placeholder to make obvious what is
+		required: Since it cannot be known what modules a user will install, no real content for such a module list can be assumed.
+		If desired, new searches can be performed across only the current results of the previous search.  Any modules may be
+		searched, including general books and even dictionaries, in any combination.
+	   </para>
+
+	   <para>
+		Note the tooltip in the screenshot above, for Attributes search.  This qualifier is used to perform searches on attributes
+		that are carried with verses, instead of verse content proper.  Thus, a search of KJV for Strong's Greek #140, using
+		"Word//Lemma/G140", will return the single result of Matthew 12:18.
+	   </para>
+
+	   <warning>
 	   	<para>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
 		</para>
 	   </warning>  
+
+	   <warning>
+	   	<para>
+		Late in preparation for release of 2.2, it was discovered that footnote content search (as an Attributes search; see
+		screenshot) has been inadvertently broken by other needed development effort in Advanced Search, and further fixes to cure
+		this will require completion of other planned, extensive re-working of how Advanced Search works.  We regret the
+		inconvenience, but it is expected that this will receive top priority following 2.2's release.
+		</para>
+	   </warning>
 	   </sect2>
 
 	<sect2 id="hdbk-op-search-dialog-text-regexp">
-		<title>Search Syntax using GCC Regular Expression</title>
+		<title>Search Syntax using Regular Expression</title>
 
 		<para>
 			Regular expression searches provide a way to do simple or complex searches for strings that match a pattern or set of patterns (branches) separated by vertical bars &quot;|&quot;. While a pattern can be built to look for a word or phrase, a simple pattern that consists of a word does not look for only that word but for any place the string of letters that make that word are found. A search for &quot;right&quot; will return verses that contain the word &quot;right&quot;, but also &quot;<emphasis>right</emphasis>eous&quot;, &quot;<emphasis>right</emphasis>eousness&quot;, &quot;un<emphasis>right</emphasis>eous&quot;, &quot;up<emphasis>right</emphasis>&quot; and even &quot;b<emphasis>right</emphasis>&quot;. A search for &quot;hall not&quot; is not a search for &quot;hall&quot; AND &quot;not&quot; but for the string &quot;hall not&quot; with a space between the second &quot;l&quot; and the &quot;n&quot;. The search for &quot;hall not&quot; will find occurrences of &quot;s<emphasis>hall not</emphasis>&quot;.
@@ -209,7 +240,7 @@ an ordinary period.
 		</para>
 
 		<sect3 id="hdbk-op-search-dialog-text-regexp-rules">
-			<title>Rules for GCC Regular Expression Search Requests</title>
+			<title>Rules for Regular Expression Search Requests</title>
 			<itemizedlist>
 <listitem><para>. The period matches any character.</para></listitem>
 <listitem><para>* The asterisk matches 0 or more characters of the
