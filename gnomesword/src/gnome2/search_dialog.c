@@ -82,6 +82,7 @@ static guint n_targets = G_N_ELEMENTS (target_list);
 
 
 SEARCH_DIALOG1 search1;
+
 static GtkWidget *dialog;
 static gboolean _preview_on;
 static gboolean _in_url;
