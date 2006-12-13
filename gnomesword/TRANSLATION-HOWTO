@@ -48,7 +48,12 @@ $ vi YOUR-LANG.po
 # Check the file for errors (IMPORTANT! Don't forget this step):
 $ msgfmt -cv -o /dev/null YOUR-LANG.po
 
+# Updating the .po file is easy
+$ intltool-update YOUR-LANG.po
+
+
 You are now ready to compile GnomeSword and check the result of your work.
+
 
 
 Translating GnomeSword Manual
