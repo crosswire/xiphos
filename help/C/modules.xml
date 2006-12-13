@@ -16,9 +16,21 @@
 		</para>
 		<figure>
 			<title>The Module Manager Dialog</title>
-	        	<screenshot>
-	        	<screeninfo>The Module Manager  Dialog</screeninfo>
-                         <graphic fileref="figures/module.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/module.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/module.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Module Manager Dialog</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         </screenshot>
 		</figure>
 	</sect2>
@@ -30,9 +42,21 @@
 			<title>Sword Module Installations</title>
 			<figure>
 				<title>Sword Module Installations</title>
-	        	<screenshot>
-		        	<screeninfo>Module Installation</screeninfo>
-                        	 <graphic fileref="figures/sword_config.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/sword_config.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/sword_config.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Module Installation</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         </screenshot>
 			</figure>
 			<para>
@@ -44,10 +68,23 @@
 			<title>Sword Sources Settings</title>
 			<figure>
 				<title>Sword Sources Settings</title>
-	        	<screenshot>
-		        	<screeninfo>Module Installation</screeninfo>
-                        	 <graphic fileref="figures/sword_sources.png" format="PNG" ></graphic>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/sword_sources.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/sword_sources.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Module Installation</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         	</screenshot>
+
 			</figure>
 		</sect3>
 	</sect2>
@@ -59,19 +96,44 @@
 			<title>Adding Sword Modules</title>
 			<figure>
 				<title></title>
-	       		<screenshot>
-			       	<screeninfo>Module Installation</screeninfo>
-                        	 <graphic fileref="figures/sword_install.png" format="PNG" ></graphic>
+	       		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/sword_install.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Module Installation</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                         </screenshot>
 			</figure>
 		</sect3>
 		<sect3 id="remove-module">
 			<title>Removing Sword Modules</title>
 			<figure>
-				<title></title>
-	       		<screenshot>
-			       	<screeninfo>Removing Modules</screeninfo>
-                        	 <graphic fileref="figures/sword_remove.png" format="PNG" ></graphic>
+				<title>Removing Modules</title>
+	       		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/sword_remove.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/sword_remove.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Removing Modules</phrase> 
+	    </textobject> 
+	  </mediaobject> 
                         	</screenshot>
 			</figure>
 		</sect3>
