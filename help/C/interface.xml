@@ -12,9 +12,22 @@
    		</para>
 	        <figure id="menubar_figure">
 			<title>Menubar</title>
-	  		<screenshot>
-	      		<screeninfo>GnomeSword menubar</screeninfo>
-    	   		<graphic fileref="figures/interface_menubar.png" format="PNG" ></graphic>
+	  		<screenshot> 
+			  <mediaobject> 
+			    <imageobject><imagedata
+				fileref="figures/interface_menubar.png" format="PNG" /> 
+			    </imageobject>
+	    		<!-- EPS versions of the figures are not required at the moment. -->
+          		<!-- 
+		    <imageobject>
+      			<imagedata fileref="figures/interface_menubar.eps" format="EPS"/>
+    		    </imageobject>
+		    -->
+	    <textobject> 
+	      <phrase>&appname; menubar</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 		      	</screenshot>
 	    	</figure>
 	</sect2>
@@ -30,13 +43,23 @@
     	</para>
 		<figure id="toolbar_figure">
 			<title>ToolBar</title>
-			<screenshot>
-			<screeninfo>The Toolbar</screeninfo>
-			<graphic fileref="figures/interface_toolbar.png"
-format="PNG"/>
-						
-			</screenshot>
-		</figure>			
+			<screenshot> 
+	  <mediaobject> 
+	    <imageobject>
+		<imagedata fileref="figures/interface_toolbar.png" format="PNG"/> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_toolbar.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Toolbar</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	</screenshot>
+		</figure>	
 		<para>
 		The <interface>Toolbar</interface> consists of the following functions:
 		</para>
@@ -119,10 +142,23 @@ format="PNG"/>
    	 	<title>The Sidebar</title>
 		<figure id="sidepane_figure">
 			<title>Sidepane</title>
-	  		<screenshot>
-	      			<screeninfo>The Sidepane</screeninfo>
-    	   			<graphic fileref="figures/interface_sidepane.png" format="PNG" ></graphic>
-		      	</screenshot>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject>
+		<imagedata fileref="figures/interface_sidepane.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_sidepane.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Sidepane</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	   </screenshot>
+
 	    	</figure>
 		<para>
 	     	On the left hand side of <application>GnomeSword</application> there is the Side Pane. Here the
@@ -132,9 +168,21 @@ format="PNG"/>
 		</para>
 		<figure id="shortcut_figure">
 			<title>Sidepane Shortcuts</title>
-	  		<screenshot>
-	      		<screeninfo>Sidepane shortcuts</screeninfo>
-    	   		<graphic fileref="figures/interface_shortcut.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject>
+		<imagedata fileref="figures/interface_shortcut.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_shortcut.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Sidepane shortcuts</phrase> 
+	    </textobject> 
+	  </mediaobject> 
 			</screenshot>
 	    	</figure>
 	</sect2>
@@ -143,9 +191,22 @@ format="PNG"/>
    		<title>The Bible Text Pane</title>
   		<figure id="textpane_figure">
 			<title>The Bible Textpane</title>
-	  		<screenshot>
-	      		<screeninfo>The Bible textpane</screeninfo>
-    	   		<graphic fileref="figures/interface_biblepane.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject>
+		<imagedata fileref="figures/interface_biblepane.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_biblepane.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Bible textpane</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 			</screenshot>
 	    	</figure>
 		<para>
@@ -189,9 +250,21 @@ format="PNG"/>
 			</para>
 		<figure id="parallel_figure">
 			<title>Bible textpane - parallel view</title>
-	  		<screenshot>
-	      		<screeninfo>Bible textpane - parallel view</screeninfo>
-    	   		<graphic fileref="figures/interface_parallel.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata fileref="figures/interface_parallel.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_parallel.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Bible textpane - parallel view</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 		      	</screenshot>
 	    	</figure>
 			<para>
@@ -201,9 +274,21 @@ format="PNG"/>
 			</para>
 		<figure id="parallel_figure_separate">
 			<title>Parallel View - separate window</title>
-	  		<screenshot>
-	      		<screeninfo>Parallel View - separate window</screeninfo>
-    	   		<graphic fileref="figures/interface_parallel-separate.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata fileref="figures/interface_parallel-separate.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_parallel-separate.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Parallel View - separate window</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 		      	</screenshot>
 		</figure>
 		</sect3>
@@ -302,9 +387,21 @@ format="PNG"/>
 			</itemizedlist>
 			<figure id="module_options">
 				<title>Module Options</title>
-		  		<screenshot>
-		      		<screeninfo>Module Options</screeninfo>
-	    	   		<graphic fileref="figures/interface_biblepane-options.png" format="PNG" ></graphic>
+		  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata fileref="figures/interface_biblepane-options.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_biblepane-options.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Module Options</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 			      	</screenshot>
 		    	</figure>
 		</sect3>
@@ -316,10 +413,23 @@ format="PNG"/>
 			</para>
 			<figure id="view_options">
 				<title>View Options</title>
-		  		<screenshot>
-		      		<screeninfo>View Options</screeninfo>
-	    	   		<graphic fileref="figures/interface_menubar-view.png" format="PNG" ></graphic>
+		  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata fileref="figures/interface_menubar-view.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_menubar-view.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>View Options</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 			      	</screenshot>
+
 		    	</figure>
 			<itemizedlist>
 				<listitem>	
@@ -379,9 +489,21 @@ format="PNG"/>
 		<title>Viewer Pane</title>
 		<figure id="viewer_figure">
 			<title>Viewer Panel</title>
-	  		<screenshot>
-	      		<screeninfo>Viewer Panel</screeninfo>
-    	   		<graphic fileref="figures/interface_viewer.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata fileref="figures/interface_viewer.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_viewer.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Viewer Panel</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 		      	</screenshot>
 		</figure>
 		<para>
@@ -405,9 +527,22 @@ format="PNG"/>
    		<title>The Commentary Pane</title>
 		<figure id="commentary_figure">
 			<title>The Commentary Pane</title>
-	  		<screenshot>
-	      			<screeninfo>Commentary Pane</screeninfo>
-    	   			<graphic fileref="figures/interface_commentarypane.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/interface_commentarypane.png" format="PNG" />
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_commentarypane.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Commentary Pane</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 	      		</screenshot>
     		</figure>
 		<para>
@@ -460,9 +595,22 @@ format="PNG"/>
 		<title>Dictionary Pane</title>
 		<figure id="dict_figure">
 			<title>The Dictionary Pane</title>
-	  		<screenshot>
-	      			<screeninfo>The Dictionary Pane</screeninfo>
-    	   			<graphic fileref="figures/interface_dictionary.png" format="PNG" ></graphic>
+	  		<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/interface_dictionary.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/image.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Dictionary Pane</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
 	      		</screenshot>
     		</figure>
 	</sect2>
