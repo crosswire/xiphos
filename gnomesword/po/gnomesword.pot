@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-06 22:22+0100\n"
+"POT-Creation-Date: 2006-12-13 21:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,34 +53,34 @@ msgstr ""
 msgid "Number of Devotion modules"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:235 ../src/main/previewer.cc:107
+#: ../src/main/module_dialogs.cc:233 ../src/main/previewer.cc:107
 #: ../ui/prefs.glade.h:48
 msgid "Previewer"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:302 ../src/main/module_dialogs.cc:431
+#: ../src/main/module_dialogs.cc:300 ../src/main/module_dialogs.cc:429
 #: ../src/main/previewer.cc:173
 msgid "Footnote"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:308 ../src/main/module_dialogs.cc:436
+#: ../src/main/module_dialogs.cc:306 ../src/main/module_dialogs.cc:434
 #: ../src/main/previewer.cc:179
 msgid "Cross Reference"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:314 ../src/main/module_dialogs.cc:328
-#: ../src/main/module_dialogs.cc:441 ../src/main/module_dialogs.cc:453
+#: ../src/main/module_dialogs.cc:312 ../src/main/module_dialogs.cc:326
+#: ../src/main/module_dialogs.cc:439 ../src/main/module_dialogs.cc:451
 #: ../src/main/previewer.cc:185 ../src/main/previewer.cc:199
 msgid "Strongs"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:320 ../src/main/module_dialogs.cc:339
-#: ../src/main/module_dialogs.cc:446 ../src/main/module_dialogs.cc:463
+#: ../src/main/module_dialogs.cc:318 ../src/main/module_dialogs.cc:337
+#: ../src/main/module_dialogs.cc:444 ../src/main/module_dialogs.cc:461
 #: ../src/main/previewer.cc:191 ../src/main/previewer.cc:210
 msgid "Morphology"
 msgstr ""
 
-#: ../src/main/module_dialogs.cc:1273
+#: ../src/main/module_dialogs.cc:1271
 msgid "Back to "
 msgstr ""
 
@@ -94,14 +94,14 @@ msgstr ""
 
 #: ../src/main/sidebar.cc:576 ../src/main/sidebar.cc:858
 #: ../src/main/sidebar.cc:859 ../src/main/sidebar.cc:860
-#: ../src/gnome2/parallel_view.c:534 ../src/gnome2/sidebar.c:652
-#: ../src/gnome2/sidebar.c:661 ../src/gnome2/utilities.c:443
+#: ../src/gnome2/parallel_view.c:534 ../src/gnome2/sidebar.c:653
+#: ../src/gnome2/sidebar.c:662 ../src/gnome2/utilities.c:443
 msgid "Parallel View"
 msgstr ""
 
 #: ../src/main/sidebar.cc:582 ../src/main/sidebar.cc:866
 #: ../src/main/sidebar.cc:867 ../src/main/sidebar.cc:868
-#: ../src/gnome2/main_window.c:650
+#: ../src/gnome2/main_window.c:658
 msgid "Standard View"
 msgstr ""
 
@@ -204,11 +204,11 @@ msgid "Export"
 msgstr ""
 
 #: ../src/editor/editor_menu.c:720 ../src/editor/toolbar_edit.c:689
-#: ../src/gnome2/html.c:687 ../src/gnome2/note_editor.c:1241
+#: ../src/gnome2/html.c:686 ../src/gnome2/note_editor.c:1241
 msgid "Print"
 msgstr ""
 
-#: ../src/editor/editor_menu.c:728 ../src/gnome2/main_menu.c:865
+#: ../src/editor/editor_menu.c:728 ../src/gnome2/main_menu.c:864
 #: ../src/gnome2/note_editor.c:1249
 msgid "_Edit"
 msgstr ""
@@ -860,7 +860,7 @@ msgstr ""
 #: ../src/gnome2/bibletext.c:1050 ../src/gnome2/bibletext_dialog.c:2116
 #: ../src/gnome2/commentary.c:778 ../src/gnome2/commentary_dialog.c:1805
 #: ../src/gnome2/dictlex.c:991 ../src/gnome2/gbs.c:811
-#: ../src/gnome2/sidebar.c:985
+#: ../src/gnome2/sidebar.c:986
 msgid "About"
 msgstr ""
 
@@ -972,7 +972,7 @@ msgstr ""
 msgid "Restore saved folder"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:972
+#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:973
 msgid "Open in a new tab"
 msgstr ""
 
@@ -1176,237 +1176,237 @@ msgstr ""
 msgid "Go to %s"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:87
+#: ../src/gnome2/gnomesword.c:86
 msgid "Initiating GnomeSword"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:152 ../src/gnome2/splash.c:590
+#: ../src/gnome2/gnomesword.c:151 ../src/gnome2/splash.c:590
 msgid "Displaying GnomeSword"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:227
+#: ../src/gnome2/gnomesword.c:223
 msgid "The Setup Druid was cancelled."
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:228
+#: ../src/gnome2/gnomesword.c:224
 msgid "Do you wish to set preferences now?"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:251
+#: ../src/gnome2/gnomesword.c:247
 msgid "done"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:329
+#: ../src/gnome2/gnomesword.c:325
 msgid "GnomeSword is shutdown"
 msgstr ""
 
-#: ../src/gnome2/html.c:156
+#: ../src/gnome2/html.c:155
 msgid "Unlock "
 msgstr ""
 
-#: ../src/gnome2/html.c:588
+#: ../src/gnome2/html.c:587
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/gnome2/html.c:737
+#: ../src/gnome2/html.c:736
 msgid "Print Preview"
 msgstr ""
 
-#: ../src/gnome2/html.c:743
+#: ../src/gnome2/html.c:742
 msgid "Failed to print the document"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:680
+#: ../src/gnome2/main_menu.c:679
 msgid "Open Study_Pad"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:681
+#: ../src/gnome2/main_menu.c:680
 msgid "Open the StudyPad editor"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:686
+#: ../src/gnome2/main_menu.c:685
 msgid "_Open Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:687
+#: ../src/gnome2/main_menu.c:686
 msgid "Open a saved session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:691
+#: ../src/gnome2/main_menu.c:690
 msgid "_Save Session"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:692
+#: ../src/gnome2/main_menu.c:691
 msgid "Save the current session to a file"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:703
+#: ../src/gnome2/main_menu.c:702
 msgid "_Copy"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:704
+#: ../src/gnome2/main_menu.c:703
 msgid "Copy highlighted text from main window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:710 ../src/gnome2/sidebar.c:1332
+#: ../src/gnome2/main_menu.c:709 ../src/gnome2/sidebar.c:1333
 msgid "_Search"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:711
+#: ../src/gnome2/main_menu.c:710
 msgid "Search using the shortcut bar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:716
+#: ../src/gnome2/main_menu.c:715
 msgid "_Advanced Search"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:717
+#: ../src/gnome2/main_menu.c:716
 msgid "Advanced search using the search dialog"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:725
+#: ../src/gnome2/main_menu.c:724
 msgid "_Module Manager"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:726
+#: ../src/gnome2/main_menu.c:725
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:735
+#: ../src/gnome2/main_menu.c:734
 msgid "C_lear"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:736
+#: ../src/gnome2/main_menu.c:735
 msgid "Clear history list"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:746
+#: ../src/gnome2/main_menu.c:745
 msgid "_Daily Devotion"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:747
+#: ../src/gnome2/main_menu.c:746
 msgid "Show the Daily Devotion for today"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:762
+#: ../src/gnome2/main_menu.c:761
 msgid "_Bible Texts"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:763
+#: ../src/gnome2/main_menu.c:762
 msgid "Show or hide Bible texts window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:768
+#: ../src/gnome2/main_menu.c:767
 msgid "P_review"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:769
+#: ../src/gnome2/main_menu.c:768
 msgid "Show or hide Preview window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:774
+#: ../src/gnome2/main_menu.c:773
 msgid "_Commentary"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:775
+#: ../src/gnome2/main_menu.c:774
 msgid "Show or hide commentaries"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:780
+#: ../src/gnome2/main_menu.c:779
 msgid "Dictionary/_Lexicon"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:782
+#: ../src/gnome2/main_menu.c:781
 msgid "Show or hide - dictionaries and lexicons"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:788
+#: ../src/gnome2/main_menu.c:787
 msgid "_Verse Style"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:794
+#: ../src/gnome2/main_menu.c:793
 msgid "_Pin Tabs"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:800
+#: ../src/gnome2/main_menu.c:799
 msgid "R_ead Aloud"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:806
+#: ../src/gnome2/main_menu.c:805
 msgid "Show Verse _Numbers"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:813
+#: ../src/gnome2/main_menu.c:812
 msgid "_Attach/Detach Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:819
+#: ../src/gnome2/main_menu.c:818
 msgid "_Show/Hide Sidebar"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:829
+#: ../src/gnome2/main_menu.c:828
 msgid "_Contents"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:830
+#: ../src/gnome2/main_menu.c:829
 msgid "Open the GnomeSword manual"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:843
+#: ../src/gnome2/main_menu.c:842
 msgid "_About the SWORD Project ..."
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:844
+#: ../src/gnome2/main_menu.c:843
 msgid "More information about the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:849
+#: ../src/gnome2/main_menu.c:848
 msgid "About _GnomeSword ..."
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:850
+#: ../src/gnome2/main_menu.c:849
 msgid "About this application"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:859 ../ui/editor_note.xml.h:14
+#: ../src/gnome2/main_menu.c:858 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:19
 msgid "_File"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:871
+#: ../src/gnome2/main_menu.c:870
 msgid "_View"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:877
+#: ../src/gnome2/main_menu.c:876
 msgid "Hi_story"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:883
+#: ../src/gnome2/main_menu.c:882
 msgid "_Help"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:518
+#: ../src/gnome2/main_window.c:526
 msgid "Starting"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:519
+#: ../src/gnome2/main_window.c:527
 msgid "Building GnomeSword interface"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:526
+#: ../src/gnome2/main_window.c:534
 msgid "GnomeSword - Bible Study Software"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:580
+#: ../src/gnome2/main_window.c:588
 msgid "Open a new tab"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:726
+#: ../src/gnome2/main_window.c:734
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:743
+#: ../src/gnome2/main_window.c:751
 msgid "Book View"
 msgstr ""
 
@@ -1462,7 +1462,7 @@ msgstr ""
 msgid "Old"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1003
+#: ../src/gnome2/mod_mgr.c:1003 ../src/gnome2/mod_mgr.c:1084
 msgid "Configure"
 msgstr ""
 
@@ -1480,6 +1480,24 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1063
 msgid "Directory"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1087
+msgid "Sources"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1091 ../src/gnome2/preferences_dialog.c:1499
+#: ../src/gnome2/sidebar.c:1588
+msgid "Modules"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1093 ../src/gnome2/mod_mgr.c:2098
+#: ../ui/module-manager.glade.h:13
+msgid "Install"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1095
+msgid "Remove"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1311
@@ -1516,10 +1534,6 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1811
 msgid "Directory:"
-msgstr ""
-
-#: ../src/gnome2/mod_mgr.c:2098 ../ui/module-manager.glade.h:13
-msgid "Install"
 msgstr ""
 
 #: ../src/gnome2/note_editor.c:1200
@@ -1605,39 +1619,35 @@ msgstr ""
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1499 ../src/gnome2/sidebar.c:1587
-msgid "Modules"
-msgstr ""
-
 #: ../src/gnome2/preferences_dialog.c:1502
 msgid "Main"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:48
+#: ../src/gnome2/search_dialog.c:55
 msgid "Searching the "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:49
+#: ../src/gnome2/search_dialog.c:56
 msgid " Module"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:50
+#: ../src/gnome2/search_dialog.c:57
 msgid "found in "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:647
+#: ../src/gnome2/search_dialog.c:678
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:649
+#: ../src/gnome2/search_dialog.c:680
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:861
+#: ../src/gnome2/search_dialog.c:892
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:862
+#: ../src/gnome2/search_dialog.c:893
 msgid "Are you sure you want to delete:"
 msgstr ""
 
@@ -1902,51 +1912,51 @@ msgstr ""
 msgid "Sidebar"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:933
+#: ../src/gnome2/sidebar.c:934
 msgid "Save List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:934
+#: ../src/gnome2/sidebar.c:935
 msgid "Save the search results as bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:973
+#: ../src/gnome2/sidebar.c:974
 msgid "Open selected module in a new tab"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:979
+#: ../src/gnome2/sidebar.c:980
 msgid "Open in dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:980
+#: ../src/gnome2/sidebar.c:981
 msgid "Open selected module in a dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:986
+#: ../src/gnome2/sidebar.c:987
 msgid "View information about the selected dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1316
+#: ../src/gnome2/sidebar.c:1317
 msgid "_Modules"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1324
+#: ../src/gnome2/sidebar.c:1325
 msgid "_Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1341
+#: ../src/gnome2/sidebar.c:1342
 msgid "Verse _List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1555
+#: ../src/gnome2/sidebar.c:1556
 msgid "Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1566
+#: ../src/gnome2/sidebar.c:1567
 msgid "Search"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1576
+#: ../src/gnome2/sidebar.c:1577
 msgid "Verse List"
 msgstr ""
 
