@@ -46,7 +46,7 @@ translation:
 $ vi YOUR-LANG.po
 
 # Check the file for errors (IMPORTANT! Don't forget this step):
-$ msgfmt -cv -o /dev/null xy.po
+$ msgfmt -cv -o /dev/null YOUR-LANG.po
 
 You are now ready to compile GnomeSword and check the result of your work.
 
@@ -80,7 +80,7 @@ $ vi YOUR-LANG.po
 # You can add your localized screenshots. They go into the YOUR-LANG/figures 
 directory.
 
-# When the source files change, updating the po file is easy :
+# When a new version of the help file is avalaibale, it's easy to update the po file:
 $ xml2po -e -u YOUR-LANG.po ../C/*xml
 
 
