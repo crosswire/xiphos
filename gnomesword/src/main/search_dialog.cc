@@ -869,7 +869,8 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 void main_finds_verselist_selection_changed(GtkTreeSelection * selection, 
                                                                       gpointer data)
 {
-	gchar *text, *text_str, *buf, *module;
+	gchar *text, *text_str, *buf, *module, *key;
+	gchar **work_buf = NULL; 
 	gint i, textlen;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
@@ -893,23 +894,28 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	buf = strchr(text,':');
 	++buf;
 	++buf;
-	text_str = backendSearch->get_render_text(module,buf);
-	
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
+	work_buf = g_strsplit(buf," ",3);
+	key = g_strdup_printf("%s %s",work_buf[0],work_buf[1]);
+					     
 	if(verse_selected) g_free(verse_selected);
 	drag_module_type = backendSearch->module_type(module);
 	if(drag_module_type == BOOK_TYPE)
 		verse_selected = g_strdup_printf("sword://%s/%lu",module,
 		       		backendSearch->get_treekey_offset_from_key(
-						module, buf));
+						module, key));
 	else 
-		verse_selected = g_strdup_printf("sword://%s/%s",module,buf);
+		verse_selected = g_strdup_printf("sword://%s/%s",module,key);
+	text_str = backendSearch->get_render_text(module,key);
+	
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
 #ifdef DEBUG
-	g_message("main_finds_verselist_selection_changed: %s",verse_selected);
+	g_message("main_finds_verselist_selection_changed: %s %s",work_buf[0],work_buf[1]);
 #endif
 	if(text) g_free(text);	
 	g_free(module);
+	g_free(key);
 	g_free(text_str);
+	g_strfreev(work_buf);
 }
 
 
@@ -1460,7 +1466,7 @@ void main_do_dialog_search(void)
 			/* test for mod type */
 			mod_type = backendSearch->module_type(module);	
 			if(mod_type == TEXT_TYPE)			
-				g_string_printf(str, "%s: %s %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
+				g_string_printf(str, "%s: %s  %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
 			else			
 				g_string_printf(str, "%s: %s", module,  key_buf);				
 			tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
