@@ -42,7 +42,7 @@ src/gnome2/gbs.c
 src/gnome2/gbs_dialog.c
 src/gnome2/gnomesword.c
 src/gnome2/gui.c
-src/gnome2/hints.c
+# src/gnome2/hints.c
 src/gnome2/html.c
 src/gnome2/main_menu.c
 src/gnome2/main_window.c
