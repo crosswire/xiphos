@@ -6,10 +6,24 @@
 	
 		<figure>
 		<title>the Search Bar</title>
-                       <screenshot>
-                       		<screeninfo>The Search Bar</screeninfo>
-                       		<graphic fileref="figures/interface_searchpane.png" format="PNG" ></graphic>
+                       <screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/interface_searchpane.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/interface_searchpane.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Search Bar</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
                        </screenshot>
+
                 </figure>
               <para>
 		The <interface>Search Dialog</interface> consists of the following parts:
@@ -149,10 +163,24 @@
 	 
 	  <figure>
 	  <title>The Advanced Search Dialogue</title>
-	  <screenshot>
-		<screeninfo>The Advanced Search  Dialog</screeninfo>
-                <graphic fileref="figures/search_search.png" format="PNG" ></graphic>
-          </screenshot>
+	  <screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/search_search.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/search_search.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>The Advanced Search  Dialog</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	
+          </screenshot>	
+
           </figure>
            
 	 <warning>
