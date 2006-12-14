@@ -301,13 +301,6 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-					right-click in the <interface>Bible Text pane</interface>. In the popup menu choose
-					<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open current in a dialog Module
-					</guimenuitem></menuchoice>.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
 					Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
 					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
 					. Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
