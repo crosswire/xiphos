@@ -37,7 +37,7 @@ static const gchar *authors[] = {
     "Carl Constantine",
     "Jp Robinson",
     "Andy Piper",
-     "Karl Kleinpaste",
+    "Karl Kleinpaste",
     NULL
 };
   
@@ -45,6 +45,7 @@ static const gchar *documenters[] = {
     "Pierre Benz",
     "Andy Piper",
     "Peter von Kaehne",
+    "Karl Kleinpaste",
     NULL
 };
 
