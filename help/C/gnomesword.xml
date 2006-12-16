@@ -72,7 +72,7 @@ Template last modified Apr 11, 2002
     not specified, the publisher/author is the same for all versions of the 
     document.  -->
     <publisher> 
-      <publishername> GNOME Documentation Project </publishername> 
+      <publishername>The GnomeSword Team</publishername> 
     </publisher> 
 
     &legal;
