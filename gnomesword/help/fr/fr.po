@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword-manual 2.1.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-15 18:40+0100\n"
-"PO-Revision-Date: 2006-12-16 16:49+0100\n"
+"PO-Revision-Date: 2006-12-17 14:47+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -1640,11 +1640,12 @@ msgid ""
 "'Side Pane' should usually be absolutely adequate. Click either in the menu "
 "bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' "
 "<guimenuitem> Modules -&gt;Search</guimenuitem> to access it."
-msgstr ""
-"Pour rechercher rapidement un mot ou une expression dans un module en cours "
-"d'utilisation, le plus simple est d'utiliser la fonction recherche du volet "
-"latéral. Cette fonction de recherche rapide est activée en sélectionnant  le "
-"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</guimenuitem></menuchoice>  ou  le bouton "
+msgstr "Pour rechercher rapidement un mot ou une expression dans un "
+"module en cours d'utilisation, le plus simple est d'utiliser la "
+"fonction recherche du volet latéral. Cette fonction de recherche "
+"rapide est activée en sélectionnant  le menu <menuchoice>"
+"<guimenuitem>Éditer</guimenuitem><guimenuitem>"
+"Rechercher</guimenuitem></menuchoice>  ou  le bouton "
 "<guibutton>Rechercher</guibutton> du volet latéral."
 
 #: ../C/gnomesword.xml:8(title) ../C/search.xml:8(title)
@@ -1669,22 +1670,22 @@ msgstr "Boite de saisie de l'expression à rechercher"
 #: ../C/gnomesword.xml:38(para) ../C/gnomesword.xml:69(title)
 #: ../C/search.xml:38(para) ../C/search.xml:69(title)
 msgid "Search Module Selector"
-msgstr "Sélecteur du module à rechercher"
+msgstr "Sélecteur du module objet de la requêtet"
 
 #: ../C/gnomesword.xml:43(para) ../C/gnomesword.xml:77(title)
 #: ../C/search.xml:43(para) ../C/search.xml:77(title)
 msgid "Search Type Selector"
-msgstr "Sélecteur du type de recherche"
+msgstr "Sélecteur du type de requête"
 
 #: ../C/gnomesword.xml:48(para) ../C/gnomesword.xml:115(title)
 #: ../C/search.xml:48(para) ../C/search.xml:115(title)
 msgid "Search Options Checkbox"
-msgstr "Case à cocher des options de recherche"
+msgstr "Case à cocher des options de la requêtet"
 
 #: ../C/gnomesword.xml:53(para) ../C/gnomesword.xml:122(title)
 #: ../C/search.xml:53(para) ../C/search.xml:122(title)
 msgid "Search Scope Selector"
-msgstr "Sélecteur de l'étendue de la recherche"
+msgstr "Sélecteur de la plage de versets"
 
 #: ../C/gnomesword.xml:59(title) ../C/search.xml:59(title)
 msgid "Search Key Entry Box"
@@ -1698,11 +1699,12 @@ msgid ""
 "entered and all other selections in the search dialog are complete, click "
 "the <guibutton>Find</guibutton> button to begin the search."
 msgstr ""
-"La boite d'entrée permet de saisir l'expression à rechercher. Cette expression peut être un "
-"mot, une partie de mot, plusieurs mots, une phrase, ou une expression "
-"rationnelle suivant le type de recherche sélectionné. Une fois l'expression "
-"à rechercher saisie, et les options définies, un clic sur le bouton "
-"<guimenuitem>Rechercher</guimenuitem> démarre la séquence de recherche."
+"La boite d'entrée permet de saisir l'expression à rechercher. Cette "
+"expression peut être un mot, une partie de mot, plusieurs mots, une "
+"phrase, ou une expression rationnelle suivant le type de requête "
+"sélectionné. Une fois l'expression à rechercher saisie, et les options "
+"définies, un clic sur le bouton <guimenuitem>Rechercher"
+"</guimenuitem> démarre la séquence de recherche."
 
 #: ../C/gnomesword.xml:70(para) ../C/search.xml:70(para)
 msgid ""
@@ -1711,17 +1713,18 @@ msgid ""
 "<guibutton>Commentary</guibutton> to search commentaries. Only the currently "
 "active module will be searched."
 msgstr ""
-"Permet la sélection du module dans lesquels la recherche sera effectuée. "
-"Sélectionner <guimenuitem>Texte biblique</guimenuitem> pour effectuer une "
-"recherche dans le texte biblique ou <guimenuitem>Commentaire</guimenuitem> "
-"pour le module de commentaires. Seuls les modules en cours sont parcourus."
+"Permet la sélection du module dans lequel la requête sera exécutée. "
+"Sélectionner <guimenuitem>Texte biblique</guimenuitem> pour "
+"exécuter une requête dans le texte biblique ou <guimenuitem>"
+"Commentaire</guimenuitem>  pour le module de commentaires. "
+"La requête ne s'exécute que sur les modules en cours de consultation.."
 
 #: ../C/gnomesword.xml:78(para) ../C/search.xml:78(para)
 msgid ""
 "Allows selection of the type of search. There are three search types "
 "available:"
 msgstr ""
-"Permet se sélectionner le type de recherche. Trois types de recherche sont "
+"Permet se sélectionner le type de requête. Trois types de requête sont "
 "possibles :"
 
 #: ../C/gnomesword.xml:83(guibutton) ../C/search.xml:83(guibutton)
@@ -1733,7 +1736,7 @@ msgid ""
 "This type will match any verse that has all the words in the search key, "
 "regardless of where they appear in the verse."
 msgstr ""
-"Ce type va rechercher n'importe quel verset contenant tous les mots de "
+"La requête  recherche n'importe quel verset contenant tous les mots de "
 "l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
 "apparaissent dans le verset."
 
@@ -1778,10 +1781,11 @@ msgid ""
 "which contains \"<emphasis> good</emphasis>, and doeth <emphasis>it</"
 "emphasis> not, to him it <emphasis>is</emphasis> sin.\""
 msgstr ""
-"Ce type recherche la phrase exacte contenue dans l'expression à rechercher. "
-"Si la phrase à rechercher est <userinput>en vérité</userinput>, les passages "
-"obtenus contiendront  \"<emphasis>en vérité</emphasis>,\" mais pas\" "
-"<emphasis>en</emphasis> toute  <emphasis>vérité</emphasis>\""
+"La requête recherche la phrase exacte contenue dans l'expression "
+"à rechercher. Si la phrase à rechercher est <userinput>en vérité"
+"</userinput>, les passages obtenus contiendront  \"<emphasis>"
+"en vérité</emphasis>,\" mais pas\" <emphasis>en</emphasis>"
+" toute  <emphasis>vérité</emphasis>\""
 
 #: ../C/gnomesword.xml:116(para) ../C/search.xml:116(para)
 msgid ""
@@ -1798,21 +1802,21 @@ msgid ""
 "Allows defining the range within the specificed module that will be "
 "searched. There are three search scopes available:"
 msgstr ""
-"Permet de définir l'étendue de recherche dans le module spécifié. Trois "
-"étendues de recherche sont possibles :"
+"Permet de définir la plage de versets à parcourir dans le module "
+"spécifié. Trois plages de recherche sont possibles :"
 
 #: ../C/gnomesword.xml:127(guibutton) ../C/search.xml:127(guibutton)
 msgid "No scope"
-msgstr "Pas de limites"
+msgstr "Sans limites"
 
 #: ../C/gnomesword.xml:128(para) ../C/search.xml:128(para)
 msgid "This button causes the search to to include the entire module."
 msgstr ""
-"Sélectionner ce bouton permet d'étendre la recherche au module en entier."
+"Sélectionner ce bouton implique que la requête s'exécute sur l'ensemble des versets."
 
 #: ../C/gnomesword.xml:133(guibutton) ../C/search.xml:133(guibutton)
 msgid "Use bounds"
-msgstr "Avec limites"
+msgstr "Limites définies"
 
 #: ../C/gnomesword.xml:134(para) ../C/search.xml:134(para)
 msgid ""
@@ -1839,7 +1843,7 @@ msgstr ""
 
 #: ../C/gnomesword.xml:149(guibutton) ../C/search.xml:149(guibutton)
 msgid "Last search"
-msgstr "Limites précédentes"
+msgstr "Dernière requête"
 
 #: ../C/gnomesword.xml:150(para) ../C/search.xml:150(para)
 msgid ""
@@ -1847,9 +1851,10 @@ msgid ""
 "a result of the last search. Use this with a new search key to narrow the "
 "search further."
 msgstr ""
-"Sélectionner ce bouton pour relancer une recherche uniquement sur les  "
-"versets retournés en résultat de la recherche précédente. Utiliser avec une "
-"nouvelle expression de façon à réduire la liste des versets restitués. "
+"Sélectionner ce bouton pour relancer une recherche uniquement sur l"
+"es  versets retournés en résultat de la requête précédente. Utiliser "
+"avec une nouvelle expression de façon à réduire la liste des versets "
+"restitués. "
 
 #: ../C/gnomesword.xml:160(title)
 msgid "Advanced Searches"
@@ -1889,7 +1894,14 @@ msgid ""
 "desired, new searches can be performed across only the current results of "
 "the previous search. Any modules may be searched, including general books "
 "and even dictionaries, in any combination."
-msgstr "Par défaut, deux étendues de recherche sont définies, relatives à  l'Ancien Testament et au Nouveau Testament. D'autres limites peuvent être définies à volonté par l'utilisateur comme par exemple \"Les Évangiles\" ou les \"Épîtres de Paul\". La liste des sélections personnalisées de modules est vide au départ, puisque dépendante des modules de textes installées par l'utilisateur.. Des listes peuvent être crées en incluant n'importe quel module, ce qui permet même  d'exécuter des requêtes sur les livres de la bibliothèque et les dictionnaires."
+msgstr "Par défaut, deux plages de versets sont définies, relatives à  l'Ancien "
+"Testament et au Nouveau Testament. D'autres limites peuvent être "
+"définies à volonté par l'utilisateur comme par exemple \"Les Évangiles\" "
+"ou les \"Épîtres de Paul\". La liste des modules est vide au départ, "
+"puisque dépendante des modules de textes installées par l'utilisateur.. "
+"Des listes peuvent être crées en incluant n'importe quel module, ce "
+"qui permet même  d'exécuter des requêtes sur les livres de la "
+"bibliothèque ou les dictionnaires."
 
 #: ../C/gnomesword.xml:202(para)
 msgid ""
