@@ -1,3 +1,14 @@
+2006-12-17  - almost 2 years since NEWS was updated.
+	      2.1.10, preparing for 2.2 final/stable.
+	      first-time user enhancements re: module manager
+	      advanced search improvements, esp. drag-n-drop
+	      pinned tabs so all navigate together
+	      scripture read aloud via festival TTS
+	      scroll into next/prev chapter by mousing
+	      optional verse number hiding
+	      image content auto-resizes to fit subwindow
+	      book/chapter headings are again accessible
+
 2005-01-19  - documentation now builds to the new book format.
               Translators please take note!
 	      	
