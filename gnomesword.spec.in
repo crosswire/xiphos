@@ -13,12 +13,11 @@ BuildRoot:	%{_tmppath}/%{name}-root
 Requires:	sword = %(rpm -q --queryformat '%%{version}' sword)
 Requires:	libgnomeui >= 2.2
 Requires:	gtkhtml3 >= 3.0
-Requires:	bonobo >= 1.0
+Requires:	libbonobo >= 2.0
 BuildRequires:	sword-devel >= 1.5.6
 BuildRequires:	libgnomeui-devel >= 2.2
-BuildRequires:	gal-devel >= 0.22
 BuildRequires:	gtkhtml3-devel >= 3.0
-BuildRequires:	bonobo-devel >= 1.0
+BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	gnome-spell
 BuildRequires:	scrollkeeper >= 0.3.5
 Obsoletes:	gnomesword2
@@ -61,13 +60,15 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 %defattr(-,root,root)
 %{prefix}/bin/gnomesword2
 %{prefix}/share/gnome/help/*
-%{prefix}/share/omf/%{name}
+%{prefix}/share/gnomesword/*
 %{prefix}/share/locale/*
 %{prefix}/share/pixmaps/*
 %doc ABOUT-NLS AUTHORS COPYING COPYING-DOCS INSTALL NEWS README TODO
 %{prefix}/share/applications/%{name}.desktop
 
 %changelog
+* Sun Dec 17 2006 Karl Kleinpaste <karl@charcoal.com>
+- reworked a lot of cruft for FC 5 & 6.
 * Wed Jan 14 2004 Andy Piper <andyp@users.sf.net>
 - cleaned build statements thanks to Hugo (will now build as user)
 - changed package name
