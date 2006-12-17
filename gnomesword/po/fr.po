@@ -35,12 +35,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-13 21:34+0100\n"
-"PO-Revision-Date: 2006-12-10 16:49+0100\n"
+"PO-Revision-Date: 2006-12-17 14:28+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -743,11 +743,12 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Le SWORD Project s'est donné pour objectif de créer un ensemble extensible "
-"de logiciels destinés à l'étude de la Bible. L'ossature de base SWORD-permet "
-"de naviguier aisémen tparmi les textes bibliques, commentaires, lexiques, "
-"dictionnaires.. De nombreux logiciels finaux sont developpés en utilisant "
-"cette ossature. Elle leur permet de partager les mêmes modules de textes. "
+"Le SWORD Project s'est donné pour objectif de créer un ensemble "
+"extensible de logiciels destinés à l'étude de la Bible. L'ossature de "
+"base SWORD-permet de naviguer aisément parmi les textes bibliques, "
+"commentaires, lexiques, dictionnaires.. De nombreux logiciels finaux "
+"sont développés en utilisant cette ossature. Elle leur permet de "
+"partager les mêmes modules de textes. "
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -759,7 +760,7 @@ msgstr "Version de Sword"
 
 #: ../src/gnome2/about_sword.c:161
 msgid "Modules can be downloaded from the SWORD Project"
-msgstr "Les extes sont disponibles sur le site du  SWORD Project"
+msgstr "Modules à télécharger depuis le site du  SWORD Project"
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -878,7 +879,7 @@ msgstr "En-têtes"
 #: ../src/gnome2/commentary.c:757 ../src/gnome2/commentary_dialog.c:1784
 #: ../src/gnome2/dictlex.c:970 ../src/gnome2/gbs.c:790
 msgid "Variants"
-msgstr "Variante"
+msgstr "Variantes"
 
 # src/gs_preferences_dlg.c
 #: ../src/gnome2/bibletext.c:1039 ../src/gnome2/bibletext.c:1161
@@ -976,7 +977,7 @@ msgstr "Ajouter"
 
 #: ../src/gnome2/bookmarks_menu.c:917
 msgid "Label: "
-msgstr "Étiquette"
+msgstr "Étiquette :"
 
 #: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
 msgid "Enter Folder Name"
@@ -1036,7 +1037,7 @@ msgstr "Insére un nouveau signet dans le dossier sélectionné"
 
 #: ../src/gnome2/bookmarks_menu.c:1144
 msgid "_Edit Item"
-msgstr "Éditer l'élément.."
+msgstr "Éditer l'élément"
 
 #: ../src/gnome2/bookmarks_menu.c:1145
 msgid "Edit bookmark item"
@@ -1112,7 +1113,7 @@ msgstr "Fermer sans sauvegarder"
 
 #: ../src/gnome2/dialog.c:755
 msgid "GnomeSword:"
-msgstr "GnomeSword:"
+msgstr "GnomeSword :"
 
 #: ../src/gnome2/dialog.c:856
 msgid "Close _without Saving"
@@ -1120,11 +1121,11 @@ msgstr "Ferme la fenêtre de sortie"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
-msgstr "Ouvrir.."
+msgstr "Ouvrir"
 
 #: ../src/gnome2/fileselection.c:266
 msgid "Save StudyPad File"
-msgstr "Enregistrer le fichier du bloc-Notes d'étude"
+msgstr "Enregistre le fichier du bloc-Notes"
 
 #: ../src/gnome2/find_dialog.c:227
 msgid "Enter Word or Phrase"
@@ -1253,7 +1254,7 @@ msgstr "Le document n'a pas pu être imprimé"
 
 #: ../src/gnome2/main_menu.c:679
 msgid "Open Study_Pad"
-msgstr "Bloc-notes..."
+msgstr "Bloc-notes"
 
 #: ../src/gnome2/main_menu.c:680
 msgid "Open the StudyPad editor"
@@ -1389,7 +1390,7 @@ msgstr "Ouvre l'aide de GnomeSword"
 
 #: ../src/gnome2/main_menu.c:842
 msgid "_About the SWORD Project ..."
-msgstr "À propos du SWORD Project"
+msgstr "À propos du SWORD Project·..."
 
 #: ../src/gnome2/main_menu.c:843
 msgid "More information about the SWORD Project"
@@ -1397,7 +1398,7 @@ msgstr "Plus d'Information à propos du SWORD Project"
 
 #: ../src/gnome2/main_menu.c:848
 msgid "About _GnomeSword ..."
-msgstr "À propos de GnomeSword..."
+msgstr "À propos de GnomeSword ..."
 
 #: ../src/gnome2/main_menu.c:849
 msgid "About this application"
@@ -1578,7 +1579,7 @@ msgstr "Enregistrer note"
 
 #: ../src/gnome2/note_editor.c:1205
 msgid "Export Note"
-msgstr "Exporter la note"
+msgstr "Exporter note"
 
 #: ../src/gnome2/note_editor.c:1210
 msgid "Delete Note"
@@ -1689,11 +1690,11 @@ msgstr "Êtes-vous certain de supprimer:"
 
 #: ../src/gnome2/search_sidebar.c:176 ../ui/search-dialog.glade.h:52
 msgid "Start searching"
-msgstr "Démarrer la recherche"
+msgstr "Démarre la requête"
 
 #: ../src/gnome2/search_sidebar.c:192
 msgid "Search Module"
-msgstr "Rechercher dans :"
+msgstr "Module"
 
 #: ../src/gnome2/search_sidebar.c:206
 msgid "Bible"
@@ -1706,7 +1707,7 @@ msgstr "Commentaire"
 
 #: ../src/gnome2/search_sidebar.c:229
 msgid "Search Type"
-msgstr "Type de recherche :"
+msgstr "Type de requête"
 
 #: ../src/gnome2/search_sidebar.c:243 ../ui/search-dialog.glade.h:37
 msgid "Multi word"
@@ -1718,23 +1719,23 @@ msgstr "Phrase exacte"
 
 #: ../src/gnome2/search_sidebar.c:276
 msgid "Search Options"
-msgstr "Options de la recherche :"
+msgstr "Options de la requête"
 
 #: ../src/gnome2/search_sidebar.c:304
 msgid "Search Scope"
-msgstr "Étendue de la recherche :"
+msgstr "Plage de versets"
 
 #: ../src/gnome2/search_sidebar.c:317
 msgid "No scope"
-msgstr "Pas de limites"
+msgstr "Sans limites"
 
 #: ../src/gnome2/search_sidebar.c:327
 msgid "Use bounds"
-msgstr "Avec limites"
+msgstr "Limites définies"
 
 #: ../src/gnome2/search_sidebar.c:336
 msgid "Last search"
-msgstr "Limites précédentes"
+msgstr "Dernière requête"
 
 #: ../src/gnome2/search_sidebar.c:351
 msgid "Bounds"
@@ -1924,8 +1925,8 @@ msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
 "word is clicked"
 msgstr ""
-"Lexique grec à afficher dans la fenêtre dictionnaire et lexique quand un "
-"lien ou un mot est cliqué"
+"Lexique grec à afficher dans la fenêtre dictionnaire quand un "
+"lien ou un mot est sélectionné"
 
 #: ../src/gnome2/setup_druid.c:1028 ../ui/prefs.glade.h:36
 msgid "Hebrew Lexicon"
@@ -1937,8 +1938,8 @@ msgid ""
 "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or "
 "word is clicked"
 msgstr ""
-"Lexique hébreu à afficher dans la fenêtre dictionnaire et lexiqueh quand un "
-"lien ou un mot est cliqué"
+"Lexique hébreu à afficher dans la fenêtre dictionnaire quand un "
+"lien ou un mot est sélectionné"
 
 #: ../src/gnome2/setup_druid.c:1053 ../ui/prefs.glade.h:28
 msgid "Daily Devotional"
@@ -2033,7 +2034,7 @@ msgstr "non chargé"
 
 #: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
-msgstr "Bloc-notes d'étude"
+msgstr "Bloc-notes"
 
 #: ../src/gnome2/toolbar_nav.c:535
 msgid "Move backwards through history"
@@ -2058,7 +2059,7 @@ msgstr "Change de verset"
 #: ../src/gnome2/toolbar_nav.c:780
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
-"Saisir un verset au format <livre> <chap>:<verset>(ex: Jn 3:16) puis valider"
+"Saisir un verset au format <livre> <chapitre>:<verset>(ex: Jn 3:16) puis valider par appui sur la touche Entrée"
 
 #: ../src/gnome2/utilities.c:271
 #, c-format
@@ -2290,7 +2291,7 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>Attention:</b> Prudence dans les pays réfracaires à la Bible"
+msgstr "<b>Attention:</b> Prudence dans les zones de persécution"
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
@@ -2338,7 +2339,7 @@ msgstr "Rép Sword-sys"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Found</b>"
-msgstr "<b>Résultats</b>"
+msgstr "<b>Réponses</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>List Name</b>"
@@ -2350,11 +2351,11 @@ msgstr "<b>Listes de modules</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Modules</b>"
-msgstr "<b>Module</b>"
+msgstr "<b>Modules</b>"
 
 #: ../ui/search-dialog.glade.h:5
 msgid "<b>Options</b>"
-msgstr "<b>Options</b>"
+msgstr "<b>Options de la requête</b>"
 
 #: ../ui/search-dialog.glade.h:6
 msgid "<b>Preview</b>"
@@ -2362,31 +2363,31 @@ msgstr "<b>Aperçu</b>"
 
 #: ../ui/search-dialog.glade.h:7
 msgid "<b>Range Name</b>"
-msgstr "<b>Nom de la sélection</b>"
+msgstr "<b>Nom de la plage</b>"
 
 #: ../ui/search-dialog.glade.h:8
 msgid "<b>Range Text</b>"
-msgstr "<b>Étendue de la sélection</b>"
+msgstr "<b>Limites de la plage</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Ranges</b>"
-msgstr "<b>Sélections</b>"
+msgstr "<b>Plages de versets</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Results Display Options</b>"
-msgstr "<b>Options</b>"
+msgstr "<b>Options d'affichage</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Scope</b>"
-msgstr "<b>Étendue</b>"
+msgstr "<b>Plage de versets</b>"
 
 #: ../ui/search-dialog.glade.h:12
 msgid "<b>Search Results</b>"
-msgstr "<b>Résultats de recherche</b>"
+msgstr "<b>Résultats</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Type</b>"
-msgstr "<b>Type de recherche </b>"
+msgstr "<b>Type de requête </b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "Add Modules"
@@ -2394,11 +2395,11 @@ msgstr "Ajout de modules"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Advanced Search"
-msgstr "Recherche avancée.."
+msgstr "Recherche avancée"
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Attribute Search"
-msgstr "Attributs"
+msgstr "Attributs de la requêe"
 
 #: ../ui/search-dialog.glade.h:17
 msgid "Attributes"
@@ -2410,7 +2411,7 @@ msgstr "Efface tous les modules de la liste"
 
 #: ../ui/search-dialog.glade.h:19
 msgid "Clear lists for new search"
-msgstr "Efface les résutats de la recherche"
+msgstr "Efface tous les résultats"
 
 #: ../ui/search-dialog.glade.h:20
 msgid "Create a new module list"
@@ -2418,31 +2419,31 @@ msgstr "Crée une nouvelle liste de modules"
 
 #: ../ui/search-dialog.glade.h:21
 msgid "Create new custom range"
-msgstr "Crée une nouvelle sélection personnalisée"
+msgstr "Crée une nouvelle plage de verrsets"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Current results"
-msgstr "Résultats actuels"
+msgstr "Dernière requête"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Custom Lists"
-msgstr "Listes personnalisées"
+msgstr "Listes de modules"
 
 #: ../ui/search-dialog.glade.h:24
 msgid "Custom Ranges"
-msgstr "Sélections personnalisées"
+msgstr "Plages de versets"
 
 #: ../ui/search-dialog.glade.h:25
 msgid "Custom list"
-msgstr "Liste personnalisée"
+msgstr "Liste prédéfinie"
 
 #: ../ui/search-dialog.glade.h:26
 msgid "Custom range"
-msgstr "Sélections personnalisées"
+msgstr "Plage prédéfinie"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Delete selected range"
-msgstr "Supprime la sélection"
+msgstr "Supprime la plage sélectionnée"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Delete the selected list"
@@ -2450,20 +2451,19 @@ msgstr "Supprime la liste sélectionnée"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Entire module"
-msgstr "Module en entier"
+msgstr "Module entier"
 
 #: ../ui/search-dialog.glade.h:31
 msgid "In modules that have Footnotes"
-msgstr "Affiche les notes de bas de page éventuelles"
+msgstr "Inclut les notes de bas de page dans l'affichage des versets "
 
 #: ../ui/search-dialog.glade.h:32
 msgid "In modules that have Morphological Tags"
-msgstr ""
-"Affiche les étiquettes morphologiques si elles sont présentes dans le module"
+msgstr "Inclut les étiquettes morphologiques dans l'affichage des versets"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "In modules that have Strong's Numbers"
-msgstr "Affiche les nombres de Strong s'ils sont présents dans le module"
+msgstr "Inclut les nombres de Strong dans l'affichage des versets"
 
 #: ../ui/search-dialog.glade.h:35
 msgid "Module Selection"
@@ -2471,7 +2471,7 @@ msgstr "Sélection de module"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "Module list"
-msgstr "Liste de modules"
+msgstr "Plusieurs modules"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Open a dialog to select modules to add to the list"
@@ -2483,11 +2483,11 @@ msgstr "Supprime le module sélectionné de la liste"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Results"
-msgstr "Résultats de la recherche"
+msgstr "Résultats"
 
 #: ../ui/search-dialog.glade.h:42
 msgid "Save custom range"
-msgstr "Enregistre la sélection personnalisée"
+msgstr "Enregistre la plage de versets"
 
 #: ../ui/search-dialog.glade.h:43
 msgid "Save search results as bookmarks"
@@ -2495,27 +2495,27 @@ msgstr "Enregistre les résultats de la recherche comme signets"
 
 #: ../ui/search-dialog.glade.h:44
 msgid "Save the module list"
-msgstr "Enregistre la liste des modules"
+msgstr "Enregistre la liste de modules"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Search  Criteria"
-msgstr "Critères de recherche"
+msgstr "Critères"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Search entire module"
-msgstr "Recherche dans le module entier"
+msgstr "La requête s'exécute sur tous les versets"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Show Footnotes"
-msgstr "Notes de bas de page"
+msgstr "Avec notes de bas de page"
 
 #: ../ui/search-dialog.glade.h:48
 msgid "Show Morphological Tags"
-msgstr "Étiquettes morphologiques"
+msgstr "Avec étiquettes morphologiques"
 
 #: ../ui/search-dialog.glade.h:49
 msgid "Show Strong's Numbers"
-msgstr "Nombres de Strong"
+msgstr "Avec nombres de Strong"
 
 #: ../ui/search-dialog.glade.h:50
 msgid "Show in main window"
@@ -2523,27 +2523,27 @@ msgstr "Affiche le résultat dans la fenêtre principale"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Single module"
-msgstr "Un seul module"
+msgstr "Module unique"
 
 #: ../ui/search-dialog.glade.h:53
 msgid "Use a custom module list for the search"
-msgstr "Recherche dans une liste de modules personnalisée"
+msgstr "La requête s'exécute dans une liste de modules prédéfinie"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "Use a custom range for the scope of the search"
-msgstr "Recherche en utilisant la sélection personnalisée de limites"
+msgstr "La requête s'exécute sur une plage prédéfinie de versets"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Use a single module for the search"
-msgstr "Recherche dans un seul module"
+msgstr "La requête s'exécute sur  un seul module"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Use the current module list for the search"
-msgstr "Recherche dans la liste actuelle des modules"
+msgstr "La requête s'exécute sur plusieurs modules"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Use the results of the last search as the scope of the search"
-msgstr "Recherche en prenant  les derniers résultats comme limites"
+msgstr "La requête s'exécute uniquement sur les versets retournés lors de la requête précédente"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "e.g. Matt-John;Rev4"
