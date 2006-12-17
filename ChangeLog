@@ -1,3 +1,7 @@
+2006-12-17  karl <karl@charcoal.com>
+
+	* updated gnomesword.spec.in
+
 2006-12-14  karl <karl@charcoal.com>
 
 	* fixed configure.in glitch: fr_FR => fr.
