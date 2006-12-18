@@ -1,6 +1,9 @@
 2006-12-13  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1617225: gnomesword crashes, when clicking on combobox...
+	* fixed bug: gnomesword crashes, when clicking left right arrows on dict bar
+	* fixed bug: gnomesword crashes, when clicking <view context> in 
+	  parallel view with less that 5 modules selected.
 
 2006-12-17  karl <karl@charcoal.com>
 
