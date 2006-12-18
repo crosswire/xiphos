@@ -694,7 +694,8 @@ void main_dictionary_entry_changed(char * mod_name)
 	gchar *key = NULL;
 	gchar *key2 = NULL;
 	
-	
+	if(!mod_name) 
+		return;
 	if(strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
@@ -758,6 +759,8 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	
 	menu = gtk_menu_new();
 	
+	if(!settings.havedict || !mod_name)
+		return NULL;
 	if(strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
