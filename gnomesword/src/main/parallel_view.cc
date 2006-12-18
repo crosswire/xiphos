@@ -1358,27 +1358,26 @@ void main_update_parallel_page_detached(void)
 
 void main_swap_parallel_with_main(char *intmod)
 {
-	if (!strcmp(settings.parallel5Module, intmod)) {
+	if ((settings.parallel5Module) && !strcmp(settings.parallel5Module, intmod)) {
 		settings.parallel5Module = xml_get_value("modules", "bible");
 	}
-	if (!strcmp(settings.parallel4Module, intmod)) {
+	if ((settings.parallel4Module) && !strcmp(settings.parallel4Module, intmod)) {
 		settings.parallel4Module = xml_get_value("modules", "bible");
 	}
-	if (!strcmp(settings.parallel3Module, intmod)) {
+	if ((settings.parallel3Module) && !strcmp(settings.parallel3Module, intmod)) {
 		settings.parallel3Module = xml_get_value("modules", "bible");
 	}
-	if (!strcmp(settings.parallel2Module, intmod)) {
+	if ((settings.parallel2Module) && !strcmp(settings.parallel2Module, intmod)) {
 		settings.parallel2Module = xml_get_value("modules", "bible");
 	}
-	if (!strcmp(settings.parallel1Module, intmod)) {
+	if ((settings.parallel1Module) && !strcmp(settings.parallel1Module, intmod)) {
 		settings.parallel1Module = xml_get_value("modules", "bible");
 	}
 	main_display_bible(intmod, settings.currentverse);
 	main_update_parallel_page();
-/*	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widgets.
-						   button_parallel_view),FALSE); */
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
+                                             0);
 }
-
 
 
 /******************************************************************************
