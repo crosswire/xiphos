@@ -384,7 +384,9 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		buf = main_get_striptext_from_string(settings.MainWindowModule, 
 						key);	
 		
+#ifdef DEBUG
 		g_message(buf);
+#endif
 		if(buf == NULL) return;
 		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
