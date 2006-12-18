@@ -1,6 +1,7 @@
 2006-12-17  karl <karl@charcoal.com>
 
 	* updated gnomesword.spec.in
+	* move src/gnome/html.c's g_message inside #ifdef DEBUG.
 
 2006-12-14  karl <karl@charcoal.com>
 
