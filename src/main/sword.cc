@@ -849,6 +849,10 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 void main_dictionary_button_clicked(gint direction)
 {	
 	gchar *key = NULL;
+	
+	if(!settings.havedict || !settings.DictWindowModule)
+		return;
+		
 	backend->set_module_key(settings.DictWindowModule, 
 				settings.dictkey);
 	if(direction == 0)
