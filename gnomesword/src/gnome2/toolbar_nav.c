@@ -348,7 +348,7 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
-	gchar *buf = NULL;
+	//gchar *buf = NULL;
 	GtkTreeIter iter;
 	gsize bytes_read;
 	gsize bytes_written;
@@ -358,11 +358,11 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry4_changed");
-#endif
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
+#ifdef DEBUG
+	g_message("on_comboboxentry4_changed: %s",book);
+#endif
 	//      g_error_free (error);
 /*	key = g_convert(book,
 			     -1,
@@ -377,13 +377,13 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 		return;
 	}*/
 	url = g_strdup_printf("sword:///%s 1:1", book);
-	buf = g_strdup_printf("%s 1:1", book);
+	//buf = g_strdup_printf("%s 1:1", book);
 
 	main_url_handler(url, TRUE);
-	main_navbar_set(navbar_main, buf);
+	//main_navbar_set(navbar_main, buf);
 	g_free(url);
 	g_free(book);
-	g_free(buf);
+	//g_free(buf);
 	//g_free(key);
 }
 
@@ -394,7 +394,7 @@ on_comboboxentry5_changed(GtkComboBox * combobox, gpointer data)
 	gchar *url = NULL;
 	gchar *book = NULL;
 	gchar *chapter = NULL;
-	gchar *buf = NULL;
+	//gchar *buf = NULL;
 	GtkTreeIter iter;
 
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
@@ -419,14 +419,14 @@ on_comboboxentry5_changed(GtkComboBox * combobox, gpointer data)
 			   -1);
 
 	url = g_strdup_printf("sword:///%s %s:1", book, chapter);
-	buf = g_strdup_printf("%s %s:1", book, chapter);
+	//buf = g_strdup_printf("%s %s:1", book, chapter);
 	main_url_handler(url, TRUE);
-	main_navbar_set(navbar_main, buf);
+	//main_navbar_set(navbar_main, buf);
 
 	g_free(url);
 	g_free(book);
 	g_free(chapter);
-	g_free(buf);
+	//g_free(buf);
 }
 
 
@@ -437,7 +437,7 @@ on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	gchar *book = NULL;
 	gchar *chapter = NULL;
 	gchar *verse = NULL;
-	gchar *buf = NULL;
+	//gchar *buf = NULL;
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
@@ -475,15 +475,15 @@ on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 
 	url =
 	    g_strdup_printf("sword:///%s %s:%s", book, chapter, verse);
-	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
+	//buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
 	main_url_handler(url, TRUE);
-	main_navbar_set(navbar_main, buf);
+	//main_navbar_set(navbar_main, buf);
 
 	g_free(url);
 	g_free(book);
 	g_free(chapter);
 	g_free(verse);
-	g_free(buf);
+	//g_free(buf);
 }
 
 /******************************************************************************

@@ -85,6 +85,7 @@ extern GtkWidget *cbe_freeform_lookup;
 extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
+char *sword_locale = NULL;
 
 
 /******************************************************************************
@@ -513,7 +514,6 @@ char *main_get_path_to_mods(void)
 
 void main_init_backend(void)
 {	
-	char *sword_locale = NULL;
 	char *sys_locale = NULL;
 	const char *lang = getenv("LANG");
 	SWMgr mgr;
@@ -536,7 +536,7 @@ void main_init_backend(void)
 	sys_locale = strdup(lang);
 	settings.spell_language = strdup(sys_locale);	
 	main_init_lists();
-	free((char*)sword_locale);
+//	free((char*)sword_locale);
 	free(sys_locale);	
 }
 
@@ -559,6 +559,7 @@ void main_init_backend(void)
 
 void main_shutdown_backend(void)
 {
+	free((char*)sword_locale);
 	if(backend) 
 	        delete backend; 
 	backend = NULL;
