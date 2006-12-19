@@ -56,6 +56,7 @@ extern "C" {
 
 #define UTF_8 "UTF-8" 
 extern char *OLD_CODESET;
+extern char *sword_locale;
 /*** end defs ***/
 
 /*** function prototypes ***/
