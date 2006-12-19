@@ -180,11 +180,13 @@ int settings_init(int new_configs, int new_bookmarks)
 #endif
 		settings.first_run = TRUE;
 
-		sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/modules/texts");
-		if (access(sword_dir, F_OK) == -1) {
+		main_init_lists();
+		if (settings.havebible == 0) {
 			if (gui_yes_no_dialog(GS_NET_PERMISSION)) {
-				gui_open_mod_mgr_initial_run();					
-				if (access(sword_dir, F_OK) == -1) {
+				main_shutdown_list();
+				gui_open_mod_mgr_initial_run();
+				main_init_lists();
+				if (settings.havebible == 0) {
 					gui_generic_warning
 					    ("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
 					exit(1);
@@ -197,7 +199,7 @@ int settings_init(int new_configs, int new_bookmarks)
 				exit(1);
 			}
 		}
-		g_free(sword_dir);
+		main_shutdown_list();
 
 		main_init_lists();
 		xml_create_settings_file(settings.fnconfigure);
