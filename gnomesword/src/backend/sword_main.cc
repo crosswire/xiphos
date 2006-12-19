@@ -488,8 +488,16 @@ char *BackEnd::get_valid_key(const char *key) {
 	vkey.AutoNormalize(1);
 	vkey = mykey;       
 	g_free(mykey);
-	
-	mykey = g_convert((char*)vkey.getShortText(),
+	if((sword_locale) && (!strcmp(sword_locale,"en")))
+		mykey = g_convert((char*)vkey.getShortText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	else
+		mykey = g_convert((char*)vkey.getText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
