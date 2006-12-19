@@ -1,3 +1,7 @@
+2006-12-19  terry <tbiggs@users.sf.net>
+
+	* fixed bug #1618324: "philipper" in german version points to philemon
+
 2006-12-19  karl <karl@charcoal.com>
 
 	* fixed bug #1618829: first use, no global modules found
