@@ -121,7 +121,7 @@ client_die_cb (GnomeClient *client, gpointer data)
 void
 gs_session_init (const char *argv0)
 {
-	g_print("\nInitiating GNOME session handler\n\n");
+	/* g_print("\nInitiating GNOME session handler\n\n"); */
 	if (master_client)
 		return;
 
