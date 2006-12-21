@@ -1085,13 +1085,6 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
-	 NULL,
-	 (gpointer) on_show_tabs_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
 	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
