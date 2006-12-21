@@ -10,7 +10,7 @@
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
-  <property name="default_width">575</property>
+  <property name="default_width">665</property>
   <property name="default_height">465</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
