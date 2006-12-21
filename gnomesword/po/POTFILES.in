@@ -8,6 +8,7 @@ src/main/display.cc
 src/main/lists.cc
 src/main/module_dialogs.cc
 src/main/previewer.cc
+src/main/search_dialog.cc
 src/main/sidebar.cc
 src/main/tab_history.c
 # editor Source files

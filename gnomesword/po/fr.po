@@ -34,8 +34,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-13 21:34+0100\n"
-"PO-Revision-Date: 2006-12-19 21:05+0100\n"
+"POT-Creation-Date: 2006-12-21 19:33+0100\n"
+"PO-Revision-Date: 2006-12-21 19:34+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -109,6 +109,43 @@ msgstr "Étiquette morphologique"
 #: ../src/main/module_dialogs.cc:1271
 msgid "Back to "
 msgstr "Revenir à "
+
+#: ../src/main/search_dialog.cc:53 ../src/gnome2/search_dialog.c:55
+msgid "Searching the "
+msgstr "Recherche dans "
+
+#: ../src/main/search_dialog.cc:54 ../src/gnome2/search_dialog.c:56
+msgid " Module"
+msgstr " Module"
+
+#: ../src/main/search_dialog.cc:55 ../src/gnome2/search_dialog.c:57
+msgid "found in "
+msgstr "dans "
+
+#: ../src/main/search_dialog.cc:344
+msgid "Delete Range?"
+msgstr "Supprimer la plage?"
+
+#: ../src/main/search_dialog.cc:345
+msgid "Are you sure you want to delete this range?"
+msgstr "Êtes-vous certain de supprimer cette plage?"
+
+#: ../src/main/search_dialog.cc:571 ../src/main/search_dialog.cc:1053
+#: ../src/main/search_dialog.cc:1074 ../src/gnome2/sidebar.c:1567
+msgid "Search"
+msgstr "Rechercher"
+
+#: ../src/main/search_dialog.cc:625
+msgid "Remove Module?"
+msgstr "Enlever les modules?"
+
+#: ../src/main/search_dialog.cc:626
+msgid "Are you sure you want to remove the selected module?"
+msgstr "Êtes-vous certain de supprimer le module sélectionné?"
+
+#: ../src/main/search_dialog.cc:1493
+msgid "Search finished"
+msgstr "Recherche terminée "
 
 #: ../src/main/sidebar.cc:366
 msgid "verse"
@@ -230,7 +267,7 @@ msgid "Export"
 msgstr "Exporter"
 
 #: ../src/editor/editor_menu.c:720 ../src/editor/toolbar_edit.c:689
-#: ../src/gnome2/html.c:686 ../src/gnome2/note_editor.c:1241
+#: ../src/gnome2/html.c:688 ../src/gnome2/note_editor.c:1241
 msgid "Print"
 msgstr "Imprimer..."
 
@@ -720,11 +757,11 @@ msgstr "Indenter"
 msgid "Indents the paragraphs more"
 msgstr "Augmenter l'indentation"
 
-#: ../src/gnome2/about_gnomesword.c:115
+#: ../src/gnome2/about_gnomesword.c:116
 msgid "Copyright 2000-2006 The GnomeSword Development Team"
 msgstr "Copyright 2000-2006 L'équipe de développement GnomeSword"
 
-#: ../src/gnome2/about_gnomesword.c:118
+#: ../src/gnome2/about_gnomesword.c:119
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
@@ -743,12 +780,11 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Le SWORD Project s'est donné pour objectif de créer un ensemble "
-"extensible de logiciels destinés à l'étude de la Bible. L'ossature de "
-"base SWORD-permet de naviguer aisément parmi les textes bibliques, "
-"commentaires, lexiques, dictionnaires.. De nombreux logiciels finaux "
-"sont développés en utilisant cette ossature. Elle leur permet de "
-"partager les mêmes modules de textes. "
+"Le SWORD Project s'est donné pour objectif de créer un ensemble extensible "
+"de logiciels destinés à l'étude de la Bible. L'ossature de base SWORD-permet "
+"de naviguer aisément parmi les textes bibliques, commentaires, lexiques, "
+"dictionnaires.. De nombreux logiciels finaux sont développés en utilisant "
+"cette ossature. Elle leur permet de partager les mêmes modules de textes. "
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -1239,16 +1275,16 @@ msgstr "Arrrêt de GnomeSword"
 msgid "Unlock "
 msgstr "Entrez la clé de déverrouillage"
 
-#: ../src/gnome2/html.c:587
+#: ../src/gnome2/html.c:589
 #, c-format
 msgid "Page %d of %d"
 msgstr "Page %d de %d"
 
-#: ../src/gnome2/html.c:736
+#: ../src/gnome2/html.c:738
 msgid "Print Preview"
 msgstr "Aperçu avat impression"
 
-#: ../src/gnome2/html.c:742
+#: ../src/gnome2/html.c:744
 msgid "Failed to print the document"
 msgstr "Le document n'a pas pu être imprimé"
 
@@ -1660,18 +1696,6 @@ msgstr "Onglets et volets"
 msgid "Main"
 msgstr "Base"
 
-#: ../src/gnome2/search_dialog.c:55
-msgid "Searching the "
-msgstr "Rechercher le"
-
-#: ../src/gnome2/search_dialog.c:56
-msgid " Module"
-msgstr " Module"
-
-#: ../src/gnome2/search_dialog.c:57
-msgid "found in "
-msgstr "trouvé dans "
-
 #: ../src/gnome2/search_dialog.c:678
 msgid "Clear List?"
 msgstr "Effacer la liste?"
@@ -1925,8 +1949,8 @@ msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
 "word is clicked"
 msgstr ""
-"Lexique grec à afficher dans la fenêtre dictionnaire quand un "
-"lien ou un mot est sélectionné"
+"Lexique grec à afficher dans la fenêtre dictionnaire quand un lien ou un mot "
+"est sélectionné"
 
 #: ../src/gnome2/setup_druid.c:1028 ../ui/prefs.glade.h:36
 msgid "Hebrew Lexicon"
@@ -1938,8 +1962,8 @@ msgid ""
 "Which Hebrew Lexicon to display in Dictionary/Lexicon Window when a link or "
 "word is clicked"
 msgstr ""
-"Lexique hébreu à afficher dans la fenêtre dictionnaire quand un "
-"lien ou un mot est sélectionné"
+"Lexique hébreu à afficher dans la fenêtre dictionnaire quand un lien ou un "
+"mot est sélectionné"
 
 #: ../src/gnome2/setup_druid.c:1053 ../ui/prefs.glade.h:28
 msgid "Daily Devotional"
@@ -2004,10 +2028,6 @@ msgstr "_Liste de versets"
 msgid "Bookmarks"
 msgstr "Signets"
 
-#: ../src/gnome2/sidebar.c:1567
-msgid "Search"
-msgstr "Rechercher"
-
 #: ../src/gnome2/sidebar.c:1577
 msgid "Verse List"
 msgstr "_Liste de versets"
@@ -2059,7 +2079,8 @@ msgstr "Change de verset"
 #: ../src/gnome2/toolbar_nav.c:780
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
-"Saisir un verset au format <livre> <chapitre>:<verset>(ex: Jn 3:16) puis valider par appui sur la touche Entrée"
+"Saisir un verset au format <livre> <chapitre>:<verset>(ex: Jn 3:16) puis "
+"valider par appui sur la touche Entrée"
 
 #: ../src/gnome2/utilities.c:271
 #, c-format
@@ -2226,11 +2247,11 @@ msgstr "Notes personnelles"
 
 #: ../ui/prefs.glade.h:49
 msgid "Resize images"
-msgstr "Réduction des images"
+msgstr "Réduire les images"
 
 #: ../ui/prefs.glade.h:50
 msgid "Scroll to Previous/Next Chapter"
-msgstr "Défilement du chapître"
+msgstr "Défilement continu des chapitres"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:51
@@ -2298,7 +2319,8 @@ msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Attention</b> Ne pas utiliser le téléchargement dans·les·pays où être détecté représente un danger"
+"<b>Attention</b> Ne pas utiliser le téléchargement dans·les·pays où être "
+"détecté représente un danger"
 
 #: ../ui/module-manager.glade.h:9
 msgid "Continue"
@@ -2542,7 +2564,9 @@ msgstr "La requête s'exécute sur plusieurs modules"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Use the results of the last search as the scope of the search"
-msgstr "La requête s'exécute uniquement sur les versets retournés lors de la requête précédente"
+msgstr ""
+"La requête s'exécute uniquement sur les versets retournés lors de la requête "
+"précédente"
 
 #: ../ui/search-dialog.glade.h:58
 msgid "e.g. Matt-John;Rev4"
@@ -2671,9 +2695,6 @@ msgstr "Enregistre à l'aide de l'interface  PersistFile"
 
 #~ msgid "Local Source"
 #~ msgstr "Support local"
-
-#~ msgid "Remove Modules"
-#~ msgstr "Enlever les modules"
 
 #~ msgid "Refresh remote sources"
 #~ msgstr "Mise à jour de la liste des modules disponibles"
