@@ -813,19 +813,6 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
-	 NULL,
-	 (gpointer) on_show_tabs_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
-	 NULL,
-	 (gpointer) on_unlock_module_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
-	 0, (GdkModifierType) 0, NULL},
-        {
 	 GNOME_APP_UI_ITEM, N_("Display Book Heading"),
 	 NULL,
 	 (gpointer) on_book_heading_activate, NULL, NULL,
@@ -836,6 +823,12 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_chapter_heading_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
+	 NULL,
+	 (gpointer) on_unlock_module_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -869,8 +862,8 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation"        
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
-	gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module"
-	gtk_widget_hide(menu1_uiinfo[8].widget);
+	//gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module"
+	//gtk_widget_hide(menu1_uiinfo[8].widget);
 	gtk_widget_hide(menu1_uiinfo[9].widget);
 
 
@@ -994,7 +987,7 @@ void gui_create_pm_commentary(void)
 		
 	}
 	if(main_has_cipher_tag(mod_name))
-		gtk_widget_show(menu1_uiinfo[7].widget);
+		gtk_widget_show(menu1_uiinfo[9].widget);
 	
 	
 	/* 
