@@ -1,0 +1,88 @@
+________________________
+
+GNOMESWORD RELEASE NOTES
+________________________
+
+Release 2.2
+25 Dec 2006
+
+Known deficiencies:
+
+1. Footnote body search was very recently broken by other needed work
+   in Advanced Search.  Other "attribute" searches (esp. Strong's
+   refs) work, but not footnote body search.  This will be addressed
+   early in the next development cycle: Advanced Search is due for
+   another round of revamping, largely to simplify and enhance the
+   operation of attribute searches.  See feature request #1615402.
+
+2. The alternate HTML renderer code under the "mozembed" #ifdef is
+   not functional at this time, and we do not know if such capability
+   will return in a future release.  This means that the configure
+   options --with-firefox and --with-seamonkey do not function.
+
+3. The verse number font color preference is ignored; this will go
+   away entirely soon, as verse numbers are links to themselves, for
+   re-aligning verse navigation to the verse in question, which in
+   turn tracks the commentary to the same verse.  See feature request
+   #1620641.
+
+4. The module manager offers installation directory options of
+   ~/.sword as well as the system Sword directory, typically
+   /usr/share/sword, iff that directory is writable by the user.
+   Future work will involve efforts at a superuser password query
+   to obtain temporary access to the system directory, but in the
+   current release, "chown -R you.yourgroup" is necessary, prior to
+   running GnomeSword.  See feature request #1618837.
+
+Bug reports addressed since 2.1.10:
+1620542  Crashes on "View Context"
+1618998  Displays frame then hangs
+1618829  first use: no global modules found by gnomesword
+1618324  "philipper" in german version points to philemon
+1617225  gnomesword crashes, when clicking on combobox...
+1613439  Sidebar setting does not survive program restart
+
+Feature requests pending:
+1620641  "Verse numbers" font color is ignored
+1620313  Couple of bugs with module manager operation
+1618837  global install of modules
+1615402  advanced search needs help
+1613239  improve command line use of "sword://"
+1194044  prayer list
+1193235  Allow text to be displayed double space
+1124274  GnomeSword for Windows
+ 901894  Drop book list for search limit
+Requests 1613239 and above are post-2.1.10 release.  Older requests
+represent capabilities for which the needed underlying support does
+not exist or which represent an extremely complicated re-working of
+GnomeSword from its current state.
+________________________
+
+Release 2.1.10
+09 Dec 2006
+
+Recent bug reports addressed:
+1605640  Change Font does nothing
+1605638  Printing does not work
+1602532  Uninstallable with Ubuntu Edgy Eft
+1602059  Images in Personal Commentary don't show if path has spaces
+1601897  search too broad on strongs
+1601744  title of module in titlebar not displaying for GetLut1545
+1596747  Crash on "search", no content displayed
+1594151  previewer-anchored footnotes needed
+1582986  Crashed
+1576964  GnomeSword fails to build with libsword6-dev
+1575275  meta chars in new bookmark folders
+1551501  Fix build with -Wl,--as-needed
+1536274  clickable links to external sources don't work
+1535370  feature request: track verse change across all open tabs
+1535122  2.1.7 has typos in commentary_dialog.c
+1521926  2.1.7 seems unaware of large portions of commentaries
+1507371  2.1.7 forgets which commentary is in use
+1505753  2.1.7 mishandles crossrefs in headers
+
+This list is incomplete, as these notes did not exist to track such
+reports until recently, but represents the major reports fixed since
+the middle of the 2.1 development cycle at a time when many very old
+bug reports were finally addressed.
+________________________
