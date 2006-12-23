@@ -173,7 +173,7 @@ int settings_init(int new_configs, int new_bookmarks)
 		"settings.xml");
 	
 	/* if settings.xml does not exist create it */
-	if (access(settings.fnconfigure, F_OK) == -1) {
+	if ((access(settings.fnconfigure, F_OK) == -1) || new_configs) {
 		/* must be first run */
 #ifdef DEBUG 
 		g_print("\nFirst Run: need to create settings!\n");
