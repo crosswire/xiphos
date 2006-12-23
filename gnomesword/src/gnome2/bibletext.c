@@ -491,11 +491,15 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 	static int scroll = 1;
 	if(!settings.chapter_scroll) return;
 	if(scroll && (adjustment1->value <= adjustment1->lower)) {
+#ifdef DEBUG
 		g_message("\ntop: %g\n",adjustment1->value);
+#endif
 		gui_navbar_handle_spinbutton_click(1, 0);
 		scroll = 0;
 	} else if(scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
+#ifdef DEBUG
 		g_message("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size);
+#endif
 		gui_navbar_handle_spinbutton_click(1, 1);
 		scroll = 0;
 		gtk_adjustment_set_value(adjustment,2);
