@@ -1,24 +1,16 @@
-==================================================================
-Please see INSTALL file before you start.
-==================================================================
-
 ******************************************************************
-GnomeSword requires Gnome ,the Sword libs and GtkHTML-3.x 
+GnomeSword requires Gnome2 ,the Sword libs and GtkHTML3
 ******************************************************************
-
-##################################################################
-GnomeSword uses pspell for spell checking 
-Some of the code for spell checking is from the Bluefish HTML editor 0.6
-##################################################################
-
 
 ******************************************************************
 you can start gnomesword with command line options
-1. gnomesword newconfigs - this will create a new configuration file
-with default settings - if gnomesword will not start this might help
-2. gnomesword newbookmarks - this will create a new bookmark file should
-the old get messed up.
-3. gnomesword newfiles - this will create both the above files
+1. gnomesword2 newconfigs - this will create a new configuration file
+   with default settings - if gnomesword will not start this might help
+2. gnomesword2 newbookmarks - this will create a new bookmark file should
+   the old get messed up.
+3. gnomesword2 newfiles - this will create both the above files
+4. gnomesword2 sword://KJV/1Tim1:15 - will open gnomesword with KJV
+   open to 1 Tim 1:15 in the main window.
 ******************************************************************
 
 GnomeSword started life as the Sword Project's Cheatah program.
@@ -32,4 +24,5 @@ Sword Project and then giving it to the world! God Bless you!
 
 
 We hope that your Bible Study will be enhanced by GnomeSword.
+
 The GnomeSword Development Team
