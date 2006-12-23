@@ -367,7 +367,9 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
 static void on_entry_activate(GtkEntry * entry,
 				   gpointer user_data)
 {
+#ifdef DEBUG
 	g_message("on_entry_activate");
+#endif
 }
 
 

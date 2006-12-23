@@ -127,7 +127,9 @@ static void about_module_display(GString * str, gchar * text)
 
 static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
 {
+#ifdef DEBUG
 	g_message("on_copy_activate");
+#endif
 	gui_copy_html(text_html);
 }
 

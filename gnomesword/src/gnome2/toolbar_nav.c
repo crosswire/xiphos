@@ -331,7 +331,9 @@ on_chapter_button_down_clicked(GtkButton * button, gpointer user_data)
 static void
 on_book_button_up_clicked(GtkButton * button, gpointer user_data)
 {
+#ifdef DEBUG
 	g_message("on_book_button_up_clicked");
+#endif
 	gui_navbar_handle_spinbutton_click(0, 0);
 }
 
