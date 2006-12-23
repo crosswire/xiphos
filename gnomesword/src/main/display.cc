@@ -260,6 +260,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
+	else if (mod_type == DICTIONARY_TYPE)
+		keytext = g_strdup((char*)imodule.KeyText());
 	else
 		keytext = g_convert((char*)imodule.KeyText(),
                              -1,

@@ -56,6 +56,8 @@ extern gboolean do_display;
 
 static 
 gboolean save_through_persist_file(EDITOR * e, const gchar * filename);
+static 
+void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 
 struct _editor {
 	GtkWidget *window;
@@ -157,6 +159,7 @@ delete_note_cb(GtkWidget * widget, gpointer data)
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			main_delete_note(e->module, e->key);
+			load_through_persist_stream("", e);
 		}
 		g_free(info);
 		g_free(buf);
