@@ -346,7 +346,7 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 	gchar *buf = NULL;
 	
 	buf = (gchar*)gtk_entry_get_text(entry);
-	
+//	g_message("dict_key_entry_changed: %s",buf);
 	if(strlen(buf) < 2 )
 		return;
 	
