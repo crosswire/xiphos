@@ -1578,7 +1578,9 @@ GtkWidget *create_fileselection_local_source(void)
 
 void on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
+#ifdef DEBUG
 	g_message("on_destroy");
+#endif
 	mod_mgr_shut_down();
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -2173,7 +2175,9 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
 	g_message(glade_file);
+#endif
 	
 	/* build the widget */
 	if(first_run) {		

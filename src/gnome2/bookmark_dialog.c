@@ -346,7 +346,9 @@ static void create_bookmark_dialog(gchar * label,
 
 	glade_file = gui_general_user_file ("bookmarks.glade", TRUE);
 	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
 	g_message(glade_file);
+#endif
 	
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);
