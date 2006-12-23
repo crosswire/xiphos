@@ -268,7 +268,9 @@ static gchar *gdkcolor_to_hex(GdkColor color, gint websafe)
 					color.green/256, 
 					color.blue/256);
 	}
+#ifdef DEBUG
 	g_message(tmpstr);
+#endif
 	return tmpstr;
 }
 

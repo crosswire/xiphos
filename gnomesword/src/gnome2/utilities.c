@@ -251,7 +251,9 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 		if (!g_path_is_absolute (file))
 		{
 			gchar * cwd, *file1;
+#ifdef DEBUG
 			g_message ("Using %s (usually OK)", file);
+#endif
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();

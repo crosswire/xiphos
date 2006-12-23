@@ -123,12 +123,16 @@ nsresult embed_dialogs_print_real(nsIPrintSettings *options, PRBool preview,
 
 	g_return_val_if_fail (wb, NS_ERROR_FAILURE);
 
+#ifdef DEBUG
 	g_message("not a NS_ERROR_FAILURE 1");
+#endif
 	
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(wb, &rv));
 	if (NS_FAILED(rv) || !print) return NS_ERROR_FAILURE;
 
+#ifdef DEBUG
 	g_message("not a NS_ERROR_FAILURE 2");
+#endif
 	if (!preview)
 	{
 		//GPrintListener *listener = new GPrintListener(print, options, parent);
@@ -226,7 +230,9 @@ gint embed_dialogs_dom_mouse_over(GtkMozEmbed *embed, gpointer dom_event, gpoint
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
+#ifdef DEBUG
 		g_message("nsEvent failed %d",NS_ERROR_FAILURE);
+#endif
 		return NS_ERROR_FAILURE;
 	}
 
@@ -234,14 +240,18 @@ gint embed_dialogs_dom_mouse_over(GtkMozEmbed *embed, gpointer dom_event, gpoint
 	result = nsEvent->GetOriginalTarget(getter_AddRefs(OriginalTarget));
 	if (NS_FAILED(result) || !OriginalTarget) {
 		
+#ifdef DEBUG
 		g_message("OriginalTarget failed %d",NS_ERROR_FAILURE);
+#endif
 		return NS_ERROR_FAILURE;
 	}
 
 	nsCOMPtr<nsIDOMNode> OriginalNode = do_QueryInterface(OriginalTarget);
 	if (!OriginalNode) {
 		
+#ifdef DEBUG
 		g_message("OriginalNode failed %d",NS_ERROR_FAILURE);
+#endif
 		return NS_ERROR_FAILURE;
 	}
 	

@@ -1,3 +1,7 @@
+2006-12-23  karl <karl@charcoal.com>
+
+	* moved all g_message() calls inside #ifdef DEBUG.
+
 2006-12-19  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1618324: "philipper" in german version points to philemon

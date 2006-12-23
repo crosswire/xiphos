@@ -1523,7 +1523,9 @@ on_treeview10_drag_begin               (GtkWidget       *widget,
                                         GdkDragContext  *drag_context,
                                         gpointer         user_data)
 {
+#ifdef DEBUG
 	g_message("on_treeview10_drag_begin");
+#endif
 	
 }
 
@@ -1536,7 +1538,9 @@ on_treeview10_drag_motion              (GtkWidget       *widget,
                                         guint            time,
                                         gpointer         user_data)
 {
+#ifdef DEBUG
 	g_message("on_treeview10_drag_motion");
+#endif
 
   return FALSE;
 }
@@ -1548,7 +1552,9 @@ on_treeview10_drag_leave               (GtkWidget       *widget,
                                         guint            time,
                                         gpointer         user_data)
 {
+#ifdef DEBUG
 	g_message("on_treeview10_drag_leave");
+#endif
 
 }
 
@@ -2472,7 +2478,9 @@ void _create_search_dialog(void)
 	glade_file =
 	    gui_general_user_file("search-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
 	g_message(glade_file);
+#endif
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
