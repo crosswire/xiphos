@@ -458,7 +458,9 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	if(morph_mod)  {		
 		if(strchr(buf,'|')) {
 			gint morphlen = strlen(morph);
-			g_message("buf = %s", buf);	
+#ifdef DEBUG
+			g_message("buf = %s", buf);
+#endif
 			for (i = 0; i < morphlen; i++) {
 				if(morph[i] == '|') {
 					val[i] = '\0';
@@ -469,8 +471,10 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 			val2 = strchr(buf,'|');
 			++val2;
 			
+#ifdef DEBUG
 			g_message("val = %s", val);
 			g_message("val2 = %s", val2);
+#endif
 			morph_buf = g_strdup_printf("%s<br />%s<br /><br />%s<br />%s",
 					val,
 					main_get_rendered_text(morph_mod, (gchar*)val),

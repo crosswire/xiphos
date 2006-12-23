@@ -1630,7 +1630,9 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
+#ifdef DEBUG
 	g_message("main_dialogs_url_handler url = %s",url);
+#endif
 	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url"))
 		return new_url_handler(t,url,clicked);
 	if(strstr(url,"sword://"))
@@ -1800,7 +1802,9 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
 			     TRUE, t);
 		be->set_treekey(t->offset);
+#ifdef DEBUG
 		g_message("offset = %d",t->offset);
+#endif
 	} else
 		be->set_key(t->key);
 	
