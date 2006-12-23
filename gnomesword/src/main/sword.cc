@@ -193,6 +193,9 @@ void main_save_note(	const gchar * module_name,
 #endif
 	backend->save_entry(note_str);
 #endif
+	if((!strcmp(settings.CommWindowModule,module_name)) &&  
+				(!strcmp(settings.currentverse, key_str)))
+		main_display_commentary(module_name, key_str);
 }
 
 /******************************************************************************
@@ -211,8 +214,7 @@ void main_save_note(	const gchar * module_name,
  *   void
  */
 
-void main_delete_note(	const gchar * module_name, 
-								const gchar * key_str)
+void main_delete_note(	const gchar * module_name, const gchar * key_str)
 {
 #ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
@@ -223,6 +225,9 @@ void main_delete_note(	const gchar * module_name,
 #endif
 	backend->delete_entry();
 #endif	
+	if((!strcmp(settings.CommWindowModule,module_name)) &&  
+				(!strcmp(settings.currentverse, key_str)))
+		main_display_commentary(module_name, key_str);
 }
 
 	
@@ -727,8 +732,24 @@ void main_dictionary_entry_changed(char * mod_name)
 
 static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
 {
+	gchar *buf;                                       
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;	
+	
+	buf = g_convert((char*)(gchar*) user_data,
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+#ifdef DEBUG
+	g_message("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf);
+#endif
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), (gchar*) user_data);
 	gtk_widget_activate(widgets.entry_dict);
+	g_free(buf);
 }
 
 /******************************************************************************
@@ -768,9 +789,11 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 		settings.DictWindowModule = xml_get_value(
 					"modules", "dict");
 	}	
-	
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
+#ifdef DEBUG
+	g_message("\nold_key: %s\nkey: %s",old_key,key);
+#endif	
 	key2 = g_utf8_strup(key,strlen(key));
 	
 	backend->set_module_key(mod_name, key2);
@@ -792,25 +815,25 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	new_key = g_strdup((char*)backend->display_mod->KeyText());
 	
 	for (i = 0; i < (count / 2)+1; i++) {
-		free(new_key);
+		//free(new_key);
 		(*backend->display_mod)--;
 		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
                                              -1,
                                              NULL,
                                              &bytes_written,
                                              NULL);*/
-		new_key = g_strdup((char*)backend->display_mod->KeyText());
+		//new_key = g_strdup((char*)backend->display_mod->KeyText());
 	}
 
 	for (i = 0; i < count; i++) {
 		free(new_key);			
 		(*backend->display_mod)++;
-		new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
+		/*new_key = g_locale_to_utf8((char*)backend->display_mod->KeyText(),
                                              -1,
                                              NULL,
                                              &bytes_written,
-                                             NULL);
-		//new_key = g_strdup((char*)backend->display_mod->KeyText());
+                                             NULL);*/
+		new_key = g_strdup((char*)backend->display_mod->KeyText());
 		/* add menu item */
 		item =
 		    gtk_menu_item_new_with_label((gchar *) new_key);
@@ -1063,7 +1086,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		if(navbar_main.module_name) 
 			g_free(navbar_main.module_name);
 		navbar_main.module_name = g_strdup(settings.MainWindowModule);
-		if(navbar_main.key) 
+		if(navbar_main.key)
 			g_free(navbar_main.key);
 		navbar_main.key = g_strdup(settings.currentverse);
 		main_navbar_fill_book_combo(navbar_main);

@@ -1454,7 +1454,6 @@ void BackEnd::save_module_key(char *mod_name, char *key) {
 	char *mod_name_lower =  g_ascii_strdown(mod_name, strlen(mod_name));	
 	char *conffile = g_strdup_printf("%s/%s.conf",main_mgr->configPath,mod_name_lower);
 	SWConfig *myConfig = new SWConfig(conffile);
-	
 	section = myConfig->Sections.find(mod_name);
 	if (section != myConfig->Sections.end()) {
 		entry =  section->second. find("CipherKey");
