@@ -1,3 +1,7 @@
+2006-12-23  terry <tbiggs@users.sf.net>
+
+	* bumped to 2.2-svn revison 1380
+
 2006-12-23  karl <karl@charcoal.com>
 
 	* moved all g_message() calls inside #ifdef DEBUG.
