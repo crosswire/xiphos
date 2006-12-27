@@ -642,9 +642,9 @@ GtkWidget *gui_create_dictionary_pane(void)
 
 static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
-/*	save_module_options(settings.MainWindowModule, (gchar *) data,
+	main_save_module_options(settings.DictWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	gui_display_text(settings.currentverse);*/
+	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
 }
 
 
