@@ -8,6 +8,7 @@ DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 gnomesworddoc_DATA = \
 	README \
+	RELEASE-NOTES \
 	COPYING \
 	COPYING-DOCS \
 	AUTHORS \
