@@ -32,6 +32,7 @@ void main_sidebar_search_percent_update(char percent, void *userData);
 void main_do_sidebar_search(gpointer user_data);
 void main_init_sidebar_search_backend(void);
 void main_delete_sidebar_search_backend(void);
+void main_search_sidebar_fill_bounds_combos(void);
 
 #ifdef __cplusplus
 }

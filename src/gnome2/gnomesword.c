@@ -104,6 +104,7 @@ void frontend_init(void)
 	 */
 	gui_create_sidebar(widgets.epaned);
 	main_init_sidebar_search_backend();
+	main_search_sidebar_fill_bounds_combos();
 	/*
 	 *  parallel stuff
 	 */
