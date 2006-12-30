@@ -134,6 +134,7 @@ void gui_create_search_sidebar(void)
 	GtkWidget *viewport_search;
 	GtkTooltips *tooltips;
 	gchar *header;
+	//GtkListStore *store;
 
 	tooltips = gtk_tooltips_new();
 	//ss = &sss;
@@ -376,21 +377,21 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label2), 1.0, 0.5);
 
-	ss.entryLower = gtk_entry_new();;
+	ss.entryLower = gtk_combo_box_entry_new_text();
 	gtk_widget_show(ss.entryLower);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryLower, 1, 2, 0, 1,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryLower, 114, 22);
-	gtk_entry_set_text(GTK_ENTRY(ss.entryLower), _("Genesis"));
+//	gtk_entry_set_text(GTK_ENTRY(ss.entryLower), _("Genesis"));
 
-	ss.entryUpper = gtk_entry_new();;
+	ss.entryUpper = gtk_combo_box_entry_new_text();
 	gtk_widget_show(ss.entryUpper);
 	gtk_table_attach(GTK_TABLE(table1), ss.entryUpper, 1, 2, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_size_request(ss.entryUpper, 114, 22);
-	gtk_entry_set_text(GTK_ENTRY(ss.entryUpper), _("Revelation"));
+//	gtk_entry_set_text(GTK_ENTRY(ss.entryUpper), _("Revelation"));
 	
 
 	g_signal_connect(GTK_OBJECT(ss.rrbUseBounds),

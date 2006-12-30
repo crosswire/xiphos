@@ -58,12 +58,14 @@ extern "C" {
 #include "gui/tabbed_browser.h"
 #include "gui/gnomesword.h"
 #include "gui/sidebar.h"
+//#include "gui/search_sidebar.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
 
 #include "main/display.hh"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/search_sidebar.h"
 #include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
@@ -1090,6 +1092,7 @@ void main_display_bible(const char * mod_name, const char * key)
 			g_free(navbar_main.key);
 		navbar_main.key = g_strdup(settings.currentverse);
 		main_navbar_fill_book_combo(navbar_main);
+		main_search_sidebar_fill_bounds_combos();
 	}
 	
 	settings.whichwindow = MAIN_TEXT_WINDOW;
