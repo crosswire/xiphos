@@ -24,6 +24,9 @@
 #endif
 #include <gnome.h>
 #include <regex.h>
+//#include <swmgr.h>
+//#include <versekey.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,6 +39,7 @@ extern "C" {
 
 #include "main/search_sidebar.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/xml.h"
  
 #include "gui/search_dialog.h"
@@ -236,10 +240,12 @@ void main_do_sidebar_search(gpointer user_data)
 		backendSearch->clear_search_list();
 		str = g_string_new(" ");
 		g_string_sprintf(str, "%s - %s",
-				 gtk_entry_get_text(GTK_ENTRY
+				 gtk_combo_box_get_active_text(GTK_COMBO_BOX
 						    (ss.entryLower)),
-				 gtk_entry_get_text(GTK_ENTRY
+				 gtk_combo_box_get_active_text(GTK_COMBO_BOX
 						    (ss.entryUpper)));
+				 //gtk_entry_get_text(GTK_COMBO_BOX
+				//		    (ss.entryUpper)));
 		backendSearch->set_range(str->str);
 		backendSearch->set_scope2range();
 		g_string_free(str, TRUE);
@@ -278,4 +284,72 @@ void main_delete_sidebar_search_backend(void)
 {
 	delete backendSearch;
 	
+}
+
+void main_search_sidebar_fill_bounds_combos(void)
+{
+	VerseKey key; 
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
+	char *book = NULL;
+	char *module_name;
+	GtkTreeIter iter;
+	int i = 0, j = 0, x = 2;
+	int testaments;
+	
+	//module_name = settings.sb_search_mod;
+	module_name = g_strdup(settings.MainWindowModule);
+
+	testaments = backendSearch->module_get_testaments(module_name);
+	
+	GtkTreeModel* upper_model = gtk_combo_box_get_model(
+			GTK_COMBO_BOX(ss.entryUpper));
+	gtk_list_store_clear(GTK_LIST_STORE(upper_model));
+	GtkTreeModel* lower_model = gtk_combo_box_get_model(
+			GTK_COMBO_BOX(ss.entryLower));
+	gtk_list_store_clear(GTK_LIST_STORE(lower_model));
+	
+	if (backendSearch->module_has_testament(module_name, 1)) {
+		while(i < key.BMAX[0]) { 			
+			book = g_convert((const char *) key.books[0][i].name,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     &error);
+
+			if(book == NULL) {
+				g_print ("error: %s\n", error->message);
+				g_error_free (error);
+				continue;
+			}
+			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
+			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
+			++i;
+			g_free(book);
+		}
+	}
+	i = 0;
+	if (backendSearch->module_has_testament(module_name, 2)) {
+		while(i < key.BMAX[1]) {			
+			book = g_convert((const char *) key.books[1][i].name,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     &error);
+			if(book == NULL) {
+				g_print ("error: %s\n", error->message);
+				g_error_free (error);
+				continue;
+			}
+			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
+			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
+			++i;
+			g_free(book);
+		}
+	}	
 }
