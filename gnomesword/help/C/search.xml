@@ -131,9 +131,9 @@
 				</varlistentry>
 				<varlistentry>
 					<term><guibutton>Use bounds</guibutton></term>
-					<listitem><para>Selecting this button produces two text 
-					entry boxes marked <guilabel>Lower</guilabel> and
-					<guilabel>Upper</guilabel>. Enter the first book 
+					<listitem><para>Selecting this button produces two dropdown
+					selector boxes marked <guilabel>Lower</guilabel> and
+					<guilabel>Upper</guilabel>. Select the first book
 					to search in the <guilabel>Lower</guilabel> box and
 					the last book to search in the <guilabel>Upper</guilabel>
 					box. The search will begin with the <guilabel>Lower
