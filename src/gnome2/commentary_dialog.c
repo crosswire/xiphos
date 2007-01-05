@@ -677,8 +677,7 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
 			   0, &chapter, -1);
 
-	url = g_strdup_printf("sword:///%s %s:1",
-			      settings.MainWindowModule, book, chapter);
+	url = g_strdup_printf("sword:///%s %s:1", book, chapter);
 	buf = g_strdup_printf("%s %s:1", book, chapter);
 	main_dialogs_url_handler(d, url, TRUE);
 	main_navbar_set(d->navbar, buf);
