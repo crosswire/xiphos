@@ -1,3 +1,7 @@
+2007-01-05  karl <karl@charcoal.com>
+
+	* fixed bug #1628714: dialog commentaries select revelation
+
 2007-01-03  karl <karl@charcoal.com>
 
 	* updated doc for dropdown bounds selector.
