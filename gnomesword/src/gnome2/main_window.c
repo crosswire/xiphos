@@ -203,6 +203,10 @@ void gui_set_bible_comm_layout(void)
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
 				       settings.commpane_hight);
 	
+	if ((settings.showcomms == TRUE)  ||  (settings.showdicts == TRUE)) {
+		gtk_widget_show(widgets.vpaned2);
+	}
+	
 	if (settings.showtexts == FALSE) 
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
 	else
@@ -229,8 +233,8 @@ void gui_set_bible_comm_layout(void)
 				       settings.commpane_hight);
 	}
 	
-	if ((settings.showcomms == FALSE)
-		   && (settings.showdicts == FALSE)) {
+	if ((settings.showcomms == FALSE)  && (settings.showdicts == FALSE)) {
+		gtk_widget_hide(widgets.vpaned2);
 		gtk_paned_set_position(GTK_PANED
 				       (widgets.hpaned),
 				       settings.gs_width);	   
