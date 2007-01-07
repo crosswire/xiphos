@@ -1567,6 +1567,7 @@ static void setup_color_pickers(void)
                                         &color);
 	}
 
+/*
 	if (string_is_color(settings.bible_verse_num_color)) {
 		gdk_color_parse(settings.bible_verse_num_color, &color);
 		gtk_color_button_set_color(
@@ -1578,6 +1579,7 @@ static void setup_color_pickers(void)
 			GTK_COLOR_BUTTON(color_picker.verse_numbers),
                                         &color);
 	}
+*/
 
 	if (string_is_color(settings.link_color)) {
 		gdk_color_parse(settings.link_color, &color);
@@ -1855,9 +1857,11 @@ static void create_preferences_dialog(void)
 	color_picker.text_current_verse = glade_xml_get_widget (gxml, "colorbutton3");
 	g_signal_connect(color_picker.text_current_verse, "color_set",
 			 G_CALLBACK(on_colorbutton3_color_set), NULL);
+/*
 	color_picker.verse_numbers = glade_xml_get_widget (gxml, "colorbutton4");
 	g_signal_connect(color_picker.verse_numbers, "color_set",
 			 G_CALLBACK(on_colorbutton4_color_set), NULL);
+*/
 	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
 	g_signal_connect(color_picker.href_links, "color_set",
 			 G_CALLBACK(on_colorbutton5_color_set), NULL);
