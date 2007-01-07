@@ -1129,8 +1129,8 @@ void create_menu(void)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"
 	gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module"
-	gtk_widget_hide(menu1_uiinfo[8].widget);
-	gtk_widget_hide(menu1_uiinfo[9].widget);
+	//gtk_widget_hide(menu1_uiinfo[8].widget);
+	//gtk_widget_hide(menu1_uiinfo[9].widget);
 
 
 
