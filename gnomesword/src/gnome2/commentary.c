@@ -464,13 +464,13 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 #else	
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
-	g_free(dict_key);
 #endif
-	if (dict_key && mod_name) {
+	if (dict_key && mod_name)
 		main_display_dictionary(mod_name, dict_key);
+	if (dict_key)
 		g_free(dict_key);
+	if (mod_name)
 		g_free(mod_name);
-	}
 }
 
 /******************************************************************************
