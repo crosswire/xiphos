@@ -1,3 +1,7 @@
+2007-01-09  karl <karl@charcoal.com>
+
+	* fixed crash in commentary word lookup.
+
 2007-01-06  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1624757: able to completely disable right panes.

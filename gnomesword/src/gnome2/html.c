@@ -311,11 +311,11 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	key = gtk_html_get_selection_html (html, &len);
 	if ((key == NULL) || (*key == '\0'))
 	{
-	    gui_generic_warning("No selection provided\nSubstituting `Jesus'");
-	    key = ">Jesus<";
+		gui_generic_warning("No selection provided\nSubstituting `Jesus'");
+		key = ">Jesus<";
 	}
-	key = strchr(key,'>');
-	++key;
+	if (buf = strchr(key, '>'))	/* it might not have >< delimiters? */
+		key = buf + 1;
 	keylen = strlen(key);
 	buf = g_new(gchar, keylen);
 	
