@@ -481,6 +481,8 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			   NULL,
 			   NULL,
 			   settings.comm_showing);
+	if(settings.comm_showing)
+		main_display_commentary(settings.CommWindowModule, settings.currentverse);
 }
 
 
