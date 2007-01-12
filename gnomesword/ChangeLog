@@ -1,3 +1,7 @@
+2007-01-12  karl <karl@charcoal.com>
+
+	* fixed bug #1629380: comm.dialog xref selection refers to wrong book
+
 2007-01-09  karl <karl@charcoal.com>
 
 	* fixed crash in commentary word lookup.
