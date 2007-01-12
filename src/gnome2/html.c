@@ -184,9 +184,6 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf = NULL;
-	gchar tmpbuf[255];
-	gint i = 0;
 	
 	if(main_url_handler(url, TRUE))
 		return;
@@ -200,6 +197,58 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 //#ifdef DEBUG	
 //	g_warning("link not handled");
 //#endif
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_prefixable_link_clicked
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_prefixable_link_clicked(GtkHTML * html,
+ *				      const gchar * url,
+ *				      gpointer data,
+ *				      const gchar * book)
+ *
+ * Description
+ *   html link clicked.  possibly prefix url with current book name.
+ *
+ * Return value
+ *   void
+ */
+
+void gui_prefixable_link_clicked(GtkHTML * html,
+				 const gchar * url,
+				 gpointer data,
+				 const gchar * book)
+{
+	gchar *buf, *place;
+	gchar tmpbuf[1023];
+	
+	if (buf = strstr(url, "&value=")) {
+		buf += 7;
+		place = buf;
+
+		while (*buf && isdigit(*buf))
+			buf++;
+		if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
+			/* url begins w/"digits:" only: fix */
+			strncpy(tmpbuf, url, place - url);
+			strcpy(tmpbuf+(place-url), book);
+			strcat(tmpbuf, place);
+			url = tmpbuf;
+		}
+	}
+	if (main_url_handler(url, TRUE))
+		return;
+	
+	if (*url == '@') {
+		++url;
+		main_swap_parallel_with_main((gchar *) url);
+		return;
+	}
 }
 
 
