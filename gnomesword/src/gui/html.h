@@ -34,6 +34,7 @@ extern gboolean in_url;
 void url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle);	
 void gui_url(GtkHTML * html, const gchar * url, gpointer data);
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data);
+void gui_prefixable_link_clicked(GtkHTML * html, const gchar * url, gpointer data, const gchar *book);
 void gui_begin_html(GtkWidget * html, gboolean utf8);
 void gui_end_html(GtkWidget * html);
 void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt);

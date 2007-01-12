@@ -743,6 +743,34 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 
 /******************************************************************************
  * Name
+ *   commentary_prefixable_link
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void commentary_prefixable_link(void)	
+ *
+ * Description
+ *    front-end-ish handler for xref clicks, to supply book name to prefix.
+ *
+ * Return value
+ *   void
+ */
+
+void commentary_prefixable_link(GtkHTML * html,
+				const gchar * url,
+				gpointer data)
+{
+	gchar buf[32];
+
+	cur_d = data;
+	strcpy(buf, cur_d->key);
+	*(strchr(buf, ' ')) = '\0';
+	gui_prefixable_link_clicked(html, url, data, buf);
+}
+
+/******************************************************************************
+ * Name
  *   create_nav_toolbar
  *
  * Synopsis
@@ -988,7 +1016,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 				 G_CALLBACK(html_key_press_event), d);
 		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
 				 "link_clicked",
-				 G_CALLBACK(gui_link_clicked), NULL);
+				 G_CALLBACK(commentary_prefixable_link), NULL);
 
 		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
 				 "on_url", G_CALLBACK(gui_url), NULL);
@@ -1011,7 +1039,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 
 		g_signal_connect(GTK_OBJECT(d->html),
 				 "link_clicked",
-				 G_CALLBACK(gui_link_clicked), d);
+				 G_CALLBACK(commentary_prefixable_link), d);
 		g_signal_connect(GTK_OBJECT(d->html), "on_url",
 				 G_CALLBACK(dialog_url), d);
 		g_signal_connect(GTK_OBJECT(d->html),
