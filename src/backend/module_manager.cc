@@ -29,7 +29,12 @@
 #include <config.h>
 #endif
 
+
+#ifdef SUSE_10_2
+#include <glib.h>
+#else
 #include <glib-2.0/glib.h>
+#endif
 #include <swmgr.h>
 #include <localemgr.h>
 #include <swlocale.h>

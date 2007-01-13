@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <glib-2.0/glib.h>
+#include <gnome.h>
 
 #include <fcntl.h>
 #include <stdio.h>

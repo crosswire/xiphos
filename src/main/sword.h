@@ -27,7 +27,7 @@ extern "C" {
 #endif
 #include <gnome.h>
 #include <glib/gi18n.h>
-#include <glib-2.0/glib.h>
+//#include <glib-2.0/glib.h>
 	
 #include "main/configs.h"	
 	

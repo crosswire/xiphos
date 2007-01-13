@@ -112,7 +112,7 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 			   GTK_TOGGLE_BUTTON(d->backward)->active == 0,
 			   d->regular);
 	sprintf(settings.findText, "%s", text);
-	g_free(text);
+	//g_free(text);
 }
 
 

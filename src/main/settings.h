@@ -21,10 +21,16 @@
 
 #ifndef _SETTINGS_H_
 #define _SETTINGS_H_
-
+/*
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 //#include <gnome.h>
-
+#ifdef SUSE_10_2
+#include <glib.h>
+#else
 #include <glib-2.0/glib.h>
+#endif*/
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,3 +1,9 @@
+2007-01-13  terry <tbiggs@users.sf.net>
+
+	* added navigation toolbar to genbook pane
+	* added files main/navbar_book.cc and main/navbar_book.h
+	* added files gnome2/navbar_book.c and gui/navbar_book.h
+
 2007-01-12  karl <karl@charcoal.com>
 
 	* fixed bug #1629380: comm.dialog xref selection refers to wrong book

@@ -1760,8 +1760,10 @@ void setup_module_comboboxs(void)
 		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_5_module), settings.parallel5Module);
 	/* Miscellaneous Modules page */
 	glist = get_list(DEVOTION_LIST);
-	if(glist) 
+	if(glist)  {
 		fill_combobox(glist,GTK_COMBO_BOX(combo.devotion_module), settings.devotionalmod);
+		
+	}
 	glist = get_list(DICT_LIST);
 	if(glist) 
 		fill_combobox(glist,GTK_COMBO_BOX(combo.hebrew_lex__module), settings.lex_hebrew);
