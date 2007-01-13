@@ -114,6 +114,11 @@ else
   AC_SUBST(MOZILLA_CFLAGS)
 fi
 
+AC_ARG_ENABLE(opensuse102,[  --enable-opensuse102    use opensuse102 [default=no]],opensuse102=$enableval,opensuse102=no)
+if test "x$opensuse102" = xyes; then	
+	AC_DEFINE(SUSE_10_2, 1, [Define if you are using opensuse10.2])
+fi
+
 AC_ARG_ENABLE(sword_svn,[  --enable-sword_svn        use svn sword [default=no]],sword_svn=$enableval,sword_svn=no)
 if test "x$sword_svn" = xyes; then
    AC_DEFINE(USE_SWORD_SVN, 1, [Define if you want to use svn sword])

@@ -385,6 +385,7 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 				     error);
 		mod = (*it).second;
 		mod->setKey(mykey);
+		//g_message("mykey: %s", mykey);
 		g_free(mykey);
 		return strdup((char *) mod->RenderText());
 	}
@@ -1031,6 +1032,15 @@ int BackEnd::treekey_first_child(unsigned long offset) {
 }
 
 
+int BackEnd::treekey_parent(unsigned long offset) {
+        if (tree_key) {
+                tree_key->setOffset(offset);
+		return tree_key->parent();
+	}
+        return false;
+}
+
+
 char *BackEnd::treekey_get_local_name(unsigned long offset) {	
         if (tree_key) {
                 tree_key->setOffset(offset);
@@ -1045,6 +1055,18 @@ int BackEnd::treekey_next_sibling(unsigned long offset) {
         if (tree_key) {
                 tree_key->setOffset(offset);
                 if(tree_key->nextSibling()) {
+			return 1;
+		}	
+        }
+        return 0;
+}
+
+
+
+int BackEnd::treekey_prev_sibling(unsigned long offset) {
+        if (tree_key) {
+                tree_key->setOffset(offset);
+                if(tree_key->previousSibling()) {
 			return 1;
 		}	
         }

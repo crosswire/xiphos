@@ -40,6 +40,7 @@
 #include "main/sidebar.h"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/navbar_book.h"
 #include "main/settings.h"
 #include "main/sword.h"
 //#include "main/tab_struct.h"
@@ -692,6 +693,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					 (sidebar.module_list), path,
 					 FALSE);
 		gtk_tree_path_free(path);
+		//unsigned long x = atoi((key) ? key: "0");
+		main_setup_navbar_book(mod, atoi((key) ? key: "0"));
 		break;
 	}
 	if (cap)

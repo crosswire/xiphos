@@ -65,6 +65,7 @@ extern "C" {
 #include "main/display.hh"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/navbar_book.h"
 #include "main/search_sidebar.h"
 #include "main/previewer.h"
 #include "main/settings.h"
@@ -900,7 +901,9 @@ void main_display_book(const char * mod_name, char * key)
 		return;
 	if(!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
-	
+#ifdef DEBUG
+	g_message("key: %s", key);
+#endif
 	
 	settings.whichwindow = BOOK_WINDOW;
 	if(key == NULL) key = "0";
@@ -925,7 +928,7 @@ void main_display_book(const char * mod_name, char * key)
 		backend->set_module_key(mod_name, key);
 	}
 	backend->display_mod->Display();
-	
+	main_setup_navbar_book(settings.book_mod,settings.book_offset);
 	if(settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
@@ -1190,7 +1193,9 @@ void main_display_devotional(void)
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
 	
+	
 	text = backend->get_render_text(settings.devotionalmod, buf);
+//	g_message("modname: %s\nloctime: %s\ntext: %s",settings.devotionalmod, buf, text);
 	if (text) {
 		main_entry_display(sidebar.html_viewer_widget,
 			      settings.devotionalmod, text, buf, TRUE);
