@@ -1,6 +1,7 @@
 2007-01-13  karl <karl@charcoal.com>
 
 	* fixed bug #1634794 adv.search hates booknames w/spaces
+	* fixed bug #1631629 bible dialog uses wrong verse style
 
 2007-01-13  terry <tbiggs@users.sf.net>
 
