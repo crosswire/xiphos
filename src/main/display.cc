@@ -299,9 +299,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				(mf->old_font_size)?mf->old_font_size:"+0");
 #endif
 
-	if(backend->module_type(imodule.Name()) == PERCOM_TYPE)
+	if (backend->module_type(imodule.Name()) == PERCOM_TYPE)
 		rework = (const char *)(const char *)imodule.getRawEntry();  //keytext);
-	else if(!strcmp(imodule.Name() ,"ISBE"))		
+	else if (!strcmp(imodule.Name() ,"ISBE"))		
 		rework = (const char *)(const char *)imodule.StripText();  //keytext);
 	else
 		rework = (const char *)imodule;
@@ -331,7 +331,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 #endif
 	free_font(mf);	
 	g_free(ops);
-	if(keytext) g_free(keytext);
+	if (keytext)
+		g_free(keytext);
 		
 }
 
@@ -356,13 +357,13 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 	int chapter = key->Chapter();
 	key->Verse(1);
 	
-	if(!key->_compare(key_top)) {
+	if (!key->_compare(key_top)) {
 		swbuf.appendFormatted("<font face=\"%s\" size=\"%s\" color=\"%s\">",
 			(mf->old_font)?mf->old_font:"", 
 			(mf->old_font_size)?mf->old_font_size:"+0", 
 			settings.bible_text_color);
 		
-		if((!strcmp(settings.MainWindowModule,"KJV")))
+		if ((!strcmp(settings.MainWindowModule,"KJV")))
 			swbuf.appendFormatted("</font><div style=\"text-align: center\">%s<hr></div>", 
 					mod->Description());
 		else
@@ -396,7 +397,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				settings.bible_text_color);		
 		//g_message(mod->getRawEntry());
-/*		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+/*		if ((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
 			swbuf.appendFormatted("%s</font><br><hr>",
 					(const char *)*mod);
 		else	
@@ -422,7 +423,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 	mod->setKey(imodule.getKey());
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
 	
-	if(key_bottom._compare(key) < 1) {
+	if (key_bottom._compare(key) < 1) {
 		swbuf.appendFormatted(
 			"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 			(mf->old_font)?mf->old_font:"", 
@@ -435,7 +436,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 	} else {
 	
 		int chapter = key->Chapter();	
-		if((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
+		if ((!strcmp(settings.MainWindowModule,"KJV"))  || (!strcmp(settings.MainWindowModule,"KJV2006")))
 			swbuf.appendFormatted(
 				"<hr><b>%s %d.</b><br><br>",
 				_("Chapter"),chapter);
@@ -679,7 +680,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 #endif	
-	if(!strcmp(imodule.Name(),"KJV"))
+	if (!strcmp(imodule.Name(),"KJV"))
 		paragraphMark = "&para;";
 	else
 		paragraphMark = "";
@@ -691,7 +692,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color);
-	if(is_rtol) 
+	if (is_rtol) 
 		swbuf += "<DIV ALIGN=right>";
 #ifdef USE_GTKMOZEMBED 
 	gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
@@ -713,7 +714,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading,"%d",x);
-		while((preverse 
+		while ((preverse 
 			= backend->get_entry_attribute("Heading","Preverse",
 							    heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
@@ -749,11 +750,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 				:settings.bible_text_color);
 		
 #ifdef USE_GTKMOZEMBED 		
-		if(key->Verse() == curVerse || 
-				key->Verse() == curVerse-1 || 
-				key->Verse() == curVerse-2|| 
-				key->Verse() == curVerse+2|| 
-				key->Verse() == curVerse+1 ) {
+		if (key->Verse() == curVerse   ||
+		    key->Verse() == curVerse-1 ||
+		    key->Verse() == curVerse-2 ||
+		    key->Verse() == curVerse+2 ||
+		    key->Verse() == curVerse+1 ) {
 			main_set_strongs_morphs(ops);
 		} else {		
 			main_set_strongs_morphs_off(ops);
@@ -771,7 +772,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			GTKChapDisp::ReadAloud(curVerse, imodule);
 		
 		if (settings.versestyle) { 
-			if(g_strstr_len(buf,strlen(buf),"<!p>")) {
+			if (g_strstr_len(buf,strlen(buf),"<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
@@ -797,7 +798,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 	
-	if(is_rtol) 
+	if (is_rtol) 
 		swbuf += ("</DIV></body></html>");
 	else
 		swbuf += "</body></html>";
@@ -810,7 +811,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 						"text/html");*/
 		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());			
 	gtk_moz_embed_close_stream(html);
-	if(curVerse > 1) {
+	if (curVerse > 1) {
 		buf = g_strdup_printf("%d", curVerse);
 		embed_go_to_anchor(html, buf);
 		g_free(buf);
@@ -823,7 +824,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		//gtk_html_load_from_string(html,swbuf.c_str(),swbuf.length());
 	gtk_html_end(html,stream,status);
 	gtk_html_set_editable(html, was_editable);
-	if(curVerse > 2) {
+	if (curVerse > 2) {
 		buf = g_strdup_printf("%d", curVerse - 2);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
@@ -874,7 +875,7 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 	const gchar *mark_name = "CurrentVerse";
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 1);
-	if(font_tag)
+	if (font_tag)
 		gtk_text_tag_table_remove(gtk_text_buffer_get_tag_table (buffer),
                                 font_tag);
 	
@@ -906,7 +907,7 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 		
 		g_string_printf(str, " %s", (const char *)imodule.StripText());
 		
-		if(key->Verse() == curVerse) {
+		if (key->Verse() == curVerse) {
 		        gtk_text_buffer_get_end_iter(buffer, &iter);
 			mark = gtk_text_buffer_create_mark (buffer,
 						mark_name,
@@ -997,12 +998,12 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	
-	if(type == 3)
+	if (type == 3)
 		keytext = be->treekey_get_local_name(be->get_treekey_offset());
 	else
 		keytext = imodule.KeyText();
 	
-	if(type == 4)
+	if (type == 4)
 		g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 				"<font face=\"%s\" size=\"%s\">%s"
@@ -1084,6 +1085,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gtk_widget_modify_font (gtkText, desc);
 	gboolean was_editable = gtk_html_get_editable(html);
 #endif	
+	gint versestyle;
+	gchar *file = NULL, *style = NULL;
+
+	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	style = get_conf_file_item(file, imodule.Name(), "style");
+	if ((style) && strcmp(style,"verse"))
+		versestyle = FALSE;
+	else	
+		versestyle = TRUE;
+	g_free(style);
+	g_free(file);
 
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -1095,7 +1107,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading,"%d",x);
-		while((preverse 
+		while ((preverse 
 			= be->get_entry_attribute("Heading","Preverse",
 							    heading)) != NULL) {
 			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
@@ -1127,11 +1139,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 		str = g_string_append(str,buf);
 		g_free(buf);	
 
-		if (newparagraph && settings.versestyle) {
+		if (newparagraph && versestyle) {
 			newparagraph = FALSE;
 			str = g_string_append(str, paragraphMark);
 		}		
-		if(key->Verse() == curVerse || 
+		if (key->Verse() == curVerse || 
 				key->Verse() == curVerse-1 || 
 				key->Verse() == curVerse-2|| 
 				key->Verse() == curVerse+2|| 
@@ -1143,7 +1155,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		str = g_string_append(str, (const char *)imodule);
 		buf = g_strdup_printf("%s",(const char *)imodule);
 		
-		if (settings.versestyle) {
+		if (versestyle) {
 			buf2 = g_strdup_printf(" %s", "</font><br>");
 			
 			if ((strstr(buf, "<!P>") == NULL) &&
@@ -1170,7 +1182,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_moz_embed_render_data(html, str->str, str->len,
 					"file:///sword", 
 					"text/html");
-	if(curVerse > 1) {
+	if (curVerse > 1) {
 		buf = g_strdup_printf("%d", curVerse);
 		embed_go_to_anchor(html, buf);
 		g_free(buf);
@@ -1180,7 +1192,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
 	gtk_html_set_editable(html, was_editable);
-	if(curVerse > 1) {
+	if (curVerse > 1) {
 		buf = g_strdup_printf("%d", curVerse - 1);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
@@ -1216,7 +1228,7 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 	GString *str = g_string_new(NULL);
 	const gchar *mark_name = "CurrentVerse";
 	
-	if(!font_tag) {
+	if (!font_tag) {
 		font_tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
 		g_object_set (G_OBJECT (font_tag), "font", mf->old_font,
 					NULL);
@@ -1245,7 +1257,7 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 		
 		g_string_printf(str, " %s", (const char *)imodule);
 		
-		if(key->Verse() == curVerse) {
+		if (key->Verse() == curVerse) {
 		        gtk_text_buffer_get_end_iter(buffer, &iter);
 			mark = gtk_text_buffer_create_mark (buffer,
 						mark_name,
@@ -1300,7 +1312,7 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 				0.0);
 	gtk_text_buffer_delete_mark(buffer,mark);
 	
-	if(font_tag)
+	if (font_tag)
 		gtk_text_tag_table_remove(gtk_text_buffer_get_tag_table (buffer),
                                 font_tag);
 	font_tag = NULL;

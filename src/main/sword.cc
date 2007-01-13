@@ -196,8 +196,8 @@ void main_save_note(	const gchar * module_name,
 #endif
 	backend->save_entry(note_str);
 #endif
-	if((!strcmp(settings.CommWindowModule,module_name)) &&  
-				(!strcmp(settings.currentverse, key_str)))
+	if ((!strcmp(settings.CommWindowModule, module_name)) &&  
+	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);
 }
 
@@ -228,8 +228,8 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
 #endif
 	backend->delete_entry();
 #endif	
-	if((!strcmp(settings.CommWindowModule,module_name)) &&  
-				(!strcmp(settings.currentverse, key_str)))
+	if ((!strcmp(settings.CommWindowModule,module_name)) &&  
+	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);
 }
 
@@ -498,7 +498,7 @@ char *main_get_path_to_mods(void)
 {
 	SWMgr *mgr = backend->get_main_mgr();
 	char *path = mgr->prefixPath;
-	if(path)
+	if (path)
 		return g_strdup(path);
 	return NULL;
 }
@@ -568,7 +568,7 @@ void main_init_backend(void)
 void main_shutdown_backend(void)
 {
 	free((char*)sword_locale);
-	if(backend) 
+	if (backend) 
 	        delete backend; 
 	backend = NULL;
 		
@@ -703,9 +703,9 @@ void main_dictionary_entry_changed(char * mod_name)
 	gchar *key = NULL;
 	gchar *key2 = NULL;
 	
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
-	if(strcmp(settings.DictWindowModule,mod_name)) {
+	if (strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
 		settings.DictWindowModule = xml_get_value(
@@ -784,9 +784,9 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	
 	menu = gtk_menu_new();
 	
-	if(!settings.havedict || !mod_name)
+	if (!settings.havedict || !mod_name)
 		return NULL;
-	if(strcmp(settings.DictWindowModule,mod_name)) {
+	if (strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
 		settings.DictWindowModule = xml_get_value(
@@ -877,12 +877,12 @@ void main_dictionary_button_clicked(gint direction)
 {	
 	gchar *key = NULL;
 	
-	if(!settings.havedict || !settings.DictWindowModule)
+	if (!settings.havedict || !settings.DictWindowModule)
 		return;
 		
 	backend->set_module_key(settings.DictWindowModule, 
 				settings.dictkey);
-	if(direction == 0)
+	if (direction == 0)
 		(*backend->display_mod)--;
 	else
 		(*backend->display_mod)++;
@@ -895,19 +895,19 @@ void main_dictionary_button_clicked(gint direction)
 void main_display_book(const char * mod_name, char * key)
 {
 	gboolean use_offset = FALSE;
-	if(!settings.havebook || !mod_name)
+	if (!settings.havebook || !mod_name)
 		return;
-	if(!backend->is_module(mod_name))
+	if (!backend->is_module(mod_name))
 		return;
-	if(!settings.book_mod)
+	if (!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
 #ifdef DEBUG
 	g_message("key: %s", key);
 #endif
 	
 	settings.whichwindow = BOOK_WINDOW;
-	if(key == NULL) key = "0";
-	if(isalpha(key[0])) {
+	if (key == NULL) key = "0";
+	if (isalpha(key[0])) {
 		xml_set_value("GnomeSword", "keys", "book", key);
 		settings.book_key = xml_get_value( "keys", "book");
 		use_offset = FALSE;
@@ -917,11 +917,11 @@ void main_display_book(const char * mod_name, char * key)
 		use_offset = TRUE;
 	}
 	
-	if(strcmp(settings.book_mod,mod_name)) {
+	if (strcmp(settings.book_mod,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "book", mod_name);
 		settings.book_mod = xml_get_value( "modules", "book");
 	}
-	if(use_offset) {
+	if (use_offset) {
 		backend->set_module(mod_name);	
 		backend->set_treekey(settings.book_offset);
 	} else {
@@ -929,7 +929,7 @@ void main_display_book(const char * mod_name, char * key)
 	}
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod,settings.book_offset);
-	if(settings.browsing)
+	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      NULL,
@@ -942,21 +942,21 @@ void main_display_book(const char * mod_name, char * key)
 
 void main_display_commentary(const char * mod_name, const char * key)
 {	
-	if(!settings.havecomm || !settings.comm_showing)
+	if (!settings.havecomm || !settings.comm_showing)
 		return;
 	
-	if(!mod_name)
+	if (!mod_name)
 		mod_name = xml_get_value("modules", "comm");
 	
-	if(!mod_name || !backend->is_module(mod_name))
+	if (!mod_name || !backend->is_module(mod_name))
 		return;
-	if(!settings.CommWindowModule)
+	if (!settings.CommWindowModule)
 		settings.CommWindowModule = (char*)mod_name;
 	
 	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
 						
-	if(strcmp(settings.CommWindowModule,mod_name)) {
+	if (strcmp(settings.CommWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
 		settings.CommWindowModule = xml_get_value( "modules", "comm");
 	}
@@ -964,7 +964,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	if(settings.browsing)
+	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      mod_name,
 				      NULL,
@@ -980,13 +980,13 @@ void main_display_dictionary(char * mod_name, char * key)
 #ifdef DEBUG
 	g_message("main_display_dictionary\nmod_name: %s\nkey: %s",mod_name,key);
 #endif
-	if(!settings.havedict || !mod_name)
+	if (!settings.havedict || !mod_name)
 		return;
-	if(!backend->is_module(mod_name))
+	if (!backend->is_module(mod_name))
 		return;
-	if(!settings.DictWindowModule)
+	if (!settings.DictWindowModule)
 		settings.DictWindowModule = (char*)mod_name;
-	if(strcmp(settings.DictWindowModule,mod_name)) {
+	if (strcmp(settings.DictWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "dict",
 					mod_name);
 		settings.DictWindowModule = xml_get_value(
@@ -994,18 +994,18 @@ void main_display_dictionary(char * mod_name, char * key)
 	}
 	//gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
 	
-	if(key == NULL)
+	if (key == NULL)
 		key = "Grace";
 	
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
-	if(!strcmp(old_key, key))
+	if (!strcmp(old_key, key))
 		main_dictionary_entry_changed(settings.DictWindowModule);
 	else {
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 		gtk_widget_activate(widgets.entry_dict);
 	}
 	
-	if(settings.browsing)
+	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      mod_name,
@@ -1063,35 +1063,34 @@ void main_display_bible(const char * mod_name, const char * key)
 	/* keeps us out of a crash causing loop */
 	g_signal_handler_block(adjustment, scroll_adj_signal);
 	
-	if(!mod_name)
+	if (!mod_name)
 		mod_name = xml_get_value("modules", "bible");	
 	
 	
-	if(!settings.havebible || !mod_name)
+	if (!settings.havebible || !mod_name)
 		return;
-	if(!backend->is_module(mod_name))
+	if (!backend->is_module(mod_name))
 		return;
 	
-	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
-	if(!settings.MainWindowModule)
+	if (!settings.MainWindowModule)
 		settings.MainWindowModule = (char*)mod_name;
 	
-	if(strcmp(settings.currentverse, key)) {
+	if (strcmp(settings.currentverse, key)) {
 		xml_set_value("GnomeSword", "keys", "verse",
 					key);
 		settings.currentverse = xml_get_value(
 					"keys", "verse");
 	}
 	
-	if(strcmp(settings.MainWindowModule, mod_name)) {
+	if (strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "bible",
 					mod_name);
 		settings.MainWindowModule = xml_get_value(
 					"modules", "bible");
-		if(navbar_main.module_name) 
+		if (navbar_main.module_name) 
 			g_free(navbar_main.module_name);
 		navbar_main.module_name = g_strdup(settings.MainWindowModule);
-		if(navbar_main.key)
+		if (navbar_main.key)
 			g_free(navbar_main.key);
 		navbar_main.key = g_strdup(settings.currentverse);
 		main_navbar_fill_book_combo(navbar_main);
@@ -1101,11 +1100,14 @@ void main_display_bible(const char * mod_name, const char * key)
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	gui_change_window_title(settings.MainWindowModule);
 	
+	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	style = get_conf_file_item(file, mod_name, "style");
-	if((style) && strcmp(style,"verse"))
+	if ((style) && strcmp(style,"verse"))
 		settings.versestyle = FALSE;
 	else	
 		settings.versestyle = TRUE;
+	g_free(style);
+	g_free(file);
 	
 	style_display = FALSE;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -1113,12 +1115,12 @@ void main_display_bible(const char * mod_name, const char * key)
 				       settings.versestyle);
 	style_display = TRUE;
 	
-	if(backend->module_has_testament(mod_name,
+	if (backend->module_has_testament(mod_name,
 				backend->get_key_testament(key))) {
 			backend->set_module_key(mod_name, key);
 			backend->display_mod->Display();
 	} else {
-		if(backend->get_key_testament(key) == 1)
+		if (backend->get_key_testament(key) == 1)
 			val_key = main_update_nav_controls("Matthew 1:1");
 		else
 			val_key = main_update_nav_controls("Genesis 1:1");
@@ -1131,7 +1133,7 @@ void main_display_bible(const char * mod_name, const char * key)
 #ifdef DEBUG 
 	g_print("mod_name = %s\n",mod_name);	
 #endif
-	if(settings.browsing) {
+	if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,
 				      NULL,
@@ -1303,7 +1305,7 @@ const char *main_get_mod_config_entry(const char * module_name, const char * ent
 int main_is_mod_rtol(const char * module_name)
 {
 	char *direction = backend->get_config_entry((char*)module_name, "Direction");
-	if(direction && !strcmp(direction, "RtoL"))
+	if (direction && !strcmp(direction, "RtoL"))
 		return TRUE;
 	return FALSE;
 }
@@ -1327,7 +1329,7 @@ int main_is_mod_rtol(const char * module_name)
 int main_has_cipher_tag(char *mod_name)
 {
 	gchar *tmpbuf = backend->get_config_entry(mod_name, "CipherKey");
-	if(tmpbuf) {
+	if (tmpbuf) {
 		return true;
 	}
 	return false;
