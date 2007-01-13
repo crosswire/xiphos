@@ -54,6 +54,7 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 
+#include "main/navbar_book.h"
 #include "main/parallel_view.h"
 #include "main/sword.h"
 #include "main/settings.h"
@@ -168,6 +169,7 @@ void frontend_display(void)
 	gtk_widget_realize(widgets.html_book);
 	url = g_strdup_printf("sword://%s/%d",settings.book_mod,
 					      settings.book_offset);
+	main_setup_navbar_book(settings.book_mod, settings.book_offset);
 	main_url_handler(url);
 	g_free(url);
 	

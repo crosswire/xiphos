@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * search_sidebar.h - glue
+ * navbar_book.h - navigation bar for genbook modules
  *
- * Copyright (C) 2004 GnomeSword Developer Team
+ * Copyright (C) 2007 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __SEARCH_SIDEBAR_H__
-#define __SEARCH_SIDEBAR_H__
+#ifndef ___NAVBAR_BOOK_H_
+#define ___NAVBAR_BOOK_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-//#include <glib-2.0/glib.h>
-	
-void main_sidebar_search_percent_update(char percent, void *userData);
-void main_do_sidebar_search(gpointer user_data);
-void main_init_sidebar_search_backend(void);
-void main_delete_sidebar_search_backend(void);
-void main_search_sidebar_fill_bounds_combos(void);
-
-#ifdef __cplusplus
-}
-#endif
+GtkWidget *gui_navbar_book_new(void);
 
 #endif
