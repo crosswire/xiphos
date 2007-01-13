@@ -398,7 +398,7 @@ static void add_module_finds(GList * versekeys)
 
 	gtk_list_store_clear(list_store);
 
-	while(tmp) {	
+	while (tmp) {	
 		buf =  (char*) tmp->data;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, 
@@ -842,8 +842,10 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 	tmp = (GList*)tmp->data;
 	add_module_finds(tmp);
 	
-	if(text) g_free(text);
-	if(path_str) g_free(path_str);
+	if (text)
+		g_free(text);
+	if (path_str)
+		g_free(path_str);
 	gtk_tree_path_free(path);
 	
 }
@@ -867,55 +869,60 @@ void main_selection_finds_list_changed(GtkTreeSelection *
  */
 
 void main_finds_verselist_selection_changed(GtkTreeSelection * selection, 
-                                                                      gpointer data)
+					    gpointer data)
 {
 	gchar *text, *text_str, *buf, *module, *key;
-	gchar **work_buf = NULL; 
-	gint i, textlen;
+	gint textlen;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
-	GtkTextIter iter, startiter, enditer;
-//	GtkTextBuffer *tbuf = search1.text_buffer;
- 	if (!gtk_tree_selection_get_selected (selection,&model,&selected))
+
+ 	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return;
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
 #ifdef DEBUG
-	g_message("\ntext: %s",text);
+	g_message("\ntext: %s", text);
 #endif
 	textlen = strlen(text);
-	module = g_new(gchar, textlen);
-	for (i = 0; i < textlen; i++){
-		if(text[i] == ':') {
-			module[i] = '\0';
-			break;
-		}
-		module[i] = text[i];
-	}
-	buf = strchr(text,':');
-	++buf;
-	++buf;
-	work_buf = g_strsplit(buf," ",3);
-	key = g_strdup_printf("%s %s",work_buf[0],work_buf[1]);
+	module = text;
+
+	// first `:' finds end of module name.
+	buf = strchr(text, ':');
+	*(module+(buf-text)) = '\0';	// strncpy unreliably terminates?
+
+	// key begins 2 chars after module.
+	key = buf + 2;
 					     
-	if(verse_selected) g_free(verse_selected);
+	if (verse_selected)
+		g_free(verse_selected);
 	drag_module_type = backendSearch->module_type(module);
-	if(drag_module_type == BOOK_TYPE)
-		verse_selected = g_strdup_printf("sword://%s/%lu",module,
-		       		backendSearch->get_treekey_offset_from_key(
-						module, key));
-	else 
-		verse_selected = g_strdup_printf("sword://%s/%s",module,key);
+	if ((drag_module_type == BOOK_TYPE) ||
+	    (drag_module_type == DICTIONARY_TYPE)) {
+		verse_selected = g_strdup_printf("sword://%s/%lu", module,
+						 backendSearch->
+						 get_treekey_offset_from_key
+						 (module, key));
+	}
+	else {
+		if (drag_module_type == TEXT_TYPE) {
+			// now find verse spec's `:'; then SPC to end key.
+			buf = strchr(buf+1, ':');
+			buf = strchr(buf, ' ');
+			*buf = '\0';
+		}
+		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
+	}
 	text_str = backendSearch->get_render_text(module,key);
 	
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),text_str,strlen(text_str));
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
+				  text_str, strlen(text_str));
+
 #ifdef DEBUG
-	g_message("main_finds_verselist_selection_changed: %s %s",work_buf[0],work_buf[1]);
+	g_message("main_finds_verselist_selection_changed: %s %s", module, key);
 #endif
-	if(text) g_free(text);	
-	g_free(module);
-	g_free(key);
+
+	if (text)
+		g_free(text);
 	g_free(text_str);
-	g_strfreev(work_buf);
 }
 
 
@@ -1066,7 +1073,7 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 	gchar *mod_list_str = NULL;
 	const gchar *name = NULL;
 	
-	if(!GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
+	if (!GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active)
 		return;
 	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)); 
 	mod_list = get_custom_list_from_name(name);
@@ -1117,7 +1124,7 @@ static void add_to_found_list(gchar * result_text, gchar * module)
 			   1, result_text, 
 			   -1);
 		
-	if(result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
+	if (result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
 		g_free(result_text);
 	g_string_free(str, TRUE);
 }
@@ -1340,19 +1347,20 @@ void _clear_find_lists(void)
 	gchar *tmp_buf = NULL;
 	
 	list_of_finds = g_list_first(list_of_finds);
-	while(list_of_finds) {
+	while (list_of_finds) {
 		tmp = (GList*) list_of_finds->data;
-		while(tmp) {
+		while (tmp) {
 			tmp_buf = (char*) tmp->data;
 #ifdef DEBUG
 			g_message(tmp_buf);
 #endif
-			if(tmp_buf) g_free(tmp_buf);
+			if (tmp_buf) g_free(tmp_buf);
 			tmp = g_list_next(tmp);
 		}
 		list_of_finds = g_list_next(list_of_finds);
 	}
-	if(list_of_finds) g_list_free(list_of_finds);
+	if (list_of_finds)
+		g_list_free(list_of_finds);
 	list_of_finds = NULL;
 }
 
@@ -1441,7 +1449,7 @@ void main_do_dialog_search(void)
 	
 	
 	settings.searchType = search_type;
-	//if(search_type != -4)
+	//if (search_type != -4)
 	check_search_global_options();
 
 	
@@ -1453,7 +1461,7 @@ void main_do_dialog_search(void)
 		
 		gui_set_progressbar_text(search1.progressbar, buf);
 
-		if(search_type == -2 || search_type == -4)
+		if (search_type == -2 || search_type == -4)
 			search_type = backendSearch->check_for_optimal_search(module);
 		//g_message("search_type = %d",search_type);
 		
@@ -1465,7 +1473,7 @@ void main_do_dialog_search(void)
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
 			/* test for mod type */
 			mod_type = backendSearch->module_type(module);	
-			if(mod_type == TEXT_TYPE)			
+			if (mod_type == TEXT_TYPE)			
 				g_string_printf(str, "%s: %s  %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
 			else			
 				g_string_printf(str, "%s: %s", module,  key_buf);				
@@ -1482,7 +1490,7 @@ void main_do_dialog_search(void)
 				   0, str->str, 
 				   -1);
 		++x;
-		if(x == 1) { // add verse list for hits in first module to verse listview
+		if (x == 1) { // add verse list for hits in first module to verse listview
 			tmp = (GList*) list_of_finds->data;
 			add_module_finds(g_list_first(tmp));
 		}
