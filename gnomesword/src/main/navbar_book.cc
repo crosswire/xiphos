@@ -75,6 +75,7 @@ void main_navbar_book_parent(void)
 
 }
 
+
 /******************************************************************************
  * Name
  *  
@@ -112,6 +113,80 @@ void main_navbar_book_first_child(void)
 	
 
 }
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void main_navbar_book_prev(void)
+{
+	char *tmpbuf = NULL;
+	unsigned long offset;
+	
+	backend->set_module(settings.book_mod);
+	backend->set_treekey(settings.book_offset);
+	//offset = backend->get_treekey_offset();
+	if(backend->treekey_prev_sibling(settings.book_offset)) {
+		offset = backend->get_treekey_offset();	
+		tmpbuf = backend->treekey_get_local_name(offset);
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);
+		g_free(tmpbuf);
+		tmpbuf = g_strdup_printf("%ld",offset);
+		main_display_book(settings.book_mod,tmpbuf);
+		g_free(tmpbuf);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void main_navbar_book_next(void)
+{
+	char *tmpbuf = NULL;
+	unsigned long offset;	
+	
+	backend->set_module(settings.book_mod);
+	backend->set_treekey(settings.book_offset);
+	//offset = backend->get_treekey_offset();
+	if(backend->treekey_next_sibling(settings.book_offset)) {
+		offset = backend->get_treekey_offset();	
+		tmpbuf = backend->treekey_get_local_name(offset);
+		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);
+		g_free(tmpbuf);
+		tmpbuf = g_strdup_printf("%ld",offset);
+		main_display_book(settings.book_mod,tmpbuf);
+		g_free(tmpbuf);
+	}
+	
+
+}
+
 
 
 static
