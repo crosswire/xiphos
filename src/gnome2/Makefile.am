@@ -41,6 +41,7 @@ gnomesword2_SOURCES =  \
     main_menu.c \
     main_window.c \
     mod_mgr.c \
+    navbar_book.c \
     note_editor.c \
     parallel_view.c \
     parallel_dialog.c \

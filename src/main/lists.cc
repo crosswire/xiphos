@@ -24,12 +24,13 @@
 #endif
 
 #include <gnome.h>
-#include <glib-2.0/glib.h>
+//#include <glib-2.0/glib.h>
 #include <string.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 #include "backend/sword_main.hh"
 
@@ -130,6 +131,12 @@ void main_init_lists(void)
 	settings.havebook = g_list_length(mods.bookmods);
 
 	settings.havepercomm = g_list_length(mods.percommods);
+	if(g_list_length(mods.devotionmods)== 1) {		
+		xml_set_value("GnomeSword", "modules", "devotional",(char*)mods.devotionmods->data );
+		settings.devotionalmod = xml_get_value("modules", "devotional");
+	}
+		
+		
 #ifdef DEBUG
 	g_print("%s = %d\n", _("Number of Text modules"), settings.havebible);
 	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);

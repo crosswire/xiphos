@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <glib-2.0/glib.h>
+//#include <glib-2.0/glib.h>
 
 void main_drag_drop_display_in_main(const char * uri);
 void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name);
