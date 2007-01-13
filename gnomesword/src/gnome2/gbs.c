@@ -52,6 +52,7 @@
 #include "gui/shortcutbar_search.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
+#include "gui/navbar_book.h"
 
 #include "main/embed.h"
 #include "main/settings.h"
@@ -306,10 +307,15 @@ GtkWidget *gui_create_book_pane(void)
 	GtkWidget *box;
 	GtkWidget *scrolledwindow;
 	GtkWidget *eventbox;	
+	GtkWidget *navbar;
 	
 	box = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box);
 
+	navbar = gui_navbar_book_new();
+	gtk_box_pack_start(GTK_BOX(box),
+			   navbar, FALSE,
+			   FALSE, 0);
 
 #ifdef USE_GTKMOZEMBED	
 	eventbox = gtk_event_box_new ();

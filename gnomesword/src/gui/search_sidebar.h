@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
-#include <gnome.h>
+//#include <gnome.h>
 	
 typedef struct _sidebar_search SIDESEARCH;
 struct _sidebar_search {
