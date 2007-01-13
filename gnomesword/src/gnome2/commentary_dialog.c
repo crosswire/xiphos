@@ -765,7 +765,7 @@ void commentary_prefixable_link(GtkHTML * html,
 
 	cur_d = data;
 	strcpy(buf, cur_d->key);
-	*(strchr(buf, ' ')) = '\0';
+	*(strrchr(buf, ' ')) = '\0';
 	gui_prefixable_link_clicked(html, url, data, buf);
 }
 
