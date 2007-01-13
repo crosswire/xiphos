@@ -1,3 +1,7 @@
+2007-01-13  karl <karl@charcoal.com>
+
+	* fixed bug #1634794 adv.search hates booknames w/spaces
+
 2007-01-13  terry <tbiggs@users.sf.net>
 
 	* added navigation toolbar to genbook pane
