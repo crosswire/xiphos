@@ -1227,6 +1227,18 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
 	GString *str = g_string_new(NULL);
 	const gchar *mark_name = "CurrentVerse";
+
+	gint versestyle;
+	gchar *file = NULL, *style = NULL;
+
+	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	style = get_conf_file_item(file, imodule.Name(), "style");
+	if ((style) && strcmp(style,"verse"))
+		versestyle = FALSE;
+	else	
+		versestyle = TRUE;
+	g_free(style);
+	g_free(file);
 	
 	if (!font_tag) {
 		font_tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
@@ -1290,7 +1302,7 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
                                         NULL);		
 		} 
 		gtk_text_buffer_get_end_iter(buffer, &iter);
-		if (settings.versestyle) 
+		if (versestyle) 
 			gtk_text_buffer_insert(buffer, &iter, "\n", strlen("\n"));
 		else
 			gtk_text_buffer_insert(buffer, &iter, " ", strlen(" "));
