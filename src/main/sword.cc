@@ -53,6 +53,7 @@ extern "C" {
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 #include "gui/commentary.h"
+#include "gui/dialog.h"
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 #include "gui/tabbed_browser.h"
@@ -1179,6 +1180,22 @@ void main_display_devotional(void)
 	time_t curtime;
 	struct tm *loctime;
 	gchar *text;
+
+	/*
+	 * This makes sense only if you've installed & defined one.
+	 */
+	if (settings.devotionalmod == NULL) {
+		GList *glist = get_list(DEVOTION_LIST);
+
+		if (g_list_length(glist) != 0) {
+			xml_set_value("GnomeSword", "modules", "devotional",
+				      (char*)glist->data );
+			settings.devotionalmod = xml_get_value("modules",
+							       "devotional");
+		} else {
+			gui_generic_warning("Daily devotional was requested, but there are none installed.");
+		}
+	}
 
 	/*
 	 * Get the current time.
