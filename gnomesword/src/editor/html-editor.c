@@ -658,8 +658,9 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	title = g_strdup_printf("%s - %s", e->module, e->key);
 	text = main_get_rendered_text((gchar *) e->module,
 				   (gchar *) e->key);
-
-	load_through_persist_stream(text, e);
+	if(strlen(text)) 
+		load_through_persist_stream(text, e);
+	
 	change_window_title(e->window, title);
 	main_navbar_set(e->navbar, e->key);
 	
