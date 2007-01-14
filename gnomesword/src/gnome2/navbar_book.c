@@ -310,6 +310,18 @@ GtkWidget *gui_navbar_book_new(void)
   gtk_widget_show (arrow1);
   gtk_container_add (GTK_CONTAINER (navbar_book.button_list), arrow1);
 
+  navbar_book.button_left= gtk_button_new ();
+  gtk_widget_show (navbar_book.button_left);
+  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_left, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, navbar_book.button_left, _("Go to parent"), NULL);
+  
+  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_left), GTK_RELIEF_NONE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_left), FALSE);
+
+  image1 = gtk_image_new_from_icon_name ("stock_left", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image1);
+  gtk_container_add (GTK_CONTAINER (navbar_book.button_left), image1);
+
   navbar_book.button_up = gtk_button_new ();
   gtk_widget_show (navbar_book.button_up);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_up, FALSE, FALSE, 0);
@@ -331,18 +343,6 @@ GtkWidget *gui_navbar_book_new(void)
   image2 = gtk_image_new_from_icon_name ("stock_down", GTK_ICON_SIZE_BUTTON);
   gtk_widget_show (image2);
   gtk_container_add (GTK_CONTAINER (navbar_book.button_down), image2);
-
-  navbar_book.button_left= gtk_button_new ();
-  gtk_widget_show (navbar_book.button_left);
-  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_left, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_left, _("Go to parent"), NULL);
-  
-  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_left), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_left), FALSE);
-
-  image1 = gtk_image_new_from_icon_name ("stock_left", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image1);
-  gtk_container_add (GTK_CONTAINER (navbar_book.button_left), image1);
 
   navbar_book.button_right = gtk_button_new ();
   gtk_widget_show (navbar_book.button_right);
