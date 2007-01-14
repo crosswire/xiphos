@@ -1,3 +1,7 @@
+2007-01-14  karl <karl@charcoal.com>
+
+	* fixed bug #1626605 Daily Devotion Does Not Display
+
 2007-01-14  terry <tbiggs@users.sf.net>
 
 	* gs now depends on gtkhtml-3.8.x
