@@ -27,8 +27,7 @@ extern "C"
 {
 #endif
 
-#include <config.h>	
-#ifdef USE_GTKHTML38
+#include <config.h>
 
 typedef struct _editor EDITOR;
 
@@ -36,8 +35,6 @@ void editor_sync_with_main(void);
 gboolean editor_close_all(void);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 gint load_file (EDITOR * e);	
-
-#endif	/*  USE_GTKHTML38 */	
 
 
 #ifdef __cplusplus

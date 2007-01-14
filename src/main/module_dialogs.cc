@@ -41,12 +41,6 @@ extern "C" {
 
 #include <string.h>
 
-
-#ifndef USE_GTKHTML38
-#include "editor/editor.h"
-#include "editor/editor-control.h"
-#endif
-
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
@@ -56,7 +50,6 @@ extern "C" {
 #include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
-#include "gui/note_editor.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
