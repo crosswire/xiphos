@@ -281,45 +281,19 @@ GtkWidget *gui_navbar_book_new(void)
 {
   GtkWidget *vbox1;
   GtkWidget *hbox1;
-  GtkWidget *button_parent;
   GtkWidget *image1;
-  GtkWidget *entry_current_loc;
-  GtkWidget *togglebutton_book;
   GtkWidget *arrow1;
-  GtkWidget *button_child;
   GtkWidget *image2;
   GtkTooltips *tooltips;
  
   tooltips = gtk_tooltips_new ();
-
+  navbar_book.number_sibs = 0;
   vbox1 = gtk_vbox_new (FALSE, 0);
   gtk_widget_show (vbox1);
 
   hbox1 = gtk_hbox_new (FALSE, 0);
   gtk_widget_show (hbox1);
   gtk_box_pack_start (GTK_BOX (vbox1), hbox1, FALSE, TRUE, 0);
-
-  navbar_book.button_up = gtk_button_new ();
-  gtk_widget_show (navbar_book.button_up);
-  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_up, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_up, _("Go to parent"), NULL);
-  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_up), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_up), FALSE);
-
-  image1 = gtk_image_new_from_icon_name ("stock_up", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image1);
-  gtk_container_add (GTK_CONTAINER (navbar_book.button_up), image1);
-
-  navbar_book.button_left= gtk_button_new ();
-  gtk_widget_show (navbar_book.button_left);
-  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_left, FALSE, FALSE, 0);
-  
-  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_left), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_left), FALSE);
-
-  image1 = gtk_image_new_from_icon_name ("stock_left", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image1);
-  gtk_container_add (GTK_CONTAINER (navbar_book.button_left), image1);
 
   navbar_book.lookup_entry = gtk_entry_new ();
   gtk_widget_show (navbar_book.lookup_entry);
@@ -330,16 +304,50 @@ GtkWidget *gui_navbar_book_new(void)
   navbar_book.button_list = gtk_toggle_button_new ();
   gtk_widget_show (navbar_book.button_list);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_list, FALSE, FALSE, 0);
-  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_list), GTK_RELIEF_NONE);
+  //gtk_button_set_relief (GTK_BUTTON (navbar_book.button_list), GTK_RELIEF_NONE);
 
   arrow1 = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
   gtk_widget_show (arrow1);
   gtk_container_add (GTK_CONTAINER (navbar_book.button_list), arrow1);
 
+  navbar_book.button_up = gtk_button_new ();
+  gtk_widget_show (navbar_book.button_up);
+  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_up, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, navbar_book.button_up, _("Go to previous item"), NULL);
+  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_up), GTK_RELIEF_NONE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_up), FALSE);
+
+  image1 = gtk_image_new_from_icon_name ("stock_up", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image1);
+  gtk_container_add (GTK_CONTAINER (navbar_book.button_up), image1);
+
+  navbar_book.button_down = gtk_button_new ();
+  gtk_widget_show (navbar_book.button_down);
+  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_down, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, navbar_book.button_down, _("Go to next item"), NULL);
+  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_down), GTK_RELIEF_NONE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_down), FALSE);
+
+  image2 = gtk_image_new_from_icon_name ("stock_down", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image2);
+  gtk_container_add (GTK_CONTAINER (navbar_book.button_down), image2);
+
+  navbar_book.button_left= gtk_button_new ();
+  gtk_widget_show (navbar_book.button_left);
+  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_left, FALSE, FALSE, 0);
+  gtk_tooltips_set_tip (tooltips, navbar_book.button_left, _("Go to parent"), NULL);
+  
+  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_left), GTK_RELIEF_NONE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_left), FALSE);
+
+  image1 = gtk_image_new_from_icon_name ("stock_left", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image1);
+  gtk_container_add (GTK_CONTAINER (navbar_book.button_left), image1);
+
   navbar_book.button_right = gtk_button_new ();
   gtk_widget_show (navbar_book.button_right);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_right, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_right, _("Next"), NULL);
+  gtk_tooltips_set_tip (tooltips, navbar_book.button_right, _("Go to first child"), NULL);
   
   gtk_button_set_relief (GTK_BUTTON (navbar_book.button_right), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_right), FALSE);
@@ -348,32 +356,20 @@ GtkWidget *gui_navbar_book_new(void)
   gtk_widget_show (image1);
   gtk_container_add (GTK_CONTAINER (navbar_book.button_right), image1);
 
-  navbar_book.button_down = gtk_button_new ();
-  gtk_widget_show (navbar_book.button_down);
-  gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_down, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_down, _("Go to first child"), NULL);
-  gtk_button_set_relief (GTK_BUTTON (navbar_book.button_down), GTK_RELIEF_NONE);
-  gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_down), FALSE);
-
-  image2 = gtk_image_new_from_icon_name ("stock_down", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image2);
-  gtk_container_add (GTK_CONTAINER (navbar_book.button_down), image2);
-
-
   g_signal_connect ((gpointer) navbar_book.button_up, "clicked",
-                    G_CALLBACK (on_button_parent_clicked),
+                    G_CALLBACK (on_button_prev_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) navbar_book.button_down, "clicked",
+                    G_CALLBACK (on_button_next_clicked),
                     NULL);
   g_signal_connect ((gpointer)navbar_book.button_left , "clicked",
-                    G_CALLBACK (on_button_prev_clicked),
+                    G_CALLBACK (on_button_parent_clicked),
+                    NULL);
+  g_signal_connect ((gpointer)navbar_book.button_right , "clicked",
+                    G_CALLBACK (on_button_child_clicked),
                     NULL);
   g_signal_connect ((gpointer) navbar_book.button_list, "button_press_event",
                     G_CALLBACK (select_button_press_callback),
-                    NULL);
-  g_signal_connect ((gpointer)navbar_book.button_right , "clicked",
-                    G_CALLBACK (on_button_next_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) navbar_book.button_down, "clicked",
-                    G_CALLBACK (on_button_child_clicked),
                     NULL);
   return vbox1;
 }
