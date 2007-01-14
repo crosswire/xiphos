@@ -1,3 +1,8 @@
+2007-01-14  terry <tbiggs@users.sf.net>
+
+	* gs now depends on gtkhtml-3.8.x
+	* removed old editor files for gtkhtml-3.6 and earlier
+
 2007-01-13  karl <karl@charcoal.com>
 
 	* fixed bug #1634794 adv.search hates booknames w/spaces

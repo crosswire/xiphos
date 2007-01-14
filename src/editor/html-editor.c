@@ -1275,9 +1275,10 @@ gint _create_new(const gchar * filename, const gchar * key, gint note)
 		editor->filename = NULL;
 		widgets.studypad_dialog =
 		    container_create(_("StudyPad"), editor);
-		if (filename)
+		if (filename) {
 			editor->filename = g_strdup(filename);
-		load_through_persist_file(editor, g_strdup(filename));
+			load_through_persist_file(editor, g_strdup(filename));
+		}
 		settings.studypad_dialog_exist = TRUE;
 	}
 	if (editor->html_widget) {
