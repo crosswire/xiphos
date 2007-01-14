@@ -82,17 +82,6 @@ if test "x$have_gtkhtml" = xyes; then
 	dnl gtkhtml api version
 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
 	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
-else
-	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.6, have_gtkhtml=yes,exit)
-	AC_DEFINE(USE_GTKHTML36, 1, [Define if you want to use GtkHtml-3.6])
-
-	dnl gtkhtml_datadir
-	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.6`"
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
-
-	dnl gtkhtml api version
-	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.6`
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
 fi
 AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
 AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
