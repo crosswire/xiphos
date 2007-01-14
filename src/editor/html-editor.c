@@ -143,7 +143,7 @@ delete_note_cb(GtkWidget * widget, gpointer data)
 	gchar *buf = NULL;
 	EDITOR *e = (EDITOR *) data;
 	
-	if(e->studypad)
+	if (e->studypad)
 		return;
 	
 	info = gui_new_dialog();
@@ -266,8 +266,8 @@ save_through_persist_file(EDITOR * e, const gchar * filename)
 		CORBA_exception_free(&ev);
 		return FALSE;
 	}
-	if(!e->filename || strcmp(e->filename, filename)) {
-		if(e->filename)
+	if (!e->filename || strcmp(e->filename, filename)) {
+		if (e->filename)
 			g_free(e->filename);
 		e->filename = g_strdup(filename);
 		xml_set_value("GnomeSword", "studypad", "lastfile",
@@ -473,7 +473,7 @@ add_bookmark_cb(GtkWidget * widget, gpointer data)
 	EDITOR *e = (EDITOR *) data;
 	gchar *label = NULL;
 	
-	if(e->studypad) {
+	if (e->studypad) {
 		label = g_strdup_printf("%s, %s",e->filename, "studypad");
 		gui_bookmark_dialog(label, "studypad", e->filename);
 		g_free(label);
@@ -501,7 +501,7 @@ save_through_persist_file_cb(GtkWidget * widget, gpointer data)
 {
 	gchar *filename = NULL;
 	EDITOR *e = (EDITOR *) data;
-	if(e->filename) {
+	if (e->filename) {
 		filename = g_strdup(e->filename);
 		save_through_persist_file(e, filename);
 	}
@@ -623,9 +623,9 @@ gboolean editor_close_all(void)
 #ifdef DEBUG
 	g_message("number of editors = %d",g_list_length(tmp));
 #endif
-	while(tmp != NULL) {
+	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if(e->window)
+		if (e->window)
 			do_exit(e);			
 		tmp = g_list_next(tmp);
 	}
@@ -640,16 +640,16 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 	gchar *title;
 	gchar *text;
 	
-	if(editor_is_dirty(e))
+	if (editor_is_dirty(e))
 		save_through_persist_stream_cb(NULL, e);
 	
-	if(module_name) {
-		if(e->module)
+	if (module_name) {
+		if (e->module)
 			g_free(e->module);
 		e->module = g_strdup(module_name);
 	}
-	if(key) {	
-		if(e->key) 
+	if (key) {	
+		if (e->key) 
 			g_free(e->key);
 		e->key = g_strdup(key);
 	}
@@ -948,8 +948,8 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
 
 static void sync_toggled(GtkToggleButton * button, EDITOR * e)
 {
-	if(button->active) {
-		if(editor_is_dirty(e))
+	if (button->active) {
+		if (editor_is_dirty(e))
 			save_through_persist_stream_cb(NULL, (EDITOR*)e);
 		editor_load_note(e, NULL,settings.currentverse);
 		e->sync = TRUE;
@@ -965,9 +965,9 @@ void editor_sync_with_main(void)
 	EDITOR * e;
 	
 	tmp = g_list_first(editors_all);
-	while(tmp != NULL) {
+	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if(!e->studypad) 
+		if (!e->studypad) 
 			sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
 		tmp = g_list_next(tmp);
 	}
@@ -1123,11 +1123,13 @@ static GtkWidget *container_create(const gchar * window_title,
 	
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox);
-	if(!editor->studypad) {
+	if (!editor->studypad) {
 		toolbar_nav = navebar_create(editor);
 		gtk_widget_show(toolbar_nav);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
 		editor->navbar.module_name = editor->module;
+		if (editor->navbar.key == NULL)
+			editor->navbar.key = g_strdup(editor->key);
 		main_navbar_fill_book_combo(editor->navbar);
 	}
 
@@ -1314,16 +1316,16 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 	EDITOR *e;
 	
 	tmp = g_list_first(editors_all);
-	while(tmp != NULL) {
+	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if(note && !e->studypad) {
-			if(editor_is_dirty(e))
+		if (note && !e->studypad) {
+			if (editor_is_dirty(e))
 				save_through_persist_stream_cb(NULL, 
 						(EDITOR*)e);
-			if(e->module)
+			if (e->module)
 				g_free(e->module);
 			e->module = g_strdup(filename);
-			if(e->key)
+			if (e->key)
 				g_free(e->key);
 			e->key = g_strdup(key);
 			gtk_widget_show(e->window);
@@ -1332,12 +1334,12 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 			editor_load_note(e, NULL, NULL);
 			return 1;
 		}
-		if(!note && e->studypad) {
-			if(editor_is_dirty(e))
+		if (!note && e->studypad) {
+			if (editor_is_dirty(e))
 				save_through_persist_file(e, 
 						g_strdup(e->filename));
 				
-			if(e->filename)
+			if (e->filename)
 				g_free(e->filename);
 			e->filename = g_strdup(filename);
 			gtk_widget_show(e->window);
