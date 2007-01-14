@@ -37,6 +37,74 @@
 #include "backend/sword_main.hh"
 
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+static
+int check_for_prev_sib(char * book, unsigned long offset)
+{
+	unsigned long offset_save;
+	
+	offset_save = offset;
+	backend->set_module(book);
+	backend->set_treekey(offset);
+	if(backend->treekey_prev_sibling(offset)) {
+		gtk_widget_set_sensitive(navbar_book.button_up,TRUE);
+		backend->set_treekey(offset_save);
+	} else {
+		gtk_widget_set_sensitive(navbar_book.button_up,FALSE);
+	}
+}
+
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+static
+int check_for_next_sib(char * book, unsigned long offset)
+{
+	unsigned long offset_save;
+	
+	offset_save = offset;
+	backend->set_module(book);
+	backend->set_treekey(offset);
+	if(backend->treekey_next_sibling(offset)) {
+		gtk_widget_set_sensitive(navbar_book.button_down,TRUE);
+		backend->set_treekey(offset_save);
+	} else {
+		gtk_widget_set_sensitive(navbar_book.button_down,FALSE);
+	}
+}
+
+
 /******************************************************************************
  * Name
  *  
@@ -146,7 +214,9 @@ void main_navbar_book_prev(void)
 		tmpbuf = g_strdup_printf("%ld",offset);
 		main_display_book(settings.book_mod,tmpbuf);
 		g_free(tmpbuf);
-	}
+	} 
+	//check_for_prev_sib(settings.book_mod, settings.book_offset);
+	//check_for_next_sib(settings.book_mod, settings.book_offset);
 }
 
 
@@ -182,8 +252,9 @@ void main_navbar_book_next(void)
 		tmpbuf = g_strdup_printf("%ld",offset);
 		main_display_book(settings.book_mod,tmpbuf);
 		g_free(tmpbuf);
-	}
-	
+	} 
+	//check_for_prev_sib(settings.book_mod, settings.book_offset);
+	//check_for_next_sib(settings.book_mod, settings.book_offset);
 
 }
 
@@ -198,6 +269,8 @@ void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	tmpbuf = g_strdup_printf("%ld",GPOINTER_TO_INT(user_data));
 	main_display_book(settings.book_mod,tmpbuf);
 
+	//check_for_prev_sib(settings.book_mod, settings.book_offset);
+	//check_for_next_sib(settings.book_mod, settings.book_offset);
 }
 
 
@@ -223,6 +296,8 @@ GtkWidget *main_book_drop_down_new(void)
 	GtkWidget *menu;
 	GtkWidget * item;
 	unsigned long offset;
+
+	navbar_book.number_sibs = 0;
 	
 	backend->set_module(settings.book_mod);
 	backend->set_treekey(settings.book_offset);
@@ -277,34 +352,17 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);
 		
 		if(offset > 0)
-			gtk_widget_set_sensitive(navbar_book.button_up,TRUE);
+			gtk_widget_set_sensitive(navbar_book.button_left,TRUE);
 		else
-			gtk_widget_set_sensitive(navbar_book.button_up,FALSE);		
+			gtk_widget_set_sensitive(navbar_book.button_left,FALSE);		
 			
 		if (backend->treekey_has_children(offset)) {
-			gtk_widget_set_sensitive(navbar_book.button_down,TRUE);
-			/*gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, COL_OPEN_PIXBUF,
-					   pixbufs->pixbuf_closed,
-					   COL_CLOSED_PIXBUF,
-					   pixbufs->pixbuf_closed,
-					   COL_CAPTION,
-					   (gchar *) tmpbuf, COL_MODULE,
-					   (gchar *) mod_name,
-					   COL_OFFSET, (gchar *) buf,
-					   -1);*/
+			gtk_widget_set_sensitive(navbar_book.button_right,TRUE);
 		} else {
-			gtk_widget_set_sensitive(navbar_book.button_down,FALSE);
-			/*gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, COL_OPEN_PIXBUF,
-					   pixbufs->pixbuf_helpdoc,
-					   COL_CLOSED_PIXBUF, NULL,
-					   COL_CAPTION,
-					   (gchar *) tmpbuf, COL_MODULE,
-					   (gchar *) mod_name,
-					   COL_OFFSET, (gchar *) buf,
-					   -1);*/
+			gtk_widget_set_sensitive(navbar_book.button_right,FALSE);
 		}
+	check_for_prev_sib(settings.book_mod, settings.book_offset);
+	check_for_next_sib(settings.book_mod, settings.book_offset);
 		free(tmpbuf);
 //	}
 
