@@ -25,16 +25,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#ifndef USE_GTKHTML38
-#include <gtkhtml/htmlengine.h>
-#include <gtkhtml/htmlselection.h>
-#include <gtkhtml/htmlengine-search.h>
-#endif
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
+#include <gtkhtml/gtkhtml-search.h>
 
 #include "gui/find_dialog.h"
 #include "main/settings.h"
@@ -107,12 +98,12 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 	html = GTK_HTML(d->htmlwidget);
 	text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
-	html_engine_search(html->engine, text,
-			   GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
-			   GTK_TOGGLE_BUTTON(d->backward)->active == 0,
-			   d->regular);
+	gtk_html_engine_search (html,
+					       text,
+					       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
+					       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
+					      d->regular );
 	sprintf(settings.findText, "%s", text);
-	//g_free(text);
 }
 
 
@@ -137,10 +128,7 @@ static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
-#ifndef USE_GTKHTML38
-	if (html->engine->search_info)
-		html_engine_search_next(html->engine);
-#endif
+	gtk_html_engine_search_next(html);
 }
 
 
