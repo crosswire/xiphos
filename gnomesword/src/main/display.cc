@@ -731,6 +731,11 @@ char GTKChapDisp::Display(SWModule &imodule)
                              &bytes_written,
                              error);
 		
+		// special contrasty highlighting
+		if ((key->Verse() == curVerse) && settings.versehighlight)
+			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
+					      settings.highlight_bg);
+
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
@@ -746,8 +751,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				(key->Verse() == curVerse)
-				?settings.currentverse_color
-				:settings.bible_text_color);
+				? (settings.versehighlight
+				   ? settings.highlight_fg
+				   : settings.currentverse_color)
+				: settings.bible_text_color);
 		
 #ifdef USE_GTKMOZEMBED 		
 		if (key->Verse() == curVerse   ||
@@ -781,6 +788,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 		} else {
 			swbuf.append("</font>");
 		}
+
+		// special contrasty highlighting
+		if ((key->Verse() == curVerse) && settings.versehighlight)
+			swbuf.appendFormatted("</td></tr></table>");
+
 		g_free(buf);
 #ifdef USE_GTKMOZEMBED 
 		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
@@ -1117,6 +1129,15 @@ char DialogChapDisp::Display(SWModule &imodule)
 			++x;
 			sprintf(heading,"%d",x);
 		}
+
+		// special contrasty highlighting
+		if ((key->Verse() == curVerse) && settings.versehighlight) {
+			buf = g_strdup_printf("<table bgcolor=\"%s\"><tr><td>",
+					      settings.highlight_bg);
+			str = g_string_append(str,buf);
+			g_free(buf);
+		}
+
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
@@ -1133,8 +1154,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				(key->Verse() == curVerse)
-				?settings.currentverse_color
-				:settings.bible_text_color);
+				? (settings.versehighlight
+				   ? settings.highlight_fg
+				   : settings.currentverse_color)
+				: settings.bible_text_color);
 		
 		str = g_string_append(str,buf);
 		g_free(buf);	
@@ -1173,6 +1196,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 		str = g_string_append(str, buf2);
 		g_free(buf);
 		g_free(buf2);
+
+		// special contrasty highlighting
+		if ((key->Verse() == curVerse) && settings.versehighlight)
+		    str = g_string_append(str, ("</td></tr></table>"));
 	}
 	buf = g_strdup_printf("%s", "</body></html>");
 	str = g_string_append(str, buf);
@@ -1192,8 +1219,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
 	gtk_html_set_editable(html, was_editable);
-	if (curVerse > 1) {
-		buf = g_strdup_printf("%d", curVerse - 1);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}	

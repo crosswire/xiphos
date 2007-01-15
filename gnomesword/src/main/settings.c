@@ -438,10 +438,22 @@ void load_settings_structure(void)
 	    xml_get_value("HTMLcolors", "versenum");
 	settings.found_color = xml_get_value("HTMLcolors", "found");
 
+	if (buf = xml_get_value("HTMLcolors", "highlight_fg"))
+		settings.highlight_fg = g_strdup(buf);
+	else {
+		xml_add_new_item_to_section("HTMLcolors", "highlight_fg", "#FFFF00");
+		settings.highlight_fg = g_strdup("#FFFF00");
+	}
+	if (buf = xml_get_value("HTMLcolors", "highlight_bg"))
+		settings.highlight_bg = g_strdup(buf);
+	else {
+		xml_add_new_item_to_section("HTMLcolors", "highlight_bg", "#060680");
+		settings.highlight_bg = g_strdup("#060680");
+	}
 
 	buf = xml_get_value("parallel", "strongs");
 	if(buf)
-		settings.strongsint =atoi(buf);
+		settings.strongsint = atoi(buf);
 	
 	buf = xml_get_value("parallel", "morphs");
 	if(buf)
@@ -503,6 +515,13 @@ void load_settings_structure(void)
 	else {
 		xml_add_new_item_to_section("misc", "showversenum", "1");
 		settings.showversenum = 1;
+	}
+
+	if (buf = xml_get_value("misc", "versehighlight"))
+		settings.versehighlight = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "versehighlight", "0");
+		settings.versehighlight = 0;
 	}
 
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
