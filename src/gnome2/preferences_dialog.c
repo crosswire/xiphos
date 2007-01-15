@@ -61,6 +61,7 @@ typedef enum {
 	USE_PINNED_TABS,
 	READ_ALOUD,
 	SHOW_VERSE_NUM,
+	VERSE_HIGHLIGHT,
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
@@ -79,7 +80,9 @@ typedef enum {
 	TEXT_BACKGROUND,
 	TEXT_CURRENT_VERSE,
 	VERSE_NUMBERS,
-	HREF_LINKS
+	HREF_LINKS,
+	HIGHLIGHT_FG,
+	HIGHLIGHT_BG
 } which_color_combo;
 
 
@@ -132,6 +135,8 @@ struct _preferences_color_pickers {
 	GtkWidget *text_current_verse;
 	GtkWidget *verse_numbers;
 	GtkWidget *href_links;
+	GtkWidget *highlight_fg;
+	GtkWidget *highlight_bg;
 };
 
 typedef struct _preferences_check_buttons CHECK_BUTTONS;
@@ -151,6 +156,7 @@ struct _preferences_check_buttons {
 	GtkWidget *use_imageresize;
 	GtkWidget *readaloud;
 	GtkWidget *show_verse_num;
+	GtkWidget *versehighlight;
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
@@ -461,6 +467,72 @@ void on_colorbutton5_color_set(GtkColorButton * colorbutton,
 
 /******************************************************************************
  * Name
+ *   on_colorbutton6_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton6_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton6_color_set(GtkColorButton * colorbutton,
+                                       			 gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "highlight_fg", buf2);
+	settings.highlight_fg = xml_get_value("HTMLcolors", "highlight_fg");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+/******************************************************************************
+ * Name
+ *   on_colorbutton7_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorbutton7_color_set(GtkColorButton  * colorbutton, 
+ *							gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_colorbutton7_color_set(GtkColorButton * colorbutton,
+                                       			 gpointer user_data)
+{
+	gchar *buf2 = NULL;
+ 	GdkColor color;
+	
+	gtk_color_button_get_color(colorbutton, &color);
+	buf2 = gdkcolor_to_hex(color,1); 
+	xml_set_value("GnomeSword", "HTMLcolors", "highlight_bg", buf2);
+	settings.highlight_bg = xml_get_value("HTMLcolors", "highlight_bg");
+	if (buf2)
+		g_free(buf2);
+	apply_color_settings();
+}
+
+/******************************************************************************
+ * Name
  *   on_checkbutton1_toggled
  *
  * Synopsis
@@ -729,6 +801,35 @@ void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data
 
 /******************************************************************************
  * Name
+ *   on_checkbutton13_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton13_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton13_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "versehighlight",
+		      (togglebutton->active ? "1" : "0"));
+	settings.versehighlight = atoi(xml_get_value("misc", "versehighlight"));
+	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.versehighlight_item),
+			       settings.versehighlight);
+}
+
+
+/******************************************************************************
+ * Name
  *   on_checkbutton6_toggled
  *
  * Synopsis
@@ -866,6 +967,36 @@ void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer
 		xml_set_value("GnomeSword", "misc", "imageresize", "0");
 	buf = xml_get_value("misc", "imageresize");
 	settings.imageresize =  atoi(buf);
+}
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_versehighlight_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	gchar *buf;
+	
+	if (togglebutton->active)
+		xml_set_value("GnomeSword", "misc", "versehighlight", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "versehighlight", "0");
+	buf = xml_get_value("misc", "versehighlight");
+	settings.versehighlight =  atoi(buf);
+	main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
 
 /******************************************************************************
@@ -1592,6 +1723,24 @@ static void setup_color_pickers(void)
 			GTK_COLOR_BUTTON(color_picker.href_links),
                                         &color);
 	}
+
+	// contrasty highlighting -- foreground.
+	if (string_is_color(settings.highlight_fg))
+		gdk_color_parse(settings.highlight_fg, &color);
+	else
+		gdk_color_parse("#0000CF", &color);
+	gtk_color_button_set_color(
+		GTK_COLOR_BUTTON(color_picker.highlight_fg),
+				&color);
+
+	// contrasty highlighting -- background.
+	if (string_is_color(settings.highlight_bg))
+		gdk_color_parse(settings.highlight_bg, &color);
+	else
+		gdk_color_parse("#0000CF", &color);
+	gtk_color_button_set_color(
+		GTK_COLOR_BUTTON(color_picker.highlight_bg),
+				&color);
 }
 
 
@@ -1630,6 +1779,9 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_imageresize),
 				     settings.imageresize);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.versehighlight),
+				     settings.versehighlight);
 
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
@@ -1653,6 +1805,8 @@ static void setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_scroll_toggled), NULL);
 	g_signal_connect(check_button.use_imageresize, "toggled",
 			 G_CALLBACK(on_checkbutton_imageresize_toggled), NULL);
+	g_signal_connect(check_button.versehighlight, "toggled",
+			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
 	
 }
 
@@ -1867,6 +2021,13 @@ static void create_preferences_dialog(void)
 	color_picker.href_links = glade_xml_get_widget (gxml, "colorbutton5");
 	g_signal_connect(color_picker.href_links, "color_set",
 			 G_CALLBACK(on_colorbutton5_color_set), NULL);
+	color_picker.highlight_fg = glade_xml_get_widget (gxml, "colorbutton6");
+	g_signal_connect(color_picker.highlight_fg, "color_set",
+			 G_CALLBACK(on_colorbutton6_color_set), NULL);
+	color_picker.highlight_bg = glade_xml_get_widget (gxml, "colorbutton7");
+	g_signal_connect(color_picker.highlight_bg, "color_set",
+			 G_CALLBACK(on_colorbutton7_color_set), NULL);
+
 	setup_color_pickers();
 	/* check buttons */
 	check_button.enable_tabbed_browsing = glade_xml_get_widget(gxml, "checkbutton1");
@@ -1878,11 +2039,13 @@ static void create_preferences_dialog(void)
 	check_button.use_pinned_tabs = glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
 	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
+	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton13");
 	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
+	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	setup_check_buttons();
 	/* verse number size */
 	index = get_verse_number_size_index();

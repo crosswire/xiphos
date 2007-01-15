@@ -75,6 +75,8 @@ struct _settings {
 		*bible_verse_num_color, /* verse number color */
 		*found_color, /* color to use for search word in results display */
 		*font_color, /*  */
+		*highlight_fg, /* special fg color when highlighting */
+		*highlight_bg, /* special fg color when highlighting */
 		*verse_num_font_size;		
 		
 	int 
@@ -112,6 +114,7 @@ struct _settings {
 	        pinnedtabs, /* all tabs are pinned together, moving in concert */
 	        showversenum, /* display verse numbers in text (default on) */
 	        readaloud, /* pass text through (existing) "festival -server" */
+	        versehighlight, /* do special fg/bg for current verse */
 	        parallelpage, /* display parallel page */
 	        autosavepersonalcomments, /* auto save personal notes */
 	        formatpercom, /* use html to format personal notes */
