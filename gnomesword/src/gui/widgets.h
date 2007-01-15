@@ -109,6 +109,7 @@ struct  _app_widgets {
 		*pinnedtabs_item,	/* widget to access toggle menu - for pinnedtabs */
 		*showversenum_item,	/* widget to access toggle menu - for showversenum */
 		*readaloud_item,	/* widget to access toggle menu - for reading out loud */
+		*versehighlight_item,	/* widget to access toggle menu - for verse highlight */
 		*button_dict_book,      /* main toolbar togglebutton */
 //		*button_parallel_view,  /* main toolbar togglebutton */
 		*button_new_tab,	/* creates a new passage tab */
