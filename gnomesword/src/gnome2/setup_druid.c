@@ -54,6 +54,7 @@ struct _settings_druid {
 	GtkWidget *checkbutton_pinned_tabs;
 	GtkWidget *checkbutton_readaloud;
 	GtkWidget *checkbutton_show_verse_num;
+	GtkWidget *checkbutton_versehighlight;
 	GtkWidget *checkbutton_text_tabs;
 	GtkWidget *checkbutton_text_window;
 	GtkWidget *checkbutton_comm_tabs;
@@ -216,6 +217,13 @@ static void save_first_run_settings(SETTINGS_DRUID widgets)
 		xml_set_value("GnomeSword", "misc", "showversenum", "1");
 	else
 		xml_set_value("GnomeSword", "misc", "showversenum", "0");
+
+	settings.versehighlight =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_versehighlight)->active;
+	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_versehighlight)->active)
+		xml_set_value("GnomeSword", "misc", "versehighlight", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "versehighlight", "0");
 
 	settings.showtexts =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active;
@@ -675,6 +683,17 @@ static GtkWidget *create_setup_druid(GList * biblemods,
 	gtk_widget_set_size_request(widgets.checkbutton_show_verse_num, 212, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.checkbutton_show_verse_num),
+				     TRUE);
+
+	widgets.checkbutton_versehighlight =
+	    gtk_check_button_new_with_label(_("Highlight Current Verse"));
+	gtk_widget_show(widgets.checkbutton_versehighlight);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_versehighlight, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(widgets.checkbutton_versehighlight, 212, -1);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.checkbutton_versehighlight),
 				     TRUE);
 
 	widgets.checkbutton_text_tabs =
