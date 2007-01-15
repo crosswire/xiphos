@@ -526,8 +526,10 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "text_fg", (const xmlChar *) "#000000");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum",(const xmlChar *)  "#0000CF");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "currentverse", (const xmlChar *) "#339766");
-	xmlNewTextChild(section_node, NULL,(const xmlChar *)  "link", (const xmlChar *) "#878787");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "link", (const xmlChar *) "#878787");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "found", (const xmlChar *) "#D02898");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_fg", (const xmlChar *)"#FFFF00");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "highlight_bg", (const xmlChar *)"#060680");
 
 
 	section_node =
@@ -587,6 +589,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"pinnedtabs", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"showversenum", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"readaloud", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"versehighlight", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"setup_canceled",(const xmlChar *)"0");
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"modules", NULL);

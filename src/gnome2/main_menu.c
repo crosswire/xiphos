@@ -334,6 +334,31 @@ static void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_versehighlight_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_versehighlight_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toggle special current verse highlight.
+ *
+ * Return value
+ *   void
+ */
+
+static void on_versehighlight_activate(GtkCheckMenuItem * menuitem,
+				  gpointer user_data)
+{
+	settings.versehighlight = menuitem->active;
+	xml_set_value("GnomeSword", "misc", "versehighlight",
+		      (settings.versehighlight ? "1" : "0"));
+	main_display_bible(NULL, settings.currentverse);
+}
+
+/******************************************************************************
+ * Name
  *  on_exit_activate
  *
  * Synopsis
@@ -807,6 +832,12 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Highlight Current Verse"),
+	 NULL,
+	 NULL, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
@@ -916,6 +947,7 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.pinnedtabs_item = view1_menu_uiinfo[8].widget;
 	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
+	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
@@ -928,6 +960,9 @@ void gui_create_main_menu(GtkWidget * app)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.showversenum_item),
 				       settings.showversenum);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.versehighlight_item),
+				       settings.versehighlight);
 	
 	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
@@ -944,6 +979,10 @@ void gui_create_main_menu(GtkWidget * app)
 	g_signal_connect(GTK_OBJECT(widgets.showversenum_item),
 			   "toggled",
 			   G_CALLBACK(on_show_verse_numbers_activate),
+			   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.versehighlight_item),
+			   "toggled",
+			   G_CALLBACK(on_versehighlight_activate),
 			   NULL);
 }
 
