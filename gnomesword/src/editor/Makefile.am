@@ -27,8 +27,7 @@ noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
 
-libeditor_a_SOURCES = Spell.idl			\
-	$(HTML_EDITOR_GENERATED)		\
+libeditor_a_SOURCES = $(HTML_EDITOR_GENERATED)		\
 	html-editor.c html-editor.h     
 
 

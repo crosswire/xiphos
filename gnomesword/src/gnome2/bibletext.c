@@ -304,7 +304,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 		break;
 	}
 #ifdef DEBUG
-	g_message("on_key_press_event");
+	g_message("on_key_press_event\nkeycode: %d",event->hardware_keycode);
 #endif
   	return FALSE;
 }
@@ -320,6 +320,9 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 			shift_key_presed = FALSE;
 		break;
 	}
+#ifdef DEBUG
+	g_message("on_key_release_event\nkeycode: %d",event->hardware_keycode);
+#endif
   	return FALSE;
 }
 
