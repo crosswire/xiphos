@@ -1179,7 +1179,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (versestyle) {
-			buf2 = g_strdup_printf(" %s", "</font><br>");
+			buf2 = g_strdup_printf(" %s",
+					       ((key->Verse() == curVerse) &&
+						settings.versehighlight)
+					       ? "</font>"
+					       : "</font><br>");
 
 			if ((strstr(buf, "<!P>") == NULL) &&
 			     (strstr(buf, "<p>") == NULL) ) {
