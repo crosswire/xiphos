@@ -801,35 +801,6 @@ void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data
 
 /******************************************************************************
  * Name
- *   on_checkbutton13_toggled
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void on_checkbutton13_toggled(GtkToggleButton * togglebutton, gpointer user_data)
- *
- * Description
- *   
- *   
- *
- * Return value
- *   void
- */
-
-void on_checkbutton13_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-	xml_set_value("GnomeSword", "misc", "versehighlight",
-		      (togglebutton->active ? "1" : "0"));
-	settings.versehighlight = atoi(xml_get_value("misc", "versehighlight"));
-	
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-			       (widgets.versehighlight_item),
-			       settings.versehighlight);
-}
-
-
-/******************************************************************************
- * Name
  *   on_checkbutton6_toggled
  *
  * Synopsis
@@ -2039,7 +2010,6 @@ static void create_preferences_dialog(void)
 	check_button.use_pinned_tabs = glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
 	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
-	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton13");
 	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
