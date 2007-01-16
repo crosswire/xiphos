@@ -284,9 +284,8 @@ GtkWidget *gui_navbar_book_new(void)
   GtkWidget *image1;
   GtkWidget *arrow1;
   GtkWidget *image2;
-  GtkTooltips *tooltips;
  
-  tooltips = gtk_tooltips_new ();
+  navbar_book.tooltips = gtk_tooltips_new ();
   navbar_book.number_sibs = 0;
   vbox1 = gtk_vbox_new (FALSE, 0);
   gtk_widget_show (vbox1);
@@ -313,7 +312,7 @@ GtkWidget *gui_navbar_book_new(void)
   navbar_book.button_left= gtk_button_new ();
   gtk_widget_show (navbar_book.button_left);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_left, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_left, _("Go to parent"), NULL);
+  gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.button_left, _("Go to parent"), NULL);
   
   gtk_button_set_relief (GTK_BUTTON (navbar_book.button_left), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_left), FALSE);
@@ -325,7 +324,7 @@ GtkWidget *gui_navbar_book_new(void)
   navbar_book.button_up = gtk_button_new ();
   gtk_widget_show (navbar_book.button_up);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_up, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_up, _("Go to previous item"), NULL);
+  gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.button_up, _("Go to previous item"), NULL);
   gtk_button_set_relief (GTK_BUTTON (navbar_book.button_up), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_up), FALSE);
 
@@ -336,7 +335,7 @@ GtkWidget *gui_navbar_book_new(void)
   navbar_book.button_down = gtk_button_new ();
   gtk_widget_show (navbar_book.button_down);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_down, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_down, _("Go to next item"), NULL);
+  gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.button_down, _("Go to next item"), NULL);
   gtk_button_set_relief (GTK_BUTTON (navbar_book.button_down), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_down), FALSE);
 
@@ -347,7 +346,7 @@ GtkWidget *gui_navbar_book_new(void)
   navbar_book.button_right = gtk_button_new ();
   gtk_widget_show (navbar_book.button_right);
   gtk_box_pack_start (GTK_BOX (hbox1), navbar_book.button_right, FALSE, FALSE, 0);
-  gtk_tooltips_set_tip (tooltips, navbar_book.button_right, _("Go to first child"), NULL);
+  gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.button_right, _("Go to first child"), NULL);
   
   gtk_button_set_relief (GTK_BUTTON (navbar_book.button_right), GTK_RELIEF_NONE);
   gtk_button_set_focus_on_click (GTK_BUTTON (navbar_book.button_right), FALSE);
