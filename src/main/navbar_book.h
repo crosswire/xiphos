@@ -38,7 +38,6 @@ struct _navbar_book {
   	GtkTooltips *tooltips;	
 	gchar *key;
 	gchar *book_name;	
-	gint number_sibs;
 };
 extern NAVBAR_BOOK navbar_book;
 
