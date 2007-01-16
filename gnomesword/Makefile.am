@@ -27,7 +27,8 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	COPYING-DOCS
+	COPYING-DOCS \
+	RELEASE-NOTES 
 
 DISTCLEANFILES = gnome-doc-utils.make
 
