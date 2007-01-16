@@ -364,7 +364,7 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	tmpbuf = backend->get_key_form_offset(offset);
 	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);	
   	gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.lookup_entry, tmpbuf, NULL);
-	g_message(settings.book_key);
+	
 	if(offset > 0)
 		gtk_widget_set_sensitive(navbar_book.button_left,TRUE);
 	else
