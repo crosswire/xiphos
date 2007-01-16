@@ -337,6 +337,23 @@ GtkWidget *main_book_drop_down_new(void)
 } 
 
 
+
+/******************************************************************************
+ * Name
+ *   main_setup_navbar_book
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *   void main_setup_navbar_book(gchar * book_name, unsigned long offset)
+ *   
+ *
+ * Description
+ *   set  sensitive state of navbar buttons and set the entry to current book key
+ *
+ * Return value
+ *   void
+ */
+
 void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 {
 	gchar buf[256];
@@ -344,57 +361,22 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
-	
-//	if (backend->treekey_first_child(offset)) {
-//		offset = backend->get_treekey_offset();
-//		sprintf(buf, "%lu", offset);
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);
+	tmpbuf = backend->get_key_form_offset(offset);
+	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),  tmpbuf);	
+  	gtk_tooltips_set_tip (navbar_book.tooltips, navbar_book.lookup_entry, tmpbuf, NULL);
+	g_message(settings.book_key);
+	if(offset > 0)
+		gtk_widget_set_sensitive(navbar_book.button_left,TRUE);
+	else
+		gtk_widget_set_sensitive(navbar_book.button_left,FALSE);		
 		
-		if(offset > 0)
-			gtk_widget_set_sensitive(navbar_book.button_left,TRUE);
-		else
-			gtk_widget_set_sensitive(navbar_book.button_left,FALSE);		
-			
-		if (backend->treekey_has_children(offset)) {
-			gtk_widget_set_sensitive(navbar_book.button_right,TRUE);
-		} else {
-			gtk_widget_set_sensitive(navbar_book.button_right,FALSE);
-		}
+	if (backend->treekey_has_children(offset)) {
+		gtk_widget_set_sensitive(navbar_book.button_right,TRUE);
+	} else {
+		gtk_widget_set_sensitive(navbar_book.button_right,FALSE);
+	}
+	
 	check_for_prev_sib(settings.book_mod, settings.book_offset);
 	check_for_next_sib(settings.book_mod, settings.book_offset);
-		free(tmpbuf);
-//	}
-
-/*	while (backend->treekey_next_sibling(offset)) {
-		offset = backend->get_treekey_offset();
-		sprintf(buf, "%lu", offset);
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_tree_store_append(GTK_TREE_STORE(model),
-				      &child_iter, &iter);
-		if (backend->treekey_has_children(offset)) {
-			gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, COL_OPEN_PIXBUF,
-					   pixbufs->pixbuf_closed,
-					   COL_CLOSED_PIXBUF,
-					   pixbufs->pixbuf_closed,
-					   COL_CAPTION,
-					   (gchar *) tmpbuf, COL_MODULE,
-					   (gchar *) mod_name,
-					   COL_OFFSET, (gchar *) buf,
-					   -1);
-		} else {
-			gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, COL_OPEN_PIXBUF,
-					   pixbufs->pixbuf_helpdoc,
-					   COL_CLOSED_PIXBUF, NULL,
-					   COL_CAPTION,
-					   (gchar *) tmpbuf, COL_MODULE,
-					   (gchar *) mod_name,
-					   COL_OFFSET, (gchar *) buf,
-					   -1);
-		}
-		free(tmpbuf);
-	}
-*/
+	free(tmpbuf);
 }

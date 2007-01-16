@@ -57,19 +57,6 @@ dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
 
-dnl PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,have_gtkhtml=no)
-dnl if test "x$have_gtkhtml" = xyes; then
-dnl 	AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
-dnl 
-dnl 	dnl gtkhtml_datadir
-dnl 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.1`"
-dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
-dnl 	
-dnl 	dnl gtkhtml api version
-dnl 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.1`
-dnl 	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
-dnl fi
-
 PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
 if test "x$have_gtkhtml" = xyes; then
 	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
@@ -144,21 +131,6 @@ if test x$debug = xyes; then
   CXXFLAGS="$CXXFLAGS -Werror"
 fi
 
-
-GNOME_SPELL_CFLAGS=""
-GNOME_SPELL_LIBS=""
-AC_SUBST(GNOME_SPELL_CFLAGS)
-AC_SUBST(GNOME_SPELL_LIBS)
-  
-GNOME_SPELL_MODULES="libgnomeui-2.0 >= 1.112.1 libbonoboui-2.0 >= 1.112.1 libglade-2.0 >= 1.99.9"
-PKG_CHECK_MODULES(GNOME_SPELL, $GNOME_SPELL_MODULES)
-AC_SUBST(GNOME_SPELL_CFLAGS)
-AC_SUBST(GNOME_SPELL_LIBS)
-have_speller="yes"
-speller="gnome-spell"
-use_gnome_spell="true"
-AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
-AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
@@ -166,10 +138,10 @@ BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CON
 AC_SUBST(BONOBO_IDL_INCLUDES)
 
 
-AM_CONDITIONAL(GNOME_SPELL, test x$use_gnome_spell = xtrue)
+dnl 	AM_CONDITIONAL(GNOME_SPELL, test x$use_gnome_spell = xtrue)
 
-SPELL_LIBS=""
-AC_SUBST(SPELL_LIBS)
+dnl 	SPELL_LIBS=""
+dnl 	AC_SUBST(SPELL_LIBS)
 
 dnl ====================================
 dnl Gnome-doc-utils
