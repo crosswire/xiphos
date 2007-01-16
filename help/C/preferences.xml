@@ -145,6 +145,11 @@
 		If you enable <guilabel>Resize images</guilabel>, <application>GnomeSword</application> will automatically resize image
 		content in commentaries, general books, and dictionaries so as to fit the subwindow which contains them.
 		</para>
+		<para>
+		<guilabel>Highlight current verse</guilabel>, if enabled, will cause <application>GnomeSword</application> to substitute
+		mere current verse colorization with a high-contrast alternate color scheme on the current verse.  The colors used may be
+		chosen from the color selector pane (see above).
+		</para>
                 </sect3>
 	</sect2>
 	
