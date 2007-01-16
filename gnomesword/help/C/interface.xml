@@ -451,6 +451,13 @@
 					numbers within the text.
 					</para>
 				</listitem>
+				<listitem>	
+					<para>
+					Highlight Current Verse - Initially disabled, this toggle replaces mere alternate colorization of
+					the current verse with a substitute high-contrast highlight.  The colors used may be selected from
+					the Preferences dialog.
+					</para>
+				</listitem>
 			</itemizedlist>
 		</sect3>
 		
