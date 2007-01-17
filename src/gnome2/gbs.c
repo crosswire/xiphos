@@ -313,16 +313,12 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_widget_show(box);
 
 	navbar = gui_navbar_book_new();
-	gtk_box_pack_start(GTK_BOX(box),
-			   navbar, FALSE,
-			   FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box), navbar, FALSE, FALSE, 0);
 
 #ifdef USE_GTKMOZEMBED	
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
-	gtk_box_pack_start(GTK_BOX(box),
-			   eventbox, TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
 	widgets.html_book = embed_new(BOOK_TYPE);
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
@@ -335,9 +331,7 @@ GtkWidget *gui_create_book_pane(void)
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(box),
-			   scrolledwindow, TRUE,
-			   TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(box), scrolledwindow, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
