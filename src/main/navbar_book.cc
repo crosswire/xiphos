@@ -391,7 +391,7 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	gtk_tooltips_set_tip(navbar_book.tooltips,
 			     navbar_book.lookup_entry, tmpbuf, NULL);
 
-	if (heck_for_parent(settings.book_mod, settings.book_offset))
+	if (check_for_parent(settings.book_mod, settings.book_offset))
 		gtk_widget_set_sensitive(navbar_book.button_left, TRUE);
 	else
 		gtk_widget_set_sensitive(navbar_book.button_left, FALSE);
