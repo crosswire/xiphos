@@ -139,3 +139,22 @@
 		</sect3>
 	</sect2>
 
+<!-- Installing Non-Standard Modules -->
+	<sect2 id="non-standard-modules">
+		<title>Installing Non-Standard Modules</title>
+		<para>
+		Some resource modules in Sword Project format are available from sources other than Crosswire.  Necessarily, installing such
+		a module is a manual task.
+		</para>
+		<para>
+		Modules are normally packaged as *.zip files; they contain a configuration file plus a number of data files.  Installation
+		of such a module is done by cd'ing to your personal Sword (not <application>GnomeSword</application>) configuration
+		directory, ~/.sword, and unzipping the file there.  The configuration file will be left in "mods.d", and the module's data
+		files will go into a subdirectory of "modules".  Alternatively, if you have write access to the system Sword directory,
+		typically /usr/share/sword, you may cd there instead before unzipping.
+		</para>
+		<para>
+		Restart <application>GnomeSword</application> after installing such a module, so that a fresh instance of the program can
+		notice the new module in place.
+		</para>
+	</sect2>
