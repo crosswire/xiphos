@@ -24,17 +24,20 @@
 #endif
 #include <gnome.h>
 #include <versekey.h>
+#include <swmodule.h>
 
+#include "main/module_dialogs.h"
 #include "main/navbar_book.h"
+#include "main/navbar_book_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
-#include "gui/navbar_book.h"
+#include "gui/navbar_book_dialog.h"
 
 #include "backend/sword_main.hh"
 
-
+DIALOG_DATA * cur_d;
 /******************************************************************************
  * Name
  *  check_for_prev_sib
@@ -52,15 +55,16 @@
  */
 
 static
-int check_for_prev_sib(char *book, unsigned long offset)
+int check_for_prev_sib(DIALOG_DATA * d)
 {
 	unsigned long offset_save;
-
-	offset_save = offset;
-	backend->set_module(book);
-	backend->set_treekey(offset);
-	if (backend->treekey_prev_sibling(offset)) {
-		backend->set_treekey(offset_save);
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	offset_save = d->offset;
+	be->set_treekey(d->offset);
+	if (be->treekey_prev_sibling(d->offset)) {
+		d->offset = offset_save;
+		be->set_treekey(offset_save);
 		return 1;
 	}
 	return 0;
@@ -85,15 +89,16 @@ int check_for_prev_sib(char *book, unsigned long offset)
  */
 
 static
-int check_for_next_sib(char *book, unsigned long offset)
+int check_for_next_sib(DIALOG_DATA * d)
 {
 	unsigned long offset_save;
-
-	offset_save = offset;
-	backend->set_module(book);
-	backend->set_treekey(offset);
-	if (backend->treekey_next_sibling(offset)) {
-		backend->set_treekey(offset_save);
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	offset_save = d->offset;
+	be->set_treekey(d->offset);
+	if (be->treekey_next_sibling(d->offset)) {
+		d->offset = offset_save;
+		be->set_treekey(offset_save);
 		return 1;
 	}
 	return 0;
@@ -116,22 +121,15 @@ int check_for_next_sib(char *book, unsigned long offset)
  *   void
  */
 
-void main_navbar_book_parent(void)
+void main_navbar_book_dialog_parent(gpointer data)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-
-	backend->set_module(settings.book_mod);
-	backend->set_treekey(settings.book_offset);
-	if (backend->treekey_parent(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
-		g_free(tmpbuf);
-		tmpbuf = g_strdup_printf("%ld", offset);
-		main_display_book(settings.book_mod, tmpbuf);
-		g_free(tmpbuf);
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	be->set_treekey(d->offset);
+	if (be->treekey_parent(d->offset)) {
+		d->offset = be->get_treekey_offset();
+		main_setup_navbar_book_dialog(d);
 	}
 }
 
@@ -152,22 +150,15 @@ void main_navbar_book_parent(void)
  *   void
  */
 
-void main_navbar_book_first_child(void)
+void main_navbar_book_dialog_first_child(gpointer data)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
-
-	backend->set_module(settings.book_mod);
-	backend->set_treekey(settings.book_offset);
-	if (backend->treekey_first_child(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
-		g_free(tmpbuf);
-		tmpbuf = g_strdup_printf("%ld", offset);
-		main_display_book(settings.book_mod, tmpbuf);
-		g_free(tmpbuf);
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	be->set_treekey(d->offset);
+	if (be->treekey_first_child(d->offset)) {
+		d->offset = be->get_treekey_offset();
+		main_setup_navbar_book_dialog(d);
 	}
 }
 
@@ -188,22 +179,15 @@ void main_navbar_book_first_child(void)
  *   void
  */
 
-void main_navbar_book_prev(void)
+void main_navbar_book_dialog_prev(gpointer data)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
 
-	backend->set_module(settings.book_mod);
-	backend->set_treekey(settings.book_offset);
-	if (backend->treekey_prev_sibling(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
-		g_free(tmpbuf);
-		tmpbuf = g_strdup_printf("%ld", offset);
-		main_display_book(settings.book_mod, tmpbuf);
-		g_free(tmpbuf);
+	be->set_treekey(d->offset);
+	if (be->treekey_prev_sibling(d->offset)) {
+		d->offset = backend->get_treekey_offset();
+		main_setup_navbar_book_dialog(d);
 	}
 }
 
@@ -224,22 +208,15 @@ void main_navbar_book_prev(void)
  *   void
  */
 
-void main_navbar_book_next(void)
+void main_navbar_book_dialog_next(gpointer data)
 {
-	char *tmpbuf = NULL;
-	unsigned long offset;
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
 
-	backend->set_module(settings.book_mod);
-	backend->set_treekey(settings.book_offset);
-	if (backend->treekey_next_sibling(settings.book_offset)) {
-		offset = backend->get_treekey_offset();
-		tmpbuf = backend->treekey_get_local_name(offset);
-		gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry),
-				   tmpbuf);
-		g_free(tmpbuf);
-		tmpbuf = g_strdup_printf("%ld", offset);
-		main_display_book(settings.book_mod, tmpbuf);
-		g_free(tmpbuf);
+	be->set_treekey(d->offset);
+	if (backend->treekey_next_sibling(d->offset)) {
+		d->offset = backend->get_treekey_offset();
+		main_setup_navbar_book_dialog(d);
 	}
 }
 
@@ -262,12 +239,11 @@ void main_navbar_book_next(void)
  */
 
 static
-void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
+void on_menu_select(GtkMenuItem * menuitem, gpointer data)
 {
 	char *tmpbuf = NULL;
-
-	tmpbuf = g_strdup_printf("%ld", GPOINTER_TO_INT(user_data));
-	main_display_book(settings.book_mod, tmpbuf);
+	cur_d->offset = GPOINTER_TO_INT(data);	
+	main_setup_navbar_book_dialog(cur_d);
 }
 
 
@@ -288,35 +264,37 @@ void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
  *   GtkWidget * (menu)
  */
 
-GtkWidget *main_book_drop_down_new(void)
+GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 {
 	gchar *tmpbuf = NULL;
 	GtkWidget *menu;
 	GtkWidget *item;
 	unsigned long offset;
-
-	backend->set_module(settings.book_mod);
-	backend->set_treekey(settings.book_offset);
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	cur_d = d;
+	be->set_treekey(d->offset);
 	menu = gtk_menu_new();
-	offset = settings.book_offset;
+	offset = d->offset;
 	/* take us to the first sibling */
-	while (backend->treekey_prev_sibling(offset)) {
-		offset = backend->get_treekey_offset();
+	while (be->treekey_prev_sibling(offset)) {
+		offset = be->get_treekey_offset();
 	}
 	/* add menu item for first sibling*/
-	tmpbuf = backend->treekey_get_local_name(offset);
+	tmpbuf = be->treekey_get_local_name(offset);
 	item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
 	gtk_widget_show(item);
 	g_signal_connect(GTK_OBJECT(item), "activate",
 			 G_CALLBACK(on_menu_select),
-			 GINT_TO_POINTER(offset));
+			GINT_TO_POINTER(offset) );
 	gtk_container_add(GTK_CONTAINER(menu), item);
 	g_free(tmpbuf);
 
-	while (backend->treekey_next_sibling(offset)) {
-		offset = backend->get_treekey_offset();
+	while (be->treekey_next_sibling(offset)) {
+		offset = be->get_treekey_offset();
 		/* add menu item */
-		tmpbuf = backend->treekey_get_local_name(offset);
+		tmpbuf = be->treekey_get_local_name(offset);
 		item = gtk_menu_item_new_with_label((gchar *) tmpbuf);
 		gtk_widget_show(item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
@@ -346,38 +324,42 @@ GtkWidget *main_book_drop_down_new(void)
  *   void
  */
 
-void main_setup_navbar_book(gchar * book_name, unsigned long offset)
+void main_setup_navbar_book_dialog(gpointer data)
 {
 	gchar buf[256];
 	gchar *tmpbuf = NULL;
-//	g_message("offset: %ld",offset);
-	backend->set_module(book_name);
-	backend->set_treekey(offset);
-	tmpbuf = backend->get_key_form_offset(offset);
-	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
-	gtk_tooltips_set_tip(navbar_book.tooltips,
-			     navbar_book.lookup_entry, tmpbuf, NULL);
-
-	if (offset > 0)
-		gtk_widget_set_sensitive(navbar_book.button_left, TRUE);
+	DIALOG_DATA * d = (DIALOG_DATA *) data;
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	if(d->offset < 4) d->offset = 4;
+	//backend->set_module(book_name);
+	be->set_treekey(d->offset);
+	tmpbuf = be->get_key_form_offset(d->offset);
+	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
+	gtk_tooltips_set_tip(d->navbar_book.tooltips,
+			     d->navbar_book.lookup_entry, tmpbuf, NULL);
+	if (d->offset >= 4)
+		gtk_widget_set_sensitive(d->navbar_book.button_left, TRUE);
 	else
-		gtk_widget_set_sensitive(navbar_book.button_left, FALSE);
+		gtk_widget_set_sensitive(d->navbar_book.button_left, FALSE);
 
-	if (backend->treekey_has_children(offset)) {
-		gtk_widget_set_sensitive(navbar_book.button_right, TRUE);
+	if (be->treekey_has_children(d->offset)) {
+		gtk_widget_set_sensitive(d->navbar_book.button_right, TRUE);
 	} else {
-		gtk_widget_set_sensitive(navbar_book.button_right, FALSE);
+		gtk_widget_set_sensitive(d->navbar_book.button_right, FALSE);
 	}
 
-	if (check_for_prev_sib(settings.book_mod, settings.book_offset))
-		gtk_widget_set_sensitive(navbar_book.button_up, TRUE);
+	if (check_for_prev_sib(d))
+		gtk_widget_set_sensitive(d->navbar_book.button_up, TRUE);
 	else
-		gtk_widget_set_sensitive(navbar_book.button_up, FALSE);
+		gtk_widget_set_sensitive(d->navbar_book.button_up, FALSE);
 
-	if (check_for_next_sib(settings.book_mod, settings.book_offset))
-		gtk_widget_set_sensitive(navbar_book.button_down, TRUE);
+	if (check_for_next_sib(d))
+		gtk_widget_set_sensitive(d->navbar_book.button_down, TRUE);
 	else
-		gtk_widget_set_sensitive(navbar_book.button_down, FALSE);
+		gtk_widget_set_sensitive(d->navbar_book.button_down, FALSE);
 
 	free(tmpbuf);
+	be->set_treekey(d->offset);
+	be->display_mod->Display();
 }
