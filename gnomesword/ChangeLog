@@ -1,3 +1,9 @@
+2007-01-17  terry <tbiggs@users.sf.net>
+
+	* added navigation toolbar to genbook dialog
+	* added files main/navbar_book_dialog.cc and main/navbar_book_dialog.h
+	* added files gnome2/navbar_book_dialog.c and gui/navbar_book_dialog.h
+
 2007-01-15  karl <karl@charcoal.com>
 
 	* added feature: high-contrast highlight of current verse.
