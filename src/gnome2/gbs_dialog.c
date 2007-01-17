@@ -32,6 +32,7 @@
 #endif
 //#include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
+#include "gui/navbar_book_dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
 
@@ -307,6 +308,7 @@ static void add_columns(GtkTreeView *tree)
 void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 {
 	GtkWidget *vbox_dialog;
+	GtkWidget *navbar;
 	GtkWidget *frame_gbs;
 	GtkWidget *hpaned;
 	GtkWidget *scrolledwindow_ctree;
@@ -335,15 +337,18 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), frame_gbs, TRUE, TRUE,
 			   0);
 */
+	navbar = gui_navbar_book_dialog_new(dlg);
+	gtk_box_pack_start(GTK_BOX(vbox_dialog), navbar, FALSE, FALSE, 0);
+	
 	hpaned = gtk_hpaned_new();
 	gtk_widget_show(hpaned);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), hpaned, TRUE, TRUE,
 			   0);
 	//gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
-	gtk_paned_set_position(GTK_PANED(hpaned), 190);
+	//gtk_paned_set_position(GTK_PANED(hpaned), 190);
 
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_ctree);
+	//gtk_widget_show(scrolledwindow_ctree);
 	gtk_paned_pack1(GTK_PANED(hpaned), scrolledwindow_ctree, FALSE,
 		      TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
