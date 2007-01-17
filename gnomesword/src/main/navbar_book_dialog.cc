@@ -40,6 +40,40 @@
 DIALOG_DATA * cur_d;
 /******************************************************************************
  * Name
+ *  check_for_parent
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  int check_for_parent(DIALOG_DATA * d)
+ *
+ * Description
+ *   check to see if there is a parent to  the curret item
+ *
+ * Return value
+ *   int
+ */
+
+static
+int check_for_parent(DIALOG_DATA * d)
+{
+	unsigned long offset_save;
+	BackEnd *be = (BackEnd *) d->backend;
+	
+	offset_save = d->offset;
+	be->set_treekey(d->offset);
+	if (be->treekey_parent(d->offset)) {
+		d->offset = offset_save;
+		be->set_treekey(offset_save);
+		return 1;
+	}
+	return 0;
+}
+
+
+
+/******************************************************************************
+ * Name
  *  check_for_prev_sib
  *
  * Synopsis
@@ -186,7 +220,7 @@ void main_navbar_book_dialog_prev(gpointer data)
 
 	be->set_treekey(d->offset);
 	if (be->treekey_prev_sibling(d->offset)) {
-		d->offset = backend->get_treekey_offset();
+		d->offset = be->get_treekey_offset();
 		main_setup_navbar_book_dialog(d);
 	}
 }
@@ -214,8 +248,8 @@ void main_navbar_book_dialog_next(gpointer data)
 	BackEnd *be = (BackEnd *) d->backend;
 
 	be->set_treekey(d->offset);
-	if (backend->treekey_next_sibling(d->offset)) {
-		d->offset = backend->get_treekey_offset();
+	if (be->treekey_next_sibling(d->offset)) {
+		d->offset = be->get_treekey_offset();
 		main_setup_navbar_book_dialog(d);
 	}
 }
@@ -331,14 +365,15 @@ void main_setup_navbar_book_dialog(gpointer data)
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
 	
-	if(d->offset < 4) d->offset = 4;
-	//backend->set_module(book_name);
+	/*if(d->offset < 4) 
+		d->offset = 4;*/
 	be->set_treekey(d->offset);
 	tmpbuf = be->get_key_form_offset(d->offset);
 	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
 	gtk_tooltips_set_tip(d->navbar_book.tooltips,
 			     d->navbar_book.lookup_entry, tmpbuf, NULL);
-	if (d->offset >= 4)
+	/* fixme:  needs to check for parent */
+	if (check_for_parent(d))    //d->offset > 4)
 		gtk_widget_set_sensitive(d->navbar_book.button_left, TRUE);
 	else
 		gtk_widget_set_sensitive(d->navbar_book.button_left, FALSE);
