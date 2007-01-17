@@ -37,6 +37,39 @@
 
 /******************************************************************************
  * Name
+ *  check_for_parent
+ *
+ * Synopsis
+ *   #include "main/navbar_book.h"
+ *
+ *  int check_for_parent(char *book, unsigned long offset)
+ *
+ * Description
+ *   check to see if there is a parent to  the curret item
+ *
+ * Return value
+ *   int
+ */
+
+static
+int check_for_parent(char *book, unsigned long offset)
+{
+	unsigned long offset_save;
+	
+	offset_save = offset;
+	backend->set_module(book);
+	backend->set_treekey(offset);
+	
+	if (backend->treekey_parent(offset)) {
+		backend->set_treekey(offset_save);
+		return 1;
+	}
+	return 0;
+}
+
+
+/******************************************************************************
+ * Name
  *  check_for_prev_sib
  *
  * Synopsis
@@ -358,8 +391,7 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	gtk_tooltips_set_tip(navbar_book.tooltips,
 			     navbar_book.lookup_entry, tmpbuf, NULL);
 
-	/* fixme:  needs to check for parent */
-	if (offset > 0)
+	if (heck_for_parent(settings.book_mod, settings.book_offset))
 		gtk_widget_set_sensitive(navbar_book.button_left, TRUE);
 	else
 		gtk_widget_set_sensitive(navbar_book.button_left, FALSE);
