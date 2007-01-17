@@ -915,6 +915,7 @@ void main_display_book(const char * mod_name, char * key)
 	} else {
 		xml_set_value("GnomeSword", "keys", "offset", key);
 		settings.book_offset = atol(xml_get_value( "keys", "offset"));
+		if(settings.book_offset < 4) settings.book_offset = 4;
 		use_offset = TRUE;
 	}
 	

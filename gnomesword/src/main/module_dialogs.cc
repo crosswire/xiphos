@@ -54,6 +54,7 @@ extern "C" {
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
+#include "main/navbar_book_dialog.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/sidebar.h"
@@ -1795,6 +1796,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
 			     TRUE, t);
 		be->set_treekey(t->offset);
+		main_setup_navbar_book_dialog(t);
 #ifdef DEBUG
 		g_message("offset = %d",t->offset);
 #endif
@@ -1808,14 +1810,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		t->is_locked = 0;
 		t->cipher_old = NULL;
 	}	
-	
-	be->display_mod->Display();
-	bible_apply_change = TRUE;
-	
-#ifndef USE_GTKHTML38
-	if(type == PERCOM_TYPE)
-		gtk_html_set_editable(ec->html, TRUE);
-#endif
+	if(type != BOOK_TYPE) {
+		be->display_mod->Display();
+		bible_apply_change = TRUE;
+	}
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	return t;
