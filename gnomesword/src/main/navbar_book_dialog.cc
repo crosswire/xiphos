@@ -365,15 +365,13 @@ void main_setup_navbar_book_dialog(gpointer data)
 	DIALOG_DATA * d = (DIALOG_DATA *) data;
 	BackEnd *be = (BackEnd *) d->backend;
 	
-	/*if(d->offset < 4) 
-		d->offset = 4;*/
 	be->set_treekey(d->offset);
 	tmpbuf = be->get_key_form_offset(d->offset);
 	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
 	gtk_tooltips_set_tip(d->navbar_book.tooltips,
 			     d->navbar_book.lookup_entry, tmpbuf, NULL);
-	/* fixme:  needs to check for parent */
-	if (check_for_parent(d))    //d->offset > 4)
+			     
+	if (check_for_parent(d))    
 		gtk_widget_set_sensitive(d->navbar_book.button_left, TRUE);
 	else
 		gtk_widget_set_sensitive(d->navbar_book.button_left, FALSE);
