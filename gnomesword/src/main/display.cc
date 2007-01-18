@@ -713,9 +713,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
-		while ((preverse = imodule.getEntryAttributes()["Heading"]["Preverse"][heading].c_str()) != NULL) {
-			//= backend->get_entry_attribute("Heading", "Preverse",
-							   // heading)) != NULL) {
+		while ((preverse //= imodule.getEntryAttributes()["Heading"]["Preverse"][heading].c_str()) != NULL) {
+			= backend->get_entry_attribute("Heading", "Preverse",
+							    heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
 			swbuf.appendFormatted("<br><b>%s</b><br><br>", preverse2);
 			g_free(preverse);
