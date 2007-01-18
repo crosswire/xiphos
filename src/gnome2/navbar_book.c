@@ -96,6 +96,35 @@ void menu_position_under(GtkMenu * menu, int * x, int * y,
 	*push_in = FALSE;
 }
 
+static gboolean lookup_entry_press_callback(GtkWidget * widget,
+					     GdkEventKey * event,
+					     gpointer user_data)
+{
+	switch(event->hardware_keycode) {
+			case 98:
+					gtk_button_clicked(GTK_BUTTON(navbar_book.button_up));
+					return TRUE;
+			break;
+			case 104: 
+					gtk_button_clicked(GTK_BUTTON(navbar_book.button_down));
+					return TRUE;
+			break;
+			case 100: 
+					gtk_button_clicked(GTK_BUTTON(navbar_book.button_left));
+					return TRUE;
+			break;
+			case 102:
+					gtk_button_clicked(GTK_BUTTON(navbar_book.button_right));
+					return TRUE;
+			break;
+	}
+#ifdef DEBUG
+	g_message("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode);
+#endif
+	return FALSE;
+	
+
+}
 /******************************************************************************
  * Name
  *   select_button_press_callback
@@ -355,5 +384,8 @@ GtkWidget *gui_navbar_book_new(void)
 	g_signal_connect((gpointer) navbar_book.button_list,
 			 "button_press_event",
 			 G_CALLBACK(select_button_press_callback), NULL);
+	g_signal_connect((gpointer) navbar_book.lookup_entry,
+			 "key_press_event",
+			 G_CALLBACK(lookup_entry_press_callback), NULL);
 	return vbox1;
 }
