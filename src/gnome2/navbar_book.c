@@ -263,7 +263,7 @@ GtkWidget *gui_navbar_book_new(void)
 	gtk_box_pack_start(GTK_BOX(hbox1), navbar_book.lookup_entry, TRUE,
 			   TRUE, 0);
 	gtk_editable_set_editable(GTK_EDITABLE(navbar_book.lookup_entry),
-				  FALSE);
+				  TRUE);
 	gtk_entry_set_invisible_char(GTK_ENTRY(navbar_book.lookup_entry),
 				     9679);
 

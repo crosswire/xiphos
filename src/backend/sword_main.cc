@@ -958,9 +958,11 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
 
 unsigned long BackEnd::treekey_set_key(char * key) {
 	if(tree_key) {
-		tree_key->setText(key);
-               display_mod->KeyText();      //snap to entry
-		return tree_key->getOffset();
+                TreeKeyIdx treenode = *tree_key;
+		treenode.setText(key);
+                display_mod->SetKey(treenode);
+		display_mod->KeyText();      //snap to entry
+		return treenode.getOffset();
 	}
 	return 0;
 }
