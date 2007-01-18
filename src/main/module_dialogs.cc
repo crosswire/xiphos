@@ -1706,14 +1706,14 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			t->mod_type = TEXT_TYPE;
 			gui_create_bibletext_dialog(t);
 #ifdef USE_GTKMOZEMBED
-			be->chapDisplay = new DialogChapDisp(t->html, be, t->ops);
+			be->chapDisplay = new DialogChapDisp(t->html, t, be, t->ops);
 #else
 			if(t->is_rtol)
 				be->dialogRTOLDisplay 
-				   = new DialogTextviewChapDisp(t->text, be, t->ops);
+				   = new DialogTextviewChapDisp(t->text,  t, be, t->ops);
 			else	
 				be->chapDisplay 
-				      = new DialogChapDisp(t->html, be, t->ops); 
+				      = new DialogChapDisp(t->html,  t, be, t->ops); 
 #endif
 			be->init_SWORD(1);
 			if(key)
@@ -1729,7 +1729,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		case COMMENTARY_TYPE:
 			t->mod_type = COMMENTARY_TYPE;
 			gui_create_commentary_dialog(t, FALSE);
-			be->entryDisplay = new DialogEntryDisp(t->html, be, t->ops); 
+			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
 			be->init_SWORD(1);
 			if(key)
 				t->key = g_strdup(key);
@@ -1749,7 +1749,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			strcpy(ec->filename, t->mod_name);
 			t->is_percomm = TRUE;
 			be->entryDisplay 
-				    = new DialogEntryDisp(ec->htmlwidget, be, t->ops); 
+				    = new DialogEntryDisp(ec->htmlwidget,  t, be, t->ops); 
 			be->init_SWORD(1);
 			ec->be = (BackEnd*)be;
 			if(key)
@@ -1767,7 +1767,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		case DICTIONARY_TYPE:
 			t->mod_type = DICTIONARY_TYPE;
 			gui_create_dictlex_dialog(t);
-			be->entryDisplay = new DialogEntryDisp(t->html, be, t->ops); 
+			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
 			be->init_SWORD(1);
 			if(key)
 				t->key = g_strdup(key);
@@ -1777,7 +1777,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		case BOOK_TYPE:
 			t->mod_type = BOOK_TYPE;
 			gui_create_gbs_dialog(t);
-			be->entryDisplay = new DialogEntryDisp(t->html, be, t->ops); 
+			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
 			be->init_SWORD(1);
 			t->key = NULL; 
 			if(key)

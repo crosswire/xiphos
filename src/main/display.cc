@@ -1010,8 +1010,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 
-	if (type == 3)
-		keytext = be->treekey_get_local_name(be->get_treekey_offset());
+	if (type == 3) {
+		g_message("offset: %d",d->offset);
+		keytext = be->treekey_get_local_name(d->offset);
+		
+	}
 	else
 		keytext = imodule.KeyText();
 

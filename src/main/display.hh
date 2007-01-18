@@ -66,23 +66,24 @@ public:
 class DialogEntryDisp : public SWDisplay {
 protected:
 	GtkWidget *gtkText;
+	DIALOG_DATA *d;
 	BackEnd *be;
 	GLOBAL_OPS * ops;
 public:
-	DialogEntryDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) {this->gtkText = gtkText;this->be = be;this->ops = ops;}
+	DialogEntryDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) {this->gtkText = gtkText;this->d = d;this->be = be;this->ops = ops;}
 	virtual char Display(SWModule &imodule);
 };
 
 class DialogChapDisp : public  DialogEntryDisp {
 public:
-	DialogChapDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,be,ops) {}
+	DialogChapDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,d,be,ops) {}
 	virtual char Display(SWModule &imodule);
 };
 
 #ifndef USE_GTKMOZEMBED
 class DialogTextviewChapDisp : public  DialogEntryDisp {
 public:
-	DialogTextviewChapDisp(GtkWidget *gtkText, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,be,ops) {}
+	DialogTextviewChapDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,d,be,ops) {}
 	virtual char Display(SWModule &imodule);
 };
 #endif
