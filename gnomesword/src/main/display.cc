@@ -713,9 +713,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
-		while ((preverse
-			= backend->get_entry_attribute("Heading", "Preverse",
-							    heading)) != NULL) {
+		while ((preverse = imodule.getEntryAttributes()["Heading"]["Preverse"][heading].c_str()) != NULL) {
+			//= backend->get_entry_attribute("Heading", "Preverse",
+							   // heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
 			swbuf.appendFormatted("<br><b>%s</b><br><br>", preverse2);
 			g_free(preverse);
@@ -991,7 +991,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	GString *str = g_string_new(NULL);
 	const gchar *keytext = NULL;
 	int curPos = 0;
-	int type = be->module_type(imodule.Name());
+	int type = d->mod_type;  //be->module_type(imodule.Name());
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 #ifdef USE_GTKMOZEMBED
@@ -1010,11 +1010,8 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 
-	if (type == 3) {
-		g_message("offset: %d",d->offset);
+	if (type == 3)
 		keytext = be->treekey_get_local_name(d->offset);
-		
-	}
 	else
 		keytext = imodule.KeyText();
 
