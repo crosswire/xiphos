@@ -713,7 +713,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
-		while ((preverse //= imodule.getEntryAttributes()["Heading"]["Preverse"][heading].c_str()) != NULL) {
+		while ((preverse
 			= backend->get_entry_attribute("Heading", "Preverse",
 							    heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
