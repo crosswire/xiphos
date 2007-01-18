@@ -908,7 +908,7 @@ void main_display_book(const char * mod_name, char * key)
 	
 	settings.whichwindow = BOOK_WINDOW;
 	if (key == NULL) key = "0";
-	if (isalpha(key[0])) {
+	if (!isdigit(key[0])) {
 		xml_set_value("GnomeSword", "keys", "book", key);
 		settings.book_key = xml_get_value( "keys", "book");
 		use_offset = FALSE;
