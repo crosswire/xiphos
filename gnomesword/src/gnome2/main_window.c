@@ -57,6 +57,7 @@
 WIDGETS widgets;
 
 
+static gboolean ctrl_key_presed = FALSE;
 static GtkWidget *nav_toolbar;
 /******************************************************************************
  * Name
@@ -486,25 +487,59 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 }
 
 
-gboolean
-on_vbox1_key_press_event               (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        gpointer         user_data)
+static
+gboolean on_vbox1_key_press_event(GtkWidget * widget,
+                                        GdkEventKey * event,
+                                        gpointer user_data)
 {
+/*	if(ctrl_key_presed) {
+		switch(event->hardware_keycode) {
+			case 42:
+				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+				gtk_widget_grab_focus(navbar_book.lookup_entry);
+			break;
+			case 54:
+				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+				gtk_widget_grab_focus(navbar_main.lookup_entry);
+			break;
+			case 56:
+				gtk_widget_grab_focus(navbar_main.lookup_entry);
+			break;
+			
+		}
+	}	
+	*/
+	switch(event->hardware_keycode) {
+		case 37:
+		case 109:
+			ctrl_key_presed = TRUE;
+		break;
+	}
+	
 
-
+#ifdef DEBUG
+	g_message("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode);
+#endif
 
 
   return FALSE;
 }
 
-
-gboolean
-on_vbox1_key_release_event             (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        gpointer         user_data)
+static
+gboolean on_vbox1_key_release_event(GtkWidget * widget,
+                                        GdkEventKey * event,
+                                        gpointer user_data)
 {
+	switch(event->hardware_keycode) {
+		case 37:
+		case 109:
+			ctrl_key_presed = FALSE;
+		break;
+	}
 
+#ifdef DEBUG
+	g_message("on_vbox1_key_release_event\nkeycode: %d",event->hardware_keycode);
+#endif
   return FALSE;
 }
 
