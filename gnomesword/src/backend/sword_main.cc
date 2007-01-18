@@ -875,7 +875,7 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
        	 	gsize bytes_written;
         	GError *error = NULL;
 #ifdef DEBUG 
-		g_message(f_message,734,"key",key);
+		g_message(f_message,878,"key",key);
 #endif
 		mykey = g_convert(key,
                              -1,
@@ -890,7 +890,7 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 		}
 		display_mod->setKey(mykey);
 #ifdef DEBUG 
-		g_message(f_message,743,"mykey",mykey);
+		g_message(f_message,893,"mykey",mykey);
 #endif
 		g_free(mykey);
 		return 1;
@@ -956,7 +956,14 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
         return retval;
 }
 
-
+unsigned long BackEnd::treekey_set_key(char * key) {
+	if(tree_key) {
+		tree_key->setText(key);
+               display_mod->KeyText();      //snap to entry
+		return tree_key->getOffset();
+	}
+	return 0;
+}
 void BackEnd::set_treekey(unsigned long offset) {
 	if(tree_key)
 		delete tree_key;
@@ -1007,7 +1014,7 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
 }
 
 
-unsigned long BackEnd::get_treekey_offset(void) {
+unsigned long BackEnd::get_treekey_offset(void) {	
         if (tree_key) 
                 return tree_key->getOffset();
         return 0;

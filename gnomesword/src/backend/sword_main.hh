@@ -123,6 +123,7 @@ public:
 	int treekey_has_children(unsigned long offset);
 	int treekey_first_child(unsigned long offset);
 	char *treekey_get_local_name(unsigned long offset);
+	unsigned long  treekey_set_key(char * key) ;
 	int treekey_prev_sibling(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
 	GList *parse_verse_list(const char * list, char * current_key);

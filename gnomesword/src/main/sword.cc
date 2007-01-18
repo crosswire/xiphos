@@ -926,8 +926,12 @@ void main_display_book(const char * mod_name, char * key)
 	if (use_offset) {
 		backend->set_module(mod_name);	
 		backend->set_treekey(settings.book_offset);
-	} else {
-		backend->set_module_key(mod_name, key);
+	} else {	
+		backend->set_module(mod_name);
+		backend->set_treekey(0);
+		settings.book_offset = backend->treekey_set_key(key);
+		//backend->set_module_key(mod_name, key);
+		//settings.book_offset = backend->get_treekey_offset(); 
 	}
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod,settings.book_offset);
