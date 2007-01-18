@@ -706,16 +706,14 @@ void main_dictionary_entry_changed(char * mod_name)
 	
 	if (!mod_name) 
 		return;
-	if (strcmp(settings.DictWindowModule,mod_name)) {
-		xml_set_value("GnomeSword", "modules", "dict",
-					mod_name);
-		settings.DictWindowModule = xml_get_value(
-					"modules", "dict");
+	if (strcmp(settings.DictWindowModule, mod_name)) {
+		xml_set_value("GnomeSword", "modules", "dict", mod_name);
+		settings.DictWindowModule = xml_get_value("modules", "dict");
 	}	
 	
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
-	key2 = g_utf8_strup(key,strlen(key));
+	key2 = g_utf8_strup(key, strlen(key));
 	
 	backend->set_module_key(mod_name, key2);
 	g_free(key2);
@@ -895,55 +893,53 @@ void main_dictionary_button_clicked(gint direction)
 
 void main_display_book(const char * mod_name, char * key)
 {
-	gboolean use_offset = FALSE;
+#ifdef DEBUG
+	g_message("main_display_book\nmod_name: %s\nkey: %s", mod_name, key);
+#endif
+
 	if (!settings.havebook || !mod_name)
 		return;
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
-#ifdef DEBUG
-	g_message("key: %s", key);
-#endif
+
+	if (strcmp(settings.book_mod, mod_name)) {
+		xml_set_value("GnomeSword", "modules", "book", mod_name);
+		settings.book_mod = xml_get_value("modules", "book");
+	}
 	
-	settings.whichwindow = BOOK_WINDOW;
-	if (key == NULL) key = "0";
+	if (key == NULL)
+		key = "0";
+
 	if (!isdigit(key[0])) {
 		xml_set_value("GnomeSword", "keys", "book", key);
-		settings.book_key = xml_get_value( "keys", "book");
-		use_offset = FALSE;
-	} else {
-		xml_set_value("GnomeSword", "keys", "offset", key);
-		settings.book_offset = atol(xml_get_value( "keys", "offset"));
-		if(settings.book_offset < 4) settings.book_offset = 4;
-		use_offset = TRUE;
-	}
-	
-	if (strcmp(settings.book_mod,mod_name)) {
-		xml_set_value("GnomeSword", "modules", "book", mod_name);
-		settings.book_mod = xml_get_value( "modules", "book");
-	}
-	if (use_offset) {
-		backend->set_module(mod_name);	
-		backend->set_treekey(settings.book_offset);
-	} else {	
+		settings.book_key = xml_get_value("keys", "book");
+
 		backend->set_module(mod_name);
 		backend->set_treekey(0);
 		settings.book_offset = backend->treekey_set_key(key);
-		//backend->set_module_key(mod_name, key);
-		//settings.book_offset = backend->get_treekey_offset(); 
+	} else {
+		settings.book_offset = atol(key);
+		if(settings.book_offset < 4)
+			settings.book_offset = 4;
+		xml_set_value("GnomeSword", "keys", "offset", key);
+
+		backend->set_module(mod_name);	
+		backend->set_treekey(settings.book_offset);
 	}
+	
 	backend->display_mod->Display();
-	main_setup_navbar_book(settings.book_mod,settings.book_offset);
+	main_setup_navbar_book(settings.book_mod, settings.book_offset);
+	settings.comm_showing = FALSE;
 	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      NULL,
 				      mod_name,
 				      NULL,
-				      key?key:NULL,
+				      key,
 				      FALSE);
-
 }
 
 void main_display_commentary(const char * mod_name, const char * key)
@@ -970,6 +966,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
+	settings.comm_showing = TRUE;
 	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      mod_name,
@@ -984,21 +981,20 @@ void main_display_dictionary(char * mod_name, char * key)
 {
 	const gchar *old_key;
 #ifdef DEBUG
-	g_message("main_display_dictionary\nmod_name: %s\nkey: %s",mod_name,key);
+	g_message("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key);
 #endif
+
 	if (!settings.havedict || !mod_name)
 		return;
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.DictWindowModule)
 		settings.DictWindowModule = (char*)mod_name;
-	if (strcmp(settings.DictWindowModule,mod_name)) {
-		xml_set_value("GnomeSword", "modules", "dict",
-					mod_name);
-		settings.DictWindowModule = xml_get_value(
-					"modules", "dict");
+
+	if (strcmp(settings.DictWindowModule, mod_name)) {
+		xml_set_value("GnomeSword", "modules", "dict", mod_name);
+		settings.DictWindowModule = xml_get_value("modules", "dict");
 	}
-	//gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
 	
 	if (key == NULL)
 		key = "Grace";
