@@ -38,6 +38,7 @@
 #include "backend/sword_main.hh"
 
 DIALOG_DATA * cur_d;
+
 /******************************************************************************
  * Name
  *  check_for_parent
@@ -79,7 +80,7 @@ int check_for_parent(DIALOG_DATA * d)
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  int check_for_prev_sib(char * book, unsigned long offset)
+ *  int check_for_prev_sib(DIALOG_DATA * d)
  *
  * Description
  *   check to see if there is a sibling before the curret one
@@ -113,7 +114,7 @@ int check_for_prev_sib(DIALOG_DATA * d)
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  int check_for_next_sib(char * book, unsigned long offset)
+ *  int check_for_next_sib(DIALOG_DATA * d)
  *
  * Description
  *   check to see if there is another sibling after the current one
@@ -141,12 +142,12 @@ int check_for_next_sib(DIALOG_DATA * d)
 
 /******************************************************************************
  * Name
- *  main_navbar_book_parent
+ *  main_navbar_book_dialog_parent
  *
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  void main_navbar_book_parent(void)
+ *  void main_navbar_book_dialog_parent(void)
  *
  * Description
  *   left button clicked - display parent
@@ -170,12 +171,12 @@ void main_navbar_book_dialog_parent(gpointer data)
 
 /******************************************************************************
  * Name
- *  main_navbar_book_first_child
+ *  main_navbar_book_dialog_first_child
  *
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  void main_navbar_book_first_child(void)
+ *  void main_navbar_book_dialog_first_child(void)
  *
  * Description
  *   right button clicked - display first child
@@ -199,12 +200,12 @@ void main_navbar_book_dialog_first_child(gpointer data)
 
 /******************************************************************************
  * Name
- *  main_navbar_book_prev
+ *  main_navbar_book_dialog_prev
  *
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  void main_navbar_book_prev(void)
+ *  void main_navbar_book_dialog_prev(void)
  *
  * Description
  *   up button clicked - display previous sibling
@@ -228,12 +229,12 @@ void main_navbar_book_dialog_prev(gpointer data)
 
 /******************************************************************************
  * Name
- *  main_navbar_book_next
+ *  main_navbar_book_dialog_next
  *
  * Synopsis
  *   #include "main/navbar_book.h"
  *
- *  void main_navbar_book_next(void)
+ *  void main_navbar_book_dialog_next(void)
  *
  * Description
  *   down button clicked - display next sibling
@@ -260,7 +261,7 @@ void main_navbar_book_dialog_next(gpointer data)
  *  on_menu_select(
  *
  * Synopsis
- *   #include "main/navbar_book.h"
+ *   #include "main/navbar_book_dialog.h"
  *   
  *   void on_menu_select(GtkMenuItem * menuitem, gpointer user_data)
  *
@@ -283,12 +284,12 @@ void on_menu_select(GtkMenuItem * menuitem, gpointer data)
 
 /******************************************************************************
  * Name
- *   main_book_drop_down_new
+ *   main_book_dialog_drop_down_new
  *
  * Synopsis
- *   #include "main/navbar_book.h"
+ *   #include "main/navbar_book_dialog.h"
  *
- *   GtkWidget *main_book_drop_down_new(void)
+ *   GtkWidget *main_book_dialog_drop_down_new(void)
  *
  * Description
  *   create a menu of all the current items in the current section of current genbook
@@ -343,17 +344,17 @@ GtkWidget *main_navbar_book_dialog_drop_down_new(gpointer data)
 
 /******************************************************************************
  * Name
- *   main_setup_navbar_book
+ *   main_setup_navbar_book_dialog
  *
  * Synopsis
- *   #include "main/navbar_book.h"
+ *   #include "main/navbar_book_dialog.h"
  *   
- *   void main_setup_navbar_book(gchar * book_name, unsigned long offset)
+ *   void main_setup_navbar_book_dialog(gpointer data)
  *   
  *
  * Description
  *   set  sensitive state of navbar buttons and set the entry to current book key
- *
+ *   data = DIALOG_DATA * dialog
  * Return value
  *   void
  */
