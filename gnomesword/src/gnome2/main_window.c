@@ -488,41 +488,36 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 
 
 static
-gboolean on_vbox1_key_press_event(GtkWidget * widget,
-                                        GdkEventKey * event,
-                                        gpointer user_data)
+gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
+                                        							gpointer user_data)
 {
-/*	if(ctrl_key_presed) {
 		switch(event->hardware_keycode) {
-			case 42:
-				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
-				gtk_widget_grab_focus(navbar_book.lookup_entry);
+			case 40: //D
+				if(event->state == GDK_CONTROL_MASK) 
+					gtk_widget_grab_focus(widgets.entry_dict);
 			break;
-			case 54:
-				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
-				gtk_widget_grab_focus(navbar_main.lookup_entry);
+			case 42: //G
+				if(event->state == GDK_CONTROL_MASK)  {				
+					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+					gtk_widget_grab_focus(navbar_book.lookup_entry);
+				}
 			break;
-			case 56:
-				gtk_widget_grab_focus(navbar_main.lookup_entry);
+			case 54: //C
+				if(event->state == GDK_CONTROL_MASK) {
+					gtk_widget_grab_focus(navbar_main.lookup_entry);
+					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+				}
+			break;
+			case 56: //B
+				if(event->state == GDK_CONTROL_MASK) 
+					gtk_widget_grab_focus(navbar_main.lookup_entry);
 			break;
 			
 		}
-	}	
-	*/
-	switch(event->hardware_keycode) {
-		case 37:
-		case 109:
-			ctrl_key_presed = TRUE;
-		break;
-	}
-	
-
 #ifdef DEBUG
 	g_message("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode);
 #endif
-
-
-  return FALSE;
+	return FALSE;
 }
 
 static
@@ -530,16 +525,7 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         GdkEventKey * event,
                                         gpointer user_data)
 {
-	switch(event->hardware_keycode) {
-		case 37:
-		case 109:
-			ctrl_key_presed = FALSE;
-		break;
-	}
 
-#ifdef DEBUG
-	g_message("on_vbox1_key_release_event\nkeycode: %d",event->hardware_keycode);
-#endif
   return FALSE;
 }
 
