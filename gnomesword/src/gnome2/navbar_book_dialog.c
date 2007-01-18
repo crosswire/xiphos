@@ -145,7 +145,7 @@ static gboolean select_button_press_callback(GtkWidget * widget,
  *  void on_button_parent_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   call main_navbar_book_parent() in main/navbar_book.cc
+ *   call main_navbar_book_dialog_parent() in main/navbar_book.cc
  *
  * Return value
  *   void
@@ -168,7 +168,7 @@ void on_button_parent_clicked(GtkButton * button, gpointer user_data)
  *  void on_button_child_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   call main_navbar_book_first_child() in main/navbar_book.cc
+ *   call main_navbar_book_dialog_first_child() in main/navbar_book.cc
  *
  * Return value
  *   void
@@ -191,7 +191,7 @@ void on_button_child_clicked(GtkButton * button, gpointer user_data)
  *  void on_button_prev_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   call main_navbar_book_prev() in main/navbar_book.cc
+ *   call main_navbar_book_dialog_prev() in main/navbar_book.cc
  *
  * Return value
  *   void
@@ -214,7 +214,7 @@ void on_button_prev_clicked(GtkButton * button, gpointer user_data)
  *  void on_button_next_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *   call main_navbar_book_next(); in main/navbar_book.cc
+ *   call main_navbar_book_dialog_next(); in main/navbar_book.cc
  *
  * Return value
  *   void
@@ -229,12 +229,12 @@ void on_button_next_clicked(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *  gui_navbar_book_new
+ *  gui_navbar_book_dialog_new
  *
  * Synopsis
  *   #include "gui/navbar_book_dialog.h"
  *
- *  GtkWidget *gui_navbar_book_new(void)
+ *  GtkWidget *gui_navbar_book_dialog_new(void)
  *
  * Description
  *   create a new gen book navigation toolbar and return it
