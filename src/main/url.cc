@@ -882,14 +882,14 @@ static gint sword_uri(const gchar * url, gboolean clicked)
  *   gint main_url_handler(const gchar * url, gboolean clicked)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   gint
  */
 
 gint main_url_handler(const gchar * url, gboolean clicked)
-{	
+{
 	gchar* action = NULL;
 	gchar* type = NULL;
 	gchar* value = NULL;
@@ -899,20 +899,60 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* strongs = NULL;
 	gchar *buf = NULL;
 	URL* m_url;
-	
-	if(strstr(url,"sword://"))
-		return sword_uri(url,clicked);
-	if(strstr(url,"book://"))
-		return sword_uri(url,clicked);
-	if(strstr(url,"chapter://"))
-		return sword_uri(url,clicked);
-	
+
 #ifdef DEBUG
-	g_warning("main_url_handler()");
-	g_warning("url = %s",url);
-#endif	
-	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url")) {/* passagestudy.jsp?action=showStrongs&type= */
-		m_url = new URL((const char*)url);	
+	g_message("main_url_handler()");
+	g_message("url = %s", url);
+#endif
+
+	if (strstr(url, "sword://")   ||
+	    strstr(url, "book://")    ||
+	    strstr(url, "chapter://")) {
+		// handle `+' space substitutions and %xx encodings.
+		int retval;
+		GString *url_clean = g_string_new(NULL);
+		const gchar *url_chase;
+		char hex_template[] = { '0', '0', '\0' };
+		unsigned long from_hex;
+
+		for (url_chase = url; *url_chase; ++url_chase) {
+			switch (*url_chase) {
+			case '+':
+				g_string_append_c(url_clean, ' ');
+				break;
+			case '%':
+				if (isxdigit(*(url_chase+1)) &&
+				    isxdigit(*(url_chase+2))) {
+					hex_template[0] = *(url_chase+1);
+					hex_template[1] = *(url_chase+2);
+					from_hex = strtol(hex_template, NULL, 16);
+					g_string_append_c(url_clean,
+							  (gchar) from_hex);
+					url_chase += 2;
+				} else {
+					// failed %xx enconding; normal character.
+					// should we instead do nothing with this '%'?
+					g_string_append_c(url_clean, '%');
+				}
+				break;
+			default:
+				g_string_append_c(url_clean, *url_chase);
+				break;
+			}
+		}
+#ifdef DEBUG
+		g_message("url_clean = %s", url_clean->str);
+#endif
+
+		retval = sword_uri(url_clean->str, clicked);
+		g_string_free(url_clean, TRUE);
+		return retval;
+	}
+
+	if (strstr(url, "passagestudy.jsp") ||
+	    strstr(url, "gnomesword.url")) {
+		/* passagestudy.jsp?action=showStrongs&type= */
+		m_url = new URL((const char*)url);
 		action = g_strdup(m_url->getParameterValue("action"));
 		type = g_strdup((gchar*)m_url->getParameterValue("type"));
 		value = g_strdup((gchar*)m_url->getParameterValue("value"));
@@ -920,71 +960,69 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 
 #ifdef DEBUG
-		g_warning("action = %s",action);
-		g_warning("type = %s",type);  
-		g_warning("value = %s",value);
-		g_warning("strongs = %s",strongs);  
-		g_warning("morph = %s",morph);
-#endif	
-		
-		
-		if(strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
-			show_strongs_morph(type,strongs,morph,clicked);
-		} else if(strlen(strongs) >= 1 && strlen(morph) < 1) {
-			show_strongs(type,strongs,clicked);			
+		g_message("action = %s", action);
+		g_message("type = %s", type);
+		g_message("value = %s", value);
+		g_message("strongs = %s", strongs);
+		g_message("morph = %s", morph);
+#endif
+
+		if (strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
+			show_strongs_morph(type, strongs, morph, clicked);
+		} else if (strlen(strongs) >= 1 && strlen(morph) < 1) {
+			show_strongs(type, strongs, clicked);
 		}
-		
-		if(!strcmp(action,"showStrongs")) 
-			show_strongs(type,value,clicked);
-		
-		
-		if(!strcmp(action,"showMorph"))
-			show_morph(type, value,clicked);
-		
-		if(!strcmp(action,"showNote")) {	
+
+		if (!strcmp(action, "showStrongs"))
+			show_strongs(type, value, clicked);
+
+		if (!strcmp(action, "showMorph"))
+			show_morph(type, value, clicked);
+
+		if (!strcmp(action, "showNote")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
 			show_note(module, passage, type, value, clicked);
-			if(module) g_free(module);
-			if(passage) g_free(passage);
+			if (module) g_free(module);
+			if (passage) g_free(passage);
 		}
-		
-		if(!strcmp(action,"showRef")) {	
+
+		if (!strcmp(action, "showRef")) {
 			module = g_strdup(m_url->getParameterValue("module"));
-			if(!strcmp(type,"scripRef"))
-				show_ref(module,value,clicked);
-			if(!strcmp(type,"swordURL")) {
-				
+			if (!strcmp(type, "scripRef"))
+				show_ref(module, value, clicked);
+			if (!strcmp(type, "swordURL")) {
+				// do nothing?
 			}
-			if(module) g_free(module);
+			if (module)
+				g_free(module);
 		}
-		
-		if(!strcmp(action,"showBookmark")) {	
+
+		if (!strcmp(action, "showBookmark")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			show_module_and_key(module, value, type, clicked);
-			if(module) g_free(module);
-		}		
-		
-		if(!strcmp(action,"showModInfo")) {	
+			if (module) g_free(module);
+		}
+
+		if (!strcmp(action, "showModInfo")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			show_mod_info(module, value, clicked);
-			if(module) g_free(module);
-		}		
-		
-		if(!strcmp(action,"showParallel")) {
+			if (module) g_free(module);
+		}
+
+		if (!strcmp(action, "showParallel")) {
 			show_parallel(value, type, clicked);
 		}
-				
-		
-		if(!strcmp(action,"showStudypad")) {
+
+		if (!strcmp(action, "showStudypad")) {
 			show_studypad(value, clicked);
 		}
-		
-		if(action) g_free(action);
-		if(type) g_free(type);
-		if(value) g_free(value);
-		if(strongs) g_free(strongs);
-		if(morph) g_free(morph);
+
+		if (action) g_free(action);
+		if (type) g_free(type);
+		if (value) g_free(value);
+		if (strongs) g_free(strongs);
+		if (morph) g_free(morph);
 		delete m_url;
 		return 1;
 	}
@@ -994,32 +1032,32 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   
+ *
  *
  * Description
- *  
+ *
  *
  * Return value
- *   
+ *
  */
- 
+
 const gchar *main_url_encode(const gchar * pram)
 {
 	SWBuf retval;
 	retval = URL::encode(pram);
-/*#ifdef DEBUG 
+/*#ifdef DEBUG
 	g_warning(pram);
 	g_warning(retval.c_str());
 #endif*/
-	if(retval.length())
+	if (retval.length())
 		return g_strdup(retval.c_str());
 	else
 		return g_strdup("");
-}		
+}
 
 /******   end of file   ******/
