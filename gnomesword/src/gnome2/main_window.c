@@ -486,6 +486,29 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 }
 
 
+gboolean
+on_vbox1_key_press_event               (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+
+
+
+
+  return FALSE;
+}
+
+
+gboolean
+on_vbox1_key_release_event             (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+
+  return FALSE;
+}
+
+
 /******************************************************************************
  * Name
  *   create_mainwindow
@@ -779,6 +802,15 @@ void create_mainwindow(void)
 	gnome_app_set_statusbar(GNOME_APP(widgets.app), widgets.appbar);
 
 	gui_install_menu_hints(widgets.app);
+
+
+
+  g_signal_connect ((gpointer) vbox_gs, "key_press_event",
+                    G_CALLBACK (on_vbox1_key_press_event),
+                    NULL);
+  g_signal_connect ((gpointer) vbox_gs, "key_release_event",
+                    G_CALLBACK (on_vbox1_key_release_event),
+                    NULL);
 
 	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
 			   "switch_page",
