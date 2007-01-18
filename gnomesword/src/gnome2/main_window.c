@@ -493,23 +493,23 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 {
 		switch(event->hardware_keycode) {
 			case 40: //D
-				if(event->state == GDK_CONTROL_MASK) 
+				if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
 					gtk_widget_grab_focus(widgets.entry_dict);
 			break;
 			case 42: //G
-				if(event->state == GDK_CONTROL_MASK)  {				
+				if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
 					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
 					gtk_widget_grab_focus(navbar_book.lookup_entry);
 				}
 			break;
 			case 54: //C
-				if(event->state == GDK_CONTROL_MASK) {
+				if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
 					gtk_widget_grab_focus(navbar_main.lookup_entry);
 					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 				}
 			break;
 			case 56: //B
-				if(event->state == GDK_CONTROL_MASK) 
+				if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
 					gtk_widget_grab_focus(navbar_main.lookup_entry);
 			break;
 			
