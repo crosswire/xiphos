@@ -1329,14 +1329,18 @@ void main_update_parallel_page_detached(void)
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
 	}
-	sprintf(buf, "%d", settings.intCurVerse);
+	sprintf(buf, "%d", ((settings.intCurVerse > 1)
+			    ? settings.intCurVerse - 1
+			    : settings.intCurVerse));
 #ifdef USE_GTKMOZEMBED	
 	gtk_moz_embed_close_stream(new_browser);
-	embed_go_to_anchor(new_browser, buf);
+	if (settings.intCurVerse > 1)
+		embed_go_to_anchor(new_browser, buf);
 #else
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
-	gtk_html_jump_to_anchor(html, buf);
+	if (settings.intCurVerse > 1)
+		gtk_html_jump_to_anchor(html, buf);
 #endif 
 }
 
