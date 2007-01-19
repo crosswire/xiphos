@@ -825,8 +825,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 					    "text/html");*/
 		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
 	gtk_moz_embed_close_stream(html);
-	if (curVerse > 1) {
-		buf = g_strdup_printf("%d", curVerse);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
 		embed_go_to_anchor(html, buf);
 		g_free(buf);
 	}
@@ -1213,8 +1213,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_moz_embed_render_data(html, str->str, str->len,
 					  "file:///sword",
 					  "text/html");
-	if (curVerse > 1) {
-		buf = g_strdup_printf("%d", curVerse);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
 		embed_go_to_anchor(html, buf);
 		g_free(buf);
 	}
