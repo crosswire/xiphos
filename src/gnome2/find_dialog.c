@@ -259,10 +259,9 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area29), hbuttonbox8,
 			   TRUE, TRUE, 0);
 
-	dialog->close = gtk_button_new_from_stock(GTK_STOCK_CLOSE);	//gtk_button_new_with_label(_("Close"));
-	gtk_widget_show(dialog->close);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
-	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
+	dialog->find = gtk_button_new_from_stock(GTK_STOCK_FIND);	//gtk_button_new_with_label(_("Find"));
+	gtk_widget_show(dialog->find);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
 
 	dialog->next = gtk_button_new();
 	gtk_widget_show(dialog->next);
@@ -287,9 +286,10 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(hbox5), label12, FALSE, FALSE, 0);
 	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
 
-	dialog->find = gtk_button_new_from_stock(GTK_STOCK_FIND);	//gtk_button_new_with_label(_("Find"));
-	gtk_widget_show(dialog->find);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
+	dialog->close = gtk_button_new_from_stock(GTK_STOCK_CLOSE);	//gtk_button_new_with_label(_("Close"));
+	gtk_widget_show(dialog->close);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
+	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
 	GTK_WIDGET_SET_FLAGS(dialog->find, GTK_CAN_DEFAULT);
 
 
