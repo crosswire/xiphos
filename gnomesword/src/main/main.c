@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 		    (!strncmp(argv[1], "bible:/", 7)) ||
 		    (strstr(argv[1], "studypad"))) {
 			if (!strncmp(argv[1], "bible:/", 7))
-				memcpy(argv[1], "sword"); /* equivalent */
+				memcpy(argv[1], "sword", 5); /* equivalent */
 			have_sword_url = TRUE;
 		}
 	}
