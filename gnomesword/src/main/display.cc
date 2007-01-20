@@ -138,25 +138,11 @@ AnalyzeForImageSize(const char *origtext,
 	char *path;		// ... the current "path".
 	char *end, save;	// "end" is the path's end.
 	char buf[32];		// for preparing new width+height spec.
-	gint image_x, image_y, window_x, window_y;
+	gint image_x, image_y, window_x, window_y = -999;
 	int image_retval;
 
-	//if (GTK_WIDGET_VISIBLE(window)) {	// would be nicer...
 	if (mod_type == PERCOM_TYPE)
 		mod_type = COMMENTARY_TYPE;	// equivalent for display
-	if (++mod_use_counter[mod_type] >= 1) {
-		// call _get_size only if the window exists by now.
-		gdk_drawable_get_size(window, &window_x, &window_y);
-		if ((window_x > 200) || (window_y > 200)) {
-			window_x -= 15;
-			window_y -= 15;
-		} else {
-			window_x = (window_x * 93)/100;
-			window_y = (window_y * 93)/100;
-		}
-	} else {
-		window_x = window_y = 10000; // degenerate: no resize.
-	}
 
 	text = origtext;
 	resized = "";
@@ -165,6 +151,24 @@ AnalyzeForImageSize(const char *origtext,
 	for (path = ImgSrcStr(text);
              path;
              path = ImgSrcStr(path)) {
+
+		if (window_y == -999) {
+			/* we have images, but we don't know bounds yet */
+			//if (GTK_WIDGET_VISIBLE(window)) {
+			if (++mod_use_counter[mod_type] >= 1) {
+				// call _get_size only if the window exists by now.
+				gdk_drawable_get_size(window, &window_x, &window_y);
+				if ((window_x > 200) || (window_y > 200)) {
+					window_x -= 15;
+					window_y -= 15;
+				} else {
+					window_x = (window_x * 93)/100;
+					window_y = (window_y * 93)/100;
+				}
+			} else {
+				window_x = window_y = 10000; // degenerate: no resize.
+			}
+		}
 
 		path += IMGSRC_LENGTH;
 		save = *path;
