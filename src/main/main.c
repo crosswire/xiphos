@@ -115,8 +115,17 @@ int main(int argc, char *argv[])
 	
 	gui_splash_done();
 	
-	if(have_sword_url)
+	if (have_sword_url) {
+		if (!strncmp(argv[1], "sword:/", 7)) {
+			char *key = strchr(argv[1]+8, '/');
+			if (key && *(key+1) != '\0')
+				key++;
+			else
+				key = "Gen 1:1";
+			gui_open_passage_in_new_tab(key);
+		}
 		main_url_handler(argv[1], TRUE);
+	}
 
 	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
 					(widgets.notebook_comm_book), 0);*/
