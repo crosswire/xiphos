@@ -141,20 +141,28 @@ AnalyzeForImageSize(const char *origtext,
 	gint image_x, image_y, window_x, window_y = -999;
 	int image_retval;
 
-	if (mod_type == PERCOM_TYPE)
-		mod_type = COMMENTARY_TYPE;	// equivalent for display
+	// performance tweak:
+	// image content is by no means common. therefore, spend an extra
+	// search call to determine whether any of the rest is needed,
+	// most especially to stop copying large blocks of text w/no images.
+	if (ImgSrcStr(origtext) == NULL)
+		return origtext;
 
 	text = origtext;
 	resized = "";
 	trail = text;
 
-	for (path = ImgSrcStr(text);
-             path;
-             path = ImgSrcStr(path)) {
+	for (path = ImgSrcStr(text); path; path = ImgSrcStr(path)) {
 
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
-			//if (GTK_WIDGET_VISIBLE(window)) {
+
+			if (mod_type == PERCOM_TYPE)
+				mod_type = COMMENTARY_TYPE; // equivalent
+
+			// we need this sort of "if" here rather badly...
+			// if (GTK_WIDGET_VISIBLE(window)) {
+			// ...because this hack counter is poor at best.
 			if (++mod_use_counter[mod_type] >= 1) {
 				// call _get_size only if the window exists by now.
 				gdk_drawable_get_size(window, &window_x, &window_y);
