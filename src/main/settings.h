@@ -31,6 +31,9 @@
 #else
 #include <glib-2.0/glib.h>
 #endif*/
+
+#include <gconf/gconf-client.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -244,6 +247,9 @@ extern SETTINGS settings;
 
 int settings_init(int new_configs, int new_bookmarks);
 void load_settings_structure(void);
+void gconf_setup(void);
+
+#define	GS_GCONF_MAX	6
 
 #ifdef __cplusplus
 }

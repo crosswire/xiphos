@@ -211,8 +211,9 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
-	
-	
+
+	gconf_setup();
+
 	return retval;
 }
 
@@ -596,8 +597,6 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("tabs","browsing","1");
 		settings.browsing = 1;
 	}
-	
-	
 
 	/*
 	   settings. = xml_get_value("", "");
@@ -609,39 +608,73 @@ void load_settings_structure(void)
 }
 
 
-
-
-
 /******************************************************************************
  * Name
- *    
+ *    gconf_setup
  *
  * Synopsis
  *   #include "main/settings.h"
  *
- *   	
+ *   void gconf_setup()
  *
  * Description
- *   
+ *   verifies and initializes the GConf subsystem, so that "sword://" and
+ *   similar can be handled by url-comprehending programs such as browsers.
  *
  * Return value
- *   
+ *   void
  */
 
+#define	GS_GCONF_PERMISSION	"There is currently no program set as your handler for \"sword://\" and similar URLs.  Would you like GnomeSword to install itself as the program to handle these URLs?"
 
+char *gconf_keys[GS_GCONF_MAX][2] = {
+    { "/desktop/gnome/url-handlers/bible/command",       "gnomesword2 \"%s\"" },
+    { "/desktop/gnome/url-handlers/bible/enabled",       (char *) 1 },
+    { "/desktop/gnome/url-handlers/bible/need-terminal", (char *) 0 },
+    { "/desktop/gnome/url-handlers/sword/command",       "gnomesword2 \"%s\"" },
+    { "/desktop/gnome/url-handlers/sword/enabled",       (char *) 1 },
+    { "/desktop/gnome/url-handlers/sword/need-terminal", (char *) 0 }
+};
 
-/******************************************************************************
- * Name
- *    
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   
- */
+void gconf_setup()
+{
+	int i;
+	char msg[256];
+	gchar *str;
+	gboolean retval;
+	GConfClient* client = gconf_client_get_default();
+
+	if (client == NULL)
+		return;		/* we're not running under GConf */
+
+	/*
+	 * This is deliberately somewhat simple-minded, at least for now.
+	 * We care about one thing: Is anything set to handle "bible://"?
+	 */
+	if (((str = gconf_client_get_string(client, gconf_keys[0][0],
+					    NULL)) == NULL) &&
+	    gui_yes_no_dialog(GS_GCONF_PERMISSION)) {
+		/*
+		 * Mechanical as can be, one after another.
+		 */
+		for (i = 0; i < GS_GCONF_MAX; ++i) {
+			retval = (((i % 3) == 0)	/* contrived hack */
+				  ? gconf_client_set_string
+					(client,
+					 gconf_keys[i][0],
+					 gconf_keys[i][1],
+					 NULL)
+				  : gconf_client_set_bool
+					(client,
+					 gconf_keys[i][0],
+					 (gboolean) gconf_keys[i][1],
+					 NULL));
+			if (!retval) {
+				sprintf(msg, "GnomeSword failed to complete handler init for key #%d:\n%s",
+					i, gconf_keys[i][0]);
+				gui_generic_warning(msg);
+				return;
+			}
+		}
+	}
+}
