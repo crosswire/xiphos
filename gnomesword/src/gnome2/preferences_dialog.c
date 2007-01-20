@@ -1699,7 +1699,7 @@ static void setup_color_pickers(void)
 	if (string_is_color(settings.highlight_fg))
 		gdk_color_parse(settings.highlight_fg, &color);
 	else
-		gdk_color_parse("#0000CF", &color);
+		gdk_color_parse("#FFFF00", &color);
 	gtk_color_button_set_color(
 		GTK_COLOR_BUTTON(color_picker.highlight_fg),
 				&color);
@@ -1708,7 +1708,7 @@ static void setup_color_pickers(void)
 	if (string_is_color(settings.highlight_bg))
 		gdk_color_parse(settings.highlight_bg, &color);
 	else
-		gdk_color_parse("#0000CF", &color);
+		gdk_color_parse("#060680", &color);
 	gtk_color_button_set_color(
 		GTK_COLOR_BUTTON(color_picker.highlight_bg),
 				&color);
