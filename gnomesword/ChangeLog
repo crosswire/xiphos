@@ -1,3 +1,7 @@
+2007-01-19  karl <karl@charcoal.com>
+
+	* feature #1613239: improve command line use of "sword://"
+
 2007-01-17  terry <tbiggs@users.sf.net>
 
 	* added navigation toolbar to genbook dialog
