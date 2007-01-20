@@ -59,6 +59,11 @@ int main(int argc, char *argv[])
 
 	gui_init(argc, argv);
 	
+	if (argc > 2) {
+		gui_generic_warning("GnomeSword does not understand more than one argument.");
+		exit(1);
+	}
+
 	if (argc > 1) {
 		/*
 		 * these args are for broken configs or bookmarks -
@@ -77,7 +82,11 @@ int main(int argc, char *argv[])
 		/*
 		 * this arg is a sword uri
 		 */
-		if ((!strncmp(argv[1], "sword:/",7)) || (strstr(argv[1],"studypad"))) {
+		if ((!strncmp(argv[1], "sword:/", 7)) ||
+		    (!strncmp(argv[1], "bible:/", 7)) ||
+		    (strstr(argv[1], "studypad"))) {
+			if (!strncmp(argv[1], "bible:/", 7))
+				memcpy(argv[1], "sword"); /* equivalent */
 			have_sword_url = TRUE;
 		}
 	}
