@@ -931,7 +931,6 @@ void main_display_book(const char * mod_name, char * key)
 	
 	backend->display_mod->Display();
 	main_setup_navbar_book(settings.book_mod, settings.book_offset);
-	settings.comm_showing = FALSE;
 	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
@@ -966,7 +965,6 @@ void main_display_commentary(const char * mod_name, const char * key)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	settings.comm_showing = TRUE;
 	if (settings.browsing)
 		gui_update_tab_struct(NULL,
 				      mod_name,
