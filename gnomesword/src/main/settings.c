@@ -630,10 +630,10 @@ void load_settings_structure(void)
 char *gconf_keys[GS_GCONF_MAX][2] = {
     { "/desktop/gnome/url-handlers/bible/command",       "gnomesword2 \"%s\"" },
     { "/desktop/gnome/url-handlers/bible/enabled",       (char *) 1 },
-    { "/desktop/gnome/url-handlers/bible/need-terminal", (char *) 0 },
+    { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
     { "/desktop/gnome/url-handlers/sword/command",       "gnomesword2 \"%s\"" },
     { "/desktop/gnome/url-handlers/sword/enabled",       (char *) 1 },
-    { "/desktop/gnome/url-handlers/sword/need-terminal", (char *) 0 }
+    { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
 };
 
 void gconf_setup()
