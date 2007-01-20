@@ -701,12 +701,12 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 
 /******************************************************************************
  * Name
- *   main_dialogs_dictionary_entery_changed
+ *   main_dialogs_dictionary_entry_changed
  *
  * Synopsis
  *   #include ".h"
  *
- *   void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)	
+ *   void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)	
  *
  * Description
  *   
@@ -715,7 +715,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
  *   void
  */
 
-void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)
+void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 {
 	gint count = 10, i;
 	gchar *new_key, *text = NULL;
