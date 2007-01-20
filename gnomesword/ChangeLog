@@ -1,3 +1,7 @@
+2007-01-20  karl <karl@charcoal.com>
+
+	* remove all traces of setup_druid.  hasn't been relevant in eons.
+
 2007-01-19  karl <karl@charcoal.com>
 
 	* feature #1613239: improve command line use of "sword://"
