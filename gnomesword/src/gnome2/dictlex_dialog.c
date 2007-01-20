@@ -350,14 +350,14 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
  *   void
  */
 
-static void entery_changed(GtkEditable * editable, DIALOG_DATA * d)
+static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 {
 	if (d->key)
 		g_free(d->key);
 	d->key =
 	    g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
 
-	main_dialogs_dictionary_entery_changed(d);
+	main_dialogs_dictionary_entry_changed(d);
 }
 
 
@@ -530,7 +530,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			 G_CALLBACK(on_btnSyncDL_clicked), dlg);
 	g_signal_connect(GTK_OBJECT(dlg->entry), "changed",
-			 G_CALLBACK(entery_changed),
+			 G_CALLBACK(entry_changed),
 			 (DIALOG_DATA *) dlg);
 	g_signal_connect(G_OBJECT(dlg->listview),
 			 "button_release_event",
