@@ -626,6 +626,8 @@ void load_settings_structure(void)
 
 #define	GS_GCONF_PERMISSION	"There is currently no program set as your handler for \"sword://\" and similar URLs.  Would you like GnomeSword to install itself as the program to handle these URLs?"
 
+#define	GS_GCONF_SUCCESS	"GnomeSword has successfully set itself as the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\" to examine keys under /desktop/gnome/url-handlers, if you need to change these."
+
 char *gconf_keys[GS_GCONF_MAX][2] = {
     { "/desktop/gnome/url-handlers/bible/command",       "gnomesword2 \"%s\"" },
     { "/desktop/gnome/url-handlers/bible/enabled",       (char *) 1 },
@@ -675,5 +677,6 @@ void gconf_setup()
 				return;
 			}
 		}
+		gui_generic_warning(GS_GCONF_SUCCESS);
 	}
 }
