@@ -1218,11 +1218,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 			g_string_printf(text, "%s", (const char *)imodule);
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
-				*(text->str + text->len - 6) = '\0';
+				*(text->str + text->len) = '\0';
 			}
 			else if (!strcmp(text->str + text->len - 4, "<br>")) {
 				text->len -= 4;
-				*(text->str + text->len - 4) = '\0';
+				*(text->str + text->len) = '\0';
 			}
 			str = g_string_append(str, text->str);
 			g_string_free(text, TRUE);
