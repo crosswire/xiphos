@@ -114,18 +114,6 @@ out:
 
 #define	IMGSRC_LENGTH	10	// strlen('<img src="')
 
-char *
-ImgSrcStr(const char *s)
-{
-	char *p;
-
-	if ((p = strstr(s, "<IMG SRC=\"")) == 0)
-		if ((p = strstr(s, "<img src=\"")) == 0)
-			if ((p = strstr(s, "<img SRC=\"")) == 0)
-			     p = strstr(s, "<IMG src=\"");
-	return p;
-}
-
 const char *
 AnalyzeForImageSize(const char *origtext,
 		    GdkWindow *window,
@@ -145,14 +133,16 @@ AnalyzeForImageSize(const char *origtext,
 	// image content is by no means common. therefore, spend an extra
 	// search call to determine whether any of the rest is needed,
 	// most especially to stop copying large blocks of text w/no images.
-	if (ImgSrcStr(origtext) == NULL)
+	if (strcasestr(origtext, "<img src=\"") == NULL)
 		return origtext;
 
 	text = origtext;
 	resized = "";
 	trail = text;
 
-	for (path = ImgSrcStr(text); path; path = ImgSrcStr(path)) {
+	for (path = strcasestr(text, "<img src=\"");
+	     path;
+	     path = strcasestr(path, "<img src=\"")) {
 
 		if (window_y == -999) {
 			/* we have images, but we don't know bounds yet */
@@ -167,8 +157,8 @@ AnalyzeForImageSize(const char *origtext,
 				// call _get_size only if the window exists by now.
 				gdk_drawable_get_size(window, &window_x, &window_y);
 				if ((window_x > 200) || (window_y > 200)) {
-					window_x -= 15;
-					window_y -= 15;
+					window_x -= 20;
+					window_y -= 20;
 				} else {
 					window_x = (window_x * 93)/100;
 					window_y = (window_y * 93)/100;
