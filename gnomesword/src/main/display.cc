@@ -790,14 +790,16 @@ char GTKChapDisp::Display(SWModule &imodule)
 		    !settings.versestyle &&		// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
-			gint text_len;
 
 			g_string_printf(text, "%s", (const char *)imodule);
-			text_len = strlen(text->str);
-			if (!strcmp(text->str + text_len - 6, "<br />"))
-				*(text->str + text_len - 6) = '\0';
-			else if (!strcmp(text->str + text_len - 4, "<br>"))
-				*(text->str + text_len - 4) = '\0';
+			if (!strcmp(text->str + text->len - 6, "<br />")) {
+				text->len -= 6;
+				*(text->str + text->len) = '\0';
+			}
+			else if (!strcmp(text->str + text->len - 4, "<br>")) {
+				text->len -= 4;
+				*(text->str + text->len) = '\0';
+			}
 			swbuf += text->str;
 			g_string_free(text, TRUE);
 		} else
@@ -1206,7 +1208,27 @@ char DialogChapDisp::Display(SWModule &imodule)
 		} else {
 			main_set_dialog_strongs_morphs_off(be, ops);
 		}
-		str = g_string_append(str, (const char *)imodule);
+
+		// same forced line break glitch in highlighted current verse.
+		if (settings.versehighlight &&		// doing <table> h/l.
+		    !versestyle &&			// paragraph format.
+		    (key->Verse() == curVerse)) {
+			GString *text = g_string_new(NULL);
+
+			g_string_printf(text, "%s", (const char *)imodule);
+			if (!strcmp(text->str + text->len - 6, "<br />")) {
+				text->len -= 6;
+				*(text->str + text->len - 6) = '\0';
+			}
+			else if (!strcmp(text->str + text->len - 4, "<br>")) {
+				text->len -= 4;
+				*(text->str + text->len - 4) = '\0';
+			}
+			str = g_string_append(str, text->str);
+			g_string_free(text, TRUE);
+		} else
+			str = g_string_append(str, (const char *)imodule);
+
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (versestyle) {
