@@ -783,7 +783,26 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf += paragraphMark;;
 		}
 
-		swbuf += (const char *)imodule;
+		// correct a highlight glitch: in poetry verses which end in
+		// a forced line break, we must remove the break to prevent
+		// the enclosing <table> from producing a double break.
+		if (settings.versehighlight &&		// doing <table> h/l.
+		    !settings.versestyle &&		// paragraph format.
+		    (key->Verse() == curVerse)) {
+			GString *text = g_string_new(NULL);
+			gint text_len;
+
+			g_string_printf(text, "%s", (const char *)imodule);
+			text_len = strlen(text->str);
+			if (!strcmp(text->str + text_len - 6, "<br />"))
+				*(text->str + text_len - 6) = '\0';
+			else if (!strcmp(text->str + text_len - 4, "<br>"))
+				*(text->str + text_len - 4) = '\0';
+			swbuf += text->str;
+			g_string_free(text, TRUE);
+		} else
+			swbuf += (const char *)imodule;
+
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (key->Verse() == curVerse)
