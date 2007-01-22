@@ -118,6 +118,7 @@ struct _settings {
 	        showversenum, /* display verse numbers in text (default on) */
 	        readaloud, /* pass text through (existing) "festival -server" */
 	        versehighlight, /* do special fg/bg for current verse */
+	        doublespace, /* double-space text (default off) */
 	        parallelpage, /* display parallel page */
 	        autosavepersonalcomments, /* auto save personal notes */
 	        formatpercom, /* use html to format personal notes */

@@ -62,7 +62,8 @@ extern "C" {
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none%s }--></STYLE></head>"
+#define DOUBLE_SPACE " ; line-height:2em"
 
 using namespace sword;
 using namespace std;
@@ -272,11 +273,12 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-	swbuf.append(HTML_START);
-	swbuf.appendFormatted(  "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-				settings.bible_bg_color,
-				settings.bible_text_color,
-				settings.link_color);
+	swbuf.appendFormatted(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color);
 
 	swbuf.appendFormatted(  "<font color=\"%s\">",
 				settings.bible_verse_num_color);
@@ -689,10 +691,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	swbuf.appendFormatted(HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-				settings.bible_bg_color,
-				settings.bible_text_color,
-				settings.link_color);
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color);
 	if (is_rtol)
 		swbuf += "<DIV ALIGN=right>";
 #ifdef USE_GTKMOZEMBED
@@ -1039,10 +1042,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 		keytext = imodule.KeyText();
 
 	if (type == 4)
-		g_string_printf(str, 	HTML_START
+		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 				"<font face=\"%s\" size=\"%s\">%s"
 				"</font></body></html>",
+				(settings.doublespace ? DOUBLE_SPACE : ""),
 				settings.bible_bg_color,
 				settings.bible_text_color,
 				settings.link_color,
@@ -1054,12 +1058,13 @@ char DialogEntryDisp::Display(SWModule &imodule)
 						       type)
 				 : (const char *)imodule /* untouched */));
 	else
-		g_string_printf(str, 	HTML_START
+		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
 				"[%s]</font></a>[%s]<br>"
 				"<font face=\"%s\" size=\"%s\">%s"
 				"</font></body></html>",
+				(settings.doublespace ? DOUBLE_SPACE : ""),
 				settings.bible_bg_color,
 				settings.bible_text_color,
 				settings.link_color,
@@ -1134,6 +1139,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+				(settings.doublespace ? DOUBLE_SPACE : ""),
 				settings.bible_bg_color,
 				settings.bible_text_color,
 				settings.link_color);
