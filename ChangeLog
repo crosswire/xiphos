@@ -1,3 +1,9 @@
+2007-01-21  karl <karl@charcoal.com>
+
+	* feature #1193235: Allow text to be displayed double space.
+	  (so far, scaffolding only -- pending css-awareness in
+	   gtkmozembed or gecko.  currently #ifdef DOUBLESPACE.)
+
 2007-01-20  karl <karl@charcoal.com>
 
 	* remove all traces of setup_druid.  hasn't been relevant in eons.
