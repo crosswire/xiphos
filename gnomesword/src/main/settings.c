@@ -524,6 +524,14 @@ void load_settings_structure(void)
 		settings.versehighlight = 0;
 	}
 
+	buf = xml_get_value("misc", "doublespace");
+	if (buf)
+		settings.doublespace = atoi(buf);
+	else {
+		xml_add_new_item_to_section("misc", "doublespace", "0");
+		settings.doublespace = 0;
+	}
+
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 	
 		
