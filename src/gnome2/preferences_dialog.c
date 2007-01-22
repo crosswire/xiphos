@@ -62,6 +62,7 @@ typedef enum {
 	READ_ALOUD,
 	SHOW_VERSE_NUM,
 	VERSE_HIGHLIGHT,
+	DOUBLE_SPACE,
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
@@ -157,6 +158,7 @@ struct _preferences_check_buttons {
 	GtkWidget *readaloud;
 	GtkWidget *show_verse_num;
 	GtkWidget *versehighlight;
+	GtkWidget *doublespace;
 	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
@@ -700,11 +702,9 @@ void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
 void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	extern gboolean style_display;
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "versestyle", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "versestyle", "0");
-	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
+	xml_set_value("GnomeSword", "misc", "versestyle",
+		      (togglebutton->active ? "1" : "0"));
+	settings.versestyle = togglebutton->active;
 	
 	style_display = TRUE;	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -734,7 +734,6 @@ void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data
 	xml_set_value("GnomeSword", "misc", "pinnedtabs",
 		      (togglebutton->active ? "1" : "0"));
 	settings.pinnedtabs = atoi(xml_get_value("misc", "pinnedtabs"));
-	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.pinnedtabs_item),
 			       settings.pinnedtabs);
@@ -763,7 +762,6 @@ void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data
 	xml_set_value("GnomeSword", "misc", "readaloud",
 		      (togglebutton->active ? "1" : "0"));
 	settings.readaloud = atoi(xml_get_value("misc", "readaloud"));
-	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.readaloud_item),
 			       settings.readaloud);
@@ -818,12 +816,9 @@ void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data
 
 void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "lexicons", "usedefaultdict", "1");
-	else
-		xml_set_value("GnomeSword", "lexicons", "usedefaultdict", "0");
-	settings.useDefaultDict =
-			atoi(xml_get_value("lexicons", "usedefaultdict"));
+	xml_set_value("GnomeSword", "lexicons", "usedefaultdict",
+		      (togglebutton->active ? "1" : "0"));
+	settings.useDefaultDict = togglebutton->active;
 }
 
 
@@ -846,11 +841,9 @@ void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 
 void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	if(togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "dailydevotional", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "dailydevotional", "0");
-	settings.showdevotional = atoi(xml_get_value("misc","dailydevotional"));
+	xml_set_value("GnomeSword", "misc", "dailydevotional",
+		      (togglebutton->active ? "1" : "0"));
+	settings.showdevotional = togglebutton->active;
 }
 
 
@@ -873,13 +866,10 @@ void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 
 void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "splash", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "splash", "0");
-	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+	xml_set_value("GnomeSword", "misc", "splash",
+		      (togglebutton->active ? "1" : "0"));
+	settings.showsplash = togglebutton->active;
 }
-
 
 
 /******************************************************************************
@@ -901,14 +891,9 @@ void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 
 void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	gchar *buf;
-	
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "chapter-scroll", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "chapter-scroll", "0");
-	buf = xml_get_value("misc", "chapter-scroll");
-	settings.chapter_scroll = atoi(buf);
+	xml_set_value("GnomeSword", "misc", "chapter-scroll",
+		      (togglebutton->active ? "1" : "0"));
+	settings.chapter_scroll = togglebutton->active;
 }
 
 /******************************************************************************
@@ -930,14 +915,9 @@ void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user
 
 void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	gchar *buf;
-	
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "imageresize", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "imageresize", "0");
-	buf = xml_get_value("misc", "imageresize");
-	settings.imageresize =  atoi(buf);
+	xml_set_value("GnomeSword", "misc", "imageresize",
+		      (togglebutton->active ? "1" : "0"));
+	settings.imageresize =  togglebutton->active;
 }
 
 /******************************************************************************
@@ -959,16 +939,41 @@ void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer
 
 void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	gchar *buf;
-	
-	if (togglebutton->active)
-		xml_set_value("GnomeSword", "misc", "versehighlight", "1");
-	else
-		xml_set_value("GnomeSword", "misc", "versehighlight", "0");
-	buf = xml_get_value("misc", "versehighlight");
-	settings.versehighlight =  atoi(buf);
+	xml_set_value("GnomeSword", "misc", "versehighlight",
+		      (togglebutton->active ? "1" : "0"));
+	settings.versehighlight = togglebutton->active;
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.versehighlight_item),
+			       settings.versehighlight);
 	main_display_bible(settings.MainWindowModule, settings.currentverse);
 }
+
+/******************************************************************************
+ * Name
+ *   on_checkbutton_doublespace_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ * Return value
+ *   void
+ */
+
+void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "doublespace",
+		      (togglebutton->active ? "1" : "0"));
+	settings.doublespace = togglebutton->active;
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+			       (widgets.doublespace_item),
+			       settings.doublespace);
+}
+
 
 /******************************************************************************
  * Name
@@ -1753,6 +1758,9 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.versehighlight),
 				     settings.versehighlight);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.doublespace),
+				     settings.doublespace);
 
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
@@ -1778,7 +1786,8 @@ static void setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_imageresize_toggled), NULL);
 	g_signal_connect(check_button.versehighlight, "toggled",
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
-	
+	g_signal_connect(check_button.doublespace, "toggled",
+			 G_CALLBACK(on_checkbutton_doublespace_toggled), NULL);
 }
 
 
@@ -2016,6 +2025,7 @@ static void create_preferences_dialog(void)
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
+	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
 	setup_check_buttons();
 	/* verse number size */
 	index = get_verse_number_size_index();
