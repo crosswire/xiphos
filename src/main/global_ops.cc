@@ -105,6 +105,7 @@ int main_save_module_options(char * mod_name, char * option, int choice)
 	SWConfig module_options(buf);
 	
 	module_options.Load();
+	g_free(buf);	
 
 	if (choice) {
 		on_off = "On";
@@ -335,7 +336,8 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	SWConfig module_options(buf);
 	
 	module_options.Load();
-		
+	g_free(buf);	
+
 	ops = g_new0(GLOBAL_OPS, 1);
 	ops->module_type = 0;
 	ops->words_in_red = 
@@ -365,6 +367,5 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	ops->variants_secondary =  
 		gui_of2tf(module_options[mod_name]["Secondary Reading"].c_str());
 	
-	g_free(buf);	
 	return ops;
 }
