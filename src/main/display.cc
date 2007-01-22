@@ -62,8 +62,8 @@ extern "C" {
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none%s }--></STYLE></head>"
-#define DOUBLE_SPACE " ; line-height:2em"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }%s--></STYLE></head>"
+#define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
 using namespace sword;
 using namespace std;
