@@ -280,7 +280,7 @@ void gui_load_tabs(const gchar *filename)
 	gboolean error = FALSE;
 
 	GList *tmp = NULL;
-	PASSAGE_TAB_INFO *pt = NULL;
+	PASSAGE_TAB_INFO *pt = NULL, *pt_first = NULL;
 
 	if (filename == NULL)
 	{
@@ -328,6 +328,8 @@ void gui_load_tabs(const gchar *filename)
 						if (!xmlStrcmp(tmp_node->name, (const xmlChar*)"tab"))
 						{
 							pt = g_new0(PASSAGE_TAB_INFO, 1);
+							if (pt_first == NULL)
+								pt_first = pt;
 							
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"text_mod");
 							pt->text_mod = g_strdup(val);
@@ -384,6 +386,9 @@ void gui_load_tabs(const gchar *filename)
 		}
 		else
 		{
+			// first passage is current/displayed.
+			pt = pt_first;
+
 			// This is a hack to keep gs from loading the settings from the last session
 			// into the last tab loaded here.
 			settings.MainWindowModule = g_strdup(pt->text_mod);
