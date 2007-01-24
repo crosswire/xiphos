@@ -1416,6 +1416,29 @@ char *main_get_rendered_text(char *module_name, char *key)
 {
 	return backend->get_render_text(module_name, key);
 }
+
+
+/******************************************************************************
+ * Name
+ *   main_get_raw_text
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   char *main_get_raw_text(char *module_name, char *key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_get_raw_text(char *module_name, char *key)
+{
+	return backend->get_raw_text(module_name, key);
+}
+
 /******************************************************************************
  * Name
  *  main_get_mod_type
