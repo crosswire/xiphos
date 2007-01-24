@@ -496,7 +496,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			struct sockaddr_in service;
 
 			if ((tts_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
-				char msg[128];
+				char msg[256];
 				sprintf(msg, "ReadAloud disabled:\nsocket failed, %s",
 					strerror(errno));
 				settings.readaloud = 0;
@@ -514,15 +514,13 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			service.sin_addr.s_addr = htonl(0x7f000001);
 			if (connect(tts_socket, (const sockaddr *)&service,
 				    sizeof(service)) != 0) {
-				char msg[128];
-				sprintf(msg, "TTS unavailable: %s\nAttempting TTS restart",
-					strerror(errno));
 				system("festival --server &");
-				gui_generic_warning(msg);
+				sleep(2); // give festival a moment to init.
 
 				if (connect(tts_socket, (const sockaddr *)&service,
 					    sizeof(service)) != 0) {
 					// it still didn't work -- missing.
+					char msg[256];
 					sprintf(msg, "%s\n%s, %s",
 						"TTS \"festival\" not started -- perhaps not installed",
 						"TTS connect failed", strerror(errno));
@@ -616,7 +614,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		    (write(tts_socket, text->str, strlen(text->str)) < 0) ||
 		    (write(tts_socket, "\")\r\n", 4) < 0))
 		{
-			char msg[128];
+			char msg[256];
 			sprintf(msg, "TTS disappeared?\nTTS write failed: %s",
 				strerror(errno));
 			shutdown(tts_socket, SHUT_RDWR);
