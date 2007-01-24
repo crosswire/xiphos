@@ -656,7 +656,7 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		
 	
 	title = g_strdup_printf("%s - %s", e->module, e->key);
-	text = main_get_striptext((gchar *) e->module,
+	text = main_get_raw_text((gchar *) e->module,
 				   (gchar *) e->key);
 	if(strlen(text)) 
 		load_through_persist_stream(text, e);
