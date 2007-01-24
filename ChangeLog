@@ -1,3 +1,7 @@
+2007-01-23  karl <karl@charcoal.com>
+
+	* fixed bug #1642603: loading a tab set leaves GS confused
+
 2007-01-21  karl <karl@charcoal.com>
 
 	* feature #1193235: Allow text to be displayed double space.
