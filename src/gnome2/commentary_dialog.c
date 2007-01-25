@@ -24,12 +24,12 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include "main/embed.h"
 #include "main/embed-dialogs.h"
 #else
-#include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
 #endif
 
@@ -40,11 +40,6 @@
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
 
-#ifndef USE_GTKHTML38
-#include "editor/editor_menu.h"
-#include "editor/toolbar_style.h"
-#include "editor/toolbar_edit.h"
-#endif
 #include "main/lists.h"
 #include "main/navbar.h"
 #include "main/settings.h"
