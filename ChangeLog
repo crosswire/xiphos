@@ -1,3 +1,8 @@
+2007-01-25  karl <karl@charcoal.com>
+
+	* fixed adv.search attribute by adding MATCHWHOLEENTRY iff search
+	  string begins with Word//Lemma/.
+
 2007-01-24  terry <tbiggs@users.sf.net>
 
 	* fixed bug #1643623: pers.comm. editor loses <tokens> on re-edit
