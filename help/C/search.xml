@@ -210,15 +210,6 @@
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
 		</para>
 	   </warning>  
-
-	   <warning>
-	   	<para>
-		Late in preparation for release of 2.2, it was discovered that footnote content search (as an Attributes search; see
-		screenshot) has been inadvertently broken by other needed development effort in Advanced Search, and further fixes to cure
-		this will require completion of other planned, extensive re-working of how Advanced Search works.  We regret the
-		inconvenience, but it is expected that this will receive top priority following 2.2's release.
-		</para>
-	   </warning>
 	   </sect2>
 
 	<sect2 id="hdbk-op-search-dialog-text-regexp">
