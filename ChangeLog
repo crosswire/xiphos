@@ -5,6 +5,7 @@
 	* fixed tab history update when tabs are pinned, so as only to add
 	  entries for the current tab, rather than replicating them in all
 	  tabs.  makes for a performance boost, too.
+	* updated RELEASE-NOTES in anticipation of 2.2.1.
 
 2007-01-24  terry <tbiggs@users.sf.net>
 
