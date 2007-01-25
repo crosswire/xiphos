@@ -3,6 +3,80 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.2.1 (maintenance)
+27 Jan 2007
+
+Behavioral matters:
+
+1. Genbooks now use a navbar in both dialog and Book View pane.
+2. High-contrast highlight of current verse is available.
+   (Edit->Prefs->Fonts->Colors, plus either View->Highlight Current Verse
+    or Edit->Prefs->General->Misc->Highlight current verse.)
+3. Unused verse number color preference was removed, as planned
+   (feat.req #1620641).
+4. Footnote content search works again, but it's a hack, it still uses
+   an atrocious syntax, and we still need to do the planned rework in
+   Advanced Search (feat.req #1615402).
+5. Disabling both right-side panes completely disables right-side display
+   (bug #1624753, feat.req #1624757).
+6. GnomeSword enables GConf-based URL handling (feat.req #1613239).
+7. There is code in place to do double-space text as soon as GTKMOZEMBED
+   returns (feat.req #1193235).  #ifdef DOUBLESPACE keeps the View item
+   out of visibility for the moment.  Improved Strong's/morph markup
+   (feat.req #1633426) will follow soon.  Both depend on CSS.
+8. Some new keyboard shortcuts have appeared (feat.req #1633397).  Alt-G
+   focuses on the Genbook navbar, and thereafter arrow keys do what you
+   expect.  Ctrl-L focuses the main verse navbar text.
+
+Important usage note:
+
+A genbook key handling bug exists in the Sword libs, in SVN after
+their 1.5.9 release.  If you build Sword from SVN and you find that
+you are unable to navigate to certain portions of some genbooks
+(Finney, Heretics, Institutes), a workaround is this, for each module:
+    cd ~/.sword/modules/genbook/rawgenbook/finney
+    mod2imp Finney > finney.imp
+    imp2gbs finney.imp
+    rm finney.imp
+That is, simple re-importation will make the module consistent with
+itself in this regard.
+
+Bug reports addressed since 2.2:
+1643716  non UTF-8 chars with libsword built without icu
+1643623  pers.comm. editor loses <tokens> on re-edit
+1642835  TTS unavailable: Connection refused
+1642603  loading a tab set leaves GS confused
+1640907  long verse history -> pulldown-select fails
+1639131  genbook footnotes are inaccessible
+1635205  commentary dict lookup crashes GS
+1634794  adv.search hates booknames w/spaces
+1633109  gtk warnings from personal commentary
+1632443  comm. fails to track beneath genbook
+1631814  right-click -> Edit -> Find crashes
+1631629  bible dialog uses wrong verse style
+1629380  comm.dialog xref selection refers to wrong book
+1628714  dialog commentaries select revelation?
+1626605  Daily Devotion Does Not Display
+1624753  "Show/Hide Sidebar" has a Weird Effect on the Right Sidebar
+1623020  gnomesword tts
+1622892  dict/lex cannot change xref setting
+
+New feature requests pending:
+1642837  fullscreen support
+1633426  update strong's/morph markup readability
+1633407  personal commentary needs
+1631815  open single-image window on click
+
+Feature requests closed:
+1633397  shortcut: focus text cursor to verse bar
+1624757  Add View Option to Toggle the Right Sidebar
+1620641  "Verse numbers" font color is ignored
+1613239  improve command line use of "sword://"
+1193235  Allow text to be displayed double space
+         (but inactive, pending return of GTKMOZEMBED)
+ 901894  Drop book list for search limit
+________________________
+
 Release 2.2
 25 Dec 2006
 
