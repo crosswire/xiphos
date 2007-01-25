@@ -99,7 +99,7 @@ void main_update_tab_history_menu(gpointer data)
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
 	
 	gui_remove_menu_items(_("H_istory/<Separator>"),
-			      24); //tab->history_items + 1);
+			      25); //tab->history_items + 1);
 	gui_add_separator2menu(widgets.app, _("H_istory/C_lear"));
 	
 	for (i = 0; i < tab->history_items; i++) {
