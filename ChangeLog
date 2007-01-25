@@ -2,6 +2,9 @@
 
 	* fixed adv.search attribute by adding MATCHWHOLEENTRY iff search
 	  string begins with Word//Lemma/.
+	* fixed tab history update when tabs are pinned, so as only to add
+	  entries for the current tab, rather than replicating them in all
+	  tabs.  makes for a performance boost, too.
 
 2007-01-24  terry <tbiggs@users.sf.net>
 
