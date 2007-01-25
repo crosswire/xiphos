@@ -1,6 +1,7 @@
 2007-01-24  karl <karl@charcoal.com>
 
 	* fixed bug #1642835: TTS unavailable: Connection refused
+	* fixed bug #1640907: long verse history -> pulldown-select fails
 
 2007-01-23  karl <karl@charcoal.com>
 
