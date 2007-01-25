@@ -1432,7 +1432,8 @@ void main_do_dialog_search(void)
 	// For attribute-based searches, e.g. "Word//Lemma/G140",
 	// we must constrain the match to whole words.  Otherwise,
 	// we will inadvertently return e.g. 140 plus 1401 and 1404.
-	if (search_type == -3)
+	if ((search_type == -3) &&
+	    (!strncmp(search_string, "Word//Lemma/", 12)))
 		search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
 
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
