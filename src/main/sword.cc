@@ -703,7 +703,10 @@ void main_dictionary_entry_changed(char * mod_name)
 {	
 	gchar *key = NULL;
 	gchar *key2 = NULL;
-	
+	gsize bytes_read;	
+	gsize bytes_written;	
+	GError **error = NULL;
+
 	if (!mod_name) 
 		return;
 	if (strcmp(settings.DictWindowModule, mod_name)) {
@@ -713,21 +716,37 @@ void main_dictionary_entry_changed(char * mod_name)
 	
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
-	key2 = g_utf8_strup(key, strlen(key));
-	
+//	key2 = g_utf8_strup(key, strlen(key));
+	key2 = g_convert(  key,	
+			     -1,	
+			     UTF_8,	
+			     OLD_CODESET,	
+			     &bytes_read,	
+			     &bytes_written,
+			     error);		
+
 	backend->set_module_key(mod_name, key2);
 	g_free(key2);
 	g_free(key);
 	key = backend->get_module_key();
-	
+
+	key2 = g_convert(  key,	
+			     -1,	
+			     OLD_CODESET,	
+			     UTF_8,	
+			     &bytes_read,	
+			     &bytes_written,
+			     error);	
+		
 	xml_set_value("GnomeSword", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key2);
 	g_free(key);
+	g_free(key2);
 } 
 
 
@@ -777,9 +796,11 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	gchar *key = NULL;
 	gchar *key2 = NULL;
 	gint height;
-        gsize bytes_written;
 	GtkWidget *menu;
 	GtkWidget * item;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
 	
 	menu = gtk_menu_new();
 	
@@ -796,7 +817,15 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 #ifdef DEBUG
 	g_message("\nold_key: %s\nkey: %s",old_key,key);
 #endif	
-	key2 = g_utf8_strup(key,strlen(key));
+//	key2 = g_utf8_strup(key,strlen(key));
+	key2 = g_convert(  key,	
+			     -1,	
+			     UTF_8,	
+			     OLD_CODESET,	
+			     &bytes_read,	
+			     &bytes_written,
+			     error);
+
 	
 	backend->set_module_key(mod_name, key2);
 	g_free(key2);
