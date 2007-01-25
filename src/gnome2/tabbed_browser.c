@@ -597,11 +597,14 @@ void gui_set_tab_label(const gchar * key)
 	if (settings.pinnedtabs) {
 		GList *tmp = NULL;
 		for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp))
-			gui_set_named_tab_label(key, (PASSAGE_TAB_INFO*)tmp->data);
+			gui_set_named_tab_label
+			    (key,
+			     (PASSAGE_TAB_INFO*)tmp->data,
+			     ((PASSAGE_TAB_INFO*)tmp->data == cur_passage_tab));
 	}
 	else
 	{
-		gui_set_named_tab_label(key, cur_passage_tab);
+		gui_set_named_tab_label(key, cur_passage_tab, TRUE);
 	}
 }
 
@@ -621,7 +624,7 @@ void gui_set_tab_label(const gchar * key)
  *   void
  */
  
-void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt)
+void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean update)
 {
 	GString *str = g_string_new(NULL);
 	
@@ -640,7 +643,8 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt)
 					GTK_NOTEBOOK(widgets.notebook_main),
                                         pt->page_widget,
                                             str->str );
-	main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
+	if (update)
+		main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 	g_string_free(str,TRUE);
 }
 
