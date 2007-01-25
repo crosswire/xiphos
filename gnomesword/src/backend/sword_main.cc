@@ -1107,7 +1107,7 @@ char *BackEnd::navigate_module(int direction) {
 			     &bytes_read,
 			     &bytes_written,
 			     error);
-	return retval; //strdup((char *) display_mod->KeyText());
+	return strdup((char *) display_mod->KeyText());
 }
 
 GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
