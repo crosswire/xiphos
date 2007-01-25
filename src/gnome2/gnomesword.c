@@ -159,7 +159,7 @@ void frontend_display(void)
 	main_clear_viewer();
 	
 	//gtk_widget_realize(widgets.html_comm);
-	
+/*	
 	gtk_widget_realize(widgets.html_dict);
 	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 					      settings.dictkey);
@@ -177,7 +177,8 @@ void frontend_display(void)
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
 	main_url_handler(url);
-	g_free(url);	
+	g_free(url);
+*/
 /*			
 	if(!settings.first_run) {
 		if(!settings.havebible){

@@ -502,6 +502,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 					gtk_widget_grab_focus(navbar_book.lookup_entry);
 				}
 			break;
+			case 46: //L
+				if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+					gtk_widget_grab_focus(navbar_main.lookup_entry);
+			break;
 			case 54: //C
 				if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
 					gtk_widget_grab_focus(navbar_main.lookup_entry);
