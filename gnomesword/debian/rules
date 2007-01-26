@@ -17,11 +17,12 @@ configure-stamp:
 	dh_testdir
 
 	# Add here commands to configure the package.
-	./autogen.sh $(confflags) --prefix=/usr --mandir=\$${prefix}/share/man \
+	./autogen.sh $(confflags) \
+		--prefix=/usr \
+		--mandir=\$${prefix}/share/man \
 		--enable-pspell \
-		--prefix=/usr
-#		--enable-sword_svn
-#		--enable-debug
+		--prefix=/usr \
+		--enable-debug
 #		--enable-moz_embed
 
 	touch configure-stamp
