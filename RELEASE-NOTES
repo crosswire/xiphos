@@ -26,7 +26,8 @@ Behavioral matters:
    (feat.req #1633426) will follow soon.  Both depend on CSS.
 8. Some new keyboard shortcuts have appeared (feat.req #1633397).  Alt-G
    focuses on the Genbook navbar, and thereafter arrow keys do what you
-   expect.  Ctrl-L focuses the main verse navbar text.
+   expect.  Alt-C brings up the commentary.  Ctrl-L focuses the main
+   verse navbar text.
 
 Important usage note:
 
@@ -62,12 +63,12 @@ Bug reports addressed since 2.2:
 1622892  dict/lex cannot change xref setting
 
 New feature requests pending:
-1642837  fullscreen support
 1633426  update strong's/morph markup readability
 1633407  personal commentary needs
 1631815  open single-image window on click
 
 Feature requests closed:
+1642837  fullscreen support
 1633397  shortcut: focus text cursor to verse bar
 1624757  Add View Option to Toggle the Right Sidebar
 1620641  "Verse numbers" font color is ignored
