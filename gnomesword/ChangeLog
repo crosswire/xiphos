@@ -1,3 +1,11 @@
+2007-01-25  Dominique Corbex <domcox@users.sourceforge.net>
+
+	* fixed bug #1643716: non UTF-8 chars with libsword built without icu
+
+2007-01-25  terry <tbiggs@users.sf.net>
+
+	* feature #1633397: shortcut: focus text cursor to verse bar
+
 2007-01-25  karl <karl@charcoal.com>
 
 	* fixed adv.search attribute by adding MATCHWHOLEENTRY iff search
@@ -6,6 +14,7 @@
 	  entries for the current tab, rather than replicating them in all
 	  tabs.  makes for a performance boost, too.
 	* updated RELEASE-NOTES in anticipation of 2.2.1.
+	* updated manual for keyboard shortcuts.
 
 2007-01-24  terry <tbiggs@users.sf.net>
 
