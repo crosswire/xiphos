@@ -1,3 +1,41 @@
+gnomesword (2.2.0-99.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Subversion release
+
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Fri, 26 Jan 2007 23:22:46 +0100
+
+gnomesword (2.2.0-1) unstable; urgency=low
+
+  * New stable upstream release
+  * removed patch window_title.diff - included upstream
+  * removed patch strongs_search.diff - included upsteam
+  * Searching for Strongs numbers is possible now and is
+      documented in the help, Closes: #331175
+
+ -- Daniel Glassey <wdg@debian.org>  Wed, 10 Jan 2007 16:27:32 +0000
+
+gnomesword (2.1.9-1) unstable; urgency=low
+
+  * New upstream release
+  * which depends on sword 1.5.9, Closes: #400179
+  * debian/control: standards version 3.7.2.2 (no changes)
+  * debian/copyright: mention license of documentation
+	     GFDL with no invariant sections, no front-cover
+			 texts, no back-cover texts.
+  * left-clicking on word in RST does not crash, Closes: #329243
+  * assertion problem resolved Closes: #253447
+  * Bookmarks have been fixed, Closes: #331177
+  * Explicitly depend on gtkhtml3.8, Closes: #372732
+    (Thanks to Salvatore Bonaccorso for spotting that one)
+  * Add man page from the gnomesword team, Closes: #123423
+  * patch window_title.diff as partial fix for bug 259947
+  * patch strongs_search.diff makes tooltip on attributes describe 
+      correctly how to search for strongs numbers. However, it still 
+      needs to be documented properly before I close bug 331175.
+
+ -- Daniel Glassey <wdg@debian.org>  Thu, 23 Nov 2006 10:43:52 +0000
+
 gnomesword (2.1.7-2) unstable; urgency=low
 
   * Don't build as native package, hmph
