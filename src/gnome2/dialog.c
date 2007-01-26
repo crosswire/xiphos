@@ -386,7 +386,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	}
 
 	if (info->label4) {
-		label12 = gtk_label_new(info->label3);
+		label12 = gtk_label_new(info->label4);
 		gtk_widget_show(label12);
 		gtk_table_attach(GTK_TABLE(table2), label12, 0, 1, 3, 4,
 				 (GtkAttachOptions) (GTK_FILL),
