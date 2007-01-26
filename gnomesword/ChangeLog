@@ -1,3 +1,8 @@
+2007-01-26  karl <karl@charcoal.com>
+
+	* update configure.in for version 2.2.1 at -r1480.
+	  touchups to RELEASE-NOTES.
+
 2007-01-25  Dominique Corbex <domcox@users.sourceforge.net>
 
 	* fixed bug #1643716: non UTF-8 chars with libsword built without icu
