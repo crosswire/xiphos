@@ -26,9 +26,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#include "main/embed.h"
-#include "main/embed-dialogs.h"
+#include "gecko/gecko-html.h"
 #else
 #ifdef __cplusplus
 extern "C" {
@@ -527,9 +525,12 @@ void main_update_parallel_page(void)
 	gchar *buf;
 	gchar *file = NULL;
 	gchar *data = NULL;
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(widgets.html_parallel);
 	
-	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+	
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
+	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
+	gecko_html_open_stream(html,"text/html");
+	
 	settings.cvparallel = settings.currentverse;
 	
 	if (settings.havebible) {	
@@ -698,10 +699,10 @@ void main_update_parallel_page(void)
 		utf8len = strlen(tmpBuf);
 		if (utf8len) {
 			data = g_strconcat(data, tmpBuf, NULL);	
-			gtk_moz_embed_append_data(new_browser, data, strlen(data));
+			gecko_html_write(html,data,-1);
 		}	
 	}
-	gtk_moz_embed_close_stream(new_browser);
+	gecko_html_close(html);
 	if(data)
 		g_free(data);		
 	if (font_name)
@@ -976,7 +977,7 @@ void main_update_parallel_page(void)
  */
 
 #ifdef USE_GTKMOZEMBED	
-static void int_display(GtkMozEmbed *new_browser, gchar * key)	
+static void int_display(GeckoHtml *html, gchar * key)	
 #else
 static void int_display(GtkHTML *html, gchar * key)
 #endif
@@ -998,6 +999,7 @@ static void int_display(GtkHTML *html, gchar * key)
 	char *cur_book;
 	
 	
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html))) return;
 	str = g_string_new("");
 	tmpkey = backend_p->get_valid_key(key);
 
@@ -1016,7 +1018,7 @@ static void int_display(GtkHTML *html, gchar * key)
 		g_string_printf(str, "%s", "<tr valign=\"top\">");
 		if (str->len) {
 #ifdef USE_GTKMOZEMBED	
-		gtk_moz_embed_append_data(new_browser, str->str, str->len);
+		gecko_html_write(html, str->str, str->len);
 #else
 		gtk_html_write(html, htmlstream, str->str,str->len);
 #endif
@@ -1096,8 +1098,7 @@ static void int_display(GtkHTML *html, gchar * key)
 				textColor);
 			if (str->len) {
 #ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
-							str->str, str->len);
+				gecko_html_write(html, str->str, str->len);
 #else
 				gtk_html_write(html, htmlstream, 
 							str->str,str->len);
@@ -1108,9 +1109,7 @@ static void int_display(GtkHTML *html, gchar * key)
 					"%s","<br><DIV ALIGN=right>");			
 				if (strlen(buf2)) {
 #ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							buf2, 
-							strlen(buf2));
+					gecko_html_write(html, buf2, strlen(buf2));
 #else
 					gtk_html_write(html, htmlstream, 
 							buf2,
@@ -1126,8 +1125,7 @@ static void int_display(GtkHTML *html, gchar * key)
 				    (mod_name, tmpkey);
 				if (strlen(utf8str)) {
 #ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							utf8str, 
+					gecko_html_write(html, utf8str, 
 							strlen(utf8str));
 #else
 					gtk_html_write(html, htmlstream, 
@@ -1142,9 +1140,7 @@ static void int_display(GtkHTML *html, gchar * key)
 					"%s","</DIV>");			
 				if (strlen(buf2)) {
 #ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							buf2, 
-							strlen(buf2));
+					gecko_html_write(html, buf2, strlen(buf2));
 #else
 					gtk_html_write(html, htmlstream, 
 							buf2,
@@ -1156,8 +1152,7 @@ static void int_display(GtkHTML *html, gchar * key)
 			g_string_printf(str, "%s", "</font></td>");
 			if (str->len) {
 #ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
-							str->str, str->len);
+				gecko_html_write(html, str->str, str->len);
 #else
 				gtk_html_write(html, htmlstream, 
 							str->str,str->len);
@@ -1170,8 +1165,7 @@ static void int_display(GtkHTML *html, gchar * key)
 		g_string_printf(str, "%s", "</tr>");
 		if (str->len) {
 #ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
-							str->str, str->len);
+				gecko_html_write(html, str->str, str->len);
 #else
 				gtk_html_write(html, htmlstream, 
 							str->str,str->len);
@@ -1203,9 +1197,10 @@ void main_update_parallel_page_detached(void)
 {
 	gchar *utf8str, buf[500];
 	gint utf8len;
-#ifdef USE_GTKMOZEMBED	
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(widgets.html_parallel_dialog);	
-	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+#ifdef USE_GTKMOZEMBED
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
+	GeckoHtml *html = GECKO_HTML(widgets.html_parallel_dialog);
+	gecko_html_open_stream(html,"text/html");
 #else
 	//-- setup gtkhtml widget
 	GtkHTML *html = GTK_HTML(widgets.html_parallel_dialog);
@@ -1223,7 +1218,7 @@ void main_update_parallel_page_detached(void)
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+		gecko_html_write(html, buf, utf8len);
 #else
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1237,7 +1232,7 @@ void main_update_parallel_page_detached(void)
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+			gecko_html_write(html, buf, utf8len);
 #else
 			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1252,7 +1247,7 @@ void main_update_parallel_page_detached(void)
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+			gecko_html_write(html, buf, utf8len);
 #else
 			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1267,7 +1262,7 @@ void main_update_parallel_page_detached(void)
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+			gecko_html_write(html, buf, utf8len);
 #else
 			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1282,7 +1277,7 @@ void main_update_parallel_page_detached(void)
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+			gecko_html_write(html, buf, utf8len);
 #else
 			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1297,7 +1292,7 @@ void main_update_parallel_page_detached(void)
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-			gtk_moz_embed_append_data(new_browser, buf, utf8len);
+			gecko_html_write(html, buf, utf8len);
 #else
 			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1309,14 +1304,14 @@ void main_update_parallel_page_detached(void)
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+		gecko_html_write(html, buf, utf8len);
 #else
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
 	}
 
 #ifdef USE_GTKMOZEMBED
-	int_display(new_browser, settings.cvparallel);
+	int_display(html, settings.cvparallel);
 #else
 	int_display(html, settings.cvparallel);	
 #endif
@@ -1324,7 +1319,7 @@ void main_update_parallel_page_detached(void)
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
-		gtk_moz_embed_append_data(new_browser, buf, utf8len);
+		gecko_html_write(html, buf, utf8len);
 #else
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
@@ -1333,9 +1328,9 @@ void main_update_parallel_page_detached(void)
 			    ? settings.intCurVerse - 1
 			    : settings.intCurVerse));
 #ifdef USE_GTKMOZEMBED	
-	gtk_moz_embed_close_stream(new_browser);
+	gecko_html_close(html);
 	if (settings.intCurVerse > 1)
-		embed_go_to_anchor(new_browser, buf);
+		gecko_html_jump_to_anchor (html,buf);
 #else
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
