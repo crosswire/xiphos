@@ -34,6 +34,7 @@
 
 #include "main/url.hh"
 
+#include "gecko/gecko-html.h"
 //#include "backend/sword.h"
  
 /******************************************************************************
@@ -96,7 +97,9 @@ int main(int argc, char *argv[])
     	settings_init(newconfigs,newbookmarks);
 	
 	gui_splash_init();
-
+	
+	gecko_html_initialize();
+	
 	gui_splash_step1();
 	
 	create_mainwindow();
@@ -130,6 +133,5 @@ int main(int argc, char *argv[])
 	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
 					(widgets.notebook_comm_book), 0);*/
 	gui_main();
-
 	return 0;
 }
