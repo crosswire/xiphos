@@ -1264,7 +1264,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 					  "text/html");
 	if (curVerse > 2) {
 		buf = g_strdup_printf("%d", curVerse - 2);
-		embed_go_to_anchor(html, buf);
+		//embed_go_to_anchor(html, buf);
 		g_free(buf);
 	}
 #else

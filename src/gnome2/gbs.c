@@ -556,7 +556,8 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 		
 	mod_name = main_module_name_from_description(dict_mod_description);
 #ifdef USE_GTKMOZEMBED
-	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_book));
+	//embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	dict_key = 
