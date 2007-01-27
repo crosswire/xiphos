@@ -30,10 +30,7 @@
 #include <localemgr.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#include <gtkmozembed_internal.h>
-#include <nsIDOMMouseEvent.h>
-#include <dom/nsIDOMKeyEvent.h>
+#include "gecko/gecko-html.h"
 #endif
 
 #ifdef __cplusplus
@@ -59,6 +56,7 @@ extern "C" {
 #include "main/xml.h"
  
 #include "backend/sword_main.hh"
+
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
@@ -89,7 +87,9 @@ void main_clear_viewer(void)
 	gchar *buf;
 
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
+	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	gecko_html_open_stream(html,"text/html");
 #else	
 	/* setup gtkhtml widget */
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
@@ -114,9 +114,8 @@ void main_clear_viewer(void)
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+		gecko_html_write(html,str->str,str->len);
+	gecko_html_close(html);
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
@@ -154,7 +153,9 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
+	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	gecko_html_open_stream(html,"text/html");
 #else	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 #endif
@@ -229,9 +230,8 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+		gecko_html_write(html,str->str,str->len);
+	gecko_html_close(html);
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
@@ -378,7 +378,9 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(sidebar.html_viewer_widget);
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
+	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	gecko_html_open_stream(html,"text/html");
 #else	
 	GtkHTML *html = GTK_HTML(html_widget);
 
@@ -436,9 +438,8 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+		gecko_html_write(html,str->str,str->len);
+	gecko_html_close(html);
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
