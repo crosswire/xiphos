@@ -27,9 +27,9 @@
 #include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
+#include "gecko/gecko-html.h"
 #endif
-#include "main/embed.h"
+//#include "main/embed.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -54,8 +54,11 @@
 #include "gui/bibletext_dialog.h"
 #include "gui/widgets.h"
 
+
 WIDGETS widgets;
 
+
+extern gboolean shift_key_presed;
 
 static gboolean ctrl_key_presed = FALSE;
 static GtkWidget *nav_toolbar;
@@ -491,31 +494,35 @@ static
 gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
                                         							gpointer user_data)
 {
-		switch(event->hardware_keycode) {
-			case 40: //D
-				if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
-					gtk_widget_grab_focus(widgets.entry_dict);
-			break;
-			case 42: //G
-				if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
-					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
-					gtk_widget_grab_focus(navbar_book.lookup_entry);
-				}
-			break;
-			case 46: //L
-				if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
-					gtk_widget_grab_focus(navbar_main.lookup_entry);
-			break;
-			case 54: //C
-				if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
-					gtk_widget_grab_focus(navbar_main.lookup_entry);
-					gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
-				}
-			break;
-			case 56: //B
-				if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
-					gtk_widget_grab_focus(navbar_main.lookup_entry);
-			break;
+	switch(event->hardware_keycode) {
+		case 40: //D
+			if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+				gtk_widget_grab_focus(widgets.entry_dict);
+		break;
+		case 42: //G
+			if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
+				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+				gtk_widget_grab_focus(navbar_book.lookup_entry);
+			}
+		break;
+		case 46: //L
+			if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+				gtk_widget_grab_focus(navbar_main.lookup_entry);
+		break;
+		case 54: //C
+			if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
+				gtk_widget_grab_focus(navbar_main.lookup_entry);
+				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+			}
+		break;
+		case 56: //B
+			if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+				gtk_widget_grab_focus(navbar_main.lookup_entry);
+		break;
+		case 50: 
+		case 62: 
+			shift_key_presed = TRUE;				
+		break;
 			
 		}
 #ifdef DEBUG
@@ -529,7 +536,12 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
                                         GdkEventKey * event,
                                         gpointer user_data)
 {
-
+        switch(event->hardware_keycode) {			
+		case 50: 
+		case 62: 
+			shift_key_presed = FALSE;				
+		break;
+	}
   return FALSE;
 }
 
@@ -733,7 +745,7 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame, 
 				TRUE, TRUE,
 			   	0);
-	sidebar.html_viewer_widget = embed_new(VIEWER_TYPE);
+	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(VIEWER_TYPE));//embed_new(VIEWER_TYPE);
 	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);

@@ -28,12 +28,8 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifndef USE_GTKHTML38
-#include <gtkhtml/htmlengine.h>
-#endif
-
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
+#include "gecko/gecko-html.h"
 #endif
 
 //#include "gui/gtkhtml_display.h"
@@ -204,6 +200,7 @@ void gui_popup_menu_gbs(void)
 	create_menu(NULL);
 }
 
+
 /******************************************************************************
  * Name
  *  gui_set_gbs_frame_label
@@ -286,6 +283,15 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 }
 
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     gpointer user_data)
+{	
+	gui_popup_menu_gbs(); 
+}
+
+
 /******************************************************************************
  * Name
  *   gui_create_book_pane
@@ -319,11 +325,15 @@ GtkWidget *gui_create_book_pane(void)
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
-	widgets.html_book = embed_new(BOOK_TYPE);
+	widgets.html_book = GTK_WIDGET(gecko_html_new(BOOK_TYPE)); //embed_new(BOOK_TYPE);
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_book);
 	
+	g_signal_connect((gpointer)widgets.html_book,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
 	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
@@ -418,13 +428,23 @@ static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_GTKMOZEMBED
+	gecko_html_print_document (GTK_WINDOW(widgets.app), 
+				   settings.book_mod, 
+				   GECKO_HTML(widgets.html_book));
+#else
 	gui_html_print(widgets.html_book, FALSE);
+#endif
 }
 
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_GTKMOZEMBED
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_book));
+#else
 	gui_copy_html(widgets.html_book);
+#endif
 }
 
 
@@ -457,7 +477,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 #endif
 	gchar *dict_key =NULL;
 #ifdef USE_GTKMOZEMBED
-	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_book));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);	
