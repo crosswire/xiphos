@@ -1,7 +1,7 @@
 INCLUDES =  \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
-    $(MOZILLA_CFLAGS) \
+    $(MOZILLA_COMPONENT_CFLAGS) \
     -I$(top_srcdir)/src \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
@@ -62,9 +62,10 @@ gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/editor/libeditor.a \
     $(top_builddir)/src/backend/libbackend.a \
+    $(top_builddir)/src/gecko/libgecko.a \
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \
-    $(MOZILLA_LIBS) \
+    $(MOZILLA_COMPONENT_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
     $(SWORD_LIBS)
