@@ -51,7 +51,7 @@
 #include <nsIDOMHTMLElement.h>  
 #include <nsIDOMHTMLTextAreaElement.h>  
 #include <nsIDOMNamedNodeMap.h>
-#include <nsIWebBrowserPersist.h>
+//#include <nsIWebBrowserPersist.h>
 #include <nsNetUtil.h>
 #include <nsIWebBrowserFind.h>
 #include <nsIDOMNSDocument.h>
@@ -62,7 +62,7 @@
 #include <nsIDOMRange.h>
 #include <nsIWebBrowserFind.h>
 #include <nsNetUtil.h>
-#include <nsICharsetConverterManager.h>
+//#include <nsICharsetConverterManager.h>
 #include <nsIDOMWindow.h>
 #include <nsISelection.h>
 #include <nsISHistory.h>
@@ -73,7 +73,7 @@
 //#include <nsIPresContext.h>
 #include <nsIEventStateManager.h>
 #include <nsIClipboardCommands.h>
-#include <nsIParserNode.h>
+//#include <nsIParserNode.h>
 #include "nsIWebBrowserPrint.h"
 
 #endif
@@ -97,6 +97,8 @@ extern "C" {
 
 #include "gui/html.h"
 #include "gui/widgets.h"
+
+#include "gecko/gecko-html.h"
 
 extern gboolean shift_key_presed;
 
@@ -599,10 +601,12 @@ void embed_copy_selection(GtkMozEmbed *mozilla_embed)
 
 GtkWidget *embed_new(gint window)
 {
-	GtkMozEmbed *new_browser;
+	//GtkMozEmbed *new_browser;
+	GeckoHtml *html;
+	html = gecko_html_new(window);
 	
-	new_browser = GTK_MOZ_EMBED(gtk_moz_embed_new());
-	
+	//new_browser = GTK_MOZ_EMBED(gtk_moz_embed_new());
+	/*
 	g_signal_connect(GTK_OBJECT(new_browser), "dom_key_down",
 				   G_CALLBACK(embed_dom_key_down),
 				   GINT_TO_POINTER(window));
@@ -627,8 +631,8 @@ GtkWidget *embed_new(gint window)
 	g_signal_connect(GTK_OBJECT(new_browser), "link_message",
 				   G_CALLBACK(embed_link_message_cb),
 				   GINT_TO_POINTER(window));
-				   
-	return GTK_WIDGET(new_browser);
+	*/			   
+	return GTK_WIDGET(html);
 }
 
 #endif
