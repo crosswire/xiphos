@@ -50,7 +50,7 @@
 #include <nsIDOMHTMLElement.h>  
 #include <nsIDOMHTMLTextAreaElement.h>  
 #include <nsIDOMNamedNodeMap.h>
-#include <nsIWebBrowserPersist.h>
+//#include <nsIWebBrowserPersist.h>
 #include <nsNetUtil.h>
 #include <nsIWebBrowserFind.h>
 #include <nsIDOMNSDocument.h>
@@ -61,7 +61,7 @@
 #include <nsIDOMRange.h>
 #include <nsIWebBrowserFind.h>
 #include <nsNetUtil.h>
-#include <nsICharsetConverterManager.h>
+//#include <nsICharsetConverterManager.h>
 #include <nsIDOMWindow.h>
 #include <nsISelection.h>
 #include <nsISHistory.h>
@@ -72,7 +72,7 @@
 //#include <nsIPresContext.h>
 #include <nsIEventStateManager.h>
 #include <nsIClipboardCommands.h>
-#include <nsIParserNode.h>
+//#include <nsIParserNode.h>
 #include "nsIWebBrowserPrint.h"
 
 #endif
