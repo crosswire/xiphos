@@ -31,6 +31,21 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* Define if we have gecko 1.7 */
+#undef HAVE_GECKO_1_7
+
+/* Define if we have gecko 1.8 */
+#undef HAVE_GECKO_1_8
+
+/* Define if we have gecko 1.8.1 */
+#undef HAVE_GECKO_1_8_1
+
+/* Define if we have gecko 1.9 */
+#undef HAVE_GECKO_1_9
+
+/* Define if gecko is a debug build */
+#undef HAVE_GECKO_DEBUG
+
 /* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT
 
@@ -45,6 +60,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define if mozilla is of the toolkit flavour */
+#undef HAVE_MOZILLA_TOOLKIT
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H

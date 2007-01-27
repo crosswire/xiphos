@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
+#include "gecko/gecko-html.h"
 #endif
 #include <gtkhtml/gtkhtml.h>
 
@@ -486,28 +486,19 @@ void gui_create_parallel_page(void)
 	 */
 			  
 	settings.dockedInt = TRUE;
-#ifdef USE_GTKMOZEMBED	
-	/*widgets.frame_parallel = gtk_frame_new(NULL);
-	gtk_widget_show(widgets.frame_parallel);	
-	gtk_frame_set_shadow_type(GTK_FRAME(widgets.frame_parallel), GTK_SHADOW_IN);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), 
-					widgets.frame_parallel);*/
-	//gtk_paned_add1((GtkPaned *)paned,frame);
-	
+#ifdef USE_GTKMOZEMBED
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
 	
 	widgets.frame_parallel = eventbox;	
-	widgets.html_parallel = embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel = GTK_WIDGET(gecko_html_new(PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
 	gtk_widget_show(widgets.html_parallel);					   
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel);
 #else	
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
-	/*gtk_container_add(GTK_CONTAINER(widgets.frame_parallel),
-			  scrolled_window);*/
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_ALWAYS);
