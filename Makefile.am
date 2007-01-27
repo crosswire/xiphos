@@ -2,7 +2,7 @@
 
 @INTLTOOL_DESKTOP_RULE@
 
-SUBDIRS = m4 doc po src ui help
+SUBDIRS = doc po src ui help
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
