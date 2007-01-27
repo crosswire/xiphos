@@ -863,14 +863,14 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-#ifdef DOUBLESPACE
+//#ifdef DOUBLESPACE
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("D_ouble-Space Text"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-#endif /* DOUBLESPACE */
+//#endif /* DOUBLESPACE */
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
@@ -981,9 +981,9 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
 	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
-#ifdef DOUBLESPACE
+//#ifdef DOUBLESPACE
 	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
-#endif /* DOUBLESPACE */
+//#endif /* DOUBLESPACE */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
@@ -999,11 +999,11 @@ void gui_create_main_menu(GtkWidget * app)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versehighlight_item),
 				       settings.versehighlight);
-#ifdef DOUBLESPACE
+//#ifdef DOUBLESPACE
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.doublespace_item),
 				       settings.doublespace);
-#endif /* DOUBLESPACE */
+//#endif /* DOUBLESPACE */
 	
 	g_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
@@ -1025,12 +1025,12 @@ void gui_create_main_menu(GtkWidget * app)
 			   "toggled",
 			   G_CALLBACK(on_versehighlight_activate),
 			   NULL);
-#ifdef DOUBLESPACE
+//#ifdef DOUBLESPACE
 	g_signal_connect(GTK_OBJECT(widgets.doublespace_item),
 			   "toggled",
 			   G_CALLBACK(on_doublespace_activate),
 			   NULL);
-#endif /* DOUBLESPACE */
+//#endif /* DOUBLESPACE */
 }
 
 /******************************************************************************

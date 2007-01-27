@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
+#include "gecko/gecko-html.h"
 #else
 #include <gtkhtml/gtkhtml.h>
 #include "gui/html.h"
@@ -1443,7 +1443,8 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   		gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED	
-	embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
+	gecko_html_copy_selection(GECKO_HTML(cur_vt->html));
+	//embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
@@ -1524,8 +1525,9 @@ static void lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description(dict_mod_description);
-#ifdef USE_GTKMOZEMBED	
-	embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
+#ifdef USE_GTKMOZEMBED
+	gecko_html_copy_selection(GECKO_HTML(cur_vt->html));
+	//embed_copy_selection(GTK_MOZ_EMBED(cur_vt->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
