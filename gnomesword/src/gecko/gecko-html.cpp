@@ -133,13 +133,13 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 //    debug_print (DB_FUNCTION, "entering\n");
 //    debug_print (DB_ARG, "  uri = \"%s\"\n", uri);
 
-	if (!html->priv->frames_enabled) {
+	//if (!html->priv->frames_enabled) {
 		g_signal_emit(html, signals[URI_SELECTED], 0, uri, FALSE);
 		block_load = TRUE;
-	} else {
-		g_signal_emit(html, signals[FRAME_SELECTED], 0, uri, FALSE,
-			      &block_load);
-	}
+	//} else {
+	//	g_signal_emit(html, signals[FRAME_SELECTED], 0, uri, FALSE,
+	//		      &block_load);
+	//}
 	return block_load;
 }
 

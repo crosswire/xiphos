@@ -557,47 +557,6 @@ nsIDocShell *get_primary_docshell (GtkMozEmbed *b)
 
 	return ds;
 }
- 
-
-void embed_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor)
-{
-	nsAutoString aAnchorName;
-	nsCOMPtr<nsIDocShell> ds;
-	nsresult rv, result;
-	
-	aAnchorName.AssignWithConversion (anchor);
-	
-	ds = get_primary_docshell (mozilla_embed);
-
-	if ( ! ds ) {
-		return;
-	}
-
-	/* get nsIPresShell */
-
-	nsCOMPtr<nsIPresShell> presShell;
-	result = ds->GetPresShell(getter_AddRefs(presShell));
-	if (!NS_SUCCEEDED(result) || (!presShell)) 
-		return;
-
-	/* get nsIDocument */
-/*
-	nsCOMPtr<nsIDocument> document;
-	result = presShell->GetDocument(getter_AddRefs(document));
-	if (!NS_SUCCEEDED(result) || (!document)) 
-		return;
-		
-	presShell->GoToAnchor(aAnchorName, 1);*/
-}
-
-void embed_copy_selection(GtkMozEmbed *mozilla_embed)
-{
-	nsIWebBrowser *wb;
-	gtk_moz_embed_get_nsIWebBrowser (mozilla_embed, &wb);
-	
-	nsCOMPtr<nsIClipboardCommands> clipboard (do_GetInterface(wb));
-	clipboard->CopySelection();
-}
 
 GtkWidget *embed_new(gint window)
 {

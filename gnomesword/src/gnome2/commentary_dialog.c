@@ -33,6 +33,8 @@
 #include "gui/html.h"
 #endif
 
+#include "gecko/gecko-html.h"
+
 #include "gui/commentary_dialog.h"
 #include "gui/dialog.h"
 #include "gui/gnomesword.h"
@@ -1082,7 +1084,8 @@ static void on_copy2_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED
-	embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
+	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
+	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 #else
 	gui_copy_html(cur_d->html);
 #endif
@@ -1117,7 +1120,8 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 #ifdef USE_GTKMOZEMBED	
-	embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
+	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
+	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
@@ -1194,7 +1198,8 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 	mod_name =
 	    main_module_name_from_description(dict_mod_description);
 #ifdef USE_GTKMOZEMBED	
-	embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
+	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
+	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
