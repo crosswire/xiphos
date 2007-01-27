@@ -27,9 +27,9 @@
 #include <localemgr.h>
 #include <swversion.h>
 
-//#ifdef USE_GTKMOZEMBED 
-//#include "backend/gs_markupfiltmgr.h"
-//#endif
+#ifdef USE_GTKMOZEMBED 
+#include "backend/gs_markupfiltmgr.h"
+#endif
 //#ifdef USE_SWORD_SVN
 #include <markupfiltmgr.h>
 #include <swlocale.h>

@@ -25,11 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-
-#ifndef USE_GTKHTML38
-#include <gtkhtml/htmlengine-print.h>
-#include <gtkhtml/htmlselection.h>
-#endif
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>

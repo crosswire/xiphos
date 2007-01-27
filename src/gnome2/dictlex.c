@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
+#include "gecko/gecko-html.h"
 #endif
 
 #include "gui/dictlex.h"
@@ -479,6 +479,14 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 	return FALSE;
 }
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     gpointer user_data)
+{	
+	gui_create_pm_dictionary(); 
+}
+
 
 GtkWidget *gui_create_dictionary_pane(void)
 {
@@ -558,10 +566,14 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
 	
-	widgets.html_dict = embed_new(DICTIONARY_TYPE);
+	widgets.html_dict = GTK_WIDGET(gecko_html_new(DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_dict);
+	g_signal_connect((gpointer)widgets.html_dict,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
 	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
@@ -685,7 +697,13 @@ static void on_item1_activate(GtkMenuItem * menuitem,
 static void on_print1_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
+#ifdef USE_GTKMOZEMBED
+	gecko_html_print_document (GTK_WINDOW(widgets.app), 
+				   settings.DictWindowModule, 
+				   GECKO_HTML(widgets.html_dict));
+#else	
 	gui_html_print(widgets.html_dict, FALSE);
+#endif
 }
 
 
@@ -693,7 +711,7 @@ static void on_copy2_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED
-	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_dict));
 #else
 	gui_copy_html(widgets.html_dict);
 #endif
@@ -729,7 +747,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 #ifdef USE_GTKMOZEMBED
-	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_dict));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);		
