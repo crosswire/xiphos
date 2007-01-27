@@ -38,8 +38,7 @@
 #include <errno.h>
 
 #ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#include <nsIDOMHTMLAnchorElement.h>
+#include "gecko/gecko-html.h"
 #else
 #ifdef __cplusplus
 extern "C" {
@@ -61,6 +60,7 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
+
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }%s--></STYLE></head>"
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
@@ -237,14 +237,17 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
 #else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	GtkHTML *html = GTK_HTML(gtkText);PangoContext* pc = gtk_widget_create_pango_context(gtkText);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Sans"));
 	gtk_widget_modify_font (gtkText, desc);
 #endif
+	
+	
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -298,7 +301,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				"<font face=\"%s\" size=\"%s\">",
 				imodule.Name(),
 				(gchar*)keytext,
-				(mf->old_font)?mf->old_font:"",
+				"sans", //(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0");
 #endif
 
@@ -319,11 +322,13 @@ char GTKEntryDisp::Display(SWModule &imodule)
 
 #ifdef USE_GTKMOZEMBED
 	if (swbuf.length())
-		gtk_moz_embed_render_data(html,
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+		/*gtk_moz_embed_render_data(html,
 					  swbuf.c_str(),
 					  swbuf.length(),
 					  "file:///sword",
-					  "text/html");
+					  "text/html");*/
+	gecko_html_close(html);
 #else
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
@@ -668,8 +673,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
 #ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
-	gtk_moz_embed_open_stream(html, "file:///sword", "text/html");
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
@@ -697,7 +703,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	if (is_rtol)
 		swbuf += "<DIV ALIGN=right>";
 #ifdef USE_GTKMOZEMBED
-	gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
+	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
 	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
 #endif
@@ -706,7 +712,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	strongs_on = ops->strongs;
 	getVerseBefore(imodule);
 #ifdef USE_GTKMOZEMBED
-	gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
+	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
 	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
 #endif
@@ -821,7 +827,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		g_free(buf);
 #ifdef USE_GTKMOZEMBED
-		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
 		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
 #endif
@@ -841,17 +847,13 @@ char GTKChapDisp::Display(SWModule &imodule)
 	else
 		swbuf += "</body></html>";
 #ifdef USE_GTKMOZEMBED
-	if (swbuf.length())
-		/*gtk_moz_embed_render_data(html,
-					    swbuf.c_str(),
-					    swbuf.length(),
-					    "file:///sword", 
-					    "text/html");*/
-		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
-	gtk_moz_embed_close_stream(html);
+	if (swbuf.length()) 
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	gecko_html_close(html);
 	if (curVerse > 2) {
 		buf = g_strdup_printf("%d", curVerse - 2);
-		embed_go_to_anchor(html, buf);
+		gecko_html_jump_to_anchor (html,buf);
+		//embed_go_to_anchor(html, buf);
 		g_free(buf);
 	}
 #else
@@ -859,7 +861,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		gtk_html_set_editable(html, FALSE);
 	if (swbuf.length())
 		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-		//gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
 	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
 	if (curVerse > 2) {
@@ -1019,6 +1020,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 #ifdef USE_GTKMOZEMBED
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);

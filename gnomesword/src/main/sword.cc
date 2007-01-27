@@ -1090,6 +1090,8 @@ void main_display_bible(const char * mod_name, const char * key)
 	extern GtkAdjustment* adjustment;
 	
 	/* keeps us out of a crash causing loop */
+	
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
 	g_signal_handler_block(adjustment, scroll_adj_signal);
 	
 	if (!mod_name)
