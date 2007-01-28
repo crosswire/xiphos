@@ -27,7 +27,8 @@ INCLUDES =  \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
     $(addprefix -I$(MOZILLA_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(MOZILLA_COMPONENT_CFLAGS)
+    $(MOZILLA_COMPONENT_CFLAGS) \
+    $(UPRINT_CFLAGS)
     
     
 noinst_LIBRARIES = libmain.a

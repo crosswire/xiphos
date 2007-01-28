@@ -7,7 +7,8 @@ INCLUDES =  \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
     -DLIBDIR=\""$(libdir)"\" \
-    -DSHARE_DIR=\"$(pkgdatadir)\" 
+    -DSHARE_DIR=\"$(pkgdatadir)\"  \
+    $(UPRINT_CFLAGS)
 
 
 bin_PROGRAMS = gnomesword2
@@ -68,7 +69,8 @@ gnomesword2_LDADD = \
     $(MOZILLA_COMPONENT_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
-    $(SWORD_LIBS)
+    $(SWORD_LIBS) \
+    $(UPRINT_LIBS)
 
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h
