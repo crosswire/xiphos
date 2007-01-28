@@ -28,7 +28,8 @@ INCLUDES =  \
     $(GTKHTML_CFLAGS)	\
     $(addprefix -I$(MOZILLA_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
     $(MOZILLA_COMPONENT_CFLAGS) \
-    -DMOZILLA_HOME=\""$(MOZILLA_HOME)\"" 
+    -DMOZILLA_HOME=\""$(MOZILLA_HOME)\""  \
+    $(UPRINT_CFLAGS)
  
      
 noinst_LIBRARIES = libgecko.a
