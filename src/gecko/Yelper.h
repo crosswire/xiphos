@@ -22,11 +22,16 @@
 #ifndef __YELPER_H__
 #define __YELPER_H__
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <gtkmozembed.h>
 #include <nsCOMPtr.h>
 #include <nsIDOMNode.h>
 
+#ifdef USE_GTKUPRINT
 #include "gecko/gecko-print.h"
+#endif
 
 class nsIDOMWindow;
 class nsITypeAheadFind;
@@ -54,8 +59,11 @@ public:
 	void ProcessMouseEvent (void *aEvent);
         gint ProcessKeyPressEvent(GtkMozEmbed *embed, gpointer dom_event);
         gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
+
+#ifdef USE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
-			gint *prev_pages);	
+			gint *prev_pages);
+#endif
 	nsresult PrintPreviewNavigate (gint page_no);
 	nsresult PrintPreviewEnd ();
 

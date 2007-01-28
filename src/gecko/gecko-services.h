@@ -21,6 +21,10 @@
 #ifndef __GECKO_SERVICES_H
 #define __GECKO_SERVICES_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifdef USE_GTKUPRINT
 #include <nsIPrintingPromptService.h>
 #include <nsIPrintProgressParams.h>
 #include <nsIWebProgressListener.h>
@@ -35,7 +39,7 @@
 #define G_PRINTINGPROMPTSERVICE_CLASSNAME "Geckos Printing Prompt Service"
 #define G_PRINTINGPROMPTSERVICE_CONTRACTID "@mozilla.org/embedcomp/printingprompt-service;1"
 
-void gs_register_printing ();
+void gecko_register_printing ();
 
 /* Overwriting PrintPromptService makes the default mozilla print dialog
  * not appear.  We already have our print dialog shown
@@ -77,4 +81,5 @@ protected:
   gboolean called_finish;
 };
 
+#endif
 #endif
