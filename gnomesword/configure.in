@@ -23,7 +23,7 @@ dnl gtk+-unix-print
 dnl ***
 UPRINT_LIBS=""
 UPRINT_CFLAGS=""
-dnl PKG_CHECK_MODULES(UPRINT, gtk+-unix-print-2.0, have_gtkuprint=yes,have_gtkuprint=no)
+PKG_CHECK_MODULES(UPRINT, gtk+-unix-print-2.0, have_gtkuprint=yes,have_gtkuprint=no)
 if test "x$have_gtkuprint" = xyes; then
   AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
 fi

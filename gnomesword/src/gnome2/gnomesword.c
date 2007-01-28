@@ -196,10 +196,33 @@ void frontend_display(void)
 					      0);
 */
 	gtk_widget_grab_focus (sidebar.module_list);
-	
+#ifdef USE_GTKMOZEMBED	/* gecko  needs the widgets to be visible before
+	                   writing */
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+#endif
 	// setup passage notebook
-	if(settings.browsing)
+	if(settings.browsing) {
 		gui_notebook_main_setup();
+	} else {	
+		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
+						      settings.dictkey);
+		main_url_handler(url);
+		g_free(url);	
+		
+		gtk_widget_realize(widgets.html_book);
+		url = g_strdup_printf("sword://%s/%d",settings.book_mod,
+						      settings.book_offset);
+		main_url_handler(url);
+		g_free(url);
+		
+		settings.addhistoryitem = FALSE;
+		url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
+						      settings.currentverse);
+		main_url_handler(url);
+		g_free(url);
+	}
 	
 	if (settings.showdevotional) 
 		main_display_devotional();

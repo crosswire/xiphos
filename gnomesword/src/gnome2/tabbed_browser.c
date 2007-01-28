@@ -674,7 +674,8 @@ void gui_update_tab_struct(const gchar * text_mod,
 {	
 	if(page_change) 
 		return;
-	
+	if(!settings.browsing)
+	        return;
 	
 	if(text_mod) {
 		if(cur_passage_tab->text_mod)
