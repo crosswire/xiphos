@@ -672,6 +672,9 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * book_offset,
 			   gboolean comm_showing)
 {	
+	if(!settings.browsing)
+	        return;
+	
 	if(page_change) 
 		return;
 	

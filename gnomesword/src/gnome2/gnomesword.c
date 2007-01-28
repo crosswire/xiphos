@@ -85,12 +85,7 @@ void frontend_init(void)
 	guint number_of_pages = 0;
 #ifdef DEBUG	
 	g_print("%s\n", _("Initiating GnomeSword"));
-#endif
-
-	
-//	hint.in_popup = FALSE;
-//	hint.use_hints = FALSE;
-	
+#endif	
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = main_is_module("Thayer");
@@ -112,14 +107,9 @@ void frontend_init(void)
 	if (settings.havebible) {
 		main_check_parallel_modules();
 		main_init_paraellel_view();
-		//main_set_parallel_options_at_start();
-		//gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
 
 	main_dialogs_setup();
-	// setup passage notebook
-	if(settings.browsing)
-		gui_notebook_main_setup();
 
 	gui_set_sidebar_porgram_start();
 }
@@ -152,51 +142,8 @@ void frontend_display(void)
 #ifdef DEBUG	
 	g_print("%s\n", _("Displaying GnomeSword"));
 #endif
-	gui_show_main_window();
+	gui_show_main_window();	
 
-//	gui_add_history_Item(widgets.app, settings.currentverse);
-	
-	main_clear_viewer();
-	
-	//gtk_widget_realize(widgets.html_comm);
-/*	
-	gtk_widget_realize(widgets.html_dict);
-	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
-					      settings.dictkey);
-	main_url_handler(url);
-	g_free(url);	
-	
-	gtk_widget_realize(widgets.html_book);
-	url = g_strdup_printf("sword://%s/%d",settings.book_mod,
-					      settings.book_offset);
-	main_setup_navbar_book(settings.book_mod, settings.book_offset);
-	main_url_handler(url);
-	g_free(url);
-	
-	settings.addhistoryitem = FALSE;
-	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
-					      settings.currentverse);
-	main_url_handler(url);
-	g_free(url);
-*/
-/*			
-	if(!settings.first_run) {
-		if(!settings.havebible){
-			settings.showtexts = FALSE;
-			gui_show_hide_texts(FALSE);
-			gtk_widget_set_sensitive(widgets.viewtexts_item, FALSE);
-		}
-		if(!settings.havecomm) {
-			settings.showcomms = FALSE;
-			gui_show_hide_comms(FALSE);
-			gtk_widget_set_sensitive(widgets.viewcomms_item, FALSE);
-		}
-		if(!settings.havedict) {
-			gui_show_hide_dicts(FALSE);
-			gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
-		}
-	}
-*/		
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -213,9 +160,6 @@ void frontend_display(void)
 	gui_show_hide_texts(settings.showtexts);
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
-	if (settings.showdevotional) {
-		main_display_devotional();
-	}
 	
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	if(settings.setup_canceled) {
@@ -240,10 +184,32 @@ void frontend_display(void)
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
 	
-/*	gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_comm_book),
-					      0);
-*/
+	// setup passage notebook
+	if(settings.browsing)
+		gui_notebook_main_setup();
+	else {
+		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
+						      settings.dictkey);
+		main_url_handler(url);
+		g_free(url);	
+		
+		url = g_strdup_printf("sword://%s/%d",settings.book_mod,
+						      settings.book_offset);
+		main_url_handler(url);
+		g_free(url);
+		
+		settings.addhistoryitem = FALSE;
+		url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
+						      settings.currentverse);
+		main_url_handler(url);
+		g_free(url);
+	}
+	
+	if (settings.showdevotional)
+		main_display_devotional();
+	else
+		main_clear_viewer();
+	
 	gtk_widget_grab_focus (sidebar.module_list);
 	
 
