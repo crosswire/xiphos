@@ -449,13 +449,14 @@ void gecko_html_select_none(GeckoHtml * html)
 	html->priv->yelper->DoCommand("cmd_selectNone");
 }
 
+#ifdef USE_GTKUPRINT
 void
 gecko_html_print(GeckoHtml * html, GeckoPrintInfo * info, gboolean preview,
 		 gint * npages)
 {
 	html->priv->yelper->Print(info, preview, npages);
 }
-
+#endif
 void gecko_html_preview_navigate(GeckoHtml * html, gint page_no)
 {
 	html->priv->yelper->PrintPreviewNavigate(page_no);
@@ -518,6 +519,7 @@ void
 gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 			  gpointer print_html)
 {
+#ifdef USE_GTKUPRINT	
 	GtkWidget *gtk_win;
 	GeckoHtml *html;
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);
@@ -548,4 +550,5 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gecko_print_run(window, html, gtk_win, vbox);
 	if (swdisplay)
 		delete swdisplay;
+#endif
 }

@@ -12,11 +12,28 @@ DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0 gtk+-unix-print-2.0,,exit)
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
 
+
+dnl ***
+dnl gtk+-unix-print
+dnl ***
+UPRINT_LIBS=""
+UPRINT_CFLAGS=""
+dnl PKG_CHECK_MODULES(UPRINT, gtk+-unix-print-2.0, have_gtkuprint=yes,have_gtkuprint=no)
+if test "x$have_gtkuprint" = xyes; then
+  AC_DEFINE(USE_GTKUPRINT, 1, [Define if you want to use gtk-unix-print])
+fi
+AC_SUBST(UPRINT_LIBS)
+AC_SUBST(UPRINT_CFLAGS)
+
+
+dnl ***
+dnl Sword libs
+dnl ***
 PKG_CHECK_MODULES(SWORD, sword >= 1.5.9, , exit)
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
@@ -275,7 +292,12 @@ echo
 echo "Summary of GnomeSword configuration:"
 echo "mozilla:                  enabled"
 echo "install directory:      ${prefix}/bin"
+if test "x$have_gtkuprint" = xyes; then
+  echo "gtk-unix-print:          enabled"
+else
+  echo "gtk-unix-print:       not enabled"
 
+fi
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
   if test "x$have_gtkhtml" = xyes; then
