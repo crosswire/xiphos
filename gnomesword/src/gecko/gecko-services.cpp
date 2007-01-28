@@ -23,6 +23,7 @@
 #include <mozilla-config.h>
 #include "config.h"
 
+#ifdef USE_GTKUPRINT
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -426,7 +427,7 @@ static const nsModuleComponentInfo sAppComps[] = {
 };
 
 void
-gs_register_printing ()
+gecko_register_printing ()
 {
   nsresult rv;
   nsCOMPtr<nsIComponentRegistrar> cr;
@@ -457,3 +458,4 @@ gs_register_printing ()
     }
     
 }
+#endif

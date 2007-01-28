@@ -104,10 +104,13 @@ void            gecko_html_paste(GeckoHtml * html);
 
 void            gecko_html_select_all     (GeckoHtml    *html);
 void            gecko_html_select_none(GeckoHtml * html);
+
+#ifdef USE_GTKUPRINT
 void            gecko_html_print          (GeckoHtml    *html,
 					  GeckoPrintInfo *info,
 					  gboolean preview,
 					  gint *npages);
+#endif					  
 void            gecko_html_preview_end    (GeckoHtml    *html);
 void            gecko_html_preview_navigate (GeckoHtml *html,
 					    gint page_no);

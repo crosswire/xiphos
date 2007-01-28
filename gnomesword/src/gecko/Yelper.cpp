@@ -433,6 +433,7 @@ gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 	shift_key_pressed = FALSE;	
 }
 
+#ifdef USE_GTKUPRINT
 nsresult 
 Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
 {
@@ -465,6 +466,7 @@ Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
   return rv;
 
 }
+#endif
 
 nsresult
 Yelper::PrintPreviewNavigate (int page_no)

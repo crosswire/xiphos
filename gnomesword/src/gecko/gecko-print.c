@@ -21,7 +21,10 @@
  * Boston, MA 02111-1307, USA.
  *
  */
-
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifdef USE_GTKUPRINT
 #include <unistd.h>
 #include <gnome.h>
 #include <sys/stat.h>
@@ -597,4 +600,4 @@ gecko_finish_printing (GtkPrintJob *job, GeckoPrintInfo *info, GError *error)
 	currently_running = FALSE;
     
 }
-
+#endif

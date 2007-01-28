@@ -26,6 +26,10 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifdef USE_GTKUPRINT
 /* Needed to fill the struct */
 #include <gtk/gtkprinter.h>
 #include <gtk/gtkprintsettings.h>
@@ -86,4 +90,5 @@ void          gecko_print_update_progress   (GeckoPrintInfo *info,
 					    gdouble percentage);
 G_END_DECLS
 
+#endif
 #endif

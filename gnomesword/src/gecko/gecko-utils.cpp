@@ -213,8 +213,9 @@ gecko_init (void)
 
 	gtk_moz_embed_push_startup ();
 
-	gs_register_printing ();
-
+#ifdef USE_GTKUPRINT
+	gecko_register_printing ();
+#endif
 	nsresult rv;
 	nsCOMPtr<nsIPrefService> prefService (do_GetService (NS_PREFSERVICE_CONTRACTID, &rv));
 	NS_ENSURE_SUCCESS (rv, FALSE);
