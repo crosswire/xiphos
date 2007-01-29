@@ -113,7 +113,7 @@ static GdkPixbuf *INSTALLED;
 static GdkPixbuf *LOCKED;
 static GdkPixbuf *BLANK;
 static gchar *current_mod;
-
+static gchar *remote_source;
 
 GladeXML *gxml;
 
@@ -749,7 +749,12 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 static void response_refresh(void)
 {
 	gint failed = 1;
+	gint page_num = 1;
 	
+	mod_mgr_shut_down();
+	mod_mgr_init(destination);
+	
+	page_num = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook1));
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), 
 					_("Refreshing remote"));
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
@@ -757,10 +762,13 @@ static void response_refresh(void)
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}	
-	
 	failed =
-	    mod_mgr_refresh_remote_source(
-	    	gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child)));
+		    mod_mgr_refresh_remote_source(remote_source);
+	
+	/*failed =
+		mod_mgr_refresh_remote_source(
+		  gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child)));*/
+	
 	if (failed) {
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
@@ -1295,7 +1303,9 @@ void on_notebook1_switch_page(GtkNotebook * notebook,
 		clear_and_hide_progress_bar();
 		break;
 	case 1:
-		clear_and_hide_progress_bar();		
+		clear_and_hide_progress_bar();	
+		mod_mgr_shut_down();
+		mod_mgr_init(destination);	
 		break;
 	case 2:
 		clear_and_hide_progress_bar();
@@ -1372,6 +1382,10 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button1);
+		//g_message(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
+		if(remote_source)
+		        g_free(remote_source);
+		remote_source = g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
 		//gtk_widget_show(progressbar_refresh);
 	} else {
 		gtk_widget_hide(button1);
@@ -1581,6 +1595,9 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 #ifdef DEBUG
 	g_message("on_destroy");
 #endif
+	if(remote_source)
+	        g_free(remote_source);
+	
 	mod_mgr_shut_down();
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -1834,6 +1851,11 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 			   COLUMN_CAPTION, dialog->text1,
 			   COLUMN_SOURCE, dialog->text3,
 			   COLUMN_DIRECTORY, dialog->text4, -1);
+	
+	if(remote_source)
+	        g_free(remote_source);	
+	remote_source = g_strdup(dialog->text1);
+	
 	g_free(dialog->text1);
 	g_free(dialog->text2);
 	g_free(dialog->text3);
@@ -1841,6 +1863,8 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	g_free(dialog);
 	g_string_free(str, TRUE);
 	save_sources();
+	
+	
 }
 
 
