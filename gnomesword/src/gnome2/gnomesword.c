@@ -85,12 +85,7 @@ void frontend_init(void)
 	guint number_of_pages = 0;
 #ifdef DEBUG	
 	g_print("%s\n", _("Initiating GnomeSword"));
-#endif
-
-	
-//	hint.in_popup = FALSE;
-//	hint.use_hints = FALSE;
-	
+#endif	
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = main_is_module("Thayer");
@@ -112,8 +107,6 @@ void frontend_init(void)
 	if (settings.havebible) {
 		main_check_parallel_modules();
 		main_init_paraellel_view();
-		//main_set_parallel_options_at_start();
-		//gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
 
 	main_dialogs_setup();
@@ -169,33 +162,7 @@ void frontend_display(void)
 	gui_show_hide_comms(settings.showcomms);
 	
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
-	if(settings.setup_canceled) {
-		str = g_string_new("");
-		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			_("The Setup Druid was cancelled."),
-			_("Do you wish to set preferences now?"));
-		info->label_top = str->str;
-		info->yes = TRUE;
-		info->no = TRUE;
-
-		test = gui_alert_dialog(info);
-		if (test == GS_YES) {
-			gui_setup_preferences_dialog();
-		}
-		g_free(info);
-		g_string_free(str,TRUE);
-		settings.setup_canceled = FALSE;
-		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
-	}
 	
-/*	gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.notebook_comm_book),
-					      0);
-*/
-	gtk_widget_grab_focus (sidebar.module_list);
 #ifdef USE_GTKMOZEMBED	/* gecko  needs the widgets to be visible before
 	                   writing */
 	while (gtk_events_pending()) {
@@ -229,6 +196,7 @@ void frontend_display(void)
 	else 
 		main_clear_viewer();
 
+	gtk_widget_grab_focus (sidebar.module_list);
 #ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
 #endif
