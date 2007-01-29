@@ -749,21 +749,16 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 static void response_refresh(void)
 {
 	gint failed = 1;
-	gint page_num = 1;
+	gchar *buf = NULL;
 	
-	mod_mgr_shut_down();
-	mod_mgr_init(destination);
-	
-	page_num = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook1));
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), 
-					_("Refreshing remote"));
+	buf = g_strdup_printf("%s: %s", _("Refreshing remote"),remote_source);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}	
-	failed =
-		    mod_mgr_refresh_remote_source(remote_source);
+	failed = mod_mgr_refresh_remote_source(remote_source);
 	
 	/*failed =
 		mod_mgr_refresh_remote_source(
@@ -784,6 +779,7 @@ static void response_refresh(void)
 		gtk_widget_show(button2);
 		gtk_widget_hide(button3);
 	}
+	g_free(buf);
 }
 
 /******************************************************************************
@@ -1382,11 +1378,9 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button1);
-		//g_message(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
 		if(remote_source)
 		        g_free(remote_source);
 		remote_source = g_strdup(gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo_entry2)));
-		//gtk_widget_show(progressbar_refresh);
 	} else {
 		gtk_widget_hide(button1);
 		gtk_widget_hide(progressbar_refresh);
@@ -1815,7 +1809,10 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	GS_DIALOG *dialog;
 	GtkTreeIter iter;
 	GString *str = g_string_new(NULL);
-
+	
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+	gtk_widget_hide(button1);
+	
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	g_string_printf(str,
@@ -1862,8 +1859,12 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	g_free(dialog->text4);
 	g_free(dialog);
 	g_string_free(str, TRUE);
-	save_sources();
-	
+	save_sources();	
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}	
+	mod_mgr_shut_down();
+	mod_mgr_init(destination);
 	
 }
 
