@@ -1,3 +1,15 @@
+2007-01-29 terry <tbiggs@users.sf.net>
+
+	* fixed bug #1645989 newly-defined install source unavailable
+
+2007-01-28 terry <tbiggs@users.sf.net>
+
+	* fixed bug #1646579: sidebar search, no bounds => crash
+	
+2007-01-27 terry <tbiggs@users.sf.net>
+
+	* created a development branch
+	
 2007-01-26  karl <karl@charcoal.com>
 
 	* update configure.in for version 2.2.1 at -r1480.
