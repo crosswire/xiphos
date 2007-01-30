@@ -1479,6 +1479,58 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;
 
+	table2 = gtk_table_new(2, 2, TRUE);
+	gtk_widget_show(table2);
+	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(table2), 2);
+	gtk_table_set_row_spacings(GTK_TABLE(table2), 6);
+	gtk_table_set_col_spacings(GTK_TABLE(table2), 6);
+
+	button_bookmarks =
+	    gtk_toggle_button_new_with_mnemonic(_("Bookmarks"));
+	gtk_widget_show(button_bookmarks);
+	gtk_table_attach(GTK_TABLE(table2), button_bookmarks, 1, 2, 0,
+			 1, (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_bookmarks),
+			      GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_bookmarks),
+				      FALSE);
+
+	button_search =
+	    gtk_toggle_button_new_with_mnemonic(_("Search"));
+	gtk_widget_show(button_search);
+	gtk_table_attach(GTK_TABLE(table2), button_search, 0, 1, 1, 2,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_search),
+			      GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_search), FALSE);
+
+	button_v_lists =
+	    gtk_toggle_button_new_with_mnemonic(_("Verse List"));
+	gtk_widget_show(button_v_lists);
+	gtk_table_attach(GTK_TABLE(table2), button_v_lists, 1, 2, 1, 2,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_v_lists),
+			      GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_v_lists),
+				      FALSE);
+
+	button_modules =
+	    gtk_toggle_button_new_with_mnemonic(_("Modules"));
+	gtk_widget_show(button_modules);
+	gtk_table_attach(GTK_TABLE(table2), button_modules, 0, 1, 0, 1,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_button_set_relief(GTK_BUTTON(button_modules),
+			      GTK_RELIEF_HALF);
+	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules),
+				      FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_modules),
+				     TRUE);
+
 	widgets.notebook_sidebar = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_sidebar);
 
@@ -1544,58 +1596,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	sidebar.menu_modules = create_menu_modules();
 
-
-	table2 = gtk_table_new(2, 2, TRUE);
-	gtk_widget_show(table2);
-	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(table2), 2);
-	gtk_table_set_row_spacings(GTK_TABLE(table2), 6);
-	gtk_table_set_col_spacings(GTK_TABLE(table2), 6);
-
-	button_bookmarks =
-	    gtk_toggle_button_new_with_mnemonic(_("Bookmarks"));
-	gtk_widget_show(button_bookmarks);
-	gtk_table_attach(GTK_TABLE(table2), button_bookmarks, 1, 2, 0,
-			 1, (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_button_set_relief(GTK_BUTTON(button_bookmarks),
-			      GTK_RELIEF_HALF);
-	gtk_button_set_focus_on_click(GTK_BUTTON(button_bookmarks),
-				      FALSE);
-
-	button_search =
-	    gtk_toggle_button_new_with_mnemonic(_("Search"));
-	gtk_widget_show(button_search);
-	gtk_table_attach(GTK_TABLE(table2), button_search, 0, 1, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_button_set_relief(GTK_BUTTON(button_search),
-			      GTK_RELIEF_HALF);
-	gtk_button_set_focus_on_click(GTK_BUTTON(button_search), FALSE);
-
-	button_v_lists =
-	    gtk_toggle_button_new_with_mnemonic(_("Verse List"));
-	gtk_widget_show(button_v_lists);
-	gtk_table_attach(GTK_TABLE(table2), button_v_lists, 1, 2, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_button_set_relief(GTK_BUTTON(button_v_lists),
-			      GTK_RELIEF_HALF);
-	gtk_button_set_focus_on_click(GTK_BUTTON(button_v_lists),
-				      FALSE);
-
-	button_modules =
-	    gtk_toggle_button_new_with_mnemonic(_("Modules"));
-	gtk_widget_show(button_modules);
-	gtk_table_attach(GTK_TABLE(table2), button_modules, 0, 1, 0, 1,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_button_set_relief(GTK_BUTTON(button_modules),
-			      GTK_RELIEF_HALF);
-	gtk_button_set_focus_on_click(GTK_BUTTON(button_modules),
-				      FALSE);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_modules),
-				     TRUE);
 
 	g_signal_connect((gpointer) button_bookmarks, "toggled",
 			 G_CALLBACK(on_bookmarks_activate), NULL);
