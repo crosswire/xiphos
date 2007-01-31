@@ -156,16 +156,10 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
-#ifdef USE_GTKHTML38
 		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
 								event->x,
 								event->y);
-#else
-		url = html_engine_get_link_at (GTK_HTML(widgets.html_book)->engine,
-					 event->x,
-					 event->y);
-#endif
-		if(strstr(url,"sword://")) {
+		if(url && (strstr(url,"sword://"))) {
 			gchar **work_buf = g_strsplit (url,"/",4);
 			gui_open_passage_in_new_tab(work_buf[3]);
 			g_strfreev(work_buf);

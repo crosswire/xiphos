@@ -347,6 +347,15 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 								URL::encode(u->version.c_str()).c_str(), 
 								URL::encode(vkey->getText()).c_str(), ch);
 						}
+						else {
+							char ch = ((tag.getAttribute("type") && ((!strcmp(tag.getAttribute("type"), "crossReference")) || (!strcmp(tag.getAttribute("type"), "x-cross-ref")))) ? 'x':'n');
+							buf.appendFormatted("<a href=\"passagestudy.jsp?action=showNote&type=%c&value=%s&module=%s&passage=%s\"><small><sup>*%c</sup></small></a> ", 
+								ch, 
+								URL::encode(footnoteNumber.c_str()).c_str(), 
+								URL::encode(u->version.c_str()).c_str(), 
+								URL::encode(u->key->getText()).c_str(),  
+								ch);
+						}
 					}
 				}
 				u->suspendTextPassThru = true;
