@@ -50,9 +50,9 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 
-#define SEARCHING N_("Searching the ")
-#define SMODULE N_(" Module")
-#define FINDS N_("found in ")		
+#define SEARCHING _("Searching the ")
+#define SMODULE _(" Module")
+#define FINDS _("found in")		
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
 static BackEnd *backendSearch;
