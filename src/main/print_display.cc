@@ -23,4 +23,38 @@
 #include <config.h>
 #endif
 
+#include <swmgr.h>
+#include <swmodule.h>
+#include <versekey.h>
+#include <gbfosis.h>
+#include <thmlosis.h>
 
+#include <regex.h>
+#include <string.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <errno.h>
+
+
+#include "gecko/gecko-html.h"
+
+#include "main/print_display.h"
+#include "main/settings.h"
+#include "main/global_ops.hh"
+#include "main/sword.h"
+
+#include "gui/utilities.h"
+#include "gui/widgets.h"
+
+#include "backend/sword_main.hh"
+#include "backend/gs_osishtmlhref.h"
+
+
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }%s--></STYLE></head>"
+#define DOUBLE_SPACE " * { line-height: 2em ! important; }"
+
+using namespace sword;
+using namespace std;
+
+int strongs_on;

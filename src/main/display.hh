@@ -53,6 +53,7 @@ public:
 	virtual void ReadAloud(unsigned int verse, const char *suppliedtext);
 	MOD_FONT *mf;
 	SWBuf swbuf;
+	gboolean is_rtol;
 };
 
 #ifndef USE_GTKMOZEMBED
@@ -87,3 +88,19 @@ public:
 	virtual char Display(SWModule &imodule);
 };
 #endif
+
+class GTKPrintEntryDisp : public SWDisplay {
+protected:
+	GtkWidget *gtkText;
+	BackEnd *be;
+public:	
+	GTKPrintEntryDisp(GtkWidget *gtkText, BackEnd *be) { this->gtkText = gtkText; this->be = be;}
+	virtual char Display(SWModule &imodule);
+};
+
+class GTKPrintChapDisp : public GTKPrintEntryDisp {
+public:
+	GTKPrintChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKPrintEntryDisp(gtkText,be) {}
+	virtual char Display(SWModule &imodule);
+	MOD_FONT *mf;
+};

@@ -388,6 +388,9 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
+		
+		if (is_rtol)
+			swbuf += "<DIV ALIGN=right>";
 		swbuf.appendFormatted(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
@@ -403,16 +406,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
-		//g_message(mod->getRawEntry());
-/*		if ((!strcmp(settings.MainWindowModule, "KJV")) ||
-		    (!strcmp(settings.MainWindowModule, "KJV2006")))
-			swbuf.appendFormatted("%s</font><br><hr>",
-					(const char *)*mod);
-		else
-*/
-			swbuf.appendFormatted(
+		swbuf.appendFormatted(
 				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 					(const char *)*mod, _("Chapter"), chapter);
+		if (is_rtol)
+			swbuf += ("</DIV>");
 	}
 }
 
@@ -443,8 +441,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 					mod->Description());
 	} else {
 		int chapter = key->Chapter();
-		if ((!strcmp(settings.MainWindowModule, "KJV")) ||
-		    (!strcmp(settings.MainWindowModule, "KJV2006")))
+		if ((!strcmp(settings.MainWindowModule, "KJV")))
 			swbuf.appendFormatted(
 				"<hr><b>%s %d.</b><br><br>",
 				_("Chapter"), chapter);
@@ -460,6 +457,9 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
+		
+		if (is_rtol)
+			swbuf += "<DIV ALIGN=right>";
 		swbuf.appendFormatted(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 				  "<font size=\"%s\" color=\"%s\">%d</font></A> "
@@ -479,6 +479,8 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				settings.bible_text_color);
 		swbuf += (const char *)*mod;
 		swbuf+= "</font>";
+		if (is_rtol)
+			swbuf += ("</DIV>");
 	}
 }
 
@@ -669,7 +671,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GError **error = NULL;
 
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
+	is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
 #ifdef USE_GTKMOZEMBED
@@ -1416,3 +1418,228 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 	g_free(ops);
 }
 #endif
+
+char GTKPrintEntryDisp::Display(SWModule &imodule)
+{
+	gchar *keytext = NULL;
+	SWBuf swbuf = "";
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	gint mod_type;
+	MOD_FONT *mf = get_font(imodule.Name());
+	
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
+	
+	
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+
+	const char *rework;	// for image size analysis rework.
+
+	(const char *)imodule;	// snap to entry
+	//g_message((const char *)imodule.getRawEntry());
+	main_set_global_options(ops);
+	mod_type = backend->module_type(imodule.Name());
+
+	if (mod_type == BOOK_TYPE)
+		keytext = g_convert(backend->treekey_get_local_name(
+				settings.book_offset),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	else if (mod_type == DICTIONARY_TYPE)
+		keytext = g_strdup((char*)imodule.KeyText());
+	else
+		keytext = g_convert((char*)imodule.KeyText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	swbuf.appendFormatted(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color);
+
+	swbuf.appendFormatted(  "<font color=\"%s\">",
+				settings.bible_verse_num_color);
+
+	swbuf.appendFormatted(	"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+				"[*%s*]</a></font>[%s]<br>"
+				"<font face=\"%s\" size=\"%s\">",
+				imodule.Description(),
+				imodule.Name(),
+				imodule.Name(),
+				(gchar*)keytext,
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0");
+				
+	swbuf.append((const char *)imodule);
+	
+	swbuf.append("</font></body></html>");
+
+	if (swbuf.length())
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	gecko_html_close(html);
+	free_font(mf);
+	g_free(ops);
+	if (keytext)
+		g_free(keytext);
+}
+
+char GTKPrintChapDisp::Display(SWModule &imodule)
+{
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curTestament = key->Testament();
+	int curPos = 0;
+	gchar *utf8_key;
+	gchar *buf;
+	gchar *preverse = NULL;
+	gchar *paragraphMark = NULL;
+	gchar *br = NULL;
+	gchar heading[32];
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	SWBuf swbuf;
+	
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
+	gboolean newparagraph = FALSE;
+	mf = get_font(imodule.Name());
+	
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
+	
+	if (!strcmp(imodule.Name(), "KJV"))
+		paragraphMark = "&para;";
+	else
+		paragraphMark = "";
+
+	swbuf = "";
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
+	swbuf.appendFormatted(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color);
+	if (is_rtol)
+		swbuf += "<DIV ALIGN=right>";
+	
+	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	
+	swbuf = "";
+	main_set_global_options(ops);
+	strongs_on = ops->strongs;
+	
+	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	
+	swbuf = "";
+
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
+				== curChapter && !imodule.Error()); imodule++) {
+		int x = 0;
+		sprintf(heading, "%d", x);
+		while ((preverse
+			= backend->get_entry_attribute("Heading", "Preverse",
+							    heading)) != NULL) {
+			const char *preverse2 = imodule.RenderText(preverse);
+			swbuf.appendFormatted("<br><b>%s</b><br><br>", preverse2);
+			g_free(preverse);
+			++x;
+			sprintf(heading, "%d", x);
+		}
+		utf8_key = g_convert((char*)key->getText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+
+		// special contrasty highlighting
+		/* if ((key->Verse() == curVerse) && settings.versehighlight)
+			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
+					      settings.highlight_bg); */
+
+		swbuf.appendFormatted(settings.showversenum
+			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
+			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
+			: "&nbsp; <A NAME=\"%d\"> </A>",
+			key->Verse(),
+			utf8_key,
+			settings.verse_num_font_size,
+			settings.bible_verse_num_color,
+			key->Verse());
+
+		swbuf.appendFormatted(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0",
+				settings.bible_text_color);
+
+		if (newparagraph && settings.versestyle) {
+			newparagraph = FALSE;
+			swbuf += paragraphMark;;
+		}
+
+		swbuf += (const char *)imodule;
+
+		buf = g_strdup_printf("%s", (const char *)imodule);
+
+		if (settings.versestyle) {
+			if (g_strstr_len(buf, strlen(buf), "<!p>")) {
+				newparagraph = TRUE;
+			} else {
+				newparagraph = FALSE;
+			}
+			swbuf.append("</font><br>");
+		} else {
+			swbuf.append("</font>");
+		}
+
+		g_free(buf);
+		
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+		
+		swbuf = "";
+	}
+	swbuf = "";
+	
+
+	// Reset the Bible location before GTK gets access:
+	// Mouse activity destroys this key, so we must be finished with it.
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+
+	if (is_rtol)
+		swbuf += ("</DIV></body></html>");
+	else
+		swbuf += "</body></html>";
+	
+	if (swbuf.length()) 
+		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	gecko_html_close(html);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
+		gecko_html_jump_to_anchor (html,buf);
+		g_free(buf);
+	}
+	
+	free_font(mf);
+	g_free(ops);
+}
