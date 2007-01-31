@@ -464,7 +464,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gboolean valid;
 	GdkPixbuf *installed;
 	GdkPixbuf *locked;
-	GString *str = g_string_new(NULL);
+	gchar shortname[52];
 
 	if ((!g_ascii_isalnum(info->language[0]))
 	    || (info->language == NULL))
@@ -488,7 +488,9 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 				locked = BLANK;
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, info->description,	//str->str,
+			strncpy(shortname, info->description, 50);
+			shortname[51] = '\0';
+			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, shortname,
 					   COLUMN_INSTALLED, installed,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
@@ -497,7 +499,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
 					   COLUMN_VISIBLE, TRUE, -1);
-
 			g_free(str_data);
 			return;
 		}
