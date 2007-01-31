@@ -488,7 +488,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 				locked = BLANK;
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, info->name,	//str->str,
+			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, info->description,	//str->str,
 					   COLUMN_INSTALLED, installed,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
@@ -1589,8 +1589,10 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 #ifdef DEBUG
 	g_message("on_destroy");
 #endif
-	if(remote_source)
+	if(remote_source) {
 	        g_free(remote_source);
+		remote_source = NULL;
+	}
 	
 	mod_mgr_shut_down();
 	while (gtk_events_pending()) {
@@ -1851,7 +1853,7 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 			   COLUMN_DIRECTORY, dialog->text4, -1);
 	
 	if(remote_source)
-	        g_free(remote_source);	
+	        g_free(remote_source);
 	remote_source = g_strdup(dialog->text1);
 	
 	g_free(dialog->text1);
@@ -2186,7 +2188,7 @@ static void setup_ui_labels()
 static void
 on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 {
-	if(remote_source) 
+	if(remote_source)
 		g_free(remote_source);
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
 }
