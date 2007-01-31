@@ -19,18 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _SWORD_PRINT_H__
-#define _SWORD_RINT_H__
+#ifndef __PRINT_DISPLAY_H__
+#define __PRINT_DISPLAY_H__
 
-#ifdef __cplusplus
-extern "C" {
+#ifdef HAVE_CONFIG_H
+#include <config.h>
 #endif
 
+#include <gtk/gtk.h>
+#include <swmgr.h>
+#include <swdisp.h>
+#include "backend/sword_main.hh"
 
-
-
-#ifdef __cplusplus
-}
-#endif
+using namespace sword;
 
 #endif

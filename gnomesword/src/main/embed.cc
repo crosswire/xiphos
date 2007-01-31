@@ -101,6 +101,7 @@ extern "C" {
 #include "gecko/gecko-html.h"
 
 extern gboolean shift_key_presed;
+extern gboolean in_url;
 
 
 #ifdef USE_GTKMOZEMBED

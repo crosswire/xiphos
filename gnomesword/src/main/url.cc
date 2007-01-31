@@ -905,8 +905,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	g_message("url = %s", url);
 #endif
 
-	if (strstr(url, "sword://")   ||
-	    strstr(url, "book://")    ||
+	if (strstr(url, "sword://") ||
+	    strstr(url, "book://")  ||
 	    strstr(url, "chapter://")) {
 		// handle `+' space substitutions and %xx encodings.
 		int retval;
@@ -940,10 +940,11 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 				break;
 			}
 		}
+		
 #ifdef DEBUG
 		g_message("url_clean = %s", url_clean->str);
 #endif
-
+		
 		retval = sword_uri(url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
 		return retval;
