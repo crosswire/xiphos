@@ -1715,6 +1715,7 @@ void on_button5_clicked(GtkButton * button, gpointer  user_data)
 {
 	GtkWidget *dlg = create_fileselection_local_source();
 	gtk_widget_show(dlg);
+	gtk_dialog_run(GTK_DIALOG(dlg));
 }
 
 
