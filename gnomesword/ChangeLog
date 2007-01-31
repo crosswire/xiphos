@@ -1,6 +1,6 @@
-2007-01-29 terry <tbiggs@users.sf.net>
+2007-01-31 terry <tbiggs@users.sf.net>
 
-	* fixed bug #1648806 Cannot add local module source directory.
+	* fixed bug #1648806 Cannot add local module source directory. - svn 1501
 
 2007-01-30  karl <charcoal@users.sf.net>
 
