@@ -1715,6 +1715,7 @@ void on_button5_clicked(GtkButton * button, gpointer  user_data)
 {
 	GtkWidget *dlg = create_fileselection_local_source();
 	gtk_widget_show(dlg);
+	gtk_dialog_run(GTK_DIALOG(dlg));
 }
 
 
@@ -2181,6 +2182,15 @@ static void setup_ui_labels()
 	g_free(path);
 }
 
+
+static void
+on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
+{
+	if(remote_source) 
+		g_free(remote_source);
+	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
+}
+
 static
 GtkWidget *create_module_manager_dialog(gboolean first_run)
 {
@@ -2292,6 +2302,9 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 	set_combobox(GTK_COMBO_BOX(combo_entry1));
 	combo_entry2 = glade_xml_get_widget (gxml, "comboboxentry2"); /* remote source */
 	set_combobox(GTK_COMBO_BOX(combo_entry2));
+	g_signal_connect ((gpointer) combo_entry2, "changed",
+                    G_CALLBACK (on_comboboxentry_remote_changed),
+                    NULL);
 	/* radio buttons */
 	radiobutton_source = glade_xml_get_widget (gxml, "radiobutton1"); /* local */
 	radiobutton2 = glade_xml_get_widget (gxml, "radiobutton2"); /* remote */

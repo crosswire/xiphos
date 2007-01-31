@@ -31,12 +31,17 @@
 
 #include "main/display.hh"
 #include "main/sword.h"
+#include "main/url.hh"
+
+#include "gui/widgets.h"
 
 #include "gecko/gecko-html.h"
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-utils.h"
 #include "gecko/Yelper.h"
 
+extern gboolean shift_key_presed;
+extern gboolean in_url;
 
 #define GECKO_HTML_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GECKO_TYPE_HTML, GeckoHtmlPriv))
 
@@ -88,10 +93,37 @@ static gint html_dom_mouse_down(GtkMozEmbed * embed, gpointer dom_event)
 
 static void html_link_message(GtkMozEmbed * embed)
 {
+	gchar buf[500];
 	gchar *url = gtk_moz_embed_get_link_message(embed);
+	/*
 #ifdef DEBUG
 	g_message(url);
-#endif
+#endif	
+	*/
+	if(shift_key_presed)
+		return;
+	
+	if (!strlen(url)) { /* moved out of url - clear appbar - info viewer*/
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
+		in_url = FALSE;
+		/*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
+			main_clear_viewer();*/
+	} else {
+		in_url = TRUE;	/* we need this for html_button_released */
+		if(main_url_handler(url, FALSE))
+			return;
+		
+		if (*url == 'I') {
+			return;
+		} else if (*url == 'U') {
+			++url;
+			sprintf(buf, "%s %s", _("Unlock "), url);
+		} else /* any other link */
+			sprintf(buf, "%s", "");
+			
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
+					buf);
+	}
 }
 
 
@@ -122,25 +154,13 @@ gint html_dom_key_up(GtkMozEmbed * embed, gpointer dom_event)
 
 static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 {
-	GeckoHtml *html = GECKO_HTML(embed);
-	gboolean block_load;
-
 	g_return_val_if_fail(uri != NULL, FALSE);
 
 #ifdef DEBUG
 	g_message("uri: %s", uri);
 #endif
-//    debug_print (DB_FUNCTION, "entering\n");
-//    debug_print (DB_ARG, "  uri = \"%s\"\n", uri);
-
-	//if (!html->priv->frames_enabled) {
-		g_signal_emit(html, signals[URI_SELECTED], 0, uri, FALSE);
-		block_load = TRUE;
-	//} else {
-	//	g_signal_emit(html, signals[FRAME_SELECTED], 0, uri, FALSE,
-	//		      &block_load);
-	//}
-	return block_load;
+	main_url_handler(uri, TRUE);
+	return TRUE;
 }
 
 static void html_realize(GtkWidget * widget)
@@ -540,9 +560,9 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gtk_widget_hide(gtk_win);
 	
 	if (!strcmp(mod->Type(), TEXT_MODS)) 
-		swdisplay = new GTKChapDisp(GTK_WIDGET(html), backend);
+		swdisplay = new GTKPrintChapDisp(GTK_WIDGET(html), backend);
 	else 
-		swdisplay = new GTKEntryDisp(GTK_WIDGET(html), backend);
+		swdisplay = new GTKPrintEntryDisp(GTK_WIDGET(html), backend);
 	
 	mod->setDisplay(swdisplay);
 	mod->Display();
