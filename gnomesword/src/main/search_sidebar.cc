@@ -137,7 +137,7 @@ static void fill_search_results_list(int finds)
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
 	GtkTreePath *path;	
-	gchar *buf1 = N_("matches");
+	gchar *buf1 = _("matches");
 	RESULTS *list_item;
 	
 	if(list_of_verses) {
