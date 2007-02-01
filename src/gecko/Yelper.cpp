@@ -363,7 +363,8 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 	
 	nsAutoString node_name;
 	OriginalNode->GetNodeName(node_name);
-	g_message("node_name: %s", (const char*)node_name);
+	//gchar mybuf[80];
+	//node_name.ToCString( mybuf, 12);
 	if(node_name.EqualsIgnoreCase("span")) {
 		PRBool _retval;
 		OriginalNode->HasAttributes(&_retval);
@@ -371,18 +372,6 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 			gchar *tmp = GetAttribute(OriginalNode,"sword_url");
 			if (tmp && strlen(tmp)) {
 				main_url_handler(tmp,FALSE);
-				g_free(tmp);
-			}
-		}
-	}
-	if(node_name.EqualsIgnoreCase("href")) {
-		PRBool _retval;
-		OriginalNode->HasAttributes(&_retval);
-		if(_retval) {
-			gchar *tmp = GetAttribute(OriginalNode,"sword_url");
-			if (tmp && strlen(tmp)) {
-				g_message("ProcessMouseOver: %s",tmp);
-				//main_url_handler(tmp,FALSE);
 				g_free(tmp);
 			}
 		}
