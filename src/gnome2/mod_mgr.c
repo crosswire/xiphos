@@ -60,6 +60,7 @@ enum {
 	COLUMN_FIXED,
 	COLUMN_OLD_VERSION,
 	COLUMN_NEW_VERSION,
+	COLUMN_DESC,
 	COLUMN_VISIBLE,
 	NUM_COLUMNS
 };
@@ -464,7 +465,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gboolean valid;
 	GdkPixbuf *installed;
 	GdkPixbuf *locked;
-	gchar shortname[52];
 
 	if ((!g_ascii_isalnum(info->language[0]))
 	    || (info->language == NULL))
@@ -488,9 +488,8 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 				locked = BLANK;
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
-			strncpy(shortname, info->description, 50);
-			shortname[51] = '\0';
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, shortname,
+			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
+					   COLUMN_NAME, info->name,
 					   COLUMN_INSTALLED, installed,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
@@ -498,6 +497,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   info->old_version,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
+					   COLUMN_DESC, info->description,
 					   COLUMN_VISIBLE, TRUE, -1);
 			g_free(str_data);
 			return;
@@ -977,6 +977,17 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	/*gtk_tree_view_column_set_sort_column_id(column,
 	   COLUMN_NEW_VERSION); */
 	gtk_tree_view_append_column(treeview, column);
+
+	/* column for description */
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Description"),
+						     renderer, "text",
+						     COLUMN_DESC,
+						     NULL);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+	   COLUMN_DESC); */
+	gtk_tree_view_append_column(treeview, column);
 }
 
 
@@ -1132,6 +1143,7 @@ static GtkTreeModel *create_model(void)
 				   GDK_TYPE_PIXBUF,
 				   GDK_TYPE_PIXBUF,
 				   G_TYPE_BOOLEAN,
+				   G_TYPE_STRING,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING, G_TYPE_BOOLEAN);
 	return GTK_TREE_MODEL(store);
