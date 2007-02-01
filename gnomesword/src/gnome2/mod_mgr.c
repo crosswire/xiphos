@@ -3,7 +3,7 @@
  * gnome2/mod_mgr.c 
  *
  * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
- *
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -59,7 +59,9 @@ enum {
 	COLUMN_LOCKED,
 	COLUMN_FIXED,
 	COLUMN_OLD_VERSION,
+	COLUMN_DIFFERENT,
 	COLUMN_NEW_VERSION,
+	COLUMN_DESC,
 	COLUMN_VISIBLE,
 	NUM_COLUMNS
 };
@@ -111,6 +113,7 @@ static gint current_page;
 static gint response;
 static GdkPixbuf *INSTALLED;
 static GdkPixbuf *LOCKED;
+static GdkPixbuf *REFRESH;
 static GdkPixbuf *BLANK;
 static gchar *current_mod;
 static gchar *remote_source;
@@ -140,6 +143,9 @@ static void create_pixbufs(void)
 					   GTK_ICON_SIZE_MENU, NULL);
 	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					  "/epiphany-secure.png", NULL);
+	REFRESH = gtk_widget_render_icon(dialog,
+					 GTK_STOCK_REFRESH,
+					 GTK_ICON_SIZE_MENU, NULL);
 	BLANK = gtk_widget_render_icon(dialog,
 				       "gnome-stock-blank",
 				       GTK_ICON_SIZE_MENU, NULL);
@@ -464,11 +470,22 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gboolean valid;
 	GdkPixbuf *installed;
 	GdkPixbuf *locked;
-	GString *str = g_string_new(NULL);
+	GdkPixbuf *refresh;
+	gchar *description = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
 
 	if ((!g_ascii_isalnum(info->language[0]))
 	    || (info->language == NULL))
 		info->language = N_("Unknown");
+	
+	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
+			 &bytes_written, &error);
+	if(description == NULL) {
+		g_print ("error: %s\n", error->message);
+		g_error_free (error);
+	}
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -479,25 +496,39 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 				   &str_data, -1);
 		if (!strcmp(info->language, str_data)) {
 			if (info->installed)
-				installed = INSTALLED;	//g_string_printf(str, "*%s", info->name);
+				installed = INSTALLED;
 			else
-				installed = BLANK;	//g_string_printf(str, "%s", info->name);
+				installed = BLANK;
+
 			if (info->locked)
 				locked = LOCKED;
 			else
 				locked = BLANK;
+
+			if (info->installed &&
+			    (!info->old_version && info->new_version &&
+			     strcmp(info->new_version, " ")) ||
+			    (info->old_version && !info->new_version) ||
+			    (info->old_version && info->new_version &&
+			     strcmp(info->old_version, info->new_version)))
+				refresh = REFRESH;
+			else
+				refresh = BLANK;
+
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
-			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, COLUMN_NAME, info->name,	//str->str,
+			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
+					   COLUMN_NAME, info->name,
 					   COLUMN_INSTALLED, installed,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
 					   COLUMN_OLD_VERSION,
 					   info->old_version,
+					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
+					   COLUMN_DESC, description,
 					   COLUMN_VISIBLE, TRUE, -1);
-
 			g_free(str_data);
 			return;
 		}
@@ -700,6 +731,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 
 	while (tmp) {
 		info = (MOD_MGR *) tmp->data;
+		
 		if (!strcmp(info->type, TEXT_MODS)) {
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
@@ -966,6 +998,19 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	if (remove)
 		return;
 
+	/* column for refresh/update */
+	column = gtk_tree_view_column_new();
+	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
+					 GTK_ICON_SIZE_MENU);
+	gtk_widget_show(image);
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+	gtk_tree_view_column_set_widget(column, image);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "pixbuf", COLUMN_DIFFERENT,
+					    NULL);
+	gtk_tree_view_append_column(treeview, column);
+
 	/* column for source module version */
 	renderer = gtk_cell_renderer_text_new();
 	column =
@@ -975,6 +1020,17 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 						     NULL);
 	/*gtk_tree_view_column_set_sort_column_id(column,
 	   COLUMN_NEW_VERSION); */
+	gtk_tree_view_append_column(treeview, column);
+
+	/* column for description */
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Description"),
+						     renderer, "text",
+						     COLUMN_DESC,
+						     NULL);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+	   COLUMN_DESC); */
 	gtk_tree_view_append_column(treeview, column);
 }
 
@@ -1131,6 +1187,8 @@ static GtkTreeModel *create_model(void)
 				   GDK_TYPE_PIXBUF,
 				   GDK_TYPE_PIXBUF,
 				   G_TYPE_BOOLEAN,
+				   G_TYPE_STRING,
+				   GDK_TYPE_PIXBUF,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING, G_TYPE_BOOLEAN);
 	return GTK_TREE_MODEL(store);
@@ -1589,8 +1647,10 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 #ifdef DEBUG
 	g_message("on_destroy");
 #endif
-	if(remote_source)
+	if(remote_source) {
 	        g_free(remote_source);
+		remote_source = NULL;
+	}
 	
 	mod_mgr_shut_down();
 	while (gtk_events_pending()) {
@@ -1851,7 +1911,7 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 			   COLUMN_DIRECTORY, dialog->text4, -1);
 	
 	if(remote_source)
-	        g_free(remote_source);	
+	        g_free(remote_source);
 	remote_source = g_strdup(dialog->text1);
 	
 	g_free(dialog->text1);
@@ -2186,7 +2246,7 @@ static void setup_ui_labels()
 static void
 on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 {
-	if(remote_source) 
+	if(remote_source)
 		g_free(remote_source);
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
 }
