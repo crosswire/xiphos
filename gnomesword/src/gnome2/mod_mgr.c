@@ -471,10 +471,21 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GdkPixbuf *installed;
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
+	gchar *description = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
 
 	if ((!g_ascii_isalnum(info->language[0]))
 	    || (info->language == NULL))
 		info->language = N_("Unknown");
+	
+	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
+			 &bytes_written, &error);
+	if(description == NULL) {
+		g_print ("error: %s\n", error->message);
+		g_error_free (error);
+	}
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -516,7 +527,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
-					   COLUMN_DESC, info->description,
+					   COLUMN_DESC, description,
 					   COLUMN_VISIBLE, TRUE, -1);
 			g_free(str_data);
 			return;
@@ -720,6 +731,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 
 	while (tmp) {
 		info = (MOD_MGR *) tmp->data;
+		
 		if (!strcmp(info->type, TEXT_MODS)) {
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
