@@ -59,8 +59,8 @@ enum {
 	COLUMN_LOCKED,
 	COLUMN_FIXED,
 	COLUMN_OLD_VERSION,
-	COLUMN_NEW_VERSION,
 	COLUMN_DIFFERENT,
+	COLUMN_NEW_VERSION,
 	COLUMN_DESC,
 	COLUMN_VISIBLE,
 	NUM_COLUMNS
@@ -513,9 +513,9 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   COLUMN_FIXED, FALSE,
 					   COLUMN_OLD_VERSION,
 					   info->old_version,
+					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
-					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_DESC, info->description,
 					   COLUMN_VISIBLE, TRUE, -1);
 			g_free(str_data);
@@ -986,17 +986,6 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	if (remove)
 		return;
 
-	/* column for source module version */
-	renderer = gtk_cell_renderer_text_new();
-	column =
-	    gtk_tree_view_column_new_with_attributes(_("New"),
-						     renderer, "text",
-						     COLUMN_NEW_VERSION,
-						     NULL);
-	/*gtk_tree_view_column_set_sort_column_id(column,
-	   COLUMN_NEW_VERSION); */
-	gtk_tree_view_append_column(treeview, column);
-
 	/* column for refresh/update */
 	column = gtk_tree_view_column_new();
 	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
@@ -1008,6 +997,17 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "pixbuf", COLUMN_DIFFERENT,
 					    NULL);
+	gtk_tree_view_append_column(treeview, column);
+
+	/* column for source module version */
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("New"),
+						     renderer, "text",
+						     COLUMN_NEW_VERSION,
+						     NULL);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+	   COLUMN_NEW_VERSION); */
 	gtk_tree_view_append_column(treeview, column);
 
 	/* column for description */
@@ -1176,8 +1176,8 @@ static GtkTreeModel *create_model(void)
 				   GDK_TYPE_PIXBUF,
 				   G_TYPE_BOOLEAN,
 				   G_TYPE_STRING,
-				   G_TYPE_STRING,
 				   GDK_TYPE_PIXBUF,
+				   G_TYPE_STRING,
 				   G_TYPE_STRING, G_TYPE_BOOLEAN);
 	return GTK_TREE_MODEL(store);
 }
