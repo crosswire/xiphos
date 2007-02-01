@@ -108,11 +108,33 @@ static void html_link_message(GtkMozEmbed * embed)
 		in_url = FALSE;
 		/*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
 			main_clear_viewer();*/
-	} else {
+	} else {		
+		GString *url_clean = g_string_new(NULL);
+		const gchar *url_chase;
+		int i = 0;
+		for (url_chase = url; *url_chase; ++url_chase) {
+			switch (*url_chase) {
+			case '/':
+				if(i > 2)
+				        g_string_append(url_clean, "%2F");
+				else
+					g_string_append_c(url_clean, *url_chase);
+				++i;
+				break;
+			default:
+					g_string_append_c(url_clean, *url_chase);
+				break;
+			}
+		}
+#ifdef DEBUG
+		g_message("\nurl:        %s\nurl_clean: %s",url,url_clean->str);
+#endif	
 		in_url = TRUE;	/* we need this for html_button_released */
-		if(main_url_handler(url, FALSE))
+		if(main_url_handler(url_clean->str, FALSE)) {	
+			g_string_free(url_clean, TRUE);	
 			return;
-		
+		}
+		g_string_free(url_clean, TRUE);	
 		if (*url == 'I') {
 			return;
 		} else if (*url == 'U') {
@@ -120,7 +142,6 @@ static void html_link_message(GtkMozEmbed * embed)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else /* any other link */
 			sprintf(buf, "%s", "");
-			
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 	}
