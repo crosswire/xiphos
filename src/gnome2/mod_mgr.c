@@ -420,8 +420,8 @@ static GList *get_list_mods_to_remove_install(gboolean install)
 	if (!gtk_tree_model_get_iter_first
 	    (GTK_TREE_MODEL(model), &root))
 		return retval;
-	if (!gtk_tree_model_iter_has_child(model, &root))
-		return retval;
+	/*if (!gtk_tree_model_iter_has_child(model, &root))
+		return retval;*/
 
 	do {
 		gtk_tree_model_get(model, &root,
