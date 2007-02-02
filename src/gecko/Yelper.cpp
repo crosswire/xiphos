@@ -323,7 +323,6 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 	nsIDOMEventTarget *aCurrentTarget;
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//gint pane = GPOINTER_TO_INT(data);
-	
 	if(shift_key_presed || shift_key_pressed)
 		return FALSE;
 	if(pane == VIEWER_TYPE)
@@ -382,11 +381,19 @@ void
 Yelper::ProcessMouseEvent (void* aEvent)
 {
 	g_return_if_fail (aEvent != NULL);
+	PRBool *aShiftKey;
 
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return;
 
+	event->GetShiftKey(aShiftKey);
+	if(aShiftKey)  {    
+	        shift_key_presed = TRUE; 
+	        shift_key_pressed = TRUE;
+		return ;
+	}
+	
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
@@ -405,8 +412,8 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
 	return;
-	
-/*	nsCOMPtr<nsIDOMNSEvent> nsEvent (do_QueryInterface (event));
+	/*
+	nsCOMPtr<nsIDOMNSEvent> nsEvent (do_QueryInterface (event));
 	if (!nsEvent) return;
 
 	nsresult rv;
@@ -419,12 +426,21 @@ Yelper::ProcessMouseEvent (void* aEvent)
 
 	nsString href;
 	rv = anchor->GetHref (href);
-	if (NS_FAILED (rv) || !href.Length ()) return;*/
-
+	if (NS_FAILED (rv) || !href.Length ()) return;
+	
+	gchar mybuf[80];
+	href.ToCString( mybuf, 12);	
+	g_message("hre: %s",mybuf);
+	*/
 }
 
 gint Yelper::ProcessKeyPressEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
+	nsresult result;
+	nsIDOMEventTarget *aCurrentTarget;
+	nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
+	
+	
 	shift_key_presed = TRUE;
 	shift_key_pressed = TRUE;
 }	
