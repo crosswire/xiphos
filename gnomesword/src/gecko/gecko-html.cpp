@@ -161,7 +161,7 @@ gint html_dom_key_press(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
 	html->priv->yelper->ProcessKeyPressEvent(embed, dom_event);
-	//g_message("html_dom_key_press");
+	g_message("html_dom_key_press");
 	return FALSE;
 }
 
