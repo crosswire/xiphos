@@ -1758,9 +1758,11 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.versehighlight),
 				     settings.versehighlight);
+#ifdef DOUBLESPACE
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.doublespace),
 				     settings.doublespace);
+#endif /* DOUBLESPACE */
 
 	g_signal_connect(check_button.enable_tabbed_browsing, "toggled",
 			 G_CALLBACK(on_checkbutton1_toggled), NULL);
@@ -1786,8 +1788,10 @@ static void setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_imageresize_toggled), NULL);
 	g_signal_connect(check_button.versehighlight, "toggled",
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
+#ifdef DOUBLESPACE
 	g_signal_connect(check_button.doublespace, "toggled",
 			 G_CALLBACK(on_checkbutton_doublespace_toggled), NULL);
+#endif /* DOUBLESPACE */
 }
 
 
