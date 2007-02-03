@@ -171,7 +171,7 @@ void frontend_display(void)
 #endif
 	// setup passage notebook
 	if(settings.browsing) {
-		gui_notebook_main_setup();
+		gui_notebook_main_setup();;
 	} else {	
 		url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 						      settings.dictkey);
