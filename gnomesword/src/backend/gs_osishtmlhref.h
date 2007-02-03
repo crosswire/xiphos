@@ -37,6 +37,8 @@ protected:
 		bool inRed;
 		bool inName;
 		bool inNote;
+		bool inXRefNote;
+	        bool BiblicalText;
 		SWBuf lastTransChange;
 		SWBuf w;
 		SWBuf fn;

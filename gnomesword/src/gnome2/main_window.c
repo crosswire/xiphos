@@ -473,6 +473,8 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
 					gint page_num, GList **tl)
 { 
+	gchar *url = NULL;
+	
 	if(page_num == 0)
 		settings.comm_showing = TRUE;
 	else
@@ -487,6 +489,12 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			   settings.comm_showing);
 	if(settings.comm_showing)
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+	else {
+		url = g_strdup_printf("sword://%s/%d",settings.book_mod,
+						      settings.book_offset);
+		main_url_handler(url);
+		g_free(url);
+	}
 }
 
 
