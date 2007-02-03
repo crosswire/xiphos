@@ -33,10 +33,13 @@ SWORD_NAMESPACE_START
 GS_OSISHTMLHREF::MyUserData::MyUserData(const SWModule * module, const SWKey * key):
 BasicFilterUserData(module, key)
 {
+	inXRefNote    = false;
 	osisQToTick = ((!module->getConfigEntry("OSISqToTick"))
 		       || (strcmp(module->getConfigEntry("OSISqToTick"), "false")));
-	if (module)
+	if (module) {
 		version = module->Name();
+		BiblicalText = (!strcmp(module->Type(), "Biblical Texts"));
+	}
 	inRed = false;
 }
 
@@ -396,11 +399,47 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		}
 		// <reference> tag
 		else if (!strcmp(tag.getName(), "reference")) {
-			if ((!tag.isEndTag()) && (!tag.isEmpty())) {
-				buf += "<a href=\"\">";
-			} else if (tag.isEndTag()) {
-				buf += "</a>";
+			if (!u->inXRefNote) {	// only show these if we're not in an xref note				
+				if ((!tag.isEndTag()) && (!tag.isEmpty())) {
+					u->suspendTextPassThru = true;
+				}
+				if (tag.isEndTag()) {
+					if (!u->BiblicalText) {
+						SWBuf refList = tag.getAttribute("passage");
+						if (!refList.length())
+							refList = u->lastTextNode;
+						SWBuf version = tag.getAttribute("version");
+						
+						buf.appendFormatted("&nbsp;<a href=\"passagestudy.jsp?action=showRef&type=scripRef&value=%s&module=%s\">",
+							(refList.length()) ? URL::encode(refList.c_str()).c_str() : "", 
+							(version.length()) ? URL::encode(version.c_str()).c_str() : "");
+						buf += u->lastTextNode.c_str();
+						buf += "</a>&nbsp;";
+					}
+					else {
+						SWBuf footnoteNumber = tag.getAttribute("swordFootnote");
+						VerseKey *vkey = NULL;
+						// see if we have a VerseKey * or descendant
+						SWTRY {
+							vkey = SWDYNAMIC_CAST(VerseKey, u->key);
+						}
+						SWCATCH ( ... ) {}
+						if (vkey) {
+							// leave this special osis type in for crossReference notes types?  Might thml use this some day? Doesn't hurt.
+							//buf.appendFormatted("<a href=\"noteID=%s.x.%s\"><small><sup>*x</sup></small></a> ", vkey->getText(), footnoteNumber.c_str());
+							buf.appendFormatted("<a href=\"passagestudy.jsp?action=showNote&type=x&value=%s&module=%s&passage=%s\"><small><sup>*x</sup></small></a> ",  
+								URL::encode(footnoteNumber.c_str()).c_str(), 
+								URL::encode(u->version.c_str()).c_str(),
+								URL::encode(vkey->getText()).c_str());
+						
+						}
+					}
+				}
 			}
+			if (tag.isEndTag()) {
+				u->suspendTextPassThru = false;
+			}
+			
 		}
 		// <l> poetry, etc
 		else if (!strcmp(tag.getName(), "l")) {

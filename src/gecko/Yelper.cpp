@@ -40,6 +40,7 @@
 #include <nsIDOMNode.h>
 #include <nsIDOMNSEvent.h>
 #include <nsIDOMWindow.h>
+#include <nsIDOMKeyEvent.h>
 #include <nsIInterfaceRequestorUtils.h>
 #include <nsIPrefService.h>
 #include <nsIPrintSettings.h>
@@ -320,6 +321,7 @@ int
 Yelper::ProcessMouseOver (void* aEvent, int pane)
 {
 	nsresult result;
+	//PRBool *aShiftKey;
 	nsIDOMEventTarget *aCurrentTarget;
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//gint pane = GPOINTER_TO_INT(data);
@@ -327,11 +329,10 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
-	
 #ifdef DEBUG
 		g_message("pane: %d",pane);
 #endif
-	main_clear_viewer();
+	//main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
@@ -381,18 +382,19 @@ void
 Yelper::ProcessMouseEvent (void* aEvent)
 {
 	g_return_if_fail (aEvent != NULL);
-	PRBool *aShiftKey;
+	//PRBool *aShiftKey;
 
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return;
-
+/*
 	event->GetShiftKey(aShiftKey);
 	if(aShiftKey)  {    
 	        shift_key_presed = TRUE; 
 	        shift_key_pressed = TRUE;
 		return ;
 	}
+*/
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
@@ -436,11 +438,18 @@ Yelper::ProcessMouseEvent (void* aEvent)
 
 gint Yelper::ProcessKeyPressEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
+	/*
 	nsresult result;
-	nsIDOMEventTarget *aCurrentTarget;
+	PRBool *aShiftKey;
 	nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
 	
-	
+	event->GetShiftKey(aShiftKey);
+	if(aShiftKey)  {    
+	        shift_key_presed = TRUE; 
+	        shift_key_pressed = TRUE;
+		g_message("ProcessKeyPressEvent");
+	}
+	*/
 	shift_key_presed = TRUE;
 	shift_key_pressed = TRUE;
 }	
