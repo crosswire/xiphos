@@ -83,12 +83,16 @@ static void html_title(GtkMozEmbed * embed)
 	}
 }
 
+static gint html_dom_mouse_dbl_click(GtkMozEmbed * embed, gpointer dom_event)
+{
+	GeckoHtml *html = GECKO_HTML(embed);
+	return html->priv->yelper->ProcessMouseDblClickEvent(dom_event);
+}
+
 static gint html_dom_mouse_down(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-
-	html->priv->yelper->ProcessMouseEvent(dom_event);
-	return FALSE;
+	return html->priv->yelper->ProcessMouseEvent(dom_event);
 }
 
 static void html_link_message(GtkMozEmbed * embed)
@@ -148,29 +152,24 @@ static void html_link_message(GtkMozEmbed * embed)
 }
 
 
-static int html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
+static 
+gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-
-	html->priv->yelper->ProcessMouseOver(dom_event, html->priv->pane);
-	return FALSE;
+	return html->priv->yelper->ProcessMouseOver(dom_event, html->priv->pane);
 }
 
 static
-gint html_dom_key_press(GtkMozEmbed * embed, gpointer dom_event)
+gint html_dom_key_down(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-	html->priv->yelper->ProcessKeyPressEvent(embed, dom_event);
-	g_message("html_dom_key_press");
-	return FALSE;
+	return html->priv->yelper->ProcessKeyDownEvent(embed, dom_event);
 }
-
 static
 gint html_dom_key_up(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-	html->priv->yelper->ProcessKeyReleaseEvent(embed, dom_event);
-	return FALSE;
+	return html->priv->yelper->ProcessKeyReleaseEvent(embed, dom_event);
 }
 
 static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
@@ -273,13 +272,14 @@ static void html_class_init(GeckoHtmlClass * klass)
 	widget_class->realize = html_realize;
 
 	moz_embed_class->title = html_title;
+	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
 	moz_embed_class->dom_mouse_down = html_dom_mouse_down;
+	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
+	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
 	moz_embed_class->link_message = html_link_message;
-	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
-	moz_embed_class->dom_key_press = html_dom_key_press;
+	moz_embed_class->dom_key_down = html_dom_key_down;
 	moz_embed_class->dom_key_up = html_dom_key_up;
-
 	klass->font_handler = 0;
 	klass->color_handler = 0;
 	klass->a11y_handler = 0;
