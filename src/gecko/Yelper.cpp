@@ -317,22 +317,27 @@ gchar *Yelper::GetAttribute (nsIDOMNode *node, gchar *attribute)
 	return ToNewCString(nodeValue);
 }
 
-int
+gint
 Yelper::ProcessMouseOver (void* aEvent, int pane)
 {
 	nsresult result;
-	//PRBool *aShiftKey;
+	PRBool aShiftKey;
 	nsIDOMEventTarget *aCurrentTarget;
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
-	//gint pane = GPOINTER_TO_INT(data);
-	if(shift_key_presed || shift_key_pressed)
+	
+	event->GetShiftKey(&aShiftKey);
+	if(aShiftKey)  {    
+	       return 1;
+	}
+	
+	if(shift_key_presed)
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
 #ifdef DEBUG
 		g_message("pane: %d",pane);
 #endif
-	//main_clear_viewer();
+	main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
@@ -378,23 +383,43 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 	}
 	return FALSE;	
 }
-void
-Yelper::ProcessMouseEvent (void* aEvent)
-{
-	g_return_if_fail (aEvent != NULL);
-	//PRBool *aShiftKey;
 
+gint
+Yelper::ProcessMouseDblClickEvent (void* aEvent)
+{
+	nsAutoString aType;
+	nsresult rv;
+	g_return_val_if_fail(aEvent != NULL,0);
+	nsCOMPtr<nsISelection> oSelection;
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
-	if (!event) return;
-/*
-	event->GetShiftKey(aShiftKey);
-	if(aShiftKey)  {    
-	        shift_key_presed = TRUE; 
-	        shift_key_pressed = TRUE;
-		return ;
-	}
-*/
+	if (!event) return 0;
+		
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	g_warning("domEvent->GetType: %s",mybuf);
+	rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
+	
+	return 1;
+}
+
+gint
+Yelper::ProcessMouseEvent (void* aEvent)
+{
+	nsAutoString aType;
+	
+	g_return_val_if_fail(aEvent != NULL,0);
+	//g_return_if_fail (aEvent != NULL);	
+	
+	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
+	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
+	if (!event) return 0;
+		
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	g_warning("domEvent->GetType: %s",mybuf);
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
@@ -405,7 +430,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	if(button == 1)	       
 	        shift_key_presed = TRUE; 
 	/* Mozilla uses 2 as its right mouse button code */
-	if (button != 2) return;
+	if (button != 2) return 1;
 	
 
 #ifdef DEBUG
@@ -413,51 +438,26 @@ Yelper::ProcessMouseEvent (void* aEvent)
 #endif
 	g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
-	return;
-	/*
-	nsCOMPtr<nsIDOMNSEvent> nsEvent (do_QueryInterface (event));
-	if (!nsEvent) return;
-
-	nsresult rv;
-	nsCOMPtr<nsIDOMEventTarget> originalTarget;
-	rv = nsEvent->GetOriginalTarget (getter_AddRefs (originalTarget));
-	if (NS_FAILED (rv) || !originalTarget) return;
-	
-	nsCOMPtr <nsIDOMHTMLAnchorElement> anchor (do_QueryInterface (originalTarget));
-	if (!anchor) return;
-
-	nsString href;
-	rv = anchor->GetHref (href);
-	if (NS_FAILED (rv) || !href.Length ()) return;
-	
-	gchar mybuf[80];
-	href.ToCString( mybuf, 12);	
-	g_message("hre: %s",mybuf);
-	*/
+	return 1;
 }
 
-gint Yelper::ProcessKeyPressEvent(GtkMozEmbed *embed, gpointer dom_event)
+gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
-	/*
-	nsresult result;
-	PRBool *aShiftKey;
 	nsIDOMKeyEvent *event = (nsIDOMKeyEvent*) dom_event;
+	if (!event) return 0;
+	nsresult rv;
+	PRUint32 keyCode;
+	rv = event->GetKeyCode(&keyCode);
+	if (NS_FAILED(rv)) return rv;
+	//g_message("keycode: %d",keyCode);
 	
-	event->GetShiftKey(aShiftKey);
-	if(aShiftKey)  {    
-	        shift_key_presed = TRUE; 
-	        shift_key_pressed = TRUE;
-		g_message("ProcessKeyPressEvent");
-	}
-	*/
-	shift_key_presed = TRUE;
-	shift_key_pressed = TRUE;
+	return 1;
 }	
 
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	shift_key_presed = FALSE;
-	shift_key_pressed = FALSE;	
+	return 1;	
 }
 
 #ifdef USE_GTKUPRINT

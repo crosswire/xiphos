@@ -56,8 +56,9 @@ public:
 	void SetSelectionAttention (PRBool aSelectionAttention);
         gchar *GetAttribute (nsIDOMNode *node, gchar *attribute);
         gint ProcessMouseOver (void* aEvent, gint pane);
-	void ProcessMouseEvent (void *aEvent);
-        gint ProcessKeyPressEvent(GtkMozEmbed *embed, gpointer dom_event);
+        gint ProcessMouseDblClickEvent (void* aEvent);
+	gint ProcessMouseEvent (void *aEvent);
+        gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
         gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
 
 #ifdef USE_GTKUPRINT
@@ -71,7 +72,6 @@ private:
 	PRPackedBool mInitialised;
 	PRPackedBool mSelectionAttention;
 	PRPackedBool mHasFocus;
-        bool shift_key_pressed;
 	GtkMozEmbed *mEmbed;
 	nsCOMPtr<nsIWebBrowser> mWebBrowser;
 	nsCOMPtr<nsIDOMWindow> mDOMWindow;
