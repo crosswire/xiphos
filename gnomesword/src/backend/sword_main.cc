@@ -132,15 +132,15 @@ void BackEnd::init_SWORD(int gsType) {
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-#ifdef USE_GTKMOZEMBED
+/*#ifdef USE_GTKMOZEMBED
 				display_mod->setDisplay(textDisplay);
 #else
 				const char *direction = display_mod->getConfigEntry("Direction");
 				if(direction && !strcmp(direction,"RtoL" ))
 					display_mod->setDisplay(RTOLDisplay);
-				else
+				else*/
 					display_mod->setDisplay(textDisplay);
-#endif
+//#endif
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
 				display_mod->setDisplay(commDisplay);
