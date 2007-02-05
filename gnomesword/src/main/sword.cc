@@ -1261,10 +1261,10 @@ void main_setup_displays(void)
 	backend->bookDisplay = new GTKMozEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKMozEntryDisp(widgets.html_dict,backend);
 
-#else*/
+#else
 #ifndef USE_GTKMOZEMBED
-	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
-#endif
+	backend->RTOLDisplay =  new GTKChapDisp(widgets.html_text,backend);    //new GTKTextviewChapDisp(widgets.textview,backend);
+#endif*/
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->bookDisplay = new GTKEntryDisp(widgets.html_book,backend);
