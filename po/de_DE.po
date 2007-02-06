@@ -1,7 +1,9 @@
 # German translation for GnomeSword2
 # Copyright (C) 2004 Johannes Tanzler
+#               2007 Christoph Brill
 # This file is distributed under the same license as the Gnomesword2 package.
 # Johannes Tanzler <johannes.tanzler@aon.at> 2004
+# Christoph Brill <egore911@egore911.de> 2007
 #
 #, fuzzy
 msgid ""
@@ -9,60 +11,53 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-13 23:16-0500\n"
-"PO-Revision-Date: Don, 06 Mai 2004 21:09:01 +0200\n"
-"Last-Translator: Johannes Tanzler <johannes.tanzler@aon.at>\n"
+"PO-Revision-Date: Sun, 04 Feb 2007 13:47:23 +0100\n"
+"Last-Translator: Christoph Brill <egore911@egore911.de>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.h:1
-#, fuzzy
 msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword - Software zum Bibelstudium"
+msgstr "GnomeSword2 - Software zum Bibelstudium"
 
 #: ../gnomesword.desktop.in.h:2
 msgid "Study the Bible"
-msgstr ""
+msgstr "Studiere die Bibel"
 
 #: ../src/main/lists.cc:138
-#, fuzzy
 msgid "Number of Text modules"
-msgstr "Anzahl der Bibeltext-Module"
+msgstr "Anzahl der Text-Module"
 
 #: ../src/main/lists.cc:139
-#, fuzzy
 msgid "Number of Commentary modules"
 msgstr "Anzahl der Kommantar-Module"
 
 #: ../src/main/lists.cc:140
-#, fuzzy
 msgid "Number of Dict/lex modules"
-msgstr "Anzahl der Bibeltext-Module"
+msgstr "Anzahl der Wörterbuch/Lexikon-Module"
 
 #: ../src/main/lists.cc:141
-#, fuzzy
 msgid "Number of Book modules"
-msgstr "Anzahl der Bibeltext-Module"
+msgstr "Anzahl der Bücher-Module"
 
 #: ../src/main/lists.cc:142
 #, fuzzy
 msgid "Number of Percomm modules"
-msgstr "Anzahl der Kommantar-Module"
+msgstr "Anzahl der Kommentar-Module"
 
 #: ../src/main/lists.cc:143
-#, fuzzy
 msgid "Number of Devotion modules"
-msgstr "Anzahl der Wörterbuch/Lexikon-Module"
+msgstr "Anzahl der Losung-Module"
 
 #: ../src/main/sidebar.cc:359
-#, fuzzy
 msgid "verse"
-msgstr "Gehe zu Vers"
+msgstr "Vers"
 
 #: ../src/main/sidebar.cc:419
 msgid "chapter"
-msgstr ""
+msgstr "Kapitel"
 
 #: ../src/main/sidebar.cc:575 ../src/main/sidebar.cc:846
 #: ../src/main/sidebar.cc:847 ../src/main/sidebar.cc:848
@@ -76,7 +71,7 @@ msgstr "Parallelansicht"
 #: ../src/main/sidebar.cc:855 ../src/main/sidebar.cc:856
 #: ../src/gnome2/main_window.c:616
 msgid "Standard View"
-msgstr ""
+msgstr "Standardansicht"
 
 #: ../src/main/sidebar.cc:585 ../src/main/sidebar.cc:883
 #: ../src/main/sidebar.cc:885 ../src/gnome2/mod_mgr.c:664
@@ -109,13 +104,13 @@ msgstr "Wörterbücher"
 #: ../src/main/tab_history.c:65 ../src/main/tab_history.c:101
 #: ../src/main/tab_history.c:116
 msgid "H_istory/<Separator>"
-msgstr "_Chronik/<Separator>"
+msgstr "Chron_ik/<Separator>"
 
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:67 ../src/main/tab_history.c:103
 #, fuzzy
 msgid "H_istory/C_lear"
-msgstr "_Chronik"
+msgstr "Chron_ik/_Leeren"
 
 #: ../src/editor/editor-control.c:354 ../src/editor/editor_menu.c:108
 #: ../src/editor/editor_menu.c:183 ../src/editor/editor_menu.c:689
@@ -130,21 +125,19 @@ msgstr "Datei"
 #: ../src/editor/editor-control.c:359 ../src/editor/toolbar_edit.c:238
 #: ../src/gnome2/studypad.c:107
 msgid "has been modified. Do you wish to save it?"
-msgstr "wurde geändert. Möchten Sie sie speichern?"
+msgstr "wurde geändert. Möchten Sie diese speichern?"
 
 #: ../src/editor/editor_menu.c:141
 msgid "-untitled-"
 msgstr "-Ohne Titel-"
 
 #: ../src/editor/editor_menu.c:532
-#, fuzzy
 msgid "Add reference Link"
-msgstr "<b>Referenz-Verweise hinzufügen</b>"
+msgstr "Referenz-Verweise hinzufügen"
 
 #: ../src/editor/editor_menu.c:538
-#, fuzzy
 msgid "Link text: "
-msgstr "Weitersuchen"
+msgstr "Verweistext:"
 
 #: ../src/editor/editor_menu.c:540
 msgid "Reference: "
@@ -153,7 +146,7 @@ msgstr "Referenz: "
 #: ../src/editor/editor_menu.c:542 ../src/gnome2/bookmarks_menu.c:480
 #: ../src/gnome2/bookmarks_menu.c:919
 msgid "Module: "
-msgstr "Module: "
+msgstr "Modul: "
 
 #: ../src/editor/editor_menu.c:696 ../src/editor/toolbar_edit.c:586
 #: ../src/gnome2/mod_mgr.c:958 ../src/gnome2/note_editor.c:1217
@@ -163,7 +156,7 @@ msgstr "Neu"
 #: ../src/editor/editor_menu.c:700 ../src/editor/toolbar_edit.c:614
 #: ../src/gnome2/note_editor.c:1221
 msgid "Open"
-msgstr ""
+msgstr "Öffnen"
 
 #: ../src/editor/editor_menu.c:704 ../src/editor/toolbar_edit.c:642
 #: ../src/editor/toolbar_edit.c:656 ../src/gnome2/note_editor.c:1225
@@ -227,54 +220,48 @@ msgstr "_Suchen"
 #: ../src/editor/replace.c:227 ../src/editor/toolbar_edit.c:796
 #: ../src/gnome2/note_editor.c:1289
 msgid "Replace"
-msgstr "Ersetzen"
+msgstr "E_rsetzen"
 
 #: ../src/editor/editor_menu.c:772 ../src/gnome2/note_editor.c:1293
 msgid "Link..."
 msgstr "Verweis..."
 
 #: ../src/editor/popup.c:201 ../src/editor/popup.c:278
-#, fuzzy
 msgid "Properties"
-msgstr "Fortschritt"
+msgstr "Eigenschaften"
 
 #: ../src/editor/popup.c:209 ../src/gnome2/preferences_cell_renderer.c:399
 msgid "Text"
 msgstr "Text"
 
 #: ../src/editor/popup.c:215 ../src/editor/popup.c:281
-#, fuzzy
 msgid "Link"
-msgstr "Verweise"
+msgstr "Verweis"
 
 #: ../src/editor/popup.c:221
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: ../src/editor/popup.c:227
 msgid "Paragraph"
-msgstr ""
+msgstr "Absatz"
 
 #: ../src/editor/popup.c:233
-#, fuzzy
 msgid "Page"
-msgstr "Einfügen"
+msgstr "Seite"
 
 #: ../src/editor/popup.c:239 ../src/editor/toolbar_edit.c:123
-#, fuzzy
 msgid "Rule"
-msgstr "ändern"
+msgstr "Regel"
 
 #: ../src/editor/popup.c:245 ../src/editor/popup.c:535
 #: ../src/editor/popup.c:547 ../src/editor/toolbar_edit.c:144
-#, fuzzy
 msgid "Table"
-msgstr "Reiter"
+msgstr "Tabelle"
 
 #: ../src/editor/popup.c:251
-#, fuzzy
 msgid "Cell"
-msgstr "Rechtschreibung"
+msgstr "Zelle"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/editor/popup.c:466 ../src/gnome2/bibletext.c:1044
@@ -287,123 +274,116 @@ msgid "Bookmark"
 msgstr "Lesezeichen"
 
 #: ../src/editor/popup.c:472
+#, fuzzy
 msgid "Paste Quotation"
-msgstr ""
+msgstr "Anführungszeichen einfügen"
 
 #: ../src/editor/popup.c:476
-#, fuzzy
 msgid "Insert Link"
-msgstr "Lesezeichen einfügen"
+msgstr "Verweis einfügen"
 
 #: ../src/editor/popup.c:483
-#, fuzzy
 msgid "Remove Link"
-msgstr "Ordner entfernen"
+msgstr "Verweis entfernen"
 
 #: ../src/editor/popup.c:490
-#, fuzzy
 msgid "Style"
 msgstr "_Versstil"
 
 #: ../src/editor/popup.c:493
 msgid "Text Style..."
-msgstr ""
+msgstr "Textstil..."
 
 #: ../src/editor/popup.c:495 ../src/editor/popup.c:501
 #: ../src/editor/popup.c:511
 msgid "Paragraph Style..."
-msgstr ""
+msgstr "Absatzstil..."
 
 #: ../src/editor/popup.c:499
-#, fuzzy
 msgid "Link Style..."
-msgstr "Verweis..."
+msgstr "Verweisstil..."
 
 #: ../src/editor/popup.c:505
 msgid "Rule Style..."
-msgstr ""
+msgstr "Regelstil..."
 
 #: ../src/editor/popup.c:509
 msgid "Image Style..."
-msgstr ""
+msgstr "Bildstil..."
 
 #: ../src/editor/popup.c:520
 msgid "Cell Style..."
-msgstr ""
+msgstr "Zellstil..."
 
 #: ../src/editor/popup.c:523
 msgid "Table Style..."
-msgstr ""
+msgstr "Tabellenstil..."
 
 #: ../src/editor/popup.c:529
 msgid "Page Style..."
-msgstr ""
+msgstr "Seitenstil..."
 
 #: ../src/editor/popup.c:534
+#, fuzzy
 msgid "Table insert"
-msgstr ""
+msgstr "Tabelle einfügen"
 
 #: ../src/editor/popup.c:537
 msgid "Row above"
-msgstr ""
+msgstr "Zeile über"
 
 #: ../src/editor/popup.c:538
 msgid "Row below"
-msgstr ""
+msgstr "Zeile unter"
 
 #: ../src/editor/popup.c:540
 msgid "Column before"
-msgstr ""
+msgstr "Spalte davor"
 
 #: ../src/editor/popup.c:541
 msgid "Column after"
-msgstr ""
+msgstr "Spalte dahinter"
 
 #: ../src/editor/popup.c:546
 msgid "Table delete"
-msgstr ""
+msgstr "Tabelle löschen"
 
 #: ../src/editor/popup.c:548
 msgid "Row"
-msgstr ""
+msgstr "Zeile"
 
 #: ../src/editor/popup.c:549
 msgid "Column"
-msgstr ""
+msgstr "Spalte"
 
 #: ../src/editor/popup.c:550
-#, fuzzy
 msgid "Cell contents"
-msgstr "_Inhalt"
+msgstr "Zell_inhalt"
 
 #: ../src/editor/popup.c:558
 msgid "Check Word Spelling..."
-msgstr ""
+msgstr "Rechtschreibung prüfen..."
 
 #: ../src/editor/popup.c:563
 msgid "Add Word to"
-msgstr ""
+msgstr "Wort hinzufügen zu"
 
 #: ../src/editor/popup.c:567
-#, fuzzy, c-format
+#, c-format
 msgid "%s Dictionary"
-msgstr "Wörterbücher"
+msgstr "%s Wörterbuch"
 
 #: ../src/editor/popup.c:576
-#, fuzzy
 msgid "Add Word to Dictionary"
-msgstr "Vorgabewörterbuch verwenden"
+msgstr "Wort zu Wörterbuch hinzufügen"
 
 #: ../src/editor/popup.c:579
-#, fuzzy
 msgid "Ignore Misspelled Word"
-msgstr ""
-"Wort\n"
-"ignorieren"
+msgstr "Falsch geschriebenes Wort ignorieren"
 
 #: ../src/editor/popup.c:583
 msgid "Input Methods"
-msgstr ""
+msgstr "Eingabemethoden"
 
 #. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
 #: ../src/editor/replace.c:80
@@ -411,19 +391,16 @@ msgid "Replace confirmation"
 msgstr "Ersetzung bestätigen"
 
 #: ../src/editor/replace.c:81
-#, fuzzy
 msgid "Replace _All"
-msgstr "Alle ersetzen"
+msgstr "_Alle ersetzen"
 
 #: ../src/editor/replace.c:82
-#, fuzzy
 msgid "_Next"
-msgstr "Nächstes"
+msgstr "_Nächstes"
 
 #: ../src/editor/replace.c:84
-#, fuzzy
 msgid "_Replace"
-msgstr "Ersetzen"
+msgstr "E_rsetzen"
 
 #: ../src/editor/replace.c:172
 #, fuzzy
@@ -432,52 +409,45 @@ msgstr "Rückwärts suchen"
 
 #: ../src/editor/replace.c:173 ../src/editor/search.c:115
 msgid "Case _sensitive"
-msgstr ""
+msgstr "Groß- und Kleinschreibung beachten"
 
 #: ../src/editor/replace.c:183
-#, fuzzy
 msgid "Replace:"
-msgstr "Ersetzen"
+msgstr "Ersetzen:"
 
 #: ../src/editor/replace.c:186
-#, fuzzy
 msgid "With:"
-msgstr "mit"
+msgstr "mit:"
 
 #: ../src/editor/search.c:114
 #, fuzzy
 msgid "_Backward"
-msgstr "Rückwärts suchen"
+msgstr "Zurück"
 
 #: ../src/editor/search.c:116
-#, fuzzy
 msgid "_Regular Expression"
-msgstr "Regulärer Ausdruck"
+msgstr "_Regulärer Ausdruck"
 
 #: ../src/editor/spell.c:315
 msgid "No misspelled word found"
-msgstr ""
+msgstr "Keine Rechtschreibfehler gefunden"
 
 #: ../src/editor/spell.c:323
-#, fuzzy
 msgid "Spell checker"
 msgstr "Rechtschreibprüfung"
 
 #: ../src/editor/spell.c:417
-#, fuzzy
 msgid "Current _Languages"
-msgstr "Aktuelle Ergebnisse"
+msgstr "Aktue_lle Sprache"
 
 #. #ifdef USE_GTKFILECHOOSER
 #: ../src/editor/toolbar_edit.c:62 ../src/editor/toolbar_edit.c:813
-#, fuzzy
 msgid "Insert image"
-msgstr "Lesezeichen einfügen"
+msgstr "Bind einfügen"
 
 #: ../src/editor/toolbar_edit.c:120 ../src/editor/toolbar_edit.c:141
-#, fuzzy
 msgid "Insert"
-msgstr "Lesezeichen einfügen"
+msgstr "Einfügen"
 
 #: ../src/editor/toolbar_edit.c:330 ../src/gnome2/note_editor.c:689
 msgid "Delete Note?"
@@ -485,7 +455,7 @@ msgstr "Notiz löschen?"
 
 #: ../src/editor/toolbar_edit.c:331 ../src/gnome2/note_editor.c:690
 msgid "Are you sure you want to delete the note for\n"
-msgstr "Die Notiz zu folgendem Vers wird gelöscht:\n"
+msgstr "Soll die Notiz zu folgendem Vers gelöscht werden\n"
 
 #: ../src/editor/toolbar_edit.c:587
 msgid "Create a new file"
@@ -525,34 +495,31 @@ msgstr "Suchen und Ersetzen"
 
 #: ../src/editor/toolbar_edit.c:814
 msgid "Insert image at cursor"
-msgstr ""
+msgstr "Bild bei Cursor einfügen"
 
 #: ../src/editor/toolbar_edit.c:823
-#, fuzzy
 msgid "Insert link"
 msgstr "Lesezeichen einfügen"
 
 #: ../src/editor/toolbar_edit.c:824
 msgid "Insert link at cursor"
-msgstr ""
+msgstr "Lesezeichen bei Cursor einfügen"
 
 #: ../src/editor/toolbar_edit.c:833
-#, fuzzy
 msgid "Insert rule"
-msgstr "Lesezeichen einfügen"
+msgstr "Regel einfügen"
 
 #: ../src/editor/toolbar_edit.c:834
 msgid "Insert rule at cursor"
-msgstr ""
+msgstr "Regel bei Cursor einfügen"
 
 #: ../src/editor/toolbar_edit.c:844
-#, fuzzy
 msgid "Insert table"
-msgstr "Kursiv"
+msgstr "Tabelle einfügen"
 
 #: ../src/editor/toolbar_edit.c:845
 msgid "Insert table at cursor"
-msgstr ""
+msgstr "Tabelle bei Cursor einfügen"
 
 #: ../src/editor/toolbar_edit.c:864
 msgid "Spell"
@@ -571,6 +538,7 @@ msgid "Preformat"
 msgstr "Vorformatiert"
 
 #: ../src/editor/toolbar_style.c:53
+#, fuzzy
 msgid "Bulleted List"
 msgstr "Liste"
 
@@ -624,7 +592,7 @@ msgstr "Linksbündig"
 
 #: ../src/editor/toolbar_style.c:1059
 msgid "Left justifies the paragraphs"
-msgstr "Linksbündig"
+msgstr "Linksbündig mit Absätzen"
 
 #: ../src/editor/toolbar_style.c:1062
 msgid "Center"
@@ -632,7 +600,7 @@ msgstr "Zentrieren"
 
 #: ../src/editor/toolbar_style.c:1063
 msgid "Center justifies the paragraphs"
-msgstr "Zentrieren"
+msgstr "Zentrieren mit Absätzen"
 
 #: ../src/editor/toolbar_style.c:1066
 msgid "Right align"
@@ -640,7 +608,7 @@ msgstr "Rechtsbündig"
 
 #: ../src/editor/toolbar_style.c:1067
 msgid "Right justifies the paragraphs"
-msgstr "Rechtsbündig"
+msgstr "Rechtsbündig mit Absätzen"
 
 #: ../src/editor/toolbar_style.c:1079
 msgid "Typewriter"
@@ -656,7 +624,7 @@ msgstr "Fett"
 
 #: ../src/editor/toolbar_style.c:1083
 msgid "Makes the text bold"
-msgstr "Fett"
+msgstr "Macht die Schrift fett"
 
 #: ../src/editor/toolbar_style.c:1086
 msgid "Italic"
@@ -664,7 +632,7 @@ msgstr "Kursiv"
 
 #: ../src/editor/toolbar_style.c:1087
 msgid "Makes the text italic"
-msgstr "Kursiv"
+msgstr "Macht die Schrift kursiv"
 
 #: ../src/editor/toolbar_style.c:1090
 msgid "Underline"
@@ -672,7 +640,7 @@ msgstr "Unterstreichen"
 
 #: ../src/editor/toolbar_style.c:1091
 msgid "Underlines the text"
-msgstr "Unterstreichen"
+msgstr "Unterstreicht den Text"
 
 #: ../src/editor/toolbar_style.c:1094
 msgid "Strikeout"
@@ -680,7 +648,7 @@ msgstr "Durchstreichen"
 
 #: ../src/editor/toolbar_style.c:1095
 msgid "Strikes out the text"
-msgstr "Durchstreichen"
+msgstr "Streicht den Text durch"
 
 #: ../src/editor/toolbar_style.c:1105
 msgid "Unindent"
@@ -688,7 +656,7 @@ msgstr "Einzug verringern"
 
 #: ../src/editor/toolbar_style.c:1106
 msgid "Indents the paragraphs less"
-msgstr "Einzug verringern"
+msgstr "Einzug der Absätze verringern"
 
 #: ../src/editor/toolbar_style.c:1109
 msgid "Indent"
@@ -696,28 +664,24 @@ msgstr "Einzug erhöhen"
 
 #: ../src/editor/toolbar_style.c:1110
 msgid "Indents the paragraphs more"
-msgstr "Einzug erhöhen"
+msgstr "Einzug der Absätze erhöhen"
 
 #: ../src/gnome2/about_gnomesword.c:84
 #, fuzzy
 msgid "Copyright 2000-2005 The GnomeSword Development Team"
-msgstr "Copyright 2003 The GnomeSword Development team"
+msgstr "Copyright 2003-2007 The GnomeSword Development team"
 
 #: ../src/gnome2/about_gnomesword.c:87
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Das Wort ist glaubwürdig und wert, dass man es beherzigt: Christus Jesus ist "
-"in die Welt gekommen, um die Sünder zu retten. Von ihnen bin ich der Erste. "
-"(1 Tim 1,15)\n"
-"\n"
 "Unser Dank gilt Troy Griffitts und allen anderen, die uns das SWORD-Projekt "
 "gegeben haben."
 
 #: ../src/gnome2/about_modules.c:162
 msgid "About Sword Module"
-msgstr "Info zum Sword-Modul"
+msgstr "Über das Sword-Modul"
 
 #: ../src/gnome2/about_sword.c:94
 msgid ""
@@ -727,14 +691,16 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Das SWORD-Projekt hat das Vorhaben, ein Softwarepaket zu erstellen, mit dem "
-"das Wort Gottes erforscht und studiert werden kann. Das Sword Bibel-"
-"Framework ermöglicht einfache Bearbeitung von Bibeltexten, Kommentaren, "
-"Wörterbüchern, Lexika und anderen Büchern."
+"Das SWORD-Projekt hat das Vorhaben, ein ständig erweitertes Softwarepaket "
+"zu erstellen, mit dem Gott und das Wort Gottes erforscht und studiert werden "
+"kann. Das Sword Bibel-Framework ermöglicht einfache Bearbeitung von "
+"Bibeltexten, Kommentaren, Lexika, Wörterbüchern und anderen Büchern. Die "
+"installierten Module können von allen Frontends des SWORD-Framworks genutzt "
+"werden."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
-msgstr "Info zum SWORD-Projekt"
+msgstr "Über das SWORD-Projekt"
 
 #: ../src/gnome2/about_sword.c:130
 msgid "Sword Version"
@@ -742,9 +708,7 @@ msgstr "Sword Version"
 
 #: ../src/gnome2/about_sword.c:161
 msgid "Modules can be downloaded from the SWORD Project"
-msgstr ""
-"Module können von der Webseite\n"
-"des SWORD-Projekts heruntergeladen werden."
+msgstr "Module können von der Webseite des SWORD-Projekts heruntergeladen werden."
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -754,7 +718,7 @@ msgstr "Das SWORD-Projekt"
 #: ../src/gnome2/commentary.c:551 ../src/gnome2/commentary_dialog.c:1539
 #: ../src/gnome2/dictlex.c:823 ../src/gnome2/gbs.c:627
 msgid "item1"
-msgstr ""
+msgstr "Eintrag1"
 
 #: ../src/gnome2/bibletext.c:861 ../src/gnome2/bibletext_dialog.c:1894
 #: ../src/gnome2/commentary.c:561 ../src/gnome2/commentary_dialog.c:1549
@@ -766,7 +730,7 @@ msgstr "Modul öffnen"
 #: ../src/gnome2/commentary.c:573 ../src/gnome2/commentary_dialog.c:1575
 #: ../src/gnome2/gbs.c:649
 msgid "item2"
-msgstr ""
+msgstr "Eintrag2"
 
 #: ../src/gnome2/bibletext.c:885 ../src/gnome2/bibletext_dialog.c:1932
 #: ../src/gnome2/commentary.c:585 ../src/gnome2/commentary_dialog.c:1587
@@ -882,7 +846,7 @@ msgstr "Aktuelles Wörterbuch benutzen"
 #: ../src/gnome2/dictlex.c:994 ../src/gnome2/gbs.c:813
 #: ../src/gnome2/sidebar.c:985
 msgid "About"
-msgstr "Info"
+msgstr "Über"
 
 #: ../src/gnome2/bibletext.c:1057 ../src/gnome2/bibletext_dialog.c:2097
 #: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/commentary.c:757
@@ -894,9 +858,8 @@ msgstr "Bearbeiten"
 #: ../src/gnome2/bibletext.c:1063 ../src/gnome2/bibletext_dialog.c:2103
 #: ../src/gnome2/commentary.c:763 ../src/gnome2/commentary_dialog.c:1758
 #: ../src/gnome2/dictlex.c:1020 ../src/gnome2/gbs.c:839
-#, fuzzy
 msgid "_Module Options"
-msgstr "Moduloptionen"
+msgstr "_Moduloptionen"
 
 #: ../src/gnome2/bibletext.c:1069 ../src/gnome2/bibletext_dialog.c:2109
 #: ../src/gnome2/commentary.c:769 ../src/gnome2/commentary_dialog.c:1764
@@ -921,24 +884,21 @@ msgstr "Gehe zu"
 
 #: ../src/gnome2/bibletext_dialog.c:1900
 #: ../src/gnome2/commentary_dialog.c:1555
-#, fuzzy
 msgid "Sync with main"
 msgstr "Mit Hauptfenster synchronisieren"
 
 #: ../src/gnome2/bibletext_dialog.c:1906
 #: ../src/gnome2/commentary_dialog.c:1561
 msgid "Stay in sync"
-msgstr ""
+msgstr "Synchronisiert bleiben"
 
 #: ../src/gnome2/bookmarks_menu.c:473
-#, fuzzy
 msgid "Folder name: "
-msgstr "Ordner-Name"
+msgstr "Ordner-Name: "
 
 #: ../src/gnome2/bookmarks_menu.c:476
-#, fuzzy
 msgid "Bookmark name: "
-msgstr "Lesezeichen"
+msgstr "Lesezeichen: "
 
 #: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:918
 msgid "Verse: "
@@ -970,7 +930,7 @@ msgstr "Beschriftung: "
 
 #: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
 msgid "Enter Folder Name"
-msgstr "Ordner eingeben: "
+msgstr "Ordnername eingeben"
 
 #: ../src/gnome2/bookmarks_menu.c:1012
 msgid "Folder Name"
@@ -997,9 +957,8 @@ msgid "Restore saved folder"
 msgstr "Gespeicherte Ordner wiederherstellen"
 
 #: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:972
-#, fuzzy
 msgid "Open in a new tab"
-msgstr "In Dialogfenster öffnen"
+msgstr "In neuem Reiter öffnen"
 
 #: ../src/gnome2/bookmarks_menu.c:1121 ../src/gnome2/bookmarks_menu.c:1127
 msgid "Open this bookmark in a dialog"
@@ -1031,7 +990,7 @@ msgstr "Lesezeichen _bearbeiten"
 
 #: ../src/gnome2/bookmarks_menu.c:1145
 msgid "Edit bookmark item"
-msgstr "Lesezeichen bearbeiten"
+msgstr "Lesezeichen Eintrag bearbeiten"
 
 #: ../src/gnome2/bookmarks_menu.c:1150
 msgid "Delete Item"
@@ -1067,7 +1026,7 @@ msgstr "Einträge dürfen in andere Ordner verschoben werden"
 
 #: ../src/gnome2/bookmarks_menu.c:1178
 msgid "Import Bibletime Bookmarks"
-msgstr "Wichtige Bibletime-Lesezeichen"
+msgstr "Importiere Bibletime-Lesezeichen"
 
 #: ../src/gnome2/bookmarks_menu.c:1179
 msgid "Load Bookmarks from Bibletime"
@@ -1091,11 +1050,12 @@ msgstr "Chiffrierschlüssel eingeben: "
 
 #: ../src/gnome2/dialog.c:211
 msgid "Close without Saving"
-msgstr ""
+msgstr "Schließen ohne Speichern"
 
 #: ../src/gnome2/dialog.c:821
+#, fuzzy
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Schließen ohne Speichern"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
@@ -1141,39 +1101,39 @@ msgstr "Aktuelle Schriftart: "
 
 #: ../src/gnome2/font_dialog.c:359
 msgid "+5"
-msgstr ""
+msgstr "+5"
 
 #: ../src/gnome2/font_dialog.c:361
 msgid "+4"
-msgstr ""
+msgstr "+4"
 
 #: ../src/gnome2/font_dialog.c:363
 msgid "+3"
-msgstr ""
+msgstr "+3"
 
 #: ../src/gnome2/font_dialog.c:365
 msgid "+2"
-msgstr ""
+msgstr "+2"
 
 #: ../src/gnome2/font_dialog.c:367
 msgid "+1"
-msgstr ""
+msgstr "+1"
 
 #: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
 msgid "+0"
-msgstr ""
+msgstr "+0"
 
 #: ../src/gnome2/font_dialog.c:371
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: ../src/gnome2/font_dialog.c:373
 msgid "-2"
-msgstr ""
+msgstr "-2"
 
 #: ../src/gnome2/font_dialog.c:375
 msgid "-3"
-msgstr ""
+msgstr "-3"
 
 #: ../src/gnome2/font_dialog.c:386
 msgid "Use the default font for this module"
@@ -1190,31 +1150,28 @@ msgid "Go to %s"
 msgstr "Gehe zu %s"
 
 #: ../src/gnome2/gnomesword.c:87
-#, fuzzy
 msgid "Initiating GnomeSword"
-msgstr "Beim Starten Vorgaben verwenden"
+msgstr "Starte GnomeSword"
 
 #: ../src/gnome2/gnomesword.c:152 ../src/gnome2/splash.c:590
 msgid "Displaying GnomeSword"
-msgstr ""
+msgstr "Zeige GnomeSword"
 
 #: ../src/gnome2/gnomesword.c:222
-#, fuzzy
 msgid "The Setup Druid was cancelled."
 msgstr "Der Setup-Druide wurde abgebrochen"
 
 #: ../src/gnome2/gnomesword.c:223
 msgid "Do you wish to set preferences now?"
-msgstr "Möchten Sie jetzt Präferenzen festlegen?"
+msgstr "Möchten Sie ihre Einstellungen jetzt festlegen?"
 
 #: ../src/gnome2/gnomesword.c:248
 msgid "done"
-msgstr ""
+msgstr "erledigt"
 
 #: ../src/gnome2/gnomesword.c:322
-#, fuzzy
 msgid "GnomeSword is shutdown"
-msgstr "GnomeSword-Vorgaben "
+msgstr "GnomeSword ist heruntergefahren"
 
 #: ../src/gnome2/html.c:156
 msgid "Unlock "
@@ -1243,21 +1200,19 @@ msgstr "Den StudyPad-Editor öffnen"
 
 #: ../src/gnome2/main_menu.c:607
 msgid "Open Session"
-msgstr ""
+msgstr "Sitzung öffnen"
 
 #: ../src/gnome2/main_menu.c:608
 msgid "Open a saved session"
-msgstr ""
+msgstr "Gespeicherte Sitzung öffnen"
 
 #: ../src/gnome2/main_menu.c:612
-#, fuzzy
 msgid "Save Session"
-msgstr "Ergebnisse speichern"
+msgstr "Sitzung speichern"
 
 #: ../src/gnome2/main_menu.c:613
-#, fuzzy
 msgid "Save the current session to a file"
-msgstr "Datei speichern"
+msgstr "Aktuelle Sitzung in Datei speichern"
 
 #: ../src/gnome2/main_menu.c:625
 msgid "Copy highlighted text from main window"
@@ -1277,16 +1232,15 @@ msgstr "_Erweiterte Suche"
 
 #: ../src/gnome2/main_menu.c:638
 msgid "Advanced search using the search dialog"
-msgstr "Erweiterte Suche in der Verknüpfungsleiste"
+msgstr "Erweiterte Suche mit dem Suchdialog"
 
 #: ../src/gnome2/main_menu.c:646 ../ui/module-manager.glade.h:15
-#, fuzzy
 msgid "Module Manager"
-msgstr "Module: "
+msgstr "Moduleverwaltung"
 
 #: ../src/gnome2/main_menu.c:647
 msgid "Use module manager to install and remove Sword modules"
-msgstr ""
+msgstr "Mit der Moduleverwaltung Sword Module installieren bzw. deinstallieren"
 
 #: ../src/gnome2/main_menu.c:656
 msgid "C_lear"
@@ -1302,7 +1256,7 @@ msgstr "_Tageslosung"
 
 #: ../src/gnome2/main_menu.c:668
 msgid "Show the Daily Devotion for today"
-msgstr "Die Tageslosung anzeigen"
+msgstr "Die heutige Tageslosung anzeigen"
 
 #: ../src/gnome2/main_menu.c:683 ../ui/prefs.glade.h:19
 msgid "Bible Texts"
@@ -1327,23 +1281,19 @@ msgid "Dictionary/Lexicon"
 msgstr "Wörterbücher/Lexika"
 
 #: ../src/gnome2/main_menu.c:697
-#, fuzzy
 msgid "Show or hide - dictionaries and lexicons"
-msgstr ""
-"Unteren Arbeitsbereich anzeigen oder verbergen - Wörterbücher und andere "
-"Texte"
+msgstr "Unteren Arbeitsbereich anzeigen oder verbergen - Wörterbücher und "
+"andere Texte"
 
 #: ../src/gnome2/main_menu.c:703
 msgid "Verse Style"
 msgstr "_Versstil"
 
 #: ../src/gnome2/main_menu.c:710
-#, fuzzy
 msgid "Attach/Detach Sidebar"
 msgstr "Verknüpfungsleiste an_heften/abtrennen"
 
 #: ../src/gnome2/main_menu.c:716
-#, fuzzy
 msgid "Show/Hide Sidebar"
 msgstr "Verknüpfungsleiste _anzeigen/verbergen"
 
@@ -1381,7 +1331,6 @@ msgid "_View"
 msgstr "_Ansicht"
 
 #: ../src/gnome2/main_menu.c:774
-#, fuzzy
 msgid "Hi_story"
 msgstr "_Chronik"
 
@@ -1390,149 +1339,138 @@ msgid "_Help"
 msgstr "_Hilfe"
 
 #: ../src/gnome2/main_window.c:484
-#, fuzzy
 msgid "Starting"
-msgstr "Beim Starten Vorgaben verwenden"
+msgstr "Starte"
 
 #: ../src/gnome2/main_window.c:485
-#, fuzzy
 msgid "Building GnomeSword interface"
-msgstr "Schnittstelle"
+msgstr "Erstelle GnomeSwort Schnittstelle"
 
 #: ../src/gnome2/main_window.c:492
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Software zum Bibelstudium"
 
 #: ../src/gnome2/main_window.c:546
-#, fuzzy
 msgid "Open a new tab"
-msgstr "Datei öffnen"
+msgstr "Neuen Reiter öffnen"
 
 #: ../src/gnome2/main_window.c:682
-#, fuzzy
 msgid "Commentary View"
-msgstr "Kommentare"
+msgstr "Kommentaransicht"
 
 #: ../src/gnome2/main_window.c:699
 msgid "Book View"
-msgstr ""
+msgstr "Buchansicht"
 
 #: ../src/gnome2/mod_mgr.c:212
 msgid "Install the following modules:"
-msgstr ""
+msgstr "Installiere die folgenden Module:"
 
 #: ../src/gnome2/mod_mgr.c:217
 msgid "Remove the following modules:"
-msgstr ""
+msgstr "Entferne die folgenden Module:"
 
 #: ../src/gnome2/mod_mgr.c:239
 msgid "Preparing to install"
-msgstr ""
+msgstr "Bereite Installation vor"
 
 #: ../src/gnome2/mod_mgr.c:242
-#, fuzzy
 msgid "Preparing to remove"
-msgstr "Druckvorschau"
+msgstr "Bereite Entfernung vor"
 
 #: ../src/gnome2/mod_mgr.c:265
 msgid "Installing: "
-msgstr ""
+msgstr "Installiere: "
 
 #: ../src/gnome2/mod_mgr.c:270
 msgid "Removing: "
-msgstr ""
+msgstr "Entferne: "
 
 #: ../src/gnome2/mod_mgr.c:314
 msgid "Install failed"
-msgstr ""
+msgstr "Installation fehlgeschlagen"
 
 #: ../src/gnome2/mod_mgr.c:316
-#, fuzzy
 msgid "Remove failed"
-msgstr "Ordner entfernen"
+msgstr "Entfernung fehlgeschlagen"
 
 #: ../src/gnome2/mod_mgr.c:318 ../src/gnome2/mod_mgr.c:769
-#, fuzzy
 msgid "Finished"
-msgstr "_Suchen"
+msgstr "Fertig"
 
 #: ../src/gnome2/mod_mgr.c:752
+#, fuzzy
 msgid "Refreshing remote"
-msgstr ""
+msgstr "Aktualsiere entferne Quelle"
 
 #: ../src/gnome2/mod_mgr.c:764
+#, fuzzy
 msgid "Remote not found"
-msgstr ""
+msgstr "Entfernte Quelle nicht gefunden"
 
 #: ../src/gnome2/mod_mgr.c:867
-#, fuzzy
 msgid "Module Name"
-msgstr "Module: "
+msgstr "Modulname"
 
 #: ../src/gnome2/mod_mgr.c:944
 msgid "Old"
-msgstr ""
+msgstr "Alt"
 
 #: ../src/gnome2/mod_mgr.c:993
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurieren"
 
 #: ../src/gnome2/mod_mgr.c:1027
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: ../src/gnome2/mod_mgr.c:1035
-#, fuzzy
 msgid "Caption"
-msgstr "Optionen"
+msgstr "Überschrift"
 
 #: ../src/gnome2/mod_mgr.c:1044
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #: ../src/gnome2/mod_mgr.c:1053
-#, fuzzy
 msgid "Directory"
-msgstr "SWORD-Verzeichnis"
+msgstr "Verzeichnis"
 
 #: ../src/gnome2/mod_mgr.c:1301
 msgid "Please Refresh"
-msgstr ""
+msgstr "Bitte aktualisieren"
 
 #: ../src/gnome2/mod_mgr.c:1303
 msgid "Your module list is not up to date!"
-msgstr ""
+msgstr "Ihre Moduleliste ist veraltet!"
 
 #: ../src/gnome2/mod_mgr.c:1515
 msgid "Select Local Source"
-msgstr ""
+msgstr "Wähle lokale Quelle"
 
 #: ../src/gnome2/mod_mgr.c:1710 ../src/gnome2/mod_mgr.c:1847
-#, fuzzy
 msgid "Remove the selected source"
-msgstr "Ausgewählten Ordner entfernen "
+msgstr "Ausgewählte Quelle entfernen "
 
 #: ../src/gnome2/mod_mgr.c:1758
 msgid "Enter a remote source"
-msgstr ""
+msgstr "Geben sie eine entferne Quelle an"
 
 #: ../src/gnome2/mod_mgr.c:1762
-#, fuzzy
 msgid "Caption:"
-msgstr "Optionen"
+msgstr "Überschrift:"
 
 #: ../src/gnome2/mod_mgr.c:1763
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 #: ../src/gnome2/mod_mgr.c:1764
 msgid "URL:"
-msgstr ""
+msgstr "Adresse:"
 
 #: ../src/gnome2/mod_mgr.c:1765
-#, fuzzy
 msgid "Directory:"
-msgstr "SWORD-Verzeichnis"
+msgstr "Verzeichnis:"
 
 #: ../src/gnome2/note_editor.c:1200
 msgid "Save Note"
@@ -1596,28 +1534,27 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 #: ../src/gnome2/preferences_dialog.c:1305
-#, fuzzy
 msgid "Fonts"
-msgstr "Fußnoten"
+msgstr "Schriften"
 
 #: ../src/gnome2/preferences_dialog.c:1308
-#, fuzzy
 msgid "Color"
-msgstr "Schriften und Farben"
+msgstr "Farben"
 
 #: ../src/gnome2/preferences_dialog.c:1311
 #: ../src/gnome2/preferences_dialog.c:1325
 #: ../src/gnome2/preferences_dialog.c:1338
 msgid "Misc"
-msgstr ""
+msgstr "Verschiedenes"
 
 #: ../src/gnome2/preferences_dialog.c:1315
 msgid "General"
 msgstr "Allgemein"
 
 #: ../src/gnome2/preferences_dialog.c:1318 ../ui/prefs.glade.h:50
+#, fuzzy
 msgid "Tabs and Panes"
-msgstr ""
+msgstr "Reiter und Ausschnitte"
 
 #: ../src/gnome2/preferences_dialog.c:1329 ../src/gnome2/sidebar.c:1644
 msgid "Modules"
@@ -1625,7 +1562,7 @@ msgstr "Module"
 
 #: ../src/gnome2/preferences_dialog.c:1332
 msgid "Main"
-msgstr ""
+msgstr "Hauptfenster"
 
 #: ../src/gnome2/search_dialog.c:51
 msgid "Searching the "
@@ -1645,7 +1582,7 @@ msgstr "Liste leeren?"
 
 #: ../src/gnome2/search_dialog.c:652
 msgid "Are you sure you want to clear the module list?"
-msgstr "Möchten Sie die Modulliste leeren?"
+msgstr "Möchten Sie die Modulliste wirklich leeren?"
 
 #: ../src/gnome2/search_dialog.c:864
 msgid "Delete list?"
@@ -1739,11 +1676,12 @@ msgid ""
 "Once you have completed these steps, you can always change the settings "
 "later by using the Preferences dialog."
 msgstr ""
-"Sie verwenden GnomeSword zum ersten Mal. Deshalb wird ihnen dieser Druide "
+"Sie verwenden GnomeSword zum ersten Mal. Deshalb wird ihnen dieser Assistent "
 "bei der ersten Einrichtung helfen und Ihnen einige einfache Fragen stellen.\n"
 "\n"
-"Sie können diese Einstellung später jederzeit ändern, indem Sie "
-"denentsprechenden Dialog (Bearbeiten/Einstellungen) verwenden."
+"Nachdem sie die folgenden Schritte durchgeführt haben, können diese "
+"Einstellung später jederzeit ändern, indem Sie denentsprechenden Dialog "
+"(Bearbeiten/Einstellungen) verwenden."
 
 #: ../src/gnome2/setup_druid.c:447
 msgid "GnomeSword Configuration - Page 2 of 5"
@@ -1917,9 +1855,8 @@ msgid "Save the search results as bookmarks"
 msgstr "Suchergebnisse als Lesezeichen speichern"
 
 #: ../src/gnome2/sidebar.c:973
-#, fuzzy
 msgid "Open selected module in a new tab"
-msgstr "Ausgewähltes Modul in einem Dialog öffnen"
+msgstr "Ausgewähltes Modul in neuem Reiter öffnen"
 
 #: ../src/gnome2/sidebar.c:979
 msgid "Open in dialog"
@@ -1950,37 +1887,32 @@ msgid "Verse _List"
 msgstr "_Versliste"
 
 #: ../src/gnome2/sidebar.c:1612
-#, fuzzy
 msgid "Bookmarks"
 msgstr "_Lesezeichen"
 
 #: ../src/gnome2/sidebar.c:1633
-#, fuzzy
 msgid "Verse List"
 msgstr "_Versliste"
 
 #: ../src/gnome2/splash.c:361
-#, fuzzy
 msgid "Powered by the SWORD Project"
-msgstr "Info zum SWORD-Projekt"
+msgstr "Benutzt das SWORD-Projekt"
 
 #: ../src/gnome2/splash.c:538
 msgid "Loading settings"
-msgstr ""
+msgstr "Lade Einstellungen"
 
 #: ../src/gnome2/splash.c:556
-#, fuzzy
 msgid "Building Interface"
-msgstr "Schnittstelle"
+msgstr "Erstelle Schnittstelle"
 
 #: ../src/gnome2/splash.c:573
-#, fuzzy
 msgid "Starting Sword"
-msgstr "Beim Starten Vorgaben verwenden"
+msgstr "Starte Sword"
 
 #: ../src/gnome2/studypad.c:184
 msgid "not loaded"
-msgstr ""
+msgstr "nicht geladen"
 
 #: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
@@ -1988,65 +1920,57 @@ msgstr "StudyPad"
 
 #: ../src/gnome2/toolbar_nav.c:390
 msgid "Move backwards through history"
-msgstr ""
+msgstr "In Chronik zurück gehen"
 
 #: ../src/gnome2/toolbar_nav.c:412
 msgid "Move foward through history"
-msgstr ""
+msgstr "In Chronik vorwärts gehen"
 
 #: ../src/gnome2/toolbar_nav.c:439
 msgid "Select a Book of the Bible"
-msgstr ""
+msgstr "Wähle ein Buch der Bibel"
 
 #: ../src/gnome2/toolbar_nav.c:470
-#, fuzzy
 msgid "Change Chapter"
-msgstr "Schriftart für Modul"
+msgstr "Kapitel wechseln"
 
 #: ../src/gnome2/toolbar_nav.c:504
-#, fuzzy
 msgid "Change Verse"
-msgstr "Parallelansicht 1 ändern"
+msgstr "Vers wechseln"
 
 #: ../src/gnome2/toolbar_nav.c:539
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
-msgstr ""
+msgstr "Bitte einen Verse im Format 1:1 eingeben und Enter drücken"
 
 #: ../src/gnome2/utilities.c:254
 #, c-format
 msgid "%s not found"
-msgstr ""
+msgstr "%s nicht gefunden"
 
 #. *****   end of file   *****
 #: ../ui/bookmarks.glade.h:1
-#, fuzzy
 msgid "Add Bookmark"
-msgstr "Lesezeichen"
+msgstr "Lesezeichen hinzufügen"
 
 #: ../ui/bookmarks.glade.h:2
-#, fuzzy
 msgid "Create new folder"
-msgstr "Neue Datei erstellen"
+msgstr "Neuen Ordner erstellen"
 
 #: ../ui/bookmarks.glade.h:3
-#, fuzzy
 msgid "Label:"
-msgstr "Beschriftung: "
+msgstr "Beschriftung:"
 
 #: ../ui/bookmarks.glade.h:4
-#, fuzzy
 msgid "Module:"
-msgstr "Module: "
+msgstr "Modul:"
 
 #: ../ui/bookmarks.glade.h:5
-#, fuzzy
 msgid "New ..."
-msgstr "Neu"
+msgstr "Neu ..."
 
 #: ../ui/bookmarks.glade.h:6
-#, fuzzy
 msgid "Verse:"
-msgstr "Vers: "
+msgstr "Vers:"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2059,48 +1983,51 @@ msgid ""
 "+4\n"
 "+5"
 msgstr ""
+"-2\n"
+"-1\n"
+"+0\n"
+"+1\n"
+"+2\n"
+"+3\n"
+"+4\n"
+"+5"
 
 #: ../ui/prefs.glade.h:9
-#, fuzzy
 msgid "<b>Font Colors</b>"
-msgstr "Schriften und Farben"
+msgstr "<b>Schriftfarben</b>"
 
 #: ../ui/prefs.glade.h:10
+#, fuzzy
 msgid "<b>Font Miscellaneous</b>"
-msgstr ""
+msgstr "<b>Schrift</b>"
 
 #: ../ui/prefs.glade.h:11
-#, fuzzy
 msgid "<b>General</b>"
-msgstr "Allgemein"
+msgstr "<b>Allgemein</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr ""
+msgstr "<b>Hauptfenster Module</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Miscellaneous Modules</b>"
-msgstr ""
+msgstr "<b>Verschiedene Module</b>"
 
 #: ../ui/prefs.glade.h:14
-#, fuzzy
 msgid "<b>Parallel View</b>"
-msgstr "Parallelansicht"
+msgstr "<b>Parallelansicht</b>"
 
 #: ../ui/prefs.glade.h:15
-#, fuzzy
 msgid "<b>Show</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Anzeigen</b>"
 
 #: ../ui/prefs.glade.h:16
-#, fuzzy
 msgid "<b>StudyPad default directory</b>"
-msgstr "Vorgabeverzeichnis für StudyPad"
+msgstr "<b>Vorgabeverzeichnis für StudyPad</b>"
 
 #: ../ui/prefs.glade.h:17
-#, fuzzy
 msgid "<b>Tabs</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Reiter</b>"
 
 #: ../ui/prefs.glade.h:18
 msgid "Background"
@@ -2112,17 +2039,16 @@ msgstr "Bibeltext"
 
 #: ../ui/prefs.glade.h:21
 msgid "Biblical Text"
-msgstr "Bibeltext"
+msgstr "Biblischer Text"
 
 #: ../ui/prefs.glade.h:22
-#, fuzzy
 msgid "Book"
-msgstr "Bücher"
+msgstr "Buch"
 
 #: ../ui/prefs.glade.h:25
 #, fuzzy
 msgid "Cover"
-msgstr "Untere"
+msgstr "Cover"
 
 #: ../ui/prefs.glade.h:26
 msgid "Current Verse text"
@@ -2133,18 +2059,17 @@ msgid "Default Dictionary"
 msgstr "Vorgabewörterbuch"
 
 #: ../ui/prefs.glade.h:29
-#, fuzzy
 msgid "Dictionary"
-msgstr "Wörterbücher"
+msgstr "Wörterbuch"
 
 #: ../ui/prefs.glade.h:31
 msgid "Font Colors"
-msgstr "Schriften und Farben"
+msgstr "Schriftfarben"
 
 #: ../ui/prefs.glade.h:32
 #, fuzzy
 msgid "Font Misc"
-msgstr "Fußnoten"
+msgstr "Schrift"
 
 #: ../ui/prefs.glade.h:33
 #, fuzzy
@@ -2161,29 +2086,25 @@ msgid "Links"
 msgstr "Verweise"
 
 #: ../ui/prefs.glade.h:37
-#, fuzzy
 msgid "Modules Main"
-msgstr "Module: "
+msgstr "Hauptmodule"
 
 #: ../ui/prefs.glade.h:38
-#, fuzzy
 msgid "Modules Misc"
-msgstr "Modulliste"
+msgstr "Verschiedene Module"
 
 #: ../ui/prefs.glade.h:39
 #, fuzzy
 msgid "Modules Parallel"
-msgstr "Parallelansicht ein/aus"
+msgstr "Parallele Module"
 
 #: ../ui/prefs.glade.h:45
-#, fuzzy
 msgid "Personal Notes"
 msgstr "Persönliche Kommentare"
 
 #: ../ui/prefs.glade.h:47
-#, fuzzy
 msgid "Select A Directory"
-msgstr "SWORD-Verzeichnis"
+msgstr "Verzeichnis wählen"
 
 #: ../ui/prefs.glade.h:48
 msgid "Show Daily Devotion at start up"
@@ -2199,7 +2120,7 @@ msgstr "Vorgabewörterbuch verwenden"
 
 #: ../ui/prefs.glade.h:53
 msgid "Use tabbed browsing"
-msgstr ""
+msgstr "Benutze Reiter zur Anzeige"
 
 #: ../ui/prefs.glade.h:54
 msgid "Verse number font size"
@@ -2211,143 +2132,127 @@ msgstr "Versnummern"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr ""
+msgstr "<b>Quellen hinzufügen oder entfernen</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr ""
+msgstr "<b>Installationsziel</b>"
 
 #: ../ui/module-manager.glade.h:3
-#, fuzzy
 msgid "<b>Install Source</b>"
-msgstr "Module"
+msgstr "<b>Installationsquelle</b>"
 
 #: ../ui/module-manager.glade.h:4
-#, fuzzy
 msgid "<b>Module Manager</b>"
-msgstr "Module: "
+msgstr "<b>Moduleverwaltung</b>"
 
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
-#, fuzzy
 msgid "<b>Sword</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
+msgstr "<b>WARNUNG:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt "
+"werden könnten, sollten sie dies mit Vorsicht benutzen."
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
+"<b>Warnung:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt werden "
+"könnten und nicht entdeckt werden wollen, sollten sie KEINE entfernte "
+"Installation durchführen!"
 
 #: ../ui/module-manager.glade.h:9
-#, fuzzy
 msgid "Current Remote Sources"
-msgstr "Aktuelle Schriftart: "
+msgstr "Aktuelle entferne Quellen"
 
 #: ../ui/module-manager.glade.h:10
-#, fuzzy
 msgid "Current local sources"
-msgstr "Aktuelle Ergebnisse"
+msgstr "Aktuelle lokale Quellen"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Home dir"
-msgstr ""
+msgstr "Heimverzeichnis"
 
 #: ../ui/module-manager.glade.h:12
-#, fuzzy
 msgid "Install"
-msgstr "Kursiv"
+msgstr "Installieren"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Local"
-msgstr ""
+msgstr "Lokal"
 
 #: ../ui/module-manager.glade.h:14
-#, fuzzy
 msgid "Local Install Folder"
-msgstr "Module"
+msgstr "Lokales Installationsverzeichnis"
 
 #: ../ui/module-manager.glade.h:16
-#, fuzzy
 msgid "Remote"
-msgstr "_Notiz"
+msgstr "Entfernt"
 
 #: ../ui/module-manager.glade.h:17
-#, fuzzy
 msgid "Sword sys dir"
-msgstr "Sword Version"
+msgstr "Sword Systemverzeichnis"
 
 #: ../ui/search-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Found</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Gefunden</b>"
 
 #: ../ui/search-dialog.glade.h:2
-#, fuzzy
 msgid "<b>List Name</b>"
-msgstr "Name der Liste"
+msgstr "<b>Name der Liste</b>"
 
 #: ../ui/search-dialog.glade.h:3
-#, fuzzy
 msgid "<b>Module Lists</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Modulliste</b>"
 
 #: ../ui/search-dialog.glade.h:4
-#, fuzzy
 msgid "<b>Modules</b>"
-msgstr "<Modul>"
+msgstr "<b>Module</b>"
 
 #: ../ui/search-dialog.glade.h:5
-#, fuzzy
 msgid "<b>Options</b>"
-msgstr "Optionen"
+msgstr "<b>Optionen</b>"
 
 #: ../ui/search-dialog.glade.h:6
-#, fuzzy
 msgid "<b>Preview</b>"
-msgstr "Parallelansicht"
+msgstr "<b>Vorschau</b>"
 
 #: ../ui/search-dialog.glade.h:7
-#, fuzzy
 msgid "<b>Range Name</b>"
-msgstr "Bereichsname"
+msgstr "<b>Bereichsname</b>"
 
 #: ../ui/search-dialog.glade.h:8
-#, fuzzy
 msgid "<b>Range Text</b>"
-msgstr "Bereichstext"
+msgstr "<b>Bereichstext</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Ranges</b>"
-msgstr ""
+msgstr "<b>Bereiche</b>"
 
 #: ../ui/search-dialog.glade.h:10
 #, fuzzy
 msgid "<b>Scope</b>"
-msgstr "<b>Bearbeiten</b>"
+msgstr "<b>Rahmen</b>"
 
 #: ../ui/search-dialog.glade.h:11
-#, fuzzy
 msgid "<b>Search Results</b>"
-msgstr "Suchergebnisse"
+msgstr "<b>Suchergebnisse</b>"
 
 #: ../ui/search-dialog.glade.h:12
-#, fuzzy
 msgid "<b>Search Type</b>"
-msgstr "Suchtyp"
+msgstr "<b>Suchtyp</b>"
 
 #: ../ui/search-dialog.glade.h:13
-#, fuzzy
 msgid "Add Modules"
-msgstr "Module"
+msgstr "Module hinzufügen"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Attributes"
-msgstr ""
+msgstr "Attribute"
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Clear all modules from the list"
@@ -2422,18 +2327,16 @@ msgid "Include Strong's Numbers"
 msgstr "Strongs Nummer einschließen"
 
 #: ../ui/search-dialog.glade.h:36
-#, fuzzy
 msgid "Module Selection"
-msgstr "Auswahl nachschlagen"
+msgstr "Modulauswahl"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "Module list"
 msgstr "Modulliste"
 
 #: ../ui/search-dialog.glade.h:39
-#, fuzzy
 msgid "Open a dialog to select modules to add to the list"
-msgstr "Ausgewähltes Modul aus der Liste entfernen"
+msgstr "Module in einem Dialog zur Liste hinzufügen"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Remove the selected module from the list"
@@ -2456,7 +2359,6 @@ msgid "Save the module list"
 msgstr "Modulliste speichern"
 
 #: ../ui/search-dialog.glade.h:46
-#, fuzzy
 msgid "Search  Criteria"
 msgstr "Suchkriterien"
 
@@ -2497,108 +2399,97 @@ msgid "e.g. Matt-John;Rev4"
 msgstr "zB. Mt-Joh;Offb4"
 
 #: ../ui/search-dialog.glade.h:57
-#, fuzzy
 msgid "for "
-msgstr " für "
+msgstr "für "
 
 #: ../ui/editor_note.xml.h:1
-#, fuzzy
 msgid "Delete the current note"
-msgstr "Datei speichern"
+msgstr "Notiz löschen"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:2
-#, fuzzy
 msgid "E_xit"
-msgstr "Bearbeiten"
+msgstr "Beenden"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:3
-#, fuzzy
 msgid "Exit"
-msgstr "Bearbeiten"
+msgstr "Beenden"
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:4
 msgid "Exit the program"
-msgstr ""
+msgstr "Das Program beenden"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:5
-#, fuzzy
 msgid "For_mat"
-msgstr "Vorformatiert"
+msgstr "Vorfor_matiert"
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:6
+#, fuzzy
 msgid "HTML Format switch"
-msgstr ""
+msgstr "HTML Format wechseln"
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:7
 msgid "HTML mode"
-msgstr ""
+msgstr "HTML Modus"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr ""
+msgstr "Druckvorschau der Notiz"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:12
-#, fuzzy
 msgid "Print Pre_view"
-msgstr "Druckvorschau"
+msgstr "Druck_vorschau"
 
 #: ../ui/editor_note.xml.h:10
-#, fuzzy
 msgid "Print this note"
-msgstr "In dieser Notiz suchen"
+msgstr "Dieser Notiz drucken"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save using the PersistStream interface"
-msgstr ""
+msgstr "Mit Hilfe von PersistStream speichern"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr ""
+msgstr "Persönlichen Kommentar löschen"
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:18
-#, fuzzy
 msgid "_Print..."
-msgstr "Drucken"
+msgstr "Drucken..."
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr ""
+msgstr "_Speichern (Persönlicher Kommentar)"
 
 #: ../ui/editor_studypad.xml.h:1
-#, fuzzy
 msgid "Create a new document"
-msgstr "Neue Modulliste erstellen"
+msgstr "Neues Dokument erstellen"
 
 #: ../ui/editor_studypad.xml.h:8
-#, fuzzy
 msgid "New Document"
-msgstr "Nächster Kommentar"
+msgstr "Neues Dokument"
 
 #: ../ui/editor_studypad.xml.h:9
-#, fuzzy
 msgid "Open (PersistFile)"
-msgstr "Datei öffnen"
+msgstr "Öffnen (PersistFile)"
 
 #: ../ui/editor_studypad.xml.h:10
 msgid "Open using the PersistFile interface"
-msgstr ""
+msgstr "Mit Hilfe von PersistFile öffnen"
 
 #: ../ui/editor_studypad.xml.h:11
 msgid "Preview the document to be printed"
-msgstr ""
+msgstr "Druckvorschau des Dokuments"
 
 #: ../ui/editor_studypad.xml.h:13
-#, fuzzy
 msgid "Print this document"
-msgstr "Druck fehlgeschlagen"
+msgstr "Dokument drucken"
 
 #: ../ui/editor_studypad.xml.h:15
 msgid "Save (PersistFile)"
-msgstr ""
+msgstr "Speicher (PersistFile)"
 
 #: ../ui/editor_studypad.xml.h:16
 msgid "Save using the PersistFile interface"
-msgstr ""
+msgstr "Mit Hilfe von PersistFile speichern"
 
 #~ msgid "Note for"
 #~ msgstr "Notiz zu"
