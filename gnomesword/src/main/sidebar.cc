@@ -671,8 +671,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					      (widgets.
 					       notebook_comm_book), 1);
 		backend->set_module(mod);
-		backend->set_treekey(atoi((key) ? key : (gchar *) "0"));
-		main_display_book(mod, (key) ? key : (gchar *) "0");
+		backend->set_treekey(key ? atoi(key) : 0);
+		main_display_book(mod, (key ? key : (gchar *) "0"));
 		path = gtk_tree_model_get_path(model, &selected);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
@@ -685,16 +685,16 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		}
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
-		    && backend->treekey_has_children(atoi(key))) {
+		    && backend->treekey_has_children(key ? atoi(key) : 0)) {
 			add_children_to_tree(model,
-					     selected, mod, atol(key));
+					     selected, mod,
+					     (key ? atol(key) : 0));
 		}
 		gtk_tree_view_expand_row(GTK_TREE_VIEW
 					 (sidebar.module_list), path,
 					 FALSE);
 		gtk_tree_path_free(path);
-		//unsigned long x = atoi((key) ? key: "0");
-		main_setup_navbar_book(mod, atoi((key) ? key: "0"));
+		main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 		break;
 	}
 	if (cap)
