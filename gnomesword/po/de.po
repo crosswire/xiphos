@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-06 21:29+0100\n"
+"POT-Creation-Date: 2007-02-06 21:35+0100\n"
 "PO-Revision-Date: 2007-02-06 21:49+0100\n"
 "Last-Translator: Christoph Brill <egore911@egore911.de>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -2220,6 +2220,10 @@ msgstr "Mit Hilfe von PersistFile speichern"
 
 #~ msgid "Cell"
 #~ msgstr "Zelle"
+
+#, fuzzy
+#~ msgid "Paste Quotation"
+#~ msgstr "Anführungszeichen einfügen"
 
 #~ msgid "Insert Link"
 #~ msgstr "Verweis einfügen"
