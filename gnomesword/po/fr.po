@@ -24,12 +24,12 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2 2.2.1\n"
+"Project-Id-Version: GnomeSword 2 2.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-06 21:47+0100\n"
-"PO-Revision-Date: 2007-02-06 21:47+0100\n"
-"Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2006-06-19 20:15+0000\n"
+"PO-Revision-Date: 2007-02-08 22:09+0100\n"
+"Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannick.marchegay@lokanova.com>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -317,7 +317,7 @@ msgstr "Bloc-notes"
 
 #: ../src/gnome2/about_gnomesword.c:116
 msgid "Copyright 2000-2006 The GnomeSword Development Team"
-msgstr "Copyright 2000-2006 L'équipe de développement GnomeSword"
+msgstr "Copyright 2000-2007 L'équipe de développement GnomeSword"
 
 #: ../src/gnome2/about_gnomesword.c:119
 msgid ""
@@ -338,7 +338,7 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Le SWORD Project s'est donné pour objectif de créer un ensemble extensible "
+"Le SWORD Project s'est donné pour objectif de créer un ensemble évolutif "
 "de logiciels destinés à l'étude de la Bible. L'ossature de base SWORD-permet "
 "de naviguer aisément parmi les textes bibliques, commentaires, lexiques, "
 "dictionnaires.. De nombreux logiciels finaux sont développés en utilisant "
@@ -953,7 +953,7 @@ msgstr "Aperçu"
 
 #: ../src/gnome2/main_menu.c:818
 msgid "Show or hide Preview window"
-msgstr "Affiche/cache le volet des textes bibliques"
+msgstr "Affiche/cache la fenêtre Aperçu"
 
 #: ../src/gnome2/main_menu.c:823
 msgid "_Commentary"
