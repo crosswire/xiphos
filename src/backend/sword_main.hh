@@ -51,6 +51,8 @@ class BackEnd {
 	VerseKey search_scope_bounds; //----- sets lower and upper search bounds
 	SWKey *current_scope;
 	SWModule *search_mod;
+	//SWFilter *thml2osis;
+	SWFilter *osis2html;
 	typedef map < SWBuf, SWBuf > ModLanguageMap;
 	ModLanguageMap languageMap;
 	

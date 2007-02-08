@@ -466,6 +466,7 @@ static gboolean on_configure_event(GtkWidget * widget,
 	sprintf(layout, "%d", settings.app_y);
 	xml_set_value("GnomeSword", "layout", "app_y", layout);
 	xml_save_settings_doc(settings.fnconfigure);
+	
 	return FALSE;
 }
 
@@ -552,7 +553,6 @@ gboolean on_vbox1_key_release_event(GtkWidget * widget,
 	}
   return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -699,7 +699,7 @@ void create_mainwindow(void)
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
 	gtk_paned_pack1(GTK_PANED(widgets.vpaned),
-					widgets.vbox_text, FALSE, TRUE);
+					widgets.vbox_text, TRUE, TRUE);
 
 	/*
 	 * bible/parallel notebook
@@ -744,7 +744,7 @@ void create_mainwindow(void)
 	widgets.vbox_previewer = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_previewer);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.vbox_previewer), 1);
-	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, FALSE, TRUE);
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.vbox_previewer, TRUE, TRUE);
 	
 #ifdef USE_GTKMOZEMBED 
 	frame = gtk_frame_new(NULL);

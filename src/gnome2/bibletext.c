@@ -545,67 +545,14 @@ GtkWidget *gui_create_bible_pane(void)
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
 
-#ifdef USE_GTKMOZEMBED	
-	widgets.eventbox1 = gtk_event_box_new ();
-	gtk_widget_show (widgets.eventbox1);
-	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.eventbox1);
-	widgets.html_text = GTK_WIDGET(gecko_html_new(TEXT_TYPE)); //embed_new(TEXT_TYPE);
+	widgets.html_text = GTK_WIDGET(gecko_html_new(TEXT_TYPE)); 
 	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(widgets.eventbox1),
-			 widgets.html_text);
-	
-	g_signal_connect ((gpointer) widgets.eventbox1, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
-	g_signal_connect ((gpointer) widgets.eventbox1, "key_press_event",
-		    G_CALLBACK (on_key_press_event),
-		    NULL);
+	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.html_text);
 	g_signal_connect((gpointer)widgets.html_text,
 		      "popupmenu_requested",
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
-#else		
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(notebook_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	adjustment = gtk_scrolled_window_get_vadjustment
-                                            (GTK_SCROLLED_WINDOW(scrolledwindow));
-	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
-				G_CALLBACK(adj_changed),
-				NULL);
-	
-	widgets.html_text = gtk_html_new();
-	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_text);
-			  
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
-				G_CALLBACK(gui_link_clicked),
-				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
-				G_CALLBACK(gui_url),
-				GINT_TO_POINTER(TEXT_TYPE));		    
-	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
-				G_CALLBACK(on_text_button_release_event),
-				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "button_press_event",
-				G_CALLBACK(on_text_button_press_event),
-				NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
-		    		G_CALLBACK (on_enter_notify_event),
-		       		NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
-		    		G_CALLBACK (on_key_press_event),
-		    		NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
-		    		G_CALLBACK (on_key_release_event),
-		    		NULL);				   
-#endif
+
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),

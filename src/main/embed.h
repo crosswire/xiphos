@@ -35,7 +35,7 @@ void embed_print(gboolean preview, GtkMozEmbed *embed);
 void embed_copy_selection(GtkMozEmbed *mozilla_embed);
 void embed_go_to_anchor(GtkMozEmbed *mozilla_embed, const char *anchor);
 void embed_navigate_to_anchor (GtkMozEmbed *mozilla_embed, const char *anchor);
-GtkWidget *embed_new(gint window);
+//GtkWidget *embed_new(gint window);
 
 #endif /* USE_GTKMOZEMBED */
 

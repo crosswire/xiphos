@@ -91,7 +91,6 @@ extern gboolean shift_key_presed;
 gboolean style_display = TRUE;
 char *sword_locale = NULL;
 
-
 /******************************************************************************
  * Name
  *   main_book_heading

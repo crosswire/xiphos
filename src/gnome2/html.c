@@ -349,8 +349,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 
 	html = GTK_HTML(html_widget);
 	if (word)
-		gtk_html_select_word(html);	
-#ifdef USE_GTKHTML38		
+		gtk_html_select_word(html);
 	key = gtk_html_get_selection_html (html, &len);
 	if ((key == NULL) || (*key == '\0'))
 	{
@@ -378,15 +377,6 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	buf2= g_strdup(key);
 	g_free(buf);
 	return buf2; /* must be freed by calling function */
-#else
-	if (html_engine_is_selection_active(html->engine)) {
-		key = html_engine_get_selection_string(html->engine);
-		key = g_strdelimit(key, ".,\"<>;:?", ' ');
-		key = g_strstrip(key);
-		return g_strdup(key);	/* must be freed by calling function */
-	}
-#endif
-	return key;
 }
 
 

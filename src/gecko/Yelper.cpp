@@ -52,6 +52,7 @@
 #include <nsServiceManagerUtils.h>
 #include <nsIPresShell.h> 
 #include <nsIDOMNamedNodeMap.h>
+//#include <nsIFrame.h>
 
 #ifndef HAVE_GECKO_1_9
 #include <nsIDocShell.h>
@@ -61,12 +62,11 @@
 #include <nsITypeAheadFind.h>
 #endif /* !HAVE_GECKO_1_9 */
 
-//#include "yelp-debug.h"
 #include "gecko/gecko-services.h"
 
 #include "gecko/Yelper.h"
 
-//g_string_append
+#include "gui/widgets.h"
 
 #include "main/previewer.h"
 #include "main/sword.h"
@@ -389,18 +389,27 @@ Yelper::ProcessMouseDblClickEvent (void* aEvent)
 {
 	nsAutoString aType;
 	nsresult rv;
+	PRUnichar **selText;
 	g_return_val_if_fail(aEvent != NULL,0);
 	nsCOMPtr<nsISelection> oSelection;
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 		
-	domEvent->GetType(aType);
+/*	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	g_warning("domEvent->GetType: %s",mybuf);
-	rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
+	g_warning("domEvent->GetType: %s",mybuf);*/
+	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
+	DoCommand("cmd_copy");
+	//gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	//gtk_editable_delete_selection((GtkEditable *)widgets.entry_dict);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);
+/*	rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
+	rv = oSelection->ToString(selText);
+	g_message("selText: %s", selText);*/
 	return 1;
 }
 
@@ -430,7 +439,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	if(button == 1)	       
 	        shift_key_presed = TRUE; 
 	/* Mozilla uses 2 as its right mouse button code */
-	if (button != 2) return 1;
+	if (button != 2) return 0;
 	
 
 #ifdef DEBUG
@@ -458,6 +467,28 @@ gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	shift_key_presed = FALSE;
 	return 1;	
+}
+
+gint Yelper::redraw(GtkMozEmbed *embed)
+{
+/*	nsresult rv = NS_ERROR_FAILURE;
+	nsCOMPtr<nsIDocShell> docShell (do_GetInterface (mWebBrowser, &rv));
+	NS_ENSURE_SUCCESS (rv, rv);
+	nsCOMPtr<nsIPresShell> presShell;
+	rv = docShell->GetPresShell(getter_AddRefs(presShell));
+        if (NS_SUCCEEDED(rv) && presShell) {
+		nsIFrame *rootFrame = presShell->GetRootFrame();
+ 
+		if (rootFrame) {
+			nsRect r(nsPoint(0, 0), rootFrame->GetSize());
+			rootFrame->Invalidate(r, 1);
+			return 1;
+	        }
+	}
+	return 0;
+	*/
+	
+	//mDOMWindow->Redraw();	
 }
 
 #ifdef USE_GTKUPRINT
