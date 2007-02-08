@@ -41,3 +41,5 @@ libgecko_a_SOURCES =  \
 	gecko-services.h   	gecko-services.cpp 	\
 	gecko-utils.cpp		gecko-utils.h			
 	
+EXTRA_DIST = \
+	README

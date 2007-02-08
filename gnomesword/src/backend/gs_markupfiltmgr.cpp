@@ -223,7 +223,7 @@ void GS_MarkupFilterMgr::CreateFilters(char markup) {
                         break;
                 case FMT_HTMLHREF:
                         fromplain = new PLAINHTML();
-                        fromthml = new ThMLHTMLHREF();
+                        fromthml = new ThMLOSIS();
                         fromgbf = new GBFHTMLHREF();
                         fromosis = new GS_OSISHTMLHREF();
                         break;

@@ -26,6 +26,7 @@
 #include <swmodule.h>
 #include <localemgr.h>
 #include <swversion.h>
+#include <thmlosis.h>
 
 #ifdef USE_GTKMOZEMBED 
 #include "backend/gs_markupfiltmgr.h"
@@ -44,6 +45,7 @@
 #include <dirent.h>
 
 #include "backend/sword_main.hh"
+#include "backend/gs_osishtmlhref.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -61,22 +63,12 @@ char *OLD_CODESET;
 static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
-BackEnd::BackEnd() {
-
-#ifdef USE_GTKMOZEMBED 		
+BackEnd::BackEnd() {	
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 
-#else	
-//#ifdef USE_SWORD_SVN
-	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-/*#else
-	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-#endif*/
-#endif
-
+	//thml2osis = new  ThMLOSIS();
+	osis2html = new  GS_OSISHTMLHREF();
 	
 	display_mod = NULL;	
 	tree_key = NULL;	
@@ -121,6 +113,8 @@ BackEnd::~BackEnd() {
 		delete verselistDisplay;
 	if(viewerDisplay)
 		delete viewerDisplay;
+        if (osis2html)
+                delete (osis2html);
 }
 
 
@@ -132,23 +126,27 @@ void BackEnd::init_SWORD(int gsType) {
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-#ifdef USE_GTKMOZEMBED
+				const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				if(sourcetype && !strcmp(sourcetype,"ThML" ))
+					display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(textDisplay);
-#else
-				const char *direction = display_mod->getConfigEntry("Direction");
-				if(direction && !strcmp(direction,"RtoL" ))
-					display_mod->setDisplay(RTOLDisplay);
-				else
-					display_mod->setDisplay(textDisplay);
-#endif
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
+				const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				if(sourcetype && !strcmp(sourcetype,"ThML" ))
+					display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(commDisplay);
 			}
 			if (!strcmp(display_mod->Type(), DICT_MODS)) {
+				const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				if(sourcetype && !strcmp(sourcetype,"ThML" ))
+					display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(dictDisplay);
 			}
 			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
+				const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				if(sourcetype && !strcmp(sourcetype,"ThML" ))
+					display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(bookDisplay);
 			}			
 		}
@@ -156,16 +154,8 @@ void BackEnd::init_SWORD(int gsType) {
 	} else if(gsType == 1) {
 		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
-			if (!strcmp(display_mod->Type(), TEXT_MODS)) {				
-#ifdef USE_GTKMOZEMBED
+			if (!strcmp(display_mod->Type(), TEXT_MODS)) {	
 				display_mod->setDisplay(chapDisplay);
-#else
-				const char *direction = display_mod->getConfigEntry("Direction");
-				if(direction && !strcmp(direction,"RtoL" ))
-					display_mod->setDisplay(dialogRTOLDisplay);
-				else
-					display_mod->setDisplay(chapDisplay);
-#endif
 			} else {
 				display_mod->setDisplay(entryDisplay);
 			}

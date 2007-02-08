@@ -48,6 +48,8 @@ extern "C" {
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 
+#include "gecko/gecko-html.h"
+
 #include "backend/sword_main.hh"
 
 #define SEARCHING N_("Searching the ")
@@ -913,8 +915,9 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	}
 	text_str = backendSearch->get_render_text(module,key);
 	
-	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
-				  text_str, strlen(text_str));
+	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
+	gecko_html_write(GECKO_HTML(search1.preview_html),text_str,strlen(text_str));
+	gecko_html_close(GECKO_HTML(search1.preview_html));
 
 #ifdef DEBUG
 	g_message("main_finds_verselist_selection_changed: %s %s", module, key);

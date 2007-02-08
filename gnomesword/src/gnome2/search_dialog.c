@@ -39,6 +39,8 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
+#include "gecko/gecko-html.h"
+
 #include "main/search_dialog.h"
 #include "main/configs.h"
 #include "main/lists.h"
@@ -1767,34 +1769,11 @@ scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 /* add html widgets */
 static
 void _add_html_widget(GtkWidget * vbox)
-{
-
-	GtkWidget *scrolledwindow;
-/*	
-#ifdef USE_GTKMOZEMBED 
-	
-#else	
-*/ 
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE,
-			   TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
-					    (scrolledwindow),
-					    GTK_SHADOW_IN);
-
-	search1.preview_html = gtk_html_new();
+{	
+	search1.preview_html = GTK_WIDGET(gecko_html_new(12));
 	gtk_widget_show(search1.preview_html);
-	gtk_html_load_empty(GTK_HTML(search1.preview_html));
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  search1.preview_html);
-//#endif                         
-
-
+	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE,
+			   TRUE, 0);
 }
 
 
