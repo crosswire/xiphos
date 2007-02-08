@@ -558,7 +558,7 @@ nsIDocShell *get_primary_docshell (GtkMozEmbed *b)
 
 	return ds;
 }
-
+/*
 GtkWidget *embed_new(gint window)
 {
 	//GtkMozEmbed *new_browser;
@@ -566,7 +566,7 @@ GtkWidget *embed_new(gint window)
 	html = gecko_html_new(window);
 	
 	//new_browser = GTK_MOZ_EMBED(gtk_moz_embed_new());
-	/*
+	
 	g_signal_connect(GTK_OBJECT(new_browser), "dom_key_down",
 				   G_CALLBACK(embed_dom_key_down),
 				   GINT_TO_POINTER(window));
@@ -591,8 +591,8 @@ GtkWidget *embed_new(gint window)
 	g_signal_connect(GTK_OBJECT(new_browser), "link_message",
 				   G_CALLBACK(embed_link_message_cb),
 				   GINT_TO_POINTER(window));
-	*/			   
+				   
 	return GTK_WIDGET(html);
 }
-
+*/
 #endif

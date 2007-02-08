@@ -193,7 +193,7 @@ static void html_realize(GtkWidget * widget)
 	rv = html->priv->yelper->Init();
 
 	if (NS_FAILED(rv)) {
-		g_warning("GSer initialization failed for %p\n",
+		g_warning("gecko initialization failed for %p\n",
 			  (void *) html);
 	}
 }
@@ -274,7 +274,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 	moz_embed_class->title = html_title;
 	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
 	moz_embed_class->dom_mouse_down = html_dom_mouse_down;
-	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
+	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;size_to
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
 	moz_embed_class->link_message = html_link_message;
