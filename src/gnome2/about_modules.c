@@ -360,7 +360,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 			text = widgets.html_book;
 		}
 
-		about_module_display(str, bufabout);	/* send about info to display function */
+		about_module_display(str, bufabout);	/* send about info to display function filter from rtf to html*/
 		gui_begin_html(text, FALSE);
 		gui_display_html(text, "<html><body>",
 				 strlen("<html><body>"));

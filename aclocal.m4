@@ -114,7 +114,8 @@ AC_SUBST($1)dnl
 #-----------------
 glib_DEFUN([GLIB_WITH_NLS],
   dnl NLS is obligatory
-  [USE_NLS=yes
+  [AC_REQUIRE([AC_CANONICAL_HOST])dnl
+    USE_NLS=yes
     AC_SUBST(USE_NLS)
 
     gt_cv_have_gettext=no
@@ -389,8 +390,10 @@ glib_DEFUN([GLIB_DEFINE_LOCALEDIR],
 [glib_REQUIRE([GLIB_GNU_GETTEXT])dnl
 glib_save_prefix="$prefix"
 glib_save_exec_prefix="$exec_prefix"
+glib_save_datarootdir="$datarootdir"
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix=$prefix
+datarootdir=`eval echo "${datarootdir}"`
 if test "x$CATOBJEXT" = "x.mo" ; then
   localedir=`eval echo "${libdir}/locale"`
 else
@@ -398,6 +401,7 @@ else
 fi
 prefix="$glib_save_prefix"
 exec_prefix="$glib_save_exec_prefix"
+datarootdir="$glib_save_datarootdir"
 AC_DEFINE_UNQUOTED($1, "$localedir",
   [Define the location where the catalogs will be installed])
 ])

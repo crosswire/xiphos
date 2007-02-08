@@ -60,7 +60,7 @@ public:
 	gint ProcessMouseEvent (void *aEvent);
         gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
         gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);
-
+        gint redraw(GtkMozEmbed *embed);
 #ifdef USE_GTKUPRINT
 	nsresult Print (GeckoPrintInfo *print_info, PRBool preview,
 			gint *prev_pages);
