@@ -47,7 +47,7 @@ GETTEXT_PACKAGE=gnomesword
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 dnl Languages which your application supports
-	ALL_LINGUAS="de de_DE en_GB fr ru uk"
+	ALL_LINGUAS=""
 
 AM_GLIB_GNU_GETTEXT
 
