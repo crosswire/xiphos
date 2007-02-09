@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-06-19 20:15+0000\n"
-"PO-Revision-Date: 2007-02-08 22:09+0100\n"
+"PO-Revision-Date: 2007-02-09 18:46+0100\n"
 "Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannick.marchegay@lokanova.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../src/gnome2/about_modules.c:227
 msgid "About Sword Module"
-msgstr "À propos des Modules de Sword"
+msgstr "À propos de ce module de Sword"
 
 #: ../src/gnome2/about_sword.c:94
 msgid ""
@@ -720,7 +720,7 @@ msgstr "GnomeSword :"
 
 #: ../src/gnome2/dialog.c:856
 msgid "Close _without Saving"
-msgstr "Ferme la fenêtre de sortie"
+msgstr "Ferme sans enregistrer"
 
 #: ../src/gnome2/dictlex.c:1032 ../src/gnome2/gbs.c:843
 msgid "Show Tabs"
@@ -815,7 +815,7 @@ msgstr "Police par défaut dans ce module"
 #: ../src/gnome2/gbs_dialog.c:130
 #, c-format
 msgid "Show %s in main window"
-msgstr "Afficher %s dans la fenêtre principale"
+msgstr "Affiche %s dans la fenêtre principale"
 
 #: ../src/gnome2/gbs_dialog.c:148
 #, c-format
@@ -953,7 +953,7 @@ msgstr "Aperçu"
 
 #: ../src/gnome2/main_menu.c:818
 msgid "Show or hide Preview window"
-msgstr "Affiche/cache la fenêtre Aperçu"
+msgstr "Affiche/cache le volet aperçu"
 
 #: ../src/gnome2/main_menu.c:823
 msgid "_Commentary"
@@ -1485,7 +1485,7 @@ msgstr "%s non trouvé"
 #. *****   end of file   *****
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
-msgstr "Ajoute un signet"
+msgstr "Ajouter un signet"
 
 #: ../ui/bookmarks.glade.h:2
 msgid "Create new folder"
