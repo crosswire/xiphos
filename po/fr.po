@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-06-19 20:15+0000\n"
-"PO-Revision-Date: 2007-02-09 18:46+0100\n"
+"PO-Revision-Date: 2007-02-09 23:20+0100\n"
 "Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannick.marchegay@lokanova.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -273,7 +273,7 @@ msgstr "H_istorique/_Effacer"
 
 #: ../src/editor/html-editor.c:153
 msgid "Are you sure you want to delete the note for"
-msgstr "Êtes-vous certain de supprimer la note de "
+msgstr "Êtes-vous certain de supprimer le commentaire de"
 
 #: ../src/editor/html-editor.c:155
 msgid "It will be lost permanently!"
@@ -296,7 +296,7 @@ msgstr "Fichier"
 
 #: ../src/editor/html-editor.c:535
 msgid "Save the changes to document"
-msgstr "Enregistrer les changements apportés au document"
+msgstr "Voulez-vous enregistrer les modifications apportées au document"
 
 #: ../src/editor/html-editor.c:536
 msgid "before closing?"
@@ -304,8 +304,7 @@ msgstr "avant de fermer?"
 
 #: ../src/editor/html-editor.c:544
 msgid "If you don't save, changes will be permanently lost."
-msgstr ""
-"Si vous n'enregistrez pas, les changements seront définitivement perdus"
+msgstr "Si vous n'enregistrez pas, les modifications seront définitivement perdues"
 
 #: ../src/editor/html-editor.c:1269
 msgid "Note Editor"
@@ -328,7 +327,7 @@ msgstr ""
 
 #: ../src/gnome2/about_modules.c:227
 msgid "About Sword Module"
-msgstr "À propos de ce module de Sword"
+msgstr "À propos de ce module Sword"
 
 #: ../src/gnome2/about_sword.c:94
 msgid ""
