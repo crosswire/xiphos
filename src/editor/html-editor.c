@@ -152,7 +152,7 @@ delete_note_cb(GtkWidget * widget, gpointer data)
 		    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
 		    _("Are you sure you want to delete the note for") , e->key);
 		info->label_top = buf;
-		info->label2 =  N_("It will be lost permanently!");
+		info->label2 =  _("It will be lost permanently!");
 		info->yes = TRUE;
 		info->cancel = TRUE;
 
@@ -531,17 +531,16 @@ gint ask_about_saving(EDITOR * e)
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
 		else
-			buf = N_("File");
-		buf1 = N_("Save the changes to document");
-		buf2 = N_("before closing?");
+			buf = _("File");
+		buf1 = _("Save the changes to document");
+		buf2 = _("before closing?");
 		buf3 =
 		    g_strdup_printf
 		    ("<span weight=\"bold\" size=\"larger\">%s %s %s</span>",
 		     buf1, buf, buf2);
 		info->label_top = buf3;
 		info->label2 =
-		    N_
-		    ("If you don't save, changes will be permanently lost.");
+		    _("If you don't save, changes will be permanently lost.");
 		info->save = TRUE;
 		info->cancel = TRUE;
 		info->no_save = TRUE;
