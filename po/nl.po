@@ -13,7 +13,7 @@ msgstr ""
 "Last-Translator: Gertjan Francke <gwfrancke@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.h:1
@@ -906,7 +906,7 @@ msgstr "Huidige sessie opslaan naar een bestand"
 #: ../src/gnome2/main_menu.c:752
 #, fuzzy
 msgid "_Copy"
-msgstr "Kopieëren"
+msgstr "KopieÃ«ren"
 
 #: ../src/gnome2/main_menu.c:753
 msgid "Copy highlighted text from main window"
@@ -1257,7 +1257,7 @@ msgstr "Parallel"
 
 #: ../src/gnome2/parallel_view.c:261 ../src/gnome2/parallel_view.c:333
 msgid "Copy"
-msgstr "Kopieëren"
+msgstr "KopieÃ«ren"
 
 #: ../src/gnome2/parallel_view.c:270 ../src/gnome2/parallel_view.c:342
 msgid "Detach/Attach"
@@ -2531,7 +2531,7 @@ msgstr "Opslaan m.b.v. de PersistFile interface"
 #~ "later by using the Preferences dialog."
 #~ msgstr ""
 #~ "Omdat dit de eerste keer dat u GnomeSword gebruikt zal deze assistent u "
-#~ "door de initiële configuratie leiden met behulp van eenvoudige vragen.Als "
+#~ "door de initiÃ«le configuratie leiden met behulp van eenvoudige vragen.Als "
 #~ "u klaar bent, kunt u de configuratie altijd wijzigen met het venster "
 #~ "Voorkeuren."
 
