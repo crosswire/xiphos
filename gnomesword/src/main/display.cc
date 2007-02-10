@@ -49,7 +49,6 @@ extern "C" {
 #endif /* USE_GTKMOZEMBED */
 
 #include "main/display.hh"
-#include "main/embed.h"
 #include "main/settings.h"
 #include "main/global_ops.hh"
 #include "main/sword.h"

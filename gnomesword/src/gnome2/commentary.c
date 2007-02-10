@@ -51,7 +51,6 @@
 #include "gui/widgets.h"
 
 
-#include "main/embed.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"

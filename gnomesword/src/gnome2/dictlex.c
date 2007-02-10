@@ -44,7 +44,6 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
-#include "main/embed.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"

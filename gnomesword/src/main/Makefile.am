@@ -36,8 +36,6 @@ noinst_LIBRARIES = libmain.a
 libmain_a_SOURCES =  \
     configs.cc configs.h \
     display.cc display.hh \
-    embed.cc embed.h \
-    embed-dialogs.cc embed-dialogs.h \
     global_ops.cc global_ops.hh \
     lists.cc lists.h \
     main.c \

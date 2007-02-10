@@ -41,7 +41,6 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "main/embed-dialogs.h"
 #include "main/navbar.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -1269,7 +1268,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_set_size_request(frame, -1, 400);
 
 #ifdef USE_GTKMOZEMBED		
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+/*	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	vt->html = embed_dialogs_new((DIALOG_DATA*) vt);
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(frame), vt->html);
@@ -1283,7 +1282,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	vt->previewer = embed_dialogs_new((DIALOG_DATA*) vt);
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
-	
+*/	
 #else
 	swVText = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(swVText);
