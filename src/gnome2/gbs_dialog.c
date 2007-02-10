@@ -36,7 +36,6 @@
 #include "gui/html.h"
 #include "gui/widgets.h"
 
-#include "main/embed-dialogs.h"
 #include "main/module_dialogs.h"
 #include "main/sidebar.h"
 #include "main/sword.h"
@@ -377,9 +376,9 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
 	
 	
-	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
+/*	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
 	gtk_container_add(GTK_CONTAINER(frame), dlg->html);
-	gtk_widget_show(dlg->html);
+	gtk_widget_show(dlg->html);*/
 	
 #else
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
