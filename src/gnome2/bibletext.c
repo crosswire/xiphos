@@ -61,7 +61,6 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/global_ops.hh"
-#include "main/embed.h"
 
 
 gboolean shift_key_presed = FALSE;

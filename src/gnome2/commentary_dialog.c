@@ -27,8 +27,6 @@
 #include <gtkhtml/gtkhtml.h>
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
-#include "main/embed.h"
-#include "main/embed-dialogs.h"
 #else
 #include "gui/html.h"
 #endif
@@ -973,9 +971,9 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
 #ifdef USE_GTKMOZEMBED	
-	d->html = embed_dialogs_new((DIALOG_DATA*) d);
+/*	d->html = embed_dialogs_new((DIALOG_DATA*) d);
 	gtk_container_add(GTK_CONTAINER(frame19), d->html);
-	gtk_widget_show(d->html);
+	gtk_widget_show(d->html);*/
 #else
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow38);
@@ -1073,7 +1071,7 @@ static void on_print1_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
 #ifdef USE_GTKMOZEMBED
-	embed_print(TRUE, GTK_MOZ_EMBED(cur_d->html));
+//	embed_print(TRUE, GTK_MOZ_EMBED(cur_d->html));
 #else
 	 gui_html_print(cur_d->html, FALSE);
 #endif

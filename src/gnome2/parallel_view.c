@@ -37,7 +37,6 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
-#include "main/embed.h"
 #include "main/parallel_view.h"
 #include "main/global_ops.hh"
 #include "main/lists.h"

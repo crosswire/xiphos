@@ -285,8 +285,8 @@ AC_LANG_POP([C++])
 
 gecko_cv_gecko_version_int="$(echo "$gecko_cv_gecko_version" | $AWK -F . '{print [$]1 * 1000000 + [$]2 * 1000 + [$]3}')"
 
-if test "$gecko_cv_gecko_version_int" -lt "1007000" -o "$gecko_cv_gecko_version_int" -gt "1009000"; then
-	AC_MSG_ERROR([Gecko version $gecko_cv_gecko_version is not supported!])
+if test "$gecko_cv_gecko_version" -lt "1007000" -o "$gecko_cv_gecko_version_int" -gt 	"1009000"; then
+	AC_MSG_ERROR([Gecko version $gecko_cv_gecko_version_int is not supported!])
 fi
 
 if test "$gecko_cv_gecko_version_int" -ge "1007000"; then
