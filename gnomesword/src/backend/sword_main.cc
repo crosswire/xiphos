@@ -1361,7 +1361,7 @@ void BackEnd::init_language_map(void) {
 	//languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 	//languageMap[SWBuf("ln")] = SWBuf("Lingala");
 	//languageMap[SWBuf("lo")] = SWBuf("Lao");
-	languageMap[SWBuf("lt")] = SWBuf("Lithuanian"); /* done */
+	languageMap[SWBuf("lt")] = SWBuf(_("Lithuanian")); /* done */
 	languageMap[SWBuf("lv")] = SWBuf(_("Latvian")); /* done */
 	//languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 	//languageMap[SWBuf("mh")] = SWBuf("Marshall");
@@ -1439,9 +1439,9 @@ void BackEnd::init_language_map(void) {
 	//languageMap[SWBuf("ur")] = SWBuf("Urdu");
 	//languageMap[SWBuf("uz")] = SWBuf("Uzbek");
 	languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese")); /* done */
-	//languageMap[SWBuf("vo")] = SWBuf("Volapük");
+	languageMap[SWBuf("vo")] = SWBuf("Volapük");/* if commented,  accentued u causes gettext problems */
 /*  */	//languageMap[SWBuf("wo")] = SWBuf("Wolof");
-	languageMap[SWBuf("xh")] = SWBuf("Xhosa"); /* causes gettext problems */
+	languageMap[SWBuf("xh")] = SWBuf(_("Xhosa"));
 	languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian")); /* done */
 	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch")); /* done */
 /*  */	languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French")); /* done */
