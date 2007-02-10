@@ -1,7 +1,7 @@
 # application files
 gnomesword.desktop.in
 # backend source files
-#src/backend/sword_main.cc
+src/backend/sword_main.cc
 # shared source files
 src/main/display.cc
 src/main/lists.cc
