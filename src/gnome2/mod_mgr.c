@@ -478,7 +478,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 
 	if ((!g_ascii_isalnum(info->language[0]))
 	    || (info->language == NULL))
-		info->language = N_("Unknown");
+		info->language = _("Unknown");
 	
 	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
 			 &bytes_written, &error);
@@ -556,12 +556,12 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  */
 
 static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
-				const gchar * language)
+				const gchar *language)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
 	GtkTreeIter child_iter;
-	gchar *buf;
+	const gchar *buf;
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
@@ -569,19 +569,21 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 
 		
 	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = N_("Unknown");
+		language = _("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
-		buf = g_convert(language, 
-				-1, 
-				UTF_8, 
-				OLD_CODESET, 
-				&bytes_read,
-				&bytes_written, 
-				&error);
+//		buf = g_convert(language, 
+//				-1, 
+//				UTF_8, 
+//				OLD_CODESET, 
+//				&bytes_read,
+//				&bytes_written, 
+//				&error);
+		buf = language;
+
 		if(buf == NULL) {
 			g_print ("error: %s\n", error->message);
 			g_error_free (error);
@@ -598,21 +600,23 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 				      g_utf8_casefold(str_data,-1))) {
 		/*if(!strcmp(buf,str_data)) {*/
 			g_free(str_data);
-			g_free(buf);
+//			g_free(buf);
 			return;
 		}
 		g_free(str_data);
-		g_free(buf);
+//		g_free(buf);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-	buf = g_convert(language, 
-			-1, 
-			UTF_8, 
-			OLD_CODESET, 
-			&bytes_read,
-			&bytes_written, 
-			&error);
+//	buf = g_convert(language, 
+//			-1, 
+//			UTF_8, 
+//			OLD_CODESET, 
+//			&bytes_read,
+//			&bytes_written, 
+//			&error);
+	buf = language; 
+
 	gtk_tree_store_set(GTK_TREE_STORE(model), 
 			&child_iter,
 			COLUMN_VISIBLE, 
@@ -620,7 +624,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 			COLUMN_NAME,
 			(gchar *) buf, 
 			-1);
-	g_free(buf);
+//	g_free(buf);
 
 }
 
@@ -1373,8 +1377,7 @@ void on_notebook1_switch_page(GtkNotebook * notebook,
 			g_string_printf(str,
 					"<span weight=\"bold\">%s</span>\n\n%s",
 					_("Please Refresh"),
-					_
-					("Your module list is not up to date!"));
+					_("Your module list is not up to date!"));
 			yes_no_dialog->label_top = str->str;
 			yes_no_dialog->ok = TRUE;
 
@@ -1824,7 +1827,7 @@ void on_button6_clicked(GtkButton * button, gpointer user_data)
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = N_("Bookmark");
+	yes_no_dialog->title = _("Bookmark");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			_("Remove the selected source"),
@@ -1882,10 +1885,10 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
 	dialog->label_top = str->str;
-	dialog->label1 = N_("Caption:");
-	dialog->label2 = N_("Type:");
-	dialog->label3 = N_("URL:");
-	dialog->label4 = N_("Directory:");
+	dialog->label1 = _("Caption:");
+	dialog->label2 = _("Type:");
+	dialog->label3 = _("URL:");
+	dialog->label4 = _("Directory:");
 	dialog->text1 = g_strdup("Crosswire");
 	dialog->text2 = g_strdup("FTP");
 	dialog->text3 = g_strdup("ftp.crosswire.org");
@@ -1975,7 +1978,7 @@ void on_button8_clicked(GtkButton * button, gpointer user_data)
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = N_("Bookmark");
+	yes_no_dialog->title = _("Bookmark");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			_("Remove the selected source"),
