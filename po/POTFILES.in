@@ -9,6 +9,7 @@ src/main/module_dialogs.cc
 src/main/previewer.cc
 src/main/search_dialog.cc
 src/main/search_sidebar.cc
+src/main/settings.c
 src/main/sidebar.cc
 src/main/sword.cc
 src/main/tab_history.c

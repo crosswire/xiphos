@@ -49,7 +49,7 @@
  */
 #define GS_DIR ".gnomesword"
 
-#define GS_NET_PERMISSION	"Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n\nWith your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n1. Configure remote install.\n2. Connect.\n3. Select a Bible text of your language preference.\n4. Click `install'.\nClose the Module Manager when you are done.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword invoke the Module Manager so that you may install a Bible?"
+#define GS_NET_PERMISSION	_("Welcome to GnomeSword.\n\nThere are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n\nWith your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n1. Configure remote install.\n2. Connect.\n3. Select a Bible text of your language preference.\n4. Click `install'.\nClose the Module Manager when you are done.\n\nWarning: If you live in a persecuted country, use with care.\n\nMay GnomeSword invoke the Module Manager so that you may install a Bible?")
 
 /******************************************************************************
  * globals
@@ -95,7 +95,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* Get home dir */
 	if ((settings.homedir = getenv("HOME")) == NULL) {
-		g_error("$HOME is not set!");
+		g_error(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
 	}
@@ -110,10 +110,10 @@ int settings_init(int new_configs, int new_bookmarks)
 		gs_old = g_strdup_printf("%s/.gnomesword-2.0", settings.homedir);
 		if (access(gs_old, F_OK) == 0) {
 			if (rename(gs_old, settings.gSwordDir) == 0)
-				gui_generic_warning("GnomeSword has renamed .gnomesword-2.0 to .gnomesword");
+				gui_generic_warning(_("GnomeSword has renamed .gnomesword-2.0 to .gnomesword"));
 			else {
 				char msg[300];
-				sprintf(msg, "GnomeSword can not rename  .gnomesword-2.0 to .gnomesword:\n%s\n\nGnomeSword cannot continue.",
+				sprintf(msg, _("GnomeSword can not rename  .gnomesword-2.0 to .gnomesword:\n%s\n\nGnomeSword cannot continue."),
 					strerror(errno));
 				gui_generic_warning(msg);
 				/* necessarily giving up. */
@@ -121,7 +121,7 @@ int settings_init(int new_configs, int new_bookmarks)
 			}
 		} else if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
-			sprintf(msg, "GnomeSword can not create  .gnomesword:\n%s\n\nGnomeSword cannot continue.",
+			sprintf(msg, _("GnomeSword can not create  .gnomesword:\n%s\n\nGnomeSword cannot continue."),
 				strerror(errno));
 			gui_generic_warning(msg);
 			/* if we can not create gSwordDir exit */
@@ -141,7 +141,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf("can not create  .sword");
+			printf(_("can not create  .sword"));
 		} 
 	}
 	g_free(sword_dir);
@@ -149,7 +149,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf("can not create  .sword/mods.d");
+			printf(_("can not create  .sword/mods.d"));
 		} 
 	}	
 	g_free(sword_dir);
@@ -157,7 +157,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir,".sword/modules");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf("can not create  .sword/modules");
+			printf(_("can not create  .sword/modules"));
 		} 
 	}
 	g_free(sword_dir);
@@ -187,14 +187,14 @@ int settings_init(int new_configs, int new_bookmarks)
 				main_init_lists();
 				if (settings.havebible == 0) {
 					gui_generic_warning
-					    ("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
+					    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display, GnomeSword cannot proceed, and will now exit."));
 					exit(1);
 				} else
 					gui_generic_warning
-					    ("Bible module installation complete.");
+					    (_("Bible module installation complete."));
 			} else {
 				gui_generic_warning
-				    ("Without any Bible modules to display, GnomeSword cannot proceed, and will now exit.");
+				    (_("Without any Bible modules to display, GnomeSword cannot proceed, and will now exit."));
 				exit(1);
 			}
 		}
@@ -632,9 +632,9 @@ void load_settings_structure(void)
  *   void
  */
 
-#define	GS_GCONF_PERMISSION	"There is currently no program set as your handler for \"sword://\" and similar URLs.  Would you like GnomeSword to install itself as the program to handle these URLs?"
+#define	GS_GCONF_PERMISSION	_("There is currently no program set as your handler for \"sword://\" and similar URLs.  Would you like GnomeSword to install itself as the program to handle these URLs?")
 
-#define	GS_GCONF_SUCCESS	"GnomeSword has successfully set itself as the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\" to examine keys under /desktop/gnome/url-handlers, if you need to change these."
+#define	GS_GCONF_SUCCESS	_("GnomeSword has successfully set itself as the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\" to examine keys under /desktop/gnome/url-handlers, if you need to change these.")
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
     { "/desktop/gnome/url-handlers/bible/command",       "gnomesword2 \"%s\"" },
@@ -679,7 +679,7 @@ void gconf_setup()
 					 (gboolean) gconf_keys[i][1],
 					 NULL));
 			if (!retval) {
-				sprintf(msg, "GnomeSword failed to complete handler init for key #%d:\n%s",
+				sprintf(msg, _("GnomeSword failed to complete handler init for key #%d:\n%s"),
 					i, gconf_keys[i][0]);
 				gui_generic_warning(msg);
 				return;
