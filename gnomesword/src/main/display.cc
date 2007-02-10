@@ -288,8 +288,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0");
 
-	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
-		 !strcmp(imodule.getConfigEntry("SourceType"),"ThML"))
+	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
+		// !strcmp(imodule.getConfigEntry("SourceType"),"ThML"))
 		rework = (const char *)(const char *)imodule.getRawEntry();  //keytext);
 	else if (!strcmp(imodule.Name(), "ISBE"))
 		rework = (const char *)(const char *)imodule.StripText();  //keytext);
@@ -724,7 +724,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 				   ? settings.highlight_fg
 				   : settings.currentverse_color)
 				: settings.bible_text_color);
-				
+/*				
 		if (key->Verse() == curVerse   ||
 		    key->Verse() == curVerse-1 ||
 		    key->Verse() == curVerse-2 ||
@@ -734,7 +734,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		} else {
 			main_set_strongs_morphs_off(ops);
 		}
-		
+*/		
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			swbuf += paragraphMark;;

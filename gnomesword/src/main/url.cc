@@ -411,7 +411,7 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	gchar *buf = NULL;
 	gchar *val = g_new(gchar,strlen(value));
 	gchar *val2 = NULL;
-	gboolean realstrongs;
+	//gboolean realstrongs;
 	
 	
 	
@@ -425,10 +425,10 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 			modbuf = settings.lex_greek;
 			if(backend->is_module("Robinson")) 
 				morph_mod = "Robinson";
-			realstrongs = (!strcmp(modbuf,"StrongsRealGreek"));
+			//realstrongs = (!strcmp(modbuf,"StrongsRealGreek"));
 		} else {
 			modbuf = settings.lex_hebrew;
-			realstrongs = (!strcmp(modbuf,"StrongsRealHebrew"));
+			//realstrongs = (!strcmp(modbuf,"StrongsRealHebrew"));
 		}
 	}
 	buf = g_strdup(value);
@@ -446,16 +446,10 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 		val2 = strchr(buf,'|');
 		++val2;
 		strongs_buf = g_strdup_printf("%s<br /><br />%s",
-					(realstrongs)?
-					main_get_raw_text(modbuf, (gchar*)val)
-					:main_get_rendered_text(modbuf, (gchar*)val),
-					(realstrongs)?
-					main_get_raw_text(modbuf, (gchar*)val2)
-					:main_get_rendered_text(modbuf, (gchar*)val2));
+					main_get_rendered_text(modbuf, (gchar*)val),
+					main_get_rendered_text(modbuf, (gchar*)val2));
 	} else { 
-		strongs_buf = (realstrongs)?
-				main_get_raw_text(modbuf, (gchar*)value):
-				main_get_rendered_text(modbuf, (gchar*)value);
+		strongs_buf = main_get_rendered_text(modbuf, (gchar*)value);
 	}
 	
 	// morph stuff
