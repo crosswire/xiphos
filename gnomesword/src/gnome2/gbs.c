@@ -50,7 +50,6 @@
 #include "gui/widgets.h"
 #include "gui/navbar_book.h"
 
-#include "main/embed.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/global_ops.hh"

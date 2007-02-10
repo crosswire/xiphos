@@ -29,7 +29,6 @@
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
 #endif
-//#include "main/embed.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -323,7 +322,7 @@ static gboolean  delete_event (GtkWidget *widget,
 	main_shutdown_backend();
 	gtk_main_quit();
 	gtk_exit(0);
-	return FALSE;	
+	return TRUE;	
 }
 
 /******************************************************************************
