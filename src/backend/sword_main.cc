@@ -28,9 +28,9 @@
 #include <swversion.h>
 #include <thmlosis.h>
 
-#ifdef USE_GTKMOZEMBED 
-#include "backend/gs_markupfiltmgr.h"
-#endif
+//#ifdef USE_GTKMOZEMBED 
+//#include "backend/gs_markupfiltmgr.h"
+//#endif
 //#ifdef USE_SWORD_SVN
 #include <markupfiltmgr.h>
 #include <swlocale.h>
@@ -64,8 +64,8 @@ static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {	
-	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
 	//thml2osis = new  ThMLOSIS();
 	osis2html = new  GS_OSISHTMLHREF();
@@ -126,27 +126,27 @@ void BackEnd::init_SWORD(int gsType) {
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-				const char *sourcetype = display_mod->getConfigEntry("SourceType");
-				if(sourcetype && !strcmp(sourcetype,"ThML" ))
-					display_mod->AddRenderFilter(osis2html);
+				//const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				//if(sourcetype && !strcmp(sourcetype,"ThML" ))
+				//	display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(textDisplay);
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
-				const char *sourcetype = display_mod->getConfigEntry("SourceType");
-				if(sourcetype && !strcmp(sourcetype,"ThML" ))
-					display_mod->AddRenderFilter(osis2html);
+				//const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				//if(sourcetype && !strcmp(sourcetype,"ThML" ))
+				//	display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(commDisplay);
 			}
 			if (!strcmp(display_mod->Type(), DICT_MODS)) {
-				const char *sourcetype = display_mod->getConfigEntry("SourceType");
-				if(sourcetype && !strcmp(sourcetype,"ThML" ))
-					display_mod->AddRenderFilter(osis2html);
+				//const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				//if(sourcetype && !strcmp(sourcetype,"ThML" ))
+				//	display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(dictDisplay);
 			}
 			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
-				const char *sourcetype = display_mod->getConfigEntry("SourceType");
-				if(sourcetype && !strcmp(sourcetype,"ThML" ))
-					display_mod->AddRenderFilter(osis2html);
+				//const char *sourcetype = display_mod->getConfigEntry("SourceType");
+				//if(sourcetype && !strcmp(sourcetype,"ThML" ))
+				//	display_mod->AddRenderFilter(osis2html);
 				display_mod->setDisplay(bookDisplay);
 			}			
 		}
