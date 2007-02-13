@@ -24,6 +24,7 @@
 #include "config.h"
 
 #include <stdlib.h>
+#include <gconf/gconf-client.h>
 
 #include <nsStringAPI.h>
 
@@ -37,8 +38,13 @@
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-utils.h"
 
+#define KEY_GNOME_DIR           "/desktop/gnome/interface"
+#define KEY_GNOME_VARIABLE_FONT KEY_GNOME_DIR "/document_font_name"
+#define KEY_GNOME_FIXED_FONT    KEY_GNOME_DIR "/monospace_font_name"
+
 static nsIPrefBranch* gPrefBranch;
 
+static GConfClient *gconf_client = NULL;
 static const char *font_languages[] = {
 	"x-western",
 	"ar",
@@ -122,7 +128,7 @@ gecko_set_caret (gboolean value)
 }
 /*
 extern "C" void
-gecko_set_color (YelpColorType type, const gchar *color)
+gecko_set_color (GeckoColorType type, const gchar *color)
 {
 	gecko_prefs_set_bool ("browser.display.use_system_colors", FALSE);
 	switch (type) {
@@ -201,6 +207,8 @@ gecko_set_font (GeckoFontType font_type, const gchar *fontname)
 extern "C" gboolean
 gecko_init (void)
 {
+    	GError *err = NULL;
+	gchar *fontname = NULL;
 #ifdef HAVE_GECKO_1_9
 	NS_LogInit ();
 #endif
@@ -222,7 +230,21 @@ gecko_init (void)
 
 	rv = CallQueryInterface (prefService, &gPrefBranch);
 	NS_ENSURE_SUCCESS (rv, FALSE);
-
+	
+    	gconf_client = gconf_client_get_default ();
+    	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_VARIABLE_FONT, &err);
+	if(fontname) {
+		g_message("var fontname %s",fontname);
+		gecko_set_font (GECKO_FONT_VARIABLE, fontname);
+		g_free(fontname);
+	}
+    	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_FIXED_FONT, &err);
+	if(fontname) {
+		g_message("fixed fontname %s",fontname);
+		gecko_set_font (GECKO_FONT_FIXED, fontname);
+		g_free(fontname);
+	}
+	g_object_unref(gconf_client);
 	return TRUE;
 }
 
