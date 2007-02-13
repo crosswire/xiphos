@@ -567,7 +567,9 @@ void main_init_backend(void)
 
 void main_shutdown_backend(void)
 {
-	free((char*)sword_locale);
+	if(sword_locale)
+		free((char*)sword_locale);
+	sword_locale = NULL;
 	if (backend) 
 	        delete backend; 
 	backend = NULL;
