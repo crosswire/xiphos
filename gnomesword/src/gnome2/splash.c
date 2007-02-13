@@ -481,6 +481,17 @@ void gui_splash_init()
 		
 		icon_pixbuf = 
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+					     "/mozilla-icon.png", &error);
+		if (!icon_pixbuf) {
+			fprintf(stderr, "pixmap file error: %s\n",
+				error->message);
+			g_error_free(error);
+		}
+		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
+		gdk_pixbuf_unref(icon_pixbuf);
+
+		icon_pixbuf = 
+		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/gnome-session.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
@@ -528,6 +539,23 @@ void gui_splash_init()
 	}
 }
 
+void gui_splash_step0()
+{
+	ESplashPrivate *priv;
+	if (settings.showsplash) {
+		
+		priv = E_SPLASH(splash)->priv;
+		gtk_progress_bar_set_text(priv->progressbar,
+                                             _("Initiating Gecko"));
+		gtk_progress_bar_set_fraction(priv->progressbar,
+                                             0.0);
+		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
+		
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
+	}
+}
 void gui_splash_step1()
 {
 	ESplashPrivate *priv;

@@ -98,6 +98,8 @@ int main(int argc, char *argv[])
 	
 	gui_splash_init();
 	
+	gui_splash_step0();
+	
 	gecko_html_initialize();
 	
 	gui_splash_step1();
