@@ -76,10 +76,6 @@ BackEnd::BackEnd() {
 	bookDisplay          = 0;
 	dictDisplay          = 0;
 	textDisplay          = 0;
-#ifndef USE_GTKMOZEMBED
-	RTOLDisplay          = 0;
-	dialogRTOLDisplay    = 0;
-#endif
 	entryDisplay         = 0;
 	chapDisplay          = 0;
 	verselistDisplay     = 0;
@@ -88,9 +84,12 @@ BackEnd::BackEnd() {
  
 
 BackEnd::~BackEnd() {
-	delete main_mgr;
-	delete display_mgr;
-	
+	if(main_mgr)
+		delete main_mgr;
+	if(display_mgr)
+		delete display_mgr;
+	main_mgr = 0;
+	display_mgr = 0;
 	if (commDisplay)
 		delete commDisplay;
 	if (bookDisplay)
@@ -99,12 +98,6 @@ BackEnd::~BackEnd() {
 		delete dictDisplay;
 	if (textDisplay)
 		delete textDisplay;
-#ifndef USE_GTKMOZEMBED
-	if (RTOLDisplay)
-		delete RTOLDisplay;
-	if(dialogRTOLDisplay)
-		delete dialogRTOLDisplay;
-#endif	
 	if(entryDisplay)
 		delete entryDisplay;
 	if(chapDisplay)
@@ -114,7 +107,15 @@ BackEnd::~BackEnd() {
 	if(viewerDisplay)
 		delete viewerDisplay;
         if (osis2html)
-                delete (osis2html);
+                delete (osis2html);	
+	commDisplay          = 0;
+	bookDisplay          = 0;
+	dictDisplay          = 0;
+	textDisplay          = 0;
+	entryDisplay         = 0;
+	chapDisplay          = 0;
+	verselistDisplay     = 0;
+	viewerDisplay        = 0;
 }
 
 
