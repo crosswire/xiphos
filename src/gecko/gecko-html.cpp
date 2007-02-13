@@ -213,7 +213,7 @@ static void html_init(GeckoHtml * html)
 	klass = GECKO_HTML_GET_CLASS(html);
 /*	if (!klass->font_handler) {
 		klass->font_handler =
-		   gecko_settings_notify_add (GS_SETTINGS_INFO_FONTS,
+		   gecko_settings_notify_add (GECKO_SETTINGS_INFO_FONTS,
 		   (GHookFunc) html_set_fonts,
 		   NULL);
 		   html_set_fonts (); 

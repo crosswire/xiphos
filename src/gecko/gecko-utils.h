@@ -33,7 +33,7 @@ typedef enum {
 } GeckoFontType;
 
 void            gecko_set_caret   (gboolean       value);
-/*void            gecko_set_color   (GSColorType  type,
+/*void            gecko_set_color   (GeckoColorType  type,
 					const gchar   *color);*/
 void            gecko_set_font    (GeckoFontType   font_type,
 				        const gchar   *fontname);
