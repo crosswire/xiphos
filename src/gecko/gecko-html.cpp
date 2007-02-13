@@ -510,13 +510,13 @@ void gecko_html_preview_end(GeckoHtml * html)
 
 static void html_set_fonts(void)
 {
-	/*  gchar *font;
+/*	  gchar *font;
 
-	   font = gecko_settings_get_font (GS_FONT_VARIABLE);
+	   font = gecko_settings_get_font (GECKO_FONT_VARIABLE);
 	   gecko_set_font (GECKO_FONT_VARIABLE, font);
 	   g_free (font);
 
-	   font = gecko_settings_get_font (GS_FONT_FIXED);
+	   font = gecko_settings_get_font (GECKO_FONT_FIXED);
 	   gecko_set_font (GECKO_FONT_FIXED, font);
 	   g_free (font); */
 }

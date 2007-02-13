@@ -257,6 +257,7 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
+	gecko_html_shutdown();
 
 	if(settings.browsing)
 		gui_notebook_main_shutdown();

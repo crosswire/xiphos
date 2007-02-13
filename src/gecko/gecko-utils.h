@@ -34,13 +34,12 @@ typedef enum {
 
 void            gecko_set_caret   (gboolean       value);
 /*void            gecko_set_color   (GSColorType  type,
-					const gchar   *color);
-void            gecko_set_font    (GSFontType   font_type,
-				        const gchar   *fontname);*/
+					const gchar   *color);*/
+void            gecko_set_font    (GeckoFontType   font_type,
+				        const gchar   *fontname);
 gboolean       gecko_init         (void);
 void           gecko_shutdown     (void);
 
 G_END_DECLS
 
 #endif /* __GS_GECKO_UTILS_H__ */
-
