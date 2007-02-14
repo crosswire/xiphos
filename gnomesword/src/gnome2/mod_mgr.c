@@ -302,7 +302,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 			}
 		}
 		if (install) {
-			g_print("installing %s\n", buf);
+			g_print("installing %s, source=%s\n", buf,source);
 			if (local)
 				failed =
 				    mod_mgr_local_install_module(source, buf);
@@ -472,17 +472,16 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
 	gchar *description = NULL;
-	gchar *dest;
-	const gchar *buf;
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
+	const gchar *buf;
 
+	/* Check language */
 	buf = info->language;
-	g_utf8_strncpy (dest,buf,1);
-	if (!g_unichar_isalnum(g_utf8_get_char(dest)) || (info->language == NULL))
-//	if ((!g_ascii_isalnum(info->language[0]))
-//	    || (info->language == NULL))
+	if (!g_utf8_validate(buf,-1,NULL))
+		info->language = _("Unknown");
+	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (info->language == NULL))
 		info->language = _("Unknown");
 	
 	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
@@ -566,16 +565,17 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
 	GtkTreeIter child_iter;
-	const gchar *buf;
-	gchar *dest;
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
 	gboolean valid;
+	const gchar *buf;
 
-	g_utf8_strncpy (dest,language,1);	
-	if (!g_unichar_isalnum(g_utf8_get_char(dest)) || (language == NULL))
-//	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
+	/* Check language */
+	buf = language;
+	if (!g_utf8_validate(buf,-1,NULL))
+		language = _("Unknown");
+	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
@@ -925,6 +925,11 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 						     renderer, "text",
 						     COLUMN_NAME, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
+	/* set this column to a fixed sizing (of 185 pixels) */
+	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+					GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_column_set_fixed_width(GTK_TREE_VIEW_COLUMN
+					     (column), 185);	
 	gtk_tree_view_append_column(treeview, column);
 
 	column = gtk_tree_view_column_new();
