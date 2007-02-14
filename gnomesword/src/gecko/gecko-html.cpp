@@ -30,6 +30,7 @@
 #include "backend/sword_main.hh"
 
 #include "main/display.hh"
+#include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/url.hh"
 
@@ -50,8 +51,10 @@ struct _GeckoHtmlPriv {
 	gchar *base_uri;
 	gchar *anchor;
 	gboolean frames_enabled;
+	gboolean is_dialog;
 	guint timeout;
 	gint pane;
+	DIALOG_DATA * dialog;
 };
 
 static void html_set_fonts(void);
@@ -99,6 +102,9 @@ static void html_link_message(GtkMozEmbed * embed)
 {
 	gchar buf[500];
 	gchar *url = gtk_moz_embed_get_link_message(embed);
+	GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	
 	/*
 #ifdef DEBUG
 	g_message(url);
@@ -134,9 +140,17 @@ static void html_link_message(GtkMozEmbed * embed)
 		g_message("\nurl:        %s\nurl_clean: %s",url,url_clean->str);
 #endif	
 		in_url = TRUE;	/* we need this for html_button_released */
-		if(main_url_handler(url_clean->str, FALSE)) {	
-			g_string_free(url_clean, TRUE);	
-			return;
+		if(priv->is_dialog) {
+			if(main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {	
+				g_string_free(url_clean, TRUE);	
+				return;
+			}
+			
+		} else {
+			if(main_url_handler(url_clean->str, FALSE)) {	
+				g_string_free(url_clean, TRUE);	
+				return;
+			}
 		}
 		g_string_free(url_clean, TRUE);	
 		if (*url == 'I') {
@@ -156,7 +170,11 @@ static
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-	return html->priv->yelper->ProcessMouseOver(dom_event, html->priv->pane);
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	return html->priv->yelper->ProcessMouseOver(dom_event, 
+						    priv->pane,
+						    priv->is_dialog,
+						    priv->dialog);
 }
 
 static
@@ -175,11 +193,16 @@ gint html_dom_key_up(GtkMozEmbed * embed, gpointer dom_event)
 static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 {
 	g_return_val_if_fail(uri != NULL, FALSE);
+	GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 
 #ifdef DEBUG
 	g_message("uri: %s", uri);
 #endif
-	main_url_handler(uri, TRUE);
+	if(priv->is_dialog)
+		main_dialogs_url_handler(priv->dialog, uri, TRUE);
+	else
+		main_url_handler(uri, TRUE);
 	return TRUE;
 }
 
@@ -353,12 +376,15 @@ GType gecko_html_get_type(void)
 	return type;
 }
 
-GeckoHtml *gecko_html_new(gint pane)
+GeckoHtml *gecko_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 {
 	GeckoHtml *html;
-
 	html = GECKO_HTML(g_object_new(GECKO_TYPE_HTML, NULL));
-	html->priv->pane = pane;
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	priv->pane = pane;
+	priv->is_dialog = is_dialog;
+	//g_message("is_dialog");
+	priv->dialog = dialog;
 	return html;
 }
 

@@ -54,6 +54,8 @@ extern "C" {
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
+#include "gecko/gecko-html.h"
+
 #include "main/navbar_book_dialog.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -397,17 +399,14 @@ void main_dialog_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *str;
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
-#ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *new_browser;
-#else	
-	GtkHTML *html;	
-#endif	
+	
 	if(!d->previewer)
 		return;
+	
 #ifdef USE_GTKMOZEMBED
-	new_browser = GTK_MOZ_EMBED(d->previewer);
+	GeckoHtml *html= GECKO_HTML(d->previewer);
 #else	
-	html = GTK_HTML(d->previewer);
+	GtkHTML *html= GTK_HTML(d->previewer);	
 #endif	
 		
 	g_string_printf(tmp_str,
@@ -473,10 +472,11 @@ void main_dialog_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	}
 	
 #ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gtk_moz_embed_render_data(new_browser, str->str, str->len,
-					"file:///sword", 
-					"text/html");
+	if (str->len) {		
+		gecko_html_open_stream(html,"text/html");
+		gecko_html_write(html, str->str, str->len);
+		gecko_html_close(html);
+	}
 #else	
 	if (str->len)
 		gtk_html_load_from_string(html,str->str,str->len);
@@ -915,21 +915,16 @@ void main_dialog_delete_note(gpointer data)
 
 void main_free_on_destroy(DIALOG_DATA * t)
 {
-	GList *tmp = NULL;
+	//GList *tmp = NULL;
+	
 	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) t);
 	g_free(t->ops); 
 	g_free(t->key);
 	g_free(t->mod_name);
-#ifndef USE_GTKHTML38 
-	if((GSHTMLEditorControlData*)t->editor) {
-		editor_control_data_destroy(NULL, 
-				(GSHTMLEditorControlData*)t->editor);		
-		dlg_percom = NULL;
-	}
-#endif
 	if((BackEnd*)t->backend) {
 		BackEnd* be = (BackEnd*)t->backend;
 		delete be;
+		be = NULL;
 	}
 	g_free(t);
 }
@@ -1311,7 +1306,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 	
 	BackEnd* be = (BackEnd*)d->backend;
 	
-	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")) {
+	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")  || strstr(type,"robinson")) {
 		if(be->is_module("Robinson")) 
 			modbuf = "Robinson";
 	} 		
@@ -1392,8 +1387,7 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 			gtk_widget_show(dlg);
 		
 		gui_display_mod_and_key(modbuf, (gchar*)value);
-		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
-		     modbuf);		
+		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);		
 	} else {
 		mybuf =
 		    main_get_rendered_text(modbuf, (gchar*)value);
@@ -1660,9 +1654,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	gchar *direction = NULL;
 	gchar *url;
 
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec;
-#endif
 	do_display = TRUE;
 	if(!backend->is_module(mod_name))
 		return NULL;

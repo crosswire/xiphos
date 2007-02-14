@@ -565,7 +565,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
 	
-	widgets.html_dict = GTK_WIDGET(gecko_html_new(DICTIONARY_TYPE));
+	widgets.html_dict = GTK_WIDGET(gecko_html_new(NULL, FALSE, DICTIONARY_TYPE));
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_dict);
