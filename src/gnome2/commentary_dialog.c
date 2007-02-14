@@ -25,9 +25,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#else
+#ifndef USE_GTKMOZEMBED
 #include "gui/html.h"
 #endif
 
@@ -848,6 +846,14 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 	return hbox3;
 }
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     DIALOG_DATA * d)
+{	
+	gui_commentary_dialog_create_menu(d); 
+}
+
 
 /******************************************************************************
  * Name
@@ -872,10 +878,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
 	GtkWidget *scrolledwindow38;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec =
-	    (GSHTMLEditorControlData *) d->editor;
-#endif
+	
 	cur_d = d;
 	d->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -911,9 +914,13 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
 #ifdef USE_GTKMOZEMBED	
-/*	d->html = embed_dialogs_new((DIALOG_DATA*) d);
+	d->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) d),TRUE,DIALOG_COMMENTARY_TYPE));
 	gtk_container_add(GTK_CONTAINER(frame19), d->html);
-	gtk_widget_show(d->html);*/
+	gtk_widget_show(d->html);	
+	g_signal_connect((gpointer)d->html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      (DIALOG_DATA*)d);
 #else
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow38);
@@ -925,62 +932,20 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 					    scrolledwindow38,
 					    settings.shadow_type);
+	d->html = gtk_html_new();
+	gtk_widget_show(d->html);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow38),
+			  d->html);
+	gtk_html_load_empty(GTK_HTML(d->html));
 
-
-	if (do_edit) {
-#ifndef USE_GTKHTML38
-		ec->htmlwidget = gtk_html_new();
-		ec->html = GTK_HTML(ec->htmlwidget);
-		gtk_widget_show(ec->htmlwidget);
-		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-				  ec->htmlwidget);
-
-		ec->vbox = vbox30;
-
-		ec->pm = gui_create_editor_popup(ec);
-		gnome_popup_menu_attach(ec->pm, ec->htmlwidget, NULL);
-
-		ec->statusbar = gtk_statusbar_new();
-		gtk_widget_show(ec->statusbar);
-		gtk_box_pack_start(GTK_BOX(vbox30), ec->statusbar,
-				   FALSE, TRUE, 0);
-		
-		/* html.c */
-		g_signal_connect(G_OBJECT(ec->htmlwidget),
-				 "key_press_event",
-				 G_CALLBACK(html_key_press_event), d);
-		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
-				 "link_clicked",
-				 G_CALLBACK(commentary_prefixable_link), NULL);
-
-		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
-				 "on_url", G_CALLBACK(gui_url), NULL);
-
-		gui_toolbar_style(ec);
-		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ec->toolbar_style, FALSE, FALSE, 0);
-		gtk_widget_show(ec->toolbar_style);
-		gui_toolbar_edit(ec);
-		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ec->toolbar_edit, FALSE, FALSE, 0);
-		gtk_widget_show(ec->toolbar_edit);
-#endif  /* USE_GTKHTML38 */
-	} else {
-		d->html = gtk_html_new();
-		gtk_widget_show(d->html);
-		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-				  d->html);
-		gtk_html_load_empty(GTK_HTML(d->html));
-
-		g_signal_connect(GTK_OBJECT(d->html),
-				 "link_clicked",
-				 G_CALLBACK(commentary_prefixable_link), d);
-		g_signal_connect(GTK_OBJECT(d->html), "on_url",
-				 G_CALLBACK(dialog_url), d);
-		g_signal_connect(GTK_OBJECT(d->html),
-				 "button_press_event",
-				 G_CALLBACK(button_press_event), d);
-	}
+	g_signal_connect(GTK_OBJECT(d->html),
+			 "link_clicked",
+			 G_CALLBACK(commentary_prefixable_link), d);
+	g_signal_connect(GTK_OBJECT(d->html), "on_url",
+			 G_CALLBACK(dialog_url), d);
+	g_signal_connect(GTK_OBJECT(d->html),
+			 "button_press_event",
+			 G_CALLBACK(button_press_event), d);
 
 #endif  /* USE_GTKMOZEMBED */
 
@@ -1012,6 +977,7 @@ static void on_print1_activate(GtkMenuItem * menuitem,
 {
 #ifdef USE_GTKMOZEMBED
 //	embed_print(TRUE, GTK_MOZ_EMBED(cur_d->html));
+	
 #else
 	 gui_html_print(cur_d->html, FALSE);
 #endif
@@ -1023,7 +989,6 @@ static void on_copy2_activate(GtkMenuItem * menuitem,
 {
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
-	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 #else
 	gui_copy_html(cur_d->html);
 #endif
@@ -1059,7 +1024,6 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = NULL;
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
-	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);
@@ -1137,7 +1101,6 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 	    main_module_name_from_description(dict_mod_description);
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_copy_selection(GECKO_HTML(cur_d->html));
-	//embed_copy_selection(GTK_MOZ_EMBED(cur_d->html));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
 	gtk_widget_activate(widgets.entry_dict);

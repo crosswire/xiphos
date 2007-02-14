@@ -435,7 +435,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	g_warning("domEvent->GetType: %s",mybuf);
+	g_message("domEvent->GetType: %s",mybuf);
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
