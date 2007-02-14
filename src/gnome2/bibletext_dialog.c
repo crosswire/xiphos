@@ -41,6 +41,8 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
+#include "gecko/gecko-html.h"
+
 #include "main/navbar.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -1213,6 +1215,14 @@ static void create_text_tags(GtkTextBuffer *buffer)
 }
 #endif	
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     gpointer user_data)
+{	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
+	gui_text_dialog_create_menu(d);
+}
+
 /******************************************************************************
  * Name
  *   create_bibletext_dialog
@@ -1266,12 +1276,15 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_show(frame);
 	gtk_paned_add1((GtkPaned *)paned,frame);
 	gtk_widget_set_size_request(frame, -1, 400);
-
-#ifdef USE_GTKMOZEMBED		
-/*	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	vt->html = embed_dialogs_new((DIALOG_DATA*) vt);
+	
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	vt->html = GTK_WIDGET(gecko_html_new(vt,TRUE,DIALOG_TEXT_TYPE));//embed_dialogs_new((DIALOG_DATA*) vt);
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(frame), vt->html);
+	g_signal_connect((gpointer)vt->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      vt);
 	   
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
@@ -1279,91 +1292,11 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_set_size_request(frame, -1, 100);	
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	
-	vt->previewer = embed_dialogs_new((DIALOG_DATA*) vt);
+	vt->previewer = GTK_WIDGET(gecko_html_new(vt,FALSE,VIEWER_TYPE));//embed_dialogs_new((DIALOG_DATA*) vt);
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
-*/	
-#else
-	swVText = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-                                             settings.shadow_type);
-				      
-	if (!vt->is_rtol) {	
-		vt->html = gtk_html_new();
-		gtk_widget_show(vt->html);
-		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-		gtk_html_load_empty(GTK_HTML(vt->html));
-		g_signal_connect(G_OBJECT(vt->html), "on_url",
-				   G_CALLBACK(dialog_url), (gpointer) vt);			   
-		g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-				   G_CALLBACK(link_clicked), vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "motion_notify_event",
-				   G_CALLBACK
-				   (on_dialog_motion_notify_event), vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_button_release_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->html),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_text_button_press_event),
-				   (DIALOG_DATA *) vt);
-	} else { 
-		// * use gtktextview for right to left text * //
-		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
-		vt->text = gtk_text_view_new ();
-		gtk_widget_show (vt->text);
-		gtk_container_add (GTK_CONTAINER (swVText), vt->text);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (vt->text), FALSE);
-		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (vt->text));
-		create_text_tags(text_buffer);
-		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
-		
-		g_signal_connect(GTK_OBJECT(vt->text),
-				   "button_press_event",
-				   G_CALLBACK
-				   (textview_button_press_event),
-				   (DIALOG_DATA *) vt);
-		g_signal_connect(GTK_OBJECT(vt->text),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				   (DIALOG_DATA *) vt);
-	}
-
-	   
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_paned_add2((GtkPaned *)paned,frame);
 	
 
-	swVText = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(swVText);
-	gtk_container_add(GTK_CONTAINER(frame), swVText);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_ALWAYS);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
-                                             settings.shadow_type);
-	
-	vt->previewer = gtk_html_new();
-	gtk_widget_show(vt->previewer);
-	gtk_container_add(GTK_CONTAINER(swVText), vt->previewer);
-	gtk_html_load_empty(GTK_HTML(vt->previewer));
-	
-				   
-	g_signal_connect(GTK_OBJECT(vt->previewer), "link_clicked",
-				   G_CALLBACK(link_clicked), vt);
-
-#endif		
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
@@ -1880,7 +1813,7 @@ static void global_option_headings(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
  *   void
  */
 
-static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)
+static void on_close_activate(GtkMenuItem * menuitem, gpointer data)
 {
 	close_text_dialog(cur_vt);
 }

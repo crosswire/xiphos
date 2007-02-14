@@ -26,6 +26,7 @@
 #include <gtkmozembed.h>
 
 #include "gecko/gecko-print.h"
+#include "main/module_dialogs.h"
 
 G_BEGIN_DECLS
 
@@ -68,7 +69,9 @@ struct _GeckoHtmlClass {
 };
 
 GType           gecko_html_get_type       (void);
-GeckoHtml *        gecko_html_new            (gint pane);
+GeckoHtml *     gecko_html_new            (DIALOG_DATA * dialog, 
+					   gboolean is_dialog, 
+					   gint pane);
 
 void            gecko_html_set_base_uri   (GeckoHtml    *html,
 					  const gchar *uri);

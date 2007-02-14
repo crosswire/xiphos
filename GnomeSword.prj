@@ -171,9 +171,7 @@ module.source.files=\
 	src/main/navbar_book.cc\
 	src/main/lists.cc\
 	src/main/module_dialogs.cc\
-	src/main/embed-dialogs.cc\
 	src/main/search_sidebar.cc\
-	src/main/embed.cc\
 	src/main/previewer.cc\
 	src/main/parallel_view.cc\
 	src/main/mod_mgr.cc\

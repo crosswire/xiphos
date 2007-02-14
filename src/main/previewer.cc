@@ -378,8 +378,8 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
 	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
-	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget))) return;
+	GeckoHtml *html = GECKO_HTML(html_widget);
 	gecko_html_open_stream(html,"text/html");
 	g_string_printf(tmp_str,
 		HTML_START

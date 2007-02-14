@@ -309,24 +309,9 @@ static gboolean html_key_press_event(GtkWidget * widget,
 				     DIALOG_DATA * d)
 {
 	cur_d = d;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec =
-	    (GSHTMLEditorControlData *) d->editor;
-	ec->changed = TRUE;
-	//g_warning("html_key_press_event");
-	gui_update_statusbar(ec);
-#endif
 	return FALSE;
 }
 
-
-#ifndef USE_GTKMOZEMBED
-void html_cursor_move(GtkHTML * html, GtkDirectionType dir_type,
-		      GtkHTMLCursorSkipType skip)
-{
-	g_warning("html_cursor_move");
-}
-#endif
 
 
 /******************************************************************************
@@ -334,7 +319,7 @@ void html_cursor_move(GtkHTML * html, GtkDirectionType dir_type,
  *   book_changed
  *
  * Synopsis
- *   #include "bibletext_dialog.h"
+ *   #include ".h"
  *
  *   void book_changed(GtkEditable * editable, gpointer user_data)	
  *
@@ -351,22 +336,11 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * d)
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
 
 	cur_d = d;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec =
-	    (GSHTMLEditorControlData *) d->editor;
-#endif
 	if (*bookname) {
 		url = g_strdup_printf("sword:///%s 1:1", bookname);
 		main_dialogs_url_handler(d, url, TRUE);
 		g_free(url);
 	}
-#ifndef USE_GTKHTML38
-	if (!ec)
-		return;
-	if (ec->key)
-		g_free(ec->key);
-	ec->key = g_strdup_printf("%s 1:1", bookname);
-#endif
 }
 
 
@@ -396,10 +370,6 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	gchar *val_key;
 	gint chapter;
 	cur_d = d;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec =
-	    (GSHTMLEditorControlData *) d->editor;
-#endif
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -408,13 +378,6 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	main_dialogs_url_handler(d, url, TRUE);
 	g_free(url);
 
-#ifndef USE_GTKHTML38
-	if (!ec)
-		return FALSE;
-	if (ec->key)
-		g_free(ec->key);
-	ec->key = g_strdup_printf("%s %d:1", bookname, chapter);
-#endif
 	return FALSE;
 }
 
@@ -445,10 +408,6 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	gchar *val_key;
 	gint chapter, verse;
 	cur_d = d;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec =
-	    (GSHTMLEditorControlData *) d->editor;
-#endif
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
@@ -463,13 +422,6 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	main_dialogs_url_handler(d, url, TRUE);
 	g_free(url);
 
-#ifndef USE_GTKHTML38
-	if (!ec)
-		return FALSE;
-	if (ec->key)
-		g_free(ec->key);
-	ec->key = g_strdup_printf("%s %d:%d", bookname, chapter, verse);
-#endif
 	return FALSE;
 }
 
@@ -538,10 +490,6 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * d)
 {
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec
-	    = (GSHTMLEditorControlData *) d->editor;
-#endif
 	const gchar *buf = gtk_entry_get_text(entry);
 	cur_d = d;
 	if (d->navbar.key)
@@ -551,14 +499,6 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * d)
 	main_dialogs_url_handler(d, url, TRUE);
 	g_free(url);
 	main_navbar_set(d->navbar, d->navbar.key);
-
-#ifndef USE_GTKHTML38
-	if (!ec)
-		return;
-	if (ec->key)
-		g_free(ec->key);
-	ec->key = g_strdup_printf("%s", buf);
-#endif
 }
 
 

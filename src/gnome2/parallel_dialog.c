@@ -634,7 +634,7 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	
-	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel_dialog = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
 	gtk_widget_show(widgets.html_parallel_dialog);					   
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel_dialog);

@@ -1770,7 +1770,7 @@ scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 static
 void _add_html_widget(GtkWidget * vbox)
 {	
-	search1.preview_html = GTK_WIDGET(gecko_html_new(12));
+	search1.preview_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
 	gtk_widget_show(search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE,
 			   TRUE, 0);
