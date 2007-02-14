@@ -162,7 +162,7 @@ void backend_mod_mgr_init_language_map(void) {
 	//mm_languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 	//mm_languageMap[SWBuf("ln")] = SWBuf("Lingala");
 	//mm_languageMap[SWBuf("lo")] = SWBuf("Lao");
-	mm_languageMap[SWBuf("lt")] = SWBuf("Lithuanian"); /* done */
+	mm_languageMap[SWBuf("lt")] = SWBuf(_("Lithuanian")); /* done */
 	mm_languageMap[SWBuf("lv")] = SWBuf(_("Latvian")); /* done */
 	//mm_languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 	//mm_languageMap[SWBuf("mh")] = SWBuf("Marshall");
@@ -240,9 +240,9 @@ void backend_mod_mgr_init_language_map(void) {
 	//mm_languageMap[SWBuf("ur")] = SWBuf("Urdu");
 	//mm_languageMap[SWBuf("uz")] = SWBuf("Uzbek");
 	mm_languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese")); /* done */
-	//mm_languageMap[SWBuf("vo")] = SWBuf("Volapük");
+	mm_languageMap[SWBuf("vo")] = SWBuf("Volapük");/* if commented,  accentued u causes gettext problems */
 /*  */	//mm_languageMap[SWBuf("wo")] = SWBuf("Wolof");
-	mm_languageMap[SWBuf("xh")] = SWBuf("Xhosa"); /* causes gettext problems */
+	mm_languageMap[SWBuf("xh")] = SWBuf(_("Xhosa")); 
 	mm_languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian")); /* done */
 	mm_languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch")); /* done */
 /*  */	mm_languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French")); /* done */
