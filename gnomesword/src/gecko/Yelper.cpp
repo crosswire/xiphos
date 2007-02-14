@@ -68,6 +68,7 @@
 
 #include "gui/widgets.h"
 
+#include "main/module_dialogs.h"
 #include "main/previewer.h"
 #include "main/sword.h"
 #include "main/url.hh"
@@ -318,18 +319,18 @@ gchar *Yelper::GetAttribute (nsIDOMNode *node, gchar *attribute)
 }
 
 gint
-Yelper::ProcessMouseOver (void* aEvent, int pane)
+Yelper::ProcessMouseOver (void* aEvent, int pane, 
+			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
 	nsresult result;
 	PRBool aShiftKey;
 	nsIDOMEventTarget *aCurrentTarget;
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
-	
+	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
 	if(aShiftKey)  {    
 	       return 1;
 	}
-	
 	if(shift_key_presed)
 		return FALSE;
 	if(pane == VIEWER_TYPE)
@@ -376,7 +377,13 @@ Yelper::ProcessMouseOver (void* aEvent, int pane)
 		if(_retval) {
 			gchar *tmp = GetAttribute(OriginalNode,"sword_url");
 			if (tmp && strlen(tmp)) {
-				main_url_handler(tmp,FALSE);
+				if(is_dialog) {
+					//g_message("is_dialog = true");
+					main_dialogs_url_handler(dialog, tmp, FALSE);
+				} else {
+					//g_message("is_dialog = false");
+					main_url_handler(tmp,FALSE);
+				}
 				g_free(tmp);
 			}
 		}

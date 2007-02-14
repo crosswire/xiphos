@@ -544,7 +544,7 @@ GtkWidget *gui_create_bible_pane(void)
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
 
-	widgets.html_text = GTK_WIDGET(gecko_html_new(TEXT_TYPE)); 
+	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.html_text);
 	g_signal_connect((gpointer)widgets.html_text,

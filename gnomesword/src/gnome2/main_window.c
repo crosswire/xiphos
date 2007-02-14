@@ -752,7 +752,7 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_previewer), frame, 
 				TRUE, TRUE,
 			   	0);
-	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(VIEWER_TYPE));//embed_new(VIEWER_TYPE);
+	sidebar.html_viewer_widget = GTK_WIDGET(gecko_html_new(NULL, FALSE, VIEWER_TYPE));//embed_new(VIEWER_TYPE);
 	gtk_container_add(GTK_CONTAINER(frame), sidebar.html_viewer_widget);
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
