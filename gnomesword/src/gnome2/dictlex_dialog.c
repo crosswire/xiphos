@@ -24,9 +24,7 @@
 #endif
 
 #include <gnome.h>
-#ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#else
+#ifndef USE_GTKMOZEMBED
 #include <gtkhtml/gtkhtml.h>
 #endif
 
@@ -35,6 +33,8 @@
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
+
+#include "gecko/gecko-html.h"
 
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -393,6 +393,14 @@ static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 	main_dialogs_dictionary_entry_changed(d);
 }
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     DIALOG_DATA * d)
+{
+	//(d);
+}
+
 
 /******************************************************************************
  * Name
@@ -523,10 +531,14 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
 #ifdef USE_GTKMOZEMBED
-/*	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);	
-	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
+	gtk_frame_set_shadow_type(GTK_FRAME(frameDictHTML), GTK_SHADOW_IN);	
+	dlg->html = GTK_WIDGET(gecko_html_new((DIALOG_DATA*) dlg,TRUE,DIALOG_DICTIONARY_TYPE));
 	gtk_container_add(GTK_CONTAINER(frameDictHTML), dlg->html);
-	gtk_widget_show(dlg->html);*/
+	gtk_widget_show(dlg->html);
+	g_signal_connect((gpointer)dlg->html,
+		      "popupmenu_requested",
+		      G_CALLBACK(_popupmenu_requested_cb),
+		      dlg);
 #else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);

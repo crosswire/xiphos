@@ -195,7 +195,32 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 	g_return_val_if_fail(uri != NULL, FALSE);
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-
+	
+	// prefixable link
+	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
+		gchar *buf, *place;
+		gchar tmpbuf[1023];
+		gchar book[32];
+		strcpy(book, priv->dialog->key);
+		*(strrchr(book, ' ')) = '\0';
+		
+		if (buf = strstr(uri, "&value=")) {
+			buf += 7;
+			place = buf;
+	
+			while (*buf && isdigit(*buf))
+				buf++;
+			if ((*buf == ':') || strncmp(buf, "%3A", 3) == 0) {
+				/* url begins w/"digits:" only: fix */
+				strncpy(tmpbuf, uri, place - uri);
+				strcpy(tmpbuf+(place-uri), book);
+				strcat(tmpbuf, place);
+				uri = tmpbuf;
+			}
+		}
+		
+	}
+	
 #ifdef DEBUG
 	g_message("uri: %s", uri);
 #endif

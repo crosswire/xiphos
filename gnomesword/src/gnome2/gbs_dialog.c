@@ -25,16 +25,15 @@
 
 #include <gnome.h>
 
-#ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#else
+#ifndef USE_GTKMOZEMBED
 #include <gtkhtml/gtkhtml.h>
 #endif
-//#include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
+
+#include "gecko/gecko-html.h"
 
 #include "main/module_dialogs.h"
 #include "main/sidebar.h"
@@ -288,6 +287,13 @@ static void add_columns(GtkTreeView *tree)
 	gtk_tree_view_column_set_visible(column,FALSE);
 }
 
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     DIALOG_DATA * d)
+{	
+	//(d); 
+}
 /******************************************************************************
  * Name
  *   create_gbs_dialog
@@ -376,9 +382,13 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_paned_pack2(GTK_PANED(hpaned), frame, FALSE, TRUE);
 	
 	
-/*	dlg->html = embed_dialogs_new((DIALOG_DATA*) dlg);
+	dlg->html = GTK_WIDGET(gecko_html_new(((DIALOG_DATA*) dlg),TRUE,DIALOG_BOOK_TYPE));
 	gtk_container_add(GTK_CONTAINER(frame), dlg->html);
-	gtk_widget_show(dlg->html);*/
+	gtk_widget_show(dlg->html);	
+	g_signal_connect((gpointer)dlg->html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      (DIALOG_DATA*)dlg);
 	
 #else
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
