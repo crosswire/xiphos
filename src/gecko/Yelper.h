@@ -32,6 +32,7 @@
 #ifdef USE_GTKUPRINT
 #include "gecko/gecko-print.h"
 #endif
+#include "main/module_dialogs.h"
 
 class nsIDOMWindow;
 class nsITypeAheadFind;
@@ -55,7 +56,8 @@ public:
 	PRBool FindAgain (PRBool aForward);
 	void SetSelectionAttention (PRBool aSelectionAttention);
         gchar *GetAttribute (nsIDOMNode *node, gchar *attribute);
-        gint ProcessMouseOver (void* aEvent, gint pane);
+        gint ProcessMouseOver (void* aEvent, gint pane,  
+			       gboolean is_dialog, DIALOG_DATA * d);
         gint ProcessMouseDblClickEvent (void* aEvent);
 	gint ProcessMouseEvent (void *aEvent);
         gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);

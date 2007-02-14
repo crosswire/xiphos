@@ -270,7 +270,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_box_pack_start(GTK_BOX(box_comm),
 			   eventbox1, TRUE,
 			   TRUE, 0);
-	widgets.html_comm = GTK_WIDGET(gecko_html_new(COMMENTARY_TYPE));
+	widgets.html_comm = GTK_WIDGET(gecko_html_new(NULL, FALSE, COMMENTARY_TYPE));
 	gtk_widget_show(widgets.html_comm);
 	gtk_container_add(GTK_CONTAINER(eventbox1),
 			 widgets.html_comm);

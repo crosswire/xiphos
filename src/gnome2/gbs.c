@@ -318,7 +318,7 @@ GtkWidget *gui_create_book_pane(void)
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_box_pack_start(GTK_BOX(box), eventbox, TRUE, TRUE, 0);
-	widgets.html_book = GTK_WIDGET(gecko_html_new(BOOK_TYPE)); //embed_new(BOOK_TYPE);
+	widgets.html_book = GTK_WIDGET(gecko_html_new(NULL, FALSE, BOOK_TYPE)); //embed_new(BOOK_TYPE);
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_book);

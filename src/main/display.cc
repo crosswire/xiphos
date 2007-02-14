@@ -962,19 +962,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	int type = d->mod_type;  //be->module_type(imodule.Name());
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-#ifdef USE_GTKMOZEMBED
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
-	gtk_widget_modify_font (gtkText, desc);
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
+	GeckoHtml *html = GECKO_HTML(gtkText);
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
@@ -1024,16 +1012,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 						       type)
 				 : (const char *)imodule /* untouched */));
 
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gtk_moz_embed_render_data(html, str->str, str->len,
-					"file:///sword",
-					"text/html");
-#else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
-	gtk_html_set_editable(html, was_editable);
-#endif
+	if (str->len) {
+		gecko_html_open_stream(html,"text/html");
+		gecko_html_write(html, str->str, str->len);
+		gecko_html_close(html); 
+	}
 	g_string_free(str, TRUE);
 	free_font(mf);
 	g_free(ops);
@@ -1056,18 +1039,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
 	gchar heading[32];
-	gboolean newparagraph = FALSE;
-#ifdef USE_GTKMOZEMBED
-	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc,
-					  ((mf->old_font)?mf->old_font:"Serif"));
-	gtk_widget_modify_font (gtkText, desc);
-	gboolean was_editable = gtk_html_get_editable(html);
-#endif
+	gboolean newparagraph = FALSE;	
+	GeckoHtml *html = GECKO_HTML(gtkText);
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
 
@@ -1138,6 +1111,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 			newparagraph = FALSE;
 			str = g_string_append(str, paragraphMark);
 		}
+		/*
 		if (key->Verse() == curVerse   ||
 		    key->Verse() == curVerse-1 ||
 		    key->Verse() == curVerse-2 ||
@@ -1147,7 +1121,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		} else {
 			main_set_dialog_strongs_morphs_off(be, ops);
 		}
-
+		*/
 		// same forced line break glitch in highlighted current verse.
 		if (settings.versehighlight &&		// doing <table> h/l.
 		    !versestyle &&			// paragraph format.
@@ -1200,27 +1174,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 	buf = g_strdup_printf("%s", "</body></html>");
 	str = g_string_append(str, buf);
 	g_free(buf);
-#ifdef USE_GTKMOZEMBED
-	if (str->len)
-		gtk_moz_embed_render_data(html, str->str, str->len,
-					  "file:///sword",
-					  "text/html");
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
-		//embed_go_to_anchor(html, buf);
-		g_free(buf);
-	}
-#else
+	
 	if (str->len) {
-		gtk_html_load_from_string(html, str->str, str->len);
+		gecko_html_open_stream(html,"text/html");
+		gecko_html_write(html, str->str, str->len);
+		gecko_html_close(html); 
+		if (curVerse > 2) {
+			buf = g_strdup_printf("%d", curVerse - 2);
+			gecko_html_jump_to_anchor(html, buf);
+			g_free(buf);
+		}
 	}
-	gtk_html_set_editable(html, was_editable);
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
-		gtk_html_jump_to_anchor(html, buf);
-		g_free(buf);
-	}
-#endif
 	g_string_free(str, TRUE);
 	key->Verse(1);
 	key->Chapter(1);

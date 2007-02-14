@@ -491,7 +491,7 @@ void gui_create_parallel_page(void)
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
 	
 	widgets.frame_parallel = eventbox;	
-	widgets.html_parallel = GTK_WIDGET(gecko_html_new(PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
+	widgets.html_parallel = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
 	gtk_widget_show(widgets.html_parallel);					   
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel);

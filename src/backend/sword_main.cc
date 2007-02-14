@@ -152,7 +152,7 @@ void BackEnd::init_SWORD(int gsType) {
 			}			
 		}
 		init_language_map();
-	} else if(gsType == 1) {
+	} else if(gsType == 1) { // dialogs
 		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {	
