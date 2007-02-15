@@ -1,5 +1,6 @@
 2007-02-14 terry <tbiggs@users.sf.net>
 
+	* bumped to 2.3.0 for development branch
 	* switched commentary dialog to gecko
 	* switched dictionary dialog to gecko
 	* switched genbook dialog to gecko
