@@ -1,5 +1,11 @@
 2007-02-05 terry <tbiggs@users.sf.net>
 
+	* added attribute search page to advanced search dialog
+	  now for a strongs search you only need to enter if the
+	  strongs number as G4443
+
+2007-02-05 terry <tbiggs@users.sf.net>
+
 	* moved right to left text display to gtkhtml
 
 2007-01-31 terry <tbiggs@users.sf.net>
