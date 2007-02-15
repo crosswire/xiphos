@@ -1,3 +1,9 @@
+2007-02-15 terry <tbiggs@users.sf.net>
+
+	* added attribute search page to advanced search dialog
+	  now for a strongs search you only need to enter if the
+	  strongs number as G4443
+
 2007-02-14 terry <tbiggs@users.sf.net>
 
 	* bumped to 2.3.0 for development branch
@@ -10,6 +16,10 @@
 
 	* switched about_module dialog to gecko
 	* switched bibletext dialog to gecko
+	
+2007-02-05 terry <tbiggs@users.sf.net>
+
+	* moved right to left text display to gtkhtml
 
 2007-01-31 terry <tbiggs@users.sf.net>
 

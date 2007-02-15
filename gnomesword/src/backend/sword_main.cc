@@ -1184,6 +1184,7 @@ const char *BackEnd::get_next_listkey(void) {
 				     error);
 		//retval = results.getText();
 		results++;
+	results.sort();
 		return retval;
 	}
 	return NULL;	
@@ -1243,6 +1244,7 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 				int search_type, int search_params, int is_dialog) {
 	char progressunits = 70;
 	results.ClearList();
+	//search_scope_list.ClearList()
 	search_mod = NULL;
 
 	search_mod = main_mgr->Modules[module_name];
@@ -1258,6 +1260,8 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 				:main_sidebar_search_percent_update,
 				(void *) &progressunits);
 	search_scope_list = results;
+	if(search_type == -4)
+		results.sort();
 	return results.Count();
 }
  

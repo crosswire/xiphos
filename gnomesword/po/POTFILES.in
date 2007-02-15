@@ -3,6 +3,8 @@ gnomesword.desktop.in
 # backend source files
 #src/backend/sword.cpp
 #src/backend/sword_main.cc
+src/backend/module_manager.cc
+src/backend/module_manager.cc
 # shared source files
 src/main/display.cc
 src/main/lists.cc
