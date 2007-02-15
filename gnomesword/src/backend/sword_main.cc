@@ -1193,7 +1193,6 @@ const char *BackEnd::get_next_listkey(void) {
 				     error);
 		//retval = results.getText();
 		results++;
-	results.sort();
 		return retval;
 	}
 	return NULL;	
