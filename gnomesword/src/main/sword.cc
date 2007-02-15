@@ -1226,7 +1226,7 @@ void main_display_devotional(void)
 			settings.devotionalmod = xml_get_value("modules",
 							       "devotional");
 		} else {
-			gui_generic_warning("Daily devotional was requested, but there are none installed.");
+			gui_generic_warning(_("Daily devotional was requested, but there are none installed."));
 		}
 	}
 
