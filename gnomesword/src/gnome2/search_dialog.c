@@ -2565,11 +2565,23 @@ void _create_search_dialog(void)
 	search1.rb_regexp = glade_xml_get_widget(gxml, "radiobutton10");
 	search1.rb_exact_phrase =
 	    glade_xml_get_widget(gxml, "radiobutton11");
+	    
+	    
+	/* attributes radio buttons */
 	search1.rb_attributes =
 	    glade_xml_get_widget(gxml, "radiobutton12");
+	search1.rb_strongs =
+	    glade_xml_get_widget(gxml, "radiobutton13");
+	search1.rb_morphs =
+	    glade_xml_get_widget(gxml, "radiobutton15");
+	search1.rb_footnotes =
+	    glade_xml_get_widget(gxml, "radiobutton14");
 
+	/*   */
 	search1.cb_case_sensitive =
 	    glade_xml_get_widget(gxml, "checkbutton1");
+	    
+	/* display options check buttons */
 	search1.cb_include_strongs =
 	    glade_xml_get_widget(gxml, "checkbutton2");
 	search1.cb_include_morphs =

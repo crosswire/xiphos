@@ -1368,6 +1368,7 @@ void main_do_dialog_search(void)
 {
 	gint search_type, search_params, finds;
 	const gchar *search_string;
+	const gchar *attribute_search_string = NULL;
 	gchar *module;
 	gchar buf[256], *utf8str;
 	gchar *tmp_buf;
@@ -1375,9 +1376,6 @@ void main_do_dialog_search(void)
 	GList *search_mods = NULL;
 	const gchar *key_buf;
 	GString *str;
-	//GtkHTMLStreamStatus status2;
-	//GtkHTML *html;
-	//GtkHTMLStream *htmlstream2;
 	GList *tmp = NULL;
 	GList *tmp_list = NULL;
 	SWBuf swbuf = "";
@@ -1415,13 +1413,12 @@ void main_do_dialog_search(void)
 	set_up_dialog_search();
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(search1.notebook), 1);
-
+	//search1.notebook
 	search_type = 
 	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
 	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
 	   // GTK_TOGGLE_BUTTON(search1.rb_attributes)->active ? -4 : -3;
-
 #ifdef DEBUG
 	g_message("search_type = %d",search_type);
 #endif
@@ -1429,13 +1426,32 @@ void main_do_dialog_search(void)
 	search_params = GTK_TOGGLE_BUTTON
 	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
 
-	// For attribute-based searches, e.g. "Word//Lemma/G140",
-	// we must constrain the match to whole words.  Otherwise,
-	// we will inadvertently return e.g. 140 plus 1401 and 1404.
-	if ((search_type == -3) &&
-	    (!strncmp(search_string, "Word//Lemma/", 12)))
-		search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
-
+	if(search_type == -3) {
+		if(GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
+			// For attribute-based searches, e.g. "Word//Lemma/G140",
+			// we must constrain the match to whole words.  Otherwise,
+			// we will inadvertently return e.g. 140 plus 1401 and 1404.		
+			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			attribute_search_string = g_strdup_printf(
+					"Word//Lemma/%s",
+					search_string);
+			g_message(attribute_search_string);
+		} else if(GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
+			// For attribute-based searches, e.g. "Word//Lemma/G140",
+			// we must constrain the match to whole words.  Otherwise,
+			// we will inadvertently return e.g. 140 plus 1401 and 1404.		
+			search_params |= SEARCHFLAG_MATCHWHOLEENTRY;
+			attribute_search_string = g_strdup_printf(
+					"Word//Morph/%s",
+					search_string);
+			g_message(attribute_search_string);			
+		} else if(GTK_TOGGLE_BUTTON(search1.rb_footnotes)->active) {
+			attribute_search_string = g_strdup_printf(
+					"Footnote//body/%s",
+					search_string);
+			g_message(attribute_search_string);
+		}
+	}
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;
 		name =
@@ -1466,8 +1482,14 @@ void main_do_dialog_search(void)
 			search_type = backendSearch->check_for_optimal_search(module);
 		//g_message("search_type = %d",search_type);
 		
-		finds = backendSearch->do_module_search(module, search_string,
-					 search_type, search_params, TRUE);
+		finds = backendSearch->do_module_search(module, 
+					(attribute_search_string)?
+					attribute_search_string:
+					search_string,
+					search_type, 
+					search_params, 
+					TRUE);
+		
 		tmp_list = g_list_first(tmp_list);
 		tmp_list = NULL;
 		
@@ -1498,6 +1520,8 @@ void main_do_dialog_search(void)
 		g_free(module);
 		search_mods = g_list_next(search_mods);
 	}
+	if(attribute_search_string)
+		g_free((gchar*)attribute_search_string);
 	g_list_free(search_mods);
 	gui_set_progressbar_text(search1.progressbar, _("Search finished"));
 	gui_set_progressbar_fraction(search1.progressbar, 0);
