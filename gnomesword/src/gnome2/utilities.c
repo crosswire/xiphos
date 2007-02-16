@@ -205,7 +205,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename (g_get_home_dir (), ".gnomesword-2.0", fname, NULL);
+	file = g_build_filename (g_get_home_dir (), ".gnomesword", fname, NULL);
 	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
