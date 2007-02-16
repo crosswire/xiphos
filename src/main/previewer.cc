@@ -276,9 +276,16 @@ static void mark_search_words(GString * str)
 	/* point buf to found verse */
 	buf = str->str;
 	searchbuf = g_strdup(settings.searchText);
-
+	/* check for '"' in clucene search remove the '"' and 
+	   treat like a phrase search */
+	if(g_str_has_prefix(searchbuf,"\"")) {
+		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
+		g_strstrip( searchbuf );
+		settings.searchType = -3;
+	}
+	
 	/* if we have a muti word search go here */
-	if (settings.searchType == -2) {
+	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
 		GList *list;
 		gint count = 0, i = 0;
