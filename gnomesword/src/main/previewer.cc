@@ -268,6 +268,7 @@ static void mark_search_words(GString * str)
 	if (settings.searchType == 0) {
 		return;
 	}
+	g_message(settings.searchText);
 	/* close tags */
 	sprintf(closestr, "</b></font>");
 	/* open tags */
@@ -276,9 +277,13 @@ static void mark_search_words(GString * str)
 	/* point buf to found verse */
 	buf = str->str;
 	searchbuf = g_strdup(settings.searchText);
-
+	if(g_str_has_prefix(searchbuf,"\"")) {
+		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
+		g_strstrip( searchbuf );
+	}
+	
 	/* if we have a muti word search go here */
-	if (settings.searchType == -2) {
+	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
 		GList *list;
 		gint count = 0, i = 0;

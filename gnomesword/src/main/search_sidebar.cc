@@ -137,7 +137,7 @@ static void fill_search_results_list(int finds)
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
 	GtkTreePath *path;	
-	gchar *buf1 = N_("matches");
+	gchar *buf1 = _("matches");
 	RESULTS *list_item;
 	
 	if(list_of_verses) {
@@ -212,7 +212,7 @@ void main_do_sidebar_search(gpointer user_data)
 	const char *search_string = NULL;
 	char *search_module;	
 	gchar search_label[80];
-	gchar *buf = N_("Search");
+	gchar *buf = _("Search");
 	
 	search_dialog = FALSE;
 	search_string = gtk_entry_get_text(GTK_ENTRY(ss.entrySearch));
@@ -256,9 +256,9 @@ void main_do_sidebar_search(gpointer user_data)
 
 	sprintf(settings.searchText, "%s", search_string);
 
-	settings.searchType = GTK_TOGGLE_BUTTON
-	    (ss.rbRegExp)->active ? 0 :
-	    GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
+	settings.searchType = 
+		GTK_TOGGLE_BUTTON(ss.rbRegExp)->active ? 0 :
+	    	GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
 
 	if(settings.searchType == -2)
 			settings.searchType = backendSearch->check_for_optimal_search(search_module);
