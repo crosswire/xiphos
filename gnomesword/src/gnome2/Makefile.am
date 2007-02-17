@@ -38,7 +38,6 @@ gnomesword2_SOURCES =  \
     gbs_dialog.c \
     gnomesword.c \
     gui.c \
-    html.c \
     main_menu.c \
     main_window.c \
     mod_mgr.c \

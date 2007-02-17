@@ -93,7 +93,7 @@ static void dialog_destroy(GtkObject * object, gpointer data)
 
 static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-	gchar *text;
+/*	gchar *text;
 	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
@@ -103,7 +103,7 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 					       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
 					       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
 					      d->regular );
-	sprintf(settings.findText, "%s", text);
+	sprintf(settings.findText, "%s", text);*/
 }
 
 
@@ -125,10 +125,10 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-	GtkHTML *html;
+/*	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
-	gtk_html_engine_search_next(html);
+	gtk_html_engine_search_next(html); */
 }
 
 

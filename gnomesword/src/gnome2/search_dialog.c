@@ -33,7 +33,7 @@
 #include <glib.h>
 
 #include "gui/search_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"

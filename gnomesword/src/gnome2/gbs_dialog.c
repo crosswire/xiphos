@@ -30,7 +30,7 @@
 #endif
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/widgets.h"
 
 #include "gecko/gecko-html.h"
@@ -102,7 +102,7 @@ static void dialog_destroy(GtkObject * object, DIALOG_DATA * dlg)
  * Return value
  *   void
  */
-
+/*
 static void dialog_url(GtkHTML * html, const gchar * url,
 		       DIALOG_DATA * dlg)
 {
@@ -150,7 +150,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	}
 
 }
-
+*/
 
 /******************************************************************************
  * Name

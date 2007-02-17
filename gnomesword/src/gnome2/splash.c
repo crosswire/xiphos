@@ -486,6 +486,12 @@ void gui_splash_init()
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
 			g_error_free(error);
+			error = NULL;
+			/* this is ugly but better than a crash */
+			settings.showsplash = 0;
+			gtk_widget_unref(splash);
+			gtk_widget_destroy(splash);
+			return;
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
@@ -497,6 +503,11 @@ void gui_splash_init()
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
 			g_error_free(error);
+			error = NULL;
+			settings.showsplash = 0;
+			gtk_widget_unref(splash);
+			gtk_widget_destroy(splash);
+			return;
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
@@ -509,6 +520,10 @@ void gui_splash_init()
 				error->message);
 			g_error_free(error);
 			error = NULL;
+			settings.showsplash = 0;
+			gtk_widget_unref(splash);
+			gtk_widget_destroy(splash);
+			return;
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
@@ -521,6 +536,10 @@ void gui_splash_init()
 				error->message);
 			g_error_free(error);
 			error = NULL;
+			settings.showsplash = 0;
+			gtk_widget_unref(splash);
+			gtk_widget_destroy(splash);
+			return;
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
@@ -533,6 +552,10 @@ void gui_splash_init()
 				error->message);
 			g_error_free(error);
 			error = NULL;
+			settings.showsplash = 0;
+			gtk_widget_unref(splash);
+			gtk_widget_destroy(splash);
+			return;
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
