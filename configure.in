@@ -164,7 +164,8 @@ if test "x$cygwin" = xno; then
   SCROLLKEEPER_BUILD_REQUIRED=0.3.5
   AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
 else
-  AM_CONDITIONAL(ENABLE_SK, 0)
+  enable_scrollkeeper=no
+  AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
 fi
 
 
