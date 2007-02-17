@@ -32,7 +32,7 @@
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "gui/gnomesword.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
@@ -751,7 +751,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Copy"),
 	 N_("Copy highlighted text from main window"),
-	 gui_copyhtml_activate, NULL, NULL,
+	 NULL/*gui_copyhtml_activate*/, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_COPY,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,

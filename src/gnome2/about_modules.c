@@ -27,7 +27,7 @@
 
 
 #include "gui/about_modules.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"

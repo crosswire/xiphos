@@ -61,7 +61,7 @@ extern "C" {
 #include "gui/sidebar.h"
 //#include "gui/search_sidebar.h"
 #include "gui/utilities.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 
 #include "main/display.hh"
 #include "main/lists.h"
@@ -595,7 +595,7 @@ void main_shutdown_backend(void)
  * Return value
  *   void
  */
-
+/*
 void main_locked_module_display(gpointer data,
 				  char * mod_name, char * cipher_key)
 {
@@ -683,7 +683,7 @@ void main_locked_module_display(gpointer data,
 	g_string_free(str,TRUE);
 
 }
-
+*/
 /******************************************************************************
  * Name
  *   main_dictionary_entry_changed

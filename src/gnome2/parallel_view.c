@@ -32,7 +32,7 @@
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -301,10 +301,10 @@ static GtkWidget *create_parallel_popup(void)
 	main_load_menu_form_mod_list(pmInt, _("Change parallel 5"),
 			       (GCallback)
 			       on_changeint5mod_activate);
-
+/*
 	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
-			   NULL);
+			   NULL);*/
 	g_signal_connect(GTK_OBJECT(undockInt), "activate",
 			   G_CALLBACK(on_undockInt_activate),
 			   &settings);
@@ -374,9 +374,9 @@ void gui_popup_menu_parallel(void)
 			       (GCallback)
 			       on_changeint5mod_activate);
 
-	g_signal_connect(GTK_OBJECT(copy7), "activate",
+/*	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
-			   NULL);
+			   NULL);*/
 	g_signal_connect(GTK_OBJECT(undockInt), "activate",
 			   G_CALLBACK(on_undockInt_activate),
 			   &settings);

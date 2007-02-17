@@ -24,16 +24,11 @@
 #endif
 
 #include <gnome.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
 #include <regex.h>
 
 #include "gui/sidebar.h"
 #include "gui/search_sidebar.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 

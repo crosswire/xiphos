@@ -36,7 +36,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"

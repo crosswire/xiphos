@@ -24,10 +24,10 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
-#ifndef USE_GTKMOZEMBED
-#include "gui/html.h"
-#endif
+//#include <gtkhtml/gtkhtml.h>
+//#ifndef USE_GTKMOZEMBED
+//#include "gui/html.h"
+//#endif
 
 #include "gecko/gecko-html.h"
 
@@ -689,7 +689,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * d)
  * Return value
  *   void
  */
-
+/*
 void commentary_prefixable_link(GtkHTML * html,
 				const gchar * url,
 				gpointer data)
@@ -701,7 +701,7 @@ void commentary_prefixable_link(GtkHTML * html,
 	*(strrchr(buf, ' ')) = '\0';
 	gui_prefixable_link_clicked(html, url, data, buf);
 }
-
+*/
 /******************************************************************************
  * Name
  *   create_nav_toolbar

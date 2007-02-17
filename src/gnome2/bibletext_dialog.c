@@ -25,12 +25,7 @@
 
 #include <gnome.h>
 
-#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
-#else
-#include <gtkhtml/gtkhtml.h>
-#include "gui/html.h"
-#endif
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -1336,13 +1331,13 @@ static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_html_print(cur_vt->html, FALSE);
+	//gui_html_print(cur_vt->html, FALSE);
 }
 
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_copy_html(cur_vt->html);
+	//gui_copy_html(cur_vt->html);
 }
 
 

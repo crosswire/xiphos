@@ -23,7 +23,7 @@
 ## the same distribution terms that you use for the rest of that program.
 
 dnl IT_PROG_INTLTOOL([MINIMUM-VERSION], [no-xml])
-# serial 2 IT_PROG_INTLTOOL
+# serial 35 IT_PROG_INTLTOOL
 AC_DEFUN([IT_PROG_INTLTOOL],
 [AC_PREREQ([2.50])dnl
 
@@ -38,9 +38,9 @@ esac
 if test -n "$1"; then
     AC_MSG_CHECKING(for intltool >= $1)
 
-    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ print $ 1 * 100 + $ 2; }'`
+    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo $1 | awk -F. '{ print $ 1 * 1000 + $ 2 * 100 + $ 3; }'`
     INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { print $ 2; }' ${ac_aux_dir}/intltool-update.in`
-    [INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split($ 2, VERSION, "."); print VERSION[1] * 100 + VERSION[2];}' ${ac_aux_dir}/intltool-update.in`
+    [INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split($ 2, VERSION, "."); print VERSION[1] * 1000 + VERSION[2] * 100 + VERSION[3];}' ${ac_aux_dir}/intltool-update.in`
     ]
     AC_MSG_RESULT([$INTLTOOL_APPLIED_VERSION found])
     test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT" ||
@@ -111,6 +111,9 @@ AC_PATH_PROG(INTLTOOL_MSGFMT, msgfmt, msgfmt)
 AC_PATH_PROG(INTLTOOL_MSGMERGE, msgmerge, msgmerge)
 AC_PATH_PROG(INTLTOOL_XGETTEXT, xgettext, xgettext)
 
+# Substitute ALL_LINGUAS so we can use it in po/Makefile
+AC_SUBST(ALL_LINGUAS)
+    
 IT_PO_SUBDIR([po])
 
 dnl The following is very similar to
