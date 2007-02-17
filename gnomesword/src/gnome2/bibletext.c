@@ -46,7 +46,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
@@ -199,7 +199,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	 */
 	gui_change_window_title(settings.MainWindowModule);
 
-	switch (event->button) {
+/*	switch (event->button) {
 	case 1:
 		if (!in_url) {
 			key = gui_button_press_lookup(widgets.html_text);
@@ -243,7 +243,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		break;
 	case 3:
 		break;
-	}
+	}*/
 	return FALSE;
 }
 

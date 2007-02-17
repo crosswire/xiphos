@@ -44,7 +44,7 @@
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
@@ -149,7 +149,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	gchar *buf = NULL;
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
-	
+	/*
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -206,7 +206,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 		break;
 	case 3:
 		break;
-	}
+	}*/
 	return FALSE;
 }
 

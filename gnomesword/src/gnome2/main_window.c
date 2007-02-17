@@ -42,7 +42,7 @@
 #include "gui/sidebar.h"
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
 #include "gui/commentary.h"

@@ -22,9 +22,6 @@
 #include <config.h>
 #include <libgnome/gnome-i18n.h>
 
-
-#ifdef USE_GTKHTML38
-
 #include <gnome.h>
 #include <bonobo.h>
 #include <sys/types.h>
@@ -33,8 +30,6 @@
 
 #include <glib.h>
 #include <Editor.h>
-#include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/gtkhtml-properties.h>
 
 #include "editor/html-editor.h"
 
@@ -44,7 +39,6 @@
 #include "main/xml.h"
 
 #include "gui/dialog.h"
-#include "gui/html.h"
 #include "gui/widgets.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
@@ -85,7 +79,7 @@ struct _editor {
 static GList *editors_all = NULL;
 static gint formatHTML = 1;
 static GtkWidget *win;
-static GtkHTML *html;
+//static GtkHTML *html;
 
 
 
@@ -695,14 +689,14 @@ static
 void print_message_cb(GtkWidget * widget, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
-	gui_html_print(e->html_widget, FALSE);
+	//gui_html_print(e->html_widget, FALSE);
 }
 
 static
 void print_preview_message_cb(GtkWidget * widget, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
-	gui_html_print(e->html_widget, TRUE);
+	//gui_html_print(e->html_widget, TRUE);
 }
 
 
@@ -765,7 +759,7 @@ app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data)
 	do_exit((EDITOR *) data);
 	return FALSE;
 }
-
+/*
 static void size_changed(GtkHTML * html, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
@@ -774,7 +768,7 @@ static void size_changed(GtkHTML * html, gpointer data)
 #endif
 	e->is_changed = TRUE;
 }
-
+*/
 static gboolean on_key_release_event(GtkWidget * widget,
 				     GdkEventKey * event, gpointer data)
 {
@@ -1363,4 +1357,3 @@ gint load_file(EDITOR * e)
 	load_through_persist_file(e, g_strdup(e->filename));
 	return FALSE;
 }
-#endif				/* USE_GTKHTML38 */
