@@ -43,7 +43,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/bookmarks.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/font_dialog.h"
@@ -120,7 +120,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	
 	settings.whichwindow = BOOK_WINDOW;
 	//gui_change_window_title(settings.book_mod);
-	
+	/*
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -166,7 +166,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 		break;
 	case 3:
 		break;
-	}
+	}*/
 	return FALSE;
 }
 

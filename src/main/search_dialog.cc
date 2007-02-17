@@ -44,7 +44,7 @@ extern "C" {
 #include "gui/search_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 

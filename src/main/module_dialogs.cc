@@ -34,7 +34,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gtkhtml/gtkhtml.h>
+//#include <gtkhtml/gtkhtml.h>
 #ifdef __cplusplus
 }
 #endif	
@@ -48,7 +48,7 @@ extern "C" {
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
@@ -792,7 +792,7 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
  * Return value
  *   gboolean
  */
-
+/*
 static GString *note_str;
 static gboolean save_note_receiver(const HTMLEngine * engine,
 				   const char *data, unsigned int len,
@@ -810,7 +810,7 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
 
 	return TRUE;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -827,7 +827,7 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
  * Return value
  *   void
  */
-
+/*
 void main_dialog_save_note(gpointer data)
 {
 	//gchar *buf = NULL;                                       
@@ -850,13 +850,7 @@ void main_dialog_save_note(gpointer data)
 		 GINT_TO_POINTER(0)) ){
 		g_warning("file not writen");
 	} else {
-		/*buf = g_convert(note_str->str,
-                             -1,
-                             OLD_CODESET,
-                             UTF_8,
-                             &bytes_read,
-                             &bytes_written,
-                             error);*/
+		
 		//g_message(note_str->str);
 		be->save_entry(note_str->str);	
 		g_print("\nnote saved\n");
@@ -866,7 +860,7 @@ void main_dialog_save_note(gpointer data)
 	gtk_html_set_editable(e->html, TRUE);
 #endif
 }
-
+*/
 /******************************************************************************
  * Name
  *   main_dialog_delete_note
@@ -882,7 +876,7 @@ void main_dialog_save_note(gpointer data)
  * Return value
  *   void
  */
-
+/*
 void main_dialog_delete_note(gpointer data)
 {
 #ifndef USE_GTKHTML38
@@ -894,7 +888,7 @@ void main_dialog_delete_note(gpointer data)
 	be->delete_entry();
 #endif	
 }
-
+*/
 
 /******************************************************************************
  * Name

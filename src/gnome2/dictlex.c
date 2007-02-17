@@ -36,7 +36,7 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/dictlex_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/sidebar.h"
@@ -228,7 +228,7 @@ static gint html_button_released(GtkWidget * html,
 	settings.whichwindow = DICTIONARY_WINDOW;
 
 	//gui_change_window_title(settings.DictWindowModule);
-
+/*
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -249,7 +249,7 @@ static gint html_button_released(GtkWidget * html,
 		}
 		break;
 	}
-
+*/
 	return FALSE;
 }
 

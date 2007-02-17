@@ -623,7 +623,7 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 		return;
 
 	gtk_win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	html = gecko_html_new(8);
+	html = gecko_html_new(NULL,FALSE,8);
 	gtk_container_add(GTK_CONTAINER(gtk_win), GTK_WIDGET(vbox));
 	gtk_box_pack_end(GTK_BOX(vbox), GTK_WIDGET(html), TRUE, TRUE, 0);
 	gtk_widget_show(gtk_win);
@@ -631,7 +631,7 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gtk_widget_show(GTK_WIDGET(html));
 	gtk_widget_hide(gtk_win);
 	
-	if (!strcmp(mod->Type(), TEXT_MODS)) 
+	if (!strcmp(mod->Type(), TEXT_MODS))
 		swdisplay = new GTKPrintChapDisp(GTK_WIDGET(html), backend);
 	else 
 		swdisplay = new GTKPrintEntryDisp(GTK_WIDGET(html), backend);

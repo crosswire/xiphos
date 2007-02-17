@@ -40,7 +40,7 @@
 #endif
 
 #include "gui/about_modules.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/utilities.h"
@@ -64,6 +64,7 @@
 
 #include "backend/sword_main.hh"
 
+gint in_url;
 
 using namespace sword;
 

@@ -45,7 +45,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 
 
 #include "main/url.hh"
@@ -1034,7 +1034,7 @@ GtkWidget *create_menu_modules(void)
  * Return value
  *   gboolean
  */
-
+/*
 static gboolean on_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
@@ -1066,7 +1066,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-
+*/
 static void tree_selection_changed_cb(GtkTreeSelection * selection,
 				      gpointer data)
 {

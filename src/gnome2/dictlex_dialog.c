@@ -30,7 +30,7 @@
 
 
 #include "gui/dictlex_dialog.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
 
@@ -216,13 +216,13 @@ static void dialog_destroy(GtkObject * object, DIALOG_DATA * dlg)
  * Return value
  *   void
  */
-
+/*
 static void dialog_url(GtkHTML * html, const gchar * url,
 		       DIALOG_DATA * dlg)
 {
 
 	//cur_dlg = dlg;
-	/*
+	
 
 	   if (*url == '@') {
 	   ++url;
@@ -247,9 +247,9 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	   sprintf(buf, _("Go to %s"), url);
 
 
-	 */
+	
 }
-
+*/
 /******************************************************************************
  * Name
  *  list_button_released

@@ -46,7 +46,7 @@ extern "C" {
 #include "gui/search_sidebar.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
-#include "gui/html.h"
+//#include "gui/html.h"
 #include "gui/dialog.h"
 
 //#include "backend/module_search.hh"
