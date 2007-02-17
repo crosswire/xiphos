@@ -132,6 +132,8 @@ strcasestr(const char *haystack, const char *needle)
 			*s = tolower(*s);
 
 	s = strstr(lower_haystack, lower_needle);
+	if (s)
+		s = (char *)haystack + (s - lower_haystack);
 
 	g_free(lower_haystack);
 	g_free(lower_needle);
@@ -203,10 +205,10 @@ AnalyzeForImageSize(const char *origtext,
 		trail = path;
 
 		// some play fast-n-loose with proper file spec.
-		if (strncmp(path, "file:///", 8) == 0) {
+		if (strncmp(path, "file://", 7) == 0) {
 			path += 7;
 			resized += "file://";
-		} else if (strncmp(path, "file:/", 6) == 0) {
+		} else if (strncmp(path, "file:", 5) == 0) {
 			path += 5;
 			resized += "file:";
 		} else
