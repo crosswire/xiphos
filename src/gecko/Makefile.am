@@ -31,7 +31,7 @@ INCLUDES =  \
     -DMOZILLA_HOME=\""$(MOZILLA_HOME)\""  \
     $(UPRINT_CFLAGS)
  
-     
+if USE_GTKMOZEMBED     
 noinst_LIBRARIES = libgecko.a
 
 libgecko_a_SOURCES =  \
@@ -40,6 +40,7 @@ libgecko_a_SOURCES =  \
 	gecko-print.c		gecko-print.h		\
 	gecko-services.h   	gecko-services.cpp 	\
 	gecko-utils.cpp		gecko-utils.h			
-	
+endif
+
 EXTRA_DIST = \
 	README

@@ -24,12 +24,13 @@
 #endif
 
 #include <gnome.h>
-//#include <gtkhtml/gtkhtml.h>
-//#ifndef USE_GTKMOZEMBED
-//#include "gui/html.h"
-//#endif
-
+#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
+
 
 #include "gui/commentary_dialog.h"
 #include "gui/dialog.h"
@@ -472,6 +473,36 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
+ *   commentary_prefixable_link
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void commentary_prefixable_link(void)	
+ *
+ * Description
+ *    front-end-ish handler for xref clicks, to supply book name to prefix.
+ *
+ * Return value
+ *   void
+ */
+
+#ifndef USE_GTKHTML38
+void commentary_prefixable_link(GtkHTML * html,
+				const gchar * url,
+				gpointer data)
+{
+	gchar buf[32];
+
+	cur_d = data;
+	strcpy(buf, cur_d->key);
+	*(strrchr(buf, ' ')) = '\0';
+	gui_prefixable_link_clicked(html, url, data, buf);
+}
+#endif
+
+/******************************************************************************
+ * Name
  *   on_entry_activate
  *
  * Synopsis
@@ -846,6 +877,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 	return hbox3;
 }
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -853,7 +885,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	gui_commentary_dialog_create_menu(d); 
 }
-
+#endif
 
 /******************************************************************************
  * Name

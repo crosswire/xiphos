@@ -25,14 +25,17 @@
 
 #include <gnome.h>
 
-
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 #include "gui/about_modules.h"
-//#include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -132,9 +135,13 @@ static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
 #ifdef DEBUG
 	g_message("on_copy_activate");
 #endif
-	//gui_copy_html(text_html);
+#ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(text_html));
+#else
+	gui_copy_html(text_html);
+#endif
 }
+	
 
 
 
@@ -174,7 +181,7 @@ static void create_menu1 (void)
  *
  * Return value
  *   gboolean
- *//*
+ */
 static gboolean on_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
@@ -191,8 +198,8 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-*/
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -200,6 +207,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	create_menu1();
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -261,8 +269,18 @@ static GtkWidget *gui_create_about_modules(void)
 
 	frame73 = gtk_frame_new(NULL);
 	gtk_widget_show(frame73);
-	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
-/*
+	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);	
+#ifdef USE_GTKMOZEMBED	
+	text_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, 12));
+	gtk_widget_show(text_html);
+	gtk_container_add(GTK_CONTAINER(frame73), text_html);
+	//gtk_widget_set_sensitive(text_html,FALSE);
+	g_signal_connect((gpointer)text_html,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
+#else
+
 	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow30);
 	gtk_container_add(GTK_CONTAINER(frame73), scrolledwindow30);
@@ -273,21 +291,14 @@ static GtkWidget *gui_create_about_modules(void)
 				       GTK_POLICY_ALWAYS);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
                                              settings.shadow_type);
-
-*/
-	text_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, 12));//gtk_html_new();
+	text_html = gtk_html_new();
 	gtk_widget_show(text_html);
-	gtk_container_add(GTK_CONTAINER(frame73), text_html);
-	//gtk_widget_set_sensitive(text_html,FALSE);
-	g_signal_connect((gpointer)text_html,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
 	    
-	/*g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
+	g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
 				G_CALLBACK(on_button_release_event),
-				NULL);*/
-
+				NULL);
+#endif
 	dialog_action_area28 =
 	    GTK_DIALOG(dialog_about_mods)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
@@ -375,6 +386,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		}
 
 		about_module_display(str, bufabout);	/* send about info to display function filter from rtf to html*/
+#ifdef USE_GTKMOZEMBED
 		gecko_html_open_stream(GECKO_HTML(text), "text/html");
 		gecko_html_write(GECKO_HTML(text), "<html><body>",
 				 strlen("<html><body>"));
@@ -384,8 +396,8 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gecko_html_write(GECKO_HTML(text), "</body></html>",
 				 strlen("</body></html>"));
 		gecko_html_close(GECKO_HTML(text));
-		
-/*		gui_begin_html(text, FALSE);
+#else
+		gui_begin_html(text, FALSE);
 		gui_display_html(text, "<html><body>",
 				 strlen("<html><body>"));
 		gui_display_html(text, description->str,
@@ -395,7 +407,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gui_display_html(text, "</body></html>",
 				 strlen("</body></html>"));
 		gui_end_html(text);
-*/
+#endif
 	} else
 		g_warning("oops");
 

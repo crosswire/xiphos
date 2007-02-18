@@ -26,20 +26,23 @@
 #include <gnome.h>
 #include <glade/glade-xml.h>
 
+#ifdef USE_GTKMOZEMBED 
+#include "gecko/gecko-html.h"
+#else
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include <regex.h>
 #include <string.h>
 #include <glib.h>
 
 #include "gui/search_dialog.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/search_dialog.h"
 #include "main/configs.h"
@@ -262,7 +265,7 @@ void on_togglebutton_show_main(GtkToggleButton * togglebutton,
  * Return value
  *   void
  */
-
+#ifndef USE_GTKMOZEMBED
 static void _url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL;
@@ -338,7 +341,7 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
 	g_free(newmod);
 	g_free(newref);
 }
-
+#endif
 
 /******************************************************************************
  * Name
@@ -356,6 +359,7 @@ static void _url(GtkHTML * html, const gchar * url, gpointer data)
  *   void
  */
 
+#ifndef USE_GTKMOZEMBED
 static void _link_clicked(GtkHTML * html, const gchar * url,
 			  gpointer data)
 {
@@ -441,6 +445,7 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
 	g_free(newmod);
 	g_free(newref);
 }
+#endif
 
 
 /******************************************************************************
@@ -460,12 +465,13 @@ static void _link_clicked(GtkHTML * html, const gchar * url,
  *   void
  */
 
+#ifndef USE_GTKMOZEMBED
 static void report_link_clicked(GtkHTML * html, const gchar * url,
 				gpointer data)
 {
 //	gtk_html_jump_to_anchor(GTK_HTML(search1.results_html), url);
 }
-
+#endif
 
 /******************************************************************************
  * Name
@@ -1770,7 +1776,11 @@ scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 static
 void _add_html_widget(GtkWidget * vbox)
 {	
+#ifdef USE_GTKMOZEMBED
 	search1.preview_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, DIALOG_SEARCH_PREVIEW_TYPE));
+#else
+	search1.preview_html = gtk_html_new();
+#endif
 	gtk_widget_show(search1.preview_html);
 	gtk_box_pack_start(GTK_BOX(vbox), search1.preview_html, TRUE,
 			   TRUE, 0);

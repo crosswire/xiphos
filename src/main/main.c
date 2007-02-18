@@ -33,8 +33,9 @@
 //#include "gui/widgets.h"
 
 #include "main/url.hh"
-
+#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#endif
 //#include "backend/sword.h"
  
 /******************************************************************************
@@ -98,10 +99,11 @@ int main(int argc, char *argv[])
 	
 	gui_splash_init();
 	
+#ifdef USE_GTKMOZEMBED
 	gui_splash_step0();
 	
 	gecko_html_initialize();
-	
+#endif
 	gui_splash_step1();
 	
 	create_mainwindow();

@@ -25,15 +25,17 @@
 
 #include <gnome.h>
 
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
+
 #include "gui/gbs_dialog.h"
 #include "gui/navbar_book_dialog.h"
-//#include "gui/html.h"
 #include "gui/widgets.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/module_dialogs.h"
 #include "main/sidebar.h"
@@ -287,6 +289,7 @@ static void add_columns(GtkTreeView *tree)
 	gtk_tree_view_column_set_visible(column,FALSE);
 }
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -294,6 +297,8 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	//(d); 
 }
+#endif
+
 /******************************************************************************
  * Name
  *   create_gbs_dialog
@@ -409,9 +414,9 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	g_signal_connect(GTK_OBJECT(dlg->html),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	/*g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   G_CALLBACK(dialog_url),
-			   (DIALOG_DATA *) dlg);
+			   (DIALOG_DATA *) dlg);*/
 	g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
 			   G_CALLBACK(link_clicked),
 			   (DIALOG_DATA *) dlg);
