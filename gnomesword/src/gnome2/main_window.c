@@ -24,10 +24,12 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
 #include "main/sword.h"
 #include "main/settings.h"
@@ -42,7 +44,6 @@
 #include "gui/sidebar.h"
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
-//#include "gui/html.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
 #include "gui/commentary.h"

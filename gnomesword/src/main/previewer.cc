@@ -382,10 +382,18 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GString *search_str;
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
-	
+#ifdef USE_GTKMOZEMBED	
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget))) return;
 	GeckoHtml *html = GECKO_HTML(html_widget);
 	gecko_html_open_stream(html,"text/html");
+#else	
+	GtkHTML *html = GTK_HTML(html_widget);
+
+	/* setup gtkhtml widget */
+	was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif
 	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -433,9 +441,15 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
+#ifdef USE_GTKMOZEMBED
 	if (str->len)
 		gecko_html_write(html,str->str,str->len);
 	gecko_html_close(html);
+#else	
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	gtk_html_set_editable(html, was_editable);
+#endif	
 	/* andyp - inserted for debugging, remove */
 	//g_print(str->str); 
 	

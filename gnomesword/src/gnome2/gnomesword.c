@@ -257,8 +257,9 @@ void shutdown_frontend(void)
 	xml_free_settings_doc();
 
 	main_shutdown_list();
+#ifdef USE_GTKMOZEMBED	
 	gecko_html_shutdown();
-
+#endif
 	if(settings.browsing)
 		gui_notebook_main_shutdown();
 

@@ -26,13 +26,17 @@
 #include <regex.h>
 #include <swbuf.h>
 #include <swmodule.h>
-
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
 #ifdef __cplusplus
 extern "C" {
 #endif
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #ifdef __cplusplus
 }
+#endif
 #endif
 	
 
@@ -44,11 +48,9 @@ extern "C" {
 #include "gui/search_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
-//#include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 
-#include "gecko/gecko-html.h"
 
 #include "backend/sword_main.hh"
 
@@ -914,10 +916,15 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
 	}
 	text_str = backendSearch->get_render_text(module,key);
-	
+#ifdef USE_GTKMOZEMBED	
 	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
 	gecko_html_write(GECKO_HTML(search1.preview_html),text_str,strlen(text_str));
 	gecko_html_close(GECKO_HTML(search1.preview_html));
+#else
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
+				  text_str, strlen(text_str));
+#endif
+
 
 #ifdef DEBUG
 	g_message("main_finds_verselist_selection_changed: %s %s", module, key);

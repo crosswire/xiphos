@@ -24,8 +24,12 @@
 #endif
 
 #include <gnome.h>
-
+#ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
@@ -35,8 +39,6 @@
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
-
-#include "gecko/gecko-html.h"
 
 #include "main/navbar.h"
 #include "main/module_dialogs.h"
@@ -167,7 +169,6 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 
 
 
-#ifndef USE_GTKMOZEMBED
 /******************************************************************************
  * Name
  *   link_clicked
@@ -185,6 +186,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
  *   void
  */
 
+#ifndef USE_GTKMOZEMBED
 static void link_clicked(GtkHTML * html, const gchar * url,
 			 DIALOG_DATA * vt)
 {
@@ -1210,6 +1212,7 @@ static void create_text_tags(GtkTextBuffer *buffer)
 }
 #endif	
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -1217,6 +1220,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	DIALOG_DATA * d = (DIALOG_DATA *)user_data;
 	gui_text_dialog_create_menu(d);
 }
+#endif	
 
 /******************************************************************************
  * Name
@@ -1266,12 +1270,12 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	paned = gtk_vpaned_new();	
 	gtk_box_pack_start(GTK_BOX(vbox33), paned, TRUE, TRUE, 0);
 	gtk_widget_show(paned);
-	   
+
+#ifdef USE_GTKMOZEMBED	   
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_paned_add1((GtkPaned *)paned,frame);
-	gtk_widget_set_size_request(frame, -1, 400);
-	
+	gtk_widget_set_size_request(frame, -1, 400);	
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	vt->html = GTK_WIDGET(gecko_html_new(vt,TRUE,DIALOG_TEXT_TYPE));//embed_dialogs_new((DIALOG_DATA*) vt);
 	gtk_widget_show(vt->html);
@@ -1291,7 +1295,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_widget_show(vt->previewer);
 	gtk_container_add(GTK_CONTAINER(frame), vt->previewer);
 	
-
+#endif
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
