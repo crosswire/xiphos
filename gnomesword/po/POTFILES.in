@@ -7,6 +7,7 @@ src/backend/module_manager.cc
 src/backend/module_manager.cc
 # shared source files
 src/main/display.cc
+src/main/embed.cc
 src/main/lists.cc
 src/main/module_dialogs.cc
 src/main/previewer.cc
@@ -52,7 +53,7 @@ src/gnome2/main_menu.c
 src/gnome2/main_window.c
 src/gnome2/mod_mgr.c
 src/gnome2/navbar_book.c
-# src/gnome2/note_editor.c
+src/gnome2/navbar_book_dialog.c
 src/gnome2/parallel_dialog.c
 src/gnome2/parallel_view.c
 src/gnome2/preferences_cell_renderer.c
@@ -74,3 +75,4 @@ ui/module-manager.glade
 ui/search-dialog.glade
 ui/editor_note.xml
 ui/editor_studypad.xml
+ui/editor.xml
