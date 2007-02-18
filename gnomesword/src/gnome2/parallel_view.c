@@ -27,12 +27,13 @@
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
-#endif
+#else
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#endif
 
 #include "gui/parallel_view.h"
 #include "gui/parallel_dialog.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"

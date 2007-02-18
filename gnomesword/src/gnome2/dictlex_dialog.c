@@ -24,17 +24,18 @@
 #endif
 
 #include <gnome.h>
-#ifndef USE_GTKMOZEMBED
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
 #include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
 
 
 #include "gui/dictlex_dialog.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/sidebar.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/module_dialogs.h"
 #include "main/sword.h"
@@ -393,6 +394,7 @@ static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 	main_dialogs_dictionary_entry_changed(d);
 }
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -400,7 +402,13 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {
 	//(d);
 }
-
+#else
+static void dialog_url(GtkHTML * html, const gchar * url,
+		       DIALOG_DATA * dlg)
+{
+	
+}
+#endif
 
 /******************************************************************************
  * Name

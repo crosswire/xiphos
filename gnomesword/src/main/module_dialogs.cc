@@ -30,13 +30,16 @@
 
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
-#endif
+#include "gecko/gecko-html.h"
+#else
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #ifdef __cplusplus
 }
+#endif	
 #endif	
 
 #include <string.h>
@@ -48,13 +51,11 @@ extern "C" {
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/navbar_book_dialog.h"
 #include "main/module_dialogs.h"

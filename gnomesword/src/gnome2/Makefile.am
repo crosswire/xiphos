@@ -38,6 +38,7 @@ gnomesword2_SOURCES =  \
     gbs_dialog.c \
     gnomesword.c \
     gui.c \
+    html.c \
     main_menu.c \
     main_window.c \
     mod_mgr.c \
@@ -57,12 +58,18 @@ gnomesword2_SOURCES =  \
     toolbar_nav.c \
     tabbed_browser.c \
     utilities.c
-    
+
+if USE_GTKMOZEMBED
+    LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
+else
+    LIB_GECKO=
+endif 
+
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/editor/libeditor.a \
     $(top_builddir)/src/backend/libbackend.a \
-    $(top_builddir)/src/gecko/libgecko.a \
+    $(LIB_GECKO) \
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \
     $(MOZILLA_COMPONENT_LIBS) \
