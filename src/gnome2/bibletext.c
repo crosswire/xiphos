@@ -24,29 +24,24 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
-#endif
-
-
-#ifdef USE_GTKHTML38
-#include "editor/html-editor.h"
 #else
-#include <gtkhtml/htmlengine.h>
-#include "editor/editor-control.h"
+#include <gtkhtml/gtkhtml.h>
+#include "editor/html-editor.h"
+#include "gui/html.h"
 #endif
+
 
 #include "gui/gnomesword.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
-#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_main.h" 
 #include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
-//#include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
@@ -124,6 +119,7 @@ void gui_popup_pm_text(void)
 //gui_popup_pm_text();
 
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -131,7 +127,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	gui_popup_pm_text();
 }
-
+#endif
 
 /******************************************************************************
  * Name
@@ -543,7 +539,7 @@ GtkWidget *gui_create_bible_pane(void)
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
-
+#ifdef USE_GTKMOZEMBED
 	widgets.html_text = GTK_WIDGET(gecko_html_new(NULL, FALSE, TEXT_TYPE)); 
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(notebook_text), widgets.html_text);
@@ -552,6 +548,48 @@ GtkWidget *gui_create_bible_pane(void)
 		      G_CALLBACK (_popupmenu_requested_cb),
 		      NULL);
 
+#else		
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_container_add(GTK_CONTAINER(notebook_text),
+			  scrolledwindow);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	adjustment = gtk_scrolled_window_get_vadjustment
+                                            (GTK_SCROLLED_WINDOW(scrolledwindow));
+	scroll_adj_signal = g_signal_connect(GTK_OBJECT(adjustment), "value-changed",
+				G_CALLBACK(adj_changed),
+				NULL);
+	
+	widgets.html_text = gtk_html_new();
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.html_text);
+			  
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
+				G_CALLBACK(gui_link_clicked),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
+				G_CALLBACK(gui_url),
+				GINT_TO_POINTER(TEXT_TYPE));		    
+	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
+				G_CALLBACK(on_text_button_release_event),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "button_press_event",
+				G_CALLBACK(on_text_button_press_event),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
+		    		G_CALLBACK (on_enter_notify_event),
+		       		NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
+		    		G_CALLBACK (on_key_press_event),
+		    		NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
+		    		G_CALLBACK (on_key_release_event),
+		    		NULL);				   
+#endif
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),

@@ -27,6 +27,9 @@
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
 
 #include "gui/dictlex.h"
@@ -36,7 +39,6 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/dictlex_dialog.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/sidebar.h"
@@ -477,7 +479,7 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 	}
 	return FALSE;
 }
-
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -485,7 +487,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	gui_create_pm_dictionary(); 
 }
-
+#endif
 
 GtkWidget *gui_create_dictionary_pane(void)
 {

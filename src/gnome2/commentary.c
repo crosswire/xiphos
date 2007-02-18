@@ -24,18 +24,14 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
-
-#ifdef USE_GTKHTML38
-#include "editor/html-editor.h"
-#else
-#include <gtkhtml/htmlengine.h>
-#include "editor/editor-control.h"
-#endif
 
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
+#include "editor/html-editor.h"
 #endif
 
 #include "gui/commentary.h"
@@ -44,7 +40,6 @@
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/sidebar.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
@@ -57,9 +52,6 @@
 #include "main/xml.h"
 #include "main/global_ops.hh"
 
-
-
-#include "gecko/gecko-html.h"
 
 //static void create_menu(GdkEventButton * event);
 
@@ -223,6 +215,7 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 }
 
 
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -230,7 +223,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	gui_create_pm_commentary(); 
 }
-
+#endif
 
 /******************************************************************************
  * Name

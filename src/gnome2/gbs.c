@@ -26,13 +26,14 @@
 #include <gnome.h>
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_GTKMOZEMBED
 #include "gecko/gecko-html.h"
+#else
+#include <gtkhtml/gtkhtml.h>
+#include "gui/html.h"
 #endif
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/gbs.h"
@@ -43,7 +44,6 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/bookmarks.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/font_dialog.h"
@@ -275,7 +275,7 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
   	return FALSE;
 }
 
-
+#ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
 			     gchar *uri,
@@ -283,7 +283,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
 {	
 	gui_popup_menu_gbs(); 
 }
-
+#endif
 
 /******************************************************************************
  * Name

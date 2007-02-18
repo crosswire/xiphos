@@ -24,12 +24,14 @@
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKMOZEMBED
+#include "gecko/gecko-html.h"
+#else
 #include <gtkhtml/gtkhtml.h>
+#endif
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/display_info.h"
 
-#include "gecko/gecko-html.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -88,9 +90,18 @@ void gui_display_mod_and_key(gchar * mod_name, gchar * key)
 
 void gui_display_text_information(gchar * information)
 {
+#ifdef USE_GTKMOZEMBED
 	gecko_html_open_stream(GECKO_HTML(html_widget), "text/html");
 	gecko_html_write(GECKO_HTML(html_widget),information,strlen(information));
 	gecko_html_close(GECKO_HTML(html_widget));
+#else
+	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
+	if (was_editable)
+		gtk_html_set_editable(GTK_HTML(html_widget), FALSE);
+	
+	gtk_html_load_from_string(GTK_HTML(html_widget),information,strlen(information));
+	gtk_html_set_editable(GTK_HTML(html_widget), was_editable);
+#endif
 }
 
 /******************************************************************************
@@ -198,7 +209,12 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
 			   0);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
-/*	
+#ifdef USE_GTKMOZEMBED
+	html_widget = GTK_WIDGET(gecko_html_new(NULL,FALSE,30));//gtk_html_new();
+	gtk_widget_show(html_widget);
+	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
+#else
+	
 	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow70);
 	gtk_box_pack_start(GTK_BOX(hbox), scrolledwindow70, TRUE, TRUE,
@@ -209,10 +225,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				       GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow70,
                                              settings.shadow_type);
-*/
-	html_widget = GTK_WIDGET(gecko_html_new(NULL,FALSE,30));//gtk_html_new();
-	gtk_widget_show(html_widget);
-	gtk_box_pack_start(GTK_BOX(hbox), html_widget, TRUE, TRUE, 0);
+#endif
 	//gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
 

@@ -237,9 +237,16 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 	
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+#ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
-	
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);	
+#endif
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -278,6 +285,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	swbuf.appendFormatted(  "<font color=\"%s\">",
 				settings.bible_verse_num_color);
 
+	
+
+#ifdef USE_GTKMOZEMBED	
 	swbuf.appendFormatted(	"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
 				"[*%s*]</a></font>[%s]<br>"
 				"<font face=\"%s\" size=\"%s\">",
@@ -287,6 +297,14 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0");
+#else
+	swbuf.appendFormatted(	"[*%s*]</font>[%s]<br>"
+				"<font face=\"%s\" size=\"%s\">",
+				imodule.Name(),
+				(gchar*)keytext,
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0");
+#endif
 
 	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
 		// !strcmp(imodule.getConfigEntry("SourceType"),"ThML"))
@@ -307,9 +325,18 @@ char GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 
+#ifdef USE_GTKMOZEMBED
 	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
+#else
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+	if (swbuf.length())
+		gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
+	gtk_html_set_editable(html, was_editable);
+#endif
 	
 	free_font(mf);
 	g_free(ops);
@@ -648,10 +675,23 @@ char GTKChapDisp::Display(SWModule &imodule)
 	is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
-	
+#ifdef USE_GTKMOZEMBED	
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
+
+	gboolean was_editable = gtk_html_get_editable(html);
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	GtkHTMLStreamStatus status;
+#endif
+	
+	
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;";
 	else
@@ -667,15 +707,22 @@ char GTKChapDisp::Display(SWModule &imodule)
 			      settings.link_color);
 	if (is_rtol)
 		swbuf += "<DIV ALIGN=right>";
-	
+
+#ifdef USE_GTKMOZEMBED		
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+#else
+	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
+#endif
 	
 	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
 	getVerseBefore(imodule);
-	
+#ifdef USE_GTKMOZEMBED	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
+#else
+	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
+#endif
 	
 	swbuf = "";
 
@@ -786,8 +833,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf.appendFormatted("</td></tr></table>");
 
 		g_free(buf);
-		
+#ifdef USE_GTKMOZEMBED		
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+#else
+		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
+#endif
 		
 		swbuf = "";
 	}
@@ -805,6 +855,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	else
 		swbuf += "</body></html>";
 	
+#ifdef USE_GTKMOZEMBED
 	if (swbuf.length()) 
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
@@ -813,7 +864,22 @@ char GTKChapDisp::Display(SWModule &imodule)
 		gecko_html_jump_to_anchor (html,buf);
 		//embed_go_to_anchor(html, buf);
 		g_free(buf);
-	}	
+	}
+#else
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+	if (swbuf.length())
+		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
+		//gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
+	gtk_html_end(html, stream, status);
+	gtk_html_set_editable(html, was_editable);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
+		gtk_html_jump_to_anchor(html, buf);
+		g_free(buf);
+	}
+	gtk_html_flush (html);
+#endif	
 	free_font(mf);
 	g_free(ops);
 }
@@ -962,7 +1028,18 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	int type = d->mod_type;  //be->module_type(imodule.Name());
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+#ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
+	gtk_widget_modify_font (gtkText, desc);
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
@@ -1012,11 +1089,18 @@ char DialogEntryDisp::Display(SWModule &imodule)
 						       type)
 				 : (const char *)imodule /* untouched */));
 
+
+#ifdef USE_GTKMOZEMBED
 	if (str->len) {
 		gecko_html_open_stream(html,"text/html");
 		gecko_html_write(html, str->str, str->len);
 		gecko_html_close(html); 
 	}
+#else
+	if (str->len)
+		gtk_html_load_from_string(html, str->str, str->len);
+	gtk_html_set_editable(html, was_editable);
+#endif
 	g_string_free(str, TRUE);
 	free_font(mf);
 	g_free(ops);
@@ -1040,7 +1124,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;	
+#ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
+#else
+	GtkHTML *html = GTK_HTML(gtkText);
+	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(desc,
+					  ((mf->old_font)?mf->old_font:"Serif"));
+	gtk_widget_modify_font (gtkText, desc);
+	gboolean was_editable = gtk_html_get_editable(html);
+#endif
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
 
@@ -1175,6 +1269,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	str = g_string_append(str, buf);
 	g_free(buf);
 	
+#ifdef USE_GTKMOZEMBED
 	if (str->len) {
 		gecko_html_open_stream(html,"text/html");
 		gecko_html_write(html, str->str, str->len);
@@ -1185,6 +1280,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 	}
+#else
+	if (str->len) {
+		gtk_html_load_from_string(html, str->str, str->len);
+	}
+	gtk_html_set_editable(html, was_editable);
+	if (curVerse > 2) {
+		buf = g_strdup_printf("%d", curVerse - 2);
+		gtk_html_jump_to_anchor(html, buf);
+		g_free(buf);
+	}
+#endif
 	g_string_free(str, TRUE);
 	key->Verse(1);
 	key->Chapter(1);
@@ -1326,6 +1432,7 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 
 char GTKPrintEntryDisp::Display(SWModule &imodule)
 {
+#ifdef USE_GTKMOZEMBED
 	gchar *keytext = NULL;
 	SWBuf swbuf = "";
 	gsize bytes_read;
@@ -1398,10 +1505,12 @@ char GTKPrintEntryDisp::Display(SWModule &imodule)
 	g_free(ops);
 	if (keytext)
 		g_free(keytext);
+#endif
 }
 
 char GTKPrintChapDisp::Display(SWModule &imodule)
 {
+#ifdef USE_GTKMOZEMBED
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -1547,4 +1656,5 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	
 	free_font(mf);
 	g_free(ops);
+#endif
 }

@@ -96,39 +96,78 @@ AC_SUBST(GTKHTML_DATA_DIR)
 
 
 
-
 dnl  *****
 dnl  Gecko
 dnl  *****
 
-dnl  MOZILLA_COMPONENT_LIBS=""
-dnl  MOZILLA_COMPONENT_CFLAGS=""
-dnl  AM_CONDITIONAL(USE_GTKMOZEMBED, false)
-
-dnl  AC_ARG_ENABLE(moz_embed,[  --enable-moz_embed    use moz_embed [default=no]],moz_embed=$enableval,moz_embed=no)
-dnl  if test "x$moz_embed" = xyes; then	
-  GECKO_INIT([MOZILLA])
-  AC_SUBST([MOZILLA])
-  AC_SUBST([MOZILLA_FLAVOUR])
-  AC_SUBST([MOZILLA_INCLUDE_ROOT])
-  AC_SUBST([MOZILLA_HOME])
-  AC_SUBST([MOZILLA_PREFIX])
-  AC_SUBST([MOZILLA_EXTRA_LIBS])
-
-  case "$MOZILLA" in
-  xulrunner) gecko_min_version=1.8 ;;
-  *firefox) gecko_min_version=1.5 ;;
-  *) AC_MSG_ERROR([$gecko_cv_gecko is not supported])
-  esac
-
-  PKG_CHECK_MODULES([MOZILLA_COMPONENT],[${gecko_cv_gecko}-xpcom >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])	
-  AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
-  AM_CONDITIONAL(USE_GTKMOZEMBED, true)
+dnl  AC_ARG_ENABLE(no_gecko,[  --disable-gecko    don't use gecko [default=yes]],no_gecko=$enableval,no_gecko=yes)
+dnl  if test "x$no_gecko" = xno; then	
+	  
+dnl  else
+	
 dnl  fi
+
+dnl ====================================
+dnl cygwin
+dnl  ====================================
+AC_ARG_ENABLE(cygwin,[  --enable-cygwin    use cygwin [default=no]],cygwin=$enableval,cygwin=no)
+if test "x$cygwin" = xno; then
+	dnl  *****
+	dnl  Gecko
+	dnl  *****
+	GECKO_INIT([MOZILLA])
+	AC_SUBST([MOZILLA])
+	AC_SUBST([MOZILLA_FLAVOUR])
+	AC_SUBST([MOZILLA_INCLUDE_ROOT])
+	AC_SUBST([MOZILLA_HOME])
+	AC_SUBST([MOZILLA_PREFIX])
+	AC_SUBST([MOZILLA_EXTRA_LIBS])
+
+	case "$MOZILLA" in
+	xulrunner) gecko_min_version=1.8 ;;
+	*firefox) gecko_min_version=1.5 ;;
+	*) AC_MSG_ERROR([$gecko_cv_gecko is not supported])
+	esac
+
+	PKG_CHECK_MODULES([MOZILLA_COMPONENT],[${gecko_cv_gecko}-xpcom >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])	
+	AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
+	AM_CONDITIONAL(USE_GTKMOZEMBED, true)
+	gecko=yes  
+  dnl ====================================
+  dnl Gnome-doc-utils
+  dnl ====================================
+  GNOME_DOC_INIT
+
+  dnl ====================================
+  dnl = Begin tests for scrollkeeper
+  dnl ====================================
+  AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+  if test x$SCROLLKEEPER_CONFIG = xno; then
+    AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
+  fi
+  dnl ====================================
+  dnl = End tests for scrollkeeper
+  dnl ====================================Y
+  SCROLLKEEPER_BUILD_REQUIRED=0.3.5
+  AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
+else
+	MOZILLA_COMPONENT_LIBS=""
+	MOZILLA_COMPONENT_CFLAGS=""
+	AM_CONDITIONAL(USE_GTKMOZEMBED, false)
+	AM_CONDITIONAL(HAVE_MOZILLA_TOOLKIT, false)
+	AM_CONDITIONAL(HAVE_GECKO_DEBUG, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_7, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_8, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_8_1, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_9, false)
+	gecko=no 
+	
+  enable_scrollkeeper=no
+  AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
+fi
+
 AC_SUBST(MOZILLA_COMPONENT_LIBS)
 AC_SUBST(MOZILLA_COMPONENT_CFLAGS)
-
-
 
 
 AC_ARG_ENABLE(opensuse102,[  --enable-opensuse102    use opensuse102 [default=no]],opensuse102=$enableval,opensuse102=no)
@@ -177,30 +216,6 @@ AC_SUBST(ORBIT_IDL)
 
 BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_IDL_INCLUDES)
-
-
-dnl 	AM_CONDITIONAL(GNOME_SPELL, test x$use_gnome_spell = xtrue)
-
-dnl 	SPELL_LIBS=""
-dnl 	AC_SUBST(SPELL_LIBS)
-
-dnl ====================================
-dnl Gnome-doc-utils
-dnl ====================================
-GNOME_DOC_INIT
-
-dnl ====================================
-dnl = Begin tests for scrollkeeper
-dnl ====================================
-AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
-if test x$SCROLLKEEPER_CONFIG = xno; then
-  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package: http://scrollkeeper.sourceforge.net)
-fi
-dnl ====================================
-dnl = End tests for scrollkeeper
-dnl ====================================Y
-SCROLLKEEPER_BUILD_REQUIRED=0.3.5
-AC_SUBST(SCROLLKEEPER_BUILD_REQUIRED)
 
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
@@ -290,7 +305,11 @@ gnomesword.spec
 
 echo
 echo "Summary of GnomeSword configuration:"
+if test "x$gecko" = xyes; then
 echo "mozilla:                  enabled"
+else
+echo "mozilla:                  disabled"
+fi
 echo "install directory:      ${prefix}/bin"
 if test "x$have_gtkuprint" = xyes; then
   echo "gtk-unix-print:          enabled"
@@ -304,9 +323,9 @@ if test "x$debug" = xyes; then
     echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
   fi
 
-  if test "x$moz_embed" = xyes; then
-    echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
-  fi
+  dnl if test "x$no_gecko" = xyes; then
+    echo "MOZILLA_COMPONENT_CFLAGS  $MOZILLA_COMPONENT_CFLAGS"
+  dnl fi
   if test "x$sword_svn" = xyes; then
     echo "Sword SVN:             enabled"
   fi
