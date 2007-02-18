@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-15 21:39+0100\n"
+"POT-Creation-Date: 2007-02-18 11:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("aa")] = SWBuf("Afar");
 #. mm_languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 #. mm_languageMap[SWBuf("ae")] = SWBuf("Avestan");
-#: ../src/backend/sword_main.cc:1282 ../src/backend/module_manager.cc:79
+#: ../src/backend/sword_main.cc:1281 ../src/backend/module_manager.cc:79
 msgid "Afrikaans"
 msgstr ""
 
@@ -40,12 +40,12 @@ msgstr ""
 #. languageMap[SWBuf("am")] = SWBuf("Amharic");
 #. done
 #. mm_languageMap[SWBuf("am")] = SWBuf("Amharic");
-#: ../src/backend/sword_main.cc:1284 ../src/backend/module_manager.cc:81
+#: ../src/backend/sword_main.cc:1283 ../src/backend/module_manager.cc:81
 msgid "English, Old (ca.450-1100)"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1285 ../src/backend/module_manager.cc:82
+#: ../src/backend/sword_main.cc:1284 ../src/backend/module_manager.cc:82
 msgid "Arabic"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("as")] = SWBuf("Assamese");
 #. mm_languageMap[SWBuf("ay")] = SWBuf("Aymara");
-#: ../src/backend/sword_main.cc:1288 ../src/backend/module_manager.cc:85
+#: ../src/backend/sword_main.cc:1287 ../src/backend/module_manager.cc:85
 msgid "Azerbaijani"
 msgstr ""
 
@@ -63,12 +63,12 @@ msgstr ""
 #. languageMap[SWBuf("ba")] = SWBuf("Bashkir");
 #. done
 #. mm_languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-#: ../src/backend/sword_main.cc:1290 ../src/backend/module_manager.cc:87
+#: ../src/backend/sword_main.cc:1289 ../src/backend/module_manager.cc:87
 msgid "Belarusian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1291 ../src/backend/module_manager.cc:88
+#: ../src/backend/sword_main.cc:1290 ../src/backend/module_manager.cc:88
 msgid "Bulgarian"
 msgstr ""
 
@@ -82,17 +82,17 @@ msgstr ""
 #. mm_languageMap[SWBuf("bi")] = SWBuf("Bislama");
 #. mm_languageMap[SWBuf("bn")] = SWBuf("Bengali");
 #. mm_languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-#: ../src/backend/sword_main.cc:1296 ../src/backend/module_manager.cc:93
+#: ../src/backend/sword_main.cc:1295 ../src/backend/module_manager.cc:93
 msgid "Breton"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1297 ../src/backend/module_manager.cc:94
+#: ../src/backend/sword_main.cc:1296 ../src/backend/module_manager.cc:94
 msgid "Bosnian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1298 ../src/backend/module_manager.cc:95
+#: ../src/backend/sword_main.cc:1297 ../src/backend/module_manager.cc:95
 msgid "Catalan"
 msgstr ""
 
@@ -100,7 +100,7 @@ msgstr ""
 #. languageMap[SWBuf("ce")] = SWBuf("Chechen");
 #. done
 #. mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
-#: ../src/backend/sword_main.cc:1300 ../src/backend/module_manager.cc:97
+#: ../src/backend/sword_main.cc:1299 ../src/backend/module_manager.cc:97
 msgid "Cebuano"
 msgstr ""
 
@@ -110,17 +110,17 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 #. mm_languageMap[SWBuf("co")] = SWBuf("Corsican");
-#: ../src/backend/sword_main.cc:1303 ../src/backend/module_manager.cc:100
+#: ../src/backend/sword_main.cc:1302 ../src/backend/module_manager.cc:100
 msgid "Coptic"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1304 ../src/backend/module_manager.cc:101
+#: ../src/backend/sword_main.cc:1303 ../src/backend/module_manager.cc:101
 msgid "Czech"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1305 ../src/backend/module_manager.cc:102
+#: ../src/backend/sword_main.cc:1304 ../src/backend/module_manager.cc:102
 msgid "Church Slavic"
 msgstr ""
 
@@ -128,17 +128,17 @@ msgstr ""
 #. languageMap[SWBuf("cv")] = SWBuf("Chuvash");
 #. done
 #. mm_languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-#: ../src/backend/sword_main.cc:1307 ../src/backend/module_manager.cc:104
+#: ../src/backend/sword_main.cc:1306 ../src/backend/module_manager.cc:104
 msgid "Welsh"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1308 ../src/backend/module_manager.cc:105
+#: ../src/backend/sword_main.cc:1307 ../src/backend/module_manager.cc:105
 msgid "Danish"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1309 ../src/backend/module_manager.cc:106
+#: ../src/backend/sword_main.cc:1308 ../src/backend/module_manager.cc:106
 msgid "German"
 msgstr ""
 
@@ -146,42 +146,42 @@ msgstr ""
 #. languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
 #. done
 #. mm_languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-#: ../src/backend/sword_main.cc:1311 ../src/backend/module_manager.cc:108
+#: ../src/backend/sword_main.cc:1310 ../src/backend/module_manager.cc:108
 msgid "Greek, Modern (1453-)"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1312 ../src/backend/module_manager.cc:109
+#: ../src/backend/sword_main.cc:1311 ../src/backend/module_manager.cc:109
 msgid "English"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1313 ../src/backend/module_manager.cc:110
+#: ../src/backend/sword_main.cc:1312 ../src/backend/module_manager.cc:110
 msgid "American English"
 msgstr ""
 
 #. done
 #.
-#: ../src/backend/sword_main.cc:1315 ../src/backend/module_manager.cc:112
+#: ../src/backend/sword_main.cc:1314 ../src/backend/module_manager.cc:112
 msgid "English, Middle (1100-1500)"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1316 ../src/backend/module_manager.cc:113
+#: ../src/backend/sword_main.cc:1315 ../src/backend/module_manager.cc:113
 msgid "Esperanto"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1317 ../src/backend/module_manager.cc:114
+#: ../src/backend/sword_main.cc:1316 ../src/backend/module_manager.cc:114
 msgid "Spanish"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1318 ../src/backend/module_manager.cc:115
+#: ../src/backend/sword_main.cc:1317 ../src/backend/module_manager.cc:115
 msgid "Estonian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1319 ../src/backend/module_manager.cc:116
+#: ../src/backend/sword_main.cc:1318 ../src/backend/module_manager.cc:116
 msgid "Basque"
 msgstr ""
 
@@ -189,7 +189,7 @@ msgstr ""
 #. languageMap[SWBuf("fa")] = SWBuf("Persian");
 #. done
 #. mm_languageMap[SWBuf("fa")] = SWBuf("Persian");
-#: ../src/backend/sword_main.cc:1321 ../src/backend/module_manager.cc:118
+#: ../src/backend/sword_main.cc:1320 ../src/backend/module_manager.cc:118
 msgid "Finnish"
 msgstr ""
 
@@ -199,22 +199,22 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("fj")] = SWBuf("Fijian");
 #. mm_languageMap[SWBuf("fo")] = SWBuf("Faroese");
-#: ../src/backend/sword_main.cc:1324 ../src/backend/module_manager.cc:121
+#: ../src/backend/sword_main.cc:1323 ../src/backend/module_manager.cc:121
 msgid "French"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1325 ../src/backend/module_manager.cc:122
+#: ../src/backend/sword_main.cc:1324 ../src/backend/module_manager.cc:122
 msgid "Frisian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1326 ../src/backend/module_manager.cc:123
+#: ../src/backend/sword_main.cc:1325 ../src/backend/module_manager.cc:123
 msgid "Irish"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1327 ../src/backend/module_manager.cc:124
+#: ../src/backend/sword_main.cc:1326 ../src/backend/module_manager.cc:124
 msgid "Gaelic (Scots)"
 msgstr ""
 
@@ -228,27 +228,27 @@ msgstr ""
 #. mm_languageMap[SWBuf("gn")] = SWBuf("Guarani");
 #. mm_languageMap[SWBuf("gn")] = SWBuf("Gujarati");
 #.
-#: ../src/backend/sword_main.cc:1331 ../src/backend/module_manager.cc:128
+#: ../src/backend/sword_main.cc:1330 ../src/backend/module_manager.cc:128
 msgid "Gothic"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1332 ../src/backend/module_manager.cc:129
+#: ../src/backend/sword_main.cc:1331 ../src/backend/module_manager.cc:129
 msgid "Manx"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1333 ../src/backend/module_manager.cc:130
+#: ../src/backend/sword_main.cc:1332 ../src/backend/module_manager.cc:130
 msgid "Greek, Ancient (to 1453)"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1334 ../src/backend/module_manager.cc:131
+#: ../src/backend/sword_main.cc:1333 ../src/backend/module_manager.cc:131
 msgid "Hebrew"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1335 ../src/backend/module_manager.cc:132
+#: ../src/backend/sword_main.cc:1334 ../src/backend/module_manager.cc:132
 msgid "Hawaiian"
 msgstr ""
 
@@ -258,17 +258,17 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("hi")] = SWBuf("Hindi");
 #. mm_languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-#: ../src/backend/sword_main.cc:1338 ../src/backend/module_manager.cc:135
+#: ../src/backend/sword_main.cc:1337 ../src/backend/module_manager.cc:135
 msgid "Croatian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1339 ../src/backend/module_manager.cc:136
+#: ../src/backend/sword_main.cc:1338 ../src/backend/module_manager.cc:136
 msgid "Hungarian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1340 ../src/backend/module_manager.cc:137
+#: ../src/backend/sword_main.cc:1339 ../src/backend/module_manager.cc:137
 msgid "Armenian"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("hz")] = SWBuf("Herero");
 #. mm_languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-#: ../src/backend/sword_main.cc:1343 ../src/backend/module_manager.cc:140
+#: ../src/backend/sword_main.cc:1342 ../src/backend/module_manager.cc:140
 msgid "Klingon"
 msgstr ""
 
@@ -286,7 +286,7 @@ msgstr ""
 #. languageMap[SWBuf("ie")] = SWBuf("Interlingue");
 #. done
 #. mm_languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-#: ../src/backend/sword_main.cc:1345 ../src/backend/module_manager.cc:142
+#: ../src/backend/sword_main.cc:1344 ../src/backend/module_manager.cc:142
 msgid "Indonesian"
 msgstr ""
 
@@ -296,12 +296,12 @@ msgstr ""
 #. done
 #.
 #. mm_languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-#: ../src/backend/sword_main.cc:1347 ../src/backend/module_manager.cc:144
+#: ../src/backend/sword_main.cc:1346 ../src/backend/module_manager.cc:144
 msgid "Icelandic"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1348 ../src/backend/module_manager.cc:145
+#: ../src/backend/sword_main.cc:1347 ../src/backend/module_manager.cc:145
 msgid "Italian"
 msgstr ""
 
@@ -309,12 +309,12 @@ msgstr ""
 #. languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
 #. done
 #. mm_languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-#: ../src/backend/sword_main.cc:1350 ../src/backend/module_manager.cc:147
+#: ../src/backend/sword_main.cc:1349 ../src/backend/module_manager.cc:147
 msgid "Japanese"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1351 ../src/backend/module_manager.cc:148
+#: ../src/backend/sword_main.cc:1350 ../src/backend/module_manager.cc:148
 msgid "Georgian"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
 #. mm_languageMap[SWBuf("km")] = SWBuf("Khmer");
 #. mm_languageMap[SWBuf("kn")] = SWBuf("Kannada");
-#: ../src/backend/sword_main.cc:1358 ../src/backend/module_manager.cc:155
+#: ../src/backend/sword_main.cc:1357 ../src/backend/module_manager.cc:155
 msgid "Korean"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 #. languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
 #. done
 #. mm_languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-#: ../src/backend/sword_main.cc:1360 ../src/backend/module_manager.cc:157
+#: ../src/backend/sword_main.cc:1359 ../src/backend/module_manager.cc:157
 msgid "Kurdish"
 msgstr ""
 
@@ -350,12 +350,12 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("kv")] = SWBuf("Komi");
 #. mm_languageMap[SWBuf("kw")] = SWBuf("Cornish");
-#: ../src/backend/sword_main.cc:1363 ../src/backend/module_manager.cc:160
+#: ../src/backend/sword_main.cc:1362 ../src/backend/module_manager.cc:160
 msgid "Kirghiz"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1364 ../src/backend/module_manager.cc:161
+#: ../src/backend/sword_main.cc:1363 ../src/backend/module_manager.cc:161
 msgid "Latin"
 msgstr ""
 
@@ -367,12 +367,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 #. mm_languageMap[SWBuf("ln")] = SWBuf("Lingala");
 #. mm_languageMap[SWBuf("lo")] = SWBuf("Lao");
-#: ../src/backend/sword_main.cc:1368 ../src/backend/module_manager.cc:165
+#: ../src/backend/sword_main.cc:1367 ../src/backend/module_manager.cc:165
 msgid "Lithuanian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1369 ../src/backend/module_manager.cc:166
+#: ../src/backend/sword_main.cc:1368 ../src/backend/module_manager.cc:166
 msgid "Latvian"
 msgstr ""
 
@@ -382,12 +382,12 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 #. mm_languageMap[SWBuf("mh")] = SWBuf("Marshall");
-#: ../src/backend/sword_main.cc:1372 ../src/backend/module_manager.cc:169
+#: ../src/backend/sword_main.cc:1371 ../src/backend/module_manager.cc:169
 msgid "Maori"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1373 ../src/backend/sword_main.cc:1456
+#: ../src/backend/sword_main.cc:1372 ../src/backend/sword_main.cc:1455
 #: ../src/backend/module_manager.cc:170 ../src/backend/module_manager.cc:253
 msgid "Macedonian"
 msgstr ""
@@ -402,12 +402,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("mn")] = SWBuf("Mongolian");
 #. mm_languageMap[SWBuf("mo")] = SWBuf("Moldavian");
 #. mm_languageMap[SWBuf("mr")] = SWBuf("Marathi");
-#: ../src/backend/sword_main.cc:1378 ../src/backend/module_manager.cc:175
+#: ../src/backend/sword_main.cc:1377 ../src/backend/module_manager.cc:175
 msgid "Malay"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1379 ../src/backend/module_manager.cc:176
+#: ../src/backend/sword_main.cc:1378 ../src/backend/module_manager.cc:176
 msgid "Maltese"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
 #.
 #. mm_languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-#: ../src/backend/sword_main.cc:1384 ../src/backend/module_manager.cc:181
+#: ../src/backend/sword_main.cc:1383 ../src/backend/module_manager.cc:181
 msgid "Low German; Low Saxon"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("ne")] = SWBuf("Nepali");
 #. mm_languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-#: ../src/backend/sword_main.cc:1387 ../src/backend/module_manager.cc:184
+#: ../src/backend/sword_main.cc:1386 ../src/backend/module_manager.cc:184
 msgid "Dutch"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 #. languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
 #. done
 #. mm_languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-#: ../src/backend/sword_main.cc:1389 ../src/backend/module_manager.cc:186
+#: ../src/backend/sword_main.cc:1388 ../src/backend/module_manager.cc:186
 msgid "Norwegian"
 msgstr ""
 
@@ -463,7 +463,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("or")] = SWBuf("Oriya");
 #. mm_languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
 #. mm_languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-#: ../src/backend/sword_main.cc:1398 ../src/backend/module_manager.cc:195
+#: ../src/backend/sword_main.cc:1397 ../src/backend/module_manager.cc:195
 msgid "Papiamento"
 msgstr ""
 
@@ -471,7 +471,7 @@ msgstr ""
 #. languageMap[SWBuf("pi")] = SWBuf("Pali");
 #. done
 #. mm_languageMap[SWBuf("pi")] = SWBuf("Pali");
-#: ../src/backend/sword_main.cc:1400 ../src/backend/module_manager.cc:197
+#: ../src/backend/sword_main.cc:1399 ../src/backend/module_manager.cc:197
 msgid "Polish"
 msgstr ""
 
@@ -479,7 +479,7 @@ msgstr ""
 #. languageMap[SWBuf("ps")] = SWBuf("Pushto");
 #. done
 #. mm_languageMap[SWBuf("ps")] = SWBuf("Pushto");
-#: ../src/backend/sword_main.cc:1402 ../src/backend/module_manager.cc:199
+#: ../src/backend/sword_main.cc:1401 ../src/backend/module_manager.cc:199
 msgid "Portuguese"
 msgstr ""
 
@@ -491,12 +491,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("qu")] = SWBuf("Quechua");
 #. mm_languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
 #. mm_languageMap[SWBuf("rn")] = SWBuf("Rundi");
-#: ../src/backend/sword_main.cc:1406 ../src/backend/module_manager.cc:203
+#: ../src/backend/sword_main.cc:1405 ../src/backend/module_manager.cc:203
 msgid "Romanian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1407 ../src/backend/module_manager.cc:204
+#: ../src/backend/sword_main.cc:1406 ../src/backend/module_manager.cc:204
 msgid "Russian"
 msgstr ""
 
@@ -508,7 +508,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
 #. mm_languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
 #. mm_languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-#: ../src/backend/sword_main.cc:1411 ../src/backend/module_manager.cc:208
+#: ../src/backend/sword_main.cc:1410 ../src/backend/module_manager.cc:208
 msgid "Scots"
 msgstr ""
 
@@ -522,12 +522,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("se")] = SWBuf("Northern Sami");
 #. mm_languageMap[SWBuf("sg")] = SWBuf("Sango");
 #. mm_languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-#: ../src/backend/sword_main.cc:1416 ../src/backend/module_manager.cc:213
+#: ../src/backend/sword_main.cc:1415 ../src/backend/module_manager.cc:213
 msgid "Slovak"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1417 ../src/backend/module_manager.cc:214
+#: ../src/backend/sword_main.cc:1416 ../src/backend/module_manager.cc:214
 msgid "Slovenian"
 msgstr ""
 
@@ -539,12 +539,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("sm")] = SWBuf("Samoan");
 #.
 #. mm_languageMap[SWBuf("sn")] = SWBuf("Shona");
-#: ../src/backend/sword_main.cc:1420 ../src/backend/module_manager.cc:217
+#: ../src/backend/sword_main.cc:1419 ../src/backend/module_manager.cc:217
 msgid "Somali"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1421 ../src/backend/module_manager.cc:218
+#: ../src/backend/sword_main.cc:1420 ../src/backend/module_manager.cc:218
 msgid "Albanian"
 msgstr ""
 
@@ -558,22 +558,22 @@ msgstr ""
 #. mm_languageMap[SWBuf("ss")] = SWBuf("Swati");
 #. mm_languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
 #. mm_languageMap[SWBuf("su")] = SWBuf("Sundanese");
-#: ../src/backend/sword_main.cc:1426 ../src/backend/module_manager.cc:223
+#: ../src/backend/sword_main.cc:1425 ../src/backend/module_manager.cc:223
 msgid "Swedish"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1427 ../src/backend/module_manager.cc:224
+#: ../src/backend/sword_main.cc:1426 ../src/backend/module_manager.cc:224
 msgid "Swahili"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1428 ../src/backend/module_manager.cc:225
+#: ../src/backend/sword_main.cc:1427 ../src/backend/module_manager.cc:225
 msgid "Syriac"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1429 ../src/backend/module_manager.cc:226
+#: ../src/backend/sword_main.cc:1428 ../src/backend/module_manager.cc:226
 msgid "Tamil"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("te")] = SWBuf("Telugu");
 #. mm_languageMap[SWBuf("tg")] = SWBuf("Tajik");
-#: ../src/backend/sword_main.cc:1432 ../src/backend/module_manager.cc:229
+#: ../src/backend/sword_main.cc:1431 ../src/backend/module_manager.cc:229
 msgid "Thai"
 msgstr ""
 
@@ -591,17 +591,17 @@ msgstr ""
 #. languageMap[SWBuf("tk")] = SWBuf("Turkmen");
 #. done
 #. mm_languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-#: ../src/backend/sword_main.cc:1434 ../src/backend/module_manager.cc:231
+#: ../src/backend/sword_main.cc:1433 ../src/backend/module_manager.cc:231
 msgid "Tagalog"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1435 ../src/backend/module_manager.cc:232
+#: ../src/backend/sword_main.cc:1434 ../src/backend/module_manager.cc:232
 msgid "Tswana"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1436 ../src/backend/module_manager.cc:233
+#: ../src/backend/sword_main.cc:1435 ../src/backend/module_manager.cc:233
 msgid "Turkish"
 msgstr ""
 
@@ -613,7 +613,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("ts")] = SWBuf("Tsonga");
 #. mm_languageMap[SWBuf("tt")] = SWBuf("Tatar");
 #. mm_languageMap[SWBuf("tw")] = SWBuf("Twi");
-#: ../src/backend/sword_main.cc:1440 ../src/backend/module_manager.cc:237
+#: ../src/backend/sword_main.cc:1439 ../src/backend/module_manager.cc:237
 msgid "Tahitian"
 msgstr ""
 
@@ -621,7 +621,7 @@ msgstr ""
 #. languageMap[SWBuf("ug")] = SWBuf("Uighur");
 #. done
 #. mm_languageMap[SWBuf("ug")] = SWBuf("Uighur");
-#: ../src/backend/sword_main.cc:1442 ../src/backend/module_manager.cc:239
+#: ../src/backend/sword_main.cc:1441 ../src/backend/module_manager.cc:239
 msgid "Ukrainian"
 msgstr ""
 
@@ -631,7 +631,7 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("ur")] = SWBuf("Urdu");
 #. mm_languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-#: ../src/backend/sword_main.cc:1445 ../src/backend/module_manager.cc:242
+#: ../src/backend/sword_main.cc:1444 ../src/backend/module_manager.cc:242
 msgid "Vietnamese"
 msgstr ""
 
@@ -643,67 +643,67 @@ msgstr ""
 #. if commented,  accentued u causes gettext problems
 #.
 #. mm_languageMap[SWBuf("wo")] = SWBuf("Wolof");
-#: ../src/backend/sword_main.cc:1448 ../src/backend/module_manager.cc:245
+#: ../src/backend/sword_main.cc:1447 ../src/backend/module_manager.cc:245
 msgid "Xhosa"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1449 ../src/backend/module_manager.cc:246
+#: ../src/backend/sword_main.cc:1448 ../src/backend/module_manager.cc:246
 msgid "Bavarian"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1450 ../src/backend/module_manager.cc:247
+#: ../src/backend/sword_main.cc:1449 ../src/backend/module_manager.cc:247
 msgid "Alemannisch"
 msgstr ""
 
 #. done
 #.
-#: ../src/backend/sword_main.cc:1451 ../src/backend/module_manager.cc:248
+#: ../src/backend/sword_main.cc:1450 ../src/backend/module_manager.cc:248
 msgid "Haitian Creole French"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1452 ../src/backend/module_manager.cc:249
+#: ../src/backend/sword_main.cc:1451 ../src/backend/module_manager.cc:249
 msgid "Itz"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1453 ../src/backend/module_manager.cc:250
+#: ../src/backend/sword_main.cc:1452 ../src/backend/module_manager.cc:250
 msgid "Shuar"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1454 ../src/backend/module_manager.cc:251
+#: ../src/backend/sword_main.cc:1453 ../src/backend/module_manager.cc:251
 msgid "Kekchi"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1455 ../src/backend/module_manager.cc:252
+#: ../src/backend/sword_main.cc:1454 ../src/backend/module_manager.cc:252
 msgid "Lombard"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1457 ../src/backend/module_manager.cc:254
+#: ../src/backend/sword_main.cc:1456 ../src/backend/module_manager.cc:254
 msgid "Tok Pisin"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1458 ../src/backend/module_manager.cc:255
+#: ../src/backend/sword_main.cc:1457 ../src/backend/module_manager.cc:255
 msgid "Uma"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1459 ../src/backend/module_manager.cc:256
+#: ../src/backend/sword_main.cc:1458 ../src/backend/module_manager.cc:256
 msgid "Romani, Vlax"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1460 ../src/backend/module_manager.cc:257
+#: ../src/backend/sword_main.cc:1459 ../src/backend/module_manager.cc:257
 msgid "Sango"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1461 ../src/backend/module_manager.cc:258
+#: ../src/backend/sword_main.cc:1460 ../src/backend/module_manager.cc:258
 msgid "Sranan"
 msgstr ""
 
@@ -713,18 +713,22 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("yi")] = SWBuf("Yiddish");
 #. mm_languageMap[SWBuf("za")] = SWBuf("Zhuang");
-#: ../src/backend/sword_main.cc:1464 ../src/backend/module_manager.cc:261
+#: ../src/backend/sword_main.cc:1463 ../src/backend/module_manager.cc:261
 msgid "Chinese"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1465 ../src/backend/module_manager.cc:262
+#: ../src/backend/sword_main.cc:1464 ../src/backend/module_manager.cc:262
 msgid "Zulu"
 msgstr ""
 
-#: ../src/main/display.cc:374 ../src/main/display.cc:410
-#: ../src/main/display.cc:445 ../src/main/display.cc:449
+#: ../src/main/display.cc:402 ../src/main/display.cc:438
+#: ../src/main/display.cc:473 ../src/main/display.cc:477
 msgid "Chapter"
+msgstr ""
+
+#: ../src/main/embed.cc:505 ../src/gnome2/html.c:154
+msgid "Unlock "
 msgstr ""
 
 #: ../src/main/lists.cc:141
@@ -818,7 +822,7 @@ msgstr ""
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1502
+#: ../src/main/search_dialog.cc:1526
 msgid "Search finished"
 msgstr ""
 
@@ -1001,67 +1005,67 @@ msgid "Dictionaries"
 msgstr ""
 
 #. g_print("date: %s\n", getenv("DATE"));
-#: ../src/main/sword.cc:537 ../src/gnome2/main_window.c:580
+#: ../src/main/sword.cc:538 ../src/gnome2/main_window.c:580
 msgid "Starting"
 msgstr ""
 
-#: ../src/main/sword.cc:538
+#: ../src/main/sword.cc:539
 msgid "Initiating SWORD"
 msgstr ""
 
-#: ../src/main/sword.cc:539
+#: ../src/main/sword.cc:540
 msgid "path to sword"
 msgstr ""
 
-#: ../src/main/sword.cc:540
+#: ../src/main/sword.cc:541
 msgid "System locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:541
+#: ../src/main/sword.cc:542
 msgid "SWORD locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:543
+#: ../src/main/sword.cc:544
 msgid "Checking for SWORD Modules"
 msgstr ""
 
-#: ../src/main/sword.cc:577
+#: ../src/main/sword.cc:578
 msgid "SWORD is shutdown"
 msgstr ""
 
-#: ../src/main/sword.cc:620 ../src/main/sword.cc:629
+#: ../src/main/sword.cc:621 ../src/main/sword.cc:630
 msgid "The"
 msgstr ""
 
-#: ../src/main/sword.cc:622
+#: ../src/main/sword.cc:623
 msgid "module is locked."
 msgstr ""
 
-#: ../src/main/sword.cc:632
+#: ../src/main/sword.cc:633
 msgid "module has been unlocked."
 msgstr ""
 
-#: ../src/main/sword.cc:643
+#: ../src/main/sword.cc:644
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: ../src/main/sword.cc:647
+#: ../src/main/sword.cc:648
 msgid "click here"
 msgstr ""
 
-#: ../src/main/sword.cc:648
+#: ../src/main/sword.cc:649
 msgid "to unlock the module"
 msgstr ""
 
-#: ../src/main/sword.cc:658
+#: ../src/main/sword.cc:659
 msgid "You will need to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: ../src/main/sword.cc:667
+#: ../src/main/sword.cc:668
 msgid "You need to restart GnomeSword to view it"
 msgstr ""
 
-#: ../src/main/sword.cc:1224
+#: ../src/main/sword.cc:1225
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
@@ -1110,11 +1114,11 @@ msgstr ""
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1268
+#: ../src/editor/html-editor.c:1270
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1276 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1278 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
@@ -1221,12 +1225,14 @@ msgstr ""
 #: ../src/gnome2/bibletext.c:972 ../src/gnome2/bibletext_dialog.c:2030
 #: ../src/gnome2/commentary.c:693 ../src/gnome2/commentary_dialog.c:1742
 #: ../src/gnome2/dictlex.c:909 ../src/gnome2/gbs.c:720
+#: ../ui/search-dialog.glade.h:39
 msgid "Morphological Tags"
 msgstr ""
 
 #: ../src/gnome2/bibletext.c:980 ../src/gnome2/bibletext_dialog.c:2038
 #: ../src/gnome2/commentary.c:701 ../src/gnome2/commentary_dialog.c:1750
 #: ../src/gnome2/dictlex.c:917 ../src/gnome2/gbs.c:728
+#: ../ui/search-dialog.glade.h:32
 msgid "Footnotes"
 msgstr ""
 
@@ -1539,7 +1545,7 @@ msgid "Enter Word or Phrase"
 msgstr ""
 
 #: ../src/gnome2/find_dialog.c:230 ../src/gnome2/search_sidebar.c:290
-#: ../ui/search-dialog.glade.h:34
+#: ../ui/search-dialog.glade.h:36
 msgid "Match case"
 msgstr ""
 
@@ -1548,7 +1554,7 @@ msgid "Search backwards"
 msgstr ""
 
 #: ../src/gnome2/find_dialog.c:244 ../src/gnome2/search_sidebar.c:255
-#: ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.glade.h:42
 msgid "Regular expression"
 msgstr ""
 
@@ -1622,7 +1628,7 @@ msgstr ""
 msgid "Initiating GnomeSword"
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:143 ../src/gnome2/splash.c:590
+#: ../src/gnome2/gnomesword.c:143 ../src/gnome2/splash.c:624
 msgid "Displaying GnomeSword"
 msgstr ""
 
@@ -1640,10 +1646,6 @@ msgstr ""
 
 #: ../src/gnome2/gnomesword.c:295
 msgid "GnomeSword is shutdown"
-msgstr ""
-
-#: ../src/gnome2/html.c:154
-msgid "Unlock "
 msgstr ""
 
 #: ../src/gnome2/html.c:637
@@ -1824,7 +1826,7 @@ msgid "About this application"
 msgstr ""
 
 #: ../src/gnome2/main_menu.c:922 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:19
+#: ../ui/editor_studypad.xml.h:19 ../ui/editor.xml.h:14
 msgid "_File"
 msgstr ""
 
@@ -1998,19 +2000,19 @@ msgstr ""
 msgid "Directory:"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:314
+#: ../src/gnome2/navbar_book.c:314 ../src/gnome2/navbar_book_dialog.c:286
 msgid "Go to parent"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:331
+#: ../src/gnome2/navbar_book.c:331 ../src/gnome2/navbar_book_dialog.c:303
 msgid "Go to previous item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:347
+#: ../src/gnome2/navbar_book.c:347 ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to next item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:364
+#: ../src/gnome2/navbar_book.c:364 ../src/gnome2/navbar_book_dialog.c:336
 msgid "Go to first child"
 msgstr ""
 
@@ -2113,7 +2115,7 @@ msgstr ""
 msgid "Are you sure you want to delete:"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:52
+#: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:58
 msgid "Start searching"
 msgstr ""
 
@@ -2133,11 +2135,11 @@ msgstr ""
 msgid "Search Type"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:37
+#: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:40
 msgid "Multi word"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:263 ../ui/search-dialog.glade.h:30
+#: ../src/gnome2/search_sidebar.c:263 ../ui/search-dialog.glade.h:31
 msgid "Exact phrase"
 msgstr ""
 
@@ -2225,15 +2227,19 @@ msgstr ""
 msgid "Powered by the SWORD Project"
 msgstr ""
 
-#: ../src/gnome2/splash.c:538
+#: ../src/gnome2/splash.c:555
+msgid "Initiating Gecko"
+msgstr ""
+
+#: ../src/gnome2/splash.c:572
 msgid "Loading settings"
 msgstr ""
 
-#: ../src/gnome2/splash.c:556
+#: ../src/gnome2/splash.c:590
 msgid "Building Interface"
 msgstr ""
 
-#: ../src/gnome2/splash.c:573
+#: ../src/gnome2/splash.c:607
 msgid "Starting Sword"
 msgstr ""
 
@@ -2581,218 +2587,238 @@ msgid "Sword sys dir"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:1
-msgid "<b>Found</b>"
+msgid "<b>Attribute</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:2
-msgid "<b>List Name</b>"
+msgid "<b>Found</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:3
-msgid "<b>Module Lists</b>"
+msgid "<b>List Name</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:4
-msgid "<b>Modules</b>"
+msgid "<b>Module Lists</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:5
-msgid "<b>Options</b>"
+msgid "<b>Modules</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:6
-msgid "<b>Preview</b>"
+msgid "<b>Options</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:7
-msgid "<b>Range Name</b>"
+msgid "<b>Preview</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Text</b>"
+msgid "<b>Range Name</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:9
-msgid "<b>Ranges</b>"
+msgid "<b>Range Text</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:10
-msgid "<b>Results Display Options</b>"
+msgid "<b>Ranges</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:11
-msgid "<b>Scope</b>"
+msgid "<b>Results Display Options</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:12
-msgid "<b>Search Results</b>"
+msgid "<b>Scope</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:13
-msgid "<b>Search Type</b>"
+msgid "<b>Search Results</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:14
-msgid "Add Modules"
+msgid "<b>Search Type</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:15
-msgid "Advanced Search"
+msgid "Add Modules"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:16
-msgid "Attribute Search"
+msgid "Advanced Search"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:17
-msgid "Attributes"
+msgid "Attribute Search"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:18
-msgid "Clear all modules from the list"
+msgid "Attributes"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:19
-msgid "Clear lists for new search"
+msgid "Clear all modules from the list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:20
-msgid "Create a new module list"
+msgid "Clear lists for new search"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:21
-msgid "Create new custom range"
+msgid "Create a new module list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:22
-msgid "Current results"
+msgid "Create new custom range"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:23
-msgid "Custom Lists"
+msgid "Current results"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:24
-msgid "Custom Ranges"
+msgid "Custom Lists"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:25
-msgid "Custom list"
+msgid "Custom Ranges"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:26
-msgid "Custom range"
+msgid "Custom list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:27
-msgid "Delete selected range"
+msgid "Custom range"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:28
-msgid "Delete the selected list"
+msgid "Delete selected range"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:29
+msgid "Delete the selected list"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:30
 msgid "Entire module"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:31
+#: ../ui/search-dialog.glade.h:33
 msgid "In modules that have Footnotes"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:32
+#: ../ui/search-dialog.glade.h:34
 msgid "In modules that have Morphological Tags"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:33
+#: ../ui/search-dialog.glade.h:35
 msgid "In modules that have Strong's Numbers"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:35
+#: ../ui/search-dialog.glade.h:37
 msgid "Module Selection"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:36
+#: ../ui/search-dialog.glade.h:38
 msgid "Module list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:38
+#: ../ui/search-dialog.glade.h:41
 msgid "Open a dialog to select modules to add to the list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:43
 msgid "Remove the selected module from the list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.glade.h:44
 msgid "Results"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:45
 msgid "Save custom range"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.glade.h:46
 msgid "Save search results as bookmarks"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:47
 msgid "Save the module list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:48
 msgid "Search  Criteria"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:49
 msgid "Search entire module"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:47
-msgid "Show Footnotes"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:48
-msgid "Show Morphological Tags"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:49
-msgid "Show Strong's Numbers"
-msgstr ""
-
 #: ../ui/search-dialog.glade.h:50
-msgid "Show in main window"
+msgid "Search for Morphological tags"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:51
-msgid "Single module"
+msgid "Search for Strongs Numbers like G4442 or H1121"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:52
+msgid "Search in footnotes"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:53
-msgid "Use a custom module list for the search"
+msgid "Show Footnotes"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:54
-msgid "Use a custom range for the scope of the search"
+msgid "Show Morphological Tags"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:55
-msgid "Use a single module for the search"
+msgid "Show Strong's Numbers"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:56
-msgid "Use the current module list for the search"
+msgid "Show in main window"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:57
-msgid "Use the results of the last search as the scope of the search"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:58
-msgid "e.g. Matt-John;Rev4"
+msgid "Single module"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:59
+msgid "Strongs Numbers"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:60
+msgid "Use a custom module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:61
+msgid "Use a custom range for the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:62
+msgid "Use a single module for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:63
+msgid "Use the current module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:64
+msgid "Use the results of the last search as the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:65
+msgid "e.g. Matt-John;Rev4"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:66
 msgid "for "
 msgstr ""
 
@@ -2801,26 +2827,32 @@ msgid "Delete the current note"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr ""
 
@@ -2837,6 +2869,7 @@ msgid "Print this note"
 msgstr ""
 
 #: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
+#: ../ui/editor.xml.h:11
 msgid "Save"
 msgstr ""
 
@@ -2860,19 +2893,19 @@ msgstr ""
 msgid "Add this file to your bookmarks"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
 msgid "Open (PersistFile)"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:12
+#: ../ui/editor_studypad.xml.h:12 ../ui/editor.xml.h:10
 msgid "Open using the PersistFile interface"
 msgstr ""
 
@@ -2884,10 +2917,10 @@ msgstr ""
 msgid "Print this document"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:17
+#: ../ui/editor_studypad.xml.h:17 ../ui/editor.xml.h:12
 msgid "Save (PersistFile)"
 msgstr ""
 
-#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:13
 msgid "Save using the PersistFile interface"
 msgstr ""
