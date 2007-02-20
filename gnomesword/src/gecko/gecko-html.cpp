@@ -171,7 +171,6 @@ static void html_link_message(GtkMozEmbed * embed)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 	}
-	shift_key_presed = FALSE;
 }
 
 
@@ -184,6 +183,16 @@ gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 						    priv->pane,
 						    priv->is_dialog,
 						    priv->dialog);
+}
+
+static
+gint html_dom_mouse_out(GtkMozEmbed * embed, gpointer dom_event)
+{
+	GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	if(priv->pane == VIEWER_TYPE)
+		shift_key_presed = FALSE;
+	return 1; 
 }
 
 static
@@ -332,7 +341,8 @@ static void html_class_init(GeckoHtmlClass * klass)
 	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
 	moz_embed_class->dom_mouse_down = html_dom_mouse_down;
 	moz_embed_class->dom_mouse_up = html_dom_mouse_up;
-	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;size_to
+	moz_embed_class->dom_mouse_out = html_dom_mouse_out;
+	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
 	moz_embed_class->link_message = html_link_message;
