@@ -434,7 +434,9 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	//g_message("domEvent->GetType: %s",mybuf);
+#ifdef DEBUG
+	g_message("domEvent->GetType: %s",mybuf);
+#endif
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
