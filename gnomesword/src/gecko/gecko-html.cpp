@@ -171,6 +171,7 @@ static void html_link_message(GtkMozEmbed * embed)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 	}
+	shift_key_presed = FALSE;
 }
 
 
