@@ -402,10 +402,12 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 		
+#ifdef DEBUG
 /*	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
 	g_warning("domEvent->GetType: %s",mybuf);*/
+#endif
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
 	DoCommand("cmd_copy");
@@ -418,7 +420,7 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	g_message("selText: %s", selText);*/
 	return 1;
 }
- 
+
 gint
 Yelper::ProcessMouseUpEvent (void* aEvent)
 {
@@ -431,21 +433,22 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 		
+#ifdef DEBUG
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-#ifdef DEBUG
-	g_message("domEvent->GetType: %s",mybuf);
+	//g_message("domEvent->GetType: %s",mybuf);
 #endif
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
 #ifdef DEBUG
-	g_message("mouse button up: %d",button);
+	//g_message("mouse button up: %d",button);
 #endif
 	if(button == 1)	       
-	        shift_key_presed = FALSE; 	
+	        shift_key_presed = FALSE; 
+	return 0;	
 }
 
 gint
@@ -463,7 +466,9 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	//g_message("domEvent->GetType: %s",mybuf);
+#ifdef DEBUG
+	g_message("domEvent->GetType: %s",mybuf);
+#endif
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
