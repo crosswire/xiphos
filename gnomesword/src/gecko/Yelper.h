@@ -59,6 +59,7 @@ public:
         gint ProcessMouseOver (void* aEvent, gint pane,  
 			       gboolean is_dialog, DIALOG_DATA * d);
         gint ProcessMouseDblClickEvent (void* aEvent);
+	gint ProcessMouseUpEvent (void* aEvent);
 	gint ProcessMouseEvent (void *aEvent);
         gint ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event);
         gint ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event);

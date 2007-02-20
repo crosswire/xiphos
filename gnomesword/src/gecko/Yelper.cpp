@@ -391,8 +391,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	return FALSE;	
 }
 
-gint
-Yelper::ProcessMouseDblClickEvent (void* aEvent)
+gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 {
 	nsAutoString aType;
 	nsresult rv;
@@ -419,6 +418,33 @@ Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	g_message("selText: %s", selText);*/
 	return 1;
 }
+ 
+gint
+Yelper::ProcessMouseUpEvent (void* aEvent)
+{
+	nsAutoString aType;
+	
+	g_return_val_if_fail(aEvent != NULL,0);
+	//g_return_if_fail (aEvent != NULL);	
+	
+	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
+	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
+	if (!event) return 0;
+		
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	//g_message("domEvent->GetType: %s",mybuf);
+	
+	PRUint16 button = 2;
+	event->GetButton (&button);
+
+#ifdef DEBUG
+	g_message("mouse button up: %d",button);
+#endif
+	if(button == 1)	       
+	        shift_key_presed = FALSE; 	
+}
 
 gint
 Yelper::ProcessMouseEvent (void* aEvent)
@@ -435,7 +461,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	g_message("domEvent->GetType: %s",mybuf);
+	//g_message("domEvent->GetType: %s",mybuf);
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
