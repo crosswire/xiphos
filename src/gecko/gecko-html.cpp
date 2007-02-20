@@ -98,6 +98,14 @@ static gint html_dom_mouse_down(GtkMozEmbed * embed, gpointer dom_event)
 	return html->priv->yelper->ProcessMouseEvent(dom_event);
 }
 
+
+static gint html_dom_mouse_up(GtkMozEmbed * embed, gpointer dom_event)
+{
+	GeckoHtml *html = GECKO_HTML(embed);
+	return html->priv->yelper->ProcessMouseUpEvent(dom_event);
+}
+
+
 static void html_link_message(GtkMozEmbed * embed)
 {
 	gchar buf[500];
@@ -322,6 +330,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 	moz_embed_class->title = html_title;
 	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
 	moz_embed_class->dom_mouse_down = html_dom_mouse_down;
+	moz_embed_class->dom_mouse_up = html_dom_mouse_up;
 	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;size_to
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
