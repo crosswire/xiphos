@@ -1,0 +1,363 @@
+# Anjuta Version 1.2.4a 
+Compatibility Level: 1 
+
+<PROJECT_DESCRIPTION_START>
+Bible study tool for the Gnome desktop<PROJECT_DESCRIPTION_END>
+<CONFIG_PROGS_START>
+<CONFIG_PROGS_END>
+<CONFIG_LIBS_START>
+<CONFIG_LIBS_END>
+<CONFIG_HEADERS_START>
+<CONFIG_HEADERS_END>
+<CONFIG_CHARACTERISTICS_START>
+<CONFIG_CHARACTERISTICS_END>
+<CONFIG_LIB_FUNCS_START>
+<CONFIG_LIB_FUNCS_END>
+<CONFIG_ADDITIONAL_START>
+<CONFIG_ADDITIONAL_END>
+<CONFIG_FILES_START>
+<CONFIG_FILES_END>
+<MAKEFILE_AM_START>
+<MAKEFILE_AM_END>
+
+props.file.type=project
+
+anjuta.version=1.2.4a
+anjuta.compatibility.level=1
+
+project.name=GnomeSword
+project.type=GNOME 2.0
+project.target.type=EXECUTABLE
+project.version=2.2.1
+project.author=The GnomeSword Development Team
+project.source.target=src/gnome2/gnomesword2
+project.has.gettext=0
+project.gui.command=
+project.programming.language=C
+project.excluded.modules=intl
+
+project.config.extra.modules.before=
+project.config.extra.modules.after=
+project.config.blocked=1
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
+
+project.menu.entry=GnomeSword Version 2.2.1
+project.menu.group=Application
+project.menu.comment=GnomeSword Version 2.2.1
+project.menu.icon=
+project.menu.need.terminal=0
+
+project.configure.options=
+anjuta.program.arguments=
+preferences.build.option.jobs=0
+preferences.build.option.silent=0
+preferences.build.option.autosave=1
+preferences.make=make
+preferences.build.option.keep.going=1
+preferences.build.option.warn.undef=0
+preferences.autoformat.custom.style= -i8 -sc -bli0 -bl0 -cbi0 -ss
+preferences.indent.opening=0
+preferences.autoformat.disable=0
+preferences.indent.automatic=1
+preferences.use.tabs=1
+preferences.indent.size=8
+preferences.tabsize=8
+preferences.indent.closing=0
+
+module.include.name=.
+module.include.type=
+module.include.files=\
+	acconfig.h\
+	config.h\
+	src/backend/sword_main.hh\
+	src/backend/module_manager.hh\
+	src/backend/gs_osishtmlhref.h\
+	src/backend/gs_markupfiltmgr.h\
+	src/main/parallel_view.h\
+	src/main/sidebar.h\
+	src/main/debug.h\
+	src/main/tab_history.h\
+	src/main/navbar_book_dialog.h\
+	src/main/settings.h\
+	src/main/global_ops.hh\
+	src/main/module_dialogs.h\
+	src/main/navbar.h\
+	src/main/xml.h\
+	src/main/display.hh\
+	src/main/configs.h\
+	src/main/mod_mgr.h\
+	src/main/embed-dialogs.h\
+	src/main/previewer.h\
+	src/main/navbar_book.h\
+	src/main/url.hh\
+	src/main/sword.h\
+	src/main/search_sidebar.h\
+	src/main/embed.h\
+	src/main/lists.h\
+	src/main/search_dialog.h\
+	src/editor/Editor.h\
+	src/editor/html-editor.h\
+	src/gui/html.h\
+	src/gui/studypad.h\
+	src/gui/session.h\
+	src/gui/widgets.h\
+	src/gui/display_info.h\
+	src/gui/parallel_view.h\
+	src/gui/sidebar.h\
+	src/gui/sidebar_dialog.h\
+	src/gui/navbar_book_dialog.h\
+	src/gui/gui.h\
+	src/gui/about_modules.h\
+	src/gui/find_dialog.h\
+	src/gui/shortcutbar_viewer.h\
+	src/gui/bookmark_dialog.h\
+	src/gui/parallel_dialog.h\
+	src/gui/about_sword.h\
+	src/gui/font_dialog.h\
+	src/gui/about_gnomesword.h\
+	src/gui/commentary_dialog.h\
+	src/gui/bibletext_dialog.h\
+	src/gui/fileselection.h\
+	src/gui/shortcutbar_main.h\
+	src/gui/tabbed_browser.h\
+	src/gui/bookmarks_treeview.h\
+	src/gui/bibletext.h\
+	src/gui/bookmarks_menu.h\
+	src/gui/gbs.h\
+	src/gui/dialog.h\
+	src/gui/main_window.h\
+	src/gui/gbs_dialog.h\
+	src/gui/shortcutbar_dialog.h\
+	src/gui/dictlex.h\
+	src/gui/mod_mgr.h\
+	src/gui/navbar_book.h\
+	src/gui/cipher_key_dialog.h\
+	src/gui/preferences_cell_renderer.h\
+	src/gui/commentary.h\
+	src/gui/bookmarks.h\
+	src/gui/main_menu.h\
+	src/gui/shortcutbar_search.h\
+	src/gui/search_sidebar.h\
+	src/gui/gnomesword.h\
+	src/gui/utilities.h\
+	src/gui/dictlex_dialog.h\
+	src/gui/toolbar_nav.h\
+	src/gui/splash.h\
+	src/gui/search_dialog.h\
+	src/gui/preferences_dialog.h
+
+module.source.name=.
+module.source.type=
+module.source.files=\
+	src/backend/gs_markupfiltmgr.cpp\
+	src/backend/sword_main.cc\
+	src/backend/module_manager.cc\
+	src/backend/gs_osishtmlhref.cpp\
+	src/main/settings.c\
+	src/main/navbar_book_dialog.cc\
+	src/main/navbar.cc\
+	src/main/display.cc\
+	src/main/module_dialogs.cc\
+	src/main/configs.cc\
+	src/main/main.c\
+	src/main/embed.cc\
+	src/main/sidebar.cc\
+	src/main/embed-dialogs.cc\
+	src/main/sword.cc\
+	src/main/xml.c\
+	src/main/url.cc\
+	src/main/search_dialog.cc\
+	src/main/search_sidebar.cc\
+	src/main/parallel_view.cc\
+	src/main/lists.cc\
+	src/main/global_ops.cc\
+	src/main/mod_mgr.cc\
+	src/main/tab_history.c\
+	src/main/previewer.cc\
+	src/main/navbar_book.cc\
+	src/editor/Editor-common.c\
+	src/editor/Editor-skels.c\
+	src/editor/html-editor.c\
+	src/editor/Editor-stubs.c\
+	src/gnome2/about_modules.c\
+	src/gnome2/bookmark_dialog.c\
+	src/gnome2/bookmarks_menu.c\
+	src/gnome2/main_window.c\
+	src/gnome2/fileselection.c\
+	src/gnome2/navbar_book.c\
+	src/gnome2/sidebar_dialog.c\
+	src/gnome2/dictlex_dialog.c\
+	src/gnome2/splash.c\
+	src/gnome2/commentary.c\
+	src/gnome2/about_sword.c\
+	src/gnome2/dictlex.c\
+	src/gnome2/preferences_dialog.c\
+	src/gnome2/navbar_book_dialog.c\
+	src/gnome2/search_sidebar.c\
+	src/gnome2/main_menu.c\
+	src/gnome2/html.c\
+	src/gnome2/display_info.c\
+	src/gnome2/bibletext.c\
+	src/gnome2/cipher_key_dialog.c\
+	src/gnome2/dialog.c\
+	src/gnome2/about_gnomesword.c\
+	src/gnome2/session.c\
+	src/gnome2/search_dialog.c\
+	src/gnome2/find_dialog.c\
+	src/gnome2/gbs.c\
+	src/gnome2/gbs_dialog.c\
+	src/gnome2/mod_mgr.c\
+	src/gnome2/bibletext_dialog.c\
+	src/gnome2/utilities.c\
+	src/gnome2/dummy.cpp\
+	src/gnome2/gnomesword.c\
+	src/gnome2/tabbed_browser.c\
+	src/gnome2/parallel_dialog.c\
+	src/gnome2/gui.c\
+	src/gnome2/commentary_dialog.c\
+	src/gnome2/toolbar_nav.c\
+	src/gnome2/bookmarks_treeview.c\
+	src/gnome2/studypad.c\
+	src/gnome2/parallel_view.c\
+	src/gnome2/font_dialog.c\
+	src/gnome2/preferences_cell_renderer.c\
+	src/gnome2/sidebar.c
+
+module.pixmap.name=.
+module.pixmap.type=
+module.pixmap.files=\
+	ui/sword3.png\
+	ui/logo.png\
+	help/fr/figures/sword_sources.png\
+	help/fr/figures/interface_sidepane.png\
+	help/fr/figures/first_start.png\
+	help/fr/figures/interface_searchpane.png\
+	help/fr/figures/preferences_modules-misc.png\
+	help/fr/figures/interface_parallel.png\
+	help/fr/figures/interface_dictionary.png\
+	help/fr/figures/preferences_fonts-misc.png\
+	help/fr/figures/interface_shortcut.png\
+	help/fr/figures/sword_remove.png\
+	help/fr/figures/preferences_modules-main.png\
+	help/fr/figures/search_search.png\
+	help/fr/figures/interface_parallel-separate.png\
+	help/fr/figures/interface.png\
+	help/fr/figures/interface_menubar.png\
+	help/fr/figures/sword_config.png\
+	help/fr/figures/interface_biblepane.png\
+	help/fr/figures/preferences.png\
+	help/fr/figures/preferences_fonts-color.png\
+	help/fr/figures/preferences_general-tabs.png\
+	help/fr/figures/preferences_modules-parallel.png\
+	help/fr/figures/personal.png\
+	help/fr/figures/module.png\
+	help/fr/figures/preferences_general-misc.png\
+	help/fr/figures/sword_install.png\
+	help/fr/figures/interface_menubar-view.png\
+	help/fr/figures/interface_biblepane-options.png\
+	help/fr/figures/interface_toolbar.png\
+	help/fr/figures/studypad.png\
+	help/C/figures/interface_commentarypane.png\
+	help/C/figures/sword_sources.png\
+	help/C/figures/interface_sidepane.png\
+	help/C/figures/first_start.png\
+	help/C/figures/interface_searchpane.png\
+	help/C/figures/preferences_modules-misc.png\
+	help/C/figures/sword3.png\
+	help/C/figures/interface_parallel.png\
+	help/C/figures/interface_dictionary.png\
+	help/C/figures/preferences_fonts-misc.png\
+	help/C/figures/interface_shortcut.png\
+	help/C/figures/sword_remove.png\
+	help/C/figures/preferences_modules-main.png\
+	help/C/figures/search_search.png\
+	help/C/figures/interface_parallel-separate.png\
+	help/C/figures/interface.png\
+	help/C/figures/interface_menubar.png\
+	help/C/figures/sword_config.png\
+	help/C/figures/interface_viewer.png\
+	help/C/figures/interface_biblepane.png\
+	help/C/figures/preferences.png\
+	help/C/figures/preferences_fonts-color.png\
+	help/C/figures/preferences_general-tabs.png\
+	help/C/figures/preferences_modules-parallel.png\
+	help/C/figures/personal.png\
+	help/C/figures/module.png\
+	help/C/figures/preferences_general-misc.png\
+	help/C/figures/sword_install.png\
+	help/C/figures/interface_menubar-view.png\
+	help/C/figures/interface_biblepane-options.png\
+	help/C/figures/interface_toolbar.png\
+	help/C/figures/studypad.png\
+	debian/gs2.xpm\
+	pixmaps/tt.png\
+	pixmaps/splash.png\
+	pixmaps/gnome-windows.png\
+	pixmaps/epiphany-unsecure.png\
+	pixmaps/gs2-48x48.png\
+	pixmaps/epiphany-secure.png\
+	pixmaps/gs2-48x48.ico\
+	pixmaps/gnome-session.png\
+	pixmaps/init-settings.png\
+	pixmaps/sword3.png\
+	pixmaps/logo.png\
+	pixmaps/epiphany-bookmark-page.png\
+	pixmaps/gnome-window-manager.png\
+	pixmaps/sword.png\
+	pixmaps/epiphany-bookmarks.png\
+	pixmaps/about.png\
+	pixmaps/splash2.png\
+	pixmaps/dlg-un.png\
+	pixmaps/new_tab_button.png
+
+module.data.name=.
+module.data.type=
+module.data.files=
+
+module.help.name=.
+module.help.type=
+module.help.files=
+
+module.doc.name=.
+module.doc.type=
+module.doc.files=\
+	AUTHORS\
+	po/ChangeLog\
+	m4/ChangeLog\
+	NEWS\
+	README\
+	INSTALL\
+	COPYING\
+	TODO\
+	ChangeLog
+
+module.po.files=\
+	nl.po\
+	fr.po\
+	ru.po\
+	cs.po\
+	sk.po\
+	es.po\
+	de.po\
+	uk.po\
+	en_GB.po\
+	bg.po
+
+compiler.options.supports=
+compiler.options.include.paths=\
+	.\
+	..
+compiler.options.library.paths=
+compiler.options.libraries=
+compiler.options.libraries.selected=
+compiler.options.defines=\
+	HAVE_CONFIG_H
+compiler.options.defines.selected=
+compiler.options.warning.buttons=0 0 1 1 0 1 0 0 0 0 0 0 0 1 0 0 
+compiler.options.optimize.buttons=0 0 1 0 
+compiler.options.other.buttons=1 0 
+compiler.options.other.c.flags=
+compiler.options.other.l.flags=
+compiler.options.other.l.libs=
+
+project.src.paths=
