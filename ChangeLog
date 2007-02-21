@@ -1,3 +1,7 @@
+2007-02-05 terry <tbiggs@users.sf.net>
+
+	* begin support for gtkhtml38-3.13 which breaks the printing api
+	
 2007-02-21  karl <charcoal@users.sf.net>
 
 	* added testament-detecting use of Packard -vs- Robinson morph.
@@ -9,7 +13,7 @@
 2007-02-05 terry <tbiggs@users.sf.net>
 
 	* added attribute search page to advanced search dialog
-	  now for a strongs search you only need to enter if the
+	  now for a strongs search you only need to enter the
 	  strongs number as G4443
 
 2007-02-05 terry <tbiggs@users.sf.net>
