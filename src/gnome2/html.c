@@ -26,10 +26,6 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifndef USE_GTKHTML38
-#include <gtkhtml/htmlengine-print.h>
-#include <gtkhtml/htmlselection.h>
-#endif
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
@@ -680,6 +676,8 @@ static struct _info *info_new(GtkHTML * html,
 					   GnomePrintContext * pc,
 					   gdouble * line)
 {
+#ifdef USE_GTKHTML38_3_13
+#else
 	struct _info *info;
 
 	info = g_new(struct _info, 1);
@@ -700,6 +698,7 @@ static struct _info *info_new(GtkHTML * html,
 	info->footer_date = FALSE;
 	info->footer_page_num = TRUE;
 	return info;
+#endif
 }
 
 
@@ -721,6 +720,8 @@ static struct _info *info_new(GtkHTML * html,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
+#ifdef USE_GTKHTML38_3_13
+#else
 	GtkHTML *html;
 	GtkWidget *w = NULL;
 	GnomePrintContext *print_context;
@@ -793,4 +794,5 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	}
 
 	g_object_unref(print_master);
+#endif
 }
