@@ -285,18 +285,25 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	
-	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")  || strstr(type,"robinson")) {
-		if(backend->is_module("Robinson")) 
-			modbuf = "Robinson";
-	} 		
+	if (!strcmp(type,"Greek") ||
+	     strstr(type,"x-Robinson") ||
+	     strstr(type,"robinson")) {
+		if (backend->get_key_testament(settings.currentverse) == 2) {
+			if (backend->is_module("Robinson")) 
+				modbuf = "Robinson";
+		} else {
+			if (backend->is_module("Packard")) 
+				modbuf = "Packard";
+		}
+	}
 	if (clicked) {
 		main_display_dictionary(modbuf, (gchar*)value);		
 	} else {
 		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
 		if (mybuf) {
-			main_information_viewer(modbuf, 
-					mybuf, 
-					(gchar*)value, 
+			main_information_viewer(modbuf,
+					mybuf,
+					(gchar*)value,
 					"showMorph",
 					(gchar*)type,
 					NULL,
