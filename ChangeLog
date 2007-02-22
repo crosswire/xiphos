@@ -1,3 +1,8 @@
+2007-02-22  karl <charcoal@users.sf.net>
+
+	* fixed detached parallel view infloop in Rev 22.
+	* restructured parallel view code to cache modnames and fontsizes.
+
 2007-02-05 terry <tbiggs@users.sf.net>
 
 	* begin support for gtkhtml38-3.13 which breaks the printing api
