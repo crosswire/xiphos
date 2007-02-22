@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-18 11:36+0100\n"
+"POT-Creation-Date: 2007-02-22 18:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gnomesword.desktop.in.h:1
+#: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
 msgstr ""
 
-#: ../gnomesword.desktop.in.h:2
+#: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr ""
 
@@ -727,7 +727,7 @@ msgstr ""
 msgid "Chapter"
 msgstr ""
 
-#: ../src/main/embed.cc:505 ../src/gnome2/html.c:154
+#: ../src/main/embed.cc:505 ../src/gnome2/html.c:150
 msgid "Unlock "
 msgstr ""
 
@@ -1005,67 +1005,67 @@ msgid "Dictionaries"
 msgstr ""
 
 #. g_print("date: %s\n", getenv("DATE"));
-#: ../src/main/sword.cc:538 ../src/gnome2/main_window.c:580
+#: ../src/main/sword.cc:537 ../src/gnome2/main_window.c:580
 msgid "Starting"
 msgstr ""
 
-#: ../src/main/sword.cc:539
+#: ../src/main/sword.cc:538
 msgid "Initiating SWORD"
 msgstr ""
 
-#: ../src/main/sword.cc:540
+#: ../src/main/sword.cc:539
 msgid "path to sword"
 msgstr ""
 
-#: ../src/main/sword.cc:541
+#: ../src/main/sword.cc:540
 msgid "System locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:542
+#: ../src/main/sword.cc:541
 msgid "SWORD locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:544
+#: ../src/main/sword.cc:543
 msgid "Checking for SWORD Modules"
 msgstr ""
 
-#: ../src/main/sword.cc:578
+#: ../src/main/sword.cc:577
 msgid "SWORD is shutdown"
 msgstr ""
 
-#: ../src/main/sword.cc:621 ../src/main/sword.cc:630
+#: ../src/main/sword.cc:620 ../src/main/sword.cc:629
 msgid "The"
 msgstr ""
 
-#: ../src/main/sword.cc:623
+#: ../src/main/sword.cc:622
 msgid "module is locked."
 msgstr ""
 
-#: ../src/main/sword.cc:633
+#: ../src/main/sword.cc:632
 msgid "module has been unlocked."
 msgstr ""
 
-#: ../src/main/sword.cc:644
+#: ../src/main/sword.cc:643
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: ../src/main/sword.cc:648
+#: ../src/main/sword.cc:647
 msgid "click here"
 msgstr ""
 
-#: ../src/main/sword.cc:649
+#: ../src/main/sword.cc:648
 msgid "to unlock the module"
 msgstr ""
 
-#: ../src/main/sword.cc:659
+#: ../src/main/sword.cc:658
 msgid "You will need to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: ../src/main/sword.cc:668
+#: ../src/main/sword.cc:667
 msgid "You need to restart GnomeSword to view it"
 msgstr ""
 
-#: ../src/main/sword.cc:1225
+#: ../src/main/sword.cc:1224
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
@@ -1114,11 +1114,11 @@ msgstr ""
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1270
+#: ../src/editor/html-editor.c:1268
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1278 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1276 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
@@ -1648,20 +1648,20 @@ msgstr ""
 msgid "GnomeSword is shutdown"
 msgstr ""
 
-#: ../src/gnome2/html.c:637
+#: ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/gnome2/html.c:736
+#: ../src/gnome2/html.c:737
 msgid "Print"
 msgstr ""
 
-#: ../src/gnome2/html.c:786
+#: ../src/gnome2/html.c:787
 msgid "Print Preview"
 msgstr ""
 
-#: ../src/gnome2/html.c:792
+#: ../src/gnome2/html.c:793
 msgid "Failed to print the document"
 msgstr ""
 
