@@ -976,7 +976,7 @@ void main_update_parallel_page(void)
  */
 
 #ifdef USE_GTKMOZEMBED	
-static void int_display(GtkMozEmbed *new_browser, gchar * key)	
+static void int_display(GtkMozEmbed *new_browser, gchar * key)
 #else
 static void int_display(GtkHTML *html, gchar * key)
 #endif
@@ -984,11 +984,11 @@ static void int_display(GtkHTML *html, gchar * key)
 	gchar  	* utf8str,
 	   	*bgColor,
 		*textColor,
-	    	buf[500], 
-		*tmpkey, 
-		tmpbuf[256], 
-		*mod_name, 
-		*use_font_size;
+	    	buf[500],
+		*tmpkey,
+		tmpbuf[256],
+		*mod_name[5],
+		*use_font_size[5];
 	GString *str;
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
@@ -996,8 +996,52 @@ static void int_display(GtkHTML *html, gchar * key)
 	gchar *file = NULL;
 	gint utf8len, cur_verse, cur_chapter, i = 1, j;
 	char *cur_book;
-	
-	
+
+	// need #verses to process in this book.
+	char *gkey = NULL;
+	VerseKey vkey;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
+	int xverses;
+
+	vkey.AutoNormalize(1);
+	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
+			 &bytes_written, &error);
+	if(gkey == NULL) {
+		g_print ("key convert error: %s => %s\n",
+			 key, error->message);
+		g_error_free (error);
+		return;
+	}
+	vkey = gkey;
+	g_free(gkey);
+
+	xverses = (vkey.books[vkey.Testament()-1]
+				 [vkey.Book()-1].
+				 versemax[vkey.Chapter()-1]);
+
+	// quick cache of modules and fonts.
+	mod_name[0] = (parallel1 ? settings.parallel1Module : NULL);
+	mod_name[1] = (parallel2 ? settings.parallel2Module : NULL);
+	mod_name[2] = (parallel3 ? settings.parallel3Module : NULL);
+	mod_name[3] = (parallel4 ? settings.parallel4Module : NULL);
+	mod_name[4] = (parallel5 ? settings.parallel5Module : NULL);
+
+	for (j = 0; j < 5; ++j) {
+		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
+		use_font_size[j] = get_conf_file_item(file,
+						      mod_name[j],
+						      "Fontsize");
+		g_free(file);
+		if(!use_font_size[j])
+			use_font_size[j] = g_strdup("+0");
+		if (strlen(use_font_size[j]) < 2) {
+			free(use_font_size[j]);
+			use_font_size[j] = g_strdup("+0");
+		}
+	}
+
 	str = g_string_new("");
 	tmpkey = backend_p->get_valid_key(key);
 
@@ -1007,20 +1051,17 @@ static void int_display(GtkHTML *html, gchar * key)
 	cur_chapter = backend_p->key_get_chapter(tmpkey);
 	cur_book = backend_p->key_get_book(tmpkey);
 
-	for (i = 1;; i++) {
+	for (i = 1; i <= xverses; i++) {
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		free(tmpkey);
 		tmpkey = backend_p->get_valid_key(tmpbuf);
-		if (cur_chapter != backend_p->key_get_chapter(tmpkey))
-			break;
+
 		g_string_printf(str, "%s", "<tr valign=\"top\">");
-		if (str->len) {
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 		gtk_moz_embed_append_data(new_browser, str->str, str->len);
 #else
-		gtk_html_write(html, htmlstream, str->str,str->len);
+		gtk_html_write(html, htmlstream, str->str, str->len);
 #endif
-		}
 
 		if (i == cur_verse)
 			textColor = settings.currentverse_color;
@@ -1030,57 +1071,13 @@ static void int_display(GtkHTML *html, gchar * key)
 		if (evenRow) {
 			evenRow = FALSE;
 			bgColor = settings.bible_bg_color;
-		}
-
-		else {
+		} else {
 			evenRow = TRUE;
 			bgColor = "#f1f1f1";
 		}
 
 		for (j = 0; j < 5; j++) {
-			mod_name = NULL;
-			switch (j) {
-			case 0:
-				if (parallel1)
-					mod_name =
-					    settings.parallel1Module;
-				break;
-			case 1:
-				if (parallel2)
-					mod_name =
-					    settings.parallel2Module;
-				break;
-			case 2:
-				if (parallel3)
-					mod_name =
-					    settings.parallel3Module;
-				break;
-			case 3:
-				if (parallel4)
-					mod_name =
-					    settings.parallel4Module;
-				break;
-			case 4:
-				if (parallel5)
-					mod_name =
-					    settings.parallel5Module;
-				break;
-			}
-
-			is_rtol = main_is_mod_rtol(mod_name);
-			
-			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);			
-			use_font_size = get_conf_file_item(file, mod_name, "Fontsize");
-			g_free(file);
-			if(!use_font_size)
-				use_font_size = g_strdup("+0");			
-			
-			//use_font_size = get_module_font_size(mod_name);
-			if (strlen(use_font_size) < 2) {
-				free(use_font_size);
-				use_font_size = g_strdup("+0");
-			}
-
+			is_rtol = main_is_mod_rtol(mod_name[j]);
 			g_string_printf(str,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
 				"<a href=\"gnomesword.url?action=showParallel&"
@@ -1091,93 +1088,86 @@ static void int_display(GtkHTML *html, gchar * key)
 				main_url_encode(tmpkey),
 				i,
 				settings.bible_verse_num_color,
-				i, 
-				use_font_size, 
+				i,
+				use_font_size[j],
 				textColor);
 			if (str->len) {
-#ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
+#ifdef USE_GTKMOZEMBED
+				gtk_moz_embed_append_data(new_browser,
 							str->str, str->len);
 #else
-				gtk_html_write(html, htmlstream, 
+				gtk_html_write(html, htmlstream,
 							str->str,str->len);
 #endif
 			}
 			if(is_rtol) {
 				buf2 = g_strdup_printf(
-					"%s","<br><DIV ALIGN=right>");			
-				if (strlen(buf2)) {
+					"%s", "<br><DIV ALIGN=right>");
 #ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							buf2, 
-							strlen(buf2));
+				gtk_moz_embed_append_data(new_browser, 
+							  buf2, 
+							  strlen(buf2));
 #else
-					gtk_html_write(html, htmlstream, 
-							buf2,
-							strlen(buf2));
+				gtk_html_write(html, htmlstream, 
+					       buf2,
+					       strlen(buf2));
 #endif
-					free(buf2);
-				}
+				free(buf2);
 			}
-			if (mod_name) {
-				
+
+			if (mod_name[j]) {
 				utf8str =
 				    main_get_rendered_text
-				    (mod_name, tmpkey);
+				    (mod_name[j], tmpkey);
 				if (strlen(utf8str)) {
-#ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							utf8str, 
-							strlen(utf8str));
+#ifdef USE_GTKMOZEMBED
+					gtk_moz_embed_append_data(new_browser,
+								  utf8str,
+								  strlen(utf8str));
 #else
-					gtk_html_write(html, htmlstream, 
-							utf8str,
-							strlen(utf8str));
+					gtk_html_write(html, htmlstream,
+						       utf8str,
+						       strlen(utf8str));
 #endif
 					free(utf8str);
 				}
 			}
+
 			if(is_rtol) {
-				buf2 = g_strdup_printf(
-					"%s","</DIV>");			
-				if (strlen(buf2)) {
-#ifdef USE_GTKMOZEMBED	
-					gtk_moz_embed_append_data(new_browser, 
-							buf2, 
-							strlen(buf2));
+				buf2 = g_strdup_printf("%s", "</DIV>");
+#ifdef USE_GTKMOZEMBED
+				gtk_moz_embed_append_data(new_browser,
+							  buf2,
+							  strlen(buf2));
 #else
-					gtk_html_write(html, htmlstream, 
-							buf2,
-							strlen(buf2));
+				gtk_html_write(html, htmlstream,
+					       buf2,
+					       strlen(buf2));
 #endif
-					free(buf2);
-				}
+				free(buf2);
 			}
 			g_string_printf(str, "%s", "</font></td>");
-			if (str->len) {
-#ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
-							str->str, str->len);
+#ifdef USE_GTKMOZEMBED
+			gtk_moz_embed_append_data(new_browser,
+						  str->str, str->len);
 #else
-				gtk_html_write(html, htmlstream, 
-							str->str,str->len);
+			gtk_html_write(html, htmlstream,
+				       str->str,str->len);
 #endif
-			}
-			//if (use_font_size)
-			g_free(use_font_size);
 		}
 
 		g_string_printf(str, "%s", "</tr>");
-		if (str->len) {
-#ifdef USE_GTKMOZEMBED	
-				gtk_moz_embed_append_data(new_browser, 
-							str->str, str->len);
+#ifdef USE_GTKMOZEMBED
+		gtk_moz_embed_append_data(new_browser,
+					  str->str, str->len);
 #else
-				gtk_html_write(html, htmlstream, 
-							str->str,str->len);
+		gtk_html_write(html, htmlstream,
+			       str->str,str->len);
 #endif
-		}
 	}
+
+	for (j = 0; j < 5; ++j)
+		g_free(use_font_size[j]);
 	g_free(tmpkey);
 	g_free(cur_book);
 }
