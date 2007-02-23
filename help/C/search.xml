@@ -201,8 +201,10 @@
 
 	   <para>
 		Note the tooltip in the screenshot above, for Attributes search.  This qualifier is used to perform searches on attributes
-		that are carried with verses, instead of verse content proper.  Thus, a search of KJV for Strong's Greek #140, using
-		"Word//Lemma/G140", will return the single result of Matthew 12:18.
+		that are carried with verses, instead of verse content proper, such as footnote content or Strong's Hebrew and Greek
+		references.  If this button is selected, specific attribute qualifiers must be made in the Attribute Search tab, at the
+		right end of the tab set.  Strong's references are identified with a leading "H" or "G" and the numeric Strong's identifier.
+		Thus, a search of KJV for Strong's Greek #140, using "G140", will return the single result of Matthew 12:18.
 	   </para>
 
 	   <warning>
