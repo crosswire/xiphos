@@ -3,6 +3,62 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.2.2 (maintenance)
+23 Feb 2007
+
+Behavioral matters:
+
+1. The module manager now provides both short module name plus long
+   module description on the right, and there is also a refresh icon
+   between mismatched old & new version stamps of installed modules
+   (bug #1666761).  GnomeSword now works around a Sword lib install
+   manager bug when updating installed modules by deleting the old
+   version before attempting to retrieve the new version (bug #1666748).
+2. Several MM glitches related to unfindable or unusable newly-defined
+   install sources have been fixed (bug #1666763, #1666759).
+3. Some of the planned Advanced Search work has been done (feat.req
+   #1615402).  E.g. you can select the Attributes radio button, then
+   use the Attribute tab to define which attribute is in question.
+   The Strong's syntax needed is now just H### or G###.
+4. Many changes for improving i18n handling have been done.  (We need
+   translators.)
+5. The 2x2 set of buttons at the bottom of the sidebar have been moved
+   to the top, where they sit near the rest of the mouse controls
+   (bug #1666764).
+6. GnomeSword can now build under MS-Windows in the Cygwin environment
+   (feat.req #1124274), and gives every appearance of being fully
+   functional there.  Doing so requires a bash script and two library tar
+   files.  See ftp://ftp.kleinpaste.org/pub/sword/util/cygwin/
+
+Bug reports addressed since 2.2.1:
+1666764  sidebar buttons belong at top
+1666763  MM loses track of newly-defined sources
+1666761  MM: descriptions + refresh indicator
+1666759  rem.source w/o bible text -> can't load
+1666758  null genbook key -> crash
+1666756  lack of icons in splash -> crash
+1666755  strcasestr() is nonstandard
+1666754  wrong morph for OT
+1666751  GS infloops det.parallel on Rev22
+1666748  need workaround for installmgr bug
+1651736  Updated german Translation
+1651514  Crasher bugs related to directories(?)
+1651375  changing tabbed-view preference requires restart
+1651077  osis-based commentary's xrefs don't work
+1648806  Cannot add local module source directory
+1647579  switching from local to remote causes crash
+1646579  sidebar search, no bounds => crash
+1645989  newly-defined install source unavailable
+
+New feature requests pending:
+1646037  very simple api for scrolling
+
+Feature requests closed:
+1642837  fullscreen support
+1633397  shortcut: focus text cursor to verse bar
+1124274  GnomeSword for Windows
+________________________
+
 Release 2.2.1 (maintenance)
 27 Jan 2007
 
