@@ -52,7 +52,7 @@
 #define GTK_RESPONSE_REFRESH 301
 #define INSTALL 1
 #define REMOVE 0
- 
+
 enum {
 	COLUMN_NAME,
 	COLUMN_INSTALLED,
@@ -213,16 +213,13 @@ static void remove_install_modules(GList * modules, gboolean install)
 	mods = g_string_truncate(mods, mods->len - 2);
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-	if (install)
-		g_string_printf(dialog_text,
-				"<span weight=\"bold\">%s</span>\n\n%s",
-				_("Install the following modules:"),
-				mods->str);
-	else
-		g_string_printf(dialog_text,
-				"<span weight=\"bold\">%s</span>\n\n%s",
-				_("Remove the following modules:"),
-				mods->str);
+
+	g_string_printf(dialog_text,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			(install
+			 ? _("Install the following modules:")
+			 : _("Remove the following modules:")),
+			mods->str);
 
 	yes_no_dialog->label_top = dialog_text->str;
 	yes_no_dialog->yes = TRUE;
@@ -241,12 +238,10 @@ static void remove_install_modules(GList * modules, gboolean install)
 		g_string_free(dialog_text, TRUE);
 		return;
 	}
-	if(install)
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-						  _("Preparing to install"));
-	else
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-						  _("Preparing to remove"));
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
+				  (install
+				   ? _("Preparing to install")
+				   : _("Preparing to remove")));
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -267,18 +262,15 @@ static void remove_install_modules(GList * modules, gboolean install)
 	while (tmp) {
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
-		if (install) {
-			g_string_printf(mods, "%s: %s",
-					_("Installing: "), buf);
-			gtk_progress_bar_set_text(GTK_PROGRESS_BAR
-						  (progressbar_refresh),
-						  mods->str);
-		} else {
-			g_string_printf(mods, "%s: %s", _("Removing: "),
-					buf);
-			gtk_progress_bar_set_text(GTK_PROGRESS_BAR
-						  (progressbar_refresh),
-						  mods->str);
+		g_string_printf(mods, "%s: %s",
+				(install ? _("Installing") : _("Removing")),
+				buf);
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
+					  (progressbar_refresh),
+					  mods->str);
+
+		if (!install ||			// just delete
+		    main_is_module(buf)) {	// delete before re-install
 			g_print("uninstalling %s from %s\n", buf,
 				destination);
 			failed = mod_mgr_uninstall(destination, buf);
