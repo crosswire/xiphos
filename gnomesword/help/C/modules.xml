@@ -114,6 +114,15 @@
 	
                         </screenshot>
 			</figure>
+		<para>
+		Modules that are already installed have a checkmark beside them.  Locked modules, which require that you purchase an unlock
+		key from the module's copyright holder, will show a lock symbol.
+		</para>
+		<para>
+		Select new modules to be installed by clicking the checkboxes and then the Install button at the bottom.  Any number of
+		modules may be requested for installation at one time.  If there are modules installed for which a more recent version is
+		available, a refresh icon will appear between the differing old and new version stamps.
+		</para>
 		</sect3>
 		<sect3 id="remove-module">
 			<title>Removing Sword Modules</title>
