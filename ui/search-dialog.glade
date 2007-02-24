@@ -657,7 +657,7 @@
 				      <child>
 					<widget class="GtkRadioButton" id="radiobutton12">
 					  <property name="visible">True</property>
-					  <property name="tooltip">Make selections on the Attribute Search tab</property>
+					  <property name="tooltip" translatable="yes">Make selections on the Attribute Search tab</property>
 					  <property name="can_focus">True</property>
 					  <property name="label" translatable="yes">Attributes</property>
 					  <property name="use_underline">True</property>
