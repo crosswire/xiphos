@@ -1,3 +1,8 @@
+2007-02-24 terry <tbiggs@users.sf.net>
+
+	* bumped to 2.2.2.1 for release @ -r1598
+	* picked up po files in dist.
+	
 2007-02-24  karl <charcoal@users.sf.net>
 
 	* stop hurting 64bit by playing pointer/int games in settings.c.
