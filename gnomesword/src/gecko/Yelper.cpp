@@ -462,11 +462,11 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-		
+
+#ifdef DEBUG		
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-#ifdef DEBUG
 	g_message("domEvent->GetType: %s",mybuf);
 #endif
 	
