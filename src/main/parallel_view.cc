@@ -1428,7 +1428,7 @@ void main_init_paraellel_view(void)
 	gui_create_parallel_page();
 	gtk_widget_realize(widgets.html_parallel);
 	
-	gui_create_parallel_popup();
+	//gui_create_parallel_popup();
 }
 
 void main_delete_paraellel_view(void)
