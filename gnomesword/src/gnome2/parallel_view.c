@@ -227,94 +227,6 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 }
 
 
-/******************************************************************************
- * Name
- *   create_parallel_popup
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   GtkWidget * create_parallel_popup(GList * mods)
- *
- * Description
- *   create popup menu for parallel window
- *
- * Return value
- *   GtkWidget *
- */
-
-static GtkWidget *create_parallel_popup(void)
-{
-	GtkWidget *pmInt;
-	GtkAccelGroup *pmInt_accels;
-	GtkWidget *copy7;
-	GtkWidget *undockInt;
-	GtkWidget *module_options;
-	GtkWidget *separator2;
-	GtkTooltips *tooltips;	
-	GtkWidget *module_options_menu;
-	
-	tooltips = gtk_tooltips_new();
-	pmInt = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmInt), "pmInt", pmInt);
-
-	copy7 = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_show(copy7);
-	gtk_container_add(GTK_CONTAINER(pmInt), copy7);
-
-	separator2 = gtk_menu_item_new();
-	gtk_widget_show(separator2);
-	gtk_container_add(GTK_CONTAINER(pmInt), separator2);
-	gtk_widget_set_sensitive(separator2, FALSE);
-
-	undockInt = gtk_menu_item_new_with_label(_("Detach/Attach"));
-	gtk_widget_show(undockInt);
-	gtk_container_add(GTK_CONTAINER(pmInt), undockInt);
-
-	module_options =
-	    gtk_menu_item_new_with_label(_("Module Options"));
-	gtk_widget_show(module_options);
-	gtk_container_add(GTK_CONTAINER(pmInt), module_options);
-
-	module_options_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_options),
-				  module_options_menu);
-				  
-	main_load_g_ops_parallel(module_options_menu);
-
-	separator2 = gtk_menu_item_new();
-	gtk_widget_show(separator2);
-	gtk_container_add(GTK_CONTAINER(pmInt), separator2);
-	gtk_widget_set_sensitive(separator2, FALSE);
-	/* build change parallel modules submenu */
-	main_load_menu_form_mod_list(pmInt, _("Change parallel 1"),
-			       (GCallback)
-			       on_changeint1mod_activate);
-	main_load_menu_form_mod_list(pmInt, _("Change parallel 2"),
-			       (GCallback)
-			       on_changeint2mod_activate);
-	main_load_menu_form_mod_list(pmInt, _("Change parallel 3"),
-			       (GCallback)
-			       on_changeint3mod_activate);
-	main_load_menu_form_mod_list(pmInt, _("Change parallel 4"),
-			       (GCallback)
-			       on_changeint4mod_activate);
-	main_load_menu_form_mod_list(pmInt, _("Change parallel 5"),
-			       (GCallback)
-			       on_changeint5mod_activate);
-/*
-	g_signal_connect(GTK_OBJECT(copy7), "activate",
-			   G_CALLBACK(gui_copyhtml_activate),
-			   NULL);*/
-	g_signal_connect(GTK_OBJECT(undockInt), "activate",
-			   G_CALLBACK(on_undockInt_activate),
-			   &settings);
-
-	return pmInt;
-}
-
-
-
 void gui_popup_menu_parallel(void)
 {	
 	GtkWidget *menu;
@@ -389,35 +301,6 @@ void gui_popup_menu_parallel(void)
 //	g_free(ops);
 }
 
-/******************************************************************************
- * Name
- *   gui_create_parallel_popup
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void gui_create_parallel_popup(GList *bible_description)
- *
- * Description
- *   call create_parallel_popup() and attach menu to parallel html widget
- *
- * Return value
- *   void
- */
-
-void gui_create_parallel_popup(void)
-{
-#ifndef USE_GTKMOZEMBED
-	/* create popup menu for parallel window */
-	GtkWidget *menu_inter =
-	    create_parallel_popup();
-	/* attach popup menus */
-	gnome_popup_menu_attach(menu_inter,
-				widgets.html_parallel,
-				(gchar *) "1");
-#endif
-}
-
 
 static gboolean
 on_enter_notify_event        (GtkWidget       *widget,
@@ -458,6 +341,15 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 }
 
 
+#ifdef USE_GTKMOZEMBED
+static void
+_popupmenu_requested_cb (GeckoHtml *html,
+			     gchar *uri,
+			     gpointer user_data)
+{	
+	gui_popup_menu_parallel();
+}
+#endif
 
 /******************************************************************************
  * Name
@@ -496,6 +388,11 @@ void gui_create_parallel_page(void)
 	gtk_widget_show(widgets.html_parallel);					   
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel);
+	
+	g_signal_connect((gpointer)widgets.html_parallel,
+		      "popupmenu_requested",
+		      G_CALLBACK (_popupmenu_requested_cb),
+		      NULL);
 #else	
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
