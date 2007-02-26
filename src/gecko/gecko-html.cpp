@@ -428,7 +428,6 @@ GeckoHtml *gecko_html_new(DIALOG_DATA * dialog, gboolean is_dialog, gint pane)
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	priv->pane = pane;
 	priv->is_dialog = is_dialog;
-	//g_message("is_dialog");
 	priv->dialog = dialog;
 	return html;
 }
