@@ -406,7 +406,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
 				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">[%s] %s </font></A>",
+				"<font color=\"%s\">[%s] %s </font></a><br />",
 				mod_name,
 				key,
 				settings.bible_verse_num_color,
