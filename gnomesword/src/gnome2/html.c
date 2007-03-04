@@ -423,13 +423,14 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		if(!len) {
 			return NULL;
 		}
-		
-		
+		//converts encoding from ncr to utf8
+		key = ncr_to_utf8(key);
+
 		buf = main_get_striptext_from_string(settings.MainWindowModule, 
 						key);	
 		
 #ifdef DEBUG
-		g_message(buf);
+		g_message("src/gnome2/html.c: buf=>%s<",buf);
 #endif
 		if(buf == NULL) return;
 		key = g_strdelimit(buf, ".,\"<>;:?", ' ');

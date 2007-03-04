@@ -738,8 +738,16 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 			break;
 		}
 	}
-	text =
-	    main_get_search_results_text(settings.sb_search_mod, key);
+	// UTF-8 workaround (domcox)
+	// main_get_search_results_text (renderText) doesn't render 
+	// non-ascii chars saved in numeric character reference format 
+	// in personal notes.
+	// Notes are now saved in utf8 encoding (GnomeSword > 2.2.2.1)
+	if( main_get_mod_type(settings.sb_search_mod) == PERCOM_TYPE)
+		text = main_get_raw_text(settings.sb_search_mod, key);
+	else
+		text = main_get_search_results_text(settings.sb_search_mod, key);
+
 	if (text) {
 		settings.displaySearchResults = TRUE;
 		main_entry_display(sidebar.html_viewer_widget, //sidebar.html_widget,
