@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-24 13:27+0100\n"
+"POT-Creation-Date: 2007-03-05 22:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -809,8 +809,8 @@ msgid "Are you sure you want to delete this range?"
 msgstr ""
 
 #: ../src/main/search_dialog.cc:571 ../src/main/search_dialog.cc:1060
-#: ../src/main/search_dialog.cc:1081 ../src/main/search_sidebar.cc:215
-#: ../src/gnome2/sidebar.c:1501
+#: ../src/main/search_dialog.cc:1081 ../src/main/search_sidebar.cc:218
+#: ../src/gnome2/sidebar.c:1509
 msgid "Search"
 msgstr ""
 
@@ -953,54 +953,55 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/main/sidebar.cc:367
+#: ../src/main/sidebar.cc:368
 msgid "verse"
 msgstr ""
 
-#: ../src/main/sidebar.cc:427
+#: ../src/main/sidebar.cc:428
 msgid "chapter"
 msgstr ""
 
-#: ../src/main/sidebar.cc:577 ../src/main/sidebar.cc:871
-#: ../src/main/sidebar.cc:872 ../src/main/sidebar.cc:873
+#: ../src/main/sidebar.cc:578 ../src/main/sidebar.cc:872
+#: ../src/main/sidebar.cc:873 ../src/main/sidebar.cc:874
 #: ../src/gnome2/parallel_view.c:534 ../src/gnome2/sidebar.c:653
-#: ../src/gnome2/sidebar.c:662 ../src/gnome2/utilities.c:445
+#: ../src/gnome2/sidebar.c:662 ../src/gnome2/utilities.c:442
 msgid "Parallel View"
 msgstr ""
 
-#: ../src/main/sidebar.cc:583 ../src/main/sidebar.cc:879
-#: ../src/main/sidebar.cc:880 ../src/main/sidebar.cc:881
+#: ../src/main/sidebar.cc:584 ../src/main/sidebar.cc:880
+#: ../src/main/sidebar.cc:881 ../src/main/sidebar.cc:882
 #: ../src/gnome2/main_window.c:712
 msgid "Standard View"
 msgstr ""
 
-#: ../src/main/sidebar.cc:589 ../src/main/sidebar.cc:908
-#: ../src/main/sidebar.cc:910 ../src/gnome2/mod_mgr.c:700
-#: ../src/gnome2/utilities.c:467 ../ui/prefs.glade.h:25
+#: ../src/main/sidebar.cc:590 ../src/main/sidebar.cc:909
+#: ../src/main/sidebar.cc:911 ../src/gnome2/mod_mgr.c:694
+#: ../src/gnome2/utilities.c:464 ../ui/prefs.glade.h:25
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/main/sidebar.cc:602 ../src/main/sidebar.cc:965
-#: ../src/main/sidebar.cc:967 ../src/gnome2/mod_mgr.c:710
-#: ../src/gnome2/utilities.c:510
+#: ../src/main/sidebar.cc:603 ../src/main/sidebar.cc:966
+#: ../src/main/sidebar.cc:968 ../src/gnome2/mod_mgr.c:704
+#: ../src/gnome2/utilities.c:507
 msgid "General Books"
 msgstr ""
 
-#: ../src/main/sidebar.cc:740 ../src/main/sidebar.cc:742
-#: ../src/main/sidebar.cc:797 ../src/main/sidebar.cc:799
+#: ../src/main/sidebar.cc:741 ../src/main/sidebar.cc:743
+#: ../src/main/sidebar.cc:798 ../src/main/sidebar.cc:800
 #: ../src/gnome2/mod_mgr.c:475 ../src/gnome2/mod_mgr.c:477
-#: ../src/gnome2/mod_mgr.c:569 ../src/gnome2/mod_mgr.c:571
-#: ../src/gnome2/utilities.c:311 ../src/gnome2/utilities.c:387
+#: ../src/gnome2/mod_mgr.c:570 ../src/gnome2/mod_mgr.c:572
+#: ../src/gnome2/utilities.c:313 ../src/gnome2/utilities.c:315
+#: ../src/gnome2/utilities.c:382 ../src/gnome2/utilities.c:384
 msgid "Unknown"
 msgstr ""
 
-#: ../src/main/sidebar.cc:863 ../src/main/sidebar.cc:865
-#: ../src/gnome2/mod_mgr.c:696 ../src/gnome2/utilities.c:439
+#: ../src/main/sidebar.cc:864 ../src/main/sidebar.cc:866
+#: ../src/gnome2/mod_mgr.c:690 ../src/gnome2/utilities.c:436
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/main/sidebar.cc:936 ../src/main/sidebar.cc:938
-#: ../src/gnome2/mod_mgr.c:705 ../src/gnome2/utilities.c:488
+#: ../src/main/sidebar.cc:937 ../src/main/sidebar.cc:939
+#: ../src/gnome2/mod_mgr.c:699 ../src/gnome2/utilities.c:485
 msgid "Dictionaries"
 msgstr ""
 
@@ -1087,38 +1088,38 @@ msgstr ""
 msgid "It will be lost permanently!"
 msgstr ""
 
-#: ../src/editor/html-editor.c:393
+#: ../src/editor/html-editor.c:398
 msgid "Open file..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:404
+#: ../src/editor/html-editor.c:409
 msgid "Save file as..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:534 ../src/gnome2/bibletext.c:1071
+#: ../src/editor/html-editor.c:539 ../src/gnome2/bibletext.c:1071
 #: ../src/gnome2/bibletext_dialog.c:2122 ../src/gnome2/commentary.c:792
 #: ../src/gnome2/commentary_dialog.c:1834 ../src/gnome2/dictlex.c:1008
 #: ../src/gnome2/gbs.c:819 ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:535
+#: ../src/editor/html-editor.c:540
 msgid "Save the changes to document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:536
+#: ../src/editor/html-editor.c:541
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/html-editor.c:543
+#: ../src/editor/html-editor.c:548
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1268
+#: ../src/editor/html-editor.c:1273
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1276 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1281 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
@@ -1291,7 +1292,7 @@ msgstr ""
 #: ../src/gnome2/bibletext.c:1057 ../src/gnome2/bibletext_dialog.c:2115
 #: ../src/gnome2/commentary.c:778 ../src/gnome2/commentary_dialog.c:1827
 #: ../src/gnome2/dictlex.c:994 ../src/gnome2/gbs.c:805
-#: ../src/gnome2/sidebar.c:986
+#: ../src/gnome2/sidebar.c:994
 msgid "About"
 msgstr ""
 
@@ -1300,8 +1301,8 @@ msgstr ""
 #: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
 #: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
 #: ../src/gnome2/commentary.c:785 ../src/gnome2/dictlex.c:1001
-#: ../src/gnome2/gbs.c:812 ../src/gnome2/mod_mgr.c:1834
-#: ../src/gnome2/mod_mgr.c:1985 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/gbs.c:812 ../src/gnome2/mod_mgr.c:1828
+#: ../src/gnome2/mod_mgr.c:1979 ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr ""
 
@@ -1412,7 +1413,7 @@ msgstr ""
 msgid "Restore saved folder"
 msgstr ""
 
-#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:973
+#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:981
 msgid "Open in a new tab"
 msgstr ""
 
@@ -1648,20 +1649,20 @@ msgstr ""
 msgid "GnomeSword is shutdown"
 msgstr ""
 
-#: ../src/gnome2/html.c:633
+#: ../src/gnome2/html.c:634
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/gnome2/html.c:737
+#: ../src/gnome2/html.c:738
 msgid "Print"
 msgstr ""
 
-#: ../src/gnome2/html.c:787
+#: ../src/gnome2/html.c:788
 msgid "Print Preview"
 msgstr ""
 
-#: ../src/gnome2/html.c:793
+#: ../src/gnome2/html.c:794
 msgid "Failed to print the document"
 msgstr ""
 
@@ -1697,7 +1698,7 @@ msgstr ""
 msgid "Copy highlighted text from main window"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:759 ../src/gnome2/sidebar.c:1333
+#: ../src/gnome2/main_menu.c:759 ../src/gnome2/sidebar.c:1341
 msgid "_Search"
 msgstr ""
 
@@ -1898,105 +1899,105 @@ msgstr ""
 msgid "Remove failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:317 ../src/gnome2/mod_mgr.c:809
+#: ../src/gnome2/mod_mgr.c:317 ../src/gnome2/mod_mgr.c:803
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:789
+#: ../src/gnome2/mod_mgr.c:783
 msgid "Refreshing remote"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:804
+#: ../src/gnome2/mod_mgr.c:798
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:916
+#: ../src/gnome2/mod_mgr.c:910
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:998
+#: ../src/gnome2/mod_mgr.c:992
 msgid "Old"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1025
+#: ../src/gnome2/mod_mgr.c:1019
 msgid "New"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1036
+#: ../src/gnome2/mod_mgr.c:1030
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1071 ../src/gnome2/mod_mgr.c:1152
+#: ../src/gnome2/mod_mgr.c:1065 ../src/gnome2/mod_mgr.c:1146
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1105
+#: ../src/gnome2/mod_mgr.c:1099
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1113
+#: ../src/gnome2/mod_mgr.c:1107
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1122
+#: ../src/gnome2/mod_mgr.c:1116
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1131
+#: ../src/gnome2/mod_mgr.c:1125
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1155
+#: ../src/gnome2/mod_mgr.c:1149
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1159 ../src/gnome2/preferences_dialog.c:1608
-#: ../src/gnome2/sidebar.c:1522
+#: ../src/gnome2/mod_mgr.c:1153 ../src/gnome2/preferences_dialog.c:1608
+#: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1161 ../src/gnome2/mod_mgr.c:2193
+#: ../src/gnome2/mod_mgr.c:1155 ../src/gnome2/mod_mgr.c:2187
 #: ../ui/module-manager.glade.h:13
 msgid "Install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1163
+#: ../src/gnome2/mod_mgr.c:1157
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1383
+#: ../src/gnome2/mod_mgr.c:1377
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1384
+#: ../src/gnome2/mod_mgr.c:1378
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1598
+#: ../src/gnome2/mod_mgr.c:1592
 msgid "Select Local Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1837 ../src/gnome2/mod_mgr.c:1988
+#: ../src/gnome2/mod_mgr.c:1831 ../src/gnome2/mod_mgr.c:1982
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1888
+#: ../src/gnome2/mod_mgr.c:1882
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1892
+#: ../src/gnome2/mod_mgr.c:1886
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1893
+#: ../src/gnome2/mod_mgr.c:1887
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1894
+#: ../src/gnome2/mod_mgr.c:1888
 msgid "URL:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1895
+#: ../src/gnome2/mod_mgr.c:1889
 msgid "Directory:"
 msgstr ""
 
@@ -2179,47 +2180,47 @@ msgstr ""
 msgid "Sidebar"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:934
+#: ../src/gnome2/sidebar.c:942
 msgid "Save List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:935
+#: ../src/gnome2/sidebar.c:943
 msgid "Save the search results as bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:974
+#: ../src/gnome2/sidebar.c:982
 msgid "Open selected module in a new tab"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:980
+#: ../src/gnome2/sidebar.c:988
 msgid "Open in dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:981
+#: ../src/gnome2/sidebar.c:989
 msgid "Open selected module in a dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:987
+#: ../src/gnome2/sidebar.c:995
 msgid "View information about the selected dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1317
+#: ../src/gnome2/sidebar.c:1325
 msgid "_Modules"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1325
+#: ../src/gnome2/sidebar.c:1333
 msgid "_Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1342
+#: ../src/gnome2/sidebar.c:1350
 msgid "Verse _List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1490
+#: ../src/gnome2/sidebar.c:1498
 msgid "Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1511
+#: ../src/gnome2/sidebar.c:1519
 msgid "Verse List"
 msgstr ""
 
