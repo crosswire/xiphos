@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-18 11:36+0100\n"
+"POT-Creation-Date: 2007-02-24 13:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gnomesword.desktop.in.h:1
+#: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
 msgstr ""
 
-#: ../gnomesword.desktop.in.h:2
+#: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr ""
 
@@ -727,7 +727,7 @@ msgstr ""
 msgid "Chapter"
 msgstr ""
 
-#: ../src/main/embed.cc:505 ../src/gnome2/html.c:154
+#: ../src/main/embed.cc:505 ../src/gnome2/html.c:150
 msgid "Unlock "
 msgstr ""
 
@@ -975,97 +975,97 @@ msgid "Standard View"
 msgstr ""
 
 #: ../src/main/sidebar.cc:589 ../src/main/sidebar.cc:908
-#: ../src/main/sidebar.cc:910 ../src/gnome2/mod_mgr.c:708
+#: ../src/main/sidebar.cc:910 ../src/gnome2/mod_mgr.c:700
 #: ../src/gnome2/utilities.c:467 ../ui/prefs.glade.h:25
 msgid "Commentaries"
 msgstr ""
 
 #: ../src/main/sidebar.cc:602 ../src/main/sidebar.cc:965
-#: ../src/main/sidebar.cc:967 ../src/gnome2/mod_mgr.c:718
+#: ../src/main/sidebar.cc:967 ../src/gnome2/mod_mgr.c:710
 #: ../src/gnome2/utilities.c:510
 msgid "General Books"
 msgstr ""
 
 #: ../src/main/sidebar.cc:740 ../src/main/sidebar.cc:742
 #: ../src/main/sidebar.cc:797 ../src/main/sidebar.cc:799
-#: ../src/gnome2/mod_mgr.c:483 ../src/gnome2/mod_mgr.c:485
-#: ../src/gnome2/mod_mgr.c:577 ../src/gnome2/mod_mgr.c:579
+#: ../src/gnome2/mod_mgr.c:475 ../src/gnome2/mod_mgr.c:477
+#: ../src/gnome2/mod_mgr.c:569 ../src/gnome2/mod_mgr.c:571
 #: ../src/gnome2/utilities.c:311 ../src/gnome2/utilities.c:387
 msgid "Unknown"
 msgstr ""
 
 #: ../src/main/sidebar.cc:863 ../src/main/sidebar.cc:865
-#: ../src/gnome2/mod_mgr.c:704 ../src/gnome2/utilities.c:439
+#: ../src/gnome2/mod_mgr.c:696 ../src/gnome2/utilities.c:439
 msgid "Biblical Texts"
 msgstr ""
 
 #: ../src/main/sidebar.cc:936 ../src/main/sidebar.cc:938
-#: ../src/gnome2/mod_mgr.c:713 ../src/gnome2/utilities.c:488
+#: ../src/gnome2/mod_mgr.c:705 ../src/gnome2/utilities.c:488
 msgid "Dictionaries"
 msgstr ""
 
 #. g_print("date: %s\n", getenv("DATE"));
-#: ../src/main/sword.cc:538 ../src/gnome2/main_window.c:580
+#: ../src/main/sword.cc:537 ../src/gnome2/main_window.c:580
 msgid "Starting"
 msgstr ""
 
-#: ../src/main/sword.cc:539
+#: ../src/main/sword.cc:538
 msgid "Initiating SWORD"
 msgstr ""
 
-#: ../src/main/sword.cc:540
+#: ../src/main/sword.cc:539
 msgid "path to sword"
 msgstr ""
 
-#: ../src/main/sword.cc:541
+#: ../src/main/sword.cc:540
 msgid "System locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:542
+#: ../src/main/sword.cc:541
 msgid "SWORD locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:544
+#: ../src/main/sword.cc:543
 msgid "Checking for SWORD Modules"
 msgstr ""
 
-#: ../src/main/sword.cc:578
+#: ../src/main/sword.cc:577
 msgid "SWORD is shutdown"
 msgstr ""
 
-#: ../src/main/sword.cc:621 ../src/main/sword.cc:630
+#: ../src/main/sword.cc:620 ../src/main/sword.cc:629
 msgid "The"
 msgstr ""
 
-#: ../src/main/sword.cc:623
+#: ../src/main/sword.cc:622
 msgid "module is locked."
 msgstr ""
 
-#: ../src/main/sword.cc:633
+#: ../src/main/sword.cc:632
 msgid "module has been unlocked."
 msgstr ""
 
-#: ../src/main/sword.cc:644
+#: ../src/main/sword.cc:643
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: ../src/main/sword.cc:648
+#: ../src/main/sword.cc:647
 msgid "click here"
 msgstr ""
 
-#: ../src/main/sword.cc:649
+#: ../src/main/sword.cc:648
 msgid "to unlock the module"
 msgstr ""
 
-#: ../src/main/sword.cc:659
+#: ../src/main/sword.cc:658
 msgid "You will need to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: ../src/main/sword.cc:668
+#: ../src/main/sword.cc:667
 msgid "You need to restart GnomeSword to view it"
 msgstr ""
 
-#: ../src/main/sword.cc:1225
+#: ../src/main/sword.cc:1224
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
@@ -1114,11 +1114,11 @@ msgstr ""
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1270
+#: ../src/editor/html-editor.c:1268
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1278 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1276 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
@@ -1225,7 +1225,7 @@ msgstr ""
 #: ../src/gnome2/bibletext.c:972 ../src/gnome2/bibletext_dialog.c:2030
 #: ../src/gnome2/commentary.c:693 ../src/gnome2/commentary_dialog.c:1742
 #: ../src/gnome2/dictlex.c:909 ../src/gnome2/gbs.c:720
-#: ../ui/search-dialog.glade.h:39
+#: ../ui/search-dialog.glade.h:40
 msgid "Morphological Tags"
 msgstr ""
 
@@ -1300,8 +1300,8 @@ msgstr ""
 #: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
 #: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
 #: ../src/gnome2/commentary.c:785 ../src/gnome2/dictlex.c:1001
-#: ../src/gnome2/gbs.c:812 ../src/gnome2/mod_mgr.c:1842
-#: ../src/gnome2/mod_mgr.c:1993 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/gbs.c:812 ../src/gnome2/mod_mgr.c:1834
+#: ../src/gnome2/mod_mgr.c:1985 ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr ""
 
@@ -1545,7 +1545,7 @@ msgid "Enter Word or Phrase"
 msgstr ""
 
 #: ../src/gnome2/find_dialog.c:230 ../src/gnome2/search_sidebar.c:290
-#: ../ui/search-dialog.glade.h:36
+#: ../ui/search-dialog.glade.h:37
 msgid "Match case"
 msgstr ""
 
@@ -1554,7 +1554,7 @@ msgid "Search backwards"
 msgstr ""
 
 #: ../src/gnome2/find_dialog.c:244 ../src/gnome2/search_sidebar.c:255
-#: ../ui/search-dialog.glade.h:42
+#: ../ui/search-dialog.glade.h:43
 msgid "Regular expression"
 msgstr ""
 
@@ -1648,20 +1648,20 @@ msgstr ""
 msgid "GnomeSword is shutdown"
 msgstr ""
 
-#: ../src/gnome2/html.c:637
+#: ../src/gnome2/html.c:633
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/gnome2/html.c:736
+#: ../src/gnome2/html.c:737
 msgid "Print"
 msgstr ""
 
-#: ../src/gnome2/html.c:786
+#: ../src/gnome2/html.c:787
 msgid "Print Preview"
 msgstr ""
 
-#: ../src/gnome2/html.c:792
+#: ../src/gnome2/html.c:793
 msgid "Failed to print the document"
 msgstr ""
 
@@ -1866,137 +1866,137 @@ msgstr ""
 msgid "Book View"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:219
+#: ../src/gnome2/mod_mgr.c:220
 msgid "Install the following modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:224
+#: ../src/gnome2/mod_mgr.c:221
 msgid "Remove the following modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:246
+#: ../src/gnome2/mod_mgr.c:243
 msgid "Preparing to install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:249
+#: ../src/gnome2/mod_mgr.c:244
 msgid "Preparing to remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:272
-msgid "Installing: "
+#: ../src/gnome2/mod_mgr.c:266
+msgid "Installing"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:277
-msgid "Removing: "
+#: ../src/gnome2/mod_mgr.c:266
+msgid "Removing"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:321
+#: ../src/gnome2/mod_mgr.c:313
 msgid "Install failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:323
+#: ../src/gnome2/mod_mgr.c:315
 msgid "Remove failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:325 ../src/gnome2/mod_mgr.c:817
+#: ../src/gnome2/mod_mgr.c:317 ../src/gnome2/mod_mgr.c:809
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:797
+#: ../src/gnome2/mod_mgr.c:789
 msgid "Refreshing remote"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:812
+#: ../src/gnome2/mod_mgr.c:804
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:924
+#: ../src/gnome2/mod_mgr.c:916
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1006
+#: ../src/gnome2/mod_mgr.c:998
 msgid "Old"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1033
+#: ../src/gnome2/mod_mgr.c:1025
 msgid "New"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1044
+#: ../src/gnome2/mod_mgr.c:1036
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1079 ../src/gnome2/mod_mgr.c:1160
+#: ../src/gnome2/mod_mgr.c:1071 ../src/gnome2/mod_mgr.c:1152
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1113
+#: ../src/gnome2/mod_mgr.c:1105
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1121
+#: ../src/gnome2/mod_mgr.c:1113
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1130
+#: ../src/gnome2/mod_mgr.c:1122
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1139
+#: ../src/gnome2/mod_mgr.c:1131
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1163
+#: ../src/gnome2/mod_mgr.c:1155
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1167 ../src/gnome2/preferences_dialog.c:1608
+#: ../src/gnome2/mod_mgr.c:1159 ../src/gnome2/preferences_dialog.c:1608
 #: ../src/gnome2/sidebar.c:1522
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1169 ../src/gnome2/mod_mgr.c:2201
+#: ../src/gnome2/mod_mgr.c:1161 ../src/gnome2/mod_mgr.c:2193
 #: ../ui/module-manager.glade.h:13
 msgid "Install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1171
+#: ../src/gnome2/mod_mgr.c:1163
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1391
+#: ../src/gnome2/mod_mgr.c:1383
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1392
+#: ../src/gnome2/mod_mgr.c:1384
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1606
+#: ../src/gnome2/mod_mgr.c:1598
 msgid "Select Local Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1845 ../src/gnome2/mod_mgr.c:1996
+#: ../src/gnome2/mod_mgr.c:1837 ../src/gnome2/mod_mgr.c:1988
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1896
+#: ../src/gnome2/mod_mgr.c:1888
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1900
+#: ../src/gnome2/mod_mgr.c:1892
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1901
+#: ../src/gnome2/mod_mgr.c:1893
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1902
+#: ../src/gnome2/mod_mgr.c:1894
 msgid "URL:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1903
+#: ../src/gnome2/mod_mgr.c:1895
 msgid "Directory:"
 msgstr ""
 
@@ -2115,7 +2115,7 @@ msgstr ""
 msgid "Are you sure you want to delete:"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:58
+#: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:59
 msgid "Start searching"
 msgstr ""
 
@@ -2135,7 +2135,7 @@ msgstr ""
 msgid "Search Type"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:40
+#: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:41
 msgid "Multi word"
 msgstr ""
 
@@ -2718,107 +2718,111 @@ msgstr ""
 msgid "In modules that have Strong's Numbers"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:37
-msgid "Module Selection"
+#: ../ui/search-dialog.glade.h:36
+msgid "Make selections on the Attribute Search tab"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:38
+msgid "Module Selection"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:39
 msgid "Module list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:41
+#: ../ui/search-dialog.glade.h:42
 msgid "Open a dialog to select modules to add to the list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:43
+#: ../ui/search-dialog.glade.h:44
 msgid "Remove the selected module from the list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:44
+#: ../ui/search-dialog.glade.h:45
 msgid "Results"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:45
+#: ../ui/search-dialog.glade.h:46
 msgid "Save custom range"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:46
+#: ../ui/search-dialog.glade.h:47
 msgid "Save search results as bookmarks"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:47
+#: ../ui/search-dialog.glade.h:48
 msgid "Save the module list"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:48
+#: ../ui/search-dialog.glade.h:49
 msgid "Search  Criteria"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:49
+#: ../ui/search-dialog.glade.h:50
 msgid "Search entire module"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:50
+#: ../ui/search-dialog.glade.h:51
 msgid "Search for Morphological tags"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:51
+#: ../ui/search-dialog.glade.h:52
 msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:52
+#: ../ui/search-dialog.glade.h:53
 msgid "Search in footnotes"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:53
+#: ../ui/search-dialog.glade.h:54
 msgid "Show Footnotes"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:54
+#: ../ui/search-dialog.glade.h:55
 msgid "Show Morphological Tags"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:55
+#: ../ui/search-dialog.glade.h:56
 msgid "Show Strong's Numbers"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:56
+#: ../ui/search-dialog.glade.h:57
 msgid "Show in main window"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:57
+#: ../ui/search-dialog.glade.h:58
 msgid "Single module"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:59
+#: ../ui/search-dialog.glade.h:60
 msgid "Strongs Numbers"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:60
+#: ../ui/search-dialog.glade.h:61
 msgid "Use a custom module list for the search"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:61
+#: ../ui/search-dialog.glade.h:62
 msgid "Use a custom range for the scope of the search"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:62
+#: ../ui/search-dialog.glade.h:63
 msgid "Use a single module for the search"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:63
+#: ../ui/search-dialog.glade.h:64
 msgid "Use the current module list for the search"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:64
+#: ../ui/search-dialog.glade.h:65
 msgid "Use the results of the last search as the scope of the search"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:65
+#: ../ui/search-dialog.glade.h:66
 msgid "e.g. Matt-John;Rev4"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:66
+#: ../ui/search-dialog.glade.h:67
 msgid "for "
 msgstr ""
 
