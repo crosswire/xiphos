@@ -1059,6 +1059,7 @@ static void int_display(GtkHTML *html, gchar * key)
 		free(tmpkey);
 		tmpkey = backend_p->get_valid_key(tmpbuf);
 
+		
 		g_string_printf(str, "%s", "<tr valign=\"top\">");
 #ifdef USE_GTKMOZEMBED
 		gecko_html_write(html, str->str, str->len);
@@ -1159,6 +1160,8 @@ static void int_display(GtkHTML *html, gchar * key)
 		gtk_html_write(html, htmlstream,
 			       str->str,str->len);
 #endif
+	/*if (tmpkey)
+			break;*/
 	}
 
 	for (j = 0; j < 5; ++j)
