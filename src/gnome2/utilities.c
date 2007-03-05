@@ -205,7 +205,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename (g_get_home_dir (), ".gnomesword-2.0", fname, NULL);
+	file = g_build_filename (g_get_home_dir (), ".gnomesword", fname, NULL);
 	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
@@ -307,20 +307,18 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	GError *error = NULL;
 	gboolean valid;
 
-	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = N_("Unknown");
+	/* Check language */
+	buf = strdup(language);
+	if (!g_utf8_validate(buf,-1,NULL))
+		language = _("Unknown");
+	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
+		language = _("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
-		buf = g_convert(language, 
-				-1, 
-				UTF_8, 
-				OLD_CODESET, 
-				&bytes_read,
-			 	&bytes_written, 
-				&error);
+		buf = strdup(language);
 		if(buf == NULL) {
 			g_print ("error: %s\n", error->message);
 			g_error_free (error);
@@ -339,13 +337,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		g_free(buf);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
-	buf = g_convert(language, 
-			-1, 
-			UTF_8, 
-			OLD_CODESET, 
-			&bytes_read,
-		  	&bytes_written, 
-			&error);
+	buf = strdup(language);
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
 	gtk_tree_store_set(GTK_TREE_STORE(model), 
 			&child_iter, 
@@ -382,9 +374,14 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	gboolean valid;
+	gchar *buf;
 
-	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = N_("Unknown");
+	/* Check language */
+	buf = strdup(language);
+	if (!g_utf8_validate(buf,-1,NULL))
+		language = _("Unknown");
+	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
+		language = _("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -804,6 +801,79 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 		gtk_container_add(GTK_CONTAINER(menu), item); 
 		tmp = g_list_next(tmp);	
 	}	
+}
+
+/******************************************************************************
+ * Name
+ *  ncr_to_utf8
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   gchar * util_ncr2utf8(gchar * text)
+ *
+ * Description
+ *   Converts a string containing numeric character references (NCR) to utf-8 encoding
+ *
+ *   A numeric character reference (NCR) is a common markup construct used in html
+ *   pages. It consists of a short sequence of characters that represent a single
+ *   character from the Universal Character Set (UCS) of Unicode.
+ *   
+ *   NCR markup : &#<unicode-value>;  ex: &#233;
+ *
+ * Return value
+ *   gchar
+ */
+
+gchar * ncr_to_utf8(gchar * text)
+{
+	gchar *ncr;
+	gunichar unicode;
+	gchar utf8[7];
+	gchar *result = NULL;
+	size_t count;
+	guint len;
+	GString *newtext;
+	
+	newtext = g_string_new(NULL);
+	// search for "&"
+	result = strtok(text, "&");
+	newtext = g_string_append (newtext, result);
+
+	while( result != NULL ) {
+       	result = strtok( NULL, "&" );
+       	if (result != NULL) {
+       		// search for "#"
+       		if ( strcspn(result, "#") == 0){
+				// converts ncr value (string) to unicode (guint32)
+   		       	count = strcspn(result + 1, ";"); 
+ 		      	ncr=g_strndup(result + 1, count );
+ 		     	unicode = 0;
+				for (; *ncr != '\0' && *ncr >= '0' && *ncr <='9'; ncr++) 
+ 				  	unicode = (unicode * 10) + (*ncr - '0');
+  				g_free(ncr - count);
+				//  converts unicode char to utf8
+  		  		if (g_unichar_validate(unicode)){
+  		  			len = g_unichar_to_utf8(unicode, utf8);
+  		  			utf8[len] = '\0';
+  		  			newtext = g_string_append (newtext, utf8);
+  		  		}
+  		  		else {
+  		  			g_string_append_printf(newtext,"&#%d;",unicode);
+#ifdef DEBUG
+					g_message("src/gnome2/utilities.c ncr2utf8, invalid unicode char &#%d;\n", unicode);
+#endif
+				}
+  		  		// remaining text added
+  		  		if (strlen(result)>count)
+  		  			g_string_append(newtext, result+count+2);
+  			}
+  			else
+  				g_string_append(newtext, result);
+  		}
+   }
+	return g_string_free (newtext, FALSE);
+
 }
 
 
