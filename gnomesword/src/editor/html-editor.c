@@ -164,7 +164,8 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 {
 	BonoboObject *smem;
 	CORBA_Environment ev;
-	const char *text;
+	const gchar *text;
+	gchar *buf;
 	size_t len;
 	EDITOR *ed = (EDITOR *) data;
 
@@ -176,6 +177,10 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	bonobo_stream_client_write(BONOBO_OBJREF(smem), "", 1, &ev);
 
 	text = bonobo_stream_mem_get_buffer(BONOBO_STREAM_MEM(smem));
+	buf = strdup(text);
+	// converts encoding from ncr to utf8
+	text = ncr_to_utf8(buf);
+	g_free(buf);
 #ifdef DEBUG
 	g_message(text);
 #endif
