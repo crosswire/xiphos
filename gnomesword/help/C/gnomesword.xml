@@ -13,9 +13,9 @@
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY license SYSTEM "license.xml">
 
-  <!ENTITY appversion "2.1.8">
-  <!ENTITY manrevision "2.1">
-  <!ENTITY date "December 2006">
+  <!ENTITY appversion "2.2.2">
+  <!ENTITY manrevision "2.2.2">
+  <!ENTITY date "February 2007">
   <!ENTITY app "<application>Gnomesword2</application>">
   <!ENTITY appname "GnomeSword">
   <!ENTITY gnomesword "the GnomeSword Team">
@@ -56,7 +56,7 @@ Template last modified Apr 11, 2002
     </abstract>
     <copyright>
       <year>2003</year>
-      <year>2006</year>
+      <year>2007</year>
       <holder>The GnomeSword Team</holder>
     </copyright>
 
@@ -129,7 +129,7 @@ Template last modified Apr 11, 2002
     <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-        <revnumber>&appname; Manual V&manrevision;</revnumber> 
+        <revnumber>&appname; Manual &manrevision;</revnumber> 
         <date>&date;</date> 
       </revision> 
     </revhistory> 
