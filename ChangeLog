@@ -1,3 +1,11 @@
+2007-03-04  dom <domcox@users.sf.net>
+
+	* fixed bug #1673598: cannot search Personal for non-ascii chars
+
+2007-02-24  dom <domcox@users.sf.net>
+
+	* fixed bug #1667954: modules missing in advanced search (i18n bug, affects some translations)
+
 2007-02-24  karl <charcoal@users.sf.net>
 
 	* stop hurting 64bit by playing pointer/int games in settings.c.
