@@ -147,7 +147,7 @@ void gui_verselist_to_bookmarks(GList * verses)
 	}
 	g_free(info->text1);
 	g_free(info);
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
+//	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
 }
 
 /******************************************************************************
