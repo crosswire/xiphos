@@ -141,7 +141,6 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 	}
 }
 
-
 static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 {
 	GtkWidget *dialog_alert;
@@ -154,11 +153,14 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	GtkWidget *dialog_action_area2;
 	GtkWidget *cancelbutton1;
 	GtkWidget *okbutton2;
+	GtkWidget *scrolledwindow;
+	GtkWidget *viewport;
 
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
-	gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
+	gtk_window_set_default_size (GTK_WINDOW (dialog_alert), 380, 200);
+	//gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 
 	dialog_vbox2 = GTK_DIALOG(dialog_alert)->vbox;
@@ -179,14 +181,28 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
 	}
-
+	
+	
 	vbox2 = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
+	
+	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_show (scrolledwindow);
+	gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), 
+			GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	/*gtk_scrolled_window_set_shadow_type (
+			GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);*/
+	
+	viewport = gtk_viewport_new (NULL, NULL);
+	gtk_widget_show (viewport);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow), viewport);
 
 	label7 = gtk_label_new(info->label_top);
-	gtk_widget_show(label7);
-	gtk_box_pack_start(GTK_BOX(vbox2), label7, FALSE, FALSE, 0);
+	gtk_widget_show(label7);	
+	gtk_container_add (GTK_CONTAINER (viewport), label7);
+	//gtk_box_pack_start(GTK_BOX(vbox2), label7, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
