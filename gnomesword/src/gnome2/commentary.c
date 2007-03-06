@@ -23,6 +23,7 @@
 #  include <config.h>
 #endif
 
+#include <errno.h>
 #include <gnome.h>
 
 
@@ -34,6 +35,7 @@
 #include "editor/html-editor.h"
 #endif
 
+#include "gui/dialog.h"
 #include "gui/commentary.h"
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
@@ -412,6 +414,134 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	cipher_key = gui_add_cipher_key(settings.CommWindowModule, cipher_old);
 	if (cipher_key) 
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+}
+
+static void
+on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GS_DIALOG *info;
+	GString *workstr;
+	char *s;
+	char *datapath_old, *datapath_new;
+	const char *conf_old;
+	char *conf_new;
+	char *sworddir, *modsdir;
+	FILE *result;
+
+	// get a new name for the module.
+	info = gui_new_dialog();
+	info->title = _("Rename Commentary");
+	workstr = g_string_new("");
+	g_string_printf(workstr, "<span weight=\"bold\">%s</span>",
+			_("Choose Commentary Name"));
+	info->label_top = workstr->str;
+	info->text1 = g_strdup(_("New Name"));
+	info->label1 = N_("Name: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+
+	if (gui_gs_dialog(info) != GS_OK)
+		goto out1;
+
+	for (s = info->text1; *s; ++s) {
+		if (!isalnum(*s)) {
+			gui_generic_warning("Names must be letters+digits only.");
+			goto out1;
+		}
+	}
+
+	if (main_is_module(info->text1)) {
+		gui_generic_warning("Duplicate name");
+		goto out1;
+	}
+
+	sworddir = g_new(char, strlen(settings.homedir) + 8);
+	sprintf(sworddir, "%s/.sword", settings.homedir);
+	modsdir  = g_new(char, strlen(sworddir) + 8);
+	sprintf(modsdir,  "%s/mods.d", sworddir);
+
+	conf_old =
+	    main_get_mod_config_file(settings.CommWindowModule, sworddir);
+			// static data -- not to be free'd.
+
+	conf_new = g_strdup(info->text1);	// dirname is lowercase.
+	for (s = conf_new; *s; ++s)
+		if (isupper(*s))
+			*s = tolower(*s);
+
+	datapath_old =
+	    main_get_mod_config_entry(settings.CommWindowModule, "DataPath");
+	datapath_new = g_strdup(datapath_old);
+	if ((s = strstr(datapath_new, "rawfiles/")) == NULL) {
+	    gui_generic_warning("Malformed datapath in old configuration!");
+	    goto out2;
+	}
+
+	*(s+9) = '\0';		// skip past "rawfiles/".
+	s = g_strdup_printf("%s%s", datapath_new, conf_new);
+	g_free(datapath_new);	// out with the old...
+	datapath_new = s;	// ..and in with the new.
+
+	// move old data directory to new.
+	if ((chdir(sworddir) != 0) ||
+	    (rename(datapath_old, datapath_new) != 0)) {
+		gui_generic_warning("Failed to rename directory.");
+		goto out2;
+	}
+
+	// manufacture new .conf from old.
+	g_string_printf(workstr,
+			"( cd %s && sed -e '/^\\[/s|^.*$|[%s]|' -e '/^DataPath=/s|rawfiles/.*$|rawfiles/%s/|' < %s > %s.conf ) 2>&1",
+			modsdir, info->text1, conf_new, conf_old, conf_new);
+	if ((result = popen(workstr->str, "r")) == NULL) {
+		g_string_printf(workstr,
+				_("Failed to create new configuration:\n%s"),
+				strerror(errno));
+		gui_generic_warning(workstr->str);
+		goto out2;
+	} else {
+		gchar output[258];
+		if (fgets(output, 256, result) != NULL) {
+			g_string_truncate(workstr, 0);
+			g_string_append(workstr,
+					_("Configuration build error:\n\n"));
+			g_string_append(workstr, output);
+			gui_generic_warning(workstr->str);
+			goto out2;	// necessary?  advisable?
+		}
+		pclose(result);
+	}
+
+	// unlink old conf.
+	g_string_printf(workstr, "%s/%s", modsdir, conf_old);
+	if (unlink(workstr->str) != 0) {
+		g_string_printf(workstr,
+				"Unlink of old configuration failed:\n%s",
+				strerror(errno));
+		gui_generic_warning(workstr->str);
+		goto out2;
+	}
+	main_update_module_lists();
+	settings.CommWindowModule = g_strdup(info->text1);
+	main_display_commentary(info->text1, settings.currentverse);
+
+out2:
+	g_free(conf_new);
+	g_free(datapath_old);
+	g_free(datapath_new);
+	g_free(modsdir);
+	g_free(sworddir);
+out1:
+	g_free(info->text1);
+	g_free(info);
+	g_string_free(workstr, TRUE);
+}
+
+
+static void
+on_dump_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_generic_warning("dumping here");
 }
 
 
@@ -838,10 +968,22 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
+	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),		// 9
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Rename Pers.Comm."),		// 10
+	 NULL,
+	 (gpointer) on_rename_perscomm_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-convert",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Dump Pers.Comm."),		// 11
+	 NULL,
+	 (gpointer) on_dump_perscomm_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-paste",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -877,8 +1019,9 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
 	//gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module"
 	//gtk_widget_hide(menu1_uiinfo[8].widget);
-	gtk_widget_hide(menu1_uiinfo[9].widget);
-
+	gtk_widget_hide(menu1_uiinfo[9].widget);	// unlock
+	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
+	gtk_widget_hide(menu1_uiinfo[11].widget);	// dump pers.comm
 
 	
 	view_menu = gtk_menu_new();
@@ -999,9 +1142,13 @@ void gui_create_pm_commentary(void)
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 		
 	}
-	if(main_has_cipher_tag(mod_name))
-		gtk_widget_show(menu1_uiinfo[9].widget);
-	
+	if (main_has_cipher_tag(mod_name))
+		gtk_widget_show(menu1_uiinfo[9].widget);	// unlock
+
+	if (main_get_mod_type(mod_name) == PERCOM_TYPE) {
+		gtk_widget_show(menu1_uiinfo[10].widget);	// rename
+		gtk_widget_show(menu1_uiinfo[11].widget);	// dump
+	}
 	
 	/* 
 	 * menu1_uiinfo[0].widget, "about");
