@@ -48,6 +48,7 @@ extern "C" {
 
 #include <ctype.h>
 #include <time.h>
+#include <dirent.h>
 
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
@@ -1347,11 +1348,51 @@ char *main_get_mod_about_info(char * mod_name)
 	return backend->get_config_entry(mod_name, "About");
 }
 
-
-const char *main_get_mod_config_entry(const char * module_name, const char * entry)
+char *main_get_mod_config_entry(const char * module_name,
+				      const char * entry)
 {
 	return backend->get_config_entry((char*)module_name, (char*)entry);
 }
+
+const char *main_get_mod_config_file(const char * module_name,
+				     const char * moddir)
+{
+#ifdef  SWORD_SHOULD_HAVE_A_WAY_TO_GET_A_CONF_FILENAME_FROM_A_MODNAME
+	return backend->get_config_file((char*)module_name, (char*)moddir);
+#else
+	DIR *dir;
+	struct dirent *ent;
+	SWBuf name;
+
+	name =  moddir;
+	name += "/mods.d";
+	if (dir = opendir(name)) {
+		rewinddir(dir);
+		while (ent = readdir(dir)) {
+			if ((strcmp(ent->d_name, ".")) &&
+			    (strcmp(ent->d_name, ".."))) {
+				name =  moddir;
+				name += "/mods.d/";
+				name += ent->d_name;
+				SWConfig *config = new SWConfig(name.c_str());
+				if (config->Sections.find(module_name) !=
+				    config->Sections.end()) {
+					static char ret_name[255];
+					closedir(dir);
+					delete config;
+					strcpy(ret_name, ent->d_name);
+					return ret_name;
+				}
+				else
+					delete config;
+			}
+		}
+		closedir(dir);
+	}
+	return NULL;
+#endif
+}
+
 int main_is_mod_rtol(const char * module_name)
 {
 	char *direction = backend->get_config_entry((char*)module_name, "Direction");
