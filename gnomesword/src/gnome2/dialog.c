@@ -141,7 +141,6 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 	}
 }
 
-
 static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 {
 	GtkWidget *dialog_alert;
@@ -154,11 +153,13 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	GtkWidget *dialog_action_area2;
 	GtkWidget *cancelbutton1;
 	GtkWidget *okbutton2;
+	GtkWidget *scrolledwindow;
+	GtkWidget *viewport;
 
 	dialog_alert = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_alert), 5);
 	gtk_window_set_title(GTK_WINDOW(dialog_alert), " ");
-	gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
+	//gtk_window_set_resizable(GTK_WINDOW(dialog_alert), FALSE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_alert), FALSE);
 
 	dialog_vbox2 = GTK_DIALOG(dialog_alert)->vbox;
@@ -179,26 +180,37 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(image5), 0.5, 0);
 		gtk_misc_set_padding(GTK_MISC(image5), 12, 0);
 	}
-
+	
+	
 	vbox2 = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox2);
 	gtk_box_pack_start(GTK_BOX(hbox3), vbox2, TRUE, TRUE, 0);
 
 	label7 = gtk_label_new(info->label_top);
-	gtk_widget_show(label7);
+	gtk_widget_show(label7);	
 	gtk_box_pack_start(GTK_BOX(vbox2), label7, FALSE, FALSE, 0);
 	gtk_label_set_use_markup(GTK_LABEL(label7), TRUE);
 	gtk_label_set_justify(GTK_LABEL(label7), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label7), TRUE);
 	gtk_misc_set_alignment(GTK_MISC(label7), 0, 0.5);
 
-	if (info->label2) {
+	if (info->label2) {	
+		gtk_window_set_default_size (GTK_WINDOW (dialog_alert), 380, 200);
+		scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+		gtk_widget_show (scrolledwindow);
+		gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), 
+				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+		
+		viewport = gtk_viewport_new (NULL, NULL);
+		gtk_widget_show (viewport);
+		gtk_container_add (GTK_CONTAINER (scrolledwindow), viewport);
+		
 		label10 = gtk_label_new(info->label2);
 		gtk_widget_show(label10);
-		gtk_box_pack_start(GTK_BOX(vbox2), label10, FALSE, FALSE, 0);
+		gtk_container_add (GTK_CONTAINER (viewport), label10);
 		gtk_label_set_justify(GTK_LABEL(label10), GTK_JUSTIFY_LEFT);
 		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
-
 	}
 	
 	dialog_action_area2 = GTK_DIALOG(dialog_alert)->action_area;
@@ -751,10 +763,11 @@ void gui_generic_warning(char *message)
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
-	g_string_printf(dialog_text, "<span weight=\"bold\">%s</span>\n\n%s",
-			_("GnomeSword:"),
-			message);
+	
+	g_string_printf(dialog_text, "<span weight=\"bold\">%s</span>",
+			_("GnomeSword:"));
 	dialog->label_top = dialog_text->str;
+	dialog->label2 = message;
 	dialog->ok = TRUE;
 
 	gui_alert_dialog(dialog);
