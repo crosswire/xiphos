@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include <bonobo.h>
 #include <gnome.h>
@@ -47,11 +48,16 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-#define GTK_RESPONSE_INSTALL 303
-#define GTK_RESPONSE_REMOVE 302
 #define GTK_RESPONSE_REFRESH 301
-#define INSTALL 1
-#define REMOVE 0
+#define GTK_RESPONSE_REMOVE  302
+#define GTK_RESPONSE_INSTALL 303
+#define GTK_RESPONSE_ARCHIVE 304
+
+enum {
+	REMOVE  = 0,
+	INSTALL = 1,
+	ARCHIVE = 2,
+};
 
 enum {
 	COLUMN_NAME,
@@ -83,6 +89,7 @@ static GtkWidget *button_cancel;
 static GtkWidget *button1;
 static GtkWidget *button2;
 static GtkWidget *button3;
+static GtkWidget *button4;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -176,12 +183,12 @@ static gboolean mod_mgr_check_for_file(const gchar * filename)
 
 /******************************************************************************
  * Name
- *   install_modules
+ *   remove_install_modules
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *    void install_modules(GList * modules)
+ *    void remove_install_modules(GList * modules, int activity)
  *
  * Description
  *   
@@ -190,7 +197,9 @@ static gboolean mod_mgr_check_for_file(const gchar * filename)
  *   void
  */
 
-static void remove_install_modules(GList * modules, gboolean install)
+#define ZIP_DIR	".sword/zip"
+
+static void remove_install_modules(GList * modules, int activity)
 {
 	GList *tmp = NULL;
 	gchar *buf;
@@ -215,10 +224,12 @@ static void remove_install_modules(GList * modules, gboolean install)
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 
 	g_string_printf(dialog_text,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			(install
-			 ? _("Install the following modules:")
-			 : _("Remove the following modules:")),
+			"<span weight=\"bold\">%s these modules:</span>\n\n%s",
+			((activity == INSTALL)
+			 ? _("Install")
+			 : ((activity == REMOVE)
+			    ? _("Remove")
+			    : _("Archive"))),
 			mods->str);
 
 	yes_no_dialog->label_top = dialog_text->str;
@@ -239,9 +250,11 @@ static void remove_install_modules(GList * modules, gboolean install)
 		return;
 	}
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-				  (install
+				  ((activity == INSTALL)
 				   ? _("Preparing to install")
-				   : _("Preparing to remove")));
+				   : ((activity == REMOVE)
+				      ? _("Preparing to remove")
+				      : _("Preparing to archive"))));
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -253,6 +266,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 	gtk_widget_hide(button1);
 	gtk_widget_hide(button2);
 	gtk_widget_hide(button3);
+	gtk_widget_hide(button4);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -263,16 +277,76 @@ static void remove_install_modules(GList * modules, gboolean install)
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
 		g_string_printf(mods, "%s: %s",
-				(install ? _("Installing") : _("Removing")),
+				((activity == INSTALL)
+				 ? _("Installing")
+				 : ((activity == REMOVE)
+				    ? _("Removing")
+				    : _("Archiving"))),
 				buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
 
-		if (!install ||			// just delete
-		    main_is_module(buf)) {	// delete before re-install
-			g_print("uninstalling %s from %s\n", buf,
-				destination);
+		if (activity == ARCHIVE) {
+			GString *cmd = g_string_new(NULL);
+			gchar *dir = g_new(char, strlen(settings.homedir) +
+					   strlen(ZIP_DIR) + 2);
+			gchar *zipfile;
+			char *datapath;
+			FILE *result;
+
+			g_print("archive %s in %s\n", buf, destination);
+			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
+			if ((access(dir, F_OK) == -1) &&
+			    (mkdir(dir, S_IRWXU) != 0)) {
+				char msg[300];
+				sprintf(msg, _("`mkdir %s' failed:\n%s."),
+					dir, strerror(errno));
+				g_free(dir);
+				gui_generic_warning(msg);
+				return;
+			}
+
+			zipfile = g_new(char, strlen(dir) + 100); // excess
+			sprintf(zipfile, "%s/%s.zip", dir, buf);
+			datapath = main_get_mod_config_entry(buf, "DataPath");
+			if (access(datapath, F_OK) == -1)
+			    *(strrchr(datapath, '/')) = '\0';
+
+			g_string_printf(cmd,
+				"( rm -f %s && cd %s && zip -r %s mods.d/%s %s ) 2>&1",
+				zipfile,
+				destination,
+				zipfile,
+				main_get_mod_config_file(buf, destination),
+				datapath);
+			g_free(datapath);
+			
+			if ((result = popen(cmd->str, "r")) == NULL) {
+				gui_generic_warning
+				    (_("GnomeSword could not execute archiver"));
+			} else {
+				gchar output[258];
+				g_string_truncate(cmd, 0);
+				//g_string_append(cmd, buf);
+				//g_string_append(cmd, _(" archival result:\n\n"));
+				while (fgets(output, 256, result) != NULL)
+					; // g_string_append(cmd, output);
+				pclose(result);
+				g_string_append(cmd, _("Archive in "));
+				g_string_append(cmd, zipfile);
+				gui_generic_warning(cmd->str);
+			}
+			g_free(zipfile);
+			g_free(dir);
+			g_string_free(cmd, TRUE);
+			failed = 0;
+		}
+
+		if ((activity == REMOVE) ||	// just delete it
+		    ((activity == INSTALL) &&
+		     main_is_module(buf))) {	// delete before re-install
+			g_print("uninstall %s from %s\n", buf, destination);
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -283,7 +357,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 					    (GTK_LABEL(label_home));
 					g_warning(new_dest);
 				}
-				g_print("uninstalling %s from %s\n",
+				g_print("removing %s from %s\n",
 					buf, new_dest);
 				failed =
 				    mod_mgr_uninstall(new_dest, buf);
@@ -293,8 +367,9 @@ static void remove_install_modules(GList * modules, gboolean install)
 				gtk_main_iteration();
 			}
 		}
-		if (install) {
-			g_print("installing %s, source=%s\n", buf,source);
+
+		if (activity == INSTALL) {
+			g_print("remove %s, source=%s\n", buf,source);
 			if (local)
 				failed =
 				    mod_mgr_local_install_module(source, buf);
@@ -308,11 +383,12 @@ static void remove_install_modules(GList * modules, gboolean install)
 	have_changes = TRUE;
 	g_list_free(tmp);
 	if (failed) {
-		if (install)
-			g_string_printf(mods, "%s",
-					_("Install failed"));
-		else
-			g_string_printf(mods, "%s", _("Remove failed"));
+		g_string_printf(mods, "%s failed",
+				((activity == INSTALL)
+				 ? _("Install")
+				 : ((activity == REMOVE)
+				    ? _("Remove")
+				    : _("Archive"))));
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
@@ -328,6 +404,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 		break;
 		case 4:
 			gtk_widget_show(button3);
+			gtk_widget_show(button4);
 		break;		
 	}
 }
@@ -395,7 +472,7 @@ static GList *parse_treeview(GList * list, GtkTreeModel * model,
  *   void
  */
 
-static GList *get_list_mods_to_remove_install(gboolean install)
+static GList *get_list_mods_to_remove_install(int activity)
 {
 	GList *retval = NULL;
 	GtkTreeIter root;
@@ -403,7 +480,7 @@ static GList *get_list_mods_to_remove_install(gboolean install)
 	GtkTreeModel *model;
 	gchar *name;
 	gboolean fixed;
-	if (install)
+	if (activity == INSTALL)
 		model =
 		    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
 	else
@@ -685,7 +762,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		return;
 	tmp2 = tmp;
 
-	/*  add lBiblical Texts folder */
+	/*  add Biblical Texts folder */
 	gtk_tree_store_append(store, &text, NULL);
 	gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
 
@@ -761,6 +838,36 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 
 /******************************************************************************
  * Name
+ *   remove_install_wrapper
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *    void remove_install_wrapper(GList * modules)
+ *
+ * Description
+ *   generalization of install/remove/archive methodology.
+ *
+ * Return value
+ *   void
+ */
+
+static void remove_install_wrapper(int activity)
+{
+	GList *modules = NULL;
+	modules = get_list_mods_to_remove_install(activity);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	remove_install_modules(modules, activity);
+	load_module_tree(GTK_TREE_VIEW(treeview), (activity == INSTALL));
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	} 	
+}
+
+/******************************************************************************
+ * Name
  *   response_refresh
  *
  * Synopsis
@@ -807,6 +914,7 @@ static void response_refresh(void)
 		gtk_widget_hide(button1);
 		gtk_widget_show(button2);
 		gtk_widget_hide(button3);
+		gtk_widget_hide(button4);
 	}
 	g_free(buf);
 }
@@ -1154,7 +1262,7 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Install"), 1, 3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Remove"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Archive/Remove"), 1, 4, -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -1671,24 +1779,17 @@ void on_refresh_clicked(GtkButton * button, gpointer  user_data)
 
 void on_install_clicked(GtkButton * button, gpointer  user_data)
 {
-	GList *modules = NULL;
-	modules = get_list_mods_to_remove_install(INSTALL);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
-	remove_install_modules(modules, INSTALL);
-	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	} 	
+	remove_install_wrapper(INSTALL);
 }
 
 void on_remove_clicked(GtkButton * button, gpointer  user_data)
 {
-	GList *modules = NULL;
-	modules = get_list_mods_to_remove_install(REMOVE);
-	remove_install_modules(modules, REMOVE);
-	load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);	
+	remove_install_wrapper(REMOVE);
+}
+
+void on_archive_clicked(GtkButton * button, gpointer  user_data)
+{
+	remove_install_wrapper(ARCHIVE);
 }
 
 void on_cancel_clicked(GtkButton * button, gpointer  user_data)
@@ -1712,8 +1813,9 @@ void on_cancel_clicked(GtkButton * button, gpointer  user_data)
  * Description
  *   these are local defines
  *   GTK_RESPONSE_REFRESH = 301
- *   GTK_RESPONSE_INSTALL = 303
  *   GTK_RESPONSE_REMOVE  = 302
+ *   GTK_RESPONSE_INSTALL = 303
+ *   GTK_RESPONSE_ARCHIVE = 304
  *
  * Return value
  *   void
@@ -1737,20 +1839,13 @@ void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_dat
 		response_close();
 		break;
 	case GTK_RESPONSE_INSTALL:
-		modules = get_list_mods_to_remove_install(INSTALL);
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
-		remove_install_modules(modules, INSTALL);
-		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
-		while (gtk_events_pending()) {
-			gtk_main_iteration();
-		}
+		remove_install_wrapper(INSTALL);
 		break;
 	case GTK_RESPONSE_REMOVE:
-		modules = get_list_mods_to_remove_install(REMOVE);
-		remove_install_modules(modules, REMOVE);
-		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
+		remove_install_wrapper(REMOVE);
+		break;
+	case GTK_RESPONSE_ARCHIVE:
+		remove_install_wrapper(ARCHIVE);
 		break;
 	}
 }
@@ -2045,11 +2140,13 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 					gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
+				gtk_widget_hide(button4);
 				break;
 			case 2:
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
+				gtk_widget_hide(button4);
 				break;
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2059,9 +2156,11 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 					gtk_widget_hide(button1);
 				gtk_widget_show(button2);
 				gtk_widget_hide(button3);
+				gtk_widget_hide(button4);
 				break;
 			case 4:
 				gtk_widget_show(button3);
+				gtk_widget_show(button4);
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				break;
@@ -2195,6 +2294,14 @@ void setup_dialog_action_area(GtkDialog * dialog)
 	g_signal_connect(button3, "clicked", G_CALLBACK(on_remove_clicked), NULL);
 	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button3, 302);
 	//GTK_WIDGET_SET_FLAGS (button3, GTK_CAN_DEFAULT);
+
+/* archive */	
+	button4 =  gtk_button_new_from_stock ("gtk-save");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button4,FALSE, FALSE,0);
+	g_signal_connect(button3, "clicked", G_CALLBACK(on_archive_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button4, 304);
+	//GTK_WIDGET_SET_FLAGS (button4, GTK_CAN_DEFAULT);
+
 /* cancel */	
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_cancel,FALSE, FALSE,0);
@@ -2308,6 +2415,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 		button1 = glade_xml_get_widget (gxml, "button2"); /* refresh */
 		button2 = glade_xml_get_widget (gxml, "button3"); /* install */
 		button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
+		button4 = glade_xml_get_widget (gxml, "button13"); /* archive */
 	}
 		
 	g_signal_connect(dialog, "response",
