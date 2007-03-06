@@ -328,12 +328,12 @@ static void remove_install_modules(GList * modules, int activity)
 			} else {
 				gchar output[258];
 				g_string_truncate(cmd, 0);
-				//g_string_append(cmd, buf);
-				//g_string_append(cmd, _(" archival result:\n\n"));
+				g_string_append(cmd, buf);
+				g_string_append(cmd, _(" archival result:\n\n"));
 				while (fgets(output, 256, result) != NULL)
-					; // g_string_append(cmd, output);
+					g_string_append(cmd, output);
 				pclose(result);
-				g_string_append(cmd, _("Archive in "));
+				g_string_append(cmd, _("\nArchive in "));
 				g_string_append(cmd, zipfile);
 				gui_generic_warning(cmd->str);
 			}
