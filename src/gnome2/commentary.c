@@ -53,7 +53,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/global_ops.hh"
-
+#include "main/search_sidebar.h"
 
 //static void create_menu(GdkEventButton * event);
 
@@ -541,7 +541,7 @@ out1:
 static void
 on_dump_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_generic_warning("dumping here");
+	main_sidebar_perscomm_dump();
 }
 
 

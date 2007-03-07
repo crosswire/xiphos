@@ -1445,7 +1445,6 @@ void main_do_dialog_search(void)
 			attribute_search_string = g_strdup_printf(
 					"Word//Lemma/%s",
 					search_string);
-			g_message(attribute_search_string);
 		} else if(GTK_TOGGLE_BUTTON(search1.rb_morphs)->active) {
 			// For attribute-based searches, e.g. "Word//Lemma/G140",
 			// we must constrain the match to whole words.  Otherwise,
@@ -1454,13 +1453,14 @@ void main_do_dialog_search(void)
 			attribute_search_string = g_strdup_printf(
 					"Word//Morph/%s",
 					search_string);
-			g_message(attribute_search_string);			
 		} else if(GTK_TOGGLE_BUTTON(search1.rb_footnotes)->active) {
 			attribute_search_string = g_strdup_printf(
 					"Footnote//body/%s",
 					search_string);
-			g_message(attribute_search_string);
 		}
+#ifdef DEBUG
+		g_message(attribute_search_string);
+#endif
 	}
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;
