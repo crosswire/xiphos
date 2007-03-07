@@ -462,7 +462,6 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	conf_old =
 	    main_get_mod_config_file(settings.CommWindowModule, sworddir);
-			// static data -- not to be free'd.
 
 	conf_new = g_strdup(info->text1);	// dirname is lowercase.
 	for (s = conf_new; *s; ++s)
@@ -527,6 +526,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 out2:
 	g_free(conf_new);
+	g_free(conf_old);
 	g_free(datapath_old);
 	g_free(datapath_new);
 	g_free(modsdir);
@@ -1146,7 +1146,11 @@ void gui_create_pm_commentary(void)
 		gtk_widget_show(menu1_uiinfo[9].widget);	// unlock
 
 	if (main_get_mod_type(mod_name) == PERCOM_TYPE) {
+#ifndef __CYGWIN__
+		// winxp filesystem denies renaming any
+		// part of an open file's pathname.
 		gtk_widget_show(menu1_uiinfo[10].widget);	// rename
+#endif
 		gtk_widget_show(menu1_uiinfo[11].widget);	// dump
 	}
 	
