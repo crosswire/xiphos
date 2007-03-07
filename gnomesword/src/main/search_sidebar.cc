@@ -273,6 +273,7 @@ void main_do_sidebar_search(gpointer user_data)
  
 void main_sidebar_perscomm_dump(void)
 {
+	strcpy(settings.sb_search_mod,settings.MainWindowModule);
 	backendSearch->clear_scope();
 	backendSearch->clear_search_list();
 	fill_search_results_list(backendSearch->do_module_search
