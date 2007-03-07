@@ -224,12 +224,12 @@ static void remove_install_modules(GList * modules, int activity)
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 
 	g_string_printf(dialog_text,
-			"<span weight=\"bold\">%s these modules:</span>\n\n%s",
+			"<span weight=\"bold\">%s</span>\n\n%s",
 			((activity == INSTALL)
-			 ? _("Install")
+			 ? _("Install these modules:")
 			 : ((activity == REMOVE)
-			    ? _("Remove")
-			    : _("Archive"))),
+			    ? _("Remove these modules:")
+			    : _("Archive these modules:"))),
 			mods->str);
 
 	yes_no_dialog->label_top = dialog_text->str;
@@ -292,10 +292,12 @@ static void remove_install_modules(GList * modules, int activity)
 			gchar *dir = g_new(char, strlen(settings.homedir) +
 					   strlen(ZIP_DIR) + 2);
 			gchar *zipfile;
-			char *datapath;
+			char *datapath, *conf_file;
 			FILE *result;
 
+#ifdef DEBUG
 			g_print("archive %s in %s\n", buf, destination);
+#endif
 			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
 			if ((access(dir, F_OK) == -1) &&
 			    (mkdir(dir, S_IRWXU) != 0)) {
@@ -313,13 +315,15 @@ static void remove_install_modules(GList * modules, int activity)
 			if (access(datapath, F_OK) == -1)
 			    *(strrchr(datapath, '/')) = '\0';
 
+			conf_file = main_get_mod_config_file(buf, destination);
 			g_string_printf(cmd,
-				"( rm -f %s && cd %s && zip -r %s mods.d/%s %s ) 2>&1",
+				"( rm -f '%s' && cd '%s' && zip -r '%s' 'mods.d/%s' '%s' ) 2>&1",
 				zipfile,
 				destination,
 				zipfile,
-				main_get_mod_config_file(buf, destination),
+				conf_file,
 				datapath);
+			g_free(conf_file);
 			g_free(datapath);
 			
 			if ((result = popen(cmd->str, "r")) == NULL) {
@@ -346,7 +350,9 @@ static void remove_install_modules(GList * modules, int activity)
 		if ((activity == REMOVE) ||	// just delete it
 		    ((activity == INSTALL) &&
 		     main_is_module(buf))) {	// delete before re-install
+#ifdef DEBUG
 			g_print("uninstall %s from %s\n", buf, destination);
+#endif
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -369,7 +375,9 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == INSTALL) {
+#ifdef DEBUG
 			g_print("remove %s, source=%s\n", buf,source);
+#endif
 			if (local)
 				failed =
 				    mod_mgr_local_install_module(source, buf);
@@ -1262,7 +1270,7 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Install"), 1, 3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Archive/Remove"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Remove/Archive"), 1, 4, -1);
 
 	return GTK_TREE_MODEL(model);
 }
