@@ -1378,9 +1378,7 @@ char *main_get_mod_config_file(const char * module_name,
 					return ret_name;
 				}
 				else
-				  {
 					delete config;
-				  }
 			}
 		}
 		closedir(dir);
