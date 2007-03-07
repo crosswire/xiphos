@@ -1354,7 +1354,7 @@ char *main_get_mod_config_entry(const char * module_name,
 	return backend->get_config_entry((char*)module_name, (char*)entry);
 }
 
-const char *main_get_mod_config_file(const char * module_name,
+char *main_get_mod_config_file(const char * module_name,
 				     const char * moddir)
 {
 #ifdef  SWORD_SHOULD_HAVE_A_WAY_TO_GET_A_CONF_FILENAME_FROM_A_MODNAME
@@ -1377,10 +1377,9 @@ const char *main_get_mod_config_file(const char * module_name,
 				SWConfig *config = new SWConfig(name.c_str());
 				if (config->Sections.find(module_name) !=
 				    config->Sections.end()) {
-					static char ret_name[255];
+					char *ret_name = g_strdup(ent->d_name);
 					closedir(dir);
 					delete config;
-					strcpy(ret_name, ent->d_name);
 					return ret_name;
 				}
 				else
