@@ -214,8 +214,6 @@ void main_do_sidebar_search(gpointer user_data)
 	int search_params, finds;
 	const char *search_string = NULL;
 	char *search_module;	
-	gchar search_label[80];
-	gchar *buf = N_("Search");
 	
 	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
 	search_dialog = FALSE;
@@ -225,14 +223,10 @@ void main_do_sidebar_search(gpointer user_data)
 		return;
 	
 	if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_text)->active) {
-		sprintf(search_label, "%s %s", buf,
-			settings.MainWindowModule);
 		strcpy(settings.sb_search_mod,
 		       settings.MainWindowModule);
 	}
 	else if (GTK_TOGGLE_BUTTON(ss.radiobutton_search_comm)->active) {
-		sprintf(search_label, "%s %s", buf,
-			settings.CommWindowModule);
 		strcpy(settings.sb_search_mod,settings.CommWindowModule);
 	} 	
 	
@@ -265,7 +259,7 @@ void main_do_sidebar_search(gpointer user_data)
 	    GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
 
 	if(settings.searchType == -2)
-			settings.searchType = backendSearch->check_for_optimal_search(search_module);
+		settings.searchType = backendSearch->check_for_optimal_search(search_module);
 
 		
 	search_params =
@@ -277,6 +271,18 @@ void main_do_sidebar_search(gpointer user_data)
 	fill_search_results_list(finds);
 }
  
+void main_sidebar_perscomm_dump(void)
+{
+	backendSearch->clear_scope();
+	backendSearch->clear_search_list();
+	fill_search_results_list(backendSearch->do_module_search
+		/* personal commentary */	(settings.CommWindowModule,
+		/* find one character */	".",
+		/* regexp */			0,
+		/* case is irrelevant */	0,
+		/* happening in sidebar */	FALSE));
+}
+
 void main_init_sidebar_search_backend(void)
 {
 	backendSearch = new BackEnd();
