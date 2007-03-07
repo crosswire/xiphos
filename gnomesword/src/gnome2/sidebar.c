@@ -1109,7 +1109,9 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 	    g_strdup_printf("sword://%s/%s", settings.sb_search_mod,
 			    key);
 
+#ifdef DEBUG
 	g_warning("%d", event->keyval);
+#endif
 	if (event) {
 		switch (event->keyval) {
 		case 65293:
