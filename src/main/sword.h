@@ -98,8 +98,8 @@ int main_has_cipher_tag(char *mod_name);
 int main_is_module(char * mod_name);
 char *main_get_mod_config_entry(const char * module_name,
 				      const char * entry);
-const char *main_get_mod_config_file(const char * module_name,
-				     const char * moddir);
+char *main_get_mod_config_file(const char * module_name,
+			       const char * moddir);
 char *main_get_mod_about_info(char * mod_name);
 char *main_get_striptext(char *module_name, char *key);
 char *main_get_striptext_from_string(char *module_name, char *string);
