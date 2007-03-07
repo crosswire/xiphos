@@ -157,8 +157,8 @@ AnalyzeForImageSize(const char *origtext,
 				// call _get_size only if the window exists by now.
 				gdk_drawable_get_size(window, &window_x, &window_y);
 				if ((window_x > 200) || (window_y > 200)) {
-					window_x -= 20;
-					window_y -= 20;
+					window_x -= 23;
+					window_y -= 23;
 				} else {
 					window_x = (window_x * 93)/100;
 					window_y = (window_y * 93)/100;
