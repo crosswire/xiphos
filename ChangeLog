@@ -1,6 +1,6 @@
 2007-03-06  karl <charcoal@users.sf.net>
 
-	* implement rename + archive of feat.req #1633407.
+	* feat.req #1633407: implement pers.comm dump, rename, archive.
 
 2007-03-05 terry <tbiggs@users.sf.net>
 
