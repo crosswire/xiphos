@@ -398,6 +398,10 @@ dump_block(SWBuf& rendered,
 		t = strrchr(*strongs, '>') + 1;
 		*s = '<';
 		slen = s - t;
+		s = strstr(*strongs, "&lt;");
+		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
+		s = strstr(*strongs, "&gt;");
+		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 	} else
 		slen = 0;
 	if (*morph) {
@@ -406,6 +410,10 @@ dump_block(SWBuf& rendered,
 		t = strrchr(*morph, '>') + 1;
 		*s = '<';
 		mlen = s - t;
+		s = strchr(*morph, '(');
+		*s = ' ';
+		s = strrchr(*morph, ')');
+		*s = ' ';
 	} else
 		mlen = 0;
 	min_length = 2 + max(slen, mlen);
