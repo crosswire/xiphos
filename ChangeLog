@@ -1,3 +1,7 @@
+2007-03-08  karl <charcoal@users.sf.net>
+
+	* feat.req #1633426: implement block-render of strongs/morph.
+
 2007-03-06  karl <charcoal@users.sf.net>
 
 	* feat.req #1633407: implement pers.comm dump, rename, archive.
