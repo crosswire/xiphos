@@ -373,7 +373,10 @@ dump_block(SWBuf& rendered,
 	   const char **strongs,
 	   const char **morph)
 {
-	// unannotated words needs no help.
+	int wlen, slen, mlen, min_length;
+	char *s, *t;
+
+	// unannotated words need no help.
 	if (*word && (*strongs == NULL) && (*morph == NULL)) {
 		rendered += *word;
 		g_free((char *)*word);
@@ -382,43 +385,44 @@ dump_block(SWBuf& rendered,
 		return;
 	}
 
+	if (*word == NULL) {
+		// we need to cobble up something to take the place of
+		// a word, in order that the strongs/morph not overlay.
+		*word = g_strdup("·");
+	}
+
 	rendered += "<span class=\"word\">";
-	if (*word) {
-		int wlen, slen, mlen, min_length;
-		char *s, *t;
-
-		if (*strongs) {
-			s = g_strrstr(*strongs, "</a>");
-			*s = '\0';
-			t = strrchr(*strongs, '>') + 1;
-			*s = '<';
-			slen = s - t;
-		} else
-			slen = 0;
-		if (*morph) {
-			s = g_strrstr(*morph, "</a>");
-			*s = '\0';
-			t = strrchr(*morph, '>') + 1;
-			*s = '<';
-			mlen = s - t;
-		} else
-			mlen = 0;
-		min_length = 2 + max(slen, mlen);
-
-		// try to touch up some length problems.
-		// morphs tend to be all-caps and are wider than usual.
-		if (min_length > 6)
-			min_length += 2;
-		if (min_length > 9)
-			min_length += 2;
-
-		rendered += *word;
-		for (wlen = strlen(*word); wlen <= min_length; ++wlen)
-			rendered += "&nbsp;";
-		g_free((char *)*word);
-		*word = NULL;
+	if (*strongs) {
+		s = g_strrstr(*strongs, "</a>");
+		*s = '\0';
+		t = strrchr(*strongs, '>') + 1;
+		*s = '<';
+		slen = s - t;
 	} else
-		rendered += " ";
+		slen = 0;
+	if (*morph) {
+		s = g_strrstr(*morph, "</a>");
+		*s = '\0';
+		t = strrchr(*morph, '>') + 1;
+		*s = '<';
+		mlen = s - t;
+	} else
+		mlen = 0;
+	min_length = 2 + max(slen, mlen);
+
+	// try to touch up some length problems.
+	// morphs tend to be all-caps and are wider than usual.
+	if (min_length > 6)
+		min_length += 2;
+	if (min_length > 9)
+		min_length += 2;
+
+	rendered += *word;
+	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
+		rendered += "&nbsp;";
+
+	g_free((char *)*word);
+	*word = NULL;
 
 	if (*strongs) {
 		rendered += "<span class=\"strongs\">";
