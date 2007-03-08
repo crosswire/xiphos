@@ -418,13 +418,6 @@ dump_block(SWBuf& rendered,
 		mlen = 0;
 	min_length = 2 + max(slen, mlen);
 
-	// try to touch up some length problems.
-	// morphs tend to be all-caps and are wider than usual.
-	if (min_length > 6)
-		min_length += 2;
-	if (min_length > 9)
-		min_length += 2;
-
 	rendered += *word;
 	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
 		rendered += "&nbsp;";
@@ -461,7 +454,7 @@ block_render(const char *text)
 	const char *word    = NULL,
 		   *strongs = NULL,
 		   *morph   = NULL;
-
+	int bracket;
 	static SWBuf rendered;
 	const char *s, *t;
 
@@ -504,8 +497,7 @@ block_render(const char *text)
 						dump_block(rendered, &word, &strongs, &morph);
 					strongs = g_strndup(s, t-s);
 				}
-				s = t-1;	// stop at closing `>';
-						// "for" will move forward.
+				s = t;
 				break;
 			}
 			// ...fall through to ordinary text...
@@ -514,8 +506,27 @@ block_render(const char *text)
 		default:
 			if (word)
 				dump_block(rendered, &word, &strongs, &morph);
-			for (word = s; *s && (*s != ' ') && (*s != '\t'); ++s)
-				;
+
+			// here's an unfortunate problem.  consider:
+			// L<font size="-1">ORD</font> followed by strongs.
+			// the SPC breaks it into 2 "words", very badly.
+			// we need to track <> use to get it as *1* word,
+			// before we capture the strongs, or just the latter
+			// half of it ("size=...") goes inside the <span>.
+			bracket = 0;
+			word = s;
+			do {
+				if (*s == ' ')
+					s++;
+				for ( /* */ ;
+				     *s && (*s != ' ') && (*s != '\t');
+				     ++s) {
+					if (*s == '<')
+						bracket++;
+					else if (*s == '>')
+						bracket--;
+				}
+			} while (bracket != 0);
 			word = g_strndup(word, s-word);
 			s--;
 		}
