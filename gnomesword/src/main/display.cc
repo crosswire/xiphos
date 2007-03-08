@@ -61,7 +61,23 @@ extern "C" {
 #include "backend/gs_osishtmlhref.h"
 
 
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }%s--></STYLE></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
+
+// CSS style blocks to control blocked strongs+morph output
+// BOTH is when the user wants to see both types of markup.
+// ONE is when he wants one or the other, so we can use a single
+// specification which overlays both on top of one another.
+#define CSS_BLOCK_BOTH \
+" *        { line-height: 3.5em; }" \
+" .word    { position: relative; }" \
+" .strongs { position: absolute; top: 0.3em; left: 0 }" \
+" .morph   { position: absolute; top: 1.3em; left: 0 }"
+#define CSS_BLOCK_ONE \
+" *        { line-height: 2.7em; }" \
+" .word    { position: relative; }" \
+" .strongs { position: absolute; top:  0.6em; left: 0 }" \
+" .morph   { position: absolute; top:  0.6em; left: 0 }"
+
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
 using namespace sword;
@@ -345,7 +361,159 @@ char GTKEntryDisp::Display(SWModule &imodule)
 }
 
 
-void GTKChapDisp::getVerseBefore(SWModule &imodule)
+//
+// utility function for block_render() below.
+// having a word + annotation in hand, stuff them into the buffer.
+// span class names are from CSS_BLOCK macros.
+// we garbage-collect here so block_render doesn't have to.
+//
+void
+dump_block(SWBuf& rendered,
+	   const char **word,
+	   const char **strongs,
+	   const char **morph)
+{
+	// unannotated words needs no help.
+	if (*word && (*strongs == NULL) && (*morph == NULL)) {
+		rendered += *word;
+		g_free((char *)*word);
+		*word = NULL;
+		rendered += " ";
+		return;
+	}
+
+	rendered += "<span class=\"word\">";
+	if (*word) {
+		int wlen, slen, mlen, min_length;
+		char *s, *t;
+
+		if (*strongs) {
+			s = g_strrstr(*strongs, "</a>");
+			*s = '\0';
+			t = strrchr(*strongs, '>') + 1;
+			*s = '<';
+			slen = s - t;
+		} else
+			slen = 0;
+		if (*morph) {
+			s = g_strrstr(*morph, "</a>");
+			*s = '\0';
+			t = strrchr(*morph, '>') + 1;
+			*s = '<';
+			mlen = s - t;
+		} else
+			mlen = 0;
+		min_length = 2 + max(slen, mlen);
+
+		// try to touch up some length problems.
+		// morphs tend to be all-caps and are wider than usual.
+		if (min_length > 6)
+			min_length += 2;
+		if (min_length > 9)
+			min_length += 2;
+
+		rendered += *word;
+		for (wlen = strlen(*word); wlen <= min_length; ++wlen)
+			rendered += "&nbsp;";
+		g_free((char *)*word);
+		*word = NULL;
+	} else
+		rendered += " ";
+
+	if (*strongs) {
+		rendered += "<span class=\"strongs\">";
+		rendered += *strongs;
+		rendered += "</span>";
+		g_free((char *)*strongs);
+		*strongs = NULL;
+	}
+	if (*morph) {
+		rendered += "<span class=\"morph\">";
+		rendered += *morph;
+		rendered += "</span>";
+		g_free((char *)*morph);
+		*morph = NULL;
+	}
+	rendered += "</span> ";
+}
+
+//
+// re-process a block of text so as to envelope its strong's and morph
+// references in <span> blocks which will be interpreted by the CSS
+// directives to put each ref immediately below the word it annotates.
+// this keeps the text linearly readable while providing annotation.
+//
+const char *
+block_render(const char *text)
+{
+	const char *word    = NULL,
+		   *strongs = NULL,
+		   *morph   = NULL;
+
+	static SWBuf rendered;
+	const char *s, *t;
+
+	rendered = "";
+	for (s = text; *s; ++s) {
+		switch (*s) {
+		case ' ':
+		case '\t':
+#if 0
+			if (word) {
+				t = g_strdup_printf("%s%c", word, *s);
+				g_free((char *)word);
+				word = t;
+			} else
+				word = g_strndup(s, 1);	// copy verbatim.
+#endif
+			break;
+
+		case '<':
+			// strongs and morph are bounded by "<small>".
+			if (!strncmp(s+1, "small>", 6)) {
+				if ((t = strstr(s, "</small>")) == NULL) {
+#ifdef DEBUG
+					g_message("No </small> in %s\n", s);
+#endif
+					break;
+				}
+				t += 8;
+				// this is very dicey -- phenomenological/
+				// observable about Sword filters' provision.
+				// strongs: "<em>&lt;...&gt;</em>"
+				// morph:   "<em>(...)</em>"
+				// if Sword ever changes this, we're dead.
+				if (*(s+11) == '(') {
+					if (morph)
+						dump_block(rendered, &word, &strongs, &morph);
+					morph   = g_strndup(s, t-s);
+				} else {
+					if (strongs)
+						dump_block(rendered, &word, &strongs, &morph);
+					strongs = g_strndup(s, t-s);
+				}
+				s = t-1;	// stop at closing `>';
+						// "for" will move forward.
+				break;
+			}
+			// ...fall through to ordinary text...
+			// (includes other "<>"-bounded markup.)
+
+		default:
+			if (word)
+				dump_block(rendered, &word, &strongs, &morph);
+			for (word = s; *s && (*s != ' ') && (*s != '\t'); ++s)
+				;
+			word = g_strndup(word, s-word);
+			s--;
+		}
+	}
+	if (word || strongs || morph)
+		dump_block(rendered, &word, &strongs, &morph);
+	return rendered.c_str();
+}
+
+void GTKChapDisp::getVerseBefore(SWModule &imodule, gboolean strongs_or_morph)
 {
 	gsize bytes_read;
 	gsize bytes_written;
@@ -409,13 +577,16 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				settings.bible_text_color);
 		swbuf.appendFormatted(
 				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
-					(const char *)*mod, _("Chapter"), chapter);
+				(strongs_or_morph
+				 ? block_render((const char *)*mod)
+				 : (const char *)*mod),
+				_("Chapter"), chapter);
 		if (is_rtol)
 			swbuf += ("</DIV>");
 	}
 }
 
-void GTKChapDisp::getVerseAfter(SWModule &imodule)
+void GTKChapDisp::getVerseAfter(SWModule &imodule, gboolean strongs_or_morph)
 {
 	gsize bytes_read;
 	gsize bytes_written;
@@ -478,7 +649,9 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
-		swbuf += (const char *)*mod;
+		swbuf += (strongs_or_morph
+			  ? block_render((const char *)*mod)
+			  : (const char *)*mod);
 		swbuf+= "</font>";
 		if (is_rtol)
 			swbuf += ("</DIV>");
@@ -690,8 +863,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 #endif
-	
-	
+
+	gboolean strongs_and_morph = (ops->strongs && ops->morphs);
+	gboolean strongs_or_morph  = (ops->strongs || ops->morphs);
+
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;";
 	else
@@ -701,7 +876,14 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	swbuf.appendFormatted(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      // strongs & morph specs win over dblspc.
+			      (strongs_and_morph		// both
+			       ? CSS_BLOCK_BOTH
+			       : (strongs_or_morph		// either
+				  ? CSS_BLOCK_ONE
+				  : (settings.doublespace	// neither
+				     ? DOUBLE_SPACE
+				     : ""))),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
 			      settings.link_color);
@@ -717,7 +899,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
-	getVerseBefore(imodule);
+	getVerseBefore(imodule, strongs_or_morph);
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
@@ -726,8 +908,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 	
 	swbuf = "";
 
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
-				== curChapter && !imodule.Error()); imodule++) {
+	for (key->Verse(1);
+	     (key->Book()    == curBook) &&
+	     (key->Chapter() == curChapter) &&
+	     !imodule.Error();
+	     imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
 		while ((preverse
@@ -804,10 +989,16 @@ char GTKChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			swbuf += text->str;
+
+			swbuf += (strongs_or_morph)
+				    ? block_render(text->str)
+				    : text->str;
+
 			g_string_free(text, TRUE);
 		} else
-			swbuf += (const char *)imodule;
+			swbuf += (strongs_or_morph)
+				    ? block_render((const char *)imodule)
+				    : (const char *)imodule;
 		
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
@@ -842,7 +1033,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf = "";
 	}
 	swbuf = "";
-	getVerseAfter(imodule);
+	getVerseAfter(imodule, strongs_or_morph);
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
@@ -1135,6 +1326,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gtk_widget_modify_font (gtkText, desc);
 	gboolean was_editable = gtk_html_get_editable(html);
 #endif
+	gboolean strongs_and_morph, strongs_or_morph;
+
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
 
@@ -1147,13 +1340,23 @@ char DialogChapDisp::Display(SWModule &imodule)
 	g_free(style);
 	g_free(file);
 
-	g_string_printf(str,	HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-				(settings.doublespace ? DOUBLE_SPACE : ""),
-				settings.bible_bg_color,
-				settings.bible_text_color,
-				settings.link_color);
 	main_dialog_set_global_options((BackEnd*)be, ops);
+	strongs_and_morph = (ops->strongs && ops->morphs);
+	strongs_or_morph  = (ops->strongs || ops->morphs);
+
+	g_string_printf(str,
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			(strongs_and_morph
+			 ? CSS_BLOCK_BOTH
+			 : (strongs_or_morph
+			    ? CSS_BLOCK_ONE
+			    : (settings.doublespace
+			       ? DOUBLE_SPACE
+			       : ""))),
+			settings.bible_bg_color,
+			settings.bible_text_color,
+			settings.link_color);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
@@ -1231,10 +1434,16 @@ char DialogChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			str = g_string_append(str, text->str);
+			str = g_string_append(str, 
+					      (strongs_or_morph
+					       ? block_render(text->str)
+					       : text->str));
 			g_string_free(text, TRUE);
 		} else
-			str = g_string_append(str, (const char *)imodule);
+			str = g_string_append(str,
+					      (strongs_or_morph
+					       ? block_render((const char *)imodule)
+					       : (const char *)imodule));
 
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
