@@ -513,7 +513,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 out2:
 	g_free(conf_new);
-	g_free(conf_old);
+	g_free((char*)conf_old);
 	g_free(datapath_old);
 	g_free(datapath_new);
 	g_free(modsdir);
