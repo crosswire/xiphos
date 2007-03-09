@@ -32,6 +32,7 @@
 
 #include <regex.h>
 #include <string.h>
+#include <assert.h>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -400,7 +401,7 @@ dump_block(SWBuf& rendered,
 		slen = s - t;
 		s = strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
-		s = strstr(*strongs, "&gt;");
+		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 	} else
 		slen = 0;
@@ -412,7 +413,7 @@ dump_block(SWBuf& rendered,
 		mlen = s - t;
 		s = strchr(*morph, '(');
 		*s = ' ';
-		s = strrchr(*morph, ')');
+		s = strrchr(s, ')');
 		*s = ' ';
 	} else
 		mlen = 0;
@@ -497,7 +498,7 @@ block_render(const char *text)
 						dump_block(rendered, &word, &strongs, &morph);
 					strongs = g_strndup(s, t-s);
 				}
-				s = t;
+				s = t-1;
 				break;
 			}
 			// ...fall through to ordinary text...
@@ -516,7 +517,7 @@ block_render(const char *text)
 			bracket = 0;
 			word = s;
 			do {
-				if (*s == ' ')
+				while ((*s == ' ') || (*s == '\t'))
 					s++;
 				for ( /* */ ;
 				     *s && (*s != ' ') && (*s != '\t');
@@ -525,6 +526,7 @@ block_render(const char *text)
 						bracket++;
 					else if (*s == '>')
 						bracket--;
+					assert(bracket >= 0);
 				}
 			} while (bracket != 0);
 			word = g_strndup(word, s-word);
