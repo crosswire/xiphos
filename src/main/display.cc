@@ -601,10 +601,12 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule, gboolean strongs_or_morph)
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
 		swbuf.appendFormatted(
-				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				"%s</font>%s<br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 				(strongs_or_morph
 				 ? block_render((const char *)*mod)
 				 : (const char *)*mod),
+				// extra break when excess strongs/morph space.
+				(strongs_or_morph ? "<br>" : ""),
 				_("Chapter"), chapter);
 		if (is_rtol)
 			swbuf += ("</DIV>");
@@ -634,17 +636,21 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule, gboolean strongs_or_morph)
 			settings.bible_text_color);
 
 		swbuf.appendFormatted(
-			"</font><hr><div style=\"text-align: center\"><p>%s</p></div>",
-					mod->Description());
+			"</font>%s<hr><div style=\"text-align: center\"><p>%s</p></div>",
+			// extra break when excess strongs/morph space.
+			(strongs_or_morph ? "<br>" : ""),
+			mod->Description());
 	} else {
 		int chapter = key->Chapter();
 		if ((!strcmp(settings.MainWindowModule, "KJV")))
 			swbuf.appendFormatted(
-				"<hr><b>%s %d.</b><br><br>",
+				"%s<hr><b>%s %d.</b><br><br>",
+				(strongs_or_morph ? "<br>" : ""),
 				_("Chapter"), chapter);
 		else
 			swbuf.appendFormatted(
-				"<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				"%s<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				(strongs_or_morph ? "<br>" : ""),
 				_("Chapter"), chapter);
 
 		utf8_key = g_convert((char*)key->getText(),
@@ -891,6 +897,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 	gboolean strongs_and_morph = (ops->strongs && ops->morphs);
 	gboolean strongs_or_morph  = (ops->strongs || ops->morphs);
+	// when strongs/morph are on, the anchor boundary must be smaller.
+	gint display_boundary = (strongs_or_morph ? 1 : 2);
 
 	if (!strcmp(imodule.Name(), "KJV"))
 		paragraphMark = "&para;";
@@ -1075,8 +1083,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	if (swbuf.length()) 
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
+	if (curVerse > display_boundary) {
+		buf = g_strdup_printf("%d", curVerse - display_boundary);
 		gecko_html_jump_to_anchor (html,buf);
 		//embed_go_to_anchor(html, buf);
 		g_free(buf);
@@ -1089,8 +1097,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		//gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
 	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
+	if (curVerse > display_boundary) {
+		buf = g_strdup_printf("%d", curVerse - display_boundary);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}
@@ -1352,6 +1360,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gboolean was_editable = gtk_html_get_editable(html);
 #endif
 	gboolean strongs_and_morph, strongs_or_morph;
+	gint display_boundary;
 
 	gint versestyle;
 	gchar *file = NULL, *style = NULL;
@@ -1368,6 +1377,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	main_dialog_set_global_options((BackEnd*)be, ops);
 	strongs_and_morph = (ops->strongs && ops->morphs);
 	strongs_or_morph  = (ops->strongs || ops->morphs);
+	display_boundary = (strongs_or_morph ? 1 : 2);
 
 	g_string_printf(str,
 			HTML_START
@@ -1508,8 +1518,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gecko_html_open_stream(html,"text/html");
 		gecko_html_write(html, str->str, str->len);
 		gecko_html_close(html); 
-		if (curVerse > 2) {
-			buf = g_strdup_printf("%d", curVerse - 2);
+		if (curVerse > display_boundary) {
+			buf = g_strdup_printf("%d", curVerse - display_boundary);
 			gecko_html_jump_to_anchor(html, buf);
 			g_free(buf);
 		}
@@ -1519,8 +1529,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 		gtk_html_load_from_string(html, str->str, str->len);
 	}
 	gtk_html_set_editable(html, was_editable);
-	if (curVerse > 2) {
-		buf = g_strdup_printf("%d", curVerse - 2);
+	if (curVerse > display_boundary) {
+		buf = g_strdup_printf("%d", curVerse - display_boundary);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}
