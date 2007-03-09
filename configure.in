@@ -12,7 +12,7 @@ DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeui-2.0 libxml-2.0 libglade-2.0,,exit)
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
@@ -74,25 +74,28 @@ dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
 
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8 >= 3.13, have_gtkhtml=yes,have_gtkhtml=no)
 if test "x$have_gtkhtml" = xyes; then
+	AC_DEFINE(USE_GTKHTML38_3_13, 1, [Define if you want to use GtkHtml-3.8-3.13])
+	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+
+else
 	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
 	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
 
-	dnl gtkhtml_datadir
-	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
-
-	dnl gtkhtml api version
-	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
-	dnl AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
 fi
+dnl gtkhtml_datadir
+GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
+dnl gtkhtml api version
+GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
 AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
 AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
-
 AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_DATA_DIR)
+
+
+
 
 
 
