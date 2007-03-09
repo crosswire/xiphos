@@ -157,6 +157,9 @@
 /* Define if you want to use GtkHtml-3.8 */
 #undef USE_GTKHTML38
 
+/* Define if you want to use GtkHtml-3.8-3.13 */
+#undef USE_GTKHTML38_3_13
+
 /* Define if you want to use gtkmozembed */
 #undef USE_GTKMOZEMBED
 
