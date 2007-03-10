@@ -389,7 +389,7 @@ block_dump(SWBuf& rendered,
 	if (*word == NULL) {
 		// we need to cobble up something to take the place of
 		// a word, in order that the strongs/morph not overlay.
-		*word = g_strdup("·");
+		*word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 	}
 
 	rendered += "<span class=\"word\">";
@@ -492,13 +492,13 @@ block_render(const char *text)
 				if (*(s+11) == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
-						word = g_strdup("·");
+						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 					}
 					morph   = g_strndup(s, t-s);
 				} else {
 					if (strongs) {
 						block_dump(rendered, &word, &strongs, &morph);
-						word = g_strdup("·");
+						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 					}
 					strongs = g_strndup(s, t-s);
 				}
