@@ -526,13 +526,19 @@ block_render(const char *text)
 				for ( /* */ ;
 				     *s && (*s != ' ') && (*s != '\t');
 				     ++s) {
-					if (*s == '<')
+					if (*s == '<') {
+						if (!strncmp(s+1, "small>", 6)) {
+							// "break 2;"
+							goto outword;
+						}
 						bracket++;
+					}
 					else if (*s == '>')
 						bracket--;
 					assert(bracket >= 0);
 				}
 			} while (bracket != 0);
+		    outword:
 			word = g_strndup(word, s-word);
 			s--;
 		}
