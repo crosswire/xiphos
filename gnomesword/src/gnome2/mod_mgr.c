@@ -950,8 +950,13 @@ static void response_close(void)
 		
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		g_string_printf(str, "%s/dirlist", settings.homedir);
-		if (mod_mgr_check_for_file(str->str))
+		if (mod_mgr_check_for_file(str->str)) {
+#ifdef DEBUG
 			g_warning(str->str);
+#else
+			unlink(str->str);
+#endif
+		}
 		g_string_free(str,TRUE);
 	}
 }
