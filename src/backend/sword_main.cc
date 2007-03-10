@@ -1121,7 +1121,7 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 				     error);
 	
 	key.setText(m_current_key);
-	vs = key.ParseVerseList(list, key);
+	vs = key.ParseVerseList(list, key, TRUE);
 	g_free(m_current_key);
 	if(!vs.Count())
 		return retlist;
