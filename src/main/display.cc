@@ -369,7 +369,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 // we garbage-collect here so block_render doesn't have to.
 //
 void
-dump_block(SWBuf& rendered,
+block_dump(SWBuf& rendered,
 	   const char **word,
 	   const char **strongs,
 	   const char **morph)
@@ -490,12 +490,16 @@ block_render(const char *text)
 				// morph:   "<em>(...)</em>"
 				// if Sword ever changes this, we're dead.
 				if (*(s+11) == '(') {
-					if (morph)
-						dump_block(rendered, &word, &strongs, &morph);
+					if (morph) {
+						block_dump(rendered, &word, &strongs, &morph);
+						word = g_strdup("·");
+					}
 					morph   = g_strndup(s, t-s);
 				} else {
-					if (strongs)
-						dump_block(rendered, &word, &strongs, &morph);
+					if (strongs) {
+						block_dump(rendered, &word, &strongs, &morph);
+						word = g_strdup("·");
+					}
 					strongs = g_strndup(s, t-s);
 				}
 				s = t-1;
@@ -506,7 +510,7 @@ block_render(const char *text)
 
 		default:
 			if (word)
-				dump_block(rendered, &word, &strongs, &morph);
+				block_dump(rendered, &word, &strongs, &morph);
 
 			// here's an unfortunate problem.  consider:
 			// L<font size="-1">ORD</font> followed by strongs.
@@ -534,7 +538,7 @@ block_render(const char *text)
 		}
 	}
 	if (word || strongs || morph)
-		dump_block(rendered, &word, &strongs, &morph);
+		block_dump(rendered, &word, &strongs, &morph);
 	return rendered.c_str();
 }
 
