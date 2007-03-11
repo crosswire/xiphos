@@ -790,11 +790,12 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	g_message("gui_lookup_bibletext_selection\ndict_key: %s",dict_key);
 #endif
 #endif
-	if (dict_key && mod_name) {
+	if (dict_key && mod_name)
 		main_display_dictionary(mod_name, dict_key);
+	if (dict_key)
 		g_free(dict_key);
+	if (mod_name)
 		g_free(mod_name);
-	}
 }
 
 /******************************************************************************
