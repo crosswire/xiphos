@@ -268,7 +268,9 @@ static void mark_search_words(GString * str)
 	if (settings.searchType == 0) {
 		return;
 	}
+#ifdef DEBUG
 	g_message(settings.searchText);
+#endif
 	/* close tags */
 	sprintf(closestr, "</b></font>");
 	/* open tags */
