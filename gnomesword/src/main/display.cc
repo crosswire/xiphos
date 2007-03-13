@@ -54,6 +54,7 @@ extern "C" {
 #include "main/settings.h"
 #include "main/global_ops.hh"
 #include "main/sword.h"
+#include "main/modulecache.hh"
 
 #include "gui/utilities.h"
 #include "gui/widgets.h"
@@ -61,6 +62,8 @@ extern "C" {
 
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
+
+extern ModuleCache::CacheMap ModuleMap;
 
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }%s--></STYLE></head>"
 #define DOUBLE_SPACE " * { line-height: 2em ! important; }"
@@ -367,7 +370,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 }
 
 
-void GTKChapDisp::getVerseBefore(SWModule &imodule)
+void GTKChapDisp::getVerseBefore(SWModule &imodule, uint16_t cache_flags)
 {
 	gsize bytes_read;
 	gsize bytes_written;
@@ -375,12 +378,13 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 	gchar *utf8_key;
 	SWMgr *mgr = be->get_main_mgr();
 
-	SWModule *mod_top = mgr->getModule(imodule.Name());
+	const char *ModuleName = imodule.Name();
+	SWModule *mod_top = mgr->getModule(ModuleName);
 	mod_top->setSkipConsecutiveLinks(true);
 	*mod_top = sword::TOP;
 
 	sword::VerseKey key_top( mod_top->KeyText() );
-	SWModule *mod = mgr->getModule(imodule.Name());
+	SWModule *mod = mgr->getModule(ModuleName);
 	mod->setKey(imodule.getKey());
 
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
@@ -404,6 +408,14 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 	} else {
 		(*mod)--;
 
+		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
+							   [key->Book()]
+							   [key->Chapter()]
+							   [key->Verse()];
+
+		if (!cVerse.CacheIsValid(cache_flags))
+			cVerse.SetText((const char *)*mod, cache_flags);
+
 		utf8_key = g_convert((char*)key->getText(),
 				     -1,
 				     UTF_8,
@@ -426,31 +438,26 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
-		//g_message(mod->getRawEntry());
-/*		if ((!strcmp(settings.MainWindowModule, "KJV")) ||
-		    (!strcmp(settings.MainWindowModule, "KJV2006")))
-			swbuf.appendFormatted("%s</font><br><hr>",
-					(const char *)*mod);
-		else
-*/
-			swbuf.appendFormatted(
+
+		swbuf.appendFormatted(
 				"%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
-					(const char *)*mod, _("Chapter"), chapter);
+					cVerse.GetText(), _("Chapter"), chapter);
 	}
 }
 
-void GTKChapDisp::getVerseAfter(SWModule &imodule)
+void GTKChapDisp::getVerseAfter(SWModule &imodule, uint16_t cache_flags)
 {
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
 	gchar *utf8_key;
 	SWMgr *mgr = be->get_main_mgr();
-	SWModule *mod_bottom = mgr->getModule(imodule.Name());
+	const char *ModuleName = imodule.Name();
+	SWModule *mod_bottom = mgr->getModule(ModuleName);
 		mod_bottom->setSkipConsecutiveLinks(true);
 	*mod_bottom = sword::BOTTOM;
 	sword::VerseKey key_bottom( mod_bottom->KeyText() );
-	SWModule *mod = mgr->getModule(imodule.Name());
+	SWModule *mod = mgr->getModule(ModuleName);
 	mod->setKey(imodule.getKey());
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
 
@@ -500,8 +507,17 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
-		swbuf += (const char *)*mod;
-		swbuf+= "</font>";
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
+							   [key->Book()]
+							   [key->Chapter()]
+							   [key->Verse()];
+
+		if (!cVerse.CacheIsValid(cache_flags))
+			cVerse.SetText((const char *)*mod, cache_flags);
+
+		swbuf += cVerse.GetText();
+		swbuf += "</font>";
 	}
 }
 
@@ -691,10 +707,12 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gsize bytes_written;
 	GError **error = NULL;
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
+	char *ModuleName = imodule.Name();
+	GLOBAL_OPS * ops = main_new_globals(ModuleName);
+	uint16_t cache_flags = ConstructFlags(ops);
+	gboolean is_rtol = main_is_mod_rtol(ModuleName);
 	gboolean newparagraph = FALSE;
-	mf = get_font(imodule.Name());
+	mf = get_font(ModuleName);
 #ifdef USE_GTKMOZEMBED
 	GtkMozEmbed *html = GTK_MOZ_EMBED(gtkText);
 	gtk_moz_embed_open_stream(html, "file:///sword", "text/html");
@@ -709,7 +727,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 #endif
-	if (!strcmp(imodule.Name(), "KJV"))
+	if (!strcmp(ModuleName, "KJV"))
 		paragraphMark = "&para;";
 	else
 		paragraphMark = "";
@@ -732,7 +750,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
-	getVerseBefore(imodule);
+	getVerseBefore(imodule, cache_flags);
 #ifdef USE_GTKMOZEMBED
 	gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
 #else
@@ -740,8 +758,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 #endif
 	swbuf = "";
 
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
-				== curChapter && !imodule.Error()); imodule++) {
+	for (key->Verse(1);
+	     (key->Book()    == curBook) &&
+	     (key->Chapter() == curChapter) &&
+	     !imodule.Error();
+	     imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
 		while ((preverse
@@ -753,6 +774,12 @@ char GTKChapDisp::Display(SWModule &imodule)
 			++x;
 			sprintf(heading, "%d", x);
 		}
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
+							   [key->Book()]
+							   [key->Chapter()]
+							   [key->Verse()];
+
 		utf8_key = g_convert((char*)key->getText(),
                              -1,
                              UTF_8,
@@ -802,6 +829,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf += paragraphMark;;
 		}
 
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags))
+			cVerse.SetText((const char *)imodule, cache_flags);
+
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
 		// the enclosing <table> from producing a double break.
@@ -810,7 +841,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", (const char *)imodule);
+			g_string_printf(text, "%s", cVerse.GetText());
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -822,15 +853,15 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf += text->str;
 			g_string_free(text, TRUE);
 		} else
-			swbuf += (const char *)imodule;
-
-		buf = g_strdup_printf("%s", (const char *)imodule);
+			swbuf += cVerse.GetText();
 
 		if (key->Verse() == curVerse)
-			GTKChapDisp::ReadAloud(curVerse, imodule);
+			GTKChapDisp::ReadAloud(curVerse, cVerse.GetText());
 
 		if (settings.versestyle) {
-			if (g_strstr_len(buf, strlen(buf), "<!p>")) {
+			if (g_strstr_len(cVerse.GetText(),
+					 strlen(cVerse.GetText()),
+					 "<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
@@ -847,7 +878,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		if ((key->Verse() == curVerse) && settings.versehighlight)
 			swbuf.appendFormatted("</td></tr></table>");
 
-		g_free(buf);
 #ifdef USE_GTKMOZEMBED
 		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
 #else
@@ -856,7 +886,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf = "";
 	}
 	swbuf = "";
-	getVerseAfter(imodule);
+	getVerseAfter(imodule, cache_flags);
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
