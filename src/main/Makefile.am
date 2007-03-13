@@ -17,6 +17,7 @@ libmain_a_SOURCES =  \
     lists.cc lists.h \
     main.c \
     module_dialogs.cc module_dialogs.h \
+    modulecache.cc modulecache.hh \
     mod_mgr.cc mod_mgr.h \
     navbar.cc navbar.h \
     navbar_book.cc navbar_book.h \
