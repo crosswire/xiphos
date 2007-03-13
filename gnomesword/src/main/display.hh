@@ -48,8 +48,8 @@ class GTKChapDisp : public GTKEntryDisp {
 public:
 	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
-	virtual void getVerseBefore(SWModule &imodule);
-	virtual void getVerseAfter(SWModule &imodule);
+	virtual void getVerseBefore(SWModule &imodule, uint16_t cache_flags);
+	virtual void getVerseAfter(SWModule &imodule, uint16_t cache_flags);
 	virtual void ReadAloud(unsigned int verse, const char *suppliedtext);
 	MOD_FONT *mf;
 	SWBuf swbuf;
