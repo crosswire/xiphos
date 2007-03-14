@@ -540,7 +540,9 @@ block_render(const char *text)
 				     *s && (*s != ' ') && (*s != '\t');
 				     ++s) {
 					if (*s == '<') {
-						if (!strncmp(s+1, "small>", 6)) {
+						if (!strncmp(s+1, "small>", 6) ||
+						    ((*(s+1) == 'a') &&
+						     (*(s+2) == ' '))) {
 							// "break 2;"
 							goto outword;
 						}
