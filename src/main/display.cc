@@ -859,9 +859,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			GTKChapDisp::ReadAloud(curVerse, cVerse.GetText());
 
 		if (settings.versestyle) {
-			if (g_strstr_len(cVerse.GetText(),
-					 strlen(cVerse.GetText()),
-					 "<!p>")) {
+			if (strstr(cVerse.GetText(), "<!p>")) {
 				newparagraph = TRUE;
 			} else {
 				newparagraph = FALSE;
