@@ -1,3 +1,9 @@
+2007-03-13  karl <charcoal@users.sf.net>
+
+	* implemented module cache for display performance improvement:
+	  no need to keep re-accessing Sword itself when display options
+	  are not changing; keep a cache of HTML-ready text.
+
 2007-03-08  karl <charcoal@users.sf.net>
 
 	* feat.req #1633426: implement block-render of strongs/morph.
