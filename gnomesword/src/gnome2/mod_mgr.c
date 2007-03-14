@@ -48,6 +48,8 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
+extern void ModuleCacheErase(const char *modname);     // modulecache.cc
+
 #define GTK_RESPONSE_REFRESH 301
 #define GTK_RESPONSE_REMOVE  302
 #define GTK_RESPONSE_INSTALL 303
@@ -368,6 +370,9 @@ static void remove_install_modules(GList * modules, int activity)
 				failed =
 				    mod_mgr_uninstall(new_dest, buf);
 			}
+
+			// annihilate cache of removed module.
+			ModuleCacheErase((const char *)buf);
 
 			while (gtk_events_pending()) {
 				gtk_main_iteration();
