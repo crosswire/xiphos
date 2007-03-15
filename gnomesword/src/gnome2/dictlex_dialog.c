@@ -387,7 +387,7 @@ static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 			     &bytes_written,
 			     error);
 
-	d->key = key2;
+	d->key = g_utf8_strup(key2, -1);
 ;
 //	g_message(f_message,407,"entry_changedl",d->key);    
 
