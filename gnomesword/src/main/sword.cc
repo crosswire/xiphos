@@ -77,6 +77,7 @@ extern "C" {
  
 #include "main/parallel_view.h"
 #include "backend/sword_main.hh"
+#include "backend/gs_stringmgr.h"
 
 extern char *OLD_CODESET;
 using namespace sword; 
@@ -529,6 +530,8 @@ void main_init_backend(void)
 	SWMgr mgr;
 	
 	if (!lang) lang="C";
+
+	StringMgr::setSystemStringMgr( new GS_StringMgr() );
 	
 	backend = new BackEnd();
 	backend->init_SWORD(0);
@@ -1026,7 +1029,8 @@ void main_display_dictionary(char * mod_name, char * key)
 	
 	if (key == NULL)
 		key = "Grace";
-	
+	// old_key is uppercase
+	key = g_utf8_strup(key, -1);
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
 	if (!strcmp(old_key, key))
 		main_dictionary_entry_changed(settings.DictWindowModule);
