@@ -1,3 +1,8 @@
+2007-03-15  dom <domcox@users.sf.net>
+
+	* added StringMgr, a class which provides string handling 
+	  functions, for utf-8 support if icu is disabled in sword
+
 2007-03-05  karl <charcoal@users.sf.net>
 
 	* added "read selection aloud" to bibles & commentaries.
