@@ -6,6 +6,7 @@ INCLUDES = \
 noinst_LIBRARIES = libbackend.a
 
 libbackend_a_SOURCES =  \
+    gs_stringmgr.cpp gs_stringmgr.h \
     gs_markupfiltmgr.cpp gs_markupfiltmgr.h \
     gs_osishtmlhref.cpp gs_osishtmlhref.h \
     module_manager.cc module_manager.hh \
