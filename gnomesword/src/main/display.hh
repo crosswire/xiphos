@@ -24,6 +24,9 @@
 #include <config.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
@@ -50,7 +53,6 @@ public:
 	virtual char Display(SWModule &imodule);
 	virtual void getVerseBefore(SWModule &imodule, uint16_t cache_flags);
 	virtual void getVerseAfter(SWModule &imodule, uint16_t cache_flags);
-	virtual void ReadAloud(unsigned int verse, const char *suppliedtext);
 	MOD_FONT *mf;
 	SWBuf swbuf;
 };
@@ -86,4 +88,12 @@ public:
 	DialogTextviewChapDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,d,be,ops) {}
 	virtual char Display(SWModule &imodule);
 };
+#endif
+
+#endif	/* __cplusplus */
+
+void ReadAloud(unsigned int verse, const char *suppliedtext);
+
+#ifdef __cplusplus
+}
 #endif

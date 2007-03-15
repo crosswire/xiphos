@@ -1,3 +1,8 @@
+2007-03-05  karl <charcoal@users.sf.net>
+
+	* added "read selection aloud" to bibles & commentaries.
+	  (mouse-sweep some text, pick off popup menu.)
+
 2007-03-13  karl <charcoal@users.sf.net>
 
 	* implemented module cache for display performance improvement:

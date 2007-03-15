@@ -44,7 +44,7 @@
 #include "main/navbar.h"
 #include "main/settings.h"
 #include "main/sword.h"
-
+#include "main/display.hh"
 
 static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
 
@@ -1111,6 +1111,19 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(url);
 }
 
+static void on_read_selection_aloud(GtkMenuItem * menuitem,
+				    gpointer user_data)
+{
+	GtkHTML *html = GTK_HTML(cur_d->html);
+	int len;
+	gchar *dict_key = gtk_html_get_selection_html(html, &len);
+
+	if (dict_key && len && (*dict_key != '\0')) {
+		ReadAloud(0, dict_key);
+		g_free(dict_key);
+	} else
+		gui_generic_warning("No selection made");
+}
 
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 					       gpointer user_data)
@@ -1179,7 +1192,7 @@ on_secondary_reading_activate(GtkMenuItem * menuitem,
 					 gchar * dict_mod_description)
  *
  * Description
- *   lookup seledtion in a dict/lex module
+ *   lookup selection in a dict/lex module
  *
  * Return value
  *   void
@@ -1871,6 +1884,12 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_chapter_heading_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Read Selection Aloud"),
+	 NULL,
+	 (gpointer) on_read_selection_aloud, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-mic",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
