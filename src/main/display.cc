@@ -600,15 +600,6 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 		// clean: no quotes (conflict w/festival syntax).
 		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
 			*s = ' ';
-		// festival *pronounces* brackets and asterisks -- idiots.
-		for (s = strchr(text->str, '['); s; s = strchr(s, '['))
-			*s = ' ';
-		for (s = strchr(text->str, ']'); s; s = strchr(s, ']'))
-			*s = ' ';
-		for (s = strchr(text->str, '*'); s; s = strchr(s, '*'))
-			*s = ' ';
-		// in case it isn't obvious, i'd really like a  standard
-		// function that walks a string for multiple individual chars.
 
 		// clean: no <tokens>.
 		for (s = strchr(text->str, '<'); s; s = strchr(s, '<')) {
@@ -659,6 +650,16 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
+
+		// festival *pronounces* brackets and asterisks -- idiots.
+		for (s = strchr(text->str, '['); s; s = strchr(s, '['))
+			*s = ' ';
+		for (s = strchr(text->str, ']'); s; s = strchr(s, ']'))
+			*s = ' ';
+		for (s = strchr(text->str, '*'); s; s = strchr(s, '*'))
+			*s = ' ';
+		// in case it isn't obvious, i'd really like a  standard
+		// function that walks a string for multiple individual chars.
 #ifdef DEBUG
 		g_message("ReadAloud: clean: %s\n", text->str);
 #endif
