@@ -527,12 +527,13 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule, uint16_t cache_flags)
 // then scribbled out the local static socket with (SayText "...").
 // Non-zero verse param is prefixed onto supplied text.
 //
-void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
+void ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 	static int tts_socket = -1;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
 
-	if (settings.readaloud) {
+	if (settings.readaloud ||	// read anything, or
+	    (verse == 0)) {		// read what's handed us.
 		gchar *s, *t;
 
 		// setup for communication.
@@ -583,7 +584,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		// avoid speaking the first *2* times.
 		// (2 Display() calls are made during startup.)
 		// though speaking may be intended, startup speech is annoying.
-		if (++use_counter < 1)
+		if (verse && (++use_counter < 1))
 			return;
 
 		GString *text = g_string_new(NULL);
@@ -599,6 +600,15 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		// clean: no quotes (conflict w/festival syntax).
 		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
 			*s = ' ';
+		// festival *pronounces* brackets and asterisks -- idiots.
+		for (s = strchr(text->str, '['); s; s = strchr(s, '['))
+			*s = ' ';
+		for (s = strchr(text->str, ']'); s; s = strchr(s, ']'))
+			*s = ' ';
+		for (s = strchr(text->str, '*'); s; s = strchr(s, '*'))
+			*s = ' ';
+		// in case it isn't obvious, i'd really like a  standard
+		// function that walks a string for multiple individual chars.
 
 		// clean: no <tokens>.
 		for (s = strchr(text->str, '<'); s; s = strchr(s, '<')) {
@@ -856,7 +866,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf += cVerse.GetText();
 
 		if (key->Verse() == curVerse)
-			GTKChapDisp::ReadAloud(curVerse, cVerse.GetText());
+			ReadAloud(curVerse, cVerse.GetText());
 
 		if (settings.versestyle) {
 			if (strstr(cVerse.GetText(), "<!p>")) {
