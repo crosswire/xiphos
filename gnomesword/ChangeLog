@@ -1,9 +1,14 @@
+2007-03-16  karl <charcoal@users.sf.net>
+
+	* feat.req #1631815: open single-image window on click
+	  (depends on Sword lib "<a href>" enhancement.)
+
 2007-03-15  dom <domcox@users.sf.net>
 
 	* added StringMgr, a class which provides string handling 
 	  functions, for utf-8 support if icu is disabled in sword
 
-2007-03-05  karl <charcoal@users.sf.net>
+2007-03-15  karl <charcoal@users.sf.net>
 
 	* added "read selection aloud" to bibles & commentaries.
 	  (mouse-sweep some text, pick off popup menu.)
