@@ -39,7 +39,6 @@ char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
 		char *ret = text;
 		text  = g_ascii_strup(ret, -1);
 	}
-	g_message("text=%s",text);
 	return text;
 }
 
