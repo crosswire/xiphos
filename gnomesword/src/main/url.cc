@@ -186,6 +186,56 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 }
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gint (const gchar * filename, gboolean clicked)
+ *
+ * Description
+ *  
+ *
+ * Return value
+ *   gint
+ */
+ 
+ static gint show_separate_image(const gchar * filename, gboolean clicked)
+{
+	if (clicked) {
+#ifdef DEBUG 
+		g_print("file = %s\n", filename);
+#endif
+		GString *cmd = g_string_new(NULL);
+		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
+				"display", filename);
+		FILE *result;
+
+		if ((result = popen(cmd->str, "r")) == NULL) {
+			g_string_printf(cmd,
+					_("GnomeSword could not execute %s"),
+					"display");
+			gui_generic_warning(cmd->str);
+		} else {
+			gchar output[258];
+			if (fgets(output, 256, result) != NULL) {
+				g_string_truncate(cmd, 0);
+				g_string_append(cmd,
+						_("Viewer error:\n"));
+				g_string_append(cmd, output);
+				gui_generic_warning(cmd->str);
+			}
+		}
+		g_string_free(cmd, TRUE);
+	} else {
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
+					filename);
+	}
+	return 1;
+}
+
 
 /******************************************************************************
  * Name
@@ -194,7 +244,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint show_mod_info(const gchar * module, const gchar * discription,
+ *   gint show_mod_info(const gchar * module, const gchar * description,
  *						gboolean clicked)
  *
  * Description
@@ -204,7 +254,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
  
- static gint show_mod_info(const gchar * module, const gchar * discription,
+ static gint show_mod_info(const gchar * module, const gchar * description,
 						gboolean clicked)
 {
 	if(clicked) {
@@ -214,7 +264,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					discription);
+					description);
 	}
 	return 1;
 }
@@ -983,10 +1033,10 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if (!strcmp(action, "showStrongs"))
 			show_strongs(type, value, clicked);
 
-		if (!strcmp(action, "showMorph"))
+		else if (!strcmp(action, "showMorph"))
 			show_morph(type, value, clicked);
 
-		if (!strcmp(action, "showNote")) {
+		else if (!strcmp(action, "showNote")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
 			show_note(module, passage, type, value, clicked);
@@ -994,7 +1044,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			if (passage) g_free(passage);
 		}
 
-		if (!strcmp(action, "showRef")) {
+		else if (!strcmp(action, "showRef")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			if (!strcmp(type, "scripRef"))
 				show_ref(module, value, clicked);
@@ -1005,24 +1055,28 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 				g_free(module);
 		}
 
-		if (!strcmp(action, "showBookmark")) {
+		else if (!strcmp(action, "showBookmark")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			show_module_and_key(module, value, type, clicked);
 			if (module) g_free(module);
 		}
 
-		if (!strcmp(action, "showModInfo")) {
+		else if (!strcmp(action, "showModInfo")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			show_mod_info(module, value, clicked);
 			if (module) g_free(module);
 		}
 
-		if (!strcmp(action, "showParallel")) {
+		else if (!strcmp(action, "showParallel")) {
 			show_parallel(value, type, clicked);
 		}
 
-		if (!strcmp(action, "showStudypad")) {
+		else if (!strcmp(action, "showStudypad")) {
 			show_studypad(value, clicked);
+		}
+
+		else if (!strcmp(action, "showImage")) {
+		    show_separate_image(value+5, clicked);	// skip "file:"
 		}
 
 		if (action) g_free(action);
