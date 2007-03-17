@@ -47,8 +47,7 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
-
-extern void ModuleCacheErase(const char *modname);	// modulecache.cc
+#include "main/modulecache.hh"
 
 #define GTK_RESPONSE_REFRESH 301
 #define GTK_RESPONSE_REMOVE  302

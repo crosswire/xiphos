@@ -35,16 +35,18 @@
 #include <config.h>
 #endif
 
-#include <map>
 #include <gnome.h>
 #include <glib.h>
 #include <assert.h>
-
 #include "main/global_ops.hh"
 
+typedef unsigned short int uint16_t;
+
 #ifdef __cplusplus
+
+#include <map>
+
 extern "C" {
-#endif
 
 namespace ModuleCache {
 
@@ -64,10 +66,13 @@ namespace ModuleCache {
 	class CacheVerse {
 	public:
 		CacheVerse();
-		CacheVerse(const char *text, uint16_t flags);
+		CacheVerse(uint16_t flags,
+			   const char *text,
+			   const char *header = "");
 		~CacheVerse();
 
 		bool		TextIsValid();
+		bool		HeaderIsValid();
 		bool		CacheIsValid(uint16_t flags);
 
 		uint16_t	GetFlags();
@@ -77,11 +82,17 @@ namespace ModuleCache {
 
 		const char *	GetText();
 		void		SetText(const char *text, uint16_t flags);
+		void		AppendText(const char *text, uint16_t flags);
+
+		const char *	GetHeader();
+		void		SetHeader(const char *text);
+		void		AppendHeader(const char *text);
 
 		void		Invalidate();
 
 	private:
 		char *		_text;
+		char *		_header;
 		uint16_t	_flags;		// bitmask
 	};
 
@@ -104,6 +115,7 @@ inline
 ModuleCache::CacheVerse::
 CacheVerse() :
 	_text(NULL),
+	_header(NULL),
 	_flags(0)
 {
 	// just initializers preceding
@@ -111,8 +123,9 @@ CacheVerse() :
 
 inline
 ModuleCache::CacheVerse::
-CacheVerse(const char *text, uint16_t flags) :
+CacheVerse(uint16_t flags, const char *text, const char *header) :
 	_text(g_strdup(text)),
+	_header(g_strdup(header)),
 	_flags(flags)
 {
 	// just initializers preceding
@@ -124,6 +137,8 @@ ModuleCache::CacheVerse::
 {
 	if (_text)
 		g_free(_text);
+	if (_header)
+		g_free(_header);
 }
 
 // Access.
@@ -133,6 +148,13 @@ bool ModuleCache::CacheVerse::
 TextIsValid()
 {
 	return _text != NULL;
+}
+
+inline
+bool ModuleCache::CacheVerse::
+HeaderIsValid()
+{
+	return _header != NULL;
 }
 
 inline
@@ -171,8 +193,7 @@ DelFlag(uint16_t flag)
 }
 
 inline
-const char *
-ModuleCache::CacheVerse::
+const char *ModuleCache::CacheVerse::
 GetText()
 {
 	assert(_text);
@@ -191,13 +212,64 @@ SetText(const char *text, uint16_t flags)
 
 inline
 void ModuleCache::CacheVerse::
+AppendText(const char *text, uint16_t flags)
+{
+	if (_text) {
+		char *new_text = g_strconcat(_text, text, NULL);
+		g_free(_text);
+		_text = new_text;
+	} else
+		_text  = g_strdup(text);
+	_flags = flags;
+}
+
+// large, but seemingly valid, assumption...
+// the almost-equivalent header routines ignore flags entirely:
+// we depend on the idea that any time one assigns a header, within
+// a few lines of straight line code we will also assign text+flags.
+// also, a null header is legit.
+
+inline
+const char *ModuleCache::CacheVerse::
+GetHeader()
+{
+	return (_header ? _header : "");
+}
+
+inline
+void ModuleCache::CacheVerse::
+SetHeader(const char *text)
+{
+	if (_header)
+		g_free(_header);
+	_header  = g_strdup(text);
+}
+
+inline
+void ModuleCache::CacheVerse::
+AppendHeader(const char *text)
+{
+	if (_header) {
+		char *new_text = g_strconcat(_header, text, NULL);
+		g_free(_header);
+		_header = new_text;
+	} else
+		_header  = g_strdup(text);
+}
+
+inline
+void ModuleCache::CacheVerse::
 Invalidate()
 {
 	_flags = 0;
 	if (_text)
 		g_free(_text);
-	_text  = NULL;
+	if (_header)
+		g_free(_header);
+	_text = _header = NULL;
 }
+
+#endif	/* __cplusplus */
 
 // namespace-free routines.
 
