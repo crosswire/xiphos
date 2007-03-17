@@ -27,18 +27,23 @@
 SWORD_NAMESPACE_START
 
 char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
-	const int max = (maxlen>0) ? maxlen : strlen(text);
+	const int max = (maxlen>0) ? maxlen : g_utf8_strlen(text, -1);
 
 	gssize len;
 	const gchar **end;
-		
+
 	if (g_utf8_validate(text, -1, end)) {
 		text = g_utf8_strup(text, len);
 	}
 	else {
-		char *ret = text;
-		text  = g_ascii_strup(ret, -1);
+		char* ret = text;
+		while (*text) {
+			*text = toupper(*text);
+			text++;
+		}
+
 	}
+
 	return text;
 }
 
