@@ -369,6 +369,32 @@ char GTKEntryDisp::Display(SWModule &imodule)
 		g_free(keytext);
 }
 
+//
+// utility function for filling headers from verses.
+//
+void
+CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
+{
+	int x = 0;
+	gchar heading[8];
+	const gchar *preverse, *preverse2, *text;
+
+	cVerse.SetHeader("");
+
+	sprintf(heading, "%d", x);
+	while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
+							heading)) != NULL) {
+		preverse2 = mod.RenderText(preverse);
+		text = g_strdup_printf("<br><b>%s</b><br><br>",
+				       preverse2);
+		cVerse.AppendHeader(text);
+		g_free((gchar *)text);
+		// g_free(preverse2); // does RenderText's result need free()?
+		g_free((gchar *)preverse);
+		++x;
+		sprintf(heading, "%d", x);
+	}
+}
 
 void GTKChapDisp::getVerseBefore(SWModule &imodule, uint16_t cache_flags)
 {
@@ -710,10 +736,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
-	gchar *preverse = NULL;
 	gchar *paragraphMark = NULL;
 	gchar *br = NULL;
-	gchar heading[32];
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
@@ -774,22 +798,19 @@ char GTKChapDisp::Display(SWModule &imodule)
 	     (key->Chapter() == curChapter) &&
 	     !imodule.Error();
 	     imodule++) {
-		int x = 0;
-		sprintf(heading, "%d", x);
-		while ((preverse
-			= backend->get_entry_attribute("Heading", "Preverse",
-							    heading)) != NULL) {
-			const char *preverse2 = imodule.RenderText(preverse);
-			swbuf.appendFormatted("<br><b>%s</b><br><br>", preverse2);
-			g_free(preverse);
-			++x;
-			sprintf(heading, "%d", x);
-		}
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
 							   [key->Book()]
 							   [key->Chapter()]
 							   [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags))
+			cVerse.SetText((const char *)imodule, cache_flags);
+		if (!cVerse.HeaderIsValid())
+			CacheHeader(cVerse, imodule);
+
+		swbuf.appendFormatted(cVerse.GetHeader());
 
 		utf8_key = g_convert((char*)key->getText(),
                              -1,
@@ -839,10 +860,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 			newparagraph = FALSE;
 			swbuf += paragraphMark;;
 		}
-
-		// use the module cache rather than re-accessing Sword.
-		if (!cVerse.CacheIsValid(cache_flags))
-			cVerse.SetText((const char *)imodule, cache_flags);
 
 		// correct a highlight glitch: in poetry verses which end in
 		// a forced line break, we must remove the break to prevent
