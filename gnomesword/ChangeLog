@@ -1,11 +1,12 @@
-2007-03-16  karl <charcoal@users.sf.net>
+2007-03-18  karl <charcoal@users.sf.net>
 
-	* updates to the module cache, to cache preverse headers.
-
+	* fix egregious book selection bug in module cache.
+	
 2007-03-16  karl <charcoal@users.sf.net>
 
 	* feat.req #1631815: open single-image window on click
 	  (depends on Sword lib "<a href>" enhancement.)
+	* updates to the module cache, to cache preverse headers.
 
 2007-03-15  dom <domcox@users.sf.net>
 
