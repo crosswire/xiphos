@@ -430,7 +430,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 						key);	
 		
 #ifdef DEBUG
-		g_message("src/gnome2/html.c: buf=>%s<",buf);
+		g_message("src/gnome2/html.c: buf=%s",buf);
 #endif
 		if(buf == NULL) return;
 		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
