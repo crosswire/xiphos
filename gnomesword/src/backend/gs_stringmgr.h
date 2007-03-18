@@ -16,13 +16,11 @@
  *
  */
 
-
 #ifndef GS_STRINGMGR_H
 #define GS_STRINGMGR_H
 
 //Sword includes
 #include <stringmgr.h>
-
 
 SWORD_NAMESPACE_START
 
@@ -41,12 +39,6 @@ public:
 	*  @param max Only change max chars
 	*/
 	virtual char *upperUTF8(char *text, unsigned int max = 0) const;
-
-	/* Converts the param to an uppercase latin1 string
-	*  @param text The text encoded in latin1 which should 
-	*  be turned into an upper case string
-	*/
-	virtual char *upperLatin1(char *text, unsigned int max = 0) const;
 	
 protected:
 	/* Checks whether Utf8 support is available.
