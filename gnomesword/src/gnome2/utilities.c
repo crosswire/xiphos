@@ -831,14 +831,19 @@ gchar * ncr_to_utf8(gchar * text)
 	gunichar unicode;
 	gchar utf8[7];
 	gchar *result = NULL;
+	gchar buf[strlen(text)+2];
 	size_t count;
 	guint len;
 	GString *newtext;
 	
 	newtext = g_string_new(NULL);
+	// add an extra char before text
+	// to avoid a delimiter as first char
+	strcpy(buf, " ");
+	strcat(buf, text);
 	// search for "&"
-	result = strtok(text, "&");
-	newtext = g_string_append (newtext, result);
+	result = strtok(buf, "&");
+	newtext = g_string_append (newtext, result + 1);
 
 	while( result != NULL ) {
        	result = strtok( NULL, "&" );
