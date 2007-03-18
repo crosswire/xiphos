@@ -17,41 +17,15 @@
  *
  */
 
-
 #include "gs_stringmgr.h"
 
 //System includes
-#include <ctype.h>
 #include <glib.h>
 
 SWORD_NAMESPACE_START
 
 char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
-	const int max = (maxlen>0) ? maxlen : g_utf8_strlen(text, -1);
-
-	gssize len;
-	const gchar **end;
-
-	if (g_utf8_validate(text, -1, end)) {
-		text = g_utf8_strup(text, len);
-	}
-	else {
-		char* ret = text;
-		while (*text) {
-			*text = toupper(*text);
-			text++;
-		}
-
-	}
-
-	return text;
-}
-
-char* GS_StringMgr::upperLatin1(char* text, unsigned int max) const {
-	char* ret = text;
-
-	text  = g_ascii_strup(ret, -1);
-	return text;
+	return g_utf8_strup(text, -1);
 }
 
 bool GS_StringMgr::supportsUnicode() const {
