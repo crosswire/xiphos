@@ -434,10 +434,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule, uint16_t cache_flags)
 	} else {
 		(*mod)--;
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
-							   [key->Book()]
-							   [key->Chapter()]
-							   [key->Verse()];
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
 
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((const char *)*mod, cache_flags);
@@ -534,10 +535,11 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule, uint16_t cache_flags)
 				(mf->old_font_size)?mf->old_font_size:"+0",
 				settings.bible_text_color);
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
-							   [key->Book()]
-							   [key->Chapter()]
-							   [key->Verse()];
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
 
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((const char *)*mod, cache_flags);
@@ -799,10 +801,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 	     !imodule.Error();
 	     imodule++) {
 
-		ModuleCache::CacheVerse& cVerse = ModuleMap[ModuleName]
-							   [key->Book()]
-							   [key->Chapter()]
-							   [key->Verse()];
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags))
