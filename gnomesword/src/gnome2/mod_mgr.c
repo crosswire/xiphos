@@ -125,6 +125,7 @@ static GdkPixbuf *REFRESH;
 static GdkPixbuf *BLANK;
 static gchar *current_mod;
 static gchar *remote_source;
+static gboolean first_time_user = FALSE;
 
 GladeXML *gxml;
 
@@ -349,10 +350,11 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if ((activity == REMOVE) ||	// just delete it
-		    ((activity == INSTALL) &&
+		    (!first_time_user &&	// don't trip on "no modules".
+		     (activity == INSTALL) &&
 		     main_is_module(buf))) {	// delete before re-install
 #ifdef DEBUG
-			g_print("uninstall %s from %s\n", buf, destination);
+			g_print("remove %s from %s\n", buf, destination);
 #endif
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
@@ -380,7 +382,7 @@ static void remove_install_modules(GList * modules, int activity)
 
 		if (activity == INSTALL) {
 #ifdef DEBUG
-			g_print("remove %s, source=%s\n", buf,source);
+			g_print("install %s, source=%s\n", buf,source);
 #endif
 			if (local)
 				failed =
@@ -2562,9 +2564,11 @@ void gui_open_mod_mgr_initial_run(void)
 	//if (!lang) lang="C";
 	//main_module_mgr_set_sword_locale(lang);
 	//OLD_CODESET = "iso8859-1";
+	first_time_user = TRUE;
 	dlg = create_module_manager_dialog(TRUE);
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
+	first_time_user = FALSE;
 }
 
 /******************************************************************************

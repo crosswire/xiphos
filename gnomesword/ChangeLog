@@ -1,3 +1,7 @@
+2007-03-19  karl <charcoal@users.sf.net>
+
+	* fix bug #1681135 Module manager crashes Gnomesword on startup.
+	
 2007-03-18  karl <charcoal@users.sf.net>
 
 	* fix egregious book selection bug in module cache.
