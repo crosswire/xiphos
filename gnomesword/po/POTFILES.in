@@ -7,7 +7,7 @@ src/backend/module_manager.cc
 src/backend/module_manager.cc
 # shared source files
 src/main/display.cc
-src/main/embed.cc
+# src/main/embed.cc
 src/main/lists.cc
 src/main/module_dialogs.cc
 src/main/previewer.cc
@@ -60,7 +60,7 @@ src/gnome2/preferences_cell_renderer.c
 src/gnome2/preferences_dialog.c
 src/gnome2/search_dialog.c
 src/gnome2/search_sidebar.c
-src/gnome2/setup_druid.c
+# src/gnome2/setup_druid.c
 src/gnome2/sidebar_dialog.c
 src/gnome2/sidebar.c
 src/gnome2/splash.c
