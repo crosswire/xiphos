@@ -436,7 +436,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 			_("Choose Commentary Name"));
 	info->label_top = workstr->str;
 	info->text1 = g_strdup(_("New Name"));
-	info->label1 = N_("Name: ");
+	info->label1 = _("Name: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 
@@ -515,7 +515,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_string_printf(workstr, "%s/%s", modsdir, conf_old);
 	if (unlink(workstr->str) != 0) {
 		g_string_printf(workstr,
-				"Unlink of old configuration failed:\n%s",
+				_("Unlink of old configuration failed:\n%s"),
 				strerror(errno));
 		gui_generic_warning(workstr->str);
 		goto out2;
