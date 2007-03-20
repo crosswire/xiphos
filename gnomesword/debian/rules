@@ -21,9 +21,8 @@ configure-stamp:
 		--prefix=/usr \
 		--mandir=\$${prefix}/share/man \
 		--enable-pspell \
-		--prefix=/usr \
-		--enable-debug
-#		--enable-moz_embed
+		--enable-debug \
+		--enable-moz_embed
 
 	touch configure-stamp
 
