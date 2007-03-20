@@ -419,6 +419,14 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef __CYGWIN__
+	gui_generic_warning("GnomeSword is limited by Windows' filesystem, "
+			    "which disallows the renaming of filename "
+			    "components of currently-open files "
+			    "(such as the contents of this commentary). "
+			    "Therefore, personal commentary renaming is "
+			    "not available in Windows/Cygwin environment.");
+#else
 	GS_DIALOG *info;
 	GString *workstr;
 	char *s;
@@ -535,6 +543,7 @@ out1:
 	g_free(info->text1);
 	g_free(info);
 	g_string_free(workstr, TRUE);
+#endif /* !__CYGWIN__ */
 }
 
 
@@ -1146,11 +1155,7 @@ void gui_create_pm_commentary(void)
 		gtk_widget_show(menu1_uiinfo[9].widget);	// unlock
 
 	if (main_get_mod_type(mod_name) == PERCOM_TYPE) {
-#ifndef __CYGWIN__
-		// winxp filesystem denies renaming any
-		// part of an open file's pathname.
 		gtk_widget_show(menu1_uiinfo[10].widget);	// rename
-#endif
 		gtk_widget_show(menu1_uiinfo[11].widget);	// dump
 	}
 	
