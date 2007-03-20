@@ -86,6 +86,11 @@
                         	</screenshot>
 
 			</figure>
+		<para>
+		There are other repositories available besides Crosswire's own, though the modules available from other repositories do not
+		represent content officially sanctioned by Crosswire.  On the web, see this page for list of those repositories known:
+		http://www.crosswire.org/wiki/index.php/Module_Repositories
+		</para>
 		</sect3>
 	</sect2>
 	
@@ -145,6 +150,11 @@
 	  </mediaobject> 
                         	</screenshot>
 			</figure>
+		<para>
+		Archival is available for any module, although it is provided with personal commentaries specifically in mind.  A *.zip of
+		the module is left in the directory ~/.sword/zip.  Archival prior to removal of personal commentaries is recommended, in
+		order to be available for future re-install if the subject matter of the personal commentary becomes important again.
+		</para>
 		</sect3>
 	</sect2>
 
