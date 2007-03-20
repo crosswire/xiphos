@@ -444,6 +444,11 @@
 					<application>festival</application> text-to-speech system.  <application>Festival</application> is a
 					widely-available TTS, often installed by default in Linux distributions.
 					</para>
+					<para>
+					Also, mouse-selected text may be read aloud from Bibles, commentaries, and general books, using the
+					right-click menu, regardless of whether Read Aloud is selected.
+					</para>
+
 				</listitem>
 				<listitem>	
 					<para>
@@ -557,9 +562,6 @@
 		viewer on that single image, in order to get a better view.  This is particularly useful if image resizing has been enabled
 		with the result that images are made very small in the subwindow.  (This feature requires underlying Sword support beyond
 		its 1.5.9 public release, at revision "SVN 2034" or later.)
-		</para>
-		<para>
-		Also, mouse-selected text may be read aloud from Bibles, commentaries, and general books, using the right-click menu.
 		</para>
 		<note>
 			<para>
