@@ -1,6 +1,7 @@
 2007-03-20  karl <charcoal@users.sf.net>
 
 	* manual updates, reflect 2.2.3: archive/rename/dump of pers.comm.
+	* make the inability to rename under Cygwin obvious to the user.
 	
 2007-03-19  karl <charcoal@users.sf.net>
 
