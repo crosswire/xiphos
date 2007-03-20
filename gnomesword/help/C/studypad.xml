@@ -47,5 +47,12 @@
 			        	<listitem><para>Find and 'Find and Replace'</para></listitem>
 			        	<listitem><para>Spellcheck</para></listitem>
 			        	</itemizedlist>
+
+	        <para>
+		In order for spellcheck to be available, one of the languages
+		under <guimenuitem>Edit-&gt;Current Languages</guimenuitem>
+		must be set.
+	        </para>
+
 	</sect2>
 
