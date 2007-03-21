@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-19 22:09+0100\n"
-"PO-Revision-Date: 2007-03-19 22:16+0100\n"
+"PO-Revision-Date: 2007-03-21 22:14+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -2003,7 +2003,7 @@ msgstr "Supprimer les modules suivants :"
 
 #: ../src/gnome2/mod_mgr.c:233
 msgid "Archive these modules:"
-msgstr "Enregistrer la liste de modules"
+msgstr "Archiver ces modules :"
 
 #: ../src/gnome2/mod_mgr.c:255
 msgid "Preparing to install"
@@ -2015,7 +2015,7 @@ msgstr "Préparation à la suppression"
 
 #: ../src/gnome2/mod_mgr.c:258
 msgid "Preparing to archive"
-msgstr "Préparation de l'enregistrement"
+msgstr "Préparation de l'archivage"
 
 #: ../src/gnome2/mod_mgr.c:282
 msgid "Installing"
@@ -2027,7 +2027,7 @@ msgstr "Suppression de"
 
 #: ../src/gnome2/mod_mgr.c:285
 msgid "Archiving"
-msgstr "Enregistremen"
+msgstr "Archivage"
 
 #: ../src/gnome2/mod_mgr.c:306
 #, c-format
@@ -2040,14 +2040,14 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:332
 msgid "GnomeSword could not execute archiver"
-msgstr "GnomeSword n'a pas pu enregistrer"
+msgstr "GnomeSword n'a pas pu archiver "
 
 #: ../src/gnome2/mod_mgr.c:337
 msgid ""
 " archival result:\n"
 "\n"
 msgstr ""
-" résultat de l'enregistrement\n"
+" résultat de l'archivage\n"
 "\n"
 
 #: ../src/gnome2/mod_mgr.c:341
@@ -2056,7 +2056,7 @@ msgid ""
 "Archive in "
 msgstr ""
 "\n"
-"Enregistrement "
+" Archive·in·"
 
 #: ../src/gnome2/mod_mgr.c:400 ../src/gnome2/mod_mgr.c:1280
 #: ../src/gnome2/mod_mgr.c:2303 ../ui/module-manager.glade.h:14
@@ -2069,7 +2069,7 @@ msgstr "Supprimer"
 
 #: ../src/gnome2/mod_mgr.c:403 ../ui/module-manager.glade.h:9
 msgid "Archive"
-msgstr "Enregistrer"
+msgstr "Archiver"
 
 #: ../src/gnome2/mod_mgr.c:405 ../src/gnome2/mod_mgr.c:922
 msgid "Finished"
