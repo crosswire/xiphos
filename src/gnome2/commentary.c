@@ -420,12 +420,13 @@ static void
 on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 #ifdef __CYGWIN__
-	gui_generic_warning("GnomeSword is limited by Windows' filesystem, "
-			    "which disallows the renaming of filename "
-			    "components of currently-open files "
-			    "(such as the contents of this commentary). "
-			    "Therefore, personal commentary renaming is "
-			    "not available in Windows/Cygwin environment.");
+	gui_generic_warning(_("Renaming is not available in Cygwin.\n\n"
+			      "GnomeSword is limited by Windows' filesystem,\n"
+			      "because it disallows the renaming of filename\n"
+			      "components of currently-open files,\n"
+			      "such as the contents of this commentary.\n"
+			      "Therefore, personal commentary renaming is\n"
+			      "not available in the Windows environment."));
 #else
 	GS_DIALOG *info;
 	GString *workstr;
