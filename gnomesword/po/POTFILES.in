@@ -14,6 +14,7 @@ src/main/previewer.cc
 src/main/search_dialog.cc
 src/main/sidebar.cc
 src/main/tab_history.c
+src/main/xml.c
 # editor Source files
 # src/editor/editor.c
 # src/editor/editor-control.c

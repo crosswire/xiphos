@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-22 21:02+0100\n"
+"POT-Creation-Date: 2007-03-22 21:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -739,6 +739,87 @@ msgstr ""
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:67 ../src/main/tab_history.c:103
 msgid "H_istory/C_lear"
+msgstr ""
+
+#: ../src/main/xml.c:95
+msgid "Personal"
+msgstr ""
+
+#: ../src/main/xml.c:96
+msgid "What must I do to be saved?"
+msgstr ""
+
+#: ../src/main/xml.c:98 ../src/main/xml.c:99
+msgid "Acts 16:31"
+msgstr ""
+
+#: ../src/main/xml.c:103 ../src/main/xml.c:104
+msgid "Eph 2:8"
+msgstr ""
+
+#: ../src/main/xml.c:108 ../src/main/xml.c:109
+msgid "Romans 1:16"
+msgstr ""
+
+#: ../src/main/xml.c:112
+msgid "What is the Gospel?"
+msgstr ""
+
+#: ../src/main/xml.c:114
+msgid "1 Cor 15:1-4"
+msgstr ""
+
+#: ../src/main/xml.c:115
+msgid "1 Cor 15:1"
+msgstr ""
+
+#: ../src/main/xml.c:423 ../src/main/xml.c:1089
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:429 ../src/main/xml.c:692 ../src/main/xml.c:970
+#, c-format
+msgid "empty document \n"
+msgstr ""
+
+#: ../src/main/xml.c:435
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr ""
+
+#: ../src/main/xml.c:475
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr ""
+
+#: ../src/main/xml.c:489
+msgid "Old Testament"
+msgstr ""
+
+#: ../src/main/xml.c:491
+msgid "Gen - Mal"
+msgstr ""
+
+#: ../src/main/xml.c:497
+msgid "New Testament"
+msgstr ""
+
+#: ../src/main/xml.c:499
+msgid "Mat - Rev"
+msgstr ""
+
+#: ../src/main/xml.c:507
+msgid "Sample Module List"
+msgstr ""
+
+#: ../src/main/xml.c:509
+msgid "Select the modules you want"
+msgstr ""
+
+#: ../src/main/xml.c:698 ../src/main/xml.c:976
+#, c-format
+msgid "wrong type, root node != %s\n"
 msgstr ""
 
 #: ../src/editor/html-editor.c:147
