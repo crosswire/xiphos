@@ -28,14 +28,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-22 21:02+0100\n"
-"PO-Revision-Date: 2007-03-22 20:45+0100\n"
+"POT-Creation-Date: 2007-03-22 21:51+0100\n"
+"PO-Revision-Date: 2007-03-22 22:02+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #: ../gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -761,6 +761,87 @@ msgstr "H_istorique/<Separator>"
 #: ../src/main/tab_history.c:67 ../src/main/tab_history.c:103
 msgid "H_istory/C_lear"
 msgstr "H_istorique/_Effacer"
+
+#: ../src/main/xml.c:95
+msgid "Personal"
+msgstr "Notes personnelles"
+
+#: ../src/main/xml.c:96
+msgid "What must I do to be saved?"
+msgstr "Comment être sauvé?"
+
+#: ../src/main/xml.c:98 ../src/main/xml.c:99
+msgid "Acts 16:31"
+msgstr "Actes·16:31"
+
+#: ../src/main/xml.c:103 ../src/main/xml.c:104
+msgid "Eph 2:8"
+msgstr "Éph·2:8"
+
+#: ../src/main/xml.c:108 ../src/main/xml.c:109
+msgid "Romans 1:16"
+msgstr "Romaiins 8:28"
+
+#: ../src/main/xml.c:112
+msgid "What is the Gospel?"
+msgstr "Qu'est-ce que l'Évangile?"
+
+#: ../src/main/xml.c:114
+msgid "1 Cor 15:1-4"
+msgstr "1·Cor·15:1-4"
+
+#: ../src/main/xml.c:115
+msgid "1 Cor 15:1"
+msgstr "1·Cor·15:1"
+
+#: ../src/main/xml.c:423 ../src/main/xml.c:1089
+#, c-format
+msgid "Document not parsed successfully. \n"
+msgstr "Erreur de lecture du document \n"
+
+#: ../src/main/xml.c:429 ../src/main/xml.c:692 ../src/main/xml.c:970
+#, c-format
+msgid "empty document \n"
+msgstr "Document vide \n"
+
+#: ../src/main/xml.c:435
+#, c-format
+msgid "wrong type, root node != SwordBookmarks\n"
+msgstr "Erreur de type,·root·node·!=·SwordBookmarks\n"
+
+#: ../src/main/xml.c:475
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr "Erreur de création du document \n"
+
+#: ../src/main/xml.c:489
+msgid "Old Testament"
+msgstr "Ancien Testament"
+
+#: ../src/main/xml.c:491
+msgid "Gen - Mal"
+msgstr "Gen·-·Mal"
+
+#: ../src/main/xml.c:497
+msgid "New Testament"
+msgstr "Nouveau Testament"
+
+#: ../src/main/xml.c:499
+msgid "Mat - Rev"
+msgstr "Mat·-·Ap"
+
+#: ../src/main/xml.c:507
+msgid "Sample Module List"
+msgstr "Exemple de liste de modules"
+
+#: ../src/main/xml.c:509
+msgid "Select the modules you want"
+msgstr "Modules à ajouter ici"
+
+#: ../src/main/xml.c:698 ../src/main/xml.c:976
+#, c-format
+msgid "wrong type, root node != %s\n"
+msgstr "Erreur de type,·root·node·!=·%s\n"
 
 #: ../src/editor/html-editor.c:147
 msgid "Are you sure you want to delete the note for"
@@ -3042,9 +3123,6 @@ msgstr "Enregistre à l'aide de l'interface  PersistFile"
 #~ msgid "Generic book"
 #~ msgstr "Livres"
 
-#~ msgid "Personal"
-#~ msgstr "Notes personnelles"
-
 # src/gs_preferences_dlg.c
 #~ msgid ""
 #~ "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link "
@@ -3562,17 +3640,11 @@ msgstr "Enregistre à l'aide de l'interface  PersistFile"
 #~ msgid "Found"
 #~ msgstr "Résultat"
 
-#~ msgid "Clear Module List"
-#~ msgstr "Efface la liste des modules"
-
 #~ msgid "Clear the module list"
 #~ msgstr "Efface la liste de modules"
 
 #~ msgid " "
 #~ msgstr "."
-
-#~ msgid "Romans 8:28"
-#~ msgstr "Romains 8:28"
 
 #~ msgid "Goto verse"
 #~ msgstr "Aller au verset..."
