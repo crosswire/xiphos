@@ -568,7 +568,7 @@ void main_change_mods_select_label(char *mod_name)
 	
 	if (GTK_TOGGLE_BUTTON(search1.rb_current_module)->active) {
 		str = g_string_new("");
-		g_string_printf(str,"<b>%s: </b>%s",_("Search"),mod_name);
+		g_string_printf(str,"<b>%s</b>%s",Q_("Search: "),mod_name);
 		gtk_label_set_markup(GTK_LABEL(search1.label_mod_select),
                                      str->str);
 		g_string_free(str,TRUE);
@@ -1057,7 +1057,7 @@ void main_add_modlist_to_label(void)
 	mods = get_current_list();
 	mod_list = get_modlist_string(mods);
 	str = g_string_new("");
-	g_string_printf(str,"<b>%s: </b>%s",_("Search"),mod_list);
+	g_string_printf(str,"<b>%s</b>%s",Q_("Search: "),mod_list);
 	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select),
 			     str->str);
 	g_free(mod_list);
@@ -1078,7 +1078,7 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)); 
 	mod_list = get_custom_list_from_name(name);
 	mod_list_str = get_modlist_string(mod_list);
-	str = g_strdup_printf("<b>%s: </b>%s",_("Search"),mod_list_str);
+	str = g_strdup_printf("<b>%s</b>%s",Q_("Search: "),mod_list_str);
 	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
 	g_free(mod_list_str);
 	g_free(str);
