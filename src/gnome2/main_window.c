@@ -501,39 +501,41 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 
 static
 gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
-                                        							gpointer user_data)
+				  gpointer user_data)
 {
 	switch(event->hardware_keycode) {
-		case 40: //D
-			if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
-				gtk_widget_grab_focus(widgets.entry_dict);
+	case 40: //D
+		if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
-		case 42: //G
-			if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
-				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
-				gtk_widget_grab_focus(navbar_book.lookup_entry);
-			}
-		break;
-		case 46: //L
-			if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
-				gtk_widget_grab_focus(navbar_main.lookup_entry);
-		break;
-		case 54: //C
-			if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
-				gtk_widget_grab_focus(navbar_main.lookup_entry);
-				gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
-			}
-		break;
-		case 56: //B
-			if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
-				gtk_widget_grab_focus(navbar_main.lookup_entry);
-		break;
-		case 50: 
-		case 62: 
-			shift_key_presed = TRUE;				
-		break;
-			
+	case 42: //G
+		if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
+			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
+		break;
+	case 46: //L
+		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+			gtk_widget_grab_focus(navbar_main.lookup_entry);
+		break;
+	case 41: //F
+		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+			// bible text only, *sigh*.
+			gui_find_dlg(widgets.html_text,
+				     settings.MainWindowModule,
+				     FALSE, NULL);
+		break;
+	case 54: //C
+		if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
+			gtk_widget_grab_focus(navbar_main.lookup_entry);
+			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
+		}
+		break;
+	case 56: //B
+		if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+			gtk_widget_grab_focus(navbar_main.lookup_entry);
+		break;
+	}
 #ifdef DEBUG
 	g_message("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode);
 #endif
