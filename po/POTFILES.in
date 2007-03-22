@@ -15,6 +15,7 @@ src/main/settings.c
 src/main/sidebar.cc
 src/main/sword.cc
 src/main/tab_history.c
+src/main/xml.c
 # editor Source files
 src/editor/html-editor.c
 # GNOME2 Source files

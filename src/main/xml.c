@@ -83,7 +83,7 @@ void xml_new_bookmark_file(void)
 
 	if (xml_doc == NULL) {
 		fprintf(stderr,
-			"Document not created successfully. \n");
+			_("Document not created successfully. \n"));
 		return;
 	}
 
@@ -92,27 +92,27 @@ void xml_new_bookmark_file(void)
 			      (const xmlChar *) "1.0");
 	xmlDocSetRootElement(xml_doc, xml_node);
 
-	xml_root = xml_add_folder_to_parent(xml_node, "Personal");
-	xml_folder = xml_add_folder_to_parent(xml_root, "What must I do to be saved?");
+	xml_root = xml_add_folder_to_parent(xml_node, _("Personal"));
+	xml_folder = xml_add_folder_to_parent(xml_root, _("What must I do to be saved?"));
 	xml_add_bookmark_to_parent(xml_folder, 
-					"Acts 16:31",
-					"Acts 16:31",
+					_("Acts 16:31"),
+					_("Acts 16:31"),
 					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
-					"Eph 2:8",
-					"Eph 2:8",
+					_("Eph 2:8"),
+					_("Eph 2:8"),
 					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
-					"Romans 1:16",
-					"Romans 1:16",
+					_("Romans 1:16"),
+					_("Romans 1:16"),
 					NULL,
 					NULL);
-	xml_folder = xml_add_folder_to_parent(xml_root, "What is the Gospel?");
+	xml_folder = xml_add_folder_to_parent(xml_root, _("What is the Gospel?"));
 	xml_add_bookmark_to_parent(xml_folder, 
-					"1 Cor 15:1-4",
-					"1 Cor 15:1",
+					_("1 Cor 15:1-4"),
+					_("1 Cor 15:1"),
 					NULL,
 					NULL);
 
@@ -420,19 +420,19 @@ xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file)
 	bookmark_doc = xmlParseFile((const char *) bookmark_file);
 
 	if (bookmark_doc == NULL) {
-		fprintf(stderr, "Document not parsed successfully. \n");
+		fprintf(stderr, _("Document not parsed successfully. \n"));
 		return;
 	}
 
 	cur = xmlDocGetRootElement(bookmark_doc);
 	if (cur == NULL) {
-		fprintf(stderr, "empty document \n");
+		fprintf(stderr, _("empty document \n"));
 		return;
 	}
 
 	if (xmlStrcmp(cur->name, (const xmlChar *) "SwordBookmarks")) {
 		fprintf(stderr,
-			"wrong type, root node != SwordBookmarks\n");
+			_("wrong type, root node != SwordBookmarks\n"));
 		xmlFreeDoc(bookmark_doc);
 		return;
 	}
@@ -472,7 +472,7 @@ int xml_create_settings_file(char *path)
 
 	if (xml_settings_doc == NULL) {
 		fprintf(stderr,
-			"Document not created successfully. \n");
+			_("Document not created successfully. \n"));
 		return 0;
 	}
 
@@ -486,17 +486,17 @@ int xml_create_settings_file(char *path)
 			       NULL, (const xmlChar *) "range", NULL);
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "label",
-			      (const xmlChar *) "Old Testament");
+			      (const xmlChar *) _("Old Testament"));
 	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) "Gen - Mal");
+	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Gen - Mal"));
 	cur_node =
 	    xmlNewChild(section_node, NULL, (const xmlChar *) "range",
 			NULL);
 	xml_attr =
 	    xmlNewProp(cur_node, (const xmlChar *) "label",
-		       (const xmlChar *) "New Testament");
+		       (const xmlChar *) _("New Testament"));
 	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) "Mat - Rev");
+	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Mat - Rev"));
 
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) "modlists", NULL);
@@ -504,9 +504,9 @@ int xml_create_settings_file(char *path)
 			       NULL, (const xmlChar *) "modlist", NULL);
 	xml_attr = xmlNewProp(cur_node,
 			      (const xmlChar *) "label",
-			      (const xmlChar *) "Sample Module List");
+			      (const xmlChar *) _("Sample Module List"));
 	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) "Select the modules you want");
+	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Select the modules you want"));
 
 
 	section_node = xmlNewChild(root_node, NULL,
@@ -689,13 +689,13 @@ static xmlNodePtr xml_find_section(char *type_doc, char *section)
 
 	cur = xmlDocGetRootElement(xml_settings_doc);
 	if (cur == NULL) {
-		fprintf(stderr, "empty document \n");
+		fprintf(stderr, _("empty document \n"));
 		return NULL;
 	}
 
 	if (xmlStrcmp(cur->name, (const xmlChar *) type_doc)) {
 		fprintf(stderr,
-			"wrong type, root node != %s\n", type_doc);
+			_("wrong type, root node != %s\n"), type_doc);
 		return NULL;
 	}
 
@@ -967,13 +967,13 @@ static xmlNodePtr xml_find_prop(char *type_doc, char *section,
 
 	cur = xmlDocGetRootElement(xml_settings_doc);
 	if (cur == NULL) {
-		fprintf(stderr, "empty document \n");
+		fprintf(stderr, _("empty document \n"));
 		return NULL;
 	}
 
 	if (xmlStrcmp(cur->name, (const xmlChar *) type_doc)) {
 		fprintf(stderr,
-			"wrong type, root node != %s\n", type_doc);
+			_("wrong type, root node != %s\n"), type_doc);
 		return NULL;
 	}
 
@@ -1086,7 +1086,7 @@ int xml_parse_settings_file(char *file_name)
 	xml_settings_doc = xmlParseFile(file_name);
 
 	if (xml_settings_doc == NULL) {
-		fprintf(stderr, "Document not parsed successfully. \n");
+		fprintf(stderr, _("Document not parsed successfully. \n"));
 		return FALSE;
 	}
 	return TRUE;
