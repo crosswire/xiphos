@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-20 21:16+0100\n"
-"PO-Revision-Date: 2007-03-21 22:27+0100\n"
+"POT-Creation-Date: 2007-03-22 18:42+0100\n"
+"PO-Revision-Date: 2007-03-22 19:02+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:494(None)
+#: ../C/gnomesword.xml:499(None)
 msgid ""
 "@@image: 'figures/interface_viewer.png'; md5=53a0903b08f0d65f10a8d325e6f8a2ac"
 msgstr ""
@@ -141,7 +141,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:533(None)
+#: ../C/gnomesword.xml:538(None)
 msgid ""
 "@@image: 'figures/interface_commentarypane.png'; "
 "md5=30849c46fa99039f15a22694fd0fc5ab"
@@ -151,7 +151,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:610(None)
+#: ../C/gnomesword.xml:612(None)
 msgid ""
 "@@image: 'figures/interface_dictionary.png'; "
 "md5=7ec215cab06899f6a969f89e187c60c0"
@@ -520,7 +520,7 @@ msgstr "crosswire"
 msgid "help dialog"
 msgstr "Fenêtre d'aide"
 
-#: ../C/gnomesword.xml:160(primary) ../C/gnomesword.xml:636(application)
+#: ../C/gnomesword.xml:160(primary) ../C/gnomesword.xml:638(application)
 msgid "GnomeSword"
 msgstr "&appname;"
 
@@ -797,7 +797,7 @@ msgstr ""
 "Strong, les notes de bas de page et les  étiquettes  morphologiques. Il est "
 "situé en-dessous du volet des textes bibliques.."
 
-#: ../C/gnomesword.xml:143(term) ../C/gnomesword.xml:542(phrase)
+#: ../C/gnomesword.xml:143(term) ../C/gnomesword.xml:547(phrase)
 msgid "Commentary Pane"
 msgstr "Commentaires"
 
@@ -1280,7 +1280,18 @@ msgstr ""
 "distributions Linux. (NDT: En général, les résultats sont meilleurs en "
 "anglais )"
 
-#: ../C/gnomesword.xml:449(para)
+#: ../C/gnomesword.xml:447(para)
+msgid ""
+"Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
+"general books, using the right-click menu, regardless of whether Read Aloud "
+"is selected."
+msgstr ""
+"De même, la synthèse vocale peut être utilisée sur des portions de textes "
+"bibliques, commentaires ou de livres. Une fois le texte désiré mis en surbrillance, "
+"sélectionner  <guimenuitem>Synthèse vocale du texte sélectionné</guimenuitem> "
+"dans le menu contextuel obtenu à l'aide du clic droit de la souris."
+
+#: ../C/gnomesword.xml:454(para)
 msgid ""
 "Show Verse Numbers - Normally enabled, this toggle can be disabled to "
 "prevent display of verse numbers within the text."
@@ -1288,7 +1299,7 @@ msgstr ""
 "Affiche les numéros de versets. Normalement activée, cette option peut être "
 "désactivée pour ne pas afficher les numéros de versets dans le texte. "
 
-#: ../C/gnomesword.xml:455(para)
+#: ../C/gnomesword.xml:460(para)
 msgid ""
 "Highlight Current Verse - Initially disabled, this toggle replaces mere "
 "alternate colorization of the current verse with a substitute high-contrast "
@@ -1298,11 +1309,11 @@ msgstr ""
 "remplacer la couleur du verset en cours par une coloration au contraste plus "
 "élevée. Les couleurs sont modifiables dans la fenêtre de préférences."
 
-#: ../C/gnomesword.xml:465(title)
+#: ../C/gnomesword.xml:470(title)
 msgid "Specific Word Meanings"
 msgstr "Définition d'un mot particulier"
 
-#: ../C/gnomesword.xml:466(para)
+#: ../C/gnomesword.xml:471(para)
 msgid ""
 "In order to check the meaning of a specific word, click on the desired word "
 "you wish to lookup. The word should then highlight itself and the "
@@ -1314,15 +1325,15 @@ msgstr ""
 "définition, si le mot est répertorié, s'affiche ensuite dans le volet "
 "<interface>dictionnaire</interface>."
 
-#: ../C/gnomesword.xml:473(title)
+#: ../C/gnomesword.xml:478(title)
 msgid "Finding A Specific Word"
 msgstr "Rechercher un mot spécifique"
 
-#: ../C/gnomesword.xml:474(para)
+#: ../C/gnomesword.xml:479(para)
 msgid "To find a specific word within a passage:"
 msgstr "Pour rechercher un mot spécifique dans un passage :"
 
-#: ../C/gnomesword.xml:479(para)
+#: ../C/gnomesword.xml:484(para)
 msgid ""
 "right-click in the <interface>Bible Text Pane</interface>. In the popup "
 "menu, choose <guibutton>Edit</guibutton>-&gt; <guibutton>Find</guibutton>. A "
@@ -1337,15 +1348,15 @@ msgstr ""
 "texte à rechercher, puis ensuite valider à l'aide du bouton "
 "<guibutton>Rechercher</guibutton>"
 
-#: ../C/gnomesword.xml:489(title)
+#: ../C/gnomesword.xml:494(title)
 msgid "Viewer Pane"
 msgstr "Volet apreçu"
 
-#: ../C/gnomesword.xml:491(title) ../C/gnomesword.xml:503(phrase)
+#: ../C/gnomesword.xml:496(title) ../C/gnomesword.xml:508(phrase)
 msgid "Viewer Panel"
 msgstr "Volet aperçu"
 
-#: ../C/gnomesword.xml:509(para)
+#: ../C/gnomesword.xml:514(para)
 msgid ""
 "The Viewer Pane is where the user sees Strong's numbers, morphological tags, "
 "footnotes, and cross-references that the <interface>Bible Text Pane</"
@@ -1355,7 +1366,7 @@ msgstr ""
 "étiquettes  morphologiques et les références croisées lorsque ces options "
 "sont activées dans le volet des <interface>textes bibliques</interface>."
 
-#: ../C/gnomesword.xml:513(para)
+#: ../C/gnomesword.xml:518(para)
 msgid ""
 "Footnote content is normally transient in the Viewer Pane: It is displayed "
 "while your mouse hovers over the footnote indicator <guibutton>*n</"
@@ -1377,7 +1388,7 @@ msgstr ""
 "permet de se déplacer ensuite dans la fenêtre à l'aide de l'ascenseur "
 "vertical, "
 
-#: ../C/gnomesword.xml:519(para)
+#: ../C/gnomesword.xml:524(para)
 msgid ""
 "Cross-reference indicators <guibutton>*x</guibutton> also display "
 "transiently in the Viewer Pane. Left-clicking the indicator will send the "
@@ -1393,11 +1404,11 @@ msgstr ""
 "sélectionnés un par un, ils seront affichés dans le volet<interface>·aperçu</"
 "interface>."
 
-#: ../C/gnomesword.xml:527(title) ../C/gnomesword.xml:529(title)
+#: ../C/gnomesword.xml:532(title) ../C/gnomesword.xml:534(title)
 msgid "The Commentary Pane"
 msgstr "Le volet des commentaires"
 
-#: ../C/gnomesword.xml:548(para)
+#: ../C/gnomesword.xml:553(para)
 msgid ""
 "The <interface>Commentary pane</interface> is where the commentary modules "
 "are displayed. This provides easy reading, reference and access to different "
@@ -1415,7 +1426,7 @@ msgstr ""
 "suffit de changer de verset à l'aide de la <interface>barre d'outils</"
 "interface>."
 
-#: ../C/gnomesword.xml:555(para)
+#: ../C/gnomesword.xml:560(para)
 msgid ""
 "If there are images that are part of a commentary, general book, or "
 "dictionary/lexicon, they may be clicked to invoke a viewer on that single "
@@ -1424,16 +1435,14 @@ msgid ""
 "the subwindow. (This feature requires underlying Sword support beyond its "
 "1.5.9 public release, at revision \"SVN 2034\" or later.)"
 msgstr ""
-"Si une image fait partie d'un commentaire, d'un livre ou d'un dictionnaire, la sélectionner par un simple clic la fait s'afficher agrandie dans une nouvelle fenêtre. Cette·fonctionnalité·est·particulièrement·intéressante si l'option de réduction des images est activée avec pour résultat de très petites images. (Cette fonctionnalité nécessite une version de libsword supérieure à 1.5.9, minimum svn 2034 ou suivantes)."
+"Si une image fait partie d'un commentaire, d'un livre ou d'un dictionnaire, "
+"la sélectionner par un simple clic la fait s'afficher agrandie dans une "
+"nouvelle fenêtre. Cette·fonctionnalité·est·particulièrement·intéressante si "
+"l'option de réduction des images est activée avec pour résultat de très "
+"petites images. (Cette fonctionnalité nécessite une version de libsword "
+"supérieure à 1.5.9, minimum svn 2034 ou suivantes)."
 
-#: ../C/gnomesword.xml:561(para)
-msgid ""
-"Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
-"general books, using the right-click menu."
-msgstr ""
-"De même, la synthèse vocale peut être utilisée sur des sélections de textes bibliques, commentaires ou de livres, à l'aide du clic droit de la souris."
-
-#: ../C/gnomesword.xml:565(para)
+#: ../C/gnomesword.xml:567(para)
 msgid ""
 "By changing to passage settings on the <interface>Toolbar</interface>, the "
 "contents in the <interface>Bible Text pane</interface> and the "
@@ -1444,15 +1453,15 @@ msgstr ""
 "bibliques</interface> et du  volet d'affichage des<interface> commentaires</"
 "interface> changent simultanément."
 
-#: ../C/gnomesword.xml:572(title)
+#: ../C/gnomesword.xml:574(title)
 msgid "Finding Out About The Commentary Module"
 msgstr "Rechercher les informations à propos du module de commentaires"
 
-#: ../C/gnomesword.xml:573(para)
+#: ../C/gnomesword.xml:575(para)
 msgid "To find out about the commentary currently being displayed:"
 msgstr "À propos du commentaire actuellement affiché."
 
-#: ../C/gnomesword.xml:578(para)
+#: ../C/gnomesword.xml:580(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>About </guimenuitem> module name."
@@ -1461,11 +1470,11 @@ msgstr ""
 "d'affichage des <interface>commentaires</interface>. Dans le menu contextuel "
 "qui se présente, choisir <guimenuitem>À propos de</guimenuitem>."
 
-#: ../C/gnomesword.xml:587(title)
+#: ../C/gnomesword.xml:589(title)
 msgid "Commentary Headings."
 msgstr "Entêtes des commentaires."
 
-#: ../C/gnomesword.xml:588(para)
+#: ../C/gnomesword.xml:590(para)
 msgid ""
 "Most commentaries have additional headings which enable introductory "
 "information about the book and chapter currently being displayed in the "
@@ -1476,7 +1485,7 @@ msgstr ""
 "volet des<interface> textes bibliques</interface>.·Pour obtenir l'affichage "
 "de l'entête :"
 
-#: ../C/gnomesword.xml:594(para)
+#: ../C/gnomesword.xml:596(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>Display Book Heading</guimenuitem> or "
@@ -1487,30 +1496,30 @@ msgstr ""
 "qui se présente, choisir <guimenuitem>Afficher l'entête du livre</"
 "guimenuitem> ou <guimenuitem>Afficher l'entête du chapitre</guimenuitem>."
 
-#: ../C/gnomesword.xml:604(title)
+#: ../C/gnomesword.xml:606(title)
 msgid "Dictionary Pane"
 msgstr "Volet dictionnaire"
 
-#: ../C/gnomesword.xml:606(title) ../C/gnomesword.xml:619(phrase)
+#: ../C/gnomesword.xml:608(title) ../C/gnomesword.xml:621(phrase)
 msgid "The Dictionary Pane"
 msgstr "Le volet du dictionnaire"
 
-#: ../C/gnomesword.xml:628(title)
+#: ../C/gnomesword.xml:630(title)
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: ../C/gnomesword.xml:629(para)
+#: ../C/gnomesword.xml:631(para)
 msgid ""
 "Several keyboard shortcuts exist in <application>GnomeSword</application>:"
 msgstr ""
 "<application>GnomeSword</application>  présente un certain nombre de "
 "raccourcis clavier :"
 
-#: ../C/gnomesword.xml:634(guibutton)
+#: ../C/gnomesword.xml:636(guibutton)
 msgid "Ctrl-L"
 msgstr "Ctrl-L"
 
-#: ../C/gnomesword.xml:633(listitem)
+#: ../C/gnomesword.xml:635(listitem)
 msgid ""
 "<placeholder-1/> focuses and selects the main verse navbar text. You can "
 "then immediately type in new verse selection text, or the arrow keys can be "
@@ -1528,11 +1537,11 @@ msgstr ""
 "Genèse par exemple, et n'importe quel nom de livre en tant que tel implique "
 "chapitre 1, verset 1."
 
-#: ../C/gnomesword.xml:641(guibutton)
+#: ../C/gnomesword.xml:643(guibutton)
 msgid "Alt-C"
 msgstr "Alt-C"
 
-#: ../C/gnomesword.xml:640(listitem)
+#: ../C/gnomesword.xml:642(listitem)
 msgid ""
 "<placeholder-1/> brings the Commentary View forward when previously obscured "
 "by the Book View."
@@ -1540,11 +1549,11 @@ msgstr ""
 "<placeholder-1/> ramène au premier-plan le volet <interface>Commentaire</"
 "interface> si celui-ci est masqué par le volet <interface>Livre</interface>"
 
-#: ../C/gnomesword.xml:644(guibutton)
+#: ../C/gnomesword.xml:646(guibutton)
 msgid "Alt-G"
 msgstr "Alt-G"
 
-#: ../C/gnomesword.xml:643(listitem)
+#: ../C/gnomesword.xml:645(listitem)
 msgid ""
 "<placeholder-1/> is the opposite of Alt-C, and the arrow keys can then drive "
 "the navbar buttons."
@@ -1765,12 +1774,11 @@ msgid ""
 "those repositories known: http://www.crosswire.org/wiki/index.php/"
 "Module_Repositories"
 msgstr ""
-"D'autres sources non affiliées à  Crosswire proposent des modules Sword "
-"bien que le contenu de ces modules ne bénéficie pas de l'aval officiel de"
-" Croswwire. La page web "
-"<ulink url=\"http://www.crosswire.org/wiki/index.php/Module_Repositories\">"
-"http://www.crosswire.org/wiki/index.php/Module_Repositories</ulink> "
-"recense les sources connues."
+"D'autres sources non affiliées à  Crosswire proposent des modules Sword bien "
+"que le contenu de ces modules ne bénéficie pas de l'aval officiel de "
+"Croswwire. La page web <ulink url=\"http://www.crosswire.org/wiki/index.php/"
+"Module_Repositories\">http://www.crosswire.org/wiki/index.php/"
+"Module_Repositories</ulink> recense les sources connues."
 
 #: ../C/gnomesword.xml:99(title)
 msgid "Add And Remove Modules"
@@ -1825,11 +1833,11 @@ msgid ""
 "is recommended, in order to be available for future re-install if the "
 "subject matter of the personal commentary becomes important again."
 msgstr ""
-"Tout module peut être archivé, bien que l'archivage soit principalement intéressant "
-"dans le cas des modules de commentaires personnels. Une copie du module au "
-"format compressé *.zip est placée dans le répertoire ~/.sword/zip. Il est recommandé "
-"d'archiver les commentaires personnels avant de les supprimer de façon à pouvoir les "
-"réinstaller si besoin est."
+"Tout module peut être archivé, bien que l'archivage soit principalement "
+"intéressant dans le cas des modules de commentaires personnels. Une copie du "
+"module au format compressé *.zip est placée dans le répertoire ~/.sword/zip. "
+"Il est recommandé d'archiver les commentaires personnels avant de les "
+"supprimer de façon à pouvoir les réinstaller si besoin est."
 
 #: ../C/gnomesword.xml:163(title)
 msgid "Installing Non-Standard Modules"
@@ -2730,10 +2738,10 @@ msgstr "Vérification de l'orthographe"
 msgid ""
 "In order for spellcheck to be available, one of the languages under "
 "<guimenuitem>Edit-&gt;Current Languages</guimenuitem> must be set."
-msgstr "Pour activer la vérification orthographique, un des langages du menu "
-"<menuchoice><guisubmenu>Éditer</guisubmenu>"
-"<guimenuitem>Langues·actuelles</guimenuitem>"
-"</menuchoice> doit·être·sélectionné."
+msgstr ""
+"Pour activer la vérification orthographique, un des langages du menu "
+"<menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues·actuelles</"
+"guimenuitem></menuchoice> doit·être·sélectionné."
 
 #: ../C/gnomesword.xml:224(title) ../C/gnomesword.xml:31(phrase)
 msgid "The Personal Commentary"
@@ -2795,12 +2803,12 @@ msgid ""
 "<guimenuitem>Verse</guimenuitem> selectors to choose to edit your comment to "
 "one particular verse."
 msgstr ""
-"Le bouton <guimenuitem>Synchroniser</guimenuitem> permet de  remplacer "
-" l'adresse du verset affiché par celle du verset en cours  dans le "
-"volet des<interface> textes bibliques</interface>.  Sinon, l'utilisation des "
+"Le bouton <guimenuitem>Synchroniser</guimenuitem> permet de  remplacer  "
+"l'adresse du verset affiché par celle du verset en cours  dans le volet "
+"des<interface> textes bibliques</interface>.  Sinon, l'utilisation des "
 "sélecteurs de <guimenuitem>Livre</guimenuitem>, <guimenuitem>Chapitre</"
-"guimenuitem>, <guimenuitem>Verset</guimenuitem> permet  d'éditer le commentaire "
-"d'un autre verset."
+"guimenuitem>, <guimenuitem>Verset</guimenuitem> permet  d'éditer le "
+"commentaire d'un autre verset."
 
 #: ../C/gnomesword.xml:68(para)
 msgid "Save, Delete and Print"
@@ -2826,9 +2834,16 @@ msgid ""
 "names can consist only of letters and digits, and cannot duplicate an "
 "existing module's name. Rename is accessible off the right-click menu."
 msgstr ""
-"Le nom du commentaire personnel peut être modifié de façon à l'accorder à une étude ou un sujet particulier. Il est ainsi possible de disposer de plusieurs commentaires personnels de la façon suivante : renommer premièrement le commentaire personnel en cours, puis ensuite ré-installer le module de commentaire personnel standard (Personal), et ainsi de suite. Note : les nouveaux noms de commentaires personnels ne peuvent contenir que des lettres et des chiffres, et ne doivent pas copier le nom d'un autre module existant. Un clic du bouton droit de "
-"la souris dans le volet <interface>Commentaire</interface> fait apparaître le menu "
-"contextuel permettant de renommer le commentaire personnel."
+"Le nom du commentaire personnel peut être modifié de façon à l'accorder à "
+"une étude ou un sujet particulier. Il est ainsi possible de disposer de "
+"plusieurs commentaires personnels de la façon suivante : renommer "
+"premièrement le commentaire personnel en cours, puis ensuite ré-installer le "
+"module de commentaire personnel standard (Personal), et ainsi de suite. "
+"Note : les nouveaux noms de commentaires personnels ne peuvent contenir que "
+"des lettres et des chiffres, et ne doivent pas copier le nom d'un autre "
+"module existant. Un clic du bouton droit de la souris dans le volet "
+"<interface>Commentaire</interface> fait apparaître le menu contextuel "
+"permettant de renommer le commentaire personnel."
 
 #: ../C/gnomesword.xml:97(para)
 msgid ""
@@ -2837,9 +2852,13 @@ msgid ""
 "possible future re-installation. See the module manager's Remove/Archive "
 "page. Any module may be archived, not just personal commentaries."
 msgstr ""
-"Si une étude faisant partie d'un commentaire personnel n'est plus utile, il est possible, "
-"avant·de·la·supprimer, d'archiver le commentaire personnel à l'aide du gestionnaire de "
-"modules pour éventuellement le réinstaller plus tard.  Utiliser pour cela le bouton <guibutton>Archiver</guibutton> du volet <guimenu>Supprimer</guimenu> du gestionnaire de modules. Tout type de module peut être archivé, l'archivage n'est pas réservé aux  commentaires personnels."
+"Si une étude faisant partie d'un commentaire personnel n'est plus utile, il "
+"est possible, avant·de·la·supprimer, d'archiver le commentaire personnel à "
+"l'aide du gestionnaire de modules pour éventuellement le réinstaller plus "
+"tard.  Utiliser pour cela le bouton <guibutton>Archiver</guibutton> du volet "
+"<guimenu>Supprimer</guimenu> du gestionnaire de modules. Tout type de module "
+"peut être archivé, l'archivage n'est pas réservé aux  commentaires "
+"personnels."
 
 #: ../C/gnomesword.xml:105(para)
 msgid ""
@@ -2847,7 +2866,12 @@ msgid ""
 "that more than a tiny fraction of all verses will have personal commentary "
 "attached to them. A verse list showing where personal commentary notes exist "
 "is available from the right-click menu."
-msgstr "La Bible dans le schéma de versification le plus courant compte 31192 versets, il est cependant peu probable que tous les versets contiennent des commentaires personnels. La liste des versets commentés, indiquant les versets pour lesquels un commentaire personnel existe, s'obtient à l'aide du menu contextuel affiché par un clic droit de la souris."
+msgstr ""
+"La Bible dans le schéma de versification le plus courant compte 31192 "
+"versets, il est cependant peu probable que tous les versets contiennent des "
+"commentaires personnels. La liste des versets commentés, indiquant les "
+"versets pour lesquels un commentaire personnel existe, s'obtient à l'aide du "
+"menu contextuel affiché par un clic droit de la souris."
 
 #: ../C/gnomesword.xml:114(para)
 msgid ""
