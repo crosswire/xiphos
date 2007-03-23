@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-22 21:51+0100\n"
+"POT-Creation-Date: 2007-03-23 19:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -741,6 +741,11 @@ msgstr ""
 msgid "H_istory/C_lear"
 msgstr ""
 
+#: ../src/main/xml.c:86 ../src/main/xml.c:475
+#, c-format
+msgid "Document not created successfully. \n"
+msgstr ""
+
 #: ../src/main/xml.c:95
 msgid "Personal"
 msgstr ""
@@ -786,11 +791,6 @@ msgstr ""
 #: ../src/main/xml.c:435
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
-
-#: ../src/main/xml.c:475
-#, c-format
-msgid "Document not created successfully. \n"
 msgstr ""
 
 #: ../src/main/xml.c:489
@@ -1233,6 +1233,10 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:1184
 msgid "Remove - Restore"
+msgstr ""
+
+#: ../src/gnome2/bookmarks_treeview.c:909 ../src/gnome2/sidebar.c:1500
+msgid "Bookmarks"
 msgstr ""
 
 #: ../src/gnome2/cipher_key_dialog.c:60
@@ -2030,10 +2034,6 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:1352
 msgid "Verse _List"
-msgstr ""
-
-#: ../src/gnome2/sidebar.c:1500
-msgid "Bookmarks"
 msgstr ""
 
 #: ../src/gnome2/sidebar.c:1511
