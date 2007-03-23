@@ -906,7 +906,7 @@ GtkWidget *gui_create_bookmark_tree(void)
 	gtk_tree_store_set(GTK_TREE_STORE(tree_model), &iter,
 			   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
 			   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
-			   COL_CAPTION, "Bookmarks",
+			   COL_CAPTION, _("Bookmarks"),
 			   COL_KEY, NULL, COL_MODULE, NULL, -1);
 
 	load_xml_bookmarks(GTK_TREE_VIEW(tree), &iter);
