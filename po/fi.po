@@ -1138,7 +1138,7 @@ msgstr "Tietoa tästä ohjelmasta"
 #: ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:19
 msgid "_File"
-msgstr "_Kansio"
+msgstr "_Tiedosto"
 
 #: ../src/gnome2/main_menu.c:928
 msgid "_Edit"
