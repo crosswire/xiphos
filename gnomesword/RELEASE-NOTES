@@ -3,6 +3,61 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.2.3
+24 Mar 2007
+
+1. A module cache has been implemented as a significant performance
+   improvement.  As Bible text is visited, everything seen goes into
+   an in-memory cache, so that subsequent navigation of the same text
+   does not need to re-visit Sword.  If display options change
+   (footnotes xrefs headings Strong's morph), the cache is invalidated
+   and Sword is queried again to re-populate the display-ready cache.
+
+   Display performance acid test:
+     KJV Ps 119 (176 verses), all mod.opts enabled; spin verse selector.
+     End-to-end (v1 -> v176) navigation time on 1.8GHz computer:
+     GS 2.2.2, 441sec; GS 2.2.3, 102sec => 78% reduction.
+
+2. Personal commentary archival, renaming, and verse dump are implemented
+   (feat.req #1633407).  Archival is available via the module manager
+   (any module may be archived); rename + dump are on the pers.comm
+   popup menu.  [For Cygwin, regrets, NTFS prevents rename of files
+   currently open, so module rename is not available there; but archive
+   + dump are fine.]
+
+3. Main window image content can be clicked to invoke an external image
+   viewer (feat.req #1631815).  Support for this feature requires an
+   enhancement to Sword itself beyond its 1.5.9 release (i.e. built from
+   SVN at change level >= -r2035), but of course it builds/runs fine
+   without this feature's availability using today's Sword 1.5.9.  Some
+   day (soon?), Troy will release a new 1.5.something, or perhaps 1.6,
+   which will contain this.
+
+4. Finnish translation now available.
+
+5. Sidebar verse lists are always savable (bug #1674149).
+
+6. Improving i18n support now supports more non-ASCII searches
+   (bug #1673598).
+
+7. Mouse-selected Bible/commentary/genbook text can be read aloud using
+   a popup menu selection, regardless of whether scripture reading is
+   enabled on View -> Read Aloud.
+
+Bug reports addressed since 2.2.2:
+1681135  Module manager crashes Gnomesword on startup
+1674149  unable to save verse lists
+1673598  cannot search personal for non-ascii chars
+1667954  Missing modules in advanced-search window
+
+New feature requests pending:
+<none>
+
+Feature requests closed:
+1633407  personal commentary needs
+1631815  open single-image window on click
+________________________
+
 Release 2.2.2 (maintenance)
 23 Feb 2007
 
@@ -55,7 +110,7 @@ New feature requests pending:
 
 Feature requests closed:
 1642837  fullscreen support
-1633397  shortcut: focus text cursor to verse bar
+1615402  advanced search needs help
 1124274  GnomeSword for Windows
 ________________________
 
