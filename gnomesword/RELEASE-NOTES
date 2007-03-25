@@ -45,6 +45,7 @@ Release 2.2.3
    enabled on View -> Read Aloud.
 
 Bug reports addressed since 2.2.2:
+1687602  Module Manager crashes on FC6
 1681135  Module manager crashes Gnomesword on startup
 1674149  unable to save verse lists
 1673598  cannot search personal for non-ascii chars
