@@ -33,7 +33,11 @@
 
 #include "editor/html-editor.h"
 
+#ifdef OLD_NAVBAR
 #include "main/navbar.h"
+#else
+#include "main/navbar_versekey.h"
+#endif
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
@@ -59,8 +63,12 @@ struct _editor {
 	GtkWidget *sync_button;
 	GtkWidget *html_widget;
 	GtkWidget *statusbar;
-	
+
+#ifdef OLD_NAVBAR	
 	NAVBAR navbar;
+#else		
+	NAVBAR_VERSEKEY navbar;
+#endif
 	
 	BonoboWidget *control;
 	GNOME_GtkHTML_Editor_Engine engine;
@@ -805,6 +813,7 @@ static gboolean on_key_release_event(GtkWidget * widget,
 
 
 
+#ifdef OLD_NAVBAR
 static void on_comboboxentry4_changed(GtkComboBox * combobox, EDITOR * e)
 {
 	gchar *book = NULL;
@@ -903,7 +912,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, EDITOR * e)
 	g_free(verse);
 	g_free(buf);
 }
-
+#endif
 /******************************************************************************
  * Name
  *   
@@ -925,7 +934,11 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
 	const gchar *buf = gtk_entry_get_text(entry);
 	if (e->navbar.key)
 		g_free(e->navbar.key);
+#ifdef OLD_NAVBAR
 	e->navbar.key = g_strdup(buf);
+#else
+	e->navbar.key = g_string_assign(e->navbar.key,buf);
+#endif
 	editor_load_note(e, NULL, buf);
 }
 
@@ -976,6 +989,7 @@ void editor_sync_with_main(void)
 
 static GtkWidget *navebar_create(EDITOR * editor)
 {
+#ifdef OLD_NAVBAR
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
@@ -1005,6 +1019,7 @@ static GtkWidget *navebar_create(EDITOR * editor)
 	gtk_widget_set_size_request(separatortoolitem, 6, -1);
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
+
 	editor->navbar.comboboxentry_book =
 	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
 	gtk_widget_show(editor->navbar.comboboxentry_book);
@@ -1088,7 +1103,7 @@ static GtkWidget *navebar_create(EDITOR * editor)
 	
 	g_signal_connect(GTK_OBJECT(editor->sync_button),
 			 "toggled", G_CALLBACK(sync_toggled), editor);
-	
+
 	g_signal_connect((gpointer) editor->navbar.comboboxentry_book,
 			 "changed",
 			 G_CALLBACK(on_comboboxentry4_changed),editor);
@@ -1098,10 +1113,10 @@ static GtkWidget *navebar_create(EDITOR * editor)
 	g_signal_connect((gpointer) editor->navbar.comboboxentry_verse,
 			 "changed",
 			 G_CALLBACK(on_comboboxentry6_changed),editor);
-	
 	g_signal_connect((gpointer) editor->navbar.lookup_entry, "activate",
 			 G_CALLBACK(on_entry_activate), editor);
 	return hbox3;
+#endif	
 }
 
 
@@ -1127,10 +1142,16 @@ static GtkWidget *container_create(const gchar * window_title,
 		toolbar_nav = navebar_create(editor);
 		gtk_widget_show(toolbar_nav);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
+#ifdef OLD_NAVBAR
 		editor->navbar.module_name = editor->module;
 		if (editor->navbar.key == NULL)
 			editor->navbar.key = g_strdup(editor->key);
 		main_navbar_fill_book_combo(editor->navbar);
+#else
+		editor->navbar.module_name = g_string_assign(editor->navbar.module_name,editor->module);
+		if (!editor->navbar.key->len)
+			editor->navbar.key = g_string_assign(editor->navbar.key,editor->key);
+#endif
 	}
 
 	window = GTK_WINDOW(win);

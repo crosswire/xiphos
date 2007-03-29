@@ -856,14 +856,14 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	work_buf = g_strsplit (url,"/",4);
 	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
 #ifdef DEBUG
-	g_message("work_buf :%s, %s",work_buf[2],work_buf[KEY]);
+	g_message("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]);
 #endif
-	if(!work_buf[2] && !work_buf[KEY]) {
+	if(!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
 		return 0;
 	}
-	if(!work_buf[3]) {
+	if(!work_buf[KEY]) {
 		tmpkey = work_buf[MODULE];		
 	} else
 		tmpkey = work_buf[KEY];
