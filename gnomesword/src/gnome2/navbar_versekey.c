@@ -417,8 +417,6 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
                                             gpointer user_data)
 {
 	main_navbar_versekey_spin_verse(navbar_versekey,event->scroll.direction);
-	g_message("event->scroll->direction:%d",event->scroll.direction);
-	g_message("on_button_verse_menu_verse_scroll_event");
   return FALSE;
 }
 
