@@ -556,7 +556,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 	char *book = NULL;
 	char *current_book = NULL;
 	int i = 0, j = 0, x = 2;
-	
+	GtkMenuShell *menu_shell;
 	if(navbar.testaments == backend->module_get_testaments(navbar.module_name->str))
 		return NULL;
 	
