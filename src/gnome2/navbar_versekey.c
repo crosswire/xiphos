@@ -395,6 +395,36 @@ static void on_entry_activate(GtkEntry * entry, gpointer data)
 
 /******************************************************************************
  * Name
+ *  on_button_verse_menu_verse_scroll_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *  gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
+ *                                           GdkEvent * event,
+ *                                           gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+static
+gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data)
+{
+	main_navbar_versekey_spin_verse(navbar_versekey,event->scroll.direction);
+	g_message("event->scroll->direction:%d",event->scroll.direction);
+	g_message("on_button_verse_menu_verse_scroll_event");
+  return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_navbar_versekey_new
  *
  * Synopsis
@@ -494,6 +524,9 @@ GtkWidget *gui_navbar_versekey_new(void)
 			 G_CALLBACK(select_button_press_callback), 
 			 GINT_TO_POINTER(VERSE_BUTTON));
 			 
+	g_signal_connect ((gpointer)navbar_versekey.button_verse_menu , "scroll_event",
+		    G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    NULL);
 	return navbar_versekey.navbar;
 	
 }
