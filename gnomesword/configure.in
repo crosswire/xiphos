@@ -96,6 +96,10 @@ AC_SUBST(GTKHTML_DATA_DIR)
 
 
 
+AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
+if test "x$old_navbar" = xyes; then
+  AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
+fi
 
 
 

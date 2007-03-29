@@ -1,3 +1,16 @@
+2007-03-29  terry <tbiggs@users.sourceforge.net>
+
+	* added navbar_versekey 
+
+
+2007-03-25  karl <charcoal@users.sf.net>
+
+	* 2.2.3 release.
+
+2007-03-23  karl <charcoal@users.sf.net>
+
+	* add a block of release notes.
+
 2007-03-22  karl <charcoal@users.sf.net>
 
 	* Add Ctrl-F to invoke Bible text "find".

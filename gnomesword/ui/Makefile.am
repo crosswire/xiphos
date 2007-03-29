@@ -2,6 +2,7 @@ ui_DATA = \
 	bookmarks.glade \
 	prefs.glade \
 	module-manager.glade \
+	navbar_versekey.glade \
 	search-dialog.glade \
 	logo.png \
 	sword3.png \
