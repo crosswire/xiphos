@@ -298,6 +298,15 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
+	if(event->state == GDK_CONTROL_MASK)
+		g_message("GDK_CONTROL_MASK");
+	if(event->state == GDK_SHIFT_MASK)
+		g_message("GDK_SHIFT_MASK");
+	if(event->state == GDK_MOD1_MASK)
+		g_message("GDK_MOD1_MASK");
+	if(event->state == GDK_MODIFIER_MASK)
+		g_message("GDK_MODIFIER_MASK");
+	g_message("state: %d",event->state);
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
@@ -315,6 +324,12 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
+	if(event->state == GDK_CONTROL_MASK)
+		g_message("GDK_CONTROL_MASK");
+	if(event->state == GDK_SHIFT_MASK)
+		g_message("GDK_SHIFT_MASK");
+	if(event->state == GDK_MOD1_MASK)
+		g_message("GDK_MOD1_MASK");
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
