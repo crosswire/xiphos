@@ -550,6 +550,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 	VerseKey key_current; 
 	GtkWidget *menu;
 	GtkWidget *item;
+	GtkWidget *select_item;
 	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;
@@ -570,6 +571,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 				     &bytes_written,
 				     &error);
 	menu = gtk_menu_new();
+	menu_shell = GTK_MENU_SHELL(menu);
 	
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while(i < key.BMAX[0]) { 
@@ -586,11 +588,19 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 				g_error_free (error);
 				continue;
 			}
-			item = gtk_menu_item_new_with_label(book);
-			gtk_widget_show(item);	
-			gtk_container_add(GTK_CONTAINER(menu), item);
-			if (!strcmp(book, current_book))
-				gtk_widget_set_sensitive(item,FALSE);
+			if (!strcmp(book, current_book)) {
+				select_item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(select_item);	
+				//gtk_container_add(GTK_CONTAINER(menu), select_item);
+				gtk_menu_shell_append(menu_shell, select_item);
+			} else {
+				item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(item);	
+				//gtk_container_add(GTK_CONTAINER(menu), item);
+				gtk_menu_shell_append(menu_shell, item);
+			}
+			//if (!strcmp(book, current_book))
+				//gtk_widget_set_sensitive(item,FALSE);
 			g_signal_connect(GTK_OBJECT(item), "activate",
 					   G_CALLBACK
 					   (on_ot_book_menu_select),
@@ -614,11 +624,22 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 				g_error_free (error);
 				continue;
 			}
-			item = gtk_menu_item_new_with_label(book);
-			gtk_widget_show(item);	
-			gtk_container_add(GTK_CONTAINER(menu), item);
-			if (!strcmp(book, current_book))
-				gtk_widget_set_sensitive(item,FALSE);
+			if (!strcmp(book, current_book)) {
+				select_item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(select_item);	
+				//gtk_container_add(GTK_CONTAINER(menu), select_item);
+				gtk_menu_shell_append(menu_shell, select_item);
+			} else {
+				item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(item);	
+				//gtk_container_add(GTK_CONTAINER(menu), item);
+				gtk_menu_shell_append(menu_shell, item);
+			}
+			//item = gtk_menu_item_new_with_label(book);
+			//gtk_widget_show(item);	
+			//gtk_container_add(GTK_CONTAINER(menu), item);
+			//if (!strcmp(book, current_book))
+			//	gtk_widget_set_sensitive(item,FALSE);
 			g_signal_connect(GTK_OBJECT(item), "activate",
 					   G_CALLBACK
 					   (on_nt_book_menu_select),
@@ -627,6 +648,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 			g_free(book);
 		}
 	}
+	 gtk_menu_shell_select_item(menu_shell,select_item);
 	if(current_book)
 		g_free(current_book);	
 	return menu;
