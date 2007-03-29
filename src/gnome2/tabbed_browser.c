@@ -47,6 +47,7 @@
 
 
 #include "main/lists.h"
+#include "main/navbar_versekey.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/tab_history.h"
@@ -558,6 +559,12 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	settings.comm_showing = comm_showing; 
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
+	//if(navbar_versekey.module_name)
+		//g_free(navbar_versekey.module_name);
+	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,pt->text_mod);
+	//if(navbar_versekey.key)
+		//g_free(navbar_versekey.key);
+	navbar_versekey.key = g_string_assign(navbar_versekey.key,pt->text_commentary_key);
 	main_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
