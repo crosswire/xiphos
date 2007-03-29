@@ -44,6 +44,7 @@ gnomesword2_SOURCES =  \
     mod_mgr.c \
     navbar_book.c \
     navbar_book_dialog.c \
+    navbar_versekey.c navbar_versekey.h \
     parallel_view.c \
     parallel_dialog.c \
     preferences_cell_renderer.c \

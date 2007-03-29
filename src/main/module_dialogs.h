@@ -22,6 +22,7 @@
 #ifndef __MODULE_DIALOGS_H__
 #define __MODULE_DIALOGS_H__
 
+#include <config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,8 +30,12 @@ extern "C" {
 typedef struct _dialog_data DIALOG_DATA;
 
 #include "main/global_ops.hh"
-#include "main/navbar.h"
 #include "main/navbar_book.h"
+//#ifdef OLD_NAVBAR
+#include "main/navbar.h"
+//#else
+#include "main/navbar_versekey.h"
+//#endif
 
 struct _dialog_data {
 	/* dialog widgets */
@@ -77,7 +82,13 @@ struct _dialog_data {
 	gpointer editor;
 	
         GObject *mod_selection;
+	
+//#ifdef OLD_NAVBAR
 	NAVBAR navbar;
+//#else
+//	NAVBAR_VERSEKEY navbar;
+//#endif
+
 	NAVBAR_BOOK navbar_book;
 	GLOBAL_OPS *ops;
 };
