@@ -28,6 +28,8 @@ extern "C" {
 
 #include <gnome.h>
 #include "gui/toolbar_nav.h"
+#include "main/navbar_versekey.h"
+	
 typedef struct _tab_page TAB_PAGE;
 struct  _tab_page {
 	GtkWidget *vbox;
@@ -61,7 +63,11 @@ struct  _tab_page {
 	gchar *text_comm_key;
 	gchar *dict_key;
 	gchar *book_key;
+#ifdef OLD_NAVBAR	
 	NAV_BAR nav_bar;
+#else	
+	NAVBAR_VERSEKEY nav_bar;
+#endif
 };
 
 typedef struct _main_window MAIN_WINDOW;

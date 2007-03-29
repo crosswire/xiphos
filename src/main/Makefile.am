@@ -22,6 +22,7 @@ libmain_a_SOURCES =  \
     navbar.cc navbar.h \
     navbar_book.cc navbar_book.h \
     navbar_book_dialog.cc navbar_book_dialog.h \
+    navbar_versekey.cc navbar_versekey.h \
     parallel_view.cc parallel_view.h \
     previewer.cc previewer.h \
     search_dialog.cc search_dialog.h \

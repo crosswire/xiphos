@@ -22,18 +22,14 @@
 #ifndef _NAVBAR_H
 #define _NAVBAR_H
 
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-/*
-typedef struct _spinbuttons SPINBUTTONS;
-struct  _spinbuttons{	
-	GtkWidget *up;
-	GtkWidget *down;
-	gint combo;
-};
-*/
+
+#include <config.h>
+	
 typedef struct _navbar NAVBAR;
 struct _navbar {	
 	GtkWidget *button_back;

@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * tab_history.h - add, remove and navigate history
+ * navbar_versekey.h - navigation bar for genbook modules
  *
- * Copyright (C) 2005 GnomeSword Developer Team
+ * Copyright (C) 2007 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,32 +19,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __TAB_HISTORY_H_
-#define __TAB_HISTORY_H_
+#ifndef ___NAVBAR_VERSEKEY_H_
+#define ___NAVBAR_VERSEKEY_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-//#include <gnome.h>
-
-typedef struct _tab_history TAB_HISTORY;
-struct _tab_history {
-        gint itemnum;
-        gchar verseref[80];
-        gchar textmod[80];
-        gchar commod[80];
-};
-
-GtkWidget *main_versekey_drop_down_new(gpointer data);
-void main_clear_tab_history(void);
-void main_add_tab_history_item(gpointer data);
-void main_navigate_tab_history(gint direction);
-void main_update_tab_history_menu(gpointer data);		
-void main_change_verse_tab_history(gint historynum);
-
-#ifdef __cplusplus
-}
-#endif
+GtkWidget *gui_navbar_versekey_new(void);
 
 #endif

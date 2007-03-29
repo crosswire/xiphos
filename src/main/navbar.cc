@@ -41,6 +41,7 @@
 
 #include "backend/sword_main.hh"
 
+//#ifdef OLD_NAVBAR
 
 gboolean do_display;
 gboolean do_display_dict;
