@@ -28,9 +28,9 @@
 #include <swmodule.h>	
 #include <url.h>
 
-#ifdef USE_GTKMOZEMBED
-#include <gtkmozembed.h>
-#endif
+//#ifdef USE_GTKMOZEMBED
+//#include <gtkmozembed.h>
+//#endif
 #ifdef __cplusplus
 extern "C" {
 #endif

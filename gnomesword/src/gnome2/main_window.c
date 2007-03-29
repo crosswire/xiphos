@@ -52,6 +52,7 @@
 #include "gui/search_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/bibletext_dialog.h"
+#include "gui/navbar_versekey.h"
 #include "gui/widgets.h"
 
 WIDGETS widgets;
@@ -504,7 +505,11 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case 46: //L
 		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
-			gtk_widget_grab_focus(navbar_main.lookup_entry);
+#ifdef OLD_NAVBAR
+			gtk_widget_grab_focus(nav_bar.lookup_entry);
+#else
+			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+#endif
 		break;
 	case 41: //F
 		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
@@ -515,13 +520,21 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		break;
 	case 54: //C
 		if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
-			gtk_widget_grab_focus(navbar_main.lookup_entry);
+#ifdef OLD_NAVBAR
+			gtk_widget_grab_focus(nav_bar.lookup_entry);
+#else
+			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+#endif
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 		}
 		break;
 	case 56: //B
 		if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
-			gtk_widget_grab_focus(navbar_main.lookup_entry);
+#ifdef OLD_NAVBAR
+			gtk_widget_grab_focus(nav_bar.lookup_entry);
+#else
+			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+#endif
 		break;
 	}
 #ifdef DEBUG
@@ -660,9 +673,15 @@ void create_mainwindow(void)
 /*
 	 * nav toolbar
 	 */
+#ifdef OLD_NAVBAR
 	nav_toolbar = gui_create_nav_toolbar(vboxMain);
 	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
 			   FALSE, 0);
+#else
+	nav_toolbar = gui_navbar_versekey_new();
+	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
+			   FALSE, 0);
+#endif
 	/*
 	 * end nav toolbar
 	 */
@@ -877,7 +896,11 @@ void create_mainwindow(void)
 			   (epaned_button_release_event),
 			   (gchar *) "hpaned1");
 
+#ifdef OLD_NAVBAR
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
+#else
+	gtk_widget_grab_focus(navbar_versekey.lookup_entry);
+#endif
 
 	gtk_window_set_default_size((GtkWindow *)widgets.app,
                                              settings.gs_width,

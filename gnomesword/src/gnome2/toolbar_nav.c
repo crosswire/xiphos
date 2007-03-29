@@ -43,6 +43,7 @@
 #include "main/url.hh"
 #include "main/xml.h"
 
+
 NAVBAR navbar_main;
 NAV_BAR nav_bar;
 GtkWidget *cbe_book;

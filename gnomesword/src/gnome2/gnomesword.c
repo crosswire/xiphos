@@ -94,7 +94,9 @@ void frontend_init(void)
 	/*
 	 * get and load books of the Bible 
 	 */
+#ifdef OLD_NAVBAR
 	main_navbar_fill_book_combo(navbar_main);
+#endif
 	/*
 	 *  setup sidebar
 	 */
@@ -290,6 +292,9 @@ void shutdown_frontend(void)
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
 	main_delete_paraellel_view();
+	
+	g_string_free(navbar_versekey.module_name,TRUE);
+	g_string_free(navbar_versekey.key,TRUE);
 	
 #ifdef DEBUG	
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
