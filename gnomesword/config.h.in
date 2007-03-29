@@ -97,6 +97,9 @@
 /* Define to 1 if you wish to enable 'maintainer-only' behavior. */
 #undef MAINTAINER_MODE
 
+/* Define if wish to use the old style navbar */
+#undef OLD_NAVBAR
+
 /* Name of package */
 #undef PACKAGE
 

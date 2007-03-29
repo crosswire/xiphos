@@ -308,7 +308,17 @@ gchar *main_update_nav_controls(const gchar * key)
 	settings.currentverse = xml_get_value("keys", "verse");
 	
 	settings.apply_change = FALSE;
+#ifdef OLD_NAVBAR
 	main_navbar_set(navbar_main, val_key);
+#else
+	//if(navbar_versekey.module_name)
+		//g_free(navbar_versekey.module_name);
+	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
+	//if(navbar_versekey.key)
+		//g_free(navbar_versekey.key);
+	navbar_versekey.key = g_string_assign(navbar_versekey.key,val_key);
+	main_navbar_versekey_set(navbar_versekey, val_key);
+#endif
 	settings.apply_change = TRUE;
 	return val_key;
 }
@@ -1124,6 +1134,7 @@ void main_display_bible(const char * mod_name, const char * key)
 					mod_name);
 		settings.MainWindowModule = xml_get_value(
 					"modules", "bible");
+#ifdef OLD_NAVBAR
 		if (navbar_main.module_name) 
 			g_free(navbar_main.module_name);
 		navbar_main.module_name = g_strdup(settings.MainWindowModule);
@@ -1131,6 +1142,14 @@ void main_display_bible(const char * mod_name, const char * key)
 			g_free(navbar_main.key);
 		navbar_main.key = g_strdup(settings.currentverse);
 		main_navbar_fill_book_combo(navbar_main);
+#else
+		//if (navbar_versekey.module_name) 
+			//g_free(navbar_versekey.module_name);
+		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
+		//if (navbar_versekey.key)
+			//g_free(navbar_versekey.key);
+		navbar_versekey.key = g_string_assign(navbar_versekey.key,settings.currentverse);
+#endif
 		main_search_sidebar_fill_bounds_combos();
 	}
 	

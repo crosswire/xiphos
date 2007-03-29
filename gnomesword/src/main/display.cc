@@ -343,7 +343,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 		     : rework /* left as-is */);
 
 	swbuf.append("</font></body></html>");
-
+#ifdef DEBUG
+	g_message("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length());
+#endif
 #ifdef USE_GTKMOZEMBED
 	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());

@@ -28,6 +28,7 @@ extern "C" {
 
 #include <gnome.h>
 
+	
 typedef struct _toolbar_nav NAV_BAR;
 struct  _toolbar_nav {
 	GtkWidget *lookup_entry;
