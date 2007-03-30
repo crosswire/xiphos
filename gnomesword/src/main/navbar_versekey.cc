@@ -437,9 +437,13 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar)
 	GError *error = NULL;
 	gint i,x;
 	GtkWidget *menu;
+	GtkMenuShell *menu_shell;
 	GtkWidget *item;
+	GtkWidget *select_item;
 	
 	menu = gtk_menu_new();
+	menu_shell = GTK_MENU_SHELL(menu);
+	
 	vkey.AutoNormalize(1);
 	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
@@ -457,16 +461,26 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar)
 	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
 	for(i=1; i <= x; i++) {
 		sprintf(buf,"%d",i);
-		item = gtk_menu_item_new_with_label(buf);
-		gtk_widget_show(item);	
-		gtk_container_add(GTK_CONTAINER(menu), item);
-		if (i == xverse)
-			gtk_widget_set_sensitive(item,FALSE);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		if (i == xverse) {
+			select_item = gtk_menu_item_new_with_label(buf);
+			gtk_widget_show(select_item);	
+			gtk_menu_shell_append(menu_shell, select_item);
+			g_signal_connect(GTK_OBJECT(select_item), "activate",
 				   G_CALLBACK
 				   (on_verse_menu_select),
 				   GINT_TO_POINTER(i));
+		} else {
+			item = gtk_menu_item_new_with_label(buf);
+			gtk_widget_show(item);	
+			gtk_menu_shell_append(menu_shell, item);
+			g_signal_connect(GTK_OBJECT(item), "activate",
+				   G_CALLBACK
+				   (on_verse_menu_select),
+				   GINT_TO_POINTER(i));
+		}
 	}
+	if(select_item)
+		gtk_menu_shell_select_item(menu_shell,select_item);
 	return menu;
 }
 
@@ -498,8 +512,12 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar)
 	vkey.AutoNormalize(1);
 	gint i,x;
 	GtkWidget *menu;
+	GtkMenuShell *menu_shell;
 	GtkWidget *item;
+	GtkWidget *select_item;
+	
 	menu = gtk_menu_new();
+	menu_shell = GTK_MENU_SHELL(menu);
 	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
@@ -514,16 +532,26 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar)
 	x = (vkey.books[xtestament-1][xbook-1].chapmax);
 	for(i=1; i <= x; i++) {
 		sprintf(buf,"%d",i);
-		item = gtk_menu_item_new_with_label(buf);
-		gtk_widget_show(item);	
-		gtk_container_add(GTK_CONTAINER(menu), item);
-		if (i == xchapter)
-			gtk_widget_set_sensitive(item,FALSE);
-		g_signal_connect(GTK_OBJECT(item), "activate",
+		if (i == xchapter) {
+			select_item = gtk_menu_item_new_with_label(buf);
+			gtk_widget_show(select_item);
+			gtk_menu_shell_append(menu_shell, select_item);
+			g_signal_connect(GTK_OBJECT(select_item), "activate",
 				   G_CALLBACK
 				   (on_chapter_menu_select),
 				   GINT_TO_POINTER(i));
+		} else {
+			item = gtk_menu_item_new_with_label(buf);
+			gtk_widget_show(item);	
+			gtk_menu_shell_append(menu_shell, item);
+			g_signal_connect(GTK_OBJECT(item), "activate",
+				   G_CALLBACK
+				   (on_chapter_menu_select),
+				   GINT_TO_POINTER(i));
+		}
 	}
+	if(select_item)
+		gtk_menu_shell_select_item(menu_shell,select_item);	
 	return menu;
 }
 
@@ -590,21 +618,21 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 			}
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(select_item);	
-				//gtk_container_add(GTK_CONTAINER(menu), select_item);
+				gtk_widget_show(select_item);
 				gtk_menu_shell_append(menu_shell, select_item);
-			} else {
-				item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(item);	
-				//gtk_container_add(GTK_CONTAINER(menu), item);
-				gtk_menu_shell_append(menu_shell, item);
-			}
-			//if (!strcmp(book, current_book))
-				//gtk_widget_set_sensitive(item,FALSE);
-			g_signal_connect(GTK_OBJECT(item), "activate",
+				g_signal_connect(GTK_OBJECT(select_item), "activate",
 					   G_CALLBACK
 					   (on_ot_book_menu_select),
 					   GINT_TO_POINTER(i));
+			} else {
+				item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(item);
+				gtk_menu_shell_append(menu_shell, item);
+				g_signal_connect(GTK_OBJECT(item), "activate",
+					   G_CALLBACK
+					   (on_ot_book_menu_select),
+					   GINT_TO_POINTER(i));
+			}
 			++i;
 			g_free(book);
 		}
@@ -626,29 +654,27 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer da
 			}
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(select_item);	
-				//gtk_container_add(GTK_CONTAINER(menu), select_item);
+				gtk_widget_show(select_item);
 				gtk_menu_shell_append(menu_shell, select_item);
-			} else {
-				item = gtk_menu_item_new_with_label(book);
-				gtk_widget_show(item);	
-				//gtk_container_add(GTK_CONTAINER(menu), item);
-				gtk_menu_shell_append(menu_shell, item);
-			}
-			//item = gtk_menu_item_new_with_label(book);
-			//gtk_widget_show(item);	
-			//gtk_container_add(GTK_CONTAINER(menu), item);
-			//if (!strcmp(book, current_book))
-			//	gtk_widget_set_sensitive(item,FALSE);
-			g_signal_connect(GTK_OBJECT(item), "activate",
+				g_signal_connect(GTK_OBJECT(select_item), "activate",
 					   G_CALLBACK
 					   (on_nt_book_menu_select),
 					   GINT_TO_POINTER(i));
+			} else {
+				item = gtk_menu_item_new_with_label(book);
+				gtk_widget_show(item);
+				gtk_menu_shell_append(menu_shell, item);
+				g_signal_connect(GTK_OBJECT(item), "activate",
+					   G_CALLBACK
+					   (on_nt_book_menu_select),
+					   GINT_TO_POINTER(i));
+			}
 			++i;
 			g_free(book);
 		}
 	}
-	 gtk_menu_shell_select_item(menu_shell,select_item);
+	if(select_item)
+		gtk_menu_shell_select_item(menu_shell,select_item);
 	if(current_book)
 		g_free(current_book);	
 	return menu;
