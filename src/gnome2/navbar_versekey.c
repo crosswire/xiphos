@@ -421,6 +421,64 @@ gboolean on_button_verse_menu_verse_scroll_event(GtkWidget * widget,
 }
 
 
+
+/******************************************************************************
+ * Name
+ *  on_button_verse_menu_chapter_scroll_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *  gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
+ *                                           GdkEvent * event,
+ *                                           gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+static
+gboolean on_button_verse_menu_chapter_scroll_event(GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data)
+{
+	main_navbar_versekey_spin_chapter(navbar_versekey,event->scroll.direction);
+	return FALSE;
+}
+
+
+
+/******************************************************************************
+ * Name
+ *  on_button_verse_menu_book_scroll_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *  gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
+ *                                           GdkEvent * event,
+ *                                           gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+static
+gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data)
+{
+	main_navbar_versekey_spin_book(navbar_versekey,event->scroll.direction);
+	return FALSE;
+}
+
+
 /******************************************************************************
  * Name
  *  gui_navbar_versekey_new
@@ -520,11 +578,16 @@ GtkWidget *gui_navbar_versekey_new(void)
 	g_signal_connect((gpointer) navbar_versekey.button_verse_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_button_press_callback), 
-			 GINT_TO_POINTER(VERSE_BUTTON));
-			 
+			 GINT_TO_POINTER(VERSE_BUTTON));			 
 	g_signal_connect ((gpointer)navbar_versekey.button_verse_menu , "scroll_event",
-		    G_CALLBACK (on_button_verse_menu_verse_scroll_event),
-		    NULL);
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 NULL);			 
+	g_signal_connect ((gpointer)navbar_versekey.button_chapter_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 NULL);			 
+	g_signal_connect ((gpointer)navbar_versekey.button_book_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 NULL);
 	return navbar_versekey.navbar;
 	
 }
