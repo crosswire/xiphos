@@ -29,7 +29,7 @@ extern "C"
 typedef struct _navbar_versekey NAVBAR_VERSEKEY;
 struct _navbar_versekey {	
 	GtkWidget *navbar;
-	
+	GtkWidget *button_sync;
 	GtkWidget *button_history_back;
 	GtkWidget *button_history_next;
 	GtkWidget *button_history_menu;	
@@ -56,18 +56,18 @@ struct _navbar_versekey {
 	GString *key;
 	gchar *book;
 	GString *module_name;
-	
+	gboolean dialog;
 	int testaments;	
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
 
 const char *main_get_valid_key(char * key);
-GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar);
-GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar);
+GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer data);
+GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, gpointer data);
+GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, gpointer data);
 void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction);
 void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction);
 void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction);
-GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer data);
 void main_navbar_versekey_book_prev(void);
 void main_navbar_versekey_book_next(void);
 void main_navbar_versekey_chapter_prev(void);

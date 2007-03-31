@@ -36,6 +36,7 @@
 #include "gui/dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/main_window.h"
+#include "gui/navbar_versekey.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
 
@@ -516,7 +517,7 @@ void commentary_prefixable_link(GtkHTML * html,
  * Return value
  *   void
  */
-
+#ifdef OLD_NAVBAR
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * d)
 {
 	const gchar *buf = gtk_entry_get_text(entry);
@@ -529,6 +530,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * d)
 	g_free(url);
 	main_navbar_set(d->navbar, d->navbar.key);
 }
+#endif
 
 
 /******************************************************************************
@@ -583,6 +585,8 @@ static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * d)
 	cur_d = d;
 }
 
+
+#ifdef OLD_NAVBAR
 static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 {
 	gchar *url = NULL;
@@ -704,6 +708,8 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 	g_free(verse);
 	g_free(buf);
 }
+#endif
+
 
 /******************************************************************************
  * Name
@@ -751,6 +757,7 @@ void commentary_prefixable_link(GtkHTML * html,
 
 static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 {
+#ifdef OLD_NAVBAR
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
@@ -875,6 +882,9 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 	g_signal_connect((gpointer) d->navbar.lookup_entry, "activate",
 			 G_CALLBACK(on_entry_activate), d);
 	return hbox3;
+#else
+	return gui_navbar_versekey_dialog_new(d);
+#endif
 }
 
 #ifdef USE_GTKMOZEMBED
