@@ -83,11 +83,11 @@ struct _dialog_data {
 	
         GObject *mod_selection;
 	
-//#ifdef OLD_NAVBAR
+#ifdef OLD_NAVBAR
 	NAVBAR navbar;
-//#else
-//	NAVBAR_VERSEKEY navbar;
-//#endif
+#else
+	NAVBAR_VERSEKEY navbar;
+#endif
 
 	NAVBAR_BOOK navbar_book;
 	GLOBAL_OPS *ops;

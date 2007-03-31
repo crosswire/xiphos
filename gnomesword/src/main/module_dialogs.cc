@@ -47,6 +47,7 @@ extern "C" {
 #include "gui/gbs_dialog.h"
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
+#include "gui/navbar_versekey.h"
 #include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
@@ -56,6 +57,7 @@ extern "C" {
 
 #include "main/navbar_book_dialog.h"
 #include "main/module_dialogs.h"
+#include "main/navbar_versekey.h"
 #include "main/sword.h"
 #include "main/sidebar.h"
 #include "main/settings.h"
@@ -972,7 +974,10 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 			}
 			if(t->mod_type == TEXT_TYPE || 
 					t->mod_type == COMMENTARY_TYPE)
+#ifdef OLD_NAVBAR
 				main_navbar_set(t->navbar, key);
+#else
+#endif
 			be->display_mod->Display();
 			gdk_window_raise(t->dialog->window);
 			return;
@@ -1095,10 +1100,15 @@ void main_dialogs_shutdown(void)
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
 		}
+#ifdef OLD_NAVBAR
 		if(t->navbar.key)
 			g_free(t->navbar.key);
 		if(t->navbar.module_name)
 			g_free(t->navbar.module_name);
+#else
+		g_string_free(t->navbar.module_name,TRUE);
+		g_string_free(t->navbar.key,TRUE);
+#endif
 		g_free(t->mod_name);
 		g_free(t->ops);
 		g_free(t->key);
@@ -1472,8 +1482,14 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	be->set_module_key(t->mod_name, t->key);
 //	main_dialog_set_global_options(t);
 	be->display_mod->Display();
-	if(t->navbar.module_name)
+	if(t->navbar.module_name) {
+#ifdef OLD_NAVBAR
 		main_navbar_set(t->navbar, t->key);
+#else
+		main_navbar_versekey_set(t->navbar, t->key);
+#endif
+		
+	}
 	
 	g_free(module);
 	g_free(key);
@@ -1721,10 +1737,16 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			else			
 				t->key = g_strdup(settings.currentverse);
 			dlg_bible = t;
+#ifdef OLD_NAVBAR
 			t->navbar.is_dialog = TRUE;
 			t->navbar.key = g_strdup(settings.currentverse);
 			t->navbar.module_name = g_strdup(mod_name);
 			main_navbar_fill_book_combo(t->navbar);
+#else
+			t->navbar.module_name = g_string_new(mod_name);
+			t->navbar.key =  g_string_new(settings.currentverse);
+			main_navbar_versekey_set(t->navbar, (char*)t->navbar.key); 
+#endif
 		break;
 		case COMMENTARY_TYPE:
 			t->mod_type = COMMENTARY_TYPE;
@@ -1735,10 +1757,16 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 				t->key = g_strdup(key);
 			else			
 				t->key = g_strdup(settings.currentverse);
+#ifdef OLD_NAVBAR
 			t->navbar.is_dialog = TRUE;
 			t->navbar.key = g_strdup(settings.currentverse);
 			t->navbar.module_name = g_strdup(mod_name);
 			main_navbar_fill_book_combo(t->navbar);
+#else
+			t->navbar.module_name = g_string_new(mod_name);
+			t->navbar.key =  g_string_new(settings.currentverse);
+			main_navbar_versekey_set(t->navbar, (char*)t->navbar.key); 
+#endif
 		break;
 #ifndef USE_GTKHTML38
 		case PERCOM_TYPE:
@@ -1790,8 +1818,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	gtk_widget_show(t->dialog);
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
 	be->set_module(t->mod_name);
-	if(type == TEXT_TYPE) 
-		main_dialogs_clear_viewer(t);
 	if(type == BOOK_TYPE) {
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
 			     TRUE, t);
@@ -1814,6 +1840,12 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		be->display_mod->Display();
 		bible_apply_change = TRUE;
 	}
+	if(type == TEXT_TYPE)
+		main_dialogs_clear_viewer(t); 
+	
+	if(type == COMMENTARY_TYPE || type == TEXT_TYPE)
+		main_navbar_versekey_set(t->navbar, (char*)t->key);
+		
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	return t;

@@ -23,5 +23,6 @@
 #define ___NAVBAR_VERSEKEY_H_
 
 GtkWidget *gui_navbar_versekey_new(void);
+GtkWidget *gui_navbar_versekey_dialog_new(gpointer dialog);
 
 #endif
