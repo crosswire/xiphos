@@ -37,6 +37,7 @@
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/main_window.h"
+#include "gui/navbar_versekey.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
@@ -624,7 +625,7 @@ static void sync_with_main(DIALOG_DATA * c)
  *   void
  */
 
-static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
+void gui_bible_dialog_sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
 {
 	if (button->active) {
 		sync_with_main(c);
@@ -633,6 +634,7 @@ static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
 		c->sync = FALSE;
 }
 
+#ifdef OLD_NAVBAR
 void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
 	gchar *url = NULL;
@@ -753,7 +755,6 @@ void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 }
 
 
-
 /******************************************************************************
  * Name
  *   on_entry_activate
@@ -782,6 +783,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 	main_navbar_set(c->navbar, c->navbar.key);
 
 }
+#endif
 
 
 /******************************************************************************
@@ -802,6 +804,7 @@ static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 
 static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 {
+#ifdef OLD_NAVBAR
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
@@ -925,7 +928,11 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 			 G_CALLBACK(on_comboboxentry6_changed), c);
 	g_signal_connect((gpointer) c->navbar.lookup_entry, "activate",
 			 G_CALLBACK(on_entry_activate), c);
+			 
 	return hbox3;
+#else
+	return gui_navbar_versekey_dialog_new(c);
+#endif
 }
 
 
@@ -1950,7 +1957,7 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	 {
 	 GNOME_APP_UI_TOGGLEITEM, N_("Stay in sync"),
 	 NULL,
-	 (gpointer) sync_toggled, NULL, NULL,
+	 (gpointer) gui_bible_dialog_sync_toggled, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
