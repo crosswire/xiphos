@@ -29,7 +29,7 @@ extern "C" {
 	
 #include "main/module_dialogs.h"
 
-
+void gui_bible_dialog_sync_toggled(GtkToggleButton * button, DIALOG_DATA * c);
 void gui_create_bibletext_dialog(DIALOG_DATA * vt);
 void gui_text_dialog_create_menu(DIALOG_DATA * d);
 	
