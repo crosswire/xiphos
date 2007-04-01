@@ -274,9 +274,10 @@ void shutdown_frontend(void)
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
 	main_delete_paraellel_view();
-	
+#ifndef OLD_NAVBAR	
 	g_string_free(navbar_versekey.module_name,TRUE);
 	g_string_free(navbar_versekey.key,TRUE);
+#endif
 	
 #ifdef DEBUG	
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
