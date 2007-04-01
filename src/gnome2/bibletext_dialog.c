@@ -916,7 +916,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 			   TRUE, 0);
 
 	g_signal_connect(GTK_OBJECT(sync_button),
-			 "toggled", G_CALLBACK(sync_toggled), c);
+			 "toggled", G_CALLBACK(gui_bible_dialog_sync_toggled), c);
 	g_signal_connect((gpointer) c->navbar.comboboxentry_book,
 			 "changed",
 			 G_CALLBACK(on_comboboxentry4_changed), c);
