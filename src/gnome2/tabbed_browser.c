@@ -561,10 +561,12 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
 	//if(navbar_versekey.module_name)
 		//g_free(navbar_versekey.module_name);
+#ifndef OLD_NAVBAR
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,pt->text_mod);
 	//if(navbar_versekey.key)
 		//g_free(navbar_versekey.key);
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,pt->text_commentary_key);
+#endif
 	main_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
