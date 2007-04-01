@@ -274,7 +274,7 @@ static void sync_toggled(GtkToggleButton * button, gpointer data)
  * Return value
  *   void
  */
-#ifdef OLD_NAVBAR
+//#ifdef OLD_NAVBAR
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
 	
@@ -416,7 +416,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	g_free(verse);
 	g_free(buf);
 }
-#endif
+//#endif
 
 /******************************************************************************
  * Name
@@ -436,7 +436,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 
 static GtkWidget *create_nav_toolbar(void)
 {
-#ifdef OLD_NAVBAR
+//#ifdef OLD_NAVBAR
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
@@ -561,7 +561,7 @@ static GtkWidget *create_nav_toolbar(void)
 	g_signal_connect((gpointer) navbar.lookup_entry, "activate",
 			 G_CALLBACK(on_entry_activate), NULL);
 	return hbox3;
-#else
+/*#else
 	gchar *glade_file;
 	GladeXML *gxml;
 	
@@ -572,7 +572,7 @@ static GtkWidget *create_nav_toolbar(void)
 	g_message(glade_file);
 #endif
 
-	/* build the widget */
+	//* build the widget *
 	gxml = glade_xml_new(glade_file, "navbar", NULL);
 	navbar_parallel.dialog = FALSE;
 	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
@@ -599,7 +599,7 @@ static GtkWidget *create_nav_toolbar(void)
 	navbar_parallel.book_menu = gtk_menu_new();
 	navbar_parallel.chapter_menu = gtk_menu_new();
 	navbar_parallel.verse_menu = gtk_menu_new();
-	/*
+	
 	g_signal_connect((gpointer) navbar_parallel.lookup_entry,
 				 "activate", G_CALLBACK(on_entry_activate),
 				 NULL);
@@ -652,9 +652,9 @@ static GtkWidget *create_nav_toolbar(void)
 		    	 NULL);			 
 	g_signal_connect ((gpointer)navbar_parallel.button_book_menu , "scroll_event",
 		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
-		    	 NULL);*/
+		    	 NULL);
 	return navbar_parallel.navbar;
-#endif
+#endif*/
 }
 
 
