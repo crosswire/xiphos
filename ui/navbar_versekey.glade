@@ -35,7 +35,7 @@
 	  <child>
 	    <widget class="GtkToggleButton" id="togglebutton_sync">
 	      <property name="can_focus">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="relief">GTK_RELIEF_NONE</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="active">False</property>
 	      <property name="inconsistent">False</property>
@@ -177,7 +177,7 @@
 
 	      <child>
 		<widget class="GtkToggleButton" id="togglebutton_book">
-		  <property name="width_request">162</property>
+		  <property name="width_request">150</property>
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
 		  <property name="relief">GTK_RELIEF_NONE</property>
@@ -194,7 +194,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label_book">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">&lt;b&gt;John&lt;/b&gt;</property>
+			  <property name="label" translatable="yes">&lt;b&gt;Revelation of John&lt;/b&gt;</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
