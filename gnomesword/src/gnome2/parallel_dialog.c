@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <glade/glade-xml.h>
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include "main/embed.h"
@@ -36,11 +37,13 @@
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 #include "gui/gnomesword.h"
+#include "gui/utilities.h"
 #include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/navbar.h"
+#include "main/navbar_versekey.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -62,6 +65,7 @@ static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
 static GtkWidget *sync_button;
 static NAVBAR navbar;
+static NAVBAR_VERSEKEY navbar_parallel;
 
 static GtkWidget *create_parallel_dialog(void);
 static void sync_with_main(void);
@@ -270,7 +274,7 @@ static void sync_toggled(GtkToggleButton * button, gpointer data)
  * Return value
  *   void
  */
-
+#ifdef OLD_NAVBAR
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
 	
@@ -412,6 +416,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 	g_free(verse);
 	g_free(buf);
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -431,6 +436,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 
 static GtkWidget *create_nav_toolbar(void)
 {
+#ifdef OLD_NAVBAR
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
@@ -555,6 +561,100 @@ static GtkWidget *create_nav_toolbar(void)
 	g_signal_connect((gpointer) navbar.lookup_entry, "activate",
 			 G_CALLBACK(on_entry_activate), NULL);
 	return hbox3;
+#else
+	gchar *glade_file;
+	GladeXML *gxml;
+	
+	glade_file =
+		    gui_general_user_file("navbar_versekey.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
+	g_message(glade_file);
+#endif
+
+	/* build the widget */
+	gxml = glade_xml_new(glade_file, "navbar", NULL);
+	navbar_parallel.dialog = FALSE;
+	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
+	navbar_parallel.key =  g_string_new(settings.currentverse);
+	
+	navbar_parallel.navbar = glade_xml_get_widget(gxml, "navbar");
+	
+	navbar_parallel.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
+	navbar_parallel.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
+	navbar_parallel.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
+	navbar_parallel.button_book_up = glade_xml_get_widget(gxml, "button_book2");
+	navbar_parallel.button_book_down = glade_xml_get_widget(gxml, "button_book1");
+	navbar_parallel.button_chapter_up = glade_xml_get_widget(gxml, "button_chapter2");
+	navbar_parallel.button_chapter_down = glade_xml_get_widget(gxml, "button_chapter1");
+	navbar_parallel.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
+	navbar_parallel.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
+	navbar_parallel.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
+	navbar_parallel.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
+	navbar_parallel.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
+	navbar_parallel.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
+	navbar_parallel.label_book_menu = glade_xml_get_widget(gxml, "label_book");
+	navbar_parallel.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
+	navbar_parallel.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+	navbar_parallel.book_menu = gtk_menu_new();
+	navbar_parallel.chapter_menu = gtk_menu_new();
+	navbar_parallel.verse_menu = gtk_menu_new();
+	/*
+	g_signal_connect((gpointer) navbar_parallel.lookup_entry,
+				 "activate", G_CALLBACK(on_entry_activate),
+				 NULL);
+		
+	g_signal_connect((gpointer) navbar_parallel.button_book_up,
+			 "clicked", G_CALLBACK(on_book_button_up_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_book_down,
+			 "clicked", G_CALLBACK(on_book_button_down_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_chapter_up,
+			 "clicked", G_CALLBACK(on_chapter_button_up_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_chapter_down,
+			 "clicked", G_CALLBACK(on_chapter_button_down_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_verse_up,
+			 "clicked", G_CALLBACK(on_verse_button_up_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_verse_down,
+			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_history_back,
+			 "clicked", G_CALLBACK(on_button_history_back_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_history_next,
+			 "clicked", G_CALLBACK(on_button_history_next_clicked),
+			 NULL);
+	g_signal_connect((gpointer) navbar_parallel.button_history_menu,
+			 "button_press_event",
+			 G_CALLBACK(select_button_press_callback), 
+			 GINT_TO_POINTER(HISTORY_BUTTON));
+	g_signal_connect((gpointer) navbar_parallel.button_book_menu,
+			 "button_press_event",
+			 G_CALLBACK(select_button_press_callback), 
+			 GINT_TO_POINTER(BOOK_BUTTON));
+	g_signal_connect((gpointer) navbar_parallel.button_chapter_menu,
+			 "button_press_event",
+			 G_CALLBACK(select_button_press_callback), 
+			 GINT_TO_POINTER(CHAPTER_BUTTON));
+	g_signal_connect((gpointer) navbar_parallel.button_verse_menu,
+			 "button_press_event",
+			 G_CALLBACK(select_button_press_callback), 
+			 GINT_TO_POINTER(VERSE_BUTTON));			 
+	g_signal_connect ((gpointer)navbar_parallel.button_verse_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
+		    	 NULL);			 
+	g_signal_connect ((gpointer)navbar_parallel.button_chapter_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
+		    	 NULL);			 
+	g_signal_connect ((gpointer)navbar_parallel.button_book_menu , "scroll_event",
+		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
+		    	 NULL);*/
+	return navbar_parallel.navbar;
+#endif
 }
 
 
