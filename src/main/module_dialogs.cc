@@ -1828,10 +1828,10 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	}
 	if(type == TEXT_TYPE)
 		main_dialogs_clear_viewer(t); 
-	
+#ifndef OLD_NAVBAR	
 	if(type == COMMENTARY_TYPE || type == TEXT_TYPE)
 		main_navbar_versekey_set(t->navbar, (char*)t->key);
-		
+#endif		
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	return t;
