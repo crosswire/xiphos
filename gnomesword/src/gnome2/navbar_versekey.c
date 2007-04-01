@@ -54,7 +54,7 @@ NAVBAR_VERSEKEY navbar_versekey;
 
 extern PASSAGE_TAB_INFO *cur_passage_tab;
 
-
+#ifndef OLD_NAVBAR
 /******************************************************************************
  * Name
  *   on_verse_button_up_clicked
@@ -878,3 +878,4 @@ GtkWidget *gui_navbar_versekey_dialog_new(gpointer d)
 	return dialog->navbar.navbar;
 	
 }
+#endif

@@ -274,13 +274,14 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 {
 	VerseKey vkey;
 	char book = GPOINTER_TO_INT(user_data);
-	
+#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	vkey = (c_dialog)? c_dialog->navbar.key->str:navbar_versekey.key->str;
 	vkey.Testament(0);
 	vkey.Book(book+1);
 	gtk_entry_set_text(GTK_ENTRY((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry),vkey.getText());
 	gtk_widget_activate((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry);
+#endif
 }
 
 
@@ -307,11 +308,13 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey vkey;
 	char chapter = GPOINTER_TO_INT(user_data);
 		
+#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	vkey = (c_dialog)? c_dialog->navbar.key->str:navbar_versekey.key->str;
 	vkey.Chapter(chapter);
 	gtk_entry_set_text(GTK_ENTRY((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry),vkey.getText());
 	gtk_widget_activate((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry);
+#endif
 }
 
 
@@ -338,11 +341,13 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	VerseKey vkey;
 	char verse = GPOINTER_TO_INT(user_data);
 	
+#ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
 	vkey = (c_dialog)? c_dialog->navbar.key->str:navbar_versekey.key->str;
 	vkey.Verse(verse);
 	gtk_entry_set_text(GTK_ENTRY((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry),vkey.getText());
 	gtk_widget_activate((c_dialog)? c_dialog->navbar.lookup_entry:navbar_versekey.lookup_entry);
+#endif
 }
 
 
