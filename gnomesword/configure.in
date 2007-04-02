@@ -140,6 +140,9 @@ if test "x$cygwin" = xno; then
 	AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
 	AM_CONDITIONAL(USE_GTKMOZEMBED, true)
 	gecko=yes  
+	MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $MOZILLA-gtkmozembed`"
+	AC_SUBST(MOZILLA_HOME)
+
   dnl ====================================
   dnl Gnome-doc-utils
   dnl ====================================
