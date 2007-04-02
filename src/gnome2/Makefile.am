@@ -66,6 +66,8 @@ else
     LIB_GECKO=
 endif 
 
+gnomesword2_LDFLAGS = -R$(MOZILLA_HOME)
+
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/editor/libeditor.a \
