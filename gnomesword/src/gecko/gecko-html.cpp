@@ -26,6 +26,8 @@
 
 #include <swmgr.h>
 #include <swmodule.h>
+#include <url.h>
+#include <swbuf.h>
 
 #include "backend/sword_main.hh"
 
@@ -112,7 +114,7 @@ static void html_link_message(GtkMozEmbed * embed)
 	gchar *url = gtk_moz_embed_get_link_message(embed);
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
-	
+	    
 	/*
 #ifdef DEBUG
 	g_message(url);
@@ -155,7 +157,7 @@ static void html_link_message(GtkMozEmbed * embed)
 			}
 			
 		} else {
-			if(main_url_handler(url_clean->str, FALSE)) {	
+			if(main_url_handler_gecko(url_clean->str)) {	
 				g_string_free(url_clean, TRUE);	
 				return;
 			}
@@ -168,8 +170,7 @@ static void html_link_message(GtkMozEmbed * embed)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else /* any other link */
 			sprintf(buf, "%s", "");
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					buf);
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
 
@@ -177,12 +178,13 @@ static void html_link_message(GtkMozEmbed * embed)
 static 
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
-	GeckoHtml *html = GECKO_HTML(embed);
+	/*GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	return html->priv->yelper->ProcessMouseOver(dom_event, 
 						    priv->pane,
 						    priv->is_dialog,
-						    priv->dialog);
+						    priv->dialog);*/
+    return 0;
 }
 
 static
