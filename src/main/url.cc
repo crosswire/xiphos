@@ -264,6 +264,9 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 #endif
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
+#ifdef DEBUG 
+		g_print("description = %s\n",description);
+#endif
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					description);
 	}
@@ -287,26 +290,26 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  *   gint
  */
  
- static gint show_parallel(const gchar * value, const gchar * type, 
+ static gint show_parallel(const gchar * svalue, const gchar * stype, 
 							gboolean clicked)
 {
-	if(!strcmp(type,"swap")) {
+	if(!strcmp(stype,"swap")) {
 		if(clicked) {
-			main_swap_parallel_with_main((gchar *) value);		
+			main_swap_parallel_with_main((gchar *) svalue);		
 		} else {
 			gchar *buf = g_strdup_printf( 
-				_("Show %s in main window"), value);
+				_("Show %s in main window"), svalue);
 			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 						buf);
 			g_free(buf);
 		}
 	}
-	if(!strcmp(type,"verse")) {
+	if(!strcmp(stype,"verse")) {
 		if(clicked) {
 			settings.cvparallel = 
-				main_parallel_update_controls(value);
+				main_parallel_update_controls(svalue);
 			main_update_parallel_page_detached();
-			gui_set_parallel_navbar((char*)value);
+			gui_set_parallel_navbar((char*)svalue);
 		} 
 	}
 	return 1;
@@ -329,15 +332,15 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  *   gint
  */
  
- static gint show_morph(const gchar * type, const gchar * value, 
+ static gint show_morph(const gchar * stype, const gchar * svalue, 
 				gboolean clicked)
 {	
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	
-	if (!strcmp(type,"Greek") ||
-	     strstr(type,"x-Robinson") ||
-	     strstr(type,"robinson")) {
+	if (!strcmp(stype,"Greek") ||
+	     strstr(stype,"x-Robinson") ||
+	     strstr(stype,"robinson")) {
 		if (backend->get_key_testament(settings.currentverse) == 2) {
 			if (backend->is_module("Robinson")) 
 				modbuf = "Robinson";
@@ -347,15 +350,15 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		}
 	}
 	if (clicked) {
-		main_display_dictionary(modbuf, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)svalue);		
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text(modbuf, (gchar*)svalue);
 		if (mybuf) {
 			main_information_viewer(modbuf,
 					mybuf,
-					(gchar*)value,
+					(gchar*)svalue,
 					"showMorph",
-					(gchar*)type,
+					(gchar*)stype,
 					NULL,
 					NULL);
 			g_free(mybuf);
@@ -382,7 +385,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  *   gint
  */ 
  
-static gint show_strongs(const gchar * type, const gchar * value, 
+static gint show_strongs(const gchar * stype, const gchar * svalue, 
 			gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
@@ -391,11 +394,11 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	gchar *val = NULL;
 	gchar *val1 = NULL;
 	gchar *val2 = NULL;
-	gchar *buf = g_new(gchar,strlen(value));
+	gchar *buf = g_new(gchar,strlen(svalue));
 	guint delay;	
 	guint i;	
 	
-	val = g_strdup(value);
+	val = g_strdup(svalue);
 #ifdef DEBUG 
 	g_message("buf len = %d",strlen(buf));
 #endif
@@ -405,28 +408,28 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	}*/
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
-		if(!strcmp(type,"Greek")) 
+		if(!strcmp(stype,"Greek")) 
 			modbuf = "NasbGreek";
 		else 
 			modbuf = "NasbHebrew";
 	} else {
-		if(!strcmp(type,"Greek")) 
+		if(!strcmp(stype,"Greek")) 
 			modbuf = settings.lex_greek;
 		else  
 			modbuf = settings.lex_hebrew;
 	}
 	
 	if (clicked) {
-		main_display_dictionary(modbuf, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)svalue);		
 	} else {
-		mybuf = main_get_rendered_text(modbuf, (gchar*)value);
+		mybuf = main_get_rendered_text(modbuf, (gchar*)svalue);
 		if (mybuf) {
 			main_information_viewer(  
 					modbuf, 
 					mybuf, 
-					(gchar*)value, 
+					(gchar*)svalue, 
 					"showStrongs",
-					(gchar*)type,
+					(gchar*)stype,
 					NULL,
 					NULL);
 			g_free(mybuf);
@@ -454,7 +457,7 @@ static gint show_strongs(const gchar * type, const gchar * value,
  *   gint
  */ 
  
-static gint show_strongs_morph(const gchar * type, const gchar * value, 
+static gint show_strongs_morph(const gchar * stype, const gchar * svalue, 
 			 const gchar * morph, gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
@@ -467,19 +470,19 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	guint delay;	
 	guint i;	
 	gchar *buf = NULL;
-	gchar *val = g_new(gchar,strlen(value));
+	gchar *val = g_new(gchar,strlen(svalue));
 	gchar *val2 = NULL;
 	//gboolean realstrongs;
 	
 	
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
-		if(!strcmp(type,"Greek")) 
+		if(!strcmp(stype,"Greek")) 
 			modbuf = "NasbGreek";
 		else 
 			modbuf = "NasbHebrew";
 	} else {
-		if(!strcmp(type,"Greek")) {
+		if(!strcmp(stype,"Greek")) {
 			modbuf = settings.lex_greek;
 			if(backend->is_module("Robinson")) 
 				morph_mod = "Robinson";
@@ -489,17 +492,17 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 			//realstrongs = (!strcmp(modbuf,"StrongsRealHebrew"));
 		}
 	}
-	buf = g_strdup(value);
+	buf = g_strdup(svalue);
 	//g_message("buf len = %d",strlen(buf));
 	if(strchr(buf,'|')) {
 		//g_message("buf = %s", buf);
-		gint valuelen = strlen(value);
+		gint valuelen = strlen(svalue);
 		for (i = 0; i < valuelen; i++) {
-			if(value[i] == '|') {
+			if(svalue[i] == '|') {
 				val[i] = '\0';
 				break;
 			}
-			val[i] = value[i];
+			val[i] = svalue[i];
 		}
 		val2 = strchr(buf,'|');
 		++val2;
@@ -507,7 +510,7 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 					main_get_rendered_text(modbuf, (gchar*)val),
 					main_get_rendered_text(modbuf, (gchar*)val2));
 	} else { 
-		strongs_buf = main_get_rendered_text(modbuf, (gchar*)value);
+		strongs_buf = main_get_rendered_text(modbuf, (gchar*)svalue);
 	}
 	
 	// morph stuff
@@ -546,16 +549,16 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	}
 	
 	if (clicked) {
-		main_display_dictionary(modbuf, (gchar*)value);		
+		main_display_dictionary(modbuf, (gchar*)svalue);		
 	} else {
 		//morph_buf = main_get_rendered_text(morph_mod, (gchar*)morph);
 		if (strongs_buf) {
 			main_information_viewer(  
 					modbuf, 
 					strongs_buf, 
-					(gchar*)value, 
+					(gchar*)svalue, 
 					"showStrongsMorph",
-					(gchar*)type,
+					(gchar*)stype,
 					(gchar*)morph_buf,
 					(gchar*)morph);
 		}
@@ -585,7 +588,7 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
  */
  
 static gint show_note(const gchar * module, const gchar * passage, 
-		const gchar * type, const gchar * value, gboolean clicked)
+		const gchar * stype, const gchar * svalue, gboolean clicked)
 {	
 	gchar *tmpbuf = NULL;
 	gchar *buf = NULL;
@@ -603,10 +606,10 @@ static gint show_note(const gchar * module, const gchar * passage,
 	if(passage && (strlen(passage) < 5))
 		passage = settings.currentverse;
 	
-	if(strstr(type,"x") && clicked) {
+	if(strstr(stype,"x") && clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);
 		tmpbuf = backend->get_entry_attribute("Footnote",
-							 (gchar*)value,
+							 (gchar*)svalue,
 							"refList");
 		if (tmpbuf) {
 			main_display_verse_list_in_sidebar(settings.
@@ -615,27 +618,27 @@ static gint show_note(const gchar * module, const gchar * passage,
 					  tmpbuf);
 			g_free(tmpbuf);
 		}
-	} else if(strstr(type,"n") && !clicked) {
+	} else if(strstr(stype,"n") && !clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);		
 		tmpbuf = backend->get_entry_attribute("Footnote",
-						(gchar*)value,
+						(gchar*)svalue,
 						"body");		
 		buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
 		if(tmpbuf) g_free(tmpbuf);	
 		if (buf) {
 			main_information_viewer((gchar*)module, 
 					buf, 
-					(gchar*)value,
+					(gchar*)svalue,
 					"showNote",			
-					(gchar*)type,
+					(gchar*)stype,
 					NULL,
 					NULL);
 			if(buf) g_free(buf);	
 		}			
-	} else if(strstr(type,"x") && !clicked) {
+	} else if(strstr(stype,"x") && !clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);		
 		tmpbuf = backend->get_entry_attribute("Footnote",
-						(gchar*)value,
+						(gchar*)svalue,
 						"refList");
 		
 		
@@ -685,9 +688,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 		if (str) {
 			main_information_viewer((gchar*)module, 
 					str->str, 
-					(gchar*)value,
+					(gchar*)svalue,
 					"showNote",			
-					(gchar*)type,
+					(gchar*)stype,
 					NULL,
 					NULL);
 		}			
@@ -747,7 +750,7 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
  */
 
 static int show_module_and_key(const char * module, const char * key, 
-					const char * type, gboolean clicked)
+					const char * stype, gboolean clicked)
 {
 	gchar *buf = NULL;
 	gchar *tmpkey = NULL;
@@ -765,12 +768,12 @@ static int show_module_and_key(const char * module, const char * key,
 	}
 	
 	if(backend->is_module(module)) {
-		if(!strcmp(type,"newTab")) {
+		if(!strcmp(stype,"newTab")) {
 			main_open_bookmark_in_new_tab((gchar*)module, 
 					(gchar*)key);
 			return 1;
 		}
-		if(!strcmp(type,"newDialog"))  {
+		if(!strcmp(stype,"newDialog"))  {
 #ifdef USE_GTKHTML38
 			if(module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
 				editor_create_new(module,key,TRUE);
@@ -950,9 +953,10 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 
 gint main_url_handler(const gchar * url, gboolean clicked)
 {
+	gchar* url_work = g_strdup(url);;
 	gchar* action = NULL;
-	gchar* type = NULL;
-	gchar* value = NULL;
+	gchar* stype = NULL;
+	gchar* svalue = NULL;
 	gchar* module = NULL;
 	gchar* passage = NULL;
 	gchar* morph = NULL;
@@ -964,10 +968,12 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	g_message("main_url_handler()");
 	g_message("url = %s", url);
 #endif
+	g_message("main_url_handler()");
+	g_message("url = %s", url);
 
-	if (strstr(url, "sword://") ||
-	    strstr(url, "book://")  ||
-	    strstr(url, "chapter://")) {
+	if (strstr(url_work, "sword://") ||
+	    strstr(url_work, "book://")  ||
+	    strstr(url_work, "chapter://")) {
 		// handle `+' space substitutions and %xx encodings.
 		int retval;
 		GString *url_clean = g_string_new(NULL);
@@ -975,7 +981,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		char hex_template[] = { '0', '0', '\0' };
 		unsigned long from_hex;
 
-		for (url_chase = url; *url_chase; ++url_chase) {
+		for (url_chase = url_work; *url_chase; ++url_chase) {
 			switch (*url_chase) {
 			case '+':
 				g_string_append_c(url_clean, ' ');
@@ -1009,50 +1015,48 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		g_string_free(url_clean, TRUE);
 		return retval;
 	}
-
-	if (strstr(url, "passagestudy.jsp") ||
-	    strstr(url, "gnomesword.url")) {
+	if (strstr(url_work, "passagestudy.jsp") ||
+	    strstr(url_work, "gnomesword.url")) {
 		/* passagestudy.jsp?action=showStrongs&type= */
-		m_url = new URL((const char*)url);
+		m_url = new URL((const char*)url_work);
 		action = g_strdup(m_url->getParameterValue("action"));
-		type = g_strdup((gchar*)m_url->getParameterValue("type"));
-		value = g_strdup((gchar*)m_url->getParameterValue("value"));
 		morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
+		stype = g_strdup((gchar*)m_url->getParameterValue("type"));
+		svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 
 #ifdef DEBUG
 		g_message("action = %s", action);
-		g_message("type = %s", type);
-		g_message("value = %s", value);
+		g_message("type = %s", stype);
+		g_message("value = %s", svalue);
 		g_message("strongs = %s", strongs);
 		g_message("morph = %s", morph);
 #endif
-
-		if (strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
-			show_strongs_morph(type, strongs, morph, clicked);
-		} else if (strlen(strongs) >= 1 && strlen(morph) < 1) {
-			show_strongs(type, strongs, clicked);
+		if (!strcmp(action, "showStrongs")) {
+			stype = g_strdup((gchar*)m_url->getParameterValue("type"));
+			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+			show_strongs(stype, svalue, clicked);
 		}
 
-		if (!strcmp(action, "showStrongs"))
-			show_strongs(type, value, clicked);
-
-		else if (!strcmp(action, "showMorph"))
-			show_morph(type, value, clicked);
+		else if (!strcmp(action, "showMorph")) {
+			stype = g_strdup((gchar*)m_url->getParameterValue("type"));
+			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
+			show_morph(stype, svalue, clicked);
+		}
 
 		else if (!strcmp(action, "showNote")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
-			show_note(module, passage, type, value, clicked);
+			show_note(module, passage, stype, svalue, clicked);
 			if (module) g_free(module);
 			if (passage) g_free(passage);
 		}
 
 		else if (!strcmp(action, "showRef")) {
 			module = g_strdup(m_url->getParameterValue("module"));
-			if (!strcmp(type, "scripRef"))
-				show_ref(module, value, clicked);
-			if (!strcmp(type, "swordURL")) {
+			if (!strcmp(stype, "scripRef"))
+				show_ref(module, svalue, clicked);
+			if (!strcmp(stype, "swordURL")) {
 				// do nothing?
 			}
 			if (module)
@@ -1061,37 +1065,146 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 
 		else if (!strcmp(action, "showBookmark")) {
 			module = g_strdup(m_url->getParameterValue("module"));
-			show_module_and_key(module, value, type, clicked);
+			show_module_and_key(module, svalue, stype, clicked);
 			if (module) g_free(module);
 		}
 
 		else if (!strcmp(action, "showModInfo")) {
+			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 			module = g_strdup(m_url->getParameterValue("module"));
-			show_mod_info(module, value, clicked);
+			show_mod_info(module, svalue, clicked);
 			if (module) g_free(module);
 		}
 
 		else if (!strcmp(action, "showParallel")) {
-			show_parallel(value, type, clicked);
+			show_parallel(svalue, stype, clicked);
 		}
 
 		else if (!strcmp(action, "showStudypad")) {
-			show_studypad(value, clicked);
+			show_studypad(svalue, clicked);
 		}
 
 		else if (!strcmp(action, "showImage")) {
-			show_separate_image(value+5, clicked);	// skip "file:"
+			show_separate_image(svalue+5, clicked);	// skip "file:"
 		}
 
 		if (action) g_free(action);
-		if (type) g_free(type);
-		if (value) g_free(value);
+		if (stype) g_free(stype);
+		if (svalue) g_free(svalue);
 		if (strongs) g_free(strongs);
 		if (morph) g_free(morph);
+		if(url_work) g_free(url_work);
 		delete m_url;
 		return 1;
 	}
+
 	return 0;
+}
+
+
+/******************************************************************************
+ * Name
+ *	main_url_handler_gecko
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *	gint main_url_handler_gecko(const gchar * url)
+ *
+ * Description
+ *	
+ *
+ * Return value
+ *	gint
+ */
+
+gint main_url_handler_gecko(const gchar * url)
+{
+	gchar* url_work = g_strdup(url);;
+	
+	if (strstr(url_work, "passagestudy.jsp") ||
+	    strstr(url_work, "gnomesword.url")) {
+		gchar* action = NULL;
+		gchar* stype = NULL;
+		gchar* svalue = NULL;
+		gchar* module = NULL;
+		gchar* passage = NULL;
+		gchar **work_buf = NULL;       
+
+		if((action = g_strstr_len(url_work, 40, "action")) == NULL)
+			return 0;
+		 
+		work_buf = g_strsplit (action,"&",6);	
+			
+		g_message("action = %s", work_buf[0]);
+		if(strstr(action, "showStrongs")) {
+			if(strstr(work_buf[1],"Greek")) 
+				stype = "Greek";
+			else
+				stype = "Hebrew";
+			svalue = strstr(work_buf[2],"=");
+			++svalue;
+			g_message("type = %s", stype);
+			g_message("value = %s", svalue);
+			
+			show_strongs(stype, svalue, FALSE);
+			
+		}
+		if(strstr(action, "showMorph")) {
+			if(strstr(work_buf[1],"robinson")) 
+				stype = "robinson";
+			else
+				stype = "packard";
+			svalue = strstr(work_buf[2],"=");
+			++svalue;
+			g_message("type = %s", stype);
+			g_message("value = %s", svalue);
+			show_morph(stype, svalue, FALSE);
+		}
+		if(strstr(action, "showModInfo")) {
+			svalue = strstr(work_buf[1],"=");
+			++svalue;
+			module = strstr(work_buf[2],"=");
+			++module;
+			g_message("module = %s", module);
+			g_message("svalue = %s", svalue);
+			show_mod_info(module, svalue, FALSE);
+		}
+		if(strstr(action, "showNote")) {
+			stype = strstr(work_buf[1],"=");
+			++stype;
+			svalue = strstr(work_buf[2],"=");
+			++svalue;
+			module = strstr(work_buf[3],"=");
+			++module;
+			passage = strstr(work_buf[4],"=");
+			++passage;
+			for(int i = 0; i < strlen(passage); i++) {
+				if(passage[i] == '+') passage[i] = ' ';
+			}
+			show_note(module, passage, stype, svalue, FALSE);
+		}
+			
+		if(strstr(action, "showRef")) {
+				stype = strstr(work_buf[1],"=");
+				++stype;
+				svalue = strstr(work_buf[2],"=");
+				++svalue;
+				for(int i = 0; i < strlen(svalue); i++) {
+					if(svalue[i] == '+') svalue[i] = ' ';
+				}
+				module = strstr(work_buf[3],"=");
+				if(module) ++module;
+				if (!strcmp(stype, "scripRef"))
+					show_ref(module, svalue, FALSE);
+		}
+		/*if(work_buf[1]) g_message("work_buf[1] = %s", work_buf[1]);
+		if(work_buf[2]) g_message("work_buf[2] = %s", work_buf[2]);
+		if(work_buf[3]) g_message("work_buf[3] = %s", work_buf[3]);
+		if(work_buf[4]) g_message("work_buf[4] = %s", work_buf[4]);*/
+		g_strfreev (work_buf);
+		g_free(url_work);
+	}
 }
 
 
