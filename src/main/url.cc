@@ -968,8 +968,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	g_message("main_url_handler()");
 	g_message("url = %s", url);
 #endif
-	g_message("main_url_handler()");
-	g_message("url = %s", url);
 
 	if (strstr(url_work, "sword://") ||
 	    strstr(url_work, "book://")  ||
@@ -1136,7 +1134,9 @@ gint main_url_handler_gecko(const gchar * url)
 		 
 		work_buf = g_strsplit (action,"&",6);	
 			
+#ifdef DEBUG
 		g_message("action = %s", work_buf[0]);
+#endif
 		if(strstr(action, "showStrongs")) {
 			if(strstr(work_buf[1],"Greek")) 
 				stype = "Greek";
@@ -1144,11 +1144,11 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "Hebrew";
 			svalue = strstr(work_buf[2],"=");
 			++svalue;
+#ifdef DEBUG
 			g_message("type = %s", stype);
 			g_message("value = %s", svalue);
-			
+#endif
 			show_strongs(stype, svalue, FALSE);
-			
 		}
 		if(strstr(action, "showMorph")) {
 			if(strstr(work_buf[1],"robinson")) 
@@ -1157,8 +1157,10 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "packard";
 			svalue = strstr(work_buf[2],"=");
 			++svalue;
+#ifdef DEBUG
 			g_message("type = %s", stype);
 			g_message("value = %s", svalue);
+#endif
 			show_morph(stype, svalue, FALSE);
 		}
 		if(strstr(action, "showModInfo")) {
@@ -1166,8 +1168,10 @@ gint main_url_handler_gecko(const gchar * url)
 			++svalue;
 			module = strstr(work_buf[2],"=");
 			++module;
+#ifdef DEBUG
 			g_message("module = %s", module);
 			g_message("svalue = %s", svalue);
+#endif
 			show_mod_info(module, svalue, FALSE);
 		}
 		if(strstr(action, "showNote")) {
