@@ -1,3 +1,8 @@
+2007-04-07  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #1695949 ] Gnomesword crashes on startup: segfault in backend -
+	  applied patch from maurerpe.
+
 2007-03-31  terry <tbiggs@users.sourceforge.net>
 
 	* added new navbar to bible and commentary dialogs
