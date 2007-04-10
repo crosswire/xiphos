@@ -1115,7 +1115,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
  * Return value
  *	gint
  */
-
+/*
 gint main_url_handler_gecko(const gchar * url)
 {
 	gchar* url_work = g_strdup(url);;
@@ -1202,15 +1202,11 @@ gint main_url_handler_gecko(const gchar * url)
 				if (!strcmp(stype, "scripRef"))
 					show_ref(module, svalue, FALSE);
 		}
-		/*if(work_buf[1]) g_message("work_buf[1] = %s", work_buf[1]);
-		if(work_buf[2]) g_message("work_buf[2] = %s", work_buf[2]);
-		if(work_buf[3]) g_message("work_buf[3] = %s", work_buf[3]);
-		if(work_buf[4]) g_message("work_buf[4] = %s", work_buf[4]);*/
 		g_strfreev (work_buf);
 		g_free(url_work);
 	}
 }
-
+*/
 
 /******************************************************************************
  * Name

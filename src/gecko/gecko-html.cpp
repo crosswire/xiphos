@@ -107,27 +107,28 @@ static gint html_dom_mouse_up(GtkMozEmbed * embed, gpointer dom_event)
 	return html->priv->yelper->ProcessMouseUpEvent(dom_event);
 }
 
-
+/*
 static void html_link_message(GtkMozEmbed * embed)
 {
+	return;
 	gchar buf[500];
 	gchar *url = gtk_moz_embed_get_link_message(embed);
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	    
-	/*
+	
 #ifdef DEBUG
 	g_message(url);
 #endif	
-	*/
+	
 	if(shift_key_presed)
 		return;
 	
-	if (!strlen(url)) { /* moved out of url - clear appbar - info viewer*/
+	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
-		/*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
-			main_clear_viewer();*/
+		//*if(GPOINTER_TO_INT(data) == TEXT_TYPE)
+		//	main_clear_viewer();*
 	} else {		
 		GString *url_clean = g_string_new(NULL);
 		const gchar *url_chase;
@@ -149,7 +150,7 @@ static void html_link_message(GtkMozEmbed * embed)
 #ifdef DEBUG
 		g_message("\nurl:        %s\nurl_clean: %s",url,url_clean->str);
 #endif	
-		in_url = TRUE;	/* we need this for html_button_released */
+		in_url = TRUE;	//* we need this for html_button_released *
 		if(priv->is_dialog) {
 			if(main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {	
 				g_string_free(url_clean, TRUE);	
@@ -168,23 +169,22 @@ static void html_link_message(GtkMozEmbed * embed)
 		} else if (*url == 'U') {
 			++url;
 			sprintf(buf, "%s %s", _("Unlock "), url);
-		} else /* any other link */
+		} else //* any other link *
 			sprintf(buf, "%s", "");
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
-
+*/
 
 static 
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
-	/*GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	return html->priv->yelper->ProcessMouseOver(dom_event, 
 						    priv->pane,
 						    priv->is_dialog,
-						    priv->dialog);*/
-    return 0;
+						    priv->dialog);
 }
 
 static
@@ -347,7 +347,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
-	moz_embed_class->link_message = html_link_message;
+	//moz_embed_class->link_message = html_link_message; //using mouse over 
 	moz_embed_class->dom_key_down = html_dom_key_down;
 	moz_embed_class->dom_key_up = html_dom_key_up;
 	klass->font_handler = 0;
