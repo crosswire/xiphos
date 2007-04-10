@@ -347,6 +347,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	g_message("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length());
 #endif
 #ifdef USE_GTKMOZEMBED
+	
+	
 	if (swbuf.length())
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
@@ -1429,6 +1431,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gboolean newparagraph = FALSE;	
 #ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
@@ -1471,6 +1474,9 @@ char DialogChapDisp::Display(SWModule &imodule)
 			settings.bible_bg_color,
 			settings.bible_text_color,
 			settings.link_color);
+	
+	gecko_html_write(html, str->str, str->len);
+	str = g_string_erase(str, 0, -1);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
@@ -1587,14 +1593,16 @@ char DialogChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
 		    str = g_string_append(str, ("</td></tr></table>"));
+		gecko_html_write(html, str->str, str->len);
+		str = g_string_erase(str, 0, -1);
 	}
+	str = g_string_erase(str, 0, -1);
 	buf = g_strdup_printf("%s", "</body></html>");
 	str = g_string_append(str, buf);
 	g_free(buf);
 	
 #ifdef USE_GTKMOZEMBED
 	if (str->len) {
-		gecko_html_open_stream(html,"text/html");
 		gecko_html_write(html, str->str, str->len);
 		gecko_html_close(html); 
 		if (curVerse > display_boundary) {
