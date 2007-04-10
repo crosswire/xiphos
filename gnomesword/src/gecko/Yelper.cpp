@@ -338,7 +338,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 #ifdef DEBUG
 		g_message("pane: %d",pane);
 #endif
-	main_clear_viewer();
+	//main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
@@ -371,19 +371,35 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	OriginalNode->GetNodeName(node_name);
 	//gchar mybuf[80];
 	//node_name.ToCString( mybuf, 12);
-	if(node_name.EqualsIgnoreCase("span")) {
+	//g_message("node name: %s", mybuf);
+	if(node_name.EqualsIgnoreCase("a")) {
 		PRBool _retval;
 		OriginalNode->HasAttributes(&_retval);
 		if(_retval) {
-			gchar *tmp = GetAttribute(OriginalNode,"sword_url");
+			gchar *tmp = GetAttribute(OriginalNode,"href");
 			if (tmp && strlen(tmp)) {
-				if(is_dialog) {
-					//g_message("is_dialog = true");
-					main_dialogs_url_handler(dialog, tmp, FALSE);
-				} else {
-					//g_message("is_dialog = false");
-					main_url_handler(tmp,FALSE);
+				GString *url_clean = g_string_new(NULL);
+				const gchar *url_chase;
+				int i = 0;
+				for (url_chase = tmp; *url_chase; ++url_chase) {
+					switch (*url_chase) {
+					case '/':
+						if(i > 2)
+							g_string_append(url_clean, "%2F");
+						else
+							g_string_append_c(url_clean, *url_chase);
+						++i;
+						break;
+					default:
+							g_string_append_c(url_clean, *url_chase);
+						break;
+					}
 				}
+				if(is_dialog) 
+					main_dialogs_url_handler(dialog, url_clean->str, FALSE);
+				else 
+					main_url_handler(url_clean->str, FALSE);
+				g_string_free(url_clean, TRUE);	
 				g_free(tmp);
 			}
 		}
