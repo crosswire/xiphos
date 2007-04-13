@@ -107,10 +107,9 @@ static gint html_dom_mouse_up(GtkMozEmbed * embed, gpointer dom_event)
 	return html->priv->yelper->ProcessMouseUpEvent(dom_event);
 }
 
-/*
+
 static void html_link_message(GtkMozEmbed * embed)
 {
-	return;
 	gchar buf[500];
 	gchar *url = gtk_moz_embed_get_link_message(embed);
 	GeckoHtml *html = GECKO_HTML(embed);
@@ -118,7 +117,7 @@ static void html_link_message(GtkMozEmbed * embed)
 	    
 	
 #ifdef DEBUG
-	g_message(url);
+	g_message("html_link_message: url = %s",url);
 #endif	
 	
 	if(shift_key_presed)
@@ -174,17 +173,18 @@ static void html_link_message(GtkMozEmbed * embed)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	}
 }
-*/
+
 
 static 
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
-	GeckoHtml *html = GECKO_HTML(embed);
+/*	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	return html->priv->yelper->ProcessMouseOver(dom_event, 
 						    priv->pane,
 						    priv->is_dialog,
-						    priv->dialog);
+						    priv->dialog);*/
+	return 0;
 }
 
 static
@@ -347,7 +347,7 @@ static void html_class_init(GeckoHtmlClass * klass)
 	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
 	moz_embed_class->open_uri = html_open_uri;
-	//moz_embed_class->link_message = html_link_message; //using mouse over 
+	moz_embed_class->link_message = html_link_message;  
 	moz_embed_class->dom_key_down = html_dom_key_down;
 	moz_embed_class->dom_key_up = html_dom_key_up;
 	klass->font_handler = 0;
