@@ -1115,7 +1115,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
  * Return value
  *	gint
  */
-/*
+
 gint main_url_handler_gecko(const gchar * url)
 {
 	gchar* url_work = g_strdup(url);;
@@ -1186,6 +1186,10 @@ gint main_url_handler_gecko(const gchar * url)
 			for(int i = 0; i < strlen(passage); i++) {
 				if(passage[i] == '+') passage[i] = ' ';
 			}
+#ifdef DEBUG
+			g_message("stype = %s", stype);
+			g_message("svalue = %s", svalue);
+#endif
 			show_note(module, passage, stype, svalue, FALSE);
 		}
 			
@@ -1206,7 +1210,7 @@ gint main_url_handler_gecko(const gchar * url)
 		g_free(url_work);
 	}
 }
-*/
+
 
 /******************************************************************************
  * Name
