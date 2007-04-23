@@ -46,7 +46,8 @@ project.menu.group=Application
 project.menu.comment=GnomeSword Version 2.2.1
 project.menu.icon=/home/tbiggs/devel/gnomesword/pixmaps/gs2-48x48.png
 project.menu.need.terminal=0
-project.configure.options=--prefix=/usr --enable-debug --enable-maintainer-mode
+
+project.configure.options=--enable-debug --enable-maintainer-mode
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -154,6 +155,7 @@ module.include.files=\
 	src/gui/search_dialog.h\
 	src/gui/preferences_dialog.h\
 	src/gui/navbar_versekey.h
+
 module.source.name=.
 module.source.type=
 module.source.files=\
@@ -235,6 +237,7 @@ module.source.files=\
 	src/gnome2/sidebar.c\
 	src/gnome2/navbar_versekey.c\
 	src/main/navbar_versekey.cc
+
 module.pixmap.name=.
 module.pixmap.type=
 module.pixmap.files=\
