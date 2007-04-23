@@ -24,5 +24,6 @@
 
 GtkWidget *gui_navbar_versekey_new(void);
 GtkWidget *gui_navbar_versekey_dialog_new(gpointer dialog);
+GtkWidget *gui_navbar_versekey_parallel_new(void);
 
 #endif
