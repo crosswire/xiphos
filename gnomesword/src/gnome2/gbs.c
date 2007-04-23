@@ -28,10 +28,10 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifndef USE_GTKHTML38
+/*#ifndef USE_GTKHTML38
 #include <gtkhtml/htmlengine.h>
 #endif
-
+*/
 #ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif

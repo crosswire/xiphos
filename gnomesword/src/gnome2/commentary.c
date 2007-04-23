@@ -27,12 +27,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
-#else
-#include <gtkhtml/htmlengine.h>
-#include "editor/editor-control.h"
-#endif
 
 
 #ifdef USE_GTKMOZEMBED
@@ -187,15 +182,10 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 2:
 		if (!in_url)
 			break;
-#ifdef USE_GTKHTML38
 		url = gtk_html_get_url_at (GTK_HTML(widgets.html_comm),		
 								event->x,
 								event->y);
-#else
-		url = html_engine_get_link_at (GTK_HTML(widgets.html_comm)->engine,
-					 event->x,
-					 event->y);
-#endif
+
 		if (url) {
 			if(strstr(url,"sword://")) {
 				gchar **work_buf = g_strsplit (url,"/",4);
@@ -644,12 +634,12 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 	editor_create_new((gchar *)user_data,(gchar *)settings.currentverse,TRUE);
-#else
+/*#else
 //	gui_open_commentary_editor((gchar *) user_data);
 	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
-#endif
+#endif*/
 }
 
 /******************************************************************************
