@@ -26,12 +26,12 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
-#else
+/*#else
 #include <gtkhtml/htmlengine.h>
 #include "editor/editor.h"
-#endif
+#endif*/
 
 
 #include "gui/sidebar.h"
@@ -877,15 +877,15 @@ static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 	gint is_percomm = main_get_mod_type(buf_module);
 	if(is_percomm == PERCOM_TYPE)
 		editor_create_new((gchar *)buf_module,(gchar *)settings.currentverse,TRUE);
 	else
 		main_dialogs_open(buf_module,NULL);
-#else
+/*#else
 	main_dialogs_open(buf_module,NULL);
-#endif
+#endif*/
 	g_free(buf_module);
 }
 
@@ -1055,13 +1055,13 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	case 1:
 		break;
 	case 2:
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 		url = gtk_html_get_url_at(GTK_HTML(data),
 					  event->x, event->y);
-#else
+/*#else
 		url = html_engine_get_link_at(GTK_HTML(data)->engine,
 					      event->x, event->y);
-#endif
+#endif*/
 		if (url && strstr(url, "sword://")) {
 			gchar **work_buf = g_strsplit(url, "/", 4);
 			gui_open_passage_in_new_tab(work_buf[KEY]);
