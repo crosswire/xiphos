@@ -189,7 +189,7 @@ void main_save_note(	const gchar * module_name,
 		(void) strcpy(rework+1, rework+3);
 	}
 
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
 #ifdef DEBUG
 	g_message("note module %s\nnote key %s\nnote text%s",
@@ -198,7 +198,7 @@ void main_save_note(	const gchar * module_name,
 				note_str);
 #endif
 	backend->save_entry(note_str);
-#endif
+//#endif
 	if ((!strcmp(settings.CommWindowModule, module_name)) &&  
 	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);
@@ -222,7 +222,7 @@ void main_save_note(	const gchar * module_name,
 
 void main_delete_note(	const gchar * module_name, const gchar * key_str)
 {
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
 #ifdef DEBUG
 	g_message("note module %s\nnote key %s\n",
@@ -230,7 +230,7 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
 				key_str);
 #endif
 	backend->delete_entry();
-#endif	
+//#endif	
 	if ((!strcmp(settings.CommWindowModule,module_name)) &&  
 	    (!strcmp(settings.currentverse, key_str)))
 		main_display_commentary(module_name, key_str);

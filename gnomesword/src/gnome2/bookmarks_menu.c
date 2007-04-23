@@ -53,9 +53,9 @@
 #include "main/module_dialogs.h"
 
 
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
-#endif
+//#endif
 
 BOOKMARK_MENU menu;
 
@@ -397,7 +397,7 @@ static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 					3, &key, 
 					4, &module, 
 					-1);
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 		if(module && (main_get_mod_type(module) == PERCOM_TYPE)) {			
 			editor_create_new(module,key,TRUE);			
 			use_dialog = FALSE;
@@ -405,7 +405,7 @@ static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 			g_free(key);
 			return;
 		}
-#endif
+//#endif
 		url = g_strdup_printf("gnomesword.url?action=showBookmark&"
 					"type=%s&value=%s&module=%s",
 					"newDialog",
