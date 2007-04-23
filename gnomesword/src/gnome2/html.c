@@ -681,7 +681,8 @@ static struct _info *info_new(GtkHTML * html,
 					   gdouble * line)
 {
 	struct _info *info;
-#ifndef USE_GTKHTML38_3_13
+#ifndef USE_GTKHTML314
+#ifdef USE_GTKHTML38
 	info = g_new(struct _info, 1);
 	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
 
@@ -699,6 +700,7 @@ static struct _info *info_new(GtkHTML * html,
 	info->footer_date = FALSE;
 	info->footer_page_num = TRUE;
 	return info;
+#endif
 #endif
 }
 
@@ -721,7 +723,8 @@ static struct _info *info_new(GtkHTML * html,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
-#ifndef USE_GTKHTML38_3_13
+#ifndef USE_GTKHTML314
+#ifdef USE_GTKHTML38
 	GtkHTML *html;
 	GtkWidget *w = NULL;
 	GnomePrintContext *print_context;
@@ -794,5 +797,6 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	}
 
 	g_object_unref(print_master);
+#endif
 #endif
 }
