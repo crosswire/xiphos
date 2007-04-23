@@ -832,41 +832,7 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
 
 void main_dialog_save_note(gpointer data)
 {
-	//gchar *buf = NULL;                                       
-//	gsize bytes_read;
-//	gsize bytes_written;
-//	GError **error = NULL;
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
-	BackEnd *be = (BackEnd*)e->be;
-	
-	
-	if(!be)
-		return;	
-	
-	gtk_html_set_editable(e->html, FALSE);
-	note_str = g_string_new("");
-	
-	if (!gtk_html_export (e->html, "text/html",
-		 (GtkHTMLSaveReceiverFn) save_note_receiver,
-		 GINT_TO_POINTER(0)) ){
-		g_warning("file not writen");
-	} else {
-		/*buf = g_convert(note_str->str,
-                             -1,
-                             OLD_CODESET,
-                             UTF_8,
-                             &bytes_read,
-                             &bytes_written,
-                             error);*/
-		//g_message(note_str->str);
-		be->save_entry(note_str->str);	
-		g_print("\nnote saved\n");
-		//g_free(buf);
-	}
-	g_string_free(note_str, 0);
-	gtk_html_set_editable(e->html, TRUE);
-#endif
+
 }
 
 /******************************************************************************
@@ -887,14 +853,6 @@ void main_dialog_save_note(gpointer data)
 
 void main_dialog_delete_note(gpointer data)
 {
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
-	BackEnd *be = (BackEnd*)e->be;
-	
-	if(!be)
-		return;	
-	be->delete_entry();
-#endif	
 }
 
 
@@ -922,13 +880,6 @@ void main_free_on_destroy(DIALOG_DATA * t)
 	g_free(t->ops); 
 	g_free(t->key);
 	g_free(t->mod_name);
-#ifndef USE_GTKHTML38 
-	if((GSHTMLEditorControlData*)t->editor) {
-		editor_control_data_destroy(NULL, 
-				(GSHTMLEditorControlData*)t->editor);		
-		dlg_percom = NULL;
-	}
-#endif
 	if((BackEnd*)t->backend) {
 		BackEnd* be = (BackEnd*)t->backend;
 		delete be;
@@ -1091,11 +1042,6 @@ void main_dialogs_shutdown(void)
 		/* 
 		 * free each DIALOG_DATA item created 
 		 */
-#ifndef USE_GTKHTML38
-		if((GSHTMLEditorControlData*)t->editor) 
-			editor_control_data_destroy(NULL, 
-					(GSHTMLEditorControlData*)t->editor);
-#endif		
 		if((BackEnd*)t->backend) {
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
@@ -1675,10 +1621,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	gint type;
 	gchar *direction = NULL;
 	gchar *url;
-
-#ifndef USE_GTKHTML38
-	GSHTMLEditorControlData *ec;
-#endif
+	
 	do_display = TRUE;
 	if(!backend->is_module(mod_name))
 		return NULL;
@@ -1768,30 +1711,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			main_navbar_versekey_set(t->navbar, (char*)t->navbar.key); 
 #endif
 		break;
-#ifndef USE_GTKHTML38
-		case PERCOM_TYPE:
-			t->mod_type = PERCOM_TYPE;
-			gui_create_note_editor(t);
-			ec = (GSHTMLEditorControlData *) t->editor;
-			ec->key = g_strdup(settings.currentverse);
-			strcpy(ec->filename, t->mod_name);
-			t->is_percomm = TRUE;
-			be->entryDisplay 
-				    = new DialogEntryDisp(ec->htmlwidget,  t, be, t->ops); 
-			be->init_SWORD(1);
-			ec->be = (BackEnd*)be;
-			if(key)
-				t->key = g_strdup(key);
-			else			
-				t->key = g_strdup(settings.currentverse);
-			settings.percomm_dialog_exist = TRUE;
-			dlg_percom = t;
-			t->navbar.is_dialog = TRUE;
-			t->navbar.key = g_strdup(t->key);
-			t->navbar.module_name = g_strdup(mod_name);
-			main_navbar_fill_book_combo(t->navbar);
-		break;
-#endif
 		case DICTIONARY_TYPE:
 			t->mod_type = DICTIONARY_TYPE;
 			gui_create_dictlex_dialog(t);

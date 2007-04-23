@@ -31,12 +31,7 @@
 #endif
 
 
-#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
-#else
-#include <gtkhtml/htmlengine.h>
-#include "editor/editor-control.h"
-#endif
 
 #include "gui/gnomesword.h"
 #include "gui/bibletext.h"
@@ -217,15 +212,9 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		}
 		if (!in_url)
 			break;
-#ifdef USE_GTKHTML38
 		url = gtk_html_get_url_at (GTK_HTML(widgets.html_text),		
 								event->x,
 								event->y);
-#else
-		url = html_engine_get_link_at (GTK_HTML(widgets.html_text)->engine,
-					 event->x,
-					 event->y);
-#endif
 		if(strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);
 			gui_open_passage_in_new_tab(work_buf[3]);
@@ -845,11 +834,11 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_GTKHTML38
+//#ifdef USE_GTKHTML38
 	editor_create_new((gchar *)user_data,(gchar *)settings.currentverse,TRUE);
-#else
+/*#else
 	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
-#endif
+#endif*/
 }
 
 /******************************************************************************
