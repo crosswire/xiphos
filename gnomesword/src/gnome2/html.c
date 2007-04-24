@@ -677,8 +677,8 @@ static struct _info *info_new(GtkHTML * html,
 					   GnomePrintContext * pc,
 					   gdouble * line)
 {
-#ifdef USE_GTKHTML38_3_13
-#else
+#ifndef USE_GTKHTML3_14
+#ifdef USE_GTKHTML38
 	struct _info *info;
 
 	info = g_new(struct _info, 1);
@@ -699,6 +699,7 @@ static struct _info *info_new(GtkHTML * html,
 	info->footer_date = FALSE;
 	info->footer_page_num = TRUE;
 	return info;
+#endif
 #endif
 }
 
@@ -721,8 +722,8 @@ static struct _info *info_new(GtkHTML * html,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
-#ifdef USE_GTKHTML38_3_13
-#else
+#ifndef USE_GTKHTML3_14
+#ifdef USE_GTKHTML38
 	GtkHTML *html;
 	GtkWidget *w = NULL;
 	GnomePrintContext *print_context;
@@ -795,5 +796,6 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	}
 
 	g_object_unref(print_master);
+#endif
 #endif
 }
