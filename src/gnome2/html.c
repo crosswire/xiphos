@@ -351,7 +351,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	html = GTK_HTML(html_widget);
 	if (word)
 		gtk_html_select_word(html);	
-//#ifdef USE_GTKHTML38		
+#ifdef USE_GTKHTML38		
 	key = gtk_html_get_selection_html (html, &len);
 	if ((key == NULL) || (*key == '\0'))
 	{
@@ -379,14 +379,14 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	buf2= g_strdup(key);
 	g_free(buf);
 	return buf2; /* must be freed by calling function */
-/*#else
+#else
 	if (html_engine_is_selection_active(html->engine)) {
 		key = html_engine_get_selection_string(html->engine);
 		key = g_strdelimit(key, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
-		return g_strdup(key);	
-	}*/
-//#endif
+		return g_strdup(key);	/* must be freed by calling function */
+	}
+#endif
 	return key;
 }
 
@@ -416,7 +416,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 	gint len;
 
 	html = GTK_HTML(html_widget);
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 	if (!html->in_selection) {
 		gtk_html_select_word(html);
 		key = gtk_html_get_selection_html(html, &len);
@@ -445,7 +445,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		g_free(buf);
 		return rtval;	// * must be freed by calling function *
 	}
-/*#else
+#else
 	if (!html_engine_is_selection_active(html->engine)) {
 		gtk_html_select_word(html);
 		if (html_engine_is_selection_active(html->engine)) {
@@ -463,8 +463,8 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 			return g_strdup(key);	// * must be freed by calling function *
 		}
 
-	}*/
-//#endif
+	}
+#endif
 	return key;
 }
 
@@ -677,8 +677,8 @@ static struct _info *info_new(GtkHTML * html,
 					   GnomePrintContext * pc,
 					   gdouble * line)
 {
-//#ifndef USE_GTKHTML38_3_13
-#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38_3_13
+#else
 	struct _info *info;
 
 	info = g_new(struct _info, 1);
@@ -721,9 +721,8 @@ static struct _info *info_new(GtkHTML * html,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
-//#ifndef USE_GTKHTML38_3_13
-	
-#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38_3_13
+#else
 	GtkHTML *html;
 	GtkWidget *w = NULL;
 	GnomePrintContext *print_context;

@@ -33,7 +33,11 @@
 #include <swbuf.h>
 #include <gnome.h>
 
+#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
+#else
+#include "editor/editor.h"
+#endif
 
 #include "gui/about_modules.h"
 #include "gui/html.h"
@@ -165,7 +169,19 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  
  static gint show_studypad(const gchar * filename, gboolean clicked)
 {
-	//editor_create_new(filename, NULL, FALSE);
+#ifdef USE_GTKHTML38
+	editor_create_new(filename, NULL, FALSE);
+#else
+	if (settings.studypad_dialog_exist) {
+		gtk_widget_show(widgets.studypad_dialog);
+		load_file((gchar*) filename, editor_cd);
+		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
+				 window);
+	} else {
+		settings.studypad_dialog_exist =
+			  gui_open_studypad((gchar*)filename);
+	}
+#endif
 	return 1;
 }
 
@@ -752,12 +768,12 @@ static int show_module_and_key(const char * module, const char * key,
 			return 1;
 		}
 		if(!strcmp(type,"newDialog"))  {
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 			if(module && (main_get_mod_type((gchar*)module) == PERCOM_TYPE)) {			
 				editor_create_new(module,key,TRUE);
 				return 1;
 			}
-//#endif
+#endif
 			main_dialog_goto_bookmark((gchar*)module,
 						(gchar*)key);
 			return 1;
@@ -769,9 +785,9 @@ static int show_module_and_key(const char * module, const char * key,
 				main_display_bible(module, tmpkey);
 				main_display_commentary(NULL, tmpkey);
 				main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 				editor_sync_with_main();
-//#endif
+#endif
 				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case COMMENTARY_TYPE:
@@ -871,9 +887,9 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				main_display_commentary(NULL, key);
 				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 				editor_sync_with_main();
-//#endif
+#endif
 				if(key) g_free((gchar*)key);
 			break;				
 			case COMMENTARY_TYPE:	
@@ -899,9 +915,9 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			main_display_commentary(NULL, key);
 			main_display_bible(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar*)key);
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 			editor_sync_with_main();
-//#endif
+#endif
 			if(key) g_free((gchar*)key);
 		} else {
 			alert_url_not_found(url);

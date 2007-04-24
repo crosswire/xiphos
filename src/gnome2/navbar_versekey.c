@@ -636,50 +636,6 @@ gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
 }
 
 
-NAVBAR_VERSEKEY real_navbar_versekey_new(void)
-{
-	NAVBAR_VERSEKEY navbar;
-	gchar *glade_file;
-	GladeXML *gxml;
-	glade_file =
-		    gui_general_user_file("navbar_versekey.glade", FALSE);
-	g_return_if_fail(glade_file != NULL);
-#ifdef DEBUG
-	g_message(glade_file);
-#endif
-		/* build the widget */
-	gxml = glade_xml_new(glade_file, "navbar", NULL);
-	navbar.dialog = FALSE;
-	
-	navbar.navbar = glade_xml_get_widget(gxml, "navbar");
-	navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");	
-	navbar.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
-	navbar.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
-	navbar.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
-	navbar.button_book_up = glade_xml_get_widget(gxml, "button_book2");
-	navbar.button_book_down = glade_xml_get_widget(gxml, "button_book1");
-	navbar.button_chapter_up = glade_xml_get_widget(gxml, "button_chapter2");
-	navbar.button_chapter_down = glade_xml_get_widget(gxml, "button_chapter1");
-	navbar.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
-	navbar.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
-	navbar.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
-	navbar.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
-	navbar.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
-	navbar.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
-	navbar.label_book_menu = glade_xml_get_widget(gxml, "label_book");
-	navbar.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
-	navbar.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
-	//navbar.book_menu = gtk_menu_new();
-	//navbar.chapter_menu = gtk_menu_new();
-	//navbar.verse_menu = gtk_menu_new();
-	
-	
-	
-	
-	return navbar;
-}
-
-
 /******************************************************************************
  * Name
  *  gui_navbar_versekey_new
@@ -698,9 +654,46 @@ NAVBAR_VERSEKEY real_navbar_versekey_new(void)
 
 GtkWidget *gui_navbar_versekey_new(void)
 {
-	navbar_versekey = real_navbar_versekey_new();
+
+	gchar *glade_file;
+	GladeXML *gxml;
+	GtkWidget *navbar;
+	
+	glade_file =
+		    gui_general_user_file("navbar_versekey.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
+	g_message(glade_file);
+#endif
+
+	/* build the widget */
+	gxml = glade_xml_new(glade_file, "navbar", NULL);
+	navbar_versekey.dialog = FALSE;
 	navbar_versekey.module_name = g_string_new(settings.MainWindowModule);
 	navbar_versekey.key =  g_string_new(settings.currentverse);
+	
+	navbar_versekey.navbar = glade_xml_get_widget(gxml, "navbar");
+	
+	navbar_versekey.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
+	navbar_versekey.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
+	navbar_versekey.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
+	navbar_versekey.button_book_up = glade_xml_get_widget(gxml, "button_book2");
+	navbar_versekey.button_book_down = glade_xml_get_widget(gxml, "button_book1");
+	navbar_versekey.button_chapter_up = glade_xml_get_widget(gxml, "button_chapter2");
+	navbar_versekey.button_chapter_down = glade_xml_get_widget(gxml, "button_chapter1");
+	navbar_versekey.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
+	navbar_versekey.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
+	navbar_versekey.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
+	navbar_versekey.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
+	navbar_versekey.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
+	navbar_versekey.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
+	navbar_versekey.label_book_menu = glade_xml_get_widget(gxml, "label_book");
+	navbar_versekey.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
+	navbar_versekey.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+	navbar_versekey.book_menu = gtk_menu_new();
+	navbar_versekey.chapter_menu = gtk_menu_new();
+	navbar_versekey.verse_menu = gtk_menu_new();
+	
 	g_signal_connect((gpointer) navbar_versekey.lookup_entry,
 				 "activate", G_CALLBACK(on_entry_activate),
 				 NULL);
@@ -776,17 +769,55 @@ GtkWidget *gui_navbar_versekey_new(void)
 
 GtkWidget *gui_navbar_versekey_dialog_new(gpointer d)
 {
-	DIALOG_DATA *dialog = (DIALOG_DATA *)d;
 
-	dialog->navbar = real_navbar_versekey_new();
-	gtk_widget_show(dialog->navbar.button_sync); 
+	gchar *glade_file;
+	GladeXML *gxml;
+	GtkWidget *navbar;
+	//NAVBAR_VERSEKEY 
+	DIALOG_DATA *dialog = (DIALOG_DATA *)d;
+	glade_file =
+		    gui_general_user_file("navbar_versekey.glade", FALSE);
+	g_return_if_fail(glade_file != NULL);
+#ifdef DEBUG
+	g_message(glade_file);
+#endif
+
+	/* build the widget */
+	gxml = glade_xml_new(glade_file, "navbar", NULL);
 	dialog->navbar.dialog = TRUE;
 	dialog->navbar.module_name = g_string_new(settings.MainWindowModule);
 	dialog->navbar.key =  g_string_new(settings.currentverse);
+	
+	dialog->navbar.navbar = glade_xml_get_widget(gxml, "navbar");
+	
+	dialog->navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
 	gtk_widget_show(dialog->navbar.button_sync); 
-	gtk_widget_hide(dialog->navbar.button_history_back);
+	
+	dialog->navbar.button_history_back = glade_xml_get_widget(gxml, "button_history_back");
+	gtk_widget_hide(dialog->navbar.button_history_back); 
+	
+	dialog->navbar.button_history_next = glade_xml_get_widget(gxml, "button_history_foward");
 	gtk_widget_hide(dialog->navbar.button_history_next); 
-	gtk_widget_hide(dialog->navbar.button_history_menu);  
+	
+	dialog->navbar.button_history_menu = glade_xml_get_widget(gxml, "togglebutton_history_list");
+	gtk_widget_hide(dialog->navbar.button_history_menu); 
+	
+	dialog->navbar.button_book_up = glade_xml_get_widget(gxml, "button_book2");
+	dialog->navbar.button_book_down = glade_xml_get_widget(gxml, "button_book1");
+	dialog->navbar.button_chapter_up = glade_xml_get_widget(gxml, "button_chapter2");
+	dialog->navbar.button_chapter_down = glade_xml_get_widget(gxml, "button_chapter1");
+	dialog->navbar.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
+	dialog->navbar.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
+	dialog->navbar.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
+	dialog->navbar.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
+	dialog->navbar.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
+	dialog->navbar.lookup_entry = glade_xml_get_widget(gxml, "entry_lookup");
+	dialog->navbar.label_book_menu = glade_xml_get_widget(gxml, "label_book");
+	dialog->navbar.label_chapter_menu = glade_xml_get_widget(gxml, "label_chapter");
+	dialog->navbar.label_verse_menu = glade_xml_get_widget(gxml, "label_verse");
+	dialog->navbar.book_menu = gtk_menu_new();
+	dialog->navbar.chapter_menu = gtk_menu_new();
+	dialog->navbar.verse_menu = gtk_menu_new();
 	
 	g_signal_connect((gpointer) dialog->navbar.button_sync,
 			 "clicked", G_CALLBACK(gui_bible_dialog_sync_toggled),
@@ -847,91 +878,4 @@ GtkWidget *gui_navbar_versekey_dialog_new(gpointer d)
 	return dialog->navbar.navbar;
 	
 }
-
-
-/******************************************************************************
- * Name
- *  gui_navbar_versekey_new
- *
- * Synopsis
- *   #include "gui/navbar_versekey.h"
- *
- *  GtkWidget *gui_navbar_book_new(void)
- *
- * Description
- *   create a new Bible navigation toolbar and return it
- *
- * Return value
- *   GtkWidget *
- */
-
-GtkWidget *gui_navbar_versekey_parallel_new(void)
-{
-	extern NAVBAR_VERSEKEY navbar_parallel;
-	navbar_parallel = real_navbar_versekey_new();
-	navbar_parallel.module_name = g_string_new(settings.MainWindowModule);
-	navbar_parallel.key =  g_string_new(settings.currentverse);
-	gtk_widget_show(navbar_parallel.button_sync); 
-	gtk_widget_hide(navbar_parallel.button_history_back);
-	gtk_widget_hide(navbar_parallel.button_history_next); 
-	gtk_widget_hide(navbar_parallel.button_history_menu);  
-	
-	g_signal_connect((gpointer) navbar_parallel.lookup_entry,
-				 "activate", G_CALLBACK(on_entry_activate),
-				 NULL);
-		
-	g_signal_connect((gpointer) navbar_parallel.button_book_up,
-			 "clicked", G_CALLBACK(on_book_button_up_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_book_down,
-			 "clicked", G_CALLBACK(on_book_button_down_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_chapter_up,
-			 "clicked", G_CALLBACK(on_chapter_button_up_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_chapter_down,
-			 "clicked", G_CALLBACK(on_chapter_button_down_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_verse_up,
-			 "clicked", G_CALLBACK(on_verse_button_up_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_verse_down,
-			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_history_back,
-			 "clicked", G_CALLBACK(on_button_history_back_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_history_next,
-			 "clicked", G_CALLBACK(on_button_history_next_clicked),
-			 NULL);
-	g_signal_connect((gpointer) navbar_parallel.button_history_menu,
-			 "button_press_event",
-			 G_CALLBACK(select_button_press_callback), 
-			 GINT_TO_POINTER(HISTORY_BUTTON));
-	g_signal_connect((gpointer) navbar_parallel.button_book_menu,
-			 "button_press_event",
-			 G_CALLBACK(select_button_press_callback), 
-			 GINT_TO_POINTER(BOOK_BUTTON));
-	g_signal_connect((gpointer) navbar_parallel.button_chapter_menu,
-			 "button_press_event",
-			 G_CALLBACK(select_button_press_callback), 
-			 GINT_TO_POINTER(CHAPTER_BUTTON));
-	g_signal_connect((gpointer) navbar_parallel.button_verse_menu,
-			 "button_press_event",
-			 G_CALLBACK(select_button_press_callback), 
-			 GINT_TO_POINTER(VERSE_BUTTON));			 
-	g_signal_connect ((gpointer)navbar_parallel.button_verse_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_verse_scroll_event),
-		    	 NULL);			 
-	g_signal_connect ((gpointer)navbar_parallel.button_chapter_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_chapter_scroll_event),
-		    	 NULL);			 
-	g_signal_connect ((gpointer)navbar_parallel.button_book_menu , "scroll_event",
-		    	 G_CALLBACK (on_button_verse_menu_book_scroll_event),
-		    	 NULL);
-	return navbar_parallel.navbar;
-	
-}
-
-
 #endif

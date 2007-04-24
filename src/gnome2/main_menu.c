@@ -25,9 +25,9 @@
 
 #include <gnome.h>
 
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 #include "editor/html-editor.h"
-//#endif
+#endif
 
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
@@ -705,9 +705,9 @@ static void on_mod_mgr(GtkMenuItem * menuitem,
 static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 {
 
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 	editor_create_new(settings.studypadfilename, NULL, FALSE);
-/*#else
+#else
 	if (settings.studypad_dialog_exist) {
 		gtk_widget_show(widgets.studypad_dialog);
 		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
@@ -716,7 +716,7 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 		settings.studypad_dialog_exist =
 			  gui_open_studypad(settings.studypadfilename);
 	}
-#endif*/
+#endif
 }
 
 
