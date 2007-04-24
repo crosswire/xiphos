@@ -29,6 +29,7 @@
 
 
 #include "main/navbar_book.h"
+#include "main/settings.h"
 
 NAVBAR_BOOK navbar_book;
 
@@ -100,6 +101,8 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 					     GdkEventKey * event,
 					     gpointer user_data)
 {
+	if(!settings.havebook)
+		return FALSE;	
 	switch(event->hardware_keycode) {
 			case 98:
 					gtk_button_clicked(GTK_BUTTON(navbar_book.button_up));
@@ -148,7 +151,11 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 					     GdkEventButton * event,
 					     gpointer user_data)
 {
-	GtkWidget *menu = main_book_drop_down_new();	
+	GtkWidget *menu;
+	
+	if(!settings.havebook)
+		return FALSE;	
+	menu = main_book_drop_down_new();
 	g_signal_connect(menu, "deactivate",
 			 G_CALLBACK(menu_deactivate_callback), widget);
 	if ((event->type == GDK_BUTTON_PRESS) && event->button == 1) {
@@ -182,6 +189,8 @@ static gboolean select_button_press_callback(GtkWidget * widget,
 static
 void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 {
+	if(!settings.havebook)
+		return;	
 	main_navbar_book_parent();
 }
 
@@ -205,6 +214,8 @@ void on_button_parent_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_child_clicked(GtkButton * button, gpointer user_data)
 {
+	if(!settings.havebook)
+		return;	
 	main_navbar_book_first_child();
 }
 
@@ -228,6 +239,8 @@ void on_button_child_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 {
+	if(!settings.havebook)
+		return;	
 	main_navbar_book_prev();
 }
 
@@ -251,6 +264,8 @@ void on_button_prev_clicked(GtkButton * button, gpointer user_data)
 static
 void on_button_next_clicked(GtkButton * button, gpointer user_data)
 {
+	if(!settings.havebook)
+		return;	
 	main_navbar_book_next();
 }
 
