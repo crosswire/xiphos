@@ -680,8 +680,7 @@ static struct _info *info_new(GtkHTML * html,
 					   GnomePrintContext * pc,
 					   gdouble * line)
 {
-	struct _info *info;
-#ifndef USE_GTKHTML314
+#ifndef USE_GTKHTML3_14
 #ifdef USE_GTKHTML38
 	info = g_new(struct _info, 1);
 	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
@@ -723,7 +722,7 @@ static struct _info *info_new(GtkHTML * html,
 
 void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
-#ifndef USE_GTKHTML314
+#ifndef USE_GTKHTML3_14
 #ifdef USE_GTKHTML38
 	GtkHTML *html;
 	GtkWidget *w = NULL;
