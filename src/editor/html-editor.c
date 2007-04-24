@@ -23,7 +23,7 @@
 #include <libgnome/gnome-i18n.h>
 
 
-//#ifdef USE_GTKHTML38
+#ifdef USE_GTKHTML38
 
 #include <gnome.h>
 #include <bonobo.h>
@@ -1388,4 +1388,4 @@ gint load_file(EDITOR * e)
 	load_through_persist_file(e, g_strdup(e->filename));
 	return FALSE;
 }
-//#endif				/* USE_GTKHTML38 */
+#endif				/* USE_GTKHTML38 */
