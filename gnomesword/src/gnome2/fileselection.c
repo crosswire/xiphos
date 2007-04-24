@@ -22,7 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-/*#ifndef USE_GTKHTML38
+#ifndef USE_GTKHTML38
 
 #include <gnome.h>
 #include <stdio.h>
@@ -34,8 +34,8 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
-#define BUFFER_SIZE 8192	
-*/
+#define BUFFER_SIZE 8192	/* input buffer size */
+
  
 /******************************************************************************
  * Name
@@ -52,12 +52,12 @@
  * Return value
  *   void
  */
-/*
+
 static void dialog_destroy(GtkObject * object, gpointer user_data)
 {
 	gtk_main_quit();
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -74,7 +74,7 @@ static void dialog_destroy(GtkObject * object, gpointer user_data)
  * Return value
  *   void
  */
-/*
+
 static void open_ok(GtkButton *button, GSHTMLEditorControlData *ecd)
 {
 	GtkWidget *filesel;
@@ -86,7 +86,7 @@ static void open_ok(GtkButton *button, GSHTMLEditorControlData *ecd)
 	load_file(ecd->filename, ecd);
 	gtk_widget_destroy(filesel);
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -103,13 +103,13 @@ static void open_ok(GtkButton *button, GSHTMLEditorControlData *ecd)
  * Return value
  *   void
  */
-/*
+
 static void open_cancel(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-*/
+
 /******************************************************************************
  * Name
  *   save_ok
@@ -125,7 +125,7 @@ static void open_cancel(GtkButton * button, gpointer user_data)
  * Return value
  *   void
  */
-/*
+
 static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *filesel;
@@ -137,7 +137,7 @@ static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 	gtk_widget_destroy(filesel);
 	save_file(filename, ecd);
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -154,7 +154,7 @@ static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
  * Return value
  *   void
  */
-/*
+
 static void save_plain_text_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *filesel;
@@ -166,7 +166,7 @@ static void save_plain_text_ok(GtkButton * button, GSHTMLEditorControlData * ecd
 	gtk_widget_destroy(filesel);
 	save_file_plain_text(filename, ecd);
 }
-*/
+
 /******************************************************************************
  * Name
  *   save_cancel
@@ -182,12 +182,12 @@ static void save_plain_text_ok(GtkButton * button, GSHTMLEditorControlData * ecd
  * Return value
  *   void
  */
-/*
+
 static void save_cancel(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -204,7 +204,7 @@ static void save_cancel(GtkButton * button, gpointer user_data)
  * Return value
  *   GtkWidget *
  */
-/*
+
 GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *fileselection;
@@ -237,7 +237,7 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 
 	return fileselection;
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -254,7 +254,7 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
  * Return value
  *   GtkWidget *
  */
-/*
+
 static GtkWidget *create_fileselection_save(GSHTMLEditorControlData *ecd, 
 							gboolean to_html)
 {
@@ -293,7 +293,7 @@ static GtkWidget *create_fileselection_save(GSHTMLEditorControlData *ecd,
 	gtk_widget_show_all(fileselection);
 	return fileselection;
 }
-*/
+
 
 /******************************************************************************
  * Name
@@ -310,7 +310,7 @@ static GtkWidget *create_fileselection_save(GSHTMLEditorControlData *ecd,
  * Return value
  *   gint
  */
-/*
+
 gint gui_fileselection_save(GSHTMLEditorControlData *ecd, gboolean to_html)
 {
 	GtkWidget *window;
@@ -340,4 +340,4 @@ gint gui_fileselection_save(GSHTMLEditorControlData *ecd, gboolean to_html)
 	
 	
 }
-#endif*/
+#endif
