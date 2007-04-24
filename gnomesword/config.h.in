@@ -157,14 +157,14 @@
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
 
-/* Define if you want to use GtkHtml-3.14 */
-#undef USE_GTKHTML314
-
 /* Define if you want to use GtkHtml-3.8 */
 #undef USE_GTKHTML38
 
 /* Define if you want to use GtkHtml-3.8-3.13 */
 #undef USE_GTKHTML38_3_13
+
+/* Define if you want to use GtkHtml-3.14 */
+#undef USE_GTKHTML3_14
 
 /* Define if you want to use gtkmozembed */
 #undef USE_GTKMOZEMBED
