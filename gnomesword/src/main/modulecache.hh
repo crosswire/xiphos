@@ -68,7 +68,7 @@ namespace ModuleCache {
 		CacheVerse();
 		CacheVerse(uint16_t flags,
 			   const char *text,
-			   const char *header = "");
+			   const char *header = NULL);
 		~CacheVerse();
 
 		bool		TextIsValid();
@@ -89,6 +89,7 @@ namespace ModuleCache {
 		void		AppendHeader(const char *text);
 
 		void		Invalidate();
+		void		InvalidateHeader();
 
 	private:
 		char *		_text;
@@ -124,8 +125,8 @@ CacheVerse() :
 inline
 ModuleCache::CacheVerse::
 CacheVerse(uint16_t flags, const char *text, const char *header) :
-	_text(g_strdup(text)),
-	_header(g_strdup(header)),
+	_text(text ? g_strdup(text) : NULL),
+	_header(header ? g_strdup(header) : NULL),
 	_flags(flags)
 {
 	// just initializers preceding
@@ -267,6 +268,15 @@ Invalidate()
 	if (_header)
 		g_free(_header);
 	_text = _header = NULL;
+}
+
+inline
+void ModuleCache::CacheVerse::
+InvalidateHeader()
+{
+	if (_header)
+		g_free(_header);
+	_header = NULL;
 }
 
 #endif	/* __cplusplus */
