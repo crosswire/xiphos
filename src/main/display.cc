@@ -1045,7 +1045,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 		if (!cVerse.HeaderIsValid())
 			CacheHeader(cVerse, imodule);
 
-		swbuf.appendFormatted(cVerse.GetHeader());
+		if (cache_flags & ModuleCache::Headings)
+			swbuf.appendFormatted(cVerse.GetHeader());
+		else
+			cVerse.InvalidateHeader();
 
 		utf8_key = g_convert((char*)key->getText(),
                              -1,
