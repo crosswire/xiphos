@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-26 23:42+0200\n"
-"PO-Revision-Date: 2007-03-26 23:48+0100\n"
+"POT-Creation-Date: 2007-04-26 12:17+0200\n"
+"PO-Revision-Date: 2007-04-26 12:19+0100\n"
 "Last-Translator: Gertjan Francke <gwfrancke@gmail.com>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -265,9 +265,8 @@ msgstr "Gotisch"
 #. done
 #: ../src/backend/sword_main.cc:1332
 #: ../src/backend/module_manager.cc:129
-#, fuzzy
 msgid "Manx"
-msgstr "Manx"
+msgstr ""
 
 #. done
 #: ../src/backend/sword_main.cc:1333
@@ -852,43 +851,43 @@ msgstr "Aantal Percomm-modules"
 msgid "Number of Devotion modules"
 msgstr "Aantal meditatie-modules"
 
-#: ../src/main/module_dialogs.cc:227
+#: ../src/main/module_dialogs.cc:229
 #: ../src/main/previewer.cc:107
 #: ../ui/prefs.glade.h:52
 msgid "Previewer"
 msgstr "Voorbeeldweergave"
 
-#: ../src/main/module_dialogs.cc:294
-#: ../src/main/module_dialogs.cc:423
+#: ../src/main/module_dialogs.cc:296
+#: ../src/main/module_dialogs.cc:425
 #: ../src/main/previewer.cc:173
 msgid "Footnote"
 msgstr "Voetnoot"
 
-#: ../src/main/module_dialogs.cc:300
-#: ../src/main/module_dialogs.cc:428
+#: ../src/main/module_dialogs.cc:302
+#: ../src/main/module_dialogs.cc:430
 #: ../src/main/previewer.cc:179
 msgid "Cross Reference"
 msgstr "Kruisverwijzing: "
 
-#: ../src/main/module_dialogs.cc:306
-#: ../src/main/module_dialogs.cc:320
-#: ../src/main/module_dialogs.cc:433
-#: ../src/main/module_dialogs.cc:445
+#: ../src/main/module_dialogs.cc:308
+#: ../src/main/module_dialogs.cc:322
+#: ../src/main/module_dialogs.cc:435
+#: ../src/main/module_dialogs.cc:447
 #: ../src/main/previewer.cc:185
 #: ../src/main/previewer.cc:199
 msgid "Strongs"
 msgstr "Strongs"
 
-#: ../src/main/module_dialogs.cc:312
-#: ../src/main/module_dialogs.cc:331
-#: ../src/main/module_dialogs.cc:438
-#: ../src/main/module_dialogs.cc:455
+#: ../src/main/module_dialogs.cc:314
+#: ../src/main/module_dialogs.cc:333
+#: ../src/main/module_dialogs.cc:440
+#: ../src/main/module_dialogs.cc:457
 #: ../src/main/previewer.cc:191
 #: ../src/main/previewer.cc:210
 msgid "Morphology"
 msgstr "Morfologie"
 
-#: ../src/main/module_dialogs.cc:1265
+#: ../src/main/module_dialogs.cc:1275
 msgid "Back to "
 msgstr "Terug naar"
 
@@ -941,7 +940,7 @@ msgstr "gevonden in "
 
 #: ../src/main/search_sidebar.cc:140
 msgid "matches"
-msgstr "gevonden"
+msgstr "resultaten"
 
 #: ../src/main/settings.c:52
 msgid ""
@@ -962,18 +961,18 @@ msgid ""
 msgstr ""
 "Welkom bij GnomeSword.\n"
 "\n"
-"Er zijn geen Bijbelmodules geinstalleerd. GnomeSword heeft minimaal een Bijbelmodule nodig, om te kunnen starten.\n"
+"Er zijn geen Bijbel-modules geïnstalleerd. GnomeSword heeft minimaal één Bijbel-module nodig, om te kunnen starten.\n"
 "\n"
 "Met uw toestemming wordt het Modulebeheer gestart, zodat u modules kunt installeren vanaf Crosswire:\n"
 "1. Configureer installatie vanaf een andere lokatie\n"
 "2. Maak een verbinding.\n"
-"3. Selecteer een Bijbelmodule naar keuze.\n"
+"3. Selecteer een Bijbel-module naar keuze.\n"
 "4. Kies 'Installeren'.\n"
 "Sluit het Modulebeheer als u klaar bent.\n"
 "\n"
 "Waarschuwing: Wees voorzichtig met het gebruik als u in uw land wordt vervolgd.\n"
 "\n"
-"Modulebeheer opstarten om een Bijbelmodule te installeren?"
+"Modulebeheer opstarten om een Bijbel-module te installeren?"
 
 #: ../src/main/settings.c:98
 msgid "$HOME is not set!"
@@ -1091,9 +1090,9 @@ msgid "chapter"
 msgstr "hoofdstuk"
 
 #: ../src/main/sidebar.cc:578
-#: ../src/main/sidebar.cc:872
-#: ../src/main/sidebar.cc:873
-#: ../src/main/sidebar.cc:874
+#: ../src/main/sidebar.cc:875
+#: ../src/main/sidebar.cc:876
+#: ../src/main/sidebar.cc:877
 #: ../src/gnome2/parallel_view.c:534
 #: ../src/gnome2/sidebar.c:653
 #: ../src/gnome2/sidebar.c:662
@@ -1102,16 +1101,16 @@ msgid "Parallel View"
 msgstr "Parallelweergave"
 
 #: ../src/main/sidebar.cc:584
-#: ../src/main/sidebar.cc:880
-#: ../src/main/sidebar.cc:881
-#: ../src/main/sidebar.cc:882
-#: ../src/gnome2/main_window.c:718
+#: ../src/main/sidebar.cc:883
+#: ../src/main/sidebar.cc:884
+#: ../src/main/sidebar.cc:885
+#: ../src/gnome2/main_window.c:737
 msgid "Standard View"
 msgstr "Standaardweergave"
 
 #: ../src/main/sidebar.cc:590
-#: ../src/main/sidebar.cc:909
-#: ../src/main/sidebar.cc:911
+#: ../src/main/sidebar.cc:912
+#: ../src/main/sidebar.cc:914
 #: ../src/gnome2/mod_mgr.c:785
 #: ../src/gnome2/utilities.c:464
 #: ../ui/prefs.glade.h:25
@@ -1119,17 +1118,17 @@ msgid "Commentaries"
 msgstr "Commentaren"
 
 #: ../src/main/sidebar.cc:603
-#: ../src/main/sidebar.cc:966
-#: ../src/main/sidebar.cc:968
+#: ../src/main/sidebar.cc:969
+#: ../src/main/sidebar.cc:971
 #: ../src/gnome2/mod_mgr.c:795
 #: ../src/gnome2/utilities.c:507
 msgid "General Books"
 msgstr "Algemene boeken"
 
-#: ../src/main/sidebar.cc:741
-#: ../src/main/sidebar.cc:743
-#: ../src/main/sidebar.cc:798
-#: ../src/main/sidebar.cc:800
+#: ../src/main/sidebar.cc:744
+#: ../src/main/sidebar.cc:746
+#: ../src/main/sidebar.cc:801
+#: ../src/main/sidebar.cc:803
 #: ../src/gnome2/mod_mgr.c:566
 #: ../src/gnome2/mod_mgr.c:568
 #: ../src/gnome2/mod_mgr.c:661
@@ -1141,96 +1140,96 @@ msgstr "Algemene boeken"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../src/main/sidebar.cc:864
-#: ../src/main/sidebar.cc:866
+#: ../src/main/sidebar.cc:867
+#: ../src/main/sidebar.cc:869
 #: ../src/gnome2/mod_mgr.c:781
 #: ../src/gnome2/utilities.c:436
 msgid "Biblical Texts"
 msgstr "Bijbelvertalingen"
 
-#: ../src/main/sidebar.cc:937
-#: ../src/main/sidebar.cc:939
+#: ../src/main/sidebar.cc:940
+#: ../src/main/sidebar.cc:942
 #: ../src/gnome2/mod_mgr.c:790
 #: ../src/gnome2/utilities.c:485
 msgid "Dictionaries"
 msgstr "Woordenboeken"
 
 #. g_print("date: %s\n", getenv("DATE"));
-#: ../src/main/sword.cc:541
-#: ../src/gnome2/main_window.c:586
+#: ../src/main/sword.cc:551
+#: ../src/gnome2/main_window.c:599
 msgid "Starting"
 msgstr "Bezig met starten"
 
-#: ../src/main/sword.cc:542
+#: ../src/main/sword.cc:552
 msgid "Initiating SWORD"
 msgstr "Bezig met initialiseren van GnomeSword"
 
-#: ../src/main/sword.cc:543
+#: ../src/main/sword.cc:553
 msgid "path to sword"
 msgstr "pad naar sword"
 
-#: ../src/main/sword.cc:544
+#: ../src/main/sword.cc:554
 msgid "System locale is"
 msgstr "Systeem lokalisatie is"
 
-#: ../src/main/sword.cc:545
+#: ../src/main/sword.cc:555
 msgid "SWORD locale is"
 msgstr "SWORD lokalisatie is"
 
-#: ../src/main/sword.cc:547
+#: ../src/main/sword.cc:557
 msgid "Checking for SWORD Modules"
 msgstr "Bezig met zoeken naar SWORD-modules"
 
-#: ../src/main/sword.cc:581
+#: ../src/main/sword.cc:591
 msgid "SWORD is shutdown"
 msgstr "GnomeSword wordt afgesloten"
 
-#: ../src/main/sword.cc:624
-#: ../src/main/sword.cc:633
+#: ../src/main/sword.cc:634
+#: ../src/main/sword.cc:643
 msgid "The"
 msgstr "De"
 
-#: ../src/main/sword.cc:626
+#: ../src/main/sword.cc:636
 msgid "module is locked."
 msgstr "modules is vergrendeld."
 
-#: ../src/main/sword.cc:636
+#: ../src/main/sword.cc:646
 msgid "module has been unlocked."
 msgstr "module is beschikbaar."
 
-#: ../src/main/sword.cc:647
+#: ../src/main/sword.cc:657
 msgid "If you have the cipher key you can"
 msgstr "Als u de decodeersleutel heeft kunt u"
 
-#: ../src/main/sword.cc:651
+#: ../src/main/sword.cc:661
 msgid "click here"
 msgstr "hier klikken"
 
-#: ../src/main/sword.cc:652
+#: ../src/main/sword.cc:662
 msgid "to unlock the module"
 msgstr "Ontgrendel deze module"
 
-#: ../src/main/sword.cc:662
+#: ../src/main/sword.cc:672
 msgid "You will need to restart GnomeSword after you unlock it."
 msgstr "U moet GnomeSword herstarten na het ontgrendelen."
 
-#: ../src/main/sword.cc:671
+#: ../src/main/sword.cc:681
 msgid "You need to restart GnomeSword to view it"
 msgstr "U moet GnomeSword herstarten om het te bekijken"
 
-#: ../src/main/sword.cc:1229
+#: ../src/main/sword.cc:1248
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "Dagelijkse meditatie werd gevraagd, maar er zijn geen geinstalleerd."
+msgstr "Dagelijkse meditatie werd gevraagd, maar er zijn geen geïnstalleerd."
 
-#: ../src/main/tab_history.c:65
-#: ../src/main/tab_history.c:101
-#: ../src/main/tab_history.c:116
+#: ../src/main/tab_history.c:66
+#: ../src/main/tab_history.c:110
+#: ../src/main/tab_history.c:125
 msgid "H_istory/<Separator>"
 msgstr "_Geschiedenis<Separator>"
 
 #. tab->history_items + 1);
-#: ../src/main/tab_history.c:67
-#: ../src/main/tab_history.c:103
+#: ../src/main/tab_history.c:68
+#: ../src/main/tab_history.c:112
 msgid "H_istory/C_lear"
 msgstr "_Geschiedenis/_Wissen"
 
@@ -1323,50 +1322,50 @@ msgstr "Selecteer de gewenste modules"
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
-#: ../src/editor/html-editor.c:153
+#: ../src/editor/html-editor.c:161
 msgid "Are you sure you want to delete the note for"
 msgstr "Weet u zeker dat u de notitie wilt verwijderen voor"
 
-#: ../src/editor/html-editor.c:155
+#: ../src/editor/html-editor.c:163
 msgid "It will be lost permanently!"
 msgstr "Het gaat definitief verloren."
 
-#: ../src/editor/html-editor.c:398
+#: ../src/editor/html-editor.c:406
 msgid "Open file..."
 msgstr "Bestand openen"
 
-#: ../src/editor/html-editor.c:409
+#: ../src/editor/html-editor.c:417
 msgid "Save file as..."
 msgstr "Bestand opslaan als..."
 
-#: ../src/editor/html-editor.c:539
-#: ../src/gnome2/bibletext.c:1086
-#: ../src/gnome2/bibletext_dialog.c:2136
+#: ../src/editor/html-editor.c:547
+#: ../src/gnome2/bibletext.c:1101
+#: ../src/gnome2/bibletext_dialog.c:2143
 #: ../src/gnome2/commentary.c:945
-#: ../src/gnome2/commentary_dialog.c:1847
+#: ../src/gnome2/commentary_dialog.c:1845
 #: ../src/gnome2/dictlex.c:1008
-#: ../src/gnome2/gbs.c:833
+#: ../src/gnome2/gbs.c:836
 #: ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr "Bestand"
 
-#: ../src/editor/html-editor.c:540
+#: ../src/editor/html-editor.c:548
 msgid "Save the changes to document"
 msgstr "Wijzigingen opslaan"
 
-#: ../src/editor/html-editor.c:541
+#: ../src/editor/html-editor.c:549
 msgid "before closing?"
 msgstr "voor afsluiten?"
 
-#: ../src/editor/html-editor.c:548
+#: ../src/editor/html-editor.c:556
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Wijzigingen gaan verloren als u niet opslaat."
 
-#: ../src/editor/html-editor.c:1273
+#: ../src/editor/html-editor.c:1294
 msgid "Note Editor"
 msgstr "Notitieblok"
 
-#: ../src/editor/html-editor.c:1281
+#: ../src/editor/html-editor.c:1302
 #: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr "Studieblok"
@@ -1403,205 +1402,205 @@ msgstr "Modules zijn te downloaden van het SWORD-project"
 msgid "The SWORD Project"
 msgstr "Het SWORD-project"
 
-#: ../src/gnome2/bibletext.c:886
-#: ../src/gnome2/bibletext_dialog.c:1929
+#: ../src/gnome2/bibletext.c:901
+#: ../src/gnome2/bibletext_dialog.c:1936
 #: ../src/gnome2/commentary.c:745
-#: ../src/gnome2/commentary_dialog.c:1640
+#: ../src/gnome2/commentary_dialog.c:1638
 #: ../src/gnome2/dictlex.c:823
-#: ../src/gnome2/gbs.c:633
+#: ../src/gnome2/gbs.c:636
 msgid "item1"
 msgstr "item1"
 
-#: ../src/gnome2/bibletext.c:896
-#: ../src/gnome2/bibletext_dialog.c:1939
+#: ../src/gnome2/bibletext.c:911
+#: ../src/gnome2/bibletext_dialog.c:1946
 #: ../src/gnome2/commentary.c:755
-#: ../src/gnome2/commentary_dialog.c:1650
+#: ../src/gnome2/commentary_dialog.c:1648
 #: ../src/gnome2/dictlex.c:833
-#: ../src/gnome2/gbs.c:643
+#: ../src/gnome2/gbs.c:646
 msgid "Open Module"
 msgstr "Module openen"
 
-#: ../src/gnome2/bibletext.c:908
-#: ../src/gnome2/bibletext_dialog.c:1965
+#: ../src/gnome2/bibletext.c:923
+#: ../src/gnome2/bibletext_dialog.c:1972
 #: ../src/gnome2/commentary.c:767
-#: ../src/gnome2/commentary_dialog.c:1676
-#: ../src/gnome2/gbs.c:655
+#: ../src/gnome2/commentary_dialog.c:1674
+#: ../src/gnome2/gbs.c:658
 msgid "item2"
 msgstr "item2"
 
-#: ../src/gnome2/bibletext.c:920
-#: ../src/gnome2/bibletext_dialog.c:1977
+#: ../src/gnome2/bibletext.c:935
+#: ../src/gnome2/bibletext_dialog.c:1984
 #: ../src/gnome2/commentary.c:779
-#: ../src/gnome2/commentary_dialog.c:1688
-#: ../src/gnome2/gbs.c:667
+#: ../src/gnome2/commentary_dialog.c:1686
+#: ../src/gnome2/gbs.c:670
 msgid "Note"
 msgstr "Notitie"
 
-#: ../src/gnome2/bibletext.c:930
-#: ../src/gnome2/bibletext_dialog.c:1987
+#: ../src/gnome2/bibletext.c:945
+#: ../src/gnome2/bibletext_dialog.c:1994
 #: ../src/gnome2/commentary.c:789
-#: ../src/gnome2/commentary_dialog.c:1698
+#: ../src/gnome2/commentary_dialog.c:1696
 #: ../src/gnome2/dictlex.c:852
-#: ../src/gnome2/gbs.c:677
+#: ../src/gnome2/gbs.c:680
 msgid "All Readings"
 msgstr "Alle lezingen"
 
-#: ../src/gnome2/bibletext.c:936
-#: ../src/gnome2/bibletext_dialog.c:1993
+#: ../src/gnome2/bibletext.c:951
+#: ../src/gnome2/bibletext_dialog.c:2000
 #: ../src/gnome2/commentary.c:795
-#: ../src/gnome2/commentary_dialog.c:1704
+#: ../src/gnome2/commentary_dialog.c:1702
 #: ../src/gnome2/dictlex.c:858
-#: ../src/gnome2/gbs.c:683
+#: ../src/gnome2/gbs.c:686
 msgid "Primary Reading"
 msgstr "Primaire Lezing"
 
-#: ../src/gnome2/bibletext.c:942
-#: ../src/gnome2/bibletext_dialog.c:1999
+#: ../src/gnome2/bibletext.c:957
+#: ../src/gnome2/bibletext_dialog.c:2006
 #: ../src/gnome2/commentary.c:801
-#: ../src/gnome2/commentary_dialog.c:1710
+#: ../src/gnome2/commentary_dialog.c:1708
 #: ../src/gnome2/dictlex.c:864
-#: ../src/gnome2/gbs.c:689
+#: ../src/gnome2/gbs.c:692
 msgid "Secondary Reading"
 msgstr "Secundaire Lezing"
 
-#: ../src/gnome2/bibletext.c:960
-#: ../src/gnome2/bibletext_dialog.c:2017
+#: ../src/gnome2/bibletext.c:975
+#: ../src/gnome2/bibletext_dialog.c:2024
 #: ../src/gnome2/commentary.c:819
-#: ../src/gnome2/commentary_dialog.c:1728
+#: ../src/gnome2/commentary_dialog.c:1726
 #: ../src/gnome2/dictlex.c:882
 #: ../src/gnome2/font_dialog.c:292
-#: ../src/gnome2/gbs.c:707
+#: ../src/gnome2/gbs.c:710
 msgid "Set Module Font"
 msgstr "Lettertype voor module"
 
-#: ../src/gnome2/bibletext.c:967
-#: ../src/gnome2/bibletext_dialog.c:2024
+#: ../src/gnome2/bibletext.c:982
+#: ../src/gnome2/bibletext_dialog.c:2031
 #: ../src/gnome2/commentary.c:826
-#: ../src/gnome2/commentary_dialog.c:1735
+#: ../src/gnome2/commentary_dialog.c:1733
 #: ../src/gnome2/dictlex.c:889
-#: ../src/gnome2/gbs.c:714
+#: ../src/gnome2/gbs.c:717
 msgid "Words of Christ in Red"
 msgstr "Woorden van Christus in het rood"
 
-#: ../src/gnome2/bibletext.c:976
-#: ../src/gnome2/bibletext_dialog.c:2033
+#: ../src/gnome2/bibletext.c:991
+#: ../src/gnome2/bibletext_dialog.c:2040
 #: ../src/gnome2/commentary.c:835
-#: ../src/gnome2/commentary_dialog.c:1744
+#: ../src/gnome2/commentary_dialog.c:1742
 #: ../src/gnome2/dictlex.c:898
-#: ../src/gnome2/gbs.c:723
+#: ../src/gnome2/gbs.c:726
 msgid "Strong's Numbers"
 msgstr "Strongs"
 
-#: ../src/gnome2/bibletext.c:987
-#: ../src/gnome2/bibletext_dialog.c:2044
+#: ../src/gnome2/bibletext.c:1002
+#: ../src/gnome2/bibletext_dialog.c:2051
 #: ../src/gnome2/commentary.c:846
-#: ../src/gnome2/commentary_dialog.c:1755
+#: ../src/gnome2/commentary_dialog.c:1753
 #: ../src/gnome2/dictlex.c:909
-#: ../src/gnome2/gbs.c:734
+#: ../src/gnome2/gbs.c:737
 #: ../ui/search-dialog.glade.h:40
 msgid "Morphological Tags"
 msgstr "Morfologische Markeringen"
 
-#: ../src/gnome2/bibletext.c:995
-#: ../src/gnome2/bibletext_dialog.c:2052
+#: ../src/gnome2/bibletext.c:1010
+#: ../src/gnome2/bibletext_dialog.c:2059
 #: ../src/gnome2/commentary.c:854
-#: ../src/gnome2/commentary_dialog.c:1763
+#: ../src/gnome2/commentary_dialog.c:1761
 #: ../src/gnome2/dictlex.c:917
-#: ../src/gnome2/gbs.c:742
+#: ../src/gnome2/gbs.c:745
 #: ../ui/search-dialog.glade.h:32
 msgid "Footnotes"
 msgstr "Voetnoten"
 
-#: ../src/gnome2/bibletext.c:1003
-#: ../src/gnome2/bibletext_dialog.c:2060
+#: ../src/gnome2/bibletext.c:1018
+#: ../src/gnome2/bibletext_dialog.c:2067
 #: ../src/gnome2/commentary.c:862
-#: ../src/gnome2/commentary_dialog.c:1771
+#: ../src/gnome2/commentary_dialog.c:1769
 #: ../src/gnome2/dictlex.c:925
-#: ../src/gnome2/gbs.c:750
+#: ../src/gnome2/gbs.c:753
 msgid "Greek Accents"
 msgstr "Griekse Leestekens"
 
-#: ../src/gnome2/bibletext.c:1011
-#: ../src/gnome2/bibletext_dialog.c:2068
+#: ../src/gnome2/bibletext.c:1026
+#: ../src/gnome2/bibletext_dialog.c:2075
 #: ../src/gnome2/commentary.c:870
-#: ../src/gnome2/commentary_dialog.c:1779
+#: ../src/gnome2/commentary_dialog.c:1777
 #: ../src/gnome2/dictlex.c:933
-#: ../src/gnome2/gbs.c:758
+#: ../src/gnome2/gbs.c:761
 msgid "Lemmas"
 msgstr "Lemmas"
 
-#: ../src/gnome2/bibletext.c:1019
-#: ../src/gnome2/bibletext_dialog.c:2076
+#: ../src/gnome2/bibletext.c:1034
+#: ../src/gnome2/bibletext_dialog.c:2083
 #: ../src/gnome2/commentary.c:878
-#: ../src/gnome2/commentary_dialog.c:1787
+#: ../src/gnome2/commentary_dialog.c:1785
 #: ../src/gnome2/dictlex.c:941
-#: ../src/gnome2/gbs.c:766
+#: ../src/gnome2/gbs.c:769
 msgid "Scripture Cross-references"
 msgstr "Kruisverwijzingen van de schrift"
 
-#: ../src/gnome2/bibletext.c:1027
-#: ../src/gnome2/bibletext_dialog.c:2084
+#: ../src/gnome2/bibletext.c:1042
+#: ../src/gnome2/bibletext_dialog.c:2091
 #: ../src/gnome2/commentary.c:886
-#: ../src/gnome2/commentary_dialog.c:1795
+#: ../src/gnome2/commentary_dialog.c:1793
 #: ../src/gnome2/dictlex.c:949
-#: ../src/gnome2/gbs.c:774
+#: ../src/gnome2/gbs.c:777
 msgid "Hebrew Vowel Points"
 msgstr "De Hebreeuwse Klinkertekens"
 
-#: ../src/gnome2/bibletext.c:1035
-#: ../src/gnome2/bibletext_dialog.c:2092
+#: ../src/gnome2/bibletext.c:1050
+#: ../src/gnome2/bibletext_dialog.c:2099
 #: ../src/gnome2/commentary.c:894
-#: ../src/gnome2/commentary_dialog.c:1803
+#: ../src/gnome2/commentary_dialog.c:1801
 #: ../src/gnome2/dictlex.c:957
-#: ../src/gnome2/gbs.c:782
+#: ../src/gnome2/gbs.c:785
 msgid "Hebrew Cantillation"
 msgstr "Hebreeuwse Cantillation"
 
-#: ../src/gnome2/bibletext.c:1043
-#: ../src/gnome2/bibletext_dialog.c:2100
+#: ../src/gnome2/bibletext.c:1058
+#: ../src/gnome2/bibletext_dialog.c:2107
 #: ../src/gnome2/commentary.c:902
-#: ../src/gnome2/commentary_dialog.c:1811
+#: ../src/gnome2/commentary_dialog.c:1809
 #: ../src/gnome2/dictlex.c:965
-#: ../src/gnome2/gbs.c:790
+#: ../src/gnome2/gbs.c:793
 msgid "Headings"
-msgstr "Rubrieken"
+msgstr "Koppen"
 
-#: ../src/gnome2/bibletext.c:1051
-#: ../src/gnome2/bibletext_dialog.c:2108
+#: ../src/gnome2/bibletext.c:1066
+#: ../src/gnome2/bibletext_dialog.c:2115
 #: ../src/gnome2/commentary.c:910
-#: ../src/gnome2/commentary_dialog.c:1819
+#: ../src/gnome2/commentary_dialog.c:1817
 #: ../src/gnome2/dictlex.c:973
-#: ../src/gnome2/gbs.c:798
+#: ../src/gnome2/gbs.c:801
 msgid "Variants"
 msgstr "Varianten"
 
-#: ../src/gnome2/bibletext.c:1061
-#: ../src/gnome2/bibletext.c:1182
-#: ../src/gnome2/bibletext_dialog.c:2118
-#: ../src/gnome2/bibletext_dialog.c:2233
+#: ../src/gnome2/bibletext.c:1076
+#: ../src/gnome2/bibletext.c:1197
+#: ../src/gnome2/bibletext_dialog.c:2125
+#: ../src/gnome2/bibletext_dialog.c:2240
 #: ../src/gnome2/commentary.c:920
 #: ../src/gnome2/commentary.c:1065
-#: ../src/gnome2/commentary_dialog.c:1829
-#: ../src/gnome2/commentary_dialog.c:1953
+#: ../src/gnome2/commentary_dialog.c:1827
+#: ../src/gnome2/commentary_dialog.c:1951
 #: ../src/gnome2/dictlex.c:983
 #: ../src/gnome2/dictlex.c:1094
-#: ../src/gnome2/gbs.c:808
-#: ../src/gnome2/gbs.c:928
+#: ../src/gnome2/gbs.c:811
+#: ../src/gnome2/gbs.c:931
 msgid "Use Current Dictionary"
 msgstr "Gebruik huidig woordenboek"
 
-#: ../src/gnome2/bibletext.c:1072
-#: ../src/gnome2/bibletext_dialog.c:2129
+#: ../src/gnome2/bibletext.c:1087
+#: ../src/gnome2/bibletext_dialog.c:2136
 #: ../src/gnome2/commentary.c:931
-#: ../src/gnome2/commentary_dialog.c:1840
+#: ../src/gnome2/commentary_dialog.c:1838
 #: ../src/gnome2/dictlex.c:994
-#: ../src/gnome2/gbs.c:819
+#: ../src/gnome2/gbs.c:822
 #: ../src/gnome2/sidebar.c:994
 msgid "About"
 msgstr "Info"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1079
+#: ../src/gnome2/bibletext.c:1094
 #: ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:736
 #: ../src/gnome2/bookmarks_menu.c:910
@@ -1609,69 +1608,69 @@ msgstr "Info"
 #: ../src/gnome2/bookmarks_treeview.c:102
 #: ../src/gnome2/commentary.c:938
 #: ../src/gnome2/dictlex.c:1001
-#: ../src/gnome2/gbs.c:826
+#: ../src/gnome2/gbs.c:829
 #: ../src/gnome2/mod_mgr.c:1942
 #: ../src/gnome2/mod_mgr.c:2093
 #: ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "Bladwijzer"
 
-#: ../src/gnome2/bibletext.c:1092
-#: ../src/gnome2/bibletext_dialog.c:2142
+#: ../src/gnome2/bibletext.c:1107
+#: ../src/gnome2/bibletext_dialog.c:2149
 #: ../src/gnome2/bookmarks_menu.c:456
 #: ../src/gnome2/commentary.c:951
-#: ../src/gnome2/commentary_dialog.c:1853
+#: ../src/gnome2/commentary_dialog.c:1851
 #: ../src/gnome2/dictlex.c:1014
-#: ../src/gnome2/gbs.c:839
+#: ../src/gnome2/gbs.c:842
 msgid "Edit"
 msgstr "Bewerken"
 
-#: ../src/gnome2/bibletext.c:1098
-#: ../src/gnome2/bibletext_dialog.c:2148
+#: ../src/gnome2/bibletext.c:1113
+#: ../src/gnome2/bibletext_dialog.c:2155
 #: ../src/gnome2/commentary.c:957
-#: ../src/gnome2/commentary_dialog.c:1859
+#: ../src/gnome2/commentary_dialog.c:1857
 #: ../src/gnome2/dictlex.c:1020
-#: ../src/gnome2/gbs.c:845
+#: ../src/gnome2/gbs.c:848
 msgid "_Module Options"
 msgstr "_Moduleopties"
 
-#: ../src/gnome2/bibletext.c:1104
-#: ../src/gnome2/bibletext_dialog.c:2154
+#: ../src/gnome2/bibletext.c:1119
+#: ../src/gnome2/bibletext_dialog.c:2161
 #: ../src/gnome2/commentary.c:963
-#: ../src/gnome2/commentary_dialog.c:1865
+#: ../src/gnome2/commentary_dialog.c:1863
 #: ../src/gnome2/dictlex.c:1026
-#: ../src/gnome2/gbs.c:851
+#: ../src/gnome2/gbs.c:854
 msgid "Lookup Selection"
 msgstr "Zoek selectie"
 
-#: ../src/gnome2/bibletext.c:1110
-#: ../src/gnome2/bibletext_dialog.c:2160
+#: ../src/gnome2/bibletext.c:1125
+#: ../src/gnome2/bibletext_dialog.c:2167
 #: ../src/gnome2/commentary.c:981
-#: ../src/gnome2/commentary_dialog.c:1871
+#: ../src/gnome2/commentary_dialog.c:1869
 #: ../src/gnome2/dictlex.c:1039
-#: ../src/gnome2/gbs.c:864
+#: ../src/gnome2/gbs.c:867
 msgid "Unlock This Module"
 msgstr "Open deze module"
 
-#: ../src/gnome2/bibletext.c:1116
-#: ../src/gnome2/bibletext_dialog.c:2166
+#: ../src/gnome2/bibletext.c:1131
+#: ../src/gnome2/bibletext_dialog.c:2173
 #: ../src/gnome2/commentary.c:999
-#: ../src/gnome2/commentary_dialog.c:1889
-#: ../src/gnome2/gbs.c:870
+#: ../src/gnome2/commentary_dialog.c:1887
+#: ../src/gnome2/gbs.c:873
 msgid "Read Selection Aloud"
 msgstr "Hardop voorlezen"
 
-#: ../src/gnome2/bibletext_dialog.c:576
+#: ../src/gnome2/bibletext_dialog.c:577
 msgid "Go to "
 msgstr "Ga naar"
 
-#: ../src/gnome2/bibletext_dialog.c:1945
-#: ../src/gnome2/commentary_dialog.c:1656
+#: ../src/gnome2/bibletext_dialog.c:1952
+#: ../src/gnome2/commentary_dialog.c:1654
 msgid "Sync with main"
 msgstr "Synchroniseer met main"
 
-#: ../src/gnome2/bibletext_dialog.c:1951
-#: ../src/gnome2/commentary_dialog.c:1662
+#: ../src/gnome2/bibletext_dialog.c:1958
+#: ../src/gnome2/commentary_dialog.c:1660
 msgid "Stay in sync"
 msgstr "Synchroon houden"
 
@@ -1897,12 +1896,12 @@ msgid ""
 msgstr ""
 
 #: ../src/gnome2/commentary.c:969
-#: ../src/gnome2/commentary_dialog.c:1877
+#: ../src/gnome2/commentary_dialog.c:1875
 msgid "Display Book Heading"
 msgstr "Toon boektitel"
 
 #: ../src/gnome2/commentary.c:975
-#: ../src/gnome2/commentary_dialog.c:1883
+#: ../src/gnome2/commentary_dialog.c:1881
 msgid "Display Chapter Heading"
 msgstr "Toon Hoofdstuktitel"
 
@@ -1927,7 +1926,7 @@ msgid "Close _without Saving"
 msgstr "Sluiten _zonder opslaan"
 
 #: ../src/gnome2/dictlex.c:1032
-#: ../src/gnome2/gbs.c:857
+#: ../src/gnome2/gbs.c:860
 msgid "Show Tabs"
 msgstr "Tabbladen tonen"
 
@@ -2035,24 +2034,24 @@ msgstr "Ga naar %s"
 msgid "Initiating GnomeSword"
 msgstr "Initialiseren GnomeSword"
 
-#: ../src/gnome2/gnomesword.c:143
+#: ../src/gnome2/gnomesword.c:145
 #: ../src/gnome2/splash.c:624
 msgid "Displaying GnomeSword"
 msgstr "Opbouwen interface"
 
-#: ../src/gnome2/gnomesword.c:171
+#: ../src/gnome2/gnomesword.c:173
 msgid "The Setup Druid was cancelled."
 msgstr ""
 
-#: ../src/gnome2/gnomesword.c:172
+#: ../src/gnome2/gnomesword.c:174
 msgid "Do you wish to set preferences now?"
 msgstr "Wilt u nu instellingen wijzigen?"
 
-#: ../src/gnome2/gnomesword.c:217
+#: ../src/gnome2/gnomesword.c:219
 msgid "done"
 msgstr "klaar"
 
-#: ../src/gnome2/gnomesword.c:295
+#: ../src/gnome2/gnomesword.c:301
 msgid "GnomeSword is shutdown"
 msgstr "GnomeSword wordt afgesloten"
 
@@ -2061,15 +2060,15 @@ msgstr "GnomeSword wordt afgesloten"
 msgid "Page %d of %d"
 msgstr "Pagian %d van %d"
 
-#: ../src/gnome2/html.c:738
+#: ../src/gnome2/html.c:739
 msgid "Print"
 msgstr "Afdrukken"
 
-#: ../src/gnome2/html.c:788
+#: ../src/gnome2/html.c:789
 msgid "Print Preview"
 msgstr "Afdrukvoorbeeld"
 
-#: ../src/gnome2/html.c:794
+#: ../src/gnome2/html.c:795
 msgid "Failed to print the document"
 msgstr "Afdrukken is mislukt"
 
@@ -2203,12 +2202,10 @@ msgid "D_ouble-Space Text"
 msgstr "Tekst met dubbele spaties"
 
 #: ../src/gnome2/main_menu.c:876
-#, fuzzy
 msgid "_Attach/Detach Sidebar"
 msgstr "Koppel/Ontkoppel zijbalk"
 
 #: ../src/gnome2/main_menu.c:882
-#, fuzzy
 msgid "_Show/Hide Sidebar"
 msgstr "Toon/Verberg zijbalk"
 
@@ -2259,23 +2256,23 @@ msgstr "_Geschiedenis"
 msgid "_Help"
 msgstr "_Help"
 
-#: ../src/gnome2/main_window.c:587
+#: ../src/gnome2/main_window.c:600
 msgid "Building GnomeSword interface"
 msgstr "Bezig met opbouwen GnomeSword interface"
 
-#: ../src/gnome2/main_window.c:594
+#: ../src/gnome2/main_window.c:607
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Software voor bijbelstudie"
 
-#: ../src/gnome2/main_window.c:648
+#: ../src/gnome2/main_window.c:661
 msgid "Open a new tab"
 msgstr "Open een nieuw tabblad"
 
-#: ../src/gnome2/main_window.c:794
+#: ../src/gnome2/main_window.c:813
 msgid "Commentary View"
 msgstr "Commentaarweergave"
 
-#: ../src/gnome2/main_window.c:811
+#: ../src/gnome2/main_window.c:830
 msgid "Book View"
 msgstr "Boekweergave"
 
@@ -2461,27 +2458,27 @@ msgstr "URL:"
 msgid "Directory:"
 msgstr "Map:"
 
-#: ../src/gnome2/navbar_book.c:314
-#: ../src/gnome2/navbar_book_dialog.c:286
+#: ../src/gnome2/navbar_book.c:329
+#: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go to parent"
 msgstr "Ga naar bovenliggende"
 
-#: ../src/gnome2/navbar_book.c:331
-#: ../src/gnome2/navbar_book_dialog.c:303
+#: ../src/gnome2/navbar_book.c:346
+#: ../src/gnome2/navbar_book_dialog.c:316
 msgid "Go to previous item"
 msgstr "Vorig item"
 
-#: ../src/gnome2/navbar_book.c:347
-#: ../src/gnome2/navbar_book_dialog.c:319
+#: ../src/gnome2/navbar_book.c:362
+#: ../src/gnome2/navbar_book_dialog.c:332
 msgid "Go to next item"
 msgstr "Volgend item"
 
-#: ../src/gnome2/navbar_book.c:364
-#: ../src/gnome2/navbar_book_dialog.c:336
+#: ../src/gnome2/navbar_book.c:379
+#: ../src/gnome2/navbar_book_dialog.c:349
 msgid "Go to first child"
 msgstr "Ga naar het eerste"
 
-#: ../src/gnome2/parallel_dialog.c:599
+#: ../src/gnome2/parallel_dialog.c:699
 #: ../src/gnome2/preferences_dialog.c:1614
 msgid "Parallel"
 msgstr "Parallel"
@@ -2731,27 +2728,27 @@ msgstr "is gewijzigd. Wilt u de wijzigingen opslaan?"
 msgid "not loaded"
 msgstr "niet geladen"
 
-#: ../src/gnome2/toolbar_nav.c:537
+#: ../src/gnome2/toolbar_nav.c:538
 msgid "Move backwards through history"
 msgstr "Schuif terugwaarts in de geschiedenis"
 
-#: ../src/gnome2/toolbar_nav.c:558
+#: ../src/gnome2/toolbar_nav.c:559
 msgid "Move foward through history"
 msgstr "Schuif voorwaarts in de geschiedenis"
 
-#: ../src/gnome2/toolbar_nav.c:579
+#: ../src/gnome2/toolbar_nav.c:580
 msgid "Select a Book of the Bible"
 msgstr "Selecteer een bijbelboek"
 
-#: ../src/gnome2/toolbar_nav.c:644
+#: ../src/gnome2/toolbar_nav.c:645
 msgid "Change Chapter"
 msgstr "Wijzig hoofdstuk"
 
-#: ../src/gnome2/toolbar_nav.c:714
+#: ../src/gnome2/toolbar_nav.c:715
 msgid "Change Verse"
 msgstr "Wijzig vers"
 
-#: ../src/gnome2/toolbar_nav.c:782
+#: ../src/gnome2/toolbar_nav.c:783
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "Geef een versreferentie in Boek 1:1 formaat en druk op Enter"
 
@@ -3032,7 +3029,7 @@ msgstr "<b>WAARSCHUWING:</b> Wees voorzichtig als u in een land leeft waar u wor
 
 #: ../ui/module-manager.glade.h:8
 msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "<b>WAARSCHUWING:</b> Als u wordt vervolgd en niet wilt worden opgemerkt, dan moet u de niet vanaf externe bronnen installeren! "
+msgstr "<b>WAARSCHUWING:</b> Als u wordt vervolgd en niet wilt worden opgemerkt, dan moet u NIET vanaf een externe bron installeren! "
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
