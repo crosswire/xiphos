@@ -682,6 +682,8 @@ static struct _info *info_new(GtkHTML * html,
 {
 #ifndef USE_GTKHTML3_14
 #ifdef USE_GTKHTML38
+	struct _info *info;
+
 	info = g_new(struct _info, 1);
 	info->local_font = gnome_font_find_closest((const guchar *)"Sans Regular", 10.0);
 
