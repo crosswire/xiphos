@@ -1,8 +1,12 @@
+2007-04-27  terry <tbiggs@users.sourceforge.net>
+
+	* committed work around for bug #1708829 crash on opening note editor
+
 2007-04-26  karl <charcoal@users.sf.net>
 
 	* fixed modulecache header invalidation bug.
 
-2007-04-28  terry <tbiggs@users.sourceforge.net>
+2007-04-24  terry <tbiggs@users.sourceforge.net>
 	
 	* fixed bug #1706475 no genbooks + genbook navbar => crash
 	* added support for gtkhtml-3.14
