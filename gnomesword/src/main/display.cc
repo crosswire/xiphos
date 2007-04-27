@@ -1283,7 +1283,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 			newparagraph = FALSE;
 			str = g_string_append(str, paragraphMark);
 		}
-		if (key->Verse() == curVerse   ||
+/*		if (key->Verse() == curVerse   ||
 		    key->Verse() == curVerse-1 ||
 		    key->Verse() == curVerse-2 ||
 		    key->Verse() == curVerse+2 ||
@@ -1292,7 +1292,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		} else {
 			main_set_dialog_strongs_morphs_off(be, ops);
 		}
-
+*/
 		// same forced line break glitch in highlighted current verse.
 		if (settings.versehighlight &&		// doing <table> h/l.
 		    !versestyle &&			// paragraph format.
