@@ -60,6 +60,7 @@ WIDGETS widgets;
 
 static gboolean ctrl_key_presed = FALSE;
 static GtkWidget *nav_toolbar;
+//static NAVBAR_TYPE *type;
 /******************************************************************************
  * Name
  *  gui_show_hide_texts
