@@ -1,3 +1,7 @@
+2007-04-27  dom <domcox@users.sf.net>
+
+	* Norsk Bokmål (nb_NO) translation by harald@thingelstad.org added
+
 2007-04-26  karl <charcoal@users.sf.net>
 
 	* fixed modulecache header invalidation bug.
