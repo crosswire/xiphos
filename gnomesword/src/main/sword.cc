@@ -312,11 +312,8 @@ gchar *main_update_nav_controls(const gchar * key)
 #ifdef OLD_NAVBAR
 	main_navbar_set(navbar_main, val_key);
 #else
-	//if(navbar_versekey.module_name)
-		//g_free(navbar_versekey.module_name);
 	navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
-	//if(navbar_versekey.key)
-		//g_free(navbar_versekey.key);
+	
 	navbar_versekey.key = g_string_assign(navbar_versekey.key,val_key);
 	main_navbar_versekey_set(navbar_versekey, val_key);
 #endif

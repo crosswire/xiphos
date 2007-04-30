@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * navbar_versekey.h - navigation bar for genbook modules
+ * navbar_versekey_dialog.h - navigation bar for genbook modules
  *
  * Copyright (C) 2007 GnomeSword Developer Team
  *
@@ -19,12 +19,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___NAVBAR_VERSEKEY_H_
-#define ___NAVBAR_VERSEKEY_H_
+#ifndef __NAVBAR_VERSEKEY_DIALOG_H_
+#define __NAVBAR_VERSEKEY_DIALOG_H_
 
-#include "main/navbar_versekey.h"
+#include "main/module_dialogs.h"
  
-GtkWidget *gui_navbar_versekey_new(void);
-//GtkWidget *gui_navbar_versekey_parallel_new(void);
+GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog);
 
 #endif

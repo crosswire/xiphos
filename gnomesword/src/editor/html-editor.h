@@ -28,11 +28,49 @@ extern "C"
 #endif
 
 #include <config.h>
+#include <bonobo.h>
+#ifdef OLD_NAVBAR
+#include "main/navbar.h"
+#else
+#include "main/navbar_versekey.h"
+#endif
+#include "editor/Editor.h"
 
 typedef struct _editor EDITOR;
 
+struct _editor {
+	GtkWidget *window;
+	GtkWidget *toolbar;
+	GtkWidget *sync_button;
+	GtkWidget *html_widget;
+	GtkWidget *statusbar;
+
+#ifdef OLD_NAVBAR	
+	NAVBAR navbar;
+#else		
+	NAVBAR_VERSEKEY navbar;
+#endif
+	
+	BonoboWidget *control;
+	GNOME_GtkHTML_Editor_Engine engine;
+	Bonobo_PersistFile persist_file_interface;
+	Bonobo_PersistStream persist_stream_interface;
+	
+	gint type;
+
+	gboolean studypad;
+	gboolean is_changed;
+	gboolean sync;
+
+	gchar *filename;
+	gchar *module;
+	gchar *key;
+};	
+
+
 void editor_sync_with_main(void);
 gboolean editor_close_all(void);
+void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);
 gint load_file (EDITOR * e);	
 
