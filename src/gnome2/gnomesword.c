@@ -54,6 +54,7 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 
+#include "main/prayer_list.h"
 #include "main/navbar_book.h"
 #include "main/parallel_view.h"
 #include "main/sword.h"
@@ -213,7 +214,7 @@ void frontend_display(void)
 		main_clear_viewer();
 	
 	gtk_widget_grab_focus (sidebar.module_list);
-	
+	//main_prayer_list_new("2007");
 
 #ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
