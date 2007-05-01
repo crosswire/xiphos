@@ -152,31 +152,6 @@ gchar *main_parallel_change_verse(void)
 
 /******************************************************************************
  * Name
- *   main_parallel_update_controls
- *
- * Synopsis
- *   #include ".h"
- *   
- *   gchar *main_parallel_update_controls(gchar * ref)
- *
- * Description
- *   
- *
- *
- *   
- *
- * Return value
- *   gchar*
- */
-
-gchar *main_parallel_update_controls(const gchar * ref)
-{
-	return backend->get_valid_key(ref);
-}
-
-
-/******************************************************************************
- * Name
  *   gui_set_parallel_module_global_options
  *
  * Synopsis
