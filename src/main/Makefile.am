@@ -47,6 +47,7 @@ libmain_a_SOURCES =  \
     navbar_book_dialog.cc navbar_book_dialog.h \
     navbar_versekey.cc navbar_versekey.h \
     parallel_view.cc parallel_view.h \
+    prayer_list.cc prayer_list.h \
     previewer.cc previewer.h \
     search_dialog.cc search_dialog.h \
     search_sidebar.cc search_sidebar.h \

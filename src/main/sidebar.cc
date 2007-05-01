@@ -41,13 +41,12 @@
 #include "main/lists.h"
 #include "main/navbar.h"
 #include "main/navbar_book.h"
+#include "main/prayer_list.h"
 #include "main/settings.h"
 #include "main/sword.h"
-//#include "main/tab_struct.h"
 #include "main/url.hh"
 #include "main/xml.h"
 
-//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 
@@ -228,8 +227,15 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 			   -1);
 
+	//g_message("offset: %d",backend->get_treekey_offset());
+	//g_message(backend->display_mod->Name());
 	if (backend->treekey_first_child(offset)) {
+		//g_message("treekey_first_child1 %s",mod_name);
+		
 		offset = backend->get_treekey_offset();
+		
+		//g_message("offset: %d",offset);
+		
 		sprintf(buf, "%lu", offset);
 		tmpbuf = backend->treekey_get_local_name(offset);
 		gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -670,13 +676,16 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		main_display_dictionary(mod, settings.dictkey);
 		break;
 	case BOOK_TYPE:
+#ifdef PRAYERLIST
+	case PRAYERLIST_TYPE:
+#endif
+			  //  g_message("key %s",key);
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
 					       notebook_comm_book), 1);
 		backend->set_module(mod);
-		backend->set_treekey(atoi((key) ? key : (gchar *) "0"));
-		main_display_book(mod, (key) ? key : (gchar *) "0");
+		backend->set_treekey(key ? atoi(key) : 0);
 		path = gtk_tree_model_get_path(model, &selected);
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
@@ -684,8 +693,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_children_to_tree(model,
 					     selected,
 					     mod,
-					     backend->
-					     get_treekey_offset());
+					     0);
 		}
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
@@ -697,8 +705,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					 (sidebar.module_list), path,
 					 FALSE);
 		gtk_tree_path_free(path);
-		//unsigned long x = atoi((key) ? key: "0");
-		main_setup_navbar_book(mod, atoi((key) ? key: "0"));
+		main_display_book(mod, (key ? key : (gchar *) "0"));
+		main_setup_navbar_book(mod, (key ? atoi(key) : 0));
 		break;
 	}
 	if (cap)
@@ -765,6 +773,46 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 			   COL_CAPTION, (gchar *) language,
 			   COL_MODULE, NULL, COL_OFFSET, NULL, -1);
 }
+
+
+/******************************************************************************
+ * Name
+ *   add_module_to_prayerlist_folder
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void add_module_to_prayerlist_folder(GtkTreeModel * model,
+ *		      GtkTreeIter iter, gchar * module_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+#ifdef PRAYERLIST
+static void add_module_to_prayerlist_folder(GtkTreeModel * model,
+					  GtkTreeIter iter,
+					  gchar * module_name)
+{
+	
+	GtkTreeIter child_iter;
+	
+	gtk_tree_store_append(GTK_TREE_STORE(model),
+			      &child_iter, &iter);
+	gtk_tree_store_set(GTK_TREE_STORE(model),
+			   &child_iter, COL_OPEN_PIXBUF,
+			   pixbufs->pixbuf_closed,
+			   COL_CLOSED_PIXBUF,
+			   pixbufs->pixbuf_closed,
+			   COL_CAPTION,
+			   (gchar *) module_name,
+			   COL_MODULE,
+			   (gchar *) module_name,
+			   COL_OFFSET, NULL, -1);
+}
+#endif
 
 
 /******************************************************************************
@@ -990,6 +1038,21 @@ void main_load_module_tree(GtkWidget * tree)
 		tmp = g_list_next(tmp);
 	}
 
+#ifdef PRAYERLIST
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Prayer List"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Prayer List"), -1);
+	tmp = get_list(PRAYER_LIST);
+	while (tmp != NULL) {
+		add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
+					      iter, (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+#endif	
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
 }

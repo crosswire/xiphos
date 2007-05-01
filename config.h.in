@@ -139,6 +139,9 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Define if wish to enable the PrayerList */
+#undef PRAYERLIST
+
 /* Define to the type of arg 1 for `select'. */
 #undef SELECT_TYPE_ARG1
 

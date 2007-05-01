@@ -910,20 +910,29 @@ void main_dialog_delete_note(gpointer data)
  *   void
  */
 
-void main_free_on_destroy(DIALOG_DATA * t)
+void main_free_on_destroy(DIALOG_DATA * d)
 {
 	//GList *tmp = NULL;
+	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) d);
+	g_free(d->ops); 
+	g_free(d->key);
+	g_free(d->mod_name);
 	
-	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) t);
-	g_free(t->ops); 
-	g_free(t->key);
-	g_free(t->mod_name);
-	if((BackEnd*)t->backend) {
-		BackEnd* be = (BackEnd*)t->backend;
+#ifdef OLD_NAVBAR
+		if(d->navbar.key)
+			g_free(d->navbar.key);
+		if(d->navbar.module_name)
+			g_free(d->navbar.module_name);
+#else
+		g_string_free(d->navbar.module_name,TRUE);
+		g_string_free(d->navbar.key,TRUE);
+#endif
+	if((BackEnd*)d->backend) {
+		BackEnd* be = (BackEnd*)d->backend;
 		delete be;
 		be = NULL;
 	}
-	g_free(t);
+	g_free(d);
 }
 
 
@@ -1081,11 +1090,6 @@ void main_dialogs_shutdown(void)
 		/* 
 		 * free each DIALOG_DATA item created 
 		 */
-#ifndef USE_GTKHTML38
-		if((GSHTMLEditorControlData*)t->editor) 
-			editor_control_data_destroy(NULL, 
-					(GSHTMLEditorControlData*)t->editor);
-#endif		
 		if((BackEnd*)t->backend) {
 			BackEnd* be = (BackEnd*)t->backend;
 			delete be;
@@ -1731,7 +1735,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 #else
 			t->navbar.module_name = g_string_new(mod_name);
 			t->navbar.key =  g_string_new(settings.currentverse);
-			main_navbar_versekey_set(t->navbar, (char*)t->navbar.key); 
+			//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key->str); 
 #endif
 		break;
 		case COMMENTARY_TYPE:
@@ -1751,33 +1755,9 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 #else
 			t->navbar.module_name = g_string_new(mod_name);
 			t->navbar.key =  g_string_new(settings.currentverse);
-			main_navbar_versekey_set(t->navbar, (char*)t->navbar.key); 
+			//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key); 
 #endif
 		break;
-#ifndef USE_GTKHTML38
-		case PERCOM_TYPE:
-			t->mod_type = PERCOM_TYPE;
-			gui_create_note_editor(t);
-			ec = (GSHTMLEditorControlData *) t->editor;
-			ec->key = g_strdup(settings.currentverse);
-			strcpy(ec->filename, t->mod_name);
-			t->is_percomm = TRUE;
-			be->entryDisplay 
-				    = new DialogEntryDisp(ec->htmlwidget,  t, be, t->ops); 
-			be->init_SWORD(1);
-			ec->be = (BackEnd*)be;
-			if(key)
-				t->key = g_strdup(key);
-			else			
-				t->key = g_strdup(settings.currentverse);
-			settings.percomm_dialog_exist = TRUE;
-			dlg_percom = t;
-			t->navbar.is_dialog = TRUE;
-			t->navbar.key = g_strdup(t->key);
-			t->navbar.module_name = g_strdup(mod_name);
-			main_navbar_fill_book_combo(t->navbar);
-		break;
-#endif
 		case DICTIONARY_TYPE:
 			t->mod_type = DICTIONARY_TYPE;
 			gui_create_dictlex_dialog(t);

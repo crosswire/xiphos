@@ -36,8 +36,9 @@
 #ifdef OLD_NAVBAR
 #include "main/navbar.h"
 #else
-#include "main/navbar_versekey.h"
+#include "gui/navbar_versekey_editor.h"
 #endif
+
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
@@ -54,35 +55,7 @@ extern gboolean do_display;
 
 static 
 gboolean save_through_persist_file(EDITOR * e, const gchar * filename);
-static 
-void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
-
-struct _editor {
-	GtkWidget *window;
-	GtkWidget *toolbar;
-	GtkWidget *sync_button;
-	GtkWidget *html_widget;
-	GtkWidget *statusbar;
-
-#ifdef OLD_NAVBAR	
-	NAVBAR navbar;
-#else		
-	NAVBAR_VERSEKEY navbar;
-#endif
-	
-	BonoboWidget *control;
-	GNOME_GtkHTML_Editor_Engine engine;
-	Bonobo_PersistFile persist_file_interface;
-	Bonobo_PersistStream persist_stream_interface;
-
-	gboolean studypad;
-	gboolean is_changed;
-	gboolean sync;
-
-	gchar *filename;
-	gchar *module;
-	gchar *key;
-};
+//static 
 
 static GList *editors_all = NULL;
 static gint formatHTML = 1;
@@ -667,10 +640,15 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 				   (gchar *) e->key);
 	if(strlen(text)) 
 		load_through_persist_stream(text, e);
+	else
+		load_through_persist_stream("", e); /* clear editor if no text */
 	
 	change_window_title(e->window, title);
+#ifdef OLD_NAVBAR
 	main_navbar_set(e->navbar, e->key);
-	
+#else	
+	main_navbar_versekey_set(e->navbar, e->key);
+#endif
 	if (text)
 		g_free(text);
 	if (title)
@@ -959,7 +937,7 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
  *   void
  */
 
-static void sync_toggled(GtkToggleButton * button, EDITOR * e)
+void editor_sync_toggled(GtkToggleButton * button, EDITOR * e)
 {
 	if (button->active) {
 		if (editor_is_dirty(e))
@@ -981,7 +959,7 @@ void editor_sync_with_main(void)
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
 		if (!e->studypad) 
-			sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
+			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
 		tmp = g_list_next(tmp);
 	}
 }
@@ -1102,7 +1080,7 @@ static GtkWidget *navebar_create(EDITOR * editor)
 			   TRUE, 0);
 	
 	g_signal_connect(GTK_OBJECT(editor->sync_button),
-			 "toggled", G_CALLBACK(sync_toggled), editor);
+			 "toggled", G_CALLBACK(editor_sync_toggled), editor);
 
 	g_signal_connect((gpointer) editor->navbar.comboboxentry_book,
 			 "changed",
@@ -1139,18 +1117,18 @@ static GtkWidget *container_create(const gchar * window_title,
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox);
 	if (!editor->studypad) {
+#ifdef OLD_NAVBAR
 		toolbar_nav = navebar_create(editor);
 		gtk_widget_show(toolbar_nav);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-#ifdef OLD_NAVBAR
 		editor->navbar.module_name = editor->module;
 		if (editor->navbar.key == NULL)
 			editor->navbar.key = g_strdup(editor->key);
 		main_navbar_fill_book_combo(editor->navbar);
 #else
-		editor->navbar.module_name = g_string_assign(editor->navbar.module_name,editor->module);
-		if (!editor->navbar.key->len)
-			editor->navbar.key = g_string_assign(editor->navbar.key,editor->key);
+		toolbar_nav = gui_navbar_versekey_editor_new(editor);
+		gtk_widget_show(toolbar_nav);
+		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
 #endif
 	}
 
@@ -1232,7 +1210,9 @@ static GtkWidget *container_create(const gchar * window_title,
 	CORBA_exception_free(&ev);
 
 	gtk_widget_show_all(GTK_WIDGET(window));
-
+	gtk_widget_hide(editor->navbar.button_history_back); 
+	gtk_widget_hide(editor->navbar.button_history_next); 
+	gtk_widget_hide(editor->navbar.button_history_menu); 
 	CORBA_exception_init(&ev);
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
@@ -1383,3 +1363,4 @@ gint load_file(EDITOR * e)
 	load_through_persist_file(e, g_strdup(e->filename));
 	return FALSE;
 }
+
