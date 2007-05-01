@@ -47,6 +47,7 @@ gnomesword2_SOURCES =  \
     navbar_versekey.c \
     navbar_versekey_dialog.c \
     navbar_versekey_editor.c \
+    navbar_versekey_parallel.c \
     parallel_view.c \
     parallel_dialog.c \
     prayer_list.c \

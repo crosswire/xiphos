@@ -306,10 +306,14 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 	}
 	if(!strcmp(stype,"verse")) {
 		if(clicked) {
-			settings.cvparallel = 
-				main_parallel_update_controls(svalue);
+#ifdef OLD_NAVBAR
+			settings.cvparallel = backend->get_valid_key(svalue);
 			main_update_parallel_page_detached();
 			gui_set_parallel_navbar((char*)svalue);
+#else
+			gtk_entry_set_text(GTK_ENTRY(navbar_parallel.lookup_entry),svalue);
+			gtk_widget_activate(navbar_parallel.lookup_entry);
+#endif
 		} 
 	}
 	return 1;
