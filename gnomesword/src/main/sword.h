@@ -47,8 +47,8 @@ extern "C" {
 #define DIALOG_COMMENTARY_TYPE 8 
 #define DIALOG_DICTIONARY_TYPE 9
 #define DIALOG_BOOK_TYPE 10
-
 #define DIALOG_SEARCH_PREVIEW_TYPE 11
+#define	PRAYERLIST_TYPE 12
        
 /* these strings are not seen by users */
 #define TEXT_MODS "Biblical Texts"

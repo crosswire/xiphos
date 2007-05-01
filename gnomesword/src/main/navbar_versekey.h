@@ -26,6 +26,20 @@
 extern "C"
 {
 #endif
+typedef struct _navbar_type NAVBAR_TYPE;
+struct  _navbar_type {
+	gint type;
+	gpointer dialog;
+	gpointer editor;
+};
+
+enum {
+	NB_MAIN,
+	NB_PARALLEL,
+	NB_DIALOG,
+	NB_EDITOR
+};
+
 typedef struct _navbar_versekey NAVBAR_VERSEKEY;
 struct _navbar_versekey {	
 	GtkWidget *navbar;
@@ -57,14 +71,21 @@ struct _navbar_versekey {
 	gchar *book;
 	GString *module_name;
 	gboolean dialog;
-	int testaments;	
+	gint testaments;
+	gint type;	
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
 
 const char *main_get_valid_key(char * key);
-GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, gpointer data);
-GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, gpointer data);
-GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, gpointer data);
+GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, 
+						gpointer dialog,
+						gpointer editor);
+GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, 
+						gpointer dialog,
+						gpointer editor);
+GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, 
+						gpointer dialog,
+						gpointer editor);
 void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction);
 void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction);
 void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction);

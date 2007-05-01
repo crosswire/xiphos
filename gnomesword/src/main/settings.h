@@ -173,7 +173,7 @@ struct _settings {
 		havedict, 
 		havebook, 
 		havepercomm,
-		
+		haveprayerlist,
 		/* do we need to add item to history */
 		addhistoryitem;
 	

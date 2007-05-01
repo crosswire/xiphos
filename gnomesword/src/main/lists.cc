@@ -77,6 +77,11 @@ GList *get_list(gint type)
 	case DEVOTION_LIST:
 		return mod_lists->devotionmods;
 		break;
+#ifdef PRAYERLIST
+	case PRAYER_LIST:
+		return mod_lists->prayermods;
+		break;
+#endif
 	}
 	return NULL;
 }
@@ -95,17 +100,20 @@ void main_init_lists(void)
 	mods.percommods = NULL;
 	mods.bookmods = NULL;
 	mods.devotionmods = NULL;
+	mods.prayermods = NULL;
 	mods.options = NULL;
 	mods.text_descriptions = NULL;
 	mods.comm_descriptions = NULL;
 	mods.dict_descriptions = NULL;
 	mods.book_descriptions = NULL;
+	//mods.prayer_descriptions = NULL;
 
 	settings.havebible = FALSE;
 	settings.havecomm = FALSE;
 	settings.havedict = FALSE;
 	settings.havebook = FALSE;
 	settings.havepercomm = FALSE;
+	settings.haveprayerlist = FALSE;
 	
 	if(backend) {
 		mods.options = backend->get_module_options();
@@ -130,7 +138,10 @@ void main_init_lists(void)
 
 	settings.havebook = g_list_length(mods.bookmods);
 
-	settings.havepercomm = g_list_length(mods.percommods);
+	settings.havepercomm = g_list_length(mods.percommods);	
+#ifdef PRAYERLIST
+	settings.haveprayerlist = g_list_length(mods.prayermods);
+#endif	
 	if(g_list_length(mods.devotionmods)== 1) {		
 		xml_set_value("GnomeSword", "modules", "devotional",(char*)mods.devotionmods->data );
 		settings.devotionalmod = xml_get_value("modules", "devotional");
@@ -143,8 +154,11 @@ void main_init_lists(void)
 	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
 	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
 	g_print("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm);
-	g_print("%s = %d\n\n", _("Number of Devotion modules"), 
+	g_print("%s = %d\n", _("Number of Devotion modules"), 
 					g_list_length(mods.devotionmods));
+#ifdef PRAYERLIST
+	g_print("%s = %d\n\n", _("Number of Prayer modules"), settings.haveprayerlist);
+#endif
 #endif
 }
 
@@ -192,7 +206,14 @@ void main_shutdown_list(void)
 		    g_list_next(mod_lists->percommods);
 	}
 	g_list_free(mod_lists->percommods);
-
+#ifdef PRAYERLIST
+	while (mod_lists->prayermods != NULL) {
+		g_free((char *) mod_lists->prayermods->data);
+		mod_lists-> =prayermods
+		    g_list_next(mod_lists->prayermods);
+	}
+	g_list_free(mod_lists->prayermods);
+#endif
 	while (mod_lists->text_descriptions != NULL) {
 		g_free((char *) mod_lists->text_descriptions->data);
 		mod_lists->text_descriptions =

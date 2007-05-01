@@ -36,7 +36,7 @@
 #include "gui/dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/main_window.h"
-#include "gui/navbar_versekey.h"
+#include "gui/navbar_versekey_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
 
@@ -44,6 +44,7 @@
 #include "main/navbar.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/navbar_versekey.h"
 
 
 static void create_menu(DIALOG_DATA * d, GdkEventButton * event);
@@ -883,6 +884,7 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * d)
 			 G_CALLBACK(on_entry_activate), d);
 	return hbox3;
 #else
+	d->navbar.type = NB_DIALOG;
 	return gui_navbar_versekey_dialog_new(d);
 #endif
 }

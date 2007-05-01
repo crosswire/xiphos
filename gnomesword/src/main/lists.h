@@ -45,10 +45,12 @@ struct _module_lists {
 	    *bookmods,
 	    *percommods,
 	    *devotionmods,
+	    *prayermods,
 	    *text_descriptions,
 	    *dict_descriptions,
 	    *comm_descriptions,
 	    *book_descriptions,
+	    *prayer_descriptions,
 	    *options;
 };
 
@@ -61,7 +63,7 @@ struct _module_lists {
 #define DICT_DESC_LIST 5
 #define GBS_LIST 6
 #define GBS_DESC_LIST 7
-//#define BOOKS_LIST 8
+#define PRAYER_LIST 8
 #define OPTIONS_LIST 9
 #define PERCOMM_LIST 10
 #define DEVOTION_LIST 11
