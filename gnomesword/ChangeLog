@@ -1,3 +1,7 @@
+2007-05-01  karl <charcoal@users.sf.net>
+
+	* tweaked html-editor.c, OLD_NAVBAR history button sensitivity.
+
 2007-04-30  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #1708829 crash on opening note editor
