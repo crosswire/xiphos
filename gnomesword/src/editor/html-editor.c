@@ -1135,7 +1135,6 @@ static GtkWidget *container_create(const gchar * window_title,
 		toolbar_nav = gui_navbar_versekey_editor_new(editor);
 		gtk_widget_show(toolbar_nav);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-		
 #endif
 	}
 
@@ -1217,7 +1216,9 @@ static GtkWidget *container_create(const gchar * window_title,
 	CORBA_exception_free(&ev);
 
 	gtk_widget_show_all(GTK_WIDGET(window));
-
+	gtk_widget_hide(editor->navbar.button_history_back); 
+	gtk_widget_hide(editor->navbar.button_history_next); 
+	gtk_widget_hide(editor->navbar.button_history_menu); 
 	CORBA_exception_init(&ev);
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
