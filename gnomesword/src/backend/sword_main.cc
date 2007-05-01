@@ -290,13 +290,20 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 				    strdup((char *) (*it).second->Name()));
 		}
 		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
-			mods->bookmods =
-			    g_list_append(mods->bookmods,
-			    strdup((char *) (*it).second->Name()));
-			mods->book_descriptions =
-			    g_list_append(mods->book_descriptions,
-			    strdup((char *) (*it).second->
-				   Description()));
+			if ((*it).second->getConfigEntry("GSType") && 
+				!strcmp((*it).second->getConfigEntry("GSType")
+				    , "PrayerList")) {
+				mods->prayermods = g_list_append(mods->prayermods,
+				    strdup((char *) (*it).second->Name()));
+			} else {
+				mods->bookmods =
+				    g_list_append(mods->bookmods,
+				    strdup((char *) (*it).second->Name()));
+				mods->book_descriptions =
+				    g_list_append(mods->book_descriptions,
+				    strdup((char *) (*it).second->
+					   Description()));
+			}
 		}			
 	}
 }
@@ -695,6 +702,9 @@ int BackEnd::module_type(const char *mod_name) {
 		}
 
 		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+			if ((*it).second->getConfigEntry("GSType") && 
+				!strcmp((char *) (*it).second->getConfigEntry("GSType"), "PrayerList")) 
+				return PRAYERLIST_TYPE;
 			return BOOK_TYPE;
 		}
 	}

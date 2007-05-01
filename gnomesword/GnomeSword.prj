@@ -154,7 +154,9 @@ module.include.files=\
 	src/gui/splash.h\
 	src/gui/search_dialog.h\
 	src/gui/preferences_dialog.h\
-	src/gui/navbar_versekey.h
+	src/gui/navbar_versekey.h\
+	src/main/prayer_list.h\
+	src/gui/navbar_book_editor.h
 
 module.source.name=.
 module.source.type=
@@ -236,7 +238,11 @@ module.source.files=\
 	src/gnome2/preferences_cell_renderer.c\
 	src/gnome2/sidebar.c\
 	src/gnome2/navbar_versekey.c\
-	src/main/navbar_versekey.cc
+	src/main/navbar_versekey.cc\
+	src/gnome2/prayer_list.c\
+	src/main/prayer_list.cc\
+	src/gnome2/navbar_versekey_dialog.c\
+	src/gnome2/navbar_versekey_editor.c
 
 module.pixmap.name=.
 module.pixmap.type=
