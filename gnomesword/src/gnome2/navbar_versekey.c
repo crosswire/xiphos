@@ -326,7 +326,7 @@ static gboolean select_book_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;	
 	
-	menu = main_versekey_drop_down_book_menu(navbar_versekey,
+	menu = main_versekey_drop_down_book_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
 	if(!menu)
 		return 0;		
@@ -370,7 +370,7 @@ static gboolean select_chapter_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	menu = main_versekey_drop_down_chapter_menu(navbar_versekey,
+	menu = main_versekey_drop_down_chapter_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
 	if(!menu)
 		return 0;		
@@ -414,7 +414,7 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	menu = main_versekey_drop_down_verse_menu(navbar_versekey,
+	menu = main_versekey_drop_down_verse_menu(navbar_versekey, NB_MAIN,
 						NULL,NULL);
 	if(!menu)
 		return 0;		
