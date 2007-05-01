@@ -1,20 +1,30 @@
+2007-04-30  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #1708829 crash on opening note editor
+	* started work on a prayer list 
+	  added gnome2/prayer_list.c and gui/prayer_list.h
+	  added main/prayer_list.cc and main/prayer_list.h
+	  
 2007-04-27  dom <domcox@users.sf.net>
 
 	* Norsk Bokmål (nb_NO) translation by harald@thingelstad.org added
 
+2007-04-27  terry <tbiggs@users.sourceforge.net>
+
+	* committed work around for bug #1708829 crash on opening note editor
+
 2007-04-26  karl <charcoal@users.sf.net>
 
 	* fixed modulecache header invalidation bug.
-	* fixed compilation bug in gnome2/html.c:info_new().
 
-2007-04-28  terry <tbiggs@users.sourceforge.net>
+2007-04-24  terry <tbiggs@users.sourceforge.net>
 	
 	* fixed bug #1706475 no genbooks + genbook navbar => crash
 	* added support for gtkhtml-3.14
 
 2007-04-07  terry <tbiggs@users.sourceforge.net>
 
-	* fixed bug #1695949 ] Gnomesword crashes on startup: segfault in backend -
+	* fixed bug #1695949 Gnomesword crashes on startup: segfault in backend -
 	  applied patch from maurerpe.
 
 2007-03-31  terry <tbiggs@users.sourceforge.net>
