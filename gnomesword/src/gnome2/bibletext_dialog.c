@@ -931,12 +931,6 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 			 
 	return hbox3;
 #else
-	/*NAVBAR_TYPE *type;
-	type = g_new(NAVBAR_TYPE,1);
-	type->type = NB_DIALOG;
-	type->dialog = c;
-	type->editor = NULL;
-	*/
 	c->navbar.type = NB_DIALOG;
 	return gui_navbar_versekey_dialog_new(c);
 #endif

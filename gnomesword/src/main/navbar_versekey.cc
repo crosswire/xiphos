@@ -45,6 +45,7 @@ extern gboolean do_display_dict;
 
 static DIALOG_DATA * c_dialog;
 static EDITOR * c_editor;
+static gint c_type;
 
 /******************************************************************************
  * Name
@@ -249,15 +250,25 @@ void on_nt_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
-	if(c_dialog) {
-		vkey = c_dialog->navbar.key->str;
-		entry = c_dialog->navbar.lookup_entry;
-	} else if (c_editor) {
-		entry = c_editor->navbar.lookup_entry;
-		vkey = c_editor->navbar.key->str;
-	} else {
-		vkey = navbar_versekey.key->str;
-		entry = navbar_versekey.lookup_entry;
+	switch(c_type) {
+		case NB_MAIN:
+			vkey = navbar_versekey.key->str;
+			entry = navbar_versekey.lookup_entry;
+		break;
+		case NB_PARALLEL:
+			vkey = navbar_parallel.key->str;
+			entry = navbar_parallel.lookup_entry;
+		break;
+		case NB_DIALOG:
+			if(!c_dialog) return;
+			vkey = c_dialog->navbar.key->str;
+			entry = c_dialog->navbar.lookup_entry;
+		break;
+		case NB_EDITOR:
+			if(!c_editor) return;
+			entry = c_editor->navbar.lookup_entry;
+			vkey = c_editor->navbar.key->str;
+		break;
 	}
 	if(entry) {
 		vkey.Testament(2);
@@ -294,15 +305,26 @@ void on_ot_book_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	char book = GPOINTER_TO_INT(user_data);
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
-	if(c_dialog) {
-		vkey = c_dialog->navbar.key->str;
-		entry = c_dialog->navbar.lookup_entry;
-	} else if (c_editor) {
-		entry = c_editor->navbar.lookup_entry;
-		vkey = c_editor->navbar.key->str;
-	} else {
-		vkey = navbar_versekey.key->str;
-		entry = navbar_versekey.lookup_entry;
+	
+	switch(c_type) {
+		case NB_MAIN:
+			vkey = navbar_versekey.key->str;
+			entry = navbar_versekey.lookup_entry;
+		break;
+		case NB_PARALLEL:
+			vkey = navbar_parallel.key->str;
+			entry = navbar_parallel.lookup_entry;
+		break;
+		case NB_DIALOG:
+			if(!c_dialog) return;
+			vkey = c_dialog->navbar.key->str;
+			entry = c_dialog->navbar.lookup_entry;
+		break;
+		case NB_EDITOR:
+			if(!c_editor) return;
+			entry = c_editor->navbar.lookup_entry;
+			vkey = c_editor->navbar.key->str;
+		break;
 	}
 	if(entry) {
 		vkey.Testament(0);
@@ -340,15 +362,26 @@ void on_chapter_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 		
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
-	if(c_dialog) {
-		vkey = c_dialog->navbar.key->str;
-		entry = c_dialog->navbar.lookup_entry;
-	} else if (c_editor) {
-		entry = c_editor->navbar.lookup_entry;
-		vkey = c_editor->navbar.key->str;
-	} else {
-		vkey = navbar_versekey.key->str;
-		entry = navbar_versekey.lookup_entry;
+	
+	switch(c_type) {
+		case NB_MAIN:
+			vkey = navbar_versekey.key->str;
+			entry = navbar_versekey.lookup_entry;
+		break;
+		case NB_PARALLEL:
+			vkey = navbar_parallel.key->str;
+			entry = navbar_parallel.lookup_entry;
+		break;
+		case NB_DIALOG:
+			if(!c_dialog) return;
+			vkey = c_dialog->navbar.key->str;
+			entry = c_dialog->navbar.lookup_entry;
+		break;
+		case NB_EDITOR:
+			if(!c_editor) return;
+			entry = c_editor->navbar.lookup_entry;
+			vkey = c_editor->navbar.key->str;
+		break;
 	}
 	if(entry) {
 		vkey.Chapter(chapter);
@@ -385,15 +418,25 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 	
 #ifndef OLD_NAVBAR	
 	vkey.AutoNormalize(1);
-	if(c_dialog) {
-		vkey = c_dialog->navbar.key->str;
-		entry = c_dialog->navbar.lookup_entry;
-	} else if (c_editor) {
-		entry = c_editor->navbar.lookup_entry;
-		vkey = c_editor->navbar.key->str;
-	} else {
-		vkey = navbar_versekey.key->str;
-		entry = navbar_versekey.lookup_entry;
+	switch(c_type) {
+		case NB_MAIN:
+			vkey = navbar_versekey.key->str;
+			entry = navbar_versekey.lookup_entry;
+		break;
+		case NB_PARALLEL:
+			vkey = navbar_parallel.key->str;
+			entry = navbar_parallel.lookup_entry;
+		break;
+		case NB_DIALOG:
+			if(!c_dialog) return;
+			vkey = c_dialog->navbar.key->str;
+			entry = c_dialog->navbar.lookup_entry;
+		break;
+		case NB_EDITOR:
+			if(!c_editor) return;
+			entry = c_editor->navbar.lookup_entry;
+			vkey = c_editor->navbar.key->str;
+		break;
 	}
 	if(entry) {
 		vkey.Verse(verse);
@@ -488,6 +531,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
  */
 
 GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor)
 {
@@ -503,9 +547,10 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	GtkWidget *item;
 	GtkWidget *select_item;
 	c_dialog = NULL;
+	c_editor = NULL;	
 	c_dialog = (DIALOG_DATA *) dialog;
-	c_editor = NULL;
 	c_editor = (EDITOR *) editor;
+	c_type = nb_type;
 	
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
@@ -568,6 +613,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
  */
 
 GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor)
 {
@@ -587,6 +633,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	c_dialog = (DIALOG_DATA *) dialog;
 	c_editor = NULL;
 	c_editor = (EDITOR *) editor;
+	c_type = nb_type;
 	
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
@@ -645,6 +692,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
  */
 
 GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor)
 {
@@ -665,6 +713,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	c_dialog = (DIALOG_DATA *) dialog;
 	c_editor = NULL;
 	c_editor = (EDITOR *) editor;
+	c_type = nb_type;
 	
 	if(navbar.testaments == backend->module_get_testaments(navbar.module_name->str))
 		return NULL;
