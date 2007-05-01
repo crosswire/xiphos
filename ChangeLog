@@ -1,3 +1,9 @@
+2007-05-01  terry <tbiggs@users.sourceforge.net>
+
+	* added new navbar to parallel dialog
+	  added gui/navbar_treekey_parallel.h
+	  and   gnome2/navbar_treekey_parallel.c
+
 2007-05-01  karl <charcoal@users.sf.net>
 
 	* tweaked html-editor.c, OLD_NAVBAR history button sensitivity.

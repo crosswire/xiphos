@@ -26,12 +26,7 @@
 extern "C"
 {
 #endif
-typedef struct _navbar_type NAVBAR_TYPE;
-struct  _navbar_type {
-	gint type;
-	gpointer dialog;
-	gpointer editor;
-};
+	
 
 enum {
 	NB_MAIN,
@@ -75,15 +70,19 @@ struct _navbar_versekey {
 	gint type;	
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
+extern NAVBAR_VERSEKEY navbar_parallel;
 
 const char *main_get_valid_key(char * key);
 GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor);
 GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor);
 GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar, 
+						gint nb_type,
 						gpointer dialog,
 						gpointer editor);
 void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction);
