@@ -943,7 +943,7 @@ static void on_entry_activate(GtkEntry * entry, EDITOR * e)
  *   void
  */
 
-static void sync_toggled(GtkToggleButton * button, EDITOR * e)
+void editor_sync_toggled(GtkToggleButton * button, EDITOR * e)
 {
 	if (button->active) {
 		if (editor_is_dirty(e))
@@ -965,7 +965,7 @@ void editor_sync_with_main(void)
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
 		if (!e->studypad) 
-			sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
+			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
 		tmp = g_list_next(tmp);
 	}
 }
@@ -1086,7 +1086,7 @@ static GtkWidget *navebar_create(EDITOR * editor)
 			   TRUE, 0);
 	
 	g_signal_connect(GTK_OBJECT(editor->sync_button),
-			 "toggled", G_CALLBACK(sync_toggled), editor);
+			 "toggled", G_CALLBACK(editor_sync_toggled), editor);
 
 	g_signal_connect((gpointer) editor->navbar.comboboxentry_book,
 			 "changed",
