@@ -312,7 +312,7 @@ gboolean select_book_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	menu = main_versekey_drop_down_book_menu(dialog->navbar, dialog, NULL);
+	menu = main_versekey_drop_down_book_menu(dialog->navbar, NB_DIALOG, dialog, NULL);
 	if(!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
@@ -356,7 +356,7 @@ gboolean select_chapter_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	menu = main_versekey_drop_down_chapter_menu(dialog->navbar, dialog, NULL);
+	menu = main_versekey_drop_down_chapter_menu(dialog->navbar, NB_DIALOG, dialog, NULL);
 	if(!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
@@ -399,7 +399,7 @@ static gboolean select_verse_button_press_callback(GtkWidget * widget,
 {
 	GtkWidget *menu;
 	
-	menu = main_versekey_drop_down_verse_menu(dialog->navbar, dialog, NULL);
+	menu = main_versekey_drop_down_verse_menu(dialog->navbar, NB_DIALOG, dialog, NULL);
 	if(!menu)
 		return 0;		
 	g_signal_connect(menu, "deactivate",
