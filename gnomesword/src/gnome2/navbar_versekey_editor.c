@@ -525,9 +525,9 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, EDITOR * editor)
 	g_signal_connect((gpointer) navbar.button_verse_down,
 			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
 			 editor);
-	/*g_signal_connect((gpointer) navbar.button_sync,
-			 "clicked", G_CALLBACK(gui_bible_dialog_sync_toggled),
-			 editor);*/
+	g_signal_connect((gpointer) navbar.button_sync,
+			 "clicked", G_CALLBACK(G_CALLBACK(editor_sync_toggled)),
+			 editor);
 	g_signal_connect((gpointer) navbar.button_book_menu,
 			 "button_press_event",
 			 G_CALLBACK(select_book_button_press_callback), 
@@ -593,9 +593,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 		
 	editor->navbar.button_sync = glade_xml_get_widget(gxml, "togglebutton_sync");
 	gtk_widget_show(editor->navbar.button_sync); 
-	gtk_widget_hide(editor->navbar.button_history_back); 
-	gtk_widget_hide(editor->navbar.button_history_next); 
-	gtk_widget_hide(editor->navbar.button_history_menu); 
+	
 	
 	editor->navbar.button_book_up = glade_xml_get_widget(gxml, "button_book2");
 	editor->navbar.button_book_down = glade_xml_get_widget(gxml, "button_book1");
