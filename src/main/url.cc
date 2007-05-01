@@ -302,10 +302,16 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	}
 	if(!strcmp(type,"verse")) {
 		if(clicked) {
+#ifdef OLD_NAVBAR
 			settings.cvparallel = 
-				main_parallel_update_controls(value);
+				backend->get_valid_key(value);
 			main_update_parallel_page_detached();
 			gui_set_parallel_navbar((char*)value);
+#else
+			//main_navbar_versekey_set(navbar_parallel, (char*)value);
+			gtk_entry_set_text(GTK_ENTRY(navbar_parallel.lookup_entry),value);
+			gtk_widget_activate(navbar_parallel.lookup_entry);
+#endif
 		} 
 	}
 	return 1;
