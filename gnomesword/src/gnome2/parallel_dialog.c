@@ -210,7 +210,11 @@ static void sync_with_main(void)
 
 void gui_keep_parallel_dialog_in_sync(void)
 {
+#ifdef OLD_NAVBAR
 	if(GTK_TOGGLE_BUTTON(sync_button)->active)
+#else
+	if(GTK_TOGGLE_BUTTON(navbar_parallel.button_sync)->active)
+#endif
 		sync_with_main();
 }
 
@@ -630,11 +634,11 @@ GtkWidget *create_parallel_dialog(void)
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
-			   
-		
+#ifdef OLD_NAVBAR
 	navbar.key = g_strdup(settings.currentverse);
 	navbar.module_name = g_strdup(settings.parallel1Module);	   
 	main_navbar_fill_book_combo(navbar);
+#endif
 	
 #ifdef USE_GTKMOZEMBED
 	frame = gtk_frame_new(NULL);
