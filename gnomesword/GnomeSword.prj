@@ -149,7 +149,8 @@ module.include.files=\
 	src/main/prayer_list.h\
 	src/gui/navbar_versekey_dialog.h\
 	src/gui/navbar_versekey_editor.h\
-	src/main/navbar_versekey.h
+	src/main/navbar_versekey.h\
+	src/gui/prayer_list.h
 
 module.source.name=.
 module.source.type=
