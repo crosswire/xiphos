@@ -564,11 +564,16 @@ struct _info {
 	gboolean footer_date;
 	gboolean footer_page_num;
 };
+void  print_header(		GtkHTML *html, 
+				GtkPrintContext *print_context,				      
+				gdouble x, gdouble y, 
+				gdouble width, gdouble height, 
+				gpointer user_data)
 
-static void print_header(GtkHTML * html,
+/*static void print_header(GtkHTML * html,
 			 GnomePrintContext * print_context, gdouble x,
 			 gdouble y, gdouble width, gdouble height,
-			 gpointer user_data)
+			 gpointer user_data)*/
 {
 /*	struct _info *info = (struct  _info*) user_data;
 	
@@ -608,27 +613,28 @@ static void print_header(GtkHTML * html,
  * Return value
  *   void
  */
-static void print_footer(GtkHTML * html,
-			 GnomePrintContext * print_context, gdouble x,
-			 gdouble y, gdouble width, gdouble height,
-			 gpointer user_data)
+static void print_footer(	GtkHTML *html, 
+				GtkPrintContext *print_context,				      
+				gdouble x, gdouble y, 
+				gdouble width, gdouble height, 
+				gpointer user_data)
 {
-	gdouble h = height - 10.0;
+	/*gdouble h = height - 10.0;
 	struct _info *info = (struct _info *) user_data;
 
 	if (info->local_font) {
 		//gnome_print_setfont(print_context, info->local_font);
 		//gnome_print_line_stroked(print_context, x, y, width, y);
-		gnome_print_gsave(print_context);
-		gnome_print_newpath(print_context);
-		gnome_print_setrgbcolor(print_context, .0, .0, .0);		
-		/*gnome_print_moveto(print_context, x,
+		//gnome_print_gsave(print_context);
+		//gnome_print_newpath(print_context);
+		//gnome_print_setrgbcolor(print_context, .0, .0, .0);		
+		gnome_print_moveto(print_context, x,
 				   y -
 				   gnome_font_get_ascender(info->local_font));
 		gnome_print_setfont(print_context, info->local_font);
 		gnome_print_show(print_context, info->footer_title);*/
 		
-		
+		/*
 		if(info->footer_page_num) {
 			char *text =
 			    g_strdup_printf(_("Page %d of %d"), info->page_num,
@@ -658,7 +664,7 @@ static void print_footer(GtkHTML * html,
 		}
 		gnome_print_grestore(print_context);
 		info->page_num++;
-	}
+	}*/
 
 }
 
@@ -772,12 +778,19 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 
 	html = GTK_HTML(htmlwidget);
 
-	gtk_html_print_set_master(html, print_master);
+	//gtk_html_print_set_master(html, print_master);
 
 	info = info_new(html, print_context, &line);
-	gtk_html_print_with_header_footer(html, print_context, line,
+	/*gtk_html_print_with_header_footer(html, print_context, line,
 					  line, print_header, print_footer,
-					  info);
+					  info);*/
+	gtk_html_print_page_with_header_footer  (html,
+						   (GtkPrintContext*)print_context,
+						   line,
+						   line,
+						   print_header,
+						   print_footer,
+						   info);
 	info_free(info);
 
 	gnome_print_job_close(print_master);
