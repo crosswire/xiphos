@@ -814,7 +814,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			CacheHeader(cVerse, imodule);
 
 		if (cache_flags & ModuleCache::Headings)
-			swbuf.appendFormatted(cVerse.GetHeader());
+			swbuf.append(cVerse.GetHeader());
 		else
 			cVerse.InvalidateHeader();
 
