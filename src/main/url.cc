@@ -596,9 +596,10 @@ static gint show_note(const gchar * module, const gchar * passage,
 {	
 	gchar *tmpbuf = NULL;
 	gchar *buf = NULL;
+	gchar *work_buf = NULL;
 	GString *str = g_string_new(NULL);
 	GList *tmp = NULL;
-	gint i = 0;
+	gint i = 0, j = 0;
 	RESULTS *list_item;
 	
 	if(!in_url)
@@ -609,6 +610,23 @@ static gint show_note(const gchar * module, const gchar * passage,
 	
 	if(passage && (strlen(passage) < 5))
 		passage = settings.currentverse;
+	
+	if(strstr(passage,"0X")) { // work around for notes in headers 
+		work_buf = g_new0(char,strlen(passage));
+		g_strdelimit((gchar*)passage,".",'\0');
+		for(i = 0;i < strlen(passage);i++) {
+			if(passage[i] == '0' && passage[i+1] == 'X') {
+				++i;
+				work_buf[j++] = ':';
+				if(passage[i+1]== '0') {
+					work_buf[j++] = '1';
+					break;
+				}
+			} else			
+				work_buf[j++] = passage[i];
+		}
+		passage = work_buf;
+	}
 	
 	if(strstr(stype,"x") && clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);
@@ -671,7 +689,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 			str = g_string_append(str,buf);
 			if(buf) g_free(buf);
 			buf = NULL;
-			++i;
+			//++i;
 			g_free((char *) tmp->data);
 			tmp = g_list_next(tmp);
 		}
@@ -699,6 +717,8 @@ static gint show_note(const gchar * module, const gchar * passage,
 					NULL);
 		}			
 	}
+	if(work_buf)
+		g_free(work_buf);
 	g_string_free(str, 1);
 	return 1;
 }

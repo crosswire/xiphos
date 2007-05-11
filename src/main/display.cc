@@ -582,7 +582,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 	sprintf(heading, "%d", x);
 	while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 							heading)) != NULL) {
-		preverse2 = mod.RenderText(preverse);
+		preverse2 = g_strdup(mod.RenderText(preverse));
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
 				       preverse2);
 		cVerse.AppendHeader(text);
@@ -1062,7 +1062,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 		if ((key->Verse() == curVerse) && settings.versehighlight)
 			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
 					      settings.highlight_bg);
-
+		/* please remove this, cuz I forgot */
+		/*if (key->Verse() == curVerse)
+			g_message(imodule.getRawEntry());*/
+		
+		
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%s\" color=\"%s\">%d</font></A> "
