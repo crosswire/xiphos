@@ -622,7 +622,7 @@ static void print_header(GtkHTML * html,
  *   void
  */
 static void print_footer(	GtkHTML *html, 
-				GtkPrintContext *print_context,				      
+				GnomePrintContext *print_context,				      
 				gdouble x, gdouble y, 
 				gdouble width, gdouble height, 
 				gpointer user_data)
