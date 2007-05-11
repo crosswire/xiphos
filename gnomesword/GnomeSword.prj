@@ -150,7 +150,8 @@ module.include.files=\
 	src/gui/navbar_versekey_dialog.h\
 	src/gui/navbar_versekey_editor.h\
 	src/main/navbar_versekey.h\
-	src/gui/prayer_list.h
+	src/gui/prayer_list.h\
+	src/main/modulecache.hh
 
 module.source.name=.
 module.source.type=
@@ -233,7 +234,8 @@ module.source.files=\
 	src/gnome2/prayer_list.c\
 	src/main/prayer_list.cc\
 	src/gnome2/navbar_versekey_dialog.c\
-	src/gnome2/navbar_versekey_editor.c
+	src/gnome2/navbar_versekey_editor.c\
+	src/main/modulecache.cc
 
 module.pixmap.name=.
 module.pixmap.type=
