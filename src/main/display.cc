@@ -582,7 +582,7 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 	sprintf(heading, "%d", x);
 	while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 							heading)) != NULL) {
-		preverse2 = g_strdup(mod.RenderText(preverse));
+		preverse2 = mod.RenderText(preverse);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
 				       preverse2);
 		cVerse.AppendHeader(text);
@@ -1046,7 +1046,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			CacheHeader(cVerse, imodule);
 
 		if (cache_flags & ModuleCache::Headings)
-			swbuf.appendFormatted(cVerse.GetHeader());
+			swbuf.append(cVerse.GetHeader());
 		else
 			cVerse.InvalidateHeader();
 
