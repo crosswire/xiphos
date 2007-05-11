@@ -384,7 +384,8 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 	sprintf(heading, "%d", x);
 	while ((preverse = backend->get_entry_attribute("Heading", "Preverse",
 							heading)) != NULL) {
-		preverse2 = g_strdup(mod.RenderText(preverse));
+		preverse2 = mod.RenderText(preverse);
+		g_message(preverse2);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
 				       preverse2);
 		cVerse.AppendHeader(text);
