@@ -564,19 +564,21 @@ struct _info {
 	gboolean footer_date;
 	gboolean footer_page_num;
 };
-void  print_header(		GtkHTML *html, 
+/*void  print_header(		GtkHTML *html, 
 				GtkPrintContext *print_context,				      
 				gdouble x, gdouble y, 
 				gdouble width, gdouble height, 
-				gpointer user_data)
+				gpointer user_data)*/
 
-/*static void print_header(GtkHTML * html,
+static void print_header(GtkHTML * html,
 			 GnomePrintContext * print_context, gdouble x,
 			 gdouble y, gdouble width, gdouble height,
-			 gpointer user_data)*/
+			 gpointer user_data)
 {
-/*	struct _info *info = (struct  _info*) user_data;
-	
+	struct _info *info = (struct  _info*) user_data;
+
+#ifndef USE_GTKHTML3_14
+#ifdef USE_GTKHTML38	
 	if (info->local_font) {
 		gnome_print_line_stroked(print_context, x, y, width, y);
 		
@@ -592,7 +594,9 @@ void  print_header(		GtkHTML *html,
 		
 	
 		info->page_num++;
-	}*/
+	}
+#endif
+#endif
 }
 
 
@@ -781,16 +785,16 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 	//gtk_html_print_set_master(html, print_master);
 
 	info = info_new(html, print_context, &line);
-	/*gtk_html_print_with_header_footer(html, print_context, line,
+	gtk_html_print_with_header_footer(html, print_context, line,
 					  line, print_header, print_footer,
-					  info);*/
-	gtk_html_print_page_with_header_footer  (html,
+					  info);
+/*	gtk_html_print_page_with_header_footer  (html,
 						   (GtkPrintContext*)print_context,
 						   line,
 						   line,
 						   print_header,
 						   print_footer,
-						   info);
+						   info);*/
 	info_free(info);
 
 	gnome_print_job_close(print_master);
