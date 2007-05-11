@@ -1048,7 +1048,6 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		else if (!strcmp(action, "showNote")) {
 			module = g_strdup(m_url->getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
-		g_message("passage = %s", passage);
 			show_note(module, passage, type, value, clicked);
 			if (module) g_free(module);
 			if (passage) g_free(passage);
