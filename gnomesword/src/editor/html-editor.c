@@ -1217,9 +1217,11 @@ static GtkWidget *container_create(const gchar * window_title,
 
 	gtk_widget_show_all(GTK_WIDGET(window));
 #ifndef OLD_NAVBAR
-	gtk_widget_hide(editor->navbar.button_history_back);
-	gtk_widget_hide(editor->navbar.button_history_next);
-	gtk_widget_hide(editor->navbar.button_history_menu);
+	if(!editor->studypad) {
+		gtk_widget_hide(editor->navbar.button_history_back);
+		gtk_widget_hide(editor->navbar.button_history_next);
+		gtk_widget_hide(editor->navbar.button_history_menu);
+	}
 #endif /* OLD_NAVBAR */
 	CORBA_exception_init(&ev);
 	editor->engine =
