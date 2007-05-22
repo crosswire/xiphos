@@ -1,3 +1,7 @@
+2007-05-22  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug #1723478 opening studypad causes gs to crash
+
 2007-05-01  terry <tbiggs@users.sourceforge.net>
 
 	* added new navbar to parallel dialog
