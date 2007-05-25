@@ -26,8 +26,6 @@
 #include <gnome.h>
 #include <glade/glade-xml.h>
 
-//#include "editor/html-editor.h"
-
 #include "gui/navbar_versekey_dialog.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/tabbed_browser.h"
@@ -58,11 +56,13 @@
  */
 
 static 
-void on_verse_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
+gboolean on_verse_up_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
 {
-	main_navbar_versekey_spin_verse(dialog->navbar,0);
+	main_navbar_versekey_spin_verse(dialog->navbar, 0);
+	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -81,9 +81,12 @@ void on_verse_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
  */
 
 static 
-void on_verse_button_down_clicked(GtkButton * button, DIALOG_DATA * dialog)
+gboolean on_verse_down_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
 {
 	main_navbar_versekey_spin_verse(dialog->navbar, 1);
+	return FALSE;
 }
 
 
@@ -104,11 +107,13 @@ void on_verse_button_down_clicked(GtkButton * button, DIALOG_DATA * dialog)
  */
 
 static 
-void on_chapter_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
-{	
+gboolean on_chapter_up_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
+{
 	main_navbar_versekey_spin_chapter(dialog->navbar, 0);
+	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -127,9 +132,12 @@ void on_chapter_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
  */
 
 static 
-void on_chapter_button_down_clicked(GtkButton * button, DIALOG_DATA * dialog)
+gboolean on_chapter_down_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
 {
 	main_navbar_versekey_spin_chapter(dialog->navbar, 1);
+	return FALSE;
 }
 
 
@@ -150,11 +158,13 @@ void on_chapter_button_down_clicked(GtkButton * button, DIALOG_DATA * dialog)
  */
 
 static 
-void on_book_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
+gboolean on_book_up_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
 {
 	main_navbar_versekey_spin_book(dialog->navbar, 0);
+	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -173,11 +183,13 @@ void on_book_button_up_clicked(GtkButton * button, DIALOG_DATA * dialog)
  */
 
 static 
-void on_book_button_down_clicked(GtkButton * button, DIALOG_DATA * dialog)
+gboolean on_book_down_button_release_event(GtkWidget * widget,
+                                       	GdkEventButton * event,
+                                       	DIALOG_DATA * dialog)
 {
 	main_navbar_versekey_spin_book(dialog->navbar, 1);
+	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
@@ -543,12 +555,272 @@ gboolean on_button_verse_menu_book_scroll_event(GtkWidget * widget,
 	return FALSE;
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_up_leave_notify_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        gpointer user_data)
+ *
+ * Description
+ *   mimic a button by hiding/showing arrow pixmaps when mouse leaves spin
+ *   buttons
+ *
+ * Return value
+ *   gboolean
+ */
+
+static   
+gboolean on_book_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_book_up_box);
+	gtk_widget_show(dialog->navbar.arrow_book_up);	
+	return FALSE;
+}
+
+static   
+gboolean on_chapter_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_chapter_up_box);
+	gtk_widget_show(dialog->navbar.arrow_chapter_up);	
+	return FALSE;
+}
+
+static   
+gboolean on_verse_up_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_verse_up_box);
+	gtk_widget_show(dialog->navbar.arrow_verse_up);	
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *   on_down_leave_notify_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        gpointer user_data)
+ *
+ * Description
+ *   mimic a button by hiding/showing arrow pixmaps when mouse leaves spin
+ *   buttons
+ *
+ * Return value
+ *   gboolean
+ */
+
+static 
+gboolean on_book_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	
+	gtk_widget_hide(dialog->navbar.arrow_book_down_box);
+	gtk_widget_show(dialog->navbar.arrow_book_down);
+	return FALSE;
+}
+
+static 
+gboolean on_chapter_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_chapter_down_box);
+	gtk_widget_show(dialog->navbar.arrow_chapter_down);
+	return FALSE;
+}
+
+static 
+gboolean on_verse_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_verse_down_box);
+	gtk_widget_show(dialog->navbar.arrow_verse_down);
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_up_enter_notify_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+ *                                       gpointer  user_data)
+ *
+ * Description
+ *   mimic a button by hiding/showing arrow pixmaps when mouse enters spin
+ *   buttons
+ *
+ * Return value
+ *   gboolean
+ */
+
+static 
+gboolean on_book_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_book_up);
+	gtk_widget_show(dialog->navbar.arrow_book_up_box);
+	return FALSE;
+}
+
+
+static 
+gboolean on_chapter_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_chapter_up);
+	gtk_widget_show(dialog->navbar.arrow_chapter_up_box);
+	return FALSE;
+}
+
+static 
+gboolean on_verse_up_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_verse_up);
+	gtk_widget_show(dialog->navbar.arrow_verse_up_box);
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_down_enter_notify_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        gpointer user_data)
+ *
+ * Description
+ *   mimic a button by hiding/showing arrow pixmaps when mouse enters spin
+ *   buttons
+ *
+ * Return value
+ *   gboolean
+ */
+
+static 
+gboolean on_book_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_book_down);
+	gtk_widget_show(dialog->navbar.arrow_book_down_box);
+	return FALSE;
+}
+
+static 
+gboolean on_chapter_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_chapter_down);
+	gtk_widget_show(dialog->navbar.arrow_chapter_down_box);
+	return FALSE;
+}
+
+static 
+gboolean on_verse_down_enter_notify_event(GtkWidget * widget, GdkEventCrossing * event,
+                                        DIALOG_DATA * dialog)
+{
+	gtk_widget_hide(dialog->navbar.arrow_verse_down);
+	gtk_widget_show(dialog->navbar.arrow_verse_down_box);
+	return FALSE;
+}
+
+
 static
 void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA * dialog)
 {		
 	g_signal_connect((gpointer) navbar.lookup_entry,
 			 "activate", G_CALLBACK(on_entry_activate),
-			 dialog);		
+			 dialog);
+	
+	g_signal_connect((gpointer) navbar.button_book_up,
+			 "button_release_event", G_CALLBACK(on_book_up_button_release_event),
+			 dialog);
+	g_signal_connect((gpointer) navbar.button_book_down,
+			 "button_release_event", G_CALLBACK(on_book_down_button_release_event),
+			 dialog);
+	g_signal_connect((gpointer) navbar.button_chapter_up,
+			 "button_release_event", G_CALLBACK(on_chapter_up_button_release_event),
+			 dialog);
+	g_signal_connect((gpointer) navbar.button_chapter_down,
+			 "button_release_event", G_CALLBACK(on_chapter_down_button_release_event),
+			 dialog);
+	g_signal_connect((gpointer) navbar.button_verse_up,
+			 "button_release_event", G_CALLBACK(on_verse_up_button_release_event),
+			 dialog);
+	g_signal_connect((gpointer) navbar.button_verse_down,
+			 "button_release_event", G_CALLBACK(on_verse_down_button_release_event),
+			 dialog);
+			 
+	/*     */			
+	g_signal_connect ((gpointer) navbar.button_book_up,
+			"enter_notify_event",
+		    	G_CALLBACK (on_book_up_enter_notify_event),
+		    	dialog);
+	g_signal_connect ((gpointer) navbar.button_book_up,
+			"leave_notify_event",
+		    	G_CALLBACK (on_book_up_leave_notify_event),
+		    	dialog);
+		    
+	g_signal_connect ((gpointer)navbar.button_book_down , 
+			"enter_notify_event",
+		    	G_CALLBACK (on_book_down_enter_notify_event),
+		    	dialog);
+	g_signal_connect ((gpointer)navbar.button_book_down ,
+			"leave_notify_event",
+		    	G_CALLBACK (on_book_down_leave_notify_event),
+		    	dialog);
+		    
+	/*    */		    
+	g_signal_connect ((gpointer) navbar.button_chapter_up, "enter_notify_event",
+		    G_CALLBACK (on_chapter_up_enter_notify_event),
+		    dialog);
+	g_signal_connect ((gpointer)navbar.button_chapter_up , "leave_notify_event",
+		    G_CALLBACK (on_chapter_up_leave_notify_event),
+		    dialog);	
+	
+	g_signal_connect ((gpointer) navbar.button_chapter_down, "enter_notify_event",
+		    G_CALLBACK (on_chapter_down_enter_notify_event),
+		    dialog);
+	g_signal_connect ((gpointer)navbar.button_chapter_down , "leave_notify_event",
+		    G_CALLBACK (on_chapter_down_leave_notify_event),
+		    dialog);	
+	
+	/*    */		    
+	g_signal_connect ((gpointer) navbar.button_verse_up, "enter_notify_event",
+		    G_CALLBACK (on_verse_up_enter_notify_event),
+		    dialog);
+	g_signal_connect ((gpointer)navbar.button_verse_up , "leave_notify_event",
+		    G_CALLBACK (on_verse_up_leave_notify_event),
+		    dialog);
+		    
+	g_signal_connect ((gpointer) navbar.button_verse_down, "enter_notify_event",
+		    G_CALLBACK (on_verse_down_enter_notify_event),
+		   dialog );
+	g_signal_connect ((gpointer)navbar.button_verse_down , "leave_notify_event",
+		    G_CALLBACK (on_verse_down_leave_notify_event),
+		    dialog);		 
+			 
+			 
+			 
+			 
+	
+/*	
 	g_signal_connect((gpointer) navbar.button_book_up,
 			 "clicked", G_CALLBACK(on_book_button_up_clicked),
 			 dialog);
@@ -567,6 +839,8 @@ void _connect_signals(NAVBAR_VERSEKEY navbar, DIALOG_DATA * dialog)
 	g_signal_connect((gpointer) navbar.button_verse_down,
 			 "clicked", G_CALLBACK(on_verse_button_down_clicked),
 			 dialog);
+			 
+*/
 	g_signal_connect((gpointer) navbar.button_sync,
 			 "clicked", G_CALLBACK(gui_bible_dialog_sync_toggled),
 			 dialog);
@@ -639,12 +913,26 @@ GtkWidget *gui_navbar_versekey_dialog_new(DIALOG_DATA * dialog)
 	gtk_widget_hide(dialog->navbar.button_history_next); 
 	gtk_widget_hide(dialog->navbar.button_history_menu); 
 	
-	dialog->navbar.button_book_up = glade_xml_get_widget(gxml, "button_book2");
-	dialog->navbar.button_book_down = glade_xml_get_widget(gxml, "button_book1");
-	dialog->navbar.button_chapter_up = glade_xml_get_widget(gxml, "button_chapter2");
-	dialog->navbar.button_chapter_down = glade_xml_get_widget(gxml, "button_chapter1");
-	dialog->navbar.button_verse_up = glade_xml_get_widget(gxml, "button_verse2");
-	dialog->navbar.button_verse_down = glade_xml_get_widget(gxml, "button_verse1");
+	dialog->navbar.button_book_up = glade_xml_get_widget(gxml, "eventbox9");
+	dialog->navbar.button_book_down = glade_xml_get_widget(gxml, "eventbox6");
+	dialog->navbar.button_chapter_up = glade_xml_get_widget(gxml, "eventbox8");
+	dialog->navbar.button_chapter_down = glade_xml_get_widget(gxml, "eventbox4");
+	dialog->navbar.button_verse_up = glade_xml_get_widget(gxml, "eventbox7");
+	dialog->navbar.button_verse_down = glade_xml_get_widget(gxml, "eventbox1");
+		
+	dialog->navbar.arrow_book_up_box = glade_xml_get_widget(gxml, "image13");
+	dialog->navbar.arrow_book_up = glade_xml_get_widget(gxml, "image12");
+	dialog->navbar.arrow_book_down_box = glade_xml_get_widget(gxml, "image15");
+	dialog->navbar.arrow_book_down = glade_xml_get_widget(gxml, "image14");
+	dialog->navbar.arrow_chapter_up_box = glade_xml_get_widget(gxml, "image9");
+	dialog->navbar.arrow_chapter_up = glade_xml_get_widget(gxml, "image8");
+	dialog->navbar.arrow_chapter_down_box = glade_xml_get_widget(gxml, "image11");
+	dialog->navbar.arrow_chapter_down = glade_xml_get_widget(gxml, "image10");
+	dialog->navbar.arrow_verse_up_box = glade_xml_get_widget(gxml, "image7");
+	dialog->navbar.arrow_verse_up = glade_xml_get_widget(gxml, "image6");
+	dialog->navbar.arrow_verse_down_box = glade_xml_get_widget(gxml, "image16");
+	dialog->navbar.arrow_verse_down = glade_xml_get_widget(gxml, "image5");
+	
 	dialog->navbar.button_book_menu = glade_xml_get_widget(gxml, "togglebutton_book");
 	dialog->navbar.button_chapter_menu = glade_xml_get_widget(gxml, "togglebutton_chapter");
 	dialog->navbar.button_verse_menu = glade_xml_get_widget(gxml, "togglebutton_verse");
