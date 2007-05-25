@@ -1215,6 +1215,12 @@ static GtkWidget *container_create(const gchar * window_title,
 		gtk_widget_hide(editor->navbar.button_history_back);
 		gtk_widget_hide(editor->navbar.button_history_next);
 		gtk_widget_hide(editor->navbar.button_history_menu);
+		gtk_widget_hide(editor->navbar.arrow_book_up_box);
+		gtk_widget_hide(editor->navbar.arrow_book_down_box);
+		gtk_widget_hide(editor->navbar.arrow_chapter_up_box);
+		gtk_widget_hide(editor->navbar.arrow_chapter_down_box);
+		gtk_widget_hide(editor->navbar.arrow_verse_up_box);
+		gtk_widget_hide(editor->navbar.arrow_verse_down_box);
 	}
 #endif /* OLD_NAVBAR */
 	CORBA_exception_init(&ev);

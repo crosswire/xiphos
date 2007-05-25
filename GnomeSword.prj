@@ -247,7 +247,8 @@ module.source.files=\
 	src/main/prayer_list.cc\
 	src/gnome2/navbar_versekey_dialog.c\
 	src/gnome2/navbar_versekey_editor.c\
-	src/main/modulecache.cc
+	src/main/modulecache.cc\
+	src/gnome2/navbar_versekey_parallel.c
 
 module.pixmap.name=.
 module.pixmap.type=
