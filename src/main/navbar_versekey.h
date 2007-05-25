@@ -50,6 +50,19 @@ struct _navbar_versekey {
 	GtkWidget *button_verse_up;
 	GtkWidget *button_verse_down;
 	
+	GtkWidget *arrow_book_up_box;
+	GtkWidget *arrow_book_up;
+	GtkWidget *arrow_book_down_box;
+	GtkWidget *arrow_book_down;
+	GtkWidget *arrow_chapter_up_box;
+	GtkWidget *arrow_chapter_up;
+	GtkWidget *arrow_chapter_down_box;
+	GtkWidget *arrow_chapter_down;
+	GtkWidget *arrow_verse_up_box;
+	GtkWidget *arrow_verse_up;
+	GtkWidget *arrow_verse_down_box;
+	GtkWidget *arrow_verse_down;
+	
 	GtkWidget *button_book_menu;
 	GtkWidget *button_chapter_menu;
 	GtkWidget *button_verse_menu;
