@@ -416,6 +416,8 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 			modbuf = "NasbGreek";
 		else 
 			modbuf = "NasbHebrew";
+		//if(strstr(svalue,"!"))
+			//g_strdelimit((gchar*)svalue,"!",'\0');
 	} else {
 		if(!strcmp(stype,"Greek")) 
 			modbuf = settings.lex_greek;
