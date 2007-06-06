@@ -579,7 +579,7 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"dailydevotional", (const xmlChar *)"0");
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"splash", (const xmlChar *)"0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *)"splash", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"usedefault", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"formatpercom", (const xmlChar *)"1");
 	xmlNewTextChild(section_node, NULL,(const xmlChar *) "showcomms", (const xmlChar *)"1");
