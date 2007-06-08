@@ -80,9 +80,12 @@ struct _settings {
 		*font_color, /*  */
 		*highlight_fg, /* special fg color when highlighting */
 		*highlight_bg, /* special fg color when highlighting */
-		*verse_num_font_size;		
+		*verse_num_font_size_str,
+		*base_font_size_str;
 		
-	int 
+	int
+		verse_num_font_size,
+		base_font_size,
       		sidebar_width,
 		verselist_toppane_height, //height of the top pane in the search results window
 		upperpane_hight,
