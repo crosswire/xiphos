@@ -595,9 +595,9 @@ void main_update_parallel_page(void)
 
 			if (j == 0) {
 				sprintf(tmpBuf,
-					"<tr><td><i><font color=\"%s\" size=\"%s\">[%s]</font></i></td></tr>",
+					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
-					settings.verse_num_font_size,
+					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 
 				utf8len = strlen(tmpBuf);
@@ -607,12 +607,13 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
 				settings.bible_verse_num_color,
-				settings.verse_num_font_size, mod_name);
+				settings.verse_num_font_size + settings.base_font_size,
+				mod_name);
 
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
@@ -818,9 +819,9 @@ void main_update_parallel_page(void)
 
 			if (j == 0) {
 				sprintf(tmpBuf,
-					"<tr><td><i><font color=\"%s\" size=\"%s\">[%s]</font></i></td></tr>",
+					"<tr><td><i><font color=\"%d\" size=\"%s\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
-					settings.verse_num_font_size,
+					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
 
 				utf8len = strlen(tmpBuf);
@@ -833,12 +834,13 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
 				settings.bible_verse_num_color,
-				settings.verse_num_font_size, mod_name);
+				settings.verse_num_font_size + settings.base_font_size,
+				mod_name);
 
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
