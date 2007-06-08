@@ -424,9 +424,17 @@ void load_settings_structure(void)
 		settings.commpane_hight = 240;
 	}
 	
-	settings.verse_num_font_size =
-	    xml_get_value("fontsize", "versenum");
+	settings.verse_num_font_size_str = xml_get_value("fontsize", "versenum");
+	settings.verse_num_font_size = atoi(settings.verse_num_font_size_str);
 
+	if (buf = xml_get_value("fontsize", "basefontsize")) {
+		settings.base_font_size_str = g_strdup(buf);
+		settings.base_font_size = atoi(settings.base_font_size_str);
+	} else {
+		xml_add_new_item_to_section("fontsize", "basefontsize", "+0");
+		settings.base_font_size = g_strdup("+0");
+		settings.base_font_size = 0;
+	}
 
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	settings.bible_bg_color =
