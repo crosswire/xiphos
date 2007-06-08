@@ -519,6 +519,7 @@ int xml_create_settings_file(char *path)
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "fontsize", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *) "versenum", (const xmlChar *) "+0");
+	xmlNewTextChild(section_node, NULL, (const xmlChar *) "basefontsize", (const xmlChar *) "+0");
 
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *) "HTMLcolors", NULL);

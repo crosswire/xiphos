@@ -1,3 +1,8 @@
+2007-06-08  karl <charcoal@users.sf.net>
+
+	* back half of implementation of base font size.
+	  now needs a preferences tweak alongside versenum size.
+
 2007-06-06  karl <charcoal@users.sf.net>
 
 	* fixed bug #1731993: splash enabled by default.

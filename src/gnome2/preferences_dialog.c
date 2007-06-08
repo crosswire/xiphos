@@ -1031,7 +1031,8 @@ void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data)
 	if (!buf)
 		return;	
 	xml_set_value("GnomeSword", "fontsize", "versenum", buf);
-	settings.verse_num_font_size = xml_get_value("fontsize", "versenum");
+	settings.verse_num_font_size_str = xml_get_value("fontsize", "versenum");
+	settings.verse_num_font_size = atoi(settings.verse_num_font_size_str);
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
 	main_url_handler(url);
@@ -1838,21 +1839,21 @@ static
 gint get_verse_number_size_index(void)
 {
 	gint i = 0;
-	if(!strcmp(settings.verse_num_font_size,"-2"))
+	if (!strcmp(settings.verse_num_font_size_str, "-2"))
 		return 0;
-	if(!strcmp(settings.verse_num_font_size,"-1"))
+	if (!strcmp(settings.verse_num_font_size_str, "-1"))
 		return 1;
-	if(!strcmp(settings.verse_num_font_size,"+0"))
+	if (!strcmp(settings.verse_num_font_size_str, "+0"))
 		return 2;
-	if(!strcmp(settings.verse_num_font_size,"+1"))
+	if (!strcmp(settings.verse_num_font_size_str, "+1"))
 		return 3;
-	if(!strcmp(settings.verse_num_font_size,"+2"))
+	if (!strcmp(settings.verse_num_font_size_str, "+2"))
 		return 4;
-	if(!strcmp(settings.verse_num_font_size,"+3"))
+	if (!strcmp(settings.verse_num_font_size_str, "+3"))
 		return 5;
-	if(!strcmp(settings.verse_num_font_size,"+4"))
+	if (!strcmp(settings.verse_num_font_size_str, "+4"))
 		return 6;
-	if(!strcmp(settings.verse_num_font_size,"+5"))
+	if (!strcmp(settings.verse_num_font_size_str, "+5"))
 		return 7;
 }
 
