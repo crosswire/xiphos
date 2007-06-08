@@ -253,7 +253,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gsize bytes_written;
 	GError **error = NULL;
 	gint mod_type;
-	gint font_size;
 	MOD_FONT *mf = get_font(imodule.Name());
 	
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
@@ -295,38 +294,33 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
+
 	swbuf.appendFormatted(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">",
 			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
-			      settings.link_color);
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size));
 
 	swbuf.appendFormatted(  "<font color=\"%s\">",
 				settings.bible_verse_num_color);
 
-	font_size = ((mf->old_font_size)
-		     ? atoi(mf->old_font_size) + settings.base_font_size
-		     : settings.base_font_size);
 #ifdef USE_GTKMOZEMBED	
 	swbuf.appendFormatted(	"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"[*%s*]</a></font>[%s]<br>"
-				"<font face=\"%s\" size=\"%s%d\">",
+				"[*%s*]</a></font>[%s]<br>",
 				imodule.Description(),
 				imodule.Name(),
 				imodule.Name(),
-				(gchar*)keytext,
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size);
+				(gchar*)keytext);
 #else
-	swbuf.appendFormatted(	"[*%s*]</font>[%s]<br>"
-				"<font face=\"%s\" size=\"%s%d\">",
+	swbuf.appendFormatted(	"[*%s*]</font>[%s]<br>",
 				imodule.Name(),
-				(gchar*)keytext,
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size);
+				(gchar*)keytext);
 #endif
 
 	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
@@ -607,7 +601,6 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 	GError **error = NULL;
 	gchar *utf8_key;
 	SWMgr *mgr = be->get_main_mgr();
-	gint font_size;
 
 	const char *ModuleName = imodule.Name();
 	SWModule *mod_top = mgr->getModule(ModuleName);
@@ -623,20 +616,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 	key->Verse(1);
 
 	if (!key->_compare(key_top)) {
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
-		swbuf.appendFormatted("<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				      ((mf->old_font) ? mf->old_font : ""),
-				      ((font_size >= 0) ? "+" : ""),
-				      font_size,
-				      settings.bible_text_color);
-
 		if ((!strcmp(settings.MainWindowModule, "KJV")))
-			swbuf.appendFormatted("</font><div style=\"text-align: center\">%s<hr></div>",
+			swbuf.appendFormatted("<div style=\"text-align: center\">%s<hr></div>",
 					mod->Description());
 		else
-			swbuf.appendFormatted("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
+			swbuf.appendFormatted("<div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
 					mod->Description(),
 					_("Chapter"),
 					chapter);
@@ -665,31 +649,20 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		
 		if (is_rtol)
 			swbuf += "<DIV ALIGN=right>";
-		font_size = ((settings.versestyle)
-			     ? settings.verse_num_font_size + settings.base_font_size
-			     : settings.base_font_size - 2);
 		swbuf.appendFormatted(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%s%d\" color=\"%s\">%d</font></A> "
+				  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
 				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0,
 				utf8_key,
-				((font_size >= 0) ? "+" : ""),
-				font_size,
+				((settings.versestyle)
+				 ? settings.verse_num_font_size + settings.base_font_size
+				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
 				key->Verse());
 
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
 		swbuf.appendFormatted(
-				"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
-				settings.bible_text_color);
-		swbuf.appendFormatted(
-				"%s</font>%s<br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				"%s%s<br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 				cVerse.GetText(),
 				// extra break when excess strongs/morph space.
 				(strongs_or_morph ? "<br>" : ""),
@@ -707,7 +680,6 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 	gsize bytes_written;
 	GError **error = NULL;
 	gchar *utf8_key;
-	gint font_size;
 	SWMgr *mgr = be->get_main_mgr();
 	const char *ModuleName = imodule.Name();
 	SWModule *mod_bottom = mgr->getModule(ModuleName);
@@ -719,18 +691,8 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
 
 	if (key_bottom._compare(key) < 1) {
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
 		swbuf.appendFormatted(
-			"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-			((mf->old_font) ? mf->old_font : ""),
-			((font_size >= 0) ? "+" : ""),
-			font_size,
-			settings.bible_text_color);
-
-		swbuf.appendFormatted(
-			"</font>%s<hr><div style=\"text-align: center\"><p>%s</p></div>",
+			"%s<hr><div style=\"text-align: center\"><p>%s</p></div>",
 			// extra break when excess strongs/morph space.
 			(strongs_or_morph ? "<br>" : ""),
 			mod->Description());
@@ -757,29 +719,17 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 		
 		if (is_rtol)
 			swbuf += "<DIV ALIGN=right>";
-		font_size = ((settings.versestyle)
-			     ? settings.verse_num_font_size + settings.base_font_size
-			     : settings.base_font_size - 2);
 		swbuf.appendFormatted(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%s%d\" color=\"%s\">%d</font></A> "
+				  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
 				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0,
 				utf8_key,
-				((font_size >= 0) ? "+" : ""),
-				font_size,
+				((settings.versestyle)
+				 ? settings.verse_num_font_size + settings.base_font_size
+				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
 				key->Verse());
-
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
-		swbuf.appendFormatted(
-				"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
-				settings.bible_text_color);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -794,7 +744,6 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				       cache_flags);
 
 		swbuf += cVerse.GetText();
-		swbuf += "</font>";
 		if (is_rtol)
 			swbuf += ("</DIV>");
 	}
@@ -983,7 +932,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
-	gint font_size;
 
 	char *ModuleName = imodule.Name();
 	GLOBAL_OPS * ops = main_new_globals(ModuleName);
@@ -1020,7 +968,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	swbuf.appendFormatted(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">",
 			      // strongs & morph specs win over dblspc.
 			      (strongs_and_morph		// both
 			       ? CSS_BLOCK_BOTH
@@ -1031,7 +980,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 				     : ""))),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
-			      settings.link_color);
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size));
 	if (is_rtol)
 		swbuf += "<DIV ALIGN=right>";
 
@@ -1095,31 +1048,21 @@ char GTKChapDisp::Display(SWModule &imodule)
 		/*if (key->Verse() == curVerse)
 			g_message(imodule.getRawEntry());*/
 		
-		font_size = settings.verse_num_font_size + settings.base_font_size;
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%s%d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			utf8_key,
-			((font_size >= 0) ? "+" : ""),
-			font_size,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
 			key->Verse());
 
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
-		swbuf.appendFormatted(
-				"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
-				(key->Verse() == curVerse)
-				? (settings.versehighlight
-				   ? settings.highlight_fg
-				   : settings.currentverse_color)
-				: settings.bible_text_color);
+		if (key->Verse() == curVerse)
+				swbuf.appendFormatted("<font color=\"%s\">",
+						      (settings.versehighlight
+						       ? settings.highlight_fg
+						       : settings.currentverse_color));
 /*				
 		if (key->Verse() == curVerse   ||
 		    key->Verse() == curVerse-1 ||
@@ -1158,8 +1101,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 		} else
 			swbuf += cVerse.GetText();
 		
-		if (key->Verse() == curVerse)
+		if (key->Verse() == curVerse) {
+			swbuf.appendFormatted("</font>");
 			GTKChapDisp::ReadAloud(curVerse, cVerse.GetText());
+		}
 
 		if (settings.versestyle) {
 			if (strstr(cVerse.GetText(), "<!p>")) {
@@ -1167,12 +1112,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 			} else {
 				newparagraph = FALSE;
 			}
-			swbuf.append(((key->Verse() == curVerse) &&
-				      settings.versehighlight)
-				     ? "</font>"
-				     : "</font><br>");
-		} else {
-			swbuf.append("</font>");
+			if ((key->Verse() != curVerse) ||
+			    !settings.versehighlight)
+				swbuf.append("<br>");
 		}
 
 		// special contrasty highlighting
@@ -1197,9 +1139,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol)
-		swbuf += ("</DIV></body></html>");
+		swbuf += ("</DIV></font></body></html>");
 	else
-		swbuf += "</body></html>";
+		swbuf += "</font></body></html>";
 	
 #ifdef USE_GTKMOZEMBED
 	if (swbuf.length()) 
@@ -1402,14 +1344,13 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	if (type == 4)
 		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<font face=\"%s\" size=\"%s%d\">%s"
+				"<font face=\"%s\" size=\"%+d\">%s"
 				"</font></body></html>",
 				(settings.doublespace ? DOUBLE_SPACE : ""),
 				settings.bible_bg_color,
 				settings.bible_text_color,
 				settings.link_color,
 				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
 				font_size,
 				(settings.imageresize
 				 ? AnalyzeForImageSize((const char *)imodule,
@@ -1419,22 +1360,21 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	else
 		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
-				"[%s]</font></a>[%s]<br>"
-				"<font face=\"%s\" size=\"%s%d\">%s"
-				"</font></body></html>",
+				"<font face=\"%s\" size=\"%+d\">"
+				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+				"<font color=\"%s\">[%s]</font></a>[%s]<br>"
+				"%s</font></body></html>",
 				(settings.doublespace ? DOUBLE_SPACE : ""),
 				settings.bible_bg_color,
 				settings.bible_text_color,
 				settings.link_color,
+				((mf->old_font) ? mf->old_font : ""),
+				font_size,
 				imodule.Description(),
 				imodule.Name(),
 				settings.bible_verse_num_color,
 				imodule.Name(),
 				(gchar*)keytext,
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
 				(settings.imageresize
 				 ? AnalyzeForImageSize((const char *)imodule,
 						       GDK_WINDOW(gtkText->window),
@@ -1466,7 +1406,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	int curPos = 0;
-	gint font_size;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GString *str = g_string_new(NULL);
@@ -1511,7 +1450,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 	g_string_printf(str,
 			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			"<font face=\"%s\" size=\"%+d\">",
 			(strongs_and_morph
 			 ? CSS_BLOCK_BOTH
 			 : (strongs_or_morph
@@ -1521,12 +1461,18 @@ char DialogChapDisp::Display(SWModule &imodule)
 			       : ""))),
 			settings.bible_bg_color,
 			settings.bible_text_color,
-			settings.link_color);
+			settings.link_color,
+			((mf->old_font) ? mf->old_font : ""),
+			((mf->old_font_size)
+			 ? atoi(mf->old_font_size) + settings.base_font_size
+			 : settings.base_font_size));
 	
 	gecko_html_write(html, str->str, str->len);
 	str = g_string_erase(str, 0, -1);
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
-				== curChapter && !imodule.Error()); imodule++) {
+
+	for (key->Verse(1);
+	     key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error();
+	     imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
 		while ((preverse
@@ -1548,35 +1494,28 @@ char DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
-		font_size = settings.verse_num_font_size + settings.base_font_size;
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%s%d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			(char*)key->getText(),
-			((font_size >= 0) ? "+" : ""),
-			font_size,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
 			key->Verse());
 		str = g_string_append(str, buf);
 		g_free(buf);
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size)
-			     : settings.base_font_size);
-		buf = g_strdup_printf(
-				"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
-				(key->Verse() == curVerse)
-				? (settings.versehighlight
-				   ? settings.highlight_fg
-				   : settings.currentverse_color)
-				: settings.bible_text_color);
 
-		str = g_string_append(str, buf);
-		g_free(buf);
+		if (key->Verse() == curVerse) {
+			buf = g_strdup_printf(
+				"<font color=\"%s\">",
+				(settings.versehighlight
+				 ? settings.highlight_fg
+				 : settings.currentverse_color));
+
+			str = g_string_append(str, buf);
+			g_free(buf);
+		}
 
 		if (newparagraph && versestyle) {
 			newparagraph = FALSE;
@@ -1619,14 +1558,16 @@ char DialogChapDisp::Display(SWModule &imodule)
 					       ? block_render((const char *)imodule)
 					       : (const char *)imodule));
 
+		if (key->Verse() == curVerse)
+			str = g_string_append(str, "</font>");
+
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (versestyle) {
-			buf2 = g_strdup_printf(" %s",
+			buf2 = g_strdup_printf("%s",
 					       ((key->Verse() == curVerse) &&
 						settings.versehighlight)
-					       ? "</font>"
-					       : "</font><br>");
+					       ? "" : "<br>");
 
 			if ((strstr(buf, "<!P>") == NULL) &&
 			     (strstr(buf, "<p>") == NULL) ) {
@@ -1651,7 +1592,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		str = g_string_erase(str, 0, -1);
 	}
 	str = g_string_erase(str, 0, -1);
-	buf = g_strdup_printf("%s", "</body></html>");
+	buf = g_strdup_printf("%s", "</font></body></html>");
 	str = g_string_append(str, buf);
 	g_free(buf);
 	
@@ -1861,28 +1802,24 @@ char GTKPrintEntryDisp::Display(SWModule &imodule)
                              &bytes_written,
                              error);
 	swbuf.appendFormatted(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">"
+			      "<font color=\"%s\">"
+			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font>[%s]<br>",
 			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
-			      settings.link_color);
-
-	swbuf.appendFormatted(  "<font color=\"%s\">",
-				settings.bible_verse_num_color);
-
-	font_size = ((mf->old_font_size)
-		     ? atoi(mf->old_font_size) + settings.base_font_size
-		     : settings.base_font_size);
-	swbuf.appendFormatted(	"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"[*%s*]</a></font>[%s]<br>"
-				"<font face=\"%s\" size=\"%s%d\">",
-				imodule.Description(),
-				imodule.Name(),
-				imodule.Name(),
-				(gchar*)keytext,
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size);
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size),
+			      settings.bible_verse_num_color,
+			      imodule.Description(),
+			      imodule.Name(),
+			      imodule.Name(),
+			      (gchar*)keytext );
 				
 	swbuf.append((const char *)imodule);
 	
@@ -1917,7 +1854,6 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	gsize bytes_written;
 	GError **error = NULL;
 	SWBuf swbuf;
-	gint font_size;
 	
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
@@ -1936,11 +1872,16 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	swbuf.appendFormatted(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">",
 			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
-			      settings.link_color);
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size));
 	if (is_rtol)
 		swbuf += "<DIV ALIGN=right>";
 	
@@ -1954,8 +1895,9 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	
 	swbuf = "";
 
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
-				== curChapter && !imodule.Error()); imodule++) {
+	for (key->Verse(1);
+	     key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error();
+	     imodule++) {
 		int x = 0;
 		sprintf(heading, "%d", x);
 		while ((preverse
@@ -1975,32 +1917,15 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
                              &bytes_written,
                              error);
 
-		// special contrasty highlighting
-		/* if ((key->Verse() == curVerse) && settings.versehighlight)
-			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
-					      settings.highlight_bg); */
-
-		font_size = settings.verse_num_font_size + settings.base_font_size;
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%s%d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			utf8_key,
-			((font_size >= 0) ? "+" : ""),
-			font_size,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
 			key->Verse());
-
-		font_size = ((mf->old_font_size)
-			     ? atoi(mf->old_font_size) + settings.base_font_size
-			     : settings.base_font_size);
-		swbuf.appendFormatted(
-				"<font face=\"%s\" size=\"%s%d\" color=\"%s\">",
-				((mf->old_font) ? mf->old_font : ""),
-				((font_size >= 0) ? "+" : ""),
-				font_size,
-				settings.bible_text_color);
 
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
@@ -2017,9 +1942,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 			} else {
 				newparagraph = FALSE;
 			}
-			swbuf.append("</font><br>");
-		} else {
-			swbuf.append("</font>");
+			swbuf.append("<br>");
 		}
 
 		g_free(buf);
@@ -2030,7 +1953,6 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	}
 	swbuf = "";
 	
-
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
 	key->Book(curBook);
@@ -2038,9 +1960,9 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol)
-		swbuf += ("</DIV></body></html>");
+		swbuf += ("</DIV></font></body></html>");
 	else
-		swbuf += "</body></html>";
+		swbuf += "</font></body></html>";
 	
 	if (swbuf.length()) 
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
