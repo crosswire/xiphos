@@ -1,3 +1,7 @@
+2007-06-09  terry <tbiggs@users.sourceforge.net>
+
+	* added main/sword.cc main_refresh_all
+
 2007-06-08  karl <charcoal@users.sf.net>
 
 	* back half of implementation of base font size.

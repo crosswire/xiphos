@@ -1276,7 +1276,14 @@ void main_display_devotional(void)
 	}
 }
 
-
+void main_refresh_all(void)
+{ 
+	main_display_bible(settings.MainWindowModule, settings.currentverse);
+	main_display_commentary(settings.CommWindowModule, settings.currentverse);
+	main_display_book(settings.book_mod, settings.book_key);	
+	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
+}
+    
 void main_setup_displays(void)
 { 
 /*
