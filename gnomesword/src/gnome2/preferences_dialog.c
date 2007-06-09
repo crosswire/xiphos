@@ -104,6 +104,7 @@ typedef enum {
 	GREEK_LEX_VIEWER_MODULE,
 	HEBREW_LEX_VIEWER_MODULE,
 	COMBO_ENTRY_SP_DIR,
+	BASE_FONT_SIZE,
 	VERSE_NUMBER_SIZE
 } which_entry;
 
@@ -126,6 +127,7 @@ struct _preferences_combo {
 	GtkWidget *greek_lex_viewer_module;
 	GtkWidget *hebrew_lex_viewer_module;
 	GtkWidget *combo_entry_sp_dir;
+	GtkWidget *base_font_size;
 	GtkWidget *verse_number_size;
 };
 
@@ -1043,6 +1045,45 @@ void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *   on_basecombobox1_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_basecombobox1_changed(GtkEditable * editable, gpointer user_data)	
+ *
+ * Description
+ *   combobox1 (base font size) 
+ *   has changed - update Biblical text pane
+ *
+ * Return value
+ *  void 
+ */
+
+void on_basecombobox1_changed(GtkComboBox * combobox, gpointer user_data)
+{
+	gchar *buf = NULL;
+	gchar *url = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
+	if (!buf)
+		return;	
+	xml_set_value("GnomeSword", "fontsize", "basefontsize", buf);
+	settings.base_font_size_str = xml_get_value("fontsize", "basefontsize");
+	settings.base_font_size = atoi(settings.base_font_size_str);
+	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
+					      settings.currentverse);
+	main_url_handler(url);
+	g_free(url);
+	g_free(buf);
+}
+
+
+/******************************************************************************
+ * Name
  *   on_combobox2_changed
  *
  * Synopsis
@@ -1836,24 +1877,24 @@ void fill_combobox(GList * glist, GtkComboBox * combo, gchar * current_module)
 
 
 static
-gint get_verse_number_size_index(void)
+gint get_font_size_index(const char *font)
 {
 	gint i = 0;
-	if (!strcmp(settings.verse_num_font_size_str, "-2"))
+	if (!strcmp(font, "-2"))
 		return 0;
-	if (!strcmp(settings.verse_num_font_size_str, "-1"))
+	if (!strcmp(font, "-1"))
 		return 1;
-	if (!strcmp(settings.verse_num_font_size_str, "+0"))
+	if (!strcmp(font, "+0"))
 		return 2;
-	if (!strcmp(settings.verse_num_font_size_str, "+1"))
+	if (!strcmp(font, "+1"))
 		return 3;
-	if (!strcmp(settings.verse_num_font_size_str, "+2"))
+	if (!strcmp(font, "+2"))
 		return 4;
-	if (!strcmp(settings.verse_num_font_size_str, "+3"))
+	if (!strcmp(font, "+3"))
 		return 5;
-	if (!strcmp(settings.verse_num_font_size_str, "+4"))
+	if (!strcmp(font, "+4"))
 		return 6;
-	if (!strcmp(settings.verse_num_font_size_str, "+5"))
+	if (!strcmp(font, "+5"))
 		return 7;
 }
 
@@ -2032,12 +2073,20 @@ static void create_preferences_dialog(void)
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
 	setup_check_buttons();
+
 	/* verse number size */
-	index = get_verse_number_size_index();
+	index = get_font_size_index(settings.verse_num_font_size_str);
 	combo.verse_number_size = glade_xml_get_widget(gxml, "combobox1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.verse_number_size), index);
 	g_signal_connect(combo.verse_number_size, "changed",
 			 G_CALLBACK(on_combobox1_changed), NULL);
+
+	/* base font size */
+	index = get_font_size_index(settings.base_font_size_str);
+	combo.base_font_size = glade_xml_get_widget(gxml, "basecombobox1");
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo.base_font_size), index);
+	g_signal_connect(combo.base_font_size, "changed",
+			 G_CALLBACK(on_basecombobox1_changed), NULL);
 
 	/* module combos */				
 	combo.text_module = glade_xml_get_widget (gxml, "combobox2");
