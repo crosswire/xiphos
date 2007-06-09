@@ -342,7 +342,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 #ifdef DEBUG
-	g_message("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length());
+	//g_message("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length());
 #endif
 #ifdef USE_GTKMOZEMBED
 	
