@@ -379,7 +379,8 @@ static void on_doublespace_activate(GtkCheckMenuItem * menuitem,
 	settings.doublespace = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "doublespace",
 		      (settings.doublespace ? "1" : "0"));
-	main_display_bible(NULL, settings.currentverse);
+	//main_display_bible(NULL, settings.currentverse);
+	main_refresh_all();
 }
 
 /******************************************************************************
