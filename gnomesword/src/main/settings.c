@@ -432,7 +432,7 @@ void load_settings_structure(void)
 		settings.base_font_size = atoi(settings.base_font_size_str);
 	} else {
 		xml_add_new_item_to_section("fontsize", "basefontsize", "+0");
-		settings.base_font_size = g_strdup("+0");
+		settings.base_font_size_str = g_strdup("+0");
 		settings.base_font_size = 0;
 	}
 
