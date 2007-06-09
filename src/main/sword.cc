@@ -932,7 +932,7 @@ void main_dictionary_button_clicked(gint direction)
 	g_free(key);
 }
 
-void main_display_book(const char * mod_name, char * key)
+void main_display_book(const char * mod_name, char * key)     //, unsigned long offset)
 {
 #ifdef DEBUG
 	g_message("main_display_book\nmod_name: %s\nkey: %s", mod_name, key);
@@ -950,7 +950,7 @@ void main_display_book(const char * mod_name, char * key)
 		settings.book_mod = xml_get_value("modules", "book");
 	}
 	
-	if (key == NULL)
+	if (key == NULL)  // && offset == -1)
 		key = "0";
 
 	if (!isdigit(key[0])) {
@@ -964,6 +964,8 @@ void main_display_book(const char * mod_name, char * key)
 		settings.book_offset = atol(key);
 		if(settings.book_offset < 4)
 			settings.book_offset = 4;
+		xml_set_value("GnomeSword", "keys", "book", key);
+		settings.book_key = xml_get_value("keys", "book");
 		xml_set_value("GnomeSword", "keys", "offset", key);
 
 		backend->set_module(mod_name);	
