@@ -1,7 +1,7 @@
 2007-06-08  karl <charcoal@users.sf.net>
 
 	* back half of implementation of base font size.
-	  now needs a preferences tweak alongside versenum size.
+	* front half in ui/prefs.glade and pref dialog.
 	* re-worked font name+size usage to minimize excess specification.
 
 2007-06-06  karl <charcoal@users.sf.net>
