@@ -1,3 +1,7 @@
+2007-06-10  terry <tbiggs@users.sourceforge.net>
+
+	* added doublespace support to previewer
+
 2007-06-09  terry <tbiggs@users.sourceforge.net>
 
 	* added main/sword.cc main_refresh_all
