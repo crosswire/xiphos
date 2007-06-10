@@ -18,7 +18,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -41,26 +41,19 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
 #include <ctype.h>
 #include <time.h>
-
-
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
-
 #include "main/previewer.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
- 
 #include "backend/sword_main.hh"
-
-	
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-
-
+//#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!-- A { text-decoration:none } %s --></STYLE></head>"
+#define DOUBLE_SPACE " * { line-height: 2em ! important; }"
 
 /******************************************************************************
  * Name
@@ -69,14 +62,14 @@ extern "C" {
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void main_clear_viewer(VOID)
+ *   void main_clear_viewer(void)
  *
  * Description
  *   clear the information viewer
  *
  * Return value
  *   void
- */
+ */ 
 
 void main_clear_viewer(void)
 {
@@ -87,40 +80,43 @@ void main_clear_viewer(void)
 	gchar *buf;
 
 #ifdef USE_GTKMOZEMBED
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
+		return;
 	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
-	gecko_html_open_stream(html,"text/html");
-#else	
+	gecko_html_open_stream(html, "text/html");
+#else
 	/* setup gtkhtml widget */
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-#endif	
+#endif
 	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			"",			
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
 	buf = _("Previewer");
 	g_string_printf(tmp_str,
-	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
+			"<b>%s</b><br><font color=\"grey\">"
+			"<HR></font><br>", buf);
 	str = g_string_append(str, tmp_str->str);
-		
+
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
 	str = g_string_append(str, tmp_str->str);
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html,str->str,str->len);
+		gecko_html_write(html, str->str, str->len);
 	gecko_html_close(html);
-#else	
+#else
 	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
+		gtk_html_load_from_string(html, str->str, str->len);
 	gtk_html_set_editable(html, was_editable);
-#endif	
+#endif
 	//free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
@@ -145,96 +141,101 @@ void main_clear_viewer(void)
  */
 
 void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type ,gchar * morph_text,
-			     gchar * morph)
+			     gchar * action, gchar * type,
+			     gchar * morph_text, gchar * morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
 	MOD_FONT *mf = get_font(mod_name);
 #ifdef USE_GTKMOZEMBED
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
+		return;
 	GeckoHtml *html = GECKO_HTML(sidebar.html_viewer_widget);
-	gecko_html_open_stream(html,"text/html");
-#else	
+	gecko_html_open_stream(html, "text/html");
+#else
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 #endif
 
 	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			(settings.doublespace ? DOUBLE_SPACE : ""),	
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-	if(type) {
-		if(!strcmp(type,"n")) {
+	if (type) {
+		if (!strcmp(type, "n")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
+					"<font color=\"grey\">%s<HR></font><br>",
 					_("Footnote"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if(!strcmp(type,"x")) {
+		if (!strcmp(type, "x")) {
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s<HR></font><br>",
+					"<font color=\"grey\">%s<HR></font><br>",
 					_("Cross Reference"));
 			str = g_string_append(str, tmp_str->str);
 		}
-		if(!strcmp(action ,"showStrongs")) {  //&& !strcmp(type,"Greek")
+		if (!strcmp(action, "showStrongs")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
-					_("Strongs"),key);
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Strongs"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
-		if(!strcmp(action ,"showMorph")) {  //&& !strcmp(type,"Greek")
+		if (!strcmp(action, "showMorph")) {	//&& !strcmp(type,"Greek")
 			g_string_printf(tmp_str,
-				"<font color=\"grey\">%s: %s<HR></font><br>",
-					_("Morphology"),key);
+					"<font color=\"grey\">%s: %s<HR></font><br>",
+					_("Morphology"), key);
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
-	
-	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
+
+	if (!strcmp(action, "showStrongsMorph")) {	//&& !strcmp(type,"Greek")
 		g_string_printf(tmp_str,
-			"<font color=\"grey\">%s: %s<HR></font>",
-				_("Strongs"),key);
+				"<font color=\"grey\">%s: %s<HR></font>",
+				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
-		g_string_printf(tmp_str, 
+		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none", 
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->
+				old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
-		
+
 		g_string_printf(tmp_str,
-			"<font color=\"grey\"><br><br>%s: %s<HR></font>",
-					_("Morphology"),morph);
+				"<font color=\"grey\"><br><br>%s: %s<HR></font>",
+				_("Morphology"), morph);
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, morph_text);
-		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
+		g_string_printf(tmp_str, " %s<br>",
+				"</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-		
-		
+
+
 	} else {
-		g_string_printf(tmp_str, 
+		g_string_printf(tmp_str,
 				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font)?mf->old_font:"none", 
-				(mf->old_font_size)?mf->old_font_size:"+0");
+				(mf->old_font) ? mf->old_font : "none",
+				(mf->old_font_size) ? mf->
+				old_font_size : "+0");
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
-	
+
 		g_string_printf(tmp_str, " %s", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-	
+
 	}
-	
+
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html,str->str,str->len);
+		gecko_html_write(html, str->str, str->len);
 	gecko_html_close(html);
-#else	
+#else
 	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
+		gtk_html_load_from_string(html, str->str, str->len);
 #endif
 	free_font(mf);
 	g_string_free(str, TRUE);
@@ -274,16 +275,15 @@ static void mark_search_words(GString * str)
 	/* close tags */
 	sprintf(closestr, "</b></font>");
 	/* open tags */
-	sprintf(openstr, "<font color=\"%s\"><b>",
-		settings.found_color);
+	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	/* point buf to found verse */
 	buf = str->str;
 	searchbuf = g_strdup(settings.searchText);
-	if(g_str_has_prefix(searchbuf,"\"")) {
+	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
-		g_strstrip( searchbuf );
+		g_strstrip(searchbuf);
 	}
-	
+
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
@@ -313,8 +313,7 @@ static void mark_search_words(GString * str)
 			len2 = strlen((gchar *) list->data);
 			/* find search word in verse */
 			if ((tmpbuf =
-			     strstr(buf,
-				    (gchar *) list->data)) != NULL) {
+			     strstr(buf, (gchar *) list->data)) != NULL) {
 				/* set len3 to length of tmpbuf 
 				   (tmpbuf points to first occurance of 
 				   search word in verse) */
@@ -323,13 +322,11 @@ static void mark_search_words(GString * str)
 				len4 = len1 - len3;
 				/* add end tags first 
 				   (position to add tag to is len4 + len2) */
-				str =
-				    g_string_insert(str, (len4 + len2),
-						    closestr);
+				str = g_string_insert(str, (len4 + len2),
+						      closestr);
 				/* then add start tags 
 				   (position to add tag to is len4) */
-				str =
-				    g_string_insert(str, len4, openstr);
+				str = g_string_insert(str, len4, openstr);
 			}
 			/* point buf to changed str */
 			buf = str->str;
@@ -346,9 +343,8 @@ static void mark_search_words(GString * str)
 			len3 = strlen(tmpbuf);
 			len4 = len1 - len3;
 			/* place end tag first */
-			str =
-			    g_string_insert(str, (len4 + len2),
-					    closestr);
+			str = g_string_insert(str, (len4 + len2),
+					      closestr);
 			/* then place start tag */
 			str = g_string_insert(str, len4, openstr);
 		}
@@ -365,8 +361,8 @@ static void mark_search_words(GString * str)
  * Synopsis
  *   #include ".h"
  *
- *   void main_entry_display(GtkWidget * html_widget, gchar * mod_name, 
- *					      gchar * text, gchar *key)
+ *   void main_entry_display(gpointer data, gchar * mod_name,
+ *		   gchar * text, gchar * key, gboolean show_key)
  *
  * Description
  *   display Sword modules one verse (entry) at a time
@@ -384,11 +380,12 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	GString *search_str;
 	gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
-#ifdef USE_GTKMOZEMBED	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget))) return;
+#ifdef USE_GTKMOZEMBED
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(html_widget)))
+		return;
 	GeckoHtml *html = GECKO_HTML(html_widget);
-	gecko_html_open_stream(html,"text/html");
-#else	
+	gecko_html_open_stream(html, "text/html");
+#else
 	GtkHTML *html = GTK_HTML(html_widget);
 
 	/* setup gtkhtml widget */
@@ -397,41 +394,42 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		gtk_html_set_editable(html, FALSE);
 #endif
 	g_string_printf(tmp_str,
-		HTML_START
-		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color,
-		settings.link_color);
+			HTML_START
+			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+			(settings.doublespace ? DOUBLE_SPACE : ""),	
+			settings.bible_bg_color, settings.bible_text_color,
+			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
 	/* show key in html widget  */
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			g_string_printf(tmp_str,
-				"<a href=\"sword://%s/%s\">"
-				"<font color=\"%s\">[%s] %s </font></a><br />",
-				mod_name,
-				key,
-				settings.bible_verse_num_color,
-				mod_name, key);
+					"<a href=\"sword://%s/%s\">"
+					"<font color=\"%s\">[%s] %s </font></a><br />",
+					mod_name,
+					key,
+					settings.bible_verse_num_color,
+					mod_name, key);
 		} else {
 			g_string_printf(tmp_str,
-				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"<font color=\"%s\">[%s]</a></font>[%s] ",
-				backend->module_description(mod_name),
-				mod_name,
-				settings.bible_verse_num_color,
-				mod_name, 
-				key);
+					"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+					"<font color=\"%s\">[%s]</a></font>[%s] ",
+					backend->
+					module_description(mod_name),
+					mod_name,
+					settings.bible_verse_num_color,
+					mod_name, key);
 		}
 		str = g_string_append(str, tmp_str->str);
 	}
-	
-	g_string_printf(tmp_str, 
+
+	g_string_printf(tmp_str,
 			"<font face=\"%s\" size=\"%s\">",
-			(mf->old_font)?mf->old_font:"none", 
-			(mf->old_font_size)?mf->old_font_size:"+0");
+			(mf->old_font) ? mf->old_font : "none",
+			(mf->old_font_size) ? mf->old_font_size : "+0");
 	str = g_string_append(str, tmp_str->str);
-	
+
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
 		mark_search_words(search_str);
@@ -445,16 +443,16 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 #ifdef USE_GTKMOZEMBED
 	if (str->len)
-		gecko_html_write(html,str->str,str->len);
+		gecko_html_write(html, str->str, str->len);
 	gecko_html_close(html);
-#else	
+#else
 	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
+		gtk_html_load_from_string(html, str->str, str->len);
 	gtk_html_set_editable(html, was_editable);
-#endif	
+#endif
 	/* andyp - inserted for debugging, remove */
 	//g_print(str->str); 
-	
+
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
