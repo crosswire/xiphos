@@ -492,7 +492,8 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 
 void main_update_parallel_page(void)
 {
-	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
+	gchar tmpBuf[256], *rowcolor;
+	gchar *font_size_tmp = NULL, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
 	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
@@ -581,12 +582,11 @@ void main_update_parallel_page(void)
 						
 			font_size = get_conf_file_item(file, mod_name, "Fontsize");
 			g_free(file);		
-			if(!font_size)
-				font_size = g_strdup("+0");
-			if (strlen(font_size) < 2){
-				free(font_size);
-				font_size = g_strdup("+0");
-			}
+			if(font_size_tmp)
+				font_size = g_strdup_printf("%+d",(atoi(font_size_tmp) + settings.base_font_size));
+			else 
+				font_size = g_strdup_printf("%+d",settings.base_font_size);
+
 
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
@@ -607,7 +607,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%d\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
@@ -707,6 +707,7 @@ void main_update_parallel_page(void)
 void main_update_parallel_page(void)
 {
 	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
+	gchar *font_size_tmp = NULL, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
 	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
@@ -801,17 +802,14 @@ void main_update_parallel_page(void)
 //                                      g_warning("use_gtkhtml_font = FALSE");
 				}
 			}
-			
-			//file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);			
-			font_size = get_conf_file_item(file, mod_name, "Fontsize");
-			g_free(file);//get_module_font_size(mod_name);			
-			if(!font_size)
-				font_size = g_strdup("+0");
-			if (strlen(font_size) < 2){
-				free(font_size);
-				font_size = g_strdup("+0");
-			}
-
+						
+			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
+			g_free(file);
+			if(font_size_tmp)
+				font_size = g_strdup_printf("%+d",(atoi(font_size_tmp) + settings.base_font_size));
+			else 
+				font_size = g_strdup_printf("%+d",settings.base_font_size);
+		
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
 			else
@@ -834,7 +832,7 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%d\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%+d\"> [%s]</font></a></b>",
 				rowcolor,
 				main_get_module_description(mod_name),
 				mod_name,
@@ -914,6 +912,13 @@ void main_update_parallel_page(void)
 					       htmlstream, tmpBuf,
 					       utf8len);
 			}
+			if (font_name)
+				free(font_name);
+			if (font_size)
+				free(font_size);
+			if (font_size_tmp)
+				free(font_size_tmp);
+			
 		}
 
 		sprintf(tmpBuf, "</table></body></html>");
@@ -929,10 +934,6 @@ void main_update_parallel_page(void)
 	}
 /*	gtk_frame_set_label(GTK_FRAME(widgets.frame_parallel),
 			    settings.currentverse);*/
-	if (font_name)
-		free(font_name);
-	if (font_size)
-		free(font_size);
 }
 
 #endif
@@ -966,7 +967,8 @@ static void int_display(GtkHTML *html, gchar * key)
 		*tmpkey,
 		tmpbuf[256],
 		*mod_name[5],
-		*use_font_size[5];
+		*use_font_size[5],
+	        *font_size_tmp[5];
 	GString *str;
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
@@ -1010,16 +1012,23 @@ static void int_display(GtkHTML *html, gchar * key)
 
 	for (j = 0; j < 5; ++j) {
 		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
-		use_font_size[j] = get_conf_file_item(file,
-						      mod_name[j],
-						      "Fontsize");
+		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
 		g_free(file);
+		/*
 		if(!use_font_size[j])
 			use_font_size[j] = g_strdup("+0");
 		if (strlen(use_font_size[j]) < 2) {
 			free(use_font_size[j]);
 			use_font_size[j] = g_strdup("+0");
 		}
+		*/
+				
+		if(font_size_tmp[j])
+			use_font_size[j] = g_strdup_printf("%+d",(atoi(font_size_tmp[j]) + settings.base_font_size));
+		else 
+			use_font_size[j] = g_strdup_printf("%+d",settings.base_font_size);
+
+
 	}
 
 	str = g_string_new("");
@@ -1051,10 +1060,10 @@ static void int_display(GtkHTML *html, gchar * key)
 
 		if (evenRow) {
 			evenRow = FALSE;
-			bgColor = settings.bible_bg_color;
+			bgColor = "#f1f1f1";
 		} else {
 			evenRow = TRUE;
-			bgColor = "#f1f1f1";
+			bgColor = settings.bible_bg_color;
 		}
 
 		for (j = 0; j < 5; j++) {
@@ -1141,8 +1150,10 @@ static void int_display(GtkHTML *html, gchar * key)
 			break;*/
 	}
 
-	for (j = 0; j < 5; ++j)
+	for (j = 0; j < 5; ++j) {
 		g_free(use_font_size[j]);
+		g_free(font_size_tmp[j]);
+	}
 	g_free(tmpkey);
 	g_free(cur_book);
 }
@@ -1197,7 +1208,9 @@ void main_update_parallel_page_detached(void)
 
 	if (settings.parallel1Module) {
 		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
+			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
+			settings.bible_verse_num_color,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.parallel1Module);
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
@@ -1212,7 +1225,9 @@ void main_update_parallel_page_detached(void)
 
 	if (settings.parallel2Module) {
 		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
+			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
+			settings.bible_verse_num_color,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.parallel2Module);
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
@@ -1227,7 +1242,9 @@ void main_update_parallel_page_detached(void)
 
 	if (settings.parallel3Module) {
 		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
+			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
+			settings.bible_verse_num_color,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.parallel3Module);
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
@@ -1242,7 +1259,9 @@ void main_update_parallel_page_detached(void)
 
 	if (widgets.html_parallel) {
 		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
+			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
+			settings.bible_verse_num_color,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.parallel4Module);
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
@@ -1257,7 +1276,9 @@ void main_update_parallel_page_detached(void)
 
 	if (settings.parallel5Module) {
 		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
+			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
+			settings.bible_verse_num_color,
+			settings.verse_num_font_size + settings.base_font_size,
 			settings.parallel5Module);
 
 		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;

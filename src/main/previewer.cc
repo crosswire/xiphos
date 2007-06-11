@@ -117,7 +117,6 @@ void main_clear_viewer(void)
 		gtk_html_load_from_string(html, str->str, str->len);
 	gtk_html_set_editable(html, was_editable);
 #endif
-	//free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);
 }
@@ -198,10 +197,11 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 				_("Strongs"), key);
 		str = g_string_append(str, tmp_str->str);
 		g_string_printf(tmp_str,
-				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font) ? mf->old_font : "none",
-				(mf->old_font_size) ? mf->
-				old_font_size : "+0");
+				"<font face=\"%s\" size=\"%+d\">",
+				((mf->old_font) ? mf->old_font : "none"),
+				((mf->old_font_size)
+			        ? atoi(mf->old_font_size) + settings.base_font_size
+			        : settings.base_font_size));
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
@@ -213,20 +213,18 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 		g_string_printf(tmp_str, " %s<br>",
 				"</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-
-
 	} else {
 		g_string_printf(tmp_str,
-				"<font face=\"%s\" size=\"%s\">",
-				(mf->old_font) ? mf->old_font : "none",
-				(mf->old_font_size) ? mf->
-				old_font_size : "+0");
+				"<font face=\"%s\" size=\"%+d\">",
+				((mf->old_font) ? mf->old_font : "none"),
+				((mf->old_font_size)
+			        ? atoi(mf->old_font_size) + settings.base_font_size
+			        : settings.base_font_size));
 		str = g_string_append(str, tmp_str->str);
 		str = g_string_append(str, text);
 
 		g_string_printf(tmp_str, " %s", "</font></body></html>");
 		str = g_string_append(str, tmp_str->str);
-
 	}
 
 #ifdef USE_GTKMOZEMBED
@@ -425,9 +423,11 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	}
 
 	g_string_printf(tmp_str,
-			"<font face=\"%s\" size=\"%s\">",
-			(mf->old_font) ? mf->old_font : "none",
-			(mf->old_font_size) ? mf->old_font_size : "+0");
+			"<font face=\"%s\" size=\"%+d\">",
+			((mf->old_font) ? mf->old_font : "none"),
+			((mf->old_font_size)
+			? atoi(mf->old_font_size) + settings.base_font_size
+			: settings.base_font_size));
 	str = g_string_append(str, tmp_str->str);
 
 	if (settings.displaySearchResults) {
