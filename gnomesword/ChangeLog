@@ -1,3 +1,7 @@
+2007-06-11  terry <tbiggs@users.sourceforge.net>
+
+	* added base font size to previewer and parallel view
+
 2007-06-10  terry <tbiggs@users.sourceforge.net>
 
 	* added doublespace support to previewer
