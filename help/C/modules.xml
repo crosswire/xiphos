@@ -63,6 +63,21 @@
 			After you have selected your Install Source, click the <guimenuitem>Refresh</guimenuitem> button to cause GnomeSword
 			to find the module summary available from that source before moving on.
 			</para>
+
+			<para>
+			Take note of the "Install Destination."  Normal usage of Sword Project tools in Linux/UNIX environments includes
+			one's personal area, under ~/.sword, plus a shared system-wide area readable by all users.  If the user does not
+			have write access to the system area, that selection will be greyed-out and unavailable.
+			</para>
+
+			<para>
+			There have been some requests for <application>GnomeSword</application> to provide a means by which an ordinary
+			(non-root) user could start the program, gain temporary write access to the system area while installing modules,
+			and then revoke that access after installation is complete.  Attempting to devise a scheme to do this has proven
+			quite difficult, given the different superuser management schemes employed by various Linux distributions.
+			Therefore, at this time there are no ongoing plans to try to solve this problem, and users are advised to enable
+			write access to the system area outside <application>GnomeSword</application>.
+			</para>
 		</sect3>
 		<sect3 id="sword-sources">
 			<title>Sword Sources Settings</title>
