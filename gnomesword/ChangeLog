@@ -1,3 +1,8 @@
+2007-06-12  karl <charcoal@users.sf.net>
+
+	* updates to manual for base font size, and to document that we
+	  plan no solution to the global install problem.
+
 2007-06-08  karl <charcoal@users.sf.net>
 
 	* back half of implementation of base font size.
