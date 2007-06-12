@@ -79,6 +79,11 @@
 		In individual modules' display, the right-click menu's <guimenuitem>Module Options</guimenuitem> selector provides font name
 		and size selection.
 		</para>
+
+		<para>
+		The base font size is the size initially chosen for all modules displayed by <application>GnomeSword</application>.  The
+		verse number and individual modules' font size choices are relative to the base font size.
+		</para>
 		</sect3>
 	</sect2>
 	
