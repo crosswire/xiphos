@@ -984,6 +984,22 @@ void gui_create_main_menu(GtkWidget * app)
 #ifdef DOUBLESPACE
 	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
 #endif /* DOUBLESPACE */
+
+	/* map tab's show state into view menu. */
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewtexts_item),
+				       settings.showtexts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewcomms_item),
+				       settings.showcomms);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewdicts_item),
+				       settings.showdicts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewpreview_item),
+				       settings.showpreview);
+
+	/* update other status toys */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);

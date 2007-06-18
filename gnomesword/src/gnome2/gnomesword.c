@@ -165,27 +165,6 @@ void frontend_display(void)
 	gui_show_hide_comms(settings.showcomms);
 	
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
-	if(settings.setup_canceled) {
-		str = g_string_new("");
-		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			_("The Setup Druid was cancelled."),
-			_("Do you wish to set preferences now?"));
-		info->label_top = str->str;
-		info->yes = TRUE;
-		info->no = TRUE;
-
-		test = gui_alert_dialog(info);
-		if (test == GS_YES) {
-			gui_setup_preferences_dialog();
-		}
-		g_free(info);
-		g_string_free(str,TRUE);
-		settings.setup_canceled = FALSE;
-		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
-	}
 	
 	// setup passage notebook
 	if(settings.browsing)
