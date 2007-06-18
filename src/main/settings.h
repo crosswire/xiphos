@@ -45,41 +45,41 @@ struct _settings {
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
-	        *parallel1Module,	/* module to open at program startup  */
-	        *parallel2Module,	/* module to open at program startup  */
-	        *parallel3Module, /* module to open at program startup  */
-	        *parallel4Module,	/* module to open at program startup  */
-	        *parallel5Module, /* module to open at program startup  */
-	        *personalcommentsmod,/* module to open at program startup  */
+	        *parallel1Module,	/* 5 parallel passage modules  */
+	        *parallel2Module,	/*   */
+	        *parallel3Module,	/*   */
+	        *parallel4Module,	/*   */
+	        *parallel5Module,	/*   */
+	        *personalcommentsmod,	/* module to open at program startup  */
 		sb_search_mod[80], 	/* module to use for sidebar search */
 	        *devotionalmod, 	/* module to use for devotional */
-	        *DefaultDict, 	/* module to use for devotional */
-		*lex_greek, /* module to use for greek lexicon - strongs or thayers*/
-		*lex_hebrew, /* module to use for hebrew lexicon - strongs or BDB*/	        
-		*lex_greek_viewer, /* module to use for greek lexicon - strongs or thayers - in viewer */
-		*lex_hebrew_viewer, /* module to use for hebrew lexicon - strongs or BDB - in viewer */
-	        *currentverse,	/* verse to use at program startup */
-		comm_key[80],	/*  */
-	        *cvparallel,	/* current verse for detached parallel */
-		*percomverse, /* current verse for personal comments */
+	        *DefaultDict,		/* module to use for devotional */
+		*lex_greek,		/* module to use for greek lexicon - strongs or thayers*/
+		*lex_hebrew,		/* module to use for hebrew lexicon - strongs or BDB*/	        
+		*lex_greek_viewer,	/* module to use for greek lexicon - strongs or thayers - in viewer */
+		*lex_hebrew_viewer,	/* module to use for hebrew lexicon - strongs or BDB - in viewer */
+	        *currentverse,		/* where we are right now */
+		comm_key[80],		/*  */
+	        *cvparallel,		/* current verse for detached parallel */
+		*percomverse,		/* current verse for personal comments */
 	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
-	        *studypadfilename,   /* name of file in studypad when we closed */
-		*studypaddir,	    /* directory for studypad files */
-		groupName[50], /* shortcut bar group name (viewer, verse list) */
-		searchText[256], /* search string used by sidebar search */
-		findText[256],   /* string used by find dialog */
+	        *studypadfilename,	/* name of file in studypad when we closed */
+		*studypaddir,		/* directory for studypad files */
+		groupName[50],		/* shortcut bar group name (viewer, verse list) */
+		searchText[256],	/* search string used by sidebar search */
+		findText[256],		/* string used by find dialog */
 		*spell_language,
 		
 	/* fonts, font colors and font sizes */
-	        *bible_text_color, /* color for text */
-	        *bible_bg_color,  /* color for background */
-	        *currentverse_color,  /* color for current verse */
-	        *link_color,  /* color for strongs, morph tags */	
-		*bible_verse_num_color, /* verse number color */
-		*found_color, /* color to use for search word in results display */
-		*font_color, /*  */
-		*highlight_fg, /* special fg color when highlighting */
-		*highlight_bg, /* special fg color when highlighting */
+	        *bible_text_color,	/* color for text */
+	        *bible_bg_color,	/* color for background */
+	        *currentverse_color,	/* color for current verse */
+	        *link_color,		/* color for strongs, morph tags */	
+		*bible_verse_num_color,	/* verse number color */
+		*found_color,		/* color to use for search word in results display */
+		*font_color,		/*  */
+		*highlight_fg,		/* special fg color when highlighting */
+		*highlight_bg,		/* special fg color when highlighting */
 		*verse_num_font_size_str,
 		*base_font_size_str;
 		
@@ -187,8 +187,7 @@ struct _settings {
 	char *book_key;    /*  */
 	unsigned long book_offset;
 	
-	
-	int comm_showing;
+	int comm_showing;	/* whether comm or book is visible */
 	
 	/* store program title */
 	char program_title[256];
@@ -226,9 +225,6 @@ struct _settings {
 	/* window location at close */
 	int app_x;
 	int app_y;
-	
-	/* set up druid canceled */
-	int setup_canceled;
 	
 	/* there is no settings.xml file */
 	int first_run;

@@ -298,7 +298,6 @@ static void apply_color_settings(void)
 			settings.dictkey);
 	if (settings.havebible)
 		main_update_parallel_page();
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -1115,7 +1114,6 @@ void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data)
 	main_url_handler(url);
 	g_free(url);
 	g_free(buf);
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -1152,7 +1150,6 @@ void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data)
 	main_url_handler(url);
 	g_free(url);
 	g_free(buf);
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -1516,7 +1513,6 @@ void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data)
 	main_url_handler(url);
 	g_free(url);
 	g_free(buf);
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -1609,7 +1605,6 @@ void on_dialog_prefs_response(GtkDialog * dialog, gint response_id,
 		xml_save_settings_doc(settings.fnconfigure);
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
