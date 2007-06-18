@@ -981,7 +981,11 @@ void main_display_book(const char * mod_name, char * key)     //, unsigned long 
 				      mod_name,
 				      NULL,
 				      key,
-				      FALSE);
+				      FALSE,
+				      settings.showtexts,
+				      settings.showpreview,
+				      settings.showcomms,
+				      settings.showdicts);
 }
 
 void main_display_commentary(const char * mod_name, const char * key)
@@ -1015,7 +1019,11 @@ void main_display_commentary(const char * mod_name, const char * key)
 				      NULL,
 				      NULL,
 				      NULL,
-				      TRUE);
+				      TRUE,
+				      settings.showtexts,
+				      settings.showpreview,
+				      settings.showcomms,
+				      settings.showdicts);
 }
 
 void main_display_dictionary(char * mod_name, char * key)
@@ -1056,7 +1064,11 @@ void main_display_dictionary(char * mod_name, char * key)
 				      NULL,
 				      key,
 				      NULL,
-				      settings.comm_showing);
+				      settings.comm_showing,
+				      settings.showtexts,
+				      settings.showpreview,
+				      settings.showcomms,
+				      settings.showdicts);
 }
 
 
@@ -1195,8 +1207,12 @@ void main_display_bible(const char * mod_name, const char * key)
 				      NULL,
 				      NULL,
 				      NULL,
-				      settings.comm_showing);
-		gui_set_tab_label(settings.currentverse);
+				      settings.comm_showing,
+				      settings.showtexts,
+				      settings.showpreview,
+				      settings.showcomms,
+				      settings.showdicts);
+		gui_set_tab_label(settings.currentverse, FALSE);
 	}
 
 	/*

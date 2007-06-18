@@ -1,3 +1,8 @@
+2007-06-18  karl <charcoal@users.sf.net>
+
+	* change panel show state to per-tab.
+	* eliminate last of the "setup cancel" logic.
+
 2007-06-12  karl <charcoal@users.sf.net>
 
 	* updates to manual for base font size, and to document that we
