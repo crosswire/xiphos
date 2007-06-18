@@ -77,20 +77,53 @@ static const gchar *default_tab_filename = ".last_session_tabs";
 
 static int yes_no2true_false(const gchar * yes_no)
 {
-	if (yes_no && !strcmp(yes_no, "yes"))
-		return TRUE;
-	else
-		return FALSE;
+	return (yes_no && !strcmp(yes_no, "yes"));
 }
 
 static gchar *true_false2yes_no(int true_false)
 {
-	if (true_false)
-		return "yes";
-	else
-		return "no";
+	return (true_false ? "yes" : "no");
 }
 
+
+/******************************************************************************
+ * Name
+ *  gui_recompute_shows
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_recompute_shows(void)	
+ *
+ * Description
+ *   a new set of text/preview/comm/dict showings has been selected.
+ *   re-align the displayed world with that.
+ *
+ * Return value
+ *   void
+ */
+void gui_recompute_shows(void)
+{
+	gui_show_hide_preview(settings.showpreview);
+	gui_show_hide_texts(settings.showtexts);
+	gui_show_hide_dicts(settings.showdicts);
+	gui_show_hide_comms(settings.showcomms);
+	gui_set_tab_label(settings.currentverse, TRUE);
+	gui_set_bible_comm_layout();
+
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewtexts_item),
+				       settings.showtexts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewcomms_item),
+				       settings.showcomms);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewdicts_item),
+				       settings.showdicts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewpreview_item),
+				       settings.showpreview);
+}
 
 /******************************************************************************
  * Name
@@ -124,6 +157,13 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 		//gtk_widget_set_sensitive(pt->button_close, TRUE);
 		gtk_widget_show (pt->button_close);
 		gtk_widget_hide (pt->close_pixmap);
+
+		/* adopt panel shows from passage tab memory. */
+		settings.showtexts   = pt->showtexts;
+		settings.showpreview = pt->showpreview;
+		settings.showcomms   = pt->showcomms;
+		settings.showdicts   = pt->showdicts;
+		gui_recompute_shows();
 	}
 }
 
@@ -208,7 +248,7 @@ void gui_save_tabs(const gchar *filename)
 	
 	if (access(tabs_dir, F_OK) == -1) {
 		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
-			printf("can't create tabs dir");
+			gui_generic_warning("Can't create tabs dir.");
 			return;
 		}
 	}
@@ -218,8 +258,7 @@ void gui_save_tabs(const gchar *filename)
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
 
 	if (xml_doc == NULL) {
-		fprintf(stderr,
-			"Document not created successfully. \n");
+		gui_generic_warning("Tabs document not created successfully.");
 		return;
 	}
 
@@ -237,21 +276,29 @@ void gui_save_tabs(const gchar *filename)
 		cur_node = xmlNewChild(section_node,
 				NULL, (const xmlChar *) "tab", NULL);
 		xmlNewProp(cur_node,(const xmlChar *)"text_mod",
-				(const xmlChar *)pt->text_mod);		
-		xmlNewProp(cur_node, (const xmlChar *)"commentary_mod", 
+				(const xmlChar *)pt->text_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"commentary_mod",
 				(const xmlChar *)pt->commentary_mod);
 		xmlNewProp(cur_node, (const xmlChar *)"dictlex_mod",
-				(const xmlChar *)pt->dictlex_mod);		
-		xmlNewProp(cur_node, (const xmlChar *)"book_mod", 
+				(const xmlChar *)pt->dictlex_mod);
+		xmlNewProp(cur_node, (const xmlChar *)"book_mod",
 				(const xmlChar *)pt->book_mod);
 		xmlNewProp(cur_node, (const xmlChar *)"text_commentary_key",
-				(const xmlChar *)pt->text_commentary_key);		
-		xmlNewProp(cur_node, (const xmlChar *)"dictlex_key", 
-				(const xmlChar *)pt->dictlex_key);		
-		xmlNewProp(cur_node, (const xmlChar *)"book_offset", 
-				(const xmlChar *)pt->book_offset);		
-		xmlNewProp(cur_node, (const xmlChar *)"comm_showing", 
+				(const xmlChar *)pt->text_commentary_key);
+		xmlNewProp(cur_node, (const xmlChar *)"dictlex_key",
+				(const xmlChar *)pt->dictlex_key);
+		xmlNewProp(cur_node, (const xmlChar *)"book_offset",
+				(const xmlChar *)pt->book_offset);
+		xmlNewProp(cur_node, (const xmlChar *)"comm_showing",
 				(const xmlChar *)true_false2yes_no(pt->comm_showing));
+		xmlNewProp(cur_node, (const xmlChar *)"showtexts",
+				(const xmlChar *)true_false2yes_no(pt->showtexts));
+		xmlNewProp(cur_node, (const xmlChar *)"showpreview",
+				(const xmlChar *)true_false2yes_no(pt->showpreview));
+		xmlNewProp(cur_node, (const xmlChar *)"showcomms",
+				(const xmlChar *)true_false2yes_no(pt->showcomms));
+		xmlNewProp(cur_node, (const xmlChar *)"showdicts",
+				(const xmlChar *)true_false2yes_no(pt->showdicts));
 	}
 	xmlSaveFormatFile(file, xml_doc,1);
 	xmlFreeDoc(xml_doc);
@@ -279,6 +326,7 @@ void gui_load_tabs(const gchar *filename)
 	//const xmlChar *xml_filename;
 	gchar *tabs_dir, *file, *val;
 	gboolean error = FALSE;
+	gboolean back_compat_need_save = FALSE;
 
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL, *pt_first = NULL;
@@ -291,7 +339,9 @@ void gui_load_tabs(const gchar *filename)
 	{
 		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 		if (access(tabs_dir, F_OK) == -1) {
-			printf("creating new Tabs directory\n");
+#ifdef DEBUG
+			g_message("Creating new tabs directory\n");
+#endif
 			gui_save_tabs(NULL);
 			//return;
 		}	
@@ -300,18 +350,18 @@ void gui_load_tabs(const gchar *filename)
 		//xml_filename = (const xmlChar *) file;
 		xml_doc = xmlParseFile(file);
 		if (xml_doc == NULL) {
-			fprintf(stderr, "Document not parsed successfully. \n");
+			gui_generic_warning("Tabs document not parsed successfully.");
 			error = TRUE;
 		}
 		else {
 			tmp_node = xmlDocGetRootElement(xml_doc);
 			if (tmp_node == NULL) {
-				fprintf(stderr,"empty document\n");
+				gui_generic_warning("Tabs document is empty.");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
 			else if (xmlStrcmp(tmp_node->name, (const xmlChar *)"GnomeSword_Tabs")) {
-				fprintf(stderr,"document of the wrong type, root node != GnomeSword_Tabs");
+				gui_generic_warning("Tabs document has wrong type, root node != GnomeSword_Tabs");
 				xmlFreeDoc(xml_doc);
 				error = TRUE;
 			}
@@ -332,6 +382,7 @@ void gui_load_tabs(const gchar *filename)
 							if (pt_first == NULL)
 								pt_first = pt;
 							
+							/* load per-tab module information. */
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"text_mod");
 							pt->text_mod = g_strdup(val);
 							xmlFree(val);
@@ -356,10 +407,42 @@ void gui_load_tabs(const gchar *filename)
 							val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"comm_showing");
 							pt->comm_showing = yes_no2true_false(val);
 							xmlFree(val);
+
+							/*
+							 * load per-tab "show" state.
+							 * includes backward compatibility:
+							 * if there is no per-tab state,
+							 * take tab state from global state.
+							 */
+							if (val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showtexts")) {
+								pt->showtexts = yes_no2true_false(val);
+								xmlFree(val);
+								val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showpreview");
+								pt->showpreview = yes_no2true_false(val);
+								xmlFree(val);
+								val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showcomms");
+								pt->showcomms = yes_no2true_false(val);
+								xmlFree(val);
+								val = (gchar*)xmlGetProp(tmp_node, (const xmlChar *)"showdicts");
+								pt->showdicts = yes_no2true_false(val);
+								xmlFree(val);
+							} else {
+								pt->showtexts   = settings.showtexts;
+								pt->showpreview = settings.showpreview;
+								pt->showcomms   = settings.showcomms;
+								pt->showdicts   = settings.showdicts;
+								back_compat_need_save = TRUE;
+							}
+
 							pt->history_items = 0;	
 							pt->current_history_item = 0;
 							pt->first_back_click = TRUE;
-							main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);							
+							main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
+
+							if (settings.currentverse)
+								g_free(settings.currentverse);
+							settings.currentverse = g_strdup(pt->text_commentary_key);
+
 							passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 							notebook_main_add_page(pt);
 						}
@@ -368,6 +451,10 @@ void gui_load_tabs(const gchar *filename)
 			}
 		}
 		xmlFreeDoc(xml_doc);
+
+		/* backward compatibility completion. */
+		if (back_compat_need_save)
+			gui_save_tabs(filename);
 	
 		if (error == TRUE || pt == NULL) {
 			pt = g_new0(PASSAGE_TAB_INFO, 1);
@@ -378,6 +465,12 @@ void gui_load_tabs(const gchar *filename)
 			pt->text_commentary_key = g_strdup(settings.currentverse);
 			pt->dictlex_key = g_strdup(settings.dictkey);
 			pt->book_offset = NULL; //settings.book_offset = atol(xml_get_value( "keys", "offset"));
+
+			pt->showtexts   = settings.showtexts;
+			pt->showpreview = settings.showpreview;
+			pt->showcomms   = settings.showcomms;
+			pt->showdicts   = settings.showdicts;
+
 			pt->history_items = 0;	
 			pt->current_history_item = 0;
 			pt->first_back_click = TRUE;
@@ -390,8 +483,8 @@ void gui_load_tabs(const gchar *filename)
 			// first passage is current/displayed.
 			pt = pt_first;
 
-			// This is a hack to keep gs from loading the settings from the last session
-			// into the last tab loaded here.
+			// This is a hack to keep gs from loading the settings
+			// from the last session into the last tab loaded here.
 			settings.MainWindowModule = g_strdup(pt->text_mod);
 			settings.CommWindowModule = g_strdup(pt->commentary_mod);
 			settings.DictWindowModule = g_strdup(pt->dictlex_mod);
@@ -399,6 +492,11 @@ void gui_load_tabs(const gchar *filename)
 			settings.currentverse = g_strdup(pt->text_commentary_key);
 			settings.dictkey = g_strdup(pt->dictlex_key);
 			settings.book_offset = atol(pt->book_offset);
+
+			settings.showtexts   = pt->showtexts;
+			settings.showpreview = pt->showpreview;
+			settings.showcomms   = pt->showcomms;
+			settings.showdicts   = pt->showdicts;
 		}
 	}			//gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
 	set_current_tab(pt);
@@ -533,7 +631,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
 #ifdef DEBUG
-	printf("\n on_notebook_main_switch_page \n");
+	g_message("on_notebook_main_switch_page");
 #endif	
 	page_change = TRUE;
 	/* get data structure for new passage */
@@ -549,6 +647,12 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	removed_page = 1;
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 	set_current_tab (pt);
+
+	settings.showtexts   = pt->showtexts;
+	settings.showpreview = pt->showpreview;
+	settings.showcomms   = pt->showcomms;
+	settings.showdicts   = pt->showdicts;
+	gui_recompute_shows();
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
@@ -572,14 +676,8 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	//sets the dictionary mod and key
 	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);
 
-	if(pt->comm_showing)
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(
-					widgets.notebook_comm_book),
-					0);
-	else
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(
-					widgets.notebook_comm_book),
-					1);	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+				      (pt->comm_showing ? 0 : 1));
 	page_change = FALSE;
 }
 
@@ -591,19 +689,20 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  * Synopsis
  *   #include "tabbed_browser.h"
  *
- *   void gui_set_tab_label(const char *key)	
+ *   void gui_set_tab_label(const char *key, gboolean one_tab)	
  *
  * Description
  *   sets tab label(s) to current verse.
  *   dependent on pinnedtabs setting, either just cur or all.
+ *   one_tab means don't loop the set, just set current.
  *
  * Return value
  *   void
  */
  
-void gui_set_tab_label(const gchar * key)
+void gui_set_tab_label(const gchar * key, gboolean one_tab)
 {
-	if (settings.pinnedtabs) {
+	if ((settings.pinnedtabs && !one_tab) || (cur_passage_tab == NULL)) {
 		GList *tmp = NULL;
 		for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp))
 			gui_set_named_tab_label
@@ -641,20 +740,35 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 		g_free(pt->text_commentary_key);
 	pt->text_commentary_key = g_strdup(key);
 		
-	g_string_printf(str,"%s: %s",
-				pt->text_mod,
-				pt->text_commentary_key); 
-	gtk_label_set_text (pt->tab_label,str->str);
+	if (pt->showtexts || pt->comm_showing) {
+		g_string_printf(str, "%s: %s",
+				(pt->showtexts
+				 ? pt->text_mod
+				 : (pt->commentary_mod
+				    ? pt->commentary_mod
+				    : "[no commentary]")),
+				pt->text_commentary_key);
+	} else {
+		g_string_printf(str, "%s",
+				(pt->showcomms
+				 ? (pt->book_mod
+				    ? pt->book_mod
+				    : "[no book]")
+				 : (pt->dictlex_mod
+				    ? pt->dictlex_mod
+				    : "[no dict]")));
+	}
+
+	gtk_label_set_text (pt->tab_label, str->str);
 #ifdef DEBUG 
-	g_print("label = %s\n",str->str);	
+	g_message("label = %s\n", str->str);
 #endif
 	gtk_notebook_set_menu_label_text(
-					GTK_NOTEBOOK(widgets.notebook_main),
-                                        pt->page_widget,
-                                            str->str );
+		GTK_NOTEBOOK(widgets.notebook_main),
+		pt->page_widget, str->str);
 	if (update)
 		main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
-	g_string_free(str,TRUE);
+	g_string_free(str, TRUE);
 }
 
 /******************************************************************************
@@ -679,20 +793,27 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * book_mod, 
 			   const gchar * dictlex_key,
 			   const gchar * book_offset,
-			   gboolean comm_showing)
+			   gboolean comm_showing,
+			   gboolean showtexts,
+			   gboolean showpreview,
+			   gboolean showcomms,
+			   gboolean showdicts)
 {	
 	if(!settings.browsing)
 	        return;
 	
-	if(page_change) 
+	if(page_change)
 		return;
-	
-	
+
+	cur_passage_tab->showtexts   = showtexts;
+	cur_passage_tab->showpreview = showpreview;
+	cur_passage_tab->showcomms   = showcomms;
+	cur_passage_tab->showdicts   = showdicts;
+
 	if(text_mod) {
 		if(cur_passage_tab->text_mod)
 			g_free(cur_passage_tab->text_mod);
-		cur_passage_tab->text_mod = g_strdup(text_mod);	
-				
+		cur_passage_tab->text_mod = g_strdup(text_mod);
 	}
 	//g_message("commentary_mod = %s",commentary_mod);
 	if(commentary_mod) {
@@ -751,15 +872,26 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	
 	if(!settings.browsing)
 		return;
-	pt = g_new0(PASSAGE_TAB_INFO, 1);
+
+	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
+		gui_generic_warning("Could not allocate a new tab");
+		return;
+	}
 	pt->text_mod = g_strdup(settings.MainWindowModule);
 	pt->commentary_mod = g_strdup(settings.CommWindowModule);
 	pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 	pt->book_mod = g_strdup(settings.book_mod);
+
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
 	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
 	pt->comm_showing = settings.comm_showing;
+
+	pt->showtexts   = settings.showtexts;
+	pt->showpreview = settings.showpreview;
+	pt->showcomms   = settings.showcomms;
+	pt->showdicts   = settings.showdicts;
+
 	pt->history_items = 0;	
 	pt->current_history_item = 0;
 	pt->first_back_click = TRUE;
@@ -800,9 +932,17 @@ void gui_open_module_in_new_tab(gchar *module)
 	if(!settings.browsing)
 		return;
 	
-	pt = g_new0(PASSAGE_TAB_INFO, 1);
+	if ((pt = g_new0(PASSAGE_TAB_INFO, 1)) == NULL) {
+		gui_generic_warning("Could not allocate a new tab");
+		return;
+	}
 	module_type = main_get_mod_type(module);
-	
+
+	pt->showtexts   = FALSE;
+	pt->showpreview = settings.showpreview;
+	pt->showcomms   = FALSE;
+	pt->showdicts   = FALSE;
+
 	switch (module_type) {
 	case -1:
 		return;
@@ -812,35 +952,45 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = g_strdup(settings.book_mod);
+		pt->showtexts = TRUE;
 		break;
 	case COMMENTARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(module);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = g_strdup(settings.book_mod);
+		pt->showcomms = TRUE;
+		pt->comm_showing = 0;
 		break;
 	case DICTIONARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(module);
 		pt->book_mod = g_strdup(settings.book_mod);
+		pt->showdicts = TRUE;
 		break;
 	case BOOK_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = g_strdup(module);
+		pt->showcomms = TRUE;
+		pt->comm_showing = 1;
 		break;
 	}
-		
+
 	pt->text_commentary_key = g_strdup(settings.currentverse);
 	pt->dictlex_key = g_strdup(settings.dictkey);	
 	pt->book_offset = g_strdup_printf("%d",settings.book_offset);
-	pt->comm_showing = settings.comm_showing;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
 	notebook_main_add_page(pt);
+		
+	settings.showtexts = pt->showtexts;
+	settings.showcomms = pt->showcomms;
+	settings.showdicts = pt->showdicts;
+	gui_recompute_shows();
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num
@@ -870,7 +1020,7 @@ void gui_close_all_tabs(void)
 	gint i;
 	gint number_of_pages = 
 		gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
-	for(i = number_of_pages-1;i > -1;i--) {
+	for(i = number_of_pages - 1; i > -1; i--) {
 		PASSAGE_TAB_INFO *pt = 
 			(PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)i);
 		passage_list = g_list_remove(passage_list, pt);
@@ -1032,4 +1182,28 @@ void gui_notebook_main_shutdown(void)
 	}
 	g_list_free(passage_list);
 	cur_passage_tab = NULL;
+}
+
+void gui_tab_set_showtexts(int show)
+{
+	if (cur_passage_tab)
+		cur_passage_tab->showtexts = show;
+}
+
+void gui_tab_set_showpreview(int show)
+{
+	if (cur_passage_tab)
+		cur_passage_tab->showpreview = show;
+}
+
+void gui_tab_set_showcomms(int show)
+{
+	if (cur_passage_tab)
+		cur_passage_tab->showcomms = show;
+}
+
+void gui_tab_set_showdicts(int show)
+{
+	if (cur_passage_tab)
+		cur_passage_tab->showdicts = show;
 }
