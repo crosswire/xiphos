@@ -95,7 +95,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* Get home dir */
 	if ((settings.homedir = getenv("HOME")) == NULL) {
-		g_error(_("$HOME is not set!"));
+		gui_generic_warning(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
 	}
@@ -141,7 +141,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf(_("can not create  .sword"));
+			gui_generic_warning(_("can not create  .sword"));
 		} 
 	}
 	g_free(sword_dir);
@@ -149,7 +149,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf(_("can not create  .sword/mods.d"));
+			gui_generic_warning(_("can not create  .sword/mods.d"));
 		} 
 	}	
 	g_free(sword_dir);
@@ -157,7 +157,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir,".sword/modules");
 	if (access(sword_dir, F_OK) == -1) {
 		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
-			printf(_("can not create  .sword/modules"));
+			gui_generic_warning(_("can not create  .sword/modules"));
 		} 
 	}
 	g_free(sword_dir);
@@ -541,14 +541,6 @@ void load_settings_structure(void)
 	}
 
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
-	
-		
-	if(xml_get_value("misc", "setup_canceled"))
-		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
-	else {
-		xml_add_new_item_to_section("misc","setup_canceled","0");
-		settings.setup_canceled = atoi(xml_get_value("misc", "setup_canceled"));
-	}
 	
 	if (buf = xml_get_value("misc", "chapter-scroll")) {
 		settings.chapter_scroll = atoi(buf);

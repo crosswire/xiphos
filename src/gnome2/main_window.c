@@ -60,6 +60,7 @@ WIDGETS widgets;
 
 static gboolean ctrl_key_presed = FALSE;
 static GtkWidget *nav_toolbar;
+static main_window_created = FALSE;
 
 /******************************************************************************
  * Name
@@ -80,14 +81,17 @@ static GtkWidget *nav_toolbar;
 void gui_show_hide_texts(gboolean choice)
 {
 	settings.showtexts = choice;
+	gui_tab_set_showtexts(choice);
+	gui_set_tab_label(settings.currentverse, TRUE);
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.vpaned);
+		if (main_window_created)
+			gtk_widget_hide(widgets.vpaned);
 		xml_set_value("GnomeSword", "misc", "showtexts", "0");
 	} else {
-		gtk_widget_show(widgets.vpaned);
+		if (main_window_created)
+			gtk_widget_show(widgets.vpaned);
 		xml_set_value("GnomeSword", "misc", "showtexts", "1");
 	}
-	gui_set_bible_comm_layout();
 }
 
 
@@ -110,14 +114,16 @@ void gui_show_hide_texts(gboolean choice)
 void gui_show_hide_preview(gboolean choice)
 {
 	settings.showpreview = choice;
+	gui_tab_set_showpreview(choice);
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.vbox_previewer);
+		if (main_window_created)
+			gtk_widget_hide(widgets.vbox_previewer);
 		xml_set_value("GnomeSword", "misc", "showpreview", "0");
 	} else {
-		gtk_widget_show(widgets.vbox_previewer);
-		xml_set_value("GnomeSword", "misc", "showpreview", "1");		
+		if (main_window_created)
+			gtk_widget_show(widgets.vbox_previewer);
+		xml_set_value("GnomeSword", "misc", "showpreview", "1");
 	}
-	//gui_set_bible_comm_layout();
 }
 
 
@@ -140,14 +146,17 @@ void gui_show_hide_preview(gboolean choice)
 void gui_show_hide_comms(gboolean choice)
 {
 	settings.showcomms = choice;
+	gui_tab_set_showcomms(choice);
+	gui_set_tab_label(settings.currentverse, TRUE);
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.notebook_comm_book);
+		if (main_window_created)
+			gtk_widget_hide(widgets.notebook_comm_book);
 		xml_set_value("GnomeSword", "misc", "showcomms", "0");
 	} else {
-		gtk_widget_show(widgets.notebook_comm_book);
+		if (main_window_created)
+			gtk_widget_show(widgets.notebook_comm_book);
 		xml_set_value("GnomeSword", "misc", "showcomms", "1");
 	}
-	gui_set_bible_comm_layout();
 }
 
 
@@ -170,14 +179,17 @@ void gui_show_hide_comms(gboolean choice)
 void gui_show_hide_dicts(gboolean choice)
 {
 	settings.showdicts = choice;
+	gui_tab_set_showdicts(choice);
+	gui_set_tab_label(settings.currentverse, TRUE);
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.box_dict);
+		if (main_window_created)
+			gtk_widget_hide(widgets.box_dict);
 		xml_set_value("GnomeSword", "misc", "showdicts", "0");
 	} else {
-		gtk_widget_show(widgets.box_dict);
+		if (main_window_created)
+			gtk_widget_show(widgets.box_dict);
 		xml_set_value("GnomeSword", "misc", "showdicts", "1");
 	}
-	gui_set_bible_comm_layout();
 }
 
 
@@ -210,31 +222,20 @@ void gui_set_bible_comm_layout(void)
 		gtk_widget_show(widgets.vpaned2);
 	}
 	
-	if (settings.showtexts == FALSE) 
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
-	else
-		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				       settings.biblepane_width);
+	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
+			       (settings.showtexts
+				? settings.biblepane_width
+				: 0));
 
-	if (settings.showcomms == FALSE) {
-		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned2),
-				       0);
-	} else {
-		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned2),
-				       settings.commpane_hight);
-	}
+	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
+			       (settings.showcomms
+				? settings.commpane_hight
+				: 0));
 	
-	if (settings.showdicts == FALSE) {
-		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned2),
-				       settings.gs_hight);
-	} else {
-		gtk_paned_set_position(GTK_PANED
-				       (widgets.vpaned2),
-				       settings.commpane_hight);
-	}
+	gtk_paned_set_position(GTK_PANED(widgets.vpaned2),
+			       (settings.showdicts
+				? settings.commpane_hight
+				: settings.gs_hight));
 	
 	if ((settings.showcomms == FALSE)  && (settings.showdicts == FALSE)) {
 		gtk_widget_hide(widgets.vpaned2);
@@ -478,14 +479,19 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 		settings.comm_showing = FALSE;
 		
 	gui_update_tab_struct(NULL, 
-			   settings.CommWindowModule, 
-			   NULL, 
-			   NULL, 
-			   NULL,
-			   NULL,
-			   settings.comm_showing);
+			      settings.CommWindowModule, 
+			      NULL, 
+			      NULL, 
+			      NULL,
+			      NULL,
+			      settings.comm_showing,
+			      settings.showtexts,
+			      settings.showpreview,
+			      settings.showcomms,
+			      settings.showdicts);
 	if(settings.comm_showing)
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+	gui_set_tab_label(settings.currentverse, TRUE);
 }
 
 
@@ -906,6 +912,7 @@ void create_mainwindow(void)
 	gtk_window_set_default_size((GtkWindow *)widgets.app,
                                              settings.gs_width,
                                              settings.gs_hight);
+	main_window_created = TRUE;
 }
 
 /*
