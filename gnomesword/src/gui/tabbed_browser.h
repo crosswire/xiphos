@@ -47,13 +47,19 @@ struct _passage_tab_info {
 	gint history_items;
 	gint current_history_item;
 	gboolean first_back_click;
+
+	/* per-tab show indicators */
+	gboolean showtexts;
+	gboolean showpreview;
+	gboolean showcomms;
+	gboolean showdicts;
 };
 
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
 
 void gui_save_tabs(const gchar *filename);
 void gui_load_tabs(const gchar *filename);
-void gui_set_tab_label(const gchar *key);
+void gui_set_tab_label(const gchar *key, gboolean one_tab);
 void gui_set_named_tab_label(const gchar *key, PASSAGE_TAB_INFO *pt, gboolean update);
 void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
@@ -64,7 +70,11 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * book_mod, 
 			   const gchar * dictlex_key, 
 			   const gchar * book_offset,
-			   gboolean comm_showing);
+			   gboolean comm_showing,
+			   gboolean showtexts,
+			   gboolean showpreview,
+			   gboolean showcomms,
+			   gboolean showdicts);
 void gui_close_all_tabs(void);
 void gui_open_tabs(void);
 
@@ -73,6 +83,11 @@ void gui_notebook_main_shutdown(void);
 /*void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
 					gint page_num, GList **tl);*/
+
+void gui_tab_set_showtexts(int show);
+void gui_tab_set_showpreview(int show);
+void gui_tab_set_showcomms(int show);
+void gui_tab_set_showdicts(int show);
 #ifdef __cplusplus
 }
 #endif
