@@ -1,3 +1,7 @@
+2007-06-19  karl <charcoal@users.sf.net>
+
+	* fix per-tab show state so as not to act like pinned tabs.
+
 2007-06-18  karl <charcoal@users.sf.net>
 
 	* change panel show state to per-tab.
