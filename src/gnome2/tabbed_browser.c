@@ -104,11 +104,14 @@ static gchar *true_false2yes_no(int true_false)
  */
 void gui_recompute_shows(void)
 {
+	if (cur_passage_tab)
+		gui_reassign_strdup(&settings.currentverse,
+				    cur_passage_tab->text_commentary_key);
+
 	gui_show_hide_preview(settings.showpreview);
 	gui_show_hide_texts(settings.showtexts);
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
-	gui_set_tab_label(settings.currentverse, TRUE);
 	gui_set_bible_comm_layout();
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -253,6 +256,7 @@ void gui_save_tabs(const gchar *filename)
 		}
 	}
 	file = g_strdup_printf("%s%s",tabs_dir,filename);
+	g_free(tabs_dir);
 	//xml_filename = (const xmlChar *) file;
 	
 	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
@@ -301,6 +305,7 @@ void gui_save_tabs(const gchar *filename)
 				(const xmlChar *)true_false2yes_no(pt->showdicts));
 	}
 	xmlSaveFormatFile(file, xml_doc,1);
+	g_free(file);
 	xmlFreeDoc(xml_doc);
 }
 
@@ -346,9 +351,11 @@ void gui_load_tabs(const gchar *filename)
 			//return;
 		}	
 		file = g_strdup_printf("%s%s",tabs_dir,filename);
+		g_free(tabs_dir);
 
 		//xml_filename = (const xmlChar *) file;
 		xml_doc = xmlParseFile(file);
+		g_free(file);
 		if (xml_doc == NULL) {
 			gui_generic_warning("Tabs document not parsed successfully.");
 			error = TRUE;
@@ -439,9 +446,8 @@ void gui_load_tabs(const gchar *filename)
 							pt->first_back_click = TRUE;
 							main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 
-							if (settings.currentverse)
-								g_free(settings.currentverse);
-							settings.currentverse = g_strdup(pt->text_commentary_key);
+							gui_reassign_strdup(&settings.currentverse,
+									    pt->text_commentary_key);
 
 							passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 							notebook_main_add_page(pt);
@@ -485,18 +491,13 @@ void gui_load_tabs(const gchar *filename)
 
 			// This is a hack to keep gs from loading the settings
 			// from the last session into the last tab loaded here.
-			settings.MainWindowModule = g_strdup(pt->text_mod);
-			settings.CommWindowModule = g_strdup(pt->commentary_mod);
-			settings.DictWindowModule = g_strdup(pt->dictlex_mod);
-			settings.book_mod = g_strdup(pt->book_mod);
-			settings.currentverse = g_strdup(pt->text_commentary_key);
-			settings.dictkey = g_strdup(pt->dictlex_key);
+			gui_reassign_strdup(&settings.MainWindowModule, pt->text_mod);
+			gui_reassign_strdup(&settings.CommWindowModule, pt->commentary_mod);
+			gui_reassign_strdup(&settings.DictWindowModule, pt->dictlex_mod);
+			gui_reassign_strdup(&settings.book_mod, pt->book_mod);
+			gui_reassign_strdup(&settings.currentverse, pt->text_commentary_key);
+			gui_reassign_strdup(&settings.dictkey, pt->dictlex_key);
 			settings.book_offset = atol(pt->book_offset);
-
-			settings.showtexts   = pt->showtexts;
-			settings.showpreview = pt->showpreview;
-			settings.showcomms   = pt->showcomms;
-			settings.showdicts   = pt->showdicts;
 		}
 	}			//gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
 	set_current_tab(pt);
@@ -646,13 +647,8 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 		pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	removed_page = 1;
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
-	set_current_tab (pt);
 
-	settings.showtexts   = pt->showtexts;
-	settings.showpreview = pt->showpreview;
-	settings.showcomms   = pt->showcomms;
-	settings.showdicts   = pt->showdicts;
-	gui_recompute_shows();
+	set_current_tab (pt);
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
@@ -736,9 +732,7 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 {
 	GString *str = g_string_new(NULL);
 	
-	if (pt->text_commentary_key)
-		g_free(pt->text_commentary_key);
-	pt->text_commentary_key = g_strdup(key);
+	gui_reassign_strdup(&pt->text_commentary_key, key);
 		
 	if (pt->showtexts || pt->comm_showing) {
 		g_string_printf(str, "%s: %s",
@@ -811,33 +805,23 @@ void gui_update_tab_struct(const gchar * text_mod,
 	cur_passage_tab->showdicts   = showdicts;
 
 	if(text_mod) {
-		if(cur_passage_tab->text_mod)
-			g_free(cur_passage_tab->text_mod);
-		cur_passage_tab->text_mod = g_strdup(text_mod);
+		gui_reassign_strdup(&cur_passage_tab->text_mod, text_mod);
 	}
 	//g_message("commentary_mod = %s",commentary_mod);
 	if(commentary_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
-		if(cur_passage_tab->commentary_mod)
-			g_free(cur_passage_tab->commentary_mod);
-		cur_passage_tab->commentary_mod = g_strdup(commentary_mod);		
+		gui_reassign_strdup(&cur_passage_tab->commentary_mod, commentary_mod);		
 	} 
 	//g_message("cur_passage_tab->commentary_mod = %s",cur_passage_tab->commentary_mod);
 	if(dictlex_mod) {
-		if(cur_passage_tab->dictlex_mod)
-			g_free(cur_passage_tab->dictlex_mod);
-		cur_passage_tab->dictlex_mod = g_strdup(dictlex_mod);		
+		gui_reassign_strdup(&cur_passage_tab->dictlex_mod, dictlex_mod);		
 	} 
 	if(book_mod) {
 		cur_passage_tab->comm_showing = comm_showing;
-		if(cur_passage_tab->book_mod)
-			g_free(cur_passage_tab->book_mod);
-		cur_passage_tab->book_mod = g_strdup(book_mod);		
+		gui_reassign_strdup(&cur_passage_tab->book_mod, book_mod);		
 	}
 	if(book_offset) {
-		if(cur_passage_tab->book_offset)
-			g_free(cur_passage_tab->book_offset);
-		cur_passage_tab->book_offset = g_strdup(book_offset);		
+		gui_reassign_strdup(&cur_passage_tab->book_offset, book_offset);		
 	}
 	/*if(text_commentary_key) {
 		if(cur_passage_tab->text_commentary_key)
@@ -845,9 +829,7 @@ void gui_update_tab_struct(const gchar * text_mod,
 		cur_passage_tab->text_commentary_key = g_strdup(text_commentary_key);		
 	}*/
 	if(dictlex_key) {
-		if(cur_passage_tab->dictlex_key)
-			g_free(cur_passage_tab->dictlex_key);
-		cur_passage_tab->dictlex_key = g_strdup(dictlex_key);		
+		gui_reassign_strdup(&cur_passage_tab->dictlex_key, dictlex_key);		
 	}
 }
 
@@ -986,11 +968,6 @@ void gui_open_module_in_new_tab(gchar *module)
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
 	notebook_main_add_page(pt);
-		
-	settings.showtexts = pt->showtexts;
-	settings.showcomms = pt->showcomms;
-	settings.showdicts = pt->showdicts;
-	gui_recompute_shows();
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num

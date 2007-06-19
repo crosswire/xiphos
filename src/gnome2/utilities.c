@@ -43,18 +43,19 @@
 
 gint gui_of2tf(const gchar * on_off)
 {
-	if (!strcmp(on_off, "On"))
-		return TRUE;
-	else
-		return FALSE;
+	return (!strcmp(on_off, "On") ? TRUE : FALSE);
 }
 
 gchar *gui_tf2of(gint true_false)
 {
-	if (true_false)
-		return "On";
-	else
-		return "Off";
+	return (true_false ? "On" : "Off");
+}
+
+void gui_reassign_strdup(gchar **where, gchar *what)
+{
+	if (*where)
+		g_free(*where);
+	*where = g_strdup(what);
 }
 
 
@@ -313,6 +314,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
+	g_free(buf);
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -382,6 +384,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
+	g_free(buf);
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -624,10 +627,7 @@ gchar * remove_linefeeds(gchar * buf)
 	
 	key = g_strdelimit(buf, "\n", ' ');
 	
-	if(key)
-		return g_strdup(key);
-	else
-		return NULL;
+	return (key ? g_strdup(key) : NULL);
 		
 }
 
