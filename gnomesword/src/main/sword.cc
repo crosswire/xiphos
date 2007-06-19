@@ -507,9 +507,7 @@ char *main_get_path_to_mods(void)
 {
 	SWMgr *mgr = backend->get_main_mgr();
 	char *path = mgr->prefixPath;
-	if (path)
-		return g_strdup(path);
-	return NULL;
+	return (path ? g_strdup(path) : NULL);
 }
 
 
@@ -1146,20 +1144,18 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.MainWindowModule = xml_get_value(
 					"modules", "bible");
 #ifdef OLD_NAVBAR
-		if (navbar_main.module_name) 
-			g_free(navbar_main.module_name);
-		navbar_main.module_name = g_strdup(settings.MainWindowModule);
-		if (navbar_main.key)
-			g_free(navbar_main.key);
-		navbar_main.key = g_strdup(settings.currentverse);
+		gui_reassign_strdup(&navbar_main.module_name, settings.MainWindowModule);
+		gui_reassign_strdup(&navbar_main.key, settings.currentverse);
 		main_navbar_fill_book_combo(navbar_main);
 #else
 		//if (navbar_versekey.module_name) 
 			//g_free(navbar_versekey.module_name);
-		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,settings.MainWindowModule);
+		navbar_versekey.module_name = g_string_assign(navbar_versekey.module_name,
+							      settings.MainWindowModule);
 		//if (navbar_versekey.key)
 			//g_free(navbar_versekey.key);
-		navbar_versekey.key = g_string_assign(navbar_versekey.key,settings.currentverse);
+		navbar_versekey.key = g_string_assign(navbar_versekey.key,
+						      settings.currentverse);
 #endif
 		main_search_sidebar_fill_bounds_combos();
 	}
