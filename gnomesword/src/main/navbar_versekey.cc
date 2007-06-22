@@ -104,7 +104,7 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
@@ -156,7 +156,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
@@ -207,7 +207,7 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
@@ -483,7 +483,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
@@ -559,7 +559,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return NULL;
 	}
@@ -640,7 +640,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return NULL;
 	}
@@ -741,7 +741,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				     &error);
 
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}
@@ -777,7 +777,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				     &bytes_written,
 				     &error);
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}

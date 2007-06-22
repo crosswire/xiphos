@@ -557,7 +557,7 @@ void main_update_parallel_page(void)
 					mod_name = NULL;
 				break;
 			}
-//                      g_warning("mod_name = %s",mod_name);
+			GS_warning(("mod_name = %s",mod_name));
 			if (!mod_name)
 				continue;
 
@@ -776,7 +776,7 @@ void main_update_parallel_page(void)
 					mod_name = NULL;
 				break;
 			}
-//                      g_warning("mod_name = %s",mod_name);
+			GS_warning(("mod_name = %s",mod_name));
 			if (!mod_name)
 				continue;
 
@@ -790,14 +790,14 @@ void main_update_parallel_page(void)
 				font_name = g_strdup("none");
 			if (strlen(font_name) < 2) {
 				use_gtkhtml_font = TRUE;
-//                                      g_warning("use_gtkhtml_font = TRUE");
+				GS_warning(("use_gtkhtml_font = TRUE"));
 			} else {
 				if (!strncmp(font_name, "none", 4)) {
 					use_gtkhtml_font = TRUE;
-//                                      g_warning("use_gtkhtml_font = TRUE");
+					GS_warning(("use_gtkhtml_font = TRUE"));
 				} else {
 					use_gtkhtml_font = FALSE;
-//                                      g_warning("use_gtkhtml_font = FALSE");
+					GS_warning(("use_gtkhtml_font = FALSE"));
 				}
 			}
 			
@@ -986,8 +986,8 @@ static void int_display(GtkHTML *html, gchar * key)
 	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("key convert error: %s => %s\n",
-			 key, error->message);
+		GS_print(("key convert error: %s => %s\n",
+			  key, error->message));
 		g_error_free (error);
 		return;
 	}

@@ -154,9 +154,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 
-#ifdef DEBUG	
-	g_warning("link not handled");
-#endif		
+	GS_warning(("link not handled"));
 	}
 }
 
@@ -189,9 +187,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		return;
 	}
 	
-//#ifdef DEBUG	
-//	g_warning("link not handled");
-//#endif
+	GS_warning(("link not handled"));
 }
 
 
@@ -371,9 +367,7 @@ gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 		buf[i] = key[i];
 	}
 	
-#ifdef DEBUG
-	g_message("gui_get_word_or_selection\nkey: %s",key);
-#endif
+	GS_message(("gui_get_word_or_selection\nkey: %s",key));
 	key = g_strdelimit(buf, ".,\"<>;:?", ' ');
 	key = g_strstrip(key);
 	buf2= g_strdup(key);
@@ -429,9 +423,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		buf = main_get_striptext_from_string(settings.MainWindowModule, 
 						key);	
 		
-#ifdef DEBUG
-		g_message("src/gnome2/html.c: buf=%s",buf);
-#endif
+		GS_message(("src/gnome2/html.c: buf=%s",buf));
 		if(buf == NULL) return;
 		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
 		key = g_strstrip(key);
