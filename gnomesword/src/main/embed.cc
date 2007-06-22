@@ -214,9 +214,7 @@ nsresult embed_print_real(nsIPrintSettings *options, PRBool preview,
 	nsCOMPtr<nsIWebBrowserPrint> print(do_GetInterface(wb, &rv));
 	if (NS_FAILED(rv) || !print) return NS_ERROR_FAILURE;
 
-#ifdef DEBUG
-	g_message("not a NS_ERROR_FAILURE");
-#endif
+	GS_message(("not a NS_ERROR_FAILURE"));
 	
 	if(preview) {
 		rv = print->PrintPreview(options, nsnull, nsnull);
@@ -331,29 +329,20 @@ gint embed_dom_mouse_over(GtkMozEmbed *embed, gpointer dom_event, gpointer data)
 	main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
-		
-#ifdef DEBUG
-		g_message("nsEvent failed %d",NS_ERROR_FAILURE);
-#endif
+		GS_message(("nsEvent failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 
 	nsCOMPtr<nsIDOMEventTarget> OriginalTarget;
 	result = nsEvent->GetOriginalTarget(getter_AddRefs(OriginalTarget));
-	if (NS_FAILED(result) || !OriginalTarget) {
-		
-#ifdef DEBUG
-		g_message("OriginalTarget failed %d",NS_ERROR_FAILURE);
-#endif
+	if (NS_FAILED(result) || !OriginalTarget) {		
+		GS_message(("OriginalTarget failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 
 	nsCOMPtr<nsIDOMNode> OriginalNode = do_QueryInterface(OriginalTarget);
 	if (!OriginalNode) {
-		
-#ifdef DEBUG
-		g_message("OriginalNode failed %d",NS_ERROR_FAILURE);
-#endif
+		GS_message(("OriginalNode failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 	
@@ -482,9 +471,8 @@ void embed_link_message_cb (GtkMozEmbed *embed, gpointer data)
 	gchar buf[500];
 	extern gboolean shift_key_presed;
 	gchar *url = gtk_moz_embed_get_link_message (embed);
-#ifdef DEBUG
-	g_message(url);
-#endif
+	GS_message((url));
+
 	if(shift_key_presed)
 		return;
 	

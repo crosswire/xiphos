@@ -218,15 +218,15 @@ static gint string_is_color(gchar * color)
 	gint i;
 
 	if (!color) {
-		g_warning("string_is_color, pointer NULL\n");
+		GS_warning(("string_is_color, pointer NULL\n"));
 		return 0;
 	}
 	if (strlen(color) != 7) {
-		g_warning("string_is_color, strlen(%s) != 7\n", color);
+		GS_warning(("string_is_color, strlen(%s) != 7\n", color));
 		return 0;
 	}
 	if (color[0] != '#') {
-		g_warning("string_is_color, 0 in %s is not #\n", color);
+		GS_warning(("string_is_color, 0 in %s is not #\n", color));
 		return 0;
 	}
 	for (i = 1; i < 7; i++) {
@@ -234,9 +234,9 @@ static gint string_is_color(gchar * color)
 		    || (color[i] < 48)
 		    || ((color[i] > 57) && (color[i] < 65))
 		    || ((color[i] > 70) && (color[i] < 97))) {
-			g_warning
-			    ("string_is_color, %d in %s is not from a color, it is %d\n",
-			     i, color, color[i]);
+			GS_warning
+			    (("string_is_color, %d in %s is not from a color, it is %d\n",
+			     i, color, color[i]));
 			return 0;
 		}
 	}
@@ -278,9 +278,7 @@ static gchar *gdkcolor_to_hex(GdkColor color, gint websafe)
 					color.green/256, 
 					color.blue/256);
 	}
-#ifdef DEBUG
-	g_message(tmpstr);
-#endif
+	GS_message((tmpstr));
 	return tmpstr;
 }
 

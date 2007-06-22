@@ -146,19 +146,17 @@ void main_init_lists(void)
 		xml_set_value("GnomeSword", "modules", "devotional",(char*)mods.devotionmods->data );
 		settings.devotionalmod = xml_get_value("modules", "devotional");
 	}
-		
-		
-#ifdef DEBUG
-	g_print("%s = %d\n", _("Number of Text modules"), settings.havebible);
-	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);
-	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
-	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
-	g_print("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm);
-	g_print("%s = %d\n", _("Number of Devotion modules"), 
-					g_list_length(mods.devotionmods));
+
+	GS_print(("%s = %d\n", _("Number of Text modules"), settings.havebible));
+	GS_print(("%s = %d\n", _("Number of Commentary modules"), settings.havecomm));
+	GS_print(("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict));
+	GS_print(("%s = %d\n", _("Number of Book modules"), settings.havebook));
+	GS_print(("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm));
+	GS_print(("%s = %d\n", _("Number of Devotion modules"),
+		  g_list_length(mods.devotionmods)));
 #ifdef PRAYERLIST
-	g_print("%s = %d\n\n", _("Number of Prayer modules"), settings.haveprayerlist);
-#endif
+	GS_print(("%s = %d\n\n", _("Number of Prayer modules"),
+		  settings.haveprayerlist));
 #endif
 }
 
