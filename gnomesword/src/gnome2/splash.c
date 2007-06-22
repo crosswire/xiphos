@@ -32,6 +32,7 @@
 
 
 #include "main/settings.h"
+#include "main/sword.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -377,8 +378,8 @@ GtkWidget *e_splash_new(void)
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash2.png",
 				     &error);
 	if (!splash_image_pixbuf) {
-		fprintf(stderr, "pixmap file error: %s\n",
-			error->message);
+		GS_warning(("pixmap file error: %s\n",
+			    error->message));
 		g_error_free(error);
 		error = NULL;
 		settings.showsplash = FALSE;
@@ -483,8 +484,8 @@ void gui_splash_init()
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/mozilla-icon.png", &error);
 		if (!icon_pixbuf) {
-			fprintf(stderr, "pixmap file error: %s\n",
-				error->message);
+			GS_warning(("pixmap file error: %s\n",
+				    error->message));
 			g_error_free(error);
 			error = NULL;
 			/* this is ugly but better than a crash */
@@ -500,8 +501,8 @@ void gui_splash_init()
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/gnome-session.png", &error);
 		if (!icon_pixbuf) {
-			fprintf(stderr, "pixmap file error: %s\n",
-				error->message);
+			GS_warning(("pixmap file error: %s\n",
+				    error->message));
 			g_error_free(error);
 			error = NULL;
 			settings.showsplash = 0;
@@ -516,8 +517,8 @@ void gui_splash_init()
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/gnome-windows.png", &error);
 		if (!icon_pixbuf) {
-			fprintf(stderr, "pixmap file error: %s\n",
-				error->message);
+			GS_warning(("pixmap file error: %s\n",
+				    error->message));
 			g_error_free(error);
 			error = NULL;
 			settings.showsplash = 0;
@@ -532,8 +533,8 @@ void gui_splash_init()
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/sword.png", &error);
 		if (!icon_pixbuf) {
-			fprintf(stderr, "pixmap file error: %s\n",
-				error->message);
+			GS_warning(("pixmap file error: %s\n",
+				    error->message));
 			g_error_free(error);
 			error = NULL;
 			settings.showsplash = 0;
@@ -548,8 +549,8 @@ void gui_splash_init()
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/gs2-48x48.png", &error);
 		if (!icon_pixbuf) {
-			fprintf(stderr, "pixmap file error: %s\n",
-				error->message);
+			GS_warning(("pixmap file error: %s\n",
+				    error->message));
 			g_error_free(error);
 			error = NULL;
 			settings.showsplash = 0;

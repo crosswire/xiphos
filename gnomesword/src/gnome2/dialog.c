@@ -30,6 +30,7 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/sword.h"
 
 static GtkWidget *gs_dialog;
 static GtkWidget *entry1 = NULL;
@@ -121,7 +122,7 @@ static void get_entry_text(GS_DIALOG * info)
 static void on_dialog_response(GtkDialog * dialog, gint response_id,
 			       GS_DIALOG * info)
 {
-	//g_warning("%d", response_id);
+	GS_warning(("%d", response_id));
 	switch (response_id) {
 	case GTK_RESPONSE_OK:
 		retval = GS_OK;

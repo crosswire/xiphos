@@ -175,7 +175,7 @@ static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
 			     DIALOG_DATA * dlg)
 {
 	//cur_dlg = dlg;
-//      g_warning("current module = %s",cur_dlg->mod_name);
+	GS_warning(("current module = %s",cur_dlg->mod_name));
 }
 
 /******************************************************************************
@@ -388,8 +388,8 @@ static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 			     error);
 
 	d->key = g_utf8_strup(key2, -1);
-;
-//	g_message(f_message,407,"entry_changedl",d->key);    
+
+	//GS_message((f_message,407,"entry_changedl",d->key));    
 
 	main_dialogs_dictionary_entry_changed(d);
 }

@@ -190,12 +190,10 @@ void main_save_note(	const gchar * module_name,
 
 #ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
-#ifdef DEBUG
-	g_message("note module %s\nnote key %s\nnote text%s",
-				module_name,
-				key_str,
-				note_str);
-#endif
+	GS_message(("note module %s\nnote key %s\nnote text%s",
+		    module_name,
+		    key_str,
+		    note_str));
 	backend->save_entry(note_str);
 #endif
 	if ((!strcmp(settings.CommWindowModule, module_name)) &&  
@@ -223,11 +221,9 @@ void main_delete_note(	const gchar * module_name, const gchar * key_str)
 {
 #ifdef USE_GTKHTML38
 	backend->set_module_key(module_name, key_str);
-#ifdef DEBUG
-	g_message("note module %s\nnote key %s\n",
-				module_name,
-				key_str);
-#endif
+	GS_message(("note module %s\nnote key %s\n",
+		    module_name,
+		    key_str));
 	backend->delete_entry();
 #endif	
 	if ((!strcmp(settings.CommWindowModule,module_name)) &&  
@@ -540,16 +536,14 @@ void main_init_backend(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
-#ifdef DEBUG	
-	//g_print("date: %s\n", getenv("DATE"));
-	g_print("%s sword-%s\n", _("Starting"), backend->get_sword_version());
-	g_print("%s\n", _("Initiating SWORD"));
-	g_print("%s: %s\n",_("path to sword"),mgr.prefixPath);
-	g_print("%s %s\n", _("System locale is"),lang);	
-	g_print("%s %s\n", _("SWORD locale is"), sword_locale);	
-	g_print("OLD_CODESET = %s\n\n", OLD_CODESET);
-	g_print("%s\n", _("Checking for SWORD Modules"));
-#endif
+	//GS_print(("date: %s\n", getenv("DATE")));
+	GS_print(("%s sword-%s\n", _("Starting"), backend->get_sword_version()));
+	GS_print(("%s\n", _("Initiating SWORD")));
+	GS_print(("%s: %s\n",_("path to sword"),mgr.prefixPath));
+	GS_print(("%s %s\n", _("System locale is"),lang));	
+	GS_print(("%s %s\n", _("SWORD locale is"), sword_locale));	
+	GS_print(("OLD_CODESET = %s\n\n", OLD_CODESET));
+	GS_print(("%s\n", _("Checking for SWORD Modules")));
 	sys_locale = strdup(lang);
 	settings.spell_language = strdup(sys_locale);	
 	main_init_lists();
@@ -583,9 +577,7 @@ void main_shutdown_backend(void)
 	        delete backend; 
 	backend = NULL;
 		
-#ifdef DEBUG	
-	g_print("%s\n", _("SWORD is shutdown"));
-#endif
+	GS_print(("%s\n", _("SWORD is shutdown")));
 }
 
 /******************************************************************************
@@ -775,9 +767,7 @@ static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
                              &bytes_read,
                              &bytes_written,
                              error);
-#ifdef DEBUG
-	g_message("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf);
-#endif
+	GS_message(("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf));
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), (gchar*) user_data);
 	gtk_widget_activate(widgets.entry_dict);
 	g_free(buf);
@@ -824,9 +814,7 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	}	
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
-#ifdef DEBUG
-	g_message("\nold_key: %s\nkey: %s",old_key,key);
-#endif	
+	GS_message(("\nold_key: %s\nkey: %s",old_key,key));
 //	key2 = g_utf8_strup(key,strlen(key));
 	key2 = g_convert(  key,	
 			     -1,	
@@ -932,9 +920,7 @@ void main_dictionary_button_clicked(gint direction)
 
 void main_display_book(const char * mod_name, char * key)     //, unsigned long offset)
 {
-#ifdef DEBUG
-	g_message("main_display_book\nmod_name: %s\nkey: %s", mod_name, key);
-#endif
+	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
 
 	if (!settings.havebook || !mod_name)
 		return;
@@ -1027,9 +1013,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 void main_display_dictionary(char * mod_name, char * key)
 {
 	const gchar *old_key;
-#ifdef DEBUG
-	g_message("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key);
-#endif
+	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
 
 	if (!settings.havedict || !mod_name)
 		return;
@@ -1193,9 +1177,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		g_free(val_key);			
 	}
 	
-#ifdef DEBUG 
-	g_print("mod_name = %s\n",mod_name);	
-#endif
+	GS_print(("mod_name = %s\n",mod_name));	
 	if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,

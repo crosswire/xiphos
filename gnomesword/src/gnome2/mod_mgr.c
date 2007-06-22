@@ -297,9 +297,7 @@ static void remove_install_modules(GList * modules, int activity)
 			char *datapath, *conf_file;
 			FILE *result;
 
-#ifdef DEBUG
-			g_print("archive %s in %s\n", buf, destination);
-#endif
+			GS_print(("archive %s in %s\n", buf, destination));
 			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
 			if ((access(dir, F_OK) == -1) &&
 			    (mkdir(dir, S_IRWXU) != 0)) {
@@ -353,9 +351,7 @@ static void remove_install_modules(GList * modules, int activity)
 		    (!first_time_user &&	// don't trip on "no modules".
 		     (activity == INSTALL) &&
 		     main_is_module(buf))) {	// delete before re-install
-#ifdef DEBUG
-			g_print("remove %s from %s\n", buf, destination);
-#endif
+			GS_print(("remove %s from %s\n", buf, destination));
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -364,10 +360,10 @@ static void remove_install_modules(GList * modules, int activity)
 				} else {
 					new_dest = gtk_label_get_text
 					    (GTK_LABEL(label_home));
-					g_warning(new_dest);
+					GS_warning((new_dest));
 				}
-				g_print("removing %s from %s\n",
-					buf, new_dest);
+				GS_print(("removing %s from %s\n",
+					  buf, new_dest));
 				failed =
 				    mod_mgr_uninstall(new_dest, buf);
 			}
@@ -381,9 +377,7 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == INSTALL) {
-#ifdef DEBUG
-			g_print("install %s, source=%s\n", buf,source);
-#endif
+			GS_print(("install %s, source=%s\n", buf,source));
 			if (local)
 				failed =
 				    mod_mgr_local_install_module(source, buf);
@@ -571,7 +565,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
 			 &bytes_written, &error);
 	if(description == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 	}
 
@@ -669,7 +663,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 
 		buf = strdup(language);
 		if(buf == NULL) {
-			g_print ("error: %s\n", error->message);
+			GS_print(("error: %s\n", error->message));
 			g_error_free (error);
 			return;
 		}
@@ -958,6 +952,7 @@ static void response_close(void)
 		g_string_printf(str, "%s/dirlist", settings.homedir);
 		if (mod_mgr_check_for_file(str->str)) {
 #ifdef DEBUG
+			/* special case: don't use GS_warning. */
 			g_warning(str->str);
 #else
 			unlink(str->str);
@@ -1680,7 +1675,7 @@ void on_fileselection_local_source_response(GtkDialog * dialog,
 				   gtk_file_selection_get_filename
 				   (filesel), -1);
 		save_sources();
-		g_warning(gtk_file_selection_get_filename(filesel));
+		GS_warning((gtk_file_selection_get_filename(filesel)));
 
 		break;
 	case GTK_RESPONSE_CANCEL:
@@ -1772,9 +1767,7 @@ GtkWidget *create_fileselection_local_source(void)
 
 void on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
-#ifdef DEBUG
-	g_message("on_destroy");
-#endif
+	GS_message(("on_destroy"));
 	if(remote_source) {
 	        g_free(remote_source);
 		remote_source = NULL;
@@ -2356,7 +2349,7 @@ static void setup_ui_labels()
 	path = main_module_mgr_get_path_to_mods();
 	gtk_label_set_text(GTK_LABEL(label_system), path);
 	if (access(path, W_OK) == -1) {
-		g_print("%s is write protected\n", path);
+		GS_print(("%s is write protected\n", path));
 		gtk_widget_set_sensitive(label_system, FALSE);
 		gtk_widget_set_sensitive(radiobutton4, FALSE);
 	} else {
@@ -2397,9 +2390,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-#ifdef DEBUG
-	g_message(glade_file);
-#endif
+	GS_message((glade_file));
 	
 	/* build the widget */
 	if(first_run) {		

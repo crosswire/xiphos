@@ -33,12 +33,11 @@
 #include "gui/tabbed_browser.h"
 #include "gui/utilities.h"
 
-
 //#include "main/module_dialogs.h"
 #include "main/navbar_versekey.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/tab_history.h"
-
 
 #ifndef OLD_NAVBAR
 /******************************************************************************
@@ -854,9 +853,7 @@ GtkWidget *gui_navbar_versekey_editor_new(EDITOR * editor)
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-#ifdef DEBUG
-	g_message(glade_file);
-#endif
+	GS_message((glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "navbar", NULL);

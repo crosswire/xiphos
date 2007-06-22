@@ -450,8 +450,6 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		gtk_html_load_from_string(html, str->str, str->len);
 	gtk_html_set_editable(html, was_editable);
 #endif
-	/* andyp - inserted for debugging, remove */
-	//g_print(str->str); 
 
 	free_font(mf);
 	g_string_free(str, TRUE);

@@ -41,6 +41,8 @@
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-print.h"
 
+#include "main/sword.h"
+
 /* Implementation file */
 NS_IMPL_ISUPPORTS3(GPrintingPromptService, nsIPrintingPromptService, nsIWebProgressListener, nsIPrintProgressParams)
 
@@ -304,7 +306,7 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
 
   GtkPaperSize *paperSize = gtk_page_setup_get_paper_size (settings->setup);
   if (!paperSize) {
-    g_warning ("Paper size not set.  Aborting!\n");
+    GS_warning(("Paper size not set.  Aborting!\n"));
     return NS_ERROR_FAILURE;
   }
 
@@ -343,8 +345,8 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
     }
     if (i == G_N_ELEMENTS (paperTable)) {
       /* Not in table, fall back to A4 */
-      g_warning ("Unknown paper name '%s', falling back to A4", 
-		 gtk_paper_size_get_name (paperSize));
+      GS_warning(("Unknown paper name '%s', falling back to A4", 
+		  gtk_paper_size_get_name (paperSize)));
       paperName = paperTable[1].mozPaperName;
     }
   
@@ -444,7 +446,7 @@ gecko_register_printing ()
     
   if (NS_FAILED(rv) || !componentFactory)
     {
-      g_warning ("Failed to make a factory for %s\n", sAppComps[0].mDescription);
+      GS_warning(("Failed to make a factory for %s\n", sAppComps[0].mDescription));
       return;
     }
    
@@ -454,7 +456,7 @@ gecko_register_printing ()
 			   componentFactory);
   if (NS_FAILED(rv))
     {
-      g_warning ("Failed to register %s\n", sAppComps[0].mDescription);
+      GS_warning(("Failed to register %s\n", sAppComps[0].mDescription));
     }
     
 }

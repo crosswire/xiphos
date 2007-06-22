@@ -32,6 +32,7 @@
 #include <libgnomeui/gnome-client.h>
 #include "gui/session.h"
 #include "gui/gnomesword.h"
+#include "main/sword.h"
 
 /* The master client  */
 static GnomeClient *master_client = NULL;
@@ -121,7 +122,7 @@ client_die_cb (GnomeClient *client, gpointer data)
 void
 gs_session_init (const char *argv0)
 {
-	/* g_print("\nInitiating GNOME session handler\n\n"); */
+	GS_print(("\nInitiating GNOME session handler\n\n"));
 	if (master_client)
 		return;
 

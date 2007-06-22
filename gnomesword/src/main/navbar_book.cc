@@ -383,7 +383,7 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 {
 	gchar buf[256];
 	gchar *tmpbuf = NULL;
-//	g_message("offset: %ld",offset);
+	GS_message(("offset: %ld",offset));
 	backend->set_module(book_name);
 	backend->set_treekey(offset);
 	tmpbuf = backend->get_key_form_offset(offset);

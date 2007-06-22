@@ -556,9 +556,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 #endif
 		break;
 	}
-#ifdef DEBUG
-	g_message("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode);
-#endif
+	GS_message(("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode));
 	return FALSE;
 }
 
@@ -618,10 +616,8 @@ void create_mainwindow(void)
 	settings.shadow_type = GTK_SHADOW_IN;
 
 	tooltips = gtk_tooltips_new ();
-#ifdef DEBUG
-	g_print("%s gnomesword-%s\n", _("Starting"), VERSION);
-	g_print("%s\n\n", _("Building GnomeSword interface"));
-#endif
+	GS_print(("%s gnomesword-%s\n", _("Starting"), VERSION));
+	GS_print(("%s\n\n", _("Building GnomeSword interface")));
 
 	widgets.studypad_dialog = NULL;
 
