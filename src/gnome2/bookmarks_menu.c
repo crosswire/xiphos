@@ -571,7 +571,7 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
 
 	sprintf(buf, "%s/removed/%s.xml", settings.swbmDir,
 		caption);
-	g_warning(buf);
+	GS_warning((buf));
 
 	bookmarks_changed = TRUE;
 	save_iter_to_xml_removed(&selected);

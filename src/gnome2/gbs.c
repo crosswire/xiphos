@@ -463,9 +463,7 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-#ifdef DEBUG
-	g_message("book on_use_current_dictionary_activate");
-#endif
+	GS_message(("book on_use_current_dictionary_activate"));
 	gchar *dict_key =NULL;
 #ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));

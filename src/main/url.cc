@@ -205,9 +205,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
-#ifdef DEBUG 
-		g_print("file = %s\n", filename);
-#endif
+		GS_print(("file = %s\n", filename));
 		GString *cmd = g_string_new(NULL);
 		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
 				"display", filename);
@@ -258,9 +256,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 						gboolean clicked)
 {
 	if(clicked) {
-#ifdef DEBUG 
-		g_print("module = %s\n",module);
-#endif
+		GS_print(("module = %s\n",module));
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
@@ -401,9 +397,7 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	guint i;	
 	
 	val = g_strdup(value);
-#ifdef DEBUG 
-	g_message("buf len = %d",strlen(buf));
-#endif
+	GS_message(("buf len = %d",strlen(buf)));
 	/*if((val1 = strchar(val,'|')) != NULL)	{
 		val1 = (val1) ? (val1 + 1) : val;
 		
@@ -521,9 +515,7 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	if(morph_mod)  {		
 		if(strchr(buf,'|')) {
 			gint morphlen = strlen(morph);
-#ifdef DEBUG
-			g_message("buf = %s", buf);
-#endif
+			GS_message(("buf = %s", buf));
 			for (i = 0; i < morphlen; i++) {
 				if(morph[i] == '|') {
 					val[i] = '\0';
@@ -534,10 +526,8 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 			val2 = strchr(buf,'|');
 			++val2;
 			
-#ifdef DEBUG
-			g_message("val = %s", val);
-			g_message("val2 = %s", val2);
-#endif
+			GS_message(("val = %s", val));
+			GS_message(("val2 = %s", val2));
 			morph_buf = g_strdup_printf("%s<br />%s<br /><br />%s<br />%s",
 					val,
 					main_get_rendered_text(morph_mod, (gchar*)val),
@@ -861,9 +851,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	
 	work_buf = g_strsplit (url,"/",4);
 	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
-#ifdef DEBUG
-	g_message("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]);
-#endif
+	GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));
 	if(!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
@@ -966,10 +954,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar *buf = NULL;
 	URL* m_url;
 
-#ifdef DEBUG
-	g_message("main_url_handler()");
-	g_message("url = %s", url);
-#endif
+	GS_message(("main_url_handler()"));
+	GS_message(("url = %s", url));
 
 	if (strstr(url, "sword://")   ||
 	    strstr(url, "book://")    ||
@@ -1006,9 +992,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 				break;
 			}
 		}
-#ifdef DEBUG
-		g_message("url_clean = %s", url_clean->str);
-#endif
+		GS_message(("url_clean = %s", url_clean->str));
 
 		retval = sword_uri(url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
@@ -1025,13 +1009,11 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 
-#ifdef DEBUG
-		g_message("action = %s", action);
-		g_message("type = %s", type);
-		g_message("value = %s", value);
-		g_message("strongs = %s", strongs);
-		g_message("morph = %s", morph);
-#endif
+		GS_message(("action = %s", action));
+		GS_message(("type = %s", type));
+		GS_message(("value = %s", value));
+		GS_message(("strongs = %s", strongs));
+		GS_message(("morph = %s", morph));
 
 		if (strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
 			show_strongs_morph(type, strongs, morph, clicked);

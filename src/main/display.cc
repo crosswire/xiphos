@@ -281,7 +281,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	const char *rework;	// for image size analysis rework.
 
 	(const char *)imodule;	// snap to entry
-	//g_message((const char *)imodule.getRawEntry());
+	//GS_message(((const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
 
@@ -598,9 +598,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 			// use of ". ..." is to induce proper pauses.
 		else
 			g_string_printf(text, "%s", suppliedtext);
-#ifdef DEBUG
-		g_message("ReadAloud: dirty: %s\n", text->str);
-#endif
+		GS_message(("ReadAloud: dirty: %s\n", text->str));
 
 		// clean: no quotes (conflict w/festival syntax).
 		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
@@ -612,9 +610,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-#ifdef DEBUG
-				g_message("ReadAloud: Unmatched <> in %s\n", s);
-#endif
+				GS_message(("ReadAloud: Unmatched <> in %s\n", s));
 				goto out;
 			}
 		}
@@ -626,9 +622,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-#ifdef DEBUG
-				g_message("ReadAloud: Unmatched &lt;&gt; in %s\n", s);
-#endif
+				GS_message(("ReadAloud: Unmatched &lt;&gt; in %s\n", s));
 				goto out;
 			}
 		}
@@ -639,9 +633,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 				while (s <= t)
 					*(s++) = ' ';
 			} else {
-#ifdef DEBUG
-				g_message("ReadAloud: Incomplete &xxx; in %s\n", s);
-#endif
+				GS_message(("ReadAloud: Incomplete &xxx; in %s\n", s));
 				goto out;
 			}
 		}
@@ -665,9 +657,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 			*s = ' ';
 		// in case it isn't obvious, i'd really like a  standard
 		// function that walks a string for multiple individual chars.
-#ifdef DEBUG
-		g_message("ReadAloud: clean: %s\n", text->str);
-#endif
+		GS_message(("ReadAloud: clean: %s\n", text->str));
 
 		// scribble clean text to the socket.
 		if ((write(tts_socket, "(SayText \"", 10) < 0)  ||
@@ -812,9 +802,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		if ((key->Verse() == curVerse) && settings.versehighlight)
 			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
 					      settings.highlight_bg);
-		/* please remove this, cuz I forgot */
-		/*if (key->Verse() == curVerse)
-			g_message(imodule.getRawEntry());*/
 		
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"

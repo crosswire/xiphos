@@ -29,11 +29,10 @@
 #include "gui/navbar_versekey_parallel.h"
 #include "gui/utilities.h"
 
-
 #include "main/navbar_versekey.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
-
+#include "main/sword.h"
 
 enum  {
 	BOOK_BUTTON,
@@ -757,9 +756,7 @@ GtkWidget *gui_navbar_versekey_parallel_new(void)
 	glade_file =
 		    gui_general_user_file("navbar_versekey.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
-#ifdef DEBUG
-	g_message(glade_file);
-#endif
+	GS_message((glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "navbar", NULL);

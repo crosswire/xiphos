@@ -127,9 +127,7 @@ static void about_module_display(GString * str, gchar * text)
 
 static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
 {
-#ifdef DEBUG
-	g_message("on_copy_activate");
-#endif
+	GS_message(("on_copy_activate"));
 	gui_copy_html(text_html);
 }
 
@@ -371,8 +369,9 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gui_display_html(text, "</body></html>",
 				 strlen("</body></html>"));
 		gui_end_html(text);
-	} else
-		g_warning("oops");
+	} else {
+		GS_warning(("gui_display_about_module_dialog: oops"));
+	}
 
 	if (bufabout)
 		g_free(bufabout);

@@ -331,7 +331,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 				     &error);
 
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}
@@ -353,7 +353,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 				     &bytes_written,
 				     &error);
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}
