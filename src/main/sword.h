@@ -116,4 +116,20 @@ void main_refresh_all(void);
 }
 #endif
 
+/*
+ * Eliminate wrapping debug & warning generators in #ifdef DEBUG.
+ * Do it once, here, and then just remember to use GS_*.
+ */
+#ifdef DEBUG
+# define GS_message(x)	g_message x
+# define GS_warning(x)	g_warning x
+# define GS_print(x)	g_print x
+# define GS_error(x)	g_error x
+#else
+# define GS_message(x)
+# define GS_warning(x)
+# define GS_print(x)
+# define GS_error(x)
+#endif
+
 #endif

@@ -78,7 +78,7 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	gkey = g_convert(navbar.key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
-		g_print ("error: %s\n", error->message);
+		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
@@ -168,7 +168,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				     &error);
 
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}
@@ -194,7 +194,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				     &bytes_written,
 				     &error);
 			if(book == NULL) {
-				g_print ("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
 			}

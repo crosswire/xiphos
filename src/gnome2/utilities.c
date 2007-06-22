@@ -164,7 +164,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 	}
 	else
 	{
-		g_warning("callback function not found: %s", cb_name);
+		GS_warning(("callback function not found: %s", cb_name));
 	}
 }
 
@@ -252,9 +252,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 		if (!g_path_is_absolute (file))
 		{
 			gchar * cwd, *file1;
-#ifdef DEBUG
-			g_message ("Using %s (usually OK)", file);
-#endif
+			GS_message( ("Using %s (usually OK)", file));
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();
@@ -271,7 +269,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	/* if nothing then theres an error */
 	else if (critical)
 	{
-		g_error(_("%s not found"), fname);
+		GS_error((_("%s not found"), fname));
 	}
 
 	/* return result */
@@ -322,7 +320,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		gchar *str_data;
 		buf = strdup(language);
 		if(buf == NULL) {
-			g_print ("error: %s\n", error->message);
+			GS_print(("error: %s\n", error->message));
 			g_error_free (error);
 			return;
 		}
@@ -865,9 +863,7 @@ gchar * ncr_to_utf8(gchar * text)
   		  		}
   		  		else {
   		  			g_string_append_printf(newtext,"&#%d;",unicode);
-#ifdef DEBUG
-					g_message("src/gnome2/utilities.c ncr2utf8, invalid unicode char &#%d;\n", unicode);
-#endif
+					GS_message(("src/gnome2/utilities.c ncr2utf8, invalid unicode char &#%d;\n", unicode));
 				}
   		  		// remaining text added
   		  		if (strlen(result)>count)

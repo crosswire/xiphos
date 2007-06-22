@@ -875,9 +875,7 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
         	gsize bytes_read;
        	 	gsize bytes_written;
         	GError *error = NULL;
-#ifdef DEBUG 
-		g_message(f_message,878,"key",key);
-#endif
+		GS_message((f_message,878,"key",key));
 		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
@@ -886,13 +884,11 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
                              &bytes_written,
                              &error);
 		if(error) {
-			g_print ("error: %s\n", error->message);
+			GS_print(("error: %s\n", error->message));
 			g_error_free (error);	
 		}
 		display_mod->setKey(mykey);
-#ifdef DEBUG 
-		g_message(f_message,893,"mykey",mykey);
-#endif
+		GS_message((f_message,893,"mykey",mykey));
 		g_free(mykey);
 		return 1;
 	}
@@ -909,9 +905,7 @@ int BackEnd::set_key(const char *key) {
         	gsize bytes_read;
        	 	gsize bytes_written;
         	GError **error = NULL;
-#ifdef DEBUG 
-		g_message(f_message,758,"key",key);
-#endif
+		GS_message((f_message,758,"key",key));
 		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
@@ -920,9 +914,7 @@ int BackEnd::set_key(const char *key) {
                              &bytes_written,
                              error);
 		display_mod->setKey(mykey);
-#ifdef DEBUG 
-		g_message(f_message,767,"mykey",mykey);
-#endif
+		GS_message((f_message,767,"mykey",mykey));
 		g_free(mykey);
 		//display_mod->setKey(key);
 		return 1;
@@ -1003,7 +995,7 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
                              &bytes_written,
                              &error);
 		if(error) {
-			g_print ("error: %s\n", error->message);
+			GS_print(("error: %s\n", error->message));
 			g_error_free (error);	
 		}		
 		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();

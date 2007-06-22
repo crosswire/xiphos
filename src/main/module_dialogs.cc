@@ -146,7 +146,7 @@ void main_dialogs_book_heading(DIALOG_DATA * d)
 	SWMgr *mgr = be->get_display_mgr();
 	
 	be->display_mod = mgr->Modules[d->mod_name];
-	//g_message((char*)be->display_mod->RenderText());
+	GS_message(((char*)be->display_mod->RenderText()));
 	vkey = (VerseKey*)(SWKey*)(*be->display_mod);	
 	vkey->Headings(1);
 	vkey->AutoNormalize(0);
@@ -731,8 +731,6 @@ void main_dialogs_dictionary_entry_changed(DIALOG_DATA * d)
 	gchar * mod_name = d->mod_name;
 	BackEnd *be = (BackEnd*)d->backend;
 	
-	//g_warning(be->mod->Name());
-	
 	if(!backend->is_module(mod_name))
 		return;
 	
@@ -806,7 +804,6 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
 		startgrabing = FALSE;
 	if (startgrabing) {
 		note_str = g_string_append(note_str, data);
-		//g_warning(gstr->str);
 	}
 	if (strstr(data, "<BODY") != NULL)
 		startgrabing = TRUE;
@@ -1077,7 +1074,7 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
 void main_dialogs_shutdown(void)
 {
 	GList *tmp = list_dialogs;
-	//g_warning("items = %d",g_list_length(tmp));
+	GS_warning(("items = %d",g_list_length(tmp)));
 	while (tmp != NULL) {
 		DIALOG_DATA *t = (DIALOG_DATA*) tmp->data;
 		bible_freed = TRUE;
@@ -1152,7 +1149,7 @@ void main_dialog_set_global_opt(gpointer backend, gboolean choice)
 	else
 		on_off = "Off";
 */	
-	g_warning("main_dialog_set_global_opt");
+	GS_warning(("main_dialog_set_global_opt"));
 	
 }
 
@@ -1563,9 +1560,7 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	gchar *buf = NULL;
 	URL* m_url;
 	
-#ifdef DEBUG	
-	g_message("new_url_handler url = %s",url);
-#endif
+	GS_message(("new_url_handler url = %s",url));
 	m_url = new URL((const char*)url);	
 	action = g_strdup(m_url->getParameterValue("action"));
 	type = g_strdup((gchar*)m_url->getParameterValue("type"));
@@ -1573,13 +1568,10 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 	morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
 	strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 	
-#ifdef DEBUG
-	g_message("action = %s",action);
-	g_message("type = %s",type);  
-	g_message("value = %s",value);
-#endif	
+	GS_message(("action = %s",action));
+	GS_message(("type = %s",type));  
+	GS_message(("value = %s",value));
 
-	
 	if(strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
 		show_strongs_morph(t, type,strongs,morph,clicked);
 	} else if(strlen(strongs) >= 1 && strlen(morph) < 1) {
@@ -1633,9 +1625,7 @@ static gint new_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked
 
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
-#ifdef DEBUG
-	g_message("main_dialogs_url_handler url = %s",url);
-#endif
+	GS_message(("main_dialogs_url_handler url = %s",url));
 	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url"))
 		return new_url_handler(t,url,clicked);
 	if(strstr(url,"sword://"))
@@ -1789,9 +1779,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			     TRUE, t);
 		be->set_treekey(t->offset);
 		main_setup_navbar_book_dialog(t);
-#ifdef DEBUG
-		g_message("offset = %d",t->offset);
-#endif
+		GS_message(("offset = %d",t->offset));
 	} else
 		be->set_key(t->key);
 	

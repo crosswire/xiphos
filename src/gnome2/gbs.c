@@ -469,9 +469,7 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-#ifdef DEBUG
-	g_message("book on_use_current_dictionary_activate");
-#endif
+	GS_message(("book on_use_current_dictionary_activate"));
 	gchar *dict_key =NULL;
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(widgets.html_book));

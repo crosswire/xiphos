@@ -105,7 +105,7 @@ void appendChild(TreeKeyIdx *treeKey, gchar * name)
 	treeKey->appendChild();
 	treeKey->setLocalName(name);
 	treeKey->save();
-	g_message("name: %s\nlocalName: %s",name,treeKey->getLocalName());
+	GS_message(("name: %s\nlocalName: %s",name,treeKey->getLocalName()));
 }
 
 void add_prayer_list_sections(RawGenBook * book, TreeKeyIdx * treeKey)
@@ -236,7 +236,7 @@ void main_prayer_list_add_child(gchar * mod_name)
 	backend->set_module(mod_name);
 	SWModule *book = backend->display_mod;
 	
-	g_message(book->Name());
+	GS_message((book->Name()));
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 	root.root(); printTree(root, treeKey);

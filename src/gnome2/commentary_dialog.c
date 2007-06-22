@@ -599,9 +599,7 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 	cur_d = d;
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry4_changed");
-#endif
+	GS_message(("on_comboboxentry4_changed"));
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
 
@@ -633,9 +631,7 @@ static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 	cur_d = d;
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry5_changed");
-#endif
+	GS_message(("on_comboboxentry5_changed"));
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (d->navbar.comboboxentry_book),
 				      &iter);
@@ -679,9 +675,7 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * d)
 	cur_d = d;
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry6_changed");
-#endif
+	GS_message(("on_comboboxentry6_changed"));
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (d->navbar.comboboxentry_book),
 				      &iter);

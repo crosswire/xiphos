@@ -303,6 +303,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
+#ifdef DEBUG
 	if(event->state == GDK_CONTROL_MASK)
 		g_message("GDK_CONTROL_MASK");
 	if(event->state == GDK_SHIFT_MASK)
@@ -312,15 +313,14 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 	if(event->state == GDK_MODIFIER_MASK)
 		g_message("GDK_MODIFIER_MASK");
 	g_message("state: %d",event->state);
+#endif
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_presed = TRUE;
 		break;
 	}
-#ifdef DEBUG
-	g_message("on_key_press_event\nkeycode: %d",event->hardware_keycode);
-#endif
+	GS_message(("on_key_press_event\nkeycode: %d",event->hardware_keycode));
   	return FALSE;
 }
 
@@ -329,21 +329,21 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
 {
+#ifdef DEBUG
 	if(event->state == GDK_CONTROL_MASK)
 		g_message("GDK_CONTROL_MASK");
 	if(event->state == GDK_SHIFT_MASK)
 		g_message("GDK_SHIFT_MASK");
 	if(event->state == GDK_MOD1_MASK)
 		g_message("GDK_MOD1_MASK");
+#endif
 	switch(event->hardware_keycode) {
 		case 50:
 		case 62:
 			shift_key_presed = FALSE;
 		break;
 	}
-#ifdef DEBUG
-	g_message("on_key_release_event\nkeycode: %d",event->hardware_keycode);
-#endif
+	GS_message(("on_key_release_event\nkeycode: %d",event->hardware_keycode));
   	return FALSE;
 }
 
@@ -515,15 +515,11 @@ void adj_changed(GtkAdjustment * adjustment1, gpointer user_data)
 	static int scroll = 1;
 	if(!settings.chapter_scroll) return;
 	if(scroll && (adjustment1->value <= adjustment1->lower)) {
-#ifdef DEBUG
-		g_message("\ntop: %g\n",adjustment1->value);
-#endif
+		GS_message(("\ntop: %g\n",adjustment1->value));
 		gui_navbar_handle_spinbutton_click(1, 0);
 		scroll = 0;
 	} else if(scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
-#ifdef DEBUG
-		g_message("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size);
-#endif
+		GS_message(("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size));
 		gui_navbar_handle_spinbutton_click(1, 1);
 		scroll = 0;
 		gtk_adjustment_set_value(adjustment,2);
@@ -807,9 +803,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 			(GtkEditable *)widgets.entry_dict,0,-1));
 #else
 	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
-#ifdef DEBUG
-	g_message("gui_lookup_bibletext_selection\ndict_key: %s",dict_key);
-#endif
+	GS_message(("gui_lookup_bibletext_selection\ndict_key: %s",dict_key));
 #endif
 	if (dict_key && mod_name)
 		main_display_dictionary(mod_name, dict_key);

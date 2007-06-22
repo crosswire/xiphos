@@ -140,7 +140,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
 	GtkTreeIter iter;
 	RESULTS *list_item;
 
-	//g_warning("verse_list = %s",verse_list);
+	GS_warning(("verse_list = %s",verse_list));
 	list_of_verses = g_list_first(list_of_verses);
 	if (list_of_verses) {
 		while (list_of_verses) {
@@ -227,14 +227,14 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
 			   -1);
 
-	//g_message("offset: %d",backend->get_treekey_offset());
-	//g_message(backend->display_mod->Name());
+	GS_message(("offset: %d",backend->get_treekey_offset()));
+	GS_message((backend->display_mod->Name()));
 	if (backend->treekey_first_child(offset)) {
-		//g_message("treekey_first_child1 %s",mod_name);
+		GS_message(("treekey_first_child1 %s",mod_name));
 		
 		offset = backend->get_treekey_offset();
 		
-		//g_message("offset: %d",offset);
+		GS_message(("offset: %d",offset));
 		
 		sprintf(buf, "%lu", offset);
 		tmpbuf = backend->treekey_get_local_name(offset);
@@ -492,7 +492,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				      &bytes_read, &bytes_written,
 				      &error);
 			if (buf == NULL) {
-				g_print("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free(error);
 				continue;
 			}	//(gchar *) key.books[0][j].name;
@@ -524,7 +524,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				      &bytes_read, &bytes_written,
 				      &error);
 			if (buf == NULL) {
-				g_print("error: %s\n", error->message);
+				GS_print(("error: %s\n", error->message));
 				g_error_free(error);
 				continue;
 			}	//(gchar *) key.books[1][j].name;
@@ -679,7 +679,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 #ifdef PRAYERLIST
 	case PRAYERLIST_TYPE:
 #endif
-			  //  g_message("key %s",key);
+		GS_message(("key %s",key));
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
