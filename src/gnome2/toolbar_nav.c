@@ -332,9 +332,7 @@ on_chapter_button_down_clicked(GtkButton * button, gpointer user_data)
 static void
 on_book_button_up_clicked(GtkButton * button, gpointer user_data)
 {
-#ifdef DEBUG
-	g_message("on_book_button_up_clicked");
-#endif
+	GS_message(("on_book_button_up_clicked"));
 	gui_navbar_handle_spinbutton_click(0, 0);
 }
 
@@ -363,9 +361,7 @@ on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
 		return;
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
-#ifdef DEBUG
-	g_message("on_comboboxentry4_changed: %s",book);
-#endif
+	GS_message(("on_comboboxentry4_changed: %s",book));
 	//      g_error_free (error);
 /*	key = g_convert(book,
 			     -1,
@@ -408,9 +404,7 @@ on_comboboxentry5_changed(GtkComboBox * combobox, gpointer data)
 
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry5_changed");
-#endif
+	GS_message(("on_comboboxentry5_changed"));
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (navbar_main.comboboxentry_book),
 				      &iter);
@@ -458,9 +452,7 @@ on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
 
 	if (!do_display)
 		return;
-#ifdef DEBUG
-	g_message("on_comboboxentry6_changed");
-#endif
+	GS_message(("on_comboboxentry6_changed"));
 	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
 				      (navbar_main.comboboxentry_book),
 				      &iter);

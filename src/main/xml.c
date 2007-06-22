@@ -342,9 +342,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 			}
 		}
 	}
-#ifdef DEBUG
-	g_print("\nsaving = %s\n", xml_filename);
-#endif	
+	GS_print(("\nsaving = %s\n", xml_filename));
 	xmlSaveFile(xml_filename, root_doc);
 	xmlFreeDoc(root_doc);
 	g_free(file_buf);
@@ -368,9 +366,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 
 void xml_write_bookmark_doc(const xmlChar * xml_filename)
 {	
-#ifdef DEBUG	
-	g_print("\nsaving = %s\n", xml_filename);
-#endif	
+	GS_print(("\nsaving = %s\n", xml_filename));
 	xmlSaveFormatFile((const char *) xml_filename, bookmark_doc,1);
 }
 

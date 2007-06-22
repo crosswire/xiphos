@@ -344,9 +344,7 @@ void gui_load_tabs(const gchar *filename)
 	{
 		tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 		if (access(tabs_dir, F_OK) == -1) {
-#ifdef DEBUG
-			g_message("Creating new tabs directory\n");
-#endif
+			GS_message(("Creating new tabs directory\n"));
 			gui_save_tabs(NULL);
 			//return;
 		}	
@@ -631,9 +629,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	gboolean comm_showing;
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
-#ifdef DEBUG
-	g_message("on_notebook_main_switch_page");
-#endif	
+	GS_message(("on_notebook_main_switch_page"));
 	page_change = TRUE;
 	/* get data structure for new passage */
 	/*
@@ -754,9 +750,7 @@ void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean u
 	}
 
 	gtk_label_set_text (pt->tab_label, str->str);
-#ifdef DEBUG 
-	g_message("label = %s\n", str->str);
-#endif
+	GS_message(("label = %s\n", str->str));
 	gtk_notebook_set_menu_label_text(
 		GTK_NOTEBOOK(widgets.notebook_main),
 		pt->page_widget, str->str);

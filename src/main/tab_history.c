@@ -36,6 +36,7 @@
 
 #include "main/tab_history.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/url.hh"
 #include "main/xml.h"
 #include "main/navbar_versekey.h"
@@ -293,10 +294,8 @@ void main_change_verse_tab_history(gint historynum)
 	} else {
 		settings.addhistoryitem = FALSE;
 	}
-#ifdef DEBUG 
-	g_print("commod = %s\n",tab->history_list[historynum].commod);
-	g_print("textmod = %s\n",tab->history_list[historynum].textmod);	
-#endif
+	GS_print(("commod = %s\n",tab->history_list[historynum].commod));
+	GS_print(("textmod = %s\n",tab->history_list[historynum].textmod));	
 	// ** change commentary mod **
 	url = g_strdup_printf("sword://%s/%s",tab->history_list[historynum].commod,
 				  tab->history_list[historynum].verseref);
