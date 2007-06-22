@@ -116,9 +116,7 @@ static void html_link_message(GtkMozEmbed * embed)
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	    
 	
-#ifdef DEBUG
-	g_message("html_link_message: url = %s",url);
-#endif	
+	GS_message(("html_link_message: url = %s",url));
 	
 	if(shift_key_presed)
 		return;
@@ -146,9 +144,7 @@ static void html_link_message(GtkMozEmbed * embed)
 				break;
 			}
 		}
-#ifdef DEBUG
-		g_message("\nurl:        %s\nurl_clean: %s",url,url_clean->str);
-#endif	
+		GS_message(("\nurl:        %s\nurl_clean: %s",url,url_clean->str));
 		in_url = TRUE;	//* we need this for html_button_released *
 		if(priv->is_dialog) {
 			if(main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {	
@@ -241,9 +237,7 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		
 	}
 	
-#ifdef DEBUG
-	g_message("uri: %s", uri);
-#endif
+	GS_message(("uri: %s", uri));
 	if(priv->is_dialog)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
@@ -261,8 +255,8 @@ static void html_realize(GtkWidget * widget)
 	rv = html->priv->yelper->Init();
 
 	if (NS_FAILED(rv)) {
-		g_warning("gecko initialization failed for %p\n",
-			  (void *) html);
+		GS_warning(("gecko initialization failed for %p\n",
+			    (void *) html));
 	}
 }
 
@@ -465,7 +459,7 @@ void gecko_html_write(GeckoHtml * html, const gchar * data, gint len)
 	if (len == -1)
 		len = strlen(data);
 	gtk_moz_embed_append_data(GTK_MOZ_EMBED(html), data, len);
-	//g_message("html_write: \n\tlength = %d \n\tdata: %s",len,data);
+	GS_message(("html_write: \n\tlength = %d \n\tdata: %s",len,data));
 }
 
 void gecko_html_frames(GeckoHtml * html, gboolean enable)
@@ -622,9 +616,7 @@ gboolean gecko_html_initialize(void)
 
 void gecko_html_shutdown(void)
 {
-#ifdef DEBUG
-	g_message("gecko shutdown");
-#endif
+	GS_message(("gecko shutdown"));
 	gecko_shutdown();
 }
 

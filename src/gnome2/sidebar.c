@@ -1109,9 +1109,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 	    g_strdup_printf("sword://%s/%s", settings.sb_search_mod,
 			    key);
 
-#ifdef DEBUG
-	g_warning("%d", event->keyval);
-#endif
+	GS_warning(("%d", event->keyval));
 	if (event) {
 		switch (event->keyval) {
 		case 65293:
@@ -1426,7 +1424,7 @@ static gboolean paned_button_release_event(GtkWidget * widget,
 	panesize = gtk_paned_get_position(GTK_PANED(widget));
 
 	if (panesize > 15) {
-		//g_warning("paned_viewer = %d",panesize);
+		GS_warning(("paned_viewer = %d",panesize));
 		settings.sidebar_notebook_hight = panesize;
 		sprintf(layout, "%d", settings.sidebar_notebook_hight);
 		xml_set_value("GnomeSword", "layout",

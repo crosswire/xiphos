@@ -27,9 +27,9 @@
 
 #include "gui/navbar_book.h"
 
-
 #include "main/navbar_book.h"
 #include "main/settings.h"
+#include "main/sword.h"
 
 NAVBAR_BOOK navbar_book;
 
@@ -121,9 +121,7 @@ static gboolean lookup_entry_press_callback(GtkWidget * widget,
 					return TRUE;
 			break;
 	}
-#ifdef DEBUG
-	g_message("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode);
-#endif
+	GS_message(("lookup_entry_press_callback\nkeycode: %d",event->hardware_keycode));
 	return FALSE;
 	
 

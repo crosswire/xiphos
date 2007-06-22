@@ -335,16 +335,12 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
-#ifdef DEBUG
-		g_message("pane: %d",pane);
-#endif
+		GS_message(("pane: %d",pane));
 	//main_clear_viewer();
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
-#ifdef DEBUG
-		g_message("nsEvent failed %d",NS_ERROR_FAILURE);
-#endif
+		GS_message(("nsEvent failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 
@@ -352,18 +348,14 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	result = nsEvent->GetOriginalTarget(getter_AddRefs(OriginalTarget));
 	if (NS_FAILED(result) || !OriginalTarget) {
 		
-#ifdef DEBUG
-		g_message("OriginalTarget failed %d",NS_ERROR_FAILURE);
-#endif
+		GS_message(("OriginalTarget failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 
 	nsCOMPtr<nsIDOMNode> OriginalNode = do_QueryInterface(OriginalTarget);
 	if (!OriginalNode) {
 		
-#ifdef DEBUG
-		g_message("OriginalNode failed %d",NS_ERROR_FAILURE);
-#endif
+		GS_message(("OriginalNode failed %d",NS_ERROR_FAILURE));
 		return NS_ERROR_FAILURE;
 	}
 	
@@ -459,9 +451,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
-#ifdef DEBUG
-	//g_message("mouse button up: %d",button);
-#endif
+	//GS_message(("mouse button up: %d",button));
 	if(button == 1)	       
 	        shift_key_presed = FALSE; 
 	return 0;	
@@ -483,24 +473,20 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	g_message("domEvent->GetType: %s",mybuf);
+	GS_message(("domEvent->GetType: %s",mybuf));
 #endif
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
 
-#ifdef DEBUG
-	g_message("mouse button: %d",button);
-#endif
+	GS_message(("mouse button: %d",button));
 	if(button == 1)	       
 	        shift_key_presed = TRUE; 
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;
 	
 
-#ifdef DEBUG
-	g_message("g_signal_emit_by_name");
-#endif
+	GS_message(("g_signal_emit_by_name"));
 	if(mEmbed)
 		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
@@ -569,15 +555,15 @@ Yelper::Print (GeckoPrintInfo *print_info, PRBool preview, int *prev_pages)
   nsCOMPtr<PrintListener> listener = new PrintListener (print_info, print);
 
   if (!preview){
-	g_message("Yelper::Print4");
-    rv = print->Print (settings, listener);
-	g_message("Yelper::Print5");
+	GS_message(("Yelper::Print4"));
+	rv = print->Print (settings, listener);
+	GS_message(("Yelper::Print5"));
   }
   else {
     rv = print->PrintPreview (settings, mDOMWindow, nsnull);
     rv |= print->GetPrintPreviewNumPages (prev_pages);
   }
-	g_message("Yelper::Print6");
+  GS_message(("Yelper::Print6"));
   return rv;
 
 }

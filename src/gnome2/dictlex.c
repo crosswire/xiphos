@@ -347,7 +347,7 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 	gchar *buf = NULL;
 	
 	buf = (gchar*)gtk_entry_get_text(entry);
-//	g_message("dict_key_entry_changed: %s",buf);
+	GS_message(("dict_key_entry_changed: %s",buf));
 	if(strlen(buf) < 2 )
 		return;
 	
@@ -368,9 +368,7 @@ void button_forward_clicked(GtkButton * button, gpointer user_data)
 static void on_entry_activate(GtkEntry * entry,
 				   gpointer user_data)
 {
-#ifdef DEBUG
-	g_message("on_entry_activate");
-#endif
+	GS_message(("on_entry_activate"));
 }
 
 

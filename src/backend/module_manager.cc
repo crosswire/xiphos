@@ -282,9 +282,7 @@ void backend_mod_mgr_init_language_map(void) {
 void GSStatusReporter::preStatus(long totalBytes, long completedBytes, 
 				   const char *message)
 {
-#ifdef DEBUG 
-	g_print(f_message,83,"message",message);
-#endif
+	GS_print((f_message,83,"message",message));
 	update_install_status(totalBytes, completedBytes, message);
 }
 
