@@ -39,6 +39,7 @@
 
 #include "main/lists.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/xml.h"
 
 //#include "backend/sword.h"
@@ -174,9 +175,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if settings.xml does not exist create it */
 	if ((access(settings.fnconfigure, F_OK) == -1) || new_configs) {
 		/* must be first run */
-#ifdef DEBUG 
-		g_print("\nFirst Run: need to create settings!\n");
-#endif
+		GS_print(("\nFirst Run: need to create settings!\n"));
 		settings.first_run = TRUE;
 
 		main_init_lists();

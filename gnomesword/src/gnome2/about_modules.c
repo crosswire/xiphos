@@ -132,9 +132,7 @@ static void about_module_display(GString * str, gchar * text)
 
 static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
 {
-#ifdef DEBUG
-	g_message("on_copy_activate");
-#endif
+	GS_message(("on_copy_activate"));
 #ifdef USE_GTKMOZEMBED
 	gecko_html_copy_selection(GECKO_HTML(text_html));
 #else
@@ -409,7 +407,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gui_end_html(text);
 #endif
 	} else
-		g_warning("oops");
+ 		GS_warning(("gui_display_about_module_dialog: oops"));
 
 	if (bufabout)
 		g_free(bufabout);

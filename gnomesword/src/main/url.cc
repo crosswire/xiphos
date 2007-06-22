@@ -206,9 +206,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
-#ifdef DEBUG
-		g_print("file = %s\n", filename);
-#endif
+		GS_print(("file = %s\n", filename));
 		GString *cmd = g_string_new(NULL);
 		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
 				"display", filename);
@@ -259,14 +257,10 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 						gboolean clicked)
 {
 	if(clicked) {
-#ifdef DEBUG 
-		g_print("module = %s\n",module);
-#endif
+		GS_print(("module = %s\n",module));
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
-#ifdef DEBUG 
-		g_print("description = %s\n",description);
-#endif
+		GS_print(("description = %s\n",description));
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					description);
 	}
@@ -403,9 +397,7 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	guint i;	
 	
 	val = g_strdup(svalue);
-#ifdef DEBUG 
-	g_message("buf len = %d",strlen(buf));
-#endif
+	GS_message(("buf len = %d",strlen(buf)));
 	/*if((val1 = strchar(val,'|')) != NULL)	{
 		val1 = (val1) ? (val1 + 1) : val;
 		
@@ -527,9 +519,7 @@ static gint show_strongs_morph(const gchar * stype, const gchar * svalue,
 	if(morph_mod)  {		
 		if(strchr(buf,'|')) {
 			gint morphlen = strlen(morph);
-#ifdef DEBUG
-			g_message("buf = %s", buf);
-#endif
+			GS_message(("buf = %s", buf));
 			for (i = 0; i < morphlen; i++) {
 				if(morph[i] == '|') {
 					val[i] = '\0';
@@ -540,10 +530,8 @@ static gint show_strongs_morph(const gchar * stype, const gchar * svalue,
 			val2 = strchr(buf,'|');
 			++val2;
 			
-#ifdef DEBUG
-			g_message("val = %s", val);
-			g_message("val2 = %s", val2);
-#endif
+			GS_message(("val = %s", val));
+			GS_message(("val2 = %s", val2));
 			morph_buf = g_strdup_printf("%s<br />%s<br /><br />%s<br />%s",
 					val,
 					main_get_rendered_text(morph_mod, (gchar*)val),
@@ -867,9 +855,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	
 	work_buf = g_strsplit (url,"/",4);
 	//if(work_buf[KEY][0] == '/' ) ++work_buf[KEY];
-#ifdef DEBUG
-	g_message("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]);
-#endif
+	GS_message(("work_buf :%s, %s",work_buf[MODULE],work_buf[KEY]));
 	if(!work_buf[MODULE] && !work_buf[KEY]) {
 		alert_url_not_found(url);
 		g_strfreev(work_buf);
@@ -973,10 +959,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar *buf = NULL;
 	URL* m_url;
 
-#ifdef DEBUG
-	g_message("main_url_handler()");
-	g_message("url = %s", url);
-#endif
+	GS_message(("main_url_handler()"));
+	GS_message(("url = %s", url));
 
 	if (strstr(url_work, "sword://") ||
 	    strstr(url_work, "book://")  ||
@@ -1014,9 +998,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 			}
 		}
 		
-#ifdef DEBUG
-		g_message("url_clean = %s", url_clean->str);
-#endif
+		GS_message(("url_clean = %s", url_clean->str));
 		
 		retval = sword_uri(url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
@@ -1032,13 +1014,12 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		stype = g_strdup((gchar*)m_url->getParameterValue("type"));
 		svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
 
-#ifdef DEBUG
-		g_message("action = %s", action);
-		g_message("type = %s", stype);
-		g_message("value = %s", svalue);
-		g_message("strongs = %s", strongs);
-		g_message("morph = %s", morph);
-#endif
+		GS_message(("action = %s", action));
+		GS_message(("type = %s", stype));
+		GS_message(("value = %s", svalue));
+		GS_message(("strongs = %s", strongs));
+		GS_message(("morph = %s", morph));
+
 		if (!strcmp(action, "showStrongs")) {
 			stype = g_strdup((gchar*)m_url->getParameterValue("type"));
 			svalue = g_strdup((gchar*)m_url->getParameterValue("value"));
@@ -1143,9 +1124,7 @@ gint main_url_handler_gecko(const gchar * url)
 		 
 		work_buf = g_strsplit (action,"&",6);	
 			
-#ifdef DEBUG
-		g_message("action = %s", work_buf[0]);
-#endif
+		GS_message(("action = %s", work_buf[0]));
 		if(strstr(action, "showStrongs")) {
 			if(strstr(work_buf[1],"Greek")) 
 				stype = "Greek";
@@ -1153,10 +1132,8 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "Hebrew";
 			svalue = strstr(work_buf[2],"=");
 			++svalue;
-#ifdef DEBUG
-			g_message("type = %s", stype);
-			g_message("value = %s", svalue);
-#endif
+			GS_message(("type = %s", stype));
+			GS_message(("value = %s", svalue));
 			show_strongs(stype, svalue, FALSE);
 		}
 		if(strstr(action, "showMorph")) {
@@ -1166,10 +1143,8 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "packard";
 			svalue = strstr(work_buf[2],"=");
 			++svalue;
-#ifdef DEBUG
-			g_message("type = %s", stype);
-			g_message("value = %s", svalue);
-#endif
+			GS_message(("type = %s", stype));
+			GS_message(("value = %s", svalue));
 			show_morph(stype, svalue, FALSE);
 		}
 		if(strstr(action, "showModInfo")) {
@@ -1177,10 +1152,8 @@ gint main_url_handler_gecko(const gchar * url)
 			++svalue;
 			module = strstr(work_buf[2],"=");
 			++module;
-#ifdef DEBUG
-			g_message("module = %s", module);
-			g_message("svalue = %s", svalue);
-#endif
+			GS_message(("module = %s", module));
+			GS_message(("svalue = %s", svalue));
 			show_mod_info(module, svalue, FALSE);
 		}
 		if(strstr(action, "showNote")) {
@@ -1195,10 +1168,8 @@ gint main_url_handler_gecko(const gchar * url)
 			for(int i = 0; i < strlen(passage); i++) {
 				if(passage[i] == '+') passage[i] = ' ';
 			}
-#ifdef DEBUG
-			g_message("stype = %s", stype);
-			g_message("svalue = %s", svalue);
-#endif
+			GS_message(("stype = %s", stype));
+			GS_message(("svalue = %s", svalue));
 			show_note(module, passage, stype, svalue, FALSE);
 		}
 			

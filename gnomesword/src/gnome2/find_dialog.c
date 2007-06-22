@@ -29,7 +29,7 @@
 
 #include "gui/find_dialog.h"
 #include "main/settings.h"
-
+#include "main/sword.h"
 
 typedef struct _find_dialog FIND_DIALOG;
 
@@ -69,9 +69,7 @@ static void dialog_destroy(GtkObject * object, gpointer data)
 {
 	g_free(dialog);
 	dialog = NULL;
-#ifdef DEBUG
-	g_print("\nall done\n");
-#endif
+	GS_print(("\nall done\n"));
 }
 
 

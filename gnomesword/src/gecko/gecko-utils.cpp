@@ -38,6 +38,8 @@
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-utils.h"
 
+#include "main/sword.h"
+
 #define KEY_GNOME_DIR           "/desktop/gnome/interface"
 #define KEY_GNOME_VARIABLE_FONT KEY_GNOME_DIR "/document_font_name"
 #define KEY_GNOME_FIXED_FONT    KEY_GNOME_DIR "/monospace_font_name"
@@ -234,17 +236,13 @@ gecko_init (void)
     	gconf_client = gconf_client_get_default ();
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_VARIABLE_FONT, &err);
 	if(fontname) {
-#ifdef DEBUG
-		g_message("var fontname %s",fontname);
-#endif
+		GS_message(("var fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_VARIABLE, fontname);
 		g_free(fontname);
 	}
     	fontname = gconf_client_get_string (gconf_client, KEY_GNOME_FIXED_FONT, &err);
 	if(fontname) {
-#ifdef DEBUG
-		g_message("fixed fontname %s",fontname);
-#endif
+		GS_message(("fixed fontname %s",fontname));
 		gecko_set_font (GECKO_FONT_FIXED, fontname);
 		g_free(fontname);
 	}

@@ -84,9 +84,7 @@
 void frontend_init(void)
 {
 	guint number_of_pages = 0;
-#ifdef DEBUG	
-	g_print("%s\n", _("Initiating GnomeSword"));
-#endif	
+	GS_print(("%s\n", _("Initiating GnomeSword")));
 	settings.comm_showing = TRUE;
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = main_is_module("Thayer");
@@ -142,9 +140,7 @@ void frontend_display(void)
 	GString *str;
 	gchar *url;
 	extern GList *passage_list;
-#ifdef DEBUG	
-	g_print("%s\n", _("Displaying GnomeSword"));
-#endif
+	GS_print(("%s\n", _("Displaying GnomeSword")));
 	gui_show_main_window();
 	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
@@ -201,9 +197,7 @@ void frontend_display(void)
 	gtk_widget_grab_focus (sidebar.module_list);
 	//main_prayer_list_new("2007");
 	
-#ifdef DEBUG	
-	g_print("%s\n\n", _("done"));
-#endif
+	GS_print(("%s\n\n", _("done")));
 } 
 
 
@@ -281,8 +275,5 @@ void shutdown_frontend(void)
 	g_string_free(navbar_versekey.key,TRUE);
 #endif
 	
-#ifdef DEBUG	
-	g_print("\n%s\n", _("GnomeSword is shutdown"));
-#endif
-
+	GS_print(("\n%s\n", _("GnomeSword is shutdown")));
 }

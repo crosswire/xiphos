@@ -127,9 +127,7 @@ void gui_verselist_to_bookmarks(GList * verses)
 			tmpbuf = list_item->key;
 			g_string_sprintf(str, "%s, %s", tmpbuf,
 					 module_name);
-#ifdef DEBUG
-			g_message("bookmark: %s",str->str);
-#endif
+			GS_message(("bookmark: %s",str->str));
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &iter, &parent);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
@@ -761,7 +759,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	button_two = FALSE;
 
 
-	//g_warning(main_url_encode("test this"));
+	GS_warning((main_url_encode("test this")));
 
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	current_selection = selection;

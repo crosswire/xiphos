@@ -206,9 +206,7 @@ static void set_search_global_option(gchar * option, gboolean choice)
 		on_off = "Off";
 	}
 	mgr->setGlobalOption(option, on_off);
-#ifdef DEBUG
-	g_print("option = %s is %s\n",option,on_off);
-#endif
+	GS_print(("option = %s is %s\n",option,on_off));
 }
 
 
@@ -247,7 +245,7 @@ void main_save_modlist(void)
 		gtk_tree_model_get(model, &iter,
 				   0, &text1, 1, &text2, -1);
 		xml_set_list_item("modlists", "modlist", text1, text2);
-		//g_warning(text2);
+		GS_warning((text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -293,7 +291,7 @@ void main_save_range(void)
 				   0, &text1, 1, &text2, -1);
 
 		xml_set_list_item("ranges", "range", text1, text2);
-		//g_warning(text2);
+		GS_warning((text2));
 		g_free(text1);
 		g_free(text2);
 	} while (gtk_tree_model_iter_next(model, &iter));
@@ -839,9 +837,7 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
 	path = gtk_tree_model_get_path(model,&selected);
 	path_str = gtk_tree_path_to_string(path);
-#ifdef DEBUG
-	g_message("\npath: %s\ntext: %s",path_str,text);
-#endif
+	GS_message(("\npath: %s\ntext: %s",path_str,text));
 	tmp = g_list_nth(list_of_finds,atoi(path_str));
 	tmp = (GList*)tmp->data;
 	add_module_finds(tmp);
@@ -883,9 +879,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
  	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return;
 	gtk_tree_model_get(model, &selected, 0, &text, -1);
-#ifdef DEBUG
-	g_message("\ntext: %s", text);
-#endif
+	GS_message(("\ntext: %s", text));
 	textlen = strlen(text);
 	module = text;
 
@@ -925,10 +919,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 				  text_str, strlen(text_str));
 #endif
 
-
-#ifdef DEBUG
-	g_message("main_finds_verselist_selection_changed: %s %s", module, key);
-#endif
+	GS_message(("main_finds_verselist_selection_changed: %s %s", module, key));
 
 	if (text)
 		g_free(text);
@@ -1361,9 +1352,7 @@ void _clear_find_lists(void)
 		tmp = (GList*) list_of_finds->data;
 		while (tmp) {
 			tmp_buf = (char*) tmp->data;
-#ifdef DEBUG
-			g_message(tmp_buf);
-#endif
+			GS_message((tmp_buf));
 			if (tmp_buf) g_free(tmp_buf);
 			tmp = g_list_next(tmp);
 		}
@@ -1429,9 +1418,7 @@ void main_do_dialog_search(void)
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
 	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
 	   // GTK_TOGGLE_BUTTON(search1.rb_attributes)->active ? -4 : -3;
-#ifdef DEBUG
-	g_message("search_type = %d",search_type);
-#endif
+	GS_message(("search_type = %d",search_type));
 
 	search_params = GTK_TOGGLE_BUTTON
 	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
@@ -1458,9 +1445,7 @@ void main_do_dialog_search(void)
 					"Footnote//body/%s",
 					search_string);
 		}
-#ifdef DEBUG
-		g_message(attribute_search_string);
-#endif
+		GS_message((attribute_search_string));
 	}
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_list)->active) {
 		const gchar *name;
@@ -1490,7 +1475,7 @@ void main_do_dialog_search(void)
 
 		if (search_type == -2 || search_type == -4)
 			search_type = backendSearch->check_for_optimal_search(module);
-		//g_message("search_type = %d",search_type);
+		GS_message(("search_type = %d",search_type));
 		
 		finds = backendSearch->do_module_search(module, 
 					(attribute_search_string)?

@@ -162,9 +162,7 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	// converts encoding from ncr to utf8
 	text = ncr_to_utf8(buf);
 	g_free(buf);
-#ifdef DEBUG
-	g_message(text);
-#endif
+	GS_message((text));
 	main_save_note(ed->module, ed->key, text);
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
 	ed->is_changed = FALSE;
@@ -189,9 +187,7 @@ save_through_plain_persist_stream_cb(GtkWidget * widget, gpointer data)
 	bonobo_stream_client_write(BONOBO_OBJREF(smem), "", 1, &ev);
 
 	text = bonobo_stream_mem_get_buffer(BONOBO_STREAM_MEM(smem));
-#ifdef DEBUG
-	g_message(text);
-#endif
+	GS_message((text));
 	//main_save_note(ed->module, ed->key, text);
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
 	ed->is_changed = FALSE;
@@ -208,9 +204,7 @@ load_through_persist_file(EDITOR * e, const gchar * filename)
 
 	CORBA_exception_init(&ev);
 
-#ifdef DEBUG	
-	g_message(filename);
-#endif
+	GS_message((filename));
 
 	Bonobo_PersistFile_load(e->persist_file_interface, filename, &ev);
 
@@ -438,9 +432,7 @@ static void open_new_document_cb(GtkWidget * widget, gpointer data)
 		load_through_persist_file(e, g_strdup(e->filename));
 		g_free(e->filename);
 		e->filename = NULL;
-#ifdef DEBUG
-		g_message(template);
-#endif
+		GS_message((template));
 	}
 	g_free(template);
 	e->is_changed = TRUE;
@@ -572,12 +564,11 @@ void do_exit(EDITOR * e)
 		e->persist_file_interface = CORBA_OBJECT_NIL;
 	}
 
-#ifdef DEBUG
-	g_message("do_exit");
-	g_message(e->filename);
-	g_message(e->module);
-	g_message(e->key);
-#endif
+	GS_message(("do_exit"));
+	GS_message((e->filename));
+	GS_message((e->module));
+	GS_message((e->key));
+
 	if (e->studypad)
 		settings.studypad_dialog_exist = FALSE;
 	if (e->filename) {
@@ -600,9 +591,7 @@ gboolean editor_close_all(void)
 	EDITOR *e = NULL;
 	
 	tmp = g_list_first(editors_all);
-#ifdef DEBUG
-	g_message("number of editors = %d",g_list_length(tmp));
-#endif
+	GS_message(("number of editors = %d",g_list_length(tmp)));
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
 		if (e->window)
@@ -754,9 +743,7 @@ app_delete_cb(GtkWidget * widget, GdkEvent * event, gpointer data)
 static void size_changed(GtkHTML * html, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
-#ifdef DEBUG
-	g_message("size_changed");
-#endif
+	GS_message(("size_changed"));
 	e->is_changed = TRUE;
 }
 */
@@ -1169,9 +1156,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	editor->control =
 	    BONOBO_WIDGET(bonobo_widget_new_control(CONTROL_ID,
 				      BONOBO_OBJREF(container)));
-#ifdef DEBUG
-	g_message(CONTROL_ID);
-#endif
+	GS_message((CONTROL_ID));
 	if (editor->control == NULL)
 		g_error("Cannot get `%s'.", CONTROL_ID);
 
@@ -1367,9 +1352,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 
 gint load_file(EDITOR * e)
 {
-#ifdef DEBUG
-	g_message("loading: %s\n", e->filename);
-#endif
+	GS_message(("loading: %s\n", e->filename));
 	load_through_persist_file(e, g_strdup(e->filename));
 	return FALSE;
 }
