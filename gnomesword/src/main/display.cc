@@ -274,8 +274,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	//GS_message(((const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
-
-	if (mod_type == BOOK_TYPE)
+	g_message("mod_type: %d",mod_type);
+	if (mod_type == BOOK_TYPE) {
 		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
                              -1,
@@ -284,7 +284,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-	else if (mod_type == DICTIONARY_TYPE)
+		g_message(keytext);
+	} else if (mod_type == DICTIONARY_TYPE)
 		keytext = g_strdup((char*)imodule.KeyText());
 	else
 		keytext = g_convert((char*)imodule.KeyText(),
@@ -341,11 +342,32 @@ char GTKEntryDisp::Display(SWModule &imodule)
 		     : rework /* left as-is */);
 
 	swbuf.append("</font></body></html>");
-	GS_message(("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length()));
+	//GS_message(("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length()));
 #ifdef USE_GTKMOZEMBED
 	
-	
-	if (swbuf.length())
+	if (swbuf.length() > 10000) {
+		gchar *token = NULL;
+		
+		if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<p "))
+			token = "<p ";
+		else if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<br>"))
+			token = "<br>";
+		else if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<br />"))
+			token = "<br />";
+		if(token) {
+			gchar** tmpbuf = g_strsplit(swbuf.c_str(),token,-1);
+			for( int i = 0; i < 200; i++) {
+				if(tmpbuf[i]) {
+					gchar *text = g_strdup_printf("%s%s",token,tmpbuf[i]);
+					gecko_html_write(html,text,strlen(text));
+					g_free(text);
+				} else 
+					break;
+				
+			}
+			g_strfreev(tmpbuf);
+		}
+	} else
 		gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	gecko_html_close(html);
 #else
@@ -1368,11 +1390,34 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 
 #ifdef USE_GTKMOZEMBED
-	if (str->len) {
-		gecko_html_open_stream(html,"text/html");
+	gecko_html_open_stream(html,"text/html");
+	
+	if (str->len > 10000) {
+		gchar *token = NULL;
+		
+		if(g_strstr_len(str->str, str->len,"<p "))
+			token = "<p ";
+		else if(g_strstr_len(str->str, str->len,"<br>"))
+			token = "<br>";
+		else if(g_strstr_len(str->str, str->len,"<br />"))
+			token = "<br />";
+		if(token) {
+			gchar** tmpbuf = g_strsplit(str->str,token,-1);
+			for( int i = 0; i < 200; i++) {
+				if(tmpbuf[i]) {
+					gchar *text = g_strdup_printf("%s%s",token,tmpbuf[i]);
+					gecko_html_write(html,text,strlen(text));
+					g_free(text);
+				} else 
+					break;
+				
+			}
+			g_strfreev(tmpbuf);
+		}
+	} else	if (str->len)	
 		gecko_html_write(html, str->str, str->len);
-		gecko_html_close(html); 
-	}
+	gecko_html_close(html); 
+		
 #else
 	if (str->len)
 		gtk_html_load_from_string(html, str->str, str->len);
