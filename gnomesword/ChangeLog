@@ -1,3 +1,7 @@
+2007-06-11  terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug: 1677234 2.3: Yelper crashes following right-click (maybe)
+
 2007-06-22  karl <charcoal@users.sf.net>
 
 	* aggressive update to get rid of per-usage #ifdef
