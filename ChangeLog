@@ -6,7 +6,7 @@
 
 	* aggressive update to get rid of per-usage #ifdef
 	  around g_message and friends.  now use GS_message
-	  and double-quote the arg list (to make it a single
+	  and double-paren the arg list (to make it a single
 	  arg to the GS_message macros).
 
 2007-06-19  karl <charcoal@users.sf.net>

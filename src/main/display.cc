@@ -274,7 +274,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	//GS_message(((const char *)imodule.getRawEntry()));
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
-	g_message("mod_type: %d",mod_type);
+	GS_message(("mod_type: %d",mod_type));
 	if (mod_type == BOOK_TYPE) {
 		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
@@ -284,7 +284,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-		g_message(keytext);
+		GS_message((keytext));
 	} else if (mod_type == DICTIONARY_TYPE)
 		keytext = g_strdup((char*)imodule.KeyText());
 	else
