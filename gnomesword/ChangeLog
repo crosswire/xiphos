@@ -1,10 +1,7 @@
 2007-06-26  karl <charcoal@users.sf.net>
 
 	* fixed bug 1743785: 2.3: loss of per-module font in <table>
-
-2007-06-25  terry <tbiggs@users.sourceforge.net>
-
-	* fixed bug: 1677234 2.3: Yelper crashes following right-click (maybe)
+	* fixed bug 1685243: 2.3: stuck trying to display SysTheo
 
 2007-06-22  karl <charcoal@users.sf.net>
 
