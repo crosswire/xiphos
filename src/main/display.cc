@@ -345,30 +345,18 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	//GS_message(("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length()));
 #ifdef USE_GTKMOZEMBED
 	
-	if (swbuf.length() > 10000) {
-		gchar *token = NULL;
-		
-		if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<p "))
-			token = "<p ";
-		else if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<br>"))
-			token = "<br>";
-		else if(g_strstr_len(swbuf.c_str(), swbuf.length(),"<br />"))
-			token = "<br />";
-		if(token) {
-			gchar** tmpbuf = g_strsplit(swbuf.c_str(),token,-1);
-			for( int i = 0; i < 200; i++) {
-				if(tmpbuf[i]) {
-					gchar *text = g_strdup_printf("%s%s",token,tmpbuf[i]);
-					gecko_html_write(html,text,strlen(text));
-					g_free(text);
-				} else 
-					break;
-				
-			}
-			g_strfreev(tmpbuf);
-		}
-	} else
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
+	// gecko html widgets are uptight about being handed
+	// huge quantities of text -- producer/consumer problem,
+	// and we mustn't overload the receiver.  10k chunks.
+
+	int len = swbuf.length(), offset = 0, write_size;
+
+	while (len > 0) {
+		write_size = min(10000, len);
+		gecko_html_write(html, swbuf.c_str()+offset, write_size);
+		offset += write_size;
+		len -= write_size;
+	}
 	gecko_html_close(html);
 #else
 	gboolean was_editable = gtk_html_get_editable(html);
@@ -1398,30 +1386,18 @@ char DialogEntryDisp::Display(SWModule &imodule)
 #ifdef USE_GTKMOZEMBED
 	gecko_html_open_stream(html,"text/html");
 	
-	if (str->len > 10000) {
-		gchar *token = NULL;
-		
-		if(g_strstr_len(str->str, str->len,"<p "))
-			token = "<p ";
-		else if(g_strstr_len(str->str, str->len,"<br>"))
-			token = "<br>";
-		else if(g_strstr_len(str->str, str->len,"<br />"))
-			token = "<br />";
-		if(token) {
-			gchar** tmpbuf = g_strsplit(str->str,token,-1);
-			for( int i = 0; i < 200; i++) {
-				if(tmpbuf[i]) {
-					gchar *text = g_strdup_printf("%s%s",token,tmpbuf[i]);
-					gecko_html_write(html,text,strlen(text));
-					g_free(text);
-				} else 
-					break;
-				
-			}
-			g_strfreev(tmpbuf);
-		}
-	} else	if (str->len)	
-		gecko_html_write(html, str->str, str->len);
+	// gecko html widgets are uptight about being handed
+	// huge quantities of text -- producer/consumer problem,
+	// and we mustn't overload the receiver.  10k chunks.
+
+	int len = str->len, offset = 0, write_size;
+
+	while (len > 0) {
+		write_size = min(10000, len);
+		gecko_html_write(html, str->str+offset, write_size);
+		offset += write_size;
+		len -= write_size;
+	}
 	gecko_html_close(html); 
 		
 #else
