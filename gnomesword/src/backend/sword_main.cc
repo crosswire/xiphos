@@ -30,10 +30,8 @@
 //#ifdef USE_GTKMOZEMBED 
 //#include "backend/gs_markupfiltmgr.h"
 //#endif
-//#ifdef USE_SWORD_SVN
 #include <markupfiltmgr.h>
 #include <swlocale.h>
-//#endif
 
 #include <gnome.h>
 #include <versekey.h>
@@ -68,13 +66,8 @@ BackEnd::BackEnd() {
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 
 #else	
-//#ifdef USE_SWORD_SVN
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-/*#else
-	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-#endif*/
 #endif
 
 	
