@@ -154,8 +154,5 @@
 /* Define if you want to use gtkmozembed */
 #undef USE_GTKMOZEMBED
 
-/* Define if you want to use svn sword */
-#undef USE_SWORD_SVN
-
 /* Version number of package */
 #undef VERSION
