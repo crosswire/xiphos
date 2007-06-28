@@ -31,10 +31,8 @@
 //#ifdef USE_GTKMOZEMBED 
 //#include "backend/gs_markupfiltmgr.h"
 //#endif
-//#ifdef USE_SWORD_SVN
 #include <markupfiltmgr.h>
 #include <swlocale.h>
-//#endif
 
 #include <gnome.h>
 #include <versekey.h>
