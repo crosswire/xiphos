@@ -1,3 +1,8 @@
+2007-06-28  karl <charcoal@users.sf.net>
+
+	* bug 1729936: unused configure flags should go away
+	  (only --enable-sword_svn was removed, the rest are needed.)
+
 2007-06-22  karl <charcoal@users.sf.net>
 
 	* aggressive update to get rid of per-usage #ifdef
