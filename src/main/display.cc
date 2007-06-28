@@ -461,17 +461,18 @@ block_dump(SWBuf& rendered,
 // directives to put each ref immediately below the word it annotates.
 // this keeps the text linearly readable while providing annotation.
 //
-const char *
-block_render(const char *text)
+// secondary interface.
+// text destination is provided, ready to go.
+// this means we are able to recurse when needed.
+void
+block_render_secondary(const char *text, SWBuf& rendered)
 {
 	const char *word    = NULL,
 		   *strongs = NULL,
 		   *morph   = NULL;
 	int bracket;
-	static SWBuf rendered;
 	const char *s, *t;
 
-	rendered = "";
 	for (s = text; *s; ++s) {
 		switch (*s) {
 		case ' ':
@@ -496,9 +497,28 @@ block_render(const char *text)
 					GS_warning(("No %s in %s\n", end, s));
 					break;
                                 }
-				t += 4;
-				word = g_strndup(s, t-s);
-                                s = t-1;
+
+				// nasb eph 5:31: whole verse is an italicized
+				// quotation of gen 2:24...containing strongs.
+				// in event of font switch, output bare switch
+				// controls but recurse on content within.
+				if ((*(s+1) == 'a') || (*(s+1) == 'A')) {
+					// <a href> anchor -- uninteresting.
+					t += 4;
+					word = g_strndup(s, t-s);
+					s = t-1;
+				} else {
+					// font switch nightmare.
+					word = g_strndup(s, 3);
+					rendered += word;
+					g_free((char *)word);
+					word = g_strndup(s+3, t-(s+3));
+					block_render_secondary(word, rendered);
+					g_free((char *)word);
+					word = NULL;
+					rendered += end;
+					s = t+3;
+				}
                                 break;
 			} else if (!strncmp(s+1, "small>", 6)) {
 				// strongs and morph are bounded by "<small>".
@@ -570,6 +590,17 @@ block_render(const char *text)
 	}
 	if (word || strongs || morph)
 		block_dump(rendered, &word, &strongs, &morph);
+}
+
+// entry interface.
+// initializes for secondary interface.
+const char *
+block_render(const char *text)
+{
+	static SWBuf rendered;
+
+	rendered = "";
+	block_render_secondary(text, rendered);
 	return rendered.c_str();
 }
 
