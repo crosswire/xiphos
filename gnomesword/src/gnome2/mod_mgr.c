@@ -94,8 +94,8 @@ static GtkWidget *button_cancel;
 static GtkWidget *button1;
 static GtkWidget *button2;
 static GtkWidget *button3;
-static GtkWidget *button4;
-static GtkWidget *button5;
+static GtkWidget *button_arch;
+static GtkWidget *button_idx;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -284,8 +284,8 @@ static void remove_install_modules(GList * modules, int activity)
 	gtk_widget_hide(button1);
 	gtk_widget_hide(button2);
 	gtk_widget_hide(button3);
-	gtk_widget_hide(button4);
-	gtk_widget_hide(button5);
+	gtk_widget_hide(button_arch);
+	gtk_widget_hide(button_idx);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -455,12 +455,12 @@ static void remove_install_modules(GList * modules, int activity)
 		case 3:
 			if(need_update) gtk_widget_show(button1);
 			gtk_widget_show(button2);
-			gtk_widget_show(button5);
+			gtk_widget_show(button_idx);
 		break;
 		case 4:
 			gtk_widget_show(button3);
-			gtk_widget_show(button4);
-			gtk_widget_show(button5);
+			gtk_widget_show(button_arch);
+			gtk_widget_show(button_idx);
 		break;		
 	}
 }
@@ -981,8 +981,8 @@ static void response_refresh(void)
 		gtk_widget_hide(button1);
 		gtk_widget_show(button2);
 		gtk_widget_hide(button3);
-		gtk_widget_hide(button4);
-		gtk_widget_hide(button5);
+		gtk_widget_hide(button_arch);
+		gtk_widget_hide(button_idx);
 	}
 	g_free(buf);
 }
@@ -2229,15 +2229,15 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 					gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
-				gtk_widget_hide(button4);
-				gtk_widget_hide(button5);
+				gtk_widget_hide(button_arch);
+				gtk_widget_hide(button_idx);
 				break;
 			case 2:
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
-				gtk_widget_hide(button4);
-				gtk_widget_hide(button5);
+				gtk_widget_hide(button_arch);
+				gtk_widget_hide(button_idx);
 				break;
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2247,13 +2247,13 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 					gtk_widget_hide(button1);
 				gtk_widget_show(button2);
 				gtk_widget_hide(button3);
-				gtk_widget_hide(button4);
-				gtk_widget_show(button5);
+				gtk_widget_hide(button_arch);
+				gtk_widget_show(button_idx);
 				break;
 			case 4:
 				gtk_widget_show(button3);
-				gtk_widget_show(button4);
-				gtk_widget_show(button5);
+				gtk_widget_show(button_arch);
+				gtk_widget_show(button_idx);
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				break;
@@ -2389,18 +2389,18 @@ void setup_dialog_action_area(GtkDialog * dialog)
 	//GTK_WIDGET_SET_FLAGS (button3, GTK_CAN_DEFAULT);
 
 /* archive */	
-	button4 =  gtk_button_new_from_stock ("gtk-save");
-	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button4,FALSE, FALSE,0);
-	g_signal_connect(button4, "clicked", G_CALLBACK(on_archive_clicked), NULL);
-	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button4, 304);
-	//GTK_WIDGET_SET_FLAGS (button4, GTK_CAN_DEFAULT);
+	button_arch =  gtk_button_new_from_stock ("gtk-save");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_arch,FALSE, FALSE,0);
+	g_signal_connect(button_arch, "clicked", G_CALLBACK(on_archive_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_arch, 304);
+	//GTK_WIDGET_SET_FLAGS (button_arch, GTK_CAN_DEFAULT);
 
 /* index */	
-	button5 =  gtk_button_new_from_stock ("gtk-save-as");
-	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button5,FALSE, FALSE,0);
-	g_signal_connect(button5, "clicked", G_CALLBACK(on_index_clicked), NULL);
-	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button5, 304);
-	//GTK_WIDGET_SET_FLAGS (button5, GTK_CAN_DEFAULT);
+	button_idx =  gtk_button_new_from_stock ("gtk-save-as");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_idx,FALSE, FALSE,0);
+	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_idx, 304);
+	//GTK_WIDGET_SET_FLAGS (button_idx, GTK_CAN_DEFAULT);
 
 /* cancel */	
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
@@ -2513,8 +2513,8 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 		button1 = glade_xml_get_widget (gxml, "button2"); /* refresh */
 		button2 = glade_xml_get_widget (gxml, "button3"); /* install */
 		button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
-		button4 = glade_xml_get_widget (gxml, "button13"); /* archive */
-		button5 = glade_xml_get_widget (gxml, "button14"); /* index */
+		button_arch = glade_xml_get_widget (gxml, "button13"); /* archive */
+		button_idx = glade_xml_get_widget (gxml, "button14"); /* index */
 	}
 		
 	g_signal_connect(dialog, "response",
