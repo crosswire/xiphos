@@ -395,6 +395,43 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 	}
 }
 
+//
+// Display content at 0:0 and n:0.
+//
+void getZeroContent(SWModule &imodule, uint16_t cache_flags, SWBuf &swbuf, SWModule *mod)
+{
+	const char *ModuleName = imodule.Name();
+
+	mod->setKey(imodule.getKey());
+	VerseKey *key = (VerseKey *)(SWKey *)*mod;
+	int chapter = key->Chapter();
+
+	char oldAutoNorm = key->AutoNormalize();
+	key->AutoNormalize(0);
+
+	for (int i = 0; i < 2; ++i) {
+		// Get chapter 0 iff we're in chapter 1.
+		if ((i == 0) && (chapter != 1))
+			continue;
+
+		key->Chapter(i*chapter);
+		key->Verse(0);
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		if (!cVerse.CacheIsValid(cache_flags))
+		    cVerse.SetText((const char *)*mod, cache_flags);
+
+		swbuf.appendFormatted("%s", cVerse.GetText());
+	}
+
+	key->AutoNormalize(oldAutoNorm);
+}
+
 void GTKChapDisp::getVerseBefore(SWModule &imodule, uint16_t cache_flags)
 {
 	gsize bytes_read;
@@ -460,6 +497,8 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule, uint16_t cache_flags)
 				"%s<br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 					cVerse.GetText(), _("Chapter"), chapter);
 	}
+
+	getZeroContent(imodule, cache_flags, swbuf, mod);
 }
 
 void GTKChapDisp::getVerseAfter(SWModule &imodule, uint16_t cache_flags)
