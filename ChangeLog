@@ -1,5 +1,6 @@
 2007-06-28  karl <charcoal@users.sf.net>
 
+	* bug 1743785: loss of per-module font in <table>
 	* bug 1729936: unused configure flags should go away
 	  (only --enable-sword_svn was removed, the rest are needed.)
 
