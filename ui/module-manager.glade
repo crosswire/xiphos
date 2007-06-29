@@ -159,6 +159,18 @@
 	  </child>
 
 	  <child>
+	    <widget class="GtkButton" id="button14">
+	      <property name="can_default">True</property>
+	      <property name="can_focus">True</property>
+	      <property name="label" translatable="yes">Index</property>
+	      <property name="use_stock">True</property>
+	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
+	      <property name="response_id">305</property>
+	    </widget>
+	  </child>
+
+	  <child>
 	    <widget class="GtkButton" id="button12">
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
