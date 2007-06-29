@@ -1352,6 +1352,52 @@ int main_is_module(char * mod_name)
 
 /******************************************************************************
  * Name
+ *   main_has_search_framework
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   int main_has_search_framework(char * mod_name)
+ *
+ * Description
+ *    tells us whether CLucene is available
+ *
+ * Return value
+ *   int (boolean)
+ */
+
+int main_has_search_framework(char *mod_name)
+{
+	SWMgr *mgr = backend->get_main_mgr();
+	SWModule *mod = mgr->Modules.find(mod_name)->second;
+	return mod->hasSearchFramework();
+}
+
+/******************************************************************************
+ * Name
+ *   main_optimal_search
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   int main_optimal_search(char * mod_name)
+ *
+ * Description
+ *    tells us whether a CLucene index exists
+ *
+ * Return value
+ *   int (boolean)
+ */
+
+int main_optimal_search(char *mod_name)
+{
+	SWMgr *mgr = backend->get_main_mgr();
+	SWModule *mod = mgr->Modules.find(mod_name)->second;
+	return mod->isSearchOptimallySupported("God", -4, 0, 0);
+}
+
+/******************************************************************************
+ * Name
  *  get_mod_about_info
  *
  * Synopsis
@@ -1418,9 +1464,7 @@ char *main_get_mod_config_file(const char * module_name,
 int main_is_mod_rtol(const char * module_name)
 {
 	char *direction = backend->get_config_entry((char*)module_name, "Direction");
-	if (direction && !strcmp(direction, "RtoL"))
-		return TRUE;
-	return FALSE;
+	return (direction && !strcmp(direction, "RtoL"));
 }
 
 /******************************************************************************
@@ -1441,13 +1485,8 @@ int main_is_mod_rtol(const char * module_name)
 
 int main_has_cipher_tag(char *mod_name)
 {
-	gchar *tmpbuf = backend->get_config_entry(mod_name, "CipherKey");
-	if (tmpbuf) {
-		return true;
-	}
-	return false;
+	return (backend->get_config_entry(mod_name, "CipherKey") != NULL);
 }
-
 
 
 /******************************************************************************
