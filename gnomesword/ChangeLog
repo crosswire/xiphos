@@ -2,6 +2,7 @@
 
 	* bug 1729936: unused configure flags should go away
 	  (only --enable-sword_svn was removed, the rest are needed.)
+	* feat.req 1703135: display 0:0 & n:0
 
 2007-06-27  karl <charcoal@users.sf.net>
 
