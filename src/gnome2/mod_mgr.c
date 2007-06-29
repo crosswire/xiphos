@@ -274,9 +274,8 @@ static void remove_install_modules(GList * modules, int activity)
 					 ? _("Preparing to archive")
 					 : _("Preparing to index")))));
 	gtk_widget_show(progressbar_refresh);	
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}
 	g_free(yes_no_dialog);
 	g_string_free(dialog_text, TRUE);
 	gtk_widget_queue_draw(dialog);
@@ -287,9 +286,8 @@ static void remove_install_modules(GList * modules, int activity)
 	gtk_widget_hide(button_arch);
 	gtk_widget_hide(button_idx);
 	gtk_widget_show(button_cancel);
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}
 
 	tmp = modules;
 	while (tmp) {
@@ -359,6 +357,8 @@ static void remove_install_modules(GList * modules, int activity)
 				g_string_append(cmd, _("\nArchive in "));
 				g_string_append(cmd, zipfile);
 				gui_generic_warning(cmd->str);
+				while (gtk_events_pending())
+					gtk_main_iteration();
 			}
 			g_free(zipfile);
 			g_free(dir);
@@ -390,9 +390,8 @@ static void remove_install_modules(GList * modules, int activity)
 			// annihilate cache of removed module.
 			ModuleCacheErase((const char *)buf);
 
-			while (gtk_events_pending()) {
+			while (gtk_events_pending())
 				gtk_main_iteration();
-			}
 		}
 
 		if (activity == INSTALL) {
@@ -424,6 +423,8 @@ static void remove_install_modules(GList * modules, int activity)
 					g_string_append(cmd, output);
 				pclose(result);
 				gui_generic_warning(cmd->str);
+				while (gtk_events_pending())
+					gtk_main_iteration();
 			}
 			g_string_free(cmd, TRUE);
 			failed = 0;
@@ -799,9 +800,8 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	MOD_MGR *info;
 
 	mod_mgr_shut_down();
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}
 	mod_mgr_init(destination);
 
 	if (install) {
@@ -923,14 +923,12 @@ static void remove_install_wrapper(int activity)
 {
 	GList *modules = NULL;
 	modules = get_list_mods_to_remove_install(activity);
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}
 	remove_install_modules(modules, activity);
 	load_module_tree(GTK_TREE_VIEW(treeview), (activity == INSTALL));
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	} 	
 }
 
 /******************************************************************************
@@ -958,9 +956,8 @@ static void response_refresh(void)
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);	
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}	
 	failed = mod_mgr_refresh_remote_source(remote_source);
 	
 	/*failed =
@@ -1847,9 +1844,8 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 	}
 	
 	mod_mgr_shut_down();
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	} 
 	if(have_changes && need_update) {
 		main_update_module_lists();
 		main_load_module_tree(sidebar.module_list);
@@ -1885,9 +1881,8 @@ void on_index_clicked(GtkButton * button, gpointer  user_data)
 void on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
 	mod_mgr_terminate();
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}
 }
 
 
@@ -1914,9 +1909,8 @@ void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_dat
 	switch (response_id) {
 	case GTK_RESPONSE_CANCEL:
 		mod_mgr_terminate();
-		while (gtk_events_pending()) {
+		while (gtk_events_pending())
 			gtk_main_iteration();
-		}
 		break;
 	case GTK_RESPONSE_REFRESH:
 		response_refresh();
@@ -2106,9 +2100,8 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	g_free(dialog);
 	g_string_free(str, TRUE);
 	save_sources();	
-	while (gtk_events_pending()) {
+	while (gtk_events_pending())
 		gtk_main_iteration();
-	}	
 	mod_mgr_shut_down();
 	mod_mgr_init(destination);
 	
