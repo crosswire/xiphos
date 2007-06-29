@@ -1,3 +1,7 @@
+2007-06-29  karl <charcoal@users.sf.net>
+
+	* work on feat.req 1711360 lucene indexing.
+
 2007-06-28  karl <charcoal@users.sf.net>
 
 	* bug 1729936: unused configure flags should go away

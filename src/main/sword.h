@@ -98,6 +98,8 @@ const char *main_get_module_language(const char *module_name);
 int main_check_for_global_option(char * mod_name, char * option);
 int main_has_cipher_tag(char *mod_name);
 int main_is_module(char * mod_name);
+int main_has_search_framework(char *mod_name);
+int main_optimal_search(char *mod_name);
 char *main_get_mod_config_entry(const char * module_name,
 				      const char * entry);
 char *main_get_mod_config_file(const char * module_name,
