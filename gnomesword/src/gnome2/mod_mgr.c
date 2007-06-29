@@ -53,16 +53,20 @@
 #define GTK_RESPONSE_REMOVE  302
 #define GTK_RESPONSE_INSTALL 303
 #define GTK_RESPONSE_ARCHIVE 304
+#define GTK_RESPONSE_FASTMOD 305
+/* see these codes' use in ui/module-manager.glade. */
 
 enum {
 	REMOVE  = 0,
 	INSTALL = 1,
 	ARCHIVE = 2,
+	FASTMOD = 3,
 };
 
 enum {
 	COLUMN_NAME,
 	COLUMN_INSTALLED,
+	COLUMN_FASTREADY,
 	COLUMN_LOCKED,
 	COLUMN_FIXED,
 	COLUMN_OLD_VERSION,
@@ -91,6 +95,7 @@ static GtkWidget *button1;
 static GtkWidget *button2;
 static GtkWidget *button3;
 static GtkWidget *button4;
+static GtkWidget *button5;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -120,6 +125,8 @@ static gboolean need_update;
 static gint current_page;
 static gint response;
 static GdkPixbuf *INSTALLED;
+static GdkPixbuf *FASTICON;
+static GdkPixbuf *NO_INDEX;
 static GdkPixbuf *LOCKED;
 static GdkPixbuf *REFRESH;
 static GdkPixbuf *BLANK;
@@ -150,6 +157,11 @@ static void create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
+	FASTICON = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+					    "/dlg-un-16.png", NULL);
+	NO_INDEX = gtk_widget_render_icon(dialog,
+					  GTK_STOCK_CANCEL,
+					  GTK_ICON_SIZE_MENU, NULL);
 	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					  "/epiphany-secure.png", NULL);
 	REFRESH = gtk_widget_render_icon(dialog,
@@ -231,7 +243,9 @@ static void remove_install_modules(GList * modules, int activity)
 			 ? _("Install these modules:")
 			 : ((activity == REMOVE)
 			    ? _("Remove these modules:")
-			    : _("Archive these modules:"))),
+			    : ((activity == ARCHIVE)
+			       ? _("Archive these modules:")
+			       : _("Build fast-search index for these\nmodules (may take minutes/module):")))),
 			mods->str);
 
 	yes_no_dialog->label_top = dialog_text->str;
@@ -256,7 +270,9 @@ static void remove_install_modules(GList * modules, int activity)
 				   ? _("Preparing to install")
 				   : ((activity == REMOVE)
 				      ? _("Preparing to remove")
-				      : _("Preparing to archive"))));
+				      : ((activity == ARCHIVE)
+					 ? _("Preparing to archive")
+					 : _("Preparing to index")))));
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -269,6 +285,7 @@ static void remove_install_modules(GList * modules, int activity)
 	gtk_widget_hide(button2);
 	gtk_widget_hide(button3);
 	gtk_widget_hide(button4);
+	gtk_widget_hide(button5);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
@@ -283,7 +300,9 @@ static void remove_install_modules(GList * modules, int activity)
 				 ? _("Installing")
 				 : ((activity == REMOVE)
 				    ? _("Removing")
-				    : _("Archiving"))),
+				    : ((activity == ARCHIVE)
+				       ? _("Archiving")
+				       : _("Indexing")))),
 				buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
@@ -385,6 +404,31 @@ static void remove_install_modules(GList * modules, int activity)
 				failed =
 				    mod_mgr_remote_install(source, buf);
 		}
+
+		if (activity == FASTMOD) {
+			GString *cmd = g_string_new(NULL);
+			FILE *result;
+
+			GS_print(("index %s\n", buf));
+			g_string_printf(cmd, "mkfastmod '%s' 2>&1", buf);
+			
+			if ((result = popen(cmd->str, "r")) == NULL) {
+				gui_generic_warning
+				    (_("GnomeSword could not execute indexer"));
+			} else {
+				gchar output[258];
+				g_string_truncate(cmd, 0);
+				g_string_append(cmd, buf);
+				g_string_append(cmd, _(" indexer result:\n\n"));
+				while (fgets(output, 256, result) != NULL)
+					g_string_append(cmd, output);
+				pclose(result);
+				gui_generic_warning(cmd->str);
+			}
+			g_string_free(cmd, TRUE);
+			failed = 0;
+		}
+
 		g_free(tmp->data);
 		tmp = g_list_next(tmp);
 	}
@@ -396,7 +440,9 @@ static void remove_install_modules(GList * modules, int activity)
 				 ? _("Install")
 				 : ((activity == REMOVE)
 				    ? _("Remove")
-				    : _("Archive"))));
+				    : ((activity == ARCHIVE)
+				       ? _("Archive")
+				       : _("Index")))));
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
@@ -409,10 +455,12 @@ static void remove_install_modules(GList * modules, int activity)
 		case 3:
 			if(need_update) gtk_widget_show(button1);
 			gtk_widget_show(button2);
+			gtk_widget_show(button5);
 		break;
 		case 4:
 			gtk_widget_show(button3);
 			gtk_widget_show(button4);
+			gtk_widget_show(button5);
 		break;		
 	}
 }
@@ -466,12 +514,12 @@ static GList *parse_treeview(GList * list, GtkTreeModel * model,
 
 /******************************************************************************
  * Name
- *   get_list_mods_to_install
+ *   get_list_mods_to_remove_install
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void get_list_mods_to_install(void)
+ *   void get_list_mods_to_remove_install(void)
  *
  * Description
  *   
@@ -546,6 +594,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GtkTreeIter child_iter;
 	gboolean valid;
 	GdkPixbuf *installed;
+	GdkPixbuf *fasticon;
 	GdkPixbuf *locked;
 	GdkPixbuf *refresh;
 	gchar *description = NULL;
@@ -597,11 +646,21 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 			else
 				refresh = BLANK;
 
+			if (info->installed &&
+			    main_has_search_framework(info->name)) {
+				if (main_optimal_search(info->name))
+					fasticon = FASTICON;
+				else
+					fasticon = NO_INDEX;
+			} else
+				fasticon = BLANK;
+
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 					   COLUMN_NAME, info->name,
 					   COLUMN_INSTALLED, installed,
+					   COLUMN_FASTREADY, fasticon,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
 					   COLUMN_OLD_VERSION,
@@ -854,7 +913,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
  *    void remove_install_wrapper(GList * modules)
  *
  * Description
- *   generalization of install/remove/archive methodology.
+ *   generalization of install/remove/archive/index methodology.
  *
  * Return value
  *   void
@@ -923,6 +982,7 @@ static void response_refresh(void)
 		gtk_widget_show(button2);
 		gtk_widget_hide(button3);
 		gtk_widget_hide(button4);
+		gtk_widget_hide(button5);
 	}
 	g_free(buf);
 }
@@ -1049,6 +1109,18 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "pixbuf", COLUMN_INSTALLED,
+					    NULL);
+	gtk_tree_view_append_column(treeview, column);
+
+	column = gtk_tree_view_column_new();
+	image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
+					"/dlg-un-16.png");
+	gtk_widget_show(image);
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+	gtk_tree_view_column_set_widget(column, image);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "pixbuf", COLUMN_FASTREADY,
 					    NULL);
 	gtk_tree_view_append_column(treeview, column);
 
@@ -1308,6 +1380,7 @@ static GtkTreeModel *create_model(void)
 	/* create list store */
 	store = gtk_tree_store_new(NUM_COLUMNS,
 				   G_TYPE_STRING,
+				   GDK_TYPE_PIXBUF,
 				   GDK_TYPE_PIXBUF,
 				   GDK_TYPE_PIXBUF,
 				   G_TYPE_BOOLEAN,
@@ -1804,6 +1877,11 @@ void on_archive_clicked(GtkButton * button, gpointer  user_data)
 	remove_install_wrapper(ARCHIVE);
 }
 
+void on_index_clicked(GtkButton * button, gpointer  user_data)
+{
+	remove_install_wrapper(FASTMOD);
+}
+
 void on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
 	mod_mgr_terminate();
@@ -1823,11 +1901,7 @@ void on_cancel_clicked(GtkButton * button, gpointer  user_data)
  *   void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data)
  *
  * Description
- *   these are local defines
- *   GTK_RESPONSE_REFRESH = 301
- *   GTK_RESPONSE_REMOVE  = 302
- *   GTK_RESPONSE_INSTALL = 303
- *   GTK_RESPONSE_ARCHIVE = 304
+ *   these are local defines at the top of this file.
  *
  * Return value
  *   void
@@ -1858,6 +1932,9 @@ void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_dat
 		break;
 	case GTK_RESPONSE_ARCHIVE:
 		remove_install_wrapper(ARCHIVE);
+		break;
+	case GTK_RESPONSE_FASTMOD:
+		remove_install_wrapper(FASTMOD);
 		break;
 	}
 }
@@ -2153,12 +2230,14 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button4);
+				gtk_widget_hide(button5);
 				break;
 			case 2:
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button4);
+				gtk_widget_hide(button5);
 				break;
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2169,10 +2248,12 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_show(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button4);
+				gtk_widget_show(button5);
 				break;
 			case 4:
 				gtk_widget_show(button3);
 				gtk_widget_show(button4);
+				gtk_widget_show(button5);
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				break;
@@ -2310,9 +2391,16 @@ void setup_dialog_action_area(GtkDialog * dialog)
 /* archive */	
 	button4 =  gtk_button_new_from_stock ("gtk-save");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button4,FALSE, FALSE,0);
-	g_signal_connect(button3, "clicked", G_CALLBACK(on_archive_clicked), NULL);
+	g_signal_connect(button4, "clicked", G_CALLBACK(on_archive_clicked), NULL);
 	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button4, 304);
 	//GTK_WIDGET_SET_FLAGS (button4, GTK_CAN_DEFAULT);
+
+/* index */	
+	button5 =  gtk_button_new_from_stock ("gtk-save-as");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button5,FALSE, FALSE,0);
+	g_signal_connect(button5, "clicked", G_CALLBACK(on_index_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button5, 304);
+	//GTK_WIDGET_SET_FLAGS (button5, GTK_CAN_DEFAULT);
 
 /* cancel */	
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
@@ -2426,6 +2514,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 		button2 = glade_xml_get_widget (gxml, "button3"); /* install */
 		button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
 		button4 = glade_xml_get_widget (gxml, "button13"); /* archive */
+		button5 = glade_xml_get_widget (gxml, "button14"); /* index */
 	}
 		
 	g_signal_connect(dialog, "response",
