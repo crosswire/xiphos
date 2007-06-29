@@ -800,8 +800,14 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
-			swbuf.appendFormatted("<table bgcolor=\"%s\"><tr><td>",
-					      settings.highlight_bg);
+			swbuf.appendFormatted(
+			    "<table bgcolor=\"%s\"><tr><td>"
+			    "<font face=\"%s\" size=\"%+d\">",
+			    settings.highlight_bg,
+			    ((mf->old_font) ? mf->old_font : ""),
+			    ((mf->old_font_size)
+			     ? atoi(mf->old_font_size) + settings.base_font_size
+			     : settings.base_font_size));
 		
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
@@ -875,7 +881,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
-			swbuf.appendFormatted("</td></tr></table>");
+			swbuf.appendFormatted("</font></td></tr></table>");
 
 #ifdef USE_GTKMOZEMBED
 		gtk_moz_embed_append_data(html, swbuf.c_str(), swbuf.length());
@@ -1228,8 +1234,14 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight) {
-			buf = g_strdup_printf("<table bgcolor=\"%s\"><tr><td>",
-					      settings.highlight_bg);
+			buf = g_strdup_printf(
+			    "<table bgcolor=\"%s\"><tr><td>"
+			    "<font face=\"%s\" size=\"%+d\">",
+			    settings.highlight_bg,
+			    ((mf->old_font) ? mf->old_font : ""),
+			    ((mf->old_font_size)
+			     ? atoi(mf->old_font_size) + settings.base_font_size
+			     : settings.base_font_size));
 			str = g_string_append(str, buf);
 			g_free(buf);
 		}
@@ -1310,17 +1322,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 			}
 		} else {
 			if (strstr(buf, "<!P>") == NULL)
-				buf2 = g_strdup_printf(" %s", "</font>");
+				buf2 = g_strdup(" ");
 			else
-				buf2 = g_strdup_printf(" %s", "</font><p>");
+				buf2 = g_strdup_printf(" %s", "<p>");
 		}
 		str = g_string_append(str, buf2);
-		g_free(buf);
 		g_free(buf2);
+		g_free(buf);
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
-		    str = g_string_append(str, ("</td></tr></table>"));
+		    str = g_string_append(str, ("</font></td></tr></table>"));
 	}
 	buf = g_strdup_printf("%s", "</font></body></html>");
 	str = g_string_append(str, buf);
