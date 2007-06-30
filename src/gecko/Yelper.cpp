@@ -335,8 +335,9 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
-		GS_message(("pane: %d",pane));
-	//main_clear_viewer();
+	GS_message(("pane: %d",pane));
+	main_clear_viewer();
+	/*
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
 	if (NS_FAILED(result) || !nsEvent) {
 		
@@ -395,7 +396,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 				g_free(tmp);
 			}
 		}
-	}
+	}*/
 	return FALSE;	
 }
 
