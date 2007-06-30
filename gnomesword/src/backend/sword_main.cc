@@ -1230,7 +1230,6 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	search_mod->createSearchFramework(main_index_percent_update,
 					(void *) &progressunits);
 	return 1;
-	
 }
 
 int BackEnd::check_for_optimal_search(char * module_name) {
