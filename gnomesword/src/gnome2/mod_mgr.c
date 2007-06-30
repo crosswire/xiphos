@@ -405,7 +405,11 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == FASTMOD) {
-			GString *cmd = g_string_new(NULL);
+			if(main_module_mgr_index_mod(buf))
+				failed = 0;
+			else
+				failed = 1;
+			/*GString *cmd = g_string_new(NULL);
 			FILE *result;
 
 			GS_print(("index %s\n", buf));
@@ -427,7 +431,7 @@ static void remove_install_modules(GList * modules, int activity)
 					gtk_main_iteration();
 			}
 			g_string_free(cmd, TRUE);
-			failed = 0;
+			failed = 0;*/
 		}
 
 		g_free(tmp->data);
