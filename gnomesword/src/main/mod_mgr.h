@@ -54,7 +54,8 @@ struct  _mms {
 	const char *source;
 	const char *directory;
 };
-
+int main_module_mgr_index_mod(char * module_name);
+void main_index_percent_update(char percent, void *userData);
 char *main_module_mgr_set_sword_locale(const char *sys_locale);
 char *main_module_mgr_get_path_to_mods(void);
 void main_update_module_lists(void);
