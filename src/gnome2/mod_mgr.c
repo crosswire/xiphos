@@ -1334,8 +1334,7 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_set(model, &iter, 0, "SWORD", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Sources"), 1, 1,
-			   -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Sources"), 1, 1, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, _("Configure"), 1, 2, -1);
 
@@ -1343,9 +1342,9 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Modules"), -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Install"), 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Install/Update"), 1, 3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Remove/Archive"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Maintenance"), 1, 4, -1);
 
 	return GTK_TREE_MODEL(model);
 }
