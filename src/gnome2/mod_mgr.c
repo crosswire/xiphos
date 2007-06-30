@@ -1334,18 +1334,17 @@ static GtkTreeModel *create_model_to_first(void)
 	gtk_tree_store_set(model, &iter, 0, "SWORD", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Configure"), 1, 1,
-			   -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Sources"), 1, 1, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Sources"), 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Configure"), 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, _("Modules"), -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Install"), 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Install/Update"), 1, 3, -1);
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Remove/Archive"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Maintenance"), 1, 4, -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -2215,18 +2214,18 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 						      (notebook1), sel);
 			switch (sel) {
 			case 1:
-				if (GTK_TOGGLE_BUTTON(radiobutton2)->
-				    active)
-					gtk_widget_show(button1);
-				else
-					gtk_widget_hide(button1);
+				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
 				break;
 			case 2:
-				gtk_widget_hide(button1);
+				if (GTK_TOGGLE_BUTTON(radiobutton2)->
+				    active)
+					gtk_widget_show(button1);
+				else
+					gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button_arch);
