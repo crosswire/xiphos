@@ -174,14 +174,14 @@ static void html_link_message(GtkMozEmbed * embed)
 static 
 gint html_dom_mouse_over(GtkMozEmbed * embed, gpointer dom_event)
 {
-/*	GeckoHtml *html = GECKO_HTML(embed);
+	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
 	return html->priv->yelper->ProcessMouseOver(dom_event, 
 						    priv->pane,
 						    priv->is_dialog,
-						    priv->dialog);*/
-	return 0;
+						    priv->dialog);
 }
+
 
 static
 gint html_dom_mouse_out(GtkMozEmbed * embed, gpointer dom_event)
