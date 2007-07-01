@@ -136,6 +136,8 @@ static gboolean first_time_user = FALSE;
 
 GladeXML *gxml;
 
+static void load_module_tree(GtkTreeView * treeview, gboolean install);
+
 /******************************************************************************
  * Name
  *   create_pixbufs
@@ -405,7 +407,11 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == FASTMOD) {
-			GString *cmd = g_string_new(NULL);
+			if(main_module_mgr_index_mod(buf))
+				failed = 0;
+			else
+				failed = 1;
+			/*GString *cmd = g_string_new(NULL);
 			FILE *result;
 
 			GS_print(("index %s\n", buf));
@@ -427,7 +433,8 @@ static void remove_install_modules(GList * modules, int activity)
 					gtk_main_iteration();
 			}
 			g_string_free(cmd, TRUE);
-			failed = 0;
+			failed = 0;*/
+			//load_module_tree(GtkTreeView * treeview, gboolean install)
 		}
 
 		g_free(tmp->data);
@@ -447,6 +454,8 @@ static void remove_install_modules(GList * modules, int activity)
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
+	if(!failed && activity == FASTMOD)
+		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	g_string_free(mods, TRUE);
@@ -1147,7 +1156,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 
 	column = gtk_tree_view_column_new();
 	if (remove)
-		image = gtk_image_new_from_stock(GTK_STOCK_REMOVE,
+		image = gtk_image_new_from_stock("gtk-yes",//GTK_STOCK_REMOVE,
 						 GTK_ICON_SIZE_MENU);
 	else
 		image = gtk_image_new_from_stock(GTK_STOCK_ADD,

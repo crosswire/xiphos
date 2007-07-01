@@ -1,11 +1,11 @@
+2007-06-30 terry <tbiggs@users.sourceforge.net>
+
+	* fixed bug 1743789: 2.3: transient note/xref is not transient
+
 2007-06-30  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
 	* mod.mgr: change pane names, "install/update" and "maintenance"
 	* also swap top 2 panels, configure and sources.
-
-2007-06-30 terry <tbiggs@users.sourceforge.net>
-
-	* fixed bug 1743789: 2.3: transient note/xref is not transient
 
 2007-06-29  karl <charcoal@users.sf.net>
 
