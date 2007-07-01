@@ -1229,6 +1229,18 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	return 1;
 }
 
+int BackEnd::do_module_delete_index(char *module_name, int is_dialog) {
+	
+	search_mod = main_mgr->Modules[module_name];
+	if (!search_mod)
+		return -1;
+	if (!search_mod->hasSearchFramework())
+		return 0;
+	
+	search_mod->deleteSearchFramework();
+	return 1;
+}
+
 int BackEnd::check_for_optimal_search(char * module_name) {
 	search_mod = main_mgr->Modules[module_name];
 	
