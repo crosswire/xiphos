@@ -2082,6 +2082,7 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	GS_DIALOG *dialog;
 	GtkTreeIter iter;
 	GString *str = g_string_new(NULL);
+	GList *tmp;
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
 	gtk_widget_hide(button1);
@@ -2115,6 +2116,17 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 		g_string_free(str, TRUE);
 		return;
 	}
+
+	tmp = mod_mgr_list_remote_sources();
+	while (tmp) {
+		if (!strcmp(((MOD_MGR_SOURCE *)tmp->data)->caption,
+			    dialog->text1)) {
+			gui_generic_warning("A source by that name already exists.");
+			return;
+		}
+		tmp = g_list_next(tmp);
+	}
+
 	gtk_list_store_append(GTK_LIST_STORE(model), &iter);
 	gtk_list_store_set(GTK_LIST_STORE(model), &iter,
 			   COLUMN_TYPE, dialog->text2,
@@ -2137,7 +2149,6 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 		gtk_main_iteration();
 	mod_mgr_shut_down();
 	mod_mgr_init(destination);
-	
 }
 
 
