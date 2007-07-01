@@ -45,6 +45,7 @@
 #include "backend/sword_main.hh"
 #include "backend/gs_osishtmlhref.h"
 
+#include "main/mod_mgr.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/search_sidebar.h"
@@ -1221,11 +1222,11 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	char progressunits = 70;
 	if (!search_mod->hasSearchFramework())
 		return 0;
-	search_mod->createSearchFramework((is_dialog)
-					?main_dialog_search_percent_update
-					:main_sidebar_search_percent_update,
-					(void *) &progressunits);
 	
+	search_mod->deleteSearchFramework();
+	search_mod->createSearchFramework(main_index_percent_update,
+					(void *) &progressunits);
+	return 1;
 }
 
 int BackEnd::check_for_optimal_search(char * module_name) {
