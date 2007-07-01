@@ -115,6 +115,12 @@ char *main_module_mgr_get_path_to_mods(void)
 	return backend_module_mgr_get_path_to_mods();
 }
 
+
+int main_module_mgr_index_mod(char * module_name)
+{
+	return backend->do_module_index(module_name, 0);
+}
+
 /******************************************************************************
  * Name
  *   
@@ -184,6 +190,25 @@ void update_install_progress(double fraction)
 	gui_update_install_progressbar(fraction);
 }
 
+
+void main_index_percent_update(char percent, void *userData)
+{
+	char maxHashes = *((char *) userData);
+	float num;
+	char buf[80];
+	static char printed = 0;
+	
+	/* update search dialog progress */
+	while ((((float) percent) / 100) * maxHashes > printed) {
+		sprintf(buf, "%f", (((float) percent) / 100));
+		num = (float) percent / 100;
+		gui_update_install_progressbar((gdouble)num);
+		printed++;
+	}
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	printed = 0;
+}
 
 /******************************************************************************
  * Name
