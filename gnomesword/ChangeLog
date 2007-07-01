@@ -1,6 +1,7 @@
 2007-07-01  karl <charcoal@users.sf.net>
 
-        * implement index deletion.
+	* feat.req 1620313: refuse duplicate install source being added.
+	* implement index deletion.
 
 2007-06-30  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
