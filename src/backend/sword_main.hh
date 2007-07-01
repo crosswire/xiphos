@@ -137,6 +137,7 @@ public:
 	int set_scope2last_search(void);
 	int check_for_optimal_search(char * module_name);
 	int do_module_index(char *module_name, int is_dialog);
+	int do_module_delete_index(char *module_name, int is_dialog);
 	int do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog);
 	
