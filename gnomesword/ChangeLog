@@ -1,7 +1,12 @@
+2007-07-01  karl <charcoal@users.sf.net>
+
+        * implement index deletion.
+
 2007-06-30  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
 	* mod.mgr: change pane names, "install/update" and "maintenance"
 	* also swap top 2 panels, configure and sources.
+	* implement indexing progress bar.
 
 2007-06-29  karl <charcoal@users.sf.net>
 
