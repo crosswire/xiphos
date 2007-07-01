@@ -1,6 +1,11 @@
+2007-07-01  karl <charcoal@users.sf.net>
+
+	* implement index deletion.
+
 2007-06-30 terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug 1743789: 2.3: transient note/xref is not transient
+	* implement indexing progress bar.
 
 2007-06-30  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 

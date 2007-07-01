@@ -121,6 +121,11 @@ int main_module_mgr_index_mod(char * module_name)
 	return backend->do_module_index(module_name, 0);
 }
 
+int main_module_mgr_delete_index_mod(char * module_name)
+{
+	return backend->do_module_delete_index(module_name, 0);
+}
+
 /******************************************************************************
  * Name
  *   

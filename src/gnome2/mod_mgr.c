@@ -54,6 +54,7 @@
 #define GTK_RESPONSE_INSTALL 303
 #define GTK_RESPONSE_ARCHIVE 304
 #define GTK_RESPONSE_FASTMOD 305
+#define GTK_RESPONSE_DELFAST 306
 /* see these codes' use in ui/module-manager.glade. */
 
 enum {
@@ -61,6 +62,7 @@ enum {
 	INSTALL = 1,
 	ARCHIVE = 2,
 	FASTMOD = 3,
+	DELFAST = 4,
 };
 
 enum {
@@ -96,6 +98,7 @@ static GtkWidget *button2;
 static GtkWidget *button3;
 static GtkWidget *button_arch;
 static GtkWidget *button_idx;
+static GtkWidget *button_delidx;
 static GtkWidget *label_home;
 static GtkWidget *label_system;
 //static GtkWidget *progressbar;
@@ -219,6 +222,7 @@ static void remove_install_modules(GList * modules, int activity)
 {
 	GList *tmp = NULL;
 	gchar *buf;
+	gchar *verb;
 	const gchar *new_dest;
 	gint test;
 	gint failed = 1;
@@ -239,16 +243,22 @@ static void remove_install_modules(GList * modules, int activity)
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 
+	switch (activity)
+	{
+	case INSTALL:
+		verb = _("Install these modules:"); break;
+	case REMOVE:
+		verb = _("Remove these modules:"); break;
+	case ARCHIVE:
+		verb = _("Archive these modules:"); break;
+	case FASTMOD:
+		verb = _("Build fast-search index for these\nmodules (may take minutes/module):"); break;
+	case DELFAST:
+		verb = _("Delete fast-search index for these modules:"); break;
+	}
 	g_string_printf(dialog_text,
 			"<span weight=\"bold\">%s</span>\n\n%s",
-			((activity == INSTALL)
-			 ? _("Install these modules:")
-			 : ((activity == REMOVE)
-			    ? _("Remove these modules:")
-			    : ((activity == ARCHIVE)
-			       ? _("Archive these modules:")
-			       : _("Build fast-search index for these\nmodules (may take minutes/module):")))),
-			mods->str);
+			verb, mods->str);
 
 	yes_no_dialog->label_top = dialog_text->str;
 	yes_no_dialog->yes = TRUE;
@@ -267,14 +277,20 @@ static void remove_install_modules(GList * modules, int activity)
 		g_string_free(dialog_text, TRUE);
 		return;
 	}
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh),
-				  ((activity == INSTALL)
-				   ? _("Preparing to install")
-				   : ((activity == REMOVE)
-				      ? _("Preparing to remove")
-				      : ((activity == ARCHIVE)
-					 ? _("Preparing to archive")
-					 : _("Preparing to index")))));
+	switch (activity)
+	{
+	case INSTALL:
+		verb = _("Preparing to install"); break;
+	case REMOVE:
+		verb = _("Preparing to remove"); break;
+	case ARCHIVE:
+		verb = _("Preparing to archive"); break;
+	case FASTMOD:
+		verb = _("Preparing to index"); break;
+	case DELFAST:
+		verb = _("Preparing to delete index"); break;
+	}
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), verb);
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -287,6 +303,7 @@ static void remove_install_modules(GList * modules, int activity)
 	gtk_widget_hide(button3);
 	gtk_widget_hide(button_arch);
 	gtk_widget_hide(button_idx);
+	gtk_widget_hide(button_delidx);
 	gtk_widget_show(button_cancel);
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -295,15 +312,20 @@ static void remove_install_modules(GList * modules, int activity)
 	while (tmp) {
 		buf = (gchar *) tmp->data;
 		current_mod = buf;
-		g_string_printf(mods, "%s: %s",
-				((activity == INSTALL)
-				 ? _("Installing")
-				 : ((activity == REMOVE)
-				    ? _("Removing")
-				    : ((activity == ARCHIVE)
-				       ? _("Archiving")
-				       : _("Indexing")))),
-				buf);
+		switch (activity)
+		{
+		case INSTALL:
+			verb = _("Installing"); break;
+		case REMOVE:
+			verb = _("Removing"); break;
+		case ARCHIVE:
+			verb = _("Archiving"); break;
+		case FASTMOD:
+			verb = _("Indexing"); break;
+		case DELFAST:
+			verb = _("Deleting index"); break;
+		}
+		g_string_printf(mods, "%s: %s", verb, buf);
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR
 					  (progressbar_refresh),
 					  mods->str);
@@ -407,34 +429,19 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == FASTMOD) {
-			if(main_module_mgr_index_mod(buf))
+			GS_print(("index %s\n", buf));
+			if (main_module_mgr_index_mod(buf))
 				failed = 0;
 			else
 				failed = 1;
-			/*GString *cmd = g_string_new(NULL);
-			FILE *result;
+		}
 
-			GS_print(("index %s\n", buf));
-			g_string_printf(cmd, "mkfastmod '%s' 2>&1", buf);
-			
-			if ((result = popen(cmd->str, "r")) == NULL) {
-				gui_generic_warning
-				    (_("GnomeSword could not execute indexer"));
-			} else {
-				gchar output[258];
-				g_string_truncate(cmd, 0);
-				g_string_append(cmd, buf);
-				g_string_append(cmd, _(" indexer result:\n\n"));
-				while (fgets(output, 256, result) != NULL)
-					g_string_append(cmd, output);
-				pclose(result);
-				gui_generic_warning(cmd->str);
-				while (gtk_events_pending())
-					gtk_main_iteration();
-			}
-			g_string_free(cmd, TRUE);
-			failed = 0;*/
-			//load_module_tree(GtkTreeView * treeview, gboolean install)
+		if (activity == DELFAST) {
+			GS_print(("deleting index %s\n", buf));
+			if (main_module_mgr_delete_index_mod(buf))
+				failed = 0;
+			else
+				failed = 1;
 		}
 
 		g_free(tmp->data);
@@ -443,18 +450,24 @@ static void remove_install_modules(GList * modules, int activity)
 	have_changes = TRUE;
 	g_list_free(tmp);
 	if (failed) {
-		g_string_printf(mods, "%s failed",
-				((activity == INSTALL)
-				 ? _("Install")
-				 : ((activity == REMOVE)
-				    ? _("Remove")
-				    : ((activity == ARCHIVE)
-				       ? _("Archive")
-				       : _("Index")))));
+		switch (activity)
+		{
+		case INSTALL:
+		    verb = _("Install"); break;
+		case REMOVE:
+		    verb = _("Remove"); break;
+		case ARCHIVE:
+		    verb = _("Archive"); break;
+		case FASTMOD:
+		    verb = _("Index"); break;
+		case DELFAST:
+		    verb = _("Deletion"); break;
+		}
+		g_string_printf(mods, "%s failed", verb);
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
-	if(!failed && activity == FASTMOD)
+	if (!failed && ((activity == FASTMOD) || (activity == DELFAST)))
 		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
@@ -465,12 +478,15 @@ static void remove_install_modules(GList * modules, int activity)
 		case 3:
 			if(need_update) gtk_widget_show(button1);
 			gtk_widget_show(button2);
-			gtk_widget_show(button_idx);
+			gtk_widget_hide(button_arch);
+			gtk_widget_hide(button_idx);
+			gtk_widget_hide(button_delidx);
 		break;
 		case 4:
 			gtk_widget_show(button3);
 			gtk_widget_show(button_arch);
 			gtk_widget_show(button_idx);
+			gtk_widget_show(button_delidx);
 		break;		
 	}
 }
@@ -989,6 +1005,7 @@ static void response_refresh(void)
 		gtk_widget_hide(button3);
 		gtk_widget_hide(button_arch);
 		gtk_widget_hide(button_idx);
+		gtk_widget_hide(button_delidx);
 	}
 	g_free(buf);
 }
@@ -1886,6 +1903,11 @@ void on_index_clicked(GtkButton * button, gpointer  user_data)
 	remove_install_wrapper(FASTMOD);
 }
 
+void on_delete_index_clicked(GtkButton * button, gpointer  user_data)
+{
+	remove_install_wrapper(DELFAST);
+}
+
 void on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
 	mod_mgr_terminate();
@@ -1937,6 +1959,9 @@ void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_dat
 		break;
 	case GTK_RESPONSE_FASTMOD:
 		remove_install_wrapper(FASTMOD);
+		break;
+	case GTK_RESPONSE_DELFAST:
+		remove_install_wrapper(DELFAST);
 		break;
 	}
 }
@@ -2228,6 +2253,7 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
+				gtk_widget_hide(button_delidx);
 				break;
 			case 2:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2239,6 +2265,7 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button_arch);
 				gtk_widget_hide(button_idx);
+				gtk_widget_hide(button_delidx);
 				break;
 			case 3:
 				if (GTK_TOGGLE_BUTTON(radiobutton2)->
@@ -2249,12 +2276,14 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 				gtk_widget_show(button2);
 				gtk_widget_hide(button3);
 				gtk_widget_hide(button_arch);
-				gtk_widget_show(button_idx);
+				gtk_widget_hide(button_idx);
+				gtk_widget_hide(button_delidx);
 				break;
 			case 4:
 				gtk_widget_show(button3);
 				gtk_widget_show(button_arch);
 				gtk_widget_show(button_idx);
+				gtk_widget_show(button_delidx);
 				gtk_widget_hide(button1);
 				gtk_widget_hide(button2);
 				break;
@@ -2400,8 +2429,15 @@ void setup_dialog_action_area(GtkDialog * dialog)
 	button_idx =  gtk_button_new_from_stock ("gtk-save-as");
 	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_idx,FALSE, FALSE,0);
 	g_signal_connect(button_idx, "clicked", G_CALLBACK(on_index_clicked), NULL);
-	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_idx, 304);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_idx, 305);
 	//GTK_WIDGET_SET_FLAGS (button_idx, GTK_CAN_DEFAULT);
+
+/* index */	
+	button_delidx =  gtk_button_new_from_stock ("edit-delete");
+	gtk_box_pack_start(GTK_BOX(dialog_action_area1),button_delidx,FALSE, FALSE,0);
+	g_signal_connect(button_delidx, "clicked", G_CALLBACK(on_delete_index_clicked), NULL);
+	//gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button_delidx, 306);
+	//GTK_WIDGET_SET_FLAGS (button_delidx, GTK_CAN_DEFAULT);
 
 /* cancel */	
 	button_cancel =  gtk_button_new_from_stock ("gtk-cancel");
@@ -2516,6 +2552,7 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 		button3 = glade_xml_get_widget (gxml, "button9"); /* remove */
 		button_arch = glade_xml_get_widget (gxml, "button13"); /* archive */
 		button_idx = glade_xml_get_widget (gxml, "button14"); /* index */
+		button_delidx = glade_xml_get_widget (gxml, "button15"); /* delete index */
 	}
 		
 	g_signal_connect(dialog, "response",
