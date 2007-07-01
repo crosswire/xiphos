@@ -245,7 +245,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 	
 	PASSAGE_TAB_INFO *tab = (PASSAGE_TAB_INFO*) data;
 	menu = gtk_menu_new();
-	item = gtk_menu_item_new_with_label("Clear History");
+	item = gtk_menu_item_new_with_label(_("Clear History"));
 	gtk_widget_show(item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
