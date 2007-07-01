@@ -1227,6 +1227,8 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	char progressunits = 70;
 	if (!search_mod->hasSearchFramework())
 		return 0;
+	
+	search_mod->deleteSearchFramework();
 	search_mod->createSearchFramework(main_index_percent_update,
 					(void *) &progressunits);
 	return 1;
