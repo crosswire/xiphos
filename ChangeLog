@@ -1,3 +1,7 @@
+2007-07-02  karl <charcoal@users.sf.net>
+
+	* changed "URL" to "Host" in mod.mgr Sources -> Add.
+
 2007-07-01  karl <charcoal@users.sf.net>
 
 	* feat.req 1620313: refuse duplicate install source being added.
