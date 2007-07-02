@@ -2,6 +2,7 @@
 
 	* feat.req 1620313: refuse duplicate install source being added.
 	* implement index deletion.
+	* manual updates to reflect lucene indexing, incl. image updates.
 
 2007-06-30  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
