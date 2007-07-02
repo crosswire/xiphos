@@ -4,11 +4,11 @@
 	<sect2 id="module-introduction">
   		<title>Introduction To The Module Manager</title>
 		<para>
-		The "module" is the unit of content in GnomeSword, and Sword generally; a Sword module is a resource available for viewing
-		in Sword applications.  There are several varieties: Most importantly, Bible texts, as well as dictionaries and lexicons,
-		commentaries, and general books, including some which have graphical content (e.g. atlases).  They are installed either
-		from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server such as Crosswire, which
-		is the home of Sword, and from which all officially Sword-sanctioned modules are available.
+		The "module" is the unit of content in <application>GnomeSword</application>, and Sword generally; a Sword module is a
+		resource available for viewing in Sword applications.  There are several varieties: Most importantly, Bible texts, as well
+		as dictionaries and lexicons, commentaries, and general books, including some which have graphical content (e.g. atlases).
+		They are installed either from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server
+		such as Crosswire, which is the home of Sword, and from which all officially Sword-sanctioned modules are available.
 		</para>
 		<para>
 		If you have other Sword applications installed, they will all share the same set of Sword modules that you install through
@@ -38,47 +38,6 @@
 <!-- Sword Configure-->
 	<sect2 id="sword-config">
 	<title>Sword Module Configurations</title>
-		<sect3 id="installation">
-			<title>Sword Module Installations</title>
-			<figure>
-				<title>Sword Module Installations</title>
-	        	<screenshot> 
-	  <mediaobject> 
-	    <imageobject><imagedata
-		fileref="figures/sword_config.png" format="PNG" /> 
-	    </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-            <!-- 
-		    <imageobject>
-      		<imagedata fileref="figures/sword_config.eps" format="EPS"/>
-    		    </imageobject>
-	    -->
-	    <textobject> 
-	      <phrase>Module Installation</phrase> 
-	    </textobject> 
-	  </mediaobject> 
-                        </screenshot>
-			</figure>
-			<para>
-			After you have selected your Install Source, click the <guimenuitem>Refresh</guimenuitem> button to cause GnomeSword
-			to find the module summary available from that source before moving on.
-			</para>
-
-			<para>
-			Take note of the "Install Destination."  Normal usage of Sword Project tools in Linux/UNIX environments includes
-			one's personal area, under ~/.sword, plus a shared system-wide area readable by all users.  If the user does not
-			have write access to the system area, that selection will be greyed-out and unavailable.
-			</para>
-
-			<para>
-			There have been some requests for <application>GnomeSword</application> to provide a means by which an ordinary
-			(non-root) user could start the program, gain temporary write access to the system area while installing modules,
-			and then revoke that access after installation is complete.  Attempting to devise a scheme to do this has proven
-			quite difficult, given the different superuser management schemes employed by various Linux distributions.
-			Therefore, at this time there are no ongoing plans to try to solve this problem, and users are advised to enable
-			write access to the system area outside <application>GnomeSword</application>.
-			</para>
-		</sect3>
 		<sect3 id="sword-sources">
 			<title>Sword Sources Settings</title>
 			<figure>
@@ -107,13 +66,54 @@
 		http://www.crosswire.org/wiki/index.php/Module_Repositories
 		</para>
 		</sect3>
+		<sect3 id="installation">
+			<title>Sword Module Installations</title>
+			<figure>
+				<title>Sword Module Installations</title>
+	        	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/sword_config.png" format="PNG" /> 
+	    </imageobject>
+	    <!-- EPS versions of the figures are not required at the moment. -->
+            <!-- 
+		    <imageobject>
+      		<imagedata fileref="figures/sword_config.eps" format="EPS"/>
+    		    </imageobject>
+	    -->
+	    <textobject> 
+	      <phrase>Module Installation</phrase> 
+	    </textobject> 
+	  </mediaobject> 
+                        </screenshot>
+			</figure>
+			<para>
+			After you have selected your Install Source, click the <guimenuitem>Refresh</guimenuitem> button to cause
+			<application>GnomeSword</application> to find the module summary available from that source before moving on.
+			</para>
+
+			<para>
+			Take note of the "Install Destination."  Normal usage of Sword Project tools in Linux/UNIX environments includes
+			one's personal area, under ~/.sword, plus a shared system-wide area readable by all users.  If the user does not
+			have write access to the system area, that selection will be greyed-out and unavailable.
+			</para>
+
+			<para>
+			There have been some requests for <application>GnomeSword</application> to provide a means by which an ordinary
+			(non-root) user could start the program, gain temporary write access to the system area while installing modules,
+			and then revoke that access after installation is complete.  Attempting to devise a scheme to do this has proven
+			quite difficult, given the different superuser management schemes employed by various Linux distributions.
+			Therefore, at this time there are no ongoing plans to try to solve this problem, and users are advised to enable
+			write access to the system area outside <application>GnomeSword</application>.
+			</para>
+		</sect3>
 	</sect2>
 	
 <!-- Adding And Removing Modules -->
 	<sect2 id="module-management">
 		<title>Add And Remove Modules</title>
 		<sect3 id="add-module">
-			<title>Adding Sword Modules</title>
+			<title>Adding and Updating Sword Modules</title>
 			<figure>
 				<title>Adding Modules</title>
 	       		<screenshot> 
@@ -135,8 +135,9 @@
                         </screenshot>
 			</figure>
 		<para>
-		Modules that are already installed have a checkmark beside them.  Locked modules, which require that you purchase an unlock
-		key from the module's copyright holder, will show a lock symbol.
+		Modules that are already installed have a checkmark beside them.  If a fast search ("lucene") index is available, an open
+		book is displayed, otherwise an "X" is shown; creation of the index is available on the Maintenance pane.  Locked modules,
+		which require that you purchase an unlock key from the module's copyright holder, will show a lock symbol.
 		</para>
 		<para>
 		Select new modules to be installed by clicking the checkboxes and then the Install button at the bottom.  Any number of
@@ -145,9 +146,9 @@
 		</para>
 		</sect3>
 		<sect3 id="remove-module">
-			<title>Removing Sword Modules</title>
+			<title>Module Maintenance</title>
 			<figure>
-				<title>Removing Modules</title>
+				<title>Module Maintenance</title>
 	       		<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
@@ -160,15 +161,29 @@
     		    </imageobject>
 	    -->
 	    <textobject> 
-	      <phrase>Removing Modules</phrase> 
+	      <phrase>Module Maintenance</phrase> 
 	    </textobject> 
 	  </mediaobject> 
                         	</screenshot>
 			</figure>
 		<para>
+		Several maintenance functions are available: Removal, archival, index, and index deletion.
+		</para>
+		<para>
+		Removal disposes of a module entirely.  There is no recovery of the module unless you have previously archived a copy of it.
+		</para>
+		<para>
 		Archival is available for any module, although it is provided with personal commentaries specifically in mind.  A *.zip of
 		the module is left in the directory ~/.sword/zip.  Archival prior to removal of personal commentaries is recommended, in
 		order to be available for future re-install if the subject matter of the personal commentary becomes important again.
+		</para>
+		<para>
+		Indexing is provided so that the underlying Sword search support can create the index needed for the "lucene" multi-word
+		fast-search functions.  If the index is not created, multi-word search will still be available, but it will be much slower.
+		With the index in place, searches through an entire Bible can take just a few seconds.
+		</para>
+		<para>
+		Indexes may be deleted as well.
 		</para>
 		</sect3>
 	</sect2>
