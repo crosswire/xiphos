@@ -2097,7 +2097,7 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	dialog->label_top = str->str;
 	dialog->label1 = _("Caption:");
 	dialog->label2 = _("Type:");
-	dialog->label3 = _("URL:");
+	dialog->label3 = _("Host:");
 	dialog->label4 = _("Directory:");
 	dialog->text1 = g_strdup("Crosswire");
 	dialog->text2 = g_strdup("FTP");
