@@ -99,6 +99,16 @@ gui_create_about_gnomesword(void)
   GdkPixbuf *about1_logo_pixbuf;
   GtkWidget *about1;
   GError *error = NULL;
+  gchar versionbuild[128];
+
+  snprintf
+      (versionbuild, 120, "%s-%s", VERSION,
+#ifdef USE_GTKMOZEMBED
+       "mozembed"
+#else
+       "gtkhtml3"
+#endif
+      );
 
   about1_logo_pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR"/about.png", &error);
 
@@ -110,13 +120,15 @@ gui_create_about_gnomesword(void)
   gtk_about_dialog_set_name
           (GTK_ABOUT_DIALOG (about1), PACKAGE);
   gtk_about_dialog_set_version
-          (GTK_ABOUT_DIALOG (about1), VERSION);
+          (GTK_ABOUT_DIALOG (about1), versionbuild);
   gtk_about_dialog_set_copyright
           (GTK_ABOUT_DIALOG (about1),
-           _("Copyright 2000-2006 The GnomeSword Development Team"));
+           _("Copyright 2000-2007 The GnomeSword Development Team"));
   gtk_about_dialog_set_comments
           (GTK_ABOUT_DIALOG (about1),
            _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
+  gtk_about_dialog_set_website
+	  (GTK_ABOUT_DIALOG (about1), "http://gnomesword.sourceforge.net/");
   gtk_about_dialog_set_authors
           (GTK_ABOUT_DIALOG (about1), authors);
   gtk_about_dialog_set_documenters
