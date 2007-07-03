@@ -2,6 +2,8 @@
 
 	* changed "URL" to "Host" in mod.mgr Sources -> Add.
 	* updated about_gnomesword.c for copyright & website.
+	* configure.in change to build with gtkhtml instead of
+	  gtkmozembed.  (but there are gecko dependencies.)
 
 2007-07-01  karl <charcoal@users.sf.net>
 
