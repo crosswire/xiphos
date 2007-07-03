@@ -104,19 +104,20 @@ AC_SUBST(GTKHTML_LIBS)
 AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_DATA_DIR)
 
-
 AC_ARG_ENABLE(prayer_list,[  --enable-prayer_list    use prayer_list [default=no]],prayer_list=$enableval,prayer_list=no)
 if test "x$prayer_list" = xyes; then
   AC_DEFINE(PRAYERLIST, 1, [Define if wish to enable the PrayerList])
 fi
-
 
 AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
 if test "x$old_navbar" = xyes; then
   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
 fi
 
-
+AC_ARG_ENABLE(gtkhtml,[  --enable-gtkhtml    use gtkhtml instead of gtkmozembed [default=no]],gtkhtml=$enableval,gtkhtml=no)
+if test "x$gtkhtml" = xyes; then
+  AC_DEFINE(GTKHTML, 1, [Define if wish to use gtkhtml instead of gtkmozembed])
+fi
 
 dnl  *****
 dnl  Gecko
@@ -134,6 +135,8 @@ dnl cygwin
 dnl  ====================================
 AC_ARG_ENABLE(cygwin,[  --enable-cygwin    use cygwin [default=no]],cygwin=$enableval,cygwin=no)
 if test "x$cygwin" = xno; then
+
+  if test "x$gtkhtml" = xno; then
 	dnl  *****
 	dnl  Gecko
 	dnl  *****
@@ -157,6 +160,21 @@ if test "x$cygwin" = xno; then
 	gecko=yes  
 	MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $MOZILLA-gtkmozembed`"
 	AC_SUBST(MOZILLA_HOME)
+  else
+	MOZILLA_COMPONENT_LIBS=""
+	MOZILLA_COMPONENT_CFLAGS=""
+	AM_CONDITIONAL(USE_GTKMOZEMBED, false)
+	AM_CONDITIONAL(HAVE_MOZILLA_TOOLKIT, false)
+	AM_CONDITIONAL(HAVE_GECKO_DEBUG, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_7, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_8, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_8_1, false)
+	AM_CONDITIONAL(HAVE_GECKO_1_9, false)
+	gecko=no 
+	
+	enable_scrollkeeper=no
+	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
+  fi
 
   dnl ====================================
   dnl Gnome-doc-utils
@@ -187,8 +205,8 @@ else
 	AM_CONDITIONAL(HAVE_GECKO_1_9, false)
 	gecko=no 
 	
-  enable_scrollkeeper=no
-  AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
+	enable_scrollkeeper=no
+	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
 fi
 
 AC_SUBST(MOZILLA_COMPONENT_LIBS)
