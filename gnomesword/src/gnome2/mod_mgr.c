@@ -815,7 +815,8 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	GtkTreeIter iter;
 	GtkTreeIter text;
 	GtkTreeIter commentary;
-	GtkTreeIter dictoinary;
+	GtkTreeIter dictionary;
+	GtkTreeIter devotional;
 	GtkTreeIter book;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -844,7 +845,6 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		else
 			tmp = mod_mgr_remote_list_modules(source);
 	} else {
-
 		tmp = mod_mgr_list_local_modules(main_get_path_to_mods());
 	}
 
@@ -860,18 +860,19 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 
 	/*  add Commentaries folder */
 	gtk_tree_store_append(store, &commentary, NULL);
-	gtk_tree_store_set(store, &commentary, 0, _("Commentaries"),
-			   -1);
+	gtk_tree_store_set(store, &commentary, 0, _("Commentaries"), -1);
 
 	/*  add Dictionaries folder */
-	gtk_tree_store_append(store, &dictoinary, NULL);
-	gtk_tree_store_set(store, &dictoinary, 0, _("Dictionaries"),
-			   -1);
+	gtk_tree_store_append(store, &dictionary, NULL);
+	gtk_tree_store_set(store, &dictionary, 0, _("Dictionaries"), -1);
+
+	/*  add Devotionals folder */
+	gtk_tree_store_append(store, &devotional, NULL);
+	gtk_tree_store_set(store, &devotional, 0, _("Daily Devotionals"), -1);
 
 	/*  add Books folder */
 	gtk_tree_store_append(store, &book, NULL);
 	gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
-
 
 
 	while (tmp2) {
@@ -879,41 +880,37 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		if (!strcmp(info->type, TEXT_MODS)) {
 			add_language_folder(GTK_TREE_MODEL(store), text,
 					    info->language);
-		}
-		if (!strcmp(info->type, COMM_MODS)) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    commentary, info->language);
-		}
-		if (!strcmp(info->type, DICT_MODS)) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    dictoinary, info->language);
-		}
-		if (!strcmp(info->type, BOOK_MODS)) {
-			add_language_folder(GTK_TREE_MODEL(store), book,
-					    info->language);
-		}
-		tmp2 = g_list_next(tmp2);
-	}
-
-	while (tmp) {
-		info = (MOD_MGR *) tmp->data;
-		
-		if (!strcmp(info->type, TEXT_MODS)) {
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
 						      info);
 		}
-		if (!strcmp(info->type, COMM_MODS)) {
+		else if (!strcmp(info->type, COMM_MODS)) {
+			add_language_folder(GTK_TREE_MODEL(store),
+					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      commentary, info);
 		}
-		if (!strcmp(info->type, DICT_MODS)) {
-			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      dictoinary, info);
+		else if (!strcmp(info->type, DICT_MODS)) {
+			char *feature = main_get_mod_config_entry(info->name,
+							      "Feature");
+			if (feature && !strcmp(feature, "DailyDevotion")) {
+				add_language_folder(GTK_TREE_MODEL(store),
+						    devotional, info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store),
+							      devotional, info);
+			} else {
+				add_language_folder(GTK_TREE_MODEL(store),
+						    dictionary, info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store),
+							      dictionary, info);
+			}
 		}
-		if (!strcmp(info->type, BOOK_MODS)) {
+		else if (!strcmp(info->type, BOOK_MODS)) {
+			add_language_folder(GTK_TREE_MODEL(store), book,
+					    info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), book,
 						      info);
@@ -922,7 +919,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		g_free(info->type);
 		g_free(info->new_version);
 		g_free(info);
-		tmp = g_list_next(tmp);
+		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
 }
