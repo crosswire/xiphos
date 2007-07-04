@@ -490,8 +490,8 @@ void gecko_html_printf(GeckoHtml * html, char *format, ...)
 
 static gboolean timeout_update_gok(GeckoHtml * html)
 {
-	g_signal_emit_by_name(gtk_widget_get_accessible(GTK_WIDGET(html)),
-			      "children_changed::add", -1, NULL, NULL);
+	//g_signal_emit_by_name(gtk_widget_get_accessible(GTK_WIDGET(html)),
+	//		      "children_changed::add", -1, NULL, NULL);
 	html->priv->timeout = 0;
 	return FALSE;
 }
