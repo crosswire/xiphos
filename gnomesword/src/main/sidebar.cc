@@ -908,6 +908,7 @@ void main_load_module_tree(GtkWidget * tree)
 				   G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_store_clear(store);
 
+	/*  Biblical Texts folders */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -932,27 +933,18 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_MODULE, _("Standard View"),
 			   COL_OFFSET, _("Standard View"), -1);
 
-	/*  add language folders Biblical Texts folder */
 	tmp = get_list(TEXT_LIST);
 	while (tmp != NULL) {
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Biblical Texts language folders */
-	tmp = get_list(TEXT_LIST);
-	while (tmp != NULL) {
-		const gchar *buf =
-		    backend->module_get_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 
-	/*  add language folders Commentaries folder */
+	/*  Commentaries folders */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -966,21 +958,13 @@ void main_load_module_tree(GtkWidget * tree)
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Commentaries language folders */
-	tmp = get_list(COMM_LIST);
-	while (tmp != NULL) {
-		const gchar *buf =
-		    backend->module_get_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 
-	/*  add language folders Dictionaries folder */
+	/*  Dictionaries folders */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -994,15 +978,26 @@ void main_load_module_tree(GtkWidget * tree)
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
 		tmp = g_list_next(tmp);
-
 	}
 
-	/*  add modules to Dict/Lex language folders */
-	tmp = get_list(DICT_LIST);
+	/*  Devotionals folders */
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Daily Devotionals"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Daily Devotionals"), -1);
+
+	tmp = get_list(DEVOTION_LIST);
 	while (tmp != NULL) {
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
@@ -1018,20 +1013,12 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_MODULE, NULL,
 			   COL_OFFSET, _("General Books"), -1);
 
-	/*  add language folders Books folder */
+	/*  General Books folders */
 	tmp = get_list(GBS_LIST);
 	while (tmp != NULL) {
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
-		tmp = g_list_next(tmp);
-	}
-
-	/*  add modules to Books language folders */
-	tmp = get_list(GBS_LIST);
-	while (tmp != NULL) {
-		const gchar *buf =
-		    backend->module_get_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
