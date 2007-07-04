@@ -2,6 +2,7 @@
 
 	* added Daily Devotionals to module listings.
 	* roughly doubled module listing performance.
+	* disabled GOK timeout in gecko-html.cpp to kill warnings.
 
 2007-07-02  karl <charcoal@users.sf.net>
 
