@@ -16,6 +16,9 @@
 /* Gettext package */
 #undef GETTEXT_PACKAGE
 
+/* Define if wish to use gtkhtml instead of gtkmozembed */
+#undef GTKHTML
+
 /* The gtkhtml api version */
 #undef GTKHTML_API_VERSION
 
