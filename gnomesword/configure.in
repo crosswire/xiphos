@@ -159,10 +159,10 @@ if test "x$cygwin" = xno; then
 	AM_CONDITIONAL(USE_GTKMOZEMBED, true)
 	gecko=yes  
 	MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $MOZILLA-gtkmozembed`"
-	AC_SUBST(MOZILLA_HOME)
   else
 	MOZILLA_COMPONENT_LIBS=""
-	MOZILLA_COMPONENT_CFLAGS=""
+	MOZILLA_COMPONENT_CFLAGS="" 
+	MOZILLA_HOME=""
 	AM_CONDITIONAL(USE_GTKMOZEMBED, false)
 	AM_CONDITIONAL(HAVE_MOZILLA_TOOLKIT, false)
 	AM_CONDITIONAL(HAVE_GECKO_DEBUG, false)
@@ -172,8 +172,6 @@ if test "x$cygwin" = xno; then
 	AM_CONDITIONAL(HAVE_GECKO_1_9, false)
 	gecko=no 
 	
-	enable_scrollkeeper=no
-	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
   fi
 
   dnl ====================================
@@ -209,6 +207,7 @@ else
 	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
 fi
 
+AC_SUBST(MOZILLA_HOME)
 AC_SUBST(MOZILLA_COMPONENT_LIBS)
 AC_SUBST(MOZILLA_COMPONENT_CFLAGS)
 
