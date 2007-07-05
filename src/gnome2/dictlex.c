@@ -230,7 +230,7 @@ static gint html_button_released(GtkWidget * html,
 	settings.whichwindow = DICTIONARY_WINDOW;
 
 	//gui_change_window_title(settings.DictWindowModule);
-/*
+
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -251,7 +251,7 @@ static gint html_button_released(GtkWidget * html,
 		}
 		break;
 	}
-*/
+
 	return FALSE;
 }
 
