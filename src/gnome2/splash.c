@@ -479,7 +479,8 @@ void gui_splash_init()
 
 		gtk_widget_show(splash);
 		gtk_object_ref(GTK_OBJECT(splash));
-		
+
+#ifdef USE_GTKMOZEMBED		
 		icon_pixbuf = 
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/mozilla-icon.png", &error);
@@ -496,7 +497,7 @@ void gui_splash_init()
 		}
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
-
+#endif
 		icon_pixbuf = 
 		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/gnome-session.png", &error);

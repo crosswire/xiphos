@@ -143,7 +143,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	gchar *buf = NULL;
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
-	/*
+	
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -200,7 +200,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 		break;
 	case 3:
 		break;
-	}*/
+	}
 	return FALSE;
 }
 
