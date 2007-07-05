@@ -66,24 +66,24 @@ gnomesword2_SOURCES =  \
 
 if USE_GTKMOZEMBED
     LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
+    gnomesword2_LDFLAGS = -R$(MOZILLA_HOME)
 else
     LIB_GECKO=
 endif 
 
-gnomesword2_LDFLAGS = -R$(MOZILLA_HOME)
 
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/editor/libeditor.a \
     $(top_builddir)/src/backend/libbackend.a \
-    $(LIB_GECKO) \
+    $(LIB_GECKO)\
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \
     $(MOZILLA_COMPONENT_LIBS) \
-    $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
     $(SWORD_LIBS) \
     $(UPRINT_LIBS)
 
+    
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h

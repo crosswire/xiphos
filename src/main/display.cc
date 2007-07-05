@@ -1509,6 +1509,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 					  ((mf->old_font)?mf->old_font:"Serif"));
 	gtk_widget_modify_font (gtkText, desc);
 	gboolean was_editable = gtk_html_get_editable(html);
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	GtkHTMLStreamStatus status;
 #endif
 	gboolean strongs_and_morph, strongs_or_morph;
 	gint display_boundary;
@@ -1548,8 +1550,13 @@ char DialogChapDisp::Display(SWModule &imodule)
 			((mf->old_font_size)
 			 ? atoi(mf->old_font_size) + settings.base_font_size
 			 : settings.base_font_size));
-	
+
+#ifdef USE_GTKMOZEMBED	
 	gecko_html_write(html, str->str, str->len);
+#else
+	gtk_html_write(html, stream, str->str, str->len);
+#endif
+	
 	str = g_string_erase(str, 0, -1);
 
 	for (key->Verse(1);
@@ -1675,8 +1682,12 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
-		    str = g_string_append(str, ("</font></td></tr></table>"));
+		    	str = g_string_append(str, ("</font></td></tr></table>"));
+#ifdef USE_GTKMOZEMBED	
 		gecko_html_write(html, str->str, str->len);
+#else
+		gtk_html_write(html, stream, str->str, str->len);
+#endif
 		str = g_string_erase(str, 0, -1);
 	}
 	str = g_string_erase(str, 0, -1);
@@ -1696,14 +1707,17 @@ char DialogChapDisp::Display(SWModule &imodule)
 	}
 #else
 	if (str->len) {
-		gtk_html_load_from_string(html, str->str, str->len);
+		gtk_html_write(html, stream, str->str, str->len);
+		//gtk_html_load_from_string(html, str->str, str->len);
 	}
+	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
 	if (curVerse > display_boundary) {
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
 	}
+	gtk_html_flush (html);
 #endif
 	g_string_free(str, TRUE);
 	key->Verse(1);
