@@ -459,6 +459,15 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	return 0;	
 }
 
+#include <signal.h>
+sighandler_t save;
+
+void
+crash_handler(int signum)
+{
+	throw(signum);
+}
+
 gint
 Yelper::ProcessMouseEvent (void* aEvent)
 {
@@ -489,6 +498,8 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 
 	GS_message(("g_signal_emit_by_name"));
+
+	save = signal(SIGSEGV, crash_handler);
 	if(mEmbed) {
 		try {
 			g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
@@ -496,12 +507,13 @@ Yelper::ProcessMouseEvent (void* aEvent)
 		}
 		catch (...) {
 			if (gui_yes_no_dialog("Mysterious `yelper' catch!\n"
-					      "Drop core?\n"
+					      "Abort and drop core?\n"
 					      "(Otherwise, re-mouse.)")) {
 				abort();
 			}
 		}
 	}
+	(void) signal(SIGSEGV, save);
 	return 1;
 }
 
