@@ -67,7 +67,6 @@
 #include "gecko/Yelper.h"
 
 #include "gui/widgets.h"
-#include "gui/dialog.h"
 
 #include "main/module_dialogs.h"
 #include "main/previewer.h"
@@ -459,15 +458,6 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	return 0;	
 }
 
-#include <signal.h>
-sighandler_t save;
-
-void
-crash_handler(int signum)
-{
-	throw(signum);
-}
-
 gint
 Yelper::ProcessMouseEvent (void* aEvent)
 {
@@ -498,22 +488,9 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 
 	GS_message(("g_signal_emit_by_name"));
-
-	save = signal(SIGSEGV, crash_handler);
-	if(mEmbed) {
-		try {
-			g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
+	if(mEmbed)
+		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
-		}
-		catch (...) {
-			if (gui_yes_no_dialog("Mysterious `yelper' catch!\n"
-					      "Abort and drop core?\n"
-					      "(Otherwise, re-mouse.)")) {
-				abort();
-			}
-		}
-	}
-	(void) signal(SIGSEGV, save);
 	return 1;
 }
 
