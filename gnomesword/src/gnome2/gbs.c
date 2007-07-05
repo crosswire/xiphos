@@ -124,7 +124,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 		return FALSE;
 	settings.whichwindow = BOOK_WINDOW;
 	//gui_change_window_title(settings.book_mod);
-	/*
+	
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -170,7 +170,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 		break;
 	case 3:
 		break;
-	}*/
+	}
 	return FALSE;
 }
 
