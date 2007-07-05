@@ -975,10 +975,13 @@ void gui_create_commentary_dialog(DIALOG_DATA * d, gboolean do_edit)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 			  d->html);
 	gtk_html_load_empty(GTK_HTML(d->html));
-
+	
+#ifndef USE_GTKHTML38
 	g_signal_connect(GTK_OBJECT(d->html),
 			 "link_clicked",
 			 G_CALLBACK(commentary_prefixable_link), d);
+#endif
+	
 	g_signal_connect(GTK_OBJECT(d->html), "on_url",
 			 G_CALLBACK(dialog_url), d);
 	g_signal_connect(GTK_OBJECT(d->html),

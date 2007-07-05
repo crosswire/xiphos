@@ -706,7 +706,7 @@ void main_update_parallel_page(void)
 
 void main_update_parallel_page(void)
 {
-	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
+	gchar tmpBuf[256], *rowcolor;
 	gchar *font_size_tmp = NULL, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
 	gint utf8len, i, j;
