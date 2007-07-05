@@ -67,6 +67,7 @@
 #include "gecko/Yelper.h"
 
 #include "gui/widgets.h"
+#include "gui/dialog.h"
 
 #include "main/module_dialogs.h"
 #include "main/previewer.h"
@@ -488,9 +489,19 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 
 	GS_message(("g_signal_emit_by_name"));
-	if(mEmbed)
-		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
+	if(mEmbed) {
+		try {
+			g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
+		}
+		catch (...) {
+			if (gui_yes_no_dialog("Mysterious `yelper' catch!\n"
+					      "Drop core?\n"
+					      "(Otherwise, re-mouse.)")) {
+				abort();
+			}
+		}
+	}
 	return 1;
 }
 
