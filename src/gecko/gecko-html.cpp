@@ -97,7 +97,7 @@ static gint html_dom_mouse_dbl_click(GtkMozEmbed * embed, gpointer dom_event)
 static gint html_dom_mouse_down(GtkMozEmbed * embed, gpointer dom_event)
 {
 	GeckoHtml *html = GECKO_HTML(embed);
-	return html->priv->yelper->ProcessMouseEvent(dom_event);
+    	return html->priv->yelper->ProcessMouseEvent(dom_event);
 }
 
 
