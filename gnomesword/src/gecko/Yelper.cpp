@@ -455,34 +455,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	//GS_message(("mouse button up: %d",button));
 	if(button == 1)	       
 	        shift_key_presed = FALSE; 
-	return 0;	
-}
-
-gint
-Yelper::ProcessMouseEvent (void* aEvent)
-{
-	nsAutoString aType;
 	
-	g_return_val_if_fail(aEvent != NULL,0);
-	//g_return_if_fail (aEvent != NULL);	
-	
-	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
-	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
-	if (!event) return 0;
-
-#ifdef DEBUG		
-	domEvent->GetType(aType);
-	gchar mybuf[80];
-	aType.ToCString( mybuf, 79);
-	GS_message(("domEvent->GetType: %s",mybuf));
-#endif
-	
-	PRUint16 button = 2;
-	event->GetButton (&button);
-
-	GS_message(("mouse button: %d",button));
-	if(button == 1)	       
-	        shift_key_presed = TRUE; 
 	/* Mozilla uses 2 as its right mouse button code */
 	if (button != 2) return 0;
 	
@@ -491,7 +464,35 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	if(mEmbed)
 		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
-	return 1;
+	return 1;	
+}
+
+gint
+Yelper::ProcessMouseEvent (void* aEvent)
+{	
+	g_return_val_if_fail(aEvent != NULL,0);
+	
+	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
+	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
+	if (!event) return 0;
+	
+	
+#ifndef DEBUG
+	nsAutoString aType;	
+	domEvent->GetType(aType);
+	gchar mybuf[80];
+	aType.ToCString( mybuf, 79);
+	GS_message(("domEvent->GetType: %s",mybuf));
+#endif	
+	
+	PRUint16 button = 2;
+	event->GetButton (&button);
+	
+	GS_message(("mouse button: %d",button));	
+	
+	if(button == 1) shift_key_presed = TRUE; 
+	
+	return 0;	
 }
 
 gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
