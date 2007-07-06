@@ -488,7 +488,7 @@ Yelper::ProcessMouseEvent (void* aEvent)
 
 	GS_message(("g_signal_emit_by_name"));
 	if(mEmbed)
-		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
+		g_signal_emit_by_name (mEmbed, "popupmenu_requested", NULL);  //,
 			        // NS_ConvertUTF16toUTF8 (href).get());
 	return 1;	
 }
