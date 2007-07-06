@@ -123,8 +123,8 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	if(!settings.havebook)
 		return FALSE;
 	settings.whichwindow = BOOK_WINDOW;
-	//gui_change_window_title(settings.book_mod);
 	
+#ifdef GTKHTML
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -171,6 +171,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	case 3:
 		break;
 	}
+#endif
 	return FALSE;
 }
 

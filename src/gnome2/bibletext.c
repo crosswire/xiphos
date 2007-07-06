@@ -195,6 +195,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	 */
 	gui_change_window_title(settings.MainWindowModule);
 
+#ifdef GTKHTML
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -240,6 +241,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 	case 3:
 		break;
 	}
+#endif /* GTKHTML */
 	return FALSE;
 }
 

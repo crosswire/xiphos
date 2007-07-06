@@ -143,7 +143,8 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	gchar *buf = NULL;
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
-	
+
+#ifdef GTKHTML	
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -201,6 +202,7 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	case 3:
 		break;
 	}
+#endif /* GTKHTML */
 	return FALSE;
 }
 
