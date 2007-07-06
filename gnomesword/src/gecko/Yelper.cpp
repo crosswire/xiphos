@@ -432,17 +432,15 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 
 gint
 Yelper::ProcessMouseUpEvent (void* aEvent)
-{
-	nsAutoString aType;
-	
+{	
 	g_return_val_if_fail(aEvent != NULL,0);
-	//g_return_if_fail (aEvent != NULL);	
 	
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
 		
 #ifdef DEBUG
+	nsAutoString aType;
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
@@ -456,15 +454,8 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	if(button == 1)	       
 	        shift_key_presed = FALSE; 
 	
-	/* Mozilla uses 2 as its right mouse button code */
-	if (button != 2) return 0;
 	
-
-	GS_message(("g_signal_emit_by_name"));
-	if(mEmbed)
-		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
-			        // NS_ConvertUTF16toUTF8 (href).get());
-	return 1;	
+	return 0;	
 }
 
 gint
@@ -492,7 +483,14 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 	if(button == 1) shift_key_presed = TRUE; 
 	
-	return 0;	
+	/* Mozilla uses 2 as its right mouse button code */
+	if (button != 2) return 0;	
+
+	GS_message(("g_signal_emit_by_name"));
+	if(mEmbed)
+		g_signal_emit_by_name (mEmbed, "popupmenu_requested");  //,
+			        // NS_ConvertUTF16toUTF8 (href).get());
+	return 1;	
 }
 
 gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
