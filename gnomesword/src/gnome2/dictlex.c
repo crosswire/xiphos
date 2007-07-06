@@ -231,6 +231,7 @@ static gint html_button_released(GtkWidget * html,
 
 	//gui_change_window_title(settings.DictWindowModule);
 
+#ifdef GTKHTML
 	switch (event->button) {
 	case 1:
 		if (in_url) 
@@ -251,7 +252,7 @@ static gint html_button_released(GtkWidget * html,
 		}
 		break;
 	}
-
+#endif /* GTKHTML */
 	return FALSE;
 }
 
