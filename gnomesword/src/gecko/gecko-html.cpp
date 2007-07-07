@@ -209,14 +209,31 @@ gint html_dom_key_up(GtkMozEmbed * embed, gpointer dom_event)
 static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 {
 	g_return_val_if_fail(uri != NULL, FALSE);
+
 	GeckoHtml *html = GECKO_HTML(embed);
 	GeckoHtmlPriv *priv = GECKO_HTML_GET_PRIVATE(html);
+	gchar *buf, *place;
+	gchar tmpbuf[1023];
+	gchar book[32];
+	GString *tmpstr = g_string_new(NULL);
+
+	// for some reason, `/' is not properly encoded for us as "%2F"
+	// so we have to do it ourselves.  /mutter/ *ick*
+	if (place = strchr(uri, '?')) {		// url's beginning, as-is.
+		strncpy(tmpbuf, uri, (++place)-uri);
+		tmpbuf[place-uri] = '\0';
+		tmpstr = g_string_append(tmpstr, tmpbuf);
+		for (/* */ ; *place; ++place) {
+			if (*place != '/')
+				tmpstr = g_string_append_c(tmpstr, *place);
+			else
+				tmpstr = g_string_append(tmpstr, "%2F");
+		}
+		uri = tmpstr->str;
+	}
 	
 	// prefixable link
 	if(priv->pane == DIALOG_COMMENTARY_TYPE) { 
-		gchar *buf, *place;
-		gchar tmpbuf[1023];
-		gchar book[32];
 		strcpy(book, priv->dialog->key);
 		*(strrchr(book, ' ')) = '\0';
 		
@@ -242,6 +259,8 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		main_dialogs_url_handler(priv->dialog, uri, TRUE);
 	else
 		main_url_handler(uri, TRUE);
+
+	g_string_free(tmpstr, TRUE);
 	return TRUE;
 }
 
