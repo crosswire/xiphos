@@ -648,3 +648,45 @@
 		</itemizedlist>
 	</sect2>
 
+	<sect2 id="gnomesword-differences">
+		<title>Version Differences in <application>GnomeSword</application>'s Display</title>
+		<para>
+		The <application>GnomeSword</application> interface has evolved over time, and there are two display libraries with which
+		<application>GnomeSword</application> can be built.  The older, less featureful version is called "gtkhtml3", and the newer,
+		more capable version is called "MozEmbed".  Both of these display libraries render text in a browser-like fashion, using HTML
+		constructs to control display.
+		</para>
+
+		<para>
+		Several desirable capabilities are unsupportable in gtkhtml3, and although recent <application>GnomeSword</application> is
+		written to take advantage of MozEmbed features, it is possible that the version running on your computer needed to be
+		built with gtkhtml3 instead, either because the version of MozEmbed available for your system is not recent enough to
+		support the needs of <application>GnomeSword</application>, or it simply doesn't exist for your system.  (Notably, Cygwin
+		has no MozEmbed at all.)  The following differences will be apparent, depending on whether gtkhtml3 or MozEmbed is the
+		underlying display engine:
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				Morphology and Strong's references, enabled via the right-click menu in some modules, are displayed inline
+				with gtkhtml3; with MozEmbed, a blocked display is used, where these references are aligned beneath the word
+				to which they refer, for a much more readable, less cluttered display.
+			</listitem>
+			<listitem>
+				Footnote and cross-reference markers (<guibutton>*n</guibutton>, <guibutton>*x</guibutton>) are displayed as
+				proper superscripts in MozEmbed, but not in gtkhtml3.
+			</listitem>
+			<listitem>
+				Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, no underlines are needed.
+			</listitem>
+			<listitem>
+				Under MozEmbed, double-space display is available using the <guimenuitem>View</guimenuitem> menu, but not
+				under gtkhtml3.
+			</listitem>
+		</itemizedlist>
+
+		<para>
+		Using the "About GnomeSword" selection under the <guimenuitem>Help</guimenuitem> menu, you will see the display library with
+		which <application>GnomeSword</application> was built.
+		</para>
+	</sect2>
