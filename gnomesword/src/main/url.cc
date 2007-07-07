@@ -1125,8 +1125,8 @@ gint main_url_handler_gecko(const gchar * url)
 		work_buf = g_strsplit (action,"&",6);	
 			
 		GS_message(("action = %s", work_buf[0]));
-		if(strstr(action, "showStrongs")) {
-			if(strstr(work_buf[1],"Greek")) 
+		if (strstr(action, "showStrongs")) {
+			if (strstr(work_buf[1],"Greek")) 
 				stype = "Greek";
 			else
 				stype = "Hebrew";
@@ -1136,8 +1136,8 @@ gint main_url_handler_gecko(const gchar * url)
 			GS_message(("value = %s", svalue));
 			show_strongs(stype, svalue, FALSE);
 		}
-		if(strstr(action, "showMorph")) {
-			if(strstr(work_buf[1],"robinson")) 
+		else if (strstr(action, "showMorph")) {
+			if (strstr(work_buf[1],"robinson")) 
 				stype = "robinson";
 			else
 				stype = "packard";
@@ -1147,7 +1147,7 @@ gint main_url_handler_gecko(const gchar * url)
 			GS_message(("value = %s", svalue));
 			show_morph(stype, svalue, FALSE);
 		}
-		if(strstr(action, "showModInfo")) {
+		else if (strstr(action, "showModInfo")) {
 			svalue = strstr(work_buf[1],"=");
 			++svalue;
 			module = strstr(work_buf[2],"=");
@@ -1156,7 +1156,7 @@ gint main_url_handler_gecko(const gchar * url)
 			GS_message(("svalue = %s", svalue));
 			show_mod_info(module, svalue, FALSE);
 		}
-		if(strstr(action, "showNote")) {
+		else if (strstr(action, "showNote")) {
 			stype = strstr(work_buf[1],"=");
 			++stype;
 			svalue = strstr(work_buf[2],"=");
@@ -1165,26 +1165,49 @@ gint main_url_handler_gecko(const gchar * url)
 			++module;
 			passage = strstr(work_buf[4],"=");
 			++passage;
-			for(int i = 0; i < strlen(passage); i++) {
-				if(passage[i] == '+') passage[i] = ' ';
+			int plen = strlen(passage);
+			for (int i = 0; i < plen; i++) {
+				if (passage[i] == '+') passage[i] = ' ';
+				else if (!strncmp(&(passage[i]), "%2F", 3)) {
+					// repair undecoded "%2F" -> "/"
+					char *lead, *follow;
+					passage[i] = '/';
+					for (follow = &(passage[i+1]), lead = follow + 2;
+					     *lead;
+					     ++follow, ++lead)
+					    *follow = *lead;
+					*follow = '\0';
+					plen -= 2;
+				}
 			}
 			GS_message(("stype = %s", stype));
 			GS_message(("svalue = %s", svalue));
 			show_note(module, passage, stype, svalue, FALSE);
 		}
-			
-		if(strstr(action, "showRef")) {
-				stype = strstr(work_buf[1],"=");
-				++stype;
-				svalue = strstr(work_buf[2],"=");
-				++svalue;
-				for(int i = 0; i < strlen(svalue); i++) {
-					if(svalue[i] == '+') svalue[i] = ' ';
+		else if (strstr(action, "showRef")) {
+			stype = strstr(work_buf[1],"=");
+			++stype;
+			svalue = strstr(work_buf[2],"=");
+			++svalue;
+			int slen = strlen(svalue);
+			for (int i = 0; i < slen; i++) {
+				if (svalue[i] == '+') svalue[i] = ' ';
+				else if (!strncmp(&(svalue[i]), "%2F", 3)) {
+					// repair undecoded "%2F" -> "/"
+					char *lead, *follow;
+					svalue[i] = '/';
+					for (follow = &(svalue[i+1]), lead = follow + 2;
+					     *lead;
+					     ++follow, ++lead)
+					    *follow = *lead;
+					*follow = '\0';
+					slen -= 2;
 				}
-				module = strstr(work_buf[3],"=");
-				if(module) ++module;
-				if (!strcmp(stype, "scripRef"))
-					show_ref(module, svalue, FALSE);
+			}
+			module = strstr(work_buf[3],"=");
+			if (module) ++module;
+			if (!strcmp(stype, "scripRef"))
+				show_ref(module, svalue, FALSE);
 		}
 		g_strfreev (work_buf);
 		g_free(url_work);
