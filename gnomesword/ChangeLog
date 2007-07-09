@@ -1,3 +1,7 @@
+2007-07-08  karl <charcoal@users.sf.net>
+
+	* for highlight, force highlight_fg on verse number.
+
 2007-07-07  karl <charcoal@users.sf.net>
 
 	* added a manual section on gtkhtml3 -vs- MozEmbed.
