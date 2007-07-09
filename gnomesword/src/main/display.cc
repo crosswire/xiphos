@@ -1126,7 +1126,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			utf8_key,
 			settings.verse_num_font_size + settings.base_font_size,
-			settings.bible_verse_num_color,
+			((settings.versehighlight && (key->Verse() == curVerse))
+			 ? settings.highlight_fg
+			 : settings.bible_verse_num_color),
 			key->Verse());
 
 		if (key->Verse() == curVerse)
@@ -1596,7 +1598,9 @@ char DialogChapDisp::Display(SWModule &imodule)
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
-			settings.bible_verse_num_color,
+			((settings.versehighlight && (key->Verse() == curVerse))
+			 ? settings.highlight_fg
+			 : settings.bible_verse_num_color),
 			key->Verse());
 		str = g_string_append(str, buf);
 		g_free(buf);
