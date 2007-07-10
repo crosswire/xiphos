@@ -1,3 +1,7 @@
+2007-07-10 dom <domcox@users.sf.net>
+
+	* fixed bug 1744418: bad display of grk result in adv.search
+
 2007-07-08  karl <charcoal@users.sf.net>
 
 	* for highlight, force highlight_fg on verse number.
