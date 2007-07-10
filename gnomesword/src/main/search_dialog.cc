@@ -875,6 +875,7 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	gint textlen;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
+	GString *html_text;
 
  	if (!gtk_tree_selection_get_selected (selection, &model, &selected))
 		return;
@@ -910,10 +911,14 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
 	}
 	text_str = backendSearch->get_render_text(module,key);
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
+	html_text=g_string_new(HTML_START);
+	g_string_append(html_text,text_str);
+	g_string_append(html_text,"</html>");	
 	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html),text_str,strlen(text_str));
+	gecko_html_write(GECKO_HTML(search1.preview_html),html_text->str,html_text->len);
 	gecko_html_close(GECKO_HTML(search1.preview_html));
+	g_string_free(html_text,TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
 				  text_str, strlen(text_str));
