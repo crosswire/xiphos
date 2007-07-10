@@ -237,7 +237,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 	if(sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
-		OLD_CODESET = "iso8859-1";
+		OLD_CODESET = "UTF-8";
 	}
 	return retval;
 }
