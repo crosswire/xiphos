@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-01 15:36+0200\n"
-"PO-Revision-Date: 2007-07-01 17:24+0200\n"
+"POT-Creation-Date: 2007-07-11 22:31+0200\n"
+"PO-Revision-Date: 2007-07-11 22:24+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Authors
 #: ../C/authors.xml:3(para) ../C/gnomesword.xml:3(para)
@@ -240,38 +240,43 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:22(None) ../C/modules.xml:22(None)
-msgid "@@image: 'figures/module.png'; md5=79e643354e4bcbb2ffc505f854a19b87"
+#, fuzzy
+msgid "@@image: 'figures/module.png'; md5=dd737967d33b2dadb6b9a05bdb8fe46e"
 msgstr "@@image: 'figures/module.png'; md5=79e643354e4bcbb2ffc505f854a19b87"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:48(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/sword_config.png'; md5=c10ff645365fdbec53b304dc3dd435d3"
+"@@image: 'figures/sword_sources.png'; md5=79f7b71d48b8f79c4b9606438c1c9650"
 msgstr ""
-"@@image: 'figures/sword_config.png'; md5=c10ff645365fdbec53b304dc3dd435d3"
+"@@image: 'figures/sword_sources.png'; md5=258f70cace884c921ebdeddc0915bb17"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:89(None)
+#: ../C/gnomesword.xml:76(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/sword_sources.png'; md5=258f70cace884c921ebdeddc0915bb17"
+"@@image: 'figures/sword_config.png'; md5=5941742eecb4d1cba508e5f9b1e28565"
 msgstr ""
-"@@image: 'figures/sword_sources.png'; md5=258f70cace884c921ebdeddc0915bb17"
+"@@image: 'figures/sword_config.png'; md5=c10ff645365fdbec53b304dc3dd435d3"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:122(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/sword_install.png'; md5=3cfb6bfe24372a660de21a93425693da"
+"@@image: 'figures/sword_install.png'; md5=c71eda03793fba9ab4728f8b4a8bf7f8"
 msgstr ""
 "@@image: 'figures/sword_install.png'; md5=3cfb6bfe24372a660de21a93425693da"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:154(None)
+#: ../C/gnomesword.xml:155(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/sword_remove.png'; md5=fa774f36de565f22301c7fd2c6971df1"
+"@@image: 'figures/sword_remove.png'; md5=25db01bba9d1c29adf2a0d7b93e6890b"
 msgstr ""
 "@@image: 'figures/sword_remove.png'; md5=fa774f36de565f22301c7fd2c6971df1"
 
@@ -1564,6 +1569,109 @@ msgstr ""
 "navigation sont commandés par les touches de déplacement <keycap>Haut</"
 "keycap> <keycap>Bas</keycap>·<keycap>Gauche</keycap>·<keycap>Droite</keycap>."
 
+#: ../C/gnomesword.xml:652(title)
+msgid "Version Differences in <application>GnomeSword</application>'s Display"
+msgstr "Différences d'affichage dans <application>&appname;</application> :"
+
+#: ../C/gnomesword.xml:653(para)
+msgid ""
+"The <application>GnomeSword</application> interface has evolved over time, "
+"and there are two display libraries with which <application>GnomeSword</"
+"application> can be built. The older, less featureful version is called "
+"\"gtkhtml3\", and the newer, more capable version is called \"MozEmbed\". "
+"Both of these display libraries render text in a browser-like fashion, using "
+"HTML constructs to control display."
+msgstr ""
+"L'application <application>&appname;</application> a évolué au niveau des "
+"possibilités d'affichage. <application>&appname;</application> peut être "
+"compilé avec l'une des 2 bibliothèques suivantes au choix. La plus ancienne, "
+"moins complète se nomme «&nbsp;gtkhtml3&nbsp;», et la nouvelle offrant plus "
+"de possibilités est «&nbsp;MozEmbed&nbsp;»."
+
+#: ../C/gnomesword.xml:660(para)
+msgid ""
+"Several desirable capabilities are unsupportable in gtkhtml3, and although "
+"recent <application>GnomeSword</application> is written to take advantage of "
+"MozEmbed features, it is possible that the version running on your computer "
+"needed to be built with gtkhtml3 instead, either because the version of "
+"MozEmbed available for your system is not recent enough to support the needs "
+"of <application>GnomeSword</application>, or it simply doesn't exist for "
+"your system. (Notably, Cygwin has no MozEmbed at all.) The following "
+"differences will be apparent, depending on whether gtkhtml3 or MozEmbed is "
+"the underlying display engine:"
+msgstr ""
+"Un certain nombre de nouveautés de <application>&appname;</application> ne "
+"sont pas supportées par «&nbsp;gtkhtml3&nbsp;». Bien que "
+"<application>&appname;</application> soit écrit pour tirer parti des "
+"possibilités de «&nbsp;MozEmbed&nbsp;», il est possible que la version "
+"installée sur votre système ait été construite avec «&nbsp;gtkhtml3&nbsp;», "
+"soit que la version installée n'est pas suffisamment récente soit tout "
+"simplement elle n'existe pas. (Note: Cygwin ne propose pas «&nbsp;"
+"MozEmbed&nbsp;»). Les différences suivantes se feront valoir suivant que "
+"vous utilisez «&nbsp;gtkhtml3&nbsp;» ou «&nbsp;MozEmbed&nbsp;» comme moteur "
+"d'affichage :"
+
+#: ../C/gnomesword.xml:670(listitem)
+msgid ""
+"Morphology and Strong's references, enabled via the right-click menu in some "
+"modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
+"display is used, where these references are aligned beneath the word to "
+"which they refer, for a much more readable, less cluttered display."
+msgstr ""
+"Les étiquettes morphologiques ainsi que les références de Strong, activées "
+"via un menu contextuel dans certains modules, sont affichées dans le corps "
+"du texte avec  «&nbsp;gtkhtml3&nbsp;». Avec «&nbsp;MozEmbed&nbsp;», ces "
+"références sont alignées au-dessous du mot auxquelles elles se rapportent de "
+"façon à procurer un affichage plus aéré et plus lisible."
+
+#: ../C/gnomesword.xml:676(guibutton)
+msgid "*n"
+msgstr "*n"
+
+#: ../C/gnomesword.xml:676(guibutton)
+msgid "*x"
+msgstr "*x"
+
+#: ../C/gnomesword.xml:675(listitem)
+msgid ""
+"Footnote and cross-reference markers (<placeholder-1/>, <placeholder-2/>) "
+"are displayed as proper superscripts in MozEmbed, but not in gtkhtml3."
+msgstr ""
+"Les notes de pied de page·et les références croisées·cross·(<placeholder-1/>,"
+"·<placeholder-2/>)·s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
+
+#: ../C/gnomesword.xml:679(listitem)
+msgid ""
+"Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
+"no underlines are needed."
+msgstr ""
+"Les liens avec «&nbsp;gtkhtml3&nbsp;» sont à la fois colorés et soulignés. "
+"Ils ne sont pas soulignés avec «&nbsp;MozEmbed&nbsp;»."
+
+#: ../C/gnomesword.xml:683(guimenuitem)
+msgid "View"
+msgstr "Affichage"
+
+#: ../C/gnomesword.xml:682(listitem)
+msgid ""
+"Under MozEmbed, double-space display is available using the <placeholder-1/> "
+"menu, but not under gtkhtml3."
+msgstr ""
+"Avec «&nbsp;MozEmbed&nbsp;», l'affichage en double espacement du texte est "
+"activable à l'aide du menu <placeholder-1/>,·cette option est indisponible "
+"avec «&nbsp;gtkhtml3&nbsp;»."
+
+#: ../C/gnomesword.xml:688(para)
+msgid ""
+"Using the \"About GnomeSword\" selection under the <guimenuitem>Help</"
+"guimenuitem> menu, you will see the display library with which "
+"<application>GnomeSword</application> was built."
+msgstr ""
+"À l'aide du menu <menuchoice><guimenuitem>Aide</guimenuitem><guimenuitem>À "
+"propos de Gnomesword</guimenuitem></menuchoice>, il est possible de "
+"connaître la bibliothèque avec laquelle <application>&appname;</application> "
+"a été construit."
+
 #: ../C/gnomesword.xml:200(title)
 msgid "Preferences"
 msgstr "Préférences"
@@ -1613,7 +1721,11 @@ msgid ""
 "The base font size is the size initially chosen for all modules displayed by "
 "<application>GnomeSword</application>. The verse number and individual "
 "modules' font size choices are relative to the base font size."
-msgstr "La taille de police standard est la taille par défaut de tous les modules affichés par &app;. Note: la taille des n° de verset ainsi que la taille de la police sélectionnée individuellement par module sont relatives à cette taille standard."
+msgstr ""
+"La taille de police standard est la taille par défaut de tous les modules "
+"affichés par &app;. Note: la taille des n° de verset ainsi que la taille de "
+"la police sélectionnée individuellement par module sont relatives à cette "
+"taille standard."
 
 #: ../C/gnomesword.xml:92(title)
 msgid "General Settings"
@@ -1715,14 +1827,15 @@ msgstr "Introduction à la gestion des modules"
 
 #: ../C/gnomesword.xml:6(para) ../C/modules.xml:6(para)
 msgid ""
-"The \"module\" is the unit of content in GnomeSword, and Sword generally; a "
-"Sword module is a resource available for viewing in Sword applications. "
-"There are several varieties: Most importantly, Bible texts, as well as "
-"dictionaries and lexicons, commentaries, and general books, including some "
-"which have graphical content (e.g. atlases). They are installed either from "
-"a local directory structure (such as a CDROM distribution) or remotely via "
-"ftp from a server such as Crosswire, which is the home of Sword, and from "
-"which all officially Sword-sanctioned modules are available."
+"The \"module\" is the unit of content in <application>GnomeSword</"
+"application>, and Sword generally; a Sword module is a resource available "
+"for viewing in Sword applications. There are several varieties: Most "
+"importantly, Bible texts, as well as dictionaries and lexicons, "
+"commentaries, and general books, including some which have graphical content "
+"(e.g. atlases). They are installed either from a local directory structure "
+"(such as a CDROM distribution) or remotely via ftp from a server such as "
+"Crosswire, which is the home of Sword, and from which all officially Sword-"
+"sanctioned modules are available."
 msgstr ""
 "Le 'module' est l'unité de base de contenu dans &appname; et plus "
 "généralement Sword. Un module de Sword  est une ressource affichée dans une "
@@ -1751,52 +1864,15 @@ msgid "Sword Module Configurations"
 msgstr "Configurations des modules de Sword"
 
 #: ../C/gnomesword.xml:42(title) ../C/gnomesword.xml:44(title)
-msgid "Sword Module Installations"
-msgstr "Installations de modules de Sword"
+msgid "Sword Sources Settings"
+msgstr "Configurer les sources de Sword"
 
-#: ../C/gnomesword.xml:57(phrase) ../C/gnomesword.xml:98(phrase)
+#: ../C/gnomesword.xml:57(phrase) ../C/gnomesword.xml:85(phrase)
 #: ../C/gnomesword.xml:131(phrase)
 msgid "Module Installation"
 msgstr "Installation de module"
 
-#: ../C/gnomesword.xml:62(para)
-msgid ""
-"After you have selected your Install Source, click the <guimenuitem>Refresh</"
-"guimenuitem> button to cause GnomeSword to find the module summary available "
-"from that source before moving on."
-msgstr ""
-"Après avoir choisi votre source d'installation, sélectionner le bouton "
-"<guimenuitem>Rafraîchir</guimenuitem> ce qui conduit <application>&appname;</"
-"application> à répertorier au préalable les modules disponibles au niveau de "
-"la source d'installation."
-
-#: ../C/gnomesword.xml:67(para)
-msgid ""
-"Take note of the \"Install Destination.\" Normal usage of Sword Project "
-"tools in Linux/UNIX environments includes one's personal area, under ~/."
-"sword, plus a shared system-wide area readable by all users. If the user "
-"does not have write access to the system area, that selection will be greyed-"
-"out and unavailable."
-msgstr "Remarques sur le <guimenuitem>Répertoire d'installation</guimenuitem>. L'installation habituelle de Sword dans un environnement Linux/UNIX·comprend un emplacement personnel sous ~/.sword, et un emplacement système accessible seulement en lecture par tous les utilisateurs. Si &app; n'a pas les droits d'accès en écriture sur cet emplacement système, cette option sera grisée et inaccessible."
-
-#: ../C/gnomesword.xml:73(para)
-msgid ""
-"There have been some requests for <application>GnomeSword</application> to "
-"provide a means by which an ordinary (non-root) user could start the "
-"program, gain temporary write access to the system area while installing "
-"modules, and then revoke that access after installation is complete. "
-"Attempting to devise a scheme to do this has proven quite difficult, given "
-"the different superuser management schemes employed by various Linux "
-"distributions. Therefore, at this time there are no ongoing plans to try to "
-"solve this problem, and users are advised to enable write access to the "
-"system area outside <application>GnomeSword</application>."
-msgstr "Un certain nombre de demandes ont été faites pour que soit incorporé à &app; un moyen permettant à un utilisateur ordinaire (non-root) d'obtenir temporairement les droits d'accès à l'emplacement système pendant l'installation des modules, puis d'annuler ces droits une fois l'installation terminée. Étant donné les différentes gestions des droits du super-utilisateur employées dans l'éventail des distributions Linux, il s'est trouvé plutôt difficile d'établir un moyen de satisfaire cette demande. En ce moment, il n'y a aucun projet en cours essayant de résoudre ce problème, il est donc conseillé aux utilisateurs de gérer les droits d'accès en écriture à l'emplacement système en dehors de &app;."
-
-#: ../C/gnomesword.xml:83(title) ../C/gnomesword.xml:85(title)
-msgid "Sword Sources Settings"
-msgstr "Configurer les sources de Sword"
-
-#: ../C/gnomesword.xml:104(para)
+#: ../C/gnomesword.xml:63(para)
 msgid ""
 "There are other repositories available besides Crosswire's own, though the "
 "modules available from other repositories do not represent content "
@@ -1810,13 +1886,66 @@ msgstr ""
 "Module_Repositories\">http://www.crosswire.org/wiki/index.php/"
 "Module_Repositories</ulink> recense les sources connues."
 
+#: ../C/gnomesword.xml:70(title) ../C/gnomesword.xml:72(title)
+msgid "Sword Module Installations"
+msgstr "Installations de modules de Sword"
+
+#: ../C/gnomesword.xml:90(para)
+msgid ""
+"After you have selected your Install Source, click the <guimenuitem>Refresh</"
+"guimenuitem> button to cause <application>GnomeSword</application> to find "
+"the module summary available from that source before moving on."
+msgstr ""
+"Après avoir choisi votre source d'installation, sélectionner le bouton "
+"<guimenuitem>Rafraîchir</guimenuitem> ce qui conduit <application>&appname;</"
+"application> à répertorier au préalable les modules disponibles au niveau de "
+"la source d'installation."
+
+#: ../C/gnomesword.xml:95(para)
+msgid ""
+"Take note of the \"Install Destination.\" Normal usage of Sword Project "
+"tools in Linux/UNIX environments includes one's personal area, under ~/."
+"sword, plus a shared system-wide area readable by all users. If the user "
+"does not have write access to the system area, that selection will be greyed-"
+"out and unavailable."
+msgstr ""
+"Remarques sur le <guimenuitem>Répertoire d'installation</guimenuitem>. "
+"L'installation habituelle de Sword dans un environnement Linux/UNIX·comprend "
+"un emplacement personnel sous ~/.sword, et un emplacement système accessible "
+"seulement en lecture par tous les utilisateurs. Si &app; n'a pas les droits "
+"d'accès en écriture sur cet emplacement système, cette option sera grisée et "
+"inaccessible."
+
+#: ../C/gnomesword.xml:101(para)
+msgid ""
+"There have been some requests for <application>GnomeSword</application> to "
+"provide a means by which an ordinary (non-root) user could start the "
+"program, gain temporary write access to the system area while installing "
+"modules, and then revoke that access after installation is complete. "
+"Attempting to devise a scheme to do this has proven quite difficult, given "
+"the different superuser management schemes employed by various Linux "
+"distributions. Therefore, at this time there are no ongoing plans to try to "
+"solve this problem, and users are advised to enable write access to the "
+"system area outside <application>GnomeSword</application>."
+msgstr ""
+"Un certain nombre de demandes ont été faites pour que soit incorporé à &app; "
+"un moyen permettant à un utilisateur ordinaire (non-root) d'obtenir "
+"temporairement les droits d'accès à l'emplacement système pendant "
+"l'installation des modules, puis d'annuler ces droits une fois "
+"l'installation terminée. Étant donné les différentes gestions des droits du "
+"super-utilisateur employées dans l'éventail des distributions Linux, il "
+"s'est trouvé plutôt difficile d'établir un moyen de satisfaire cette "
+"demande. En ce moment, il n'y a aucun projet en cours essayant de résoudre "
+"ce problème, il est donc conseillé aux utilisateurs de gérer les droits "
+"d'accès en écriture à l'emplacement système en dehors de &app;."
+
 #: ../C/gnomesword.xml:114(title)
 msgid "Add And Remove Modules"
 msgstr "Ajouter et supprimer des modules"
 
 #: ../C/gnomesword.xml:116(title)
-msgid "Adding Sword Modules"
-msgstr "Ajout de modules Sword"
+msgid "Adding and Updating Sword Modules"
+msgstr "Ajout et mise à jour de modules Sword"
 
 #: ../C/gnomesword.xml:118(title)
 msgid "Adding Modules"
@@ -1824,15 +1953,20 @@ msgstr "Ajout de modules"
 
 #: ../C/gnomesword.xml:137(para)
 msgid ""
-"Modules that are already installed have a checkmark beside them. Locked "
-"modules, which require that you purchase an unlock key from the module's "
-"copyright holder, will show a lock symbol."
+"Modules that are already installed have a checkmark beside them. If a fast "
+"search (\"lucene\") index is available, an open book is displayed, otherwise "
+"an \"X\" is shown; creation of the index is available on the Maintenance "
+"pane. Locked modules, which require that you purchase an unlock key from the "
+"module's copyright holder, will show a lock symbol."
 msgstr ""
-"Les modules déjà installés sont cochés. Les modules verrouilles, nécessitant "
+"Les modules déjà installés sont cochés. Si le module est indexé, un symbole "
+"représentant un petit livret est affiché, sinon une croix est présente. La "
+"création d'un index pour recherches rapides est disponible dans le volet "
+"<guimenuitem>Maintenance</guimenuitem>. Les modules verrouilles, nécessitant "
 "l'achat d'une clé de déverrouillage auprès du détenteur des droits d'un "
 "module sous copyright sont mentionnés par un symbole en forme de verrou."
 
-#: ../C/gnomesword.xml:141(para)
+#: ../C/gnomesword.xml:142(para)
 msgid ""
 "Select new modules to be installed by clicking the checkboxes and then the "
 "Install button at the bottom. Any number of modules may be requested for "
@@ -1847,15 +1981,28 @@ msgstr ""
 "disponible, ceci est signalé par un petit symbole de rafraîchissement situé "
 "à côté du numéro de version."
 
-#: ../C/gnomesword.xml:148(title)
-msgid "Removing Sword Modules"
-msgstr "Suppression de modules Sword"
+#: ../C/gnomesword.xml:149(title) ../C/gnomesword.xml:151(title)
+#: ../C/gnomesword.xml:164(phrase)
+msgid "Module Maintenance"
+msgstr "Maintenance des modules"
 
-#: ../C/gnomesword.xml:150(title) ../C/gnomesword.xml:163(phrase)
-msgid "Removing Modules"
-msgstr "Suppression de modules"
+#: ../C/gnomesword.xml:169(para)
+msgid ""
+"Several maintenance functions are available: Removal, archival, index, and "
+"index deletion."
+msgstr ""
+"Plusieurs opérations de maintenance sont possibles : Suppression, archivage, "
+"indexation et suppression d'index."
 
-#: ../C/gnomesword.xml:168(para)
+#: ../C/gnomesword.xml:172(para)
+msgid ""
+"Removal disposes of a module entirely. There is no recovery of the module "
+"unless you have previously archived a copy of it."
+msgstr ""
+"Supprimer un module est une opération définitive. Il est impossible de "
+"récupérer le module à moins que vous n'ayez une copie de celui-ci."
+
+#: ../C/gnomesword.xml:175(para)
 msgid ""
 "Archival is available for any module, although it is provided with personal "
 "commentaries specifically in mind. A *.zip of the module is left in the "
@@ -1869,11 +2016,28 @@ msgstr ""
 "Il est recommandé d'archiver les commentaires personnels avant de les "
 "supprimer de façon à pouvoir les réinstaller si besoin est."
 
-#: ../C/gnomesword.xml:178(title)
+#: ../C/gnomesword.xml:180(para)
+msgid ""
+"Indexing is provided so that the underlying Sword search support can create "
+"the index needed for the \"lucene\" multi-word fast-search functions. If the "
+"index is not created, multi-word search will still be available, but it will "
+"be much slower. With the index in place, searches through an entire Bible "
+"can take just a few seconds."
+msgstr ""
+"L'indexation est une opération permettant au moteur Sword d'effectuer des "
+"recherches multi-mots rapides. Si cet index n'existe pas, les recherches "
+"durent un certain temps. Avec la mise en place d'un index, la recherche de "
+"type multi-mots sur l'ensemble de la Bible ne dure que quelques secondes."
+
+#: ../C/gnomesword.xml:185(para)
+msgid "Indexes may be deleted as well."
+msgstr "Les index peuvent être supprimés."
+
+#: ../C/gnomesword.xml:193(title)
 msgid "Installing Non-Standard Modules"
 msgstr "Installer des modules non-standards"
 
-#: ../C/gnomesword.xml:179(para)
+#: ../C/gnomesword.xml:194(para)
 msgid ""
 "Some resource modules in Sword Project format are available from sources "
 "other than Crosswire. Necessarily, installing such a module is a manual task."
@@ -1881,7 +2045,7 @@ msgstr ""
 "Des modules au format Sword Project sont disponibles auprès d'autres sources "
 "que Crosswire. Il est nécessaire de les installer manuellement."
 
-#: ../C/gnomesword.xml:183(para)
+#: ../C/gnomesword.xml:198(para)
 msgid ""
 "Modules are normally packaged as *.zip files; they contain a configuration "
 "file plus a number of data files. Installation of such a module is done by "
@@ -1904,7 +2068,7 @@ msgstr ""
 "sword, vous pouvez aussi décompresser le fichier zip dans ce répertoire, le "
 "module sera partagé par tous les utilisateurs."
 
-#: ../C/gnomesword.xml:190(para)
+#: ../C/gnomesword.xml:205(para)
 msgid ""
 "Restart <application>GnomeSword</application> after installing such a "
 "module, so that a fresh instance of the program can notice the new module in "
@@ -3032,6 +3196,12 @@ msgstr ""
 #: ../C/studypad.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid "Removing Sword Modules"
+#~ msgstr "Suppression de modules Sword"
+
+#~ msgid "Removing Modules"
+#~ msgstr "Suppression de modules"
 
 #~ msgid "@@image: 'figures/module.png'; md5=e8875805cdd04d5db4677faafc6d18ac"
 #~ msgstr "@@image: 'figures/module.png'; md5=e8875805cdd04d5db4677faafc6d18ac"
