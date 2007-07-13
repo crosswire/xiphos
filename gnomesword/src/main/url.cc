@@ -25,6 +25,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>	
 #include <url.h>
@@ -227,6 +228,10 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 			}
 		}
 		g_string_free(cmd, TRUE);
+
+		// reap zombies.
+		int state;
+		(void) wait(&state);
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					filename);
