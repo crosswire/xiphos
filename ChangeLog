@@ -1,3 +1,7 @@
+2007-07-13  karl <charcoal@users.sf.net>
+
+	* reap children spawned by image display.
+
 2007-07-08  karl <charcoal@users.sf.net>
 
 	* for highlight, force highlight_fg on verse number.
