@@ -892,9 +892,10 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 						      commentary, info);
 		}
 		else if (!strcmp(info->type, DICT_MODS)) {
-			char *feature = main_get_mod_config_entry(info->name,
-							      "Feature");
-			if (feature && !strcmp(feature, "DailyDevotion")) {
+			//char *feature = main_get_mod_config_entry(info->name,
+			//				      "Feature");
+			//if (feature && !strcmp(feature, "DailyDevotion")) {
+			if(info->is_devotional) {
 				add_language_folder(GTK_TREE_MODEL(store),
 						    devotional, info->language);
 				add_module_to_language_folder(GTK_TREE_MODEL
