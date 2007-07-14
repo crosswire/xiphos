@@ -493,6 +493,13 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 				      		&bytes_read, 
 						&bytes_written,
 				      		error);
+			
+			char *feature = (char*)module->getConfigEntry("Feature");
+			if (feature && !strcmp(feature, "DailyDevotion"))
+				mod_info->is_devotional = 1;
+			else
+				mod_info->is_devotional = 0;			
+			
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
 			mod_info->installed =
