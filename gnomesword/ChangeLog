@@ -1,3 +1,8 @@
+2007-07-14  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
+
+	* repair karl's stupidity about first-time user mod.mgr -vs-
+	  a backend which doesn't exist during first-time user mod.mgr.
+
 2007-07-13  karl <charcoal@users.sf.net>
 
 	* reap children spawned by image display.
