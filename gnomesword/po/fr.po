@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-10 21:53+0200\n"
-"PO-Revision-Date: 2007-07-10 22:01+0200\n"
+"PO-Revision-Date: 2007-07-20 11:10+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
@@ -2108,23 +2108,22 @@ msgstr "Supprimer les modules suivants :"
 
 #: ../src/gnome2/mod_mgr.c:253
 msgid "Archive these modules:"
-msgstr "Archiver ces modules :"
+msgstr "Archiver les modules suivants :"
 
 #: ../src/gnome2/mod_mgr.c:255
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module):"
 msgstr ""
-"Indexer ces module en vue d'accélérer les requêtes (peut prendre un certain "
-"temps):"
+"Ajouter un index pour recherche rapide aux modules suivants (dure un certain temps) :"
 
 #: ../src/gnome2/mod_mgr.c:257
 msgid "Delete fast-search index for these modules:"
-msgstr "Supprimer l'index pour recherche rapide de ces modules :"
+msgstr "Retirer l'index pour recherche rapide aux modules suivants :"
 
 #: ../src/gnome2/mod_mgr.c:283
 msgid "Preparing to install"
-msgstr "Préparation de l'installation"
+msgstr "Préparation à l'installation"
 
 #: ../src/gnome2/mod_mgr.c:285
 msgid "Preparing to remove"
@@ -2132,7 +2131,7 @@ msgstr "Préparation à la suppression"
 
 #: ../src/gnome2/mod_mgr.c:287
 msgid "Preparing to archive"
-msgstr "Préparation de l'archivage"
+msgstr "Préparation à l'archivage"
 
 #: ../src/gnome2/mod_mgr.c:289
 msgid "Preparing to index"
@@ -2152,15 +2151,15 @@ msgstr "Suppression de"
 
 #: ../src/gnome2/mod_mgr.c:322
 msgid "Archiving"
-msgstr "Archivage"
+msgstr "Archivage de"
 
 #: ../src/gnome2/mod_mgr.c:324
 msgid "Indexing"
-msgstr "Indexation"
+msgstr "Indexation de"
 
 #: ../src/gnome2/mod_mgr.c:326
 msgid "Deleting index"
-msgstr "Supprime l'index"
+msgstr "Suppression de l'index à"
 
 #: ../src/gnome2/mod_mgr.c:346
 #, c-format
@@ -2272,11 +2271,11 @@ msgstr "Modules"
 
 #: ../src/gnome2/mod_mgr.c:1368
 msgid "Install/Update"
-msgstr "Installer/MàJ"
+msgstr "Installer"
 
 #: ../src/gnome2/mod_mgr.c:1370
 msgid "Maintenance"
-msgstr "Maintenance"
+msgstr "Gérer"
 
 #: ../src/gnome2/mod_mgr.c:1591
 msgid "Please Refresh"
@@ -2668,7 +2667,7 @@ msgstr "<b>Vue parallèle</b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Show</b>"
-msgstr "<b>Afficher</b>"
+msgstr "<b>Volets</b>"
 
 # src/gs_preferences_dlg.c
 #: ../ui/prefs.glade.h:16
@@ -2700,7 +2699,7 @@ msgstr "Taille de la police standard"
 
 #: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
-msgstr "Textes bibliques"
+msgstr "Texte biblique"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible text"
@@ -2737,7 +2736,7 @@ msgstr "Dictionnaire"
 
 #: ../ui/prefs.glade.h:33
 msgid "Dictionary/Lexicon"
-msgstr "Dictionnaire/Lexiques"
+msgstr "Dictionnaire/Lexique"
 
 #: ../ui/prefs.glade.h:34
 msgid "Font Colors"
@@ -3060,7 +3059,7 @@ msgstr "Inclut les nombres de Strong dans l'affichage des versets"
 msgid "Make selections on the Attribute Search tab"
 msgstr ""
 "Recherche sur les nombres de Strong \n"
-"Plus d'options dans l'onglet Atributs"
+"Plus d'options dans l'onglet Attributs"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Module Selection"
