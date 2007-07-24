@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-10 21:57+0200\n"
-"PO-Revision-Date: 2007-07-20 12:57+0200\n"
+"PO-Revision-Date: 2007-07-24 22:33+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
@@ -3017,23 +3017,23 @@ msgstr "Auteurs"
 
 #: ../C/gnomesword.xml:8(para)
 msgid "Andy Piper"
-msgstr "Andy·Piper"
+msgstr "Andy Piper"
 
 #: ../C/gnomesword.xml:13(para)
 msgid "Pierre Benz"
-msgstr "Pierre·Benz"
+msgstr "Pierre Benz"
 
 #: ../C/gnomesword.xml:18(para)
 msgid "Dr Peter von Kaehne"
-msgstr "Dr·Peter·von·Kaehne"
+msgstr "Dr Peter von Kaehne"
 
 #: ../C/gnomesword.xml:23(para)
 msgid "Karl Kleinpaste"
-msgstr "Karl·Kleinpaste"
+msgstr "Karl Kleinpaste"
 
 #: ../C/gnomesword.xml:28(para)
 msgid "Dominique Corbex"
-msgstr "Dominique·Corbex"
+msgstr "Dominique Corbex"
 
 #: ../C/gnomesword.xml:33(para)
 msgid ""
@@ -3105,9 +3105,9 @@ msgstr ""
 "peut être consulté en annexe du <citetitle>GNOME Users Guide</citetitle> ou "
 "sur le site Internet de la <ulink type=\"http\" url=\"http://www.fsf.org"
 "\">Free  Software Foundation</ulink>, ou encore en écrivant à : <address>Free "
-"Software Foundation, Inc.<street>59 Temple Place</street> - Suite "
-"330<city>Boston</city>, <state>MA</state> <postcode>02111-1307</"
-"postcode><country>USA</country></address>"
+"Software Foundation, Inc.<street> 59 Temple Place</street> - Suite "
+"330 <city>Boston</city>, <state>MA</state><postcode>02111-1307</"
+"postcode> <country>USA</country></address>"
 
 #: ../C/interface.xml:27(phrase)
 msgid "menubar"
