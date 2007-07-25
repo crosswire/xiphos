@@ -1130,8 +1130,8 @@ static void add_to_found_list(gchar * result_text, gchar * module)
 			   1, result_text, 
 			   -1);
 		
-	if (result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
-		g_free(result_text);
+//	if (result_text) /* allocated by g_convert() in BackEnd::get_next_listkey() */
+//		g_free(result_text);
 	g_string_free(str, TRUE);
 }
 /******************************************************************************
@@ -1501,7 +1501,7 @@ void main_do_dialog_search(void)
 			else			
 				g_string_printf(str, "%s: %s", module,  key_buf);				
 			tmp_list = g_list_append(tmp_list, (char*) g_strdup(str->str));
-			g_free((char*)key_buf);	
+//			g_free((char*)key_buf);	
 		}
 		list_of_finds = g_list_append(list_of_finds, (GList*)tmp_list);
 		// add number of hits in each module to finds listview

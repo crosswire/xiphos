@@ -369,21 +369,22 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != display_mgr->Modules.end()) {
-		char *mykey;                                                 
+/*		char *mykey;                                                 
 		gsize bytes_read;
 		gsize bytes_written;
 		GError **error = NULL;		
-		mykey = g_convert(key,
+//		mykey = g_convert(key,
 				     -1,
 				     OLD_CODESET,
 				     UTF_8,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
+				     error);  */
 		mod = (*it).second;
-		mod->setKey(mykey);
+//		mod->setKey(mykey);
+		mod->setKey(key);
 		//g_message("mykey: %s", mykey);
-		g_free(mykey);
+//		g_free(mykey);
 		return strdup((char *) mod->RenderText());
 	}
 	return NULL;	
@@ -395,20 +396,21 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != display_mgr->Modules.end()) {
-		char *mykey;                                                 
-		gsize bytes_read;
-		gsize bytes_written;
-		GError **error = NULL;		
-		mykey = g_convert(key,
+//		char *mykey;                                                 
+//		gsize bytes_read;
+//		gsize bytes_written;
+//		GError **error = NULL;		
+/*		mykey = g_convert(key,
 				     -1,
 				     OLD_CODESET,
 				     UTF_8,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
+				     error);  */
 		mod = (*it).second;
-		mod->setKey(mykey);
-		g_free(mykey);
+//		mod->setKey(mykey);
+		mod->setKey(key);
+//		g_free(mykey);
 		return strdup((char *) mod->getRawEntry());
 	}
 	return NULL;	
@@ -448,20 +450,21 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
-		char *mykey;                                                 
+/*		char *mykey;                                                 
 		gsize bytes_read;
 		gsize bytes_written;
 		GError **error = NULL;		
-		mykey = g_convert(key,
+//		mykey = g_convert(key,
 				     -1,
 				     OLD_CODESET,
 				     UTF_8,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
+				     error);  */
 		mod = (*it).second;
-		mod->setKey(mykey);
-		g_free(mykey);
+//		mod->setKey(mykey);
+		mod->setKey(key);
+//		g_free(mykey);
 		return strdup((char *) mod->StripText());
 	}
 	return NULL;	
@@ -471,38 +474,40 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 char *BackEnd::get_valid_key(const char *key) {
 	VerseKey vkey;
 	char *mykey;                                                 
-        gsize bytes_read;
+/*     gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(key,
+//	mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
                              error);
-	
+	*/
 	vkey.AutoNormalize(1);
-	vkey = mykey;       
-	g_free(mykey);
+//	vkey = mykey;
+	vkey = key;
+//	g_free(mykey);
 	if((sword_locale) && (!strcmp(sword_locale,"en")))
-		mykey = g_convert((char*)vkey.getShortText(),
+/*		mykey = g_convert((char*)vkey.getShortText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);   */
+		mykey = (char*)vkey.getShortText();
 	else
-		mykey = g_convert((char*)vkey.getText(),
+/*		mykey = g_convert((char*)vkey.getText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
-			     
+                             error);    */
+		mykey = (char*)vkey.getText();
 	//g_warning("valkey = %s",mykey);
 	//g_warning("vkey.getText() = %s",(char*)vkey.getText());
 	return strdup(mykey);
@@ -510,90 +515,95 @@ char *BackEnd::get_valid_key(const char *key) {
 
 char *BackEnd::key_get_book(const char *key) {
 	VerseKey vkey;
-	char *mykey;                                                 
+/*	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(key,
+//	mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error); */
 	vkey.AutoNormalize(1);
-	vkey = mykey;
-	      
-	g_free(mykey);
-	mykey = g_convert((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name,
+//	vkey = mykey;
+	vkey = key;
+	
+//	g_free(mykey);
+/*	mykey = g_convert((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name,
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
-	return mykey;
+                             error);   */
+//	return mykey;
+	return (char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name;
 }
 
 
 int BackEnd::key_get_chapter(const char *key) {
 	VerseKey vkey;
-	char *mykey;                                                 
+/*	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(key,
+/*	mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
 	vkey.AutoNormalize(1);
-	vkey = mykey;
-	g_free(mykey);
+//	vkey = mykey;
+	vkey = key;
+//	g_free(mykey);
 	return vkey.Chapter();
 }
 
 int BackEnd::key_get_verse(const char *key) {
 	VerseKey vkey;
-	char *mykey;                                                 
+/*	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(   key,
+//	mykey = g_convert(   key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
 	vkey.AutoNormalize(1);
-	vkey = mykey;
-	g_free(mykey);
+//	vkey = mykey;
+	vkey = key;
+//	g_free(mykey);
 	return vkey.Verse();
 }
 
 const unsigned int BackEnd::key_chapter_count(const char *key) {
 	VerseKey vkey;
-	char *mykey;                                                 
+/*	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(   key,
+//	mykey = g_convert(   key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
 	vkey.AutoNormalize(1);
-	vkey = mykey;
-	g_free(mykey);
+//	vkey = mykey;
+	vkey = key;
+//	g_free(mykey);
 	
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
@@ -603,21 +613,22 @@ const unsigned int BackEnd::key_chapter_count(const char *key) {
 
 const unsigned int BackEnd::key_verse_count(const char *key) {
 	VerseKey vkey;  
-	char *mykey;                                                   
+/*	char *mykey;                                                   
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
 	
-	mykey = g_convert(   key,
+//	mykey = g_convert(   key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
 	vkey.AutoNormalize(1);
-	vkey = mykey;
-	g_free(mykey);
+//	vkey = mykey;
+	vkey = key;
+//	g_free(mykey);
 	
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
@@ -627,20 +638,21 @@ const unsigned int BackEnd::key_verse_count(const char *key) {
 
 
 char *BackEnd::get_module_key() { 
-	char *mykey;                                                   
+/*	char *mykey;                                                   
         gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;
+        GError **error = NULL;    */
 	(const char *) *display_mod;
 	
-	mykey = g_convert(   (char*)display_mod->KeyText(),
+/*	mykey = g_convert(   (char*)display_mod->KeyText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
-	return mykey;
+                             error);    */
+//	return mykey;
+	return strdup((char*)display_mod->KeyText());
 }
 
 void BackEnd::save_entry(const char * entry) {
@@ -712,10 +724,10 @@ int BackEnd::module_type(const char *mod_name) {
 
 char *BackEnd::module_description(char *mod_name) {
 	ModMap::iterator it;	//-- iteratior
-	char *description = NULL;                                                   
+/*	char *description = NULL;                                                   
         gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;
+        GError **error = NULL;    */
 	
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return NULL;
@@ -723,15 +735,16 @@ char *BackEnd::module_description(char *mod_name) {
 	it = main_mgr->Modules.find(mod_name);
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {	
-		description = g_convert((char*)(*it).second->Description(),
+/*		description = g_convert((char*)(*it).second->Description(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);     */
 		//g_message((*it).second->Description());
-		return description;  //(*it).second->Description();
+//		return description;  //(*it).second->Description();
+		return (*it).second->Description();
 	}
 	return NULL;
 }
@@ -754,8 +767,8 @@ char *BackEnd::module_name_from_description(char *description) {
 
 int BackEnd::get_key_testament(const char * key) {
         gsize bytes_written;
-	char *mykey =  g_locale_from_utf8(key,-1,NULL,&bytes_written,NULL);
-	/*char *mykey = g_convert(   (char*)key,
+//	char *mykey =  g_locale_from_utf8(key,-1,NULL,&bytes_written,NULL);
+/*	char *mykey = g_convert(   (char*)key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
@@ -763,8 +776,8 @@ int BackEnd::get_key_testament(const char * key) {
                              &bytes_written,
                              error);*/
 	
-	sword::VerseKey ikey( mykey );
-	g_free(mykey);
+	sword::VerseKey ikey( key );
+//	g_free(mykey);
 	return ikey.Testament();	
 }
 
@@ -870,12 +883,12 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 	display_mod = display_mgr->Modules[module_name];
 	
 	if (display_mod) {
-		char *mykey;                                                 
+/*		char *mykey;                                                 
         	gsize bytes_read;
        	 	gsize bytes_written;
-        	GError *error = NULL;
+        	GError *error = NULL; */
 		GS_message((f_message,878,"key",key));
-		mykey = g_convert(key,
+/*		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
@@ -886,9 +899,11 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 			GS_print(("error: %s\n", error->message));
 			g_error_free (error);	
 		}
-		display_mod->setKey(mykey);
-		GS_message((f_message,893,"mykey",mykey));
-		g_free(mykey);
+		display_mod->setKey(mykey);   */
+		display_mod->setKey(key);
+		
+/*		GS_message((f_message,893,"mykey",mykey));
+		g_free(mykey);    */
 		return 1;
 	}
 	else 
@@ -900,22 +915,22 @@ int BackEnd::set_key(const char *key) {
 	if(!key)
 		return 0;
 	if (display_mod) {
-		char *mykey;                                                 
+/*		char *mykey;                                                 
         	gsize bytes_read;
        	 	gsize bytes_written;
-        	GError **error = NULL;
+        	GError **error = NULL;  */
 		GS_message((f_message,758,"key",key));
-		mykey = g_convert(key,
+/*		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
-		display_mod->setKey(mykey);
-		GS_message((f_message,767,"mykey",mykey));
-		g_free(mykey);
-		//display_mod->setKey(key);
+                             error);   */
+//		display_mod->setKey(mykey);
+//		GS_message((f_message,767,"mykey",mykey));
+//		g_free(mykey);
+		display_mod->setKey(key);
 		return 1;
 	}
 	else 
@@ -925,9 +940,9 @@ int BackEnd::set_key(const char *key) {
 
 char *BackEnd::get_key_form_offset(unsigned long offset) {
 	char *retval = NULL;                                      
-        gsize bytes_read;
+/*        gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;
+        GError **error = NULL;   */
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
                 treenode.setOffset(offset);
@@ -936,14 +951,14 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
                         display_mod->SetKey(treenode);
                         display_mod->KeyText();      //snap to entry
                 }		
-		retval = g_convert( (char *) display_mod->KeyText(),
+/*		retval = g_convert( (char *) display_mod->KeyText(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
-		//retval = strdup(display_mod->KeyText());
+				     error);   */
+		retval = strdup(display_mod->KeyText());
         }
         return retval;
 }
@@ -977,16 +992,16 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
         SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
 	char *mykey;                                                 
-        gsize bytes_read;
+ /*       gsize bytes_read;
        	gsize bytes_written;
-        GError *error = NULL;
+        GError *error = NULL;    */
 	unsigned long retval = 0;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {		
 		mod = (*it).second;
-		mykey = g_convert(key,
+/*		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
@@ -996,9 +1011,10 @@ unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, con
 		if(error) {
 			GS_print(("error: %s\n", error->message));
 			g_error_free (error);	
-		}		
+		}    */		
 		TreeKeyIdx *tree_key_idx = (TreeKeyIdx *) mod->CreateKey();
-		tree_key_idx->setText(mykey);
+//		tree_key_idx->setText(mykey);
+		tree_key_idx->setText(key);
                 mod->SetKey(tree_key_idx);
 		(char*)mod;
 		retval = tree_key_idx->getOffset();
@@ -1076,10 +1092,10 @@ int BackEnd::treekey_prev_sibling(unsigned long offset) {
 
 
 char *BackEnd::navigate_module(int direction) {
-	char *retval = NULL;                                      
-        gsize bytes_read;
+/*	char *retval = NULL;                                      
+/*        gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;
+        GError **error = NULL;    */
 	if (direction == -1)
 		return strdup((char *) display_mod->KeyText());
 
@@ -1092,13 +1108,13 @@ char *BackEnd::navigate_module(int direction) {
 		break;
 	}
 	display_mod->Error();
-	retval = g_convert( (char *) display_mod->KeyText(),
+/*	retval = g_convert( (char *) display_mod->KeyText(),
 			     -1,
 			     UTF_8,
 			     OLD_CODESET,
 			     &bytes_read,
 			     &bytes_written,
-			     error);
+			     error);   */
 	return strdup((char *) display_mod->KeyText());
 }
 
@@ -1106,37 +1122,39 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	GList *retlist = NULL;
 	VerseKey key;
 	ListKey vs;                                                   
-        gsize bytes_read;
+/*        gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;
+        GError **error = NULL;    */
 	
 	if(!list)
 		return retlist;
-	
-	char *m_current_key = g_convert(current_key,
+	g_message("current_key=%s",current_key);
+/*	char *m_current_key = g_convert(current_key,
 				     -1,
 				     OLD_CODESET,
 				     UTF_8,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
+				     error);    */
 	
-	key.setText(m_current_key);
+//	key.setText(m_current_key);
+	key.setText(current_key);
 	vs = key.ParseVerseList(list, key, TRUE);
-	g_free(m_current_key);
+//	g_free(m_current_key);
 	if(!vs.Count())
 		return retlist;
 	while(!vs.Error()) {
-		error = NULL;
-		char *m_key = g_convert((char*)vs.getText(),
+//		error = NULL;
+/*		char *m_key = g_convert((char*)vs.getText(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
+				     error);    */
 
-		retlist = g_list_append(retlist, (char*)m_key);
+//		retlist = g_list_append(retlist, (char*)m_key);
+		retlist = g_list_append(retlist, strdup((char*)vs.getText()));
 		vs++;
 	}
 	return retlist;
@@ -1171,19 +1189,19 @@ void BackEnd::set_listkey_position(char pos) {
 
 const char *BackEnd::get_next_listkey(void) {
 	const char *retval = NULL;                                                  
-        gsize bytes_read;
+/*        gsize bytes_read;
         gsize bytes_written;
-        GError **error = NULL;	
+        GError **error = NULL;	 */
 	
 	while(!results.Error()) {		
-		retval = g_convert((char*)results.getText(),
+/*		retval = g_convert((char*)results.getText(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
-		//retval = results.getText();
+				     error);    */
+		retval = results.getText();
 		results++;
 		return retval;
 	}

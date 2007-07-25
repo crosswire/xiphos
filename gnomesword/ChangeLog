@@ -1,3 +1,7 @@
+2007-07-25  dom <domcox@users.sf.net>
+
+	* i18n cleanup (part of) : backend
+
 2007-07-14  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
 	* repair karl's stupidity about first-time user mod.mgr -vs-
