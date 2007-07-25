@@ -704,10 +704,10 @@ void main_locked_module_display(gpointer data,
 void main_dictionary_entry_changed(char * mod_name)
 {	
 	gchar *key = NULL;
-	gchar *key2 = NULL;
+/*	gchar *key2 = NULL;
 	gsize bytes_read;	
 	gsize bytes_written;	
-	GError **error = NULL;
+	GError **error = NULL;    */
 
 	if (!mod_name) 
 		return;
@@ -715,30 +715,31 @@ void main_dictionary_entry_changed(char * mod_name)
 		xml_set_value("GnomeSword", "modules", "dict", mod_name);
 		settings.DictWindowModule = xml_get_value("modules", "dict");
 	}	
-	
+
 	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
 	
 //	key2 = g_utf8_strup(key, strlen(key));
-	key2 = g_convert(  key,	
+/*	key2 = g_convert(  key,	
 			     -1,	
 			     UTF_8,	
 			     OLD_CODESET,	
 			     &bytes_read,	
 			     &bytes_written,
-			     error);		
+			     error);	   */	
 
-	backend->set_module_key(mod_name, key2);
-	g_free(key2);
+//	backend->set_module_key(mod_name, key2);
+	backend->set_module_key(mod_name, key);
+//	g_free(key2);
 	g_free(key);
 	key = backend->get_module_key();
 
-	key2 = g_convert(  key,	
+/*	key2 = g_convert(  key,	
 			     -1,	
 			     OLD_CODESET,	
 			     UTF_8,	
 			     &bytes_read,	
 			     &bytes_written,
-			     error);	
+			     error);	   */
 		
 	xml_set_value("GnomeSword", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
@@ -746,31 +747,32 @@ void main_dictionary_entry_changed(char * mod_name)
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
-	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key2);
+//	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key2);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
 	g_free(key);
-	g_free(key2);
+//	g_free(key2);
 } 
 
 
 
 static void dict_key_list_select(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *buf;                                       
+/*	gchar *buf;                                       
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;	
-	
-	buf = g_convert((char*)(gchar*) user_data,
+	GError **error = NULL;	*/
+
+/*	buf = g_convert((char*)(gchar*) user_data,
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
                              error);
-	GS_message(("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf));
+	GS_message(("\nuser_data: %s\nbuf: %s",(gchar*) user_data,buf));  */
 	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), (gchar*) user_data);
 	gtk_widget_activate(widgets.entry_dict);
-	g_free(buf);
+//	g_free(buf);
 }
 
 /******************************************************************************
@@ -794,13 +796,13 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	gint count = 9, i;
 	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
-	gchar *key2 = NULL;
+//	gchar *key2 = NULL;
 	gint height;
 	GtkWidget *menu;
 	GtkWidget * item;
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;
+	GError **error = NULL;    */
 	
 	menu = gtk_menu_new();
 	
@@ -816,17 +818,17 @@ GtkWidget *main_dictionary_drop_down_new(char * mod_name, char * old_key)
 	
 	GS_message(("\nold_key: %s\nkey: %s",old_key,key));
 //	key2 = g_utf8_strup(key,strlen(key));
-	key2 = g_convert(  key,	
+/*	key2 = g_convert(  key,	
 			     -1,	
 			     UTF_8,	
 			     OLD_CODESET,	
 			     &bytes_read,	
 			     &bytes_written,
-			     error);
+			     error);    */
 
-	
-	backend->set_module_key(mod_name, key2);
-	g_free(key2);
+//	backend->set_module_key(mod_name, key2);
+	backend->set_module_key(mod_name, key);
+//	g_free(key2);
 	g_free(key);
 	key = backend->get_module_key();
 	
