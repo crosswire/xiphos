@@ -169,8 +169,8 @@ static void fill_search_results_list(int finds)
 		list_item->key = g_strdup(tmpbuf);
 		list_of_verses = g_list_append(list_of_verses, 
 						(RESULTS *) list_item);
-		if(key_buf) /* allocated by g_convert() in BackEnd::get_next_listkey() */
-			g_free((gchar*)key_buf);
+//		if(key_buf) /* allocated by g_convert() in BackEnd::get_next_listkey() */
+//			g_free((gchar*)key_buf);
 	}
 	
 	sprintf(buf, "%d %s", finds, buf1);
