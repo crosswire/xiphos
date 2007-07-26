@@ -540,7 +540,7 @@ char *BackEnd::key_get_book(const char *key) {
                              &bytes_written,
                              error);   */
 //	return mykey;
-	return (char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name;
+	return strdup((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name);
 }
 
 
