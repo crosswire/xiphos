@@ -358,7 +358,7 @@ MOD_MGR *ModuleManager::getNextModule(void)
 	if(it != end) {
 		module = it->second;
 		mod_info = g_new(MOD_MGR, 1);
-		mod_info->name = g_convert(module->Name(),
+//		mod_info->name = g_convert(module->Name(),
 					   -1,
 					   UTF_8,
 					   OLD_CODESET,
@@ -368,7 +368,7 @@ MOD_MGR *ModuleManager::getNextModule(void)
 			mod_info->language = (module->Lang())?
 				backend->get_language_map(module->Lang()): 
 				"unknown";
-			mod_info->type = g_convert(module->Type(),
+//			mod_info->type = g_convert(module->Type(),
 						   -1,
 						   UTF_8,
 						   OLD_CODESET,
@@ -378,7 +378,7 @@ MOD_MGR *ModuleManager::getNextModule(void)
 			buf =
 			    (module->getConfigEntry("Version")) ? module->
 			    getConfigEntry("Version") : " ";
-			mod_info->new_version = g_convert(buf, 
+//			mod_info->new_version = g_convert(buf, 
 						-1, UTF_8, OLD_CODESET,
 				      		&bytes_read, 
 						&bytes_written,
@@ -403,7 +403,7 @@ MOD_MGR *ModuleManager::getNextModule(void)
  * Name
  *   backend_module_mgr_get_path_to_mods
  *
- * Synopsis
+ * Synopsisg_message("module_manager.cc:515 Description=%s",mod_info->description);
  *   #include "backend/module_manager.hh"
  *
  *   char *backend_module_mgr_get_path_to_mods(void)
@@ -440,6 +440,7 @@ int backend_mod_mgr_is_module(const char *mod_name) {
 	}
 	return 0;
 }
+
 /******************************************************************************
  * Name
  *   module_mgr_list_modules
@@ -459,40 +460,47 @@ int backend_mod_mgr_is_module(const char *mod_name) {
 MOD_MGR *backend_module_mgr_get_next_module(void)
 {
 	MOD_MGR *mod_info = NULL;
-	const char *buf;
+/*	const char *buf;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error;
+	GError **error;    */
 	SWModule *module;
 	
 	if(it != end) {
 		module = it->second;
 		mod_info = g_new(MOD_MGR, 1);
-		mod_info->name = g_convert(module->Name(),
+/*		mod_info->name = g_convert(module->Name(),
 					   -1,
 					   UTF_8,
 					   OLD_CODESET,
 					   &bytes_read,
-					   &bytes_written, error);
+					   &bytes_written, error);    */
+		mod_info->name = strdup(module->Name());
+
 		if (mod_info->name) {
 			mod_info->language = (module->Lang())?
 				backend_mod_mgr_get_language_map(module->Lang()): 
 				"unknown";
-			mod_info->type = g_convert(module->Type(),
+/*			mod_info->type = g_convert(module->Type(),
 						   -1,
 						   UTF_8,
 						   OLD_CODESET,
 						   &bytes_read,
 						   &bytes_written,
-						   error);
-			buf =
+						   error);    */
+			mod_info->type = strdup(module->Type());
+
+/*			buf =
 			    (module->getConfigEntry("Version")) ? module->
-			    getConfigEntry("Version") : " ";
-			mod_info->new_version = g_convert(buf, 
+			    getConfigEntry("Version") : " ";    */
+/*			mod_info->new_version = g_convert(buf, 
 						-1, UTF_8, OLD_CODESET,
 				      		&bytes_read, 
 						&bytes_written,
-				      		error);
+				      		error);    */
+			mod_info->new_version = strdup(
+			(module->getConfigEntry("Version")) ? module->
+			    getConfigEntry("Version") : " ");
 			
 			char *feature = (char*)module->getConfigEntry("Feature");
 			if (feature && !strcmp(feature, "DailyDevotion"))
