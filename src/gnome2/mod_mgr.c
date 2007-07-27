@@ -626,7 +626,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gchar *description = NULL;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+//	GError *error = NULL;
 	gchar *buf;
 
 	/* Check language */
@@ -637,12 +637,13 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		info->language = _("Unknown");
 	g_free(buf);
 
-	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
-			 &bytes_written, &error);
-	if(description == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-	}
+/*	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
+			 &bytes_written, &error);    */
+	description = info->description;
+//	if(description == NULL) {
+//		GS_print(("error: %s\n", error->message));
+//		g_error_free (error);
+//	}
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
