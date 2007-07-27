@@ -57,11 +57,11 @@ gchar *gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	
 	info = gui_new_dialog();
 	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	info->label_top = N_("Cipher Key?");
-	info->label_middle = N_("for:");
+	info->label_top = _("Cipher Key?");
+	info->label_middle = _("for:");
 	info->label_bottom = mod_name;
 	info->text1 = g_strdup(cipher_old);
-	info->label1 = N_("Enter Cipher Key: ");
+	info->label1 = _("Enter Cipher Key: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	/*** open dialog ***/
