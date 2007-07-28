@@ -55,9 +55,9 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	GtkTreeIter iter;
 	gint i,x;	
 	VerseKey vkey; 
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	
 	if(!navbar.module_name)
 		return;
@@ -75,14 +75,15 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	do_display = FALSE;
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(navbar.key, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(navbar.key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
-	}
-	vkey = gkey;
+	}    */
+//	vkey = gkey;
+	vkey = key;
 	
 	if((backend->module_has_testament(navbar.module_name, 1))
 				&& (vkey.Testament() == 2))
@@ -139,9 +140,9 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 {
 	VerseKey key; 
 	VerseKey key_abrev; 
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;   */
 	char *book = NULL;
 	GtkTreeIter iter;
 	int i = 0, j = 0, x = 2;
@@ -159,7 +160,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	if (backend->module_has_testament(navbar.module_name, 1)) {
 		while(i < key.BMAX[0]) { 			
 			//key_abrev = key.books[0][i].name;
-			book = g_convert((const char *) key.books[0][i].name,   //key_abrev.getBookAbbrev(),
+/*			book = g_convert((const char *) key.books[0][i].name,   //key_abrev.getBookAbbrev(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -171,7 +172,8 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[0][i].name);
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(	GTK_LIST_STORE(book_model), 
 						&iter, 
@@ -186,7 +188,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	if (backend->module_has_testament(navbar.module_name, 2)) {
 		while(i < key.BMAX[1]) {			
 			//key_abrev = key.books[1][i].name;
-			book = g_convert((const char *) key.books[1][i].name,   //key_abrev.getBookAbbrev(),
+/*			book = g_convert((const char *) key.books[1][i].name,   //key_abrev.getBookAbbrev(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -197,7 +199,8 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[1][i].name);
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(	GTK_LIST_STORE(book_model), 
 						&iter, 
