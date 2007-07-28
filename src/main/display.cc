@@ -276,26 +276,28 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	mod_type = backend->module_type(imodule.Name());
 	GS_message(("mod_type: %d",mod_type));
 	if (mod_type == BOOK_TYPE) {
-		keytext = g_convert(backend->treekey_get_local_name(
+/*		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);*/
+		keytext = strdup(backend->treekey_get_local_name(
+				settings.book_offset));
 		GS_message((keytext));
 	} else if (mod_type == DICTIONARY_TYPE)
 		keytext = g_strdup((char*)imodule.KeyText());
 	else
-		keytext = g_convert((char*)imodule.KeyText(),
+/*		keytext = g_convert((char*)imodule.KeyText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
-
+                             error);    */
+		keytext = strdup((char*)imodule.KeyText());
 	swbuf.appendFormatted(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">",
@@ -715,14 +717,15 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 					: (const char *)*mod),
 				       cache_flags);
 
-		utf8_key = g_convert((char*)key->getText(),
+/*		utf8_key = g_convert((char*)key->getText(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
-		
+				     error);    */
+		utf8_key = strdup((char*)key->getText());
+
 		if (is_rtol)
 			swbuf += "<DIV ALIGN=right>";
 		swbuf.appendFormatted(settings.showversenum
@@ -787,14 +790,15 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				(strongs_or_morph ? "<br>" : ""),
 				_("Chapter"), chapter);
 
-		utf8_key = g_convert((char*)key->getText(),
+/*		utf8_key = g_convert((char*)key->getText(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
-		
+				     error);    */
+		utf8_key = strdup((char*)key->getText());
+
 		if (is_rtol)
 			swbuf += "<DIV ALIGN=right>";
 		swbuf.appendFormatted(settings.showversenum
@@ -1100,13 +1104,14 @@ char GTKChapDisp::Display(SWModule &imodule)
 		else
 			cVerse.InvalidateHeader();
 
-		utf8_key = g_convert((char*)key->getText(),
+/*		utf8_key = g_convert((char*)key->getText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
+	utf8_key = strdup((char*)key->getText());
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
@@ -1889,24 +1894,29 @@ char GTKPrintEntryDisp::Display(SWModule &imodule)
 	mod_type = backend->module_type(imodule.Name());
 
 	if (mod_type == BOOK_TYPE)
-		keytext = g_convert(backend->treekey_get_local_name(
+/*		keytext = g_convert(backend->treekey_get_local_name(
 				settings.book_offset),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
+	keytext = strdup(backend->treekey_get_local_name(
+				settings.book_offset));
+	
 	else if (mod_type == DICTIONARY_TYPE)
 		keytext = g_strdup((char*)imodule.KeyText());
 	else
-		keytext = g_convert((char*)imodule.KeyText(),
+/*		keytext = g_convert((char*)imodule.KeyText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             error);    */
+		keytext = strdup((char*)imodule.KeyText());
+	
 	swbuf.appendFormatted(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
@@ -2015,14 +2025,15 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 			++x;
 			sprintf(heading, "%d", x);
 		}
-		utf8_key = g_convert((char*)key->getText(),
+/*		utf8_key = g_convert((char*)key->getText(),
                              -1,
                              UTF_8,
                              OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
-                             error);
-
+                             error);    */
+		utf8_key = strdup((char*)key->getText());
+		
 		swbuf.appendFormatted(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
 			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "

@@ -332,21 +332,22 @@ static void add_columns(GtkTreeView * treeview)
 void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
 {
 	gchar *key = NULL;
-	gchar *key2 = NULL;
+/*	gchar *key2 = NULL;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;
+	GError **error = NULL;   */
 
 	key=settings.dictkey;
-	key2 = g_convert(  key,	
+/*	key2 = g_convert(  key,	
 			     -1,	
 			     OLD_CODESET,	
 			     UTF_8,	
 			     &bytes_read,	
 			     &bytes_written,
-			     error);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), key2);
-//	g_free(key1);
+			     error);    */
+//	gtk_entry_set_text(GTK_ENTRY(d->entry), key2);
+	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
+//	g_free(key);
 //	g_free(key2);
 }
 
@@ -369,28 +370,28 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
 static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
 {
 	gchar *key = NULL;
-	gchar *key2 = NULL;
+/*	gchar *key2 = NULL;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error = NULL;
+	GError **error = NULL;    */
 	
 	if (d->key)
 		g_free(d->key);
 
 	key=
 	    g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
-	key2 = g_convert(  key,	
+/*	key2 = g_convert(  key,	
 			     -1,	
 			     UTF_8,	
 			     OLD_CODESET,	
 			     &bytes_read,	
 			     &bytes_written,
-			     error);
+			     error);    */
 
-	d->key = g_utf8_strup(key2, -1);
-
+//	d->key = g_utf8_strup(key2, -1);
+	d->key = g_utf8_strup(key, -1);
+	g_free(key);
 	//GS_message((f_message,407,"entry_changedl",d->key));    
-
 	main_dialogs_dictionary_entry_changed(d);
 }
 
