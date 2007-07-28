@@ -988,7 +988,7 @@ static void int_display(GtkHTML *html, gchar * key)
 	int xverses;
 
 	vkey.AutoNormalize(1);
-	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("key convert error: %s => %s\n",
@@ -996,8 +996,10 @@ static void int_display(GtkHTML *html, gchar * key)
 		g_error_free (error);
 		return;
 	}
-	vkey = gkey;
-	g_free(gkey);
+*/
+//	vkey = gkey;
+	vkey = key;
+//	g_free(gkey);
 
 	xverses = (vkey.books[vkey.Testament()-1]
 				 [vkey.Book()-1].
