@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-25 18:50+0100\n"
-"PO-Revision-Date: 2007-07-27 19:41+0100\n"
+"PO-Revision-Date: 2007-07-28 18:01+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -1441,16 +1441,16 @@ msgstr "Ir para "
 #: ../src/gnome2/bibletext_dialog.c:1947
 #: ../src/gnome2/commentary_dialog.c:1650
 msgid "Sync with main"
-msgstr ""
+msgstr "Sincronizar com principal"
 
 #: ../src/gnome2/bibletext_dialog.c:1953
 #: ../src/gnome2/commentary_dialog.c:1656
 msgid "Stay in sync"
-msgstr ""
+msgstr "Manter sincronizado"
 
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
-msgstr ""
+msgstr "Nome de pasta: "
 
 #: ../src/gnome2/bookmarks_menu.c:476
 msgid "Bookmark name: "
@@ -1466,19 +1466,19 @@ msgstr "Módulo: "
 
 #: ../src/gnome2/bookmarks_menu.c:664
 msgid "Restore Bookmark Folder"
-msgstr ""
+msgstr "Restaurar Pasta de Marca"
 
 #: ../src/gnome2/bookmarks_menu.c:740
 msgid "Remove the selected folder"
-msgstr ""
+msgstr "Remover a pasta seleccionada"
 
 #: ../src/gnome2/bookmarks_menu.c:742
 msgid "(and all its contents)?"
-msgstr ""
+msgstr "(e todo o seu conteúdo)?"
 
 #: ../src/gnome2/bookmarks_menu.c:747
 msgid "Remove the selected bookmark"
-msgstr ""
+msgstr "Remover a marca seleccionada"
 
 #: ../src/gnome2/bookmarks_menu.c:911
 msgid "Add"
@@ -1486,7 +1486,7 @@ msgstr "Adicionar"
 
 #: ../src/gnome2/bookmarks_menu.c:917
 msgid "Label: "
-msgstr ""
+msgstr "Rótulo: "
 
 #: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
 msgid "Enter Folder Name"
@@ -1494,47 +1494,47 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:1012
 msgid "Folder Name"
-msgstr ""
+msgstr "Nome da Pasta"
 
 #: ../src/gnome2/bookmarks_menu.c:1013 ../src/gnome2/bookmarks_treeview.c:105
 msgid "Folder: "
-msgstr ""
+msgstr "Pasta: "
 
 #: ../src/gnome2/bookmarks_menu.c:1103
 msgid "Remove Folder"
-msgstr ""
+msgstr "Remover Pasta"
 
 #: ../src/gnome2/bookmarks_menu.c:1104
 msgid "Remove folder and save it"
-msgstr ""
+msgstr "Remover pasta e guardá-la"
 
 #: ../src/gnome2/bookmarks_menu.c:1110
 msgid "Restore Folder"
-msgstr ""
+msgstr "Restaurar Pasta"
 
 #: ../src/gnome2/bookmarks_menu.c:1111
 msgid "Restore saved folder"
-msgstr ""
+msgstr "Restaurar pasta guardada"
 
 #: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:981
 msgid "Open in a new tab"
-msgstr ""
+msgstr "Abrir numa nova aba"
 
 #: ../src/gnome2/bookmarks_menu.c:1121 ../src/gnome2/bookmarks_menu.c:1127
 msgid "Open this bookmark in a dialog"
-msgstr ""
+msgstr "Abrir esta marca num diálogo"
 
 #: ../src/gnome2/bookmarks_menu.c:1126
 msgid "Open in a dialog"
-msgstr ""
+msgstr "Abrir num diálogo"
 
 #: ../src/gnome2/bookmarks_menu.c:1132
 msgid "New Folder"
-msgstr ""
+msgstr "Nova Pasta"
 
 #: ../src/gnome2/bookmarks_menu.c:1133
 msgid "Add new folder to selected folder"
-msgstr ""
+msgstr "Adicionar nova pasta à pasta seleccionada"
 
 #: ../src/gnome2/bookmarks_menu.c:1138
 msgid "Insert Bookmark"
@@ -1542,75 +1542,75 @@ msgstr "Inserir Marca"
 
 #: ../src/gnome2/bookmarks_menu.c:1139
 msgid "Insert new bookmark here"
-msgstr ""
+msgstr "Inserir nova marca aqui"
 
 #: ../src/gnome2/bookmarks_menu.c:1144
 msgid "_Edit Item"
-msgstr ""
+msgstr "_Editar Item"
 
 #: ../src/gnome2/bookmarks_menu.c:1145
 msgid "Edit bookmark item"
-msgstr ""
+msgstr "Editar item de marca"
 
 #: ../src/gnome2/bookmarks_menu.c:1150
 msgid "Delete Item"
-msgstr ""
+msgstr "Apagar Item"
 
 #: ../src/gnome2/bookmarks_menu.c:1151
 msgid "Delete item"
-msgstr ""
+msgstr "Apagar item"
 
 #: ../src/gnome2/bookmarks_menu.c:1157
 msgid "Expand All"
-msgstr ""
+msgstr "Expandir Tudo"
 
 #: ../src/gnome2/bookmarks_menu.c:1158
 msgid "Expand all Bookmarks groups"
-msgstr ""
+msgstr "Expandir todos os grupos de Marcas"
 
 #: ../src/gnome2/bookmarks_menu.c:1163
 msgid "Collapse All"
-msgstr ""
+msgstr "Colapsar Tudo"
 
 #: ../src/gnome2/bookmarks_menu.c:1164
 msgid "Collapse all Bookmarks groups"
-msgstr ""
+msgstr "Colapsar todos os grupos de Marcas"
 
 #: ../src/gnome2/bookmarks_menu.c:1170
 msgid "Allow Reordering"
-msgstr ""
+msgstr "Permitir Reordenação"
 
 #: ../src/gnome2/bookmarks_menu.c:1172
 msgid "Allow items to be moved from one folder to another"
-msgstr ""
+msgstr "Permitir mover itens de uma pasta para outra"
 
 #: ../src/gnome2/bookmarks_menu.c:1178
 msgid "Import Bibletime Bookmarks"
-msgstr "Importar marcas Bibletime"
+msgstr "Importar Marcas Bibletime"
 
 #: ../src/gnome2/bookmarks_menu.c:1179
 msgid "Load Bookmarks from Bibletime"
-msgstr ""
+msgstr "Carregar Marcas de Bibletime"
 
 #: ../src/gnome2/bookmarks_menu.c:1184
 msgid "Remove - Restore"
-msgstr ""
+msgstr "Remover - Restaurar"
 
 #: ../src/gnome2/bookmarks_treeview.c:907 ../src/gnome2/sidebar.c:1498
 msgid "Bookmarks"
-msgstr ""
+msgstr "Marcas"
 
 #: ../src/gnome2/cipher_key_dialog.c:60
 msgid "Cipher Key?"
-msgstr ""
+msgstr "Chave cifrada?"
 
 #: ../src/gnome2/cipher_key_dialog.c:61
 msgid "for:"
-msgstr ""
+msgstr "para:"
 
 #: ../src/gnome2/cipher_key_dialog.c:64
 msgid "Enter Cipher Key: "
-msgstr ""
+msgstr "Introduza Chave Cifrada: "
 
 #: ../src/gnome2/commentary.c:423
 msgid ""
@@ -1626,11 +1626,11 @@ msgstr ""
 
 #: ../src/gnome2/commentary.c:442
 msgid "Rename Commentary"
-msgstr ""
+msgstr "Renomear Comentário"
 
 #: ../src/gnome2/commentary.c:445
 msgid "Choose Commentary Name"
-msgstr ""
+msgstr "Escolher Nome de Comentário"
 
 #: ../src/gnome2/commentary.c:447
 msgid "New Name"
@@ -1646,6 +1646,8 @@ msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
+"Falhou a criação de nova configuração:\n"
+"%s"
 
 #: ../src/gnome2/commentary.c:515
 msgid ""
@@ -1662,15 +1664,15 @@ msgstr ""
 
 #: ../src/gnome2/commentary.c:969 ../src/gnome2/commentary_dialog.c:1871
 msgid "Display Book Heading"
-msgstr ""
+msgstr "Mostrar Cabeçalho de Livro"
 
 #: ../src/gnome2/commentary.c:975 ../src/gnome2/commentary_dialog.c:1877
 msgid "Display Chapter Heading"
-msgstr ""
+msgstr "Mostrar Caebeçalho de Capítulo"
 
 #: ../src/gnome2/commentary.c:987
 msgid "Rename Pers.Comm."
-msgstr ""
+msgstr "Renomear Comentário Pessoal"
 
 #: ../src/gnome2/commentary.c:993
 msgid "Dump Pers.Comm."
@@ -1686,11 +1688,11 @@ msgstr ""
 
 #: ../src/gnome2/dialog.c:870
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Fechar se_m Guardar"
 
 #: ../src/gnome2/dictlex.c:1030 ../src/gnome2/gbs.c:858
 msgid "Show Tabs"
-msgstr ""
+msgstr "Mostrar Abas"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
@@ -1706,7 +1708,7 @@ msgstr "Procurar"
 
 #: ../src/gnome2/find_dialog.c:213
 msgid "Enter Word or Phrase"
-msgstr ""
+msgstr "Introduza Palavra ou Frase"
 
 #: ../src/gnome2/find_dialog.c:228 ../src/gnome2/search_sidebar.c:290
 #: ../ui/search-dialog.glade.h:37
@@ -1724,64 +1726,64 @@ msgstr "Expressão Regular"
 
 #: ../src/gnome2/find_dialog.c:282
 msgid "Find Next"
-msgstr ""
+msgstr "Procurar Próximo"
 
 #: ../src/gnome2/font_dialog.c:322
 msgid "Change font for"
-msgstr ""
+msgstr "Mudar fonte para"
 
 #: ../src/gnome2/font_dialog.c:326
 msgid "Module"
-msgstr ""
+msgstr "Módulo"
 
 #: ../src/gnome2/font_dialog.c:330
 msgid "Current font: "
-msgstr ""
+msgstr "Fonte corrente: "
 
 #: ../src/gnome2/font_dialog.c:359
 msgid "+5"
-msgstr ""
+msgstr "+5"
 
 #: ../src/gnome2/font_dialog.c:361
 msgid "+4"
-msgstr ""
+msgstr "+4"
 
 #: ../src/gnome2/font_dialog.c:363
 msgid "+3"
-msgstr ""
+msgstr "+3"
 
 #: ../src/gnome2/font_dialog.c:365
 msgid "+2"
-msgstr ""
+msgstr "+2"
 
 #: ../src/gnome2/font_dialog.c:367
 msgid "+1"
-msgstr ""
+msgstr "+1"
 
 #: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
 msgid "+0"
-msgstr ""
+msgstr "+0"
 
 #: ../src/gnome2/font_dialog.c:371
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: ../src/gnome2/font_dialog.c:373
 msgid "-2"
-msgstr ""
+msgstr "-2"
 
 #: ../src/gnome2/font_dialog.c:375
 msgid "-3"
-msgstr ""
+msgstr "-3"
 
 #: ../src/gnome2/font_dialog.c:386
 msgid "Use the default font for this module"
-msgstr ""
+msgstr "Usar a fonte por omissão para este módulo"
 
 #: ../src/gnome2/gbs_dialog.c:130
 #, c-format
 msgid "Show %s in main window"
-msgstr ""
+msgstr "Mostrar %s na janela principal"
 
 #: ../src/gnome2/gbs_dialog.c:148
 #, c-format
@@ -1794,56 +1796,56 @@ msgstr "Iniciando GnomeSword"
 
 #: ../src/gnome2/gnomesword.c:143 ../src/gnome2/splash.c:625
 msgid "Displaying GnomeSword"
-msgstr ""
+msgstr "Mostrando GnomeSword"
 
 #. main_prayer_list_new("2007");
 #: ../src/gnome2/gnomesword.c:194
 msgid "done"
-msgstr ""
+msgstr "feito"
 
 #: ../src/gnome2/gnomesword.c:274
 msgid "GnomeSword is shutdown"
-msgstr ""
+msgstr "GnomeSword está fechado"
 
 #: ../src/gnome2/html.c:741
 msgid "Print"
-msgstr ""
+msgstr "Imprimir"
 
 #: ../src/gnome2/html.c:798
 msgid "Print Preview"
-msgstr ""
+msgstr "Prever Impressão"
 
 #: ../src/gnome2/html.c:804
 msgid "Failed to print the document"
-msgstr ""
+msgstr "Falhou a impressão do documento"
 
 #: ../src/gnome2/main_menu.c:729
 msgid "Open Study_Pad"
-msgstr ""
+msgstr "Abrir Study_Pad"
 
 #: ../src/gnome2/main_menu.c:730
 msgid "Open the StudyPad editor"
-msgstr ""
+msgstr "Abrir o editor StudyPad"
 
 #: ../src/gnome2/main_menu.c:735
 msgid "_Open Session"
-msgstr ""
+msgstr "_Abrir Sessão"
 
 #: ../src/gnome2/main_menu.c:736
 msgid "Open a saved session"
-msgstr ""
+msgstr "Abrir uma sessão guardada"
 
 #: ../src/gnome2/main_menu.c:740
 msgid "_Save Session"
-msgstr ""
+msgstr "Guardar _Sessão"
 
 #: ../src/gnome2/main_menu.c:741
 msgid "Save the current session to a file"
-msgstr ""
+msgstr "Guardar a sessão corrente num ficheiro"
 
 #: ../src/gnome2/main_menu.c:752
 msgid "_Copy"
-msgstr ""
+msgstr "_Copiar"
 
 #: ../src/gnome2/main_menu.c:753
 msgid "Copy highlighted text from main window"
@@ -1855,11 +1857,11 @@ msgstr "_Procurar"
 
 #: ../src/gnome2/main_menu.c:760
 msgid "Search using the shortcut bar"
-msgstr ""
+msgstr "Procurar com a barra de atalhos"
 
 #: ../src/gnome2/main_menu.c:765
 msgid "_Advanced Search"
-msgstr ""
+msgstr "_Busca Avançada"
 
 #: ../src/gnome2/main_menu.c:766
 msgid "Advanced search using the search dialog"
@@ -1867,7 +1869,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:774
 msgid "_Module Manager"
-msgstr ""
+msgstr "Gestor de _Módulos"
 
 #: ../src/gnome2/main_menu.c:775
 msgid "Use module manager to install and remove Sword modules"
@@ -1875,7 +1877,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:784
 msgid "C_lear"
-msgstr ""
+msgstr "_Limpar"
 
 #: ../src/gnome2/main_menu.c:785
 msgid "Clear history list"
@@ -1883,15 +1885,15 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:795
 msgid "_Daily Devotion"
-msgstr ""
+msgstr "_Devocional Diário"
 
 #: ../src/gnome2/main_menu.c:796
 msgid "Show the Daily Devotion for today"
-msgstr ""
+msgstr "Mostrar o Devocional Diário para hoje"
 
 #: ../src/gnome2/main_menu.c:811
 msgid "_Bible Texts"
-msgstr ""
+msgstr "Textos _Bíblicos"
 
 #: ../src/gnome2/main_menu.c:812
 msgid "Show or hide Bible texts window"
@@ -1899,15 +1901,15 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:817
 msgid "P_review"
-msgstr ""
+msgstr "P_rever"
 
 #: ../src/gnome2/main_menu.c:818
 msgid "Show or hide Preview window"
-msgstr ""
+msgstr "Mostrar ou ocultar janela de Previsão"
 
 #: ../src/gnome2/main_menu.c:823
 msgid "_Commentary"
-msgstr ""
+msgstr "_Comentário"
 
 #: ../src/gnome2/main_menu.c:824
 msgid "Show or hide commentaries"
@@ -1915,7 +1917,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:829
 msgid "Dictionary/_Lexicon"
-msgstr ""
+msgstr "Dicionário/_Léxico"
 
 #: ../src/gnome2/main_menu.c:831
 msgid "Show or hide - dictionaries and lexicons"
@@ -1923,7 +1925,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:837
 msgid "_Verse Style"
-msgstr ""
+msgstr "Estilo de _Versículo"
 
 #: ../src/gnome2/main_menu.c:843
 msgid "_Pin Tabs"
@@ -1935,11 +1937,11 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:855
 msgid "Show Verse _Numbers"
-msgstr ""
+msgstr "Mostrar _Números de Versículos"
 
 #: ../src/gnome2/main_menu.c:861
 msgid "_Highlight Current Verse"
-msgstr ""
+msgstr "_Assinalar Versículo Corrente"
 
 #: ../src/gnome2/main_menu.c:868
 msgid "D_ouble-Space Text"
@@ -1947,11 +1949,11 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:876
 msgid "_Attach/Detach Sidebar"
-msgstr ""
+msgstr "_Anexar/Desanexar Barra Lateral"
 
 #: ../src/gnome2/main_menu.c:882
 msgid "_Show/Hide Sidebar"
-msgstr ""
+msgstr "Mo_strar/Ocultar Barra Lateral"
 
 #: ../src/gnome2/main_menu.c:892
 msgid "_Contents"
@@ -1971,11 +1973,11 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:912
 msgid "About _GnomeSword ..."
-msgstr ""
+msgstr "Sobre _GnomeSword ..."
 
 #: ../src/gnome2/main_menu.c:913
 msgid "About this application"
-msgstr ""
+msgstr "Sobre esta aplicação"
 
 #: ../src/gnome2/main_menu.c:922 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:19 ../ui/editor.xml.h:14
@@ -2012,11 +2014,11 @@ msgstr ""
 
 #: ../src/gnome2/main_window.c:816
 msgid "Commentary View"
-msgstr ""
+msgstr "Vista de Comentário"
 
 #: ../src/gnome2/main_window.c:833
 msgid "Book View"
-msgstr ""
+msgstr "Vista de Livro"
 
 #: ../src/gnome2/mod_mgr.c:249
 msgid "Install these modules:"
@@ -2179,7 +2181,7 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:1365 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
-msgstr ""
+msgstr "Módulos"
 
 #: ../src/gnome2/mod_mgr.c:1367
 msgid "Install/Update"
@@ -2442,31 +2444,31 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:1509
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: ../src/gnome2/sidebar.c:1519
 msgid "Verse List"
-msgstr ""
+msgstr "Lista de Versículos"
 
 #: ../src/gnome2/splash.c:362
 msgid "Powered by the SWORD Project"
-msgstr ""
+msgstr "Movido pelo Projecto SWORD"
 
 #: ../src/gnome2/splash.c:556
 msgid "Initiating Gecko"
-msgstr ""
+msgstr "Iniciando Gecko"
 
 #: ../src/gnome2/splash.c:573
 msgid "Loading settings"
-msgstr ""
+msgstr "Carregando definições"
 
 #: ../src/gnome2/splash.c:591
 msgid "Building Interface"
-msgstr ""
+msgstr "Construindo Interface"
 
 #: ../src/gnome2/splash.c:608
 msgid "Starting Sword"
-msgstr ""
+msgstr "Iniciando Sword"
 
 #: ../src/gnome2/studypad.c:107
 msgid "has been modified. Do you wish to save it?"
