@@ -88,11 +88,11 @@ const char *main_get_valid_key(char * key)
 void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 {
 	VerseKey vkey; 
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char *tmpkey = NULL;
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	int book;
 	
 	if(!navbar.module_name->len)
@@ -101,14 +101,15 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = tmpkey;
 	
 	book = (direction)?(vkey.Book()+1):(vkey.Book()-1);
 	vkey.Book(book);
@@ -116,7 +117,7 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-	g_free(gkey);
+//	g_free(gkey);
 }
 
 
@@ -140,11 +141,11 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 {
 	
 	VerseKey vkey; 
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char *tmpkey = NULL;
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	int chapter;
 	
 	if(!navbar.module_name->len)
@@ -153,21 +154,22 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = tmpkey;
 	chapter = (direction)?(vkey.Chapter()+1):(vkey.Chapter()-1);
 	vkey.Chapter(chapter);
 	tmpkey = g_strdup_printf("%s %d:1",vkey.getBookName(),vkey.Chapter());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-	g_free(gkey);
+//	g_free(gkey);
 }
 
 
@@ -191,11 +193,11 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 {
 	
 	VerseKey vkey; 
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char *tmpkey = NULL;
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;   */
 	int verse;
 	
 	if(!navbar.module_name->len)
@@ -204,14 +206,15 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = tmpkey;
 	verse = (direction)?(vkey.Verse()+1):(vkey.Verse()-1);
 	vkey.Verse(verse);
 	tmpkey = g_strdup_printf("%s %d:%d",vkey.getBookName(),
@@ -220,7 +223,7 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-	g_free(gkey);
+//	g_free(gkey);
 }
 
 
@@ -467,27 +470,28 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 {	
 	char buf[5];
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char *tmpbuf = NULL;
 	int book;
 	gint i,x;	
 	VerseKey vkey; 
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	
 	if(!navbar.module_name->len)
 		return;
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = key;
 	
 	if((backend->module_has_testament(navbar.module_name->str, 1))
 				&& (vkey.Testament() == 2))
@@ -509,8 +513,8 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
 	if(tmpbuf)
 		g_free(tmpbuf);
-	if(gkey)
-		g_free(gkey);	
+//	if(gkey)
+//		g_free(gkey);	
 }
 
 
@@ -536,11 +540,11 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	VerseKey vkey; 
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char buf[5];
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	gint i,x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;
@@ -556,14 +560,15 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	menu_shell = GTK_MENU_SHELL(menu);
 	
 	vkey.AutoNormalize(1);
-	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return NULL;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = navbar.key->str;
 	char xtestament = vkey.Testament() ;
 	char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
@@ -618,11 +623,11 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 						gpointer editor)
 {
 	VerseKey vkey; 
-	char *gkey = NULL;
+//	char *gkey = NULL;
 	char buf[5];
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;   */
 	vkey.AutoNormalize(1);
 	gint i,x;
 	GtkWidget *menu;
@@ -637,14 +642,15 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
-	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
+/*	gkey = g_convert(navbar.key->str, -1, OLD_CODESET, UTF_8, &bytes_read,
 			 &bytes_written, &error);
 	if(gkey == NULL) {
 		GS_print(("error: %s\n", error->message));
 		g_error_free (error);
 		return NULL;
 	}
-	vkey = gkey;
+	vkey = gkey;    */
+	vkey = navbar.key->str;
 	char xtestament = vkey.Testament() ;
 	char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
@@ -701,9 +707,9 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	GtkWidget *menu;
 	GtkWidget *item;
 	GtkWidget *select_item;
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;  */
 	char *book = NULL;
 	char *current_book = NULL;
 	int i = 0, j = 0, x = 2;
@@ -720,19 +726,20 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	
 	navbar.testaments = backend->module_get_testaments(navbar.module_name->str);
 	key_current = navbar.key->str;
-	current_book = g_convert((const char *) key_current.getBookName(),
+/*	current_book = g_convert((const char *) key_current.getBookName(),
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     &error);
+				     &error);     */
+	current_book = strdup((const char *) key_current.getBookName());
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 	
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while(i < key.BMAX[0]) { 
-			book = g_convert((const char *) key.books[0][i].name,
+/*			book = g_convert((const char *) key.books[0][i].name,
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -744,7 +751,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[0][i].name);
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);
@@ -769,7 +777,7 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name->str, 2)) {
 		while(i < key.BMAX[1]) {
-			book = g_convert((const char *) key.books[1][i].name,
+/*			book = g_convert((const char *) key.books[1][i].name,
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -780,7 +788,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[1][i].name);
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);

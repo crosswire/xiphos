@@ -299,9 +299,9 @@ void main_delete_sidebar_search_backend(void)
 void main_search_sidebar_fill_bounds_combos(void)
 {
 	VerseKey key; 
-	gsize bytes_read;
+/*	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
+	GError *error = NULL;    */
 	char *book = NULL;
 	char *module_name;
 	GtkTreeIter iter;
@@ -322,7 +322,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	
 	if (backendSearch->module_has_testament(module_name, 1)) {
 		while(i < key.BMAX[0]) { 			
-			book = g_convert((const char *) key.books[0][i].name,
+/*			book = g_convert((const char *) key.books[0][i].name,
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -334,7 +334,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[0][i].name);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
@@ -345,7 +346,7 @@ void main_search_sidebar_fill_bounds_combos(void)
 	i = 0;
 	if (backendSearch->module_has_testament(module_name, 2)) {
 		while(i < key.BMAX[1]) {			
-			book = g_convert((const char *) key.books[1][i].name,
+/*			book = g_convert((const char *) key.books[1][i].name,
 				     -1,
 				     UTF_8,
 				     OLD_CODESET,
@@ -356,7 +357,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 				GS_print(("error: %s\n", error->message));
 				g_error_free (error);
 				continue;
-			}
+			}    */
+			book = strdup((const char *) key.books[1][i].name);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
