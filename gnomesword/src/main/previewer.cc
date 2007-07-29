@@ -275,8 +275,8 @@ static void mark_search_words(GString * str)
 	/* open tags */
 	sprintf(openstr, "<font color=\"%s\"><b>", settings.found_color);
 	/* point buf to found verse */
-	buf = str->str;
-	searchbuf = g_strdup(settings.searchText);
+	buf = g_utf8_casefold(str->str,-1);
+	searchbuf = g_utf8_casefold(g_strdup(settings.searchText),-1);
 	if (g_str_has_prefix(searchbuf, "\"")) {
 		searchbuf = g_strdelimit(searchbuf, "\"", ' ');
 		g_strstrip(searchbuf);
@@ -310,10 +310,10 @@ static void mark_search_words(GString * str)
 			/* set len2 to length of search word */
 			len2 = strlen((gchar *) list->data);
 			/* find search word in verse */
-			if ((tmpbuf =
-			     strstr(buf, (gchar *) list->data)) != NULL) {
+			while ((tmpbuf =
+			     g_strrstr(buf, (gchar *) list->data)) != NULL) {
 				/* set len3 to length of tmpbuf 
-				   (tmpbuf points to first occurance of 
+				   (tmpbuf points to last occurance of 
 				   search word in verse) */
 				len3 = strlen(tmpbuf);
 				//-- set len4 to diff between len1 and len3
@@ -325,9 +325,12 @@ static void mark_search_words(GString * str)
 				/* then add start tags 
 				   (position to add tag to is len4) */
 				str = g_string_insert(str, len4, openstr);
+				/* prepare to search for another occurance */
+				buf[len4] = '\0';
+				len1 =len4;
 			}
 			/* point buf to changed str */
-			buf = str->str;
+			buf = g_utf8_casefold(str->str,-1);
 			list = g_list_next(list);
 		}
 		g_list_free(list);
