@@ -1,3 +1,9 @@
+2007-07-29  dom <domcox@users.sf.net>
+
+	* sidebar search fix: text in upper case or multiple occurances 
+	of the same word were not highlighted in the previewer.
+	(multi-word & phrase search types)
+
 2007-07-14  terry <tbiggs@users.sourceforge.net> + karl <charcoal@users.sf.net>
 
 	* repair karl's stupidity about first-time user mod.mgr -vs-
