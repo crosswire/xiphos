@@ -207,7 +207,7 @@ void main_shutdown_list(void)
 #ifdef PRAYERLIST
 	while (mod_lists->prayermods != NULL) {
 		g_free((char *) mod_lists->prayermods->data);
-		mod_lists-> =prayermods
+		mod_lists->prayermods =
 		    g_list_next(mod_lists->prayermods);
 	}
 	g_list_free(mod_lists->prayermods);
