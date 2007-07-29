@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 08:30+0100\n"
-"PO-Revision-Date: 2007-07-29 16:34+0100\n"
+"PO-Revision-Date: 2007-07-29 23:42+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Árabe"
 #. mm_languageMap[SWBuf("ay")] = SWBuf("Aymara");
 #: ../src/backend/sword_main.cc:1296 ../src/backend/module_manager.cc:85
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaijano"
 
 #. done
 #. languageMap[SWBuf("ba")] = SWBuf("Bashkir");
@@ -101,7 +101,7 @@ msgstr "Catalão"
 #. mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
 #: ../src/backend/sword_main.cc:1308 ../src/backend/module_manager.cc:97
 msgid "Cebuano"
-msgstr ""
+msgstr "Cebuano"
 
 #. done
 #. languageMap[SWBuf("ch")] = SWBuf("Chamorro");
@@ -177,7 +177,7 @@ msgstr "Espanhol"
 #. done
 #: ../src/backend/sword_main.cc:1326 ../src/backend/module_manager.cc:115
 msgid "Estonian"
-msgstr "Estonio"
+msgstr "Estónio"
 
 #. done
 #: ../src/backend/sword_main.cc:1327 ../src/backend/module_manager.cc:116
@@ -190,7 +190,7 @@ msgstr "Basco"
 #. mm_languageMap[SWBuf("fa")] = SWBuf("Persian");
 #: ../src/backend/sword_main.cc:1329 ../src/backend/module_manager.cc:118
 msgid "Finnish"
-msgstr "Finlands"
+msgstr "Finlandês"
 
 #. done
 #. languageMap[SWBuf("fj")] = SWBuf("Fijian");
@@ -205,7 +205,7 @@ msgstr "Francês"
 #. done
 #: ../src/backend/sword_main.cc:1333 ../src/backend/module_manager.cc:122
 msgid "Frisian"
-msgstr ""
+msgstr "Frisiano"
 
 #. done
 #: ../src/backend/sword_main.cc:1334 ../src/backend/module_manager.cc:123
@@ -215,7 +215,7 @@ msgstr "Irlandês"
 #. done
 #: ../src/backend/sword_main.cc:1335 ../src/backend/module_manager.cc:124
 msgid "Gaelic (Scots)"
-msgstr ""
+msgstr "Gaélico (Escócia)"
 
 #. done
 #. languageMap[SWBuf("gl")] = SWBuf("Gallegan");
@@ -269,7 +269,7 @@ msgstr "Húngaro"
 #. done
 #: ../src/backend/sword_main.cc:1348 ../src/backend/module_manager.cc:137
 msgid "Armenian"
-msgstr ""
+msgstr "Arménio"
 
 #. done
 #. languageMap[SWBuf("hz")] = SWBuf("Herero");
@@ -748,7 +748,7 @@ msgstr "Número de módulos Livro"
 
 #: ../src/main/lists.cc:154
 msgid "Number of Percomm modules"
-msgstr ""
+msgstr "Números de módulos Percomm"
 
 #: ../src/main/lists.cc:155
 msgid "Number of Devotion modules"
@@ -756,12 +756,12 @@ msgstr "Número de módulos Devocional"
 
 #: ../src/main/lists.cc:158
 msgid "Number of Prayer modules"
-msgstr ""
+msgstr "Número de módulos Oração"
 
 #: ../src/main/module_dialogs.cc:229 ../src/main/previewer.cc:107
 #: ../ui/prefs.glade.h:53
 msgid "Previewer"
-msgstr ""
+msgstr "Pré-visualizador"
 
 #: ../src/main/module_dialogs.cc:296 ../src/main/module_dialogs.cc:425
 #: ../src/main/previewer.cc:173
@@ -777,13 +777,13 @@ msgstr "Referência cruzada"
 #: ../src/main/module_dialogs.cc:435 ../src/main/module_dialogs.cc:447
 #: ../src/main/previewer.cc:185 ../src/main/previewer.cc:199
 msgid "Strongs"
-msgstr ""
+msgstr "Strongs"
 
 #: ../src/main/module_dialogs.cc:314 ../src/main/module_dialogs.cc:333
 #: ../src/main/module_dialogs.cc:440 ../src/main/module_dialogs.cc:457
 #: ../src/main/previewer.cc:191 ../src/main/previewer.cc:210
 msgid "Morphology"
-msgstr ""
+msgstr "Morfologia"
 
 #: ../src/main/module_dialogs.cc:1270
 msgid "Back to "
@@ -862,7 +862,7 @@ msgstr "$HOME não está definido!"
 
 #: ../src/main/settings.c:114
 msgid "GnomeSword has renamed .gnomesword-2.0 to .gnomesword"
-msgstr ""
+msgstr "GnomeSword não pode renomear .gnomesword-2.0 para .gnomesword:"
 
 #: ../src/main/settings.c:117
 #, c-format
@@ -885,18 +885,22 @@ msgid ""
 "\n"
 "GnomeSword cannot continue."
 msgstr ""
+"GnomeSword não pode criar .gnomesword:\n"
+"%s\n"
+"\n"
+"GnomeSword não pode continuar."
 
 #: ../src/main/settings.c:145
 msgid "can not create  .sword"
-msgstr ""
+msgstr "não pode criar .sword"
 
 #: ../src/main/settings.c:153
 msgid "can not create  .sword/mods.d"
-msgstr ""
+msgstr "não pode criar .sword/mods.d"
 
 #: ../src/main/settings.c:161
 msgid "can not create  .sword/modules"
-msgstr ""
+msgstr "não pode criar .sword/modules"
 
 #: ../src/main/settings.c:189
 msgid ""
@@ -955,6 +959,9 @@ msgid ""
 "You may wish to run the program \"gconf-editor\" to examine keys under /"
 "desktop/gnome/url-handlers, if you need to change these."
 msgstr ""
+"GnomeSword foi configurado com sucesso para lidar com URLs sword:// e bible://.\n"
+"\n"
+"Se desejar, pode correr o programa \"gconf-editor\" para examinar chaves sob /desktop/gnome/url-handlers, se necessitar de as alterar."
 
 #: ../src/main/settings.c:681
 #, c-format
@@ -1079,11 +1086,11 @@ msgstr "para desbloquear o módulo"
 
 #: ../src/main/sword.cc:659
 msgid "You will need to restart GnomeSword after you unlock it."
-msgstr ""
+msgstr "Vai precisar de reiniciar GnomeSword depois de desbloqueá-lo."
 
 #: ../src/main/sword.cc:668
 msgid "You need to restart GnomeSword to view it"
-msgstr ""
+msgstr "Precisa de reiniciar GnomeSword para vê-lo"
 
 #: ../src/main/sword.cc:1239
 msgid "Daily devotional was requested, but there are none installed."
@@ -1092,16 +1099,16 @@ msgstr "Foi pedido um Devocional Diário, mas não há nenhum instalado."
 #: ../src/main/tab_history.c:67 ../src/main/tab_history.c:111
 #: ../src/main/tab_history.c:126
 msgid "H_istory/<Separator>"
-msgstr ""
+msgstr "_Histórico/<Separator>"
 
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:69 ../src/main/tab_history.c:113
 msgid "H_istory/C_lear"
-msgstr ""
+msgstr "_Histórico/_Limpar"
 
 #: ../src/main/tab_history.c:248
 msgid "Clear History"
-msgstr ""
+msgstr "Limpar Histórico"
 
 #: ../src/main/xml.c:86 ../src/main/xml.c:471
 #, c-format
@@ -1114,7 +1121,7 @@ msgstr "Pessoal"
 
 #: ../src/main/xml.c:96
 msgid "What must I do to be saved?"
-msgstr ""
+msgstr "O que preciso de fazer para ser salvo?"
 
 #: ../src/main/xml.c:98 ../src/main/xml.c:99
 msgid "Acts 16:31"
@@ -1138,7 +1145,7 @@ msgstr "1 Cor 15:1-4"
 
 #: ../src/main/xml.c:115
 msgid "1 Cor 15:1"
-msgstr ""
+msgstr "1 Cor 15:1"
 
 #: ../src/main/xml.c:419 ../src/main/xml.c:1085
 #, c-format
@@ -1153,7 +1160,7 @@ msgstr "documento vazio \n"
 #: ../src/main/xml.c:431
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "tipo errado, root node != SwordBookmarks\n"
 
 #: ../src/main/xml.c:485
 msgid "Old Testament"
@@ -1173,7 +1180,7 @@ msgstr "Mat - Ap"
 
 #: ../src/main/xml.c:503
 msgid "Sample Module List"
-msgstr ""
+msgstr "Amostra de Lista de Módulos"
 
 #: ../src/main/xml.c:505
 msgid "Select the modules you want"
@@ -1182,15 +1189,15 @@ msgstr "Seleccione os módulos que pretende"
 #: ../src/main/xml.c:694 ../src/main/xml.c:972
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr ""
+msgstr "tipo errado, root node != %s\n"
 
 #: ../src/editor/html-editor.c:135
 msgid "Are you sure you want to delete the note for"
-msgstr ""
+msgstr "Tem a certeza de que quer apagar a nota para"
 
 #: ../src/editor/html-editor.c:137
 msgid "It will be lost permanently!"
-msgstr ""
+msgstr "Vai ser permanentemente perdido!"
 
 #: ../src/editor/html-editor.c:374
 msgid "Open file..."
@@ -1217,11 +1224,11 @@ msgstr "antes de fechar?"
 
 #: ../src/editor/html-editor.c:522
 msgid "If you don't save, changes will be permanently lost."
-msgstr ""
+msgstr "Se não guardar, as alterações serão definitivamente perdidas."
 
 #: ../src/editor/html-editor.c:1270
 msgid "Note Editor"
-msgstr ""
+msgstr "Editor de Notas"
 
 #: ../src/editor/html-editor.c:1278 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
@@ -1229,13 +1236,13 @@ msgstr ""
 
 #: ../src/gnome2/about_gnomesword.c:126
 msgid "Copyright 2000-2007 The GnomeSword Development Team"
-msgstr ""
+msgstr "Copyright 2000-2007 Equipa de Desenvolvimento GnomeSword"
 
 #: ../src/gnome2/about_gnomesword.c:129
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
-msgstr ""
+msgstr "Gostaríamos de agradecer a Troy Griffitts e os outros companheiros que nos deram o Projecto SWORD."
 
 #: ../src/gnome2/about_modules.c:225
 msgid "About Sword Module"
@@ -1248,7 +1255,7 @@ msgid ""
 "easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and "
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
-msgstr ""
+msgstr "O Projecto SWORD é uma iniciativa para criar um pacote de software expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma de Bíblia SWORD permite fácil manipulação de textos da Bíblia, comentários, léxicos, dicionários e outros livros. Várias interfaces são construídas com base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado entre quaisquer dessas interfaces."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -1256,15 +1263,15 @@ msgstr "Sobre o Projecto SWORD"
 
 #: ../src/gnome2/about_sword.c:130
 msgid "Sword Version"
-msgstr ""
+msgstr "Versão Sword"
 
 #: ../src/gnome2/about_sword.c:161
 msgid "Modules can be downloaded from the SWORD Project"
-msgstr ""
+msgstr "Módulos podem ser descarregados do Projecto SWORD"
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
-msgstr ""
+msgstr "O Projecto SWORD"
 
 #: ../src/gnome2/bibletext.c:895 ../src/gnome2/bibletext_dialog.c:1931
 #: ../src/gnome2/commentary.c:745 ../src/gnome2/commentary_dialog.c:1634
@@ -1325,7 +1332,7 @@ msgstr ""
 #: ../src/gnome2/commentary.c:835 ../src/gnome2/commentary_dialog.c:1738
 #: ../src/gnome2/dictlex.c:896 ../src/gnome2/gbs.c:724
 msgid "Strong's Numbers"
-msgstr ""
+msgstr "Números Strong"
 
 #: ../src/gnome2/bibletext.c:996 ../src/gnome2/bibletext_dialog.c:2046
 #: ../src/gnome2/commentary.c:846 ../src/gnome2/commentary_dialog.c:1749
@@ -1339,7 +1346,7 @@ msgstr ""
 #: ../src/gnome2/dictlex.c:915 ../src/gnome2/gbs.c:743
 #: ../ui/search-dialog.glade.h:32
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas de rodapé"
 
 #: ../src/gnome2/bibletext.c:1012 ../src/gnome2/bibletext_dialog.c:2062
 #: ../src/gnome2/commentary.c:862 ../src/gnome2/commentary_dialog.c:1765
@@ -1398,7 +1405,7 @@ msgstr ""
 #: ../src/gnome2/dictlex.c:992 ../src/gnome2/gbs.c:820
 #: ../src/gnome2/sidebar.c:994
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bibletext.c:1088 ../src/gnome2/bookmarks_menu.c:470
@@ -1421,7 +1428,7 @@ msgstr "Editar"
 #: ../src/gnome2/commentary.c:957 ../src/gnome2/commentary_dialog.c:1853
 #: ../src/gnome2/dictlex.c:1018 ../src/gnome2/gbs.c:846
 msgid "_Module Options"
-msgstr ""
+msgstr "Opções de _Módulo"
 
 #: ../src/gnome2/bibletext.c:1113 ../src/gnome2/bibletext_dialog.c:2156
 #: ../src/gnome2/commentary.c:963 ../src/gnome2/commentary_dialog.c:1859
@@ -1433,13 +1440,13 @@ msgstr ""
 #: ../src/gnome2/commentary.c:981 ../src/gnome2/commentary_dialog.c:1865
 #: ../src/gnome2/dictlex.c:1037 ../src/gnome2/gbs.c:865
 msgid "Unlock This Module"
-msgstr ""
+msgstr "Desbloquear este Módulo"
 
 #: ../src/gnome2/bibletext.c:1125 ../src/gnome2/bibletext_dialog.c:2168
 #: ../src/gnome2/commentary.c:999 ../src/gnome2/commentary_dialog.c:1883
 #: ../src/gnome2/gbs.c:871
 msgid "Read Selection Aloud"
-msgstr ""
+msgstr "Ler Selecção em voz alta"
 
 #: ../src/gnome2/bibletext_dialog.c:577
 msgid "Go to "
@@ -1630,6 +1637,12 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
+"Renomear não é possível em Cygwin.\n"
+"\n"
+"GnomeSword está limitado pelo sistema de ficheiros de Windows,\n"
+"porque impede a renomeação de componentes do nome de ficheiro para ficheiros presentemente abertos,\n"
+"tal como os conteúdos deste comentário.\n"
+"Por isso, não é possível renomear comentários pessoais no ambiente Windows."
 
 #: ../src/gnome2/commentary.c:442
 msgid "Rename Commentary"
@@ -1687,11 +1700,11 @@ msgstr ""
 
 #: ../src/gnome2/dialog.c:224
 msgid "Close without Saving"
-msgstr ""
+msgstr "Fechar sem guardar"
 
 #: ../src/gnome2/dialog.c:769
 msgid "GnomeSword:"
-msgstr ""
+msgstr "GnomeSword:"
 
 #: ../src/gnome2/dialog.c:870
 msgid "Close _without Saving"
@@ -1703,11 +1716,11 @@ msgstr "Mostrar Abas"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
-msgstr ""
+msgstr "Abrir Ficheiro StudyPad"
 
 #: ../src/gnome2/fileselection.c:266
 msgid "Save StudyPad File"
-msgstr ""
+msgstr "Guardar Ficheiro StudyPad"
 
 #: ../src/gnome2/find_dialog.c:195 ../src/gnome2/find_dialog.c:360
 msgid "Find"
@@ -1888,7 +1901,7 @@ msgstr "_Limpar"
 
 #: ../src/gnome2/main_menu.c:785
 msgid "Clear history list"
-msgstr ""
+msgstr "Limpar lista de histórico"
 
 #: ../src/gnome2/main_menu.c:795
 msgid "_Daily Devotion"
@@ -1904,7 +1917,7 @@ msgstr "Textos _Bíblicos"
 
 #: ../src/gnome2/main_menu.c:812
 msgid "Show or hide Bible texts window"
-msgstr ""
+msgstr "Mostrar ou ocultar janela de textos bíblicos"
 
 #: ../src/gnome2/main_menu.c:817
 msgid "P_review"
@@ -1920,7 +1933,7 @@ msgstr "_Comentário"
 
 #: ../src/gnome2/main_menu.c:824
 msgid "Show or hide commentaries"
-msgstr ""
+msgstr "Mostrar ou ocultar comentários"
 
 #: ../src/gnome2/main_menu.c:829
 msgid "Dictionary/_Lexicon"
@@ -1928,7 +1941,7 @@ msgstr "Dicionário/_Léxico"
 
 #: ../src/gnome2/main_menu.c:831
 msgid "Show or hide - dictionaries and lexicons"
-msgstr ""
+msgstr "Mostrar ou ocultar - dicionários e léxicos"
 
 #: ../src/gnome2/main_menu.c:837
 msgid "_Verse Style"
@@ -1940,7 +1953,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:849
 msgid "R_ead Aloud"
-msgstr ""
+msgstr "L_er em voz alta"
 
 #: ../src/gnome2/main_menu.c:855
 msgid "Show Verse _Numbers"
@@ -1964,7 +1977,7 @@ msgstr "Mo_strar/Ocultar Barra Lateral"
 
 #: ../src/gnome2/main_menu.c:892
 msgid "_Contents"
-msgstr ""
+msgstr "_Conteúdo"
 
 #: ../src/gnome2/main_menu.c:893
 msgid "Open the GnomeSword manual"
@@ -1976,7 +1989,7 @@ msgstr "_Sobre o Projecto SWORD ..."
 
 #: ../src/gnome2/main_menu.c:907
 msgid "More information about the SWORD Project"
-msgstr ""
+msgstr "Mais informação sobre o Projecto SWORD"
 
 #: ../src/gnome2/main_menu.c:912
 msgid "About _GnomeSword ..."
@@ -2001,7 +2014,7 @@ msgstr "_Ver"
 
 #: ../src/gnome2/main_menu.c:940
 msgid "Hi_story"
-msgstr "Hi_stória"
+msgstr "_Histórico"
 
 #: ../src/gnome2/main_menu.c:946
 msgid "_Help"
@@ -2009,15 +2022,15 @@ msgstr "A_juda"
 
 #: ../src/gnome2/main_window.c:604
 msgid "Building GnomeSword interface"
-msgstr ""
+msgstr "Construindo a interface GnomeSword"
 
 #: ../src/gnome2/main_window.c:610
 msgid "GnomeSword - Bible Study Software"
-msgstr ""
+msgstr "GnomeSword - Software de Estudo Bíblico"
 
 #: ../src/gnome2/main_window.c:664
 msgid "Open a new tab"
-msgstr ""
+msgstr "Abrir uma nova aba"
 
 #: ../src/gnome2/main_window.c:816
 msgid "Commentary View"
@@ -2029,15 +2042,15 @@ msgstr "Vista de Livro"
 
 #: ../src/gnome2/mod_mgr.c:249
 msgid "Install these modules:"
-msgstr ""
+msgstr "Instalar estes módulos:"
 
 #: ../src/gnome2/mod_mgr.c:251
 msgid "Remove these modules:"
-msgstr ""
+msgstr "Remover estes módulos:"
 
 #: ../src/gnome2/mod_mgr.c:253
 msgid "Archive these modules:"
-msgstr ""
+msgstr "Arquivar estes módulos:"
 
 #: ../src/gnome2/mod_mgr.c:255
 msgid ""
@@ -2051,43 +2064,43 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:283
 msgid "Preparing to install"
-msgstr ""
+msgstr "Preparando instalação"
 
 #: ../src/gnome2/mod_mgr.c:285
 msgid "Preparing to remove"
-msgstr ""
+msgstr "Preparando remoção"
 
 #: ../src/gnome2/mod_mgr.c:287
 msgid "Preparing to archive"
-msgstr ""
+msgstr "Preparando arquivo"
 
 #: ../src/gnome2/mod_mgr.c:289
 msgid "Preparing to index"
-msgstr ""
+msgstr "Preparando indexação"
 
 #: ../src/gnome2/mod_mgr.c:291
 msgid "Preparing to delete index"
-msgstr ""
+msgstr "Preparando para apagar index"
 
 #: ../src/gnome2/mod_mgr.c:318
 msgid "Installing"
-msgstr ""
+msgstr "Instalando"
 
 #: ../src/gnome2/mod_mgr.c:320
 msgid "Removing"
-msgstr ""
+msgstr "Removendo"
 
 #: ../src/gnome2/mod_mgr.c:322
 msgid "Archiving"
-msgstr ""
+msgstr "Arquivando"
 
 #: ../src/gnome2/mod_mgr.c:324
 msgid "Indexing"
-msgstr ""
+msgstr "Indexando"
 
 #: ../src/gnome2/mod_mgr.c:326
 msgid "Deleting index"
-msgstr ""
+msgstr "Apagando index"
 
 #: ../src/gnome2/mod_mgr.c:346
 #, c-format
@@ -2095,71 +2108,73 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
+"`mkdir %s' falhou:\n"
+"%s."
 
 #: ../src/gnome2/mod_mgr.c:372
 msgid "GnomeSword could not execute archiver"
-msgstr ""
+msgstr "GnomeSword não conseguiu executar arquivador"
 
 #: ../src/gnome2/mod_mgr.c:377
 msgid ""
 " archival result:\n"
 "\n"
-msgstr ""
+msgstr " resultado de arquivo:\n\n"
 
 #: ../src/gnome2/mod_mgr.c:381
 msgid ""
 "\n"
 "Archive in "
-msgstr ""
+msgstr "\nArquivar em "
 
 #: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2416
 #: ../ui/module-manager.glade.h:13
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: ../src/gnome2/mod_mgr.c:458
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: ../src/gnome2/mod_mgr.c:460
 msgid "Archive"
-msgstr ""
+msgstr "Arquivar"
 
 #: ../src/gnome2/mod_mgr.c:462
 msgid "Index"
-msgstr ""
+msgstr "Indexar"
 
 #: ../src/gnome2/mod_mgr.c:464
 msgid "Deletion"
-msgstr ""
+msgstr "Remoção"
 
 #: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:995
 msgid "Finished"
-msgstr ""
+msgstr "Terminado"
 
 #: ../src/gnome2/mod_mgr.c:976
 msgid "Refreshing remote"
-msgstr ""
+msgstr "Actualizando remoto"
 
 #: ../src/gnome2/mod_mgr.c:990
 msgid "Remote not found"
-msgstr ""
+msgstr "Remoto não encontrado"
 
 #: ../src/gnome2/mod_mgr.c:1111
 msgid "Module Name"
-msgstr ""
+msgstr "Nome de Módulo"
 
 #: ../src/gnome2/mod_mgr.c:1205
 msgid "Old"
-msgstr ""
+msgstr "Velho"
 
 #: ../src/gnome2/mod_mgr.c:1232
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #: ../src/gnome2/mod_mgr.c:1243
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: ../src/gnome2/mod_mgr.c:1278 ../src/gnome2/mod_mgr.c:1361
 msgid "Configure"
@@ -2175,15 +2190,15 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1329
 msgid "Source"
-msgstr ""
+msgstr "Fonte"
 
 #: ../src/gnome2/mod_mgr.c:1338
 msgid "Directory"
-msgstr ""
+msgstr "Directório"
 
 #: ../src/gnome2/mod_mgr.c:1359
 msgid "Sources"
-msgstr ""
+msgstr "Fontes"
 
 #: ../src/gnome2/mod_mgr.c:1365 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
@@ -2192,31 +2207,31 @@ msgstr "Módulos"
 
 #: ../src/gnome2/mod_mgr.c:1367
 msgid "Install/Update"
-msgstr ""
+msgstr "Instalar/Actualizar"
 
 #: ../src/gnome2/mod_mgr.c:1369
 msgid "Maintenance"
-msgstr ""
+msgstr "Manutenção"
 
 #: ../src/gnome2/mod_mgr.c:1590
 msgid "Please Refresh"
-msgstr ""
+msgstr "Por favor actualize"
 
 #: ../src/gnome2/mod_mgr.c:1591
 msgid "Your module list is not up to date!"
-msgstr ""
+msgstr "A sua lista de módulos não está actual!"
 
 #: ../src/gnome2/mod_mgr.c:1805
 msgid "Select Local Source"
-msgstr ""
+msgstr "Seleccione fonte local"
 
 #: ../src/gnome2/mod_mgr.c:2038 ../src/gnome2/mod_mgr.c:2199
 msgid "Remove the selected source"
-msgstr ""
+msgstr "Remover a fonte seleccionada"
 
 #: ../src/gnome2/mod_mgr.c:2090
 msgid "Enter a remote source"
-msgstr ""
+msgstr "Introduzir uma fonte remota"
 
 #: ../src/gnome2/mod_mgr.c:2094
 msgid "Caption:"
@@ -2240,11 +2255,11 @@ msgstr ""
 
 #: ../src/gnome2/navbar_book.c:344 ../src/gnome2/navbar_book_dialog.c:316
 msgid "Go to previous item"
-msgstr ""
+msgstr "Ir para item anterior"
 
 #: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:332
 msgid "Go to next item"
-msgstr ""
+msgstr "Ir para próximo item"
 
 #: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:349
 msgid "Go to first child"
@@ -2305,33 +2320,33 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1540 ../ui/prefs.glade.h:52
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: ../src/gnome2/preferences_dialog.c:1619
 msgid "Fonts"
-msgstr ""
+msgstr "Fontes"
 
 #: ../src/gnome2/preferences_dialog.c:1622
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #: ../src/gnome2/preferences_dialog.c:1625
 #: ../src/gnome2/preferences_dialog.c:1639
 #: ../src/gnome2/preferences_dialog.c:1652
 msgid "Misc"
-msgstr ""
+msgstr "Variado"
 
 #: ../src/gnome2/preferences_dialog.c:1629
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: ../src/gnome2/preferences_dialog.c:1632 ../ui/prefs.glade.h:59
 msgid "Tabs and Panes"
-msgstr ""
+msgstr "Abas e painéis"
 
 #: ../src/gnome2/preferences_dialog.c:1646
 msgid "Main"
-msgstr ""
+msgstr "Principal"
 
 #: ../src/gnome2/search_dialog.c:678
 msgid "Clear List?"
@@ -2351,11 +2366,11 @@ msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:59
 msgid "Start searching"
-msgstr ""
+msgstr "Iniciar busca"
 
 #: ../src/gnome2/search_sidebar.c:193
 msgid "Search Module"
-msgstr ""
+msgstr "Procurar Módulo"
 
 #: ../src/gnome2/search_sidebar.c:207
 msgid "Bible"
@@ -2499,11 +2514,11 @@ msgstr ""
 
 #: ../src/gnome2/toolbar_nav.c:637
 msgid "Change Chapter"
-msgstr ""
+msgstr "Alterar Capítulo"
 
 #: ../src/gnome2/toolbar_nav.c:707
 msgid "Change Verse"
-msgstr ""
+msgstr "Alterar Versículo"
 
 #: ../src/gnome2/toolbar_nav.c:775
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
@@ -2512,7 +2527,7 @@ msgstr ""
 #: ../src/gnome2/utilities.c:272
 #, c-format
 msgid "%s not found"
-msgstr ""
+msgstr "%s não encontrado"
 
 #. *****   end of file   *****
 #: ../ui/bookmarks.glade.h:1
