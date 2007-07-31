@@ -1,3 +1,9 @@
+2007-07-31  karl <charcoal@users.sf.net>
+
+	* fix bug 1764758: strongs on -> numbers verbalized
+	* fix bug 1764758: integrate 2.2 fix, avoid reading [, ], & *.
+	* move one g_message to GS_message.
+
 2007-07-29  dom <domcox@users.sf.net>
 
 	* sidebar search fix: text in upper case or multiple occurances 
