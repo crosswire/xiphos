@@ -511,34 +511,37 @@ static
 gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				  gpointer user_data)
 {
+	/* these are the mods we actually use for global keys, we always only check for these set */
+	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
+
 	switch(event->hardware_keycode) {
-	case 40: //D
-		if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+	case 40: //D dictionary entry
+		if (state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
-	case 42: //G
-		if(event->state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)  {				
+	case 42: //G  book entry
+		if (state == GDK_MOD1_MASK)  { //GDK_CONTROL_MASK)
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
 			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
 		break;
-	case 46: //L
-		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+	case 46: //L  verse entry
+		if (state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
 #ifdef OLD_NAVBAR
 			gtk_widget_grab_focus(nav_bar.lookup_entry);
 #else
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 #endif
 		break;
-	case 41: //F
-		if(event->state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
+	case 41: //F  find in bible text
+		if (state == GDK_CONTROL_MASK)  //GDK_CONTROL_MASK) 
 			// bible text only, *sigh*.
 			gui_find_dlg(widgets.html_text,
 				     settings.MainWindowModule,
 				     FALSE, NULL);
 		break;
-	case 54: //C
-		if(event->state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
+	case 54: //C  commentary pane
+		if (state == GDK_MOD1_MASK) { //GDK_CONTROL_MASK) {
 #ifdef OLD_NAVBAR
 			gtk_widget_grab_focus(nav_bar.lookup_entry);
 #else
@@ -547,8 +550,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 		}
 		break;
-	case 56: //B
-		if(event->state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
+	case 56: //B verse entry
+		if (state == GDK_MOD1_MASK)  //GDK_CONTROL_MASK) 
 #ifdef OLD_NAVBAR
 			gtk_widget_grab_focus(nav_bar.lookup_entry);
 #else
@@ -556,7 +559,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 #endif
 		break;
 	}
-	GS_message(("on_vbox1_key_press_event\nkeycode: %d",event->hardware_keycode));
+	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",event->hardware_keycode, state));
 	return FALSE;
 }
 
