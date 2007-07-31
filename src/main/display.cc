@@ -904,6 +904,33 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			g_string_printf(text, "%s", suppliedtext);
 		GS_message(("ReadAloud: dirty: %s\n", text->str));
 
+		// clean: no <span> surrounding strongs/morph.
+		// i wish there was a regexp form of strstr().
+		for (s = strstr(text->str, "<span class=\"strongs\">");
+		     s;
+		     s = strstr(s, "<span class=\"strongs\">")) {
+			if (t = strstr(s, "</span>")) {
+				t += 6;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched <span strong></span> in %s\n", s));
+				goto out;
+			}
+		}
+		for (s = strstr(text->str, "<span class=\"morph\">");
+		     s;
+		     s = strstr(s, "<span class=\"morph\">")) {
+			if (t = strstr(s, "</span>")) {
+				t += 6;
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("ReadAloud: Unmatched <span morph></span> in %s\n", s));
+				goto out;
+			}
+		}
+
 		// clean: no quotes (conflict w/festival syntax).
 		for (s = strchr(text->str, '"'); s; s = strchr(s, '"'))
 			*s = ' ';
@@ -951,6 +978,16 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 			*(s++) = ' ';
 			*(s++) = ' ';
 		}
+
+		// festival *pronounces* brackets and asterisks -- idiots.
+		for (s = strchr(text->str, '['); s; s = strchr(s, '['))
+			*s = ' ';
+		for (s = strchr(text->str, ']'); s; s = strchr(s, ']'))
+			*s = ' ';
+		for (s = strchr(text->str, '*'); s; s = strchr(s, '*'))
+			*s = ' ';
+		// in case it isn't obvious, i'd really like a  standard
+		// function that walks a string for multiple individual chars.
 		GS_message(("ReadAloud: clean: %s\n", text->str));
 
 		// scribble clean text to the socket.
