@@ -1128,7 +1128,7 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	
 	if(!list)
 		return retlist;
-	g_message("current_key=%s",current_key);
+	GS_message(("current_key=%s",current_key));
 /*	char *m_current_key = g_convert(current_key,
 				     -1,
 				     OLD_CODESET,
