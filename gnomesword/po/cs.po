@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword 2 2.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-29 08:30+0100\n"
+"POT-Creation-Date: 2007-02-06 22:01+0100\n"
 "PO-Revision-Date: 2007-03-23 22:48+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: \n"
@@ -32,7 +32,8 @@ msgstr "Studium Bible"
 #. mm_languageMap[SWBuf("aa")] = SWBuf("Afar");
 #. mm_languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 #. mm_languageMap[SWBuf("ae")] = SWBuf("Avestan");
-#: ../src/backend/sword_main.cc:1290 ../src/backend/module_manager.cc:79
+#: ../src/backend/sword_main.cc:1282
+#: ../src/backend/module_manager.cc:79
 msgid "Afrikaans"
 msgstr "Afrikánština"
 
@@ -40,12 +41,14 @@ msgstr "Afrikánština"
 #. languageMap[SWBuf("am")] = SWBuf("Amharic");
 #. done
 #. mm_languageMap[SWBuf("am")] = SWBuf("Amharic");
-#: ../src/backend/sword_main.cc:1292 ../src/backend/module_manager.cc:81
+#: ../src/backend/sword_main.cc:1284
+#: ../src/backend/module_manager.cc:81
 msgid "English, Old (ca.450-1100)"
 msgstr "Angličtina, stará (ca.450-1100)"
 
 #. done
-#: ../src/backend/sword_main.cc:1293 ../src/backend/module_manager.cc:82
+#: ../src/backend/sword_main.cc:1285
+#: ../src/backend/module_manager.cc:82
 msgid "Arabic"
 msgstr "Arabština"
 
@@ -55,7 +58,8 @@ msgstr "Arabština"
 #. done
 #. mm_languageMap[SWBuf("as")] = SWBuf("Assamese");
 #. mm_languageMap[SWBuf("ay")] = SWBuf("Aymara");
-#: ../src/backend/sword_main.cc:1296 ../src/backend/module_manager.cc:85
+#: ../src/backend/sword_main.cc:1288
+#: ../src/backend/module_manager.cc:85
 msgid "Azerbaijani"
 msgstr "Ázerbájdžánština"
 
@@ -63,12 +67,14 @@ msgstr "Ázerbájdžánština"
 #. languageMap[SWBuf("ba")] = SWBuf("Bashkir");
 #. done
 #. mm_languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-#: ../src/backend/sword_main.cc:1298 ../src/backend/module_manager.cc:87
+#: ../src/backend/sword_main.cc:1290
+#: ../src/backend/module_manager.cc:87
 msgid "Belarusian"
 msgstr "Běloruština"
 
 #. done
-#: ../src/backend/sword_main.cc:1299 ../src/backend/module_manager.cc:88
+#: ../src/backend/sword_main.cc:1291
+#: ../src/backend/module_manager.cc:88
 msgid "Bulgarian"
 msgstr "Bulharština"
 
@@ -82,17 +88,20 @@ msgstr "Bulharština"
 #. mm_languageMap[SWBuf("bi")] = SWBuf("Bislama");
 #. mm_languageMap[SWBuf("bn")] = SWBuf("Bengali");
 #. mm_languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-#: ../src/backend/sword_main.cc:1304 ../src/backend/module_manager.cc:93
+#: ../src/backend/sword_main.cc:1296
+#: ../src/backend/module_manager.cc:93
 msgid "Breton"
 msgstr "Bretonština"
 
 #. done
-#: ../src/backend/sword_main.cc:1305 ../src/backend/module_manager.cc:94
+#: ../src/backend/sword_main.cc:1297
+#: ../src/backend/module_manager.cc:94
 msgid "Bosnian"
 msgstr "Bosenština"
 
 #. done
-#: ../src/backend/sword_main.cc:1306 ../src/backend/module_manager.cc:95
+#: ../src/backend/sword_main.cc:1298
+#: ../src/backend/module_manager.cc:95
 msgid "Catalan"
 msgstr "Katalánština"
 
@@ -100,7 +109,8 @@ msgstr "Katalánština"
 #. languageMap[SWBuf("ce")] = SWBuf("Chechen");
 #. done
 #. mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
-#: ../src/backend/sword_main.cc:1308 ../src/backend/module_manager.cc:97
+#: ../src/backend/sword_main.cc:1300
+#: ../src/backend/module_manager.cc:97
 msgid "Cebuano"
 msgstr ""
 
@@ -110,17 +120,20 @@ msgstr ""
 #. done
 #. mm_languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 #. mm_languageMap[SWBuf("co")] = SWBuf("Corsican");
-#: ../src/backend/sword_main.cc:1311 ../src/backend/module_manager.cc:100
+#: ../src/backend/sword_main.cc:1303
+#: ../src/backend/module_manager.cc:100
 msgid "Coptic"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1312 ../src/backend/module_manager.cc:101
+#: ../src/backend/sword_main.cc:1304
+#: ../src/backend/module_manager.cc:101
 msgid "Czech"
 msgstr "Čeština"
 
 #. done
-#: ../src/backend/sword_main.cc:1313 ../src/backend/module_manager.cc:102
+#: ../src/backend/sword_main.cc:1305
+#: ../src/backend/module_manager.cc:102
 msgid "Church Slavic"
 msgstr "Staroslověnština"
 
@@ -128,17 +141,20 @@ msgstr "Staroslověnština"
 #. languageMap[SWBuf("cv")] = SWBuf("Chuvash");
 #. done
 #. mm_languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-#: ../src/backend/sword_main.cc:1315 ../src/backend/module_manager.cc:104
+#: ../src/backend/sword_main.cc:1307
+#: ../src/backend/module_manager.cc:104
 msgid "Welsh"
 msgstr "Welšština"
 
 #. done
-#: ../src/backend/sword_main.cc:1316 ../src/backend/module_manager.cc:105
+#: ../src/backend/sword_main.cc:1308
+#: ../src/backend/module_manager.cc:105
 msgid "Danish"
 msgstr "Dánština"
 
 #. done
-#: ../src/backend/sword_main.cc:1317 ../src/backend/module_manager.cc:106
+#: ../src/backend/sword_main.cc:1309
+#: ../src/backend/module_manager.cc:106
 msgid "German"
 msgstr "Němčina"
 
@@ -146,42 +162,50 @@ msgstr "Němčina"
 #. languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
 #. done
 #. mm_languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-#: ../src/backend/sword_main.cc:1319 ../src/backend/module_manager.cc:108
+#: ../src/backend/sword_main.cc:1311
+#: ../src/backend/module_manager.cc:108
 msgid "Greek, Modern (1453-)"
 msgstr "Řečtina, moderní  (1453-)"
 
 #. done
-#: ../src/backend/sword_main.cc:1320 ../src/backend/module_manager.cc:109
+#: ../src/backend/sword_main.cc:1312
+#: ../src/backend/module_manager.cc:109
 msgid "English"
 msgstr "Angličtina"
 
-#: ../src/backend/sword_main.cc:1321 ../src/backend/module_manager.cc:110
+#: ../src/backend/sword_main.cc:1313
+#: ../src/backend/module_manager.cc:110
 msgid "American English"
 msgstr "Americká angličtina"
 
 #. done
 #.
-#: ../src/backend/sword_main.cc:1323 ../src/backend/module_manager.cc:112
+#: ../src/backend/sword_main.cc:1315
+#: ../src/backend/module_manager.cc:112
 msgid "English, Middle (1100-1500)"
 msgstr "Angličtina, střední (1100-1500)"
 
 #. done
-#: ../src/backend/sword_main.cc:1324 ../src/backend/module_manager.cc:113
+#: ../src/backend/sword_main.cc:1316
+#: ../src/backend/module_manager.cc:113
 msgid "Esperanto"
 msgstr "Esperanto"
 
 #. done
-#: ../src/backend/sword_main.cc:1325 ../src/backend/module_manager.cc:114
+#: ../src/backend/sword_main.cc:1317
+#: ../src/backend/module_manager.cc:114
 msgid "Spanish"
 msgstr "Španělština"
 
 #. done
-#: ../src/backend/sword_main.cc:1326 ../src/backend/module_manager.cc:115
+#: ../src/backend/sword_main.cc:1318
+#: ../src/backend/module_manager.cc:115
 msgid "Estonian"
 msgstr "Estonština"
 
 #. done
-#: ../src/backend/sword_main.cc:1327 ../src/backend/module_manager.cc:116
+#: ../src/backend/sword_main.cc:1319
+#: ../src/backend/module_manager.cc:116
 msgid "Basque"
 msgstr "Baskičtina"
 
@@ -189,7 +213,8 @@ msgstr "Baskičtina"
 #. languageMap[SWBuf("fa")] = SWBuf("Persian");
 #. done
 #. mm_languageMap[SWBuf("fa")] = SWBuf("Persian");
-#: ../src/backend/sword_main.cc:1329 ../src/backend/module_manager.cc:118
+#: ../src/backend/sword_main.cc:1321
+#: ../src/backend/module_manager.cc:118
 msgid "Finnish"
 msgstr "Finština"
 
@@ -199,22 +224,26 @@ msgstr "Finština"
 #. done
 #. mm_languageMap[SWBuf("fj")] = SWBuf("Fijian");
 #. mm_languageMap[SWBuf("fo")] = SWBuf("Faroese");
-#: ../src/backend/sword_main.cc:1332 ../src/backend/module_manager.cc:121
+#: ../src/backend/sword_main.cc:1324
+#: ../src/backend/module_manager.cc:121
 msgid "French"
 msgstr "Francouština"
 
 #. done
-#: ../src/backend/sword_main.cc:1333 ../src/backend/module_manager.cc:122
+#: ../src/backend/sword_main.cc:1325
+#: ../src/backend/module_manager.cc:122
 msgid "Frisian"
 msgstr "Fríské jazyky"
 
 #. done
-#: ../src/backend/sword_main.cc:1334 ../src/backend/module_manager.cc:123
+#: ../src/backend/sword_main.cc:1326
+#: ../src/backend/module_manager.cc:123
 msgid "Irish"
 msgstr "Irština"
 
 #. done
-#: ../src/backend/sword_main.cc:1335 ../src/backend/module_manager.cc:124
+#: ../src/backend/sword_main.cc:1327
+#: ../src/backend/module_manager.cc:124
 msgid "Gaelic (Scots)"
 msgstr "Galština (skotové)"
 
@@ -228,27 +257,32 @@ msgstr "Galština (skotové)"
 #. mm_languageMap[SWBuf("gn")] = SWBuf("Guarani");
 #. mm_languageMap[SWBuf("gn")] = SWBuf("Gujarati");
 #.
-#: ../src/backend/sword_main.cc:1339 ../src/backend/module_manager.cc:128
+#: ../src/backend/sword_main.cc:1331
+#: ../src/backend/module_manager.cc:128
 msgid "Gothic"
 msgstr "Gótština"
 
 #. done
-#: ../src/backend/sword_main.cc:1340 ../src/backend/module_manager.cc:129
+#: ../src/backend/sword_main.cc:1332
+#: ../src/backend/module_manager.cc:129
 msgid "Manx"
 msgstr "Manština"
 
 #. done
-#: ../src/backend/sword_main.cc:1341 ../src/backend/module_manager.cc:130
+#: ../src/backend/sword_main.cc:1333
+#: ../src/backend/module_manager.cc:130
 msgid "Greek, Ancient (to 1453)"
 msgstr "Řečtina, starověká (to 1453)"
 
 #. done
-#: ../src/backend/sword_main.cc:1342 ../src/backend/module_manager.cc:131
+#: ../src/backend/sword_main.cc:1334
+#: ../src/backend/module_manager.cc:131
 msgid "Hebrew"
 msgstr "Hebrejština"
 
 #. done
-#: ../src/backend/sword_main.cc:1343 ../src/backend/module_manager.cc:132
+#: ../src/backend/sword_main.cc:1335
+#: ../src/backend/module_manager.cc:132
 msgid "Hawaiian"
 msgstr "Hawajština"
 
@@ -258,17 +292,20 @@ msgstr "Hawajština"
 #. done
 #. mm_languageMap[SWBuf("hi")] = SWBuf("Hindi");
 #. mm_languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-#: ../src/backend/sword_main.cc:1346 ../src/backend/module_manager.cc:135
+#: ../src/backend/sword_main.cc:1338
+#: ../src/backend/module_manager.cc:135
 msgid "Croatian"
 msgstr "Chorvatština"
 
 #. done
-#: ../src/backend/sword_main.cc:1347 ../src/backend/module_manager.cc:136
+#: ../src/backend/sword_main.cc:1339
+#: ../src/backend/module_manager.cc:136
 msgid "Hungarian"
 msgstr "Maďarština"
 
 #. done
-#: ../src/backend/sword_main.cc:1348 ../src/backend/module_manager.cc:137
+#: ../src/backend/sword_main.cc:1340
+#: ../src/backend/module_manager.cc:137
 msgid "Armenian"
 msgstr "Arménština"
 
@@ -278,7 +315,8 @@ msgstr "Arménština"
 #. done
 #. mm_languageMap[SWBuf("hz")] = SWBuf("Herero");
 #. mm_languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-#: ../src/backend/sword_main.cc:1351 ../src/backend/module_manager.cc:140
+#: ../src/backend/sword_main.cc:1343
+#: ../src/backend/module_manager.cc:140
 msgid "Klingon"
 msgstr ""
 
@@ -286,7 +324,8 @@ msgstr ""
 #. languageMap[SWBuf("ie")] = SWBuf("Interlingue");
 #. done
 #. mm_languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-#: ../src/backend/sword_main.cc:1353 ../src/backend/module_manager.cc:142
+#: ../src/backend/sword_main.cc:1345
+#: ../src/backend/module_manager.cc:142
 msgid "Indonesian"
 msgstr "Indonéšština"
 
@@ -296,12 +335,14 @@ msgstr "Indonéšština"
 #. done
 #.
 #. mm_languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-#: ../src/backend/sword_main.cc:1355 ../src/backend/module_manager.cc:144
+#: ../src/backend/sword_main.cc:1347
+#: ../src/backend/module_manager.cc:144
 msgid "Icelandic"
 msgstr "Islandština"
 
 #. done
-#: ../src/backend/sword_main.cc:1356 ../src/backend/module_manager.cc:145
+#: ../src/backend/sword_main.cc:1348
+#: ../src/backend/module_manager.cc:145
 msgid "Italian"
 msgstr "Italština"
 
@@ -309,12 +350,14 @@ msgstr "Italština"
 #. languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
 #. done
 #. mm_languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-#: ../src/backend/sword_main.cc:1358 ../src/backend/module_manager.cc:147
+#: ../src/backend/sword_main.cc:1350
+#: ../src/backend/module_manager.cc:147
 msgid "Japanese"
 msgstr "Japonština"
 
 #. done
-#: ../src/backend/sword_main.cc:1359 ../src/backend/module_manager.cc:148
+#: ../src/backend/sword_main.cc:1351
+#: ../src/backend/module_manager.cc:148
 msgid "Georgian"
 msgstr "Gruzínština"
 
@@ -332,7 +375,8 @@ msgstr "Gruzínština"
 #. mm_languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
 #. mm_languageMap[SWBuf("km")] = SWBuf("Khmer");
 #. mm_languageMap[SWBuf("kn")] = SWBuf("Kannada");
-#: ../src/backend/sword_main.cc:1366 ../src/backend/module_manager.cc:155
+#: ../src/backend/sword_main.cc:1358
+#: ../src/backend/module_manager.cc:155
 msgid "Korean"
 msgstr "Korejština"
 
@@ -340,7 +384,8 @@ msgstr "Korejština"
 #. languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
 #. done
 #. mm_languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-#: ../src/backend/sword_main.cc:1368 ../src/backend/module_manager.cc:157
+#: ../src/backend/sword_main.cc:1360
+#: ../src/backend/module_manager.cc:157
 msgid "Kurdish"
 msgstr "Kurdština"
 
@@ -350,12 +395,14 @@ msgstr "Kurdština"
 #. done
 #. mm_languageMap[SWBuf("kv")] = SWBuf("Komi");
 #. mm_languageMap[SWBuf("kw")] = SWBuf("Cornish");
-#: ../src/backend/sword_main.cc:1371 ../src/backend/module_manager.cc:160
+#: ../src/backend/sword_main.cc:1363
+#: ../src/backend/module_manager.cc:160
 msgid "Kirghiz"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1372 ../src/backend/module_manager.cc:161
+#: ../src/backend/sword_main.cc:1364
+#: ../src/backend/module_manager.cc:161
 msgid "Latin"
 msgstr "Latina"
 
@@ -367,12 +414,14 @@ msgstr "Latina"
 #. mm_languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 #. mm_languageMap[SWBuf("ln")] = SWBuf("Lingala");
 #. mm_languageMap[SWBuf("lo")] = SWBuf("Lao");
-#: ../src/backend/sword_main.cc:1376 ../src/backend/module_manager.cc:165
+#: ../src/backend/sword_main.cc:1368
+#: ../src/backend/module_manager.cc:165
 msgid "Lithuanian"
 msgstr "Litevština"
 
 #. done
-#: ../src/backend/sword_main.cc:1377 ../src/backend/module_manager.cc:166
+#: ../src/backend/sword_main.cc:1369
+#: ../src/backend/module_manager.cc:166
 msgid "Latvian"
 msgstr "Lotyština"
 
@@ -382,13 +431,16 @@ msgstr "Lotyština"
 #. done
 #. mm_languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 #. mm_languageMap[SWBuf("mh")] = SWBuf("Marshall");
-#: ../src/backend/sword_main.cc:1380 ../src/backend/module_manager.cc:169
+#: ../src/backend/sword_main.cc:1372
+#: ../src/backend/module_manager.cc:169
 msgid "Maori"
 msgstr "Maorština"
 
 #. done
-#: ../src/backend/sword_main.cc:1381 ../src/backend/sword_main.cc:1464
-#: ../src/backend/module_manager.cc:170 ../src/backend/module_manager.cc:253
+#: ../src/backend/sword_main.cc:1373
+#: ../src/backend/sword_main.cc:1456
+#: ../src/backend/module_manager.cc:170
+#: ../src/backend/module_manager.cc:253
 msgid "Macedonian"
 msgstr "Makedonština"
 
@@ -402,12 +454,14 @@ msgstr "Makedonština"
 #. mm_languageMap[SWBuf("mn")] = SWBuf("Mongolian");
 #. mm_languageMap[SWBuf("mo")] = SWBuf("Moldavian");
 #. mm_languageMap[SWBuf("mr")] = SWBuf("Marathi");
-#: ../src/backend/sword_main.cc:1386 ../src/backend/module_manager.cc:175
+#: ../src/backend/sword_main.cc:1378
+#: ../src/backend/module_manager.cc:175
 msgid "Malay"
 msgstr "Malajština"
 
 #. done
-#: ../src/backend/sword_main.cc:1387 ../src/backend/module_manager.cc:176
+#: ../src/backend/sword_main.cc:1379
+#: ../src/backend/module_manager.cc:176
 msgid "Maltese"
 msgstr "Maltéština"
 
@@ -423,7 +477,8 @@ msgstr "Maltéština"
 #. mm_languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
 #.
 #. mm_languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-#: ../src/backend/sword_main.cc:1392 ../src/backend/module_manager.cc:181
+#: ../src/backend/sword_main.cc:1384
+#: ../src/backend/module_manager.cc:181
 msgid "Low German; Low Saxon"
 msgstr "Nízká němčina; Low Saxon"
 
@@ -433,7 +488,8 @@ msgstr "Nízká němčina; Low Saxon"
 #. done
 #. mm_languageMap[SWBuf("ne")] = SWBuf("Nepali");
 #. mm_languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-#: ../src/backend/sword_main.cc:1395 ../src/backend/module_manager.cc:184
+#: ../src/backend/sword_main.cc:1387
+#: ../src/backend/module_manager.cc:184
 msgid "Dutch"
 msgstr "Holandština"
 
@@ -441,7 +497,8 @@ msgstr "Holandština"
 #. languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
 #. done
 #. mm_languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-#: ../src/backend/sword_main.cc:1397 ../src/backend/module_manager.cc:186
+#: ../src/backend/sword_main.cc:1389
+#: ../src/backend/module_manager.cc:186
 msgid "Norwegian"
 msgstr "Norština"
 
@@ -463,7 +520,8 @@ msgstr "Norština"
 #. mm_languageMap[SWBuf("or")] = SWBuf("Oriya");
 #. mm_languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
 #. mm_languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-#: ../src/backend/sword_main.cc:1406 ../src/backend/module_manager.cc:195
+#: ../src/backend/sword_main.cc:1398
+#: ../src/backend/module_manager.cc:195
 msgid "Papiamento"
 msgstr ""
 
@@ -471,7 +529,8 @@ msgstr ""
 #. languageMap[SWBuf("pi")] = SWBuf("Pali");
 #. done
 #. mm_languageMap[SWBuf("pi")] = SWBuf("Pali");
-#: ../src/backend/sword_main.cc:1408 ../src/backend/module_manager.cc:197
+#: ../src/backend/sword_main.cc:1400
+#: ../src/backend/module_manager.cc:197
 msgid "Polish"
 msgstr "Polština"
 
@@ -479,7 +538,8 @@ msgstr "Polština"
 #. languageMap[SWBuf("ps")] = SWBuf("Pushto");
 #. done
 #. mm_languageMap[SWBuf("ps")] = SWBuf("Pushto");
-#: ../src/backend/sword_main.cc:1410 ../src/backend/module_manager.cc:199
+#: ../src/backend/sword_main.cc:1402
+#: ../src/backend/module_manager.cc:199
 msgid "Portuguese"
 msgstr "Portugalština"
 
@@ -491,12 +551,14 @@ msgstr "Portugalština"
 #. mm_languageMap[SWBuf("qu")] = SWBuf("Quechua");
 #. mm_languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
 #. mm_languageMap[SWBuf("rn")] = SWBuf("Rundi");
-#: ../src/backend/sword_main.cc:1414 ../src/backend/module_manager.cc:203
+#: ../src/backend/sword_main.cc:1406
+#: ../src/backend/module_manager.cc:203
 msgid "Romanian"
 msgstr "Rumunština"
 
 #. done
-#: ../src/backend/sword_main.cc:1415 ../src/backend/module_manager.cc:204
+#: ../src/backend/sword_main.cc:1407
+#: ../src/backend/module_manager.cc:204
 msgid "Russian"
 msgstr "Ruština"
 
@@ -508,7 +570,8 @@ msgstr "Ruština"
 #. mm_languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
 #. mm_languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
 #. mm_languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-#: ../src/backend/sword_main.cc:1419 ../src/backend/module_manager.cc:208
+#: ../src/backend/sword_main.cc:1411
+#: ../src/backend/module_manager.cc:208
 msgid "Scots"
 msgstr "Skotský"
 
@@ -522,12 +585,14 @@ msgstr "Skotský"
 #. mm_languageMap[SWBuf("se")] = SWBuf("Northern Sami");
 #. mm_languageMap[SWBuf("sg")] = SWBuf("Sango");
 #. mm_languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-#: ../src/backend/sword_main.cc:1424 ../src/backend/module_manager.cc:213
+#: ../src/backend/sword_main.cc:1416
+#: ../src/backend/module_manager.cc:213
 msgid "Slovak"
 msgstr "Slovenština"
 
 #. done
-#: ../src/backend/sword_main.cc:1425 ../src/backend/module_manager.cc:214
+#: ../src/backend/sword_main.cc:1417
+#: ../src/backend/module_manager.cc:214
 msgid "Slovenian"
 msgstr "Slovinština"
 
@@ -539,12 +604,14 @@ msgstr "Slovinština"
 #. mm_languageMap[SWBuf("sm")] = SWBuf("Samoan");
 #.
 #. mm_languageMap[SWBuf("sn")] = SWBuf("Shona");
-#: ../src/backend/sword_main.cc:1428 ../src/backend/module_manager.cc:217
+#: ../src/backend/sword_main.cc:1420
+#: ../src/backend/module_manager.cc:217
 msgid "Somali"
 msgstr "Somálština"
 
 #. done
-#: ../src/backend/sword_main.cc:1429 ../src/backend/module_manager.cc:218
+#: ../src/backend/sword_main.cc:1421
+#: ../src/backend/module_manager.cc:218
 msgid "Albanian"
 msgstr "Albánština"
 
@@ -558,22 +625,26 @@ msgstr "Albánština"
 #. mm_languageMap[SWBuf("ss")] = SWBuf("Swati");
 #. mm_languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
 #. mm_languageMap[SWBuf("su")] = SWBuf("Sundanese");
-#: ../src/backend/sword_main.cc:1434 ../src/backend/module_manager.cc:223
+#: ../src/backend/sword_main.cc:1426
+#: ../src/backend/module_manager.cc:223
 msgid "Swedish"
 msgstr "Švédština"
 
 #. done
-#: ../src/backend/sword_main.cc:1435 ../src/backend/module_manager.cc:224
+#: ../src/backend/sword_main.cc:1427
+#: ../src/backend/module_manager.cc:224
 msgid "Swahili"
 msgstr "Svahilština"
 
 #. done
-#: ../src/backend/sword_main.cc:1436 ../src/backend/module_manager.cc:225
+#: ../src/backend/sword_main.cc:1428
+#: ../src/backend/module_manager.cc:225
 msgid "Syriac"
 msgstr "Syrština"
 
 #. done
-#: ../src/backend/sword_main.cc:1437 ../src/backend/module_manager.cc:226
+#: ../src/backend/sword_main.cc:1429
+#: ../src/backend/module_manager.cc:226
 msgid "Tamil"
 msgstr "Tamilština"
 
@@ -583,7 +654,8 @@ msgstr "Tamilština"
 #. done
 #. mm_languageMap[SWBuf("te")] = SWBuf("Telugu");
 #. mm_languageMap[SWBuf("tg")] = SWBuf("Tajik");
-#: ../src/backend/sword_main.cc:1440 ../src/backend/module_manager.cc:229
+#: ../src/backend/sword_main.cc:1432
+#: ../src/backend/module_manager.cc:229
 msgid "Thai"
 msgstr "Thajština"
 
@@ -591,17 +663,20 @@ msgstr "Thajština"
 #. languageMap[SWBuf("tk")] = SWBuf("Turkmen");
 #. done
 #. mm_languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-#: ../src/backend/sword_main.cc:1442 ../src/backend/module_manager.cc:231
+#: ../src/backend/sword_main.cc:1434
+#: ../src/backend/module_manager.cc:231
 msgid "Tagalog"
 msgstr "Tagalogština"
 
 #. done
-#: ../src/backend/sword_main.cc:1443 ../src/backend/module_manager.cc:232
+#: ../src/backend/sword_main.cc:1435
+#: ../src/backend/module_manager.cc:232
 msgid "Tswana"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1444 ../src/backend/module_manager.cc:233
+#: ../src/backend/sword_main.cc:1436
+#: ../src/backend/module_manager.cc:233
 msgid "Turkish"
 msgstr "Turečtina"
 
@@ -613,7 +688,8 @@ msgstr "Turečtina"
 #. mm_languageMap[SWBuf("ts")] = SWBuf("Tsonga");
 #. mm_languageMap[SWBuf("tt")] = SWBuf("Tatar");
 #. mm_languageMap[SWBuf("tw")] = SWBuf("Twi");
-#: ../src/backend/sword_main.cc:1448 ../src/backend/module_manager.cc:237
+#: ../src/backend/sword_main.cc:1440
+#: ../src/backend/module_manager.cc:237
 msgid "Tahitian"
 msgstr "Tahitština"
 
@@ -621,7 +697,8 @@ msgstr "Tahitština"
 #. languageMap[SWBuf("ug")] = SWBuf("Uighur");
 #. done
 #. mm_languageMap[SWBuf("ug")] = SWBuf("Uighur");
-#: ../src/backend/sword_main.cc:1450 ../src/backend/module_manager.cc:239
+#: ../src/backend/sword_main.cc:1442
+#: ../src/backend/module_manager.cc:239
 msgid "Ukrainian"
 msgstr "Ukrajinština"
 
@@ -631,7 +708,8 @@ msgstr "Ukrajinština"
 #. done
 #. mm_languageMap[SWBuf("ur")] = SWBuf("Urdu");
 #. mm_languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-#: ../src/backend/sword_main.cc:1453 ../src/backend/module_manager.cc:242
+#: ../src/backend/sword_main.cc:1445
+#: ../src/backend/module_manager.cc:242
 msgid "Vietnamese"
 msgstr "Vietnamština"
 
@@ -643,67 +721,80 @@ msgstr "Vietnamština"
 #. if commented,  accentued u causes gettext problems
 #.
 #. mm_languageMap[SWBuf("wo")] = SWBuf("Wolof");
-#: ../src/backend/sword_main.cc:1456 ../src/backend/module_manager.cc:245
+#: ../src/backend/sword_main.cc:1448
+#: ../src/backend/module_manager.cc:245
 msgid "Xhosa"
 msgstr ""
 
-#: ../src/backend/sword_main.cc:1457 ../src/backend/module_manager.cc:246
+#: ../src/backend/sword_main.cc:1449
+#: ../src/backend/module_manager.cc:246
 msgid "Bavarian"
 msgstr "Bavorština"
 
 #. done
-#: ../src/backend/sword_main.cc:1458 ../src/backend/module_manager.cc:247
+#: ../src/backend/sword_main.cc:1450
+#: ../src/backend/module_manager.cc:247
 msgid "Alemannisch"
 msgstr ""
 
 #. done
 #.
-#: ../src/backend/sword_main.cc:1459 ../src/backend/module_manager.cc:248
+#: ../src/backend/sword_main.cc:1451
+#: ../src/backend/module_manager.cc:248
 msgid "Haitian Creole French"
 msgstr "Kreolština"
 
 #. done
-#: ../src/backend/sword_main.cc:1460 ../src/backend/module_manager.cc:249
+#: ../src/backend/sword_main.cc:1452
+#: ../src/backend/module_manager.cc:249
 msgid "Itz"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1461 ../src/backend/module_manager.cc:250
+#: ../src/backend/sword_main.cc:1453
+#: ../src/backend/module_manager.cc:250
 msgid "Shuar"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1462 ../src/backend/module_manager.cc:251
+#: ../src/backend/sword_main.cc:1454
+#: ../src/backend/module_manager.cc:251
 msgid "Kekchi"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1463 ../src/backend/module_manager.cc:252
+#: ../src/backend/sword_main.cc:1455
+#: ../src/backend/module_manager.cc:252
 msgid "Lombard"
 msgstr "Lombardština"
 
 #. done
-#: ../src/backend/sword_main.cc:1465 ../src/backend/module_manager.cc:254
+#: ../src/backend/sword_main.cc:1457
+#: ../src/backend/module_manager.cc:254
 msgid "Tok Pisin"
 msgstr "Tok Pisin"
 
 #. done
-#: ../src/backend/sword_main.cc:1466 ../src/backend/module_manager.cc:255
+#: ../src/backend/sword_main.cc:1458
+#: ../src/backend/module_manager.cc:255
 msgid "Uma"
 msgstr ""
 
 #. done
-#: ../src/backend/sword_main.cc:1467 ../src/backend/module_manager.cc:256
+#: ../src/backend/sword_main.cc:1459
+#: ../src/backend/module_manager.cc:256
 msgid "Romani, Vlax"
 msgstr "Rumunština, Vlax"
 
 #. done
-#: ../src/backend/sword_main.cc:1468 ../src/backend/module_manager.cc:257
+#: ../src/backend/sword_main.cc:1460
+#: ../src/backend/module_manager.cc:257
 msgid "Sango"
 msgstr "Sango"
 
 #. done
-#: ../src/backend/sword_main.cc:1469 ../src/backend/module_manager.cc:258
+#: ../src/backend/sword_main.cc:1461
+#: ../src/backend/module_manager.cc:258
 msgid "Sranan"
 msgstr "Sranan"
 
@@ -713,89 +804,101 @@ msgstr "Sranan"
 #. done
 #. mm_languageMap[SWBuf("yi")] = SWBuf("Yiddish");
 #. mm_languageMap[SWBuf("za")] = SWBuf("Zhuang");
-#: ../src/backend/sword_main.cc:1472 ../src/backend/module_manager.cc:261
+#: ../src/backend/sword_main.cc:1464
+#: ../src/backend/module_manager.cc:261
 msgid "Chinese"
 msgstr "Čínština"
 
 #. done
-#: ../src/backend/sword_main.cc:1473 ../src/backend/module_manager.cc:262
+#: ../src/backend/sword_main.cc:1465
+#: ../src/backend/module_manager.cc:262
 msgid "Zulu"
 msgstr "Zulu"
 
-#: ../src/main/display.cc:463 ../src/main/display.cc:498
-#: ../src/main/display.cc:530 ../src/main/display.cc:534
+#: ../src/main/display.cc:432
+#: ../src/main/display.cc:471
+#: ../src/main/display.cc:507
+#: ../src/main/display.cc:511
 msgid "Chapter"
 msgstr "Kapitola"
 
-#: ../src/main/embed.cc:493 ../src/gnome2/html.c:150
+#: ../src/main/embed.cc:505
+#: ../src/gnome2/html.c:150
 msgid "Unlock "
 msgstr "Odemknout"
 
-#: ../src/main/lists.cc:150
+#: ../src/main/lists.cc:141
 msgid "Number of Text modules"
 msgstr ""
 
-#: ../src/main/lists.cc:151
+#: ../src/main/lists.cc:142
 msgid "Number of Commentary modules"
 msgstr ""
 
-#: ../src/main/lists.cc:152
+#: ../src/main/lists.cc:143
 msgid "Number of Dict/lex modules"
 msgstr ""
 
-#: ../src/main/lists.cc:153
+#: ../src/main/lists.cc:144
 msgid "Number of Book modules"
 msgstr ""
 
-#: ../src/main/lists.cc:154
+#: ../src/main/lists.cc:145
 msgid "Number of Percomm modules"
 msgstr ""
 
-#: ../src/main/lists.cc:155
+#: ../src/main/lists.cc:146
 msgid "Number of Devotion modules"
 msgstr ""
 
-#: ../src/main/lists.cc:158
-msgid "Number of Prayer modules"
-msgstr ""
-
-#: ../src/main/module_dialogs.cc:229 ../src/main/previewer.cc:107
-#: ../ui/prefs.glade.h:53
+#: ../src/main/module_dialogs.cc:227
+#: ../src/main/previewer.cc:107
+#: ../ui/prefs.glade.h:52
 msgid "Previewer"
 msgstr "Prohlížeč"
 
-#: ../src/main/module_dialogs.cc:296 ../src/main/module_dialogs.cc:425
+#: ../src/main/module_dialogs.cc:294
+#: ../src/main/module_dialogs.cc:423
 #: ../src/main/previewer.cc:173
 msgid "Footnote"
 msgstr "Vysvětlivka"
 
-#: ../src/main/module_dialogs.cc:302 ../src/main/module_dialogs.cc:430
+#: ../src/main/module_dialogs.cc:300
+#: ../src/main/module_dialogs.cc:428
 #: ../src/main/previewer.cc:179
 msgid "Cross Reference"
 msgstr "Odkaz"
 
-#: ../src/main/module_dialogs.cc:308 ../src/main/module_dialogs.cc:322
-#: ../src/main/module_dialogs.cc:435 ../src/main/module_dialogs.cc:447
-#: ../src/main/previewer.cc:185 ../src/main/previewer.cc:199
+#: ../src/main/module_dialogs.cc:306
+#: ../src/main/module_dialogs.cc:320
+#: ../src/main/module_dialogs.cc:433
+#: ../src/main/module_dialogs.cc:445
+#: ../src/main/previewer.cc:185
+#: ../src/main/previewer.cc:199
 msgid "Strongs"
 msgstr "Strongův"
 
-#: ../src/main/module_dialogs.cc:314 ../src/main/module_dialogs.cc:333
-#: ../src/main/module_dialogs.cc:440 ../src/main/module_dialogs.cc:457
-#: ../src/main/previewer.cc:191 ../src/main/previewer.cc:210
+#: ../src/main/module_dialogs.cc:312
+#: ../src/main/module_dialogs.cc:331
+#: ../src/main/module_dialogs.cc:438
+#: ../src/main/module_dialogs.cc:455
+#: ../src/main/previewer.cc:191
+#: ../src/main/previewer.cc:210
 msgid "Morphology"
 msgstr "Morfologie"
 
-#: ../src/main/module_dialogs.cc:1270
+#: ../src/main/module_dialogs.cc:1265
 msgid "Back to "
 msgstr "Zpět k"
 
-#: ../src/main/search_dialog.cc:53 ../src/main/search_sidebar.cc:55
+#: ../src/main/search_dialog.cc:53
+#: ../src/main/search_sidebar.cc:55
 #: ../src/gnome2/search_dialog.c:55
 msgid "Searching the "
 msgstr "Hledání"
 
-#: ../src/main/search_dialog.cc:54 ../src/main/search_sidebar.cc:56
+#: ../src/main/search_dialog.cc:54
+#: ../src/main/search_sidebar.cc:56
 #: ../src/gnome2/search_dialog.c:56
 msgid " Module"
 msgstr " Modul"
@@ -804,32 +907,34 @@ msgstr " Modul"
 msgid "found in"
 msgstr "nalezeno v"
 
-#: ../src/main/search_dialog.cc:342
+#: ../src/main/search_dialog.cc:344
 msgid "Delete Range?"
 msgstr "Smazat rozsah?"
 
-#: ../src/main/search_dialog.cc:343
+#: ../src/main/search_dialog.cc:345
 msgid "Are you sure you want to delete this range?"
 msgstr "Jste si jist, že chcete odstranit tento rozsah?"
 
-#: ../src/main/search_dialog.cc:569 ../src/main/search_dialog.cc:1052
-#: ../src/main/search_dialog.cc:1073
+#: ../src/main/search_dialog.cc:571
+#: ../src/main/search_dialog.cc:1060
+#: ../src/main/search_dialog.cc:1081
 msgid "Search: "
 msgstr "Hledat:"
 
-#: ../src/main/search_dialog.cc:623
+#: ../src/main/search_dialog.cc:625
 msgid "Remove Module?"
 msgstr "Smazat modul?"
 
-#: ../src/main/search_dialog.cc:624
+#: ../src/main/search_dialog.cc:626
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Jste si jist, že chcete smazat vybraný modul?"
 
-#: ../src/main/search_dialog.cc:1512
+#: ../src/main/search_dialog.cc:1526
 msgid "Search finished"
 msgstr "Hledání dokončeno"
 
-#: ../src/main/search_sidebar.cc:57 ../src/gnome2/search_dialog.c:57
+#: ../src/main/search_sidebar.cc:57
+#: ../src/gnome2/search_dialog.c:57
 msgid "found in "
 msgstr "nalezeno v"
 
@@ -837,15 +942,13 @@ msgstr "nalezeno v"
 msgid "matches"
 msgstr "výskytů"
 
-#: ../src/main/settings.c:53
+#: ../src/main/settings.c:52
 msgid ""
 "Welcome to GnomeSword.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, GnomeSword "
-"needs you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n"
 "\n"
-"With your permission, GnomeSword will invoke the Module Manager so that you "
-"may install from Crosswire:\n"
+"With your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -858,11 +961,9 @@ msgid ""
 msgstr ""
 "Vítá Vás program GnomeSword.\n"
 "\n"
-"Žádná Bible není nainstalována. GnomeSword potřebuje pro správné spuštění "
-"alespoň jednu Bibli.\n"
+"Žádná Bible není nainstalována. GnomeSword potřebuje pro správné spuštění alespoň jednu Bibli.\n"
 "\n"
-"Pokud to dovolíte, GnomeSword spustí Správce modulů, aby jste mohli "
-"instalovat moduly ze stránek Crosswire:\n"
+"Pokud to dovolíte, GnomeSword spustí Správce modulů, aby jste mohli instalovat moduly ze stránek Crosswire:\n"
 "1. Nastavení vzdálené instalace.\n"
 "2. Spojení.\n"
 "3. Výběr Bible ve Vašem preferovaném jazyce.\n"
@@ -873,15 +974,15 @@ msgstr ""
 "\n"
 "Může Gnomesword spustit Správce modulů, aby jste mohli instalovat Bibli?"
 
-#: ../src/main/settings.c:99
+#: ../src/main/settings.c:98
 msgid "$HOME is not set!"
 msgstr ""
 
-#: ../src/main/settings.c:114
+#: ../src/main/settings.c:113
 msgid "GnomeSword has renamed .gnomesword-2.0 to .gnomesword"
 msgstr "GnomeSword přejmenoval .gnomesword-2.0 na .gnomesword"
 
-#: ../src/main/settings.c:117
+#: ../src/main/settings.c:116
 #, c-format
 msgid ""
 "GnomeSword can not rename  .gnomesword-2.0 to .gnomesword:\n"
@@ -894,7 +995,7 @@ msgstr ""
 "\n"
 "GnomeSword nemůže pokračovat."
 
-#: ../src/main/settings.c:125
+#: ../src/main/settings.c:124
 #, c-format
 msgid ""
 "GnomeSword can not create  .gnomesword:\n"
@@ -907,43 +1008,40 @@ msgstr ""
 "\n"
 "GnomeSword nemůže pokračovat."
 
-#: ../src/main/settings.c:145
+#: ../src/main/settings.c:144
+#, c-format
 msgid "can not create  .sword"
 msgstr "nelze vytvořit  .sword"
 
-#: ../src/main/settings.c:153
+#: ../src/main/settings.c:152
+#, c-format
 msgid "can not create  .sword/mods.d"
 msgstr "nelze vytvořit  .sword/mods.d"
 
-#: ../src/main/settings.c:161
+#: ../src/main/settings.c:160
+#, c-format
 msgid "can not create  .sword/modules"
 msgstr "nelze vytvořit  .sword/modules"
 
-#: ../src/main/settings.c:189
+#: ../src/main/settings.c:190
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
 "\n"
-"Without any Bible modules to display, GnomeSword cannot proceed, and will "
-"now exit."
+"Without any Bible modules to display, GnomeSword cannot proceed, and will now exit."
 msgstr ""
 "Žádné Bible nejsou nainstalovány.\n"
 "Očividně jste odmítnul nějaké instalovat.\n"
 "\n"
-"Bez nainstalování Bible GnomeSword nemůže pokračovat a provede se ukončení "
-"programu."
+"Bez nainstalování Bible GnomeSword nemůže pokračovat a provede se ukončení programu."
 
-#: ../src/main/settings.c:193
+#: ../src/main/settings.c:194
 msgid "Bible module installation complete."
 msgstr "Instalace Bible kompletní."
 
-#: ../src/main/settings.c:196
-msgid ""
-"Without any Bible modules to display, GnomeSword cannot proceed, and will "
-"now exit."
-msgstr ""
-"Bez Bible pro zobrazení, GnomeSword nemůže pokračovat a provede se ukončení "
-"programu."
+#: ../src/main/settings.c:197
+msgid "Without any Bible modules to display, GnomeSword cannot proceed, and will now exit."
+msgstr "Bez Bible pro zobrazení, GnomeSword nemůže pokračovat a provede se ukončení programu."
 
 #. *****************************************************************************
 #. * Name
@@ -961,30 +1059,21 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:634
-msgid ""
-"There is currently no program set as your handler for \"sword://\" and "
-"similar URLs.  Would you like GnomeSword to install itself as the program to "
-"handle these URLs?"
-msgstr ""
-"V současné době není nastavena obsluha pro URL typu \"sword://\". Přejete "
-"si, aby se GnomeSword používal pro obsluhu těchto URL?"
+#: ../src/main/settings.c:635
+msgid "There is currently no program set as your handler for \"sword://\" and similar URLs.  Would you like GnomeSword to install itself as the program to handle these URLs?"
+msgstr "V současné době není nastavena obsluha pro URL typu \"sword://\". Přejete si, aby se GnomeSword používal pro obsluhu těchto URL?"
 
-#: ../src/main/settings.c:636
+#: ../src/main/settings.c:637
 msgid ""
-"GnomeSword has successfully set itself as the handler of sword:// and "
-"bible:// URLs.\n"
+"GnomeSword has successfully set itself as the handler of sword:// and bible:// URLs.\n"
 "\n"
-"You may wish to run the program \"gconf-editor\" to examine keys under /"
-"desktop/gnome/url-handlers, if you need to change these."
+"You may wish to run the program \"gconf-editor\" to examine keys under /desktop/gnome/url-handlers, if you need to change these."
 msgstr ""
-"GnomeSword úspěšně nastavil sám sebe pro pro obsluhu URL typu sword:// a "
-"bible://.\n"
+"GnomeSword úspěšně nastavil sám sebe pro pro obsluhu URL typu sword:// a bible://.\n"
 "\n"
-"Můžete si přát spustit program \"gconf-editor\" pro ověření hodnot v /"
-"desktop/gnome/url-handlers, pokud budete potřebovat tyto hodoty změnit."
+"Můžete si přát spustit program \"gconf-editor\" pro ověření hodnot v /desktop/gnome/url-handlers, pokud budete potřebovat tyto hodoty změnit."
 
-#: ../src/main/settings.c:681
+#: ../src/main/settings.c:682
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
@@ -993,71 +1082,82 @@ msgstr ""
 "GnomeSword selhal v dokončení  inicializace obsluhy pro výraz #%d:\n"
 "%s"
 
-#: ../src/main/sidebar.cc:374
+#: ../src/main/sidebar.cc:368
 msgid "verse"
 msgstr "verš"
 
-#: ../src/main/sidebar.cc:434
+#: ../src/main/sidebar.cc:428
 msgid "chapter"
 msgstr "kapitola"
 
-#: ../src/main/sidebar.cc:584 ../src/main/sidebar.cc:925
-#: ../src/main/sidebar.cc:926 ../src/main/sidebar.cc:927
-#: ../src/gnome2/parallel_view.c:534 ../src/gnome2/sidebar.c:653
-#: ../src/gnome2/sidebar.c:662 ../src/gnome2/utilities.c:443
+#: ../src/main/sidebar.cc:578
+#: ../src/main/sidebar.cc:872
+#: ../src/main/sidebar.cc:873
+#: ../src/main/sidebar.cc:874
+#: ../src/gnome2/parallel_view.c:534
+#: ../src/gnome2/sidebar.c:653
+#: ../src/gnome2/sidebar.c:662
+#: ../src/gnome2/utilities.c:442
 msgid "Parallel View"
 msgstr "Souběžný pohled"
 
-#: ../src/main/sidebar.cc:590 ../src/main/sidebar.cc:933
-#: ../src/main/sidebar.cc:934 ../src/main/sidebar.cc:935
-#: ../src/gnome2/main_window.c:740
+#: ../src/main/sidebar.cc:584
+#: ../src/main/sidebar.cc:880
+#: ../src/main/sidebar.cc:881
+#: ../src/main/sidebar.cc:882
+#: ../src/gnome2/main_window.c:718
 msgid "Standard View"
 msgstr "Standardní pohled"
 
-#: ../src/main/sidebar.cc:596 ../src/main/sidebar.cc:953
-#: ../src/main/sidebar.cc:955 ../src/gnome2/mod_mgr.c:864
-#: ../src/gnome2/utilities.c:458 ../ui/prefs.glade.h:26
+#: ../src/main/sidebar.cc:590
+#: ../src/main/sidebar.cc:909
+#: ../src/main/sidebar.cc:911
+#: ../src/gnome2/mod_mgr.c:785
+#: ../src/gnome2/utilities.c:464
+#: ../ui/prefs.glade.h:25
 msgid "Commentaries"
 msgstr "Komentáře"
 
-#: ../src/main/sidebar.cc:609 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015 ../src/gnome2/mod_mgr.c:876
-#: ../src/gnome2/utilities.c:499
+#: ../src/main/sidebar.cc:603
+#: ../src/main/sidebar.cc:966
+#: ../src/main/sidebar.cc:968
+#: ../src/gnome2/mod_mgr.c:795
+#: ../src/gnome2/utilities.c:507
 msgid "General Books"
 msgstr "Ostatní knihy"
 
-#: ../src/main/sidebar.cc:753 ../src/main/sidebar.cc:755
-#: ../src/main/sidebar.cc:850 ../src/main/sidebar.cc:852
-#: ../src/gnome2/mod_mgr.c:635 ../src/gnome2/mod_mgr.c:637
-#: ../src/gnome2/mod_mgr.c:741 ../src/gnome2/mod_mgr.c:743
-#: ../src/gnome2/utilities.c:312 ../src/gnome2/utilities.c:314
-#: ../src/gnome2/utilities.c:382 ../src/gnome2/utilities.c:384
+#: ../src/main/sidebar.cc:741
+#: ../src/main/sidebar.cc:743
+#: ../src/main/sidebar.cc:798
+#: ../src/main/sidebar.cc:800
+#: ../src/gnome2/mod_mgr.c:566
+#: ../src/gnome2/mod_mgr.c:568
+#: ../src/gnome2/mod_mgr.c:661
+#: ../src/gnome2/mod_mgr.c:663
+#: ../src/gnome2/utilities.c:313
+#: ../src/gnome2/utilities.c:315
+#: ../src/gnome2/utilities.c:382
+#: ../src/gnome2/utilities.c:384
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../src/main/sidebar.cc:917 ../src/main/sidebar.cc:919
-#: ../src/gnome2/mod_mgr.c:860 ../src/gnome2/utilities.c:438
+#: ../src/main/sidebar.cc:864
+#: ../src/main/sidebar.cc:866
+#: ../src/gnome2/mod_mgr.c:781
+#: ../src/gnome2/utilities.c:436
 msgid "Biblical Texts"
 msgstr "Bible"
 
-#: ../src/main/sidebar.cc:973 ../src/main/sidebar.cc:975
-#: ../src/gnome2/mod_mgr.c:868 ../src/gnome2/utilities.c:472
+#: ../src/main/sidebar.cc:937
+#: ../src/main/sidebar.cc:939
+#: ../src/gnome2/mod_mgr.c:790
+#: ../src/gnome2/utilities.c:485
 msgid "Dictionaries"
 msgstr "Slovníky"
 
-#: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
-#: ../src/gnome2/mod_mgr.c:872 ../src/gnome2/utilities.c:486
-#, fuzzy
-msgid "Daily Devotionals"
-msgstr "Čtení na každý den"
-
-#: ../src/main/sidebar.cc:1034 ../src/main/sidebar.cc:1036
-#, fuzzy
-msgid "Prayer List"
-msgstr "Uložit seznam"
-
-#. GS_print(("date: %s\n", getenv("DATE")));
-#: ../src/main/sword.cc:541 ../src/gnome2/main_window.c:603
+#. g_print("date: %s\n", getenv("DATE"));
+#: ../src/main/sword.cc:541
+#: ../src/gnome2/main_window.c:586
 msgid "Starting"
 msgstr "Startuji"
 
@@ -1081,62 +1181,61 @@ msgstr "SWORD jazyk je"
 msgid "Checking for SWORD Modules"
 msgstr "Kontrola SWORD modulů"
 
-#: ../src/main/sword.cc:579
+#: ../src/main/sword.cc:581
 msgid "SWORD is shutdown"
 msgstr "SWORD je vypnutý"
 
-#: ../src/main/sword.cc:621 ../src/main/sword.cc:630
+#: ../src/main/sword.cc:624
+#: ../src/main/sword.cc:633
 msgid "The"
 msgstr " "
 
-#: ../src/main/sword.cc:623
+#: ../src/main/sword.cc:626
 msgid "module is locked."
 msgstr "modul je zamknut."
 
-#: ../src/main/sword.cc:633
+#: ../src/main/sword.cc:636
 msgid "module has been unlocked."
 msgstr "modul byl odemknut."
 
-#: ../src/main/sword.cc:644
+#: ../src/main/sword.cc:647
 msgid "If you have the cipher key you can"
 msgstr "Pokud máte šifrovací klíč, můžete"
 
-#: ../src/main/sword.cc:648
+#: ../src/main/sword.cc:651
 msgid "click here"
 msgstr "klikněte zde"
 
-#: ../src/main/sword.cc:649
+#: ../src/main/sword.cc:652
 msgid "to unlock the module"
 msgstr "odemknout modul"
 
-#: ../src/main/sword.cc:659
+#: ../src/main/sword.cc:662
 msgid "You will need to restart GnomeSword after you unlock it."
 msgstr "Po odemknutí bude potřeba restartovat GnomeSword."
 
-#: ../src/main/sword.cc:668
+#: ../src/main/sword.cc:671
 msgid "You need to restart GnomeSword to view it"
 msgstr "K prohlížení bude nutno restartovat GnomeSword."
 
-#: ../src/main/sword.cc:1239
+#: ../src/main/sword.cc:1229
 msgid "Daily devotional was requested, but there are none installed."
 msgstr "Čtení na každý den bylo požadováno, ale žádné není instalováno."
 
-#: ../src/main/tab_history.c:67 ../src/main/tab_history.c:111
-#: ../src/main/tab_history.c:126
+#: ../src/main/tab_history.c:65
+#: ../src/main/tab_history.c:101
+#: ../src/main/tab_history.c:116
 msgid "H_istory/<Separator>"
 msgstr "H_istorie/<Separator>"
 
 #. tab->history_items + 1);
-#: ../src/main/tab_history.c:69 ../src/main/tab_history.c:113
+#: ../src/main/tab_history.c:67
+#: ../src/main/tab_history.c:103
 msgid "H_istory/C_lear"
 msgstr "H_istorie/V_yčistit"
 
-#: ../src/main/tab_history.c:248
-#, fuzzy
-msgid "Clear History"
-msgstr "Vymazat historii"
-
-#: ../src/main/xml.c:86 ../src/main/xml.c:471
+#: ../src/main/xml.c:86
+#: ../src/main/xml.c:475
 #, c-format
 msgid "Document not created successfully. \n"
 msgstr ""
@@ -1149,15 +1248,18 @@ msgstr "Osobní"
 msgid "What must I do to be saved?"
 msgstr "Co musím udělat, abych byl zachráněn?"
 
-#: ../src/main/xml.c:98 ../src/main/xml.c:99
+#: ../src/main/xml.c:98
+#: ../src/main/xml.c:99
 msgid "Acts 16:31"
 msgstr "Skutky 16:31"
 
-#: ../src/main/xml.c:103 ../src/main/xml.c:104
+#: ../src/main/xml.c:103
+#: ../src/main/xml.c:104
 msgid "Eph 2:8"
 msgstr "Efezským 2:8"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:108
+#: ../src/main/xml.c:109
 msgid "Romans 1:16"
 msgstr "Římanům 1:16"
 
@@ -1173,123 +1275,117 @@ msgstr "1. Korintským 15:1-4"
 msgid "1 Cor 15:1"
 msgstr "1. Korintským 15:1"
 
-#: ../src/main/xml.c:419 ../src/main/xml.c:1085
+#: ../src/main/xml.c:423
+#: ../src/main/xml.c:1089
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr ""
 
-#: ../src/main/xml.c:425 ../src/main/xml.c:688 ../src/main/xml.c:966
+#: ../src/main/xml.c:429
+#: ../src/main/xml.c:692
+#: ../src/main/xml.c:970
 #, c-format
 msgid "empty document \n"
 msgstr "prázdný dokument \n"
 
-#: ../src/main/xml.c:431
+#: ../src/main/xml.c:435
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
 msgstr ""
 
-#: ../src/main/xml.c:485
+#: ../src/main/xml.c:489
 msgid "Old Testament"
 msgstr "Starý zákon"
 
-#: ../src/main/xml.c:487
+#: ../src/main/xml.c:491
 msgid "Gen - Mal"
 msgstr "Genesis - Malachiáš"
 
-#: ../src/main/xml.c:493
+#: ../src/main/xml.c:497
 msgid "New Testament"
 msgstr "Nový zákon"
 
-#: ../src/main/xml.c:495
+#: ../src/main/xml.c:499
 msgid "Mat - Rev"
 msgstr "Mt - Zj"
 
-#: ../src/main/xml.c:503
+#: ../src/main/xml.c:507
 msgid "Sample Module List"
 msgstr "Příklad seznamu modulů"
 
-#: ../src/main/xml.c:505
+#: ../src/main/xml.c:509
 msgid "Select the modules you want"
 msgstr "Vyberte modul, který chcete"
 
-#: ../src/main/xml.c:694 ../src/main/xml.c:972
+#: ../src/main/xml.c:698
+#: ../src/main/xml.c:976
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
-#: ../src/editor/html-editor.c:135
+#: ../src/editor/html-editor.c:153
 msgid "Are you sure you want to delete the note for"
 msgstr "Jste si jist, že chcete odstranit poznámku k"
 
-#: ../src/editor/html-editor.c:137
+#: ../src/editor/html-editor.c:155
 msgid "It will be lost permanently!"
 msgstr "Bude trvale ztracen!"
 
-#: ../src/editor/html-editor.c:374
+#: ../src/editor/html-editor.c:398
 msgid "Open file..."
 msgstr "Otevřít soubor..."
 
-#: ../src/editor/html-editor.c:385
+#: ../src/editor/html-editor.c:409
 msgid "Save file as..."
 msgstr "Uložit jako..."
 
-#: ../src/editor/html-editor.c:513 ../src/gnome2/bibletext.c:1095
-#: ../src/gnome2/bibletext_dialog.c:2138 ../src/gnome2/commentary.c:945
-#: ../src/gnome2/commentary_dialog.c:1841 ../src/gnome2/dictlex.c:1006
-#: ../src/gnome2/gbs.c:834 ../src/gnome2/studypad.c:103
+#: ../src/editor/html-editor.c:539
+#: ../src/gnome2/bibletext.c:1086
+#: ../src/gnome2/bibletext_dialog.c:2136
+#: ../src/gnome2/commentary.c:945
+#: ../src/gnome2/commentary_dialog.c:1847
+#: ../src/gnome2/dictlex.c:1008
+#: ../src/gnome2/gbs.c:833
+#: ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr "Soubor"
 
-#: ../src/editor/html-editor.c:514
+#: ../src/editor/html-editor.c:540
 msgid "Save the changes to document"
 msgstr "Uložit změny dokumentu"
 
-#: ../src/editor/html-editor.c:515
+#: ../src/editor/html-editor.c:541
 msgid "before closing?"
 msgstr "před uzavřením?"
 
-#: ../src/editor/html-editor.c:522
+#: ../src/editor/html-editor.c:548
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Pokud neprovedete uložení, změny budou trvale ztraceny."
 
-#: ../src/editor/html-editor.c:1270
+#: ../src/editor/html-editor.c:1273
 msgid "Note Editor"
 msgstr "Editor poznámek"
 
-#: ../src/editor/html-editor.c:1278 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1281
+#: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/gnome2/about_gnomesword.c:126
-#, fuzzy
-msgid "Copyright 2000-2007 The GnomeSword Development Team"
+#: ../src/gnome2/about_gnomesword.c:116
+msgid "Copyright 2000-2006 The GnomeSword Development Team"
 msgstr "Copyright 2000-2006 The GnomeSword Development Team"
 
-#: ../src/gnome2/about_gnomesword.c:129
-msgid ""
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
-msgstr ""
-"Poděkování patří osobám jako Troy Griffitts a všem ostatním, kteří vytvořili "
-"aplikaci The SWORD Project."
+#: ../src/gnome2/about_gnomesword.c:119
+msgid "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
+msgstr "Poděkování patří osobám jako Troy Griffitts a všem ostatním, kteří vytvořili aplikaci The SWORD Project."
 
-#: ../src/gnome2/about_modules.c:225
+#: ../src/gnome2/about_modules.c:227
 msgid "About Sword Module"
 msgstr "O modulu"
 
 #: ../src/gnome2/about_sword.c:94
-msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Bible Framework allows "
-"easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and "
-"other books. Many frontends are built using this framework. An installed "
-"module set may be shared between any frontend using the framework."
-msgstr ""
-"Aplikace The SWORD Project je snaha o vytvoření počítačového programu pro "
-"poznávání a studium Božího slova. Program umožňuje lehké ovládání biblických "
-"textů, komentářů, slovníků a dalších knih. Několik uživatelských rozhraní "
-"využívá tento program. Několik nainstalovaných modulů může být sdíleno mezi "
-"více aplikacemi, využívající tento program. "
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed module set may be shared between any frontend using the framework."
+msgstr "Aplikace The SWORD Project je snaha o vytvoření počítačového programu pro poznávání a studium Božího slova. Program umožňuje lehké ovládání biblických textů, komentářů, slovníků a dalších knih. Několik uživatelských rozhraní využívá tento program. Několik nainstalovaných modulů může být sdíleno mezi více aplikacemi, využívající tento program. "
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -1307,192 +1403,275 @@ msgstr "Moduly lze stáhnout ze stránek aplikace The SWORD Project"
 msgid "The SWORD Project"
 msgstr "The SWORD Project"
 
-#: ../src/gnome2/bibletext.c:895 ../src/gnome2/bibletext_dialog.c:1931
-#: ../src/gnome2/commentary.c:745 ../src/gnome2/commentary_dialog.c:1634
-#: ../src/gnome2/dictlex.c:821 ../src/gnome2/gbs.c:634
+#: ../src/gnome2/bibletext.c:886
+#: ../src/gnome2/bibletext_dialog.c:1929
+#: ../src/gnome2/commentary.c:745
+#: ../src/gnome2/commentary_dialog.c:1640
+#: ../src/gnome2/dictlex.c:823
+#: ../src/gnome2/gbs.c:633
 msgid "item1"
 msgstr "položka1"
 
-#: ../src/gnome2/bibletext.c:905 ../src/gnome2/bibletext_dialog.c:1941
-#: ../src/gnome2/commentary.c:755 ../src/gnome2/commentary_dialog.c:1644
-#: ../src/gnome2/dictlex.c:831 ../src/gnome2/gbs.c:644
+#: ../src/gnome2/bibletext.c:896
+#: ../src/gnome2/bibletext_dialog.c:1939
+#: ../src/gnome2/commentary.c:755
+#: ../src/gnome2/commentary_dialog.c:1650
+#: ../src/gnome2/dictlex.c:833
+#: ../src/gnome2/gbs.c:643
 msgid "Open Module"
 msgstr "Otevřít modul"
 
-#: ../src/gnome2/bibletext.c:917 ../src/gnome2/bibletext_dialog.c:1967
-#: ../src/gnome2/commentary.c:767 ../src/gnome2/commentary_dialog.c:1670
-#: ../src/gnome2/gbs.c:656
+#: ../src/gnome2/bibletext.c:908
+#: ../src/gnome2/bibletext_dialog.c:1965
+#: ../src/gnome2/commentary.c:767
+#: ../src/gnome2/commentary_dialog.c:1676
+#: ../src/gnome2/gbs.c:655
 msgid "item2"
 msgstr "položka2"
 
-#: ../src/gnome2/bibletext.c:929 ../src/gnome2/bibletext_dialog.c:1979
-#: ../src/gnome2/commentary.c:779 ../src/gnome2/commentary_dialog.c:1682
-#: ../src/gnome2/gbs.c:668
+#: ../src/gnome2/bibletext.c:920
+#: ../src/gnome2/bibletext_dialog.c:1977
+#: ../src/gnome2/commentary.c:779
+#: ../src/gnome2/commentary_dialog.c:1688
+#: ../src/gnome2/gbs.c:667
 msgid "Note"
 msgstr "Poznamenat"
 
-#: ../src/gnome2/bibletext.c:939 ../src/gnome2/bibletext_dialog.c:1989
-#: ../src/gnome2/commentary.c:789 ../src/gnome2/commentary_dialog.c:1692
-#: ../src/gnome2/dictlex.c:850 ../src/gnome2/gbs.c:678
+#: ../src/gnome2/bibletext.c:930
+#: ../src/gnome2/bibletext_dialog.c:1987
+#: ../src/gnome2/commentary.c:789
+#: ../src/gnome2/commentary_dialog.c:1698
+#: ../src/gnome2/dictlex.c:852
+#: ../src/gnome2/gbs.c:677
 msgid "All Readings"
 msgstr "Všechna čtení"
 
-#: ../src/gnome2/bibletext.c:945 ../src/gnome2/bibletext_dialog.c:1995
-#: ../src/gnome2/commentary.c:795 ../src/gnome2/commentary_dialog.c:1698
-#: ../src/gnome2/dictlex.c:856 ../src/gnome2/gbs.c:684
+#: ../src/gnome2/bibletext.c:936
+#: ../src/gnome2/bibletext_dialog.c:1993
+#: ../src/gnome2/commentary.c:795
+#: ../src/gnome2/commentary_dialog.c:1704
+#: ../src/gnome2/dictlex.c:858
+#: ../src/gnome2/gbs.c:683
 msgid "Primary Reading"
 msgstr "Prvořadé čtení"
 
-#: ../src/gnome2/bibletext.c:951 ../src/gnome2/bibletext_dialog.c:2001
-#: ../src/gnome2/commentary.c:801 ../src/gnome2/commentary_dialog.c:1704
-#: ../src/gnome2/dictlex.c:862 ../src/gnome2/gbs.c:690
+#: ../src/gnome2/bibletext.c:942
+#: ../src/gnome2/bibletext_dialog.c:1999
+#: ../src/gnome2/commentary.c:801
+#: ../src/gnome2/commentary_dialog.c:1710
+#: ../src/gnome2/dictlex.c:864
+#: ../src/gnome2/gbs.c:689
 msgid "Secondary Reading"
 msgstr "Pomocné čtení"
 
-#: ../src/gnome2/bibletext.c:969 ../src/gnome2/bibletext_dialog.c:2019
-#: ../src/gnome2/commentary.c:819 ../src/gnome2/commentary_dialog.c:1722
-#: ../src/gnome2/dictlex.c:880 ../src/gnome2/font_dialog.c:292
-#: ../src/gnome2/gbs.c:708
+#: ../src/gnome2/bibletext.c:960
+#: ../src/gnome2/bibletext_dialog.c:2017
+#: ../src/gnome2/commentary.c:819
+#: ../src/gnome2/commentary_dialog.c:1728
+#: ../src/gnome2/dictlex.c:882
+#: ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/gbs.c:707
 msgid "Set Module Font"
 msgstr "Nastavit písmo modulu"
 
-#: ../src/gnome2/bibletext.c:976 ../src/gnome2/bibletext_dialog.c:2026
-#: ../src/gnome2/commentary.c:826 ../src/gnome2/commentary_dialog.c:1729
-#: ../src/gnome2/dictlex.c:887 ../src/gnome2/gbs.c:715
+#: ../src/gnome2/bibletext.c:967
+#: ../src/gnome2/bibletext_dialog.c:2024
+#: ../src/gnome2/commentary.c:826
+#: ../src/gnome2/commentary_dialog.c:1735
+#: ../src/gnome2/dictlex.c:889
+#: ../src/gnome2/gbs.c:714
 msgid "Words of Christ in Red"
 msgstr "Ježíšova slova v červené barvě"
 
-#: ../src/gnome2/bibletext.c:985 ../src/gnome2/bibletext_dialog.c:2035
-#: ../src/gnome2/commentary.c:835 ../src/gnome2/commentary_dialog.c:1738
-#: ../src/gnome2/dictlex.c:896 ../src/gnome2/gbs.c:724
+#: ../src/gnome2/bibletext.c:976
+#: ../src/gnome2/bibletext_dialog.c:2033
+#: ../src/gnome2/commentary.c:835
+#: ../src/gnome2/commentary_dialog.c:1744
+#: ../src/gnome2/dictlex.c:898
+#: ../src/gnome2/gbs.c:723
 msgid "Strong's Numbers"
 msgstr "Strongova čísla"
 
-#: ../src/gnome2/bibletext.c:996 ../src/gnome2/bibletext_dialog.c:2046
-#: ../src/gnome2/commentary.c:846 ../src/gnome2/commentary_dialog.c:1749
-#: ../src/gnome2/dictlex.c:907 ../src/gnome2/gbs.c:735
+#: ../src/gnome2/bibletext.c:987
+#: ../src/gnome2/bibletext_dialog.c:2044
+#: ../src/gnome2/commentary.c:846
+#: ../src/gnome2/commentary_dialog.c:1755
+#: ../src/gnome2/dictlex.c:909
+#: ../src/gnome2/gbs.c:734
 #: ../ui/search-dialog.glade.h:40
 msgid "Morphological Tags"
 msgstr "Morfologické značky"
 
-#: ../src/gnome2/bibletext.c:1004 ../src/gnome2/bibletext_dialog.c:2054
-#: ../src/gnome2/commentary.c:854 ../src/gnome2/commentary_dialog.c:1757
-#: ../src/gnome2/dictlex.c:915 ../src/gnome2/gbs.c:743
+#: ../src/gnome2/bibletext.c:995
+#: ../src/gnome2/bibletext_dialog.c:2052
+#: ../src/gnome2/commentary.c:854
+#: ../src/gnome2/commentary_dialog.c:1763
+#: ../src/gnome2/dictlex.c:917
+#: ../src/gnome2/gbs.c:742
 #: ../ui/search-dialog.glade.h:32
 msgid "Footnotes"
 msgstr "Poznámky pod čarou"
 
-#: ../src/gnome2/bibletext.c:1012 ../src/gnome2/bibletext_dialog.c:2062
-#: ../src/gnome2/commentary.c:862 ../src/gnome2/commentary_dialog.c:1765
-#: ../src/gnome2/dictlex.c:923 ../src/gnome2/gbs.c:751
+#: ../src/gnome2/bibletext.c:1003
+#: ../src/gnome2/bibletext_dialog.c:2060
+#: ../src/gnome2/commentary.c:862
+#: ../src/gnome2/commentary_dialog.c:1771
+#: ../src/gnome2/dictlex.c:925
+#: ../src/gnome2/gbs.c:750
 msgid "Greek Accents"
 msgstr "Řecké přízvuky"
 
-#: ../src/gnome2/bibletext.c:1020 ../src/gnome2/bibletext_dialog.c:2070
-#: ../src/gnome2/commentary.c:870 ../src/gnome2/commentary_dialog.c:1773
-#: ../src/gnome2/dictlex.c:931 ../src/gnome2/gbs.c:759
+#: ../src/gnome2/bibletext.c:1011
+#: ../src/gnome2/bibletext_dialog.c:2068
+#: ../src/gnome2/commentary.c:870
+#: ../src/gnome2/commentary_dialog.c:1779
+#: ../src/gnome2/dictlex.c:933
+#: ../src/gnome2/gbs.c:758
 msgid "Lemmas"
 msgstr "Lemmata"
 
-#: ../src/gnome2/bibletext.c:1028 ../src/gnome2/bibletext_dialog.c:2078
-#: ../src/gnome2/commentary.c:878 ../src/gnome2/commentary_dialog.c:1781
-#: ../src/gnome2/dictlex.c:939 ../src/gnome2/gbs.c:767
+#: ../src/gnome2/bibletext.c:1019
+#: ../src/gnome2/bibletext_dialog.c:2076
+#: ../src/gnome2/commentary.c:878
+#: ../src/gnome2/commentary_dialog.c:1787
+#: ../src/gnome2/dictlex.c:941
+#: ../src/gnome2/gbs.c:766
 msgid "Scripture Cross-references"
 msgstr "Odkaz do písma"
 
-#: ../src/gnome2/bibletext.c:1036 ../src/gnome2/bibletext_dialog.c:2086
-#: ../src/gnome2/commentary.c:886 ../src/gnome2/commentary_dialog.c:1789
-#: ../src/gnome2/dictlex.c:947 ../src/gnome2/gbs.c:775
+#: ../src/gnome2/bibletext.c:1027
+#: ../src/gnome2/bibletext_dialog.c:2084
+#: ../src/gnome2/commentary.c:886
+#: ../src/gnome2/commentary_dialog.c:1795
+#: ../src/gnome2/dictlex.c:949
+#: ../src/gnome2/gbs.c:774
 msgid "Hebrew Vowel Points"
 msgstr "Body hebrejských samohlásek"
 
-#: ../src/gnome2/bibletext.c:1044 ../src/gnome2/bibletext_dialog.c:2094
-#: ../src/gnome2/commentary.c:894 ../src/gnome2/commentary_dialog.c:1797
-#: ../src/gnome2/dictlex.c:955 ../src/gnome2/gbs.c:783
+#: ../src/gnome2/bibletext.c:1035
+#: ../src/gnome2/bibletext_dialog.c:2092
+#: ../src/gnome2/commentary.c:894
+#: ../src/gnome2/commentary_dialog.c:1803
+#: ../src/gnome2/dictlex.c:957
+#: ../src/gnome2/gbs.c:782
 msgid "Hebrew Cantillation"
 msgstr "Hebrejský lexikón"
 
-#: ../src/gnome2/bibletext.c:1052 ../src/gnome2/bibletext_dialog.c:2102
-#: ../src/gnome2/commentary.c:902 ../src/gnome2/commentary_dialog.c:1805
-#: ../src/gnome2/dictlex.c:963 ../src/gnome2/gbs.c:791
+#: ../src/gnome2/bibletext.c:1043
+#: ../src/gnome2/bibletext_dialog.c:2100
+#: ../src/gnome2/commentary.c:902
+#: ../src/gnome2/commentary_dialog.c:1811
+#: ../src/gnome2/dictlex.c:965
+#: ../src/gnome2/gbs.c:790
 msgid "Headings"
 msgstr "Nadpisy"
 
-#: ../src/gnome2/bibletext.c:1060 ../src/gnome2/bibletext_dialog.c:2110
-#: ../src/gnome2/commentary.c:910 ../src/gnome2/commentary_dialog.c:1813
-#: ../src/gnome2/dictlex.c:971 ../src/gnome2/gbs.c:799
+#: ../src/gnome2/bibletext.c:1051
+#: ../src/gnome2/bibletext_dialog.c:2108
+#: ../src/gnome2/commentary.c:910
+#: ../src/gnome2/commentary_dialog.c:1819
+#: ../src/gnome2/dictlex.c:973
+#: ../src/gnome2/gbs.c:798
 msgid "Variants"
 msgstr "Varianty"
 
-#: ../src/gnome2/bibletext.c:1070 ../src/gnome2/bibletext.c:1191
-#: ../src/gnome2/bibletext_dialog.c:2120 ../src/gnome2/bibletext_dialog.c:2235
-#: ../src/gnome2/commentary.c:920 ../src/gnome2/commentary.c:1065
-#: ../src/gnome2/commentary_dialog.c:1823
-#: ../src/gnome2/commentary_dialog.c:1947 ../src/gnome2/dictlex.c:981
-#: ../src/gnome2/dictlex.c:1092 ../src/gnome2/gbs.c:809
-#: ../src/gnome2/gbs.c:929
+#: ../src/gnome2/bibletext.c:1061
+#: ../src/gnome2/bibletext.c:1182
+#: ../src/gnome2/bibletext_dialog.c:2118
+#: ../src/gnome2/bibletext_dialog.c:2233
+#: ../src/gnome2/commentary.c:920
+#: ../src/gnome2/commentary.c:1065
+#: ../src/gnome2/commentary_dialog.c:1829
+#: ../src/gnome2/commentary_dialog.c:1953
+#: ../src/gnome2/dictlex.c:983
+#: ../src/gnome2/dictlex.c:1094
+#: ../src/gnome2/gbs.c:808
+#: ../src/gnome2/gbs.c:928
 msgid "Use Current Dictionary"
 msgstr "Použít současný slovník"
 
-#: ../src/gnome2/bibletext.c:1081 ../src/gnome2/bibletext_dialog.c:2131
-#: ../src/gnome2/commentary.c:931 ../src/gnome2/commentary_dialog.c:1834
-#: ../src/gnome2/dictlex.c:992 ../src/gnome2/gbs.c:820
+#: ../src/gnome2/bibletext.c:1072
+#: ../src/gnome2/bibletext_dialog.c:2129
+#: ../src/gnome2/commentary.c:931
+#: ../src/gnome2/commentary_dialog.c:1840
+#: ../src/gnome2/dictlex.c:994
+#: ../src/gnome2/gbs.c:819
 #: ../src/gnome2/sidebar.c:994
 msgid "About"
 msgstr "O modulu"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1088 ../src/gnome2/bookmarks_menu.c:470
-#: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
-#: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
-#: ../src/gnome2/commentary.c:938 ../src/gnome2/dictlex.c:999
-#: ../src/gnome2/gbs.c:827 ../src/gnome2/mod_mgr.c:2035
-#: ../src/gnome2/mod_mgr.c:2196 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bibletext.c:1079
+#: ../src/gnome2/bookmarks_menu.c:470
+#: ../src/gnome2/bookmarks_menu.c:736
+#: ../src/gnome2/bookmarks_menu.c:910
+#: ../src/gnome2/bookmarks_menu.c:1008
+#: ../src/gnome2/bookmarks_treeview.c:102
+#: ../src/gnome2/commentary.c:938
+#: ../src/gnome2/dictlex.c:1001
+#: ../src/gnome2/gbs.c:826
+#: ../src/gnome2/mod_mgr.c:1942
+#: ../src/gnome2/mod_mgr.c:2093
+#: ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "Záložka"
 
-#: ../src/gnome2/bibletext.c:1101 ../src/gnome2/bibletext_dialog.c:2144
-#: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/commentary.c:951
-#: ../src/gnome2/commentary_dialog.c:1847 ../src/gnome2/dictlex.c:1012
-#: ../src/gnome2/gbs.c:840
+#: ../src/gnome2/bibletext.c:1092
+#: ../src/gnome2/bibletext_dialog.c:2142
+#: ../src/gnome2/bookmarks_menu.c:456
+#: ../src/gnome2/commentary.c:951
+#: ../src/gnome2/commentary_dialog.c:1853
+#: ../src/gnome2/dictlex.c:1014
+#: ../src/gnome2/gbs.c:839
 msgid "Edit"
 msgstr "Upravit"
 
-#: ../src/gnome2/bibletext.c:1107 ../src/gnome2/bibletext_dialog.c:2150
-#: ../src/gnome2/commentary.c:957 ../src/gnome2/commentary_dialog.c:1853
-#: ../src/gnome2/dictlex.c:1018 ../src/gnome2/gbs.c:846
+#: ../src/gnome2/bibletext.c:1098
+#: ../src/gnome2/bibletext_dialog.c:2148
+#: ../src/gnome2/commentary.c:957
+#: ../src/gnome2/commentary_dialog.c:1859
+#: ../src/gnome2/dictlex.c:1020
+#: ../src/gnome2/gbs.c:845
 msgid "_Module Options"
 msgstr "_Volby modulu"
 
-#: ../src/gnome2/bibletext.c:1113 ../src/gnome2/bibletext_dialog.c:2156
-#: ../src/gnome2/commentary.c:963 ../src/gnome2/commentary_dialog.c:1859
-#: ../src/gnome2/dictlex.c:1024 ../src/gnome2/gbs.c:852
+#: ../src/gnome2/bibletext.c:1104
+#: ../src/gnome2/bibletext_dialog.c:2154
+#: ../src/gnome2/commentary.c:963
+#: ../src/gnome2/commentary_dialog.c:1865
+#: ../src/gnome2/dictlex.c:1026
+#: ../src/gnome2/gbs.c:851
 msgid "Lookup Selection"
 msgstr "Výběr vyhledávání"
 
-#: ../src/gnome2/bibletext.c:1119 ../src/gnome2/bibletext_dialog.c:2162
-#: ../src/gnome2/commentary.c:981 ../src/gnome2/commentary_dialog.c:1865
-#: ../src/gnome2/dictlex.c:1037 ../src/gnome2/gbs.c:865
+#: ../src/gnome2/bibletext.c:1110
+#: ../src/gnome2/bibletext_dialog.c:2160
+#: ../src/gnome2/commentary.c:981
+#: ../src/gnome2/commentary_dialog.c:1871
+#: ../src/gnome2/dictlex.c:1039
+#: ../src/gnome2/gbs.c:864
 msgid "Unlock This Module"
 msgstr "Odemknout tento modul"
 
-#: ../src/gnome2/bibletext.c:1125 ../src/gnome2/bibletext_dialog.c:2168
-#: ../src/gnome2/commentary.c:999 ../src/gnome2/commentary_dialog.c:1883
-#: ../src/gnome2/gbs.c:871
+#: ../src/gnome2/bibletext.c:1116
+#: ../src/gnome2/bibletext_dialog.c:2166
+#: ../src/gnome2/commentary.c:999
+#: ../src/gnome2/commentary_dialog.c:1889
+#: ../src/gnome2/gbs.c:870
 msgid "Read Selection Aloud"
 msgstr "Číst výběr na_hlas"
 
-#: ../src/gnome2/bibletext_dialog.c:577
+#: ../src/gnome2/bibletext_dialog.c:576
 msgid "Go to "
 msgstr "Přejít na"
 
-#: ../src/gnome2/bibletext_dialog.c:1947
-#: ../src/gnome2/commentary_dialog.c:1650
+#: ../src/gnome2/bibletext_dialog.c:1945
+#: ../src/gnome2/commentary_dialog.c:1656
 msgid "Sync with main"
 msgstr "Synchronizovat s hlavním oknem"
 
-#: ../src/gnome2/bibletext_dialog.c:1953
-#: ../src/gnome2/commentary_dialog.c:1656
+#: ../src/gnome2/bibletext_dialog.c:1951
+#: ../src/gnome2/commentary_dialog.c:1662
 msgid "Stay in sync"
 msgstr "Zůstat při synchronizaci"
 
@@ -1504,11 +1683,13 @@ msgstr "Jméno složky: "
 msgid "Bookmark name: "
 msgstr "Jméno záložky: "
 
-#: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:918
+#: ../src/gnome2/bookmarks_menu.c:479
+#: ../src/gnome2/bookmarks_menu.c:918
 msgid "Verse: "
 msgstr "Verš: "
 
-#: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:919
+#: ../src/gnome2/bookmarks_menu.c:480
+#: ../src/gnome2/bookmarks_menu.c:919
 msgid "Module: "
 msgstr "Modul: "
 
@@ -1536,7 +1717,8 @@ msgstr "Přidat"
 msgid "Label: "
 msgstr "Jmenovka: "
 
-#: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
+#: ../src/gnome2/bookmarks_menu.c:1010
+#: ../src/gnome2/bookmarks_treeview.c:103
 msgid "Enter Folder Name"
 msgstr "Vložte jméno složky"
 
@@ -1544,7 +1726,8 @@ msgstr "Vložte jméno složky"
 msgid "Folder Name"
 msgstr "jméno složky"
 
-#: ../src/gnome2/bookmarks_menu.c:1013 ../src/gnome2/bookmarks_treeview.c:105
+#: ../src/gnome2/bookmarks_menu.c:1013
+#: ../src/gnome2/bookmarks_treeview.c:105
 msgid "Folder: "
 msgstr "Složka: "
 
@@ -1564,11 +1747,13 @@ msgstr "Obnovit složku"
 msgid "Restore saved folder"
 msgstr "Obnovit uloženou složku"
 
-#: ../src/gnome2/bookmarks_menu.c:1120 ../src/gnome2/sidebar.c:981
+#: ../src/gnome2/bookmarks_menu.c:1120
+#: ../src/gnome2/sidebar.c:981
 msgid "Open in a new tab"
 msgstr "Otevřít v novém panelu"
 
-#: ../src/gnome2/bookmarks_menu.c:1121 ../src/gnome2/bookmarks_menu.c:1127
+#: ../src/gnome2/bookmarks_menu.c:1121
+#: ../src/gnome2/bookmarks_menu.c:1127
 msgid "Open this bookmark in a dialog"
 msgstr "Otevřít tuto záložku v okně"
 
@@ -1644,7 +1829,8 @@ msgstr "Načíst záložky z programu Bibletime"
 msgid "Remove - Restore"
 msgstr "Odstranit - Obnovit"
 
-#: ../src/gnome2/bookmarks_treeview.c:907 ../src/gnome2/sidebar.c:1498
+#: ../src/gnome2/bookmarks_treeview.c:909
+#: ../src/gnome2/sidebar.c:1500
 msgid "Bookmarks"
 msgstr "Záložky"
 
@@ -1710,11 +1896,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:969 ../src/gnome2/commentary_dialog.c:1871
+#: ../src/gnome2/commentary.c:969
+#: ../src/gnome2/commentary_dialog.c:1877
 msgid "Display Book Heading"
 msgstr "Zobraz nadpis knihy"
 
-#: ../src/gnome2/commentary.c:975 ../src/gnome2/commentary_dialog.c:1877
+#: ../src/gnome2/commentary.c:975
+#: ../src/gnome2/commentary_dialog.c:1883
 msgid "Display Chapter Heading"
 msgstr "Zobraz nadpis kapitoly"
 
@@ -1726,19 +1914,20 @@ msgstr ""
 msgid "Dump Pers.Comm."
 msgstr ""
 
-#: ../src/gnome2/dialog.c:224
+#: ../src/gnome2/dialog.c:223
 msgid "Close without Saving"
 msgstr "Zavřít bez uložení"
 
-#: ../src/gnome2/dialog.c:769
+#: ../src/gnome2/dialog.c:768
 msgid "GnomeSword:"
 msgstr "GnomeSword:"
 
-#: ../src/gnome2/dialog.c:870
+#: ../src/gnome2/dialog.c:869
 msgid "Close _without Saving"
 msgstr "Zavřít _bez uložení"
 
-#: ../src/gnome2/dictlex.c:1030 ../src/gnome2/gbs.c:858
+#: ../src/gnome2/dictlex.c:1032
+#: ../src/gnome2/gbs.c:857
 msgid "Show Tabs"
 msgstr "Zobrazit panely"
 
@@ -1750,29 +1939,32 @@ msgstr "Otevřít StudyPad soubor"
 msgid "Save StudyPad File"
 msgstr "Uložit StudyPad soubor"
 
-#: ../src/gnome2/find_dialog.c:195 ../src/gnome2/find_dialog.c:360
+#: ../src/gnome2/find_dialog.c:197
+#: ../src/gnome2/find_dialog.c:362
 msgid "Find"
 msgstr "Hledat"
 
-#: ../src/gnome2/find_dialog.c:213
+#: ../src/gnome2/find_dialog.c:215
 msgid "Enter Word or Phrase"
 msgstr "Zadejte slovo nebo výraz"
 
-#: ../src/gnome2/find_dialog.c:228 ../src/gnome2/search_sidebar.c:290
+#: ../src/gnome2/find_dialog.c:230
+#: ../src/gnome2/search_sidebar.c:290
 #: ../ui/search-dialog.glade.h:37
 msgid "Match case"
 msgstr "Rozlišovat velikost"
 
-#: ../src/gnome2/find_dialog.c:234
+#: ../src/gnome2/find_dialog.c:236
 msgid "Search backwards"
 msgstr "Hledat zpětně"
 
-#: ../src/gnome2/find_dialog.c:242 ../src/gnome2/search_sidebar.c:255
+#: ../src/gnome2/find_dialog.c:244
+#: ../src/gnome2/search_sidebar.c:255
 #: ../ui/search-dialog.glade.h:43
 msgid "Regular expression"
 msgstr "Regulární výraz"
 
-#: ../src/gnome2/find_dialog.c:282
+#: ../src/gnome2/find_dialog.c:284
 msgid "Find Next"
 msgstr "Najít další"
 
@@ -1808,7 +2000,8 @@ msgstr "+2"
 msgid "+1"
 msgstr "+1"
 
-#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:369
+#: ../src/gnome2/font_dialog.c:382
 msgid "+0"
 msgstr "+0"
 
@@ -1842,28 +2035,41 @@ msgstr "Přejít na %s"
 msgid "Initiating GnomeSword"
 msgstr "Inicializace GnomeSword"
 
-#: ../src/gnome2/gnomesword.c:143 ../src/gnome2/splash.c:625
+#: ../src/gnome2/gnomesword.c:143
+#: ../src/gnome2/splash.c:624
 msgid "Displaying GnomeSword"
 msgstr "Zobrazování GnomeSword"
 
-#. main_prayer_list_new("2007");
-#: ../src/gnome2/gnomesword.c:194
+#: ../src/gnome2/gnomesword.c:171
+msgid "The Setup Druid was cancelled."
+msgstr ""
+
+#: ../src/gnome2/gnomesword.c:172
+msgid "Do you wish to set preferences now?"
+msgstr "Přejete si nastavit volby hned?"
+
+#: ../src/gnome2/gnomesword.c:217
 msgid "done"
 msgstr "hotovo"
 
-#: ../src/gnome2/gnomesword.c:274
+#: ../src/gnome2/gnomesword.c:295
 msgid "GnomeSword is shutdown"
 msgstr "GnomeSword je vypnutý"
 
-#: ../src/gnome2/html.c:741
+#: ../src/gnome2/html.c:634
+#, c-format
+msgid "Page %d of %d"
+msgstr "Strana %d z %d"
+
+#: ../src/gnome2/html.c:738
 msgid "Print"
 msgstr "Tisk"
 
-#: ../src/gnome2/html.c:798
+#: ../src/gnome2/html.c:788
 msgid "Print Preview"
 msgstr "Náhled tisku"
 
-#: ../src/gnome2/html.c:804
+#: ../src/gnome2/html.c:794
 msgid "Failed to print the document"
 msgstr "Nezdařil se tisk dokumentu"
 
@@ -1899,7 +2105,8 @@ msgstr "_Kopírovat"
 msgid "Copy highlighted text from main window"
 msgstr "Kopírovat zvýrazněný text z hlavního okna"
 
-#: ../src/gnome2/main_menu.c:759 ../src/gnome2/sidebar.c:1341
+#: ../src/gnome2/main_menu.c:759
+#: ../src/gnome2/sidebar.c:1343
 msgid "_Search"
 msgstr "_Hledat"
 
@@ -2027,8 +2234,10 @@ msgstr "O aplikaci _GnomeSword ..."
 msgid "About this application"
 msgstr "O této aplikaci"
 
-#: ../src/gnome2/main_menu.c:922 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:19 ../ui/editor.xml.h:14
+#: ../src/gnome2/main_menu.c:922
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:19
+#: ../ui/editor.xml.h:14
 msgid "_File"
 msgstr "_Soubor"
 
@@ -2048,111 +2257,80 @@ msgstr "_Historie"
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: ../src/gnome2/main_window.c:604
+#: ../src/gnome2/main_window.c:587
 msgid "Building GnomeSword interface"
 msgstr "Vytváření rozhraní GnomeSword"
 
-#: ../src/gnome2/main_window.c:610
+#: ../src/gnome2/main_window.c:594
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - program pro studium Bible"
 
-#: ../src/gnome2/main_window.c:664
+#: ../src/gnome2/main_window.c:648
 msgid "Open a new tab"
 msgstr "Otevřít nový panel"
 
-#: ../src/gnome2/main_window.c:816
+#: ../src/gnome2/main_window.c:794
 msgid "Commentary View"
 msgstr "Komentář"
 
-#: ../src/gnome2/main_window.c:833
+#: ../src/gnome2/main_window.c:811
 msgid "Book View"
 msgstr "Kniha"
 
-#: ../src/gnome2/mod_mgr.c:249
+#: ../src/gnome2/mod_mgr.c:231
 msgid "Install these modules:"
 msgstr "Instalace následujících modulů:"
 
-#: ../src/gnome2/mod_mgr.c:251
+#: ../src/gnome2/mod_mgr.c:233
 msgid "Remove these modules:"
 msgstr "Odstranění následujících modulů:"
 
-#: ../src/gnome2/mod_mgr.c:253
+#: ../src/gnome2/mod_mgr.c:234
 msgid "Archive these modules:"
 msgstr "Přidat následují moduly do archivu:"
 
-#: ../src/gnome2/mod_mgr.c:255
-msgid ""
-"Build fast-search index for these\n"
-"modules (may take minutes/module):"
-msgstr ""
-
-#: ../src/gnome2/mod_mgr.c:257
-#, fuzzy
-msgid "Delete fast-search index for these modules:"
-msgstr "Přidat následují moduly do archivu:"
-
-#: ../src/gnome2/mod_mgr.c:283
+#: ../src/gnome2/mod_mgr.c:256
 msgid "Preparing to install"
 msgstr "Příprava pro instalaci"
 
-#: ../src/gnome2/mod_mgr.c:285
+#: ../src/gnome2/mod_mgr.c:258
 msgid "Preparing to remove"
 msgstr "Příprava k odstranění"
 
-#: ../src/gnome2/mod_mgr.c:287
+#: ../src/gnome2/mod_mgr.c:259
 msgid "Preparing to archive"
 msgstr "Příprava k archivaci"
 
-#: ../src/gnome2/mod_mgr.c:289
-#, fuzzy
-msgid "Preparing to index"
-msgstr "Příprava pro instalaci"
-
-#: ../src/gnome2/mod_mgr.c:291
-#, fuzzy
-msgid "Preparing to delete index"
-msgstr "Příprava k odstranění"
-
-#: ../src/gnome2/mod_mgr.c:318
+#: ../src/gnome2/mod_mgr.c:283
 msgid "Installing"
 msgstr "Instalace"
 
-#: ../src/gnome2/mod_mgr.c:320
+#: ../src/gnome2/mod_mgr.c:285
 msgid "Removing"
 msgstr "Odstranění"
 
-#: ../src/gnome2/mod_mgr.c:322
+#: ../src/gnome2/mod_mgr.c:286
 msgid "Archiving"
 msgstr "Archivování"
 
-#: ../src/gnome2/mod_mgr.c:324
-#, fuzzy
-msgid "Indexing"
-msgstr "Indonéšština"
-
-#: ../src/gnome2/mod_mgr.c:326
-#, fuzzy
-msgid "Deleting index"
-msgstr "Odstranit položku"
-
-#: ../src/gnome2/mod_mgr.c:346
+#: ../src/gnome2/mod_mgr.c:307
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:372
+#: ../src/gnome2/mod_mgr.c:333
 msgid "GnomeSword could not execute archiver"
 msgstr "GnomeSword nemůže spustit archivátor"
 
-#: ../src/gnome2/mod_mgr.c:377
+#: ../src/gnome2/mod_mgr.c:338
 msgid ""
 " archival result:\n"
 "\n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:381
+#: ../src/gnome2/mod_mgr.c:342
 msgid ""
 "\n"
 "Archive in "
@@ -2160,180 +2338,186 @@ msgstr ""
 "\n"
 "Archivovat do "
 
-#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2416
-#: ../ui/module-manager.glade.h:13
+#: ../src/gnome2/mod_mgr.c:402
+#: ../src/gnome2/mod_mgr.c:1282
+#: ../src/gnome2/mod_mgr.c:2305
+#: ../ui/module-manager.glade.h:14
 msgid "Install"
 msgstr "Přidat"
 
-#: ../src/gnome2/mod_mgr.c:458
+#: ../src/gnome2/mod_mgr.c:404
 msgid "Remove"
 msgstr "Odstranit"
 
-#: ../src/gnome2/mod_mgr.c:460
+#: ../src/gnome2/mod_mgr.c:405
+#: ../ui/module-manager.glade.h:9
 msgid "Archive"
 msgstr "Archivovat"
 
-#: ../src/gnome2/mod_mgr.c:462
-msgid "Index"
-msgstr ""
-
-#: ../src/gnome2/mod_mgr.c:464
-#, fuzzy
-msgid "Deletion"
-msgstr "Odstranit položku"
-
-#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:995
+#: ../src/gnome2/mod_mgr.c:407
+#: ../src/gnome2/mod_mgr.c:924
 msgid "Finished"
 msgstr "Dokončeno"
 
-#: ../src/gnome2/mod_mgr.c:976
+#: ../src/gnome2/mod_mgr.c:904
 msgid "Refreshing remote"
 msgstr "Obnovit vzdálený"
 
-#: ../src/gnome2/mod_mgr.c:990
+#: ../src/gnome2/mod_mgr.c:919
 msgid "Remote not found"
 msgstr "Vzdálený nenalezen"
 
-#: ../src/gnome2/mod_mgr.c:1111
+#: ../src/gnome2/mod_mgr.c:1037
 msgid "Module Name"
 msgstr "Jméno modulu"
 
-#: ../src/gnome2/mod_mgr.c:1205
+#: ../src/gnome2/mod_mgr.c:1119
 msgid "Old"
 msgstr "Starý"
 
-#: ../src/gnome2/mod_mgr.c:1232
+#: ../src/gnome2/mod_mgr.c:1146
 msgid "New"
 msgstr "Nový"
 
-#: ../src/gnome2/mod_mgr.c:1243
+#: ../src/gnome2/mod_mgr.c:1157
 msgid "Description"
 msgstr "Popis"
 
-#: ../src/gnome2/mod_mgr.c:1278 ../src/gnome2/mod_mgr.c:1361
+#: ../src/gnome2/mod_mgr.c:1192
+#: ../src/gnome2/mod_mgr.c:1273
 msgid "Configure"
 msgstr "Nastavení"
 
-#: ../src/gnome2/mod_mgr.c:1312
+#: ../src/gnome2/mod_mgr.c:1226
 msgid "Type"
 msgstr "Druh"
 
-#: ../src/gnome2/mod_mgr.c:1320
+#: ../src/gnome2/mod_mgr.c:1234
 msgid "Caption"
 msgstr "Titulek"
 
-#: ../src/gnome2/mod_mgr.c:1329
+#: ../src/gnome2/mod_mgr.c:1243
 msgid "Source"
 msgstr "Zdroj"
 
-#: ../src/gnome2/mod_mgr.c:1338
+#: ../src/gnome2/mod_mgr.c:1252
 msgid "Directory"
 msgstr "Adresář"
 
-#: ../src/gnome2/mod_mgr.c:1359
+#: ../src/gnome2/mod_mgr.c:1276
 msgid "Sources"
 msgstr "Zdroje"
 
-#: ../src/gnome2/mod_mgr.c:1365 ../src/gnome2/preferences_dialog.c:1643
-#: ../src/gnome2/sidebar.c:1530
+#: ../src/gnome2/mod_mgr.c:1280
+#: ../src/gnome2/preferences_dialog.c:1608
+#: ../src/gnome2/sidebar.c:1532
 msgid "Modules"
 msgstr "Moduly"
 
-#: ../src/gnome2/mod_mgr.c:1367
-#, fuzzy
-msgid "Install/Update"
-msgstr "Přidat"
+#: ../src/gnome2/mod_mgr.c:1284
+msgid "Remove/Archive"
+msgstr "Odstranit/Archiv"
 
-#: ../src/gnome2/mod_mgr.c:1369
-msgid "Maintenance"
-msgstr ""
-
-#: ../src/gnome2/mod_mgr.c:1590
+#: ../src/gnome2/mod_mgr.c:1504
 msgid "Please Refresh"
 msgstr "Prosím obnovit"
 
-#: ../src/gnome2/mod_mgr.c:1591
+#: ../src/gnome2/mod_mgr.c:1505
 msgid "Your module list is not up to date!"
 msgstr "Váš seznam modulů není aktuální!"
 
-#: ../src/gnome2/mod_mgr.c:1805
+#: ../src/gnome2/mod_mgr.c:1719
 msgid "Select Local Source"
 msgstr "Vybrat lokální zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2038 ../src/gnome2/mod_mgr.c:2199
+#: ../src/gnome2/mod_mgr.c:1945
+#: ../src/gnome2/mod_mgr.c:2096
 msgid "Remove the selected source"
 msgstr "Odstranit vybraný zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2090
+#: ../src/gnome2/mod_mgr.c:1996
 msgid "Enter a remote source"
 msgstr "Zadat vzdálený zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2094
+#: ../src/gnome2/mod_mgr.c:2000
 msgid "Caption:"
 msgstr "Titulek:"
 
-#: ../src/gnome2/mod_mgr.c:2095
+#: ../src/gnome2/mod_mgr.c:2001
 msgid "Type:"
 msgstr "Druh:"
 
-#: ../src/gnome2/mod_mgr.c:2096
-msgid "Host:"
-msgstr ""
+#: ../src/gnome2/mod_mgr.c:2002
+msgid "URL:"
+msgstr "URL:"
 
-#: ../src/gnome2/mod_mgr.c:2097
+#: ../src/gnome2/mod_mgr.c:2003
 msgid "Directory:"
 msgstr "Adresář:"
 
-#: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:314
+#: ../src/gnome2/navbar_book_dialog.c:286
 msgid "Go to parent"
 msgstr "Jdi na předka"
 
-#: ../src/gnome2/navbar_book.c:344 ../src/gnome2/navbar_book_dialog.c:316
+#: ../src/gnome2/navbar_book.c:331
+#: ../src/gnome2/navbar_book_dialog.c:303
 msgid "Go to previous item"
 msgstr "Jdi na předchozí položku"
 
-#: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:332
+#: ../src/gnome2/navbar_book.c:347
+#: ../src/gnome2/navbar_book_dialog.c:319
 msgid "Go to next item"
 msgstr "Jdi na následující položku"
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:349
+#: ../src/gnome2/navbar_book.c:364
+#: ../src/gnome2/navbar_book_dialog.c:336
 msgid "Go to first child"
 msgstr "Jdi na prvního potomka"
 
-#: ../src/gnome2/parallel_dialog.c:607 ../src/gnome2/preferences_dialog.c:1649
+#: ../src/gnome2/parallel_dialog.c:599
+#: ../src/gnome2/preferences_dialog.c:1614
 msgid "Parallel"
 msgstr "Souběžně"
 
-#: ../src/gnome2/parallel_view.c:261 ../src/gnome2/parallel_view.c:333
+#: ../src/gnome2/parallel_view.c:261
+#: ../src/gnome2/parallel_view.c:333
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: ../src/gnome2/parallel_view.c:270 ../src/gnome2/parallel_view.c:342
+#: ../src/gnome2/parallel_view.c:270
+#: ../src/gnome2/parallel_view.c:342
 msgid "Detach/Attach"
 msgstr "Uvolnit/Ukotvit"
 
-#: ../src/gnome2/parallel_view.c:275 ../src/gnome2/parallel_view.c:347
+#: ../src/gnome2/parallel_view.c:275
+#: ../src/gnome2/parallel_view.c:347
 msgid "Module Options"
 msgstr "Nastavení modulů"
 
 #. build change parallel modules submenu
-#: ../src/gnome2/parallel_view.c:290 ../src/gnome2/parallel_view.c:362
+#: ../src/gnome2/parallel_view.c:290
+#: ../src/gnome2/parallel_view.c:362
 msgid "Change parallel 1"
 msgstr "Změnit souběžně 1"
 
-#: ../src/gnome2/parallel_view.c:293 ../src/gnome2/parallel_view.c:365
+#: ../src/gnome2/parallel_view.c:293
+#: ../src/gnome2/parallel_view.c:365
 msgid "Change parallel 2"
 msgstr "Změnit souběžně 2"
 
-#: ../src/gnome2/parallel_view.c:296 ../src/gnome2/parallel_view.c:368
+#: ../src/gnome2/parallel_view.c:296
+#: ../src/gnome2/parallel_view.c:368
 msgid "Change parallel 3"
 msgstr "Změnit souběžně 3"
 
-#: ../src/gnome2/parallel_view.c:299 ../src/gnome2/parallel_view.c:371
+#: ../src/gnome2/parallel_view.c:299
+#: ../src/gnome2/parallel_view.c:371
 msgid "Change parallel 4"
 msgstr "Změnit souběžně 4"
 
-#: ../src/gnome2/parallel_view.c:302 ../src/gnome2/parallel_view.c:374
+#: ../src/gnome2/parallel_view.c:302
+#: ../src/gnome2/parallel_view.c:374
 msgid "Change parallel 5"
 msgstr "Změnit souběžně 5"
 
@@ -2353,33 +2537,35 @@ msgstr "Pixbuf objekt"
 msgid "The pixbuf to render."
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1540 ../ui/prefs.glade.h:52
+#: ../src/gnome2/preferences_dialog.c:1504
+#: ../ui/prefs.glade.h:51
 msgid "Preferences"
 msgstr "Nastavení"
 
-#: ../src/gnome2/preferences_dialog.c:1619
+#: ../src/gnome2/preferences_dialog.c:1584
 msgid "Fonts"
 msgstr "Písma"
 
-#: ../src/gnome2/preferences_dialog.c:1622
+#: ../src/gnome2/preferences_dialog.c:1587
 msgid "Color"
 msgstr "Barva"
 
-#: ../src/gnome2/preferences_dialog.c:1625
-#: ../src/gnome2/preferences_dialog.c:1639
-#: ../src/gnome2/preferences_dialog.c:1652
+#: ../src/gnome2/preferences_dialog.c:1590
+#: ../src/gnome2/preferences_dialog.c:1604
+#: ../src/gnome2/preferences_dialog.c:1617
 msgid "Misc"
 msgstr "Ostatní"
 
-#: ../src/gnome2/preferences_dialog.c:1629
+#: ../src/gnome2/preferences_dialog.c:1594
 msgid "General"
 msgstr "Obecné"
 
-#: ../src/gnome2/preferences_dialog.c:1632 ../ui/prefs.glade.h:59
+#: ../src/gnome2/preferences_dialog.c:1597
+#: ../ui/prefs.glade.h:58
 msgid "Tabs and Panes"
 msgstr "Panely a pole"
 
-#: ../src/gnome2/preferences_dialog.c:1646
+#: ../src/gnome2/preferences_dialog.c:1611
 msgid "Main"
 msgstr "Hlavní"
 
@@ -2399,7 +2585,8 @@ msgstr "Odstranit seznam?"
 msgid "Are you sure you want to delete:"
 msgstr "Jste si jist, že chcete odstranit:"
 
-#: ../src/gnome2/search_sidebar.c:177 ../ui/search-dialog.glade.h:59
+#: ../src/gnome2/search_sidebar.c:177
+#: ../ui/search-dialog.glade.h:59
 msgid "Start searching"
 msgstr "Spustit hledání"
 
@@ -2411,7 +2598,8 @@ msgstr "Hledat modul"
 msgid "Bible"
 msgstr "Bible"
 
-#: ../src/gnome2/search_sidebar.c:216 ../ui/prefs.glade.h:27
+#: ../src/gnome2/search_sidebar.c:216
+#: ../ui/prefs.glade.h:26
 msgid "Commentary"
 msgstr "Výklad"
 
@@ -2419,11 +2607,13 @@ msgstr "Výklad"
 msgid "Search Type"
 msgstr "Typ hledání"
 
-#: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:41
+#: ../src/gnome2/search_sidebar.c:244
+#: ../ui/search-dialog.glade.h:41
 msgid "Multi word"
 msgstr "Více slovní"
 
-#: ../src/gnome2/search_sidebar.c:263 ../ui/search-dialog.glade.h:31
+#: ../src/gnome2/search_sidebar.c:263
+#: ../ui/search-dialog.glade.h:31
 msgid "Exact phrase"
 msgstr "Přesný výraz"
 
@@ -2487,43 +2677,43 @@ msgstr "Otevřít vybraný modul v dialogovém okně"
 msgid "View information about the selected dialog"
 msgstr "Zobrazit informace o vybraném dialogovém okně"
 
-#: ../src/gnome2/sidebar.c:1325
+#: ../src/gnome2/sidebar.c:1327
 msgid "_Modules"
 msgstr "_Moduly"
 
-#: ../src/gnome2/sidebar.c:1333
+#: ../src/gnome2/sidebar.c:1335
 msgid "_Bookmarks"
 msgstr "_Záložky"
 
-#: ../src/gnome2/sidebar.c:1350
+#: ../src/gnome2/sidebar.c:1352
 msgid "Verse _List"
 msgstr "Seznam _veršů"
 
-#: ../src/gnome2/sidebar.c:1509
+#: ../src/gnome2/sidebar.c:1511
 msgid "Search"
 msgstr "Hledat"
 
-#: ../src/gnome2/sidebar.c:1519
+#: ../src/gnome2/sidebar.c:1521
 msgid "Verse List"
 msgstr "Verše"
 
-#: ../src/gnome2/splash.c:362
+#: ../src/gnome2/splash.c:361
 msgid "Powered by the SWORD Project"
 msgstr "Powered by the SWORD Project"
 
-#: ../src/gnome2/splash.c:556
+#: ../src/gnome2/splash.c:555
 msgid "Initiating Gecko"
 msgstr "Inicializace Gecko"
 
-#: ../src/gnome2/splash.c:573
+#: ../src/gnome2/splash.c:572
 msgid "Loading settings"
 msgstr "Načítání nastavení"
 
-#: ../src/gnome2/splash.c:591
+#: ../src/gnome2/splash.c:590
 msgid "Building Interface"
 msgstr "Vytváření rozhraní"
 
-#: ../src/gnome2/splash.c:608
+#: ../src/gnome2/splash.c:607
 msgid "Starting Sword"
 msgstr "Spouštění Sword"
 
@@ -2535,31 +2725,31 @@ msgstr "byl změněm. Přejete si uložit změny?"
 msgid "not loaded"
 msgstr "nenačten"
 
-#: ../src/gnome2/toolbar_nav.c:530
+#: ../src/gnome2/toolbar_nav.c:537
 msgid "Move backwards through history"
 msgstr "Pohyb v historii pozpátku"
 
-#: ../src/gnome2/toolbar_nav.c:551
+#: ../src/gnome2/toolbar_nav.c:558
 msgid "Move foward through history"
 msgstr "Pohyb v historii dopředu"
 
-#: ../src/gnome2/toolbar_nav.c:572
+#: ../src/gnome2/toolbar_nav.c:579
 msgid "Select a Book of the Bible"
 msgstr "Výběr knihy"
 
-#: ../src/gnome2/toolbar_nav.c:637
+#: ../src/gnome2/toolbar_nav.c:644
 msgid "Change Chapter"
 msgstr "Změna kapitoly"
 
-#: ../src/gnome2/toolbar_nav.c:707
+#: ../src/gnome2/toolbar_nav.c:714
 msgid "Change Verse"
 msgstr "Změna verše"
 
-#: ../src/gnome2/toolbar_nav.c:775
+#: ../src/gnome2/toolbar_nav.c:782
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "Zadej odkaz na verš ve formátu  Kniha 1:1  a stiskni Enter"
 
-#: ../src/gnome2/utilities.c:272
+#: ../src/gnome2/utilities.c:273
 #, c-format
 msgid "%s not found"
 msgstr "%s nenalezeno"
@@ -2650,173 +2840,162 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "Použít zvýšený kontrast pro zvýraznění aktuálního verše"
 
 #: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
-msgstr ""
-"Automaticky přizpůsobit velikost podoken u komentářů, knih a slovniků pro "
-"vyplnění hlavního okna."
+msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
+msgstr "Automaticky přizpůsobit velikost podoken u komentářů, knih a slovniků pro vyplnění hlavního okna."
 
 #: ../ui/prefs.glade.h:20
 msgid "Background"
 msgstr "Pozadí"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
-msgid "Base font size"
-msgstr "Velikost písma u čísla verše"
-
-#: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
 msgstr "Biblické texty"
 
-#: ../ui/prefs.glade.h:23
+#: ../ui/prefs.glade.h:22
 msgid "Bible text"
 msgstr "Text z Bible"
 
-#: ../ui/prefs.glade.h:24
+#: ../ui/prefs.glade.h:23
 msgid "Biblical Text"
 msgstr "Biblický text"
 
-#: ../ui/prefs.glade.h:25
+#: ../ui/prefs.glade.h:24
 msgid "Book"
 msgstr "Kniha"
 
-#: ../ui/prefs.glade.h:28
+#: ../ui/prefs.glade.h:27
 msgid "Cover"
 msgstr "Obal"
 
-#: ../ui/prefs.glade.h:29
+#: ../ui/prefs.glade.h:28
 msgid "Current Verse text"
 msgstr "Současný text verše"
 
-#: ../ui/prefs.glade.h:30
+#: ../ui/prefs.glade.h:29
 msgid "Daily Devotional"
 msgstr "Čtení na každý den"
 
-#: ../ui/prefs.glade.h:31
+#: ../ui/prefs.glade.h:30
 msgid "Default Dictionary"
 msgstr "Výchozí slovník"
 
-#: ../ui/prefs.glade.h:32
+#: ../ui/prefs.glade.h:31
 msgid "Dictionary"
 msgstr "Slovník"
 
-#: ../ui/prefs.glade.h:33
+#: ../ui/prefs.glade.h:32
 msgid "Dictionary/Lexicon"
 msgstr "Slovník/Lexikon"
 
-#: ../ui/prefs.glade.h:34
+#: ../ui/prefs.glade.h:33
 msgid "Font Colors"
 msgstr "Barvý písma"
 
-#: ../ui/prefs.glade.h:35
+#: ../ui/prefs.glade.h:34
 msgid "Font Misc"
 msgstr "Písmo - různé"
 
-#: ../ui/prefs.glade.h:36
+#: ../ui/prefs.glade.h:35
 msgid "General Misc"
 msgstr "Obecně různé"
 
-#: ../ui/prefs.glade.h:37
+#: ../ui/prefs.glade.h:36
 msgid "Greek Lexicon"
 msgstr "Řecký lexikon"
 
-#: ../ui/prefs.glade.h:38
+#: ../ui/prefs.glade.h:37
 msgid "Hebrew Lexicon"
 msgstr "Hebrejský lexikon"
 
-#: ../ui/prefs.glade.h:39
+#: ../ui/prefs.glade.h:38
 msgid "Highlight Background"
 msgstr "Zvýraznění pozadí"
 
-#: ../ui/prefs.glade.h:40
+#: ../ui/prefs.glade.h:39
 msgid "Highlight Foreground"
 msgstr "Zvýraznění popředí"
 
-#: ../ui/prefs.glade.h:41
+#: ../ui/prefs.glade.h:40
 msgid "Highlight current verse"
 msgstr "Zvýraznit aktuální verš"
 
-#: ../ui/prefs.glade.h:42
+#: ../ui/prefs.glade.h:41
 msgid "Links"
 msgstr "Odkazy"
 
-#: ../ui/prefs.glade.h:43
+#: ../ui/prefs.glade.h:42
 msgid "Modules Main"
 msgstr "Hlavní moduly"
 
-#: ../ui/prefs.glade.h:44
+#: ../ui/prefs.glade.h:43
 msgid "Modules Misc"
 msgstr "Různé moduly"
 
-#: ../ui/prefs.glade.h:45
+#: ../ui/prefs.glade.h:44
 msgid "Modules Parallel"
 msgstr "Souběžné moduly"
 
-#: ../ui/prefs.glade.h:46
+#: ../ui/prefs.glade.h:45
 msgid "Parallel 1"
 msgstr "Souběžně 1"
 
-#: ../ui/prefs.glade.h:47
+#: ../ui/prefs.glade.h:46
 msgid "Parallel 2"
 msgstr "Souběžně 2"
 
-#: ../ui/prefs.glade.h:48
+#: ../ui/prefs.glade.h:47
 msgid "Parallel 3"
 msgstr "Souběžně 3"
 
-#: ../ui/prefs.glade.h:49
+#: ../ui/prefs.glade.h:48
 msgid "Parallel 4"
 msgstr "Souběžně 4"
 
-#: ../ui/prefs.glade.h:50
+#: ../ui/prefs.glade.h:49
 msgid "Parallel 5"
 msgstr "Souběžně 5"
 
-#: ../ui/prefs.glade.h:51
+#: ../ui/prefs.glade.h:50
 msgid "Personal Notes"
 msgstr "Osobní poznámky"
 
-#: ../ui/prefs.glade.h:54
+#: ../ui/prefs.glade.h:53
 msgid "Resize images"
 msgstr "Měnit velikost"
 
-#: ../ui/prefs.glade.h:55
+#: ../ui/prefs.glade.h:54
 msgid "Scroll to Previous/Next Chapter"
 msgstr "Rolováním na předchozí/další kapitolu"
 
-#: ../ui/prefs.glade.h:56
+#: ../ui/prefs.glade.h:55
 msgid "Select A Directory"
 msgstr "Vybrat složku"
 
-#: ../ui/prefs.glade.h:57
+#: ../ui/prefs.glade.h:56
 msgid "Show Daily Devotion at start up"
 msgstr "Zobrazit čtení na každý den při spuštění"
 
-#: ../ui/prefs.glade.h:58
+#: ../ui/prefs.glade.h:57
 msgid "Show splash screen at start up"
 msgstr "Zobrazit úvodní obrazovku při spuštění"
 
-#: ../ui/prefs.glade.h:60
+#: ../ui/prefs.glade.h:59
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
-msgstr ""
-"Použít rolovací lištu u biblického textu pro posun na předchozí nebo další "
-"kapitolu."
+msgstr "Použít rolovací lištu u biblického textu pro posun na předchozí nebo další kapitolu."
 
-#: ../ui/prefs.glade.h:61
+#: ../ui/prefs.glade.h:60
 msgid "Use Verse style"
 msgstr "Použít styl verše"
 
-#: ../ui/prefs.glade.h:62
+#: ../ui/prefs.glade.h:61
 msgid "Use default Dictionary"
 msgstr "Použít výchozí slovník"
 
-#: ../ui/prefs.glade.h:63
+#: ../ui/prefs.glade.h:62
 msgid "Use tabbed browsing"
 msgstr "Použít panelové prohlížení"
 
-#: ../ui/prefs.glade.h:64
+#: ../ui/prefs.glade.h:63
 msgid "Verse number font size"
 msgstr "Velikost písma u čísla verše"
 
@@ -2843,50 +3022,45 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>VAROVÁNÍ:</b> Pokud nežijete ve svobodné zemi, používejte obezřetně."
+msgstr "<b>VAROVÁNÍ:</b> Pokud nežijete ve svobodné zemi, používejte obezřetně."
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>VAROVÁNÍ:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat "
-"odhalení, NEMĚLI by jste používat instalaci modulů přes internet! "
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>VAROVÁNÍ:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat odhalení, NEMĚLI by jste používat instalaci modulů přes internet! "
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:10
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:11
 msgid "Current Remote Sources"
 msgstr "Současné vzdálené zdroje"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:12
 msgid "Current local sources"
 msgstr "Současné lokální zdroje"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:13
 msgid "Home dir"
 msgstr "Domovký adresář"
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:15
 msgid "Local"
 msgstr "Místní"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:16
 msgid "Local Install Folder"
 msgstr "Adresář lokální instalace"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:17
 msgid "Module Manager"
 msgstr "Správce modulů"
 
-#: ../ui/module-manager.glade.h:17
+#: ../ui/module-manager.glade.h:18
 msgid "Remote"
 msgstr "Vzdálený"
 
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:19
 msgid "Sword sys dir"
 msgstr "Systémový adresář pro Sword"
 
@@ -3134,32 +3308,38 @@ msgstr "na "
 msgid "Delete the current note"
 msgstr "Odstranit aktuálni poznámku"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "U_končit"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "Ukončit"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "Ukončit program"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "_Formát"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "HTML formát přepínače"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "HTML režim"
@@ -3168,7 +3348,8 @@ msgstr "HTML režim"
 msgid "Preview the note to be printed"
 msgstr "Náhled poznámky pro tisk"
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:14
+#: ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "_Náhled tisku"
 
@@ -3176,7 +3357,8 @@ msgstr "_Náhled tisku"
 msgid "Print this note"
 msgstr "Tisk poznámky"
 
-#: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
 #: ../ui/editor.xml.h:11
 msgid "Save"
 msgstr "Uložit"
@@ -3189,7 +3371,8 @@ msgstr ""
 msgid "_Delete Personal Comment"
 msgstr "_Odstranit osobní komentář"
 
-#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:20
+#: ../ui/editor_note.xml.h:15
+#: ../ui/editor_studypad.xml.h:20
 msgid "_Print..."
 msgstr "_Tisk..."
 
@@ -3201,19 +3384,23 @@ msgstr "_Uložit (Osobní komentář)"
 msgid "Add this file to your bookmarks"
 msgstr "Přidat soubor mezi záložky"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr "Vytvořit nový dokument"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr "Nový dokument"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor.xml.h:9
 msgid "Open (PersistFile)"
 msgstr "Otevřít (Trvalý soubor)"
 
-#: ../ui/editor_studypad.xml.h:12 ../ui/editor.xml.h:10
+#: ../ui/editor_studypad.xml.h:12
+#: ../ui/editor.xml.h:10
 msgid "Open using the PersistFile interface"
 msgstr ""
 
@@ -3225,22 +3412,13 @@ msgstr "Náhled dokumentu pro tisk"
 msgid "Print this document"
 msgstr "Tiskt dokumentu"
 
-#: ../ui/editor_studypad.xml.h:17 ../ui/editor.xml.h:12
+#: ../ui/editor_studypad.xml.h:17
+#: ../ui/editor.xml.h:12
 msgid "Save (PersistFile)"
 msgstr "Uložit (Trvalý soubor)"
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:13
+#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor.xml.h:13
 msgid "Save using the PersistFile interface"
 msgstr ""
 
-#~ msgid "Do you wish to set preferences now?"
-#~ msgstr "Přejete si nastavit volby hned?"
-
-#~ msgid "Page %d of %d"
-#~ msgstr "Strana %d z %d"
-
-#~ msgid "Remove/Archive"
-#~ msgstr "Odstranit/Archiv"
-
-#~ msgid "URL:"
-#~ msgstr "URL:"
