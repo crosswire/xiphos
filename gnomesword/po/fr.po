@@ -28,14 +28,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-10 21:53+0200\n"
+"POT-Creation-Date: 2007-07-29 08:30+0100\n"
 "PO-Revision-Date: 2007-07-20 11:10+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -1036,13 +1036,13 @@ msgid "Standard View"
 msgstr "Vue simple"
 
 #: ../src/main/sidebar.cc:596 ../src/main/sidebar.cc:953
-#: ../src/main/sidebar.cc:955 ../src/gnome2/mod_mgr.c:863
+#: ../src/main/sidebar.cc:955 ../src/gnome2/mod_mgr.c:864
 #: ../src/gnome2/utilities.c:458 ../ui/prefs.glade.h:26
 msgid "Commentaries"
 msgstr "Commentaires"
 
 #: ../src/main/sidebar.cc:609 ../src/main/sidebar.cc:1013
-#: ../src/main/sidebar.cc:1015 ../src/gnome2/mod_mgr.c:875
+#: ../src/main/sidebar.cc:1015 ../src/gnome2/mod_mgr.c:876
 #: ../src/gnome2/utilities.c:499
 msgid "General Books"
 msgstr "Livres"
@@ -1050,24 +1050,24 @@ msgstr "Livres"
 #: ../src/main/sidebar.cc:753 ../src/main/sidebar.cc:755
 #: ../src/main/sidebar.cc:850 ../src/main/sidebar.cc:852
 #: ../src/gnome2/mod_mgr.c:635 ../src/gnome2/mod_mgr.c:637
-#: ../src/gnome2/mod_mgr.c:740 ../src/gnome2/mod_mgr.c:742
+#: ../src/gnome2/mod_mgr.c:741 ../src/gnome2/mod_mgr.c:743
 #: ../src/gnome2/utilities.c:312 ../src/gnome2/utilities.c:314
 #: ../src/gnome2/utilities.c:382 ../src/gnome2/utilities.c:384
 msgid "Unknown"
 msgstr "Inconnu"
 
 #: ../src/main/sidebar.cc:917 ../src/main/sidebar.cc:919
-#: ../src/gnome2/mod_mgr.c:859 ../src/gnome2/utilities.c:438
+#: ../src/gnome2/mod_mgr.c:860 ../src/gnome2/utilities.c:438
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
 #: ../src/main/sidebar.cc:973 ../src/main/sidebar.cc:975
-#: ../src/gnome2/mod_mgr.c:867 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:868 ../src/gnome2/utilities.c:472
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
 #: ../src/main/sidebar.cc:993 ../src/main/sidebar.cc:995
-#: ../src/gnome2/mod_mgr.c:871 ../src/gnome2/utilities.c:486
+#: ../src/gnome2/mod_mgr.c:872 ../src/gnome2/utilities.c:486
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
@@ -1466,8 +1466,8 @@ msgstr "À propos"
 #: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
 #: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
 #: ../src/gnome2/commentary.c:938 ../src/gnome2/dictlex.c:999
-#: ../src/gnome2/gbs.c:827 ../src/gnome2/mod_mgr.c:2036
-#: ../src/gnome2/mod_mgr.c:2197 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/gbs.c:827 ../src/gnome2/mod_mgr.c:2035
+#: ../src/gnome2/mod_mgr.c:2196 ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "Signet"
 
@@ -2115,7 +2115,8 @@ msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module):"
 msgstr ""
-"Ajouter un index pour recherche rapide aux modules suivants (dure un certain temps) :"
+"Ajouter un index pour recherche rapide aux modules suivants (dure un certain "
+"temps) :"
 
 #: ../src/gnome2/mod_mgr.c:257
 msgid "Delete fast-search index for these modules:"
@@ -2190,7 +2191,7 @@ msgstr ""
 "\n"
 " Archive·in·"
 
-#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2417
+#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2416
 #: ../ui/module-manager.glade.h:13
 msgid "Install"
 msgstr "Installer"
@@ -2211,106 +2212,106 @@ msgstr "Indexer"
 msgid "Deletion"
 msgstr "Suppression"
 
-#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:996
+#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:995
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../src/gnome2/mod_mgr.c:977
+#: ../src/gnome2/mod_mgr.c:976
 msgid "Refreshing remote"
 msgstr "Rafraîchissement en cours"
 
-#: ../src/gnome2/mod_mgr.c:991
+#: ../src/gnome2/mod_mgr.c:990
 msgid "Remote not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1111
 msgid "Module Name"
 msgstr "Nom du module"
 
-#: ../src/gnome2/mod_mgr.c:1206
+#: ../src/gnome2/mod_mgr.c:1205
 msgid "Old"
 msgstr "Installé"
 
-#: ../src/gnome2/mod_mgr.c:1233
+#: ../src/gnome2/mod_mgr.c:1232
 msgid "New"
 msgstr "Nouveau"
 
-#: ../src/gnome2/mod_mgr.c:1244
+#: ../src/gnome2/mod_mgr.c:1243
 msgid "Description"
 msgstr "Description"
 
-#: ../src/gnome2/mod_mgr.c:1279 ../src/gnome2/mod_mgr.c:1362
+#: ../src/gnome2/mod_mgr.c:1278 ../src/gnome2/mod_mgr.c:1361
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1313
+#: ../src/gnome2/mod_mgr.c:1312
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1321
+#: ../src/gnome2/mod_mgr.c:1320
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1330
+#: ../src/gnome2/mod_mgr.c:1329
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1339
+#: ../src/gnome2/mod_mgr.c:1338
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1360
+#: ../src/gnome2/mod_mgr.c:1359
 msgid "Sources"
 msgstr "Sources"
 
-#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/preferences_dialog.c:1643
+#: ../src/gnome2/mod_mgr.c:1365 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1368
+#: ../src/gnome2/mod_mgr.c:1367
 msgid "Install/Update"
 msgstr "Installer"
 
-#: ../src/gnome2/mod_mgr.c:1370
+#: ../src/gnome2/mod_mgr.c:1369
 msgid "Maintenance"
 msgstr "Gérer"
 
-#: ../src/gnome2/mod_mgr.c:1591
+#: ../src/gnome2/mod_mgr.c:1590
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1592
+#: ../src/gnome2/mod_mgr.c:1591
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
-#: ../src/gnome2/mod_mgr.c:1806
+#: ../src/gnome2/mod_mgr.c:1805
 msgid "Select Local Source"
 msgstr "Support local"
 
-#: ../src/gnome2/mod_mgr.c:2039 ../src/gnome2/mod_mgr.c:2200
+#: ../src/gnome2/mod_mgr.c:2038 ../src/gnome2/mod_mgr.c:2199
 msgid "Remove the selected source"
 msgstr "Supprime la source sélectionnée"
 
-#: ../src/gnome2/mod_mgr.c:2091
+#: ../src/gnome2/mod_mgr.c:2090
 msgid "Enter a remote source"
 msgstr "Ajouter un site de téléchargement"
 
-#: ../src/gnome2/mod_mgr.c:2095
+#: ../src/gnome2/mod_mgr.c:2094
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2096
+#: ../src/gnome2/mod_mgr.c:2095
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2097
+#: ../src/gnome2/mod_mgr.c:2096
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2098
+#: ../src/gnome2/mod_mgr.c:2097
 msgid "Directory:"
 msgstr "Répertoire :"
 
