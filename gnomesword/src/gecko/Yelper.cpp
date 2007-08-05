@@ -503,13 +503,13 @@ gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 	if (NS_FAILED(rv)) return rv;
 	//g_message("keycode: %d",keyCode);
 	
-	return 1;
+	return NS_OK;
 }	
 
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
 	shift_key_presed = FALSE;
-	return 1;	
+	return NS_OK;	
 }
 
 gint Yelper::redraw(GtkMozEmbed *embed)
