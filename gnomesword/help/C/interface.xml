@@ -653,6 +653,9 @@
 			<listitem>
 				<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
 			</listitem>
+			<listitem>
+				<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog.
+			</listitem>
 		</itemizedlist>
 	</sect2>
 
