@@ -1,3 +1,7 @@
+2007-08-05  dom <domcox@users.sf.net>
+
+	* fix bug 1743304: keyboard shortcuts are not working
+
 2007-07-31  karl <charcoal@users.sf.net>
 
 	* fix bug 1764758: strongs on -> numbers verbalized
