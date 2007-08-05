@@ -66,7 +66,7 @@ extern gboolean shift_key_presed;
  *   void
  */
 
-static void on_undockInt_activate(GtkMenuItem * menuitem)
+void on_undockInt_activate(GtkMenuItem * menuitem)
 {
 	if (settings.dockedInt) {
 		settings.dockedInt = FALSE;
