@@ -634,16 +634,24 @@
 		<itemizedlist>
 			<listitem>
 				<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
-				in new verse selection text, or the arrow keys can be used to select the spinners (left/right) and change
-				them (up/down).  Be aware that <application>GnomeSword</application>, as is the case with most Sword
-				applications, understands many abbreviations: "G" is adequate to specify Genesis, for example, and any book
-				name by itself implies 1:1.
+				in new verse selection text.  Be aware that, as is the case with most Sword applications,
+				<application>GnomeSword</application> understands many abbreviations: "G" is adequate to specify Genesis,
+				for example, and any book name by itself implies 1:1.
+			</listitem>
+			<listitem>
+				<guibutton>Ctrl-F</guibutton> opens the "Find" dialog for the Bible pane.
 			</listitem>
 			<listitem>
 				<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
 			</listitem>
 			<listitem>
-				<guibutton>Alt-G</guibutton> is the opposite of Alt-C, and the arrow keys can then drive the navbar buttons.
+				<guibutton>Alt-G</guibutton> is the opposite of Alt-C, focusing on the general book.
+			</listitem>
+			<listitem>
+				<guibutton>Alt-B</guibutton> opens a bookmark dialog on the current verse.
+			</listitem>
+			<listitem>
+				<guibutton>Alt-D</guibutton> focuses on the dictionary navbar text.
 			</listitem>
 		</itemizedlist>
 	</sect2>
