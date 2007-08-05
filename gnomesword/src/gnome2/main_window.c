@@ -561,6 +561,10 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			g_free(label);
 		}
 		break;
+	case 33: // Alt-P  parallel detachment
+		if (state == GDK_MOD1_MASK)
+			on_undockInt_activate(NULL);
+		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
 		    event->hardware_keycode, state));
