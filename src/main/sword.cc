@@ -1371,8 +1371,8 @@ int main_is_module(char * mod_name)
 int main_has_search_framework(char *mod_name)
 {
 	SWMgr *mgr = backend->get_main_mgr();
-	SWModule *mod = mgr->Modules.find(mod_name)->second;
-	return mod->hasSearchFramework();
+	SWModule *mod = mgr->getModule(mod_name);
+	return (mod && mod->hasSearchFramework());
 }
 
 /******************************************************************************
