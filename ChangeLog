@@ -2,6 +2,7 @@
 
 	* change Alt-B to give bookmark dialog (Ctrl-L focuses verse text).
 	* add Alt-P to detach/re-attach parallel view dialog.
+	* avoid main_has_search_framework()'s core per scribe's suggestion.
 
 2007-08-05  dom <domcox@users.sf.net>
 
