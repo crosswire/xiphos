@@ -699,7 +699,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		}
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
-		    && backend->treekey_has_children(atoi(key))) {
+		    && backend->treekey_has_children(key ? atoi(key) : 0)) {
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
