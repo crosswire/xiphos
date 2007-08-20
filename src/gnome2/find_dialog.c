@@ -91,17 +91,17 @@ static void dialog_destroy(GtkObject * object, gpointer data)
 
 static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-/*	gchar *text;
-	GtkHTML *html;
+	gchar *text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
+	sprintf(settings.findText, "%s", text);
 
-	html = GTK_HTML(d->htmlwidget);
-	text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
-	gtk_html_engine_search (html,
-					       text,
-					       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
-					       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
-					      d->regular );
-	sprintf(settings.findText, "%s", text);*/
+#ifdef GTKHTML
+	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text,
+			       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
+			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
+			       d->regular);
+#else
+	gecko_html_find((void *)d->htmlwidget, text);
+#endif /* !GTKHTML */
 }
 
 
@@ -123,10 +123,12 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-/*	GtkHTML *html;
-
-	html = GTK_HTML(d->htmlwidget);
-	gtk_html_engine_search_next(html); */
+#ifdef GTKHTML
+	gtk_html_engine_search_next(GTK_HTML(d->htmlwidget));
+#else
+	gecko_html_find_again((void *)d->htmlwidget,
+			      GTK_TOGGLE_BUTTON(d->backward)->active == 0);
+#endif /* !GTKHTML */
 }
 
 
@@ -224,11 +226,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
+#ifdef GTKHTML
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
+#endif /* GTKHTML */
 
 	dialog->backward =
 	    gtk_check_button_new_with_label(_("Search backwards"));
@@ -238,11 +242,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (dialog->backward), FALSE);
 
+#ifdef GTKHTML
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular expression"));
 	gtk_widget_show(dialog->regex);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->regex, FALSE, FALSE,
 			   0);
+#endif /* !GTKHTML */
 
 	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
