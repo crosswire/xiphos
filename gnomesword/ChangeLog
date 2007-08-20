@@ -1,4 +1,8 @@
-2007-08-05  karl <charcoal@users.sf.net>
+2007-08-20  karl <charcoal@users.sf.net>
+
+	* fixed #1744400: edit->find...doesn't
+
+2007-08-15  karl <charcoal@users.sf.net>
 
 	* update a missed fix 2.2->2.3 to prevent genbook atoi() core.
 
