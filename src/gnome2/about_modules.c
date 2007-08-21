@@ -386,8 +386,8 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		about_module_display(str, bufabout);	/* send about info to display function filter from rtf to html*/
 #ifdef USE_GTKMOZEMBED
 		gecko_html_open_stream(GECKO_HTML(text), "text/html");
-		gecko_html_write(GECKO_HTML(text), "<html><body>",
-				 strlen("<html><body>"));
+		gecko_html_write(GECKO_HTML(text), "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>",
+				 strlen("<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>"));
 		gecko_html_write(GECKO_HTML(text),description->str,
 				 description->len);
 		gecko_html_write(GECKO_HTML(text),str->str, str->len);
