@@ -396,8 +396,8 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gecko_html_close(GECKO_HTML(text));
 #else
 		gui_begin_html(text, FALSE);
-		gui_display_html(text, "<html><body>",
-				 strlen("<html><body>"));
+		gui_display_html(text, "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>",
+				 strlen("<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head><body>"));
 		gui_display_html(text, description->str,
 				 description->len);
 		gui_display_html(text, str->str, str->len);
