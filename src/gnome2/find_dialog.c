@@ -94,14 +94,14 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 	gchar *text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	sprintf(settings.findText, "%s", text);
 
-#ifdef GTKHTML
+#ifndef USE_GTKMOZEMBED
 	gtk_html_engine_search(GTK_HTML(d->htmlwidget), text,
 			       GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
 			       GTK_TOGGLE_BUTTON(d->backward)->active == 0,
 			       d->regular);
 #else
 	gecko_html_find((void *)d->htmlwidget, text);
-#endif /* !GTKHTML */
+#endif /* !USE_GTKMOZEMBED */
 }
 
 
@@ -123,12 +123,12 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 
 static void next_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-#ifdef GTKHTML
+#ifndef USE_GTKMOZEMBED
 	gtk_html_engine_search_next(GTK_HTML(d->htmlwidget));
 #else
 	gecko_html_find_again((void *)d->htmlwidget,
 			      GTK_TOGGLE_BUTTON(d->backward)->active == 0);
-#endif /* !GTKHTML */
+#endif /* !USE_GTKMOZEMBED */
 }
 
 
