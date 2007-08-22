@@ -131,6 +131,34 @@ out:
 	return retval;
 }
 
+#ifdef __CYGWIN__
+/*
+ * strcasestr() turns out to be nonstandard extension, but we need it.
+ */
+char *
+strcasestr(const char *haystack, const char *needle)
+{
+	char *lower_haystack = g_strdup(haystack);
+	char *lower_needle = g_strdup(needle);
+	char *s;
+
+	for (s = lower_haystack; *s; ++s)
+		if (isupper(*s))
+			*s = tolower(*s);
+	for (s = lower_needle; *s; ++s)
+		if (isupper(*s))
+			*s = tolower(*s);
+
+	s = strstr(lower_haystack, lower_needle);
+	if (s)
+		s = (char *)haystack + (s - lower_haystack);
+
+	g_free(lower_haystack);
+	g_free(lower_needle);
+	return s;
+}
+#endif /* __CYGWIN__ */
+
 #define	IMGSRC_LENGTH	10	// strlen('<img src="')
 
 const char *
