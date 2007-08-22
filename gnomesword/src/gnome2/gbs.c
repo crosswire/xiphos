@@ -55,6 +55,7 @@
 #include "main/global_ops.hh"
 #include "main/sword.h"
 #include "main/xml.h"
+#include "main/display.hh"
 
 static void create_menu(GdkEventButton * event);
 
@@ -465,6 +466,31 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 	main_display_book(settings.book_mod,xml_get_value( "keys", "offset"));
 }
 
+static void on_read_selection_aloud(GtkMenuItem * menuitem,
+				    gpointer user_data)
+{
+	gchar *dict_key;
+	int len;
+
+#ifdef USE_GTKMOZEMBED
+	gecko_html_copy_selection(GECKO_HTML(widgets.html_book));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = 
+		g_strdup(gtk_editable_get_chars(
+			(GtkEditable *)widgets.entry_dict,0,-1));
+	len = (dict_key ? strlen(dict_key) : 0);
+#else
+	GtkHTML *html = GTK_HTML(widgets.html_book);
+	dict_key = gtk_html_get_selection_html(html, &len);
+#endif /* !USE_GTKMOZEMBED */
+ 
+	if (dict_key && len && *dict_key) {
+		ReadAloud(0, dict_key);
+		g_free(dict_key);
+	} else
+		gui_generic_warning("No selection made");
+}
 
 static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
@@ -538,7 +564,7 @@ on_secondary_reading_activate(GtkMenuItem * menuitem,
 					 gchar * dict_mod_description)
  *
  * Description
- *   lookup seledtion in a dict/lex module
+ *   lookup selection in a dict/lex module
  *
  * Return value
  *   void
@@ -874,6 +900,12 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Read Selection Aloud"),
+	 NULL,
+	 (gpointer) on_read_selection_aloud, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-mic",
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
