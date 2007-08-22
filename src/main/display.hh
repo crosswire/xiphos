@@ -24,6 +24,9 @@
 #include <config.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
@@ -54,7 +57,6 @@ public:
 	virtual void getVerseAfter(SWModule &imodule,
 				   gboolean strongs_or_morph,
 				   uint16_t cache_flags);
-	virtual void ReadAloud(unsigned int verse, const char *suppliedtext);
 	MOD_FONT *mf;
 	SWBuf swbuf;
 	gboolean is_rtol;
@@ -108,3 +110,11 @@ public:
 	virtual char Display(SWModule &imodule);
 	MOD_FONT *mf;
 };
+
+#endif /* __cplusplus */
+
+void ReadAloud(unsigned int verse, const char *suppliedtext);
+
+#ifdef __cplusplus
+}
+#endif
