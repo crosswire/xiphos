@@ -1,6 +1,7 @@
 2007-08-22  karl <charcoal@users.sf.net>
 
-	* integrate cygwin strcasestr() from 2.2
+	* integrate cygwin strcasestr() from 2.2.
+	* use correct #ifndef for gtkhtml/gecko in find_dialog.c.
 
 2007-08-21  karl <charcoal@users.sf.net>
 
