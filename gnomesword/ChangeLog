@@ -2,6 +2,7 @@
 
 	* integrate cygwin strcasestr() from 2.2.
 	* use correct #ifndef for gtkhtml/gecko in find_dialog.c.
+	* incorporate an img src prefix fix from 2.2.
 
 2007-08-21  karl <charcoal@users.sf.net>
 
