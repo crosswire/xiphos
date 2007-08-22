@@ -837,12 +837,13 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 // then scribbled out the local static socket with (SayText "...").
 // Non-zero verse param is prefixed onto supplied text.
 //
-void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
+void ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 	static int tts_socket = -1;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
 
-	if (settings.readaloud) {
+	if (settings.readaloud ||       // read anything, or
+	    (verse == 0)) {		// read what's handed us.
 		gchar *s, *t;
 
 		// setup for communication.
@@ -893,7 +894,7 @@ void GTKChapDisp::ReadAloud(unsigned int verse, const char *suppliedtext)
 		// avoid speaking the first *2* times.
 		// (2 Display() calls are made during startup.)
 		// though speaking may be intended, startup speech is annoying.
-		if (++use_counter < 1)
+		if (verse && (++use_counter < 1))
 			return;
 
 		GString *text = g_string_new(NULL);
@@ -1218,7 +1219,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		
 		if (key->Verse() == curVerse) {
 			swbuf.appendFormatted("</font>");
-			GTKChapDisp::ReadAloud(curVerse, cVerse.GetText());
+			ReadAloud(curVerse, cVerse.GetText());
 		}
 
 		if (settings.versestyle) {
