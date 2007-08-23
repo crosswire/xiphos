@@ -3,6 +3,9 @@
 	* integrate cygwin strcasestr() from 2.2.
 	* use correct #ifndef for gtkhtml/gecko in find_dialog.c.
 	* incorporate an img src prefix fix from 2.2.
+	* attempt to generalize to gtkhtml3 the "big blob" gecko fix of
+	  SysTheo, so as to address e.g. ISBE "genealogy" (96kbyte entry) --
+	  seems to be a bug in recent pango; cygwin was already fine with it.
 
 2007-08-21  karl <charcoal@users.sf.net>
 

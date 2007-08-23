@@ -286,7 +286,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 #ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
@@ -373,27 +372,38 @@ char GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 	//GS_message(("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length()));
-#ifdef USE_GTKMOZEMBED
 	
-	// gecko html widgets are uptight about being handed
+	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
 
 	int len = swbuf.length(), offset = 0, write_size;
 
-	while (len > 0) {
-		write_size = min(10000, len);
-		gecko_html_write(html, swbuf.c_str()+offset, write_size);
-		offset += write_size;
-		len -= write_size;
-	}
-	gecko_html_close(html);
+#ifdef USE_GTKMOZEMBED
+	gecko_html_open_stream(html,"text/html");
 #else
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-	if (swbuf.length())
-		gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
+#endif
+
+	while (len > 0) {
+		write_size = min(10000, len);
+#ifdef USE_GTKMOZEMBED
+		gecko_html_write(html, swbuf.c_str()+offset, write_size);
+#else
+		gtk_html_write(html, stream, swbuf.c_str()+offset, write_size);
+#endif
+		offset += write_size;
+		len -= write_size;
+	}
+
+#ifdef USE_GTKMOZEMBED
+	gecko_html_close(html);
+#else
+	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
 #endif
 	
@@ -1469,9 +1479,6 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
 	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
 	gtk_widget_modify_font (gtkText, desc);
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
 #endif
 
 	(const char *)imodule;	// snap to entry
@@ -1525,29 +1532,40 @@ char DialogEntryDisp::Display(SWModule &imodule)
 						       type)
 				 : (const char *)imodule /* untouched */));
 
-
-#ifdef USE_GTKMOZEMBED
-	gecko_html_open_stream(html,"text/html");
-	
-	// gecko html widgets are uptight about being handed
+	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
 
 	int len = str->len, offset = 0, write_size;
 
+#ifdef USE_GTKMOZEMBED
+	gecko_html_open_stream(html,"text/html");
+#else
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	GtkHTMLStreamStatus status;
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+#endif
+	
 	while (len > 0) {
 		write_size = min(10000, len);
+#ifdef USE_GTKMOZEMBED
 		gecko_html_write(html, str->str+offset, write_size);
+#else
+		gtk_html_write(html, stream, str->str+offset, write_size);
+#endif
 		offset += write_size;
 		len -= write_size;
 	}
+
+#ifdef USE_GTKMOZEMBED
 	gecko_html_close(html); 
-		
 #else
-	if (str->len)
-		gtk_html_load_from_string(html, str->str, str->len);
+	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
 #endif
+
 	g_string_free(str, TRUE);
 	free_font(mf);
 	g_free(ops);
