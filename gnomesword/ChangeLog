@@ -1,3 +1,7 @@
+2007-08-25  karl <charcoal@users.sf.net>
+
+	* bug #1781816 #1: recover the parallel view right-click menu.
+
 2007-08-22  karl <charcoal@users.sf.net>
 
 	* integrate cygwin strcasestr() from 2.2.
