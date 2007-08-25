@@ -343,11 +343,19 @@ static gboolean on_key_release_event         (GtkWidget       *widget,
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
-			     gchar *uri,
-			     gpointer user_data)
-{	
+_popupmenu_requested_cb(GeckoHtml *html,
+			gchar *uri,
+			gpointer user_data)
+{
 	gui_popup_menu_parallel();
+}
+#else
+_popupmenu_requested_cb(GtkHTML *html,
+			GdkEventButton * event,
+			gpointer date)
+{
+	if (event->button == 3)
+		gui_popup_menu_parallel();
 }
 #endif
 
@@ -382,18 +390,18 @@ void gui_create_parallel_page(void)
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel), eventbox);
-	
-	widgets.frame_parallel = eventbox;	
+
+	widgets.frame_parallel = eventbox;
 	widgets.html_parallel = GTK_WIDGET(gecko_html_new(NULL, FALSE, PARALLEL_TYPE)); //embed_new(PARALLEL_TYPE); //gtk_moz_embed_new();
-	gtk_widget_show(widgets.html_parallel);					   
+	gtk_widget_show(widgets.html_parallel);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			  widgets.html_parallel);
-	
+
 	g_signal_connect((gpointer)widgets.html_parallel,
-		      "popupmenu_requested",
-		      G_CALLBACK (_popupmenu_requested_cb),
-		      NULL);
-#else	
+			 "popupmenu_requested",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
+#else
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolled_window);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),
@@ -402,7 +410,7 @@ void gui_create_parallel_page(void)
 /*	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolled_window,
                                              settings.shadow_type);*/
 	widgets.frame_parallel = scrolled_window;
-	
+
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_bible_parallel),
 			  scrolled_window);
 	widgets.html_parallel = gtk_html_new();
@@ -410,13 +418,17 @@ void gui_create_parallel_page(void)
 	gtk_html_load_empty(GTK_HTML(widgets.html_parallel));
 	gtk_container_add(GTK_CONTAINER(scrolled_window),
 			  widgets.html_parallel);
-			  
+
 	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
-			   "on_url", G_CALLBACK(gui_url),
-			   (gpointer) widgets.app);
+			 "on_url", G_CALLBACK(gui_url),
+			 (gpointer) widgets.app);
 	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
-			   "link_clicked",
-			   G_CALLBACK(gui_link_clicked), NULL);
+			 "link_clicked",
+			 G_CALLBACK(gui_link_clicked), NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
+			 "button_release_event",
+			 G_CALLBACK (_popupmenu_requested_cb),
+			 NULL);
 #endif
 
 	label = gtk_label_new(_("Parallel View"));
@@ -424,10 +436,9 @@ void gui_create_parallel_page(void)
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK
-				    (widgets.notebook_bible_parallel), 
+				    (widgets.notebook_bible_parallel),
 				    1),
 				   label);
-							
 
 	g_signal_connect ((gpointer) widgets.html_parallel, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
@@ -438,10 +449,4 @@ void gui_create_parallel_page(void)
 	g_signal_connect ((gpointer) widgets.html_parallel, "key_release_event",
 		    G_CALLBACK (on_key_release_event),
 		    NULL);
-	
-			   /*
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
-			   "button_release_event",
-			   G_CALLBACK(button_release_event), NULL);
-			   */
 }
