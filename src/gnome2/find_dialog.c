@@ -226,13 +226,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
-#ifdef GTKHTML
+#ifndef USE_GTKMOZEMBED
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
-#endif /* GTKHTML */
+#endif /* !USE_GTKMOZEMBED */
 
 	dialog->backward =
 	    gtk_check_button_new_with_label(_("Search backwards"));
@@ -242,13 +242,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (dialog->backward), FALSE);
 
-#ifdef GTKHTML
+#ifndef USE_GTKMOZEMBED
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular expression"));
 	gtk_widget_show(dialog->regex);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->regex, FALSE, FALSE,
 			   0);
-#endif /* !GTKHTML */
+#endif /* !USE_GTKMOZEMBED */
 
 	dialog_action_area29 = GTK_DIALOG(dialog->dialog)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
