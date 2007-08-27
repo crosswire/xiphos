@@ -1,3 +1,7 @@
+2007-08-26  karl <charcoal@users.sf.net>
+
+	* consistency in #if usage for find_dialog.c.
+
 2007-08-25  karl <charcoal@users.sf.net>
 
 	* bug #1781816 #1: recover the parallel view right-click menu.
