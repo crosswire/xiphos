@@ -114,7 +114,7 @@ void backend_mod_mgr_init_language_map(void) {
 	mm_languageMap[SWBuf("es")] = SWBuf(_("Spanish")); /* done */
 	mm_languageMap[SWBuf("et")] = SWBuf(_("Estonian")); /* done */
 	mm_languageMap[SWBuf("eu")] = SWBuf(_("Basque")); /* done */
-	//mm_languageMap[SWBuf("fa")] = SWBuf("Persian");
+	mm_languageMap[SWBuf("fa")] = SWBuf(_("Farsi (Persian)"));
 	mm_languageMap[SWBuf("fi")] = SWBuf(_("Finnish")); /* done */
 	//mm_languageMap[SWBuf("fj")] = SWBuf("Fijian");
 	//mm_languageMap[SWBuf("fo")] = SWBuf("Faroese");
@@ -133,11 +133,11 @@ void backend_mod_mgr_init_language_map(void) {
 	//mm_languageMap[SWBuf("hi")] = SWBuf("Hindi");
 	//mm_languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
 	mm_languageMap[SWBuf("hr")] = SWBuf(_("Croatian")); /* done */
+	mm_languageMap[SWBuf("ht")] = SWBuf(_("French, Haitian Creole")); /* done */
 	mm_languageMap[SWBuf("hu")] = SWBuf(_("Hungarian")); /* done */
 	mm_languageMap[SWBuf("hy")] = SWBuf(_("Armenian")); /* done */
 	//mm_languageMap[SWBuf("hz")] = SWBuf("Herero");
 	//mm_languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-	mm_languageMap[SWBuf("i-klingon")] = SWBuf(_("Klingon")); /* done */
 	//mm_languageMap[SWBuf("ie")] = SWBuf("Interlingue");
 	mm_languageMap[SWBuf("id")] = SWBuf(_("Indonesian")); /* done */
 /*  */	//mm_languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
@@ -146,6 +146,7 @@ void backend_mod_mgr_init_language_map(void) {
 	//mm_languageMap[SWBuf("iu")] = SWBuf("Inuktitut"); 
 	mm_languageMap[SWBuf("ja")] = SWBuf(_("Japanese")); /* done */
 	mm_languageMap[SWBuf("ka")] = SWBuf(_("Georgian")); /* done */
+	mm_languageMap[SWBuf("kek")] = SWBuf(_("Kekchi")); /* done */
 	//mm_languageMap[SWBuf("ki")] = SWBuf("Kikuyu");
 	//mm_languageMap[SWBuf("kj")] = SWBuf("Kuanyama");
 	//mm_languageMap[SWBuf("kk")] = SWBuf("Kazakh");
@@ -174,7 +175,7 @@ void backend_mod_mgr_init_language_map(void) {
 	//mm_languageMap[SWBuf("mr")] = SWBuf("Marathi");
 	mm_languageMap[SWBuf("ms")] = SWBuf(_("Malay")); /* done */
 	mm_languageMap[SWBuf("mt")] = SWBuf(_("Maltese")); /* done */
-	//mm_languageMap[SWBuf("my")] = SWBuf("Burmese");
+	mm_languageMap[SWBuf("my")] = SWBuf("Burmese");
 	//mm_languageMap[SWBuf("na")] = SWBuf("Nauru");
 	//mm_languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
 /*  */	//mm_languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
@@ -195,6 +196,8 @@ void backend_mod_mgr_init_language_map(void) {
 	mm_languageMap[SWBuf("pap")] = SWBuf(_("Papiamento")); /* done */
 	//mm_languageMap[SWBuf("pi")] = SWBuf("Pali");
 	mm_languageMap[SWBuf("pl")] = SWBuf(_("Polish")); /* done */
+	mm_languageMap[SWBuf("pot")] = SWBuf(_("Potawatomi")); /* done */
+	mm_languageMap[SWBuf("ppk")] = SWBuf(_("Uma")); /* done */
 	//mm_languageMap[SWBuf("ps")] = SWBuf("Pushto");
 	mm_languageMap[SWBuf("pt")] = SWBuf(_("Portuguese")); /* done */
 	//mm_languageMap[SWBuf("qu")] = SWBuf("Quechua");
@@ -229,6 +232,7 @@ void backend_mod_mgr_init_language_map(void) {
 	mm_languageMap[SWBuf("th")] = SWBuf(_("Thai")); /* done */
 	//mm_languageMap[SWBuf("tk")] = SWBuf("Turkmen");
 	mm_languageMap[SWBuf("tl")] = SWBuf(_("Tagalog")); /* done */
+	mm_languageMap[SWBuf("tlh")] = SWBuf(_("Klingon")); /* done */
 	mm_languageMap[SWBuf("tn")] = SWBuf(_("Tswana")); /* done */
 	mm_languageMap[SWBuf("tr")] = SWBuf(_("Turkish")); /* done */
 	//mm_languageMap[SWBuf("ts")] = SWBuf("Tsonga");
@@ -245,14 +249,11 @@ void backend_mod_mgr_init_language_map(void) {
 	mm_languageMap[SWBuf("xh")] = SWBuf(_("Xhosa")); 
 	mm_languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian")); /* done */
 	mm_languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch")); /* done */
-/*  */	mm_languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French")); /* done */
 	mm_languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz")); /* done */
 	mm_languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar")); /* done */
-	mm_languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchi")); /* done */
 	mm_languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard")); /* done */
 	mm_languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian")); /* done */
 	mm_languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin")); /* done */
-	mm_languageMap[SWBuf("x-E-PPK")] = SWBuf(_("Uma")); /* done */
 	mm_languageMap[SWBuf("x-E-RMY")] = SWBuf(_("Romani, Vlax")); /* done */
 	mm_languageMap[SWBuf("x-E-SAJ")] = SWBuf(_("Sango")); /* done */
 	mm_languageMap[SWBuf("x-E-SRN")] = SWBuf(_("Sranan")); /* done */
