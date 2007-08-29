@@ -63,7 +63,7 @@
 		<para>
 		There are other repositories available besides Crosswire's own, though the modules available from other repositories do not
 		represent content officially sanctioned by Crosswire.  On the web, see this page for list of those repositories known:
-		http://www.crosswire.org/wiki/index.php/Module_Repositories
+		<ulink type="http" url="http://www.crosswire.org/wiki/index.php/Module_Repositories">http://www.crosswire.org/wiki/index.php/Module_Repositories</ulink>		
 		</para>
 		</sect3>
 		<sect3 id="installation">
