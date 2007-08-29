@@ -639,6 +639,9 @@ static gint show_note(const gchar * module, const gchar * passage,
 			vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
 			oldAutoNorm = vkey->AutoNormalize();
 			vkey->AutoNormalize(0);
+			int chap = vkey->Chapter();
+			++chap;
+			vkey->Chapter(chap);
 			vkey->Verse(0);
 		}
 		else 
