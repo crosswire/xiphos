@@ -633,7 +633,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 		VerseKey *vkey;
 		char oldAutoNorm;
 		if (stop_autonorm) {
-			g_message("its a :0 note");
 			SWMgr *mgr = backend->get_display_mgr();
 			backend->display_mod = mgr->Modules[module];
 			backend->display_mod->setKey(passage);
@@ -641,8 +640,6 @@ static gint show_note(const gchar * module, const gchar * passage,
 			oldAutoNorm = vkey->AutoNormalize();
 			vkey->AutoNormalize(0);
 			vkey->Verse(0);
-			//backend->display_mod->setKey(vkey);
-		}		
 		else 
 			backend->set_module_key((gchar*)module, (gchar*)passage);		
 		
