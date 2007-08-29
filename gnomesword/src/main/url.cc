@@ -32,6 +32,11 @@
 
 
 #include <swbuf.h>
+
+
+#include <swmgr.h>
+#include <swmodule.h>
+
 #include <gnome.h>
 
 #ifdef USE_GTKHTML38
@@ -619,10 +624,34 @@ static gint show_note(const gchar * module, const gchar * passage,
 			g_free(tmpbuf);
 		}
 	} else if(strstr(stype,"n") && !clicked) {
-		backend->set_module_key((gchar*)module, (gchar*)passage);		
+		//
+		// if we are asking for a note/xref in n:0,
+		// we must stop autonormalization for a moment.
+		//
+		g_message("its a note!");
+		int stop_autonorm = ((strstr(passage, ":0")) != NULL);
+		VerseKey *vkey;
+		char oldAutoNorm;
+		if (stop_autonorm) {
+			g_message("its a :0 note");
+			SWMgr *mgr = backend->get_display_mgr();
+			backend->display_mod = mgr->Modules[module];
+			backend->display_mod->setKey(passage);
+			vkey = (VerseKey*)(SWKey*)(*backend->display_mod);
+			oldAutoNorm = vkey->AutoNormalize();
+			vkey->AutoNormalize(0);
+			vkey->Verse(0);
+			//backend->display_mod->setKey(vkey);
+		}		
+		else 
+			backend->set_module_key((gchar*)module, (gchar*)passage);		
+		
+		
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						(gchar*)svalue,
 						"body");		
+		
+		
 		buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
 		if(tmpbuf) g_free(tmpbuf);	
 		if (buf) {
@@ -634,7 +663,8 @@ static gint show_note(const gchar * module, const gchar * passage,
 					NULL,
 					NULL);
 			if(buf) g_free(buf);	
-		}			
+		}
+		if (stop_autonorm) vkey->AutoNormalize(oldAutoNorm);			
 	} else if(strstr(stype,"x") && !clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);		
 		tmpbuf = backend->get_entry_attribute("Footnote",
