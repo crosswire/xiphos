@@ -17,6 +17,7 @@ DOC_INCLUDES = 	introduction.xml \
 		license.xml		
 
 DOC_FIGURES = 	figures/first_start.png \
+		figures/gtkhtml3-vs-mozembed.png \
 		figures/interface_biblepane-options.png \
 		figures/interface_biblepane.png \
 		figures/interface_commentarypane.png \
