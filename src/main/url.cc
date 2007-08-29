@@ -640,6 +640,7 @@ static gint show_note(const gchar * module, const gchar * passage,
 			oldAutoNorm = vkey->AutoNormalize();
 			vkey->AutoNormalize(0);
 			vkey->Verse(0);
+		}
 		else 
 			backend->set_module_key((gchar*)module, (gchar*)passage);		
 		
