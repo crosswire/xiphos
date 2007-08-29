@@ -2,6 +2,7 @@
 
 	* make a proper link in the manual to the repos page.
 	* add a gtkhtml3/mozembed comparison image to the manual.
+	* fix #1783315: Footnotes in verse 0 not shown.
 
 2007-08-28  karl <charcoal@users.sf.net>
 
