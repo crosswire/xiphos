@@ -1,3 +1,7 @@
+2007-08-31  karl <charcoal@users.sf.net>
+
+	* make double-space conditional on USE_GTKMOZEMBED.
+
 2007-08-29  karl <charcoal@users.sf.net>
 
 	* make a proper link in the manual to the repos page.
