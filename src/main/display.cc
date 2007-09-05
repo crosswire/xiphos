@@ -211,7 +211,7 @@ AnalyzeForImageSize(const char *origtext,
 					window_y = (window_y * 93)/100;
 				}
 			} else {
-				window_x = window_y = 10000; // degenerate: no resize.
+				window_x = window_y = 400; // degenerate: full resize.
 			}
 		}
 
