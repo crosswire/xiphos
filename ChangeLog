@@ -1,3 +1,7 @@
+2007-09-04  karl <charcoal@users.sf.net>
+
+	* update RELEASE-NOTES + interface.xml in preparation for 2.3.
+
 2007-08-31  karl <charcoal@users.sf.net>
 
 	* make double-space conditional on USE_GTKMOZEMBED.
