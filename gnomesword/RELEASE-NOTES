@@ -3,6 +3,251 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.3.0
+12 Sep 2007
+
+This is a test and evaluation release.
+
+Today's 2.3 is a test release of the replacement and re-integration of
+the old gtkhtml3 display engine with the new MozEmbed display engine.
+Thus, version 2.2 is officially defunct, an evolutionary dead end.  As
+such, the 2.3 series of releases, which we hope to be mercifully short
+until stability can be again declared when released as 2.4, represents
+a major functional change from 2.2, mostly internally, but nonetheless
+with quite a number of user-visible changes.
+
+See the manual, especially section 3.9, "Version Differences in
+GnomeSword's Display," for details on what is different between
+gtkhtml3 and MozEmbed.  MozEmbed provides a fundamentally prettier and
+friendlier interface.  Note that not all platforms have adequate, or
+any, MozEmbed support, e.g. Fedora Core 5 has some MozEmbed support,
+but it is too out of date and buggy for GnomeSword's use; Windows with
+Cygwin lacks MozEmbed entirely.  On such platforms, configure with
+--enable-gtkhtml.  (On Cygwin, --enable-cygwin is necessary, and
+includes configuration of gtkhtml3.)
+
+GnomeSword requires underlying Sword support at version 1.5.10 or later.
+
+Behavioral matters:
+
+ 1. The splash screen is enabled by default, especially for benefit of
+    first-time users.
+
+ 2. Subwindow visibility state (Bible, commentary/genbook, previewer,
+    dictionary, all selected from the View menu) is now maintained on a
+    per-tab basis, rather than simply as global state.  Existing tabs
+    files are auto-updated when they are first used, with current
+    global state applied to all tabs, and then the tabs file is re-saved.
+
+ 3. Doublespace text and blocked Strong's+morph (in MozEmbed only).
+
+ 4. Book and chapter headings in Bibles, stored in modules as
+    pseudoverses in 0:0 (per book) and n:0 (per chapter), are presented
+    when headings are enabled.
+
+ 5. A new navbar has been implemented that looks generally better.
+    That said, it appears not to look so good on Cygwin, with older GTK
+    support; consider configuring with --enable-old_navbar there.
+
+ 6. Indices needed for fast "lucene" searches can now be built from
+    the module manager.  An icon indicates the presence of a
+    ready-for-use index.  Also, the module manager's appearance has been
+    generally re-arranged to be a bit more functional and intuitive: The
+    "remove" panel is now a general "maintenance" panel, and the
+    "configure" and "sources" panels have been swapped.
+
+ 7. A base font size has been implemented; see Preferences.  All
+    module font size choices are relative to this base.
+
+ 8. Daily devotionals now get their own subtree in module lists in the
+    sidebar and module manager.
+
+ 9. Additional keyboard shortcuts: Alt-B bookmark dialog, Alt-P detach
+    parallel dialog window.
+
+10. Locale names have been updated to accommodate more recent versions
+    of existing modules (e.g. Farsi, Haitian Creole, Burmese, others).
+
+11. "About" boxes for modules handle UTF-8 properly.
+
+12. Duplicate install sources are now refused.
+
+13. A module cache bug regarding mis-cached headers has been fixed.
+
+14. A font error in highlighted verses was fixed.
+
+15. "About GnomeSword" is a bit more informative and useful, showing
+    GnomeSword's web site as well as the display engine with which
+    GnomeSword was built (gtkhtml3 -vs- MozEmbed).
+
+16. Many translation updates, plus new translations (e.g. Portuguese).
+
+Known, unresolved flaws in this unstable test release:
+1781886  upcased greek in most cases in cygwin
+	 (only LXXTischUP displays properly)
+1781816  gtkhtml3 integration bugs
+	 (various problems specific to gtkhtml3 builds, involving
+	  failure to follow mouse clicks in certain circumstances)
+1747281  can't drag-n-drop from adv.search
+	 (in either gtkhtml3 or MozEmbed, d&d has stopped working)
+
+Bug reports addressed since 2.2.2:
+1783315  Footnotes in verse 0 not shown
+1783300  locale names are out of date
+1769405  Can't open
+1767851  A Search with bounds in the Side pane locks GS (sword-svn)
+1764758  strongs on -> numbers verbalized
+1752812  Not in Menu
+1749534  failed footnote access in josephus
+1747273  can't search over "current results"
+1744444  blocked strongs fails NASB Eph 5:31
+1744418  bad display of grk result in adv.search
+1744400  edit->find...doesn't
+1743789  transient note/xref is not transient
+1743785  loss of per-module font in <table>
+1743304  keyboard shortcuts are not working
+1731993  splash should be enabled by default
+1729936  unused configure flags should go away
+1724254  Opening Necronomicon module crashes GnomeSword
+1723580  opening study pad crashes gnomesword2
+1723478  opening studypad causes gs to crash
+1723159  Debian/GNU 4.0 - Gnomesword crashes on startup
+1709398  Building under FreeBSD
+1708829  crash on opening note editor
+1706475  no genbooks + genbook navbar => crash
+1703697  GnomeSword crashes on startup
+1695949  Gnomesword crashes on startup: segfault in backend
+
+New feature requests pending:
+1782923  bookmarks
+
+Feature requests closed:
+1748022  daily devs should get their own mod.list
+1738882  save subpanel view state on per-tab basis
+1737648  Allow unlimited modules in the parallel view
+1733421  need a base font size for all of GS
+1726806  greek and hebrew
+1711360  Lucene Indexing
+1703135  Display Verse 0, Chapter 0:0 in Bible Texts
+1691050  new king james version
+1646037  very simple api for scrolling
+1633426  update strong's/morph markup readability
+1620313  Couple of bugs with module manager operation
+1618837  global install of modules
+________________________
+
+Release 2.2.3
+24 Mar 2007
+
+1. A module cache has been implemented as a significant performance
+   improvement.  As Bible text is visited, everything seen goes into
+   an in-memory cache, so that subsequent navigation of the same text
+   does not need to re-visit Sword.  If display options change
+   (footnotes xrefs headings Strong's morph), the cache is invalidated
+   and Sword is queried again to re-populate the display-ready cache.
+
+   Display performance acid test:
+     KJV Ps 119 (176 verses), all mod.opts enabled; spin verse selector.
+     End-to-end (v1 -> v176) navigation time on 1.8GHz computer:
+     GS 2.2.2, 441sec; GS 2.2.3, 102sec => 78% reduction.
+
+2. Personal commentary archival, renaming, and verse dump are implemented
+   (feat.req #1633407).  Archival is available via the module manager
+   (any module may be archived); rename + dump are on the pers.comm
+   popup menu.  [For Cygwin, regrets, NTFS prevents rename of files
+   currently open, so module rename is not available there; but archive
+   + dump are fine.]
+
+3. Main window image content can be clicked to invoke an external image
+   viewer (feat.req #1631815).  Support for this feature requires an
+   enhancement to Sword itself beyond its 1.5.9 release (i.e. built from
+   SVN at change level >= -r2035), but of course it builds/runs fine
+   without this feature's availability using today's Sword 1.5.9.  Some
+   day (soon?), Troy will release a new 1.5.something, or perhaps 1.6,
+   which will contain this.
+
+4. Finnish translation now available.
+
+5. Sidebar verse lists are always savable (bug #1674149).
+
+6. Improving i18n support now supports more non-ASCII searches
+   (bug #1673598).
+
+7. Mouse-selected Bible/commentary/genbook text can be read aloud using
+   a popup menu selection, regardless of whether scripture reading is
+   enabled on View -> Read Aloud.
+
+Bug reports addressed since 2.2.2:
+1687602  Module Manager crashes on FC6
+1681135  Module manager crashes Gnomesword on startup
+1674149  unable to save verse lists
+1673598  cannot search personal for non-ascii chars
+1667954  Missing modules in advanced-search window
+
+New feature requests pending:
+<none>
+
+Feature requests closed:
+1633407  personal commentary needs
+1631815  open single-image window on click
+________________________
+
+Release 2.2.2 (maintenance)
+23 Feb 2007
+
+Behavioral matters:
+
+1. The module manager now provides both short module name plus long
+   module description on the right, and there is also a refresh icon
+   between mismatched old & new version stamps of installed modules
+   (bug #1666761).  GnomeSword now works around a Sword lib install
+   manager bug when updating installed modules by deleting the old
+   version before attempting to retrieve the new version (bug #1666748).
+2. Several MM glitches related to unfindable or unusable newly-defined
+   install sources have been fixed (bug #1666763, #1666759).
+3. Some of the planned Advanced Search work has been done (feat.req
+   #1615402).  E.g. you can select the Attributes radio button, then
+   use the Attribute tab to define which attribute is in question.
+   The Strong's syntax needed is now just H### or G###.
+4. Many changes for improving i18n handling have been done.  (We need
+   translators.)
+5. The 2x2 set of buttons at the bottom of the sidebar have been moved
+   to the top, where they sit near the rest of the mouse controls
+   (bug #1666764).
+6. GnomeSword can now build under MS-Windows in the Cygwin environment
+   (feat.req #1124274), and gives every appearance of being fully
+   functional there.  Doing so requires a bash script and two library tar
+   files.  See ftp://ftp.kleinpaste.org/pub/sword/util/cygwin/
+
+Bug reports addressed since 2.2.1:
+1666764  sidebar buttons belong at top
+1666763  MM loses track of newly-defined sources
+1666761  MM: descriptions + refresh indicator
+1666759  rem.source w/o bible text -> can't load
+1666758  null genbook key -> crash
+1666756  lack of icons in splash -> crash
+1666755  strcasestr() is nonstandard
+1666754  wrong morph for OT
+1666751  GS infloops det.parallel on Rev22
+1666748  need workaround for installmgr bug
+1651736  Updated german Translation
+1651514  Crasher bugs related to directories(?)
+1651375  changing tabbed-view preference requires restart
+1651077  osis-based commentary's xrefs don't work
+1648806  Cannot add local module source directory
+1647579  switching from local to remote causes crash
+1646579  sidebar search, no bounds => crash
+1645989  newly-defined install source unavailable
+
+New feature requests pending:
+1646037  very simple api for scrolling
+
+Feature requests closed:
+1642837  fullscreen support
+1615402  advanced search needs help
+1124274  GnomeSword for Windows
+________________________
+
 Release 2.2.1 (maintenance)
 27 Jan 2007
 
