@@ -48,7 +48,6 @@ DOC_FIGURES = 	figures/first_start.png \
 		figures/sword_config.png \
 		figures/sword_install.png \
 		figures/sword_remove.png \
-		figures/sword_sources.png \
-		figures/gtkhtml3-vs-mozembed.png
+		figures/sword_sources.png
 
 DOC_LINGUAS =	de fr
