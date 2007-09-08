@@ -661,8 +661,8 @@ void main_update_parallel_page(void)
 			}	
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"gnomesword.url?action=showParallel&"
-				"type=swap&value=%s\">view context</a>]</small></td></tr>",
-				mod_name);
+				"type=swap&value=%s\">%s</a>]</small></td></tr>",
+				mod_name,_("view context"));
 
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
@@ -903,8 +903,8 @@ void main_update_parallel_page(void)
 			}	
 			sprintf(tmpBuf,
 				"</font><small>[<a href=\"gnomesword.url?action=showParallel&"
-				"type=swap&value=%s\">view context</a>]</small></td></tr>",
-				mod_name);
+				"type=swap&value=%s\">%s</a>]</small></td></tr>",
+				mod_name,_("view context"));
 
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
