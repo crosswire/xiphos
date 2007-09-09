@@ -91,7 +91,7 @@ Known, unresolved flaws in this unstable test release:
 1747281  can't drag-n-drop from adv.search
 	 (in either gtkhtml3 or MozEmbed, d&d has stopped working)
 
-Bug reports addressed since 2.2.2:
+Bug reports addressed since 2.2.3:
 1783315  Footnotes in verse 0 not shown
 1783300  locale names are out of date
 1769405  Can't open
