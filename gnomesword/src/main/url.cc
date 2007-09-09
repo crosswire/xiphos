@@ -974,7 +974,6 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 
 gint main_url_handler(const gchar * url, gboolean clicked)
 {
-	gchar* url_work = g_strdup(url);;
 	gchar* action = NULL;
 	gchar* stype = NULL;
 	gchar* svalue = NULL;
@@ -984,21 +983,22 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* strongs = NULL;
 	gchar *buf = NULL;
 	URL* m_url;
+	int retval = 0;		// assume failure.
 
 	GS_message(("main_url_handler()"));
 	GS_message(("url = %s", url));
 
-	if (strstr(url_work, "sword://") ||
-	    strstr(url_work, "book://")  ||
-	    strstr(url_work, "chapter://")) {
+	if (strstr(url, "sword://") ||
+	    strstr(url, "bible://") ||
+	    strstr(url, "book://")  ||
+	    strstr(url, "chapter://")) {
 		// handle `+' space substitutions and %xx encodings.
-		int retval;
 		GString *url_clean = g_string_new(NULL);
 		const gchar *url_chase;
 		char hex_template[] = { '0', '0', '\0' };
 		unsigned long from_hex;
 
-		for (url_chase = url_work; *url_chase; ++url_chase) {
+		for (url_chase = url; *url_chase; ++url_chase) {
 			switch (*url_chase) {
 			case '+':
 				g_string_append_c(url_clean, ' ');
@@ -1028,12 +1028,34 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		
 		retval = sword_uri(url_clean->str, clicked);
 		g_string_free(url_clean, TRUE);
-		return retval;
 	}
-	if (strstr(url_work, "passagestudy.jsp") ||
-	    strstr(url_work, "gnomesword.url")) {
+	else if (strstr(url, "passagestudy.jsp") ||
+		 strstr(url, "gnomesword.url")) {
+
+		// another minor nightmare: re-encode / and : in hex.
+		gchar *place;
+		gchar tmpbuf[1023];
+		GString *tmpstr = g_string_new(NULL);
+
+		place = strchr(url, '?');		// url's beginning, as-is.
+		strncpy(tmpbuf, url, (++place)-url);
+		tmpbuf[place-url] = '\0';
+		tmpstr = g_string_append(tmpstr, tmpbuf);
+		for (/* */ ; *place; ++place) {
+			switch (*place) {
+			case '/':
+				tmpstr = g_string_append(tmpstr, "%2F"); break;
+			case ':':
+				tmpstr = g_string_append(tmpstr, "%3A"); break;
+			case ' ':
+				tmpstr = g_string_append(tmpstr, "%20"); break;
+			default:
+				tmpstr = g_string_append_c(tmpstr, *place);
+			}
+		}
+
 		/* passagestudy.jsp?action=showStrongs&type= */
-		m_url = new URL((const char*)url_work);
+		m_url = new URL((const char*)tmpstr->str);
 		action = g_strdup(m_url->getParameterValue("action"));
 		morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
@@ -1107,12 +1129,11 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if (svalue) g_free(svalue);
 		if (strongs) g_free(strongs);
 		if (morph) g_free(morph);
-		if(url_work) g_free(url_work);
 		delete m_url;
-		return 1;
+		retval = 1;
 	}
 
-	return 0;
+	return retval;
 }
 
 
