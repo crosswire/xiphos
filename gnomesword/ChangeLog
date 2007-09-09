@@ -1,3 +1,7 @@
+2007-09-09  karl <charcoal@users.sf.net>
+
+	* fix #1781816-4: click to get "about" in gtkhtml3 build.
+
 2007-09-05  karl <charcoal@users.sf.net>
 
 	* tweak display.cc for a 1st guess on widget size for images.

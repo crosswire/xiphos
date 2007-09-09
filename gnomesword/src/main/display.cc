@@ -337,21 +337,15 @@ char GTKEntryDisp::Display(SWModule &imodule)
 			       ? atoi(mf->old_font_size) + settings.base_font_size
 			       : settings.base_font_size));
 
-	swbuf.appendFormatted(  "<font color=\"%s\">",
-				settings.bible_verse_num_color);
+	swbuf.appendFormatted("<font color=\"%s\">",
+			      settings.bible_verse_num_color);
 
-#ifdef USE_GTKMOZEMBED	
-	swbuf.appendFormatted(	"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"[*%s*]</a></font>[%s]<br>",
-				imodule.Description(),
-				imodule.Name(),
-				imodule.Name(),
-				(gchar*)keytext);
-#else
-	swbuf.appendFormatted(	"[*%s*]</font>[%s]<br>",
-				imodule.Name(),
-				(gchar*)keytext);
-#endif
+	swbuf.appendFormatted("<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font>[%s]<br>",
+			      imodule.Description(),
+			      imodule.Name(),
+			      imodule.Name(),
+			      (gchar*)keytext);
 
 	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
 		// !strcmp(imodule.getConfigEntry("SourceType"),"ThML"))

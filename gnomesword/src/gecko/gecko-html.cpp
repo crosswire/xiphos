@@ -224,10 +224,16 @@ static gint html_open_uri(GtkMozEmbed * embed, const gchar * uri)
 		tmpbuf[place-uri] = '\0';
 		tmpstr = g_string_append(tmpstr, tmpbuf);
 		for (/* */ ; *place; ++place) {
-			if (*place != '/')
+			switch (*place) {
+			case '/':
+				tmpstr = g_string_append(tmpstr, "%2F"); break;
+			case ':':
+				tmpstr = g_string_append(tmpstr, "%3A"); break;
+			case ' ':
+				tmpstr = g_string_append(tmpstr, "%20"); break;
+			default:
 				tmpstr = g_string_append_c(tmpstr, *place);
-			else
-				tmpstr = g_string_append(tmpstr, "%2F");
+			}
 		}
 		uri = tmpstr->str;
 	}
