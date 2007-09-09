@@ -1129,6 +1129,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if (svalue) g_free(svalue);
 		if (strongs) g_free(strongs);
 		if (morph) g_free(morph);
+		g_string_free(tmpstr, TRUE);
 		delete m_url;
 		retval = 1;
 	}
