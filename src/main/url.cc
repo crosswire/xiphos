@@ -127,7 +127,7 @@ static void alert_url_not_found(const gchar * url)
 	g_free(dialog);
 	g_string_free(dialog_text, TRUE);
 }
- 
+
 /******************************************************************************
  * Name
  *   show_in_appbar
@@ -270,9 +270,12 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		GS_print(("module = %s\n",module));
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
-		GS_print(("description = %s\n",description));
+		/* some mod descriptions contain fun(ny) characters */
+		GString *desc_clean = hex_decode(description);
+		GS_print(("description = %s\n", desc_clean->str));
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					description);
+					desc_clean->str);
+		g_string_free(desc_clean, TRUE);
 	}
 	return 1;
 }
@@ -992,38 +995,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	    strstr(url, "bible://") ||
 	    strstr(url, "book://")  ||
 	    strstr(url, "chapter://")) {
-		// handle `+' space substitutions and %xx encodings.
-		GString *url_clean = g_string_new(NULL);
-		const gchar *url_chase;
-		char hex_template[] = { '0', '0', '\0' };
-		unsigned long from_hex;
-
-		for (url_chase = url; *url_chase; ++url_chase) {
-			switch (*url_chase) {
-			case '+':
-				g_string_append_c(url_clean, ' ');
-				break;
-			case '%':
-				if (isxdigit(*(url_chase+1)) &&
-				    isxdigit(*(url_chase+2))) {
-					hex_template[0] = *(url_chase+1);
-					hex_template[1] = *(url_chase+2);
-					from_hex = strtol(hex_template, NULL, 16);
-					g_string_append_c(url_clean,
-							  (gchar) from_hex);
-					url_chase += 2;
-				} else {
-					// failed %xx enconding; normal character.
-					// should we instead do nothing with this '%'?
-					g_string_append_c(url_clean, '%');
-				}
-				break;
-			default:
-				g_string_append_c(url_clean, *url_chase);
-				break;
-			}
-		}
-		
+		GString *url_clean = hex_decode(url);
 		GS_message(("url_clean = %s", url_clean->str));
 		
 		retval = sword_uri(url_clean->str, clicked);
@@ -1291,6 +1263,57 @@ const gchar *main_url_encode(const gchar * pram)
 		return g_strdup(retval.c_str());
 	else
 		return g_strdup("");
+}
+ 
+/******************************************************************************
+ * Name
+ *   hex_decode
+ *
+ * Synopsis
+ *   hex_decode(const gchar *url)
+ *
+ * Description
+ *   extricates `+' and "%xx" encodings.
+ *
+ * Return value
+ *   GString *
+ */
+
+GString *
+hex_decode(const gchar *url)
+{
+	// handle `+' space substitutions and %xx encodings.
+	GString *url_clean = g_string_new(NULL);
+	const gchar *url_chase;
+	char hex_template[] = { '0', '0', '\0' };
+	unsigned long from_hex;
+
+	for (url_chase = url; *url_chase; ++url_chase) {
+		switch (*url_chase) {
+		case '+':
+			g_string_append_c(url_clean, ' ');
+			break;
+		case '%':
+			if (isxdigit(*(url_chase+1)) &&
+			    isxdigit(*(url_chase+2))) {
+				hex_template[0] = *(url_chase+1);
+				hex_template[1] = *(url_chase+2);
+				from_hex = strtol(hex_template, NULL, 16);
+				g_string_append_c(url_clean,
+						  (gchar) from_hex);
+				url_chase += 2;
+			} else {
+				// failed %xx enconding; normal character.
+				// should we instead do nothing with this '%'?
+				g_string_append_c(url_clean, '%');
+			}
+			break;
+		default:
+			g_string_append_c(url_clean, *url_chase);
+			break;
+		}
+	}
+	return url_clean;
 }
 
 /******   end of file   ******/
