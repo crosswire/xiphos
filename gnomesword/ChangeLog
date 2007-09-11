@@ -1,3 +1,7 @@
+2007-09-10  karl <charcoal@users.sf.net>
+
+	* update hex decoding so that module descriptions don't show %2F.
+
 2007-09-09  karl <charcoal@users.sf.net>
 
 	* fix #1781816-4: click to get "about" in gtkhtml3 build.
