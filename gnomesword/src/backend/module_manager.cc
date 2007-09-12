@@ -502,13 +502,23 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			mod_info->new_version = strdup(
 			(module->getConfigEntry("Version")) ? module->
 			    getConfigEntry("Version") : " ");
-			
+
 			char *feature = (char*)module->getConfigEntry("Feature");
 			if (feature && !strcmp(feature, "DailyDevotion"))
 				mod_info->is_devotional = 1;
 			else
-				mod_info->is_devotional = 0;			
-			
+				mod_info->is_devotional = 0;
+
+			char *category = (char*)module->getConfigEntry("Category");
+			if (category && !strcmp(category, "Maps"))
+				mod_info->is_maps = 1;
+			else
+				mod_info->is_maps = 0;
+			if (category && !strcmp(category, "Images"))
+				mod_info->is_images = 1;
+			else
+				mod_info->is_images = 0;			
+
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
 			mod_info->installed =

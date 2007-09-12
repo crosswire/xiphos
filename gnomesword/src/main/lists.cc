@@ -77,6 +77,12 @@ GList *get_list(gint type)
 	case DEVOTION_LIST:
 		return mod_lists->devotionmods;
 		break;
+	case MAP_LIST:
+		return mod_lists->mapmods;
+		break;
+	case IMAGE_LIST:
+		return mod_lists->imagemods;
+		break;
 #ifdef PRAYERLIST
 	case PRAYER_LIST:
 		return mod_lists->prayermods;
@@ -101,6 +107,8 @@ void main_init_lists(void)
 	mods.bookmods = NULL;
 	mods.devotionmods = NULL;
 	mods.prayermods = NULL;
+	mods.mapmods = NULL;
+	mods.imagemods = NULL;
 	mods.options = NULL;
 	mods.text_descriptions = NULL;
 	mods.comm_descriptions = NULL;
