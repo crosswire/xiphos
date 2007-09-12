@@ -820,6 +820,8 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	GtkTreeIter dictionary;
 	GtkTreeIter devotional;
 	GtkTreeIter book;
+	GtkTreeIter map;
+	GtkTreeIter image;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeIter child_iter;
@@ -876,6 +878,13 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	gtk_tree_store_append(store, &book, NULL);
 	gtk_tree_store_set(store, &book, 0, _("General Books"), -1);
 
+	/*  add Maps folder */
+	gtk_tree_store_append(store, &map, NULL);
+	gtk_tree_store_set(store, &map, 0, _("Maps"), -1);
+
+	/*  add Images folder */
+	gtk_tree_store_append(store, &image, NULL);
+	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
 	while (tmp2) {
 		info = (MOD_MGR *) tmp2->data;
@@ -915,6 +924,22 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 						      (store), book,
 						      info);
 		}
+
+		if (info->is_maps) {
+				add_language_folder(GTK_TREE_MODEL(store),
+						    map, info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store),
+							      map, info);
+		}
+		if (info->is_images) {
+				add_language_folder(GTK_TREE_MODEL(store),
+						    image, info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store),
+							      image, info);
+		}
+
 		g_free(info->name);
 		g_free(info->type);
 		g_free(info->new_version);
