@@ -281,10 +281,10 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 			
 			char *feature =
 			    (char *) (*it).second->getConfigEntry("Feature");
-			if(!feature)
+			if (!feature)
 				continue;
 			if (!strcmp(feature, "DailyDevotion"))
-				mods->devotionmods 
+				mods->devotionmods
 				   = g_list_append(mods->devotionmods,
 				    strdup((char *) (*it).second->Name()));
 		}
@@ -303,7 +303,20 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 				    strdup((char *) (*it).second->
 					   Description()));
 			}
-		}			
+		}
+
+		char *category =
+		    (char *) (*it).second->getConfigEntry("Category");
+		if (!category)
+			continue;
+		if (!strcmp(category, "Maps"))
+			mods->mapmods
+			   = g_list_append(mods->mapmods,
+			    strdup((char *) (*it).second->Name()));
+		if (!strcmp(category, "Images"))
+			mods->imagemods
+			   = g_list_append(mods->imagemods,
+			    strdup((char *) (*it).second->Name()));
 	}
 }
 

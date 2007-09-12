@@ -46,6 +46,8 @@ struct _module_lists {
 	    *percommods,
 	    *devotionmods,
 	    *prayermods,
+	    *imagemods,
+	    *mapmods,
 	    *text_descriptions,
 	    *dict_descriptions,
 	    *comm_descriptions,
@@ -67,6 +69,8 @@ struct _module_lists {
 #define OPTIONS_LIST 9
 #define PERCOMM_LIST 10
 #define DEVOTION_LIST 11
+#define MAP_LIST 12
+#define IMAGE_LIST 13
 
 
 GList * get_list(gint type);
