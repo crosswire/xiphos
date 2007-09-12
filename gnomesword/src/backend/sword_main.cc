@@ -43,7 +43,7 @@
 #include <dirent.h>
 
 #include "backend/sword_main.hh"
-#include "backend/gs_osishtmlhref.h"
+//#include "backend/gs_osishtmlhref.h"
 
 #include "main/mod_mgr.h"
 #include "main/settings.h"
@@ -67,7 +67,7 @@ BackEnd::BackEnd() {
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 
 	//thml2osis = new  ThMLOSIS();
-	osis2html = new  GS_OSISHTMLHREF();
+	//osis2html = new  GS_OSISHTMLHREF();
 	
 	display_mod = NULL;	
 	tree_key = NULL;	
@@ -105,8 +105,8 @@ BackEnd::~BackEnd() {
 		delete verselistDisplay;
 	if(viewerDisplay)
 		delete viewerDisplay;
-        if (osis2html)
-                delete (osis2html);	
+//        if (osis2html)
+  //              delete (osis2html);	
 	commDisplay          = 0;
 	bookDisplay          = 0;
 	dictDisplay          = 0;
