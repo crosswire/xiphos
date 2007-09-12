@@ -60,7 +60,7 @@ extern "C" {
 #include "gui/dialog.h"
 
 #include "backend/sword_main.hh"
-#include "backend/gs_osishtmlhref.h"
+//#include "backend/gs_osishtmlhref.h"
 
 extern ModuleCache::CacheMap ModuleMap;
 
