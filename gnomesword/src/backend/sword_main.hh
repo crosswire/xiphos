@@ -50,7 +50,7 @@ class BackEnd {
 	SWKey *current_scope;
 	SWModule *search_mod;
 	//SWFilter *thml2osis;
-	SWFilter *osis2html;
+	//SWFilter *osis2html;
 	typedef map < SWBuf, SWBuf > ModLanguageMap;
 	ModLanguageMap languageMap;
 	
