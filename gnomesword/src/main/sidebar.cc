@@ -1006,7 +1006,7 @@ void main_load_module_tree(GtkWidget * tree)
 		tmp = g_list_next(tmp);
 	}
 
-
+	/*  General Books folders */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -1015,8 +1015,47 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_MODULE, NULL,
 			   COL_OFFSET, _("General Books"), -1);
 
-	/*  General Books folders */
 	tmp = get_list(GBS_LIST);
+	while (tmp != NULL) {
+		const gchar *buf =
+		    backend->module_get_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  Maps folders */
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Maps"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Maps"), -1);
+
+	tmp = get_list(MAP_LIST);
+	while (tmp != NULL) {
+		const gchar *buf =
+		    backend->module_get_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  Images folders */
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, _("Images"),
+			   COL_MODULE, NULL,
+			   COL_OFFSET, _("Images"), -1);
+
+	tmp = get_list(IMAGE_LIST);
 	while (tmp != NULL) {
 		const gchar *buf =
 		    backend->module_get_language((gchar *) tmp->data);

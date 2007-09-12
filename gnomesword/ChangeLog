@@ -1,3 +1,7 @@
+2007-09-11  karl <charcoal@users.sf.net>
+
+	* add Maps and Images to module lists (sidebar, mod.mgr).
+
 2007-09-10  karl <charcoal@users.sf.net>
 
 	* update hex decoding so that module descriptions don't show %2F.

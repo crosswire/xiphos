@@ -45,6 +45,8 @@ struct  _mm {
 	char *description;
 	int installed;
 	int is_devotional;
+	int is_maps;
+	int is_images;
 	int locked;
 };
 

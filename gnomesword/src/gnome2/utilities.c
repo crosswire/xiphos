@@ -437,7 +437,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, _("Biblical Texts"), -1);
 
-	if(is_sidebar) {
+	if (is_sidebar) {
 		gtk_tree_store_append(store, &child_iter, &iter);
 		gtk_tree_store_set(store, &child_iter, 0,
 				   _("Parallel View"), -1);
@@ -495,11 +495,39 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 		tmp = g_list_next(tmp);
 	}
 
+	/*  General Books folders */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, _("General Books"), -1);
 
-	/*  General Books folders */
 	tmp = get_list(GBS_LIST);
+	while (tmp != NULL) {
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  Maps folders */
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter, 0, _("Maps"), -1);
+
+	tmp = get_list(MAP_LIST);
+	while (tmp != NULL) {
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  Images folders */
+	gtk_tree_store_append(store, &iter, NULL);
+	gtk_tree_store_set(store, &iter, 0, _("Images"), -1);
+
+	tmp = get_list(IMAGE_LIST);
 	while (tmp != NULL) {
 		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
