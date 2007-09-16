@@ -1,6 +1,7 @@
 2007-09-16  karl <charcoal@users.sf.net>
 
 	* update morph output for tidiness: lowercase; no breakable spaces.
+	* update morph/strong's to preserve ()<> for gtkhtml3.	
 
 2007-09-11  karl <charcoal@users.sf.net>
 
