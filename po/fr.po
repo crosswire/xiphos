@@ -28,14 +28,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-08 10:52+0200\n"
-"PO-Revision-Date: 2007-09-08 10:52+0200\n"
+"POT-Creation-Date: 2007-09-16 23:04+0200\n"
+"PO-Revision-Date: 2007-09-16 22:48+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -608,36 +608,36 @@ msgstr "中文"
 msgid "Zulu"
 msgstr "isiZulu"
 
-#: ../src/main/display.cc:741 ../src/main/display.cc:786
-#: ../src/main/display.cc:824 ../src/main/display.cc:829
+#: ../src/main/display.cc:735 ../src/main/display.cc:780
+#: ../src/main/display.cc:818 ../src/main/display.cc:823
 msgid "Chapter"
 msgstr "Chapitre"
 
-#: ../src/main/lists.cc:150
+#: ../src/main/lists.cc:158
 msgid "Number of Text modules"
 msgstr "Nombre de modules de textes bibliques"
 
-#: ../src/main/lists.cc:151
+#: ../src/main/lists.cc:159
 msgid "Number of Commentary modules"
 msgstr "Nombre de modules de commentaires"
 
-#: ../src/main/lists.cc:152
+#: ../src/main/lists.cc:160
 msgid "Number of Dict/lex modules"
 msgstr "Nombre de modules de dictionnaires"
 
-#: ../src/main/lists.cc:153
+#: ../src/main/lists.cc:161
 msgid "Number of Book modules"
 msgstr "Nombre de modules de livres"
 
-#: ../src/main/lists.cc:154
+#: ../src/main/lists.cc:162
 msgid "Number of Percomm modules"
 msgstr "Nombre de modules de commentaires personnels"
 
-#: ../src/main/lists.cc:155
+#: ../src/main/lists.cc:163
 msgid "Number of Devotion modules"
 msgstr "Nombre de modules de calendrier biblique"
 
-#: ../src/main/lists.cc:158
+#: ../src/main/lists.cc:166
 msgid "Number of Prayer modules"
 msgstr "Nombre de modules de prières"
 
@@ -735,14 +735,14 @@ msgid "Standard View"
 msgstr "Vue simple"
 
 #: ../src/main/sidebar.cc:598 ../src/main/sidebar.cc:954
-#: ../src/main/sidebar.cc:956 ../src/gnome2/mod_mgr.c:865
+#: ../src/main/sidebar.cc:956 ../src/gnome2/mod_mgr.c:867
 #: ../src/gnome2/utilities.c:458 ../ui/prefs.glade.h:26
 msgid "Commentaries"
 msgstr "Commentaires"
 
 #: ../src/main/sidebar.cc:611 ../src/main/sidebar.cc:1014
-#: ../src/main/sidebar.cc:1016 ../src/gnome2/mod_mgr.c:877
-#: ../src/gnome2/utilities.c:499
+#: ../src/main/sidebar.cc:1016 ../src/gnome2/mod_mgr.c:879
+#: ../src/gnome2/utilities.c:500
 msgid "General Books"
 msgstr "Livres"
 
@@ -756,21 +756,31 @@ msgid "Unknown"
 msgstr "Inconnu"
 
 #: ../src/main/sidebar.cc:918 ../src/main/sidebar.cc:920
-#: ../src/gnome2/mod_mgr.c:861 ../src/gnome2/utilities.c:438
+#: ../src/gnome2/mod_mgr.c:863 ../src/gnome2/utilities.c:438
 msgid "Biblical Texts"
 msgstr "Textes bibliques"
 
 #: ../src/main/sidebar.cc:974 ../src/main/sidebar.cc:976
-#: ../src/gnome2/mod_mgr.c:869 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:871 ../src/gnome2/utilities.c:472
 msgid "Dictionaries"
 msgstr "Dictionnaires"
 
 #: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
-#: ../src/gnome2/mod_mgr.c:873 ../src/gnome2/utilities.c:486
+#: ../src/gnome2/mod_mgr.c:875 ../src/gnome2/utilities.c:486
 msgid "Daily Devotionals"
 msgstr "Calendriers bibliques"
 
-#: ../src/main/sidebar.cc:1035 ../src/main/sidebar.cc:1037
+#: ../src/main/sidebar.cc:1034 ../src/main/sidebar.cc:1036
+#: ../src/gnome2/mod_mgr.c:883 ../src/gnome2/utilities.c:514
+msgid "Maps"
+msgstr "Cartes"
+
+#: ../src/main/sidebar.cc:1054 ../src/main/sidebar.cc:1056
+#: ../src/gnome2/mod_mgr.c:887 ../src/gnome2/utilities.c:528
+msgid "Images"
+msgstr "Images"
+
+#: ../src/main/sidebar.cc:1074 ../src/main/sidebar.cc:1076
 msgid "Prayer List"
 msgstr "Liste de prières"
 
@@ -900,16 +910,16 @@ msgstr "Voulez-vous enregistrer les modifications apportées au document"
 msgid "before closing?"
 msgstr "avant de fermer?"
 
-#: ../src/editor/html-editor.c:516
+#: ../src/editor/html-editor.c:515
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 "Si vous n'enregistrez pas, les modifications seront définitivement perdues"
 
-#: ../src/editor/html-editor.c:1264
+#: ../src/editor/html-editor.c:1263
 msgid "Note Editor"
 msgstr "Éditeur de note"
 
-#: ../src/editor/html-editor.c:1272 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1271 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr "Bloc-notes"
 
@@ -1094,12 +1104,13 @@ msgid "About"
 msgstr "À propos"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1109 ../src/gnome2/bookmarks_menu.c:470
-#: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
-#: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
-#: ../src/gnome2/commentary.c:967 ../src/gnome2/dictlex.c:1019
-#: ../src/gnome2/gbs.c:862 ../src/gnome2/mod_mgr.c:2036
-#: ../src/gnome2/mod_mgr.c:2197 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bibletext.c:1109 ../src/gnome2/bookmark_dialog.c:145
+#: ../src/gnome2/bookmarks_menu.c:470 ../src/gnome2/bookmarks_menu.c:736
+#: ../src/gnome2/bookmarks_menu.c:910 ../src/gnome2/bookmarks_menu.c:1008
+#: ../src/gnome2/bookmarks_treeview.c:102 ../src/gnome2/commentary.c:967
+#: ../src/gnome2/dictlex.c:1019 ../src/gnome2/gbs.c:862
+#: ../src/gnome2/mod_mgr.c:2061 ../src/gnome2/mod_mgr.c:2222
+#: ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "Signet"
 
@@ -1148,6 +1159,20 @@ msgstr "Synchroniser avec la fenêtre principale"
 msgid "Stay in sync"
 msgstr "Synchronisé"
 
+#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:1010
+#: ../src/gnome2/bookmarks_treeview.c:103
+msgid "Enter Folder Name"
+msgstr "Saisir le nom du dossier"
+
+#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:1012
+msgid "Folder Name"
+msgstr "Nom du dossier"
+
+#: ../src/gnome2/bookmark_dialog.c:150 ../src/gnome2/bookmarks_menu.c:1013
+#: ../src/gnome2/bookmarks_treeview.c:105
+msgid "Folder: "
+msgstr "Dossier :"
+
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
 msgstr "Nom du dossier :"
@@ -1187,18 +1212,6 @@ msgstr "Ajouter"
 #: ../src/gnome2/bookmarks_menu.c:917
 msgid "Label: "
 msgstr "Étiquette :"
-
-#: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
-msgid "Enter Folder Name"
-msgstr "Saisir le nom du dossier"
-
-#: ../src/gnome2/bookmarks_menu.c:1012
-msgid "Folder Name"
-msgstr "Nom du dossier"
-
-#: ../src/gnome2/bookmarks_menu.c:1013 ../src/gnome2/bookmarks_treeview.c:105
-msgid "Folder: "
-msgstr "Dossier :"
 
 #: ../src/gnome2/bookmarks_menu.c:1103
 msgid "Remove Folder"
@@ -1812,8 +1825,8 @@ msgstr ""
 "\n"
 " Archive·in·"
 
-#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2417
-#: ../ui/module-manager.glade.h:13
+#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2442
+#: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr "Installer"
 
@@ -1821,11 +1834,11 @@ msgstr "Installer"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: ../src/gnome2/mod_mgr.c:460
+#: ../src/gnome2/mod_mgr.c:460 ../ui/module-manager.glade.h:9
 msgid "Archive"
 msgstr "Archiver"
 
-#: ../src/gnome2/mod_mgr.c:462
+#: ../src/gnome2/mod_mgr.c:462 ../ui/module-manager.glade.h:15
 msgid "Index"
 msgstr "Indexer"
 
@@ -1833,108 +1846,117 @@ msgstr "Indexer"
 msgid "Deletion"
 msgstr "Suppression"
 
-#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:996
+#: ../src/gnome2/mod_mgr.c:466
+#, c-format
+msgid "%s failed"
+msgstr "%s a échoué"
+
+#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:1021
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../src/gnome2/mod_mgr.c:977
+#: ../src/gnome2/mod_mgr.c:1002
 msgid "Refreshing remote"
 msgstr "Rafraîchissement en cours"
 
-#: ../src/gnome2/mod_mgr.c:991
+#: ../src/gnome2/mod_mgr.c:1016
 msgid "Remote not found"
 msgstr "Serveur non trouvé"
 
-#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1137
 msgid "Module Name"
 msgstr "Nom du module"
 
-#: ../src/gnome2/mod_mgr.c:1206
+#: ../src/gnome2/mod_mgr.c:1231
 msgid "Old"
 msgstr "Installé"
 
-#: ../src/gnome2/mod_mgr.c:1233
+#: ../src/gnome2/mod_mgr.c:1258
 msgid "New"
 msgstr "Nouveau"
 
-#: ../src/gnome2/mod_mgr.c:1244
+#: ../src/gnome2/mod_mgr.c:1269
 msgid "Description"
 msgstr "Description"
 
-#: ../src/gnome2/mod_mgr.c:1279 ../src/gnome2/mod_mgr.c:1362
+#: ../src/gnome2/mod_mgr.c:1304 ../src/gnome2/mod_mgr.c:1387
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../src/gnome2/mod_mgr.c:1313
+#: ../src/gnome2/mod_mgr.c:1338
 msgid "Type"
 msgstr "Type"
 
-#: ../src/gnome2/mod_mgr.c:1321
+#: ../src/gnome2/mod_mgr.c:1346
 msgid "Caption"
 msgstr "Libellé"
 
-#: ../src/gnome2/mod_mgr.c:1330
+#: ../src/gnome2/mod_mgr.c:1355
 msgid "Source"
 msgstr "Source"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:1339
+#: ../src/gnome2/mod_mgr.c:1364
 msgid "Directory"
 msgstr "Répertoire"
 
-#: ../src/gnome2/mod_mgr.c:1360
+#: ../src/gnome2/mod_mgr.c:1385
 msgid "Sources"
 msgstr "Sources"
 
-#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/preferences_dialog.c:1643
+#: ../src/gnome2/mod_mgr.c:1391 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
 msgstr "Modules"
 
-#: ../src/gnome2/mod_mgr.c:1368
+#: ../src/gnome2/mod_mgr.c:1393
 msgid "Install/Update"
 msgstr "Installer"
 
-#: ../src/gnome2/mod_mgr.c:1370
+#: ../src/gnome2/mod_mgr.c:1395
 msgid "Maintenance"
 msgstr "Gérer"
 
-#: ../src/gnome2/mod_mgr.c:1591
+#: ../src/gnome2/mod_mgr.c:1616
 msgid "Please Refresh"
 msgstr "Rafraîchir"
 
-#: ../src/gnome2/mod_mgr.c:1592
+#: ../src/gnome2/mod_mgr.c:1617
 msgid "Your module list is not up to date!"
 msgstr "La liste des modules n'est pas à jour!"
 
-#: ../src/gnome2/mod_mgr.c:1806
+#: ../src/gnome2/mod_mgr.c:1831
 msgid "Select Local Source"
 msgstr "Support local"
 
-#: ../src/gnome2/mod_mgr.c:2039 ../src/gnome2/mod_mgr.c:2200
+#: ../src/gnome2/mod_mgr.c:2064 ../src/gnome2/mod_mgr.c:2225
 msgid "Remove the selected source"
 msgstr "Supprime la source sélectionnée"
 
-#: ../src/gnome2/mod_mgr.c:2091
+#: ../src/gnome2/mod_mgr.c:2116
 msgid "Enter a remote source"
 msgstr "Ajouter un site de téléchargement"
 
-#: ../src/gnome2/mod_mgr.c:2095
+#: ../src/gnome2/mod_mgr.c:2120
 msgid "Caption:"
 msgstr "Libellé :"
 
-#: ../src/gnome2/mod_mgr.c:2096
+#: ../src/gnome2/mod_mgr.c:2121
 msgid "Type:"
 msgstr "Type :"
 
-#: ../src/gnome2/mod_mgr.c:2097
+#: ../src/gnome2/mod_mgr.c:2122
 msgid "Host:"
 msgstr "Serveur :"
 
 # src/gs_preferences_dlg.c
-#: ../src/gnome2/mod_mgr.c:2098
+#: ../src/gnome2/mod_mgr.c:2123
 msgid "Directory:"
 msgstr "Répertoire :"
+
+#: ../src/gnome2/mod_mgr.c:2146
+msgid "A source by that name already exists."
+msgstr "Une source du même nom existe déjà"
 
 #: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go to parent"
@@ -2509,39 +2531,43 @@ msgstr ""
 "<b>Attention</b> Ne pas utiliser le téléchargement dans·les·pays où être "
 "détecté représente un danger"
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:10
 msgid "Continue"
 msgstr "Continuer"
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:11
 msgid "Current Remote Sources"
 msgstr "Téléchargement"
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:12
 msgid "Current local sources"
 msgstr "Sources locales"
 
-#: ../ui/module-manager.glade.h:12
+#: ../ui/module-manager.glade.h:13
+msgid "Delete Index"
+msgstr "Suppr. Index"
+
+#: ../ui/module-manager.glade.h:14
 msgid "Home dir"
 msgstr "Dossier personnel"
 
-#: ../ui/module-manager.glade.h:14
+#: ../ui/module-manager.glade.h:17
 msgid "Local"
 msgstr "Source locale"
 
-#: ../ui/module-manager.glade.h:15
+#: ../ui/module-manager.glade.h:18
 msgid "Local Install Folder"
 msgstr "Répertoire local d'installation"
 
-#: ../ui/module-manager.glade.h:16
+#: ../ui/module-manager.glade.h:19
 msgid "Module Manager"
 msgstr "Gérer les modules"
 
-#: ../ui/module-manager.glade.h:17
+#: ../ui/module-manager.glade.h:20
 msgid "Remote"
 msgstr "Téléchargement"
 
-#: ../ui/module-manager.glade.h:18
+#: ../ui/module-manager.glade.h:21
 msgid "Sword sys dir"
 msgstr "Rép Sword-sys"
 
@@ -3108,9 +3134,6 @@ msgstr "Enregistre à l'aide de l'interface  PersistFile"
 #~ msgid "Remove/Archive"
 #~ msgstr "Supprimer"
 
-#~ msgid "Install failed"
-#~ msgstr "L\"installation a échoué"
-
 #~ msgid "Remove failed"
 #~ msgstr "La suppression a échoué"
 
@@ -3278,9 +3301,6 @@ msgstr "Enregistre à l'aide de l'interface  PersistFile"
 
 #~ msgid "Link"
 #~ msgstr "Lien"
-
-#~ msgid "Image"
-#~ msgstr "Image"
 
 #~ msgid "Paragraph"
 #~ msgstr "Paragraphe"
