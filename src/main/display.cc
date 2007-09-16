@@ -445,10 +445,12 @@ block_dump(SWBuf& rendered,
 		t = strrchr(*strongs, '>') + 1;
 		*s = '<';
 		slen = s - t;
+#ifdef USE_GTKMOZEMBED
 		s = strstr(*strongs, "&lt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
 		s = strstr(s, "&gt;");
 		*s = *(s+1) = *(s+2) = *(s+3) = ' ';
+#endif /* USE_GTKMOZEMBED */
 	} else
 		slen = 0;
 	if (*morph) {
@@ -464,10 +466,12 @@ block_dump(SWBuf& rendered,
 		t = strrchr(*morph, '>') + 1;
 		*s = '<';
 		mlen = s - t;
+#ifdef USE_GTKMOZEMBED
 		s = strchr(*morph, '(');
 		*s = ' ';
 		s = strrchr(s, ')');
 		*s = ' ';
+#endif /* USE_GTKMOZEMBED */
 	} else
 		mlen = 0;
 	min_length = 2 + max(slen, mlen);
