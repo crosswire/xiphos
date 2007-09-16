@@ -1005,12 +1005,12 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	str = g_string_new("");
 	info = gui_new_dialog();
 	//info->stock_icon = GTK_STOCK_OPEN;
-	info->title = N_("Bookmark");
+	info->title = _("Bookmark");
 	g_string_printf(str, "<span weight=\"bold\">%s</span>",
 			_("Enter Folder Name"));
 	info->label_top = str->str;
 	info->text1 = g_strdup(_("Folder Name"));
-	info->label1 = N_("Folder: ");
+	info->label1 = _("Folder: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	
