@@ -679,7 +679,11 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 //
 // Display content at 0:0 and n:0.
 //
-void getZeroContent(SWModule &imodule, uint16_t cache_flags, SWBuf &swbuf, SWModule *mod)
+void getZeroContent(SWModule &imodule,
+		    uint16_t cache_flags,
+		    SWBuf &swbuf,
+		    SWModule *mod,
+		    gboolean strongs_or_morph)
 {
 	const char *ModuleName = imodule.Name();
 
@@ -705,9 +709,11 @@ void getZeroContent(SWModule &imodule, uint16_t cache_flags, SWBuf &swbuf, SWMod
 		    [key->Verse()];
 
 		if (!cVerse.CacheIsValid(cache_flags))
-		    cVerse.SetText((const char *)*mod, cache_flags);
+			cVerse.SetText((strongs_or_morph
+					? block_render((const char *)*mod)
+					: (const char *)*mod), cache_flags);
 
-		swbuf.appendFormatted("%s", cVerse.GetText());
+		swbuf.appendFormatted("%s<br />", cVerse.GetText());
 	}
 
 	key->AutoNormalize(oldAutoNorm);
@@ -793,7 +799,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 			swbuf += ("</DIV>");
 	}
 
-	getZeroContent(imodule, cache_flags, swbuf, mod);
+	getZeroContent(imodule, cache_flags, swbuf, mod, strongs_or_morph);
 }
 
 void GTKChapDisp::getVerseAfter(SWModule &imodule,
