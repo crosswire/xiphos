@@ -1,7 +1,8 @@
 2007-09-16  karl <charcoal@users.sf.net>
 
 	* update morph output for tidiness: lowercase; no breakable spaces.
-	* update morph/strong's to preserve ()<> for gtkhtml3.	
+	* update morph/strong's to preserve ()<> for gtkhtml3.
+	* update getZeroContent(), block_render content (esp. Grk modules).
 
 2007-09-11  karl <charcoal@users.sf.net>
 
