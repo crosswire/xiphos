@@ -463,7 +463,7 @@ static void remove_install_modules(GList * modules, int activity)
 		case DELFAST:
 		    verb = _("Deletion"); break;
 		}
-		g_string_printf(mods, "%s failed", verb);
+		g_string_printf(mods, _("%s failed"), verb);
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
@@ -2143,7 +2143,7 @@ void on_button7_clicked(GtkButton * button, gpointer user_data)
 	while (tmp) {
 		if (!strcmp(((MOD_MGR_SOURCE *)tmp->data)->caption,
 			    dialog->text1)) {
-			gui_generic_warning("A source by that name already exists.");
+			gui_generic_warning(_("A source by that name already exists."));
 			return;
 		}
 		tmp = g_list_next(tmp);

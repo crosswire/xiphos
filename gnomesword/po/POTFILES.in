@@ -33,6 +33,7 @@ src/gnome2/about_modules.c
 src/gnome2/about_sword.c
 src/gnome2/bibletext.c
 src/gnome2/bibletext_dialog.c
+src/gnome2/bookmark_dialog.c
 src/gnome2/bookmarks_menu.c
 src/gnome2/bookmarks_treeview.c
 src/gnome2/cipher_key_dialog.c

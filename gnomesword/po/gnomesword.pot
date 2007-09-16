@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-08 10:52+0200\n"
+"POT-Creation-Date: 2007-09-16 23:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,36 +587,36 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-#: ../src/main/display.cc:741 ../src/main/display.cc:786
-#: ../src/main/display.cc:824 ../src/main/display.cc:829
+#: ../src/main/display.cc:735 ../src/main/display.cc:780
+#: ../src/main/display.cc:818 ../src/main/display.cc:823
 msgid "Chapter"
 msgstr ""
 
-#: ../src/main/lists.cc:150
+#: ../src/main/lists.cc:158
 msgid "Number of Text modules"
 msgstr ""
 
-#: ../src/main/lists.cc:151
+#: ../src/main/lists.cc:159
 msgid "Number of Commentary modules"
 msgstr ""
 
-#: ../src/main/lists.cc:152
+#: ../src/main/lists.cc:160
 msgid "Number of Dict/lex modules"
 msgstr ""
 
-#: ../src/main/lists.cc:153
+#: ../src/main/lists.cc:161
 msgid "Number of Book modules"
 msgstr ""
 
-#: ../src/main/lists.cc:154
+#: ../src/main/lists.cc:162
 msgid "Number of Percomm modules"
 msgstr ""
 
-#: ../src/main/lists.cc:155
+#: ../src/main/lists.cc:163
 msgid "Number of Devotion modules"
 msgstr ""
 
-#: ../src/main/lists.cc:158
+#: ../src/main/lists.cc:166
 msgid "Number of Prayer modules"
 msgstr ""
 
@@ -714,14 +714,14 @@ msgid "Standard View"
 msgstr ""
 
 #: ../src/main/sidebar.cc:598 ../src/main/sidebar.cc:954
-#: ../src/main/sidebar.cc:956 ../src/gnome2/mod_mgr.c:865
+#: ../src/main/sidebar.cc:956 ../src/gnome2/mod_mgr.c:867
 #: ../src/gnome2/utilities.c:458 ../ui/prefs.glade.h:26
 msgid "Commentaries"
 msgstr ""
 
 #: ../src/main/sidebar.cc:611 ../src/main/sidebar.cc:1014
-#: ../src/main/sidebar.cc:1016 ../src/gnome2/mod_mgr.c:877
-#: ../src/gnome2/utilities.c:499
+#: ../src/main/sidebar.cc:1016 ../src/gnome2/mod_mgr.c:879
+#: ../src/gnome2/utilities.c:500
 msgid "General Books"
 msgstr ""
 
@@ -735,21 +735,31 @@ msgid "Unknown"
 msgstr ""
 
 #: ../src/main/sidebar.cc:918 ../src/main/sidebar.cc:920
-#: ../src/gnome2/mod_mgr.c:861 ../src/gnome2/utilities.c:438
+#: ../src/gnome2/mod_mgr.c:863 ../src/gnome2/utilities.c:438
 msgid "Biblical Texts"
 msgstr ""
 
 #: ../src/main/sidebar.cc:974 ../src/main/sidebar.cc:976
-#: ../src/gnome2/mod_mgr.c:869 ../src/gnome2/utilities.c:472
+#: ../src/gnome2/mod_mgr.c:871 ../src/gnome2/utilities.c:472
 msgid "Dictionaries"
 msgstr ""
 
 #: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
-#: ../src/gnome2/mod_mgr.c:873 ../src/gnome2/utilities.c:486
+#: ../src/gnome2/mod_mgr.c:875 ../src/gnome2/utilities.c:486
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/main/sidebar.cc:1035 ../src/main/sidebar.cc:1037
+#: ../src/main/sidebar.cc:1034 ../src/main/sidebar.cc:1036
+#: ../src/gnome2/mod_mgr.c:883 ../src/gnome2/utilities.c:514
+msgid "Maps"
+msgstr ""
+
+#: ../src/main/sidebar.cc:1054 ../src/main/sidebar.cc:1056
+#: ../src/gnome2/mod_mgr.c:887 ../src/gnome2/utilities.c:528
+msgid "Images"
+msgstr ""
+
+#: ../src/main/sidebar.cc:1074 ../src/main/sidebar.cc:1076
 msgid "Prayer List"
 msgstr ""
 
@@ -879,15 +889,15 @@ msgstr ""
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/html-editor.c:516
+#: ../src/editor/html-editor.c:515
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1264
+#: ../src/editor/html-editor.c:1263
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1272 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1271 ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
@@ -1065,12 +1075,13 @@ msgid "About"
 msgstr ""
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1109 ../src/gnome2/bookmarks_menu.c:470
-#: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
-#: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
-#: ../src/gnome2/commentary.c:967 ../src/gnome2/dictlex.c:1019
-#: ../src/gnome2/gbs.c:862 ../src/gnome2/mod_mgr.c:2036
-#: ../src/gnome2/mod_mgr.c:2197 ../ui/editor_studypad.xml.h:2
+#: ../src/gnome2/bibletext.c:1109 ../src/gnome2/bookmark_dialog.c:145
+#: ../src/gnome2/bookmarks_menu.c:470 ../src/gnome2/bookmarks_menu.c:736
+#: ../src/gnome2/bookmarks_menu.c:910 ../src/gnome2/bookmarks_menu.c:1008
+#: ../src/gnome2/bookmarks_treeview.c:102 ../src/gnome2/commentary.c:967
+#: ../src/gnome2/dictlex.c:1019 ../src/gnome2/gbs.c:862
+#: ../src/gnome2/mod_mgr.c:2061 ../src/gnome2/mod_mgr.c:2222
+#: ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr ""
 
@@ -1119,6 +1130,20 @@ msgstr ""
 msgid "Stay in sync"
 msgstr ""
 
+#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:1010
+#: ../src/gnome2/bookmarks_treeview.c:103
+msgid "Enter Folder Name"
+msgstr ""
+
+#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:1012
+msgid "Folder Name"
+msgstr ""
+
+#: ../src/gnome2/bookmark_dialog.c:150 ../src/gnome2/bookmarks_menu.c:1013
+#: ../src/gnome2/bookmarks_treeview.c:105
+msgid "Folder: "
+msgstr ""
+
 #: ../src/gnome2/bookmarks_menu.c:473
 msgid "Folder name: "
 msgstr ""
@@ -1157,18 +1182,6 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:917
 msgid "Label: "
-msgstr ""
-
-#: ../src/gnome2/bookmarks_menu.c:1010 ../src/gnome2/bookmarks_treeview.c:103
-msgid "Enter Folder Name"
-msgstr ""
-
-#: ../src/gnome2/bookmarks_menu.c:1012
-msgid "Folder Name"
-msgstr ""
-
-#: ../src/gnome2/bookmarks_menu.c:1013 ../src/gnome2/bookmarks_treeview.c:105
-msgid "Folder: "
 msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:1103
@@ -1765,8 +1778,8 @@ msgid ""
 "Archive in "
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2417
-#: ../ui/module-manager.glade.h:13
+#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2442
+#: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr ""
 
@@ -1774,11 +1787,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:460
+#: ../src/gnome2/mod_mgr.c:460 ../ui/module-manager.glade.h:9
 msgid "Archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:462
+#: ../src/gnome2/mod_mgr.c:462 ../ui/module-manager.glade.h:15
 msgid "Index"
 msgstr ""
 
@@ -1786,105 +1799,114 @@ msgstr ""
 msgid "Deletion"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:996
+#: ../src/gnome2/mod_mgr.c:466
+#, c-format
+msgid "%s failed"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:1021
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:977
+#: ../src/gnome2/mod_mgr.c:1002
 msgid "Refreshing remote"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:991
+#: ../src/gnome2/mod_mgr.c:1016
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1137
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1206
+#: ../src/gnome2/mod_mgr.c:1231
 msgid "Old"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1233
+#: ../src/gnome2/mod_mgr.c:1258
 msgid "New"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1244
+#: ../src/gnome2/mod_mgr.c:1269
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1279 ../src/gnome2/mod_mgr.c:1362
+#: ../src/gnome2/mod_mgr.c:1304 ../src/gnome2/mod_mgr.c:1387
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1313
+#: ../src/gnome2/mod_mgr.c:1338
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1321
+#: ../src/gnome2/mod_mgr.c:1346
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1330
+#: ../src/gnome2/mod_mgr.c:1355
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1339
+#: ../src/gnome2/mod_mgr.c:1364
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1360
+#: ../src/gnome2/mod_mgr.c:1385
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1366 ../src/gnome2/preferences_dialog.c:1643
+#: ../src/gnome2/mod_mgr.c:1391 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1368
+#: ../src/gnome2/mod_mgr.c:1393
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1370
+#: ../src/gnome2/mod_mgr.c:1395
 msgid "Maintenance"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1591
+#: ../src/gnome2/mod_mgr.c:1616
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1592
+#: ../src/gnome2/mod_mgr.c:1617
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1806
+#: ../src/gnome2/mod_mgr.c:1831
 msgid "Select Local Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2039 ../src/gnome2/mod_mgr.c:2200
+#: ../src/gnome2/mod_mgr.c:2064 ../src/gnome2/mod_mgr.c:2225
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2091
+#: ../src/gnome2/mod_mgr.c:2116
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2095
+#: ../src/gnome2/mod_mgr.c:2120
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2096
+#: ../src/gnome2/mod_mgr.c:2121
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2097
+#: ../src/gnome2/mod_mgr.c:2122
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2098
+#: ../src/gnome2/mod_mgr.c:2123
 msgid "Directory:"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:2146
+msgid "A source by that name already exists."
 msgstr ""
 
 #: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
@@ -2441,39 +2463,43 @@ msgid ""
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
 
-#: ../ui/module-manager.glade.h:9
+#: ../ui/module-manager.glade.h:10
 msgid "Continue"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:10
+#: ../ui/module-manager.glade.h:11
 msgid "Current Remote Sources"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:11
+#: ../ui/module-manager.glade.h:12
 msgid "Current local sources"
 msgstr ""
 
-#: ../ui/module-manager.glade.h:12
-msgid "Home dir"
+#: ../ui/module-manager.glade.h:13
+msgid "Delete Index"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:14
-msgid "Local"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:15
-msgid "Local Install Folder"
-msgstr ""
-
-#: ../ui/module-manager.glade.h:16
-msgid "Module Manager"
+msgid "Home dir"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:17
-msgid "Remote"
+msgid "Local"
 msgstr ""
 
 #: ../ui/module-manager.glade.h:18
+msgid "Local Install Folder"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:19
+msgid "Module Manager"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:20
+msgid "Remote"
+msgstr ""
+
+#: ../ui/module-manager.glade.h:21
 msgid "Sword sys dir"
 msgstr ""
 
