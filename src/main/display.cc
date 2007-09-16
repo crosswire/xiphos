@@ -421,7 +421,7 @@ block_dump(SWBuf& rendered,
 	   const char **morph)
 {
 	int wlen, slen, mlen, min_length;
-	char *s, *t;
+	char *s, *s0, *t;
 
 	// unannotated words need no help.
 	if (*word && (*strongs == NULL) && (*morph == NULL)) {
@@ -452,6 +452,13 @@ block_dump(SWBuf& rendered,
 	} else
 		slen = 0;
 	if (*morph) {
+		s = s0 = strstr(*morph, "\">") + 2;
+		t = strchr(s, '<');
+		for (/* */; s < t; ++s)
+			if (isupper(*s))
+				*s = tolower(*s);
+		for (s = strchr(s0, ' '); s && (s < t); s = strchr(s, ' '))
+			*s = '-';
 		s = g_strrstr(*morph, "</a>");
 		*s = '\0';
 		t = strrchr(*morph, '>') + 1;
