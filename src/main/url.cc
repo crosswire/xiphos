@@ -351,7 +351,8 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 	
 	if (!strcmp(stype,"Greek") ||
 	     strstr(stype,"x-Robinson") ||
-	     strstr(stype,"robinson")) {
+	     strstr(stype,"robinson") ||
+	     strstr(stype,"Robinson")) {
 		if (backend->get_key_testament(settings.currentverse) == 2) {
 			if (backend->is_module("Robinson")) 
 				modbuf = "Robinson";

@@ -1,6 +1,7 @@
 2007-09-17  karl <charcoal@users.sf.net>
 
 	* stop inadvertent hebrew match on greek lemma.
+	* add "Robinson" as an acceptable morph ref.
 
 2007-09-17  karl <charcoal@users.sf.net>
 
