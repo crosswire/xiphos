@@ -1136,23 +1136,23 @@ void gui_create_pm_dictionary(void)
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
 				    widget)->active = ops->words_in_red;
 	}
-	if ((main_check_for_global_option(mod_name, "GBFStrongs"))
-	    || (main_check_for_global_option(mod_name, "ThMLStrongs"))
-	    || (main_check_for_global_option(mod_name, "OSISStrongs"))) {
+	if (main_check_for_global_option(mod_name, "GBFStrongs") ||
+	    main_check_for_global_option(mod_name, "ThMLStrongs") ||
+	    main_check_for_global_option(mod_name, "OSISStrongs")) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
 				    widget)->active = ops->strongs;
 	}
-	if ((main_check_for_global_option(mod_name, "GBFMorph")) ||
-	    (main_check_for_global_option(mod_name, "ThMLMorph")) ||
-	    (main_check_for_global_option(mod_name, "OSISMorph"))) {
+	if (main_check_for_global_option(mod_name, "GBFMorph") ||
+	    main_check_for_global_option(mod_name, "ThMLMorph") ||
+	    main_check_for_global_option(mod_name, "OSISMorph")) {
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = ops->morphs;
 	}
-	if ((main_check_for_global_option(mod_name, "GBFFootnotes")) ||
-	    (main_check_for_global_option(mod_name, "ThMLFootnotes")) ||
-	    (main_check_for_global_option(mod_name, "OSISFootnotes"))) {
+	if (main_check_for_global_option(mod_name, "GBFFootnotes") ||
+	    main_check_for_global_option(mod_name, "ThMLFootnotes") ||
+	    main_check_for_global_option(mod_name, "OSISFootnotes")) {
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = ops->footnotes;
@@ -1162,13 +1162,14 @@ void gui_create_pm_dictionary(void)
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
 				    widget)->active = ops->greekaccents;
 	}
-	if (main_check_for_global_option(mod_name, "ThMLLemma")) {
+	if (main_check_for_global_option(mod_name, "ThMLLemma") ||
+	    main_check_for_global_option(mod_name, "OSISLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = ops->lemmas;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
-	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
+	    main_check_for_global_option(mod_name, "OSISScripref")) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
 				    widget)->active =
@@ -1185,7 +1186,7 @@ void gui_create_pm_dictionary(void)
 				    widget)->active = ops->hebrewcant;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
-	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
+	    main_check_for_global_option(mod_name, "OSISHeadings")) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = ops->headings;
