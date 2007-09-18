@@ -586,13 +586,21 @@ block_render_secondary(const char *text, SWBuf& rendered)
 				if (*(s+11) == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
+#ifdef USE_GTKMOZEMBED
 						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+#else
+						word = g_strdup("&nbsp;");
+#endif /* USE_GTKMOZEMBED */
 					}
 					morph   = g_strndup(s, t-s);
 				} else {
 					if (strongs) {
 						block_dump(rendered, &word, &strongs, &morph);
+#ifdef USE_GTKMOZEMBED
 						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+#else
+						word = g_strdup("&nbsp;");
+#endif /* USE_GTKMOZEMBED */
 					}
 					strongs = g_strndup(s, t-s);
 				}
