@@ -435,7 +435,11 @@ block_dump(SWBuf& rendered,
 	if (*word == NULL) {
 		// we need to cobble up something to take the place of
 		// a word, in order that the strongs/morph not overlay.
+#ifdef USE_GTKMOZEMBED
 		*word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+#else
+		*word = g_strdup(" ");	// gtkhtml3 has no alignment need.
+#endif /* USE_GTKMOZEMBED */
 	}
 
 	rendered += "<span class=\"word\">";
@@ -477,8 +481,10 @@ block_dump(SWBuf& rendered,
 	min_length = 2 + max(slen, mlen);
 
 	rendered += *word;
+#ifdef USE_GTKMOZEMBED
 	for (wlen = strlen(*word); wlen <= min_length; ++wlen)
 		rendered += "&nbsp;";
+#endif /* USE_GTKMOZEMBED */
 
 	g_free((char *)*word);
 	*word = NULL;
