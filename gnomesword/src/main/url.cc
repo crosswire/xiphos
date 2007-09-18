@@ -399,6 +399,9 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 static gint show_strongs(const gchar * stype, const gchar * svalue, 
 			gboolean clicked)
 {	
+	if ((stype == NULL) || (*stype == '\0'))
+		return 1;	// it's a lemma only - no lexdict reference.
+
 	gchar *modbuf_viewer = NULL;
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
@@ -408,7 +411,7 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	gchar *buf = g_new(gchar,strlen(svalue));
 	guint delay;	
 	guint i;	
-	
+
 	val = g_strdup(svalue);
 	GS_message(("buf len = %d",strlen(buf)));
 	/*if((val1 = strchar(val,'|')) != NULL)	{
@@ -1148,8 +1151,10 @@ gint main_url_handler_gecko(const gchar * url)
 		if (strstr(action, "showStrongs")) {
 			if (strstr(work_buf[1],"Greek")) 
 				stype = "Greek";
-			else
+			else if (strstr(work_buf[1],"Hebrew")) 
 				stype = "Hebrew";
+			else
+				stype = "";
 			svalue = strstr(work_buf[2],"=");
 			++svalue;
 			GS_message(("type = %s", stype));
