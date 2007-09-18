@@ -2227,9 +2227,9 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_strongs), 
 				(DIALOG_DATA *)t);
 	}
-	if ((main_check_for_global_option(mod_name, "GBFMorph")) ||
-	    (main_check_for_global_option(mod_name, "ThMLMorph")) ||
-	    (main_check_for_global_option(mod_name, "OSISMorph"))) {
+	if (main_check_for_global_option(mod_name, "GBFMorph") ||
+	    main_check_for_global_option(mod_name, "ThMLMorph") ||
+	    main_check_for_global_option(mod_name, "OSISMorph")) {
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = t->ops->morphs;
@@ -2239,9 +2239,9 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_morphs), 
 				(DIALOG_DATA *)t);
 	}
-	if ((main_check_for_global_option(mod_name, "GBFFootnotes")) ||
-	    (main_check_for_global_option(mod_name, "ThMLFootnotes")) ||
-	    (main_check_for_global_option(mod_name, "OSISFootnotes"))) {
+	if (main_check_for_global_option(mod_name, "GBFFootnotes") ||
+	    main_check_for_global_option(mod_name, "ThMLFootnotes") ||
+	    main_check_for_global_option(mod_name, "OSISFootnotes")) {
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = t->ops->footnotes;
@@ -2261,7 +2261,8 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_greekaccents), 
 				(DIALOG_DATA *)t);
 	}
-	if (main_check_for_global_option(mod_name, "ThMLLemma")) {
+	if (main_check_for_global_option(mod_name, "ThMLLemma") ||
+	    main_check_for_global_option(mod_name, "OSISLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = t->ops->lemmas;
@@ -2272,7 +2273,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				(DIALOG_DATA *)t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
-	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
+	    main_check_for_global_option(mod_name, "OSISScripref")) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
 				    widget)->active = t->ops->scripturerefs;
@@ -2303,7 +2304,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				(DIALOG_DATA *)t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
-	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
+	    main_check_for_global_option(mod_name, "OSISHeadings")) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
 		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = t->ops->headings;
