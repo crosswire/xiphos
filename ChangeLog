@@ -1,5 +1,9 @@
 2007-09-17  karl <charcoal@users.sf.net>
 
+	* stop inadvertent hebrew match on greek lemma.
+
+2007-09-17  karl <charcoal@users.sf.net>
+
 	* hack on OSISLemma stuff for the sake of Osk's beta Tisch.
 
 2007-09-16  karl <charcoal@users.sf.net>
