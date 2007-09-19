@@ -1128,8 +1128,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTMLStreamStatus status;
 #endif
 
-	gboolean strongs_and_morph = (ops->strongs && ops->morphs);
-	gboolean strongs_or_morph  = (ops->strongs || ops->morphs);
+	gboolean strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+				      ops->morphs);
+	gboolean strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+				      ops->morphs);
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
 
@@ -1644,8 +1646,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 	g_free(file);
 
 	main_dialog_set_global_options((BackEnd*)be, ops);
-	strongs_and_morph = (ops->strongs && ops->morphs);
-	strongs_or_morph  = (ops->strongs || ops->morphs);
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
 	display_boundary = (strongs_or_morph ? 1 : 2);
 
 	g_string_printf(str,
