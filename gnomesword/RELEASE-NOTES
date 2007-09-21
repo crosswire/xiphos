@@ -4,7 +4,7 @@ GNOMESWORD RELEASE NOTES
 ________________________
 
 Release 2.3.0
-12 Sep 2007
+30 Sep 2007
 
 This is a test and evaluation release.
 
@@ -39,7 +39,7 @@ Behavioral matters:
     files are auto-updated when they are first used, with current
     global state applied to all tabs, and then the tabs file is re-saved.
 
- 3. Doublespace text and blocked Strong's+morph (in MozEmbed only).
+ 3. Doublespace text and blocked Strong's+morph (only with MozEmbed).
 
  4. Book and chapter headings in Bibles, stored in modules as
     pseudoverses in 0:0 (per book) and n:0 (per chapter), are presented
@@ -59,32 +59,33 @@ Behavioral matters:
  7. A base font size has been implemented; see Preferences.  All
     module font size choices are relative to this base.
 
- 8. Daily devotionals now get their own subtree in module lists in the
+ 8. Daily Devotionals now get their own subtree in module lists in the
     sidebar and module manager.
 
- 9. Additional keyboard shortcuts: Alt-B bookmark dialog, Alt-P detach
+ 9. In line with newly-defined module configuration keywords and
+    qualifiers, there are now also Maps and Images subtrees.
+
+10. Additional keyboard shortcuts: Alt-B bookmark dialog, Alt-P detach
     parallel dialog window.
 
-10. Locale names have been updated to accommodate more recent versions
+11. Locale names have been updated to accommodate more recent versions
     of existing modules (e.g. Farsi, Haitian Creole, Burmese, others).
 
-11. "About" boxes for modules handle UTF-8 properly.
+12. "About" boxes for modules handle UTF-8 properly.
 
-12. Duplicate install sources are now refused.
+13. Duplicate install sources are now refused.
 
-13. A module cache bug regarding mis-cached headers has been fixed.
+14. A module cache bug regarding mis-cached headers has been fixed.
 
-14. A font error in highlighted verses was fixed.
+15. A font error in highlighted verses was fixed.
 
-15. "About GnomeSword" is a bit more informative and useful, showing
+16. "About GnomeSword" is a bit more informative and useful, showing
     GnomeSword's web site as well as the display engine with which
     GnomeSword was built (gtkhtml3 -vs- MozEmbed).
 
-16. Many translation updates, plus new translations (e.g. Portuguese).
+17. Many translation updates, plus new translations (e.g. Portuguese).
 
 Known, unresolved flaws in this unstable test release:
-1781886  upcased greek in most cases in cygwin
-	 (only LXXTischUP displays properly)
 1781816  gtkhtml3 integration bugs
 	 (various problems specific to gtkhtml3 builds, involving
 	  failure to follow mouse clicks in certain circumstances)
@@ -94,6 +95,7 @@ Known, unresolved flaws in this unstable test release:
 Bug reports addressed since 2.2.3:
 1783315  Footnotes in verse 0 not shown
 1783300  locale names are out of date
+1781886  upcased greek in most cases in cygwin
 1769405  Can't open
 1767851  A Search with bounds in the Side pane locks GS (sword-svn)
 1764758  strongs on -> numbers verbalized
