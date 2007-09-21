@@ -1,3 +1,7 @@
+2007-09-20  karl <charcoal@users.sf.net>
+
+	* push sidebar search strings past a leading non-alpha char.
+
 2007-09-17  karl <charcoal@users.sf.net>
 
 	* stop inadvertent hebrew match on greek lemma.

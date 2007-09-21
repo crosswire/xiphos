@@ -291,9 +291,13 @@ static void mark_search_words(GString * str)
 		list = NULL;
 		/* seperate the search words and add them to a glist */
 		if ((token = strtok(searchbuf, " ")) != NULL) {
+			if (!isalpha(*token) && isalpha(*(token+1)))
+				token++;
 			list = g_list_append(list, token);
 			++count;
 			while ((token = strtok(NULL, " ")) != NULL) {
+				if (!isalpha(*token) && isalpha(*(token+1)))
+					token++;
 				list = g_list_append(list, token);
 				++count;
 			}
