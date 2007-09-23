@@ -1421,12 +1421,12 @@ void main_do_dialog_search(void)
 	search_type = 
 	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
-	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
-	   // GTK_TOGGLE_BUTTON(search1.rb_attributes)->active ? -4 : -3;
+	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 :
+	    GTK_TOGGLE_BUTTON(search1.rb_optimized)->active ? -4 : -3;
 	GS_message(("search_type = %d",search_type));
 
-	search_params = GTK_TOGGLE_BUTTON
-	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
+	search_params =
+	    GTK_TOGGLE_BUTTON(search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
 
 	if(search_type == -3) {
 		if(GTK_TOGGLE_BUTTON(search1.rb_strongs)->active) {
@@ -1463,29 +1463,26 @@ void main_do_dialog_search(void)
 	} else
 		search_mods = get_current_search_mod();
 	search_mods = g_list_first(search_mods);
-	
-	
+
 	settings.searchType = search_type;
-	//if (search_type != -4)
+
 	check_search_global_options();
 
-	
-	
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
 
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
-		
+
 		gui_set_progressbar_text(search1.progressbar, buf);
 
-		if (search_type == -2 || search_type == -4)
+		if (search_type == -4)	// possibly demote lucene->word search.
 			search_type = backendSearch->check_for_optimal_search(module);
 		GS_message(("search_type = %d",search_type));
 		
 		finds = backendSearch->do_module_search(module, 
-					(attribute_search_string)?
-					attribute_search_string:
-					search_string,
+					(attribute_search_string
+					 ? attribute_search_string
+					 : search_string),
 					search_type, 
 					search_params, 
 					TRUE);

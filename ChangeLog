@@ -1,5 +1,7 @@
 2007-09-22  karl <charcoal@users.sf.net>
 
+	* make multiword-vs-lucene search explicit, without auto-promotion
+	  (but possible demotion, lucene->multiword, in absence of index).
 	* fix #1800106: Crash when searching.
 
 2007-09-20  karl <charcoal@users.sf.net>
