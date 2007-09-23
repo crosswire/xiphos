@@ -1277,7 +1277,8 @@ int BackEnd::check_for_optimal_search(char * module_name) {
 	
 	if (!search_mod)
 		return -2;
-	if (search_mod->hasSearchFramework() && search_mod->isSearchOptimallySupported("God", -4, 0, 0))
+	if (search_mod->hasSearchFramework() &&
+	    search_mod->isSearchOptimallySupported("God", -4, 0, 0))
 		return -4; // ** indexed search - clucene ** 
 	else
 		return -2; // ** word search **
@@ -1305,12 +1306,12 @@ int BackEnd::do_module_search(char *module_name,
 				search_type,
 				search_params,
 				current_scope, 0,
-				(is_dialog)
-				?main_dialog_search_percent_update
-				:main_sidebar_search_percent_update,
+				(is_dialog
+				 ? main_dialog_search_percent_update
+				 : main_sidebar_search_percent_update),
 				(void *) &progressunits);
 	search_scope_list = results;
-	if(search_type == -4)
+	if (search_type == -4)
 		results.sort();
 	return results.Count();
 }

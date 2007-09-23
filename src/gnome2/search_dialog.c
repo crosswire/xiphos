@@ -2396,14 +2396,12 @@ void _create_search_dialog(void)
 	verse_selected = NULL;
 	_preview_on = TRUE;
 
-	glade_file =
-	    gui_general_user_file("search-dialog.glade", FALSE);
+	glade_file = gui_general_user_file("search-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
 	GS_message((glade_file));
 
 	/* build the widget */
 	gxml = glade_xml_new(glade_file, "dialog", NULL);
-	
 
 	gxml2 = glade_xml_new(glade_file, "dialog2", NULL);
 	search1.mod_sel_dialog = glade_xml_get_widget(gxml2, "dialog2");
@@ -2427,17 +2425,17 @@ void _create_search_dialog(void)
 			 G_CALLBACK(_on_dialog_response), NULL);
 	g_signal_connect(search1.dialog, "destroy",
 			 G_CALLBACK(_on_destroy), NULL);
-			 
+
 	button1 = glade_xml_get_widget(gxml, "button1");	
 	g_signal_connect(button1, "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);	
-			 
+
 	search1.label_search_module =
 	    glade_xml_get_widget(gxml, "label5");
 	search1.search_entry = glade_xml_get_widget(gxml, "entry1");
 	g_signal_connect(search1.search_entry, "activate",
 			 G_CALLBACK(on_button_begin_search), NULL);	
-	
+
 	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
 
 	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
@@ -2458,8 +2456,7 @@ void _create_search_dialog(void)
 	search1.listview_modules =
 	    glade_xml_get_widget(gxml, "treeview7");
 	_setup_listviews(search1.listview_modules, NULL);
-	
-	
+
 	/* scope radio buttons */
 	search1.rb_no_scope = glade_xml_get_widget(gxml, "radiobutton1");
 	g_signal_connect(search1.rb_no_scope, "toggled",
@@ -2480,33 +2477,24 @@ void _create_search_dialog(void)
 	g_signal_connect(search1.rb_custom_list, "toggled",
 			 G_CALLBACK(mod_list_toggled), NULL);	
 	/*  */
-	search1.rb_words = glade_xml_get_widget(gxml, "radiobutton9");
-	search1.rb_regexp = glade_xml_get_widget(gxml, "radiobutton10");
-	search1.rb_exact_phrase =
-	    glade_xml_get_widget(gxml, "radiobutton11");
-	    
-	    
+	search1.rb_words        = glade_xml_get_widget(gxml, "radiobutton9");
+	search1.rb_regexp       = glade_xml_get_widget(gxml, "radiobutton10");
+	search1.rb_exact_phrase = glade_xml_get_widget(gxml, "radiobutton11");
+	search1.rb_optimized    = glade_xml_get_widget(gxml, "radiobutton16");
+
 	/* attributes radio buttons */
-	search1.rb_attributes =
-	    glade_xml_get_widget(gxml, "radiobutton12");
-	search1.rb_strongs =
-	    glade_xml_get_widget(gxml, "radiobutton13");
-	search1.rb_morphs =
-	    glade_xml_get_widget(gxml, "radiobutton15");
-	search1.rb_footnotes =
-	    glade_xml_get_widget(gxml, "radiobutton14");
+	search1.rb_attributes = glade_xml_get_widget(gxml, "radiobutton12");
+	search1.rb_strongs    = glade_xml_get_widget(gxml, "radiobutton13");
+	search1.rb_morphs     = glade_xml_get_widget(gxml, "radiobutton15");
+	search1.rb_footnotes  = glade_xml_get_widget(gxml, "radiobutton14");
 
 	/*   */
-	search1.cb_case_sensitive =
-	    glade_xml_get_widget(gxml, "checkbutton1");
+	search1.cb_case_sensitive = glade_xml_get_widget(gxml, "checkbutton1");
 	    
 	/* display options check buttons */
-	search1.cb_include_strongs =
-	    glade_xml_get_widget(gxml, "checkbutton2");
-	search1.cb_include_morphs =
-	    glade_xml_get_widget(gxml, "checkbutton3");
-	search1.cb_include_footnotes =
-	    glade_xml_get_widget(gxml, "checkbutton4");
+	search1.cb_include_strongs   = glade_xml_get_widget(gxml, "checkbutton2");
+	search1.cb_include_morphs    = glade_xml_get_widget(gxml, "checkbutton3");
+	search1.cb_include_footnotes = glade_xml_get_widget(gxml, "checkbutton4");
 	    
 	toolbutton1 = glade_xml_get_widget(gxml, "toolbutton1");
 	g_signal_connect(toolbutton1, "clicked",
