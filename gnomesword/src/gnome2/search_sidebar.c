@@ -169,7 +169,10 @@ void gui_create_search_sidebar(void)
 	btnSearch = gtk_button_new_from_stock(GTK_STOCK_FIND);
 	gtk_widget_show (btnSearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
-	gtk_tooltips_set_tip (tooltips, btnSearch, _("Start searching"), NULL);
+	gtk_tooltips_set_tip(tooltips,
+			     btnSearch,
+			     _("Multi-word search: use +FirstWord +SecondWord"),
+			     NULL);
 	gtk_button_set_relief (GTK_BUTTON (btnSearch), GTK_RELIEF_NONE);
 
 	ss.progressbar_search = gtk_progress_bar_new();

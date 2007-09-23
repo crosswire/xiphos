@@ -83,7 +83,11 @@ Behavioral matters:
     GnomeSword's web site as well as the display engine with which
     GnomeSword was built (gtkhtml3 -vs- MozEmbed).
 
-17. Many translation updates, plus new translations (e.g. Portuguese).
+17. Both old style multi-word search and optimized ("lucene") search
+    are available in advanced search.  Sidebar search is optimized,
+    with a tooltip to assist on need for +First +Second for multi-word.
+
+18. Many translation updates, plus new translations (e.g. Portuguese).
 
 Known, unresolved flaws in this unstable test release:
 1781816  gtkhtml3 integration bugs
