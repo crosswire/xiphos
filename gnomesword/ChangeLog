@@ -1,3 +1,7 @@
+2007-09-22  karl <charcoal@users.sf.net>
+
+	* fix #1800106: Crash when searching.
+
 2007-09-20  karl <charcoal@users.sf.net>
 
 	* push sidebar search strings past a leading non-alpha char.
