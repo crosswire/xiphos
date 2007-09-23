@@ -62,6 +62,7 @@ struct _search_dialog1 {
 	GtkWidget *rb_words;
 	GtkWidget *rb_regexp;
 	GtkWidget *rb_exact_phrase;
+	GtkWidget *rb_optimized;
 	GtkWidget *rb_attributes;
 	GtkWidget *rb_strongs;
 	GtkWidget *rb_morphs;
