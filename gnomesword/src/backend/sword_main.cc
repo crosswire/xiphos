@@ -1283,16 +1283,23 @@ int BackEnd::check_for_optimal_search(char * module_name) {
 		return -2; // ** word search **
 }
 
-int BackEnd::do_module_search(char *module_name, const char *search_string, 
-				int search_type, int search_params, int is_dialog) {
+int BackEnd::do_module_search(char *module_name,
+			      const char *search_string,
+			      int search_type,
+			      int search_params,
+			      int is_dialog)
+{
 	char progressunits = 70;
-	results.ClearList();
+	results.clear();
 	//search_scope_list.ClearList()
 	search_mod = NULL;
 
 	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
+	if ((current_scope == &search_scope_list) &&
+	    (search_scope_list.Count() == 0))
+		return 0;
 	
 	results = search_mod->search(search_string,
 				search_type,
