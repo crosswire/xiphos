@@ -617,7 +617,9 @@
 				      <child>
 					<widget class="GtkRadioButton" id="radiobutton16">
 					  <property name="visible">True</property>
-					  <property name="tooltip" translatable="yes">Indexes must have been built beforehand</property>
+					  <property name="tooltip" translatable="yes">Fast, featureful, index-based search
+Indexes must have been built beforehand:
+See Module Manager's maintenance functions</property>
 					  <property name="can_focus">True</property>
 					  <property name="label" translatable="yes">Optimized ("Lucene")</property>
 					  <property name="use_underline">True</property>
