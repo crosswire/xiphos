@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-16 23:04+0200\n"
+"POT-Creation-Date: 2007-09-25 16:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,8 +587,8 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-#: ../src/main/display.cc:735 ../src/main/display.cc:780
-#: ../src/main/display.cc:818 ../src/main/display.cc:823
+#: ../src/main/display.cc:766 ../src/main/display.cc:811
+#: ../src/main/display.cc:849 ../src/main/display.cc:854
 msgid "Chapter"
 msgstr ""
 
@@ -688,7 +688,7 @@ msgstr ""
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1526
+#: ../src/main/search_dialog.cc:1523
 msgid "Search finished"
 msgstr ""
 
@@ -1004,14 +1004,14 @@ msgstr ""
 #: ../src/gnome2/bibletext.c:1017 ../src/gnome2/bibletext_dialog.c:1991
 #: ../src/gnome2/commentary.c:875 ../src/gnome2/commentary_dialog.c:1714
 #: ../src/gnome2/dictlex.c:927 ../src/gnome2/gbs.c:770
-#: ../ui/search-dialog.glade.h:40
+#: ../ui/search-dialog.glade.h:43
 msgid "Morphological Tags"
 msgstr ""
 
 #: ../src/gnome2/bibletext.c:1025 ../src/gnome2/bibletext_dialog.c:1999
 #: ../src/gnome2/commentary.c:883 ../src/gnome2/commentary_dialog.c:1722
 #: ../src/gnome2/dictlex.c:935 ../src/gnome2/gbs.c:778
-#: ../ui/search-dialog.glade.h:32
+#: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
 msgstr ""
 
@@ -1385,8 +1385,8 @@ msgstr ""
 msgid "Enter Word or Phrase"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:231 ../src/gnome2/search_sidebar.c:285
-#: ../ui/search-dialog.glade.h:37
+#: ../src/gnome2/find_dialog.c:231 ../src/gnome2/search_sidebar.c:288
+#: ../ui/search-dialog.glade.h:40
 msgid "Match case"
 msgstr ""
 
@@ -1394,8 +1394,8 @@ msgstr ""
 msgid "Search backwards"
 msgstr ""
 
-#: ../src/gnome2/find_dialog.c:247 ../src/gnome2/search_sidebar.c:250
-#: ../ui/search-dialog.glade.h:43
+#: ../src/gnome2/find_dialog.c:247 ../src/gnome2/search_sidebar.c:253
+#: ../ui/search-dialog.glade.h:47
 msgid "Regular expression"
 msgstr ""
 
@@ -2024,63 +2024,65 @@ msgstr ""
 msgid "Are you sure you want to delete:"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:172 ../ui/search-dialog.glade.h:59
-msgid "Start searching"
+#: ../src/gnome2/search_sidebar.c:174
+msgid ""
+"For multi-word search, use\n"
+"+FirstWord +SecondWord"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:188
+#: ../src/gnome2/search_sidebar.c:191
 msgid "Search Module"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:202
+#: ../src/gnome2/search_sidebar.c:205
 msgid "Bible"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:211 ../ui/prefs.glade.h:27
+#: ../src/gnome2/search_sidebar.c:214 ../ui/prefs.glade.h:27
 msgid "Commentary"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:225
+#: ../src/gnome2/search_sidebar.c:228
 msgid "Search Type"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:239 ../ui/search-dialog.glade.h:41
+#: ../src/gnome2/search_sidebar.c:242 ../ui/search-dialog.glade.h:44
 msgid "Multi word"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:258 ../ui/search-dialog.glade.h:31
+#: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:31
 msgid "Exact phrase"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:272
+#: ../src/gnome2/search_sidebar.c:275
 msgid "Search Options"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:300
+#: ../src/gnome2/search_sidebar.c:303
 msgid "Search Scope"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:313
+#: ../src/gnome2/search_sidebar.c:316
 msgid "No scope"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:323
+#: ../src/gnome2/search_sidebar.c:326
 msgid "Use bounds"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:332
+#: ../src/gnome2/search_sidebar.c:335
 msgid "Last search"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:347
+#: ../src/gnome2/search_sidebar.c:350
 msgid "Bounds"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:361
+#: ../src/gnome2/search_sidebar.c:364
 msgid "Lower"
 msgstr ""
 
-#: ../src/gnome2/search_sidebar.c:368
+#: ../src/gnome2/search_sidebar.c:371
 msgid "Upper"
 msgstr ""
 
@@ -2623,123 +2625,138 @@ msgstr ""
 msgid "Entire module"
 msgstr ""
 
-#: ../ui/search-dialog.glade.h:33
-msgid "In modules that have Footnotes"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:34
-msgid "In modules that have Morphological Tags"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:35
-msgid "In modules that have Strong's Numbers"
+#: ../ui/search-dialog.glade.h:32
+msgid ""
+"Fast, featureful, index-based search\n"
+"Indexes must have been built beforehand:\n"
+"See Module Manager's maintenance functions"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:36
-msgid "Make selections on the Attribute Search tab"
+msgid "In modules that have Footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:37
+msgid "In modules that have Morphological Tags"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:38
-msgid "Module Selection"
+msgid "In modules that have Strong's Numbers"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:39
-msgid "Module list"
+msgid "Make selections on the Attribute Search tab"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:41
+msgid "Module Selection"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:42
-msgid "Open a dialog to select modules to add to the list"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:44
-msgid "Remove the selected module from the list"
+msgid "Module list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:45
-msgid "Results"
+msgid "Open a dialog to select modules to add to the list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:46
-msgid "Save custom range"
-msgstr ""
-
-#: ../ui/search-dialog.glade.h:47
-msgid "Save search results as bookmarks"
+msgid "Optimized (\"Lucene\")"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:48
-msgid "Save the module list"
+msgid "Remove the selected module from the list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:49
-msgid "Search  Criteria"
+msgid "Results"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:50
-msgid "Search entire module"
+msgid "Save custom range"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:51
-msgid "Search for Morphological tags"
+msgid "Save search results as bookmarks"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:52
-msgid "Search for Strongs Numbers like G4442 or H1121"
+msgid "Save the module list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:53
-msgid "Search in footnotes"
+msgid "Search  Criteria"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:54
-msgid "Show Footnotes"
+msgid "Search entire module"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:55
-msgid "Show Morphological Tags"
+msgid "Search for Morphological tags"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:56
-msgid "Show Strong's Numbers"
+msgid "Search for Strongs Numbers like G4442 or H1121"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:57
-msgid "Show in main window"
+msgid "Search in footnotes"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:58
-msgid "Single module"
+msgid "Show Footnotes"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:59
+msgid "Show Morphological Tags"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:60
-msgid "Strongs Numbers"
+msgid "Show Strong's Numbers"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:61
-msgid "Use a custom module list for the search"
+msgid "Show in main window"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:62
-msgid "Use a custom range for the scope of the search"
+msgid "Single module"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:63
-msgid "Use a single module for the search"
+msgid "Start searching"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:64
-msgid "Use the current module list for the search"
+msgid "Strongs Numbers"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:65
-msgid "Use the results of the last search as the scope of the search"
+msgid "Use a custom module list for the search"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:66
-msgid "e.g. Matt-John;Rev4"
+msgid "Use a custom range for the scope of the search"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:67
+msgid "Use a single module for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:68
+msgid "Use the current module list for the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:69
+msgid "Use the results of the last search as the scope of the search"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:70
+msgid "e.g. Matt-John;Rev4"
+msgstr ""
+
+#: ../ui/search-dialog.glade.h:71
 msgid "for "
 msgstr ""
 
@@ -2844,4 +2861,16 @@ msgstr ""
 
 #: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:13
 msgid "Save using the PersistFile interface"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:1
+msgid "1"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:2
+msgid "<b>Revelation of John</b>"
+msgstr ""
+
+#: ../ui/navbar_versekey.glade.h:3
+msgid "Drop down history list"
 msgstr ""
