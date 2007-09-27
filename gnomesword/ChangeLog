@@ -1,3 +1,7 @@
+2007-09-26  karl <charcoal@users.sf.net>
+
+	* correct previewer link color on book references.
+
 2007-09-22  karl <charcoal@users.sf.net>
 
 	* make multiword-vs-lucene search explicit, without auto-promotion
