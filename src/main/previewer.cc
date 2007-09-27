@@ -414,7 +414,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 					"<font color=\"%s\">[%s] %s </font></a><br />",
 					mod_name,
 					key,
-					settings.bible_verse_num_color,
+					settings.link_color,
 					mod_name, key);
 		} else {
 			g_string_printf(tmp_str,
@@ -423,7 +423,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 					backend->
 					module_description(mod_name),
 					mod_name,
-					settings.bible_verse_num_color,
+					settings.link_color,
 					mod_name, key);
 		}
 		str = g_string_append(str, tmp_str->str);
