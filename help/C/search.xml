@@ -62,7 +62,13 @@
 			a regular expression depending on the type of search selected. When 
 			the search key is entered and all other selections in the search dialog 
 			are complete, click the <guibutton>Find</guibutton> button to begin 
-			the search.</para>
+			the search.
+			</para>
+			<para>
+			This search uses the optimized search method (see next section) if
+			the module has previously been indexed, so bear in mind the additional
+			syntax required to do multi-word searches (e.g. +FirstWord +SecondWord).
+			</para>
 			</sect3>
 		
 		<sect3 id="gnomesword-search-modselect">
@@ -189,6 +195,13 @@
 		In <guimenuitem>Advanced Search</guimenuitem>, much more complex queries can be constructed, involving custom search ranges,
 		custom lists of modules over which to search, regular expression matching (see next section), and attribute-based searches
 		such as are found in footnotes or Strong's Hebrew and Greek dictionary references.
+	   </para>
+
+	   <para>
+		The default search is multi-word, a somewhat slow and blunt search through module text.  Also available is an optimized
+		search based on the Lucene indexing and search library.  A web search will provide several references to the syntax needed
+		to put to use the power of an optimized Lucene search.  In order to use the optimized search, the index must be constructed
+		beforehand: Please see the preceding section on the Module Manager regarding the Maintenance functions, including indexing.
 	   </para>
 
 	   <para>
