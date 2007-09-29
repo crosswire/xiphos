@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-
+#include <osishtmlhref.h>
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
@@ -1132,6 +1132,17 @@ char GTKChapDisp::Display(SWModule &imodule)
 				      ops->morphs);
 	gboolean strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
 				      ops->morphs);
+	if (strongs_and_morph) {
+		for (FilterList::const_iterator it =
+			 imodule.getRenderFilters().begin();
+		     it != imodule.getRenderFilters().end();
+		     it++) {
+			OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
+			if (f)
+				f->setMorphFirst();
+		}
+	}
+
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
 
@@ -1651,6 +1662,16 @@ char DialogChapDisp::Display(SWModule &imodule)
 	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
 			     ops->morphs);
 	display_boundary = (strongs_or_morph ? 1 : 2);
+	if (strongs_and_morph) {
+		for (FilterList::const_iterator it =
+			 imodule.getRenderFilters().begin();
+		     it != imodule.getRenderFilters().end();
+		     it++) {
+			OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
+			if (f)
+				f->setMorphFirst();
+		}
+	}
 
 	g_string_printf(str,
 			HTML_START

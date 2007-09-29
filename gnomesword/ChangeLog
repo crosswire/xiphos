@@ -1,3 +1,7 @@
+2007-09-29  karl <charcoal@users.sf.net>
+
+	* use new Sword setMorphFirst() in text display.
+
 2007-09-26  karl <charcoal@users.sf.net>
 
 	* correct previewer link color on book references.
