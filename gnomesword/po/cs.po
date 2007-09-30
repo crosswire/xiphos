@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword 2 2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-06 22:01+0100\n"
-"PO-Revision-Date: 2007-09-25 18:45+0100\n"
+"PO-Revision-Date: 2007-09-30 21:40+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -588,10 +588,10 @@ msgstr "Čínština"
 msgid "Zulu"
 msgstr ""
 
-#: ../src/main/display.cc:766
-#: ../src/main/display.cc:811
-#: ../src/main/display.cc:849
-#: ../src/main/display.cc:854
+#: ../src/main/display.cc:723
+#: ../src/main/display.cc:768
+#: ../src/main/display.cc:836
+#: ../src/main/display.cc:841
 msgid "Chapter"
 msgstr "Kapitola"
 
