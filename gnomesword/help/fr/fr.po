@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-08 10:22+0200\n"
-"PO-Revision-Date: 2007-09-08 10:35+0200\n"
+"POT-Creation-Date: 2007-09-30 19:26+0200\n"
+"PO-Revision-Date: 2007-09-30 20:52+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
-"Language-Team: Français\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,8 +30,8 @@ msgstr "sword3.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:62(None) ../C/gnomesword.xml:77(None)
-msgid "@@image: 'figures/interface.png'; md5=edb4d35181b49764e2d12d2befe20ca2"
-msgstr "/interface.png"
+msgid "@@image: 'figures/interface.png'; md5=8a25b1bdc20db3e81a6ba9e2cb5bdf57"
+msgstr "interface.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -61,7 +61,7 @@ msgstr "interface_toolbar.png"
 #: ../C/gnomesword.xml:148(None)
 msgid ""
 "@@image: 'figures/interface_sidepane.png'; "
-"md5=1d911663de4426378ab4a6cf9ef012a6"
+"md5=1a9e0a7b0b1a74e35e49c56004988b37"
 msgstr "interface_sidepane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -250,9 +250,10 @@ msgstr "interface_searchpane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:171(None)
+#: ../C/gnomesword.xml:177(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/search_search.png'; md5=2922ad00896a502e4682e17395bbc15a"
+"@@image: 'figures/search_search.png'; md5=1a4e617b4b6599ed5768ccb794fa823f"
 msgstr "search_search.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -2443,23 +2444,23 @@ msgstr ""
 msgid "Search Key Entry box"
 msgstr "Boite de saisie de l'expression à rechercher"
 
-#: ../C/gnomesword.xml:38(para) ../C/gnomesword.xml:69(title)
-#: ../C/search.xml:38(para) ../C/search.xml:69(title)
+#: ../C/gnomesword.xml:38(para) ../C/gnomesword.xml:75(title)
+#: ../C/search.xml:38(para) ../C/search.xml:75(title)
 msgid "Search Module Selector"
 msgstr "Sélecteur du module objet de la requête"
 
-#: ../C/gnomesword.xml:43(para) ../C/gnomesword.xml:77(title)
-#: ../C/search.xml:43(para) ../C/search.xml:77(title)
+#: ../C/gnomesword.xml:43(para) ../C/gnomesword.xml:83(title)
+#: ../C/search.xml:43(para) ../C/search.xml:83(title)
 msgid "Search Type Selector"
 msgstr "Sélecteur du type de requête"
 
-#: ../C/gnomesword.xml:48(para) ../C/gnomesword.xml:115(title)
-#: ../C/search.xml:48(para) ../C/search.xml:115(title)
+#: ../C/gnomesword.xml:48(para) ../C/gnomesword.xml:121(title)
+#: ../C/search.xml:48(para) ../C/search.xml:121(title)
 msgid "Search Options Checkbox"
 msgstr "Case à cocher des options de la requête"
 
-#: ../C/gnomesword.xml:53(para) ../C/gnomesword.xml:122(title)
-#: ../C/search.xml:53(para) ../C/search.xml:122(title)
+#: ../C/gnomesword.xml:53(para) ../C/gnomesword.xml:128(title)
+#: ../C/search.xml:53(para) ../C/search.xml:128(title)
 msgid "Search Scope Selector"
 msgstr "Sélecteur de la plage de versets"
 
@@ -2482,7 +2483,15 @@ msgstr ""
 "le bouton <guimenuitem>Rechercher</guimenuitem> démarre la séquence de "
 "recherche."
 
-#: ../C/gnomesword.xml:70(para) ../C/search.xml:70(para)
+#: ../C/gnomesword.xml:67(para) ../C/search.xml:67(para)
+msgid ""
+"This search uses the optimized search method (see next section) if the "
+"module has previously been indexed, so bear in mind the additional syntax "
+"required to do multi-word searches (e.g. +FirstWord +SecondWord)."
+msgstr "La requête employe une méthode de recherche optimisée plus rapide"
+"(Voir la section suivante) si le module concerné a été précédemment indexé."
+
+#: ../C/gnomesword.xml:76(para) ../C/search.xml:76(para)
 msgid ""
 "Allows selection of which modules you would like to search. Select "
 "<guibutton>Bible</guibutton> to search Bible versions or "
@@ -2495,7 +2504,7 @@ msgstr ""
 "pour le module de commentaires. La requête ne s'exécute que dans les modules "
 "en cours de consultation."
 
-#: ../C/gnomesword.xml:78(para) ../C/search.xml:78(para)
+#: ../C/gnomesword.xml:84(para) ../C/search.xml:84(para)
 msgid ""
 "Allows selection of the type of search. There are three search types "
 "available:"
@@ -2503,11 +2512,11 @@ msgstr ""
 "Permet se sélectionner le type de requête. Trois types de requête sont "
 "possibles :"
 
-#: ../C/gnomesword.xml:83(guibutton) ../C/search.xml:83(guibutton)
+#: ../C/gnomesword.xml:89(guibutton) ../C/search.xml:89(guibutton)
 msgid "Multi word"
 msgstr "Mots multiples"
 
-#: ../C/gnomesword.xml:84(para) ../C/search.xml:84(para)
+#: ../C/gnomesword.xml:90(para) ../C/search.xml:90(para)
 msgid ""
 "This type will match any verse that has all the words in the search key, "
 "regardless of where they appear in the verse."
@@ -2516,11 +2525,11 @@ msgstr ""
 "l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
 "apparaissent dans le verset."
 
-#: ../C/gnomesword.xml:89(guibutton) ../C/search.xml:89(guibutton)
+#: ../C/gnomesword.xml:95(guibutton) ../C/search.xml:95(guibutton)
 msgid "Regular expression"
 msgstr "Expression rationnelle"
 
-#: ../C/gnomesword.xml:90(para) ../C/search.xml:90(para)
+#: ../C/gnomesword.xml:96(para) ../C/search.xml:96(para)
 msgid ""
 "This search uses a regular expression as a search key. A regular expression "
 "is a pattern used to match a string of text. A regular expression can be "
@@ -2535,7 +2544,7 @@ msgstr ""
 "permet de retrouver les passages qui contiennent les mots Aiah, Ahaziah, "
 "Athaliah et Amariah."
 
-#: ../C/gnomesword.xml:97(para) ../C/search.xml:97(para)
+#: ../C/gnomesword.xml:103(para) ../C/search.xml:103(para)
 msgid ""
 "A complete discussion of regular expressions is beyond the scope of this "
 "manual, but more information can be found in the grep man page."
@@ -2544,11 +2553,11 @@ msgstr ""
 "de ce manuel, mais cependant plus d'informations à ce sujet peuvent être "
 "obtenues en parcourant le manuel de <command>grep</command>."
 
-#: ../C/gnomesword.xml:102(guibutton) ../C/search.xml:102(guibutton)
+#: ../C/gnomesword.xml:108(guibutton) ../C/search.xml:108(guibutton)
 msgid "Exact phrase"
 msgstr "Phrase exacte"
 
-#: ../C/gnomesword.xml:103(para) ../C/search.xml:103(para)
+#: ../C/gnomesword.xml:109(para) ../C/search.xml:109(para)
 msgid ""
 "This type will match the search key exatly as entered. If the search key is "
 "<userinput>\n"
@@ -2563,7 +2572,7 @@ msgstr ""
 "emphasis>&nbsp;», mais pas «­­&nbsp;<emphasis>en</emphasis> toute  "
 "<emphasis>vérité</emphasis>&nbsp;»."
 
-#: ../C/gnomesword.xml:116(para) ../C/search.xml:116(para)
+#: ../C/gnomesword.xml:122(para) ../C/search.xml:122(para)
 msgid ""
 "Allows selecting of search options. The only available option is "
 "<guibutton>Match case</guibutton>. Check this box to make the search case "
@@ -2573,7 +2582,7 @@ msgstr ""
 "<guimenuitem>Respecter la casse</guimenuitem>. Cocher cette boite rend la "
 "recherche sensible à la casse des caractères."
 
-#: ../C/gnomesword.xml:123(para) ../C/search.xml:123(para)
+#: ../C/gnomesword.xml:129(para) ../C/search.xml:129(para)
 msgid ""
 "Allows defining the range within the specificed module that will be "
 "searched. There are three search scopes available:"
@@ -2581,21 +2590,21 @@ msgstr ""
 "Permet de définir la plage de versets à parcourir dans le module spécifié. "
 "Trois plages de recherche sont possibles :"
 
-#: ../C/gnomesword.xml:127(guibutton) ../C/search.xml:127(guibutton)
+#: ../C/gnomesword.xml:133(guibutton) ../C/search.xml:133(guibutton)
 msgid "No scope"
 msgstr "Sans limites"
 
-#: ../C/gnomesword.xml:128(para) ../C/search.xml:128(para)
+#: ../C/gnomesword.xml:134(para) ../C/search.xml:134(para)
 msgid "This button causes the search to to include the entire module."
 msgstr ""
 "Sélectionner ce bouton implique que la requête s'exécute sur l'ensemble des "
 "versets."
 
-#: ../C/gnomesword.xml:133(guibutton) ../C/search.xml:133(guibutton)
+#: ../C/gnomesword.xml:139(guibutton) ../C/search.xml:139(guibutton)
 msgid "Use bounds"
 msgstr "Limites définies"
 
-#: ../C/gnomesword.xml:134(para) ../C/search.xml:134(para)
+#: ../C/gnomesword.xml:140(para) ../C/search.xml:140(para)
 msgid ""
 "Selecting this button produces two dropdown selector boxes marked "
 "<guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Select the first "
@@ -2613,7 +2622,7 @@ msgstr ""
 "limite <guilabel>Haute</guilabel> en incluant tous les versets situés entre "
 "les deux limites."
 
-#: ../C/gnomesword.xml:143(para) ../C/search.xml:143(para)
+#: ../C/gnomesword.xml:149(para) ../C/search.xml:149(para)
 msgid ""
 "Chapter and verse numbers can be entered into the search bound boxes as well "
 "to further narrow the search."
@@ -2621,11 +2630,11 @@ msgstr ""
 "Des numéros de chapitres ou de versets peuvent aussi être saisis dans les "
 "deux zones basse et haute  afin de mieux cibler la recherche."
 
-#: ../C/gnomesword.xml:149(guibutton) ../C/search.xml:149(guibutton)
+#: ../C/gnomesword.xml:155(guibutton) ../C/search.xml:155(guibutton)
 msgid "Last search"
 msgstr "Dernière requête"
 
-#: ../C/gnomesword.xml:150(para) ../C/search.xml:150(para)
+#: ../C/gnomesword.xml:156(para) ../C/search.xml:156(para)
 msgid ""
 "Select this button to do a new search including only the verses returned as "
 "a result of the last search. Use this with a new search key to narrow the "
@@ -2636,11 +2645,11 @@ msgstr ""
 "nouvelle expression, cette méthode permet de réduire la liste des versets "
 "restitués."
 
-#: ../C/gnomesword.xml:160(title)
+#: ../C/gnomesword.xml:166(title)
 msgid "Advanced Searches"
 msgstr "Recherche avancée"
 
-#: ../C/gnomesword.xml:161(para)
+#: ../C/gnomesword.xml:167(para)
 msgid ""
 "More complicated searches might require the use of the advanced search "
 "functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem>."
@@ -2650,15 +2659,15 @@ msgstr ""
 "l'utilisation du  menu <menuchoice><guimenuitem>Éditer</"
 "guimenuitem><guimenuitem>Recherche avancée</guimenuitem></menuchoice>."
 
-#: ../C/gnomesword.xml:167(title)
+#: ../C/gnomesword.xml:173(title)
 msgid "The Advanced Search Dialogue"
 msgstr "La fenêtre de recherche avancée"
 
-#: ../C/gnomesword.xml:180(phrase)
+#: ../C/gnomesword.xml:186(phrase)
 msgid "The Advanced Search Dialog"
 msgstr "La fenêtre de recherche avancée"
 
-#: ../C/gnomesword.xml:188(para)
+#: ../C/gnomesword.xml:194(para)
 msgid ""
 "In <guimenuitem>Advanced Search</guimenuitem>, much more complex queries can "
 "be constructed, involving custom search ranges, custom lists of modules over "
@@ -2672,7 +2681,39 @@ msgstr ""
 "s'effectuer sur les attributs du texte comme les notes de bas de page ou les "
 "références de Strong des dictionnaires grec et hébreu."
 
-#: ../C/gnomesword.xml:194(para)
+#: ../C/gnomesword.xml:200(para)
+msgid ""
+"The default search is multi-word, a somewhat slow and blunt search through "
+"module text. Also available is an optimized search based on the Lucene "
+"indexing and search library. A web search will provide several references to "
+"the syntax needed to put to use the power of an optimized Lucene search. In "
+"order to use the optimized search, the index must be constructed beforehand: "
+"Please see the preceding section on the Module Manager regarding the "
+"Maintenance functions, including indexing."
+msgstr "La requête par défaut est de type multi-mots, une recherche quelque peu "
+"lente et rustique. Une requête optimisée basée sur le moteur de recherche "
+"textuelle Lucene est également disponible. La syntaxe acceptée par Lucene "
+"pour les requêtes se révèle particulièrement puissante, bien que relativement "
+"simple. Outre les traditionnels modificateurs «&nbsp;+&nbsp;» et "
+"«&nbsp;-&nbsp;», les jokers «&nbsp;*&nbsp;» et «&nbsp;?&nbsp;», "
+"ainsi que les opérateurs booléens «&nbsp;AND&nbsp;», «&nbsp;OR&nbsp;» "
+"et «&nbsp;NOT&nbsp;», nous avons accès à deux fonctionnalités "
+"particulièrement intéressantes. Ainsi, l'accent circonflexe, placé à la fin d'un "
+"mot, permet d'augmenter la priorité d'un mot, dans la requête "
+"«&nbsp;Christ OR Jésus^&nbsp;», Lucene choisira en priorité le terme "
+"«&nbsp;Jésus&nbsp;». Cet opérateur peut être suivi d'un chiffre positif "
+"définissant la valeur de la priorité. A cela s'ajoute l'opérateur tilde "
+"«&nbsp;~&nbsp;» qui trouve un emploi dans deux situations. Dans "
+"l'exemple «&nbsp;Jésus Christ~5&nbsp;», le moteur cherchera les termes "
+"Jésus et Christ situés à une distance de moins de 5 mots l'un de l'autre. "
+"Par contre, la recherche de «&nbsp;forme~&nbsp;» renverra tous les mots "
+"similaires à «&nbsp;forme&nbsp;», ce qui inclut par exemple "
+"«&nbsp;ferme&nbsp;» ou «&nbsp;formel&nbsp;». Enfin, nous pouvons effectuer "
+"des requêtes sur des champs particuliers des documents en préfixant les "
+"requêtes par le nom du champ suivi du caractère deux-points, "
+"comme dans «&nbsp;titre:Jean&nbsp;». "
+
+#: ../C/gnomesword.xml:207(para)
 msgid ""
 "By default, two standard search ranges are defined, for Old and New "
 "Testament; you may wish to define others for e.g. \"Gospels\" or \"Paul's "
@@ -2692,7 +2733,7 @@ msgstr ""
 "d'exécuter des requêtes sur les livres ou les dictionnaires, dans n'importe "
 "quelle combinaison."
 
-#: ../C/gnomesword.xml:202(para)
+#: ../C/gnomesword.xml:215(para)
 msgid ""
 "Note the tooltip in the screenshot above, for Attributes search. This "
 "qualifier is used to perform searches on attributes that are carried with "
@@ -2715,7 +2756,7 @@ msgstr ""
 "grec n° 140, en utilisant «­­&nbsp;G140&nbsp;», retourne  Matthieu 12:18 comme "
 "résultat."
 
-#: ../C/gnomesword.xml:211(para)
+#: ../C/gnomesword.xml:224(para)
 msgid ""
 "Changes to some of the settings (e.g. scope of search, searched modules, "
 "etc.) in Advanced Search will affect the simple search via the side pane but "
@@ -2726,11 +2767,11 @@ msgstr ""
 "options de la recherche simple du <interface>volet latéral</interface> mais "
 "pas l'inverse."
 
-#: ../C/gnomesword.xml:218(title)
+#: ../C/gnomesword.xml:231(title)
 msgid "Search Syntax using Regular Expression"
 msgstr "Syntaxe des expressions rationnelles utilisées en clé de recherche"
 
-#: ../C/gnomesword.xml:220(para)
+#: ../C/gnomesword.xml:233(para)
 msgid ""
 "Regular expression searches provide a way to do simple or complex searches "
 "for strings that match a pattern or set of patterns (branches) separated by "
@@ -2762,7 +2803,7 @@ msgstr ""
 "les deux mots. Une recherche de «­­&nbsp;ne pas&nbsp;» trouvera aussi les "
 "versets contenant «­­&nbsp;<emphasis>ne pas</emphasis>se&nbsp;»."
 
-#: ../C/gnomesword.xml:223(para)
+#: ../C/gnomesword.xml:236(para)
 msgid ""
 "The power of Regular Expressions is in the patterns (or templates) used to "
 "define a search. A pattern consists of ordinary characters and some special "
@@ -2779,7 +2820,7 @@ msgstr ""
 "convertir les caractères spéciaux en caractères ordinaires et inversement "
 "les caractères ordinaires en caractères spéciaux."
 
-#: ../C/gnomesword.xml:228(para)
+#: ../C/gnomesword.xml:241(para)
 msgid ""
 "Example: the pattern \"<emphasis>i. love\\.</emphasis>\" will find sentences "
 "that end with \"h<emphasis>i</emphasis>s <emphasis>love</emphasis>\" or "
@@ -2801,15 +2842,15 @@ msgstr ""
 "suivant ne doit pas être considéré comme un caractère spécial, mais comme un "
 "point ordinaire."
 
-#: ../C/gnomesword.xml:236(title)
+#: ../C/gnomesword.xml:249(title)
 msgid "Rules for Regular Expression Search Requests"
 msgstr "Règles des requêtes de recherche à l'aide des expressions rationnelles"
 
-#: ../C/gnomesword.xml:238(para)
+#: ../C/gnomesword.xml:251(para)
 msgid ". The period matches any character."
 msgstr "«­­&nbsp;.&nbsp;» Le point remplace n'importe quel caractère."
 
-#: ../C/gnomesword.xml:239(para)
+#: ../C/gnomesword.xml:252(para)
 msgid ""
 "* The asterisk matches 0 or more characters of the preceding: set, character "
 "or indicated character."
@@ -2818,7 +2859,7 @@ msgstr ""
 "d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro "
 "caractère."
 
-#: ../C/gnomesword.xml:241(para)
+#: ../C/gnomesword.xml:254(para)
 msgid ""
 "+ The plus sign matches 1 or more characters of the preceding: set, "
 "character or indicated character."
@@ -2827,7 +2868,7 @@ msgstr ""
 "précédente expression régulière. Il joue un rôle similaire à «­­&nbsp;"
 "*&nbsp;» (astérisque), mais ne correspond pas à zéro occurrence."
 
-#: ../C/gnomesword.xml:243(para)
+#: ../C/gnomesword.xml:256(para)
 msgid ""
 "? The question mark matches 0 or 1 character of the preceding: set, "
 "character or indicated character."
@@ -2836,37 +2877,37 @@ msgstr ""
 "de la précédente expression rationnelle. Il est généralement utilisé pour "
 "correspondre à des caractères uniques."
 
-#: ../C/gnomesword.xml:245(para)
+#: ../C/gnomesword.xml:258(para)
 msgid ""
 "[ ] Square brackets match any one of the characters specified inside [ ]."
 msgstr ""
 "«­­&nbsp;[...]&nbsp;» Les crochets englobent un ensemble de caractères pour "
 "réaliser une correspondance dans une seule expression rationnelle."
 
-#: ../C/gnomesword.xml:247(para)
+#: ../C/gnomesword.xml:260(para)
 msgid "^ A caret as the first character inside [ ] means NOT."
 msgstr ""
 "«­­&nbsp;^&nbsp;» La puissance comme premier caractère à l'intérieur "
 "d'accolades inverse la signification de l'ensemble des caractères de  "
 "l'expression rationnelle."
 
-#: ../C/gnomesword.xml:248(para)
+#: ../C/gnomesword.xml:261(para)
 msgid "^ A caret beginning a pattern anchors the beginning of a line."
 msgstr ""
 "«­­&nbsp;^&nbsp;» La puissance en dehors d'accolades correspond au début d'une "
 "ligne."
 
-#: ../C/gnomesword.xml:250(para)
+#: ../C/gnomesword.xml:263(para)
 msgid "$ A dollar at the end of a pattern anchors the end of a line."
 msgstr ""
 "«­­&nbsp;$&nbsp;» Le signe dollar à la fin d'une expression rationnelle "
 "correspond à la fin d'une ligne."
 
-#: ../C/gnomesword.xml:252(para)
+#: ../C/gnomesword.xml:265(para)
 msgid "| A vertical bar means logical OR."
 msgstr "«­­&nbsp;|&nbsp;» La barre verticale signifie OU logique"
 
-#: ../C/gnomesword.xml:253(para)
+#: ../C/gnomesword.xml:266(para)
 msgid ""
 "( ) Parentheses enclose expressions for grouping. <emphasis>Not supported!</"
 "emphasis>"
@@ -2874,7 +2915,7 @@ msgstr ""
 "«­­&nbsp;()&nbsp;» Les parenthèses servent à regrouper des expressions. "
 "<emphasis>Non supporté dans &appname;</emphasis>"
 
-#: ../C/gnomesword.xml:255(para)
+#: ../C/gnomesword.xml:268(para)
 msgid ""
 "\\ A backslash can be used prior to any special character to match that "
 "character."
@@ -2882,7 +2923,7 @@ msgstr ""
 "«­­&nbsp;\\&nbsp;» L'antislash échappe un caractère spécial, ce qui signifie "
 "que le caractère est interprété littéralement."
 
-#: ../C/gnomesword.xml:257(para)
+#: ../C/gnomesword.xml:270(para)
 msgid ""
 "\\ A backslash can be used prior to an ordinary character to make it a "
 "special character."
@@ -2890,11 +2931,11 @@ msgstr ""
 "«­­&nbsp;\\&nbsp;» L'antislash utilisé devant un caractère ordinaire, le "
 "transforme en caractère spécial.."
 
-#: ../C/gnomesword.xml:262(title)
+#: ../C/gnomesword.xml:275(title)
 msgid "The Period"
 msgstr "Le point"
 
-#: ../C/gnomesword.xml:264(para)
+#: ../C/gnomesword.xml:277(para)
 msgid ""
 "The Period \".\" will match any single character even a space or other non-"
 "alphabet character. <emphasis>s.t</emphasis> matches <emphasis>s</"
@@ -2914,11 +2955,11 @@ msgstr ""
 "qui retourne 1133, 11333 mais pas 13 (un caractère supplémentaire est "
 "manquant)."
 
-#: ../C/gnomesword.xml:278(title)
+#: ../C/gnomesword.xml:291(title)
 msgid "The Asterisk"
 msgstr "L'astérisque"
 
-#: ../C/gnomesword.xml:280(para)
+#: ../C/gnomesword.xml:293(para)
 msgid ""
 "The asterisk \"*\" matches zero or more characters of the preceding: set, "
 "character or indicated character. Using a period asterisk combination \".*\" "
@@ -2933,11 +2974,11 @@ msgstr ""
 "caractère. Par exemple : «­­&nbsp;1133*&nbsp;» correspond à 11 plus un ou plus "
 "de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de suite."
 
-#: ../C/gnomesword.xml:292(title)
+#: ../C/gnomesword.xml:305(title)
 msgid "The Plus Sign"
 msgstr "Le signe plus"
 
-#: ../C/gnomesword.xml:293(para)
+#: ../C/gnomesword.xml:306(para)
 msgid ""
 "The Plus Sign \"+\" matches one or more characters of the preceding: set, "
 "character or indicated character. Using a period and plus sign combination "
@@ -2950,11 +2991,11 @@ msgstr ""
 "précédente expression rationnelle. Il joue un rôle similaire à «­­&nbsp;"
 "*&nbsp;» (astérisque), mais ne correspond pas à zéro occurrence."
 
-#: ../C/gnomesword.xml:304(title)
+#: ../C/gnomesword.xml:317(title)
 msgid "The Question Mark"
 msgstr "Le point d'interrogation."
 
-#: ../C/gnomesword.xml:305(para)
+#: ../C/gnomesword.xml:318(para)
 msgid ""
 "The Question Mark \"?\"matches zero or one character of the preceding: set, "
 "character or indicated character. <emphasis>be?n</emphasis> matches "
@@ -2966,11 +3007,11 @@ msgstr ""
 "instance au·plus·de la précédente expression rationnelle. Il est "
 "généralement utilisé pour correspondre à des caractères uniques."
 
-#: ../C/gnomesword.xml:314(title)
+#: ../C/gnomesword.xml:327(title)
 msgid "The Square Brackets"
 msgstr "Les crochets"
 
-#: ../C/gnomesword.xml:315(para)
+#: ../C/gnomesword.xml:328(para)
 msgid ""
 "The Square Brackets \"[]\" enclose a set of characters that can match. The "
 "period, asterisk, plus sign and question mark are not special inside the "
@@ -3002,11 +3043,11 @@ msgstr ""
 "correspondent à des modèles de mots communs. «­­&nbsp;[Oo][Uu][Ii]&nbsp;» "
 "correspond à oui, Oui, OUI, oUi et ainsi de suite. "
 
-#: ../C/gnomesword.xml:337(title)
+#: ../C/gnomesword.xml:350(title)
 msgid "The Caret first in Square Brackets"
 msgstr "La puissance en premier caractère entre des crochets"
 
-#: ../C/gnomesword.xml:338(para)
+#: ../C/gnomesword.xml:351(para)
 msgid ""
 "If the Caret is the first character after the left bracket (\"[^\") it means "
 "NOT. <emphasis>s[^io]t</emphasis> matches <emphasis>set, sat</emphasis>, "
@@ -3017,11 +3058,11 @@ msgstr ""
 "entre crochets, il  inverse la signification de l'ensemble des caractères de "
 "l'expression rationnelle."
 
-#: ../C/gnomesword.xml:345(title)
+#: ../C/gnomesword.xml:358(title)
 msgid "The Caret as Start of Line Anchor"
 msgstr "La puissance correspond au début d'une ligne"
 
-#: ../C/gnomesword.xml:346(para)
+#: ../C/gnomesword.xml:359(para)
 msgid ""
 "If the Caret is the first character in a pattern (\"^xxx\") it anchors the "
 "pattern to the start of a line. Any match must be at the beginning of a "
@@ -3042,11 +3083,11 @@ msgstr ""
 "est préférable d'utiliser : «­­&nbsp;<emphasis>^....Au commencement</"
 "emphasis>&nbsp;»)."
 
-#: ../C/gnomesword.xml:359(title)
+#: ../C/gnomesword.xml:372(title)
 msgid "The Dollar Sign as End of Line Anchor"
 msgstr "Le signe dollar recherche en fin de ligne"
 
-#: ../C/gnomesword.xml:360(para)
+#: ../C/gnomesword.xml:373(para)
 msgid ""
 "If the Dollar Sign is the last character (\"xxx$\") in a pattern it anchors "
 "the pattern to the end of a line. Any match must be at the end of a line. "
@@ -3068,11 +3109,11 @@ msgstr ""
 "\\....$&nbsp;», «Amen\\..........$&nbsp;», ou même «­­&nbsp;Amen"
 "\\....................$&nbsp;»)."
 
-#: ../C/gnomesword.xml:374(title)
+#: ../C/gnomesword.xml:387(title)
 msgid "The Vertical Bar"
 msgstr "La barre verticale"
 
-#: ../C/gnomesword.xml:375(para)
+#: ../C/gnomesword.xml:388(para)
 msgid ""
 "The Vertical Bar \"|\" between patterns means OR. <emphasis>John|Peter</"
 "emphasis> matches <emphasis>John</emphasis> or <emphasis>Peter. John .*Peter|"
@@ -3093,19 +3134,19 @@ msgstr ""
 "emphasis>&nbsp;» retourne <emphasis>douleur</emphasis> ou "
 "<emphasis>souffrance</emphasis> ou <emphasis>tourment</emphasis>."
 
-#: ../C/gnomesword.xml:386(title)
+#: ../C/gnomesword.xml:399(title)
 msgid "The Parentheses"
 msgstr "Les parenthèses"
 
-#: ../C/gnomesword.xml:387(emphasis)
+#: ../C/gnomesword.xml:400(emphasis)
 msgid "The use of Parentheses \"( )\" is not supported!"
 msgstr "L'usage des parenthèses «­­&nbsp;()&nbsp;» n'est pas prévu."
 
-#: ../C/gnomesword.xml:393(title)
+#: ../C/gnomesword.xml:406(title)
 msgid "The Backslash Prior to a Special Character"
 msgstr "L'antislash précédant un caractère spécial"
 
-#: ../C/gnomesword.xml:394(para)
+#: ../C/gnomesword.xml:407(para)
 msgid ""
 "The Backslash prior to a special character (\"\\*\") indicates that the "
 "character is not being used in its special meaning, but is just to match "
@@ -3119,11 +3160,11 @@ msgstr ""
 "mais pas <emphasis>amen</emphasis>t et ne trouvera donc pas "
 "firm<emphasis>amen</emphasis>t."
 
-#: ../C/gnomesword.xml:402(title)
+#: ../C/gnomesword.xml:415(title)
 msgid "The Backslash Prior to an Ordinary Character"
 msgstr "L'antislash précédant un caractère ordinaire"
 
-#: ../C/gnomesword.xml:404(para)
+#: ../C/gnomesword.xml:417(para)
 msgid ""
 "The Backslash prior to an ordinary character (\"\\o\") indicates that the "
 "character is not being used to match itself, but has special meaning."
@@ -3132,7 +3173,7 @@ msgstr ""
 "ce caractère n'est plus utilisé comme tel mais prend une signification "
 "spéciale."
 
-#: ../C/gnomesword.xml:409(para)
+#: ../C/gnomesword.xml:422(para)
 msgid ""
 "\\b if use outside [ ] means word boundary. If used inside [ ] means "
 "backspace. <emphasis>\\brighteous\\b</emphasis> matches <emphasis>righteous</"
@@ -3145,7 +3186,7 @@ msgstr ""
 "\\b</emphasis> retourne <emphasis>juste</emphasis> mais pas "
 "in<emphasis>juste</emphasis> ou <emphasis>juste</emphasis>sse."
 
-#: ../C/gnomesword.xml:413(para)
+#: ../C/gnomesword.xml:426(para)
 msgid ""
 "\\B means non-word boundary. <emphasis>\\Brighteous\\B</emphasis> matches "
 "un<emphasis>righteous</emphasis>ness and un<emphasis>righteous</emphasis>ly "
@@ -3156,27 +3197,27 @@ msgstr ""
 "trouve cha<emphasis>leur</emphasis>euse mais pas cha<emphasis>leur</"
 "emphasis> ou <emphasis>leur</emphasis>re."
 
-#: ../C/gnomesword.xml:417(para)
+#: ../C/gnomesword.xml:430(para)
 msgid "\\d means digit; same as [0-9]."
 msgstr "\\d représente un chiffre, identique à [0-9]."
 
-#: ../C/gnomesword.xml:418(para)
+#: ../C/gnomesword.xml:431(para)
 msgid "\\D means non-digit, same as [^0-9]."
 msgstr "\\D signifie non-numérique, identique à [^0-9]."
 
-#: ../C/gnomesword.xml:419(para)
+#: ../C/gnomesword.xml:432(para)
 msgid "\\s means space."
 msgstr "\\s représente une espace."
 
-#: ../C/gnomesword.xml:420(para)
+#: ../C/gnomesword.xml:433(para)
 msgid "\\S means not a space."
 msgstr "\\S signifie pas d'espace."
 
-#: ../C/gnomesword.xml:421(para)
+#: ../C/gnomesword.xml:434(para)
 msgid "\\w means alphanumeric; same as [a-zA-Z0-9_]."
 msgstr "\\w signifie alphanumérique, identique à [a-zA-Z0-9_]."
 
-#: ../C/gnomesword.xml:422(para)
+#: ../C/gnomesword.xml:435(para)
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr "\\W signifie non alphanumérique, identique à [^a-zA-Z0-9_]."
 
