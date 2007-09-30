@@ -25,7 +25,13 @@
 SWORD_NAMESPACE_START
 
 char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
-	return g_utf8_strup(text, -1);
+	char *upper_str = g_utf8_strup(text, -1);
+	int newlen = strlen(upper_str);
+	if (newlen >= maxlen) newlen = maxlen - 1;
+	memcpy(text, upper_str, newlen);
+	text[newlen] = 0;	// be sure we're null terminated.
+	g_free(upper_str);
+	return text;
 }
 
 bool GS_StringMgr::supportsUnicode() const {
