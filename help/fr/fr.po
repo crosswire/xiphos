@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 19:26+0200\n"
-"PO-Revision-Date: 2007-09-30 20:52+0200\n"
+"PO-Revision-Date: 2007-09-30 21:03+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -251,7 +251,6 @@ msgstr "interface_searchpane.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:177(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/search_search.png'; md5=1a4e617b4b6599ed5768ccb794fa823f"
 msgstr "search_search.png"
