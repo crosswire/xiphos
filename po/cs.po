@@ -2662,7 +2662,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:8
 msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "<b>Varování:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat odhalení, NEMĚLI by jste používat instalaci modulů přes internet! "
+msgstr "<b>Varování:</b> Pokud nežijete ve svobodné zemi a nepřejete si riskovat odhalení, NEMĚLI byste používat instalaci modulů přes Internet! "
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
