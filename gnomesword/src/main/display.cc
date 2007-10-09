@@ -680,8 +680,21 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 	}
 }
 
+void set_morph_order(SWModule &imodule)
+{
+	for (FilterList::const_iterator it =
+		 imodule.getRenderFilters().begin();
+	     it != imodule.getRenderFilters().end();
+	     it++) {
+		OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
+		if (f)
+			f->setMorphFirst();
+	}
+}
+
 void GTKChapDisp::getVerseBefore(SWModule &imodule,
 				 gboolean strongs_or_morph,
+				 gboolean strongs_and_morph,
 				 uint16_t cache_flags)
 {
 	gchar *utf8_key;
@@ -718,6 +731,9 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		}
 	} else {
 		(*mod)--;
+
+		if (strongs_and_morph)
+			set_morph_order(*mod);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -800,6 +816,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 
 void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				gboolean strongs_or_morph,
+				gboolean strongs_and_morph,
 				uint16_t cache_flags)
 {
 	gchar *utf8_key;
@@ -859,6 +876,9 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				key->Verse());
 		swbuf.append(buf);
 		g_free(buf);
+
+		if (strongs_and_morph)
+			set_morph_order(*mod);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -1113,16 +1133,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 				      ops->morphs);
 	gboolean strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
 				      ops->morphs);
-	if (strongs_and_morph) {
-		for (FilterList::const_iterator it =
-			 imodule.getRenderFilters().begin();
-		     it != imodule.getRenderFilters().end();
-		     it++) {
-			OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
-			if (f)
-				f->setMorphFirst();
-		}
-	}
+	if (strongs_and_morph)
+		set_morph_order(imodule);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
@@ -1168,7 +1180,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
-	getVerseBefore(imodule, strongs_or_morph, cache_flags);
+	getVerseBefore(imodule, strongs_or_morph, strongs_and_morph, cache_flags);
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
@@ -1308,7 +1320,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf = "";
 	}
 	swbuf = "";
-	getVerseAfter(imodule, strongs_or_morph, cache_flags);
+	getVerseAfter(imodule, strongs_or_morph, strongs_and_morph, cache_flags);
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.

@@ -53,9 +53,11 @@ public:
 	virtual char Display(SWModule &imodule);
 	virtual void getVerseBefore(SWModule &imodule,
 				    gboolean strongs_or_morph,
+				    gboolean strongs_and_morph,
 				    uint16_t cache_flags);
 	virtual void getVerseAfter(SWModule &imodule,
 				   gboolean strongs_or_morph,
+				   gboolean strongs_and_morph,
 				   uint16_t cache_flags);
 	MOD_FONT *mf;
 	SWBuf swbuf;
