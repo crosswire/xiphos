@@ -1,3 +1,11 @@
+2007-10-08  karl <charcoal@users.sf.net>
+
+	* fix morph word ordering in verseBefore/After.
+
+2007-10-08  dom <domcox@users.sf.net>
+
+	* fix buffer-overrun of GS crash by avoiding swbuf flaws.
+
 2007-10-06  karl <charcoal@users.sf.net>
 
 	* fix empty string bug induced by prev.fix to stringmgr.
