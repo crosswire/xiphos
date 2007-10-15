@@ -1,3 +1,7 @@
+2007-10-14  karl <charcoal@users.sf.net>
+
+	* 2.3.1 release.
+
 2007-10-08  karl <charcoal@users.sf.net>
 
 	* fix morph word ordering in verseBefore/After.
