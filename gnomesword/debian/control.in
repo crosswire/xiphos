@@ -1,5 +1,5 @@
 Source: gnomesword
-Build-Depends: @cdbs@, libsword-dev (>=1.5.9-0), gnome-spell, libgtkhtml3.8-dev, scrollkeeper, gnome-core-devel, gtkhtml3.8
+Build-Depends: @cdbs@, libsword-dev (>=1.5.10-0), gnome-spell, libgtkhtml3.8-dev, scrollkeeper, gnome-core-devel, gtkhtml3.8, firefox-dev
 Build-Conflicts: libgtkhtml3.2-dev, libgtkhtml3.6-dev
 Section: gnome
 Priority: optional
@@ -10,7 +10,7 @@ Package: gnomesword
 Architecture: any
 Section: gnome
 Provides: sword-frontend
-Depends: sword-text, sword-comm, sword-dict, ${shlibs:Depends}
+Depends:firefox, ${shlibs:Depends}
 Description: Bible study with GNOME
  A bible study program for GNOME using the SWORD library.
  Features:
