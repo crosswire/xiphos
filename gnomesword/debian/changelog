@@ -1,9 +1,9 @@
-gnomesword (2.2.3-1) unstable; urgency=low
+gnomesword (2.3.1-0gutsy1) gutsy; urgency=low
 
   * Non-maintainer upload.
-  * Subversion release
+  * 2.3.1 release
 
- -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Sun, 25 Jan 2007 12:00:400 +0000
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Wed, 17 Oct 2007 10:00:40 +0200
 
 gnomesword (2.2.0-1) unstable; urgency=low
 
