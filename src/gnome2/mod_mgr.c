@@ -668,7 +668,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 			     strcmp(info->new_version, " ")) ||
 			    (info->old_version && !info->new_version) ||
 			    (info->old_version && info->new_version &&
-			     strcmp(info->old_version, info->new_version)))
+			     strcmp(info->new_version, info->old_version) > 0))
 				refresh = REFRESH;
 			else
 				refresh = BLANK;
