@@ -1,3 +1,10 @@
+2007-10-18  karl <charcoal@users.sf.net>
+
+	* pick up 2.2 translator addition for about_gnomesword.c.
+	* impose a "string greater than" semantic on version comparison in
+	  gnome2/mod_mgr.c so as to not be bothered by old versions at
+	  secondary repos.
+
 2007-10-14  karl <charcoal@users.sf.net>
 
 	* 2.3.1 release.
