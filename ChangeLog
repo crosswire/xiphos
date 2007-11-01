@@ -1,3 +1,8 @@
+2007-11-01  karl <charcoal@users.sf.net>
+
+	* fix #1824138: no defined lexdict in subwindow causes
+	  either crash (U-GG) or g_log() complaints (Fedora).
+
 2007-10-18  karl <charcoal@users.sf.net>
 
 	* pick up 2.2 translator addition for about_gnomesword.c.
