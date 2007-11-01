@@ -460,6 +460,10 @@ static gboolean select_button_press_callback (GtkWidget *widget,
 			      GdkEventButton *event,
 			      gpointer user_data)
 {
+	if (!settings.DictWindowModule ||
+	    (*settings.DictWindowModule == '\0'))
+		return;
+
 	GtkWidget *menu = main_dictionary_drop_down_new(settings.DictWindowModule,
 						settings.dictkey);
 	
