@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 08:30+0100\n"
-"PO-Revision-Date: 2007-11-08 12:45+0000\n"
+"PO-Revision-Date: 2007-11-08 13:11+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -826,7 +826,7 @@ msgstr "Tem a certeza de que pretende remover o módulo seleccionado?"
 
 #: ../src/main/search_dialog.cc:1512
 msgid "Search finished"
-msgstr "Busca terminada"
+msgstr "Pesquisa concluída"
 
 #: ../src/main/search_sidebar.cc:57 ../src/gnome2/search_dialog.c:57
 msgid "found in "
@@ -1889,19 +1889,19 @@ msgstr "Copiar texto assinalado na janela principal"
 
 #: ../src/gnome2/main_menu.c:759 ../src/gnome2/sidebar.c:1341
 msgid "_Search"
-msgstr "_Procurar"
+msgstr "_Pesquisar"
 
 #: ../src/gnome2/main_menu.c:760
 msgid "Search using the shortcut bar"
-msgstr "Procurar com a barra de atalhos"
+msgstr "Pesquisar com a barra de atalhos"
 
 #: ../src/gnome2/main_menu.c:765
 msgid "_Advanced Search"
-msgstr "_Busca Avançada"
+msgstr "Pesquisa _Avançada"
 
 #: ../src/gnome2/main_menu.c:766
 msgid "Advanced search using the search dialog"
-msgstr "Busca avançada usando o diálogo de busca"
+msgstr "Pesquisa avançada usando o diálogo de pesquisa"
 
 #: ../src/gnome2/main_menu.c:774
 msgid "_Module Manager"
@@ -2388,7 +2388,7 @@ msgstr "Iniciar busca"
 
 #: ../src/gnome2/search_sidebar.c:193
 msgid "Search Module"
-msgstr "Procurar Módulo"
+msgstr "Pesquisar Módulo"
 
 #: ../src/gnome2/search_sidebar.c:207
 msgid "Bible"
@@ -2400,7 +2400,7 @@ msgstr "Comentário"
 
 #: ../src/gnome2/search_sidebar.c:230
 msgid "Search Type"
-msgstr "Tipo de busca"
+msgstr "Tipo de pesquisa"
 
 #: ../src/gnome2/search_sidebar.c:244 ../ui/search-dialog.glade.h:41
 msgid "Multi word"
@@ -2412,11 +2412,11 @@ msgstr "Frase exacta"
 
 #: ../src/gnome2/search_sidebar.c:277
 msgid "Search Options"
-msgstr "Opções de Busca"
+msgstr "Opções de Pesquisa"
 
 #: ../src/gnome2/search_sidebar.c:305
 msgid "Search Scope"
-msgstr "Âmbito de busca"
+msgstr "Âmbito de Pesquisa"
 
 #: ../src/gnome2/search_sidebar.c:318
 msgid "No scope"
@@ -2428,7 +2428,7 @@ msgstr "Usar limites"
 
 #: ../src/gnome2/search_sidebar.c:337
 msgid "Last search"
-msgstr "Última busca"
+msgstr "Última pesquisa"
 
 #: ../src/gnome2/search_sidebar.c:352
 msgid "Bounds"
@@ -2452,7 +2452,7 @@ msgstr "Guardar Lista"
 
 #: ../src/gnome2/sidebar.c:943
 msgid "Save the search results as bookmarks"
-msgstr "Guardar os resultados da busca como marcas"
+msgstr "Guardar os resultados da pesquisa como marcas"
 
 #: ../src/gnome2/sidebar.c:982
 msgid "Open selected module in a new tab"
@@ -2484,7 +2484,7 @@ msgstr "_Lista de Versículos"
 
 #: ../src/gnome2/sidebar.c:1509
 msgid "Search"
-msgstr "Procurar"
+msgstr "Pesquisar"
 
 #: ../src/gnome2/sidebar.c:1519
 msgid "Verse List"
