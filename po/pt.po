@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 08:30+0100\n"
-"PO-Revision-Date: 2007-11-08 13:11+0000\n"
+"PO-Revision-Date: 2007-11-08 20:58+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -792,7 +792,7 @@ msgstr "Voltar a "
 #: ../src/main/search_dialog.cc:53 ../src/main/search_sidebar.cc:55
 #: ../src/gnome2/search_dialog.c:55
 msgid "Searching the "
-msgstr "Procurando "
+msgstr "Pesquisando"
 
 #: ../src/main/search_dialog.cc:54 ../src/main/search_sidebar.cc:56
 #: ../src/gnome2/search_dialog.c:56
@@ -814,7 +814,7 @@ msgstr "Tem a certeza de que quer apagar esta extensão?"
 #: ../src/main/search_dialog.cc:569 ../src/main/search_dialog.cc:1052
 #: ../src/main/search_dialog.cc:1073
 msgid "Search: "
-msgstr "Procurar: "
+msgstr "Pesquisar: "
 
 #: ../src/main/search_dialog.cc:623
 msgid "Remove Module?"
@@ -1151,7 +1151,7 @@ msgstr "Romanos 1:16"
 
 #: ../src/main/xml.c:112
 msgid "What is the Gospel?"
-msgstr "Qual é o Evangelho?"
+msgstr "O que é o Evangelho?"
 
 #: ../src/main/xml.c:114
 msgid "1 Cor 15:1-4"
@@ -1753,7 +1753,7 @@ msgstr "Combinar capitalização"
 
 #: ../src/gnome2/find_dialog.c:234
 msgid "Search backwards"
-msgstr "Procurar para trás"
+msgstr "Pesquisar para trás"
 
 #: ../src/gnome2/find_dialog.c:242 ../src/gnome2/search_sidebar.c:255
 #: ../ui/search-dialog.glade.h:43
@@ -2987,7 +2987,7 @@ msgstr "Módulo Inteiro"
 
 #: ../ui/search-dialog.glade.h:33
 msgid "In modules that have Footnotes"
-msgstr "Em módulos com Rodapés"
+msgstr "Em módulos com Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:34
 msgid "In modules that have Morphological Tags"
@@ -3051,11 +3051,11 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:53
 msgid "Search in footnotes"
-msgstr "Procurar em notas de rodapé"
+msgstr "Pesquisar em notas de rodapé"
 
 #: ../ui/search-dialog.glade.h:54
 msgid "Show Footnotes"
-msgstr "Mostrar Rodapés"
+msgstr "Mostrar Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Show Morphological Tags"
