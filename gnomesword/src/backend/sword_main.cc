@@ -1340,7 +1340,7 @@ void BackEnd::init_language_map(void) {
 	languageMap[SWBuf("ca")] = SWBuf(_("Catalan")); /* done */
 	//languageMap[SWBuf("ce")] = SWBuf("Chechen");
 	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano")); /* done */
-	//languageMap[SWBuf("ch")] = SWBuf("Chamorro");
+	languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 	//languageMap[SWBuf("co")] = SWBuf("Corsican");
 	languageMap[SWBuf("cop")] = SWBuf(_("Coptic")); /* done */
 	languageMap[SWBuf("cs")] = SWBuf(_("Czech")); /* done */

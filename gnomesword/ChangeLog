@@ -1,3 +1,7 @@
+2007-11-22  karl <charcoal@users.sf.net>
+
+	* locale names updated for chamorro.
+
 2007-11-01  karl <charcoal@users.sf.net>
 
 	* fix #1824138: no defined lexdict in subwindow causes
