@@ -95,7 +95,7 @@ void backend_mod_mgr_init_language_map(void) {
 	mm_languageMap[SWBuf("ca")] = SWBuf(_("Catalan")); /* done */
 	//mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
 	mm_languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano")); /* done */
-	//mm_languageMap[SWBuf("ch")] = SWBuf("Chamorro");
+	mm_languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 	//mm_languageMap[SWBuf("co")] = SWBuf("Corsican");
 	mm_languageMap[SWBuf("cop")] = SWBuf(_("Coptic")); /* done */
 	mm_languageMap[SWBuf("cs")] = SWBuf(_("Czech")); /* done */
