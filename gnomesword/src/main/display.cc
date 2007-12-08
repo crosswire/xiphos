@@ -247,11 +247,13 @@ AnalyzeForImageSize(const char *origtext,
 		path = end+1;
 		trail = path;
 
-		if ((image_retval != 0) && no_warning_yet) {
-			gui_generic_warning(
-			    "An image file's size could not be determined.\nIs ImageMagick's 'identify' not installed?\n(Or possibly the image is of type other than bmp/gif/jpg/png.)\nGnomeSword cannot resize images to fit window.");
-			settings.imageresize = 0;
-			no_warning_yet = false;
+		if (image_retval != 0) {
+			if (no_warning_yet) {
+				gui_generic_warning(
+				    "An image file's size could not be determined.\nIs ImageMagick's 'identify' not installed?\n(Or possibly the image is of type other than bmp/gif/jpg/png.)\nGnomeSword cannot resize images to fit window.");
+				settings.imageresize = 0;
+				no_warning_yet = false;
+			}
 			continue;
 		}
 
