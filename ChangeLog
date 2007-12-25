@@ -1,3 +1,11 @@
+2007-12-25  karl <charcoal@users.sf.net>
+
+	* don't turn off imageresize just because one image failed.
+	* announce image resize failure only once per display, not per image.
+	* fit gconf intro text into smaller box.
+	* change from offset to key string in adv.search (offset drops core).
+	* fix #1747281: search drag-n-drop fails; use main_url_encode(key).
+
 2007-11-22  karl <charcoal@users.sf.net>
 
 	* locale names updated for chamorro.
