@@ -896,10 +896,11 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	drag_module_type = backendSearch->module_type(module);
 	if ((drag_module_type == BOOK_TYPE) ||
 	    (drag_module_type == DICTIONARY_TYPE)) {
-		verse_selected = g_strdup_printf("sword://%s/%lu", module,
-						 backendSearch->
-						 get_treekey_offset_from_key
-						 (module, key));
+		//verse_selected = g_strdup_printf("sword://%s/%lu", module,
+		//				 backendSearch->
+		//				 get_treekey_offset_from_key
+		//				 (module, key));
+		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
 	}
 	else {
 		if (drag_module_type == TEXT_TYPE) {
