@@ -44,6 +44,7 @@ extern "C" {
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
+#include "main/url.hh"
  
 #include "gui/search_dialog.h"
 #include "gui/sidebar.h"
@@ -894,23 +895,15 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	if (verse_selected)
 		g_free(verse_selected);
 	drag_module_type = backendSearch->module_type(module);
-	if ((drag_module_type == BOOK_TYPE) ||
-	    (drag_module_type == DICTIONARY_TYPE)) {
-		//verse_selected = g_strdup_printf("sword://%s/%lu", module,
-		//				 backendSearch->
-		//				 get_treekey_offset_from_key
-		//				 (module, key));
-		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
+	if (drag_module_type == TEXT_TYPE) {
+		// now find verse spec's `:'; then SPC to end key.
+		buf = strchr(buf+1, ':');
+		buf = strchr(buf, ' ');
+		*buf = '\0';
 	}
-	else {
-		if (drag_module_type == TEXT_TYPE) {
-			// now find verse spec's `:'; then SPC to end key.
-			buf = strchr(buf+1, ':');
-			buf = strchr(buf, ' ');
-			*buf = '\0';
-		}
-		verse_selected = g_strdup_printf("sword://%s/%s", module, key);
-	}
+	const gchar *temp_key = main_url_encode(key);
+	verse_selected = g_strdup_printf("sword://%s/%s", module, temp_key);
+	g_free((gchar *)temp_key);
 	text_str = backendSearch->get_render_text(module,key);
 #ifdef USE_GTKMOZEMBED
 	html_text=g_string_new(HTML_START);
