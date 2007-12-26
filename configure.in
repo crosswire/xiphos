@@ -207,6 +207,9 @@ else
 	AM_CONDITIONAL(ENABLE_SK,  test "x$enable_scrollkeeper" = "xyes")
 fi
 
+AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
+AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
+
 AC_SUBST(MOZILLA_HOME)
 AC_SUBST(MOZILLA_COMPONENT_LIBS)
 AC_SUBST(MOZILLA_COMPONENT_CFLAGS)

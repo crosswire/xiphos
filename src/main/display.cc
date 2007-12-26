@@ -131,7 +131,7 @@ out:
 	return retval;
 }
 
-#ifdef __CYGWIN__
+#ifndef STRCASESTR
 /*
  * strcasestr() turns out to be nonstandard extension, but we need it.
  */
@@ -157,7 +157,7 @@ strcasestr(const char *haystack, const char *needle)
 	g_free(lower_needle);
 	return s;
 }
-#endif /* __CYGWIN__ */
+#endif /* !HAVE_STRCASESTR */
 
 #define	IMGSRC_LENGTH	10	// strlen('<img src="')
 
