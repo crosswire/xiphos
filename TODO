@@ -1,15 +1,7 @@
 TODO:
 	* Re-work advanced search (req #1615402):
-	  - Attribute search (e.g. Word//Lemma/Gxxx) very confusion-prone.
-	  - Search on more than one Strong's ref at a time.
 	  - Specify search range on the fly, without having to name it.
 	  - Search Hebrew/Greek using native charsets.
-	* Improve command use of "sword://" (req #1613239):
-	  - Open new tab instead of taking over 1st.
-	  - Create gconf key to handle sword://.
-	  - Handle bible:// as well, because it's more intuitive anyway.
-	  - Create gnomesword-remote (cf. gaim-remote)?
-	* Much more needs to be discussed on gnomesword-developers.
 
 For more information on feature requests:
 http://sourceforge.net/tracker/?group_id=5528&atid=355528
