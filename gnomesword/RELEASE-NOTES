@@ -3,6 +3,48 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.3.2
+26 Dec 2007
+
+This is an intermediate bugfix release, to correct a small number of
+varyingly important or long-standing issues.
+
+1. Drag-n-drop from adv.search almost works again: Keys containing `/'
+   or whitespace were not being processed correctly, and the gecko
+   subsystem was simply not accepting the request.  However, there is
+   still a problem in MozEmbed where, once a gecko element (any of the
+   main subwindows) has had focus, drag-n-drop cannot complete and the
+   program, and possibly the desktop, are hung -- there is a gtk signal
+   connection problem yet to be understood fully.  (This problem is
+   MozEmbed-specific and does not occur in gtkhtml at all.)
+
+2. Core dumps in adv.search induced by offset handling in lexdicts
+   and genbooks were eliminated.
+
+3. Image resizing is not disabled just because one image failed.
+   Complaints on image resize failure are made just once per page.
+
+4. Fit gconf setup dialog strings into a smaller text box.
+
+Bug reports addressed since 2.3.1:
+1857805  Bug report when starting gnomesword2
+1855521  Build failure with xulrunner-1.9-beta2
+1830932  strcasestr() is nonstandard, more than just cygwin
+1830919  test before adding g++ options to flags
+1828280  Text not translated
+1824138  no lexdict => crash or log complaints
+1808047  Czech translation -- grammatical error
+1802257  highlighting will be case sensitive even if the search isn't
+1781816  2.3 gtkhtml3 integration bugs
+1747281  2.3: can't drag-n-drop from adv.search
+
+New feature requests pending:
+<none>
+
+Feature requests closed:
+<none>
+________________________
+
 Release 2.3.1
 14 Oct 2007
 
