@@ -1,3 +1,12 @@
+2007-12-26  - bugfix release, 2.3.2.  mostly some adv.search updates.
+
+2007-10-14  - a lot has happened in 10 months.  releasing 2.3.1 to go
+              with Sword 1.5.10, giving MozEmbed HTML driver for those
+              platforms which support it.  the entire 2.2 series turned
+              into a feature development phase.  much better mod.mgr
+              usage, oodles of bugs fixed, better navbars, module cache
+              performance improvements, other stuff.
+
 2006-12-17  - almost 2 years since NEWS was updated.
 	      2.1.10, preparing for 2.2 final/stable.
 	      first-time user enhancements re: module manager
