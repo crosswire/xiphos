@@ -1,3 +1,9 @@
+2007-12-26  karl <charcoal@users.sf.net>
+
+	* 2.3.2 release.
+	* update some general text files.
+	* generalize strcasestr solution beyond cygwin (e.g. solaris).
+
 2007-12-25  karl <charcoal@users.sf.net>
 
 	* don't turn off imageresize just because one image failed.
