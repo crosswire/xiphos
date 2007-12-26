@@ -484,7 +484,7 @@ void gecko_html_write(GeckoHtml * html, const gchar * data, gint len)
 	if (len == -1)
 		len = strlen(data);
 	gtk_moz_embed_append_data(GTK_MOZ_EMBED(html), data, len);
-	GS_message(("html_write: \n\tlength = %d \n\tdata: %s",len,data));
+	//GS_message(("html_write: \n\tlength = %d \n\tdata: %s",len,data));
 }
 
 void gecko_html_frames(GeckoHtml * html, gboolean enable)
