@@ -131,7 +131,7 @@ out:
 	return retval;
 }
 
-#ifndef STRCASESTR
+#ifndef HAVE_STRCASESTR
 /*
  * strcasestr() turns out to be nonstandard extension, but we need it.
  */
@@ -509,6 +509,13 @@ block_dump(SWBuf& rendered,
 // secondary interface.
 // text destination is provided, ready to go.
 // this means we are able to recurse when needed.
+
+#ifdef USE_GTKMOZEMBED
+#define EMPTY_WORD	""
+#else
+#define EMPTY_WORD	"&nbsp;"
+#endif /* USE_GTKMOZEMBED */
+
 void
 block_render_secondary(const char *text, SWBuf& rendered)
 {
@@ -580,21 +587,13 @@ block_render_secondary(const char *text, SWBuf& rendered)
 				if (*(s+11) == '(') {
 					if (morph) {
 						block_dump(rendered, &word, &strongs, &morph);
-#ifdef USE_GTKMOZEMBED
-						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-#else
-						word = g_strdup("&nbsp;");
-#endif /* USE_GTKMOZEMBED */
+						word = g_strdup(EMPTY_WORD);
 					}
 					morph   = g_strndup(s, t-s);
 				} else {
 					if (strongs) {
 						block_dump(rendered, &word, &strongs, &morph);
-#ifdef USE_GTKMOZEMBED
-						word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-#else
-						word = g_strdup("&nbsp;");
-#endif /* USE_GTKMOZEMBED */
+						word = g_strdup(EMPTY_WORD);
 					}
 					strongs = g_strndup(s, t-s);
 				}
