@@ -74,6 +74,7 @@ enum {
 	COLUMN_OLD_VERSION,
 	COLUMN_DIFFERENT,
 	COLUMN_NEW_VERSION,
+	COLUMN_INSTALLSIZE,
 	COLUMN_DESC,
 	COLUMN_VISIBLE,
 	NUM_COLUMNS
@@ -696,6 +697,8 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_NEW_VERSION,
 					   info->new_version,
+					   COLUMN_INSTALLSIZE,
+					   info->installsize,
 					   COLUMN_DESC, description,
 					   COLUMN_VISIBLE, TRUE, -1);
 			g_free(str_data);
@@ -1263,6 +1266,17 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	   COLUMN_NEW_VERSION); */
 	gtk_tree_view_append_column(treeview, column);
 
+	/* column for source install size */
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Size"),
+						     renderer, "text",
+						     COLUMN_INSTALLSIZE,
+						     NULL);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+	   COLUMN_INSTALLSIZE); */
+	gtk_tree_view_append_column(treeview, column);
+
 	/* column for description */
 	renderer = gtk_cell_renderer_text_new();
 	column =
@@ -1430,6 +1444,7 @@ static GtkTreeModel *create_model(void)
 				   G_TYPE_BOOLEAN,
 				   G_TYPE_STRING,
 				   GDK_TYPE_PIXBUF,
+				   G_TYPE_STRING,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING, G_TYPE_BOOLEAN);
 	return GTK_TREE_MODEL(store);

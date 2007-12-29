@@ -48,6 +48,7 @@ struct  _mm {
 	int is_maps;
 	int is_images;
 	int locked;
+	char *installsize;
 };
 
 typedef struct _mms MOD_MGR_SOURCE;
