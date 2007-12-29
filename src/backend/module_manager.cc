@@ -491,17 +491,20 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 						   error);    */
 			mod_info->type = strdup(module->Type());
 
-/*			buf =
-			    (module->getConfigEntry("Version")) ? module->
-			    getConfigEntry("Version") : " ";    */
-/*			mod_info->new_version = g_convert(buf, 
-						-1, UTF_8, OLD_CODESET,
-				      		&bytes_read, 
-						&bytes_written,
-				      		error);    */
-			mod_info->new_version = strdup(
-			(module->getConfigEntry("Version")) ? module->
-			    getConfigEntry("Version") : " ");
+			char *vers = (char*)module->getConfigEntry("Version");
+			mod_info->new_version = strdup(vers ? vers : " ");
+
+			char *installsize = (char*)module->getConfigEntry("InstallSize");
+			if (installsize && (isdigit(*installsize))) {
+				int isize = atoi(installsize);
+				if (isize > (3*1024*1024))
+					mod_info->installsize =
+					    g_strdup_printf("%dM", isize/(1024*1024));
+				else
+					mod_info->installsize =
+					    g_strdup_printf("%dk", isize/1024);
+			} else
+			    mod_info->installsize = g_strdup("---");
 
 			char *feature = (char*)module->getConfigEntry("Feature");
 			if (feature && !strcmp(feature, "DailyDevotion"))
@@ -520,7 +523,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 				mod_info->is_images = 0;			
 
 			mod_info->old_version =
-			    backend_mod_mgr_get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
+			    backend_mod_mgr_get_config_entry(mod_info->name, "Version");
 			mod_info->installed =
 			    backend_mod_mgr_is_module(mod_info->name);
 			mod_info->description = module->Description();
