@@ -1,3 +1,7 @@
+2007-12-29  karl <charcoal@users.sf.net>
+
+	* feat.req #1860685 mod.mgr show InstallSize in *.conf
+
 2007-12-27  karl <charcoal@users.sf.net>
 
 	* fix #1860365 lemma display hack is very poor
