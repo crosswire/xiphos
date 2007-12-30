@@ -504,7 +504,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 					mod_info->installsize =
 					    g_strdup_printf("%dk", isize/1024);
 			} else
-			    mod_info->installsize = g_strdup("---");
+			    mod_info->installsize = g_strdup("-?-");
 
 			char *feature = (char*)module->getConfigEntry("Feature");
 			if (feature && !strcmp(feature, "DailyDevotion"))
