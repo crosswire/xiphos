@@ -627,7 +627,6 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gchar *description = NULL;
 	gsize bytes_read;
 	gsize bytes_written;
-//	GError *error = NULL;
 	gchar *buf;
 
 	/* Check language */
@@ -638,13 +637,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		info->language = _("Unknown");
 	g_free(buf);
 
-/*	description = g_convert(info->description, -1, UTF_8, OLD_CODESET, &bytes_read,
-			 &bytes_written, &error);    */
 	description = info->description;
-//	if(description == NULL) {
-//		GS_print(("error: %s\n", error->message));
-//		g_error_free (error);
-//	}
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -735,7 +728,6 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	GtkTreeIter child_iter;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError *error = NULL;
 	gboolean valid;
 	gchar *buf;
 
@@ -752,12 +744,6 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		gchar *str_data;
 
 		buf = strdup(language);
-		if(buf == NULL) {
-			GS_print(("error: %s\n", error->message));
-			g_error_free (error);
-			return;
-		}
-		
 		gtk_tree_model_get(model, 
 				&iter_iter, 
 				COLUMN_NAME, 
@@ -776,13 +762,6 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-//	buf = g_convert(language, 
-//			-1, 
-//			UTF_8, 
-//			OLD_CODESET, 
-//			&bytes_read,
-//			&bytes_written, 
-//			&error);
 	buf = strdup(language); 
 
 	gtk_tree_store_set(GTK_TREE_STORE(model), 
@@ -946,6 +925,7 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		g_free(info->name);
 		g_free(info->type);
 		g_free(info->new_version);
+		g_free(info->installsize);
 		g_free(info);
 		tmp2 = g_list_next(tmp2);
 	}
@@ -1018,6 +998,7 @@ static void response_refresh(void)
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
+		g_free(buf);
 		return;
 	}
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
