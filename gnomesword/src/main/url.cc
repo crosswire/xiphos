@@ -422,9 +422,9 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
 		if(!strcmp(stype,"Greek")) 
-			modbuf = "NasbGreek";
+			modbuf = "NASBgreek";
 		else 
-			modbuf = "NasbHebrew";
+			modbuf = "NASBhebrew";
 		//if(strstr(svalue,"!"))
 			//g_strdelimit((gchar*)svalue,"!",'\0');
 	} else {
@@ -493,9 +493,9 @@ static gint show_strongs_morph(const gchar * stype, const gchar * svalue,
 	
 	if(!strcmp(settings.MainWindowModule,"NASB")) {
 		if(!strcmp(stype,"Greek")) 
-			modbuf = "NasbGreek";
+			modbuf = "NASBgreek";
 		else 
-			modbuf = "NasbHebrew";
+			modbuf = "NASBhebrew";
 	} else {
 		if(!strcmp(stype,"Greek")) {
 			modbuf = settings.lex_greek;
