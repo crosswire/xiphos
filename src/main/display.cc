@@ -408,6 +408,13 @@ char GTKEntryDisp::Display(SWModule &imodule)
 // span class names are from CSS_BLOCK macros.
 // we garbage-collect here so block_render doesn't have to.
 //
+
+#ifdef USE_GTKMOZEMBED
+#define	ALIGN_WORD	"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+#else
+#define	ALIGN_WORD	" "	// gtkhtml3 has no alignment need.
+#endif /* USE_GTKMOZEMBED */
+
 void
 block_dump(SWBuf& rendered,
 	   const char **word,
@@ -429,11 +436,7 @@ block_dump(SWBuf& rendered,
 	if (*word == NULL) {
 		// we need to cobble up something to take the place of
 		// a word, in order that the strongs/morph not overlay.
-#ifdef USE_GTKMOZEMBED
-		*word = g_strdup("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-#else
-		*word = g_strdup(" ");	// gtkhtml3 has no alignment need.
-#endif /* USE_GTKMOZEMBED */
+		*word = g_strdup(ALIGN_WORD);
 	}
 
 	rendered += "<span class=\"word\">";
@@ -441,6 +444,14 @@ block_dump(SWBuf& rendered,
 		s = g_strrstr(*strongs, "</a>");
 		*s = '\0';
 		t = strrchr(*strongs, '>') + 1;
+		// correct weird NASB lexicon references.
+		if (s0 = strchr(*strongs, '!')) {
+			while (isdigit(*(s0-1))) {
+				*s0 = *(s0-1);
+				s0--;
+			}
+			*s0 = '0';
+		}
 		*s = '<';
 		slen = s - t;
 #ifdef USE_GTKMOZEMBED
