@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-08 02:02+0000\n"
+"PO-Revision-Date: 2008-01-08 23:42+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -42,14 +42,14 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:82
 msgid "Arabic"
-msgstr ""
+msgstr "عربی"
 
 #. done
 #. mm_languageMap[SWBuf("as")] = SWBuf("Assamese");
 #. mm_languageMap[SWBuf("ay")] = SWBuf("Aymara");
 #: ../src/backend/module_manager.cc:85
 msgid "Azerbaijani"
-msgstr ""
+msgstr "آزری"
 
 #. done
 #. mm_languageMap[SWBuf("ba")] = SWBuf("Bashkir");
@@ -118,7 +118,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:106
 msgid "German"
-msgstr ""
+msgstr "المانی"
 
 #. done
 #. mm_languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
@@ -129,11 +129,11 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:109
 msgid "English"
-msgstr ""
+msgstr "انگلسی"
 
 #: ../src/backend/module_manager.cc:110
 msgid "American English"
-msgstr ""
+msgstr "انگلسی (امرکای)"
 
 #. done
 #.
@@ -164,7 +164,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:117
 msgid "Farsi (Persian)"
-msgstr ""
+msgstr "فارسی"
 
 #: ../src/backend/module_manager.cc:118
 msgid "Finnish"
@@ -185,7 +185,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:123
 msgid "Irish"
-msgstr ""
+msgstr "ایرلندی"
 
 #. done
 #: ../src/backend/module_manager.cc:124
@@ -209,7 +209,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:130
 msgid "Greek, Ancient (to 1453)"
-msgstr ""
+msgstr "یونانی (قدیم)"
 
 #. done
 #: ../src/backend/module_manager.cc:131
@@ -241,7 +241,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:138
 msgid "Armenian"
-msgstr ""
+msgstr "ارمانی"
 
 #. done
 #. mm_languageMap[SWBuf("hz")] = SWBuf("Herero");
@@ -261,7 +261,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:145
 msgid "Italian"
-msgstr ""
+msgstr "آیتالیای"
 
 #. done
 #. mm_languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
@@ -272,7 +272,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:148
 msgid "Georgian"
-msgstr ""
+msgstr "چرجستانی"
 
 #. done
 #: ../src/backend/module_manager.cc:149
@@ -294,7 +294,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
 #: ../src/backend/module_manager.cc:158
 msgid "Kurdish"
-msgstr ""
+msgstr "کوردی"
 
 #. done
 #. mm_languageMap[SWBuf("kv")] = SWBuf("Komi");
@@ -640,7 +640,7 @@ msgstr ""
 #: ../src/main/module_dialogs.cc:435 ../src/main/module_dialogs.cc:447
 #: ../src/main/previewer.cc:183 ../src/main/previewer.cc:197
 msgid "Strongs"
-msgstr ""
+msgstr "شماره‌ها Strong"
 
 #: ../src/main/module_dialogs.cc:317 ../src/main/module_dialogs.cc:336
 #: ../src/main/module_dialogs.cc:440 ../src/main/module_dialogs.cc:457
@@ -681,7 +681,7 @@ msgstr ""
 #: ../src/main/search_dialog.cc:573 ../src/main/search_dialog.cc:1066
 #: ../src/main/search_dialog.cc:1087
 msgid "Search: "
-msgstr ""
+msgstr "جستجو:"
 
 #: ../src/main/search_dialog.cc:627
 msgid "Remove Module?"
@@ -1080,7 +1080,7 @@ msgstr ""
 #: ../src/gnome2/dictlex.c:1012 ../src/gnome2/gbs.c:854
 #: ../src/gnome2/sidebar.c:994
 msgid "About"
-msgstr ""
+msgstr "درباره"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bibletext.c:1108 ../src/gnome2/bookmark_dialog.c:145
@@ -1126,7 +1126,7 @@ msgstr ""
 
 #: ../src/gnome2/bibletext_dialog.c:575
 msgid "Go to "
-msgstr ""
+msgstr "برو به:"
 
 #: ../src/gnome2/bibletext_dialog.c:1892
 #: ../src/gnome2/commentary_dialog.c:1615
@@ -1162,11 +1162,11 @@ msgstr ""
 
 #: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:918
 msgid "Verse: "
-msgstr ""
+msgstr "ایا:"
 
 #: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:919
 msgid "Module: "
-msgstr ""
+msgstr "مدول:"
 
 #: ../src/gnome2/bookmarks_menu.c:664
 msgid "Restore Bookmark Folder"
@@ -1387,7 +1387,7 @@ msgstr ""
 
 #: ../src/gnome2/find_dialog.c:197 ../src/gnome2/find_dialog.c:366
 msgid "Find"
-msgstr ""
+msgstr "پیدا بکن"
 
 #: ../src/gnome2/find_dialog.c:215
 msgid "Enter Word or Phrase"
@@ -1417,7 +1417,7 @@ msgstr ""
 
 #: ../src/gnome2/font_dialog.c:326
 msgid "Module"
-msgstr ""
+msgstr "مدول"
 
 #: ../src/gnome2/font_dialog.c:330
 msgid "Current font: "
@@ -1425,39 +1425,39 @@ msgstr ""
 
 #: ../src/gnome2/font_dialog.c:359
 msgid "+5"
-msgstr ""
+msgstr "+٥"
 
 #: ../src/gnome2/font_dialog.c:361
 msgid "+4"
-msgstr ""
+msgstr "+٤"
 
 #: ../src/gnome2/font_dialog.c:363
 msgid "+3"
-msgstr ""
+msgstr "+٣"
 
 #: ../src/gnome2/font_dialog.c:365
 msgid "+2"
-msgstr ""
+msgstr "+٢"
 
 #: ../src/gnome2/font_dialog.c:367
 msgid "+1"
-msgstr ""
+msgstr "+١"
 
 #: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
 msgid "+0"
-msgstr ""
+msgstr "+٠"
 
 #: ../src/gnome2/font_dialog.c:371
 msgid "-1"
-msgstr ""
+msgstr "-١"
 
 #: ../src/gnome2/font_dialog.c:373
 msgid "-2"
-msgstr ""
+msgstr "-٢"
 
 #: ../src/gnome2/font_dialog.c:375
 msgid "-3"
-msgstr ""
+msgstr "-٣"
 
 #: ../src/gnome2/font_dialog.c:386
 msgid "Use the default font for this module"
@@ -1486,7 +1486,7 @@ msgstr ""
 
 #: ../src/gnome2/html.c:743
 msgid "Print"
-msgstr ""
+msgstr "چپ"
 
 #: ../src/gnome2/html.c:800
 msgid "Print Preview"
@@ -1522,7 +1522,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:753
 msgid "_Copy"
-msgstr ""
+msgstr "کپی"
 
 #: ../src/gnome2/main_menu.c:754
 msgid "Copy highlighted text from main window"
@@ -1554,7 +1554,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:785
 msgid "C_lear"
-msgstr ""
+msgstr "پاک"
 
 #: ../src/gnome2/main_menu.c:786
 msgid "Clear history list"
@@ -1586,7 +1586,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:824
 msgid "_Commentary"
-msgstr ""
+msgstr "تفصیری"
 
 #: ../src/gnome2/main_menu.c:825
 msgid "Show or hide commentaries"
@@ -1642,7 +1642,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:907
 msgid "_About the SWORD Project ..."
-msgstr ""
+msgstr "درباره پرژه Sword"
 
 #: ../src/gnome2/main_menu.c:908
 msgid "More information about the SWORD Project"
@@ -1650,11 +1650,11 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:913
 msgid "About _GnomeSword ..."
-msgstr ""
+msgstr "درباره GnomeSword"
 
 #: ../src/gnome2/main_menu.c:914
 msgid "About this application"
-msgstr ""
+msgstr "درباره این برنامه"
 
 #: ../src/gnome2/main_menu.c:923 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:19 ../ui/editor.xml.h:14
@@ -1667,15 +1667,15 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:935
 msgid "_View"
-msgstr ""
+msgstr "نمایش"
 
 #: ../src/gnome2/main_menu.c:941
 msgid "Hi_story"
-msgstr ""
+msgstr "تریخ"
 
 #: ../src/gnome2/main_menu.c:947
 msgid "_Help"
-msgstr ""
+msgstr "کمک"
 
 #: ../src/gnome2/main_window.c:630
 msgid "Starting"
@@ -1695,7 +1695,7 @@ msgstr ""
 
 #: ../src/gnome2/main_window.c:843
 msgid "Commentary View"
-msgstr ""
+msgstr "نمایش تفصیری"
 
 #: ../src/gnome2/main_window.c:860
 msgid "Book View"
@@ -2292,7 +2292,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:22
 msgid "Bible Texts"
-msgstr ""
+msgstr "ترجومه‌ها کتاب مقدس"
 
 #: ../ui/prefs.glade.h:23
 msgid "Bible text"
@@ -2304,7 +2304,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:25
 msgid "Book"
-msgstr ""
+msgstr "کتاب"
 
 #: ../ui/prefs.glade.h:28
 msgid "Cover"
@@ -2316,7 +2316,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:30
 msgid "Daily Devotional"
-msgstr ""
+msgstr "نور روزنی"
 
 #: ../ui/prefs.glade.h:31
 msgid "Default Dictionary"
@@ -2324,7 +2324,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:32
 msgid "Dictionary"
-msgstr ""
+msgstr "کتاب فرهنگی"
 
 #: ../ui/prefs.glade.h:33
 msgid "Dictionary/Lexicon"
@@ -2344,7 +2344,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:37
 msgid "Greek Lexicon"
-msgstr ""
+msgstr "کتاب فرهنگی یونانی"
 
 #: ../ui/prefs.glade.h:38
 msgid "Hebrew Lexicon"
@@ -2766,7 +2766,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:71
 msgid "for "
-msgstr ""
+msgstr "برای"
 
 #: ../ui/editor_note.xml.h:1
 msgid "Delete the current note"
@@ -2775,17 +2775,17 @@ msgstr ""
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
-msgstr ""
+msgstr "خروج"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
-msgstr ""
+msgstr "خروج"
 
 #: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
-msgstr ""
+msgstr "خروج اس برنامه"
 
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
@@ -2829,7 +2829,7 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:20
 msgid "_Print..."
-msgstr ""
+msgstr "چپ..."
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
