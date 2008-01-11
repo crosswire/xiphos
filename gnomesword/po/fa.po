@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-11 02:43+0000\n"
+"PO-Revision-Date: 2008-01-11 02:52+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -714,7 +714,7 @@ msgstr ""
 #: ../src/main/sidebar.cc:935 ../src/main/sidebar.cc:936
 #: ../src/gnome2/main_window.c:767
 msgid "Standard View"
-msgstr ""
+msgstr "نمایش معمولی"
 
 #: ../src/main/sidebar.cc:598 ../src/main/sidebar.cc:954
 #: ../src/main/sidebar.cc:956 ../src/gnome2/mod_mgr.c:867
@@ -743,7 +743,7 @@ msgstr "نشناخته"
 #: ../src/main/sidebar.cc:918 ../src/main/sidebar.cc:920
 #: ../src/gnome2/mod_mgr.c:863 ../src/gnome2/utilities.c:438
 msgid "Biblical Texts"
-msgstr ""
+msgstr "ترجومه‌ها کتاب مقدس"
 
 #: ../src/main/sidebar.cc:974 ../src/main/sidebar.cc:976
 #: ../src/gnome2/mod_mgr.c:871 ../src/gnome2/utilities.c:472
@@ -2040,7 +2040,7 @@ msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:191
 msgid "Search Module"
-msgstr ""
+msgstr "جستجو در مدول"
 
 #: ../src/gnome2/search_sidebar.c:205
 msgid "Bible"
@@ -2575,7 +2575,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:16
 msgid "Advanced Search"
-msgstr ""
+msgstr "جستجو پیشرفته"
 
 #: ../ui/search-dialog.glade.h:17
 msgid "Attribute Search"
