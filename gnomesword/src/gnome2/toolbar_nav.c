@@ -235,22 +235,21 @@ void gui_navbar_handle_spinbutton_click(gint button, gint direction)
 	    gtk_combo_box_get_model(GTK_COMBO_BOX
 				    (navbar_main.comboboxentry_verse));
 
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (navbar_main.comboboxentry_book),
-				      &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
-			   -1);
+	// book
+	gtk_combo_box_get_active_iter(
+	    GTK_COMBO_BOX(navbar_main.comboboxentry_book), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book, -1);
 
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (navbar_main.
-				       comboboxentry_chapter), &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
-			   &chapter, -1);
+	// chapter
+	gtk_combo_box_get_active_iter(
+	    GTK_COMBO_BOX(navbar_main.comboboxentry_chapter), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0, &chapter, -1);
 
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
-				      (navbar_main.comboboxentry_verse),
-				      &iter);
+	// verse
+	gtk_combo_box_get_active_iter(
+	    GTK_COMBO_BOX(navbar_main.comboboxentry_verse), &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
+
 	switch (button) {
 	case 0:		/*    books     */
 		index = gtk_combo_box_get_active(GTK_COMBO_BOX
@@ -271,19 +270,13 @@ void gui_navbar_handle_spinbutton_click(gint button, gint direction)
 		}
 		break;
 	case 1:		/*    chapters     */
-		if (direction)
-			new = g_strdup_printf("%d", atoi(chapter) + 1);
-		else
-			new = g_strdup_printf("%d", atoi(chapter) - 1);
-
+		new = g_strdup_printf("%d", main_deformat_number(chapter) + 
+				      (direction ? 1 : -1));
 		url = g_strdup_printf("sword:///%s %s:1", book, new);
 		break;
 	case 2:		/*    verses     */
-		if (direction)
-			new = g_strdup_printf("%d", atoi(verse) + 1);
-		else
-			new = g_strdup_printf("%d", atoi(verse) - 1);
-
+		new = g_strdup_printf("%d", main_deformat_number(verse) + 
+				      (direction ? 1 : -1));
 		url = g_strdup_printf("sword:///%s %s:%s",
 				      book, chapter, new);
 		break;

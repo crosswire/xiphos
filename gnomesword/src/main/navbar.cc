@@ -49,7 +49,7 @@ gboolean do_display_dict;
 
 void main_navbar_set(NAVBAR navbar, const char * key)
 {	
-	char buf[5];
+	//char buf[5];
 	char *gkey = NULL;
 	int book;
 	GtkTreeIter iter;
@@ -101,13 +101,14 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	int xverse = vkey.Verse();
 	x = (vkey.books[xtestament-1][xbook-1].chapmax);
 	for(i=1; i <= x; i++) {
-		sprintf(buf,"%d",i);
+		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(chapter_store), &iter);
-		gtk_list_store_set(	GTK_LIST_STORE(chapter_store), 
-					&iter, 
-					0, 
-					buf, 
-					-1);
+		gtk_list_store_set(GTK_LIST_STORE(chapter_store), 
+				   &iter, 
+				   0, 
+				   num, 
+				   -1);
+		g_free(num);
 	}
 	gtk_combo_box_set_active((GtkComboBox *)navbar.comboboxentry_chapter,
                                              xchapter-1);
@@ -119,13 +120,14 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	xverse = vkey.Verse();	
 	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
 	for(i=1; i <= x; i++) {
-		sprintf(buf,"%d",i);
+		char *num = main_format_number(i);
 		gtk_list_store_append (GTK_LIST_STORE(verse_store), &iter);
-		gtk_list_store_set(	GTK_LIST_STORE(verse_store), 
-					&iter, 
-					0, 
-					buf, 
-					-1);
+		gtk_list_store_set(GTK_LIST_STORE(verse_store), 
+				   &iter, 
+				   0, 
+				   num, 
+				   -1);
+		g_free(num);
 	}
 	gtk_combo_box_set_active((GtkComboBox *)navbar.comboboxentry_verse,
                                              xverse-1);
