@@ -497,13 +497,18 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			char *installsize = (char*)module->getConfigEntry("InstallSize");
 			if (installsize && (isdigit(*installsize))) {
 				int isize = atoi(installsize);
+				char *num;
 				// round to nearest M or k.
-				if (isize > (3*1024*1024))
+				if (isize > (3*1024*1024)) {
+					num = main_format_number((isize+(512*1024))/(1024*1024));
 					mod_info->installsize =
-					    g_strdup_printf("%dM", (isize+(512*1024))/(1024*1024));
-				else
+					    g_strdup_printf("%sM", num);
+				} else {
+					num = main_format_number((isize+512)/1024);
 					mod_info->installsize =
-					    g_strdup_printf("%dk", (isize+512)/1024);
+					    g_strdup_printf("%sk", num);
+				}
+				g_free(num);
 			} else
 			    mod_info->installsize = g_strdup("-?-");
 

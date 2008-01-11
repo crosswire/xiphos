@@ -373,8 +373,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	cur_d = d;
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
 	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (d->spb_chapter));
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_chapter));
 	url = g_strdup_printf("sword:///%s %d:1", bookname, chapter);
 	main_dialogs_url_handler(d, url, TRUE);
 	g_free(url);
@@ -411,14 +410,12 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	cur_d = d;
 	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(d->cbe_book));
 	chapter =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (d->spb_chapter));
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_chapter));
 	verse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (d->spb_verse));
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(d->spb_verse));
 	url =
-	    g_strdup_printf("sword:///%s %d:%d", bookname, chapter,
-			    verse);
+	    g_strdup_printf("sword:///%s %d:%d",
+			    bookname, chapter, verse);
 
 	main_dialogs_url_handler(d, url, TRUE);
 	g_free(url);

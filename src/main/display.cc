@@ -713,6 +713,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 {
 	gchar *utf8_key;
 	gchar *buf;
+	char *num;
 	SWMgr *mgr = be->get_main_mgr();
 
 	const char *ModuleName = imodule.Name();
@@ -736,10 +737,12 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 			g_free(buf);
 		}
 		else {
-			buf=g_strdup_printf("<div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
+			num = main_format_number(chapter);
+			buf=g_strdup_printf("<div style=\"text-align: center\"><p>%s</p><b>%s %s</b></div>",
 					mod->Description(),
 					_("Chapter"),
-					chapter);
+					num);
+			g_free(num);
 			swbuf.append(buf);
 			g_free(buf);
 		}
@@ -766,9 +769,10 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		if (is_rtol)
 			swbuf.append("<DIV ALIGN=right>");
 
+		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
+				  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
 				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0,
 				utf8_key,
@@ -776,16 +780,19 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				key->Verse());
+				num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
+		num = main_format_number(chapter);
 		buf=g_strdup_printf(
-				"%s%s<br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				"%s%s<br><hr><div style=\"text-align: center\"><b>%s %s</b></div>",
 				cVerse.GetText(),
 				// extra break when excess strongs/morph space.
 				(strongs_or_morph ? "<br>" : ""),
-				_("Chapter"), chapter);
+				_("Chapter"), num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
@@ -794,6 +801,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 
 		(*mod)++;
 	}
+
 
 	//
 	// Display content at 0:0 and n:0.
@@ -835,6 +843,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 {
 	gchar *utf8_key;
 	gchar *buf;
+	char *num;
 	SWMgr *mgr = be->get_main_mgr();
 	const char *ModuleName = imodule.Name();
 	SWModule *mod_bottom = mgr->getModule(ModuleName);
@@ -854,32 +863,34 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 		swbuf.append(buf);
 		g_free(buf);
 	} else {
-		int chapter = key->Chapter();
+		char *num = main_format_number(key->Chapter());
 		if ((!strcmp(settings.MainWindowModule, "KJV"))){
 			buf=g_strdup_printf(
-				"%s<hr><b>%s %d.</b><br><br>",
+				"%s<hr><b>%s %s.</b><br><br>",
 				(strongs_or_morph ? "<br>" : ""),
-				_("Chapter"), chapter);
+				_("Chapter"), num);
 			swbuf.append(buf);
 			g_free(buf);
 		}
 		else {
 			buf=g_strdup_printf(
-				"%s<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+				"%s<hr><div style=\"text-align: center\"><b>%s %s</b></div>",
 				(strongs_or_morph ? "<br>" : ""),
-				_("Chapter"), chapter);
+				_("Chapter"), num);
 			swbuf.append(buf);
 			g_free(buf);
 		}
+		g_free(num);
 
 		utf8_key = strdup((char*)key->getText());
 
 		if (is_rtol)
 			swbuf.append("<DIV ALIGN=right>");
 
+		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
+				  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
 				: "&nbsp; <A NAME=\"%d\"> </A>",
 				0,
 				utf8_key,
@@ -887,7 +898,8 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				 ? settings.verse_num_font_size + settings.base_font_size
 				 : settings.base_font_size - 2),
 				settings.bible_verse_num_color,
-				key->Verse());
+				num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
@@ -1118,6 +1130,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
+	char *num;
 	gchar *paragraphMark = NULL;
 	gchar *br = NULL;
 
@@ -1245,9 +1258,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
+		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			utf8_key,
@@ -1255,7 +1269,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 			((settings.versehighlight && (key->Verse() == curVerse))
 			 ? settings.highlight_fg
 			 : settings.bible_verse_num_color),
-			key->Verse());
+			num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 
@@ -1413,6 +1428,7 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
 	GString *str = g_string_new(NULL);
 	const gchar *mark_name = "CurrentVerse";
+	char *num;
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 1);
 	if (font_tag)
@@ -1433,16 +1449,17 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
 				== curChapter && !imodule.Error()); imodule++) {
 
-		g_string_printf(str, "%d", key->Verse());
+		num = main_format_number(key->Verse());
 	        gtk_text_buffer_get_end_iter(buffer, &iter);
 		gtk_text_buffer_insert_with_tags(buffer,
 				&iter,
-				str->str,
-				str->len,
+				num,
+				strlen(num),
 				gtk_text_tag_table_lookup (
 				gtk_text_buffer_get_tag_table (buffer),
 						       "verseNumber"),
 				NULL);
+		g_free(num);
 
 		g_string_printf(str, " %s", (const char *)imodule.StripText());
 
@@ -1634,6 +1651,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	GString *str = g_string_new(NULL);
 	gchar *buf;
 	gchar *buf2;
+	char *num;
 	gchar *preverse = NULL;
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
@@ -1742,9 +1760,10 @@ char DialogChapDisp::Display(SWModule &imodule)
 			g_free(buf);
 		}
 
+		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			(char*)key->getText(),
@@ -1752,7 +1771,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 			((settings.versehighlight && (key->Verse() == curVerse))
 			 ? settings.highlight_fg
 			 : settings.bible_verse_num_color),
-			key->Verse());
+			num);
+		g_free(num);
 		str = g_string_append(str, buf);
 		g_free(buf);
 
@@ -1931,16 +1951,17 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter()
 				== curChapter && !imodule.Error()); imodule++) {
 
-		g_string_printf(str, "%d", key->Verse());
+		char *num = main_format_number(key->Verse());
 	        gtk_text_buffer_get_end_iter(buffer, &iter);
 		gtk_text_buffer_insert_with_tags(buffer,
 				&iter,
-				str->str,
-				str->len,
-				gtk_text_tag_table_lookup (
-				gtk_text_buffer_get_tag_table (buffer),
+				num,
+				strlen(num),
+				gtk_text_tag_table_lookup(
+				gtk_text_buffer_get_tag_table(buffer),
 						       "verseNumber"),
 				NULL);
+		g_free(num);
 
 		g_string_printf(str, " %s", (const char *)imodule);
 
@@ -2098,6 +2119,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 	gchar heading[32];
 	SWBuf swbuf;
+	char *num;
 	
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
@@ -2150,7 +2172,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 		sprintf(heading, "%d", x);
 		while ((preverse
 			= backend->get_entry_attribute("Heading", "Preverse",
-							    heading)) != NULL) {
+						       heading)) != NULL) {
 			const char *preverse2 = imodule.RenderText(preverse);
 			buf=g_strdup_printf("<br><b>%s</b><br><br>", preverse2);
 			swbuf.append(buf);
@@ -2162,15 +2184,17 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 
 		utf8_key = strdup((char*)key->getText());
 
+		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
 			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%d</font></A> "
+			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
 			: "&nbsp; <A NAME=\"%d\"> </A>",
 			key->Verse(),
 			utf8_key,
 			settings.verse_num_font_size + settings.base_font_size,
 			settings.bible_verse_num_color,
-			key->Verse());
+			num);
+		g_free(num);
 		swbuf.append(buf);
 		g_free(buf);
 

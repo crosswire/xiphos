@@ -1385,6 +1385,7 @@ void main_do_dialog_search(void)
 	GtkTreeIter iter2;
 	gint x = 0;
 	gint mod_type;
+	char *num;
 	
 	_clear_find_lists();
 	model =
@@ -1495,9 +1496,12 @@ void main_do_dialog_search(void)
 //			g_free((char*)key_buf);	
 		}
 		list_of_finds = g_list_append(list_of_finds, (GList*)tmp_list);
+
 		// add number of hits in each module to finds listview
-		g_string_printf(str, "%d %s %s",
-				finds, FINDS, module);
+		num = main_format_number(finds);
+		g_string_printf(str, "%s %s %s",
+				num, FINDS, module);
+		g_free(num);
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, 
 				   &iter,

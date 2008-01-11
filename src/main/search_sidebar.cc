@@ -139,6 +139,7 @@ static void fill_search_results_list(int finds)
 	GtkTreePath *path;	
 	gchar *buf1 = _("matches");
 	RESULTS *list_item;
+	gchar *num;
 	
 	if(list_of_verses) {
 		while(list_of_verses) {
@@ -173,7 +174,9 @@ static void fill_search_results_list(int finds)
 //			g_free((gchar*)key_buf);
 	}
 	
-	sprintf(buf, "%d %s", finds, buf1);
+	num = main_format_number(finds);
+	sprintf(buf, "%s %s", num, buf1);
+	g_free(num);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),3);
 	/* cleanup progress bar */

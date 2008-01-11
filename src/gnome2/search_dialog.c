@@ -628,7 +628,12 @@ void new_modlist(GtkButton * button, gpointer user_data)
 				    (search1.module_lists));
 	list_store2 = GTK_LIST_STORE(model2);
 
-	sprintf(buf, "New List%d", search1.list_rows);
+	{
+		// must encode locale-sensitively
+		char *num = main_format_number(search1.list_rows);
+		sprintf(buf, "New List %s", num);
+		g_free(num);
+	}
 
 	search1.module_count = 0;
 	gtk_list_store_clear(list_store);

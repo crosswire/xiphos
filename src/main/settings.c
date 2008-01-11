@@ -89,10 +89,19 @@ int settings_init(int new_configs, int new_bookmarks)
 	char *sword_dir = NULL;
 	char *gs_old = NULL;
 	char *tabs = NULL;
+	char *env;
 
 	settings.first_run = FALSE;
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
+
+	/* find out what kind of peculiar language environment we have */
+	re_encode_digits = FALSE;
+	if (((env = getenv("LC_ALL")) != NULL) &&
+	    // for now, farsi-sensitive only
+	    (strncmp (env, "fa", 2) == 0)) {
+		re_encode_digits = TRUE;
+	}
 
 	/* Get home dir */
 	if ((settings.homedir = getenv("HOME")) == NULL) {

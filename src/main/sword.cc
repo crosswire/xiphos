@@ -1620,3 +1620,83 @@ char *main_get_module_description(char * module_name)
 {
 	return backend->module_description(module_name);
 }
+
+/******************************************************************************
+ * Name
+ *  main_format_number
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   char *main_format_number(int x)	
+ *
+ * Description
+ *   returns a digit string in either "latinate arabic" (normal) or
+ *   farsi characters.
+ *   re_encode_digits is chosen at startup in settings.c.
+ *   caller must free allocated string space when finished with it.
+ *
+ * Return value
+ *   char *
+ */ 
+
+int re_encode_digits = FALSE;
+
+char *
+main_format_number(int x)
+{
+	char *digits = g_strdup_printf("%d", x);
+
+	if (re_encode_digits) {
+		//
+		// "\333\260" is farsi "zero".
+		//
+		char *d, *f, *farsi = g_new(char, 2*(strlen(digits)+1));
+			// 2 "chars" per farsi-displayed digit + slop.
+
+		for (d = digits, f = farsi; *d; ++d) {
+			*(f++) = '\333';
+			*(f++) = '\260' + ((*d) - '0');
+		}
+		*f = '\0';
+		g_free(digits);
+		return farsi;
+	}
+	return digits;
+}
+
+/******************************************************************************
+ * Name
+ *  main_deformat_number
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *   int main_deformat_number(char *digitstring)
+ *
+ * Description
+ *   returns the numeric value of the digitstring with
+ *   respect to whether it's ordinary digits or farsi.
+ *
+ * Return value
+ *   int
+ */ 
+
+int
+main_deformat_number(char *digitstring)
+{
+	if (re_encode_digits) {
+		// we can afford to make big assumptions because
+		// we produced this string, so we can play fast-n-loose.
+		// - digits have a particular content.
+		// - never negative.
+		// - one digit == 2 characters & only the 2nd is important.
+		char *d;
+		int result = 0;
+		d = digitstring;
+		while (*d) {
+		    result = 10*result + (*(++d) - '\260');
+		    ++d;
+		}
+		return result;
+	}
+	return atoi(digitstring);
+}
