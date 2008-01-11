@@ -1212,7 +1212,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	/* column for installed module version */
 	renderer = gtk_cell_renderer_text_new();
 	column =
-	    gtk_tree_view_column_new_with_attributes(_("Old"),
+	    gtk_tree_view_column_new_with_attributes(_("Installed"),
 						     renderer, "text",
 						     COLUMN_OLD_VERSION,
 						     NULL);
@@ -1239,7 +1239,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	/* column for source module version */
 	renderer = gtk_cell_renderer_text_new();
 	column =
-	    gtk_tree_view_column_new_with_attributes(_("New"),
+	    gtk_tree_view_column_new_with_attributes(_("Available"),
 						     renderer, "text",
 						     COLUMN_NEW_VERSION,
 						     NULL);
