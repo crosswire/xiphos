@@ -371,7 +371,9 @@ static void add_verses_to_chapter(GtkTreeModel * model,
 	verses = backend->key_verse_count(work_buf[3]);
 
 	for (i = 1; i < (verses + 1); i++) {
-		gchar *buf = g_strdup_printf("%s %d", _("verse"), i);
+		gchar *num = main_format_number(i);
+		gchar *buf = g_strdup_printf("%s %s", _("verse"), num);
+		g_free(num);
 		gchar *key = g_strdup_printf("sword://%s/%s %d:%d",
 					     work_buf[2],
 					     book,
@@ -431,7 +433,9 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 	chapters = backend->key_chapter_count(work_buf[3]);
 
 	for (i = 1; i < (chapters + 1); i++) {
-		gchar *buf = g_strdup_printf("%s %d", _("chapter"), i);
+		gchar *num = main_format_number(i);
+		gchar *buf = g_strdup_printf("%s %s", _("chapter"), i);
+		g_free(num);
 		gchar *key = g_strdup_printf("chapter://%s/%s %d:1",
 					     work_buf[2],
 					     book,

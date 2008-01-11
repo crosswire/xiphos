@@ -358,8 +358,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 	if (panesize > 15) {
 		if (!strcmp((gchar *) user_data, "epaned")) {
 			settings.sidebar_width = panesize;
-			sprintf(layout, "%d",
-				settings.sidebar_width);
+			sprintf(layout, "%d", settings.sidebar_width);
 			xml_set_value("GnomeSword", "layout",
 				      "shortcutbar", layout);
 		}

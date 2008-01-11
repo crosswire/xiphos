@@ -59,6 +59,7 @@ extern "C" {
 #define UTF_8 "UTF-8" 
 extern char *OLD_CODESET;
 extern char *sword_locale;
+extern int re_encode_digits;
 /*** end defs ***/
 
 /*** function prototypes ***/
@@ -113,6 +114,8 @@ int main_get_mod_type(char * mod_name);
 char *main_get_module_description(char * module_name);
 char *main_get_treekey_local_name(unsigned long offset);
 void main_refresh_all(void);
+char *main_format_number(int x);
+int main_deformat_number(char *digitstring);
     
 #ifdef __cplusplus
 }
