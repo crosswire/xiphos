@@ -41,15 +41,22 @@ protected:
 	GtkWidget *gtkText;
 	BackEnd *be;
 public:	
-	GTKEntryDisp(GtkWidget *gtkText, BackEnd *be) 
-					 { this->gtkText = gtkText; 
-					   this->be = be;}
+	GTKEntryDisp(GtkWidget *gtkText,
+		     BackEnd *be) 
+	{
+		this->gtkText = gtkText; 
+		this->be = be;
+	}
 	virtual char Display(SWModule &imodule);
 };
 
 class GTKChapDisp : public GTKEntryDisp {
 public:
-	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
+	GTKChapDisp(GtkWidget *gtkText,
+		    BackEnd *be)
+	    : GTKEntryDisp(gtkText,be)
+	{
+	}
 	virtual char Display(SWModule &imodule);
 	virtual void getVerseBefore(SWModule &imodule,
 				    gboolean strongs_or_morph,
@@ -67,7 +74,11 @@ public:
 #ifndef USE_GTKMOZEMBED
 class GTKTextviewChapDisp : public GTKEntryDisp {
 public:
-	GTKTextviewChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
+	GTKTextviewChapDisp(GtkWidget *gtkText,
+			    BackEnd *be)
+	    : GTKEntryDisp(gtkText,be)
+	{
+	}
 	virtual char Display(SWModule &imodule);
 };
 #endif
@@ -79,20 +90,41 @@ protected:
 	BackEnd *be;
 	GLOBAL_OPS * ops;
 public:
-	DialogEntryDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) {this->gtkText = gtkText;this->d = d;this->be = be;this->ops = ops;}
+	DialogEntryDisp(GtkWidget *gtkText,
+			DIALOG_DATA *d,
+			BackEnd *be,
+			GLOBAL_OPS * ops)
+	{
+		this->gtkText = gtkText;
+		this->d = d;
+		this->be = be;
+		this->ops = ops;
+	}
 	virtual char Display(SWModule &imodule);
 };
 
 class DialogChapDisp : public  DialogEntryDisp {
 public:
-	DialogChapDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,d,be,ops) {}
+	DialogChapDisp(GtkWidget *gtkText,
+		       DIALOG_DATA *d,
+		       BackEnd *be,
+		       GLOBAL_OPS * ops)
+	    : DialogEntryDisp(gtkText,d,be,ops)
+	{
+	}
 	virtual char Display(SWModule &imodule);
 };
 
 #ifndef USE_GTKMOZEMBED
 class DialogTextviewChapDisp : public  DialogEntryDisp {
 public:
-	DialogTextviewChapDisp(GtkWidget *gtkText, DIALOG_DATA *d, BackEnd *be, GLOBAL_OPS * ops) : DialogEntryDisp(gtkText,d,be,ops) {}
+	DialogTextviewChapDisp(GtkWidget *gtkText,
+			       DIALOG_DATA *d,
+			       BackEnd *be,
+			       GLOBAL_OPS * ops)
+	    : DialogEntryDisp(gtkText,d,be,ops)
+	{
+	}
 	virtual char Display(SWModule &imodule);
 };
 #endif
@@ -102,13 +134,22 @@ protected:
 	GtkWidget *gtkText;
 	BackEnd *be;
 public:	
-	GTKPrintEntryDisp(GtkWidget *gtkText, BackEnd *be) { this->gtkText = gtkText; this->be = be;}
+	GTKPrintEntryDisp(GtkWidget *gtkText,
+			  BackEnd *be)
+	{
+		this->gtkText = gtkText;
+		this->be = be;
+	}
 	virtual char Display(SWModule &imodule);
 };
 
 class GTKPrintChapDisp : public GTKPrintEntryDisp {
 public:
-	GTKPrintChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKPrintEntryDisp(gtkText,be) {}
+	GTKPrintChapDisp(GtkWidget *gtkText,
+			 BackEnd *be)
+	    : GTKPrintEntryDisp(gtkText,be)
+	{
+	}
 	virtual char Display(SWModule &imodule);
 	MOD_FONT *mf;
 };
