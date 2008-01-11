@@ -1,3 +1,8 @@
+2008-01-11  karl <charcoal@users.sf.net>
+
+	* restore missing gtkhtml bible dialog code.
+	* in mod.mgr, change Old/New to Installed/Available.
+
 2008-01-10  karl <charcoal@users.sf.net>
 
 	* feat.req #1869036 need farsi numerals
