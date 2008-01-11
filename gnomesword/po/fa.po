@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-11 02:52+0000\n"
+"PO-Revision-Date: 2008-01-11 22:17+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:94
 msgid "Bosnian"
-msgstr ""
+msgstr "بسنی"
 
 #. done
 #: ../src/backend/module_manager.cc:95
@@ -113,7 +113,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:105
 msgid "Danish"
-msgstr ""
+msgstr "دانمرکی"
 
 #. done
 #: ../src/backend/module_manager.cc:106
@@ -149,7 +149,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:114
 msgid "Spanish"
-msgstr ""
+msgstr "اسپنیای"
 
 #. done
 #: ../src/backend/module_manager.cc:115
@@ -168,7 +168,7 @@ msgstr "فارسی"
 
 #: ../src/backend/module_manager.cc:118
 msgid "Finnish"
-msgstr ""
+msgstr "فینلندی"
 
 #. done
 #. mm_languageMap[SWBuf("fj")] = SWBuf("Fijian");
@@ -214,7 +214,7 @@ msgstr "یونانی (قدیم)"
 #. done
 #: ../src/backend/module_manager.cc:131
 msgid "Hebrew"
-msgstr ""
+msgstr "عبری"
 
 #. done
 #: ../src/backend/module_manager.cc:132
@@ -226,7 +226,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
 #: ../src/backend/module_manager.cc:135
 msgid "Croatian"
-msgstr ""
+msgstr "کرواسی"
 
 #. done
 #: ../src/backend/module_manager.cc:136
@@ -306,7 +306,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:162
 msgid "Latin"
-msgstr ""
+msgstr "لتینی"
 
 #. done
 #. mm_languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
@@ -385,7 +385,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("pi")] = SWBuf("Pali");
 #: ../src/backend/module_manager.cc:198
 msgid "Polish"
-msgstr ""
+msgstr "لهیستانی"
 
 #. done
 #: ../src/backend/module_manager.cc:199
@@ -401,7 +401,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("ps")] = SWBuf("Pushto");
 #: ../src/backend/module_manager.cc:202
 msgid "Portuguese"
-msgstr ""
+msgstr "پرتخالی"
 
 #. done
 #. mm_languageMap[SWBuf("qu")] = SWBuf("Quechua");
@@ -414,7 +414,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:207
 msgid "Russian"
-msgstr ""
+msgstr "روسی"
 
 #. done
 #. mm_languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
@@ -422,7 +422,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("sc")] = SWBuf("Sardinian");
 #: ../src/backend/module_manager.cc:211
 msgid "Scots"
-msgstr ""
+msgstr "اسکتلندی"
 
 #. done
 #. mm_languageMap[SWBuf("sd")] = SWBuf("Sindhi");
@@ -431,7 +431,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("si")] = SWBuf("Sinhalese");
 #: ../src/backend/module_manager.cc:216
 msgid "Slovak"
-msgstr ""
+msgstr "سلوکی"
 
 #. done
 #: ../src/backend/module_manager.cc:217
@@ -875,7 +875,7 @@ msgstr ""
 
 #: ../src/editor/html-editor.c:367
 msgid "Open file..."
-msgstr ""
+msgstr "پرونده باز کن"
 
 #: ../src/editor/html-editor.c:378
 msgid "Save file as..."
@@ -886,7 +886,7 @@ msgstr ""
 #: ../src/gnome2/commentary_dialog.c:1806 ../src/gnome2/dictlex.c:1026
 #: ../src/gnome2/gbs.c:868 ../src/gnome2/studypad.c:103
 msgid "File"
-msgstr ""
+msgstr "پرونده"
 
 #: ../src/editor/html-editor.c:507
 msgid "Save the changes to document"
@@ -958,7 +958,7 @@ msgstr ""
 #: ../src/gnome2/commentary.c:783 ../src/gnome2/commentary_dialog.c:1609
 #: ../src/gnome2/dictlex.c:851 ../src/gnome2/gbs.c:678
 msgid "Open Module"
-msgstr ""
+msgstr "مدول باز کن"
 
 #: ../src/gnome2/bibletext.c:937 ../src/gnome2/bibletext_dialog.c:1912
 #: ../src/gnome2/commentary.c:795 ../src/gnome2/commentary_dialog.c:1635
@@ -1939,7 +1939,7 @@ msgstr ""
 
 #: ../src/gnome2/parallel_view.c:245
 msgid "Copy"
-msgstr ""
+msgstr "کپی"
 
 #: ../src/gnome2/parallel_view.c:254
 msgid "Detach/Attach"
@@ -2018,7 +2018,7 @@ msgstr ""
 
 #: ../src/gnome2/search_dialog.c:686
 msgid "Clear List?"
-msgstr ""
+msgstr "لیست پاک کردن"
 
 #: ../src/gnome2/search_dialog.c:688
 msgid "Are you sure you want to clear the module list?"
@@ -2817,7 +2817,7 @@ msgstr ""
 #: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
 #: ../ui/editor.xml.h:11
 msgid "Save"
-msgstr ""
+msgstr "نحیره"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save using the PersistStream interface"
