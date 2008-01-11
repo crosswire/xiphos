@@ -120,6 +120,7 @@ gchar *main_parallel_change_verse(void)
 	gchar buf[256];
 	gint chapter, verse;
 	char *newbook;
+	char *numC, *numV;
 
 	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
 	chapter =
@@ -140,7 +141,13 @@ gchar *main_parallel_change_verse(void)
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
 				  chapter);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
-	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
+
+	numC = main_format_number(chapter);
+	numV = main_format_number(verse);
+	sprintf(buf, "%s %s:%s", newbook, numC, numV);
+	g_free(numC);
+	g_free(numV);
+
 	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
 	retval = buf;
 	g_free(newbook);
@@ -817,7 +824,7 @@ void main_update_parallel_page(void)
 
 			if (j == 0) {
 				sprintf(tmpBuf,
-					"<tr><td><i><font color=\"%d\" size=\"%s\">[%s]</font></i></td></tr>",
+					"<tr><td><i><font color=\"%s\" size=\"%d\">[%s]</font></i></td></tr>",
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size + settings.base_font_size,
 					settings.currentverse);
@@ -1016,15 +1023,7 @@ static void int_display(GtkHTML *html, gchar * key)
 		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
 		g_free(file);
-		/*
-		if(!use_font_size[j])
-			use_font_size[j] = g_strdup("+0");
-		if (strlen(use_font_size[j]) < 2) {
-			free(use_font_size[j]);
-			use_font_size[j] = g_strdup("+0");
-		}
-		*/
-				
+
 		if(font_size_tmp[j])
 			use_font_size[j] = g_strdup_printf("%+d",(atoi(font_size_tmp[j]) + settings.base_font_size));
 		else 
@@ -1069,18 +1068,19 @@ static void int_display(GtkHTML *html, gchar * key)
 		}
 
 		for (j = 0; j < 5; j++) {
+			char *num = main_format_number(i);
 			is_rtol = main_is_mod_rtol(mod_name[j]);
 			g_string_printf(str,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
 				"<a href=\"gnomesword.url?action=showParallel&"
 				"type=verse&value=%s\" name=\"%d\">"
-				"<font color=\"%s\">%d. </font></a>"
+				"<font color=\"%s\">%s. </font></a>"
 				"<font size=\"%s\" color=\"%s\">",
 				bgColor,
 				main_url_encode(tmpkey),
 				i,
 				settings.bible_verse_num_color,
-				i,
+				num,
 				use_font_size[j],
 				textColor);
 			if (str->len) {

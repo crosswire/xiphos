@@ -165,7 +165,7 @@ void main_navbar_versekey_spin_chapter(NAVBAR_VERSEKEY navbar, int direction)
 	vkey = tmpkey;
 	chapter = (direction)?(vkey.Chapter()+1):(vkey.Chapter()-1);
 	vkey.Chapter(chapter);
-	tmpkey = g_strdup_printf("%s %d:1",vkey.getBookName(),vkey.Chapter());
+	tmpkey = g_strdup_printf("%s %d:1", vkey.getBookName(), vkey.Chapter());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
@@ -217,9 +217,8 @@ void main_navbar_versekey_spin_verse(NAVBAR_VERSEKEY navbar, int direction)
 	vkey = tmpkey;
 	verse = (direction)?(vkey.Verse()+1):(vkey.Verse()-1);
 	vkey.Verse(verse);
-	tmpkey = g_strdup_printf("%s %d:%d",vkey.getBookName(),
-					    vkey.Chapter(),
-					    vkey.Verse());
+	tmpkey = g_strdup_printf("%s %d:%d", vkey.getBookName(),
+				 vkey.Chapter(), vkey.Verse());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
@@ -478,6 +477,7 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 /*	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;    */
+	char *num;
 	
 	if(!navbar.module_name->len)
 		return;
@@ -500,14 +500,18 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 		book = vkey.Book();
 	
 	
-	tmpbuf = g_strdup_printf("<b>%s</b>",vkey.getBookName());
-	gtk_label_set_label(GTK_LABEL(navbar.label_book_menu),tmpbuf);
+	tmpbuf = g_strdup_printf("<b>%s</b>", vkey.getBookName());
+	gtk_label_set_label(GTK_LABEL(navbar.label_book_menu), tmpbuf);
 	
-	tmpbuf = g_strdup_printf("<b>%d</b>",vkey.Chapter());
-	gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu),tmpbuf);
+	num = main_format_number(vkey.Chapter());
+	tmpbuf = g_strdup_printf("<b>%s</b>", num);
+	g_free(num);
+	gtk_label_set_label(GTK_LABEL(navbar.label_chapter_menu), tmpbuf);
 	
-	tmpbuf = g_strdup_printf("<b>%d</b>",vkey.Verse());
-	gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu),tmpbuf);
+	num = main_format_number(vkey.Verse());
+	tmpbuf = g_strdup_printf("<b>%s</b>", num);
+	g_free(num);
+	gtk_label_set_label(GTK_LABEL(navbar.label_verse_menu), tmpbuf);
 	
 	navbar.key = g_string_assign(navbar.key,(char*)vkey.getText());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
@@ -541,7 +545,8 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 {
 	VerseKey vkey; 
 //	char *gkey = NULL;
-	char buf[5];
+	// char buf[5];
+	char *num;
 /*	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;    */
@@ -576,9 +581,9 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 		
 	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
 	for(i=1; i <= x; i++) {
-		sprintf(buf,"%d",i);
+		num = main_format_number(i);
 		if (i == xverse) {
-			select_item = gtk_menu_item_new_with_label(buf);
+			select_item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(select_item);	
 			gtk_menu_shell_append(menu_shell, select_item);
 			g_signal_connect(GTK_OBJECT(select_item), "activate",
@@ -586,7 +591,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 				   (on_verse_menu_select),
 				   GINT_TO_POINTER(i));
 		} else {
-			item = gtk_menu_item_new_with_label(buf);
+			item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(item);	
 			gtk_menu_shell_append(menu_shell, item);
 			g_signal_connect(GTK_OBJECT(item), "activate",
@@ -594,6 +599,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 				   (on_verse_menu_select),
 				   GINT_TO_POINTER(i));
 		}
+		g_free(num);
 	}
 	if(select_item)
 		gtk_menu_shell_select_item(menu_shell,select_item);
@@ -624,7 +630,8 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 {
 	VerseKey vkey; 
 //	char *gkey = NULL;
-	char buf[5];
+	// char buf[5];
+	char *num;
 /*	gsize bytes_read;
 	gsize bytes_written;
 	GError *error = NULL;   */
@@ -656,9 +663,9 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	int xchapter = vkey.Chapter();
 	x = (vkey.books[xtestament-1][xbook-1].chapmax);
 	for(i=1; i <= x; i++) {
-		sprintf(buf,"%d",i);
+		num = main_format_number(i);
 		if (i == xchapter) {
-			select_item = gtk_menu_item_new_with_label(buf);
+			select_item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(select_item);
 			gtk_menu_shell_append(menu_shell, select_item);
 			g_signal_connect(GTK_OBJECT(select_item), "activate",
@@ -666,7 +673,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 				   (on_chapter_menu_select),
 				   GINT_TO_POINTER(i));
 		} else {
-			item = gtk_menu_item_new_with_label(buf);
+			item = gtk_menu_item_new_with_label(num);
 			gtk_widget_show(item);	
 			gtk_menu_shell_append(menu_shell, item);
 			g_signal_connect(GTK_OBJECT(item), "activate",
@@ -674,6 +681,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 				   (on_chapter_menu_select),
 				   GINT_TO_POINTER(i));
 		}
+		g_free(num);
 	}
 	if(select_item)
 		gtk_menu_shell_select_item(menu_shell,select_item);	
