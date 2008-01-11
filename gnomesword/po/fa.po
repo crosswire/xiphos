@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-08 23:42+0000\n"
+"PO-Revision-Date: 2008-01-11 00:26+0000\n"
 "Last-Translator:  <>\n"
-"Language-Team: \n"
+"Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=\n"
 "Content-Transfer-Encoding: "
@@ -591,7 +591,7 @@ msgstr ""
 #: ../src/main/display.cc:723 ../src/main/display.cc:768
 #: ../src/main/display.cc:836 ../src/main/display.cc:841
 msgid "Chapter"
-msgstr ""
+msgstr "فصل"
 
 #: ../src/main/lists.cc:158
 msgid "Number of Text modules"
@@ -693,7 +693,7 @@ msgstr ""
 
 #: ../src/main/search_dialog.cc:1523
 msgid "Search finished"
-msgstr ""
+msgstr "جستجو تمام شد"
 
 #: ../src/main/sidebar.cc:374
 msgid "verse"
@@ -795,7 +795,7 @@ msgstr "شخسی"
 
 #: ../src/main/xml.c:96
 msgid "What must I do to be saved?"
-msgstr ""
+msgstr "راه نجت چیست؟"
 
 #: ../src/main/xml.c:98 ../src/main/xml.c:99
 msgid "Acts 16:31"
@@ -910,7 +910,7 @@ msgstr ""
 
 #: ../src/gnome2/about_gnomesword.c:126
 msgid "Copyright 2000-2007 The GnomeSword Development Team"
-msgstr ""
+msgstr "هق جپ: The·GnomeSword·Development·Team"
 
 #: ../src/gnome2/about_gnomesword.c:129
 msgid ""
@@ -1021,7 +1021,7 @@ msgstr ""
 #: ../src/gnome2/dictlex.c:935 ../src/gnome2/gbs.c:777
 #: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
-msgstr ""
+msgstr "سیرنویس"
 
 #: ../src/gnome2/bibletext.c:1032 ../src/gnome2/bibletext_dialog.c:2007
 #: ../src/gnome2/commentary.c:890 ../src/gnome2/commentary_dialog.c:1730
@@ -1057,7 +1057,7 @@ msgstr ""
 #: ../src/gnome2/commentary.c:930 ../src/gnome2/commentary_dialog.c:1770
 #: ../src/gnome2/dictlex.c:983 ../src/gnome2/gbs.c:825
 msgid "Headings"
-msgstr ""
+msgstr "رونویس"
 
 #: ../src/gnome2/bibletext.c:1080 ../src/gnome2/bibletext_dialog.c:2055
 #: ../src/gnome2/commentary.c:938 ../src/gnome2/commentary_dialog.c:1778
@@ -1098,7 +1098,7 @@ msgstr ""
 #: ../src/gnome2/commentary_dialog.c:1812 ../src/gnome2/dictlex.c:1032
 #: ../src/gnome2/gbs.c:874
 msgid "Edit"
-msgstr ""
+msgstr "ویرایش"
 
 #: ../src/gnome2/bibletext.c:1127 ../src/gnome2/bibletext_dialog.c:2095
 #: ../src/gnome2/commentary.c:985 ../src/gnome2/commentary_dialog.c:1818
@@ -1988,15 +1988,15 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1540 ../ui/prefs.glade.h:52
 msgid "Preferences"
-msgstr ""
+msgstr "انتخابات"
 
 #: ../src/gnome2/preferences_dialog.c:1619
 msgid "Fonts"
-msgstr ""
+msgstr "فونتها"
 
 #: ../src/gnome2/preferences_dialog.c:1622
 msgid "Color"
-msgstr ""
+msgstr "رنگ"
 
 #: ../src/gnome2/preferences_dialog.c:1625
 #: ../src/gnome2/preferences_dialog.c:1639
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:1629
 msgid "General"
-msgstr ""
+msgstr "ومومی"
 
 #: ../src/gnome2/preferences_dialog.c:1632 ../ui/prefs.glade.h:59
 msgid "Tabs and Panes"
@@ -2044,7 +2044,7 @@ msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:205
 msgid "Bible"
-msgstr ""
+msgstr "کتاب مقدس"
 
 #: ../src/gnome2/search_sidebar.c:214 ../ui/prefs.glade.h:27
 msgid "Commentary"
@@ -2124,7 +2124,7 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:1325
 msgid "_Modules"
-msgstr ""
+msgstr "مدولها"
 
 #: ../src/gnome2/sidebar.c:1333
 msgid "_Bookmarks"
@@ -2132,15 +2132,15 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:1350
 msgid "Verse _List"
-msgstr ""
+msgstr "لیست ایات"
 
 #: ../src/gnome2/sidebar.c:1509
 msgid "Search"
-msgstr ""
+msgstr "جستجو"
 
 #: ../src/gnome2/sidebar.c:1519
 msgid "Verse List"
-msgstr ""
+msgstr "لیست ایات"
 
 #: ../src/gnome2/splash.c:362
 msgid "Powered by the SWORD Project"
@@ -2184,11 +2184,11 @@ msgstr ""
 
 #: ../src/gnome2/toolbar_nav.c:637
 msgid "Change Chapter"
-msgstr ""
+msgstr "فصل تازه"
 
 #: ../src/gnome2/toolbar_nav.c:707
 msgid "Change Verse"
-msgstr ""
+msgstr "ایا تازه"
 
 #: ../src/gnome2/toolbar_nav.c:775
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
@@ -2214,15 +2214,15 @@ msgstr ""
 
 #: ../ui/bookmarks.glade.h:4
 msgid "Module:"
-msgstr ""
+msgstr "مدول:"
 
 #: ../ui/bookmarks.glade.h:5
 msgid "New ..."
-msgstr ""
+msgstr "جدید:"
 
 #: ../ui/bookmarks.glade.h:6
 msgid "Verse:"
-msgstr ""
+msgstr "ایا:"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -2320,7 +2320,7 @@ msgstr "نور روزنی"
 
 #: ../ui/prefs.glade.h:31
 msgid "Default Dictionary"
-msgstr ""
+msgstr "کتاب فرهنگی معمولی"
 
 #: ../ui/prefs.glade.h:32
 msgid "Dictionary"
@@ -2328,11 +2328,11 @@ msgstr "کتاب فرهنگی"
 
 #: ../ui/prefs.glade.h:33
 msgid "Dictionary/Lexicon"
-msgstr ""
+msgstr "کتاب فرهنگی"
 
 #: ../ui/prefs.glade.h:34
 msgid "Font Colors"
-msgstr ""
+msgstr "رنگها فونت"
 
 #: ../ui/prefs.glade.h:35
 msgid "Font Misc"
@@ -2348,7 +2348,7 @@ msgstr "کتاب فرهنگی یونانی"
 
 #: ../ui/prefs.glade.h:38
 msgid "Hebrew Lexicon"
-msgstr ""
+msgstr "کتاب فرهنگی عبری"
 
 #: ../ui/prefs.glade.h:39
 msgid "Highlight Background"
