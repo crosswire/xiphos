@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-11 00:26+0000\n"
+"PO-Revision-Date: 2008-01-11 02:43+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -1699,7 +1699,7 @@ msgstr "نمایش تفصیری"
 
 #: ../src/gnome2/main_window.c:860
 msgid "Book View"
-msgstr ""
+msgstr "نمایش کتاب"
 
 #: ../src/gnome2/mod_mgr.c:249
 msgid "Install these modules:"
@@ -1867,7 +1867,7 @@ msgstr ""
 #: ../src/gnome2/mod_mgr.c:1391 ../src/gnome2/preferences_dialog.c:1643
 #: ../src/gnome2/sidebar.c:1530
 msgid "Modules"
-msgstr ""
+msgstr "مۆدئل‌ها"
 
 #: ../src/gnome2/mod_mgr.c:1393
 msgid "Install/Update"
