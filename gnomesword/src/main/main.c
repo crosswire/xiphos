@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	gui_init(argc, argv);
 	
 	if (argc > 2) {
-		gui_generic_warning("GnomeSword does not understand more than one argument.");
+		gui_generic_warning(_("GnomeSword does not understand more than one argument."));
 		exit(1);
 	}
 
