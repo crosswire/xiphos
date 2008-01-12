@@ -1,3 +1,8 @@
+2008-01-12  karl <charcoal@users.sf.net>
+
+	* stop several memleaks in mod.mgr
+	* restructure mod.mgr to use SWMgr more correctly.
+
 2008-01-11  karl <charcoal@users.sf.net>
 
 	* restore missing gtkhtml bible dialog code.

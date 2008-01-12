@@ -461,40 +461,25 @@ int backend_mod_mgr_is_module(const char *mod_name) {
 MOD_MGR *backend_module_mgr_get_next_module(void)
 {
 	MOD_MGR *mod_info = NULL;
-/*	const char *buf;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error;    */
 	SWModule *module;
 	
-	if(it != end) {
+	if (it != end) {
 		module = it->second;
 		mod_info = g_new(MOD_MGR, 1);
-/*		mod_info->name = g_convert(module->Name(),
-					   -1,
-					   UTF_8,
-					   OLD_CODESET,
-					   &bytes_read,
-					   &bytes_written, error);    */
-		mod_info->name = strdup(module->Name());
+		gchar *name = module->Name();
 
-		if (mod_info->name) {
-			mod_info->language = (module->Lang())?
-				backend_mod_mgr_get_language_map(module->Lang()): 
-				"unknown";
-/*			mod_info->type = g_convert(module->Type(),
-						   -1,
-						   UTF_8,
-						   OLD_CODESET,
-						   &bytes_read,
-						   &bytes_written,
-						   error);    */
+		if (name) {
+			mod_info->name = g_strdup(name);
+			mod_info->language =
+			    (module->Lang()
+			     ? backend_mod_mgr_get_language_map(module->Lang())
+			     : "unknown");
 			mod_info->type = strdup(module->Type());
 
-			char *vers = (char*)module->getConfigEntry("Version");
+			char *vers = (char *)module->getConfigEntry("Version");
 			mod_info->new_version = strdup(vers ? vers : " ");
 
-			char *installsize = (char*)module->getConfigEntry("InstallSize");
+			char *installsize = (char *)module->getConfigEntry("InstallSize");
 			if (installsize && (isdigit(*installsize))) {
 				int isize = atoi(installsize);
 				char *num;
@@ -510,23 +495,14 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 				}
 				g_free(num);
 			} else
-			    mod_info->installsize = g_strdup("-?-");
+				mod_info->installsize = g_strdup("-?-");
 
-			char *feature = (char*)module->getConfigEntry("Feature");
-			if (feature && !strcmp(feature, "DailyDevotion"))
-				mod_info->is_devotional = 1;
-			else
-				mod_info->is_devotional = 0;
+			char *feature = (char *)module->getConfigEntry("Feature");
+			mod_info->is_devotional = (feature && !strcmp(feature, "DailyDevotion"));
 
-			char *category = (char*)module->getConfigEntry("Category");
-			if (category && !strcmp(category, "Maps"))
-				mod_info->is_maps = 1;
-			else
-				mod_info->is_maps = 0;
-			if (category && !strcmp(category, "Images"))
-				mod_info->is_images = 1;
-			else
-				mod_info->is_images = 0;			
+			char *category = (char *)module->getConfigEntry("Category");
+			mod_info->is_maps   = (category && !strcmp(category, "Maps"));
+			mod_info->is_images = (category && !strcmp(category, "Images"));
 
 			mod_info->old_version =
 			    backend_mod_mgr_get_config_entry(mod_info->name, "Version");
@@ -534,7 +510,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 			    backend_mod_mgr_is_module(mod_info->name);
 			mod_info->description = module->Description();
 			mod_info->locked = 
-				(module->getConfigEntry("CipherKey")) ? 1 : 0;
+			    ((module->getConfigEntry("CipherKey")) ? 1 : 0);
 			it++;	
 			return (MOD_MGR *) mod_info;
 		}
@@ -1035,12 +1011,28 @@ char *set_mod_mgr_locale(const char *sys_locale) {
  *   void
  */
 
-void backend_init_module_mgr(const char *dir)
+void backend_init_module_mgr(const char *dir, gboolean augment)
 {
-	if(dir)
-		mgr = new SWMgr(dir);
-	else
+	if (dir) {
+		if (augment) {
+			// normal case: this will include ~/.sword content.
+			mgr = new SWMgr(dir);
+		} else {
+			// local directory install special case.
+			mgr = new SWMgr(dir, true, 0, false, false);
+			// re-assert defaults:
+			// autoload    -> true
+			// filtermgr   -> null
+			// multimod    -> false
+			// NON-DEFAULT:
+			// AUGMENTHOME -> FALSE
+			// because we do not want to include everything already
+			// installed as prepare to do more installations.
+		}
+	} else {
 		mgr = new SWMgr();
+	}
+
 	const char *lang = getenv("LANG");	
 	if (!lang) lang="C";
 	//printf("dir = %s\n",dir);
@@ -1052,7 +1044,7 @@ void backend_init_module_mgr(const char *dir)
 	installMgr = new InstallMgr(baseDir, statusReporter);
 	//installMgr = new InstallMgr(baseDir);
 	backend_mod_mgr_init_language_map();
-	backend_module_mgr_list_local_sources();
+	//backend_module_mgr_list_local_sources();
 }
 
 /******************************************************************************

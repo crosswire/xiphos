@@ -71,9 +71,9 @@ enum {
 	COLUMN_FASTREADY,
 	COLUMN_LOCKED,
 	COLUMN_FIXED,
-	COLUMN_OLD_VERSION,
+	COLUMN_INSTALLED_VERSION,
 	COLUMN_DIFFERENT,
-	COLUMN_NEW_VERSION,
+	COLUMN_AVAILABLE_VERSION,
 	COLUMN_INSTALLSIZE,
 	COLUMN_DESC,
 	COLUMN_VISIBLE,
@@ -228,7 +228,7 @@ static void remove_install_modules(GList * modules, int activity)
 	gint test;
 	gint failed = 1;
 	GS_DIALOG *yes_no_dialog;
-	GString *mods = g_string_new(NULL);
+	GString *mods = g_string_new("");
 	GString *dialog_text = g_string_new(NULL);
 
 	tmp = modules;
@@ -236,13 +236,11 @@ static void remove_install_modules(GList * modules, int activity)
 		buf = (gchar *) tmp->data;
 		if (buf[0] == '*')
 			++buf;
+		if (*(mods->str))	// not the first
+			mods = g_string_append(mods, ", ");
 		mods = g_string_append(mods, buf);
-		mods = g_string_append(mods, ", ");
 		tmp = g_list_next(tmp);
 	}
-	mods = g_string_truncate(mods, mods->len - 2);
-	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 
 	switch (activity)
 	{
@@ -260,7 +258,10 @@ static void remove_install_modules(GList * modules, int activity)
 	g_string_printf(dialog_text,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			verb, mods->str);
+	g_string_free(mods, TRUE);
 
+	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 	yes_no_dialog->label_top = dialog_text->str;
 	yes_no_dialog->yes = TRUE;
 	yes_no_dialog->no = TRUE;
@@ -274,10 +275,12 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 		g_list_free(tmp);
 		g_free(yes_no_dialog);
-		g_string_free(mods, TRUE);
 		g_string_free(dialog_text, TRUE);
 		return;
 	}
+	g_free(yes_no_dialog);
+	g_string_free(dialog_text, TRUE);
+
 	switch (activity)
 	{
 	case INSTALL:
@@ -295,8 +298,6 @@ static void remove_install_modules(GList * modules, int activity)
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	g_free(yes_no_dialog);
-	g_string_free(dialog_text, TRUE);
 	gtk_widget_queue_draw(dialog);
 	gtk_widget_hide(button_close);
 	gtk_widget_hide(button1);
@@ -420,7 +421,7 @@ static void remove_install_modules(GList * modules, int activity)
 		}
 
 		if (activity == INSTALL) {
-			GS_print(("install %s, source=%s\n", buf,source));
+			GS_print(("install %s, source=%s\n", buf, source));
 			if (local)
 				failed =
 				    mod_mgr_local_install_module(source, buf);
@@ -685,10 +686,10 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 					   COLUMN_FASTREADY, fasticon,
 					   COLUMN_LOCKED, locked,
 					   COLUMN_FIXED, FALSE,
-					   COLUMN_OLD_VERSION,
+					   COLUMN_INSTALLED_VERSION,
 					   info->old_version,
 					   COLUMN_DIFFERENT, refresh,
-					   COLUMN_NEW_VERSION,
+					   COLUMN_AVAILABLE_VERSION,
 					   info->new_version,
 					   COLUMN_INSTALLSIZE,
 					   info->installsize,
@@ -821,17 +822,17 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 			source =
 			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry1)->child));
 			local = TRUE;
+			tmp = mod_mgr_list_local_modules(source, FALSE);
+			// false -> tell installmgr not to mess with ~/.sword content.
 		} else {
 			source =
 			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child));
 			local = FALSE;
-		}
-		if (local)
-			tmp = mod_mgr_list_local_modules(source);
-		else
 			tmp = mod_mgr_remote_list_modules(source);
+		}
 	} else {
-		tmp = mod_mgr_list_local_modules(main_get_path_to_mods());
+		tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
+		// true -> we must have all modules available, incl. ~/.sword content.
 	}
 
 	store = GTK_TREE_STORE(gtk_tree_view_get_model(treeview));
@@ -1214,10 +1215,10 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Installed"),
 						     renderer, "text",
-						     COLUMN_OLD_VERSION,
+						     COLUMN_INSTALLED_VERSION,
 						     NULL);
 	/*gtk_tree_view_column_set_sort_column_id(column,
-	   COLUMN_OLD_VERSION); */
+	   COLUMN_INSTALLED_VERSION); */
 	gtk_tree_view_append_column(treeview, column);
 
 	if (remove)
@@ -1241,10 +1242,10 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Available"),
 						     renderer, "text",
-						     COLUMN_NEW_VERSION,
+						     COLUMN_AVAILABLE_VERSION,
 						     NULL);
 	/*gtk_tree_view_column_set_sort_column_id(column,
-	   COLUMN_NEW_VERSION); */
+	   COLUMN_AVAILABLE_VERSION); */
 	gtk_tree_view_append_column(treeview, column);
 
 	/* column for source install size */
@@ -1464,19 +1465,19 @@ static void load_source_treeviews(void)
 		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry1));
 	GtkTreeModel* module_box_remote = 
 		gtk_combo_box_get_model(GTK_COMBO_BOX(combo_entry2));
+
 	/* remote */
 	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
 	gtk_list_store_clear(GTK_LIST_STORE(module_box_remote));
-	tmp = mod_mgr_list_remote_sources();
-	tmp2 = g_list_first(tmp);
+	tmp = tmp2 = mod_mgr_list_remote_sources();;
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gtk_list_store_append(GTK_LIST_STORE(remote_model),
 				      &iter);
 		gtk_list_store_set(GTK_LIST_STORE(remote_model), &iter,
-				   COLUMN_TYPE, mms->type,
-				   COLUMN_CAPTION, mms->caption,
-				   COLUMN_SOURCE, mms->source,
+				   COLUMN_TYPE,      mms->type,
+				   COLUMN_CAPTION,   mms->caption,
+				   COLUMN_SOURCE,    mms->source,
 				   COLUMN_DIRECTORY, mms->directory,
 				   -1);
 		gtk_list_store_append(GTK_LIST_STORE(module_box_remote), &combo_iter);
@@ -1485,41 +1486,28 @@ static void load_source_treeviews(void)
 					0, 
 					(gchar*)mms->caption, 
 					-1);
-		tmp = g_list_next(tmp);
-	}
-	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2), 0);
-	while (tmp2) {
-		mms = (MOD_MGR_SOURCE *) tmp2->data;
 		g_free((gchar*)mms->type);
 		g_free((gchar*)mms->caption);
 		g_free((gchar*)mms->source);
 		g_free((gchar*)mms->directory);
 		g_free(mms);
-		tmp2 = g_list_next(tmp2); 
+		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);
-	tmp = NULL;
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2), 0);
 	g_list_free(tmp2);
-	tmp2 = NULL;
 
 	/* local */
 	gtk_list_store_clear(GTK_LIST_STORE(local_model));
 	gtk_list_store_clear(GTK_LIST_STORE(module_box_local));
-	tmp = mod_mgr_list_local_sources();
-	/*if (tmp) {
-		mms = (MOD_MGR_SOURCE *) tmp->data;
-		gnome_file_entry_set_filename((GnomeFileEntry *)
-					      fileentry1,
-					      mms->directory);
-	}*/
+	tmp = tmp2 = mod_mgr_list_local_sources();
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gtk_list_store_append(GTK_LIST_STORE(local_model),
 				      &iter);
 		gtk_list_store_set(GTK_LIST_STORE(local_model), &iter,
-				   COLUMN_TYPE, mms->type,
-				   COLUMN_CAPTION, mms->caption,
-				   COLUMN_SOURCE, mms->source,
+				   COLUMN_TYPE,      mms->type,
+				   COLUMN_CAPTION,   mms->caption,
+				   COLUMN_SOURCE,    " ", // mms->source - eh.
 				   COLUMN_DIRECTORY, mms->directory,
 				   -1);
 		gtk_list_store_append(GTK_LIST_STORE(module_box_local), &combo_iter);
@@ -1528,13 +1516,15 @@ static void load_source_treeviews(void)
 					0, 
 					(gchar*)mms->caption, 
 					-1);
+		g_free((gchar*)mms->type);
+		g_free((gchar*)mms->caption);
+		g_free((gchar*)mms->source);
+		g_free((gchar*)mms->directory);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry1), 0);
-	g_list_free(tmp);
-
-
+	g_list_free(tmp2);
 }
 
 
