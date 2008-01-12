@@ -4,6 +4,7 @@
 	* restructure mod.mgr to use SWMgr more correctly.
 	* fix mod.mgr use of local sources.
 	* bunch of cosmetic crud in mod_mgr.*.
+	* add to RELEASE-NOTES, anticipating 20 january.
 
 2008-01-11  karl <charcoal@users.sf.net>
 

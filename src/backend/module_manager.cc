@@ -265,7 +265,7 @@ void backend_mod_mgr_init_language_map(void) {
 
 /******************************************************************************
  * Name
- *   preDownloadStatus
+ *   preStatus
  *
  * Synopsis
  *   #include "backend/module_manager.hh"
@@ -448,18 +448,18 @@ int backend_mod_mgr_is_module(const char *mod_name) {
 
 /******************************************************************************
  * Name
- *   module_mgr_list_modules
+ *   backend_module_mgr_get_next_module
  *
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   GList *module_mgr_list_modules(SWMgr * mgr)
+ *   GList *backend_module_mgr_get_next_module()
  *
  * Description
  *   
  *
  * Return value
- *   GList *
+ *   MOD_MGR *
  */
 
 MOD_MGR *backend_module_mgr_get_next_module(void)
@@ -831,7 +831,7 @@ void backend_init_module_mgr_config(void)
 	SWConfig config(confPath.c_str());
 
 	InstallSource is("FTP");
-	is.caption = "crosswire";
+	is.caption = "Crosswire";
 	is.source = "ftp.crosswire.org";
 	is.directory = "/pub/sword/raw";
 	
@@ -1021,14 +1021,14 @@ void backend_init_module_mgr(const char *dir,
 		} else {
 			// local directory install special case.
 			mgr = new SWMgr(dir, true, 0, false, false);
-			// see template.  re-assert defaults:
+			// see template.  re-assert 3 of 4 defaults:
 			// autoload    -> true
 			// filtermgr   -> null
 			// multimod    -> false
 			// NON-DEFAULT:
 			// AUGMENTHOME -> FALSE
 			// because we do not want to include everything already
-			// installed as prepare to do more installations.
+			// installed as we prepare to do more installations.
 		}
 	} else {
 		mgr = new SWMgr();
@@ -1051,12 +1051,12 @@ void backend_init_module_mgr(const char *dir,
 
 /******************************************************************************
  * Name
- *   
+ *   backend_terminate_module_mgr
  *
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   void (void)
+ *   void backend_terminate_module_mgr(void)
  *
  * Description
  *   
