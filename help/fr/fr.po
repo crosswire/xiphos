@@ -1,14 +1,14 @@
 # French translation of GnomeSword
-# Copyright (C) 2007 Free Software Foundation, Inc.
+# Copyright (C) 2008 Free Software Foundation, Inc.
 # Dominique Corbex <domcox@users.sourceforge.net>, 2007.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2.3.0\n"
+"Project-Id-Version: GnomeSword 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-30 19:26+0200\n"
-"PO-Revision-Date: 2007-09-30 21:03+0200\n"
+"POT-Creation-Date: 2008-01-12 23:25+0100\n"
+"PO-Revision-Date: 2008-01-12 23:26+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -280,8 +280,8 @@ msgid "2003"
 msgstr "2003"
 
 #: ../C/gnomesword.xml:59(year)
-msgid "2007"
-msgstr "2007"
+msgid "2008"
+msgstr "2008"
 
 #: ../C/gnomesword.xml:60(holder) ../C/gnomesword.xml:75(publishername)
 msgid "The GnomeSword Team"
@@ -431,350 +431,366 @@ msgid "Kleinpaste"
 msgstr "Kleinpaste"
 
 #: ../C/gnomesword.xml:132(revnumber)
-msgid "GnomeSword Manual 2.3.0"
+msgid "GnomeSword Manual 2.3.3"
 msgstr "Manuel de GnomeSword &manrevision;"
 
 #: ../C/gnomesword.xml:133(date)
-msgid "September 2007"
-msgstr "Septembre 2007"
+msgid "January 2008"
+msgstr "Janvier 2008"
 
 #: ../C/gnomesword.xml:137(revnumber)
+msgid "GnomeSword 2.3.2"
+msgstr "GnomeSword 2.3.2"
+
+#: ../C/gnomesword.xml:138(date)
+msgid "2007-12-26"
+msgstr "2007-12-26"
+
+#: ../C/gnomesword.xml:141(revnumber)
+msgid "GnomeSword 2.3.1"
+msgstr "GnomeSword 2.3.1"
+
+#: ../C/gnomesword.xml:142(date)
+msgid "2007-10-15"
+msgstr "2007-10-15"
+
+#: ../C/gnomesword.xml:145(revnumber)
 msgid "GnomeSword 2.2.3"
 msgstr "GnomeSword 2.2.3"
 
-#: ../C/gnomesword.xml:138(date)
+#: ../C/gnomesword.xml:146(date)
 msgid "2007-03-26"
 msgstr "2007-03-26"
 
-#: ../C/gnomesword.xml:141(revnumber)
+#: ../C/gnomesword.xml:149(revnumber)
 msgid "GnomeSword 2.2.1"
 msgstr "GnomeSword 2.2.1"
 
-#: ../C/gnomesword.xml:142(date)
+#: ../C/gnomesword.xml:150(date)
 msgid "2007-01-27"
 msgstr "2007-01-27"
 
-#: ../C/gnomesword.xml:145(revnumber)
+#: ../C/gnomesword.xml:153(revnumber)
 msgid "GnomeSword 2.2.0"
 msgstr "GnomeSword 2.2.0"
 
-#: ../C/gnomesword.xml:146(date)
+#: ../C/gnomesword.xml:154(date)
 msgid "2006-12-23"
 msgstr "2006-12-23"
 
-#: ../C/gnomesword.xml:149(revnumber)
+#: ../C/gnomesword.xml:157(revnumber)
 msgid "GnomeSword 2.1.10"
 msgstr "GnomeSword 2.1.10"
 
-#: ../C/gnomesword.xml:150(date)
+#: ../C/gnomesword.xml:158(date)
 msgid "2006-12-10"
 msgstr "2006-12-10"
 
-#: ../C/gnomesword.xml:153(revnumber)
+#: ../C/gnomesword.xml:161(revnumber)
 msgid "GnomeSword 2.1.9"
 msgstr "GnomeSword 2.1.9"
 
-#: ../C/gnomesword.xml:154(date)
+#: ../C/gnomesword.xml:162(date)
 msgid "2006-11-12"
 msgstr "2006-11-12"
 
-#: ../C/gnomesword.xml:157(revnumber)
+#: ../C/gnomesword.xml:165(revnumber)
 msgid "GnomeSword 2.1.8"
 msgstr "GnomeSword 2.1.8"
 
-#: ../C/gnomesword.xml:158(date)
+#: ../C/gnomesword.xml:166(date)
 msgid "2006-11-08"
 msgstr "2006-11-08"
 
-#: ../C/gnomesword.xml:161(revnumber)
+#: ../C/gnomesword.xml:169(revnumber)
 msgid "GnomeSword 2.1.7"
 msgstr "GnomeSword 2.1.7"
 
-#: ../C/gnomesword.xml:162(date)
+#: ../C/gnomesword.xml:170(date)
 msgid "2006-05-04"
 msgstr "2006-05-04"
 
-#: ../C/gnomesword.xml:165(revnumber)
+#: ../C/gnomesword.xml:173(revnumber)
 msgid "GnomeSword 2.1.6"
 msgstr "GnomeSword 2.1.6"
 
-#: ../C/gnomesword.xml:166(date)
+#: ../C/gnomesword.xml:174(date)
 msgid "2006-04-13"
 msgstr "2006-04-13"
 
-#: ../C/gnomesword.xml:169(revnumber)
+#: ../C/gnomesword.xml:177(revnumber)
 msgid "GnomeSword 2.1.5"
 msgstr "GnomeSword 2.1.5"
 
-#: ../C/gnomesword.xml:170(date)
+#: ../C/gnomesword.xml:178(date)
 msgid "2005-12-14"
 msgstr "2005-12-14"
 
-#: ../C/gnomesword.xml:173(revnumber)
+#: ../C/gnomesword.xml:181(revnumber)
 msgid "GnomeSword 2.1.4"
 msgstr "GnomeSword 2.1.4"
 
-#: ../C/gnomesword.xml:174(date)
+#: ../C/gnomesword.xml:182(date)
 msgid "2005-12-13"
 msgstr "2005-12-13"
 
-#: ../C/gnomesword.xml:177(revnumber)
+#: ../C/gnomesword.xml:185(revnumber)
 msgid "GnomeSword 2.1.2"
 msgstr "GnomeSword 2.1.2"
 
-#: ../C/gnomesword.xml:178(date)
+#: ../C/gnomesword.xml:186(date)
 msgid "2005-05-31"
 msgstr "2005-05-31"
 
-#: ../C/gnomesword.xml:181(revnumber)
+#: ../C/gnomesword.xml:189(revnumber)
 msgid "GnomeSword 2.1.1"
 msgstr "GnomeSword 2.1.1"
 
-#: ../C/gnomesword.xml:182(date)
+#: ../C/gnomesword.xml:190(date)
 msgid "2004-07-18"
 msgstr "2004-07-18"
 
-#: ../C/gnomesword.xml:185(revnumber)
+#: ../C/gnomesword.xml:193(revnumber)
 msgid "GnomeSword 2.1.0"
 msgstr "GnomeSword 2.1.0"
 
-#: ../C/gnomesword.xml:186(date)
+#: ../C/gnomesword.xml:194(date)
 msgid "2004-08-30"
 msgstr "2004-08-30"
 
-#: ../C/gnomesword.xml:189(revnumber)
+#: ../C/gnomesword.xml:197(revnumber)
 msgid "GnomeSword 2.0.0"
 msgstr "GnomeSword 2.0.0"
 
-#: ../C/gnomesword.xml:190(date)
+#: ../C/gnomesword.xml:198(date)
 msgid "2003-12-25"
 msgstr "2003-12-25"
 
-#: ../C/gnomesword.xml:193(revnumber)
+#: ../C/gnomesword.xml:201(revnumber)
 msgid "GnomeSword 0.7.10"
 msgstr "GnomeSword 0.7.10"
 
-#: ../C/gnomesword.xml:194(date)
+#: ../C/gnomesword.xml:202(date)
 msgid "2003-09-05"
 msgstr "2003-09-05"
 
-#: ../C/gnomesword.xml:197(revnumber)
+#: ../C/gnomesword.xml:205(revnumber)
 msgid "GnomeSword 0.7.9"
 msgstr "GnomeSword 0.7.9"
 
-#: ../C/gnomesword.xml:198(date)
+#: ../C/gnomesword.xml:206(date)
 msgid "2003-03-26"
 msgstr "2003-03-26"
 
-#: ../C/gnomesword.xml:201(revnumber)
+#: ../C/gnomesword.xml:209(revnumber)
 msgid "GnomeSword 0.7.8"
 msgstr "GnomeSword 0.7.8"
 
-#: ../C/gnomesword.xml:202(date)
+#: ../C/gnomesword.xml:210(date)
 msgid "2003-01-12"
 msgstr "2003-01-12"
 
-#: ../C/gnomesword.xml:205(revnumber)
+#: ../C/gnomesword.xml:213(revnumber)
 msgid "GnomeSword 0.7.7"
 msgstr "GnomeSword 0.7.7"
 
-#: ../C/gnomesword.xml:206(date)
+#: ../C/gnomesword.xml:214(date)
 msgid "2002-12-20"
 msgstr "2002-12-20"
 
-#: ../C/gnomesword.xml:209(revnumber)
+#: ../C/gnomesword.xml:217(revnumber)
 msgid "GnomeSword 0.7.6"
 msgstr "GnomeSword 0.7.6"
 
-#: ../C/gnomesword.xml:210(date)
+#: ../C/gnomesword.xml:218(date)
 msgid "2002-11-03"
 msgstr "2002-11-03"
 
-#: ../C/gnomesword.xml:213(revnumber)
+#: ../C/gnomesword.xml:221(revnumber)
 msgid "GnomeSword 0.7.5"
 msgstr "GnomeSword 0.7.5"
 
-#: ../C/gnomesword.xml:214(date)
+#: ../C/gnomesword.xml:222(date)
 msgid "2002-07-01"
 msgstr "2002-07-01"
 
-#: ../C/gnomesword.xml:217(revnumber)
+#: ../C/gnomesword.xml:225(revnumber)
 msgid "GnomeSword 0.7.4"
 msgstr "GnomeSword 0.7.4"
 
-#: ../C/gnomesword.xml:218(date)
+#: ../C/gnomesword.xml:226(date)
 msgid "2002-06-10"
 msgstr "2002-06-10"
 
-#: ../C/gnomesword.xml:221(revnumber)
+#: ../C/gnomesword.xml:229(revnumber)
 msgid "GnomeSword 0.7.3"
 msgstr "GnomeSword 0.7.3"
 
-#: ../C/gnomesword.xml:222(date)
+#: ../C/gnomesword.xml:230(date)
 msgid "2002-05-10"
 msgstr "2002-05-10"
 
-#: ../C/gnomesword.xml:225(revnumber)
+#: ../C/gnomesword.xml:233(revnumber)
 msgid "GnomeSword 0.7.2"
 msgstr "GnomeSword 0.7.2"
 
-#: ../C/gnomesword.xml:226(date)
+#: ../C/gnomesword.xml:234(date)
 msgid "2002-04-22"
 msgstr "2002-04-22"
 
-#: ../C/gnomesword.xml:229(revnumber)
+#: ../C/gnomesword.xml:237(revnumber)
 msgid "GnomeSword 0.7.1"
 msgstr "GnomeSword 0.7.1"
 
-#: ../C/gnomesword.xml:230(date)
+#: ../C/gnomesword.xml:238(date)
 msgid "2002-04-10"
 msgstr "2002-04-10"
 
-#: ../C/gnomesword.xml:233(revnumber)
+#: ../C/gnomesword.xml:241(revnumber)
 msgid "GnomeSword 0.7.0"
 msgstr "GnomeSword 0.7.0"
 
-#: ../C/gnomesword.xml:234(date)
+#: ../C/gnomesword.xml:242(date)
 msgid "2002-04-09"
 msgstr "2002-04-09"
 
-#: ../C/gnomesword.xml:237(revnumber)
+#: ../C/gnomesword.xml:245(revnumber)
 msgid "GnomeSword 0.5.0"
 msgstr "GnomeSword 0.5.0"
 
-#: ../C/gnomesword.xml:238(date)
+#: ../C/gnomesword.xml:246(date)
 msgid "2001-08-13"
 msgstr "2001-08-13"
 
-#: ../C/gnomesword.xml:241(revnumber)
+#: ../C/gnomesword.xml:249(revnumber)
 msgid "GnomeSword 0.4.1"
 msgstr "GnomeSword 0.4.1"
 
-#: ../C/gnomesword.xml:242(date)
+#: ../C/gnomesword.xml:250(date)
 msgid "2001-04-10"
 msgstr "2001-04-10"
 
-#: ../C/gnomesword.xml:245(revnumber)
+#: ../C/gnomesword.xml:253(revnumber)
 msgid "GnomeSword 0.4.0"
 msgstr "GnomeSword 0.4.0"
 
-#: ../C/gnomesword.xml:246(date)
+#: ../C/gnomesword.xml:254(date)
 msgid "2001-04-06"
 msgstr "2001-04-06"
 
-#: ../C/gnomesword.xml:249(revnumber)
+#: ../C/gnomesword.xml:257(revnumber)
 msgid "GnomeSword 0.3.7"
 msgstr "GnomeSword 0.3.7"
 
-#: ../C/gnomesword.xml:250(date)
+#: ../C/gnomesword.xml:258(date)
 msgid "2000-12-08"
 msgstr "2000-12-08"
 
-#: ../C/gnomesword.xml:253(revnumber)
+#: ../C/gnomesword.xml:261(revnumber)
 msgid "GnomeSword 0.3.6"
 msgstr "GnomeSword 0.3.6"
 
-#: ../C/gnomesword.xml:254(date)
+#: ../C/gnomesword.xml:262(date)
 msgid "2000-12-07"
 msgstr "2000-12-07"
 
-#: ../C/gnomesword.xml:257(revnumber)
+#: ../C/gnomesword.xml:265(revnumber)
 msgid "GnomeSword 0.3.2"
 msgstr "GnomeSword 0.3.2"
 
-#: ../C/gnomesword.xml:258(date)
+#: ../C/gnomesword.xml:266(date)
 msgid "2000-11-21"
 msgstr "2000-11-21"
 
-#: ../C/gnomesword.xml:261(revnumber)
+#: ../C/gnomesword.xml:269(revnumber)
 msgid "GnomeSword 0.3.0"
 msgstr "GnomeSword 0.3.0"
 
-#: ../C/gnomesword.xml:262(date)
+#: ../C/gnomesword.xml:270(date)
 msgid "2000-11-10"
 msgstr "2000-11-10"
 
-#: ../C/gnomesword.xml:265(revnumber)
+#: ../C/gnomesword.xml:273(revnumber)
 msgid "GnomeSword 0.2.5"
 msgstr "GnomeSword 0.2.5"
 
-#: ../C/gnomesword.xml:266(date)
+#: ../C/gnomesword.xml:274(date)
 msgid "2000-10-06"
 msgstr "2000-10-06"
 
-#: ../C/gnomesword.xml:269(revnumber)
+#: ../C/gnomesword.xml:277(revnumber)
 msgid "GnomeSword 0.2.4"
 msgstr "GnomeSword 0.2.4"
 
-#: ../C/gnomesword.xml:270(date)
+#: ../C/gnomesword.xml:278(date)
 msgid "2000-09-16"
 msgstr "2000-09-16"
 
-#: ../C/gnomesword.xml:273(revnumber)
+#: ../C/gnomesword.xml:281(revnumber)
 msgid "GnomeSword 0.2.3"
 msgstr "GnomeSword 0.2.3"
 
-#: ../C/gnomesword.xml:274(date)
+#: ../C/gnomesword.xml:282(date)
 msgid "2000-09-07"
 msgstr "2000-09-07"
 
-#: ../C/gnomesword.xml:277(revnumber)
+#: ../C/gnomesword.xml:285(revnumber)
 msgid "GnomeSword 0.2.2"
 msgstr "GnomeSword 0.2.2"
 
-#: ../C/gnomesword.xml:278(date)
+#: ../C/gnomesword.xml:286(date)
 msgid "2000-09-06"
 msgstr "2000-09-06"
 
-#: ../C/gnomesword.xml:281(revnumber)
+#: ../C/gnomesword.xml:289(revnumber)
 msgid "GnomeSword 0.2.1"
 msgstr "GnomeSword 0.2.1"
 
-#: ../C/gnomesword.xml:282(date)
+#: ../C/gnomesword.xml:290(date)
 msgid "2000-08-29"
 msgstr "2000-08-29"
 
-#: ../C/gnomesword.xml:285(revnumber)
+#: ../C/gnomesword.xml:293(revnumber)
 msgid "GnomeSword 0.2.0"
 msgstr "GnomeSword 0.2.0"
 
-#: ../C/gnomesword.xml:286(date)
+#: ../C/gnomesword.xml:294(date)
 msgid "2000-08-19"
 msgstr "2000-08-19"
 
-#: ../C/gnomesword.xml:289(revnumber)
+#: ../C/gnomesword.xml:297(revnumber)
 msgid "GnomeSword 0.1.8"
 msgstr "GnomeSword 0.1.8"
 
-#: ../C/gnomesword.xml:290(date)
+#: ../C/gnomesword.xml:298(date)
 msgid "2000-06-10"
 msgstr "2000-06-10"
 
-#: ../C/gnomesword.xml:293(revnumber)
+#: ../C/gnomesword.xml:301(revnumber)
 msgid "GnomeSword 0.1.7"
 msgstr "GnomeSword 0.1.7"
 
-#: ../C/gnomesword.xml:294(date)
+#: ../C/gnomesword.xml:302(date)
 msgid "2000-05-19"
 msgstr "2000-05-19"
 
-#: ../C/gnomesword.xml:297(revnumber)
+#: ../C/gnomesword.xml:305(revnumber)
 msgid "GnomeSword 0.1.6"
 msgstr "GnomeSword 0.1.6"
 
-#: ../C/gnomesword.xml:298(date)
+#: ../C/gnomesword.xml:306(date)
 msgid "2000-05-08"
 msgstr "2000-05-08"
 
-#: ../C/gnomesword.xml:302(releaseinfo)
-msgid "This manual describes version 2.3.0 of GnomeSword."
-msgstr "Ce manuel documente la version &manrevision; de &appname;."
+#: ../C/gnomesword.xml:310(releaseinfo)
+msgid "This manual describes version 2.3.3 of GnomeSword."
+msgstr "Ce manuel documente la version &manrevision; de &appname;"
 
-#: ../C/gnomesword.xml:305(title)
+#: ../C/gnomesword.xml:313(title)
 msgid "Feedback"
 msgstr "Votre avis"
 
-#: ../C/gnomesword.xml:306(para)
+#: ../C/gnomesword.xml:314(para)
 msgid ""
 "To report a bug or make a suggestion regarding the GnomeSword application or "
 "this manual, Use the <ulink url=\"http://sourceforge.net/tracker/?"
@@ -785,35 +801,35 @@ msgstr ""
 "sourceforge.net/tracker/?group_id=5528\">Tracker de SourceForge</ulink>  ou "
 "aux listes de diffusion."
 
-#: ../C/gnomesword.xml:314(keyword)
+#: ../C/gnomesword.xml:322(keyword)
 msgid "gnome"
 msgstr "gnome"
 
-#: ../C/gnomesword.xml:315(keyword)
+#: ../C/gnomesword.xml:323(keyword)
 msgid "gnomesword"
 msgstr "&appname;"
 
-#: ../C/gnomesword.xml:316(keyword)
+#: ../C/gnomesword.xml:324(keyword)
 msgid "gnomesword2"
 msgstr "gnomesword2"
 
-#: ../C/gnomesword.xml:317(keyword)
+#: ../C/gnomesword.xml:325(keyword)
 msgid "sword"
 msgstr "sword"
 
-#: ../C/gnomesword.xml:318(keyword)
+#: ../C/gnomesword.xml:326(keyword)
 msgid "crosswire"
 msgstr "crosswire"
 
-#: ../C/gnomesword.xml:319(keyword)
+#: ../C/gnomesword.xml:327(keyword)
 msgid "help dialog"
 msgstr "Fenêtre d'aide"
 
-#: ../C/gnomesword.xml:325(primary) ../C/gnomesword.xml:637(application)
+#: ../C/gnomesword.xml:333(primary) ../C/gnomesword.xml:637(application)
 msgid "GnomeSword"
 msgstr "&appname;"
 
-#: ../C/gnomesword.xml:340(title)
+#: ../C/gnomesword.xml:348(title)
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -908,7 +924,7 @@ msgstr ""
 "sourceforge.net</email> Toute aide sera appréciée et permettra d'améliorer "
 "&appname;."
 
-#: ../C/gnomesword.xml:353(title)
+#: ../C/gnomesword.xml:361(title)
 msgid "Getting Started with GnomeSword"
 msgstr "Premiers pas"
 
@@ -1140,7 +1156,7 @@ msgstr ""
 "contextuel permettant d'imprimer ou d'accéder aux options spécifiques du "
 "module concerné."
 
-#: ../C/gnomesword.xml:359(title)
+#: ../C/gnomesword.xml:367(title)
 msgid "Interface"
 msgstr "Interface"
 
@@ -1993,7 +2009,7 @@ msgstr ""
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
-#: ../C/gnomesword.xml:365(title)
+#: ../C/gnomesword.xml:373(title)
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -2138,7 +2154,7 @@ msgstr "Préférences diverses des modules"
 msgid "Various Preferences Modules"
 msgstr "Préférences diverses des modules"
 
-#: ../C/gnomesword.xml:371(title)
+#: ../C/gnomesword.xml:379(title)
 msgid "Module Manager"
 msgstr "Gérer les modules"
 
@@ -2402,7 +2418,7 @@ msgstr ""
 "avoir installé un module non-standard de façon à ce que le logiciel détecte "
 "le nouveau module en place."
 
-#: ../C/gnomesword.xml:377(title)
+#: ../C/gnomesword.xml:385(title)
 msgid "The Search Function"
 msgstr "Fonctions de recherche"
 
@@ -2487,8 +2503,9 @@ msgid ""
 "This search uses the optimized search method (see next section) if the "
 "module has previously been indexed, so bear in mind the additional syntax "
 "required to do multi-word searches (e.g. +FirstWord +SecondWord)."
-msgstr "La requête employe une méthode de recherche optimisée plus rapide"
-"(Voir la section suivante) si le module concerné a été précédemment indexé."
+msgstr ""
+"La requête employe une méthode de recherche optimisée plus rapide(Voir la "
+"section suivante) si le module concerné a été précédemment indexé."
 
 #: ../C/gnomesword.xml:76(para) ../C/search.xml:76(para)
 msgid ""
@@ -2689,27 +2706,27 @@ msgid ""
 "order to use the optimized search, the index must be constructed beforehand: "
 "Please see the preceding section on the Module Manager regarding the "
 "Maintenance functions, including indexing."
-msgstr "La requête par défaut est de type multi-mots, une recherche quelque peu "
+msgstr ""
+"La requête par défaut est de type multi-mots, une recherche quelque peu "
 "lente et rustique. Une requête optimisée basée sur le moteur de recherche "
 "textuelle Lucene est également disponible. La syntaxe acceptée par Lucene "
-"pour les requêtes se révèle particulièrement puissante, bien que relativement "
-"simple. Outre les traditionnels modificateurs «&nbsp;+&nbsp;» et "
-"«&nbsp;-&nbsp;», les jokers «&nbsp;*&nbsp;» et «&nbsp;?&nbsp;», "
-"ainsi que les opérateurs booléens «&nbsp;AND&nbsp;», «&nbsp;OR&nbsp;» "
-"et «&nbsp;NOT&nbsp;», nous avons accès à deux fonctionnalités "
-"particulièrement intéressantes. Ainsi, l'accent circonflexe, placé à la fin d'un "
-"mot, permet d'augmenter la priorité d'un mot, dans la requête "
-"«&nbsp;Christ OR Jésus^&nbsp;», Lucene choisira en priorité le terme "
-"«&nbsp;Jésus&nbsp;». Cet opérateur peut être suivi d'un chiffre positif "
-"définissant la valeur de la priorité. A cela s'ajoute l'opérateur tilde "
-"«&nbsp;~&nbsp;» qui trouve un emploi dans deux situations. Dans "
-"l'exemple «&nbsp;Jésus Christ~5&nbsp;», le moteur cherchera les termes "
-"Jésus et Christ situés à une distance de moins de 5 mots l'un de l'autre. "
-"Par contre, la recherche de «&nbsp;forme~&nbsp;» renverra tous les mots "
-"similaires à «&nbsp;forme&nbsp;», ce qui inclut par exemple "
-"«&nbsp;ferme&nbsp;» ou «&nbsp;formel&nbsp;». Enfin, nous pouvons effectuer "
-"des requêtes sur des champs particuliers des documents en préfixant les "
-"requêtes par le nom du champ suivi du caractère deux-points, "
+"pour les requêtes se révèle particulièrement puissante, bien que "
+"relativement simple. Outre les traditionnels modificateurs «&nbsp;+&nbsp;» "
+"et «&nbsp;-&nbsp;», les jokers «&nbsp;*&nbsp;» et «&nbsp;?&nbsp;», ainsi que "
+"les opérateurs booléens «&nbsp;AND&nbsp;», «&nbsp;OR&nbsp;» et «&nbsp;"
+"NOT&nbsp;», nous avons accès à deux fonctionnalités particulièrement "
+"intéressantes. Ainsi, l'accent circonflexe, placé à la fin d'un mot, permet "
+"d'augmenter la priorité d'un mot, dans la requête «&nbsp;Christ OR "
+"Jésus^&nbsp;», Lucene choisira en priorité le terme «&nbsp;Jésus&nbsp;». Cet "
+"opérateur peut être suivi d'un chiffre positif définissant la valeur de la "
+"priorité. A cela s'ajoute l'opérateur tilde «&nbsp;~&nbsp;» qui trouve un "
+"emploi dans deux situations. Dans l'exemple «&nbsp;Jésus Christ~5&nbsp;», le "
+"moteur cherchera les termes Jésus et Christ situés à une distance de moins "
+"de 5 mots l'un de l'autre. Par contre, la recherche de «&nbsp;forme~&nbsp;» "
+"renverra tous les mots similaires à «&nbsp;forme&nbsp;», ce qui inclut par "
+"exemple «&nbsp;ferme&nbsp;» ou «&nbsp;formel&nbsp;». Enfin, nous pouvons "
+"effectuer des requêtes sur des champs particuliers des documents en "
+"préfixant les requêtes par le nom du champ suivi du caractère deux-points, "
 "comme dans «&nbsp;titre:Jean&nbsp;». "
 
 #: ../C/gnomesword.xml:207(para)
@@ -3220,7 +3237,7 @@ msgstr "\\w signifie alphanumérique, identique à [a-zA-Z0-9_]."
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr "\\W signifie non alphanumérique, identique à [^a-zA-Z0-9_]."
 
-#: ../C/gnomesword.xml:383(title) ../C/gnomesword.xml:12(title)
+#: ../C/gnomesword.xml:391(title) ../C/gnomesword.xml:12(title)
 #: ../C/gnomesword.xml:25(phrase) ../C/studypad.xml:12(title)
 #: ../C/studypad.xml:25(phrase)
 msgid "The Studypad"
@@ -3320,7 +3337,7 @@ msgstr ""
 "<menuchoice><guisubmenu>Éditer</guisubmenu><guimenuitem>Langues actuelles</"
 "guimenuitem></menuchoice> doit être sélectionné."
 
-#: ../C/gnomesword.xml:389(title) ../C/gnomesword.xml:31(phrase)
+#: ../C/gnomesword.xml:397(title) ../C/gnomesword.xml:31(phrase)
 msgid "The Personal Commentary"
 msgstr "Commentaires personnels"
 
@@ -3463,7 +3480,7 @@ msgstr ""
 "utiliser la fonction <guimenuitem>Lien</guimenuitem> pour lier les "
 "commentaires entre eux."
 
-#: ../C/gnomesword.xml:395(title)
+#: ../C/gnomesword.xml:403(title)
 msgid "Authors"
 msgstr "Auteurs"
 
@@ -3514,7 +3531,7 @@ msgstr ""
 "<ulink type=\"http\" url=\"http://www.sourceforge.net/projects/gnomesword"
 "\">http://www.sourceforge.net/projects/gnomesword</ulink>"
 
-#: ../C/gnomesword.xml:401(title)
+#: ../C/gnomesword.xml:409(title)
 msgid "License"
 msgstr "Licence"
 
@@ -3581,11 +3598,14 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
 
+#~ msgid "2007"
+#~ msgstr "2007"
+
+#~ msgid "September 2007"
+#~ msgstr "Septembre 2007"
+
 #~ msgid "GnomeSword2 Manual"
 #~ msgstr "Manuel de &appname;"
-
-#~ msgid "February 2007"
-#~ msgstr "Septembre 2007"
 
 #~ msgid ""
 #~ "@@image: 'figures/interface_viewer.png'; "
