@@ -1,9 +1,19 @@
-gnomesword (2.3.1-0gutsy1) gutsy; urgency=low
+gnomesword (2.3.3-0svn-gutsy1) gutsy; urgency=low
 
   * Non-maintainer upload.
-  * 2.3.1 release
+  * 2.3.3svn release
 
- -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Wed, 17 Oct 2007 10:00:40 +0200
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Sat, 12 Jan 2008 22:46:40 +0200
+
+gnomesword (2.2.3-1) unstable; urgency=low
+
+  * New upstream version, Closes: #421492
+  * Build depend on libsword-dev >= 1.5.9-5 for curl transition
+  * fix typo gomesword in gnomesword2.1
+  * patch to build with gcc 4.3, Closes: #417497
+      Thanks to Martin Michmayer <tbm@debian.org>
+
+ -- Daniel Glassey <wdg@debian.org>  Fri, 18 May 2007 11:28:59 -0600
 
 gnomesword (2.2.0-1) unstable; urgency=low
 
