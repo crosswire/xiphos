@@ -697,7 +697,7 @@ static void add_module_to_language_folder(GtkTreeModel *model,
  *   #include "gui/mod_mgr.h"
  *
  *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
- *			 gchar * language)
+ *			      gchar * language)
  *   
  * Description
  *   
@@ -769,7 +769,7 @@ static void add_language_folder(GtkTreeModel *model,
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void load_module_tree(GtkWidget * tree)
+ *   void load_module_tree(GtkTreeView * treeview, gboolean install)
  *
  * Description
  *   
@@ -806,15 +806,36 @@ static void load_module_tree(GtkTreeView * treeview,
 
 	if (install) {
 		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
+			local = TRUE;
 			source =
 			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry1)->child));
-			local = TRUE;
+
+			// must find the directory attached to the name.
+			// they may (and normally will) be the same,
+			// but it's not certain.
+			tmp = tmp2 = mod_mgr_list_local_sources();
+			while (tmp) {
+				MOD_MGR_SOURCE *mms =
+				    (MOD_MGR_SOURCE *)tmp->data;
+
+				if (!strcmp(source, mms->caption))
+					source = g_strdup(mms->directory);
+
+				g_free((gchar*)mms->type);
+				g_free((gchar*)mms->caption);
+				g_free((gchar*)mms->source);
+				g_free((gchar*)mms->directory);
+				g_free(mms);
+				tmp = g_list_next(tmp);
+			}
+			g_list_free(tmp2);
+
 			tmp = mod_mgr_list_local_modules(source, FALSE);
 			// false -> tell installmgr not to mess with ~/.sword content.
 		} else {
+			local = FALSE;
 			source =
 			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combo_entry2)->child));
-			local = FALSE;
 			tmp = mod_mgr_remote_list_modules(source);
 		}
 	} else {
@@ -973,7 +994,7 @@ static void response_refresh(void)
 	gint failed = 1;
 	gchar *buf = NULL;
 	
-	buf = g_strdup_printf("%s: %s", _("Refreshing remote"),remote_source);
+	buf = g_strdup_printf("%s: %s", _("Refreshing remote"), remote_source);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);	
@@ -1436,7 +1457,7 @@ static void load_source_treeviews(void)
 	/* remote */
 	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
 	gtk_list_store_clear(GTK_LIST_STORE(module_box_remote));
-	tmp = tmp2 = mod_mgr_list_remote_sources();;
+	tmp = tmp2 = mod_mgr_list_remote_sources();
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gtk_list_store_append(GTK_LIST_STORE(remote_model),
@@ -1945,7 +1966,7 @@ void on_mod_mgr_response(GtkDialog * dialog,
 
 /******************************************************************************
  * Name
- *   on_button1_clicked
+ *   on_button5_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
@@ -1970,7 +1991,7 @@ void on_button5_clicked(GtkButton * button,
 
 /******************************************************************************
  * Name
- *   on_button2_clicked
+ *   on_button6_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
@@ -2040,12 +2061,12 @@ void on_button6_clicked(GtkButton * button,
 
 /******************************************************************************
  * Name
- *   on_button3_clicked
+ *   on_button7_clicked
  *
  * Synopsis
  *   #include "gui/mod_mgr.h"
  *
- *   void on_button3_clicked(GtkButton * button, gpointer user_data)
+ *   void on_button7_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   add remote source
