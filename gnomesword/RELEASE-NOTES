@@ -3,6 +3,44 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.3.3
+20 Jan 2008
+
+1. Module manager supports display of InstallSize qualifiers from
+   *.conf, when provided by the repository's modules.  This allows users
+   to make informed decisions about whether to spend link time or disc
+   space for modules.
+
+2. Improved algorithm for displaying complex lemma content so as not
+   to display overlapping words.
+
+3. Non-"latinate arabic" numerals are supported for LC_ALL=fa to go with
+   general Farsi translation.  This is inherently incomplete, because
+   location bars still must display regular digits.  However, verse numbers
+   in text, navbar spinners, and most other contexts are displayed
+   accordingly.
+
+4. Updated special-case NASB lexicon names (soon, very soon, we hope) and
+   adjust/fix/neuter weird embedded `!' in their refs.
+
+5. Module manager now supports "local" install, that is, if you have
+   a directory of modules to install in appropriate format.  Commonly
+   expected for use with e.g. distribution cdroms.  This has never
+   been tested/working before now.
+
+Bug reports addressed since 2.3.2:
+1870036  mod.mgr cannot do local installs
+1864007  NASB's lexicon refs need adjustment
+1860365  lemma display hack is very poor
+
+New feature requests pending:
+<none>
+
+Feature requests closed:
+1869036  need farsi numerals
+1860685  mod.mgr should support InstallSize in *.conf
+________________________
+
 Release 2.3.2
 26 Dec 2007
 
