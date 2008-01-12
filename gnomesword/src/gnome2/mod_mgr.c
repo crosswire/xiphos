@@ -422,28 +422,21 @@ static void remove_install_modules(GList * modules, int activity)
 
 		if (activity == INSTALL) {
 			GS_print(("install %s, source=%s\n", buf, source));
-			if (local)
-				failed =
-				    mod_mgr_local_install_module(source, buf);
-			else
-				failed =
-				    mod_mgr_remote_install(source, buf);
+			failed = ((local)
+				  ? mod_mgr_local_install_module(source, buf)
+				  : mod_mgr_remote_install(source, buf));
 		}
 
 		if (activity == FASTMOD) {
 			GS_print(("index %s\n", buf));
-			if (main_module_mgr_index_mod(buf))
-				failed = 0;
-			else
-				failed = 1;
+			failed = ((main_module_mgr_index_mod(buf))
+				  ? 0 : 1);
 		}
 
 		if (activity == DELFAST) {
 			GS_print(("deleting index %s\n", buf));
-			if (main_module_mgr_delete_index_mod(buf))
-				failed = 0;
-			else
-				failed = 1;
+			failed = ((main_module_mgr_delete_index_mod(buf))
+				  ? 0 : 1);
 		}
 
 		g_free(tmp->data);
