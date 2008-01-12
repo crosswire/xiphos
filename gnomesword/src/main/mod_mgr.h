@@ -67,7 +67,7 @@ void main_update_module_lists(void);
 MOD_MGR *mod_mgr_get_next_module(void);
 void update_install_status(long total, long done, const char *message);
 void update_install_progress(double fraction);
-GList *mod_mgr_list_local_modules(const char *dir);
+GList *mod_mgr_list_local_modules(const char *dir, gboolean augment);
 GList *mod_mgr_list_remote_sources(void);
 GList *mod_mgr_list_local_sources(void);
 int mod_mgr_uninstall(const char *dir, const char *mod_name);
