@@ -168,7 +168,9 @@ void main_update_module_lists(void)
  *   void
  */
 
-void update_install_status(long total, long done, const char *message)
+void update_install_status(long total,
+			   long done,
+			   const char *message)
 {
 	gui_update_install_status(total, done, message);
 }
@@ -196,7 +198,8 @@ void update_install_progress(double fraction)
 }
 
 
-void main_index_percent_update(char percent, void *userData)
+void main_index_percent_update(char percent,
+			       void *userData)
 {
 	char maxHashes = *((char *) userData);
 	float num;
@@ -310,7 +313,7 @@ int mod_mgr_remote_install(const char *source_name, const char *mod_name)
  * Synopsis
  *   #include "main/mod_mgr.hh"
  *
- *   int mod_mgr_local_install_module(const char *dir, const char *mod_name)
+ *   int mod_mgr_local_install_module(const char *destdir, const char *srcdir, const char *mod_name)
  *
  * Description
  *   
@@ -319,9 +322,11 @@ int mod_mgr_remote_install(const char *source_name, const char *mod_name)
  *   int
  */
 
-int mod_mgr_local_install_module(const char *dir, const char *mod_name)
+int mod_mgr_local_install_module(const char *destdir,
+				 const char *srcdir,
+				 const char *mod_name)
 {
-	return backend_local_install_module(dir, mod_name);
+	return backend_local_install_module(destdir, srcdir, mod_name);
 }
 
 
@@ -442,10 +447,10 @@ void mod_mgr_add_source(const char * vtype,
 			const char * directory)
 {
 	backend_module_mgr_add_source(vtype, 
-				   type, 
-				   caption, 
-				   source, 
-				   directory);
+				      type, 
+				      caption, 
+				      source, 
+				      directory);
 }
 
 
