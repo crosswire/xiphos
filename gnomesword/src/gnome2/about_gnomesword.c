@@ -123,7 +123,7 @@ gui_create_about_gnomesword(void)
           (GTK_ABOUT_DIALOG (about1), versionbuild);
   gtk_about_dialog_set_copyright
           (GTK_ABOUT_DIALOG (about1),
-           _("Copyright 2000-2007 The GnomeSword Development Team"));
+           _("Copyright 2000-2008 The GnomeSword Development Team"));
   gtk_about_dialog_set_comments
           (GTK_ABOUT_DIALOG (about1),
            _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
