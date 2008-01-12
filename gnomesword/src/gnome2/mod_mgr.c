@@ -1695,7 +1695,7 @@ void save_sources(void)
 				   COLUMN_DIRECTORY, &directory, -1);
 
 		mod_mgr_add_source("DIRSource",
-				   type, caption, source, directory);
+				   type, caption, "[local]", directory);
 		g_free(type);
 		g_free(caption);
 		g_free(source);
