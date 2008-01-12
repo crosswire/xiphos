@@ -70,7 +70,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);
 GList *backend_module_mgr_list_local_sources(void);
 void backend_module_mgr_list_local_modules_init();
-int backend_local_install_module(const char *dir, const char *mod_name);	
+int backend_local_install_module(const char *destdir, const char *srcdir, const char *mod_name);	
 int backend_remote_install_module(const char *source_name, const char *mod_name);
 int backend_uninstall_module(const char *dir, const char *mod_name);
 void backend_module_mgr_remote_list_modules_init(const char *source_name);
