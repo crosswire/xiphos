@@ -341,14 +341,14 @@ int mod_mgr_local_install_module(const char *dir, const char *mod_name)
  *   GList *
  */
 
-GList *mod_mgr_list_local_modules(const char *dir)
+GList *mod_mgr_list_local_modules(const char *dir, gboolean augment)
 {
 	GList *list = NULL;	
 	MOD_MGR *mod_info;
 	
 //	backend_delete_main_mgr();
 //	backend_init_main_mgr();
-	backend_init_module_mgr(dir);
+	backend_init_module_mgr(dir, augment);
 	
 	backend_module_mgr_list_local_modules_init();
 	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
@@ -467,7 +467,7 @@ void mod_mgr_add_source(const char * vtype,
 
 void mod_mgr_init(const char *dir)
 {
-	backend_init_module_mgr(dir);
+	backend_init_module_mgr(dir, TRUE);
 }
 
 /******************************************************************************
