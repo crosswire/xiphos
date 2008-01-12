@@ -280,8 +280,9 @@ void backend_mod_mgr_init_language_map(void) {
  *   void
  */
 
-void GSStatusReporter::preStatus(long totalBytes, long completedBytes, 
-				   const char *message)
+void GSStatusReporter::preStatus(long totalBytes,
+				 long completedBytes, 
+				 const char *message)
 {
 	GS_print((f_message,83,"message",message));
 	update_install_status(totalBytes, completedBytes, message);
@@ -303,7 +304,8 @@ void GSStatusReporter::preStatus(long totalBytes, long completedBytes,
  *   void
  */
 
-void GSStatusReporter::statusUpdate(double dltotal, double dlnow) 
+void GSStatusReporter::statusUpdate(double dltotal,
+				    double dlnow) 
 {
 	if (!dltotal)
 		return;	
@@ -325,7 +327,7 @@ ModuleManager::~ModuleManager() {
 /*
 void ModuleManager::initMgr(const char *dir)
 {
-	if(dir)
+	if (dir)
 		mgr = new SWMgr(dir);
 	else
 		mgr = new SWMgr();
@@ -356,7 +358,7 @@ MOD_MGR *ModuleManager::getNextModule(void)
 	GError **error;
 	SWModule *module;
 	
-	if(it != end) {
+	if (it != end) {
 		module = it->second;
 		mod_info = g_new(MOD_MGR, 1);
 //		mod_info->name = g_convert(module->Name(),
@@ -422,7 +424,8 @@ char *backend_module_mgr_get_path_to_mods(void)
 	return g_strdup(path);
 }
 
-char *backend_mod_mgr_get_config_entry(char * module_name, char * entry) {
+char *backend_mod_mgr_get_config_entry(char *module_name,
+				       char *entry) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
 	//-- iterate through the modules until we find modName  
@@ -434,6 +437,7 @@ char *backend_mod_mgr_get_config_entry(char * module_name, char * entry) {
 	} else
 		return NULL;
 }
+
 int backend_mod_mgr_is_module(const char *mod_name) {
 	ModMap::iterator it = mgr->Modules.find(mod_name);
 	if (it != mgr->Modules.end()) {
@@ -587,12 +591,13 @@ void backend_module_mgr_list_local_modules_init()
  *   int
  */
 
-int backend_uninstall_module(const char *dir, const char *modName)
+int backend_uninstall_module(const char *dir,
+			     const char *modName)
 {
 	SWModule *module;
 	SWMgr  *tmp_mgr;
 	int retval = -1;
-	if(dir)
+	if (dir)
 		tmp_mgr = new SWMgr(dir);
 	else
 		tmp_mgr = new SWMgr();
@@ -628,7 +633,8 @@ int backend_uninstall_module(const char *dir, const char *modName)
  *   int
  */
 
-int backend_remote_install_module(const char *sourceName, const char *modName)
+int backend_remote_install_module(const char *sourceName,
+				  const char *modName)
 {
 	InstallSourceMap::iterator source =
 	    installMgr->sources.find(sourceName);
@@ -658,7 +664,7 @@ int backend_remote_install_module(const char *sourceName, const char *modName)
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   int backend_local_install_module(const char *dir, const char *mod_name)
+ *   int backend_local_install_module(const char *destdir, const char *srcdir, const char *mod_name)
  *
  * Description
  *   
@@ -667,18 +673,12 @@ int backend_remote_install_module(const char *sourceName, const char *modName)
  *   int
  */
 
-int backend_local_install_module(const char *dir, const char *mod_name)
+int backend_local_install_module(const char *destdir,
+				 const char *srcdir,
+				 const char *mod_name)
 {
-	SWMgr lmgr(dir);
-	SWModule *module;
-	ModMap::iterator it = lmgr.Modules.find(mod_name);
-	if (it == lmgr.Modules.end()) {
-		printf("Module [%s] not available at path [%s]\n",
-			mod_name, dir);
-		return -1;
-	}
-	module = it->second;
-	return installMgr->installModule(mgr, dir, module->Name());
+	SWMgr lmgr(destdir);
+	return installMgr->installModule(&lmgr, srcdir, mod_name);
 }
 
 
@@ -928,11 +928,11 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 	int i = 0;
 	SWLocale *sw_locale;
 	
-	if(sys_locale) {
-		if(!strncmp(sys_locale,"ru_RU",5)) {
+	if (sys_locale) {
+		if (!strncmp(sys_locale,"ru_RU",5)) {
 			sys_locale = "ru_RU-koi8-r";		
-		} else if(!strncmp(sys_locale,"ru_RU-koi8-r",10)){
-			if(strlen(sys_locale) >  12) {
+		} else if (!strncmp(sys_locale,"ru_RU-koi8-r",10)){
+			if (strlen(sys_locale) >  12) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
 					buf[i+1] = '\0';
@@ -940,8 +940,8 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"uk_UA-cp1251",10)){
-			if(strlen(sys_locale) > 12 ) {
+		} else if (!strncmp(sys_locale,"uk_UA-cp1251",10)){
+			if (strlen(sys_locale) > 12 ) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
 					buf[i+1] = '\0';
@@ -949,8 +949,8 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"uk_UA-koi8-u",10)){
-			if(strlen(sys_locale) > 12 ) {
+		} else if (!strncmp(sys_locale,"uk_UA-koi8-u",10)){
+			if (strlen(sys_locale) > 12 ) {
 				for(i = 0; i < 12; i++) {
 					buf[i] = sys_locale[i];
 					buf[i+1] = '\0';
@@ -958,8 +958,8 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"pt_BR",5)){
-			if(strlen(sys_locale) > 5 ) {
+		} else if (!strncmp(sys_locale,"pt_BR",5)){
+			if (strlen(sys_locale) > 5 ) {
 				for(i = 0; i < 5; i++) {
 					buf[i] = sys_locale[i];
 					buf[i+1] = '\0';
@@ -967,8 +967,8 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 			
-		} else if(!strncmp(sys_locale,"en_GB",5)){
-			if(strlen(sys_locale) > 5 ) {
+		} else if (!strncmp(sys_locale,"en_GB",5)){
+			if (strlen(sys_locale) > 5 ) {
 				for(i = 0; i < 5; i++) {
 					buf[i] = sys_locale[i];
 					buf[i+1] = '\0';
@@ -976,7 +976,7 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 				sys_locale = buf;
 			}
 		} else {
-			if(strlen(sys_locale) > 2 ) {
+			if (strlen(sys_locale) > 2 ) {
 				buf[0] = sys_locale[0];
 				buf[1] = sys_locale[1];
 				buf[2] = '\0';
@@ -987,7 +987,7 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 		LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_locale);
 		sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_locale);
 	}
-	if(sw_locale) {
+	if (sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
 		OLD_CODESET = "iso8859-1";
@@ -1002,7 +1002,7 @@ char *set_mod_mgr_locale(const char *sys_locale) {
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   void backend_init_module_mgr(const char *dir)
+ *   void backend_init_module_mgr(const char *dir, gboolean augment)
  *
  * Description
  *   
@@ -1011,7 +1011,8 @@ char *set_mod_mgr_locale(const char *sys_locale) {
  *   void
  */
 
-void backend_init_module_mgr(const char *dir, gboolean augment)
+void backend_init_module_mgr(const char *dir,
+			     gboolean augment)
 {
 	if (dir) {
 		if (augment) {
@@ -1020,7 +1021,7 @@ void backend_init_module_mgr(const char *dir, gboolean augment)
 		} else {
 			// local directory install special case.
 			mgr = new SWMgr(dir, true, 0, false, false);
-			// re-assert defaults:
+			// see template.  re-assert defaults:
 			// autoload    -> true
 			// filtermgr   -> null
 			// multimod    -> false
@@ -1034,17 +1035,18 @@ void backend_init_module_mgr(const char *dir, gboolean augment)
 	}
 
 	const char *lang = getenv("LANG");	
-	if (!lang) lang="C";
-	//printf("dir = %s\n",dir);
+	if (!lang)
+		lang="C";
 	set_mod_mgr_locale(lang);
+
 	char *envhomedir = getenv("HOME");
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
+
 	GSStatusReporter *statusReporter = new GSStatusReporter();
+
 	installMgr = new InstallMgr(baseDir, statusReporter);
-	//installMgr = new InstallMgr(baseDir);
 	backend_mod_mgr_init_language_map();
-	//backend_module_mgr_list_local_sources();
 }
 
 /******************************************************************************
