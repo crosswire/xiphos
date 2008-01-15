@@ -91,6 +91,8 @@ protected:
 	DIALOG_DATA *d;
 	BackEnd *be;
 	GLOBAL_OPS * ops;
+	SWBuf swbuf;
+	gboolean is_rtol;
 public:
 	DialogEntryDisp(GtkWidget *gtkText,
 			DIALOG_DATA *d,
