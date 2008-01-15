@@ -295,101 +295,28 @@ void ClearImages(gchar *text)
 }
 
 //
-// general display of entries: commentary, genbook, lexdict
+// utility function to write out HTML.
 //
-char GTKEntryDisp::Display(SWModule &imodule)
+void HtmlOutput(SWModule &imodule,
+		SWBuf& swbuf,
+		GtkWidget *gtkText,
+		MOD_FONT *mf,
+		char *anchor)
 {
-	gchar *keytext = NULL;
-	gchar *buf;
-	SWBuf swbuf = "";
-	gint mod_type;
-	MOD_FONT *mf = get_font(imodule.Name());
-	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 #ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
 	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
-	gtk_widget_modify_font (gtkText, desc);	
+	pango_font_description_set_family(
+	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
+	gtk_widget_modify_font(gtkText, desc);	
 #endif
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
-	const char *rework;	// for image size analysis rework.
-	gint image_content = ops->image_content;
-
-	(const char *)imodule;	// snap to entry
-	//GS_message(((const char *)imodule.getRawEntry()));
-	main_set_global_options(ops);
-	mod_type = backend->module_type(imodule.Name());
-	GS_message(("mod_type: %d",mod_type));
-	if (mod_type == BOOK_TYPE) {
-		keytext = strdup(backend->treekey_get_local_name(
-				settings.book_offset));
-		GS_message((keytext));
-	} else if (mod_type == DICTIONARY_TYPE)
-		keytext = g_strdup((char*)imodule.KeyText());
-	else
-		keytext = strdup((char*)imodule.KeyText());
-
-	buf=g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			      "<font face=\"%s\" size=\"%+d\">",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
-			      settings.bible_bg_color,
-			      settings.bible_text_color,
-			      settings.link_color,
-			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size));
-	swbuf.append(buf);
-	g_free(buf);
-
-	buf=g_strdup_printf("<font color=\"%s\">",
-			      settings.bible_verse_num_color);
-	swbuf.append(buf);
-	g_free(buf);
-
-	buf=g_strdup_printf("<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font>[%s]<br>",
-			      imodule.Description(),
-			      imodule.Name(),
-			      imodule.Name(),
-			      (gchar*)keytext);
-	swbuf.append(buf);
-	g_free(buf);
-	
-	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
-		rework = (const char *)(const char *)imodule.getRawEntry();  //keytext);
-	else if (!strcmp(imodule.Name(), "ISBE"))
-		rework = (const char *)(const char *)imodule.StripText();  //keytext);
-	else
-		rework = (const char *)imodule;
-
-	if (image_content == 0)
-		ClearImages((gchar *)rework);
-	else if ((image_content == -1) &&	// "unknown"
-		 (strcasestr(rework, "<img ") != NULL)) {
-		image_content = 1;		// now known.
-		main_save_module_options(imodule.Name(),
-					 "Image Content", 1);
-	}
-
-	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework,
-					   GDK_WINDOW(gtkText->window),
-					   mod_type)
-		     : rework /* left as-is */);
-
-	swbuf.append("</font></body></html>");
-	
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
 	// and we mustn't overload the receiver.  10k chunks.
-
 	int len = swbuf.length(), offset = 0, write_size;
 
 #ifdef USE_GTKMOZEMBED
@@ -415,10 +342,95 @@ char GTKEntryDisp::Display(SWModule &imodule)
 
 #ifdef USE_GTKMOZEMBED
 	gecko_html_close(html);
+	if (anchor)
+		gecko_html_jump_to_anchor(html, anchor);
 #else
 	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
+	if (anchor)
+		gtk_html_jump_to_anchor(html, anchor);
+	gtk_html_flush(html);
 #endif
+}
+
+//
+// general display of entries: commentary, genbook, lexdict
+//
+char GTKEntryDisp::Display(SWModule &imodule)
+{
+	gchar *keytext = NULL;
+	gchar *buf;
+	SWBuf swbuf = "";
+	gint mod_type;
+	MOD_FONT *mf = get_font(imodule.Name());
+	
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+
+	const char *rework;	// for image size analysis rework.
+	gint image_content = ops->image_content;
+
+	(const char *)imodule;	// snap to entry
+	main_set_global_options(ops);
+	mod_type = backend->module_type(imodule.Name());
+	GS_message(("mod_type: %d",mod_type));
+
+	if (mod_type == BOOK_TYPE) {
+		keytext = strdup(backend->treekey_get_local_name(
+				settings.book_offset));
+		GS_message((keytext));
+	} else if (mod_type == DICTIONARY_TYPE)
+		keytext = g_strdup((char*)imodule.KeyText());
+	else
+		keytext = strdup((char*)imodule.KeyText());
+
+	buf = g_strdup_printf(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">"
+			      "<font color=\"%s\">"
+			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font>[%s]<br>",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size),
+			      settings.bible_verse_num_color,
+			      imodule.Description(),
+			      imodule.Name(),
+			      imodule.Name(),
+			      (gchar*)keytext);
+	swbuf.append(buf);
+	g_free(buf);
+
+	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
+		rework = (const char *)(const char *)imodule.getRawEntry();
+	else if (!strcmp(imodule.Name(), "ISBE"))
+		rework = (const char *)(const char *)imodule.StripText();
+	else
+		rework = (const char *)imodule;
+
+	if (image_content == 0)
+		ClearImages((gchar *)rework);
+	else if ((image_content == -1) &&	// "unknown"
+		 (strcasestr(rework, "<img ") != NULL)) {
+		image_content = 1;		// now known.
+		main_save_module_options(imodule.Name(),
+					 "Image Content", 1);
+	}
+
+	swbuf.append(settings.imageresize
+		     ? AnalyzeForImageSize(rework,
+					   GDK_WINDOW(gtkText->window),
+					   mod_type)
+		     : rework /* left as-is */);
+
+	swbuf.append("</font></body></html>");
+
+	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
 	
 	free_font(mf);
 	g_free(ops);
@@ -824,13 +836,13 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		utf8_key = strdup((char*)key->getText());
 
 		if (is_rtol)
-			swbuf.append("<DIV ALIGN=right>");
+			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
-				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
-				: "&nbsp; <A NAME=\"%d\"> </A>",
+				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				utf8_key,
 				((settings.versestyle)
@@ -854,7 +866,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		g_free(buf);
 
 		if (is_rtol)
-			swbuf.append("</DIV>");
+			swbuf.append("</div>");
 
 		(*mod)++;
 	}
@@ -961,13 +973,13 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 		utf8_key = strdup((char*)key->getText());
 
 		if (is_rtol)
-			swbuf.append("<DIV ALIGN=right>");
+			swbuf.append("<div align=right>");
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
-				? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-				  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
-				: "&nbsp; <A NAME=\"%d\"> </A>",
+				? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+				  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+				: "&nbsp; <a name=\"%d\"> </a>",
 				0,
 				utf8_key,
 				((settings.versestyle)
@@ -1014,7 +1026,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 
 		swbuf.append(cVerse.GetText());
 		if (is_rtol)
-			swbuf.append("</DIV>");
+			swbuf.append("</div>");
 	}
 }
 
@@ -1234,21 +1246,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	is_rtol = main_is_mod_rtol(ModuleName);
 	gboolean newparagraph = FALSE;
 	mf = get_font(ModuleName);
-#ifdef USE_GTKMOZEMBED	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
-	gtk_widget_modify_font (gtkText, desc);
-
-	gboolean was_editable = gtk_html_get_editable(html);
-	GtkHTMLStream *stream = gtk_html_begin(html);
-	GtkHTMLStreamStatus status;
-#endif
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 
 	gint image_content = ops->image_content;
 
@@ -1292,27 +1290,13 @@ char GTKChapDisp::Display(SWModule &imodule)
 	g_free(buf);
 
 	if (is_rtol)
-		swbuf.append("<DIV ALIGN=right>");
+		swbuf.append("<div align=right>");
 
-#ifdef USE_GTKMOZEMBED		
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-#else
-	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-#endif
-	
-	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
 	getVerseBefore(imodule,
 		       strongs_or_morph, strongs_and_morph,
 		       cache_flags, image_content);
-#ifdef USE_GTKMOZEMBED	
-	gecko_html_write(html,swbuf.c_str(),swbuf.length());
-#else
-	gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-#endif
-	
-	swbuf = "";
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -1377,9 +1361,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
-			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
-			: "&nbsp; <A NAME=\"%d\"> </A>",
+			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			utf8_key,
 			settings.verse_num_font_size + settings.base_font_size,
@@ -1446,16 +1430,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
 			swbuf.append("</font></td></tr></table>");
-
-#ifdef USE_GTKMOZEMBED		
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-#else
-		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-#endif
-		
-		swbuf = "";
 	}
-	swbuf = "";
+
 	getVerseAfter(imodule,
 		      strongs_or_morph, strongs_and_morph,
 		      cache_flags, image_content);
@@ -1471,29 +1447,14 @@ char GTKChapDisp::Display(SWModule &imodule)
 	else
 		swbuf.append("</font></body></html>");
 	
-#ifdef USE_GTKMOZEMBED
-	if (swbuf.length()) 
-		gecko_html_write(html,swbuf.c_str(),swbuf.length());
-	gecko_html_close(html);
-	if (curVerse > display_boundary) {
+	if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
-		gecko_html_jump_to_anchor (html,buf);
+	else
+		buf = NULL;
+	HtmlOutput(imodule, swbuf, gtkText, mf, buf);
+	if (buf)
 		g_free(buf);
-	}
-#else
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-	if (swbuf.length())
-		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-	gtk_html_end(html, stream, status);
-	gtk_html_set_editable(html, was_editable);
-	if (curVerse > display_boundary) {
-		buf = g_strdup_printf("%d", curVerse - display_boundary);
-		gtk_html_jump_to_anchor(html, buf);
-		g_free(buf);
-	}
-	gtk_html_flush (html);
-#endif	
+
 	free_font(mf);
 	g_free(ops);
 }
@@ -1638,42 +1599,57 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 
 char DialogEntryDisp::Display(SWModule &imodule)
 {
-	GString *str = g_string_new(NULL);
-	const gchar *keytext = NULL;
+	SWBuf swbuf = "";
+	gchar *keytext = NULL;
+	char *buf;
 	int curPos = 0;
-	int type = d->mod_type;  //be->module_type(imodule.Name());
+	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	gint font_size;
-#ifdef USE_GTKMOZEMBED
-	GeckoHtml *html = GECKO_HTML(gtkText);
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
-	gtk_widget_modify_font (gtkText, desc);
-#endif
 	const char *rework;	// for image size analysis rework.
 	gint image_content = ops->image_content;
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
+	mod_type = backend->module_type(imodule.Name());
+	GS_message(("mod_type: %d",mod_type));
 
-	if (type == 3)
-		keytext = be->treekey_get_local_name(d->offset);
+	if (mod_type == BOOK_TYPE) {
+		keytext = strdup(backend->treekey_get_local_name(
+				settings.book_offset));
+		GS_message((keytext));
+	} else if (mod_type == DICTIONARY_TYPE)
+		keytext = g_strdup((char*)imodule.KeyText());
 	else
-		keytext = imodule.KeyText();
+		keytext = strdup((char*)imodule.KeyText());
 
-	font_size = ((mf->old_font_size)
-		     ? atoi(mf->old_font_size) + settings.base_font_size
-		     : settings.base_font_size);
+	buf = g_strdup_printf(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">"
+			      "<font color=\"%s\">"
+			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font><br>",
+			      (settings.doublespace ? DOUBLE_SPACE : ""),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size),
+			      settings.bible_verse_num_color,
+			      imodule.Description(),
+			      imodule.Name(),
+			      imodule.Name());
+	swbuf.append(buf);
+	g_free(buf);
 
-	rework = (settings.imageresize
-		  ? AnalyzeForImageSize((const char *)imodule,
-					GDK_WINDOW(gtkText->window),
-					type)
-		  : (const char *)imodule /* untouched */);
+	if ((be->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
+		rework = (const char *)(const char *)imodule.getRawEntry();
+	else if (!strcmp(imodule.Name(), "ISBE"))
+		rework = (const char *)(const char *)imodule.StripText();
+	else
+		rework = (const char *)imodule;
 
 	if (image_content == 0)
 		ClearImages((gchar *)rework);
@@ -1684,75 +1660,20 @@ char DialogEntryDisp::Display(SWModule &imodule)
 					 "Image Content", 1);
 	}
 
-	if (type == 4)
-		g_string_printf(str, HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<font face=\"%s\" size=\"%+d\">%s"
-				"</font></body></html>",
-				(settings.doublespace ? DOUBLE_SPACE : ""),
-				settings.bible_bg_color,
-				settings.bible_text_color,
-				settings.link_color,
-				((mf->old_font) ? mf->old_font : ""),
-				font_size,
-				rework);
-	else
-		g_string_printf(str, HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<font face=\"%s\" size=\"%+d\">"
-				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-				"<font color=\"%s\">[%s]</font></a>[%s]<br>"
-				"%s</font></body></html>",
-				(settings.doublespace ? DOUBLE_SPACE : ""),
-				settings.bible_bg_color,
-				settings.bible_text_color,
-				settings.link_color,
-				((mf->old_font) ? mf->old_font : ""),
-				font_size,
-				imodule.Description(),
-				imodule.Name(),
-				settings.bible_verse_num_color,
-				imodule.Name(),
-				(gchar*)keytext,
-				rework);
+	swbuf.append(settings.imageresize
+		     ? AnalyzeForImageSize(rework,
+					   GDK_WINDOW(gtkText->window),
+					   mod_type)
+		     : rework /* left as-is */);
 
-	// html widgets are uptight about being handed
-	// huge quantities of text -- producer/consumer problem,
-	// and we mustn't overload the receiver.  10k chunks.
+	swbuf.append("</font></body></html>");
 
-	int len = str->len, offset = 0, write_size;
+	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
 
-#ifdef USE_GTKMOZEMBED
-	gecko_html_open_stream(html,"text/html");
-#else
-	GtkHTMLStream *stream = gtk_html_begin(html);
-	GtkHTMLStreamStatus status;
-	gboolean was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
-#endif
-	
-	while (len > 0) {
-		write_size = min(10000, len);
-#ifdef USE_GTKMOZEMBED
-		gecko_html_write(html, str->str+offset, write_size);
-#else
-		gtk_html_write(html, stream, str->str+offset, write_size);
-#endif
-		offset += write_size;
-		len -= write_size;
-	}
-
-#ifdef USE_GTKMOZEMBED
-	gecko_html_close(html); 
-#else
-	gtk_html_end(html, stream, status);
-	gtk_html_set_editable(html, was_editable);
-#endif
-
-	g_string_free(str, TRUE);
 	free_font(mf);
 	g_free(ops);
+	if (keytext)
+		g_free(keytext);
 }
 
 
@@ -1767,29 +1688,15 @@ char DialogChapDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
-	GString *str = g_string_new(NULL);
+	//GString *str = g_string_new(NULL);
 	gchar *buf;
-	gchar *buf2;
 	char *num;
+	is_rtol = main_is_mod_rtol(ModuleName);
 	gchar *preverse = NULL;
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;	
-#ifdef USE_GTKMOZEMBED
-	GeckoHtml *html = GECKO_HTML(gtkText);
-	gecko_html_open_stream(html,"text/html");
-#else
-	GtkHTML *html = GTK_HTML(gtkText);
-	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
-	PangoFontDescription *desc = pango_context_get_font_description(pc);
-	pango_font_description_set_family(desc,
-					  ((mf->old_font)?mf->old_font:"Serif"));
-	gtk_widget_modify_font (gtkText, desc);
-	gboolean was_editable = gtk_html_get_editable(html);
-	GtkHTMLStream *stream = gtk_html_begin(html);
-	GtkHTMLStreamStatus status;
-#endif
 	gint image_content;
 
 	gboolean strongs_and_morph, strongs_or_morph;
@@ -1819,32 +1726,29 @@ char DialogChapDisp::Display(SWModule &imodule)
 	if (strongs_and_morph)
 		set_morph_order(imodule);
 
-	g_string_printf(str,
-			HTML_START
-			"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			"<font face=\"%s\" size=\"%+d\">",
-			(strongs_and_morph
-			 ? CSS_BLOCK_BOTH
-			 : (strongs_or_morph
-			    ? CSS_BLOCK_ONE
-			    : (settings.doublespace
-			       ? DOUBLE_SPACE
-			       : ""))),
-			settings.bible_bg_color,
-			settings.bible_text_color,
-			settings.link_color,
-			((mf->old_font) ? mf->old_font : ""),
-			((mf->old_font_size)
-			 ? atoi(mf->old_font_size) + settings.base_font_size
-			 : settings.base_font_size));
+	buf = g_strdup_printf(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">",
+			      (strongs_and_morph
+			       ? CSS_BLOCK_BOTH
+			       : (strongs_or_morph
+				  ? CSS_BLOCK_ONE
+				  : (settings.doublespace
+				     ? DOUBLE_SPACE
+				     : ""))),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size));
+	swbuf = "";
+	swbuf += buf;
+	g_free(buf);
 
-#ifdef USE_GTKMOZEMBED	
-	gecko_html_write(html, str->str, str->len);
-#else
-	gtk_html_write(html, stream, str->str, str->len);
-#endif
-	
-	str = g_string_erase(str, 0, -1);
+	if (is_rtol)
+		swbuf.append("<div align=right>");
 
 	for (key->Verse(1);
 	     (key->Book() == curBook) &&
@@ -1887,7 +1791,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		    CacheHeader(cVerse, imodule, image_content);
 
 		if (cache_flags & ModuleCache::Headings)
-			str = g_string_append(str, cVerse.GetHeader());
+			swbuf.append(cVerse.GetHeader());
 		else
 			cVerse.InvalidateHeader();
 
@@ -1901,15 +1805,15 @@ char DialogChapDisp::Display(SWModule &imodule)
 			    ((mf->old_font_size)
 			     ? atoi(mf->old_font_size) + settings.base_font_size
 			     : settings.base_font_size));
-			str = g_string_append(str, buf);
+			swbuf.append(buf);
 			g_free(buf);
 		}
 
 		num = main_format_number(key->Verse());
 		buf = g_strdup_printf(settings.showversenum
-			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
-			: "&nbsp; <A NAME=\"%d\"> </A>",
+			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			(char*)key->getText(),
 			settings.verse_num_font_size + settings.base_font_size,
@@ -1918,7 +1822,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 			 : settings.bible_verse_num_color),
 			num);
 		g_free(num);
-		str = g_string_append(str, buf);
+		swbuf.append(buf);
 		g_free(buf);
 
 		if (key->Verse() == curVerse) {
@@ -1927,13 +1831,13 @@ char DialogChapDisp::Display(SWModule &imodule)
 				(settings.versehighlight
 				 ? settings.highlight_fg
 				 : settings.currentverse_color));
-			str = g_string_append(str, buf);
+			swbuf.append(buf);
 			g_free(buf);
 		}
 
 		if (newparagraph && versestyle) {
 			newparagraph = FALSE;
-			str = g_string_append(str, paragraphMark);
+			swbuf.append(paragraphMark);;
 		}
 
 		// same forced line break glitch in highlighted current verse.
@@ -1951,83 +1855,51 @@ char DialogChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			str = g_string_append(str, text->str);
+			swbuf.append(text->str);
 			g_string_free(text, TRUE);
 		} else
-			str = g_string_append(str, cVerse.GetText());
+			swbuf.append(cVerse.GetText());
 
 		if (key->Verse() == curVerse) {
-			str = g_string_append(str, "</font>");
+			swbuf.append("</font>");
 			ReadAloud(curVerse, cVerse.GetText());
 		}
 
-		buf = g_strdup_printf("%s", (const char *)imodule);
-
 		if (versestyle) {
-			buf2 = g_strdup(((key->Verse() == curVerse) &&
-					 settings.versehighlight)
-					? "" : "<br>");
-
-			if ((strstr(buf, "<!P>") == NULL) &&
-			     (strstr(buf, "<p>") == NULL) ) {
-				newparagraph = FALSE;
-			} else {
+			if (strstr(cVerse.GetText(), "<!p>")) {
 				newparagraph = TRUE;
+			} else {
+				newparagraph = FALSE;
 			}
-		} else {
-			if (strstr(buf, "<!P>") == NULL)
-				buf2 = g_strdup(" ");
-			else
-				buf2 = g_strdup(" <p>");
+			if ((key->Verse() != curVerse) ||
+			    !settings.versehighlight)
+				swbuf.append("<br>");
 		}
-		str = g_string_append(str, buf2);
-		g_free(buf2);
-		g_free(buf);
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight)
-		    	str = g_string_append(str, ("</font></td></tr></table>"));
-#ifdef USE_GTKMOZEMBED	
-		gecko_html_write(html, str->str, str->len);
-#else
-		gtk_html_write(html, stream, str->str, str->len);
-#endif
-		str = g_string_erase(str, 0, -1);
+			swbuf.append("</font></td></tr></table>");
 	}
-	str = g_string_erase(str, 0, -1);
-	buf = g_strdup_printf("%s", "</font></body></html>");
-	str = g_string_append(str, buf);
-	g_free(buf);
-	
-#ifdef USE_GTKMOZEMBED
-	if (str->len) {
-		gecko_html_write(html, str->str, str->len);
-		gecko_html_close(html); 
-		if (curVerse > display_boundary) {
-			buf = g_strdup_printf("%d", curVerse - display_boundary);
-			gecko_html_jump_to_anchor(html, buf);
-			g_free(buf);
-		}
-	}
-#else
-	if (str->len) {
-		gtk_html_write(html, stream, str->str, str->len);
-	}
-	gtk_html_end(html, stream, status);
-	gtk_html_set_editable(html, was_editable);
-	if (curVerse > display_boundary) {
-		buf = g_strdup_printf("%d", curVerse - display_boundary);
-		gtk_html_jump_to_anchor(html, buf);
-		g_free(buf);
-	}
-	gtk_html_flush (html);
-#endif
-	g_string_free(str, TRUE);
-	key->Verse(1);
-	key->Chapter(1);
+
+	// Reset the Bible location before GTK gets access:
+	// Mouse activity destroys this key, so we must be finished with it.
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
+
+	if (is_rtol)
+		swbuf.append("</div></font></body></html>");
+	else
+		swbuf.append("</font></body></html>");
+	
+	if (curVerse > display_boundary)
+		buf = g_strdup_printf("%d", curVerse - display_boundary);
+	else
+		buf = NULL;
+	HtmlOutput(imodule, swbuf, gtkText, mf, buf);
+	if (buf)
+		g_free(buf);
+
 	free_font(mf);
 }
 
@@ -2172,7 +2044,7 @@ char GTKPrintEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 	gint font_size;
 	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
 	
@@ -2254,7 +2126,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	gboolean newparagraph = FALSE;
 	mf = get_font(imodule.Name());
 	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 	GeckoHtml *html = GECKO_HTML(gtkText);
 	gecko_html_open_stream(html,"text/html");
 	
@@ -2281,7 +2153,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	g_free(buf);
 
 	if (is_rtol)
-		swbuf.append("<DIV ALIGN=right>");
+		swbuf.append("<div ALIGN=right>");
 	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	
@@ -2314,9 +2186,9 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 
 		num = main_format_number(key->Verse());
 		buf=g_strdup_printf(settings.showversenum
-			? "&nbsp; <A NAME=\"%d\" HREF=\"sword:///%s\">"
-			  "<font size=\"%+d\" color=\"%s\">%s</font></A> "
-			: "&nbsp; <A NAME=\"%d\"> </A>",
+			? "&nbsp; <a name=\"%d\" href=\"sword:///%s\">"
+			  "<font size=\"%+d\" color=\"%s\">%s</font></a> "
+			: "&nbsp; <a name=\"%d\"> </a>",
 			key->Verse(),
 			utf8_key,
 			settings.verse_num_font_size + settings.base_font_size,
@@ -2359,7 +2231,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol)
-		swbuf.append("</DIV></font></body></html>");
+		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
 	

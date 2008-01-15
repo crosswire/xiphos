@@ -1,3 +1,7 @@
+2008-01-15  karl <charcoal@users.sf.net>
+
+	* restructured a lot of display.cc to use common HTML output code.
+
 2008-01-14  karl <charcoal@users.sf.net>
 
 	* added Image Content selectability: detect images' presence,
