@@ -28,6 +28,10 @@ Release 2.3.3
    expected for use with e.g. distribution cdroms.  This has never
    been tested/working before now.
 
+6. Image content can now be disabled on demand from the right-click menu.
+   This option does not become available until the first time that
+   GnomeSword notices that there have been images in the content.
+
 Bug reports addressed since 2.3.2:
 1870036  mod.mgr cannot do local installs
 1864007  NASB's lexicon refs need adjustment
