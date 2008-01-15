@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * _dictlex.c - gui for commentary modules
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -238,7 +238,7 @@ static gint html_button_released(GtkWidget * html,
 			break;
 		key = gui_button_press_lookup(widgets.html_dict);
 		if (key) {
-			if(g_strstr_len(key,strlen(key),"*")) {
+			if (g_strstr_len(key,strlen(key),"*")) {
 				key = g_strdelimit(key, "*", ' ');
 				key = g_strstrip(key);
 				url = g_strdup_printf(
@@ -349,7 +349,7 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 	
 	buf = (gchar*)gtk_entry_get_text(entry);
 	GS_message(("dict_key_entry_changed: %s",buf));
-	if(strlen(buf) < 2 )
+	if (strlen(buf) < 2 )
 		return;
 	
 	main_display_dictionary(settings.DictWindowModule, buf);
@@ -358,12 +358,12 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 
 void button_back_clicked(GtkButton * button, gpointer user_data)
 {
-	if(settings.havedict) main_dictionary_button_clicked(0);
+	if (settings.havedict) main_dictionary_button_clicked(0);
 }
 
 void button_forward_clicked(GtkButton * button, gpointer user_data)
 {
-	if(settings.havedict) main_dictionary_button_clicked(1);
+	if (settings.havedict) main_dictionary_button_clicked(1);
 }
 
 static void on_entry_activate(GtkEntry * entry,
@@ -900,14 +900,14 @@ static GnomeUIInfo variants_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo module_options_menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Set Module Font"),
 	 NULL,
 	 (gpointer) on_set_module_font_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-select-font",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 1 */
+	{ /* 2 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Words of Christ in Red"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -915,19 +915,15 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_TOGGLEITEM,
-	 N_("Strong's Numbers"),
+	{ /* 3 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Strong's Numbers"),
 	 NULL,
 	 (gpointer) on_global_option,
 	 (gpointer) "Strong's Numbers",	/* not seen by user */
 	 NULL,
-	 GNOME_APP_PIXMAP_NONE,
-	 NULL,
-	 0,
-	 (GdkModifierType) 0,
-	 NULL},
-	{
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{ /* 4 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Morphological Tags"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -935,7 +931,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 5 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Footnotes"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -943,7 +939,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 6 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Greek Accents"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -951,7 +947,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 7 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lemmas"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -959,7 +955,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 8 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Scripture Cross-references"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -967,7 +963,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 9 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Vowel Points"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -975,7 +971,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 10 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Cantillation"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -983,7 +979,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 11 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Headings"),
 	 NULL,
 	 (gpointer) on_global_option,
@@ -991,10 +987,18 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 12 */
 	 GNOME_APP_UI_SUBTREE, N_("Variants"),
 	 NULL,
 	 variants_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{ /* 13 */
+	 GNOME_APP_UI_TOGGLEITEM, N_("Image Content"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Image Content",	/* not seen by user */
+	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
@@ -1082,17 +1086,18 @@ void gui_create_pm_dictionary(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (all_readings_uiinfo[0].widget),
 				       TRUE);
-	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	//"words_in_red"         
-	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	//"strongs_numbers"      
-	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	//"/morph_tags"  
-	gtk_widget_hide(module_options_menu_uiinfo[5].widget);	//"footnotes"    
-	gtk_widget_hide(module_options_menu_uiinfo[6].widget);	// "greek_accents"       
-	gtk_widget_hide(module_options_menu_uiinfo[7].widget);	//"lemmas"       
-	gtk_widget_hide(module_options_menu_uiinfo[8].widget);	//"cross_references"    
-	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points" 
-	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation"        
-	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
-	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
+	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	// words_in_red
+	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	// strongs_numbers
+	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	// morph_tags
+	gtk_widget_hide(module_options_menu_uiinfo[5].widget);	// footnotes
+	gtk_widget_hide(module_options_menu_uiinfo[6].widget);	// greek_accents
+	gtk_widget_hide(module_options_menu_uiinfo[7].widget);	// lemmas
+	gtk_widget_hide(module_options_menu_uiinfo[8].widget);	// cross_references
+	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	// hebrew_vowel_points
+	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	// hebrew_cantillation
+	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
+	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
+	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module" 
 	gtk_widget_hide(menu1_uiinfo[8].widget);
 	gtk_widget_hide(menu1_uiinfo[9].widget);
@@ -1127,82 +1132,79 @@ void gui_create_pm_dictionary(void)
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-/*	
-	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
-				(GCallback)gui_lookup_dict_selection);
-*/
 
-	if ((main_check_for_global_option(mod_name,
-					  "GBFRedLetterWords")) ||
-	    (main_check_for_global_option(mod_name,
-					  "OSISRedLetterWords"))) {
-		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
+	if ((main_check_for_global_option(mod_name, "GBFRedLetterWords")) ||
+	    (main_check_for_global_option(mod_name, "OSISRedLetterWords"))) {
+		gtk_widget_show(module_options_menu_uiinfo[2].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
 				    widget)->active = ops->words_in_red;
 	}
 	if (main_check_for_global_option(mod_name, "GBFStrongs") ||
 	    main_check_for_global_option(mod_name, "ThMLStrongs") ||
 	    main_check_for_global_option(mod_name, "OSISStrongs")) {
-		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
+		gtk_widget_show(module_options_menu_uiinfo[3].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
 				    widget)->active = ops->strongs;
 	}
 	if (main_check_for_global_option(mod_name, "GBFMorph") ||
 	    main_check_for_global_option(mod_name, "ThMLMorph") ||
 	    main_check_for_global_option(mod_name, "OSISMorph")) {
-		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
+		gtk_widget_show(module_options_menu_uiinfo[4].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = ops->morphs;
 	}
 	if (main_check_for_global_option(mod_name, "GBFFootnotes") ||
 	    main_check_for_global_option(mod_name, "ThMLFootnotes") ||
 	    main_check_for_global_option(mod_name, "OSISFootnotes")) {
-		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
+		gtk_widget_show(module_options_menu_uiinfo[5].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = ops->footnotes;
 	}
 	if (main_check_for_global_option(mod_name, "UTF8GreekAccents")) {
-		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
+		gtk_widget_show(module_options_menu_uiinfo[6].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
 				    widget)->active = ops->greekaccents;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLLemma") ||
 	    main_check_for_global_option(mod_name, "OSISLemma")) {
-		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
+		gtk_widget_show(module_options_menu_uiinfo[7].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = ops->lemmas;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
 	    main_check_for_global_option(mod_name, "OSISScripref")) {
-		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
+		gtk_widget_show(module_options_menu_uiinfo[8].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
 				    widget)->active =
 		    ops->scripturerefs;
 	}
 	if (main_check_for_global_option(mod_name, "UTF8HebrewPoints")) {
-		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
+		gtk_widget_show(module_options_menu_uiinfo[9].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
 				    widget)->active = ops->hebrewpoints;
 	}
 	if (main_check_for_global_option(mod_name, "UTF8Cantillation")) {
-		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
+		gtk_widget_show(module_options_menu_uiinfo[10].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
 				    widget)->active = ops->hebrewcant;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
 	    main_check_for_global_option(mod_name, "OSISHeadings")) {
-		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
+		gtk_widget_show(module_options_menu_uiinfo[11].widget);
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = ops->headings;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
-		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
+		gtk_widget_show(module_options_menu_uiinfo[12].widget);
 
-		gtk_widget_show(all_readings_uiinfo[0].widget);	//"all_readings");
-
-		gtk_widget_show(all_readings_uiinfo[1].widget);	//"primary_reading");
-
-		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
+		gtk_widget_show(all_readings_uiinfo[0].widget);	// all_readings
+		gtk_widget_show(all_readings_uiinfo[1].widget);	// primary_reading
+		gtk_widget_show(all_readings_uiinfo[2].widget);	// secondary_reading
+	}
+	if (ops->image_content != -1) {
+		gtk_widget_show(module_options_menu_uiinfo[13].widget);
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[13].
+				    widget)->active = ops->image_content;
 	}
 	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[7].widget);

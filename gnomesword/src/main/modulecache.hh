@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * modulecache.hh - 
  *
- * Copyright (C) 2007 GnomeSword Developer Team
+ * Copyright (C) 2007-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,6 +62,7 @@ namespace ModuleCache {
 	static const int RedWordsOfChrist   = 0x080;
 	static const int StrongsNumbers     = 0x100;
 	static const int Xrefs              = 0x200;
+	static const int Images             = 0x400;
 
 	class CacheVerse {
 	public:
@@ -108,26 +109,30 @@ namespace ModuleCache {
 	// Textually:
 	// CacheMap contains modules of books of chapters of verses,
 	// subscriptable at any stage to get the subordinate content.
+
+	// Similar concept for genbooks and lexdicts.
+	typedef std::map < const char *, CacheVerse > BookCacheMap;
+	// a "verse" is just a section entry, textually keyed.
 }
 
 // Lifecycle.
 
 inline
 ModuleCache::CacheVerse::
-CacheVerse() :
-	_text(NULL),
-	_header(NULL),
-	_flags(0)
+CacheVerse()
+    : _text(NULL),
+      _header(NULL),
+      _flags(0)
 {
 	// just initializers preceding
 }
 
 inline
 ModuleCache::CacheVerse::
-CacheVerse(uint16_t flags, const char *text, const char *header) :
-	_text(text ? g_strdup(text) : NULL),
-	_header(header ? g_strdup(header) : NULL),
-	_flags(flags)
+CacheVerse(uint16_t flags, const char *text, const char *header)
+    : _text(text     ? g_strdup(text)   : NULL),
+      _header(header ? g_strdup(header) : NULL),
+      _flags(flags)
 {
 	// just initializers preceding
 }
@@ -209,6 +214,11 @@ SetText(const char *text, uint16_t flags)
 		g_free(_text);
 	_text  = g_strdup(text);
 	_flags = flags;
+	// we are setting from scratch: neutralize header.
+	if (_header) {
+		g_free(_header);
+		_header = NULL;
+	}
 }
 
 inline
@@ -288,6 +298,7 @@ uint16_t ConstructFlags(GLOBAL_OPS * ops);
 
 // access from plain C to eliminate a module's entire cache (mod_mgr.c).
 void ModuleCacheErase(const char *modname);
+void BookModuleCacheErase(const char *modname);
 
 #ifdef __cplusplus
 }

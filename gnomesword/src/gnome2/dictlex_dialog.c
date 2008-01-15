@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * dictlex_dialog.c - dialog for displaying a dictlex module
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -68,13 +68,14 @@ static gint cell_height;
  *   void
  */
 
-void gui_lookup_dictlex_dialog_selection
-    (GtkMenuItem * menuitem, gchar * dict_mod_description) {
+void gui_lookup_dictlex_dialog_selection(GtkMenuItem *menuitem,
+					 gchar *dict_mod_description)
+{
 /*	gchar *dict_key;
 	gchar *mod_name = NULL;
 
 	mod_name = main_module_name_from_description(dict_mod_description);
-	if(!mod_name) 
+	if (!mod_name) 
 		return;
 
 	dict_key = gui_get_word_or_selection(cur_dlg->html, FALSE);
@@ -86,7 +87,7 @@ void gui_lookup_dictlex_dialog_selection
 			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 	}
-	if(mod_name) g_free(mod_name);
+	if (mod_name) g_free(mod_name);
 */
 }
 
@@ -107,13 +108,12 @@ void gui_lookup_dictlex_dialog_selection
  *   void
  */
 
-static void list_selection_changed(GtkTreeSelection * selection,
-				   DIALOG_DATA * d)
+static void list_selection_changed(GtkTreeSelection *selection,
+				   DIALOG_DATA *d)
 {
 	GtkTreeIter selected;
 	gchar *buf = NULL;
 	GtkTreeModel *model;
-
 
 	if (!gtk_tree_selection_get_selected
 	    (selection, &model, &selected))
@@ -145,9 +145,9 @@ static void list_selection_changed(GtkTreeSelection * selection,
  *   gint
  */
 
-static gint button_press_event(GtkWidget * html,
-			       GdkEventButton * event,
-			       DIALOG_DATA * dlg)
+static gint button_press_event(GtkWidget *html,
+			       GdkEventButton *event,
+			       DIALOG_DATA *dlg)
 {
 	//cur_dlg = dlg;
 	return FALSE;
@@ -171,8 +171,9 @@ static gint button_press_event(GtkWidget * html,
  *   void
  */
 
-static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
-			     DIALOG_DATA * dlg)
+static void dialog_set_focus(GtkWindow *window,
+			     GtkWidget *widget,
+			     DIALOG_DATA *dlg)
 {
 //	cur_dlg = dlg;
 //	GS_warning(("current module = %s",cur_dlg->mod_name));
@@ -194,63 +195,14 @@ static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
  *   void
  */
 
-static void dialog_destroy(GtkObject * object, DIALOG_DATA * dlg)
+static void dialog_destroy(GtkObject *object,
+			   DIALOG_DATA *dlg)
 {
 	if (!dialog_freed)
 		main_free_on_destroy(dlg);
 	dialog_freed = FALSE;
 }
 
-
-/******************************************************************************
- * Name
- *   dialog_url
- *
- * Synopsis
- *   #include "dictlex_dialog.h"
- *
- *   void dialog_url(GtkHTML * html, const gchar * url, DL_DATA * d)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-static void dialog_url(GtkHTML * html, const gchar * url,
-		       DIALOG_DATA * dlg)
-{
-
-	//cur_dlg = dlg;
-	
-
-	   if (*url == '@') {
-	   ++url;
-	   sprintf(buf, _("Show %s in main window"), url);
-	   }
-
-	   else if (*url == '[') {
-	   ++url;
-	   while (*url != ']') {
-	   ++url;
-	   }
-	   ++url;
-	   sprintf(buf, "%s", url);
-	   }
-
-	   else if (*url == '*') {
-	   ++url;
-	   sprintf(buf, "%s", url);
-	   }
-
-	   else
-	   sprintf(buf, _("Go to %s"), url);
-
-
-	
-}
-*/
 /******************************************************************************
  * Name
  *  list_button_released
@@ -268,15 +220,14 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   gint
  */
 
-static gint list_button_released(GtkWidget * html,
-				 GdkEventButton * event,
-				 DIALOG_DATA * d)
+static gint list_button_released(GtkWidget *html,
+				 GdkEventButton *event,
+				 DIALOG_DATA *d)
 {
 	switch (event->button) {
 	case 1:
-		list_selection_changed((GtkTreeSelection *) d->
-				       mod_selection, d);
-
+		list_selection_changed((GtkTreeSelection *)
+				       d->mod_selection, d);
 		break;
 	case 2:
 	case 3:
@@ -288,7 +239,7 @@ static gint list_button_released(GtkWidget * html,
 }
 
 
-static void add_columns(GtkTreeView * treeview)
+static void add_columns(GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -332,23 +283,9 @@ static void add_columns(GtkTreeView * treeview)
 void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
 {
 	gchar *key = NULL;
-/*	gchar *key2 = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error = NULL;   */
 
 	key=settings.dictkey;
-/*	key2 = g_convert(  key,	
-			     -1,	
-			     OLD_CODESET,	
-			     UTF_8,	
-			     &bytes_read,	
-			     &bytes_written,
-			     error);    */
-//	gtk_entry_set_text(GTK_ENTRY(d->entry), key2);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
-//	g_free(key);
-//	g_free(key2);
 }
 
 /******************************************************************************
@@ -367,31 +304,18 @@ void on_btnSyncDL_clicked(GtkButton * button, DIALOG_DATA * d)
  *   void
  */
 
-static void entry_changed(GtkEditable * editable, DIALOG_DATA * d)
+static void entry_changed(GtkEditable *editable,
+			  DIALOG_DATA *d)
 {
 	gchar *key = NULL;
-/*	gchar *key2 = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error = NULL;    */
 	
 	if (d->key)
 		g_free(d->key);
 
 	key=
 	    g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
-/*	key2 = g_convert(  key,	
-			     -1,	
-			     UTF_8,	
-			     OLD_CODESET,	
-			     &bytes_read,	
-			     &bytes_written,
-			     error);    */
-
-//	d->key = g_utf8_strup(key2, -1);
 	d->key = g_utf8_strup(key, -1);
 	g_free(key);
-	//GS_message((f_message,407,"entry_changedl",d->key));    
 	main_dialogs_dictionary_entry_changed(d);
 }
 
@@ -427,7 +351,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   GtkWidget *
  */
 
-void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
+void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *hpaned7;
 	GtkWidget *vbox;
@@ -486,18 +410,6 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	    gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(btnSyncDL), tmp_toolbar_icon);
-/*
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
-				       GTK_TOOLBAR_CHILD_BUTTON, 
-				       NULL,
-				       _("Sync"), 
-				       _("Load current key"),
-				       NULL, 
-				       tmp_toolbar_icon, 
-				       NULL,
-				       NULL);
-*/
-//	gtk_widget_show(btnSyncDL);
 
 	dlg->entry = gtk_entry_new();
 	gtk_widget_show(dlg->entry);
@@ -590,170 +502,5 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 			 "button_release_event",
 			 G_CALLBACK(list_button_released), dlg);
 }
-
-
-/******************************************************************************
- * Name
- *   gui_dictionary_dialog_goto_bookmark
- *
- * Synopsis
- *   #include "dictlex_dialog.h"
- *
- *   void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
-{
-	GList *tmp = NULL;
-	tmp = g_list_first(dialog_list);
-	while (tmp != NULL) {
-		DL_DATA *dlg = (DL_DATA *) tmp->data;
-		if(!strcmp(dlg->mod_name, mod_name)) {
-			dlg->key = g_strdup(key);
-			gtk_entry_set_text(GTK_ENTRY(dlg->entry),
-								key);
-			gdk_window_raise(dlg->dialog->window);
-			return;
-		}		
-		tmp = g_list_next(tmp);
-	}
-	gui_open_dictlex_dialog(mod_name);
-	cur_dlg->key = g_strdup(key);
-	gtk_entry_set_text(GTK_ENTRY(cur_dlg->entry),key);
-}
-*/
-/******************************************************************************
- * Name
- *   gui_open_dictlex_dialog
- *
- * Synopsis
- *   #include "dictlex_dialog.h"
- *
- *   void gui_open_dictlex_dialog(gint mod_num)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void gui_open_dictlex_dialog(gchar * mod_name)
-{		
-	DL_DATA *dlg;
-	GtkWidget *popupmenu;
-	
-	dlg = g_new0(DL_DATA, 1);
-	dlg->mod_num = get_module_number(mod_name, DICT_MODS);
-	dlg->search_string = NULL;
-	dlg->dialog = NULL;
-	dlg->key = g_strdup(settings.dictkey);
-	dlg->mod_name = g_strdup(mod_name);
-	dlg->is_dialog = TRUE;
-	dialog_list = g_list_append(dialog_list, (DL_DATA*) dlg);
-	create_dictlex_dialog(dlg);
-	if (has_cipher_tag(dlg->mod_name)) {
-		dlg->is_locked = module_is_locked(dlg->mod_name);
-		dlg->cipher_old = get_cipher_key(dlg->mod_name);
-	}
-	else {
-		dlg->is_locked = 0;
-		dlg->cipher_old = NULL;
-	}
-	cur_dlg = dlg;
-	
-	popupmenu = gui_create_pm_dict(dlg);
-	gnome_popup_menu_attach(popupmenu, dlg->html, NULL);
-	gtk_widget_show(dlg->dialog);
-	on_btnSyncDL_clicked(NULL, dlg);	
-}
-*/
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include ".h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void gui_setup_dictlex_dialog(GList *mods)
-{	
-	dialog_list = NULL;
-	dialog_freed = FALSE;
-}
-*/
-/******************************************************************************
- * Name
- *   gui_close_dict_dialog
- *
- * Synopsis
- *   #include "dictlex_dialog.h"
- *
- *   void gui_close_dict_dialog(void)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-/*
-void gui_close_dict_dialog(DL_DATA * dlg)
-{
-	if(dlg->dialog) {
-		dialog_freed = FALSE;
-		gtk_widget_destroy(dlg->dialog);
-	}
-	
-}
-*/
-
-/******************************************************************************
- * Name
- *   gui_shutdown_dictlex_dialog
- *
- * Synopsis
- *   #include "dictlex_dialog.h"
- *
- *  	void gui_shutdown_dictlex_dialog(void) 
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-void gui_shutdown_dictlex_dialog(void) 
-{
-	dialog_list = g_list_first(dialog_list);
-	while (dialog_list != NULL) {
-		DL_DATA *dlg = (DL_DATA *) dialog_list->data;
-		dialog_freed = TRUE;		
-		if(dlg->key) g_free(dlg->key);
-		if(dlg->mod_name)
-			g_free(dlg->mod_name);
-		if (dlg->dialog)
-			 gtk_widget_destroy(dlg->dialog);
-		g_free((DL_DATA *) dialog_list->data);
-		dialog_list = g_list_next(dialog_list);
-	} 
-	g_list_free(dialog_list);
-}
-*/
 
 //******  end of file  ******/
