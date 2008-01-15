@@ -1,3 +1,11 @@
+2008-01-14  karl <charcoal@users.sf.net>
+
+	* added Image Content selectability: detect images' presence,
+	  show right-click menu option to disable it.
+	  (partially a workaround for failure to display images in
+	   gtkhtml3 bibles -- problem not understood yet.)
+	* formatting changes throughout, as other work continued.
+
 2008-01-12  karl <charcoal@users.sf.net>
 
 	* stop several memleaks in mod.mgr
