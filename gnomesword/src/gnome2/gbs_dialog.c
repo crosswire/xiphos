@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * gbs_dialog.c - dialog for displaying a gbs module
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -81,7 +81,8 @@ static gint tree_level;
  *   void
  */
 
-static void dialog_destroy(GtkObject * object, DIALOG_DATA * dlg)
+static void dialog_destroy(GtkObject *object,
+			   DIALOG_DATA *dlg)
 {	
 	if (!dialog_freed)
 		main_free_on_destroy(dlg);
@@ -193,12 +194,14 @@ static void link_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static gboolean button_press(GtkWidget * widget,
-			     GdkEventButton * event, DIALOG_DATA * g)
+static gboolean button_press(GtkWidget *widget,
+			     GdkEventButton *event,
+			     DIALOG_DATA *g)
 {
 	cur_dlg = g;
 	return FALSE;
 }
+
 /******************************************************************************
  * Name
  *   tree_selection_changed
@@ -216,31 +219,27 @@ static gboolean button_press(GtkWidget * widget,
  *   void
  */
 
-static void tree_selection_changed(GtkTreeSelection * selection,
-				  DIALOG_DATA * g)
+static void tree_selection_changed(GtkTreeSelection *selection,
+				  DIALOG_DATA *g)
 {	
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(g->tree));
 	
 	main_dialogs_tree_selection_changed(model, selection, TRUE, g);
-	
 }
 
 static GtkTreeModel *create_model (void)
 {
-  GtkTreeStore *model;
+	GtkTreeStore *model;
 
-  /* create tree store */
-  model = gtk_tree_store_new (N_COLUMNS, 
-			  GDK_TYPE_PIXBUF,
-			  GDK_TYPE_PIXBUF,
-			  G_TYPE_STRING,
-			  G_TYPE_STRING,
-			  G_TYPE_STRING);
-
- 
-
-  return GTK_TREE_MODEL(model);
+	/* create tree store */
+	model = gtk_tree_store_new (N_COLUMNS, 
+				    GDK_TYPE_PIXBUF,
+				    GDK_TYPE_PIXBUF,
+				    G_TYPE_STRING,
+				    G_TYPE_STRING,
+				    G_TYPE_STRING);
+	return GTK_TREE_MODEL(model);
 }
 
 static void add_columns(GtkTreeView *tree)
@@ -292,8 +291,8 @@ static void add_columns(GtkTreeView *tree)
 #ifdef USE_GTKMOZEMBED
 static void
 _popupmenu_requested_cb (GeckoHtml *html,
-			     gchar *uri,
-			     DIALOG_DATA * d)
+			 gchar *uri,
+			 DIALOG_DATA *d)
 {	
 	//(d); 
 }
@@ -315,7 +314,7 @@ _popupmenu_requested_cb (GeckoHtml *html,
  *   void
  */
 
-void gui_create_gbs_dialog(DIALOG_DATA * dlg)
+void gui_create_gbs_dialog(DIALOG_DATA *dlg)
 {
 	GtkWidget *vbox_dialog;
 	GtkWidget *navbar;

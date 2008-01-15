@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * display.hh - 
  *
- * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,11 +61,13 @@ public:
 	virtual void getVerseBefore(SWModule &imodule,
 				    gboolean strongs_or_morph,
 				    gboolean strongs_and_morph,
-				    uint16_t cache_flags);
+				    uint16_t cache_flags,
+				    gint     image_content);
 	virtual void getVerseAfter(SWModule &imodule,
 				   gboolean strongs_or_morph,
 				   gboolean strongs_and_morph,
-				   uint16_t cache_flags);
+				   uint16_t cache_flags,
+				   gint     image_content);
 	MOD_FONT *mf;
 	SWBuf swbuf;
 	gboolean is_rtol;
