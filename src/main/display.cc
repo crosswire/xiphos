@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * display.cc -
  *
- * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -276,7 +276,27 @@ AnalyzeForImageSize(const char *origtext,
 	return resized.c_str();
 }
 
+//
+// utility function to blank `<img src="foo.jpg" />' content from text.
+//
+void ClearImages(gchar *text)
+{
+	gchar *s, *t;
 
+	for (s = strstr(text, "<img "); s; s = strstr(s, "<img ")) {
+		if (t = strchr(s+4, '>')) {
+			while (s <= t)
+				*(s++) = ' ';
+		} else {
+			GS_message(("ClearImages: no img end: %s\n", s));
+			return;
+		}
+	}
+}
+
+//
+// general display of entries: commentary, genbook, lexdict
+//
 char GTKEntryDisp::Display(SWModule &imodule)
 {
 	gchar *keytext = NULL;
@@ -298,6 +318,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
+	gint image_content = ops->image_content;
 
 	(const char *)imodule;	// snap to entry
 	//GS_message(((const char *)imodule.getRawEntry()));
@@ -342,16 +363,21 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	g_free(buf);
 	
 	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
-		// !strcmp(imodule.getConfigEntry("SourceType"),"ThML"))
 		rework = (const char *)(const char *)imodule.getRawEntry();  //keytext);
 	else if (!strcmp(imodule.Name(), "ISBE"))
 		rework = (const char *)(const char *)imodule.StripText();  //keytext);
 	else
 		rework = (const char *)imodule;
 
-		/********************/
-	//	g_message((const char *)imodule.getRawEntry());
-		/********************/
+	if (image_content == 0)
+		ClearImages((gchar *)rework);
+	else if ((image_content == -1) &&	// "unknown"
+		 (strcasestr(rework, "<img ") != NULL)) {
+		image_content = 1;		// now known.
+		main_save_module_options(imodule.Name(),
+					 "Image Content", 1);
+	}
+
 	swbuf.append(settings.imageresize
 		     ? AnalyzeForImageSize(rework,
 					   GDK_WINDOW(gtkText->window),
@@ -359,7 +385,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
 		     : rework /* left as-is */);
 
 	swbuf.append("</font></body></html>");
-	//GS_message(("\nswbuf.str:\n%s\nswbuf.length:\n%d",swbuf.c_str(),swbuf.length()));
 	
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
@@ -668,14 +693,17 @@ block_render(const char *text)
 }
 
 //
-// utility function for filling headers from verses.
+// utility function to fill headers from verses.
 //
 void
-CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
+CacheHeader(ModuleCache::CacheVerse& cVerse,
+	    SWModule &mod,
+	    gint& image_content)
 {
 	int x = 0;
 	gchar heading[8];
-	const gchar *preverse, *preverse2, *text;
+	const gchar *preverse, *preverse2;
+	gchar *text;
  
 	cVerse.SetHeader("");
 
@@ -685,6 +713,16 @@ CacheHeader(ModuleCache::CacheVerse& cVerse, SWModule &mod)
 		preverse2 = mod.RenderText(preverse);
 		text = g_strdup_printf("<br><b>%s</b><br><br>",
 				       preverse2);
+
+		if (image_content == 0)
+			ClearImages(text);
+		else if ((image_content == -1) &&	// "unknown"
+			 (strcasestr(text, "<img ") != NULL)) {
+			image_content = 1;		// now known.
+			main_save_module_options(mod.Name(),
+						 "Image Content", 1);
+		}
+
 		cVerse.AppendHeader(text);
 		g_free((gchar *)text);
 		// g_free(preverse2); // does RenderText's result need free()?
@@ -709,7 +747,8 @@ void set_morph_order(SWModule &imodule)
 void GTKChapDisp::getVerseBefore(SWModule &imodule,
 				 gboolean strongs_or_morph,
 				 gboolean strongs_and_morph,
-				 uint16_t cache_flags)
+				 uint16_t cache_flags,
+				 gint     image_content)
 {
 	gchar *utf8_key;
 	gchar *buf;
@@ -758,11 +797,29 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		    [key->Chapter()]
 		    [key->Verse()];
 
+#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
 					? block_render((const char *)*mod)
 					: (const char *)*mod),
 				       cache_flags);
+#else
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			const char *text = (strongs_or_morph
+					    ? block_render((const char *)mod)
+					    : (const char *)mod);
+
+			if (image_content == 0)
+				ClearImages((gchar *)text);
+			else if ((image_content == -1) &&	// "unknown"
+				 (strcasestr(text, "<img ") != NULL)) {
+				image_content = 1;		// now known.
+				main_save_module_options(mod->Name(),
+							 "Image Content", 1);
+			}
+			cVerse.SetText(text, cache_flags);
+		}
+#endif
 
 		utf8_key = strdup((char*)key->getText());
 
@@ -802,7 +859,6 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		(*mod)++;
 	}
 
-
 	//
 	// Display content at 0:0 and n:0.
 	//
@@ -823,10 +879,29 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		    [key->Chapter()]
 		    [key->Verse()];
 
+#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
 					? block_render((const char *)*mod)
-					: (const char *)*mod), cache_flags);
+					: (const char *)*mod),
+				       cache_flags);
+#else
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			const char *text = (strongs_or_morph
+					    ? block_render((const char *)mod)
+					    : (const char *)mod);
+
+			if (image_content == 0)
+				ClearImages((gchar *)text);
+			else if ((image_content == -1) &&	// "unknown"
+				 (strcasestr(text, "<img ") != NULL)) {
+				image_content = 1;		// now known.
+				main_save_module_options(mod->Name(),
+							 "Image Content", 1);
+			}
+			cVerse.SetText(text, cache_flags);
+		}
+#endif
 
 		buf=g_strdup_printf("%s<br />", cVerse.GetText());
 		swbuf.append(buf);
@@ -839,7 +914,8 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 void GTKChapDisp::getVerseAfter(SWModule &imodule,
 				gboolean strongs_or_morph,
 				gboolean strongs_and_morph,
-				uint16_t cache_flags)
+				uint16_t cache_flags,
+				gint     image_content)
 {
 	gchar *utf8_key;
 	gchar *buf;
@@ -912,11 +988,29 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 		    [key->Chapter()]
 		    [key->Verse()];
 
+#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
 					? block_render((const char *)*mod)
 					: (const char *)*mod),
 				       cache_flags);
+#else
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			const char *text = (strongs_or_morph
+					    ? block_render((const char *)mod)
+					    : (const char *)mod);
+
+			if (image_content == 0)
+				ClearImages((gchar *)text);
+			else if ((image_content == -1) &&	// "unknown"
+				 (strcasestr(text, "<img ") != NULL)) {
+				image_content = 1;		// now known.
+				main_save_module_options(mod->Name(),
+							 "Image Content", 1);
+			}
+			cVerse.SetText(text, cache_flags);
+		}
+#endif
 
 		swbuf.append(cVerse.GetText());
 		if (is_rtol)
@@ -1156,6 +1250,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTMLStreamStatus status;
 #endif
 
+	gint image_content = ops->image_content;
+
 	gboolean strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 				      ops->morphs);
 	gboolean strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
@@ -1175,23 +1271,23 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 
 	buf=g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			      "<font face=\"%s\" size=\"%+d\">",
-			      // strongs & morph specs win over dblspc.
-			      (strongs_and_morph		// both
-			       ? CSS_BLOCK_BOTH
-			       : (strongs_or_morph		// either
-				  ? CSS_BLOCK_ONE
-				  : (settings.doublespace	// neither
-				     ? DOUBLE_SPACE
-				     : ""))),
-			      settings.bible_bg_color,
-			      settings.bible_text_color,
-			      settings.link_color,
-			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size));
+			    "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			    "<font face=\"%s\" size=\"%+d\">",
+			    // strongs & morph specs win over dblspc.
+			    (strongs_and_morph		// both
+			     ? CSS_BLOCK_BOTH
+			     : (strongs_or_morph		// either
+				? CSS_BLOCK_ONE
+				: (settings.doublespace	// neither
+				   ? DOUBLE_SPACE
+				   : ""))),
+			    settings.bible_bg_color,
+			    settings.bible_text_color,
+			    settings.link_color,
+			    ((mf->old_font) ? mf->old_font : ""),
+			    ((mf->old_font_size)
+			     ? atoi(mf->old_font_size) + settings.base_font_size
+			     : settings.base_font_size));
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -1207,7 +1303,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
-	getVerseBefore(imodule, strongs_or_morph, strongs_and_morph, cache_flags);
+	getVerseBefore(imodule,
+		       strongs_or_morph, strongs_and_morph,
+		       cache_flags, image_content);
 #ifdef USE_GTKMOZEMBED	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 #else
@@ -1217,7 +1315,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 
 	for (key->Verse(1);
-	     (key->Book()    == curBook) &&
+	     (key->Book()    == curBook)    &&
 	     (key->Chapter() == curChapter) &&
 	     !imodule.Error();
 	     imodule++) {
@@ -1229,13 +1327,32 @@ char GTKChapDisp::Display(SWModule &imodule)
 		    [key->Verse()];
 
 		// use the module cache rather than re-accessing Sword.
+#if 1
 		if (!cVerse.CacheIsValid(cache_flags))
 			cVerse.SetText((strongs_or_morph
 					? block_render((const char *)imodule)
 					: (const char *)imodule),
 				       cache_flags);
+#else
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			const char *text = (strongs_or_morph
+					    ? block_render((const char *)imodule)
+					    : (const char *)imodule);
+
+			if (image_content == 0)
+				ClearImages((gchar *)text);
+			else if ((image_content == -1) &&	// "unknown"
+				 (strcasestr(text, "<img ") != NULL)) {
+				image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			cVerse.SetText(text, cache_flags);
+		}
+#endif
+
 		if (!cVerse.HeaderIsValid())
-			CacheHeader(cVerse, imodule);
+		    CacheHeader(cVerse, imodule, image_content);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(cVerse.GetHeader());
@@ -1276,23 +1393,13 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		if (key->Verse() == curVerse) {
 			buf=g_strdup_printf("<font color=\"%s\">",
-						      (settings.versehighlight
-						       ? settings.highlight_fg
-						       : settings.currentverse_color));
+					    (settings.versehighlight
+					     ? settings.highlight_fg
+					     : settings.currentverse_color));
 			swbuf.append(buf);
 			g_free(buf);
 		}
-/*				
-		if (key->Verse() == curVerse   ||
-		    key->Verse() == curVerse-1 ||
-		    key->Verse() == curVerse-2 ||
-		    key->Verse() == curVerse+2 ||
-		    key->Verse() == curVerse+1 ) {
-			main_set_strongs_morphs(ops);
-		} else {
-			main_set_strongs_morphs_off(ops);
-		}
-*/		
+
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			swbuf.append(paragraphMark);;
@@ -1349,7 +1456,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf = "";
 	}
 	swbuf = "";
-	getVerseAfter(imodule, strongs_or_morph, strongs_and_morph, cache_flags);
+	getVerseAfter(imodule,
+		      strongs_or_morph, strongs_and_morph,
+		      cache_flags, image_content);
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
@@ -1358,7 +1467,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 
 	if (is_rtol)
-		swbuf.append("</DIV></font></body></html>");
+		swbuf.append("</div></font></body></html>");
 	else
 		swbuf.append("</font></body></html>");
 	
@@ -1369,7 +1478,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 	if (curVerse > display_boundary) {
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 		gecko_html_jump_to_anchor (html,buf);
-		//embed_go_to_anchor(html, buf);
 		g_free(buf);
 	}
 #else
@@ -1377,7 +1485,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		gtk_html_set_editable(html, FALSE);
 	if (swbuf.length())
 		gtk_html_write(html, stream, swbuf.c_str(), swbuf.length());
-		//gtk_html_load_from_string(html, swbuf.c_str(), swbuf.length());
 	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);
 	if (curVerse > display_boundary) {
@@ -1547,6 +1654,8 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	pango_font_description_set_family(desc, ((mf->old_font)?mf->old_font:"Serirf"));
 	gtk_widget_modify_font (gtkText, desc);
 #endif
+	const char *rework;	// for image size analysis rework.
+	gint image_content = ops->image_content;
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
@@ -1559,6 +1668,22 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	font_size = ((mf->old_font_size)
 		     ? atoi(mf->old_font_size) + settings.base_font_size
 		     : settings.base_font_size);
+
+	rework = (settings.imageresize
+		  ? AnalyzeForImageSize((const char *)imodule,
+					GDK_WINDOW(gtkText->window),
+					type)
+		  : (const char *)imodule /* untouched */);
+
+	if (image_content == 0)
+		ClearImages((gchar *)rework);
+	else if ((image_content == -1) &&	// "unknown"
+		 (strcasestr(rework, "<img ") != NULL)) {
+		image_content = 1;		// now known.
+		main_save_module_options(imodule.Name(),
+					 "Image Content", 1);
+	}
+
 	if (type == 4)
 		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1570,11 +1695,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 				settings.link_color,
 				((mf->old_font) ? mf->old_font : ""),
 				font_size,
-				(settings.imageresize
-				 ? AnalyzeForImageSize((const char *)imodule,
-						       GDK_WINDOW(gtkText->window),
-						       type)
-				 : (const char *)imodule /* untouched */));
+				rework);
 	else
 		g_string_printf(str, HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1593,11 +1714,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 				settings.bible_verse_num_color,
 				imodule.Name(),
 				(gchar*)keytext,
-				(settings.imageresize
-				 ? AnalyzeForImageSize((const char *)imodule,
-						       GDK_WINDOW(gtkText->window),
-						       type)
-				 : (const char *)imodule /* untouched */));
+				rework);
 
 	// html widgets are uptight about being handed
 	// huge quantities of text -- producer/consumer problem,
@@ -1641,10 +1758,12 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 char DialogChapDisp::Display(SWModule &imodule)
 {
+	const char *ModuleName = imodule.Name();
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
+	int curTestament = key->Testament();
 	int curPos = 0;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
@@ -1671,6 +1790,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 #endif
+	gint image_content;
+
 	gboolean strongs_and_morph, strongs_or_morph;
 	gint display_boundary;
 
@@ -1687,21 +1808,16 @@ char DialogChapDisp::Display(SWModule &imodule)
 	g_free(file);
 
 	main_dialog_set_global_options((BackEnd*)be, ops);
+	uint16_t cache_flags = ConstructFlags(ops);
+	image_content = ops->image_content;
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
 	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
 			     ops->morphs);
 	display_boundary = (strongs_or_morph ? 1 : 2);
-	if (strongs_and_morph) {
-		for (FilterList::const_iterator it =
-			 imodule.getRenderFilters().begin();
-		     it != imodule.getRenderFilters().end();
-		     it++) {
-			OSISHTMLHREF *f = dynamic_cast<OSISHTMLHREF *>(*it);
-			if (f)
-				f->setMorphFirst();
-		}
-	}
+
+	if (strongs_and_morph)
+		set_morph_order(imodule);
 
 	g_string_printf(str,
 			HTML_START
@@ -1731,20 +1847,49 @@ char DialogChapDisp::Display(SWModule &imodule)
 	str = g_string_erase(str, 0, -1);
 
 	for (key->Verse(1);
-	     key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error();
+	     (key->Book() == curBook) &&
+	     (key->Chapter() == curChapter) &&
+	     !imodule.Error();
 	     imodule++) {
-		int x = 0;
-		sprintf(heading, "%d", x);
-		while ((preverse
-			= be->get_entry_attribute("Heading", "Preverse",
-							    heading)) != NULL) {
-			buf = g_strdup_printf("<br><b>%s</b><br><br>", preverse);
-			str = g_string_append(str, buf);
-			g_free(preverse);
-			g_free(buf);
-			++x;
-			sprintf(heading, "%d", x);
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+#if 1
+		if (!cVerse.CacheIsValid(cache_flags))
+			cVerse.SetText((strongs_or_morph
+					? block_render((const char *)imodule)
+					: (const char *)imodule),
+				       cache_flags);
+#else
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			const char *text = (strongs_or_morph
+					    ? block_render((const char *)imodule)
+					    : (const char *)imodule);
+
+			if (image_content == 0)
+				ClearImages((gchar *)text);
+			else if ((image_content == -1) &&	// "unknown"
+				 (strcasestr(text, "<img ") != NULL)) {
+				image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			cVerse.SetText(text, cache_flags);
 		}
+#endif
+
+		if (!cVerse.HeaderIsValid())
+		    CacheHeader(cVerse, imodule, image_content);
+
+		if (cache_flags & ModuleCache::Headings)
+			str = g_string_append(str, cVerse.GetHeader());
+		else
+			cVerse.InvalidateHeader();
 
 		// special contrasty highlighting
 		if ((key->Verse() == curVerse) && settings.versehighlight) {
@@ -1782,7 +1927,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 				(settings.versehighlight
 				 ? settings.highlight_fg
 				 : settings.currentverse_color));
-
 			str = g_string_append(str, buf);
 			g_free(buf);
 		}
@@ -1791,24 +1935,14 @@ char DialogChapDisp::Display(SWModule &imodule)
 			newparagraph = FALSE;
 			str = g_string_append(str, paragraphMark);
 		}
-		/*
-		if (key->Verse() == curVerse   ||
-		    key->Verse() == curVerse-1 ||
-		    key->Verse() == curVerse-2 ||
-		    key->Verse() == curVerse+2 ||
-		    key->Verse() == curVerse+1 ) {
-			main_set_dialog_strongs_morphs(be, ops);
-		} else {
-			main_set_dialog_strongs_morphs_off(be, ops);
-		}
-		*/
+
 		// same forced line break glitch in highlighted current verse.
 		if (settings.versehighlight &&		// doing <table> h/l.
 		    !versestyle &&			// paragraph format.
 		    (key->Verse() == curVerse)) {
 			GString *text = g_string_new(NULL);
 
-			g_string_printf(text, "%s", (const char *)imodule);
+			g_string_printf(text, "%s", cVerse.GetText());
 			if (!strcmp(text->str + text->len - 6, "<br />")) {
 				text->len -= 6;
 				*(text->str + text->len) = '\0';
@@ -1817,27 +1951,22 @@ char DialogChapDisp::Display(SWModule &imodule)
 				text->len -= 4;
 				*(text->str + text->len) = '\0';
 			}
-			str = g_string_append(str, 
-					      (strongs_or_morph
-					       ? block_render(text->str)
-					       : text->str));
+			str = g_string_append(str, text->str);
 			g_string_free(text, TRUE);
 		} else
-			str = g_string_append(str,
-					      (strongs_or_morph
-					       ? block_render((const char *)imodule)
-					       : (const char *)imodule));
+			str = g_string_append(str, cVerse.GetText());
 
-		if (key->Verse() == curVerse)
+		if (key->Verse() == curVerse) {
 			str = g_string_append(str, "</font>");
+			ReadAloud(curVerse, cVerse.GetText());
+		}
 
 		buf = g_strdup_printf("%s", (const char *)imodule);
 
 		if (versestyle) {
-			buf2 = g_strdup_printf("%s",
-					       ((key->Verse() == curVerse) &&
-						settings.versehighlight)
-					       ? "" : "<br>");
+			buf2 = g_strdup(((key->Verse() == curVerse) &&
+					 settings.versehighlight)
+					? "" : "<br>");
 
 			if ((strstr(buf, "<!P>") == NULL) &&
 			     (strstr(buf, "<p>") == NULL) ) {
@@ -1849,7 +1978,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 			if (strstr(buf, "<!P>") == NULL)
 				buf2 = g_strdup(" ");
 			else
-				buf2 = g_strdup_printf(" %s", "<p>");
+				buf2 = g_strdup(" <p>");
 		}
 		str = g_string_append(str, buf2);
 		g_free(buf2);
@@ -1883,7 +2012,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 #else
 	if (str->len) {
 		gtk_html_write(html, stream, str->str, str->len);
-		//gtk_html_load_from_string(html, str->str, str->len);
 	}
 	gtk_html_end(html, stream, status);
 	gtk_html_set_editable(html, was_editable);

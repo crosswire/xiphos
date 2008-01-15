@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * modulecache.cc - 
  *
- * Copyright (C) 2007 GnomeSword Developer Team
+ * Copyright (C) 2007-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,8 +31,8 @@
 
 using namespace ModuleCache;
 
-ModuleCache::CacheMap ModuleMap;	// exactly one, always in existence.
-					// (we may destroy modules within.)
+ModuleCache::CacheMap ModuleMap;	 // exactly one, always in existence.
+ModuleCache::BookCacheMap BookModuleMap; // (we may destroy modules within.)
 
 // The entire class is implemented inline in .hh.
 // Needed here: Just the namespace-less functions.
@@ -52,6 +52,7 @@ ConstructFlags(GLOBAL_OPS *ops)
 	flags |= (ops->words_in_red  ? RedWordsOfChrist : 0);
 	flags |= (ops->strongs       ? StrongsNumbers : 0);
 	flags |= (ops->scripturerefs ? Xrefs : 0);
+	flags |= (ops->image_content ? Images : 0);
 	return flags;
 }
 
@@ -64,4 +65,13 @@ ModuleCacheErase(const char *modname)
 	if (itr != ModuleMap.end())
 		ModuleMap.erase(itr);
 	// or just ModuleMap.erase(modname), i guess.
+}
+
+void
+BookModuleCacheErase(const char *modname)
+{
+	BookCacheMap::iterator itr = BookModuleMap.find(modname);
+
+	if (itr != BookModuleMap.end())
+		BookModuleMap.erase(itr);
 }

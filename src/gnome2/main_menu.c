@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * main_menu.c - creation of and call backs for gnomesword main menu
  *
- * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -236,19 +236,21 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  */
 
 static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
-			      gpointer user_data)
+				     gpointer user_data)
 {
 	extern gboolean style_display;
 	if(style_display) {
 		gchar *file = g_strdup_printf("%s/modops.conf", 
-						settings.gSwordDir);
-		gchar *url = g_strdup_printf(	"sword://%s/%s",
-						settings.MainWindowModule,
-						settings.currentverse);
+					      settings.gSwordDir);
+		gchar *url = g_strdup_printf("sword://%s/%s",
+					     settings.MainWindowModule,
+					     settings.currentverse);
 		/* remember our choice for the next program startup */
 		settings.versestyle = menuitem->active;
 		save_conf_file_item(file, settings.MainWindowModule, "style",
-				(menuitem->active)?"verse":"paragraph");
+				    (menuitem->active
+				     ? "verse"
+				     : "paragraph"));
 		if (settings.havebible) {
 			main_url_handler(url, TRUE);		
 		}

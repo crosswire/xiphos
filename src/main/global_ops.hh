@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * mod_global_ops.h - setup for SWORD global options in the gui
  *
- * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ struct  _global_ops {
 	gboolean variants_primary; 
 	gboolean variants_secondary;
 	gint module_type;
+	gint image_content;
 };
 
 int main_save_module_options(char * mod_name, char * option, int choice);
