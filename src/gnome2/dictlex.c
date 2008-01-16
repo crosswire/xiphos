@@ -782,13 +782,6 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
-static void on_show_tabs_activate(GtkMenuItem * menuitem,
-				  gpointer user_data)
-{
-
-}
-
-
 static void
 on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -1016,52 +1009,44 @@ static GnomeUIInfo lookup_selection_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo menu1_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("About"),
 	 NULL,
 	 (gpointer) on_about_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
 	 0, (GdkModifierType) 0, NULL},
-	//GNOMEUIINFO_SEPARATOR,
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Bookmark"),
 	 NULL,
 	 (gpointer) on_add_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-add",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 2 */
+	{ /* 3 */
 	 GNOME_APP_UI_SUBTREE, N_("File"),
 	 NULL,
 	 file3_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 4 */
 	 GNOME_APP_UI_SUBTREE, N_("Edit"),
 	 NULL,
 	 edit3_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 5 */
 	 GNOME_APP_UI_SUBTREE, N_("_Module Options"),
 	 NULL,
 	 module_options_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-ok",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 6 */
 	 GNOME_APP_UI_SUBTREE, N_("Lookup Selection"),
 	 NULL,
 	 lookup_selection_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
 	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
-	 NULL,
-	 (gpointer) on_show_tabs_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	{ /* 7 */
 	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
@@ -1098,10 +1083,7 @@ void gui_create_pm_dictionary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
-	gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module" 
-	gtk_widget_hide(menu1_uiinfo[8].widget);
-	gtk_widget_hide(menu1_uiinfo[9].widget);
-
+	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
 
 
 	view_menu = gtk_menu_new();
