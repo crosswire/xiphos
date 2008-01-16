@@ -32,6 +32,7 @@
 
 #include <regex.h>
 #include <string.h>
+#include <ctype.h>
 #include <assert.h>
 
 #include <sys/socket.h>

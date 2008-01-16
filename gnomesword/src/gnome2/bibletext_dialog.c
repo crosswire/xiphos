@@ -2118,44 +2118,44 @@ static GnomeUIInfo lookup_selection_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo menu1_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("About"),
 	 NULL,
 	 (gpointer) on_about_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 1 */
+	{ /* 2 */
 	 GNOME_APP_UI_SUBTREE, N_("File"),
 	 NULL,
 	 file3_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 3 */
 	 GNOME_APP_UI_SUBTREE, N_("Edit"),
 	 NULL,
 	 edit3_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 4 */
 	 GNOME_APP_UI_SUBTREE, N_("_Module Options"),
 	 NULL,
 	 module_options_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-ok",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 5 */
 	 GNOME_APP_UI_SUBTREE, N_("Lookup Selection"),
 	 NULL,
 	 lookup_selection_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 6 */
 	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
 	 NULL,
 	 (gpointer) on_unlock_module_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 7 */
 	 GNOME_APP_UI_ITEM, N_("Read Selection Aloud"),
 	 NULL,
 	 (gpointer) on_read_selection_aloud, NULL, NULL,
@@ -2196,6 +2196,9 @@ static void create_menu(DIALOG_DATA *t,
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[6].widget);	// unlock_module
+#ifdef __CYGWIN__
+	gtk_widget_hide(menu1_uiinfo[7].widget);	// read aloud
+#endif /* __CYGWIN__ */
 	gtk_widget_hide(file3_menu_uiinfo[0].widget);
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 

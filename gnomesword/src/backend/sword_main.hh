@@ -32,7 +32,6 @@
 
 #include "main/lists.h"
 
-using std::string;
 using std::map;
 using std::list;
 using namespace sword;
