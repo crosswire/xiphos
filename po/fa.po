@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-16 03:11+0000\n"
+"PO-Revision-Date: 2008-01-16 09:39+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -1530,7 +1530,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:760 ../src/gnome2/sidebar.c:1341
 msgid "_Search"
-msgstr ""
+msgstr "جستجو"
 
 #: ../src/gnome2/main_menu.c:761
 msgid "Search using the shortcut bar"
@@ -1538,7 +1538,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:766
 msgid "_Advanced Search"
-msgstr ""
+msgstr "جستجو پیسرفته"
 
 #: ../src/gnome2/main_menu.c:767
 msgid "Advanced search using the search dialog"
@@ -1562,7 +1562,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:796
 msgid "_Daily Devotion"
-msgstr ""
+msgstr "نور روزانی"
 
 #: ../src/gnome2/main_menu.c:797
 msgid "Show the Daily Devotion for today"
@@ -1594,7 +1594,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:830
 msgid "Dictionary/_Lexicon"
-msgstr ""
+msgstr "کتاب فرهنگ"
 
 #: ../src/gnome2/main_menu.c:832
 msgid "Show or hide - dictionaries and lexicons"
@@ -1614,7 +1614,7 @@ msgstr "بخوان با سدا بلاند"
 
 #: ../src/gnome2/main_menu.c:856
 msgid "Show Verse _Numbers"
-msgstr ""
+msgstr "شماره‌ها ایات"
 
 #: ../src/gnome2/main_menu.c:862
 msgid "_Highlight Current Verse"
