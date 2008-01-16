@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-16 09:39+0000\n"
+"PO-Revision-Date: 2008-01-16 09:51+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -1546,7 +1546,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:775
 msgid "_Module Manager"
-msgstr ""
+msgstr "لیست مدول‌ها"
 
 #: ../src/gnome2/main_menu.c:776
 msgid "Use module manager to install and remove Sword modules"
@@ -1566,11 +1566,11 @@ msgstr "نور روزانی"
 
 #: ../src/gnome2/main_menu.c:797
 msgid "Show the Daily Devotion for today"
-msgstr ""
+msgstr "نور روزانی برای امروز نشان بده"
 
 #: ../src/gnome2/main_menu.c:812
 msgid "_Bible Texts"
-msgstr ""
+msgstr "کتاب مقدس"
 
 #: ../src/gnome2/main_menu.c:813
 msgid "Show or hide Bible texts window"
