@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-11 22:17+0000\n"
+"PO-Revision-Date: 2008-01-16 02:59+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("cv")] = SWBuf("Chuvash");
 #: ../src/backend/module_manager.cc:104
 msgid "Welsh"
-msgstr ""
+msgstr "ولیزی"
 
 #. done
 #: ../src/backend/module_manager.cc:105
@@ -175,7 +175,7 @@ msgstr "فینلندی"
 #. mm_languageMap[SWBuf("fo")] = SWBuf("Faroese");
 #: ../src/backend/module_manager.cc:121
 msgid "French"
-msgstr ""
+msgstr "فرنزاوی"
 
 #. done
 #: ../src/backend/module_manager.cc:122
@@ -581,12 +581,12 @@ msgstr ""
 #. mm_languageMap[SWBuf("za")] = SWBuf("Zhuang");
 #: ../src/backend/module_manager.cc:262
 msgid "Chinese"
-msgstr ""
+msgstr "چینی"
 
 #. done
 #: ../src/backend/module_manager.cc:263
 msgid "Zulu"
-msgstr ""
+msgstr "زولو"
 
 #: ../src/main/display.cc:723 ../src/main/display.cc:768
 #: ../src/main/display.cc:836 ../src/main/display.cc:841
@@ -708,7 +708,7 @@ msgstr "فضل"
 #: ../src/gnome2/parallel_view.c:434 ../src/gnome2/sidebar.c:653
 #: ../src/gnome2/sidebar.c:662 ../src/gnome2/utilities.c:443
 msgid "Parallel View"
-msgstr ""
+msgstr "نمایش مطابق"
 
 #: ../src/main/sidebar.cc:592 ../src/main/sidebar.cc:934
 #: ../src/main/sidebar.cc:935 ../src/main/sidebar.cc:936
@@ -1490,7 +1490,7 @@ msgstr "چپ"
 
 #: ../src/gnome2/html.c:800
 msgid "Print Preview"
-msgstr ""
+msgstr "نمایش چپی"
 
 #: ../src/gnome2/html.c:806
 msgid "Failed to print the document"
@@ -1602,7 +1602,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:838
 msgid "_Verse Style"
-msgstr ""
+msgstr "نمایش ایات"
 
 #: ../src/gnome2/main_menu.c:844
 msgid "_Pin Tabs"
@@ -2120,7 +2120,7 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:995
 msgid "View information about the selected dialog"
-msgstr ""
+msgstr "اتلاعت درباره این فرمان"
 
 #: ../src/gnome2/sidebar.c:1325
 msgid "_Modules"
@@ -2258,7 +2258,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:14
 msgid "<b>Parallel View</b>"
-msgstr ""
+msgstr "<b>نمایش مطابق<b>"
 
 #: ../ui/prefs.glade.h:15
 msgid "<b>Show</b>"
