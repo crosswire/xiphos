@@ -1028,7 +1028,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, "gtk-paste",
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Read Selection Aloud"),
+	 GNOME_APP_UI_ITEM, N_("Read Selection Aloud"),		// 12
 	 NULL,
 	 (gpointer) on_read_selection_aloud, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-mic",
@@ -1071,6 +1071,9 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// unlock
 	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
 	gtk_widget_hide(menu1_uiinfo[11].widget);	// dump pers.comm
+#ifdef __CYGWIN__
+	gtk_widget_hide(menu1_uiinfo[12].widget);	// read aloud
+#endif /* __CYGWIN__ */
 
 	
 	view_menu = gtk_menu_new();
