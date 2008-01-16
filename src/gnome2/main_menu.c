@@ -794,94 +794,84 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo view1_menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("_Daily Devotion"),
 	 N_("Show the Daily Devotion for today"),
 	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-/*
-	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Main Window Hints"),
-	 N_("Show or hide Hints in text windows"),
-	 (gpointer) view_hints, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-*/
-	{
+	GNOMEUIINFO_SEPARATOR,  /* 1 */
+	{ /* 2 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Bible Texts"),
 	 N_("Show or hide Bible texts window"),
 	 (gpointer) view_bible_texts, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
- 	{
+ 	{ /* 3 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("P_review"),
 	 N_("Show or hide Preview window"),
 	 (gpointer) view_previewer, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 4 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Commentary"),
 	 N_("Show or hide commentaries"),
 	 (gpointer) view_upper_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 5 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Dictionary/_Lexicon"),
-	 N_
-	 ("Show or hide - dictionaries and lexicons"),
+	 N_("Show or hide - dictionaries and lexicons"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 6 */
+	{ /* 7 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Verse Style"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 8 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Pin Tabs"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 9 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("R_ead Aloud"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 10 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Show Verse _Numbers"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 11 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("_Highlight Current Verse"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 #ifdef USE_GTKMOZEMBED
-	{
+	{ /* 12 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("D_ouble-Space Text"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 #endif /* USE_GTKMOZEMBED */
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 13 */
+	{ /* 14 */
 	 GNOME_APP_UI_ITEM, N_("_Attach/Detach Sidebar"),
 	 NULL,
 	 gui_attach_detach_sidebar, NULL, NULL, 
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 15 */
 	 GNOME_APP_UI_ITEM, N_("_Show/Hide Sidebar"),
 	 NULL,
 	 gui_sidebar_showhide, NULL, NULL,
@@ -987,6 +977,9 @@ void gui_create_main_menu(GtkWidget * app)
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
 #endif /* USE_GTKMOZEMBED */
+#ifdef __CYGWIN__
+	gtk_widget_hide(view1_menu_uiinfo[9].widget);
+#endif /* __CYGWIN */
 
 	/* map tab's show state into view menu. */
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
