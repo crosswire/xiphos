@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-16 02:59+0000\n"
+"PO-Revision-Date: 2008-01-16 03:11+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr "بسنی"
 #. done
 #: ../src/backend/module_manager.cc:95
 msgid "Catalan"
-msgstr ""
+msgstr "کتلانی"
 
 #. done
 #. mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
@@ -92,7 +92,7 @@ msgstr ""
 #. mm_languageMap[SWBuf("co")] = SWBuf("Corsican");
 #: ../src/backend/module_manager.cc:100
 msgid "Coptic"
-msgstr ""
+msgstr "مسری"
 
 #. done
 #: ../src/backend/module_manager.cc:101
@@ -236,7 +236,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:137
 msgid "Hungarian"
-msgstr ""
+msgstr "مچاری"
 
 #. done
 #: ../src/backend/module_manager.cc:138
@@ -249,7 +249,7 @@ msgstr "ارمانی"
 #. mm_languageMap[SWBuf("ie")] = SWBuf("Interlingue");
 #: ../src/backend/module_manager.cc:142
 msgid "Indonesian"
-msgstr ""
+msgstr "اندانسی"
 
 #. done
 #.
@@ -331,7 +331,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:171 ../src/backend/module_manager.cc:255
 msgid "Macedonian"
-msgstr ""
+msgstr "مکدانی"
 
 #. done
 #. mm_languageMap[SWBuf("ml")] = SWBuf("Malayalam");
@@ -473,7 +473,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:229
 msgid "Tamil"
-msgstr ""
+msgstr "تمیلی"
 
 #. done
 #. mm_languageMap[SWBuf("te")] = SWBuf("Telugu");
@@ -501,7 +501,7 @@ msgstr ""
 #. done
 #: ../src/backend/module_manager.cc:237
 msgid "Turkish"
-msgstr ""
+msgstr "تورکی"
 
 #. done
 #. mm_languageMap[SWBuf("ts")] = SWBuf("Tsonga");
@@ -668,7 +668,7 @@ msgstr "مدول"
 
 #: ../src/main/search_dialog.cc:59 ../src/gnome2/search_dialog.c:62
 msgid "found in "
-msgstr ""
+msgstr "پیداد شد دار"
 
 #: ../src/main/search_dialog.cc:346
 msgid "Delete Range?"
@@ -1610,7 +1610,7 @@ msgstr ""
 
 #: ../src/gnome2/main_menu.c:850
 msgid "R_ead Aloud"
-msgstr ""
+msgstr "بخوان با سدا بلاند"
 
 #: ../src/gnome2/main_menu.c:856
 msgid "Show Verse _Numbers"
@@ -1659,11 +1659,11 @@ msgstr "درباره این برنامه"
 #: ../src/gnome2/main_menu.c:923 ../ui/editor_note.xml.h:14
 #: ../ui/editor_studypad.xml.h:19 ../ui/editor.xml.h:14
 msgid "_File"
-msgstr ""
+msgstr "پرونده"
 
 #: ../src/gnome2/main_menu.c:929
 msgid "_Edit"
-msgstr ""
+msgstr "ویرایش"
 
 #: ../src/gnome2/main_menu.c:935
 msgid "_View"
@@ -1830,11 +1830,11 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1231
 msgid "Old"
-msgstr ""
+msgstr "قدیم"
 
 #: ../src/gnome2/mod_mgr.c:1258
 msgid "New"
-msgstr ""
+msgstr "نو"
 
 #: ../src/gnome2/mod_mgr.c:1269
 msgid "Description"
@@ -1846,7 +1846,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1338
 msgid "Type"
-msgstr ""
+msgstr "شکل"
 
 #: ../src/gnome2/mod_mgr.c:1346
 msgid "Caption"
@@ -2048,7 +2048,7 @@ msgstr "کتاب مقدس"
 
 #: ../src/gnome2/search_sidebar.c:214 ../ui/prefs.glade.h:27
 msgid "Commentary"
-msgstr ""
+msgstr "تفسیر"
 
 #: ../src/gnome2/search_sidebar.c:228
 msgid "Search Type"
@@ -2064,7 +2064,7 @@ msgstr ""
 
 #: ../src/gnome2/search_sidebar.c:275
 msgid "Search Options"
-msgstr ""
+msgstr "انتخاب‌ها جستجو"
 
 #: ../src/gnome2/search_sidebar.c:303
 msgid "Search Scope"
@@ -2400,7 +2400,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:51
 msgid "Personal Notes"
-msgstr ""
+msgstr "تفسیر شخسی"
 
 #: ../ui/prefs.glade.h:54
 msgid "Resize images"
