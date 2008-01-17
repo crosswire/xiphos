@@ -362,7 +362,10 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gint mod_type;
 	MOD_FONT *mf = get_font(imodule.Name());
 	
+#ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+#endif
+
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
