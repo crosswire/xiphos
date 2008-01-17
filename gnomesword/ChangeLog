@@ -1,11 +1,13 @@
 2008-01-16  karl <charcoal@users.sf.net>
 	
 	* fix #1872525 Fix build errors with gcc-4.3
+	* restructure and simplify readability of HtmlOutput.
+	* solve gtkhtml3 side of "first display of genbook is blank".
 	
 2008-01-15  karl <charcoal@users.sf.net>
 
 	* restructured a lot of display.cc to use common HTML output code.
-	* turned off Read Aloud from main View menu on Cygwin.
+	* turned off Read Aloud from all menus on Cygwin.
 
 2008-01-14  karl <charcoal@users.sf.net>
 
