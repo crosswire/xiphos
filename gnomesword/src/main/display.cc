@@ -304,8 +304,11 @@ void HtmlOutput(SWModule &imodule,
 		MOD_FONT *mf,
 		char *anchor)
 {
+	int len = swbuf.length(), offset = 0, write_size;
+
 #ifdef USE_GTKMOZEMBED
 	GeckoHtml *html = GECKO_HTML(gtkText);
+	gecko_html_open_stream(html,"text/html");
 #else
 	GtkHTML *html = GTK_HTML(gtkText);
 	PangoContext* pc = gtk_widget_create_pango_context(gtkText);
@@ -313,22 +316,16 @@ void HtmlOutput(SWModule &imodule,
 	pango_font_description_set_family(
 	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
 	gtk_widget_modify_font(gtkText, desc);	
-#endif
-
-	// html widgets are uptight about being handed
-	// huge quantities of text -- producer/consumer problem,
-	// and we mustn't overload the receiver.  10k chunks.
-	int len = swbuf.length(), offset = 0, write_size;
-
-#ifdef USE_GTKMOZEMBED
-	gecko_html_open_stream(html,"text/html");
-#else
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 #endif
+
+	// html widgets are uptight about being handed
+	// huge quantities of text -- producer/consumer problem,
+	// and we mustn't overload the receiver.  10k chunks.
 
 	while (len > 0) {
 		write_size = min(10000, len);
