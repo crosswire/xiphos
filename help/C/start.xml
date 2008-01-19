@@ -131,10 +131,10 @@
 			    </listitem>
 		  	 </varlistentry>
 			<varlistentry>
-				<term>Viewer</term>
+				<term>Previewer</term>
 				<listitem>
 					<para>
-					The <interface>Viewer</interface> displays Bible text module options. These include Strong's
+					The <interface>Previewer</interface> displays Bible text module options. These include Strong's
 					numbers, footnotes and morphological tags. It is located below the Bible Text Pane.
 					</para>
 				</listitem>
@@ -169,7 +169,7 @@
 			 </variablelist>
 		     <para>
 			When you right-click in the different interface sections, the interface displays a popup menu, which provides access
-			to more module-specific options, including printing services.
+			to more module-specific options, including display controls and printing services.
 			</para>
 	</sect2>
 
