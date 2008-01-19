@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-12 23:25+0100\n"
-"PO-Revision-Date: 2008-01-12 23:26+0100\n"
+"POT-Creation-Date: 2008-01-19 15:49+0100\n"
+"PO-Revision-Date: 2008-01-19 19:30+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "sword3.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:62(None) ../C/gnomesword.xml:77(None)
+#: ../C/gnomesword.xml:63(None) ../C/gnomesword.xml:77(None)
 msgid "@@image: 'figures/interface.png'; md5=8a25b1bdc20db3e81a6ba9e2cb5bdf57"
 msgstr "interface.png"
 
@@ -98,7 +98,7 @@ msgstr "interface_parallel-separate.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:385(None)
+#: ../C/gnomesword.xml:398(None)
 msgid ""
 "@@image: 'figures/interface_biblepane-options.png'; "
 "md5=7469f6bfb046f10092f8cc55154a1e8e"
@@ -106,7 +106,7 @@ msgstr "interface_biblepane-options.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:411(None)
+#: ../C/gnomesword.xml:424(None)
 msgid ""
 "@@image: 'figures/interface_menubar-view.png'; "
 "md5=5e992f05345ee519d756cf7eefd6816c"
@@ -114,14 +114,14 @@ msgstr "interface_menubar-view.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:499(None)
+#: ../C/gnomesword.xml:521(None)
 msgid ""
 "@@image: 'figures/interface_viewer.png'; md5=d0254ed1561f75acaa8beff53ff551b9"
 msgstr "interface_viewer.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:538(None)
+#: ../C/gnomesword.xml:560(None)
 msgid ""
 "@@image: 'figures/interface_commentarypane.png'; "
 "md5=6aefb41dbd52a44ba782f3128f0ab620"
@@ -129,7 +129,7 @@ msgstr "interface_commentarypane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:611(None)
+#: ../C/gnomesword.xml:633(None)
 msgid ""
 "@@image: 'figures/interface_dictionary.png'; "
 "md5=759f9bff6efe6cfe280871abf83ecba2"
@@ -137,7 +137,7 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:707(None)
+#: ../C/gnomesword.xml:733(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
 "md5=8cb0c5fe67f45e009bd8f40f5609f573"
@@ -184,7 +184,7 @@ msgstr "preferences_general-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:171(None)
+#: ../C/gnomesword.xml:176(None)
 msgid ""
 "@@image: 'figures/preferences_modules-main.png'; "
 "md5=4b62e4a3aa5f7ac0c57bc986ffaeb226"
@@ -192,7 +192,7 @@ msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:191(None)
+#: ../C/gnomesword.xml:196(None)
 msgid ""
 "@@image: 'figures/preferences_modules-parallel.png'; "
 "md5=560f20f49760a8a3528282c0ca0cc22b"
@@ -200,7 +200,7 @@ msgstr "preferences_modules-parallel.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:211(None)
+#: ../C/gnomesword.xml:216(None)
 msgid ""
 "@@image: 'figures/preferences_modules-misc.png'; "
 "md5=debecf07d1cec94e2c50de2fe046d0dd"
@@ -208,41 +208,41 @@ msgstr "preferences_modules-misc.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:22(None) ../C/modules.xml:22(None)
+#: ../C/gnomesword.xml:23(None) ../C/modules.xml:23(None)
 msgid "@@image: 'figures/module.png'; md5=dd737967d33b2dadb6b9a05bdb8fe46e"
 msgstr "module.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:48(None)
+#: ../C/gnomesword.xml:49(None)
 msgid ""
 "@@image: 'figures/sword_sources.png'; md5=79f7b71d48b8f79c4b9606438c1c9650"
 msgstr "sword_sources.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:76(None)
+#: ../C/gnomesword.xml:77(None)
 msgid ""
 "@@image: 'figures/sword_config.png'; md5=5941742eecb4d1cba508e5f9b1e28565"
 msgstr "sword_config.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:122(None)
+#: ../C/gnomesword.xml:123(None)
 msgid ""
-"@@image: 'figures/sword_install.png'; md5=c71eda03793fba9ab4728f8b4a8bf7f8"
+"@@image: 'figures/sword_install.png'; md5=e34cb6abc2c10333a8c4916036827a39"
 msgstr "sword_install.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:155(None)
+#: ../C/gnomesword.xml:157(None)
 msgid ""
 "@@image: 'figures/sword_remove.png'; md5=25db01bba9d1c29adf2a0d7b93e6890b"
 msgstr "sword_remove.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:12(None) ../C/search.xml:12(None)
+#: ../C/gnomesword.xml:15(None) ../C/search.xml:15(None)
 msgid ""
 "@@image: 'figures/interface_searchpane.png'; "
 "md5=0cddddec73f71ce0bd08c1d26aa454d1"
@@ -250,7 +250,7 @@ msgstr "interface_searchpane.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:177(None)
+#: ../C/gnomesword.xml:180(None)
 msgid ""
 "@@image: 'figures/search_search.png'; md5=1a4e617b4b6599ed5768ccb794fa823f"
 msgstr "search_search.png"
@@ -825,7 +825,7 @@ msgstr "crosswire"
 msgid "help dialog"
 msgstr "Fenêtre d'aide"
 
-#: ../C/gnomesword.xml:333(primary) ../C/gnomesword.xml:637(application)
+#: ../C/gnomesword.xml:333(primary) ../C/gnomesword.xml:663(application)
 msgid "GnomeSword"
 msgstr "&appname;"
 
@@ -875,12 +875,12 @@ msgstr "Étudier dans les langues originelles, grec ou hébreu"
 #: ../C/gnomesword.xml:25(para)
 msgid ""
 "<application>Gnomesword2</application> aims to provide a simple and clean "
-"user interface whilst providing a powerful tool allowing a personalized "
-"Bible study environment."
+"user interface while providing a powerful tool allowing a personalized Bible "
+"study environment."
 msgstr ""
-"<application>&appname;</application> cherche a être un logiciel d'étude "
-"biblique puissant, offrant un environnement de travail adapté, tout en "
-"restant simple et léger à utiliser."
+"<application>&appname;</application> vise à offrir une interface utilisateur "
+"simple et légère tout en étant un outil puissant de manière à procurer un "
+"cadre sur mesure adapté à l'étude de la Bible."
 
 #: ../C/gnomesword.xml:30(title) ../C/gnomesword.xml:43(phrase)
 msgid "The SWORD Project logo"
@@ -892,22 +892,24 @@ msgid ""
 "crosswire.org\">http://www.crosswire.org</ulink>. Other applications under "
 "the same banner are <application>The SWORD Project for Windows</application> "
 "(aka <application>BibleCS</application> or <application>WinSword</"
-"application>), <application>MacSword</application> for the Macintosh, and "
+"application>), <application>MacSword</application> for the Macintosh, "
+"<application>BibleDesktop</application>, a Java application, and "
 "<application>BibleTime</application>, another Linux program."
 msgstr ""
 "Le «­­&nbsp;SWORD Project&nbsp;» est hébergé à <ulink type=\"http\" url="
 "\"http://www.crosswire.org\"> http://www.crosswire.org</ulink>. D'autres "
-"applications basées sur le même principe sont : <application>The SWORD "
-"Project for Windows</application> (<application>BibleCS</application> ou "
-"<application>WinSword</application>), <application>MacSword</application> "
-"pour Macintosh et <application>BibleTime</application> sous environnement "
-"KDE pour Linux."
+"applications basées sur le «­­&nbsp;SWORD Project&nbsp;» sont&nbsp;: "
+"<application>The SWORD Project for Windows</application> "
+"(<application>BibleCS</application> ou <application>WinSword</application>),"
+" <application>MacSword</application> pour Macintosh, <application>"
+"BibleDesktop</application>, une application Java et <application>"
+"BibleTime</application> sous environnement KDE pour Linux."
 
-#: ../C/gnomesword.xml:58(title) ../C/gnomesword.xml:71(phrase)
+#: ../C/gnomesword.xml:59(title) ../C/gnomesword.xml:72(phrase)
 msgid "GnomeSword in action"
 msgstr "&appname; en action"
 
-#: ../C/gnomesword.xml:80(para)
+#: ../C/gnomesword.xml:81(para)
 msgid ""
 "<application>Gnomesword2</application> is currently in development, so this "
 "manual may not reflect the program as you see it. If it does not, please "
@@ -1062,7 +1064,7 @@ msgstr ""
 "La <interface>Barre d'outils</interface> contient des boutons permettant de "
 "naviguer rapidement dans le texte biblique."
 
-#: ../C/gnomesword.xml:116(term)
+#: ../C/gnomesword.xml:116(term) ../C/gnomesword.xml:144(title)
 msgid "Sidebar"
 msgstr "Volet latéral"
 
@@ -1088,22 +1090,23 @@ msgstr ""
 "Le volet des<interface> Textes bibliques</interface> affiche le texte "
 "biblique sélectionné."
 
-#: ../C/gnomesword.xml:134(term)
-msgid "Viewer"
+#: ../C/gnomesword.xml:134(term) ../C/gnomesword.xml:516(title)
+#: ../C/gnomesword.xml:530(phrase)
+msgid "Previewer"
 msgstr "Aperçu"
 
 #: ../C/gnomesword.xml:136(para)
 msgid ""
-"The <interface>Viewer</interface> displays Bible text module options. These "
-"include Strong's numbers, footnotes and morphological tags. It is located "
-"below the Bible Text Pane."
+"The <interface>Previewer</interface> displays Bible text module options. "
+"These include Strong's numbers, footnotes and morphological tags. It is "
+"located below the Bible Text Pane."
 msgstr ""
-"Le volet <interface>Aperçu</interface> affiche  les textes complémentaires "
-"des modules de textes bibliques. Ces textes comprennent  les nombres de "
-"Strong, les notes de bas de page et les  étiquettes  morphologiques. Il est "
+"Le volet <interface>Aperçu</interface> affiche les textes complémentaires "
+"des modules de textes bibliques. Ces textes comprennent les nombres de "
+"Strong, les notes de bas de page et les étiquettes morphologiques. Il est "
 "situé en-dessous du volet des textes bibliques."
 
-#: ../C/gnomesword.xml:143(term) ../C/gnomesword.xml:547(phrase)
+#: ../C/gnomesword.xml:143(term) ../C/gnomesword.xml:569(phrase)
 msgid "Commentary Pane"
 msgstr "Commentaire"
 
@@ -1149,7 +1152,7 @@ msgstr ""
 msgid ""
 "When you right-click in the different interface sections, the interface "
 "displays a popup menu, which provides access to more module-specific "
-"options, including printing services."
+"options, including display controls and printing services."
 msgstr ""
 "Un clic du bouton droit de la souris dans les différents volets de la "
 "fenêtre de <application>&appname;</application> fait apparaître un menu "
@@ -1168,7 +1171,7 @@ msgid ""
 "type. For example, the file operations have been grouped into the "
 "<guisubmenu>File</guisubmenu> menu."
 msgstr ""
-"La <interface>barre de menu</interface> se situe en haut de la fenêtre de "
+"La <interface>Barre de menu</interface> se situe en haut de la fenêtre de "
 "l'application <application>&appname;</application>.  Pratiquement toutes les "
 "fonctions sont disponibles en utilisant les éléments de menu appropriés. Les "
 "différentes fonctions sont regroupées par type. Par exemple, les opérations "
@@ -1185,14 +1188,15 @@ msgstr "Barres d'outils"
 
 #: ../C/gnomesword.xml:38(para)
 msgid ""
-"The function of the Toolbar is to provide control over the Bible Pane. "
-"Activation of the Toolbar option is done by moving the mouse cursor over the "
-"desired toolbar button and selecting it. A tooltip will appear if the mouse "
-"cursor is held stationary over a toolbar button, describing the function of "
-"the button."
+"The function of the Toolbar is to provide control over the Bible and "
+"Commentary Panes. Activation of the Toolbar option is done by moving the "
+"mouse cursor over the desired toolbar button and selecting it. A tooltip "
+"will appear if the mouse cursor is held stationary over a toolbar button, "
+"describing the function of the button."
 msgstr ""
-"La <interface>barre d'outils</interface> commande le volet des "
-"<interface>textes bibliques.</interface> Les commandes sont activées par un "
+"La fonction de la <interface>Barre d'outils</interface> est de commander "
+"le volet des <interface>Textes bibliques.</interface> et des <interface> "
+"Commentaires</interface>. Les commandes sont activées par un "
 "clic de la souris sur un des boutons de la barre d'outils. Si le curseur de "
 "la souris est déplacé au-dessus d'un des boutons, à ce moment-là une bulle "
 "d'aide apparaît, décrivant la fonction de ce bouton."
@@ -1211,7 +1215,7 @@ msgstr ""
 "La <interface>Barre d'outils</interface> présente les fonctions suivantes :"
 
 #: ../C/gnomesword.xml:68(para)
-msgid "History View Toggle"
+msgid "History View Toggle and drop-down menu"
 msgstr "Boutons de déplacement dans l'historique des versets consultés"
 
 #: ../C/gnomesword.xml:73(para) ../C/gnomesword.xml:102(title)
@@ -1286,42 +1290,34 @@ msgid ""
 "wrong or no information will be displayed."
 msgstr ""
 "Les valeurs de livre, chapitre et verset doivent être correctes, sinon le "
-"passage ne change pas ou le résultat obtenu est différent de celui désiré."
+"le résultat obtenu risque d'être différent de celui désiré."
 
-#: ../C/gnomesword.xml:142(title)
+#: ../C/gnomesword.xml:142(title) ../C/gnomesword.xml:157(phrase)
 msgid "The Sidebar"
 msgstr "La barre d'outils"
-
-#: ../C/gnomesword.xml:144(title)
-msgid "Sidepane"
-msgstr "Volet latéral"
-
-#: ../C/gnomesword.xml:157(phrase)
-msgid "The Sidepane"
-msgstr "Le volet latéral"
 
 #: ../C/gnomesword.xml:163(para)
 msgid ""
 "On the left hand side of <application>GnomeSword</application> there is the "
-"Side Pane. Here the user can switch between the different Sword modules, "
-"view bookmarks, do simple searches and view verse lists. To switch between "
-"all Side Pane functions, shortcuts have been placed at the bottom of the "
-"Side Pane. Clicking on the shortcut activates the option."
+"Sidebar. Here the user can switch between the different Sword modules, view "
+"bookmarks, do simple searches and view verse lists. To switch between all "
+"Sidebar functions, shortcuts have been placed at the bottom of the Sidebar. "
+"Clicking on the shortcut activates the option."
 msgstr ""
-"Le <interface>volet latéral</interface> se situe sur la partie gauche de la "
-"fenêtre principale de  <application>&appname;</application>. Le "
+"Le <interface>volet latéral</interface> est situé sur la partie gauche de la "
+"fenêtre principale de <application>&appname;</application>. Le "
 "<interface>volet latéral</interface> permet de choisir les modules Sword, "
-"gérer et utiliser les signets, effectuer des recherches simples ou afficher "
-"les listes de versets. Les boutons situés au bas du <interface>volet "
+"de gérer et utiliser les signets,d' effectuer des recherches basiques ou d'afficher "
+"les listes de versets. Les raccourcis du <interface>volet "
 "latéral</interface> permettent, par un simple clic, d'activer ces "
 "différentes fonctions."
 
 #: ../C/gnomesword.xml:170(title)
-msgid "Sidepane Shortcuts"
+msgid "Sidebar Shortcuts"
 msgstr "Raccourcis du volet latéral"
 
 #: ../C/gnomesword.xml:183(phrase)
-msgid "Sidepane shortcuts"
+msgid "Sidebar shortcuts"
 msgstr "Raccourcis du volet latéral"
 
 #: ../C/gnomesword.xml:191(title)
@@ -1391,15 +1387,15 @@ msgstr "Utilisation du mode Vue parallèle"
 #: ../C/gnomesword.xml:243(para)
 msgid ""
 "A nice function in <application>GnomeSword</application> is the ability to "
-"view your specified bible text in parallel in five translations of your "
-"choice. The Parallel View mode can be accessed by selecting "
-"<guimenuitem>Parallel View</guimenuitem> just below the <interface>Bible "
-"Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> "
-"tab. Please note that you can only view one verse at a time. You can change "
-"the verse by selecting another verse, chapter, or book at the toolbar. Also "
-"note that modules that are Old Testament or New Testament only (eg "
-"Westminster Leningrad Codex and Byzantine Majority Text ) will not be able "
-"to display books, chapters, or verses that they don't have."
+"view your specified bible text in five parallel translations of your choice. "
+"The Parallel View mode can be accessed by selecting <guimenuitem>Parallel "
+"View</guimenuitem> just below the <interface>Bible Text Pane</interface>, "
+"next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that "
+"you can only view one verse at a time. You can change the verse by selecting "
+"another verse, chapter, or book at the toolbar. Also note that modules that "
+"are Old Testament or New Testament only (eg Westminster Leningrad Codex and "
+"Byzantine Majority Text ) will not be able to display books, chapters, or "
+"verses that they don't have."
 msgstr ""
 "Une fonction intéressante de <application>&appname;</application> est la "
 "possibilité d'afficher en parallèle le texte de cinq versions différentes de "
@@ -1410,7 +1406,7 @@ msgstr ""
 "la fois. Utiliser les sélecteurs de la barre d'outils pour changer de "
 "verset. Il est à noter également que les modules de texte contenant "
 "seulement le Nouveau Testament ou seulement l'Ancien Testament ne pourront "
-"pas afficher les livres, chapitres, versets qu'ils ne contiennent pas."
+"pas afficher les livres, chapitres, versets qu'ils n'ont pas."
 
 #: ../C/gnomesword.xml:252(title) ../C/gnomesword.xml:264(phrase)
 msgid "Bible textpane - parallel view"
@@ -1451,9 +1447,9 @@ msgstr ""
 msgid ""
 "Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</"
 "interface>,choose <menuchoice><guimenuitem>Biblical Texts</"
-"guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice> . Then "
-"right-click on your specific translation and choose the <guimenuitem>Open in "
-"dialog</guimenuitem> option."
+"guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>. Then "
+"right-click on a translation and choose the <guimenuitem>Open in dialog</"
+"guimenuitem> option."
 msgstr ""
 "Dans l'option  <guimenuitem>Modules</guimenuitem> du <interface>volet "
 "latéral</interface>, choisir <menuchoice><guimenuitem>Textes bibliques</"
@@ -1480,43 +1476,62 @@ msgstr ""
 "<interface>textes bibliques</interface>. Dans le menu contextuel qui "
 "s'affiche, sélectionner <guimenuitem>À propos</guimenuitem>."
 
-#: ../C/gnomesword.xml:329(title) ../C/gnomesword.xml:382(title)
-#: ../C/gnomesword.xml:394(phrase)
+#: ../C/gnomesword.xml:326(para)
+msgid ""
+"Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</"
+"interface>,choose <menuchoice><guimenuitem>Biblical Texts</"
+"guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>. Then "
+"right-click on a translation and choose the <guimenuitem>About</guimenuitem> "
+"option."
+msgstr ""
+"Dans l'option  <guimenuitem>Modules</guimenuitem> du <interface>volet "
+"latéral</interface>, choisir <menuchoice><guimenuitem>Textes bibliques</"
+"guimenuitem><guimenuitem>langue de votre choix</guimenuitem></menuchoice>. "
+"Faire un clic droit sur la version souhaitée, puis dans le menu contextuel "
+"qui s'affiche, choisir l'option <guimenuitem>À propos</"
+"guimenuitem>."
+
+#: ../C/gnomesword.xml:337(title) ../C/gnomesword.xml:395(title)
+#: ../C/gnomesword.xml:407(phrase)
 msgid "Module Options"
 msgstr "Options des modules"
 
-#: ../C/gnomesword.xml:330(para)
+#: ../C/gnomesword.xml:338(para)
 msgid ""
 "Most Bible translations have additional options which the user can select."
 msgstr ""
 "De nombreux modules de textes bibliques proposent des options additionnelles "
 "à activer suivant les besoins de  l'utilisateur :"
 
-#: ../C/gnomesword.xml:335(para)
+#: ../C/gnomesword.xml:343(para)
 msgid "Words Of Christ In Red"
 msgstr "Paroles de Christ en rouge"
 
-#: ../C/gnomesword.xml:340(para)
+#: ../C/gnomesword.xml:348(para)
 msgid "Strong's Numbers"
 msgstr "Nombres de Strong"
 
-#: ../C/gnomesword.xml:345(para)
+#: ../C/gnomesword.xml:353(para)
 msgid "Morphological Tags"
 msgstr "Étiquettes morphologiques"
 
-#: ../C/gnomesword.xml:350(para)
+#: ../C/gnomesword.xml:358(para)
 msgid "Footnotes"
 msgstr "Notes de bas de page"
 
-#: ../C/gnomesword.xml:355(para)
+#: ../C/gnomesword.xml:363(para)
 msgid "Scripture Cross-Reference"
 msgstr "Références croisées de l'Écriture"
 
-#: ../C/gnomesword.xml:360(para)
+#: ../C/gnomesword.xml:368(para)
 msgid "Headings"
 msgstr "Entêtes"
 
-#: ../C/gnomesword.xml:366(para)
+#: ../C/gnomesword.xml:373(para)
+msgid "Image Content"
+msgstr "Afficher les images"
+
+#: ../C/gnomesword.xml:379(para)
 msgid ""
 "Translations in other languages such as Greek or Hebrew have specific "
 "options which deal only with the specific language."
@@ -1524,11 +1539,11 @@ msgstr ""
 "Les versions en d'autres langues tel le grec ou l'hébreu offrent des options "
 "particulières qui ne s'appliquent qu'à ces langues."
 
-#: ../C/gnomesword.xml:370(para)
+#: ../C/gnomesword.xml:383(para)
 msgid "In order to access these options:"
 msgstr "pour accéder à ces options :"
 
-#: ../C/gnomesword.xml:375(para)
+#: ../C/gnomesword.xml:388(para)
 msgid ""
 "right-click in the <interface>Bible Text pane</interface>. In the popup menu "
 "(example shown), choose <guibutton>Module Options</guibutton> and select the "
@@ -1539,12 +1554,12 @@ msgstr ""
 "s'affiche, choisir <guimenuitem>Options du module</guimenuitem>, puis "
 "l'option désirée."
 
-#: ../C/gnomesword.xml:403(title) ../C/gnomesword.xml:408(title)
-#: ../C/gnomesword.xml:420(phrase)
+#: ../C/gnomesword.xml:416(title) ../C/gnomesword.xml:421(title)
+#: ../C/gnomesword.xml:433(phrase)
 msgid "View Options"
 msgstr "Options d'affichage"
 
-#: ../C/gnomesword.xml:404(para)
+#: ../C/gnomesword.xml:417(para)
 msgid ""
 "There are several additional modes that can be selected from the menubar's "
 "<guimenuitem>View</guimenuitem> pulldown."
@@ -1552,7 +1567,25 @@ msgstr ""
 "Plusieurs modes supplémentaires peuvent être sélectionnés à l'aide du menu "
 "<guimenuitem>Afficher</guimenuitem> de la barre de menu."
 
-#: ../C/gnomesword.xml:429(para)
+#: ../C/gnomesword.xml:440(para)
+msgid ""
+"The first 4 checkboxes control whether each named subwindow is displayed. "
+"The viewable state of the subwindows is remembered on a per-tab basis. This "
+"makes it possible, for example, to have a tab dedicated to a maps module "
+"alone (in a dictionary module, having alphabetically-listed places), by "
+"turning off the display of Bible, Previewer, and Commentary for that tab."
+msgstr "Les 4 premières options commandent l'affichage des différents volets de l'interface. "
+"L'état d'affichage de chaque volet est spécifique à un onglet. Ceci permet, par "
+"exemple, d'avoir un onglet dédié à l'affichage des cartes (module dictionnaire "
+"avec les lieux triés alphabétiquement), en suspendant l'affichage des volets "
+"<interface>Textes bibliques</interface>, <interface>Commentaires</interface>"
+" et <interface>Aperçu</interface>."
+
+#: ../C/gnomesword.xml:445(para)
+msgid "The remaining checkboxes control these other display features:"
+msgstr "Les options restantes commandent les autres options d'affichage."
+
+#: ../C/gnomesword.xml:450(para)
 msgid ""
 "Verse Style - Toggles between Bible text display in separate verses, or in "
 "paragraphs instead. This is set on a per-module basis."
@@ -1561,7 +1594,7 @@ msgstr ""
 "biblique entre versets distinctifs ou par paragraphes. Cette option "
 "s'applique à un module entier."
 
-#: ../C/gnomesword.xml:435(para)
+#: ../C/gnomesword.xml:456(para)
 msgid ""
 "Pin Tabs - When more than one tab is open, each one's verse is navigated "
 "separately in the disabled case. If tab pinning is enabled, then all tabs "
@@ -1572,7 +1605,7 @@ msgstr ""
 "Quand cette option est activée, tous les onglets sont liés ensemble, et "
 "affichent le même verset."
 
-#: ../C/gnomesword.xml:442(para)
+#: ../C/gnomesword.xml:463(para)
 msgid ""
 "Read Aloud - If you enable this, then GnomeSword will funnel all selected "
 "verses through the <application>festival</application> text-to-speech "
@@ -1586,7 +1619,7 @@ msgstr ""
 "défaut dans les distributions Linux. (NDT: En général, les résultats sont "
 "meilleurs en anglais )"
 
-#: ../C/gnomesword.xml:447(para)
+#: ../C/gnomesword.xml:468(para)
 msgid ""
 "Also, mouse-selected text may be read aloud from Bibles, commentaries, and "
 "general books, using the right-click menu, regardless of whether Read Aloud "
@@ -1598,7 +1631,7 @@ msgstr ""
 "sélectionné</guimenuitem> dans le menu contextuel obtenu à l'aide du clic "
 "droit de la souris."
 
-#: ../C/gnomesword.xml:454(para)
+#: ../C/gnomesword.xml:475(para)
 msgid ""
 "Show Verse Numbers - Normally enabled, this toggle can be disabled to "
 "prevent display of verse numbers within the text."
@@ -1607,7 +1640,7 @@ msgstr ""
 "activée, cette option peut être désactivée pour ne pas afficher les numéros "
 "de versets dans le texte. "
 
-#: ../C/gnomesword.xml:460(para)
+#: ../C/gnomesword.xml:481(para)
 msgid ""
 "Highlight Current Verse - Initially disabled, this toggle replaces mere "
 "alternate colorization of the current verse with a substitute high-contrast "
@@ -1618,72 +1651,68 @@ msgstr ""
 "une coloration au contraste plus élevée. Les couleurs sont modifiables dans "
 "la fenêtre de préférences."
 
-#: ../C/gnomesword.xml:470(title)
+#: ../C/gnomesword.xml:491(title)
 msgid "Specific Word Meanings"
 msgstr "Définition d'un mot particulier"
 
-#: ../C/gnomesword.xml:471(para)
+#: ../C/gnomesword.xml:492(para)
 msgid ""
-"In order to check the meaning of a specific word, click on the desired word "
+"In order to check the meaning of a specific word, double-click on the word "
 "you wish to lookup. The word should then highlight itself and the "
 "explanation should be displayed, if available, in the <interface>Dictionary "
 "Pane</interface>."
 msgstr ""
-"Pour obtenir la définition d'un mot particulier, faire un clic à l'aide de "
+"Pour obtenir la définition d'un mot particulier, faire un double-clic à l'aide de "
 "la souris sur le mot désiré. Le mot se met en surbrillance et sa définition, "
 "si le mot est répertorié, s'affiche ensuite dans le volet "
 "<interface>dictionnaire</interface>."
 
-#: ../C/gnomesword.xml:478(title)
+#: ../C/gnomesword.xml:499(title)
 msgid "Finding A Specific Word"
 msgstr "Rechercher un mot spécifique"
 
-#: ../C/gnomesword.xml:479(para)
+#: ../C/gnomesword.xml:500(para)
 msgid "To find a specific word within a passage:"
 msgstr "Pour rechercher un mot spécifique dans un passage :"
 
-#: ../C/gnomesword.xml:484(para)
+#: ../C/gnomesword.xml:505(para)
 msgid ""
 "right-click in the <interface>Bible Text Pane</interface>. In the popup "
 "menu, choose <guibutton>Edit</guibutton>-&gt; <guibutton>Find</guibutton>. A "
-"separate dialog will appear, which will allow single or multi word searches. "
-"Fill out dialog and click the <guibutton>Find</guibutton> button."
+"separate dialog will appear, which provides text searches. Fill out dialog "
+"and click the <guibutton>Find</guibutton> and <guibutton>Find Next</"
+"guibutton> buttons."
 msgstr ""
 "Faire un clic droit à l'aide de la souris dans le volet des "
 "<interface>textes bibliques</interface>. Dans le menu contextuel qui "
-"s'affiche, choisir <menuchoice><guimenuitem>Éditer</"
-"guimenuitem><guimenuitem>Rechercher</guimenuitem></menuchoice>. Une fenêtre "
+"s'affiche, choisir <menuchoice><guimenuitem>Éditer</guimenuitem>"
+"<guimenuitem>Rechercher</guimenuitem></menuchoice>. Une fenêtre "
 "s'ouvre ensuite, permettant la recherche d'un ou plusieurs mots. Saisir le "
 "texte à rechercher, puis ensuite valider à l'aide du bouton "
 "<guibutton>Rechercher</guibutton>."
 
-#: ../C/gnomesword.xml:494(title)
-msgid "Viewer Pane"
-msgstr "Volet aperçu"
+#: ../C/gnomesword.xml:518(title)
+msgid "PreViewer"
+msgstr "Aperçu"
 
-#: ../C/gnomesword.xml:496(title) ../C/gnomesword.xml:508(phrase)
-msgid "Viewer Panel"
-msgstr "Volet aperçu"
-
-#: ../C/gnomesword.xml:514(para)
+#: ../C/gnomesword.xml:536(para)
 msgid ""
-"The Viewer Pane is where the user sees Strong's numbers, morphological tags, "
+"The Previewer is where the user sees Strong's numbers, morphological tags, "
 "footnotes, and cross-references that the <interface>Bible Text Pane</"
 "interface> provides."
 msgstr ""
 "Le volet Aperçu est l'endroit où sont affichés les nombres de Strong, les "
-"étiquettes  morphologiques et les références croisées lorsque ces options "
-"sont activées dans le volet des <interface>textes bibliques</interface>."
+"étiquettes morphologiques et les références croisées présentées "
+"dans le volet des <interface>textes bibliques</interface>."
 
-#: ../C/gnomesword.xml:518(para)
+#: ../C/gnomesword.xml:540(para)
 msgid ""
-"Footnote content is normally transient in the Viewer Pane: It is displayed "
+"Footnote content is normally transient in the Previewer: It is displayed "
 "while your mouse hovers over the footnote indicator <guibutton>*n</"
 "guibutton> in the Bible text, and then disappears when your mouse moves off. "
 "But some translations' footnotes (e.g. NET Bible's) can be very large, so "
 "that not all the text is visible. To anchor the text so that you can scroll "
-"it in the Viewer Pane, middle-click the indicator and move to the Viewer "
-"Pane."
+"it in the Previewer, middle-click the indicator and move to the Previewer."
 msgstr ""
 "Les notes de bas de page ne sont pas visibles dans le volet des<interface> "
 "textes bibliques</interface>. Elles sont affichées seulement lorsque le "
@@ -1697,31 +1726,31 @@ msgstr ""
 "permet de se déplacer ensuite dans la fenêtre à l'aide de l'ascenseur "
 "vertical."
 
-#: ../C/gnomesword.xml:524(para)
+#: ../C/gnomesword.xml:546(para)
 msgid ""
 "Cross-reference indicators <guibutton>*x</guibutton> also display "
-"transiently in the Viewer Pane. Left-clicking the indicator will send the "
-"set of references to the <guibutton>Verse List</guibutton> in the "
+"transiently in the Previewer. Left-clicking the indicator will send the set "
+"of references to the <guibutton>Verse List</guibutton> in the "
 "<interface>Sidebar</interface>, where you can click them individually for "
-"reading in the Viewer Pane."
+"reading in the Previewer."
 msgstr ""
 "Les références croisées <guimenuitem>*x</guimenuitem> ne sont pas visibles "
 "dans le volet des <interface>textes bibliques</interface>. Un clic à l'aide "
 "du bouton de la souris sur l'indicateur <guimenuitem>*x</guimenuitem> "
 "provoque l'affichage des références croisées dans la liste de "
 "<guimenuitem>Versets</guimenuitem> du <interface>volet latéral</interface>, "
-"où sélectionnés un par un, ils seront affichés dans le volet "
+"où ensuite sélectionnés un par un, ils pourront être affichés dans le volet "
 "<interface>aperçu</interface>."
 
-#: ../C/gnomesword.xml:532(title) ../C/gnomesword.xml:534(title)
+#: ../C/gnomesword.xml:554(title) ../C/gnomesword.xml:556(title)
 msgid "The Commentary Pane"
 msgstr "Le volet des commentaires"
 
-#: ../C/gnomesword.xml:553(para)
+#: ../C/gnomesword.xml:575(para)
 msgid ""
 "The <interface>Commentary pane</interface> is where the commentary modules "
-"are displayed. This provides easy reading, reference and access to different "
-"commentaries currently installed. The passage viewed by the "
+"are displayed. This provides easy reading, reference, and access to "
+"different commentaries currently installed. The passage viewed by the "
 "<interface>Commentary pane</interface> is directly controlled by the current "
 "passage viewed in the <interface>Bible Text pane</interface>, so in order to "
 "change to a different passage commentary, select the desired passage on the "
@@ -1732,10 +1761,10 @@ msgstr ""
 "d'autres commentaires existants. Le commentaire est directement lié au "
 "passage affiché dans le volet d'affichage des<interface> textes bibliques</"
 "interface>, ainsi pour consulter le commentaire d'un autre passage, il "
-"suffit de changer de verset à l'aide de la <interface>barre d'outils</"
+"suffit de changer de verset à l'aide de la <interface>Barre d'outils</"
 "interface>."
 
-#: ../C/gnomesword.xml:560(para)
+#: ../C/gnomesword.xml:582(para)
 msgid ""
 "If there are images that are part of a commentary, general book, or "
 "dictionary/lexicon, they may be clicked to invoke a viewer on that single "
@@ -1749,26 +1778,26 @@ msgstr ""
 "intéressante si l'option de réduction des images a été activée avec pour "
 "résultat des images très rétrécies."
 
-#: ../C/gnomesword.xml:566(para)
+#: ../C/gnomesword.xml:588(para)
 msgid ""
 "By changing to passage settings on the <interface>Toolbar</interface>, the "
 "contents in the <interface>Bible Text pane</interface> and the "
 "<interface>Commentary Pane</interface> will be changed."
 msgstr ""
-"En changeant la référence du passage à l'aide de la <interface>barre "
+"En changeant la référence du passage à l'aide de la <interface>Barre "
 "d'outils</interface>, le contenu du volet d'affichage des<interface> textes "
 "bibliques</interface> et du  volet d'affichage des<interface> commentaires</"
 "interface> changent simultanément."
 
-#: ../C/gnomesword.xml:573(title)
+#: ../C/gnomesword.xml:595(title)
 msgid "Finding Out About The Commentary Module"
 msgstr "Rechercher les informations à propos du module de commentaires"
 
-#: ../C/gnomesword.xml:574(para)
+#: ../C/gnomesword.xml:596(para)
 msgid "To find out about the commentary currently being displayed:"
 msgstr "À propos du commentaire actuellement affiché :"
 
-#: ../C/gnomesword.xml:579(para)
+#: ../C/gnomesword.xml:601(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>About </guimenuitem> module name."
@@ -1777,22 +1806,22 @@ msgstr ""
 "d'affichage des <interface>commentaires</interface>. Dans le menu contextuel "
 "qui se présente, sélectionner <guimenuitem>À propos de</guimenuitem>."
 
-#: ../C/gnomesword.xml:588(title)
+#: ../C/gnomesword.xml:610(title)
 msgid "Commentary Headings."
 msgstr "Entêtes des commentaires"
 
-#: ../C/gnomesword.xml:589(para)
+#: ../C/gnomesword.xml:611(para)
 msgid ""
-"Most commentaries have additional headings which enable introductory "
+"Many commentaries have additional headings which enable introductory "
 "information about the book and chapter currently being displayed in the "
 "<interface>Bible Text pane</interface>. In order to view them:"
 msgstr ""
 "De nombreux commentaires incorporent des entêtes avec une note "
 "d'introduction sur le livre ou le chapitre en cours d'utilisation dans le "
 "volet des<interface> textes bibliques</interface>. Pour obtenir l'affichage "
-"de l'entête :"
+"de l'entête&nbsp;:"
 
-#: ../C/gnomesword.xml:595(para)
+#: ../C/gnomesword.xml:617(para)
 msgid ""
 "right-click in the <interface>Commentary Pane</interface>. In the popup menu "
 "choose <guimenuitem>Display Book Heading</guimenuitem> or "
@@ -1803,30 +1832,39 @@ msgstr ""
 "qui se présente, choisir <guimenuitem>Afficher l'entête du livre</"
 "guimenuitem> ou <guimenuitem>Afficher l'entête du chapitre</guimenuitem>."
 
-#: ../C/gnomesword.xml:605(title)
+#: ../C/gnomesword.xml:627(title)
 msgid "Dictionary Pane"
 msgstr "Volet dictionnaire"
 
-#: ../C/gnomesword.xml:607(title) ../C/gnomesword.xml:620(phrase)
+#: ../C/gnomesword.xml:629(title) ../C/gnomesword.xml:642(phrase)
 msgid "The Dictionary Pane"
 msgstr "Le volet du dictionnaire"
 
-#: ../C/gnomesword.xml:629(title)
+#: ../C/gnomesword.xml:649(para)
+msgid ""
+"The Dictionary Pane's content is driven by its up/down selectors, typing in "
+"its navbar text, or double-clicks in the Bible, Commentary, or Book Panes."
+msgstr "Le volet <interface>Dictionnaire</interface> est piloté à l'aide des flèches haut/bas, "
+"en saisissant un mot dans la zone de saisie ou en double-cliquant sur des mots "
+"dans les volets <interface>Textes bibliques</interface>, <interface>Commentaires"
+"</interface>, <interface>Livre</interface>."
+
+#: ../C/gnomesword.xml:655(title)
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: ../C/gnomesword.xml:630(para)
+#: ../C/gnomesword.xml:656(para)
 msgid ""
 "Several keyboard shortcuts exist in <application>GnomeSword</application>:"
 msgstr ""
 "<application>GnomeSword</application>  présente un certain nombre de "
 "raccourcis clavier :"
 
-#: ../C/gnomesword.xml:635(guibutton)
+#: ../C/gnomesword.xml:661(guibutton)
 msgid "Ctrl-L"
 msgstr "Ctrl-L"
 
-#: ../C/gnomesword.xml:634(listitem)
+#: ../C/gnomesword.xml:660(listitem)
 msgid ""
 "<placeholder-1/> focuses and selects the main verse navbar text. You can "
 "then immediately type in new verse selection text. Be aware that, as is the "
@@ -1841,21 +1879,21 @@ msgstr ""
 "exemple, et n'importe quel nom de livre saisi seul implique chapitre 1, "
 "verset 1."
 
-#: ../C/gnomesword.xml:641(guibutton)
+#: ../C/gnomesword.xml:667(guibutton)
 msgid "Ctrl-F"
 msgstr "Ctrl-F"
 
-#: ../C/gnomesword.xml:640(listitem)
+#: ../C/gnomesword.xml:666(listitem)
 msgid "<placeholder-1/> opens the \"Find\" dialog for the Bible pane."
 msgstr ""
 "<placeholder-1/> ouvre la boite de recherche dans le texte biblique en cours "
 "d'affichage."
 
-#: ../C/gnomesword.xml:644(guibutton)
+#: ../C/gnomesword.xml:670(guibutton)
 msgid "Alt-C"
 msgstr "Alt-C"
 
-#: ../C/gnomesword.xml:643(listitem)
+#: ../C/gnomesword.xml:669(listitem)
 msgid ""
 "<placeholder-1/> brings the Commentary View forward when previously obscured "
 "by the Book View."
@@ -1863,50 +1901,50 @@ msgstr ""
 "<placeholder-1/> ramène au premier-plan le volet <interface>Commentaire</"
 "interface> si celui-ci est masqué par le volet <interface>Livre</interface>."
 
-#: ../C/gnomesword.xml:647(guibutton)
+#: ../C/gnomesword.xml:673(guibutton)
 msgid "Alt-G"
 msgstr "Alt-G"
 
-#: ../C/gnomesword.xml:646(listitem)
+#: ../C/gnomesword.xml:672(listitem)
 msgid ""
 "<placeholder-1/> is the opposite of Alt-C, focusing on the general book."
 msgstr ""
 "<placeholder-1/> ramène au premier-plan le volet <interface>Livre</"
 "interface>."
 
-#: ../C/gnomesword.xml:650(guibutton)
+#: ../C/gnomesword.xml:676(guibutton)
 msgid "Alt-B"
 msgstr "Alt-B"
 
-#: ../C/gnomesword.xml:649(listitem)
+#: ../C/gnomesword.xml:675(listitem)
 msgid "<placeholder-1/> opens a bookmark dialog on the current verse."
 msgstr ""
 "<placeholder-1/> ouvre la fenêtre <interface>Ajouter un signet</interface> "
 "sur le verset en cours"
 
-#: ../C/gnomesword.xml:653(guibutton)
+#: ../C/gnomesword.xml:679(guibutton)
 msgid "Alt-D"
 msgstr "Alt-D"
 
-#: ../C/gnomesword.xml:652(listitem)
+#: ../C/gnomesword.xml:678(listitem)
 msgid "<placeholder-1/> focuses on the dictionary navbar text."
 msgstr ""
 "<placeholder-1/> place le focus sur la barre de navigation du volet "
 "<interface>Dictionnaire</interface>."
 
-#: ../C/gnomesword.xml:656(guibutton)
+#: ../C/gnomesword.xml:682(guibutton)
 msgid "Alt-P"
 msgstr "Alt-P"
 
-#: ../C/gnomesword.xml:655(listitem)
+#: ../C/gnomesword.xml:681(listitem)
 msgid "<placeholder-1/> detaches/re-attaches the parallel view dialog."
 msgstr "<placeholder-1/> détache / rattache la fenêtre de vue parallèle."
 
-#: ../C/gnomesword.xml:662(title)
+#: ../C/gnomesword.xml:688(title)
 msgid "Version Differences in <application>GnomeSword</application>'s Display"
 msgstr "Différences d'affichage dans <application>&appname;</application> :"
 
-#: ../C/gnomesword.xml:663(para)
+#: ../C/gnomesword.xml:689(para)
 msgid ""
 "The <application>GnomeSword</application> interface has evolved over time, "
 "and there are two display libraries with which <application>GnomeSword</"
@@ -1921,7 +1959,7 @@ msgstr ""
 "moins complète se nomme «&nbsp;gtkhtml3&nbsp;», et la nouvelle offrant plus "
 "de possibilités est «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:670(para)
+#: ../C/gnomesword.xml:696(para)
 msgid ""
 "Several desirable capabilities are unsupportable in gtkhtml3, and although "
 "recent <application>GnomeSword</application> is written to take advantage of "
@@ -1944,7 +1982,7 @@ msgstr ""
 "vous utilisez «&nbsp;gtkhtml3&nbsp;» ou «&nbsp;MozEmbed&nbsp;» comme moteur "
 "d'affichage :"
 
-#: ../C/gnomesword.xml:680(listitem)
+#: ../C/gnomesword.xml:706(listitem)
 msgid ""
 "Morphology and Strong's references, enabled via the right-click menu in some "
 "modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
@@ -1957,15 +1995,15 @@ msgstr ""
 "références sont alignées au-dessous du mot auxquelles elles se rapportent de "
 "façon à procurer un affichage plus aéré et plus lisible."
 
-#: ../C/gnomesword.xml:686(guibutton)
+#: ../C/gnomesword.xml:712(guibutton)
 msgid "*n"
 msgstr "*n"
 
-#: ../C/gnomesword.xml:686(guibutton)
+#: ../C/gnomesword.xml:712(guibutton)
 msgid "*x"
 msgstr "*x"
 
-#: ../C/gnomesword.xml:685(listitem)
+#: ../C/gnomesword.xml:711(listitem)
 msgid ""
 "Footnote and cross-reference markers (<placeholder-1/>, <placeholder-2/>) "
 "are displayed as proper superscripts in MozEmbed, but not in gtkhtml3."
@@ -1973,7 +2011,7 @@ msgstr ""
 "Les notes de pied de page et les références croisées (<placeholder-1/>, "
 "<placeholder-2/>) s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:689(listitem)
+#: ../C/gnomesword.xml:715(listitem)
 msgid ""
 "Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
 "no underlines are needed."
@@ -1981,11 +2019,11 @@ msgstr ""
 "Les liens avec «&nbsp;gtkhtml3&nbsp;» sont à la fois colorés et soulignés. "
 "Ils ne sont pas soulignés avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:693(guimenuitem)
+#: ../C/gnomesword.xml:719(guimenuitem)
 msgid "View"
 msgstr "Affichage"
 
-#: ../C/gnomesword.xml:692(listitem)
+#: ../C/gnomesword.xml:718(listitem)
 msgid ""
 "Under MozEmbed, double-space display is available using the <placeholder-1/> "
 "menu, but not under gtkhtml3."
@@ -1994,7 +2032,7 @@ msgstr ""
 "activable à l'aide du menu <placeholder-1/>, cette option est indisponible "
 "avec «&nbsp;gtkhtml3&nbsp;»."
 
-#: ../C/gnomesword.xml:698(para)
+#: ../C/gnomesword.xml:724(para)
 msgid ""
 "Using the \"About GnomeSword\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
@@ -2005,7 +2043,7 @@ msgstr ""
 "connaître la bibliothèque avec laquelle <application>&appname;</application> "
 "a été construit."
 
-#: ../C/gnomesword.xml:703(title) ../C/gnomesword.xml:710(phrase)
+#: ../C/gnomesword.xml:729(title) ../C/gnomesword.xml:736(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
@@ -2083,6 +2121,20 @@ msgstr "Préférences générales et répertoire du bloc-notes."
 
 #: ../C/gnomesword.xml:140(para)
 msgid ""
+"Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> "
+"whose keys are numerically in the form \"Month.Day\". If you have such a "
+"module installed and it has been selected as your preferred devotional, then "
+"you can ask that <application>GnomeSword</application> display today's "
+"selection during startup."
+msgstr ""
+"Les <guilabel>Calendriers bibliques</guilabel> sont des modules dictionnaires "
+"spécifiques dont les entrées sont de la forme numérique \"Mois:Jour\" "
+"(ex&nbsp;: 12:25). Si un module de ce type a été installé puis déclaré comme "
+"Calendrier biblique dans les préférences diverses des modules, &appname; "
+"peut présenter le texte du jour lors du démarrage."
+
+#: ../C/gnomesword.xml:145(para)
+msgid ""
 "<guilabel>Verse style</guilabel> indicates that each verse should begin on a "
 "separate line, or (when disabled) that verses should be allowed to group in "
 "paragraphs, according to the Bible module's internal markup. Not all Bible "
@@ -2094,7 +2146,7 @@ msgstr ""
 "biblique. (Les modules de textes bibliques ne sont pas tous encodés de cette "
 "façon)."
 
-#: ../C/gnomesword.xml:145(para)
+#: ../C/gnomesword.xml:150(para)
 msgid ""
 "With <guilabel>Scroll to Previous/Next Chapter</guilabel> enabled, using the "
 "mouse to scroll to the beginning or end of a chapter will cause "
@@ -2105,7 +2157,7 @@ msgstr ""
 "défilement au début ou à la fin d'un chapitre à l'aide de la souris  permet "
 "également de changer de chapitre."
 
-#: ../C/gnomesword.xml:149(para)
+#: ../C/gnomesword.xml:154(para)
 msgid ""
 "If you enable <guilabel>Resize images</guilabel>, <application>GnomeSword</"
 "application> will automatically resize image content in commentaries, "
@@ -2117,7 +2169,7 @@ msgstr ""
 "commentaires, dictionnaires, livres de façon à ce qu'elles s'adaptent à la "
 "taille de la fenêtre où elles sont affichées."
 
-#: ../C/gnomesword.xml:153(para)
+#: ../C/gnomesword.xml:158(para)
 msgid ""
 "<guilabel>Highlight current verse</guilabel>, if enabled, will cause "
 "<application>GnomeSword</application> to substitute mere current verse "
@@ -2130,27 +2182,27 @@ msgstr ""
 "contraste plus élevée. Les couleurs sont modifiables dans le volet "
 "<guilabel>Couleurs</guilabel> (voir au-dessus)."
 
-#: ../C/gnomesword.xml:163(title)
+#: ../C/gnomesword.xml:168(title)
 msgid "Module Settings"
 msgstr "Configuration des modules"
 
-#: ../C/gnomesword.xml:165(title)
+#: ../C/gnomesword.xml:170(title)
 msgid "Main Module Settings"
 msgstr "Configuration du module principal"
 
-#: ../C/gnomesword.xml:167(title) ../C/gnomesword.xml:180(phrase)
+#: ../C/gnomesword.xml:172(title) ../C/gnomesword.xml:185(phrase)
 msgid "The Module Preferences Dialog"
 msgstr "La fenêtre de préférences des modules"
 
-#: ../C/gnomesword.xml:187(title) ../C/gnomesword.xml:200(phrase)
+#: ../C/gnomesword.xml:192(title) ../C/gnomesword.xml:205(phrase)
 msgid "Parallel Preferences"
 msgstr "Préférences des vues parallèles"
 
-#: ../C/gnomesword.xml:207(title)
+#: ../C/gnomesword.xml:212(title)
 msgid "Various preferences Modules"
 msgstr "Préférences diverses des modules"
 
-#: ../C/gnomesword.xml:220(phrase)
+#: ../C/gnomesword.xml:225(phrase)
 msgid "Various Preferences Modules"
 msgstr "Préférences diverses des modules"
 
@@ -2168,11 +2220,12 @@ msgid ""
 "application>, and Sword generally; a Sword module is a resource available "
 "for viewing in Sword applications. There are several varieties: Most "
 "importantly, Bible texts, as well as dictionaries and lexicons, "
-"commentaries, and general books, including some which have graphical content "
-"(e.g. atlases). They are installed either from a local directory structure "
-"(such as a CDROM distribution) or remotely via ftp from a server such as "
-"Crosswire, which is the home of Sword, and from which all officially Sword-"
-"sanctioned modules are available."
+"commentaries, and general books, any of which may include image content (e."
+"g. atlases). They are installed either from a local directory structure "
+"(typically on removable media, such as a CDROM distribution) or remotely via "
+"ftp from a repository such as Crosswire, which is the home of Sword, and "
+"from which all officially Sword-sanctioned modules are available. Also, many "
+"other modules are available from non-Crosswire repositories."
 msgstr ""
 "Le «­­&nbsp;module&nbsp;» est l'unité de base de contenu dans &appname; et "
 "plus généralement Sword. Un module de Sword  est une ressource affichée dans "
@@ -2182,35 +2235,36 @@ msgstr ""
 "contenu graphique (Atlas). Ils sont à installer depuis un répertoire local "
 "(distribution par CDROM) ou par téléchargement  ftp depuis un serveur "
 "distant comme celui de Crosswire, site de Sword, où tous les modules "
-"officiels sont disponibles."
+"officiels sont disponibles. Des modules sont également disponibles auprès "
+"d'autres sources."
 
-#: ../C/gnomesword.xml:13(para) ../C/modules.xml:13(para)
+#: ../C/gnomesword.xml:14(para) ../C/modules.xml:14(para)
 msgid ""
 "If you have other Sword applications installed, they will all share the same "
 "set of Sword modules that you install through the Module Manager."
 msgstr ""
 "Si d'autres applications Sword sont installées, elles ont également accès à "
-"cet ensemble commun de modules installés par le gestionnaire de modules."
+"cet ensemble courant de modules installés par le gestionnaire de modules."
 
-#: ../C/gnomesword.xml:18(title) ../C/gnomesword.xml:31(phrase)
-#: ../C/modules.xml:18(title) ../C/modules.xml:31(phrase)
+#: ../C/gnomesword.xml:19(title) ../C/gnomesword.xml:32(phrase)
+#: ../C/modules.xml:19(title) ../C/modules.xml:32(phrase)
 msgid "The Module Manager Dialog"
 msgstr "La fenêtre de gestion des modules"
 
-#: ../C/gnomesword.xml:40(title)
+#: ../C/gnomesword.xml:41(title)
 msgid "Sword Module Configurations"
 msgstr "Configurations des modules de Sword"
 
-#: ../C/gnomesword.xml:42(title) ../C/gnomesword.xml:44(title)
+#: ../C/gnomesword.xml:43(title) ../C/gnomesword.xml:45(title)
 msgid "Sword Sources Settings"
 msgstr "Configurer les sources de Sword"
 
-#: ../C/gnomesword.xml:57(phrase) ../C/gnomesword.xml:85(phrase)
-#: ../C/gnomesword.xml:131(phrase)
+#: ../C/gnomesword.xml:58(phrase) ../C/gnomesword.xml:86(phrase)
+#: ../C/gnomesword.xml:132(phrase)
 msgid "Module Installation"
 msgstr "Installation de module"
 
-#: ../C/gnomesword.xml:63(para)
+#: ../C/gnomesword.xml:64(para)
 msgid ""
 "There are other repositories available besides Crosswire's own, though the "
 "modules available from other repositories do not represent content "
@@ -2225,11 +2279,11 @@ msgstr ""
 "Module_Repositories\">http://www.crosswire.org/wiki/index.php/"
 "Module_Repositories</ulink> recense les sources connues."
 
-#: ../C/gnomesword.xml:70(title) ../C/gnomesword.xml:72(title)
+#: ../C/gnomesword.xml:71(title) ../C/gnomesword.xml:73(title)
 msgid "Sword Module Installations"
 msgstr "Installations de modules de Sword"
 
-#: ../C/gnomesword.xml:90(para)
+#: ../C/gnomesword.xml:91(para)
 msgid ""
 "After you have selected your Install Source, click the <guimenuitem>Refresh</"
 "guimenuitem> button to cause <application>GnomeSword</application> to find "
@@ -2240,7 +2294,7 @@ msgstr ""
 "</application> à répertorier au préalable les modules disponibles au niveau "
 "de la source d'installation."
 
-#: ../C/gnomesword.xml:95(para)
+#: ../C/gnomesword.xml:96(para)
 msgid ""
 "Take note of the \"Install Destination.\" Normal usage of Sword Project "
 "tools in Linux/UNIX environments includes one's personal area, under ~/."
@@ -2255,7 +2309,7 @@ msgstr ""
 "droits d'accès en écriture sur cet emplacement système, cette option sera "
 "grisée et inaccessible."
 
-#: ../C/gnomesword.xml:101(para)
+#: ../C/gnomesword.xml:102(para)
 msgid ""
 "There have been some requests for <application>GnomeSword</application> to "
 "provide a means by which an ordinary (non-root) user could start the "
@@ -2278,54 +2332,60 @@ msgstr ""
 "ce problème, il est donc conseillé aux utilisateurs de gérer les droits "
 "d'accès en écriture à l'emplacement système en dehors de &appname;."
 
-#: ../C/gnomesword.xml:114(title)
+#: ../C/gnomesword.xml:115(title)
 msgid "Add And Remove Modules"
 msgstr "Ajouter et supprimer des modules"
 
-#: ../C/gnomesword.xml:116(title)
+#: ../C/gnomesword.xml:117(title)
 msgid "Adding and Updating Sword Modules"
 msgstr "Ajout et mise à jour de modules Sword"
 
-#: ../C/gnomesword.xml:118(title)
+#: ../C/gnomesword.xml:119(title)
 msgid "Adding Modules"
 msgstr "Ajout de modules"
 
-#: ../C/gnomesword.xml:137(para)
+#: ../C/gnomesword.xml:138(para)
 msgid ""
-"Modules that are already installed have a checkmark beside them. If a fast "
-"search (\"lucene\") index is available, an open book is displayed, otherwise "
-"an \"X\" is shown; creation of the index is available on the Maintenance "
-"pane. Locked modules, which require that you purchase an unlock key from the "
-"module's copyright holder, will show a lock symbol."
+"Modules that are already installed will show a checkmark beside them. If a "
+"fast search (\"lucene\") index is available, an open book will be displayed, "
+"otherwise an \"X\" will be shown; creation of the index is available on the "
+"Maintenance pane. Locked modules, which require that you purchase an unlock "
+"key from the module's copyright holder, will show a lock symbol. If there "
+"are modules installed for which a more recent version is available, a "
+"refresh icon will appear between the differing old and new version stamps. "
+"There may be an approximate size displayed, if the repository management "
+"provides this information, otherwise a question mark (\"-?-\") will be shown."
 msgstr ""
-"Les modules déjà installés sont cochés. Si le module est indexé, un symbole "
-"représentant un petit livret est affiché, sinon une croix est présente. La "
-"création d'un index pour recherches rapides est disponible dans le volet "
-"<guimenuitem>Gérer</guimenuitem>. Les modules verrouillés, nécessitant "
-"l'achat d'une clé de déverrouillage auprès du détenteur des droits d'un "
-"module sous copyright sont mentionnés par un symbole en forme de verrou."
+"Les modules déjà installés sont cochés. Si un index de recherche rapide "
+"(\"Lucène\") a été créé, un symbole représentant un petit livre ouvert est "
+"affiché, sinon une croix est présente. La création d'un index de recherche "
+"rapide est disponible dans le volet <guimenuitem>Gérer</guimenuitem>. "
+"Les modules verrouillés, nécessitant l'achat d'une clé de déverrouillage "
+"auprès du détenteur des droits d'un module sous copyright sont mentionnés "
+"par un symbole en forme de verrou. "
+"S'il existe une version plus récente des modules déjà installés, un symbole "
+"de rafraîchissement apparaît entre les étiquettes <guimenuitem>Installé"
+"</guimenuitem> et <guimenuitem>Dispo</guimenuitem>. La taille "
+"approximative du module est affichée à condition que la source de modules "
+"fournisse cette information, autrement un point d'interrogation (\"-?-\") est présenté."
 
-#: ../C/gnomesword.xml:142(para)
+#: ../C/gnomesword.xml:145(para)
 msgid ""
 "Select new modules to be installed by clicking the checkboxes and then the "
 "Install button at the bottom. Any number of modules may be requested for "
-"installation at one time. If there are modules installed for which a more "
-"recent version is available, a refresh icon will appear between the "
-"differing old and new version stamps."
+"installation at one time."
 msgstr ""
 "Pour installer de nouveaux modules il suffit de sélectionner les cases à "
 "cocher des modules à installer, puis de valider à l'aide du bouton "
 "<guibutton>Installer</guibutton>. Plusieurs modules peuvent être installés "
-"simultanément. Si une nouvelle version d'un module déjà installé est "
-"disponible, ceci est signalé par un petit symbole de rafraîchissement situé "
-"à côté du numéro de version."
+"simultanément."
 
-#: ../C/gnomesword.xml:149(title) ../C/gnomesword.xml:151(title)
-#: ../C/gnomesword.xml:164(phrase)
+#: ../C/gnomesword.xml:151(title) ../C/gnomesword.xml:153(title)
+#: ../C/gnomesword.xml:166(phrase)
 msgid "Module Maintenance"
 msgstr "Gérer les modules"
 
-#: ../C/gnomesword.xml:169(para)
+#: ../C/gnomesword.xml:171(para)
 msgid ""
 "Several maintenance functions are available: Removal, archival, index, and "
 "index deletion."
@@ -2333,7 +2393,7 @@ msgstr ""
 "Plusieurs opérations de maintenance sont possibles : Suppression, archivage, "
 "indexation et suppression d'index."
 
-#: ../C/gnomesword.xml:172(para)
+#: ../C/gnomesword.xml:174(para)
 msgid ""
 "Removal disposes of a module entirely. There is no recovery of the module "
 "unless you have previously archived a copy of it."
@@ -2341,7 +2401,7 @@ msgstr ""
 "Supprimer un module est une opération définitive. Il est impossible de "
 "récupérer le module à moins que vous n'ayez une copie de celui-ci."
 
-#: ../C/gnomesword.xml:175(para)
+#: ../C/gnomesword.xml:177(para)
 msgid ""
 "Archival is available for any module, although it is provided with personal "
 "commentaries specifically in mind. A *.zip of the module is left in the "
@@ -2355,7 +2415,7 @@ msgstr ""
 "sword/zip. Il est recommandé d'archiver les commentaires personnels avant de "
 "les supprimer de façon à pouvoir les réinstaller si besoin est."
 
-#: ../C/gnomesword.xml:180(para)
+#: ../C/gnomesword.xml:182(para)
 msgid ""
 "Indexing is provided so that the underlying Sword search support can create "
 "the index needed for the \"lucene\" multi-word fast-search functions. If the "
@@ -2369,23 +2429,25 @@ msgstr ""
 "recherche de type multi-mots sur l'ensemble de la Bible ne dure que quelques "
 "secondes."
 
-#: ../C/gnomesword.xml:185(para)
+#: ../C/gnomesword.xml:187(para)
 msgid "Indexes may be deleted as well."
 msgstr "Les index peuvent être supprimés."
 
-#: ../C/gnomesword.xml:193(title)
+#: ../C/gnomesword.xml:195(title)
 msgid "Installing Non-Standard Modules"
 msgstr "Installer des modules non-standards"
 
-#: ../C/gnomesword.xml:194(para)
+#: ../C/gnomesword.xml:196(para)
 msgid ""
 "Some resource modules in Sword Project format are available from sources "
-"other than Crosswire. Necessarily, installing such a module is a manual task."
+"other than Crosswire and not from a module manager-ready repository. "
+"Necessarily, installing such a module is a manual task."
 msgstr ""
 "Des modules au format Sword Project sont disponibles auprès d'autres sources "
-"que Crosswire. Il est nécessaire de les installer manuellement."
+"que Crosswire mais pas sous la forme d'une source à configurer avec le "
+"gestionnaire de modules. Il est donc nécessaire de les installer manuellement."
 
-#: ../C/gnomesword.xml:198(para)
+#: ../C/gnomesword.xml:200(para)
 msgid ""
 "Modules are normally packaged as *.zip files; they contain a configuration "
 "file plus a number of data files. Installation of such a module is done by "
@@ -2408,7 +2470,7 @@ msgstr ""
 "Sword usr/share/sword, vous pouvez aussi décompresser le fichier zip dans ce "
 "répertoire, ce module sera alors accessible à tous les utilisateurs."
 
-#: ../C/gnomesword.xml:205(para)
+#: ../C/gnomesword.xml:207(para)
 msgid ""
 "Restart <application>GnomeSword</application> after installing such a "
 "module, so that a fresh instance of the program can notice the new module in "
@@ -2428,62 +2490,59 @@ msgstr "Recherche simple"
 
 #: ../C/gnomesword.xml:5(para) ../C/search.xml:5(para)
 msgid ""
-"To conduct a quick search within the current module the 'Search Bar' in the "
-"'Side Pane' should usually be absolutely adequate. Click either in the menu "
-"bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' "
-"<guimenuitem> Modules -&gt;Search</guimenuitem> to access it."
+"To conduct a quick search within the current Bible or commentary module, the "
+"Search Bar in the Sidebar should usually be adequate. Click either in the "
+"menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the Sidebar "
+"<guimenuitem>Modules-&gt;Search</guimenuitem> to access it."
 msgstr ""
 "Pour rechercher rapidement un mot ou une expression dans un module en cours "
 "d'utilisation, le plus simple est d'utiliser la fonction recherche du volet "
 "latéral. Cette fonction de recherche rapide est activée en sélectionnant  le "
-"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>Rechercher</"
-"guimenuitem></menuchoice>  ou  le bouton <guibutton>Rechercher</guibutton> "
-"du volet latéral."
+"menu <menuchoice><guimenuitem>Éditer</guimenuitem><guimenuitem>"
+"Rechercher</guimenuitem></menuchoice> ou le bouton <guibutton>"
+"Rechercher</guibutton> du volet latéral."
 
-#: ../C/gnomesword.xml:8(title) ../C/search.xml:8(title)
-msgid "the Search Bar"
-msgstr "La barre de recherche"
-
-#: ../C/gnomesword.xml:21(phrase) ../C/search.xml:21(phrase)
+#: ../C/gnomesword.xml:11(title) ../C/gnomesword.xml:24(phrase)
+#: ../C/search.xml:11(title) ../C/search.xml:24(phrase)
 msgid "The Search Bar"
 msgstr "La barre de recherche"
 
-#: ../C/gnomesword.xml:28(para) ../C/search.xml:28(para)
+#: ../C/gnomesword.xml:31(para) ../C/search.xml:31(para)
 msgid ""
 "The <interface>Search Dialog</interface> consists of the following parts:"
 msgstr ""
 "Le formulaire <interface>Rechercher</interface> est constitué des éléments "
 "suivants :"
 
-#: ../C/gnomesword.xml:33(para) ../C/search.xml:33(para)
+#: ../C/gnomesword.xml:36(para) ../C/search.xml:36(para)
 msgid "Search Key Entry box"
 msgstr "Boite de saisie de l'expression à rechercher"
 
-#: ../C/gnomesword.xml:38(para) ../C/gnomesword.xml:75(title)
-#: ../C/search.xml:38(para) ../C/search.xml:75(title)
+#: ../C/gnomesword.xml:41(para) ../C/gnomesword.xml:78(title)
+#: ../C/search.xml:41(para) ../C/search.xml:78(title)
 msgid "Search Module Selector"
 msgstr "Sélecteur du module objet de la requête"
 
-#: ../C/gnomesword.xml:43(para) ../C/gnomesword.xml:83(title)
-#: ../C/search.xml:43(para) ../C/search.xml:83(title)
+#: ../C/gnomesword.xml:46(para) ../C/gnomesword.xml:86(title)
+#: ../C/search.xml:46(para) ../C/search.xml:86(title)
 msgid "Search Type Selector"
 msgstr "Sélecteur du type de requête"
 
-#: ../C/gnomesword.xml:48(para) ../C/gnomesword.xml:121(title)
-#: ../C/search.xml:48(para) ../C/search.xml:121(title)
+#: ../C/gnomesword.xml:51(para) ../C/gnomesword.xml:124(title)
+#: ../C/search.xml:51(para) ../C/search.xml:124(title)
 msgid "Search Options Checkbox"
 msgstr "Case à cocher des options de la requête"
 
-#: ../C/gnomesword.xml:53(para) ../C/gnomesword.xml:128(title)
-#: ../C/search.xml:53(para) ../C/search.xml:128(title)
+#: ../C/gnomesword.xml:56(para) ../C/gnomesword.xml:131(title)
+#: ../C/search.xml:56(para) ../C/search.xml:131(title)
 msgid "Search Scope Selector"
 msgstr "Sélecteur de la plage de versets"
 
-#: ../C/gnomesword.xml:59(title) ../C/search.xml:59(title)
+#: ../C/gnomesword.xml:62(title) ../C/search.xml:62(title)
 msgid "Search Key Entry Box"
 msgstr "Boite de saisie de l'expression à rechercher"
 
-#: ../C/gnomesword.xml:60(para) ../C/search.xml:60(para)
+#: ../C/gnomesword.xml:63(para) ../C/search.xml:63(para)
 msgid ""
 "Allows entry of the key for which you would like to search. The search key "
 "can be a word, part of a word, several words, a phrase, or a regular "
@@ -2498,7 +2557,7 @@ msgstr ""
 "le bouton <guimenuitem>Rechercher</guimenuitem> démarre la séquence de "
 "recherche."
 
-#: ../C/gnomesword.xml:67(para) ../C/search.xml:67(para)
+#: ../C/gnomesword.xml:70(para) ../C/search.xml:70(para)
 msgid ""
 "This search uses the optimized search method (see next section) if the "
 "module has previously been indexed, so bear in mind the additional syntax "
@@ -2507,7 +2566,7 @@ msgstr ""
 "La requête employe une méthode de recherche optimisée plus rapide(Voir la "
 "section suivante) si le module concerné a été précédemment indexé."
 
-#: ../C/gnomesword.xml:76(para) ../C/search.xml:76(para)
+#: ../C/gnomesword.xml:79(para) ../C/search.xml:79(para)
 msgid ""
 "Allows selection of which modules you would like to search. Select "
 "<guibutton>Bible</guibutton> to search Bible versions or "
@@ -2520,7 +2579,7 @@ msgstr ""
 "pour le module de commentaires. La requête ne s'exécute que dans les modules "
 "en cours de consultation."
 
-#: ../C/gnomesword.xml:84(para) ../C/search.xml:84(para)
+#: ../C/gnomesword.xml:87(para) ../C/search.xml:87(para)
 msgid ""
 "Allows selection of the type of search. There are three search types "
 "available:"
@@ -2528,11 +2587,11 @@ msgstr ""
 "Permet se sélectionner le type de requête. Trois types de requête sont "
 "possibles :"
 
-#: ../C/gnomesword.xml:89(guibutton) ../C/search.xml:89(guibutton)
+#: ../C/gnomesword.xml:92(guibutton) ../C/search.xml:92(guibutton)
 msgid "Multi word"
 msgstr "Mots multiples"
 
-#: ../C/gnomesword.xml:90(para) ../C/search.xml:90(para)
+#: ../C/gnomesword.xml:93(para) ../C/search.xml:93(para)
 msgid ""
 "This type will match any verse that has all the words in the search key, "
 "regardless of where they appear in the verse."
@@ -2541,11 +2600,11 @@ msgstr ""
 "l'expression  à rechercher, quelque soit l'ordre dans lequel ils "
 "apparaissent dans le verset."
 
-#: ../C/gnomesword.xml:95(guibutton) ../C/search.xml:95(guibutton)
+#: ../C/gnomesword.xml:98(guibutton) ../C/search.xml:98(guibutton)
 msgid "Regular expression"
 msgstr "Expression rationnelle"
 
-#: ../C/gnomesword.xml:96(para) ../C/search.xml:96(para)
+#: ../C/gnomesword.xml:99(para) ../C/search.xml:99(para)
 msgid ""
 "This search uses a regular expression as a search key. A regular expression "
 "is a pattern used to match a string of text. A regular expression can be "
@@ -2560,7 +2619,7 @@ msgstr ""
 "permet de retrouver les passages qui contiennent les mots Aiah, Ahaziah, "
 "Athaliah et Amariah."
 
-#: ../C/gnomesword.xml:103(para) ../C/search.xml:103(para)
+#: ../C/gnomesword.xml:106(para) ../C/search.xml:106(para)
 msgid ""
 "A complete discussion of regular expressions is beyond the scope of this "
 "manual, but more information can be found in the grep man page."
@@ -2569,11 +2628,11 @@ msgstr ""
 "de ce manuel, mais cependant plus d'informations à ce sujet peuvent être "
 "obtenues en parcourant le manuel de <command>grep</command>."
 
-#: ../C/gnomesword.xml:108(guibutton) ../C/search.xml:108(guibutton)
+#: ../C/gnomesword.xml:111(guibutton) ../C/search.xml:111(guibutton)
 msgid "Exact phrase"
 msgstr "Phrase exacte"
 
-#: ../C/gnomesword.xml:109(para) ../C/search.xml:109(para)
+#: ../C/gnomesword.xml:112(para) ../C/search.xml:112(para)
 msgid ""
 "This type will match the search key exatly as entered. If the search key is "
 "<userinput>\n"
@@ -2588,7 +2647,7 @@ msgstr ""
 "emphasis>&nbsp;», mais pas «­­&nbsp;<emphasis>en</emphasis> toute  "
 "<emphasis>vérité</emphasis>&nbsp;»."
 
-#: ../C/gnomesword.xml:122(para) ../C/search.xml:122(para)
+#: ../C/gnomesword.xml:125(para) ../C/search.xml:125(para)
 msgid ""
 "Allows selecting of search options. The only available option is "
 "<guibutton>Match case</guibutton>. Check this box to make the search case "
@@ -2598,7 +2657,7 @@ msgstr ""
 "<guimenuitem>Respecter la casse</guimenuitem>. Cocher cette boite rend la "
 "recherche sensible à la casse des caractères."
 
-#: ../C/gnomesword.xml:129(para) ../C/search.xml:129(para)
+#: ../C/gnomesword.xml:132(para) ../C/search.xml:132(para)
 msgid ""
 "Allows defining the range within the specificed module that will be "
 "searched. There are three search scopes available:"
@@ -2606,21 +2665,21 @@ msgstr ""
 "Permet de définir la plage de versets à parcourir dans le module spécifié. "
 "Trois plages de recherche sont possibles :"
 
-#: ../C/gnomesword.xml:133(guibutton) ../C/search.xml:133(guibutton)
+#: ../C/gnomesword.xml:136(guibutton) ../C/search.xml:136(guibutton)
 msgid "No scope"
 msgstr "Sans limites"
 
-#: ../C/gnomesword.xml:134(para) ../C/search.xml:134(para)
+#: ../C/gnomesword.xml:137(para) ../C/search.xml:137(para)
 msgid "This button causes the search to to include the entire module."
 msgstr ""
 "Sélectionner ce bouton implique que la requête s'exécute sur l'ensemble des "
 "versets."
 
-#: ../C/gnomesword.xml:139(guibutton) ../C/search.xml:139(guibutton)
+#: ../C/gnomesword.xml:142(guibutton) ../C/search.xml:142(guibutton)
 msgid "Use bounds"
 msgstr "Limites définies"
 
-#: ../C/gnomesword.xml:140(para) ../C/search.xml:140(para)
+#: ../C/gnomesword.xml:143(para) ../C/search.xml:143(para)
 msgid ""
 "Selecting this button produces two dropdown selector boxes marked "
 "<guilabel>Lower</guilabel> and <guilabel>Upper</guilabel>. Select the first "
@@ -2638,7 +2697,7 @@ msgstr ""
 "limite <guilabel>Haute</guilabel> en incluant tous les versets situés entre "
 "les deux limites."
 
-#: ../C/gnomesword.xml:149(para) ../C/search.xml:149(para)
+#: ../C/gnomesword.xml:152(para) ../C/search.xml:152(para)
 msgid ""
 "Chapter and verse numbers can be entered into the search bound boxes as well "
 "to further narrow the search."
@@ -2646,11 +2705,11 @@ msgstr ""
 "Des numéros de chapitres ou de versets peuvent aussi être saisis dans les "
 "deux zones basse et haute  afin de mieux cibler la recherche."
 
-#: ../C/gnomesword.xml:155(guibutton) ../C/search.xml:155(guibutton)
+#: ../C/gnomesword.xml:158(guibutton) ../C/search.xml:158(guibutton)
 msgid "Last search"
 msgstr "Dernière requête"
 
-#: ../C/gnomesword.xml:156(para) ../C/search.xml:156(para)
+#: ../C/gnomesword.xml:159(para) ../C/search.xml:159(para)
 msgid ""
 "Select this button to do a new search including only the verses returned as "
 "a result of the last search. Use this with a new search key to narrow the "
@@ -2661,11 +2720,11 @@ msgstr ""
 "nouvelle expression, cette méthode permet de réduire la liste des versets "
 "restitués."
 
-#: ../C/gnomesword.xml:166(title)
+#: ../C/gnomesword.xml:169(title)
 msgid "Advanced Searches"
 msgstr "Recherche avancée"
 
-#: ../C/gnomesword.xml:167(para)
+#: ../C/gnomesword.xml:170(para)
 msgid ""
 "More complicated searches might require the use of the advanced search "
 "functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem>."
@@ -2675,15 +2734,15 @@ msgstr ""
 "l'utilisation du  menu <menuchoice><guimenuitem>Éditer</"
 "guimenuitem><guimenuitem>Recherche avancée</guimenuitem></menuchoice>."
 
-#: ../C/gnomesword.xml:173(title)
+#: ../C/gnomesword.xml:176(title)
 msgid "The Advanced Search Dialogue"
 msgstr "La fenêtre de recherche avancée"
 
-#: ../C/gnomesword.xml:186(phrase)
+#: ../C/gnomesword.xml:189(phrase)
 msgid "The Advanced Search Dialog"
 msgstr "La fenêtre de recherche avancée"
 
-#: ../C/gnomesword.xml:194(para)
+#: ../C/gnomesword.xml:197(para)
 msgid ""
 "In <guimenuitem>Advanced Search</guimenuitem>, much more complex queries can "
 "be constructed, involving custom search ranges, custom lists of modules over "
@@ -2697,7 +2756,7 @@ msgstr ""
 "s'effectuer sur les attributs du texte comme les notes de bas de page ou les "
 "références de Strong des dictionnaires grec et hébreu."
 
-#: ../C/gnomesword.xml:200(para)
+#: ../C/gnomesword.xml:203(para)
 msgid ""
 "The default search is multi-word, a somewhat slow and blunt search through "
 "module text. Also available is an optimized search based on the Lucene "
@@ -2729,7 +2788,7 @@ msgstr ""
 "préfixant les requêtes par le nom du champ suivi du caractère deux-points, "
 "comme dans «&nbsp;titre:Jean&nbsp;». "
 
-#: ../C/gnomesword.xml:207(para)
+#: ../C/gnomesword.xml:210(para)
 msgid ""
 "By default, two standard search ranges are defined, for Old and New "
 "Testament; you may wish to define others for e.g. \"Gospels\" or \"Paul's "
@@ -2749,7 +2808,7 @@ msgstr ""
 "d'exécuter des requêtes sur les livres ou les dictionnaires, dans n'importe "
 "quelle combinaison."
 
-#: ../C/gnomesword.xml:215(para)
+#: ../C/gnomesword.xml:218(para)
 msgid ""
 "Note the tooltip in the screenshot above, for Attributes search. This "
 "qualifier is used to perform searches on attributes that are carried with "
@@ -2772,7 +2831,7 @@ msgstr ""
 "grec n° 140, en utilisant «­­&nbsp;G140&nbsp;», retourne  Matthieu 12:18 comme "
 "résultat."
 
-#: ../C/gnomesword.xml:224(para)
+#: ../C/gnomesword.xml:227(para)
 msgid ""
 "Changes to some of the settings (e.g. scope of search, searched modules, "
 "etc.) in Advanced Search will affect the simple search via the side pane but "
@@ -2783,11 +2842,11 @@ msgstr ""
 "options de la recherche simple du <interface>volet latéral</interface> mais "
 "pas l'inverse."
 
-#: ../C/gnomesword.xml:231(title)
+#: ../C/gnomesword.xml:234(title)
 msgid "Search Syntax using Regular Expression"
 msgstr "Syntaxe des expressions rationnelles utilisées en clé de recherche"
 
-#: ../C/gnomesword.xml:233(para)
+#: ../C/gnomesword.xml:236(para)
 msgid ""
 "Regular expression searches provide a way to do simple or complex searches "
 "for strings that match a pattern or set of patterns (branches) separated by "
@@ -2819,7 +2878,7 @@ msgstr ""
 "les deux mots. Une recherche de «­­&nbsp;ne pas&nbsp;» trouvera aussi les "
 "versets contenant «­­&nbsp;<emphasis>ne pas</emphasis>se&nbsp;»."
 
-#: ../C/gnomesword.xml:236(para)
+#: ../C/gnomesword.xml:239(para)
 msgid ""
 "The power of Regular Expressions is in the patterns (or templates) used to "
 "define a search. A pattern consists of ordinary characters and some special "
@@ -2836,7 +2895,7 @@ msgstr ""
 "convertir les caractères spéciaux en caractères ordinaires et inversement "
 "les caractères ordinaires en caractères spéciaux."
 
-#: ../C/gnomesword.xml:241(para)
+#: ../C/gnomesword.xml:244(para)
 msgid ""
 "Example: the pattern \"<emphasis>i. love\\.</emphasis>\" will find sentences "
 "that end with \"h<emphasis>i</emphasis>s <emphasis>love</emphasis>\" or "
@@ -2858,15 +2917,15 @@ msgstr ""
 "suivant ne doit pas être considéré comme un caractère spécial, mais comme un "
 "point ordinaire."
 
-#: ../C/gnomesword.xml:249(title)
+#: ../C/gnomesword.xml:252(title)
 msgid "Rules for Regular Expression Search Requests"
 msgstr "Règles des requêtes de recherche à l'aide des expressions rationnelles"
 
-#: ../C/gnomesword.xml:251(para)
+#: ../C/gnomesword.xml:254(para)
 msgid ". The period matches any character."
 msgstr "«­­&nbsp;.&nbsp;» Le point remplace n'importe quel caractère."
 
-#: ../C/gnomesword.xml:252(para)
+#: ../C/gnomesword.xml:255(para)
 msgid ""
 "* The asterisk matches 0 or more characters of the preceding: set, character "
 "or indicated character."
@@ -2875,7 +2934,7 @@ msgstr ""
 "d'une chaîne ou d'une expression rationnelle la précédant, incluant zéro "
 "caractère."
 
-#: ../C/gnomesword.xml:254(para)
+#: ../C/gnomesword.xml:257(para)
 msgid ""
 "+ The plus sign matches 1 or more characters of the preceding: set, "
 "character or indicated character."
@@ -2884,7 +2943,7 @@ msgstr ""
 "précédente expression régulière. Il joue un rôle similaire à «­­&nbsp;"
 "*&nbsp;» (astérisque), mais ne correspond pas à zéro occurrence."
 
-#: ../C/gnomesword.xml:256(para)
+#: ../C/gnomesword.xml:259(para)
 msgid ""
 "? The question mark matches 0 or 1 character of the preceding: set, "
 "character or indicated character."
@@ -2893,37 +2952,37 @@ msgstr ""
 "de la précédente expression rationnelle. Il est généralement utilisé pour "
 "correspondre à des caractères uniques."
 
-#: ../C/gnomesword.xml:258(para)
+#: ../C/gnomesword.xml:261(para)
 msgid ""
 "[ ] Square brackets match any one of the characters specified inside [ ]."
 msgstr ""
 "«­­&nbsp;[...]&nbsp;» Les crochets englobent un ensemble de caractères pour "
 "réaliser une correspondance dans une seule expression rationnelle."
 
-#: ../C/gnomesword.xml:260(para)
+#: ../C/gnomesword.xml:263(para)
 msgid "^ A caret as the first character inside [ ] means NOT."
 msgstr ""
 "«­­&nbsp;^&nbsp;» La puissance comme premier caractère à l'intérieur "
 "d'accolades inverse la signification de l'ensemble des caractères de  "
 "l'expression rationnelle."
 
-#: ../C/gnomesword.xml:261(para)
+#: ../C/gnomesword.xml:264(para)
 msgid "^ A caret beginning a pattern anchors the beginning of a line."
 msgstr ""
 "«­­&nbsp;^&nbsp;» La puissance en dehors d'accolades correspond au début d'une "
 "ligne."
 
-#: ../C/gnomesword.xml:263(para)
+#: ../C/gnomesword.xml:266(para)
 msgid "$ A dollar at the end of a pattern anchors the end of a line."
 msgstr ""
 "«­­&nbsp;$&nbsp;» Le signe dollar à la fin d'une expression rationnelle "
 "correspond à la fin d'une ligne."
 
-#: ../C/gnomesword.xml:265(para)
+#: ../C/gnomesword.xml:268(para)
 msgid "| A vertical bar means logical OR."
 msgstr "«­­&nbsp;|&nbsp;» La barre verticale signifie OU logique"
 
-#: ../C/gnomesword.xml:266(para)
+#: ../C/gnomesword.xml:269(para)
 msgid ""
 "( ) Parentheses enclose expressions for grouping. <emphasis>Not supported!</"
 "emphasis>"
@@ -2931,7 +2990,7 @@ msgstr ""
 "«­­&nbsp;()&nbsp;» Les parenthèses servent à regrouper des expressions. "
 "<emphasis>Non supporté dans &appname;</emphasis>"
 
-#: ../C/gnomesword.xml:268(para)
+#: ../C/gnomesword.xml:271(para)
 msgid ""
 "\\ A backslash can be used prior to any special character to match that "
 "character."
@@ -2939,7 +2998,7 @@ msgstr ""
 "«­­&nbsp;\\&nbsp;» L'antislash échappe un caractère spécial, ce qui signifie "
 "que le caractère est interprété littéralement."
 
-#: ../C/gnomesword.xml:270(para)
+#: ../C/gnomesword.xml:273(para)
 msgid ""
 "\\ A backslash can be used prior to an ordinary character to make it a "
 "special character."
@@ -2947,11 +3006,11 @@ msgstr ""
 "«­­&nbsp;\\&nbsp;» L'antislash utilisé devant un caractère ordinaire, le "
 "transforme en caractère spécial.."
 
-#: ../C/gnomesword.xml:275(title)
+#: ../C/gnomesword.xml:278(title)
 msgid "The Period"
 msgstr "Le point"
 
-#: ../C/gnomesword.xml:277(para)
+#: ../C/gnomesword.xml:280(para)
 msgid ""
 "The Period \".\" will match any single character even a space or other non-"
 "alphabet character. <emphasis>s.t</emphasis> matches <emphasis>s</"
@@ -2971,11 +3030,11 @@ msgstr ""
 "qui retourne 1133, 11333 mais pas 13 (un caractère supplémentaire est "
 "manquant)."
 
-#: ../C/gnomesword.xml:291(title)
+#: ../C/gnomesword.xml:294(title)
 msgid "The Asterisk"
 msgstr "L'astérisque"
 
-#: ../C/gnomesword.xml:293(para)
+#: ../C/gnomesword.xml:296(para)
 msgid ""
 "The asterisk \"*\" matches zero or more characters of the preceding: set, "
 "character or indicated character. Using a period asterisk combination \".*\" "
@@ -2990,11 +3049,11 @@ msgstr ""
 "caractère. Par exemple : «­­&nbsp;1133*&nbsp;» correspond à 11 plus un ou plus "
 "de 3 ainsi que d'autres caractères : 113, 1133, 111312 et ainsi de suite."
 
-#: ../C/gnomesword.xml:305(title)
+#: ../C/gnomesword.xml:308(title)
 msgid "The Plus Sign"
 msgstr "Le signe plus"
 
-#: ../C/gnomesword.xml:306(para)
+#: ../C/gnomesword.xml:309(para)
 msgid ""
 "The Plus Sign \"+\" matches one or more characters of the preceding: set, "
 "character or indicated character. Using a period and plus sign combination "
@@ -3007,11 +3066,11 @@ msgstr ""
 "précédente expression rationnelle. Il joue un rôle similaire à «­­&nbsp;"
 "*&nbsp;» (astérisque), mais ne correspond pas à zéro occurrence."
 
-#: ../C/gnomesword.xml:317(title)
+#: ../C/gnomesword.xml:320(title)
 msgid "The Question Mark"
 msgstr "Le point d'interrogation."
 
-#: ../C/gnomesword.xml:318(para)
+#: ../C/gnomesword.xml:321(para)
 msgid ""
 "The Question Mark \"?\"matches zero or one character of the preceding: set, "
 "character or indicated character. <emphasis>be?n</emphasis> matches "
@@ -3023,11 +3082,11 @@ msgstr ""
 "instance au·plus·de la précédente expression rationnelle. Il est "
 "généralement utilisé pour correspondre à des caractères uniques."
 
-#: ../C/gnomesword.xml:327(title)
+#: ../C/gnomesword.xml:330(title)
 msgid "The Square Brackets"
 msgstr "Les crochets"
 
-#: ../C/gnomesword.xml:328(para)
+#: ../C/gnomesword.xml:331(para)
 msgid ""
 "The Square Brackets \"[]\" enclose a set of characters that can match. The "
 "period, asterisk, plus sign and question mark are not special inside the "
@@ -3059,11 +3118,11 @@ msgstr ""
 "correspondent à des modèles de mots communs. «­­&nbsp;[Oo][Uu][Ii]&nbsp;» "
 "correspond à oui, Oui, OUI, oUi et ainsi de suite. "
 
-#: ../C/gnomesword.xml:350(title)
+#: ../C/gnomesword.xml:353(title)
 msgid "The Caret first in Square Brackets"
 msgstr "La puissance en premier caractère entre des crochets"
 
-#: ../C/gnomesword.xml:351(para)
+#: ../C/gnomesword.xml:354(para)
 msgid ""
 "If the Caret is the first character after the left bracket (\"[^\") it means "
 "NOT. <emphasis>s[^io]t</emphasis> matches <emphasis>set, sat</emphasis>, "
@@ -3074,11 +3133,11 @@ msgstr ""
 "entre crochets, il  inverse la signification de l'ensemble des caractères de "
 "l'expression rationnelle."
 
-#: ../C/gnomesword.xml:358(title)
+#: ../C/gnomesword.xml:361(title)
 msgid "The Caret as Start of Line Anchor"
 msgstr "La puissance correspond au début d'une ligne"
 
-#: ../C/gnomesword.xml:359(para)
+#: ../C/gnomesword.xml:362(para)
 msgid ""
 "If the Caret is the first character in a pattern (\"^xxx\") it anchors the "
 "pattern to the start of a line. Any match must be at the beginning of a "
@@ -3099,11 +3158,11 @@ msgstr ""
 "est préférable d'utiliser : «­­&nbsp;<emphasis>^....Au commencement</"
 "emphasis>&nbsp;»)."
 
-#: ../C/gnomesword.xml:372(title)
+#: ../C/gnomesword.xml:375(title)
 msgid "The Dollar Sign as End of Line Anchor"
 msgstr "Le signe dollar recherche en fin de ligne"
 
-#: ../C/gnomesword.xml:373(para)
+#: ../C/gnomesword.xml:376(para)
 msgid ""
 "If the Dollar Sign is the last character (\"xxx$\") in a pattern it anchors "
 "the pattern to the end of a line. Any match must be at the end of a line. "
@@ -3125,11 +3184,11 @@ msgstr ""
 "\\....$&nbsp;», «Amen\\..........$&nbsp;», ou même «­­&nbsp;Amen"
 "\\....................$&nbsp;»)."
 
-#: ../C/gnomesword.xml:387(title)
+#: ../C/gnomesword.xml:390(title)
 msgid "The Vertical Bar"
 msgstr "La barre verticale"
 
-#: ../C/gnomesword.xml:388(para)
+#: ../C/gnomesword.xml:391(para)
 msgid ""
 "The Vertical Bar \"|\" between patterns means OR. <emphasis>John|Peter</"
 "emphasis> matches <emphasis>John</emphasis> or <emphasis>Peter. John .*Peter|"
@@ -3150,19 +3209,19 @@ msgstr ""
 "emphasis>&nbsp;» retourne <emphasis>douleur</emphasis> ou "
 "<emphasis>souffrance</emphasis> ou <emphasis>tourment</emphasis>."
 
-#: ../C/gnomesword.xml:399(title)
+#: ../C/gnomesword.xml:402(title)
 msgid "The Parentheses"
 msgstr "Les parenthèses"
 
-#: ../C/gnomesword.xml:400(emphasis)
+#: ../C/gnomesword.xml:403(emphasis)
 msgid "The use of Parentheses \"( )\" is not supported!"
 msgstr "L'usage des parenthèses «­­&nbsp;()&nbsp;» n'est pas prévu."
 
-#: ../C/gnomesword.xml:406(title)
+#: ../C/gnomesword.xml:409(title)
 msgid "The Backslash Prior to a Special Character"
 msgstr "L'antislash précédant un caractère spécial"
 
-#: ../C/gnomesword.xml:407(para)
+#: ../C/gnomesword.xml:410(para)
 msgid ""
 "The Backslash prior to a special character (\"\\*\") indicates that the "
 "character is not being used in its special meaning, but is just to match "
@@ -3176,11 +3235,11 @@ msgstr ""
 "mais pas <emphasis>amen</emphasis>t et ne trouvera donc pas "
 "firm<emphasis>amen</emphasis>t."
 
-#: ../C/gnomesword.xml:415(title)
+#: ../C/gnomesword.xml:418(title)
 msgid "The Backslash Prior to an Ordinary Character"
 msgstr "L'antislash précédant un caractère ordinaire"
 
-#: ../C/gnomesword.xml:417(para)
+#: ../C/gnomesword.xml:420(para)
 msgid ""
 "The Backslash prior to an ordinary character (\"\\o\") indicates that the "
 "character is not being used to match itself, but has special meaning."
@@ -3189,7 +3248,7 @@ msgstr ""
 "ce caractère n'est plus utilisé comme tel mais prend une signification "
 "spéciale."
 
-#: ../C/gnomesword.xml:422(para)
+#: ../C/gnomesword.xml:425(para)
 msgid ""
 "\\b if use outside [ ] means word boundary. If used inside [ ] means "
 "backspace. <emphasis>\\brighteous\\b</emphasis> matches <emphasis>righteous</"
@@ -3202,7 +3261,7 @@ msgstr ""
 "\\b</emphasis> retourne <emphasis>juste</emphasis> mais pas "
 "in<emphasis>juste</emphasis> ou <emphasis>juste</emphasis>sse."
 
-#: ../C/gnomesword.xml:426(para)
+#: ../C/gnomesword.xml:429(para)
 msgid ""
 "\\B means non-word boundary. <emphasis>\\Brighteous\\B</emphasis> matches "
 "un<emphasis>righteous</emphasis>ness and un<emphasis>righteous</emphasis>ly "
@@ -3213,27 +3272,27 @@ msgstr ""
 "trouve cha<emphasis>leur</emphasis>euse mais pas cha<emphasis>leur</"
 "emphasis> ou <emphasis>leur</emphasis>re."
 
-#: ../C/gnomesword.xml:430(para)
+#: ../C/gnomesword.xml:433(para)
 msgid "\\d means digit; same as [0-9]."
 msgstr "\\d représente un chiffre, identique à [0-9]."
 
-#: ../C/gnomesword.xml:431(para)
+#: ../C/gnomesword.xml:434(para)
 msgid "\\D means non-digit, same as [^0-9]."
 msgstr "\\D signifie non-numérique, identique à [^0-9]."
 
-#: ../C/gnomesword.xml:432(para)
+#: ../C/gnomesword.xml:435(para)
 msgid "\\s means space."
 msgstr "\\s représente une espace."
 
-#: ../C/gnomesword.xml:433(para)
+#: ../C/gnomesword.xml:436(para)
 msgid "\\S means not a space."
 msgstr "\\S signifie pas d'espace."
 
-#: ../C/gnomesword.xml:434(para)
+#: ../C/gnomesword.xml:437(para)
 msgid "\\w means alphanumeric; same as [a-zA-Z0-9_]."
 msgstr "\\w signifie alphanumérique, identique à [a-zA-Z0-9_]."
 
-#: ../C/gnomesword.xml:435(para)
+#: ../C/gnomesword.xml:438(para)
 msgid "\\W means not alphanumeric; same as [^a-zA-Z0-9_]."
 msgstr "\\W signifie non alphanumérique, identique à [^a-zA-Z0-9_]."
 
@@ -3362,12 +3421,12 @@ msgstr ""
 #: ../C/gnomesword.xml:11(para)
 msgid ""
 "An editor window similar to the <guimenuitem>Study Pad</guimenuitem> will "
-"appear. Edit your comment and save it; in future it will appear as your "
+"appear. Edit your comment and save it; in the future it will appear as your "
 "comment to the relevant verse."
 msgstr ""
-"Un éditeur semblable au<guimenuitem> bloc-notes </guimenuitem> s'affiche "
-"ensuite. Votre commentaire est à éditer puis à enregistrer. Il apparaîtra "
-"plus tard comme votre commentaire personnel du verset correspondant."
+"Un éditeur semblable au<guimenuitem> bloc-notes </guimenuitem> va apparaître. "
+"Votre commentaire est à éditer puis à enregistrer. Il apparaîtra "
+"plus tard comme commentaire personnel au verset correspondant."
 
 #: ../C/gnomesword.xml:18(title)
 msgid "The Personal Commentary Editor"
@@ -3597,6 +3656,21 @@ msgstr ""
 #: ../C/studypad.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid "Sidepane"
+#~ msgstr "Volet latéral"
+
+#~ msgid "The Sidepane"
+#~ msgstr "Le volet latéral"
+
+#~ msgid "Viewer Pane"
+#~ msgstr "Volet aperçu"
+
+#~ msgid "Viewer Panel"
+#~ msgstr "Volet aperçu"
+
+#~ msgid "the Search Bar"
+#~ msgstr "La barre de recherche"
 
 #~ msgid "2007"
 #~ msgstr "2007"
