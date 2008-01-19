@@ -2,6 +2,7 @@
 
 	* updated manual for forthcoming 2.3.3 release.
 	* updated boundary anchor logic to accommodate strong+morph better.
+	* fix glitch caused by display.cc dialog integration last week.
 
 2008-01-16  karl <charcoal@users.sf.net>
 	

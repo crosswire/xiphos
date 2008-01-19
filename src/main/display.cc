@@ -356,7 +356,9 @@ void HtmlOutput(SWModule &imodule,
 //
 char GTKEntryDisp::Display(SWModule &imodule)
 {
+#if 0
 	gchar *keytext = NULL;
+#endif
 	gchar *buf;
 	SWBuf swbuf = "";
 	gint mod_type;
@@ -376,21 +378,21 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	mod_type = backend->module_type(imodule.Name());
 	GS_message(("mod_type: %d",mod_type));
 
+#if 0
 	if (mod_type == BOOK_TYPE) {
 		keytext = strdup(backend->treekey_get_local_name(
 				settings.book_offset));
 		GS_message((keytext));
-	} else if (mod_type == DICTIONARY_TYPE)
+	} else
 		keytext = g_strdup((char*)imodule.KeyText());
-	else
-		keytext = strdup((char*)imodule.KeyText());
+#endif
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 			      "<font face=\"%s\" size=\"%+d\">"
 			      "<font color=\"%s\">"
 			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font>[%s]<br>",
+			      "[*%s*]</a></font><br>",
 			      (settings.doublespace ? DOUBLE_SPACE : ""),
 			      settings.bible_bg_color,
 			      settings.bible_text_color,
@@ -402,8 +404,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 			      settings.bible_verse_num_color,
 			      imodule.Description(),
 			      imodule.Name(),
-			      imodule.Name(),
-			      (gchar*)keytext);
+			      imodule.Name());
 	swbuf.append(buf);
 	g_free(buf);
 
@@ -435,8 +436,10 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	
 	free_font(mf);
 	g_free(ops);
+#if 0
 	if (keytext)
 		g_free(keytext);
+#endif
 }
 
 
@@ -1602,8 +1605,10 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 
 char DialogEntryDisp::Display(SWModule &imodule)
 {
-	SWBuf swbuf = "";
+#if 0
 	gchar *keytext = NULL;
+#endif
+	SWBuf swbuf = "";
 	char *buf;
 	int curPos = 0;
 	gint mod_type;
@@ -1617,14 +1622,13 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	mod_type = backend->module_type(imodule.Name());
 	GS_message(("mod_type: %d",mod_type));
 
+#if 0
 	if (mod_type == BOOK_TYPE) {
-		keytext = strdup(backend->treekey_get_local_name(
-				settings.book_offset));
+		keytext = strdup(be->treekey_get_local_name(d->offset));
 		GS_message((keytext));
-	} else if (mod_type == DICTIONARY_TYPE)
+	} else
 		keytext = g_strdup((char*)imodule.KeyText());
-	else
-		keytext = strdup((char*)imodule.KeyText());
+#endif
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1675,8 +1679,10 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 	free_font(mf);
 	g_free(ops);
+#if 0
 	if (keytext)
 		g_free(keytext);
+#endif
 }
 
 
