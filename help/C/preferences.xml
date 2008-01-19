@@ -138,6 +138,11 @@
 
                 </figure>
 		<para>
+		Certain dictionary-style modules are <guilabel>Daily Devotionals</guilabel> whose keys are numerically in the form "Month.Day".  If you have
+		such a module installed and it has been selected as your preferred devotional, then you can ask that <application>GnomeSword</application>
+		display today's selection during startup.
+		</para>
+		<para>
 		<guilabel>Verse style</guilabel> indicates that each verse should begin on a separate line, or (when disabled) that verses
 		should be allowed to group in paragraphs, according to the Bible module's internal markup.  Not all Bible modules have such
 		markup.

@@ -36,7 +36,7 @@
 	<sect2 id="toolbars">
    		<title>Toolbars</title>
    		<para>
-	    	The function of the Toolbar is to provide control over the Bible Pane.
+	    	The function of the Toolbar is to provide control over the Bible and Commentary Panes.
 		Activation of the Toolbar option is done by moving the mouse cursor over the 
 		desired toolbar button and selecting it. A tooltip will appear if the mouse cursor 
 		is held stationary over a toolbar button, describing the function of the button. 
@@ -66,7 +66,7 @@
 		<itemizedlist>
 			<listitem>
 				<para>
-				History View Toggle
+				History View Toggle and drop-down menu
 				</para>
 			</listitem>
 			<listitem>
@@ -137,11 +137,11 @@
 		</sect3>
 	</sect2>
    
-<!-- ============= Sidepane  ============-->  
-	<sect2 id="gnomesword-sidepane">
+<!-- ============= Sidebar  ============-->  
+	<sect2 id="gnomesword-sidebar">
    	 	<title>The Sidebar</title>
-		<figure id="sidepane_figure">
-			<title>Sidepane</title>
+		<figure id="sidebar_figure">
+			<title>Sidebar</title>
 	  		<screenshot> 
 	  <mediaobject> 
 	    <imageobject>
@@ -154,20 +154,20 @@
     		    </imageobject>
 	    -->
 	    <textobject> 
-	      <phrase>The Sidepane</phrase> 
+	      <phrase>The Sidebar</phrase> 
 	    </textobject> 
 	  </mediaobject> 
 	   </screenshot>
 
 	    	</figure>
 		<para>
-	     	On the left hand side of <application>GnomeSword</application> there is the Side Pane. Here the
+	     	On the left hand side of <application>GnomeSword</application> there is the Sidebar. Here the
 	     	user can switch between the different Sword modules, view bookmarks, do simple searches and view verse lists.
-		To switch between all Side Pane functions, shortcuts have been placed at the bottom of the Side Pane.
+		To switch between all Sidebar functions, shortcuts have been placed at the bottom of the Sidebar.
 		Clicking on the shortcut activates the option.
 		</para>
 		<figure id="shortcut_figure">
-			<title>Sidepane Shortcuts</title>
+			<title>Sidebar Shortcuts</title>
 	  		<screenshot> 
 	  <mediaobject> 
 	    <imageobject>
@@ -180,7 +180,7 @@
     		    </imageobject>
 	    -->
 	    <textobject> 
-	      <phrase>Sidepane shortcuts</phrase> 
+	      <phrase>Sidebar shortcuts</phrase> 
 	    </textobject> 
 	  </mediaobject> 
 			</screenshot>
@@ -241,7 +241,7 @@
 		<sect3 id="gnomesword-bible-parallel">
 			<title>Using the Parallel View Mode</title>
 			<para>
-			A nice function in <application>GnomeSword</application> is the ability to view your specified bible text in parallel in five
+			A nice function in <application>GnomeSword</application> is the ability to view your specified bible text in five parallel
 			translations of your choice. The Parallel View mode can be accessed by selecting <guimenuitem>Parallel View</guimenuitem> just
 			below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you
 			can only view one verse at a time. You can change the verse by selecting another verse, chapter, or book at the toolbar. Also note
@@ -302,8 +302,8 @@
 				<listitem>
 					<para>
 					Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
-					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
-					. Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
+					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>.
+					Then right-click on a translation and choose the <guimenuitem>Open in dialog</guimenuitem>
 					option.
 					</para>
 				</listitem>
@@ -320,6 +320,14 @@
 					<para>
 					right-click in the <interface>Bible Text pane</interface>. In the popup menu choose
 					<guimenuitem>About </guimenuitem> module name.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
+					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>.
+					Then right-click on a translation and choose the <guimenuitem>About</guimenuitem>
+					option.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -359,6 +367,11 @@
 				<listitem>	
 					<para>
 					Headings
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+					Image Content
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -424,6 +437,14 @@
 			      	</screenshot>
 
 		    	</figure>
+			<para>
+			The first 4 checkboxes control whether each named subwindow is displayed.  The viewable state of the subwindows is remembered on a
+			per-tab basis.  This makes it possible, for example, to have a tab dedicated to a maps module alone (in a dictionary module, having
+			alphabetically-listed places), by turning off the display of Bible, Previewer, and Commentary for that tab.
+			</para>
+			<para>
+			The remaining checkboxes control these other display features:
+			</para>
 			<itemizedlist>
 				<listitem>	
 					<para>
@@ -469,7 +490,7 @@
 		<sect3 id="gnomesword-bible-dictionary">
 			<title>Specific Word Meanings</title>
 			<para>
-			In order to check the meaning of a specific word, click on the desired word you wish to lookup. The word should then highlight itself and the
+			In order to check the meaning of a specific word, double-click on the word you wish to lookup. The word should then highlight itself and the
 			explanation should be displayed, if available, in the <interface>Dictionary Pane</interface>. 
 			</para>
 		</sect3>
@@ -482,18 +503,19 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose <guibutton>Edit</guibutton>-&gt;							<guibutton>Find</guibutton>. A separate dialog will appear, which will allow single or multi word searches. Fill out
-					dialog and click the <guibutton>Find</guibutton> button.
+					right-click in the <interface>Bible Text Pane</interface>. In the popup menu, choose <guibutton>Edit</guibutton>-&gt;
+					<guibutton>Find</guibutton>. A separate dialog will appear, which provides text searches. Fill out
+					dialog and click the <guibutton>Find</guibutton> and <guibutton>Find Next</guibutton> buttons.
 					</para>	
 				</listitem>
 			</itemizedlist>
 		</sect3>
 	</sect2>
-<!-- ============= Viewer Pane	================ -->
+<!-- ============= Previewer	================ -->
 	<sect2 id="gnomesword-viewer">
-		<title>Viewer Pane</title>
+		<title>Previewer</title>
 		<figure id="viewer_figure">
-			<title>Viewer Panel</title>
+			<title>PreViewer</title>
 	  		<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata fileref="figures/interface_viewer.png" format="PNG" /> 
@@ -505,26 +527,26 @@
     		    </imageobject>
 	    -->
 	    <textobject> 
-	      <phrase>Viewer Panel</phrase> 
+	      <phrase>Previewer</phrase> 
 	    </textobject> 
 	  </mediaobject> 
 	
 		      	</screenshot>
 		</figure>
 		<para>
-		The Viewer Pane is where the user sees Strong's numbers, morphological tags, footnotes, and cross-references that the
+		The Previewer is where the user sees Strong's numbers, morphological tags, footnotes, and cross-references that the
 		<interface>Bible Text Pane</interface> provides.
 		</para>
 		<para>
-		Footnote content is normally transient in the Viewer Pane: It is displayed while your mouse hovers over the footnote
+		Footnote content is normally transient in the Previewer: It is displayed while your mouse hovers over the footnote
 		indicator <guibutton>*n</guibutton> in the Bible text, and then disappears when your mouse moves off.  But some
 		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
-		that you can scroll it in the Viewer Pane, middle-click the indicator and move to the Viewer Pane.
+		that you can scroll it in the Previewer, middle-click the indicator and move to the Previewer.
 		</para>
 		<para>
-		Cross-reference indicators <guibutton>*x</guibutton> also display transiently in the Viewer Pane.  Left-clicking the
+		Cross-reference indicators <guibutton>*x</guibutton> also display transiently in the Previewer.  Left-clicking the
 		indicator will send the set of references to the <guibutton>Verse List</guibutton> in the
-		<interface>Sidebar</interface>, where you can click them individually for reading in the Viewer Pane.
+		<interface>Sidebar</interface>, where you can click them individually for reading in the Previewer.
 		</para>
 	</sect2>	
 <!-- ============= Commentary Pane  ============--> 
@@ -552,7 +574,7 @@
     		</figure>
 		<para>
 		The <interface>Commentary pane</interface> is where the commentary modules are displayed. This provides easy
-		reading, reference and  access to different commentaries currently installed. The passage viewed by the 
+		reading, reference, and access to different commentaries currently installed. The passage viewed by the 
 		<interface>Commentary pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
 		Text pane</interface>, so in order to change to a different passage commentary, select the desired passage
 		on the <interface>Toolbar</interface>.
@@ -587,7 +609,7 @@
 		<sect3 id="gnomesword-commentary-headings">
 			<title>Commentary Headings.</title>
 			<para>
-			Most commentaries have additional headings which enable introductory information about the book and chapter currently
+			Many commentaries have additional headings which enable introductory information about the book and chapter currently
 			being displayed in the <interface>Bible Text pane</interface>. In order to view them:
 			</para>
 			<itemizedlist>
@@ -623,6 +645,10 @@
 	
 	      		</screenshot>
     		</figure>
+
+		<para>
+		The Dictionary Pane's content is driven by its up/down selectors, typing in its navbar text, or double-clicks in the Bible, Commentary, or Book Panes.
+		</para>
 	</sect2>
 
 	<sect2 id="gnomesword-shortcut">
