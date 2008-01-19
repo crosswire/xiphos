@@ -1448,7 +1448,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 	else
 		swbuf.append("</font></body></html>");
 	
-	if (curVerse > display_boundary)
+	if (strongs_and_morph)
+		buf = g_strdup_printf("%d", curVerse);
+	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
@@ -1893,7 +1895,9 @@ char DialogChapDisp::Display(SWModule &imodule)
 	else
 		swbuf.append("</font></body></html>");
 	
-	if (curVerse > display_boundary)
+	if (strongs_and_morph)
+		buf = g_strdup_printf("%d", curVerse);
+	else if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
