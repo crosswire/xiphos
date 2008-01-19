@@ -2,10 +2,13 @@
 
 	<sect2 id="gnomesword-searchpane">
 		<title>Simple Searches</title>
-		<para> To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. 	Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it.</para> 
+		<para>
+		To conduct a quick search within the current Bible or commentary module, the Search Bar in the Sidebar should usually be adequate. Click either
+		in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the Sidebar <guimenuitem>Modules-&gt;Search</guimenuitem> to access it.
+		</para> 
 	
 		<figure>
-		<title>the Search Bar</title>
+		<title>The Search Bar</title>
                        <screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata

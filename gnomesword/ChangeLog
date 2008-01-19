@@ -1,3 +1,7 @@
+2008-01-19  karl <charcoal@users.sf.net>
+
+	* updated manual for forthcoming 2.3.3 release.
+
 2008-01-16  karl <charcoal@users.sf.net>
 	
 	* fix #1872525 Fix build errors with gcc-4.3
