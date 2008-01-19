@@ -1,6 +1,7 @@
 2008-01-19  karl <charcoal@users.sf.net>
 
 	* updated manual for forthcoming 2.3.3 release.
+	* updated boundary anchor logic to accommodate strong+morph better.
 
 2008-01-16  karl <charcoal@users.sf.net>
 	
