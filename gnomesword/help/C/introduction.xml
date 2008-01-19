@@ -22,7 +22,7 @@
            translations</para>
         </listitem>
       </itemizedlist>
-      <para>&app; aims to provide a simple and clean user interface whilst providing a
+      <para>&app; aims to provide a simple and clean user interface while providing a
       powerful tool allowing a personalized Bible study environment.</para>
 
       <!-- ==== Figure ==== -->
@@ -51,6 +51,7 @@
       Other applications under the same banner are <application>The SWORD Project for Windows</application>
       (aka <application>BibleCS</application> or <application>WinSword</application>),      
       <application>MacSword</application> for the Macintosh,
+      <application>BibleDesktop</application>, a Java application,
       and <application>BibleTime</application>, another Linux program.</para>
 
       <para>

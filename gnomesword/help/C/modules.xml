@@ -6,9 +6,10 @@
 		<para>
 		The "module" is the unit of content in <application>GnomeSword</application>, and Sword generally; a Sword module is a
 		resource available for viewing in Sword applications.  There are several varieties: Most importantly, Bible texts, as well
-		as dictionaries and lexicons, commentaries, and general books, including some which have graphical content (e.g. atlases).
-		They are installed either from a local directory structure (such as a CDROM distribution) or remotely via ftp from a server
-		such as Crosswire, which is the home of Sword, and from which all officially Sword-sanctioned modules are available.
+		as dictionaries and lexicons, commentaries, and general books, any of which may include image content (e.g. atlases).
+		They are installed either from a local directory structure (typically on removable media, such as a CDROM distribution)
+		or remotely via ftp from a repository such as Crosswire, which is the home of Sword, and from which all officially
+		Sword-sanctioned modules are available.  Also, many other modules are available from non-Crosswire repositories.
 		</para>
 		<para>
 		If you have other Sword applications installed, they will all share the same set of Sword modules that you install through
@@ -135,14 +136,15 @@
                         </screenshot>
 			</figure>
 		<para>
-		Modules that are already installed have a checkmark beside them.  If a fast search ("lucene") index is available, an open
-		book is displayed, otherwise an "X" is shown; creation of the index is available on the Maintenance pane.  Locked modules,
-		which require that you purchase an unlock key from the module's copyright holder, will show a lock symbol.
+		Modules that are already installed will show a checkmark beside them.  If a fast search ("lucene") index is available, an open book will be
+		displayed, otherwise an "X" will be shown; creation of the index is available on the Maintenance pane.  Locked modules, which require that you
+		purchase an unlock key from the module's copyright holder, will show a lock symbol.  If there are modules installed for which a more recent
+		version is available, a refresh icon will appear between the differing old and new version stamps.  There may be an approximate size displayed,
+		if the repository management provides this information, otherwise a question mark ("-?-") will be shown.
 		</para>
 		<para>
 		Select new modules to be installed by clicking the checkboxes and then the Install button at the bottom.  Any number of
-		modules may be requested for installation at one time.  If there are modules installed for which a more recent version is
-		available, a refresh icon will appear between the differing old and new version stamps.
+		modules may be requested for installation at one time.
 		</para>
 		</sect3>
 		<sect3 id="remove-module">
@@ -192,8 +194,8 @@
 	<sect2 id="non-standard-modules">
 		<title>Installing Non-Standard Modules</title>
 		<para>
-		Some resource modules in Sword Project format are available from sources other than Crosswire.  Necessarily, installing such
-		a module is a manual task.
+		Some resource modules in Sword Project format are available from sources other than Crosswire and not from a module manager-ready repository.
+		Necessarily, installing such a module is a manual task.
 		</para>
 		<para>
 		Modules are normally packaged as *.zip files; they contain a configuration file plus a number of data files.  Installation
