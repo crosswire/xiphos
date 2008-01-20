@@ -1,3 +1,7 @@
+2008-01-20  - bugfix release, 2.3.3.  a number of bugfixes, InstallSize
+              support, Farsi digits, image content selectability, much
+              internal re-organization around display.cc.
+
 2007-12-26  - bugfix release, 2.3.2.  mostly some adv.search updates.
 
 2007-10-14  - a lot has happened in 10 months.  releasing 2.3.1 to go
@@ -30,7 +34,7 @@
 2000-08-27  Michael Meeks  <michael@helixcode.com>  is helping with the
 	GnomeSword project.  
  
-2000-08-25  - double click on a Srongs number to look up number in Srongs lex
+2000-08-25  - double click on a Strongs number to look up number in Strongs lex
 
 2000-08-18  - added shortcut bar from the Evolution project
             - first 0.2 release
