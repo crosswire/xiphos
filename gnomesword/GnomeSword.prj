@@ -28,7 +28,7 @@ anjuta.compatibility.level=1
 project.name=GnomeSword
 project.type=GNOME 2.0
 project.target.type=EXECUTABLE
-project.version=2.3.2
+project.version=2.3.3
 project.author=The GnomeSword Development Team
 project.source.target=src/gnome2/gnomesword2
 project.has.gettext=0
@@ -41,9 +41,9 @@ project.config.extra.modules.after=
 project.config.blocked=1
 project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
-project.menu.entry=GnomeSword Version 2.3.2
+project.menu.entry=GnomeSword Version 2.3.3
 project.menu.group=Application
-project.menu.comment=GnomeSword Version 2.3.2
+project.menu.comment=GnomeSword Version 2.3.3
 project.menu.icon=/home/tbiggs/devel/gnomesword/pixmaps/gs2-48x48.png
 project.menu.need.terminal=0
 
