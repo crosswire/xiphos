@@ -102,12 +102,12 @@ int main_save_module_options(char *mod_name,
 
 /******************************************************************************
  * Name
- *  gui_set_global_options
+ *  main_dialog_set_global_options
  *
  * Synopsis
  *   #include "gui/mod_global_ops.h"
  *
- *   void gui_set_global_options(GLOBAL_OPS * ops)	
+ *   void main_dialog_set_global_options(gpointer backend, GLOBAL_OPS * ops)
  *
  * Description
  *   set module global options
@@ -122,37 +122,42 @@ void main_dialog_set_global_options(gpointer backend,
 	BackEnd* b = (BackEnd*)backend;
 	
 	set_dialog_global_option(b, "Strong's Numbers",
-			  ops->strongs);
+				 ops->strongs);
 	set_dialog_global_option(b, "Morphological Tags",
-			  ops->morphs);
+				 ops->morphs);
 	set_dialog_global_option(b, "Footnotes",
-			  ops->footnotes);
+				 ops->footnotes);
 	set_dialog_global_option(b, "Greek Accents",
-			  ops->greekaccents);
+				 ops->greekaccents);
 	set_dialog_global_option(b, "Lemmas",
-			  ops->lemmas);
+				 ops->lemmas);
 	set_dialog_global_option(b, "Cross-references",
-			  ops->scripturerefs);
+				 ops->scripturerefs);
 	set_dialog_global_option(b, "Hebrew Vowel Points",
-			  ops->hebrewpoints);
+				 ops->hebrewpoints);
 	set_dialog_global_option(b, "Hebrew Cantillation",
-			  ops->hebrewcant);
+				 ops->hebrewcant);
 	set_dialog_global_option(b, "Headings",
-			  ops->headings);
+				 ops->headings);
 	set_dialog_global_option(b, "Words of Christ in Red",
-			  ops->words_in_red);
-	
+				 ops->words_in_red);
+	set_dialog_global_option(b, "Primary Reading",
+				 ops->variants_primary);
+	set_dialog_global_option(b, "Secondary Reading",
+				 ops->variants_secondary);
+	set_dialog_global_option(b, "All Readings",
+				 ops->variants_all);
 }
 
 
 /******************************************************************************
  * Name
- *  gui_set_global_options
+ *  main_set_global_options
  *
  * Synopsis
  *   #include "gui/mod_global_ops.h"
  *
- *   void gui_set_global_options(GLOBAL_OPS * ops)	
+ *   void main_set_global_options(GLOBAL_OPS * ops)	
  *
  * Description
  *   set module global options
@@ -183,7 +188,12 @@ void main_set_global_options(GLOBAL_OPS * ops)
 			  ops->headings);
 	set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
-
+	set_global_option(ops->module_type, "Primary Reading",
+			  ops->variants_primary);
+	set_global_option(ops->module_type, "Secondary Reading",
+			  ops->variants_secondary);
+	set_global_option(ops->module_type, "All Readings",
+			  ops->variants_all);
 }
 
 
@@ -339,12 +349,19 @@ GLOBAL_OPS *main_new_globals(gchar * mod_name)
 	    gui_of2tf(module_options[mod_name]["Hebrew Cantillation"].c_str());
 	ops->headings =
 	    gui_of2tf(module_options[mod_name]["Headings"].c_str());
+
 	ops->variants_all =
 	    gui_of2tf(module_options[mod_name]["All Readings"].c_str());
 	ops->variants_primary =
 	    gui_of2tf(module_options[mod_name]["Primary Reading"].c_str());
 	ops->variants_secondary =
 	    gui_of2tf(module_options[mod_name]["Secondary Reading"].c_str());
+	if ((ops->variants_all == FALSE) &&
+	    (ops->variants_primary == FALSE) &&
+	    (ops->variants_secondary == FALSE)) {
+		ops->variants_primary = TRUE;
+		//main_save_module_options(mod_name, "Primary Reading", 1);
+	}
 
 	ops->image_content =
 	    (*(module_options[mod_name]["Image Content"].c_str()) == '\0')

@@ -52,17 +52,20 @@ namespace ModuleCache {
 
 	// bitwise cache type indicators:
 	// if flags change (=> new display choice), text becomes invalid.
-	static const int Footnotes          = 0x001;
-	static const int GreekAccents       = 0x002;
-	static const int Headings           = 0x004;
-	static const int HebrewCantillation = 0x008;
-	static const int HebrewVowels       = 0x010;
-	static const int Lemmas             = 0x020;
-	static const int Morphology         = 0x040;
-	static const int RedWordsOfChrist   = 0x080;
-	static const int StrongsNumbers     = 0x100;
-	static const int Xrefs              = 0x200;
-	static const int Images             = 0x400;
+	static const int Footnotes          = 0x0001;
+	static const int GreekAccents       = 0x0002;
+	static const int Headings           = 0x0004;
+	static const int HebrewCantillation = 0x0008;
+	static const int HebrewVowels       = 0x0010;
+	static const int Lemmas             = 0x0020;
+	static const int Morphology         = 0x0040;
+	static const int RedWordsOfChrist   = 0x0080;
+	static const int StrongsNumbers     = 0x0100;
+	static const int Xrefs              = 0x0200;
+	static const int Images             = 0x0400;
+	static const int VariantsAll        = 0x0800;
+	static const int VariantsPrimary    = 0x1000;
+	static const int VariantsSecondary  = 0x2000;
 
 	class CacheVerse {
 	public:

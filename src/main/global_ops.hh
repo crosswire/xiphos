@@ -41,9 +41,9 @@ struct  _global_ops {
 	gboolean hebrewpoints; 
 	gboolean hebrewcant; 
 	gboolean headings; 
-	gboolean variants_all; 
 	gboolean variants_primary; 
 	gboolean variants_secondary;
+	gboolean variants_all; 
 	gint module_type;
 	gint image_content;
 };
