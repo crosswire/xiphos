@@ -765,35 +765,40 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 //	cipher_old = get_cipher_key(settings.MainWindowModule);
 	cipher_key = gui_add_cipher_key(settings.MainWindowModule, cipher_old);
 	if (cipher_key) 
-		main_display_bible(settings.MainWindowModule, settings.currentverse);
+		main_display_bible(settings.MainWindowModule,
+				   settings.currentverse);
 }
-
-
-void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
 
 void
-on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_reading_select(GtkMenuItem * menuitem, gpointer user_data)
 {
-
-}
-
-
-void
-on_primary_reading_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
-
-void
-on_secondary_reading_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
-{
-
+	gchar *modname = settings.MainWindowModule;
+	gchar *url = g_strdup_printf("sword://%s/%s",
+				     modname, settings.currentverse);
+	switch ((int) user_data)
+	{
+	case 0:	/* primary */
+		main_save_module_options(modname, "Primary Reading", 1);
+		main_save_module_options(modname, "Secondary Reading", 0);
+		main_save_module_options(modname, "All Readings", 0);
+		break;
+	case 1:	/* secondary */
+		main_save_module_options(modname, "Primary Reading", 0);
+		main_save_module_options(modname, "Secondary Reading", 1);
+		main_save_module_options(modname, "All Readings", 0);
+		break;
+	case 2:	/* all */
+		main_save_module_options(modname, "Primary Reading", 0);
+		main_save_module_options(modname, "Secondary Reading", 0);
+		main_save_module_options(modname, "All Readings", 1);
+		break;
+	default:
+		g_message("invalid variant %d\n", (int) user_data);
+		gui_generic_warning("GnomeSword: invalid internal variant");
+		break;
+	}
+	main_url_handler(url, TRUE);		
+	g_free(url);
 }
 
 
@@ -901,9 +906,8 @@ void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	gchar *label = g_strdup_printf("%s, %s",settings.currentverse,
 					settings.MainWindowModule);
-	//gint result = gtk_dialog_run((GtkDialog *)
 	gui_bookmark_dialog(label,
-			settings.MainWindowModule, settings.currentverse);
+			    settings.MainWindowModule, settings.currentverse);
 	
 	
 	g_free(label);	
@@ -956,21 +960,27 @@ static GnomeUIInfo edit3_menu_uiinfo[] = {
 
 static GnomeUIInfo all_readings_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("All Readings"),
-	 NULL,
-	 (gpointer) on_all_readings_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{
 	 GNOME_APP_UI_ITEM, N_("Primary Reading"),
 	 NULL,
-	 (gpointer) on_primary_reading_activate, NULL, NULL,
+	 (gpointer) on_reading_select, 
+	 (gpointer) 0,
+	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Secondary Reading"),
 	 NULL,
-	 (gpointer) on_secondary_reading_activate, NULL, NULL,
+	 (gpointer) on_reading_select,
+	 (gpointer) 1,
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("All Readings"),
+	 NULL,
+	 (gpointer) on_reading_select,
+	 (gpointer) 2,
+	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
@@ -1172,9 +1182,12 @@ void create_menu(void)
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
+
+	// remove this next line?  or leave it as a default?
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (all_readings_uiinfo[0].widget),
 				       TRUE);
+
 	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	// words_in_red
 	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	// strongs_numbers
 	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	// morph_tags
@@ -1296,9 +1309,17 @@ void create_menu(void)
 	}
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);
-		gtk_widget_show(all_readings_uiinfo[0].widget);	// all readings
-		gtk_widget_show(all_readings_uiinfo[1].widget);	// primary reading
-		gtk_widget_show(all_readings_uiinfo[2].widget);	// secondary reading
+
+		gtk_widget_show(all_readings_uiinfo[0].widget);	// primary
+		gtk_widget_show(all_readings_uiinfo[1].widget);	// secondary
+		gtk_widget_show(all_readings_uiinfo[2].widget);	// all
+
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[0].
+				    widget)->active = ops->variants_primary;
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[1].
+				    widget)->active = ops->variants_secondary;
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[2].
+				    widget)->active = ops->variants_all;
 	}
 	if (ops->image_content != -1) {
 		gtk_widget_show(module_options_menu_uiinfo[13].widget);

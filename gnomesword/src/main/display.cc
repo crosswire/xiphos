@@ -24,6 +24,8 @@
 #endif
 
 #include <osishtmlhref.h>
+#include <osisvariants.h>
+#include <thmlvariants.h>
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
@@ -280,7 +282,8 @@ AnalyzeForImageSize(const char *origtext,
 //
 // utility function to blank `<img src="foo.jpg" />' content from text.
 //
-void ClearImages(gchar *text)
+void
+ClearImages(gchar *text)
 {
 	gchar *s, *t;
 
@@ -298,11 +301,12 @@ void ClearImages(gchar *text)
 //
 // utility function to write out HTML.
 //
-void HtmlOutput(SWModule &imodule,
-		SWBuf& swbuf,
-		GtkWidget *gtkText,
-		MOD_FONT *mf,
-		char *anchor)
+void
+HtmlOutput(SWModule &imodule,
+	   SWBuf& swbuf,
+	   GtkWidget *gtkText,
+	   MOD_FONT *mf,
+	   char *anchor)
 {
 	int len = swbuf.length(), offset = 0, write_size;
 
@@ -354,24 +358,24 @@ void HtmlOutput(SWModule &imodule,
 //
 // general display of entries: commentary, genbook, lexdict
 //
-char GTKEntryDisp::Display(SWModule &imodule)
+char
+GTKEntryDisp::Display(SWModule &imodule)
 {
 #if 0
 	gchar *keytext = NULL;
 #endif
 	gchar *buf;
-	SWBuf swbuf = "";
 	gint mod_type;
-	MOD_FONT *mf = get_font(imodule.Name());
+	mf = get_font(imodule.Name());
+	swbuf = "";
 	
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 #endif
 
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
-	gint image_content = ops->image_content;
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
@@ -415,11 +419,11 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	else
 		rework = (const char *)imodule;
 
-	if (image_content == 0)
+	if (ops->image_content == 0)
 		ClearImages((gchar *)rework);
-	else if ((image_content == -1) &&	// "unknown"
+	else if ((ops->image_content == -1) &&	// "unknown"
 		 (strcasestr(rework, "<img ") != NULL)) {
-		image_content = 1;		// now known.
+		ops->image_content = 1;		// now known.
 		main_save_module_options(imodule.Name(),
 					 "Image Content", 1);
 	}
@@ -435,7 +439,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
 	
 	free_font(mf);
+	mf = NULL;
 	g_free(ops);
+	ops = NULL;
 #if 0
 	if (keytext)
 		g_free(keytext);
@@ -569,7 +575,8 @@ block_dump(SWBuf& rendered,
 #endif /* USE_GTKMOZEMBED */
 
 void
-block_render_secondary(const char *text, SWBuf& rendered)
+block_render_secondary(const char *text,
+		       SWBuf& rendered)
 {
 	const char *word    = NULL,
 		   *strongs = NULL,
@@ -713,7 +720,7 @@ block_render(const char *text)
 //
 void
 CacheHeader(ModuleCache::CacheVerse& cVerse,
-	    SWModule &mod,
+	    SWModule& mod,
 	    gint& image_content)
 {
 	int x = 0;
@@ -748,7 +755,8 @@ CacheHeader(ModuleCache::CacheVerse& cVerse,
 	}
 }
 
-void set_morph_order(SWModule &imodule)
+void
+set_morph_order(SWModule& imodule)
 {
 	for (FilterList::const_iterator it =
 		 imodule.getRenderFilters().begin();
@@ -760,11 +768,34 @@ void set_morph_order(SWModule &imodule)
 	}
 }
 
-void GTKChapDisp::getVerseBefore(SWModule &imodule,
-				 gboolean strongs_or_morph,
-				 gboolean strongs_and_morph,
-				 uint16_t cache_flags,
-				 gint     image_content)
+void
+set_reading(SWModule& imodule, GLOBAL_OPS *ops)
+{
+	for (FilterList::const_iterator it =
+		 imodule.getRenderFilters().begin();
+	     it != imodule.getRenderFilters().end();
+	     it++) {
+		OSISVariants *f = dynamic_cast<OSISVariants *>(*it);
+		if (f) {
+			f->setOptionValue(ops->variants_primary
+					  ? "Primary Reading"
+					  : (ops->variants_secondary
+					     ? "Secondary Reading"
+					     : "All Readings"));
+		}
+
+		ThMLVariants *g = dynamic_cast<ThMLVariants *>(*it);
+		if (g)
+			g->setOptionValue(ops->variants_primary
+					  ? "Primary Reading"
+					  : (ops->variants_secondary
+					     ? "Secondary Reading"
+					     : "All Readings"));
+	}
+}
+
+void
+GTKChapDisp::getVerseBefore(SWModule &imodule)
 {
 	gchar *utf8_key;
 	gchar *buf;
@@ -807,6 +838,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 		if (strongs_and_morph)
 			set_morph_order(*mod);
 
+		if (ops->variants_primary ||
+		    ops->variants_secondary ||
+		    ops->variants_all)
+			set_reading(*mod, ops);
+
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
@@ -825,11 +861,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
 
-			if (image_content == 0)
+			if (ops->image_content == 0)
 				ClearImages((gchar *)text);
-			else if ((image_content == -1) &&	// "unknown"
+			else if ((ops->image_content == -1) &&	// "unknown"
 				 (strcasestr(text, "<img ") != NULL)) {
-				image_content = 1;		// now known.
+				ops->image_content = 1;		// now known.
 				main_save_module_options(mod->Name(),
 							 "Image Content", 1);
 			}
@@ -907,11 +943,11 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
 
-			if (image_content == 0)
+			if (ops->image_content == 0)
 				ClearImages((gchar *)text);
-			else if ((image_content == -1) &&	// "unknown"
+			else if ((ops->image_content == -1) &&	// "unknown"
 				 (strcasestr(text, "<img ") != NULL)) {
-				image_content = 1;		// now known.
+				ops->image_content = 1;		// now known.
 				main_save_module_options(mod->Name(),
 							 "Image Content", 1);
 			}
@@ -927,11 +963,8 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule,
 	key->AutoNormalize(oldAutoNorm);
 }
 
-void GTKChapDisp::getVerseAfter(SWModule &imodule,
-				gboolean strongs_or_morph,
-				gboolean strongs_and_morph,
-				uint16_t cache_flags,
-				gint     image_content)
+void
+GTKChapDisp::getVerseAfter(SWModule &imodule)
 {
 	gchar *utf8_key;
 	gchar *buf;
@@ -998,6 +1031,11 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 		if (strongs_and_morph)
 			set_morph_order(*mod);
 
+		if (ops->variants_primary ||
+		    ops->variants_secondary ||
+		    ops->variants_all)
+			set_reading(*mod, ops);
+
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
 		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
@@ -1016,11 +1054,11 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule,
 					    ? block_render((const char *)mod)
 					    : (const char *)mod);
 
-			if (image_content == 0)
+			if (ops->image_content == 0)
 				ClearImages((gchar *)text);
-			else if ((image_content == -1) &&	// "unknown"
+			else if ((ops->image_content == -1) &&	// "unknown"
 				 (strcasestr(text, "<img ") != NULL)) {
-				image_content = 1;		// now known.
+				ops->image_content = 1;		// now known.
 				main_save_module_options(mod->Name(),
 							 "Image Content", 1);
 			}
@@ -1245,21 +1283,26 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 
 	char *ModuleName = imodule.Name();
-	GLOBAL_OPS * ops = main_new_globals(ModuleName);
-	uint16_t cache_flags = ConstructFlags(ops);
+	ops = main_new_globals(ModuleName);
+	cache_flags = ConstructFlags(ops);
+
 	is_rtol = main_is_mod_rtol(ModuleName);
 	gboolean newparagraph = FALSE;
 	mf = get_font(ModuleName);
+
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
 
-	gint image_content = ops->image_content;
-
-	gboolean strongs_and_morph = ((ops->strongs || ops->lemmas) &&
-				      ops->morphs);
-	gboolean strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
-				      ops->morphs);
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+
+	if (ops->variants_primary ||
+	    ops->variants_secondary ||
+	    ops->variants_all)
+		set_reading(imodule, ops);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
@@ -1298,9 +1341,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 	main_set_global_options(ops);
 	strongs_on = ops->strongs;
-	getVerseBefore(imodule,
-		       strongs_or_morph, strongs_and_morph,
-		       cache_flags, image_content);
+	getVerseBefore(imodule);
 
 	for (key->Verse(1);
 	     (key->Book()    == curBook)    &&
@@ -1327,11 +1368,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 					    ? block_render((const char *)imodule)
 					    : (const char *)imodule);
 
-			if (image_content == 0)
+			if (ops->image_content == 0)
 				ClearImages((gchar *)text);
-			else if ((image_content == -1) &&	// "unknown"
+			else if ((ops->image_content == -1) &&	// "unknown"
 				 (strcasestr(text, "<img ") != NULL)) {
-				image_content = 1;		// now known.
+				ops->image_content = 1;		// now known.
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
@@ -1340,7 +1381,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 #endif
 
 		if (!cVerse.HeaderIsValid())
-		    CacheHeader(cVerse, imodule, image_content);
+		    CacheHeader(cVerse, imodule, ops->image_content);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(cVerse.GetHeader());
@@ -1436,9 +1477,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 			swbuf.append("</font></td></tr></table>");
 	}
 
-	getVerseAfter(imodule,
-		      strongs_or_morph, strongs_and_morph,
-		      cache_flags, image_content);
+	getVerseAfter(imodule);
 
 	// Reset the Bible location before GTK gets access:
 	// Mouse activity destroys this key, so we must be finished with it.
@@ -1451,9 +1490,12 @@ char GTKChapDisp::Display(SWModule &imodule)
 	else
 		swbuf.append("</font></body></html>");
 	
+#ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
-	else if (curVerse > display_boundary)
+	else	/* this is not dangling: connects to following "if" */
+#endif /* USE_GTKMOZEMBED */
+	if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
@@ -1462,7 +1504,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 		g_free(buf);
 
 	free_font(mf);
+	mf = NULL;
 	g_free(ops);
+	ops = NULL;
 }
 
 
@@ -1598,7 +1642,9 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 	free_font(mf);
+	mf = NULL;
 	g_free(ops);
+	ops = NULL;
 }
 #endif
 
@@ -1615,12 +1661,10 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	const char *rework;	// for image size analysis rework.
-	gint image_content = ops->image_content;
 
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
-	GS_message(("mod_type: %d",mod_type));
 
 #if 0
 	if (mod_type == BOOK_TYPE) {
@@ -1658,11 +1702,11 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	else
 		rework = (const char *)imodule;
 
-	if (image_content == 0)
+	if (ops->image_content == 0)
 		ClearImages((gchar *)rework);
-	else if ((image_content == -1) &&	// "unknown"
+	else if ((ops->image_content == -1) &&	// "unknown"
 		 (strcasestr(rework, "<img ") != NULL)) {
-		image_content = 1;		// now known.
+		ops->image_content = 1;		// now known.
 		main_save_module_options(imodule.Name(),
 					 "Image Content", 1);
 	}
@@ -1678,7 +1722,9 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
 
 	free_font(mf);
+	mf = NULL;
 	g_free(ops);
+	ops = NULL;
 #if 0
 	if (keytext)
 		g_free(keytext);
@@ -1706,7 +1752,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;	
-	gint image_content;
 
 	gboolean strongs_and_morph, strongs_or_morph;
 	gint display_boundary;
@@ -1725,7 +1770,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 	main_dialog_set_global_options((BackEnd*)be, ops);
 	uint16_t cache_flags = ConstructFlags(ops);
-	image_content = ops->image_content;
 	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
 			     ops->morphs);
 	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
@@ -1734,6 +1778,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 	if (strongs_and_morph)
 		set_morph_order(imodule);
+
+	if (ops->variants_primary ||
+	    ops->variants_secondary ||
+	    ops->variants_all)
+		set_reading(imodule, ops);
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1784,11 +1833,11 @@ char DialogChapDisp::Display(SWModule &imodule)
 					    ? block_render((const char *)imodule)
 					    : (const char *)imodule);
 
-			if (image_content == 0)
+			if (ops->image_content == 0)
 				ClearImages((gchar *)text);
-			else if ((image_content == -1) &&	// "unknown"
+			else if ((ops->image_content == -1) &&	// "unknown"
 				 (strcasestr(text, "<img ") != NULL)) {
-				image_content = 1;		// now known.
+				ops->image_content = 1;		// now known.
 				main_save_module_options(imodule.Name(),
 							 "Image Content", 1);
 			}
@@ -1797,7 +1846,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 #endif
 
 		if (!cVerse.HeaderIsValid())
-		    CacheHeader(cVerse, imodule, image_content);
+		    CacheHeader(cVerse, imodule, ops->image_content);
 
 		if (cache_flags & ModuleCache::Headings)
 			swbuf.append(cVerse.GetHeader());
@@ -1901,9 +1950,12 @@ char DialogChapDisp::Display(SWModule &imodule)
 	else
 		swbuf.append("</font></body></html>");
 	
+#ifdef USE_GTKMOZEMBED
 	if (strongs_and_morph)
 		buf = g_strdup_printf("%d", curVerse);
-	else if (curVerse > display_boundary)
+	else	/* this is not dangling: connects to following "if" */
+#endif /* USE_GTKMOZEMBED */
+	if (curVerse > display_boundary)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
