@@ -42,17 +42,20 @@ uint16_t
 ConstructFlags(GLOBAL_OPS *ops)
 {
 	int flags = 0;
-	flags |= (ops->footnotes     ? Footnotes : 0);
-	flags |= (ops->greekaccents  ? GreekAccents : 0);
-	flags |= (ops->headings      ? Headings : 0);
-	flags |= (ops->hebrewcant    ? HebrewCantillation : 0);
-	flags |= (ops->hebrewpoints  ? HebrewVowels : 0);
-	flags |= (ops->lemmas        ? Lemmas : 0);
-	flags |= (ops->morphs        ? Morphology : 0);
-	flags |= (ops->words_in_red  ? RedWordsOfChrist : 0);
-	flags |= (ops->strongs       ? StrongsNumbers : 0);
-	flags |= (ops->scripturerefs ? Xrefs : 0);
-	flags |= (ops->image_content ? Images : 0);
+	flags |= (ops->footnotes          ? Footnotes : 0);
+	flags |= (ops->greekaccents       ? GreekAccents : 0);
+	flags |= (ops->headings           ? Headings : 0);
+	flags |= (ops->hebrewcant         ? HebrewCantillation : 0);
+	flags |= (ops->hebrewpoints       ? HebrewVowels : 0);
+	flags |= (ops->lemmas             ? Lemmas : 0);
+	flags |= (ops->morphs             ? Morphology : 0);
+	flags |= (ops->words_in_red       ? RedWordsOfChrist : 0);
+	flags |= (ops->strongs            ? StrongsNumbers : 0);
+	flags |= (ops->scripturerefs      ? Xrefs : 0);
+	flags |= (ops->image_content      ? Images : 0);
+	flags |= (ops->variants_all       ? VariantsAll : 0);
+	flags |= (ops->variants_primary   ? VariantsPrimary : 0);
+	flags |= (ops->variants_secondary ? VariantsSecondary : 0);
 	return flags;
 }
 

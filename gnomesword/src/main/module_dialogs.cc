@@ -909,7 +909,6 @@ void main_dialog_delete_note(gpointer data)
 
 void main_free_on_destroy(DIALOG_DATA * d)
 {
-	//GList *tmp = NULL;
 	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) d);
 	g_free(d->ops); 
 	g_free(d->key);
@@ -921,8 +920,10 @@ void main_free_on_destroy(DIALOG_DATA * d)
 		if(d->navbar.module_name)
 			g_free(d->navbar.module_name);
 #else
-		g_string_free(d->navbar.module_name,TRUE);
-		g_string_free(d->navbar.key,TRUE);
+		if (d->navbar.module_name)
+			g_string_free(d->navbar.module_name,TRUE);
+		if (d->navbar.key)
+			g_string_free(d->navbar.key,TRUE);
 #endif
 	if((BackEnd*)d->backend) {
 		BackEnd* be = (BackEnd*)d->backend;
