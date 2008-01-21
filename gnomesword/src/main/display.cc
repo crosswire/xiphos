@@ -769,32 +769,6 @@ set_morph_order(SWModule& imodule)
 }
 
 void
-set_reading(SWModule& imodule, GLOBAL_OPS *ops)
-{
-	for (FilterList::const_iterator it =
-		 imodule.getRenderFilters().begin();
-	     it != imodule.getRenderFilters().end();
-	     it++) {
-		OSISVariants *f = dynamic_cast<OSISVariants *>(*it);
-		if (f) {
-			f->setOptionValue(ops->variants_primary
-					  ? "Primary Reading"
-					  : (ops->variants_secondary
-					     ? "Secondary Reading"
-					     : "All Readings"));
-		}
-
-		ThMLVariants *g = dynamic_cast<ThMLVariants *>(*it);
-		if (g)
-			g->setOptionValue(ops->variants_primary
-					  ? "Primary Reading"
-					  : (ops->variants_secondary
-					     ? "Secondary Reading"
-					     : "All Readings"));
-	}
-}
-
-void
 GTKChapDisp::getVerseBefore(SWModule &imodule)
 {
 	gchar *utf8_key;
@@ -837,11 +811,6 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(*mod);
-
-		if (ops->variants_primary ||
-		    ops->variants_secondary ||
-		    ops->variants_all)
-			set_reading(*mod, ops);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -1030,11 +999,6 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		if (strongs_and_morph)
 			set_morph_order(*mod);
-
-		if (ops->variants_primary ||
-		    ops->variants_secondary ||
-		    ops->variants_all)
-			set_reading(*mod, ops);
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
@@ -1298,11 +1262,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 			     ops->morphs);
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-
-	if (ops->variants_primary ||
-	    ops->variants_secondary ||
-	    ops->variants_all)
-		set_reading(imodule, ops);
 
 	// when strongs/morph are on, the anchor boundary must be smaller.
 	gint display_boundary = (strongs_or_morph ? 1 : 2);
@@ -1778,11 +1737,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 	if (strongs_and_morph)
 		set_morph_order(imodule);
-
-	if (ops->variants_primary ||
-	    ops->variants_secondary ||
-	    ops->variants_all)
-		set_reading(imodule, ops);
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"

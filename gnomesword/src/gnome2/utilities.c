@@ -889,5 +889,57 @@ gchar * ncr_to_utf8(gchar * text)
 
 }
 
+//
+// for choosing variants, primary/secondary/all.
+// perversely, this routine is called twice.
+// it seems to be so that (first) old state can
+// be undone, then (second) with new state.
+// unfortunately, there is no argument provided which tells us so.
+// since we have nothing to undo, we simply ignore it.
+//
+void reading_selector(char *modname,
+		      char *key,
+		      DIALOG_DATA *dialog,
+		      GtkMenuItem *menuitem,
+		      gpointer user_data)
+{
+	static gboolean this_time = FALSE;
+	gchar *url;
+	gboolean primary = 0, secondary = 0, all = 0;
+
+	if (!this_time) {
+		this_time = TRUE;	// next time, we'll do it.
+		return;
+	}
+
+	switch ((int) user_data)
+	{
+	case 0:
+		primary = TRUE;  secondary = FALSE; all = FALSE;
+		break;
+	case 1:
+		primary = FALSE; secondary = TRUE;  all = FALSE;
+		break;
+	case 2:
+		primary = FALSE; secondary = FALSE; all = TRUE;
+		break;
+	default:
+		g_message("invalid variant %d\n", (int) user_data);
+		gui_generic_warning("GnomeSword: invalid internal variant");
+		break;
+	}
+
+	main_save_module_options(modname, "Primary Reading", primary);
+	main_save_module_options(modname, "Secondary Reading", secondary);
+	main_save_module_options(modname, "All Readings", all);
+
+	url = g_strdup_printf("sword://%s/%s", modname, key);
+	if (dialog)
+		main_dialogs_url_handler(dialog, url, TRUE);
+	else
+		main_url_handler(url, TRUE);
+	g_free(url);
+	this_time = FALSE;	// next time, ignore.
+}
 
 /******   end of file   ******/

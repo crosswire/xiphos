@@ -44,12 +44,21 @@ static void set_dialog_global_option(BackEnd *be,
 				     char *option,
 				     gboolean choice)
 {
-	//BackEnd* be = (BackEnd*)t->backend;	
 	SWMgr *mgr = be->get_display_mgr();
 	char *on_off;
 
 	on_off = gui_tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
+}
+
+
+static void set_dialog_global_variant(BackEnd *be,
+				      char *option,
+				      char *choice)
+{
+	SWMgr *mgr = be->get_display_mgr();
+
+	mgr->setGlobalOption(option, choice);
 }
 
 
@@ -64,6 +73,18 @@ static void set_global_option(int manager,
 	on_off = gui_tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
 	main_mgr->setGlobalOption(option, on_off);
+}
+
+
+static void set_global_variant(int manager,
+			       char *option,
+			       char *choice)
+{
+	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *main_mgr = backend->get_main_mgr();
+
+	mgr->setGlobalOption(option, choice);
+	main_mgr->setGlobalOption(option, choice);
 }
 
 
@@ -141,12 +162,15 @@ void main_dialog_set_global_options(gpointer backend,
 				 ops->headings);
 	set_dialog_global_option(b, "Words of Christ in Red",
 				 ops->words_in_red);
-	set_dialog_global_option(b, "Primary Reading",
-				 ops->variants_primary);
-	set_dialog_global_option(b, "Secondary Reading",
-				 ops->variants_secondary);
-	set_dialog_global_option(b, "All Readings",
-				 ops->variants_all);
+	if (ops->variants_primary)
+		set_dialog_global_variant(b, "Textual Variants", 
+					  "Primary Reading");
+	else if (ops->variants_secondary)
+		set_dialog_global_variant(b, "Textual Variants",
+					  "Secondary Reading");
+	else if (ops->variants_all)
+		set_dialog_global_variant(b, "Textual Variants",
+					  "All Readings");
 }
 
 
@@ -188,12 +212,15 @@ void main_set_global_options(GLOBAL_OPS * ops)
 			  ops->headings);
 	set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
-	set_global_option(ops->module_type, "Primary Reading",
-			  ops->variants_primary);
-	set_global_option(ops->module_type, "Secondary Reading",
-			  ops->variants_secondary);
-	set_global_option(ops->module_type, "All Readings",
-			  ops->variants_all);
+	if (ops->variants_primary)
+		set_global_variant(ops->module_type, "Textual Variants", 
+				   "Primary Reading");
+	else if (ops->variants_secondary)
+		set_global_variant(ops->module_type, "Textual Variants",
+				   "Secondary Reading");
+	else if (ops->variants_all)
+		set_global_variant(ops->module_type, "Textual Variants",
+				   "All Readings");
 }
 
 
