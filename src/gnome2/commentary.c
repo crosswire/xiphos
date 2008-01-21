@@ -441,7 +441,8 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 			settings.CommWindowModule:settings.book_mod);*/
 	cipher_key = gui_add_cipher_key(settings.CommWindowModule, cipher_old);
 	if (cipher_key) 
-		main_display_commentary(settings.CommWindowModule, settings.currentverse);
+		main_display_commentary(settings.CommWindowModule,
+					settings.currentverse);
 }
 
 static void
@@ -590,24 +591,13 @@ static void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 
 static void
-on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_reading_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-
-}
-
-
-static void
-on_primary_reading_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
-
-static void
-on_secondary_reading_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
-{
-
+	reading_selector(settings.CommWindowModule,
+			 settings.currentverse,
+			 NULL,
+			 menuitem,
+			 user_data);
 }
 
 
@@ -761,9 +751,9 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	
 	gchar *label = g_strdup_printf("%s, %s",settings.currentverse,
 					settings.CommWindowModule);
-
 	gui_bookmark_dialog(label,
-			settings.CommWindowModule, settings.currentverse);
+			    settings.CommWindowModule,
+			    settings.currentverse);
 	g_free(label);	
 	
 }
@@ -814,21 +804,27 @@ static GnomeUIInfo edit3_menu_uiinfo[] = {
 
 static GnomeUIInfo all_readings_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("All Readings"),
-	 NULL,
-	 (gpointer) on_all_readings_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL},
-	{
 	 GNOME_APP_UI_ITEM, N_("Primary Reading"),
 	 NULL,
-	 (gpointer) on_primary_reading_activate, NULL, NULL,
+	 (gpointer) on_reading_select, 
+	 (gpointer) 0,
+	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Secondary Reading"),
 	 NULL,
-	 (gpointer) on_secondary_reading_activate, NULL, NULL,
+	 (gpointer) on_reading_select,
+	 (gpointer) 1,
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("All Readings"),
+	 NULL,
+	 (gpointer) on_reading_select,
+	 (gpointer) 2,
+	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
@@ -1051,9 +1047,7 @@ void gui_create_pm_commentary(void)
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (all_readings_uiinfo[0].widget),
-				       TRUE);
+
 	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	// words_in_red
 	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	// strongs_numbers
 	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	// morph_tags
@@ -1066,8 +1060,7 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	// headings
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
-	//gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module"
-	//gtk_widget_hide(menu1_uiinfo[8].widget);
+
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// unlock
 	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
 	gtk_widget_hide(menu1_uiinfo[11].widget);	// dump pers.comm
@@ -1180,9 +1173,17 @@ void gui_create_pm_commentary(void)
 	}
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);
-		gtk_widget_show(all_readings_uiinfo[0].widget);	// all_readings
-		gtk_widget_show(all_readings_uiinfo[1].widget);	// primary_reading
-		gtk_widget_show(all_readings_uiinfo[2].widget);	// secondary_reading
+
+		gtk_widget_show(all_readings_uiinfo[0].widget);	// primary
+		gtk_widget_show(all_readings_uiinfo[1].widget);	// secondary
+		gtk_widget_show(all_readings_uiinfo[2].widget);	// all
+
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[0].
+				    widget)->active = ops->variants_primary;
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[1].
+				    widget)->active = ops->variants_secondary;
+		GTK_CHECK_MENU_ITEM(all_readings_uiinfo[2].
+				    widget)->active = ops->variants_all;
 	}
 	if (ops->image_content != -1) {
 		gtk_widget_show(module_options_menu_uiinfo[13].widget);
