@@ -25,6 +25,7 @@ extern "C" {
 	
 #include <gnome.h>
 #include "main/configs.h"
+#include "main/module_dialogs.h"
 
 gint gui_of2tf(const gchar * on_off);
 gchar *gui_tf2of(gint true_false);
@@ -51,7 +52,12 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 void gui_remove_menu_items(gchar *startitem, gint numberofitems);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 				GCallback callback);
-gchar * ncr_to_utf8(gchar * text);
+gchar *ncr_to_utf8(gchar * text);
+void reading_selector(char *modname,
+		      char *key,
+		      DIALOG_DATA *dialog,
+		      GtkMenuItem *menuitem,
+		      gpointer user_data);
 	
 #ifdef __cplusplus
 }

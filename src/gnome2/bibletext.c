@@ -49,6 +49,7 @@
 #include "gui/font_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/tabbed_browser.h"
+#include "gui/utilities.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"
@@ -769,36 +770,14 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   settings.currentverse);
 }
 
-void
-on_reading_select(GtkMenuItem * menuitem, gpointer user_data)
+static void
+on_reading_select(GtkMenuItem *menuitem, gpointer user_data)
 {
-	gchar *modname = settings.MainWindowModule;
-	gchar *url = g_strdup_printf("sword://%s/%s",
-				     modname, settings.currentverse);
-	switch ((int) user_data)
-	{
-	case 0:	/* primary */
-		main_save_module_options(modname, "Primary Reading", 1);
-		main_save_module_options(modname, "Secondary Reading", 0);
-		main_save_module_options(modname, "All Readings", 0);
-		break;
-	case 1:	/* secondary */
-		main_save_module_options(modname, "Primary Reading", 0);
-		main_save_module_options(modname, "Secondary Reading", 1);
-		main_save_module_options(modname, "All Readings", 0);
-		break;
-	case 2:	/* all */
-		main_save_module_options(modname, "Primary Reading", 0);
-		main_save_module_options(modname, "Secondary Reading", 0);
-		main_save_module_options(modname, "All Readings", 1);
-		break;
-	default:
-		g_message("invalid variant %d\n", (int) user_data);
-		gui_generic_warning("GnomeSword: invalid internal variant");
-		break;
-	}
-	main_url_handler(url, TRUE);		
-	g_free(url);
+	reading_selector(settings.MainWindowModule,
+			 settings.currentverse,
+			 NULL,
+			 menuitem,
+			 user_data);
 }
 
 
@@ -904,12 +883,12 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 static 
 void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
-	gchar *label = g_strdup_printf("%s, %s",settings.currentverse,
-					settings.MainWindowModule);
+	gchar *label = g_strdup_printf("%s, %s",
+				       settings.currentverse,
+				       settings.MainWindowModule);
 	gui_bookmark_dialog(label,
-			    settings.MainWindowModule, settings.currentverse);
-	
-	
+			    settings.MainWindowModule,
+			    settings.currentverse);
 	g_free(label);	
 }
 
@@ -1182,11 +1161,6 @@ void create_menu(void)
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
-
-	// remove this next line?  or leave it as a default?
-	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (all_readings_uiinfo[0].widget),
-				       TRUE);
 
 	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	// words_in_red
 	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	// strongs_numbers
