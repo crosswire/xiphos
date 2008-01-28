@@ -66,18 +66,17 @@ void gui_attach_detach_sidebar(void)
 		settings.showshortcutbar = TRUE;
 		gtk_widget_show(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
-		gtk_paned_set_position(GTK_PANED
-				     (widgets.hpaned),
-				     biblepanesize);
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
+				       biblepanesize);
 		gtk_widget_show(widgets.dock_sb);
 	} else {
 		settings.docked = TRUE;
 		biblepanesize =
 		    (settings.gs_width - settings.sidebar_width) / 2;
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
-				     settings.sidebar_width);
+				       settings.sidebar_width);
 		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-				     biblepanesize);
+				       biblepanesize);
 		gtk_widget_reparent(widgets.shortcutbar,
 				    widgets.epaned);
 		gtk_widget_destroy(widgets.dock_sb);
@@ -105,7 +104,7 @@ void gui_attach_detach_sidebar(void)
 static void on_dialog_destroy(GtkObject *object, gpointer user_data)
 {
 	/* we need the if to prevent a loop */
-	if(!settings.docked)
+	if (!settings.docked)
 		gui_attach_detach_sidebar();
 }
 
@@ -135,7 +134,7 @@ GtkWidget* create_sidebar_dialog(void)
 	gtk_window_set_title(GTK_WINDOW(dlgDock), _("Sidebar"));
 	gtk_window_set_resizable(GTK_WINDOW(dlgDock), TRUE);
 	gtk_widget_set_usize(dlgDock, settings.sidebar_width,
-			settings.gs_hight);
+			     settings.gs_hight);
 
 	vbox_dock = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dock);
