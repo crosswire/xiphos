@@ -1,3 +1,7 @@
+2008-02-08  karl <charcoal@users.sf.net>
+
+	* fix failed farsi numeric glitch in src/main/sidebar.cc.
+
 2008-01-21  karl <charcoal@users.sf.net>
 
 	* finish fix of pri/sec/all reading apparatus.

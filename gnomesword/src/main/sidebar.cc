@@ -434,7 +434,7 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 
 	for (i = 1; i < (chapters + 1); i++) {
 		gchar *num = main_format_number(i);
-		gchar *buf = g_strdup_printf("%s %s", _("chapter"), i);
+		gchar *buf = g_strdup_printf("%s %s", _("chapter"), num);
 		g_free(num);
 		gchar *key = g_strdup_printf("chapter://%s/%s %d:1",
 					     work_buf[2],
