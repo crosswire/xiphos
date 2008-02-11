@@ -10,7 +10,7 @@ Package: gnomesword
 Architecture: any
 Section: gnome
 Provides: sword-frontend
-Depends:firefox, ${shlibs:Depends}
+Depends:firefox, gtkhtml3.8, ${shlibs:Depends}
 Description: Bible study with GNOME
  A bible study program for GNOME using the SWORD library.
  Features:

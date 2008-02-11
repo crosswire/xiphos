@@ -3,14 +3,14 @@ Build-Depends: autotools-dev, quilt, patchutils (>= 0.2.25), cdbs (>= 0.4.27-1),
 Build-Conflicts: libgtkhtml3.2-dev, libgtkhtml3.6-dev
 Section: gnome
 Priority: optional
-Maintainer: Daniel Glassey <wdg@debian.org>
+Maintainer: Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>
 Standards-Version: 3.6.2.0
 
 Package: gnomesword
 Architecture: any
 Section: gnome
 Provides: sword-frontend
-Depends: firefox, ${shlibs:Depends}
+Depends: firefox, gtkhtml3.8, ${shlibs:Depends}
 Description: Bible study with GNOME
  A bible study program for GNOME using the SWORD library.
  Features:
