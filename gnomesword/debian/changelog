@@ -1,9 +1,9 @@
-gnomesword (2.3.2-pre3svn-gutsy1) gutsy; urgency=low
+gnomesword (2.3.3-1gutsy) gutsy; urgency=low
 
   * Non-maintainer upload.
-  * 2.3.2-pre3svn release
+  * 2.3.3 release
 
- -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Sat, 12 Jan 2008 22:46:40 +0200
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Sat, 20 Jan 2008 20:25:32 +0200
 
 gnomesword (2.2.3-1) unstable; urgency=low
 
