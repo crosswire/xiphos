@@ -636,7 +636,7 @@ void create_mainwindow(void)
 			  _("GnomeSword - Bible Study Software"));
 	gtk_object_set_data(GTK_OBJECT(widgets.app),
 			    "widgets.app", widgets.app);
-	gtk_widget_set_size_request(widgets.app, 680, 480);
+	gtk_widget_set_size_request(widgets.app, 680, 425);
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 	gnome_window_icon_set_default_from_file
