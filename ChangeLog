@@ -1,3 +1,8 @@
+2008-02-11  dom <domcox@users.sf.net>
+
+	* window minimum size reduced from 800x480 to 800x425, 
+	  thus allowing gs to run on an eeepc.
+
 2008-02-08  karl <charcoal@users.sf.net>
 
 	* fix failed farsi numeric glitch in src/main/sidebar.cc.
