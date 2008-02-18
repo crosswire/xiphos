@@ -241,6 +241,16 @@ struct _settings {
 	/* signal id dictionary combo changed */
 	long signal_id;
 	
+	/* mod mgr local or remote  */
+	int mod_mgr_source; /* 0 = local, 1 = remote */
+	/* mod mgr local sorce  */
+	int mod_mgr_local_source_index;
+	/* mod mgr remote source  */
+	int mod_mgr_remote_source_index;
+	/* mod mgr destination  */
+	int mod_mgr_destination; /* if = 0 destination is .sword 
+								 else sword directory  */
+	
 };
 
 extern SETTINGS settings;
