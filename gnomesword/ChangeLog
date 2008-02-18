@@ -1,3 +1,7 @@
+2008-02-18  terry <tbiggs@users.sourceforge.net>
+
+	* mod mgr now remembers the settings on the configure page
+
 2008-02-11  dom <domcox@users.sf.net>
 
 	* window minimum size reduced from 800x480 to 800x425, 
