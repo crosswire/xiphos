@@ -1652,12 +1652,30 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 		        g_free(remote_source);
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
+		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "1");
+		
 	} else {
 		gtk_widget_hide(button1);
 		gtk_widget_hide(progressbar_refresh);
+		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "0");
 	}
+	settings.mod_mgr_source = togglebutton->active;
+	xml_save_settings_doc(settings.fnconfigure);	
 }
 
+
+void on_radiobutton4_toggled(GtkToggleButton * togglebutton,
+			     gpointer user_data)
+{
+	if (togglebutton->active) {
+		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "1");
+		
+	} else {
+		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "0");
+	}
+	settings.mod_mgr_source = togglebutton->active;
+	xml_save_settings_doc(settings.fnconfigure);	
+}
 
 /******************************************************************************
  * Name
@@ -2462,6 +2480,23 @@ void setup_dialog_action_area(GtkDialog * dialog)
 	
 }
 
+static gint set_controls_to_last_use(void)
+{
+	/* local or remote source */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton2),
+								  			settings.mod_mgr_source);
+	/* local source */
+	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry1),
+							  	settings.mod_mgr_local_source_index);
+	/* remote source */
+	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry2),
+							  	settings.mod_mgr_remote_source_index);
+	/* destination */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton4),
+								  			settings.mod_mgr_destination);
+	
+}
+
 static void setup_ui_labels()
 {
 
@@ -2503,8 +2538,27 @@ static void setup_ui_labels()
 
 
 static void
+on_comboboxentry_local_changed(GtkComboBox *combobox, gpointer user_data)
+{
+	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry1));
+	settings.mod_mgr_local_source_index = index;
+	gchar *index_str = g_strdup_printf("%d",index);
+	xml_set_value("GnomeSword", "modmgr", "mod_mgr_local_source_index", index_str);	
+	xml_save_settings_doc(settings.fnconfigure);
+	g_free(index_str);
+}
+
+static void
 on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 {
+	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry2));
+	settings.mod_mgr_remote_source_index = index;
+	gchar *index_str = g_strdup_printf("%d",index);
+	g_message("index = %d index_str = %s",index,index_str);
+	xml_set_value("GnomeSword", "modmgr", "mod_mgr_remote_source_index", index_str);
+	xml_save_settings_doc(settings.fnconfigure);	
+	g_free(index_str);
+	
 	if (remote_source)
 		g_free(remote_source);
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
@@ -2619,22 +2673,27 @@ GtkWidget *create_module_manager_dialog(gboolean first_run)
 	set_combobox(GTK_COMBO_BOX(combo_entry1));
 	combo_entry2 = glade_xml_get_widget (gxml, "comboboxentry2"); /* remote source */
 	set_combobox(GTK_COMBO_BOX(combo_entry2));
-	g_signal_connect ((gpointer) combo_entry2, "changed",
-                    G_CALLBACK (on_comboboxentry_remote_changed),
-                    NULL);
 
 	/* radio buttons */
 	radiobutton_source = glade_xml_get_widget (gxml, "radiobutton1"); /* local */
 	radiobutton2 = glade_xml_get_widget (gxml, "radiobutton2"); /* remote */
 	radiobutton_dest = glade_xml_get_widget (gxml, "radiobutton3"); /* homedir */
 	radiobutton4 = glade_xml_get_widget (gxml, "radiobutton4"); /* homedir */
+	setup_ui_labels();
+	set_controls_to_last_use();
 	g_signal_connect(radiobutton2, "toggled",
 			 G_CALLBACK(on_radiobutton2_toggled), NULL);
+	g_signal_connect(radiobutton4, "toggled",
+			 G_CALLBACK(on_radiobutton4_toggled), NULL);
+	g_signal_connect ((gpointer) combo_entry1, "changed",
+                    G_CALLBACK (on_comboboxentry_local_changed),
+                    NULL);
+	g_signal_connect ((gpointer) combo_entry2, "changed",
+                    G_CALLBACK (on_comboboxentry_remote_changed),
+                    NULL);
 	if (first_run) 
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);	
 	
-	setup_ui_labels();
-		
 	return dialog;
 }
 
