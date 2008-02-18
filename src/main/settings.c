@@ -357,7 +357,38 @@ void load_settings_structure(void)
 //	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
 	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
 
-
+	/* mod mgr stuff */ 
+	if(xml_get_value("modmgr", "mod_mgr_source"))
+		settings.mod_mgr_source = atoi(xml_get_value("modmgr", "mod_mgr_source"));
+	else {
+		xml_add_new_section_to_settings_doc("modmgr");
+		xml_add_new_item_to_section("modmgr", "mod_mgr_source", "1");
+		settings.mod_mgr_source = 1;
+	}	 
+	if(xml_get_value("modmgr", "mod_mgr_destination"))
+		settings.mod_mgr_destination = atoi(xml_get_value("modmgr", "mod_mgr_destination"));
+	else {
+		xml_add_new_item_to_section("modmgr", "mod_mgr_destination", "0");
+		settings.mod_mgr_destination = 0;
+	}		
+	if(xml_get_value("modmgr", "mod_mgr_local_source_index"))
+		settings.mod_mgr_local_source_index = 
+			atoi(xml_get_value("modmgr", "mod_mgr_local_source_index"));
+	else {
+		xml_add_new_item_to_section("modmgr", "mod_mgr_local_source_index", "0");
+		settings.mod_mgr_local_source_index = 0;
+	}		
+	if(xml_get_value("modmgr", "mod_mgr_remote_source_index"))
+		settings.mod_mgr_remote_source_index =
+			atoi(xml_get_value("modmgr", "mod_mgr_remote_source_index"));
+	else {
+		xml_add_new_item_to_section("modmgr", "mod_mgr_remote_source_index", "0");
+		settings.mod_mgr_remote_source_index = 0;
+	}	
+	
+	/* end mod mgr stuff */
+	
+	
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 

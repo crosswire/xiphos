@@ -1135,6 +1135,20 @@ void xml_free_settings_doc(void)
 	xmlFreeDoc(xml_settings_doc);
 }
 
+void xml_add_new_section_to_settings_doc(char * section)
+{
+	xmlNodePtr root_node = NULL;
+	xmlNodePtr section_node = NULL;
+	
+	root_node = xmlDocGetRootElement(xml_settings_doc);
+	if (root_node == NULL) {
+		fprintf(stderr, _("empty document \n"));
+		return NULL;
+	}	
+	section_node = xmlNewChild(root_node, NULL,
+				   (const xmlChar *) section, NULL);
+}
+
 
 /******************************************************************************
  * Name
