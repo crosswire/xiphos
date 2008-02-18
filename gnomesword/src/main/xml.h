@@ -27,6 +27,7 @@ extern "C" {
 #endif
 #include <libxml/parser.h>
 
+void xml_add_new_section_to_settings_doc(char * section);
 void xml_new_bookmark_file(void);	
 xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);	
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
