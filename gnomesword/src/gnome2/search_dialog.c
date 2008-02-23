@@ -2232,6 +2232,17 @@ void verses_drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
         GS_print((".\n"));
 }
 
+
+void gui_set_drop_target(GtkWidget * target)
+{
+	  gtk_drag_dest_set(target,              /* widget that will accept a drop */
+               	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
+               	| GTK_DEST_DEFAULT_HIGHLIGHT,
+               	target_list,            /* lists of target to support */
+               	n_targets,              /* size of list */
+               	GDK_ACTION_COPY);         /* what to do with data after dropped */
+}
+
 /******************************************************************************
  * Name
  *   _setup_dnd
@@ -2250,6 +2261,7 @@ void verses_drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
 
 void _setup_dnd(void)
 {
+//#ifndef USE_GTKMOZEMBED
 	GdkModifierType start_button_mask;
 	GdkDragAction actions;
 	GtkTargetEntry target_entry;	        
@@ -2358,9 +2370,9 @@ void _setup_dnd(void)
                 G_CALLBACK (verses_drag_data_get_handl), NULL);
         g_signal_connect (search1.listview_verses, "drag-begin",
                 G_CALLBACK (verses_drag_begin_handl), NULL);
+//#endif
                 
 }
-
 
 /******************************************************************************
  * Name
