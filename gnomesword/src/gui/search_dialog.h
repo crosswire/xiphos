@@ -106,7 +106,8 @@ extern gchar *verse_selected;
 
 
 void gui_create_search_dialog(void);
-	
+void gui_set_drop_target(GtkWidget * target);
+
 #ifdef __cplusplus
 }
 #endif
