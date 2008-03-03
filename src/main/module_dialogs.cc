@@ -1376,9 +1376,9 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 	
 	if(!strcmp(t->mod_name,"NASB")) {
 		if(!strcmp(type,"Greek")) 
-			modbuf = "NASBgreek";
+			modbuf = "NASGreek";
 		else 
-			modbuf = "NASBhebrew";
+			modbuf = "NASHebrew";
 			
 	} else {
 		if(!strcmp(type,"Greek")) 
