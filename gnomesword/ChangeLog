@@ -1,3 +1,8 @@
+2008-03-03  karl <charcoal@users.sf.net>
+
+	* re-fix #1864007 NASB's lexicon refs need adjustment, this time
+	  based on DM's actual test release -- should be final (I hope).
+
 2008-02-23  terry <tbiggs@users.sourceforge.net>
 
 	FIXED: bug 1747281 2.3: can't drag-n-drop from adv.search I think
