@@ -89,6 +89,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	char *sword_dir = NULL;
 	char *gs_old = NULL;
 	char *tabs = NULL;
+	char *tmp = NULL;
 	char *env;
 
 	settings.first_run = FALSE;
@@ -215,6 +216,22 @@ int settings_init(int new_configs, int new_bookmarks)
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
 	}
+	
+	/* check for template.pad file for studypad */
+	/* set fnconfigure to gSwordDir and settings.xml */
+	tmp = g_new(char, strlen(settings.gSwordDir) +
+				     strlen("template.pad") + 2);
+	sprintf(tmp, "%s/%s", settings.gSwordDir,
+		"template.pad");
+	
+	/* if template.pad does not exist create it */
+	if ((access(tmp, F_OK) == -1)) {
+		g_file_set_contents(tmp, " ", strlen(" "), NULL);
+	}
+	
+	
+	
+	
 
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
