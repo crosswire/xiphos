@@ -881,8 +881,10 @@ gchar * ncr_to_utf8(gchar * text)
   		  		if (strlen(result)>count)
   		  			g_string_append(newtext, result+count+2);
   			}
-  			else
+  			else {
+				g_string_append_c(newtext, '&'); /* puts the '&' back for other escape codes */
   				g_string_append(newtext, result);
+			}
   		}
    }
 	return g_string_free (newtext, FALSE);
