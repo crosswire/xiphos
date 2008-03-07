@@ -1143,7 +1143,7 @@ void xml_add_new_section_to_settings_doc(char * section)
 	root_node = xmlDocGetRootElement(xml_settings_doc);
 	if (root_node == NULL) {
 		fprintf(stderr, _("empty document \n"));
-		return NULL;
+		return;
 	}	
 	section_node = xmlNewChild(root_node, NULL,
 				   (const xmlChar *) section, NULL);

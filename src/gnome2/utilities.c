@@ -912,7 +912,7 @@ void reading_selector(char *modname,
 		return;
 	}
 
-	switch ((int) user_data)
+	switch ((int) GPOINTER_TO_INT(user_data))
 	{
 	case 0:
 		primary = TRUE;  secondary = FALSE; all = FALSE;
@@ -924,7 +924,7 @@ void reading_selector(char *modname,
 		primary = FALSE; secondary = FALSE; all = TRUE;
 		break;
 	default:
-		g_message("invalid variant %d\n", (int) user_data);
+		g_message("invalid variant %d\n", (int) GPOINTER_TO_INT(user_data));
 		gui_generic_warning("GnomeSword: invalid internal variant");
 		break;
 	}
