@@ -5,7 +5,7 @@
 	</commands>
 	<menu>
 		<submenu name="File" _label="_File">
-			<menuitem name="OpenFile" verb="" _label="Open" _tip="Open open a file in Studypad" pixtype="stock" pixname="Open"/>
+			<menuitem name="OpenFile" verb="" _label="Open" _tip="Open the file in Studypad" pixtype="stock" pixname="Open"/>
 			<menuitem name="SaveFile" verb="" _label="Save" _tip="Save the current file" pixtype="stock" pixname="Save"/>
 			<separator/>
 			<menuitem name="NewDoc" verb="" _label="New Document" _tip="Create a new document" pixtype="stock" pixname="New"/>

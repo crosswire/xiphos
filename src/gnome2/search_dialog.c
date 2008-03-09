@@ -2261,7 +2261,6 @@ void gui_set_drop_target(GtkWidget * target)
 
 void _setup_dnd(void)
 {
-//#ifndef USE_GTKMOZEMBED
 	GdkModifierType start_button_mask;
 	GdkDragAction actions;
 	GtkTargetEntry target_entry;	        
@@ -2276,10 +2275,10 @@ void _setup_dnd(void)
                 
         gtk_drag_source_set( search1.mod_sel_dlg_treeview,  /* widget will be drag-able */
 	        		GDK_BUTTON1_MASK,       /* modifier that will start a drag */
-                		target_list,            /* lists of target to support */
-                		n_targets,              /* size of list */
-                		GDK_ACTION_COPY);        /* what to do with data after dropped */
-	
+                	target_list,            /* lists of target to support */
+                	n_targets,              /* size of list */
+                	GDK_ACTION_COPY);        /* what to do with data after dropped */
+
         gtk_drag_dest_set(widgets.html_text,              /* widget that will accept a drop */
                 	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
                 	| GTK_DEST_DEFAULT_HIGHLIGHT,
@@ -2310,11 +2309,10 @@ void _setup_dnd(void)
 
 	gtk_drag_source_set(search1.listview_verses,  /* widget will be drag-able */
 	        		GDK_BUTTON1_MASK,       /* modifier that will start a drag */
-                		target_list,            /* lists of target to support */
-                		n_targets,              /* size of list */
-                		GDK_ACTION_COPY);        /* what to do with data after dropped */
-        
-	       
+                	target_list,            /* lists of target to support */
+                	n_targets,              /* size of list */
+                	GDK_ACTION_COPY);        /* what to do with data after dropped */
+	 
         /* All possible destination signals */
         g_signal_connect (search1.listview_modules, "drag-data-received", 
                 G_CALLBACK(drag_data_received_handl), NULL);
@@ -2340,26 +2338,26 @@ void _setup_dnd(void)
                 
         g_signal_connect (search1.mod_sel_dlg_treeview, "drag-end",
                 G_CALLBACK (drag_end_handl), NULL); 
-      
-      /* All possible destination signals verses*/
+     
+      //* All possible destination signals verses 
         g_signal_connect (widgets.html_text, "drag-data-received", 
                 G_CALLBACK(verses_drag_data_received_handl), NULL);
         g_signal_connect (widgets.html_text, "drag-drop",
                 G_CALLBACK (verses_drag_drop_handl), NULL); 
       
-      /* All possible destination signals verses*/
+      //* All possible destination signals verses 
         g_signal_connect (widgets.html_comm, "drag-data-received", 
                 G_CALLBACK(verses_drag_data_received_handl), NULL);
         g_signal_connect (widgets.html_comm, "drag-drop",
                 G_CALLBACK (verses_drag_drop_handl), NULL); 
       
-      /* All possible destination signals verses*/
+      //* All possible destination signals verses 
         g_signal_connect (widgets.html_dict, "drag-data-received", 
                 G_CALLBACK(verses_drag_data_received_handl), NULL);
         g_signal_connect (widgets.html_dict, "drag-drop",
                 G_CALLBACK (verses_drag_drop_handl), NULL); 
       
-      /* All possible destination signals verses*/
+      //* All possible destination signals verses
         g_signal_connect (widgets.html_book, "drag-data-received", 
                 G_CALLBACK(verses_drag_data_received_handl), NULL);
         g_signal_connect (widgets.html_book, "drag-drop",
@@ -2370,8 +2368,6 @@ void _setup_dnd(void)
                 G_CALLBACK (verses_drag_data_get_handl), NULL);
         g_signal_connect (search1.listview_verses, "drag-begin",
                 G_CALLBACK (verses_drag_begin_handl), NULL);
-//#endif
-                
 }
 
 /******************************************************************************

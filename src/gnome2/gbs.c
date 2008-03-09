@@ -657,6 +657,32 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 }
 
 
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void (GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void edit_prayer_list(GtkMenuItem * menuitem, gpointer user_data)
+{
+#ifdef USE_GTKHTML38
+	//editor_create_new((gchar *)user_data,(gchar *)settings.currentverse,TRUE);
+#else
+	//main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
+#endif
+}
+
+
 static GnomeUIInfo view_text_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("item1"),
@@ -693,7 +719,7 @@ static GnomeUIInfo edit3_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_COPY_ITEM(on_copy2_activate, NULL),
 	GNOMEUIINFO_MENU_FIND_ITEM(on_find1_activate, NULL),
 	{
-	 GNOME_APP_UI_SUBTREE, N_("Note"),
+	 GNOME_APP_UI_SUBTREE, N_("Prayer List"),
 	 NULL,
 	 note_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
@@ -907,7 +933,7 @@ static void create_menu(GdkEventButton * event)
 	GtkWidget *usecurrent;
 	GtkWidget *view_menu;
 	GtkWidget *separator;
-	GtkWidget *edit_per_menu;
+	GtkWidget *edit_pl_menu;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = settings.book_mod;
 	GLOBAL_OPS *ops = main_new_globals(mod_name);
@@ -940,6 +966,15 @@ static void create_menu(GdkEventButton * event)
 	
 	gui_add_mods_2_gtk_menu(GBS_DESC_LIST, view_menu,
 				(GCallback) on_view_mod_activate);
+	
+/*	
+	edit_pl_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
+				  edit_pl_menu);
+				  
+	gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_pl_menu,
+				(GCallback) edit_prayer_list);
+*/	
 								
 	
 	lookup_selection_menu = gtk_menu_new();
