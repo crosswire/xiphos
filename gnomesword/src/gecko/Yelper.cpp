@@ -325,6 +325,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 	nsresult result;
 	PRBool aShiftKey;
 	nsIDOMEventTarget *aCurrentTarget;
+	GS_message(("mouse over pane: %d",pane));
 	nsIDOMMouseEvent *event = (nsIDOMMouseEvent*) aEvent;	
 	//DIALOG_DATA *dialog = (DIALOG_DATA *)data;
 	event->GetShiftKey(&aShiftKey);
@@ -335,7 +336,6 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
-	GS_message(("pane: %d",pane));
 	main_clear_viewer();
 	/*
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
@@ -444,7 +444,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	//g_message("domEvent->GetType: %s",mybuf);
+	GS_message(("domEvent->GetType: %s",mybuf));
 #endif
 	
 	PRUint16 button = 2;

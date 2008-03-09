@@ -41,7 +41,7 @@
 #include "main/lists.h"
 #include "main/navbar.h"
 #include "main/navbar_book.h"
-#include "main/prayer_list.h"
+#include "main/sword_treekey.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/url.hh"

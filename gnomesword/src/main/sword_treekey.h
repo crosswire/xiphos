@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * prayer_list.h - 
+ * sword_treekey.h -  treekey stuff for book editor
  *
  * Copyright (C) 2007 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
-#ifndef _PRAYER_LIST_HH
-#define _PRAYER_LIST_HH
+#ifndef _SWORD_TREEKEY_HH
+#define _SWORD_TREEKEY_HH
 
 #ifdef __cplusplus
 extern "C"
@@ -36,4 +36,4 @@ gint main_prayer_list_new(char * list_name);
 }
 #endif
 
-#endif /* _PRAYER_LIST_H */
+#endif /* _SWORD_TREEKEY_HH */

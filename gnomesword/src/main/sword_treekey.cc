@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * prayer_list.cc - 
+ * sword_treekey.cc - treekey stuff for book editor
  *
- * Copyright (C) 2007 GnomeSword Developer Team
+ * Copyright (C) 2008 GnomeSword Developer Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 #include <string>
 #include <stdio.h>
 
-#include "main/prayer_list.h"
+#include "main/sword_treekey.h"
 #include "main/settings.h"
 #include "main/sword.h"
 
@@ -230,7 +230,7 @@ gint main_prayer_list_new(gchar * list_name)
 	
 	delete treeKey;
 }
-
+/*
 void main_prayer_list_add_child(gchar * mod_name)
 {
 	backend->set_module(mod_name);
@@ -241,4 +241,9 @@ void main_prayer_list_add_child(gchar * mod_name)
 	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 	root.root(); printTree(root, treeKey);
 	
+}
+*/
+void main_load_book_tree_in_editor(char * book)
+{
+    
 }

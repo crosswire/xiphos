@@ -8,7 +8,7 @@
 	</commands>
 	<menu>
 		<submenu name="File" _label="_File">
-			<menuitem name="SaveNote" verb="" _label="_Save (Personal Comment)" _tip="Save using the PersistStream interface" pixtype="stock" pixname="Save"/>
+			<menuitem name="SaveNote" verb="" _label="_Save (Personal Comment)" _tip="Save the current note" pixtype="stock" pixname="Save"/>
 			<separator/>
 			<menuitem name="DeleteNote" verb="" _label="_Delete Personal Comment" _tip="Delete the current note" pixtype="stock" pixname="gtk-delete"/>
 			<separator/>

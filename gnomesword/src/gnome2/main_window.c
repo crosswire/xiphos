@@ -868,10 +868,10 @@ void create_mainwindow(void)
 				    (widgets.notebook_comm_book), 
 				    0),
 				   label);
-				   
+			   
 	/*
 	 * book pane
-         */			   
+     */   
 	box_book = gui_create_book_pane();
         gtk_container_add(GTK_CONTAINER(widgets.notebook_comm_book),
 			  box_book);
@@ -888,7 +888,7 @@ void create_mainwindow(void)
 				   
 	/*
 	 * dict/lex
-         */
+     */
 	widgets.box_dict = gui_create_dictionary_pane(); 
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned2),
 			widgets.box_dict, TRUE, TRUE);
