@@ -41,6 +41,7 @@
 
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/sword_treekey.h"
 #include "main/xml.h"
 
 #include "gui/dialog.h"
@@ -160,8 +161,10 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	text = bonobo_stream_mem_get_buffer(BONOBO_STREAM_MEM(smem));
 	buf = strdup(text);
 	// converts encoding from ncr to utf8
-	text = ncr_to_utf8(buf);
+	if(g_strstr_len(buf, strlen(buf), "&#") != NULL)
+		text = ncr_to_utf8(buf);
 	g_free(buf);
+	
 	GS_message((text));
 	main_save_note(ed->module, ed->key, text);
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
@@ -425,6 +428,7 @@ static void open_new_document_cb(GtkWidget * widget, gpointer data)
 
 	template =
 	    g_strdup_printf("%s/template.pad", settings.gSwordDir);
+	
 	if (g_file_test(template, G_FILE_TEST_EXISTS)) {
 		if (e->filename)
 			g_free(e->filename);
@@ -433,7 +437,7 @@ static void open_new_document_cb(GtkWidget * widget, gpointer data)
 		g_free(e->filename);
 		e->filename = NULL;
 		GS_message((template));
-	}
+	} 
 	g_free(template);
 	e->is_changed = TRUE;
 }
@@ -624,6 +628,51 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		
 	
 	title = g_strdup_printf("%s - %s", e->module, e->key);
+	text = main_get_raw_text((gchar *) e->module, (gchar *) e->key);
+	if(strlen(text)) 
+		load_through_persist_stream(text, e);
+	else
+		load_through_persist_stream("", e); /* clear editor if no text */
+	
+	change_window_title(e->window, title);
+    	if(e->type == NOTE_EDITOR) {
+#ifdef OLD_NAVBAR
+		main_navbar_set(e->navbar, e->key);
+#else	
+		main_navbar_versekey_set(e->navbar, e->key);
+#endif
+	}
+    	
+	if (text)
+		g_free(text);
+	if (title)
+		g_free(title);
+}
+
+
+void
+editor_load_book(EDITOR * e, const gchar * module_name,
+		 const gchar * key)
+{
+	gchar *title;
+	gchar *text;
+	
+	if (editor_is_dirty(e))
+		save_through_persist_stream_cb(NULL, e);
+	
+	if (module_name) {
+		if (e->module)
+			g_free(e->module);
+		e->module = g_strdup(module_name);
+	}
+	if (key) {	
+		if (e->key) 
+			g_free(e->key);
+		e->key = g_strdup(key);
+	}
+		
+	
+	title = g_strdup_printf("%s - %s", e->module, e->key);
 	text = main_get_raw_text((gchar *) e->module,
 				   (gchar *) e->key);
 	if(strlen(text)) 
@@ -632,17 +681,18 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 		load_through_persist_stream("", e); /* clear editor if no text */
 	
 	change_window_title(e->window, title);
+	/* 
 #ifdef OLD_NAVBAR
 	main_navbar_set(e->navbar, e->key);
 #else	
 	main_navbar_versekey_set(e->navbar, e->key);
 #endif
+	*/
 	if (text)
 		g_free(text);
 	if (title)
 		g_free(title);
 }
-
 
 static void exit_cb(GtkWidget * widget, gpointer data)
 {
@@ -1089,6 +1139,8 @@ static GtkWidget *container_create(const gchar * window_title,
 {
 	GtkWindow *window;
 	GtkWidget *vbox;
+	GtkWidget *paned;
+	GtkWidget *scrollbar;
 	GtkWidget *toolbar_nav = NULL;
 	BonoboUIComponent *component;
 	BonoboUIContainer *container;
@@ -1102,21 +1154,6 @@ static GtkWidget *container_create(const gchar * window_title,
 	
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_widget_show(vbox);
-	if (!editor->studypad) {
-#ifdef OLD_NAVBAR
-		toolbar_nav = navebar_create(editor);
-		gtk_widget_show(toolbar_nav);
-		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-		editor->navbar.module_name = editor->module;
-		if (editor->navbar.key == NULL)
-			editor->navbar.key = g_strdup(editor->key);
-		main_navbar_fill_book_combo(editor->navbar);
-#else
-		toolbar_nav = gui_navbar_versekey_editor_new(editor);
-		gtk_widget_show(toolbar_nav);
-		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
-#endif
-	}
 
 	window = GTK_WINDOW(win);
 	editor->window = win;
@@ -1169,7 +1206,57 @@ static GtkWidget *container_create(const gchar * window_title,
 	
 	
 	/* add editor control to vbox */
-	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
+	switch(editor->type){
+		case NOTE_EDITOR:
+#ifdef OLD_NAVBAR
+			toolbar_nav = navebar_create(editor);
+			gtk_widget_show(toolbar_nav);
+			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
+			editor->navbar.module_name = editor->module;
+			if (editor->navbar.key == NULL)
+				editor->navbar.key = g_strdup(editor->key);
+			main_navbar_fill_book_combo(editor->navbar);
+#else
+			toolbar_nav = gui_navbar_versekey_editor_new(editor);
+			gtk_widget_show(toolbar_nav);
+			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(toolbar_nav), FALSE, TRUE, 0);
+#endif
+			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
+		break;
+		case BOOK_EDITOR:
+			paned = gtk_hpaned_new();
+			gtk_widget_show(paned);
+			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(paned), 
+					    	TRUE, TRUE, 0);
+	    		scrollbar = gtk_scrolled_window_new(NULL, NULL);
+			gtk_widget_show(scrollbar);
+			gtk_paned_pack1(GTK_PANED(paned), GTK_WIDGET(scrollbar),
+						TRUE, TRUE);
+			gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollbar),
+						       GTK_POLICY_AUTOMATIC,
+						       GTK_POLICY_AUTOMATIC);
+			gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+							    scrollbar,
+					    settings.shadow_type);
+	    		main_add_mod_tree_columns(GTK_TREE_VIEW(editor->treeview));
+	     
+	    
+	    		editor->treeview = gtk_tree_view_new();
+			gtk_widget_show(editor->treeview);
+			gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(editor->treeview), FALSE);
+			gtk_container_add(GTK_CONTAINER(scrollbar),
+					 editor->treeview);
+			gtk_paned_pack2(GTK_PANED(paned), GTK_WIDGET(editor->control),
+						TRUE, TRUE);
+	    		
+	    
+	    
+	    
+		break;
+		case STUDYPAD_EDITOR:
+			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
+		break;
+	}
 	
 	/* add a statusbar */
 	editor->statusbar = gtk_statusbar_new();
@@ -1194,6 +1281,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	CORBA_exception_free(&ev);
 
 	gtk_widget_show_all(GTK_WIDGET(window));
+    /*
 #ifndef OLD_NAVBAR
 	if(!editor->studypad) {
 		gtk_widget_hide(editor->navbar.button_history_back);
@@ -1206,7 +1294,7 @@ static GtkWidget *container_create(const gchar * window_title,
 		gtk_widget_hide(editor->navbar.arrow_verse_up_box);
 		gtk_widget_hide(editor->navbar.arrow_verse_down_box);
 	}
-#endif /* OLD_NAVBAR */
+#endif  */  /* OLD_NAVBAR */
 	CORBA_exception_init(&ev);
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
@@ -1243,7 +1331,7 @@ static GtkWidget *container_create(const gchar * window_title,
 
 
 static
-gint _create_new(const gchar * filename, const gchar * key, gint note)
+gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 {
 	gchar *title = NULL;
 	EDITOR *editor;
@@ -1253,27 +1341,42 @@ gint _create_new(const gchar * filename, const gchar * key, gint note)
 	editor->persist_file_interface = CORBA_OBJECT_NIL;
 	editor->persist_stream_interface = CORBA_OBJECT_NIL;
 	editor->sync = FALSE;
+	editor->type = editor_type;
 	
-	if (note) {
-		editor->studypad = FALSE;
-		editor->filename = NULL;
-		editor->module = g_strdup(filename);
-		editor->key = g_strdup(key);
-		editor->navbar.key = NULL;
-		container_create(_("Note Editor"), editor);
-		editor_load_note(editor, NULL, NULL);
-	} else {
-		editor->studypad = TRUE;
-		editor->module = NULL;
-		editor->key = NULL;
-		editor->filename = NULL;
-		widgets.studypad_dialog =
-		    container_create(_("StudyPad"), editor);
-		if (filename) {
-			editor->filename = g_strdup(filename);
-			load_through_persist_file(editor, g_strdup(filename));
-		}
-		settings.studypad_dialog_exist = TRUE;
+	switch(editor_type) {
+		case STUDYPAD_EDITOR:	
+			editor->studypad = TRUE;
+			editor->module = NULL;
+			editor->key = NULL;
+			editor->filename = NULL;
+			widgets.studypad_dialog =
+				container_create(_("StudyPad"), editor);
+			if (filename) {
+				editor->filename = g_strdup(filename);
+				load_through_persist_file(editor, g_strdup(filename));
+			}
+			settings.studypad_dialog_exist = TRUE;
+		break;
+	case NOTE_EDITOR:
+			editor->studypad = FALSE;
+			editor->filename = NULL;
+			editor->module = g_strdup(filename);
+			editor->key = g_strdup(key);
+			editor->navbar.key = NULL;
+			container_create(_("Note Editor"), editor);
+			editor_load_note(editor, NULL, NULL);
+		break;
+	case BOOK_EDITOR:
+			editor->studypad = FALSE;
+			editor->filename = NULL;
+			editor->module = g_strdup(filename);
+			editor->key = g_strdup(key);
+			editor->navbar.key = NULL;
+			container_create(_("Prayer List Editor"), editor);
+			//editor_load_note(editor, NULL, NULL);
+			
+		break;
+	
 	}
 	if (editor->html_widget) {
 		g_signal_connect(editor->html_widget,
@@ -1306,7 +1409,7 @@ gint _create_new(const gchar * filename, const gchar * key, gint note)
  *   gint
  */
 
-gint editor_create_new(const gchar * filename, const gchar * key, gint note)
+gint editor_create_new(const gchar * filename, const gchar * key, gint editor_type)
 {
 	GList *tmp = NULL;
 	EDITOR *e;
@@ -1314,40 +1417,62 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint note)
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if (note && !e->studypad) {
-			if (editor_is_dirty(e))
-				save_through_persist_stream_cb(NULL, 
-						(EDITOR*)e);
-			if (e->module)
-				g_free(e->module);
-			e->module = g_strdup(filename);
-			if (e->key)
-				g_free(e->key);
-			e->key = g_strdup(key);
-			gtk_widget_show(e->window);
-			gdk_window_raise(GTK_WIDGET(e->window)->window);
-			
-			editor_load_note(e, NULL, NULL);
-			return 1;
-		}
-		if (!note && e->studypad) {
-			if (editor_is_dirty(e))
-				save_through_persist_file(e, 
-						g_strdup(e->filename));
+		switch(editor_type) {
+			case STUDYPAD_EDITOR:
+				if (e->studypad) {
+					if (editor_is_dirty(e))
+						save_through_persist_file(e, 
+								g_strdup(e->filename));
+						
+					if (e->filename)
+						g_free(e->filename);
+					e->filename = g_strdup(filename);
+					gtk_widget_show(e->window);
+					gdk_window_raise(GTK_WIDGET(e->window)->window);
+					load_through_persist_file(e, g_strdup(filename));
+					return 1;
+				}
+			break;
+			case NOTE_EDITOR:
+			if (!e->studypad) {
+				if (editor_is_dirty(e))
+					save_through_persist_stream_cb(NULL, 
+							(EDITOR*)e);
+				if (e->module)
+					g_free(e->module);
+				e->module = g_strdup(filename);
+				if (e->key)
+					g_free(e->key);
+				e->key = g_strdup(key);
+				gtk_widget_show(e->window);
+				gdk_window_raise(GTK_WIDGET(e->window)->window);
 				
-			if (e->filename)
-				g_free(e->filename);
-			e->filename = g_strdup(filename);
-			gtk_widget_show(e->window);
-			gdk_window_raise(GTK_WIDGET(e->window)->window);
-			load_through_persist_file(e, g_strdup(filename));
-			return 1;
+				editor_load_note(e, NULL, NULL);
+				return 1;
+			}
+			case BOOK_EDITOR:
+				if (!e->studypad) {
+					if (editor_is_dirty(e))
+						save_through_persist_stream_cb(NULL, 
+								(EDITOR*)e);
+					if (e->module)
+						g_free(e->module);
+					e->module = g_strdup(filename);
+					if (e->key)
+						g_free(e->key);
+					e->key = g_strdup(key);
+					gtk_widget_show(e->window);
+					gdk_window_raise(GTK_WIDGET(e->window)->window);
+					
+					editor_load_book(e, NULL, NULL);
+					return 1;
+				}
+			break;
 		}
 		tmp = g_list_next(tmp);
 	}
-	return _create_new(filename, key, note);
+	return _create_new(filename, key, editor_type);
 }
-
 
 gint load_file(EDITOR * e)
 {
