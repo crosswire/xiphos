@@ -857,6 +857,7 @@ gchar * ncr_to_utf8(gchar * text)
 
 	while( result != NULL ) {
        	result = strtok( NULL, "&" );
+		GS_message(("result: %s",result));
        	if (result != NULL) {
        		// search for "#"
        		if ( strcspn(result, "#") == 0){

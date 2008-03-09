@@ -54,7 +54,7 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 
-#include "main/prayer_list.h"
+#include "main/sword_treekey.h"
 #include "main/navbar_book.h"
 #include "main/parallel_view.h"
 #include "main/sword.h"
@@ -104,12 +104,12 @@ void frontend_init(void)
 	main_search_sidebar_fill_bounds_combos();
 	/*
 	 *  parallel stuff
-	 */
+	 */	
 	if (settings.havebible) {
 		main_check_parallel_modules();
 		main_init_paraellel_view();
 	}
-
+	
 	main_dialogs_setup();
 
 	gui_set_sidebar_porgram_start();
@@ -195,7 +195,7 @@ void frontend_display(void)
 	else 
 		main_clear_viewer();
 	gtk_widget_grab_focus (sidebar.module_list);
-	//main_prayer_list_new("2007");
+	//main_prayer_list_new("2008");
 	
 	GS_print(("%s\n\n", _("done")));
 } 

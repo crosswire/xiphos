@@ -27,3 +27,6 @@
 #include <gnome.h>
 
 #include "gui/prayer_list.h"
+
+
+

@@ -40,6 +40,7 @@ typedef struct _editor EDITOR;
 struct _editor {
 	GtkWidget *window;
 	GtkWidget *toolbar;
+    	GtkWidget *treeview;
 	GtkWidget *sync_button;
 	GtkWidget *html_widget;
 	GtkWidget *statusbar;
@@ -66,13 +67,20 @@ struct _editor {
 	gchar *key;
 };	
 
+enum {
+	STUDYPAD_EDITOR,
+	NOTE_EDITOR,
+	BOOK_EDITOR
+};
+
 void editor_sync_toggled(GtkToggleButton * button, EDITOR * e);
 void editor_sync_with_main(void);
 gboolean editor_close_all(void);
 void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
-gint editor_create_new(const gchar * filename, const gchar * key, gint note);
-gint load_file (EDITOR * e);	
-
+void editor_load_book(EDITOR * e, const gchar * module_name, const gchar * key);
+gint editor_create_new(const gchar * filename, const gchar * key, gint note);	
+//gint editor_create_prayer_list_editor(const gchar * mod_name, const gchar * key, gint prayer_list);
+gint load_file (EDITOR * e);
 
 #ifdef __cplusplus
 }
