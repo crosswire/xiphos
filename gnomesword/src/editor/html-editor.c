@@ -47,6 +47,7 @@
 #include "gui/dialog.h"
 #include "gui/widgets.h"
 #include "gui/gnomesword.h"
+#include "gui/treekey-editor.h"
 #include "gui/utilities.h"
 
 
@@ -72,7 +73,7 @@ gboolean editor_is_dirty(EDITOR * e)
 	gboolean rv;
 
 	CORBA_exception_init(&ev);
-/*	rv = e->is_changed
+	/* rv = e->is_changed
 	    || (GNOME_GtkHTML_Editor_Engine_hasUndo(e->engine, &ev) &&
 		!GNOME_GtkHTML_Editor_Engine_runCommand(e->engine,
 							"is-saved",
@@ -166,7 +167,12 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	g_free(buf);
 	
 	GS_message((text));
-	main_save_note(ed->module, ed->key, text);
+	
+	if(ed->type == NOTE_EDITOR)
+		main_save_note(ed->module, ed->key, text);
+	else
+		main_treekey_save_book_text(ed->module, ed->key, (gchar*)text); 
+	
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
 	ed->is_changed = FALSE;
 	bonobo_object_unref(BONOBO_OBJECT(smem));
@@ -650,44 +656,35 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 }
 
 
-void
-editor_load_book(EDITOR * e, const gchar * module_name,
-		 const gchar * key)
+void editor_save_book(EDITOR * e)
 {
-	gchar *title;
-	gchar *text;
-	
 	if (editor_is_dirty(e))
 		save_through_persist_stream_cb(NULL, e);
+}
+
+void editor_load_book(EDITOR * e)
+{
+	gchar *title = NULL;
+	gchar *text = NULL;	
 	
-	if (module_name) {
-		if (e->module)
-			g_free(e->module);
-		e->module = g_strdup(module_name);
-	}
-	if (key) {	
-		if (e->key) 
-			g_free(e->key);
-		e->key = g_strdup(key);
-	}
 		
+	if(!g_ascii_isdigit(e->key[0])) return; /* make sure is a number (offset) */
 	
-	title = g_strdup_printf("%s - %s", e->module, e->key);
-	text = main_get_raw_text((gchar *) e->module,
-				   (gchar *) e->key);
+	title = g_strdup_printf("%s", e->module);
+	GS_message (("book: %s\noffset :%s", e->module, e->key));
+	
+	if(atol(e->key) != 0)
+		text = main_get_book_raw_text (e->module, e->key);
+	else
+		text = g_strdup(e->module);
+	
 	if(strlen(text)) 
 		load_through_persist_stream(text, e);
 	else
 		load_through_persist_stream("", e); /* clear editor if no text */
 	
 	change_window_title(e->window, title);
-	/* 
-#ifdef OLD_NAVBAR
-	main_navbar_set(e->navbar, e->key);
-#else	
-	main_navbar_versekey_set(e->navbar, e->key);
-#endif
-	*/
+	
 	if (text)
 		g_free(text);
 	if (title)
@@ -1162,7 +1159,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	g_signal_connect(window, "delete-event",
 			 G_CALLBACK(app_delete_cb), (EDITOR *) editor);
 
-	gtk_window_set_default_size(window, 600, 440);
+	gtk_window_set_default_size(window, 640, 440);
 	gtk_window_set_resizable(window, TRUE);
 
 	component = bonobo_ui_component_new("Editor");
@@ -1237,21 +1234,17 @@ static GtkWidget *container_create(const gchar * window_title,
 						       GTK_POLICY_AUTOMATIC);
 			gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
 							    scrollbar,
-					    settings.shadow_type);
-	    		main_add_mod_tree_columns(GTK_TREE_VIEW(editor->treeview));
-	     
+					    settings.shadow_type);	     
 	    
-	    		editor->treeview = gtk_tree_view_new();
+	    		editor->treeview = gui_create_editor_tree(editor); 
 			gtk_widget_show(editor->treeview);
-			gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(editor->treeview), FALSE);
 			gtk_container_add(GTK_CONTAINER(scrollbar),
 					 editor->treeview);
-			gtk_paned_pack2(GTK_PANED(paned), GTK_WIDGET(editor->control),
+			gtk_paned_set_position(GTK_PANED(paned),
+				       125);
+			gtk_tree_view_expand_all((GtkTreeView *)editor->treeview);
+    			gtk_paned_pack2(GTK_PANED(paned), GTK_WIDGET(editor->control),
 						TRUE, TRUE);
-	    		
-	    
-	    
-	    
 		break;
 		case STUDYPAD_EDITOR:
 			gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(editor->control), TRUE, TRUE, 0);
@@ -1281,9 +1274,9 @@ static GtkWidget *container_create(const gchar * window_title,
 	CORBA_exception_free(&ev);
 
 	gtk_widget_show_all(GTK_WIDGET(window));
-    /*
+    
 #ifndef OLD_NAVBAR
-	if(!editor->studypad) {
+	if(!editor->type == NOTE_EDITOR) {
 		gtk_widget_hide(editor->navbar.button_history_back);
 		gtk_widget_hide(editor->navbar.button_history_next);
 		gtk_widget_hide(editor->navbar.button_history_menu);
@@ -1294,7 +1287,7 @@ static GtkWidget *container_create(const gchar * window_title,
 		gtk_widget_hide(editor->navbar.arrow_verse_up_box);
 		gtk_widget_hide(editor->navbar.arrow_verse_down_box);
 	}
-#endif  */  /* OLD_NAVBAR */
+#endif    /* OLD_NAVBAR */
 	CORBA_exception_init(&ev);
 	editor->engine =
 	    (GNOME_GtkHTML_Editor_Engine)
@@ -1370,8 +1363,7 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->studypad = FALSE;
 			editor->filename = NULL;
 			editor->module = g_strdup(filename);
-			editor->key = g_strdup(key);
-			editor->navbar.key = NULL;
+			editor->key = NULL; //g_strdup(key);
 			container_create(_("Prayer List Editor"), editor);
 			//editor_load_note(editor, NULL, NULL);
 			
@@ -1464,7 +1456,7 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 					gtk_widget_show(e->window);
 					gdk_window_raise(GTK_WIDGET(e->window)->window);
 					
-					editor_load_book(e, NULL, NULL);
+					editor_load_book(e);
 					return 1;
 				}
 			break;

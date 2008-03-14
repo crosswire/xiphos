@@ -27,10 +27,15 @@ extern "C"
 {
 #endif
 
-void main_prayer_list_add_child(gchar * mod_name);
-//void main_fill_prayer_list_tree(gchar * mod_name);
-gint main_prayer_list_new(char * list_name);
-
+unsigned long main_treekey_remove (char *book, char *name, char * offset);
+unsigned long main_treekey_append_sibling (char *book, char *name, char * offset);
+unsigned long main_treekey_append_child (char *book, char *name, char * offset);
+void main_treekey_set_local_name(char * book, char * name, char * offset);
+//void main_prayer_list_add_child(gchar * mod_name);
+int main_prayer_list_new(char * list_name);
+void main_load_book_tree_in_editor (GtkTreeView * treeview, char * book);
+char *main_get_book_raw_text (char *book, char * offset);
+void main_treekey_save_book_text (char *book, char * offset, char * text);
 
 #ifdef __cplusplus
 }

@@ -30,6 +30,8 @@ typedef struct _sidebar SIDEBAR;
 struct _sidebar {
 	GtkWidget *module_list;
 	GtkWidget *menu_modules;
+	GtkWidget *menu_prayerlist;
+	GtkWidget *menu_prayerlist_mod;
 	GtkWidget *results_list,
 		*notebook,
 		*tbtn_view_main,

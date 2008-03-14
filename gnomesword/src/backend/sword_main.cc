@@ -428,7 +428,21 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 	}
 	return NULL;	
 }
-
+/*
+char *BackEnd::get_raw_text(const char *module_name, const char *key) {
+	SWModule *mod;
+	ModMap::iterator it;	//-- iteratior
+	//-- iterate through the modules until we find modName  
+	it = display_mgr->Modules.find(module_name);
+	//-- if we find the module
+	if (it != display_mgr->Modules.end()) {
+		mod = (*it).second;
+		mod->setKey(key);
+		return strdup((char *) mod->getRawEntry());
+	}
+	return NULL;	
+}
+*/
 char *BackEnd::render_this_text(const char * module_name, const char * text) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
@@ -952,10 +966,7 @@ int BackEnd::set_key(const char *key) {
 }
 
 char *BackEnd::get_key_form_offset(unsigned long offset) {
-	char *retval = NULL;                                      
-/*        gsize bytes_read;
-        gsize bytes_written;
-        GError **error = NULL;   */
+	char *retval = NULL; 
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
                 treenode.setOffset(offset);
@@ -963,14 +974,7 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
                 if (treenode.getOffset() > 0) {
                         display_mod->SetKey(treenode);
                         display_mod->KeyText();      //snap to entry
-                }		
-/*		retval = g_convert( (char *) display_mod->KeyText(),
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     error);   */
+                }
 		retval = strdup(display_mod->KeyText());
         }
         return retval;
