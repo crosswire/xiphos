@@ -372,12 +372,12 @@ void xml_write_bookmark_doc(const xmlChar * xml_filename)
 
 /******************************************************************************
  * Name
- *   xml_load_bookmark_file
+ *   
  *
  * Synopsis
  *   #include "main/xml.h"
  *
- *   void xml_load_bookmark_file(char * bookmark_file)
+ *   void 
  *
  * Description
  *   

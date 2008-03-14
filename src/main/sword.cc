@@ -1579,6 +1579,27 @@ char *main_get_raw_text(char *module_name, char *key)
 
 /******************************************************************************
  * Name
+ *   main_get_raw_text
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   char *main_get_raw_text(char *module_name, char *key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_get_book_key_from_offset(char *module_name, unsigned long offset)
+{
+	//return backend->get_key_form_offset(module_name, key);
+}
+
+/******************************************************************************
+ * Name
  *  main_get_mod_type
  *
  * Synopsis
