@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * prayer_list.c - 
+ * treekey-editor.h - 
  *
  * Copyright (C) 2007 GnomeSword Developer Team
  *
@@ -18,15 +18,19 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef _TREEKEY_EDITOR_H
+#define _TREEKEY_EDITOR_H
 
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
-#include <gnome.h>
+GtkWidget *gui_create_editor_tree(EDITOR * editor);
 
-#include "gui/prayer_list.h"
+#ifdef __cplusplus
+}
+#endif
 
-
-
+#endif /* _TREEKEY_EDITOR_H */

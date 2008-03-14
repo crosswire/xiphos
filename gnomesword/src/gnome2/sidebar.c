@@ -65,6 +65,7 @@ static GtkWidget *button_modules;
 static gchar *s_module_name;
 static gint button_vl_html;
 static gchar *buf_module;
+static gchar *buf_caption;
 GList *list_of_verses;
 
 
@@ -381,6 +382,7 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 	GtkTreeIter selected;
 	GtkTreeModel *model;
 	gchar *mod = NULL;
+	gchar *caption = NULL;
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(sidebar.module_list));
@@ -388,7 +390,7 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return FALSE;
 
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 3, &mod, -1);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 2, &caption, 3, &mod, -1);
 
 	switch (event->button) {
 	case 1:
@@ -396,20 +398,43 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		break;
 
 	case 2:
-		if (mod && (g_utf8_collate(mod, _("Parallel View"))))
+		if (mod && (g_utf8_collate(mod, _("Parallel View")))
+		    	&& (g_utf8_collate(mod, _("Standard View"))))
 			gui_open_module_in_new_tab(mod);
 		break;
 
 	case 3:
-		if (mod && (g_utf8_collate(mod, _("Parallel View")))) {
+		if (mod && (g_utf8_collate(mod, _("Parallel View")))
+		    	&& (g_utf8_collate(mod, _("Standard View")))
+		    	&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
 			buf_module = mod;
 			gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
-			return FALSE;
+			g_free(caption);
+			return FALSE;		
 		}
+	    	if (caption && (!g_utf8_collate(caption, _("Prayer List")))) {
+			buf_caption = caption;
+			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
+				       NULL, NULL, NULL, NULL,
+				       0, gtk_get_current_event_time());
+			g_free(mod);
+			return FALSE;
+		
+		}
+	    	if (mod && (main_get_mod_type(mod) == PRAYERLIST_TYPE)) {
+			buf_module = mod;
+			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist_mod),
+				       NULL, NULL, NULL, NULL,
+				       0, gtk_get_current_event_time());
+			g_free(caption);
+			return FALSE;					
+		}
+	    
 		break;
 	}
+	g_free(caption);
 	g_free(mod);
 	return FALSE;
 }
@@ -751,6 +776,63 @@ GtkWidget *create_menu_modules(void)
 	return menu_modules;
 }
 
+static void
+on_new_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+    	main_prayer_list_new(NULL);
+	GS_message(("on_modules_list_button_release: cap = %s",buf_caption));
+	g_free(buf_module);
+	buf_module = NULL;
+}
+
+static GnomeUIInfo menu_prayerlist_uiinfo[] = {
+  GNOMEUIINFO_MENU_NEW_ITEM (N_("New prayer list"), 
+			     N_("Create new prayer list"), 
+			     on_new_activate, NULL),
+  GNOMEUIINFO_END
+};
+
+GtkWidget *create_menu_prayerlist(void)
+{
+	GtkWidget *menu;
+
+	menu = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
+			    menu_prayerlist_uiinfo, NULL, FALSE, 0);
+	return menu;
+}
+
+
+
+void
+on_edit_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	editor_create_new(buf_module, NULL, BOOK_EDITOR);
+}
+
+static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
+ 
+  {
+    GNOME_APP_UI_ITEM, N_("Open in editor"),
+    NULL,
+    (gpointer) on_edit_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+GtkWidget *create_menu_prayerlist_mod(void)
+{
+	GtkWidget *menu;
+
+	menu = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
+			    menu_prayerlist_mod_uiinfo, NULL, FALSE, 0);
+	return menu;
+}
 
 static void tree_selection_changed_cb(GtkTreeSelection * selection,
 				      gpointer data)
@@ -1235,6 +1317,8 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			       (on_modules_list_button_release), NULL);
 
 	sidebar.menu_modules = create_menu_modules();
+	sidebar.menu_prayerlist = create_menu_prayerlist();
+	sidebar.menu_prayerlist_mod = create_menu_prayerlist_mod();
 
 	g_signal_connect((gpointer) button_bookmarks, "toggled",
 			 G_CALLBACK(on_bookmarks_activate), NULL);
