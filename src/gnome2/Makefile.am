@@ -50,7 +50,6 @@ gnomesword2_SOURCES =  \
     navbar_versekey_parallel.c \
     parallel_view.c \
     parallel_dialog.c \
-    prayer_list.c \
     preferences_cell_renderer.c \
     preferences_dialog.c \
     search_dialog.c \
@@ -62,6 +61,7 @@ gnomesword2_SOURCES =  \
     studypad.c \
     toolbar_nav.c \
     tabbed_browser.c \
+    treekey-editor.c \
     utilities.c
 
 if USE_GTKMOZEMBED
