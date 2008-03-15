@@ -408,7 +408,7 @@ gint main_prayer_list_new (gchar * list_name)
 	config[list_name]["Encoding"] = "UTF-8";
 	config[list_name]["Lang"] = "en";	/* fix me */
 	config[list_name]["Version"] = "0.1";
-	config[list_name]["MinimumVersion"] = "1.5.9";
+	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
 	config[list_name]["Description"] = "Prayer List";
 	config[list_name]["About"] =
