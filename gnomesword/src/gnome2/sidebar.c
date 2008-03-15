@@ -405,8 +405,8 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 
 	case 3:
 		if (mod && (g_utf8_collate(mod, _("Parallel View")))
-		    	&& (g_utf8_collate(mod, _("Standard View")))
-		    	&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
+		    	&& (g_utf8_collate(mod, _("Standard View")))) {
+		    	//&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
 			buf_module = mod;
 			gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
 				       NULL, NULL, NULL, NULL,
@@ -627,7 +627,11 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
 	if (main_get_mod_type(buf_module) == PERCOM_TYPE)
 		editor_create_new((gchar *)buf_module,
 				  (gchar *)settings.currentverse,
-				  TRUE);
+				  NOTE_EDITOR);
+	else if (main_get_mod_type(buf_module) == PRAYERLIST_TYPE)
+		editor_create_new((gchar *)buf_module,
+				  "0",
+				  BOOK_EDITOR);
 	else
 		main_dialogs_open(buf_module, NULL);
 #else

@@ -141,11 +141,13 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 						NULL, 
 						&info->iter);
 			gtk_tree_store_set(GTK_TREE_STORE(info->model),
-						&sibling,
-						COL_CAPTION, d->text1,
-						COL_MODULE, info->book,
-						COL_OFFSET, buf,
-						-1);
+					&sibling,
+					COL_OPEN_PIXBUF, pixbufs->pixbuf_helpdoc,
+					COL_CLOSED_PIXBUF, NULL,
+					COL_CAPTION, d->text1,
+					COL_MODULE, info->book,
+					COL_OFFSET, buf,
+					-1);
 			if(e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
