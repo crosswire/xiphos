@@ -946,6 +946,9 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->showdicts = TRUE;
 		break;
 	case BOOK_TYPE:
+#ifdef PRAYERLIST
+	case PRAYERLIST_TYPE:
+#endif
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
