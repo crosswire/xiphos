@@ -180,7 +180,6 @@ unsigned long main_treekey_remove (char *book, char *name, char * offset)
 	mod->KeyText();      //snap to entry
 	mod->deleteEntry();
 	treekey->remove();
-	treekey->getText();   //snap to entry
 	return treekey->getOffset();
 }
 
