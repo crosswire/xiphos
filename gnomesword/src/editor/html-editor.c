@@ -1276,7 +1276,7 @@ static GtkWidget *container_create(const gchar * window_title,
 	gtk_widget_show_all(GTK_WIDGET(window));
     
 #ifndef OLD_NAVBAR
-	if(!editor->type == NOTE_EDITOR) {
+	if(editor->type == NOTE_EDITOR) {
 		gtk_widget_hide(editor->navbar.button_history_back);
 		gtk_widget_hide(editor->navbar.button_history_next);
 		gtk_widget_hide(editor->navbar.button_history_menu);
