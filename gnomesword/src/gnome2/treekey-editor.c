@@ -61,7 +61,7 @@ static GtkWidget *menu;
 
 INFO *
 _get_info (GtkWidget * tree)
-{;
+{
 	GtkTreeSelection *selection = NULL;	
 	GtkTreeView *t = GTK_TREE_VIEW(tree);
 	
