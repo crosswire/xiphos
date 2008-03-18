@@ -991,11 +991,16 @@ static void remove_install_wrapper(int activity)
 
 static void response_refresh(void)
 {
-	gint failed = 1;
-	gchar *buf = NULL;
+	gint failed;
+	gchar *buf;
 	
+	if (remote_source == NULL)
+		remote_source = g_strdup(gtk_combo_box_get_active_text(
+					     GTK_COMBO_BOX(combo_entry2)));
+
 	buf = g_strdup_printf("%s: %s", _("Refreshing remote"), remote_source);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), buf);
+	g_free(buf);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
 	gtk_widget_show(progressbar_refresh);	
 	while (gtk_events_pending())
@@ -1006,7 +1011,6 @@ static void response_refresh(void)
 		gtk_progress_bar_set_text(
 			GTK_PROGRESS_BAR(progressbar_refresh), _("Remote not found"));
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
-		g_free(buf);
 		return;
 	}
 	load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
@@ -1021,7 +1025,6 @@ static void response_refresh(void)
 		gtk_widget_hide(button_idx);
 		gtk_widget_hide(button_delidx);
 	}
-	g_free(buf);
 }
 
 /******************************************************************************
