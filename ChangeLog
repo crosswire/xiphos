@@ -1,3 +1,7 @@
+2008-03-22  karl <charcoal@users.sf.net>
+
+	* fix #1923337 respect module fonts in detached parallel view.
+
 2008-03-18  karl <charcoal@users.sf.net>
 
 	* fix unknown saved remote source when entering mod.mgr.
