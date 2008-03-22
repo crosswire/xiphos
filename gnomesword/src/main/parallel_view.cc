@@ -967,7 +967,7 @@ static void int_display(GeckoHtml *html, gchar * key)
 static void int_display(GtkHTML *html, gchar * key)
 #endif
 {
-	gchar  	* utf8str,
+	gchar  	*utf8str,
 	   	*bgColor,
 		*textColor,
 	    	buf[500],
@@ -975,7 +975,8 @@ static void int_display(GtkHTML *html, gchar * key)
 		tmpbuf[256],
 		*mod_name[5],
 		*use_font_size[5],
-	        *font_size_tmp[5];
+		*font_size_tmp[5],
+		*use_font_name[5];
 	GString *str;
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;
@@ -987,7 +988,6 @@ static void int_display(GtkHTML *html, gchar * key)
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(html))) return;
 
 	// need #verses to process in this book.
-	char *gkey = NULL;
 	VerseKey vkey;
 	gsize bytes_read;
 	gsize bytes_written;
@@ -995,18 +995,7 @@ static void int_display(GtkHTML *html, gchar * key)
 	int xverses;
 
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("key convert error: %s => %s\n",
-			  key, error->message));
-		g_error_free (error);
-		return;
-	}
-*/
-//	vkey = gkey;
 	vkey = key;
-//	g_free(gkey);
 
 	xverses = (vkey.books[vkey.Testament()-1]
 				 [vkey.Book()-1].
@@ -1019,18 +1008,22 @@ static void int_display(GtkHTML *html, gchar * key)
 	mod_name[3] = (parallel4 ? settings.parallel4Module : NULL);
 	mod_name[4] = (parallel5 ? settings.parallel5Module : NULL);
 
+	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 	for (j = 0; j < 5; ++j) {
-		file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
-		g_free(file);
-
-		if(font_size_tmp[j])
-			use_font_size[j] = g_strdup_printf("%+d",(atoi(font_size_tmp[j]) + settings.base_font_size));
+		if (font_size_tmp[j])
+			use_font_size[j] =
+			    g_strdup_printf("%+d", (atoi(font_size_tmp[j]) +
+						    settings.base_font_size));
 		else 
-			use_font_size[j] = g_strdup_printf("%+d",settings.base_font_size);
+			use_font_size[j] =
+			    g_strdup_printf("%+d", settings.base_font_size);
 
-
+		use_font_name[j] = get_conf_file_item(file, mod_name[j], "Font");
+		if (use_font_name[j] == NULL)
+			use_font_name[j] = g_strdup("none");
 	}
+	g_free(file);
 
 	str = g_string_new("");
 	tmpkey = backend_p->get_valid_key(key);
@@ -1047,7 +1040,7 @@ static void int_display(GtkHTML *html, gchar * key)
 		tmpkey = backend_p->get_valid_key(tmpbuf);
 
 		
-		g_string_printf(str, "%s", "<tr valign=\"top\">");
+		g_string_assign(str, "<tr valign=\"top\">");
 #ifdef USE_GTKMOZEMBED
 		gecko_html_write(html, str->str, str->len);
 #else
@@ -1075,12 +1068,13 @@ static void int_display(GtkHTML *html, gchar * key)
 				"<a href=\"gnomesword.url?action=showParallel&"
 				"type=verse&value=%s\" name=\"%d\">"
 				"<font color=\"%s\">%s. </font></a>"
-				"<font size=\"%s\" color=\"%s\">",
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				bgColor,
 				main_url_encode(tmpkey),
 				i,
 				settings.bible_verse_num_color,
 				num,
+				use_font_name[j],
 				use_font_size[j],
 				textColor);
 			if (str->len) {
@@ -1092,8 +1086,7 @@ static void int_display(GtkHTML *html, gchar * key)
 #endif
 			}
 			if(is_rtol) {
-				buf2 = g_strdup_printf(
-					"%s", "<br><DIV ALIGN=right>");
+				buf2 = g_strdup("<br><DIV ALIGN=right>");
 #ifdef USE_GTKMOZEMBED	
 				gecko_html_write(html, buf2, strlen(buf2));
 #else
@@ -1122,7 +1115,7 @@ static void int_display(GtkHTML *html, gchar * key)
 			}
 
 			if(is_rtol) {
-				buf2 = g_strdup_printf("%s", "</DIV>");
+				buf2 = g_strdup("</DIV>");
 #ifdef USE_GTKMOZEMBED
 				gecko_html_write(html, buf2, strlen(buf2));
 #else
@@ -1132,7 +1125,7 @@ static void int_display(GtkHTML *html, gchar * key)
 #endif
 				free(buf2);
 			}
-			g_string_printf(str, "%s", "</font></td>");
+			g_string_assign(str, "</font></td>");
 #ifdef USE_GTKMOZEMBED
 			gecko_html_write(html, str->str, str->len);
 #else
@@ -1141,20 +1134,19 @@ static void int_display(GtkHTML *html, gchar * key)
 #endif
 		}
 
-		g_string_printf(str, "%s", "</tr>");
+		g_string_assign(str, "</tr>");
 #ifdef USE_GTKMOZEMBED
 		gecko_html_write(html, str->str, str->len);
 #else
 		gtk_html_write(html, htmlstream,
 			       str->str,str->len);
 #endif
-	/*if (tmpkey)
-			break;*/
 	}
 
 	for (j = 0; j < 5; ++j) {
 		g_free(use_font_size[j]);
 		g_free(font_size_tmp[j]);
+		g_free(use_font_name[j]);
 	}
 	g_free(tmpkey);
 	g_free(cur_book);
