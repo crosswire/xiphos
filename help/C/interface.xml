@@ -719,6 +719,10 @@
 				Under MozEmbed, double-space display is available using the <guimenuitem>View</guimenuitem> menu, but not
 				under gtkhtml3.
 			</listitem>
+			<listitem>
+				It is not possible for gtkhtml3 to interpret multiple font face directives in a single window, so the
+				gtkhtml3 detached parallel view window cannot provide per-module font selections.
+			</listitem>
 		</itemizedlist>
 
 		<para>
