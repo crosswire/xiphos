@@ -35,6 +35,7 @@ struct _passage_tab_info {
 	GtkLabel *tab_label;
 	GtkWidget *button_close;
 	GtkWidget *close_pixmap;
+	GtkWidget *editor;
 	gchar *text_mod;
 	gchar *commentary_mod;
 	gchar *dictlex_mod;
@@ -53,6 +54,7 @@ struct _passage_tab_info {
 	gboolean showpreview;
 	gboolean showcomms;
 	gboolean showdicts;
+	gboolean showbookeditor;
 };
 
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)

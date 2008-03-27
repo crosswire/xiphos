@@ -141,6 +141,7 @@ struct _settings {
                 showpreview, /* show preview pane if true  */
                 showcomms, /* show commentaries if true  */
                 showdicts, /* show dictionaries/lexicons if true */
+		showbookeditor,
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		havethayer, /* for greek morph tags */
@@ -250,6 +251,8 @@ struct _settings {
 	/* mod mgr destination  */
 	int mod_mgr_destination; /* if = 0 destination is .sword 
 								 else sword directory  */
+	/* if true use prayerlist */
+	int prayerlist;
 	
 };
 

@@ -678,9 +678,8 @@ static void info_free(struct _info *info)
 	g_free(info);
 }
 
-static struct _info *info_new(GtkHTML * html,
-					   GnomePrintContext * pc,
-					   gdouble * line)
+static 
+struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
 {
 #ifndef USE_GTKHTML3_14
 #ifdef USE_GTKHTML38

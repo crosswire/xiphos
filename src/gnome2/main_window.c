@@ -253,10 +253,14 @@ void gui_set_bible_comm_layout(void)
 				       (widgets.hpaned),
 				       settings.biblepane_width);	   
 	}
-	if((settings.showcomms == FALSE) && (settings.showtexts == FALSE))
+	if(((settings.showcomms == FALSE) && (settings.showtexts == FALSE)) ||
+	   ((settings.comm_showing == FALSE) && (settings.showtexts == FALSE)))
 		gtk_widget_hide(nav_toolbar);
 	else
 		gtk_widget_show(nav_toolbar);
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
+				      (settings.comm_showing ? 0 : 1));
 		
 }
 
@@ -492,10 +496,13 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 		settings.comm_showing = TRUE;
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_book));
 		gui_set_drop_target(widgets.html_comm);
+		gtk_widget_show(nav_toolbar);
 	} else {
 		settings.comm_showing = FALSE;
 		gtk_drag_dest_unset(GTK_WIDGET(widgets.html_comm));
 		gui_set_drop_target(widgets.html_book);
+		if(!settings.showtexts)
+			gtk_widget_hide(nav_toolbar);
 	}
 		
 	gui_update_tab_struct(NULL, 
@@ -516,7 +523,7 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 						      settings.book_offset);
 		main_url_handler(url);
 		g_free(url);
-	}
+	}	
 	gui_set_tab_label(settings.currentverse, TRUE);
 }
 
@@ -619,7 +626,7 @@ void create_mainwindow(void)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
-	GtkWidget *vboxMain;
+	//GtkWidget *vboxMain;
 	GtkWidget *hbox2;
 	GtkWidget *swInt;
 	GtkWidget *hbox25;
@@ -676,11 +683,11 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 6);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
-	vboxMain = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vboxMain);
-	gtk_paned_pack2(GTK_PANED(widgets.epaned), vboxMain,
+	widgets.vboxMain = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(widgets.vboxMain);
+	gtk_paned_pack2(GTK_PANED(widgets.epaned), widgets.vboxMain,
 			TRUE, TRUE);
-	gtk_container_set_border_width(GTK_CONTAINER(vboxMain), 2);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vboxMain), 2);
 	
 	/*
 	 * notebook to have separate passages opened at once
@@ -690,7 +697,7 @@ void create_mainwindow(void)
 	widgets.hboxtb = gtk_hbox_new(FALSE, 0);
 	if(settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
-	gtk_box_pack_start(GTK_BOX(vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
 
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
@@ -705,7 +712,8 @@ void create_mainwindow(void)
 	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"),
 				NULL);
 
-	widgets.notebook_main = gtk_notebook_new();gtk_widget_show(widgets.notebook_main);
+	widgets.notebook_main = gtk_notebook_new();
+	gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(widgets.hboxtb),
 			   widgets.notebook_main, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
@@ -714,16 +722,21 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_main));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
-/*
+	
+	widgets.page = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(widgets.page);
+	gtk_box_pack_start(GTK_BOX(widgets.vboxMain), widgets.page, TRUE,
+			   TRUE, 0);
+	/*
 	 * nav toolbar
 	 */
 #ifdef OLD_NAVBAR
-	nav_toolbar = gui_create_nav_toolbar(vboxMain);
-	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
+	nav_toolbar = gui_create_nav_toolbar(NULL);
+	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE,
 			   FALSE, 0);
 #else
 	nav_toolbar = gui_navbar_versekey_new();
-	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
+	gtk_box_pack_start(GTK_BOX(widgets.page), nav_toolbar, FALSE,
 			   FALSE, 0);
 #endif
 	/*
@@ -733,7 +746,7 @@ void create_mainwindow(void)
 /**widgets.hpaned********/
 	widgets.hpaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(vboxMain), widgets.hpaned, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.page), widgets.hpaned, TRUE, TRUE, 0);
 
 /**widgets.vpaned********/
 	widgets.vpaned = gtk_vpaned_new();

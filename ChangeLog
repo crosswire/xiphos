@@ -1,3 +1,9 @@
+2008-03-27  terry <tbiggs@users.sourceforge.net>
+
+	* added 'General->Misc->Enable paryer list' option to preferences_dialog
+	* removed --enable-prayer_list switch from configure.in
+	* FIXED: 2nd part of bug #1906647 Showing Commentary Pane 	
+
 2008-03-22  karl <charcoal@users.sf.net>
 
 	* fix #1923337 respect module fonts in detached parallel view.
