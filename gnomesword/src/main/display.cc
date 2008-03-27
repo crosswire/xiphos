@@ -412,7 +412,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
+	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) || (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE)) // ||
 		rework = (const char *)(const char *)imodule.getRawEntry();
 	else if (!strcmp(imodule.Name(), "ISBE"))
 		rework = (const char *)(const char *)imodule.StripText();

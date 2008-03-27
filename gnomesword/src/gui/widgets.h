@@ -30,6 +30,8 @@ struct  _app_widgets {
 	GtkWidget
 		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
+		*vboxMain, /*  */
+		*page, /*  */
 		*epaned, /* sidebar bar and main panle */
 		*vpaned, /* bible/previewer paned */
 		*vpaned2, /* commentary/dictionary paned */
