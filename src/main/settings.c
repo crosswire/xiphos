@@ -660,6 +660,15 @@ void load_settings_structure(void)
 		settings.docked = 1;
 	}
 	
+	if (xml_get_value("misc", "prayerlist")) {
+		buf = xml_get_value("misc", "prayerlist");
+		settings.prayerlist =  atoi(buf);
+	} else {
+		xml_add_new_item_to_section("misc","prayerlist","0");
+		settings.prayerlist = 0;
+	}
+
+	
 	if (xml_get_value("tabs", "browsing")) {
 		buf = xml_get_value("tabs", "browsing");
 		settings.browsing =  atoi(buf);
@@ -667,7 +676,6 @@ void load_settings_structure(void)
 		xml_add_new_item_to_section("tabs","browsing","1");
 		settings.browsing = 1;
 	}
-
 	/*
 	   settings. = xml_get_value("", "");
 	   settings. = xml_get_value("", "");

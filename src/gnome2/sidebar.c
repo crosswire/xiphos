@@ -32,7 +32,7 @@
 #include <gtkhtml/htmlengine.h>
 #include "editor/editor.h"
 #endif
-
+ 
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
@@ -49,6 +49,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/prayerlists.h"
 #include "main/sidebar.h"
 #include "main/url.hh"
 #include "main/xml.h"
@@ -780,6 +781,10 @@ GtkWidget *create_menu_modules(void)
 	return menu_modules;
 }
 
+
+
+
+/*
 static void
 on_new_activate                       (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -789,14 +794,70 @@ on_new_activate                       (GtkMenuItem     *menuitem,
 	g_free(buf_module);
 	buf_module = NULL;
 }
+*/
 
+void
+on_simple_list1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	main_prayerlist_basic_create();
+}
+
+
+void
+on_subject__not_so_simple_1_activate   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	main_prayerlist_not_so_basic_create();
+}
+
+
+void
+on_yearly_list1_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	main_prayerlist_wild_create();
+}
+
+static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_ITEM, N_("Simple List"),
+    N_("Create a new simple prayer list"),
+    (gpointer) on_simple_list1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "gtk-edit",
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Subject (not so simple)"),
+    NULL,
+    (gpointer) on_subject__not_so_simple_1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-bulleted-list",
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Yearly List"),
+    N_("Create a new prayer list"),
+    (gpointer) on_yearly_list1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo menu_prayerlist_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
+  GNOMEUIINFO_END
+};
+/*
 static GnomeUIInfo menu_prayerlist_uiinfo[] = {
   GNOMEUIINFO_MENU_NEW_ITEM (N_("New prayer list"), 
 			     N_("Create new prayer list"), 
 			     on_new_activate, NULL),
   GNOMEUIINFO_END
 };
-
+*/
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;

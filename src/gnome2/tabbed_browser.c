@@ -27,6 +27,7 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
+#include "editor/html-editor.h"
 
 #include "gui/gnomesword.h"
 #include "gui/tabbed_browser.h"
@@ -113,6 +114,7 @@ void gui_recompute_shows(void)
 	gui_show_hide_dicts(settings.showdicts);
 	gui_show_hide_comms(settings.showcomms);
 	gui_set_bible_comm_layout();
+	
 
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
@@ -126,6 +128,19 @@ void gui_recompute_shows(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewpreview_item),
 				       settings.showpreview);
+	
+}
+
+
+void setup_book_editor_tab(PASSAGE_TAB_INFO *pt)
+{
+	/*pt->editor = editor_create_new_book_editor(pt->book_mod, PRAYERLIST_TYPE);
+	gtk_widget_show(GTK_WIDGET(pt->editor));
+	
+	gtk_box_pack_start (GTK_BOX (widgets.vboxMain), GTK_WIDGET(pt->editor), 
+				TRUE, TRUE, 0);*/
+	
+	
 }
 
 /******************************************************************************
@@ -166,6 +181,7 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 		settings.showpreview = pt->showpreview;
 		settings.showcomms   = pt->showcomms;
 		settings.showdicts   = pt->showdicts;
+		settings.comm_showing = pt->comm_showing;
 		gui_recompute_shows();
 	}
 }
@@ -197,19 +213,15 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	gtk_widget_show(tbinf->page_widget);
 
 	g_string_printf(str,"%s: %s", tbinf->text_mod, tbinf->text_commentary_key); 
-	//tab_widget = tab_widget_new(tbinf, (gchar*)tbinf->text_commentary_key);
 	tab_widget = tab_widget_new(tbinf, str->str);
 	
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, tab_widget);
 	
-//	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
-//					tbinf->page_widget,
-//					(gchar*)tbinf->text_commentary_key);
+	
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget, str->str);
 	
-	//menu_label = gtk_label_new((gchar*)tbinf->text_commentary_key);
 	menu_label = gtk_label_new(str->str);
 	gtk_notebook_set_menu_label(GTK_NOTEBOOK(widgets.notebook_main),
                                              tbinf->page_widget,
@@ -936,7 +948,7 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = g_strdup(settings.book_mod);
 		pt->showcomms = TRUE;
-		pt->comm_showing = 0;
+		pt->comm_showing = 1;
 		break;
 	case DICTIONARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
@@ -946,15 +958,20 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->showdicts = TRUE;
 		break;
 	case BOOK_TYPE:
-#ifdef PRAYERLIST
-	case PRAYERLIST_TYPE:
-#endif
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
 		pt->book_mod = g_strdup(module);
 		pt->showcomms = TRUE;
-		pt->comm_showing = 1;
+		pt->comm_showing = 0;
+		break;
+	case PRAYERLIST_TYPE:
+		pt->text_mod = g_strdup(settings.MainWindowModule);
+		pt->commentary_mod = g_strdup(settings.CommWindowModule);
+		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
+		pt->book_mod = g_strdup(module);
+		pt->showcomms = TRUE;
+		pt->comm_showing = 0;
 		break;
 	}
 

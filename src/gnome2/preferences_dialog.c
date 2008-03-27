@@ -42,6 +42,7 @@
 #include "gui/dictlex.h"
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
+#include "gui/sidebar.h"
 #include "gui/widgets.h"
 #include "gui/preferences_cell_renderer.h"
 
@@ -50,6 +51,7 @@
 #include "main/parallel_view.h"
 #include "main/settings.h"
 #include "main/xml.h"
+
 //gtk_toggle_button_set_active
 typedef enum {
 	SHOW_BIBLE_TABS,
@@ -162,7 +164,8 @@ struct _preferences_check_buttons {
 	GtkWidget *versehighlight;
 	GtkWidget *doublespace;
 	GtkWidget *show_splash_screen;
-
+	GtkWidget *prayerlist;
+	
 	GtkWidget *show_bible_pane;
 	GtkWidget *show_preview_pane;
 	GtkWidget *show_commentary_pane;
@@ -972,6 +975,35 @@ void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer
 			       (widgets.doublespace_item),
 			       settings.doublespace);
 }
+/******************************************************************************
+ * Name
+ *   on_checkbutton12_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *
+ * Description
+ *   
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+{
+	xml_set_value("GnomeSword", "misc", "prayerlist",
+		      (togglebutton->active ? "1" : "0"));
+	settings.prayerlist = atoi(xml_get_value("misc", "prayerlist"));
+	
+	/* update module list to show choice */
+	main_update_module_lists ();
+	main_load_module_tree (sidebar.module_list);
+}
+
+
 
 
 /******************************************************************************
@@ -1793,6 +1825,9 @@ static void setup_check_buttons(void)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.versehighlight),
 				     settings.versehighlight);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.prayerlist),
+				     settings.prayerlist);
 #if 0
 #ifdef USE_GTKMOZEMBED
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1825,6 +1860,8 @@ static void setup_check_buttons(void)
 			 G_CALLBACK(on_checkbutton_imageresize_toggled), NULL);
 	g_signal_connect(check_button.versehighlight, "toggled",
 			 G_CALLBACK(on_checkbutton_versehighlight_toggled), NULL);
+	g_signal_connect(check_button.prayerlist, "toggled",
+			 G_CALLBACK(on_checkbutton_prayerlist_toggled), NULL);
 #if 0
 #ifdef USE_GTKMOZEMBED
 	g_signal_connect(check_button.doublespace, "toggled",
@@ -2069,6 +2106,7 @@ static void create_preferences_dialog(void)
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
+	check_button.prayerlist = glade_xml_get_widget(gxml, "checkbutton_prayerlist");
 	setup_check_buttons();
 
 	/* verse number size */
