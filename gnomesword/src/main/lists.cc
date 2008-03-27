@@ -83,11 +83,9 @@ GList *get_list(gint type)
 	case IMAGE_LIST:
 		return mod_lists->imagemods;
 		break;
-#ifdef PRAYERLIST
 	case PRAYER_LIST:
 		return mod_lists->prayermods;
 		break;
-#endif
 	}
 	return NULL;
 }
@@ -146,10 +144,10 @@ void main_init_lists(void)
 
 	settings.havebook = g_list_length(mods.bookmods);
 
-	settings.havepercomm = g_list_length(mods.percommods);	
-#ifdef PRAYERLIST
+	settings.havepercomm = g_list_length(mods.percommods);
+	
 	settings.haveprayerlist = g_list_length(mods.prayermods);
-#endif	
+	
 	if(g_list_length(mods.devotionmods)== 1) {		
 		xml_set_value("GnomeSword", "modules", "devotional",(char*)mods.devotionmods->data );
 		settings.devotionalmod = xml_get_value("modules", "devotional");
@@ -162,10 +160,8 @@ void main_init_lists(void)
 	GS_print(("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm));
 	GS_print(("%s = %d\n", _("Number of Devotion modules"),
 		  g_list_length(mods.devotionmods)));
-#ifdef PRAYERLIST
 	GS_print(("%s = %d\n\n", _("Number of Prayer modules"),
 		  settings.haveprayerlist));
-#endif
 }
 
 void main_shutdown_list(void)
@@ -212,14 +208,12 @@ void main_shutdown_list(void)
 		    g_list_next(mod_lists->percommods);
 	}
 	g_list_free(mod_lists->percommods);
-#ifdef PRAYERLIST
 	while (mod_lists->prayermods != NULL) {
 		g_free((char *) mod_lists->prayermods->data);
 		mod_lists->prayermods =
 		    g_list_next(mod_lists->prayermods);
 	}
 	g_list_free(mod_lists->prayermods);
-#endif
 	while (mod_lists->text_descriptions != NULL) {
 		g_free((char *) mod_lists->text_descriptions->data);
 		mod_lists->text_descriptions =

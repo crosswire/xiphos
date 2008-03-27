@@ -682,9 +682,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		main_display_dictionary(mod, settings.dictkey);
 		break;
 	case BOOK_TYPE:
-#ifdef PRAYERLIST
 	case PRAYERLIST_TYPE:
-#endif
 		GS_message(("key %s",key));
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
@@ -797,7 +795,6 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
  * Return value
  *   void
  */
-#ifdef PRAYERLIST
 static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 					  GtkTreeIter iter,
 					  gchar * module_name)
@@ -818,7 +815,6 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
 			   (gchar *) module_name,
 			   COL_OFFSET, NULL, -1);
 }
-#endif
 
 
 /******************************************************************************
@@ -1070,21 +1066,22 @@ void main_load_module_tree(GtkWidget * tree)
 		tmp = g_list_next(tmp);
 	}
 
-#ifdef PRAYERLIST
-	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter,
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-			   COL_CAPTION, _("Prayer List"),
-			   COL_MODULE, NULL,
-			   COL_OFFSET, _("Prayer List"), -1);
-	tmp = get_list(PRAYER_LIST);
-	while (tmp != NULL) {
-		add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
-					      iter, (gchar *) tmp->data);
-		tmp = g_list_next(tmp);
+	/* prayer list folders */
+	if(settings.prayerlist) {
+		gtk_tree_store_append(store, &iter, NULL);
+		gtk_tree_store_set(store, &iter,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, _("Prayer List"),
+				   COL_MODULE, NULL,
+				   COL_OFFSET, _("Prayer List"), -1);
+		tmp = get_list(PRAYER_LIST);
+		while (tmp != NULL) {
+			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
+						      iter, (gchar *) tmp->data);
+			tmp = g_list_next(tmp);
+		}
 	}
-#endif	
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
 }
