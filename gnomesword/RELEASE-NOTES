@@ -3,6 +3,40 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.3.4
+27 Apr 2008
+
+1. Primary/secondary reading selections, used mostly in Greek Bibles to
+   identify variant readings found in ancient MSS, is functional for the
+   first time.
+
+2. Prayer list support is enabled in the Preferences dialog.  Several
+   varieties of prayer list are then available by right-clicking the
+   new element in the modules list.
+
+3. Per-module font face choices are respected in detached parallel view
+   (mozembed build only; gtkhtml3 can't cope with multiple faces).
+
+4. Module manager remembers last settings.
+
+Bug reports addressed since 2.3.3:
+1923337  det.parallel needs to respect module font names
+1915596  text in preview window clears if mouse enters bible view
+1910081  Strong's Greek will not Look-up
+1906651  New Document
+1906647  Showing Commentary Pane
+1906644  Personal Commentary Quotes
+1894262  application crashes since kernel upgrade
+1872525  PATCH: Fix build errors with gcc-4.3
+
+New feature requests pending:
+1923328  Parsing/definition on word mouseover
+1894899  communication between gnomesword and bibledit
+
+Feature requests closed:
+1923319  Greek/Hebrew fonts in Parallel View
+________________________
+
 Release 2.3.3
 20 Jan 2008
 
