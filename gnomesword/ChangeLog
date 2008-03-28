@@ -1,3 +1,8 @@
+2008-03-28  terry <tbiggs@users.sourceforge.net>
+
+	* FIXED: bug #1915596 text in preview window clears if mouse enters bible view
+	  shift keys now lock previewer until mouse is moved into previewer.
+
 2008-03-27  terry <tbiggs@users.sourceforge.net>
 
 	* added 'General->Misc->Enable paryer list' option to preferences_dialog
