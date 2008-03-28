@@ -95,6 +95,8 @@ void gui_show_hide_texts(gboolean choice)
 			gtk_widget_show(widgets.vpaned);
 		xml_set_value("GnomeSword", "misc", "showtexts", "1");
 	}
+	/*if (main_window_created)
+		gui_set_bible_comm_layout();*/
 }
 
 
@@ -160,6 +162,8 @@ void gui_show_hide_comms(gboolean choice)
 			gtk_widget_show(widgets.notebook_comm_book);
 		xml_set_value("GnomeSword", "misc", "showcomms", "1");
 	}
+	if (main_window_created)
+		gui_set_bible_comm_layout();
 }
 
 
@@ -193,6 +197,8 @@ void gui_show_hide_dicts(gboolean choice)
 			gtk_widget_show(widgets.box_dict);
 		xml_set_value("GnomeSword", "misc", "showdicts", "1");
 	}
+	if (main_window_created)
+		gui_set_bible_comm_layout();
 }
 
 
