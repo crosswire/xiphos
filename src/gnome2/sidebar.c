@@ -70,6 +70,9 @@ static gchar *buf_caption;
 GList *list_of_verses;
 
 
+extern gboolean shift_key_presed;
+
+
 /******************************************************************************
  * Name
  *   on_notebook_switch_page
@@ -941,6 +944,15 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 
 		case 0x20:	/* "32" */
 			gui_open_passage_in_new_tab(key);
+			while (gtk_events_pending()) {
+				gtk_main_iteration();
+			}
+			break;
+
+		case 0xffe1:	/* shift keys */
+		case 0xffe2:
+			GS_warning(("shift key pressed"));	
+			shift_key_presed =  TRUE;
 			while (gtk_events_pending()) {
 				gtk_main_iteration();
 			}
