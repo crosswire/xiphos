@@ -21,6 +21,8 @@
  * Author: Marco Pesenti Gritti <marco@gnome.org>
  */
 
+#include <ctype.h>
+
 #include <mozilla-config.h>
 #include <config.h>
 
