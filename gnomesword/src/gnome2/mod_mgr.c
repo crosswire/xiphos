@@ -2557,7 +2557,7 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 	gint index = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_entry2));
 	settings.mod_mgr_remote_source_index = index;
 	gchar *index_str = g_strdup_printf("%d",index);
-	g_message("index = %d index_str = %s",index,index_str);
+	GS_message(("index = %d index_str = %s",index,index_str));
 	xml_set_value("GnomeSword", "modmgr", "mod_mgr_remote_source_index", index_str);
 	xml_save_settings_doc(settings.fnconfigure);	
 	g_free(index_str);
