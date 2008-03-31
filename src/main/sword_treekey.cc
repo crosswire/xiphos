@@ -169,10 +169,10 @@ unsigned long main_treekey_remove (char *book, char *name, char * offset)
 	SWMgr *mgr = backend->get_display_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
-	if(!g_ascii_isdigit(offset[0])) return -1; /* make sure offset is a number */
+	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
-		return -1;
+		return 0;
 
 	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
 	treekey->setOffset (atol(offset));
@@ -188,10 +188,10 @@ unsigned long main_treekey_append_sibling (char *book, char *name, char * offset
 	SWMgr *mgr = backend->get_display_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
-	if(!g_ascii_isdigit(offset[0])) return -1; /* make sure offset is a number */
+	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
-		return -1;
+		return 0;
 
 	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
 	treekey->setOffset (atol(offset));
@@ -214,10 +214,10 @@ unsigned long main_treekey_append_child (char *book, char *name, char * offset)
 	SWMgr *mgr = backend->get_display_mgr ();
 	SWModule *mod = mgr->Modules[book];
 	
-	if(!g_ascii_isdigit(offset[0])) return -1; /* make sure offset is a number */
+	if(!g_ascii_isdigit(offset[0])) return 0; /* make sure offset is a number */
 
 	if (!mod)
-		return -1;
+		return 0;
 
 	TreeKeyIdx *treekey = (TreeKeyIdx *) mod->CreateKey ();
 	treekey->setOffset (atol(offset));
@@ -276,8 +276,8 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 {
 	SWMgr *mgr = backend->get_display_mgr ();
 	SWModule *mod = mgr->Modules[book];
-	
-	if(!g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
+		
+	if(!offset || !g_ascii_isdigit(offset[0])) return; /* make sure offset is a number */
 	
 	if (!mod || (atol(offset) == 0))
 		return;
