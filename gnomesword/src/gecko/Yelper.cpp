@@ -508,6 +508,7 @@ gint Yelper::ProcessKeyDownEvent(GtkMozEmbed *embed, gpointer dom_event)
 
 gint Yelper::ProcessKeyReleaseEvent(GtkMozEmbed *embed, gpointer dom_event)
 {
+	GS_message(("Yelper::ProcessKeyReleaseEvent"));
 	shift_key_presed = FALSE;
 	return NS_OK;	
 }
