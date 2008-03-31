@@ -82,7 +82,7 @@ static void _button_one(EDITOR * e)
 {
 	INFO *info;
 	
-	//editor_save_book(e);
+	editor_save_book(e);
 	
 	info = _get_info (e->treeview);
 	
