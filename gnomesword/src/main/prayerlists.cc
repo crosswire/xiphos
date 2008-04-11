@@ -219,7 +219,7 @@ int main_prayerlist_basic_create(void)
 	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
 	appendChild (treeKey, "MyPrayerList");
-	setEntryText (book, "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionarys<br><br><br>");
+	setEntryText (book, "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>");
 	
 	delete treeKey;
 	g_free (info->text1);

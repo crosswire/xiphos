@@ -170,13 +170,16 @@ save_through_persist_stream_cb(GtkWidget * widget, gpointer data)
 	
 	if(ed->type == NOTE_EDITOR)
 		main_save_note(ed->module, ed->key, text);
-	else
+	else {
 		main_treekey_save_book_text(ed->module, ed->key, (gchar*)text); 
+		
+	}
 	
 	GNOME_GtkHTML_Editor_Engine_dropUndo(ed->engine, &ev);
 	ed->is_changed = FALSE;
 	bonobo_object_unref(BONOBO_OBJECT(smem));
 	CORBA_exception_free(&ev);
+	
 }
 
 static void
@@ -647,8 +650,8 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 #else	
 		main_navbar_versekey_set(e->navbar, e->key);
 #endif
-	}
-    	
+	} 
+	
 	if (text)
 		g_free(text);
 	if (title)
@@ -658,8 +661,10 @@ editor_load_note(EDITOR * e, const gchar * module_name,
 
 void editor_save_book(EDITOR * e)
 {
-	if (editor_is_dirty(e))
+	if (editor_is_dirty(e)) {
+		GS_message(("editor_is_dirty"));
 		save_through_persist_stream_cb(NULL, e);
+	}
 }
 
 void editor_load_book(EDITOR * e)
