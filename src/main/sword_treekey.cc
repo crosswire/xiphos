@@ -288,6 +288,11 @@ void main_treekey_save_book_text (char *book, char * offset, char * text)
 	mod->SetKey(treenode);
         mod->KeyText();      //snap to entry
 	(*mod) << text;
+	if(settings.book_mod && book 
+		   	&& !strcmp(settings.book_mod,book)){
+		GS_message(("main_treekey_save_book_text"));
+		main_display_book(book, offset);
+	}
 }
 
 /*********************************    *************************************/
