@@ -171,6 +171,61 @@ void _connect_signals(NAVBAR_VERSEKEY navbar)
 
 }
 
+
+/******************************************************************************
+ * Name
+ *   _check_for_distribution_license
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *  gint _check_for_distribution_license(gchar * mod_name)
+ *
+ * Description
+ *   checks the module's conf file for DistributionLicense entry - if the 
+ *   entry does not exist or contains the word 'copyright' a warning
+ *   dialog is called - this needs lots of work --FIXME--
+ *
+ * Return value
+ *   gint
+ */
+
+gint _check_for_distribution_license(gchar * mod_name)
+{
+	gchar *distributionlicense;
+	gchar *conf_file;
+	
+	conf_file = g_strdup_printf("%s/.sword/mods.d/%s.conf",
+				    settings.homedir,
+				    g_utf8_strdown(mod_name,
+                                    -1));
+	
+	
+	if(g_file_test(conf_file,G_FILE_TEST_EXISTS))
+		distributionlicense = get_conf_file_item(
+							 conf_file,
+							 mod_name,
+							 "DistributionLicense");
+	else
+		distributionlicense = main_get_mod_config_entry(
+						mod_name,
+				 		"DistributionLicense");
+	g_free(conf_file);
+	GS_message(("DistributionLicense: %s",distributionlicense));
+	
+	
+	if(!distributionlicense || (distributionlicense && 
+				          g_strstr_len(distributionlicense, 
+					  strlen(distributionlicense), 
+					  "Copyrighted"))) 
+		gui_generic_warning(_("Please check copyright before exporting!"));
+	
+	return 1;	
+}
+					     
+					     
+
+
 /******************************************************************************
  * Name
  *  gui_navbar_versekey_new
@@ -192,6 +247,8 @@ void gui_export_dialog(void)
 
 	gchar *glade_file;
 	GladeXML *gxml;
+	
+	_check_for_distribution_license(settings.MainWindowModule);
 	
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
