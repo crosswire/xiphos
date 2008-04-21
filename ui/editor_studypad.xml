@@ -9,6 +9,7 @@
 		<submenu name="File" _label="_File">
 			<menuitem name="OpenFile" verb="" _label="Open" _tip="Open a file in Studypad" pixtype="stock" pixname="Open"/>
 			<menuitem name="SaveFile" verb="" _label="Save" _tip="Save the current file" pixtype="stock" pixname="Save"/>
+			<menuitem name="SaveFileAs" verb="" _label="Save AS" _tip="Save the current file as" pixtype="stock" pixname="Save"/>
 			<separator/>
 			<menuitem name="BookMark" verb="" _label="Bookmark" _tip="Add this file to your bookmarks" pixtype="stock" pixname="gtk-jump-to"/>
 			<separator/>

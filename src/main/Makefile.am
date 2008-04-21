@@ -36,6 +36,7 @@ noinst_LIBRARIES = libmain.a
 libmain_a_SOURCES =  \
     configs.cc configs.h \
     display.cc display.hh \
+    export_passage.cc export_passage.h \
     global_ops.cc global_ops.hh \
     lists.cc lists.h \
     main.c \
