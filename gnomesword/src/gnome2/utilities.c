@@ -222,6 +222,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	i = 0;
 	alternative[i++] = g_strdup (fname);
 #ifdef MAINTAINER_MODE
+	GS_message(("MAINTAINER_MODE"));
 	/* generally only developers have any use for these */
 	alternative[i++] = g_build_filename ("..", fname, NULL);
 	alternative[i++] = g_build_filename ("ui", fname, NULL);
