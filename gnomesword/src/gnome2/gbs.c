@@ -34,6 +34,8 @@
 #include "gui/html.h"
 #endif
 
+#include "editor/html-editor.h"
+
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/gbs.h"
@@ -657,6 +659,17 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 }
 
 
+static void on_open_in_editor_activate(GtkMenuItem * menuitem,
+				 gpointer user_data)
+{
+	GS_message(("settings.book_key: %s",settings.book_key));
+	editor_create_new((gchar *)settings.book_mod,
+				  settings.book_key,
+				  BOOK_EDITOR);
+	
+}
+
+
 /******************************************************************************
  * Name
  *  
@@ -704,8 +717,8 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
 	GNOMEUIINFO_END
 };
-
-static GnomeUIInfo note_menu_uiinfo[] = {
+/*
+static GnomeUIInfo prayerlist_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("item2"),
 	 NULL,
@@ -714,16 +727,17 @@ static GnomeUIInfo note_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
-
+*/
 static GnomeUIInfo edit3_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_COPY_ITEM(on_copy2_activate, NULL),
 	GNOMEUIINFO_MENU_FIND_ITEM(on_find1_activate, NULL),
 	{
-	 GNOME_APP_UI_SUBTREE, N_("Prayer List"),
+	 GNOME_APP_UI_ITEM, N_("Open in editor"),
 	 NULL,
-	 note_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
-	 0, (GdkModifierType) 0, NULL},
+	 (gpointer) on_open_in_editor_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL
+	},
 	GNOMEUIINFO_END
 };
 
@@ -966,6 +980,10 @@ static void create_menu(GdkEventButton * event)
 	
 	gui_add_mods_2_gtk_menu(GBS_DESC_LIST, view_menu,
 				(GCallback) on_view_mod_activate);
+	if(main_get_mod_type(mod_name) == PRAYERLIST_TYPE)
+		gtk_widget_show(edit3_menu_uiinfo[2].widget);
+	else
+		gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 	
 /*	
 	edit_pl_menu = gtk_menu_new();
@@ -1077,35 +1095,9 @@ static void create_menu(GdkEventButton * event)
 		gtk_widget_show(menu1_uiinfo[7].widget);
 	
 	
-	/* 
-	 * menu1_uiinfo[0].widget, "about");
-	 * menu1_uiinfo[1].widget, "separator4");
-	 * menu1_uiinfo[2].widget, "file3");
-	 * file3_menu_uiinfo[0].widget, "view_text");
-	 * view_text_menu_uiinfo[0].widget, "item1");
-	 * file3_menu_uiinfo[1].widget, "separator8");
-	 * file3_menu_uiinfo[2].widget, "print1");
-	 * menu1_uiinfo[3].widget, "edit3");
-	 * edit3_menu_uiinfo[0].widget, "copy2");
-	 * edit3_menu_uiinfo[1].widget, "find1");
-	 * edit3_menu_uiinfo[2].widget, "note");
-	 * note_menu_uiinfo[0].widget, "item2");
-	 * menu1_uiinfo[4].widget, "module_options");
-	 * module_options_menu_uiinfo[0].widget, "set_module_font");
-	 * module_options_menu_uiinfo[1].widget, "separator5");
-	 * menu1_uiinfo[5].widget, "lookup_selection");
-	 * lookup_selection_menu_uiinfo[0].widget, "use_current_dictionary");
-	 * lookup_selection_menu_
-	mod_type = backend->module_type((gchar*)module);uiinfo[1].widget, "separator6");
-	 * menu1_uiinfo[7].widget, "separator7");
-	 * menu1_uiinfo[8].widget, "show_tabs");
-	 */
 	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
 		     			gtk_get_current_event_time());
-	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
-					NULL, event, NULL,
-					widgets.html_text);*/
-	//gtk_widget_destroy(menu1);
+	
 	g_free(ops);
 }
 

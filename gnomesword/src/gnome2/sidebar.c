@@ -409,8 +409,8 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 
 	case 3:
 		if (mod && (g_utf8_collate(mod, _("Parallel View")))
-		    	&& (g_utf8_collate(mod, _("Standard View")))) {
-		    	//&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
+		    	&& (g_utf8_collate(mod, _("Standard View")))//) {
+		    	&& (main_get_mod_type(mod) != PRAYERLIST_TYPE)) {
 			buf_module = mod;
 			gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
 				       NULL, NULL, NULL, NULL,
@@ -881,17 +881,34 @@ on_edit_activate                    (GtkMenuItem     *menuitem,
 }
 
 static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
- 
-  {
-    GNOME_APP_UI_ITEM, N_("Open in editor"),
-    NULL,
-    (gpointer) on_edit_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL,
-    0, (GdkModifierType) 0, NULL
-  },
+        {
+	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
+	 N_("Open selected module in a new tab"),
+	 (gpointer) on_open_in_tab_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_FILENAME,
+	 PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Open in editor"),
+	 N_("Open selected module in a dialog"),
+	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("About"),
+	 N_("View information about the selected dialog"),
+	 (gpointer) on_about2_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END 
+};
+/*
+static GnomeUIInfo menu_prayerlist_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
   GNOMEUIINFO_END
 };
-
+*/
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
