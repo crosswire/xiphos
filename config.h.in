@@ -100,9 +100,6 @@
 /* install prefix */
 #undef INSTALL_PREFIX
 
-/* Define to 1 if you wish to enable 'maintainer-only' behavior. */
-#undef MAINTAINER_MODE
-
 /* Define if wish to use the old style navbar */
 #undef OLD_NAVBAR
 
@@ -162,6 +159,9 @@
 
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
+
+/* Define if wish to enable the Passage exporter */
+#undef USE_EXPORTER
 
 /* Define if you want to use GtkHtml-3.8 */
 #undef USE_GTKHTML38

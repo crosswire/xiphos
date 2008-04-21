@@ -39,6 +39,7 @@
 #include "gui/bibletext_dialog.h"
 #include "gui/bookmark_dialog.h"
 #include "gui/bookmarks_treeview.h"
+#include "gui/export_dialog.h"
 #include "gui/shortcutbar_main.h" 
 #include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
@@ -663,6 +664,13 @@ void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 }
 
+void on_export_passage_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+#ifdef USE_EXPORTER
+	gui_export_dialog();
+#endif
+}
+
 
 void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -911,6 +919,12 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("Export Passage"),
+	 NULL,
+	 (gpointer) on_export_passage_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-red",
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
 	GNOMEUIINFO_END
 };
@@ -1179,7 +1193,9 @@ void create_menu(void)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
 #endif /* __CYGWIN__ */
 
-
+#ifndef USE_EXPORTER
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);
+#endif
 
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),

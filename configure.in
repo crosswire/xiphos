@@ -109,6 +109,11 @@ dnl if test "x$prayer_list" = xyes; then
 dnl   AC_DEFINE(PRAYERLIST, 1, [Define if wish to enable the PrayerList])
 dnl fi
 
+AC_ARG_ENABLE(exporter,[  --enable-exporter    use exporter [default=no]],exporter=$enableval,exporter=no)
+if test "x$exporter" = xyes; then
+  AC_DEFINE(USE_EXPORTER, 1, [Define if wish to enable the Passage exporter])
+fi
+
 AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
 if test "x$old_navbar" = xyes; then
   AC_DEFINE(OLD_NAVBAR, 1, [Define if wish to use the old style navbar])
@@ -226,8 +231,8 @@ if test "x$GXX" = xyes; then
 fi
 
 AM_MAINTAINER_MODE
-if test "x$enable_maintainer_mode" = "xyes"; then
-  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
+if test "x$maintainer-mode" = "xyes"; then
+  dnl AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
   disable_werror=no
   enable_debug=yes
 dnl   A_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
@@ -375,6 +380,12 @@ if test "x$debug" = xyes; then
     echo "Static link to Sword:           enabled"
   else  
     echo "Dynamic link to Sword:          enabled"
+  fi
+  
+  if test "x$exporter" = xyes; then
+    echo "Passage exporter:           enabled"
+  else  
+    echo "Passage exporter:          disabled"
   fi
   
   echo "SWORD_LIBS:   $SWORD_LIBS"

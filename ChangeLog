@@ -1,3 +1,16 @@
+2008-04-21  terry <tbiggs@users.sourceforge.net>
+
+	* added <Save As> item to studypad file menus.
+	* added <Export Passage> to Bible pane popup menu.
+	* added export passage dialog - this requires a '--enable-exporter'
+	  switch for ./configure and ./autogen.sh
+	* added files
+		/main/export_passage.cc
+		/main/export_passage.h
+		/gnome2/export_dialog.c
+		/gui/export_dialog.h
+		/ui/export-dialog.glade
+
 2008-03-29  karl <charcoal@users.sf.net>
 
 	* fix (part of) #1928119: failures with gcc 4.3

@@ -31,6 +31,7 @@ gnomesword2_SOURCES =  \
     dictlex_dialog.c \
     display_info.c \
     dummy.cpp \
+    export_dialog.c \
     fileselection.c \
     find_dialog.c \
     font_dialog.c \

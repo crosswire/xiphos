@@ -73,6 +73,7 @@ src/gnome2/toolbar_nav.c
 src/gnome2/utilities.c
 # Glade files
 ui/bookmarks.glade
+ui/export-dialog.glade
 ui/prefs.glade
 ui/module-manager.glade
 ui/search-dialog.glade

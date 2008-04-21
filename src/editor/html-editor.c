@@ -494,6 +494,15 @@ save_through_persist_file_cb(GtkWidget * widget, gpointer data)
 		open_or_save_as_dialog(e, OP_SAVE_THROUGH_PERSIST_FILE);
 }
 
+/* "Save through persist file" dialog.  */
+static void
+save_as_through_persist_file_cb(GtkWidget * widget, gpointer data)
+{
+	gchar *filename = NULL;
+	EDITOR *e = (EDITOR *) data;
+	open_or_save_as_dialog(e, OP_SAVE_THROUGH_PERSIST_FILE);
+}
+
 static
 gint ask_about_saving(EDITOR * e)
 {
@@ -734,6 +743,7 @@ void print_preview_message_cb(GtkWidget * widget, gpointer data)
 static BonoboUIVerb verbs[] = {
 	BONOBO_UI_UNSAFE_VERB("OpenFile", open_through_persist_file_cb),
 	BONOBO_UI_UNSAFE_VERB("SaveFile", save_through_persist_file_cb),
+	BONOBO_UI_UNSAFE_VERB("SaveFileAs", save_as_through_persist_file_cb),
 	BONOBO_UI_UNSAFE_VERB("BookMark",add_bookmark_cb),
 	BONOBO_UI_UNSAFE_VERB("OpenStream",open_through_persist_stream_cb),
 	BONOBO_UI_UNSAFE_VERB("SaveNote",save_through_persist_stream_cb),
@@ -1368,9 +1378,9 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->studypad = FALSE;
 			editor->filename = NULL;
 			editor->module = g_strdup(filename);
-			editor->key = NULL; //g_strdup(key);
+			editor->key = g_strdup(key);
 			container_create(_("Prayer List Editor"), editor);
-			//editor_load_note(editor, NULL, NULL);
+			editor_load_book(editor);
 			
 		break;
 	
