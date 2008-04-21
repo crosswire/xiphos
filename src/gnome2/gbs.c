@@ -735,7 +735,7 @@ static GnomeUIInfo edit3_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Open in editor"),
 	 NULL,
 	 (gpointer) on_open_in_editor_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-edit",
 	 0, (GdkModifierType) 0, NULL
 	},
 	GNOMEUIINFO_END
