@@ -50,6 +50,7 @@ struct _export_dialog {
 	GtkWidget *rb_plain;
 	GtkWidget *lb_version;
 	GtkWidget *lb_key;
+	GtkWidget *warning_label;
 	gint format;
 	gint passage_type;
 };
@@ -217,14 +218,14 @@ gint _check_for_distribution_license(gchar * mod_name)
 	if(!distributionlicense || (distributionlicense && 
 				          g_strstr_len(distributionlicense, 
 					  strlen(distributionlicense), 
-					  "Copyrighted"))) 
+					  "Copyrighted"))) {
 		gui_generic_warning(_("Please check copyright before exporting!"));
+		return 1;
+	}
 	
-	return 1;	
-}
-					     
-					     
-
+	return 0;	
+}			     
+			     
 
 /******************************************************************************
  * Name
@@ -247,8 +248,9 @@ void gui_export_dialog(void)
 
 	gchar *glade_file;
 	GladeXML *gxml;
+	gint dist_license;
 	
-	_check_for_distribution_license(settings.MainWindowModule);
+	dist_license = _check_for_distribution_license(settings.MainWindowModule);
 	
 	glade_file = gui_general_user_file("export-dialog.glade", FALSE);
 	g_return_if_fail(glade_file != NULL);
@@ -268,6 +270,12 @@ void gui_export_dialog(void)
 	d.rb_plain = glade_xml_get_widget(gxml, "radiobutton5");
 	d.lb_version = glade_xml_get_widget(gxml, "label3");
 	d.lb_key = glade_xml_get_widget(gxml, "label4");
+	d.warning_label = glade_xml_get_widget(gxml, "hbox2");
+	
+	if(dist_license)
+		gtk_widget_show(d.warning_label);
+	else
+		gtk_widget_hide(d.warning_label);
 	
 	gtk_label_set_text (GTK_LABEL(d.lb_version), settings.MainWindowModule);	
 	gtk_label_set_text (GTK_LABEL(d.lb_key), settings.currentverse);

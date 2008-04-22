@@ -357,6 +357,7 @@ char *BackEnd::get_config_entry(char * module_name, char * entry) {
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
+		//GS_message(("get_config_entry: %s",mod->getConfigEntry(entry)));
 		return g_strdup((char *) mod->getConfigEntry(entry));
 	} else
 		return NULL;
