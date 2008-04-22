@@ -57,12 +57,24 @@ struct _export_dialog {
 
 EXPORT_DIALOG d;
 
-static void _read_buttons(void)
-{
-	
-	gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book));
-	
-}
+
+/******************************************************************************
+ * Name
+ *   on_filechooserdialog_response
+ *
+ * Synopsis
+ *   #include "gui/export_dialog.h"
+ *
+ *   void on_filechooserdialog_response(GtkDialog * fdialog,
+ *					    gint response_id,
+ *					    GtkFileChooser * filesel)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 static
 void on_filechooserdialog_response(GtkDialog * fdialog,
@@ -86,6 +98,23 @@ void on_filechooserdialog_response(GtkDialog * fdialog,
 	gtk_widget_destroy(GTK_WIDGET(fdialog));
 }
 
+
+/******************************************************************************
+ * Name
+ *   _get_export_filename
+ *
+ * Synopsis
+ *   #include "gui/export_dialog.h"
+ *
+ *   void _get_export_filename(void)
+ *
+ * Description
+ *   open file save dialog using libglade
+ *
+ * Return value
+ *   void
+ */
+
 void _get_export_filename(void)
 {
 	gchar *glade_file;
@@ -108,23 +137,25 @@ void _get_export_filename(void)
 
 /******************************************************************************
  * Name
- *   on_mod_mgr_response
+ *   on_dialog_export_passage_response
  *
  * Synopsis
- *   #include "gui/mod_mgr.h"
+ *   #include "gui/export_dialog.h"
  *
- *   void on_mod_mgr_response(GtkDialog * dialog, gint response_id, gpointer user_data)
+ *   void on_dialog_export_passage_response(GtkDialog * dialog, 
+ *						gint response_id, 
+ *						gpointer user_data)
  *
  * Description
- *   these are local defines at the top of this file.
+ *   
  *
  * Return value
  *   void
  */
 
 void on_dialog_export_passage_response(GtkDialog * dialog,
-			 gint response_id,
-			 gpointer user_data)
+			 		gint response_id,
+			 		gpointer user_data)
 {
 	gchar *filename = NULL;
 	
@@ -138,9 +169,10 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 		else
 			d.format = 0;
 			
-		d.passage_type = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK
-				 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
-				 : VERSE;
+		d.passage_type = 
+			gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_book)) ? BOOK
+			 : gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(d.rb_chapter)) ? CHAPTER
+			 : VERSE;
 		
 		_get_export_filename();
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -151,34 +183,10 @@ void on_dialog_export_passage_response(GtkDialog * dialog,
 
 /******************************************************************************
  * Name
- *   _connect_signals
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   void _connect_signals(NAVBAR_VERSEKEY navbar)
- *
- * Description
- *   
- *
- * Return value
- *  void 
- */
-
-static
-void _connect_signals(NAVBAR_VERSEKEY navbar)
-{
-		
-
-}
-
-
-/******************************************************************************
- * Name
  *   _check_for_distribution_license
  *
  * Synopsis
- *   #include "gui/.h"
+ *   #include "gui/export_dialog.h"
  *
  *  gint _check_for_distribution_license(gchar * mod_name)
  *
@@ -200,8 +208,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 				    settings.homedir,
 				    g_utf8_strdown(mod_name,
                                     -1));
-	
-	
+		
 	if(g_file_test(conf_file,G_FILE_TEST_EXISTS))
 		distributionlicense = get_conf_file_item(
 							 conf_file,
@@ -213,8 +220,7 @@ gint _check_for_distribution_license(gchar * mod_name)
 				 		"DistributionLicense");
 	g_free(conf_file);
 	GS_message(("DistributionLicense: %s",distributionlicense));
-	
-	
+		
 	if(!distributionlicense || (distributionlicense && 
 				          g_strstr_len(distributionlicense, 
 					  strlen(distributionlicense), 
@@ -229,23 +235,22 @@ gint _check_for_distribution_license(gchar * mod_name)
 
 /******************************************************************************
  * Name
- *  gui_navbar_versekey_new
+ *   gui_export_dialog
  *
  * Synopsis
- *   #include "gui/navbar_versekey.h"
+ *   #include "gui/export_dialog.h"
  *
- *  GtkWidget *gui_navbar_book_new(void)
+ *   void gui_export_dialog(void)
  *
  * Description
- *   create a new Bible navigation toolbar and return it
+ *   create a new passage export dialog using libglade
  *
  * Return value
- *   GtkWidget *
+ *   void
  */
 
 void gui_export_dialog(void)
 {
-
 	gchar *glade_file;
 	GladeXML *gxml;
 	gint dist_license;
