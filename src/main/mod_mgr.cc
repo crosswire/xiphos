@@ -105,7 +105,7 @@ char *main_module_mgr_set_sword_locale(const char *sys_locale) {
 	if(sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
-		OLD_CODESET = "iso8859-1";
+		OLD_CODESET = (char*)"iso8859-1";
 	}
 	return retval;
 }

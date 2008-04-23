@@ -79,7 +79,7 @@ extern "C" {
 #include "backend/sword_main.hh"
 #include "backend/gs_stringmgr.h"
 
-extern char *OLD_CODESET;
+char *OLD_CODESET;
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -920,7 +920,7 @@ void main_dictionary_button_clicked(gint direction)
 	g_free(key);
 }
 
-void main_display_book(const char * mod_name, char * key)     //, unsigned long offset)
+void main_display_book(const char * mod_name, const char * key)     //, unsigned long offset)
 {
 	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
 
@@ -945,7 +945,7 @@ void main_display_book(const char * mod_name, char * key)     //, unsigned long 
 
 		backend->set_module(mod_name);
 		backend->set_treekey(0);
-		settings.book_offset = backend->treekey_set_key(key);
+		settings.book_offset = backend->treekey_set_key((char*)key);
 	} else {
 		settings.book_offset = atol(key);
 		if(settings.book_offset < 4)
@@ -1012,7 +1012,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 				      settings.showdicts);
 }
 
-void main_display_dictionary(char * mod_name, char * key)
+void main_display_dictionary(const char * mod_name, const char * key)
 {
 	const gchar *old_key;
 	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
@@ -1030,7 +1030,7 @@ void main_display_dictionary(char * mod_name, char * key)
 	}
 	
 	if (key == NULL)
-		key = "Grace";
+		key = (char*)"Grace";
 	 // old_key is uppercase
  	key = g_utf8_strup(key, -1);
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
@@ -1416,7 +1416,7 @@ int main_optimal_search(char *mod_name)
 
 char *main_get_mod_about_info(char * mod_name)
 {
-	return backend->get_config_entry(mod_name, "About");
+	return backend->get_config_entry(mod_name, (char*)"About");
 }
 
 char *main_get_mod_config_entry(const char * module_name,
@@ -1465,7 +1465,7 @@ char *main_get_mod_config_file(const char * module_name,
 
 int main_is_mod_rtol(const char * module_name)
 {
-	char *direction = backend->get_config_entry((char*)module_name, "Direction");
+	char *direction = backend->get_config_entry((char*)module_name, (char*)"Direction");
 	return (direction && !strcmp(direction, "RtoL"));
 }
 
@@ -1487,7 +1487,7 @@ int main_is_mod_rtol(const char * module_name)
 
 int main_has_cipher_tag(char *mod_name)
 {
-	return (backend->get_config_entry(mod_name, "CipherKey") != NULL);
+	return (backend->get_config_entry(mod_name, (char *)"CipherKey") != NULL);
 }
 
 
@@ -1550,7 +1550,7 @@ char *main_get_striptext_from_string(char *module_name, char *string)
  *   char *
  */
 
-char *main_get_rendered_text(char *module_name, char *key)
+char *main_get_rendered_text(const char *module_name, const char *key)
 {
 	return backend->get_render_text(module_name, key);
 }
