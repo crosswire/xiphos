@@ -49,7 +49,7 @@
 #include "main/sword.h"
 
 #ifdef DEBUG 
-static gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
+static const gchar *f_message = "backend/module_manager.cc line #%d \"%s\" = %s\n";
 #endif
 using namespace sword;
 using std::cout;
@@ -425,7 +425,7 @@ char *backend_module_mgr_get_path_to_mods(void)
 }
 
 char *backend_mod_mgr_get_config_entry(char *module_name,
-				       char *entry) {
+				       const char *entry) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
 	//-- iterate through the modules until we find modName  
@@ -990,7 +990,7 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 	if (sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
-		OLD_CODESET = "iso8859-1";
+		OLD_CODESET = (char*)"iso8859-1";
 	}
 	return retval;
 }

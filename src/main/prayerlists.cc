@@ -74,7 +74,7 @@ enum
 /*********************************    *************************************/
 
 static
-void setEntryText (RawGenBook * book, gchar * text)
+void setEntryText (RawGenBook * book, const gchar * text)
 {
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 	if (treeKey->getOffset ()) {
@@ -94,7 +94,7 @@ void setLocalName (TreeKeyIdx * treeKey, char *new_name)
 
 */
 static
-void appendChild (TreeKeyIdx * treeKey, gchar * name)
+void appendChild (TreeKeyIdx * treeKey, const gchar * name)
 {
 	treeKey->appendChild ();
 	treeKey->setLocalName (name);
@@ -105,7 +105,7 @@ void appendChild (TreeKeyIdx * treeKey, gchar * name)
 
 
 static
-void appendSibbling (TreeKeyIdx * treeKey, gchar * name)
+void appendSibbling (TreeKeyIdx * treeKey, const gchar * name)
 {
 	if (treeKey->getOffset ()) {
 		treeKey->append ();
@@ -157,7 +157,7 @@ int main_prayerlist_basic_create(void)
 
 	//if (list_name == NULL) {
 		info = gui_new_dialog ();
-		info->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+		info->stock_icon = (gchar *)GTK_STOCK_DIALOG_QUESTION;
 		info->title = _("Prayer List");
 		info->label_top = _("Name for new prayer list");
 		info->label1 = _("Name: ");
@@ -242,7 +242,7 @@ int main_prayerlist_not_so_basic_create(void)
 
 	
 	info = gui_new_dialog ();
-	info->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+	info->stock_icon = (gchar *)GTK_STOCK_DIALOG_QUESTION;
 	info->title = _("Prayer List");
 	info->label_top = _("Name for new prayer list");
 	info->label1 = _("Name: ");
@@ -332,7 +332,7 @@ int main_prayerlist_wild_create(void)
 	char *list_name = NULL;
 	
 	info = gui_new_dialog ();
-	info->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+	info->stock_icon = (gchar*)GTK_STOCK_DIALOG_QUESTION;
 	info->title = _("Prayer List");
 	info->label_top = _("Name for new prayer list");
 	info->label1 = _("Name: ");

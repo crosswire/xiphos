@@ -37,22 +37,22 @@ void xml_write_bookmark_doc(const xmlChar * xml_filename);
 
 void xml_free_bookmark_doc(void);
 xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file);
-char *xml_get_list_from_label(char * section, char * item, const char * label);
-int xml_set_section_ptr(char * section);
-void xml_set_list_item(char * section, char * item, char * label, 
-				char * value);
+char *xml_get_list_from_label(const char * section, const char * item, const char * label);
+int xml_set_section_ptr(const char * section);
+void xml_set_list_item(const char * section, const char * item, const char * label, 
+				const char * value);
 int xml_next_item(void);
 char *xml_get_label(void);
 char *xml_get_list(void);
 int xml_create_settings_file(char * file_name);
 int xml_parse_settings_file(char *file_name);
-char *xml_get_value(char *section, const char *item);
-void xml_set_value(char *type_doc, char *section, const char *item,
+char *xml_get_value(const char *section, const char *item);
+void xml_set_value(const char *type_doc, const char *section, const char *item,
 		  const char *value);
 void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
 void xml_add_new_item_to_section(char * section, char * item_name, char * value);
-void xml_remove_node(char *section, char *item, char *label);
+void xml_remove_node(const char *section, const char *item, const char *label);
 
 #ifdef __cplusplus
 }

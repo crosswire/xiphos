@@ -196,9 +196,9 @@ void main_range_text_changed(GtkEditable * editable)
  *   void
  */
 
-static void set_search_global_option(gchar * option, gboolean choice)
+static void set_search_global_option(const gchar * option, gboolean choice)
 {	
-	char *on_off;
+	const char *on_off;
 	SWMgr *mgr = backendSearch->get_display_mgr();
 
 	if (choice) {
@@ -341,7 +341,7 @@ void main_delete_range(void)
 
 	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	info->stock_icon = (gchar*)GTK_STOCK_DIALOG_WARNING;
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s %s",
 			_("Delete Range?"),
@@ -622,7 +622,7 @@ void main_delete_module(GtkTreeView *treeview)
 
 	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	info->stock_icon = (gchar*) GTK_STOCK_DIALOG_WARNING;
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			_("Remove Module?"),
@@ -1250,7 +1250,7 @@ static GList *get_custom_list_from_name(const gchar * label)
 {
 	GList *items = NULL;
 	gchar *mod_list = NULL;
-	gchar *t;
+	const gchar *t;
 	gchar *token;
 
 	search1.module_count = 0;

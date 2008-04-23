@@ -211,7 +211,7 @@ void main_dialogs_clear_viewer(DIALOG_DATA *d)
 	GString *str;
 	GString *search_str;
 	gboolean was_editable = FALSE;
-	gchar *buf;
+	const char *buf;
 
 #ifdef USE_GTKMOZEMBED
 	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(d->previewer);
@@ -394,14 +394,15 @@ void main_dialogs_information_viewer(DIALOG_DATA * d, gchar * mod_name,
  *   void
  */
 
-void main_dialog_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type ,gchar * morph_text,
-			     gchar * morph, DIALOG_DATA * d)
+void main_dialog_information_viewer(const gchar * mod_name, const gchar * text, 
+									const gchar * key, const gchar * action, 
+									const gchar * type, const gchar * morph_text,
+									const gchar * morph, DIALOG_DATA * d)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	MOD_FONT *mf = get_font(mod_name);
+	MOD_FONT *mf = get_font((gchar*)mod_name);
 	
 	if(!d->previewer)
 		return;
@@ -1210,11 +1211,11 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		buf = be->render_this_text((gchar*)module,(gchar*)tmpbuf);
 		if(tmpbuf) g_free(tmpbuf);	
 		if (buf) {
-			main_dialog_information_viewer((gchar*)module, 
+			main_dialog_information_viewer(module, 
 					buf, 
-					(gchar*)value,
+					value,
 					"showNote",			
-					(gchar*)type,
+					type,
 					NULL,
 					NULL,
 					d);
@@ -1271,11 +1272,11 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		
 		if(tmpbuf) g_free(tmpbuf);	
 		if (str) {
-			main_dialog_information_viewer((gchar*)module, 
+			main_dialog_information_viewer(module, 
 					str->str, 
-					(gchar*)value,
+					value,
 					"showNote",			
-					(gchar*)type,
+					type,
 					NULL,
 					NULL,
 					d);
@@ -1315,7 +1316,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 	
 	if(!strcmp(type,"Greek") || strstr(type,"x-Robinson")  || strstr(type,"robinson")) {
 		if(be->is_module("Robinson")) 
-			modbuf = "Robinson";
+			modbuf = (char*)"Robinson";
 	} 		
 	if (clicked) {
 		if (!gsI_isrunning) 
@@ -1323,7 +1324,7 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		else
 			gtk_widget_show(dlg);
 		
-		gui_display_mod_and_key(modbuf, (gchar*)value);
+		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
 		     modbuf);			
 	} else {
@@ -1331,9 +1332,9 @@ static gint show_note(DIALOG_DATA * d,const gchar * module, const gchar * passag
 		if (mybuf) {
 			main_dialog_information_viewer(modbuf, 
 					mybuf, 
-					(gchar*)value, 
+					value, 
 					"showMorph",
-					(gchar*)type,
+					type,
 					NULL,
 					NULL,
 					d);
@@ -1366,7 +1367,7 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 			const gchar * value, gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
-	gchar *modbuf = NULL;
+	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	guint delay;	
 	guint i;
@@ -1393,18 +1394,18 @@ static gint show_strongs(DIALOG_DATA * t, const gchar * type,
 		else
 			gtk_widget_show(dlg);
 		
-		gui_display_mod_and_key(modbuf, (gchar*)value);
+		gui_display_mod_and_key(modbuf, value);
 		gtk_window_set_title(GTK_WINDOW(dialog_display_info), modbuf);		
 	} else {
 		mybuf =
-		    main_get_rendered_text(modbuf, (gchar*)value);
+		    main_get_rendered_text((gchar*)modbuf, (gchar*)value);
 		if (mybuf) {
 			main_dialog_information_viewer(  
 					modbuf, 
 					mybuf, 
-					(gchar*)value, 
+					value, 
 					"showStrongs",
-					(gchar*)type,
+					type,
 					NULL,
 					NULL,
 					t);
@@ -1493,8 +1494,8 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 			 const gchar * morph, gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
-	gchar *modbuf = NULL;
-	gchar *morph_mod = NULL;
+	const gchar *modbuf = NULL;
+	const gchar *morph_mod = NULL;
 	gchar *strongs_buf = NULL;
 	gchar *morph_buf = NULL;
 	guint delay;	
@@ -1526,18 +1527,18 @@ static gint show_strongs_morph(DIALOG_DATA * d,const gchar * type, const gchar *
 		     modbuf);		
 	} else {
 		strongs_buf =
-		    main_get_rendered_text(modbuf, (gchar*)value);
+		    main_get_rendered_text((gchar*)modbuf, (gchar*)value);
 		morph_buf = 
-		    main_get_rendered_text(morph_mod, (gchar*)morph);
+		    main_get_rendered_text((gchar*)morph_mod, (gchar*)morph);
 		if (strongs_buf) {
 			main_dialog_information_viewer(  
 					modbuf, 
 					strongs_buf, 
-					(gchar*)value, 
+					value, 
 					"showStrongs",
-					(gchar*)type,
-					(gchar*)morph_buf,
-					(gchar*)morph,
+					type,
+					morph_buf,
+					morph,
 					d);
 			g_free(strongs_buf);
 			if(morph_buf) g_free(morph_buf);
@@ -1691,7 +1692,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	t->is_dialog = TRUE;
 	t->mod_name = g_strdup(mod_name);
 	t->is_rtol = FALSE;
-	if((direction = be->get_config_entry(t->mod_name, "Direction"))
+	if((direction = be->get_config_entry(t->mod_name, (char*)"Direction"))
 					!= NULL) {
 		if (!strcmp(direction, "RtoL"))			
 			t->is_rtol = TRUE;
@@ -1784,8 +1785,8 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	} else
 		be->set_key(t->key);
 	
-	if (be->get_config_entry(t->mod_name, "CipherKey")) {
-		t->cipher_old = be->get_config_entry(t->mod_name, "CipherKey");
+	if (be->get_config_entry(t->mod_name, (char*)"CipherKey")) {
+		t->cipher_old = be->get_config_entry(t->mod_name, (char*)"CipherKey");
 		t->is_locked = strlen(t->cipher_old);
 	} else {
 		t->is_locked = 0;

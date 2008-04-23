@@ -129,7 +129,7 @@ static void load_treeview (GtkTreeStore * model, GtkTreeIter * parent,
 }
 
 /*********************************    *************************************/
-void setEntryText (RawGenBook * book, gchar * text)
+void setEntryText (RawGenBook * book, const gchar * text)
 {
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 	if (treeKey->getOffset ()) {
@@ -138,7 +138,7 @@ void setEntryText (RawGenBook * book, gchar * text)
 	}
 }
 
-void appendSibbling (TreeKeyIdx * treeKey, gchar * name)
+void appendSibbling (TreeKeyIdx * treeKey, const gchar * name)
 {
 	if (treeKey->getOffset ()) {
 		treeKey->append ();
@@ -147,7 +147,7 @@ void appendSibbling (TreeKeyIdx * treeKey, gchar * name)
 	}
 }
 
-void appendChild (TreeKeyIdx * treeKey, gchar * name)
+void appendChild (TreeKeyIdx * treeKey, const gchar * name)
 {
 	treeKey->appendChild ();
 	treeKey->setLocalName (name);
@@ -369,7 +369,7 @@ gint main_prayer_list_new (gchar * list_name)
 
 	if (list_name == NULL) {
 		info = gui_new_dialog ();
-		info->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+		info->stock_icon = (gchar *) GTK_STOCK_DIALOG_QUESTION;
 		info->title = _("Prayer List");
 		info->label_top = _("Name for new prayer list");
 		info->label1 = _("Name: ");
