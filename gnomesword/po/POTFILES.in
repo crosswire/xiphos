@@ -10,6 +10,7 @@ src/main/display.cc
 # src/main/embed.cc
 src/main/lists.cc
 src/main/module_dialogs.cc
+src/main/prayerlists.cc
 src/main/previewer.cc
 src/main/parallel_view.cc
 src/main/search_dialog.cc

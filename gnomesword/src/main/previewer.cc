@@ -139,14 +139,14 @@ void main_clear_viewer(void)
  *   void
  */
 
-void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-			     gchar * action, gchar * type,
-			     gchar * morph_text, gchar * morph)
+void main_information_viewer(const gchar * mod_name, const gchar * text, const gchar * key,
+			     const gchar * action, const gchar * type,
+			     const gchar * morph_text, const gchar * morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	MOD_FONT *mf = get_font(mod_name);
+	MOD_FONT *mf = get_font((gchar*)mod_name);
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
 		return;

@@ -77,7 +77,7 @@ static GLOBAL_OPS *ops;
 
 BackEnd *backend_p;
 
-static gchar *tf2of(int true_false)
+static const gchar *tf2of(int true_false)
 {
 	if (true_false)
 		return "On";
@@ -88,7 +88,7 @@ static gchar *tf2of(int true_false)
 
 static void set_global_option(char * option, gboolean choice)
 {
-	char *on_off = tf2of(choice);;
+	const char *on_off = tf2of(choice);;
 	SWMgr *mgr = backend_p->get_display_mgr();
 
 	mgr->setGlobalOption(option, on_off);
@@ -499,7 +499,8 @@ void main_change_parallel_module(GSParallel parallel, gchar * mod_name)
 
 void main_update_parallel_page(void)
 {
-	gchar tmpBuf[256], *rowcolor;
+	gchar tmpBuf[256];
+	const gchar *rowcolor;
 	gchar *font_size_tmp = NULL, *font_size = NULL;
 	gchar *utf8str, *mod_name, *font_name = NULL;
 	gint utf8len, i, j;
@@ -968,15 +969,15 @@ static void int_display(GtkHTML *html, gchar * key)
 #endif
 {
 	gchar  	*utf8str,
-	   	*bgColor,
 		*textColor,
-	    	buf[500],
+	    buf[500],
 		*tmpkey,
 		tmpbuf[256],
 		*mod_name[5],
 		*use_font_size[5],
 		*font_size_tmp[5],
 		*use_font_name[5];
+	const gchar *bgColor;
 	GString *str;
 	gboolean evenRow = FALSE;
 	gboolean is_rtol = FALSE;

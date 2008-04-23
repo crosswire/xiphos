@@ -59,7 +59,7 @@ static GtkWidget *html_widget;
  *   void
  */
 
-void gui_display_mod_and_key(gchar * mod_name, gchar * key)
+void gui_display_mod_and_key(const gchar * mod_name, const gchar * key)
 {
 	gchar *text = NULL;
 	GS_message(("mod_name: %s  key: %s",mod_name,key));

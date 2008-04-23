@@ -48,7 +48,7 @@ struct  _global_ops {
 	gint image_content;
 };
 
-int main_save_module_options(char * mod_name, char * option, int choice);
+int main_save_module_options(char * mod_name, const char * option, int choice);
 void main_set_global_options(GLOBAL_OPS * ops);
 void main_set_strongs_morphs_off(GLOBAL_OPS * ops);
 void main_set_strongs_morphs(GLOBAL_OPS * ops);
