@@ -55,11 +55,11 @@ using namespace sword;
 using namespace std;
 
 BackEnd *backend = NULL;
-char *OLD_CODESET;
+
 
  
 #ifdef DEBUG 
-static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
+static const char *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
 #endif
 
 BackEnd::BackEnd() {	
@@ -237,7 +237,7 @@ char *BackEnd::set_sword_locale(const char *sys_locale) {
 	if(sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
 	} else {
-		OLD_CODESET = "UTF-8";
+		OLD_CODESET = (char*)"UTF-8";
 	}
 	return retval;
 }

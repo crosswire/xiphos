@@ -41,7 +41,7 @@
 #include "backend/sword_main.hh"
 
 static void set_dialog_global_option(BackEnd *be,
-				     char *option,
+				     const char *option,
 				     gboolean choice)
 {
 	SWMgr *mgr = be->get_display_mgr();
@@ -53,8 +53,8 @@ static void set_dialog_global_option(BackEnd *be,
 
 
 static void set_dialog_global_variant(BackEnd *be,
-				      char *option,
-				      char *choice)
+				      const char *option,
+				      const char *choice)
 {
 	SWMgr *mgr = be->get_display_mgr();
 
@@ -63,7 +63,7 @@ static void set_dialog_global_variant(BackEnd *be,
 
 
 static void set_global_option(int manager,
-			      char *option,
+			      const char *option,
 			      gboolean choice)
 {
 	SWMgr *mgr = backend->get_display_mgr();
@@ -77,8 +77,8 @@ static void set_global_option(int manager,
 
 
 static void set_global_variant(int manager,
-			       char *option,
-			       char *choice)
+			       const char *option,
+			       const char *choice)
 {
 	SWMgr *mgr = backend->get_display_mgr();
 	SWMgr *main_mgr = backend->get_main_mgr();
@@ -106,7 +106,7 @@ static void set_global_variant(int manager,
  */
 
 int main_save_module_options(char *mod_name,
-			     char *option,
+			     const char *option,
 			     int choice)
 {
 	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);

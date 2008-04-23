@@ -87,9 +87,9 @@ char *main_module_name_from_description(char *description);
 char *main_get_search_results_text(char * mod_name, char * key);
 /*void main_locked_module_display(gpointer data,
 				  char * mod_name, char * cipher_key);*/
-void main_display_book(const char * mod_name, char * key);   //, unsigned long offset);
+void main_display_book(const char * mod_name, const char * key);   //, unsigned long offset);
 void main_display_commentary(const char * mod_name, const char * key);
-void main_display_dictionary(char * mod_name, char * key);
+void main_display_dictionary(const char * mod_name, const char * key);
 void main_display_bible(const char * mod_name, const char * key);
 void main_display_devotional(void);
 void main_setup_displays(void);
@@ -108,7 +108,7 @@ char *main_get_mod_config_file(const char * module_name,
 char *main_get_mod_about_info(char * mod_name);
 char *main_get_striptext(char *module_name, char *key);
 char *main_get_striptext_from_string(char *module_name, char *string);
-char *main_get_rendered_text(char *module_name, char *key);
+char *main_get_rendered_text(const char *module_name, const char *key);
 char *main_get_raw_text(char *module_name, char *key);
 int main_get_mod_type(char * mod_name);
 char *main_get_module_description(char * module_name);

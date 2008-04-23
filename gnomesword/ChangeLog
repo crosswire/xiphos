@@ -1,3 +1,7 @@
+2008-04-23  dom  <domcox@hahaua>
+
+	* fix failures with gcc 4.2.3 (Ubuntu HH -8.04)
+
 2008-04-21  terry <tbiggs@users.sourceforge.net>
 
 	* added <Save As> item to studypad file menus.

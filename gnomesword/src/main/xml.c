@@ -679,7 +679,7 @@ int xml_create_settings_file(char *path)
  *   xmlNodePtr
  */
 
-static xmlNodePtr xml_find_section(char *type_doc, char *section)
+static xmlNodePtr xml_find_section(const char *type_doc, const char *section)
 {
 	xmlNodePtr cur = NULL;
 
@@ -727,8 +727,8 @@ static xmlNodePtr xml_find_section(char *type_doc, char *section)
  *   xmlNodePtr
  */
 
-static xmlNodePtr xml_find_item(xmlNodePtr parent, char *item,
-				char *label)
+static xmlNodePtr xml_find_item(xmlNodePtr parent, const char *item,
+				const char *label)
 {
 	xmlNodePtr cur = NULL;
 	xmlChar *prop_label = NULL;
@@ -768,7 +768,7 @@ static xmlNodePtr xml_find_item(xmlNodePtr parent, char *item,
  *   char *
  */
 
-char *xml_get_list_from_label(char *section, char *item, const char *label)
+char *xml_get_list_from_label(const char *section, const char *item, const char *label)
 {
 	xmlNodePtr cur = NULL;
 	xmlChar *prop_label = NULL;
@@ -818,8 +818,8 @@ char *xml_get_list_from_label(char *section, char *item, const char *label)
  *   void
  */
 
-void xml_set_list_item(char *section, char *item, char *label,
-		       char *value)
+void xml_set_list_item(const char *section, const char *item, const char *label,
+		       const char *value)
 {
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;
@@ -857,7 +857,7 @@ void xml_set_list_item(char *section, char *item, char *label,
  *   int
  */
 
-int xml_set_section_ptr(char *section)
+int xml_set_section_ptr(const char *section)
 {
 	xmlNodePtr cur = NULL;
 
@@ -955,8 +955,8 @@ char *xml_get_list(void)
  *   xmlNodePtr
  */
 
-static xmlNodePtr xml_find_prop(char *type_doc, char *section,
-				char *prop)
+static xmlNodePtr xml_find_prop(const char *type_doc, const char *section,
+				const char *prop)
 {
 	xmlNodePtr cur = NULL;
 	xmlNodePtr item_cur = NULL;
@@ -1015,12 +1015,12 @@ static xmlNodePtr xml_find_prop(char *type_doc, char *section,
  *   char *
  */
 
-char *xml_get_value(char *section, const char *item)
+char *xml_get_value(const char *section, const char *item)
 {
 	xmlNodePtr cur = NULL;
 	xmlChar *results = NULL;
 	if ((cur =
-	     xml_find_prop("GnomeSword", section, (char *)item)) != NULL) {
+	     xml_find_prop("GnomeSword", section, item)) != NULL) {
 		results = xmlNodeListGetString(xml_settings_doc,
 					       cur->xmlChildrenNode, 1);
 		if (results)
@@ -1047,12 +1047,12 @@ char *xml_get_value(char *section, const char *item)
  *   void
  */
 
-void xml_set_value(char *type_doc, char *section, const char *item,
+void xml_set_value(const char *type_doc, const char *section, const char *item,
 		   const char *value)
 {
 	xmlNodePtr cur = NULL;
 	if ((cur =
-	     xml_find_prop(type_doc, section, (char *)item)) != NULL) {
+	     xml_find_prop(type_doc, section, item)) != NULL) {
 		xmlNodeSetContent(cur, (const xmlChar *)value);
 	}
 }
@@ -1193,7 +1193,7 @@ void xml_add_new_item_to_section(char * section, char * item_name, char * value)
  *   void
  */
 
-void xml_remove_node(char *section, char *item, char *label)
+void xml_remove_node(const char *section, const char *item, const char *label)
 {
 	xmlNodePtr cur = NULL;
 	xmlNodePtr cur_item = NULL;

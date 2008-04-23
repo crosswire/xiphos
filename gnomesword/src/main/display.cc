@@ -1243,7 +1243,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar *utf8_key;
 	gchar *buf;
 	char *num;
-	gchar *paragraphMark = NULL;
+	const gchar *paragraphMark = NULL;
 	gchar *br = NULL;
 
 	char *ModuleName = imodule.Name();
@@ -1707,7 +1707,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	char *num;
 	is_rtol = main_is_mod_rtol(ModuleName);
 	gchar *preverse = NULL;
-	gchar *paragraphMark = "&para;";
+	const gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
 	gchar heading[32];
 	gboolean newparagraph = FALSE;	
@@ -2132,7 +2132,7 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	gchar *utf8_key;
 	gchar *buf;
 	gchar *preverse = NULL;
-	gchar *paragraphMark = NULL;
+	const gchar *paragraphMark = NULL;
 	gchar *br = NULL;
 	gchar heading[32];
 	SWBuf swbuf;

@@ -115,7 +115,7 @@ static void alert_url_not_found(const gchar * url)
 	GString *dialog_text = g_string_new(NULL);
 
 	dialog = gui_new_dialog();
-	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
+	dialog->stock_icon = (gchar*) GTK_STOCK_DIALOG_INFO;
 	g_string_printf(dialog_text,
 				"<span weight=\"bold\">%s</span>\n\n%s",
 				_("URL not found:"),
@@ -347,7 +347,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
  static gint show_morph(const gchar * stype, const gchar * svalue, 
 				gboolean clicked)
 {	
-	gchar *modbuf = NULL;
+	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	
 	if (!strcmp(stype,"Greek") ||
@@ -405,7 +405,7 @@ static gint show_strongs(const gchar * stype, const gchar * svalue,
 		return 1;	// it's a lemma only - no lexdict reference.
 
 	gchar *modbuf_viewer = NULL;
-	gchar *modbuf = NULL;
+	const gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
 	gchar *val = NULL;
 	gchar *val1 = NULL;
@@ -477,8 +477,8 @@ static gint show_strongs_morph(const gchar * stype, const gchar * svalue,
 			 const gchar * morph, gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
-	gchar *modbuf = NULL;
-	gchar *morph_mod = NULL;
+	const gchar *modbuf = NULL;
+	const gchar *morph_mod = NULL;
 	gchar *strongs_buf = NULL;
 	gchar *strongs_buf2 = NULL;
 	gchar *morph_buf = NULL;
@@ -1138,7 +1138,7 @@ gint main_url_handler_gecko(const gchar * url)
 	if (strstr(url_work, "passagestudy.jsp") ||
 	    strstr(url_work, "gnomesword.url")) {
 		gchar* action = NULL;
-		gchar* stype = NULL;
+		const gchar* stype = NULL;
 		gchar* svalue = NULL;
 		gchar* module = NULL;
 		gchar* passage = NULL;
