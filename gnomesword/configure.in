@@ -231,10 +231,11 @@ if test "x$GXX" = xyes; then
 fi
 
 AM_MAINTAINER_MODE
-if test "x$maintainer-mode" = "xyes"; then
-  dnl AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
+if test "x$USE_MAINTAINER_MODE" = "xyes"; then
+  AC_DEFINE(MAINTAINER_MODE, 1, [Define to 1 if you wish to enable 'maintainer-only' behavior.])
   disable_werror=no
   enable_debug=yes
+  debug=yes
 dnl   A_CPPFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGCONF_DISABLE_DEPRECATED -DGNOME_VFS_DISABLE_DEPRECATED -DBONOBO_UI_DISABLE_DEPRECATED -DBONOBO_DISABLE_DEPRECATED -DLIBGLADE_DISABLE_DEPRECATED -DPANGO_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 else
   disable_werror=yes
@@ -396,4 +397,5 @@ if test "x$debug" = xyes; then
   echo "GNOME_CFLAGS: $GNOME_CFLAGS"
   echo "GTKHTML_DATA_DIR        $GTKHTML_DATA_DIR"
   echo "GTKHTML_API_VERSION     $GTKHTML_API_VERSION"
+  echo "USE_MAINTAINER_MODE                    $USE_MAINTAINER_MODE"
 fi
