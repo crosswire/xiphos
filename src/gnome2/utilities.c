@@ -180,7 +180,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 gchar * gui_general_user_file (const char *fname, gboolean critical)
 {
 	static GHashTable *already_found = NULL;
-	gchar *alternative[6];
+	gchar *alternative[7];
 	gchar *file;
 	gint i;
 	
@@ -227,15 +227,18 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename ("..", fname, NULL);
 	alternative[i++] = g_build_filename ("ui", fname, NULL);
 	alternative[i++] = g_build_filename ("..", "ui", fname, NULL);
+	alternative[i++] = g_build_filename ("..", "..", "ui", fname, NULL);
+	
 #endif
 	alternative[i++] = g_build_filename (SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
 	
 	/* select one of the alternatives */
 	file = NULL;
+	
 	for (i = 0; alternative[i] != NULL; i++)
 	{
-		if (file == NULL && g_file_test (alternative[i], G_FILE_TEST_EXISTS)) 
+		if (file == NULL &&  g_file_test (alternative[i], G_FILE_TEST_EXISTS)) 
 		{
 			file = alternative[i];
 		}
