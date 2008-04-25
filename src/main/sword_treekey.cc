@@ -331,14 +331,14 @@ void main_load_book_tree_in_editor (GtkTreeView * treeview, char *book)
 
 void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
-	appendChild (treeKey, "Growth");
-	setEntryText (book, "<b>For Growth</b><br>");
-	appendSibbling (treeKey, "Salvation");
-	setEntryText (book, "<b>For Salvation</b><br>");
-	appendSibbling (treeKey, "Health");
-	setEntryText (book, "<b>For Health</b><br>");
+	appendChild (treeKey, _("Growth"));
+	setEntryText (book, _("<b>For Growth</b><br>"));
+	appendSibbling (treeKey, _("Salvation"));
+	setEntryText (book, _("<b>For Salvation</b><br>"));
+	appendSibbling (treeKey, _("Health"));
+	setEntryText (book, _("<b>For Health</b><br>"));
 	appendSibbling (treeKey, "Misc");
-	setEntryText (book, "<b>Miscellaneous</b><br>");
+	setEntryText (book, _("<b>Miscellaneous</b><br>"));
 
 	treeKey->parent ();
 }
@@ -414,9 +414,9 @@ gint main_prayer_list_new (gchar * list_name)
 	config[list_name]["Version"] = "0.1";
 	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = "Prayer List";
+	config[list_name]["Description"] = _("Prayer List");
 	config[list_name]["About"] =
-		  "\\par\\par My prayer list \\par\\par Module created in GnomeSword";
+		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
 	config.Save ();
 
 	g_free (path);
