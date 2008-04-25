@@ -117,14 +117,14 @@ void appendSibbling (TreeKeyIdx * treeKey, const gchar * name)
 static
 void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
-	appendChild (treeKey, "Growth");
-	setEntryText (book, "<b>For Growth</b><br>");
-	appendSibbling (treeKey, "Salvation");
-	setEntryText (book, "<b>For Salvation</b><br>");
-	appendSibbling (treeKey, "Health");
-	setEntryText (book, "<b>For Health</b><br>");
-	appendSibbling (treeKey, "Misc");
-	setEntryText (book, "<b>Miscellaneous</b><br>");
+	appendChild (treeKey, _("Growth"));
+	setEntryText (book, _("<b>For Growth</b><br>"));
+	appendSibbling (treeKey, _("Salvation"));
+	setEntryText (book, _("<b>For Salvation</b><br>"));
+	appendSibbling (treeKey, _("Health"));
+	setEntryText (book, _("<b>For Health</b><br>"));
+	appendSibbling (treeKey, _("Misc"));
+	setEntryText (book, _("<b>Miscellaneous</b><br>"));
 
 	treeKey->parent ();
 }
@@ -202,9 +202,9 @@ int main_prayerlist_basic_create(void)
 	config[list_name]["Version"] = "0.1";
 	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = "Prayer List";
+	config[list_name]["Description"] = _("Prayer List");
 	config[list_name]["About"] =
-		  "\\par\\par My prayer list \\par\\par Module created in GnomeSword";
+		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
 	config.Save ();
 
 	g_free (path);
@@ -218,8 +218,8 @@ int main_prayerlist_basic_create(void)
 	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
 	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
-	appendChild (treeKey, "MyPrayerList");
-	setEntryText (book, "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>");
+	appendChild (treeKey, _("MyPrayerList"));
+	setEntryText (book, _("<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"));
 	
 	delete treeKey;
 	g_free (info->text1);
@@ -287,9 +287,9 @@ int main_prayerlist_not_so_basic_create(void)
 	config[list_name]["Version"] = "0.1";
 	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = "Prayer List";
+	config[list_name]["Description"] = _("Prayer List");
 	config[list_name]["About"] =
-		  "\\par\\par My prayer list \\par\\par Module created in GnomeSword";
+		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
 	config.Save ();
 
 	g_free (path);
@@ -303,14 +303,14 @@ int main_prayerlist_not_so_basic_create(void)
 	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
 	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
-	appendChild (treeKey, "Salvation");
-	setEntryText (book, "Bob<br>Sam<br>Sue<br>John<br>");
+	appendChild (treeKey, _("Salvation"));
+	setEntryText (book, _("Bob<br>Sam<br>Sue<br>John<br>"));
 	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "Spiritual Growth");
-	setEntryText (book, "Mike<br>Steve<br>");
+	appendSibbling (treeKey, _("Spiritual Growth"));
+	setEntryText (book, _("Mike<br>Steve<br>"));
 	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "Health");
-	setEntryText (book, "Sue<br>John<br>");
+	appendSibbling (treeKey, _("Health"));
+	setEntryText (book, _("Sue<br>John<br>"));
 	
 	delete treeKey;
 	g_free (info->text1);
@@ -377,9 +377,9 @@ int main_prayerlist_wild_create(void)
 	config[list_name]["Version"] = "0.1";
 	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = "Prayer List";
+	config[list_name]["Description"] = _("Prayer List");
 	config[list_name]["About"] =
-		  "\\par\\par My prayer list \\par\\par Module created in GnomeSword";
+		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
 	config.Save ();
 
 	g_free (path);
@@ -394,40 +394,40 @@ int main_prayerlist_wild_create(void)
 	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
 	appendChild (treeKey, "01");
-	setEntryText (book, "<b>January</b><br>");
+	setEntryText (book, _("<b>January</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "02");
-	setEntryText (book, "<b>Febuary</b><br>");
+	setEntryText (book, _("<b>Febuary</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "03");
-	setEntryText (book, "<b>March</b><br>");
+	setEntryText (book, _("<b>March</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "04");
-	setEntryText (book, "<b>April</b><br>");
+	setEntryText (book, _("<b>April</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "05");
-	setEntryText (book, "<b>May</b><br>");
+	setEntryText (book, _("<b>May</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "06");
-	setEntryText (book, "<b>June</b><br>");
+	setEntryText (book, _("<b>June</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "07");
-	setEntryText (book, "<b>July</b><br>");
+	setEntryText (book, _("<b>July</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "08");
-	setEntryText (book, "<b>August</b><br>");
+	setEntryText (book, _("<b>August</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "09");
-	setEntryText (book, "<b>September</b><br>");
+	setEntryText (book, _("<b>September</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "10");
-	setEntryText (book, "<b>October</b><br>");
+	setEntryText (book, _("<b>October</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "11");
-	setEntryText (book, "<b>November</b><br>");
+	setEntryText (book, _("<b>November</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 	appendSibbling (treeKey, "12");
-	setEntryText (book, "<b>December</b><br>");
+	setEntryText (book, _("<b>December</b><br>"));
 	add_prayer_list_sections (book, treeKey);
 
 	delete treeKey;
