@@ -1,3 +1,11 @@
+2008-04-25  dom  <domcox@users.sourceforge.net>
+
+	* fr.po: Updated French translation.
+
+2008-04-24  dom  <domcox@users.sourceforge.net>
+
+	* POTFILES.in: full rewrite, missing files added
+
 2003-05-12  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.11.4.
