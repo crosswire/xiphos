@@ -13,9 +13,9 @@
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY license SYSTEM "license.xml">
 
-  <!ENTITY appversion "2.3.3">
-  <!ENTITY manrevision "2.3.3">
-  <!ENTITY date "January 2008">
+  <!ENTITY appversion "2.3.4">
+  <!ENTITY manrevision "2.3.4">
+  <!ENTITY date "April 2008">
   <!ENTITY app "<application>Gnomesword2</application>">
   <!ENTITY appname "GnomeSword">
   <!ENTITY gnomesword "the GnomeSword Team">
@@ -133,6 +133,10 @@ Template last modified Apr 11, 2002
         <date>&date;</date> 
       </revision>
 
+      <revision>
+	<revnumber>Gnomesword 2.3.3</revnumber>
+	<date>2008-01-20</date>
+      </revision>
       <revision> 
         <revnumber>GnomeSword 2.3.2</revnumber> 
         <date>2007-12-26</date> 
