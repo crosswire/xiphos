@@ -412,20 +412,62 @@ GTKEntryDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) || (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE)) // ||
-		rework = (const char *)(const char *)imodule.getRawEntry();
-	else if (!strcmp(imodule.Name(), "ISBE"))
-		rework = (const char *)(const char *)imodule.StripText();
-	else
-		rework = (const char *)imodule;
+	// we will use the module cache for regular commentaries,
+	// which navigate/change a lot, whereas pers.comms, lexdicts,
+	// and genbooks still do fresh access every time -- the nature
+	// of those modules' use won't buy much with a module cache.
 
-	if (ops->image_content == 0)
-		ClearImages((gchar *)rework);
-	else if ((ops->image_content == -1) &&	// "unknown"
-		 (strcasestr(rework, "<img ") != NULL)) {
-		ops->image_content = 1;		// now known.
-		main_save_module_options(imodule.Name(),
-					 "Image Content", 1);
+	// there is some unfortunate but unavoidable code duplication
+	// for handling potential clearing of images, due to the
+	// difference in how modules are being accessed.
+
+	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
+		VerseKey *key = (VerseKey *)(SWKey *)imodule;
+		int curTestament = key->Testament();
+		uint16_t cache_flags = ConstructFlags(ops);
+		const char *ModuleName = imodule.Name();
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			rework = (const char *)imodule;
+
+			if (ops->image_content == 0)
+				ClearImages((gchar *)rework);
+			else if ((ops->image_content == -1) &&	// "unknown"
+				 (strcasestr(rework, "<img ") != NULL)) {
+				ops->image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
+
+	} else {
+
+		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
+		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+			rework = (const char *)(const char *)imodule.getRawEntry();
+		else if (!strcmp(imodule.Name(), "ISBE"))
+			rework = (const char *)(const char *)imodule.StripText();
+		else
+			rework = (const char *)imodule;
+
+		if (ops->image_content == 0)
+			ClearImages((gchar *)rework);
+		else if ((ops->image_content == -1) &&	// "unknown"
+			 (strcasestr(rework, "<img ") != NULL)) {
+			ops->image_content = 1;		// now known.
+			main_save_module_options(imodule.Name(),
+						 "Image Content", 1);
+		}
 	}
 
 	swbuf.append(settings.imageresize
