@@ -1,3 +1,8 @@
+2008-05-08  karl <charcoal@users.sf.net>
+
+	* fix #1863160 efficiency: full module cache usage, only for
+	  commentaries -- lexdicts & genbooks wouldn't gain much from it.
+
 2008-04-23  dom  <domcox@users.sourceforge.net>
 
 	* fix failures with gcc 4.2.3 (Ubuntu HH -8.04)
