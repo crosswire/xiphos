@@ -1,3 +1,9 @@
+2008-05-10  karl <charcoal@users.sf.net>
+
+	* update release notes, tweak manual regarding fonts.
+	* more #1863160 efficiency: commentary dialogs.
+	  we now have full cache usage of bibles & commentaries.
+
 2008-05-08  karl <charcoal@users.sf.net>
 
 	* fix #1863160 efficiency: full module cache usage, only for
