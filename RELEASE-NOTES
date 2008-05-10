@@ -19,22 +19,33 @@ Release 2.3.4
 
 4. Module manager remembers last settings.
 
+5. A passage exporter facility is now available on the right-click menu,
+   if GnomeSword is configured with --enable-exporter.
+
+GnomeSword now requires Sword 1.5.11.
+
 Bug reports addressed since 2.3.3:
-1923337  det.parallel needs to respect module font names
-1915596  text in preview window clears if mouse enters bible view
-1910081  Strong's Greek will not Look-up
-1906651  New Document
-1906647  Showing Commentary Pane
-1906644  Personal Commentary Quotes
-1894262  application crashes since kernel upgrade
+1747281  2.3: can't drag-n-drop from adv.search [unresolvable]
+1863160  efficiency: full module cache usage
 1872525  PATCH: Fix build errors with gcc-4.3
+1894262  application crashes since kernel upgrade
+1906644  Personal Commentary Quotes
+1906647  Showing Commentary Pane
+1906651  New Document
+1910081  Strong's Greek will not Look-up
+1915596  text in preview window clears if mouse enters bible view
+1923337  det.parallel needs to respect module font names
+1928119  Build failures with gcc 4.3
 
 New feature requests pending:
-1923328  Parsing/definition on word mouseover
 1894899  communication between gnomesword and bibledit
+1923328  Parsing/definition on word mouseover
+1941126  Scrolling between chapters
 
 Feature requests closed:
+1194044  prayer list
 1923319  Greek/Hebrew fonts in Parallel View
+1947593  chapters in parallel view.
 ________________________
 
 Release 2.3.3
