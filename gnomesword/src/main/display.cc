@@ -1696,20 +1696,53 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	swbuf.append(buf);
 	g_free(buf);
 
-	if ((be->module_type(imodule.Name()) == PERCOM_TYPE)) // ||
-		rework = (const char *)(const char *)imodule.getRawEntry();
-	else if (!strcmp(imodule.Name(), "ISBE"))
-		rework = (const char *)(const char *)imodule.StripText();
-	else
-		rework = (const char *)imodule;
+	if (be->module_type(imodule.Name()) == COMMENTARY_TYPE) {
+		VerseKey *key = (VerseKey *)(SWKey *)imodule;
+		int curTestament = key->Testament();
+		uint16_t cache_flags = ConstructFlags(ops);
+		const char *ModuleName = imodule.Name();
 
-	if (ops->image_content == 0)
-		ClearImages((gchar *)rework);
-	else if ((ops->image_content == -1) &&	// "unknown"
-		 (strcasestr(rework, "<img ") != NULL)) {
-		ops->image_content = 1;		// now known.
-		main_save_module_options(imodule.Name(),
-					 "Image Content", 1);
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			rework = (const char *)imodule;
+
+			if (ops->image_content == 0)
+				ClearImages((gchar *)rework);
+			else if ((ops->image_content == -1) &&	// "unknown"
+				 (strcasestr(rework, "<img ") != NULL)) {
+				ops->image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
+
+	} else {
+
+		if ((be->module_type(imodule.Name()) == PERCOM_TYPE) ||
+		    (be->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+			rework = (const char *)(const char *)imodule.getRawEntry();
+		else if (!strcmp(imodule.Name(), "ISBE"))
+			rework = (const char *)(const char *)imodule.StripText();
+		else
+			rework = (const char *)imodule;
+
+		if (ops->image_content == 0)
+			ClearImages((gchar *)rework);
+		else if ((ops->image_content == -1) &&	// "unknown"
+			 (strcasestr(rework, "<img ") != NULL)) {
+			ops->image_content = 1;		// now known.
+			main_save_module_options(imodule.Name(),
+						 "Image Content", 1);
+		}
 	}
 
 	swbuf.append(settings.imageresize
