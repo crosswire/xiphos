@@ -723,6 +723,11 @@
 				It is not possible for gtkhtml3 to interpret multiple font face directives in a single window, so the
 				gtkhtml3 detached parallel view window cannot provide per-module font selections.
 			</listitem>
+			<listitem>
+				gtkhmtl3 windows can support only a single font.  This means that the detached parallel window cannot
+				respect per-module font choices, and any module's internal font requests are ignored.  In MozEmbed,
+				neither of these limitations is present.
+			</listitem>
 		</itemizedlist>
 
 		<para>
