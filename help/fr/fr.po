@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-10 20:01+0200\n"
-"PO-Revision-Date: 2008-05-10 20:07+0200\n"
+"POT-Creation-Date: 2008-05-11 10:45+0200\n"
+"PO-Revision-Date: 2008-05-11 10:45+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:742(None)
+#: ../C/gnomesword.xml:738(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
 "md5=8cb0c5fe67f45e009bd8f40f5609f573"
@@ -2045,25 +2045,14 @@ msgstr ""
 msgid ""
 "It is not possible for gtkhtml3 to interpret multiple font face directives "
 "in a single window, so the gtkhtml3 detached parallel view window cannot "
-"provide per-module font selections."
+"provide per-module font selections. Also, modules' internal font requests "
+"are ignored in any gtkhtml3 window."
 msgstr ""
 "Gtkhtml3 ne sait pas interpréter les directives de polices multiples dans "
 "une même fenêtre, c'est pourquoi la fenêtre détachée «&nbsp;Vue "
 "parallèle&nbsp;» ne permet pas une sélection de police par module."
 
-#: ../C/gnomesword.xml:726(listitem)
-msgid ""
-"gtkhmtl3 windows can support only a single font. This means that the "
-"detached parallel window cannot respect per-module font choices, and any "
-"module's internal font requests are ignored. In MozEmbed, neither of these "
-"limitations is present."
-msgstr "La bibliothèque d'affichage gtkhtml3 ne supporte qu'une seule police à la fois. "
-"En conséquence, la fenêtre détachée «&nbsp;Vue parallèle&nbsp;» ne peut "
-"respecter les choix individuels de police prédéfinis et les changements de "
-"police sont ignorés. Dans la bibliothèque MozEmbed, ces limitations ne sont "
-"pas présentes "
-
-#: ../C/gnomesword.xml:733(para)
+#: ../C/gnomesword.xml:729(para)
 msgid ""
 "Using the \"About GnomeSword\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
@@ -2074,7 +2063,7 @@ msgstr ""
 "connaître la bibliothèque avec laquelle <application>&appname;</application> "
 "a été construit."
 
-#: ../C/gnomesword.xml:738(title) ../C/gnomesword.xml:745(phrase)
+#: ../C/gnomesword.xml:734(title) ../C/gnomesword.xml:741(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
@@ -3690,6 +3679,18 @@ msgstr ""
 #: ../C/studypad.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid ""
+#~ "gtkhmtl3 windows can support only a single font. This means that the "
+#~ "detached parallel window cannot respect per-module font choices, and any "
+#~ "module's internal font requests are ignored. In MozEmbed, neither of "
+#~ "these limitations is present."
+#~ msgstr ""
+#~ "La bibliothèque d'affichage gtkhtml3 ne supporte qu'une seule police à la "
+#~ "fois. En conséquence, la fenêtre détachée «&nbsp;Vue parallèle&nbsp;» ne "
+#~ "peut respecter les choix individuels de police prédéfinis et les "
+#~ "changements de police sont ignorés. Dans la bibliothèque MozEmbed, ces "
+#~ "limitations ne sont pas présentes "
 
 #~ msgid "January 2008"
 #~ msgstr "Janvier 2008"
