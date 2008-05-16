@@ -18,7 +18,8 @@ mozilla_include_subdirs =	\
 	uriloader	\
 	webbrwsr	\
 	webshell	\
-	widget
+	widget		\
+	xpcom
 
 	
 INCLUDES =  \
@@ -26,9 +27,9 @@ INCLUDES =  \
     $(SWORD_CFLAGS) \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS)	\
-    $(addprefix -I$(MOZILLA_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(MOZILLA_COMPONENT_CFLAGS) \
-    -DMOZILLA_HOME=\""$(MOZILLA_HOME)\""  \
+    $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
+    $(GECKO_CFLAGS) \
+    -DGECKO_HOME=\""$(GECKO_HOME)\""  \
     $(UPRINT_CFLAGS)
  
 if USE_GTKMOZEMBED     
