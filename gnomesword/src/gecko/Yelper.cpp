@@ -203,14 +203,16 @@ Yelper::Find (const char *aSearchString)
 
 	nsresult rv;
 	PRUint16 found = nsITypeAheadFind::FIND_NOTFOUND;
+	/*
 #ifdef HAVE_GECKO_1_9
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
-			    PR_FALSE /* links only? */,
+			    PR_FALSE ,//  links only? *
 			    mHasFocus,
 			    &found);
-#else
+#else*/
+#ifndef HAVE_GECKO_1_9
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
-			    PR_FALSE /* links only? */,
+			    PR_FALSE, //  links only? *
 			    &found);
 #endif
 
@@ -412,10 +414,12 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	if (!event) return 0;
 		
 #ifdef DEBUG
-/*	domEvent->GetType(aType);
+#ifndef HAVE_GECKO_1_9
+	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	g_warning("domEvent->GetType: %s",mybuf);*/
+	g_warning("domEvent->GetType: %s",mybuf);
+#endif
 #endif
 	gtk_editable_delete_text((GtkEditable *)widgets.entry_dict,0,-1);
 	
@@ -438,7 +442,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	nsIDOMEvent *domEvent = static_cast<nsIDOMEvent*>(aEvent);
 	nsCOMPtr<nsIDOMMouseEvent> event (do_QueryInterface (domEvent));
 	if (!event) return 0;
-		
+/*		
 #ifdef DEBUG
 	nsAutoString aType;
 	domEvent->GetType(aType);
@@ -446,7 +450,7 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	aType.ToCString( mybuf, 79);
 	GS_message(("domEvent->GetType: %s",mybuf));
 #endif
-	
+*/	
 	PRUint16 button = 2;
 	event->GetButton (&button);
 

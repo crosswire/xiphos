@@ -302,8 +302,11 @@ PrintListener::SetPrintSettings (GeckoPrintInfo *settings,
   target->SetPrintInColor (gtk_print_settings_get_use_color (settings->config));
 
   target->SetPaperSizeUnit(nsIPrintSettings::kPaperSizeMillimeters);
-  target->SetPaperSize (nsIPrintSettings::kPaperSizeDefined);
 
+#ifndef HAVE_GECKO_1_9	
+  target->SetPaperSize (nsIPrintSettings::kPaperSizeDefined);
+#endif
+	
   GtkPaperSize *paperSize = gtk_page_setup_get_paper_size (settings->setup);
   if (!paperSize) {
     GS_warning(("Paper size not set.  Aborting!\n"));
