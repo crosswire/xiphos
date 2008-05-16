@@ -5,7 +5,7 @@ INCLUDES = \
     $(SWORD_INCLUDES) \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
-    $(MOZILLA_CFLAGS) 
+    $(GECKO_CFLAGS) 
 
 
 # CORBA stuff

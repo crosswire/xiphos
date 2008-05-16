@@ -34,7 +34,9 @@
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
+#ifndef HAVE_GECKO_1_9
 #include <dom/nsIDOMKeyEvent.h>
+#endif
 #endif
 
 #ifdef __cplusplus

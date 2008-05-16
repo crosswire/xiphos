@@ -1,7 +1,15 @@
+
+mozilla_include_subdirs =	\
+	.		\
+	gtkembedmoz	\
+	xpcom
+	
 INCLUDES =  \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
-    $(MOZILLA_COMPONENT_CFLAGS) \
+    $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
+    $(GECKO_CFLAGS) \
+    -DGECKO_HOME=\""$(GECKO_HOME)\""  \
     -I$(top_srcdir)/src \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
@@ -67,7 +75,7 @@ gnomesword2_SOURCES =  \
 
 if USE_GTKMOZEMBED
     LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
-    gnomesword2_LDFLAGS = -R$(MOZILLA_HOME)
+    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
 else
     LIB_GECKO=
 endif 
@@ -80,7 +88,7 @@ gnomesword2_LDADD = \
     $(LIB_GECKO)\
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \
-    $(MOZILLA_COMPONENT_LIBS) \
+    $(GECKO_LIBS) \
     $(GNOME_SPELL_LIBS)\
     $(SWORD_LIBS) \
     $(UPRINT_LIBS)
