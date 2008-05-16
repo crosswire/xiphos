@@ -216,9 +216,9 @@ gecko_init (void)
 #endif
 	
 #ifdef HAVE_GECKO_1_9
-	gtk_moz_embed_set_path (MOZILLA_HOME);
+	gtk_moz_embed_set_path (GECKO_HOME);
 #else
-	gtk_moz_embed_set_comp_path (MOZILLA_HOME);
+	gtk_moz_embed_set_comp_path (GECKO_HOME);
 #endif
 
 	gtk_moz_embed_push_startup ();

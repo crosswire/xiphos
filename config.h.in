@@ -49,6 +49,9 @@
 /* Define if gecko is a debug build */
 #undef HAVE_GECKO_DEBUG
 
+/* Define if xpcom glue is used */
+#undef HAVE_GECKO_XPCOM_GLUE
+
 /* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT
 
@@ -99,6 +102,9 @@
 
 /* install prefix */
 #undef INSTALL_PREFIX
+
+/* Define to 1 if you wish to enable 'maintainer-only' behavior. */
+#undef MAINTAINER_MODE
 
 /* Define if wish to use the old style navbar */
 #undef OLD_NAVBAR
