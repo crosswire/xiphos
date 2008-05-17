@@ -116,11 +116,11 @@ if $PKG_CONFIG --exists  ${gecko_cv_gecko}-xpcom; then
 	_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix ${gecko_cv_gecko}-xpcom`"
 	_GECKO_NSPR=no # XXX asac: this is currently a blind guess and should be a AC test
 else
-	_GECKO_INCLUDE_ROOT="`$PKG_CONFIG --variable=includedir ${gecko_cv_gecko}`/unstable"
+	_GECKO_INCLUDE_ROOT="`$PKG_CONFIG --variable=includedir ${gecko_cv_gecko}-unstable`"
 	_GECKO_CFLAGS="`$PKG_CONFIG --cflags ${gecko_cv_gecko}` `$PKG_CONFIG --cflags ${gecko_cv_gecko}-unstable`"
-	_GECKO_LIBDIR="`$PKG_CONFIG --variable=sdkdir ${gecko_cv_gecko}`/bin"
-	_GECKO_HOME=$with_gecko_home
-	_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix ${gecko_cv_gecko}`"
+	_GECKO_LIBDIR="`$PKG_CONFIG --variable=sdkdir ${gecko_cv_gecko}-unstable`"	
+	_GECKO_HOME="`$PKG_CONFIG --variable=libdir ${gecko_cv_gecko}-unstable`"
+	_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix ${gecko_cv_gecko}-unstable`"
 	_GECKO_NSPR=no # XXX asac: this is currently a blind guess and should be a AC test
 fi
 fi # if gecko_cv_have_gecko
