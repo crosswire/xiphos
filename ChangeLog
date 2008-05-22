@@ -1,3 +1,9 @@
+2008-05-22  karl <charcoal@users.sf.net>
+
+	* robustify NASB special-case H123!a handling.
+	* hack-fix "Smith & Van Dyke" not to use '&'.
+	* replace a bunch of 1-char strstr() with strchr().
+
 2008-05-10  karl <charcoal@users.sf.net>
 
 	* update release notes, tweak manual regarding fonts.
