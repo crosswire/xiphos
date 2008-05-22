@@ -25,8 +25,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+
+
+#ifdef HAVE_GECKO_1_9
+#include <nsStringAPI.h>
+#else
 #define MOZILLA_INTERNAL_API
 #include <nsString.h>
+#endif
 
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
@@ -162,7 +169,7 @@ void Yelper::JumpToAnchor(const char *anchor)
 	nsAutoString aAnchorName;
 	nsresult rv, result;
 	
-	aAnchorName.AssignWithConversion (anchor);
+	aAnchorName.Assign(NS_ConvertUTF8toUTF16(anchor));
 	
 	nsCOMPtr<nsIDocShell> docShell (do_GetInterface (mWebBrowser, &rv));
 
@@ -170,7 +177,7 @@ void Yelper::JumpToAnchor(const char *anchor)
 		return;
 	}
 
-	/* get nsIPresShell */
+	// * get nsIPresShell *
 
 	nsCOMPtr<nsIPresShell> presShell;
 	result = docShell->GetPresShell(getter_AddRefs(presShell));
@@ -178,6 +185,7 @@ void Yelper::JumpToAnchor(const char *anchor)
 		return;
 		
 	presShell->GoToAnchor(aAnchorName, 1);
+	
 }
 void
 Yelper::SetFindProperties (const char *aSearchString,
@@ -207,7 +215,7 @@ Yelper::Find (const char *aSearchString)
 #ifdef HAVE_GECKO_1_9
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
 			    PR_FALSE ,//  links only? *
-			    mHasFocus,
+			    //mHasFocus,
 			    &found);
 #else
 	rv = mFinder->Find (NS_ConvertUTF8toUTF16 (aSearchString),
@@ -297,7 +305,7 @@ Yelper::SetSelectionAttention (PRBool aAttention)
  
 gchar *Yelper::GetAttribute (nsIDOMNode *node, gchar *attribute)
 {
-     	nsresult result;
+ /*    	nsresult result;
 
 	nsCOMPtr<nsIDOMNamedNodeMap> attributes;
 	result = node->GetAttributes(getter_AddRefs(attributes));
@@ -316,7 +324,7 @@ gchar *Yelper::GetAttribute (nsIDOMNode *node, gchar *attribute)
 	result = attrNode->GetNodeValue(nodeValue);
 	if (!NS_SUCCEEDED(result))  return NULL;
 
-	return ToNewCString(nodeValue);
+	return ToNewCString(nodeValue);*/
 }
 
 gint
@@ -443,12 +451,13 @@ Yelper::ProcessMouseUpEvent (void* aEvent)
 	if (!event) return 0;
 		
 #ifdef DEBUG
-	nsAutoString aType;
+/*	nsAutoString aType;
 	domEvent->GetType(aType);
 	gchar mybuf[80];
-	aType.ToCString( mybuf, 79);
-	GS_message(("domEvent->GetType: %s",mybuf));
+	aType.nsCString(mybuf);
+	GS_message(("domEvent->GetType: %s",mybuf));*/
 #endif
+	
 	
 	PRUint16 button = 2;
 	event->GetButton (&button);
@@ -472,11 +481,11 @@ Yelper::ProcessMouseEvent (void* aEvent)
 	
 	
 #ifndef DEBUG
-	nsAutoString aType;	
+/*	nsAutoString aType;	
 	domEvent->GetType(aType);
 	gchar mybuf[80];
 	aType.ToCString( mybuf, 79);
-	GS_message(("domEvent->GetType: %s",mybuf));
+	GS_message(("domEvent->GetType: %s",mybuf));*/
 #endif	
 	
 	PRUint16 button = 2;
