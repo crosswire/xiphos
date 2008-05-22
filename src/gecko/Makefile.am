@@ -28,7 +28,7 @@ INCLUDES =  \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS)	\
     $(addprefix -I$(GECKO_INCLUDE_ROOT)/,$(mozilla_include_subdirs))      \
-    $(GECKO_CFLAGS) \
+    $(GECKO_COMPONENT_CFLAGS) \
     -DGECKO_HOME=\""$(GECKO_HOME)\""  \
     $(UPRINT_CFLAGS)
  
