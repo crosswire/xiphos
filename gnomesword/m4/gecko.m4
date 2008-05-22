@@ -1,5 +1,5 @@
-# Copyright © 2000-2004 Marco Pesenti Gritti
-# Copyright © 2003, 2004, 2005, 2006 Christian Persch
+# Copyright Â© 2000-2004 Marco Pesenti Gritti
+# Copyright Â© 2003, 2004, 2005, 2006 Christian Persch
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -63,7 +63,10 @@ gecko_cv_gecko=$with_gecko
 _geckos="libxul firefox mozilla-firefox seamonkey mozilla libxul-embedding xulrunner "
 if test -z "$gecko_cv_gecko"; then
 	for lizard in $_geckos; do
-		if $PKG_CONFIG --exists $lizard; then
+		if $PKG_CONFIG --exists $lizard-xpcom; then
+			gecko_cv_gecko=$lizard
+			break;
+		elif $PKG_CONFIG --exists $lizard; then
 			gecko_cv_gecko=$lizard
 			break;
 		fi
@@ -101,13 +104,20 @@ esac
 #_GECKO_HOME="`$PKG_CONFIG --variable=libdir ${gecko_cv_gecko}-xpcom`"
 #_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix ${gecko_cv_gecko}-xpcom`"
 
-
+if $PKG_CONFIG --exists  ${gecko_cv_gecko}-xpcom; then
+	_GECKO_INCLUDE_ROOT="`$PKG_CONFIG --variable=includedir ${gecko_cv_gecko}-xpcom`"
+	_GECKO_CFLAGS="-I$_GECKO_INCLUDE_ROOT"
+	_GECKO_LIBDIR="`$PKG_CONFIG --variable=libdir ${gecko_cv_gecko}-xpcom`"
+	_GECKO_HOME="`$PKG_CONFIG --variable=libdir ${gecko_cv_gecko}-xpcom`"
+	_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix ${gecko_cv_gecko}-xpcom`"
+	_GECKO_NSPR=no # XXX asac: this is currently a blind guess and should be a AC test
+else
 	_GECKO_INCLUDE_ROOT="`$PKG_CONFIG --variable=includedir libxul`"
 	_GECKO_LIBDIR="`$PKG_CONFIG --variable=libdir libxul`"
 	_GECKO_HOME="`$PKG_CONFIG --variable=libdir libxul`"
 	_GECKO_PREFIX="`$PKG_CONFIG --variable=prefix libxul`"
 	_GECKO_NSPR=no # XXX asac: this is currently a blind guess and should be a AC test
-	
+fi	
 
 fi # if gecko_cv_have_gecko
 

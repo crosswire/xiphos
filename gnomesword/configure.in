@@ -172,7 +172,11 @@ if test "x$cygwin" = xno; then
 	  *firefox) gecko_min_version=1.5 ;;
 	  *) AC_MSG_ERROR([$gecko_cv_gecko is not supported])
 	  esac
-
+	  
+	  if test "$GECKO" = "firefox"; then
+	      gecko_cv_gecko=firefox-xpcom
+	  fi
+	  
 	  PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
 
 	  AC_SUBST([GECKO_COMPONENT_CFLAGS])
