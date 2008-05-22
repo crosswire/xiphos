@@ -25,13 +25,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define MOZILLA_INTERNAL_API
 
 
 
 #ifdef HAVE_GECKO_1_9
 #include <nsStringAPI.h>
 #else
+#define MOZILLA_INTERNAL_API
 #include <nsString.h>
 #endif
 
