@@ -49,9 +49,6 @@
 /* Define if gecko is a debug build */
 #undef HAVE_GECKO_DEBUG
 
-/* Define if xpcom glue is used */
-#undef HAVE_GECKO_XPCOM_GLUE
-
 /* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT
 
@@ -60,6 +57,12 @@
 
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #undef HAVE_LC_MESSAGES
+
+/* Define for libxul */
+#undef HAVE_LIBXUL
+
+/* Define if libxul is a debug build */
+#undef HAVE_LIBXUL_DEBUG
 
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
@@ -99,6 +102,12 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
+
+/* Define if the compiler supports the "default" visibility attribute */
+#undef HAVE_VISIBILITY_ATTRIBUTE
+
+/* Define if the compiler supports the "hidden" visibility attribute */
+#undef HAVE_VISIBILITY_HIDDEN_ATTRIBUTE
 
 /* install prefix */
 #undef INSTALL_PREFIX
@@ -186,3 +195,6 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define if building the Xulrunner backend */
+#undef WITH_XULRUNNER_ENGINE
