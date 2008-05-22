@@ -1142,7 +1142,14 @@ gint main_url_handler_gecko(const gchar * url)
 		gchar* svalue = NULL;
 		gchar* module = NULL;
 		gchar* passage = NULL;
-		gchar **work_buf = NULL;       
+		gchar **work_buf = NULL;
+
+		// XXX gross hack-fix
+		// AraSVD is named "Smith & Van Dyke", using a literal '&'.
+		// this is technically a Sword bug: Sword should encode it.
+		// we work around it here: replace '&' with '+'.  *sigh*
+		if (svalue = strstr(url_work, " & "))
+			*(svalue+1) = '-';
 
 		if((action = g_strstr_len(url_work, 40, "action")) == NULL)
 			return 0;
@@ -1157,7 +1164,7 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "Hebrew";
 			else
 				stype = "";
-			svalue = strstr(work_buf[2],"=");
+			svalue = strchr(work_buf[2],'=');
 			++svalue;
 			GS_message(("type = %s", stype));
 			GS_message(("value = %s", svalue));
@@ -1168,29 +1175,29 @@ gint main_url_handler_gecko(const gchar * url)
 				stype = "robinson";
 			else
 				stype = "packard";
-			svalue = strstr(work_buf[2],"=");
+			svalue = strchr(work_buf[2],'=');
 			++svalue;
 			GS_message(("type = %s", stype));
 			GS_message(("value = %s", svalue));
 			show_morph(stype, svalue, FALSE);
 		}
 		else if (strstr(action, "showModInfo")) {
-			svalue = strstr(work_buf[1],"=");
+			svalue = strchr(work_buf[1],'=');
 			++svalue;
-			module = strstr(work_buf[2],"=");
+			module = strchr(work_buf[2],'=');
 			++module;
 			GS_message(("module = %s", module));
 			GS_message(("svalue = %s", svalue));
 			show_mod_info(module, svalue, FALSE);
 		}
 		else if (strstr(action, "showNote")) {
-			stype = strstr(work_buf[1],"=");
+			stype = strchr(work_buf[1],'=');
 			++stype;
-			svalue = strstr(work_buf[2],"=");
+			svalue = strchr(work_buf[2],'=');
 			++svalue;
-			module = strstr(work_buf[3],"=");
+			module = strchr(work_buf[3],'=');
 			++module;
-			passage = strstr(work_buf[4],"=");
+			passage = strchr(work_buf[4],'=');
 			++passage;
 			int plen = strlen(passage);
 			for (int i = 0; i < plen; i++) {
@@ -1212,9 +1219,9 @@ gint main_url_handler_gecko(const gchar * url)
 			show_note(module, passage, stype, svalue, FALSE);
 		}
 		else if (strstr(action, "showRef")) {
-			stype = strstr(work_buf[1],"=");
+			stype = strchr(work_buf[1],'=');
 			++stype;
-			svalue = strstr(work_buf[2],"=");
+			svalue = strchr(work_buf[2],'=');
 			++svalue;
 			int slen = strlen(svalue);
 			for (int i = 0; i < slen; i++) {
@@ -1231,7 +1238,7 @@ gint main_url_handler_gecko(const gchar * url)
 					slen -= 2;
 				}
 			}
-			module = strstr(work_buf[3],"=");
+			module = strchr(work_buf[3],'=');
 			if (module) ++module;
 			if (!strcmp(stype, "scripRef"))
 				show_ref(module, svalue, FALSE);

@@ -535,11 +535,11 @@ block_dump(SWBuf& rendered,
 		t = strrchr(*strongs, '>') + 1;
 		// correct weird NASB lexicon references.
 		if (s0 = strchr(*strongs, '!')) {
-			while (isdigit(*(s0-1))) {
-				*s0 = *(s0-1);
-				s0--;
-			}
-			*s0 = '0';
+			do {
+				*s0 = *(s0+1);
+				++s0;
+			} while (*s0 != '"');
+			*s0 = ' ';
 		}
 		*s = '<';
 		slen = s - t;
