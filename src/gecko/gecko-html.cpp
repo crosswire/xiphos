@@ -132,6 +132,7 @@ static void html_link_message(GtkMozEmbed * embed)
 		GString *url_clean = g_string_new(NULL);
 		const gchar *url_chase;
 		int i = 0;
+		in_url = TRUE;	//* we need this for html_button_released *
 		for (url_chase = url; *url_chase; ++url_chase) {
 			switch (*url_chase) {
 			case '/':
@@ -147,7 +148,6 @@ static void html_link_message(GtkMozEmbed * embed)
 			}
 		}
 		GS_message(("\nurl:        %s\nurl_clean: %s",url,url_clean->str));
-		in_url = TRUE;	//* we need this for html_button_released *
 		if(priv->is_dialog) {
 			if(main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {	
 				g_string_free(url_clean, TRUE);	
@@ -361,14 +361,14 @@ static void html_class_init(GeckoHtmlClass * klass)
 	widget_class->realize = html_realize;
 
 	moz_embed_class->title = html_title;
+	moz_embed_class->link_message = html_link_message;
 	moz_embed_class->dom_mouse_over = html_dom_mouse_over;
 	moz_embed_class->dom_mouse_down = html_dom_mouse_down;
 	moz_embed_class->dom_mouse_up = html_dom_mouse_up;
 	moz_embed_class->dom_mouse_out = html_dom_mouse_out;
 	//moz_embed_class->dom_mouse_click = html_dom_mouse_click;
 	moz_embed_class->dom_mouse_dbl_click = html_dom_mouse_dbl_click;
-	moz_embed_class->open_uri = html_open_uri;
-	moz_embed_class->link_message = html_link_message;  
+	moz_embed_class->open_uri = html_open_uri;  
 	moz_embed_class->dom_key_down = html_dom_key_down;
 	moz_embed_class->dom_key_up = html_dom_key_up;
 	klass->font_handler = 0;
