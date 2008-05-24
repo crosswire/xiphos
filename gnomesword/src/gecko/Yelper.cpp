@@ -346,10 +346,12 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
+#ifdef HAVE_GECKO_1_9
 	if(in_url) {
 		in_url = FALSE;
 		return FALSE;
 	}
+#endif
 	main_clear_viewer();
 	/*
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
