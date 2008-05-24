@@ -332,6 +332,7 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
 	nsresult result;
+	extern gboolean in_url;
 	PRBool aShiftKey;
 	nsIDOMEventTarget *aCurrentTarget;
 	GS_message(("mouse over pane: %d",pane));
@@ -345,6 +346,10 @@ Yelper::ProcessMouseOver (void* aEvent, int pane,
 		return FALSE;
 	if(pane == VIEWER_TYPE)
 		return FALSE;
+	if(in_url) {
+		in_url = FALSE;
+		return FALSE;
+	}
 	main_clear_viewer();
 	/*
 	nsCOMPtr<nsIDOMNSEvent> nsEvent = do_QueryInterface(event, &result);
