@@ -1,4 +1,4 @@
-AC_INIT(gnomesword, 2.3.3, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword, 2.3.4, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -34,7 +34,7 @@ AC_SUBST(UPRINT_CFLAGS)
 dnl ***
 dnl Sword libs
 dnl ***
-PKG_CHECK_MODULES(SWORD, sword >= 1.5.10, , exit)
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , exit)
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
 

@@ -1,3 +1,7 @@
+2008-05-26  - bugfix and small features release, 2.3.4.  pri/sec readings,
+              prayer list support, mod.mgr and font handling improvements,
+              passage exporter, xulrunner compatibility (NOT recommended).
+
 2008-01-20  - bugfix release, 2.3.3.  a number of bugfixes, InstallSize
               support, Farsi digits, image content selectability, much
               internal re-organization around display.cc.
