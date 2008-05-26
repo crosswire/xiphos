@@ -331,7 +331,6 @@ gint
 Yelper::ProcessMouseOver (void* aEvent, int pane, 
 			  gboolean is_dialog, DIALOG_DATA * dialog)
 {
-	extern gboolean in_url;
 	nsresult result;
 	extern gboolean in_url;
 	PRBool aShiftKey;
