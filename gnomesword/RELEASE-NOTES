@@ -4,7 +4,7 @@ GNOMESWORD RELEASE NOTES
 ________________________
 
 Release 2.3.4
-27 Apr 2008
+26 May 2008
 
 1. Primary/secondary reading selections, used mostly in Greek Bibles to
    identify variant readings found in ancient MSS, is functional for the
@@ -22,6 +22,10 @@ Release 2.3.4
 5. A passage exporter facility is now available on the right-click menu,
    if GnomeSword is configured with --enable-exporter.
 
+6. GnomeSword can now be built against the xulrunner display engine,
+   as a replacement for MozEmbed.  However, xulrunner has been shown to
+   be fundamentally broken at this time, and we do not recommend it.
+
 GnomeSword now requires Sword 1.5.11.
 
 Bug reports addressed since 2.3.3:
@@ -36,6 +40,7 @@ Bug reports addressed since 2.3.3:
 1915596  text in preview window clears if mouse enters bible view
 1923337  det.parallel needs to respect module font names
 1928119  Build failures with gcc 4.3
+1928469  Compiling gnomesword with latest xulrunner
 
 New feature requests pending:
 1894899  communication between gnomesword and bibledit
