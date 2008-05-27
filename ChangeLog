@@ -1,3 +1,7 @@
+2008-05-27  karl <charcoal@users.sf.net>
+
+	* fix #1973933 per-module font size not respected in parallel view tab.
+
 2008-05-26  karl <charcoal@users.sf.net>
 
 	* 2.3.4 release.
