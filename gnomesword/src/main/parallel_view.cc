@@ -511,7 +511,7 @@ void main_update_parallel_page(void)
 	gchar *data = NULL;
 	
 	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel))) return ;
 	GeckoHtml *html = GECKO_HTML(widgets.html_parallel);
 	gecko_html_open_stream(html,"text/html");
 	
@@ -587,10 +587,10 @@ void main_update_parallel_page(void)
 					use_gtkhtml_font = FALSE;
 				}
 			}
-						
-			font_size = get_conf_file_item(file, mod_name, "Fontsize");
+
+			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
 			g_free(file);		
-			if(font_size_tmp)
+			if (font_size_tmp)
 				font_size = g_strdup_printf("%+d",(atoi(font_size_tmp) + settings.base_font_size));
 			else 
 				font_size = g_strdup_printf("%+d",settings.base_font_size);
@@ -646,7 +646,7 @@ void main_update_parallel_page(void)
 			    backend_p->get_render_text(mod_name,
 							settings.
 							currentverse);
-			if(is_rtol) {
+			if (is_rtol) {
 				buf = g_strdup_printf(
 					"%s","<br><DIV ALIGN=right>");			
 				if (strlen(buf)) {
@@ -659,7 +659,7 @@ void main_update_parallel_page(void)
 				free(utf8str);
 			}
 
-			if(is_rtol) {
+			if (is_rtol) {
 				buf = g_strdup_printf(
 					"%s","</DIV><br>");			
 				if (strlen(buf)) {
@@ -687,12 +687,14 @@ void main_update_parallel_page(void)
 		}	
 	}
 	gecko_html_close(html);
-	if(data)
+	if (data)
 		g_free(data);		
 	if (font_name)
 		free(font_name);
 	if (font_size)
 		free(font_size);
+	if (font_size_tmp)
+		free(font_size_tmp);
 }
 
 #else
