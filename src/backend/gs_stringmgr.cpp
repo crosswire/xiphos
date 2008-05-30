@@ -28,6 +28,8 @@ char* GS_StringMgr::upperUTF8(char* text, unsigned int maxlen) const {
 	if ((text == NULL) || (*text == '\0')) {
 		return g_strdup("");
 	}
+	if (maxlen == 0)
+		maxlen = strlen(text);
 	char *upper_str = g_utf8_strup(text, -1);
 	int newlen = strlen(upper_str);
 	if (newlen >= maxlen) newlen = maxlen - 1;
