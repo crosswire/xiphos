@@ -7,7 +7,7 @@ INCLUDES = \
     $(GTKHTML_CFLAGS) \
     $(GECKO_CFLAGS) 
 
-
+if USE_GTKHTML_BONOBO_EDITOR
 # CORBA stuff
 
 HTML_EDITOR_GENERATED =		\
@@ -26,16 +26,22 @@ $(HTML_EDITOR_GENERATED): $(GTKHTML_DATA_DIR)/Editor.idl
 noinst_LIBRARIES = libeditor.a
 
 # The Editor Control
-
 libeditor_a_SOURCES = $(HTML_EDITOR_GENERATED)		\
-	html-editor.c html-editor.h     
-
-
+	html-editor.c html-editor.h  
 # Extra stuff to distribute.
 
 EXTRA_DIST = \
-    $(HTML_EDITOR_GENERATED)
-    
+    $(HTML_EDITOR_GENERATED) \
+    gtkhtml-editor.h
 
 CLEANFILES = \
     $(HTML_EDITOR_GENERATED)
+   
+
+else
+
+noinst_LIBRARIES = libeditor.a
+libeditor_a_SOURCES = html-editor.c html-editor.h
+
+endif
+
