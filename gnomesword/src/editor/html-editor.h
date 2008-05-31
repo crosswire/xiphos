@@ -27,14 +27,20 @@ extern "C"
 {
 #endif
 
-#include <config.h>
+#ifdef USE_GTKHTML3_14_23
+	
+#else
 #include <bonobo.h>
+#include "editor/Editor.h"
+	
+#endif	
+	
+#include <config.h>
 #ifdef OLD_NAVBAR
 #include "main/navbar.h"
 #else
 #include "main/navbar_versekey.h"
 #endif
-#include "editor/Editor.h"
 
 typedef struct _editor EDITOR;
 struct _editor {
@@ -51,11 +57,14 @@ struct _editor {
 	NAVBAR_VERSEKEY navbar;
 #endif
 	
+#ifdef USE_GTKHTML3_14_23
+	
+#else
 	BonoboWidget *control;
 	GNOME_GtkHTML_Editor_Engine engine;
 	Bonobo_PersistFile persist_file_interface;
 	Bonobo_PersistStream persist_stream_interface;
-	
+#endif	
 	gint type;
 
 	gboolean studypad;
@@ -80,7 +89,7 @@ void editor_load_note(EDITOR * e, const gchar * module_name, const gchar * key);
 void editor_load_book(EDITOR * e);
 gint editor_create_new(const gchar * filename, const gchar * key, gint note);	
 //gint editor_create_prayer_list_editor(const gchar * mod_name, const gchar * key, gint prayer_list);
-gint load_file (EDITOR * e);
+//gint load_file (EDITOR * e);
 
 #ifdef __cplusplus
 }
