@@ -83,8 +83,8 @@ endif
 
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/editor/libeditor.a \
     $(top_builddir)/src/backend/libbackend.a \
+    $(top_builddir)/src/editor/libeditor.a\
     $(LIB_GECKO)\
     $(GNOME_LIBS) \
     $(GTKHTML_LIBS) \

@@ -74,30 +74,42 @@ dnl ================================================================
 GTKHTML_LIBS=""
 GTKHTML_CFLAGS=""
 
-PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8 >= 3.13, have_gtkhtml=yes,have_gtkhtml=no)
+PKG_CHECK_MODULES(GTKHTML, gtkhtml-editor libgtkhtml-3.14 >= 3.23, have_gtkhtml=yes,have_gtkhtml=no)
 if test "x$have_gtkhtml" = xyes; then
-	AC_DEFINE(USE_GTKHTML38_3_13, 1, [Define if you want to use GtkHtml-3.8-3.13])
-	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
-
-else
-	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
-	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
-
-fi
-dnl gtkhtml_datadir
-GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
-dnl gtkhtml api version
-GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
-if test "x$have_gtkhtml" = xno; then
-	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14, have_gtkhtml=yes,have_gtkhtml=no)
+	AC_DEFINE(USE_GTKHTML3_14_23, 1, [Define if you want to use GtkHtml-3.14])
 	AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
 	AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
 	dnl gtkhtml_datadir
 	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
 	dnl gtkhtml api version
 	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
-fi
-	
+	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, false)
+else
+	PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8 >= 3.13, have_gtkhtml=yes,have_gtkhtml=no)
+	if test "x$have_gtkhtml" = xyes; then
+		AC_DEFINE(USE_GTKHTML38_3_13, 1, [Define if you want to use GtkHtml-3.8-3.13])
+		AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+
+	else
+		PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.8, have_gtkhtml=yes,have_gtkhtml=no)
+		AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+
+	fi
+	dnl gtkhtml_datadir
+	GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.8`"
+	dnl gtkhtml api version
+	GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.8`
+	if test "x$have_gtkhtml" = xno; then
+		PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.14, have_gtkhtml=yes,have_gtkhtml=no)
+		AC_DEFINE(USE_GTKHTML3_14, 1, [Define if you want to use GtkHtml-3.14])
+		AC_DEFINE(USE_GTKHTML38, 1, [Define if you want to use GtkHtml-3.8])
+		dnl gtkhtml_datadir
+		GTKHTML_DATA_DIR="`$PKG_CONFIG --variable=gtkhtml_datadir libgtkhtml-3.14`"
+		dnl gtkhtml api version
+		GTKHTML_API_VERSION=`$PKG_CONFIG --variable gtkhtml_apiversion libgtkhtml-3.14`
+	fi
+	AM_CONDITIONAL(USE_GTKHTML_BONOBO_EDITOR, true)
+fi	
 AC_DEFINE_UNQUOTED(GTKHTML_DATA_DIR, "${GTKHTML_DATA_DIR}", [GtkHTML data directory])
 AC_DEFINE_UNQUOTED(GTKHTML_API_VERSION, "$GTKHTML_API_VERSION", [The gtkhtml api version])
 AC_SUBST(GTKHTML_LIBS)
