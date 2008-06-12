@@ -1,3 +1,7 @@
+2008-06-12  karl <charcoal@users.sf.net>
+
+	* don't display 0:0 and n:0 unless headings are turned on.
+
 2008-05-30  karl <charcoal@users.sf.net>
 
 	* fix #1977884 GS_StringMgr crash on attribute search
