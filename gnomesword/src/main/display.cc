@@ -922,6 +922,9 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 		(*mod)++;
 	}
 
+	if (!ops->headings)
+		return;
+
 	//
 	// Display content at 0:0 and n:0.
 	//
