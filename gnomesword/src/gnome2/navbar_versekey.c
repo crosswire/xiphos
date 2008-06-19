@@ -358,10 +358,17 @@ static void on_entry_activate(GtkEntry * entry, gpointer user_data)
 	gsize bytes_written;
 	GError *error = NULL;
 	DIALOG_DATA *dialog;
+	char *rawtext;
 	
 	const gchar *buf = gtk_entry_get_text(entry);
 	if(buf == NULL)
 		return;
+	rawtext = main_get_raw_text(navbar_versekey.module_name->str, (gchar*)buf);
+	if(!rawtext || (rawtext && (strlen(rawtext) < 2))){
+		gtk_entry_set_text(entry,navbar_versekey.key->str);
+		g_free(rawtext);
+		return;
+	}
 	const gchar *gkey = main_get_valid_key((gchar*)buf);
 	if(gkey == NULL)
 		return;
