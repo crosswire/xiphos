@@ -88,11 +88,7 @@ const char *main_get_valid_key(char * key)
 void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 {
 	VerseKey vkey; 
-//	char *gkey = NULL;
 	char *tmpkey = NULL;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	int book;
 	
 	if(!navbar.module_name->len)
@@ -101,23 +97,18 @@ void main_navbar_versekey_spin_book(NAVBAR_VERSEKEY navbar, int direction)
 	tmpkey = backend->get_valid_key(navbar.key->str);
 	
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(tmpkey, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return;
-	}
-	vkey = gkey;    */
 	vkey = tmpkey;
+	
+	
 	
 	book = (direction)?(vkey.Book()+1):(vkey.Book()-1);
 	vkey.Book(book);
+	
+	
 	tmpkey = g_strdup_printf("%s 1:1",vkey.getBookName());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), tmpkey);
 	gtk_widget_activate(navbar.lookup_entry);
 	g_free(tmpkey);
-//	g_free(gkey);
 }
 
 
@@ -469,28 +460,16 @@ void on_verse_menu_select(GtkMenuItem * menuitem, gpointer user_data)
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 {	
 	char buf[5];
-//	char *gkey = NULL;
 	char *tmpbuf = NULL;
 	int book;
 	gint i,x;	
 	VerseKey vkey; 
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;    */
 	char *num;
 	
 	if(!navbar.module_name->len)
 		return;
 	
 	vkey.AutoNormalize(1);
-/*	gkey = g_convert(key, -1, OLD_CODESET, UTF_8, &bytes_read,
-			 &bytes_written, &error);
-	if(gkey == NULL) {
-		GS_print(("error: %s\n", error->message));
-		g_error_free (error);
-		return;
-	}
-	vkey = gkey;    */
 	vkey = key;
 	
 	if((backend->module_has_testament(navbar.module_name->str, 1))
@@ -515,10 +494,9 @@ void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key)
 	
 	navbar.key = g_string_assign(navbar.key,(char*)vkey.getText());
 	gtk_entry_set_text(GTK_ENTRY(navbar.lookup_entry), navbar.key->str);
+	
 	if(tmpbuf)
 		g_free(tmpbuf);
-//	if(gkey)
-//		g_free(gkey);	
 }
 
 
@@ -734,33 +712,22 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	
 	navbar.testaments = backend->module_get_testaments(navbar.module_name->str);
 	key_current = navbar.key->str;
-/*	current_book = g_convert((const char *) key_current.getBookName(),
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);     */
 	current_book = strdup((const char *) key_current.getBookName());
 	menu = gtk_menu_new();
 	menu_shell = GTK_MENU_SHELL(menu);
 	
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while(i < key.BMAX[0]) { 
-/*			book = g_convert((const char *) key.books[0][i].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-
-			if(book == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free (error);
-				continue;
-			}    */
 			book = strdup((const char *) key.books[0][i].name);
+			char *mykey = g_strdup_printf("%s 1:1",book);
+			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
+			if(!rawtext || (rawtext && (strlen(rawtext) < 2))){
+				g_free(book);
+				g_free(mykey);
+				g_free(rawtext);
+				++i;
+				continue;
+			}
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);
@@ -780,24 +747,23 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			}
 			++i;
 			g_free(book);
+			g_free(mykey);
+			g_free(rawtext);
 		}
 	}
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name->str, 2)) {
 		while(i < key.BMAX[1]) {
-/*			book = g_convert((const char *) key.books[1][i].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-			if(book == NULL) {
-				GS_print(("error: %s\n", error->message));
-				g_error_free (error);
-				continue;
-			}    */
 			book = strdup((const char *) key.books[1][i].name);
+			char *mykey = g_strdup_printf("%s 1:1",book);
+			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
+			if(!rawtext || (rawtext && (strlen(rawtext) < 2))){
+				g_free(book);
+				g_free(mykey);
+				g_free(rawtext);
+				++i;
+				continue;
+			}
 			if (!strcmp(book, current_book)) {
 				select_item = gtk_menu_item_new_with_label(book);
 				gtk_widget_show(select_item);
@@ -817,6 +783,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 			}
 			++i;
 			g_free(book);
+			g_free(mykey);
+			g_free(rawtext);
 		}
 	}
 	if(select_item)

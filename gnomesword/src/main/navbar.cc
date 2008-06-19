@@ -160,7 +160,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 			GTK_COMBO_BOX(navbar.comboboxentry_book));
 	gtk_list_store_clear(GTK_LIST_STORE(book_model));
 	if (backend->module_has_testament(navbar.module_name, 1)) {
-		while(i < key.BMAX[0]) { 			
+		while(i < key.BMAX[0]) { 		
 			//key_abrev = key.books[0][i].name;
 /*			book = g_convert((const char *) key.books[0][i].name,   //key_abrev.getBookAbbrev(),
 				     -1,
@@ -176,6 +176,14 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				continue;
 			}    */
 			book = strdup((const char *) key.books[0][i].name);
+			char *mykey = g_strdup_printf("%s 1:1",book);
+			if(!main_get_raw_text(navbar.module_name, mykey)){
+				GS_message(("book-out: %s",book));
+				g_free(book);
+				g_free(mykey);
+				continue;
+			}
+			GS_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(	GTK_LIST_STORE(book_model), 
 						&iter, 
@@ -203,6 +211,14 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 				continue;
 			}    */
 			book = strdup((const char *) key.books[1][i].name);
+			char *mykey = g_strdup_printf("%s 1:1",book);
+			if(!main_get_raw_text(navbar.module_name, mykey)){
+				GS_message(("book-in: %s",book));
+				g_free(book);
+				g_free(mykey);
+				continue;
+			}
+			GS_message(("book: %s",book));
 			gtk_list_store_append (GTK_LIST_STORE(book_model), &iter);
 			gtk_list_store_set(	GTK_LIST_STORE(book_model), 
 						&iter, 
