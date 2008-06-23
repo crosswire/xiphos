@@ -303,8 +303,7 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_left),
 				      FALSE);
 
-	image1 = gtk_image_new_from_icon_name("stock_left",
-					      GTK_ICON_SIZE_BUTTON);
+	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_left), image1);
 
@@ -319,8 +318,7 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_up),
 				      FALSE);
 
-	image1 = gtk_image_new_from_icon_name("stock_up",
-					      GTK_ICON_SIZE_BUTTON);
+	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_UP,GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_up), image1);
 
@@ -335,8 +333,7 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_down),
 				      FALSE);
 
-	image2 = gtk_image_new_from_icon_name("stock_down",
-					      GTK_ICON_SIZE_BUTTON);
+	image2 = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN,GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_down), image2);
 
@@ -353,8 +350,8 @@ GtkWidget *gui_navbar_book_dialog_new(DIALOG_DATA * d)
 	gtk_button_set_focus_on_click(GTK_BUTTON(d->navbar_book.button_right),
 				      FALSE);
 
-	image1 = gtk_image_new_from_icon_name("stock_right",
-					      GTK_ICON_SIZE_BUTTON);
+	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
+									  GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(d->navbar_book.button_right), image1);
 
