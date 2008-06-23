@@ -189,6 +189,7 @@
 
 		      <child>
 			<widget class="GtkLabel" id="label_book">
+			  <property name="width_request">133</property>
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">&lt;b&gt;Revelation of John&lt;/b&gt;</property>
 			  <property name="use_underline">False</property>
