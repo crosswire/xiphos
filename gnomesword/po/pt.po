@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 08:30+0100\n"
-"PO-Revision-Date: 2007-11-08 20:58+0000\n"
+"PO-Revision-Date: 2008-06-24 23:58+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -1402,7 +1402,7 @@ msgstr ""
 #: ../src/gnome2/commentary.c:910 ../src/gnome2/commentary_dialog.c:1813
 #: ../src/gnome2/dictlex.c:971 ../src/gnome2/gbs.c:799
 msgid "Variants"
-msgstr ""
+msgstr "Variantes"
 
 #: ../src/gnome2/bibletext.c:1070 ../src/gnome2/bibletext.c:1191
 #: ../src/gnome2/bibletext_dialog.c:2120 ../src/gnome2/bibletext_dialog.c:2235
@@ -1448,7 +1448,7 @@ msgstr "Opções de _Módulo"
 #: ../src/gnome2/commentary.c:963 ../src/gnome2/commentary_dialog.c:1859
 #: ../src/gnome2/dictlex.c:1024 ../src/gnome2/gbs.c:852
 msgid "Lookup Selection"
-msgstr ""
+msgstr "Selecção de Procura"
 
 #: ../src/gnome2/bibletext.c:1119 ../src/gnome2/bibletext_dialog.c:2162
 #: ../src/gnome2/commentary.c:981 ../src/gnome2/commentary_dialog.c:1865
@@ -2796,7 +2796,7 @@ msgstr ""
 
 #: ../ui/prefs.glade.h:64
 msgid "Verse number font size"
-msgstr ""
+msgstr "Tamanho de fonte de número de versículo"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -2804,11 +2804,11 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
-msgstr ""
+msgstr "<b>Destino de instalação</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr ""
+msgstr "<b>Fonte de instalação</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
@@ -2817,11 +2817,11 @@ msgstr "<b>Gestor de Módulos</b>"
 #. do not translate <b> and </b> they are html formating
 #: ../ui/module-manager.glade.h:6
 msgid "<b>Sword</b>"
-msgstr ""
+msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
+msgstr "<b>AVISO:</b> Use com cuidado se estiver num país com perseguições."
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
@@ -2867,7 +2867,7 @@ msgstr "Directório de sistema Sword"
 
 #: ../ui/search-dialog.glade.h:1
 msgid "<b>Attribute</b>"
-msgstr ""
+msgstr "<b>Atributo</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
@@ -2875,7 +2875,7 @@ msgstr "<b>Encontrado</b>"
 
 #: ../ui/search-dialog.glade.h:3
 msgid "<b>List Name</b>"
-msgstr ""
+msgstr "<b>Nome da Lista</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
@@ -3039,7 +3039,7 @@ msgstr "Critério de Pesquisa"
 
 #: ../ui/search-dialog.glade.h:50
 msgid "Search entire module"
-msgstr ""
+msgstr "Pesquisar módulo inteiro"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Search for Morphological tags"
@@ -3079,7 +3079,7 @@ msgstr "Números de Strong"
 
 #: ../ui/search-dialog.glade.h:61
 msgid "Use a custom module list for the search"
-msgstr ""
+msgstr "Usar uma lista personalizada de módulos para a pesquisa"
 
 #: ../ui/search-dialog.glade.h:62
 msgid "Use a custom range for the scope of the search"
@@ -3087,7 +3087,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Use a single module for the search"
-msgstr ""
+msgstr "Usar um único módulo para a pesquisa"
 
 #: ../ui/search-dialog.glade.h:64
 msgid "Use the current module list for the search"
@@ -3107,7 +3107,7 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:1
 msgid "Delete the current note"
-msgstr ""
+msgstr "Apagar a nota corrente"
 
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
@@ -3127,7 +3127,7 @@ msgstr "Sair do programa"
 #: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
-msgstr ""
+msgstr "For_matar"
 
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
@@ -3137,19 +3137,19 @@ msgstr ""
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
-msgstr ""
+msgstr "Modo HTML"
 
 #: ../ui/editor_note.xml.h:8
 msgid "Preview the note to be printed"
-msgstr ""
+msgstr "Antever nota a ser impressa"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr ""
+msgstr "Ante_visão de Impressão"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
-msgstr ""
+msgstr "Imprimir esta nota"
 
 #: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
 #: ../ui/editor.xml.h:11
@@ -3158,23 +3158,23 @@ msgstr "Guardar"
 
 #: ../ui/editor_note.xml.h:12
 msgid "Save using the PersistStream interface"
-msgstr ""
+msgstr "Guardar usando a interface PersistStream"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr ""
+msgstr "_Apagar Comentário Pessoal"
 
 #: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:20
 msgid "_Print..."
-msgstr ""
+msgstr "Im_primir..."
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr ""
+msgstr "_Guardar (Comentário Pessoal)"
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
-msgstr ""
+msgstr "Adicionar este ficheiro às suas marcas"
 
 #: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
 msgid "Create a new document"
@@ -3186,11 +3186,11 @@ msgstr "Novo Documento"
 
 #: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
 msgid "Open (PersistFile)"
-msgstr ""
+msgstr "Abrir (PersistFile)"
 
 #: ../ui/editor_studypad.xml.h:12 ../ui/editor.xml.h:10
 msgid "Open using the PersistFile interface"
-msgstr ""
+msgstr "Abrir com a interface PersistFile"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
