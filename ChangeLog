@@ -1,3 +1,7 @@
+2008-06-25  karl <charcoal@users.sf.net>
+
+	* avoid infloop when adv.search open and user hits xref link.
+
 2008-06-12  karl <charcoal@users.sf.net>
 
 	* don't display 0:0 and n:0 unless headings are turned on.

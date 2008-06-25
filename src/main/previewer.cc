@@ -264,7 +264,8 @@ static void mark_search_words(GString * str)
 	gchar closestr[40], openstr[40];
 
 	/* regular expression search results         **fixme** */
-	if (settings.searchType == 0) {
+	if ((settings.searchType == 0) ||
+	    (settings.searchText[0] == '\0')) {
 		return;
 	}
 #ifdef DEBUG
