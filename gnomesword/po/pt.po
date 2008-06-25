@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 08:30+0100\n"
-"PO-Revision-Date: 2008-06-24 23:58+0100\n"
+"PO-Revision-Date: 2008-06-25 19:39+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -2847,7 +2847,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:14
 msgid "Local"
-msgstr ""
+msgstr "Local"
 
 #: ../ui/module-manager.glade.h:15
 msgid "Local Install Folder"
@@ -2979,7 +2979,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Delete the selected list"
-msgstr ""
+msgstr "Apagar a lista seleccionada"
 
 #: ../ui/search-dialog.glade.h:30
 msgid "Entire module"
@@ -3015,7 +3015,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:44
 msgid "Remove the selected module from the list"
-msgstr ""
+msgstr "Remover o módulo seleccionado da lista"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Results"
@@ -3027,7 +3027,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Save search results as bookmarks"
-msgstr ""
+msgstr "Guardar resultados da pesquisa como marcas"
 
 #: ../ui/search-dialog.glade.h:48
 msgid "Save the module list"
