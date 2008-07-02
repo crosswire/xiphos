@@ -167,7 +167,11 @@ if test "x$cygwin" = xno; then
 	if test "$GECKO" = "firefox"; then
 	  gecko_cv_gecko=firefox-xpcom
 	fi
-	  
+
+	if test "$GECKO" = "xulrunner"; then
+	  gecko_cv_gecko=xulrunner-xpcom
+	fi
+
 	PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
 
 	AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
