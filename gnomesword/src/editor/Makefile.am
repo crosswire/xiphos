@@ -31,8 +31,7 @@ libeditor_a_SOURCES = $(HTML_EDITOR_GENERATED)		\
 # Extra stuff to distribute.
 
 EXTRA_DIST = \
-    $(HTML_EDITOR_GENERATED) \
-    gtkhtml-editor.h
+    $(HTML_EDITOR_GENERATED)
 
 CLEANFILES = \
     $(HTML_EDITOR_GENERATED)
