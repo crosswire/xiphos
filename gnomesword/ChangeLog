@@ -1,6 +1,7 @@
 2008-07-02  karl <charcoal@users.sf.net>
 
 	* 2.3.5 release.
+	* remove gtkhtml-editor.h from editor/Makefile.am.  (problem?)
 
 2008-07-02  dom  <domcox@users.sourceforge.net>
 
