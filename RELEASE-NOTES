@@ -3,6 +3,43 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.3.5
+02 Jul 2008
+
+Mostly an urgent bugfix release.
+
+1. GnomeSword can now link with the gtkhtml-3.23.2 API, so as no
+   longer to require the Bonobo editor (but still backward-compatible
+   to those systems needing it).
+
+2. A couple small glitches noticed immediately post-2.3.4 have been fixed.
+
+3. A serious search bug, in which a change in Sword's behavior was not
+   being correctly handled in GnomeSword, has been fixed.
+
+4. A failure to build in some environments (esp. Ubuntu) has been fixed.
+
+5. Display of n:0 editorial content is stopped when headings are disabled.
+
+6. An infloop bug was fixed, induced by Adv.Search being open when an
+   xref is clicked.
+
+Bug reports addressed since 2.3.4:
+1973933  per-module font size not respected in parallel view tab
+1977884  GS_StringMgr crash on attribute search
+1991836  Segmentation fault
+1995108  Segmentation Fault While Searching
+1999299  GodsWord ver 1.2 module appears corrupt
+2008263  Searching Segfault
+
+New feature requests pending:
+1991842  Some suggestions for personal commentary
+1994953  Fine tune display settings
+
+Feature requests closed:
+1994956  Previewer settings
+________________________
+
 Release 2.3.4
 26 May 2008
 

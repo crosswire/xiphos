@@ -1,4 +1,4 @@
-AC_INIT(gnomesword, 2.3.4, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword, 2.3.5, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -166,9 +166,7 @@ if test "x$cygwin" = xno; then
 	  
 	if test "$GECKO" = "firefox"; then
 	  gecko_cv_gecko=firefox-xpcom
-	fi
-
-	if test "$GECKO" = "xulrunner"; then
+	elif test "$GECKO" = "xulrunner"; then
 	  gecko_cv_gecko=xulrunner-xpcom
 	fi
 

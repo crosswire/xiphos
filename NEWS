@@ -1,3 +1,7 @@
+2008-07-02  - urgent bugfix release, 2.3.5.  necessary to eliminate a bad
+              search crash caused by a change in Sword, and to correct a
+              build failure in some environments.
+
 2008-05-26  - bugfix and small features release, 2.3.4.  pri/sec readings,
               prayer list support, mod.mgr and font handling improvements,
               passage exporter, xulrunner compatibility (NOT recommended).
