@@ -338,7 +338,7 @@ GList *BackEnd::get_module_options(void) {
 
 int BackEnd::has_global_option(char * module_name, char * option) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -351,7 +351,7 @@ int BackEnd::has_global_option(char * module_name, char * option) {
 
 char *BackEnd::get_config_entry(char * module_name, char * entry) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -378,7 +378,7 @@ int BackEnd::is_Bible_key(const char * list, char * current_key) {
 
 char *BackEnd::get_render_text(const char *module_name, const char *key) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -405,7 +405,7 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 }
 char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -432,7 +432,7 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 /*
 char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -446,7 +446,7 @@ char *BackEnd::get_raw_text(const char *module_name, const char *key) {
 */
 char *BackEnd::render_this_text(const char * module_name, const char * text) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -459,7 +459,7 @@ char *BackEnd::render_this_text(const char * module_name, const char * text) {
 
 char *BackEnd::get_strip_text_from_string(const char * module_name, const char *string) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -473,7 +473,7 @@ char *BackEnd::get_strip_text_from_string(const char * module_name, const char *
 }
 char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 	SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -693,7 +693,7 @@ void BackEnd::delete_entry(void) {
 
 
 const char *BackEnd::module_get_language(const char *module_name) {
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	//-- iterate through the modules until we find modName  
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
@@ -718,7 +718,7 @@ int BackEnd::is_module(const char *mod_name) {
 
 
 int BackEnd::module_type(const char *mod_name) {
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
 	//-- iterate through the modules until we find modName 
@@ -751,7 +751,7 @@ int BackEnd::module_type(const char *mod_name) {
 }
 
 char *BackEnd::module_description(char *mod_name) {
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 /*	char *description = NULL;                                                   
         gsize bytes_read;
         gsize bytes_written;
@@ -1008,7 +1008,7 @@ void BackEnd::set_treekey(unsigned long offset) {
 
 unsigned long BackEnd::get_treekey_offset_from_key(const char * module_name, const char * key) {
         SWModule *mod;
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	char *mykey;                                                 
  /*       gsize bytes_read;
        	gsize bytes_written;
