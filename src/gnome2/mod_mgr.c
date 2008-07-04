@@ -715,8 +715,8 @@ static void add_language_folder(GtkTreeModel *model,
 	GtkTreeIter child_iter;
 	gsize bytes_read;
 	gsize bytes_written;
-	gboolean valid;
 	gchar *buf;
+	gboolean valid;
 
 	/* Check language */
 	buf = strdup(language);
@@ -724,6 +724,7 @@ static void add_language_folder(GtkTreeModel *model,
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
+	g_free(buf);
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -731,15 +732,14 @@ static void add_language_folder(GtkTreeModel *model,
 		gchar *str_data;
 
 		buf = strdup(language);
-		gtk_tree_model_get(model, 
-				&iter_iter, 
-				COLUMN_NAME, 
-				&str_data, 
-				-1);
+		gtk_tree_model_get(model,
+				   &iter_iter,
+				   COLUMN_NAME,
+				   &str_data,
+				   -1);
 
 		if (!g_utf8_collate(g_utf8_casefold(buf,-1),
-				      g_utf8_casefold(str_data,-1))) {
-			/* if (!strcmp(buf,str_data)) {*/
+				    g_utf8_casefold(str_data,-1))) {
 			g_free(str_data);
 			g_free(buf);
 			return;
@@ -750,7 +750,6 @@ static void add_language_folder(GtkTreeModel *model,
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
 	buf = strdup(language); 
-
 	gtk_tree_store_set(GTK_TREE_STORE(model), 
 			&child_iter,
 			COLUMN_VISIBLE, 
@@ -759,7 +758,6 @@ static void add_language_folder(GtkTreeModel *model,
 			(gchar *) buf, 
 			-1);
 	g_free(buf);
-
 }
 
 /******************************************************************************
@@ -784,7 +782,6 @@ static void load_module_tree(GtkTreeView * treeview,
 	gint i;
 	static gboolean need_column = TRUE;
 	GtkTreeStore *store;
-	GtkTreeIter iter;
 	GtkTreeIter text;
 	GtkTreeIter commentary;
 	GtkTreeIter dictionary;
@@ -879,6 +876,7 @@ static void load_module_tree(GtkTreeView * treeview,
 
 	while (tmp2) {
 		info = (MOD_MGR *) tmp2->data;
+
 		if (!strcmp(info->type, TEXT_MODS)) {
 			add_language_folder(GTK_TREE_MODEL(store), text,
 					    info->language);
@@ -893,20 +891,33 @@ static void load_module_tree(GtkTreeView * treeview,
 						      (store),
 						      commentary, info);
 		}
+		else if (info->is_maps) {
+			add_language_folder(GTK_TREE_MODEL(store),
+					    map, info->language);
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store),
+						      map, info);
+		}
+		else if (info->is_images) {
+			add_language_folder(GTK_TREE_MODEL(store),
+					    image, info->language);
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store),
+						      image, info);
+		}
+		else if (info->is_devotional) {
+			add_language_folder(GTK_TREE_MODEL(store),
+					    devotional, info->language);
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store),
+						      devotional, info);
+		}
 		else if (!strcmp(info->type, DICT_MODS)) {
-			if (info->is_devotional) {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    devotional, info->language);
-				add_module_to_language_folder(GTK_TREE_MODEL
-							      (store),
-							      devotional, info);
-			} else {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    dictionary, info->language);
-				add_module_to_language_folder(GTK_TREE_MODEL
-							      (store),
-							      dictionary, info);
-			}
+			add_language_folder(GTK_TREE_MODEL(store),
+					    dictionary, info->language);
+			add_module_to_language_folder(GTK_TREE_MODEL
+						      (store),
+						      dictionary, info);
 		}
 		else if (!strcmp(info->type, BOOK_MODS)) {
 			add_language_folder(GTK_TREE_MODEL(store), book,
@@ -915,20 +926,9 @@ static void load_module_tree(GtkTreeView * treeview,
 						      (store), book,
 						      info);
 		}
-
-		if (info->is_maps) {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    map, info->language);
-				add_module_to_language_folder(GTK_TREE_MODEL
-							      (store),
-							      map, info);
-		}
-		if (info->is_images) {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    image, info->language);
-				add_module_to_language_folder(GTK_TREE_MODEL
-							      (store),
-							      image, info);
+		else {
+			GS_warning(("mod `%s' unknown type `%s'",
+				    info->name, info->type));
 		}
 
 		g_free(info->name);
