@@ -771,11 +771,16 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *cipher_key;
 	gchar *cipher_old;
 
-//	cipher_old = get_cipher_key(settings.MainWindowModule);
+	cipher_old = main_get_mod_config_entry(settings.MainWindowModule,
+					       "CipherKey");
 	cipher_key = gui_add_cipher_key(settings.MainWindowModule, cipher_old);
-	if (cipher_key) 
+	if (cipher_key) {
 		main_display_bible(settings.MainWindowModule,
 				   settings.currentverse);
+		g_free(cipher_key);
+	}
+	if (cipher_old)
+		g_free(cipher_old);
 }
 
 static void
