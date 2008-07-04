@@ -2487,17 +2487,16 @@ static gint set_controls_to_last_use(void)
 {
 	/* local or remote source */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton2),
-								  			settings.mod_mgr_source);
+				      settings.mod_mgr_source);
 	/* local source */
 	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry1),
-							  	settings.mod_mgr_local_source_index);
+				  settings.mod_mgr_local_source_index);
 	/* remote source */
 	gtk_combo_box_set_active (GTK_COMBO_BOX(combo_entry2),
-							  	settings.mod_mgr_remote_source_index);
+				  settings.mod_mgr_remote_source_index);
 	/* destination */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton4),
-								  			settings.mod_mgr_destination);
-	
+				      settings.mod_mgr_destination);
 }
 
 static void setup_ui_labels()
