@@ -2,6 +2,7 @@
 
 	* for images/maps/devotionals, remove from otherwise-native lists.
 	* fix #1973928 key entry not saved in .conf
+	* cleanup of some cipher key ick.
 
 2008-07-02  karl <charcoal@users.sf.net>
 
