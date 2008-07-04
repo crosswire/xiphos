@@ -50,6 +50,7 @@
 #include "main/sword.h"
 #include "main/search_sidebar.h"
 #include "main/search_dialog.h"
+#include "gui/dialog.h"
 
 using namespace sword;
 using namespace std;
@@ -1525,7 +1526,10 @@ char *BackEnd::get_conf_file_item(const char * file, const char * mod_name, cons
 		return NULL;
 }
 
-void BackEnd::save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value) {
+void BackEnd::save_conf_file_item(const char * file,
+				  const char * mod_name,
+				  const char * item,
+				  const char * value) {
 	SWConfig conf_file(file);
 	conf_file[mod_name][item] = value;
 	conf_file.Save();
@@ -1534,21 +1538,51 @@ void BackEnd::save_conf_file_item(const char * file, const char * mod_name, cons
 void BackEnd::save_module_key(char *mod_name, char *key) {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
-	char *mod_name_lower =  g_ascii_strdown(mod_name, strlen(mod_name));	
-	char *conffile = g_strdup_printf("%s/%s.conf",main_mgr->configPath,mod_name_lower);
-	SWConfig *myConfig = new SWConfig(conffile);
+
+	char *fullfilename;
+
+	// first try: $HOME.
+	char *confdir = g_strdup_printf("%s/%s",
+					settings.homedir, ".sword");
+	char *conffile = main_get_mod_config_file(mod_name, confdir);
+
+	if (conffile) {
+		fullfilename = g_strdup_printf("%s/mods.d/%s",
+					       confdir, conffile);
+		g_free(confdir);
+		g_free(conffile);
+	} else {
+		g_free(confdir);
+
+		// second try: system location.
+		confdir = main_module_mgr_get_path_to_mods();
+		conffile = main_get_mod_config_file(mod_name, confdir);
+
+		if (conffile) {
+			fullfilename = g_strdup_printf("%s/mods.d/%s",
+						       confdir, conffile);
+			g_free(confdir);
+			g_free(conffile);
+		} else {
+			g_free(confdir);
+			gui_generic_warning(_("Configuration not found"));
+			return;
+		}
+	}
+
+	SWConfig *myConfig = new SWConfig(fullfilename);
+	g_free(fullfilename);
+
 	section = myConfig->Sections.find(mod_name);
 	if (section != myConfig->Sections.end()) {
-		entry =  section->second. find("CipherKey");
+		entry = section->second.find("CipherKey");
 		if (entry != section->second.end()) {
 			//-- set cipher key
 			entry->second = key;
-			//-- save config file						    
+			//-- save config file
 			myConfig->Save();
 		}
 	}
-	free(conffile);
-	free(mod_name_lower);
 	delete myConfig;
 }
 /* end of file */
