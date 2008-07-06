@@ -1222,8 +1222,13 @@ void editor_sync_with_main(void)
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if (!e->studypad) 
+		if (!e->studypad) {
+#ifdef OLD_NAVBAR
 			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
+#else
+			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->navbar.button_sync), e);
+#endif
+		}
 		tmp = g_list_next(tmp);
 	}
 }
