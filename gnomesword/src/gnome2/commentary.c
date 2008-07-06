@@ -669,9 +669,33 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 #ifdef USE_GTKHTML38
 	editor_create_new((gchar *)user_data,(gchar *)settings.currentverse,TRUE);
 #else
-//	gui_open_commentary_editor((gchar *) user_data);
 	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
 #endif
+}
+
+/******************************************************************************
+ * Name
+ *
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void access_to_edit_perscomm()
+ *
+ * Description
+ *   kbd shortcut hook to pers.comm editor, from outside this source file.
+ *   Note: NOT static.
+ *
+ * Return value
+ *   void
+ */
+
+void access_to_edit_percomm()
+{
+	gchar *personal = "Personal";
+	if (!main_is_module(personal))
+		return;
+	edit_percomm(NULL /* no menuitem needed */, personal);
 }
 
 /******************************************************************************

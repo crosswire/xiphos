@@ -27,6 +27,11 @@ extern "C"
 {
 #endif
 	
+enum  {
+	BOOK_BUTTON,
+	CHAPTER_BUTTON,
+	VERSE_BUTTON
+};
 
 enum {
 	NB_MAIN,
@@ -109,6 +114,9 @@ void main_navbar_versekey_verse_prev(void);
 void main_navbar_versekey_verse_next(void);
 void main_setup_navbar_versekey(char * module_name, char * key);
 void main_navbar_versekey_set(NAVBAR_VERSEKEY navbar, const char * key);
+
+gboolean access_on_up_eventbox_button_release_event(gint element);
+gboolean access_on_down_eventbox_button_release_event(gint element);
 
 #ifdef __cplusplus
 }
