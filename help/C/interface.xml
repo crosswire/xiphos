@@ -681,6 +681,23 @@
 			<listitem>
 				<guibutton>Alt-P</guibutton> detaches/re-attaches the parallel view dialog.
 			</listitem>
+			<listitem>
+				<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
+			</listitem>
+			<listitem>
+				Location bar navigation (these are not very regular, and will probably be revisited in the future):
+				<itemizedlist>
+					<listitem>
+						Alt-PageUp/PageDown: Verse up/down.
+					</listitem>
+					<listitem>
+						Alt-Home/End: Chapter up/down.
+					</listitem>
+					<listitem>
+						Ctrl-Alt-Home/End: Book up/down.
+					</listitem>
+				</itemizedlist>
+			</listitem>
 		</itemizedlist>
 	</sect2>
 

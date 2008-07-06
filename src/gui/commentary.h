@@ -24,5 +24,6 @@
 
 GtkWidget *gui_create_commentary_pane(void);
 void gui_create_pm_commentary(void);
+void access_to_edit_percomm(void);
 
 #endif
