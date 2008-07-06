@@ -34,12 +34,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
-enum  {
-	BOOK_BUTTON,
-	CHAPTER_BUTTON,
-	VERSE_BUTTON
-};
-
 #ifndef OLD_NAVBAR
 NAVBAR_VERSEKEY navbar_parallel;
 

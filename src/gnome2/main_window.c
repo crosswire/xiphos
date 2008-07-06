@@ -546,12 +546,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_MOD1_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
+
 	case 42: // Alt-G  genbook entry
 		if (state == GDK_MOD1_MASK) {
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
 			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
 		break;
+
 	case 46: // Ctrl-L  verse entry
 		if (state == GDK_CONTROL_MASK)
 #ifdef OLD_NAVBAR
@@ -560,6 +562,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			gtk_widget_grab_focus(navbar_versekey.lookup_entry);
 #endif
 		break;
+
 	case 41: // Ctrl-F  find in bible text
 		if (state == GDK_CONTROL_MASK)
 			// bible text only, *sigh*.
@@ -567,6 +570,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				     settings.MainWindowModule,
 				     FALSE, NULL);
 		break;
+
 	case 54: // Alt-C  commentary pane
 		if (state == GDK_MOD1_MASK) {
 #ifdef OLD_NAVBAR
@@ -577,6 +581,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),0);
 		}
 		break;
+
 	case 56: // Alt-B  bookmark
 		if (state == GDK_MOD1_MASK) {
 			gchar *label = g_strdup_printf("%s, %s",
@@ -588,9 +593,45 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			g_free(label);
 		}
 		break;
+
 	case 33: // Alt-P  parallel detachment
 		if (state == GDK_MOD1_MASK)
 			on_undockInt_activate(NULL);
+		break;
+
+	case 52: // Alt-Z  open personal commentary
+		if (state == GDK_MOD1_MASK)
+			access_to_edit_percomm();
+		break;
+
+	case 97:  // Home      book/chapter up
+		if (state == (GDK_MOD1_MASK|GDK_CONTROL_MASK))
+			access_on_up_eventbox_button_release_event
+			    (BOOK_BUTTON);
+		else if (state == GDK_MOD1_MASK)
+			access_on_up_eventbox_button_release_event
+			    (CHAPTER_BUTTON);
+		break;
+
+	case 103: // End       book/chapter up
+		if (state == (GDK_MOD1_MASK|GDK_CONTROL_MASK))
+			access_on_down_eventbox_button_release_event
+			    (BOOK_BUTTON);
+		else if (state == GDK_MOD1_MASK)
+			access_on_down_eventbox_button_release_event
+			    (CHAPTER_BUTTON);
+		break;
+
+	case 99:  // PageUp    verse up
+		if (state == GDK_MOD1_MASK)
+			access_on_up_eventbox_button_release_event
+			    (VERSE_BUTTON);
+		break;
+
+	case 105: // PageDown  verse down
+		if (state == GDK_MOD1_MASK)
+			access_on_down_eventbox_button_release_event
+			    (VERSE_BUTTON);
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
