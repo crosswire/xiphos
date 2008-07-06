@@ -833,17 +833,29 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 	if (!key->_compare(key_top)) {
 		if ((!strcmp(settings.MainWindowModule, "KJV"))){
-			buf=g_strdup_printf("<div style=\"text-align: center\">%s<hr></div>",
-					mod->Description());
+			buf=g_strdup_printf("<div style=\"text-align: center\">"
+					    "<b><font size=\"%+d\">%s</font></b>"
+					    "<hr></div>",
+					    1 + ((mf->old_font_size)
+						 ? atoi(mf->old_font_size) +
+						 settings.base_font_size
+						 : settings.base_font_size),
+					    mod->Description());
 			swbuf.append(buf);
 			g_free(buf);
 		}
 		else {
 			num = main_format_number(chapter);
-			buf=g_strdup_printf("<div style=\"text-align: center\"><p>%s</p><b>%s %s</b></div>",
-					mod->Description(),
-					_("Chapter"),
-					num);
+			buf=g_strdup_printf("<div style=\"text-align: center\">"
+					    "<p><b><font size=\"%+d\">%s</font></b></p>"
+					    "<b>%s %s</b></div>",
+					    1 + ((mf->old_font_size)
+						 ? atoi(mf->old_font_size) +
+						 settings.base_font_size
+						 : settings.base_font_size),
+					    mod->Description(),
+					    _("Chapter"),
+					    num);
 			g_free(num);
 			swbuf.append(buf);
 			g_free(buf);
@@ -995,7 +1007,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 	if (key_bottom._compare(key) < 1) {
 		buf=g_strdup_printf(
-			"%s<hr><div style=\"text-align: center\"><p>%s</p></div>",
+			"%s<hr><div style=\"text-align: center\"><p><b>%s</b></p></div>",
 			// extra break when excess strongs/morph space.
 			(strongs_or_morph ? "<br>" : ""),
 			mod->Description());

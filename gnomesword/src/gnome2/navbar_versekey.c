@@ -40,13 +40,6 @@
 #include "main/sword.h"
 #include "main/tab_history.h"
 
-enum  {
-	BOOK_BUTTON,
-	CHAPTER_BUTTON,
-	VERSE_BUTTON
-};
-
-
 NAVBAR_VERSEKEY navbar_versekey;
 
 extern PASSAGE_TAB_INFO *cur_passage_tab;
@@ -650,7 +643,7 @@ gboolean on_down_leave_notify_event(GtkWidget * widget, GdkEventCrossing * event
  *   gboolean
  */
 
-static 
+static
 gboolean on_up_eventbox_button_release_event (GtkWidget * widget,
                                         	GdkEventButton * event,
                                         	gpointer user_data)
@@ -688,7 +681,7 @@ gboolean on_up_eventbox_button_release_event (GtkWidget * widget,
  *   gboolean
  */
 
-static 
+static
 gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
                                        	GdkEventButton * event,
                                        	gpointer user_data)
@@ -707,6 +700,49 @@ gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   access_on_up_eventbox_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_up_eventbox_button_release_event(gpointer element)
+ *
+ * Description
+ *   access to internal static method from main_window.c
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean access_on_up_eventbox_button_release_event(gint element)
+{
+	return on_up_eventbox_button_release_event
+	    (NULL, NULL, (void*)element);
+}
+
+/******************************************************************************
+ * Name
+ *   access_on_down_eventbox_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/navbar_versekey.h"
+ *
+ *   gboolean on_down_eventbox_button_release_event(gpointer element)
+ *
+ * Description
+ *   access to internal static method from main_window.c
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean access_on_down_eventbox_button_release_event(gint element)
+{
+	return on_down_eventbox_button_release_event
+	    (NULL, NULL, (void*)element);
+}
 
 /******************************************************************************
  * Name
