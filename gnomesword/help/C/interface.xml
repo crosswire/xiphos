@@ -685,16 +685,16 @@
 				<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
 			</listitem>
 			<listitem>
-				Location bar navigation (these are not very regular, and will probably be revisited in the future):
+				Location bar navigation:
 				<itemizedlist>
 					<listitem>
-						Alt-PageUp/PageDown: Verse up/down.
+						<guibutton>Ctrl-p/Ctrl-n</guibutton>: Verse previous/next.
 					</listitem>
 					<listitem>
-						Alt-Home/End: Chapter up/down.
+						<guibutton>p/n</guibutton>: Chapter previous/next.
 					</listitem>
 					<listitem>
-						Ctrl-Alt-Home/End: Book up/down.
+						<guibutton>P/N</guibutton>: Book previous/next.
 					</listitem>
 				</itemizedlist>
 			</listitem>
