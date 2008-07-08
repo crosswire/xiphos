@@ -1,6 +1,7 @@
 2008-07-08  karl <charcoal@users.sf.net>
 	
 	* move nav keys: Ctrl-n/p (verse), n/p (chapter), N/P (book).
+	* better wording on parent/child book navbar buttons.
 	
 2008-07-06  karl <charcoal@users.sf.net>
 
