@@ -1,3 +1,7 @@
+2008-07-08  karl <charcoal@users.sf.net>
+	
+	* move nav keys: Ctrl-n/p (verse), n/p (chapter), N/P (book).
+	
 2008-07-06  karl <charcoal@users.sf.net>
 
 	* feat.req #1991842 pers.comm suggestions:
