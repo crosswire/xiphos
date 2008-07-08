@@ -594,44 +594,37 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case 33: // Alt-P  parallel detachment
-		if (state == GDK_MOD1_MASK)
-			on_undockInt_activate(NULL);
-		break;
-
 	case 52: // Alt-Z  open personal commentary
 		if (state == GDK_MOD1_MASK)
 			access_to_edit_percomm();
 		break;
 
-	case 97:  // Home      book/chapter up
-		if (state == (GDK_MOD1_MASK|GDK_CONTROL_MASK))
-			access_on_up_eventbox_button_release_event
-			    (BOOK_BUTTON);
-		else if (state == GDK_MOD1_MASK)
-			access_on_up_eventbox_button_release_event
-			    (CHAPTER_BUTTON);
-		break;
+	// future reference: 97 = Home; 103 = End; 99 = PageUp; 105 = PageDown
 
-	case 103: // End       book/chapter up
-		if (state == (GDK_MOD1_MASK|GDK_CONTROL_MASK))
-			access_on_down_eventbox_button_release_event
-			    (BOOK_BUTTON);
-		else if (state == GDK_MOD1_MASK)
-			access_on_down_eventbox_button_release_event
-			    (CHAPTER_BUTTON);
-		break;
-
-	case 99:  // PageUp    verse up
-		if (state == GDK_MOD1_MASK)
+	case 33:  // P    "previous" or "parallel"
+		if (state == GDK_CONTROL_MASK)		// Ctrl-P verse
 			access_on_up_eventbox_button_release_event
 			    (VERSE_BUTTON);
+		else if (state == 0)			// p chapter
+			access_on_up_eventbox_button_release_event
+			    (CHAPTER_BUTTON);
+		else if (state == GDK_SHIFT_MASK)	// P book
+			access_on_up_eventbox_button_release_event
+			    (BOOK_BUTTON);
+		else if (state == GDK_MOD1_MASK) // Alt-P  parallel detach
+			on_undockInt_activate(NULL);
 		break;
 
-	case 105: // PageDown  verse down
-		if (state == GDK_MOD1_MASK)
+	case 57: // N    "next"
+		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
 			access_on_down_eventbox_button_release_event
 			    (VERSE_BUTTON);
+		else if (state == 0)			// n chapter
+			access_on_down_eventbox_button_release_event
+			    (CHAPTER_BUTTON);
+		else if (state == GDK_SHIFT_MASK)	// N book
+			access_on_down_eventbox_button_release_event
+			    (BOOK_BUTTON);
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
