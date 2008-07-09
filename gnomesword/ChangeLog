@@ -1,3 +1,7 @@
+2008-07-09  karl <charcoal@users.sf.net>
+
+	* fix bug, adv.search: deleted module trips custom list usage.
+
 2008-07-08  karl <charcoal@users.sf.net>
 	
 	* move nav keys: Ctrl-n/p (verse), n/p (chapter), N/P (book).
