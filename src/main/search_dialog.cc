@@ -1466,6 +1466,17 @@ void main_do_dialog_search(void)
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
 
+		if (!main_is_module(module)) {
+			gchar msg[300];
+			sprintf(msg, _("%s:\nNo such module is installed.\n%s"),
+				module,
+				_("Please adjust the module list."));
+			gui_generic_warning(msg);
+			g_free(module);
+			search_mods = g_list_next(search_mods);
+			continue;
+		}
+
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 
 		gui_set_progressbar_text(search1.progressbar, buf);
