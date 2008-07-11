@@ -1758,14 +1758,18 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
 		be->init_SWORD(1);
 
+		if (key)
+			t->key = g_strdup(key);
+		else			
+			t->key = g_strdup(settings.dictkey);
+
 		// for devotional use.
 		gchar buf[10];
 
 		time_t curtime;
 		struct tm *loctime;
 		char *feature;
-		if ((key == NULL) ||
-		    (feature = (char *)be->get_main_mgr()->
+		if ((feature = (char *)be->get_main_mgr()->
 					getModule(mod_name)->
 					getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
@@ -1782,11 +1786,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 				key = buf;
 			}
 		}
-
-		if (key)
-			t->key = g_strdup(key);
-		else			
-			t->key = g_strdup(settings.dictkey);
 		break;
 
 	case BOOK_TYPE:
