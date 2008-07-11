@@ -1773,17 +1773,17 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 					getModule(mod_name)->
 					getConfigEntry("Feature")) &&
 		    !strcmp(feature, "DailyDevotion")) {
-			if ((key == NULL) ||
-			    (strlen(key) != 5) ||		// blunt tests.
-			    (key[0] < '0') || (key[0] > '9') ||
-			    (key[1] < '0') || (key[1] > '9') ||
-			    (key[2] != '.')                  ||
-			    (key[3] < '0') || (key[3] > '9') ||
-			    (key[4] < '0') || (key[4] > '9')) {	// not MM.DD
+			if ((strlen(t->key) != 5) ||		// blunt tests.
+			    (t->key[0] < '0') || (t->key[0] > '9') ||
+			    (t->key[1] < '0') || (t->key[1] > '9') ||
+			    (t->key[2] != '.')                     ||
+			    (t->key[3] < '0') || (t->key[3] > '9') ||
+			    (t->key[4] < '0') || (t->key[4] > '9')) {	// not MM.DD
 				curtime = time(NULL);
 				loctime = localtime(&curtime);
 				strftime(buf, 10, "%m.%d", loctime);
-				key = buf;
+				g_free(t->key);
+				t->key = g_strdup(buf);
 			}
 		}
 		break;
