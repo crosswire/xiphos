@@ -652,7 +652,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gchar *key = g_strdup_printf("%d",settings.book_offset);
+	gchar *key = main_get_book_key_from_offset(settings.book_offset);
 	gchar *local_name = main_get_treekey_local_name(settings.book_offset);
 	gchar *label = g_strdup_printf("%s, %s",local_name,settings.book_mod);
 
