@@ -367,7 +367,7 @@ void main_setup_navbar_book_dialog(gpointer data)
 	BackEnd *be = (BackEnd *) d->backend;
 	
 	be->set_treekey(d->offset);
-	tmpbuf = be->get_key_form_offset(d->offset);
+	tmpbuf = be->get_key_from_offset(d->offset);
 	gtk_entry_set_text(GTK_ENTRY(d->navbar_book.lookup_entry), tmpbuf);
 	gtk_tooltips_set_tip(d->navbar_book.tooltips,
 			     d->navbar_book.lookup_entry, tmpbuf, NULL);
