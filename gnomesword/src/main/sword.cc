@@ -1017,6 +1017,10 @@ void main_display_commentary(const char * mod_name, const char * key)
 void main_display_dictionary(const char * mod_name, const char * key)
 {
 	const gchar *old_key;
+
+	// for devotional use.
+	gchar buf[10];
+
 	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
 
 	if (!settings.havedict || !mod_name)
@@ -1026,13 +1030,34 @@ void main_display_dictionary(const char * mod_name, const char * key)
 	if (!settings.DictWindowModule)
 		settings.DictWindowModule = (char*)mod_name;
 
+	if (key == NULL)
+		key = (char*)"Grace";
+
 	if (strcmp(settings.DictWindowModule, mod_name)) {
+		// new dict -- is it actually a devotional?
+		time_t curtime;
+		struct tm *loctime;
+		char *feature;
+		if ((feature = (char *)backend->get_main_mgr()->
+					getModule(mod_name)->
+					getConfigEntry("Feature")) &&
+		    !strcmp(feature, "DailyDevotion")) {
+			if ((strlen(key) != 5) ||		// blunt tests.
+			    (key[0] < '0') || (key[0] > '9') ||
+			    (key[1] < '0') || (key[1] > '9') ||
+			    (key[2] != '.')                  ||
+			    (key[3] < '0') || (key[3] > '9') ||
+			    (key[4] < '0') || (key[4] > '9')) {	// not MM.DD
+				curtime = time(NULL);
+				loctime = localtime(&curtime);
+				strftime(buf, 10, "%m.%d", loctime);
+				key = buf;
+			}
+		}
 		xml_set_value("GnomeSword", "modules", "dict", mod_name);
 		settings.DictWindowModule = xml_get_value("modules", "dict");
 	}
 	
-	if (key == NULL)
-		key = (char*)"Grace";
 	 // old_key is uppercase
  	key = g_utf8_strup(key, -1);
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
@@ -1230,7 +1255,7 @@ void main_display_bible(const char * mod_name, const char * key)
 
 void main_display_devotional(void)
 {
-	gchar buf[80];
+	gchar buf[10];
 	time_t curtime;
 	struct tm *loctime;
 	gchar *text;
@@ -1264,7 +1289,7 @@ void main_display_devotional(void)
 	/*
 	 * Print it out in a nice format.
 	 */
-	strftime(buf, 80, "%m.%d", loctime);
+	strftime(buf, 10, "%m.%d", loctime);
 	
 	
 	text = backend->get_render_text(settings.devotionalmod, buf);
