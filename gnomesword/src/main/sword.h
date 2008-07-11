@@ -113,6 +113,7 @@ char *main_get_raw_text(char *module_name, char *key);
 int main_get_mod_type(char * mod_name);
 char *main_get_module_description(char * module_name);
 char *main_get_treekey_local_name(unsigned long offset);
+char *main_get_book_key_from_offset(unsigned long offset);
 void main_refresh_all(void);
 char *main_format_number(int x);
 int main_deformat_number(char *digitstring);

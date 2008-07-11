@@ -962,13 +962,11 @@ int BackEnd::set_key(const char *key) {
 		display_mod->setKey(key);
 		return 1;
 	}
-	else 
-		return 0;
+	return 0;
 	
 }
 
-char *BackEnd::get_key_form_offset(unsigned long offset) {
-	char *retval = NULL; 
+char *BackEnd::get_key_from_offset(unsigned long offset) {
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
                 treenode.setOffset(offset);
@@ -977,9 +975,9 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
                         display_mod->SetKey(treenode);
                         display_mod->KeyText();      //snap to entry
                 }
-		retval = strdup(display_mod->KeyText());
+		return strdup(display_mod->KeyText());
         }
-        return retval;
+        return NULL;
 }
 
 unsigned long BackEnd::treekey_set_key(char * key) {
@@ -1323,7 +1321,7 @@ int BackEnd::do_module_search(char *module_name,
 }
  
 void BackEnd::init_language_map(void) {
-	/* --list form Bibletime-1.3-- */
+	/* --list from Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 	//languageMap[SWBuf("ae")] = SWBuf("Avestan");

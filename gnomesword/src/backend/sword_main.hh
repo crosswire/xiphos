@@ -114,7 +114,7 @@ public:
 	
 	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
 	
-	char *get_key_form_offset(unsigned long offset);
+	char *get_key_from_offset(unsigned long offset);
 	void set_treekey(unsigned long offset);
 	unsigned long get_treekey_offset(void);
 	unsigned long get_treekey_offset_from_key(const char * mod_name, const char * key);
