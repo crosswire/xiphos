@@ -312,8 +312,7 @@ static void entry_changed(GtkEditable *editable,
 	if (d->key)
 		g_free(d->key);
 
-	key=
-	    g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
+	key = g_strdup((gchar *) gtk_entry_get_text(GTK_ENTRY(d->entry)));
 	d->key = g_utf8_strup(key, -1);
 	g_free(key);
 	main_dialogs_dictionary_entry_changed(d);

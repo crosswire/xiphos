@@ -1700,76 +1700,105 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	t->sync = FALSE;
 	
 	switch(type) {
-		case TEXT_TYPE:
-			t->mod_type = TEXT_TYPE;
-			gui_create_bibletext_dialog(t);
+	case TEXT_TYPE:
+		t->mod_type = TEXT_TYPE;
+		gui_create_bibletext_dialog(t);
 #ifdef USE_GTKMOZEMBED
-			be->chapDisplay = new DialogChapDisp(t->html, t, be, t->ops);
+		be->chapDisplay = new DialogChapDisp(t->html, t, be, t->ops);
 #else
-			if(t->is_rtol)
-				be->dialogRTOLDisplay 
-				   = new DialogTextviewChapDisp(t->text,  t, be, t->ops);
-			else	
-				be->chapDisplay 
-				      = new DialogChapDisp(t->html,  t, be, t->ops); 
+		if(t->is_rtol)
+			be->dialogRTOLDisplay 
+			    = new DialogTextviewChapDisp(t->text,  t, be, t->ops);
+		else	
+			be->chapDisplay 
+			    = new DialogChapDisp(t->html,  t, be, t->ops); 
 #endif
-			be->init_SWORD(1);
-			if(key)
-				t->key = g_strdup(key);
-			else			
-				t->key = g_strdup(settings.currentverse);
-			dlg_bible = t;
+		be->init_SWORD(1);
+		if(key)
+			t->key = g_strdup(key);
+		else			
+			t->key = g_strdup(settings.currentverse);
+		dlg_bible = t;
 #ifdef OLD_NAVBAR
-			t->navbar.is_dialog = TRUE;
-			t->navbar.key = g_strdup(settings.currentverse);
-			t->navbar.module_name = g_strdup(mod_name);
-			main_navbar_fill_book_combo(t->navbar);
+		t->navbar.is_dialog = TRUE;
+		t->navbar.key = g_strdup(settings.currentverse);
+		t->navbar.module_name = g_strdup(mod_name);
+		main_navbar_fill_book_combo(t->navbar);
 #else
-			t->navbar.module_name = g_string_new(mod_name);
-			t->navbar.key =  g_string_new(settings.currentverse);
-			//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key->str); 
+		t->navbar.module_name = g_string_new(mod_name);
+		t->navbar.key =  g_string_new(settings.currentverse);
+		//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key->str); 
 #endif
 		break;
-		case COMMENTARY_TYPE:
-			t->mod_type = COMMENTARY_TYPE;
-			gui_create_commentary_dialog(t, FALSE);
-			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
-			be->init_SWORD(1);
-			if(key)
-				t->key = g_strdup(key);
-			else			
-				t->key = g_strdup(settings.currentverse);
+
+	case COMMENTARY_TYPE:
+		t->mod_type = COMMENTARY_TYPE;
+		gui_create_commentary_dialog(t, FALSE);
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->init_SWORD(1);
+		if(key)
+			t->key = g_strdup(key);
+		else			
+			t->key = g_strdup(settings.currentverse);
 #ifdef OLD_NAVBAR
-			t->navbar.is_dialog = TRUE;
-			t->navbar.key = g_strdup(settings.currentverse);
-			t->navbar.module_name = g_strdup(mod_name);
-			main_navbar_fill_book_combo(t->navbar);
+		t->navbar.is_dialog = TRUE;
+		t->navbar.key = g_strdup(settings.currentverse);
+		t->navbar.module_name = g_strdup(mod_name);
+		main_navbar_fill_book_combo(t->navbar);
 #else
-			t->navbar.module_name = g_string_new(mod_name);
-			t->navbar.key =  g_string_new(settings.currentverse);
-			//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key); 
+		t->navbar.module_name = g_string_new(mod_name);
+		t->navbar.key =  g_string_new(settings.currentverse);
+		//main_navbar_versekey_set(t->navbar, (char*)d->navbar.key); 
 #endif
 		break;
-		case DICTIONARY_TYPE:
-			t->mod_type = DICTIONARY_TYPE;
-			gui_create_dictlex_dialog(t);
-			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
-			be->init_SWORD(1);
-			if(key)
-				t->key = g_strdup(key);
-			else			
-				t->key = g_strdup(settings.dictkey);
+
+	case DICTIONARY_TYPE:
+		t->mod_type = DICTIONARY_TYPE;
+		gui_create_dictlex_dialog(t);
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->init_SWORD(1);
+
+		// for devotional use.
+		gchar buf[10];
+
+		time_t curtime;
+		struct tm *loctime;
+		char *feature;
+		if ((key == NULL) ||
+		    (feature = (char *)be->get_main_mgr()->
+					getModule(mod_name)->
+					getConfigEntry("Feature")) &&
+		    !strcmp(feature, "DailyDevotion")) {
+			if ((key == NULL) ||
+			    (strlen(key) != 5) ||		// blunt tests.
+			    (key[0] < '0') || (key[0] > '9') ||
+			    (key[1] < '0') || (key[1] > '9') ||
+			    (key[2] != '.')                  ||
+			    (key[3] < '0') || (key[3] > '9') ||
+			    (key[4] < '0') || (key[4] > '9')) {	// not MM.DD
+				curtime = time(NULL);
+				loctime = localtime(&curtime);
+				strftime(buf, 10, "%m.%d", loctime);
+				key = buf;
+			}
+		}
+
+		if (key)
+			t->key = g_strdup(key);
+		else			
+			t->key = g_strdup(settings.dictkey);
 		break;
-		case BOOK_TYPE:
-			t->mod_type = BOOK_TYPE;
-			gui_create_gbs_dialog(t);
-			be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
-			be->init_SWORD(1);
-			t->key = NULL; 
-			if(key)
-				t->offset = atoi(key);
-			else
-				t->offset = 4;
+
+	case BOOK_TYPE:
+		t->mod_type = BOOK_TYPE;
+		gui_create_gbs_dialog(t);
+		be->entryDisplay = new DialogEntryDisp(t->html,  t, be, t->ops); 
+		be->init_SWORD(1);
+		t->key = NULL; 
+		if(key)
+			t->offset = atoi(key);
+		else
+			t->offset = 4;
 		break;
 	}
 		
