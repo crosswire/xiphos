@@ -1620,9 +1620,9 @@ char *main_get_raw_text(char *module_name, char *key)
  *   char *
  */
 
-char *main_get_book_key_from_offset(char *module_name, unsigned long offset)
+char *main_get_book_key_from_offset(unsigned long offset)
 {
-	//return backend->get_key_form_offset(module_name, key);
+	return backend->get_key_from_offset(offset);
 }
 
 /******************************************************************************
