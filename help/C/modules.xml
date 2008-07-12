@@ -110,13 +110,13 @@
 		</sect3>
 	</sect2>
 	
-<!-- Adding And Removing Modules -->
+<!-- Installing, Updating, and Maintaining Modules -->
 	<sect2 id="module-management">
-		<title>Add And Remove Modules</title>
+		<title>Installing, Updating, and Maintaining Modules</title>
 		<sect3 id="add-module">
-			<title>Adding and Updating Sword Modules</title>
+			<title>Installing, Updating, and Maintaining Modules</title>
 			<figure>
-				<title>Adding Modules</title>
+				<title>Installing and Updating Modules</title>
 	       		<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
@@ -135,6 +135,11 @@
 	
                         </screenshot>
 			</figure>
+		<para>
+		The module manager generates both a per-type module list as well as a parallel availability list.  The latter is
+		intended to make it easier to find new items without having to work one's way through the per-type list, one subtree at a
+		time.  Modules which are either not yet installed or updated beyond what is currently installed will appear in both lists.
+		</para>
 		<para>
 		Modules that are already installed will show a checkmark beside them.  If a fast search ("lucene") index is available, an open book will be
 		displayed, otherwise an "X" will be shown; creation of the index is available on the Maintenance pane.  Locked modules, which require that you
