@@ -782,6 +782,8 @@ static void load_module_tree(GtkTreeView * treeview,
 	gint i;
 	static gboolean need_column = TRUE;
 	GtkTreeStore *store;
+	GtkTreeIter category_type;
+	GtkTreeIter category_avail;
 	GtkTreeIter text;
 	GtkTreeIter commentary;
 	GtkTreeIter dictionary;
@@ -850,6 +852,12 @@ static void load_module_tree(GtkTreeView * treeview,
 		return;
 	tmp2 = tmp;
 
+	if (install) {
+		gtk_tree_store_append(store, &category_type, NULL);
+		gtk_tree_store_set(store, &category_type, 0,
+				   _("Categorized\nby module type"), -1);
+	}
+
 	/*  add Biblical Texts folder */
 	gtk_tree_store_append(store, &text, NULL);
 	gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
@@ -879,17 +887,21 @@ static void load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
 	if (install) {
-		/*  add fake separator */
 		gtk_tree_store_append(store, &separator, NULL);
 		gtk_tree_store_set(store, &separator, 0, " ", -1);
 
+		gtk_tree_store_append(store, &category_avail, NULL);
+		gtk_tree_store_set(store, &category_avail, 0,
+				   _("Categorized\nby availability"), -1);
+
+
 		/*  add Updates folder */
 		gtk_tree_store_append(store, &update, NULL);
-		gtk_tree_store_set(store, &update, 0, _("Updates, all types"), -1);
+		gtk_tree_store_set(store, &update, 0, _("Updates"), -1);
 
 		/*  add Uninstalled folder */
 		gtk_tree_store_append(store, &uninstalled, NULL);
-		gtk_tree_store_set(store, &uninstalled, 0, _("Still Available, all types"), -1);
+		gtk_tree_store_set(store, &uninstalled, 0, _("Uninstalled"), -1);
 	} else {
 		if (settings.prayerlist) {
 			gtk_tree_store_append(store, &prayerlist, NULL);
