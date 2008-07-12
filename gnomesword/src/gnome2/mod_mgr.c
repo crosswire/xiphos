@@ -789,6 +789,10 @@ static void load_module_tree(GtkTreeView * treeview,
 	GtkTreeIter book;
 	GtkTreeIter map;
 	GtkTreeIter image;
+	GtkTreeIter separator;
+	GtkTreeIter update;
+	GtkTreeIter uninstalled;
+	GtkTreeIter prayerlist;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeIter child_iter;
@@ -874,8 +878,49 @@ static void load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_append(store, &image, NULL);
 	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
+	if (install) {
+		/*  add fake separator */
+		gtk_tree_store_append(store, &separator, NULL);
+		gtk_tree_store_set(store, &separator, 0, " ", -1);
+
+		/*  add Updates folder */
+		gtk_tree_store_append(store, &update, NULL);
+		gtk_tree_store_set(store, &update, 0, _("Updates, all types"), -1);
+
+		/*  add Uninstalled folder */
+		gtk_tree_store_append(store, &uninstalled, NULL);
+		gtk_tree_store_set(store, &uninstalled, 0, _("Still Available, all types"), -1);
+	} else {
+		if (settings.prayerlist) {
+			gtk_tree_store_append(store, &prayerlist, NULL);
+			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List"), -1);
+		}
+	}
+
+
 	while (tmp2) {
 		info = (MOD_MGR *) tmp2->data;
+
+		if (install) {
+			// special lists: updated and uninstalled modules.
+			if (!info->installed) {
+				add_language_folder(GTK_TREE_MODEL(store), uninstalled,
+						    info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store), uninstalled,
+							      info);
+			} else if ((!info->old_version && info->new_version &&
+				    strcmp(info->new_version, " ")) ||
+				   (info->old_version && !info->new_version) ||
+				   (info->old_version && info->new_version &&
+				    strcmp(info->new_version, info->old_version) > 0)) {
+				add_language_folder(GTK_TREE_MODEL(store), update,
+						    info->language);
+				add_module_to_language_folder(GTK_TREE_MODEL
+							      (store), update,
+							      info);
+			}
+		}
 
 		if (!strcmp(info->type, TEXT_MODS)) {
 			add_language_folder(GTK_TREE_MODEL(store), text,
@@ -920,11 +965,18 @@ static void load_module_tree(GtkTreeView * treeview,
 						      dictionary, info);
 		}
 		else if (!strcmp(info->type, BOOK_MODS)) {
-			add_language_folder(GTK_TREE_MODEL(store), book,
-					    info->language);
-			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store), book,
-						      info);
+			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
+			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
+				add_language_folder
+				    (GTK_TREE_MODEL(store), book, info->language);
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), book, info);
+			} else if (settings.prayerlist) {
+				add_language_folder
+				    (GTK_TREE_MODEL(store), prayerlist, info->language);
+				add_module_to_language_folder
+				    (GTK_TREE_MODEL(store), prayerlist, info);
+			}
 		}
 		else {
 			GS_warning(("mod `%s' unknown type `%s'",
