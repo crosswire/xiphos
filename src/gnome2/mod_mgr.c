@@ -855,7 +855,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	if (install) {
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
-				   _("Categorized\nby module type"), -1);
+				   _("Categorized by\nModule Type"), -1);
 	}
 
 	/*  add Biblical Texts folder */
@@ -892,7 +892,7 @@ static void load_module_tree(GtkTreeView * treeview,
 
 		gtk_tree_store_append(store, &category_avail, NULL);
 		gtk_tree_store_set(store, &category_avail, 0,
-				   _("Categorized\nby availability"), -1);
+				   _("Categorized by\nAvailability"), -1);
 
 
 		/*  add Updates folder */
