@@ -64,7 +64,6 @@ extern "C" {
 
 char *backend_mod_mgr_get_config_entry(char * module_name, char * entry);
 void backend_mod_mgr_init_language_map(void);
-const char *backend_mod_mgr_get_language_map(const char *language);
 char *backend_module_mgr_get_path_to_mods(void);
 MOD_MGR *backend_module_mgr_get_next_module(void);
 GList *backend_module_mgr_list_remote_sources(void);
