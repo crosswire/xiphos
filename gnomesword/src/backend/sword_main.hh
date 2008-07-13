@@ -50,8 +50,6 @@ class BackEnd {
 	SWModule *search_mod;
 	//SWFilter *thml2osis;
 	//SWFilter *osis2html;
-	typedef map < SWBuf, SWBuf > ModLanguageMap;
-	ModLanguageMap languageMap;
 	
 public:	
 	SWModule *display_mod;
@@ -73,7 +71,6 @@ public:
 	void init_SWORD(int gsType);
 	char *set_sword_locale(const char *sys_locale);
 	void init_lists(MOD_LISTS * mods);
-	void init_language_map(void);
 	const char *get_sword_version(void);
 
 	GList *get_module_options(void);
@@ -110,7 +107,6 @@ public:
 	const char *module_get_language(const char *module_name);
 	int module_has_testament(const char * module_name,  int testament);
 	int module_get_testaments(const char * module_name);
-	const char *get_language_map(const char *language);
 	
 	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
 	
