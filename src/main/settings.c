@@ -173,7 +173,9 @@ int settings_init(int new_configs, int new_bookmarks)
 	}
 	g_free(sword_dir);
 	
-	
+	/* moved here from crud locations in backend. */
+	main_init_language_map();
+
 	init_bookmarks(new_bookmarks);
 
 	/* set fnconfigure to gSwordDir and settings.xml */
@@ -196,14 +198,14 @@ int settings_init(int new_configs, int new_bookmarks)
 				main_init_lists();
 				if (settings.havebible == 0) {
 					gui_generic_warning
-					    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display, GnomeSword cannot proceed, and will now exit."));
+					    (_("There are still no Bibles installed.\nEvidently, you declined to install any.\n\nWithout any Bible modules to display,\nGnomeSword cannot proceed,\nand will now exit."));
 					exit(1);
 				} else
 					gui_generic_warning
 					    (_("Bible module installation complete."));
 			} else {
 				gui_generic_warning
-				    (_("Without any Bible modules to display, GnomeSword cannot proceed, and will now exit."));
+				    (_("Without any Bible modules to display,\nGnomeSword cannot proceed,\nand will now exit."));
 				exit(1);
 			}
 		}

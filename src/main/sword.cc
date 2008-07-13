@@ -508,6 +508,221 @@ char *main_get_path_to_mods(void)
 	return (path ? g_strdup(path) : NULL);
 }
 
+/******************************************************************************
+ * Name
+ *  main_init_language_map
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void main_init_language_map(void)
+ *
+ * Description
+ *   initializes the hard-coded abbrev->name mapping.
+ *
+ * Return value
+ *   void
+ */ 
+
+typedef std::map < SWBuf, SWBuf > ModLanguageMap;
+ModLanguageMap languageMap;
+
+void main_init_language_map() {
+	/* --list from Bibletime-1.3-- */
+	languageMap[SWBuf("aa")] = SWBuf(_("Afar"));
+	languageMap[SWBuf("ab")] = SWBuf(_("Abkhazian"));
+	languageMap[SWBuf("ae")] = SWBuf(_("Avestan"));
+	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans"));
+	languageMap[SWBuf("am")] = SWBuf(_("Amharic"));
+	languageMap[SWBuf("ang")] = SWBuf(_("English, Old (ca.450-1100)"));
+	languageMap[SWBuf("ar")] = SWBuf(_("Arabic"));
+	languageMap[SWBuf("as")] = SWBuf(_("Assamese"));
+	languageMap[SWBuf("ay")] = SWBuf(_("Aymara"));
+	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani"));
+	languageMap[SWBuf("ba")] = SWBuf(_("Bashkir"));
+	languageMap[SWBuf("be")] = SWBuf(_("Belarusian"));
+	languageMap[SWBuf("bg")] = SWBuf(_("Bulgarian"));
+	languageMap[SWBuf("bh")] = SWBuf(_("Bihari"));
+	languageMap[SWBuf("bi")] = SWBuf(_("Bislama"));
+	languageMap[SWBuf("bn")] = SWBuf(_("Bengali"));
+	languageMap[SWBuf("bo")] = SWBuf(_("Tibetan"));
+	languageMap[SWBuf("br")] = SWBuf(_("Breton"));
+	languageMap[SWBuf("bs")] = SWBuf(_("Bosnian"));
+	languageMap[SWBuf("ca")] = SWBuf(_("Catalan"));
+	languageMap[SWBuf("ce")] = SWBuf(_("Chechen"));
+	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano"));
+	languageMap[SWBuf("ch")] = SWBuf(_("Chamorro"));
+	languageMap[SWBuf("co")] = SWBuf(_("Corsican"));
+	languageMap[SWBuf("cop")] = SWBuf(_("Coptic"));
+	languageMap[SWBuf("cs")] = SWBuf(_("Czech"));
+	languageMap[SWBuf("cu")] = SWBuf(_("Church Slavic"));
+	languageMap[SWBuf("cv")] = SWBuf(_("Chuvash"));
+	languageMap[SWBuf("cy")] = SWBuf(_("Welsh"));
+	languageMap[SWBuf("da")] = SWBuf(_("Danish"));
+	languageMap[SWBuf("de")] = SWBuf(_("German"));
+	languageMap[SWBuf("dz")] = SWBuf(_("Dzongkha"));
+	languageMap[SWBuf("el")] = SWBuf(_("Greek, Modern (1453-)"));
+	languageMap[SWBuf("en")] = SWBuf(_("English"));
+	languageMap[SWBuf("en_US")] = SWBuf(_("American English"));
+/*  */	languageMap[SWBuf("enm")] =
+	    SWBuf(_("English, Middle (1100-1500)"));
+	languageMap[SWBuf("eo")] = SWBuf(_("Esperanto"));
+	languageMap[SWBuf("es")] = SWBuf(_("Spanish"));
+	languageMap[SWBuf("et")] = SWBuf(_("Estonian"));
+	languageMap[SWBuf("eu")] = SWBuf(_("Basque"));
+	languageMap[SWBuf("fa")] = SWBuf(_("Farsi (Persian)"));
+	languageMap[SWBuf("fi")] = SWBuf(_("Finnish"));
+	languageMap[SWBuf("fj")] = SWBuf(_("Fijian"));
+	languageMap[SWBuf("fo")] = SWBuf(_("Faroese"));
+	languageMap[SWBuf("fr")] = SWBuf(_("French"));
+	languageMap[SWBuf("fy")] = SWBuf(_("Frisian"));
+	languageMap[SWBuf("ga")] = SWBuf(_("Irish"));
+	languageMap[SWBuf("gd")] = SWBuf(_("Gaelic (Scots)"));
+	languageMap[SWBuf("gl")] = SWBuf(_("Gallegan"));
+	languageMap[SWBuf("gn")] = SWBuf(_("Guarani"));
+	languageMap[SWBuf("gn")] = SWBuf(_("Gujarati"));
+/*  */	languageMap[SWBuf("got")] = SWBuf(_("Gothic"));
+	languageMap[SWBuf("gv")] = SWBuf(_("Manx"));
+	languageMap[SWBuf("grc")] = SWBuf(_("Greek, Ancient (to 1453)"));
+	languageMap[SWBuf("he")] = SWBuf(_("Hebrew"));
+	languageMap[SWBuf("haw")] = SWBuf(_("Hawaiian"));
+	languageMap[SWBuf("hi")] = SWBuf(_("Hindi"));
+	languageMap[SWBuf("ho")] = SWBuf(_("Hiri Motu"));
+	languageMap[SWBuf("hr")] = SWBuf(_("Croatian"));
+	languageMap[SWBuf("ht")] = SWBuf(_("French, Haitian Creole"));
+	languageMap[SWBuf("hu")] = SWBuf(_("Hungarian"));
+	languageMap[SWBuf("hy")] = SWBuf(_("Armenian"));
+	languageMap[SWBuf("hz")] = SWBuf(_("Herero"));
+	languageMap[SWBuf("ia")] = SWBuf(_("Interlingua"));
+	languageMap[SWBuf("ie")] = SWBuf(_("Interlingue"));
+	languageMap[SWBuf("id")] = SWBuf(_("Indonesian"));
+/*  */	languageMap[SWBuf("ik")] = SWBuf(_("Inupiaq"));
+	languageMap[SWBuf("is")] = SWBuf(_("Icelandic"));
+	languageMap[SWBuf("it")] = SWBuf(_("Italian"));
+	languageMap[SWBuf("iu")] = SWBuf(_("Inuktitut")); 
+	languageMap[SWBuf("ja")] = SWBuf(_("Japanese"));
+	languageMap[SWBuf("ka")] = SWBuf(_("Georgian"));
+	languageMap[SWBuf("kek")] = SWBuf(_("Kekchi"));
+	languageMap[SWBuf("ki")] = SWBuf(_("Kikuyu"));
+	languageMap[SWBuf("kj")] = SWBuf(_("Kuanyama"));
+	languageMap[SWBuf("kk")] = SWBuf(_("Kazakh"));
+	languageMap[SWBuf("kl")] = SWBuf(_("Kalaallisut"));
+	languageMap[SWBuf("km")] = SWBuf(_("Khmer"));
+	languageMap[SWBuf("kn")] = SWBuf(_("Kannada"));
+	languageMap[SWBuf("ko")] = SWBuf(_("Korean"));
+	languageMap[SWBuf("ks")] = SWBuf(_("Kashmiri"));
+	languageMap[SWBuf("ku")] = SWBuf(_("Kurdish"));
+	languageMap[SWBuf("kv")] = SWBuf(_("Komi"));
+	languageMap[SWBuf("kw")] = SWBuf(_("Cornish"));
+	languageMap[SWBuf("ky")] = SWBuf(_("Kirghiz"));
+	languageMap[SWBuf("la")] = SWBuf(_("Latin"));
+	languageMap[SWBuf("lb")] = SWBuf(_("Letzeburgesch"));
+	languageMap[SWBuf("ln")] = SWBuf(_("Lingala"));
+	languageMap[SWBuf("lo")] = SWBuf(_("Lao"));
+	languageMap[SWBuf("lt")] = SWBuf(_("Lithuanian"));
+	languageMap[SWBuf("lv")] = SWBuf(_("Latvian"));
+	languageMap[SWBuf("mg")] = SWBuf(_("Malagasy"));
+	languageMap[SWBuf("mh")] = SWBuf(_("Marshall"));
+	languageMap[SWBuf("mi")] = SWBuf(_("Maori"));
+	languageMap[SWBuf("mk")] = SWBuf(_("Macedonian"));
+	languageMap[SWBuf("ml")] = SWBuf(_("Malayalam"));
+	languageMap[SWBuf("mn")] = SWBuf(_("Mongolian"));
+	languageMap[SWBuf("mo")] = SWBuf(_("Moldavian"));
+	languageMap[SWBuf("mr")] = SWBuf(_("Marathi"));
+	languageMap[SWBuf("ms")] = SWBuf(_("Malay"));
+	languageMap[SWBuf("mt")] = SWBuf(_("Maltese"));
+	languageMap[SWBuf("my")] = SWBuf(_("Burmese"));
+	languageMap[SWBuf("na")] = SWBuf(_("Nauru"));
+	languageMap[SWBuf("nb")] = SWBuf(_("Norwegian Bokmål"));
+/*  */	languageMap[SWBuf("nd")] = SWBuf(_("Ndebele, North"));
+	languageMap[SWBuf("nds")] = SWBuf(_("Low German; Low Saxon"));
+	languageMap[SWBuf("ne")] = SWBuf(_("Nepali"));
+	languageMap[SWBuf("ng")] = SWBuf(_("Ndonga"));
+	languageMap[SWBuf("nl")] = SWBuf(_("Dutch"));
+	languageMap[SWBuf("nn")] = SWBuf(_("Norwegian Nynorsk"));
+	languageMap[SWBuf("no")] = SWBuf(_("Norwegian"));
+	languageMap[SWBuf("nr")] = SWBuf(_("Ndebele, South"));
+	languageMap[SWBuf("nv")] = SWBuf(_("Navajo"));
+	languageMap[SWBuf("ny")] = SWBuf(_("Chichewa; Nyanja"));
+	languageMap[SWBuf("oc")] = SWBuf(_("Occitan (post 1500); Proven"));
+	languageMap[SWBuf("om")] = SWBuf(_("Oromo"));
+	languageMap[SWBuf("or")] = SWBuf(_("Oriya"));
+	languageMap[SWBuf("os")] = SWBuf(_("Ossetian; Ossetic"));
+	languageMap[SWBuf("pa")] = SWBuf(_("Panjabi"));
+	languageMap[SWBuf("pap")] = SWBuf(_("Papiamento"));
+	languageMap[SWBuf("pi")] = SWBuf(_("Pali"));
+	languageMap[SWBuf("pl")] = SWBuf(_("Polish"));
+	languageMap[SWBuf("pot")] = SWBuf(_("Potawatomi"));
+	languageMap[SWBuf("ppk")] = SWBuf(_("Uma"));
+	languageMap[SWBuf("ps")] = SWBuf(_("Pushto"));
+	languageMap[SWBuf("pt")] = SWBuf(_("Portuguese"));
+	languageMap[SWBuf("qu")] = SWBuf(_("Quechua"));
+	languageMap[SWBuf("rm")] = SWBuf(_("Raeto-Romance"));
+	languageMap[SWBuf("rn")] = SWBuf(_("Rundi"));
+	languageMap[SWBuf("ro")] = SWBuf(_("Romanian"));
+	languageMap[SWBuf("ru")] = SWBuf(_("Russian"));
+	languageMap[SWBuf("rw")] = SWBuf(_("Kinyarwanda"));
+	languageMap[SWBuf("sa")] = SWBuf(_("Sanskrit"));
+	languageMap[SWBuf("sc")] = SWBuf(_("Sardinian"));
+	languageMap[SWBuf("sco")] = SWBuf(_("Scots"));
+	languageMap[SWBuf("sd")] = SWBuf(_("Sindhi"));
+	languageMap[SWBuf("se")] = SWBuf(_("Northern Sami"));
+	languageMap[SWBuf("sg")] = SWBuf(_("Sango"));
+	languageMap[SWBuf("si")] = SWBuf(_("Sinhalese"));
+	languageMap[SWBuf("sk")] = SWBuf(_("Slovak"));
+	languageMap[SWBuf("sl")] = SWBuf(_("Slovenian"));
+	languageMap[SWBuf("sm")] = SWBuf(_("Samoan"));
+/*  */	languageMap[SWBuf("sn")] = SWBuf(_("Shona"));
+	languageMap[SWBuf("so")] = SWBuf(_("Somali"));
+	languageMap[SWBuf("sq")] = SWBuf(_("Albanian"));
+	languageMap[SWBuf("sr")] = SWBuf(_("Serbian"));
+	languageMap[SWBuf("ss")] = SWBuf(_("Swati"));
+	languageMap[SWBuf("st")] = SWBuf(_("Sotho, Southern"));
+	languageMap[SWBuf("su")] = SWBuf(_("Sundanese"));
+	languageMap[SWBuf("sv")] = SWBuf(_("Swedish"));
+	languageMap[SWBuf("sw")] = SWBuf(_("Swahili"));
+	languageMap[SWBuf("syr")] = SWBuf(_("Syriac"));
+	languageMap[SWBuf("ta")] = SWBuf(_("Tamil"));
+	languageMap[SWBuf("te")] = SWBuf(_("Telugu"));
+	languageMap[SWBuf("tg")] = SWBuf(_("Tajik"));
+	languageMap[SWBuf("th")] = SWBuf(_("Thai"));
+	languageMap[SWBuf("tk")] = SWBuf(_("Turkmen"));
+	languageMap[SWBuf("tl")] = SWBuf(_("Tagalog"));
+	languageMap[SWBuf("tlh")] = SWBuf(_("Klingon"));
+	languageMap[SWBuf("tn")] = SWBuf(_("Tswana"));
+	languageMap[SWBuf("tr")] = SWBuf(_("Turkish"));
+	languageMap[SWBuf("ts")] = SWBuf(_("Tsonga"));
+	languageMap[SWBuf("tt")] = SWBuf(_("Tatar"));
+	languageMap[SWBuf("tw")] = SWBuf(_("Twi"));
+	languageMap[SWBuf("ty")] = SWBuf(_("Tahitian"));
+	languageMap[SWBuf("ug")] = SWBuf(_("Uighur"));
+	languageMap[SWBuf("uk")] = SWBuf(_("Ukrainian"));
+	languageMap[SWBuf("ur")] = SWBuf(_("Urdu"));
+	languageMap[SWBuf("uz")] = SWBuf(_("Uzbek"));
+	languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese"));
+	languageMap[SWBuf("vo")] = SWBuf(_("Volapük"));
+/*  */	languageMap[SWBuf("wo")] = SWBuf(_("Wolof"));
+	languageMap[SWBuf("xh")] = SWBuf(_("Xhosa")); /* causes gettext problems */
+	languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian"));
+	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch"));
+	languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz"));
+	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar"));
+	languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard"));
+	languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian"));
+	languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin"));
+	languageMap[SWBuf("x-E-RMY")] = SWBuf(_("Romani, Vlax"));
+	languageMap[SWBuf("x-E-SAJ")] = SWBuf(_("Sango"));
+	languageMap[SWBuf("x-E-SRN")] = SWBuf(_("Sranan"));
+	languageMap[SWBuf("yi")] = SWBuf(_("Yiddish"));
+	languageMap[SWBuf("za")] = SWBuf(_("Zhuang"));
+	languageMap[SWBuf("zh")] = SWBuf(_("Chinese"));
+	languageMap[SWBuf("zu")] = SWBuf(_("Zulu"));
+}
+
+const char *main_get_language_map(const char *language) {
+	return languageMap[language].c_str();
+}
+
 
 /******************************************************************************
  * Name
@@ -526,7 +741,7 @@ char *main_get_path_to_mods(void)
  */
 
 void main_init_backend(void)
-{	
+{
 	char *sys_locale = NULL;
 	const char *lang = getenv("LANG");
 	SWMgr mgr;
@@ -538,19 +753,17 @@ void main_init_backend(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	sword_locale = backend->set_sword_locale(lang);
-	//GS_print(("date: %s\n", getenv("DATE")));
 	GS_print(("%s sword-%s\n", _("Starting"), backend->get_sword_version()));
 	GS_print(("%s\n", _("Initiating SWORD")));
 	GS_print(("%s: %s\n",_("path to sword"),mgr.prefixPath));
-	GS_print(("%s %s\n", _("System locale is"),lang));	
-	GS_print(("%s %s\n", _("SWORD locale is"), sword_locale));	
+	GS_print(("%s %s\n", _("System locale is"),lang));
+	GS_print(("%s %s\n", _("SWORD locale is"), sword_locale));
 	GS_print(("OLD_CODESET = %s\n\n", OLD_CODESET));
 	GS_print(("%s\n", _("Checking for SWORD Modules")));
 	sys_locale = strdup(lang);
-	settings.spell_language = strdup(sys_locale);	
+	settings.spell_language = strdup(sys_locale);
 	main_init_lists();
-//	free((char*)sword_locale);
-	free(sys_locale);	
+	free(sys_locale);
 }
 
 
