@@ -117,7 +117,10 @@ char *main_get_book_key_from_offset(unsigned long offset);
 void main_refresh_all(void);
 char *main_format_number(int x);
 int main_deformat_number(char *digitstring);
-    
+
+const char *main_get_language_map(const char *language);
+void main_init_language_map(void);
+
 #ifdef __cplusplus
 }
 #endif

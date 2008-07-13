@@ -977,8 +977,11 @@ static void load_module_tree(GtkTreeView * treeview,
 						      dictionary, info);
 		}
 		else if (!strcmp(info->type, BOOK_MODS)) {
-			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
-			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
+			gchar *gstype;
+			if (first_time_user ||
+			    ((gstype = main_get_mod_config_entry(info->name, "GSType"))
+			     == NULL)
+			    || strcmp(gstype, "PrayerList")) {
 				add_language_folder
 				    (GTK_TREE_MODEL(store), book, info->language);
 				add_module_to_language_folder
