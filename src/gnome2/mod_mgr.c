@@ -852,7 +852,7 @@ static void load_module_tree(GtkTreeView * treeview,
 		return;
 	tmp2 = tmp;
 
-	if (install) {
+	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
 				   _("Categorized by\nModule Type"), -1);
@@ -886,7 +886,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_append(store, &image, NULL);
 	gtk_tree_store_set(store, &image, 0, _("Images"), -1);
 
-	if (install) {
+	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &separator, NULL);
 		gtk_tree_store_set(store, &separator, 0, " ", -1);
 
@@ -913,7 +913,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	while (tmp2) {
 		info = (MOD_MGR *) tmp2->data;
 
-		if (install) {
+		if (install && !first_time_user) {
 			// special lists: updated and uninstalled modules.
 			if (!info->installed) {
 				add_language_folder(GTK_TREE_MODEL(store), uninstalled,

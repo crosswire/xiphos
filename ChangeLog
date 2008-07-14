@@ -3,6 +3,7 @@
 	* update Norwegian list classifications.
 	* reworked excess/duplicate languageMap crud from backend
 	  (sword_main.cc & module_manager.cc): moved to main/sword.cc.
+	* tweaked module categorization so first_time_user gets one list.
 	
 2008-07-11  karl <charcoal@users.sf.net>
 
