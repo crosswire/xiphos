@@ -1005,9 +1005,9 @@ void main_load_module_tree(GtkWidget * tree)
 		gtk_tree_store_set(store, &prayerlist,
 				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
 				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-				   COL_CAPTION, _("Prayer List"),
+				   COL_CAPTION, _("Prayer List/Journal"),
 				   COL_MODULE, NULL,
-				   COL_OFFSET, _("Prayer List"), -1);
+				   COL_OFFSET, _("Prayer List/Journal"), -1);
 	}
 
 	tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);

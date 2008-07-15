@@ -1,3 +1,14 @@
+2008-07-15  karl <charcoal@users.sf.net>
+
+	* prayer list reconstruction: 
+	  - stop crash caused by mkdir failure, due to no genbooks.
+	  - totally rework creator logic to avoid duplicated code.
+	  - set prayerlist Lang= from sword_locale.
+	    (you are editing in your own native language, right?)
+	  - restructure periodic PLs/journals.
+	  - add full-year daily journal.
+	  - change Prayer List to Prayer List/Journal in all mod.lists.
+
 2008-07-13  karl <charcoal@users.sf.net>
 
 	* update Norwegian list classifications.

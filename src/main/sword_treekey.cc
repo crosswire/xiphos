@@ -370,7 +370,7 @@ gint main_prayer_list_new (gchar * list_name)
 	if (list_name == NULL) {
 		info = gui_new_dialog ();
 		info->stock_icon = (gchar *) GTK_STOCK_DIALOG_QUESTION;
-		info->title = _("Prayer List");
+		info->title = _("Prayer List/Journal");
 		info->label_top = _("Name for new prayer list");
 		info->label1 = _("Name: ");
 		info->text1 = g_strdup (_("MyPrayerList"));
@@ -414,7 +414,7 @@ gint main_prayer_list_new (gchar * list_name)
 	config[list_name]["Version"] = "0.1";
 	config[list_name]["MinimumVersion"] = "1.5.10";
 	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = _("Prayer List");
+	config[list_name]["Description"] = _("Prayer List/Journal");
 	config[list_name]["About"] =
 		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
 	config.Save ();

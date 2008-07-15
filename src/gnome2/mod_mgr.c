@@ -905,7 +905,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	} else {
 		if (settings.prayerlist) {
 			gtk_tree_store_append(store, &prayerlist, NULL);
-			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List"), -1);
+			gtk_tree_store_set(store, &prayerlist, 0, _("Prayer List/Journal"), -1);
 		}
 	}
 
