@@ -32,7 +32,7 @@
 #include <gtkhtml/htmlengine.h>
 #include "editor/editor.h"
 #endif
- 
+
 
 #include "gui/sidebar.h"
 #include "gui/bookmarks_treeview.h"
@@ -86,7 +86,7 @@ extern gboolean shift_key_presed;
  *                                  gpointer user_data)
  *
  * Description
- *   sets the sidebar menu button label to the current page 
+ *   sets the sidebar menu button label to the current page
  *
  * Return value
  *   void
@@ -335,7 +335,7 @@ static void on_search_activate(GtkToggleButton * button,
 	}
 }
 
- 
+
 /******************************************************************************
  * Name
  *   on_search_results_activate
@@ -416,16 +416,15 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
 			g_free(caption);
-			return FALSE;		
+			return FALSE;
 		}
-	    	if (caption && (!g_utf8_collate(caption, _("Prayer List")))) {
+	    	if (caption && (!g_utf8_collate(caption, _("Prayer List/Journal")))) {
 			buf_caption = caption;
 			gtk_menu_popup(GTK_MENU(sidebar.menu_prayerlist),
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
 			g_free(mod);
 			return FALSE;
-		
 		}
 	    	if (mod && (main_get_mod_type(mod) == PRAYERLIST_TYPE)) {
 			buf_module = mod;
@@ -433,9 +432,9 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 				       NULL, NULL, NULL, NULL,
 				       0, gtk_get_current_event_time());
 			g_free(caption);
-			return FALSE;					
+			return FALSE;
 		}
-	    
+
 		break;
 	}
 	g_free(caption);
@@ -496,8 +495,8 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 		}
 	}
 	// UTF-8 workaround (domcox)
-	// main_get_search_results_text (renderText) doesn't render 
-	// non-ascii chars saved in numeric character reference format 
+	// main_get_search_results_text (renderText) doesn't render
+	// non-ascii chars saved in numeric character reference format
 	// in personal notes.
 	// Notes are now saved in utf8 encoding (GnomeSword > 2.2.2.1)
 	if (main_get_mod_type(settings.sb_search_mod) == PERCOM_TYPE)
@@ -785,63 +784,61 @@ GtkWidget *create_menu_modules(void)
 }
 
 
-
-
-/*
-static void
-on_new_activate                       (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
-{
-    	main_prayer_list_new(NULL);
-	GS_message(("on_modules_list_button_release: cap = %s",buf_caption));
-	g_free(buf_module);
-	buf_module = NULL;
-}
-*/
-
 void
-on_simple_list1_activate               (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+on_simple_activate(GtkMenuItem *menuitem,
+		   gpointer    user_data)
 {
 	main_prayerlist_basic_create();
 }
 
-
 void
-on_subject__not_so_simple_1_activate   (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+on_subject_activate(GtkMenuItem *menuitem,
+		    gpointer    user_data)
 {
-	main_prayerlist_not_so_basic_create();
+	main_prayerlist_subject_create();
 }
 
+void
+on_monthly_activate(GtkMenuItem *menuitem,
+		    gpointer    user_data)
+{
+	main_prayerlist_monthly_create();
+}
 
 void
-on_yearly_list1_activate               (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+on_journal_activate(GtkMenuItem *menuitem,
+		    gpointer    user_data)
 {
-	main_prayerlist_wild_create();
+	main_prayerlist_journal_create();
 }
 
 static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
 {
   {
-    GNOME_APP_UI_ITEM, N_("Simple List"),
+    GNOME_APP_UI_ITEM, N_("Simple"),
     N_("Create a new simple prayer list"),
-    (gpointer) on_simple_list1_activate, NULL, NULL,
+    (gpointer) on_simple_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, "gtk-edit",
     0, (GdkModifierType) 0, NULL
   },
   {
-    GNOME_APP_UI_ITEM, N_("Subject (not so simple)"),
+    GNOME_APP_UI_ITEM, N_("Subject"),
     NULL,
-    (gpointer) on_subject__not_so_simple_1_activate, NULL, NULL,
+    (gpointer) on_subject_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-bulleted-list",
     0, (GdkModifierType) 0, NULL
   },
   {
-    GNOME_APP_UI_ITEM, N_("Yearly List"),
+    GNOME_APP_UI_ITEM, N_("Monthly"),
     N_("Create a new prayer list"),
-    (gpointer) on_yearly_list1_activate, NULL, NULL,
+    (gpointer) on_monthly_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Daily Journal"),
+    N_("Create a new prayer list"),
+    (gpointer) on_journal_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
     0, (GdkModifierType) 0, NULL
   },
@@ -853,14 +850,7 @@ static GnomeUIInfo menu_prayerlist_uiinfo[] =
   GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
   GNOMEUIINFO_END
 };
-/*
-static GnomeUIInfo menu_prayerlist_uiinfo[] = {
-  GNOMEUIINFO_MENU_NEW_ITEM (N_("New prayer list"), 
-			     N_("Create new prayer list"), 
-			     on_new_activate, NULL),
-  GNOMEUIINFO_END
-};
-*/
+
 GtkWidget *create_menu_prayerlist(void)
 {
 	GtkWidget *menu;
@@ -874,8 +864,8 @@ GtkWidget *create_menu_prayerlist(void)
 
 
 void
-on_edit_activate                    (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+on_edit_activate(GtkMenuItem *menuitem,
+		 gpointer    user_data)
 {
 	editor_create_new(buf_module, NULL, BOOK_EDITOR);
 }
@@ -900,15 +890,9 @@ static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
 	 (gpointer) on_about2_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END 
+	GNOMEUIINFO_END
 };
-/*
-static GnomeUIInfo menu_prayerlist_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_NEW_SUBTREE (new_prayerlist_menu_uiinfo),
-  GNOMEUIINFO_END
-};
-*/
+
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
@@ -968,7 +952,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 
 		case 0xffe1:	/* shift keys */
 		case 0xffe2:
-			GS_warning(("shift key pressed"));	
+			GS_warning(("shift key pressed"));
 			shift_key_presed =  TRUE;
 			while (gtk_events_pending()) {
 				gtk_main_iteration();
@@ -980,7 +964,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 		}
 	}
 	g_free(key);
-	
+
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
@@ -1037,7 +1021,7 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
-				     
+
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb), NULL);
@@ -1057,24 +1041,25 @@ static void create_search_results_page(GtkWidget * notebook)
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/sidebar.h"
  *
- *   
+ *
  *
  * Description
  *
  *
  * Return value
- *   
+ *
  */
 
-static void menu_position_under(GtkMenu * menu,
+static void menu_position_under(GtkMenu *menu,
 				int *x,
 				int *y,
-				gboolean * push_in, gpointer user_data)
+				gboolean *push_in,
+				gpointer user_data)
 {
 	GtkWidget *widget;
 
@@ -1205,7 +1190,7 @@ static GnomeUIInfo menu_uiinfo[] = {
  *   GtkWidget* create_menu(void)
  *
  * Description
- *   main sidebar menu 
+ *   main sidebar menu
  *
  * Return value
  *   GtkWidget*

@@ -67,9 +67,21 @@ enum
 };
 
 
-
-
-
+static int pl_month_days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+static char *(pl_months[]) = {
+    _("January"),
+    _("February"),
+    _("March"),
+    _("April"),
+    _("May"),
+    _("June"),
+    _("July"),
+    _("August"),
+    _("September"),
+    _("October"),
+    _("November"),
+    _("December")
+};
 
 /*********************************    *************************************/
 
@@ -77,365 +89,380 @@ static
 void setEntryText (RawGenBook * book, const gchar * text)
 {
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
-	if (treeKey->getOffset ()) {
-
+	if (treeKey->getOffset()) {
 		(*book) << text;
 	}
 }
 
 
-/*
-void setLocalName (TreeKeyIdx * treeKey, char *new_name)
-{
-
-	treeKey->setLocalName (buf);
-	treeKey->save ();
-}
-
-*/
 static
 void appendChild (TreeKeyIdx * treeKey, const gchar * name)
 {
-	treeKey->appendChild ();
-	treeKey->setLocalName (name);
-	treeKey->save ();
-	GS_message (("name: %s\nlocalName: %s", name,
-		     treeKey->getLocalName ()));
+	treeKey->appendChild();
+	treeKey->setLocalName(name);
+	treeKey->save();
+	GS_message(("name: %s\nlocalName: %s", name,
+		    treeKey->getLocalName ()));
 }
 
 
 static
-void appendSibbling (TreeKeyIdx * treeKey, const gchar * name)
+void appendSibling (TreeKeyIdx * treeKey, const gchar * name)
 {
-	if (treeKey->getOffset ()) {
-		treeKey->append ();
-		treeKey->setLocalName (name);
-		treeKey->save ();
+	if (treeKey->getOffset()) {
+		treeKey->append();
+		treeKey->setLocalName(name);
+		treeKey->save();
 	}
 }
 
 static
 void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
-	appendChild (treeKey, _("Growth"));
-	setEntryText (book, _("<b>For Growth</b><br>"));
-	appendSibbling (treeKey, _("Salvation"));
-	setEntryText (book, _("<b>For Salvation</b><br>"));
-	appendSibbling (treeKey, _("Health"));
-	setEntryText (book, _("<b>For Health</b><br>"));
-	appendSibbling (treeKey, _("Misc"));
-	setEntryText (book, _("<b>Miscellaneous</b><br>"));
+	appendChild(treeKey, _("Growth"));
+	setEntryText(book, _("<b>For Growth</b><br>"));
+	appendSibling(treeKey, _("Salvation"));
+	setEntryText(book, _("<b>For Salvation</b><br>"));
+	appendSibling(treeKey, _("Health"));
+	setEntryText(book, _("<b>For Health</b><br>"));
+	appendSibling(treeKey, _("Misc"));
+	setEntryText(book, _("<b>Miscellaneous</b><br>"));
 
-	treeKey->parent ();
+	treeKey->parent();
 }
 
+
+static
+void add_prayer_list_days(RawGenBook * book,
+			  TreeKeyIdx * treeKey,
+			  int month)
+{
+	for (int day = 0; day < pl_month_days[month]; ++day) {
+		char daynum[4], monthday[32];
+		snprintf(daynum, 3, "%02d", day+1);
+		snprintf(monthday, 31, "<b>%s %d</b><br>", pl_months[month], day+1);
+
+		if (day == 0)
+			appendChild(treeKey, daynum);
+		else
+			appendSibling(treeKey, daynum);
+
+		setEntryText(book, monthday);
+	}
+
+	treeKey->parent();
+}
+
+/******************************************************************************
+ * Name
+ *   prayerlist_construct
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   void prayerlist_fundamentals(gchar *listname, gchar *summary)
+ *
+ * Description
+ *   manufacture prayer list configuration fundamentals.
+ *
+ */
+
+void
+prayerlist_construct(gchar *listname, gchar *summary)
+{
+	// configuration file generation.
+	gchar *path = g_strdup_printf("%s/.sword/mods.d/%s.conf",
+				      settings.homedir, listname);
+	SWConfig config (path);
+	g_free(path);
+
+	// configuration file content.
+	path = g_strdup_printf("./modules/genbook/rawgenbook/%s/%s",
+			       listname, listname);
+	config[listname]["DataPath"] = path;
+	g_free(path);
+	config[listname]["ModDrv"] = "RawGenBook";
+	config[listname]["GSType"] = "PrayerList";
+	config[listname]["Encoding"] = "UTF-8";
+	config[listname]["Lang"] = sword_locale; // set at startup.
+	config[listname]["Version"] = "0.1";
+	config[listname]["MinimumVersion"] = "1.5.11";
+	config[listname]["DisplayLevel"] = "2";	// ?
+	config[listname]["Description"] = _("Prayer List/Journal");
+	config[listname]["About"] = summary;	// as provided.
+	config.Save();
+
+	// fundamentals are complete.  update.
+	main_update_module_lists();
+	main_load_module_tree(sidebar.module_list);
+}
 
 
 /******************************************************************************
  * Name
- *   main_prayer_list_new
+ *   prayerlist_fundamentals
  *
  * Synopsis
  *   #include "main/prayer_list.h"
- *
- *   gint main_prayer_list_new(gchar * list_name)
+ *   gchar *prayerlist_fundamentals(gchar *summary)
  *
  * Description
- *   create a new prayer list module and add it to the sidebar module tree
+ *   manufacture prayer list configuration fundamentals.
+ *
+ * Return value
+ *   name of created module; NULL if failure.
+ */
+
+gchar *
+prayerlist_fundamentals(gchar *summary)
+{
+	char *listname = NULL;	// assume failure.
+	GS_DIALOG *info;
+	gint test;
+	gchar *path = NULL;
+
+	// name selection dialog.
+	info = gui_new_dialog();
+	info->stock_icon = (gchar *)GTK_STOCK_DIALOG_QUESTION;
+	info->title = _("Prayer List/Journal");
+	info->label_top = _("Name for new prayer list or journal");
+	info->label1 = _("Name: ");
+	info->text1 = g_strdup(_("MyPrayerList"));
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	test = gui_gs_dialog(info);
+
+	// result of name selection.
+	if (test != GS_OK) {
+		goto out;	// cancelled.
+	}
+
+	for (char *s = info->text1; *s; ++s) {
+		if (!isalnum(*s)) {
+			gui_generic_warning
+			    (_("Module names must be letters+digits only."));
+			goto out;
+		}
+	}
+
+	if (main_is_module(info->text1)) {
+		gui_generic_warning
+		    (_("GnomeSword already knows a module by that name."));
+		goto out;
+	}
+
+	// path creation based on name selection.
+	path = g_strdup_printf("%s/.sword/modules/genbook/rawgenbook/%s",
+				settings.homedir, info->text1);
+	if (access(path, F_OK) == 0) {
+		gui_generic_warning
+		    (_("GnomeSword finds that prayer list already."));
+		goto out;
+	} else {
+		if ((mkdir(path, S_IRWXU)) != 0) {
+			gui_generic_warning
+			    (_("GnomeSword cannot create module's path."));
+			goto out;
+		}
+	}
+
+	// wild, raving applause: we got through all the sanity checks.
+	listname = g_strdup(info->text1);
+
+	prayerlist_construct(listname, summary);
+
+out:
+	// both success and failure fall through here.
+	if (path)
+		g_free(path);
+	g_free(info->text1);
+	g_free(info);
+	return listname;
+}
+
+/******************************************************************************
+ * Name
+ *   main_prayerlist_basic_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_basic_create(void)
+ *
+ * Description
+ *   create a simple prayer list module & add to sidebar module tree
  *
  * Return value
  *   int
  */
-int main_prayerlist_basic_create(void)
-{	
-	RawGenBook *book = NULL;
-	gchar *path;
-	TreeKeyIdx *treeKey;
-	gint test;
-	GS_DIALOG *info;
-	char *list_name = NULL;
 
-	//if (list_name == NULL) {
-		info = gui_new_dialog ();
-		info->stock_icon = (gchar *)GTK_STOCK_DIALOG_QUESTION;
-		info->title = _("Prayer List");
-		info->label_top = _("Name for new prayer list");
-		info->label1 = _("Name: ");
-		info->text1 = g_strdup (_("MyPrayerList"));
-		info->ok = TRUE;
-		info->cancel = TRUE;
-	//}
-	test = gui_gs_dialog (info);
-	//list_name = "prayer";
-
-	if (test == GS_OK) {
-		list_name = info->text1;
-	} else {
-		g_free (info->text1);
-		g_free (info);
-		return 0;
-	}
-
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s",
-				settings.homedir, list_name);
-	if (access (path, F_OK) == -1) {
-		if ((mkdir (path, S_IRWXU)) != 0) {
-			printf (_("can not create path\n"));
-		}
-	} else {
-		printf (_("Prayer list already exist\n"));
-		g_free (path);
-		return 0;
-	}
-	g_free (path);
-	path = g_strdup_printf ("./modules/genbook/rawgenbook/%s/%s",
-				list_name, list_name);
-	gchar *conf_path = g_strdup_printf ("%s/.sword/mods.d/%s.conf",
-					    settings.homedir,
-					    list_name);
-	SWConfig config (conf_path);
-	config[list_name]["DataPath"] = path;
-	config[list_name]["ModDrv"] = "RawGenBook";
-	config[list_name]["GSType"] = "PrayerList";
-	config[list_name]["Encoding"] = "UTF-8";
-	config[list_name]["Lang"] = "en";	/* fix me */
-	config[list_name]["Version"] = "0.1";
-	config[list_name]["MinimumVersion"] = "1.5.10";
-	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = _("Prayer List");
-	config[list_name]["About"] =
-		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
-	config.Save ();
-
-	g_free (path);
-	g_free (conf_path);
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
-				settings.homedir, list_name, list_name);
-
-	RawGenBook::createModule (path);
-	book = new RawGenBook (path);
-
-	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
-
-	appendChild (treeKey, _("MyPrayerList"));
-	setEntryText (book, _("<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"));
-	
-	delete treeKey;
-	g_free (info->text1);
-	g_free (info);
-	main_update_module_lists ();
-	main_load_module_tree (sidebar.module_list);
-	
-}
- 
-
-int main_prayerlist_not_so_basic_create(void)
+gboolean
+main_prayerlist_basic_create(void)
 {
-	
-	RawGenBook *book = NULL;
-	gchar *path;
-	TreeKeyIdx *treeKey;
-	gint test;
-	GS_DIALOG *info;
-	char *list_name = NULL;
+	char *listname = prayerlist_fundamentals
+	    (_("A simple prayer list \\par\\par Module created by GnomeSword"));
+	if (listname == NULL)
+		return FALSE;
 
-	
-	info = gui_new_dialog ();
-	info->stock_icon = (gchar *)GTK_STOCK_DIALOG_QUESTION;
-	info->title = _("Prayer List");
-	info->label_top = _("Name for new prayer list");
-	info->label1 = _("Name: ");
-	info->text1 = g_strdup (_("MyPrayerList"));
-	info->ok = TRUE;
-	info->cancel = TRUE;
-	
-	test = gui_gs_dialog (info);
-	//list_name = "prayer";
-
-	if (test == GS_OK) {
-		list_name = info->text1;
-	} else {
-		g_free (info->text1);
-		g_free (info);
-		return 0;
-	}
-
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s",
-				settings.homedir, list_name);
-	if (access (path, F_OK) == -1) {
-		if ((mkdir (path, S_IRWXU)) != 0) {
-			printf (_("can not create path\n"));
-		}
-	} else {
-		printf (_("Prayer list already exist\n"));
-		g_free (path);
-		return 0;
-	}
-	g_free (path);
-	path = g_strdup_printf ("./modules/genbook/rawgenbook/%s/%s",
-				list_name, list_name);
-	gchar *conf_path = g_strdup_printf ("%s/.sword/mods.d/%s.conf",
-					    settings.homedir,
-					    list_name);
-	SWConfig config (conf_path);
-	config[list_name]["DataPath"] = path;
-	config[list_name]["ModDrv"] = "RawGenBook";
-	config[list_name]["GSType"] = "PrayerList";
-	config[list_name]["Encoding"] = "UTF-8";
-	config[list_name]["Lang"] = "en";	/* fix me */
-	config[list_name]["Version"] = "0.1";
-	config[list_name]["MinimumVersion"] = "1.5.10";
-	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = _("Prayer List");
-	config[list_name]["About"] =
-		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
-	config.Save ();
-
-	g_free (path);
-	g_free (conf_path);
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
-				settings.homedir, list_name, list_name);
-
+	gchar *path = g_strdup_printf
+	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	     settings.homedir, listname, listname);
+	g_free(listname);
 	RawGenBook::createModule (path);
-	book = new RawGenBook (path);
+	RawGenBook *book = new RawGenBook (path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
-	appendChild (treeKey, _("Salvation"));
-	setEntryText (book, _("Bob<br>Sam<br>Sue<br>John<br>"));
-	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, _("Spiritual Growth"));
-	setEntryText (book, _("Mike<br>Steve<br>"));
-	//add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, _("Health"));
-	setEntryText (book, _("Sue<br>John<br>"));
-	
+	appendChild(treeKey, _("MyPrayerList"));
+	setEntryText(book, _("<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"));
+
 	delete treeKey;
-	g_free (info->text1);
-	g_free (info);
-	main_update_module_lists ();
-	main_load_module_tree (sidebar.module_list);
-	
-	
+	return TRUE;
 }
 
 
-int main_prayerlist_wild_create(void)
+/******************************************************************************
+ * Name
+ *   main_prayerlist_subject_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_subject_create(void)
+ *
+ * Description
+ *   create a subject prayer list module & add to sidebar module tree
+ *
+ * Return value
+ *   int
+ */
+
+gboolean
+main_prayerlist_subject_create(void)
 {
-	RawGenBook *book = NULL;
-	gchar *path;
-	TreeKeyIdx *treeKey;
-	gint test;
-	GS_DIALOG *info;
-	char *list_name = NULL;
-	
-	info = gui_new_dialog ();
-	info->stock_icon = (gchar*)GTK_STOCK_DIALOG_QUESTION;
-	info->title = _("Prayer List");
-	info->label_top = _("Name for new prayer list");
-	info->label1 = _("Name: ");
-	info->text1 = g_strdup (_("MyPrayerList"));
-	info->ok = TRUE;
-	info->cancel = TRUE;
-	
-	test = gui_gs_dialog (info);
-	//list_name = "prayer";
+	char *listname = prayerlist_fundamentals
+	    (_("A subject-based prayer list \\par\\par Module created by GnomeSword"));
+	if (listname == NULL)
+		return FALSE;
 
-	if (test == GS_OK) {
-		list_name = info->text1;
-	} else {
-		g_free (info->text1);
-		g_free (info);
-		return 0;
-	}
-
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s",
-				settings.homedir, list_name);
-	if (access (path, F_OK) == -1) {
-		if ((mkdir (path, S_IRWXU)) != 0) {
-			printf (_("can not create path\n"));
-		}
-	} else {
-		printf (_("Prayer list already exist\n"));
-		g_free (path);
-		return 0;
-	}
-	g_free (path);
-	path = g_strdup_printf ("./modules/genbook/rawgenbook/%s/%s",
-				list_name, list_name);
-	gchar *conf_path = g_strdup_printf ("%s/.sword/mods.d/%s.conf",
-					    settings.homedir,
-					    list_name);
-	SWConfig config (conf_path);
-	config[list_name]["DataPath"] = path;
-	config[list_name]["ModDrv"] = "RawGenBook";
-	config[list_name]["GSType"] = "PrayerList";
-	config[list_name]["Encoding"] = "UTF-8";
-	config[list_name]["Lang"] = "en";	/* fix me */
-	config[list_name]["Version"] = "0.1";
-	config[list_name]["MinimumVersion"] = "1.5.10";
-	config[list_name]["DisplayLevel"] = "2";
-	config[list_name]["Description"] = _("Prayer List");
-	config[list_name]["About"] =
-		  _("\\par\\par My prayer list \\par\\par Module created in GnomeSword");
-	config.Save ();
-
-	g_free (path);
-	g_free (conf_path);
-	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
-				settings.homedir, list_name, list_name);
-
+	gchar *path = g_strdup_printf
+	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	     settings.homedir, listname, listname);
+	g_free(listname);
 	RawGenBook::createModule (path);
-	book = new RawGenBook (path);
+	RawGenBook *book = new RawGenBook (path);
 
 	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
-	treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 
-	appendChild (treeKey, "01");
-	setEntryText (book, _("<b>January</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "02");
-	setEntryText (book, _("<b>Febuary</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "03");
-	setEntryText (book, _("<b>March</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "04");
-	setEntryText (book, _("<b>April</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "05");
-	setEntryText (book, _("<b>May</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "06");
-	setEntryText (book, _("<b>June</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "07");
-	setEntryText (book, _("<b>July</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "08");
-	setEntryText (book, _("<b>August</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "09");
-	setEntryText (book, _("<b>September</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "10");
-	setEntryText (book, _("<b>October</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "11");
-	setEntryText (book, _("<b>November</b><br>"));
-	add_prayer_list_sections (book, treeKey);
-	appendSibbling (treeKey, "12");
-	setEntryText (book, _("<b>December</b><br>"));
-	add_prayer_list_sections (book, treeKey);
+	appendChild(treeKey, _("Salvation"));
+	setEntryText(book, _("Bob<br>Sam<br>Sue<br>John<br>"));
+	appendSibling(treeKey, _("Spiritual Growth"));
+	setEntryText(book, _("Mike<br>Steve<br>"));
+	appendSibling(treeKey, _("Health"));
+	setEntryText(book, _("Sue<br>John<br>"));
 
 	delete treeKey;
-	g_free (info->text1);
-	g_free (info);
-	main_update_module_lists ();
-	main_load_module_tree (sidebar.module_list);
-	
-	
-	
+	return TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_prayerlist_wild_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_wild_create(void)
+ *
+ * Description
+ *   create a monthly prayer list module & add to sidebar module tree
+ *
+ * Return value
+ *   int
+ */
+
+gboolean
+main_prayerlist_monthly_create(void)
+{
+	char *listname = prayerlist_fundamentals
+	    (_("An annual prayer list \\par\\par Module created by GnomeSword"));
+	if (listname == NULL)
+		return FALSE;
+
+	gchar *path = g_strdup_printf
+	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	     settings.homedir, listname, listname);
+	g_free(listname);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook (path);
+
+	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+
+	for (int month = 0; month < 12; ++month)
+	{
+		char monthnum[4], monthstring[32];
+		snprintf(monthnum, 3, "%02d", month+1);
+		snprintf(monthstring, 31, "<b>%s</b><br>", pl_months[month]);
+
+		if (month == 0)
+			appendChild(treeKey, monthnum);
+		else
+			appendSibling(treeKey, monthnum);
+		setEntryText(book, monthstring);
+		add_prayer_list_sections(book, treeKey);
+	}
+
+	delete treeKey;
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *   main_prayerlist_journal_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_journal_create(void)
+ *
+ * Description
+ *   create a daily journal prayer list module & add to sidebar module tree
+ *
+ * Return value
+ *   int
+ */
+
+gboolean
+main_prayerlist_journal_create(void)
+{
+	char *listname = prayerlist_fundamentals
+	    (_("An annual prayer list \\par\\par Module created by GnomeSword"));
+	if (listname == NULL)
+		return FALSE;
+
+	gchar *path = g_strdup_printf
+	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	     settings.homedir, listname, listname);
+	g_free(listname);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook (path);
+
+	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+
+	for (int month = 0; month < 12; ++month)
+	{
+		char monthnum[4], monthstring[32];
+		snprintf(monthnum, 3, "%02d", month+1);
+		snprintf(monthstring, 31, "<b>%s</b><br>", pl_months[month]);
+
+		if (month == 0)
+			appendChild(treeKey, monthnum);
+		else
+			appendSibling(treeKey, monthnum);
+		setEntryText(book, monthstring);
+		add_prayer_list_days(book, treeKey, month);
+	}
+
+	delete treeKey;
+	return TRUE;
 }
