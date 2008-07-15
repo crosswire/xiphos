@@ -32,6 +32,10 @@ DD MMM 2008
  9. Image, Map, and Daily Devotional modules no longer appear in more
     than one module list.
 
+10. Prayer lists have expanded to include a general journal concept; a few
+    crash bugs have been fixed, and a full-year daily journal prototype is
+    now available.
+
 Bug reports addressed since 2.3.4:
 1973928  key entry not saved in .conf
 1994431  seg fault when incorrect source
