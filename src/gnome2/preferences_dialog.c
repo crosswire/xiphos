@@ -977,12 +977,12 @@ void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer
 }
 /******************************************************************************
  * Name
- *   on_checkbutton12_toggled
+ *   on_checkbutton_prayerlist_toggled
  *
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+ *   void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
  *   
@@ -992,15 +992,28 @@ void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer
  *   void
  */
 
-void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
+				       gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "prayerlist",
 		      (togglebutton->active ? "1" : "0"));
-	settings.prayerlist = atoi(xml_get_value("misc", "prayerlist"));
+	if (settings.prayerlist = togglebutton->active) {
+		// this will be used so seldom that we don't care if it's excess.
+		GString *path = g_string_new(NULL);
+		g_string_printf(path, "%s%s", settings.homedir,
+				"/.sword/modules/genbook");
+		mkdir(path->str, S_IRWXU);
+		g_string_append(path, "/rawgenbook");
+		mkdir(path->str, S_IRWXU);
+		// we don't bother to check mkdir() return value here:
+		// if it was already there, then we're mildly redundant.
+		// if it didn't work, we'll hear about it when a list is created.
+		g_string_free(path, TRUE);
+	}
 	
 	/* update module list to show choice */
-	main_update_module_lists ();
-	main_load_module_tree (sidebar.module_list);
+	main_update_module_lists();
+	main_load_module_tree(sidebar.module_list);
 }
 
 

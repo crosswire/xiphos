@@ -1961,11 +1961,11 @@ gint _create_new(const gchar * filename, const gchar * key, gint editor_type)
 			editor->module = g_strdup(filename);
 			editor->key = g_strdup(key);
 #ifdef USE_GTKHTML3_14_23
-			editor_new(_("Prayer List Editor"), editor);
+			editor_new(_("Prayer List/Journal Editor"), editor);
 	
 	
 #else
-			container_create(_("Prayer List Editor"), editor);
+			container_create(_("Prayer List/Journal Editor"), editor);
 			editor_load_book(editor);
 #endif
 			
