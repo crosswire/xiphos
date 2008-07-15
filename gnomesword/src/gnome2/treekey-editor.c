@@ -122,7 +122,7 @@ on_add_sibling_activate (GtkMenuItem * menuitem, gpointer user_data)
 	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-	d->title = _("Prayer List Item");
+	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");
 	d->text1 = g_strdup (info->local_name);
@@ -181,7 +181,7 @@ on_add_child_activate (GtkMenuItem * menuitem, gpointer user_data)
 	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-	d->title = _("Prayer List Item");
+	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");
 	d->text1 = g_strdup (info->local_name);
@@ -278,7 +278,7 @@ on_edit_activate (GtkMenuItem * menuitem, gpointer user_data)
 	
 	d = gui_new_dialog ();
 	d->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-	d->title = _("Prayer List Item");
+	d->title = _("Prayer List/Journal Item");
 	d->label_top = _("New name");
 	d->label1 = _("Name: ");
 	d->text1 = g_strdup (info->local_name);
