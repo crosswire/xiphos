@@ -194,6 +194,7 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	// fundamentals are complete.  update.
 	main_update_module_lists();
 	main_load_module_tree(sidebar.module_list);
+	settings.havebook = 1;
 }
 
 
