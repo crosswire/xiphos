@@ -14,7 +14,7 @@ msgstr ""
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: "
 
 #: ../gnomesword.desktop.in.h:1
