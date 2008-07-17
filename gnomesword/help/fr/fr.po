@@ -1,19 +1,20 @@
 # French translation of GnomeSword
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # Dominique Corbex <domcox@users.sourceforge.net>, 2007.
+# Dominique Corbex <domcox@users.sourceforge.net>, 2008.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2.3.4\n"
+"Project-Id-Version: GnomeSword 2.3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-11 10:45+0200\n"
-"PO-Revision-Date: 2008-05-11 10:45+0200\n"
-"Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
-"Language-Team: French\n"
+"POT-Creation-Date: 2008-07-17 21:04+0200\n"
+"PO-Revision-Date: 2008-07-17 22:03+0200\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #. Authors
@@ -137,7 +138,7 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:738(None)
+#: ../C/gnomesword.xml:755(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
 "md5=8cb0c5fe67f45e009bd8f40f5609f573"
@@ -229,13 +230,14 @@ msgstr "sword_config.png"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:123(None)
+#, fuzzy
 msgid ""
-"@@image: 'figures/sword_install.png'; md5=e34cb6abc2c10333a8c4916036827a39"
+"@@image: 'figures/sword_install.png'; md5=40cd943805d7fa0f9124ad3c419356a7"
 msgstr "sword_install.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:157(None)
+#: ../C/gnomesword.xml:162(None)
 msgid ""
 "@@image: 'figures/sword_remove.png'; md5=25db01bba9d1c29adf2a0d7b93e6890b"
 msgstr "sword_remove.png"
@@ -1949,11 +1951,50 @@ msgstr "Alt-P"
 msgid "<placeholder-1/> detaches/re-attaches the parallel view dialog."
 msgstr "<placeholder-1/> détache / rattache la fenêtre de vue parallèle."
 
-#: ../C/gnomesword.xml:688(title)
+#: ../C/gnomesword.xml:685(guibutton)
+msgid "Alt-Z"
+msgstr "Alt-Z"
+
+#: ../C/gnomesword.xml:684(listitem)
+msgid "<placeholder-1/> opens the personal commentary editor."
+msgstr ""
+"<placeholder-1/> ouvre l'éditeur de commentaires personnels."
+
+#: ../C/gnomesword.xml:691(guibutton)
+msgid "Ctrl-p/Ctrl-n"
+msgstr "Ctrl-P/Ctrl-N"
+
+#: ../C/gnomesword.xml:690(listitem)
+msgid "<placeholder-1/>: Verse previous/next."
+msgstr ""
+"<placeholder-1/> Verset précédent/suivant."
+
+#: ../C/gnomesword.xml:694(guibutton)
+msgid "p/n"
+msgstr "P/N"
+
+#: ../C/gnomesword.xml:693(listitem)
+msgid "<placeholder-1/>: Chapter previous/next."
+msgstr "<placeholder-1/> : Chapitre précédent/suivant."
+
+#: ../C/gnomesword.xml:697(guibutton)
+msgid "P/N"
+msgstr "P/N"
+
+#: ../C/gnomesword.xml:696(listitem)
+msgid "<placeholder-1/>: Book previous/next."
+msgstr ""
+"<placeholder-1/> Livre précédent/suivant."
+
+#: ../C/gnomesword.xml:687(listitem)
+msgid "Location bar navigation: <placeholder-1/>"
+msgstr "Activer la barre de navigation:·<placeholder-1/>"
+
+#: ../C/gnomesword.xml:705(title)
 msgid "Version Differences in <application>GnomeSword</application>'s Display"
 msgstr "Différences d'affichage dans <application>&appname;</application> :"
 
-#: ../C/gnomesword.xml:689(para)
+#: ../C/gnomesword.xml:706(para)
 msgid ""
 "The <application>GnomeSword</application> interface has evolved over time, "
 "and there are two display libraries with which <application>GnomeSword</"
@@ -1968,7 +2009,7 @@ msgstr ""
 "moins complète se nomme «&nbsp;gtkhtml3&nbsp;», et la nouvelle offrant plus "
 "de possibilités est «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:696(para)
+#: ../C/gnomesword.xml:713(para)
 msgid ""
 "Several desirable capabilities are unsupportable in gtkhtml3, and although "
 "recent <application>GnomeSword</application> is written to take advantage of "
@@ -1991,7 +2032,7 @@ msgstr ""
 "vous utilisez «&nbsp;gtkhtml3&nbsp;» ou «&nbsp;MozEmbed&nbsp;» comme moteur "
 "d'affichage :"
 
-#: ../C/gnomesword.xml:706(listitem)
+#: ../C/gnomesword.xml:723(listitem)
 msgid ""
 "Morphology and Strong's references, enabled via the right-click menu in some "
 "modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
@@ -2004,15 +2045,15 @@ msgstr ""
 "références sont alignées au-dessous du mot auxquelles elles se rapportent de "
 "façon à procurer un affichage plus aéré et plus lisible."
 
-#: ../C/gnomesword.xml:712(guibutton)
+#: ../C/gnomesword.xml:729(guibutton)
 msgid "*n"
 msgstr "*n"
 
-#: ../C/gnomesword.xml:712(guibutton)
+#: ../C/gnomesword.xml:729(guibutton)
 msgid "*x"
 msgstr "*x"
 
-#: ../C/gnomesword.xml:711(listitem)
+#: ../C/gnomesword.xml:728(listitem)
 msgid ""
 "Footnote and cross-reference markers (<placeholder-1/>, <placeholder-2/>) "
 "are displayed as proper superscripts in MozEmbed, but not in gtkhtml3."
@@ -2020,7 +2061,7 @@ msgstr ""
 "Les notes de pied de page et les références croisées (<placeholder-1/>, "
 "<placeholder-2/>) s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:715(listitem)
+#: ../C/gnomesword.xml:732(listitem)
 msgid ""
 "Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
 "no underlines are needed."
@@ -2028,11 +2069,11 @@ msgstr ""
 "Les liens avec «&nbsp;gtkhtml3&nbsp;» sont à la fois colorés et soulignés. "
 "Ils ne sont pas soulignés avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:719(guimenuitem)
+#: ../C/gnomesword.xml:736(guimenuitem)
 msgid "View"
 msgstr "Affichage"
 
-#: ../C/gnomesword.xml:718(listitem)
+#: ../C/gnomesword.xml:735(listitem)
 msgid ""
 "Under MozEmbed, double-space display is available using the <placeholder-1/> "
 "menu, but not under gtkhtml3."
@@ -2041,7 +2082,7 @@ msgstr ""
 "activable à l'aide du menu <placeholder-1/>, cette option est indisponible "
 "avec «&nbsp;gtkhtml3&nbsp;»."
 
-#: ../C/gnomesword.xml:722(listitem)
+#: ../C/gnomesword.xml:739(listitem)
 msgid ""
 "It is not possible for gtkhtml3 to interpret multiple font face directives "
 "in a single window, so the gtkhtml3 detached parallel view window cannot "
@@ -2052,7 +2093,7 @@ msgstr ""
 "une même fenêtre, c'est pourquoi la fenêtre détachée «&nbsp;Vue "
 "parallèle&nbsp;» ne permet pas une sélection de police par module."
 
-#: ../C/gnomesword.xml:729(para)
+#: ../C/gnomesword.xml:746(para)
 msgid ""
 "Using the \"About GnomeSword\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
@@ -2063,7 +2104,7 @@ msgstr ""
 "connaître la bibliothèque avec laquelle <application>&appname;</application> "
 "a été construit."
 
-#: ../C/gnomesword.xml:734(title) ../C/gnomesword.xml:741(phrase)
+#: ../C/gnomesword.xml:751(title) ../C/gnomesword.xml:758(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
@@ -2352,19 +2393,28 @@ msgstr ""
 "ce problème, il est donc conseillé aux utilisateurs de gérer les droits "
 "d'accès en écriture à l'emplacement système en dehors de &appname;."
 
-#: ../C/gnomesword.xml:115(title)
-msgid "Add And Remove Modules"
-msgstr "Ajouter et supprimer des modules"
-
-#: ../C/gnomesword.xml:117(title)
-msgid "Adding and Updating Sword Modules"
-msgstr "Ajout et mise à jour de modules Sword"
+#: ../C/gnomesword.xml:115(title) ../C/gnomesword.xml:117(title)
+msgid "Installing, Updating, and Maintaining Modules"
+msgstr "Installer, mettre à jour et maintenir les modules"
 
 #: ../C/gnomesword.xml:119(title)
-msgid "Adding Modules"
-msgstr "Ajout de modules"
+msgid "Installing and Updating Modules"
+msgstr "Installation et mise à jour de modules"
 
 #: ../C/gnomesword.xml:138(para)
+msgid ""
+"The module manager generates both a per-type module list as well as a "
+"parallel availability list. The latter is intended to make it easier to find "
+"new items without having to work one's way through the per-type list, one "
+"subtree at a time. Modules which are either not yet installed or updated "
+"beyond what is currently installed will appear in both lists."
+msgstr "Le gestionnaire de modules génére à la fois une liste de modules classés "
+"par type et une liste de modules ordonnés par disponibilité. Cette dernière "
+"est destinée à rendre plus rapide la recherche de nouveaux éléments sans "
+"avoir à balayer la liste des modules classés par type. Les modules non encore "
+"installés ou pour lesquels existe une mise à jour apparaissent dans cette liste."
+
+#: ../C/gnomesword.xml:143(para)
 msgid ""
 "Modules that are already installed will show a checkmark beside them. If a "
 "fast search (\"lucene\") index is available, an open book will be displayed, "
@@ -2389,7 +2439,7 @@ msgstr ""
 "modules fournisse cette information, autrement un point d'interrogation "
 "(\"-?-\") est présenté."
 
-#: ../C/gnomesword.xml:145(para)
+#: ../C/gnomesword.xml:150(para)
 msgid ""
 "Select new modules to be installed by clicking the checkboxes and then the "
 "Install button at the bottom. Any number of modules may be requested for "
@@ -2400,12 +2450,12 @@ msgstr ""
 "<guibutton>Installer</guibutton>. Plusieurs modules peuvent être installés "
 "simultanément."
 
-#: ../C/gnomesword.xml:151(title) ../C/gnomesword.xml:153(title)
-#: ../C/gnomesword.xml:166(phrase)
+#: ../C/gnomesword.xml:156(title) ../C/gnomesword.xml:158(title)
+#: ../C/gnomesword.xml:171(phrase)
 msgid "Module Maintenance"
 msgstr "Gérer les modules"
 
-#: ../C/gnomesword.xml:171(para)
+#: ../C/gnomesword.xml:176(para)
 msgid ""
 "Several maintenance functions are available: Removal, archival, index, and "
 "index deletion."
@@ -2413,7 +2463,7 @@ msgstr ""
 "Plusieurs opérations de maintenance sont possibles : Suppression, archivage, "
 "indexation et suppression d'index."
 
-#: ../C/gnomesword.xml:174(para)
+#: ../C/gnomesword.xml:179(para)
 msgid ""
 "Removal disposes of a module entirely. There is no recovery of the module "
 "unless you have previously archived a copy of it."
@@ -2421,7 +2471,7 @@ msgstr ""
 "Supprimer un module est une opération définitive. Il est impossible de "
 "récupérer le module à moins que vous n'ayez une copie de celui-ci."
 
-#: ../C/gnomesword.xml:177(para)
+#: ../C/gnomesword.xml:182(para)
 msgid ""
 "Archival is available for any module, although it is provided with personal "
 "commentaries specifically in mind. A *.zip of the module is left in the "
@@ -2435,7 +2485,7 @@ msgstr ""
 "sword/zip. Il est recommandé d'archiver les commentaires personnels avant de "
 "les supprimer de façon à pouvoir les réinstaller si besoin est."
 
-#: ../C/gnomesword.xml:182(para)
+#: ../C/gnomesword.xml:187(para)
 msgid ""
 "Indexing is provided so that the underlying Sword search support can create "
 "the index needed for the \"lucene\" multi-word fast-search functions. If the "
@@ -2449,15 +2499,15 @@ msgstr ""
 "recherche de type multi-mots sur l'ensemble de la Bible ne dure que quelques "
 "secondes."
 
-#: ../C/gnomesword.xml:187(para)
+#: ../C/gnomesword.xml:192(para)
 msgid "Indexes may be deleted as well."
 msgstr "Les index peuvent être supprimés."
 
-#: ../C/gnomesword.xml:195(title)
+#: ../C/gnomesword.xml:200(title)
 msgid "Installing Non-Standard Modules"
 msgstr "Installer des modules non-standards"
 
-#: ../C/gnomesword.xml:196(para)
+#: ../C/gnomesword.xml:201(para)
 msgid ""
 "Some resource modules in Sword Project format are available from sources "
 "other than Crosswire and not from a module manager-ready repository. "
@@ -2468,7 +2518,7 @@ msgstr ""
 "gestionnaire de modules. Il est donc nécessaire de les installer "
 "manuellement."
 
-#: ../C/gnomesword.xml:200(para)
+#: ../C/gnomesword.xml:205(para)
 msgid ""
 "Modules are normally packaged as *.zip files; they contain a configuration "
 "file plus a number of data files. Installation of such a module is done by "
@@ -2492,7 +2542,7 @@ msgstr ""
 "zip dans ce répertoire, ce module sera alors accessible à tous les "
 "utilisateurs."
 
-#: ../C/gnomesword.xml:207(para)
+#: ../C/gnomesword.xml:212(para)
 msgid ""
 "Restart <application>GnomeSword</application> after installing such a "
 "module, so that a fresh instance of the program can notice the new module in "
@@ -3679,6 +3729,12 @@ msgstr ""
 #: ../C/studypad.xml:0(None)
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
+
+#~ msgid "Add And Remove Modules"
+#~ msgstr "Ajouter et supprimer des modules"
+
+#~ msgid "Adding Modules"
+#~ msgstr "Ajout de modules"
 
 #~ msgid ""
 #~ "gtkhmtl3 windows can support only a single font. This means that the "
