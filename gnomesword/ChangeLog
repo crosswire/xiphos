@@ -1,3 +1,7 @@
+2008-07-17  karl <charcoal@users.sf.net>
+
+	* mod.list generation: avoid pointless strdup; norwegian hack.
+
 2008-07-15  karl <charcoal@users.sf.net>
 
 	* prayer list reconstruction: 
