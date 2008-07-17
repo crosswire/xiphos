@@ -338,47 +338,40 @@ static void add_language_folder(GtkTreeModel *model,
 	GtkTreeIter child_iter;
 	gsize bytes_read;
 	gsize bytes_written;
-	gchar *buf;
 	gboolean valid;
 
 	/* Check language */
-	buf = strdup(language);
+	const gchar *buf = language;
 	if (!g_utf8_validate(buf,-1,NULL))
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
-	g_free(buf);
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
 
-		buf = strdup(language);
 		gtk_tree_model_get(model,
 				   &iter_iter,
 				   0,
 				   &str_data,
 				   -1);
 
-		if(!g_utf8_collate(g_utf8_casefold(buf,-1),
-				   g_utf8_casefold(str_data,-1))) {
+		if(!g_utf8_collate(g_utf8_casefold(language, -1),
+				   g_utf8_casefold(str_data, -1))) {
 			g_free(str_data);
-			g_free(buf);
 			return;
 		}
 		g_free(str_data);
-		g_free(buf);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
-	buf = strdup(language);
 	gtk_tree_store_set(GTK_TREE_STORE(model), 
 			&child_iter, 
 			0,
-			(gchar *) buf, 
+			language,
 			-1);
-	g_free(buf);
 }
 
 
@@ -408,15 +401,13 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GtkTreeIter parent;
 	GtkTreeIter child_iter;
 	gboolean valid;
-	gchar *buf;
 
 	/* Check language */
-	buf = strdup(language);
+	const gchar *buf = language;
 	if (!g_utf8_validate(buf,-1,NULL))
 		language = _("Unknown");
 	if (!g_unichar_isalnum(g_utf8_get_char(buf)) || (language == NULL))
 		language = _("Unknown");
-	g_free(buf);
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
