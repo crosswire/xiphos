@@ -633,7 +633,13 @@ void main_init_language_map() {
 	languageMap[SWBuf("mt")] = SWBuf(_("Maltese"));
 	languageMap[SWBuf("my")] = SWBuf(_("Burmese"));
 	languageMap[SWBuf("na")] = SWBuf(_("Nauru"));
+#if 0
+	// correct.
 	languageMap[SWBuf("nb")] = SWBuf(_("Norwegian Bokmål"));
+#else
+	// a hack while g_utf8_validate() dislikes 'å'.
+	languageMap[SWBuf("nb")] = SWBuf(_("Norwegian Bokmaal"));
+#endif
 /*  */	languageMap[SWBuf("nd")] = SWBuf(_("Ndebele, North"));
 	languageMap[SWBuf("nds")] = SWBuf(_("Low German; Low Saxon"));
 	languageMap[SWBuf("ne")] = SWBuf(_("Nepali"));
