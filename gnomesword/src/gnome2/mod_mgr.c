@@ -925,14 +925,18 @@ static void load_module_tree(GtkTreeView * treeview,
 			}
 		}
 
-		if (!strcmp(info->type, TEXT_MODS)) {
+		// see comment on similar code in src/main/sidebar.cc.
+
+		// (!strcmp(info->type, TEXT_MODS)) {
+		if (info->type[0] == 'B') {
 			add_language_folder(GTK_TREE_MODEL(store), text,
 					    info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
 						      info);
 		}
-		else if (!strcmp(info->type, COMM_MODS)) {
+		// (!strcmp(info->type, COMM_MODS)) {
+		else if (info->type[0] == 'C') {
 			add_language_folder(GTK_TREE_MODEL(store),
 					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
@@ -960,14 +964,16 @@ static void load_module_tree(GtkTreeView * treeview,
 						      (store),
 						      devotional, info);
 		}
-		else if (!strcmp(info->type, DICT_MODS)) {
+		// (!strcmp(info->type, DICT_MODS)) {
+		else if (info->type[0] == 'L') {
 			add_language_folder(GTK_TREE_MODEL(store),
 					    dictionary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      dictionary, info);
 		}
-		else if (!strcmp(info->type, BOOK_MODS)) {
+		// (!strcmp(info->type, BOOK_MODS)) {
+		else if (info->type[0] == 'G') {
 			gchar *gstype;
 			if (first_time_user ||
 			    ((gstype = main_get_mod_config_entry(info->name, "GSType"))

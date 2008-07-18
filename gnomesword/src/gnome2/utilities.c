@@ -513,14 +513,18 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
-		if (!strcmp(info->type, TEXT_MODS)) {
+		// see comment on similar code in src/main/sidebar.cc.
+
+		// (!strcmp(info->type, TEXT_MODS)) {
+		if (info->type[0] == 'B') {
 			add_language_folder(GTK_TREE_MODEL(store),
 					    text, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      text, info->language,
 						      info->name);
 		}
-		else if (!strcmp(info->type, COMM_MODS)) {
+		// (!strcmp(info->type, COMM_MODS)) {
+		else if (info->type[0] == 'C') {
 			add_language_folder(GTK_TREE_MODEL(store),
 					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
@@ -548,14 +552,16 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 						      devotional, info->language,
 						      info->name);
 		}
-		else if (!strcmp(info->type, DICT_MODS)) {
+		// (!strcmp(info->type, DICT_MODS)) {
+		else if (info->type[0] == 'L') {
 			add_language_folder(GTK_TREE_MODEL(store),
 					    dictionary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      dictionary, info->language,
 					      info->name);
 		}
-		else if (!strcmp(info->type, BOOK_MODS)) {
+		// (!strcmp(info->type, BOOK_MODS)) {
+		else if (info->type[0] == 'G') {
 			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
 			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
 				add_language_folder(GTK_TREE_MODEL(store),

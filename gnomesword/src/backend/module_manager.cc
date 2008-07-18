@@ -274,9 +274,7 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 		if (name) {
 			mod_info->name = g_strdup(name);
 			mod_info->language =
-			    (module->Lang()
-			     ? main_get_language_map(module->Lang())
-			     : "unknown");
+			    main_get_language_map(module->Lang());
 			mod_info->type = strdup(module->Type());
 
 			char *vers = (char *)module->getConfigEntry("Version");

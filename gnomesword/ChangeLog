@@ -1,6 +1,8 @@
 2008-07-17  karl <charcoal@users.sf.net>
 
 	* mod.list generation: avoid pointless strdup; norwegian hack.
+	* horrid but useful strcmp()-avoidance optimization in mod.list
+	  generation.
 
 2008-07-15  karl <charcoal@users.sf.net>
 
