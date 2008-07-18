@@ -726,6 +726,8 @@ void main_init_language_map() {
 }
 
 const char *main_get_language_map(const char *language) {
+	if (language == NULL)
+		return "Unknown";
 	return languageMap[language].c_str();
 }
 
