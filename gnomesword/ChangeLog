@@ -1,6 +1,8 @@
 2008-07-19  karl <charcoal@users.sf.net>
 
 	* mod.list generation: alphabetize languages everywhere.
+	* provide for cancelling a search.  (gross hack: done using the
+	  Close key, which still makes search window disappear.)
 
 2008-07-17  karl <charcoal@users.sf.net>
 

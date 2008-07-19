@@ -196,9 +196,18 @@ void button_save(GtkButton * button, gpointer user_data)
 
 void _on_destroy(GtkWidget * dialog, gpointer user_data)
 {
-	main_close_search_dialog();
-	if(module_selected) g_free(module_selected);
-	if(verse_selected) g_free(verse_selected);
+	/* main_do_dialog_search() initializes these as search starts */
+	if (search_active) {
+		terminate_search = TRUE;
+		while (gtk_events_pending())
+			gtk_main_iteration();
+	} else {
+		main_close_search_dialog();
+		if (module_selected)
+			g_free(module_selected);
+		if (verse_selected)
+			g_free(verse_selected);
+	}
 }
 
 
