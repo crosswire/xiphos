@@ -27,12 +27,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+#include <assert.h>
 
 #include <gnome.h>
 
 #include "gui/utilities.h"
 #include "gui/preferences_dialog.h"
 #include "gui/gnomesword.h"
+#include "gui/mod_mgr.h"
 #include "gui/widgets.h"
 
 #include "main/lists.h"
@@ -284,6 +286,47 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 
 /******************************************************************************
  * Name
+ *   language_add_folders
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void language_add_folders(GtkTreeModel * model, GtkTreeIter iter,
+ *			       gchar ** languages)
+ *
+ * Description
+ *   insert a block of languages into a tree model.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+language_add_folders(GtkTreeModel * model,
+		      GtkTreeIter iter,
+		      gchar ** languages)
+{
+	GtkTreeIter iter_iter;
+	GtkTreeIter parent;
+	GtkTreeIter child_iter;
+	int j;
+
+	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
+	for (j = 0; languages[j]; ++j) {
+		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
+		gtk_tree_store_set(GTK_TREE_STORE(model), 
+				   &child_iter, 
+				   0,
+				   ((g_utf8_validate(languages[j], -1, NULL))
+				    ? languages[j]
+				    : _("Unknown")),
+				   -1);
+	}
+}
+
+
+/******************************************************************************
+ * Name
  *   add_module_to_prayerlist_folder
  *
  * Synopsis
@@ -508,64 +551,51 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 
 	tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
-	tmp2 = tmp;
 
+	language_make_list(tmp, store,
+			   text, commentary, map, image,
+			   devotional, dictionary, book,
+			   language_add_folders);
+
+	tmp2 = tmp;
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
 		// see comment on similar code in src/main/sidebar.cc.
 
-		// (!strcmp(info->type, TEXT_MODS)) {
 		if (info->type[0] == 'B') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    text, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      text, info->language,
 						      info->name);
 		}
-		// (!strcmp(info->type, COMM_MODS)) {
 		else if (info->type[0] == 'C') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      commentary, info->language,
 						      info->name);
 		}
 		else if (info->is_maps) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    map, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      map, info->language,
 						      info->name);
 		}
 		else if (info->is_images) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    image, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      image, info->language,
-					      info->name);
+						      image, info->language,
+						      info->name);
 		}
 		else if (info->is_devotional) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    devotional, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      devotional, info->language,
 						      info->name);
 		}
-		// (!strcmp(info->type, DICT_MODS)) {
 		else if (info->type[0] == 'L') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    dictionary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
-					      dictionary, info->language,
-					      info->name);
+						      dictionary, info->language,
+						      info->name);
 		}
-		// (!strcmp(info->type, BOOK_MODS)) {
 		else if (info->type[0] == 'G') {
 			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
 			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    book, info->language);
 				add_module_to_language_folder(GTK_TREE_MODEL(store),
 							      book, info->language,
 							      info->name);
@@ -1002,6 +1032,150 @@ void reading_selector(char *modname,
 		main_url_handler(url, TRUE);
 	g_free(url);
 	this_time = FALSE;	// next time, ignore.
+}
+
+/* **************************************************************** */
+/* language sorting functions, for better module list displays.     */
+/* **************************************************************** */
+
+struct language_set {
+	gchar **ptr;
+	int count;
+} language_set[N_LANGSET_MODTYPES];
+
+/* one-shot setup during initialization. */
+void
+language_init()
+{
+	int i;
+	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
+		language_set[i].ptr = calloc(LANGSET_COUNT, sizeof(char*));
+		language_set[i].count = 0;
+	}
+}
+
+/* per-usage clear of old content before a new collection is made. */
+static void
+language_clear()
+{
+	int i, j;
+	char **s;
+
+	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
+		s = language_set[i].ptr;
+		for (j = 0; j < language_set[i].count; ++j) {
+			g_free(s[j]);
+			s[j] = NULL;
+		}
+		language_set[i].count = 0;
+	}
+}
+
+/* used during module set analysis: add one language to a per-type set. */
+static void
+language_add(const char *language, int module_type)
+{
+	int j;
+	char **s;
+
+	if ((language == NULL) || (*language == '\0'))
+		language = _("Unknown");
+	assert((module_type >= 0) && (module_type < N_LANGSET_MODTYPES));
+	s = language_set[module_type].ptr;
+	for (j = 0; j < language_set[module_type].count; ++j) {
+		if (!strcmp(s[j], language))
+			return;			/* found -- duplicate. */
+	}
+	assert(j < LANGSET_COUNT);		/* let's not overrun the set. */
+	s[j] = g_strdup(language);
+	++(language_set[module_type].count);
+}
+
+/* comparator function pulled verbatim from qsort(3). */
+static int
+cmpstringp(const void *p1, const void *p2)
+{
+	/* The actual arguments to this function are "pointers to
+	   pointers to char", but strcmp(3) arguments are "pointers
+	   to char", hence the following cast plus dereference */
+
+	return strcmp(* (char * const *) p1, * (char * const *) p2);
+}
+
+/* retrieve the language set specific to the module type requested */
+static gchar **
+language_get_type(int module_type)
+{
+	assert((module_type >= 0) && (module_type < N_LANGSET_MODTYPES));
+	return language_set[module_type].ptr;
+}
+
+/* push a list of modules' sorted languages into the specified tree store. */
+/* other than init, this is the only public function. */
+void
+language_make_list(GList *modlist,
+		   GtkTreeStore *store,
+		   GtkTreeIter text,
+		   GtkTreeIter commentary,
+		   GtkTreeIter map,
+		   GtkTreeIter image,
+		   GtkTreeIter devotional,
+		   GtkTreeIter dictionary,
+		   GtkTreeIter book,
+		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **))
+{
+	MOD_MGR *info;
+	int i, j;
+	char **s;
+
+	language_clear();
+
+	/* append */
+	while (modlist != NULL) {
+		info = (MOD_MGR *) modlist->data;
+ 
+		// modtype analysis identical to add_to_folder calls.
+		if (info->type[0] == 'B')
+			language_add(info->language, LANGSET_BIBLE);
+		else if (info->type[0] == 'C')
+			language_add(info->language, LANGSET_COMMENTARY);
+		else if (info->is_maps)
+			language_add(info->language, LANGSET_MAP);
+		else if (info->is_images)
+			language_add(info->language, LANGSET_IMAGE);
+		else if (info->is_devotional)
+			language_add(info->language, LANGSET_DEVOTIONAL);
+		else if (info->type[0] == 'L')
+			language_add(info->language, LANGSET_DICTIONARY);
+		else if (info->type[0] == 'G')
+			language_add(info->language, LANGSET_GENBOOK);
+
+		modlist = g_list_next(modlist);
+	}
+
+	/* sort */
+	for (i = 0; i < N_LANGSET_MODTYPES; ++i) {
+		qsort(language_set[i].ptr,
+		      language_set[i].count,
+		      sizeof(char *),
+		      cmpstringp);
+	}
+
+	/* generate tree. */
+	(*add)(GTK_TREE_MODEL(store), text,
+	       language_get_type(LANGSET_BIBLE));
+	(*add)(GTK_TREE_MODEL(store), commentary,
+	       language_get_type(LANGSET_COMMENTARY));
+	(*add)(GTK_TREE_MODEL(store), map,
+	       language_get_type(LANGSET_MAP));
+	(*add)(GTK_TREE_MODEL(store), image,
+	       language_get_type(LANGSET_IMAGE));
+	(*add)(GTK_TREE_MODEL(store), devotional,
+	       language_get_type(LANGSET_DEVOTIONAL));
+	(*add)(GTK_TREE_MODEL(store), dictionary,
+	       language_get_type(LANGSET_DICTIONARY));
+	(*add)(GTK_TREE_MODEL(store), book,
+	       language_get_type(LANGSET_GENBOOK));
 }
 
 /******   end of file   ******/
