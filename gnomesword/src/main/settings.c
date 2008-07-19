@@ -176,6 +176,8 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* moved here from crud locations in backend. */
 	main_init_language_map();
 
+	language_init();
+
 	init_bookmarks(new_bookmarks);
 
 	/* set fnconfigure to gSwordDir and settings.xml */

@@ -8,33 +8,35 @@ DD MMM 2008
 
  1. In the module manager, along with the usual per-module-type
     categorization of modules, the mod.mgr now also produces a parallel
-    per-availability categorization, for updated and yet-uninstalled
+    per-availability categorization, for updated and uninstalled
     modules.  This makes it easier to find new stuff, rather than having
     to crawl through all the per-type listings.
 
- 2. General books' bookmarks are now generated using the key text rather
+ 2. The module manager now alphabetizes the available language selections.
+
+ 3. General books' bookmarks are now generated using the key text rather
     than an arcane internal numeric module offset.
 
- 3. Devotionals now open to the current MM.DD key, rather than attempting
+ 4. Devotionals now open to the current MM.DD key, rather than attempting
     (and always failing) to open on the current dictionary key.
 
- 4. An Advanced Search bug causing failure when a custom list contains a
+ 5. An Advanced Search bug causing failure when a custom list contains a
     deleted module has been fixed.
 
- 5. Genbook navbar tooltips have been made more understandable.
+ 6. Genbook navbar tooltips have been made a bit more understandable.
 
- 6. Main verse navigation now has keyboard shorcuts on variations of N/P.
+ 7. Main verse navigation now has keyboard shorcuts on variations of N/P.
 
- 7. The personal commentary editor can be invoked with Alt-Z.
+ 8. The personal commentary editor can be invoked with Alt-Z.
 
- 8. Locked modules' cipher keys are now stored correctly.
+ 9. Locked modules' cipher keys are stored correctly.
 
- 9. Image, Map, and Daily Devotional modules no longer appear in more
+10. Image, Map, and Daily Devotional modules no longer appear in more
     than one module list.
 
-10. Prayer lists have expanded to include a general journal concept; a few
+11. Prayer lists have expanded to include a general journal concept; a few
     crash bugs have been fixed, and a full-year daily journal prototype is
-    now available.
+    available.
 
 Bug reports addressed since 2.3.4:
 1973928  key entry not saved in .conf

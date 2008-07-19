@@ -19,6 +19,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef GS_UTILITIES_H
+#define GS_UTILITIES_H
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,7 +61,34 @@ void reading_selector(char *modname,
 		      DIALOG_DATA *dialog,
 		      GtkMenuItem *menuitem,
 		      gpointer user_data);
-	
+
+void language_init();
+void language_make_list(GList *modlist,
+			GtkTreeStore *store,
+			GtkTreeIter text,
+			GtkTreeIter commentary,
+			GtkTreeIter map,
+			GtkTreeIter image,
+			GtkTreeIter devotional,
+			GtkTreeIter dictionary,
+			GtkTreeIter book,
+			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
+
+enum {
+	LANGSET_BIBLE,
+	LANGSET_COMMENTARY,
+	LANGSET_DICTIONARY,
+	LANGSET_GENBOOK,
+	LANGSET_MAP,
+	LANGSET_IMAGE,
+	LANGSET_DEVOTIONAL,
+	N_LANGSET_MODTYPES
+};
+
+#define	LANGSET_COUNT	200
+
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* GS_UTILITIES_H */
