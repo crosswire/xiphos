@@ -60,7 +60,7 @@ extern "C" {
 #define FINDS _("found in ")		
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
-static BackEnd *backendSearch;
+static BackEnd *backendSearch = NULL;
 
 static gboolean is_running = FALSE;
 extern int search_dialog;
@@ -70,45 +70,12 @@ static GList *get_custom_list_from_name(const gchar * label);
 static void add_ranges(void);
 static void add_modlist(void);
 
+gboolean terminate_search;	// also accessed from search_dialog.c.
+gboolean search_active;		// also accessed from search_dialog.c.
+
 int drag_module_type;
 
 static GList *list_of_finds;
-/******************************************************************************
- * Name
- *  search_percent_update
- *
- * Synopsis
- *   #include "main/search.h"
- *
- *   void search_percent_update(char percent, void *userData)	
- *
- * Description
- *    updates the progress bar during shortcut bar search
- *
- * Return value
- *   void
- */ 
-
-void main_dialog_search_percent_update(char percent, void *userData)
-{
-	char maxHashes = *((char *) userData);
-	float num;
-	char buf[80];
-	static char printed = 0;
-	
-	/* update search dialog progress */
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
-		gui_set_progressbar_fraction(search1.progressbar, (gdouble)num);
-		/*gnome_appbar_set_progress_percentage(
-			(GnomeAppBar *)search1.progressbar, num);*/
-		printed++;
-	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	printed = 0;
-}
 
 /******************************************************************************
  * Name
@@ -1463,8 +1430,17 @@ void main_do_dialog_search(void)
 
 	check_search_global_options();
 
+	terminate_search = FALSE;
+	search_active = TRUE;
+
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
+
+		if (terminate_search) {
+			// we simply wrap through the remaining
+			// set so as to free memory in use.
+			goto clean;
+		}
 
 		if (!main_is_module(module)) {
 			gchar msg[300];
@@ -1481,7 +1457,7 @@ void main_do_dialog_search(void)
 
 		gui_set_progressbar_text(search1.progressbar, buf);
 
-		if (search_type == -4)	// possibly demote lucene->word search.
+		if (search_type == -4)	// possibly demote "lucene"=>"word" search.
 			search_type = backendSearch->check_for_optimal_search(module);
 		GS_message(("search_type = %d",search_type));
 		
@@ -1496,9 +1472,8 @@ void main_do_dialog_search(void)
 		tmp_list = g_list_first(tmp_list);
 		tmp_list = NULL;
 		
+		mod_type = backendSearch->module_type(module);	
 		while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
-			/* test for mod type */
-			mod_type = backendSearch->module_type(module);	
 			if (mod_type == TEXT_TYPE)			
 				g_string_printf(str, "%s: %s  %s", module,  key_buf, backendSearch->get_strip_text(module, key_buf));
 			else			
@@ -1523,9 +1498,13 @@ void main_do_dialog_search(void)
 			tmp = (GList*) list_of_finds->data;
 			add_module_finds(g_list_first(tmp));
 		}
+
+	clean:
 		g_free(module);
 		search_mods = g_list_next(search_mods);
 	}
+	search_active = FALSE;
+
 	if(attribute_search_string)
 		g_free((gchar*)attribute_search_string);
 	g_list_free(search_mods);
@@ -1557,6 +1536,10 @@ void main_open_search_dialog(void)
 		GtkListStore *list_store;
 		GtkTreeIter iter;
 		
+		// get rid of holdover from last time, if it exited poorly.
+		if (backendSearch)
+			delete backendSearch;
+
 		backendSearch = new BackEnd();
 		
 		/* create and show search dialog */
@@ -1591,4 +1574,44 @@ void main_close_search_dialog(void)
 	_clear_find_lists();
 	is_running = FALSE;
 	delete backendSearch;
+	backendSearch = NULL;
+}
+/******************************************************************************
+ * Name
+ *  search_percent_update
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void search_percent_update(char percent, void *userData)	
+ *
+ * Description
+ *    updates the progress bar during shortcut bar search
+ *
+ * Return value
+ *   void
+ */ 
+
+void main_dialog_search_percent_update(char percent, void *userData)
+{
+	char maxHashes = *((char *) userData);
+	float num;
+	static char printed = 0;
+	
+	if (terminate_search) {
+		backendSearch->terminate_search();
+		// this is WAY WRONG but at least it cleans up the dying window. */
+		_clear_find_lists();
+		is_running = FALSE;
+	} else {
+		/* update search dialog progress */
+		while ((((float) percent) / 100) * maxHashes > printed) {
+			num = (float) percent / 100;
+			gui_set_progressbar_fraction(search1.progressbar, (gdouble)num);
+			printed++;
+		}
+		printed = 0;
+	}
+	while (gtk_events_pending())
+		gtk_main_iteration();
 }
