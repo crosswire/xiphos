@@ -1313,6 +1313,12 @@ int BackEnd::do_module_search(char *module_name,
 		results.sort();
 	return results.Count();
 }
+
+void BackEnd::terminate_search()
+{
+	if (search_mod)
+		search_mod->terminateSearch = true;
+}
  
 char *BackEnd::get_conf_file_item(const char * file, const char * mod_name, const char * item){
 	char *buf = NULL;
