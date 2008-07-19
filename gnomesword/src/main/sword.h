@@ -51,6 +51,7 @@ extern "C" {
 #define	PRAYERLIST_TYPE 12
        
 /* these strings are not seen by users */
+/* they are returned by Sword in module->Type() */
 #define TEXT_MODS "Biblical Texts"
 #define COMM_MODS "Commentaries"
 #define DICT_MODS "Lexicons / Dictionaries"

@@ -1,3 +1,7 @@
+2008-07-19  karl <charcoal@users.sf.net>
+
+	* mod.list generation: alphabetize languages everywhere.
+
 2008-07-17  karl <charcoal@users.sf.net>
 
 	* mod.list generation: avoid pointless strdup; norwegian hack.

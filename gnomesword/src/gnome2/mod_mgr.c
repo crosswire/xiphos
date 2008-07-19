@@ -689,6 +689,49 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 
 /******************************************************************************
  * Name
+ *   language_add_folders
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void language_add_folders(GtkTreeModel * model, GtkTreeIter iter,
+ *			       gchar ** languages)
+ *
+ * Description
+ *   insert a block of languages into a tree model.
+ *
+ * Return value
+ *   void
+ */
+
+static void
+language_add_folders(GtkTreeModel * model,
+		      GtkTreeIter iter,
+		      gchar ** languages)
+{
+	GtkTreeIter iter_iter;
+	GtkTreeIter parent;
+	GtkTreeIter child_iter;
+	int j;
+
+	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
+	for (j = 0; languages[j]; ++j) {
+		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
+		gtk_tree_store_set(GTK_TREE_STORE(model), 
+				   &child_iter,
+				   COLUMN_VISIBLE, 
+				   FALSE, 
+				   COLUMN_NAME,
+				   ((g_utf8_validate(languages[j], -1, NULL))
+				    ? languages[j]
+				    : _("Unknown")), 
+				   -1);
+	}
+}
+
+
+/******************************************************************************
+ * Name
  *   add_language_folder
  *
  * Synopsis
@@ -841,7 +884,6 @@ static void load_module_tree(GtkTreeView * treeview,
 	gtk_tree_store_clear(store);
 	if (!g_list_length(tmp))
 		return;
-	tmp2 = tmp;
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
@@ -900,7 +942,12 @@ static void load_module_tree(GtkTreeView * treeview,
 		}
 	}
 
+	language_make_list(tmp, store,
+			   text, commentary, map, image,
+			   devotional, dictionary, book,
+			   language_add_folders);
 
+	tmp2 = tmp;
 	while (tmp2) {
 		info = (MOD_MGR *) tmp2->data;
 
@@ -927,60 +974,42 @@ static void load_module_tree(GtkTreeView * treeview,
 
 		// see comment on similar code in src/main/sidebar.cc.
 
-		// (!strcmp(info->type, TEXT_MODS)) {
 		if (info->type[0] == 'B') {
-			add_language_folder(GTK_TREE_MODEL(store), text,
-					    info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
 						      info);
 		}
-		// (!strcmp(info->type, COMM_MODS)) {
 		else if (info->type[0] == 'C') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      commentary, info);
 		}
 		else if (info->is_maps) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    map, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      map, info);
 		}
 		else if (info->is_images) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    image, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      image, info);
 		}
 		else if (info->is_devotional) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    devotional, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      devotional, info);
 		}
-		// (!strcmp(info->type, DICT_MODS)) {
 		else if (info->type[0] == 'L') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    dictionary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store),
 						      dictionary, info);
 		}
-		// (!strcmp(info->type, BOOK_MODS)) {
 		else if (info->type[0] == 'G') {
 			gchar *gstype;
 			if (first_time_user ||
 			    ((gstype = main_get_mod_config_entry(info->name, "GSType"))
-			     == NULL)
-			    || strcmp(gstype, "PrayerList")) {
-				add_language_folder
-				    (GTK_TREE_MODEL(store), book, info->language);
+			     == NULL) ||
+			    strcmp(gstype, "PrayerList")) {
 				add_module_to_language_folder
 				    (GTK_TREE_MODEL(store), book, info);
 			} else if (settings.prayerlist) {

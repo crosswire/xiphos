@@ -36,6 +36,7 @@
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
 #include "gui/tabbed_browser.h"
+#include "gui/utilities.h"
 
 #include "main/sidebar.h"
 #include "main/lists.h"
@@ -781,6 +782,46 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 
 /******************************************************************************
  * Name
+ *   language_add_folders
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void language_add_folders(GtkTreeModel * model,
+ *			       GtkTreeIter iter, gchar * module_name)
+ *
+ * Description
+ *   fast creation of the tree model's language folders
+ *
+ * Return value
+ *   void
+ */
+static void
+language_add_folders(GtkTreeModel * model,
+		     GtkTreeIter iter,
+		     gchar ** languages)
+{
+	GtkTreeIter iter_iter;
+	GtkTreeIter parent;
+	GtkTreeIter child_iter;
+	int j;
+
+	(void) gtk_tree_model_iter_children(model, &iter_iter, &iter);
+	for (j = 0; languages[j]; ++j) {
+		gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				   COL_CAPTION, 
+				   ((g_utf8_validate(languages[j], -1, NULL))
+				    ? languages[j]
+				    : _("Unknown")),
+				   COL_MODULE, NULL, COL_OFFSET, NULL, -1);
+	}
+}
+
+/******************************************************************************
+ * Name
  *   add_module_to_prayerlist_folder
  *
  * Synopsis
@@ -1009,69 +1050,58 @@ void main_load_module_tree(GtkWidget * tree)
 	}
 
 	tmp = mod_mgr_list_local_modules(main_get_path_to_mods(), TRUE);
-	tmp2 = tmp;
 
+	language_make_list(tmp, store,
+			   text, commentary, map, image,
+			   devotional, dictionary, book,
+			   language_add_folders);
+
+	// fast-n-loose w/known string values to avoid pointless strcmp costs.
+	// TEXT_MODS => 'B' ("Biblical Texts")
+	// COMM_MODS => 'C' ("Commentaries")
+	// DICT_MODS => 'L' ("Lexicons / Dictionaries")
+	// BOOK_MODS => 'G' ("Generic Books")
+	// see src/main/sword.h regarding these definitions.
+	// see also similar code in src/gnome2/{mod_mgr,utilities}.c.
+	// it is just necessary that we undo some of this inefficiency.
+
+	tmp2 = tmp;
 	while (tmp2 != NULL) {
 		info = (MOD_MGR *) tmp2->data;
 
-		// fast-n-loose with known string values to avoid strcmp cost:
-		// TEXT_MODS => 'B' ("Biblical Texts")
-		// COMM_MODS => 'C' ("Commentaries")
-		// DICT_MODS => 'L' ("Lexicons / Dictionaries")
-		// BOOK_MODS => 'G' ("Generic Books")
-		// see also src/gnome2/mod_mgr.c, src/gnome2/utilitics.c
-		// it is just necessary that we undo some of this inefficiency.
-
-		// (!strcmp(info->type, TEXT_MODS))
 		if (info->type[0] == 'B') {
-			add_language_folder(GTK_TREE_MODEL(store), text, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      text, info->language,
 						      info->name);
 		}
-		// (!strcmp(info->type, COMM_MODS))
 		else if (info->type[0] == 'C') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    commentary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      commentary, info->language,
 						      info->name);
 		}
 		else if (info->is_maps) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    map, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      map, info->language,
 						      info->name);
 		}
 		else if (info->is_images) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    image, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      image, info->language,
 						      info->name);
 		}
 		else if (info->is_devotional) {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    devotional, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      devotional, info->language,
 						      info->name);
 		}
-		// (!strcmp(info->type, DICT_MODS))
 		else if (info->type[0] == 'L') {
-			add_language_folder(GTK_TREE_MODEL(store),
-					    dictionary, info->language);
 			add_module_to_language_folder(GTK_TREE_MODEL(store),
 						      dictionary, info->language,
 						      info->name);
 		}
-		// (!strcmp(info->type, BOOK_MODS))
 		else if (info->type[0] == 'G') {
 			gchar *gstype = main_get_mod_config_entry(info->name, "GSType");
 			if ((gstype == NULL) || strcmp(gstype, "PrayerList")) {
-				add_language_folder(GTK_TREE_MODEL(store),
-						    book, info->language);
 				add_module_to_language_folder(GTK_TREE_MODEL(store),
 							      book, info->language,
 							      info->name);
