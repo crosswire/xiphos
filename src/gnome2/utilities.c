@@ -555,6 +555,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
+			   NULL, NULL,
 			   language_add_folders);
 
 	tmp2 = tmp;
@@ -1122,6 +1123,8 @@ language_make_list(GList *modlist,
 		   GtkTreeIter devotional,
 		   GtkTreeIter dictionary,
 		   GtkTreeIter book,
+		   GtkTreeIter *update,
+		   GtkTreeIter *uninstalled,
 		   void (*add)(GtkTreeModel *, GtkTreeIter, gchar **))
 {
 	MOD_MGR *info;
@@ -1134,7 +1137,20 @@ language_make_list(GList *modlist,
 	while (modlist != NULL) {
 		info = (MOD_MGR *) modlist->data;
  
-		// modtype analysis identical to add_to_folder calls.
+		/* mod.mgr: special extra lists */
+		if ((update != NULL) && (uninstalled != NULL)) {
+			if (!info->installed) {
+				language_add(info->language, LANGSET_UNINSTALLED);
+			} else if ((!info->old_version && info->new_version &&
+				    strcmp(info->new_version, " ")) ||
+				   (info->old_version && !info->new_version) ||
+				   (info->old_version && info->new_version &&
+				    strcmp(info->new_version, info->old_version) > 0)) {
+				language_add(info->language, LANGSET_UPDATE);
+			}
+		}
+
+		/* modtype analysis identical to add_to_folder calls. */
 		if (info->type[0] == 'B')
 			language_add(info->language, LANGSET_BIBLE);
 		else if (info->type[0] == 'C')
@@ -1176,6 +1192,12 @@ language_make_list(GList *modlist,
 	       language_get_type(LANGSET_DICTIONARY));
 	(*add)(GTK_TREE_MODEL(store), book,
 	       language_get_type(LANGSET_GENBOOK));
+	if ((update != NULL) && (uninstalled != NULL)) {
+		(*add)(GTK_TREE_MODEL(store), *update,
+		       language_get_type(LANGSET_UPDATE));
+		(*add)(GTK_TREE_MODEL(store), *uninstalled,
+		       language_get_type(LANGSET_UNINSTALLED));
+	}
 }
 
 /******   end of file   ******/
