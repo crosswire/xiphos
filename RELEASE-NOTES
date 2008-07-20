@@ -38,6 +38,8 @@ DD MMM 2008
     crash bugs have been fixed, and a full-year daily journal prototype is
     available.
 
+12. The Advanced Search dialog's Find button now also stops a search.
+
 Bug reports addressed since 2.3.4:
 1973928  key entry not saved in .conf
 1994431  seg fault when incorrect source
@@ -47,6 +49,7 @@ New feature requests pending:
 
 Feature requests closed:
 1991842  Some suggestions for personal commentary
+2009885  Cancel a search
 ________________________
 
 Release 2.3.5
