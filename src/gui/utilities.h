@@ -72,6 +72,8 @@ void language_make_list(GList *modlist,
 			GtkTreeIter devotional,
 			GtkTreeIter dictionary,
 			GtkTreeIter book,
+			GtkTreeIter *update,
+			GtkTreeIter *uninstalled,
 			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
 
 enum {
@@ -82,6 +84,8 @@ enum {
 	LANGSET_MAP,
 	LANGSET_IMAGE,
 	LANGSET_DEVOTIONAL,
+	LANGSET_UPDATE,
+	LANGSET_UNINSTALLED,
 	N_LANGSET_MODTYPES
 };
 
