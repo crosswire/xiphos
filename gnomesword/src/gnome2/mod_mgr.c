@@ -945,7 +945,8 @@ static void load_module_tree(GtkTreeView * treeview,
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
-			   &update, &uninstalled,
+			   ((install && !first_time_user) ? &update : NULL),
+			   ((install && !first_time_user) ? &uninstalled : NULL),
 			   language_add_folders);
 
 	tmp2 = tmp;
