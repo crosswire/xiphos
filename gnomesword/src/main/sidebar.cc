@@ -1054,6 +1054,7 @@ void main_load_module_tree(GtkWidget * tree)
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
+			   NULL, NULL,
 			   language_add_folders);
 
 	// fast-n-loose w/known string values to avoid pointless strcmp costs.
