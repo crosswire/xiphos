@@ -223,6 +223,10 @@
 		Thus, a search of KJV for Strong's Greek #140, using "G140", will return the single result of Matthew 12:18.
 	   </para>
 
+	   <para>
+		The "Find" button also stops an in-progress search, as its tooltip indicates.
+	   </para>
+
 	   <warning>
 	   	<para>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
