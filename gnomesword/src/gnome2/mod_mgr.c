@@ -945,6 +945,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	language_make_list(tmp, store,
 			   text, commentary, map, image,
 			   devotional, dictionary, book,
+			   &update, &uninstalled,
 			   language_add_folders);
 
 	tmp2 = tmp;
@@ -954,8 +955,6 @@ static void load_module_tree(GtkTreeView * treeview,
 		if (install && !first_time_user) {
 			// special lists: updated and uninstalled modules.
 			if (!info->installed) {
-				add_language_folder(GTK_TREE_MODEL(store), uninstalled,
-						    info->language);
 				add_module_to_language_folder(GTK_TREE_MODEL
 							      (store), uninstalled,
 							      info);
@@ -964,8 +963,6 @@ static void load_module_tree(GtkTreeView * treeview,
 				   (info->old_version && !info->new_version) ||
 				   (info->old_version && info->new_version &&
 				    strcmp(info->new_version, info->old_version) > 0)) {
-				add_language_folder(GTK_TREE_MODEL(store), update,
-						    info->language);
 				add_module_to_language_folder(GTK_TREE_MODEL
 							      (store), update,
 							      info);
