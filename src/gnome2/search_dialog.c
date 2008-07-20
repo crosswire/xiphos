@@ -231,7 +231,12 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 
 void on_button_begin_search(GtkButton * button, gpointer user_data)
 {
-	main_do_dialog_search();
+	if (search_active) {
+		terminate_search = TRUE;
+		while (gtk_events_pending())
+			gtk_main_iteration();
+	} else
+		main_do_dialog_search();
 }
 
 

@@ -146,7 +146,7 @@
 		  <child>
 		    <widget class="GtkButton" id="button1">
 		      <property name="visible">True</property>
-		      <property name="tooltip" translatable="yes">Start searching</property>
+		      <property name="tooltip" translatable="yes">Start/stop searching</property>
 		      <property name="can_focus">True</property>
 		      <property name="label">gtk-find</property>
 		      <property name="use_stock">True</property>
