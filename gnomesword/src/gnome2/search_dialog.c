@@ -1594,7 +1594,7 @@ on_treeview10_drag_leave               (GtkWidget       *widget,
  */
 
 static
-void _setup_treetview(GtkWidget * treeview)
+void _setup_treeview(GtkWidget * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1607,7 +1607,7 @@ void _setup_treetview(GtkWidget * treeview)
 							  0, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
-	gui_load_module_tree(treeview, FALSE);
+	gui_load_module_tree(treeview);
 
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection
@@ -1619,7 +1619,7 @@ void _setup_treetview(GtkWidget * treeview)
 
 
 static
-void _setup_treetview2(GtkWidget * treeview)
+void _setup_treeview2(GtkWidget * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1632,7 +1632,7 @@ void _setup_treetview2(GtkWidget * treeview)
 							  0, NULL);
 	gtk_tree_view_column_set_sort_column_id(column, 0);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview), column);
-	gui_load_module_tree(treeview, FALSE);
+	gui_load_module_tree(treeview);
 
 	selection =
 	   G_OBJECT(gtk_tree_view_get_selection
@@ -2436,7 +2436,7 @@ void _create_search_dialog(void)
 			 G_CALLBACK(_on_dialog2_response), NULL);
 	search1.mod_sel_dlg_treeview =
 	    glade_xml_get_widget(gxml2, "treeview8");
-	_setup_treetview2(search1.mod_sel_dlg_treeview);
+	_setup_treeview2(search1.mod_sel_dlg_treeview);
 	gtk_widget_hide(search1.mod_sel_dialog);
 
 	g_free(glade_file);
@@ -2466,7 +2466,7 @@ void _create_search_dialog(void)
 	search1.notebook = glade_xml_get_widget(gxml, "notebook1");
 
 	search1.treeview = glade_xml_get_widget(gxml, "treeview1");
-	_setup_treetview(search1.treeview);
+	_setup_treeview(search1.treeview);
 
 	search1.list_range_name =
 	    glade_xml_get_widget(gxml, "treeview4");
