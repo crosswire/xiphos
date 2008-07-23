@@ -1,3 +1,7 @@
+2008-07-23  karl <charcoal@users.sf.net>
+
+	* minor cleanup of module loading and treeview setup.
+
 2008-07-19  karl <charcoal@users.sf.net>
 
 	* mod.list generation: alphabetize languages everywhere.
