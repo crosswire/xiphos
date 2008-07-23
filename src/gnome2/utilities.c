@@ -489,7 +489,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  *   void
  */
 
-void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
+void gui_load_module_tree(GtkWidget * tree)
 {
 	gint i;
 	GtkTreeStore *store;
@@ -512,12 +512,6 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  Biblical Texts folders */
 	gtk_tree_store_append(store, &text, NULL);
 	gtk_tree_store_set(store, &text, 0, _("Biblical Texts"), -1);
-
-	if (is_sidebar) {
-		gtk_tree_store_append(store, &child_iter, &text);
-		gtk_tree_store_set(store, &child_iter, 0,
-				   _("Parallel View"), -1);
-	}
 
 	/*  Commentaries folders */
 	gtk_tree_store_append(store, &commentary, NULL);
