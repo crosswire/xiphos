@@ -1,6 +1,7 @@
 2008-07-23  karl <charcoal@users.sf.net>
 
 	* minor cleanup of module loading and treeview setup.
+	* silence complaint about char/gchar auto-conversion (gtkhtml).
 
 2008-07-19  karl <charcoal@users.sf.net>
 

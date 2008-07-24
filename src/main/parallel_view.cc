@@ -735,7 +735,7 @@ void main_update_parallel_page(void)
 			gtk_html_set_editable(html, FALSE);
 		htmlstream =
 		    gtk_html_begin_content(html,
-					   "text/html; charset=utf-8");
+					   (gchar *)"text/html; charset=utf-8");
 		sprintf(tmpBuf,
 			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings.bible_bg_color,
@@ -821,7 +821,7 @@ void main_update_parallel_page(void)
 				font_size = g_strdup_printf("%+d",settings.base_font_size);
 		
 			if (j == 0 || j == 2 || j == 4)
-				rowcolor = "#F1F1F1";
+				rowcolor = (gchar *)"#F1F1F1";
 			else
 				rowcolor = settings.bible_bg_color;
 
@@ -1187,7 +1187,7 @@ void main_update_parallel_page_detached(void)
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	    gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
 #endif
 	sprintf(buf,HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
