@@ -1,3 +1,9 @@
+2008-07-25  dom <domcox@users.sourceforge.net> & karl <charcoal@users.sf.net>
+
+	* move locale-specific language name strings into sword.cc, to be
+	  no longer locale-translatable.
+	* add another general outlined topic under prayer lists & journals.
+
 2008-07-23  karl <charcoal@users.sf.net>
 
 	* minor cleanup of module loading and treeview setup.

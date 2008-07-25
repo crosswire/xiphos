@@ -55,7 +55,6 @@ using sword::SWConfig;
 using sword::SWModule;
 #endif
 
-
 enum
 {
 	COL_OPEN_PIXBUF,
@@ -65,7 +64,6 @@ enum
 	COL_OFFSET,
 	N_COLUMNS
 };
-
 
 static int pl_month_days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 static char *(pl_months[]) = {
@@ -85,8 +83,8 @@ static char *(pl_months[]) = {
 
 /*********************************    *************************************/
 
-static
-void setEntryText (RawGenBook * book, const gchar * text)
+static void
+setEntryText (RawGenBook * book, const gchar * text)
 {
 	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
 	if (treeKey->getOffset()) {
@@ -95,8 +93,8 @@ void setEntryText (RawGenBook * book, const gchar * text)
 }
 
 
-static
-void appendChild (TreeKeyIdx * treeKey, const gchar * name)
+static void
+appendChild (TreeKeyIdx * treeKey, const gchar * name)
 {
 	treeKey->appendChild();
 	treeKey->setLocalName(name);
@@ -106,8 +104,8 @@ void appendChild (TreeKeyIdx * treeKey, const gchar * name)
 }
 
 
-static
-void appendSibling (TreeKeyIdx * treeKey, const gchar * name)
+static void
+appendSibling (TreeKeyIdx * treeKey, const gchar * name)
 {
 	if (treeKey->getOffset()) {
 		treeKey->append();
@@ -116,8 +114,8 @@ void appendSibling (TreeKeyIdx * treeKey, const gchar * name)
 	}
 }
 
-static
-void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
+static void
+add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
 	appendChild(treeKey, _("Growth"));
 	setEntryText(book, _("<b>For Growth</b><br>"));
@@ -131,24 +129,34 @@ void add_prayer_list_sections (RawGenBook * book, TreeKeyIdx * treeKey)
 	treeKey->parent();
 }
 
-
-static
-void add_prayer_list_days(RawGenBook * book,
-			  TreeKeyIdx * treeKey,
-			  int month)
+static void
+add_outline_subsections (RawGenBook * book, TreeKeyIdx * treeKey)
 {
-	for (int day = 0; day < pl_month_days[month]; ++day) {
-		char daynum[4], monthday[32];
-		snprintf(daynum, 3, "%02d", day+1);
-		snprintf(monthday, 31, "<b>%s %d</b><br>", pl_months[month], day+1);
+	appendChild(treeKey, _("Point x"));
+	setEntryText(book, _("<b>(x)</b><br>"));
+	appendSibling(treeKey, _("Point y"));
+	setEntryText(book, _("<b>(y)</b><br>"));
+	appendSibling(treeKey, _("Point z"));
+	setEntryText(book, _("<b>(z)</b><br>"));
 
-		if (day == 0)
-			appendChild(treeKey, daynum);
-		else
-			appendSibling(treeKey, daynum);
+	treeKey->parent();
+}
 
-		setEntryText(book, monthday);
-	}
+static void
+add_outline_sections (RawGenBook * book, TreeKeyIdx * treeKey)
+{
+	appendChild(treeKey, _("Minor Topic 1"));
+	setEntryText(book, _("<b>Subtopic 1</b><br>"));
+	add_outline_subsections(book, treeKey);
+	appendSibling(treeKey, _("Minor Topic 2"));
+	setEntryText(book, _("<b>Subtopic 2</b><br>"));
+	add_outline_subsections(book, treeKey);
+	appendSibling(treeKey, _("Minor Topic 3"));
+	setEntryText(book, _("<b>Subtopic 3</b><br>"));
+	add_outline_subsections(book, treeKey);
+	appendSibling(treeKey, _("Minor Topic 4"));
+	setEntryText(book, _("<b>Subtopic 4</b><br>"));
+	add_outline_subsections(book, treeKey);
 
 	treeKey->parent();
 }
@@ -292,14 +300,14 @@ out:
  *   create a simple prayer list module & add to sidebar module tree
  *
  * Return value
- *   int
+ *   gboolean
  */
 
 gboolean
 main_prayerlist_basic_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A simple prayer list \\par\\par Module created by GnomeSword"));
+	    (_("A basic prayer list. \\par\\par Module created by GnomeSword."));
 	if (listname == NULL)
 		return FALSE;
 
@@ -333,14 +341,14 @@ main_prayerlist_basic_create(void)
  *   create a subject prayer list module & add to sidebar module tree
  *
  * Return value
- *   int
+ *   gboolean
  */
 
 gboolean
 main_prayerlist_subject_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("A subject-based prayer list \\par\\par Module created by GnomeSword"));
+	    (_("A subject-based prayer list. \\par\\par Module created by GnomeSword."));
 	if (listname == NULL)
 		return FALSE;
 
@@ -378,14 +386,14 @@ main_prayerlist_subject_create(void)
  *   create a monthly prayer list module & add to sidebar module tree
  *
  * Return value
- *   int
+ *   gboolean
  */
 
 gboolean
 main_prayerlist_monthly_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("An annual prayer list \\par\\par Module created by GnomeSword"));
+	    (_("A monthly prayer list. \\par\\par Module created by GnomeSword."));
 	if (listname == NULL)
 		return FALSE;
 
@@ -429,14 +437,14 @@ main_prayerlist_monthly_create(void)
  *   create a daily journal prayer list module & add to sidebar module tree
  *
  * Return value
- *   int
+ *   gboolean
  */
 
 gboolean
 main_prayerlist_journal_create(void)
 {
 	char *listname = prayerlist_fundamentals
-	    (_("An annual prayer list \\par\\par Module created by GnomeSword"));
+	    (_("A daily journal. \\par\\par Module created by GnomeSword."));
 	if (listname == NULL)
 		return FALSE;
 
@@ -461,8 +469,68 @@ main_prayerlist_journal_create(void)
 		else
 			appendSibling(treeKey, monthnum);
 		setEntryText(book, monthstring);
-		add_prayer_list_days(book, treeKey, month);
+
+		for (int day = 0; day < pl_month_days[month]; ++day) {
+			char daynum[4], monthday[32];
+			snprintf(daynum, 3, "%02d", day+1);
+			snprintf(monthday, 31, "<b>%s %d</b><br>", pl_months[month], day+1);
+
+			if (day == 0)
+				appendChild(treeKey, daynum);
+			else
+				appendSibling(treeKey, daynum);
+
+			setEntryText(book, monthday);
+		}
+		treeKey->parent();
 	}
+
+	delete treeKey;
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *   main_prayerlist_outlined_topic_create
+ *
+ * Synopsis
+ *   #include "main/prayer_list.h"
+ *   gint main_prayerlist_outlined_topic_create(void)
+ *
+ * Description
+ *   create a sermon or other topical outline
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean
+main_prayerlist_outlined_topic_create(void)
+{
+	char *listname = prayerlist_fundamentals
+	    (_("An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."));
+	if (listname == NULL)
+		return FALSE;
+
+	gchar *path = g_strdup_printf
+	    ("%s/.sword/modules/genbook/rawgenbook/%s/%s",
+	     settings.homedir, listname, listname);
+	g_free(listname);
+	RawGenBook::createModule(path);
+	RawGenBook *book = new RawGenBook (path);
+
+	TreeKeyIdx root = *((TreeKeyIdx *) ((SWKey *) (*book)));
+	TreeKeyIdx *treeKey = (TreeKeyIdx *) (SWKey *) (*book);
+
+	appendChild(treeKey, _("Major Topic A"));
+	setEntryText(book, _("<b>Major Topic A</b><br>"));
+	add_outline_sections(book, treeKey);
+	appendSibling(treeKey, _("Major Topic B"));
+	setEntryText(book, _("<b>Major Topic B</b><br>"));
+	add_outline_sections(book, treeKey);
+	appendSibling(treeKey, _("Major Topic C"));
+	setEntryText(book, _("<b>Major Topic C</b><br>"));
+	add_outline_sections(book, treeKey);
 
 	delete treeKey;
 	return TRUE;

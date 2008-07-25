@@ -13,6 +13,7 @@ DD MMM 2008
     to crawl through all the per-type listings.
 
  2. The module manager now alphabetizes the available language selections.
+    Also, locale-specific language names are in all module lists.
 
  3. General books' bookmarks are now generated using the key text rather
     than an arcane internal numeric module offset.
@@ -35,7 +36,7 @@ DD MMM 2008
     than one module list.
 
 11. Prayer lists have expanded to include a general journal concept; a few
-    crash bugs have been fixed, and a full-year daily journal prototype is
+    crash bugs have been fixed, and some new journal & topical outlines are
     available.
 
 12. The Advanced Search dialog's Find button now also stops a search.
