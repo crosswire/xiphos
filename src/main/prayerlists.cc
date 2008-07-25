@@ -195,7 +195,7 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	config[listname]["Version"] = "0.1";
 	config[listname]["MinimumVersion"] = "1.5.11";
 	config[listname]["DisplayLevel"] = "2";	// ?
-	config[listname]["Description"] = _("Prayer List/Journal");
+	config[listname]["Description"] = listname;
 	config[listname]["About"] = summary;	// as provided.
 	config.Save();
 
