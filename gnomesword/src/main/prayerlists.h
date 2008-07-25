@@ -28,10 +28,11 @@ extern "C"
 {
 #endif
 
-int main_prayerlist_basic_create(void); 
-int main_prayerlist_subject_create(void);
-int main_prayerlist_monthly_create(void);
-int main_prayerlist_journal_create(void);
+gboolean main_prayerlist_basic_create(void); 
+gboolean main_prayerlist_subject_create(void);
+gboolean main_prayerlist_monthly_create(void);
+gboolean main_prayerlist_journal_create(void);
+gboolean main_prayerlist_outlined_topic_create(void);
 
 #ifdef __cplusplus
 }

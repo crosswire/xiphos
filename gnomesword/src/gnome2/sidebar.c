@@ -812,6 +812,13 @@ on_journal_activate(GtkMenuItem *menuitem,
 	main_prayerlist_journal_create();
 }
 
+void
+on_outlined_topic_activate(GtkMenuItem *menuitem,
+			   gpointer    user_data)
+{
+	main_prayerlist_outlined_topic_create();
+}
+
 static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
 {
   {
@@ -839,6 +846,13 @@ static GnomeUIInfo new_prayerlist_menu_uiinfo[] =
     GNOME_APP_UI_ITEM, N_("Daily Journal"),
     N_("Create a new prayer list"),
     (gpointer) on_journal_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Outlined Topic"),
+    N_("Create a new prayer list"),
+    (gpointer) on_outlined_topic_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
     0, (GdkModifierType) 0, NULL
   },
