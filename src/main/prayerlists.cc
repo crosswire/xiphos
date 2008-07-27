@@ -411,7 +411,7 @@ main_prayerlist_monthly_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br>", pl_months[month]);
+		snprintf(monthstring, 31, "<b>%s</b><br>", _(pl_months[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -462,7 +462,7 @@ main_prayerlist_journal_create(void)
 	{
 		char monthnum[4], monthstring[32];
 		snprintf(monthnum, 3, "%02d", month+1);
-		snprintf(monthstring, 31, "<b>%s</b><br>", pl_months[month]);
+		snprintf(monthstring, 31, "<b>%s</b><br>", _(pl_months[month]));
 
 		if (month == 0)
 			appendChild(treeKey, monthnum);
@@ -473,7 +473,7 @@ main_prayerlist_journal_create(void)
 		for (int day = 0; day < pl_month_days[month]; ++day) {
 			char daynum[4], monthday[32];
 			snprintf(daynum, 3, "%02d", day+1);
-			snprintf(monthday, 31, "<b>%s %d</b><br>", pl_months[month], day+1);
+			snprintf(monthday, 31, "<b>%s %d</b><br>", _(pl_months[month]), day+1);
 
 			if (day == 0)
 				appendChild(treeKey, daynum);
