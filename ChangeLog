@@ -1,3 +1,9 @@
+2008-07-27  karl <charcoal@users.sf.net>
+
+	* add 7700+ languages from a SIL page referencing ISO standard.
+	* re-work main_init_language_map() to use an external file in
+	  ui/languages, and absorb it through mmap().
+
 2008-07-25  dom <domcox@users.sourceforge.net> & karl <charcoal@users.sf.net>
 
 	* move locale-specific language name strings into sword.cc, to be

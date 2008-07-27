@@ -41,6 +41,8 @@ DD MMM 2008
 
 12. The Advanced Search dialog's Find button now also stops a search.
 
+13. Almost 8000 language names are known, for module list purposes.
+
 Bug reports addressed since 2.3.4:
 1973928  key entry not saved in .conf
 1994431  seg fault when incorrect source
