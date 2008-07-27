@@ -1,0 +1,8089 @@
+#
+# EDIT THIS FILE IN A UTF-8 BUFFER.
+#
+# this file contains the language "abbrev -> name" mapping for
+# all languages known.  the first 200 or so have been part of
+# GnomeSword's main source since forever.  more recently, 7700+
+# 3-letter entries were obtained courtesy of the following url:
+#     http://www.sil.org/iso639-3/iso-639-3_20080529.tab
+# about a dozen are commented out due to repeating entries we
+# already had.
+#
+# names subsequently moved to native utf-8 are in comments preceding.
+#
+# file format is very specific and not at all forgiving:
+# - lines beginning with # are comments, ignored.
+# - empty lines are ignored.  (empty means EMPTY.)
+# - whitespace-only lines are not permitted.
+# - real content is only and exactly ABBREV TAB NAME
+# that's all.  the parse code is mind-numbingly simple and fast.
+#
+# --initial list from Bibletime-1.3--
+# Afar
+aa	Qafár af
+# Abkhazian
+ab	Аҧсуа
+ae	Avestan
+af	Afrikaans
+# Amharic
+am	አማርኛ
+ang	English, Old (ca.450-1100)
+# Arabic
+ar	العربية
+# Assamese
+as	অসমীয়া
+# Aymara
+ay	Aymar aru
+# Azerbaijani
+az	Azərbaycan
+# Bashkir
+ba	Башҡорт
+# Belarusian
+be	Беларуская
+# Bulgarian
+bg	Български
+# Bihari
+bh	अङ्गिका
+bi	Bislama
+# Bengali
+bn	বাংলা
+# Tibetan
+bo	བོད་ཡིག
+# Breton
+br	Brezhoneg
+# Bosnian
+bs	Bosanski
+# Catalan
+ca	Català
+# Chechen
+ce	Нохчийн мотт
+# Cebuano (cf. wikipedia)
+ceb	Sinugboanon
+# Chamorro
+ch	Chamoru
+# Corsican
+co	Lingua corsa
+# (missing font: untranslated) ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+cop	Coptic
+# Czech
+cs	Česky
+# Church Slavic
+cu	Ѩзыкъ словѣньскъ
+# Chuvash
+cv	Чăвашла
+# Welsh
+cy	Cymraeg
+# Danish
+da	Dansk
+# German
+de	Deutsch
+# Dzongkha
+dz	རྫོང་ཁ
+# Greek, Modern (1453-)
+el	Ελληνικά ·(1453-)
+en	English
+en_US	American English
+enm	English, Middle (1100-1500)
+eo	Esperanto
+# Spanish
+es	Español
+# Estonian
+et	Eesti
+# Basque
+eu	Euskara
+# Farsi (Persian)
+fa	فارسی
+# Finnish
+fi	Suomi
+# Fijian
+fj	Na vosa vaka-Viti
+# Faroese
+fo	Føroyskt
+# French
+fr	Français
+# Frisian
+fy	Frysk
+# Irish
+ga	Gaeilge
+# Gaelic (Scots)
+gd	Gàidhlig
+# Gallegan
+gl	galego
+# Guarani // (wrong?)
+	// languageMap[SWBuf(gn	avañe'ẽ
+# Gujarati
+gn	ગુજરાતી
+# (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
+got	Gothic
+# Manx
+gv	Gaelg
+# Greek, Ancient (to 1453)
+grc	Κοινὴ Ἑλληνική
+# Hebrew
+he	עברית
+# Hawaiian
+haw	Hawai`i
+# Hindi
+hi	हिन्दी
+# Hiri Motu
+ho	Hiri Motu
+# Croatian
+hr	Hrvatski
+# French, Haitian Creole
+ht	Krèyol ayisyen
+# Hungarian
+hu	Magyar
+# Armenian
+hy	Հայերեն
+# Herero
+hz	Otjiherero
+ia	Interlingua
+ie	Interlingue
+# Indonesian
+id	Bahasa Indonesia
+# Inupiaq
+ik	Iñupiak
+# Icelandic
+is	Íslenska
+# Italian
+it	Italiano
+# Inuktitut
+iu	ᐃᓄᒃᑎᑐᑦ
+# Japanese
+ja	日本語
+# Georgian
+ka	ქართული
+# Kekchi
+kek	Q'eqchi'
+# Kikuyu
+ki	Gĩkũyũ
+# Kuanyama
+kj	Oshikwanyama
+# Kazakh
+kk	Қазақша
+kl	Kalaallisut
+# Khmer
+km	ភាសាខ្មែរ
+# Kannada
+kn	ಕನ್ನಡ
+# Korean
+ko	한국어
+# Kashmiri
+ks	कश्मीरी - (كشميري)
+# Kurdish
+ku	Kurdî / كوردي
+# Komi
+kv	Коми
+# Cornish
+kw	Kernewek
+# Kirghiz
+ky	Հայերեն
+# Latin
+la	Latina
+# Letzeburgesch
+lb	Lëtzebuergesch
+# Lingala
+ln	Lingála
+# Lao
+lo	ລາວ
+# Lithuanian
+lt	Lietuvių
+# Latvian
+lv	Latviešu
+# Malagasy
+mg	Malagasy
+# Marshall
+mh	Kajin M̧ajeļ
+# Maori
+mi	Māori
+# Macedonian
+mk	Македонски
+# Malayalam
+ml	മലയാളം
+# Mongolian
+mn	Монгол
+# Moldavian
+mo	лимба молдовеняскэ
+# Marathi
+mr	मराठी
+# Malay
+ms	Bahasa Melayu
+# Maltese
+mt	Malti
+# (missing font: untranslated) မြန်မာစာ
+my	Burmese
+# Nauru
+na	Ekakairũ Naoero
+# correct: Norwegian Bokmål
+#nb	Bokmål
+# a hack while g_utf8_validate() dislikes 'å': Norwegian Bokmaal
+nb	Bokmaal
+# Ndebele, North
+nd	Sindebele
+# Low German; Low Saxon
+nds	Plattdüütsch
+# Nepali
+ne	नेपाली
+# Ndonga
+ng	Oshiwambo
+# Dutch
+nl	Nederlands
+# Norwegian Nynorsk
+nn	Nynorsk
+# correct: Norwegian
+#no	Norsk (bokmål)
+# a hack while g_utf8_validate() dislikes 'å': Norwegian
+no	Norsk (bokmaal)
+# Ndebele, South
+nr	Nrebele
+# Navajo
+nv	Diné bizaad
+# Chichewa; Nyanja
+ny	Chicheŵa
+# Occitan (post 1500); Proven
+oc	Occitan
+# Oromo
+om	Oromoo
+# Oriya
+or	ଓଡ଼ିଆ
+# Ossetian; Ossetic
+os	Иронау
+# Panjabi
+pa	ਪੰਜਾਬੀ پنجابی
+# Papiamento
+pap	Papiamentu
+# Pali
+pi	Pāḷi
+# Polish
+pl	Polski
+# Potawatomi (cf. wikipedia)
+pot	Neshnabémwen
+ppk	Uma
+# Pushto
+ps	پښتو
+# Portuguese
+pt	Português
+# Quechua
+qu	Quechua
+# Raeto-Romance
+rm	rumantsch
+# Rundi
+rn	Kirundi
+# Romanian
+ro	Română
+# Russian
+ru	Русский
+rw	Kinyarwanda
+# Sanskrit
+sa	संस्कृत
+# Sardinian
+sc	Sardu
+sco	Scots
+# Sindhi
+sd	سنڌي
+# Northern Sami
+se	Sámegiella
+# Sango
+sg	Sängö
+# Sinhalese
+si	සිංහල
+# Slovak
+sk	Slovenčina
+# Slovenian
+sl	Slovenščina
+# Samoan
+sm	Gagana Samoa
+# Shona
+sn	chiShona
+# Somali
+so	Soomaaliga
+# Albanian
+sq	Shqip
+# Serbian
+sr	srpski jezik
+# Swati
+ss	siSwati
+# Sotho, Southern
+st	Sesotho
+# Sundanese
+su	Basa Sunda
+# Swedish
+sv	Svenska
+# Swahili
+sw	Kiswahili
+# Syriac
+syr	ܣܘܪܝܝܐ
+# Tamil
+ta	தமிழ்
+# Telugu
+te	తెలుగు
+# Tajik
+tg	تاجیکی
+# Thai
+th	ไทย
+# Turkmen
+tk	Türkmen
+tl	Tagalog
+# Klingon
+tlh	tlhIngan Hol
+# Tswana
+tn	Setswana
+# Turkish
+tr	Türkçe
+# Tsonga
+ts	Xitsonga
+# Tatar
+tt	Татарча
+tw	Twi
+# Tahitian
+ty	Reo Mā`ohi
+# Uighur
+ug	ئۇيغۇرچە
+# Ukrainian
+uk	Українська
+# Urdu
+ur	اُردو
+# Uzbek
+uz	O'zbek
+# Vietnamese
+vi	Tiếng Việt
+# Volapk
+vo	Volapük
+# Wolof
+wo	Wolof
+# Xhosa -- causes gettext problems
+xh	isiXhosa
+# Bavarian
+x-E-BAR	Boarisch
+x-E-GSW	Alemannisch
+# Itz
+x-E-ITZ	Itza'
+x-E-JIV	Shuar
+# Lombard
+x-E-LMO	Lumbaart
+# Macedonian
+x-E-MKJ	Македонски
+# Tok Pisin
+x-E-PDG	Tok Pisin
+# Romani, Vlax
+x-E-RMY	Romani,·Vlax
+# Sango
+x-E-SAJ	Sängö
+# Sranan
+x-E-SRN	nengre
+# Yiddish
+yi	ייִדיש
+# Zhuang
+za	Saw cuengh
+# Chinese
+zh	中文
+# Zulu
+zu	isiZulu
+#
+# begin monster SIL list.
+#
+aaa	Ghotuo
+aab	Alumu-Tesu
+aac	Ari
+aad	Amal
+aae	Arbëreshë Albanian
+aaf	Aranadan
+aag	Ambrak
+aai	Arifama-Miniafia
+aak	Ankave
+aal	Afade
+aam	Aramanik
+aan	Anambé
+aao	Algerian Saharan Arabic
+aap	Pará Arára
+aaq	Eastern Abnaki
+aar	Afar
+aas	Aasáx
+aat	Arvanitika Albanian
+aau	Abau
+aaw	Solong
+aax	Mandobo Atas
+aay	Aariya
+aaz	Amarasi
+aba	Abé
+abb	Bankon
+abc	Ambala Ayta
+abd	Camarines Norte Agta
+abe	Western Abnaki
+abf	Abai Sungai
+abg	Abaga
+abh	Tajiki Arabic
+abi	Abidji
+abj	Aka-Bea
+abk	Abkhazian
+abl	Lampung Nyo
+abm	Abanyom
+abn	Abua
+abo	Abon
+abp	Abenlen Ayta
+abq	Abaza
+abr	Abron
+abs	Ambonese Malay
+abt	Ambulas
+abu	Abure
+abv	Baharna Arabic
+abw	Pal
+abx	Inabaknon
+aby	Aneme Wake
+abz	Abui
+aca	Achagua
+acb	Áncá
+acc	Cubulco Achí
+acd	Gikyode
+ace	Achinese
+acf	Saint Lucian Creole French
+ach	Acoli
+aci	Aka-Cari
+ack	Aka-Kora
+acl	Akar-Bale
+acm	Mesopotamian Arabic
+acn	Achang
+acp	Eastern Acipa
+acq	Ta'izzi-Adeni Arabic
+acr	Rabinal Achí
+acs	Acroá
+act	Achterhoeks
+acu	Achuar-Shiwiar
+acv	Achumawi
+acw	Hijazi Arabic
+acx	Omani Arabic
+acy	Cypriot Arabic
+acz	Acheron
+ada	Adangme
+adb	Adabe
+add	Dzodinka
+ade	Adele
+adf	Dhofari Arabic
+adg	Andegerebinha
+adh	Adhola
+adi	Adi
+adj	Adioukrou
+adl	Galo Adi
+adn	Adang
+ado	Abu
+adp	Adap
+adq	Adangbe
+adr	Adonara
+ads	Adamorobe Sign Language
+adt	Adnyamathanha
+adu	Aduge
+adw	Amundava
+adx	Amdo Tibetan
+ady	Adyghe
+adz	Adzera
+aea	Areba
+aeb	Tunisian Arabic
+aec	Saidi Arabic
+aed	Argentine Sign Language
+aee	Northeast Pashayi
+aek	Haeke
+ael	Ambele
+aem	Arem
+aen	Armenian Sign Language
+aeq	Aer
+aer	Eastern Arrernte
+aes	Alsea
+aeu	Akeu
+aew	Ambakich
+aey	Amele
+aez	Aeka
+afb	Gulf Arabic
+afd	Andai
+afe	Putukwam
+afg	Afghan Sign Language
+afh	Afrihili
+afi	Akrukay
+afk	Nanubae
+afn	Defaka
+afo	Eloyi
+afp	Tapei
+afr	Afrikaans
+afs	Afro-Seminole Creole
+aft	Afitti
+afu	Awutu
+afz	Obokuitai
+aga	Aguano
+agb	Legbo
+agc	Agatu
+agd	Agarabi
+age	Angal
+agf	Arguni
+agg	Angor
+agh	Ngelima
+agi	Agariya
+agj	Argobba
+agk	Isarog Agta
+agl	Fembe
+agm	Angaataha
+agn	Agutaynen
+ago	Tainae
+agp	Paranan
+agq	Aghem
+agr	Aguaruna
+ags	Esimbi
+agt	Central Cagayan Agta
+agu	Aguacateco
+agv	Remontado Agta
+agw	Kahua
+agx	Aghul
+agy	Southern Alta
+agz	Mt. Iriga Agta
+aha	Ahanta
+ahb	Axamb
+ahg	Qimant
+ahh	Aghu
+ahi	Tiagbamrin Aizi
+ahk	Akha
+ahl	Igo
+ahm	Mobumrin Aizi
+ahn	Àhàn
+aho	Ahom
+ahp	Aproumu Aizi
+ahr	Ahirani
+ahs	Ashe
+aht	Ahtena
+aia	Arosi
+aib	Ainu (China)
+aic	Ainbai
+aid	Alngith
+aie	Amara
+aif	Agi
+aig	Antigua and Barbuda Creole English
+aih	Ai-Cham
+aii	Assyrian Neo-Aramaic
+aij	Lishanid Noshan
+aik	Ake
+ail	Aimele
+aim	Aimol
+ain	Ainu (Japan)
+aio	Aiton
+aip	Burumakok
+aiq	Aimaq
+air	Airoran
+ais	Nataoran Amis
+ait	Arikem
+aiw	Aari
+aix	Aighon
+aiy	Ali
+aja	Aja (Sudan)
+ajg	Aja (Benin)
+aji	Ajië
+ajp	South Levantine Arabic
+ajt	Judeo-Tunisian Arabic
+aju	Judeo-Moroccan Arabic
+ajw	Ajawa
+ajz	Amri Karbi
+aka	Akan
+akb	Batak Angkola
+akc	Mpur
+akd	Ukpet-Ehom
+ake	Akawaio
+akf	Akpa
+akg	Anakalangu
+akh	Angal Heneng
+aki	Aiome
+akj	Aka-Jeru
+akk	Akkadian
+akl	Aklanon
+akm	Aka-Bo
+ako	Akurio
+akp	Siwu
+akq	Ak
+akr	Araki
+aks	Akaselem
+akt	Akolet
+aku	Akum
+akv	Akhvakh
+akw	Akwa
+akx	Aka-Kede
+aky	Aka-Kol
+akz	Alabama
+ala	Alago
+alc	Qawasqar
+ald	Alladian
+ale	Aleut
+alf	Alege
+alh	Alawa
+ali	Amaimon
+alj	Alangan
+alk	Alak
+all	Allar
+alm	Amblong
+aln	Gheg Albanian
+alo	Larike-Wakasihu
+alp	Alune
+alq	Algonquin
+alr	Alutor
+als	Tosk Albanian
+alt	Southern Altai
+alu	'Are'are
+alw	Alaba-K’abeena
+alx	Amol
+aly	Alyawarr
+alz	Alur
+ama	Amanayé
+amb	Ambo
+amc	Amahuaca
+ame	Yanesha'
+amf	Hamer-Banna
+amg	Amarag
+amh	Amharic
+ami	Amis
+amj	Amdang
+amk	Ambai
+aml	War-Jaintia
+amm	Ama (Papua New Guinea)
+amn	Amanab
+amo	Amo
+amp	Alamblak
+amq	Amahai
+amr	Amarakaeri
+ams	Southern Amami-Oshima
+amt	Amto
+amu	Guerrero Amuzgo
+amv	Ambelau
+amw	Western Neo-Aramaic
+amx	Anmatyerre
+amy	Ami
+amz	Atampaya
+ana	Andaqui
+anb	Andoa
+anc	Ngas
+and	Ansus
+ane	Xârâcùù
+anf	Animere
+#ang	Old English (ca. 450-1100)	// dup
+anh	Nend
+ani	Andi
+anj	Anor
+ank	Goemai
+anl	Anu
+anm	Anal
+ann	Obolo
+ano	Andoque
+anp	Angika
+anq	Jarawa (India)
+anr	Andh
+ans	Anserma
+ant	Antakarinya
+anu	Anuak
+anv	Denya
+anw	Anaang
+anx	Andra-Hus
+any	Anyin
+anz	Anem
+aoa	Angolar
+aob	Abom
+aoc	Pemon
+aod	Andarum
+aoe	Angal Enen
+aof	Bragat
+aog	Angoram
+aoh	Arma
+aoi	Anindilyakwa
+aoj	Mufian
+aok	Arhö
+aol	Alor
+aom	Ömie
+aon	Bumbita Arapesh
+aor	Aore
+aos	Taikat
+aot	A'tong
+aox	Atorada
+aoz	Uab Meto
+apb	Sa'a
+apc	North Levantine Arabic
+apd	Sudanese Arabic
+ape	Bukiyip
+apg	Ampanang
+aph	Athpariya
+api	Apiaká
+apj	Jicarilla Apache
+apk	Kiowa Apache
+apl	Lipan Apache
+apm	Mescalero-Chiricahua Apache
+apn	Apinayé
+apo	Apalik
+app	Apma
+apq	A-Pucikwar
+apr	Arop-Lokep
+aps	Arop-Sissano
+apt	Apatani
+apu	Apurinã
+apv	Alapmunte
+apw	Western Apache
+apx	Aputai
+apy	Apalaí
+apz	Safeyoka
+aqc	Archi
+aqg	Arigidi
+aqm	Atohwaim
+aqn	Northern Alta
+aqp	Atakapa
+aqr	Arhâ
+ara	Arabic
+arb	Standard Arabic
+arc	Official Aramaic (700-300 BCE)
+ard	Arabana
+are	Western Arrarnta
+arg	Aragonese
+arh	Arhuaco
+ari	Arikara
+arj	Arapaso
+ark	Arikapú
+arl	Arabela
+arn	Mapudungun
+aro	Araona
+arp	Arapaho
+arq	Algerian Arabic
+arr	Karo (Brazil)
+ars	Najdi Arabic
+aru	Aruá
+arv	Arbore
+arw	Arawak
+arx	Aruá
+ary	Moroccan Arabic
+arz	Egyptian Arabic
+asa	Asu (Tanzania)
+asb	Assiniboine
+asc	Casuarina Coast Asmat
+asd	Asas
+ase	American Sign Language
+asf	Australian Sign Language
+asg	Cishingini
+ash	Abishira
+asi	Buruwai
+asj	Nsari
+ask	Ashkun
+asl	Asilulu
+asm	Assamese
+asn	Xingú Asuriní
+aso	Dano
+asp	Algerian Sign Language
+asq	Austrian Sign Language
+asr	Asuri
+ass	Ipulo
+ast	Asturian
+asu	Tocantins Asurini
+asv	Asoa
+asw	Australian Aborigines Sign Language
+asx	Muratayak
+asy	Yaosakor Asmat
+asz	As
+ata	Pele-Ata
+atb	Zaiwa
+atc	Atsahuaca
+atd	Ata Manobo
+ate	Atemble
+atg	Ivbie North-Okpela-Arhe
+ati	Attié
+atj	Atikamekw
+atk	Ati
+atl	Mt. Iraya Agta
+atm	Ata
+atn	Ashtiani
+ato	Atong
+atp	Pudtol Atta
+atq	Aralle-Tabulahan
+atr	Waimiri-Atroari
+ats	Gros Ventre
+att	Pamplona Atta
+atu	Reel
+atv	Northern Altai
+atw	Atsugewi
+atx	Arutani
+aty	Aneityum
+atz	Arta
+aua	Asumboa
+aub	Alugu
+auc	Waorani
+aud	Anuta
+aue	=/Kx'au//'ein
+aug	Aguna
+auh	Aushi
+aui	Anuki
+auj	Awjilah
+auk	Heyo
+aul	Aulua
+aum	Asu (Nigeria)
+aun	Molmo One
+auo	Auyokawa
+aup	Makayam
+auq	Anus
+aur	Aruek
+aut	Austral
+auu	Auye
+auw	Awyi
+aux	Aurá
+auy	Awiyaana
+auz	Uzbeki Arabic
+ava	Avaric
+avb	Avau
+avd	Alviri-Vidari
+ave	Avestan
+avi	Avikam
+avk	Kotava
+avl	Eastern Egyptian Bedawi Arabic
+avn	Avatime
+avo	Agavotaguerra
+avs	Aushiri
+avt	Au
+avu	Avokaya
+avv	Avá-Canoeiro
+awa	Awadhi
+awb	Awa
+awc	Western Acipa
+awe	Awetí
+awh	Awbono
+awi	Aekyom
+awk	Awabakal
+awm	Arawum
+awn	Awngi
+awo	Awak
+awr	Awera
+aws	South Awyu
+awt	Araweté
+awu	Central Awyu
+awv	Jair Awyu
+aww	Awun
+awx	Awara
+awy	Edera Awyu
+axb	Abipon
+axg	Mato Grosso Arára
+axk	Yaka (Central African Republic)
+axm	Middle Armenian
+axx	Xaragure
+aya	Awar
+ayb	Ayizo Gbe
+ayc	Southern Aymara
+ayd	Ayabadhu
+aye	Ayere
+ayg	Ginyanga
+ayh	Hadrami Arabic
+ayi	Leyigha
+ayk	Akuku
+ayl	Libyan Arabic
+aym	Aymara
+ayn	Sanaani Arabic
+ayo	Ayoreo
+ayp	North Mesopotamian Arabic
+ayq	Ayi (Papua New Guinea)
+ayr	Central Aymara
+ays	Sorsogon Ayta
+ayt	Bataan Ayta
+ayu	Ayu
+ayx	Ayi (China)
+ayy	Tayabas Ayta
+ayz	Mai Brat
+aza	Azha
+azb	South Azerbaijani
+aze	Azerbaijani
+azg	San Pedro Amuzgos Amuzgo
+azj	North Azerbaijani
+azm	Ipalapa Amuzgo
+azo	Awing
+azt	Faire Atta
+azz	Highland Puebla Nahuatl
+baa	Babatana
+bab	Bainouk-Gunyuño
+bac	Badui
+bae	Baré
+baf	Nubaca
+bag	Tuki
+bah	Bahamas Creole English
+baj	Barakai
+bak	Bashkir
+bal	Baluchi
+bam	Bambara
+ban	Balinese
+bao	Waimaha
+bap	Bantawa
+bar	Bavarian
+bas	Basa (Cameroon)
+bau	Bada (Nigeria)
+bav	Vengo
+baw	Bambili-Bambui
+bax	Bamun
+bay	Batuley
+baz	Tunen
+bba	Baatonum
+bbb	Barai
+bbc	Batak Toba
+bbd	Bau
+bbe	Bangba
+bbf	Baibai
+bbg	Barama
+bbh	Bugan
+bbi	Barombi
+bbj	Ghomálá'
+bbk	Babanki
+bbl	Bats
+bbm	Babango
+bbn	Uneapa
+bbo	Northern Bobo Madaré
+bbp	West Central Banda
+bbq	Bamali
+bbr	Girawa
+bbs	Bakpinka
+bbt	Mburku
+bbu	Kulung (Nigeria)
+bbv	Karnai
+bbw	Baba
+bbx	Bubia
+bby	Befang
+bbz	Babalia Creole Arabic
+bca	Central Bai
+bcb	Bainouk-Samik
+bcc	Southern Balochi
+bcd	North Babar
+bce	Bamenyam
+bcf	Bamu
+bcg	Baga Binari
+bch	Bariai
+bci	Baoulé
+bcj	Bardi
+bck	Bunaba
+bcl	Central Bicolano
+bcm	Bannoni
+bcn	Bali (Nigeria)
+bco	Kaluli
+bcp	Bali (Democratic Republic of Congo)
+bcq	Bench
+bcr	Babine
+bcs	Kohumono
+bct	Bendi
+bcu	Awad Bing
+bcv	Shoo-Minda-Nye
+bcw	Bana
+bcy	Bacama
+bcz	Bainouk-Gunyaamolo
+bda	Bayot
+bdb	Basap
+bdc	Emberá-Baudó
+bdd	Bunama
+bde	Bade
+bdg	Bonggi
+bdh	Baka (Sudan)
+bdi	Burun
+bdj	Bai
+bdk	Budukh
+bdl	Indonesian Bajau
+bdm	Buduma
+bdn	Baldemu
+bdo	Morom
+bdp	Bende
+bdq	Bahnar
+bdr	West Coast Bajau
+bds	Burunge
+bdt	Bokoto
+bdu	Oroko
+bdv	Bodo Parja
+bdw	Baham
+bdx	Budong-Budong
+bdy	Bandjalang
+bdz	Badeshi
+bea	Beaver
+beb	Bebele
+bec	Iceve-Maci
+bed	Bedoanas
+bee	Byangsi
+bef	Benabena
+beg	Belait
+beh	Biali
+bei	Bekati'
+bej	Beja
+bek	Bebeli
+bel	Belarusian
+bem	Bemba (Zambia)
+ben	Bengali
+beo	Beami
+bep	Besoa
+beq	Beembe
+bes	Besme
+bet	Guiberoua Béte
+beu	Blagar
+bev	Daloa Bété
+bew	Betawi
+bex	Jur Modo
+bey	Beli (Papua New Guinea)
+bez	Bena (Tanzania)
+bfa	Bari
+bfb	Pauri Bareli
+bfc	Northern Bai
+bfd	Bafut
+bfe	Betaf
+bff	Bofi
+bfg	Busang Kayan
+bfh	Blafe
+bfi	British Sign Language
+bfj	Bafanji
+bfk	Ban Khor Sign Language
+bfl	Banda-Ndélé
+bfm	Mmen
+bfn	Bunak
+bfo	Malba Birifor
+bfp	Beba
+bfq	Badaga
+bfr	Bazigar
+bfs	Southern Bai
+bft	Balti
+bfu	Gahri
+bfw	Bondo
+bfy	Bagheli
+bfz	Mahasu Pahari
+bga	Gwamhi-Wuri
+bgb	Bobongko
+bgc	Haryanvi
+bgd	Rathwi Bareli
+bge	Bauria
+bgf	Bangandu
+bgg	Bugun
+bgi	Giangan
+bgj	Bangolan
+bgk	Bit
+bgl	Bo (Laos)
+bgm	Baga Mboteni
+bgn	Western Balochi
+bgo	Baga Koga
+bgp	Eastern Balochi
+bgq	Bagri
+bgr	Bawm Chin
+bgs	Tagabawa
+bgt	Bughotu
+bgu	Mbongno
+bgv	Warkay-Bipim
+bgw	Bhatri
+bgx	Balkan Gagauz Turkish
+bgy	Benggoi
+bgz	Banggai
+bha	Bharia
+bhb	Bhili
+bhc	Biga
+bhd	Bhadrawahi
+bhe	Bhaya
+bhf	Odiai
+bhg	Binandere
+bhh	Bukharic
+bhi	Bhilali
+bhj	Bahing
+bhk	Albay Bicolano
+bhl	Bimin
+bhm	Bathari
+bhn	Bohtan Neo-Aramaic
+bho	Bhojpuri
+bhp	Bima
+bhq	Tukang Besi South
+bhr	Bara Malagasy
+bhs	Buwal
+bht	Bhattiyali
+bhu	Bhunjia
+bhv	Bahau
+bhw	Biak
+bhx	Bhalay
+bhy	Bhele
+bhz	Bada (Indonesia)
+bia	Badimaya
+bib	Bissa
+bic	Bikaru
+bid	Bidiyo
+bie	Bepour
+bif	Biafada
+big	Biangai
+bij	Vaghat-Ya-Bijim-Legeri
+bik	Bikol
+bil	Bile
+bim	Bimoba
+bin	Bini
+bio	Nai
+bip	Bila
+biq	Bipi
+bir	Bisorio
+bis	Bislama
+bit	Berinomo
+biu	Biete
+biv	Southern Birifor
+biw	Kol (Cameroon)
+bix	Bijori
+biy	Birhor
+biz	Baloi
+bja	Budza
+bjb	Banggarla
+bjc	Bariji
+bjd	Bandjigali
+bje	Biao-Jiao Mien
+bjf	Barzani Jewish Neo-Aramaic
+bjg	Bidyogo
+bjh	Bahinemo
+bji	Burji
+bjj	Kanauji
+bjk	Barok
+bjl	Bulu (Papua New Guinea)
+bjm	Bajelani
+bjn	Banjar
+bjo	Mid-Southern Banda
+bjq	Southern Betsimisaraka Malagasy
+bjr	Binumarien
+bjs	Bajan
+bjt	Balanta-Ganja
+bju	Busuu
+bjv	Bedjond
+bjw	Bakwé
+bjx	Banao Itneg
+bjy	Bayali
+bjz	Baruga
+bka	Kyak
+bkb	Finallig
+bkc	Baka (Cameroon)
+bkd	Binukid
+bkf	Beeke
+bkg	Buraka
+bkh	Bakoko
+bki	Baki
+bkj	Pande
+bkk	Brokskat
+bkl	Berik
+bkm	Kom (Cameroon)
+bkn	Bukitan
+bko	Kwa'
+bkp	Boko (Democratic Republic of Congo)
+bkq	Bakairí
+bkr	Bakumpai
+bks	Masbate Sorsogon
+bkt	Boloki
+bku	Buhid
+bkv	Bekwarra
+bkw	Bekwil
+bkx	Baikeno
+bky	Bokyi
+bkz	Bungku
+bla	Siksika
+blb	Bilua
+blc	Bella Coola
+bld	Bolango
+ble	Balanta-Kentohe
+blf	Buol
+blg	Balau
+blh	Kuwaa
+bli	Bolia
+blj	Bolongan
+blk	Pa'o Karen
+bll	Biloxi
+blm	Beli (Sudan)
+bln	Southern Catanduanes Bicolano
+blo	Anii
+blp	Blablanga
+blq	Baluan-Pam
+blr	Blang
+bls	Balaesang
+blt	Tai Dam
+blv	Bolo
+blw	Balangao
+blx	Mag-Indi Ayta
+bly	Notre
+blz	Balantak
+bma	Lame
+bmb	Bembe
+bmc	Biem
+bmd	Baga Manduri
+bme	Limassa
+bmf	Bom
+bmg	Bamwe
+bmh	Kein
+bmi	Bagirmi
+bmj	Bote-Majhi
+bmk	Ghayavi
+bml	Bomboli
+bmm	Northern Betsimisaraka Malagasy
+bmn	Bina (Papua New Guinea)
+bmo	Bambalang
+bmp	Bulgebi
+bmq	Bomu
+bmr	Muinane
+bms	Bilma Kanuri
+bmt	Biao Mon
+bmu	Burum-Mindik
+bmv	Bum
+bmw	Bomwali
+bmx	Baimak
+bmy	Bemba (Democratic Republic of Congo)
+bmz	Baramu
+bna	Bonerate
+bnb	Bookan
+bnc	Central Bontoc
+bnd	Banda (Indonesia)
+bne	Bintauna
+bnf	Masiwang
+bng	Benga
+bni	Bangi
+bnj	Eastern Tawbuid
+bnk	Bierebo
+bnl	Boon
+bnm	Batanga
+bnn	Bunun
+bno	Bantoanon
+bnp	Bola
+bnq	Bantik
+bnr	Butmas-Tur
+bns	Bundeli
+bnu	Bentong
+bnv	Bonerif
+bnw	Bisis
+bnx	Bangubangu
+bny	Bintulu
+bnz	Beezen
+boa	Bora
+bob	Aweer
+bod	Tibetan
+boe	Mundabli
+bof	Bolon
+bog	Bamako Sign Language
+boh	Boma
+boi	Barbareño
+boj	Anjam
+bok	Bonjo
+bol	Bole
+bom	Berom
+bon	Bine
+boo	Tiemacèwè Bozo
+bop	Bonkiman
+boq	Bogaya
+bor	Borôro
+bos	Bosnian
+bot	Bongo
+bou	Bondei
+bov	Tuwuli
+bow	Rema
+box	Buamu
+boy	Bodo (Central African Republic)
+boz	Tiéyaxo Bozo
+bpa	Dakaka
+bpb	Barbacoas
+bpd	Banda-Banda
+bpg	Bonggo
+bph	Botlikh
+bpi	Bagupi
+bpj	Binji
+bpk	Orowe
+bpl	Broome Pearling Lugger Pidgin
+bpm	Biyom
+bpn	Dzao Min
+bpo	Anasi
+bpp	Kaure
+bpq	Banda Malay
+bpr	Koronadal Blaan
+bps	Sarangani Blaan
+bpt	Barrow Point
+bpu	Bongu
+bpv	Bian Marind
+bpw	Bo (Papua New Guinea)
+bpx	Palya Bareli
+bpy	Bishnupriya
+bpz	Bilba
+bqa	Tchumbuli
+bqb	Bagusa
+bqc	Boko (Benin)
+bqd	Bung
+bqf	Baga Kaloum
+bqg	Bago-Kusuntu
+bqh	Baima
+bqi	Bakhtiari
+bqj	Bandial
+bqk	Banda-Mbrès
+bql	Bilakura
+bqm	Wumboko
+bqn	Bulgarian Sign Language
+bqo	Balo
+bqp	Busa
+bqq	Biritai
+bqr	Burusu
+bqs	Bosngun
+bqt	Bamukumbit
+bqu	Boguru
+bqv	Begbere-Ejar
+bqw	Buru (Nigeria)
+bqx	Baangi
+bqy	Bengkala Sign Language
+bqz	Bakaka
+bra	Braj
+brb	Lave
+brc	Berbice Creole Dutch
+brd	Baraamu
+bre	Breton
+brf	Bera
+brg	Baure
+brh	Brahui
+bri	Mokpwe
+brj	Bieria
+brk	Birked
+brl	Birwa
+brm	Barambu
+brn	Boruca
+bro	Brokkat
+brp	Barapasi
+brq	Breri
+brr	Birao
+brs	Baras
+brt	Bitare
+bru	Eastern Bru
+brv	Western Bru
+brw	Bellari
+brx	Bodo (India)
+bry	Burui
+brz	Bilbil
+bsa	Abinomn
+bsb	Brunei Bisaya
+bsc	Bassari
+bse	Wushi
+bsf	Bauchi
+bsg	Bashkardi
+bsh	Kati
+bsi	Bassossi
+bsj	Bangwinji
+bsk	Burushaski
+bsl	Basa-Gumna
+bsm	Busami
+bsn	Barasana-Eduria
+bso	Buso
+bsp	Baga Sitemu
+bsq	Bassa
+bsr	Bassa-Kontagora
+bss	Akoose
+bst	Basketo
+bsu	Bahonsuai
+bsv	Baga Sobané
+bsw	Baiso
+bsx	Yangkam
+bsy	Sabah Bisaya
+bta	Bata
+btb	Beti (Cameroon)
+btc	Bati (Cameroon)
+btd	Batak Dairi
+bte	Gamo-Ningi
+btf	Birgit
+btg	Gagnoa Bété
+bth	Biatah Bidayuh
+bti	Burate
+btj	Bacanese Malay
+btl	Bhatola
+btm	Batak Mandailing
+btn	Ratagnon
+bto	Iriga Bicolano
+btp	Budibud
+btq	Batek
+btr	Baetora
+bts	Batak Simalungun
+btt	Bete-Bendi
+btu	Batu
+btv	Bateri
+btw	Butuanon
+btx	Batak Karo
+bty	Bobot
+btz	Batak Alas-Kluet
+bua	Buriat
+bub	Bua
+buc	Bushi
+bud	Ntcham
+bue	Beothuk
+buf	Bushoong
+bug	Buginese
+buh	Younuo Bunu
+bui	Bongili
+buj	Basa-Gurmana
+buk	Bugawac
+bul	Bulgarian
+bum	Bulu (Cameroon)
+bun	Sherbro
+buo	Terei
+bup	Busoa
+buq	Brem
+bus	Bokobaru
+but	Bungain
+buu	Budu
+buv	Bun
+buw	Bubi
+bux	Boghom
+buy	Bullom So
+buz	Bukwen
+bva	Barein
+bvb	Bube
+bvc	Baelelea
+bvd	Baeggu
+bve	Berau Malay
+bvf	Boor
+bvg	Bonkeng
+bvh	Bure
+bvi	Belanda Viri
+bvj	Baan
+bvk	Bukat
+bvl	Bolivian Sign Language
+bvm	Bamunka
+bvn	Buna
+bvo	Bolgo
+bvq	Birri
+bvr	Burarra
+bvt	Bati (Indonesia)
+bvu	Bukit Malay
+bvv	Baniva
+bvw	Boga
+bvx	Dibole
+bvz	Bauzi
+bwa	Bwatoo
+bwb	Namosi-Naitasiri-Serua
+bwc	Bwile
+bwd	Bwaidoka
+bwe	Bwe Karen
+bwf	Boselewa
+bwg	Barwe
+bwh	Bishuo
+bwi	Baniwa
+bwj	Láá Láá Bwamu
+bwk	Bauwaki
+bwl	Bwela
+bwm	Biwat
+bwn	Wunai Bunu
+bwo	Boro
+bwp	Mandobo Bawah
+bwq	Southern Bobo Madaré
+bwr	Bura-Pabir
+bws	Bomboma
+bwt	Bafaw-Balong
+bwu	Buli (Ghana)
+bww	Bwa
+bwx	Bu-Nao Bunu
+bwy	Cwi Bwamu
+bwz	Bwisi
+bxa	Bauro
+bxb	Belanda Bor
+bxc	Molengue
+bxd	Pela
+bxe	Birale
+bxf	Bilur
+bxg	Bangala
+bxh	Buhutu
+bxi	Pirlatapa
+bxj	Bayungu
+bxk	Bukusu
+bxl	Jalkunan
+bxm	Mongolia Buriat
+bxn	Burduna
+bxo	Barikanchi
+bxp	Bebil
+bxq	Beele
+bxr	Russia Buriat
+bxs	Busam
+bxu	China Buriat
+bxv	Berakou
+bxw	Bankagooma
+bxx	Borna
+bxz	Binahari
+bya	Batak
+byb	Bikya
+byc	Ubaghara
+byd	Benyadu'
+bye	Pouye
+byf	Bete
+byg	Baygo
+byh	Bujhyal
+byi	Buyu
+byj	Bina (Nigeria)
+byk	Biao
+byl	Bayono
+bym	Bidyara
+byn	Bilin
+byo	Biyo
+byp	Bumaji
+byq	Basay
+byr	Baruya
+bys	Burak
+byt	Berti
+byv	Medumba
+byw	Belhariya
+byx	Qaqet
+byy	Buya
+byz	Banaro
+bza	Bandi
+bzb	Andio
+bzd	Bribri
+bze	Jenaama Bozo
+bzf	Boikin
+bzg	Babuza
+bzh	Mapos Buang
+bzi	Bisu
+bzj	Belize Kriol English
+bzk	Nicaragua Creole English
+bzl	Boano (Sulawesi)
+bzm	Bolondo
+bzn	Boano (Maluku)
+bzo	Bozaba
+bzp	Kemberano
+bzq	Buli (Indonesia)
+bzr	Biri
+bzs	Brazilian Sign Language
+bzt	Brithenig
+bzu	Burmeso
+bzv	Bebe
+bzw	Basa (Nigeria)
+bzx	Hainyaxo Bozo
+bzy	Obanliku
+bzz	Evant
+caa	Chortí
+cab	Garifuna
+cac	San Sebastián Coatán Chuj
+cad	Caddo
+cae	Lehar
+caf	Southern Carrier
+cag	Nivaclé
+cah	Cahuarano
+caj	Chané
+cak	Central Cakchiquel
+cal	Carolinian
+cam	Cemuhî
+can	Chambri
+cao	Chácobo
+cap	Chipaya
+caq	Car Nicobarese
+car	Galibi Carib
+cas	Tsimané
+cat	Catalan
+cav	Cavineña
+caw	Callawalla
+cax	Chiquitano
+cay	Cayuga
+caz	Canichana
+cbb	Cabiyarí
+cbc	Carapana
+cbd	Carijona
+cbe	Chipiajes
+cbg	Chimila
+cbh	Cagua
+cbi	Chachi
+cbj	Ede Cabe
+cbk	Chavacano
+cbl	Bualkhaw Chin
+cbm	Yepocapa Southwestern Cakchiquel
+cbn	Nyahkur
+cbo	Izora
+cbr	Cashibo-Cacataibo
+cbs	Cashinahua
+cbt	Chayahuita
+cbu	Candoshi-Shapra
+cbv	Cacua
+cby	Carabayo
+cca	Cauca
+ccc	Chamicuro
+ccd	Cafundo Creole
+cce	Chopi
+ccg	Samba Daka
+cch	Atsam
+ccj	Kasanga
+ccl	Cutchi-Swahili
+ccm	Malaccan Creole Malay
+cco	Comaltepec Chinantec
+ccp	Chakma
+ccq	Chaungtha
+ccr	Cacaopera
+cda	Choni
+cde	Chenchu
+cdf	Chiru
+cdg	Chamari
+cdh	Chambeali
+cdi	Chodri
+cdj	Churahi
+cdm	Chepang
+cdn	Chaudangsi
+cdo	Min Dong Chinese
+cdr	Cinda-Regi-Tiyal
+cds	Chadian Sign Language
+cdy	Chadong
+cdz	Koda
+cea	Lower Chehalis
+#ceb	Cebuano				// dup
+ceg	Chamacoco
+cen	Cen
+ces	Czech
+cet	Centúúm
+cfa	Dijim-Bwilim
+cfd	Cara
+cfg	Como Karim
+cfm	Falam Chin
+cga	Changriwa
+cgc	Kagayanen
+cgg	Chiga
+cgk	Chocangacakha
+cha	Chamorro
+chb	Chibcha
+chc	Catawba
+chd	Highland Oaxaca Chontal
+che	Chechen
+chf	Tabasco Chontal
+chg	Chagatai
+chh	Chinook
+chj	Ojitlán Chinantec
+chk	Chuukese
+chl	Cahuilla
+chm	Mari (Russia)
+chn	Chinook jargon
+cho	Choctaw
+chp	Chipewyan
+chq	Quiotepec Chinantec
+chr	Cherokee
+chs	Chumash
+cht	Cholón
+chu	Church Slavic
+chv	Chuvash
+chw	Chuwabu
+chx	Chantyal
+chy	Cheyenne
+chz	Ozumacín Chinantec
+cia	Cia-Cia
+cib	Ci Gbe
+cic	Chickasaw
+cid	Chimariko
+cie	Cineni
+cih	Chinali
+cik	Chitkuli Kinnauri
+cim	Cimbrian
+cin	Cinta Larga
+cip	Chiapanec
+cir	Tiri
+ciw	Chippewa
+ciy	Chaima
+cja	Western Cham
+cje	Chru
+cjh	Upper Chehalis
+cji	Chamalal
+cjk	Chokwe
+cjm	Eastern Cham
+cjn	Chenapian
+cjo	Ashéninka Pajonal
+cjp	Cabécar
+cjr	Chorotega
+cjs	Shor
+cjv	Chuave
+cjy	Jinyu Chinese
+cka	Khumi Awa Chin
+ckb	Central Kurdish
+ckc	Northern Cakchiquel
+ckd	South Central Cakchiquel
+cke	Eastern Cakchiquel
+ckf	Southern Cakchiquel
+ckh	Chak
+cki	Santa María De Jesús Cakchiquel
+ckj	Santo Domingo Xenacoj Cakchiquel
+ckk	Acatenango Southwestern Cakchiquel
+ckl	Cibak
+cko	Anufo
+ckq	Kajakse
+ckr	Kairak
+cks	Tayo
+ckt	Chukot
+cku	Koasati
+ckv	Kavalan
+ckw	Western Cakchiquel
+ckx	Caka
+cky	Cakfem-Mushere
+ckz	Cakchiquel-Quiché Mixed Language
+cla	Ron
+clc	Chilcotin
+cld	Chaldean Neo-Aramaic
+cle	Lealao Chinantec
+clh	Chilisso
+cli	Chakali
+clk	Idu-Mishmi
+cll	Chala
+clm	Clallam
+clo	Lowland Oaxaca Chontal
+clu	Caluyanun
+clw	Chulym
+cly	Eastern Highland Chatino
+cma	Maa
+cme	Cerma
+cmg	Classical Mongolian
+cmi	Emberá-Chamí
+cmk	Chimakum
+cml	Campalagian
+cmm	Michigamea
+cmn	Mandarin Chinese
+cmo	Central Mnong
+cmr	Mro Chin
+cms	Messapic
+cmt	Camtho
+cna	Changthang
+cnb	Chinbon Chin
+cnc	Côông
+cng	Northern Qiang
+cnh	Haka Chin
+cni	Asháninka
+cnk	Khumi Chin
+cnl	Lalana Chinantec
+cnm	Ixtatán Chuj
+cno	Con
+cns	Central Asmat
+cnt	Tepetotutla Chinantec
+cnu	Chenoua
+cnw	Ngawn Chin
+cnx	Middle Cornish
+coa	Cocos Islands Malay
+cob	Chicomuceltec
+coc	Cocopa
+cod	Cocama-Cocamilla
+coe	Koreguaje
+cof	Colorado
+cog	Chong
+coh	Chonyi-Dzihana-Kauma
+coj	Cochimi
+cok	Santa Teresa Cora
+col	Columbia-Wenatchi
+com	Comanche
+con	Cofán
+coo	Comox
+#cop	Coptic				// dup
+coq	Coquille
+cor	Cornish
+cos	Corsican
+cot	Caquinte
+cou	Wamey
+cov	Cao Miao
+cow	Cowlitz
+cox	Nanti
+coy	Coyaima
+coz	Chochotec
+cpa	Palantla Chinantec
+cpb	Ucayali-Yurúa Ashéninka
+cpc	Ajyíninka Apurucayali
+cpg	Cappadocian Greek
+cpi	Chinese Pidgin English
+cpn	Cherepon
+cps	Capiznon
+cpu	Pichis Ashéninka
+cpx	Pu-Xian Chinese
+cpy	South Ucayali Ashéninka
+cqd	Chuanqiandian Cluster Miao
+cqu	Chilean Quechua
+cra	Chara
+crb	Island Carib
+crc	Lonwolwol
+crd	Coeur d'Alene
+cre	Cree
+crf	Caramanta
+crg	Michif
+crh	Crimean Tatar
+cri	Sãotomense
+crj	Southern East Cree
+crk	Plains Cree
+crl	Northern East Cree
+crm	Moose Cree
+crn	El Nayar Cora
+cro	Crow
+crq	Iyo'wujwa Chorote
+crr	Carolina Algonquian
+crs	Seselwa Creole French
+crt	Iyojwa'ja Chorote
+crv	Chaura
+crw	Chrau
+crx	Carrier
+cry	Cori
+crz	Cruzeño
+csa	Chiltepec Chinantec
+csb	Kashubian
+csc	Catalan Sign Language
+csd	Chiangmai Sign Language
+cse	Czech Sign Language
+csf	Cuba Sign Language
+csg	Chilean Sign Language
+csh	Asho Chin
+csi	Coast Miwok
+csk	Jola-Kasa
+csl	Chinese Sign Language
+csm	Central Sierra Miwok
+csn	Colombian Sign Language
+cso	Sochiapam Chinantec
+csq	Croatia Sign Language
+csr	Costa Rican Sign Language
+css	Southern Ohlone
+cst	Northern Ohlone
+csw	Swampy Cree
+csy	Siyin Chin
+csz	Coos
+cta	Tataltepec Chatino
+ctc	Chetco
+ctd	Tedim Chin
+cte	Tepinapa Chinantec
+ctg	Chittagonian
+cti	Tila Chol
+ctl	Tlacoatzintepec Chinantec
+ctm	Chitimacha
+ctn	Chhintange
+cto	Emberá-Catío
+ctp	Western Highland Chatino
+cts	Northern Catanduanes Bicolano
+ctt	Wayanad Chetti
+ctu	Tumbalá Chol
+ctz	Zacatepec Chatino
+cua	Cua
+cub	Cubeo
+cuc	Usila Chinantec
+cug	Cung
+cuh	Chuka
+cui	Cuiba
+cuj	Mashco Piro
+cuk	San Blas Kuna
+cul	Culina
+cum	Cumeral
+cun	Cunén Quiché
+cuo	Cumanagoto
+cup	Cupeño
+cuq	Cun
+cur	Chhulung
+cut	Teutila Cuicatec
+cuu	Tai Ya
+cuv	Cuvok
+cuw	Chukwa
+cux	Tepeuxila Cuicatec
+cvg	Chug
+cvn	Valle Nacional Chinantec
+cwa	Kabwa
+cwb	Maindo
+cwd	Woods Cree
+cwe	Kwere
+cwg	Chewong
+cwt	Kuwaataay
+cya	Nopala Chatino
+cyb	Cayubaba
+cym	Welsh
+cyo	Cuyonon
+czh	Huizhou Chinese
+czk	Knaanic
+czn	Zenzontepec Chatino
+czo	Min Zhong Chinese
+czt	Zotung Chin
+daa	Dangaléat
+dac	Dambi
+dad	Marik
+dae	Duupa
+daf	Dan
+dag	Dagbani
+dah	Gwahatike
+dai	Day
+daj	Dar Fur Daju
+dak	Dakota
+dal	Dahalo
+dan	Danish
+dao	Daai Chin
+dap	Nisi (India)
+daq	Dandami Maria
+dar	Dargwa
+das	Daho-Doo
+dau	Dar Sila Daju
+dav	Taita
+daw	Davawenyo
+dax	Dayi
+daz	Dao
+dba	Bangi Me
+dbb	Deno
+dbd	Dadiya
+dbe	Dabe
+dbf	Edopi
+dbg	Dogul Dom Dogon
+dbi	Doka
+dbj	Ida'an
+dbl	Dyirbal
+dbm	Duguri
+dbn	Duriankere
+dbo	Dulbu
+dbp	Duwai
+dbq	Daba
+dbr	Dabarre
+dbu	Bondum Dom Dogon
+dbv	Dungu
+dby	Dibiyaso
+dcc	Deccan
+dcr	Negerhollands
+ddd	Dongotono
+dde	Doondo
+ddg	Fataluku
+ddi	Diodio
+ddj	Jaru
+ddn	Dendi (Benin)
+ddo	Dido
+dds	Donno So Dogon
+ddw	Dawera-Daweloor
+dec	Dagik
+ded	Dedua
+dee	Dewoin
+def	Dezfuli
+deg	Degema
+deh	Dehwari
+dei	Demisa
+dek	Dek
+del	Delaware
+dem	Dem
+den	Slave (Athapascan)
+dep	Pidgin Delaware
+deq	Dendi (Central African Republic)
+der	Deori
+des	Desano
+deu	German
+dev	Domung
+dez	Dengese
+dga	Southern Dagaare
+dgb	Bunoge Dogon
+dgc	Casiguran Dumagat Agta
+dgd	Dagaari Dioula
+dge	Degenan
+dgg	Doga
+dgh	Dghwede
+dgi	Northern Dagara
+dgk	Dagba
+dgn	Dagoman
+dgo	Dogri (individual language)
+dgr	Dogrib
+dgs	Dogoso
+dgu	Degaru
+dgx	Doghoro
+dgz	Daga
+dha	Dhanwar (India)
+dhd	Dhundari
+dhg	Dhangu
+dhi	Dhimal
+dhl	Dhalandji
+dhm	Zemba
+dhn	Dhanki
+dho	Dhodia
+dhr	Dhargari
+dhs	Dhaiso
+dhu	Dhurga
+dhv	Dehu
+dhw	Dhanwar (Nepal)
+dia	Dia
+dib	South Central Dinka
+dic	Lakota Dida
+did	Didinga
+dif	Dieri
+dig	Digo
+dih	Kumiai
+dii	Dimbong
+dij	Dai
+dik	Southwestern Dinka
+dil	Dilling
+dim	Dime
+din	Dinka
+dio	Dibo
+dip	Northeastern Dinka
+diq	Dimli
+dir	Dirim
+dis	Dimasa
+dit	Dirari
+diu	Diriku
+div	Dhivehi
+diw	Northwestern Dinka
+dix	Dixon Reef
+diy	Diuwe
+diz	Ding
+djb	Djinba
+djc	Dar Daju Daju
+djd	Djamindjung
+dje	Zarma
+djf	Djangun
+dji	Djinang
+djj	Djeebbana
+djk	Aukan
+djl	Djiwarli
+djm	Jamsay Dogon
+djn	Djauan
+djo	Jangkang
+djr	Djambarrpuyngu
+dju	Kapriman
+djw	Djawi
+dka	Dakpakha
+dkk	Dakka
+dkl	Kolum So Dogon
+dkr	Kuijau
+dks	Southeastern Dinka
+dkx	Mazagway
+dlg	Dolgan
+dlm	Dalmatian
+dln	Darlong
+dma	Duma
+dmc	Dimir
+dme	Dugwor
+dmg	Upper Kinabatangan
+dmk	Domaaki
+dml	Dameli
+dmm	Dama
+dmo	Kemezung
+dmr	East Damar
+dms	Dampelas
+dmu	Dubu
+dmv	Dumpas
+dmx	Dema
+dmy	Demta
+dna	Upper Grand Valley Dani
+dnd	Daonda
+dne	Ndendeule
+dng	Dungan
+dni	Lower Grand Valley Dani
+dnk	Dengka
+dnn	Dzùùngoo
+dnr	Danaru
+dnt	Mid Grand Valley Dani
+dnu	Danau
+dnw	Western Dani
+dny	Dení
+doa	Dom
+dob	Dobu
+doc	Northern Dong
+doe	Doe
+dof	Domu
+doh	Dong
+doi	Dogri (macrolanguage)
+dok	Dondo
+dol	Doso
+don	Toura (Papua New Guinea)
+doo	Dongo
+dop	Lukpa
+doq	Dominican Sign Language
+dor	Dori'o
+dos	Dogosé
+dot	Dass
+dov	Dombe
+dow	Doyayo
+dox	Bussa
+doy	Dompo
+doz	Dorze
+dpp	Papar
+drb	Dair
+drd	Darmiya
+dre	Dolpo
+drg	Rungus
+drh	Darkhat
+dri	C'lela
+drl	Darling
+drn	West Damar
+dro	Daro-Matu Melanau
+drq	Dura
+drr	Dororo
+drs	Gedeo
+drt	Drents
+dru	Rukai
+drw	Darwazi
+dry	Darai
+dsb	Lower Sorbian
+dse	Dutch Sign Language
+dsh	Daasanach
+dsi	Disa
+dsl	Danish Sign Language
+dsn	Dusner
+dso	Desiya
+dsq	Tadaksahak
+dta	Daur
+dtb	Labuk-Kinabatangan Kadazan
+dti	Ana Tinga Dogon
+dtk	Tene Kan Dogon
+dtm	Tomo Kan Dogon
+dtp	Central Dusun
+dtr	Lotud
+dts	Toro So Dogon
+dtt	Toro Tegu Dogon
+dtu	Tebul Ure Dogon
+dua	Duala
+dub	Dubli
+duc	Duna
+dud	Hun-Saare
+due	Umiray Dumaget Agta
+duf	Dumbea
+dug	Duruma
+duh	Dungra Bhil
+dui	Dumun
+duj	Dhuwal
+duk	Duduela
+dul	Alabat Island Agta
+dum	Middle Dutch (ca. 1050-1350)
+dun	Dusun Deyah
+duo	Dupaninan Agta
+dup	Duano
+duq	Dusun Malang
+dur	Dii
+dus	Dumi
+duu	Drung
+duv	Duvle
+duw	Dusun Witu
+dux	Duungooma
+duy	Dicamay Agta
+duz	Duli
+dva	Duau
+dwa	Diri
+dwl	Walo Kumbe Dogon
+dws	Dutton World Speedwords
+dww	Dawawa
+dya	Dyan
+dyb	Dyaberdyaber
+dyd	Dyugun
+dyg	Villa Viciosa Agta
+dyi	Djimini Senoufo
+dym	Yanda Dom Dogon
+dyn	Dyangadi
+dyo	Jola-Fonyi
+dyu	Dyula
+dyy	Dyaabugay
+dza	Tunzu
+dzd	Daza
+dzg	Dazaga
+dzl	Dzalakha
+dzn	Dzando
+dzo	Dzongkha
+ebg	Ebughu
+ebo	Teke-Ebo
+ebr	Ebrié
+ebu	Embu
+ecr	Eteocretan
+ecs	Ecuadorian Sign Language
+ecy	Eteocypriot
+eee	E
+efa	Efai
+efe	Efe
+efi	Efik
+ega	Ega
+ego	Eggon
+egy	Egyptian (Ancient)
+ehu	Ehueun
+eip	Eipomek
+eit	Eitiep
+eiv	Askopan
+eja	Ejamat
+eka	Ekajuk
+eke	Ekit
+ekg	Ekari
+eki	Eki
+ekm	Elip
+eko	Koti
+ekp	Ekpeye
+ekr	Yace
+eky	Eastern Kayah
+ele	Elepi
+elh	El Hugeirat
+eli	Nding
+elk	Elkei
+ell	Modern Greek (1453-)
+elm	Eleme
+elo	El Molo
+elp	Elpaputih
+elu	Elu
+elx	Elamite
+ema	Emai-Iuleha-Ora
+emb	Embaloh
+eme	Emerillon
+emg	Eastern Meohang
+emi	Mussau-Emira
+emk	Eastern Maninkakan
+eml	Emiliano-Romagnolo
+emm	Mamulique
+emn	Eman
+emo	Emok
+emp	Northern Emberá
+ems	Pacific Gulf Yupik
+emu	Eastern Muria
+emw	Emplawas
+emy	Epigraphic Mayan
+ena	Apali
+enb	Markweeta
+enc	En
+end	Ende
+enf	Forest Enets
+eng	English
+enh	Tundra Enets
+#enm	Middle English (1100-1500)		// dup
+enn	Engenni
+eno	Enggano
+enq	Enga
+enr	Emumu
+enu	Enu
+env	Enwan (Edu State)
+enw	Enwan (Akwa Ibom State)
+eot	Beti (Côte d'Ivoire)
+epi	Epie
+epo	Esperanto
+era	Eravallan
+erg	Sie
+erh	Eruwa
+eri	Ogea
+erk	South Efate
+ero	Horpa
+err	Erre
+ers	Ersu
+ert	Eritai
+erw	Erokwanas
+ese	Ese Ejja
+esh	Eshtehardi
+esi	North Alaskan Inupiatun
+esk	Northwest Alaska Inupiatun
+esl	Egypt Sign Language
+esm	Esuma
+esn	Salvadoran Sign Language
+eso	Estonian Sign Language
+esq	Esselen
+ess	Central Siberian Yupik
+est	Estonian
+esu	Central Yupik
+etb	Etebi
+etc	Etchemin
+eth	Ethiopian Sign Language
+etn	Eton (Vanuatu)
+eto	Eton (Cameroon)
+etr	Edolo
+ets	Yekhee
+ett	Etruscan
+etu	Ejagham
+etx	Eten
+etz	Semimi
+eur	Europanto
+eus	Basque
+eve	Even
+evh	Uvbie
+evn	Evenki
+ewe	Ewe
+ewo	Ewondo
+ext	Extremaduran
+eya	Eyak
+eyo	Keiyo
+eze	Uzekwe
+faa	Fasu
+fab	Fa D'ambu
+fad	Wagi
+faf	Fagani
+fag	Finongan
+fah	Baissa Fali
+fai	Faiwol
+faj	Faita
+fak	Fang (Cameroon)
+fal	South Fali
+fam	Fam
+fan	Fang (Equatorial Guinea)
+fao	Faroese
+fap	Palor
+far	Fataleka
+fas	Persian
+fat	Fanti
+fau	Fayu
+fax	Fala
+fay	Southwestern Fars
+faz	Northwestern Fars
+fcs	Quebec Sign Language
+fer	Feroge
+ffi	Foia Foia
+ffm	Maasina Fulfulde
+fgr	Fongoro
+fia	Nobiin
+fie	Fyer
+fij	Fijian
+fil	Filipino
+fin	Finnish
+fip	Fipa
+fir	Firan
+fit	Tornedalen Finnish
+fiw	Fiwaga
+fkv	Kven Finnish
+fla	Kalispel-Pend d'Oreille
+flh	Foau
+fli	Fali
+fll	North Fali
+fln	Flinders Island
+flr	Fuliiru
+fly	Tsotsitaal
+fmp	Fe'fe'
+fmu	Far Western Muria
+fng	Fanagalo
+fni	Fania
+fod	Foodo
+foi	Foi
+fom	Foma
+fon	Fon
+for	Fore
+fos	Siraya
+fpe	Fernando Po Creole English
+fqs	Fas
+fra	French
+frc	Cajun French
+frd	Fordata
+frk	Frankish
+frm	Middle French (ca. 1400-1600)
+fro	Old French (842-ca. 1400)
+frp	Franco-Provençal
+frq	Forak
+frr	Northern Frisian
+frs	Eastern Frisian
+frt	Fortsenal
+fry	Western Frisian
+fse	Finnish Sign Language
+fsl	French Sign Language
+fss	Finnish-Swedish Sign Language
+fub	Adamawa Fulfulde
+fuc	Pulaar
+fud	East Futuna
+fue	Borgu Fulfulde
+fuf	Pular
+fuh	Western Niger Fulfulde
+fui	Bagirmi Fulfulde
+fuj	Ko
+ful	Fulah
+fum	Fum
+fun	Fulniô
+fuq	Central-Eastern Niger Fulfulde
+fur	Friulian
+fut	Futuna-Aniwa
+fuu	Furu
+fuv	Nigerian Fulfulde
+fuy	Fuyug
+fvr	Fur
+fwa	Fwâi
+fwe	Fwe
+gaa	Ga
+gab	Gabri
+gad	Gaddang
+gae	Guarequena
+gaf	Gende
+gag	Gagauz
+gah	Alekano
+gai	Borei
+gaj	Gadsup
+gak	Gamkonora
+gal	Galoli
+gam	Kandawo
+gan	Gan Chinese
+gao	Gants
+gap	Gal
+gaq	Gata'
+gar	Galeya
+gas	Adiwasi Garasia
+gat	Kenati
+gau	Mudhili Gadaba
+gav	Gabutamon
+gaw	Nobonob
+gax	Borana-Arsi-Guji Oromo
+gay	Gayo
+gaz	West Central Oromo
+gba	Gbaya (Central African Republic)
+gbb	Kaytetye
+gbc	Garawa
+gbd	Karadjeri
+gbe	Niksek
+gbf	Gaikundi
+gbg	Gbanziri
+gbh	Defi Gbe
+gbi	Galela
+gbj	Bodo Gadaba
+gbk	Gaddi
+gbl	Gamit
+gbm	Garhwali
+gbn	Mo'da
+gbo	Northern Grebo
+gbp	Gbaya-Bossangoa
+gbq	Gbaya-Bozoum
+gbr	Gbagyi
+gbs	Gbesi Gbe
+gbu	Gagadu
+gbv	Gbanu
+gbx	Eastern Xwla Gbe
+gby	Gbari
+gbz	Zoroastrian Dari
+gcc	Mali
+gcd	Ganggalida
+gce	Galice
+gcf	Guadeloupean Creole French
+gcl	Grenadian Creole English
+gcn	Gaina
+gcr	Guianese Creole French
+gct	Colonia Tovar German
+gda	Gade Lohar
+gdb	Pottangi Ollar Gadaba
+gdc	Gugu Badhun
+gdd	Gedaged
+gde	Gude
+gdf	Guduf-Gava
+gdg	Ga'dang
+gdh	Gadjerawang
+gdi	Gundi
+gdj	Gurdjar
+gdk	Gadang
+gdl	Dirasha
+gdm	Laal
+gdn	Umanakaina
+gdo	Ghodoberi
+gdq	Mehri
+gdr	Wipi
+gdu	Gudu
+gdx	Godwari
+gea	Geruma
+geb	Kire
+gec	Gboloo Grebo
+ged	Gade
+geg	Gengle
+geh	Hutterite German
+gei	Gebe
+gej	Gen
+gek	Yiwom
+gel	Kag-Fer-Jiir-Koor-Ror-Us-Zuksun
+geq	Geme
+ges	Geser-Gorom
+gew	Gera
+gex	Garre
+gey	Enya
+gez	Geez
+gfk	Patpatar
+gft	Gafat
+gga	Gao
+ggb	Gbii
+ggd	Gugadj
+gge	Guragone
+ggg	Gurgula
+ggk	Kungarakany
+ggl	Ganglau
+ggn	Eastern Gurung
+ggo	Southern Gondi
+ggr	Aghu Tharnggalu
+ggt	Gitua
+ggu	Gagu
+ggw	Gogodala
+gha	Ghadamès
+ghc	Hiberno-Scottish Gaelic
+ghe	Southern Ghale
+ghh	Northern Ghale
+ghk	Geko Karen
+ghl	Ghulfan
+ghn	Ghanongga
+gho	Ghomara
+ghr	Ghera
+ghs	Guhu-Samane
+ght	Kutang Ghale
+gia	Kitja
+gib	Gibanawa
+gic	Gail
+gid	Gidar
+gig	Goaria
+gil	Gilbertese
+gim	Gimi (Eastern Highlands)
+gin	Hinukh
+gio	Gelao
+gip	Gimi (West New Britain)
+giq	Green Gelao
+gir	Red Gelao
+gis	North Giziga
+git	Gitxsan
+giw	White Gelao
+gix	Gilima
+giy	Giyug
+giz	South Giziga
+gji	Geji
+gjk	Kachi Koli
+gjn	Gonja
+gju	Gujari
+gka	Guya
+gke	Ndai
+gkn	Gokana
+gkp	Guinea Kpelle
+gla	Scottish Gaelic
+glc	Bon Gula
+gld	Nanai
+gle	Irish
+glg	Galician
+glh	Northwest Pashayi
+gli	Guliguli
+glj	Gula Iro
+glk	Gilaki
+glo	Galambu
+glr	Glaro-Twabo
+glu	Gula (Chad)
+glv	Manx
+glw	Glavda
+gly	Gule
+gma	Gambera
+gmb	Gula'alaa
+gmd	Mághdì
+gmh	Middle High German (ca. 1050-1500)
+gml	Middle Low German
+gmm	Gbaya-Mbodomo
+gmn	Gimnime
+gmo	Gamo-Gofa-Dawro
+gmu	Gumalu
+gmx	Magoma
+gmy	Mycenaean Greek
+gna	Kaansa
+gnb	Gangte
+gnc	Guanche
+gnd	Zulgo-Gemzek
+gne	Ganang
+gng	Ngangam
+gnh	Lere
+gni	Gooniyandi
+gnk	//Gana
+gnl	Gangulu
+gnm	Ginuman
+gnn	Gumatj
+gno	Northern Gondi
+gnq	Gana
+gnr	Gureng Gureng
+gnt	Guntai
+gnu	Gnau
+gnw	Western Bolivian Guaraní
+gnz	Ganzi
+goa	Guro
+gob	Playero
+goc	Gorakor
+god	Godié
+goe	Gongduk
+gog	Gogo
+goh	Old High German (ca. 750-1050)
+goi	Gobasi
+goj	Gowlan
+gok	Gowli
+gol	Gola
+gom	Goan Konkani
+gon	Gondi
+goo	Gone Dau
+gop	Yeretuar
+goq	Gorap
+gor	Gorontalo
+gos	Gronings
+got	Gothic
+gou	Gavar
+gow	Gorowa
+gox	Gobu
+goy	Goundo
+goz	Gozarkhani
+gpa	Gupa-Abawa
+gpn	Taiap
+gqa	Ga'anda
+gqi	Guiqiong
+gqn	Guana (Brazil)
+gqr	Gor
+gra	Rajput Garasia
+grb	Grebo
+#grc	Ancient Greek (to 1453)		// dup
+grd	Guruntum-Mbaaru
+grg	Madi
+grh	Gbiri-Niragu
+gri	Ghari
+grj	Southern Grebo
+grm	Kota Marudu Talantang
+grn	Guarani
+gro	Groma
+grq	Gorovu
+grr	Taznatit
+grs	Gresi
+grt	Garo
+gru	Kistane
+grv	Central Grebo
+grw	Gweda
+grx	Guriaso
+gry	Barclayville Grebo
+grz	Guramalum
+gse	Ghanaian Sign Language
+gsg	German Sign Language
+gsl	Gusilay
+gsm	Guatemalan Sign Language
+gsn	Gusan
+gso	Southwest Gbaya
+gsp	Wasembo
+gss	Greek Sign Language
+gsw	Swiss German
+gta	Guató
+gti	Gbati-ri
+gua	Shiki
+gub	Guajajára
+guc	Wayuu
+gud	Yocoboué Dida
+gue	Gurinji
+guf	Gupapuyngu
+gug	Paraguayan Guaraní
+guh	Guahibo
+gui	Eastern Bolivian Guaraní
+guj	Gujarati
+guk	Gumuz
+gul	Sea Island Creole English
+gum	Guambiano
+gun	Mbyá Guaraní
+guo	Guayabero
+gup	Gunwinggu
+guq	Aché
+gur	Farefare
+gus	Guinean Sign Language
+gut	Maléku Jaíka
+guu	Yanomamö
+guv	Gey
+guw	Gun
+gux	Gourmanchéma
+guz	Gusii
+gva	Guana (Paraguay)
+gvc	Guanano
+gve	Duwet
+gvf	Golin
+gvj	Guajá
+gvl	Gulay
+gvm	Gurmana
+gvn	Kuku-Yalanji
+gvo	Gavião Do Jiparaná
+gvp	Pará Gavião
+gvr	Western Gurung
+gvs	Gumawana
+gvy	Guyani
+gwa	Mbato
+gwb	Gwa
+gwc	Kalami
+gwd	Gawwada
+gwe	Gweno
+gwf	Gowro
+gwg	Moo
+gwi	Gwichʼin
+gwj	/Gwi
+gwn	Gwandara
+gwr	Gwere
+gwt	Gawar-Bati
+gwu	Guwamu
+gww	Kwini
+gwx	Gua
+gxx	Wè Southern
+gya	Northwest Gbaya
+gyb	Garus
+gyd	Kayardild
+gye	Gyem
+gyf	Gungabula
+gyg	Gbayi
+gyi	Gyele
+gyl	Gayil
+gym	Ngäbere
+gyn	Guyanese Creole English
+gyr	Guarayu
+gyy	Gunya
+gza	Ganza
+gzi	Gazi
+gzn	Gane
+haa	Han
+hab	Hanoi Sign Language
+hac	Gurani
+had	Hatam
+hae	Eastern Oromo
+haf	Haiphong Sign Language
+hag	Hanga
+hah	Hahon
+hai	Haida
+haj	Hajong
+hak	Hakka Chinese
+hal	Halang
+ham	Hewa
+han	Hangaza
+hao	Hakö
+hap	Hupla
+haq	Ha
+har	Harari
+has	Haisla
+hat	Haitian
+hau	Hausa
+hav	Havu
+#haw	Hawaiian			// dup
+hax	Southern Haida
+hay	Haya
+haz	Hazaragi
+hba	Hamba
+hbb	Huba
+hbn	Heiban
+hbo	Ancient Hebrew
+hbs	Serbo-Croatian
+hbu	Habu
+hca	Andaman Creole Hindi
+hch	Huichol
+hdn	Northern Haida
+hds	Honduras Sign Language
+hdy	Hadiyya
+hea	Northern Qiandong Miao
+heb	Hebrew
+hed	Herdé
+heg	Helong
+heh	Hehe
+hei	Heiltsuk
+hem	Hemba
+her	Herero
+hgm	Hai//om
+hgw	Haigwai
+hhi	Hoia Hoia
+hhr	Kerak
+hhy	Hoyahoya
+hia	Lamang
+hib	Hibito
+hid	Hidatsa
+hif	Fijian Hindustani
+hig	Kamwe
+hih	Pamosu
+hii	Hinduri
+hij	Hijuk
+hik	Seit-Kaitetu
+hil	Hiligaynon
+hin	Hindi
+hio	Tsoa
+hir	Himarimã
+hit	Hittite
+hiw	Hiw
+hix	Hixkaryána
+hji	Haji
+hka	Kahe
+hke	Hunde
+hkk	Hunjara-Kaina Ke
+hks	Hong Kong Sign Language
+hla	Halia
+hlb	Halbi
+hld	Halang Doan
+hle	Hlersu
+hlt	Nga La
+hlu	Hieroglyphic Luwian
+hma	Southern Mashan Hmong
+hmb	Humburi Senni Songhay
+hmc	Central Huishui Hmong
+hmd	Large Flowery Miao
+hme	Eastern Huishui Hmong
+hmf	Hmong Don
+hmg	Southwestern Guiyang Hmong
+hmh	Southwestern Huishui Hmong
+hmi	Northern Huishui Hmong
+hmj	Ge
+hmk	Maek
+hml	Luopohe Hmong
+hmm	Central Mashan Hmong
+hmn	Hmong
+hmo	Hiri Motu
+hmp	Northern Mashan Hmong
+hmq	Eastern Qiandong Miao
+hmr	Hmar
+hms	Southern Qiandong Miao
+hmt	Hamtai
+hmu	Hamap
+hmv	Hmong Dô
+hmw	Western Mashan Hmong
+hmy	Southern Guiyang Hmong
+hmz	Hmong Shua
+hna	Mina (Cameroon)
+hnd	Southern Hindko
+hne	Chhattisgarhi
+hnh	//Ani
+hni	Hani
+hnj	Hmong Njua
+hnn	Hanunoo
+hno	Northern Hindko
+hns	Caribbean Hindustani
+hnu	Hung
+hoa	Hoava
+hob	Mari (Madang Province)
+hoc	Ho
+hod	Holma
+hoe	Horom
+hoh	Hobyót
+hoi	Holikachuk
+hoj	Hadothi
+hol	Holu
+hom	Homa
+hoo	Holoholo
+hop	Hopi
+hor	Horo
+hos	Ho Chi Minh City Sign Language
+hot	Hote
+hov	Hovongan
+how	Honi
+hoy	Holiya
+hoz	Hozo
+hpo	Hpon
+hps	Hawai'i Pidgin Sign Language
+hra	Hrangkhol
+hre	Hre
+hrk	Haruku
+hrm	Horned Miao
+hro	Haroi
+hrr	Horuru
+hrt	Hértevin
+hru	Hruso
+hrv	Croatian
+hrx	Hunsrik
+hrz	Harzani
+hsb	Upper Sorbian
+hsf	Southeastern Huastec
+hsh	Hungarian Sign Language
+hsl	Hausa Sign Language
+hsn	Xiang Chinese
+hss	Harsusi
+hti	Hoti
+hto	Minica Huitoto
+hts	Hadza
+htu	Hitu
+htx	Middle Hittite
+hub	Huambisa
+huc	=/Hua
+hud	Huaulu
+hue	San Francisco Del Mar Huave
+huf	Humene
+hug	Huachipaeri
+huh	Huilliche
+hui	Huli
+huj	Northern Guiyang Hmong
+huk	Hulung
+hul	Hula
+hum	Hungana
+hun	Hungarian
+huo	Hu
+hup	Hupa
+huq	Tsat
+hur	Halkomelem
+hus	Veracruz Huastec
+hut	Humla
+huu	Murui Huitoto
+huv	San Mateo Del Mar Huave
+huw	Hukumina
+hux	Nüpode Huitoto
+huy	Hulaulá
+huz	Hunzib
+hva	San Luís Potosí Huastec
+hvc	Haitian Vodoun Culture Language
+hve	San Dionisio Del Mar Huave
+hvk	Haveke
+hvn	Sabu
+hvv	Santa María Del Mar Huave
+hwa	Wané
+hwc	Hawai'i Creole English
+hwo	Hwana
+hya	Hya
+hye	Armenian
+iai	Iaai
+ian	Iatmul
+iap	Iapama
+iar	Purari
+iba	Iban
+ibb	Ibibio
+ibd	Iwaidja
+ibe	Akpes
+ibg	Ibanag
+ibi	Ibilo
+ibl	Ibaloi
+ibm	Agoi
+ibn	Ibino
+ibo	Igbo
+ibr	Ibuoro
+ibu	Ibu
+iby	Ibani
+ica	Ede Ica
+ich	Etkywan
+icl	Icelandic Sign Language
+icr	Islander Creole English
+ida	Idakho-Isukha-Tiriki
+idb	Indo-Portuguese
+idc	Idon
+idd	Ede Idaca
+ide	Idere
+idi	Idi
+ido	Ido
+idr	Indri
+ids	Idesa
+idt	Idaté
+idu	Idoma
+ifa	Amganad Ifugao
+ifb	Batad Ifugao
+ife	Ifè
+iff	Ifo
+ifk	Tuwali Ifugao
+ifm	Teke-Fuumu
+ifu	Mayoyao Ifugao
+ify	Keley-I Kallahan
+igb	Ebira
+ige	Igede
+igg	Igana
+igl	Igala
+igm	Kanggape
+ign	Ignaciano
+igo	Isebe
+igs	Interglossa
+igw	Igwe
+ihb	Iha Based Pidgin
+ihi	Ihievbe
+ihp	Iha
+iii	Sichuan Yi
+ijc	Izon
+ije	Biseni
+ijj	Ede Ije
+ijn	Kalabari
+ijs	Southeast Ijo
+ike	Eastern Canadian Inuktitut
+iki	Iko
+ikk	Ika
+ikl	Ikulu
+iko	Olulumo-Ikom
+ikp	Ikpeshi
+ikt	Western Canadian Inuktitut
+iku	Inuktitut
+ikv	Iku-Gora-Ankwa
+ikw	Ikwere
+ikx	Ik
+ikz	Ikizu
+ila	Ile Ape
+ilb	Ila
+ile	Interlingue
+ilg	Garig-Ilgar
+ili	Ili Turki
+ilk	Ilongot
+ill	Iranun
+ilo	Iloko
+ilu	Ili'uun
+ilv	Ilue
+ilw	Talur
+ima	Mala Malasar
+ime	Imeraguen
+imi	Anamgura
+iml	Miluk
+imn	Imonda
+imo	Imbongu
+imr	Imroing
+ims	Marsian
+imy	Milyan
+ina	Interlingua (International Auxiliary Language Association)
+inb	Inga
+ind	Indonesian
+ing	Degexit'an
+inh	Ingush
+inj	Jungle Inga
+inl	Indonesian Sign Language
+inm	Minaean
+inn	Isinai
+ino	Inoke-Yate
+inp	Iñapari
+ins	Indian Sign Language
+int	Intha
+inz	Ineseño
+ior	Inor
+iou	Tuma-Irumu
+iow	Iowa-Oto
+ipi	Ipili
+ipk	Inupiaq
+ipo	Ipiko
+iqu	Iquito
+ire	Iresim
+irh	Irarutu
+iri	Irigwe
+irk	Iraqw
+irn	Irántxe
+irr	Ir
+iru	Irula
+irx	Kamberau
+iry	Iraya
+isa	Isabi
+isc	Isconahua
+isd	Isnag
+ise	Italian Sign Language
+isg	Irish Sign Language
+ish	Esan
+isi	Nkem-Nkum
+isl	Icelandic
+ism	Masimasi
+isn	Isanzu
+iso	Isoko
+isr	Israeli Sign Language
+ist	Istriot
+isu	Isu (Menchum Division)
+ita	Italian
+itb	Binongan Itneg
+ite	Itene
+iti	Inlaod Itneg
+itk	Judeo-Italian
+itl	Itelmen
+itm	Itu Mbon Uzo
+ito	Itonama
+itr	Iteri
+its	Isekiri
+itt	Maeng Itneg
+itv	Itawit
+itw	Ito
+itx	Itik
+ity	Moyadan Itneg
+itz	Itzá
+ium	Iu Mien
+ivb	Ibatan
+ivv	Ivatan
+iwk	I-Wak
+iwm	Iwam
+iwo	Iwur
+iws	Sepik Iwam
+ixc	Ixcatec
+ixi	Nebaj Ixil
+ixj	Chajul Ixil
+ixl	San Juan Cotzal Ixil
+iya	Iyayu
+iyo	Mesaka
+iyx	Yaka (Congo)
+izh	Ingrian
+izi	Izi-Ezaa-Ikwo-Mgbo
+izr	Izere
+jaa	Jamamadí
+jab	Hyam
+jac	Eastern Jacalteco
+jad	Jahanka
+jae	Yabem
+jaf	Jara
+jah	Jah Hut
+jai	Western Jacalteco
+jaj	Zazao
+jak	Jakun
+jal	Yalahatan
+jam	Jamaican Creole English
+jao	Yanyuwa
+jaq	Yaqay
+jar	Jarawa (Nigeria)
+jas	New Caledonian Javanese
+jat	Jakati
+jau	Yaur
+jav	Javanese
+jax	Jambi Malay
+jay	Yan-nhangu
+jaz	Jawe
+jbe	Judeo-Berber
+jbj	Arandai
+jbn	Nafusi
+jbo	Lojban
+jbr	Jofotek-Bromnya
+jbt	Jabutí
+jbu	Jukun Takum
+jcs	Jamaican Country Sign Language
+jct	Krymchak
+jda	Jad
+jdg	Jadgali
+jdt	Judeo-Tat
+jeb	Jebero
+jee	Jerung
+jeg	Jeng
+jeh	Jeh
+jei	Yei
+jek	Jeri Kuo
+jel	Yelmek
+jen	Dza
+jer	Jere
+jet	Manem
+jeu	Jonkor Bourmataguil
+jgb	Ngbee
+jge	Judeo-Georgian
+jgo	Ngomba
+jhi	Jehai
+jhs	Jhankot Sign Language
+jia	Jina
+jib	Jibu
+jic	Tol
+jid	Bu
+jie	Jilbe
+jig	Djingili
+jih	Shangzhai
+jii	Jiiddu
+jil	Jilim
+jim	Jimi (Cameroon)
+jio	Jiamao
+jiq	Guanyinqiao
+jit	Jita
+jiu	Youle Jinuo
+jiv	Shuar
+jiy	Buyuan Jinuo
+jko	Kubo
+jku	Labir
+jle	Ngile
+jma	Dima
+jmb	Zumbun
+jmc	Machame
+jmd	Yamdena
+jmi	Jimi (Nigeria)
+jml	Jumli
+jmn	Makuri Naga
+jmr	Kamara
+jms	Mashi (Nigeria)
+jmx	Western Juxtlahuaca Mixtec
+jna	Jangshung
+jnd	Jandavra
+jng	Yangman
+jni	Janji
+jnj	Yemsa
+jnl	Rawat
+jns	Jaunsari
+job	Joba
+jod	Wojenaka
+jor	Jorá
+jos	Jordanian Sign Language
+jow	Jowulu
+jpa	Jewish Palestinian Aramaic
+jpn	Japanese
+jpr	Judeo-Persian
+jqr	Jaqaru
+jra	Jarai
+jrb	Judeo-Arabic
+jrr	Jiru
+jrt	Jorto
+jru	Japrería
+jsl	Japanese Sign Language
+jua	Júma
+jub	Wannu
+juc	Jurchen
+jud	Worodougou
+juh	Hõne
+juk	Wapan
+jul	Jirel
+jum	Jumjum
+jun	Juang
+juo	Jiba
+jup	Hupdë
+jur	Jurúna
+jus	Jumla Sign Language
+jut	Jutish
+juu	Ju
+juw	Wãpha
+juy	Juray
+jvd	Javindo
+jvn	Caribbean Javanese
+jwi	Jwira-Pepesa
+jya	Jiarong
+jye	Judeo-Yemeni Arabic
+jyy	Jaya
+kaa	Kara-Kalpak
+kab	Kabyle
+kac	Kachin
+kad	Kadara
+kae	Ketangalan
+kaf	Katso
+kag	Kajaman
+kah	Kara (Central African Republic)
+kai	Karekare
+kaj	Jju
+kak	Kayapa Kallahan
+kal	Kalaallisut
+kam	Kamba (Kenya)
+kan	Kannada
+kao	Xaasongaxango
+kap	Bezhta
+kaq	Capanahua
+kas	Kashmiri
+kat	Georgian
+kau	Kanuri
+kav	Katukína
+kaw	Kawi
+kax	Kao
+kay	Kamayurá
+kaz	Kazakh
+kba	Kalarko
+kbb	Kaxuiâna
+kbc	Kadiwéu
+kbd	Kabardian
+kbe	Kanju
+kbf	Kakauhua
+kbg	Khamba
+kbh	Camsá
+kbi	Kaptiau
+kbj	Kari
+kbk	Grass Koiari
+kbl	Kanembu
+kbm	Iwal
+kbn	Kare (Central African Republic)
+kbo	Keliko
+kbp	Kabiyé
+kbq	Kamano
+kbr	Kafa
+kbs	Kande
+kbt	Abadi
+kbu	Kabutra
+kbv	Dera (Indonesia)
+kbw	Kaiep
+kbx	Ap Ma
+kby	Manga Kanuri
+kbz	Duhwa
+kca	Khanty
+kcb	Kawacha
+kcc	Lubila
+kcd	Ngkâlmpw Kanum
+kce	Kaivi
+kcf	Ukaan
+kcg	Tyap
+kch	Vono
+kci	Kamantan
+kcj	Kobiana
+kck	Kalanga
+kcl	Kela (Papua New Guinea)
+kcm	Gula (Central African Republic)
+kcn	Nubi
+kco	Kinalakna
+kcp	Kanga
+kcq	Kamo
+kcr	Katla
+kcs	Koenoem
+kct	Kaian
+kcu	Kami (Tanzania)
+kcv	Kete
+kcw	Kabwari
+kcx	Kachama-Ganjule
+kcy	Korandje
+kcz	Konongo
+kda	Worimi
+kdc	Kutu
+kdd	Yankunytjatjara
+kde	Makonde
+kdf	Mamusi
+kdg	Seba
+kdh	Tem
+kdi	Kumam
+kdj	Karamojong
+kdk	Numee
+kdl	Tsikimba
+kdm	Kagoma
+kdn	Kunda
+kdp	Kaningdon-Nindem
+kdq	Koch
+kdr	Karaim
+kdt	Kuy
+kdu	Kadaru
+kdv	Kado
+kdw	Koneraw
+kdx	Kam
+kdy	Keder
+kdz	Kwaja
+kea	Kabuverdianu
+keb	Kélé
+kec	Keiga
+ked	Kerewe
+kee	Eastern Keres
+kef	Kpessi
+keg	Tese
+kei	Kei
+kej	Kadar
+#kek	Kekchí				// dup
+kel	Kela (Democratic Republic of Congo)
+kem	Kemak
+ken	Kenyang
+keo	Kakwa
+kep	Kaikadi
+keq	Kamar
+ker	Kera
+kes	Kugbo
+ket	Ket
+keu	Akebu
+kev	Kanikkaran
+kew	West Kewa
+kex	Kukna
+key	Kupia
+kez	Kukele
+kfa	Kodava
+kfb	Northwestern Kolami
+kfc	Konda-Dora
+kfd	Korra Koraga
+kfe	Kota (India)
+kff	Koya
+kfg	Kudiya
+kfh	Kurichiya
+kfi	Kannada Kurumba
+kfj	Kemiehua
+kfk	Kinnauri
+kfl	Kung
+kfm	Khunsari
+kfn	Kuk
+kfo	Koro (Côte d'Ivoire)
+kfp	Korwa
+kfq	Korku
+kfr	Kachchi
+kfs	Bilaspuri
+kft	Kanjari
+kfu	Katkari
+kfv	Kurmukar
+kfw	Kharam Naga
+kfx	Kullu Pahari
+kfy	Kumaoni
+kfz	Koromfé
+kga	Koyaga
+kgb	Kawe
+kgc	Kasseng
+kgd	Kataang
+kge	Komering
+kgf	Kube
+kgg	Kusunda
+kgh	Upper Tanudan Kalinga
+kgi	Selangor Sign Language
+kgj	Gamale Kham
+kgk	Kaiwá
+kgl	Kunggari
+kgm	Karipúna
+kgn	Karingani
+kgo	Krongo
+kgp	Kaingang
+kgq	Kamoro
+kgr	Abun
+kgs	Kumbainggar
+kgt	Somyev
+kgu	Kobol
+kgv	Karas
+kgw	Karon Dori
+kgx	Kamaru
+kgy	Kyerung
+kha	Khasi
+khb	Lü
+khc	Tukang Besi North
+khd	Bädi Kanum
+khe	Korowai
+khf	Khuen
+khg	Khams Tibetan
+khh	Kehu
+khj	Kuturmi
+khk	Halh Mongolian
+khl	Lusi
+khm	Central Khmer
+khn	Khandesi
+kho	Khotanese
+khp	Kapori
+khq	Koyra Chiini Songhay
+khr	Kharia
+khs	Kasua
+kht	Khamti
+khu	Nkhumbi
+khv	Khvarshi
+khw	Khowar
+khx	Kanu
+khy	Kele (Democratic Republic of Congo)
+khz	Keapara
+kia	Kim
+kib	Koalib
+kic	Kickapoo
+kid	Koshin
+kie	Kibet
+kif	Eastern Parbate Kham
+kig	Kimaama
+kih	Kilmeri
+kii	Kitsai
+kij	Kilivila
+kik	Kikuyu
+kil	Kariya
+kim	Karagas
+kin	Kinyarwanda
+kio	Kiowa
+kip	Sheshi Kham
+kiq	Kosadle
+kir	Kirghiz
+kis	Kis
+kit	Agob
+kiu	Kirmanjki
+kiv	Kimbu
+kiw	Northeast Kiwai
+kix	Khiamniungan Naga
+kiy	Kirikiri
+kiz	Kisi
+kja	Mlap
+kjb	Eastern Kanjobal
+kjc	Coastal Konjo
+kjd	Southern Kiwai
+kje	Kisar
+kjf	Khalaj
+kjg	Khmu
+kjh	Khakas
+kji	Zabana
+kjj	Khinalugh
+kjk	Highland Konjo
+kjl	Western Parbate Kham
+kjm	Kháng
+kjn	Kunjen
+kjo	Harijan Kinnauri
+kjp	Pwo Eastern Karen
+kjq	Western Keres
+kjr	Kurudu
+kjs	East Kewa
+kjt	Phrae Pwo Karen
+kju	Kashaya
+kjx	Ramopa
+kjy	Erave
+kjz	Bumthangkha
+kka	Kakanda
+kkb	Kwerisa
+kkc	Odoodee
+kkd	Kinuku
+kke	Kakabe
+kkf	Kalaktang Monpa
+kkg	Mabaka Valley Kalinga
+kkh	Khün
+kki	Kagulu
+kkj	Kako
+kkk	Kokota
+kkl	Kosarek Yale
+kkm	Kiong
+kkn	Kon Keu
+kko	Karko
+kkp	Gugubera
+kkq	Kaiku
+kkr	Kir-Balar
+kks	Giiwo
+kkt	Koi
+kku	Tumi
+kkv	Kangean
+kkw	Teke-Kukuya
+kkx	Kohin
+kky	Guguyimidjir
+kkz	Kaska
+kla	Klamath-Modoc
+klb	Kiliwa
+klc	Kolbila
+kld	Gamilaraay
+kle	Kulung (Nepal)
+klf	Kendeje
+klg	Tagakaulu Kalagan
+klh	Weliki
+kli	Kalumpang
+klj	Turkic Khalaj
+klk	Kono (Nigeria)
+kll	Kagan Kalagan
+klm	Kolom
+kln	Kalenjin
+klo	Kapya
+klp	Kamasa
+klq	Rumu
+klr	Khaling
+kls	Kalasha
+klt	Nukna
+klu	Klao
+klv	Maskelynes
+klw	Lindu
+klx	Koluwawa
+kly	Kalao
+klz	Kabola
+kma	Konni
+kmb	Kimbundu
+kmc	Southern Dong
+kmd	Madukayang Kalinga
+kme	Bakole
+kmf	Kare (Papua New Guinea)
+kmg	Kâte
+kmh	Kalam
+kmi	Kami (Nigeria)
+kmj	Kumarbhag Paharia
+kmk	Limos Kalinga
+kml	Lower Tanudan Kalinga
+kmm	Kom (India)
+kmn	Awtuw
+kmo	Kwoma
+kmp	Gimme
+kmq	Kwama
+kmr	Northern Kurdish
+kms	Kamasau
+kmt	Kemtuik
+kmu	Kanite
+kmv	Karipúna Creole French
+kmw	Komo (Democratic Republic of Congo)
+kmx	Waboda
+kmy	Koma
+kmz	Khorasani Turkish
+kna	Dera (Nigeria)
+knb	Lubuagan Kalinga
+knc	Central Kanuri
+knd	Konda
+kne	Kankanaey
+knf	Mankanya
+kng	Koongo
+kni	Kanufi
+knj	Western Kanjobal
+knk	Kuranko
+knl	Keninjal
+knm	Kanamarí
+knn	Konkani (individual language)
+kno	Kono (Sierra Leone)
+knp	Kwanja
+knq	Kintaq
+knr	Kaningra
+kns	Kensiu
+knt	Panoan Katukína
+knu	Kono (Guinea)
+knv	Tabo
+knw	Kung-Ekoka
+knx	Kendayan
+kny	Kanyok
+knz	Kalamsé
+koa	Konomala
+koc	Kpati
+kod	Kodi
+koe	Kacipo-Balesi
+kof	Kubi
+kog	Cogui
+koh	Koyo
+koi	Komi-Permyak
+koj	Sara Dunjo
+kok	Konkani (macrolanguage)
+kol	Kol (Papua New Guinea)
+kom	Komi
+kon	Kongo
+koo	Konzo
+kop	Kwato
+koq	Kota (Gabon)
+kor	Korean
+kos	Kosraean
+kot	Lagwan
+kou	Koke
+kov	Kudu-Camo
+kow	Kugama
+kox	Coxima
+koy	Koyukon
+koz	Korak
+kpa	Kutto
+kpb	Mullu Kurumba
+kpc	Curripaco
+kpd	Koba
+kpe	Kpelle
+kpf	Komba
+kpg	Kapingamarangi
+kph	Kplang
+kpi	Kofei
+kpj	Karajá
+kpk	Kpan
+kpl	Kpala
+kpm	Koho
+kpn	Kepkiriwát
+kpo	Ikposo
+kpp	Paku Karen
+kpq	Korupun-Sela
+kpr	Korafe-Yegha
+kps	Tehit
+kpt	Karata
+kpu	Kafoa
+kpv	Komi-Zyrian
+kpw	Kobon
+kpx	Mountain Koiali
+kpy	Koryak
+kpz	Kupsabiny
+kqa	Mum
+kqb	Kovai
+kqc	Doromu-Koki
+kqd	Koy Sanjaq Surat
+kqe	Kalagan
+kqf	Kakabai
+kqg	Khe
+kqh	Kisankasa
+kqi	Koitabu
+kqj	Koromira
+kqk	Kotafon Gbe
+kql	Kyenele
+kqm	Khisa
+kqn	Kaonde
+kqo	Eastern Krahn
+kqp	Kimré
+kqq	Krenak
+kqr	Kimaragang
+kqs	Northern Kissi
+kqt	Klias River Kadazan
+kqu	Seroa
+kqv	Okolod
+kqw	Kandas
+kqx	Mser
+kqy	Koorete
+kqz	Korana
+kra	Kumhali
+krb	Karkin
+krc	Karachay-Balkar
+krd	Kairui-Midiki
+kre	Panará
+krf	Koro (Vanuatu)
+krh	Kurama
+kri	Krio
+krj	Kinaray-A
+krk	Kerek
+krl	Karelian
+krm	Krim
+krn	Sapo
+krp	Korop
+krr	Kru'ng 2
+krs	Gbaya (Sudan)
+krt	Tumari Kanuri
+kru	Kurukh
+krv	Kavet
+krw	Western Krahn
+krx	Karon
+kry	Kryts
+krz	Sota Kanum
+ksa	Shuwa-Zamani
+ksb	Shambala
+ksc	Southern Kalinga
+ksd	Kuanua
+kse	Kuni
+ksf	Bafia
+ksg	Kusaghe
+ksh	Kölsch
+ksi	Krisa
+ksj	Uare
+ksk	Kansa
+ksl	Kumalu
+ksm	Kumba
+ksn	Kasiguranin
+kso	Kofa
+ksp	Kaba
+ksq	Kwaami
+ksr	Borong
+kss	Southern Kisi
+kst	Winyé
+ksu	Khamyang
+ksv	Kusu
+ksw	S'gaw Karen
+ksx	Kedang
+ksy	Kharia Thar
+ksz	Kodaku
+kta	Katua
+ktb	Kambaata
+ktc	Kholok
+ktd	Kokata
+kte	Nubri
+ktf	Kwami
+ktg	Kalkutung
+kth	Karanga
+kti	North Muyu
+ktj	Plapo Krumen
+ktk	Kaniet
+ktl	Koroshi
+ktm	Kurti
+ktn	Karitiâna
+kto	Kuot
+ktp	Kaduo
+ktq	Katabaga
+ktr	Kota Marudu Tinagas
+kts	South Muyu
+ktt	Ketum
+ktu	Kituba (Democratic Republic of Congo)
+ktv	Eastern Katu
+ktw	Kato
+ktx	Kaxararí
+kty	Kango (Bas-Uélé District)
+ktz	Ju/'hoan
+kua	Kuanyama
+kub	Kutep
+kuc	Kwinsu
+kud	'Auhelawa
+kue	Kuman
+kuf	Western Katu
+kug	Kupa
+kuh	Kushi
+kui	Kuikúro-Kalapálo
+kuj	Kuria
+kuk	Kepo'
+kul	Kulere
+kum	Kumyk
+kun	Kunama
+kuo	Kumukio
+kup	Kunimaipa
+kuq	Karipuna
+kur	Kurdish
+kus	Kusaal
+kut	Kutenai
+kuu	Upper Kuskokwim
+kuv	Kur
+kuw	Kpagua
+kux	Kukatja
+kuy	Kuuku-Ya'u
+kuz	Kunza
+kva	Bagvalal
+kvb	Kubu
+kvc	Kove
+kvd	Kui (Indonesia)
+kve	Kalabakan
+kvf	Kabalai
+kvg	Kuni-Boazi
+kvh	Komodo
+kvi	Kwang
+kvj	Psikye
+kvk	Korean Sign Language
+kvl	Brek Karen
+kvm	Kendem
+kvn	Border Kuna
+kvo	Dobel
+kvp	Kompane
+kvq	Geba Karen
+kvr	Kerinci
+kvs	Kunggara
+kvt	Lahta Karen
+kvu	Yinbaw Karen
+kvv	Kola
+kvw	Wersing
+kvx	Parkari Koli
+kvy	Yintale Karen
+kvz	Tsakwambo
+kwa	Dâw
+kwb	Kwa
+kwc	Likwala
+kwd	Kwaio
+kwe	Kwerba
+kwf	Kwara'ae
+kwg	Sara Kaba Deme
+kwh	Kowiai
+kwi	Awa-Cuaiquer
+kwj	Kwanga
+kwk	Kwakiutl
+kwl	Kofyar
+kwm	Kwambi
+kwn	Kwangali
+kwo	Kwomtari
+kwp	Kodia
+kwq	Kwak
+kwr	Kwer
+kws	Kwese
+kwt	Kwesten
+kwu	Kwakum
+kwv	Sara Kaba Náà
+kww	Kwinti
+kwx	Khirwar
+kwy	San Salvador Kongo
+kwz	Kwadi
+kxa	Kairiru
+kxb	Krobu
+kxc	Konso
+kxd	Brunei
+kxe	Kakihum
+kxf	Manumanaw Karen
+kxh	Karo (Ethiopia)
+kxi	Keningau Murut
+kxj	Kulfa
+kxk	Zayein Karen
+kxl	Nepali Kurux
+kxm	Northern Khmer
+kxn	Kanowit-Tanjong Melanau
+kxo	Kanoé
+kxp	Wadiyara Koli
+kxq	Smärky Kanum
+kxr	Koro (Papua New Guinea)
+kxs	Kangjia
+kxt	Koiwat
+kxu	Kui (India)
+kxv	Kuvi
+kxw	Konai
+kxx	Likuba
+kxy	Kayong
+kxz	Kerewo
+kya	Kwaya
+kyb	Butbut Kalinga
+kyc	Kyaka
+kyd	Karey
+kye	Krache
+kyf	Kouya
+kyg	Keyagana
+kyh	Karok
+kyi	Kiput
+kyj	Karao
+kyk	Kamayo
+kyl	Kalapuya
+kym	Kpatili
+kyn	Karolanos
+kyo	Kelon
+kyp	Kang
+kyq	Kenga
+kyr	Kuruáya
+kys	Baram Kayan
+kyt	Kayagar
+kyu	Western Kayah
+kyv	Kayort
+kyw	Kudmali
+kyx	Rapoisi
+kyy	Kambaira
+kyz	Kayabí
+kza	Western Karaboro
+kzb	Kaibobo
+kzc	Bondoukou Kulango
+kzd	Kadai
+kze	Kosena
+kzf	Da'a Kaili
+kzg	Kikai
+kzh	Kenuzi-Dongola
+kzi	Kelabit
+kzj	Coastal Kadazan
+kzk	Kazukuru
+kzl	Kayeli
+kzm	Kais
+kzn	Kokola
+kzo	Kaningi
+kzp	Kaidipang
+kzq	Kaike
+kzr	Karang
+kzs	Sugut Dusun
+kzt	Tambunan Dusun
+kzu	Kayupulau
+kzv	Komyandaret
+kzw	Karirí-Xocó
+kzx	Kamarian
+kzy	Kango (Tshopo District)
+kzz	Kalabra
+laa	Lapuyan Subanun
+lab	Linear A
+lac	Lacandon
+lad	Ladino
+lae	Pattani
+laf	Lafofa
+lag	Langi
+lah	Lahnda
+lai	Lambya
+laj	Lango (Uganda)
+lak	Laka (Nigeria)
+lal	Lalia
+lam	Lamba
+lan	Laru
+lao	Lao
+lap	Laka (Chad)
+laq	Qabiao
+lar	Larteh
+las	Lama (Togo)
+lat	Latin
+lau	Laba
+lav	Latvian
+law	Lauje
+lax	Tiwa
+lay	Lama (Myanmar)
+laz	Aribwatsa
+lba	Lui
+lbb	Label
+lbc	Lakkia
+lbe	Lak
+lbf	Tinani
+lbg	Laopang
+lbi	La'bi
+lbj	Ladakhi
+lbm	Lodhi
+lbn	Lamet
+lbo	Laven
+lbq	Wampar
+lbr	Northern Lorung
+lbs	Libyan Sign Language
+lbt	Lachi
+lbu	Labu
+lbv	Lavatbura-Lamusong
+lbw	Tolaki
+lbx	Lawangan
+lby	Lamu-Lamu
+lbz	Lardil
+lcc	Legenyem
+lcd	Lola
+lce	Loncong
+lcf	Lubu
+lch	Luchazi
+lcl	Lisela
+lcm	Tungag
+lcp	Western Lawa
+lcq	Luhu
+lcs	Lisabata-Nuniali
+ldb	Idun
+ldd	Luri
+ldg	Lenyima
+ldh	Lamja-Dengsa-Tola
+ldi	Laari
+ldj	Lemoro
+ldk	Leelau
+ldl	Kaan
+ldm	Landoma
+ldn	Láadan
+ldo	Loo
+ldp	Tso
+ldq	Lufu
+lea	Lega-Shabunda
+leb	Lala-Bisa
+lec	Leco
+led	Lendu
+lee	Lyélé
+lef	Lelemi
+leg	Lengua
+leh	Lenje
+lei	Lemio
+lej	Lengola
+lek	Leipon
+lel	Lele (Democratic Republic of Congo)
+lem	Nomaande
+len	Lenca
+leo	Leti (Cameroon)
+lep	Lepcha
+leq	Lembena
+ler	Lenkau
+les	Lese
+let	Lesing-Gelimi
+leu	Kara (Papua New Guinea)
+lev	Lamma
+lew	Ledo Kaili
+lex	Luang
+ley	Lemolang
+lez	Lezghian
+lfa	Lefa
+lfn	Lingua Franca Nova
+lga	Lungga
+lgb	Laghu
+lgg	Lugbara
+lgh	Laghuu
+lgi	Lengilu
+lgk	Lingarak
+lgl	Wala
+lgm	Lega-Mwenga
+lgn	Opuuo
+lgq	Logba
+lgr	Lengo
+lgt	Pahi
+lgu	Longgu
+lgz	Ligenza
+lha	Laha (Viet Nam)
+lhh	Laha (Indonesia)
+lhi	Lahu Shi
+lhl	Lahul Lohar
+lhm	Lhomi
+lhn	Lahanan
+lhp	Lhokpu
+lhs	Mlahsö
+lht	Toga
+lhu	Lahu
+lia	West-Central Limba
+lib	Likum
+lic	Hlai
+lid	Nyindrou
+lie	Likila
+lif	Limbu
+lig	Ligbi
+lih	Lihir
+lii	Lingkhim
+lij	Ligurian
+lik	Lika
+lil	Lillooet
+lim	Limburgan
+lin	Lingala
+lio	Liki
+lip	Sekpele
+liq	Libido
+lir	Liberian English
+lis	Lisu
+lit	Lithuanian
+liu	Logorik
+liv	Liv
+liw	Col
+lix	Liabuku
+liy	Banda-Bambari
+liz	Libinza
+lje	Rampi
+lji	Laiyolo
+ljl	Li'o
+ljp	Lampung Api
+lka	Lakalei
+lkb	Kabras
+lkc	Kucong
+lkd	Lakondê
+lke	Kenyi
+lkh	Lakha
+lki	Laki
+lkj	Remun
+lkl	Laeko-Libuat
+lkn	Lakona
+lko	Khayo
+lkr	Päri
+lks	Kisa
+lkt	Lakota
+lky	Lokoya
+lla	Lala-Roba
+llb	Lolo
+llc	Lele (Guinea)
+lld	Ladin
+lle	Lele (Papua New Guinea)
+llf	Hermit
+llg	Lole
+llh	Lamu
+lli	Teke-Laali
+llk	Lelak
+lll	Lilau
+llm	Lasalimu
+lln	Lele (Chad)
+llo	Khlor
+llp	North Efate
+llq	Lolak
+lls	Lithuanian Sign Language
+llu	Lau
+llx	Lauan
+lma	East Limba
+lmb	Merei
+lmc	Limilngan
+lmd	Lumun
+lme	Pévé
+lmf	South Lembata
+lmg	Lamogai
+lmh	Lambichhong
+lmi	Lombi
+lmj	West Lembata
+lmk	Lamkang
+lml	Hano
+lmm	Lamam
+lmn	Lambadi
+lmo	Lombard
+lmp	Limbum
+lmq	Lamatuka
+lmr	Lamalera
+lmu	Lamenu
+lmv	Lomaiviti
+lmw	Lake Miwok
+lmx	Laimbue
+lmy	Lamboya
+lmz	Lumbee
+lna	Langbashe
+lnb	Mbalanhu
+lnd	Lundayeh
+lng	Langobardic
+lnh	Lanoh
+lni	Lantanai
+lnj	Leningitij
+lnl	South Central Banda
+lnm	Langam
+lnn	Lorediakarkar
+lno	Lango (Sudan)
+lns	Lamnso'
+lnu	Longuda
+lnz	Lonzo
+loa	Loloda
+lob	Lobi
+loc	Inonhan
+loe	Saluan
+lof	Logol
+log	Logo
+loh	Narim
+loi	Loma (Côte d'Ivoire)
+loj	Lou
+lok	Loko
+lol	Mongo
+lom	Loma (Liberia)
+lon	Malawi Lomwe
+loo	Lombo
+lop	Lopa
+loq	Lobala
+lor	Téén
+los	Loniu
+lot	Otuho
+lou	Louisiana Creole French
+lov	Lopi
+low	Tampias Lobu
+lox	Loun
+loy	Lowa
+loz	Lozi
+lpa	Lelepa
+lpe	Lepki
+lpn	Long Phuri Naga
+lpo	Lipo
+lpx	Lopit
+lra	Rara Bakati'
+lrc	Northern Luri
+lre	Laurentian
+lrg	Laragia
+lri	Marachi
+lrk	Loarki
+lrl	Lari
+lrm	Marama
+lrn	Lorang
+lro	Laro
+lrr	Southern Lorung
+lrt	Larantuka Malay
+lrv	Larevat
+lsa	Lasgerdi
+lsd	Lishana Deni
+lse	Lusengo
+lsg	Lyons Sign Language
+lsh	Lish
+lsi	Lashi
+lsl	Latvian Sign Language
+lsm	Saamia
+lso	Laos Sign Language
+lsr	Aruop
+lss	Lasi
+ltc	Late Middle Chinese
+lti	Leti (Indonesia)
+ltn	Latundê
+lto	Tsotso
+lts	Tachoni
+ltu	Latu
+ltz	Luxembourgish
+lua	Luba-Lulua
+lub	Luba-Katanga
+luc	Aringa
+lud	Ludian
+lue	Luvale
+luf	Laua
+lug	Ganda
+lui	Luiseno
+luj	Luna
+luk	Lunanakha
+lul	Olu'bo
+lum	Luimbi
+lun	Lunda
+luo	Luo (Kenya and Tanzania)
+lup	Lumbu
+luq	Lucumi
+lur	Laura
+lus	Lushai
+lut	Lushootseed
+luu	Lumba-Yakkha
+luv	Luwati
+luw	Luo (Cameroon)
+luy	Luyia
+luz	Southern Luri
+lva	Maku'a
+lvk	Lavukaleve
+lvu	Levuka
+lwa	Lwalu
+lwe	Lewo Eleng
+lwg	Wanga
+lwh	White Lachi
+lwl	Eastern Lawa
+lwm	Laomian
+lwo	Luwo
+lwt	Lewotobi
+lww	Lewo
+lya	Layakha
+lyg	Lyngngam
+lyn	Luyana
+lzl	Litzlitz
+lzn	Leinong Naga
+lzz	Laz
+maa	San Jerónimo Tecóatl Mazatec
+mab	Yutanduchi Mixtec
+mad	Madurese
+mae	Bo-Rukul
+maf	Mafa
+mag	Magahi
+mah	Marshallese
+mai	Maithili
+maj	Jalapa De Díaz Mazatec
+mak	Makasar
+mal	Malayalam
+mam	Northern Mam
+man	Mandingo
+maq	Chiquihuitlán Mazatec
+mar	Marathi
+mas	Masai
+mat	San Francisco Matlatzinca
+mau	Huautla Mazatec
+mav	Sateré-Mawé
+maw	Mampruli
+max	North Moluccan Malay
+maz	Central Mazahua
+mba	Higaonon
+mbb	Western Bukidnon Manobo
+mbc	Macushi
+mbd	Dibabawon Manobo
+mbe	Molale
+mbf	Baba Malay
+mbh	Mangseng
+mbi	Ilianen Manobo
+mbj	Nadëb
+mbk	Malol
+mbl	Maxakalí
+mbm	Ombamba
+mbn	Macaguán
+mbo	Mbo (Cameroon)
+mbp	Malayo
+mbq	Maisin
+mbr	Nukak Makú
+mbs	Sarangani Manobo
+mbt	Matigsalug Manobo
+mbu	Mbula-Bwazza
+mbv	Mbulungish
+mbw	Maring
+mbx	Mari (East Sepik Province)
+mby	Memoni
+mbz	Amoltepec Mixtec
+mca	Maca
+mcb	Machiguenga
+mcc	Bitur
+mcd	Sharanahua
+mce	Itundujia Mixtec
+mcf	Matsés
+mcg	Mapoyo
+mch	Maquiritari
+mci	Mese
+mcj	Mvanip
+mck	Mbunda
+mcl	Macaguaje
+mcm	Malaccan Creole Portuguese
+mcn	Masana
+mco	Coatlán Mixe
+mcp	Makaa
+mcq	Ese
+mcr	Menya
+mcs	Mambai
+mct	Mengisa
+mcu	Cameroon Mambila
+mcv	Minanibai
+mcw	Mawa (Chad)
+mcx	Mpiemo
+mcy	South Watut
+mcz	Mawan
+mda	Mada (Nigeria)
+mdb	Morigi
+mdc	Male (Papua New Guinea)
+mdd	Mbum
+mde	Maba (Chad)
+mdf	Moksha
+mdg	Massalat
+mdh	Maguindanao
+mdi	Mamvu
+mdj	Mangbetu
+mdk	Mangbutu
+mdl	Maltese Sign Language
+mdm	Mayogo
+mdn	Mbati
+mdp	Mbala
+mdq	Mbole
+mdr	Mandar
+mds	Maria (Papua New Guinea)
+mdt	Mbere
+mdu	Mboko
+mdv	Santa Lucía Monteverde Mixtec
+mdw	Mbosi
+mdx	Dizi
+mdy	Male (Ethiopia)
+mdz	Suruí Do Pará
+mea	Menka
+meb	Ikobi-Mena
+mec	Mara
+med	Melpa
+mee	Mengen
+mef	Megam
+meg	Mea
+meh	Southwestern Tlaxiaco Mixtec
+mei	Midob
+mej	Meyah
+mek	Mekeo
+mel	Central Melanau
+mem	Mangala
+men	Mende (Sierra Leone)
+meo	Kedah Malay
+mep	Miriwung
+meq	Merey
+mer	Meru
+mes	Masmaje
+met	Mato
+meu	Motu
+mev	Mann
+mew	Maaka
+mey	Hassaniyya
+mez	Menominee
+mfa	Pattani Malay
+mfb	Bangka
+mfc	Mba
+mfd	Mendankwe-Nkwen
+mfe	Morisyen
+mff	Naki
+mfg	Mixifore
+mfh	Matal
+mfi	Wandala
+mfj	Mefele
+mfk	North Mofu
+mfl	Putai
+mfm	Marghi South
+mfn	Cross River Mbembe
+mfo	Mbe
+mfp	Makassar Malay
+mfq	Moba
+mfr	Marithiel
+mfs	Mexican Sign Language
+mft	Mokerang
+mfu	Mbwela
+mfv	Mandjak
+mfw	Mulaha
+mfx	Melo
+mfy	Mayo
+mfz	Mabaan
+mga	Middle Irish (900-1200)
+mgb	Mararit
+mgc	Morokodo
+mgd	Moru
+mge	Mango
+mgf	Maklew
+mgg	Mpongmpong
+mgh	Makhuwa-Meetto
+mgi	Lijili
+mgj	Abureni
+mgk	Mawes
+mgl	Maleu-Kilenge
+mgm	Mambae
+mgn	Mbangi
+mgo	Meta'
+mgp	Eastern Magar
+mgq	Malila
+mgr	Mambwe-Lungu
+mgs	Manda (Tanzania)
+mgt	Mongol
+mgu	Mailu
+mgv	Matengo
+mgw	Matumbi
+mgx	Omati
+mgy	Mbunga
+mgz	Mbugwe
+mha	Manda (India)
+mhb	Mahongwe
+mhc	Mocho
+mhd	Mbugu
+mhe	Besisi
+mhf	Mamaa
+mhg	Margu
+mhh	Maskoy Pidgin
+mhi	Ma'di
+mhj	Mogholi
+mhk	Mungaka
+mhl	Mauwake
+mhm	Makhuwa-Moniga
+mhn	Mócheno
+mho	Mashi (Zambia)
+mhp	Balinese Malay
+mhq	Mandan
+mhr	Eastern Mari
+mhs	Buru (Indonesia)
+mht	Mandahuaca
+mhu	Digaro-Mishmi
+mhw	Mbukushu
+mhx	Maru
+mhy	Ma'anyan
+mhz	Mor (Mor Islands)
+mia	Miami
+mib	Atatláhuca Mixtec
+mic	Mi'kmaq
+mid	Mandaic
+mie	Ocotepec Mixtec
+mif	Mofu-Gudur
+mig	San Miguel El Grande Mixtec
+mih	Chayuco Mixtec
+mii	Chigmecatitlán Mixtec
+mij	Abar
+mik	Mikasuki
+mil	Peñoles Mixtec
+mim	Alacatlatzala Mixtec
+min	Minangkabau
+mio	Pinotepa Nacional Mixtec
+mip	Apasco-Apoala Mixtec
+miq	Mískito
+mir	Isthmus Mixe
+mis	Uncoded languages
+mit	Southern Puebla Mixtec
+miu	Cacaloxtepec Mixtec
+miw	Akoye
+mix	Mixtepec Mixtec
+miy	Ayutla Mixtec
+miz	Coatzospan Mixtec
+mja	Mahei
+mjc	San Juan Colorado Mixtec
+mjd	Northwest Maidu
+mje	Muskum
+mjg	Tu
+mjh	Mwera (Nyasa)
+mji	Kim Mun
+mjj	Mawak
+mjk	Matukar
+mjl	Mandeali
+mjm	Medebur
+mjn	Ma (Papua New Guinea)
+mjo	Malankuravan
+mjp	Malapandaram
+mjq	Malaryan
+mjr	Malavedan
+mjs	Miship
+mjt	Sauria Paharia
+mju	Manna-Dora
+mjv	Mannan
+mjw	Karbi
+mjx	Mahali
+mjy	Mahican
+mjz	Majhi
+mka	Mbre
+mkb	Mal Paharia
+mkc	Siliput
+mkd	Macedonian
+mke	Mawchi
+mkf	Miya
+mkg	Mak (China)
+mki	Dhatki
+mkj	Mokilese
+mkk	Byep
+mkl	Mokole
+mkm	Moklen
+mkn	Kupang Malay
+mko	Mingang Doso
+mkp	Moikodi
+mkq	Bay Miwok
+mkr	Malas
+mks	Silacayoapan Mixtec
+mkt	Vamale
+mku	Konyanka Maninka
+mkv	Mafea
+mkw	Kituba (Congo)
+mkx	Cinamiguin Manobo
+mky	East Makian
+mkz	Makasae
+mla	Malo
+mlb	Mbule
+mlc	Cao Lan
+mld	Malakhel
+mle	Manambu
+mlf	Mal
+mlg	Malagasy
+mlh	Mape
+mli	Malimpung
+mlj	Miltu
+mlk	Ilwana
+mll	Malua Bay
+mlm	Mulam
+mln	Malango
+mlo	Mlomp
+mlp	Bargam
+mlq	Western Maninkakan
+mlr	Vame
+mls	Masalit
+mlt	Maltese
+mlu	To'abaita
+mlv	Motlav
+mlw	Moloko
+mlx	Malfaxal
+mlz	Malaynon
+mma	Mama
+mmb	Momina
+mmc	Michoacán Mazahua
+mmd	Maonan
+mme	Mae
+mmf	Mundat
+mmg	North Ambrym
+mmh	Mehináku
+mmi	Musar
+mmj	Majhwar
+mmk	Mukha-Dora
+mml	Man Met
+mmm	Maii
+mmn	Mamanwa
+mmo	Mangga Buang
+mmp	Siawi
+mmq	Musak
+mmr	Western Xiangxi Miao
+mms	Southern Mam
+mmt	Malalamai
+mmu	Mmaala
+mmv	Miriti
+mmw	Emae
+mmx	Madak
+mmy	Migaama
+mmz	Mabaale
+mna	Mbula
+mnb	Muna
+mnc	Manchu
+mnd	Mondé
+mne	Naba
+mnf	Mundani
+mng	Eastern Mnong
+mnh	Mono (Democratic Republic of Congo)
+mni	Manipuri
+mnj	Munji
+mnk	Mandinka
+mnl	Tiale
+mnm	Mapena
+mnn	Southern Mnong
+mnp	Min Bei Chinese
+mnq	Minriq
+mnr	Mono (USA)
+mns	Mansi
+mnt	Maykulan
+mnu	Mer
+mnv	Rennell-Belona
+mnw	Mon
+mnx	Manikion
+mny	Manyawa
+mnz	Moni
+moa	Mwan
+moc	Mocoví
+mod	Mobilian
+moe	Montagnais
+mof	Mohegan-Montauk-Narragansett
+mog	Mongondow
+moh	Mohawk
+moi	Mboi
+moj	Monzombo
+mok	Morori
+mol	Moldavian
+mom	Monimbo
+mon	Mongolian
+moo	Monom
+mop	Mopán Maya
+moq	Mor (Bomberai Peninsula)
+mor	Moro
+mos	Mossi
+mot	Barí
+mou	Mogum
+mov	Mohave
+mow	Moi (Congo)
+mox	Molima
+moy	Shekkacho
+moz	Mukulu
+mpa	Mpoto
+mpb	Mullukmulluk
+mpc	Mangarayi
+mpd	Machinere
+mpe	Majang
+mpf	Tajumulco Mam
+mpg	Marba
+mph	Maung
+mpi	Mpade
+mpj	Martu Wangka
+mpk	Mbara (Chad)
+mpl	Middle Watut
+mpm	Yosondúa Mixtec
+mpn	Mindiri
+mpo	Miu
+mpp	Migabac
+mpq	Matís
+mpr	Vangunu
+mps	Dadibi
+mpt	Mian
+mpu	Makuráp
+mpv	Mungkip
+mpw	Mapidian
+mpx	Misima-Paneati
+mpy	Mapia
+mpz	Mpi
+mqa	Maba (Indonesia)
+mqb	Mbuko
+mqc	Mangole
+mqe	Matepi
+mqf	Momuna
+mqg	Kota Bangun Kutai Malay
+mqh	Tlazoyaltepec Mixtec
+mqi	Mariri
+mqj	Mamasa
+mqk	Rajah Kabunsuwan Manobo
+mql	Mbelime
+mqm	South Marquesan
+mqn	Moronene
+mqo	Modole
+mqp	Manipa
+mqq	Minokok
+mqr	Mander
+mqs	West Makian
+mqt	Mok
+mqu	Mandari
+mqv	Mosimo
+mqw	Murupi
+mqx	Mamuju
+mqy	Manggarai
+mqz	Malasanga
+mra	Mlabri
+mrb	Marino
+mrc	Maricopa
+mrd	Western Magar
+mre	Martha's Vineyard Sign Language
+mrf	Elseng
+mrg	Miri
+mrh	Mara Chin
+mri	Maori
+mrj	Western Mari
+mrk	Hmwaveke
+mrl	Mortlockese
+mrm	Merlav
+mrn	Cheke Holo
+mro	Mru
+mrp	Morouas
+mrq	North Marquesan
+mrr	Maria (India)
+mrs	Maragus
+mrt	Marghi Central
+mru	Mono (Cameroon)
+mrv	Mangareva
+mrw	Maranao
+mrx	Maremgi
+mry	Karaga Mandaya
+mrz	Marind
+msa	Malay (macrolanguage)
+msb	Masbatenyo
+msc	Sankaran Maninka
+msd	Yucatec Maya Sign Language
+mse	Musey
+msf	Mekwei
+msg	Moraid
+msh	Masikoro Malagasy
+msi	Sabah Malay
+msj	Ma (Democratic Republic of Congo)
+msk	Mansaka
+msl	Molof
+msm	Agusan Manobo
+msn	Mosina
+mso	Mombum
+msp	Maritsauá
+msq	Caac
+msr	Mongolian Sign Language
+mss	West Masela
+mst	Cataelano Mandaya
+msu	Musom
+msv	Maslam
+msw	Mansoanka
+msx	Moresada
+msy	Aruamu
+msz	Momare
+mta	Cotabato Manobo
+mtb	Anyin Morofo
+mtc	Munit
+mtd	Mualang
+mte	Mono (Solomon Islands)
+mtf	Murik
+mtg	Una
+mth	Munggui
+mti	Maiwa (Papua New Guinea)
+mtj	Moskona
+mtk	Mbe'
+mtl	Montol
+mtm	Mator
+mtn	Matagalpa
+mto	Totontepec Mixe
+mtp	Wichí Lhamtés Nocten
+mtq	Muong
+mtr	Mewari
+mts	Yora
+mtt	Mota
+mtu	Tututepec Mixtec
+mtv	Asaro'o
+mtw	Magahat
+mtx	Tidaá Mixtec
+mty	Nabi
+mtz	Tacanec
+mua	Mundang
+mub	Mubi
+muc	Mbu'
+mud	Mednyj Aleut
+mue	Media Lengua
+mug	Musgu
+muh	Mündü
+mui	Musi
+muj	Mabire
+muk	Mugom
+mul	Multiple languages
+mum	Maiwala
+muo	Nyong
+mup	Malvi
+muq	Eastern Xiangxi Miao
+mur	Murle
+mus	Creek
+mut	Western Muria
+muu	Yaaku
+muv	Muthuvan
+mux	Bo-Ung
+muy	Muyang
+muz	Mursi
+mva	Manam
+mvb	Mattole
+mvc	Central Mam
+mvd	Mamboru
+mve	Marwari (Pakistan)
+mvf	Peripheral Mongolian
+mvg	Yucuañe Mixtec
+mvh	Mire
+mvi	Miyako
+mvj	Todos Santos Cuchumatán Mam
+mvk	Mekmek
+mvl	Mbara (Australia)
+mvm	Muya
+mvn	Minaveha
+mvo	Marovo
+mvp	Duri
+mvq	Moere
+mvr	Marau
+mvs	Massep
+mvt	Mpotovoro
+mvu	Marfa
+mvv	Tagal Murut
+mvw	Machinga
+mvx	Meoswar
+mvy	Indus Kohistani
+mvz	Mesqan
+mwa	Mwatebu
+mwb	Juwal
+mwc	Are
+mwd	Mudbura
+mwe	Mwera (Chimwera)
+mwf	Murrinh-Patha
+mwg	Aiklep
+mwh	Mouk-Aria
+mwi	Labo
+mwj	Maligo
+mwk	Kita Maninkakan
+mwl	Mirandese
+mwm	Sar
+mwn	Nyamwanga
+mwo	Central Maewo
+mwp	Kala Lagaw Ya
+mwq	Mün Chin
+mwr	Marwari
+mws	Mwimbi-Muthambi
+mwt	Moken
+mwu	Mittu
+mwv	Mentawai
+mww	Hmong Daw
+mwx	Mediak
+mwy	Mosiro
+mwz	Moingi
+mxa	Northwest Oaxaca Mixtec
+mxb	Tezoatlán Mixtec
+mxc	Manyika
+mxd	Modang
+mxe	Mele-Fila
+mxf	Malgbe
+mxg	Mbangala
+mxh	Mvuba
+mxi	Mozarabic
+mxj	Miju-Mishmi
+mxk	Monumbo
+mxl	Maxi Gbe
+mxm	Meramera
+mxn	Moi (Indonesia)
+mxo	Mbowe
+mxp	Tlahuitoltepec Mixe
+mxq	Juquila Mixe
+mxr	Murik
+mxs	Huitepec Mixtec
+mxt	Jamiltepec Mixtec
+mxu	Mada (Cameroon)
+mxv	Metlatónoc Mixtec
+mxw	Namo
+mxx	Mahou
+mxy	Southeastern Nochixtlán Mixtec
+mxz	Central Masela
+mya	Burmese
+myb	Mbay
+myc	Mayeka
+myd	Maramba
+mye	Myene
+myf	Bambassi
+myg	Manta
+myh	Makah
+myi	Mina (India)
+myj	Mangayat
+myk	Mamara Senoufo
+myl	Moma
+mym	Me'en
+myo	Anfillo
+myp	Pirahã
+myq	Forest Maninka
+myr	Muniche
+mys	Mesmes
+myt	Sangab Mandaya
+myu	Mundurukú
+myv	Erzya
+myw	Muyuw
+myx	Masaaba
+myy	Macuna
+myz	Classical Mandaic
+mza	Santa María Zacatepec Mixtec
+mzb	Tumzabt
+mzc	Madagascar Sign Language
+mzd	Malimba
+mze	Morawa
+mzg	Monastic Sign Language
+mzh	Wichí Lhamtés Güisnay
+mzi	Ixcatlán Mazatec
+mzj	Manya
+mzk	Nigeria Mambila
+mzl	Mazatlán Mixe
+mzm	Mumuye
+mzn	Mazanderani
+mzo	Matipuhy
+mzp	Movima
+mzq	Mori Atas
+mzr	Marúbo
+mzs	Macanese
+mzt	Mintil
+mzu	Inapang
+mzv	Manza
+mzw	Deg
+mzx	Mawayana
+mzy	Mozambican Sign Language
+mzz	Maiadomu
+naa	Namla
+nab	Southern Nambikuára
+nac	Narak
+nad	Nijadali
+nae	Naka'ela
+naf	Nabak
+nag	Naga Pidgin
+naj	Nalu
+nak	Nakanai
+nal	Nalik
+nam	Nangikurrunggurr
+nan	Min Nan Chinese
+nao	Naaba
+nap	Neapolitan
+naq	Nama (Namibia)
+nar	Iguta
+nas	Naasioi
+nat	Hungworo
+nau	Nauru
+nav	Navajo
+naw	Nawuri
+nax	Nakwi
+nay	Narrinyeri
+naz	Coatepec Nahuatl
+nba	Nyemba
+nbb	Ndoe
+nbc	Chang Naga
+nbd	Ngbinda
+nbe	Konyak Naga
+nbf	Naxi
+nbg	Nagarchal
+nbh	Ngamo
+nbi	Mao Naga
+nbj	Ngarinman
+nbk	Nake
+nbl	South Ndebele
+nbm	Ngbaka Ma'bo
+nbn	Kuri
+nbo	Nkukoli
+nbp	Nnam
+nbq	Nggem
+nbr	Numana-Nunku-Gbantu-Numbu
+nbs	Namibian Sign Language
+nbt	Na
+nbu	Rongmei Naga
+nbv	Ngamambo
+nbw	Southern Ngbandi
+nbx	Ngura
+nby	Ningera
+nca	Iyo
+ncb	Central Nicobarese
+ncc	Ponam
+ncd	Nachering
+nce	Yale
+ncf	Notsi
+ncg	Nisga'a
+nch	Central Huasteca Nahuatl
+nci	Classical Nahuatl
+ncj	Northern Puebla Nahuatl
+nck	Nakara
+ncl	Michoacán Nahuatl
+ncm	Nambo
+ncn	Nauna
+nco	Sibe
+ncp	Ndaktup
+ncr	Ncane
+ncs	Nicaraguan Sign Language
+nct	Chothe Naga
+ncu	Chumburung
+ncx	Central Puebla Nahuatl
+ncz	Natchez
+nda	Ndasa
+ndb	Kenswei Nsei
+ndc	Ndau
+ndd	Nde-Nsele-Nta
+nde	North Ndebele
+ndf	Nadruvian
+ndg	Ndengereko
+ndh	Ndali
+ndi	Samba Leko
+ndj	Ndamba
+ndk	Ndaka
+ndl	Ndolo
+ndm	Ndam
+ndn	Ngundi
+ndo	Ndonga
+ndp	Ndo
+ndq	Ndombe
+ndr	Ndoola
+#nds	Low German			// dup
+ndt	Ndunga
+ndu	Dugun
+ndv	Ndut
+ndw	Ndobo
+ndx	Nduga
+ndy	Lutos
+ndz	Ndogo
+nea	Eastern Ngad'a
+neb	Toura (Côte d'Ivoire)
+nec	Nedebang
+ned	Nde-Gbite
+nee	Kumak
+nef	Nefamese
+neg	Negidal
+neh	Nyenkha
+nei	Neo-Hittite
+nej	Neko
+nek	Neku
+nem	Nemi
+nen	Nengone
+neo	Ná-Meo
+nep	Nepali
+neq	North Central Mixe
+ner	Yahadian
+nes	Bhoti Kinnauri
+net	Nete
+nev	Nyaheun
+new	Newari
+nex	Neme
+ney	Neyo
+nez	Nez Perce
+nfa	Dhao
+nfd	Ndun
+nfg	Nyeng
+nfk	Shakara
+nfl	Ayiwo
+nfr	Nafaanra
+nfu	Mfumte
+nga	Ngbaka
+ngb	Northern Ngbandi
+ngc	Ngombe (Democratic Republic of Congo)
+ngd	Ngando (Central African Republic)
+nge	Ngemba
+ngg	Ngbaka Manza
+ngh	N/u
+ngi	Ngizim
+ngj	Ngie
+ngk	Ngalkbun
+ngl	Lomwe
+ngm	Ngatik Men's Creole
+ngn	Ngwo
+ngo	Ngoni
+ngp	Ngulu
+ngq	Ngurimi
+ngr	Nanggu
+ngs	Gvoko
+ngt	Ngeq
+ngu	Guerrero Nahuatl
+ngv	Nagumi
+ngw	Ngwaba
+ngx	Nggwahyi
+ngy	Tibea
+ngz	Ngungwel
+nha	Nhanda
+nhb	Beng
+nhc	Tabasco Nahuatl
+nhd	Chiripá
+nhe	Eastern Huasteca Nahuatl
+nhf	Nhuwala
+nhg	Tetelcingo Nahuatl
+nhh	Nahari
+nhi	Zacatlán-Ahuacatlán-Tepetzintla Nahuatl
+nhk	Isthmus-Cosoleacaque Nahuatl
+nhm	Morelos Nahuatl
+nhn	Central Nahuatl
+nho	Takuu
+nhp	Isthmus-Pajapan Nahuatl
+nhq	Huaxcaleca Nahuatl
+nhr	Naro
+nht	Ometepec Nahuatl
+nhu	Noone
+nhv	Temascaltepec Nahuatl
+nhw	Western Huasteca Nahuatl
+nhx	Isthmus-Mecayapan Nahuatl
+nhy	Northern Oaxaca Nahuatl
+nhz	Santa María La Alta Nahuatl
+nia	Nias
+nib	Nakama
+nid	Ngandi
+nie	Niellim
+nif	Nek
+nig	Ngalakan
+nih	Nyiha (Tanzania)
+nii	Nii
+nij	Ngaju
+nik	Southern Nicobarese
+nil	Nila
+nim	Nilamba
+nin	Ninzo
+nio	Nganasan
+niq	Nandi
+nir	Nimboran
+nis	Nimi
+nit	Southeastern Kolami
+niu	Niuean
+niv	Gilyak
+niw	Nimo
+nix	Hema
+niy	Ngiti
+niz	Ningil
+nja	Nzanyi
+njb	Nocte Naga
+njd	Ndonde Hamba
+njh	Lotha Naga
+nji	Gudanji
+njj	Njen
+njl	Njalgulgule
+njm	Angami Naga
+njn	Liangmai Naga
+njo	Ao Naga
+njr	Njerep
+njs	Nisa
+njt	Ndyuka-Trio Pidgin
+nju	Ngadjunmaya
+njx	Kunyi
+njy	Njyem
+nka	Nkoya
+nkb	Khoibu Naga
+nkc	Nkongho
+nkd	Koireng
+nke	Duke
+nkf	Inpui Naga
+nkg	Nekgini
+nkh	Khezha Naga
+nki	Thangal Naga
+nkj	Nakai
+nkk	Nokuku
+nkm	Namat
+nkn	Nkangala
+nko	Nkonya
+nkp	Niuatoputapu
+nkr	Nukuoro
+nks	North Asmat
+nkt	Nyika (Tanzania)
+nku	Bouna Kulango
+nkv	Nyika (Malawi and Zambia)
+nkw	Nkutu
+nkx	Nkoroo
+nkz	Nkari
+nla	Ngombale
+nlc	Nalca
+nld	Dutch
+nle	East Nyala
+nlg	Gela
+nli	Grangali
+nlj	Nyali
+nlk	Ninia Yali
+nll	Nihali
+nln	Durango Nahuatl
+nlo	Ngul
+nlr	Ngarla
+nlu	Nchumbulu
+nlv	Orizaba Nahuatl
+nlx	Nahali
+nly	Nyamal
+nma	Maram Naga
+nmb	Big Nambas
+nmc	Ngam
+nmd	Ndumu
+nme	Mzieme Naga
+nmf	Tangkhul Naga
+nmg	Kwasio
+nmh	Monsang Naga
+nmi	Nyam
+nmj	Ngombe (Central African Republic)
+nmk	Namakura
+nml	Ndemli
+nmm	Manangba
+nmn	!Xóõ
+nmo	Moyon Naga
+nmp	Nimanbur
+nmq	Nambya
+nmr	Nimbari
+nms	Letemboi
+nmt	Namonuito
+nmu	Northeast Maidu
+nmv	Ngamini
+nmw	Nimoa
+nmx	Nama (Papua New Guinea)
+nmy	Namuyi
+nmz	Nawdm
+nna	Nyangumarta
+nnb	Nande
+nnc	Nancere
+nnd	West Ambae
+nne	Ngandyera
+nnf	Ngaing
+nng	Maring Naga
+nnh	Ngiemboon
+nni	North Nuaulu
+nnj	Nyangatom
+nnk	Nankina
+nnl	Northern Rengma Naga
+nnm	Namia
+nnn	Ngete
+nno	Norwegian Nynorsk
+nnp	Wancho Naga
+nnq	Ngindo
+nnr	Narungga
+nns	Ningye
+nnt	Nanticoke
+nnu	Dwang
+nnv	Nugunu (Australia)
+nnw	Southern Nuni
+nnx	Ngong
+nny	Nyangga
+nnz	Nda'nda'
+noa	Woun Meu
+nob	Norwegian Bokmål
+noc	Nuk
+nod	Northern Thai
+noe	Nimadi
+nof	Nomane
+nog	Nogai
+noh	Nomu
+noi	Noiri
+nok	Nooksack
+nom	Nocamán
+non	Old Norse
+noo	Nootka
+nop	Numanggang
+noq	Ngongo
+nor	Norwegian
+nos	Eastern Nisu
+not	Nomatsiguenga
+nou	Ewage-Notu
+nov	Novial
+now	Nyambo
+noy	Noy
+noz	Nayi
+npa	Nar Phu
+npb	Nupbikha
+nph	Phom Naga
+npl	Southeastern Puebla Nahuatl
+npn	Mondropolon
+npo	Pochuri Naga
+nps	Nipsan
+npu	Puimei Naga
+npy	Napu
+nqg	Ede Nago
+nqk	Kura Ede Nago
+nqm	Ndom
+nqn	Nen
+nqo	N'Ko
+nra	Ngom
+nrb	Nara
+nrc	Noric
+nre	Southern Rengma Naga
+nrg	Narango
+nri	Chokri Naga
+nrl	Ngarluma
+nrm	Narom
+nrn	Norn
+nrp	North Picene
+nrr	Norra
+nrt	Northern Kalapuya
+nrx	Ngurmbur
+nrz	Lala
+nsa	Sangtam Naga
+nsc	Nshi
+nsd	Southern Nisu
+nse	Nsenga
+nsg	Ngasa
+nsh	Ngoshie
+nsi	Nigerian Sign Language
+nsk	Naskapi
+nsl	Norwegian Sign Language
+nsm	Sumi Naga
+nsn	Nehan
+nso	Pedi
+nsp	Nepalese Sign Language
+nsq	Northern Sierra Miwok
+nsr	Maritime Sign Language
+nss	Nali
+nst	Tase Naga
+nsu	Sierra Negra Nahuatl
+nsv	Southwestern Nisu
+nsw	Navut
+nsx	Nsongo
+nsy	Nasal
+nsz	Nisenan
+nte	Nathembo
+nti	Natioro
+ntj	Ngaanyatjarra
+ntk	Ikoma-Nata-Isenye
+ntm	Nateni
+nto	Ntomba
+ntp	Northern Tepehuan
+ntr	Delo
+nts	Natagaimas
+ntw	Nottoway
+nty	Mantsi
+ntz	Natanzi
+nua	Yuaga
+nuc	Nukuini
+nud	Ngala
+nue	Ngundu
+nuf	Nusu
+nug	Nungali
+nuh	Ndunda
+nui	Ngumbi
+nuj	Nyole
+nul	Nusa Laut
+num	Niuafo'ou
+nun	Nung (Myanmar)
+nuo	Nguôn
+nup	Nupe-Nupe-Tako
+nuq	Nukumanu
+nur	Nukuria
+nus	Nuer
+nut	Nung (Viet Nam)
+nuu	Ngbundu
+nuv	Northern Nuni
+nuw	Nguluwan
+nux	Mehek
+nuy	Nunggubuyu
+nuz	Tlamacazapa Nahuatl
+nvh	Nasarian
+nvm	Namiae
+nwa	Nawathinehena
+nwb	Nyabwa
+nwc	Classical Newari
+nwe	Ngwe
+nwi	Southwest Tanna
+nwm	Nyamusa-Molo
+nwr	Nawaru
+nwx	Middle Newar
+nwy	Nottoway-Meherrin
+nxa	Nauete
+nxd	Ngando (Democratic Republic of Congo)
+nxe	Nage
+nxg	Ngad'a
+nxi	Nindi
+nxl	South Nuaulu
+nxm	Numidian
+nxn	Ngawun
+nxr	Ninggerum
+nxu	Narau
+nxx	Nafri
+nya	Nyanja
+nyb	Nyangbo
+nyc	Nyanga-li
+nyd	Nyore
+nye	Nyengo
+nyf	Giryama
+nyg	Nyindu
+nyh	Nyigina
+nyi	Ama (Sudan)
+nyj	Nyanga
+nyk	Nyaneka
+nyl	Nyeu
+nym	Nyamwezi
+nyn	Nyankole
+nyo	Nyoro
+nyp	Nyang'i
+nyq	Nayini
+nyr	Nyiha (Malawi)
+nys	Nyunga
+nyt	Nyawaygi
+nyu	Nyungwe
+nyv	Nyulnyul
+nyw	Nyaw
+nyx	Nganyaywana
+nyy	Nyakyusa-Ngonde
+nza	Tigon Mbembe
+nzb	Njebi
+nzi	Nzima
+nzk	Nzakara
+nzm	Zeme Naga
+nzs	New Zealand Sign Language
+nzu	Teke-Nzikou
+nzy	Nzakambay
+oaa	Orok
+oac	Oroch
+oar	Old Aramaic (up to 700 BCE)
+oav	Old Avar
+obi	Obispeño
+obl	Oblo
+obm	Moabite
+obo	Obo Manobo
+obr	Old Burmese
+obt	Old Breton
+obu	Obulom
+oca	Ocaina
+och	Old Chinese
+oci	Occitan (post 1500)
+oco	Old Cornish
+ocu	Atzingo Matlatzinca
+oda	Odut
+odk	Od
+odt	Old Dutch
+odu	Odual
+ofo	Ofo
+ofs	Old Frisian
+ofu	Efutop
+ogb	Ogbia
+ogc	Ogbah
+oge	Old Georgian
+ogg	Ogbogolo
+ogo	Khana
+ogu	Ogbronuagum
+oht	Old Hittite
+ohu	Old Hungarian
+oia	Oirata
+oin	Inebu One
+ojb	Northwestern Ojibwa
+ojc	Central Ojibwa
+ojg	Eastern Ojibwa
+oji	Ojibwa
+ojp	Old Japanese
+ojs	Severn Ojibwa
+ojv	Ontong Java
+ojw	Western Ojibwa
+oka	Okanagan
+okb	Okobo
+okd	Okodia
+oke	Okpe (Southwestern Edo)
+okh	Koresh-e Rostam
+oki	Okiek
+okj	Oko-Juwoi
+okk	Kwamtim One
+okl	Old Kentish Sign Language
+okm	Middle Korean (10th-16th cent.)
+okn	Oki-No-Erabu
+oko	Old Korean (3rd-9th cent.)
+okr	Kirike
+oks	Oko-Eni-Osayen
+oku	Oku
+okv	Orokaiva
+okx	Okpe (Northwestern Edo)
+ola	Walungge
+old	Mochi
+ole	Olekha
+olm	Oloma
+olo	Livvi
+oma	Omaha-Ponca
+omb	East Ambae
+omc	Mochica
+ome	Omejes
+omg	Omagua
+omi	Omi
+omk	Omok
+oml	Ombo
+omn	Minoan
+omo	Utarmbung
+omp	Old Manipuri
+omr	Old Marathi
+omt	Omotik
+omu	Omurano
+omw	South Tairora
+omx	Old Mon
+ona	Ona
+onb	Lingao
+one	Oneida
+ong	Olo
+oni	Onin
+onj	Onjob
+onk	Kabore One
+onn	Onobasulu
+ono	Onondaga
+onp	Sartang
+onr	Northern One
+ons	Ono
+ont	Ontenu
+onu	Unua
+onw	Old Nubian
+onx	Onin Based Pidgin
+ood	Tohono O'odham
+oog	Ong
+oon	Önge
+oor	Oorlams
+oos	Old Ossetic
+opa	Okpamheri
+opk	Kopkaka
+opm	Oksapmin
+opo	Opao
+opt	Opata
+opy	Ofayé
+ora	Oroha
+orc	Orma
+ore	Orejón
+org	Oring
+orh	Oroqen
+ori	Oriya
+orm	Oromo
+orn	Orang Kanaq
+oro	Orokolo
+orr	Oruma
+ors	Orang Seletar
+ort	Adivasi Oriya
+oru	Ormuri
+orv	Old Russian
+orw	Oro Win
+orx	Oro
+orz	Ormu
+osa	Osage
+osc	Oscan
+osi	Osing
+oso	Ososo
+osp	Old Spanish
+oss	Ossetian
+ost	Osatu
+osu	Southern One
+osx	Old Saxon
+ota	Ottoman Turkish (1500-1928)
+otb	Old Tibetan
+otd	Ot Danum
+ote	Mezquital Otomi
+oti	Oti
+otk	Old Turkish
+otl	Tilapa Otomi
+otm	Eastern Highland Otomi
+otn	Tenango Otomi
+otq	Querétaro Otomi
+otr	Otoro
+ots	Estado de México Otomi
+ott	Temoaya Otomi
+otu	Otuke
+otw	Ottawa
+otx	Texcatepec Otomi
+oty	Old Tamil
+otz	Ixtenco Otomi
+oua	Tagargrent
+oub	Glio-Oubi
+oue	Oune
+oui	Old Uighur
+oum	Ouma
+oun	!O!ung
+owi	Owiniga
+owl	Old Welsh
+oyb	Oy
+oyd	Oyda
+oym	Wayampi
+oyy	Oya'oya
+ozm	Koonzime
+pab	Parecís
+pac	Pacoh
+pad	Paumarí
+pae	Pagibete
+paf	Paranawát
+pag	Pangasinan
+pah	Tenharim
+pai	Pe
+pak	Parakanã
+pal	Pahlavi
+pam	Pampanga
+pan	Panjabi
+pao	Northern Paiute
+#pap	Papiamento			// dup
+paq	Parya
+par	Panamint
+pas	Papasena
+pat	Papitalai
+pau	Palauan
+pav	Pakaásnovos
+paw	Pawnee
+pax	Pankararé
+pay	Pech
+paz	Pankararú
+pbb	Páez
+pbc	Patamona
+pbe	Mezontla Popoloca
+pbf	Coyotepec Popoloca
+pbg	Paraujano
+pbh	E'ñapa Woromaipu
+pbi	Parkwa
+pbl	Mak (Nigeria)
+pbn	Kpasam
+pbo	Papel
+pbp	Badyara
+pbr	Pangwa
+pbs	Central Pame
+pbt	Southern Pashto
+pbu	Northern Pashto
+pbv	Pnar
+pby	Pyu
+pbz	Palu
+pca	Santa Inés Ahuatempan Popoloca
+pcb	Pear
+pcc	Bouyei
+pcd	Picard
+pce	Pale Palaung
+pcf	Paliyan
+pcg	Paniya
+pch	Pardhan
+pci	Duruwa
+pcj	Parenga
+pck	Paite Chin
+pcl	Pardhi
+pcm	Nigerian Pidgin
+pcn	Piti
+pcp	Pacahuara
+pcr	Panang
+pcw	Pyapun
+pda	Anam
+pdc	Pennsylvania German
+pdi	Pa Di
+pdn	Podena
+pdo	Padoe
+pdt	Plautdietsch
+pdu	Kayan
+pea	Peranakan Indonesian
+peb	Eastern Pomo
+ped	Mala (Papua New Guinea)
+pee	Taje
+pef	Northeastern Pomo
+peg	Pengo
+peh	Bonan
+pei	Chichimeca-Jonaz
+pej	Northern Pomo
+pek	Penchal
+pel	Pekal
+pem	Phende
+peo	Old Persian (ca. 600-400 B.C.)
+pep	Kunja
+peq	Southern Pomo
+pes	Western Farsi
+pev	Pémono
+pex	Petats
+pey	Petjo
+pez	Eastern Penan
+pfa	Pááfang
+pfe	Peere
+pfl	Pfaelzisch
+pga	Sudanese Creole Arabic
+pgg	Pangwali
+pgi	Pagi
+pgk	Rerep
+pgn	Paelignian
+pgs	Pangseng
+pgu	Pagu
+pgy	Pongyong
+pha	Pa-Hng
+phd	Phudagi
+phg	Phuong
+phh	Phukha
+phk	Phake
+phl	Phalura
+phm	Phimbi
+phn	Phoenician
+pho	Phunoi
+phq	Phana'
+phr	Pahari-Potwari
+pht	Phu Thai
+phu	Phuan
+phv	Pahlavani
+phw	Phangduwali
+pia	Pima Bajo
+pib	Yine
+pic	Pinji
+pid	Piaroa
+pie	Piro
+pif	Pingelapese
+pig	Pisabo
+pih	Pitcairn-Norfolk
+pii	Pini
+pij	Pijao
+pil	Yom
+pim	Powhatan
+pin	Piame
+pio	Piapoco
+pip	Pero
+pir	Piratapuyo
+pis	Pijin
+pit	Pitta Pitta
+piu	Pintupi-Luritja
+piv	Pileni
+piw	Pimbwe
+pix	Piu
+piy	Piya-Kwonci
+piz	Pije
+pjt	Pitjantjatjara
+pka	Ardhamāgadhī Prākrit
+pkb	Pokomo
+pkc	Paekche
+pkg	Pak-Tong
+pkh	Pankhu
+pkn	Pakanha
+pko	Pökoot
+pkp	Pukapuka
+pkr	Attapady Kurumba
+pks	Pakistan Sign Language
+pkt	Maleng
+pku	Paku
+pla	Miani
+plb	Polonombauk
+plc	Central Palawano
+pld	Polari
+ple	Palu'e
+plg	Pilagá
+plh	Paulohi
+pli	Pali
+plj	Polci
+plk	Kohistani Shina
+pll	Shwe Palaung
+pln	Palenquero
+plo	Oluta Popoluca
+plp	Palpa
+plq	Palaic
+plr	Palaka Senoufo
+pls	San Marcos Tlalcoyalco Popoloca
+plt	Plateau Malagasy
+plu	Palikúr
+plv	Southwest Palawano
+plw	Brooke's Point Palawano
+ply	Bolyu
+plz	Paluan
+pma	Paama
+pmb	Pambia
+pmc	Palumata
+pme	Pwaamei
+pmf	Pamona
+pmh	Māhārāṣṭri Prākrit
+pmi	Northern Pumi
+pmj	Southern Pumi
+pmk	Pamlico
+pml	Lingua Franca
+pmm	Pomo
+pmn	Pam
+pmo	Pom
+pmq	Northern Pame
+pmr	Paynamar
+pms	Piemontese
+pmt	Tuamotuan
+pmu	Mirpur Panjabi
+pmw	Plains Miwok
+pmx	Poumei Naga
+pmy	Papuan Malay
+pmz	Southern Pame
+pna	Punan Bah-Biau
+pnb	Western Panjabi
+pnc	Pannei
+pne	Western Penan
+png	Pongu
+pnh	Penrhyn
+pni	Aoheng
+pnm	Punan Batu 1
+pnn	Pinai-Hagahai
+pno	Panobo
+pnp	Pancana
+pnq	Pana (Burkina Faso)
+pnr	Panim
+pns	Ponosakan
+pnt	Pontic
+pnu	Jiongnai Bunu
+pnv	Pinigura
+pnw	Panytyima
+pnx	Phong-Kniang
+pny	Pinyin
+pnz	Pana (Central African Republic)
+poa	Eastern Pokomam
+pob	Western Pokomchí
+poc	Central Pokomam
+pod	Ponares
+poe	San Juan Atzingo Popoloca
+pof	Poke
+pog	Potiguára
+poh	Eastern Pokomchí
+poi	Highland Popoluca
+pok	Pokangá
+pol	Polish
+pom	Southeastern Pomo
+pon	Pohnpeian
+poo	Central Pomo
+pop	Pwapwa
+poq	Texistepec Popoluca
+por	Portuguese
+pos	Sayula Popoluca
+#pot	Potawatomi			// dup
+pou	Southern Pokomam
+pov	Upper Guinea Crioulo
+pow	San Felipe Otlaltepec Popoloca
+pox	Polabian
+poy	Pogolo
+ppa	Pao
+ppe	Papi
+ppi	Paipai
+#ppk	Uma				// dup
+ppl	Pipil
+ppm	Papuma
+ppn	Papapana
+ppo	Folopa
+ppp	Pelende
+ppq	Pei
+ppr	Piru
+pps	San Luís Temalacayuca Popoloca
+ppt	Pare
+ppu	Papora
+ppv	Papavô
+pqa	Pa'a
+pqm	Malecite-Passamaquoddy
+prb	Lua'
+prc	Parachi
+prd	Parsi-Dari
+pre	Principense
+prg	Prussian
+prh	Porohanon
+pri	Paicî
+prk	Parauk
+prl	Peruvian Sign Language
+prm	Kibiri
+prn	Prasuni
+pro	Old Provençal (to 1500)
+prp	Parsi
+prq	Ashéninka Perené
+prr	Puri
+prs	Dari
+prt	Phai
+pru	Puragi
+prw	Parawen
+prx	Purik
+pry	Pray 3
+prz	Providencia Sign Language
+psa	Asue Awyu
+psc	Persian Sign Language
+psd	Plains Indian Sign Language
+pse	Central Malay
+psg	Penang Sign Language
+psh	Southwest Pashayi
+psi	Southeast Pashayi
+psl	Puerto Rican Sign Language
+psm	Pauserna
+psn	Panasuan
+pso	Polish Sign Language
+psp	Philippine Sign Language
+psq	Pasi
+psr	Portuguese Sign Language
+pss	Kaulong
+pst	Central Pashto
+psu	Sauraseni Prākrit
+psw	Port Sandwich
+psy	Piscataway
+pta	Pai Tavytera
+pth	Pataxó Hã-Ha-Hãe
+pti	Pintiini
+ptn	Patani
+pto	Zo'é
+ptp	Patep
+ptr	Piamatsina
+ptt	Enrekang
+ptu	Bambam
+ptv	Port Vato
+ptw	Pentlatch
+pty	Pathiya
+pua	Western Highland Purepecha
+pub	Purum
+puc	Punan Merap
+pud	Punan Aput
+pue	Puelche
+puf	Punan Merah
+pug	Phuie
+pui	Puinave
+puj	Punan Tubu
+puk	Pu Ko
+pum	Puma
+puo	Puoc
+pup	Pulabu
+puq	Puquina
+pur	Puruborá
+pus	Pushto
+put	Putoh
+puu	Punu
+puw	Puluwatese
+pux	Puari
+puy	Purisimeño
+puz	Purum Naga
+pwa	Pawaia
+pwb	Panawa
+pwg	Gapapaiwa
+pwm	Molbog
+pwn	Paiwan
+pwo	Pwo Western Karen
+pwr	Powari
+pww	Pwo Northern Karen
+pxm	Quetzaltepec Mixe
+pye	Pye Krumen
+pym	Fyam
+pyn	Poyanáwa
+pyu	Puyuma
+pyx	Pyu (Myanmar)
+pyy	Pyen
+pzn	Para Naga
+qua	Quapaw
+qub	Huallaga Huánuco Quechua
+quc	Central Quiché
+qud	Calderón Highland Quichua
+que	Quechua
+quf	Lambayeque Quechua
+qug	Chimborazo Highland Quichua
+quh	South Bolivian Quechua
+qui	Quileute
+quj	Joyabaj Quiché
+quk	Chachapoyas Quechua
+qul	North Bolivian Quechua
+qum	Sipacapense
+qun	Quinault
+qup	Southern Pastaza Quechua
+quq	Quinqui
+qur	Yanahuanca Pasco Quechua
+qus	Santiago del Estero Quichua
+qut	West Central Quiché
+quu	Eastern Quiché
+quv	Sacapulteco
+quw	Tena Lowland Quichua
+qux	Yauyos Quechua
+quy	Ayacucho Quechua
+quz	Cusco Quechua
+qva	Ambo-Pasco Quechua
+qvc	Cajamarca Quechua
+qve	Eastern Apurímac Quechua
+qvh	Huamalíes-Dos de Mayo Huánuco Quechua
+qvi	Imbabura Highland Quichua
+qvj	Loja Highland Quichua
+qvl	Cajatambo North Lima Quechua
+qvm	Margos-Yarowilca-Lauricocha Quechua
+qvn	North Junín Quechua
+qvo	Napo Lowland Quechua
+qvp	Pacaraos Quechua
+qvs	San Martín Quechua
+qvw	Huaylla Wanca Quechua
+qvy	Queyu
+qvz	Northern Pastaza Quichua
+qwa	Corongo Ancash Quechua
+qwc	Classical Quechua
+qwh	Huaylas Ancash Quechua
+qwm	Kuman (Russia)
+qws	Sihuas Ancash Quechua
+qwt	Kwalhioqua-Tlatskanai
+qxa	Chiquián Ancash Quechua
+qxc	Chincha Quechua
+qxh	Panao Huánuco Quechua
+qxi	San Andrés Quiché
+qxl	Salasaca Highland Quichua
+qxn	Northern Conchucos Ancash Quechua
+qxo	Southern Conchucos Ancash Quechua
+qxp	Puno Quechua
+qxq	Qashqa'i
+qxr	Cañar Highland Quichua
+qxs	Southern Qiang
+qxt	Santa Ana de Tusi Pasco Quechua
+qxu	Arequipa-La Unión Quechua
+qxw	Jauja Wanca Quechua
+qya	Quenya
+raa	Dungmali
+rab	Camling
+rac	Rasawa
+rad	Rade
+raf	Western Meohang
+rag	Logooli
+rah	Rabha
+rai	Ramoaaina
+raj	Rajasthani
+rak	Tulu-Bohuai
+ral	Ralte
+ram	Canela
+ran	Riantana
+rao	Rao
+rap	Rapanui
+raq	Saam
+rar	Rarotongan
+ras	Tegali
+rat	Razajerdi
+rau	Raute
+rav	Sampang
+raw	Rawang
+rax	Rang
+ray	Rapa
+raz	Rahambuu
+rbb	Rumai Palaung
+rcf	Réunion Creole French
+rdb	Rudbari
+rea	Rerau
+reb	Rembong
+ree	Rejang Kayan
+reg	Kara (Tanzania)
+rei	Reli
+rej	Rejang
+rel	Rendille
+rem	Remo
+ren	Rengao
+rer	Rer Bare
+res	Reshe
+ret	Retta
+rey	Reyesano
+rga	Roria
+rge	Romano-Greek
+rgk	Rangkas
+rgr	Resígaro
+rgs	Southern Roglai
+rgu	Ringgou
+rhg	Rohingya
+rhp	Yahang
+ria	Riang (India)
+rie	Rien
+rif	Tarifit
+ril	Riang (Myanmar)
+rim	Nyaturu
+rin	Nungu
+rir	Ribun
+rit	Ritarungo
+riu	Riung
+rjg	Rajong
+rji	Raji
+rjs	Rajbanshi
+rka	Kraol
+rkb	Rikbaktsa
+rkh	Rakahanga-Manihiki
+rki	Rakhine
+rkm	Marka
+rkt	Rangpuri
+rma	Rama
+rmb	Rembarunga
+rmc	Carpathian Romani
+rmd	Traveller Danish
+rme	Angloromani
+rmf	Kalo Finnish Romani
+rmg	Traveller Norwegian
+rmh	Murkim
+rmi	Lomavren
+rmk	Romkun
+rml	Baltic Romani
+rmm	Roma
+rmn	Balkan Romani
+rmo	Sinte Romani
+rmp	Rempi
+rmr	Caló
+rms	Romanian Sign Language
+rmt	Domari
+rmu	Tavringer Romani
+rmv	Romanova
+rmw	Welsh Romani
+rmx	Romam
+rmy	Vlax Romani
+rmz	Marma
+rna	Runa
+rnd	Ruund
+rng	Ronga
+rnl	Ranglong
+rnn	Roon
+rnp	Rongpo
+rnw	Rungwa
+rob	Tae'
+roc	Cacgia Roglai
+rod	Rogo
+roe	Ronji
+rof	Rombo
+rog	Northern Roglai
+roh	Romansh
+rol	Romblomanon
+rom	Romany
+ron	Romanian
+roo	Rotokas
+rop	Kriol
+ror	Rongga
+rou	Runga
+row	Dela-Oenale
+rpn	Repanbitip
+rpt	Rapting
+rri	Ririo
+rro	Waima
+rsb	Romano-Serbian
+rsi	Rennellese Sign Language
+rsl	Russian Sign Language
+rth	Ratahan
+rtm	Rotuman
+rtw	Rathawi
+rub	Gungu
+ruc	Ruuli
+rue	Rusyn
+ruf	Luguru
+rug	Roviana
+ruh	Ruga
+rui	Rufiji
+ruk	Che
+run	Rundi
+ruo	Istro Romanian
+rup	Macedo Romanian
+ruq	Megleno Romanian
+rus	Russian
+rut	Rutul
+ruu	Lanas Lobu
+ruy	Mala (Nigeria)
+ruz	Ruma
+rwa	Rawo
+rwk	Rwa
+rwm	Amba (Uganda)
+rwo	Rawa
+rwr	Marwari (India)
+ryn	Northern Amami-Oshima
+rys	Yaeyama
+ryu	Central Okinawan
+saa	Saba
+sab	Buglere
+sac	Meskwaki
+sad	Sandawe
+sae	Sabanês
+saf	Safaliba
+sag	Sango
+sah	Yakut
+saj	Sahu
+sak	Sake
+sam	Samaritan Aramaic
+san	Sanskrit
+sao	Sause
+sap	Sanapaná
+saq	Samburu
+sar	Saraveca
+sas	Sasak
+sat	Santali
+sau	Saleman
+sav	Saafi-Saafi
+saw	Sawi
+sax	Sa
+say	Saya
+saz	Saurashtra
+sba	Ngambay
+sbb	Simbo
+sbc	Kele (Papua New Guinea)
+sbd	Southern Samo
+sbe	Saliba
+sbf	Shabo
+sbg	Seget
+sbh	Sori-Harengan
+sbi	Seti
+sbj	Surbakhal
+sbk	Safwa
+sbl	Botolan Sambal
+sbm	Sagala
+sbn	Sindhi Bhil
+sbo	Sabüm
+sbp	Sangu (Tanzania)
+sbq	Sileibi
+sbr	Sembakung Murut
+sbs	Subiya
+sbt	Kimki
+sbu	Stod Bhoti
+sbv	Sabine
+sbw	Simba
+sbx	Seberuang
+sby	Soli
+sbz	Sara Kaba
+sca	Sansu
+scb	Chut
+sce	Dongxiang
+scf	San Miguel Creole French
+scg	Sanggau
+sch	Sakachep
+sci	Sri Lankan Creole Malay
+sck	Sadri
+scl	Shina
+scn	Sicilian
+#sco	Scots				// dup
+scp	Helambu Sherpa
+scq	Sa'och
+scs	North Slavey
+scu	Shumcho
+scv	Sheni
+scw	Sha
+scx	Sicel
+sda	Toraja-Sa'dan
+sdb	Shabak
+sdc	Sassarese Sardinian
+sde	Surubu
+sdf	Sarli
+sdg	Savi
+sdh	Southern Kurdish
+sdj	Suundi
+sdl	Saudi Arabian Sign Language
+sdm	Semandang
+sdn	Gallurese Sardinian
+sdo	Bukar-Sadung Bidayuh
+sdp	Sherdukpen
+sdr	Oraon Sadri
+sds	Sened
+sdt	Shuadit
+sdu	Sarudu
+sdx	Sibu Melanau
+sdz	Sallands
+sea	Semai
+seb	Shempire Senoufo
+sec	Sechelt
+sed	Sedang
+see	Seneca
+sef	Cebaara Senoufo
+seg	Segeju
+seh	Sena
+sei	Seri
+sej	Sene
+sek	Sekani
+sel	Selkup
+sen	Nanerigé Sénoufo
+seo	Suarmin
+sep	Sìcìté Sénoufo
+seq	Senara Sénoufo
+ser	Serrano
+ses	Koyraboro Senni Songhai
+set	Sentani
+seu	Serui-Laut
+sev	Nyarafolo Senoufo
+sew	Sewa Bay
+sey	Secoya
+sez	Senthang Chin
+sfb	Langue des signes de Belgique Francophone
+sfm	Small Flowery Miao
+sfs	South African Sign Language
+sfw	Sehwi
+sga	Old Irish (to 900)
+sgb	Mag-Anchi Ayta
+sgc	Kipsigis
+sge	Segai
+sgg	Swiss-German Sign Language
+sgh	Shughni
+sgi	Suga
+sgk	Sangkong
+sgl	Sanglechi-Ishkashimi
+sgm	Singa
+sgo	Songa
+sgp	Singpho
+sgr	Sangisari
+sgt	Brokpake
+sgu	Salas
+sgw	Sebat Bet Gurage
+sgx	Sierra Leone Sign Language
+sgz	Sursurunga
+sha	Shall-Zwall
+shb	Ninam
+shc	Sonde
+she	Sheko
+shg	Shua
+shh	Shoshoni
+shi	Tachelhit
+shj	Shatt
+shk	Shilluk
+shl	Shendu
+shm	Shahrudi
+shn	Shan
+sho	Shanga
+shp	Shipibo-Conibo
+shq	Sala
+shr	Shi
+shs	Shuswap
+sht	Shasta
+shu	Chadian Arabic
+shv	Shehri
+shw	Shwai
+shx	She
+shy	Tachawit
+shz	Syenara Senoufo
+sia	Akkala Sami
+sib	Sebop
+sic	Malinguat
+sid	Sidamo
+sie	Simaa
+sif	Siamou
+sig	Paasaal
+sih	Zire
+sii	Shom Peng
+sij	Numbami
+sik	Sikiana
+sil	Tumulung Sisaala
+sim	Mende (Papua New Guinea)
+sin	Sinhala
+sip	Sikkimese
+siq	Sonia
+sir	Siri
+sis	Siuslaw
+siu	Sinagen
+siv	Sumariup
+siw	Siwai
+six	Sumau
+siy	Sivandi
+siz	Siwi
+sja	Epena
+sjb	Sajau Basap
+sjd	Kildin Sami
+sje	Pite Sami
+sjg	Assangori
+sjk	Kemi Sami
+sjl	Sajalong
+sjm	Mapun
+sjn	Sindarin
+sjo	Xibe
+sjp	Surjapuri
+sjr	Siar-Lak
+sjs	Senhaja De Srair
+sjt	Ter Sami
+sju	Ume Sami
+sjw	Shawnee
+ska	Skagit
+skb	Saek
+skc	Sauk
+skd	Southern Sierra Miwok
+ske	Seke (Vanuatu)
+skf	Sakirabiá
+skg	Sakalava Malagasy
+skh	Sikule
+ski	Sika
+skj	Seke (Nepal)
+skk	Sok
+skm	Sakam
+skn	Kolibugan Subanon
+sko	Seko Tengah
+skp	Sekapan
+skq	Sininkere
+skr	Seraiki
+sks	Maia
+skt	Sakata
+sku	Sakao
+skv	Skou
+skw	Skepi Creole Dutch
+skx	Seko Padang
+sky	Sikaiana
+skz	Sekar
+slc	Sáliba
+sld	Sissala
+sle	Sholaga
+slf	Swiss-Italian Sign Language
+slg	Selungai Murut
+slh	Southern Puget Sound Salish
+sli	Lower Silesian
+slj	Salumá
+slk	Slovak
+sll	Salt-Yui
+slm	Pangutaran Sama
+sln	Salinan
+slp	Lamaholot
+slq	Salchuq
+slr	Salar
+sls	Singapore Sign Language
+slt	Sila
+slu	Selaru
+slv	Slovenian
+slw	Sialum
+slx	Salampasu
+sly	Selayar
+slz	Ma'ya
+sma	Southern Sami
+smb	Simbari
+smc	Som
+smd	Sama
+sme	Northern Sami
+smf	Auwe
+smg	Simbali
+smh	Samei
+smj	Lule Sami
+smk	Bolinao
+sml	Central Sama
+smm	Musasa
+smn	Inari Sami
+smo	Samoan
+smp	Samaritan
+smq	Samo
+smr	Simeulue
+sms	Skolt Sami
+smt	Simte
+smu	Somray
+smv	Samvedi
+smw	Sumbawa
+smx	Samba
+smy	Semnani
+smz	Simeku
+sna	Shona
+snb	Sebuyau
+snc	Sinaugoro
+snd	Sindhi
+sne	Bau Bidayuh
+snf	Noon
+sng	Sanga (Democratic Republic of Congo)
+snh	Shinabo
+sni	Sensi
+snj	Riverain Sango
+snk	Soninke
+snl	Sangil
+snm	Southern Ma'di
+snn	Siona
+sno	Snohomish
+snp	Siane
+snq	Sangu (Gabon)
+snr	Sihan
+sns	South West Bay
+snu	Senggi
+snv	Sa'ban
+snw	Selee
+snx	Sam
+sny	Saniyo-Hiyewe
+snz	Sinsauru
+soa	Thai Song
+sob	Sobei
+soc	So (Democratic Republic of Congo)
+sod	Songoora
+soe	Songomeno
+sog	Sogdian
+soh	Aka
+soi	Sonha
+soj	Soi
+sok	Sokoro
+sol	Solos
+som	Somali
+soo	Songo
+sop	Songe
+soq	Kanasi
+sor	Somrai
+sos	Seeku
+sot	Southern Sotho
+sou	Southern Thai
+sov	Sonsorol
+sow	Sowanda
+sox	So (Cameroon)
+soy	Miyobe
+soz	Temi
+spa	Spanish
+spb	Sepa (Indonesia)
+spc	Sapé
+spd	Saep
+spe	Sepa (Papua New Guinea)
+spg	Sian
+spi	Saponi
+spk	Sengo
+spl	Selepet
+spm	Sepen
+spo	Spokane
+spp	Supyire Senoufo
+spq	Loreto-Ucayali Spanish
+spr	Saparua
+sps	Saposa
+spt	Spiti Bhoti
+spu	Sapuan
+spx	South Picene
+spy	Sabaot
+sqa	Shama-Sambuga
+sqh	Shau
+sqi	Albanian
+sqm	Suma
+sqn	Susquehannock
+sqo	Sorkhei
+sqq	Sou
+sqs	Sri Lankan Sign Language
+sqt	Soqotri
+squ	Squamish
+sra	Saruga
+srb	Sora
+src	Logudorese Sardinian
+srd	Sardinian
+sre	Sara
+srf	Nafi
+srg	Sulod
+srh	Sarikoli
+sri	Siriano
+srk	Serudung Murut
+srl	Isirawa
+srm	Saramaccan
+srn	Sranan Tongo
+sro	Campidanese Sardinian
+srp	Serbian
+srq	Sirionó
+srr	Serer
+srs	Sarsi
+srt	Sauri
+sru	Suruí
+srv	Waray Sorsogon
+srw	Serua
+srx	Sirmauri
+sry	Sera
+srz	Shahmirzadi
+ssb	Southern Sama
+ssc	Suba-Simbiti
+ssd	Siroi
+sse	Balangingi
+ssf	Thao
+ssg	Seimat
+ssh	Shihhi Arabic
+ssi	Sansi
+ssj	Sausi
+ssk	Sunam
+ssl	Western Sisaala
+ssm	Semnam
+ssn	Waata
+sso	Sissano
+ssp	Spanish Sign Language
+ssq	So'a
+ssr	Swiss-French Sign Language
+sss	Sô
+sst	Sinasina
+ssu	Susuami
+ssv	Shark Bay
+ssw	Swati
+ssx	Samberigi
+ssy	Saho
+ssz	Sengseng
+sta	Settla
+stb	Northern Subanen
+stc	Santa Cruz
+std	Sentinel
+ste	Liana-Seti
+stf	Seta
+stg	Trieng
+sth	Shelta
+sti	Bulo Stieng
+stj	Matya Samo
+stk	Arammba
+stl	Stellingwerfs
+stm	Setaman
+stn	Owa
+sto	Stoney
+stp	Southeastern Tepehuan
+stq	Saterfriesisch
+str	Straits Salish
+sts	Shumashti
+stt	Budeh Stieng
+stu	Samtao
+stv	Silt'e
+stw	Satawalese
+sua	Sulka
+sub	Suku
+suc	Western Subanon
+sue	Suena
+sug	Suganga
+sui	Suki
+suj	Shubi
+suk	Sukuma
+sul	Surigaonon
+sum	Sumo-Mayangna
+sun	Sundanese
+suq	Suri
+sur	Mwaghavul
+sus	Susu
+sut	Subtiaba
+suv	Sulung
+suw	Sumbwa
+sux	Sumerian
+suy	Suyá
+suz	Sunwar
+sva	Svan
+svb	Ulau-Suain
+svc	Vincentian Creole English
+sve	Serili
+svk	Slovakian Sign Language
+svr	Savara
+svs	Savosavo
+svx	Skalvian
+swa	Swahili (macrolanguage)
+swb	Comorian
+swc	Congo Swahili
+swe	Swedish
+swf	Sere
+swg	Swabian
+swh	Swahili (individual language)
+swi	Sui
+swj	Sira
+swk	Malawi Sena
+swl	Swedish Sign Language
+swm	Samosa
+swn	Sawknah
+swo	Shanenawa
+swp	Suau
+swq	Sharwa
+swr	Saweru
+sws	Seluwasan
+swt	Sawila
+swu	Suwawa
+swv	Shekhawati
+sww	Sowa
+swx	Suruahá
+swy	Sarua
+sxb	Suba
+sxc	Sicanian
+sxe	Sighu
+sxg	Shixing
+sxk	Southern Kalapuya
+sxl	Selian
+sxm	Samre
+sxn	Sangir
+sxo	Sorothaptic
+sxr	Saaroa
+sxs	Sasaru
+sxu	Upper Saxon
+sxw	Saxwe Gbe
+sya	Siang
+syb	Central Subanen
+syc	Classical Syriac
+syi	Seki
+syk	Sukur
+syl	Sylheti
+sym	Maya Samo
+syn	Senaya
+syo	Suoy
+#syr	Syriac				// dup
+sys	Sinyar
+syw	Kagate
+sza	Semelai
+szb	Ngalum
+szc	Semaq Beri
+szd	Seru
+sze	Seze
+szg	Sengele
+szl	Silesian
+szn	Sula
+szp	Suabo
+szv	Isu (Fako Division)
+szw	Sawai
+taa	Lower Tanana
+tab	Tabassaran
+tac	Lowland Tarahumara
+tad	Tause
+tae	Tariana
+taf	Tapirapé
+tag	Tagoi
+tah	Tahitian
+taj	Eastern Tamang
+tak	Tala
+tal	Tal
+tam	Tamil
+tan	Tangale
+tao	Yami
+tap	Taabwa
+taq	Tamasheq
+tar	Central Tarahumara
+tas	Tay Boi
+tat	Tatar
+tau	Upper Tanana
+tav	Tatuyo
+taw	Tai
+tax	Tamki
+tay	Atayal
+taz	Tocho
+tba	Aikanã
+tbb	Tapeba
+tbc	Takia
+tbd	Kaki Ae
+tbe	Tanimbili
+tbf	Mandara
+tbg	North Tairora
+tbh	Thurawal
+tbi	Gaam
+tbj	Tiang
+tbk	Calamian Tagbanwa
+tbl	Tboli
+tbm	Tagbu
+tbn	Barro Negro Tunebo
+tbo	Tawala
+tbp	Taworta
+tbr	Tumtum
+tbs	Tanguat
+tbt	Tembo (Kitembo)
+tbu	Tubar
+tbv	Tobo
+tbw	Tagbanwa
+tbx	Kapin
+tby	Tabaru
+tbz	Ditammari
+tca	Ticuna
+tcb	Tanacross
+tcc	Datooga
+tcd	Tafi
+tce	Southern Tutchone
+tcf	Malinaltepec Tlapanec
+tcg	Tamagario
+tch	Turks And Caicos Creole English
+tci	Wára
+tck	Tchitchege
+tcl	Taman (Myanmar)
+tcm	Tanahmerah
+tcn	Tichurong
+tco	Taungyo
+tcp	Tawr Chin
+tcq	Kaiy
+tcs	Torres Strait Creole
+tct	T'en
+tcu	Southeastern Tarahumara
+tcw	Tecpatlán Totonac
+tcx	Toda
+tcy	Tulu
+tcz	Thado Chin
+tda	Tagdal
+tdb	Panchpargania
+tdc	Emberá-Tadó
+tdd	Tai Nüa
+tdf	Talieng
+tdg	Western Tamang
+tdh	Thulung
+tdi	Tomadino
+tdj	Tajio
+tdk	Tambas
+tdl	Sur
+tdn	Tondano
+tdo	Teme
+tdq	Tita
+tdr	Todrah
+tds	Doutai
+tdt	Tetun Dili
+tdu	Tempasuk Dusun
+tdv	Toro
+tdx	Tandroy-Mahafaly Malagasy
+tdy	Tadyawan
+tea	Temiar
+teb	Tetete
+tec	Terik
+ted	Tepo Krumen
+tee	Huehuetla Tepehua
+tef	Teressa
+teg	Teke-Tege
+teh	Tehuelche
+tei	Torricelli
+tek	Ibali Teke
+tel	Telugu
+tem	Timne
+ten	Tama (Colombia)
+teo	Teso
+tep	Tepecano
+teq	Temein
+ter	Tereno
+tes	Tengger
+tet	Tetum
+teu	Soo
+tev	Teor
+tew	Tewa (USA)
+tex	Tennet
+tey	Tulishi
+tfi	Tofin Gbe
+tfn	Tanaina
+tfo	Tefaro
+tfr	Teribe
+tft	Ternate
+tga	Sagalla
+tgb	Tobilung
+tgc	Tigak
+tgd	Ciwogai
+tge	Eastern Gorkha Tamang
+tgf	Chalikha
+tgg	Tangga
+tgh	Tobagonian Creole English
+tgi	Lawunuia
+tgk	Tajik
+tgl	Tagalog
+tgo	Sudest
+tgp	Tangoa
+tgq	Tring
+tgr	Tareng
+tgs	Nume
+tgt	Central Tagbanwa
+tgu	Tanggu
+tgv	Tingui-Boto
+tgw	Tagwana Senoufo
+tgx	Tagish
+tgy	Togoyo
+tha	Thai
+thc	Tai Hang Tong
+thd	Thayore
+the	Chitwania Tharu
+thf	Thangmi
+thh	Northern Tarahumara
+thi	Tai Long
+thk	Tharaka
+thl	Dangaura Tharu
+thm	Aheu
+thn	Thachanadan
+thp	Thompson
+thq	Kochila Tharu
+thr	Rana Tharu
+ths	Thakali
+tht	Tahltan
+thu	Thuri
+thv	Tahaggart Tamahaq
+thw	Thudam
+thx	The
+thy	Tha
+thz	Tayart Tamajeq
+tia	Tidikelt Tamazight
+tic	Tira
+tid	Tidong
+tie	Tingal
+tif	Tifal
+tig	Tigre
+tih	Timugon Murut
+tii	Tiene
+tij	Tilung
+tik	Tikar
+til	Tillamook
+tim	Timbe
+tin	Tindi
+tio	Teop
+tip	Trimuris
+tiq	Tiéfo
+tir	Tigrinya
+tis	Masadiit Itneg
+tit	Tinigua
+tiu	Adasen
+tiv	Tiv
+tiw	Tiwi
+tix	Southern Tiwa
+tiy	Tiruray
+tiz	Tai Hongjin
+tja	Tajuasohn
+tjg	Tunjung
+tji	Northern Tujia
+tjm	Timucua
+tjn	Tonjon
+tjo	Temacine Tamazight
+tjs	Southern Tujia
+tju	Tjurruru
+tka	Truká
+tkb	Buksa
+tkd	Tukudede
+tke	Takwane
+tkf	Tukumanféd
+tkk	Takpa
+tkl	Tokelau
+tkm	Takelma
+tkn	Toku-No-Shima
+tkp	Tikopia
+tkq	Tee
+tkr	Tsakhur
+tks	Takestani
+tkt	Kathoriya Tharu
+tku	Upper Necaxa Totonac
+tkw	Teanu
+tkx	Tangko
+tkz	Takua
+tla	Southwestern Tepehuan
+tlb	Tobelo
+tlc	Yecuatla Totonac
+tld	Talaud
+tlf	Telefol
+tlg	Tofanma
+#tlh	Klingon				// dup
+tli	Tlingit
+tlj	Talinga-Bwisi
+tlk	Taloki
+tll	Tetela
+tlm	Tolomako
+tln	Talondo'
+tlo	Talodi
+tlp	Filomena Mata-Coahuitlán Totonac
+tlq	Tai Loi
+tlr	Talise
+tls	Tambotalo
+tlt	Teluti
+tlu	Tulehu
+tlv	Taliabu
+tlw	South Wemale
+tlx	Khehek
+tly	Talysh
+tlz	Toala'
+tma	Tama (Chad)
+tmb	Katbol
+tmc	Tumak
+tmd	Haruai
+tme	Tremembé
+tmf	Toba-Maskoy
+tmg	Ternateño
+tmh	Tamashek
+tmi	Tutuba
+tmj	Samarokena
+tmk	Northwestern Tamang
+tml	Tamnim Citak
+tmm	Tai Thanh
+tmn	Taman (Indonesia)
+tmo	Temoq
+tmp	Tai Mène
+tmq	Tumleo
+tmr	Jewish Babylonian Aramaic (ca. 200-1200 CE)
+tms	Tima
+tmt	Tasmate
+tmu	Iau
+tmv	Tembo (Motembo)
+tmw	Temuan
+tmy	Tami
+tmz	Tamanaku
+tna	Tacana
+tnb	Western Tunebo
+tnc	Tanimuca-Retuarã
+tnd	Angosturas Tunebo
+tne	Tinoc Kallahan
+tnf	Tangshewi
+tng	Tobanga
+tnh	Maiani
+tni	Tandia
+tnk	Kwamera
+tnl	Lenakel
+tnm	Tabla
+tnn	North Tanna
+tno	Toromono
+tnp	Whitesands
+tnq	Taino
+tnr	Bedik
+tns	Tenis
+tnt	Tontemboan
+tnu	Tay Khang
+tnv	Tangchangya
+tnw	Tonsawang
+tnx	Tanema
+tny	Tongwe
+tnz	Tonga (Thailand)
+tob	Toba
+toc	Coyutla Totonac
+tod	Toma
+toe	Tomedes
+tof	Gizrra
+tog	Tonga (Nyasa)
+toh	Gitonga
+toi	Tonga (Zambia)
+toj	Tojolabal
+tol	Tolowa
+tom	Tombulu
+ton	Tonga (Tonga Islands)
+too	Xicotepec De Juárez Totonac
+top	Papantla Totonac
+toq	Toposa
+tor	Togbo-Vara Banda
+tos	Highland Totonac
+tou	Tho
+tov	Upper Taromi
+tow	Jemez
+tox	Tobian
+toy	Topoiyo
+toz	To
+tpa	Taupota
+tpc	Azoyú Tlapanec
+tpe	Tippera
+tpf	Tarpia
+tpg	Kula
+tpi	Tok Pisin
+tpj	Tapieté
+tpk	Tupinikin
+tpl	Tlacoapa Tlapanec
+tpm	Tampulma
+tpn	Tupinambá
+tpo	Tai Pao
+tpp	Pisaflores Tepehua
+tpq	Tukpa
+tpr	Tuparí
+tpt	Tlachichilco Tepehua
+tpu	Tampuan
+tpv	Tanapag
+tpw	Tupí
+tpx	Acatepec Tlapanec
+tpy	Trumai
+tpz	Tinputz
+tqb	Tembé
+tql	Lehali
+tqm	Turumsa
+tqn	Tenino
+tqo	Toaripi
+tqp	Tomoip
+tqq	Tunni
+tqr	Torona
+tqt	Western Totonac
+tqu	Touo
+tqw	Tonkawa
+tra	Tirahi
+trb	Terebu
+trc	Copala Triqui
+trd	Turi
+tre	East Tarangan
+trf	Trinidadian Creole English
+trg	Lishán Didán
+trh	Turaka
+tri	Trió
+trj	Toram
+trl	Traveller Scottish
+trm	Tregami
+trn	Trinitario
+tro	Tarao Naga
+trp	Kok Borok
+trq	San Martín Itunyoso Triqui
+trr	Taushiro
+trs	Chicahuaxtla Triqui
+trt	Tunggare
+tru	Turoyo
+trv	Taroko
+trw	Torwali
+trx	Tringgus-Sembaan Bidayuh
+try	Turung
+trz	Torá
+tsa	Tsaangi
+tsb	Tsamai
+tsc	Tswa
+tsd	Tsakonian
+tse	Tunisian Sign Language
+tsf	Southwestern Tamang
+tsg	Tausug
+tsh	Tsuvan
+tsi	Tsimshian
+tsj	Tshangla
+tsk	Tseku
+tsl	Ts'ün-Lao
+tsm	Turkish Sign Language
+tsn	Tswana
+tso	Tsonga
+tsp	Northern Toussian
+tsq	Thai Sign Language
+tsr	Akei
+tss	Taiwan Sign Language
+tsu	Tsou
+tsv	Tsogo
+tsw	Tsishingini
+tsx	Mubami
+tsy	Tebul Sign Language
+tsz	Purepecha
+tta	Tutelo
+ttb	Gaa
+ttc	Tektiteko
+ttd	Tauade
+tte	Bwanabwana
+ttf	Tuotomb
+ttg	Tutong
+tth	Upper Ta'oih
+tti	Tobati
+ttj	Tooro
+ttk	Totoro
+ttl	Totela
+ttm	Northern Tutchone
+ttn	Towei
+tto	Lower Ta'oih
+ttp	Tombelala
+ttq	Tawallammat Tamajaq
+ttr	Tera
+tts	Northeastern Thai
+ttt	Muslim Tat
+ttu	Torau
+ttv	Titan
+ttw	Long Wat
+tty	Sikaritai
+ttz	Tsum
+tua	Wiarumus
+tub	Tübatulabal
+tuc	Mutu
+tud	Tuxá
+tue	Tuyuca
+tuf	Central Tunebo
+tug	Tunia
+tuh	Taulil
+tui	Tupuri
+tuj	Tugutil
+tuk	Turkmen
+tul	Tula
+tum	Tumbuka
+tun	Tunica
+tuo	Tucano
+tuq	Tedaga
+tur	Turkish
+tus	Tuscarora
+tuu	Tututni
+tuv	Turkana
+tux	Tuxináwa
+tuy	Tugen
+tuz	Turka
+tva	Vaghua
+tvd	Tsuvadi
+tve	Te'un
+tvk	Southeast Ambrym
+tvl	Tuvalu
+tvm	Tela-Masbuar
+tvn	Tavoyan
+tvo	Tidore
+tvs	Taveta
+tvt	Tutsa Naga
+tvw	Sedoa
+tvy	Timor Pidgin
+twa	Twana
+twb	Western Tawbuid
+twc	Teshenawa
+twd	Twents
+twe	Tewa (Indonesia)
+twf	Northern Tiwa
+twg	Tereweng
+twh	Tai Dón
+twi	Twi
+twl	Tawara
+twm	Tawang Monpa
+twn	Twendi
+two	Tswapong
+twp	Ere
+twq	Tasawaq
+twr	Southwestern Tarahumara
+twt	Turiwára
+twu	Termanu
+tww	Tuwari
+twx	Tewe
+twy	Tawoyan
+txa	Tombonuo
+txb	Tokharian B
+txc	Tsetsaut
+txe	Totoli
+txg	Tangut
+txh	Thracian
+txi	Ikpeng
+txm	Tomini
+txn	West Tarangan
+txo	Toto
+txq	Tii
+txr	Tartessian
+txs	Tonsea
+txt	Citak
+txu	Kayapó
+txx	Tatana
+txy	Tanosy Malagasy
+tya	Tauya
+tye	Kyenga
+tyh	O'du
+tyi	Teke-Tsaayi
+tyj	Tai Do
+tyl	Thu Lao
+tyn	Kombai
+typ	Thaypan
+tyr	Tai Daeng
+tys	Tày Sa Pa
+tyt	Tày Tac
+tyu	Kua
+tyv	Tuvinian
+tyx	Teke-Tyee
+tyz	Tày
+tza	Tanzanian Sign Language
+tzb	Bachajón Tzeltal
+tzc	Chamula Tzotzil
+tze	Chenalhó Tzotzil
+tzh	Oxchuc Tzeltal
+tzj	Eastern Tzutujil
+tzm	Central Atlas Tamazight
+tzn	Tugun
+tzo	Venustiano Carranza Tzotzil
+tzs	San Andrés Larrainzar Tzotzil
+tzt	Western Tzutujil
+tzu	Huixtán Tzotzil
+tzx	Tabriak
+tzz	Zinacantán Tzotzil
+uam	Uamué
+uan	Kuan
+uar	Tairuma
+uba	Ubang
+ubi	Ubi
+ubr	Ubir
+ubu	Umbu-Ungu
+uby	Ubykh
+uda	Uda
+ude	Udihe
+udg	Muduga
+udi	Udi
+udj	Ujir
+udl	Wuzlam
+udm	Udmurt
+udu	Uduk
+ues	Kioko
+ufi	Ufim
+uga	Ugaritic
+ugb	Kuku-Ugbanh
+uge	Ughele
+ugn	Ugandan Sign Language
+ugo	Ugong
+ugy	Uruguayan Sign Language
+uha	Uhami
+uhn	Damal
+uig	Uighur
+uis	Uisai
+uiv	Iyive
+uji	Tanjijili
+uka	Kaburi
+ukg	Ukuriguma
+ukh	Ukhwejo
+ukl	Ukrainian Sign Language
+ukp	Ukpe-Bayobiri
+ukq	Ukwa
+ukr	Ukrainian
+uks	Urubú-Kaapor Sign Language
+uku	Ukue
+ukw	Ukwuani-Aboh-Ndoni
+ula	Fungwa
+ulb	Ulukwumi
+ulc	Ulch
+ulf	Usku
+uli	Ulithian
+ulk	Meriam
+ull	Ullatan
+ulm	Ulumanda'
+uln	Unserdeutsch
+ulu	Uma' Lung
+uma	Umatilla
+umb	Umbundu
+umc	Marrucinian
+umd	Umbindhamu
+umg	Umbuygamu
+umi	Ukit
+umm	Umon
+umn	Makyan Naga
+umo	Umotína
+ump	Umpila
+umr	Umbugarla
+ums	Pendau
+umu	Munsee
+una	North Watut
+und	Undetermined
+une	Uneme
+ung	Ngarinyin
+unk	Enawené-Nawé
+unm	Unami
+unp	Worora
+unr	Mundari
+unx	Munda
+unz	Unde Kaili
+uok	Uokha
+upi	Umeda
+upv	Uripiv-Wala-Rano-Atchin
+ura	Urarina
+urb	Urubú-Kaapor
+urc	Urningangg
+urd	Urdu
+ure	Uru
+urf	Uradhi
+urg	Urigina
+urh	Urhobo
+uri	Urim
+urk	Urak Lawoi'
+url	Urali
+urm	Urapmin
+urn	Uruangnirin
+uro	Ura (Papua New Guinea)
+urp	Uru-Pa-In
+urr	Lehalurup
+urt	Urat
+uru	Urumi
+urv	Uruava
+urw	Sop
+urx	Urimo
+ury	Orya
+urz	Uru-Eu-Wau-Wau
+usa	Usarufa
+ush	Ushojo
+usi	Usui
+usk	Usaghade
+usp	Uspanteco
+usu	Uya
+uta	Otank
+ute	Ute-Southern Paiute
+utp	Amba (Solomon Islands)
+utr	Etulo
+utu	Utu
+uum	Urum
+uun	Kulon-Pazeh
+uur	Ura (Vanuatu)
+uuu	U
+uve	West Uvean
+uvh	Uri
+uvl	Lote
+uwa	Kuku-Uwanh
+uya	Doko-Uyanga
+uzb	Uzbek
+uzn	Northern Uzbek
+uzs	Southern Uzbek
+vaa	Vaagri Booli
+vae	Vale
+vaf	Vafsi
+vag	Vagla
+vah	Varhadi-Nagpuri
+vai	Vai
+vaj	Vasekela Bushman
+val	Vehes
+vam	Vanimo
+van	Valman
+vao	Vao
+vap	Vaiphei
+var	Huarijio
+vas	Vasavi
+vau	Vanuma
+vav	Varli
+vay	Wayu
+vbb	Southeast Babar
+vec	Venetian
+ved	Veddah
+vel	Veluws
+vem	Vemgo-Mabas
+ven	Venda
+veo	Ventureño
+vep	Veps
+ver	Mom Jango
+vgr	Vaghri
+vgt	Vlaamse Gebarentaal
+vic	Virgin Islands Creole English
+vid	Vidunda
+vie	Vietnamese
+vif	Vili
+vig	Viemo
+vil	Vilela
+vin	Vinza
+vis	Vishavan
+vit	Viti
+viv	Iduna
+vka	Kariyarra
+vki	Ija-Zuba
+vkj	Kujarge
+vkk	Kaur
+vkl	Kulisusu
+vkm	Kamakan
+vko	Kodeoha
+vkp	Korlai Creole Portuguese
+vkt	Tenggarong Kutai Malay
+vku	Kurrama
+vlp	Valpei
+vlr	Vatrata
+vls	Vlaams
+vma	Martuyhunira
+vmb	Mbabaram
+vmc	Juxtlahuaca Mixtec
+vmd	Mudu Koraga
+vme	East Masela
+vmf	Mainfränkisch
+vmg	Minigir
+vmh	Maraghei
+vmi	Miwa
+vmj	Ixtayutla Mixtec
+vmk	Makhuwa-Shirima
+vml	Malgana
+vmm	Mitlatongo Mixtec
+vmp	Soyaltepec Mazatec
+vmq	Soyaltepec Mixtec
+vmr	Marenje
+vms	Moksela
+vmu	Muluridyi
+vmv	Valley Maidu
+vmw	Makhuwa
+vmx	Tamazola Mixtec
+vmy	Ayautla Mazatec
+vmz	Mazatlán Mazatec
+vnk	Vano
+vnm	Vinmavis
+vnp	Vunapu
+vol	Volapük
+vor	Voro
+vot	Votic
+vrs	Varisi
+vrt	Burmbar
+vsi	Moldova Sign Language
+vsl	Venezuelan Sign Language
+vsv	Valencian Sign Language
+vto	Vitou
+vum	Vumbu
+vun	Vunjo
+vut	Vute
+vwa	Awa
+waa	Walla Walla
+wab	Wab
+wac	Wasco-Wishram
+wad	Wandamen
+wae	Walser
+waf	Wakoná
+wag	Wa'ema
+wah	Watubela
+wai	Wares
+waj	Waffa
+wal	Walamo
+wam	Wampanoag
+wan	Wan
+wao	Wappo
+wap	Wapishana
+waq	Wageman
+war	Waray (Philippines)
+was	Washo
+wat	Kaninuwa
+wau	Waurá
+wav	Waka
+waw	Waiwai
+wax	Watam
+way	Wayana
+waz	Wampur
+wba	Warao
+wbb	Wabo
+wbe	Waritai
+wbf	Wara
+wbh	Wanda
+wbi	Vwanji
+wbj	Alagwa
+wbk	Waigali
+wbl	Wakhi
+wbm	Wa
+wbp	Warlpiri
+wbq	Waddar
+wbr	Wagdi
+wbt	Wanman
+wbv	Wajarri
+wbw	Woi
+wca	Yanomámi
+wci	Waci Gbe
+wdd	Wandji
+wdg	Wadaginam
+wdj	Wadjiginy
+wdu	Wadjigu
+wea	Wewaw
+wec	Wè Western
+wed	Wedau
+weh	Weh
+wei	Were
+wem	Weme Gbe
+weo	North Wemale
+wep	Westphalien
+wer	Weri
+wes	Cameroon Pidgin
+wet	Perai
+weu	Welaung
+wew	Wejewa
+wfg	Yafi
+wga	Wagaya
+wgg	Wangganguru
+wgi	Wahgi
+wgo	Waigeo
+wgw	Wagawaga
+wgy	Warrgamay
+wha	Manusela
+whg	North Wahgi
+whk	Wahau Kenyah
+whu	Wahau Kayan
+wib	Southern Toussian
+wic	Wichita
+wie	Wik-Epa
+wif	Wik-Keyangan
+wig	Wik-Ngathana
+wih	Wik-Me'anha
+wii	Minidien
+wij	Wik-Iiyanh
+wik	Wikalkan
+wil	Wilawila
+wim	Wik-Mungkan
+win	Ho-Chunk
+wir	Wiraféd
+wit	Wintu
+wiu	Wiru
+wiv	Muduapa
+wiw	Wirangu
+wiy	Wiyot
+wja	Waja
+wji	Warji
+wka	Kw'adza
+wkb	Kumbaran
+wkd	Wakde
+wkl	Kalanadi
+wku	Kunduvadi
+wkw	Wakawaka
+wla	Walio
+wlc	Mwali Comorian
+wle	Wolane
+wlg	Kunbarlang
+wli	Waioli
+wlk	Wailaki
+wll	Wali (Sudan)
+wlm	Middle Welsh
+wln	Walloon
+wlo	Wolio
+wlr	Wailapa
+wls	Wallisian
+wlu	Wuliwuli
+wlv	Wichí Lhamtés Vejoz
+wlw	Walak
+wlx	Wali (Ghana)
+wly	Waling
+wma	Mawa (Nigeria)
+wmb	Wambaya
+wmc	Wamas
+wmd	Mamaindé
+wme	Wambule
+wmh	Waima'a
+wmi	Wamin
+wmm	Maiwa (Indonesia)
+wmn	Waamwang
+wmo	Wom (Papua New Guinea)
+wms	Wambon
+wmt	Walmajarri
+wmw	Mwani
+wnb	Wanambre
+wnc	Wantoat
+wnd	Wandarang
+wne	Waneci
+wng	Wanggom
+wni	Ndzwani Comorian
+wnk	Wanukaka
+wnm	Wanggamala
+wno	Wano
+wnp	Wanap
+wnu	Usan
+woa	Tyaraity
+wob	Wè Northern
+woc	Wogeo
+wod	Wolani
+woe	Woleaian
+wof	Gambian Wolof
+wog	Wogamusin
+woi	Kamang
+wok	Longto
+wol	Wolof
+wom	Wom (Nigeria)
+won	Wongo
+woo	Manombai
+wor	Woria
+wos	Hanga Hundi
+wow	Wawonii
+woy	Weyto
+wpc	Maco
+wra	Warapu
+wrb	Warluwara
+wrd	Warduji
+wrg	Warungu
+wrh	Wiradhuri
+wri	Wariyangga
+wrl	Warlmanpa
+wrm	Warumungu
+wrn	Warnang
+wrp	Waropen
+wrr	Wardaman
+wrs	Waris
+wru	Waru
+wrv	Waruna
+wrw	Gugu Warra
+wrx	Wae Rana
+wry	Merwari
+wrz	Waray (Australia)
+wsa	Warembori
+wsi	Wusi
+wsk	Waskia
+wsr	Owenia
+wss	Wasa
+wsu	Wasu
+wsv	Wotapuri-Katarqalai
+wtf	Dumpu
+wti	Berta
+wtk	Watakataui
+wtm	Mewati
+wtw	Wotu
+wua	Wikngenchera
+wub	Wunambal
+wud	Wudu
+wuh	Wutunhua
+wul	Silimo
+wum	Wumbvu
+wun	Bungu
+wur	Wurrugu
+wut	Wutung
+wuu	Wu Chinese
+wuv	Wuvulu-Aua
+wux	Wulna
+wuy	Wauyai
+wwa	Waama
+wwo	Wetamut
+wwr	Warrwa
+www	Wawa
+wxa	Waxianghua
+wya	Wyandot
+wyb	Wangaaybuwan-Ngiyambaa
+wym	Wymysorys
+wyr	Wayoró
+wyy	Western Fijian
+xaa	Andalusian Arabic
+xab	Sambe
+xac	Kachari
+xad	Adai
+xae	Aequian
+xag	Aghwan
+xai	Kaimbé
+xal	Kalmyk
+xam	/Xam
+xan	Xamtanga
+xao	Khao
+xap	Apalachee
+xaq	Aquitanian
+xar	Karami
+xas	Kamas
+xat	Katawixi
+xau	Kauwera
+xav	Xavánte
+xaw	Kawaiisu
+xay	Kayan Mahakam
+xba	Kamba (Brazil)
+xbc	Bactrian
+xbi	Kombio
+xbm	Middle Breton
+xbo	Bolgarian
+xbr	Kambera
+xbw	Kambiwá
+xbx	Kabixí
+xcb	Cumbric
+xcc	Camunic
+xce	Celtiberian
+xcg	Cisalpine Gaulish
+xch	Chemakum
+xcl	Classical Armenian
+xcm	Comecrudo
+xcn	Cotoname
+xco	Chorasmian
+xcr	Carian
+xct	Classical Tibetan
+xcu	Curonian
+xcv	Chuvantsy
+xcw	Coahuilteco
+xcy	Cayuse
+xdc	Dacian
+xdm	Edomite
+xdy	Malayic Dayak
+xeb	Eblan
+xed	Hdi
+xeg	//Xegwi
+xel	Kelo
+xem	Kembayan
+xep	Epi-Olmec
+xer	Xerénte
+xes	Kesawai
+xet	Xetá
+xeu	Keoru-Ahia
+xfa	Faliscan
+xga	Galatian
+xgf	Gabrielino-Fernandeño
+xgl	Galindan
+xgr	Garza
+xha	Harami
+xhc	Hunnic
+xhd	Hadrami
+xhe	Khetrani
+xho	Xhosa
+xhr	Hernican
+xht	Hattic
+xhu	Hurrian
+xhv	Khua
+xia	Xiandao
+xib	Iberian
+xii	Xiri
+xil	Illyrian
+xin	Xinca
+xip	Xipináwa
+xir	Xiriâna
+xiv	Indus Valley Language
+xiy	Xipaya
+xka	Kalkoti
+xkb	Manigri-Kambolé Ede Nago
+xkc	Kho'ini
+xkd	Mendalam Kayan
+xke	Kereho
+xkf	Khengkha
+xkg	Kagoro
+xkh	Karahawyana
+xki	Kenyan Sign Language
+xkj	Kajali
+xkk	Kaco'
+xkl	Mainstream Kenyah
+xkn	Kayan River Kayan
+xko	Kiorr
+xkp	Kabatei
+xkq	Koroni
+xkr	Xakriabá
+xks	Kumbewaha
+xkt	Kantosi
+xku	Kaamba
+xkv	Kgalagadi
+xkw	Kembra
+xkx	Karore
+xky	Uma' Lasan
+xkz	Kurtokha
+xla	Kamula
+xlb	Loup B
+xlc	Lycian
+xld	Lydian
+xle	Lemnian
+xlg	Ligurian (Ancient)
+xli	Liburnian
+xln	Alanic
+xlo	Loup A
+xlp	Lepontic
+xls	Lusitanian
+xlu	Cuneiform Luwian
+xly	Elymian
+xma	Mushungulu
+xmb	Mbonga
+xmc	Makhuwa-Marrevone
+xmd	Mbedam
+xme	Median
+xmf	Mingrelian
+xmg	Mengaka
+xmh	Kuku-Muminh
+xmj	Majera
+xmk	Ancient Macedonian
+xml	Malaysian Sign Language
+xmm	Manado Malay
+xmn	Manichaean Middle Persian
+xmo	Morerebi
+xmp	Kuku-Mu'inh
+xmq	Kuku-Mangk
+xmr	Meroitic
+xms	Moroccan Sign Language
+xmt	Matbat
+xmu	Kamu
+xmv	Antankarana Malagasy
+xmw	Tsimihety Malagasy
+xmx	Maden
+xmy	Mayaguduna
+xmz	Mori Bawah
+xna	Ancient North Arabian
+xnb	Kanakanabu
+xng	Middle Mongolian
+xnh	Kuanhua
+xnn	Northern Kankanay
+xno	Anglo-Norman
+xnr	Kangri
+xns	Kanashi
+xoc	O'chi'chi'
+xod	Kokoda
+xog	Soga
+xoi	Kominimung
+xok	Xokleng
+xom	Komo (Sudan)
+xon	Konkomba
+xoo	Xukurú
+xop	Kopar
+xor	Korubo
+xow	Kowaki
+xpc	Pecheneg
+xpe	Liberia Kpelle
+xpg	Phrygian
+xpi	Pictish
+xpk	Kulina Pano
+xpm	Pumpokol
+xpn	Kapinawá
+xpo	Pochutec
+xpp	Puyo-Paekche
+xpr	Parthian
+xps	Pisidian
+xpu	Punic
+xpy	Puyo
+xqa	Karakhanid
+xqt	Qatabanian
+xra	Krahô
+xrb	Eastern Karaboro
+xre	Kreye
+xri	Krikati-Timbira
+xrm	Armazic
+xrn	Arin
+xrr	Raetic
+xrt	Aranama-Tamique
+xru	Marriammu
+xrw	Karawa
+xsa	Sabaean
+xsb	Tinà Sambal
+xsc	Scythian
+xsd	Sidetic
+xse	Sempan
+xsh	Shamang
+xsi	Sio
+xsj	Subi
+xsk	Sakan
+xsl	South Slavey
+xsm	Kasem
+xsn	Sanga (Nigeria)
+xso	Solano
+xsp	Silopi
+xsq	Makhuwa-Saka
+xsr	Sherpa
+xss	Assan
+xsu	Sanumá
+xsv	Sudovian
+xsy	Saisiyat
+xta	Alcozauca Mixtec
+xtb	Chazumba Mixtec
+xtc	Katcha-Kadugli-Miri
+xtd	Diuxi-Tilantongo Mixtec
+xte	Ketengban
+xtg	Transalpine Gaulish
+xti	Sinicahua Mixtec
+xtj	San Juan Teita Mixtec
+xtl	Tijaltepec Mixtec
+xtm	Magdalena Peñasco Mixtec
+xtn	Northern Tlaxiaco Mixtec
+xto	Tokharian A
+xtp	San Miguel Piedras Mixtec
+xtq	Tumshuqese
+xtr	Early Tripuri
+xts	Sindihui Mixtec
+xtt	Tacahua Mixtec
+xtu	Cuyamecalco Mixtec
+xtw	Tawandê
+xty	Yoloxochitl Mixtec
+xtz	Tasmanian
+xua	Alu Kurumba
+xub	Betta Kurumba
+xug	Kunigami
+xuj	Jennu Kurumba
+xum	Umbrian
+xuo	Kuo
+xup	Upper Umpqua
+xur	Urartian
+xut	Kuthant
+xuu	Kxoe
+xve	Venetic
+xvi	Kamviri
+xvn	Vandalic
+xvo	Volscian
+xvs	Vestinian
+xwa	Kwaza
+xwc	Woccon
+xwe	Xwela Gbe
+xwg	Kwegu
+xwl	Western Xwla Gbe
+xwo	Written Oirat
+xwr	Kwerba Mamberamo
+xxk	Ke'o
+xyl	Yalakalore
+xzh	Zhang-Zhung
+xzm	Zemgalian
+xzp	Ancient Zapotec
+yaa	Yaminahua
+yab	Yuhup
+yac	Pass Valley Yali
+yad	Yagua
+yae	Pumé
+yaf	Yaka (Democratic Republic of Congo)
+yag	Yámana
+yah	Yazgulyam
+yai	Yagnobi
+yaj	Banda-Yangere
+yak	Yakima
+yal	Yalunka
+yam	Yamba
+yao	Yao
+yap	Yapese
+yaq	Yaqui
+yar	Yabarana
+yas	Nugunu (Cameroon)
+yat	Yambeta
+yau	Yuwana
+yav	Yangben
+yaw	Yawalapití
+yax	Yauma
+yay	Agwagwune
+yaz	Lokaa
+yba	Yala
+ybb	Yemba
+ybd	Yangbye
+ybe	West Yugur
+ybh	Yakha
+ybi	Yamphu
+ybj	Hasha
+ybk	Bokha
+ybl	Yukuben
+ybm	Yaben
+ybn	Yabaâna
+ybo	Yabong
+ybx	Yawiyo
+yby	Yaweyuha
+ych	Chesu
+ycl	Lolopo
+ycn	Yucuna
+ycp	Chepya
+ydd	Eastern Yiddish
+yde	Yangum Dey
+ydg	Yidgha
+ydk	Yoidik
+yds	Yiddish Sign Language
+yea	Ravula
+yec	Yeniche
+yee	Yimas
+yei	Yeni
+yej	Yevanic
+yel	Yela
+yen	Yendang
+yer	Tarok
+yes	Yeskwa
+yet	Yetfa
+yeu	Yerukula
+yev	Yapunda
+yey	Yeyi
+ygl	Yangum Gel
+ygm	Yagomi
+ygp	Gepo
+ygr	Yagaria
+ygw	Yagwoia
+yha	Baha Buyang
+yhd	Judeo-Iraqi Arabic
+yhl	Hlepho Phowa
+yia	Yinggarda
+# Yiddish
+yid	ייִדיש
+yif	Ache
+yig	Wusa Nasu
+yih	Western Yiddish
+yii	Yidiny
+yij	Yindjibarndi
+yik	Dongshanba Lalo
+yil	Yindjilandji
+yim	Yimchungru Naga
+yin	Yinchia
+yip	Pholo
+yiq	Miqie
+yir	North Awyu
+yis	Yis
+yit	Eastern Lalu
+yiu	Awu
+yiv	Northern Nisu
+yix	Axi Yi
+yiy	Yir Yoront
+yiz	Azhe
+yka	Yakan
+ykg	Northern Yukaghir
+yki	Yoke
+ykk	Yakaikeke
+ykl	Khlula
+ykm	Yakamul
+yko	Yasa
+ykr	Yekora
+ykt	Kathu
+yky	Yakoma
+yla	Yaul
+yle	Yele
+ylg	Yelogu
+yli	Angguruk Yali
+yll	Yil
+ylm	Limi
+yln	Langnian Buyang
+ylo	Naluo Yi
+ylr	Yalarnnga
+ylu	Aribwaung
+yly	Nyâlayu
+yma	Yamphe
+ymb	Yambes
+ymc	Southern Muji
+ymd	Muda
+yme	Yameo
+ymg	Yamongeri
+ymh	Mili
+ymi	Moji
+ymk	Makwe
+yml	Iamalele
+ymm	Maay
+ymn	Yamna
+ymo	Yangum Mon
+ymp	Yamap
+ymq	Qila Muji
+ymr	Malasar
+yms	Mysian
+ymt	Mator-Taygi-Karagas
+ymx	Northern Muji
+ymz	Muzi
+yna	Aluo
+ynd	Yandruwandha
+yne	Lang'e
+yng	Yango
+ynh	Yangho
+ynk	Naukan Yupik
+ynl	Yangulam
+ynn	Yana
+yno	Yong
+yns	Yansi
+ynu	Yahuna
+yob	Yoba
+yog	Yogad
+yoi	Yonaguni
+yok	Yokuts
+yom	Yombe
+yon	Yonggom
+yor	Yoruba
+yos	Yos
+yox	Yoron
+yoy	Yoy
+ypa	Phala
+ypb	Labo Phowa
+ypg	Phola
+yph	Phupha
+ypm	Phuma
+ypn	Ani Phowa
+ypo	Alo Phola
+ypp	Phupa
+ypz	Phuza
+yra	Yerakai
+yrb	Yareba
+yre	Yaouré
+yri	Yarí
+yrk	Nenets
+yrl	Nhengatu
+yrn	Yerong
+yrs	Yarsun
+yrw	Yarawata
+ysc	Yassic
+ysd	Samatao
+ysl	Yugoslavian Sign Language
+ysn	Sani
+yso	Nisi (China)
+ysp	Southern Lolopo
+ysr	Sirenik Yupik
+yss	Yessan-Mayo
+ysy	Sanie
+yta	Talu
+ytl	Tanglang
+ytp	Thopho
+yua	Yucatán Maya
+yub	Yugambal
+yuc	Yuchi
+yud	Judeo-Tripolitanian Arabic
+yue	Yue Chinese
+yuf	Havasupai-Walapai-Yavapai
+yug	Yug
+yui	Yurutí
+yuj	Karkar-Yuri
+yuk	Yuki
+yul	Yulu
+yum	Quechan
+yun	Bena (Nigeria)
+yup	Yukpa
+yuq	Yuqui
+yur	Yurok
+yus	Chan Santa Cruz Maya
+yut	Yopno
+yuu	Yugh
+yuw	Yau (Morobe Province)
+yux	Southern Yukaghir
+yuy	East Yugur
+yuz	Yuracare
+yva	Yawa
+yvt	Yavitero
+ywa	Kalou
+ywl	Western Lalu
+ywn	Yawanawa
+ywq	Wuding-Luquan Yi
+ywr	Yawuru
+ywt	Xishanba Lalo
+ywu	Wumeng Nasu
+yww	Yawarawarga
+yyu	Yau (Sandaun Province)
+yyz	Ayizi
+yzg	E'ma Buyang
+yzk	Zokhuo
+zaa	Sierra de Juárez Zapotec
+zab	San Juan Guelavía Zapotec
+zac	Ocotlán Zapotec
+zad	Cajonos Zapotec
+zae	Yareni Zapotec
+zaf	Ayoquesco Zapotec
+zag	Zaghawa
+zah	Zangwal
+zai	Isthmus Zapotec
+zaj	Zaramo
+zak	Zanaki
+zal	Zauzou
+zam	Miahuatlán Zapotec
+zao	Ozolotepec Zapotec
+zap	Zapotec
+zaq	Aloápam Zapotec
+zar	Rincón Zapotec
+zas	Santo Domingo Albarradas Zapotec
+zat	Tabaa Zapotec
+zau	Zangskari
+zav	Yatzachi Zapotec
+zaw	Mitla Zapotec
+zax	Xadani Zapotec
+zay	Zayse-Zergulla
+zaz	Zari
+zbc	Central Berawan
+zbe	East Berawan
+zbl	Blissymbols
+zbt	Batui
+zbw	West Berawan
+zca	Coatecas Altas Zapotec
+zch	Central Hongshuihe Zhuang
+zdj	Ngazidja Comorian
+zea	Zeeuws
+zeg	Zenag
+zeh	Eastern Hongshuihe Zhuang
+zen	Zenaga
+zga	Kinga
+zgb	Guibei Zhuang
+zgm	Minz Zhuang
+zgn	Guibian Zhuang
+zgr	Magori
+zha	Zhuang
+zhb	Zhaba
+zhd	Dai Zhuang
+zhi	Zhire
+zhn	Nong Zhuang
+zho	Chinese
+zhw	Zhoa
+zia	Zia
+zib	Zimbabwe Sign Language
+zik	Zimakani
+zim	Mesme
+zin	Zinza
+zir	Ziriya
+ziw	Zigula
+ziz	Zizilivakan
+zka	Kaimbulawa
+zkb	Koibal
+zkg	Koguryo
+zkh	Khorezmian
+zkk	Karankawa
+zko	Kott
+zkp	São Paulo Kaingáng
+zkr	Zakhring
+zkt	Kitan
+zku	Kaurna
+zkv	Krevinian
+zkz	Khazar
+zlj	Liujiang Zhuang
+zlm	Malay (individual language)
+zln	Lianshan Zhuang
+zlq	Liuqian Zhuang
+zma	Manda (Australia)
+zmb	Zimba
+zmc	Margany
+zmd	Maridan
+zme	Mangerr
+zmf	Mfinu
+zmg	Marti Ke
+zmh	Makolkol
+zmi	Negeri Sembilan Malay
+zmj	Maridjabin
+zmk	Mandandanyi
+zml	Madngele
+zmm	Marimanindji
+zmn	Mbangwe
+zmo	Molo
+zmp	Mpuono
+zmq	Mituku
+zmr	Maranunggu
+zms	Mbesa
+zmt	Maringarr
+zmu	Muruwari
+zmv	Mbariman-Gudhinma
+zmw	Mbo (Democratic Republic of Congo)
+zmx	Bomitaba
+zmy	Mariyedi
+zmz	Mbandja
+zna	Zan Gula
+zne	Zande (individual language)
+zng	Mang
+znk	Manangkari
+zns	Mangas
+zoc	Copainalá Zoque
+zoh	Chimalapa Zoque
+zom	Zou
+zoo	Asunción Mixtepec Zapotec
+zoq	Tabasco Zoque
+zor	Rayón Zoque
+zos	Francisco León Zoque
+zpa	Lachiguiri Zapotec
+zpb	Yautepec Zapotec
+zpc	Choapan Zapotec
+zpd	Southeastern Ixtlán Zapotec
+zpe	Petapa Zapotec
+zpf	San Pedro Quiatoni Zapotec
+zpg	Guevea De Humboldt Zapotec
+zph	Totomachapan Zapotec
+zpi	Santa María Quiegolani Zapotec
+zpj	Quiavicuzas Zapotec
+zpk	Tlacolulita Zapotec
+zpl	Lachixío Zapotec
+zpm	Mixtepec Zapotec
+zpn	Santa Inés Yatzechi Zapotec
+zpo	Amatlán Zapotec
+zpp	El Alto Zapotec
+zpq	Zoogocho Zapotec
+zpr	Santiago Xanica Zapotec
+zps	Coatlán Zapotec
+zpt	San Vicente Coatlán Zapotec
+zpu	Yalálag Zapotec
+zpv	Chichicapan Zapotec
+zpw	Zaniza Zapotec
+zpx	San Baltazar Loxicha Zapotec
+zpy	Mazaltepec Zapotec
+zpz	Texmelucan Zapotec
+zqe	Qiubei Zhuang
+zra	Kara (Korea)
+zrg	Mirgan
+zrn	Zirenkel
+zro	Záparo
+zrp	Zarphatic
+zrs	Mairasi
+zsa	Sarasira
+zsk	Kaskean
+zsl	Zambian Sign Language
+zsm	Standard Malay
+zsr	Southern Rincon Zapotec
+zsu	Sukurum
+zte	Elotepec Zapotec
+ztg	Xanaguía Zapotec
+ztl	Lapaguía-Guivini Zapotec
+ztm	San Agustín Mixtepec Zapotec
+ztn	Santa Catarina Albarradas Zapotec
+ztp	Loxicha Zapotec
+ztq	Quioquitani-Quierí Zapotec
+zts	Tilquiapan Zapotec
+ztt	Tejalapan Zapotec
+ztu	Güilá Zapotec
+ztx	Zaachila Zapotec
+zty	Yatee Zapotec
+zua	Zeem
+zuh	Tokano
+zul	Zulu
+zum	Kumzari
+zun	Zuni
+zuy	Zumaya
+zwa	Zay
+zxx	No linguistic content
+zyb	Yongbei Zhuang
+zyg	Yang Zhuang
+zyj	Youjiang Zhuang
+zyn	Yongnan Zhuang
+zyp	Zyphe
+zza	Zaza
+zzj	Zuojiang Zhuang
+#
+# end monster SIL list.
