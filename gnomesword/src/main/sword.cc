@@ -52,6 +52,8 @@ extern "C" {
 #include <time.h>
 #include <dirent.h>
 
+#include <sys/mman.h>
+
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
@@ -528,213 +530,60 @@ typedef std::map < SWBuf, SWBuf > ModLanguageMap;
 ModLanguageMap languageMap;
 
 void main_init_language_map() {
-	/* --list from Bibletime-1.3-- */
+	gchar *language_file;
+	FILE *language;
+	char *s, *end, *abbrev, *name, *newline;
+	char *mapspace;
+	size_t length;
+	
+	if ((language_file = gui_general_user_file("languages", FALSE)) == NULL) {
+		gui_generic_warning
+		    (_("GnomeSword's file for language\nabbreviations is missing."));
+		return;
+	}
+	GS_message((language_file));
 
-        // language names already in their native character sets
-        // are no longer locale-sensitive within _() macros.
+	if ((language = fopen(language_file, "r")) == NULL) {
+		gui_generic_warning
+		    (_("GnomeSword's language abbreviation\nfile cannot be opened."));
+		return;
+	}
+	(void) fseek(language, 0L, SEEK_END);
+	length = ftell(language);
+	if ((mapspace = (char *)mmap(NULL, length, (PROT_READ|PROT_WRITE),
+				     MAP_PRIVATE, fileno(language), 0))
+	    == NULL) {
+		gui_generic_warning
+		    (_("GnomeSword cannot map the\nlanguage abbreviation file."));
+		fclose(language);
+		return;
+	}
+	end = length + mapspace;
 
-	languageMap[SWBuf("aa")]  = SWBuf("Qafár af");		// "Afar"
-	languageMap[SWBuf("ab")]  = SWBuf("Аҧсуа");		// "Abkhazian"
-	languageMap[SWBuf("ae")]  = SWBuf(_("Avestan"));
-	languageMap[SWBuf("af")]  = SWBuf(_("Afrikaans"));
-	languageMap[SWBuf("am")]  = SWBuf("አማርኛ");		// "Amharic"
-	languageMap[SWBuf("ang")] = SWBuf("English, Old (ca.450-1100)");
-	languageMap[SWBuf("ar")]  = SWBuf("العربية");		// "Arabic"
-	languageMap[SWBuf("as")]  = SWBuf("অসমীয়া");		// "Assamese"
-	languageMap[SWBuf("ay")]  = SWBuf("Aymar aru");		// "Aymara"
-	languageMap[SWBuf("az")]  = SWBuf("Azərbaycan");		// "Azerbaijani"
-	languageMap[SWBuf("ba")]  = SWBuf("Башҡорт");		// "Bashkir"
-	languageMap[SWBuf("be")]  = SWBuf("Беларуская");		// "Belarusian"
-	languageMap[SWBuf("bg")]  = SWBuf("Български");		// "Bulgarian"
-	languageMap[SWBuf("bh")]  = SWBuf("अङ्गिका");		// "Bihari"
-	languageMap[SWBuf("bi")]  = SWBuf(_("Bislama"));
-	languageMap[SWBuf("bn")]  = SWBuf("বাংলা");		// "Bengali"
-	languageMap[SWBuf("bo")]  = SWBuf("བོད་ཡིག");		// "Tibetan"
-	languageMap[SWBuf("br")]  = SWBuf("Brezhoneg");		// "Breton"
-	languageMap[SWBuf("bs")]  = SWBuf("Bosanski");		// "Bosnian"
-	languageMap[SWBuf("ca")]  = SWBuf("Català");		// "Catalan"
-	languageMap[SWBuf("ce")]  = SWBuf("Нохчийн мотт");	// "Chechen"
-	languageMap[SWBuf("ceb")] = SWBuf("Sinugboanon");	// "Cebuano" (cf. wikipedia)
-	languageMap[SWBuf("ch")]  = SWBuf("Chamoru");		// "Chamorro"
-	languageMap[SWBuf("co")]  = SWBuf("Lingua corsa");	// "Corsican"
-	languageMap[SWBuf("cop")] = SWBuf(_("Coptic"));		// "ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ"
-								// (missing font: untranslated)
-	languageMap[SWBuf("cs")]  = SWBuf("Česky");		// "Czech"
-	languageMap[SWBuf("cu")]  = SWBuf("Ѩзыкъ словѣньскъ");	// "Church Slavic"
-	languageMap[SWBuf("cv")]  = SWBuf("Чăвашла");		// "Chuvash"
-	languageMap[SWBuf("cy")]  = SWBuf("Cymraeg");		// "Welsh"
-	languageMap[SWBuf("da")]  = SWBuf("Dansk");		// "Danish"
-	languageMap[SWBuf("de")]  = SWBuf("Deutsch");		// "German"
-	languageMap[SWBuf("dz")]  = SWBuf("རྫོང་ཁ");		// "Dzongkha"
-	languageMap[SWBuf("el")]  = SWBuf("Ελληνικά ·(1453-)");	// "Greek, Modern (1453-)"
-	languageMap[SWBuf("en")]  = SWBuf("English");
-	languageMap[SWBuf("en_US")] = SWBuf("American English");
-/*  */	languageMap[SWBuf("enm")] = SWBuf("English, Middle (1100-1500)");
-	languageMap[SWBuf("eo")]  = SWBuf("Esperanto");
-	languageMap[SWBuf("es")]  = SWBuf("Español");		// "Spanish"
-	languageMap[SWBuf("et")]  = SWBuf("Eesti");		// "Estonian"
-	languageMap[SWBuf("eu")]  = SWBuf("Euskara");		// "Basque"
-	languageMap[SWBuf("fa")]  = SWBuf("فارسی");		// "Farsi (Persian)"
-	languageMap[SWBuf("fi")]  = SWBuf("Suomi");		// "Finnish"
-	languageMap[SWBuf("fj")]  = SWBuf("Na vosa vaka-Viti");	// "Fijian"
-	languageMap[SWBuf("fo")]  = SWBuf("Føroyskt");		// "Faroese"
-	languageMap[SWBuf("fr")]  = SWBuf("Français");		// "French"
-	languageMap[SWBuf("fy")]  = SWBuf("Frysk");		// "Frisian"
-	languageMap[SWBuf("ga")]  = SWBuf("Gaeilge");		// "Irish"
-	languageMap[SWBuf("gd")]  = SWBuf("Gàidhlig");		// "Gaelic (Scots)"
-	languageMap[SWBuf("gl")]  = SWBuf("galego");		// "Gallegan"
-	languageMap[SWBuf("gn")]  = SWBuf("avañe'ẽ");		// "Guarani"
-	languageMap[SWBuf("gn")]  = SWBuf("ગુજરાતી");		// "Gujarati"
-/*  */	languageMap[SWBuf("got")] = SWBuf(_("Gothic"));		// "𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰"
-								// (missing font: untranslated)
-	languageMap[SWBuf("gv")]  = SWBuf("Gaelg");		// "Manx"
-	languageMap[SWBuf("grc")] = SWBuf("Κοινὴ Ἑλληνική");	// "Greek, Ancient (to 1453)"
-	languageMap[SWBuf("he")]  = SWBuf("עברית");		// "Hebrew"
-	languageMap[SWBuf("haw")] = SWBuf("Hawai`i");		// "Hawaiian"
-	languageMap[SWBuf("hi")]  = SWBuf("हिन्दी");		// "Hindi"
-	languageMap[SWBuf("ho")]  = SWBuf("Hiri Motu");		// "Hiri Motu"
-	languageMap[SWBuf("hr")]  = SWBuf("Hrvatski");		// "Croatian"
-	languageMap[SWBuf("ht")]  = SWBuf("Krèyol ayisyen");	// "French, Haitian Creole"
-	languageMap[SWBuf("hu")]  = SWBuf("Magyar");		// "Hungarian"
-	languageMap[SWBuf("hy")]  = SWBuf("Հայերեն");		// "Armenian"
-	languageMap[SWBuf("hz")]  = SWBuf("Otjiherero");	// "Herero"
-	languageMap[SWBuf("ia")]  = SWBuf(_("Interlingua"));
-	languageMap[SWBuf("ie")]  = SWBuf(_("Interlingue"));
-	languageMap[SWBuf("id")]  = SWBuf("Bahasa Indonesia");	// "Indonesian"
-/*  */	languageMap[SWBuf("ik")]  = SWBuf("Iñupiak");		// "Inupiaq"
-	languageMap[SWBuf("is")]  = SWBuf("Íslenska");		// "Icelandic"
-	languageMap[SWBuf("it")]  = SWBuf("Italiano");		// "Italian"
-	languageMap[SWBuf("iu")]  = SWBuf("ᐃᓄᒃᑎᑐᑦ");		// "Inuktitut"
-	languageMap[SWBuf("ja")]  = SWBuf("日本語");		// "Japanese"
-	languageMap[SWBuf("ka")]  = SWBuf("ქართული");		// "Georgian"
-	languageMap[SWBuf("kek")] = SWBuf("Q'eqchi'");		// "Kekchi"
-	languageMap[SWBuf("ki")]  = SWBuf("Gĩkũyũ");	// "Kikuyu"
-	languageMap[SWBuf("kj")]  = SWBuf("Oshikwanyama");	// "Kuanyama"
-	languageMap[SWBuf("kk")]  = SWBuf("Қазақша");		// "Kazakh"
-	languageMap[SWBuf("kl")]  = SWBuf(_("Kalaallisut"));
-	languageMap[SWBuf("km")]  = SWBuf("ភាសាខ្មែរ");		// "Khmer"
-	languageMap[SWBuf("kn")]  = SWBuf("ಕನ್ನಡ");		// "Kannada"
-	languageMap[SWBuf("ko")]  = SWBuf("한국어");	// "Korean"
-	languageMap[SWBuf("ks")]  = SWBuf("कश्मीरी - (كشميري)");	// "Kashmiri"
-	languageMap[SWBuf("ku")]  = SWBuf("Kurdî / كوردي");	// "Kurdish"
-	languageMap[SWBuf("kv")]  = SWBuf("Коми");		// "Komi"
-	languageMap[SWBuf("kw")]  = SWBuf("Kernewek");		// "Cornish"
-	languageMap[SWBuf("ky")]  = SWBuf("Հայերեն");		// "Kirghiz"
-	languageMap[SWBuf("la")]  = SWBuf("Latina");		// "Latin"
-	languageMap[SWBuf("lb")]  = SWBuf("Lëtzebuergesch");	// "Letzeburgesch"
-	languageMap[SWBuf("ln")]  = SWBuf("Lingála");		// "Lingala"
-	languageMap[SWBuf("lo")]  = SWBuf("ລາວ");		// "Lao"
-	languageMap[SWBuf("lt")]  = SWBuf("Lietuvių");	// "Lithuanian"
-	languageMap[SWBuf("lv")]  = SWBuf("Latviešu");		// "Latvian"
-	languageMap[SWBuf("mg")]  = SWBuf("Malagasy");		// "Malagasy"
-	languageMap[SWBuf("mh")]  = SWBuf("Kajin M̧ajeļ");	// "Marshall"
-	languageMap[SWBuf("mi")]  = SWBuf("Māori");		// "Maori"
-	languageMap[SWBuf("mk")]  = SWBuf("Македонски");		// "Macedonian"
-	languageMap[SWBuf("ml")]  = SWBuf("മലയാളം");		// "Malayalam"
-	languageMap[SWBuf("mn")]  = SWBuf("Монгол");		// "Mongolian"
-	languageMap[SWBuf("mo")]  = SWBuf("лимба молдовеняскэ");	// "Moldavian"
-	languageMap[SWBuf("mr")]  = SWBuf("मराठी");		// "Marathi"
-	languageMap[SWBuf("ms")]  = SWBuf("Bahasa Melayu");	// "Malay"
-	languageMap[SWBuf("mt")]  = SWBuf("Malti");		// "Maltese"
-	languageMap[SWBuf("my")]  = SWBuf(_("Burmese"));	// "မြန်မာစာ"
-								// (missing font: untranslated)
-	languageMap[SWBuf("na")]  = SWBuf("Ekakairũ Naoero");	// "Nauru"
-#if 0
-	// correct.
-	languageMap[SWBuf("nb")]  = SWBuf("Bokmål");		// "Norwegian Bokmål"
-#else
-	// a hack while g_utf8_validate() dislikes 'å'.
-	languageMap[SWBuf("nb")]  = SWBuf("Bokmaal");		// "Norwegian Bokmaal"
-#endif
-/*  */	languageMap[SWBuf("nd")]  = SWBuf("Sindebele");		// "Ndebele, North"
-	languageMap[SWBuf("nds")] = SWBuf("Plattdüütsch");	// "Low German; Low Saxon"
-	languageMap[SWBuf("ne")]  = SWBuf("नेपाली");		// "Nepali"
-	languageMap[SWBuf("ng")]  = SWBuf("Oshiwambo");		// "Ndonga"
-	languageMap[SWBuf("nl")]  = SWBuf("Nederlands");	// "Dutch"
-	languageMap[SWBuf("nn")]  = SWBuf("Nynorsk");		// "Norwegian Nynorsk"
-#if 0
-	// correct.
-	languageMap[SWBuf("no")]  = SWBuf("Norsk (bokmål)");	// "Norwegian"
-#else
-	// a hack while g_utf8_validate() dislikes 'å'.
-	languageMap[SWBuf("no")]  = SWBuf("Norsk (bokmaal)");	// "Norwegian"
-#endif
-	languageMap[SWBuf("nr")]  = SWBuf("Nrebele");		// "Ndebele, South"
-	languageMap[SWBuf("nv")]  = SWBuf("Diné bizaad");	// "Navajo"
-	languageMap[SWBuf("ny")]  = SWBuf("Chicheŵa");		// "Chichewa; Nyanja"
-	languageMap[SWBuf("oc")]  = SWBuf("Occitan");		// "Occitan (post 1500); Proven"
-	languageMap[SWBuf("om")]  = SWBuf("Oromoo");		// "Oromo"
-	languageMap[SWBuf("or")]  = SWBuf("ଓଡ଼ିଆ");		// "Oriya"
-	languageMap[SWBuf("os")]  = SWBuf("Иронау");		// "Ossetian; Ossetic"
-	languageMap[SWBuf("pa")]  = SWBuf("ਪੰਜਾਬੀ پنجابی");	// "Panjabi"
-	languageMap[SWBuf("pap")] = SWBuf("Papiamentu");	// "Papiamento"
-	languageMap[SWBuf("pi")]  = SWBuf("Pāḷi");		// "Pali"
-	languageMap[SWBuf("pl")]  = SWBuf("Polski");		// "Polish"
-	languageMap[SWBuf("pot")] = SWBuf("Neshnabémwen");	// "Potawatomi" (cf. wikipedia)
-	languageMap[SWBuf("ppk")] = SWBuf(_("Uma"));
-	languageMap[SWBuf("ps")]  = SWBuf("پښتو");		// "Pushto"
-	languageMap[SWBuf("pt")]  = SWBuf("Português");		// "Portuguese"
-	languageMap[SWBuf("qu")]  = SWBuf("Quechua");		// "Quechua"
-	languageMap[SWBuf("rm")]  = SWBuf("rumantsch");		// "Raeto-Romance"
-	languageMap[SWBuf("rn")]  = SWBuf("Kirundi");		// "Rundi"
-	languageMap[SWBuf("ro")]  = SWBuf("Română");		// "Romanian"
-	languageMap[SWBuf("ru")]  = SWBuf("Русский");		// "Russian"
-	languageMap[SWBuf("rw")]  = SWBuf(_("Kinyarwanda"));
-	languageMap[SWBuf("sa")]  = SWBuf("संस्कृत");		// "Sanskrit"
-	languageMap[SWBuf("sc")]  = SWBuf("Sardu");		// "Sardinian"
-	languageMap[SWBuf("sco")] = SWBuf("Scots");
-	languageMap[SWBuf("sd")]  = SWBuf("سنڌي");		// "Sindhi"
-	languageMap[SWBuf("se")]  = SWBuf("Sámegiella");	// "Northern Sami"
-	languageMap[SWBuf("sg")]  = SWBuf("Sängö");		// "Sango"
-	languageMap[SWBuf("si")]  = SWBuf("සිංහල");		// "Sinhalese"
-	languageMap[SWBuf("sk")]  = SWBuf("Slovenčina");	// "Slovak"
-	languageMap[SWBuf("sl")]  = SWBuf("Slovenščina");	// "Slovenian"
-	languageMap[SWBuf("sm")]  = SWBuf("Gagana Samoa");	// "Samoan"
-/*  */	languageMap[SWBuf("sn")]  = SWBuf("chiShona");		// "Shona"
-	languageMap[SWBuf("so")]  = SWBuf("Soomaaliga");	// "Somali"
-	languageMap[SWBuf("sq")]  = SWBuf("Shqip");		// "Albanian"
-	languageMap[SWBuf("sr")]  = SWBuf("srpski jezik");	// "Serbian"
-	languageMap[SWBuf("ss")]  = SWBuf("siSwati");		// "Swati"
-	languageMap[SWBuf("st")]  = SWBuf("Sesotho");		// "Sotho, Southern"
-	languageMap[SWBuf("su")]  = SWBuf("Basa Sunda");	// "Sundanese"
-	languageMap[SWBuf("sv")]  = SWBuf("Svenska");		// "Swedish"
-	languageMap[SWBuf("sw")]  = SWBuf("Kiswahili");		// "Swahili"
-	languageMap[SWBuf("syr")] = SWBuf("ܣܘܪܝܝܐ");		// "Syriac"
-	languageMap[SWBuf("ta")]  = SWBuf("தமிழ்");		// "Tamil"
-	languageMap[SWBuf("te")]  = SWBuf("తెలుగు");		// "Telugu"
-	languageMap[SWBuf("tg")]  = SWBuf("تاجیکی");		// "Tajik"
-	languageMap[SWBuf("th")]  = SWBuf("ไทย");		// "Thai"
-	languageMap[SWBuf("tk")]  = SWBuf("Türkmen");		// "Turkmen"
-	languageMap[SWBuf("tl")]  = SWBuf("Tagalog");
-	languageMap[SWBuf("tlh")] = SWBuf("tlhIngan Hol");	// "Klingon"
-	languageMap[SWBuf("tn")]  = SWBuf("Setswana");		// "Tswana"
-	languageMap[SWBuf("tr")]  = SWBuf("Türkçe");		// "Turkish"
-	languageMap[SWBuf("ts")]  = SWBuf("Xitsonga");		// "Tsonga"
-	languageMap[SWBuf("tt")]  = SWBuf("Татарча");		// "Tatar"
-	languageMap[SWBuf("tw")]  = SWBuf(_("Twi"));
-	languageMap[SWBuf("ty")]  = SWBuf("Reo Mā`ohi");	// "Tahitian"
-	languageMap[SWBuf("ug")]  = SWBuf("ئۇيغۇرچە");		// "Uighur"
-	languageMap[SWBuf("uk")]  = SWBuf("Українська");		// "Ukrainian"
-	languageMap[SWBuf("ur")]  = SWBuf("اُردو");		// "Urdu"
-	languageMap[SWBuf("uz")]  = SWBuf("O'zbek");		// "Uzbek"
-	languageMap[SWBuf("vi")]  = SWBuf("Tiếng Việt");		// "Vietnamese"
-	languageMap[SWBuf("vo")]  = SWBuf("Volapük");		// "Volapk"
-/*  */	languageMap[SWBuf("wo")]  = SWBuf("Wolof");		// "Wolof"
-	languageMap[SWBuf("xh")]  = SWBuf("isiXhosa");		// "Xhosa" -- causes gettext problems
-	languageMap[SWBuf("x-E-BAR")] = SWBuf("Boarisch");	// "Bavarian"
-	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch"));
-	languageMap[SWBuf("x-E-ITZ")] = SWBuf("Itza'");		// "Itz"
-	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar"));
-	languageMap[SWBuf("x-E-LMO")] = SWBuf("Lumbaart");	// "Lombard"
-	languageMap[SWBuf("x-E-MKJ")] = SWBuf("Македонски");	// "Macedonian"
-	languageMap[SWBuf("x-E-PDG")] = SWBuf("Tok Pisin");	// "Tok Pisin"
-	languageMap[SWBuf("x-E-RMY")] = SWBuf("Romani,·Vlax");	// "Romani, Vlax"
-	languageMap[SWBuf("x-E-SAJ")] = SWBuf("Sängö");		// "Sango"
-	languageMap[SWBuf("x-E-SRN")] = SWBuf("nengre");	// "Sranan"
-	languageMap[SWBuf("yi")]  = SWBuf("ייִדיש");		// "Yiddish"
-	languageMap[SWBuf("za")]  = SWBuf("Saw cuengh");	// "Zhuang"
-	languageMap[SWBuf("zh")]  = SWBuf("中文");		// "Chinese"
-	languageMap[SWBuf("zu")]  = SWBuf("isiZulu");		// "Zulu"
+	for (s = mapspace; s < end; ++s) {
+		if ((newline = strchr(s, '\n')) == NULL) {
+			GS_message(("incomplete last line in languages"));
+			break;
+		}
+		*newline = '\0';
+
+		if ((*s == '#') || (s == newline)) {
+			s = newline;	// comment or empty line.
+			continue;
+		}
+
+		abbrev = s;
+		if ((name = strchr(s, '\t')) == NULL) {
+			GS_message(("tab-less line in languages"));
+			break;
+		}
+		*(name++) = '\0';	// NUL-terminate abbrev, mark name.
+		languageMap[SWBuf(abbrev)] = SWBuf(name);
+		s = newline;
+	}
+
+	munmap(mapspace, length);
+	fclose(language);
 }
 
 const char *main_get_language_map(const char *language) {
