@@ -10,6 +10,7 @@ ui_DATA = \
 	arrow_up.png \
 	arrow_up_box.png \
 	languages \
+	languages.cygwin \
 	logo.png \
 	sword3.png \
 	editor_studypad.xml \
