@@ -109,8 +109,6 @@ ga	Gaeilge
 gd	Gàidhlig
 # Gallegan
 gl	galego
-# Guarani // (wrong?)
-	// languageMap[SWBuf(gn	avañe'ẽ
 # Gujarati
 gn	ગુજરાતી
 # (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
@@ -2197,7 +2195,7 @@ end	Ende
 enf	Forest Enets
 eng	English
 enh	Tundra Enets
-#enm	Middle English (1100-1500)		// dup
+#enm	Middle English (1100-1500)	// dup
 enn	Engenni
 eno	Enggano
 enq	Enga

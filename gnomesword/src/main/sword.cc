@@ -526,6 +526,12 @@ char *main_get_path_to_mods(void)
  *   void
  */ 
 
+#ifdef __CYGWIN__
+#define	LANGUAGES	"languages.cygwin"
+#else
+#define	LANGUAGES	"languages"
+#endif
+
 typedef std::map < SWBuf, SWBuf > ModLanguageMap;
 ModLanguageMap languageMap;
 
@@ -536,7 +542,7 @@ void main_init_language_map() {
 	char *mapspace;
 	size_t length;
 	
-	if ((language_file = gui_general_user_file("languages", FALSE)) == NULL) {
+	if ((language_file = gui_general_user_file(LANGUAGES, FALSE)) == NULL) {
 		gui_generic_warning
 		    (_("GnomeSword's file for language\nabbreviations is missing."));
 		return;
@@ -558,7 +564,8 @@ void main_init_language_map() {
 		fclose(language);
 		return;
 	}
-	end = length + mapspace;
+	fclose(language);		// safe to do even while mmap is active.
+	*(end = length + mapspace) = '\0';
 
 	for (s = mapspace; s < end; ++s) {
 		if ((newline = strchr(s, '\n')) == NULL) {
@@ -583,7 +590,6 @@ void main_init_language_map() {
 	}
 
 	munmap(mapspace, length);
-	fclose(language);
 }
 
 const char *main_get_language_map(const char *language) {
