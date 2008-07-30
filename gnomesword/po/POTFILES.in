@@ -1,6 +1,5 @@
 [encoding: UTF-8]
 ## application files
-gnomesword.desktop.in
 gnomesword.desktop.in.in
 ## Backend source files
 src/backend/module_manager.cc
@@ -8,9 +7,6 @@ src/backend/sword_main.cc
 src/backend/gs_stringmgr.cpp
 ## Editor Source files
 src/editor/html-editor.c
-src/editor/Editor-stubs.c
-src/editor/Editor-skels.c
-src/editor/Editor-common.c
 ## Gecko Source files
 src/gecko/gecko-html.cpp
 src/gecko/gecko-services.cpp
