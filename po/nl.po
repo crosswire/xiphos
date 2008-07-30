@@ -9,12 +9,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-26 23:42+0200\n"
-"PO-Revision-Date: 2007-03-26 23:48+0100\n"
+"PO-Revision-Date: 2008-07-30 15:47+0200\n"
 "Last-Translator: Gertjan Francke <gwfrancke@gmail.com>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -22,7 +22,7 @@ msgstr "GnomeSword"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
-msgstr "Bestudeer de Bijbel"
+msgstr "Onderzoek de Bijbel"
 
 #. --list form Bibletime-1.3--
 #. languageMap[SWBuf("aa")] = SWBuf("Afar");
@@ -265,9 +265,8 @@ msgstr "Gotisch"
 #. done
 #: ../src/backend/sword_main.cc:1332
 #: ../src/backend/module_manager.cc:129
-#, fuzzy
 msgid "Manx"
-msgstr "Manx"
+msgstr "Manx-Gaelisch"
 
 #. done
 #: ../src/backend/sword_main.cc:1333
@@ -909,12 +908,14 @@ msgid "found in"
 msgstr "gevonden in"
 
 #: ../src/main/search_dialog.cc:344
+#, fuzzy
 msgid "Delete Range?"
-msgstr ""
+msgstr "Reeks Verwijderen?"
 
 #: ../src/main/search_dialog.cc:345
+#, fuzzy
 msgid "Are you sure you want to delete this range?"
-msgstr ""
+msgstr "Weet u zeker dat u deze reeks wilt verwijderen?"
 
 #: ../src/main/search_dialog.cc:571
 #: ../src/main/search_dialog.cc:1060
@@ -1289,9 +1290,9 @@ msgid "empty document \n"
 msgstr "leeg document \n"
 
 #: ../src/main/xml.c:435
-#, c-format
+#, fuzzy, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "verkeerd type, root node != SwordBookmarks\n"
 
 #: ../src/main/xml.c:489
 msgid "Old Testament"
@@ -1319,9 +1320,9 @@ msgstr "Selecteer de gewenste modules"
 
 #: ../src/main/xml.c:698
 #: ../src/main/xml.c:976
-#, c-format
+#, fuzzy, c-format
 msgid "wrong type, root node != %s\n"
-msgstr ""
+msgstr "verkeerd type, root node != %s\n"
 
 #: ../src/editor/html-editor.c:153
 msgid "Are you sure you want to delete the note for"
@@ -1847,6 +1848,7 @@ msgid "Enter Cipher Key: "
 msgstr "Geef sleutelcode: "
 
 #: ../src/gnome2/commentary.c:423
+#, fuzzy
 msgid ""
 "Renaming is not available in Cygwin.\n"
 "\n"
@@ -1856,7 +1858,15 @@ msgid ""
 "such as the contents of this commentary.\n"
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
-msgstr ""
+msgstr "Hernoemen is niet mogelijk in CygWin.\""
+"\n"
+"GnomeSword wordt beperkt door Windows'\n"
+"bestandssysteem omdat het niet mogelijk\n"
+"is om geopende bestanden te hernoemen,\n"
+"zoals de inhoud van dit commentaar.\n"
+"Daarom is het niet mogelijk om persoonlijk\n"
+"commentaar te hernoemen in Windows."
+""
 
 #: ../src/gnome2/commentary.c:442
 msgid "Rename Commentary"
@@ -1884,17 +1894,20 @@ msgstr ""
 "%s"
 
 #: ../src/gnome2/commentary.c:515
+#, fuzzy
 msgid ""
 "Configuration build error:\n"
 "\n"
-msgstr ""
+msgstr "Configuratie opbouw fout:\n"
+"\n"
 
 #: ../src/gnome2/commentary.c:527
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Unlink of old configuration failed:\n"
 "%s"
-msgstr ""
+msgstr "Los maken van oude configuratie niet gelukt:\n"
+"%s"
 
 #: ../src/gnome2/commentary.c:969
 #: ../src/gnome2/commentary_dialog.c:1877
@@ -2041,8 +2054,9 @@ msgid "Displaying GnomeSword"
 msgstr "Opbouwen interface"
 
 #: ../src/gnome2/gnomesword.c:171
+#, fuzzy
 msgid "The Setup Druid was cancelled."
-msgstr ""
+msgstr "The Setup Druid werd geannuleerd."
 
 #: ../src/gnome2/gnomesword.c:172
 msgid "Do you wish to set preferences now?"
@@ -2533,7 +2547,7 @@ msgstr "Tekst"
 
 #: ../src/gnome2/preferences_cell_renderer.c:401
 msgid "Text to render"
-msgstr ""
+msgstr "Te genereren tekst"
 
 #: ../src/gnome2/preferences_cell_renderer.c:407
 msgid "Pixbuf Object"
@@ -3099,24 +3113,28 @@ msgid "<b>Preview</b>"
 msgstr "<b>Voorbeeld</b>"
 
 #: ../ui/search-dialog.glade.h:8
+#, fuzzy
 msgid "<b>Range Name</b>"
-msgstr ""
+msgstr "<b>Reeksnaam</b>"
 
 #: ../ui/search-dialog.glade.h:9
+#, fuzzy
 msgid "<b>Range Text</b>"
-msgstr ""
+msgstr "<b>Range tekst</b>"
 
 #: ../ui/search-dialog.glade.h:10
+#, fuzzy
 msgid "<b>Ranges</b>"
-msgstr ""
+msgstr "<b>Reeksen</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
 msgstr "<b>Resultaatscherm eigenschappen</b>"
 
 #: ../ui/search-dialog.glade.h:12
+#, fuzzy
 msgid "<b>Scope</b>"
-msgstr ""
+msgstr "<b>Ruimte</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
@@ -3167,20 +3185,23 @@ msgid "Custom Lists"
 msgstr "Aangepaste lijsten"
 
 #: ../ui/search-dialog.glade.h:25
+#, fuzzy
 msgid "Custom Ranges"
-msgstr ""
+msgstr "Handmatige reeksen"
 
 #: ../ui/search-dialog.glade.h:26
 msgid "Custom list"
 msgstr "Aangepaste lijst"
 
 #: ../ui/search-dialog.glade.h:27
+#, fuzzy
 msgid "Custom range"
-msgstr ""
+msgstr "Handmatige reeks"
 
 #: ../ui/search-dialog.glade.h:28
+#, fuzzy
 msgid "Delete selected range"
-msgstr ""
+msgstr "Verwijder geselecteerd bereik"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Delete the selected list"
@@ -3203,8 +3224,9 @@ msgid "In modules that have Strong's Numbers"
 msgstr "in modules met Strongs-getallen"
 
 #: ../ui/search-dialog.glade.h:36
+#, fuzzy
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "Selecteer opties in het tabblad Attributen Zoeken"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "Module Selection"
@@ -3287,8 +3309,9 @@ msgid "Use a custom module list for the search"
 msgstr "Gebruik een aparte lijst met modules voor het zoeken"
 
 #: ../ui/search-dialog.glade.h:62
+#, fuzzy
 msgid "Use a custom range for the scope of the search"
-msgstr ""
+msgstr "Gebruik een aangepaste bereik voor de zoekruimte"
 
 #: ../ui/search-dialog.glade.h:63
 msgid "Use a single module for the search"
@@ -3370,8 +3393,9 @@ msgid "Save"
 msgstr "Opslaan"
 
 #: ../ui/editor_note.xml.h:12
+#, fuzzy
 msgid "Save using the PersistStream interface"
-msgstr ""
+msgstr "Opslaan m.b.v. de PersistStream interface"
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
@@ -3402,13 +3426,15 @@ msgstr "Nieuw document"
 
 #: ../ui/editor_studypad.xml.h:11
 #: ../ui/editor.xml.h:9
+#, fuzzy
 msgid "Open (PersistFile)"
-msgstr ""
+msgstr "Open (PersistFile)"
 
 #: ../ui/editor_studypad.xml.h:12
 #: ../ui/editor.xml.h:10
+#, fuzzy
 msgid "Open using the PersistFile interface"
-msgstr ""
+msgstr "Openen m.b.v. de PersistFile interface"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
@@ -3425,8 +3451,9 @@ msgstr "Opslaan (PersistFile)"
 
 #: ../ui/editor_studypad.xml.h:18
 #: ../ui/editor.xml.h:13
+#, fuzzy
 msgid "Save using the PersistFile interface"
-msgstr ""
+msgstr "Opslaan m.b.v. de PersistFile interface"
 
 #~ msgid "Install failed"
 #~ msgstr "Installatie is mislukt"
@@ -3746,4 +3773,3 @@ msgstr ""
 #~ msgstr "Morphologischetags invoegen"
 #~ msgid "Include Strong's Numbers"
 #~ msgstr "Strongs getallen invoegen"
-
