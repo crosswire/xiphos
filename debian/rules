@@ -17,7 +17,7 @@ configure-stamp:
 	dh_testdir
 
 	# Add here commands to configure the package.
-	./autogen.sh $(confflags) \
+	./configure $(confflags) \
 		--prefix=/usr \
 		--mandir=\$${prefix}/share/man \
 		--enable-pspell \
@@ -43,10 +43,8 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-
 	# Add here commands to clean up after the build process.
 	-$(MAKE) clean
-
 	dh_clean 
 
 install: build
@@ -70,7 +68,7 @@ binary-arch: build install
 	dh_installchangelogs ChangeLog
 	dh_installdocs
 	dh_installexamples
-#	dh_install
+	dh_install
 	dh_installmenu
 #	dh_installdebconf	
 #	dh_installlogrotate

@@ -1,6 +1,18 @@
-gnomesword for Debian
+Gnomesword for Debian
 ----------------------
 
-<possible notes regarding this package - if none, delete this file>
+Enter the program's main directory and then issue this command:
 
- -- Daniel Glassey <danglassey@yahoo.com>, Wed,  6 Sep 2000 23:35:41 +0100
+       dpkg-buildpackage -rfakeroot
+
+This will do everything for you.
+
+
+Ubuntu Users:
+------------
+
+
+
+
+Eeepc Users:
+-----------
