@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-25 11:19+0200\n"
+"POT-Creation-Date: 2008-07-30 21:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.h:1 ../gnomesword.desktop.in.in.h:1
@@ -24,715 +24,91 @@ msgstr ""
 msgid "Study the Bible"
 msgstr ""
 
-#. --list form Bibletime-1.3--
-#. mm_languageMap[SWBuf("aa")] = SWBuf("Afar");
-#. mm_languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
-#. mm_languageMap[SWBuf("ae")] = SWBuf("Avestan");
-#. --list form Bibletime-1.3--
-#. languageMap[SWBuf("aa")] = SWBuf("Afar");
-#. languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
-#. languageMap[SWBuf("ae")] = SWBuf("Avestan");
-#: ../src/backend/module_manager.cc:79 ../src/backend/sword_main.cc:1329
-msgid "Afrikaans"
+#: ../src/backend/sword_main.cc:1374
+msgid "Configuration not found"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("am")] = SWBuf("Amharic");
-#. done
-#. languageMap[SWBuf("am")] = SWBuf("Amharic");
-#: ../src/backend/module_manager.cc:81 ../src/backend/sword_main.cc:1331
-msgid "English, Old (ca.450-1100)"
+#: ../src/editor/html-editor.c:213 ../src/editor/html-editor.c:260
+msgid "Save As"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:82 ../src/backend/sword_main.cc:1332
-msgid "Arabic"
+#: ../src/editor/html-editor.c:231 ../src/editor/html-editor.c:278
+msgid "Untitled document"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("as")] = SWBuf("Assamese");
-#. mm_languageMap[SWBuf("ay")] = SWBuf("Aymara");
-#. done
-#. languageMap[SWBuf("as")] = SWBuf("Assamese");
-#. languageMap[SWBuf("ay")] = SWBuf("Aymara");
-#: ../src/backend/module_manager.cc:85 ../src/backend/sword_main.cc:1335
-msgid "Azerbaijani"
+#: ../src/editor/html-editor.c:443
+msgid "HTML Output"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-#. done
-#. languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-#: ../src/backend/module_manager.cc:87 ../src/backend/sword_main.cc:1337
-msgid "Belarusian"
+#: ../src/editor/html-editor.c:450
+msgid "HTML Source"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:88 ../src/backend/sword_main.cc:1338
-msgid "Bulgarian"
+#: ../src/editor/html-editor.c:457
+msgid "Plain Source"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("bh")] = SWBuf("Bihari");
-#. mm_languageMap[SWBuf("bi")] = SWBuf("Bislama");
-#. mm_languageMap[SWBuf("bn")] = SWBuf("Bengali");
-#. mm_languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-#. done
-#. languageMap[SWBuf("bh")] = SWBuf("Bihari");
-#. languageMap[SWBuf("bi")] = SWBuf("Bislama");
-#. languageMap[SWBuf("bn")] = SWBuf("Bengali");
-#. languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-#: ../src/backend/module_manager.cc:93 ../src/backend/sword_main.cc:1343
-msgid "Breton"
+#: ../src/editor/html-editor.c:464 ../ui/editor_note.xml.h:15
+#: ../ui/editor_studypad.xml.h:21
+msgid "_Print..."
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:94 ../src/backend/sword_main.cc:1344
-msgid "Bosnian"
+#: ../src/editor/html-editor.c:471 ../ui/editor_note.xml.h:9
+#: ../ui/editor_studypad.xml.h:14
+msgid "Print Pre_view"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:95 ../src/backend/sword_main.cc:1345
-msgid "Catalan"
+#: ../src/editor/html-editor.c:478
+msgid "_Quit"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("ce")] = SWBuf("Chechen");
-#. done
-#. languageMap[SWBuf("ce")] = SWBuf("Chechen");
-#: ../src/backend/module_manager.cc:97 ../src/backend/sword_main.cc:1347
-msgid "Cebuano"
+#: ../src/editor/html-editor.c:485
+msgid "_Open"
 msgstr ""
 
-#. mm_languageMap[SWBuf("co")] = SWBuf("Corsican");
-#. languageMap[SWBuf("co")] = SWBuf("Corsican");
-#: ../src/backend/module_manager.cc:100 ../src/backend/sword_main.cc:1350
-msgid "Coptic"
+#: ../src/editor/html-editor.c:492
+msgid "_Save"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:101 ../src/backend/sword_main.cc:1351
-msgid "Czech"
+#: ../src/editor/html-editor.c:499
+msgid "Save _As..."
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:102 ../src/backend/sword_main.cc:1352
-msgid "Church Slavic"
+#: ../src/editor/html-editor.c:506 ../src/gnome2/main_menu.c:915
+#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+#: ../ui/editor.xml.h:13
+msgid "_File"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-#. done
-#. languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-#: ../src/backend/module_manager.cc:104 ../src/backend/sword_main.cc:1354
-msgid "Welsh"
+#: ../src/editor/html-editor.c:516
+msgid "HTML _Output"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:105 ../src/backend/sword_main.cc:1355
-msgid "Danish"
+#: ../src/editor/html-editor.c:523
+msgid "_HTML Source"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:106 ../src/backend/sword_main.cc:1356
-msgid "German"
+#: ../src/editor/html-editor.c:530
+msgid "_Plain Source"
 msgstr ""
 
-#. done
-#. mm_languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-#. done
-#. languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-#: ../src/backend/module_manager.cc:108 ../src/backend/sword_main.cc:1358
-msgid "Greek, Modern (1453-)"
+#: ../src/editor/html-editor.c:537 ../src/gnome2/main_menu.c:927
+msgid "_View"
 msgstr ""
 
-#. done
-#: ../src/backend/module_manager.cc:109 ../src/backend/sword_main.cc:1359
-msgid "English"
-msgstr ""
-
-#: ../src/backend/module_manager.cc:110 ../src/backend/sword_main.cc:1360
-msgid "American English"
-msgstr ""
-
-#. done
-#.
-#: ../src/backend/module_manager.cc:112 ../src/backend/sword_main.cc:1362
-msgid "English, Middle (1100-1500)"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:113 ../src/backend/sword_main.cc:1363
-msgid "Esperanto"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:114 ../src/backend/sword_main.cc:1364
-msgid "Spanish"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:115 ../src/backend/sword_main.cc:1365
-msgid "Estonian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:116 ../src/backend/sword_main.cc:1366
-msgid "Basque"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:117 ../src/backend/sword_main.cc:1367
-msgid "Farsi (Persian)"
-msgstr ""
-
-#: ../src/backend/module_manager.cc:118 ../src/backend/sword_main.cc:1368
-msgid "Finnish"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("fj")] = SWBuf("Fijian");
-#. mm_languageMap[SWBuf("fo")] = SWBuf("Faroese");
-#. done
-#. languageMap[SWBuf("fj")] = SWBuf("Fijian");
-#. languageMap[SWBuf("fo")] = SWBuf("Faroese");
-#: ../src/backend/module_manager.cc:121 ../src/backend/sword_main.cc:1371
-msgid "French"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:122 ../src/backend/sword_main.cc:1372
-msgid "Frisian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:123 ../src/backend/sword_main.cc:1373
-msgid "Irish"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:124 ../src/backend/sword_main.cc:1374
-msgid "Gaelic (Scots)"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("gl")] = SWBuf("Gallegan");
-#. mm_languageMap[SWBuf("gn")] = SWBuf("Guarani");
-#. mm_languageMap[SWBuf("gn")] = SWBuf("Gujarati");
-#.
-#. done
-#. languageMap[SWBuf("gl")] = SWBuf("Gallegan");
-#. languageMap[SWBuf("gn")] = SWBuf("Guarani");
-#. languageMap[SWBuf("gn")] = SWBuf("Gujarati");
-#.
-#: ../src/backend/module_manager.cc:128 ../src/backend/sword_main.cc:1378
-msgid "Gothic"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:129 ../src/backend/sword_main.cc:1379
-msgid "Manx"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:130 ../src/backend/sword_main.cc:1380
-msgid "Greek, Ancient (to 1453)"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:131 ../src/backend/sword_main.cc:1381
-msgid "Hebrew"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:132 ../src/backend/sword_main.cc:1382
-msgid "Hawaiian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("hi")] = SWBuf("Hindi");
-#. mm_languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-#. done
-#. languageMap[SWBuf("hi")] = SWBuf("Hindi");
-#. languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-#: ../src/backend/module_manager.cc:135 ../src/backend/sword_main.cc:1385
-msgid "Croatian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:136 ../src/backend/sword_main.cc:1386
-msgid "French, Haitian Creole"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:137 ../src/backend/sword_main.cc:1387
-msgid "Hungarian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:138 ../src/backend/sword_main.cc:1388
-msgid "Armenian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("hz")] = SWBuf("Herero");
-#. mm_languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-#. mm_languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-#. done
-#. languageMap[SWBuf("hz")] = SWBuf("Herero");
-#. languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-#. languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-#: ../src/backend/module_manager.cc:142 ../src/backend/sword_main.cc:1392
-msgid "Indonesian"
-msgstr ""
-
-#. done
-#.
-#. mm_languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-#. done
-#.
-#. languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-#: ../src/backend/module_manager.cc:144 ../src/backend/sword_main.cc:1394
-msgid "Icelandic"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:145 ../src/backend/sword_main.cc:1395
-msgid "Italian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-#. done
-#. languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-#: ../src/backend/module_manager.cc:147 ../src/backend/sword_main.cc:1397
-msgid "Japanese"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:148 ../src/backend/sword_main.cc:1398
-msgid "Georgian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:149 ../src/backend/sword_main.cc:1399
-msgid "Kekchi"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ki")] = SWBuf("Kikuyu");
-#. mm_languageMap[SWBuf("kj")] = SWBuf("Kuanyama");
-#. mm_languageMap[SWBuf("kk")] = SWBuf("Kazakh");
-#. mm_languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
-#. mm_languageMap[SWBuf("km")] = SWBuf("Khmer");
-#. mm_languageMap[SWBuf("kn")] = SWBuf("Kannada");
-#. done
-#. languageMap[SWBuf("ki")] = SWBuf("Kikuyu");
-#. languageMap[SWBuf("kj")] = SWBuf("Kuanyama");
-#. languageMap[SWBuf("kk")] = SWBuf("Kazakh");
-#. languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
-#. languageMap[SWBuf("km")] = SWBuf("Khmer");
-#. languageMap[SWBuf("kn")] = SWBuf("Kannada");
-#: ../src/backend/module_manager.cc:156 ../src/backend/sword_main.cc:1406
-msgid "Korean"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-#. done
-#. languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-#: ../src/backend/module_manager.cc:158 ../src/backend/sword_main.cc:1408
-msgid "Kurdish"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("kv")] = SWBuf("Komi");
-#. mm_languageMap[SWBuf("kw")] = SWBuf("Cornish");
-#. done
-#. languageMap[SWBuf("kv")] = SWBuf("Komi");
-#. languageMap[SWBuf("kw")] = SWBuf("Cornish");
-#: ../src/backend/module_manager.cc:161 ../src/backend/sword_main.cc:1411
-msgid "Kirghiz"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:162 ../src/backend/sword_main.cc:1412
-msgid "Latin"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
-#. mm_languageMap[SWBuf("ln")] = SWBuf("Lingala");
-#. mm_languageMap[SWBuf("lo")] = SWBuf("Lao");
-#: ../src/backend/module_manager.cc:166
-msgid "Lithuanian"
-msgstr ""
-
-#. done
-#. done
-#. languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
-#. languageMap[SWBuf("ln")] = SWBuf("Lingala");
-#. languageMap[SWBuf("lo")] = SWBuf("Lao");
-#. done
-#: ../src/backend/module_manager.cc:167 ../src/backend/sword_main.cc:1417
-msgid "Latvian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("mg")] = SWBuf("Malagasy");
-#. mm_languageMap[SWBuf("mh")] = SWBuf("Marshall");
-#. done
-#. languageMap[SWBuf("mg")] = SWBuf("Malagasy");
-#. languageMap[SWBuf("mh")] = SWBuf("Marshall");
-#: ../src/backend/module_manager.cc:170 ../src/backend/sword_main.cc:1420
-msgid "Maori"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:171 ../src/backend/module_manager.cc:255
-#: ../src/backend/sword_main.cc:1421 ../src/backend/sword_main.cc:1505
-msgid "Macedonian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ml")] = SWBuf("Malayalam");
-#. mm_languageMap[SWBuf("mn")] = SWBuf("Mongolian");
-#. mm_languageMap[SWBuf("mo")] = SWBuf("Moldavian");
-#. mm_languageMap[SWBuf("mr")] = SWBuf("Marathi");
-#. done
-#. languageMap[SWBuf("ml")] = SWBuf("Malayalam");
-#. languageMap[SWBuf("mn")] = SWBuf("Mongolian");
-#. languageMap[SWBuf("mo")] = SWBuf("Moldavian");
-#. languageMap[SWBuf("mr")] = SWBuf("Marathi");
-#: ../src/backend/module_manager.cc:176 ../src/backend/sword_main.cc:1426
-msgid "Malay"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:177 ../src/backend/sword_main.cc:1427
-msgid "Maltese"
-msgstr ""
-
-#. mm_languageMap[SWBuf("na")] = SWBuf("Nauru");
-#. mm_languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
-#.
-#. mm_languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-#. languageMap[SWBuf("na")] = SWBuf("Nauru");
-#. languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
-#.
-#. languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-#: ../src/backend/module_manager.cc:182 ../src/backend/sword_main.cc:1432
-msgid "Low German; Low Saxon"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ne")] = SWBuf("Nepali");
-#. mm_languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-#. done
-#. languageMap[SWBuf("ne")] = SWBuf("Nepali");
-#. languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-#: ../src/backend/module_manager.cc:185 ../src/backend/sword_main.cc:1435
-msgid "Dutch"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-#. done
-#. languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-#: ../src/backend/module_manager.cc:187 ../src/backend/sword_main.cc:1437
-msgid "Norwegian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("nr")] = SWBuf("Ndebele, South");
-#. mm_languageMap[SWBuf("nv")] = SWBuf("Navajo");
-#. mm_languageMap[SWBuf("ny")] = SWBuf("Chichewa; Nyanja");
-#. mm_languageMap[SWBuf("oc")] = SWBuf("Occitan (post 1500); Proven");
-#. mm_languageMap[SWBuf("om")] = SWBuf("Oromo");
-#. mm_languageMap[SWBuf("or")] = SWBuf("Oriya");
-#. mm_languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
-#. mm_languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-#. done
-#. languageMap[SWBuf("nr")] = SWBuf("Ndebele, South");
-#. languageMap[SWBuf("nv")] = SWBuf("Navajo");
-#. languageMap[SWBuf("ny")] = SWBuf("Chichewa; Nyanja");
-#. languageMap[SWBuf("oc")] = SWBuf("Occitan (post 1500); Proven");
-#. languageMap[SWBuf("om")] = SWBuf("Oromo");
-#. languageMap[SWBuf("or")] = SWBuf("Oriya");
-#. languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
-#. languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-#: ../src/backend/module_manager.cc:196 ../src/backend/sword_main.cc:1446
-msgid "Papiamento"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("pi")] = SWBuf("Pali");
-#. done
-#. languageMap[SWBuf("pi")] = SWBuf("Pali");
-#: ../src/backend/module_manager.cc:198 ../src/backend/sword_main.cc:1448
-msgid "Polish"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:199 ../src/backend/sword_main.cc:1449
-msgid "Potawatomi"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:200 ../src/backend/sword_main.cc:1450
-msgid "Uma"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ps")] = SWBuf("Pushto");
-#. done
-#. languageMap[SWBuf("ps")] = SWBuf("Pushto");
-#: ../src/backend/module_manager.cc:202 ../src/backend/sword_main.cc:1452
-msgid "Portuguese"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("qu")] = SWBuf("Quechua");
-#. mm_languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
-#. mm_languageMap[SWBuf("rn")] = SWBuf("Rundi");
-#. done
-#. languageMap[SWBuf("qu")] = SWBuf("Quechua");
-#. languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
-#. languageMap[SWBuf("rn")] = SWBuf("Rundi");
-#: ../src/backend/module_manager.cc:206 ../src/backend/sword_main.cc:1456
-msgid "Romanian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:207 ../src/backend/sword_main.cc:1457
-msgid "Russian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
-#. mm_languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
-#. mm_languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-#. done
-#. languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
-#. languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
-#. languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-#: ../src/backend/module_manager.cc:211 ../src/backend/sword_main.cc:1461
-msgid "Scots"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("sd")] = SWBuf("Sindhi");
-#. mm_languageMap[SWBuf("se")] = SWBuf("Northern Sami");
-#. mm_languageMap[SWBuf("sg")] = SWBuf("Sango");
-#. mm_languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-#. done
-#. languageMap[SWBuf("sd")] = SWBuf("Sindhi");
-#. languageMap[SWBuf("se")] = SWBuf("Northern Sami");
-#. languageMap[SWBuf("sg")] = SWBuf("Sango");
-#. languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-#: ../src/backend/module_manager.cc:216 ../src/backend/sword_main.cc:1466
-msgid "Slovak"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:217 ../src/backend/sword_main.cc:1467
-msgid "Slovenian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("sm")] = SWBuf("Samoan");
-#.
-#. mm_languageMap[SWBuf("sn")] = SWBuf("Shona");
-#. done
-#. languageMap[SWBuf("sm")] = SWBuf("Samoan");
-#.
-#. languageMap[SWBuf("sn")] = SWBuf("Shona");
-#: ../src/backend/module_manager.cc:220 ../src/backend/sword_main.cc:1470
-msgid "Somali"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:221 ../src/backend/sword_main.cc:1471
-msgid "Albanian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("sr")] = SWBuf("Serbian");
-#. mm_languageMap[SWBuf("ss")] = SWBuf("Swati");
-#. mm_languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
-#. mm_languageMap[SWBuf("su")] = SWBuf("Sundanese");
-#. done
-#. languageMap[SWBuf("sr")] = SWBuf("Serbian");
-#. languageMap[SWBuf("ss")] = SWBuf("Swati");
-#. languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
-#. languageMap[SWBuf("su")] = SWBuf("Sundanese");
-#: ../src/backend/module_manager.cc:226 ../src/backend/sword_main.cc:1476
-msgid "Swedish"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:227 ../src/backend/sword_main.cc:1477
-msgid "Swahili"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:228 ../src/backend/sword_main.cc:1478
-msgid "Syriac"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:229 ../src/backend/sword_main.cc:1479
-msgid "Tamil"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("te")] = SWBuf("Telugu");
-#. mm_languageMap[SWBuf("tg")] = SWBuf("Tajik");
-#. done
-#. languageMap[SWBuf("te")] = SWBuf("Telugu");
-#. languageMap[SWBuf("tg")] = SWBuf("Tajik");
-#: ../src/backend/module_manager.cc:232 ../src/backend/sword_main.cc:1482
-msgid "Thai"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-#. done
-#. languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-#: ../src/backend/module_manager.cc:234 ../src/backend/sword_main.cc:1484
-msgid "Tagalog"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:235 ../src/backend/sword_main.cc:1485
-msgid "Klingon"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:236 ../src/backend/sword_main.cc:1486
-msgid "Tswana"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:237 ../src/backend/sword_main.cc:1487
-msgid "Turkish"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ts")] = SWBuf("Tsonga");
-#. mm_languageMap[SWBuf("tt")] = SWBuf("Tatar");
-#. mm_languageMap[SWBuf("tw")] = SWBuf("Twi");
-#. done
-#. languageMap[SWBuf("ts")] = SWBuf("Tsonga");
-#. languageMap[SWBuf("tt")] = SWBuf("Tatar");
-#. languageMap[SWBuf("tw")] = SWBuf("Twi");
-#: ../src/backend/module_manager.cc:241 ../src/backend/sword_main.cc:1491
-msgid "Tahitian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ug")] = SWBuf("Uighur");
-#. done
-#. languageMap[SWBuf("ug")] = SWBuf("Uighur");
-#: ../src/backend/module_manager.cc:243 ../src/backend/sword_main.cc:1493
-msgid "Ukrainian"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("ur")] = SWBuf("Urdu");
-#. mm_languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-#. done
-#. languageMap[SWBuf("ur")] = SWBuf("Urdu");
-#. languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-#: ../src/backend/module_manager.cc:246 ../src/backend/sword_main.cc:1496
-msgid "Vietnamese"
-msgstr ""
-
-#. done
-#. if commented,  accentued u causes gettext problems
-#.
-#. mm_languageMap[SWBuf("wo")] = SWBuf("Wolof");
-#: ../src/backend/module_manager.cc:249
-msgid "Xhosa"
-msgstr ""
-
-#. done
-#. languageMap[SWBuf("vo")] = SWBuf("Volapük");
-#.
-#. languageMap[SWBuf("wo")] = SWBuf("Wolof");
-#. causes gettext problems
-#: ../src/backend/module_manager.cc:250 ../src/backend/sword_main.cc:1500
-msgid "Bavarian"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:251 ../src/backend/sword_main.cc:1501
-msgid "Alemannisch"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:252 ../src/backend/sword_main.cc:1502
-msgid "Itz"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:253 ../src/backend/sword_main.cc:1503
-msgid "Shuar"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:254 ../src/backend/sword_main.cc:1504
-msgid "Lombard"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:256 ../src/backend/sword_main.cc:1506
-msgid "Tok Pisin"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:257 ../src/backend/sword_main.cc:1507
-msgid "Romani, Vlax"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:258 ../src/backend/sword_main.cc:1508
-msgid "Sango"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:259 ../src/backend/sword_main.cc:1509
-msgid "Sranan"
-msgstr ""
-
-#. done
-#. mm_languageMap[SWBuf("yi")] = SWBuf("Yiddish");
-#. mm_languageMap[SWBuf("za")] = SWBuf("Zhuang");
-#. done
-#. languageMap[SWBuf("yi")] = SWBuf("Yiddish");
-#. languageMap[SWBuf("za")] = SWBuf("Zhuang");
-#: ../src/backend/module_manager.cc:262 ../src/backend/sword_main.cc:1512
-msgid "Chinese"
-msgstr ""
-
-#. done
-#: ../src/backend/module_manager.cc:263 ../src/backend/sword_main.cc:1513
-msgid "Zulu"
-msgstr ""
-
-#: ../src/editor/html-editor.c:130
+#: ../src/editor/html-editor.c:638
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
-#: ../src/editor/html-editor.c:132
+#: ../src/editor/html-editor.c:640
 msgid "It will be lost permanently!"
 msgstr ""
 
-#: ../src/editor/html-editor.c:379
+#: ../src/editor/html-editor.c:859
 msgid "Open file..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:390
+#: ../src/editor/html-editor.c:870
 msgid "Save file as..."
 msgstr ""
 
@@ -744,35 +120,36 @@ msgstr ""
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:528 ../src/gnome2/bibletext.c:1123
-#: ../src/gnome2/gbs.c:905 ../src/gnome2/bibletext_dialog.c:2116
-#: ../src/gnome2/dictlex.c:1026 ../src/gnome2/commentary_dialog.c:1656
-#: ../src/gnome2/commentary.c:973 ../src/gnome2/studypad.c:103
+#: ../src/editor/html-editor.c:1527 ../src/gnome2/bibletext.c:1128
+#: ../src/gnome2/gbs.c:910 ../src/gnome2/bibletext_dialog.c:2116
+#: ../src/gnome2/dictlex.c:1030 ../src/gnome2/commentary_dialog.c:1656
+#: ../src/gnome2/commentary.c:1001 ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:529
+#: ../src/editor/html-editor.c:1528
 msgid "Save the changes to document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:530
+#: ../src/editor/html-editor.c:1529
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/html-editor.c:537
+#: ../src/editor/html-editor.c:1536
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:1361 ../src/gnome2/studypad.c:422
+#: ../src/editor/html-editor.c:1932 ../src/editor/html-editor.c:1935
+#: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1374
+#: ../src/editor/html-editor.c:1950 ../src/editor/html-editor.c:1954
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1382
-msgid "Prayer List Editor"
+#: ../src/editor/html-editor.c:1964 ../src/editor/html-editor.c:1968
+msgid "Prayer List/Journal Editor"
 msgstr ""
 
 #: ../src/gecko/gecko-html.cpp:168 ../src/gnome2/html.c:154
@@ -817,168 +194,168 @@ msgstr ""
 msgid "Save StudyPad File"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:906 ../src/gnome2/gbs.c:701
-#: ../src/gnome2/bibletext_dialog.c:1897 ../src/gnome2/dictlex.c:838
-#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:763
+#: ../src/gnome2/bibletext.c:911 ../src/gnome2/gbs.c:706
+#: ../src/gnome2/bibletext_dialog.c:1897 ../src/gnome2/dictlex.c:842
+#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:791
 msgid "item1"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:916 ../src/gnome2/gbs.c:711
-#: ../src/gnome2/bibletext_dialog.c:1907 ../src/gnome2/dictlex.c:848
-#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:773
+#: ../src/gnome2/bibletext.c:921 ../src/gnome2/gbs.c:716
+#: ../src/gnome2/bibletext_dialog.c:1907 ../src/gnome2/dictlex.c:852
+#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:801
 msgid "Open Module"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:923 ../ui/export-dialog.glade.h:6
+#: ../src/gnome2/bibletext.c:928 ../ui/export-dialog.glade.h:6
 msgid "Export Passage"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:934 ../src/gnome2/bibletext_dialog.c:1933
-#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:785
+#: ../src/gnome2/bibletext.c:939 ../src/gnome2/bibletext_dialog.c:1933
+#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:813
 msgid "item2"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:946 ../src/gnome2/bibletext_dialog.c:1945
-#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:797
+#: ../src/gnome2/bibletext.c:951 ../src/gnome2/bibletext_dialog.c:1945
+#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:825
 msgid "Note"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:956 ../src/gnome2/gbs.c:752
-#: ../src/gnome2/bibletext_dialog.c:1955 ../src/gnome2/dictlex.c:873
-#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:807
+#: ../src/gnome2/bibletext.c:961 ../src/gnome2/gbs.c:757
+#: ../src/gnome2/bibletext_dialog.c:1955 ../src/gnome2/dictlex.c:877
+#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:835
 msgid "Primary Reading"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:964 ../src/gnome2/gbs.c:758
-#: ../src/gnome2/bibletext_dialog.c:1963 ../src/gnome2/dictlex.c:879
-#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:815
+#: ../src/gnome2/bibletext.c:969 ../src/gnome2/gbs.c:763
+#: ../src/gnome2/bibletext_dialog.c:1963 ../src/gnome2/dictlex.c:883
+#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:843
 msgid "Secondary Reading"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:972 ../src/gnome2/gbs.c:746
-#: ../src/gnome2/bibletext_dialog.c:1971 ../src/gnome2/dictlex.c:867
-#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:823
+#: ../src/gnome2/bibletext.c:977 ../src/gnome2/gbs.c:751
+#: ../src/gnome2/bibletext_dialog.c:1971 ../src/gnome2/dictlex.c:871
+#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:851
 msgid "All Readings"
 msgstr ""
 
 #. 0
-#: ../src/gnome2/bibletext.c:992 ../src/gnome2/gbs.c:776
-#: ../src/gnome2/bibletext_dialog.c:1991 ../src/gnome2/dictlex.c:897
+#: ../src/gnome2/bibletext.c:997 ../src/gnome2/gbs.c:781
+#: ../src/gnome2/bibletext_dialog.c:1991 ../src/gnome2/dictlex.c:901
 #: ../src/gnome2/commentary_dialog.c:1531 ../src/gnome2/font_dialog.c:292
-#: ../src/gnome2/commentary.c:843
+#: ../src/gnome2/commentary.c:871
 msgid "Set Module Font"
 msgstr ""
 
 #. 1
 #. 2
-#: ../src/gnome2/bibletext.c:1001 ../src/gnome2/gbs.c:783
-#: ../src/gnome2/bibletext_dialog.c:2000 ../src/gnome2/dictlex.c:904
-#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:850
+#: ../src/gnome2/bibletext.c:1006 ../src/gnome2/gbs.c:788
+#: ../src/gnome2/bibletext_dialog.c:2000 ../src/gnome2/dictlex.c:908
+#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:878
 msgid "Words of Christ in Red"
 msgstr ""
 
 #. 3
-#: ../src/gnome2/bibletext.c:1009 ../src/gnome2/gbs.c:791
-#: ../src/gnome2/bibletext_dialog.c:2008 ../src/gnome2/dictlex.c:912
-#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:858
+#: ../src/gnome2/bibletext.c:1014 ../src/gnome2/gbs.c:796
+#: ../src/gnome2/bibletext_dialog.c:2008 ../src/gnome2/dictlex.c:916
+#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:886
 msgid "Strong's Numbers"
 msgstr ""
 
 #. 4
-#: ../src/gnome2/bibletext.c:1017 ../src/gnome2/gbs.c:799
-#: ../src/gnome2/bibletext_dialog.c:2016 ../src/gnome2/dictlex.c:920
-#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:866
+#: ../src/gnome2/bibletext.c:1022 ../src/gnome2/gbs.c:804
+#: ../src/gnome2/bibletext_dialog.c:2016 ../src/gnome2/dictlex.c:924
+#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:894
 #: ../ui/search-dialog.glade.h:43
 msgid "Morphological Tags"
 msgstr ""
 
 #. 5
-#: ../src/gnome2/bibletext.c:1025 ../src/gnome2/gbs.c:807
-#: ../src/gnome2/bibletext_dialog.c:2024 ../src/gnome2/dictlex.c:928
-#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:874
+#: ../src/gnome2/bibletext.c:1030 ../src/gnome2/gbs.c:812
+#: ../src/gnome2/bibletext_dialog.c:2024 ../src/gnome2/dictlex.c:932
+#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:902
 #: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
 msgstr ""
 
 #. 6
-#: ../src/gnome2/bibletext.c:1033 ../src/gnome2/gbs.c:815
-#: ../src/gnome2/bibletext_dialog.c:2032 ../src/gnome2/dictlex.c:936
-#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:882
+#: ../src/gnome2/bibletext.c:1038 ../src/gnome2/gbs.c:820
+#: ../src/gnome2/bibletext_dialog.c:2032 ../src/gnome2/dictlex.c:940
+#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:910
 msgid "Greek Accents"
 msgstr ""
 
 #. 7
-#: ../src/gnome2/bibletext.c:1041 ../src/gnome2/gbs.c:823
-#: ../src/gnome2/bibletext_dialog.c:2040 ../src/gnome2/dictlex.c:944
-#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:890
+#: ../src/gnome2/bibletext.c:1046 ../src/gnome2/gbs.c:828
+#: ../src/gnome2/bibletext_dialog.c:2040 ../src/gnome2/dictlex.c:948
+#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:918
 msgid "Lemmas"
 msgstr ""
 
 #. 8
-#: ../src/gnome2/bibletext.c:1049 ../src/gnome2/gbs.c:831
-#: ../src/gnome2/bibletext_dialog.c:2048 ../src/gnome2/dictlex.c:952
-#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:898
+#: ../src/gnome2/bibletext.c:1054 ../src/gnome2/gbs.c:836
+#: ../src/gnome2/bibletext_dialog.c:2048 ../src/gnome2/dictlex.c:956
+#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:926
 msgid "Scripture Cross-references"
 msgstr ""
 
 #. 9
-#: ../src/gnome2/bibletext.c:1057 ../src/gnome2/gbs.c:839
-#: ../src/gnome2/bibletext_dialog.c:2056 ../src/gnome2/dictlex.c:960
-#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:906
+#: ../src/gnome2/bibletext.c:1062 ../src/gnome2/gbs.c:844
+#: ../src/gnome2/bibletext_dialog.c:2056 ../src/gnome2/dictlex.c:964
+#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:934
 msgid "Hebrew Vowel Points"
 msgstr ""
 
 #. 10
-#: ../src/gnome2/bibletext.c:1065 ../src/gnome2/gbs.c:847
-#: ../src/gnome2/bibletext_dialog.c:2064 ../src/gnome2/dictlex.c:968
-#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:914
+#: ../src/gnome2/bibletext.c:1070 ../src/gnome2/gbs.c:852
+#: ../src/gnome2/bibletext_dialog.c:2064 ../src/gnome2/dictlex.c:972
+#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:942
 msgid "Hebrew Cantillation"
 msgstr ""
 
 #. 11
-#: ../src/gnome2/bibletext.c:1073 ../src/gnome2/gbs.c:855
-#: ../src/gnome2/bibletext_dialog.c:2072 ../src/gnome2/dictlex.c:976
-#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:922
+#: ../src/gnome2/bibletext.c:1078 ../src/gnome2/gbs.c:860
+#: ../src/gnome2/bibletext_dialog.c:2072 ../src/gnome2/dictlex.c:980
+#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:950
 msgid "Headings"
 msgstr ""
 
 #. 12
-#: ../src/gnome2/bibletext.c:1081 ../src/gnome2/gbs.c:863
-#: ../src/gnome2/bibletext_dialog.c:2080 ../src/gnome2/dictlex.c:984
-#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:930
+#: ../src/gnome2/bibletext.c:1086 ../src/gnome2/gbs.c:868
+#: ../src/gnome2/bibletext_dialog.c:2080 ../src/gnome2/dictlex.c:988
+#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:958
 msgid "Variants"
 msgstr ""
 
 #. 13
-#: ../src/gnome2/bibletext.c:1087 ../src/gnome2/gbs.c:869
-#: ../src/gnome2/bibletext_dialog.c:2086 ../src/gnome2/dictlex.c:990
-#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:936
+#: ../src/gnome2/bibletext.c:1092 ../src/gnome2/gbs.c:874
+#: ../src/gnome2/bibletext_dialog.c:2086 ../src/gnome2/dictlex.c:994
+#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:964
 msgid "Image Content"
 msgstr ""
 
-#: ../src/gnome2/bibletext.c:1099 ../src/gnome2/bibletext.c:1221
-#: ../src/gnome2/gbs.c:881 ../src/gnome2/gbs.c:1003
+#: ../src/gnome2/bibletext.c:1104 ../src/gnome2/bibletext.c:1226
+#: ../src/gnome2/gbs.c:886 ../src/gnome2/gbs.c:1008
 #: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/bibletext_dialog.c:2198
-#: ../src/gnome2/dictlex.c:1002 ../src/gnome2/dictlex.c:1103
+#: ../src/gnome2/dictlex.c:1006 ../src/gnome2/dictlex.c:1107
 #: ../src/gnome2/commentary_dialog.c:1638
-#: ../src/gnome2/commentary_dialog.c:1764 ../src/gnome2/commentary.c:948
-#: ../src/gnome2/commentary.c:1094
+#: ../src/gnome2/commentary_dialog.c:1764 ../src/gnome2/commentary.c:976
+#: ../src/gnome2/commentary.c:1122
 msgid "Use Current Dictionary"
 msgstr ""
 
 #. 0
-#: ../src/gnome2/bibletext.c:1110 ../src/gnome2/gbs.c:892
-#: ../src/gnome2/bibletext_dialog.c:2109 ../src/gnome2/dictlex.c:1013
-#: ../src/gnome2/commentary_dialog.c:1649 ../src/gnome2/commentary.c:959
-#: ../src/gnome2/sidebar.c:753 ../src/gnome2/sidebar.c:898
+#: ../src/gnome2/bibletext.c:1115 ../src/gnome2/gbs.c:897
+#: ../src/gnome2/bibletext_dialog.c:2109 ../src/gnome2/dictlex.c:1017
+#: ../src/gnome2/commentary_dialog.c:1649 ../src/gnome2/commentary.c:987
+#: ../src/gnome2/sidebar.c:752 ../src/gnome2/sidebar.c:902
 msgid "About"
 msgstr ""
 
 #. 1
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1116 ../src/gnome2/gbs.c:898
-#: ../src/gnome2/dictlex.c:1019 ../src/gnome2/commentary.c:966
-#: ../src/gnome2/mod_mgr.c:2059 ../src/gnome2/mod_mgr.c:2234
+#: ../src/gnome2/bibletext.c:1121 ../src/gnome2/gbs.c:903
+#: ../src/gnome2/dictlex.c:1023 ../src/gnome2/commentary.c:994
+#: ../src/gnome2/mod_mgr.c:2150 ../src/gnome2/mod_mgr.c:2325
 #: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
 #: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
@@ -990,9 +367,9 @@ msgstr ""
 #. 3
 #. 4
 #. 3
-#: ../src/gnome2/bibletext.c:1129 ../src/gnome2/gbs.c:911
-#: ../src/gnome2/bibletext_dialog.c:2122 ../src/gnome2/dictlex.c:1032
-#: ../src/gnome2/commentary_dialog.c:1662 ../src/gnome2/commentary.c:979
+#: ../src/gnome2/bibletext.c:1134 ../src/gnome2/gbs.c:916
+#: ../src/gnome2/bibletext_dialog.c:2122 ../src/gnome2/dictlex.c:1036
+#: ../src/gnome2/commentary_dialog.c:1662 ../src/gnome2/commentary.c:1007
 #: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:328
 msgid "Edit"
 msgstr ""
@@ -1001,9 +378,9 @@ msgstr ""
 #. 4
 #. 5
 #. 4
-#: ../src/gnome2/bibletext.c:1135 ../src/gnome2/gbs.c:917
-#: ../src/gnome2/bibletext_dialog.c:2128 ../src/gnome2/dictlex.c:1038
-#: ../src/gnome2/commentary_dialog.c:1668 ../src/gnome2/commentary.c:985
+#: ../src/gnome2/bibletext.c:1140 ../src/gnome2/gbs.c:922
+#: ../src/gnome2/bibletext_dialog.c:2128 ../src/gnome2/dictlex.c:1042
+#: ../src/gnome2/commentary_dialog.c:1668 ../src/gnome2/commentary.c:1013
 msgid "_Module Options"
 msgstr ""
 
@@ -1011,9 +388,9 @@ msgstr ""
 #. 5
 #. 6
 #. 5
-#: ../src/gnome2/bibletext.c:1141 ../src/gnome2/gbs.c:923
-#: ../src/gnome2/bibletext_dialog.c:2134 ../src/gnome2/dictlex.c:1044
-#: ../src/gnome2/commentary_dialog.c:1674 ../src/gnome2/commentary.c:991
+#: ../src/gnome2/bibletext.c:1146 ../src/gnome2/gbs.c:928
+#: ../src/gnome2/bibletext_dialog.c:2134 ../src/gnome2/dictlex.c:1048
+#: ../src/gnome2/commentary_dialog.c:1674 ../src/gnome2/commentary.c:1019
 msgid "Lookup Selection"
 msgstr ""
 
@@ -1021,18 +398,18 @@ msgstr ""
 #. 6
 #. 7
 #. 6
-#: ../src/gnome2/bibletext.c:1147 ../src/gnome2/gbs.c:929
-#: ../src/gnome2/bibletext_dialog.c:2140 ../src/gnome2/dictlex.c:1050
-#: ../src/gnome2/commentary_dialog.c:1680 ../src/gnome2/commentary.c:1009
+#: ../src/gnome2/bibletext.c:1152 ../src/gnome2/gbs.c:934
+#: ../src/gnome2/bibletext_dialog.c:2140 ../src/gnome2/dictlex.c:1054
+#: ../src/gnome2/commentary_dialog.c:1680 ../src/gnome2/commentary.c:1037
 msgid "Unlock This Module"
 msgstr ""
 
 #. 8
 #. 7
 #. 9
-#: ../src/gnome2/bibletext.c:1153 ../src/gnome2/gbs.c:935
+#: ../src/gnome2/bibletext.c:1158 ../src/gnome2/gbs.c:940
 #: ../src/gnome2/bibletext_dialog.c:2146
-#: ../src/gnome2/commentary_dialog.c:1698 ../src/gnome2/commentary.c:1027
+#: ../src/gnome2/commentary_dialog.c:1698 ../src/gnome2/commentary.c:1055
 msgid "Read Selection Aloud"
 msgstr ""
 
@@ -1077,7 +454,7 @@ msgstr ""
 msgid "Enter Cipher Key: "
 msgstr ""
 
-#: ../src/gnome2/gbs.c:735 ../src/gnome2/sidebar.c:892
+#: ../src/gnome2/gbs.c:740 ../src/gnome2/sidebar.c:896
 msgid "Open in editor"
 msgstr ""
 
@@ -1115,9 +492,9 @@ msgid "Change parallel 5"
 msgstr ""
 
 #: ../src/gnome2/parallel_view.c:434 ../src/gnome2/sidebar.c:405
-#: ../src/gnome2/sidebar.c:411 ../src/gnome2/utilities.c:447
-#: ../src/main/sidebar.cc:590 ../src/main/sidebar.cc:926
-#: ../src/main/sidebar.cc:927 ../src/main/sidebar.cc:928
+#: ../src/gnome2/sidebar.c:411 ../src/main/sidebar.cc:592
+#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/main/sidebar.cc:977
 msgid "Parallel View"
 msgstr ""
 
@@ -1162,12 +539,12 @@ msgid "Stay in sync"
 msgstr ""
 
 #. 7
-#: ../src/gnome2/commentary_dialog.c:1686 ../src/gnome2/commentary.c:997
+#: ../src/gnome2/commentary_dialog.c:1686 ../src/gnome2/commentary.c:1025
 msgid "Display Book Heading"
 msgstr ""
 
 #. 8
-#: ../src/gnome2/commentary_dialog.c:1692 ../src/gnome2/commentary.c:1003
+#: ../src/gnome2/commentary_dialog.c:1692 ../src/gnome2/commentary.c:1031
 msgid "Display Chapter Heading"
 msgstr ""
 
@@ -1235,7 +612,7 @@ msgstr ""
 msgid "Use the default font for this module"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:452
+#: ../src/gnome2/commentary.c:456
 msgid ""
 "Renaming is not available in Cygwin.\n"
 "\n"
@@ -1247,43 +624,42 @@ msgid ""
 "not available in the Windows environment."
 msgstr ""
 
-#: ../src/gnome2/commentary.c:471
+#: ../src/gnome2/commentary.c:475
 msgid "Rename Commentary"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:474
+#: ../src/gnome2/commentary.c:478
 msgid "Choose Commentary Name"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:476
+#: ../src/gnome2/commentary.c:480
 msgid "New Name"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:477 ../src/gnome2/treekey-editor.c:127
+#: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:283
-#: ../src/main/prayerlists.cc:163 ../src/main/prayerlists.cc:248
-#: ../src/main/prayerlists.cc:338 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:237 ../src/main/sword_treekey.cc:375
 msgid "Name: "
 msgstr ""
 
-#: ../src/gnome2/commentary.c:535
+#: ../src/gnome2/commentary.c:539
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:544
+#: ../src/gnome2/commentary.c:548
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
 
-#: ../src/gnome2/commentary.c:1015
+#: ../src/gnome2/commentary.c:1043
 msgid "Rename Pers.Comm."
 msgstr ""
 
-#: ../src/gnome2/commentary.c:1021
+#: ../src/gnome2/commentary.c:1049
 msgid "Dump Pers.Comm."
 msgstr ""
 
@@ -1396,7 +772,7 @@ msgid ""
 "Archive in "
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:455 ../src/gnome2/mod_mgr.c:2454
+#: ../src/gnome2/mod_mgr.c:455 ../src/gnome2/mod_mgr.c:2545
 #: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr ""
@@ -1422,159 +798,188 @@ msgstr ""
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:467 ../src/gnome2/mod_mgr.c:1017
+#: ../src/gnome2/mod_mgr.c:467 ../src/gnome2/mod_mgr.c:1108
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:627 ../src/gnome2/mod_mgr.c:629
-#: ../src/gnome2/mod_mgr.c:724 ../src/gnome2/mod_mgr.c:726
-#: ../src/gnome2/utilities.c:316 ../src/gnome2/utilities.c:318
-#: ../src/gnome2/utilities.c:386 ../src/gnome2/utilities.c:388
-#: ../src/main/sidebar.cc:756 ../src/main/sidebar.cc:758
-#: ../src/main/sidebar.cc:851 ../src/main/sidebar.cc:853
+#: ../src/gnome2/mod_mgr.c:626 ../src/gnome2/mod_mgr.c:628
+#: ../src/gnome2/mod_mgr.c:727 ../src/gnome2/mod_mgr.c:764
+#: ../src/gnome2/mod_mgr.c:766 ../src/gnome2/utilities.c:322
+#: ../src/gnome2/utilities.c:389 ../src/gnome2/utilities.c:391
+#: ../src/gnome2/utilities.c:451 ../src/gnome2/utilities.c:453
+#: ../src/gnome2/utilities.c:1077 ../src/main/sidebar.cc:757
+#: ../src/main/sidebar.cc:759 ../src/main/sidebar.cc:818
+#: ../src/main/sidebar.cc:891 ../src/main/sidebar.cc:893
 msgid "Unknown"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:854 ../src/gnome2/utilities.c:442
-#: ../src/main/sidebar.cc:918 ../src/main/sidebar.cc:920
+#: ../src/gnome2/mod_mgr.c:891
+msgid ""
+"Categorized by\n"
+"Module Type"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:896 ../src/gnome2/utilities.c:514
+#: ../src/main/sidebar.cc:967 ../src/main/sidebar.cc:969
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:858 ../src/gnome2/utilities.c:462
-#: ../src/main/sidebar.cc:602 ../src/main/sidebar.cc:954
-#: ../src/main/sidebar.cc:956 ../ui/prefs.glade.h:27
+#: ../src/gnome2/mod_mgr.c:900 ../src/gnome2/utilities.c:518
+#: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:992
+#: ../src/main/sidebar.cc:994 ../ui/prefs.glade.h:27
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:862 ../src/gnome2/utilities.c:476
-#: ../src/main/sidebar.cc:974 ../src/main/sidebar.cc:976
+#: ../src/gnome2/mod_mgr.c:904 ../src/gnome2/utilities.c:522
+#: ../src/main/sidebar.cc:1001 ../src/main/sidebar.cc:1003
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:866 ../src/gnome2/utilities.c:490
-#: ../src/main/sidebar.cc:994 ../src/main/sidebar.cc:996
+#: ../src/gnome2/mod_mgr.c:908 ../src/gnome2/utilities.c:526
+#: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:870 ../src/gnome2/utilities.c:504
-#: ../src/main/sidebar.cc:615 ../src/main/sidebar.cc:1014
-#: ../src/main/sidebar.cc:1016
+#: ../src/gnome2/mod_mgr.c:912 ../src/gnome2/utilities.c:530
+#: ../src/main/sidebar.cc:617 ../src/main/sidebar.cc:1019
+#: ../src/main/sidebar.cc:1021
 msgid "General Books"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:874 ../src/gnome2/utilities.c:518
-#: ../src/main/sidebar.cc:1034 ../src/main/sidebar.cc:1036
+#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/utilities.c:534
+#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Maps"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:878 ../src/gnome2/utilities.c:532
-#: ../src/main/sidebar.cc:1054 ../src/main/sidebar.cc:1056
+#: ../src/gnome2/mod_mgr.c:920 ../src/gnome2/utilities.c:538
+#: ../src/main/sidebar.cc:1037 ../src/main/sidebar.cc:1039
 msgid "Images"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1001
+#: ../src/gnome2/mod_mgr.c:928
+msgid ""
+"Categorized by\n"
+"Availability"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:933
+msgid "Updates"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:937
+msgid "Uninstalled"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:941 ../src/gnome2/sidebar.c:421
+#: ../src/gnome2/utilities.c:543 ../src/main/prayerlists.cc:235
+#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
+#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+msgid "Prayer List/Journal"
+msgstr ""
+
+#: ../src/gnome2/mod_mgr.c:1092
 msgid "Refreshing remote"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1012
+#: ../src/gnome2/mod_mgr.c:1103
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1133
+#: ../src/gnome2/mod_mgr.c:1224
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1215
+#: ../src/gnome2/mod_mgr.c:1306
 msgid "Installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1240
+#: ../src/gnome2/mod_mgr.c:1331
 msgid "Available"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1249
+#: ../src/gnome2/mod_mgr.c:1340
 msgid "Size"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1258
+#: ../src/gnome2/mod_mgr.c:1349
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1291 ../src/gnome2/mod_mgr.c:1374
+#: ../src/gnome2/mod_mgr.c:1382 ../src/gnome2/mod_mgr.c:1465
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1325
+#: ../src/gnome2/mod_mgr.c:1416
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1333
+#: ../src/gnome2/mod_mgr.c:1424
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1342
+#: ../src/gnome2/mod_mgr.c:1433
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1351
+#: ../src/gnome2/mod_mgr.c:1442
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1372
+#: ../src/gnome2/mod_mgr.c:1463
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1378 ../src/gnome2/sidebar.c:1348
-#: ../src/gnome2/preferences_dialog.c:1675
+#: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:1347
+#: ../src/gnome2/preferences_dialog.c:1688
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1380
+#: ../src/gnome2/mod_mgr.c:1471
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1382
+#: ../src/gnome2/mod_mgr.c:1473
 msgid "Maintenance"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1592
+#: ../src/gnome2/mod_mgr.c:1683
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1593
+#: ../src/gnome2/mod_mgr.c:1684
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1823
+#: ../src/gnome2/mod_mgr.c:1914
 msgid "Select Local Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2062 ../src/gnome2/mod_mgr.c:2237
+#: ../src/gnome2/mod_mgr.c:2153 ../src/gnome2/mod_mgr.c:2328
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2116
+#: ../src/gnome2/mod_mgr.c:2207
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2120
+#: ../src/gnome2/mod_mgr.c:2211
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2121
+#: ../src/gnome2/mod_mgr.c:2212
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2122
+#: ../src/gnome2/mod_mgr.c:2213
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2123
+#: ../src/gnome2/mod_mgr.c:2214
 msgid "Directory:"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2147
+#: ../src/gnome2/mod_mgr.c:2238
 msgid "A source by that name already exists."
 msgstr ""
 
@@ -1594,137 +999,136 @@ msgstr ""
 msgid "Failed to print the document"
 msgstr ""
 
-#. GS_print(("date: %s\n", getenv("DATE")));
-#: ../src/gnome2/main_window.c:657 ../src/main/sword.cc:540
+#: ../src/gnome2/main_window.c:691 ../src/main/sword.cc:631
 msgid "Starting"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:658
+#: ../src/gnome2/main_window.c:692
 msgid "Building GnomeSword interface"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:664
+#: ../src/gnome2/main_window.c:698
 msgid "GnomeSword - Bible Study Software"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:718
+#: ../src/gnome2/main_window.c:752
 msgid "Open a new tab"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:806 ../src/gnome2/sidebar.c:406
-#: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:596
-#: ../src/main/sidebar.cc:934 ../src/main/sidebar.cc:935
-#: ../src/main/sidebar.cc:936
+#: ../src/gnome2/main_window.c:840 ../src/gnome2/sidebar.c:406
+#: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:598
+#: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:984
+#: ../src/main/sidebar.cc:985
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:882
+#: ../src/gnome2/main_window.c:916
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:899
+#: ../src/gnome2/main_window.c:933
 msgid "Book View"
 msgstr ""
 
 #: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
-msgid "Go to parent"
+msgid "Go outward, to the section containing this one"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:344 ../src/gnome2/navbar_book_dialog.c:316
+#: ../src/gnome2/navbar_book.c:343 ../src/gnome2/navbar_book_dialog.c:315
 msgid "Go to previous item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:360 ../src/gnome2/navbar_book_dialog.c:332
+#: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to next item"
 msgstr ""
 
-#: ../src/gnome2/navbar_book.c:377 ../src/gnome2/navbar_book_dialog.c:349
-msgid "Go to first child"
+#: ../src/gnome2/navbar_book.c:374 ../src/gnome2/navbar_book_dialog.c:346
+msgid "Go inward, to the first subsection"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:421 ../src/main/prayerlists.cc:161
-#: ../src/main/prayerlists.cc:205 ../src/main/prayerlists.cc:246
-#: ../src/main/prayerlists.cc:290 ../src/main/prayerlists.cc:336
-#: ../src/main/prayerlists.cc:380 ../src/main/sword_treekey.cc:373
-#: ../src/main/sword_treekey.cc:417 ../src/main/sidebar.cc:1075
-#: ../src/main/sidebar.cc:1077
-msgid "Prayer List"
-msgstr ""
-
-#: ../src/gnome2/sidebar.c:701
+#: ../src/gnome2/sidebar.c:700
 msgid "Save List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:702
+#: ../src/gnome2/sidebar.c:701
 msgid "Save the search results as bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:740 ../src/gnome2/sidebar.c:885
+#: ../src/gnome2/sidebar.c:739 ../src/gnome2/sidebar.c:889
 #: ../src/gnome2/bookmarks_menu.c:1120
 msgid "Open in a new tab"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:741 ../src/gnome2/sidebar.c:886
+#: ../src/gnome2/sidebar.c:740 ../src/gnome2/sidebar.c:890
 msgid "Open selected module in a new tab"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:747
+#: ../src/gnome2/sidebar.c:746
 msgid "Open in dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:748 ../src/gnome2/sidebar.c:893
+#: ../src/gnome2/sidebar.c:747 ../src/gnome2/sidebar.c:897
 msgid "Open selected module in a dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:754 ../src/gnome2/sidebar.c:899
+#: ../src/gnome2/sidebar.c:753 ../src/gnome2/sidebar.c:903
 msgid "View information about the selected dialog"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:828
-msgid "Simple List"
+#: ../src/gnome2/sidebar.c:825
+msgid "Simple"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:829
+#: ../src/gnome2/sidebar.c:826
 msgid "Create a new simple prayer list"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:835
-msgid "Subject (not so simple)"
+#: ../src/gnome2/sidebar.c:832
+msgid "Subject"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:842
-msgid "Yearly List"
+#: ../src/gnome2/sidebar.c:839
+msgid "Monthly"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:843
+#: ../src/gnome2/sidebar.c:840 ../src/gnome2/sidebar.c:847
+#: ../src/gnome2/sidebar.c:854
 msgid "Create a new prayer list"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1161
+#: ../src/gnome2/sidebar.c:846
+msgid "Daily Journal"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:853
+msgid "Outlined Topic"
+msgstr ""
+
+#: ../src/gnome2/sidebar.c:1160
 msgid "_Modules"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1169
+#: ../src/gnome2/sidebar.c:1168
 msgid "_Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1177 ../src/gnome2/main_menu.c:762
+#: ../src/gnome2/sidebar.c:1176 ../src/gnome2/main_menu.c:762
 msgid "_Search"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1186
+#: ../src/gnome2/sidebar.c:1185
 msgid "Verse _List"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1324 ../src/gnome2/bookmarks_treeview.c:907
+#: ../src/gnome2/sidebar.c:1323 ../src/gnome2/bookmarks_treeview.c:907
 msgid "Bookmarks"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1332
+#: ../src/gnome2/sidebar.c:1331
 msgid "Search"
 msgstr ""
 
-#: ../src/gnome2/sidebar.c:1340
+#: ../src/gnome2/sidebar.c:1339
 msgid "Verse List"
 msgstr ""
 
@@ -1743,19 +1147,19 @@ msgstr ""
 msgid "found in "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:691
+#: ../src/gnome2/search_dialog.c:705
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:693
+#: ../src/gnome2/search_dialog.c:707
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:905
+#: ../src/gnome2/search_dialog.c:919
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:906
+#: ../src/gnome2/search_dialog.c:920
 msgid "Are you sure you want to delete:"
 msgstr ""
 
@@ -1821,7 +1225,7 @@ msgstr ""
 msgid "Upper"
 msgstr ""
 
-#: ../src/gnome2/utilities.c:276
+#: ../src/gnome2/utilities.c:279
 #, c-format
 msgid "%s not found"
 msgstr ""
@@ -1840,37 +1244,37 @@ msgstr ""
 msgid "Folder: "
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1572 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1585 ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1651
+#: ../src/gnome2/preferences_dialog.c:1664
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1654
+#: ../src/gnome2/preferences_dialog.c:1667
 msgid "Color"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1657
-#: ../src/gnome2/preferences_dialog.c:1671
-#: ../src/gnome2/preferences_dialog.c:1684 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1670
+#: ../src/gnome2/preferences_dialog.c:1684
+#: ../src/gnome2/preferences_dialog.c:1697 ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1661
+#: ../src/gnome2/preferences_dialog.c:1674
 msgid "General"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1664 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1677 ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1678
+#: ../src/gnome2/preferences_dialog.c:1691
 msgid "Main"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1681 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1694 ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr ""
 
@@ -2059,7 +1463,7 @@ msgstr ""
 
 #: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
 #: ../src/gnome2/treekey-editor.c:281
-msgid "Prayer List Item"
+msgid "Prayer List/Journal Item"
 msgstr ""
 
 #: ../src/gnome2/treekey-editor.c:126 ../src/gnome2/treekey-editor.c:185
@@ -2288,17 +1692,8 @@ msgstr ""
 msgid "About this application"
 msgstr ""
 
-#: ../src/gnome2/main_menu.c:915 ../ui/editor_note.xml.h:14
-#: ../ui/editor_studypad.xml.h:20 ../ui/editor.xml.h:13
-msgid "_File"
-msgstr ""
-
 #: ../src/gnome2/main_menu.c:921
 msgid "_Edit"
-msgstr ""
-
-#: ../src/gnome2/main_menu.c:927
-msgid "_View"
 msgstr ""
 
 #: ../src/gnome2/main_menu.c:933
@@ -2313,61 +1708,139 @@ msgstr ""
 msgid "Please check copyright before exporting!"
 msgstr ""
 
-#: ../src/main/sword.cc:541
+#: ../src/main/sword.cc:547
+msgid ""
+"GnomeSword's file for language\n"
+"abbreviations is missing."
+msgstr ""
+
+#: ../src/main/sword.cc:554
+msgid ""
+"GnomeSword's language abbreviation\n"
+"file cannot be opened."
+msgstr ""
+
+#: ../src/main/sword.cc:563
+msgid ""
+"GnomeSword cannot map the\n"
+"language abbreviation file."
+msgstr ""
+
+#: ../src/main/sword.cc:632
 msgid "Initiating SWORD"
 msgstr ""
 
-#: ../src/main/sword.cc:542
+#: ../src/main/sword.cc:633
 msgid "path to sword"
 msgstr ""
 
-#: ../src/main/sword.cc:543
+#: ../src/main/sword.cc:634
 msgid "System locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:544
+#: ../src/main/sword.cc:635
 msgid "SWORD locale is"
 msgstr ""
 
-#: ../src/main/sword.cc:546
+#: ../src/main/sword.cc:637
 msgid "Checking for SWORD Modules"
 msgstr ""
 
-#: ../src/main/sword.cc:580
+#: ../src/main/sword.cc:670
 msgid "SWORD is shutdown"
 msgstr ""
 
-#: ../src/main/sword.cc:1248
+#: ../src/main/sword.cc:1363
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:347
+#: ../src/main/search_dialog.cc:314
 msgid "Delete Range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:348
+#: ../src/main/search_dialog.cc:315
 msgid "Are you sure you want to delete this range?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:574 ../src/main/search_dialog.cc:1060
-#: ../src/main/search_dialog.cc:1081
+#: ../src/main/search_dialog.cc:541 ../src/main/search_dialog.cc:1027
+#: ../src/main/search_dialog.cc:1048
 msgid "Search: "
 msgstr ""
 
-#: ../src/main/search_dialog.cc:628
+#: ../src/main/search_dialog.cc:595
 msgid "Remove Module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:629
+#: ../src/main/search_dialog.cc:596
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1521
+#: ../src/main/search_dialog.cc:1447
+#, c-format
+msgid ""
+"%s:\n"
+"No such module is installed.\n"
+"%s"
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1449
+msgid "Please adjust the module list."
+msgstr ""
+
+#: ../src/main/search_dialog.cc:1511
 msgid "Search finished"
 msgstr ""
 
 #: ../src/main/main.c:65
 msgid "GnomeSword does not understand more than one argument."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:70
+msgid "January"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:71
+msgid "February"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:72
+msgid "March"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:73
+msgid "April"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:74
+msgid "May"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:75
+msgid "June"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:76
+msgid "July"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:77
+msgid "August"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:78
+msgid "September"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:79
+msgid "October"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:80
+msgid "November"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:81
+msgid "December"
 msgstr ""
 
 #: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
@@ -2378,7 +1851,7 @@ msgstr ""
 msgid "<b>For Growth</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:306
+#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:365
 #: ../src/main/sword_treekey.cc:336
 msgid "Salvation"
 msgstr ""
@@ -2387,8 +1860,7 @@ msgstr ""
 msgid "<b>For Salvation</b><br>"
 msgstr ""
 
-#. add_prayer_list_sections (book, treeKey);
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:312
+#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:369
 #: ../src/main/sword_treekey.cc:338
 msgid "Health"
 msgstr ""
@@ -2401,103 +1873,152 @@ msgstr ""
 msgid "<b>Miscellaneous</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:162 ../src/main/prayerlists.cc:247
-#: ../src/main/prayerlists.cc:337 ../src/main/sword_treekey.cc:374
-msgid "Name for new prayer list"
+#: ../src/main/prayerlists.cc:135
+msgid "Point x"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:164 ../src/main/prayerlists.cc:221
-#: ../src/main/prayerlists.cc:249 ../src/main/prayerlists.cc:339
+#: ../src/main/prayerlists.cc:136
+msgid "<b>(x)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:137
+msgid "Point y"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:138
+msgid "<b>(y)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:139
+msgid "Point z"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:140
+msgid "<b>(z)</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:148
+msgid "Minor Topic 1"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:149
+msgid "<b>Subtopic 1</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:151
+msgid "Minor Topic 2"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:152
+msgid "<b>Subtopic 2</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:154
+msgid "Minor Topic 3"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:155
+msgid "<b>Subtopic 3</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:157
+msgid "Minor Topic 4"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:158
+msgid "<b>Subtopic 4</b><br>"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:236
+msgid "Name for new prayer list or journal"
+msgstr ""
+
+#: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:324
 #: ../src/main/sword_treekey.cc:376
 msgid "MyPrayerList"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:183 ../src/main/prayerlists.cc:268
-#: ../src/main/prayerlists.cc:358 ../src/main/sword_treekey.cc:395
-#, c-format
-msgid "can not create path\n"
+#: ../src/main/prayerlists.cc:251
+msgid "Module names must be letters+digits only."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:186 ../src/main/prayerlists.cc:271
-#: ../src/main/prayerlists.cc:361 ../src/main/sword_treekey.cc:398
-#, c-format
-msgid "Prayer list already exist\n"
+#: ../src/main/prayerlists.cc:258
+msgid "GnomeSword already knows a module by that name."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:207 ../src/main/prayerlists.cc:292
-#: ../src/main/prayerlists.cc:382 ../src/main/sword_treekey.cc:419
-msgid "\\par\\par My prayer list \\par\\par Module created in GnomeSword"
+#: ../src/main/prayerlists.cc:267
+msgid "GnomeSword finds that prayer list already."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:222
+#: ../src/main/prayerlists.cc:272
+msgid "GnomeSword cannot create module's path."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:310
+msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:325
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:307
+#: ../src/main/prayerlists.cc:351
+msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
+msgstr ""
+
+#: ../src/main/prayerlists.cc:366
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr ""
 
-#. add_prayer_list_sections (book, treeKey);
-#: ../src/main/prayerlists.cc:309
+#: ../src/main/prayerlists.cc:367
 msgid "Spiritual Growth"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:310
+#: ../src/main/prayerlists.cc:368
 msgid "Mike<br>Steve<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:313
+#: ../src/main/prayerlists.cc:370
 msgid "Sue<br>John<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:397
-msgid "<b>January</b><br>"
+#: ../src/main/prayerlists.cc:396
+msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:400
-msgid "<b>Febuary</b><br>"
+#: ../src/main/prayerlists.cc:447
+msgid "A daily journal. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:403
-msgid "<b>March</b><br>"
+#: ../src/main/prayerlists.cc:511
+msgid ""
+"An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:406
-msgid "<b>April</b><br>"
+#: ../src/main/prayerlists.cc:525
+msgid "Major Topic A"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:409
-msgid "<b>May</b><br>"
+#: ../src/main/prayerlists.cc:526
+msgid "<b>Major Topic A</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:412
-msgid "<b>June</b><br>"
+#: ../src/main/prayerlists.cc:528
+msgid "Major Topic B"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:415
-msgid "<b>July</b><br>"
+#: ../src/main/prayerlists.cc:529
+msgid "<b>Major Topic B</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:418
-msgid "<b>August</b><br>"
+#: ../src/main/prayerlists.cc:531
+msgid "Major Topic C"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:421
-msgid "<b>September</b><br>"
-msgstr ""
-
-#: ../src/main/prayerlists.cc:424
-msgid "<b>October</b><br>"
-msgstr ""
-
-#: ../src/main/prayerlists.cc:427
-msgid "<b>November</b><br>"
-msgstr ""
-
-#: ../src/main/prayerlists.cc:430
-msgid "<b>December</b><br>"
+#: ../src/main/prayerlists.cc:532
+msgid "<b>Major Topic C</b><br>"
 msgstr ""
 
 #: ../src/main/xml.c:86 ../src/main/xml.c:471
@@ -2582,6 +2103,24 @@ msgstr ""
 msgid "wrong type, root node != %s\n"
 msgstr ""
 
+#: ../src/main/sword_treekey.cc:374
+msgid "Name for new prayer list"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:395
+#, c-format
+msgid "can not create path\n"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:398
+#, c-format
+msgid "Prayer list already exist\n"
+msgstr ""
+
+#: ../src/main/sword_treekey.cc:419
+msgid "\\par\\par My prayer list \\par\\par Module created in GnomeSword"
+msgstr ""
+
 #: ../src/main/display.cc:256
 msgid ""
 "An image file's size could not be determined.\n"
@@ -2590,8 +2129,8 @@ msgid ""
 "GnomeSword cannot resize images to fit window."
 msgstr ""
 
-#: ../src/main/display.cc:803 ../src/main/display.cc:872
-#: ../src/main/display.cc:965 ../src/main/display.cc:973
+#: ../src/main/display.cc:857 ../src/main/display.cc:926
+#: ../src/main/display.cc:1022 ../src/main/display.cc:1030
 #: ../ui/export-dialog.glade.h:5
 msgid "Chapter"
 msgstr ""
@@ -2659,7 +2198,7 @@ msgstr ""
 msgid "Number of Prayer modules"
 msgstr ""
 
-#: ../src/main/parallel_view.cc:673 ../src/main/parallel_view.cc:915
+#: ../src/main/parallel_view.cc:673 ../src/main/parallel_view.cc:917
 msgid "view context"
 msgstr ""
 
@@ -2695,11 +2234,11 @@ msgstr ""
 msgid "Clear History"
 msgstr ""
 
-#: ../src/main/sidebar.cc:375
+#: ../src/main/sidebar.cc:377
 msgid "verse"
 msgstr ""
 
-#: ../src/main/sidebar.cc:437
+#: ../src/main/sidebar.cc:439
 msgid "chapter"
 msgstr ""
 
@@ -2762,29 +2301,31 @@ msgid "can not create  .sword/modules"
 msgstr ""
 
 #. must be first run
-#: ../src/main/settings.c:188
+#: ../src/main/settings.c:192
 msgid ""
 "\n"
 "First Run: need to create settings!\n"
 msgstr ""
 
-#: ../src/main/settings.c:199
+#: ../src/main/settings.c:203
 msgid ""
 "There are still no Bibles installed.\n"
 "Evidently, you declined to install any.\n"
 "\n"
-"Without any Bible modules to display, GnomeSword cannot proceed, and will "
-"now exit."
+"Without any Bible modules to display,\n"
+"GnomeSword cannot proceed,\n"
+"and will now exit."
 msgstr ""
 
-#: ../src/main/settings.c:203
+#: ../src/main/settings.c:207
 msgid "Bible module installation complete."
 msgstr ""
 
-#: ../src/main/settings.c:206
+#: ../src/main/settings.c:210
 msgid ""
-"Without any Bible modules to display, GnomeSword cannot proceed, and will "
-"now exit."
+"Without any Bible modules to display,\n"
+"GnomeSword cannot proceed,\n"
+"and will now exit."
 msgstr ""
 
 #. *****************************************************************************
@@ -2803,7 +2344,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:706
+#: ../src/main/settings.c:710
 msgid ""
 "There is currently no program set as your\n"
 "handler for \"sword://\" and similar URLs.\n"
@@ -2811,7 +2352,7 @@ msgid ""
 "as the program to handle these URLs?"
 msgstr ""
 
-#: ../src/main/settings.c:708
+#: ../src/main/settings.c:712
 msgid ""
 "GnomeSword has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -2821,7 +2362,7 @@ msgid ""
 "if you need to change these."
 msgstr ""
 
-#: ../src/main/settings.c:753
+#: ../src/main/settings.c:757
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
@@ -2890,10 +2431,6 @@ msgstr ""
 msgid "Preview the note to be printed"
 msgstr ""
 
-#: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:14
-msgid "Print Pre_view"
-msgstr ""
-
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
 msgstr ""
@@ -2909,10 +2446,6 @@ msgstr ""
 
 #: ../ui/editor_note.xml.h:13
 msgid "_Delete Personal Comment"
-msgstr ""
-
-#: ../ui/editor_note.xml.h:15 ../ui/editor_studypad.xml.h:21
-msgid "_Print..."
 msgstr ""
 
 #: ../ui/editor_note.xml.h:16
@@ -3536,7 +3069,7 @@ msgid "Single module"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:63
-msgid "Start searching"
+msgid "Start/stop searching"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:64
