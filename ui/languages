@@ -19,10 +19,12 @@
 # that's all.  the parse code is mind-numbingly simple and fast.
 #
 # --initial list from Bibletime-1.3--
+# 
 # Afar
 aa	Qafár af
 # Abkhazian
 ab	Аҧсуа
+# Avestan (missing font: untranslated)
 ae	Avestan
 af	Afrikaans
 # Amharic
@@ -33,7 +35,7 @@ ar	العربية
 # Assamese
 as	অসমীয়া
 # Aymara
-ay	Aymar aru
+ay	Aymar
 # Azerbaijani
 az	Azərbaycan
 # Bashkir
@@ -43,7 +45,7 @@ be	Беларуская
 # Bulgarian
 bg	Български
 # Bihari
-bh	अङ्गिका
+bh	भोजपुरी
 bi	Bislama
 # Bengali
 bn	বাংলা
@@ -56,19 +58,19 @@ bs	Bosanski
 # Catalan
 ca	Català
 # Chechen
-ce	Нохчийн мотт
+ce	Нохчийн
 # Cebuano (cf. wikipedia)
-ceb	Sinugboanon
+ceb	Sinugboanong Binisaya
 # Chamorro
 ch	Chamoru
 # Corsican
-co	Lingua corsa
-# (missing font: untranslated) ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
+co	Corsu
+# Coptic (missing font: untranslated) ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ
 cop	Coptic
 # Czech
 cs	Česky
 # Church Slavic
-cu	Ѩзыкъ словѣньскъ
+cu  Словѣньскъ
 # Chuvash
 cv	Чăвашла
 # Welsh
@@ -96,14 +98,14 @@ fa	فارسی
 # Finnish
 fi	Suomi
 # Fijian
-fj	Na vosa vaka-Viti
+fj	Na Vosa Vakaviti
 # Faroese
 fo	Føroyskt
 # French
 fr	Français
 # Frisian
 fy	Frysk
-# Irish
+# Irish Gaelic
 ga	Gaeilge
 # Gaelic (Scots)
 gd	Gàidhlig
@@ -111,7 +113,7 @@ gd	Gàidhlig
 gl	galego
 # Gujarati
 gn	ગુજરાતી
-# (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
+# Gothic (missing font: untranslated) 𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰
 got	Gothic
 # Manx
 gv	Gaelg
@@ -167,7 +169,7 @@ kn	ಕನ್ನಡ
 # Korean
 ko	한국어
 # Kashmiri
-ks	कश्मीरी - (كشميري)
+ks	कश्मीरी / كشميري
 # Kurdish
 ku	Kurdî / كوردي
 # Komi
@@ -175,7 +177,7 @@ kv	Коми
 # Cornish
 kw	Kernewek
 # Kirghiz
-ky	Հայերեն
+ky	Кыргызча
 # Latin
 la	Latina
 # Letzeburgesch
@@ -208,10 +210,10 @@ mr	मराठी
 ms	Bahasa Melayu
 # Maltese
 mt	Malti
-# (missing font: untranslated) မြန်မာစာ
+# Burmese (missing font: untranslated) မြန်မာစာ
 my	Burmese
-# Nauru
-na	Ekakairũ Naoero
+# Nauruan
+na	Dorerin Naoero
 # correct: Norwegian Bokmål
 #nb	Bokmål
 # a hack while g_utf8_validate() dislikes 'å': Norwegian Bokmaal
@@ -251,7 +253,7 @@ pa	ਪੰਜਾਬੀ پنجابی
 # Papiamento
 pap	Papiamentu
 # Pali
-pi	Pāḷi
+pi	पािऴ
 # Polish
 pl	Polski
 # Potawatomi (cf. wikipedia)
@@ -273,7 +275,7 @@ ro	Română
 ru	Русский
 rw	Kinyarwanda
 # Sanskrit
-sa	संस्कृत
+sa	संस्कृतम्
 # Sardinian
 sc	Sardu
 sco	Scots
@@ -298,9 +300,9 @@ so	Soomaaliga
 # Albanian
 sq	Shqip
 # Serbian
-sr	srpski jezik
+sr	Српски / Srpski
 # Swati
-ss	siSwati
+ss	SiSwati
 # Sotho, Southern
 st	Sesotho
 # Sundanese
@@ -310,13 +312,13 @@ sv	Svenska
 # Swahili
 sw	Kiswahili
 # Syriac
-syr	ܣܘܪܝܝܐ
+syr	ܠܫܢܐ ܣܘܪܝܝܐ
 # Tamil
 ta	தமிழ்
 # Telugu
 te	తెలుగు
 # Tajik
-tg	تاجیکی
+tg	Тоҷикӣ/tojikī
 # Thai
 th	ไทย
 # Turkmen
@@ -331,16 +333,16 @@ tr	Türkçe
 # Tsonga
 ts	Xitsonga
 # Tatar
-tt	Татарча
+tt	Tatarça/Татарча
 tw	Twi
 # Tahitian
 ty	Reo Mā`ohi
-# Uighur
-ug	ئۇيغۇرچە
+# Uyghur
+ug	Uyghurche‎ / ئۇيغۇرچە
 # Ukrainian
 uk	Українська
 # Urdu
-ur	اُردو
+ur	اردو
 # Uzbek
 uz	O'zbek
 # Vietnamese
@@ -3805,7 +3807,8 @@ kzy	Kango (Tshopo District)
 kzz	Kalabra
 laa	Lapuyan Subanun
 lab	Linear A
-lac	Lacandon
+# Lacandon 
+lac	Hach T'ən
 lad	Ladino
 lae	Pattani
 laf	Lafofa
