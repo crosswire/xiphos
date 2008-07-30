@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-28 15:59+0200\n"
-"PO-Revision-Date: 2007-08-28 16:05+0200\n"
+"POT-Creation-Date: 2007-09-25 13:32+0200\n"
+"PO-Revision-Date: 2008-07-23 12:31+0200\n"
 "Last-Translator: Gertjan Francke <gwfrancke@gmail.com>\n"
 "Language-Team: Gnomesword-developers <gnomesword-developers@lists>\n"
 "MIME-Version: 1.0\n"
@@ -187,9 +187,8 @@ msgstr "Baskisch"
 
 #. done
 #: ../src/backend/sword_main.cc:1328 ../src/backend/module_manager.cc:117
-#, fuzzy
 msgid "Farsi (Persian)"
-msgstr "Fries"
+msgstr "Farsi (Perzisch)"
 
 #: ../src/backend/sword_main.cc:1329 ../src/backend/module_manager.cc:118
 msgid "Finnish"
@@ -266,9 +265,8 @@ msgstr "Kroatisch"
 
 #. done
 #: ../src/backend/sword_main.cc:1347 ../src/backend/module_manager.cc:136
-#, fuzzy
 msgid "French, Haitian Creole"
-msgstr "Kreyol"
+msgstr "Frans, Kreyòl"
 
 #. done
 #: ../src/backend/sword_main.cc:1348 ../src/backend/module_manager.cc:137
@@ -1285,12 +1283,12 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Het SWORD project is een poging om als basis te fungeren voor een uitbreidbare "
-"verzameling software voor het onderzoeken en bestuderen van God en Zijn Woord."
-"Via het SWORD project maakt het gebruik eenvoudig van Bijbelvertalingen,"
-"commentaren, woordenlijsten en andere boeken. Meerdere programma's "
-"gebruiken de basis software van het Sword project. Een module die is "
-"geïnstalleerd kan benut worden met alle andere programma's."
+"Het SWORD project is een poging om als basis te fungeren voor een "
+"uitbreidbare verzameling software voor het onderzoeken en bestuderen van God "
+"en Zijn Woord.Via het SWORD project maakt het gebruik eenvoudig van "
+"Bijbelvertalingen,commentaren, woordenlijsten en andere boeken. Meerdere "
+"programma's gebruiken de basis software van het Sword project. Een module "
+"die is geïnstalleerd kan benut worden met alle andere programma's."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -2445,26 +2443,24 @@ msgstr "Zoek opties"
 #: ../src/gnome2/search_sidebar.c:305
 #, fuzzy
 msgid "Search Scope"
-msgstr "Zoek scope"
+msgstr "Zoekbereik"
 
 #: ../src/gnome2/search_sidebar.c:318
 #, fuzzy
 msgid "No scope"
-msgstr "Geen scope"
+msgstr "Geen bereik"
 
 #: ../src/gnome2/search_sidebar.c:328
-#, fuzzy
 msgid "Use bounds"
-msgstr "Gebruik bounds"
+msgstr "Gebruik grenzen"
 
 #: ../src/gnome2/search_sidebar.c:337
 msgid "Last search"
 msgstr "Laatste zoekactie"
 
 #: ../src/gnome2/search_sidebar.c:352
-#, fuzzy
 msgid "Bounds"
-msgstr "Limieten"
+msgstr "Grenzen"
 
 #: ../src/gnome2/search_sidebar.c:366
 msgid "Lower"
@@ -2902,9 +2898,8 @@ msgid "Sword sys dir"
 msgstr "SWORD systeemmap"
 
 #: ../ui/search-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Attribute</b>"
-msgstr "<b>Attributen</b>"
+msgstr "<b>Attribuut</b>"
 
 #: ../ui/search-dialog.glade.h:2
 msgid "<b>Found</b>"
@@ -3043,7 +3038,6 @@ msgid "In modules that have Strong's Numbers"
 msgstr "in modules met Strongs-getallen"
 
 #: ../ui/search-dialog.glade.h:36
-#, fuzzy
 msgid "Make selections on the Attribute Search tab"
 msgstr "Selecteer opties in het tabblad Attributen Zoeken"
 
@@ -3070,7 +3064,7 @@ msgstr "Resultaten"
 #: ../ui/search-dialog.glade.h:46
 #, fuzzy
 msgid "Save custom range"
-msgstr "Handmatige range opslaan"
+msgstr "Aangepaste range opslaan"
 
 #: ../ui/search-dialog.glade.h:47
 msgid "Save search results as bookmarks"
@@ -3160,7 +3154,7 @@ msgstr "Huidige notitie verwijderen"
 #: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
-msgstr "Afsluiten"
+msgstr "Af_sluiten"
 
 #: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
@@ -3193,7 +3187,7 @@ msgstr "Afdrukvoorbeeld van de notitie"
 
 #: ../ui/editor_note.xml.h:9 ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
-msgstr "Afdrukvoorbeeld"
+msgstr "_Afdrukvoorbeeld"
 
 #: ../ui/editor_note.xml.h:10
 msgid "Print this note"
@@ -3218,7 +3212,7 @@ msgstr "_Printen..."
 
 #: ../ui/editor_note.xml.h:16
 msgid "_Save (Personal Comment)"
-msgstr "Op_slaan (Persoonlijk Commentaar)"
+msgstr "_Opslaan (Persoonlijk Commentaar)"
 
 #: ../ui/editor_studypad.xml.h:1
 msgid "Add this file to your bookmarks"
