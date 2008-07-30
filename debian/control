@@ -1,16 +1,16 @@
 Source: gnomesword
-Build-Depends: autotools-dev, quilt, patchutils (>= 0.2.25), cdbs (>= 0.4.27-1), debhelper (>= 4.1.0), debhelper (>= 4.2.21), libsword-dev (>=1.5.10), gnome-spell, libgtkhtml3.8-dev, scrollkeeper, gnome-core-devel, gtkhtml3.8
-Build-Conflicts: libgtkhtml3.2-dev, libgtkhtml3.6-dev
+Build-Depends: autotools-dev, patchutils, cdbs, debhelper, libsword-dev (>=1.5.11), gnome-spell, scrollkeeper, gtkhtml3.8 | gtkhtml3.14, libgtkhml3.8-dev | libgtkhtml3.14-dev, gnome-doc-utils, intltool, libatspi-dev, libgnome2-dev
+Build-Conflicts: 
 Section: gnome
 Priority: optional
 Maintainer: Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>
-Standards-Version: 3.6.2.0
+Standards-Version: 3.8.0.0
 
 Package: gnomesword
 Architecture: any
 Section: gnome
 Provides: sword-frontend
-Depends: firefox, gtkhtml3.8, ${shlibs:Depends}
+Depends: ${shlibs:Depends}
 Description: Bible study with GNOME
  A bible study program for GNOME using the SWORD library.
  Features:
@@ -19,7 +19,7 @@ Description: Bible study with GNOME
   Add personal notes to verses
   Bookmarks
   Parallel Page - Display up to five versions
-  StudyPad for keeping notes
-  Spellcheck for StudyPad and Personal notes (uses gnome-spell)
+  StudyPad and Personal Commentary for keeping notes
+  Spellcheck for StudyPad and Personal notes
   Uses modules from the SWORD Project
   Support for Sword Bible, Commentary, Lexicon and General Book modules

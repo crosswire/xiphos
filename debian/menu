@@ -1,5 +1,5 @@
 ?package(gnomesword):needs="X11" section="Apps/Education"\
-  title="GnomeSword"\
+  title="Gnomesword"\
   longtitle="Bible study program"\
   command="/usr/bin/gnomesword2"\
   hints="Gnome,Bible"\
