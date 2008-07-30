@@ -29,8 +29,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-26 20:33+0200\n"
-"PO-Revision-Date: 2008-07-27 21:36+0200\n"
+"POT-Creation-Date: 2008-07-30 21:59+0200\n"
+"PO-Revision-Date: 2008-07-30 22:04+0200\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1055,7 +1055,7 @@ msgstr "Aperçu avant impression"
 msgid "Failed to print the document"
 msgstr "Le document n'a pas pu être imprimé"
 
-#: ../src/gnome2/main_window.c:691 ../src/main/sword.cc:776
+#: ../src/gnome2/main_window.c:691 ../src/main/sword.cc:631
 msgid "Starting"
 msgstr "Démarrage de"
 
@@ -1767,209 +1767,52 @@ msgstr "_Aide"
 msgid "Please check copyright before exporting!"
 msgstr "Prière de vérifier le copyright avant l'export!"
 
-#. --list from Bibletime-1.3--
-#. language names already in their native character sets
-#. are no longer locale-sensitive within _() macros.
-#. "Afar"
-#. "Abkhazian"
-#: ../src/main/sword.cc:538
-msgid "Avestan"
-msgstr "Avestan"
+#: ../src/main/sword.cc:547
+msgid ""
+"GnomeSword's file for language\n"
+"abbreviations is missing."
+msgstr "Le fichier des définitions "
+"de langages est absent."
 
-#: ../src/main/sword.cc:539
-msgid "Afrikaans"
-msgstr "Afrikaans"
+#: ../src/main/sword.cc:554
+msgid ""
+"GnomeSword's language abbreviation\n"
+"file cannot be opened."
+msgstr "Ouverture impossible du fichier"
+"des définitions de langages."
 
-#. "Arabic"
-#. "Assamese"
-#. "Aymara"
-#. "Azerbaijani"
-#. "Bashkir"
-#. "Belarusian"
-#. "Bulgarian"
-#. "Bihari"
-#: ../src/main/sword.cc:550
-msgid "Bislama"
-msgstr "Bislama"
+#: ../src/main/sword.cc:563
+msgid ""
+"GnomeSword cannot map the\n"
+"language abbreviation file."
+msgstr "Erreur de lecture du fichier"
+"des définitions de langages."
 
-#. "Bengali"
-#. "Tibetan"
-#. "Breton"
-#. "Bosnian"
-#. "Catalan"
-#. "Chechen"
-#. "Cebuano" (cf. wikipedia)
-#. "Chamorro"
-#. "Corsican"
-#: ../src/main/sword.cc:560
-msgid "Coptic"
-msgstr "ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ"
-
-#. "Spanish"
-#. "Estonian"
-#. "Basque"
-#. "Farsi (Persian)"
-#. "Finnish"
-#. "Fijian"
-#. "Faroese"
-#. "French"
-#. "Frisian"
-#. "Irish"
-#. "Gaelic (Scots)"
-#. "Gallegan"
-#. "Guarani"
-#. "Gujarati"
-#.
-#: ../src/main/sword.cc:588
-msgid "Gothic"
-msgstr "𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰"
-
-#. "𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰"
-#. (missing font: untranslated)
-#. "Manx"
-#. "Greek, Ancient (to 1453)"
-#. "Hebrew"
-#. "Hawaiian"
-#. "Hindi"
-#. "Hiri Motu"
-#. "Croatian"
-#. "French, Haitian Creole"
-#. "Hungarian"
-#. "Armenian"
-#. "Herero"
-#: ../src/main/sword.cc:601
-msgid "Interlingua"
-msgstr "Interlingua"
-
-#: ../src/main/sword.cc:602
-msgid "Interlingue"
-msgstr "Interlingue"
-
-#. "Indonesian"
-#.
-#. "Inupiaq"
-#. "Icelandic"
-#. "Italian"
-#. "Inuktitut"
-#. "Japanese"
-#. "Georgian"
-#. "Kekchi"
-#. "Kikuyu"
-#. "Kuanyama"
-#. "Kazakh"
-#: ../src/main/sword.cc:614
-msgid "Kalaallisut"
-msgstr "Kalaallisut"
-
-#. "Khmer"
-#. "Kannada"
-#. "Korean"
-#. "Kashmiri"
-#. "Kurdish"
-#. "Komi"
-#. "Cornish"
-#. "Kirghiz"
-#. "Latin"
-#. "Letzeburgesch"
-#. "Lingala"
-#. "Lao"
-#. "Lithuanian"
-#. "Latvian"
-#. "Malagasy"
-#. "Marshall"
-#. "Maori"
-#. "Macedonian"
-#. "Malayalam"
-#. "Mongolian"
-#. "Moldavian"
-#. "Marathi"
-#. "Malay"
-#. "Maltese"
-#: ../src/main/sword.cc:639
-msgid "Burmese"
-msgstr "မြန်မာစာ"
-
-#. "Ndebele, South"
-#. "Navajo"
-#. "Chichewa; Nyanja"
-#. "Occitan (post 1500); Proven"
-#. "Oromo"
-#. "Oriya"
-#. "Ossetian; Ossetic"
-#. "Panjabi"
-#. "Papiamento"
-#. "Pali"
-#. "Polish"
-#. "Potawatomi" (cf. wikipedia)
-#: ../src/main/sword.cc:674
-msgid "Uma"
-msgstr "Uma"
-
-#. "Pushto"
-#. "Portuguese"
-#. "Quechua"
-#. "Raeto-Romance"
-#. "Rundi"
-#. "Romanian"
-#. "Russian"
-#: ../src/main/sword.cc:682
-msgid "Kinyarwanda"
-msgstr "Kinyarwanda"
-
-#. "Klingon"
-#. "Tswana"
-#. "Turkish"
-#. "Tsonga"
-#. "Tatar"
-#: ../src/main/sword.cc:714
-msgid "Twi"
-msgstr "Twi"
-
-#. "Tahitian"
-#. "Uighur"
-#. "Ukrainian"
-#. "Urdu"
-#. "Uzbek"
-#. "Vietnamese"
-#. "Volapk"
-#.
-#. "Wolof"
-#. "Xhosa" -- causes gettext problems
-#. "Bavarian"
-#: ../src/main/sword.cc:725
-msgid "Alemannisch"
-msgstr "Alemannisch"
-
-#. "Itz"
-#: ../src/main/sword.cc:727
-msgid "Shuar"
-msgstr "Shuar"
-
-#: ../src/main/sword.cc:777
+#: ../src/main/sword.cc:632
 msgid "Initiating SWORD"
 msgstr "Initialisation de Sword"
 
-#: ../src/main/sword.cc:778
+#: ../src/main/sword.cc:633
 msgid "path to sword"
 msgstr "Chemin d'accès à sword"
 
-#: ../src/main/sword.cc:779
+#: ../src/main/sword.cc:634
 msgid "System locale is"
 msgstr "La locale du système est "
 
-#: ../src/main/sword.cc:780
+#: ../src/main/sword.cc:635
 msgid "SWORD locale is"
 msgstr "La locale de Sword est "
 
-#: ../src/main/sword.cc:782
+#: ../src/main/sword.cc:637
 msgid "Checking for SWORD Modules"
 msgstr "Vérification des modules de Sword"
 
-#: ../src/main/sword.cc:815
+#: ../src/main/sword.cc:670
 msgid "SWORD is shutdown"
 msgstr "Arrêt de GnomeSword"
 
-#: ../src/main/sword.cc:1508
+#: ../src/main/sword.cc:1363
 msgid "Daily devotional was requested, but there are none installed."
 msgstr ""
 "Impossible d'afficher le calendrier biblique, aucun module de ce type n'est "
@@ -2164,7 +2007,8 @@ msgstr "MaListe"
 
 #: ../src/main/prayerlists.cc:251
 msgid "Module names must be letters+digits only."
-msgstr "Les noms de modules ne peuvent contenir que des lettres et des chiffres."
+msgstr ""
+"Les noms de modules ne peuvent contenir que des lettres et des chiffres."
 
 #: ../src/main/prayerlists.cc:258
 msgid "GnomeSword already knows a module by that name."
@@ -2180,7 +2024,8 @@ msgstr "Impossible de créer le chemin d'accès au module."
 
 #: ../src/main/prayerlists.cc:310
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
-msgstr "\\par\\par Liste simple de prières\\par\\par Module crée par GnomeSword"
+msgstr ""
+"\\par\\par Liste simple de prières\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:325
 msgid ""
@@ -2193,7 +2038,9 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:351
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
-msgstr "\\par\\par Liste de prières ordonnée par sujets\\par\\par Module crée par GnomeSword"
+msgstr ""
+"\\par\\par Liste de prières ordonnée par sujets\\par\\par Module crée par "
+"GnomeSword"
 
 #: ../src/main/prayerlists.cc:366
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
@@ -2213,7 +2060,8 @@ msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
-msgstr "\\par\\par Liste mensuelle de prières\\par\\par Module crée par GnomeSword"
+msgstr ""
+"\\par\\par Liste mensuelle de prières\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
@@ -2222,7 +2070,8 @@ msgstr "\\par\\par Journal quotidien\\par\\par Module crée par GnomeSword"
 #: ../src/main/prayerlists.cc:511
 msgid ""
 "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
-msgstr "\\par\\par Thême structuré (ex sermon)\\par\\par Module crée par GnomeSword"
+msgstr ""
+"\\par\\par Thême structuré (ex sermon)\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
@@ -3405,6 +3254,48 @@ msgstr "ex Mat-Jean, Ap4"
 #: ../ui/search-dialog.glade.h:71
 msgid "for "
 msgstr "Expression"
+
+#~ msgid "Avestan"
+#~ msgstr "Avestan"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
+
+#~ msgid "Bislama"
+#~ msgstr "Bislama"
+
+#~ msgid "Coptic"
+#~ msgstr "ⲙⲛⲧⲣⲙⲛⲕⲏⲙⲉ"
+
+#~ msgid "Gothic"
+#~ msgstr "𐌲𐌿𐍄𐌹𐍃𐌺𐌰 𐍂𐌰𐌶𐌳𐌰"
+
+#~ msgid "Interlingua"
+#~ msgstr "Interlingua"
+
+#~ msgid "Interlingue"
+#~ msgstr "Interlingue"
+
+#~ msgid "Kalaallisut"
+#~ msgstr "Kalaallisut"
+
+#~ msgid "Burmese"
+#~ msgstr "မြန်မာစာ"
+
+#~ msgid "Uma"
+#~ msgstr "Uma"
+
+#~ msgid "Kinyarwanda"
+#~ msgstr "Kinyarwanda"
+
+#~ msgid "Twi"
+#~ msgstr "Twi"
+
+#~ msgid "Alemannisch"
+#~ msgstr "Alemannisch"
+
+#~ msgid "Shuar"
+#~ msgstr "Shuar"
 
 #~ msgid "Subject (not so simple)"
 #~ msgstr "Sujet précis"
