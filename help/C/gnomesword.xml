@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY introduction SYSTEM "introduction.xml">
   <!ENTITY start SYSTEM "start.xml">
   <!ENTITY interface SYSTEM "interface.xml">
-  <!ENTITY preferences SYSTEM "preferences.xml"> 
+  <!ENTITY preferences SYSTEM "preferences.xml">
   <!ENTITY modules SYSTEM "modules.xml">
   <!ENTITY search SYSTEM "search.xml">
-  <!ENTITY studypad SYSTEM "studypad.xml"> 
+  <!ENTITY studypad SYSTEM "studypad.xml">
   <!ENTITY personal SYSTEM "personal.xml">
+  <!ENTITY journals SYSTEM "journals.xml">
   <!ENTITY authors SYSTEM "authors.xml">
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY license SYSTEM "license.xml">
@@ -20,13 +21,13 @@
   <!ENTITY appname "GnomeSword">
   <!ENTITY gnomesword "the GnomeSword Team">
   <!-- Information about the entities
-       The legal.xml file contains legal information, there is no need to edit the file. 
+       The legal.xml file contains legal information, there is no need to edit the file.
        Use the appversion entity to specify the version of the application.
        Use the manrevision entity to specify the revision number of this manual.
        Use the date entity to specify the release date of this manual.
        Use the app entity to specify the name of the application. -->
 ]>
-<!-- 
+<!--
 This is a GNOME documentation template, designed by the GNOME
 Documentation Project Team. Please use it for writing GNOME
 documentation, making obvious changes. In particular, all the words
@@ -38,7 +39,7 @@ Remember that this is a guide, rather than a perfect model to follow
 slavishly. Make your manual logical and readable.  And don't forget
 to remove these comments in your final documentation!  ;-)
 -->
-<!-- 
+<!--
     (Do not remove this comment block.)
 Maintained by the GNOME Documentation Project
 http://developer.gnome.org/projects/gdp
@@ -68,16 +69,16 @@ Template last modified Apr 11, 2002
     </copyright>
 
     -->
-    <!-- An address can be added to the publisher information.  If a role is 
-    not specified, the publisher/author is the same for all versions of the 
+    <!-- An address can be added to the publisher information.  If a role is
+    not specified, the publisher/author is the same for all versions of the
     document.  -->
-    <publisher> 
-      <publishername>The GnomeSword Team</publishername> 
-    </publisher> 
+    <publisher>
+      <publishername>The GnomeSword Team</publishername>
+    </publisher>
 
     &legal;
-    <!-- This file  contains link to license for the documentation (GNU FDL), and 
-    other legal stuff such as "NO WARRANTY" statement. Please do not change 
+    <!-- This file  contains link to license for the documentation (GNU FDL), and
+    other legal stuff such as "NO WARRANTY" statement. Please do not change
     any of this. -->
 
     <authorgroup>
@@ -100,13 +101,13 @@ Template last modified Apr 11, 2002
 
       <!-- This is appropriate place for other contributors: translators,
       maintainers,  etc. Commented out by default.
-     
+
       <othercredit role="translator">
-        <firstname>Latin</firstname> 
-        <surname>Translator 1</surname> 
-        <affiliation> 
-          <orgname>Latin Translation Team</orgname> 
-          <address> <email>translator@gnome.org</email> </address> 
+        <firstname>Latin</firstname>
+        <surname>Translator 1</surname>
+        <affiliation>
+          <orgname>Latin Translation Team</orgname>
+          <address> <email>translator@gnome.org</email> </address>
         </affiliation>
         <contrib>Latin translation</contrib>
       </othercredit>
@@ -126,201 +127,213 @@ Template last modified Apr 11, 2002
     <!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
     <!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
     <!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
-    <!-- to V3.0, and so on. -->  
+    <!-- to V3.0, and so on. -->
     <revhistory>
-      <revision> 
-        <revnumber>&appname; Manual &manrevision;</revnumber> 
-        <date>&date;</date> 
+      <revision>
+        <revnumber>&appname; Manual &manrevision;</revnumber>
+        <date>&date;</date>
       </revision>
 
+      <revision>
+	<revnumber>Gnomesword 2.3.6</revnumber>
+	<date>2008-08-02</date>
+      </revision>
+      <revision>
+	<revnumber>Gnomesword 2.3.5</revnumber>
+	<date>2008-07-02</date>
+      </revision>
+      <revision>
+	<revnumber>Gnomesword 2.3.4</revnumber>
+	<date>2008-05-26</date>
+      </revision>
       <revision>
 	<revnumber>Gnomesword 2.3.3</revnumber>
 	<date>2008-01-20</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.3.2</revnumber> 
-        <date>2007-12-26</date> 
-      </revision> 
-      <revision> 
-        <revnumber>GnomeSword 2.3.1</revnumber> 
-        <date>2007-10-15</date> 
-      </revision> 
-      <revision> 
-        <revnumber>GnomeSword 2.2.3</revnumber> 
-        <date>2007-03-26</date> 
+      <revision>
+        <revnumber>GnomeSword 2.3.2</revnumber>
+        <date>2007-12-26</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.2.1</revnumber> 
-        <date>2007-01-27</date> 
+      <revision>
+        <revnumber>GnomeSword 2.3.1</revnumber>
+        <date>2007-10-15</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.2.0</revnumber> 
-        <date>2006-12-23</date> 
+      <revision>
+        <revnumber>GnomeSword 2.2.3</revnumber>
+        <date>2007-03-26</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.10</revnumber> 
-        <date>2006-12-10</date> 
+      <revision>
+        <revnumber>GnomeSword 2.2.1</revnumber>
+        <date>2007-01-27</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.9</revnumber> 
+      <revision>
+        <revnumber>GnomeSword 2.2.0</revnumber>
+        <date>2006-12-23</date>
+      </revision>
+      <revision>
+        <revnumber>GnomeSword 2.1.10</revnumber>
+        <date>2006-12-10</date>
+      </revision>
+      <revision>
+        <revnumber>GnomeSword 2.1.9</revnumber>
         <date>2006-11-12</date>
      </revision>
-      <revision>    
-        <revnumber>GnomeSword 2.1.8</revnumber> 
-        <date>2006-11-08</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.8</revnumber>
+        <date>2006-11-08</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.7</revnumber> 
-        <date>2006-05-04</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.7</revnumber>
+        <date>2006-05-04</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.6</revnumber> 
-        <date>2006-04-13</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.6</revnumber>
+        <date>2006-04-13</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.5</revnumber> 
-        <date>2005-12-14</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.5</revnumber>
+        <date>2005-12-14</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.4 </revnumber> 
-        <date>2005-12-13</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.4 </revnumber>
+        <date>2005-12-13</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.2</revnumber> 
-        <date>2005-05-31</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.2</revnumber>
+        <date>2005-05-31</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.1</revnumber> 
-        <date>2004-07-18</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.1</revnumber>
+        <date>2004-07-18</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.1.0</revnumber> 
-        <date>2004-08-30</date> 
+      <revision>
+        <revnumber>GnomeSword 2.1.0</revnumber>
+        <date>2004-08-30</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 2.0.0</revnumber> 
-        <date>2003-12-25</date> 
+      <revision>
+        <revnumber>GnomeSword 2.0.0</revnumber>
+        <date>2003-12-25</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.10</revnumber> 
-        <date>2003-09-05</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.10</revnumber>
+        <date>2003-09-05</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.9</revnumber> 
-        <date>2003-03-26</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.9</revnumber>
+        <date>2003-03-26</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.8</revnumber> 
-        <date>2003-01-12</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.8</revnumber>
+        <date>2003-01-12</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.7</revnumber> 
-        <date>2002-12-20</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.7</revnumber>
+        <date>2002-12-20</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.6</revnumber> 
-        <date>2002-11-03</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.6</revnumber>
+        <date>2002-11-03</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.5</revnumber> 
-        <date>2002-07-01</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.5</revnumber>
+        <date>2002-07-01</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.4</revnumber> 
-        <date>2002-06-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.4</revnumber>
+        <date>2002-06-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.3</revnumber> 
-        <date>2002-05-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.3</revnumber>
+        <date>2002-05-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.2</revnumber> 
-        <date>2002-04-22</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.2</revnumber>
+        <date>2002-04-22</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.1</revnumber> 
-        <date>2002-04-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.1</revnumber>
+        <date>2002-04-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.7.0</revnumber> 
-        <date>2002-04-09</date> 
+      <revision>
+        <revnumber>GnomeSword 0.7.0</revnumber>
+        <date>2002-04-09</date>
       </revision>
-      <revision> 
+      <revision>
         <revnumber>GnomeSword 0.5.0</revnumber>
-        <date>2001-08-13</date> 
+        <date>2001-08-13</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.4.1</revnumber> 
-        <date>2001-04-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.4.1</revnumber>
+        <date>2001-04-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.4.0</revnumber> 
-        <date>2001-04-06</date> 
+      <revision>
+        <revnumber>GnomeSword 0.4.0</revnumber>
+        <date>2001-04-06</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.3.7</revnumber> 
-        <date>2000-12-08</date> 
+      <revision>
+        <revnumber>GnomeSword 0.3.7</revnumber>
+        <date>2000-12-08</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.3.6</revnumber> 
-        <date>2000-12-07</date> 
+      <revision>
+        <revnumber>GnomeSword 0.3.6</revnumber>
+        <date>2000-12-07</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.3.2</revnumber> 
-        <date>2000-11-21</date> 
+      <revision>
+        <revnumber>GnomeSword 0.3.2</revnumber>
+        <date>2000-11-21</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.3.0</revnumber> 
-        <date>2000-11-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.3.0</revnumber>
+        <date>2000-11-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.5</revnumber> 
-        <date>2000-10-06</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.5</revnumber>
+        <date>2000-10-06</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.4</revnumber> 
-        <date>2000-09-16</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.4</revnumber>
+        <date>2000-09-16</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.3</revnumber> 
-        <date>2000-09-07</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.3</revnumber>
+        <date>2000-09-07</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.2</revnumber> 
-        <date>2000-09-06</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.2</revnumber>
+        <date>2000-09-06</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.1</revnumber> 
-        <date>2000-08-29</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.1</revnumber>
+        <date>2000-08-29</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.2.0</revnumber> 
-        <date>2000-08-19</date> 
+      <revision>
+        <revnumber>GnomeSword 0.2.0</revnumber>
+        <date>2000-08-19</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.1.8</revnumber> 
-        <date>2000-06-10</date> 
+      <revision>
+        <revnumber>GnomeSword 0.1.8</revnumber>
+        <date>2000-06-10</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.1.7</revnumber> 
-        <date>2000-05-19</date> 
+      <revision>
+        <revnumber>GnomeSword 0.1.7</revnumber>
+        <date>2000-05-19</date>
       </revision>
-      <revision> 
-        <revnumber>GnomeSword 0.1.6</revnumber> 
-        <date>2000-05-08</date> 
+      <revision>
+        <revnumber>GnomeSword 0.1.6</revnumber>
+        <date>2000-05-08</date>
       </revision>
-    </revhistory> 
+    </revhistory>
 
     <releaseinfo>This manual describes version &appversion; of &appname;.
-    </releaseinfo> 
-    <legalnotice> 
-      <title>Feedback</title> 
+    </releaseinfo>
+    <legalnotice>
+      <title>Feedback</title>
       <para>To report a bug or make a suggestion regarding the &appname; application or
       this manual, Use the <ulink url="http://sourceforge.net/tracker/?group_id=5528">
-      Tracker on SourceForge</ulink> or the mailing lists. 
+      Tracker on SourceForge</ulink> or the mailing lists.
       </para>
       <!-- Translators may also add here feedback address for translations -->
-    </legalnotice> 
+    </legalnotice>
 
     <keywordset>
       <keyword>gnome</keyword>
@@ -331,17 +344,17 @@ Template last modified Apr 11, 2002
       <keyword>help dialog</keyword>
     </keywordset>
 
-  </articleinfo> 
+  </articleinfo>
 
-  <indexterm zone="index"> 
-    <primary>&appname;</primary> 
-  </indexterm> 
+  <indexterm zone="index">
+    <primary>&appname;</primary>
+  </indexterm>
 
 
   <!-- ============= Document Body ============================= -->
 
   <!-- Please note: the headers of the included files (introduction.xml,
-  start.xml and so on) must be into this main help file. If they are not, 
+  start.xml and so on) must be into this main help file. If they are not,
   the table of contents is not displayed by yelp.
   -->
 
@@ -358,8 +371,8 @@ Template last modified Apr 11, 2002
   to start the application and to describe the user interface components
   of the application. If there is other information that it is important
   for readers to know before they start using the application, you should
-  also include this information here. 
-  If the information about how to get started is very short, you can 
+  also include this information here.
+  If the information about how to get started is very short, you can
   include it in the Introduction and omit this section. -->
   <sect1 id="familiar">
     <title>Getting Started with &appname;</title>
@@ -381,25 +394,31 @@ Template last modified Apr 11, 2002
   <!-- Modules -->
   <sect1 id="module-manager">
     <title>Module Manager</title>
-    &modules; 
+    &modules;
   </sect1>
-  
+
   <!-- Searching -->
   <sect1 id="search">
     <title>The Search Function</title>
-    &search;  
+    &search;
   </sect1>
 
   <!-- Studypad -->
   <sect1 id="studypad">
     <title>The Studypad</title>
-    &studypad;  
+    &studypad;
   </sect1>
 
   <!-- Personal Commentary -->
   <sect1 id="personal">
-    <title>The Personal Commentary </title>
-    &personal;  
+    <title>The Personal Commentary</title>
+    &personal;
+  </sect1>
+
+  <!-- Journals and Prayer Lists -->
+  <sect1 id="journals">
+    <title>Journals and Prayer Lists</title>
+    &journals;
   </sect1>
 
   <!-- Authors -->
@@ -407,7 +426,7 @@ Template last modified Apr 11, 2002
     <title>Authors</title>
     &authors;
   </sect1>
- 
+
   <!-- License -->
   <sect1 id="license">
     <title>License</title>
