@@ -4,29 +4,32 @@ GNOMESWORD RELEASE NOTES
 ________________________
 
 Release 2.3.6
-DD MMM 2008
+02 Aug 2008
 
  1. In the module manager, along with the usual per-module-type
-    categorization of modules, the mod.mgr now also produces a parallel
+    categorization of modules, the mod.mgr also produces a parallel
     per-availability categorization, for updated and uninstalled
     modules.  This makes it easier to find new stuff, rather than having
     to crawl through all the per-type listings.
 
- 2. The module manager now alphabetizes the available language selections.
+ 2. The module manager alphabetizes the available language selections.
     Also, locale-specific language names are in all module lists.
+    (Note for Cygwin: The Cygwin pango library is buggy, tripping over
+    some valid UTF-8...by aborting.  *sigh*  For this reason, it has been
+    necessary to cripple Cygwin's use of locale-specific language names.)
 
- 3. General books' bookmarks are now generated using the key text rather
+ 3. General books' bookmarks are generated using the key text rather
     than an arcane internal numeric module offset.
 
- 4. Devotionals now open to the current MM.DD key, rather than attempting
+ 4. Devotionals open to today's MM.DD key, rather than attempting
     (and always failing) to open on the current dictionary key.
 
- 5. An Advanced Search bug causing failure when a custom list contains a
-    deleted module has been fixed.
+ 5. An Advanced Search bug has been fixed, which caused failure when a
+    custom list contained a deleted module.
 
  6. Genbook navbar tooltips have been made a bit more understandable.
 
- 7. Main verse navigation now has keyboard shorcuts on variations of N/P.
+ 7. Main verse navigation has keyboard shorcuts on variations of N/P.
 
  8. The personal commentary editor can be invoked with Alt-Z.
 
@@ -35,17 +38,22 @@ DD MMM 2008
 10. Image, Map, and Daily Devotional modules no longer appear in more
     than one module list.
 
-11. Prayer lists have expanded to include a general journal concept; a few
-    crash bugs have been fixed, and some new journal & topical outlines are
-    available.
+11. Prayer lists have expanded to include a general journal concept; a
+    few crash bugs have been fixed, and templates for journals & topical
+    outlines are available.  These user-editable modules seem now to be
+    suitable for general user-driven module creation in genbook format.
 
-12. The Advanced Search dialog's Find button now also stops a search.
+12. The Advanced Search dialog's Find button also stops a search.
 
-13. Almost 8000 language names are known, for module list purposes.
+13. Almost 8000 language abbrev names are known, for module list purposes.
 
-Bug reports addressed since 2.3.4:
+14. Comboboxes in Preferences now limit dictionary subcategories correctly
+    (i.e. HebrewDef, GreekDef, Daily Devotionals).
+
+Bug reports addressed since 2.3.5:
 1973928  key entry not saved in .conf
 1994431  seg fault when incorrect source
+2033166  Same selection in more combo boxes
 
 New feature requests pending:
 <none>
