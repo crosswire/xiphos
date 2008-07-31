@@ -23,6 +23,7 @@ EXTRA_DIST = \
 	${PACKAGE}.desktop.in.in \
 	${PACKAGE}.spec.in \
 	${PACKAGE}.spec \
+	debian/* \
 	gnome-doc-utils.make \
 	intltool-extract.in \
 	intltool-merge.in \
