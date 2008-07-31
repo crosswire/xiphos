@@ -165,7 +165,7 @@ struct _preferences_check_buttons {
 	GtkWidget *doublespace;
 	GtkWidget *show_splash_screen;
 	GtkWidget *prayerlist;
-	
+
 	GtkWidget *show_bible_pane;
 	GtkWidget *show_preview_pane;
 	GtkWidget *show_commentary_pane;
@@ -216,7 +216,8 @@ static BUTTONS button;
  *   gint
  */
 
-static gint string_is_color(gchar * color)
+static gint
+string_is_color(gchar * color)
 {
 	gint i;
 
@@ -256,7 +257,7 @@ static gint string_is_color(gchar * color)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   gchar *gdkcolor_to_hex(gdouble * color, gint websafe)	
+ *   gchar *gdkcolor_to_hex(gdouble * color, gint websafe)
  *
  * Description
  *    this code is from bluefish-1.0.2
@@ -265,20 +266,22 @@ static gint string_is_color(gchar * color)
  *   gchar *
  */
 
-static gchar *gdkcolor_to_hex(GdkColor color, gint websafe)
+static gchar *
+gdkcolor_to_hex(GdkColor color,
+		gint websafe)
 {
 	gchar *tmpstr;
 
 	tmpstr = g_malloc(8*sizeof(char));
 	if (websafe) {
-		g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X", 
-					(0x33 * color.red/(256*0x33)), 
-					(0x33 * color.green/(256*0x33)), 
+		g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X",
+					(0x33 * color.red/(256*0x33)),
+					(0x33 * color.green/(256*0x33)),
 					(0x33 * color.blue/(256*0x33)) );
 	} else {
-		g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X", 
-					color.red/256, 
-					color.green/256, 
+		g_snprintf (tmpstr, 8,"#%.2X%.2X%.2X",
+					color.red/256,
+					color.green/256,
 					color.blue/256);
 	}
 	GS_message((tmpstr));
@@ -286,16 +289,17 @@ static gchar *gdkcolor_to_hex(GdkColor color, gint websafe)
 }
 
 
-static void apply_color_settings(void)
-{	
+static void
+apply_color_settings(void)
+{
 	if (settings.havebible)
-	      main_display_bible(settings.MainWindowModule, 
+	      main_display_bible(settings.MainWindowModule,
       			settings.currentverse);
 	if (settings.havecomm)
-		main_display_commentary(settings.CommWindowModule, 
+		main_display_commentary(settings.CommWindowModule,
 			settings.currentverse);
 	if (settings.havedict)
-		main_display_dictionary(settings.DictWindowModule, 
+		main_display_dictionary(settings.DictWindowModule,
 			settings.dictkey);
 	if (settings.havebible)
 		main_update_parallel_page();
@@ -309,25 +313,26 @@ static void apply_color_settings(void)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton1_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton1_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton1_color_set(GtkColorButton  * colorbutton, 
-							gpointer user_data)
+void
+on_colorbutton1_color_set(GtkColorButton  * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf = gdkcolor_to_hex(color,1); 
+	buf = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "background", buf);
 	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
 	if (buf)
@@ -342,25 +347,26 @@ void on_colorbutton1_color_set(GtkColorButton  * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton2_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton2_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton2_color_set(GtkColorButton * colorbutton,
-                                        		gpointer user_data)
+void
+on_colorbutton2_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "text_fg", buf2);
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	if (buf2)
@@ -375,27 +381,28 @@ void on_colorbutton2_color_set(GtkColorButton * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton3_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton3_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton3_color_set(GtkColorButton * colorbutton,
-                                       			gpointer user_data)
+void
+on_colorbutton3_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "currentverse", buf2);
-	settings.currentverse_color = 
+	settings.currentverse_color =
 		xml_get_value("HTMLcolors", "currentverse");
 	if (buf2)
 		g_free(buf2);
@@ -409,25 +416,26 @@ void on_colorbutton3_color_set(GtkColorButton * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton4_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton4_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton4_color_set(GtkColorButton * colorbutton,
-                                    		    gpointer user_data)
+void
+on_colorbutton4_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "versenum", buf2);
 	settings.bible_verse_num_color =
 		xml_get_value("HTMLcolors", "versenum");
@@ -443,25 +451,26 @@ void on_colorbutton4_color_set(GtkColorButton * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton5_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton5_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton5_color_set(GtkColorButton * colorbutton,
-                                       			 gpointer user_data)
+void
+on_colorbutton5_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "link", buf2);
 	settings.link_color = xml_get_value("HTMLcolors", "link");
 	if (buf2)
@@ -476,25 +485,26 @@ void on_colorbutton5_color_set(GtkColorButton * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton6_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton6_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton6_color_set(GtkColorButton * colorbutton,
-                                       			 gpointer user_data)
+void
+on_colorbutton6_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "highlight_fg", buf2);
 	settings.highlight_fg = xml_get_value("HTMLcolors", "highlight_fg");
 	if (buf2)
@@ -509,25 +519,26 @@ void on_colorbutton6_color_set(GtkColorButton * colorbutton,
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_colorbutton7_color_set(GtkColorButton  * colorbutton, 
+ *   void on_colorbutton7_color_set(GtkColorButton  * colorbutton,
  *							gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_colorbutton7_color_set(GtkColorButton * colorbutton,
-                                       			 gpointer user_data)
+void
+on_colorbutton7_color_set(GtkColorButton * colorbutton,
+			  gpointer user_data)
 {
 	gchar *buf2 = NULL;
  	GdkColor color;
-	
+
 	gtk_color_button_get_color(colorbutton, &color);
-	buf2 = gdkcolor_to_hex(color,1); 
+	buf2 = gdkcolor_to_hex(color,1);
 	xml_set_value("GnomeSword", "HTMLcolors", "highlight_bg", buf2);
 	settings.highlight_bg = xml_get_value("HTMLcolors", "highlight_bg");
 	if (buf2)
@@ -545,14 +556,16 @@ void on_colorbutton7_color_set(GtkColorButton * colorbutton,
  *   void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
- 
-void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+
+void
+on_checkbutton1_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	if (togglebutton->active) {
 		xml_set_value("GnomeSword", "tabs", "browsing", "1");
@@ -578,14 +591,16 @@ void on_checkbutton1_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton2_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	if (togglebutton->active)
 		xml_set_value("GnomeSword", "misc", "showtexts", "1");
@@ -607,14 +622,16 @@ void on_checkbutton2_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton3_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	if (togglebutton->active)
 		xml_set_value("GnomeSword", "misc", "showcomms", "1");
@@ -636,22 +653,24 @@ void on_checkbutton3_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{	
+void
+on_checkbutton9_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
+{
 	if (togglebutton->active)
 		xml_set_value("GnomeSword", "misc", "showpreview", "1");
 	else
 		xml_set_value("GnomeSword", "misc", "showpreview", "0");
 	settings.showpreview = atoi(xml_get_value("misc", "showpreview"));
 	GTK_CHECK_MENU_ITEM(widgets.viewpreview_item)->active =
-	    settings.showpreview;	
+	    settings.showpreview;
 	gui_show_hide_preview(togglebutton->active);
 }
 
@@ -665,14 +684,16 @@ void on_checkbutton9_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton4_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
+void
+on_checkbutton4_toggled(GtkToggleButton *togglebutton,
+			gpointer user_data)
 {
 	if (togglebutton->active)
 		xml_set_value("GnomeSword", "misc", "showdicts", "1");
@@ -694,21 +715,23 @@ void on_checkbutton4_toggled(GtkToggleButton *togglebutton, gpointer user_data)
  *   void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton5_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	extern gboolean style_display;
 	xml_set_value("GnomeSword", "misc", "versestyle",
 		      (togglebutton->active ? "1" : "0"));
 	settings.versestyle = togglebutton->active;
-	
-	style_display = TRUE;	
+
+	style_display = TRUE;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.versestyle_item),
 			       settings.versestyle);
@@ -724,14 +747,16 @@ void on_checkbutton5_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton10_toggled(GtkToggleButton * togglebutton,
+			 gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "pinnedtabs",
 		      (togglebutton->active ? "1" : "0"));
@@ -752,14 +777,16 @@ void on_checkbutton10_toggled(GtkToggleButton * togglebutton, gpointer user_data
  *   void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton11_toggled(GtkToggleButton * togglebutton,
+			 gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "readaloud",
 		      (togglebutton->active ? "1" : "0"));
@@ -780,19 +807,21 @@ void on_checkbutton11_toggled(GtkToggleButton * togglebutton, gpointer user_data
  *   void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton12_toggled(GtkToggleButton * togglebutton,
+			 gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "showversenum",
 		      (togglebutton->active ? "1" : "0"));
 	settings.showversenum = atoi(xml_get_value("misc", "showversenum"));
-	
+
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 			       (widgets.showversenum_item),
 			       settings.showversenum);
@@ -809,14 +838,16 @@ void on_checkbutton12_toggled(GtkToggleButton * togglebutton, gpointer user_data
  *   void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton6_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	xml_set_value("GnomeSword", "lexicons", "usedefaultdict",
 		      (togglebutton->active ? "1" : "0"));
@@ -834,14 +865,16 @@ void on_checkbutton6_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton7_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "dailydevotional",
 		      (togglebutton->active ? "1" : "0"));
@@ -859,14 +892,16 @@ void on_checkbutton7_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton8_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "splash",
 		      (togglebutton->active ? "1" : "0"));
@@ -884,14 +919,16 @@ void on_checkbutton8_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *   void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton,
+			      gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "chapter-scroll",
 		      (togglebutton->active ? "1" : "0"));
@@ -908,14 +945,16 @@ void on_checkbutton_scroll_toggled(GtkToggleButton * togglebutton, gpointer user
  *   void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton,
+				   gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "imageresize",
 		      (togglebutton->active ? "1" : "0"));
@@ -932,14 +971,16 @@ void on_checkbutton_imageresize_toggled(GtkToggleButton * togglebutton, gpointer
  *   void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton,
+				      gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "versehighlight",
 		      (togglebutton->active ? "1" : "0"));
@@ -960,13 +1001,15 @@ void on_checkbutton_versehighlight_toggled(GtkToggleButton * togglebutton, gpoin
  *   void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  * Return value
  *   void
  */
 
-void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+void
+on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton,
+				   gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "doublespace",
 		      (togglebutton->active ? "1" : "0"));
@@ -985,15 +1028,16 @@ void on_checkbutton_doublespace_toggled(GtkToggleButton * togglebutton, gpointer
  *   void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
 
-void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
-				       gpointer user_data)
+void
+on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
+				  gpointer user_data)
 {
 	xml_set_value("GnomeSword", "misc", "prayerlist",
 		      (togglebutton->active ? "1" : "0"));
@@ -1010,7 +1054,7 @@ void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
 		// if it didn't work, we'll hear about it when a list is created.
 		g_string_free(path, TRUE);
 	}
-	
+
 	/* update module list to show choice */
 	main_update_module_lists();
 	main_load_module_tree(sidebar.module_list);
@@ -1029,14 +1073,16 @@ void on_checkbutton_prayerlist_toggled(GtkToggleButton * togglebutton,
  *   void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
  *
  * Description
- *   
- *   
+ *
+ *
  *
  * Return value
  *   void
  */
- 
-void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
+
+void
+on_folder_changed(GtkFileChooser * filechooser,
+		  gpointer user_data)
 {
 	gchar *directory = gtk_file_chooser_get_current_folder(filechooser);
 	xml_set_value("GnomeSword", "studypad", "directory", directory);
@@ -1053,17 +1099,19 @@ void on_folder_changed(GtkFileChooser * filechooser, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox1_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox1_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *   combobox1 (verse number size) 
+ *   combobox1 (verse number size)
  *   has changed - update Biblical text pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox1_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1073,7 +1121,7 @@ void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data)
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf)
-		return;	
+		return;
 	xml_set_value("GnomeSword", "fontsize", "versenum", buf);
 	settings.verse_num_font_size_str = xml_get_value("fontsize", "versenum");
 	settings.verse_num_font_size = atoi(settings.verse_num_font_size_str);
@@ -1092,17 +1140,19 @@ void on_combobox1_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_basecombobox1_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_basecombobox1_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *   combobox1 (base font size) 
+ *   combobox1 (base font size)
  *   has changed - update Biblical text pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_basecombobox1_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_basecombobox1_changed(GtkComboBox * combobox,
+			 gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1112,7 +1162,7 @@ void on_basecombobox1_changed(GtkComboBox * combobox, gpointer user_data)
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf)
-		return;	
+		return;
 	xml_set_value("GnomeSword", "fontsize", "basefontsize", buf);
 	settings.base_font_size_str = xml_get_value("fontsize", "basefontsize");
 	settings.base_font_size = atoi(settings.base_font_size_str);
@@ -1131,17 +1181,19 @@ void on_basecombobox1_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox2_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox2_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox2 (Biblical text module) or combobox3 (Commentary module),
  *   has changed - update Biblical text and Commentary panes
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox2_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1152,7 +1204,7 @@ void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data)
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf)
 		return;
-	
+
 	url = g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
 	main_url_handler(url);
 	g_free(url);
@@ -1167,17 +1219,19 @@ void on_combobox2_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox4_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox4_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox4 (Dictionary module),
  *   has changed - update dictionary pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox4_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1188,7 +1242,7 @@ void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data)
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf)
 		return;
-	
+
 	url = g_strdup_printf("sword://%s/%s",buf,settings.dictkey);
 	main_url_handler(url);
 	g_free(url);
@@ -1203,17 +1257,19 @@ void on_combobox4_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox5_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox5_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox5 (default dictionary module),
  *   has changed - update settings
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox5_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox5_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1237,17 +1293,19 @@ void on_combobox5_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox6_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox6_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox6 (Personal comments module),
  *   has changed - update settings
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox6_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox6_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1271,17 +1329,19 @@ void on_combobox6_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox7_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox7_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *    
+ *
  *   has changed - update parallel pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox7_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox7_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1303,17 +1363,19 @@ void on_combobox7_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox8_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox8_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *    
+ *
  *   has changed - update parallel pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox8_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox8_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1334,17 +1396,19 @@ void on_combobox8_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox9_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox9_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *    
+ *
  *   has changed - update parallel pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox9_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox9_changed(GtkComboBox * combobox,
+		     gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1366,17 +1430,19 @@ void on_combobox9_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox10_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox10_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *    
+ *
  *   has changed - update parallel pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox10_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox10_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1397,17 +1463,19 @@ void on_combobox10_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox11_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox11_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
- *    
+ *
  *   has changed - update parallel pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox11_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox11_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1429,17 +1497,19 @@ void on_combobox11_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox12_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox12_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox12 (Daily Devotional module),
  *   has changed - update settings
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox12_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox12_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1463,17 +1533,19 @@ void on_combobox12_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox13_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox13_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox13 (Hebrew lex module),
  *   has changed - update settings
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox13_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox13_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1497,17 +1569,19 @@ void on_combobox13_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox14_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox14_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox14 (Greek lex module),
  *   has changed - update settings
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox14_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1531,17 +1605,19 @@ void on_combobox14_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_combobox15_changed(GtkEditable * editable, gpointer user_data)	
+ *   void on_combobox15_changed(GtkEditable * editable, gpointer user_data)
  *
  * Description
  *   combobox4 (Book module),
  *   has changed - update book pane
  *
  * Return value
- *  void 
+ *  void
  */
 
-void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data)
+void
+on_combobox15_changed(GtkComboBox * combobox,
+		      gpointer user_data)
 {
 	gchar *buf = NULL;
 	gchar *url = NULL;
@@ -1551,7 +1627,7 @@ void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data)
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
 	if (!buf)
-		return;	
+		return;
 	url = g_strdup_printf("sword://%s/%s",buf,"1");
 	main_url_handler(url);
 	g_free(url);
@@ -1566,16 +1642,17 @@ void on_combobox15_changed(GtkComboBox * combobox, gpointer user_data)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void add_columns(GtkWidget * listview)	
+ *   void add_columns(GtkWidget * listview)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-static void add_columns(GtkWidget * treeview)
+static void
+add_columns(GtkWidget * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1601,14 +1678,15 @@ static void add_columns(GtkWidget * treeview)
  *		      GtkWidget * tree_widget)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-static 
-void tree_selection_changed(GtkTreeSelection * selection, gpointer data)
+static void
+tree_selection_changed(GtkTreeSelection * selection,
+		       gpointer data)
 {
 	GtkTreeIter selected;
 	gchar *name = NULL;
@@ -1631,18 +1709,20 @@ void tree_selection_changed(GtkTreeSelection * selection, gpointer data)
  * Synopsis
  *   #include "gui/.h"
  *
- *   void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, 
+ *   void on_dialog_prefs_response(GtkDialog * dialog, gint response_id,
 					gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-void on_dialog_prefs_response(GtkDialog * dialog, gint response_id, 
-					gpointer user_data)
+void
+on_dialog_prefs_response(GtkDialog * dialog,
+			 gint response_id,
+			 gpointer user_data)
 {
 	if (response_id == GTK_RESPONSE_CLOSE) {
 		xml_save_settings_doc(settings.fnconfigure);
@@ -1651,7 +1731,8 @@ void on_dialog_prefs_response(GtkDialog * dialog, gint response_id,
 }
 
 
-static GtkTreeModel *create_model(void)
+static GtkTreeModel *
+create_model(void)
 {
 	GtkTreeStore *model;
 	GtkTreeIter iter;
@@ -1708,16 +1789,17 @@ static GtkTreeModel *create_model(void)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void setup_color_pickers(void)	
+ *   void setup_color_pickers(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-static void setup_color_pickers(void)
+static void
+setup_color_pickers(void)
 {
 	GdkColor color;
 	if (string_is_color(settings.bible_bg_color)) {
@@ -1731,7 +1813,7 @@ static void setup_color_pickers(void)
 				GTK_COLOR_BUTTON(color_picker.text_background),
                                 &color);
 	}
-	
+
 	if (string_is_color(settings.bible_text_color)) {
 		gdk_color_parse(settings.bible_text_color, &color);
 		gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker.text),
@@ -1800,7 +1882,8 @@ static void setup_color_pickers(void)
 }
 
 
-static void setup_check_buttons(void)
+static void
+setup_check_buttons(void)
 {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.enable_tabbed_browsing),
@@ -1883,20 +1966,48 @@ static void setup_check_buttons(void)
 #endif /* 0 */
 }
 
+/*
+ * comparator function to determine filling of true general dict lists.
+ */
+static gboolean
+dict_no_image_map_dd(char *modname, char *feature)
+{
+	/* no features or categories */
+	const char *f = main_get_mod_config_entry(modname, "Feature");
+	const char *c = main_get_mod_config_entry(modname, "Category");
+	return (((c == NULL) ||
+		 !strcmp(c, "Glossaries")) &&
+		((f == NULL) ||
+		 !strcmp(f, "Glossary")));
+}
 
-static
-void fill_combobox(GList * glist, GtkComboBox * combo, gchar * current_module)
-{	
+/*
+ * comparator function to determine filling of heb/grk dict lists.
+ */
+static gboolean
+dict_match_feature(char *modname, char *feature)
+{
+	const char *f = main_get_mod_config_entry(modname, "Feature");
+	return (f && (!strcmp(f, feature)));
+}
+
+static void
+fill_combobox(GList * glist,
+	      GtkComboBox * combo,
+	      gchar * current_module,
+	      gboolean (*eval)(char *, char *),	/* evaluator of feature */
+	      char * feature)			/* feature sought or avoided */
+{
 	GtkTreeIter iter;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
 	gint index = 0;
 	gint i = 0;
-	
+
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 	gtk_combo_box_set_model(combo,
 				GTK_TREE_MODEL(store));
-	
+
 	renderer = gtk_cell_renderer_text_new();
 	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
 				   (combo),
@@ -1907,24 +2018,28 @@ void fill_combobox(GList * glist, GtkComboBox * combo, gchar * current_module)
 
 	gtk_list_store_clear(GTK_LIST_STORE(store));
 
-	while(glist) {
-		gtk_list_store_append(GTK_LIST_STORE(store), &iter);
-		gtk_list_store_set(GTK_LIST_STORE(store), 
-					&iter, 
-					0, 
-					(gchar*)glist->data, 
-					-1);
-		if(current_module && !strcmp((gchar*)glist->data, current_module))
-			index = i;
-		++i;
+	while (glist) {
+		if ((eval == NULL) || (*eval)(glist->data, feature)) {
+			/* "anything goes" or "acceptable match" */
+			gtk_list_store_append(GTK_LIST_STORE(store), &iter);
+			gtk_list_store_set(GTK_LIST_STORE(store),
+					   &iter,
+					   0,
+					   (gchar*)glist->data,
+					   -1);
+			if (current_module && !strcmp((gchar*)glist->data,
+						      current_module))
+				index = i;
+			++i;
+		}
 		glist = g_list_next(glist);
 	}
 	gtk_combo_box_set_active(combo, index);
 }
 
 
-static
-gint get_font_size_index(const char *font)
+static gint
+get_font_size_index(const char *font)
 {
 	gint i = 0;
 	if (!strcmp(font, "-2"))
@@ -1943,61 +2058,86 @@ gint get_font_size_index(const char *font)
 		return 6;
 	if (!strcmp(font, "+5"))
 		return 7;
+	return 0;
 }
 
 
-static
-void setup_module_comboboxs(void)
+static void
+setup_module_comboboxes(void)
 {
 	GList *glist = NULL;
-	/* Main Window Modules page */
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.text_module), settings.MainWindowModule);
-	glist = get_list(COMM_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.commentary_module), settings.CommWindowModule);
-	glist = get_list(DICT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.dictionary_module), settings.DictWindowModule);
-	glist = get_list(DICT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.default_dictionary_module), settings.DefaultDict);
-	glist = get_list(PERCOMM_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.percomm_module), settings.personalcommentsmod);
-	glist = get_list(GBS_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.book_module), settings.book_mod);
-	/* parallel page */	
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_1_module), settings.parallel1Module);	
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_2_module), settings.parallel2Module);		
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_3_module), settings.parallel3Module);	
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_4_module), settings.parallel4Module);
-	glist = get_list(TEXT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.parallel_5_module), settings.parallel5Module);
-	/* Miscellaneous Modules page */
-	glist = get_list(DEVOTION_LIST);
-	if(glist)  {
-		fill_combobox(glist,GTK_COMBO_BOX(combo.devotion_module), settings.devotionalmod);
-		
-	}
-	glist = get_list(DICT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.hebrew_lex__module), settings.lex_hebrew);
-	glist = get_list(DICT_LIST);
-	if(glist) 
-		fill_combobox(glist,GTK_COMBO_BOX(combo.greek_lex__module), settings.lex_greek);
 
+	/*
+	 * Main Window Modules page
+	 */
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.text_module),
+			      settings.MainWindowModule,
+			      NULL, NULL);
+	if (glist = get_list(COMM_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.commentary_module),
+			      settings.CommWindowModule,
+			      NULL, NULL);
+	if (glist = get_list(DICT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.dictionary_module),
+			      settings.DictWindowModule,
+			      dict_no_image_map_dd, NULL);
+	if (glist = get_list(DICT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.default_dictionary_module),
+			      settings.DefaultDict,
+			      dict_no_image_map_dd, NULL);
+	if (glist = get_list(PERCOMM_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.percomm_module),
+			      settings.personalcommentsmod,
+			      NULL, NULL);
+	if (glist = get_list(GBS_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.book_module),
+			      settings.book_mod,
+			      NULL, NULL);
+
+	/*
+	 * parallel page
+	 */
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_1_module),
+			      settings.parallel1Module,
+			      NULL, NULL);
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_2_module),
+			      settings.parallel2Module,
+			      NULL, NULL);
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_3_module),
+			      settings.parallel3Module,
+			      NULL, NULL);
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_4_module),
+			      settings.parallel4Module,
+			      NULL, NULL);
+	if (glist = get_list(TEXT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_5_module),
+			      settings.parallel5Module,
+			      NULL, NULL);
+
+	/*
+	 * Miscellaneous Modules page
+	 */
+	if (glist = get_list(DEVOTION_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.devotion_module),
+			      settings.devotionalmod,
+			      NULL, NULL);
+	if (glist = get_list(DICT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.hebrew_lex__module),
+			      settings.lex_hebrew,
+			      dict_match_feature, "HebrewDef");
+	if (glist = get_list(DICT_LIST))
+		fill_combobox(glist, GTK_COMBO_BOX(combo.greek_lex__module),
+			      settings.lex_greek,
+			      dict_match_feature, "GreekDef");
+
+	/*
+	 * signal connectivity
+	 */
 	g_signal_connect(combo.text_module, "changed",
 			 G_CALLBACK(on_combobox2_changed), NULL);
 	g_signal_connect(combo.commentary_module, "changed",
@@ -2027,7 +2167,7 @@ void setup_module_comboboxs(void)
 	g_signal_connect(combo.greek_lex__module, "changed",
 			 G_CALLBACK(on_combobox14_changed), NULL);
 
-}	
+}
 
 
 /******************************************************************************
@@ -2050,7 +2190,8 @@ void setup_module_comboboxs(void)
  *   GtkWidget *
  */
 
-static void create_preferences_dialog(void)
+static void
+create_preferences_dialog(void)
 {
 	GladeXML *gxml;
 	gchar *glade_file;
@@ -2063,7 +2204,7 @@ static void create_preferences_dialog(void)
 
 	glade_file = gui_general_user_file ("prefs.glade", TRUE);
 	g_return_if_fail(glade_file != NULL);
-	
+
 	/* build the widget */
 	gxml = glade_xml_new (glade_file, NULL, NULL);
 	g_free (glade_file);
@@ -2077,9 +2218,9 @@ static void create_preferences_dialog(void)
 			 G_CALLBACK(), NULL);
 */
 	/* color pickers */
-	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");	
+	color_picker.text_background = glade_xml_get_widget (gxml, "colorbutton1");
 	g_signal_connect(color_picker.text_background, "color_set",
-			 G_CALLBACK(on_colorbutton1_color_set), NULL);	
+			 G_CALLBACK(on_colorbutton1_color_set), NULL);
 	color_picker.text = glade_xml_get_widget (gxml, "colorbutton2");
 	g_signal_connect(color_picker.text, "color_set",
 			 G_CALLBACK(on_colorbutton2_color_set), NULL);
@@ -2136,7 +2277,7 @@ static void create_preferences_dialog(void)
 	g_signal_connect(combo.base_font_size, "changed",
 			 G_CALLBACK(on_basecombobox1_changed), NULL);
 
-	/* module combos */				
+	/* module combos */
 	combo.text_module = glade_xml_get_widget (gxml, "combobox2");
 	combo.commentary_module = glade_xml_get_widget (gxml, "combobox3");
 	combo.dictionary_module = glade_xml_get_widget (gxml, "combobox4");
@@ -2151,7 +2292,7 @@ static void create_preferences_dialog(void)
 	combo.hebrew_lex__module = glade_xml_get_widget (gxml, "combobox13");
 	combo.greek_lex__module = glade_xml_get_widget (gxml, "combobox14");
 	combo.book_module = glade_xml_get_widget (gxml, "combobox15");
-	setup_module_comboboxs();
+	setup_module_comboboxes();
 	/* studypad directory chooserbutton */
 	chooser = glade_xml_get_widget (gxml, "filechooserbutton1");
 	gtk_file_chooser_set_current_folder((GtkFileChooser *)chooser,
@@ -2159,11 +2300,11 @@ static void create_preferences_dialog(void)
 	g_signal_connect(chooser, "current_folder_changed",
 			 G_CALLBACK(on_folder_changed), NULL);
 
-	
+
 	/* prefs notebook */
 	notebook = glade_xml_get_widget (gxml, "notebook");
 	/* setup treeview */
-	model = create_model();	
+	model = create_model();
 	treeview = glade_xml_get_widget (gxml, "treeview");
 	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview), model);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), FALSE);
@@ -2173,7 +2314,7 @@ static void create_preferences_dialog(void)
 	selection = G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview)));
 	/* connect signals and data */
 	glade_xml_signal_autoconnect_full
-		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);	
+		(gxml, (GladeXMLConnectFunc)gui_glade_signal_connect_func, NULL);
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), model);
@@ -2187,17 +2328,18 @@ static void create_preferences_dialog(void)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void gui_setup_preferences_dialog(void)	
+ *   void gui_setup_preferences_dialog(void)
  *
  * Description
- *   get module list and setup preferences dialog call 
+ *   get module list and setup preferences dialog call
  *   gui_create_preferences_dialog() to create dialog
  *
  * Return value
  *   void
  */
 
-void gui_setup_preferences_dialog(void)
+void
+gui_setup_preferences_dialog(void)
 {
 	/* create preferences dialog */
 	create_preferences_dialog();

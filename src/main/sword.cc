@@ -1535,13 +1535,13 @@ char *main_get_mod_about_info(char * mod_name)
 }
 
 char *main_get_mod_config_entry(const char * module_name,
-				      const char * entry)
+				const char * entry)
 {
 	return backend->get_config_entry((char*)module_name, (char*)entry);
 }
 
 char *main_get_mod_config_file(const char * module_name,
-				     const char * moddir)
+			       const char * moddir)
 {
 #ifdef  SWORD_SHOULD_HAVE_A_WAY_TO_GET_A_CONF_FILENAME_FROM_A_MODNAME
 	return backend->get_config_file((char*)module_name, (char*)moddir);
