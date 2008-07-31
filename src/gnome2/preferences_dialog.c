@@ -1975,10 +1975,7 @@ dict_no_image_map_dd(char *modname, char *feature)
 	/* no features or categories */
 	const char *f = main_get_mod_config_entry(modname, "Feature");
 	const char *c = main_get_mod_config_entry(modname, "Category");
-	return (((c == NULL) ||
-		 !strcmp(c, "Glossaries")) &&
-		((f == NULL) ||
-		 !strcmp(f, "Glossary")));
+	return ((c == NULL) && (f == NULL));
 }
 
 /*
