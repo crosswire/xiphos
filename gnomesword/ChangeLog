@@ -1,3 +1,7 @@
+2008-07-30  karl <charcoal@users.sf.net>
+
+	* fix #2033166 limit Preferences' comboboxes category contents.
+
 2008-07-27  karl <charcoal@users.sf.net>
 
 	* add 7700+ languages from a SIL page referencing ISO standard.
