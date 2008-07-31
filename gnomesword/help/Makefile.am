@@ -13,6 +13,7 @@ DOC_INCLUDES = 	introduction.xml \
 		search.xml \
 		studypad.xml \
 		personal.xml \
+		journals.xml \
 		authors.xml \
 		license.xml		
 
@@ -32,6 +33,7 @@ DOC_FIGURES = 	figures/first_start.png \
 		figures/interface_sidepane.png \
 		figures/interface_toolbar.png \
 		figures/interface_viewer.png \
+		figures/journal.png \
 		figures/module.png \
 		figures/personal.png \
 		figures/preferences_fonts-color.png \
