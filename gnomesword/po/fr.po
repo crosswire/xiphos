@@ -21,7 +21,6 @@
 # Personal                -> Notes personnelles
 # Lemma                   -> Lemme
 # Daily Devotion          -> Calendrier biblique
-# Yannig MARCHEGAY (Kokoyaya) <yannick.marchegay@lokanova>, 2007.
 # Dominique Corbex <domcox@users.sourceforge.net>, 2008.
 # 
 # 
@@ -29,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-30 21:59+0200\n"
-"PO-Revision-Date: 2008-07-30 22:04+0200\n"
+"POT-Creation-Date: 2008-08-01 20:46+0200\n"
+"PO-Revision-Date: 2008-08-01 20:46+0200\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,11 +37,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);"
 
-#: ../gnomesword.desktop.in.h:1 ../gnomesword.desktop.in.in.h:1
+#: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
 msgstr "Guide de la Bible GnomeSword"
 
-#: ../gnomesword.desktop.in.h:2 ../gnomesword.desktop.in.in.h:2
+#: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
 msgstr "Aide à l'étude de la Bible"
 
@@ -173,7 +172,7 @@ msgstr "Éditeur de note"
 
 #: ../src/editor/html-editor.c:1964 ../src/editor/html-editor.c:1968
 msgid "Prayer List/Journal Editor"
-msgstr "Éditeur de liste de prières ou de journal"
+msgstr "Éditeur de liste de prières ou de notes"
 
 #: ../src/gecko/gecko-html.cpp:168 ../src/gnome2/html.c:154
 msgid "Unlock "
@@ -189,8 +188,8 @@ msgstr "L'impression n'est pas supportée par ce périphérique."
 
 #: ../src/gecko/gecko-print.c:268
 #, c-format
-msgid "Printer %s does not support postscript printing."
-msgstr "L'imprimante %s n'accepte pas les impressions de type postscript."
+msgid "Printer %s does not support PostScript printing."
+msgstr "L'imprimante %s n'accepte pas les impressions de type PostScript."
 
 #: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
 msgid "Printing"
@@ -929,7 +928,7 @@ msgstr "Non installé"
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Prayer List/Journal"
-msgstr "Liste de prières / Journal"
+msgstr "Liste de prières / Notes"
 
 #: ../src/gnome2/mod_mgr.c:1092
 msgid "Refreshing remote"
@@ -985,7 +984,7 @@ msgid "Sources"
 msgstr "Sources"
 
 #: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1688
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Modules"
 msgstr "Modules"
 
@@ -1141,11 +1140,11 @@ msgstr "Crée une nouvelle liste de prières"
 
 #: ../src/gnome2/sidebar.c:832
 msgid "Subject"
-msgstr "Liste par sujets"
+msgstr "Liste ordonnée par sujet"
 
 #: ../src/gnome2/sidebar.c:839
 msgid "Monthly"
-msgstr "Prières mensuelles"
+msgstr "Suivi mensuel"
 
 #: ../src/gnome2/sidebar.c:840 ../src/gnome2/sidebar.c:847
 #: ../src/gnome2/sidebar.c:854
@@ -1154,11 +1153,11 @@ msgstr "Crée une nouvelle liste de prières"
 
 #: ../src/gnome2/sidebar.c:846
 msgid "Daily Journal"
-msgstr "Journal quotidien"
+msgstr "Suivi quotidien"
 
 #: ../src/gnome2/sidebar.c:853
 msgid "Outlined Topic"
-msgstr "Thême structuré"
+msgstr "Note structurée"
 
 #: ../src/gnome2/sidebar.c:1160
 msgid "_Modules"
@@ -1302,37 +1301,37 @@ msgstr "Nom du dossier"
 msgid "Folder: "
 msgstr "Dossier :"
 
-#: ../src/gnome2/preferences_dialog.c:1585 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1662 ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../src/gnome2/preferences_dialog.c:1664
+#: ../src/gnome2/preferences_dialog.c:1745
 msgid "Fonts"
 msgstr "Polices"
 
-#: ../src/gnome2/preferences_dialog.c:1667
+#: ../src/gnome2/preferences_dialog.c:1748
 msgid "Color"
 msgstr "Couleurs"
 
-#: ../src/gnome2/preferences_dialog.c:1670
-#: ../src/gnome2/preferences_dialog.c:1684
-#: ../src/gnome2/preferences_dialog.c:1697 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1751
+#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1778 ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr "Divers"
 
-#: ../src/gnome2/preferences_dialog.c:1674
+#: ../src/gnome2/preferences_dialog.c:1755
 msgid "General"
 msgstr "Général"
 
-#: ../src/gnome2/preferences_dialog.c:1677 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1758 ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr "Onglets et volets"
 
-#: ../src/gnome2/preferences_dialog.c:1691
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Main"
 msgstr "Base"
 
-#: ../src/gnome2/preferences_dialog.c:1694 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1775 ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr "Vue parallèle"
 
@@ -1523,7 +1522,7 @@ msgstr "Charger - Sauver"
 #: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
 #: ../src/gnome2/treekey-editor.c:281
 msgid "Prayer List/Journal Item"
-msgstr "Élément de liste de prières/Journal"
+msgstr "Élément de liste de prières/notes"
 
 #: ../src/gnome2/treekey-editor.c:126 ../src/gnome2/treekey-editor.c:185
 #: ../src/gnome2/treekey-editor.c:282
@@ -1771,22 +1770,19 @@ msgstr "Prière de vérifier le copyright avant l'export!"
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
-msgstr "Le fichier des définitions "
-"de langages est absent."
+msgstr "Le fichier des définitions de langages est absent."
 
 #: ../src/main/sword.cc:554
 msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
-msgstr "Ouverture impossible du fichier"
-"des définitions de langages."
+msgstr "Ouverture impossible du fichierdes définitions de langages."
 
 #: ../src/main/sword.cc:563
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
-msgstr "Erreur de lecture du fichier"
-"des définitions de langages."
+msgstr "Erreur de lecture du fichierdes définitions de langages."
 
 #: ../src/main/sword.cc:632
 msgid "Initiating SWORD"
@@ -1998,7 +1994,7 @@ msgstr "<b>Section 4</b>"
 
 #: ../src/main/prayerlists.cc:236
 msgid "Name for new prayer list or journal"
-msgstr "Nom de la nouvelle liste de prières ou du journal"
+msgstr "Nom de la nouvelle liste de prières / note"
 
 #: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:324
 #: ../src/main/sword_treekey.cc:376
@@ -2016,7 +2012,7 @@ msgstr "Il existe déjà un module de ce nom."
 
 #: ../src/main/prayerlists.cc:267
 msgid "GnomeSword finds that prayer list already."
-msgstr "Cette liste de prières existe déjà"
+msgstr "Cette liste de prières ou note existe déjà"
 
 #: ../src/main/prayerlists.cc:272
 msgid "GnomeSword cannot create module's path."
@@ -2024,8 +2020,7 @@ msgstr "Impossible de créer le chemin d'accès au module."
 
 #: ../src/main/prayerlists.cc:310
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
-"\\par\\par Liste simple de prières\\par\\par Module crée par GnomeSword"
+msgstr "\\par\\par Liste simple\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:325
 msgid ""
@@ -2039,8 +2034,7 @@ msgstr ""
 #: ../src/main/prayerlists.cc:351
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
-"\\par\\par Liste de prières ordonnée par sujets\\par\\par Module crée par "
-"GnomeSword"
+"\\par\\par Liste ordonnée par sujets\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:366
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
@@ -2060,18 +2054,17 @@ msgstr "Personne 1<br>Personne 2<br>Personne 3<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
-"\\par\\par Liste mensuelle de prières\\par\\par Module crée par GnomeSword"
+msgstr "\\par\\par Suivi mensuel\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
-msgstr "\\par\\par Journal quotidien\\par\\par Module crée par GnomeSword"
+msgstr "\\par\\par Suivi quotidien\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:511
 msgid ""
 "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
 msgstr ""
-"\\par\\par Thême structuré (ex sermon)\\par\\par Module crée par GnomeSword"
+"\\par\\par Note structurée (ex sermon)\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
@@ -2195,7 +2188,7 @@ msgstr "La liste de prières existe déjà\n"
 
 #: ../src/main/sword_treekey.cc:419
 msgid "\\par\\par My prayer list \\par\\par Module created in GnomeSword"
-msgstr "\\par\\par Liste de prières\\par\\par Module crée par GnomeSword"
+msgstr "\\par\\par Liste simple\\par\\par Module crée par GnomeSword"
 
 #: ../src/main/display.cc:256
 msgid ""
