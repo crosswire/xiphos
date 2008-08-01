@@ -266,7 +266,7 @@ gecko_print_verify_postscript (GtkPrinter *printer, GtkWidget *print_dialog)
 					    " printer")));
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Printer %s does not"
-						    " support postscript "
+						    " support PostScript "
 						    "printing."), 
 						  gtk_printer_get_description (printer));
 	  gtk_dialog_run (GTK_DIALOG (dialog));
