@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-31 23:36+0100\n"
-"PO-Revision-Date: 2008-08-01 00:04+0100\n"
+"POT-Creation-Date: 2008-08-01 01:02+0100\n"
+"PO-Revision-Date: 2008-08-01 01:15+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgstr "_Ficheiro"
 
 #: ../src/editor/html-editor.c:516
 msgid "HTML _Output"
-msgstr ""
+msgstr "_Saída HTML"
 
 #: ../src/editor/html-editor.c:523
 msgid "_HTML Source"
@@ -161,12 +161,12 @@ msgstr "Preparando impressão"
 
 #: ../src/gecko/gecko-print.c:265
 msgid "Printing is not supported on this printer"
-msgstr ""
+msgstr "Impressão não suportada nesta impressora"
 
 #: ../src/gecko/gecko-print.c:268
 #, c-format
-msgid "Printer %s does not support postscript printing."
-msgstr ""
+msgid "Printer %s does not support PostScript printing."
+msgstr "Impressora %s não suporta impressão PostScript."
 
 #: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
 msgid "Printing"
@@ -316,7 +316,7 @@ msgstr ""
 #: ../src/gnome2/bibletext_dialog.c:2072 ../src/gnome2/dictlex.c:980
 #: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:950
 msgid "Headings"
-msgstr ""
+msgstr "Cabeçalhos"
 
 #. 12
 #: ../src/gnome2/bibletext.c:1086 ../src/gnome2/gbs.c:868
@@ -821,7 +821,7 @@ msgstr "Remoção"
 #: ../src/gnome2/mod_mgr.c:465
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s falhou"
 
 #: ../src/gnome2/mod_mgr.c:467 ../src/gnome2/mod_mgr.c:1108
 msgid "Finished"
@@ -843,6 +843,8 @@ msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
+"Categorizado por \n"
+"Tipo de Módulo"
 
 #: ../src/gnome2/mod_mgr.c:896 ../src/gnome2/utilities.c:514
 #: ../src/main/sidebar.cc:967 ../src/main/sidebar.cc:969
@@ -874,7 +876,7 @@ msgstr "Livros Gerais"
 #: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/utilities.c:534
 #: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Maps"
-msgstr ""
+msgstr "Mapas"
 
 #: ../src/gnome2/mod_mgr.c:920 ../src/gnome2/utilities.c:538
 #: ../src/main/sidebar.cc:1037 ../src/main/sidebar.cc:1039
@@ -886,10 +888,12 @@ msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
+"Categorizado por \n"
+"Disponibilidade"
 
 #: ../src/gnome2/mod_mgr.c:933
 msgid "Updates"
-msgstr ""
+msgstr "Actualizações"
 
 #: ../src/gnome2/mod_mgr.c:937
 msgid "Uninstalled"
@@ -920,11 +924,11 @@ msgstr "Instalado"
 
 #: ../src/gnome2/mod_mgr.c:1331
 msgid "Available"
-msgstr ""
+msgstr "Disponível"
 
 #: ../src/gnome2/mod_mgr.c:1340
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: ../src/gnome2/mod_mgr.c:1349
 msgid "Description"
@@ -1006,7 +1010,7 @@ msgstr "Directório:"
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2238
 msgid "A source by that name already exists."
-msgstr ""
+msgstr "Já existe uma fonte com esse nome."
 
 #: ../src/gnome2/sidebar_dialog.c:134
 msgid "Sidebar"
@@ -1057,7 +1061,7 @@ msgstr "Vista de Livro"
 
 #: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "Ir para fora, para a secção que contém este"
 
 #: ../src/gnome2/navbar_book.c:343 ../src/gnome2/navbar_book_dialog.c:315
 msgid "Go to previous item"
@@ -1069,7 +1073,7 @@ msgstr "Ir para próximo item"
 
 #: ../src/gnome2/navbar_book.c:374 ../src/gnome2/navbar_book_dialog.c:346
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "Ir para dentro, para a primeira subsecção"
 
 #: ../src/gnome2/sidebar.c:700
 msgid "Save List"
@@ -1114,7 +1118,7 @@ msgstr "Assunto"
 
 #: ../src/gnome2/sidebar.c:839
 msgid "Monthly"
-msgstr ""
+msgstr "Mensal"
 
 #: ../src/gnome2/sidebar.c:840 ../src/gnome2/sidebar.c:847
 #: ../src/gnome2/sidebar.c:854
@@ -1127,7 +1131,7 @@ msgstr "Devocional Diário"
 
 #: ../src/gnome2/sidebar.c:853
 msgid "Outlined Topic"
-msgstr ""
+msgstr "Tópico Sublinhado"
 
 #: ../src/gnome2/sidebar.c:1160
 msgid "_Modules"
@@ -1193,6 +1197,8 @@ msgid ""
 "For multi-word search, use\n"
 "+FirstWord +SecondWord"
 msgstr ""
+"Para busca multi-palavras, use \n"
+"+PrimeiraPalavra +SegundaPalavra"
 
 #: ../src/gnome2/search_sidebar.c:191
 msgid "Search Module"
@@ -1327,7 +1333,9 @@ msgstr "Copyright 2000-2008 Equipa de Desenvolvimento GnomeSword"
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
-msgstr "Gostaríamos de agradecer a Troy Griffitts e aos outros colaboradores que nos deram o Projecto SWORD."
+msgstr ""
+"Gostaríamos de agradecer a Troy Griffitts e aos outros colaboradores que nos "
+"deram o Projecto SWORD."
 
 #: ../src/gnome2/studypad.c:107
 msgid "has been modified. Do you wish to save it?"
@@ -1507,15 +1515,15 @@ msgstr "Remover o item seleccionado"
 
 #: ../src/gnome2/treekey-editor.c:310
 msgid "Add Child"
-msgstr ""
+msgstr "Adicionar Descendente"
 
 #: ../src/gnome2/treekey-editor.c:311 ../src/gnome2/treekey-editor.c:317
 msgid "Add an item"
-msgstr ""
+msgstr "Adicionar um item"
 
 #: ../src/gnome2/treekey-editor.c:316
 msgid "Add Sibling"
-msgstr ""
+msgstr "Adicionar Irmão"
 
 #: ../src/gnome2/treekey-editor.c:323
 msgid "Remove this item"
@@ -1731,13 +1739,15 @@ msgstr "A_juda"
 
 #: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:13
 msgid "Please check copyright before exporting!"
-msgstr ""
+msgstr "Por favor verifique os direitos de autor antes de exportar!"
 
 #: ../src/main/sword.cc:547
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
 msgstr ""
+"O ficheiro de GnomeSword para \n"
+"as abreviaturas de linguagem está ausente."
 
 #: ../src/main/sword.cc:554
 msgid ""
@@ -1807,6 +1817,9 @@ msgid ""
 "No such module is installed.\n"
 "%s"
 msgstr ""
+"%s: \n"
+"Esse módulo não está instalado.\n"
+"%s"
 
 #: ../src/main/search_dialog.cc:1449
 msgid "Please adjust the module list."
@@ -1888,11 +1901,11 @@ msgstr "<b>Para Salvação</b><br>"
 #: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:369
 #: ../src/main/sword_treekey.cc:338
 msgid "Health"
-msgstr ""
+msgstr "Saúde"
 
 #: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
 msgid "<b>For Health</b><br>"
-msgstr ""
+msgstr "<b>Para Saúde</b><br>"
 
 #: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
 msgid "<b>Miscellaneous</b><br>"
@@ -1904,7 +1917,7 @@ msgstr "Ponto x"
 
 #: ../src/main/prayerlists.cc:136
 msgid "<b>(x)</b><br>"
-msgstr ""
+msgstr "<b>(x)</b><br>"
 
 #: ../src/main/prayerlists.cc:137
 msgid "Point y"
@@ -1912,7 +1925,7 @@ msgstr "Ponto y"
 
 #: ../src/main/prayerlists.cc:138
 msgid "<b>(y)</b><br>"
-msgstr ""
+msgstr "<b>(y)</b><br>"
 
 #: ../src/main/prayerlists.cc:139
 msgid "Point z"
@@ -1920,7 +1933,7 @@ msgstr "Ponto z"
 
 #: ../src/main/prayerlists.cc:140
 msgid "<b>(z)</b><br>"
-msgstr ""
+msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:148
 msgid "Minor Topic 1"
@@ -1999,15 +2012,15 @@ msgstr ""
 
 #: ../src/main/prayerlists.cc:367
 msgid "Spiritual Growth"
-msgstr ""
+msgstr "Crescimento Espiritual"
 
 #: ../src/main/prayerlists.cc:368
 msgid "Mike<br>Steve<br>"
-msgstr ""
+msgstr "Mike<br>Steve<br>"
 
 #: ../src/main/prayerlists.cc:370
 msgid "Sue<br>John<br>"
-msgstr ""
+msgstr "Sue<br>John<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
@@ -2130,7 +2143,7 @@ msgstr "tipo errado, root node != %s\n"
 
 #: ../src/main/sword_treekey.cc:374
 msgid "Name for new prayer list"
-msgstr ""
+msgstr "Nome para a nova lista de oração"
 
 #: ../src/main/sword_treekey.cc:395
 #, c-format
