@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-30 22:39+0200\n"
+"POT-Creation-Date: 2008-08-01 20:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../src/gecko/gecko-print.c:268
 #, c-format
-msgid "Printer %s does not support postscript printing."
+msgid "Printer %s does not support PostScript printing."
 msgstr ""
 
 #: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
@@ -930,7 +930,7 @@ msgid "Sources"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1688
+#: ../src/gnome2/preferences_dialog.c:1769
 msgid "Modules"
 msgstr ""
 
@@ -1244,37 +1244,37 @@ msgstr ""
 msgid "Folder: "
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1585 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1662 ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1664
+#: ../src/gnome2/preferences_dialog.c:1745
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1667
+#: ../src/gnome2/preferences_dialog.c:1748
 msgid "Color"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1670
-#: ../src/gnome2/preferences_dialog.c:1684
-#: ../src/gnome2/preferences_dialog.c:1697 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1751
+#: ../src/gnome2/preferences_dialog.c:1765
+#: ../src/gnome2/preferences_dialog.c:1778 ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1674
+#: ../src/gnome2/preferences_dialog.c:1755
 msgid "General"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1677 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1758 ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1691
+#: ../src/gnome2/preferences_dialog.c:1772
 msgid "Main"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1694 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1775 ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr ""
 
