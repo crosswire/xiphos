@@ -23,7 +23,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef USE_EXPORTER
+//#ifdef USE_EXPORTER
 
 #include <swmgr.h>
 #include <swmodule.h>
@@ -236,4 +236,4 @@ void main_export_plain(char *filename, int what_to_export)
 	}
 	
 }
-#endif
+//#endif

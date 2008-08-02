@@ -666,9 +666,9 @@ void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_export_passage_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_EXPORTER
+//#ifdef USE_EXPORTER
 	gui_export_dialog();
-#endif
+//#endif
 }
 
 
@@ -1198,9 +1198,9 @@ void create_menu(void)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
 #endif /* __CYGWIN__ */
 
-#ifndef USE_EXPORTER
-	gtk_widget_hide(file3_menu_uiinfo[2].widget);
-#endif
+//#ifndef USE_EXPORTER
+//	gtk_widget_hide(file3_menu_uiinfo[2].widget);
+//#endif
 
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
