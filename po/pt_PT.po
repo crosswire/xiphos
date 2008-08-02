@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-01 01:02+0100\n"
-"PO-Revision-Date: 2008-08-01 01:15+0100\n"
+"POT-Creation-Date: 2008-08-02 03:02+0100\n"
+"PO-Revision-Date: 2008-08-02 03:02+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +207,7 @@ msgstr "Abrir Módulo"
 
 #: ../src/gnome2/bibletext.c:928 ../ui/export-dialog.glade.h:6
 msgid "Export Passage"
-msgstr ""
+msgstr "Exportar Passagem"
 
 #: ../src/gnome2/bibletext.c:939 ../src/gnome2/bibletext_dialog.c:1933
 #: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:813
@@ -302,14 +302,14 @@ msgstr "Referências Cruzadas da Escritura"
 #: ../src/gnome2/bibletext_dialog.c:2056 ../src/gnome2/dictlex.c:964
 #: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:934
 msgid "Hebrew Vowel Points"
-msgstr ""
+msgstr "Pontos Vogais do Hebraico"
 
 #. 10
 #: ../src/gnome2/bibletext.c:1070 ../src/gnome2/gbs.c:852
 #: ../src/gnome2/bibletext_dialog.c:2064 ../src/gnome2/dictlex.c:972
 #: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:942
 msgid "Hebrew Cantillation"
-msgstr ""
+msgstr "Cantilação do Hebraico"
 
 #. 11
 #: ../src/gnome2/bibletext.c:1078 ../src/gnome2/gbs.c:860
@@ -1754,12 +1754,16 @@ msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
+"O ficheiro de abreviaturas \n"
+"de GnomeSword não pode ser aberto."
 
 #: ../src/main/sword.cc:563
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
 msgstr ""
+"GnomeSword não pode mapear \n"
+"o ficheiro de abreviaturas."
 
 #: ../src/main/sword.cc:632
 msgid "Initiating SWORD"
@@ -1937,39 +1941,39 @@ msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:148
 msgid "Minor Topic 1"
-msgstr ""
+msgstr "Tópico Menor 1"
 
 #: ../src/main/prayerlists.cc:149
 msgid "<b>Subtopic 1</b><br>"
-msgstr ""
+msgstr "<b>Subtópico 1</b><br>"
 
 #: ../src/main/prayerlists.cc:151
 msgid "Minor Topic 2"
-msgstr ""
+msgstr "Tópico Menor 2"
 
 #: ../src/main/prayerlists.cc:152
 msgid "<b>Subtopic 2</b><br>"
-msgstr ""
+msgstr "<b>Subtópico 2</b><br>"
 
 #: ../src/main/prayerlists.cc:154
 msgid "Minor Topic 3"
-msgstr ""
+msgstr "Tópico Menor 3"
 
 #: ../src/main/prayerlists.cc:155
 msgid "<b>Subtopic 3</b><br>"
-msgstr ""
+msgstr "<b>Subtópico 3</b><br>"
 
 #: ../src/main/prayerlists.cc:157
 msgid "Minor Topic 4"
-msgstr ""
+msgstr "Tópico Menor 4"
 
 #: ../src/main/prayerlists.cc:158
 msgid "<b>Subtopic 4</b><br>"
-msgstr ""
+msgstr "<b>Subtópico 4</b><br>"
 
 #: ../src/main/prayerlists.cc:236
 msgid "Name for new prayer list or journal"
-msgstr ""
+msgstr "Nome da nova lista de oração ou diário"
 
 #: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:324
 #: ../src/main/sword_treekey.cc:376
@@ -1978,15 +1982,15 @@ msgstr "Minha Lista de oração"
 
 #: ../src/main/prayerlists.cc:251
 msgid "Module names must be letters+digits only."
-msgstr ""
+msgstr "Os nomes de módulos podem conter apenas letras e algarismos."
 
 #: ../src/main/prayerlists.cc:258
 msgid "GnomeSword already knows a module by that name."
-msgstr ""
+msgstr "GnomeSword já conhece um módulo por esse nome."
 
 #: ../src/main/prayerlists.cc:267
 msgid "GnomeSword finds that prayer list already."
-msgstr ""
+msgstr "GnomeSword já encontra essa lista de oração."
 
 #: ../src/main/prayerlists.cc:272
 msgid "GnomeSword cannot create module's path."
@@ -1994,21 +1998,25 @@ msgstr "GnomeSword não pode criar o caminho do módulo."
 
 #: ../src/main/prayerlists.cc:310
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "Uma lista de oração básica. \\par\\par Módulo criado por GnomeSword."
 
 #: ../src/main/prayerlists.cc:325
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
+"<b>Pessoas:</b><br>Bob<br>Sam<br>Sue<br><br><b>Igreja:</"
+"b><br>bancos<br>congregação<br>Bíblias para missionários<br><br><br>"
 
 #: ../src/main/prayerlists.cc:351
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
+"Uma lista de oração baseada em assunto. \\par\\par Módulo criado por "
+"GnomeSword."
 
 #: ../src/main/prayerlists.cc:366
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr ""
+msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
 #: ../src/main/prayerlists.cc:367
 msgid "Spiritual Growth"
@@ -2024,40 +2032,41 @@ msgstr "Sue<br>John<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "Uma lista de oração mensal. \\par\\par Módulo criado por GnomeSword."
 
 #: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "Um diário. \\par\\par Módulo criado por GnomeSword."
 
 #: ../src/main/prayerlists.cc:511
 msgid ""
 "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
 msgstr ""
+"Um tópico assinalado (ex. sermão). \\par\\par Módulo criado por GnomeSword."
 
 #: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
-msgstr ""
+msgstr "Tópico Maior A"
 
 #: ../src/main/prayerlists.cc:526
 msgid "<b>Major Topic A</b><br>"
-msgstr ""
+msgstr "<b>Tópico Maior A</b><br>"
 
 #: ../src/main/prayerlists.cc:528
 msgid "Major Topic B"
-msgstr ""
+msgstr "Tópico Maior B"
 
 #: ../src/main/prayerlists.cc:529
 msgid "<b>Major Topic B</b><br>"
-msgstr ""
+msgstr "<b>Tópico Maior B</b><br>"
 
 #: ../src/main/prayerlists.cc:531
 msgid "Major Topic C"
-msgstr ""
+msgstr "Tópico Maior C"
 
 #: ../src/main/prayerlists.cc:532
 msgid "<b>Major Topic C</b><br>"
-msgstr ""
+msgstr "<b>Tópico Maior C</b><br>"
 
 #: ../src/main/xml.c:86 ../src/main/xml.c:471
 #, c-format
@@ -2153,11 +2162,12 @@ msgstr "não pode criar caminho\n"
 #: ../src/main/sword_treekey.cc:398
 #, c-format
 msgid "Prayer list already exist\n"
-msgstr ""
+msgstr "A lista de oração já existe\n"
 
 #: ../src/main/sword_treekey.cc:419
 msgid "\\par\\par My prayer list \\par\\par Module created in GnomeSword"
 msgstr ""
+"\\par\\par Minha lista de oração \\par\\par Módulo criado por GnomeSword."
 
 #: ../src/main/display.cc:256
 msgid ""
@@ -2166,6 +2176,10 @@ msgid ""
 "(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
 "GnomeSword cannot resize images to fit window."
 msgstr ""
+"O tamanho de ficheiro de uma imagem não pôde ser determinado.\n"
+"Não está instalado 'identity' de ImageMagick?\n"
+"(Ou possivelmente o tipo de imagem é distinto de bmp/gif/jpg/png.)\n"
+"GnomeSword não pode redimensionar as imagens para ajustar à janela."
 
 #: ../src/main/display.cc:857 ../src/main/display.cc:926
 #: ../src/main/display.cc:1022 ../src/main/display.cc:1030
@@ -2251,7 +2265,7 @@ msgstr "GnomeSword não conseguiu executar %s"
 
 #: ../src/main/url.cc:232
 msgid "Viewer error:\n"
-msgstr ""
+msgstr "Erro de visualizador:\n"
 
 #: ../src/main/url.cc:309
 #, c-format
@@ -2369,6 +2383,8 @@ msgid ""
 "\n"
 "First Run: need to create settings!\n"
 msgstr ""
+"\n"
+"Primeira vez: é necessário criar definições!\n"
 
 #: ../src/main/settings.c:203
 msgid ""
@@ -2450,6 +2466,9 @@ msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
+"GnomeSword não conseguiu completar a inicialização do handler para a chave #%"
+"d: \n"
+"%s"
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2502,7 +2521,7 @@ msgstr "For_matar"
 #: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
-msgstr ""
+msgstr "Mudança de formato HTML"
 
 #: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
@@ -2548,7 +2567,7 @@ msgstr "Novo Documento"
 
 #: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
@@ -2580,7 +2599,7 @@ msgstr "Abrir o ficheiro no StudyPad"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
 msgid "<b>Export</b>"
@@ -2592,23 +2611,23 @@ msgstr "<b>Formatar</b>"
 
 #: ../ui/export-dialog.glade.h:7
 msgid "Export complete book"
-msgstr ""
+msgstr "Exportar livro completo"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Export complete chapter"
-msgstr ""
+msgstr "Exportar capítulo completo"
 
 #: ../ui/export-dialog.glade.h:9
 msgid "Export single verse"
-msgstr ""
+msgstr "Exportar versículo"
 
 #: ../ui/export-dialog.glade.h:10
-msgid "Html"
-msgstr ""
+msgid "HTML"
+msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Key"
-msgstr ""
+msgstr "Chave"
 
 #: ../ui/export-dialog.glade.h:12
 msgid "Plain Text"
@@ -2616,7 +2635,7 @@ msgstr "Texto Simples"
 
 #: ../ui/export-dialog.glade.h:14
 msgid "Save Export As"
-msgstr ""
+msgstr "Guardar Exportado como"
 
 #: ../ui/export-dialog.glade.h:15
 msgid "Verse"
@@ -2628,7 +2647,7 @@ msgstr "Versão"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr ""
+msgstr "<b>Adicionar e remover fontes</b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
@@ -2656,6 +2675,8 @@ msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
+"<b>Aviso:</b> Se vive num país com perseguições e não quer arriscar ser "
+"detectado, NÃO deve usar a instalação remota! "
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
@@ -2675,7 +2696,7 @@ msgstr "Apagar Índice"
 
 #: ../ui/module-manager.glade.h:14
 msgid "Home dir"
-msgstr ""
+msgstr "Directório local (home)"
 
 #: ../ui/module-manager.glade.h:17
 msgid "Local"
@@ -2683,7 +2704,7 @@ msgstr "Local"
 
 #: ../ui/module-manager.glade.h:18
 msgid "Local Install Folder"
-msgstr ""
+msgstr "Pasta de instalação local"
 
 #: ../ui/module-manager.glade.h:19
 msgid "Module Manager"
@@ -2703,7 +2724,7 @@ msgstr "1"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "<b>Revelation of John</b>"
-msgstr ""
+msgstr "<b>Apocalipse de João</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
 msgid "Drop down history list"
@@ -2743,7 +2764,7 @@ msgstr "<b>Geral</b>"
 
 #: ../ui/prefs.glade.h:12
 msgid "<b>Main Window Modules</b>"
-msgstr ""
+msgstr "<b>Módulos da Janela Principal</b>"
 
 #: ../ui/prefs.glade.h:13
 msgid "<b>Miscellaneous Modules</b>"
@@ -2799,7 +2820,7 @@ msgstr "Texto Bíblico"
 
 #: ../ui/prefs.glade.h:26
 msgid "Choose to enable Prayer lists "
-msgstr ""
+msgstr "Escolha para activar listas de oração"
 
 #: ../ui/prefs.glade.h:29
 msgid "Cover"
@@ -2867,15 +2888,15 @@ msgstr "Ligações"
 
 #: ../ui/prefs.glade.h:45
 msgid "Modules Main"
-msgstr ""
+msgstr "Módulos Principal"
 
 #: ../ui/prefs.glade.h:46
 msgid "Modules Misc"
-msgstr ""
+msgstr "Módulos Miscelâneo"
 
 #: ../ui/prefs.glade.h:47
 msgid "Modules Parallel"
-msgstr ""
+msgstr "Módulos Paralelo"
 
 #: ../ui/prefs.glade.h:48
 msgid "Parallel 1"
@@ -2924,6 +2945,8 @@ msgstr "Mostrar janela splash no arranque"
 #: ../ui/prefs.glade.h:62
 msgid "Use Bible Text scroll bar to scroll to previous or next chapter"
 msgstr ""
+"Use a barra de deslocamento do texto bíblico para passar ao capítulo "
+"anterior ou seguinte"
 
 #: ../ui/prefs.glade.h:63
 msgid "Use Verse style"
@@ -2935,7 +2958,7 @@ msgstr "Usar Dicionário por omissão"
 
 #: ../ui/prefs.glade.h:65
 msgid "Use tabbed browsing"
-msgstr ""
+msgstr "Use exploração com abas"
 
 #: ../ui/prefs.glade.h:66
 msgid "Verse number font size"
@@ -2955,7 +2978,7 @@ msgstr "<b>Nome da Lista</b>"
 
 #: ../ui/search-dialog.glade.h:4
 msgid "<b>Module Lists</b>"
-msgstr ""
+msgstr "<b>Lista de Módulos</b>"
 
 #: ../ui/search-dialog.glade.h:5
 msgid "<b>Modules</b>"
@@ -2971,31 +2994,31 @@ msgstr "<b>Previsão</b>"
 
 #: ../ui/search-dialog.glade.h:8
 msgid "<b>Range Name</b>"
-msgstr ""
+msgstr "<b>Nome de Extensão</b>"
 
 #: ../ui/search-dialog.glade.h:9
 msgid "<b>Range Text</b>"
-msgstr ""
+msgstr "<b>Texto de Extensão</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
-msgstr ""
+msgstr "<b>Extensões</b>"
 
 #: ../ui/search-dialog.glade.h:11
 msgid "<b>Results Display Options</b>"
-msgstr ""
+msgstr "<b>Opções para mostrar resultados</b>"
 
 #: ../ui/search-dialog.glade.h:12
 msgid "<b>Scope</b>"
-msgstr ""
+msgstr "<b>Âmbito</b>"
 
 #: ../ui/search-dialog.glade.h:13
 msgid "<b>Search Results</b>"
-msgstr ""
+msgstr "<b>Resultados de Pesquisa</b>"
 
 #: ../ui/search-dialog.glade.h:14
 msgid "<b>Search Type</b>"
-msgstr ""
+msgstr "<b>Tipo de Pesquisa</b>"
 
 #: ../ui/search-dialog.glade.h:15
 msgid "Add Modules"
@@ -3027,7 +3050,7 @@ msgstr "Criar uma nova lista de módulos"
 
 #: ../ui/search-dialog.glade.h:22
 msgid "Create new custom range"
-msgstr ""
+msgstr "Criar nova extensão personalizada"
 
 #: ../ui/search-dialog.glade.h:23
 msgid "Current results"
@@ -3035,23 +3058,23 @@ msgstr "Resultados correntes"
 
 #: ../ui/search-dialog.glade.h:24
 msgid "Custom Lists"
-msgstr "Listas Customizadas"
+msgstr "Listas personalizadas"
 
 #: ../ui/search-dialog.glade.h:25
 msgid "Custom Ranges"
-msgstr ""
+msgstr "Extensões personalizadas"
 
 #: ../ui/search-dialog.glade.h:26
 msgid "Custom list"
-msgstr "Lista Customizada"
+msgstr "Lista personalizada"
 
 #: ../ui/search-dialog.glade.h:27
 msgid "Custom range"
-msgstr ""
+msgstr "Extensão personalizada"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Delete selected range"
-msgstr ""
+msgstr "Apagar extensão seleccionada"
 
 #: ../ui/search-dialog.glade.h:29
 msgid "Delete the selected list"
@@ -3067,6 +3090,9 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
+"Pesquisa rápida, funcional, baseada em índices\n"
+"Os índices devem ser criados a priori:\n"
+"Veja as funções de manutenção do Gestor de Módulos"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "In modules that have Footnotes"
@@ -3074,7 +3100,7 @@ msgstr "Em módulos com Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:37
 msgid "In modules that have Morphological Tags"
-msgstr ""
+msgstr "Em módulos com etiquetas morfológicas"
 
 #: ../ui/search-dialog.glade.h:38
 msgid "In modules that have Strong's Numbers"
@@ -3082,7 +3108,7 @@ msgstr "Em módulos com números de Strong"
 
 #: ../ui/search-dialog.glade.h:39
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "Fazer selecções na Pesquisa de Atributos"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Module Selection"
@@ -3094,11 +3120,11 @@ msgstr "Lista de Módulos"
 
 #: ../ui/search-dialog.glade.h:45
 msgid "Open a dialog to select modules to add to the list"
-msgstr ""
+msgstr "Abrir um diálogo para seleccionar módulos a adicionar à lista"
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Optimized (\"Lucene\")"
-msgstr ""
+msgstr "Optimizada (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:48
 msgid "Remove the selected module from the list"
@@ -3110,7 +3136,7 @@ msgstr "Resultados"
 
 #: ../ui/search-dialog.glade.h:50
 msgid "Save custom range"
-msgstr ""
+msgstr "Guardar extensão personalizada"
 
 #: ../ui/search-dialog.glade.h:51
 msgid "Save search results as bookmarks"
@@ -3130,11 +3156,11 @@ msgstr "Pesquisar módulo inteiro"
 
 #: ../ui/search-dialog.glade.h:55
 msgid "Search for Morphological tags"
-msgstr ""
+msgstr "Pesquisar etiquetas morfológicas"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr ""
+msgstr "Pesquisar Números de Strong como G4442 ou H1121"
 
 #: ../ui/search-dialog.glade.h:57
 msgid "Search in footnotes"
@@ -3146,7 +3172,7 @@ msgstr "Mostrar Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:59
 msgid "Show Morphological Tags"
-msgstr ""
+msgstr "Mostrar Etiquetas Morfológicas"
 
 #: ../ui/search-dialog.glade.h:60
 msgid "Show Strong's Numbers"
@@ -3174,7 +3200,7 @@ msgstr "Usar uma lista personalizada de módulos para a pesquisa"
 
 #: ../ui/search-dialog.glade.h:66
 msgid "Use a custom range for the scope of the search"
-msgstr ""
+msgstr "Usar uma extensão personalizada no âmbito da pesquisa"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "Use a single module for the search"
@@ -3182,19 +3208,19 @@ msgstr "Usar um único módulo para a pesquisa"
 
 #: ../ui/search-dialog.glade.h:68
 msgid "Use the current module list for the search"
-msgstr ""
+msgstr "Usar a lista actual de módulos na pesquisa"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "Use the results of the last search as the scope of the search"
-msgstr ""
+msgstr "Usar os resultados da última pesquisa como âmbito da pesquisa"
 
 #: ../ui/search-dialog.glade.h:70
 msgid "e.g. Matt-John;Rev4"
-msgstr ""
+msgstr "ex. Mt-Jo;Ap4"
 
 #: ../ui/search-dialog.glade.h:71
 msgid "for "
-msgstr ""
+msgstr "para "
 
 #~ msgid "Afrikaans"
 #~ msgstr "Afrikaans"
