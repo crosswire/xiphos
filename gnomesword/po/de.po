@@ -186,7 +186,7 @@ msgstr "Auf diesem Drucker ist drucken nicht unterstützt"
 
 #: ../src/gecko/gecko-print.c:268
 #, c-format
-msgid "Printer %s does not support postscript printing."
+msgid "Printer %s does not support PostScript printing."
 msgstr "Drucker %s unterstützt kein Postscript-drucken."
 
 #: ../src/gecko/gecko-print.c:341
