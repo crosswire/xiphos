@@ -2835,8 +2835,8 @@ msgid "Export single verse"
 msgstr "Exportiere einen ein"
 
 #: ../ui/export-dialog.glade.h:10
-msgid "Html"
-msgstr "Html"
+msgid "HTML"
+msgstr "HTML"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Key"
