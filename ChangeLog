@@ -1,3 +1,7 @@
+2008-08-02  terry <tbiggs@users.sourceforge.net>
+
+	* build w/Exporter by default
+
 2008-08-02  karl <charcoal@users.sf.net>
 
 	* 2.3.6 release.

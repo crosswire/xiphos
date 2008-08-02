@@ -121,10 +121,10 @@ dnl if test "x$prayer_list" = xyes; then
 dnl   AC_DEFINE(PRAYERLIST, 1, [Define if wish to enable the PrayerList])
 dnl fi
 
-AC_ARG_ENABLE(exporter,[  --enable-exporter    use exporter [default=no]],exporter=$enableval,exporter=no)
-if test "x$exporter" = xyes; then
-  AC_DEFINE(USE_EXPORTER, 1, [Define if wish to enable the Passage exporter])
-fi
+dnl AC_ARG_ENABLE(exporter,[  --enable-exporter    use exporter [default=yes]],exporter=$enableval,exporter=yes)
+dnl if test "x$exporter" = xyes; then
+dnl   AC_DEFINE(USE_EXPORTER, 1, [Define if wish to enable the Passage exporter])
+dnl fi
 
 AC_ARG_ENABLE(old_navbar,[  --enable-old_navbar    use old_navbar [default=no]],old_navbar=$enableval,old_navbar=no)
 if test "x$old_navbar" = xyes; then
