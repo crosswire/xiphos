@@ -1,3 +1,6 @@
+2008-08-02  - final 2.3.x as pseudo-release candidate for stable 2.4.
+              many updates, many features, many bugfixes.
+
 2008-07-02  - urgent bugfix release, 2.3.5.  necessary to eliminate a bad
               search crash caused by a change in Sword, and to correct a
               build failure in some environments.
