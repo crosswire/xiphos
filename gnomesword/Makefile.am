@@ -15,6 +15,7 @@ gnomesworddoc_DATA = \
 	ChangeLog \
 	INSTALL \
 	NEWS \
+	TRANSLATION-HOWTO \
 	TODO
 
 ACLOCAL_AMFLAGS = -I m4
