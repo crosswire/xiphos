@@ -1019,7 +1019,7 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.book_mod)
-		settings.book_mod = (char*)mod_name;
+		settings.book_mod = g_strdup((char*)mod_name);
 
 	if (strcmp(settings.book_mod, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "book", mod_name);

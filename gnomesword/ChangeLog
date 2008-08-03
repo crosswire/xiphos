@@ -1,3 +1,7 @@
+2008-08-03  karl <charcoal@users.sf.net>
+
+	* fix mem alloc bug in genbook display book name handling.
+
 2008-08-02  terry <tbiggs@users.sourceforge.net>
 
 	* build w/Exporter by default
