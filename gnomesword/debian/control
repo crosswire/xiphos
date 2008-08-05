@@ -1,5 +1,5 @@
 Source: gnomesword
-Build-Depends: autotools-dev, patchutils, cdbs, debhelper, libsword-dev (>=1.5.11), gnome-spell, scrollkeeper, gtkhtml3.8 | gtkhtml3.14, libgtkhml3.8-dev | libgtkhtml3.14-dev, gnome-doc-utils, intltool, libatspi-dev, libgnome2-dev, libxul-dev
+Build-Depends: autotools-dev, patchutils, cdbs, debhelper, libsword-dev (>=1.5.11), gnome-spell, scrollkeeper, gtkhtml3.8 | gtkhtml3.14, libgtkhtml3.8-dev | libgtkhtml3.14-dev, gnome-doc-utils, intltool, libatspi-dev, libgnome2-dev, libxul-dev
 Build-Conflicts: 
 Section: gnome
 Priority: optional
