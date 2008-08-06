@@ -321,7 +321,7 @@
 				      <property name="visible">True</property>
 				      <property name="tooltip" translatable="yes">Use a custom range for the scope of the search</property>
 				      <property name="can_focus">True</property>
-				      <property name="label" translatable="yes">Custom range</property>
+				      <property name="label" translatable="yes">Custom verse range</property>
 				      <property name="use_underline">True</property>
 				      <property name="relief">GTK_RELIEF_NORMAL</property>
 				      <property name="focus_on_click">True</property>
@@ -478,7 +478,7 @@
 				      <property name="visible">True</property>
 				      <property name="tooltip" translatable="yes">Use a custom module list for the search</property>
 				      <property name="can_focus">True</property>
-				      <property name="label" translatable="yes">Custom list</property>
+				      <property name="label" translatable="yes">Custom module list</property>
 				      <property name="use_underline">True</property>
 				      <property name="relief">GTK_RELIEF_NORMAL</property>
 				      <property name="focus_on_click">True</property>
@@ -1376,7 +1376,7 @@ See Module Manager's maintenance functions</property>
 			  <child>
 			    <widget class="GtkLabel" id="label15">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">&lt;b&gt;Range Text&lt;/b&gt;</property>
+			      <property name="label" translatable="yes">&lt;b&gt;Range Definition&lt;/b&gt;</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">True</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1495,7 +1495,7 @@ See Module Manager's maintenance functions</property>
 	      <child>
 		<widget class="GtkLabel" id="label3">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Custom Ranges</property>
+		  <property name="label" translatable="yes">Custom Verse Ranges</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1864,7 +1864,7 @@ See Module Manager's maintenance functions</property>
 	      <child>
 		<widget class="GtkLabel" id="label4">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Custom Lists</property>
+		  <property name="label" translatable="yes">Custom Module Lists</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
