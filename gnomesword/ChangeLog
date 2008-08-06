@@ -1,3 +1,7 @@
+2008-08-06  karl <charcoal@users.sf.net>
+
+	* update some Adv.Search headers for better clarity.
+
 2008-08-03  karl <charcoal@users.sf.net>
 
 	* fix mem alloc bug in genbook display book name handling.
