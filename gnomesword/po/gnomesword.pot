@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-02 03:02+0100\n"
+"POT-Creation-Date: 2008-08-08 10:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2878,11 +2878,11 @@ msgid "<b>Preview</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Name</b>"
+msgid "<b>Range Definition</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:9
-msgid "<b>Range Text</b>"
+msgid "<b>Range Name</b>"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:10
@@ -2942,19 +2942,19 @@ msgid "Current results"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:24
-msgid "Custom Lists"
+msgid "Custom Module Lists"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:25
-msgid "Custom Ranges"
+msgid "Custom Verse Ranges"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:26
-msgid "Custom list"
+msgid "Custom module list"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:27
-msgid "Custom range"
+msgid "Custom verse range"
 msgstr ""
 
 #: ../ui/search-dialog.glade.h:28
