@@ -23,6 +23,10 @@
 # subject-based prayer list -> Modlitební seznam s náměty
 # StudyPad                  -> Poznámkový blok
 # splash screen             -> úvodní obrazovka
+# Range                     -> Rozsah
+# verse range               -> rozsah veršů
+# Verse Ranges              -> rozsahy veršů
+# 
 # Martin Zibricky <matysek03@users.sourceforge.net>, 2008
 #
 #
@@ -31,7 +35,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-06 22:01+0100\n"
-"PO-Revision-Date: 2008-08-02 07:46+0100\n"
+"PO-Revision-Date: 2008-08-08 10:54+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -3212,12 +3216,12 @@ msgid "<b>Preview</b>"
 msgstr "<b>Náhled</b>"
 
 #: ../ui/search-dialog.glade.h:8
-msgid "<b>Range Name</b>"
-msgstr "<b>Rozsah jmen</b>"
+msgid "<b>Range Definition</b>"
+msgstr "<b>Definice rozsahu</b>"
 
 #: ../ui/search-dialog.glade.h:9
-msgid "<b>Range Text</b>"
-msgstr "<b>Rozsah textu</b>"
+msgid "<b>Range Name</b>"
+msgstr "<b>Rozsah jmen</b>"
 
 #: ../ui/search-dialog.glade.h:10
 msgid "<b>Ranges</b>"
@@ -3276,20 +3280,20 @@ msgid "Current results"
 msgstr "Aktuální výsledky"
 
 #: ../ui/search-dialog.glade.h:24
-msgid "Custom Lists"
-msgstr "Uživatelské seznamy"
+msgid "Custom Module Lists"
+msgstr "Uživ. seznam modulů"
 
 #: ../ui/search-dialog.glade.h:25
-msgid "Custom Ranges"
-msgstr "Uživatelské rozsahy"
+msgid "Custom Verse Ranges"
+msgstr "Uživ. rozsahy veršů"
 
 #: ../ui/search-dialog.glade.h:26
-msgid "Custom list"
-msgstr "Uživatelský seznam"
+msgid "Custom module list"
+msgstr "Uživ. seznam modulů"
 
 #: ../ui/search-dialog.glade.h:27
-msgid "Custom range"
-msgstr "Uživatelský rozsah"
+msgid "Custom verse range"
+msgstr "Uživ. rozsah veršů"
 
 #: ../ui/search-dialog.glade.h:28
 msgid "Delete selected range"
