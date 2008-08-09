@@ -1,3 +1,8 @@
+2008-08-09  terry <tbiggs@users.sourceforge.net>
+
+	* quick fix for bug: #2040344 module manager needs to lock left panel
+	  does not lock left panel, but keeps gs from crashing.
+
 2008-08-06  karl <charcoal@users.sf.net>
 
 	* update some Adv.Search headers for better clarity.

@@ -137,6 +137,7 @@ static GdkPixbuf *BLANK;
 static gchar *current_mod;
 static gchar *remote_source;
 static gboolean first_time_user = FALSE;
+static gboolean working = FALSE;
 
 GladeXML *gxml;
 
@@ -1053,7 +1054,8 @@ static void remove_install_wrapper(int activity)
 {
 	GList *modules = NULL;
 	modules = get_list_mods_to_remove_install(activity);
-
+	working = TRUE;
+	
 	while (gtk_events_pending())
 		gtk_main_iteration();
 
@@ -1062,6 +1064,8 @@ static void remove_install_wrapper(int activity)
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
+	
+	working = FALSE;
 }
 
 /******************************************************************************
@@ -2375,6 +2379,9 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
+	
+	if(working) return 0;
+	
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 				   1, &sel, -1);
