@@ -837,6 +837,8 @@ static void load_module_tree(GtkTreeView * treeview,
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
 
+	working = TRUE;
+
 	mod_mgr_shut_down();
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -884,7 +886,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	store = GTK_TREE_STORE(gtk_tree_view_get_model(treeview));
 	gtk_tree_store_clear(store);
 	if (!g_list_length(tmp))
-		return;
+		goto out;
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
@@ -1031,6 +1033,9 @@ static void load_module_tree(GtkTreeView * treeview,
 		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
+
+out:
+	working = FALSE;
 }
 
 
@@ -2380,7 +2385,7 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
 	
-	if(working) return 0;
+	if (working) return 0;
 	
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
