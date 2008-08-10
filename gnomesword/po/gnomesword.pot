@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-08 10:09+0200\n"
+"POT-Creation-Date: 2008-08-10 19:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,7 +355,7 @@ msgstr ""
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: ../src/gnome2/bibletext.c:1121 ../src/gnome2/gbs.c:903
 #: ../src/gnome2/dictlex.c:1023 ../src/gnome2/commentary.c:994
-#: ../src/gnome2/mod_mgr.c:2150 ../src/gnome2/mod_mgr.c:2325
+#: ../src/gnome2/mod_mgr.c:2159 ../src/gnome2/mod_mgr.c:2334
 #: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
 #: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
@@ -687,124 +687,124 @@ msgstr ""
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:253
+#: ../src/gnome2/mod_mgr.c:254
 msgid "Install these modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:255
+#: ../src/gnome2/mod_mgr.c:256
 msgid "Remove these modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:257
+#: ../src/gnome2/mod_mgr.c:258
 msgid "Archive these modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:259
+#: ../src/gnome2/mod_mgr.c:260
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module):"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:261
+#: ../src/gnome2/mod_mgr.c:262
 msgid "Delete fast-search index for these modules:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:291
+#: ../src/gnome2/mod_mgr.c:292
 msgid "Preparing to install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:293
+#: ../src/gnome2/mod_mgr.c:294
 msgid "Preparing to remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:295
+#: ../src/gnome2/mod_mgr.c:296
 msgid "Preparing to archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:297
+#: ../src/gnome2/mod_mgr.c:298
 msgid "Preparing to index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:299
+#: ../src/gnome2/mod_mgr.c:300
 msgid "Preparing to delete index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:324
+#: ../src/gnome2/mod_mgr.c:325
 msgid "Installing"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:326
+#: ../src/gnome2/mod_mgr.c:327
 msgid "Removing"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:328
+#: ../src/gnome2/mod_mgr.c:329
 msgid "Archiving"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:330
+#: ../src/gnome2/mod_mgr.c:331
 msgid "Indexing"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:332
+#: ../src/gnome2/mod_mgr.c:333
 msgid "Deleting index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:352
+#: ../src/gnome2/mod_mgr.c:353
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:378
+#: ../src/gnome2/mod_mgr.c:379
 msgid "GnomeSword could not execute archiver"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:383
+#: ../src/gnome2/mod_mgr.c:384
 msgid ""
 " archival result:\n"
 "\n"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:387
+#: ../src/gnome2/mod_mgr.c:388
 msgid ""
 "\n"
 "Archive in "
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:455 ../src/gnome2/mod_mgr.c:2545
+#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2557
 #: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:457 ../src/gnome2/treekey-editor.c:322
+#: ../src/gnome2/mod_mgr.c:458 ../src/gnome2/treekey-editor.c:322
 msgid "Remove"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:459 ../ui/module-manager.glade.h:9
+#: ../src/gnome2/mod_mgr.c:460 ../ui/module-manager.glade.h:9
 msgid "Archive"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:461 ../ui/module-manager.glade.h:15
+#: ../src/gnome2/mod_mgr.c:462 ../ui/module-manager.glade.h:15
 msgid "Index"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:463
+#: ../src/gnome2/mod_mgr.c:464
 msgid "Deletion"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:465
+#: ../src/gnome2/mod_mgr.c:466
 #, c-format
 msgid "%s failed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:467 ../src/gnome2/mod_mgr.c:1108
+#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:1117
 msgid "Finished"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:626 ../src/gnome2/mod_mgr.c:628
-#: ../src/gnome2/mod_mgr.c:727 ../src/gnome2/mod_mgr.c:764
-#: ../src/gnome2/mod_mgr.c:766 ../src/gnome2/utilities.c:322
+#: ../src/gnome2/mod_mgr.c:627 ../src/gnome2/mod_mgr.c:629
+#: ../src/gnome2/mod_mgr.c:728 ../src/gnome2/mod_mgr.c:765
+#: ../src/gnome2/mod_mgr.c:767 ../src/gnome2/utilities.c:322
 #: ../src/gnome2/utilities.c:389 ../src/gnome2/utilities.c:391
 #: ../src/gnome2/utilities.c:451 ../src/gnome2/utilities.c:453
 #: ../src/gnome2/utilities.c:1077 ../src/main/sidebar.cc:757
@@ -813,173 +813,173 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:891
+#: ../src/gnome2/mod_mgr.c:894
 msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:896 ../src/gnome2/utilities.c:514
+#: ../src/gnome2/mod_mgr.c:899 ../src/gnome2/utilities.c:514
 #: ../src/main/sidebar.cc:967 ../src/main/sidebar.cc:969
 msgid "Biblical Texts"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:900 ../src/gnome2/utilities.c:518
+#: ../src/gnome2/mod_mgr.c:903 ../src/gnome2/utilities.c:518
 #: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:992
 #: ../src/main/sidebar.cc:994 ../ui/prefs.glade.h:27
 msgid "Commentaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:904 ../src/gnome2/utilities.c:522
+#: ../src/gnome2/mod_mgr.c:907 ../src/gnome2/utilities.c:522
 #: ../src/main/sidebar.cc:1001 ../src/main/sidebar.cc:1003
 msgid "Dictionaries"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:908 ../src/gnome2/utilities.c:526
+#: ../src/gnome2/mod_mgr.c:911 ../src/gnome2/utilities.c:526
 #: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:912 ../src/gnome2/utilities.c:530
+#: ../src/gnome2/mod_mgr.c:915 ../src/gnome2/utilities.c:530
 #: ../src/main/sidebar.cc:617 ../src/main/sidebar.cc:1019
 #: ../src/main/sidebar.cc:1021
 msgid "General Books"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:916 ../src/gnome2/utilities.c:534
+#: ../src/gnome2/mod_mgr.c:919 ../src/gnome2/utilities.c:534
 #: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
 msgid "Maps"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:920 ../src/gnome2/utilities.c:538
+#: ../src/gnome2/mod_mgr.c:923 ../src/gnome2/utilities.c:538
 #: ../src/main/sidebar.cc:1037 ../src/main/sidebar.cc:1039
 msgid "Images"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:928
+#: ../src/gnome2/mod_mgr.c:931
 msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:933
+#: ../src/gnome2/mod_mgr.c:936
 msgid "Updates"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:937
+#: ../src/gnome2/mod_mgr.c:940
 msgid "Uninstalled"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:941 ../src/gnome2/sidebar.c:421
+#: ../src/gnome2/mod_mgr.c:944 ../src/gnome2/sidebar.c:421
 #: ../src/gnome2/utilities.c:543 ../src/main/prayerlists.cc:235
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
 #: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
 msgid "Prayer List/Journal"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1092
+#: ../src/gnome2/mod_mgr.c:1101
 msgid "Refreshing remote"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1103
+#: ../src/gnome2/mod_mgr.c:1112
 msgid "Remote not found"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1224
+#: ../src/gnome2/mod_mgr.c:1233
 msgid "Module Name"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1306
+#: ../src/gnome2/mod_mgr.c:1315
 msgid "Installed"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1331
+#: ../src/gnome2/mod_mgr.c:1340
 msgid "Available"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1340
+#: ../src/gnome2/mod_mgr.c:1349
 msgid "Size"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1358
 msgid "Description"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1382 ../src/gnome2/mod_mgr.c:1465
+#: ../src/gnome2/mod_mgr.c:1391 ../src/gnome2/mod_mgr.c:1474
 msgid "Configure"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1416
+#: ../src/gnome2/mod_mgr.c:1425
 msgid "Type"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1424
+#: ../src/gnome2/mod_mgr.c:1433
 msgid "Caption"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1433
+#: ../src/gnome2/mod_mgr.c:1442
 msgid "Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1442
+#: ../src/gnome2/mod_mgr.c:1451
 msgid "Directory"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1463
+#: ../src/gnome2/mod_mgr.c:1472
 msgid "Sources"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1469 ../src/gnome2/sidebar.c:1347
+#: ../src/gnome2/mod_mgr.c:1478 ../src/gnome2/sidebar.c:1347
 #: ../src/gnome2/preferences_dialog.c:1769
 msgid "Modules"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1471
+#: ../src/gnome2/mod_mgr.c:1480
 msgid "Install/Update"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1473
+#: ../src/gnome2/mod_mgr.c:1482
 msgid "Maintenance"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1683
+#: ../src/gnome2/mod_mgr.c:1692
 msgid "Please Refresh"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1684
+#: ../src/gnome2/mod_mgr.c:1693
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:1914
+#: ../src/gnome2/mod_mgr.c:1923
 msgid "Select Local Source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2153 ../src/gnome2/mod_mgr.c:2328
+#: ../src/gnome2/mod_mgr.c:2162 ../src/gnome2/mod_mgr.c:2337
 msgid "Remove the selected source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2207
+#: ../src/gnome2/mod_mgr.c:2216
 msgid "Enter a remote source"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2211
+#: ../src/gnome2/mod_mgr.c:2220
 msgid "Caption:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2212
+#: ../src/gnome2/mod_mgr.c:2221
 msgid "Type:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2213
+#: ../src/gnome2/mod_mgr.c:2222
 msgid "Host:"
 msgstr ""
 
-#: ../src/gnome2/mod_mgr.c:2214
+#: ../src/gnome2/mod_mgr.c:2223
 msgid "Directory:"
 msgstr ""
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2238
+#: ../src/gnome2/mod_mgr.c:2247
 msgid "A source by that name already exists."
 msgstr ""
 
@@ -1147,19 +1147,19 @@ msgstr ""
 msgid "found in "
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:705
+#: ../src/gnome2/search_dialog.c:704
 msgid "Clear List?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:707
+#: ../src/gnome2/search_dialog.c:706
 msgid "Are you sure you want to clear the module list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:919
+#: ../src/gnome2/search_dialog.c:918
 msgid "Delete list?"
 msgstr ""
 
-#: ../src/gnome2/search_dialog.c:920
+#: ../src/gnome2/search_dialog.c:919
 msgid "Are you sure you want to delete:"
 msgstr ""
 
