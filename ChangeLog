@@ -2,6 +2,7 @@
 
 	* quick fix for bug: #2040344 module manager needs to lock left panel
 	  does not lock left panel, but keeps gs from crashing.
+	* fixed bug: 2040347 adv.search can't clear results
 
 2008-08-06  karl <charcoal@users.sf.net>
 

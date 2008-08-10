@@ -114,44 +114,43 @@ void on_comboboxentry2_changed(GtkComboBox * combobox,
  *						gpointer user_data)
  *
  * Description
- *   FIXME: this is really ugly :(
+ *   user pressed clear button - clears search results page
  *
  * Return value
  *   void
  */
 
 void button_clean(GtkButton * button, gpointer user_data)
-{
-	gboolean editable; 
-/*
-	editable = gtk_html_get_editable(GTK_HTML(search1.report_html));
-	if (!editable)
-		gtk_html_set_editable(GTK_HTML(search1.report_html),
-				      TRUE);
-	gtk_html_select_all(GTK_HTML(search1.report_html));
-	gtk_html_cut(GTK_HTML(search1.report_html));
-	gtk_html_set_editable(GTK_HTML(search1.report_html), editable);
-
-
-	editable =
-	    gtk_html_get_editable(GTK_HTML(search1.results_html));
-	if (!editable)
-		gtk_html_set_editable(GTK_HTML(search1.results_html),
-				      TRUE);
-	gtk_html_select_all(GTK_HTML(search1.results_html));
-	gtk_html_cut(GTK_HTML(search1.results_html));
-	gtk_html_set_editable(GTK_HTML(search1.results_html), editable);
-
-	editable =
-	    gtk_html_get_editable(GTK_HTML(search1.preview_html));
-	if (!editable)
-		gtk_html_set_editable(GTK_HTML(search1.preview_html),
-				      TRUE);
-	gtk_html_select_all(GTK_HTML(search1.preview_html));
-	gtk_html_cut(GTK_HTML(search1.preview_html));
-	gtk_html_set_editable(GTK_HTML(search1.preview_html), editable);
-*/
-
+{	 
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GString *html_text;
+	
+	GS_message(("button_clean"));
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.listview_results));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(list_store);
+	
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search1.listview_verses));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(list_store);	
+	
+#ifdef USE_GTKMOZEMBED
+	html_text=g_string_new(HTML_START);
+	g_string_append(html_text," ");
+	g_string_append(html_text,"</html>");	
+	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
+	gecko_html_write(GECKO_HTML(search1.preview_html),html_text->str,html_text->len);
+	gecko_html_close(GECKO_HTML(search1.preview_html));
+	g_string_free(html_text,TRUE);
+#else
+	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
+				  " ", strlen(" "));
+#endif
 }
 
 /******************************************************************************
