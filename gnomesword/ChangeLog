@@ -1,3 +1,7 @@
+2008-08-13  karl <charcoal@users.sf.net>
+
+	* adjust but not fix for #2036800 journal name only accepts English.
+
 2008-08-09  terry <tbiggs@users.sourceforge.net>
 
 	* quick fix for bug: #2040344 module manager needs to lock left panel

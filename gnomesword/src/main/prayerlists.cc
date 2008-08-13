@@ -246,9 +246,9 @@ prayerlist_fundamentals(gchar *summary)
 	}
 
 	for (char *s = info->text1; *s; ++s) {
-		if (!isalnum(*s)) {
+		if (!isalnum(*s) && (*s != '_')) {
 			gui_generic_warning
-			    (_("Module names must be letters+digits only."));
+			    (_("Module names must contain [A-Za-z0-9_] only."));
 			goto out;
 		}
 	}
