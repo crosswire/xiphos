@@ -486,14 +486,16 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 		goto out1;
 
 	for (s = info->text1; *s; ++s) {
-		if (!isalnum(*s)) {
-			gui_generic_warning("Names must be letters+digits only.");
+		if (!isalnum(*s) && (*s != '_')) {
+			gui_generic_warning
+			    (_("Module names must contain [A-Za-z0-9_] only."));
 			goto out1;
 		}
 	}
 
 	if (main_is_module(info->text1)) {
-		gui_generic_warning("Duplicate name");
+		gui_generic_warning
+		    (_("GnomeSword already knows a module by that name."));
 		goto out1;
 	}
 
