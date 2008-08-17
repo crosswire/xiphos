@@ -534,6 +534,35 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 }
 
 
+static void
+new_base_font_size(gboolean up)
+{
+	gchar *url;
+
+	if (up) {
+		settings.base_font_size++;
+		if (settings.base_font_size > 5)
+			settings.base_font_size = 5;
+	} else {
+		settings.base_font_size--;
+		if (settings.base_font_size < -2)
+			settings.base_font_size = -2;
+	}
+
+	if (settings.base_font_size_str)
+		g_free(settings.base_font_size_str);
+	settings.base_font_size_str = g_strdup_printf("%+d", settings.base_font_size);
+
+	xml_set_value("GnomeSword", "fontsize", "basefontsize",
+		      settings.base_font_size_str);
+	url = g_strdup_printf("sword://%s/%s",
+			      settings.MainWindowModule,
+			      settings.currentverse);
+	main_url_handler(url);
+	g_free(url);
+}
+
+
 static
 gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 				  gpointer user_data)
@@ -625,6 +654,16 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		else if (state == GDK_SHIFT_MASK)	// N book
 			access_on_down_eventbox_button_release_event
 			    (BOOK_BUTTON);
+		break;
+
+	case 21: // Ctrl-Plus  Increase base font size
+		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
+			new_base_font_size(TRUE);
+		break;
+
+	case 20: // Ctrl-Minus  Decrease base font size
+		if (state == GDK_CONTROL_MASK)
+			new_base_font_size(FALSE);
 		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
