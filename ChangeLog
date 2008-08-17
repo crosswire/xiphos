@@ -1,3 +1,7 @@
+2008-08-16  karl <charcoal@users.sf.net>
+
+	* add Ctrl-Plus/Ctrl-Minus to change base font size.
+
 2008-08-13  karl <charcoal@users.sf.net>
 
 	* adjust but not fix for #2036800 journal name only accepts English.

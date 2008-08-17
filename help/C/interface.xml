@@ -685,6 +685,9 @@
 				<guibutton>Alt-Z</guibutton> opens the personal commentary editor.
 			</listitem>
 			<listitem>
+				<guibutton>Ctrl-Plus/Ctrl-Minus</guibutton> increases/decreases the base font size.
+			</listitem>
+			<listitem>
 				Location bar navigation:
 				<itemizedlist>
 					<listitem>
