@@ -1164,10 +1164,15 @@ on_basecombobox1_changed(GtkComboBox * combobox,
 	if (!buf)
 		return;
 	xml_set_value("GnomeSword", "fontsize", "basefontsize", buf);
+
+	if (settings.base_font_size_str)
+		g_free(settings.base_font_size_str);
 	settings.base_font_size_str = xml_get_value("fontsize", "basefontsize");
+
 	settings.base_font_size = atoi(settings.base_font_size_str);
-	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
-					      settings.currentverse);
+	url = g_strdup_printf("sword://%s/%s",
+			      settings.MainWindowModule,
+			      settings.currentverse);
 	main_url_handler(url);
 	g_free(url);
 	g_free(buf);
