@@ -261,26 +261,26 @@ static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_pinned_tabs_activate
+ *  on_linked_tabs_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_pinned_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *   void on_linked_tabs_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
  * Description
- *   toggle pinning tabs together.
+ *   toggle linking tabs together.
  *
  * Return value
  *   void
  */
 
-static void on_pinned_tabs_activate(GtkCheckMenuItem * menuitem,
+static void on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
 				    gpointer user_data)
 {
-	settings.pinnedtabs = menuitem->active;
+	settings.linkedtabs = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "pinnedtabs",
-		      (settings.pinnedtabs ? "1" : "0"));
+		      (settings.linkedtabs ? "1" : "0"));
 }
 
 /******************************************************************************
@@ -808,7 +808,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
  	{ /* 3 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("P_review"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Preview"),
 	 N_("Show or hide Preview window"),
 	 (gpointer) view_previewer, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -833,13 +833,13 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 8 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Pin Tabs"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("L_ink Tabs"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 9 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("R_ead Aloud"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Read Aloud"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -970,7 +970,7 @@ void gui_create_main_menu(GtkWidget * app)
 	widgets.viewcomms_item = view1_menu_uiinfo[4].widget;
 	widgets.viewdicts_item = view1_menu_uiinfo[5].widget;
 	widgets.versestyle_item = view1_menu_uiinfo[7].widget;
-	widgets.pinnedtabs_item = view1_menu_uiinfo[8].widget;
+	widgets.linkedtabs_item = view1_menu_uiinfo[8].widget;
 	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
 	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
@@ -1000,8 +1000,8 @@ void gui_create_main_menu(GtkWidget * app)
 				       (widgets.versestyle_item),
 				       settings.versestyle);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-				       (widgets.pinnedtabs_item),
-				       settings.pinnedtabs);
+				       (widgets.linkedtabs_item),
+				       settings.linkedtabs);
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.readaloud_item),
 				       settings.readaloud);
@@ -1021,9 +1021,9 @@ void gui_create_main_menu(GtkWidget * app)
 			   "toggled",
 			   G_CALLBACK(on_verse_style1_activate),
 			   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.pinnedtabs_item),
+	g_signal_connect(GTK_OBJECT(widgets.linkedtabs_item),
 			   "toggled",
-			   G_CALLBACK(on_pinned_tabs_activate),
+			   G_CALLBACK(on_linked_tabs_activate),
 			   NULL);
 	g_signal_connect(GTK_OBJECT(widgets.readaloud_item),
 			   "toggled",
