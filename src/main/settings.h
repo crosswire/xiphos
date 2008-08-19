@@ -117,7 +117,7 @@ struct _settings {
 	        footnotesint, //-- check menu state parallel mods
 		greekaccentsint, //-- check menu state parallel mods
 	        versestyle, /* use verse style if true or paragraph style if not */
-	        pinnedtabs, /* all tabs are pinned together, moving in concert */
+	        linkedtabs, /* all tabs are linked together, moving in concert */
 	        showversenum, /* display verse numbers in text (default on) */
 	        readaloud, /* pass text through (existing) "festival -server" */
 	        versehighlight, /* do special fg/bg for current verse */

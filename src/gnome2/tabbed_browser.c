@@ -697,7 +697,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  *
  * Description
  *   sets tab label(s) to current verse.
- *   dependent on pinnedtabs setting, either just cur or all.
+ *   dependent on linkedtabs setting, either just cur or all.
  *   one_tab means don't loop the set, just set current.
  *
  * Return value
@@ -706,7 +706,7 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
  
 void gui_set_tab_label(const gchar * key, gboolean one_tab)
 {
-	if ((settings.pinnedtabs && !one_tab) || (cur_passage_tab == NULL)) {
+	if ((settings.linkedtabs && !one_tab) || (cur_passage_tab == NULL)) {
 		GList *tmp = NULL;
 		for (tmp = g_list_first(passage_list); tmp != NULL; tmp = g_list_next(tmp))
 			gui_set_named_tab_label

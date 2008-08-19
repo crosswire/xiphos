@@ -572,10 +572,10 @@ void load_settings_structure(void)
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 
 	if (buf = xml_get_value("misc", "pinnedtabs"))
-		settings.pinnedtabs = atoi(buf);
+		settings.linkedtabs = atoi(buf);
 	else {
 		xml_add_new_item_to_section("misc", "pinnedtabs", "0");
-		settings.pinnedtabs = 0;
+		settings.linkedtabs = 0;
 	}
 
 	if (buf = xml_get_value("misc", "readaloud"))
