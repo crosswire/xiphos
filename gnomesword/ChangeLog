@@ -1,6 +1,7 @@
 2008-08-18  karl <charcoal@users.sf.net>
 
 	* convert "pinned tabs" to "linked tabs".
+	* improved some phrasing in src/gnome2/about_sword.c.
 
 2008-08-16  karl <charcoal@users.sf.net>
 
