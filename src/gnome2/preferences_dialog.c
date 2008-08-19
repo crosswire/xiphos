@@ -60,7 +60,7 @@ typedef enum {
 	SHOW_BOOK_TABS,
 	USE_DEFAULT_DICTIONARY,
 	USE_VERSE_STYLE,
-	USE_PINNED_TABS,
+	USE_LINKED_TABS,
 	READ_ALOUD,
 	SHOW_VERSE_NUM,
 	VERSE_HIGHLIGHT,
@@ -156,7 +156,7 @@ struct _preferences_check_buttons {
 
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_verse_style;
-	GtkWidget *use_pinned_tabs;
+	GtkWidget *use_linked_tabs;
 	GtkWidget *use_chapter_scroll;
 	GtkWidget *use_imageresize;
 	GtkWidget *readaloud;
@@ -760,10 +760,10 @@ on_checkbutton10_toggled(GtkToggleButton * togglebutton,
 {
 	xml_set_value("GnomeSword", "misc", "pinnedtabs",
 		      (togglebutton->active ? "1" : "0"));
-	settings.pinnedtabs = atoi(xml_get_value("misc", "pinnedtabs"));
+	settings.linkedtabs = atoi(xml_get_value("misc", "pinnedtabs"));
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-			       (widgets.pinnedtabs_item),
-			       settings.pinnedtabs);
+			       (widgets.linkedtabs_item),
+			       settings.linkedtabs);
 }
 
 
@@ -2252,7 +2252,7 @@ create_preferences_dialog(void)
 	check_button.show_commentary_pane = glade_xml_get_widget(gxml, "checkbutton3");
 	check_button.show_dictionary_pane = glade_xml_get_widget(gxml, "checkbutton4");
 	check_button.use_verse_style = glade_xml_get_widget(gxml, "checkbutton5");
-	check_button.use_pinned_tabs = glade_xml_get_widget(gxml, "checkbutton10");
+	check_button.use_linked_tabs = glade_xml_get_widget(gxml, "checkbutton10");
 	check_button.readaloud = glade_xml_get_widget(gxml, "checkbutton11");
 	check_button.show_verse_num = glade_xml_get_widget(gxml, "checkbutton12");
 	check_button.use_default_dictionary = glade_xml_get_widget(gxml, "checkbutton6");
