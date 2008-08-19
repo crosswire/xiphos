@@ -454,8 +454,8 @@
 				</listitem>
 				<listitem>	
 					<para>
-					Pin Tabs - When more than one tab is open, each one's verse is navigated separately in the disabled
-					case.  If tab pinning is enabled, then all tabs navigate together, keeping all translations on the
+					Link Tabs - When more than one tab is open, each one's verse is navigated separately in the disabled
+					case.  If tab linking is enabled, then all tabs navigate together, keeping all translations on the
 					same verse.
 					</para>
 				</listitem>
