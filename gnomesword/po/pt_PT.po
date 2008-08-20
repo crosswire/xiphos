@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-13 14:48+0100\n"
-"PO-Revision-Date: 2008-08-13 14:51+0100\n"
+"POT-Creation-Date: 2008-08-20 23:56+0100\n"
+"PO-Revision-Date: 2008-08-20 23:59+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -415,17 +415,12 @@ msgstr "Ler Selecção em voz alta"
 #: ../src/gnome2/about_sword.c:94
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Bible Framework allows "
-"easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and "
-"other books. Many frontends are built using this framework. An installed "
-"module set may be shared between any frontend using the framework."
-msgstr ""
-"O Projecto SWORD é uma iniciativa para criar um pacote de software "
-"expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma de "
-"Bíblia SWORD permite fácil manipulação de textos da Bíblia, comentários, "
-"léxicos, dicionários e outros livros. Várias interfaces são construídas com "
-"base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado "
-"entre quaisquer dessas interfaces."
+"for research and study of God and His Word. The SWORD Project framework "
+"allows easy use and study of Bible texts, commentaries, lexicons, "
+"dictionaries, and other books. Many frontends are built using this "
+"framework. An installed set of books may be shared among all frontends using "
+"the framework."
+msgstr "O Projecto SWORD é uma iniciativa para criar um pacote de software expansível para pesquisa e estudo de Deus e da Sua Palavra. A Plataforma do Projecto SWORD permite fácil manipulação de textos da Bíblia, comentários, léxicos, dicionários e outros livros. Várias interfaces são construídas com base nesta plataforma. Um conjunto de módulos instalados pode ser partilhado entre quaisquer dessas interfaces."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -436,8 +431,8 @@ msgid "Sword Version"
 msgstr "Versão Sword"
 
 #: ../src/gnome2/about_sword.c:161
-msgid "Modules can be downloaded from the SWORD Project"
-msgstr "Módulos podem ser descarregados do Projecto SWORD"
+msgid "Books can be downloaded from the SWORD Project"
+msgstr "Livros podem ser descarregados do Projecto SWORD"
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -967,7 +962,7 @@ msgid "Sources"
 msgstr "Fontes"
 
 #: ../src/gnome2/mod_mgr.c:1478 ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1769
+#: ../src/gnome2/preferences_dialog.c:1774
 msgid "Modules"
 msgstr "Módulos"
 
@@ -1036,34 +1031,34 @@ msgstr "Prever Impressão"
 msgid "Failed to print the document"
 msgstr "Falhou a impressão do documento"
 
-#: ../src/gnome2/main_window.c:691 ../src/main/sword.cc:631
+#: ../src/gnome2/main_window.c:730 ../src/main/sword.cc:631
 msgid "Starting"
 msgstr "Começando"
 
-#: ../src/gnome2/main_window.c:692
+#: ../src/gnome2/main_window.c:731
 msgid "Building GnomeSword interface"
 msgstr "Construindo a interface GnomeSword"
 
-#: ../src/gnome2/main_window.c:698
+#: ../src/gnome2/main_window.c:737
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Software de Estudo Bíblico"
 
-#: ../src/gnome2/main_window.c:752
+#: ../src/gnome2/main_window.c:791
 msgid "Open a new tab"
 msgstr "Abrir uma nova aba"
 
-#: ../src/gnome2/main_window.c:840 ../src/gnome2/sidebar.c:406
+#: ../src/gnome2/main_window.c:879 ../src/gnome2/sidebar.c:406
 #: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:598
 #: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:985
 msgid "Standard View"
 msgstr "Vista Normal"
 
-#: ../src/gnome2/main_window.c:916
+#: ../src/gnome2/main_window.c:955
 msgid "Commentary View"
 msgstr "Vista de Comentário"
 
-#: ../src/gnome2/main_window.c:933
+#: ../src/gnome2/main_window.c:972
 msgid "Book View"
 msgstr "Vista de Livro"
 
@@ -1283,37 +1278,37 @@ msgstr "Nome da Pasta"
 msgid "Folder: "
 msgstr "Pasta: "
 
-#: ../src/gnome2/preferences_dialog.c:1662 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1667 ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr "Preferências"
 
-#: ../src/gnome2/preferences_dialog.c:1745
+#: ../src/gnome2/preferences_dialog.c:1750
 msgid "Fonts"
 msgstr "Fontes"
 
-#: ../src/gnome2/preferences_dialog.c:1748
+#: ../src/gnome2/preferences_dialog.c:1753
 msgid "Color"
 msgstr "Cor"
 
-#: ../src/gnome2/preferences_dialog.c:1751
-#: ../src/gnome2/preferences_dialog.c:1765
-#: ../src/gnome2/preferences_dialog.c:1778 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1756
+#: ../src/gnome2/preferences_dialog.c:1770
+#: ../src/gnome2/preferences_dialog.c:1783 ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr "Variado"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1760
 msgid "General"
 msgstr "Geral"
 
-#: ../src/gnome2/preferences_dialog.c:1758 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1763 ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr "Abas e painéis"
 
-#: ../src/gnome2/preferences_dialog.c:1772
+#: ../src/gnome2/preferences_dialog.c:1777
 msgid "Main"
 msgstr "Principal"
 
-#: ../src/gnome2/preferences_dialog.c:1775 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1780 ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr "Paralelo"
 
@@ -1642,8 +1637,8 @@ msgstr "Mostrar ou ocultar janela de textos bíblicos"
 
 #. 3
 #: ../src/gnome2/main_menu.c:811
-msgid "P_review"
-msgstr "P_rever"
+msgid "_Preview"
+msgstr "P_revisão"
 
 #: ../src/gnome2/main_menu.c:812
 msgid "Show or hide Preview window"
@@ -1675,12 +1670,12 @@ msgstr "Estilo de _Versículo"
 
 #. 8
 #: ../src/gnome2/main_menu.c:836
-msgid "_Pin Tabs"
-msgstr "_Fixar Abas"
+msgid "L_ink Tabs"
+msgstr "L_igar Abas"
 
 #. 9
 #: ../src/gnome2/main_menu.c:842
-msgid "R_ead Aloud"
+msgid "_Read Aloud"
 msgstr "L_er em voz alta"
 
 #. 10
