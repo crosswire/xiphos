@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-13 14:48+0100\n"
+"POT-Creation-Date: 2008-08-20 23:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -416,10 +416,11 @@ msgstr ""
 #: ../src/gnome2/about_sword.c:94
 msgid ""
 "The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Bible Framework allows "
-"easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and "
-"other books. Many frontends are built using this framework. An installed "
-"module set may be shared between any frontend using the framework."
+"for research and study of God and His Word. The SWORD Project framework "
+"allows easy use and study of Bible texts, commentaries, lexicons, "
+"dictionaries, and other books. Many frontends are built using this "
+"framework. An installed set of books may be shared among all frontends using "
+"the framework."
 msgstr ""
 
 #: ../src/gnome2/about_sword.c:112
@@ -431,7 +432,7 @@ msgid "Sword Version"
 msgstr ""
 
 #: ../src/gnome2/about_sword.c:161
-msgid "Modules can be downloaded from the SWORD Project"
+msgid "Books can be downloaded from the SWORD Project"
 msgstr ""
 
 #: ../src/gnome2/about_sword.c:167
@@ -938,7 +939,7 @@ msgid "Sources"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1478 ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1769
+#: ../src/gnome2/preferences_dialog.c:1774
 msgid "Modules"
 msgstr ""
 
@@ -1007,34 +1008,34 @@ msgstr ""
 msgid "Failed to print the document"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:691 ../src/main/sword.cc:631
+#: ../src/gnome2/main_window.c:730 ../src/main/sword.cc:631
 msgid "Starting"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:692
+#: ../src/gnome2/main_window.c:731
 msgid "Building GnomeSword interface"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:698
+#: ../src/gnome2/main_window.c:737
 msgid "GnomeSword - Bible Study Software"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:752
+#: ../src/gnome2/main_window.c:791
 msgid "Open a new tab"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:840 ../src/gnome2/sidebar.c:406
+#: ../src/gnome2/main_window.c:879 ../src/gnome2/sidebar.c:406
 #: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:598
 #: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:985
 msgid "Standard View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:916
+#: ../src/gnome2/main_window.c:955
 msgid "Commentary View"
 msgstr ""
 
-#: ../src/gnome2/main_window.c:933
+#: ../src/gnome2/main_window.c:972
 msgid "Book View"
 msgstr ""
 
@@ -1252,37 +1253,37 @@ msgstr ""
 msgid "Folder: "
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1662 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1667 ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1745
+#: ../src/gnome2/preferences_dialog.c:1750
 msgid "Fonts"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1748
+#: ../src/gnome2/preferences_dialog.c:1753
 msgid "Color"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1751
-#: ../src/gnome2/preferences_dialog.c:1765
-#: ../src/gnome2/preferences_dialog.c:1778 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1756
+#: ../src/gnome2/preferences_dialog.c:1770
+#: ../src/gnome2/preferences_dialog.c:1783 ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1760
 msgid "General"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1758 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1763 ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1772
+#: ../src/gnome2/preferences_dialog.c:1777
 msgid "Main"
 msgstr ""
 
-#: ../src/gnome2/preferences_dialog.c:1775 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1780 ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr ""
 
@@ -1609,7 +1610,7 @@ msgstr ""
 
 #. 3
 #: ../src/gnome2/main_menu.c:811
-msgid "P_review"
+msgid "_Preview"
 msgstr ""
 
 #: ../src/gnome2/main_menu.c:812
@@ -1642,12 +1643,12 @@ msgstr ""
 
 #. 8
 #: ../src/gnome2/main_menu.c:836
-msgid "_Pin Tabs"
+msgid "L_ink Tabs"
 msgstr ""
 
 #. 9
 #: ../src/gnome2/main_menu.c:842
-msgid "R_ead Aloud"
+msgid "_Read Aloud"
 msgstr ""
 
 #. 10
