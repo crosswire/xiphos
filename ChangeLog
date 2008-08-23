@@ -1,3 +1,7 @@
+2008-08-23  karl <charcoal@users.sf.net>
+
+	* fix erroneous non-linked tab labels on startup.
+
 2008-08-18  karl <charcoal@users.sf.net>
 
 	* convert "pinned tabs" to "linked tabs".

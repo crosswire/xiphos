@@ -189,6 +189,50 @@ void set_current_tab (PASSAGE_TAB_INFO *pt)
 
 /******************************************************************************
  * Name
+ *  pick_tab_label
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void pick_tab_label(PASSAGE_TAB_INFO *pt)
+ *
+ * Description
+ *   selects a tab label based on panel shows.
+ *
+ * Return value
+ *   GString *
+ *   ** caller must free it **
+ */
+ 
+GString *
+pick_tab_label(PASSAGE_TAB_INFO *pt)
+{
+	GString *str = g_string_new(NULL);
+
+	if (pt->showtexts || pt->comm_showing) {
+		g_string_printf(str, "%s: %s",
+				(pt->showtexts
+				 ? pt->text_mod
+				 : (pt->commentary_mod
+				    ? pt->commentary_mod
+				    : "[no commentary]")),
+				pt->text_commentary_key);
+	} else {
+		g_string_printf(str, "%s",
+				(pt->showcomms
+				 ? (pt->book_mod
+				    ? pt->book_mod
+				    : "[no book]")
+				 : (pt->dictlex_mod
+				    ? pt->dictlex_mod
+				    : "[no dict]")));
+	}
+	return str;
+}
+
+
+/******************************************************************************
+ * Name
  *  notebook_main_add_page
  *
  * Synopsis
@@ -206,27 +250,24 @@ void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 {
 	GtkWidget *tab_widget;
 	GtkWidget *menu_label;
-	GString *str = g_string_new(NULL);
+	GString *str = pick_tab_label(tbinf);
 
-	
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show(tbinf->page_widget);
 
-	g_string_printf(str,"%s: %s", tbinf->text_mod, tbinf->text_commentary_key); 
 	tab_widget = tab_widget_new(tbinf, str->str);
-	
+
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
 				 tbinf->page_widget, tab_widget);
-	
-	
+
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget, str->str);
-	
+
 	menu_label = gtk_label_new(str->str);
 	gtk_notebook_set_menu_label(GTK_NOTEBOOK(widgets.notebook_main),
                                              tbinf->page_widget,
                                              menu_label);
-	g_string_free(str,TRUE);
+	g_string_free(str, TRUE);
 }
 
 
@@ -738,30 +779,12 @@ void gui_set_tab_label(const gchar * key, gboolean one_tab)
  
 void gui_set_named_tab_label(const gchar * key, PASSAGE_TAB_INFO *pt, gboolean update)
 {
-	GString *str = g_string_new(NULL);
+	GString *str;
 	
 	gui_reassign_strdup(&pt->text_commentary_key, key);
+	str = pick_tab_label(pt);
 		
-	if (pt->showtexts || pt->comm_showing) {
-		g_string_printf(str, "%s: %s",
-				(pt->showtexts
-				 ? pt->text_mod
-				 : (pt->commentary_mod
-				    ? pt->commentary_mod
-				    : "[no commentary]")),
-				pt->text_commentary_key);
-	} else {
-		g_string_printf(str, "%s",
-				(pt->showcomms
-				 ? (pt->book_mod
-				    ? pt->book_mod
-				    : "[no book]")
-				 : (pt->dictlex_mod
-				    ? pt->dictlex_mod
-				    : "[no dict]")));
-	}
-
-	gtk_label_set_text (pt->tab_label, str->str);
+	gtk_label_set_text(pt->tab_label, str->str);
 	GS_message(("label = %s\n", str->str));
 	gtk_notebook_set_menu_label_text(
 		GTK_NOTEBOOK(widgets.notebook_main),
