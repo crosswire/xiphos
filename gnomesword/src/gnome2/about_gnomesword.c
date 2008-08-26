@@ -38,6 +38,7 @@ static const gchar *authors[] = {
     "Jp Robinson",
     "Andy Piper",
     "Karl Kleinpaste",
+	"Eicke Godehardt",
     NULL
 };
   
