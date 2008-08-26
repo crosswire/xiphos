@@ -38,7 +38,6 @@ static const gchar *authors[] = {
     "Jp Robinson",
     "Andy Piper",
     "Karl Kleinpaste",
-	"Eicke Godehardt",
     NULL
 };
   
@@ -50,7 +49,7 @@ static const gchar *documenters[] = {
     NULL
 };
 
-static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke";
+static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZdenko Podobn\nPavlo Bohmat\nMartin Zibricky\nAri Constancio\nGertjan Francke\nEicke Godehardt";
 
 /******************************************************************************
  * Name
