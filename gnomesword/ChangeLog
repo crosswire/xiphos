@@ -1,6 +1,7 @@
 2008-08-29  karl <charcoal@users.sf.net>
 
 	* fix #2069455 module deletion not reflected
+	* fix #2069476 sorting by module name
 
 2008-08-23  karl <charcoal@users.sf.net>
 
