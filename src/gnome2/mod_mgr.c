@@ -1236,7 +1236,6 @@ static void add_columns(GtkTreeView * treeview,
 	    gtk_tree_view_column_new_with_attributes(_("Module Name"),
 						     renderer, "text",
 						     COLUMN_NAME, NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 					/* fixed sizing (200 pixels) */
 	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
 					GTK_TREE_VIEW_COLUMN_FIXED);
@@ -1394,7 +1393,6 @@ static void add_columns_to_first(GtkTreeView * treeview)
 	    gtk_tree_view_column_new_with_attributes(_("Configure"),
 						     renderer, "text",
 						     COLUMN_NAME, NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
 
@@ -1428,7 +1426,6 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 	    gtk_tree_view_column_new_with_attributes(_("Type"),
 						     renderer, "text",
 						     COLUMN_TYPE, NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
@@ -1437,7 +1434,6 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 						     renderer, "text",
 						     COLUMN_CAPTION,
 						     NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
@@ -1446,7 +1442,6 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 						     renderer, "text",
 						     COLUMN_SOURCE,
 						     NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
 	renderer = gtk_cell_renderer_text_new();
@@ -1455,7 +1450,6 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 						     renderer, "text",
 						     COLUMN_DIRECTORY,
 						     NULL);
-	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
 }
