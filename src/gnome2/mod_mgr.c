@@ -467,7 +467,10 @@ static void remove_install_modules(GList * modules,
 	} else {
 		g_string_printf(mods, "%s", _("Finished"));		
 	}
-	if (!failed && ((activity == FASTMOD) || (activity == DELFAST)))
+	if (!failed &&
+	    ((activity == REMOVE) ||
+	     (activity == FASTMOD) ||
+	     (activity == DELFAST)))
 		load_module_tree(GTK_TREE_VIEW(treeview2), 0);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), mods->str);
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh), 0);
