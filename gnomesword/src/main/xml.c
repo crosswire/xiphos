@@ -569,9 +569,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"usedefaultdict", (const xmlChar *)"0");
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"defaultdictionary", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"greek", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"greekviewer", NULL);
 	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrew", NULL);
-	xmlNewTextChild(section_node, NULL, (const xmlChar *)"hebrewviewer", NULL);
 
 
 	section_node = xmlNewChild(root_node, NULL, (const xmlChar *)"misc", NULL);
