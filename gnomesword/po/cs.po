@@ -26,16 +26,16 @@
 # Range                     -> Rozsah
 # verse range               -> rozsah veršů
 # Verse Ranges              -> rozsahy veršů
-# 
+#
 # Martin Zibricky <matysek03@users.sourceforge.net>, 2008
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2.3.6\n"
+"Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-06 22:01+0100\n"
-"PO-Revision-Date: 2008-08-08 10:54+0100\n"
+"PO-Revision-Date: 2008-08-31 22:42+0100\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -161,7 +161,7 @@ msgstr "Uložit jako..."
 #: ../src/gnome2/bibletext_dialog.c:2116
 #: ../src/gnome2/dictlex.c:1030
 #: ../src/gnome2/commentary_dialog.c:1656
-#: ../src/gnome2/commentary.c:1001
+#: ../src/gnome2/commentary.c:1003
 #: ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr "Soubor"
@@ -243,7 +243,7 @@ msgstr "Uložit soubor pro Poznámkový blok"
 #: ../src/gnome2/bibletext_dialog.c:1897
 #: ../src/gnome2/dictlex.c:842
 #: ../src/gnome2/commentary_dialog.c:1437
-#: ../src/gnome2/commentary.c:791
+#: ../src/gnome2/commentary.c:793
 msgid "item1"
 msgstr "položka1"
 
@@ -252,7 +252,7 @@ msgstr "položka1"
 #: ../src/gnome2/bibletext_dialog.c:1907
 #: ../src/gnome2/dictlex.c:852
 #: ../src/gnome2/commentary_dialog.c:1447
-#: ../src/gnome2/commentary.c:801
+#: ../src/gnome2/commentary.c:803
 msgid "Open Module"
 msgstr "Otevřít modul"
 
@@ -264,14 +264,14 @@ msgstr "Exportovat pasáž"
 #: ../src/gnome2/bibletext.c:939
 #: ../src/gnome2/bibletext_dialog.c:1933
 #: ../src/gnome2/commentary_dialog.c:1473
-#: ../src/gnome2/commentary.c:813
+#: ../src/gnome2/commentary.c:815
 msgid "item2"
 msgstr "položka2"
 
 #: ../src/gnome2/bibletext.c:951
 #: ../src/gnome2/bibletext_dialog.c:1945
 #: ../src/gnome2/commentary_dialog.c:1485
-#: ../src/gnome2/commentary.c:825
+#: ../src/gnome2/commentary.c:827
 msgid "Note"
 msgstr "Poznamenat"
 
@@ -280,7 +280,7 @@ msgstr "Poznamenat"
 #: ../src/gnome2/bibletext_dialog.c:1955
 #: ../src/gnome2/dictlex.c:877
 #: ../src/gnome2/commentary_dialog.c:1495
-#: ../src/gnome2/commentary.c:835
+#: ../src/gnome2/commentary.c:837
 msgid "Primary Reading"
 msgstr "Prvořadé čtení"
 
@@ -289,7 +289,7 @@ msgstr "Prvořadé čtení"
 #: ../src/gnome2/bibletext_dialog.c:1963
 #: ../src/gnome2/dictlex.c:883
 #: ../src/gnome2/commentary_dialog.c:1503
-#: ../src/gnome2/commentary.c:843
+#: ../src/gnome2/commentary.c:845
 msgid "Secondary Reading"
 msgstr "Pomocné čtení"
 
@@ -298,7 +298,7 @@ msgstr "Pomocné čtení"
 #: ../src/gnome2/bibletext_dialog.c:1971
 #: ../src/gnome2/dictlex.c:871
 #: ../src/gnome2/commentary_dialog.c:1511
-#: ../src/gnome2/commentary.c:851
+#: ../src/gnome2/commentary.c:853
 msgid "All Readings"
 msgstr "Všechna čtení"
 
@@ -309,7 +309,7 @@ msgstr "Všechna čtení"
 #: ../src/gnome2/dictlex.c:901
 #: ../src/gnome2/commentary_dialog.c:1531
 #: ../src/gnome2/font_dialog.c:292
-#: ../src/gnome2/commentary.c:871
+#: ../src/gnome2/commentary.c:873
 msgid "Set Module Font"
 msgstr "Nastavit písmo modulu"
 
@@ -320,7 +320,7 @@ msgstr "Nastavit písmo modulu"
 #: ../src/gnome2/bibletext_dialog.c:2000
 #: ../src/gnome2/dictlex.c:908
 #: ../src/gnome2/commentary_dialog.c:1540
-#: ../src/gnome2/commentary.c:878
+#: ../src/gnome2/commentary.c:880
 msgid "Words of Christ in Red"
 msgstr "Ježíšova slova v červené barvě"
 
@@ -330,7 +330,7 @@ msgstr "Ježíšova slova v červené barvě"
 #: ../src/gnome2/bibletext_dialog.c:2008
 #: ../src/gnome2/dictlex.c:916
 #: ../src/gnome2/commentary_dialog.c:1548
-#: ../src/gnome2/commentary.c:886
+#: ../src/gnome2/commentary.c:888
 msgid "Strong's Numbers"
 msgstr "Strongova čísla"
 
@@ -340,7 +340,7 @@ msgstr "Strongova čísla"
 #: ../src/gnome2/bibletext_dialog.c:2016
 #: ../src/gnome2/dictlex.c:924
 #: ../src/gnome2/commentary_dialog.c:1556
-#: ../src/gnome2/commentary.c:894
+#: ../src/gnome2/commentary.c:896
 #: ../ui/search-dialog.glade.h:43
 msgid "Morphological Tags"
 msgstr "Morfologické značky"
@@ -351,7 +351,7 @@ msgstr "Morfologické značky"
 #: ../src/gnome2/bibletext_dialog.c:2024
 #: ../src/gnome2/dictlex.c:932
 #: ../src/gnome2/commentary_dialog.c:1564
-#: ../src/gnome2/commentary.c:902
+#: ../src/gnome2/commentary.c:904
 #: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
 msgstr "Poznámky pod čarou"
@@ -362,7 +362,7 @@ msgstr "Poznámky pod čarou"
 #: ../src/gnome2/bibletext_dialog.c:2032
 #: ../src/gnome2/dictlex.c:940
 #: ../src/gnome2/commentary_dialog.c:1572
-#: ../src/gnome2/commentary.c:910
+#: ../src/gnome2/commentary.c:912
 msgid "Greek Accents"
 msgstr "Řecké přízvuky"
 
@@ -372,7 +372,7 @@ msgstr "Řecké přízvuky"
 #: ../src/gnome2/bibletext_dialog.c:2040
 #: ../src/gnome2/dictlex.c:948
 #: ../src/gnome2/commentary_dialog.c:1580
-#: ../src/gnome2/commentary.c:918
+#: ../src/gnome2/commentary.c:920
 msgid "Lemmas"
 msgstr "Lemmata"
 
@@ -382,7 +382,7 @@ msgstr "Lemmata"
 #: ../src/gnome2/bibletext_dialog.c:2048
 #: ../src/gnome2/dictlex.c:956
 #: ../src/gnome2/commentary_dialog.c:1588
-#: ../src/gnome2/commentary.c:926
+#: ../src/gnome2/commentary.c:928
 msgid "Scripture Cross-references"
 msgstr "Odkazy do písma"
 
@@ -392,7 +392,7 @@ msgstr "Odkazy do písma"
 #: ../src/gnome2/bibletext_dialog.c:2056
 #: ../src/gnome2/dictlex.c:964
 #: ../src/gnome2/commentary_dialog.c:1596
-#: ../src/gnome2/commentary.c:934
+#: ../src/gnome2/commentary.c:936
 msgid "Hebrew Vowel Points"
 msgstr "Punktuace hebrejských samohlásek"
 
@@ -402,7 +402,7 @@ msgstr "Punktuace hebrejských samohlásek"
 #: ../src/gnome2/bibletext_dialog.c:2064
 #: ../src/gnome2/dictlex.c:972
 #: ../src/gnome2/commentary_dialog.c:1604
-#: ../src/gnome2/commentary.c:942
+#: ../src/gnome2/commentary.c:944
 msgid "Hebrew Cantillation"
 msgstr "Hebrejská vokalizace"
 
@@ -412,7 +412,7 @@ msgstr "Hebrejská vokalizace"
 #: ../src/gnome2/bibletext_dialog.c:2072
 #: ../src/gnome2/dictlex.c:980
 #: ../src/gnome2/commentary_dialog.c:1612
-#: ../src/gnome2/commentary.c:950
+#: ../src/gnome2/commentary.c:952
 msgid "Headings"
 msgstr "Nadpisy"
 
@@ -422,7 +422,7 @@ msgstr "Nadpisy"
 #: ../src/gnome2/bibletext_dialog.c:2080
 #: ../src/gnome2/dictlex.c:988
 #: ../src/gnome2/commentary_dialog.c:1620
-#: ../src/gnome2/commentary.c:958
+#: ../src/gnome2/commentary.c:960
 msgid "Variants"
 msgstr "Varianty"
 
@@ -432,7 +432,7 @@ msgstr "Varianty"
 #: ../src/gnome2/bibletext_dialog.c:2086
 #: ../src/gnome2/dictlex.c:994
 #: ../src/gnome2/commentary_dialog.c:1626
-#: ../src/gnome2/commentary.c:964
+#: ../src/gnome2/commentary.c:966
 msgid "Image Content"
 msgstr "Obsah obrazu"
 
@@ -446,8 +446,8 @@ msgstr "Obsah obrazu"
 #: ../src/gnome2/dictlex.c:1107
 #: ../src/gnome2/commentary_dialog.c:1638
 #: ../src/gnome2/commentary_dialog.c:1764
-#: ../src/gnome2/commentary.c:976
-#: ../src/gnome2/commentary.c:1122
+#: ../src/gnome2/commentary.c:978
+#: ../src/gnome2/commentary.c:1124
 msgid "Use Current Dictionary"
 msgstr "Použít aktuální slovník"
 
@@ -457,7 +457,7 @@ msgstr "Použít aktuální slovník"
 #: ../src/gnome2/bibletext_dialog.c:2109
 #: ../src/gnome2/dictlex.c:1017
 #: ../src/gnome2/commentary_dialog.c:1649
-#: ../src/gnome2/commentary.c:987
+#: ../src/gnome2/commentary.c:989
 #: ../src/gnome2/sidebar.c:752
 #: ../src/gnome2/sidebar.c:902
 msgid "About"
@@ -468,9 +468,9 @@ msgstr "O modulu"
 #: ../src/gnome2/bibletext.c:1121
 #: ../src/gnome2/gbs.c:903
 #: ../src/gnome2/dictlex.c:1023
-#: ../src/gnome2/commentary.c:994
-#: ../src/gnome2/mod_mgr.c:2150
-#: ../src/gnome2/mod_mgr.c:2325
+#: ../src/gnome2/commentary.c:996
+#: ../src/gnome2/mod_mgr.c:2156
+#: ../src/gnome2/mod_mgr.c:2331
 #: ../src/gnome2/bookmark_dialog.c:145
 #: ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:736
@@ -490,7 +490,7 @@ msgstr "Záložka"
 #: ../src/gnome2/bibletext_dialog.c:2122
 #: ../src/gnome2/dictlex.c:1036
 #: ../src/gnome2/commentary_dialog.c:1662
-#: ../src/gnome2/commentary.c:1007
+#: ../src/gnome2/commentary.c:1009
 #: ../src/gnome2/bookmarks_menu.c:456
 #: ../src/gnome2/treekey-editor.c:328
 msgid "Edit"
@@ -505,7 +505,7 @@ msgstr "Upravit"
 #: ../src/gnome2/bibletext_dialog.c:2128
 #: ../src/gnome2/dictlex.c:1042
 #: ../src/gnome2/commentary_dialog.c:1668
-#: ../src/gnome2/commentary.c:1013
+#: ../src/gnome2/commentary.c:1015
 msgid "_Module Options"
 msgstr "_Volby modulu"
 
@@ -518,7 +518,7 @@ msgstr "_Volby modulu"
 #: ../src/gnome2/bibletext_dialog.c:2134
 #: ../src/gnome2/dictlex.c:1048
 #: ../src/gnome2/commentary_dialog.c:1674
-#: ../src/gnome2/commentary.c:1019
+#: ../src/gnome2/commentary.c:1021
 msgid "Lookup Selection"
 msgstr "Výběr vyhledávání"
 
@@ -531,7 +531,7 @@ msgstr "Výběr vyhledávání"
 #: ../src/gnome2/bibletext_dialog.c:2140
 #: ../src/gnome2/dictlex.c:1054
 #: ../src/gnome2/commentary_dialog.c:1680
-#: ../src/gnome2/commentary.c:1037
+#: ../src/gnome2/commentary.c:1039
 msgid "Unlock This Module"
 msgstr "Odemknout tento modul"
 
@@ -542,13 +542,13 @@ msgstr "Odemknout tento modul"
 #: ../src/gnome2/gbs.c:940
 #: ../src/gnome2/bibletext_dialog.c:2146
 #: ../src/gnome2/commentary_dialog.c:1698
-#: ../src/gnome2/commentary.c:1055
+#: ../src/gnome2/commentary.c:1057
 msgid "Read Selection Aloud"
 msgstr "Číst výběr na_hlas"
 
 #: ../src/gnome2/about_sword.c:94
-msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed module set may be shared between any frontend using the framework."
-msgstr "SWORD Project je snaha o vytvoření programového vybavení pro zkoumání a studium Božího slova. SWORD Bible Framework umožňuje lehké ovládání biblických textů, komentářů, slovníků a dalších knih. Několik aplikací využívá toto programové vybavení. Nainstalované moduly lze sdílet mezi více aplikacemi, využívající SWORD Bible Framework."
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework."
+msgstr "The SWORD Project je snaha o vytvoření programového vybavení pro zkoumání a studium Božího slova. The SWORD Project Framework umožňuje lehké ovládání biblických textů, komentářů, slovníků a dalších knih. Několik aplikací využívá toto programové vybavení. Nainstalované knihy lze sdílet mezi více aplikacemi, využívající toto programové vybavení."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -559,8 +559,8 @@ msgid "Sword Version"
 msgstr "Verze Sword"
 
 #: ../src/gnome2/about_sword.c:161
-msgid "Modules can be downloaded from the SWORD Project"
-msgstr "Moduly lze stáhnout ze stránek aplikace SWORD Project"
+msgid "Books can be downloaded from the SWORD Project"
+msgstr "Knihy lze stáhnout ze stránek aplikace SWORD Project"
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -643,7 +643,7 @@ msgstr "Zadejte slovo nebo výraz"
 #: ../src/gnome2/search_sidebar.c:288
 #: ../ui/search-dialog.glade.h:40
 msgid "Match case"
-msgstr "Rozlišovat velikost"
+msgstr "Velikost písmen"
 
 #: ../src/gnome2/find_dialog.c:238
 msgid "Search backwards"
@@ -675,13 +675,13 @@ msgstr "Zůstat při synchronizaci"
 
 #. 7
 #: ../src/gnome2/commentary_dialog.c:1686
-#: ../src/gnome2/commentary.c:1025
+#: ../src/gnome2/commentary.c:1027
 msgid "Display Book Heading"
 msgstr "Zobraz nadpis knihy"
 
 #. 8
 #: ../src/gnome2/commentary_dialog.c:1692
-#: ../src/gnome2/commentary.c:1031
+#: ../src/gnome2/commentary.c:1033
 msgid "Display Chapter Heading"
 msgstr "Zobraz nadpis kapitoly"
 
@@ -790,7 +790,17 @@ msgstr "Nové jméno"
 msgid "Name: "
 msgstr "Jméno: "
 
-#: ../src/gnome2/commentary.c:539
+#: ../src/gnome2/commentary.c:491
+#: ../src/main/prayerlists.cc:251
+msgid "Module names must contain [A-Za-z0-9_] only."
+msgstr "Jméno smí obsahovat jen znaky [A-Za-z0-9_]."
+
+#: ../src/gnome2/commentary.c:498
+#: ../src/main/prayerlists.cc:258
+msgid "GnomeSword already knows a module by that name."
+msgstr "Modul s tímto jménem už exituje."
+
+#: ../src/gnome2/commentary.c:541
 #, c-format
 msgid ""
 "Failed to create new configuration:\n"
@@ -799,7 +809,7 @@ msgstr ""
 "Nepodařilo se vytvořit novou konfiguraci:\n"
 "%s"
 
-#: ../src/gnome2/commentary.c:548
+#: ../src/gnome2/commentary.c:550
 msgid ""
 "Configuration build error:\n"
 "\n"
@@ -807,11 +817,11 @@ msgstr ""
 "Chyba během vytváření konfigurace:\n"
 "\n"
 
-#: ../src/gnome2/commentary.c:1043
+#: ../src/gnome2/commentary.c:1045
 msgid "Rename Pers.Comm."
 msgstr "Přejmenovat Osobní komentáře"
 
-#: ../src/gnome2/commentary.c:1049
+#: ../src/gnome2/commentary.c:1051
 msgid "Dump Pers.Comm."
 msgstr ""
 
@@ -839,19 +849,19 @@ msgstr "Změna verše"
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "Zadej odkaz na verš ve formátu  Kniha 1:1  a stiskni Enter"
 
-#: ../src/gnome2/mod_mgr.c:253
+#: ../src/gnome2/mod_mgr.c:254
 msgid "Install these modules:"
 msgstr "Přidat následujících moduly:"
 
-#: ../src/gnome2/mod_mgr.c:255
+#: ../src/gnome2/mod_mgr.c:256
 msgid "Remove these modules:"
 msgstr "Odstranit následující moduly:"
 
-#: ../src/gnome2/mod_mgr.c:257
+#: ../src/gnome2/mod_mgr.c:258
 msgid "Archive these modules:"
 msgstr "Vytvořit archiv z těchto modulů:"
 
-#: ../src/gnome2/mod_mgr.c:259
+#: ../src/gnome2/mod_mgr.c:260
 msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module):"
@@ -859,51 +869,51 @@ msgstr ""
 "Vytvořit rejstřík pro rychlé vyhledávání\n"
 "u těchto modulů (může trvat minuty/modul):"
 
-#: ../src/gnome2/mod_mgr.c:261
+#: ../src/gnome2/mod_mgr.c:262
 msgid "Delete fast-search index for these modules:"
 msgstr "Smazat rejstřík pro rychlé vyhledávání u těchto modulů:"
 
-#: ../src/gnome2/mod_mgr.c:291
+#: ../src/gnome2/mod_mgr.c:292
 msgid "Preparing to install"
 msgstr "Příprava pro přidání"
 
-#: ../src/gnome2/mod_mgr.c:293
+#: ../src/gnome2/mod_mgr.c:294
 msgid "Preparing to remove"
 msgstr "Příprava pro odstranění"
 
-#: ../src/gnome2/mod_mgr.c:295
+#: ../src/gnome2/mod_mgr.c:296
 msgid "Preparing to archive"
 msgstr "Příprava pro vytvoření archivu"
 
-#: ../src/gnome2/mod_mgr.c:297
+#: ../src/gnome2/mod_mgr.c:298
 msgid "Preparing to index"
 msgstr "Příprava pro vytvoření rejstříku"
 
-#: ../src/gnome2/mod_mgr.c:299
+#: ../src/gnome2/mod_mgr.c:300
 msgid "Preparing to delete index"
 msgstr "Příprava pro odstranění rejstříku"
 
-#: ../src/gnome2/mod_mgr.c:324
+#: ../src/gnome2/mod_mgr.c:325
 msgid "Installing"
 msgstr "Přidávání"
 
-#: ../src/gnome2/mod_mgr.c:326
+#: ../src/gnome2/mod_mgr.c:327
 msgid "Removing"
 msgstr "Odstranění"
 
-#: ../src/gnome2/mod_mgr.c:328
+#: ../src/gnome2/mod_mgr.c:329
 msgid "Archiving"
 msgstr "Archivování"
 
-#: ../src/gnome2/mod_mgr.c:330
+#: ../src/gnome2/mod_mgr.c:331
 msgid "Indexing"
 msgstr "Tvorba rejstříku"
 
-#: ../src/gnome2/mod_mgr.c:332
+#: ../src/gnome2/mod_mgr.c:333
 msgid "Deleting index"
 msgstr "Mazání rejstříku"
 
-#: ../src/gnome2/mod_mgr.c:352
+#: ../src/gnome2/mod_mgr.c:353
 #, c-format
 msgid ""
 "`mkdir %s' failed:\n"
@@ -912,11 +922,11 @@ msgstr ""
 "`mkdir %s' se nezdařilo:\n"
 "%s."
 
-#: ../src/gnome2/mod_mgr.c:378
+#: ../src/gnome2/mod_mgr.c:379
 msgid "GnomeSword could not execute archiver"
 msgstr "GnomeSword nemůže spustit archivátor"
 
-#: ../src/gnome2/mod_mgr.c:383
+#: ../src/gnome2/mod_mgr.c:384
 msgid ""
 " archival result:\n"
 "\n"
@@ -924,7 +934,7 @@ msgstr ""
 " výsledek vytváření archivu:\n"
 "\n"
 
-#: ../src/gnome2/mod_mgr.c:387
+#: ../src/gnome2/mod_mgr.c:388
 msgid ""
 "\n"
 "Archive in "
@@ -932,46 +942,46 @@ msgstr ""
 "\n"
 "Archivovat do "
 
-#: ../src/gnome2/mod_mgr.c:455
-#: ../src/gnome2/mod_mgr.c:2545
+#: ../src/gnome2/mod_mgr.c:456
+#: ../src/gnome2/mod_mgr.c:2554
 #: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr "Přidat"
 
-#: ../src/gnome2/mod_mgr.c:457
+#: ../src/gnome2/mod_mgr.c:458
 #: ../src/gnome2/treekey-editor.c:322
 msgid "Remove"
 msgstr "Odstranit"
 
-#: ../src/gnome2/mod_mgr.c:459
+#: ../src/gnome2/mod_mgr.c:460
 #: ../ui/module-manager.glade.h:9
 msgid "Archive"
 msgstr "Zabalit"
 
-#: ../src/gnome2/mod_mgr.c:461
+#: ../src/gnome2/mod_mgr.c:462
 #: ../ui/module-manager.glade.h:15
 msgid "Index"
 msgstr "Rejstřík"
 
-#: ../src/gnome2/mod_mgr.c:463
+#: ../src/gnome2/mod_mgr.c:464
 msgid "Deletion"
 msgstr "Smazání"
 
-#: ../src/gnome2/mod_mgr.c:465
+#: ../src/gnome2/mod_mgr.c:466
 #, c-format
 msgid "%s failed"
 msgstr "%s se nezdařilo"
 
-#: ../src/gnome2/mod_mgr.c:467
-#: ../src/gnome2/mod_mgr.c:1108
+#: ../src/gnome2/mod_mgr.c:468
+#: ../src/gnome2/mod_mgr.c:1120
 msgid "Finished"
 msgstr "Dokončeno"
 
-#: ../src/gnome2/mod_mgr.c:626
-#: ../src/gnome2/mod_mgr.c:628
-#: ../src/gnome2/mod_mgr.c:727
-#: ../src/gnome2/mod_mgr.c:764
-#: ../src/gnome2/mod_mgr.c:766
+#: ../src/gnome2/mod_mgr.c:630
+#: ../src/gnome2/mod_mgr.c:632
+#: ../src/gnome2/mod_mgr.c:731
+#: ../src/gnome2/mod_mgr.c:768
+#: ../src/gnome2/mod_mgr.c:770
 #: ../src/gnome2/utilities.c:322
 #: ../src/gnome2/utilities.c:389
 #: ../src/gnome2/utilities.c:391
@@ -986,7 +996,7 @@ msgstr "Dokončeno"
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../src/gnome2/mod_mgr.c:891
+#: ../src/gnome2/mod_mgr.c:897
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -994,14 +1004,14 @@ msgstr ""
 "Tříděné podle\n"
 "typu modulu"
 
-#: ../src/gnome2/mod_mgr.c:896
+#: ../src/gnome2/mod_mgr.c:902
 #: ../src/gnome2/utilities.c:514
 #: ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:969
 msgid "Biblical Texts"
 msgstr "Biblické texty"
 
-#: ../src/gnome2/mod_mgr.c:900
+#: ../src/gnome2/mod_mgr.c:906
 #: ../src/gnome2/utilities.c:518
 #: ../src/main/sidebar.cc:604
 #: ../src/main/sidebar.cc:992
@@ -1010,21 +1020,21 @@ msgstr "Biblické texty"
 msgid "Commentaries"
 msgstr "Komentáře/Výklady"
 
-#: ../src/gnome2/mod_mgr.c:904
+#: ../src/gnome2/mod_mgr.c:910
 #: ../src/gnome2/utilities.c:522
 #: ../src/main/sidebar.cc:1001
 #: ../src/main/sidebar.cc:1003
 msgid "Dictionaries"
 msgstr "Slovníky"
 
-#: ../src/gnome2/mod_mgr.c:908
+#: ../src/gnome2/mod_mgr.c:914
 #: ../src/gnome2/utilities.c:526
 #: ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
 msgstr "Čtení na každý den"
 
-#: ../src/gnome2/mod_mgr.c:912
+#: ../src/gnome2/mod_mgr.c:918
 #: ../src/gnome2/utilities.c:530
 #: ../src/main/sidebar.cc:617
 #: ../src/main/sidebar.cc:1019
@@ -1032,21 +1042,21 @@ msgstr "Čtení na každý den"
 msgid "General Books"
 msgstr "Knihy obecně"
 
-#: ../src/gnome2/mod_mgr.c:916
+#: ../src/gnome2/mod_mgr.c:922
 #: ../src/gnome2/utilities.c:534
 #: ../src/main/sidebar.cc:1028
 #: ../src/main/sidebar.cc:1030
 msgid "Maps"
 msgstr "Mapy"
 
-#: ../src/gnome2/mod_mgr.c:920
+#: ../src/gnome2/mod_mgr.c:926
 #: ../src/gnome2/utilities.c:538
 #: ../src/main/sidebar.cc:1037
 #: ../src/main/sidebar.cc:1039
 msgid "Images"
 msgstr "Obrazy"
 
-#: ../src/gnome2/mod_mgr.c:928
+#: ../src/gnome2/mod_mgr.c:934
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1054,15 +1064,15 @@ msgstr ""
 "Tříděné podle\n"
 "dostupnosti"
 
-#: ../src/gnome2/mod_mgr.c:933
+#: ../src/gnome2/mod_mgr.c:939
 msgid "Updates"
 msgstr "Aktualizace"
 
-#: ../src/gnome2/mod_mgr.c:937
+#: ../src/gnome2/mod_mgr.c:943
 msgid "Uninstalled"
 msgstr "Odinstalováno"
 
-#: ../src/gnome2/mod_mgr.c:941
+#: ../src/gnome2/mod_mgr.c:947
 #: ../src/gnome2/sidebar.c:421
 #: ../src/gnome2/utilities.c:543
 #: ../src/main/prayerlists.cc:235
@@ -1073,112 +1083,112 @@ msgstr "Odinstalováno"
 msgid "Prayer List/Journal"
 msgstr "Modlitební seznam/Deník"
 
-#: ../src/gnome2/mod_mgr.c:1092
+#: ../src/gnome2/mod_mgr.c:1104
 msgid "Refreshing remote"
 msgstr "Obnovit vzdálený zdroj"
 
-#: ../src/gnome2/mod_mgr.c:1103
+#: ../src/gnome2/mod_mgr.c:1115
 msgid "Remote not found"
 msgstr "Vzdálený zdroj nenalezen"
 
-#: ../src/gnome2/mod_mgr.c:1224
+#: ../src/gnome2/mod_mgr.c:1236
 msgid "Module Name"
 msgstr "Jméno modulu"
 
-#: ../src/gnome2/mod_mgr.c:1306
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Installed"
 msgstr "Instalovaný"
 
-#: ../src/gnome2/mod_mgr.c:1331
+#: ../src/gnome2/mod_mgr.c:1342
 msgid "Available"
 msgstr "Dostupný"
 
-#: ../src/gnome2/mod_mgr.c:1340
+#: ../src/gnome2/mod_mgr.c:1351
 msgid "Size"
 msgstr "Velikost"
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1360
 msgid "Description"
 msgstr "Popis"
 
-#: ../src/gnome2/mod_mgr.c:1382
-#: ../src/gnome2/mod_mgr.c:1465
+#: ../src/gnome2/mod_mgr.c:1393
+#: ../src/gnome2/mod_mgr.c:1471
 msgid "Configure"
 msgstr "Nastavení"
 
-#: ../src/gnome2/mod_mgr.c:1416
+#: ../src/gnome2/mod_mgr.c:1426
 msgid "Type"
 msgstr "Druh"
 
-#: ../src/gnome2/mod_mgr.c:1424
+#: ../src/gnome2/mod_mgr.c:1433
 msgid "Caption"
 msgstr "Titulek"
 
-#: ../src/gnome2/mod_mgr.c:1433
+#: ../src/gnome2/mod_mgr.c:1441
 msgid "Source"
 msgstr "Zdroj"
 
-#: ../src/gnome2/mod_mgr.c:1442
+#: ../src/gnome2/mod_mgr.c:1449
 msgid "Directory"
 msgstr "Adresář"
 
-#: ../src/gnome2/mod_mgr.c:1463
+#: ../src/gnome2/mod_mgr.c:1469
 msgid "Sources"
 msgstr "Zdroje"
 
-#: ../src/gnome2/mod_mgr.c:1469
+#: ../src/gnome2/mod_mgr.c:1475
 #: ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1769
+#: ../src/gnome2/preferences_dialog.c:1770
 msgid "Modules"
 msgstr "Moduly"
 
-#: ../src/gnome2/mod_mgr.c:1471
+#: ../src/gnome2/mod_mgr.c:1477
 msgid "Install/Update"
 msgstr "Přidat/Aktualizovat"
 
-#: ../src/gnome2/mod_mgr.c:1473
+#: ../src/gnome2/mod_mgr.c:1479
 msgid "Maintenance"
 msgstr "Udržování"
 
-#: ../src/gnome2/mod_mgr.c:1683
+#: ../src/gnome2/mod_mgr.c:1689
 msgid "Please Refresh"
 msgstr "Prosím obnovit"
 
-#: ../src/gnome2/mod_mgr.c:1684
+#: ../src/gnome2/mod_mgr.c:1690
 msgid "Your module list is not up to date!"
 msgstr "Váš seznam modulů není aktuální!"
 
-#: ../src/gnome2/mod_mgr.c:1914
+#: ../src/gnome2/mod_mgr.c:1920
 msgid "Select Local Source"
 msgstr "Vybrat lokální zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2153
-#: ../src/gnome2/mod_mgr.c:2328
+#: ../src/gnome2/mod_mgr.c:2159
+#: ../src/gnome2/mod_mgr.c:2334
 msgid "Remove the selected source"
 msgstr "Odstranit vybraný zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2207
+#: ../src/gnome2/mod_mgr.c:2213
 msgid "Enter a remote source"
 msgstr "Zadat vzdálený zdroj"
 
-#: ../src/gnome2/mod_mgr.c:2211
+#: ../src/gnome2/mod_mgr.c:2217
 msgid "Caption:"
 msgstr "Titulek:"
 
-#: ../src/gnome2/mod_mgr.c:2212
+#: ../src/gnome2/mod_mgr.c:2218
 msgid "Type:"
 msgstr "Druh:"
 
-#: ../src/gnome2/mod_mgr.c:2213
+#: ../src/gnome2/mod_mgr.c:2219
 msgid "Host:"
 msgstr "URL:"
 
-#: ../src/gnome2/mod_mgr.c:2214
+#: ../src/gnome2/mod_mgr.c:2220
 msgid "Directory:"
 msgstr "Adresář:"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2238
+#: ../src/gnome2/mod_mgr.c:2244
 msgid "A source by that name already exists."
 msgstr "Zdroj s tímto jménem už existuje."
 
@@ -1198,24 +1208,24 @@ msgstr "Náhled tisku"
 msgid "Failed to print the document"
 msgstr "Nezdařil se tisk dokumentu"
 
-#: ../src/gnome2/main_window.c:691
+#: ../src/gnome2/main_window.c:730
 #: ../src/main/sword.cc:631
 msgid "Starting"
 msgstr "Startuji"
 
-#: ../src/gnome2/main_window.c:692
+#: ../src/gnome2/main_window.c:731
 msgid "Building GnomeSword interface"
 msgstr "Vytvářím rozhraní GnomeSword"
 
-#: ../src/gnome2/main_window.c:698
+#: ../src/gnome2/main_window.c:737
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - software pro studium Bible"
 
-#: ../src/gnome2/main_window.c:752
+#: ../src/gnome2/main_window.c:791
 msgid "Open a new tab"
 msgstr "Otevřít nový panel"
 
-#: ../src/gnome2/main_window.c:840
+#: ../src/gnome2/main_window.c:879
 #: ../src/gnome2/sidebar.c:406
 #: ../src/gnome2/sidebar.c:412
 #: ../src/main/sidebar.cc:598
@@ -1225,11 +1235,11 @@ msgstr "Otevřít nový panel"
 msgid "Standard View"
 msgstr "Standardní pohled"
 
-#: ../src/gnome2/main_window.c:916
+#: ../src/gnome2/main_window.c:955
 msgid "Commentary View"
 msgstr "Komentář/Výklad"
 
-#: ../src/gnome2/main_window.c:933
+#: ../src/gnome2/main_window.c:972
 msgid "Book View"
 msgstr "Kniha"
 
@@ -1364,19 +1374,19 @@ msgstr " Modul"
 msgid "found in "
 msgstr "nalezeno v"
 
-#: ../src/gnome2/search_dialog.c:705
+#: ../src/gnome2/search_dialog.c:704
 msgid "Clear List?"
 msgstr "Vyprázdnit seznam?"
 
-#: ../src/gnome2/search_dialog.c:707
+#: ../src/gnome2/search_dialog.c:706
 msgid "Are you sure you want to clear the module list?"
 msgstr "Jste si jist, že chcete vyprázdnit seznam modulů?"
 
-#: ../src/gnome2/search_dialog.c:919
+#: ../src/gnome2/search_dialog.c:918
 msgid "Delete list?"
 msgstr "Odstranit seznam?"
 
-#: ../src/gnome2/search_dialog.c:920
+#: ../src/gnome2/search_dialog.c:919
 msgid "Are you sure you want to delete:"
 msgstr "Jste si jist, že chcete odstranit:"
 
@@ -1469,40 +1479,57 @@ msgstr "Jméno složky"
 msgid "Folder: "
 msgstr "Složka: "
 
-#: ../src/gnome2/preferences_dialog.c:1662
+#: ../src/gnome2/preferences_dialog.c:1206
+#: ../src/gnome2/preferences_dialog.c:1244
+#: ../src/gnome2/preferences_dialog.c:1282
+#: ../src/gnome2/preferences_dialog.c:1318
+#: ../src/gnome2/preferences_dialog.c:1353
+#: ../src/gnome2/preferences_dialog.c:1387
+#: ../src/gnome2/preferences_dialog.c:1420
+#: ../src/gnome2/preferences_dialog.c:1454
+#: ../src/gnome2/preferences_dialog.c:1487
+#: ../src/gnome2/preferences_dialog.c:1522
+#: ../src/gnome2/preferences_dialog.c:1558
+#: ../src/gnome2/preferences_dialog.c:1594
+#: ../src/gnome2/preferences_dialog.c:1630
+#: ../src/gnome2/preferences_dialog.c:2023
+msgid "-- Select --"
+msgstr ""
+
+#: ../src/gnome2/preferences_dialog.c:1663
 #: ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr "Nastavení"
 
-#: ../src/gnome2/preferences_dialog.c:1745
+#: ../src/gnome2/preferences_dialog.c:1746
 msgid "Fonts"
 msgstr "Písma"
 
-#: ../src/gnome2/preferences_dialog.c:1748
+#: ../src/gnome2/preferences_dialog.c:1749
 msgid "Color"
 msgstr "Barva"
 
-#: ../src/gnome2/preferences_dialog.c:1751
-#: ../src/gnome2/preferences_dialog.c:1765
-#: ../src/gnome2/preferences_dialog.c:1778
+#: ../src/gnome2/preferences_dialog.c:1752
+#: ../src/gnome2/preferences_dialog.c:1766
+#: ../src/gnome2/preferences_dialog.c:1779
 #: ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr "Ostatní"
 
-#: ../src/gnome2/preferences_dialog.c:1755
+#: ../src/gnome2/preferences_dialog.c:1756
 msgid "General"
 msgstr "Obecné"
 
-#: ../src/gnome2/preferences_dialog.c:1758
+#: ../src/gnome2/preferences_dialog.c:1759
 #: ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr "Panely a pole"
 
-#: ../src/gnome2/preferences_dialog.c:1772
+#: ../src/gnome2/preferences_dialog.c:1773
 msgid "Main"
 msgstr "Hlavní"
 
-#: ../src/gnome2/preferences_dialog.c:1775
+#: ../src/gnome2/preferences_dialog.c:1776
 #: ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr "Souběžně"
@@ -1836,7 +1863,7 @@ msgstr "Zobrazit/Skrýt okno Biblické texty"
 
 #. 3
 #: ../src/gnome2/main_menu.c:811
-msgid "P_review"
+msgid "_Preview"
 msgstr "_Náhled"
 
 #: ../src/gnome2/main_menu.c:812
@@ -1869,13 +1896,13 @@ msgstr "_Styl verše"
 
 #. 8
 #: ../src/gnome2/main_menu.c:836
-msgid "_Pin Tabs"
+msgid "L_ink Tabs"
 msgstr "Stejný _verš v panelech"
 
 #. 9
 #: ../src/gnome2/main_menu.c:842
-msgid "R_ead Aloud"
-msgstr "Číst na_hlas"
+msgid "_Read Aloud"
+msgstr "Čtení na_hlas"
 
 #. 10
 #: ../src/gnome2/main_menu.c:848
@@ -2192,14 +2219,6 @@ msgstr "Jméno pro nový modlitební seznam nebo deník"
 msgid "MyPrayerList"
 msgstr "MujModlitebniSeznam"
 
-#: ../src/main/prayerlists.cc:251
-msgid "Module names must be letters+digits only."
-msgstr "Jméno modulu musí obsahovat jen písmena+číslice."
-
-#: ../src/main/prayerlists.cc:258
-msgid "GnomeSword already knows a module by that name."
-msgstr "Modul s tímto jménem už exituje."
-
 #: ../src/main/prayerlists.cc:267
 msgid "GnomeSword finds that prayer list already."
 msgstr "GnomeSword už takový modlitební seznam našel."
@@ -2314,15 +2333,15 @@ msgid "1 Cor 15:1"
 msgstr "1. Korintským 15:1"
 
 #: ../src/main/xml.c:419
-#: ../src/main/xml.c:1085
+#: ../src/main/xml.c:1083
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokument nebyl správně rozparsován. \n"
 
 #: ../src/main/xml.c:425
-#: ../src/main/xml.c:688
-#: ../src/main/xml.c:966
-#: ../src/main/xml.c:1145
+#: ../src/main/xml.c:686
+#: ../src/main/xml.c:964
+#: ../src/main/xml.c:1143
 #, c-format
 msgid "empty document \n"
 msgstr "prázdný dokument \n"
@@ -2356,8 +2375,8 @@ msgstr "Příklad seznamu modulů"
 msgid "Select the modules you want"
 msgstr "Vyberte modul, který chcete"
 
-#: ../src/main/xml.c:694
-#: ../src/main/xml.c:972
+#: ../src/main/xml.c:692
+#: ../src/main/xml.c:970
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr "chybný typ, root node != %s\n"
@@ -2653,7 +2672,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:710
+#: ../src/main/settings.c:725
 msgid ""
 "There is currently no program set as your\n"
 "handler for \"sword://\" and similar URLs.\n"
@@ -2665,7 +2684,7 @@ msgstr ""
 "Přejete si, aby se GnomeSword používal\n"
 "pro obsluhu těchto URL?"
 
-#: ../src/main/settings.c:712
+#: ../src/main/settings.c:727
 msgid ""
 "GnomeSword has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -2681,7 +2700,7 @@ msgstr ""
 "pro prohlížení klíčů v /desktop/gnome/url-handlers,\n"
 "pokud je potřeba klíče změnit."
 
-#: ../src/main/settings.c:757
+#: ../src/main/settings.c:772
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
