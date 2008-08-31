@@ -683,7 +683,7 @@ void load_settings_structure(void)
 		buf = xml_get_value("misc", "prayerlist");
 		settings.prayerlist =  atoi(buf);
 	} else {
-		xml_add_new_item_to_section("misc","prayerlist","0");
+		xml_add_new_item_to_section("misc","prayerlist","1");
 		settings.prayerlist = 0;
 	}
 
