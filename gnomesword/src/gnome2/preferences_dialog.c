@@ -103,8 +103,6 @@ typedef enum {
 	DEVOTION_MODULE,
 	GREEK_LEX__MODULE,
 	HEBREW_LEX__MODULE,
-	GREEK_LEX_VIEWER_MODULE,
-	HEBREW_LEX_VIEWER_MODULE,
 	COMBO_ENTRY_SP_DIR,
 	BASE_FONT_SIZE,
 	VERSE_NUMBER_SIZE
@@ -126,8 +124,6 @@ struct _preferences_combo {
 	GtkWidget *devotion_module;
 	GtkWidget *greek_lex__module;
 	GtkWidget *hebrew_lex__module;
-	GtkWidget *greek_lex_viewer_module;
-	GtkWidget *hebrew_lex_viewer_module;
 	GtkWidget *combo_entry_sp_dir;
 	GtkWidget *base_font_size;
 	GtkWidget *verse_number_size;

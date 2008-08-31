@@ -374,13 +374,28 @@ void load_settings_structure(void)
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 	settings.book_mod = xml_get_value("modules", "book");
-	
-	
+
+	/* we will assume reasonable module names, if not otherwise set */
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
-	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
-	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
+	if (!settings.lex_greek) {
+		settings.lex_greek = g_strdup("StrongsGreek");
+		xml_set_value("GnomeSword", "lexicons", "greek",
+			      settings.lex_greek);
+	}
+	if (!settings.lex_hebrew) {
+		settings.lex_hebrew = g_strdup("StrongsHebrew");
+		xml_set_value("GnomeSword", "lexicons", "hebrew",
+			      settings.lex_hebrew);
+	}
+
 	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
+	if (!settings.DefaultDict) {
+		settings.DefaultDict = g_strdup("WebstersDict");
+		xml_set_value("GnomeSword", "lexicons", "defaultdictionary",
+			      settings.DefaultDict);
+	}
+
 //	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
 //	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
 	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
