@@ -41,7 +41,7 @@ extern "C" {
 typedef struct _settings SETTINGS;
 struct _settings {
 	char	
-		*gs_version, 	/* GnomeSword version */
+		*gs_version,	 	/* GnomeSword version */
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
@@ -51,13 +51,11 @@ struct _settings {
 	        *parallel4Module,	/*   */
 	        *parallel5Module,	/*   */
 	        *personalcommentsmod,	/* module to open at program startup  */
-		sb_search_mod[80], 	/* module to use for sidebar search */
-	        *devotionalmod, 	/* module to use for devotional */
-	        *DefaultDict,		/* module to use for devotional */
-		*lex_greek,		/* module to use for greek lexicon - strongs or thayers*/
-		*lex_hebrew,		/* module to use for hebrew lexicon - strongs or BDB*/	        
-		*lex_greek_viewer,	/* module to use for greek lexicon - strongs or thayers - in viewer */
-		*lex_hebrew_viewer,	/* module to use for hebrew lexicon - strongs or BDB - in viewer */
+		sb_search_mod[80], 	/* module for sidebar search */
+	        *devotionalmod, 	/* module for devotional */
+	        *DefaultDict,		/* module for default dict */
+		*lex_greek,		/* module for greek lexicon - strongs or thayers */
+		*lex_hebrew,		/* module for hebrew lexicon - strongs or BDB */	        
 	        *currentverse,		/* where we are right now */
 		comm_key[80],		/*  */
 	        *cvparallel,		/* current verse for detached parallel */
@@ -76,10 +74,10 @@ struct _settings {
 	        *currentverse_color,	/* color for current verse */
 	        *link_color,		/* color for strongs, morph tags */	
 		*bible_verse_num_color,	/* verse number color */
-		*found_color,		/* color to use for search word in results display */
+		*found_color,		/* color for search word in results display */
 		*font_color,		/*  */
-		*highlight_fg,		/* special fg color when highlighting */
-		*highlight_bg,		/* special fg color when highlighting */
+		*highlight_fg,		/* special fg color for highlight */
+		*highlight_bg,		/* special bg color for highlight */
 		*verse_num_font_size_str,
 		*base_font_size_str;
 		
