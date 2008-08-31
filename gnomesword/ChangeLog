@@ -1,8 +1,8 @@
 2008-08-31  karl <charcoal@users.sf.net>
 
-	* fix Strong's modules not working due to non-save in settings.
+	* fix #2079930 Strongs Hebrew/Greek numbers don't lookup
 	* enable prayer list support by default.
-	
+
 2008-08-29  karl <charcoal@users.sf.net>
 
 	* fix #2069455 module deletion not reflected
