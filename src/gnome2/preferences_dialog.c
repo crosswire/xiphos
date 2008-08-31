@@ -1203,7 +1203,7 @@ on_combobox2_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 
 	url = g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
@@ -1241,7 +1241,7 @@ on_combobox4_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 
 	url = g_strdup_printf("sword://%s/%s",buf,settings.dictkey);
@@ -1279,7 +1279,7 @@ on_combobox5_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	xml_set_value("GnomeSword", "lexicons", "defaultdictionary", buf);
 	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
@@ -1315,7 +1315,7 @@ on_combobox6_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	xml_set_value("GnomeSword", "modules", "percomm", buf);
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");
@@ -1350,7 +1350,7 @@ on_combobox7_changed(GtkComboBox * combobox,
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	main_change_parallel_module(PARALLEL1, buf);
 	g_free(buf);
@@ -1384,7 +1384,7 @@ on_combobox8_changed(GtkComboBox * combobox,
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	main_change_parallel_module(PARALLEL2, buf);
 	g_free(buf);
@@ -1417,7 +1417,7 @@ on_combobox9_changed(GtkComboBox * combobox,
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	main_change_parallel_module(PARALLEL3, buf);
 	g_free(buf);
@@ -1451,7 +1451,7 @@ on_combobox10_changed(GtkComboBox * combobox,
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	main_change_parallel_module(PARALLEL4, buf);
 	g_free(buf);
@@ -1484,7 +1484,7 @@ on_combobox11_changed(GtkComboBox * combobox,
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	main_change_parallel_module(PARALLEL5, buf);
 	g_free(buf);
@@ -1519,7 +1519,7 @@ on_combobox12_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	xml_set_value("GnomeSword", "modules", "devotional", buf);
 	settings.devotionalmod = xml_get_value("modules", "devotional");
@@ -1555,7 +1555,7 @@ on_combobox13_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	xml_set_value("GnomeSword", "lexicons", "hebrew", buf);
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
@@ -1591,7 +1591,7 @@ on_combobox14_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	xml_set_value("GnomeSword", "lexicons", "greek", buf);
 	settings.lex_greek = xml_get_value("lexicons", "greek");
@@ -1627,7 +1627,7 @@ on_combobox15_changed(GtkComboBox * combobox,
 
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &buf, -1);
-	if (!buf)
+	if (!buf || !strcmp(buf, _("-- Select --")))	/* see fill_combobox */
 		return;
 	url = g_strdup_printf("sword://%s/%s",buf,"1");
 	main_url_handler(url);
@@ -1658,7 +1658,7 @@ add_columns(GtkWidget * treeview)
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 
-	renderer = gtk_cell_renderer_text_new();	//gui_preferences_cell_renderer_captioned_image_new();
+	renderer = gtk_cell_renderer_text_new();
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Preferences"),
 						     renderer,
@@ -2016,6 +2016,13 @@ fill_combobox(GList * glist,
 
 	gtk_list_store_clear(GTK_LIST_STORE(store));
 
+	gtk_list_store_append(GTK_LIST_STORE(store), &iter);
+	gtk_list_store_set(GTK_LIST_STORE(store),
+			   &iter,
+			   0,
+			   _("-- Select --"),
+			   -1);
+
 	while (glist) {
 		if ((eval == NULL) || (*eval)(glist->data, feature)) {
 			/* "anything goes" or "acceptable match" */
@@ -2027,7 +2034,7 @@ fill_combobox(GList * glist,
 					   -1);
 			if (current_module && !strcmp((gchar*)glist->data,
 						      current_module))
-				index = i;
+				index = i+1;
 			++i;
 		}
 		glist = g_list_next(glist);
@@ -2068,70 +2075,56 @@ setup_module_comboboxes(void)
 	/*
 	 * Main Window Modules page
 	 */
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.text_module),
-			      settings.MainWindowModule,
-			      NULL, NULL);
-	if (glist = get_list(COMM_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.commentary_module),
-			      settings.CommWindowModule,
-			      NULL, NULL);
-	if (glist = get_list(DICT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.dictionary_module),
-			      settings.DictWindowModule,
-			      dict_no_image_map_dd, NULL);
-	if (glist = get_list(DICT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.default_dictionary_module),
-			      settings.DefaultDict,
-			      dict_no_image_map_dd, NULL);
-	if (glist = get_list(PERCOMM_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.percomm_module),
-			      settings.personalcommentsmod,
-			      NULL, NULL);
-	if (glist = get_list(GBS_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.book_module),
-			      settings.book_mod,
-			      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.text_module),
+		      settings.MainWindowModule,
+		      NULL, NULL);
+	fill_combobox(get_list(COMM_LIST), GTK_COMBO_BOX(combo.commentary_module),
+		      settings.CommWindowModule,
+		      NULL, NULL);
+	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.dictionary_module),
+		      settings.DictWindowModule,
+		      dict_no_image_map_dd, NULL);
+	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.default_dictionary_module),
+		      settings.DefaultDict,
+		      dict_no_image_map_dd, NULL);
+	fill_combobox(get_list(PERCOMM_LIST), GTK_COMBO_BOX(combo.percomm_module),
+		      settings.personalcommentsmod,
+		      NULL, NULL);
+	fill_combobox(get_list(GBS_LIST), GTK_COMBO_BOX(combo.book_module),
+		      settings.book_mod,
+		      NULL, NULL);
 
 	/*
 	 * parallel page
 	 */
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_1_module),
-			      settings.parallel1Module,
-			      NULL, NULL);
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_2_module),
-			      settings.parallel2Module,
-			      NULL, NULL);
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_3_module),
-			      settings.parallel3Module,
-			      NULL, NULL);
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_4_module),
-			      settings.parallel4Module,
-			      NULL, NULL);
-	if (glist = get_list(TEXT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.parallel_5_module),
-			      settings.parallel5Module,
-			      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_1_module),
+		      settings.parallel1Module,
+		      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_2_module),
+		      settings.parallel2Module,
+		      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_3_module),
+		      settings.parallel3Module,
+		      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_4_module),
+		      settings.parallel4Module,
+		      NULL, NULL);
+	fill_combobox(get_list(TEXT_LIST), GTK_COMBO_BOX(combo.parallel_5_module),
+		      settings.parallel5Module,
+		      NULL, NULL);
 
 	/*
 	 * Miscellaneous Modules page
 	 */
-	if (glist = get_list(DEVOTION_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.devotion_module),
-			      settings.devotionalmod,
-			      NULL, NULL);
-	if (glist = get_list(DICT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.hebrew_lex__module),
-			      settings.lex_hebrew,
-			      dict_match_feature, "HebrewDef");
-	if (glist = get_list(DICT_LIST))
-		fill_combobox(glist, GTK_COMBO_BOX(combo.greek_lex__module),
-			      settings.lex_greek,
-			      dict_match_feature, "GreekDef");
+	fill_combobox(get_list(DEVOTION_LIST), GTK_COMBO_BOX(combo.devotion_module),
+		      settings.devotionalmod,
+		      NULL, NULL);
+	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.hebrew_lex__module),
+		      settings.lex_hebrew,
+		      dict_match_feature, "HebrewDef");
+	fill_combobox(get_list(DICT_LIST), GTK_COMBO_BOX(combo.greek_lex__module),
+		      settings.lex_greek,
+		      dict_match_feature, "GreekDef");
 
 	/*
 	 * signal connectivity
