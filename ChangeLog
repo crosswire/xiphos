@@ -1,6 +1,7 @@
 2008-09-01  karl <charcoal@users.sf.net>
 
 	* fix #2084401 Problem compiling with xul-1.9 (gecko.m4 update).
+	* a bunch of RELEASE-NOTES text, early prep for 2.4.
 
 2008-08-31  karl <charcoal@users.sf.net>
 

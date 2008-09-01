@@ -3,6 +3,58 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.4.0 -stable-
+20 Sep 2008
+
+Moving past the "development" 2.3 line to "stable" 2.4 with these updates
+in the post-2.3.6 release shakedown:
+
+ 1. Journal/prayer list support is enabled by default.
+
+ 2. Selecting choices for Strong's modules is now complete, and Preferences
+    comboboxes have gained an instructive "--Select--" first entry.
+
+ 3. New translations, Swedish and Hebrew.
+
+ 4. Sort capability in mod.mgr has been disabled (contextually pointless).
+
+ 5. Module deletions are reflected immediately in list on completion.
+
+ 6. An error in tab labeling has been fixed.
+
+ 7. Phrasing in several areas was improved for translation ease and clarity.
+
+ 8. Ctrl-plus/minus change the base font size.
+
+ 9. Naming change: "Pinned" tabs => "linked" tabs.
+
+10. '_' is accepted in module naming (journals/prayer lists/pers.comm).
+
+11. Search results are clearable in advanced search.
+
+12. Mouse activity is ignored during long-running mod.mgr actions.
+
+13. An ancient mem.alloc glitch in genbook modnames was fixed.
+
+14. The passage exporter is enabled by default; --enable-exporter is no
+    longer needed.
+
+Bug reports addressed since 2.3.6:
+2036800  Prayer list/journal name only accepts English
+2040344  module manager needs to lock left panel
+2040347  adv.search can't clear results
+2069455  module deletion not reflected in list
+2069476  sorting by module name contains categories
+2079930  Strongs Hebrew/Greek numbers don't lookup
+2084401  Problem compiling with xul-1.9/firefox 3 on Debian/Gentoo
+
+New feature requests pending:
+2053524  Port to Maemo OS2008 (Internet Tablet)
+
+Feature requests closed:
+2056615  Option to hide verse numbers
+________________________
+
 Release 2.3.6
 02 Aug 2008
 
