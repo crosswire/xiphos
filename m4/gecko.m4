@@ -203,7 +203,7 @@ AC_LANG_PUSH([C++])
 _SAVE_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $_GECKO_EXTRA_CPPFLAGS -I$_GECKO_INCLUDE_ROOT"
 
-AC_MSG_CHECKING([[whether we have a gtk 2 gecko build]])
+AC_MSG_CHECKING([[whether we have a gtk2 gecko build]])
 AC_RUN_IFELSE(
 	[AC_LANG_SOURCE(
 		[[#include <mozilla-config.h>
@@ -218,7 +218,7 @@ AC_RUN_IFELSE(
 		  } ]]
 	)],
 	[result=yes],
-	[AC_MSG_ERROR([[This program needs a gtk 2 gecko build]])],
+	[AC_MSG_ERROR([[This program needs a gtk2 gecko build -- perhaps use --with-gecko= to pick one explicitly: $_geckos]])],
         [result=maybe])
 AC_MSG_RESULT([$result])
 
