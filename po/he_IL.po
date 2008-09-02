@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 18:09+0100\n"
-"PO-Revision-Date: 2008-08-30 16:38+0100\n"
+"POT-Creation-Date: 2008-09-01 00:37+0100\n"
+"PO-Revision-Date: 2008-09-02 16:33+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -28,84 +28,81 @@ msgid "Study the Bible"
 msgstr "מחקר בכתבי הקודש"
 
 #: ../src/backend/sword_main.cc:1374
-#, fuzzy
 msgid "Configuration not found"
 msgstr "מידע מרוחק לא נמצא"
 
-#: ../src/editor/html-editor.c:213 ../src/editor/html-editor.c:260
-#, fuzzy
+#: ../src/editor/html-editor.c:213
+#: ../src/editor/html-editor.c:260
 msgid "Save As"
 msgstr "שמור רשימה"
 
-#: ../src/editor/html-editor.c:231 ../src/editor/html-editor.c:278
-#, fuzzy
+#: ../src/editor/html-editor.c:231
+#: ../src/editor/html-editor.c:278
 msgid "Untitled document"
 msgstr "הדפס מסמך"
 
 #: ../src/editor/html-editor.c:443
 msgid "HTML Output"
-msgstr ""
+msgstr "פלט HTML"
 
 #: ../src/editor/html-editor.c:450
-#, fuzzy
 msgid "HTML Source"
 msgstr "מקור"
 
 #: ../src/editor/html-editor.c:457
-#, fuzzy
 msgid "Plain Source"
 msgstr "מקור"
 
-#: ../src/editor/html-editor.c:464 ../ui/editor_note.xml.h:15
+#: ../src/editor/html-editor.c:464
+#: ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "הדפס..."
 
-#: ../src/editor/html-editor.c:471 ../ui/editor_note.xml.h:9
+#: ../src/editor/html-editor.c:471
+#: ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "תצוגה לפני הדפסה"
 
 #: ../src/editor/html-editor.c:478
-#, fuzzy
 msgid "_Quit"
 msgstr "עריכה"
 
 #: ../src/editor/html-editor.c:485
 msgid "_Open"
-msgstr ""
+msgstr "פתח"
 
 #: ../src/editor/html-editor.c:492
-#, fuzzy
 msgid "_Save"
 msgstr "שמור"
 
 #: ../src/editor/html-editor.c:499
-#, fuzzy
 msgid "Save _As..."
 msgstr "שמור קובץ בשם..."
 
-#: ../src/editor/html-editor.c:506 ../src/gnome2/main_menu.c:915
-#: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
+#: ../src/editor/html-editor.c:506
+#: ../src/gnome2/main_menu.c:915
+#: ../ui/editor_note.xml.h:14
+#: ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
 msgstr "קובץ"
 
 #: ../src/editor/html-editor.c:516
 msgid "HTML _Output"
-msgstr ""
+msgstr "פלט HTML"
 
 #: ../src/editor/html-editor.c:523
-#, fuzzy
 msgid "_HTML Source"
 msgstr "מקור"
 
 #: ../src/editor/html-editor.c:530
-#, fuzzy
 msgid "_Plain Source"
 msgstr "מקור"
 
-#: ../src/editor/html-editor.c:537 ../src/gnome2/main_menu.c:927
+#: ../src/editor/html-editor.c:537
+#: ../src/gnome2/main_menu.c:927
 msgid "_View"
 msgstr "תצוגה"
 
@@ -133,10 +130,14 @@ msgstr "שמור קובץ בשם..."
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1527 ../src/gnome2/bibletext.c:1128
-#: ../src/gnome2/gbs.c:910 ../src/gnome2/bibletext_dialog.c:2116
-#: ../src/gnome2/dictlex.c:1030 ../src/gnome2/commentary_dialog.c:1656
-#: ../src/gnome2/commentary.c:1003 ../src/gnome2/studypad.c:103
+#: ../src/editor/html-editor.c:1527
+#: ../src/gnome2/bibletext.c:1128
+#: ../src/gnome2/gbs.c:910
+#: ../src/gnome2/bibletext_dialog.c:2116
+#: ../src/gnome2/dictlex.c:1030
+#: ../src/gnome2/commentary_dialog.c:1656
+#: ../src/gnome2/commentary.c:1003
+#: ../src/gnome2/studypad.c:103
 msgid "File"
 msgstr "קובץ"
 
@@ -152,55 +153,57 @@ msgstr "לפני הסגירה?"
 msgid "If you don't save, changes will be permanently lost."
 msgstr "ללא שמירה, השינויים יאבדו לעד."
 
-#: ../src/editor/html-editor.c:1932 ../src/editor/html-editor.c:1935
+#: ../src/editor/html-editor.c:1932
+#: ../src/editor/html-editor.c:1935
 #: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
 msgstr "שולחן מחקר"
 
-#: ../src/editor/html-editor.c:1950 ../src/editor/html-editor.c:1954
+#: ../src/editor/html-editor.c:1950
+#: ../src/editor/html-editor.c:1954
 msgid "Note Editor"
 msgstr "עורך הערות"
 
-#: ../src/editor/html-editor.c:1964 ../src/editor/html-editor.c:1968
+#: ../src/editor/html-editor.c:1964
+#: ../src/editor/html-editor.c:1968
 msgid "Prayer List/Journal Editor"
-msgstr ""
+msgstr "עורך יומן\\רשימת תפילות"
 
-#: ../src/gecko/gecko-html.cpp:168 ../src/gnome2/html.c:154
+#: ../src/gecko/gecko-html.cpp:168
+#: ../src/gnome2/html.c:154
 msgid "Unlock "
 msgstr "פתח"
 
 #: ../src/gecko/gecko-print.c:171
-#, fuzzy
 msgid "Preparing to print"
 msgstr "מתכונן להתקנה"
 
 #: ../src/gecko/gecko-print.c:265
 msgid "Printing is not supported on this printer"
-msgstr ""
+msgstr "המדפסת אינה תומכת בהדפסה"
 
 #: ../src/gecko/gecko-print.c:268
 #, c-format
 msgid "Printer %s does not support PostScript printing."
-msgstr ""
+msgstr "המדפסת %s אינה תומכת בהדפסה."
 
-#: ../src/gecko/gecko-print.c:341 ../src/gecko/gecko-print.c:369
-#, fuzzy
+#: ../src/gecko/gecko-print.c:341
+#: ../src/gecko/gecko-print.c:369
 msgid "Printing"
 msgstr "הדפס"
 
 #: ../src/gecko/gecko-print.c:371
-#, fuzzy
 msgid "Waiting to print"
 msgstr "מתכונן להתקנה"
 
 #: ../src/gecko/gecko-print.c:583
 msgid "An error occurred while printing"
-msgstr ""
+msgstr "חלה שגיאה בעת ההדפסה"
 
 #: ../src/gecko/gecko-print.c:587
-#, fuzzy, c-format
+#, c-format
 msgid "It was not possible to print your document: %s"
-msgstr "הדפסת המסמך נכשלה"
+msgstr "הדפסת המסמך נכשלה: %s"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
@@ -210,172 +213,245 @@ msgstr "פתח קובץ שולחן מחקר"
 msgid "Save StudyPad File"
 msgstr "שמור קובץ שולחן מחקר"
 
-#: ../src/gnome2/bibletext.c:911 ../src/gnome2/gbs.c:706
-#: ../src/gnome2/bibletext_dialog.c:1897 ../src/gnome2/dictlex.c:842
-#: ../src/gnome2/commentary_dialog.c:1437 ../src/gnome2/commentary.c:793
+#: ../src/gnome2/bibletext.c:911
+#: ../src/gnome2/gbs.c:706
+#: ../src/gnome2/bibletext_dialog.c:1897
+#: ../src/gnome2/dictlex.c:842
+#: ../src/gnome2/commentary_dialog.c:1437
+#: ../src/gnome2/commentary.c:793
 msgid "item1"
 msgstr "פריט1"
 
-#: ../src/gnome2/bibletext.c:921 ../src/gnome2/gbs.c:716
-#: ../src/gnome2/bibletext_dialog.c:1907 ../src/gnome2/dictlex.c:852
-#: ../src/gnome2/commentary_dialog.c:1447 ../src/gnome2/commentary.c:803
+#: ../src/gnome2/bibletext.c:921
+#: ../src/gnome2/gbs.c:716
+#: ../src/gnome2/bibletext_dialog.c:1907
+#: ../src/gnome2/dictlex.c:852
+#: ../src/gnome2/commentary_dialog.c:1447
+#: ../src/gnome2/commentary.c:803
 msgid "Open Module"
 msgstr "פתח מודול"
 
-#: ../src/gnome2/bibletext.c:928 ../ui/export-dialog.glade.h:6
+#: ../src/gnome2/bibletext.c:928
+#: ../ui/export-dialog.glade.h:6
 msgid "Export Passage"
-msgstr ""
+msgstr "ייצא קטע"
 
-#: ../src/gnome2/bibletext.c:939 ../src/gnome2/bibletext_dialog.c:1933
-#: ../src/gnome2/commentary_dialog.c:1473 ../src/gnome2/commentary.c:815
+#: ../src/gnome2/bibletext.c:939
+#: ../src/gnome2/bibletext_dialog.c:1933
+#: ../src/gnome2/commentary_dialog.c:1473
+#: ../src/gnome2/commentary.c:815
 msgid "item2"
 msgstr "פריט2"
 
-#: ../src/gnome2/bibletext.c:951 ../src/gnome2/bibletext_dialog.c:1945
-#: ../src/gnome2/commentary_dialog.c:1485 ../src/gnome2/commentary.c:827
+#: ../src/gnome2/bibletext.c:951
+#: ../src/gnome2/bibletext_dialog.c:1945
+#: ../src/gnome2/commentary_dialog.c:1485
+#: ../src/gnome2/commentary.c:827
 msgid "Note"
 msgstr "הערה"
 
-#: ../src/gnome2/bibletext.c:961 ../src/gnome2/gbs.c:757
-#: ../src/gnome2/bibletext_dialog.c:1955 ../src/gnome2/dictlex.c:877
-#: ../src/gnome2/commentary_dialog.c:1495 ../src/gnome2/commentary.c:837
+#: ../src/gnome2/bibletext.c:961
+#: ../src/gnome2/gbs.c:757
+#: ../src/gnome2/bibletext_dialog.c:1955
+#: ../src/gnome2/dictlex.c:877
+#: ../src/gnome2/commentary_dialog.c:1495
+#: ../src/gnome2/commentary.c:837
 msgid "Primary Reading"
 msgstr "קריאה עיקרית"
 
-#: ../src/gnome2/bibletext.c:969 ../src/gnome2/gbs.c:763
-#: ../src/gnome2/bibletext_dialog.c:1963 ../src/gnome2/dictlex.c:883
-#: ../src/gnome2/commentary_dialog.c:1503 ../src/gnome2/commentary.c:845
+#: ../src/gnome2/bibletext.c:969
+#: ../src/gnome2/gbs.c:763
+#: ../src/gnome2/bibletext_dialog.c:1963
+#: ../src/gnome2/dictlex.c:883
+#: ../src/gnome2/commentary_dialog.c:1503
+#: ../src/gnome2/commentary.c:845
 msgid "Secondary Reading"
 msgstr "קריאה משנית"
 
-#: ../src/gnome2/bibletext.c:977 ../src/gnome2/gbs.c:751
-#: ../src/gnome2/bibletext_dialog.c:1971 ../src/gnome2/dictlex.c:871
-#: ../src/gnome2/commentary_dialog.c:1511 ../src/gnome2/commentary.c:853
+#: ../src/gnome2/bibletext.c:977
+#: ../src/gnome2/gbs.c:751
+#: ../src/gnome2/bibletext_dialog.c:1971
+#: ../src/gnome2/dictlex.c:871
+#: ../src/gnome2/commentary_dialog.c:1511
+#: ../src/gnome2/commentary.c:853
 msgid "All Readings"
 msgstr "כל הקריאות"
 
 #. 0
-#: ../src/gnome2/bibletext.c:997 ../src/gnome2/gbs.c:781
-#: ../src/gnome2/bibletext_dialog.c:1991 ../src/gnome2/dictlex.c:901
-#: ../src/gnome2/commentary_dialog.c:1531 ../src/gnome2/font_dialog.c:292
+#: ../src/gnome2/bibletext.c:997
+#: ../src/gnome2/gbs.c:781
+#: ../src/gnome2/bibletext_dialog.c:1991
+#: ../src/gnome2/dictlex.c:901
+#: ../src/gnome2/commentary_dialog.c:1531
+#: ../src/gnome2/font_dialog.c:292
 #: ../src/gnome2/commentary.c:873
 msgid "Set Module Font"
 msgstr "קבע גופן מודול"
 
 #. 1
 #. 2
-#: ../src/gnome2/bibletext.c:1006 ../src/gnome2/gbs.c:788
-#: ../src/gnome2/bibletext_dialog.c:2000 ../src/gnome2/dictlex.c:908
-#: ../src/gnome2/commentary_dialog.c:1540 ../src/gnome2/commentary.c:880
+#: ../src/gnome2/bibletext.c:1006
+#: ../src/gnome2/gbs.c:788
+#: ../src/gnome2/bibletext_dialog.c:2000
+#: ../src/gnome2/dictlex.c:908
+#: ../src/gnome2/commentary_dialog.c:1540
+#: ../src/gnome2/commentary.c:880
 msgid "Words of Christ in Red"
 msgstr "מילות הצלוב באדום"
 
 #. 3
-#: ../src/gnome2/bibletext.c:1014 ../src/gnome2/gbs.c:796
-#: ../src/gnome2/bibletext_dialog.c:2008 ../src/gnome2/dictlex.c:916
-#: ../src/gnome2/commentary_dialog.c:1548 ../src/gnome2/commentary.c:888
+#: ../src/gnome2/bibletext.c:1014
+#: ../src/gnome2/gbs.c:796
+#: ../src/gnome2/bibletext_dialog.c:2008
+#: ../src/gnome2/dictlex.c:916
+#: ../src/gnome2/commentary_dialog.c:1548
+#: ../src/gnome2/commentary.c:888
 msgid "Strong's Numbers"
 msgstr "מספרי סטרונג"
 
 #. 4
-#: ../src/gnome2/bibletext.c:1022 ../src/gnome2/gbs.c:804
-#: ../src/gnome2/bibletext_dialog.c:2016 ../src/gnome2/dictlex.c:924
-#: ../src/gnome2/commentary_dialog.c:1556 ../src/gnome2/commentary.c:896
+#: ../src/gnome2/bibletext.c:1022
+#: ../src/gnome2/gbs.c:804
+#: ../src/gnome2/bibletext_dialog.c:2016
+#: ../src/gnome2/dictlex.c:924
+#: ../src/gnome2/commentary_dialog.c:1556
+#: ../src/gnome2/commentary.c:896
 #: ../ui/search-dialog.glade.h:43
 msgid "Morphological Tags"
 msgstr "תגיות מורפולוגיות"
 
 #. 5
-#: ../src/gnome2/bibletext.c:1030 ../src/gnome2/gbs.c:812
-#: ../src/gnome2/bibletext_dialog.c:2024 ../src/gnome2/dictlex.c:932
-#: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:904
+#: ../src/gnome2/bibletext.c:1030
+#: ../src/gnome2/gbs.c:812
+#: ../src/gnome2/bibletext_dialog.c:2024
+#: ../src/gnome2/dictlex.c:932
+#: ../src/gnome2/commentary_dialog.c:1564
+#: ../src/gnome2/commentary.c:904
 #: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
 msgstr "הערות שוליים"
 
 #. 6
-#: ../src/gnome2/bibletext.c:1038 ../src/gnome2/gbs.c:820
-#: ../src/gnome2/bibletext_dialog.c:2032 ../src/gnome2/dictlex.c:940
-#: ../src/gnome2/commentary_dialog.c:1572 ../src/gnome2/commentary.c:912
+#: ../src/gnome2/bibletext.c:1038
+#: ../src/gnome2/gbs.c:820
+#: ../src/gnome2/bibletext_dialog.c:2032
+#: ../src/gnome2/dictlex.c:940
+#: ../src/gnome2/commentary_dialog.c:1572
+#: ../src/gnome2/commentary.c:912
 msgid "Greek Accents"
 msgstr "הטעמות יווניות"
 
 #. 7
-#: ../src/gnome2/bibletext.c:1046 ../src/gnome2/gbs.c:828
-#: ../src/gnome2/bibletext_dialog.c:2040 ../src/gnome2/dictlex.c:948
-#: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:920
+#: ../src/gnome2/bibletext.c:1046
+#: ../src/gnome2/gbs.c:828
+#: ../src/gnome2/bibletext_dialog.c:2040
+#: ../src/gnome2/dictlex.c:948
+#: ../src/gnome2/commentary_dialog.c:1580
+#: ../src/gnome2/commentary.c:920
 msgid "Lemmas"
 msgstr "כותרות פירושים"
 
 #. 8
-#: ../src/gnome2/bibletext.c:1054 ../src/gnome2/gbs.c:836
-#: ../src/gnome2/bibletext_dialog.c:2048 ../src/gnome2/dictlex.c:956
-#: ../src/gnome2/commentary_dialog.c:1588 ../src/gnome2/commentary.c:928
+#: ../src/gnome2/bibletext.c:1054
+#: ../src/gnome2/gbs.c:836
+#: ../src/gnome2/bibletext_dialog.c:2048
+#: ../src/gnome2/dictlex.c:956
+#: ../src/gnome2/commentary_dialog.c:1588
+#: ../src/gnome2/commentary.c:928
 msgid "Scripture Cross-references"
 msgstr "הפניות צולבות לכתבי הקודש"
 
 #. 9
-#: ../src/gnome2/bibletext.c:1062 ../src/gnome2/gbs.c:844
-#: ../src/gnome2/bibletext_dialog.c:2056 ../src/gnome2/dictlex.c:964
-#: ../src/gnome2/commentary_dialog.c:1596 ../src/gnome2/commentary.c:936
+#: ../src/gnome2/bibletext.c:1062
+#: ../src/gnome2/gbs.c:844
+#: ../src/gnome2/bibletext_dialog.c:2056
+#: ../src/gnome2/dictlex.c:964
+#: ../src/gnome2/commentary_dialog.c:1596
+#: ../src/gnome2/commentary.c:936
 msgid "Hebrew Vowel Points"
 msgstr "ניקוד עברי"
 
 #. 10
-#: ../src/gnome2/bibletext.c:1070 ../src/gnome2/gbs.c:852
-#: ../src/gnome2/bibletext_dialog.c:2064 ../src/gnome2/dictlex.c:972
-#: ../src/gnome2/commentary_dialog.c:1604 ../src/gnome2/commentary.c:944
+#: ../src/gnome2/bibletext.c:1070
+#: ../src/gnome2/gbs.c:852
+#: ../src/gnome2/bibletext_dialog.c:2064
+#: ../src/gnome2/dictlex.c:972
+#: ../src/gnome2/commentary_dialog.c:1604
+#: ../src/gnome2/commentary.c:944
 msgid "Hebrew Cantillation"
 msgstr "טעמי המקרא"
 
 #. 11
-#: ../src/gnome2/bibletext.c:1078 ../src/gnome2/gbs.c:860
-#: ../src/gnome2/bibletext_dialog.c:2072 ../src/gnome2/dictlex.c:980
-#: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:952
+#: ../src/gnome2/bibletext.c:1078
+#: ../src/gnome2/gbs.c:860
+#: ../src/gnome2/bibletext_dialog.c:2072
+#: ../src/gnome2/dictlex.c:980
+#: ../src/gnome2/commentary_dialog.c:1612
+#: ../src/gnome2/commentary.c:952
 msgid "Headings"
 msgstr "כותרות"
 
 #. 12
-#: ../src/gnome2/bibletext.c:1086 ../src/gnome2/gbs.c:868
-#: ../src/gnome2/bibletext_dialog.c:2080 ../src/gnome2/dictlex.c:988
-#: ../src/gnome2/commentary_dialog.c:1620 ../src/gnome2/commentary.c:960
+#: ../src/gnome2/bibletext.c:1086
+#: ../src/gnome2/gbs.c:868
+#: ../src/gnome2/bibletext_dialog.c:2080
+#: ../src/gnome2/dictlex.c:988
+#: ../src/gnome2/commentary_dialog.c:1620
+#: ../src/gnome2/commentary.c:960
 msgid "Variants"
 msgstr "משתנים"
 
 #. 13
-#: ../src/gnome2/bibletext.c:1092 ../src/gnome2/gbs.c:874
-#: ../src/gnome2/bibletext_dialog.c:2086 ../src/gnome2/dictlex.c:994
-#: ../src/gnome2/commentary_dialog.c:1626 ../src/gnome2/commentary.c:966
-#, fuzzy
+#: ../src/gnome2/bibletext.c:1092
+#: ../src/gnome2/gbs.c:874
+#: ../src/gnome2/bibletext_dialog.c:2086
+#: ../src/gnome2/dictlex.c:994
+#: ../src/gnome2/commentary_dialog.c:1626
+#: ../src/gnome2/commentary.c:966
 msgid "Image Content"
 msgstr "תוכן"
 
-#: ../src/gnome2/bibletext.c:1104 ../src/gnome2/bibletext.c:1226
-#: ../src/gnome2/gbs.c:886 ../src/gnome2/gbs.c:1008
-#: ../src/gnome2/bibletext_dialog.c:2098 ../src/gnome2/bibletext_dialog.c:2198
-#: ../src/gnome2/dictlex.c:1006 ../src/gnome2/dictlex.c:1107
+#: ../src/gnome2/bibletext.c:1104
+#: ../src/gnome2/bibletext.c:1226
+#: ../src/gnome2/gbs.c:886
+#: ../src/gnome2/gbs.c:1008
+#: ../src/gnome2/bibletext_dialog.c:2098
+#: ../src/gnome2/bibletext_dialog.c:2198
+#: ../src/gnome2/dictlex.c:1006
+#: ../src/gnome2/dictlex.c:1107
 #: ../src/gnome2/commentary_dialog.c:1638
-#: ../src/gnome2/commentary_dialog.c:1764 ../src/gnome2/commentary.c:978
+#: ../src/gnome2/commentary_dialog.c:1764
+#: ../src/gnome2/commentary.c:978
 #: ../src/gnome2/commentary.c:1124
 msgid "Use Current Dictionary"
 msgstr "השתמש במילון הנוכחי"
 
 #. 0
-#: ../src/gnome2/bibletext.c:1115 ../src/gnome2/gbs.c:897
-#: ../src/gnome2/bibletext_dialog.c:2109 ../src/gnome2/dictlex.c:1017
-#: ../src/gnome2/commentary_dialog.c:1649 ../src/gnome2/commentary.c:989
-#: ../src/gnome2/sidebar.c:752 ../src/gnome2/sidebar.c:902
+#: ../src/gnome2/bibletext.c:1115
+#: ../src/gnome2/gbs.c:897
+#: ../src/gnome2/bibletext_dialog.c:2109
+#: ../src/gnome2/dictlex.c:1017
+#: ../src/gnome2/commentary_dialog.c:1649
+#: ../src/gnome2/commentary.c:989
+#: ../src/gnome2/sidebar.c:752
+#: ../src/gnome2/sidebar.c:902
 msgid "About"
 msgstr "אודות"
 
 #. 1
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: ../src/gnome2/bibletext.c:1121 ../src/gnome2/gbs.c:903
-#: ../src/gnome2/dictlex.c:1023 ../src/gnome2/commentary.c:996
-#: ../src/gnome2/mod_mgr.c:2156 ../src/gnome2/mod_mgr.c:2331
-#: ../src/gnome2/bookmark_dialog.c:145 ../src/gnome2/bookmarks_menu.c:470
-#: ../src/gnome2/bookmarks_menu.c:736 ../src/gnome2/bookmarks_menu.c:910
-#: ../src/gnome2/bookmarks_menu.c:1008 ../src/gnome2/bookmarks_treeview.c:102
+#: ../src/gnome2/bibletext.c:1121
+#: ../src/gnome2/gbs.c:903
+#: ../src/gnome2/dictlex.c:1023
+#: ../src/gnome2/commentary.c:996
+#: ../src/gnome2/mod_mgr.c:2156
+#: ../src/gnome2/mod_mgr.c:2331
+#: ../src/gnome2/bookmark_dialog.c:145
+#: ../src/gnome2/bookmarks_menu.c:470
+#: ../src/gnome2/bookmarks_menu.c:736
+#: ../src/gnome2/bookmarks_menu.c:910
+#: ../src/gnome2/bookmarks_menu.c:1008
+#: ../src/gnome2/bookmarks_treeview.c:102
 #: ../ui/editor_studypad.xml.h:2
 msgid "Bookmark"
 msgstr "סימנייה"
@@ -384,10 +460,14 @@ msgstr "סימנייה"
 #. 3
 #. 4
 #. 3
-#: ../src/gnome2/bibletext.c:1134 ../src/gnome2/gbs.c:916
-#: ../src/gnome2/bibletext_dialog.c:2122 ../src/gnome2/dictlex.c:1036
-#: ../src/gnome2/commentary_dialog.c:1662 ../src/gnome2/commentary.c:1009
-#: ../src/gnome2/bookmarks_menu.c:456 ../src/gnome2/treekey-editor.c:328
+#: ../src/gnome2/bibletext.c:1134
+#: ../src/gnome2/gbs.c:916
+#: ../src/gnome2/bibletext_dialog.c:2122
+#: ../src/gnome2/dictlex.c:1036
+#: ../src/gnome2/commentary_dialog.c:1662
+#: ../src/gnome2/commentary.c:1009
+#: ../src/gnome2/bookmarks_menu.c:456
+#: ../src/gnome2/treekey-editor.c:328
 msgid "Edit"
 msgstr "ערוך"
 
@@ -395,9 +475,12 @@ msgstr "ערוך"
 #. 4
 #. 5
 #. 4
-#: ../src/gnome2/bibletext.c:1140 ../src/gnome2/gbs.c:922
-#: ../src/gnome2/bibletext_dialog.c:2128 ../src/gnome2/dictlex.c:1042
-#: ../src/gnome2/commentary_dialog.c:1668 ../src/gnome2/commentary.c:1015
+#: ../src/gnome2/bibletext.c:1140
+#: ../src/gnome2/gbs.c:922
+#: ../src/gnome2/bibletext_dialog.c:2128
+#: ../src/gnome2/dictlex.c:1042
+#: ../src/gnome2/commentary_dialog.c:1668
+#: ../src/gnome2/commentary.c:1015
 msgid "_Module Options"
 msgstr "אפשרויות מודול"
 
@@ -405,9 +488,12 @@ msgstr "אפשרויות מודול"
 #. 5
 #. 6
 #. 5
-#: ../src/gnome2/bibletext.c:1146 ../src/gnome2/gbs.c:928
-#: ../src/gnome2/bibletext_dialog.c:2134 ../src/gnome2/dictlex.c:1048
-#: ../src/gnome2/commentary_dialog.c:1674 ../src/gnome2/commentary.c:1021
+#: ../src/gnome2/bibletext.c:1146
+#: ../src/gnome2/gbs.c:928
+#: ../src/gnome2/bibletext_dialog.c:2134
+#: ../src/gnome2/dictlex.c:1048
+#: ../src/gnome2/commentary_dialog.c:1674
+#: ../src/gnome2/commentary.c:1021
 msgid "Lookup Selection"
 msgstr "בחירת חיפוש"
 
@@ -415,36 +501,29 @@ msgstr "בחירת חיפוש"
 #. 6
 #. 7
 #. 6
-#: ../src/gnome2/bibletext.c:1152 ../src/gnome2/gbs.c:934
-#: ../src/gnome2/bibletext_dialog.c:2140 ../src/gnome2/dictlex.c:1054
-#: ../src/gnome2/commentary_dialog.c:1680 ../src/gnome2/commentary.c:1039
+#: ../src/gnome2/bibletext.c:1152
+#: ../src/gnome2/gbs.c:934
+#: ../src/gnome2/bibletext_dialog.c:2140
+#: ../src/gnome2/dictlex.c:1054
+#: ../src/gnome2/commentary_dialog.c:1680
+#: ../src/gnome2/commentary.c:1039
 msgid "Unlock This Module"
 msgstr "פתח מודול זה"
 
 #. 8
 #. 7
 #. 9
-#: ../src/gnome2/bibletext.c:1158 ../src/gnome2/gbs.c:940
+#: ../src/gnome2/bibletext.c:1158
+#: ../src/gnome2/gbs.c:940
 #: ../src/gnome2/bibletext_dialog.c:2146
-#: ../src/gnome2/commentary_dialog.c:1698 ../src/gnome2/commentary.c:1057
-#, fuzzy
+#: ../src/gnome2/commentary_dialog.c:1698
+#: ../src/gnome2/commentary.c:1057
 msgid "Read Selection Aloud"
 msgstr "קריאה בקול"
 
 #: ../src/gnome2/about_sword.c:94
-#, fuzzy
-msgid ""
-"The SWORD Project is an effort to create an ever-expanding software package "
-"for research and study of God and His Word. The SWORD Project framework "
-"allows easy use and study of Bible texts, commentaries, lexicons, "
-"dictionaries, and other books. Many frontends are built using this "
-"framework. An installed set of books may be shared among all frontends using "
-"the framework."
-msgstr ""
-"מטרתו של פרויקט SWORD היא להפיק ולפתח חבילת תוכנה המוקדשת ללימוד דבר האל. "
-"תשתית כתבי הקודש של WORD מאפשרת גישה קלה לכתבי קודש, פירושים, לקסיקונים, "
-"מילונים וספרים אחרים. ממשקי משתמש רבים מתבססים על תשתית זו. ניתן לשתף ערכות "
-"של מודולים מותקנים בין כל סוגי הממשקים הללו."
+msgid "The SWORD Project is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework."
+msgstr "מטרתו של פרויקט SWORD היא להפיק ולפתח חבילת תוכנה המוקדשת ללימוד דבר האל. תשתית כתבי הקודש של WORD מאפשרת גישה קלה לכתבי קודש, פירושים, לקסיקונים, מילונים וספרים אחרים. ממשקי משתמש רבים מתבססים על תשתית זו. ניתן לשתף ערכות של מודולים מותקנים בין כל סוגי הממשקים הללו."
 
 #: ../src/gnome2/about_sword.c:112
 msgid "About the SWORD Project"
@@ -455,7 +534,6 @@ msgid "Sword Version"
 msgstr "גרסת SWORD"
 
 #: ../src/gnome2/about_sword.c:161
-#, fuzzy
 msgid "Books can be downloaded from the SWORD Project"
 msgstr "מודולים להורדה מפרויקט SWORD"
 
@@ -479,8 +557,8 @@ msgstr "עבור:"
 msgid "Enter Cipher Key: "
 msgstr "נא להזין מפתח הצפנה:"
 
-#: ../src/gnome2/gbs.c:740 ../src/gnome2/sidebar.c:896
-#, fuzzy
+#: ../src/gnome2/gbs.c:740
+#: ../src/gnome2/sidebar.c:896
 msgid "Open in editor"
 msgstr "פתח בתיבת דיאלוג"
 
@@ -517,14 +595,18 @@ msgstr "שנה מקביל 4"
 msgid "Change parallel 5"
 msgstr "שנה מקביל 5"
 
-#: ../src/gnome2/parallel_view.c:434 ../src/gnome2/sidebar.c:405
-#: ../src/gnome2/sidebar.c:411 ../src/main/sidebar.cc:592
-#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
+#: ../src/gnome2/parallel_view.c:434
+#: ../src/gnome2/sidebar.c:405
+#: ../src/gnome2/sidebar.c:411
+#: ../src/main/sidebar.cc:592
+#: ../src/main/sidebar.cc:975
+#: ../src/main/sidebar.cc:976
 #: ../src/main/sidebar.cc:977
 msgid "Parallel View"
 msgstr "תצוגה מקבילה"
 
-#: ../src/gnome2/find_dialog.c:197 ../src/gnome2/find_dialog.c:366
+#: ../src/gnome2/find_dialog.c:197
+#: ../src/gnome2/find_dialog.c:366
 msgid "Find"
 msgstr "מצא"
 
@@ -532,7 +614,8 @@ msgstr "מצא"
 msgid "Enter Word or Phrase"
 msgstr "הזן מילה או ביטוי"
 
-#: ../src/gnome2/find_dialog.c:231 ../src/gnome2/search_sidebar.c:288
+#: ../src/gnome2/find_dialog.c:231
+#: ../src/gnome2/search_sidebar.c:288
 #: ../ui/search-dialog.glade.h:40
 msgid "Match case"
 msgstr "התאם אותיות רישיות"
@@ -541,7 +624,8 @@ msgstr "התאם אותיות רישיות"
 msgid "Search backwards"
 msgstr "חפש אחורה"
 
-#: ../src/gnome2/find_dialog.c:247 ../src/gnome2/search_sidebar.c:253
+#: ../src/gnome2/find_dialog.c:247
+#: ../src/gnome2/search_sidebar.c:253
 #: ../ui/search-dialog.glade.h:47
 msgid "Regular expression"
 msgstr "ביטוי רגולרי"
@@ -565,12 +649,14 @@ msgid "Stay in sync"
 msgstr "שמור על סינכרון"
 
 #. 7
-#: ../src/gnome2/commentary_dialog.c:1686 ../src/gnome2/commentary.c:1027
+#: ../src/gnome2/commentary_dialog.c:1686
+#: ../src/gnome2/commentary.c:1027
 msgid "Display Book Heading"
 msgstr "הצג כותרת ספר"
 
 #. 8
-#: ../src/gnome2/commentary_dialog.c:1692 ../src/gnome2/commentary.c:1033
+#: ../src/gnome2/commentary_dialog.c:1692
+#: ../src/gnome2/commentary.c:1033
 msgid "Display Chapter Heading"
 msgstr "הצג כותרת פרק"
 
@@ -618,7 +704,8 @@ msgstr "+2"
 msgid "+1"
 msgstr "+1"
 
-#: ../src/gnome2/font_dialog.c:369 ../src/gnome2/font_dialog.c:382
+#: ../src/gnome2/font_dialog.c:369
+#: ../src/gnome2/font_dialog.c:382
 msgid "+0"
 msgstr "+0"
 
@@ -649,36 +736,45 @@ msgid ""
 "Therefore, personal commentary renaming is\n"
 "not available in the Windows environment."
 msgstr ""
+"לא ניתן לשנות שמות תחת Cygwin.\n"
+"\n"
+"מערכת הקבצים של חלונות מגבילה את GnomeSword\n"
+"בכך שאינה מאפשרת לשנות את שמם של קבצים\n"
+"פתוחים, כגון קבצי תוכן ופירוש.\n"
+"such as the contents of this commentary.\n"
+"לפיכך, לא ניתן לשנות שמות של פירושים אישיים\n"
+"בסביבת חלונות."
 
 #: ../src/gnome2/commentary.c:475
-#, fuzzy
 msgid "Rename Commentary"
 msgstr "פירוש"
 
 #: ../src/gnome2/commentary.c:478
-#, fuzzy
 msgid "Choose Commentary Name"
 msgstr "תצוגת פירוש"
 
 #: ../src/gnome2/commentary.c:480
-#, fuzzy
 msgid "New Name"
 msgstr "שם תיקייה"
 
-#: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
-#: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:283
-#: ../src/main/prayerlists.cc:237 ../src/main/sword_treekey.cc:375
-#, fuzzy
+#: ../src/gnome2/commentary.c:481
+#: ../src/gnome2/treekey-editor.c:127
+#: ../src/gnome2/treekey-editor.c:186
+#: ../src/gnome2/treekey-editor.c:283
+#: ../src/main/prayerlists.cc:237
+#: ../src/main/sword_treekey.cc:375
 msgid "Name: "
 msgstr "תווית:"
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:251
+#: ../src/gnome2/commentary.c:491
+#: ../src/main/prayerlists.cc:251
 msgid "Module names must contain [A-Za-z0-9_] only."
-msgstr ""
+msgstr "שמות מודולים יכולים להכיל אך ורק את התווים [A-Za-z0-9_]."
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:258
+#: ../src/gnome2/commentary.c:498
+#: ../src/main/prayerlists.cc:258
 msgid "GnomeSword already knows a module by that name."
-msgstr ""
+msgstr "מערכת GnomeSword כבר מכירה מודול בשם זה."
 
 #: ../src/gnome2/commentary.c:541
 #, c-format
@@ -686,20 +782,24 @@ msgid ""
 "Failed to create new configuration:\n"
 "%s"
 msgstr ""
+"לא ניתן להפיק תצורה חדשה:\n"
+"%s"
 
 #: ../src/gnome2/commentary.c:550
 msgid ""
 "Configuration build error:\n"
 "\n"
 msgstr ""
+"שגיאה בבניית תצורה:\n"
+"\n"
 
 #: ../src/gnome2/commentary.c:1045
 msgid "Rename Pers.Comm."
-msgstr ""
+msgstr "שנה שם פירוש אישי"
 
 #: ../src/gnome2/commentary.c:1051
 msgid "Dump Pers.Comm."
-msgstr ""
+msgstr "השלך פירוש אישי"
 
 #: ../src/gnome2/toolbar_nav.c:523
 msgid "Move backwards through history"
@@ -726,17 +826,14 @@ msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr "הזן מראה מקום לפסוק בפורמט \"ספר 1:1\" והקש על Enter"
 
 #: ../src/gnome2/mod_mgr.c:254
-#, fuzzy
 msgid "Install these modules:"
 msgstr "התקן את המודולים הבאים:"
 
 #: ../src/gnome2/mod_mgr.c:256
-#, fuzzy
 msgid "Remove these modules:"
 msgstr "הסר את המודולים הבאים:"
 
 #: ../src/gnome2/mod_mgr.c:258
-#, fuzzy
 msgid "Archive these modules:"
 msgstr "שמור רשימת מודולים"
 
@@ -745,9 +842,10 @@ msgid ""
 "Build fast-search index for these\n"
 "modules (may take minutes/module):"
 msgstr ""
+"בנה אינדקס לחיפוש מהיר עבור\n"
+"מודולים אלה (זמן בדקות\\מודול):"
 
 #: ../src/gnome2/mod_mgr.c:262
-#, fuzzy
 msgid "Delete fast-search index for these modules:"
 msgstr "השתמש בגופן ברירת המחדל עבור מודול זה"
 
@@ -760,40 +858,34 @@ msgid "Preparing to remove"
 msgstr "מתכונן להסרה"
 
 #: ../src/gnome2/mod_mgr.c:296
-#, fuzzy
 msgid "Preparing to archive"
 msgstr "מתכונן להסרה"
 
 #: ../src/gnome2/mod_mgr.c:298
-#, fuzzy
 msgid "Preparing to index"
 msgstr "מתכונן להתקנה"
 
 #: ../src/gnome2/mod_mgr.c:300
-#, fuzzy
 msgid "Preparing to delete index"
 msgstr "מתכונן להסרה"
 
 #: ../src/gnome2/mod_mgr.c:325
-#, fuzzy
 msgid "Installing"
 msgstr "מתקין:"
 
 #: ../src/gnome2/mod_mgr.c:327
-#, fuzzy
 msgid "Removing"
 msgstr "מסיר:"
 
 #: ../src/gnome2/mod_mgr.c:329
 msgid "Archiving"
-msgstr ""
+msgstr "מעביר לארכיב"
 
 #: ../src/gnome2/mod_mgr.c:331
 msgid "Indexing"
-msgstr ""
+msgstr "בונה אינדקס"
 
 #: ../src/gnome2/mod_mgr.c:333
-#, fuzzy
 msgid "Deleting index"
 msgstr "מחק פריט"
 
@@ -803,62 +895,80 @@ msgid ""
 "`mkdir %s' failed:\n"
 "%s."
 msgstr ""
+"פעולת `mkdir %s' נכשלה:\n"
+"%s."
 
 #: ../src/gnome2/mod_mgr.c:379
 msgid "GnomeSword could not execute archiver"
-msgstr ""
+msgstr "מערכת GnomeSword לא הצליחה להריץ את יוצר הארכיב"
 
 #: ../src/gnome2/mod_mgr.c:384
 msgid ""
 " archival result:\n"
 "\n"
 msgstr ""
+"תוצאת הארכיב:\n"
+"\n"
 
 #: ../src/gnome2/mod_mgr.c:388
 msgid ""
 "\n"
 "Archive in "
 msgstr ""
+"\n"
+"ארכיב בתוך"
 
-#: ../src/gnome2/mod_mgr.c:456 ../src/gnome2/mod_mgr.c:2554
+#: ../src/gnome2/mod_mgr.c:456
+#: ../src/gnome2/mod_mgr.c:2554
 #: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr "התקנה"
 
-#: ../src/gnome2/mod_mgr.c:458 ../src/gnome2/treekey-editor.c:322
+#: ../src/gnome2/mod_mgr.c:458
+#: ../src/gnome2/treekey-editor.c:322
 msgid "Remove"
 msgstr "הסרה"
 
-#: ../src/gnome2/mod_mgr.c:460 ../ui/module-manager.glade.h:9
+#: ../src/gnome2/mod_mgr.c:460
+#: ../ui/module-manager.glade.h:9
 msgid "Archive"
-msgstr ""
+msgstr "ארכיב"
 
-#: ../src/gnome2/mod_mgr.c:462 ../ui/module-manager.glade.h:15
+#: ../src/gnome2/mod_mgr.c:462
+#: ../ui/module-manager.glade.h:15
 msgid "Index"
-msgstr ""
+msgstr "אינדקס"
 
 #: ../src/gnome2/mod_mgr.c:464
-#, fuzzy
 msgid "Deletion"
 msgstr "מחק פריט"
 
 #: ../src/gnome2/mod_mgr.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "%s failed"
-msgstr "ההתקנה נכשלה"
+msgstr "%sכישלון ב"
 
-#: ../src/gnome2/mod_mgr.c:468 ../src/gnome2/mod_mgr.c:1120
+#: ../src/gnome2/mod_mgr.c:468
+#: ../src/gnome2/mod_mgr.c:1120
 msgid "Finished"
 msgstr "סיום"
 
-#: ../src/gnome2/mod_mgr.c:630 ../src/gnome2/mod_mgr.c:632
-#: ../src/gnome2/mod_mgr.c:731 ../src/gnome2/mod_mgr.c:768
-#: ../src/gnome2/mod_mgr.c:770 ../src/gnome2/utilities.c:322
-#: ../src/gnome2/utilities.c:389 ../src/gnome2/utilities.c:391
-#: ../src/gnome2/utilities.c:451 ../src/gnome2/utilities.c:453
-#: ../src/gnome2/utilities.c:1077 ../src/main/sidebar.cc:757
-#: ../src/main/sidebar.cc:759 ../src/main/sidebar.cc:818
-#: ../src/main/sidebar.cc:891 ../src/main/sidebar.cc:893
+#: ../src/gnome2/mod_mgr.c:630
+#: ../src/gnome2/mod_mgr.c:632
+#: ../src/gnome2/mod_mgr.c:731
+#: ../src/gnome2/mod_mgr.c:768
+#: ../src/gnome2/mod_mgr.c:770
+#: ../src/gnome2/utilities.c:322
+#: ../src/gnome2/utilities.c:389
+#: ../src/gnome2/utilities.c:391
+#: ../src/gnome2/utilities.c:451
+#: ../src/gnome2/utilities.c:453
+#: ../src/gnome2/utilities.c:1077
+#: ../src/main/sidebar.cc:757
+#: ../src/main/sidebar.cc:759
+#: ../src/main/sidebar.cc:818
+#: ../src/main/sidebar.cc:891
+#: ../src/main/sidebar.cc:893
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -867,43 +977,58 @@ msgid ""
 "Categorized by\n"
 "Module Type"
 msgstr ""
+"ממוין לפי\n"
+"סוג המודול"
 
-#: ../src/gnome2/mod_mgr.c:902 ../src/gnome2/utilities.c:514
-#: ../src/main/sidebar.cc:967 ../src/main/sidebar.cc:969
+#: ../src/gnome2/mod_mgr.c:902
+#: ../src/gnome2/utilities.c:514
+#: ../src/main/sidebar.cc:967
+#: ../src/main/sidebar.cc:969
 msgid "Biblical Texts"
 msgstr "כתבי קודש"
 
-#: ../src/gnome2/mod_mgr.c:906 ../src/gnome2/utilities.c:518
-#: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:992
-#: ../src/main/sidebar.cc:994 ../ui/prefs.glade.h:27
+#: ../src/gnome2/mod_mgr.c:906
+#: ../src/gnome2/utilities.c:518
+#: ../src/main/sidebar.cc:604
+#: ../src/main/sidebar.cc:992
+#: ../src/main/sidebar.cc:994
+#: ../ui/prefs.glade.h:27
 msgid "Commentaries"
 msgstr "פירושים"
 
-#: ../src/gnome2/mod_mgr.c:910 ../src/gnome2/utilities.c:522
-#: ../src/main/sidebar.cc:1001 ../src/main/sidebar.cc:1003
+#: ../src/gnome2/mod_mgr.c:910
+#: ../src/gnome2/utilities.c:522
+#: ../src/main/sidebar.cc:1001
+#: ../src/main/sidebar.cc:1003
 msgid "Dictionaries"
 msgstr "מילונים"
 
-#: ../src/gnome2/mod_mgr.c:914 ../src/gnome2/utilities.c:526
-#: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
-#, fuzzy
+#: ../src/gnome2/mod_mgr.c:914
+#: ../src/gnome2/utilities.c:526
+#: ../src/main/sidebar.cc:1010
+#: ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
 msgstr "Devotional יומי"
 
-#: ../src/gnome2/mod_mgr.c:918 ../src/gnome2/utilities.c:530
-#: ../src/main/sidebar.cc:617 ../src/main/sidebar.cc:1019
+#: ../src/gnome2/mod_mgr.c:918
+#: ../src/gnome2/utilities.c:530
+#: ../src/main/sidebar.cc:617
+#: ../src/main/sidebar.cc:1019
 #: ../src/main/sidebar.cc:1021
 msgid "General Books"
 msgstr "ספרים כלליים"
 
-#: ../src/gnome2/mod_mgr.c:922 ../src/gnome2/utilities.c:534
-#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
+#: ../src/gnome2/mod_mgr.c:922
+#: ../src/gnome2/utilities.c:534
+#: ../src/main/sidebar.cc:1028
+#: ../src/main/sidebar.cc:1030
 msgid "Maps"
-msgstr ""
+msgstr "מפות"
 
-#: ../src/gnome2/mod_mgr.c:926 ../src/gnome2/utilities.c:538
-#: ../src/main/sidebar.cc:1037 ../src/main/sidebar.cc:1039
-#, fuzzy
+#: ../src/gnome2/mod_mgr.c:926
+#: ../src/gnome2/utilities.c:538
+#: ../src/main/sidebar.cc:1037
+#: ../src/main/sidebar.cc:1039
 msgid "Images"
 msgstr "התאמות"
 
@@ -912,22 +1037,27 @@ msgid ""
 "Categorized by\n"
 "Availability"
 msgstr ""
+"ממוין לפי\n"
+"זמינות"
 
 #: ../src/gnome2/mod_mgr.c:939
 msgid "Updates"
-msgstr ""
+msgstr "עדכונים"
 
 #: ../src/gnome2/mod_mgr.c:943
-#, fuzzy
 msgid "Uninstalled"
 msgstr "התקנה"
 
-#: ../src/gnome2/mod_mgr.c:947 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:543 ../src/main/prayerlists.cc:235
-#: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
-#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+#: ../src/gnome2/mod_mgr.c:947
+#: ../src/gnome2/sidebar.c:421
+#: ../src/gnome2/utilities.c:543
+#: ../src/main/prayerlists.cc:235
+#: ../src/main/sword_treekey.cc:373
+#: ../src/main/sword_treekey.cc:417
+#: ../src/main/sidebar.cc:1047
+#: ../src/main/sidebar.cc:1049
 msgid "Prayer List/Journal"
-msgstr ""
+msgstr "יומן\\רשימת תפילות"
 
 #: ../src/gnome2/mod_mgr.c:1104
 msgid "Refreshing remote"
@@ -942,23 +1072,23 @@ msgid "Module Name"
 msgstr "שם מודול"
 
 #: ../src/gnome2/mod_mgr.c:1317
-#, fuzzy
 msgid "Installed"
 msgstr "התקנה"
 
 #: ../src/gnome2/mod_mgr.c:1342
 msgid "Available"
-msgstr ""
+msgstr "זמין"
 
 #: ../src/gnome2/mod_mgr.c:1351
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: ../src/gnome2/mod_mgr.c:1360
 msgid "Description"
 msgstr "תיאור"
 
-#: ../src/gnome2/mod_mgr.c:1393 ../src/gnome2/mod_mgr.c:1471
+#: ../src/gnome2/mod_mgr.c:1393
+#: ../src/gnome2/mod_mgr.c:1471
 msgid "Configure"
 msgstr "ערוך תצורה"
 
@@ -982,19 +1112,19 @@ msgstr "ספריה"
 msgid "Sources"
 msgstr "מקורות"
 
-#: ../src/gnome2/mod_mgr.c:1475 ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1774
+#: ../src/gnome2/mod_mgr.c:1475
+#: ../src/gnome2/sidebar.c:1347
+#: ../src/gnome2/preferences_dialog.c:1770
 msgid "Modules"
 msgstr "מודולים"
 
 #: ../src/gnome2/mod_mgr.c:1477
-#, fuzzy
 msgid "Install/Update"
 msgstr "התקנה"
 
 #: ../src/gnome2/mod_mgr.c:1479
 msgid "Maintenance"
-msgstr ""
+msgstr "תחזוקה"
 
 #: ../src/gnome2/mod_mgr.c:1689
 msgid "Please Refresh"
@@ -1008,7 +1138,8 @@ msgstr "רשימת המודולים אינה מעודכנת!"
 msgid "Select Local Source"
 msgstr "נא לבחור מקור מקומי"
 
-#: ../src/gnome2/mod_mgr.c:2159 ../src/gnome2/mod_mgr.c:2334
+#: ../src/gnome2/mod_mgr.c:2159
+#: ../src/gnome2/mod_mgr.c:2334
 msgid "Remove the selected source"
 msgstr "הסר את המקור שנבחר"
 
@@ -1026,7 +1157,7 @@ msgstr "סוג:"
 
 #: ../src/gnome2/mod_mgr.c:2219
 msgid "Host:"
-msgstr ""
+msgstr "מארח:"
 
 #: ../src/gnome2/mod_mgr.c:2220
 msgid "Directory:"
@@ -1035,7 +1166,7 @@ msgstr "ספריה:"
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2244
 msgid "A source by that name already exists."
-msgstr ""
+msgstr "יש כבר מקור בשם זה."
 
 #: ../src/gnome2/sidebar_dialog.c:134
 msgid "Sidebar"
@@ -1053,7 +1184,8 @@ msgstr "תצוגה לפני הדפסה"
 msgid "Failed to print the document"
 msgstr "הדפסת המסמך נכשלה"
 
-#: ../src/gnome2/main_window.c:730 ../src/main/sword.cc:631
+#: ../src/gnome2/main_window.c:730
+#: ../src/main/sword.cc:631
 msgid "Starting"
 msgstr "התחלה"
 
@@ -1069,9 +1201,12 @@ msgstr "GnomeSword - תוכנה לחקר כתבי הקודש"
 msgid "Open a new tab"
 msgstr "פתח לשונית חדשה"
 
-#: ../src/gnome2/main_window.c:879 ../src/gnome2/sidebar.c:406
-#: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:598
-#: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:984
+#: ../src/gnome2/main_window.c:879
+#: ../src/gnome2/sidebar.c:406
+#: ../src/gnome2/sidebar.c:412
+#: ../src/main/sidebar.cc:598
+#: ../src/main/sidebar.cc:983
+#: ../src/main/sidebar.cc:984
 #: ../src/main/sidebar.cc:985
 msgid "Standard View"
 msgstr "תצוגה רגילה"
@@ -1084,21 +1219,25 @@ msgstr "תצוגת פירוש"
 msgid "Book View"
 msgstr "תצוגת ספר"
 
-#: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
+#: ../src/gnome2/navbar_book.c:327
+#: ../src/gnome2/navbar_book_dialog.c:299
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "נוע החוצה אל הקטע הכולל את זה הנוכחי"
 
-#: ../src/gnome2/navbar_book.c:343 ../src/gnome2/navbar_book_dialog.c:315
+#: ../src/gnome2/navbar_book.c:343
+#: ../src/gnome2/navbar_book_dialog.c:315
 msgid "Go to previous item"
 msgstr "לך אל הפריט הקודם"
 
-#: ../src/gnome2/navbar_book.c:358 ../src/gnome2/navbar_book_dialog.c:330
+#: ../src/gnome2/navbar_book.c:358
+#: ../src/gnome2/navbar_book_dialog.c:330
 msgid "Go to next item"
 msgstr "לך אל הפריט הבא"
 
-#: ../src/gnome2/navbar_book.c:374 ../src/gnome2/navbar_book_dialog.c:346
+#: ../src/gnome2/navbar_book.c:374
+#: ../src/gnome2/navbar_book_dialog.c:346
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "נוע פנימה אל תת הקטע הראשון"
 
 #: ../src/gnome2/sidebar.c:700
 msgid "Save List"
@@ -1108,12 +1247,14 @@ msgstr "שמור רשימה"
 msgid "Save the search results as bookmarks"
 msgstr "שמור את תוצאות החיפוש כסימניות"
 
-#: ../src/gnome2/sidebar.c:739 ../src/gnome2/sidebar.c:889
+#: ../src/gnome2/sidebar.c:739
+#: ../src/gnome2/sidebar.c:889
 #: ../src/gnome2/bookmarks_menu.c:1120
 msgid "Open in a new tab"
 msgstr "פתח בלשונית חדשה"
 
-#: ../src/gnome2/sidebar.c:740 ../src/gnome2/sidebar.c:890
+#: ../src/gnome2/sidebar.c:740
+#: ../src/gnome2/sidebar.c:890
 msgid "Open selected module in a new tab"
 msgstr "פתח את המודול הנבחר בלשונית חדשה"
 
@@ -1121,47 +1262,45 @@ msgstr "פתח את המודול הנבחר בלשונית חדשה"
 msgid "Open in dialog"
 msgstr "פתח בתיבת דיאלוג"
 
-#: ../src/gnome2/sidebar.c:747 ../src/gnome2/sidebar.c:897
+#: ../src/gnome2/sidebar.c:747
+#: ../src/gnome2/sidebar.c:897
 msgid "Open selected module in a dialog"
 msgstr "פתח את המודות הנבחר בתיבת דיאלוג"
 
-#: ../src/gnome2/sidebar.c:753 ../src/gnome2/sidebar.c:903
+#: ../src/gnome2/sidebar.c:753
+#: ../src/gnome2/sidebar.c:903
 msgid "View information about the selected dialog"
 msgstr "הצג מידע אודות המודול הנבחר"
 
 #: ../src/gnome2/sidebar.c:825
-#, fuzzy
 msgid "Simple"
 msgstr "קובץ"
 
 #: ../src/gnome2/sidebar.c:826
-#, fuzzy
 msgid "Create a new simple prayer list"
 msgstr "צור רשימת מודולים חדשה"
 
 #: ../src/gnome2/sidebar.c:832
-#, fuzzy
 msgid "Subject"
 msgstr "אובייקט Pixbuf"
 
 #: ../src/gnome2/sidebar.c:839
 msgid "Monthly"
-msgstr ""
+msgstr "חודשי"
 
-#: ../src/gnome2/sidebar.c:840 ../src/gnome2/sidebar.c:847
+#: ../src/gnome2/sidebar.c:840
+#: ../src/gnome2/sidebar.c:847
 #: ../src/gnome2/sidebar.c:854
-#, fuzzy
 msgid "Create a new prayer list"
 msgstr "צור רשימת מודולים חדשה"
 
 #: ../src/gnome2/sidebar.c:846
-#, fuzzy
 msgid "Daily Journal"
 msgstr "Devotional יומי"
 
 #: ../src/gnome2/sidebar.c:853
 msgid "Outlined Topic"
-msgstr ""
+msgstr "נושא מתואר"
 
 #: ../src/gnome2/sidebar.c:1160
 msgid "_Modules"
@@ -1171,7 +1310,8 @@ msgstr "מודולים"
 msgid "_Bookmarks"
 msgstr "סימניות"
 
-#: ../src/gnome2/sidebar.c:1176 ../src/gnome2/main_menu.c:762
+#: ../src/gnome2/sidebar.c:1176
+#: ../src/gnome2/main_menu.c:762
 msgid "_Search"
 msgstr "חפש"
 
@@ -1179,7 +1319,8 @@ msgstr "חפש"
 msgid "Verse _List"
 msgstr "רשימת פסוקים"
 
-#: ../src/gnome2/sidebar.c:1323 ../src/gnome2/bookmarks_treeview.c:907
+#: ../src/gnome2/sidebar.c:1323
+#: ../src/gnome2/bookmarks_treeview.c:907
 msgid "Bookmarks"
 msgstr "סימניות"
 
@@ -1191,17 +1332,20 @@ msgstr "חיפוש"
 msgid "Verse List"
 msgstr "רשימת פסוקים"
 
-#: ../src/gnome2/search_dialog.c:60 ../src/main/search_dialog.cc:58
+#: ../src/gnome2/search_dialog.c:60
+#: ../src/main/search_dialog.cc:58
 #: ../src/main/search_sidebar.cc:55
 msgid "Searching the "
 msgstr "מחפש בתוך"
 
-#: ../src/gnome2/search_dialog.c:61 ../src/main/search_dialog.cc:59
+#: ../src/gnome2/search_dialog.c:61
+#: ../src/main/search_dialog.cc:59
 #: ../src/main/search_sidebar.cc:56
 msgid " Module"
 msgstr "מודול"
 
-#: ../src/gnome2/search_dialog.c:62 ../src/main/search_dialog.cc:60
+#: ../src/gnome2/search_dialog.c:62
+#: ../src/main/search_dialog.cc:60
 #: ../src/main/search_sidebar.cc:57
 msgid "found in "
 msgstr "נמצא בתוך"
@@ -1227,6 +1371,8 @@ msgid ""
 "For multi-word search, use\n"
 "+FirstWord +SecondWord"
 msgstr ""
+"על מנת לחפש מלים מרובות,\n"
+"נא להזין מילה1+מילה2"
 
 #: ../src/gnome2/search_sidebar.c:191
 msgid "Search Module"
@@ -1236,7 +1382,8 @@ msgstr "חפש במודול"
 msgid "Bible"
 msgstr "כתבי קודש"
 
-#: ../src/gnome2/search_sidebar.c:214 ../ui/prefs.glade.h:28
+#: ../src/gnome2/search_sidebar.c:214
+#: ../ui/prefs.glade.h:28
 msgid "Commentary"
 msgstr "פירוש"
 
@@ -1244,11 +1391,13 @@ msgstr "פירוש"
 msgid "Search Type"
 msgstr "סוג חיפוש"
 
-#: ../src/gnome2/search_sidebar.c:242 ../ui/search-dialog.glade.h:44
+#: ../src/gnome2/search_sidebar.c:242
+#: ../ui/search-dialog.glade.h:44
 msgid "Multi word"
 msgstr "רב מלים"
 
-#: ../src/gnome2/search_sidebar.c:261 ../ui/search-dialog.glade.h:31
+#: ../src/gnome2/search_sidebar.c:261
+#: ../ui/search-dialog.glade.h:31
 msgid "Exact phrase"
 msgstr "ביטוי מדויק"
 
@@ -1289,51 +1438,75 @@ msgstr "עליון"
 msgid "%s not found"
 msgstr "%s לא נמצא"
 
-#: ../src/gnome2/bookmark_dialog.c:147 ../src/gnome2/bookmarks_menu.c:1010
+#: ../src/gnome2/bookmark_dialog.c:147
+#: ../src/gnome2/bookmarks_menu.c:1010
 #: ../src/gnome2/bookmarks_treeview.c:103
 msgid "Enter Folder Name"
 msgstr "הזן שם תיקייה"
 
-#: ../src/gnome2/bookmark_dialog.c:149 ../src/gnome2/bookmarks_menu.c:1012
+#: ../src/gnome2/bookmark_dialog.c:149
+#: ../src/gnome2/bookmarks_menu.c:1012
 msgid "Folder Name"
 msgstr "שם תיקייה"
 
-#: ../src/gnome2/bookmark_dialog.c:150 ../src/gnome2/bookmarks_menu.c:1013
+#: ../src/gnome2/bookmark_dialog.c:150
+#: ../src/gnome2/bookmarks_menu.c:1013
 #: ../src/gnome2/bookmarks_treeview.c:105
 msgid "Folder: "
 msgstr "תיקייה:"
 
-#: ../src/gnome2/preferences_dialog.c:1667 ../ui/prefs.glade.h:54
+#: ../src/gnome2/preferences_dialog.c:1206
+#: ../src/gnome2/preferences_dialog.c:1244
+#: ../src/gnome2/preferences_dialog.c:1282
+#: ../src/gnome2/preferences_dialog.c:1318
+#: ../src/gnome2/preferences_dialog.c:1353
+#: ../src/gnome2/preferences_dialog.c:1387
+#: ../src/gnome2/preferences_dialog.c:1420
+#: ../src/gnome2/preferences_dialog.c:1454
+#: ../src/gnome2/preferences_dialog.c:1487
+#: ../src/gnome2/preferences_dialog.c:1522
+#: ../src/gnome2/preferences_dialog.c:1558
+#: ../src/gnome2/preferences_dialog.c:1594
+#: ../src/gnome2/preferences_dialog.c:1630
+#: ../src/gnome2/preferences_dialog.c:2023
+msgid "-- Select --"
+msgstr "-- בחירה --"
+
+#: ../src/gnome2/preferences_dialog.c:1663
+#: ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr "הגדרות"
 
-#: ../src/gnome2/preferences_dialog.c:1750
+#: ../src/gnome2/preferences_dialog.c:1746
 msgid "Fonts"
 msgstr "גופנים"
 
-#: ../src/gnome2/preferences_dialog.c:1753
+#: ../src/gnome2/preferences_dialog.c:1749
 msgid "Color"
 msgstr "צבע"
 
-#: ../src/gnome2/preferences_dialog.c:1756
-#: ../src/gnome2/preferences_dialog.c:1770
-#: ../src/gnome2/preferences_dialog.c:1783 ../src/main/prayerlists.cc:126
+#: ../src/gnome2/preferences_dialog.c:1752
+#: ../src/gnome2/preferences_dialog.c:1766
+#: ../src/gnome2/preferences_dialog.c:1779
+#: ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr "שונות"
 
-#: ../src/gnome2/preferences_dialog.c:1760
+#: ../src/gnome2/preferences_dialog.c:1756
 msgid "General"
 msgstr "כללי"
 
-#: ../src/gnome2/preferences_dialog.c:1763 ../ui/prefs.glade.h:61
+#: ../src/gnome2/preferences_dialog.c:1759
+#: ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr "לשוניות וחלוניות"
 
-#: ../src/gnome2/preferences_dialog.c:1777
+#: ../src/gnome2/preferences_dialog.c:1773
 msgid "Main"
 msgstr "ראשי"
 
-#: ../src/gnome2/preferences_dialog.c:1780 ../src/gnome2/parallel_dialog.c:605
+#: ../src/gnome2/preferences_dialog.c:1776
+#: ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr "מקביל"
 
@@ -1354,14 +1527,11 @@ msgid "The pixbuf to render."
 msgstr "Pixbuf לציור"
 
 #: ../src/gnome2/about_gnomesword.c:126
-#, fuzzy
 msgid "Copyright 2000-2008 The GnomeSword Development Team"
 msgstr "זכויות היוצרים (2000-2006) שמורות לצוות הפיתוח של GnomeSword"
 
 #: ../src/gnome2/about_gnomesword.c:129
-msgid ""
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
+msgid "We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."
 msgstr "תודה לטרוי גריפיתס ולכל מי שהעניק לנו את פרוייקט SWORD."
 
 #: ../src/gnome2/studypad.c:107
@@ -1376,7 +1546,8 @@ msgstr "לא נטען"
 msgid "Initiating GnomeSword"
 msgstr "מפעיל את GnomeSword"
 
-#: ../src/gnome2/gnomesword.c:143 ../src/gnome2/splash.c:643
+#: ../src/gnome2/gnomesword.c:143
+#: ../src/gnome2/splash.c:643
 msgid "Displaying GnomeSword"
 msgstr "מציג את GnomeSword"
 
@@ -1397,11 +1568,13 @@ msgstr "שם תיקייה:"
 msgid "Bookmark name: "
 msgstr "שם סימנייה:"
 
-#: ../src/gnome2/bookmarks_menu.c:479 ../src/gnome2/bookmarks_menu.c:918
+#: ../src/gnome2/bookmarks_menu.c:479
+#: ../src/gnome2/bookmarks_menu.c:918
 msgid "Verse: "
 msgstr "פסוק:"
 
-#: ../src/gnome2/bookmarks_menu.c:480 ../src/gnome2/bookmarks_menu.c:919
+#: ../src/gnome2/bookmarks_menu.c:480
+#: ../src/gnome2/bookmarks_menu.c:919
 msgid "Module: "
 msgstr "מודול:"
 
@@ -1445,7 +1618,8 @@ msgstr "שחזר תיקייה"
 msgid "Restore saved folder"
 msgstr "שחזר התיקייה שנשמרה"
 
-#: ../src/gnome2/bookmarks_menu.c:1121 ../src/gnome2/bookmarks_menu.c:1127
+#: ../src/gnome2/bookmarks_menu.c:1121
+#: ../src/gnome2/bookmarks_menu.c:1127
 msgid "Open this bookmark in a dialog"
 msgstr "פתח הסימנייה בתיבת דיאלוג"
 
@@ -1521,46 +1695,46 @@ msgstr "טען סימניות מ-Bibletime"
 msgid "Remove - Restore"
 msgstr "הסר - שחזר"
 
-#: ../src/gnome2/treekey-editor.c:125 ../src/gnome2/treekey-editor.c:184
+#: ../src/gnome2/treekey-editor.c:125
+#: ../src/gnome2/treekey-editor.c:184
 #: ../src/gnome2/treekey-editor.c:281
 msgid "Prayer List/Journal Item"
-msgstr ""
+msgstr "פריט יומן\\רשימת תפילות"
 
-#: ../src/gnome2/treekey-editor.c:126 ../src/gnome2/treekey-editor.c:185
+#: ../src/gnome2/treekey-editor.c:126
+#: ../src/gnome2/treekey-editor.c:185
 #: ../src/gnome2/treekey-editor.c:282
-#, fuzzy
 msgid "New name"
 msgstr "מסמך חדש"
 
-#: ../src/gnome2/treekey-editor.c:244 ../ui/export-dialog.glade.h:4
+#: ../src/gnome2/treekey-editor.c:244
+#: ../ui/export-dialog.glade.h:4
 #: ../ui/prefs.glade.h:25
 msgid "Book"
 msgstr "ספר"
 
 #: ../src/gnome2/treekey-editor.c:247
-#, fuzzy
 msgid "Remove the selected item"
 msgstr "להסיר התיקייה שנבחרה"
 
 #: ../src/gnome2/treekey-editor.c:310
 msgid "Add Child"
-msgstr ""
+msgstr "הוסף צאצא"
 
-#: ../src/gnome2/treekey-editor.c:311 ../src/gnome2/treekey-editor.c:317
+#: ../src/gnome2/treekey-editor.c:311
+#: ../src/gnome2/treekey-editor.c:317
 msgid "Add an item"
-msgstr ""
+msgstr "הוסף כפריט"
 
 #: ../src/gnome2/treekey-editor.c:316
 msgid "Add Sibling"
-msgstr ""
+msgstr "הוסף אח"
 
 #: ../src/gnome2/treekey-editor.c:323
-#, fuzzy
 msgid "Remove this item"
 msgstr "הסר - שחזר"
 
 #: ../src/gnome2/treekey-editor.c:329
-#, fuzzy
 msgid "Edit this item"
 msgstr "הדפס הערה"
 
@@ -1569,7 +1743,6 @@ msgid "Powered by the SWORD Project"
 msgstr "מושתת על פרויקט SWORD"
 
 #: ../src/gnome2/splash.c:574
-#, fuzzy
 msgid "Initiating Gecko"
 msgstr "מפעיל את GnomeSword"
 
@@ -1666,7 +1839,6 @@ msgstr "הצג \\ הסתר את חלון כתבי הקודש"
 
 #. 3
 #: ../src/gnome2/main_menu.c:811
-#, fuzzy
 msgid "_Preview"
 msgstr "תצוגה מקדימה"
 
@@ -1700,13 +1872,11 @@ msgstr "סגנון פסוק"
 
 #. 8
 #: ../src/gnome2/main_menu.c:836
-#, fuzzy
 msgid "L_ink Tabs"
 msgstr "נעץ לשוניות"
 
 #. 9
 #: ../src/gnome2/main_menu.c:842
-#, fuzzy
 msgid "_Read Aloud"
 msgstr "קריאה בקול"
 
@@ -1772,27 +1942,34 @@ msgstr "הסטוריה"
 msgid "_Help"
 msgstr "עזרה"
 
-#: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:13
+#: ../src/gnome2/export_dialog.c:228
+#: ../ui/export-dialog.glade.h:13
 msgid "Please check copyright before exporting!"
-msgstr ""
+msgstr "נא לבדוק זכויות יוצרים בטרם ייצוא!"
 
 #: ../src/main/sword.cc:547
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
 msgstr ""
+"קובץ השפה\\הקיצורים\n"
+"של GnomeSword חסר."
 
 #: ../src/main/sword.cc:554
 msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
+"לא ניתן לפתוח את קובץ\n"
+"השפה\\הקיצורים של GnomeSword."
 
 #: ../src/main/sword.cc:563
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
 msgstr ""
+"לא ניתן למפות את קובץ\n"
+"השפה\\הקיצורים של GnomeSword."
 
 #: ../src/main/sword.cc:632
 msgid "Initiating SWORD"
@@ -1820,7 +1997,7 @@ msgstr "מכבה את SWORD"
 
 #: ../src/main/sword.cc:1363
 msgid "Daily devotional was requested, but there are none installed."
-msgstr ""
+msgstr "ביקשת את ה-Devotional היומי, אך הוא אינו מותקן."
 
 #: ../src/main/search_dialog.cc:314
 msgid "Delete Range?"
@@ -1830,9 +2007,9 @@ msgstr "טווח למחיקה?"
 msgid "Are you sure you want to delete this range?"
 msgstr "האם למחוק טווח זה?"
 
-#: ../src/main/search_dialog.cc:541 ../src/main/search_dialog.cc:1027
+#: ../src/main/search_dialog.cc:541
+#: ../src/main/search_dialog.cc:1027
 #: ../src/main/search_dialog.cc:1048
-#, fuzzy
 msgid "Search: "
 msgstr "חיפוש"
 
@@ -1851,9 +2028,11 @@ msgid ""
 "No such module is installed.\n"
 "%s"
 msgstr ""
+"%s:\n"
+"לא מותקן מודול כזה.\n"
+"%s"
 
 #: ../src/main/search_dialog.cc:1449
-#, fuzzy
 msgid "Please adjust the module list."
 msgstr "שמור רשימת מודולים"
 
@@ -1863,341 +2042,338 @@ msgstr "החיפוש הושלם"
 
 #: ../src/main/main.c:65
 msgid "GnomeSword does not understand more than one argument."
-msgstr ""
+msgstr "GnomeSword אינה מפענחת יותר מארגומנט אחד"
 
 #: ../src/main/prayerlists.cc:70
 msgid "January"
-msgstr ""
+msgstr "ינואר"
 
 #: ../src/main/prayerlists.cc:71
 msgid "February"
-msgstr ""
+msgstr "פברואר"
 
 #: ../src/main/prayerlists.cc:72
-#, fuzzy
 msgid "March"
 msgstr "חיפוש"
 
 #: ../src/main/prayerlists.cc:73
 msgid "April"
-msgstr ""
+msgstr "אפריל"
 
 #: ../src/main/prayerlists.cc:74
 msgid "May"
-msgstr ""
+msgstr "מאי"
 
 #: ../src/main/prayerlists.cc:75
 msgid "June"
-msgstr ""
+msgstr "יוני"
 
 #: ../src/main/prayerlists.cc:76
 msgid "July"
-msgstr ""
+msgstr "יולי"
 
 #: ../src/main/prayerlists.cc:77
 msgid "August"
-msgstr ""
+msgstr "אוגוסט"
 
 #: ../src/main/prayerlists.cc:78
 msgid "September"
-msgstr ""
+msgstr "ספטמבר"
 
 #: ../src/main/prayerlists.cc:79
 msgid "October"
-msgstr ""
+msgstr "אוקטובר"
 
 #: ../src/main/prayerlists.cc:80
-#, fuzzy
 msgid "November"
 msgstr "עטיפה"
 
 #: ../src/main/prayerlists.cc:81
 msgid "December"
-msgstr ""
+msgstr "דצמבר"
 
-#: ../src/main/prayerlists.cc:120 ../src/main/sword_treekey.cc:334
+#: ../src/main/prayerlists.cc:120
+#: ../src/main/sword_treekey.cc:334
 msgid "Growth"
-msgstr ""
+msgstr "התחזקות"
 
-#: ../src/main/prayerlists.cc:121 ../src/main/sword_treekey.cc:335
+#: ../src/main/prayerlists.cc:121
+#: ../src/main/sword_treekey.cc:335
 msgid "<b>For Growth</b><br>"
-msgstr ""
+msgstr "<b>לשם התחזקות</b><br>"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:365
+#: ../src/main/prayerlists.cc:122
+#: ../src/main/prayerlists.cc:365
 #: ../src/main/sword_treekey.cc:336
-#, fuzzy
 msgid "Salvation"
 msgstr "כותרת"
 
-#: ../src/main/prayerlists.cc:123 ../src/main/sword_treekey.cc:337
+#: ../src/main/prayerlists.cc:123
+#: ../src/main/sword_treekey.cc:337
 msgid "<b>For Salvation</b><br>"
-msgstr ""
+msgstr "<b>לשם ישועה</b><br>"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:369
+#: ../src/main/prayerlists.cc:124
+#: ../src/main/prayerlists.cc:369
 #: ../src/main/sword_treekey.cc:338
 msgid "Health"
-msgstr ""
+msgstr "בריאות"
 
-#: ../src/main/prayerlists.cc:125 ../src/main/sword_treekey.cc:339
+#: ../src/main/prayerlists.cc:125
+#: ../src/main/sword_treekey.cc:339
 msgid "<b>For Health</b><br>"
-msgstr ""
+msgstr "<b>לשם בריאות</b><br>"
 
-#: ../src/main/prayerlists.cc:127 ../src/main/sword_treekey.cc:341
-#, fuzzy
+#: ../src/main/prayerlists.cc:127
+#: ../src/main/sword_treekey.cc:341
 msgid "<b>Miscellaneous</b><br>"
 msgstr "<b>גופן - שונות</b>"
 
 #: ../src/main/prayerlists.cc:135
-#, fuzzy
 msgid "Point x"
 msgstr "הדפס"
 
 #: ../src/main/prayerlists.cc:136
 msgid "<b>(x)</b><br>"
-msgstr ""
+msgstr "<b>(x)</b><br>"
 
 #: ../src/main/prayerlists.cc:137
-#, fuzzy
 msgid "Point y"
 msgstr "הדפס"
 
 #: ../src/main/prayerlists.cc:138
 msgid "<b>(y)</b><br>"
-msgstr ""
+msgstr "<b>(y)</b><br>"
 
 #: ../src/main/prayerlists.cc:139
-#, fuzzy
 msgid "Point z"
 msgstr "הדפס"
 
 #: ../src/main/prayerlists.cc:140
 msgid "<b>(z)</b><br>"
-msgstr ""
+msgstr "<b>(z)</b><br>"
 
 #: ../src/main/prayerlists.cc:148
 msgid "Minor Topic 1"
-msgstr ""
+msgstr "נושא משני 1"
 
 #: ../src/main/prayerlists.cc:149
-#, fuzzy
 msgid "<b>Subtopic 1</b><br>"
 msgstr "<b>היקף</b>"
 
 #: ../src/main/prayerlists.cc:151
 msgid "Minor Topic 2"
-msgstr ""
+msgstr "נושא משני 2"
 
 #: ../src/main/prayerlists.cc:152
-#, fuzzy
 msgid "<b>Subtopic 2</b><br>"
 msgstr "<b>היקף</b>"
 
 #: ../src/main/prayerlists.cc:154
 msgid "Minor Topic 3"
-msgstr ""
+msgstr "נושא משני 3"
 
 #: ../src/main/prayerlists.cc:155
-#, fuzzy
 msgid "<b>Subtopic 3</b><br>"
 msgstr "<b>היקף</b>"
 
 #: ../src/main/prayerlists.cc:157
 msgid "Minor Topic 4"
-msgstr ""
+msgstr "נושא משני 4"
 
 #: ../src/main/prayerlists.cc:158
-#, fuzzy
 msgid "<b>Subtopic 4</b><br>"
 msgstr "<b>היקף</b>"
 
 #: ../src/main/prayerlists.cc:236
 msgid "Name for new prayer list or journal"
-msgstr ""
+msgstr "שם עבור יומן או רשימת תפילות"
 
-#: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:324
+#: ../src/main/prayerlists.cc:238
+#: ../src/main/prayerlists.cc:324
 #: ../src/main/sword_treekey.cc:376
 msgid "MyPrayerList"
-msgstr ""
+msgstr "רשימת התפילות שלי"
 
 #: ../src/main/prayerlists.cc:267
 msgid "GnomeSword finds that prayer list already."
-msgstr ""
+msgstr "רשימת התפילות הזו כבר נמצאה."
 
 #: ../src/main/prayerlists.cc:272
 msgid "GnomeSword cannot create module's path."
-msgstr ""
+msgstr "לא ניתן ליצור את הנתיב למודול."
 
 #: ../src/main/prayerlists.cc:310
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "A basic prayer list. \\par\\par Module created by GnomeSword."
 
 #: ../src/main/prayerlists.cc:325
-msgid ""
-"<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
-"b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
-msgstr ""
+msgid "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgstr "<b>אנשים:</b><br>בנימין<br>שמואל<br>שושנה<br><br><b>כנסייה:</b><br>מושבים<br>אחווה<br>ספרים למסיונרים<br><br><br>"
 
 #: ../src/main/prayerlists.cc:351
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "רשימת תפילות על פי נושא. מודול אחד-לאחד שנבנה על ידי GnomeSword."
 
 #: ../src/main/prayerlists.cc:366
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr ""
+msgstr "בנימין<br>שמואל<br>שושנה<br>יוחנן<br>"
 
 #: ../src/main/prayerlists.cc:367
 msgid "Spiritual Growth"
-msgstr ""
+msgstr "התחזקות רוחנית"
 
 #: ../src/main/prayerlists.cc:368
 msgid "Mike<br>Steve<br>"
-msgstr ""
+msgstr "מיכאל<br>טוביה<br>"
 
 #: ../src/main/prayerlists.cc:370
 msgid "Sue<br>John<br>"
-msgstr ""
+msgstr "שושנה<br>יוחנן<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "רשימת תפילות חודשית. מודול אחד-לאחד שנבנה על ידי GnomeSword."
 
 #: ../src/main/prayerlists.cc:447
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
-msgstr ""
+msgstr "יומן יומי. מודול אחד-לאחד שנבנה על ידי GnomeSword."
 
 #: ../src/main/prayerlists.cc:511
-msgid ""
-"An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
-msgstr ""
+msgid "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
+msgstr "נושא מתואר (למשל, דרשה). מודול אחד-לאחד שנבנה על ידי GnomeSword."
 
 #: ../src/main/prayerlists.cc:525
 msgid "Major Topic A"
-msgstr ""
+msgstr "נושא עיקרי א'"
 
 #: ../src/main/prayerlists.cc:526
 msgid "<b>Major Topic A</b><br>"
-msgstr ""
+msgstr "<b>נושא עיקרי א'</b><br>"
 
 #: ../src/main/prayerlists.cc:528
 msgid "Major Topic B"
-msgstr ""
+msgstr "נושא עיקרי ב'"
 
 #: ../src/main/prayerlists.cc:529
 msgid "<b>Major Topic B</b><br>"
-msgstr ""
+msgstr "<b>נושא עיקרי ב'</b><br>"
 
 #: ../src/main/prayerlists.cc:531
 msgid "Major Topic C"
-msgstr ""
+msgstr "נושא עיקרי ג'"
 
 #: ../src/main/prayerlists.cc:532
 msgid "<b>Major Topic C</b><br>"
-msgstr ""
+msgstr "<b>נושא עיקרי ג'</b><br>"
 
-#: ../src/main/xml.c:86 ../src/main/xml.c:471
+#: ../src/main/xml.c:86
+#: ../src/main/xml.c:471
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr ""
+msgstr "יצירת המסמך נכשלה. \n"
 
 #: ../src/main/xml.c:95
-#, fuzzy
 msgid "Personal"
 msgstr "הערות אישיות"
 
 #: ../src/main/xml.c:96
 msgid "What must I do to be saved?"
-msgstr ""
+msgstr "מה עלי לעשות כדי להיוושע?"
 
-#: ../src/main/xml.c:98 ../src/main/xml.c:99
+#: ../src/main/xml.c:98
+#: ../src/main/xml.c:99
 msgid "Acts 16:31"
-msgstr ""
+msgstr "מעשי השליחים 16:31"
 
-#: ../src/main/xml.c:103 ../src/main/xml.c:104
+#: ../src/main/xml.c:103
+#: ../src/main/xml.c:104
 msgid "Eph 2:8"
-msgstr ""
+msgstr "אל האפסים 2:8"
 
-#: ../src/main/xml.c:108 ../src/main/xml.c:109
+#: ../src/main/xml.c:108
+#: ../src/main/xml.c:109
 msgid "Romans 1:16"
-msgstr ""
+msgstr "אל הרומים 1:16"
 
 #: ../src/main/xml.c:112
 msgid "What is the Gospel?"
-msgstr ""
+msgstr "מהי הבשורה?"
 
 #: ../src/main/xml.c:114
 msgid "1 Cor 15:1-4"
-msgstr ""
+msgstr "הראשונה אל הקורינתים 15:1-4"
 
 #: ../src/main/xml.c:115
 msgid "1 Cor 15:1"
-msgstr ""
+msgstr "הראשונה אל הקורינתים 15:1"
 
-#: ../src/main/xml.c:419 ../src/main/xml.c:1085
+#: ../src/main/xml.c:419
+#: ../src/main/xml.c:1083
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr ""
+msgstr "לא ניתן לנתח את המסמך. \n"
 
-#: ../src/main/xml.c:425 ../src/main/xml.c:688 ../src/main/xml.c:966
-#: ../src/main/xml.c:1145
-#, fuzzy, c-format
+#: ../src/main/xml.c:425
+#: ../src/main/xml.c:686
+#: ../src/main/xml.c:964
+#: ../src/main/xml.c:1143
+#, c-format
 msgid "empty document \n"
-msgstr "מסמך חדש"
+msgstr "מסמך חדש \n"
 
 #: ../src/main/xml.c:431
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "סוג שגוי, צומת השורש != SwordBookmarks\n"
 
 #: ../src/main/xml.c:485
 msgid "Old Testament"
-msgstr ""
+msgstr "הברית הישנה"
 
 #: ../src/main/xml.c:487
-#, fuzzy
 msgid "Gen - Mal"
 msgstr "כללי"
 
 #: ../src/main/xml.c:493
-#, fuzzy
 msgid "New Testament"
 msgstr "מסמך חדש"
 
 #: ../src/main/xml.c:495
 msgid "Mat - Rev"
-msgstr ""
+msgstr "הבשורה על פי מתי"
 
 #: ../src/main/xml.c:503
-#, fuzzy
 msgid "Sample Module List"
 msgstr "רשימת מודולים"
 
 #: ../src/main/xml.c:505
-#, fuzzy
 msgid "Select the modules you want"
 msgstr "שמור רשימת מודולים"
 
-#: ../src/main/xml.c:694 ../src/main/xml.c:972
+#: ../src/main/xml.c:692
+#: ../src/main/xml.c:970
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr ""
+msgstr "סוג שגוי, צומת השורש != %s\n"
 
 #: ../src/main/sword_treekey.cc:374
 msgid "Name for new prayer list"
-msgstr ""
+msgstr "שם עבור רשימת התפילות החדשה"
 
 #: ../src/main/sword_treekey.cc:395
 #, c-format
 msgid "can not create path\n"
-msgstr ""
+msgstr "לא ניתן ליצור נתיב\n"
 
 #: ../src/main/sword_treekey.cc:398
 #, c-format
 msgid "Prayer list already exist\n"
-msgstr ""
+msgstr "רשימת התפילות כבר קיימת\n"
 
 #: ../src/main/sword_treekey.cc:419
 msgid "\\par\\par My prayer list \\par\\par Module created in GnomeSword"
-msgstr ""
+msgstr "רשימת התפילות שלי: מודול אחד-לאחד שנבנה על ידי GnomeSword"
 
 #: ../src/main/display.cc:256
 msgid ""
@@ -2206,41 +2382,57 @@ msgid ""
 "(Or possibly the image is of type other than bmp/gif/jpg/png.)\n"
 "GnomeSword cannot resize images to fit window."
 msgstr ""
+"לא ניתן לקבוע את גודל קובץ התמונה.\n"
+"האם התקנת את ,identify, של ImageMagick?\n"
+"(ייתכן גם שהתמונה אינה מסוג bmp/gif/jpg/png.)\n"
+"לא ניתן להתאים את גודל התמונות לחלון."
 
-#: ../src/main/display.cc:857 ../src/main/display.cc:926
-#: ../src/main/display.cc:1022 ../src/main/display.cc:1030
+#: ../src/main/display.cc:857
+#: ../src/main/display.cc:926
+#: ../src/main/display.cc:1022
+#: ../src/main/display.cc:1030
 #: ../ui/export-dialog.glade.h:5
 msgid "Chapter"
 msgstr "פרק"
 
-#: ../src/main/previewer.cc:102 ../src/main/module_dialogs.cc:232
+#: ../src/main/previewer.cc:102
+#: ../src/main/module_dialogs.cc:232
 #: ../ui/prefs.glade.h:55
 msgid "Previewer"
 msgstr "תצוגה מקדימה"
 
-#: ../src/main/previewer.cc:171 ../src/main/module_dialogs.cc:299
+#: ../src/main/previewer.cc:171
+#: ../src/main/module_dialogs.cc:299
 #: ../src/main/module_dialogs.cc:426
 msgid "Footnote"
 msgstr "הערת שוליים"
 
-#: ../src/main/previewer.cc:177 ../src/main/module_dialogs.cc:305
+#: ../src/main/previewer.cc:177
+#: ../src/main/module_dialogs.cc:305
 #: ../src/main/module_dialogs.cc:431
 msgid "Cross Reference"
 msgstr "הפנייה צולבת"
 
-#: ../src/main/previewer.cc:183 ../src/main/previewer.cc:197
-#: ../src/main/module_dialogs.cc:311 ../src/main/module_dialogs.cc:325
-#: ../src/main/module_dialogs.cc:436 ../src/main/module_dialogs.cc:448
+#: ../src/main/previewer.cc:183
+#: ../src/main/previewer.cc:197
+#: ../src/main/module_dialogs.cc:311
+#: ../src/main/module_dialogs.cc:325
+#: ../src/main/module_dialogs.cc:436
+#: ../src/main/module_dialogs.cc:448
 msgid "Strongs"
 msgstr "סטרונג"
 
-#: ../src/main/previewer.cc:189 ../src/main/previewer.cc:210
-#: ../src/main/module_dialogs.cc:317 ../src/main/module_dialogs.cc:336
-#: ../src/main/module_dialogs.cc:441 ../src/main/module_dialogs.cc:458
+#: ../src/main/previewer.cc:189
+#: ../src/main/previewer.cc:210
+#: ../src/main/module_dialogs.cc:317
+#: ../src/main/module_dialogs.cc:336
+#: ../src/main/module_dialogs.cc:441
+#: ../src/main/module_dialogs.cc:458
 msgid "Morphology"
 msgstr "מורפולוגיה"
 
-#: ../src/main/module_dialogs.cc:1268 ../src/main/url.cc:708
+#: ../src/main/module_dialogs.cc:1268
+#: ../src/main/url.cc:708
 msgid "Back to "
 msgstr "חזרה אל"
 
@@ -2266,53 +2458,52 @@ msgstr "מספר מודולי ספר"
 
 #: ../src/main/lists.cc:160
 msgid "Number of Percomm modules"
-msgstr "מספר מודולי Percomm"
+msgstr "מספר מודולי פירוש אישי"
 
 #: ../src/main/lists.cc:161
 msgid "Number of Devotion modules"
 msgstr "מספר מודולי Devotion"
 
 #: ../src/main/lists.cc:163
-#, fuzzy
 msgid "Number of Prayer modules"
-msgstr "מספר מודולי Percomm"
+msgstr "מספר מודולי פירוש אישי"
 
-#: ../src/main/parallel_view.cc:673 ../src/main/parallel_view.cc:917
-#, fuzzy
+#: ../src/main/parallel_view.cc:673
+#: ../src/main/parallel_view.cc:917
 msgid "view context"
 msgstr "כתבי קודש"
 
 #: ../src/main/url.cc:121
-#, fuzzy
 msgid "URL not found:"
 msgstr "%s לא נמצא"
 
 #: ../src/main/url.cc:224
 #, c-format
 msgid "GnomeSword could not execute %s"
-msgstr ""
+msgstr "לא ניתן להריץ את %s"
 
 #: ../src/main/url.cc:232
 msgid "Viewer error:\n"
-msgstr ""
+msgstr "שגיאת תצוגה:\n"
 
 #: ../src/main/url.cc:309
 #, c-format
 msgid "Show %s in main window"
 msgstr "הצג %s בחלון הראשי"
 
-#: ../src/main/tab_history.c:67 ../src/main/tab_history.c:111
+#: ../src/main/tab_history.c:67
+#: ../src/main/tab_history.c:111
 #: ../src/main/tab_history.c:126
 msgid "H_istory/<Separator>"
 msgstr "היסטוריה/<Separator>"
 
 #. tab->history_items + 1);
-#: ../src/main/tab_history.c:69 ../src/main/tab_history.c:113
+#: ../src/main/tab_history.c:69
+#: ../src/main/tab_history.c:113
 msgid "H_istory/C_lear"
 msgstr "היסטוריה/נקה"
 
 #: ../src/main/tab_history.c:248
-#, fuzzy
 msgid "Clear History"
 msgstr "נקה את רשימת ההסטוריה"
 
@@ -2328,11 +2519,9 @@ msgstr "פרק"
 msgid ""
 "Welcome to GnomeSword.\n"
 "\n"
-"There are no Bible modules installed. In order to initialize, GnomeSword "
-"needs you to install at least one Bible.\n"
+"There are no Bible modules installed. In order to initialize, GnomeSword needs you to install at least one Bible.\n"
 "\n"
-"With your permission, GnomeSword will invoke the Module Manager so that you "
-"may install from Crosswire:\n"
+"With your permission, GnomeSword will invoke the Module Manager so that you may install from Crosswire:\n"
 "1. Configure remote install.\n"
 "2. Connect.\n"
 "3. Select a Bible text of your language preference.\n"
@@ -2343,14 +2532,28 @@ msgid ""
 "\n"
 "May GnomeSword invoke the Module Manager so that you may install a Bible?"
 msgstr ""
+"ברוכים הבאים ל-GnomeSword.\n"
+"\n"
+"לא מותקנים כרגע מודולי כתבי קודש. כדי לפעול, GnomeSword זקוק להתקנה של מודול כתבי קודש אחד לפחות.\n"
+"\n"
+"ברשותכם, GnomeSword יפעיל את מנהל המודולים כדי שתוכלו להתקין דרך Crosswire:\n"
+"1. קבעו תצורת התקנה מרחוק.\n"
+"2. התחברו.\n"
+"3. בחרו טקסט כתבי קודש בשפה הרצויה.\n"
+"4. הקליקו על 'התקן'.\n"
+"משתסיימו, סגרו את מנהל המודולים.\n"
+"\n"
+"אזהרה: אם אתם חיים במדינה הרודפת את המאמינים, נהגו בזהירות.\n"
+"\n"
+"האם להפעיל את מנהל המודולים לשם התקנת כתבי קודש?"
 
 #: ../src/main/settings.c:109
 msgid "$HOME is not set!"
-msgstr ""
+msgstr "לא נקבע $HOME!"
 
 #: ../src/main/settings.c:124
 msgid "GnomeSword has renamed .gnomesword-2.0 to .gnomesword"
-msgstr ""
+msgstr "GnomeSword שינתה את השם .gnomesword-2.0 ל .gnomesword"
 
 #: ../src/main/settings.c:127
 #, c-format
@@ -2360,6 +2563,10 @@ msgid ""
 "\n"
 "GnomeSword cannot continue."
 msgstr ""
+"GnomeSword אינה מסוגלת לשנות את השם  .gnomesword-2.0 ל .gnomesword:\n"
+"%s\n"
+"\n"
+"לא ניתן להמשיך."
 
 #: ../src/main/settings.c:135
 #, c-format
@@ -2369,18 +2576,22 @@ msgid ""
 "\n"
 "GnomeSword cannot continue."
 msgstr ""
+"לא ניתן ליצור את  .gnomesword:\n"
+"%s\n"
+"\n"
+"לא ניתן להמשיך."
 
 #: ../src/main/settings.c:155
 msgid "can not create  .sword"
-msgstr ""
+msgstr "לא ניתן ליצור את  .sword"
 
 #: ../src/main/settings.c:163
 msgid "can not create  .sword/mods.d"
-msgstr ""
+msgstr "לא ניתן ליצור את  .sword/mods.d"
 
 #: ../src/main/settings.c:171
 msgid "can not create  .sword/modules"
-msgstr ""
+msgstr "לא ניתן ליצור את  .sword/modules"
 
 #. must be first run
 #: ../src/main/settings.c:192
@@ -2388,6 +2599,8 @@ msgid ""
 "\n"
 "First Run: need to create settings!\n"
 msgstr ""
+"\n"
+"הרצה ראשונה: יש לבנות תצורה!\n"
 
 #: ../src/main/settings.c:203
 msgid ""
@@ -2398,10 +2611,16 @@ msgid ""
 "GnomeSword cannot proceed,\n"
 "and will now exit."
 msgstr ""
+"עדיין לא מותקנים כתבי קודש.\n"
+"מכאן שבחרת לא להתקינם.\n"
+"\n"
+"ללא מודולי כתבי קודש,\n"
+"GnomeSword אינה יכולה להמשיך,\n"
+"ולכן תיסגר."
 
 #: ../src/main/settings.c:207
 msgid "Bible module installation complete."
-msgstr ""
+msgstr "התקנת מודול כתבי קודש הושלמה."
 
 #: ../src/main/settings.c:210
 msgid ""
@@ -2409,6 +2628,9 @@ msgid ""
 "GnomeSword cannot proceed,\n"
 "and will now exit."
 msgstr ""
+"ללא מודולי כתבי קודש,\n"
+"GnomeSword אינה יכולה להמשיך,\n"
+"ולכן תיסגר."
 
 #. *****************************************************************************
 #. * Name
@@ -2426,15 +2648,19 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:710
+#: ../src/main/settings.c:725
 msgid ""
 "There is currently no program set as your\n"
 "handler for \"sword://\" and similar URLs.\n"
 "Would you like GnomeSword to install itself\n"
 "as the program to handle these URLs?"
 msgstr ""
+"כרגע לא מוגדרת תוכנה שתטפל\n"
+"ב \"sword://\" ובכתובות URL דומות.\n"
+"האם ברצונך לאפשר ל-GnomeSword \n"
+"להגדיר את עצמה כתוכנה כזו?"
 
-#: ../src/main/settings.c:712
+#: ../src/main/settings.c:727
 msgid ""
 "GnomeSword has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -2443,13 +2669,21 @@ msgid ""
 "to examine keys under /desktop/gnome/url-handlers,\n"
 "if you need to change these."
 msgstr ""
+"GnomeSword הגדירה את עצמה בהצלחה\n"
+"כתובנה לטיפול בכתובות sword:// and bible://.\n"
+"\n"
+"ניתן להריץ את התוכנה \"gconf-editor\"\n"
+"על מנת לעיין במפתחות תחת /desktop/gnome/url-handlers,\n"
+"אם עולה הצורך לשנותם."
 
-#: ../src/main/settings.c:757
+#: ../src/main/settings.c:772
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
+"GnomeSword לא הצליחה להשלים את אתחול הליך הטיפול עבור המפתח #%d:\n"
+"%s"
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2479,32 +2713,38 @@ msgstr "פסוק:"
 msgid "Delete the current note"
 msgstr "מחק הערה נוכחית"
 
-#: ../ui/editor_note.xml.h:2 ../ui/editor_studypad.xml.h:4
+#: ../ui/editor_note.xml.h:2
+#: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
 msgstr "יציאה"
 
-#: ../ui/editor_note.xml.h:3 ../ui/editor_studypad.xml.h:5
+#: ../ui/editor_note.xml.h:3
+#: ../ui/editor_studypad.xml.h:5
 #: ../ui/editor.xml.h:3
 msgid "Exit"
 msgstr "יציאה"
 
-#: ../ui/editor_note.xml.h:4 ../ui/editor_studypad.xml.h:6
+#: ../ui/editor_note.xml.h:4
+#: ../ui/editor_studypad.xml.h:6
 #: ../ui/editor.xml.h:4
 msgid "Exit the program"
 msgstr "צא מן התוכנה"
 
-#: ../ui/editor_note.xml.h:5 ../ui/editor_studypad.xml.h:7
+#: ../ui/editor_note.xml.h:5
+#: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
 msgstr "עיצוב"
 
-#: ../ui/editor_note.xml.h:6 ../ui/editor_studypad.xml.h:8
+#: ../ui/editor_note.xml.h:6
+#: ../ui/editor_studypad.xml.h:8
 #: ../ui/editor.xml.h:6
 msgid "HTML Format switch"
 msgstr "מתג עיצוב HTML"
 
-#: ../ui/editor_note.xml.h:7 ../ui/editor_studypad.xml.h:9
+#: ../ui/editor_note.xml.h:7
+#: ../ui/editor_studypad.xml.h:9
 #: ../ui/editor.xml.h:7
 msgid "HTML mode"
 msgstr "מצב HTML"
@@ -2517,13 +2757,13 @@ msgstr "תצוגה מקדימה של ההערה לפני הדפסה"
 msgid "Print this note"
 msgstr "הדפס הערה"
 
-#: ../ui/editor_note.xml.h:11 ../ui/editor_studypad.xml.h:16
+#: ../ui/editor_note.xml.h:11
+#: ../ui/editor_studypad.xml.h:16
 #: ../ui/editor.xml.h:11
 msgid "Save"
 msgstr "שמור"
 
 #: ../ui/editor_note.xml.h:12
-#, fuzzy
 msgid "Save the current note"
 msgstr "מחק הערה נוכחית"
 
@@ -2539,20 +2779,22 @@ msgstr "שמור (הערה אישת)"
 msgid "Add this file to your bookmarks"
 msgstr "הוסף קובץ זה לסימניות"
 
-#: ../ui/editor_studypad.xml.h:3 ../ui/editor.xml.h:1
+#: ../ui/editor_studypad.xml.h:3
+#: ../ui/editor.xml.h:1
 msgid "Create a new document"
 msgstr "צור מסמך חדש"
 
-#: ../ui/editor_studypad.xml.h:10 ../ui/editor.xml.h:8
+#: ../ui/editor_studypad.xml.h:10
+#: ../ui/editor.xml.h:8
 msgid "New Document"
 msgstr "מסמך חדש"
 
-#: ../ui/editor_studypad.xml.h:11 ../ui/editor.xml.h:9
+#: ../ui/editor_studypad.xml.h:11
+#: ../ui/editor.xml.h:9
 msgid "Open"
-msgstr ""
+msgstr "פתיחה"
 
 #: ../ui/editor_studypad.xml.h:12
-#, fuzzy
 msgid "Open a file in Studypad"
 msgstr "שולחן מחקר"
 
@@ -2565,76 +2807,67 @@ msgid "Print this document"
 msgstr "הדפס מסמך"
 
 #: ../ui/editor_studypad.xml.h:17
-#, fuzzy
 msgid "Save AS"
 msgstr "שמור"
 
-#: ../ui/editor_studypad.xml.h:18 ../ui/editor.xml.h:12
-#, fuzzy
+#: ../ui/editor_studypad.xml.h:18
+#: ../ui/editor.xml.h:12
 msgid "Save the current file"
 msgstr "שמור את ההפעלה הנוכחית בקובץ"
 
 #: ../ui/editor_studypad.xml.h:19
-#, fuzzy
 msgid "Save the current file as"
 msgstr "שמור את ההפעלה הנוכחית בקובץ"
 
 #: ../ui/editor.xml.h:10
-#, fuzzy
 msgid "Open the file in Studypad"
 msgstr "פתח את עורך שולחן המחקר"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
 #: ../ui/export-dialog.glade.h:2
-#, fuzzy
 msgid "<b>Export</b>"
 msgstr "<b>Sword</b>"
 
 #: ../ui/export-dialog.glade.h:3
-#, fuzzy
 msgid "<b>Format</b>"
 msgstr "<b>Sword</b>"
 
 #: ../ui/export-dialog.glade.h:7
 msgid "Export complete book"
-msgstr ""
+msgstr "ייצוא ספר שלם"
 
 #: ../ui/export-dialog.glade.h:8
 msgid "Export complete chapter"
-msgstr ""
+msgstr "ייצוא פרק שלם"
 
 #: ../ui/export-dialog.glade.h:9
 msgid "Export single verse"
-msgstr ""
+msgstr "ייצוא פסוק בודד"
 
 #: ../ui/export-dialog.glade.h:10
-#, fuzzy
 msgid "HTML"
 msgstr "מצב HTML"
 
 #: ../ui/export-dialog.glade.h:11
 msgid "Key"
-msgstr ""
+msgstr "מפתח"
 
 #: ../ui/export-dialog.glade.h:12
-#, fuzzy
 msgid "Plain Text"
 msgstr "מצא את הבא"
 
 #: ../ui/export-dialog.glade.h:14
 msgid "Save Export As"
-msgstr ""
+msgstr "שמירת ייצוא בשם"
 
 #: ../ui/export-dialog.glade.h:15
-#, fuzzy
 msgid "Verse"
 msgstr "פסוק:"
 
 #: ../ui/export-dialog.glade.h:16
-#, fuzzy
 msgid "Version"
 msgstr "גרסת SWORD"
 
@@ -2661,16 +2894,11 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr ""
-"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים, היזהרו בעת השימוש."
+msgstr "<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים, היזהרו בעת השימוש."
 
 #: ../ui/module-manager.glade.h:8
-msgid ""
-"<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
-"detection you should NOT use  the remote installation feature! "
-msgstr ""
-"<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים ומבקשים להימנע מזיהוי, "
-"אל תשתמשו באפשרות ההתקנה מרחוק!"
+msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
+msgstr "<b>אזהרה:</b> אם אתם חיים במדינה הרודפת את המאמינים ומבקשים להימנע מזיהוי, אל תשתמשו באפשרות ההתקנה מרחוק!"
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
@@ -2685,7 +2913,6 @@ msgid "Current local sources"
 msgstr "מקורות מקומיים נוכחיים"
 
 #: ../ui/module-manager.glade.h:13
-#, fuzzy
 msgid "Delete Index"
 msgstr "מחק פריט"
 
@@ -2714,16 +2941,14 @@ msgid "Sword sys dir"
 msgstr "ספריית sys של Sword"
 
 #: ../ui/navbar_versekey.glade.h:1
-#, fuzzy
 msgid "1"
 msgstr "+1"
 
 #: ../ui/navbar_versekey.glade.h:2
 msgid "<b>Revelation of John</b>"
-msgstr ""
+msgstr "<b>הבשורה על פי יוחנן</b>"
 
 #: ../ui/navbar_versekey.glade.h:3
-#, fuzzy
 msgid "Drop down history list"
 msgstr "נקה את רשימת ההסטוריה"
 
@@ -2788,9 +3013,7 @@ msgid "Apply high-contrast highlight to current verse"
 msgstr "הדגש את הפסוק הנוכחי בעזרת ניגודיות גבוהה"
 
 #: ../ui/prefs.glade.h:19
-msgid ""
-"Automatically resize commentary, book, and dictionary image content to fit "
-"subwindow"
+msgid "Automatically resize commentary, book, and dictionary image content to fit subwindow"
 msgstr "שנה את גודל התמונות בחלוניות הפירוש, הספר והמילון כדי להתאים לתת-החלון"
 
 #: ../ui/prefs.glade.h:20
@@ -2798,7 +3021,6 @@ msgid "Background"
 msgstr "רקע"
 
 #: ../ui/prefs.glade.h:21
-#, fuzzy
 msgid "Base font size"
 msgstr "גודל גופן מספר הפסוק"
 
@@ -2816,7 +3038,7 @@ msgstr "כתבי קודש"
 
 #: ../ui/prefs.glade.h:26
 msgid "Choose to enable Prayer lists "
-msgstr ""
+msgstr "אפשר רשימות תפילה"
 
 #: ../ui/prefs.glade.h:29
 msgid "Cover"
@@ -2843,7 +3065,6 @@ msgid "Dictionary/Lexicon"
 msgstr "מילון \\ לקסיקון"
 
 #: ../ui/prefs.glade.h:35
-#, fuzzy
 msgid "Enable Prayer Lists"
 msgstr "לנקות את הרשימה?"
 
@@ -2960,7 +3181,6 @@ msgid "Verse number font size"
 msgstr "גודל גופן מספר הפסוק"
 
 #: ../ui/search-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Attribute</b>"
 msgstr "תכונות"
 
@@ -2989,7 +3209,6 @@ msgid "<b>Preview</b>"
 msgstr "<b>תצוגה מקדימה</b>"
 
 #: ../ui/search-dialog.glade.h:8
-#, fuzzy
 msgid "<b>Range Definition</b>"
 msgstr "<b>טקסט טווח</b>"
 
@@ -3054,22 +3273,18 @@ msgid "Current results"
 msgstr "תוצאות נוכחיות"
 
 #: ../ui/search-dialog.glade.h:24
-#, fuzzy
 msgid "Custom Module Lists"
 msgstr "רשימות מותאמות אישית"
 
 #: ../ui/search-dialog.glade.h:25
-#, fuzzy
 msgid "Custom Verse Ranges"
 msgstr "טווחים מותאמים אישית"
 
 #: ../ui/search-dialog.glade.h:26
-#, fuzzy
 msgid "Custom module list"
 msgstr "רשימה מותאמת אישית"
 
 #: ../ui/search-dialog.glade.h:27
-#, fuzzy
 msgid "Custom verse range"
 msgstr "טווח מותאם אישית"
 
@@ -3091,6 +3306,9 @@ msgid ""
 "Indexes must have been built beforehand:\n"
 "See Module Manager's maintenance functions"
 msgstr ""
+"חיפוש מהיר, עשיר בתכונות ומבוסס אינדקס\n"
+"את האינדקס יש לבנות מראש:\n"
+"נא לעיין באפשרויות התחזוקה של מנהל המודולים"
 
 #: ../ui/search-dialog.glade.h:36
 msgid "In modules that have Footnotes"
@@ -3106,7 +3324,7 @@ msgstr "במודולים בעלי מספרי סטרונג"
 
 #: ../ui/search-dialog.glade.h:39
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "בחר בלשונית חיפוש התכונות"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Module Selection"
@@ -3122,7 +3340,7 @@ msgstr "פתח תיבת דיאלוג לבחירת המודולים שיתווס�
 
 #: ../ui/search-dialog.glade.h:46
 msgid "Optimized (\"Lucene\")"
-msgstr ""
+msgstr "מיועל (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:48
 msgid "Remove the selected module from the list"
@@ -3153,16 +3371,14 @@ msgid "Search entire module"
 msgstr "חפש בכל המודול"
 
 #: ../ui/search-dialog.glade.h:55
-#, fuzzy
 msgid "Search for Morphological tags"
 msgstr "הצג תגיות מורפולוגיות"
 
 #: ../ui/search-dialog.glade.h:56
 msgid "Search for Strongs Numbers like G4442 or H1121"
-msgstr ""
+msgstr "חפש מספרי סטרונג כגון G4442 or H1121"
 
 #: ../ui/search-dialog.glade.h:57
-#, fuzzy
 msgid "Search in footnotes"
 msgstr "מחפש בתוך"
 
@@ -3187,12 +3403,10 @@ msgid "Single module"
 msgstr "מודול יחיד"
 
 #: ../ui/search-dialog.glade.h:63
-#, fuzzy
 msgid "Start/stop searching"
 msgstr "התחל חיפוש"
 
 #: ../ui/search-dialog.glade.h:64
-#, fuzzy
 msgid "Strongs Numbers"
 msgstr "מספרי סטרונג"
 
@@ -3226,90 +3440,62 @@ msgstr "עבור"
 
 #~ msgid "found in"
 #~ msgstr "נמצא בתוך"
-
 #~ msgid "The"
 #~ msgstr "ה-"
-
 #~ msgid "module is locked."
 #~ msgstr "המודול נעול."
-
 #~ msgid "module has been unlocked."
 #~ msgstr "המודול נפתח."
-
 #~ msgid "If you have the cipher key you can"
 #~ msgstr "אם ברשותך מפתח צופן, ניתן"
-
 #~ msgid "click here"
 #~ msgstr "הקלק כאן"
-
 #~ msgid "to unlock the module"
 #~ msgstr "לפתוח את המודול"
-
 #~ msgid "You will need to restart GnomeSword after you unlock it."
 #~ msgstr "לאחר הפתיחה, יש להפעיל מחדש את GnomeSword."
-
 #~ msgid "You need to restart GnomeSword to view it"
 #~ msgstr "לצפייה, יש להפעיל מחדש את GnomeSword"
-
 #~ msgid "Show Tabs"
 #~ msgstr "הצג לשוניות"
-
 #~ msgid "Go to %s"
 #~ msgstr "לך אל %s"
-
 #~ msgid "The Setup Druid was cancelled."
 #~ msgstr "פעולת אשף ההתקנה בוטלה."
-
 #~ msgid "Do you wish to set preferences now?"
 #~ msgstr "האם ברצונך לקבוע הגדרות כעת?"
-
 #~ msgid "Page %d of %d"
 #~ msgstr "עמוד %d מתוך %d"
-
 #~ msgid "Remove failed"
 #~ msgstr "ההסרה נכשלה"
-
 #~ msgid "Old"
 #~ msgstr "ישן"
-
 #~ msgid "New"
 #~ msgstr "חדש"
-
 #~ msgid "URL:"
 #~ msgstr "URL:"
-
 #~ msgid "Go to parent"
 #~ msgstr "לך אל ההורה"
-
 #~ msgid "Go to first child"
 #~ msgstr "לך אל הצאצא הראשון"
-
 #~ msgid "Save using the PersistStream interface"
 #~ msgstr "שמור באמצעות ממשק PersistStream"
-
 #~ msgid "Open (PersistFile)"
 #~ msgstr "פתח (PersistFIle)"
-
 #~ msgid "Open using the PersistFile interface"
 #~ msgstr "פתח באמצעות ממשק PersistFile"
-
 #~ msgid "Save (PersistFile)"
 #~ msgstr "שמור (PersistFile)"
-
 #~ msgid "Save using the PersistFile interface"
 #~ msgstr "שמור באמצעות ממשק PersistFile"
-
 #~ msgid "Pick the background color"
 #~ msgstr "Pick the background colour"
-
 #~ msgid "Pick the Bible text color"
 #~ msgstr "Pick the Bible text colour"
-
 #~ msgid "Pick the current Verse color"
 #~ msgstr "Pick the current Verse colour"
-
 #~ msgid "Pick the current Verse background color"
 #~ msgstr "Pick the current Verse background colour"
-
 #~ msgid "<span weight=\"bold\">Font Colors</span>"
 #~ msgstr "<span weight=\"bold\">Font Colours</span>"
+
