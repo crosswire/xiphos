@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-26 20:49+0200\n"
-"PO-Revision-Date: 2008-08-26 21:27+0100\n"
+"POT-Creation-Date: 2008-09-02 20:37+0200\n"
+"PO-Revision-Date: 2008-09-02 21:22+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -444,8 +444,8 @@ msgstr "Über"
 #: ../src/gnome2/gbs.c:903
 #: ../src/gnome2/dictlex.c:1023
 #: ../src/gnome2/commentary.c:996
-#: ../src/gnome2/mod_mgr.c:2159
-#: ../src/gnome2/mod_mgr.c:2334
+#: ../src/gnome2/mod_mgr.c:2156
+#: ../src/gnome2/mod_mgr.c:2331
 #: ../src/gnome2/bookmark_dialog.c:145
 #: ../src/gnome2/bookmarks_menu.c:470
 #: ../src/gnome2/bookmarks_menu.c:736
@@ -534,9 +534,8 @@ msgid "Sword Version"
 msgstr "Sword Version"
 
 #: ../src/gnome2/about_sword.c:161
-#, fuzzy
 msgid "Books can be downloaded from the SWORD Project"
-msgstr "Module können von der Webseite des SWORD-Projekts heruntergeladen werden."
+msgstr "Bücher können von dem SWORD-Projekt heruntergeladen werden."
 
 #: ../src/gnome2/about_sword.c:167
 msgid "The SWORD Project"
@@ -619,7 +618,7 @@ msgstr "Wort oder Phrase eingeben"
 #: ../src/gnome2/search_sidebar.c:288
 #: ../ui/search-dialog.glade.h:40
 msgid "Match case"
-msgstr "Groß-/Kleinschreibung berücksichtigen"
+msgstr "Groß-/Kleinschreibung"
 
 #: ../src/gnome2/find_dialog.c:238
 msgid "Search backwards"
@@ -803,11 +802,11 @@ msgstr ""
 
 #: ../src/gnome2/toolbar_nav.c:523
 msgid "Move backwards through history"
-msgstr "In Chronik zurück gehen"
+msgstr "In Verlaufsliste zurück gehen"
 
 #: ../src/gnome2/toolbar_nav.c:544
 msgid "Move foward through history"
-msgstr "In Chronik vorwärts gehen"
+msgstr "In Verlaufsliste vorwärts gehen"
 
 #: ../src/gnome2/toolbar_nav.c:565
 msgid "Select a Book of the Bible"
@@ -917,7 +916,7 @@ msgstr ""
 "Archiviere in "
 
 #: ../src/gnome2/mod_mgr.c:456
-#: ../src/gnome2/mod_mgr.c:2557
+#: ../src/gnome2/mod_mgr.c:2554
 #: ../ui/module-manager.glade.h:16
 msgid "Install"
 msgstr "Installieren"
@@ -947,15 +946,15 @@ msgid "%s failed"
 msgstr "%s fehlgeschlagen"
 
 #: ../src/gnome2/mod_mgr.c:468
-#: ../src/gnome2/mod_mgr.c:1117
+#: ../src/gnome2/mod_mgr.c:1120
 msgid "Finished"
 msgstr "Fertig"
 
-#: ../src/gnome2/mod_mgr.c:627
-#: ../src/gnome2/mod_mgr.c:629
-#: ../src/gnome2/mod_mgr.c:728
-#: ../src/gnome2/mod_mgr.c:765
-#: ../src/gnome2/mod_mgr.c:767
+#: ../src/gnome2/mod_mgr.c:630
+#: ../src/gnome2/mod_mgr.c:632
+#: ../src/gnome2/mod_mgr.c:731
+#: ../src/gnome2/mod_mgr.c:768
+#: ../src/gnome2/mod_mgr.c:770
 #: ../src/gnome2/utilities.c:322
 #: ../src/gnome2/utilities.c:389
 #: ../src/gnome2/utilities.c:391
@@ -970,7 +969,7 @@ msgstr "Fertig"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../src/gnome2/mod_mgr.c:894
+#: ../src/gnome2/mod_mgr.c:897
 msgid ""
 "Categorized by\n"
 "Module Type"
@@ -978,14 +977,14 @@ msgstr ""
 "Kategorisiert nach\n"
 "Moduletyp"
 
-#: ../src/gnome2/mod_mgr.c:899
+#: ../src/gnome2/mod_mgr.c:902
 #: ../src/gnome2/utilities.c:514
 #: ../src/main/sidebar.cc:967
 #: ../src/main/sidebar.cc:969
 msgid "Biblical Texts"
 msgstr "Bibeltexte"
 
-#: ../src/gnome2/mod_mgr.c:903
+#: ../src/gnome2/mod_mgr.c:906
 #: ../src/gnome2/utilities.c:518
 #: ../src/main/sidebar.cc:604
 #: ../src/main/sidebar.cc:992
@@ -994,21 +993,21 @@ msgstr "Bibeltexte"
 msgid "Commentaries"
 msgstr "Kommentare"
 
-#: ../src/gnome2/mod_mgr.c:907
+#: ../src/gnome2/mod_mgr.c:910
 #: ../src/gnome2/utilities.c:522
 #: ../src/main/sidebar.cc:1001
 #: ../src/main/sidebar.cc:1003
 msgid "Dictionaries"
 msgstr "Wörterbücher"
 
-#: ../src/gnome2/mod_mgr.c:911
+#: ../src/gnome2/mod_mgr.c:914
 #: ../src/gnome2/utilities.c:526
 #: ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
 msgstr "Tageslosungen"
 
-#: ../src/gnome2/mod_mgr.c:915
+#: ../src/gnome2/mod_mgr.c:918
 #: ../src/gnome2/utilities.c:530
 #: ../src/main/sidebar.cc:617
 #: ../src/main/sidebar.cc:1019
@@ -1016,21 +1015,21 @@ msgstr "Tageslosungen"
 msgid "General Books"
 msgstr "Allgemeine Bücher"
 
-#: ../src/gnome2/mod_mgr.c:919
+#: ../src/gnome2/mod_mgr.c:922
 #: ../src/gnome2/utilities.c:534
 #: ../src/main/sidebar.cc:1028
 #: ../src/main/sidebar.cc:1030
 msgid "Maps"
 msgstr "Karten"
 
-#: ../src/gnome2/mod_mgr.c:923
+#: ../src/gnome2/mod_mgr.c:926
 #: ../src/gnome2/utilities.c:538
 #: ../src/main/sidebar.cc:1037
 #: ../src/main/sidebar.cc:1039
 msgid "Images"
 msgstr "Bilder"
 
-#: ../src/gnome2/mod_mgr.c:931
+#: ../src/gnome2/mod_mgr.c:934
 msgid ""
 "Categorized by\n"
 "Availability"
@@ -1038,15 +1037,15 @@ msgstr ""
 "Kategorisiert nach\n"
 "Verfügbarkeit"
 
-#: ../src/gnome2/mod_mgr.c:936
+#: ../src/gnome2/mod_mgr.c:939
 msgid "Updates"
 msgstr "Aktualisierungen"
 
-#: ../src/gnome2/mod_mgr.c:940
+#: ../src/gnome2/mod_mgr.c:943
 msgid "Uninstalled"
 msgstr "Deinstalliert"
 
-#: ../src/gnome2/mod_mgr.c:944
+#: ../src/gnome2/mod_mgr.c:947
 #: ../src/gnome2/sidebar.c:421
 #: ../src/gnome2/utilities.c:543
 #: ../src/main/prayerlists.cc:235
@@ -1057,40 +1056,40 @@ msgstr "Deinstalliert"
 msgid "Prayer List/Journal"
 msgstr "Gebetsliste/Tagebuch"
 
-#: ../src/gnome2/mod_mgr.c:1101
+#: ../src/gnome2/mod_mgr.c:1104
 msgid "Refreshing remote"
 msgstr "Aktualisiere entfernte Quelle"
 
-#: ../src/gnome2/mod_mgr.c:1112
+#: ../src/gnome2/mod_mgr.c:1115
 msgid "Remote not found"
 msgstr "Entfernte Quelle nicht gefunden"
 
-#: ../src/gnome2/mod_mgr.c:1233
+#: ../src/gnome2/mod_mgr.c:1236
 msgid "Module Name"
 msgstr "Modulname"
 
-#: ../src/gnome2/mod_mgr.c:1315
+#: ../src/gnome2/mod_mgr.c:1317
 msgid "Installed"
 msgstr "Installiert"
 
-#: ../src/gnome2/mod_mgr.c:1340
+#: ../src/gnome2/mod_mgr.c:1342
 msgid "Available"
 msgstr "Verfügbar"
 
-#: ../src/gnome2/mod_mgr.c:1349
+#: ../src/gnome2/mod_mgr.c:1351
 msgid "Size"
 msgstr "Größe"
 
-#: ../src/gnome2/mod_mgr.c:1358
+#: ../src/gnome2/mod_mgr.c:1360
 msgid "Description"
 msgstr "Beschreibung"
 
-#: ../src/gnome2/mod_mgr.c:1391
-#: ../src/gnome2/mod_mgr.c:1474
+#: ../src/gnome2/mod_mgr.c:1393
+#: ../src/gnome2/mod_mgr.c:1471
 msgid "Configure"
 msgstr "Konfigurieren"
 
-#: ../src/gnome2/mod_mgr.c:1425
+#: ../src/gnome2/mod_mgr.c:1426
 msgid "Type"
 msgstr "Typ"
 
@@ -1098,71 +1097,71 @@ msgstr "Typ"
 msgid "Caption"
 msgstr "Überschrift"
 
-#: ../src/gnome2/mod_mgr.c:1442
+#: ../src/gnome2/mod_mgr.c:1441
 msgid "Source"
 msgstr "Quelle"
 
-#: ../src/gnome2/mod_mgr.c:1451
+#: ../src/gnome2/mod_mgr.c:1449
 msgid "Directory"
 msgstr "Verzeichnis"
 
-#: ../src/gnome2/mod_mgr.c:1472
+#: ../src/gnome2/mod_mgr.c:1469
 msgid "Sources"
 msgstr "Quellen"
 
-#: ../src/gnome2/mod_mgr.c:1478
+#: ../src/gnome2/mod_mgr.c:1475
 #: ../src/gnome2/sidebar.c:1347
-#: ../src/gnome2/preferences_dialog.c:1774
+#: ../src/gnome2/preferences_dialog.c:1770
 msgid "Modules"
 msgstr "Module"
 
-#: ../src/gnome2/mod_mgr.c:1480
+#: ../src/gnome2/mod_mgr.c:1477
 msgid "Install/Update"
 msgstr "Installieren/Aktualisieren"
 
-#: ../src/gnome2/mod_mgr.c:1482
+#: ../src/gnome2/mod_mgr.c:1479
 msgid "Maintenance"
 msgstr "Pflege"
 
-#: ../src/gnome2/mod_mgr.c:1692
+#: ../src/gnome2/mod_mgr.c:1689
 msgid "Please Refresh"
 msgstr "Bitte aktualisieren"
 
-#: ../src/gnome2/mod_mgr.c:1693
+#: ../src/gnome2/mod_mgr.c:1690
 msgid "Your module list is not up to date!"
 msgstr "Ihre Moduleliste ist veraltet!"
 
-#: ../src/gnome2/mod_mgr.c:1923
+#: ../src/gnome2/mod_mgr.c:1920
 msgid "Select Local Source"
 msgstr "Lokale Quelle Auswählen"
 
-#: ../src/gnome2/mod_mgr.c:2162
-#: ../src/gnome2/mod_mgr.c:2337
+#: ../src/gnome2/mod_mgr.c:2159
+#: ../src/gnome2/mod_mgr.c:2334
 msgid "Remove the selected source"
 msgstr "Ausgewählte Quelle entfernen "
 
-#: ../src/gnome2/mod_mgr.c:2216
+#: ../src/gnome2/mod_mgr.c:2213
 msgid "Enter a remote source"
 msgstr "Geben sie eine entfernte Quelle an"
 
-#: ../src/gnome2/mod_mgr.c:2220
+#: ../src/gnome2/mod_mgr.c:2217
 msgid "Caption:"
 msgstr "Überschrift:"
 
-#: ../src/gnome2/mod_mgr.c:2221
+#: ../src/gnome2/mod_mgr.c:2218
 msgid "Type:"
 msgstr "Typ:"
 
-#: ../src/gnome2/mod_mgr.c:2222
+#: ../src/gnome2/mod_mgr.c:2219
 msgid "Host:"
 msgstr "Host:"
 
-#: ../src/gnome2/mod_mgr.c:2223
+#: ../src/gnome2/mod_mgr.c:2220
 msgid "Directory:"
 msgstr "Verzeichnis:"
 
 #. this can happen at most once
-#: ../src/gnome2/mod_mgr.c:2247
+#: ../src/gnome2/mod_mgr.c:2244
 msgid "A source by that name already exists."
 msgstr "Quelle mit diesem Namen existiert bereits"
 
@@ -1219,8 +1218,9 @@ msgstr "Buchansicht"
 
 #: ../src/gnome2/navbar_book.c:327
 #: ../src/gnome2/navbar_book_dialog.c:299
+#, fuzzy
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "Nach außen, zum Abschnitt, der diesen enthält"
 
 #: ../src/gnome2/navbar_book.c:343
 #: ../src/gnome2/navbar_book_dialog.c:315
@@ -1234,8 +1234,9 @@ msgstr "Gehe zu nächstem Eintrag"
 
 #: ../src/gnome2/navbar_book.c:374
 #: ../src/gnome2/navbar_book_dialog.c:346
+#, fuzzy
 msgid "Go inward, to the first subsection"
-msgstr ""
+msgstr "Nach innen, zum ersten Unterabschnitt"
 
 #: ../src/gnome2/sidebar.c:700
 msgid "Save List"
@@ -1298,7 +1299,7 @@ msgstr "Tagebuch"
 
 #: ../src/gnome2/sidebar.c:853
 msgid "Outlined Topic"
-msgstr ""
+msgstr "Gliederungspunkte"
 
 #: ../src/gnome2/sidebar.c:1160
 msgid "_Modules"
@@ -1453,40 +1454,57 @@ msgstr "Ordner-Name"
 msgid "Folder: "
 msgstr "Ordner: "
 
-#: ../src/gnome2/preferences_dialog.c:1667
+#: ../src/gnome2/preferences_dialog.c:1206
+#: ../src/gnome2/preferences_dialog.c:1244
+#: ../src/gnome2/preferences_dialog.c:1282
+#: ../src/gnome2/preferences_dialog.c:1318
+#: ../src/gnome2/preferences_dialog.c:1353
+#: ../src/gnome2/preferences_dialog.c:1387
+#: ../src/gnome2/preferences_dialog.c:1420
+#: ../src/gnome2/preferences_dialog.c:1454
+#: ../src/gnome2/preferences_dialog.c:1487
+#: ../src/gnome2/preferences_dialog.c:1522
+#: ../src/gnome2/preferences_dialog.c:1558
+#: ../src/gnome2/preferences_dialog.c:1594
+#: ../src/gnome2/preferences_dialog.c:1630
+#: ../src/gnome2/preferences_dialog.c:2023
+msgid "-- Select --"
+msgstr "-- Auswahl --"
+
+#: ../src/gnome2/preferences_dialog.c:1663
 #: ../ui/prefs.glade.h:54
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/gnome2/preferences_dialog.c:1750
+#: ../src/gnome2/preferences_dialog.c:1746
 msgid "Fonts"
 msgstr "Schriften"
 
-#: ../src/gnome2/preferences_dialog.c:1753
+#: ../src/gnome2/preferences_dialog.c:1749
 msgid "Color"
 msgstr "Farben"
 
-#: ../src/gnome2/preferences_dialog.c:1756
-#: ../src/gnome2/preferences_dialog.c:1770
-#: ../src/gnome2/preferences_dialog.c:1783
+#: ../src/gnome2/preferences_dialog.c:1752
+#: ../src/gnome2/preferences_dialog.c:1766
+#: ../src/gnome2/preferences_dialog.c:1779
 #: ../src/main/prayerlists.cc:126
 msgid "Misc"
 msgstr "Verschiedenes"
 
-#: ../src/gnome2/preferences_dialog.c:1760
+#: ../src/gnome2/preferences_dialog.c:1756
 msgid "General"
 msgstr "Allgemein"
 
-#: ../src/gnome2/preferences_dialog.c:1763
+#: ../src/gnome2/preferences_dialog.c:1759
 #: ../ui/prefs.glade.h:61
 msgid "Tabs and Panes"
 msgstr "Reiter und Bereiche"
 
-#: ../src/gnome2/preferences_dialog.c:1777
+#: ../src/gnome2/preferences_dialog.c:1773
 msgid "Main"
 msgstr "Hauptfenster"
 
-#: ../src/gnome2/preferences_dialog.c:1780
+#: ../src/gnome2/preferences_dialog.c:1776
 #: ../src/gnome2/parallel_dialog.c:605
 msgid "Parallel"
 msgstr "Parallel"
@@ -1695,7 +1713,6 @@ msgid "Book"
 msgstr "Buch"
 
 #: ../src/gnome2/treekey-editor.c:247
-#, fuzzy
 msgid "Remove the selected item"
 msgstr "Ausgewählten Eintrag entfernen "
 
@@ -2189,32 +2206,28 @@ msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
 msgstr "Eine einfache Gebetsliste. \\par\\par Modul erzeugt durch GnomeSword."
 
 #: ../src/main/prayerlists.cc:325
-#, fuzzy
 msgid "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
-msgstr "<b>Personen:</b><br>Bob<br>Sam<br>Sue<br><br><b>Gemeinde:</b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
+msgstr "<b>Personen:</b><br>Robert<br>Samuel<br>Susanne<br><br><b>Gemeinde:</b><br>Kirchenbänke<br>Mitgliedschaft<br>Bibeln für Missionare<br><br><br>"
 
 #: ../src/main/prayerlists.cc:351
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
 msgstr "Eine Gegenstands-basierte Gebetsliste.. \\par\\par Modul erzeugt durch GnomeSword."
 
 #: ../src/main/prayerlists.cc:366
-#, fuzzy
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
-msgstr "Bob<br>Sam<br>Sue<br>John<br>"
+msgstr "Robert<br>Samuel<br>Susanne<br>Johannes<br>"
 
 #: ../src/main/prayerlists.cc:367
 msgid "Spiritual Growth"
 msgstr "Geistliches Wachstum"
 
 #: ../src/main/prayerlists.cc:368
-#, fuzzy
 msgid "Mike<br>Steve<br>"
-msgstr "Mike<br>Steve<br>"
+msgstr "Michael<br>Stefan<br>"
 
 #: ../src/main/prayerlists.cc:370
-#, fuzzy
 msgid "Sue<br>John<br>"
-msgstr "Sue<br>John<br>"
+msgstr "Susanne<br>Johannes<br>"
 
 #: ../src/main/prayerlists.cc:396
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
@@ -2294,15 +2307,15 @@ msgid "1 Cor 15:1"
 msgstr "1 Kor 15:1"
 
 #: ../src/main/xml.c:419
-#: ../src/main/xml.c:1085
+#: ../src/main/xml.c:1083
 #, c-format
 msgid "Document not parsed successfully. \n"
 msgstr "Dokument nicht erfolgreich eingelesen.\n"
 
 #: ../src/main/xml.c:425
-#: ../src/main/xml.c:688
-#: ../src/main/xml.c:966
-#: ../src/main/xml.c:1145
+#: ../src/main/xml.c:686
+#: ../src/main/xml.c:964
+#: ../src/main/xml.c:1143
 #, c-format
 msgid "empty document \n"
 msgstr "Leeres Dokument\n"
@@ -2336,8 +2349,8 @@ msgstr "Beispiel-Modulliste"
 msgid "Select the modules you want"
 msgstr "Wähle die Module aus"
 
-#: ../src/main/xml.c:694
-#: ../src/main/xml.c:972
+#: ../src/main/xml.c:692
+#: ../src/main/xml.c:970
 #, c-format
 msgid "wrong type, root node != %s\n"
 msgstr ""
@@ -2415,7 +2428,6 @@ msgstr "Strongs"
 #: ../src/main/module_dialogs.cc:336
 #: ../src/main/module_dialogs.cc:441
 #: ../src/main/module_dialogs.cc:458
-#, fuzzy
 msgid "Morphology"
 msgstr "Morphologische Markierungen"
 
@@ -2489,9 +2501,8 @@ msgstr "Chron_ik/<Separator>"
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:69
 #: ../src/main/tab_history.c:113
-#, fuzzy
 msgid "H_istory/C_lear"
-msgstr "Chron_ik/_Leeren"
+msgstr "_Verlauf/_Leeren"
 
 #: ../src/main/tab_history.c:248
 msgid "Clear History"
@@ -2636,7 +2647,7 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:710
+#: ../src/main/settings.c:725
 msgid ""
 "There is currently no program set as your\n"
 "handler for \"sword://\" and similar URLs.\n"
@@ -2648,7 +2659,7 @@ msgstr ""
 "Möchten sie, dass GnomeSword sich selbst als\n"
 "Anwendung für diese URLs einrichtet?"
 
-#: ../src/main/settings.c:712
+#: ../src/main/settings.c:727
 msgid ""
 "GnomeSword has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -2664,7 +2675,7 @@ msgstr ""
 "verwenden, um dies unter dem Schlüsselwort\n"
 "/desktop/gnome/url-handlers wieder zu ändern."
 
-#: ../src/main/settings.c:757
+#: ../src/main/settings.c:772
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
@@ -2697,13 +2708,13 @@ msgstr "Vers:"
 
 #: ../ui/editor_note.xml.h:1
 msgid "Delete the current note"
-msgstr "Notiz löschen"
+msgstr "Aktuelle Notiz löschen"
 
 #: ../ui/editor_note.xml.h:2
 #: ../ui/editor_studypad.xml.h:4
 #: ../ui/editor.xml.h:2
 msgid "E_xit"
-msgstr "Beenden"
+msgstr "Be_enden"
 
 #: ../ui/editor_note.xml.h:3
 #: ../ui/editor_studypad.xml.h:5
@@ -2721,7 +2732,7 @@ msgstr "Das Program beenden"
 #: ../ui/editor_studypad.xml.h:7
 #: ../ui/editor.xml.h:5
 msgid "For_mat"
-msgstr "Vorfor_matiert"
+msgstr "For_mat"
 
 #: ../ui/editor_note.xml.h:6
 #: ../ui/editor_studypad.xml.h:8
@@ -2880,11 +2891,11 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>WARNUNG:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt werden könnten, sollten sie dies mit Vorsicht benutzen."
+msgstr "<b>WARNUNG:</b> Vorsicht, wenn sie in einem Land mit Verfolgung leben."
 
 #: ../ui/module-manager.glade.h:8
 msgid "<b>Warning:</b> If you live in a persecuted country and do not wish to risk detection you should NOT use  the remote installation feature! "
-msgstr "<b>Warnung:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt werden könnten und nicht entdeckt werden wollen, sollten sie KEINE entfernte Installation durchführen!"
+msgstr "<b>Warnung:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt werden könnten und nicht riskieren wollen, entdeckt zu werden, sollten sie KEINE entfernten Quellen verwenden!"
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
@@ -3310,7 +3321,7 @@ msgstr "In Modulen mit Strongs Nummern"
 
 #: ../ui/search-dialog.glade.h:39
 msgid "Make selections on the Attribute Search tab"
-msgstr ""
+msgstr "Treffe Auswahl im Reiter Attribut-Suche"
 
 #: ../ui/search-dialog.glade.h:41
 msgid "Module Selection"
