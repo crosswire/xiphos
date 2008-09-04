@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * about_sword.c - Sword about dialog
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,13 +26,8 @@
 #include <gnome.h>
 
 #include "gui/about_sword.h"
-
 #include "main/settings.h"
 #include "main/sword.h"
-
-/******************************************************************************
- * privat
- *****************************************************************************/
 
 /******************************************************************************
  * Name
@@ -45,17 +40,14 @@
  *   void
  */
 
-static void about_sword_ok(GtkButton * button, gpointer user_data)
+static void
+about_sword_ok(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *dlg;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(dlg);
 }
-
-/******************************************************************************
- * public
- *****************************************************************************/
 
 /******************************************************************************
  * Name
@@ -73,19 +65,20 @@ static void about_sword_ok(GtkButton * button, gpointer user_data)
  *   GtkWidget *
  */
 
-GtkWidget *gui_create_about_sword(void)
+GtkWidget *
+gui_create_about_sword(void)
 {
 	GtkWidget *dialog_about_sword;
-	GtkWidget *dialog_vbox27;
-	GtkWidget *vbox21;
-	GtkWidget *pixmap1;
+	GtkWidget *dialog_vbox;
+	GtkWidget *vbox;
+	GtkWidget *pixmap;
 	GtkWidget *version_label;
-	GtkWidget *scrolledwindow26;
-	GtkWidget *label95;
-	GtkWidget *textview1;
-	GtkWidget *href1;
-	GtkWidget *dialog_action_area27;
-	GtkWidget *hbuttonbox6;
+	GtkWidget *scrolledwindow;
+	GtkWidget *label;
+	GtkWidget *textview;
+	GtkWidget *href;
+	GtkWidget *dialog_action_area;
+	GtkWidget *hbuttonbox;
 	GtkWidget *button;
 	const char *ver;
 	gchar version[40];
@@ -99,12 +92,12 @@ GtkWidget *gui_create_about_sword(void)
 	     "set of books may be shared among all frontends using the "
 	     "framework.");
 
-	/* 
-	 * get sword version 
+	/*
+	 * get sword version
 	 */
 	ver = main_get_sword_version();
 	sprintf(version, "<b>SWORD-%s</b>", ver);
-	
+
 	dialog_about_sword = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
 			    "dialog_about_sword", dialog_about_sword);
@@ -112,81 +105,81 @@ GtkWidget *gui_create_about_sword(void)
 			     _("About the SWORD Project"));
         gtk_window_set_resizable(GTK_WINDOW(dialog_about_sword), FALSE);
 
-	dialog_vbox27 = GTK_DIALOG(dialog_about_sword)->vbox;
+	dialog_vbox = GTK_DIALOG(dialog_about_sword)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
-			    "dialog_vbox27", dialog_vbox27);
-	gtk_widget_show(dialog_vbox27);
+			    "dialog_vbox", dialog_vbox);
+	gtk_widget_show(dialog_vbox);
 
-	vbox21 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox21);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox27), vbox21, TRUE, TRUE,
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox), vbox, TRUE, TRUE,
 			   0);
 
-	pixmap1 = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
+	pixmap = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/sword3.png");
-	gtk_widget_show(pixmap1);
-	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 4);
+	gtk_widget_show(pixmap);
+	gtk_box_pack_start(GTK_BOX(vbox), pixmap, FALSE, FALSE, 4);
 
 	version_label = gtk_label_new(_("Sword Version"));
 	gtk_widget_show(version_label);
-	gtk_box_pack_start(GTK_BOX(vbox21), version_label, FALSE, FALSE,
+	gtk_box_pack_start(GTK_BOX(vbox), version_label, FALSE, FALSE,
 			   0);
 
 	gtk_label_set_markup(GTK_LABEL(version_label), version);
-	
-	scrolledwindow26 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow26);
-	gtk_box_pack_start(GTK_BOX(vbox21), scrolledwindow26, TRUE,
+
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE,
 			   TRUE, 4);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow26),
+				       (scrolledwindow),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-  	gtk_widget_set_size_request (scrolledwindow26, 160, 160);
-  	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow26), 4);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow26,
+  	gtk_widget_set_size_request (scrolledwindow, 160, 180);
+  	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow), 4);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
                                              settings.shadow_type);
-	
-	textview1 = gtk_text_view_new ();
-	gtk_widget_show (textview1);
-	gtk_container_add (GTK_CONTAINER (scrolledwindow26), textview1);
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview1), GTK_WRAP_WORD);	
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview1),FALSE);
-	gtk_text_buffer_set_text (gtk_text_view_get_buffer 
-				(GTK_TEXT_VIEW (textview1)), about, -1);
-	gtk_widget_set_sensitive(textview1,FALSE);
-	
-	label95 =
+
+	textview = gtk_text_view_new ();
+	gtk_widget_show (textview);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow), textview);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview), GTK_WRAP_WORD);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview),FALSE);
+	gtk_text_buffer_set_text (gtk_text_view_get_buffer
+				(GTK_TEXT_VIEW (textview)), about, -1);
+	gtk_widget_set_sensitive(textview,FALSE);
+
+	label =
 	    gtk_label_new(_
 			  ("Books can be downloaded from the SWORD Project"));
-	gtk_widget_show(label95);
-	gtk_box_pack_start(GTK_BOX(vbox21), label95, FALSE, FALSE, 0);
-	gtk_widget_set_usize(label95, -2, 24);
+	gtk_widget_show(label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_widget_set_usize(label, -2, 24);
 
-	href1 =
+	href =
 	    gnome_href_new("http://www.crosswire.org/sword", _("The SWORD Project"));
-	gtk_widget_show(href1);
-	gtk_box_pack_start(GTK_BOX(vbox21), href1, FALSE, FALSE, 0);
+	gtk_widget_show(href);
+	gtk_box_pack_start(GTK_BOX(vbox), href, FALSE, FALSE, 0);
 
-	dialog_action_area27 =
+	dialog_action_area =
 	    GTK_DIALOG(dialog_about_sword)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
-			    "dialog_action_area27",
-			    dialog_action_area27);
-	gtk_widget_show(dialog_action_area27);
+			    "dialog_action_area",
+			    dialog_action_area);
+	gtk_widget_show(dialog_action_area);
 	gtk_container_set_border_width(GTK_CONTAINER
-				       (dialog_action_area27), 10);
+				       (dialog_action_area), 10);
 
-	hbuttonbox6 = gtk_hbutton_box_new();
-	gtk_widget_show(hbuttonbox6);
-	gtk_box_pack_start(GTK_BOX(dialog_action_area27), hbuttonbox6,
+	hbuttonbox = gtk_hbutton_box_new();
+	gtk_widget_show(hbuttonbox);
+	gtk_box_pack_start(GTK_BOX(dialog_action_area), hbuttonbox,
 			   TRUE, TRUE, 0);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox6),
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox),
 				  GTK_BUTTONBOX_END);
 
 	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox), button);
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 
 	g_signal_connect(GTK_OBJECT(button), "clicked",

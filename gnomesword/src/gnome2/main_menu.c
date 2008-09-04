@@ -31,8 +31,8 @@
 
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
+#include "gui/about_trans.h"
 #include "gui/gnomesword.h"
-//#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
@@ -66,7 +66,9 @@
  *   void
  */
 
-void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
+void
+gui_about_activate(GtkMenuItem * menuitem,
+		   gpointer user_data)
 {
 	gui_display_about_module_dialog((char *) user_data, FALSE);
 }
@@ -89,13 +91,14 @@ void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_help_contents_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
+void
+on_help_contents_activate(GtkMenuItem * menuitem,
+			  gpointer user_data)
 {	
 	GError *error = NULL;
 	
-	if (gnome_help_display ((const gchar*)"gnomesword.xml", 
-			NULL, &error) == FALSE) {
+	if (gnome_help_display((const gchar*)"gnomesword.xml", 
+			       NULL, &error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free (error);        
 	}
@@ -104,12 +107,12 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  on_mnuHistoryitem1_activate
+ *  on_menuHistoryitem1_activate
  *
  * Synopsis
  *   #include "gui/main_menu.h"
  *
- *   void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
+ *   void on_menuHistoryitem1_activate(GtkMenuItem * menuitem, 
  *						gpointer user_data)	
  *
  * Description
@@ -119,8 +122,9 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
-				 gpointer user_data)
+void
+on_menuHistoryitem1_activate(GtkMenuItem * menuitem,
+			     gpointer user_data)
 {
 	main_change_verse_tab_history(GPOINTER_TO_INT(user_data));
 }
@@ -142,12 +146,40 @@ void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-					  gpointer user_data)
+void
+on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
+				     gpointer user_data)
 {
 	GtkWidget *dlg;
 
 	dlg = gui_create_about_sword();
+	gtk_widget_show(dlg);
+}
+
+/******************************************************************************
+ * Name
+ *  on_about_translation_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_about_translation_activate(GtkMenuItem * menuitem,
+ *					gpointer user_data)	
+ *
+ * Description
+ *   display - The SWORD Project - about information
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_about_translation_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
+{
+	GtkWidget *dlg;
+
+	dlg = gui_create_about_trans();
 	gtk_widget_show(dlg);
 }
 
@@ -168,8 +200,9 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_daily_devotion1_activate(GtkMenuItem * menuitem,
-				 gpointer user_data)
+void
+on_daily_devotion1_activate(GtkMenuItem * menuitem,
+			    gpointer user_data)
 {
 	main_display_devotional();
 }
@@ -190,8 +223,9 @@ void on_daily_devotion1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_preferences1_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
+void
+on_preferences1_activate(GtkMenuItem * menuitem,
+			 gpointer user_data)
 {
 	gui_setup_preferences_dialog();
 }
@@ -212,7 +246,9 @@ void on_preferences1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
+void
+on_search_activate(GtkMenuItem * menuitem,
+		   gpointer user_data)
 {
 	if (!settings.showshortcutbar) 
 		gui_sidebar_showhide();
@@ -235,8 +271,9 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
-				     gpointer user_data)
+static void
+on_verse_style1_activate(GtkCheckMenuItem * menuitem,
+			 gpointer user_data)
 {
 	extern gboolean style_display;
 	if(style_display) {
@@ -275,8 +312,9 @@ static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
-				    gpointer user_data)
+static void
+on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
+			gpointer user_data)
 {
 	settings.linkedtabs = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "pinnedtabs",
@@ -299,8 +337,9 @@ static void on_linked_tabs_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void on_read_aloud_activate(GtkCheckMenuItem * menuitem,
-				   gpointer user_data)
+static void
+on_read_aloud_activate(GtkCheckMenuItem * menuitem,
+		       gpointer user_data)
 {
 	settings.readaloud = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "readaloud",
@@ -325,8 +364,9 @@ static void on_read_aloud_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
-					   gpointer user_data)
+static void
+on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
+			       gpointer user_data)
 {
 	settings.showversenum = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "showversenum",
@@ -350,8 +390,9 @@ static void on_show_verse_numbers_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void on_versehighlight_activate(GtkCheckMenuItem * menuitem,
-				       gpointer user_data)
+static void
+on_versehighlight_activate(GtkCheckMenuItem * menuitem,
+			   gpointer user_data)
 {
 	settings.versehighlight = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "versehighlight",
@@ -375,8 +416,9 @@ static void on_versehighlight_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-static void on_doublespace_activate(GtkCheckMenuItem * menuitem,
-				    gpointer user_data)
+static void
+on_doublespace_activate(GtkCheckMenuItem * menuitem,
+			gpointer user_data)
 {
 	settings.doublespace = menuitem->active;
 	xml_set_value("GnomeSword", "misc", "doublespace",
@@ -403,7 +445,9 @@ static void on_doublespace_activate(GtkCheckMenuItem * menuitem,
  *   void
  */
 
-void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
+void
+on_exit_activate(GtkMenuItem * menuitem,
+		 gpointer user_data)
 {
 	shutdown_frontend();
 	/* shutdown the sword stuff */
@@ -421,7 +465,7 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   #include "gui/main_menu.h"
  *
  *   void on_clear1_activate(GtkMenuItem * menuitem,
- *						gpointer user_data)	
+ *			     gpointer user_data)	
  *
  * Description
  *   remove all items from history list by calling
@@ -431,9 +475,11 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void
+on_clear1_activate(GtkMenuItem * menuitem,
+		   gpointer user_data)
 {
-	main_clear_tab_history();//gui_clear_history(widgets.app);
+	main_clear_tab_history();
 }
 
 /******************************************************************************
@@ -444,7 +490,7 @@ void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   #include "gui/main_menu.h"
  *
  *   void on_about_gnomesword1_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
+ *					gpointer user_data)	
  *
  * Description
  *   display gnomesword about dialog 
@@ -453,8 +499,9 @@ void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
-				   gpointer user_data)
+void
+on_about_gnomesword1_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
 	GtkWidget *AboutBox;
 
@@ -478,7 +525,9 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
-void on_save_tabs(GtkMenuItem * menuitem, gpointer user_data)
+void
+on_save_tabs(GtkMenuItem * menuitem,
+	     gpointer user_data)
 {
 	GtkWidget *dialog;
 	gchar *tabs_dir;
@@ -528,7 +577,9 @@ void on_save_tabs(GtkMenuItem * menuitem, gpointer user_data)
  * Return value
  *   void
  */
-void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)
+void
+on_load_tabs(GtkMenuItem * menuitem,
+	     gpointer user_data)
 {
 	GtkWidget *dialog;
 	gchar *tabs_dir;
@@ -580,7 +631,9 @@ void on_load_tabs(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
+static void
+view_hints(GtkMenuItem * menuitem,
+	   gpointer user_data)
 {
 /*	hint.use_hints = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	
@@ -608,12 +661,16 @@ static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void view_bible_texts(GtkMenuItem * menuitem, gpointer user_data)
+static void
+view_bible_texts(GtkMenuItem * menuitem,
+		 gpointer user_data)
 {
 	gui_show_hide_texts(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-static void view_previewer(GtkMenuItem * menuitem, gpointer user_data)
+static void
+view_previewer(GtkMenuItem * menuitem,
+	       gpointer user_data)
 {
 	gui_show_hide_preview(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
@@ -636,8 +693,9 @@ static void view_previewer(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void view_upper_workbook(GtkMenuItem * menuitem,
-				gpointer user_data)
+static void
+view_upper_workbook(GtkMenuItem * menuitem,
+		    gpointer user_data)
 {
 	gui_show_hide_comms(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
@@ -659,8 +717,9 @@ static void view_upper_workbook(GtkMenuItem * menuitem,
  *   void
  */
 
-static void view_lower_workbook(GtkMenuItem * menuitem,
-				gpointer user_data)
+static void
+view_lower_workbook(GtkMenuItem * menuitem,
+		    gpointer user_data)
 {
 	gui_show_hide_dicts(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
@@ -682,8 +741,9 @@ static void view_lower_workbook(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_mod_mgr(GtkMenuItem * menuitem,
-				gpointer user_data)
+static void
+on_mod_mgr(GtkMenuItem * menuitem,
+	   gpointer user_data)
 {
 	gui_open_mod_mgr();
 }
@@ -705,7 +765,9 @@ static void on_mod_mgr(GtkMenuItem * menuitem,
  *   void
  */
 
-static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
+static void
+open_studypad(GtkMenuItem * menuitem,
+	      gpointer user_data)
 {
 
 #ifdef USE_GTKHTML38
@@ -887,14 +949,14 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,/*
+	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_SUBTREE, N_("About Sword Modules"),
-	 N_("Information about the installed modules"),
-	 about_sword_modules1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_UI_ITEM, N_("About _Translation ..."),
+	 N_("Translating GnomeSword to other languages"),
+	 on_about_translation_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,*/
+	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project ..."),
 	 N_("More information about the SWORD Project"),
@@ -961,7 +1023,8 @@ static GnomeUIInfo menubar1_uiinfo[] = {
  *   void
  */
 
-void gui_create_main_menu(GtkWidget * app)
+void
+gui_create_main_menu(GtkWidget * app)
 {
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 	
@@ -1061,7 +1124,8 @@ void gui_create_main_menu(GtkWidget * app)
  *   void
  */
 
-void gui_install_menu_hints(GtkWidget * app)
+void
+gui_install_menu_hints(GtkWidget * app)
 {
 	gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
 }

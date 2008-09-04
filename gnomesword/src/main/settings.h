@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * settings.h - SHORT DESCRIPTION
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,16 +21,6 @@
 
 #ifndef _SETTINGS_H_
 #define _SETTINGS_H_
-/*
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-//#include <gnome.h>
-#ifdef SUSE_10_2
-#include <glib.h>
-#else
-#include <glib-2.0/glib.h>
-#endif*/
 
 #include <gconf/gconf-client.h>
 

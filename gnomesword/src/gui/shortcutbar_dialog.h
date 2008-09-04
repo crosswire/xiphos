@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * shortcutbar_dialog.h - dialog for detached shortcut bar
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,4 +33,3 @@ void gui_attach_detach_shortcutbar(void);
 #endif
 
 #endif
-

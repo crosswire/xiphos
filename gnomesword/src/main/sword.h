@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * sword.h - glue
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@ extern "C" {
 #endif
 #include <gnome.h>
 #include <glib/gi18n.h>
-//#include <glib-2.0/glib.h>
 	
 #include "main/configs.h"	
 	

@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * xml.c - 
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,10 +23,7 @@
 #include <config.h>
 #endif
 
-
-//#include <glib-2.0/glib.h>
 #include <libxml/parser.h>
-
 
 #include "main/lists.h"
 #include "main/settings.h"
@@ -45,9 +42,6 @@ static BOOKMARK_DATA *es;
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
 static xmlDocPtr bookmark_doc;
-// void xmlFreeNode                     (xmlNodePtr cur);
-// void        xmlUnlinkNode                   (xmlNodePtr cur);
-
 
 
 /******************************************************************************

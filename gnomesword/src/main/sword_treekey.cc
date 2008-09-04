@@ -4,19 +4,19 @@
  *
  * Copyright (C) 2008 GnomeSword Developer Team
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 
@@ -440,44 +440,6 @@ gint main_prayer_list_new (gchar * list_name)
 	setEntryText (book, "<b>Health</b><br>");
 	//add_prayer_list_sections (book, treeKey);
 
-	/*
-	   appendChild (treeKey, "01");
-	   setEntryText (book, "<b>January</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "02");
-	   setEntryText (book, "<b>Febuary</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "03");
-	   setEntryText (book, "<b>March</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "04");
-	   setEntryText (book, "<b>April</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "05");
-	   setEntryText (book, "<b>May</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "06");
-	   setEntryText (book, "<b>June</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "07");
-	   setEntryText (book, "<b>July</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "08");
-	   setEntryText (book, "<b>August</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "09");
-	   setEntryText (book, "<b>September</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "10");
-	   setEntryText (book, "<b>October</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "11");
-	   setEntryText (book, "<b>November</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	   appendSibbling (treeKey, "12");
-	   setEntryText (book, "<b>December</b><br>");
-	   add_prayer_list_sections (book, treeKey);
-	 */
 	delete treeKey;
 	g_free (info->text1);
 	g_free (info);
