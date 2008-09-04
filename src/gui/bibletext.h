@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * bibletext.h - gui for Bible text modules
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@
 
 void gui_setup_bibletext(void);
 gboolean gui_text_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data);
-void gui_popup_pm_text(void);  //gchar * mod_name, GdkEventButton * event);
+				       GdkEventButton * event,
+				       gpointer data);
+void gui_popup_pm_text(void);
 GtkWidget *gui_create_bible_pane(void);
 
 #endif

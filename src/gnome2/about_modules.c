@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * about_modules.c - Sword modules about dialog
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,7 +57,9 @@ static GtkWidget *text_html;
  *   void
  */
 
-static void about_modules_ok(GtkButton * button, gpointer user_data)
+static void
+about_modules_ok(GtkButton * button,
+		 gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -82,11 +84,13 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void about_module_display(GString * str, gchar * text)
+static void
+about_module_display(GString * str,
+		     gchar * text)
 {
 	gint i, len = strlen(text);
 	gboolean center = FALSE;
-	
+
 	for (i = 0; i < len; i++) {
 		if (text[i] == '\\')	// a RTF command
 		{
@@ -130,7 +134,9 @@ static void about_module_display(GString * str, gchar * text)
 	}
 }
 
-static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
+static void
+on_copy_activate(GtkMenuItem * menuitem,
+		 gpointer data)
 {
 	GS_message(("on_copy_activate"));
 #ifdef USE_GTKMOZEMBED
@@ -139,9 +145,6 @@ static void on_copy_activate(GtkMenuItem * menuitem, gpointer data)
 	gui_copy_html(text_html);
 #endif
 }
-	
-
-
 
 static GnomeUIInfo menu1_uiinfo[] =
 {
@@ -149,7 +152,8 @@ static GnomeUIInfo menu1_uiinfo[] =
   GNOMEUIINFO_END
 };
 
-static void create_menu1 (void)
+static void
+create_menu1(void)
 {
   GtkWidget *menu1;
   GtkAccelGroup *accel_group;
@@ -180,15 +184,16 @@ static void create_menu1 (void)
  * Return value
  *   gboolean
  */
-static gboolean on_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
+static gboolean
+on_button_release_event(GtkWidget * widget,
+			GdkEventButton * event,
+			gpointer data)
 {
 	switch (event->button) {
 	case 1:
 		break;
 	case 2:
-		
+
 		break;
 	case 3:
 		create_menu1();
@@ -199,10 +204,10 @@ static gboolean on_button_release_event(GtkWidget * widget,
 
 #ifdef USE_GTKMOZEMBED
 static void
-_popupmenu_requested_cb (GeckoHtml *html,
-			     gchar *uri,
-			     gpointer user_data)
-{	
+_popupmenu_requested_cb(GeckoHtml *html,
+			gchar *uri,
+			gpointer user_data)
+{
 	create_menu1();
 }
 #endif
@@ -223,7 +228,8 @@ _popupmenu_requested_cb (GeckoHtml *html,
  *   GtkWidget *
  */
 
-static GtkWidget *gui_create_about_modules(void)
+static GtkWidget *
+gui_create_about_modules(void)
 {
 	GtkWidget *dialog_about_mods;
 	GtkWidget *dialog_vbox28;
@@ -267,8 +273,8 @@ static GtkWidget *gui_create_about_modules(void)
 
 	frame73 = gtk_frame_new(NULL);
 	gtk_widget_show(frame73);
-	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);	
-#ifdef USE_GTKMOZEMBED	
+	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
+#ifdef USE_GTKMOZEMBED
 	text_html = GTK_WIDGET(gecko_html_new(NULL, FALSE, 12));
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(frame73), text_html);
@@ -292,7 +298,7 @@ static GtkWidget *gui_create_about_modules(void)
 	text_html = gtk_html_new();
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
-	    
+
 	g_signal_connect(GTK_OBJECT(text_html),"button_release_event",
 				G_CALLBACK(on_button_release_event),
 				NULL);
@@ -338,15 +344,17 @@ static GtkWidget *gui_create_about_modules(void)
  *   void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
  */
 
-void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
+void
+gui_display_about_module_dialog(gchar * modname,
+				gboolean isGBS)
 {
-	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
+	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog
 	GtkWidget *text;	//-- pointer to text widget of dialog
 	gchar *buf = NULL,	//-- pointer to text buffer for label (mod name)
 	*bufabout;		//-- pointer to text buffer for text widget (mod about)
@@ -361,7 +369,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	buf = main_get_module_description(modname);
 	bufabout = main_get_mod_about_info(modname);
 	version = main_get_mod_config_entry(modname, "Version");
-	
+
 	g_string_printf(description,
 		"<center><FONT COLOR=\"#000FCF\"><b>%s</b></font><HR>%s %s</center><br>",
 		buf,
@@ -373,7 +381,6 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	}
 
 	if (bufabout) {
-
 		len = strlen(bufabout);
 		maxlen = len * 8;
 
@@ -401,7 +408,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		gui_display_html(text, description->str,
 				 description->len);
 		gui_display_html(text, str->str, str->len);
-		
+
 		gui_display_html(text, "</body></html>",
 				 strlen("</body></html>"));
 		gui_end_html(text);

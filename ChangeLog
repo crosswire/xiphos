@@ -1,3 +1,8 @@
+2008-09-03  karl <charcoal@users.sf.net>
+
+	* add "Help -> About Translation"
+	* update copyright years all over the place.
+
 2008-09-01  karl <charcoal@users.sf.net>
 
 	* fix #2084401 Problem compiling with xul-1.9 (gecko.m4 update).

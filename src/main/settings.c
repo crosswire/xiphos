@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * settings.c - Guess what?
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,8 +41,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
-
-//#include "backend/sword.h"
 
 
 /******************************************************************************

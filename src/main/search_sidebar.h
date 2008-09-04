@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * search_sidebar.h - glue
  *
- * Copyright (C) 2004 GnomeSword Developer Team
+ * Copyright (C) 2004-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,8 +25,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-//#include <glib-2.0/glib.h>
 	
 void main_sidebar_search_percent_update(char percent, void *userData);
 void main_do_sidebar_search(gpointer user_data);

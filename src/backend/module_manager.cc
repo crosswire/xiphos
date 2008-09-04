@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * module_manager.cc 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,16 +19,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 /*
- *  Sword must be built with curl support for gnomesword's module manager to
- *  work as expected
-*/
+ * Sword must be built with curl support for gnomesword's module manager to
+ * work as expected
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
 
 #ifdef SUSE_10_2
 #include <glib.h>

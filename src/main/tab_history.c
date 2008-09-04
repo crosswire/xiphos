@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * tab_history.c - add, remove and navigate history
  *
- * Copyright (C) 2005 GnomeSword Developer Team
+ * Copyright (C) 2005-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,6 @@
 #include "main/url.hh"
 #include "main/xml.h"
 #include "main/navbar_versekey.h"
-
 
 
 /******************************************************************************
@@ -115,7 +114,7 @@ void main_update_tab_history_menu(gpointer data)
 	for (i = 0; i < tab->history_items; i++) {
 		menuitem = g_new(GnomeUIInfo, 2);
 		menuitem->type = GNOME_APP_UI_ITEM;
-		menuitem->moreinfo = (gpointer) on_mnuHistoryitem1_activate;
+		menuitem->moreinfo = (gpointer) on_menuHistoryitem1_activate;
 		menuitem->user_data = GINT_TO_POINTER(tab->history_list[i].itemnum);
 		menuitem->label = tab->history_list[i].verseref;
 		menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
@@ -224,17 +223,9 @@ void main_add_tab_history_item(gpointer data)
 
 void on_clear_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	main_clear_tab_history();//gui_clear_history(widgets.app);
+	main_clear_tab_history();
 }
 
-/*
-struct _tab_history {
-        gint itemnum;
-        gchar verseref[80];
-        gchar textmod[80];
-        gchar commod[80];
-};
-*/
 GtkWidget *main_versekey_drop_down_new(gpointer data)
 {	
 	gint i;
@@ -258,7 +249,7 @@ GtkWidget *main_versekey_drop_down_new(gpointer data)
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK
-				   (on_mnuHistoryitem1_activate),
+				   (on_menuHistoryitem1_activate),
 				   GINT_TO_POINTER(tab->history_list[i].itemnum));	
 		if (!strcmp(tab->history_list[i].verseref, tab->text_commentary_key))
 			gtk_widget_set_sensitive(item,FALSE);
