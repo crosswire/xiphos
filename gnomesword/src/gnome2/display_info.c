@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * _display_info.c - display information (ie strongs) in a dialog
+ * display_info.c - display information (ie strongs) in a dialog
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

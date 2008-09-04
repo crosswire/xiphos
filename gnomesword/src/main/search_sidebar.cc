@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * search_sidebar.cc - glue  (: very sticky :)
  *
- * Copyright (C) 2004 GnomeSword Developer Team
+ * Copyright (C) 2004-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@
 #endif
 #include <gnome.h>
 #include <regex.h>
-//#include <swmgr.h>
-//#include <versekey.h>
 
 
 #ifdef __cplusplus
@@ -46,10 +44,8 @@ extern "C" {
 #include "gui/search_sidebar.h"
 #include "gui/sidebar.h"
 #include "gui/widgets.h"
-//#include "gui/html.h"
 #include "gui/dialog.h"
 
-//#include "backend/module_search.hh"
 #include "backend/sword_main.hh"
 
 #define SEARCHING N_("Searching the ")

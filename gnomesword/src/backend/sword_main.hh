@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * sword_main.hh - 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #ifndef _SWORD_MAIN_HH_
 #define _SWORD_MAIN_HH_
 
-	
 #include <swmgr.h>
 #include <swbuf.h>
 #include <versekey.h>
@@ -36,7 +35,6 @@ using std::map;
 using std::list;
 using namespace sword;
 	
-
 class BackEnd {
 	SWMgr *main_mgr;
 	SWMgr *display_mgr;

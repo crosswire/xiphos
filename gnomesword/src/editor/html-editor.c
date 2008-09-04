@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * html-editor.c - the html editor
  *
- * Copyright (C) 2005 GnomeSword Developer Team
+ * Copyright (C) 2005-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -2096,15 +2096,3 @@ gint editor_create_new(const gchar * filename, const gchar * key, gint editor_ty
 	}
 	return _create_new(filename, key, editor_type);
 }
-/*
-gint load_file(EDITOR * e)
-{
-#ifdef USE_GTKHTML3_14_23
-	return FALSE;
-#else
-	GS_message(("loading: %s\n", e->filename));
-	_load_file(e, g_strdup(e->filename));
-	return FALSE;
-#endif
-}
-*/

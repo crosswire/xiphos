@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * .h - 
+ * export_dialog.h - 
  *
- * Copyright (C) 2007 GnomeSword Developer Team
+ * Copyright (C) 2007-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___EXPORT_DIALOG_H_
-#define ___EXPORT_DIALOG_H_
+#ifndef _EXPORT_DIALOG_H_
+#define _EXPORT_DIALOG_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,4 +33,4 @@ void gui_export_dialog(void);
 }
 #endif
 	
-#endif /* ___EXPORT_DIALOG_H_ */
+#endif /* _EXPORT_DIALOG_H_ */

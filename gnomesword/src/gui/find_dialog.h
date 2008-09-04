@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * find_dialog.h - 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 #include <gnome.h>
 
 void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name, 
-				gboolean regular, gchar *text);
+		  gboolean regular, gchar *text);
 
 #endif
-

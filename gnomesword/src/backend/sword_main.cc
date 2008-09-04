@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * sword_main.cc - 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,9 +28,6 @@
 #include <swversion.h>
 #include <thmlosis.h>
 
-//#ifdef USE_GTKMOZEMBED 
-//#include "backend/gs_markupfiltmgr.h"
-//#endif
 #include <markupfiltmgr.h>
 #include <swlocale.h>
 
@@ -43,7 +40,6 @@
 #include <dirent.h>
 
 #include "backend/sword_main.hh"
-//#include "backend/gs_osishtmlhref.h"
 
 #include "main/mod_mgr.h"
 #include "main/settings.h"

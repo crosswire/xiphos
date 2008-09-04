@@ -1,9 +1,8 @@
-
 mozilla_include_subdirs =	\
 	.		\
 	gtkembedmoz	\
 	xpcom
-	
+
 INCLUDES =  \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
@@ -18,14 +17,13 @@ INCLUDES =  \
     -DSHARE_DIR=\"$(pkgdatadir)\"  \
     $(UPRINT_CFLAGS)
 
-
 bin_PROGRAMS = gnomesword2
-
 
 gnomesword2_SOURCES =  \
     about_gnomesword.c \
     about_modules.c \
     about_sword.c \
+    about_trans.c \
     bibletext.c \
     bibletext_dialog.c \
     bookmark_dialog.c \
@@ -80,7 +78,6 @@ else
     LIB_GECKO=
 endif 
 
-
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/backend/libbackend.a \
@@ -93,6 +90,5 @@ gnomesword2_LDADD = \
     $(SWORD_LIBS) \
     $(UPRINT_LIBS)
 
-    
 EXTRA_DIST = \
     $(top_builddir)/src/gui/*.h

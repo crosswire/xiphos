@@ -1,9 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- *
  * preferences_cell_renderer.h
  *
- * Copyright (C) 2002 Dave Camp
+ * Copyright (C) 2002-2008 Dave Camp
  * taken form Anjuta-1.1.98
  *
  * This library is free software; you can redistribute it and/or

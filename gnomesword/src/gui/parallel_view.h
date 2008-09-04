@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * parallel_view.h - support for displaying multiple modules
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,27 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
-#include "main/settings.h"
 
-typedef enum
-{
-	PARALLEL1,
-	PARALLEL2,
-	PARALLEL3,
-	PARALLEL4,
-	PARALLEL5
-	
-}GSParallel;
-*/
-
-//void gui_change_parallel_module(GSParallel parallel, gchar * mod_name);	
-//void gui_check_parallel_modules(void);	
-//void gui_set_parallel_options_at_start(void);
-//void gui_update_parallel_page(void);
-//void gui_update_parallel_page_detached(void);
-//void gui_swap_parallel_with_main(char *intmod);
-//void gui_set_parallel_module_global_options(gchar * option, gboolean choice);
 void gui_create_parallel_page(void);
 void gui_create_parallel_popup(void);
 void gui_popup_menu_parallel(void);
