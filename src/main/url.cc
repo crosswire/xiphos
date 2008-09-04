@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * url.cc - support functions
  *
- * Copyright (C) 2004,2005,2006 GnomeSword Developer Team
+ * Copyright (C) 2004-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,9 +31,7 @@
 #include <ctype.h>
 #include <url.h>
 
-
 #include <swbuf.h>
-
 
 #include <swmgr.h>
 #include <swmodule.h>
@@ -47,7 +45,6 @@
 #endif
 
 #include "gui/about_modules.h"
-//#include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/utilities.h"
@@ -76,23 +73,6 @@ gint in_url;
 using namespace sword;
 
 
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "main/url.hh"
- *
- *   
- *
- * Description
- *  
- *
- * Return value
- *   
- */
- 
- 
 /******************************************************************************
  * Name
  *   

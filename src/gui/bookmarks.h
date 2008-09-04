@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * bookmarks.h - gui for bookmarks
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,14 +28,12 @@ extern "C" {
 
 #include "main/settings.h"
 
-
 void gui_new_xml_bookmark_file(void);
 void gui_load_bookmark_tree(void);
 void create_bookmark_menu(void);
 void gui_save_old_bookmarks_to_new(GNode *gnode);
 void gui_save_bookmarks(void);
 void gui_verselist_2_bookmarks(GList *list, gchar * module_name);
-
 
 #ifdef __cplusplus
 }

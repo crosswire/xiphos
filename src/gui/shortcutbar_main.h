@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * shortcutbar_main.h - create and maintain the main shortcut bar
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,6 @@ struct  _shortcut_item {
 	gchar *name;
 };
 
-
 void showSBGroup(gint groupnum);
 void changegroupnameSB(gchar * groupName, gint groupNum);
 gint gui_get_num_shortcut_items(gint group_num);
@@ -50,4 +49,3 @@ void gui_add_sb_item(gchar * url, gchar * name, gint group_num);
 #endif
 
 #endif
-

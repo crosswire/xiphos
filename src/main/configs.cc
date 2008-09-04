@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * configs.c - 
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,6 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-
-//#include <glib-2.0/glib.h>
 
 #include "main/configs.h"
 #include "main/settings.h"

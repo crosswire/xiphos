@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * navbar_versekey_parallel.c - navigation bar for the parallel dialog
  *
- * Copyright (C) 2007 GnomeSword Developer Team
+ * Copyright (C) 2007-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

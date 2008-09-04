@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * about_gnomesword.c - GnomeSword about dialog
  *
- * Copyright (C) 2000-2006 GnomeSword Developer Team
+ * Copyright (C) 2000-2008 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -68,12 +68,11 @@ static gchar *translators = "Jan Paul Schmidt\nJorge Chacon\nDominique Corbex\nZ
  *   void
  */
 
-static void on_dialog_response(GtkDialog * dialog, gint response_id, 
-					gpointer user_data)
+static void
+on_dialog_response(GtkDialog * dialog, gint response_id, 
+		   gpointer user_data)
 {
-	//if (response_id == GTK_RESPONSE_CLOSE) {
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-	//}
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 
@@ -96,47 +95,48 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 GtkWidget*
 gui_create_about_gnomesword(void)
 {
-  GdkPixbuf *about1_logo_pixbuf;
-  GtkWidget *about1;
-  GError *error = NULL;
-  gchar versionbuild[128];
+	GdkPixbuf *about1_logo_pixbuf;
+	GtkWidget *about1;
+	GError *error = NULL;
+	gchar versionbuild[128];
 
-  snprintf
-      (versionbuild, 120, "%s-%s", VERSION,
+	snprintf
+	    (versionbuild, 120, "%s-%s", VERSION,
 #ifdef USE_GTKMOZEMBED
-       "mozembed"
+	     "mozembed"
 #else
-       "gtkhtml3"
+	     "gtkhtml3"
 #endif
-      );
+		);
 
-  about1_logo_pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR"/about.png", &error);
+	about1_logo_pixbuf =
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR"/about.png", &error);
 
-  about1 = gtk_about_dialog_new ();
+	about1 = gtk_about_dialog_new ();
   
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
   
-  gtk_about_dialog_set_name
-          (GTK_ABOUT_DIALOG (about1), PACKAGE);
-  gtk_about_dialog_set_version
-          (GTK_ABOUT_DIALOG (about1), versionbuild);
-  gtk_about_dialog_set_copyright
-          (GTK_ABOUT_DIALOG (about1),
-           _("Copyright 2000-2008 The GnomeSword Development Team"));
-  gtk_about_dialog_set_comments
-          (GTK_ABOUT_DIALOG (about1),
-           _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
-  gtk_about_dialog_set_website
-	  (GTK_ABOUT_DIALOG (about1), "http://gnomesword.sourceforge.net/");
-  gtk_about_dialog_set_authors
-          (GTK_ABOUT_DIALOG (about1), authors);
-  gtk_about_dialog_set_documenters
-          (GTK_ABOUT_DIALOG (about1), documenters);
-  gtk_about_dialog_set_translator_credits
-          (GTK_ABOUT_DIALOG (about1), translators);
-  gtk_about_dialog_set_logo
-          (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
+	gtk_about_dialog_set_name
+	    (GTK_ABOUT_DIALOG (about1), PACKAGE);
+	gtk_about_dialog_set_version
+	    (GTK_ABOUT_DIALOG (about1), versionbuild);
+	gtk_about_dialog_set_copyright
+	    (GTK_ABOUT_DIALOG (about1),
+	     _("Copyright 2000-2008 The GnomeSword Development Team"));
+	gtk_about_dialog_set_comments
+	    (GTK_ABOUT_DIALOG (about1),
+	     _("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."));
+	gtk_about_dialog_set_website
+	    (GTK_ABOUT_DIALOG (about1), "http://gnomesword.sourceforge.net/");
+	gtk_about_dialog_set_authors
+	    (GTK_ABOUT_DIALOG (about1), authors);
+	gtk_about_dialog_set_documenters
+	    (GTK_ABOUT_DIALOG (about1), documenters);
+	gtk_about_dialog_set_translator_credits
+	    (GTK_ABOUT_DIALOG (about1), translators);
+	gtk_about_dialog_set_logo
+	    (GTK_ABOUT_DIALOG (about1), about1_logo_pixbuf);
 
-  return about1;
+	return about1;
 }
