@@ -62,6 +62,7 @@ src/gnome2/splash.c
 src/gnome2/main_menu.c
 src/gnome2/export_dialog.c
 src/gnome2/bookmarks_treeview.c
+src/gnome2/about_trans.c
 ## shared source files
 src/main/sword.cc
 src/main/navbar_versekey.cc
