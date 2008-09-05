@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-05 21:06+0100\n"
-"PO-Revision-Date: 2008-09-05 21:08+0100\n"
+"POT-Creation-Date: 2008-09-06 00:32+0100\n"
+"PO-Revision-Date: 2008-09-06 00:41+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -1774,6 +1774,31 @@ msgstr "A_juda"
 #: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:13
 msgid "Please check copyright before exporting!"
 msgstr "Por favor verifique os direitos de autor antes de exportar!"
+
+#: ../src/gnome2/about_trans.c:83
+msgid ""
+"Do you like using GnomeSword to study the Bible? Would you like to see its "
+"display using your native language? You could translate GnomeSword! \n"
+"\n"
+"We are always looking for contributions of new translations of GnomeSword "
+"into other languages. If you are able to translate for us, please see the "
+"link below, contact us, and get involved with our efforts."
+msgstr ""
+"Gostaria de usar GnomeSword para estudar a Bíblia? Gostaria de uma interface na sua língua materna? Você pode traduzir GnomeSword!\n"
+"\n"
+"Estamos sempre procurando contribuições de novas traduções de GnomeSword noutras línguas. Se consegue traduzir para nós, veja por favor a ligação abaixo, contacte-nos e junte-se aos nossos esforços."
+
+#: ../src/gnome2/about_trans.c:97
+msgid "About GnomeSword Translation"
+msgstr "Sobre a tradução de GnomeSword ..."
+
+#: ../src/gnome2/about_trans.c:139
+msgid "See TRANSLATION-HOWTO in GnomeSword source"
+msgstr "Veja TRANSLATION-HOWTO no código de GnomeSword"
+
+#: ../src/gnome2/about_trans.c:146
+msgid "GnomeSword development"
+msgstr "Desenvolvimento de GnomeSword"
 
 #: ../src/main/sword.cc:545
 msgid ""
