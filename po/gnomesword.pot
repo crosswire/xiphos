@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-05 21:06+0100\n"
+"POT-Creation-Date: 2008-09-06 00:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1740,6 +1740,28 @@ msgstr ""
 
 #: ../src/gnome2/export_dialog.c:228 ../ui/export-dialog.glade.h:13
 msgid "Please check copyright before exporting!"
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:83
+msgid ""
+"Do you like using GnomeSword to study the Bible? Would you like to see its "
+"display using your native language? You could translate GnomeSword! \n"
+"\n"
+"We are always looking for contributions of new translations of GnomeSword "
+"into other languages. If you are able to translate for us, please see the "
+"link below, contact us, and get involved with our efforts."
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:97
+msgid "About GnomeSword Translation"
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:139
+msgid "See TRANSLATION-HOWTO in GnomeSword source"
+msgstr ""
+
+#: ../src/gnome2/about_trans.c:146
+msgid "GnomeSword development"
 msgstr ""
 
 #: ../src/main/sword.cc:545
