@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-01 00:37+0100\n"
-"PO-Revision-Date: 2008-09-02 16:33+0100\n"
+"PO-Revision-Date: 2008-09-06 19:55+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -1008,7 +1008,7 @@ msgstr "מילונים"
 #: ../src/main/sidebar.cc:1010
 #: ../src/main/sidebar.cc:1012
 msgid "Daily Devotionals"
-msgstr "Devotional יומי"
+msgstr "דרשות יומיות"
 
 #: ../src/gnome2/mod_mgr.c:918
 #: ../src/gnome2/utilities.c:530
@@ -1296,7 +1296,7 @@ msgstr "צור רשימת מודולים חדשה"
 
 #: ../src/gnome2/sidebar.c:846
 msgid "Daily Journal"
-msgstr "Devotional יומי"
+msgstr "יומן יומי"
 
 #: ../src/gnome2/sidebar.c:853
 msgid "Outlined Topic"
@@ -1821,11 +1821,11 @@ msgstr "נקה את רשימת ההסטוריה"
 #. 0
 #: ../src/gnome2/main_menu.c:798
 msgid "_Daily Devotion"
-msgstr "Devotion יומי"
+msgstr "דרשה יומית"
 
 #: ../src/gnome2/main_menu.c:799
 msgid "Show the Daily Devotion for today"
-msgstr "הראה את ה-Devotion היומי להיום"
+msgstr "הצג את הדרשה היומית להיום"
 
 #. 1
 #. 2
@@ -1997,7 +1997,7 @@ msgstr "מכבה את SWORD"
 
 #: ../src/main/sword.cc:1363
 msgid "Daily devotional was requested, but there are none installed."
-msgstr "ביקשת את ה-Devotional היומי, אך הוא אינו מותקן."
+msgstr "ביקשת דרשה יומית, אך אף מודול דרשות אינו מותקן."
 
 #: ../src/main/search_dialog.cc:314
 msgid "Delete Range?"
@@ -2462,7 +2462,7 @@ msgstr "מספר מודולי פירוש אישי"
 
 #: ../src/main/lists.cc:161
 msgid "Number of Devotion modules"
-msgstr "מספר מודולי Devotion"
+msgstr "מספר מודולי דרשות"
 
 #: ../src/main/lists.cc:163
 msgid "Number of Prayer modules"
@@ -3050,7 +3050,7 @@ msgstr "טקסט הפסוק הנוכחי"
 
 #: ../ui/prefs.glade.h:31
 msgid "Daily Devotional"
-msgstr "Devotional יומי"
+msgstr "דרשה יומית"
 
 #: ../ui/prefs.glade.h:32
 msgid "Default Dictionary"
@@ -3154,7 +3154,7 @@ msgstr "בחר ספרייה"
 
 #: ../ui/prefs.glade.h:59
 msgid "Show Daily Devotion at start up"
-msgstr "הצג Devotion יומי בפתיחה"
+msgstr "הצג דרשה יומית בפתיחה"
 
 #: ../ui/prefs.glade.h:60
 msgid "Show splash screen at start up"
