@@ -7,7 +7,7 @@ Release 2.4.0 -stable-
 20 Sep 2008
 
 Moving past the "development" 2.3 line to "stable" 2.4 with these updates
-in the post-2.3.6 release shakedown:
+in the post-2.3.6 shakedown:
 
  1. Journal/prayer list support is enabled by default.
 
@@ -38,6 +38,9 @@ in the post-2.3.6 release shakedown:
 
 14. The passage exporter is enabled by default; --enable-exporter is no
     longer needed.
+
+15. The Help menu contains a reference to Translation, to solicit others'
+    help in making GnomeSword more accessible to more language groups.
 
 Bug reports addressed since 2.3.6:
 2036800  Prayer list/journal name only accepts English
