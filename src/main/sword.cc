@@ -524,12 +524,6 @@ char *main_get_path_to_mods(void)
  *   void
  */ 
 
-#ifdef __CYGWIN__
-#define	LANGUAGES	"languages.cygwin"
-#else
-#define	LANGUAGES	"languages"
-#endif
-
 typedef std::map < SWBuf, SWBuf > ModLanguageMap;
 ModLanguageMap languageMap;
 
@@ -540,7 +534,7 @@ void main_init_language_map() {
 	char *mapspace;
 	size_t length;
 	
-	if ((language_file = gui_general_user_file(LANGUAGES, FALSE)) == NULL) {
+	if ((language_file = gui_general_user_file("languages", FALSE)) == NULL) {
 		gui_generic_warning
 		    (_("GnomeSword's file for language\nabbreviations is missing."));
 		return;
@@ -583,7 +577,13 @@ void main_init_language_map() {
 			break;
 		}
 		*(name++) = '\0';	// NUL-terminate abbrev, mark name.
-		languageMap[SWBuf(abbrev)] = SWBuf(name);
+#ifdef __CYGWIN__
+		// cygwin pango chokes (w/abort()) on encoding for korean.
+		if (!strcmp(abbrev, "ko"))
+			languageMap[SWBuf(abbrev)] = SWBuf("Korean");
+		else
+#endif /* __CYGWIN__ */
+			languageMap[SWBuf(abbrev)] = SWBuf(name);
 		s = newline;
 	}
 
