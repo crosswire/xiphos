@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword\n"
 "Report-Msgid-Bugs-To: gnomesword-developers@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-09-06 00:32+0100\n"
-"PO-Revision-Date: 2008-09-05 22:03-0400\n"
+"POT-Creation-Date: 2008-09-08 21:42+0200\n"
+"PO-Revision-Date: 2008-09-09 10:57-0400\n"
 "Last-Translator: Thomas Abthorpe <tabthorpe@FreeBSD.org>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -94,23 +94,23 @@ msgstr "_Plain Source"
 
 #: ../src/editor/html-editor.c:537 ../src/gnome2/main_menu.c:989
 msgid "_View"
-msgstr "_View"
+msgstr ""
 
 #: ../src/editor/html-editor.c:638
 msgid "Are you sure you want to delete the note for"
-msgstr "Are you sure you want to delete the note for"
+msgstr ""
 
 #: ../src/editor/html-editor.c:640
 msgid "It will be lost permanently!"
-msgstr "It will be lost permanently!"
+msgstr ""
 
 #: ../src/editor/html-editor.c:859
 msgid "Open file..."
-msgstr "Open file..."
+msgstr ""
 
 #: ../src/editor/html-editor.c:870
 msgid "Save file as..."
-msgstr "Save file as..."
+msgstr ""
 
 #. 2
 #. 3
@@ -125,11 +125,11 @@ msgstr "Save file as..."
 #: ../src/gnome2/dictlex.c:1030 ../src/gnome2/commentary_dialog.c:1656
 #: ../src/gnome2/commentary.c:1003 ../src/gnome2/studypad.c:103
 msgid "File"
-msgstr "File"
+msgstr ""
 
 #: ../src/editor/html-editor.c:1528
 msgid "Save the changes to document"
-msgstr "Save the changes to document"
+msgstr ""
 
 #: ../src/editor/html-editor.c:1529
 msgid "before closing?"
@@ -188,11 +188,11 @@ msgstr ""
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
-msgstr "Open StudyPad File"
+msgstr ""
 
 #: ../src/gnome2/fileselection.c:266
 msgid "Save StudyPad File"
-msgstr "Save StudyPad File"
+msgstr ""
 
 #: ../src/gnome2/bibletext.c:911 ../src/gnome2/gbs.c:706
 #: ../src/gnome2/bibletext_dialog.c:1897 ../src/gnome2/dictlex.c:842
@@ -275,7 +275,7 @@ msgstr ""
 #: ../src/gnome2/commentary_dialog.c:1564 ../src/gnome2/commentary.c:904
 #: ../ui/search-dialog.glade.h:35
 msgid "Footnotes"
-msgstr ""
+msgstr "Footnotes"
 
 #. 6
 #: ../src/gnome2/bibletext.c:1038 ../src/gnome2/gbs.c:820
@@ -289,7 +289,7 @@ msgstr ""
 #: ../src/gnome2/bibletext_dialog.c:2040 ../src/gnome2/dictlex.c:948
 #: ../src/gnome2/commentary_dialog.c:1580 ../src/gnome2/commentary.c:920
 msgid "Lemmas"
-msgstr ""
+msgstr "Lemmas"
 
 #. 8
 #: ../src/gnome2/bibletext.c:1054 ../src/gnome2/gbs.c:836
@@ -317,7 +317,7 @@ msgstr ""
 #: ../src/gnome2/bibletext_dialog.c:2072 ../src/gnome2/dictlex.c:980
 #: ../src/gnome2/commentary_dialog.c:1612 ../src/gnome2/commentary.c:952
 msgid "Headings"
-msgstr ""
+msgstr "Headings"
 
 #. 12
 #: ../src/gnome2/bibletext.c:1086 ../src/gnome2/gbs.c:868
@@ -820,7 +820,7 @@ msgstr ""
 #: ../src/main/sidebar.cc:759 ../src/main/sidebar.cc:818
 #: ../src/main/sidebar.cc:891 ../src/main/sidebar.cc:893
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: ../src/gnome2/mod_mgr.c:897
 msgid ""
@@ -837,7 +837,7 @@ msgstr ""
 #: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:992
 #: ../src/main/sidebar.cc:994 ../ui/prefs.glade.h:27
 msgid "Commentaries"
-msgstr ""
+msgstr "Commentaries"
 
 #: ../src/gnome2/mod_mgr.c:910 ../src/gnome2/utilities.c:522
 #: ../src/main/sidebar.cc:1001 ../src/main/sidebar.cc:1003
@@ -924,7 +924,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:1433
 msgid "Caption"
-msgstr ""
+msgstr "Caption"
 
 #: ../src/gnome2/mod_mgr.c:1441
 msgid "Source"
@@ -1135,7 +1135,7 @@ msgstr ""
 
 #: ../src/gnome2/sidebar.c:1331
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: ../src/gnome2/sidebar.c:1339
 msgid "Verse List"
@@ -1500,7 +1500,7 @@ msgstr ""
 #: ../src/gnome2/treekey-editor.c:244 ../ui/export-dialog.glade.h:4
 #: ../ui/prefs.glade.h:25
 msgid "Book"
-msgstr ""
+msgstr "Book"
 
 #: ../src/gnome2/treekey-editor.c:247
 msgid "Remove the selected item"
@@ -1764,19 +1764,19 @@ msgstr ""
 msgid "GnomeSword development"
 msgstr ""
 
-#: ../src/main/sword.cc:545
+#: ../src/main/sword.cc:539
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
 msgstr ""
 
-#: ../src/main/sword.cc:552
+#: ../src/main/sword.cc:546
 msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
 msgstr ""
 
-#: ../src/main/sword.cc:561
+#: ../src/main/sword.cc:555
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
@@ -2180,7 +2180,7 @@ msgstr ""
 #: ../src/main/display.cc:1022 ../src/main/display.cc:1030
 #: ../ui/export-dialog.glade.h:5
 msgid "Chapter"
-msgstr ""
+msgstr "Chapter"
 
 #: ../src/main/previewer.cc:102 ../src/main/module_dialogs.cc:232
 #: ../ui/prefs.glade.h:55
@@ -2190,7 +2190,7 @@ msgstr ""
 #: ../src/main/previewer.cc:171 ../src/main/module_dialogs.cc:299
 #: ../src/main/module_dialogs.cc:426
 msgid "Footnote"
-msgstr ""
+msgstr "Footnote"
 
 #: ../src/main/previewer.cc:177 ../src/main/module_dialogs.cc:305
 #: ../src/main/module_dialogs.cc:431
@@ -2201,13 +2201,13 @@ msgstr ""
 #: ../src/main/module_dialogs.cc:311 ../src/main/module_dialogs.cc:325
 #: ../src/main/module_dialogs.cc:436 ../src/main/module_dialogs.cc:448
 msgid "Strongs"
-msgstr ""
+msgstr "Strongs"
 
 #: ../src/main/previewer.cc:189 ../src/main/previewer.cc:210
 #: ../src/main/module_dialogs.cc:317 ../src/main/module_dialogs.cc:336
 #: ../src/main/module_dialogs.cc:441 ../src/main/module_dialogs.cc:458
 msgid "Morphology"
-msgstr ""
+msgstr "Morphology"
 
 #: ../src/main/module_dialogs.cc:1268 ../src/main/url.cc:688
 msgid "Back to "
@@ -2308,6 +2308,22 @@ msgid ""
 "\n"
 "May GnomeSword invoke the Module Manager so that you may install a Bible?"
 msgstr ""
+"Welcome to GnomeSword.\n"
+"\n"
+"There are no Bible modules installed. In order to initialise, GnomeSword "
+"needs you to install at least one Bible.\n"
+"\n"
+"With your permission, GnomeSword will invoke the Module Manager so that you "
+"may install from Crosswire:\n"
+"1. Configure remote install.\n"
+"2. Connect.\n"
+"3. Select a Bible text of your language preference.\n"
+"4. Click `install'.\n"
+"Close the Module Manager when you are done.\n"
+"\n"
+"Warning: If you live in a persecuted country, use with care.\n"
+"\n"
+"May GnomeSword invoke the Module Manager so that you may install a Bible?"
 
 #: ../src/main/settings.c:107
 msgid "$HOME is not set!"
@@ -2589,7 +2605,7 @@ msgstr ""
 
 #: ../ui/export-dialog.glade.h:16
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
@@ -2644,7 +2660,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:17
 msgid "Local"
-msgstr ""
+msgstr "Local"
 
 #: ../ui/module-manager.glade.h:18
 msgid "Local Install Folder"
@@ -2656,7 +2672,7 @@ msgstr ""
 
 #: ../ui/module-manager.glade.h:20
 msgid "Remote"
-msgstr ""
+msgstr "Remote"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Sword sys dir"
