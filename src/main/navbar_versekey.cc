@@ -693,9 +693,6 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	GtkWidget *menu;
 	GtkWidget *item;
 	GtkWidget *select_item;
-/*	gsize bytes_read;
-	gsize bytes_written;
-	GError *error = NULL;  */
 	char *book = NULL;
 	char *current_book = NULL;
 	int i = 0, j = 0, x = 2;
@@ -706,11 +703,11 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	c_editor = NULL;
 	c_editor = (EDITOR *) editor;
 	c_type = nb_type;
-	
+	/*
 	if(navbar.testaments == backend->module_get_testaments(navbar.module_name->str))
-		return NULL;
-	
+		return NULL;	
 	navbar.testaments = backend->module_get_testaments(navbar.module_name->str);
+	*/
 	key_current = navbar.key->str;
 	current_book = strdup((const char *) key_current.getBookName());
 	menu = gtk_menu_new();
