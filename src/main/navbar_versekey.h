@@ -84,7 +84,7 @@ struct _navbar_versekey {
 	gchar *book;
 	GString *module_name;
 	gboolean dialog;
-	gint testaments;
+	//gint testaments;
 	gint type;	
 };
 extern NAVBAR_VERSEKEY navbar_versekey;
