@@ -1,6 +1,6 @@
 2008-09-13  terry <tbiggs@users.sourceforge.net>
 
-	* fixed bug #2105812
+	* fixed bug #2105812 main navbar wrongly loaded when switching
 
 2008-09-08  karl <charcoal@users.sf.net>
 
