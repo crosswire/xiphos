@@ -750,7 +750,7 @@
 		Using the "About GnomeSword" selection under the <guimenuitem>Help</guimenuitem> menu, you will see the display library with
 		which <application>GnomeSword</application> was built.
 		</para>
-		<figure id="dict_figure">
+		<figure id="displib_figure">
 		  <title>Comparison, gtkhtml3 -vs- mozembed</title>
 		  <screenshot> 
 		    <mediaobject> 
