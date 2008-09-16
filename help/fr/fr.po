@@ -1,20 +1,19 @@
 # French translation of GnomeSword
 # Copyright (C) 2008 Free Software Foundation, Inc.
-# Dominique Corbex <domcox@users.sourceforge.net>, 2007.
-# Dominique Corbex <domcox@users.sourceforge.net>, 2008.
-# 
-# 
+# Dominique Corbex <domcox@users.sourceforge.net>, 2008
+#
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: GnomeSword 2.3.5\n"
+"Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-01 20:43+0200\n"
-"PO-Revision-Date: 2008-08-01 21:32+0200\n"
-"Last-Translator:  <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2008-09-16 18:33+0200\n"
+"PO-Revision-Date: 2008-09-16 18:40+0200\n"
+"Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
+"Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #. Authors
@@ -110,8 +109,8 @@ msgstr "interface_biblepane-options.png"
 #: ../C/gnomesword.xml:424(None)
 msgid ""
 "@@image: 'figures/interface_menubar-view.png'; "
-"md5=5e992f05345ee519d756cf7eefd6816c"
-msgstr "interface_menubar-view.png"
+"md5=a814a8081455c2cab68198a78cb038b4"
+msgstr "interface_menubar.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -138,7 +137,7 @@ msgstr "interface_dictionary.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gnomesword.xml:755(None)
+#: ../C/gnomesword.xml:758(None)
 msgid ""
 "@@image: 'figures/gtkhtml3-vs-mozembed.png'; "
 "md5=8cb0c5fe67f45e009bd8f40f5609f573"
@@ -253,7 +252,7 @@ msgstr "interface_searchpane.png"
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/gnomesword.xml:180(None)
 msgid ""
-"@@image: 'figures/search_search.png'; md5=1a4e617b4b6599ed5768ccb794fa823f"
+"@@image: 'figures/search_search.png'; md5=2af1d1e94530569d1e55c287ae3cba70"
 msgstr "search_search.png"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -1627,8 +1626,8 @@ msgstr ""
 
 #: ../C/gnomesword.xml:456(para)
 msgid ""
-"Pin Tabs - When more than one tab is open, each one's verse is navigated "
-"separately in the disabled case. If tab pinning is enabled, then all tabs "
+"Link Tabs - When more than one tab is open, each one's verse is navigated "
+"separately in the disabled case. If tab linking is enabled, then all tabs "
 "navigate together, keeping all translations on the same verse."
 msgstr ""
 "<guimenuitem>Onglets liés</guimenuitem> - Par défaut, quand plus d'un onglet "
@@ -1980,39 +1979,47 @@ msgstr "Alt-Z"
 msgid "<placeholder-1/> opens the personal commentary editor."
 msgstr "<placeholder-1/> ouvre l'éditeur de commentaires personnels."
 
-#: ../C/gnomesword.xml:691(guibutton)
+#: ../C/gnomesword.xml:688(guibutton)
+msgid "Ctrl-Plus/Ctrl-Minus"
+msgstr "Ctrl-+/Ctrl--"
+
+#: ../C/gnomesword.xml:687(listitem)
+msgid "<placeholder-1/> increases/decreases the base font size."
+msgstr "<placeholder-1/> augmente / diminue la taille de police"
+
+#: ../C/gnomesword.xml:694(guibutton)
 msgid "Ctrl-p/Ctrl-n"
 msgstr "Ctrl-P/Ctrl-N"
 
-#: ../C/gnomesword.xml:690(listitem)
+#: ../C/gnomesword.xml:693(listitem)
 msgid "<placeholder-1/>: Verse previous/next."
 msgstr "<placeholder-1/> Verset précédent/suivant."
 
-#: ../C/gnomesword.xml:694(guibutton)
+#: ../C/gnomesword.xml:697(guibutton)
 msgid "p/n"
 msgstr "P/N"
 
-#: ../C/gnomesword.xml:693(listitem)
+#: ../C/gnomesword.xml:696(listitem)
 msgid "<placeholder-1/>: Chapter previous/next."
 msgstr "<placeholder-1/> : Chapitre précédent/suivant."
 
-#: ../C/gnomesword.xml:697(guibutton)
+#: ../C/gnomesword.xml:700(guibutton)
 msgid "P/N"
 msgstr "P/N"
 
-#: ../C/gnomesword.xml:696(listitem)
+#: ../C/gnomesword.xml:699(listitem)
 msgid "<placeholder-1/>: Book previous/next."
 msgstr "<placeholder-1/> Livre précédent/suivant."
 
-#: ../C/gnomesword.xml:687(listitem)
+#: ../C/gnomesword.xml:690(listitem)
 msgid "Location bar navigation: <placeholder-1/>"
 msgstr "Activer la barre de navigation:·<placeholder-1/>"
 
-#: ../C/gnomesword.xml:705(title)
+#: ../C/gnomesword.xml:708(title)
 msgid "Version Differences in <application>GnomeSword</application>'s Display"
 msgstr "Différences d'affichage dans <application>&appname;</application> :"
 
-#: ../C/gnomesword.xml:706(para)
+#: ../C/gnomesword.xml:709(para)
 msgid ""
 "The <application>GnomeSword</application> interface has evolved over time, "
 "and there are two display libraries with which <application>GnomeSword</"
@@ -2027,7 +2034,7 @@ msgstr ""
 "moins complète se nomme «&nbsp;gtkhtml3&nbsp;», et la nouvelle offrant plus "
 "de possibilités est «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:713(para)
+#: ../C/gnomesword.xml:716(para)
 msgid ""
 "Several desirable capabilities are unsupportable in gtkhtml3, and although "
 "recent <application>GnomeSword</application> is written to take advantage of "
@@ -2050,7 +2057,7 @@ msgstr ""
 "vous utilisez «&nbsp;gtkhtml3&nbsp;» ou «&nbsp;MozEmbed&nbsp;» comme moteur "
 "d'affichage :"
 
-#: ../C/gnomesword.xml:723(listitem)
+#: ../C/gnomesword.xml:726(listitem)
 msgid ""
 "Morphology and Strong's references, enabled via the right-click menu in some "
 "modules, are displayed inline with gtkhtml3; with MozEmbed, a blocked "
@@ -2063,15 +2070,15 @@ msgstr ""
 "références sont alignées au-dessous du mot auxquelles elles se rapportent de "
 "façon à procurer un affichage plus aéré et plus lisible."
 
-#: ../C/gnomesword.xml:729(guibutton)
+#: ../C/gnomesword.xml:732(guibutton)
 msgid "*n"
 msgstr "*n"
 
-#: ../C/gnomesword.xml:729(guibutton)
+#: ../C/gnomesword.xml:732(guibutton)
 msgid "*x"
 msgstr "*x"
 
-#: ../C/gnomesword.xml:728(listitem)
+#: ../C/gnomesword.xml:731(listitem)
 msgid ""
 "Footnote and cross-reference markers (<placeholder-1/>, <placeholder-2/>) "
 "are displayed as proper superscripts in MozEmbed, but not in gtkhtml3."
@@ -2079,7 +2086,7 @@ msgstr ""
 "Les notes de pied de page et les références croisées (<placeholder-1/>, "
 "<placeholder-2/>) s'affichent en mode exposant avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:732(listitem)
+#: ../C/gnomesword.xml:735(listitem)
 msgid ""
 "Links in gtkhtml3 are necessarily both colored and underlined; in MozEmbed, "
 "no underlines are needed."
@@ -2087,11 +2094,11 @@ msgstr ""
 "Les liens avec «&nbsp;gtkhtml3&nbsp;» sont à la fois colorés et soulignés. "
 "Ils ne sont pas soulignés avec «&nbsp;MozEmbed&nbsp;»."
 
-#: ../C/gnomesword.xml:736(guimenuitem)
+#: ../C/gnomesword.xml:739(guimenuitem)
 msgid "View"
 msgstr "Affichage"
 
-#: ../C/gnomesword.xml:735(listitem)
+#: ../C/gnomesword.xml:738(listitem)
 msgid ""
 "Under MozEmbed, double-space display is available using the <placeholder-1/> "
 "menu, but not under gtkhtml3."
@@ -2100,7 +2107,7 @@ msgstr ""
 "activable à l'aide du menu <placeholder-1/>, cette option est indisponible "
 "avec «&nbsp;gtkhtml3&nbsp;»."
 
-#: ../C/gnomesword.xml:739(listitem)
+#: ../C/gnomesword.xml:742(listitem)
 msgid ""
 "It is not possible for gtkhtml3 to interpret multiple font face directives "
 "in a single window, so the gtkhtml3 detached parallel view window cannot "
@@ -2111,7 +2118,7 @@ msgstr ""
 "une même fenêtre, c'est pourquoi la fenêtre détachée «&nbsp;Vue "
 "parallèle&nbsp;» ne permet pas une sélection de police par module."
 
-#: ../C/gnomesword.xml:746(para)
+#: ../C/gnomesword.xml:749(para)
 msgid ""
 "Using the \"About GnomeSword\" selection under the <guimenuitem>Help</"
 "guimenuitem> menu, you will see the display library with which "
@@ -2122,7 +2129,7 @@ msgstr ""
 "connaître la bibliothèque avec laquelle <application>&appname;</application> "
 "a été construit."
 
-#: ../C/gnomesword.xml:751(title) ../C/gnomesword.xml:758(phrase)
+#: ../C/gnomesword.xml:754(title) ../C/gnomesword.xml:761(phrase)
 msgid "Comparison, gtkhtml3 -vs- mozembed"
 msgstr "Comparaison d'affichage entre gtkhtml3 et mozembed"
 
@@ -3916,6 +3923,11 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Accréditions aux traducteurs"
 
+#~ msgid ""
+#~ "@@image: 'figures/interface_menubar-view.png'; "
+#~ "md5=5e992f05345ee519d756cf7eefd6816c"
+#~ msgstr "interface_menubar-view.png"
+
 #~ msgid "April 2008"
 #~ msgstr "Avril 2008"
 
@@ -3937,26 +3949,26 @@ msgstr "Accréditions aux traducteurs"
 #~ "module's internal font requests are ignored. In MozEmbed, neither of "
 #~ "these limitations is present."
 #~ msgstr ""
-#~ "La bibliothèque d'affichage gtkhtml3 ne supporte qu'une seule police à la "
-#~ "fois. En conséquence, la fenêtre détachée «&nbsp;Vue parallèle&nbsp;» ne "
-#~ "peut respecter les choix individuels de police prédéfinis et les "
-#~ "changements de police sont ignorés. Dans la bibliothèque MozEmbed, ces "
-#~ "limitations ne sont pas présentes "
+#~ "La bibliothÃšque d'affichage gtkhtml3 ne supporte qu'une seule police Ã  "
+#~ "la fois. En consÃ©quence, la fenÃªtre dÃ©tachÃ©e Â«&nbsp;Vue "
+#~ "parallÃšle&nbsp;Â» ne peut respecter les choix individuels de police "
+#~ "prÃ©dÃ©finis et les changements de police sont ignorÃ©s. Dans la "
+#~ "bibliothÃšque MozEmbed, ces limitations ne sont pas prÃ©sentes "
 
 #~ msgid "January 2008"
 #~ msgstr "Janvier 2008"
 
 #~ msgid "Sidepane"
-#~ msgstr "Volet latéral"
+#~ msgstr "Volet latÃ©ral"
 
 #~ msgid "The Sidepane"
-#~ msgstr "Le volet latéral"
+#~ msgstr "Le volet latÃ©ral"
 
 #~ msgid "Viewer Pane"
-#~ msgstr "Volet aperçu"
+#~ msgstr "Volet aperÃ§u"
 
 #~ msgid "Viewer Panel"
-#~ msgstr "Volet aperçu"
+#~ msgstr "Volet aperÃ§u"
 
 #~ msgid "the Search Bar"
 #~ msgstr "La barre de recherche"
@@ -4002,13 +4014,13 @@ msgstr "Accréditions aux traducteurs"
 #~ "following 2.2's release."
 #~ msgstr ""
 #~ "La recherche d'expressions dans les notes de bas de page ne fonctionne "
-#~ "plus actuellement. La correction de ce problème nécessite un gros travail "
-#~ "au niveau de la fonction de recherche avancée. Nous regrettons le "
-#~ "désagrément occasionné mais la correction de cette fonction sera la "
-#~ "priorité une après la sortie de la version 2.2."
+#~ "plus actuellement. La correction de ce problÃšme nÃ©cessite un gros "
+#~ "travail au niveau de la fonction de recherche avancÃ©e. Nous regrettons "
+#~ "le dÃ©sagrÃ©ment occasionnÃ© mais la correction de cette fonction sera la "
+#~ "prioritÃ© une aprÃšs la sortie de la version 2.2."
 
 #~ msgid "GNOME Documentation Project"
-#~ msgstr "GNOME·Documentation·Project"
+#~ msgstr "GNOMEÂ·DocumentationÂ·Project"
 
 #~ msgid ""
 #~ "right-click in the <interface>Bible Text pane</interface>. In the popup "
@@ -4017,5 +4029,5 @@ msgstr "Accréditions aux traducteurs"
 #~ msgstr ""
 #~ "Faire un clic droit de la souris dans le volet des <interface>textes "
 #~ "bibliques</interface>. Dans le menu contextuel, choisir "
-#~ "<menuchoice><guimenuitem>Fiichier</guimenuitem><guimenuitem>Ouvrir·dans "
-#~ "une fenêtre·</guimenuitem></menuchoice>."
+#~ "<menuchoice><guimenuitem>Fiichier</guimenuitem><guimenuitem>OuvrirÂ·dans "
+#~ "une fenÃªtreÂ·</guimenuitem></menuchoice>."
