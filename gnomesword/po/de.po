@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-17 21:21+0200\n"
-"PO-Revision-Date: 2008-09-17 21:20+0100\n"
+"POT-Creation-Date: 2008-09-17 21:36+0200\n"
+"PO-Revision-Date: 2008-09-17 21:35+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -689,7 +689,6 @@ msgid "Rename Pers.Comm."
 msgstr "Pers.Komm. Umbenennen"
 
 #: ../src/gnome2/commentary.c:1051
-#, fuzzy
 msgid "Dump Pers.Comm."
 msgstr "Pers.Komm. ausgeben"
 
@@ -2301,7 +2300,6 @@ msgid "Number of Book modules"
 msgstr "Anzahl der Bücher-Module"
 
 #: ../src/main/lists.cc:160
-#, fuzzy
 msgid "Number of Percomm modules"
 msgstr "Anzahl der PerKomm-Module"
 
