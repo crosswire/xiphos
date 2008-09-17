@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 20:05+0200\n"
-"PO-Revision-Date: 2008-09-12 20:05+0100\n"
+"POT-Creation-Date: 2008-09-17 21:21+0200\n"
+"PO-Revision-Date: 2008-09-17 21:20+0100\n"
 "Last-Translator: Eicke Godehardt <sf at godehardt.org>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../gnomesword.desktop.in.in.h:1
 msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword2 - Software zum Bibelstudium"
+msgstr "GnomeSword2 Bibelleitfaden"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
@@ -54,7 +54,7 @@ msgstr "Einfache Quelle"
 #: ../src/editor/html-editor.c:464 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
-msgstr "Drucken..."
+msgstr "_Drucken..."
 
 #: ../src/editor/html-editor.c:471 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
@@ -67,11 +67,11 @@ msgstr "_Beenden"
 
 #: ../src/editor/html-editor.c:485
 msgid "_Open"
-msgstr "Öffnen"
+msgstr "_Öffnen"
 
 #: ../src/editor/html-editor.c:492
 msgid "_Save"
-msgstr "Speichern"
+msgstr "_Speichern"
 
 #: ../src/editor/html-editor.c:499
 msgid "Save _As..."
@@ -145,7 +145,7 @@ msgstr "Wenn sie nicht speichern, werden alle Änderungen verloren gehen."
 #: ../src/editor/html-editor.c:1932 ../src/editor/html-editor.c:1935
 #: ../src/gnome2/studypad.c:422
 msgid "StudyPad"
-msgstr "StudyPad"
+msgstr "Notizbuch"
 
 #: ../src/editor/html-editor.c:1950 ../src/editor/html-editor.c:1954
 msgid "Note Editor"
@@ -191,11 +191,11 @@ msgstr "Druck des Dokuments fehlgeschlagen: %s"
 
 #: ../src/gnome2/fileselection.c:216
 msgid "Open StudyPad File"
-msgstr "StudyPad-Datei öffnen"
+msgstr "Notizbuch-Datei öffnen"
 
 #: ../src/gnome2/fileselection.c:266
 msgid "Save StudyPad File"
-msgstr "StudyPad-Datei speichern"
+msgstr "Notizbuch-Datei speichern"
 
 #: ../src/gnome2/bibletext.c:911 ../src/gnome2/gbs.c:706
 #: ../src/gnome2/bibletext_dialog.c:1897 ../src/gnome2/dictlex.c:842
@@ -689,8 +689,9 @@ msgid "Rename Pers.Comm."
 msgstr "Pers.Komm. Umbenennen"
 
 #: ../src/gnome2/commentary.c:1051
+#, fuzzy
 msgid "Dump Pers.Comm."
-msgstr ""
+msgstr "Pers.Komm. ausgeben"
 
 #: ../src/gnome2/toolbar_nav.c:523
 msgid "Move backwards through history"
@@ -920,11 +921,11 @@ msgstr "Gebetsliste/Tagebuch"
 
 #: ../src/gnome2/mod_mgr.c:1104
 msgid "Refreshing remote"
-msgstr "Aktualisiere entfernte Quelle"
+msgstr "Aktualisiere ferne Quelle"
 
 #: ../src/gnome2/mod_mgr.c:1115
 msgid "Remote not found"
-msgstr "Entfernte Quelle nicht gefunden"
+msgstr "Ferne Quelle nicht gefunden"
 
 #: ../src/gnome2/mod_mgr.c:1236
 msgid "Module Name"
@@ -1001,7 +1002,7 @@ msgstr "Ausgewählte Quelle entfernen "
 
 #: ../src/gnome2/mod_mgr.c:2213
 msgid "Enter a remote source"
-msgstr "Geben sie eine entfernte Quelle an"
+msgstr "Geben sie eine ferne Quelle an"
 
 #: ../src/gnome2/mod_mgr.c:2217
 msgid "Caption:"
@@ -1072,7 +1073,6 @@ msgid "Book View"
 msgstr "Buchansicht"
 
 #: ../src/gnome2/navbar_book.c:327 ../src/gnome2/navbar_book_dialog.c:299
-#, fuzzy
 msgid "Go outward, to the section containing this one"
 msgstr "Nach außen, zum Abschnitt, der diesen enthält"
 
@@ -1085,7 +1085,6 @@ msgid "Go to next item"
 msgstr "Gehe zu nächstem Eintrag"
 
 #: ../src/gnome2/navbar_book.c:374 ../src/gnome2/navbar_book_dialog.c:346
-#, fuzzy
 msgid "Go inward, to the first subsection"
 msgstr "Nach innen, zum ersten Unterabschnitt"
 
@@ -1586,11 +1585,11 @@ msgstr "Starte Sword"
 
 #: ../src/gnome2/main_menu.c:794
 msgid "Open Study_Pad"
-msgstr "_Notizen öffnen"
+msgstr "_Notizbuch öffnen"
 
 #: ../src/gnome2/main_menu.c:795
 msgid "Open the StudyPad editor"
-msgstr "Den StudyPad-Editor öffnen"
+msgstr "Notizbuch-Editor öffnen"
 
 #: ../src/gnome2/main_menu.c:800
 msgid "_Open Session"
@@ -1700,9 +1699,8 @@ msgstr "_Versstil"
 
 #. 8
 #: ../src/gnome2/main_menu.c:898
-#, fuzzy
 msgid "L_ink Tabs"
-msgstr "Reiter an_heften"
+msgstr "_Reiter verbinden"
 
 #. 9
 #: ../src/gnome2/main_menu.c:904
@@ -1748,9 +1746,8 @@ msgid "About _Translation ..."
 msgstr "Info zum _Übersetzen ..."
 
 #: ../src/gnome2/main_menu.c:955
-#, fuzzy
 msgid "Translating GnomeSword to other languages"
-msgstr "Erstelle GnomeSwort Schnittstelle"
+msgstr "Übersetze GnomeSword in andere Sprachen"
 
 #: ../src/gnome2/main_menu.c:961
 msgid "_About the SWORD Project ..."
@@ -1833,6 +1830,8 @@ msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
 msgstr ""
+"GnomeSword konnte die Datei für\n"
+"Sprachabkürzungen nicht abbilden."
 
 #: ../src/main/sword.cc:630
 msgid "Initiating SWORD"
@@ -1844,11 +1843,11 @@ msgstr "Pfad zu sword"
 
 #: ../src/main/sword.cc:632
 msgid "System locale is"
-msgstr ""
+msgstr "System locale ist"
 
 #: ../src/main/sword.cc:633
 msgid "SWORD locale is"
-msgstr ""
+msgstr "SWORD locale ist"
 
 #: ../src/main/sword.cc:635
 msgid "Checking for SWORD Modules"
@@ -2181,7 +2180,7 @@ msgstr "Leeres Dokument\n"
 #: ../src/main/xml.c:425
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr ""
+msgstr "falscher Typ, Wurzelknoten != SwordBookmarks\n"
 
 #: ../src/main/xml.c:479
 msgid "Old Testament"
@@ -2210,7 +2209,7 @@ msgstr "Wähle die Module aus"
 #: ../src/main/xml.c:686 ../src/main/xml.c:964
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr ""
+msgstr "falscher Typ, Wurzelknoten != %s\n"
 
 #: ../src/main/sword_treekey.cc:374
 msgid "Name for new prayer list"
@@ -2304,7 +2303,7 @@ msgstr "Anzahl der Bücher-Module"
 #: ../src/main/lists.cc:160
 #, fuzzy
 msgid "Number of Percomm modules"
-msgstr "Anzahl der Kommentar-Module"
+msgstr "Anzahl der PerKomm-Module"
 
 #: ../src/main/lists.cc:161
 msgid "Number of Devotion modules"
@@ -2384,7 +2383,7 @@ msgstr ""
 "\n"
 "Mit ihrer Erlaubnis wird GnomeSword den Module Manager starten, so dass sie "
 "direkt von Crosswire installieren können:\n"
-"1. Entfernte Quelle konfigurieren.\n"
+"1. Ferne Quelle konfigurieren.\n"
 "2. Verbinden.\n"
 "3. Bibel in der gewünschten Sprache auswählen.\n"
 "4. Auf `installieren' drücken.\n"
@@ -2529,6 +2528,8 @@ msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
 "%s"
 msgstr ""
+"GnomeSword konnte den Schlüssel #%d nicht anwenden:\n"
+"%s"
 
 #: ../ui/bookmarks.glade.h:1
 msgid "Add Bookmark"
@@ -2631,7 +2632,7 @@ msgstr "Öffnen"
 
 #: ../ui/editor_studypad.xml.h:12
 msgid "Open a file in Studypad"
-msgstr "Eine Datei in Notizen öffnen"
+msgstr "Eine Datei im Notizbuch öffnen"
 
 #: ../ui/editor_studypad.xml.h:13
 msgid "Preview the document to be printed"
@@ -2655,7 +2656,7 @@ msgstr "Speichert die aktuelle Datei unter"
 
 #: ../ui/editor.xml.h:10
 msgid "Open the file in Studypad"
-msgstr "Die Datei in Notizen öffnen"
+msgstr "Die Datei im Notizbuch öffnen"
 
 #: ../ui/export-dialog.glade.h:1
 msgid ": "
@@ -2728,7 +2729,7 @@ msgstr "<b>Sword</b>"
 
 #: ../ui/module-manager.glade.h:7
 msgid "<b>WARNING:</b> If you live in a persecuted country use with care."
-msgstr "<b>WARNUNG:</b> Vorsicht, wenn sie in einem Land mit Verfolgung leben."
+msgstr "<b>WARNUNG:</b> Vorsicht, wenn es in ihrem Land Verfolgung gibt."
 
 #: ../ui/module-manager.glade.h:8
 msgid ""
@@ -2737,7 +2738,7 @@ msgid ""
 msgstr ""
 "<b>Warnung:</b> Wenn sie in ihrem Land wegen ihrer Religion verfolgt werden "
 "könnten und nicht riskieren wollen, entdeckt zu werden, sollten sie KEINE "
-"entfernten Quellen verwenden!"
+"fernen Quellen verwenden!"
 
 #: ../ui/module-manager.glade.h:10
 msgid "Continue"
@@ -2745,7 +2746,7 @@ msgstr "Fortfahren"
 
 #: ../ui/module-manager.glade.h:11
 msgid "Current Remote Sources"
-msgstr "Aktuelle entfernte Quellen"
+msgstr "Aktuelle ferne Quellen"
 
 #: ../ui/module-manager.glade.h:12
 msgid "Current local sources"
@@ -2773,7 +2774,7 @@ msgstr "Moduleverwaltung"
 
 #: ../ui/module-manager.glade.h:20
 msgid "Remote"
-msgstr "Entfernt"
+msgstr "Fern"
 
 #: ../ui/module-manager.glade.h:21
 msgid "Sword sys dir"
@@ -2841,7 +2842,7 @@ msgstr "<b>Anzeigen</b>"
 
 #: ../ui/prefs.glade.h:16
 msgid "<b>StudyPad default directory</b>"
-msgstr "<b>Vorgabeverzeichnis für Notizen</b>"
+msgstr "<b>Vorgabeverzeichnis für das Notizbuch</b>"
 
 #: ../ui/prefs.glade.h:17
 msgid "<b>Tabs</b>"
