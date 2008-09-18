@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-06 22:45+0200\n"
-"PO-Revision-Date: 2008-09-16 18:29+0200\n"
+"PO-Revision-Date: 2008-09-18 19:09+0200\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Project-Id-Version: gtranslator 1.0.1 <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -2889,7 +2889,7 @@ msgstr "Autorise les listes de prières"
 
 #: ../ui/prefs.glade.h:29
 msgid "Cover"
-msgstr "Couverture"
+msgstr "Accueil"
 
 #: ../ui/prefs.glade.h:30
 msgid "Current Verse text"
@@ -2918,15 +2918,15 @@ msgstr "Activer les listes de prières"
 
 #: ../ui/prefs.glade.h:36
 msgid "Font Colors"
-msgstr "Couleurs des polices"
+msgstr "Couleurs"
 
 #: ../ui/prefs.glade.h:37
 msgid "Font Misc"
-msgstr "Polices"
+msgstr "Divers"
 
 #: ../ui/prefs.glade.h:38
 msgid "General Misc"
-msgstr "Général"
+msgstr "Divers"
 
 #: ../ui/prefs.glade.h:39
 msgid "Greek Lexicon"
@@ -2954,11 +2954,11 @@ msgstr "Liens"
 
 #: ../ui/prefs.glade.h:45
 msgid "Modules Main"
-msgstr "Modules"
+msgstr "Base"
 
 #: ../ui/prefs.glade.h:46
 msgid "Modules Misc"
-msgstr "Liste de modules"
+msgstr "Divers"
 
 #: ../ui/prefs.glade.h:47
 msgid "Modules Parallel"
