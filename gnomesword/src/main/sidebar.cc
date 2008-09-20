@@ -208,7 +208,7 @@ void main_display_verse_list_in_sidebar(gchar * key,
  *				 gchar *mod_name, unsigned long offset)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -310,7 +310,7 @@ static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
  *   void main_create_pixbufs(void)	
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -341,11 +341,11 @@ void main_create_pixbufs(void)
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter, 
+ *   void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter,
  *				const gchar * key)	
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -405,11 +405,11 @@ static void add_verses_to_chapter(GtkTreeModel * model,
  * Synopsis
  *   #include "main/sidebar.h"
  *
- *   void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter, 
+ *   void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 				const gchar * key)	
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -470,7 +470,7 @@ static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 				const gchar * mod_name)	
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -568,7 +568,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
  *   void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -732,7 +732,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
  *			 gchar * language)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -807,7 +807,7 @@ language_add_folders(GtkTreeModel * model,
 		gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
 				   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
-				   COL_CAPTION, 
+				   COL_CAPTION,
 				   ((g_utf8_validate(languages[j], -1, NULL))
 				    ? languages[j]
 				    : _("Unknown")),
@@ -826,7 +826,7 @@ language_add_folders(GtkTreeModel * model,
  *		      GtkTreeIter iter, gchar * module_name)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -864,7 +864,7 @@ static void add_module_to_prayerlist_folder(GtkTreeModel * model,
  *		      GtkTreeIter iter, gchar * language, gchar * module_name)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -924,7 +924,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  *   void main_load_module_tree(GtkWidget * tree)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1034,7 +1034,7 @@ void main_load_module_tree(GtkWidget * tree)
 			   COL_OFFSET, _("Images"), -1);
 
 	/*  Prayer lists folder */
-	if(settings.prayerlist) {
+	if (settings.prayerlist) {
 		gtk_tree_store_append(store, &prayerlist, NULL);
 		gtk_tree_store_set(store, &prayerlist,
 				   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
@@ -1117,7 +1117,7 @@ void main_load_module_tree(GtkWidget * tree)
 	}
 
 	/* prayer list folders */
-	if(settings.prayerlist) {
+	if (settings.prayerlist) {
 		tmp = get_list(PRAYER_LIST);
 		while (tmp != NULL) {
 			add_module_to_prayerlist_folder(GTK_TREE_MODEL(store),
@@ -1141,7 +1141,7 @@ void main_load_module_tree(GtkWidget * tree)
  *   void main_add_mod_tree_columns(GtkTreeView * tree)	
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
