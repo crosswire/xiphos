@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-06 22:01+0100\n"
-"PO-Revision-Date: 2008-09-06 02:54+0100\n"
+"PO-Revision-Date: 2008-09-19 23:22-0000\n"
 "Last-Translator: Martin Zibricky <matysek03@users.sourceforge.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
 "MIME-Version: 1.0\n"
@@ -2001,7 +2001,7 @@ msgstr "Viz TRANSLATION-HOWTO u zdrojového kódu GnomeSword"
 msgid "GnomeSword development"
 msgstr "Vývoj aplikace GnomeSword"
 
-#: ../src/main/sword.cc:545
+#: ../src/main/sword.cc:539
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
@@ -2009,7 +2009,7 @@ msgstr ""
 "Schází soubor se zkratkami\n"
 "jazyků pro GnomeSword."
 
-#: ../src/main/sword.cc:552
+#: ../src/main/sword.cc:546
 msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
@@ -2017,7 +2017,7 @@ msgstr ""
 "Nelze otevřít soubor se zkratkami\n"
 "jazyků pro GnomeSword."
 
-#: ../src/main/sword.cc:561
+#: ../src/main/sword.cc:555
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
