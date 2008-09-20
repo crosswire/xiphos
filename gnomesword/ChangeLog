@@ -1,3 +1,7 @@
+2008-09-20  karl <charcoal@users.sf.net>
+
+	* re-fix #2105812 -- avoid premature MainWindowModule setting.
+
 2008-09-13  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2105812 main navbar wrongly loaded when switching

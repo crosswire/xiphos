@@ -639,12 +639,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 					      (widgets.
 					       notebook_bible_parallel),
 					      0);
-		if(strcmp(settings.MainWindowModule, mod)) {
-			xml_set_value("GnomeSword", "modules", "bible",
-						mod);
-			settings.MainWindowModule = xml_get_value(
-					"modules", "bible");
-		}	
+		// MainWindowModule is set in main_bible_display(), not here.
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected)
 		    && !key)
