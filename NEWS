@@ -1,3 +1,9 @@
+2008-09-21  - 2.4.0.  a few improvements to phrasing; bugfix in navbar
+	      loading; cygwin pango workaround; add Help->Translation;
+	      build improvement in gecko.m4; mod.mgr fixes; Strongs
+	      fixes; mod.mgr fixes; non-linked tab label fix; Ctrl +/-
+	      for base font size.
+
 2008-08-02  - final 2.3.x as pseudo-release candidate for stable 2.4.
               many updates, many features, many bugfixes.
 
