@@ -15,7 +15,6 @@ gnomesworddoc_DATA = \
 	ChangeLog \
 	INSTALL \
 	NEWS \
-	TRANSLATION-HOWTO \
 	TODO
 
 ACLOCAL_AMFLAGS = -I m4
@@ -30,6 +29,7 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	COPYING-DOCS \
+	TRANSLATION-HOWTO \
 	RELEASE-NOTES 
 
 DISTCLEANFILES = gnome-doc-utils.make
