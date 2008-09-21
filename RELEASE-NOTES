@@ -42,6 +42,9 @@ in the post-2.3.6 shakedown:
 15. The Help menu contains a reference to Translation, to solicit others'
     help in making GnomeSword more accessible to more language groups.
 
+16. Navbar load glitch when switching between 1- and 2-testament Bibles
+    has been fixed.
+
 Bug reports addressed since 2.3.6:
 2036800  Prayer list/journal name only accepts English
 2040344  module manager needs to lock left panel
@@ -50,6 +53,7 @@ Bug reports addressed since 2.3.6:
 2069476  sorting by module name contains categories
 2079930  Strongs Hebrew/Greek numbers don't lookup
 2084401  Problem compiling with xul-1.9/firefox 3 on Debian/Gentoo
+2105812  main navbar wrongly loaded when switching
 
 New feature requests pending:
 2053524  Port to Maemo OS2008 (Internet Tablet)
