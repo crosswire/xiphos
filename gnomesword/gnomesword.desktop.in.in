@@ -3,7 +3,7 @@
 _Name=GnomeSword2 Bible Guide
 _Comment=Study the Bible
 Exec=@gnomesword_exec@
-Icon=@PACKAGE_PIXMAPS_DIR@/gs2-48x48.png
+Icon=@PACKAGE_PIXMAPS_DIR@/gnomesword.svg
 Terminal=false
 X-MultipleArgs=false
 Type=Application
