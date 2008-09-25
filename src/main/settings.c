@@ -720,7 +720,7 @@ void load_settings_structure(void)
  *   void
  */
 
-#define	GS_GCONF_PERMISSION	_("There is currently no program set as your\nhandler for \"sword://\" and similar URLs.\nWould you like GnomeSword to install itself\nas the program to handle these URLs?")
+#define	GS_GCONF_PERMISSION	_("URL references using \"sword://\" (similar to web page\nreferences) can be used by programs to look up\nscripture references. Your system currently has no\nprogram set to handle these references.\n\nWould you like GnomeSword to set itself as the\nprogram to handle these references?")
 
 #define	GS_GCONF_SUCCESS	_("GnomeSword has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
 
