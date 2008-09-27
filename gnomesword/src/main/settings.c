@@ -245,7 +245,9 @@ int settings_init(int new_configs, int new_bookmarks)
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
 
+#ifdef __CYGWIN__
 	gconf_setup();
+#endif /* __CYGWIN__ */
 
 	return retval;
 }
@@ -703,6 +705,7 @@ void load_settings_structure(void)
 }
 
 
+#ifdef __CYGWIN__
 /******************************************************************************
  * Name
  *    gconf_setup
@@ -776,3 +779,4 @@ void gconf_setup()
 		gui_generic_warning(GS_GCONF_SUCCESS);
 	}
 }
+#endif /* __CYGWIN__ */
