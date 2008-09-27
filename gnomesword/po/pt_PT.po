@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-06 00:32+0100\n"
-"PO-Revision-Date: 2008-09-06 00:41+0100\n"
+"POT-Creation-Date: 2008-09-27 09:51+0100\n"
+"PO-Revision-Date: 2008-09-27 09:55+0100\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -499,8 +499,8 @@ msgstr "Mudar paralelo 5"
 
 #: ../src/gnome2/parallel_view.c:434 ../src/gnome2/sidebar.c:405
 #: ../src/gnome2/sidebar.c:411 ../src/main/sidebar.cc:592
-#: ../src/main/sidebar.cc:975 ../src/main/sidebar.cc:976
-#: ../src/main/sidebar.cc:977
+#: ../src/main/sidebar.cc:970 ../src/main/sidebar.cc:971
+#: ../src/main/sidebar.cc:972
 msgid "Parallel View"
 msgstr "Vista Paralela"
 
@@ -841,9 +841,9 @@ msgstr "Terminado"
 #: ../src/gnome2/mod_mgr.c:770 ../src/gnome2/utilities.c:322
 #: ../src/gnome2/utilities.c:389 ../src/gnome2/utilities.c:391
 #: ../src/gnome2/utilities.c:451 ../src/gnome2/utilities.c:453
-#: ../src/gnome2/utilities.c:1077 ../src/main/sidebar.cc:757
-#: ../src/main/sidebar.cc:759 ../src/main/sidebar.cc:818
-#: ../src/main/sidebar.cc:891 ../src/main/sidebar.cc:893
+#: ../src/gnome2/utilities.c:1077 ../src/main/sidebar.cc:752
+#: ../src/main/sidebar.cc:754 ../src/main/sidebar.cc:813
+#: ../src/main/sidebar.cc:886 ../src/main/sidebar.cc:888
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -856,39 +856,39 @@ msgstr ""
 "Tipo de Módulo"
 
 #: ../src/gnome2/mod_mgr.c:902 ../src/gnome2/utilities.c:514
-#: ../src/main/sidebar.cc:967 ../src/main/sidebar.cc:969
+#: ../src/main/sidebar.cc:962 ../src/main/sidebar.cc:964
 msgid "Biblical Texts"
 msgstr "Textos Bíblicos"
 
 #: ../src/gnome2/mod_mgr.c:906 ../src/gnome2/utilities.c:518
-#: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:992
-#: ../src/main/sidebar.cc:994 ../ui/prefs.glade.h:27
+#: ../src/main/sidebar.cc:604 ../src/main/sidebar.cc:987
+#: ../src/main/sidebar.cc:989 ../ui/prefs.glade.h:27
 msgid "Commentaries"
 msgstr "Comentários"
 
 #: ../src/gnome2/mod_mgr.c:910 ../src/gnome2/utilities.c:522
-#: ../src/main/sidebar.cc:1001 ../src/main/sidebar.cc:1003
+#: ../src/main/sidebar.cc:996 ../src/main/sidebar.cc:998
 msgid "Dictionaries"
 msgstr "Dicionários"
 
 #: ../src/gnome2/mod_mgr.c:914 ../src/gnome2/utilities.c:526
-#: ../src/main/sidebar.cc:1010 ../src/main/sidebar.cc:1012
+#: ../src/main/sidebar.cc:1005 ../src/main/sidebar.cc:1007
 msgid "Daily Devotionals"
 msgstr "Devocionais Diários"
 
 #: ../src/gnome2/mod_mgr.c:918 ../src/gnome2/utilities.c:530
-#: ../src/main/sidebar.cc:617 ../src/main/sidebar.cc:1019
-#: ../src/main/sidebar.cc:1021
+#: ../src/main/sidebar.cc:617 ../src/main/sidebar.cc:1014
+#: ../src/main/sidebar.cc:1016
 msgid "General Books"
 msgstr "Livros Gerais"
 
 #: ../src/gnome2/mod_mgr.c:922 ../src/gnome2/utilities.c:534
-#: ../src/main/sidebar.cc:1028 ../src/main/sidebar.cc:1030
+#: ../src/main/sidebar.cc:1023 ../src/main/sidebar.cc:1025
 msgid "Maps"
 msgstr "Mapas"
 
 #: ../src/gnome2/mod_mgr.c:926 ../src/gnome2/utilities.c:538
-#: ../src/main/sidebar.cc:1037 ../src/main/sidebar.cc:1039
+#: ../src/main/sidebar.cc:1032 ../src/main/sidebar.cc:1034
 msgid "Images"
 msgstr "Imagens"
 
@@ -911,7 +911,7 @@ msgstr "Desinstalado"
 #: ../src/gnome2/mod_mgr.c:947 ../src/gnome2/sidebar.c:421
 #: ../src/gnome2/utilities.c:543 ../src/main/prayerlists.cc:235
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
-#: ../src/main/sidebar.cc:1047 ../src/main/sidebar.cc:1049
+#: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Prayer List/Journal"
 msgstr "Lista de Oração/Diário"
 
@@ -1055,8 +1055,8 @@ msgstr "Abrir uma nova aba"
 
 #: ../src/gnome2/main_window.c:879 ../src/gnome2/sidebar.c:406
 #: ../src/gnome2/sidebar.c:412 ../src/main/sidebar.cc:598
-#: ../src/main/sidebar.cc:983 ../src/main/sidebar.cc:984
-#: ../src/main/sidebar.cc:985
+#: ../src/main/sidebar.cc:978 ../src/main/sidebar.cc:979
+#: ../src/main/sidebar.cc:980
 msgid "Standard View"
 msgstr "Vista Normal"
 
@@ -1784,9 +1784,12 @@ msgid ""
 "into other languages. If you are able to translate for us, please see the "
 "link below, contact us, and get involved with our efforts."
 msgstr ""
-"Gostaria de usar GnomeSword para estudar a Bíblia? Gostaria de uma interface na sua língua materna? Você pode traduzir GnomeSword!\n"
+"Gostaria de usar GnomeSword para estudar a Bíblia? Gostaria de uma interface "
+"na sua língua materna? Você pode traduzir GnomeSword!\n"
 "\n"
-"Estamos sempre procurando contribuições de novas traduções de GnomeSword noutras línguas. Se consegue traduzir para nós, veja por favor a ligação abaixo, contacte-nos e junte-se aos nossos esforços."
+"Estamos sempre procurando contribuições de novas traduções de GnomeSword "
+"noutras línguas. Se consegue traduzir para nós, veja por favor a ligação "
+"abaixo, contacte-nos e junte-se aos nossos esforços."
 
 #: ../src/gnome2/about_trans.c:97
 msgid "About GnomeSword Translation"
@@ -1800,7 +1803,7 @@ msgstr "Veja TRANSLATION-HOWTO no código de GnomeSword"
 msgid "GnomeSword development"
 msgstr "Desenvolvimento de GnomeSword"
 
-#: ../src/main/sword.cc:545
+#: ../src/main/sword.cc:539
 msgid ""
 "GnomeSword's file for language\n"
 "abbreviations is missing."
@@ -1808,7 +1811,7 @@ msgstr ""
 "O ficheiro de GnomeSword para \n"
 "as abreviaturas de linguagem está ausente."
 
-#: ../src/main/sword.cc:552
+#: ../src/main/sword.cc:546
 msgid ""
 "GnomeSword's language abbreviation\n"
 "file cannot be opened."
@@ -1816,7 +1819,7 @@ msgstr ""
 "O ficheiro de abreviaturas \n"
 "de GnomeSword não pode ser aberto."
 
-#: ../src/main/sword.cc:561
+#: ../src/main/sword.cc:555
 msgid ""
 "GnomeSword cannot map the\n"
 "language abbreviation file."
@@ -2483,19 +2486,23 @@ msgstr ""
 #. * Return value
 #. *   void
 #.
-#: ../src/main/settings.c:723
+#: ../src/main/settings.c:726
 msgid ""
-"There is currently no program set as your\n"
-"handler for \"sword://\" and similar URLs.\n"
-"Would you like GnomeSword to install itself\n"
-"as the program to handle these URLs?"
+"URL references using \"sword://\" (similar to web page\n"
+"references) can be used by programs to look up\n"
+"scripture references. Your system currently has no\n"
+"program set to handle these references.\n"
+"\n"
+"Would you like GnomeSword to set itself as the\n"
+"program to handle these references?"
 msgstr ""
-"Não existe actualmente nenhum programa \n"
-"definido para lidar com URLs \"sword://\" e similares. \n"
-"Gostaria que GnomeSword se instalasse como o programa \n"
-"para lidar com tais URLs?"
+"Referências URL usando \"sword://\" (semelhantes às referências de páginas web) \n"
+"podem ser usadas por programas para pesquisar referências bíblicas. \n"
+"O seu sistema não possui actualmente nenhum programa preparado para lidar \n"
+"com essas referências.\n"
+"Gostaria que GnomeSword se configurasse para lidar com essas referências?"
 
-#: ../src/main/settings.c:725
+#: ../src/main/settings.c:728
 msgid ""
 "GnomeSword has successfully set itself\n"
 "as the handler of sword:// and bible:// URLs.\n"
@@ -2511,7 +2518,7 @@ msgstr ""
 "para examinar chaves sob /desktop/gnome/url-handlers, \n"
 "se necessitar de as alterar."
 
-#: ../src/main/settings.c:770
+#: ../src/main/settings.c:773
 #, c-format
 msgid ""
 "GnomeSword failed to complete handler init for key #%d:\n"
@@ -3272,6 +3279,17 @@ msgstr "ex. Mt-Jo;Ap4"
 #: ../ui/search-dialog.glade.h:71
 msgid "for "
 msgstr "para "
+
+#~ msgid ""
+#~ "There is currently no program set as your\n"
+#~ "handler for \"sword://\" and similar URLs.\n"
+#~ "Would you like GnomeSword to install itself\n"
+#~ "as the program to handle these URLs?"
+#~ msgstr ""
+#~ "Não existe actualmente nenhum programa \n"
+#~ "definido para lidar com URLs \"sword://\" e similares. \n"
+#~ "Gostaria que GnomeSword se instalasse como o programa \n"
+#~ "para lidar com tais URLs?"
 
 #~ msgid "Afrikaans"
 #~ msgstr "Afrikaans"
