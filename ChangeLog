@@ -1,3 +1,8 @@
+2008-10-08  karl <charcoal@users.sf.net>
+
+	* no more perm/success/failure dialogs for gconf setup.
+	* disable gconf setup entirely for cygwin.
+
 2008-09-21  karl <charcoal@users.sf.net>
 
 	* 2.4.0 release.
