@@ -245,9 +245,9 @@ int settings_init(int new_configs, int new_bookmarks)
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
 
-#ifdef __CYGWIN__
+#ifndef __CYGWIN__
 	gconf_setup();
-#endif /* __CYGWIN__ */
+#endif /* !__CYGWIN__ */
 
 	return retval;
 }
@@ -705,7 +705,7 @@ void load_settings_structure(void)
 }
 
 
-#ifdef __CYGWIN__
+#ifndef __CYGWIN__
 /******************************************************************************
  * Name
  *    gconf_setup
@@ -718,6 +718,7 @@ void load_settings_structure(void)
  * Description
  *   verifies and initializes the GConf subsystem, so that "sword://" and
  *   similar can be handled by url-comprehending programs such as browsers.
+ *   dialogs for permission/success/failure => conditional on debug build.
  *
  * Return value
  *   void
@@ -752,8 +753,11 @@ void gconf_setup()
 	 * We care about one thing: Is anything set to handle "bible://"?
 	 */
 	if (((str = gconf_client_get_string(client, gconf_keys[0][0],
-					    NULL)) == NULL) &&
-	    gui_yes_no_dialog(GS_GCONF_PERMISSION)) {
+					    NULL)) == NULL)
+#ifdef DEBUG
+	    && gui_yes_no_dialog(GS_GCONF_PERMISSION)
+#endif /* DEBUG */
+	    ) {
 		/*
 		 * Mechanical as can be, one after another.
 		 */
@@ -769,14 +773,18 @@ void gconf_setup()
 					 gconf_keys[i][0],
 					 (gconf_keys[i][1] ? TRUE : FALSE),
 					 NULL));
+#ifdef DEBUG
 			if (!retval) {
 				sprintf(msg, _("GnomeSword failed to complete handler init for key #%d:\n%s"),
 					i, gconf_keys[i][0]);
 				gui_generic_warning(msg);
 				return;
 			}
+#endif /* DEBUG */
 		}
+#ifdef DEBUG
 		gui_generic_warning(GS_GCONF_SUCCESS);
+#endif /* DEBUG */
 	}
 }
-#endif /* __CYGWIN__ */
+#endif /* !__CYGWIN__ */
