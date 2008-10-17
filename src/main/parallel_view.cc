@@ -788,9 +788,9 @@ void main_update_parallel_page(void)
 					mod_name = NULL;
 				break;
 			}
-			GS_warning(("mod_name = %s",mod_name));
 			if (!mod_name)
 				continue;
+			GS_warning(("mod_name = %s", mod_name));
 
 			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
