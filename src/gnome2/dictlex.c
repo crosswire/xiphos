@@ -542,10 +542,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(hbox2), button10, FALSE, FALSE, 0);
 	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
 
-  	image1 = gtk_image_new_from_icon_name ("stock_up", GTK_ICON_SIZE_BUTTON);
-	/*image1 =
-	    gtk_image_new_from_stock("gtk-go-back",
-				     GTK_ICON_SIZE_BUTTON);*/
+	image1 = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image1);
 	gtk_container_add(GTK_CONTAINER(button10), image1);
 	
@@ -554,9 +551,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_box_pack_start(GTK_BOX(hbox2), button11, FALSE, FALSE, 0);
 	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
 
-	image2 = gtk_image_new_from_icon_name ("stock_down", GTK_ICON_SIZE_BUTTON);
-	   /* gtk_image_new_from_stock("gtk-go-forward",
-				     GTK_ICON_SIZE_BUTTON);*/
+	image2 = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 

@@ -401,27 +401,27 @@ void load_settings_structure(void)
 	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
 
 	/* mod mgr stuff */ 
-	if(xml_get_value("modmgr", "mod_mgr_source"))
+	if (xml_get_value("modmgr", "mod_mgr_source"))
 		settings.mod_mgr_source = atoi(xml_get_value("modmgr", "mod_mgr_source"));
 	else {
 		xml_add_new_section_to_settings_doc("modmgr");
 		xml_add_new_item_to_section("modmgr", "mod_mgr_source", "1");
 		settings.mod_mgr_source = 1;
 	}	 
-	if(xml_get_value("modmgr", "mod_mgr_destination"))
+	if (xml_get_value("modmgr", "mod_mgr_destination"))
 		settings.mod_mgr_destination = atoi(xml_get_value("modmgr", "mod_mgr_destination"));
 	else {
 		xml_add_new_item_to_section("modmgr", "mod_mgr_destination", "0");
 		settings.mod_mgr_destination = 0;
 	}		
-	if(xml_get_value("modmgr", "mod_mgr_local_source_index"))
+	if (xml_get_value("modmgr", "mod_mgr_local_source_index"))
 		settings.mod_mgr_local_source_index = 
 			atoi(xml_get_value("modmgr", "mod_mgr_local_source_index"));
 	else {
 		xml_add_new_item_to_section("modmgr", "mod_mgr_local_source_index", "0");
 		settings.mod_mgr_local_source_index = 0;
 	}		
-	if(xml_get_value("modmgr", "mod_mgr_remote_source_index"))
+	if (xml_get_value("modmgr", "mod_mgr_remote_source_index"))
 		settings.mod_mgr_remote_source_index =
 			atoi(xml_get_value("modmgr", "mod_mgr_remote_source_index"));
 	else {
@@ -435,20 +435,20 @@ void load_settings_structure(void)
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 
-	if(xml_get_value("keys", "book")) {
+	if (xml_get_value("keys", "book")) {
 		settings.book_key = xml_get_value("keys", "book");
 	} else {
 		xml_add_new_item_to_section("keys", "book", "0");
 		settings.book_key = xml_get_value("keys", "book");
 	}
-	if(xml_get_value("keys", "offset"))
+	if (xml_get_value("keys", "offset"))
 		settings.book_offset = atol(xml_get_value("keys", "offset"));
 	else {
 		xml_add_new_item_to_section("keys", "offset", "");
 		settings.book_offset = 0;
 	}
 
-	if(xml_get_value("tab", "page"))
+	if (xml_get_value("tab", "page"))
 		settings.tab_page = atol(xml_get_value("tab", "page"));
 	else {
 		xml_add_new_item_to_section("tab", "page", "0");
@@ -457,14 +457,14 @@ void load_settings_structure(void)
 
 	settings.sidebar_width =
 		atoi(xml_get_value("layout", "shortcutbar"));
-	if(xml_get_value("layout", "vltoppaneheight"))
+	if (xml_get_value("layout", "vltoppaneheight"))
 		settings.verselist_toppane_height =
 			atoi(xml_get_value("layout", "vltoppaneheight"));
 	else {
 		xml_add_new_item_to_section("layout", "vltoppaneheight", "210");
 		settings.verselist_toppane_height = 210;
 	}
-	if(xml_get_value("layout", "sidebar_notebook_hight"))
+	if (xml_get_value("layout", "sidebar_notebook_hight"))
 		settings.sidebar_notebook_hight =
 			atoi(xml_get_value("layout", "sidebar_notebook_hight"));
 	else {
@@ -474,13 +474,13 @@ void load_settings_structure(void)
 	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
 	settings.gs_width = atoi(xml_get_value("layout", "width"));
 	
-	if(xml_get_value("layout", "app_x"))
+	if (xml_get_value("layout", "app_x"))
 		settings.app_x = atoi(xml_get_value("layout", "app_x"));
 	else {
 		xml_add_new_item_to_section("layout", "app_x", "40");
 		settings.app_x = 40;
 	}
-	if(xml_get_value("layout", "app_y"))
+	if (xml_get_value("layout", "app_y"))
 		settings.app_y = atoi(xml_get_value("layout", "app_y"));
 	else{
 		xml_add_new_item_to_section("layout", "app_y", "40");
@@ -492,14 +492,14 @@ void load_settings_structure(void)
 	settings.upperpane_hight =
 	    atoi(xml_get_value("layout", "uperpane"));
 
-	if(xml_get_value("layout", "biblehight"))
+	if (xml_get_value("layout", "biblehight"))
 		settings.biblepane_hight = atoi(xml_get_value("layout", "biblehight"));
 	else {
 		xml_add_new_item_to_section("layout", "biblehight", "340");
 		settings.biblepane_hight = 250;
 	}
 
-	if(xml_get_value("layout", "commentaryhight"))
+	if (xml_get_value("layout", "commentaryhight"))
 		settings.commpane_hight = atoi(xml_get_value("layout", "commentaryhight"));
 	else {
 		xml_add_new_item_to_section("layout", "commentaryhight", "240");
@@ -542,34 +542,34 @@ void load_settings_structure(void)
 	}
 
 	buf = xml_get_value("parallel", "strongs");
-	if(buf)
+	if (buf)
 		settings.strongsint = atoi(buf);
 	
 	buf = xml_get_value("parallel", "morphs");
-	if(buf)
+	if (buf)
 		settings.morphsint = atoi(buf);
 	
 	buf = xml_get_value("parallel", "points");
-	if(buf)
+	if (buf)
 		settings.hebrewpointsint = atoi(buf);
 	
 	buf = xml_get_value("parallel", "cantillation");
-	if(buf)
+	if (buf)
 		settings.cantillationmarksint = atoi(buf);
 	
 	buf = xml_get_value("parallel", "footnotes");
-	if(buf)
+	if (buf)
 		settings.footnotesint = atoi(buf);	
 	
 	buf = xml_get_value("parallel", "parallel");
-	if(buf)
+	if (buf)
 	settings.parallelpage = atoi(buf);
 
 
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
-	if(xml_get_value("misc", "showpreview"))
+	if (xml_get_value("misc", "showpreview"))
 		settings.showpreview = atol(xml_get_value("misc", "showpreview"));
 	else {
 		xml_add_new_item_to_section("misc", "showpreview", "1");

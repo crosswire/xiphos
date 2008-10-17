@@ -680,7 +680,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		break;
 	case BOOK_TYPE:
 	case PRAYERLIST_TYPE:
-		GS_message(("key %s",key));
+		GS_message(("key %s", (key ? key : "-null-")));
 		settings.comm_showing = FALSE;
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
