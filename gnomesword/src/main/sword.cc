@@ -1010,10 +1010,11 @@ void main_dictionary_button_clicked(gint direction)
 
 void main_display_book(const char * mod_name, const char * key)     //, unsigned long offset)
 {
-	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
-
 	if (!settings.havebook || !mod_name)
 		return;
+
+	GS_message(("main_display_book\nmod_name: %s\nkey: %s", mod_name, key));
+
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.book_mod)
@@ -1107,10 +1108,11 @@ void main_display_dictionary(const char * mod_name, const char * key)
 	// for devotional use.
 	gchar buf[10];
 
-	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
-
 	if (!settings.havedict || !mod_name)
 		return;
+
+	GS_message(("main_display_dictionary\nmod_name: %s\nkey: %s", mod_name, key));
+
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.DictWindowModule)

@@ -1,3 +1,10 @@
+2008-10-17  karl <charcoal@users.sf.net>
+
+	* basic Solaris compatibility.  gtkhtml3 only so far:
+	  - null pointers are not nice in stdio.
+	  - Solaris' old sed doesn't support \(this\|that\|other\)
+	  - use a different yet still standard set of arrow images.
+
 2008-10-08  karl <charcoal@users.sf.net>
 
 	* no more perm/success/failure dialogs for gconf setup.
