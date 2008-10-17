@@ -524,12 +524,12 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			      settings.showdicts);
 	if(settings.comm_showing)
 		main_display_commentary(settings.CommWindowModule, settings.currentverse);
-	else {
-		url = g_strdup_printf("sword://%s/%d",settings.book_mod,
-						      settings.book_offset);
+	else if (settings.book_mod) {
+		url = g_strdup_printf("sword://%s/%d", settings.book_mod,
+						       settings.book_offset);
 		main_url_handler(url);
 		g_free(url);
-	}	
+	}
 	gui_set_tab_label(settings.currentverse, TRUE);
 }
 
