@@ -227,7 +227,7 @@ prayerlist_fundamentals(gchar *summary)
 	char *listname = NULL;	// assume failure.
 	GS_DIALOG *info;
 	gint test;
-	gchar *path = NULL;
+	GString *path = g_string_new(NULL);
 
 	// name selection dialog.
 	info = gui_new_dialog();
@@ -260,16 +260,27 @@ prayerlist_fundamentals(gchar *summary)
 	}
 
 	// path creation based on name selection.
-	path = g_strdup_printf("%s/.sword/modules/genbook/rawgenbook/%s",
-				settings.homedir, info->text1);
-	if (access(path, F_OK) == 0) {
+	g_string_printf(path, "%s/.sword/modules/genbook/rawgenbook/%s",
+			settings.homedir, info->text1);
+	if (access(path->str, F_OK) == 0) {
 		gui_generic_warning
 		    (_("GnomeSword finds that prayer list already."));
 		goto out;
 	} else {
-		if ((mkdir(path, S_IRWXU)) != 0) {
-			gui_generic_warning
-			    (_("GnomeSword cannot create module's path."));
+		g_string_printf(path, "%s/.sword/modules/genbook",
+				settings.homedir);
+		mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+		g_string_append(path, "/rawgenbook");
+		mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+
+		g_string_append(path, "/");
+		g_string_append(path, info->text1);
+		if ((mkdir(path->str, S_IRWXU)) != 0) {	// this one matters.
+			char *msg = g_strdup_printf
+			    (_("GnomeSword cannot create module's path:\n%s"),
+			     path->str);
+			gui_generic_warning(msg);
+			g_free(msg);
 			goto out;
 		}
 	}
@@ -281,8 +292,7 @@ prayerlist_fundamentals(gchar *summary)
 
 out:
 	// both success and failure fall through here.
-	if (path)
-		g_free(path);
+	g_string_free(path, TRUE);
 	g_free(info->text1);
 	g_free(info);
 	return listname;
