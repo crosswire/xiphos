@@ -1,3 +1,7 @@
+2008-10-18  karl <charcoal@users.sf.net>
+
+	* fix lack of intermediate path mkdir in prayerlist creation.
+
 2008-10-17  karl <charcoal@users.sf.net>
 
 	* basic Solaris compatibility.  gtkhtml3 only so far:
