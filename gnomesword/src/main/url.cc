@@ -190,19 +190,53 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
 
+const char *display_progs[] = {
+#ifndef __CYGWIN__
+	"/usr/bin/gvfs-open",
+	"/usr/bin/gnome-open",
+#endif /* !__CYGWIN__ */
+	"/usr/bin/display",
+	NULL
+};
+
 static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
-		GS_print(("file = %s\n", filename));
-		GString *cmd = g_string_new(NULL);
-		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
-				"display", filename);
+#ifdef GNOME_URL_SHOW_WORKS_LIKE_IT_IS_SUPPOSED_TO
+
+		// (but as of october 2008, it doesn't.)
+
+		gboolean result;
+		gchar *file_as_url = g_strdup_printf("file://%s", filename);
+
+		GS_print(("file = %s\n", file_as_url));
+		result = gnome_url_show(file_as_url, NULL);
+		g_free(file_as_url);
+		if (result == FALSE) {
+			gui_generic_warning((char *)"Could not display that image");
+		}
+#else
 		FILE *result;
+		GString *cmd = g_string_new(NULL);
+		int i;
+
+		for (i = 0; display_progs[i]; i++) {
+			if (access(display_progs[i], X_OK) == 0)
+				break;
+		}
+		if (display_progs[i] == NULL) {
+			gui_generic_warning((char *)"GnomeSword cannot find\nan image display program.");
+			return 0;
+		}
+
+		GS_print(("file = %s\n", filename));
+		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
+				display_progs[i], filename);
 
 		if ((result = popen(cmd->str, "r")) == NULL) {
 			g_string_printf(cmd,
 					_("GnomeSword could not execute %s"),
-					"display");
+					display_progs[i]);
 			gui_generic_warning(cmd->str);
 		} else {
 			gchar output[258];
@@ -219,6 +253,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		// reap zombies.
 		int state;
 		(void) wait(&state);
+#endif
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					filename);
