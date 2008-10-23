@@ -1,3 +1,8 @@
+2008-10-23  karl <charcoal@users.sf.net>
+
+	* replace fixed use of ImageMagick "display" with list of
+	  potential/preferred image viewing systems.
+
 2008-10-18  karl <charcoal@users.sf.net>
 
 	* fix lack of intermediate path mkdir in prayerlist creation.
