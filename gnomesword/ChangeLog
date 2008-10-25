@@ -1,3 +1,9 @@
+2008-10-25  karl <charcoal@users.sf.net>
+
+	* make ^F able to search more than bible text:
+	  based on window visibility: bible first, but if not visible,
+	  then commentary/genbook, and if not that, then dictionary.
+
 2008-10-23  karl <charcoal@users.sf.net>
 
 	* replace fixed use of ImageMagick "display" with list of
