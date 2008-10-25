@@ -151,6 +151,10 @@
 		Select new modules to be installed by clicking the checkboxes and then the Install button at the bottom.  Any number of
 		modules may be requested for installation at one time.
 		</para>
+		<para>
+		If you acquire a locked module and have obtained the cipher key for it, the module is then unlocked in the main window: Open
+		the module, which will probably appear blank, then using the right-click context menu, choose "Unlock This Module."
+		</para>
 		</sect3>
 		<sect3 id="remove-module">
 			<title>Module Maintenance</title>
