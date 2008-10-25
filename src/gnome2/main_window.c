@@ -592,12 +592,29 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 #endif
 		break;
 
-	case 41: // Ctrl-F  find in bible text
-		if (state == GDK_CONTROL_MASK)
-			// bible text only, *sigh*.
-			gui_find_dlg(widgets.html_text,
-				     settings.MainWindowModule,
-				     FALSE, NULL);
+	case 41: // Ctrl-F  find text
+		if (state == GDK_CONTROL_MASK) {
+			if (settings.showtexts) {
+				gui_find_dlg(widgets.html_text,
+					     settings.MainWindowModule,
+					     FALSE, NULL);
+			} else if (settings.showcomms) {
+				if (settings.comm_showing) {
+					gui_find_dlg(widgets.html_comm,
+						     settings.CommWindowModule,
+						     FALSE, NULL);
+				} else {
+					gui_find_dlg(widgets.html_book,
+						     settings.book_mod,
+						     FALSE, NULL);
+				}
+			} else if (settings.showdicts) {
+				gui_find_dlg(widgets.html_dict,
+					     settings.DictWindowModule,
+					     FALSE, NULL);
+			} else
+			    gui_generic_warning("GnomeSword: No windows.");
+		}
 		break;
 
 	case 54: // Alt-C  commentary pane
