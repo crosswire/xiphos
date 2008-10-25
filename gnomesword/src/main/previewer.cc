@@ -75,7 +75,6 @@ void main_clear_viewer(void)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
 	gboolean was_editable = FALSE;
 	gchar *buf;
 
@@ -145,7 +144,6 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
-	GString *search_str;
 	MOD_FONT *mf = get_font((gchar*)mod_name);
 #ifdef USE_GTKMOZEMBED
 	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(sidebar.html_viewer_widget)))
@@ -257,7 +255,7 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  *   void
  */
 
-static void mark_search_words(GString * str)
+void mark_search_words(GString * str)
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len1, len2, len3, len4;
@@ -442,6 +440,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		search_str = g_string_new(text);
 		mark_search_words(search_str);
 		str = g_string_append(str, search_str->str);
+		g_string_free(search_str, TRUE);
 	} else {
 		str = g_string_append(str, text);
 	}

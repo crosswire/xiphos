@@ -31,6 +31,7 @@ void main_clear_viewer(void);
 void main_information_viewer(const char * mod_name, const char * text, const char * key,
 		             const char * action, const char * type, const char * morph_text,
 			     const char * morph);
+void mark_search_words(GString * str);
 void main_entry_display(gpointer data, char * mod_name,
 		   char * text, char * key, gboolean show_key);
 
