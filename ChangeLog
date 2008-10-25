@@ -3,6 +3,9 @@
 	* make ^F able to search more than bible text:
 	  based on window visibility: bible first, but if not visible,
 	  then commentary/genbook, and if not that, then dictionary.
+	* add search result highlight in advanced search preview using
+	  previewer.cc's mark_search_words() [had to expose it via .h]
+	* manual updates to reflect unlocking method and new ^F semantic.
 
 2008-10-23  karl <charcoal@users.sf.net>
 

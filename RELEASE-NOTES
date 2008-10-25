@@ -3,6 +3,37 @@ ________________________
 GNOMESWORD RELEASE NOTES
 ________________________
 
+Release 2.4.1
+XX YYY 2008
+
+Ongoing requested feature enhancements in stable 2.4.
+
+ 1. GnomeSword now takes control of sword:// URLs without asking any
+    question, iff there was previously no handler for them.  (In a
+    debug build, the question is still asked, but with better phrasing.)
+
+ 2. Intermediate module paths for prayer lists are properly constructed.
+
+ 3. GnomeSword can be built under Solaris (gtkhtml3 only).
+
+ 4. Ctrl-F "find" capability: Without a Bible subwindow, it operates in
+    comm/book window; without that, it operates in dictionary window.
+
+ 5. Advanced Search provides search word highlight in result preview.
+
+ 6. New icons, courtesy of Simon Meers.
+
+Bug reports addressed since 2.4.0:
+2163853  Scrolling Issues
+2186692  GnomeSword cannot create module's path
+
+New feature requests pending:
+2190241  keys should work normally
+
+Feature requests closed:
+2121811  DRC and Vulgate are not Correct
+________________________
+
 Release 2.4.0 -stable-
 20 Sep 2008
 
