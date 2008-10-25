@@ -251,7 +251,7 @@ void main_do_sidebar_search(gpointer user_data)
 	if (GTK_TOGGLE_BUTTON(ss.rbLastSearch)->active)
 		backendSearch->set_scope2last_search();
 
-	sprintf(settings.searchText, "%s", search_string);
+	snprintf(settings.searchText, 255, "%s", search_string);
 
 	settings.searchType = 
 		GTK_TOGGLE_BUTTON(ss.rbRegExp)->active ? 0 :
