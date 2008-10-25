@@ -664,7 +664,9 @@
 				for example, and any book name by itself implies 1:1.
 			</listitem>
 			<listitem>
-				<guibutton>Ctrl-F</guibutton> opens the "Find" dialog for the Bible pane.
+				<guibutton>Ctrl-F</guibutton> opens the "Find" dialog.  The subwindow to which it applies depends on which
+				of them are visible: The Bible is first preference, then the commentary or general book, then the
+				dictionary.  So a tab can be dedicated to just a genbook, and Ctrl-F will perform "Find" within that pane.
 			</listitem>
 			<listitem>
 				<guibutton>Alt-C</guibutton> brings the Commentary View forward when previously obscured by the Book View.
