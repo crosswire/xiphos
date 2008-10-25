@@ -39,7 +39,7 @@ extern "C" {
 #endif
 #endif
 	
-
+#include "main/previewer.h"
 #include "main/search_dialog.h"
 #include "main/settings.h"
 #include "main/sword.h"
@@ -839,7 +839,8 @@ void main_selection_finds_list_changed(GtkTreeSelection *
 void main_finds_verselist_selection_changed(GtkTreeSelection * selection, 
 					    gpointer data)
 {
-	gchar *text, *text_str, *buf, *module, *key;
+	gchar *text, *buf, *module, *key;
+	GString *text_str;
 	gint textlen;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
@@ -871,25 +872,29 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	const gchar *temp_key = main_url_encode(key);
 	verse_selected = g_strdup_printf("sword://%s/%s", module, temp_key);
 	g_free((gchar *)temp_key);
-	text_str = backendSearch->get_render_text(module,key);
+
+	text_str = g_string_new(backendSearch->get_render_text(module,key));
+	mark_search_words(text_str);
+
 #ifdef USE_GTKMOZEMBED
-	html_text=g_string_new(HTML_START);
-	g_string_append(html_text,text_str);
-	g_string_append(html_text,"</html>");	
-	gecko_html_open_stream(GECKO_HTML(search1.preview_html),"text/html");
-	gecko_html_write(GECKO_HTML(search1.preview_html),html_text->str,html_text->len);
+	html_text = g_string_new(HTML_START);
+	g_string_append(html_text, text_str->str);
+	g_string_append(html_text, "</html>");	
+	gecko_html_open_stream(GECKO_HTML(search1.preview_html), "text/html");
+	gecko_html_write(GECKO_HTML(search1.preview_html),
+			 html_text->str, html_text->len);
 	gecko_html_close(GECKO_HTML(search1.preview_html));
-	g_string_free(html_text,TRUE);
+	g_string_free(html_text, TRUE);
 #else
 	gtk_html_load_from_string(GTK_HTML(search1.preview_html),
-				  text_str, strlen(text_str));
+				  text_str->str, text_str->len);
 #endif
 
 	GS_message(("main_finds_verselist_selection_changed: %s %s", module, key));
 
 	if (text)
 		g_free(text);
-	g_free(text_str);
+	g_string_free(text_str, TRUE);
 }
 
 
@@ -1426,6 +1431,7 @@ void main_do_dialog_search(void)
 		search_mods = get_current_search_mod();
 	search_mods = g_list_first(search_mods);
 
+	snprintf(settings.searchText, 255, "%s", search_string);
 	settings.searchType = search_type;
 
 	check_search_global_options();
