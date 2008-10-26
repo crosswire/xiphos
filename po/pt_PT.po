@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-26 14:54+0000\n"
+"POT-Creation-Date: 2008-10-26 16:03+0000\n"
 "PO-Revision-Date: 2008-10-26 14:54+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
@@ -1876,7 +1876,7 @@ msgstr "Remover Módulo?"
 msgid "Are you sure you want to remove the selected module?"
 msgstr "Tem a certeza de que pretende remover o módulo seleccionado?"
 
-#: ../src/main/search_dialog.cc:1453
+#: ../src/main/search_dialog.cc:1467
 #, c-format
 msgid ""
 "%s:\n"
@@ -1887,11 +1887,11 @@ msgstr ""
 "Esse módulo não está instalado.\n"
 "%s"
 
-#: ../src/main/search_dialog.cc:1455
+#: ../src/main/search_dialog.cc:1469
 msgid "Please adjust the module list."
 msgstr "Por favor, ajuste a lista de módulos."
 
-#: ../src/main/search_dialog.cc:1517
+#: ../src/main/search_dialog.cc:1531
 msgid "Search finished"
 msgstr "Pesquisa concluída"
 
