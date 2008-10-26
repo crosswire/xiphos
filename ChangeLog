@@ -1,3 +1,7 @@
+2008-10-26  karl <charcoal@users.sf.net>
+
+	* stop infloop: no custom range allowed for non-{bible,commentary}.
+
 2008-10-25  karl <charcoal@users.sf.net>
 
 	* make ^F able to search more than bible text:
