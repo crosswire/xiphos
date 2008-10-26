@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-26 14:57+0000\n"
+"POT-Creation-Date: 2008-10-26 16:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1831,7 +1831,7 @@ msgstr ""
 msgid "Are you sure you want to remove the selected module?"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1453
+#: ../src/main/search_dialog.cc:1467
 #, c-format
 msgid ""
 "%s:\n"
@@ -1839,11 +1839,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1455
+#: ../src/main/search_dialog.cc:1469
 msgid "Please adjust the module list."
 msgstr ""
 
-#: ../src/main/search_dialog.cc:1517
+#: ../src/main/search_dialog.cc:1531
 msgid "Search finished"
 msgstr ""
 
