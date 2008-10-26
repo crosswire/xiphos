@@ -1259,7 +1259,7 @@ static GList *get_custom_list_from_name(const gchar * label)
  *   void
  */
 
-static void set_up_dialog_search(void)
+static void set_up_dialog_search(GList *modlist)
 {
 	const gchar *label;
 	gchar *range = NULL;
@@ -1267,15 +1267,31 @@ static void set_up_dialog_search(void)
 	//gui_begin_html(search1.results_html, TRUE);
 	backendSearch->clear_scope();
 	if (GTK_TOGGLE_BUTTON(search1.rb_custom_range)->active) {
-		backendSearch->clear_search_list();
-		label =
-		    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(search1.combo_range)->child));
-		range =
-		    (gchar *) xml_get_list_from_label("ranges", "range",
-						      label);
-		if (range) {
-			backendSearch->set_range(range);
-			backendSearch->set_scope2range();
+		// if any non-bible, non-commentary modules are in use,
+		// we must not respect this "custom range" selector.
+		gboolean range_ok = TRUE;
+
+		while (modlist) {
+			int mod_type = backend->module_type((char*)modlist->data);
+			if ((mod_type != TEXT_TYPE) &&
+			    (mod_type != COMMENTARY_TYPE)) {
+				range_ok = FALSE;
+				break;
+			}
+			modlist = g_list_next(modlist);
+		}
+
+		if (range_ok) {
+			backendSearch->clear_search_list();
+			label =
+			    gtk_entry_get_text(GTK_ENTRY(GTK_BIN(search1.combo_range)->child));
+			range =
+			    (gchar *) xml_get_list_from_label("ranges", "range",
+							      label);
+			if (range) {
+				backendSearch->set_range(range);
+				backendSearch->set_scope2range();
+			}
 		}
 	}
 
@@ -1370,9 +1386,7 @@ void main_do_dialog_search(void)
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search1.listview_verses));
 	list_store2 = GTK_LIST_STORE(model2);
-
 	gtk_list_store_clear(list_store2);
-	
 	
 	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(search1.search_entry));
@@ -1381,8 +1395,6 @@ void main_do_dialog_search(void)
 		return;
 	str = g_string_new("");
 
-	set_up_dialog_search();
-
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(search1.notebook), 1);
 	//search1.notebook
 	search_type = 
@@ -1390,7 +1402,7 @@ void main_do_dialog_search(void)
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
 	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 :
 	    GTK_TOGGLE_BUTTON(search1.rb_optimized)->active ? -4 : -3;
-	GS_message(("search_type = %d",search_type));
+	GS_message(("search_type = %d", search_type));
 
 	search_params =
 	    GTK_TOGGLE_BUTTON(search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
@@ -1430,6 +1442,8 @@ void main_do_dialog_search(void)
 	} else
 		search_mods = get_current_search_mod();
 	search_mods = g_list_first(search_mods);
+
+	set_up_dialog_search(search_mods);
 
 	snprintf(settings.searchText, 255, "%s", search_string);
 	settings.searchType = search_type;
