@@ -159,7 +159,8 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install);
  *   void
  */
 
-static void create_pixbufs(void)
+static void
+create_pixbufs(void)
 {
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
@@ -220,8 +221,9 @@ static gboolean mod_mgr_check_for_file(const gchar * filename)
 
 #define ZIP_DIR	".sword/zip"
 
-static void remove_install_modules(GList * modules,
-				   int activity)
+static void
+remove_install_modules(GList * modules,
+		       int activity)
 {
 	GList *tmp;
 	gchar *buf;
@@ -511,9 +513,10 @@ static void remove_install_modules(GList * modules,
  *   GList *
  */
 
-static GList *parse_treeview(GList *list,
-			     GtkTreeModel *model,
-			     GtkTreeIter *tree_parent)
+static GList *
+parse_treeview(GList *list,
+	       GtkTreeModel *model,
+	       GtkTreeIter *tree_parent)
 {
 	GtkTreeIter child;
 	gchar *name = NULL;
@@ -555,7 +558,8 @@ static GList *parse_treeview(GList *list,
  *   void
  */
 
-static GList *get_list_mods_to_remove_install(int activity)
+static GList *
+get_list_mods_to_remove_install(int activity)
 {
 	GList *retval = NULL;
 	GtkTreeIter root;
@@ -608,9 +612,10 @@ static GList *get_list_mods_to_remove_install(int activity)
  *   void
  */
 
-static void add_module_to_language_folder(GtkTreeModel *model,
-					  GtkTreeIter iter,
-					  MOD_MGR *info)
+static void
+add_module_to_language_folder(GtkTreeModel *model,
+			      GtkTreeIter iter,
+			      MOD_MGR *info)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
@@ -710,8 +715,8 @@ static void add_module_to_language_folder(GtkTreeModel *model,
 
 static void
 language_add_folders(GtkTreeModel * model,
-		      GtkTreeIter iter,
-		      gchar ** languages)
+		     GtkTreeIter iter,
+		     gchar ** languages)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
@@ -751,9 +756,10 @@ language_add_folders(GtkTreeModel * model,
  *   void
  */
 
-static void add_language_folder(GtkTreeModel *model,
-				GtkTreeIter iter,
-				const gchar *language)
+static void
+add_language_folder(GtkTreeModel *model,
+		    GtkTreeIter iter,
+		    const gchar *language)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
@@ -814,8 +820,9 @@ static void add_language_folder(GtkTreeModel *model,
  *   void
  */
 
-static void load_module_tree(GtkTreeView * treeview,
-			     gboolean install)
+static void
+load_module_tree(GtkTreeView * treeview,
+		 gboolean install)
 {
 	gint i;
 	static gboolean need_column = TRUE;
@@ -839,8 +846,6 @@ static void load_module_tree(GtkTreeView * treeview,
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
-
-	working = TRUE;
 
 	mod_mgr_shut_down();
 	while (gtk_events_pending())
@@ -889,7 +894,7 @@ static void load_module_tree(GtkTreeView * treeview,
 	store = GTK_TREE_STORE(gtk_tree_view_get_model(treeview));
 	gtk_tree_store_clear(store);
 	if (!g_list_length(tmp))
-		goto out;
+		return;
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &category_type, NULL);
@@ -1036,9 +1041,6 @@ static void load_module_tree(GtkTreeView * treeview,
 		tmp2 = g_list_next(tmp2);
 	}
 	g_list_free(tmp);
-
-out:
-	working = FALSE;
 }
 
 
@@ -1058,11 +1060,15 @@ out:
  *   void
  */
 
-static void remove_install_wrapper(int activity)
+static void
+remove_install_wrapper(int activity)
 {
 	GList *modules = NULL;
-	modules = get_list_mods_to_remove_install(activity);
+
+	if (working) return;
 	working = TRUE;
+
+	modules = get_list_mods_to_remove_install(activity);
 	
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -1072,7 +1078,7 @@ static void remove_install_wrapper(int activity)
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	
+
 	working = FALSE;
 }
 
@@ -1092,11 +1098,15 @@ static void remove_install_wrapper(int activity)
  *   void
  */
 
-static void response_refresh(void)
+static void
+response_refresh(void)
 {
 	gint failed;
 	gchar *buf;
 	
+	if (working) return;
+	working = TRUE;
+
 	if (remote_source == NULL)
 		remote_source = g_strdup(gtk_combo_box_get_active_text(
 					     GTK_COMBO_BOX(combo_entry2)));
@@ -1128,6 +1138,8 @@ static void response_refresh(void)
 		gtk_widget_hide(button_idx);
 		gtk_widget_hide(button_delidx);
 	}
+
+	working = FALSE;
 }
 
 /******************************************************************************
@@ -1146,7 +1158,8 @@ static void response_refresh(void)
  *   void
  */
 
-static void response_close(void)
+static void
+response_close(void)
 {
 	if (need_update) {
 		GString *str = g_string_new(NULL);
@@ -1182,9 +1195,10 @@ static void response_close(void)
  *   void
  */
 
-static void fixed_toggled(GtkCellRendererToggle *cell,
-			  gchar *path_str,
-			  gpointer data)
+static void
+fixed_toggled(GtkCellRendererToggle *cell,
+	      gchar *path_str,
+	      gpointer data)
 {
 	GtkTreeModel *model = (GtkTreeModel *) data;
 	GtkTreeIter iter;
@@ -1222,8 +1236,9 @@ static void fixed_toggled(GtkCellRendererToggle *cell,
  *   void
  */
 
-static void add_columns(GtkTreeView * treeview,
-			gboolean remove)
+static void
+add_columns(GtkTreeView * treeview,
+	    gboolean remove)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1381,7 +1396,8 @@ static void add_columns(GtkTreeView * treeview,
  *   void
  */
 
-static void add_columns_to_first(GtkTreeView * treeview)
+static void
+add_columns_to_first(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1415,7 +1431,8 @@ static void add_columns_to_first(GtkTreeView * treeview)
  *   void
  */
 
-static void add_columns_to_remote_treeview(GtkTreeView * treeview)
+static void
+add_columns_to_remote_treeview(GtkTreeView * treeview)
 {
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -1454,7 +1471,8 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 
 }
 
-static GtkTreeModel *create_model_to_first(void)
+static GtkTreeModel *
+create_model_to_first(void)
 {
 	GtkTreeStore *model;
 	GtkTreeIter iter;
@@ -1498,7 +1516,8 @@ static GtkTreeModel *create_model_to_first(void)
  *   GtkTreeModel *
  */
 
-static GtkTreeModel *create_model(void)
+static GtkTreeModel *
+create_model(void)
 {
 	gint i = 0;
 	GtkTreeStore *store;
@@ -1520,7 +1539,8 @@ static GtkTreeModel *create_model(void)
 	return GTK_TREE_MODEL(store);
 }
 
-static GtkTreeModel *create_remote_source_treeview_model(void)
+static GtkTreeModel *
+create_remote_source_treeview_model(void)
 {
 	gint i = 0;
 	GtkListStore *store;
@@ -1533,11 +1553,11 @@ static GtkTreeModel *create_remote_source_treeview_model(void)
 				   G_TYPE_STRING, G_TYPE_STRING);
 
 	return GTK_TREE_MODEL(store);
-
 }
 
 
-static void load_source_treeviews(void)
+static void
+load_source_treeviews(void)
 {
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
@@ -1632,7 +1652,8 @@ static void load_source_treeviews(void)
  *   void
  */
 
-void clear_and_hide_progress_bar(void)
+void
+clear_and_hide_progress_bar(void)
 {
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar_refresh), "");
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar_refresh),0);
@@ -1658,9 +1679,10 @@ void clear_and_hide_progress_bar(void)
  *   void
  */
             
-void on_notebook1_switch_page(GtkNotebook * notebook,
-				     GtkNotebookPage * page,
-				     guint page_num, gpointer user_data)
+void
+on_notebook1_switch_page(GtkNotebook * notebook,
+			 GtkNotebookPage * page,
+			 guint page_num, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -1692,9 +1714,9 @@ void on_notebook1_switch_page(GtkNotebook * notebook,
 			yes_no_dialog->ok = TRUE;
 
 			test = gui_alert_dialog(yes_no_dialog);
-			if (test == GS_OK) {
-
-			}
+			//if (test == GS_OK) {
+			//
+			//}
 		}
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
@@ -1722,7 +1744,6 @@ void on_notebook1_switch_page(GtkNotebook * notebook,
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;
 	}
-
 }
 
 
@@ -1743,8 +1764,9 @@ void on_notebook1_switch_page(GtkNotebook * notebook,
  *   void
  */
 
-void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
-			     gpointer user_data)
+void
+on_radiobutton2_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
 	if (togglebutton->active) {
 		gtk_widget_show(button1);
@@ -1764,15 +1786,12 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 }
 
 
-void on_radiobutton4_toggled(GtkToggleButton * togglebutton,
-			     gpointer user_data)
+void
+on_radiobutton4_toggled(GtkToggleButton * togglebutton,
+			gpointer user_data)
 {
-	if (togglebutton->active) {
-		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "1");
-		
-	} else {
-		xml_set_value("GnomeSword", "modmgr", "mod_mgr_source", "0");
-	}
+	xml_set_value("GnomeSword", "modmgr", "mod_mgr_source",
+		      (togglebutton->active ? "1" : "0"));
 	settings.mod_mgr_source = togglebutton->active;
 	xml_save_settings_doc(settings.fnconfigure);	
 }
@@ -1793,7 +1812,8 @@ void on_radiobutton4_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-void save_sources(void)
+void
+save_sources(void)
 {
 	gchar *type = NULL;
 	gchar *caption = NULL;
@@ -1863,9 +1883,10 @@ void save_sources(void)
  *   void
  */
 
-void on_fileselection_local_source_response(GtkDialog * dialog,
-					    gint response_id,
-					    GtkFileSelection * filesel)
+void
+on_fileselection_local_source_response(GtkDialog * dialog,
+				       gint response_id,
+				       GtkFileSelection * filesel)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *model =
@@ -1910,7 +1931,8 @@ void on_fileselection_local_source_response(GtkDialog * dialog,
  *   GtkWidget*
  */
 
-GtkWidget *create_fileselection_local_source(void)
+GtkWidget *
+create_fileselection_local_source(void)
 {
 	GtkWidget *fileselection_local_source;
 	GtkWidget *ok_;
@@ -1971,8 +1993,12 @@ GtkWidget *create_fileselection_local_source(void)
  *   void
  */
 
-void on_dialog_destroy(GtkObject * object, gpointer user_data)
+void
+on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
+	if (working) return;
+	working = TRUE;
+
 	GS_message(("on_destroy"));
 	if (remote_source) {
 	        g_free(remote_source);
@@ -1986,42 +2012,51 @@ void on_dialog_destroy(GtkObject * object, gpointer user_data)
 		main_update_module_lists();
 		main_load_module_tree(sidebar.module_list);
 	}
+
+	working = FALSE;
 }
 
 /*
  * click callbacks, most using a wrapper.
  */
-void on_refresh_clicked(GtkButton * button, gpointer  user_data)
+void
+on_refresh_clicked(GtkButton * button, gpointer  user_data)
 {
 	response_refresh();
 }
 
-void on_install_clicked(GtkButton * button, gpointer  user_data)
+void
+on_install_clicked(GtkButton * button, gpointer  user_data)
 {
 	remove_install_wrapper(INSTALL);
 }
 
-void on_remove_clicked(GtkButton * button, gpointer  user_data)
+void
+on_remove_clicked(GtkButton * button, gpointer  user_data)
 {
 	remove_install_wrapper(REMOVE);
 }
 
-void on_archive_clicked(GtkButton * button, gpointer  user_data)
+void
+on_archive_clicked(GtkButton * button, gpointer  user_data)
 {
 	remove_install_wrapper(ARCHIVE);
 }
 
-void on_index_clicked(GtkButton * button, gpointer  user_data)
+void
+on_index_clicked(GtkButton * button, gpointer  user_data)
 {
 	remove_install_wrapper(FASTMOD);
 }
 
-void on_delete_index_clicked(GtkButton * button, gpointer  user_data)
+void
+on_delete_index_clicked(GtkButton * button, gpointer  user_data)
 {
 	remove_install_wrapper(DELFAST);
 }
 
-void on_cancel_clicked(GtkButton * button, gpointer  user_data)
+void
+on_cancel_clicked(GtkButton * button, gpointer  user_data)
 {
 	mod_mgr_terminate();
 	while (gtk_events_pending())
@@ -2045,9 +2080,10 @@ void on_cancel_clicked(GtkButton * button, gpointer  user_data)
  *   void
  */
 
-void on_mod_mgr_response(GtkDialog * dialog,
-			 gint response_id,
-			 gpointer user_data)
+void
+on_mod_mgr_response(GtkDialog * dialog,
+		    gint response_id,
+		    gpointer user_data)
 {
 	GList *modules = NULL;
 
@@ -2098,12 +2134,18 @@ void on_mod_mgr_response(GtkDialog * dialog,
  *   void
  */
 
-void on_button5_clicked(GtkButton * button,
-			gpointer user_data)
+void
+on_button5_clicked(GtkButton * button,
+		   gpointer user_data)
 {
-	GtkWidget *dlg = create_fileselection_local_source();
-	gtk_widget_show(dlg);
-	gtk_dialog_run(GTK_DIALOG(dlg));
+	if (!working)
+	{
+		working = TRUE;
+		GtkWidget *dlg = create_fileselection_local_source();
+		gtk_widget_show(dlg);
+		gtk_dialog_run(GTK_DIALOG(dlg));
+		working = FALSE;
+	}
 }
 
 
@@ -2123,8 +2165,9 @@ void on_button5_clicked(GtkButton * button,
  *   void
  */
 
-void on_button6_clicked(GtkButton * button,
-			gpointer user_data)
+void
+on_button6_clicked(GtkButton * button,
+		   gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -2136,8 +2179,13 @@ void on_button6_clicked(GtkButton * button,
 	gchar *type = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
-	GString *str = g_string_new(NULL);
+	GString *str;
 	GtkTreeModel *model;
+
+	if (working) return;
+	working = TRUE;
+
+	str = g_string_new(NULL);
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
@@ -2174,6 +2222,7 @@ void on_button6_clicked(GtkButton * button,
 	g_free(directory);
 	g_string_free(str, TRUE);
 
+	working = FALSE;
 }
 
 
@@ -2193,16 +2242,22 @@ void on_button6_clicked(GtkButton * button,
  *   void
  */
 
-void on_button7_clicked(GtkButton * button,
-			gpointer user_data)
+void
+on_button7_clicked(GtkButton * button,
+		   gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
 	GtkTreeIter iter;
-	GString *str = g_string_new(NULL);
+	GString *str;
 	GList *tmp;
 	gboolean name_conflict = FALSE;
 	
+	if (working) return;
+	working = TRUE;
+
+	str = g_string_new(NULL);
+
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),TRUE);
 	gtk_widget_hide(button1);
 	
@@ -2233,7 +2288,7 @@ void on_button7_clicked(GtkButton * button,
 		g_free(dialog->text4);
 		g_free(dialog);
 		g_string_free(str, TRUE);
-		return;
+		goto out;
 	}
 
 	tmp = mod_mgr_list_remote_sources();
@@ -2279,6 +2334,9 @@ void on_button7_clicked(GtkButton * button,
 
 	mod_mgr_shut_down();
 	mod_mgr_init(destination);
+
+out:
+	working = FALSE;
 }
 
 
@@ -2298,8 +2356,9 @@ void on_button7_clicked(GtkButton * button,
  *   void
  */
 
-void on_button8_clicked(GtkButton * button,
-			gpointer user_data)
+void
+on_button8_clicked(GtkButton * button,
+		   gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
@@ -2311,8 +2370,13 @@ void on_button8_clicked(GtkButton * button,
 	gchar *type = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
-	GString *str = g_string_new(NULL);
 	GtkTreeModel *model;
+	GString *str;
+
+	if (working) return;
+	working = TRUE;
+
+	str = g_string_new(NULL);
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
@@ -2348,6 +2412,8 @@ void on_button8_clicked(GtkButton * button,
 	g_free(source);
 	g_free(directory);
 	g_string_free(str, TRUE);
+
+	working = FALSE;
 }
 
 
@@ -2364,25 +2430,28 @@ void on_button8_clicked(GtkButton * button,
  * Description
  *   button release in main treeview 
  *   change notebook page to 'sel' returned from selection
- *   show hide dialog responce buttons as needed
+ *   show/hide dialog responce buttons as needed
  *
  * Return value
  *   void
  */
 
-gboolean on_treeview1_button_release_event(GtkWidget * widget,
-                            GdkEventButton * event, gpointer user_data)
+gboolean
+on_treeview1_button_release_event(GtkWidget * widget,
+				  GdkEventButton * event,
+				  gpointer user_data)
 {
 	GtkTreeSelection *selection = NULL;
 	GtkTreeIter selected;
 	gboolean is_selected = FALSE;
 	gint sel;
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
-	selection =
-	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
-	
+	GtkTreeModel *model;
+
 	if (working) return 0;
+	working = TRUE;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview1));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
 	
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
@@ -2436,29 +2505,14 @@ gboolean on_treeview1_button_release_event(GtkWidget * widget,
 
 		}
 	}
-  return FALSE;
+
+	working = FALSE;
+	return FALSE;
 }
 
 
-void
-on_filechooserdialog_selection_changed (GtkFileChooser  *filechooser,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-on_filechooserdialog_response          (GtkDialog       *dialog,
-                                        gint             response_id,
-                                        gpointer         user_data)
-{
-
-}
-
-
-static
-void setup_treeview_main(GtkTreeView * tree_view)
+static void
+setup_treeview_main(GtkTreeView * tree_view)
 {
 	GtkTreeModel *model;
 	
@@ -2471,8 +2525,8 @@ void setup_treeview_main(GtkTreeView * tree_view)
 			 G_CALLBACK(on_treeview1_button_release_event), NULL);
 }
 
-static
-void setup_treeviews_local_remote(GtkTreeView * local, GtkTreeView * remote)
+static void
+setup_treeviews_local_remote(GtkTreeView * local, GtkTreeView * remote)
 {
 	GtkTreeModel *model;
 	
@@ -2484,8 +2538,8 @@ void setup_treeviews_local_remote(GtkTreeView * local, GtkTreeView * remote)
 	add_columns_to_remote_treeview(remote);
 }
 
-static
-void setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
+static void
+setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
 {
 	GtkTreeModel *model;
 	
@@ -2497,8 +2551,8 @@ void setup_treeviews_install_remove(GtkTreeView * install, GtkTreeView * remove)
 	add_columns(remove, TRUE);
 }
 
-static
-void set_combobox(GtkComboBox * combo)
+static void
+set_combobox(GtkComboBox * combo)
 {	
 	GtkListStore *store;
 	
@@ -2508,8 +2562,8 @@ void set_combobox(GtkComboBox * combo)
 }
 
 
-static
-void setup_dialog_action_area(GtkDialog * dialog)
+static void
+setup_dialog_action_area(GtkDialog * dialog)
 {	
 	GtkWidget *alignment1;
 	GtkWidget *hbox1;
@@ -2583,7 +2637,8 @@ void setup_dialog_action_area(GtkDialog * dialog)
 	
 }
 
-static gint set_controls_to_last_use(void)
+static gint
+set_controls_to_last_use(void)
 {
 	/* local or remote source */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(radiobutton2),
@@ -2599,7 +2654,8 @@ static gint set_controls_to_last_use(void)
 				      settings.mod_mgr_destination);
 }
 
-static void setup_ui_labels()
+static void
+setup_ui_labels()
 {
 
 	GString *str = g_string_new(NULL);
@@ -2666,8 +2722,8 @@ on_comboboxentry_remote_changed(GtkComboBox *combobox, gpointer user_data)
 	remote_source = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
 }
 
-static
-GtkWidget *create_module_manager_dialog(gboolean first_run)
+static GtkWidget *
+create_module_manager_dialog(gboolean first_run)
 {
 	gchar *glade_file;
 	GtkWidget *dialog_vbox;
