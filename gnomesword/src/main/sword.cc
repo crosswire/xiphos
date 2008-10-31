@@ -94,6 +94,7 @@ extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
 char *sword_locale = NULL;
+gboolean companion_activity = FALSE;
 
 /******************************************************************************
  * Name
@@ -1079,9 +1080,26 @@ void main_display_commentary(const char * mod_name, const char * key)
 	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
 						
-	if (strcmp(settings.CommWindowModule,mod_name)) {
+	if (strcmp(settings.CommWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
-		settings.CommWindowModule = xml_get_value( "modules", "comm");
+		settings.CommWindowModule = g_strdup(mod_name);
+
+		char *companion = main_get_mod_config_entry(mod_name, "Companion");
+
+		if (companion &&
+		    (!companion_activity) &&
+		    backend->is_module(companion) &&
+		    ((settings.MainWindowModule == NULL) ||
+		     strcmp(companion, settings.MainWindowModule))) {
+			companion_activity = TRUE;
+			char *companion_question =
+			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
+					    mod_name, companion, companion);
+			if (gui_yes_no_dialog(companion_question))
+				main_display_bible(companion, key);
+			companion_activity = FALSE;
+		}
+		if (companion) g_free(companion);
 	}
 	
 	backend->set_module_key(mod_name, key);
@@ -1240,10 +1258,25 @@ void main_display_bible(const char * mod_name, const char * key)
 	}
 	
 	if (strcmp(settings.MainWindowModule, mod_name)) {
-		xml_set_value("GnomeSword", "modules", "bible",
-					mod_name);
-		settings.MainWindowModule = xml_get_value(
-					"modules", "bible");
+		xml_set_value("GnomeSword", "modules", "bible", mod_name);
+		settings.MainWindowModule = g_strdup(mod_name);
+
+		char *companion = main_get_mod_config_entry(mod_name, "Companion");
+
+		if (companion &&
+		    (!companion_activity) &&
+		    backend->is_module(companion) &&
+		    ((settings.CommWindowModule == NULL) ||
+		     strcmp(companion, settings.CommWindowModule))) {
+			companion_activity = TRUE;
+			char *companion_question =
+			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
+					    mod_name, companion, companion);
+			if (gui_yes_no_dialog(companion_question))
+				main_display_commentary(companion, key);
+			companion_activity = FALSE;
+		}
+		if (companion) g_free(companion);
 #ifdef OLD_NAVBAR
 		gui_reassign_strdup(&navbar_main.module_name, settings.MainWindowModule);
 		gui_reassign_strdup(&navbar_main.key, settings.currentverse);
