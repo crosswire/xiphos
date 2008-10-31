@@ -662,11 +662,33 @@ MOD_FONT *get_font(gchar * mod_name)
 	mf->old_font = get_conf_file_item(file, mod_name, "Font");
 	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
 	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
-	//g_warning("mf->old_font = %s",mf->old_font);
-	if (mf->old_font == NULL)
-		mf->old_font = g_strdup("none");
-	if(mf->old_font_size == NULL)
-		mf->old_font_size = g_strdup("+0");
+	if ((mf->old_font == NULL) ||
+	    !strcmp(mf->old_font, "none")) {
+		gchar *preferred_font =
+		    main_get_mod_config_entry(mod_name, "Font");
+
+		if (mf->old_font)
+			g_free(mf->old_font);
+		if (preferred_font && (*preferred_font != '\0')) {
+			mf->old_font = g_strdup(preferred_font);
+		} else {
+			mf->old_font = g_strdup("none");
+		}
+	}
+
+	if ((mf->old_font_size == NULL) ||
+	    !strcmp(mf->old_font_size, "+0")) {
+		gchar *preferred_font_size =
+		    main_get_mod_config_entry(mod_name, "Fontsize");
+
+		if (mf->old_font_size)
+			g_free(mf->old_font_size);
+		if (preferred_font_size && (*preferred_font_size != '\0')) {
+			mf->old_font_size = g_strdup(preferred_font_size);
+		} else {
+			mf->old_font_size = g_strdup("+0");
+		}
+	}
 	
 	return mf;
 }
