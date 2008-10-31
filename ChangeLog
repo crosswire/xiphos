@@ -3,6 +3,9 @@
 	* automatic font defaults per configuration file specification.
 	  xyz.conf can hold "Font=Linux Libertine" and "Fontsize=+1" and
 	  we will respect that properly in all contexts.
+	* companion modules: "Companion=OtherModule" in .conf causes
+	  an offer to open that module as well.  intended mostly for use
+	  with related Bibles and commentaries e.g. NET + NETnote.
 
 2008-10-27  karl <charcoal@users.sf.net>
 
