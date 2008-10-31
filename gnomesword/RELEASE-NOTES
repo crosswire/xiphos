@@ -29,6 +29,10 @@ Ongoing requested feature enhancements in stable 2.4.
     time the user resorts to default font name or +0 size, module
     configuration takes over.
 
+ 8. Companion modules: If a Bible or commentary has configuration file
+    element Companion=OtherModule, then GnomeSword will offer to open
+    that module as well when opening the first module.
+
 Bug reports addressed since 2.4.0:
 2163853  Scrolling Issues
 2186692  GnomeSword cannot create module's path
