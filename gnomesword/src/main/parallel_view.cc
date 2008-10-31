@@ -576,8 +576,12 @@ void main_update_parallel_page(void)
 			
 			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 			font_name = get_conf_file_item(file, mod_name, "Font");
-			if (!font_name)
-				font_name = g_strdup("none");
+			if (!font_name) {
+				font_name =
+				    main_get_mod_config_entry(mod_name, "Font");
+				if (!font_name)
+					font_name = g_strdup("none");
+			}
 			if (strlen(font_name) < 2) {
 				use_gtkhtml_font = TRUE;
 			} else {
@@ -589,12 +593,16 @@ void main_update_parallel_page(void)
 			}
 
 			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
-			g_free(file);		
-			if (font_size_tmp)
-				font_size = g_strdup_printf("%+d",(atoi(font_size_tmp) + settings.base_font_size));
-			else 
-				font_size = g_strdup_printf("%+d",settings.base_font_size);
+			g_free(file);
+			if (!font_size_tmp) {
+				font_size_tmp =
+				    main_get_mod_config_entry(mod_name, "Fontsize");
+			}
 
+			font_size =
+			    g_strdup_printf("%+d",
+					    (font_size_tmp ? atoi(font_size_tmp) : 0)
+					     + settings.base_font_size);
 
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
@@ -797,9 +805,12 @@ void main_update_parallel_page(void)
 			//font_name = get_module_font_name(mod_name);
 			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 			font_name = get_conf_file_item(file, mod_name, "Font");
-			//g_free(file);
-			if (!font_name)
-				font_name = g_strdup("none");
+			if (!font_name) {
+				font_name =
+				    main_get_mod_config_entry(mod_name, "Font");
+				if (!font_name)
+					font_name = g_strdup("none");
+			}
 			if (strlen(font_name) < 2) {
 				use_gtkhtml_font = TRUE;
 				GS_warning(("use_gtkhtml_font = TRUE"));
@@ -815,10 +826,15 @@ void main_update_parallel_page(void)
 						
 			font_size_tmp = get_conf_file_item(file, mod_name, "Fontsize");
 			g_free(file);
-			if(font_size_tmp)
-				font_size = g_strdup_printf("%+d",(atoi(font_size_tmp) + settings.base_font_size));
-			else 
-				font_size = g_strdup_printf("%+d",settings.base_font_size);
+			if (!font_size_tmp) {
+				font_size_tmp =
+				    main_get_mod_config_entry(mod_name, "Fontsize");
+			}
+
+			font_size =
+			    g_strdup_printf("%+d",
+					    (font_size_tmp ? atoi(font_size_tmp) : 0)
+					     + settings.base_font_size);
 		
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = (gchar *)"#F1F1F1";
@@ -1014,17 +1030,23 @@ static void int_display(GtkHTML *html, gchar * key)
 	file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 	for (j = 0; j < 5; ++j) {
 		font_size_tmp[j] = get_conf_file_item(file, mod_name[j], "Fontsize");
-		if (font_size_tmp[j])
-			use_font_size[j] =
-			    g_strdup_printf("%+d", (atoi(font_size_tmp[j]) +
-						    settings.base_font_size));
-		else 
-			use_font_size[j] =
-			    g_strdup_printf("%+d", settings.base_font_size);
+		if (!font_size_tmp[j]) {
+			font_size_tmp[j] =
+			    main_get_mod_config_entry(mod_name[j], "Fontsize");
+		}
+
+		use_font_size[j] =
+		    g_strdup_printf("%+d",
+				    (font_size_tmp[j] ? atoi(font_size_tmp[j]) : 0)
+				    + settings.base_font_size);
 
 		use_font_name[j] = get_conf_file_item(file, mod_name[j], "Font");
-		if (use_font_name[j] == NULL)
-			use_font_name[j] = g_strdup("none");
+		if (use_font_name[j] == NULL) {
+			use_font_name[j] =
+			    main_get_mod_config_entry(mod_name[j], "Font");
+			if (!use_font_name[j])
+				use_font_name[j] = g_strdup("none");
+		}
 	}
 	g_free(file);
 

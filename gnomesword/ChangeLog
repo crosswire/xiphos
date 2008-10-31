@@ -1,3 +1,9 @@
+2008-10-31  karl <charcoal@users.sf.net>
+
+	* automatic font defaults per configuration file specification.
+	  xyz.conf can hold "Font=Linux Libertine" and "Fontsize=+1" and
+	  we will respect that properly in all contexts.
+
 2008-10-27  karl <charcoal@users.sf.net>
 
 	* completely re-work mod.mgr lockout logic.
