@@ -60,6 +60,7 @@ extern "C" {
 extern char *OLD_CODESET;
 extern char *sword_locale;
 extern int re_encode_digits;
+extern gboolean companion_activity;
 /*** end defs ***/
 
 /*** function prototypes ***/
