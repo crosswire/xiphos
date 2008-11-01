@@ -698,6 +698,8 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 
 	set_current_tab (pt);
+
+	companion_activity = TRUE;
 	
 	//sets the book mod and key
 	main_display_book(pt->book_mod, pt->book_offset);
@@ -723,6 +725,9 @@ void gui_notebook_main_switch_page(GtkNotebook * notebook,
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
 				      (pt->comm_showing ? 0 : 1));
+
+	companion_activity = FALSE;
+
 	page_change = FALSE;
 }
 
