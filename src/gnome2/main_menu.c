@@ -95,6 +95,13 @@ void
 on_help_contents_activate(GtkMenuItem * menuitem,
 			  gpointer user_data)
 {	
+#ifdef __CYGWIN__
+	gui_generic_warning("Cygwin does not have the\n"
+			    "documentation viewer needed to\n"
+			    "view the GnomeSword manual.\n"
+			    "Install and reference the\n"
+			    "GnomeSword manual module instead.");
+#else
 	GError *error = NULL;
 	
 	if (gnome_help_display((const gchar*)"gnomesword.xml", 
@@ -102,7 +109,7 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 		GS_warning((error->message));
 		g_error_free (error);        
 	}
-	
+#endif /* __CYGWIN__ */
 }
 
 /******************************************************************************
