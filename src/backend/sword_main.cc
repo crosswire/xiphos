@@ -810,29 +810,29 @@ int BackEnd::module_has_testament(const char * module_name,  int testament) {
 	if (it != main_mgr->Modules.end()) {
 		SWModule *module = (*it).second;
 		module->setSkipConsecutiveLinks(true);
-			*module = sword::TOP; //position to first entry
-			sword::VerseKey key( module->KeyText() );
-			if (key.Testament() == 1) { // OT && NT
-				ot = 1;
-			} else if (key.Testament() == 2) { //no OT
-				ot = 0;
-			}
+
+		*module = sword::TOP; //position to first entry
+		sword::VerseKey key( module->KeyText() );
+		if (key.Testament() == 1) { // OT && NT
+			ot = 1;
+		} else if (key.Testament() == 2) { //no OT
+			ot = 0;
+		}
 	
-			*module = sword::BOTTOM;
-			key = module->KeyText();
-			if (key.Testament() == 1) { // only OT, no NT
-				nt = 0;
-			} else if (key.Testament() == 2) { //has NT
-				nt = 1;
-			}
-	         module->setSkipConsecutiveLinks(false);
+		*module = sword::BOTTOM;
+		key = module->KeyText();
+		if (key.Testament() == 1) { // only OT, no NT
+			nt = 0;
+		} else if (key.Testament() == 2) { //has NT
+			nt = 1;
+		}
+		module->setSkipConsecutiveLinks(false);
 	}
 	switch (testament) {
 		case 1:
 			return ot>0;
 		case 2:
 			return nt>0;
-
 		default:
 			return false;
 	}
