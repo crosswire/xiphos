@@ -741,7 +741,7 @@ view_lower_workbook(GtkMenuItem * menuitem,
  *   void
  */
 
-static void
+void
 on_mod_mgr(GtkMenuItem * menuitem,
 	   gpointer user_data)
 {

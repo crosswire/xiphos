@@ -33,6 +33,8 @@ Ongoing requested feature enhancements in stable 2.4.
     element Companion=OtherModule, then GnomeSword will offer to open
     that module as well when opening the first module.
 
+ 9. F1-F4 provide help, preferences, advanced search, and module manager.
+
 Bug reports addressed since 2.4.0:
 2163853  Scrolling Issues
 2186692  GnomeSword cannot create module's path

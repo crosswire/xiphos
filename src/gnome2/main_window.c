@@ -682,6 +682,22 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
+	case 67: // F1 help
+		if (state == 0)
+			on_help_contents_activate(NULL, NULL);
+		break;
+	case 68: // F2 preferences
+		if (state == 0)
+			on_preferences1_activate(NULL, NULL);
+		break;
+	case 69: // F3 search
+		if (state == 0)
+			main_open_search_dialog();
+		break;
+	case 70: // F4 module manager
+		if (state == 0)
+			on_mod_mgr(NULL, NULL);
+		break;
 	}
 	GS_message(("on_vbox1_key_press_event\nkeycode: %d, state: %d",
 		    event->hardware_keycode, state));
