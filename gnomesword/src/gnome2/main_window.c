@@ -683,17 +683,8 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			new_base_font_size(FALSE);
 		break;
 	case 67: // F1 help
-		if (state == 0) {
-#ifdef __CYGWIN__
-			gui_generic_warning("Cygwin does not have the\n"
-					    "documentation viewer needed to\n"
-					    "view the GnomeSword manual.\n"
-					    "Install and reference the\n"
-					    "GnomeSword manual module instead.");
-#else
+		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
-#endif /* __CYGWIN */
-		}
 		break;
 	case 68: // F2 preferences
 		if (state == 0)
