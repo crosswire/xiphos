@@ -1,3 +1,7 @@
+2008-11-02  karl <charcoal@users.sf.net>
+
+	* add F[1234] kbd shortcuts: help, prefs, adv.search, mod.mgr.
+
 2008-10-31  karl <charcoal@users.sf.net>
 
 	* automatic font defaults per configuration file specification.
