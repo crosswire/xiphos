@@ -1327,7 +1327,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		g_free(val_key);			
 	}
 	
-	GS_print(("mod_name = %s\n",mod_name));	
+	GS_message(("mod_name = %s",mod_name));	
 	if (settings.browsing) {
 		gui_update_tab_struct(mod_name,
 				      NULL,
