@@ -567,7 +567,7 @@ void main_update_parallel_page(void)
 					mod_name = NULL;
 				break;
 			}
-			GS_warning(("mod_name = %s",mod_name));
+			GS_message(("mod_name = %s",mod_name));
 			if (!mod_name)
 				continue;
 
@@ -798,7 +798,7 @@ void main_update_parallel_page(void)
 			}
 			if (!mod_name)
 				continue;
-			GS_warning(("mod_name = %s", mod_name));
+			GS_message(("mod_name = %s", mod_name));
 
 			++j;
 			is_rtol = main_is_mod_rtol(mod_name);
@@ -813,14 +813,14 @@ void main_update_parallel_page(void)
 			}
 			if (strlen(font_name) < 2) {
 				use_gtkhtml_font = TRUE;
-				GS_warning(("use_gtkhtml_font = TRUE"));
+				GS_message(("use_gtkhtml_font = TRUE"));
 			} else {
 				if (!strncmp(font_name, "none", 4)) {
 					use_gtkhtml_font = TRUE;
-					GS_warning(("use_gtkhtml_font = TRUE"));
+					GS_message(("use_gtkhtml_font = TRUE"));
 				} else {
 					use_gtkhtml_font = FALSE;
-					GS_warning(("use_gtkhtml_font = FALSE"));
+					GS_message(("use_gtkhtml_font = FALSE"));
 				}
 			}
 						
