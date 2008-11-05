@@ -163,7 +163,7 @@ class GTKPrintChapDisp : public GTKPrintEntryDisp {
 public:
 	GTKPrintChapDisp(GtkWidget *_gtkText,
 			 BackEnd   *_be)
-	    : GTKPrintEntryDisp(gtkText,be)
+	    : GTKPrintEntryDisp(_gtkText, _be)
 	{
 	}
 	virtual char Display(SWModule &imodule);
