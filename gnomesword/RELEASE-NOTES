@@ -20,6 +20,7 @@ Ongoing requested feature enhancements in stable 2.4.
     comm/book window; without that, it operates in dictionary window.
 
  5. Advanced Search provides search word highlight in result preview.
+    Also, the Find button toggles to Stop during a search.
 
  6. New icons, courtesy of Simon Meers.
 
