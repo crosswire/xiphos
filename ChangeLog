@@ -1,7 +1,8 @@
 2008-11-05  karl <charcoal@users.sf.net>
 
 	* add Matthew Talbert's code (with mods) to toggle the Find button
-	in Advanced Search between Find and Stop during actual search.
+	  in Advanced Search between Find and Stop during actual search.
+	* fix printing initialization error in display.hh.
 
 2008-11-02  karl <charcoal@users.sf.net>
 
