@@ -42,7 +42,7 @@
 #include "gui/dialog.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
-
+#include "gtk/gtk.h"
 
 #include "main/search_dialog.h"
 #include "main/configs.h"
@@ -93,6 +93,8 @@ static gboolean _preview_on;
 static gboolean _in_url;
 static gchar *module_selected;
 gchar *verse_selected;
+
+GtkWidget *remember_button1;	/* needed to change button in search stop */
 
 extern int drag_module_type;
 
@@ -232,10 +234,23 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
+		const gchar *label;
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_button1, label);
+		gtk_button_set_use_stock(button, TRUE);
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	} else
+	{
+		const gchar *label;
+		label = g_strdup("gtk-stop");
+		gtk_button_set_label((GtkButton *)remember_button1, label);
+		gtk_button_set_use_stock(button, TRUE);
 		main_do_dialog_search();
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_button1, label);
+		gtk_button_set_use_stock(button, TRUE);
+	}
 }
 
 
@@ -2405,7 +2420,6 @@ void _create_search_dialog(void)
 	gchar *glade_file;
 	GladeXML *gxml;
 	GladeXML *gxml2;
-	GtkWidget *button1;
 	GtkWidget *toolbutton1;
 	GtkWidget *toolbutton2;
 	GtkWidget *toolbutton3;
@@ -2452,8 +2466,8 @@ void _create_search_dialog(void)
 	g_signal_connect(search1.dialog, "destroy",
 			 G_CALLBACK(_on_destroy), NULL);
 
-	button1 = glade_xml_get_widget(gxml, "button1");	
-	g_signal_connect(button1, "clicked",
+	remember_button1 = glade_xml_get_widget(gxml, "button1");
+	g_signal_connect(remember_button1, "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);	
 
 	search1.label_search_module =
