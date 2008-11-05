@@ -1,3 +1,8 @@
+2008-11-05  karl <charcoal@users.sf.net>
+
+	* add Matthew Talbert's code (with mods) to toggle the Find button
+	in Advanced Search between Find and Stop during actual search.
+
 2008-11-02  karl <charcoal@users.sf.net>
 
 	* add F[1234] kbd shortcuts: help, prefs, adv.search, mod.mgr.
