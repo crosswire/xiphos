@@ -1,5 +1,9 @@
 2008-11-05  karl <charcoal@users.sf.net>
 
+	* 2.4.1 release.
+
+2008-11-05  karl <charcoal@users.sf.net>
+
 	* add Matthew Talbert's code (with mods) to toggle the Find button
 	  in Advanced Search between Find and Stop during actual search.
 	* fix printing initialization error in display.hh.
