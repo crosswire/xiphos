@@ -4,7 +4,7 @@ GNOMESWORD RELEASE NOTES
 ________________________
 
 Release 2.4.1
-XX YYY 2008
+05 Nov 2008
 
 Ongoing requested feature enhancements in stable 2.4.
 
@@ -14,12 +14,12 @@ Ongoing requested feature enhancements in stable 2.4.
 
  2. Intermediate module paths for prayer lists are properly constructed.
 
- 3. GnomeSword can be built under Solaris (gtkhtml3 only).
+ 3. GnomeSword can be built under Solaris (--enable-gtkhtml3 only).
 
- 4. Ctrl-F "find" capability: Without a Bible subwindow, it operates in
-    comm/book window; without that, it operates in dictionary window.
+ 4. Ctrl-F "find" capability: Without a Bible pane, it operates in
+    comm/book pane; without that, it operates in dictionary pane.
 
- 5. Advanced Search provides search word highlight in result preview.
+ 5. Advanced Search provides search term highlight in result preview.
     Also, the Find button toggles to Stop during a search.
 
  6. New icons, courtesy of Simon Meers.
