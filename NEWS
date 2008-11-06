@@ -1,3 +1,5 @@
+2008-11-05  - 2.4.1.  small features and small bug fixes.
+
 2008-09-21  - 2.4.0.  a few improvements to phrasing; bugfix in navbar
 	      loading; cygwin pango workaround; add Help->Translation;
 	      build improvement in gecko.m4; mod.mgr fixes; Strongs
