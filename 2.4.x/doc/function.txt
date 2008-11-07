@@ -1,0 +1,19 @@
+/******************************************************************************
+ * Name
+ *   NAME
+ *
+ * Synopsis
+ *   HEADER FILE
+ *
+ *   PROTOTYPE
+ *
+ * Description
+ *   DESCRIPTION
+ *
+ * Return value
+ *   TYPE
+ */
+
+TYPE NAME(PARAMETERS)
+{
+}
