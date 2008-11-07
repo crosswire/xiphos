@@ -1,0 +1,28 @@
+******************************************************************
+GnomeSword requires Gnome2 ,the Sword libs and GtkHTML3
+******************************************************************
+
+******************************************************************
+you can start gnomesword with command line options
+1. gnomesword2 newconfigs - this will create a new configuration file
+   with default settings - if gnomesword will not start this might help
+2. gnomesword2 newbookmarks - this will create a new bookmark file should
+   the old get messed up.
+3. gnomesword2 newfiles - this will create both the above files
+4. gnomesword2 sword://KJV/1Tim1:15 - will open gnomesword with KJV
+   open to 1 Tim 1:15 in the main window.
+******************************************************************
+
+GnomeSword started life as the Sword Project's Cheatah program.
+
+Over the course of GnomeSword development many ideas and some pieces of
+code have come from the Bibletime program and the Sword Project's 
+BibleCS program.
+
+We wish to thank the folks who have put so much time and work into the
+Sword Project and then giving it to the world! God Bless you!
+
+
+We hope that your Bible Study will be enhanced by GnomeSword.
+
+The GnomeSword Development Team
