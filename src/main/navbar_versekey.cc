@@ -557,7 +557,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 	int xchapter = vkey.Chapter();
 	int xverse = vkey.Verse();
 		
-	x = (vkey.books[xtestament-1][xbook-1].versemax[xchapter-1]);
+	x = (vkey.getVerseMax());
 	for(i=1; i <= x; i++) {
 		num = main_format_number(i);
 		if (i == xverse) {
@@ -639,7 +639,7 @@ GtkWidget *main_versekey_drop_down_chapter_menu(NAVBAR_VERSEKEY navbar,
 	char xtestament = vkey.Testament() ;
 	char xbook = vkey.Book();
 	int xchapter = vkey.Chapter();
-	x = (vkey.books[xtestament-1][xbook-1].chapmax);
+	x = (vkey.getChapterMax());
 	for(i=1; i <= x; i++) {
 		num = main_format_number(i);
 		if (i == xchapter) {
@@ -715,7 +715,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	
 	if (backend->module_has_testament(navbar.module_name->str, 1)) {
 		while(i < key.BMAX[0]) { 
-			book = strdup((const char *) key.books[0][i].name);
+			key.setBook(i);
+			book = strdup(key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
 			if(!rawtext || (rawtext && (strlen(rawtext) < 2))){
@@ -751,7 +752,8 @@ GtkWidget *main_versekey_drop_down_book_menu(NAVBAR_VERSEKEY navbar,
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name->str, 2)) {
 		while(i < key.BMAX[1]) {
-			book = strdup((const char *) key.books[1][i].name);
+			key.setBook(i);
+			book = strdup(key.getBookName());
 			char *mykey = g_strdup_printf("%s 1:1",book);
 			char *rawtext = main_get_raw_text(navbar.module_name->str, mykey);
 			if(!rawtext || (rawtext && (strlen(rawtext) < 2))){

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-01-16 09:51+0000\n"
+"PO-Revision-Date: 2008-07-30 00:36+0100\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -645,9 +645,9 @@ msgstr "شماره‌ها Strong"
 #: ../src/main/module_dialogs.cc:317 ../src/main/module_dialogs.cc:336
 #: ../src/main/module_dialogs.cc:440 ../src/main/module_dialogs.cc:457
 #: ../src/main/previewer.cc:189 ../src/main/previewer.cc:210
-#, fuzzy
 msgid "Morphology"
-msgstr "مرفولضی"
+msgstr "مرفولوژی"
+""
 
 #: ../src/main/module_dialogs.cc:1266
 msgid "Back to "

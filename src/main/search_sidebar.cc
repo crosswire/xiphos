@@ -334,7 +334,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 				g_error_free (error);
 				continue;
 			}    */
-			book = strdup((const char *) key.books[0][i].name);
+			key.setBook(i);
+			book = strdup(key.getBookName());
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;
@@ -357,7 +358,8 @@ void main_search_sidebar_fill_bounds_combos(void)
 				g_error_free (error);
 				continue;
 			}    */
-			book = strdup((const char *) key.books[1][i].name);
+			key.setBook(i);
+			book = strdup(key.getBookName());
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryUpper), book);
 			gtk_combo_box_append_text(GTK_COMBO_BOX(ss.entryLower), book);
 			++i;

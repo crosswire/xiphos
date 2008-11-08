@@ -58,7 +58,7 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 
 %files
 %defattr(-,root,root)
-%{prefix}/bin/gnomesword2
+%{prefix}/bin/gnomesword
 %{prefix}/share/gnome/help/*
 %{prefix}/share/gnomesword/*
 %{prefix}/share/locale/*
