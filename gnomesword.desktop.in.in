@@ -1,6 +1,5 @@
-
 [Desktop Entry]
-_Name=GnomeSword2 Bible Guide
+_Name=GnomeSword Bible Guide
 _Comment=Study the Bible
 Exec=@gnomesword_exec@
 Icon=@PACKAGE_PIXMAPS_DIR@/gnomesword.svg
@@ -9,5 +8,5 @@ X-MultipleArgs=false
 Type=Application
 Categories=Utility;X-Red-Hat-Extra;
 StartupNotify=true
-TryExec=/usr/bin/gnomesword2
+TryExec=/usr/bin/gnomesword
 X-Desktop-File-Install-Version=0.15

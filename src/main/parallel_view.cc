@@ -1016,9 +1016,7 @@ static void int_display(GtkHTML *html, gchar * key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 
-	xverses = (vkey.books[vkey.Testament()-1]
-				 [vkey.Book()-1].
-				 versemax[vkey.Chapter()-1]);
+	xverses = (vkey.getVerseMax());
 
 	// quick cache of modules and fonts.
 	mod_name[0] = (parallel1 ? settings.parallel1Module : NULL);
