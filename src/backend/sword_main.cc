@@ -564,7 +564,7 @@ char *BackEnd::key_get_book(const char *key) {
                              &bytes_written,
                              error);   */
 //	return mykey;
-	return strdup((char*)vkey.books[vkey.Testament() - 1][vkey.Book() -1].name);
+	return strdup((char*)vkey.getBookName());
 }
 
 
@@ -631,7 +631,7 @@ const unsigned int BackEnd::key_chapter_count(const char *key) {
 	
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
-	return (vkey.books[testament-1][book-1].chapmax);
+	return (vkey.getChapterMax());
 }
 
 
@@ -657,7 +657,7 @@ const unsigned int BackEnd::key_verse_count(const char *key) {
 	char testament = vkey.Testament() ;
 	char book = vkey.Book();
 	int chapter = vkey.Chapter();	
-	return (vkey.books[testament-1][book-1].versemax[chapter-1]);
+	return (vkey.getVerseMax());
 }
 
 

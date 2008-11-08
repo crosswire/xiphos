@@ -502,7 +502,8 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				g_error_free(error);
 				continue;
 			}    */
-			buf = strdup((gchar *) key.books[0][j].name);
+			key.setBook(j);
+			buf = strdup((gchar *) key.getBookName());
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
@@ -535,7 +536,8 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				g_error_free(error);
 				continue;
 			}    */
-			buf = strdup((gchar *) key.books[1][j].name);
+			key.setBook(j);
+			buf = strdup((gchar *) key.getBookName());
 			gchar *key = g_strdup_printf("book://%s/%s 1:1",
 						     mod_name, buf);
 			gtk_tree_store_append(GTK_TREE_STORE(model),
