@@ -913,7 +913,7 @@ load_module_tree(GtkTreeView * treeview,
 		g_free(repository_identifier);
 
 		gtk_tree_store_append(store, &separator, NULL);
-		gtk_tree_store_set(store, &separator, 0, " ", -1);
+		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
 
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
@@ -950,7 +950,7 @@ load_module_tree(GtkTreeView * treeview,
 
 	if (install && !first_time_user) {
 		gtk_tree_store_append(store, &separator, NULL);
-		gtk_tree_store_set(store, &separator, 0, " ", -1);
+		gtk_tree_store_set(store, &separator, 0, "------------------------", -1);
 
 		gtk_tree_store_append(store, &category_avail, NULL);
 		gtk_tree_store_set(store, &category_avail, 0,
