@@ -175,11 +175,15 @@
 		<widget class="GtkToggleButton" id="togglebutton_book">
 		  <property name="width_request">160</property>
 		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">Choose book to display</property>
 		  <property name="can_focus">True</property>
 		  <property name="relief">GTK_RELIEF_NONE</property>
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Book Selector Button</atkproperty>
+		  </accessibility>
 
 		  <child>
 		    <widget class="GtkHBox" id="hbox5">
@@ -372,6 +376,9 @@
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Toggle Chapter Button</atkproperty>
+		  </accessibility>
 
 		  <child>
 		    <widget class="GtkHBox" id="hbox6">
@@ -563,6 +570,9 @@
 		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Toggle Verse Button</atkproperty>
+		  </accessibility>
 
 		  <child>
 		    <widget class="GtkHBox" id="hbox7">
@@ -755,6 +765,9 @@
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">●</property>
 	      <property name="activates_default">False</property>
+	      <accessibility>
+		<atkproperty name="AtkObject::accessible_name" translatable="yes">Reference Entry</atkproperty>
+	      </accessibility>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
