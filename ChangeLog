@@ -1,3 +1,8 @@
+2008-11-12  karl <charcoal@users.sf.net>
+
+	* fix #2264276 excess characters in double-click dict lookup
+	  (Michael Talbert's update).
+
 2008-11-05  karl <charcoal@users.sf.net>
 
 	* 2.4.1 release.
