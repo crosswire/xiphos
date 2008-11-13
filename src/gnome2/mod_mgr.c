@@ -827,6 +827,8 @@ load_module_tree(GtkTreeView * treeview,
 	gint i;
 	static gboolean need_column = TRUE;
 	GtkTreeStore *store;
+	GtkTreeIter repository_name;
+	gchar *repository_identifier;
 	GtkTreeIter category_type;
 	GtkTreeIter category_avail;
 	GtkTreeIter text;
@@ -897,6 +899,22 @@ load_module_tree(GtkTreeView * treeview,
 		return;
 
 	if (install && !first_time_user) {
+		/* note the repository that is active */
+		if (remote_source == NULL)
+			remote_source = g_strdup(gtk_combo_box_get_active_text(
+						     GTK_COMBO_BOX(combo_entry2)));
+
+		repository_identifier =
+		    g_strdup_printf(_("Repository:\n%s"),
+				    (local ? source : remote_source));
+		gtk_tree_store_append(store, &repository_name, NULL);
+		gtk_tree_store_set(store, &repository_name, 0,
+				   repository_identifier, -1);
+		g_free(repository_identifier);
+
+		gtk_tree_store_append(store, &separator, NULL);
+		gtk_tree_store_set(store, &separator, 0, " ", -1);
+
 		gtk_tree_store_append(store, &category_type, NULL);
 		gtk_tree_store_set(store, &category_type, 0,
 				   _("Categorized by\nModule Type"), -1);
