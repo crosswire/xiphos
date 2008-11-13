@@ -50,6 +50,7 @@
 #include <nsIDOMKeyEvent.h>
 #include <nsIInterfaceRequestorUtils.h>
 #include <nsIPrefService.h>
+#include <nsIPrefBranch.h>
 #include <nsIPrintSettings.h>
 #include <nsISelectionController.h>
 #include <nsITypeAheadFind.h>
@@ -139,6 +140,11 @@ Yelper::Init ()
 
 	mInitialised = PR_TRUE;
 
+	nsCOMPtr<nsIPrefService> prefService = do_GetService (NS_PREFSERVICE_CONTRACTID);
+	nsCOMPtr<nsIPrefBranch> pref;
+	prefService->GetBranch("", getter_AddRefs(pref));
+	rv = pref->SetBoolPref("layout.word_select.stop_at_punctuation", PR_TRUE);
+	NS_ENSURE_SUCCESS (rv, rv);
 	return NS_OK;
 }
 
@@ -444,7 +450,7 @@ gint Yelper::ProcessMouseDblClickEvent (void* aEvent)
 	gtk_widget_activate(widgets.entry_dict);
 /*	rv = mDOMWindow->GetSelection(getter_AddRefs(oSelection));
 	rv = oSelection->ToString(selText);
-	g_message("selText: %s", selText);*/
+	g_message("selText: %s", rv);*/
 	return 1;
 }
 
