@@ -135,6 +135,9 @@
 		      <property name="has_frame">True</property>
 		      <property name="invisible_char">*</property>
 		      <property name="activates_default">False</property>
+		      <accessibility>
+			<atkproperty name="AtkObject::accessible_name" translatable="yes">Main Search Entry</atkproperty>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -152,6 +155,9 @@
 		      <property name="use_stock">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="focus_on_click">True</property>
+		      <accessibility>
+			<atkproperty name="AtkObject::accessible_name" translatable="yes">Find Button</atkproperty>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -210,6 +216,9 @@
 			  <property name="fixed_height_mode">False</property>
 			  <property name="hover_selection">False</property>
 			  <property name="hover_expand">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Search Criteria Treeview</atkproperty>
+			  </accessibility>
 			</widget>
 		      </child>
 		    </widget>
@@ -287,6 +296,9 @@
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Entire module radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -308,6 +320,9 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton1</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Current results radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -329,6 +344,9 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton1</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Custom verse range radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -365,6 +383,9 @@
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Custom Range Selector Combo</atkproperty>
+				  </accessibility>
 				</widget>
 			      </child>
 			    </widget>
@@ -444,6 +465,9 @@
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Single module radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -465,6 +489,9 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton4</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Module list radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -486,6 +513,9 @@
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
 				      <property name="group">radiobutton4</property>
+				      <accessibility>
+					<atkproperty name="AtkObject::accessible_name" translatable="yes">Custom module list radiobutton</atkproperty>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -522,6 +552,9 @@
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
 				  <property name="focus_on_click">True</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Custom Module List Combo</atkproperty>
+				  </accessibility>
 				</widget>
 			      </child>
 			    </widget>
@@ -606,6 +639,9 @@
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Multi word radiobutton</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -629,6 +665,9 @@ See Module Manager's maintenance functions</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton9</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Optimized ("Lucene") radiobutton</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -649,6 +688,9 @@ See Module Manager's maintenance functions</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton9</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Regular expression radiobutton</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -669,6 +711,9 @@ See Module Manager's maintenance functions</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton9</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Exact phrase radiobutton</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -690,6 +735,9 @@ See Module Manager's maintenance functions</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton9</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Attributes radiobutton</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -774,6 +822,9 @@ See Module Manager's maintenance functions</property>
 					  <property name="active">False</property>
 					  <property name="inconsistent">False</property>
 					  <property name="draw_indicator">True</property>
+					  <accessibility>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Match case checkbox</atkproperty>
+					  </accessibility>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -980,6 +1031,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
 			      <property name="shadow_type">GTK_SHADOW_IN</property>
 			      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Result Summary Window</atkproperty>
+			      </accessibility>
 
 			      <child>
 				<widget class="GtkTreeView" id="treeview9">
@@ -992,6 +1046,9 @@ See Module Manager's maintenance functions</property>
 				  <property name="fixed_height_mode">False</property>
 				  <property name="hover_selection">False</property>
 				  <property name="hover_expand">False</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Result Summary Table</atkproperty>
+				  </accessibility>
 				</widget>
 			      </child>
 			    </widget>
@@ -1205,6 +1262,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">New Range Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1220,6 +1280,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Save Range Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1235,6 +1298,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Delete Range Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1365,6 +1431,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Range Name Entry</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1409,6 +1478,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Range Definition Entry</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1462,6 +1534,9 @@ See Module Manager's maintenance functions</property>
 				  <property name="fixed_height_mode">False</property>
 				  <property name="hover_selection">False</property>
 				  <property name="hover_expand">False</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Custom Range Preview</atkproperty>
+				  </accessibility>
 				</widget>
 			      </child>
 			    </widget>
@@ -1538,6 +1613,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">New Custom Module List Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1553,6 +1631,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Save Custom Module List Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1568,6 +1649,9 @@ See Module Manager's maintenance functions</property>
 			  <property name="visible_horizontal">True</property>
 			  <property name="visible_vertical">True</property>
 			  <property name="is_important">False</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Clear Custom Module List Button</atkproperty>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="expand">False</property>
@@ -1698,6 +1782,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="has_frame">True</property>
 			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Custom Module List Name Entry</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1747,6 +1834,9 @@ See Module Manager's maintenance functions</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Clear Modules from List Button</atkproperty>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
@@ -1764,6 +1854,9 @@ See Module Manager's maintenance functions</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Delete Selected Module From List Button</atkproperty>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
@@ -1794,6 +1887,9 @@ See Module Manager's maintenance functions</property>
 				  <property name="visible_horizontal">True</property>
 				  <property name="visible_vertical">True</property>
 				  <property name="is_important">False</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Open Selection Dialog Button</atkproperty>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="expand">False</property>
@@ -1940,6 +2036,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="active">True</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Strongs Numbers radiobutton</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1961,6 +2060,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
 			      <property name="group">radiobutton13</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Morphological Tags radiobutton</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -1982,6 +2084,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
 			      <property name="group">radiobutton13</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Footnotes radiobutton</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -2062,6 +2167,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Show Strong's Numbers checkbox</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -2082,6 +2190,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Show Morphological Tags checkbox</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -2102,6 +2213,9 @@ See Module Manager's maintenance functions</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
+			      <accessibility>
+				<atkproperty name="AtkObject::accessible_name" translatable="yes">Show Footnotes checkbox</atkproperty>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>

@@ -2,7 +2,14 @@
 
 	* fix #2264276 excess characters in double-click dict lookup
 	  (Michael Talbert's update).
+	* add Michael's *.glade updates for accessibility properties
+	  to facilitate UI testing framework.
 
+2008-11-08  karl <charcoal@users.sf.net>
+
+	* Initial changes to accommodate new genbook VerseKey Sword.
+	  (Much remains to be done for completeness.)
+	
 2008-11-05  karl <charcoal@users.sf.net>
 
 	* 2.4.1 release.
