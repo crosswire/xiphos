@@ -113,6 +113,9 @@
                     <property name="use_underline">True</property>
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes">Book Radio Button</atkproperty>
+                    </accessibility>
                   </widget>
                 </child>
               </widget>
@@ -136,6 +139,9 @@
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                     <property name="group">radiobutton1</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes">Chapter Radio Button</atkproperty>
+                    </accessibility>
                   </widget>
                 </child>
               </widget>
@@ -159,6 +165,9 @@
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                     <property name="group">radiobutton1</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes">Verse Radio Button</atkproperty>
+                    </accessibility>
                   </widget>
                 </child>
               </widget>
@@ -195,6 +204,9 @@
                     <property name="use_underline">True</property>
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes">HTML Radio Button</atkproperty>
+                    </accessibility>
                   </widget>
                 </child>
               </widget>
@@ -217,6 +229,9 @@
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                     <property name="group">radiobutton4</property>
+                    <accessibility>
+                      <atkproperty name="AtkObject::accessible_name" translatable="yes">Plain Text Radio Button</atkproperty>
+                    </accessibility>
                   </widget>
                 </child>
               </widget>
@@ -246,6 +261,9 @@
                 <property name="label">gtk-cancel</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-6</property>
+                <accessibility>
+                  <atkproperty name="AtkObject::accessible_name" translatable="yes">Export Passage Cancel</atkproperty>
+                </accessibility>
               </widget>
             </child>
             <child>
@@ -256,6 +274,9 @@
                 <property name="label">gtk-ok</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-5</property>
+                <accessibility>
+                  <atkproperty name="AtkObject::accessible_name" translatable="yes">Export Passage OK</atkproperty>
+                </accessibility>
               </widget>
               <packing>
                 <property name="position">1</property>
