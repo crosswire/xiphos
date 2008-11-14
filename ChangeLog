@@ -1,6 +1,7 @@
 2008-11-13  karl <charcoal@users.sf.net>
 
 	* Add the repository identifier to the install panel of mod.mgr.
+	* Integrate blocked strongs/morph into GTKEntryDisp (cf. Didache).
 
 2008-11-12  karl <charcoal@users.sf.net>
 
