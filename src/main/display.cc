@@ -356,141 +356,6 @@ HtmlOutput(SWModule &imodule,
 #endif
 }
 
-//
-// general display of entries: commentary, genbook, lexdict
-//
-char
-GTKEntryDisp::Display(SWModule &imodule)
-{
-#if 0
-	gchar *keytext = NULL;
-#endif
-	gchar *buf;
-	gint mod_type;
-	mf = get_font(imodule.Name());
-	swbuf = "";
-	
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-#endif
-
-	ops = main_new_globals(imodule.Name());
-
-	const char *rework;	// for image size analysis rework.
-
-	(const char *)imodule;	// snap to entry
-	main_set_global_options(ops);
-	mod_type = backend->module_type(imodule.Name());
-	GS_message(("mod_type: %d",mod_type));
-
-#if 0
-	if (mod_type == BOOK_TYPE) {
-		keytext = strdup(backend->treekey_get_local_name(
-				settings.book_offset));
-		GS_message((keytext));
-	} else
-		keytext = g_strdup((char*)imodule.KeyText());
-#endif
-
-	buf = g_strdup_printf(HTML_START
-			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-			      "<font face=\"%s\" size=\"%+d\">"
-			      "<font color=\"%s\">"
-			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
-			      "[*%s*]</a></font><br>",
-			      (settings.doublespace ? DOUBLE_SPACE : ""),
-			      settings.bible_bg_color,
-			      settings.bible_text_color,
-			      settings.link_color,
-			      ((mf->old_font) ? mf->old_font : ""),
-			      ((mf->old_font_size)
-			       ? atoi(mf->old_font_size) + settings.base_font_size
-			       : settings.base_font_size),
-			      settings.bible_verse_num_color,
-			      imodule.Description(),
-			      imodule.Name(),
-			      imodule.Name());
-	swbuf.append(buf);
-	g_free(buf);
-
-	// we will use the module cache for regular commentaries,
-	// which navigate/change a lot, whereas pers.comms, lexdicts,
-	// and genbooks still do fresh access every time -- the nature
-	// of those modules' use won't buy much with a module cache.
-
-	// there is some unfortunate but unavoidable code duplication
-	// for handling potential clearing of images, due to the
-	// difference in how modules are being accessed.
-
-	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
-		VerseKey *key = (VerseKey *)(SWKey *)imodule;
-		int curTestament = key->Testament();
-		uint16_t cache_flags = ConstructFlags(ops);
-		const char *ModuleName = imodule.Name();
-
-		ModuleCache::CacheVerse& cVerse = ModuleMap
-		    [ModuleName]
-		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
-		    [key->Chapter()]
-		    [key->Verse()];
-
-		// use the module cache rather than re-accessing Sword.
-		if (!cVerse.CacheIsValid(cache_flags)) {
-			rework = (const char *)imodule;
-
-			if (ops->image_content == 0)
-				ClearImages((gchar *)rework);
-			else if ((ops->image_content == -1) &&	// "unknown"
-				 (strcasestr(rework, "<img ") != NULL)) {
-				ops->image_content = 1;		// now known.
-				main_save_module_options(imodule.Name(),
-							 "Image Content", 1);
-			}
-			
-			cVerse.SetText(rework, cache_flags);
-		} else
-			rework = cVerse.GetText();
-
-	} else {
-
-		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
-		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-			rework = (const char *)(const char *)imodule.getRawEntry();
-		else if (!strcmp(imodule.Name(), "ISBE"))
-			rework = (const char *)(const char *)imodule.StripText();
-		else
-			rework = (const char *)imodule;
-
-		if (ops->image_content == 0)
-			ClearImages((gchar *)rework);
-		else if ((ops->image_content == -1) &&	// "unknown"
-			 (strcasestr(rework, "<img ") != NULL)) {
-			ops->image_content = 1;		// now known.
-			main_save_module_options(imodule.Name(),
-						 "Image Content", 1);
-		}
-	}
-
-	swbuf.append(settings.imageresize
-		     ? AnalyzeForImageSize(rework,
-					   GDK_WINDOW(gtkText->window),
-					   mod_type)
-		     : rework /* left as-is */);
-
-	swbuf.append("</font></body></html>");
-
-	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
-	
-	free_font(mf);
-	mf = NULL;
-	g_free(ops);
-	ops = NULL;
-#if 0
-	if (keytext)
-		g_free(keytext);
-#endif
-}
-
 
 //
 // utility function for block_render() below.
@@ -809,6 +674,146 @@ set_morph_order(SWModule& imodule)
 		if (f)
 			f->setMorphFirst();
 	}
+}
+
+//
+// general display of entries: commentary, genbook, lexdict
+//
+char
+GTKEntryDisp::Display(SWModule &imodule)
+{
+	gchar *buf;
+	gint mod_type;
+	mf = get_font(imodule.Name());
+	swbuf = "";
+	
+#ifdef USE_GTKMOZEMBED
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+#endif
+
+	ops = main_new_globals(imodule.Name());
+
+	const char *rework;	// for image size analysis rework.
+
+	(const char *)imodule;	// snap to entry
+	main_set_global_options(ops);
+	mod_type = backend->module_type(imodule.Name());
+	GS_message(("mod_type: %d",mod_type));
+
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
+	if (strongs_and_morph)
+		set_morph_order(imodule);
+
+	buf = g_strdup_printf(HTML_START
+			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+			      "<font face=\"%s\" size=\"%+d\">"
+			      "<font color=\"%s\">"
+			      "<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
+			      "[*%s*]</a></font><br>",
+			      (strongs_and_morph		// both
+			       ? CSS_BLOCK_BOTH
+			       : (strongs_or_morph		// either
+				  ? CSS_BLOCK_ONE
+				  : (settings.doublespace	// neither
+				     ? DOUBLE_SPACE
+				     : ""))),
+			      settings.bible_bg_color,
+			      settings.bible_text_color,
+			      settings.link_color,
+			      ((mf->old_font) ? mf->old_font : ""),
+			      ((mf->old_font_size)
+			       ? atoi(mf->old_font_size) + settings.base_font_size
+			       : settings.base_font_size),
+			      settings.bible_verse_num_color,
+			      imodule.Description(),
+			      imodule.Name(),
+			      imodule.Name());
+	swbuf.append(buf);
+	g_free(buf);
+
+	// we will use the module cache for regular commentaries,
+	// which navigate/change a lot, whereas pers.comms, lexdicts,
+	// and genbooks still do fresh access every time -- the nature
+	// of those modules' use won't buy much with a module cache.
+
+	// there is some unfortunate but unavoidable code duplication
+	// for handling potential clearing of images, due to the
+	// difference in how modules are being accessed.
+
+	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
+		VerseKey *key = (VerseKey *)(SWKey *)imodule;
+		int curTestament = key->Testament();
+		uint16_t cache_flags = ConstructFlags(ops);
+		const char *ModuleName = imodule.Name();
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			rework = (strongs_or_morph
+				  ? block_render((const char *)imodule.RenderText())
+				  : (const char *)imodule.RenderText());
+
+			if (ops->image_content == 0)
+				ClearImages((gchar *)rework);
+			else if ((ops->image_content == -1) &&	// "unknown"
+				 (strcasestr(rework, "<img ") != NULL)) {
+				ops->image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
+
+	} else {
+
+		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
+		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
+			rework = (strongs_or_morph
+				  ? block_render((const char *)*imodule.getRawEntry())
+				  : (const char *)*imodule.getRawEntry());
+		else if (!strcmp(imodule.Name(), "ISBE"))
+			rework = (strongs_or_morph
+				  ? block_render((const char *)*imodule.StripText())
+				  : (const char *)*imodule.StripText());
+		else
+			rework = (strongs_or_morph
+				  ? block_render((const char *)imodule.RenderText())
+				  : (const char *)imodule.RenderText());
+
+		if (ops->image_content == 0)
+			ClearImages((gchar *)rework);
+		else if ((ops->image_content == -1) &&	// "unknown"
+			 (strcasestr(rework, "<img ") != NULL)) {
+			ops->image_content = 1;		// now known.
+			main_save_module_options(imodule.Name(),
+						 "Image Content", 1);
+		}
+	}
+
+	swbuf.append(settings.imageresize
+		     ? AnalyzeForImageSize(rework,
+					   GDK_WINDOW(gtkText->window),
+					   mod_type)
+		     : rework /* left as-is */);
+
+	swbuf.append("</font></body></html>");
+
+	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
+	
+	free_font(mf);
+	mf = NULL;
+	g_free(ops);
+	ops = NULL;
 }
 
 void
@@ -1668,9 +1673,6 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 
 char DialogEntryDisp::Display(SWModule &imodule)
 {
-#if 0
-	gchar *keytext = NULL;
-#endif
 	SWBuf swbuf = "";
 	char *buf;
 	int curPos = 0;
@@ -1682,14 +1684,6 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	mod_type = backend->module_type(imodule.Name());
-
-#if 0
-	if (mod_type == BOOK_TYPE) {
-		keytext = strdup(be->treekey_get_local_name(d->offset));
-		GS_message((keytext));
-	} else
-		keytext = g_strdup((char*)imodule.KeyText());
-#endif
 
 	buf = g_strdup_printf(HTML_START
 			      "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -1775,10 +1769,6 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	mf = NULL;
 	g_free(ops);
 	ops = NULL;
-#if 0
-	if (keytext)
-		g_free(keytext);
-#endif
 }
 
 
