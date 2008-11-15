@@ -758,8 +758,8 @@ GTKEntryDisp::Display(SWModule &imodule)
 		// use the module cache rather than re-accessing Sword.
 		if (!cVerse.CacheIsValid(cache_flags)) {
 			rework = (strongs_or_morph
-				  ? block_render((const char *)imodule.RenderText())
-				  : (const char *)imodule.RenderText());
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
 
 			if (ops->image_content == 0)
 				ClearImages((gchar *)rework);
@@ -779,16 +779,12 @@ GTKEntryDisp::Display(SWModule &imodule)
 		if ((backend->module_type(imodule.Name()) == PERCOM_TYPE) ||
 		    (backend->module_type(imodule.Name()) == PRAYERLIST_TYPE))
 			rework = (strongs_or_morph
-				  ? block_render((const char *)*imodule.getRawEntry())
-				  : (const char *)*imodule.getRawEntry());
-		else if (!strcmp(imodule.Name(), "ISBE"))
-			rework = (strongs_or_morph
-				  ? block_render((const char *)*imodule.StripText())
-				  : (const char *)*imodule.StripText());
+				  ? block_render(imodule.getRawEntry())
+				  : imodule.getRawEntry());
 		else
 			rework = (strongs_or_morph
-				  ? block_render((const char *)imodule.RenderText())
-				  : (const char *)imodule.RenderText());
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
 
 		if (ops->image_content == 0)
 			ClearImages((gchar *)rework);
@@ -1739,9 +1735,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 		if ((be->module_type(imodule.Name()) == PERCOM_TYPE) ||
 		    (be->module_type(imodule.Name()) == PRAYERLIST_TYPE))
-			rework = (const char *)(const char *)imodule.getRawEntry();
-		else if (!strcmp(imodule.Name(), "ISBE"))
-			rework = (const char *)(const char *)imodule.StripText();
+			rework = imodule.getRawEntry();
 		else
 			rework = (const char *)imodule;
 
