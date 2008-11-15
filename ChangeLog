@@ -2,6 +2,8 @@
 
 	* Add the repository identifier to the install panel of mod.mgr.
 	* Integrate blocked strongs/morph into GTKEntryDisp (cf. Didache).
+	* Tighten up module usage in display.cc re: typecasts and so forth.
+	* No more special case for ISBE.
 
 2008-11-12  karl <charcoal@users.sf.net>
 
