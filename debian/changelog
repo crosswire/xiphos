@@ -1,3 +1,18 @@
+gnomesword (2.4.1-2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * 2.4.1+svn (2008-11-19)
+  * Add support for xulrunner-1.9
+
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Wed, 19 Nov 2008 12:00:00 +0200
+
+gnomesword (2.4.1-1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * 2.4.1 release (2008-11-05)
+
+ -- The Gnomesword Developer Team <gnomesword-developers@lists.sourceforge.net>  Sat, 05 Nov 2008 12:00:00 +0200
+
 gnomesword (2.4.0-1) unstable; urgency=low
 
   * Non-maintainer upload.
