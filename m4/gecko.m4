@@ -402,8 +402,8 @@ if test "${gecko_cv_gecko}" = "libxul-embedding"; then
         CXXFLAGS="$CXXFLAGS $_GECKO_EXTRA_CXXFLAGS $_GECKO_CFLAGS $($PKG_CONFIG --define-variable=includetype=unstable --cflags-only-other ${gecko_cv_gecko})"
         LIBS="$LIBS $($PKG_CONFIG --libs ${gecko_cv_gecko}) -ldl"
 else
-        CPPFLAGS="$CPPFLAGS $_GECKO_EXTRA_CPPFLAGS $_GECKO_CFLAGS $($PKG_CONFIG --cflags-only-I ${gecko_cv_gecko}-xapcom)"
-        CXXFLAGS="$CXXFLAGS $_GECKO_EXTRA_CXXFLAGS $_GECKO_CFLAGS $($PKG_CONFIG --cflags-only-other ${gecko_cv_gecko}-xapcom)"
+        CPPFLAGS="$CPPFLAGS $_GECKO_EXTRA_CPPFLAGS $_GECKO_CFLAGS $($PKG_CONFIG --cflags-only-I ${gecko_cv_gecko}-xpcom)"
+        CXXFLAGS="$CXXFLAGS $_GECKO_EXTRA_CXXFLAGS $_GECKO_CFLAGS $($PKG_CONFIG --cflags-only-other ${gecko_cv_gecko}-xpcom)"
         LIBS="$LIBS $($PKG_CONFIG --libs ${gecko_cv_gecko}-xpcom)"
 fi
 if test -n "$_GECKO_HOME"; then

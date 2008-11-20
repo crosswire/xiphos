@@ -165,9 +165,9 @@ if test "x$cygwin" = xno; then
 	esac
 	  
 	if test "$GECKO" = "firefox"; then
-	  gecko_cv_gecko=firefox-xpcom
+	  gecko_cv_gecko=firefox
 	elif test "$GECKO" = "xulrunner"; then
-	  gecko_cv_gecko=xulrunner-xpcom
+	  gecko_cv_gecko=xulrunner
 	fi
 
 dnl	PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
