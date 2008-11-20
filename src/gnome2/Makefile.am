@@ -73,7 +73,7 @@ gnomesword2_SOURCES =  \
 
 if USE_GTKMOZEMBED
     LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
-    gnomesword2_LDFLAGS = $(AM_LDFLAGS)
+    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
 else
     LIB_GECKO=
 endif 
