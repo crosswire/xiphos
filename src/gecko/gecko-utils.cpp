@@ -27,9 +27,6 @@
 #include <gconf/gconf-client.h>
 
 #include <nsStringAPI.h>
-#ifdef XPCOM_GLUE
-#include <gtkmozembed_glue.cpp>
-#endif /* XPCOM_GLUE */
 
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
@@ -217,48 +214,19 @@ gecko_init (void)
 #ifdef HAVE_GECKO_1_9
 	NS_LogInit ();
 #endif
-
-	nsresult rv;
-#ifdef XPCOM_GLUE
-	    static const GREVersionRange greVersion = {
-	    "1.9a", PR_TRUE,
-	    "2", PR_TRUE
-	    };
-     char xpcomLocation[4096];
-     rv = GRE_GetGREPathWithProperties(&greVersion, 1, nsnull, 0, xpcomLocation, 4096);
-     NS_ENSURE_SUCCESS (rv, rv);
-
-	    // Startup the XPCOM Glue that links us up with XPCOM.
-	    rv = XPCOMGlueStartup(xpcomLocation);
-     NS_ENSURE_SUCCESS (rv, rv);
-
-	    rv = GTKEmbedGlueStartup();
-     NS_ENSURE_SUCCESS (rv, rv);
-
-	    rv = GTKEmbedGlueStartupInternal();
-     NS_ENSURE_SUCCESS (rv, rv);
-
-	    char *lastSlash = strrchr(xpcomLocation, '/');
-     if (lastSlash)
-	       *lastSlash = '\0';
-
-	    gtk_moz_embed_set_path(xpcomLocation);
-#else
-
 	
 #ifdef HAVE_GECKO_1_9
 	gtk_moz_embed_set_path (GECKO_HOME);
 #else
 	gtk_moz_embed_set_comp_path (GECKO_HOME);
 #endif
-#endif // XPCOM_GLUE
 
 	gtk_moz_embed_push_startup ();
 
 #ifdef USE_GTKUPRINT
 	gecko_register_printing ();
 #endif
-
+	nsresult rv;
 	nsCOMPtr<nsIPrefService> prefService (do_GetService (NS_PREFSERVICE_CONTRACTID, &rv));
 	NS_ENSURE_SUCCESS (rv, FALSE);
 

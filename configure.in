@@ -158,30 +158,20 @@ if test "x$cygwin" = xno; then
 	AC_SUBST([GECKO_GLUE_LIBS])
 
 	case "$GECKO" in
+	 libxul*) gecko_min_version=1.8 ;;
+	 xulrunner) gecko_min_version=1.8 ;;
 	 *firefox) gecko_min_version=1.5 ;;
-	 libxul-embedding) gecko_min_version=1.9 ;;
-	 xulrunner) gecko_min_version=1.9 ;;
 	 *) AC_MSG_ERROR([$gecko_cv_gecko is not supported])
 	esac
 	  
 	if test "$GECKO" = "firefox"; then
-	  gecko_cv_gecko=firefox
+	  gecko_cv_gecko=firefox-xpcom
 	elif test "$GECKO" = "xulrunner"; then
-	  gecko_cv_gecko=xulrunner
+	  gecko_cv_gecko=xulrunner-xpcom
 	fi
 
-dnl	PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
-	if test "$GECKO" = "libxul-embedding"; then
-       	   PKG_CHECK_MODULES([GECKO_COMPONENT],[libxul-embedding $gecko_cv_extra_pkg_dependencies])
-       	   GECKO_COMPONENT_CFLAGS="$GECKO_COMPONENT_CFLAGS `$PKG_CONFIG --cflags ${gecko_cv_gecko}` `$PKG_CONFIG --define-variable=includetype=unstable --cflags ${gecko_cv_gecko}`"
-	else
-	   PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko}-xpcom >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
-	fi
-GECKO_CHECK_HEADERS
-GECKO_COMPILE_IFELSE
-GECKO_RUN_IFELSE
-dnl GECKO_XPCOM_PROGRAM
-GECKO_CHECK_CONTRACTIDS
+	PKG_CHECK_MODULES([GECKO_COMPONENT],[${gecko_cv_gecko} >= $gecko_min_version $gecko_cv_extra_pkg_dependencies])
+
 	AC_DEFINE(USE_GTKMOZEMBED, 1, [Define if you want to use gtkmozembed])
 	AM_CONDITIONAL(USE_GTKMOZEMBED, true)
 	gecko=yes  
@@ -224,9 +214,9 @@ fi
 AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
 AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
 
- AC_SUBST(GECKO_HOME)
- AC_SUBST(GECKO_COMPONENT_LIBS)
- AC_SUBST(GECKO_COMPONENT_CFLAGS)
+AC_SUBST(GECKO_HOME)
+AC_SUBST(GECKO_COMPONENT_LIBS)
+AC_SUBST(GECKO_COMPONENT_CFLAGS)
 GECKO_DEFINES
 AM_CONDITIONAL([WITH_GECKO_ENGINE], [test "$with_engine" = "mozilla"])
 AM_CONDITIONAL([HAVE_XULRUNNER],[test "$gecko_cv_gecko" = "xulrunner"])
