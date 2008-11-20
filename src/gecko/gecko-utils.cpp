@@ -27,7 +27,9 @@
 #include <gconf/gconf-client.h>
 
 #include <nsStringAPI.h>
+#ifdef XPCOM_GLUE
 #include <gtkmozembed_glue.cpp>
+#endif /* XPCOM_GLUE */
 
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
