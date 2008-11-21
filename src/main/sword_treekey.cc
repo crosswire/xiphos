@@ -391,7 +391,7 @@ gint main_prayer_list_new (gchar * list_name)
 	path = g_strdup_printf ("%s/.sword/modules/genbook/rawgenbook/%s",
 				settings.homedir, list_name);
 	if (access (path, F_OK) == -1) {
-		if ((mkdir (path, S_IRWXU)) != 0) {
+		if ((Mkdir(path, S_IRWXU)) != 0) {
 			printf (_("can not create path\n"));
 		}
 	} else {
