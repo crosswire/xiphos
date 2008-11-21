@@ -269,13 +269,13 @@ prayerlist_fundamentals(gchar *summary)
 	} else {
 		g_string_printf(path, "%s/.sword/modules/genbook",
 				settings.homedir);
-		mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+		Mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
 		g_string_append(path, "/rawgenbook");
-		mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
+		Mkdir(path->str, S_IRWXU);	// ignore return value -- harmless
 
 		g_string_append(path, "/");
 		g_string_append(path, info->text1);
-		if ((mkdir(path->str, S_IRWXU)) != 0) {	// this one matters.
+		if ((Mkdir(path->str, S_IRWXU)) != 0) {	// this one matters.
 			char *msg = g_strdup_printf
 			    (_("GnomeSword cannot create module's path:\n%s"),
 			     path->str);
