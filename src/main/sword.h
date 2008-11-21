@@ -142,10 +142,10 @@ void main_init_language_map(void);
 # define GS_error(x)
 #endif
 
-#ifdef MINGW
+#ifdef WIN32
 #define	Mkdir(d,m)	mkdir(d)
 #else
 #define	Mkdir(d,m)	mkdir(d,m)
-#endif /* MINGW */
+#endif /* WIN32 */
 
 #endif
