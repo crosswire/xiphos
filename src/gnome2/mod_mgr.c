@@ -350,7 +350,7 @@ remove_install_modules(GList * modules,
 			GS_print(("archive %s in %s\n", buf, destination));
 			sprintf(dir, "%s/%s", settings.homedir, ZIP_DIR);
 			if ((access(dir, F_OK) == -1) &&
-			    (mkdir(dir, S_IRWXU) != 0)) {
+			    (Mkdir(dir, S_IRWXU) != 0)) {
 				char msg[300];
 				sprintf(msg, _("`mkdir %s' failed:\n%s."),
 					dir, strerror(errno));
