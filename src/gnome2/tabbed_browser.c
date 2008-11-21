@@ -303,7 +303,7 @@ void gui_save_tabs(const gchar *filename)
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
 	if (access(tabs_dir, F_OK) == -1) {
-		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
+		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
 			gui_generic_warning("Can't create tabs dir.");
 			return;
 		}

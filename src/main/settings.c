@@ -128,7 +128,7 @@ int settings_init(int new_configs, int new_bookmarks)
 				/* necessarily giving up. */
 				gtk_exit(1);
 			}
-		} else if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
+		} else if ((Mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			char msg[300];
 			sprintf(msg, _("GnomeSword can not create  .gnomesword:\n%s\n\nGnomeSword cannot continue."),
 				strerror(errno));
@@ -149,7 +149,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if .sword does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
 	if (access(sword_dir, F_OK) == -1) {
-		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_generic_warning(_("can not create  .sword"));
 		} 
 	}
@@ -157,7 +157,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if .sword/mods.d does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/mods.d");
 	if (access(sword_dir, F_OK) == -1) {
-		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_generic_warning(_("can not create  .sword/mods.d"));
 		} 
 	}	
@@ -165,7 +165,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if .sword/modules does not exist create it */
 	sword_dir = g_strdup_printf("%s/%s", settings.homedir,".sword/modules");
 	if (access(sword_dir, F_OK) == -1) {
-		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+		if ((Mkdir(sword_dir, S_IRWXU)) != 0) {
 			gui_generic_warning(_("can not create  .sword/modules"));
 		} 
 	}
@@ -285,7 +285,7 @@ int init_bookmarks(int new_bookmarks)
 
 	/* if .gnomesword-2.0/bookmarks does not exist create it */
 	if (access(settings.swbmDir, F_OK) == -1) {
-		if ((mkdir(settings.swbmDir, S_IRWXU)) == -1) {
+		if ((Mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
 			return 0;
 		}
@@ -296,7 +296,7 @@ int init_bookmarks(int new_bookmarks)
 				 strlen("/removed") + 2);
 	sprintf(removed, "%s/%s", settings.swbmDir, "removed");
 	if (access(removed, F_OK) == -1) {
-		if ((mkdir(removed, S_IRWXU)) == -1) {
+		if ((Mkdir(removed, S_IRWXU)) == -1) {
 			g_warning("can't create removed dir");
 			//return 0;
 		}
