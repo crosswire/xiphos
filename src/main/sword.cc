@@ -531,8 +531,8 @@ ModLanguageMap languageMap;
 void main_init_language_map() {
 	gchar *language_file;
 	FILE *language;
-	char *s, *end, *abbrev, *name, *newline;
-	char *mapspace;
+	gchar *s, *end, *abbrev, *name, *newline;
+	gchar *mapspace;
 	size_t length;
 	
 	if ((language_file = gui_general_user_file("languages", FALSE)) == NULL) {
@@ -549,12 +549,20 @@ void main_init_language_map() {
 	}
 	(void) fseek(language, 0L, SEEK_END);
 	length = ftell(language);
-	if ((mapspace = (char *)mmap(NULL, length, (PROT_READ|PROT_WRITE),
-				     MAP_PRIVATE, fileno(language), 0))
-	    == NULL) {
-		gui_generic_warning
-		    (_("GnomeSword cannot map the\nlanguage abbreviation file."));
+	rewind(language);
+
+	if ((length == 0) ||
+	    (mapspace = (gchar*)g_malloc(length+2)) == NULL) {
 		fclose(language);
+		gui_generic_warning
+		    (_("GnomeSword cannot allocate space\nfor language abbreviations."));
+		return;
+	}
+	if (fread(mapspace, 1, length, language) != length) {
+		fclose(language);
+		g_free(mapspace);
+		gui_generic_warning
+		    (_("GnomeSword cannot read the\nlanguage abbreviation file."));
 		return;
 	}
 	fclose(language);		// safe to do even while mmap is active.
@@ -588,7 +596,7 @@ void main_init_language_map() {
 		s = newline;
 	}
 
-	munmap(mapspace, length);
+	g_free(mapspace);
 }
 
 const char *main_get_language_map(const char *language) {
