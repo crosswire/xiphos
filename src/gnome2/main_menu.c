@@ -542,7 +542,7 @@ on_save_tabs(GtkMenuItem * menuitem,
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
 	if (access(tabs_dir, F_OK) == -1) {
-		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
+		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
@@ -594,7 +594,7 @@ on_load_tabs(GtkMenuItem * menuitem,
 	tabs_dir = g_strdup_printf("%s/tabs/",settings.gSwordDir);
 	
 	if (access(tabs_dir, F_OK) == -1) {
-		if ((mkdir(tabs_dir, S_IRWXU)) == -1) {
+		if ((Mkdir(tabs_dir, S_IRWXU)) == -1) {
 			fprintf(stderr, "can't create tabs dir");
 			return;
 		}
