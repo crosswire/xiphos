@@ -941,61 +941,44 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
  *   gchar
  */
 
-gchar * ncr_to_utf8(gchar * text)
+gchar *
+ncr_to_utf8(gchar * text)
 {
 	gchar *ncr;
 	gunichar unicode;
 	gchar utf8[7];
-	gchar *result = NULL;
-	gchar buf[strlen(text)+2];
-	size_t count;
 	guint len;
-	GString *newtext;
-	
-	newtext = g_string_new(NULL);
-	// add an extra char before text
-	// to avoid a delimiter as first char
-	strcpy(buf, " ");
-	strcat(buf, text);
-	// search for "&"
-	result = strtok(buf, "&");
-	newtext = g_string_append (newtext, result + 1);
+	GString *newtext = g_string_new(NULL);
 
-	while( result != NULL ) {
-       	result = strtok( NULL, "&" );
-		GS_message(("result: %s",result));
-       	if (result != NULL) {
-       		// search for "#"
-       		if ( strcspn(result, "#") == 0){
-				// converts ncr value (string) to unicode (guint32)
-   		       	count = strcspn(result + 1, ";"); 
- 		      	ncr=g_strndup(result + 1, count );
- 		     	unicode = 0;
-				for (; *ncr != '\0' && *ncr >= '0' && *ncr <='9'; ncr++) 
- 				  	unicode = (unicode * 10) + (*ncr - '0');
-  				g_free(ncr - count);
-				//  converts unicode char to utf8
-  		  		if (g_unichar_validate(unicode)){
-  		  			len = g_unichar_to_utf8(unicode, utf8);
-  		  			utf8[len] = '\0';
-  		  			newtext = g_string_append (newtext, utf8);
-  		  		}
-  		  		else {
-  		  			g_string_append_printf(newtext,"&#%d;",unicode);
-					GS_message(("src/gnome2/utilities.c ncr2utf8, invalid unicode char &#%d;\n", unicode));
-				}
-  		  		// remaining text added
-  		  		if (strlen(result)>count)
-  		  			g_string_append(newtext, result+count+2);
-  			}
-  			else {
-				g_string_append_c(newtext, '&'); /* puts the '&' back for other escape codes */
-  				g_string_append(newtext, result);
-			}
-  		}
-   }
+	for (ncr = strstr(text, "&#");
+	     ncr;
+	     text = ncr, ncr = strstr(text, "&#")) {
+		newtext = g_string_append (newtext, ncr - text);
+
+		// convert ncr value (string) to unicode (guint32)
+		unicode = 0;
+		for (ncr = ncr + 2;			// just past "&#"
+		     (*ncr != '\0') && (*ncr >= '0') && (*ncr <='9');
+		     ncr++) 
+			unicode = (unicode * 10) + ((*ncr) - '0');
+
+		// converts unicode char to utf8
+		// need proper terminator + validation of content
+		if ((*ncr == ';') && g_unichar_validate(unicode)) {
+			ncr++;				// step past ';'
+			len = g_unichar_to_utf8(unicode, utf8);
+			utf8[len] = '\0';
+			newtext = g_string_append(newtext, utf8);
+		} else {
+			g_string_append_printf(newtext, "&#%d;", unicode);
+			GS_message(("ncr2utf8: invalid unicode &#%d;\n", unicode));
+		}
+	}
+
+	if (*text != '\0')		// residual text?  paste it on.
+		newtext = g_string_append(newtext, text);
+
 	return g_string_free (newtext, FALSE);
-
 }
 
 //
