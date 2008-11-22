@@ -429,7 +429,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		
 		GS_message(("src/gnome2/html.c: buf=>%s<",buf));
 		if(buf == NULL) return;
-		key = g_strdelimit(buf, ".,\"<>;:?", ' ');
+		key = g_strdelimit(buf, "&.,\"<>;:?", ' ');
 		key = g_strstrip(key);
 		len = strlen(key);
 		if (key[len - 1] == 's' || key[len - 1] == 'd')

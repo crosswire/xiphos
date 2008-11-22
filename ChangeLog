@@ -5,6 +5,8 @@
 	* remove wait(2) from url.cc: use pclose() the proper way.
 	* add #ifdef WIN32 sensitivity: ReadAloud() matters.
 	* add #ifdef WIN32 sensitivity: HOME (linux) -vs- APPDATA (win32)
+	* replace utilitics.c:ncr_to_utf8 with working code.
+	* add '&' to html.c's g_strdelimit() string.
 
 2008-11-13  karl <charcoal@users.sf.net>
 
