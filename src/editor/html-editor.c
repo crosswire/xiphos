@@ -226,7 +226,7 @@ open_dialog (EDITOR * e)
 			GTK_FILE_CHOOSER (dialog), filename);
 	else {
 		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_get_home_dir ());
+			GTK_FILE_CHOOSER (dialog), getenv(HOMEVAR));
 		gtk_file_chooser_set_current_name (
 			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
 	}
@@ -273,7 +273,7 @@ save_dialog (GtkhtmlEditor *editor)
 			GTK_FILE_CHOOSER (dialog), filename);
 	else {
 		gtk_file_chooser_set_current_folder (
-			GTK_FILE_CHOOSER (dialog), g_get_home_dir ());
+			GTK_FILE_CHOOSER (dialog), getenv(HOMEVAR));
 		gtk_file_chooser_set_current_name (
 			GTK_FILE_CHOOSER (dialog), _("Untitled document"));
 	}
