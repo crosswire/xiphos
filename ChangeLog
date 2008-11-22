@@ -1,9 +1,10 @@
 2008-11-21  karl <charcoal@users.sf.net>
 
 	* replace mmap() with stdio calls in main_init_language_map().
-	* add #ifdef WIN32 sensitivity for mkdir() with 1 or 2 args.
+	* add #ifdef WIN32 sensitivity: mkdir() with 1 or 2 args.
 	* remove wait(2) from url.cc: use pclose() the proper way.
-	* add #ifdef WIN32 sensitivity to ReadAloud() matters.
+	* add #ifdef WIN32 sensitivity: ReadAloud() matters.
+	* add #ifdef WIN32 sensitivity: HOME (linux) -vs- APPDATA (win32)
 
 2008-11-13  karl <charcoal@users.sf.net>
 
