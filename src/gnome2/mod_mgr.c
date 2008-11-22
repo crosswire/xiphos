@@ -2678,14 +2678,9 @@ setup_ui_labels()
 
 	GString *str = g_string_new(NULL);
 	gchar *path = NULL;
-	gchar *homedir = NULL;
 		
-	if ((homedir = getenv("HOME")) == NULL) {
-		
-		
-	}	
 	have_changes = FALSE;
-	g_string_printf(str, "%s/%s", homedir,
+	g_string_printf(str, "%s/%s", settings.homedir,
 			".sword/InstallMgr/InstallMgr.conf");
 	if (!mod_mgr_check_for_file(str->str)) {
 		have_configs = FALSE;
@@ -2693,7 +2688,7 @@ setup_ui_labels()
 	}
 	have_configs = TRUE;
 	mod_mgr_init(NULL);
-	g_string_printf(str, "%s/%s", homedir, ".sword");
+	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
 	gtk_label_set_text(GTK_LABEL(label_home), str->str);
 
 	path = main_module_mgr_get_path_to_mods();
@@ -2754,7 +2749,6 @@ create_module_manager_dialog(gboolean first_run)
 	GtkWidget *widget;
 	gint index = 0;
 	GString *str = g_string_new(NULL);
-	gchar *homedir = NULL;
 	gchar *path = NULL;
 
 	glade_file = gui_general_user_file ("module-manager.glade", FALSE);

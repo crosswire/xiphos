@@ -112,7 +112,7 @@ void GSStatusReporter::statusUpdate(double dltotal,
 
 
 ModuleManager::ModuleManager() {	
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
 	statusReporter = new GSStatusReporter();
@@ -497,7 +497,7 @@ GList *backend_module_mgr_list_remote_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
 	InstallMgr *inst_mgr = new InstallMgr(baseDir);
@@ -537,7 +537,7 @@ GList *backend_module_mgr_list_local_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;	
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
 	SWConfig *installConf= new SWConfig(confPath.c_str());
@@ -617,7 +617,7 @@ int backend_module_mgr_refresh_remote_source(const char *sourceName)
 void backend_init_module_mgr_config(void)
 {
 	
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -661,7 +661,7 @@ void backend_init_module_mgr_config(void)
 
 void backend_module_mgr_clear_config(void)
 {
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -700,7 +700,7 @@ void backend_module_mgr_add_source(const char * vtype,
 				   const char * source,
 				   const char * directory)
 {
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
@@ -834,7 +834,7 @@ void backend_init_module_mgr(const char *dir,
 		lang="C";
 	set_mod_mgr_locale(lang);
 
-	char *envhomedir = getenv("HOME");
+	char *envhomedir = getenv(HOMEVAR);
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
 
