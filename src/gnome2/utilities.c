@@ -209,7 +209,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	}
 
 	/* try the default */
-	file = g_build_filename (g_get_home_dir (), ".gnomesword", fname, NULL);
+	file = g_build_filename(getenv(HOMEVAR), ".gnomesword", fname, NULL);
 	
 	/* success? */
 	if (g_file_test (file, G_FILE_TEST_EXISTS))
@@ -227,13 +227,13 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 #ifdef MAINTAINER_MODE
 	GS_message(("MAINTAINER_MODE"));
 	/* generally only developers have any use for these */
-	alternative[i++] = g_build_filename ("..", fname, NULL);
-	alternative[i++] = g_build_filename ("ui", fname, NULL);
-	alternative[i++] = g_build_filename ("..", "ui", fname, NULL);
-	alternative[i++] = g_build_filename ("..", "..", "ui", fname, NULL);
+	alternative[i++] = g_build_filename("..", fname, NULL);
+	alternative[i++] = g_build_filename("ui", fname, NULL);
+	alternative[i++] = g_build_filename("..", "ui", fname, NULL);
+	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
 	
 #endif
-	alternative[i++] = g_build_filename (SHARE_DIR, fname, NULL);
+	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
 	
 	/* select one of the alternatives */
@@ -263,7 +263,7 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 
 			/* Make it absolute */
 			cwd = g_get_current_dir();
-			file1 = g_build_filename (cwd, file, NULL);
+			file1 = g_build_filename(cwd, file, NULL);
 			g_free (file);
 			g_free (cwd);
 			file = file1;
