@@ -25,7 +25,6 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>	
 #include <ctype.h>
@@ -247,12 +246,9 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 				g_string_append(cmd, output);
 				gui_generic_warning(cmd->str);
 			}
+			pclose(result);
 		}
 		g_string_free(cmd, TRUE);
-
-		// reap zombies.
-		int state;
-		(void) wait(&state);
 #endif
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
