@@ -144,8 +144,10 @@ void main_init_language_map(void);
 
 #ifdef WIN32
 #define	Mkdir(d,m)	mkdir(d)
+#define	HOMEVAR		"APPDATA"
 #else
 #define	Mkdir(d,m)	mkdir(d,m)
+#define	HOMEVAR		"HOME"
 #endif /* WIN32 */
 
 #endif
