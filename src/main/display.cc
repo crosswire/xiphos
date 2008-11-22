@@ -37,8 +37,10 @@
 #include <ctype.h>
 #include <assert.h>
 
+#ifndef WIN32
 #include <sys/socket.h>
 #include <netinet/in.h>
+#endif /* WIN32 */
 #include <errno.h>
 
 #ifdef USE_GTKMOZEMBED
@@ -1103,6 +1105,7 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 //
 void ReadAloud(unsigned int verse, const char *suppliedtext)
 {
+#ifndef WIN32
 	static int tts_socket = -1;	// no initial connection.
 	static int use_counter = -2;	// to shortcircuit early uses.
 
@@ -1289,6 +1292,7 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 		use_counter++;
 		return;
 	}
+#endif /* WIN32 */
 }
 
 char GTKChapDisp::Display(SWModule &imodule)
