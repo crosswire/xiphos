@@ -103,7 +103,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	}
 
 	/* Get home dir */
-	if ((settings.homedir = getenv("HOME")) == NULL) {
+	if ((settings.homedir = getenv(HOMEVAR)) == NULL) {
 		gui_generic_warning(_("$HOME is not set!"));
 		/* if not found in env exit */
 		exit(0);
