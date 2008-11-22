@@ -2,6 +2,8 @@
 
 	* replace mmap() with stdio calls in main_init_language_map().
 	* add #ifdef WIN32 sensitivity for mkdir() with 1 or 2 args.
+	* remove wait(2) from url.cc: use pclose() the proper way.
+	* add #ifdef WIN32 sensitivity to ReadAloud() matters.
 
 2008-11-13  karl <charcoal@users.sf.net>
 
