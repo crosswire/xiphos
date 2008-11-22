@@ -1,7 +1,7 @@
 2008-11-21  karl <charcoal@users.sf.net>
 
 	* replace mmap() with stdio calls in main_init_language_map().
-	* add #ifdef MINGW sensitivity for mkdir() with 1 or 2 args.
+	* add #ifdef WIN32 sensitivity for mkdir() with 1 or 2 args.
 
 2008-11-13  karl <charcoal@users.sf.net>
 

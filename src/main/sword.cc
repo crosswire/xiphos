@@ -52,8 +52,6 @@ extern "C" {
 #include <time.h>
 #include <dirent.h>
 
-#include <sys/mman.h>
-
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
