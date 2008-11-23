@@ -2268,8 +2268,9 @@ on_button7_clicked(GtkButton * button,
 	GS_DIALOG *dialog;
 	GtkTreeIter iter;
 	GString *str;
-	GList *tmp;
+	GList *tmp, *tmp2;
 	gboolean name_conflict = FALSE;
+	MOD_MGR_SOURCE *mms;
 	
 	if (working) return;
 	working = TRUE;
@@ -2309,9 +2310,10 @@ on_button7_clicked(GtkButton * button,
 		goto out;
 	}
 
-	tmp = mod_mgr_list_remote_sources();
-	while (tmp) {
-		MOD_MGR_SOURCE *mms = tmp->data;
+	for (tmp = tmp2 = mod_mgr_list_remote_sources();
+	     tmp;
+	     tmp = g_list_next(tmp)) {
+		mms = (MOD_MGR_SOURCE *) tmp->data;
 		if (!strcmp(mms->caption, dialog->text1)) {
 			/* this can happen at most once */
 			gui_generic_warning(_("A source by that name already exists."));
@@ -2322,9 +2324,8 @@ on_button7_clicked(GtkButton * button,
 		g_free((gchar*)mms->source);
 		g_free((gchar*)mms->directory);
 		g_free(mms);
-		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);
+	g_list_free(tmp2);
 
 	if (!name_conflict) {
 		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
@@ -2334,6 +2335,23 @@ on_button7_clicked(GtkButton * button,
 				   COLUMN_SOURCE, dialog->text3,
 				   COLUMN_DIRECTORY, dialog->text4, -1);
 		save_sources();
+
+		/* set the new item's index as active */
+		for (test = 0, tmp = tmp2 = mod_mgr_list_remote_sources();
+		     tmp;
+		     tmp = g_list_next(tmp), ++test) {
+			mms = (MOD_MGR_SOURCE *) tmp->data;
+			if (!strcmp(mms->caption, dialog->text1)) {
+				gtk_combo_box_set_active(
+				    GTK_COMBO_BOX(combo_entry2), test);
+			}
+			g_free((gchar*)mms->type);
+			g_free((gchar*)mms->caption);
+			g_free((gchar*)mms->source);
+			g_free((gchar*)mms->directory);
+			g_free(mms);
+		}
+		g_list_free(tmp2);
 	}
 	
 	if (remote_source)
@@ -2410,7 +2428,7 @@ on_button8_clicked(GtkButton * button,
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = _("Bookmark");
+	yes_no_dialog->title = _("Delete a remote source");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			_("Remove the selected source"),
@@ -2423,6 +2441,7 @@ on_button8_clicked(GtkButton * button,
 	if (test == GS_YES) {
 		gtk_list_store_remove(GTK_LIST_STORE(model), &selected);
 		save_sources();
+		gtk_combo_box_set_active(GTK_COMBO_BOX(combo_entry2), 0);
 	}
 	g_free(yes_no_dialog);
 	g_free(type);
