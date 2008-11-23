@@ -953,7 +953,7 @@ ncr_to_utf8(gchar * text)
 	for (ncr = strstr(text, "&#");
 	     ncr;
 	     text = ncr, ncr = strstr(text, "&#")) {
-		newtext = g_string_append (newtext, ncr - text);
+		newtext = g_string_append_len(newtext, text, ncr - text);
 
 		// convert ncr value (string) to unicode (guint32)
 		unicode = 0;
@@ -978,7 +978,7 @@ ncr_to_utf8(gchar * text)
 	if (*text != '\0')		// residual text?  paste it on.
 		newtext = g_string_append(newtext, text);
 
-	return g_string_free (newtext, FALSE);
+	return g_string_free(newtext, FALSE);
 }
 
 //
