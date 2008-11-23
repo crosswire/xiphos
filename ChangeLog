@@ -1,3 +1,8 @@
+2008-11-22  karl <charcoal@users.sf.net>
+
+	* fix len append bug in ncr_to_utf8.
+	* auto-set newly-created source as current.
+
 2008-11-21  karl <charcoal@users.sf.net>
 
 	* replace mmap() with stdio calls in main_init_language_map().
