@@ -59,6 +59,15 @@ int main(int argc, char *argv[])
 	int newbookmarks = FALSE;
 	int have_sword_url = FALSE;
 
+#ifdef WIN32
+        if (!getenv("SWORD_PATH"))
+		putenv(g_strdup_printf("SWORD_PATH=%s/.sword",
+				       getenv("APPDATA")));
+	putenv(g_strdup_printf("HOME=%s", getenv("APPDATA")));
+	/* we need an idea of $HOME that's convenient. */
+	/* this gives us linux-equivalent semantics. */
+#endif /* WIN32 */
+
 	gui_init(argc, argv);
 	
 	if (argc > 2) {
