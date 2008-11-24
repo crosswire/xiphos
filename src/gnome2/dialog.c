@@ -104,12 +104,12 @@ static void get_entry_text(GS_DIALOG * info)
 
 /******************************************************************************
  * Name
- *   on_dialog1_response
+ *   on_dialog_response
  *
  * Synopsis
  *   #include "gui/dialog.h"
  *
- *   void on_dialog1_response(GtkDialog * dialog, gint response_id,
+ *   void on_dialog_response(GtkDialog * dialog, gint response_id,
  *							GS_DIALOG * info)
  *
  * Description
@@ -219,11 +219,16 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area2),
 				  GTK_BUTTONBOX_END);
 
-	if (info->no_save)
+	if (info->ok)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-                                             _("Close without Saving"),
-                                             GTK_RESPONSE_NO);
-
+				      GTK_STOCK_OK, GTK_RESPONSE_OK);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+				      GTK_STOCK_YES, GTK_RESPONSE_YES);
+	if (info->save)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
+                                             GTK_STOCK_SAVE,
+                                             GTK_RESPONSE_YES);
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_NO, GTK_RESPONSE_NO);
@@ -231,25 +236,14 @@ static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
 				      GTK_STOCK_CANCEL,
 				      GTK_RESPONSE_CANCEL);
-	if (info->yes)
+	if (info->no_save)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      GTK_STOCK_YES, GTK_RESPONSE_YES);
-
-	if (info->ok)
-		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-				      GTK_STOCK_OK, GTK_RESPONSE_OK);
-	
-
-	if (info->save)
-		gtk_dialog_add_button(GTK_DIALOG(dialog_alert),
-                                             GTK_STOCK_SAVE,
-                                             GTK_RESPONSE_YES);
-
+                                             _("Close without Saving"),
+                                             GTK_RESPONSE_NO);
 
 	g_signal_connect((gpointer) dialog_alert, "response",
 			 G_CALLBACK(on_dialog_response), info);
 
-	//gtk_widget_show_all(dialog_alert);
 	return dialog_alert;
 }
 
@@ -760,20 +754,20 @@ GS_DIALOG *gui_new_dialog(void)
 void gui_generic_warning(char *message)
 {
 	GS_DIALOG *dialog;
-	GString *dialog_text = g_string_new(NULL);
+	gchar *dialog_text;
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
 	
-	g_string_printf(dialog_text, "<span weight=\"bold\">%s</span>",
-			_("GnomeSword:"));
-	dialog->label_top = dialog_text->str;
+	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>",
+				      _("GnomeSword:"));
+	dialog->label_top = dialog_text;
 	dialog->label2 = message;
 	dialog->ok = TRUE;
 
 	gui_alert_dialog(dialog);
 	g_free(dialog);
-	g_string_free(dialog_text, TRUE);
+	g_free(dialog_text);
 }
 
 
@@ -899,17 +893,16 @@ gint gui_close_confirmation_dialog(GS_DIALOG * info)
  *   gint
  */
 
-gint gui_yes_no_dialog(char *question)
+gint gui_yes_no_dialog(char *question, char *icon)
 {
 	GS_DIALOG *yes_no;
 	gint result;
 
 	yes_no = gui_new_dialog();
-	yes_no->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+	yes_no->stock_icon = (icon ? icon : GTK_STOCK_DIALOG_QUESTION);
 	yes_no->label_top = question;
 	yes_no->yes = TRUE;
 	yes_no->no = TRUE;
-	//gtk_window_set_title(GTK_WINDOW(yes_no), "GnomeSword needs a Bible");
 
 	result = gui_alert_dialog(yes_no);
 	g_free(yes_no);
