@@ -2,6 +2,7 @@
 
 	* migrate all hand-crafted yes/no dialogs to gui_yes_no_dialog().
 	* re-order create_dialog_alert() buttons to a normalized order.
+	* check for NULL char* in GS_message, html-editor.c.
 
 2008-11-22  karl <charcoal@users.sf.net>
 
