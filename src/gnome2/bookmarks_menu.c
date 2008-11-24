@@ -712,8 +712,6 @@ static void on_restore_folder_activate(GtkMenuItem * menuitem,
 
 static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gint test;
-	GS_DIALOG *yes_no_dialog;
 	gchar *name_string;
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
@@ -721,7 +719,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
-	GString *str;
+	gchar *str;
 	
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
@@ -730,38 +728,26 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   2, &caption, 3, &key, 4, &module, -1);
 	name_string = caption;
 
-	str = g_string_new("");
-	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = N_("Bookmark");	
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s %s",
-			_("Remove the selected folder"),
-			name_string,
-			_("(and all its contents)?"));
+		str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s %s",
+				      _("Remove the selected folder"),
+				      name_string,
+				      _("(and all its contents)?"));
+	} else {
+		str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+				      _("Remove the selected bookmark"),
+				      name_string);
 	}
-	else {
-		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			_("Remove the selected bookmark"),
-			name_string);
-	}
-	yes_no_dialog->label_top = str->str;
-	yes_no_dialog->yes = TRUE;
-	yes_no_dialog->no = TRUE;
 
-	test = gui_alert_dialog(yes_no_dialog);
-	if (test == GS_YES) {
+	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 		bookmarks_changed = TRUE;
 		gui_save_bookmarks(NULL, NULL);
 	}
-	g_free(yes_no_dialog);
 	g_free(caption);
 	g_free(key);
 	g_free(module);
-	g_string_free(str,TRUE);
+	g_free(str);
 }
 
 

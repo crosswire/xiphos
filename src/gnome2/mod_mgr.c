@@ -229,11 +229,9 @@ remove_install_modules(GList * modules,
 	gchar *buf;
 	gchar *verb;
 	const gchar *new_dest;
-	gint test;
 	gint failed = 1;
-	GS_DIALOG *yes_no_dialog;
 	GString *mods;
-	GString *dialog_text = g_string_new(NULL);
+	gchar *dialog_text;
 
 	if (!modules)
 		return;
@@ -263,30 +261,20 @@ remove_install_modules(GList * modules,
 	case DELFAST:
 		verb = _("Delete fast-search index for these modules:"); break;
 	}
-	g_string_printf(dialog_text,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			verb, mods->str);
+	dialog_text = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+				      verb, mods->str);
 
-	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-	yes_no_dialog->label_top = dialog_text->str;
-	yes_no_dialog->yes = TRUE;
-	yes_no_dialog->no = TRUE;
-
-	test = gui_alert_dialog(yes_no_dialog);
-	if (test != GS_YES) {
+	if (!gui_yes_no_dialog(dialog_text, NULL)) {
 		tmp = modules; /* free list data */
 		while (tmp) {
 			g_free((gchar*)tmp->data);
 			tmp = g_list_next(tmp);
 		}
 		g_list_free(tmp);
-		g_free(yes_no_dialog);
-		g_string_free(dialog_text, TRUE);
+		g_free(dialog_text);
 		return;
 	}
-	g_free(yes_no_dialog);
-	g_string_free(dialog_text, TRUE);
+	g_free(dialog_text);
 
 	switch (activity)
 	{
@@ -1702,9 +1690,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 guint page_num, gpointer user_data)
 {
-	gint test;
-	GS_DIALOG *yes_no_dialog;
-	GString *str = g_string_new(NULL);
+	gchar *str;
 
 	current_page = page_num;
 	clear_and_hide_progress_bar();
@@ -1721,20 +1707,11 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		break;
 	case 3:
 		if (!have_configs) {
-			yes_no_dialog = gui_new_dialog();
-			yes_no_dialog->stock_icon =
-			    GTK_STOCK_DIALOG_QUESTION;
-			g_string_printf(str,
-					"<span weight=\"bold\">%s</span>\n\n%s",
-					_("Please Refresh"),
-					_("Your module list is not up to date!"));
-			yes_no_dialog->label_top = str->str;
-			yes_no_dialog->ok = TRUE;
-
-			test = gui_alert_dialog(yes_no_dialog);
-			//if (test == GS_OK) {
-			//
-			//}
+			str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+					      _("Please Refresh"),
+					      _("Your module list is not up to date!"));
+			gui_generic_warning(str);
+			g_free(str);
 		}
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
@@ -2187,8 +2164,6 @@ void
 on_button6_clicked(GtkButton * button,
 		   gpointer user_data)
 {
-	gint test;
-	GS_DIALOG *yes_no_dialog;
 	gchar *name_string;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
@@ -2197,13 +2172,11 @@ on_button6_clicked(GtkButton * button,
 	gchar *type = NULL;
 	gchar *source = NULL;
 	gchar *directory = NULL;
-	GString *str;
+	gchar *str;
 	GtkTreeModel *model;
 
 	if (working) return;
 	working = TRUE;
-
-	str = g_string_new(NULL);
 
 	selection =
 	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
@@ -2217,28 +2190,19 @@ on_button6_clicked(GtkButton * button,
 			   COLUMN_DIRECTORY, &directory, -1);
 	name_string = caption;
 
-	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = _("Bookmark");
-	g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
-			_("Remove the selected source"),
-			caption, type, source, directory);
-	yes_no_dialog->label_top = str->str;
-	yes_no_dialog->yes = TRUE;
-	yes_no_dialog->no = TRUE;
+	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
+			      _("Remove the selected source"),
+			      caption, type, source, directory);
 
-	test = gui_alert_dialog(yes_no_dialog);
-	if (test == GS_YES) {
+	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 		gtk_list_store_remove(GTK_LIST_STORE(model), &selected);
 		save_sources();
 	}
-	g_free(yes_no_dialog);
 	g_free(type);
 	g_free(caption);
 	g_free(source);
 	g_free(directory);
-	g_string_free(str, TRUE);
+	g_free(str);
 
 	working = FALSE;
 }

@@ -623,31 +623,21 @@ static void load_through_persist_stream(const gchar * text, EDITOR * e)
 static void
 delete_note_cb(GtkWidget * widget, gpointer data)
 {	
-	gint test;
-	GS_DIALOG *info;
-	gchar *buf = NULL;
+	gchar *buf;
 	EDITOR *e = (EDITOR *) data;
 	
 	if (e->studypad)
 		return;
 	
-	info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-		buf = g_strdup_printf
-		    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
-		    _("Are you sure you want to delete the note for") , e->key);
-		info->label_top = buf;
-		info->label2 =  N_("It will be lost permanently!");
-		info->yes = TRUE;
-		info->cancel = TRUE;
-
-		test = gui_alert_dialog(info);
-		if (test == GS_YES) {
-			main_delete_note(e->module, e->key);
-			load_through_persist_stream("", e);
-		}
-		g_free(info);
-		g_free(buf);
+	buf = g_strdup_printf
+	    ("<span weight=\"bold\" size=\"larger\">%s %s?</span>",
+	    _("Are you sure you want to delete the note for") , e->key);
+	/* info->label2 =  N_("It will be lost permanently!"); */
+	if (gui_yes_no_dialog(buf, GTK_STOCK_DIALOG_WARNING)) {
+		main_delete_note(e->module, e->key);
+		load_through_persist_stream("", e);
+	}
+	g_free(buf);
 }
 
 static void
