@@ -31,12 +31,20 @@
 
 #include <nsCOMPtr.h>
 #include <nsIComponentManager.h>
+#ifdef HAVE_GECKO_1_9
+#include <nsComponentManagerUtils.h>
+#endif
 #include <nsIComponentRegistrar.h>
 #include <nsIGenericFactory.h>
 #include <nsILocalFile.h>
 #include <nsIPrintSettings.h>
 #include <nsServiceManagerUtils.h>
+
+#ifdef XPCOM_GLUE
+#include <nsXPCOMGlue.h>
+#else
 #include <nsXPCOM.h>
+#endif
 
 #include "gecko/gecko-services.h"
 #include "gecko/gecko-print.h"
@@ -444,14 +452,21 @@ gecko_register_printing ()
   NS_ENSURE_SUCCESS (rv, );
 
   nsCOMPtr<nsIGenericFactory> componentFactory;
+#ifdef HAVE_GECKO_1_9
+  componentFactory = do_CreateInstance ("@mozilla.org/generic-factory;1", &rv);
+#else
   rv = NS_NewGenericFactory(getter_AddRefs(componentFactory),
 			    &(sAppComps[0]));
+#endif
     
   if (NS_FAILED(rv) || !componentFactory)
     {
       GS_warning(("Failed to make a factory for %s\n", sAppComps[0].mDescription));
       return;
     }
+#ifdef HAVE_GECKO_1_9
+  componentFactory->SetComponentInfo(&(sAppComps[0]));
+#endif
    
   rv = cr->RegisterFactory(sAppComps[0].mCID,
 			   sAppComps[0].mDescription,

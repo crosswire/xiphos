@@ -1,3 +1,8 @@
+2008-11-24  dom <domcox@users.sourceforge.net>
+
+	* improved support for XULRunner / Firefox 3 backend
+	* fixes #2334366 Building fails with xulrunner-1.9
+
 2008-11-23  karl <charcoal@users.sf.net>
 
 	* migrate all hand-crafted yes/no dialogs to gui_yes_no_dialog().
@@ -34,11 +39,6 @@
 	* add Michael's *.glade updates for accessibility properties
 	  to facilitate UI testing framework.
 
-2008-11-08  karl <charcoal@users.sf.net>
-
-	* Initial changes to accommodate new genbook VerseKey Sword.
-	  (Much remains to be done for completeness.)
-	
 2008-11-05  karl <charcoal@users.sf.net>
 
 	* 2.4.1 release.
