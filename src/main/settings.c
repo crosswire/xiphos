@@ -192,7 +192,7 @@ int settings_init(int new_configs, int new_bookmarks)
 
 		main_init_lists();
 		if (settings.havebible == 0) {
-			if (gui_yes_no_dialog(GS_NET_PERMISSION)) {
+			if (gui_yes_no_dialog(GS_NET_PERMISSION, NULL)) {
 				main_shutdown_list();
 				gui_open_mod_mgr_initial_run();
 				main_init_lists();
@@ -755,7 +755,7 @@ void gconf_setup()
 	if (((str = gconf_client_get_string(client, gconf_keys[0][0],
 					    NULL)) == NULL)
 #ifdef DEBUG
-	    && gui_yes_no_dialog(GS_GCONF_PERMISSION)
+	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
 #endif /* DEBUG */
 	    ) {
 		/*

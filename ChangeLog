@@ -1,3 +1,8 @@
+2008-11-23  karl <charcoal@users.sf.net>
+
+	* migrate all hand-crafted yes/no dialogs to gui_yes_no_dialog().
+	* re-order create_dialog_alert() buttons to a normalized order.
+
 2008-11-22  karl <charcoal@users.sf.net>
 
 	* fix len append bug in ncr_to_utf8.

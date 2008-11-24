@@ -286,13 +286,11 @@ void main_save_range(void)
 void main_delete_range(void)
 {
 	gchar *name_string = NULL;
-	gint test;
-	GS_DIALOG *info;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	GString *str;
+	gchar *str;
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
@@ -306,33 +304,20 @@ void main_delete_range(void)
 		return;
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 
-	str = g_string_new("");
-	info = gui_new_dialog();
-	info->stock_icon = (gchar*)GTK_STOCK_DIALOG_WARNING;
-	g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s %s",
-			_("Delete Range?"),
-			_("Are you sure you want to delete this range?"),
-			name_string);
-	info->label_top = str->str;
-	info->yes = TRUE;
-	info->no = TRUE;
+	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s %s",
+			      _("Delete Range?"),
+			      _("Are you sure you want to delete this range?"),
+			      name_string);
 
-	test = gui_alert_dialog(info);
-	if (test != GS_YES) {
-		g_free(name_string);
-		g_free(info);
-		return;
+	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
+		gtk_list_store_remove(list_store, &selected);
+		xml_remove_node("ranges", "range", name_string);
+		--search1.list_rows;
+		main_save_range();
 	}
 
-	gtk_list_store_remove(list_store, &selected);
-	xml_remove_node("ranges", "range", name_string);
-	--search1.list_rows;
-	main_save_range();
-
-	g_free(info);
 	g_free(name_string);
-	g_string_free(str,TRUE);
+	g_free(str);
 }
 
 
@@ -565,16 +550,13 @@ void main_change_mods_select_label(char *mod_name)
 
 void main_delete_module(GtkTreeView *treeview)
 {
-	gint test;
-	GS_DIALOG *info;
 	GList *mods = NULL;
 	gchar *mod_list;
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeSelection *selection;
 	GtkTreeIter selected;
-	GString *str;
-
+	gchar *str;
 
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
@@ -586,45 +568,31 @@ void main_delete_module(GtkTreeView *treeview)
 	    (selection, NULL, &selected))
 		return;
 
+	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s",
+			      _("Remove Module?"),
+			      _("Are you sure you want to remove the selected module?"));
 
-	str = g_string_new("");
-	info = gui_new_dialog();
-	info->stock_icon = (gchar*) GTK_STOCK_DIALOG_WARNING;
-	g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			_("Remove Module?"),
-			_("Are you sure you want to remove the selected module?"));
-	info->label_top = str->str;
-	info->yes = TRUE;
-	info->no = TRUE;
+	if (gui_yes_no_dialog(str, (char *)GTK_STOCK_DIALOG_WARNING)) {
+		gtk_list_store_remove(list_store, &selected);
 
-	test = gui_alert_dialog(info);
-	if (test != GS_YES) {
-		g_free(info);
-		g_string_free(str,TRUE);		
-		return;
+		mods = get_current_list();
+		mod_list = get_modlist_string(mods);
+
+		selection = gtk_tree_view_get_selection
+		    (GTK_TREE_VIEW(search1.module_lists));
+
+		model =
+		    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
+		list_store = GTK_LIST_STORE(model);
+
+		if (gtk_tree_selection_get_selected(selection, NULL, &selected))
+			if (mod_list) {
+				gtk_list_store_set(list_store, &selected, 1,
+						   mod_list, -1);
+				g_free(mod_list);
+			}
 	}
-	gtk_list_store_remove(list_store, &selected);
-
-	mods = get_current_list();
-	mod_list = get_modlist_string(mods);
-
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search1.module_lists));
-
-
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search1.module_lists));
-	list_store = GTK_LIST_STORE(model);
-
-	if (gtk_tree_selection_get_selected(selection, NULL, &selected))
-		if (mod_list) {
-			gtk_list_store_set(list_store, &selected, 1,
-					   mod_list, -1);
-			g_free(mod_list);
-		}
-	g_free(info);
-	g_string_free(str,TRUE);
+	g_free(str);
 }
 
 
