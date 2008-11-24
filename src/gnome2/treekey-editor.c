@@ -234,24 +234,14 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 	INFO *info;
 	EDITOR * editor = (EDITOR*) user_data;
 	GtkWidget *tree = GTK_WIDGET (editor->treeview);
-	gint test;
-	GS_DIALOG *d;
-	GString *str = g_string_new(NULL);
+	gchar *str;
 	
 	info = _get_info (tree);
-	d = gui_new_dialog();
-	d->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	d->title = _("Book");
-	g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s/%s",
-			_("Remove the selected item"),
-			info->book, info->local_name);
-	d->label_top = str->str;
-	d->yes = TRUE;
-	d->no = TRUE;
+	str = g_strdup_printf("<span weight=\"bold\">%s</span>\n\n%s/%s",
+			      _("Remove the selected item"),
+			      info->book, info->local_name);
 
-	test = gui_alert_dialog(d);
-	if (test == GS_YES) {
+	if (gui_yes_no_dialog(str, GTK_STOCK_DIALOG_WARNING)) {
 		gtk_tree_store_remove(GTK_TREE_STORE(info->model), &info->iter);
 		main_treekey_remove (info->book, info->local_name, info->offset);
 	}
@@ -260,8 +250,7 @@ on_remove_activate (GtkMenuItem * menuitem, gpointer user_data)
 	g_free(info->local_name);
 	g_free(info->offset);
 	g_free(info);
-	g_free (d);
-	g_string_free(str, TRUE);
+	g_free(str);
 }
 
 

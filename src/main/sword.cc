@@ -1101,7 +1101,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 			char *companion_question =
 			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
 					    mod_name, companion, companion);
-			if (gui_yes_no_dialog(companion_question))
+			if (gui_yes_no_dialog(companion_question, NULL))
 				main_display_bible(companion, key);
 			companion_activity = FALSE;
 		}
@@ -1278,7 +1278,7 @@ void main_display_bible(const char * mod_name, const char * key)
 			char *companion_question =
 			    g_strdup_printf("Module %s has a companion module %s.\nWould you like to open %s as well?",
 					    mod_name, companion, companion);
-			if (gui_yes_no_dialog(companion_question))
+			if (gui_yes_no_dialog(companion_question, NULL))
 				main_display_commentary(companion, key);
 			companion_activity = FALSE;
 		}
