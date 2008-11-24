@@ -119,9 +119,9 @@ void do_exit(EDITOR * e)
 	CORBA_exception_free(&ev);
 #endif
 	GS_message(("do_exit"));
-	GS_message((e->filename));
-	GS_message((e->module));
-	GS_message((e->key));
+	GS_message((e->filename ? e->filename : "no filename"));
+	GS_message((e->module ? e->module : "no module"));
+	GS_message((e->key ? e->key : "no key"));
 
 	if (e->studypad)
 		settings.studypad_dialog_exist = FALSE;
