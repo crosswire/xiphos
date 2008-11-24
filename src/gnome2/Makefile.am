@@ -73,10 +73,22 @@ gnomesword2_SOURCES =  \
 
 if USE_GTKMOZEMBED
     LIB_GECKO=$(top_builddir)/src/gecko/libgecko.a 
-    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
 else
     LIB_GECKO=
-endif 
+endif
+
+if HAVE_GECKO_1_7
+    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+endif
+if HAVE_GECKO_1_8
+    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+endif
+if HAVE_GECKO_1_8_1
+    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+endif
+if HAVE_GECKO_1_9
+    gnomesword2_LDFLAGS = $(AM_LDFLAGS)
+endif
 
 gnomesword2_LDADD = \
     $(top_builddir)/src/main/libmain.a \

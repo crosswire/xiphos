@@ -1,3 +1,8 @@
+2008-11-24  dom <domcox@users.sourceforge.net>
+
+	* improved support for XULRunner / Firefox 3 backend
+	* fixes #2334366 Building fails with xulrunner-1.9
+
 2008-11-23  karl <charcoal@users.sf.net>
 
 	* migrate all hand-crafted yes/no dialogs to gui_yes_no_dialog().
