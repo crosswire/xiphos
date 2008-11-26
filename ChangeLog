@@ -1,3 +1,10 @@
+2008-11-25  terry <tbiggs@users.sourceforge.net>
+
+	* mostly fixed bug 2264209 Scrolling to next/previous chapter no 
+	  longer works - scrolling down works - scrolling up skips a chapter
+	  or two at times - only works for gtkhtml builds - never worked for
+	  mozembed so I hide the option in the prefs dialog for mozembed builds
+
 2008-11-24  dom <domcox@users.sourceforge.net>
 
 	* improved support for XULRunner / Firefox 3 backend
