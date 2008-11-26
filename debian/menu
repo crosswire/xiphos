@@ -1,4 +1,4 @@
-?package(gnomesword):needs="X11" section="Apps/Education"\
+?package(gnomesword):needs="X11" section="Applications/Science/Social"\
   title="Gnomesword"\
   longtitle="Bible study program"\
   command="/usr/bin/gnomesword2"\
