@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-30 21:39+0200\n"
-"PO-Revision-Date: 2008-07-30 00:36+0100\n"
+"PO-Revision-Date: 2008-11-27 02:07+0000\n"
 "Last-Translator:  <>\n"
 "Language-Team:  <farsi@lists.sharif.edu>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../gnomesword.desktop.in.h:2
 msgid "Study the Bible"
-msgstr ""
+msgstr "تعلیم کتاب مقدس"
 
 #. --list form Bibletime-1.3--
 #. mm_languageMap[SWBuf("aa")] = SWBuf("Afar");
@@ -651,7 +651,7 @@ msgstr "مرفولوژی"
 
 #: ../src/main/module_dialogs.cc:1266
 msgid "Back to "
-msgstr ""
+msgstr "برو به اقب"
 
 #: ../src/main/parallel_view.cc:665 ../src/main/parallel_view.cc:907
 msgid "view context"
@@ -2738,7 +2738,7 @@ msgstr ""
 
 #: ../ui/search-dialog.glade.h:64
 msgid "Strongs Numbers"
-msgstr ""
+msgstr "شماره‌‌های استرونگ"
 
 #: ../ui/search-dialog.glade.h:65
 msgid "Use a custom module list for the search"
