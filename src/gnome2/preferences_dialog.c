@@ -2236,6 +2236,9 @@ create_preferences_dialog(void)
 	check_button.show_devotion = glade_xml_get_widget(gxml, "checkbutton7");
 	check_button.show_splash_screen = glade_xml_get_widget(gxml, "checkbutton8");
 	check_button.use_chapter_scroll = glade_xml_get_widget(gxml, "checkbutton_scroll");
+#ifdef USE_GTKMOZEMBED	
+	gtk_widget_hide(check_button.use_chapter_scroll);
+#endif
 	check_button.use_imageresize = glade_xml_get_widget(gxml, "checkbutton_imageresize");
 	check_button.versehighlight = glade_xml_get_widget(gxml, "checkbutton_versehighlight");
 	check_button.doublespace = glade_xml_get_widget(gxml, "checkbutton_doublespace");
