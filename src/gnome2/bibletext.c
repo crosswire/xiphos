@@ -517,15 +517,24 @@ static
 void adj_changed(GtkAdjustment * adjustment1, gpointer user_data) 
 
 {
+	extern NAVBAR_VERSEKEY navbar_versekey;
 	static int scroll = 1;
 	if (!settings.chapter_scroll) return;
 	if (scroll && (adjustment1->value <= adjustment1->lower)) {
 		GS_message(("\ntop: %g\n",adjustment1->value));
+#ifdef OLD_NAVBAR
 		gui_navbar_handle_spinbutton_click(1, 0);
+#else
+		main_navbar_versekey_spin_chapter(navbar_versekey,0);
+#endif
 		scroll = 0;
 	} else if (scroll && (adjustment1->value >= (adjustment1->upper - adjustment1->page_size))) {
 		GS_message(("\nvalue + page_size: %g\n",adjustment1->value + adjustment1->page_size));
+#ifdef OLD_NAVBAR
 		gui_navbar_handle_spinbutton_click(1, 1);
+#else
+		main_navbar_versekey_spin_chapter(navbar_versekey,1);
+#endif
 		scroll = 0;
 		gtk_adjustment_set_value(adjustment,2);
 	} else 	scroll = 1;
