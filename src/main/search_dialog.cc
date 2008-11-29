@@ -519,14 +519,12 @@ static void add_modlist(void)
 
 void main_change_mods_select_label(char *mod_name)
 {
-	GString *str;	
+	gchar *str;
 	
 	if (GTK_TOGGLE_BUTTON(search1.rb_current_module)->active) {
-		str = g_string_new("");
-		g_string_printf(str,"<b>%s</b>%s",Q_("Search: "),mod_name);
-		gtk_label_set_markup(GTK_LABEL(search1.label_mod_select),
-                                     str->str);
-		g_string_free(str,TRUE);
+		str = g_strdup_printf("<b>%s</b>%s",Q_("Search: "),mod_name);
+		gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
+		g_free(str);
 	} else
 		main_add_modlist_to_label();
 }
@@ -991,17 +989,19 @@ gchar *get_modlist_string(GList * mods)
 void main_add_modlist_to_label(void)
 {
 	GList *mods = NULL;
-	gchar *mod_list;
-	GString *str;
+	gchar *mod_list, *str;
 
 	mods = get_current_list();
 	mod_list = get_modlist_string(mods);
-	str = g_string_new("");
-	g_string_printf(str,"<b>%s</b>%s",Q_("Search: "),mod_list);
-	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select),
-			     str->str);
+	if (strlen(mod_list) > 60)
+		str = g_strdup_printf("<b>%s</b>%60.60s...",
+				      Q_("Search: "), mod_list);
+	else
+		str = g_strdup_printf("<b>%s</b>%s",
+				      Q_("Search: "), mod_list);
+	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
 	g_free(mod_list);
-	g_string_free(str,TRUE);
+	g_free(str);
 }
 
 
@@ -1018,7 +1018,12 @@ void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data)
 	name = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)); 
 	mod_list = get_custom_list_from_name(name);
 	mod_list_str = get_modlist_string(mod_list);
-	str = g_strdup_printf("<b>%s</b>%s",Q_("Search: "),mod_list_str);
+	if (strlen(mod_list_str) > 60)
+		str = g_strdup_printf("<b>%s</b>%60.60s...",
+				      Q_("Search: "), mod_list_str);
+	else
+		str = g_strdup_printf("<b>%s</b>%s",
+				      Q_("Search: "), mod_list_str);
 	gtk_label_set_markup(GTK_LABEL(search1.label_mod_select), str);
 	g_free(mod_list_str);
 	g_free(str);
