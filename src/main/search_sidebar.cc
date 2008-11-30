@@ -24,6 +24,7 @@
 #endif
 #include <gnome.h>
 #include <regex.h>
+#include <ctype.h>
 
 
 #ifdef __cplusplus
@@ -209,7 +210,7 @@ static void fill_search_results_list(int finds)
 
 void main_do_sidebar_search(gpointer user_data)
 {
-	GString *str;
+	GString *new_search = g_string_new(NULL);
 	int search_params, finds;
 	const char *search_string = NULL;
 	char *search_module;	
@@ -234,18 +235,16 @@ void main_do_sidebar_search(gpointer user_data)
 	backendSearch->clear_scope();
 
 	if (GTK_TOGGLE_BUTTON(ss.rrbUseBounds)->active) {
+		gchar *str;
 		backendSearch->clear_search_list();
-		str = g_string_new(" ");
-		g_string_sprintf(str, "%s - %s",
-				 gtk_combo_box_get_active_text(GTK_COMBO_BOX
-						    (ss.entryLower)),
-				 gtk_combo_box_get_active_text(GTK_COMBO_BOX
-						    (ss.entryUpper)));
-				 //gtk_entry_get_text(GTK_COMBO_BOX
-				//		    (ss.entryUpper)));
-		backendSearch->set_range(str->str);
+		str = g_strdup_printf("%s - %s",
+				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
+								    (ss.entryLower)),
+				      gtk_combo_box_get_active_text(GTK_COMBO_BOX
+								    (ss.entryUpper)));
+		backendSearch->set_range(str);
 		backendSearch->set_scope2range();
-		g_string_free(str, TRUE);
+		g_free(str);
 	}
 
 	if (GTK_TOGGLE_BUTTON(ss.rbLastSearch)->active)
@@ -257,19 +256,35 @@ void main_do_sidebar_search(gpointer user_data)
 		GTK_TOGGLE_BUTTON(ss.rbRegExp)->active ? 0 :
 	    	GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
 
-	if(settings.searchType == -2)
+	if (settings.searchType == -2)
 		settings.searchType = backendSearch->check_for_optimal_search(search_module);
 
-		
+	// if we do lucene search (-4), we assume AND for simple sidebar search.
+	// therefore, we must prepend '+' to each word to force that semantic.
+	if (settings.searchType == -4) {
+		while (*search_string) {
+			if (isalnum(*search_string))
+				g_string_append_c(new_search, '+');
+			while (((*search_string) != ' ') && ((*search_string) != '\0'))
+				g_string_append_c(new_search, *(search_string++));
+			if ((*search_string) == ' ') {
+				g_string_append_c(new_search, ' ');
+				search_string++;
+			}
+		}
+		search_string = new_search->str;
+	}
+
 	search_params =
 	    GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)->active ? 0 : REG_ICASE;
 
 	finds = backendSearch->do_module_search(search_module, search_string,
 				 settings.searchType, search_params, FALSE);
+	g_string_free(new_search, TRUE);
 
 	fill_search_results_list(finds);
 }
- 
+
 void main_sidebar_perscomm_dump(void)
 {
 	strcpy(settings.sb_search_mod,settings.MainWindowModule);

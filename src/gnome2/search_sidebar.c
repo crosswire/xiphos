@@ -171,7 +171,7 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips,
 			     btnSearch,
-			     _("For multi-word search, use\n+FirstWord +SecondWord"),
+			     _("This is an inclusive (\"AND\") search:\nFind matches showing all words."),
 			     NULL);
 	gtk_button_set_relief (GTK_BUTTON (btnSearch), GTK_RELIEF_NONE);
 

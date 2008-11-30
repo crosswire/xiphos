@@ -1,6 +1,7 @@
 2008-11-29  karl <charcoal@users.sf.net>
 
 	* fix #2264199 Long custom Module lists make search gui too wide.
+	* remove need for '+' ("AND") syntax in simple sidebar search.
 
 2008-11-25  terry <tbiggs@users.sourceforge.net>
 
