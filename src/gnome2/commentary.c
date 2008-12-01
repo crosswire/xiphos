@@ -452,8 +452,8 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef __CYGWIN__
-	gui_generic_warning(_("Renaming is not available in Cygwin.\n\n"
+#if defined(__CYGWIN__) || defined(WIN32)
+	gui_generic_warning(_("Renaming is not available in Windows.\n\n"
 			      "GnomeSword is limited by Windows' filesystem,\n"
 			      "because it disallows the renaming of filename\n"
 			      "components of currently-open files,\n"
@@ -1092,9 +1092,9 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// unlock
-	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
 	gtk_widget_hide(menu1_uiinfo[11].widget);	// dump pers.comm
-#ifdef __CYGWIN__
+#if defined(__CYGWIN__) || defined(WIN32)
+	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
 	gtk_widget_hide(menu1_uiinfo[12].widget);	// read aloud
 #endif /* __CYGWIN__ */
 

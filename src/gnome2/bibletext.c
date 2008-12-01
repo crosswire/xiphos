@@ -1203,7 +1203,7 @@ void create_menu(void)
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
-#ifdef __CYGWIN__
+#if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
 #endif /* __CYGWIN__ */
 

@@ -2,6 +2,7 @@
 
 	* "Open in dialog" => "Open in a separate window".
 	* "Verse style" => "Verse Per Line".
+	* disable ReadAloud from all menus for WIN32.
 
 2008-11-29  karl <charcoal@users.sf.net>
 

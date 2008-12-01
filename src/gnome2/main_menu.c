@@ -1047,7 +1047,7 @@ gui_create_main_menu(GtkWidget * app)
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
 #endif /* USE_GTKMOZEMBED */
-#ifdef __CYGWIN__
+#if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(view1_menu_uiinfo[9].widget);
 #endif /* __CYGWIN */
 
