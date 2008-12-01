@@ -896,7 +896,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR, /* 6 */
 	{ /* 7 */
-	 GNOME_APP_UI_TOGGLEITEM, N_("_Verse Style"),
+	 GNOME_APP_UI_TOGGLEITEM, N_("_Verse Per Line"),
 	 NULL,
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
