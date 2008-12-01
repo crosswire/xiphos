@@ -743,8 +743,8 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
 	 PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Open in dialog"),
-	 N_("Open selected module in a dialog"),
+	 GNOME_APP_UI_ITEM, N_("Open in a separate window"),
+	 N_("Open selected module in a separate ['dialog'] window"),
 	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
 	 0, (GdkModifierType) 0, NULL},
