@@ -6,6 +6,7 @@
 	* get rid of remove/restore bookmarks option (unknown).
 	* change .sword location to be under $ALLUSERSPROFILE.
 	* limit exporter to only chapter and verse (no book).
+	* add Personal/System indicators on mod.mgr Configure pane.
 
 2008-11-29  karl <charcoal@users.sf.net>
 
