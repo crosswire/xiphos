@@ -3,6 +3,7 @@
 	* "Open in dialog" => "Open in a separate window".
 	* "Verse style" => "Verse Per Line".
 	* disable ReadAloud from all menus for WIN32.
+	* get rid of remove/restore bookmarks option (unknown).
 
 2008-11-29  karl <charcoal@users.sf.net>
 
