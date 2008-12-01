@@ -60,9 +60,10 @@ int main(int argc, char *argv[])
 	int have_sword_url = FALSE;
 
 #ifdef WIN32
-        if (!getenv("SWORD_PATH"))
-		putenv(g_strdup_printf("SWORD_PATH=%s/.sword",
-				       getenv("APPDATA")));
+	if (!getenv("SWORD_PATH"))
+		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/.sword",
+				       getenv("ALLUSERSPROFILE")));
+	mkdir(getenv("SWORD_PATH"));
 	putenv(g_strdup_printf("HOME=%s", getenv("APPDATA")));
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
