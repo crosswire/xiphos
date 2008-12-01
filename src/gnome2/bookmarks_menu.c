@@ -1102,71 +1102,71 @@ static GnomeUIInfo rr_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
 	 N_("Open this bookmark in a dialog"),
 	 (gpointer) on_open_in_tab_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
 	 N_("Open this bookmark in a dialog"),
 	 (gpointer) on_dialog_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 2 */
 	 GNOME_APP_UI_ITEM, N_("New Folder"),
 	 N_("Add new folder to selected folder"),
 	 (gpointer) on_new_folder_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 3 */
 	 GNOME_APP_UI_ITEM, N_("Insert Bookmark"),
 	 N_("Insert new bookmark here"),
 	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 4 */
 	 GNOME_APP_UI_ITEM, N_("_Edit Item"),
 	 N_("Edit bookmark item"),
 	 (gpointer) on_edit_item_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 5 */
 	 GNOME_APP_UI_ITEM, N_("Delete Item"),
 	 N_("Delete item"),
 	 (gpointer) on_delete_item_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TRASH,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 6 */
+	{ /* 7 */
 	 GNOME_APP_UI_ITEM, N_("Expand All"),
 	 N_("Expand all Bookmarks groups"),
 	 (gpointer) on_expand_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_BOTTOM,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 8 */
 	 GNOME_APP_UI_ITEM, N_("Collapse All"),
 	 N_("Collapse all Bookmarks groups"),
 	 (gpointer) on_collapse_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_GOTO_TOP,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 9 */
+	{ /* 10 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Allow Reordering"),
 	 N_
 	 ("Allow items to be moved from one folder to another"),
 	 (gpointer) on_allow_reordering_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
+	GNOMEUIINFO_SEPARATOR, /* 11 */
+	{ /* 12 */
 	 GNOME_APP_UI_ITEM, N_("Import Bibletime Bookmarks"),
 	 N_("Load Bookmarks from Bibletime"),
 	 (gpointer) bibletime_bookmarks_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 13 */
 	 GNOME_APP_UI_SUBTREE, N_("Remove - Restore"),
 	 NULL,
 	 rr_menu_uiinfo, NULL, NULL,
@@ -1231,7 +1231,9 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.remove, TRUE);
 	gtk_widget_set_sensitive(menu.restore, TRUE);
 
-
+	gtk_widget_hide(pmBookmarkTree_uiinfo[13].widget);
+	/* don't know what this is -- turn it off for now */
+	
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
 				     pmBookmarkTree_uiinfo);
 				    
