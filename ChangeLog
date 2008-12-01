@@ -4,6 +4,8 @@
 	* "Verse style" => "Verse Per Line".
 	* disable ReadAloud from all menus for WIN32.
 	* get rid of remove/restore bookmarks option (unknown).
+	* change .sword location to be under $ALLUSERSPROFILE.
+	* limit exporter to only chapter and verse (no book).
 
 2008-11-29  karl <charcoal@users.sf.net>
 

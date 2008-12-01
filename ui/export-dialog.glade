@@ -106,7 +106,7 @@
                 <property name="left_padding">12</property>
                 <child>
                   <widget class="GtkRadioButton" id="radiobutton1">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="can_focus">True</property>
                     <property name="tooltip" translatable="yes">Export complete book</property>
                     <property name="label" translatable="yes">Book</property>
