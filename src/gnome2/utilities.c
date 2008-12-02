@@ -183,7 +183,7 @@ void gui_glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 gchar * gui_general_user_file (const char *fname, gboolean critical)
 {
 	static GHashTable *already_found = NULL;
-	gchar *alternative[7];
+	gchar *alternative[10];
 	gchar *file;
 	gint i;
 	
