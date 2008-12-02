@@ -835,10 +835,6 @@ msgstr ""
 msgid "gnome"
 msgstr "gnome"
 
-#: ../C/gnomesword.xml:336(keyword)
-msgid "gnomesword"
-msgstr "&appname;"
-
 #: ../C/gnomesword.xml:337(keyword)
 msgid "gnomesword"
 msgstr "gnomesword"

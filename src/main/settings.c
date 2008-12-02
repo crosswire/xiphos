@@ -751,9 +751,13 @@ void gconf_setup()
 	/*
 	 * This is deliberately somewhat simple-minded, at least for now.
 	 * We care about one thing: Is anything set to handle "bible://"?
+	 *
+	 * Unfortunate consequence of changing gnomesword2 => gnomesword:
+	 * We must fix broken keys.
 	 */
-	if (((str = gconf_client_get_string(client, gconf_keys[0][0],
-					    NULL)) == NULL)
+	if ((((str = gconf_client_get_string(client, gconf_keys[0][0],
+					    NULL)) == NULL) ||
+	     (strncmp(str, "gnomesword2", 11) == 0))
 #ifdef DEBUG
 	    && gui_yes_no_dialog(GS_GCONF_PERMISSION, NULL)
 #endif /* DEBUG */
