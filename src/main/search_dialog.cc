@@ -641,11 +641,9 @@ void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name)
 
 void main_drag_drop_display_in_main(const char * uri)
 {
-
-
+#if 0
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),
-						      1);
-
+#endif /* 0 */
 }
 
 

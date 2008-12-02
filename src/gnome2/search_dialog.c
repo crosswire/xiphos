@@ -1803,10 +1803,12 @@ void _on_dialog_response(GtkDialog * dialog, gint response_id,
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
+#if 0
 		gtk_drag_dest_unset(widgets.html_text);
 		gtk_drag_dest_unset(widgets.html_comm);
 		gtk_drag_dest_unset(widgets.html_dict);
 		gtk_drag_dest_unset(widgets.html_book);
+#endif /* 0 */
 		gtk_widget_destroy(GTK_WIDGET(search1.mod_sel_dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		break;
@@ -1855,7 +1857,8 @@ void _on_dialog2_response(GtkDialog * dialog, gint response_id,
 static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context, 
                          gint x, gint y, GtkSelectionData *selection_data, 
 			 guint target_type, guint time, gpointer data)
-{       
+{
+#if 0
         glong   *_idata;
         gchar   *_sdata;
 	gchar 	*_desc;
@@ -1903,16 +1906,19 @@ static void drag_data_received_handl(GtkWidget *widget, GdkDragContext *context,
         }
         
         gtk_drag_finish (context, dnd_success, delete_selection_data, time);
+#endif /* 0 */
 }
 
 /* Emitted when a drag is over the destination */
 static gboolean drag_motion_handl(GtkWidget *widget, GdkDragContext *context, 
 				gint x, gint y, guint t, gpointer user_data)
 {
+#if 0
         // Fancy stuff here. This signal spams the console something horrible.
         //const gchar *name = gtk_widget_get_name (widget);
         //GS_print(("%s: drag_motion_handl\n", name));
         return  FALSE;
+#endif /* 0 */
 }
 
 /* Emitted when a drag leaves the destination */
@@ -1931,6 +1937,7 @@ static void drag_leave_handl(GtkWidget *widget, GdkDragContext *context,
 static gboolean drag_drop_handl(GtkWidget *widget, GdkDragContext *context, 
 				gint x, gint y, guint time, gpointer user_data)
 {
+#if 0
         gboolean        is_valid_drop_site;
         GdkAtom         target_type;
         
@@ -1958,6 +1965,7 @@ static gboolean drag_drop_handl(GtkWidget *widget, GdkDragContext *context,
         }
         
         return  is_valid_drop_site;
+#endif /* 0 */
 }
 
 
@@ -1988,6 +1996,7 @@ static void drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
 			GtkSelectionData *selection_data, guint target_type, 
 			guint time, gpointer user_data)
 {
+#if 0
         const gchar *name = gtk_widget_get_name (widget);
         const gchar *string_data = "This is data from the source.";
         const glong integer_data = 42;
@@ -2031,6 +2040,7 @@ static void drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
         }
         
         GS_print((".\n"));
+#endif /* 0 */
 }
 
 /* Emitted when DnD begins. This is often used to present custom graphics. */
@@ -2067,7 +2077,8 @@ static void verses_drag_begin_handl(GtkWidget *widget, GdkDragContext *context,
 static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *context, 
                          gint x, gint y, GtkSelectionData *selection_data, 
 			 guint target_type, guint time, gpointer data)
-{       
+{
+#if 0
         glong   *_idata;
         gchar   *_sdata;
 	gchar 	*_desc;
@@ -2128,6 +2139,7 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
         }
         
         gtk_drag_finish (context, dnd_success, delete_selection_data, time);
+#endif /* 0 */
 }
 
 
@@ -2139,6 +2151,7 @@ static void verses_drag_data_received_handl(GtkWidget *widget, GdkDragContext *c
 static gboolean verses_drag_drop_handl(GtkWidget *widget, GdkDragContext *context, 
 				gint x, gint y, guint time, gpointer user_data)
 {
+#if 0
         gboolean        is_valid_drop_site;
         GdkAtom         target_type;
         
@@ -2166,6 +2179,7 @@ static gboolean verses_drag_drop_handl(GtkWidget *widget, GdkDragContext *contex
         }
         
         return  is_valid_drop_site;
+#endif /* 0 */
 }
 
 
@@ -2184,6 +2198,7 @@ void verses_drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
 			GtkSelectionData *selection_data, guint target_type, 
 			guint time, gpointer user_data)
 {
+#if 0
         const gchar *name = gtk_widget_get_name (widget);
         const gchar *string_data = "This is data from the source.";
         const gchar *string_data2 = NULL;
@@ -2228,17 +2243,20 @@ void verses_drag_data_get_handl(GtkWidget *widget, GdkDragContext *context,
         }
         
         GS_print((".\n"));
+#endif /* 0 */
 }
 
 
 void gui_set_drop_target(GtkWidget * target)
 {
+#if 0
 	  gtk_drag_dest_set(target,              /* widget that will accept a drop */
                	GTK_DEST_DEFAULT_MOTION /* default actions for dest on DnD */
                	| GTK_DEST_DEFAULT_HIGHLIGHT,
                	target_list,            /* lists of target to support */
                	n_targets,              /* size of list */
                	GDK_ACTION_COPY);         /* what to do with data after dropped */
+#endif /* 0 */
 }
 
 /******************************************************************************
@@ -2259,6 +2277,7 @@ void gui_set_drop_target(GtkWidget * target)
 
 void _setup_dnd(void)
 {
+#if 0
 	GdkModifierType start_button_mask;
 	GdkDragAction actions;
 	GtkTargetEntry target_entry;	        
@@ -2366,6 +2385,7 @@ void _setup_dnd(void)
                 G_CALLBACK (verses_drag_data_get_handl), NULL);
         g_signal_connect (search1.listview_verses, "drag-begin",
                 G_CALLBACK (verses_drag_begin_handl), NULL);
+#endif /* 0 */
 }
 
 /******************************************************************************

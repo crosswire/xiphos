@@ -427,12 +427,14 @@ static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
     case GDK_SELECTION_NOTIFY:
     case GDK_PROXIMITY_IN:
     case GDK_PROXIMITY_OUT:
+#if 0
     case GDK_DRAG_ENTER:
     case GDK_DRAG_LEAVE:
     case GDK_DRAG_MOTION:
     case GDK_DRAG_STATUS:
     case GDK_DROP_START:
     case GDK_DROP_FINISHED:
+#endif /* 0 */
     	return FALSE;
     default:
     	return FALSE;
