@@ -17,7 +17,7 @@
   <!ENTITY appversion "2.4.0">
   <!ENTITY manrevision "2.4.0">
   <!ENTITY date "Sat, 20 Sep 2008">
-  <!ENTITY app "<application>Gnomesword2</application>">
+  <!ENTITY app "<application>Gnomesword</application>">
   <!ENTITY appname "GnomeSword">
   <!ENTITY gnomesword "the GnomeSword Team">
   <!-- Information about the entities
@@ -338,7 +338,6 @@ Template last modified Apr 11, 2002
     <keywordset>
       <keyword>gnome</keyword>
       <keyword>gnomesword</keyword>
-      <keyword>gnomesword2</keyword>
       <keyword>sword</keyword>
       <keyword>crosswire</keyword>
       <keyword>help dialog</keyword>

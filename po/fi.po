@@ -1,6 +1,6 @@
-# British English translation for GnomeSword2
+# British English translation for GnomeSword
 # Copyright (C) 2007 Eerik Saarikalle
-# This file is distributed under the same license as the GnomeSword2 package.
+# This file is distributed under the same license as the GnomeSword package.
 # Eerik Saarikalle <eerik.suuri@gmail.com> 2007
 # , fuzzy
 #
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.h:1
-msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword2 Raamattuopas"
+msgid "GnomeSword Bible Guide"
+msgstr "GnomeSword Raamattuopas"
 
 #: ../gnomesword.desktop.in.h:2
 msgid "Study the Bible"

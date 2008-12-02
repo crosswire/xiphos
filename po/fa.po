@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: "
 
 #: ../gnomesword.desktop.in.h:1
-msgid "GnomeSword2 Bible Guide"
+msgid "GnomeSword Bible Guide"
 msgstr ""
 
 #: ../gnomesword.desktop.in.h:2

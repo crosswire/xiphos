@@ -274,7 +274,7 @@ msgid "@@image: 'figures/journal.png'; md5=f8c92ad38d6419352d993331f8f19a6a"
 msgstr "journall.png"
 
 #: ../C/gnomesword.xml:54(title)
-msgid "<application>Gnomesword2</application> Manual"
+msgid "<application>GnomeSword</application> Manual"
 msgstr "Manuel de <application>&appname;</application> :"
 
 #: ../C/gnomesword.xml:56(para)
@@ -840,8 +840,8 @@ msgid "gnomesword"
 msgstr "&appname;"
 
 #: ../C/gnomesword.xml:337(keyword)
-msgid "gnomesword2"
-msgstr "gnomesword2"
+msgid "gnomesword"
+msgstr "gnomesword"
 
 #: ../C/gnomesword.xml:338(keyword)
 msgid "sword"
@@ -867,9 +867,9 @@ msgstr "Introduction"
 #.      the application is and what it does.
 #: ../C/gnomesword.xml:5(para)
 msgid ""
-"<application>Gnomesword2</application> is a Bible study and research tool "
+"<application>GnomeSword</application> is a Bible study and research tool "
 "based upon the \"SWORD Project\" libraries and the GNOME Desktop libraries. "
-"You can use <application>Gnomesword2</application> to do the following:"
+"You can use <application>GnomeSword</application> to do the following:"
 msgstr ""
 "<application>&appname;</application> est un logiciel d'étude biblique "
 "s'appuyant sur les bibliothèques du «­­&nbsp;SWORD Project&nbsp;» et "
@@ -904,7 +904,7 @@ msgstr "Étudier dans les langues originelles, grec ou hébreu"
 
 #: ../C/gnomesword.xml:25(para)
 msgid ""
-"<application>Gnomesword2</application> aims to provide a simple and clean "
+"<application>GnomeSword</application> aims to provide a simple and clean "
 "user interface while providing a powerful tool allowing a personalized Bible "
 "study environment."
 msgstr ""
@@ -941,7 +941,7 @@ msgstr "&appname; en action"
 
 #: ../C/gnomesword.xml:81(para)
 msgid ""
-"<application>Gnomesword2</application> is currently in development, so this "
+"<application>GnomeSword</application> is currently in development, so this "
 "manual may not reflect the program as you see it. If it does not, please "
 "file a bug at the <ulink type=\"http\" url=\"http://sourceforge.net/projects/"
 "gnomesword\"> project website</ulink>, or email <email>gnomesword-"
@@ -978,7 +978,7 @@ msgstr "Menu applications"
 #: ../C/gnomesword.xml:12(para) ../C/start.xml:12(para)
 msgid ""
 "Choose <menuchoice><guisubmenu>Accessories</"
-"guisubmenu><guimenuitem>Gnomesword2 Bible Guide</guimenuitem></menuchoice>."
+"guisubmenu><guimenuitem>GnomeSword Bible Guide</guimenuitem></menuchoice>."
 msgstr ""
 "Sélectionnez <menuchoice><guisubmenu>Accessoires</"
 "guisubmenu><guimenuitem>Gnomesword</guimenuitem></menuchoice>."
@@ -989,9 +989,9 @@ msgstr "Ligne de commande"
 
 #: ../C/gnomesword.xml:22(para) ../C/start.xml:22(para)
 msgid ""
-"Type <command>gnomesword2</command>, then press <keycap>Return</keycap>."
+"Type <command>gnomesword</command>, then press <keycap>Return</keycap>."
 msgstr ""
-"Entrez <command>gnomesword2</command>, puis appuyez sur <keycap>Entrée</"
+"Entrez <command>gnomesword</command>, puis appuyez sur <keycap>Entrée</"
 "keycap>."
 
 #: ../C/gnomesword.xml:31(title)
@@ -3979,7 +3979,7 @@ msgstr "Accréditions aux traducteurs"
 #~ msgid "September 2007"
 #~ msgstr "Septembre 2007"
 
-#~ msgid "GnomeSword2 Manual"
+#~ msgid "GnomeSword Manual"
 #~ msgstr "Manuel de &appname;"
 
 #~ msgid ""

@@ -17,9 +17,9 @@ INCLUDES =  \
     -DSHARE_DIR=\"$(pkgdatadir)\"  \
     $(UPRINT_CFLAGS)
 
-bin_PROGRAMS = gnomesword2
+bin_PROGRAMS = gnomesword
 
-gnomesword2_SOURCES =  \
+gnomesword_SOURCES =  \
     about_gnomesword.c \
     about_modules.c \
     about_sword.c \
@@ -78,19 +78,19 @@ else
 endif
 
 if HAVE_GECKO_1_7
-    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+    gnomesword_LDFLAGS = -R$(GECKO_HOME)
 endif
 if HAVE_GECKO_1_8
-    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+    gnomesword_LDFLAGS = -R$(GECKO_HOME)
 endif
 if HAVE_GECKO_1_8_1
-    gnomesword2_LDFLAGS = -R$(GECKO_HOME)
+    gnomesword_LDFLAGS = -R$(GECKO_HOME)
 endif
 if HAVE_GECKO_1_9
-    gnomesword2_LDFLAGS = $(AM_LDFLAGS)
+    gnomesword_LDFLAGS = $(AM_LDFLAGS)
 endif
 
-gnomesword2_LDADD = \
+gnomesword_LDADD = \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/backend/libbackend.a \
     $(top_builddir)/src/editor/libeditor.a\

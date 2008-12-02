@@ -1,6 +1,6 @@
-# Nederlandse vertaling voor GnomeSword2
+# Nederlandse vertaling voor GnomeSword
 # Copyright (C) 2006 Gertjan Francke
-# This file is distributed under the same license as the GnomeSword2 package.
+# This file is distributed under the same license as the GnomeSword package.
 # Gertjan Francke <gwfrancke@users.sf.net> 2003
 #
 #
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
+msgid "GnomeSword Bible Guide"
 msgstr "GnomeSword"
 
 #: ../gnomesword.desktop.in.in.h:2

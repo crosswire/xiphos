@@ -1,7 +1,7 @@
-# German translation for GnomeSword2
+# German translation for GnomeSword
 # Copyright (C) 2004 Johannes Tanzler
 # 2007 Christoph Brill
-# This file is distributed under the same license as the Gnomesword2 package.
+# This file is distributed under the same license as the Gnomesword package.
 # Johannes Tanzler <johannes.tanzler@aon.at> 2004
 # Christoph Brill <egore911@egore911.de> 2007
 # , fuzzy
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword2 Bibelleitfaden"
+msgid "GnomeSword Bible Guide"
+msgstr "GnomeSword Bibelleitfaden"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"

@@ -45,8 +45,8 @@ msgstr ""
 "X-Poedit-Country: CZECH REPUBLIC\n"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword2 Průvodce Biblí"
+msgid "GnomeSword Bible Guide"
+msgstr "GnomeSword Průvodce Biblí"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"
