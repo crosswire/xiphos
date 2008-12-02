@@ -10,6 +10,7 @@
 	* change name gnomesword2 => gnomesword.
 	  no more name distinction based on toolkit support.
 	* fix gconf keys automatically.
+	* kill off all remains of drag-n-drop with #if 0.
 
 2008-11-29  karl <charcoal@users.sf.net>
 
