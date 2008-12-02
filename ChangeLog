@@ -14,6 +14,7 @@
 	* add ../share/gnomesword to gui_general_user_file().
 	* add testament-level subscripting of the module cache, to get rid
 	  of the icky arithmetic that is sensitive to 39+27 canon.
+	* disable all printing for cygwin and win32.
 
 2008-11-29  karl <charcoal@users.sf.net>
 
