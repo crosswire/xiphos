@@ -1,6 +1,6 @@
-# British English translation for GnomeSword2
+# British English translation for GnomeSword
 # Copyright (C) 2003 Andy Piper
-# This file is distributed under the same license as the GnomeSword2 package.
+# This file is distributed under the same license as the GnomeSword package.
 # Andy Piper <andyp@users.sf.net> 2003
 # , fuzzy
 #
@@ -20,8 +20,8 @@ msgstr ""
 "X-Poedit-Country: ISRAEL\n"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
-msgstr "ׂמדריך GnomeSword2 לכתבי הקודש"
+msgid "GnomeSword Bible Guide"
+msgstr "ׂמדריך GnomeSword לכתבי הקודש"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"

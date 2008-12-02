@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
-msgstr "GnomeSword2 - Program for bibelstudier"
+msgid "GnomeSword Bible Guide"
+msgstr "GnomeSword - Program for bibelstudier"
 
 #: ../gnomesword.desktop.in.in.h:2
 msgid "Study the Bible"

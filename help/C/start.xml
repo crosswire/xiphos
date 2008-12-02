@@ -11,7 +11,7 @@
 					<listitem>
 						<para>
 						Choose <menuchoice><guisubmenu>Accessories</guisubmenu>
-						<guimenuitem>Gnomesword2 Bible Guide</guimenuitem>
+						<guimenuitem>GnomeSword Bible Guide</guimenuitem>
 						</menuchoice>.
 			            </para>
     				</listitem>
@@ -20,7 +20,7 @@
     				<term>Command line</term>
     				<listitem>
     					<para>
-						Type <command>gnomesword2</command>, then press <keycap>Return</keycap>.
+						Type <command>gnomesword</command>, then press <keycap>Return</keycap>.
 						</para>
     				</listitem>
     			</varlistentry>

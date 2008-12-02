@@ -729,10 +729,10 @@ void load_settings_structure(void)
 #define	GS_GCONF_SUCCESS	_("GnomeSword has successfully set itself\nas the handler of sword:// and bible:// URLs.\n\nYou may wish to run the program \"gconf-editor\"\nto examine keys under /desktop/gnome/url-handlers,\nif you need to change these.")
 
 char *gconf_keys[GS_GCONF_MAX][2] = {
-    { "/desktop/gnome/url-handlers/bible/command",        "gnomesword2 \"%s\"" },
+    { "/desktop/gnome/url-handlers/bible/command",        "gnomesword \"%s\"" },
     { "/desktop/gnome/url-handlers/bible/enabled",        (char *) 1 },
     { "/desktop/gnome/url-handlers/bible/needs_terminal", (char *) 0 },
-    { "/desktop/gnome/url-handlers/sword/command",        "gnomesword2 \"%s\"" },
+    { "/desktop/gnome/url-handlers/sword/command",        "gnomesword \"%s\"" },
     { "/desktop/gnome/url-handlers/sword/enabled",        (char *) 1 },
     { "/desktop/gnome/url-handlers/sword/needs_terminal", (char *) 0 }
 };

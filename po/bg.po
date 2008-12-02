@@ -16,7 +16,7 @@ msgstr ""
 
 #: ../gnomesword.desktop.in.h:1
 #, fuzzy
-msgid "GnomeSword2 Bible Guide"
+msgid "GnomeSword Bible Guide"
 msgstr "GnomeSword - ïðîãðàìà çà èçó÷àâàíå íà Áèáëèÿòà"
 
 #: ../gnomesword.desktop.in.h:2

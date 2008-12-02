@@ -31,7 +31,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n>1;"
 
 #: ../gnomesword.desktop.in.in.h:1
-msgid "GnomeSword2 Bible Guide"
+msgid "GnomeSword Bible Guide"
 msgstr "Guide de la Bible GnomeSword"
 
 #: ../gnomesword.desktop.in.in.h:2
