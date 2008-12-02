@@ -843,15 +843,15 @@ static GnomeUIInfo view_text_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo file3_menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_SUBTREE, N_("Open Module"),
 	 NULL,
 	 view_text_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
-	GNOMEUIINFO_END
+	GNOMEUIINFO_SEPARATOR, /* 1 */
+	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL), /* 2 */
+	GNOMEUIINFO_END /* 3 */
 };
 
 
@@ -1083,7 +1083,9 @@ void gui_create_pm_dictionary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
-
+#if defined(__CYGWIN__) || defined(WIN32)
+	gtk_widget_hide(file3_menu_uiinfo[2]);		// print
+#endif /* __CYGWIN__ */
 
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM

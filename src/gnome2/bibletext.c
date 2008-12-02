@@ -928,21 +928,21 @@ static GnomeUIInfo view_text_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo file3_menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_SUBTREE, N_("Open Module"),
 	 NULL,
 	 view_text_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Export Passage"),
 	 NULL,
 	 (gpointer) on_export_passage_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-red",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
-	GNOMEUIINFO_END
+	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL), /* 2 */
+	GNOMEUIINFO_END /* 3 */
 };
 
 static GnomeUIInfo note_menu_uiinfo[] = {
@@ -1207,6 +1207,7 @@ void create_menu(void)
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
+	gtk_widget_hide(file3_menu_uiinfo[2]);		// print
 #endif /* __CYGWIN__ */
 
 //#ifndef USE_EXPORTER

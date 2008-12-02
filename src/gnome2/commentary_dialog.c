@@ -1443,29 +1443,29 @@ static GnomeUIInfo view_text_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo file3_menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_SUBTREE, N_("Open Module"),
 	 NULL,
 	 view_text_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Sync with main"),
 	 NULL,
 	 (gpointer) on_sync_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 2 */
 	 GNOME_APP_UI_TOGGLEITEM, N_("Stay in sync"),
 	 NULL,
 	 (gpointer) stay_in_sync_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM(on_close_activate, NULL),
-	GNOMEUIINFO_END
+	GNOMEUIINFO_SEPARATOR, /* 3 */
+	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL), /* 4 */
+	GNOMEUIINFO_SEPARATOR, /* 5 */
+	GNOMEUIINFO_MENU_CLOSE_ITEM(on_close_activate, NULL), /* 6 */
+	GNOMEUIINFO_END /* 7 */
 };
 
 static GnomeUIInfo note_menu_uiinfo[] = {
@@ -1735,6 +1735,7 @@ static void create_menu(DIALOG_DATA *d,
 	gtk_widget_hide(menu1_uiinfo[6].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[9].widget);	// read aloud
+	gtk_widget_hide(file3_menu_uiinfo[4]);		// print
 #endif /* __CYGWIN__ */
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);
 
