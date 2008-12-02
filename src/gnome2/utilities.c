@@ -231,9 +231,9 @@ gchar * gui_general_user_file (const char *fname, gboolean critical)
 	alternative[i++] = g_build_filename("ui", fname, NULL);
 	alternative[i++] = g_build_filename("..", "ui", fname, NULL);
 	alternative[i++] = g_build_filename("..", "..", "ui", fname, NULL);
+#endif
 	alternative[i++] = g_build_filename("..", "share", "gnomesword", fname, NULL);
 	/* above line for WIN32, mostly. */
-#endif
 	alternative[i++] = g_build_filename(SHARE_DIR, fname, NULL);
 	alternative[i++] = NULL;  /* NULL terminator needed */
 	
