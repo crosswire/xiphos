@@ -12,6 +12,8 @@
 	* fix gconf keys automatically.
 	* kill off all remains of drag-n-drop with #if 0.
 	* add ../share/gnomesword to gui_general_user_file().
+	* add testament-level subscripting of the module cache, to get rid
+	  of the icky arithmetic that is sensitive to 39+27 canon.
 
 2008-11-29  karl <charcoal@users.sf.net>
 

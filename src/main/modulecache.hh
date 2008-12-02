@@ -102,16 +102,17 @@ namespace ModuleCache {
 	};
 
 	// In precision order.
-	typedef std::map < int, CacheVerse   > CacheChapter;
-	typedef std::map < int, CacheChapter > CacheBook;
-	typedef std::map < int, CacheBook    > CacheModule;
+	typedef std::map < int, CacheVerse     > CacheChapter;
+	typedef std::map < int, CacheChapter   > CacheBook;
+	typedef std::map < int, CacheBook      > CacheTestament;
+	typedef std::map < int, CacheTestament > CacheModule;
 
 	// Index by module name => Cache for that module.
 	typedef std::map < const char *, CacheModule > CacheMap;
 
 	// Textually:
-	// CacheMap contains modules of books of chapters of verses,
-	// subscriptable at any stage to get the subordinate content.
+	// CacheMap contains modules of testaments of books of chapters of
+	// verses, subscriptable at any stage to get the subordinate content.
 
 	// Similar concept for genbooks and lexdicts.
 	typedef std::map < const char *, CacheVerse > BookCacheMap;

@@ -747,13 +747,13 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	if (backend->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
-		int curTestament = key->Testament();
 		uint16_t cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.Name();
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -872,7 +872,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -957,7 +958,8 @@ GTKChapDisp::getVerseBefore(SWModule &imodule)
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -1063,7 +1065,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((key->Testament() == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -1301,7 +1304,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curTestament = key->Testament();
 	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
@@ -1373,7 +1375,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -1708,13 +1711,13 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 	if (be->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
-		int curTestament = key->Testament();
 		uint16_t cache_flags = ConstructFlags(ops);
 		const char *ModuleName = imodule.Name();
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -1849,7 +1852,8 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 		ModuleCache::CacheVerse& cVerse = ModuleMap
 		    [ModuleName]
-		    [((curTestament == 1) ? 0 : 39 ) + key->Book()]
+		    [key->Testament()]
+		    [key->Book()]
 		    [key->Chapter()]
 		    [key->Verse()];
 
@@ -2206,7 +2210,6 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curTestament = key->Testament();
 	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
