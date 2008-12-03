@@ -1,3 +1,7 @@
+2008-11-29  karl <charcoal@users.sf.net>
+
+	* fix #2384287 Uninstalling current Bible module causes crashes.
+
 2008-11-29  peter <refdoc@users.sf.net>
 
 	* add chm files.

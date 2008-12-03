@@ -1991,6 +1991,8 @@ create_fileselection_local_source(void)
 void
 on_dialog_destroy(GtkObject * object, gpointer user_data)
 {
+	GList *tmp;
+
 	if (working) return;
 	working = TRUE;
 
@@ -2009,6 +2011,41 @@ on_dialog_destroy(GtkObject * object, gpointer user_data)
 	}
 
 	working = FALSE;
+
+	if (first_time_user) return;	/* no deeper analysis, first time around. */
+
+	/*
+	 * if we uninstalled a current module, substitute a live one
+	 */
+	if (!main_is_module(settings.MainWindowModule)) {
+		if (tmp = get_list(TEXT_LIST))
+			main_display_bible((char *)tmp->data, settings.currentverse);
+		else {
+			/* Zero Bibles is just not workable in GnomeSword. */
+			gui_generic_warning("You have uninstalled your last Bible.\n"
+					    "GnomeSword requires at least one.");
+			main_shutdown_list();
+			gui_open_mod_mgr_initial_run();
+			main_init_lists();
+			if (settings.havebible == 0) {
+				gui_generic_warning("There are still no Bibles installed.\n"
+						    "GnomeSword cannot continue without one.");
+				exit(1);
+			}
+		}		    
+	}
+	if (!main_is_module(settings.CommWindowModule)) {
+		if (tmp = get_list(COMM_LIST))
+			main_display_commentary((char *)tmp->data, settings.currentverse);
+	}
+	if (!main_is_module(settings.DictWindowModule)) {
+		if (tmp = get_list(DICT_LIST))
+			main_display_commentary((char *)tmp->data, settings.dictkey);
+	}
+	if (!main_is_module(settings.book_mod)) {
+		if (tmp = get_list(GBS_LIST))
+			main_display_book((char *)tmp->data, "/");	/* blank key */
+	}
 }
 
 /*
