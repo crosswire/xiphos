@@ -73,5 +73,8 @@ docbook-xsl)
 
  java -jar saxon.jar gnomesword.xml htmlhelp.xsl
 
-2) create the CHM file out of the intermediate source by using ....
+2) create the CHM file out of the intermediate source by using htmlhelp.exe
+on a Windows system (obtainable from Microsoft). 
+
+
 
