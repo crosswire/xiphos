@@ -30,6 +30,7 @@ extern "C" {
 void gui_update_install_status(glong total, glong done, const gchar *message);
 void gui_update_install_progressbar(gdouble fraction);
 void gui_open_mod_mgr(void);
+void gui_open_mod_mgr_initial_run(void);
 
 #ifdef __cplusplus
 }

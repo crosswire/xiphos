@@ -700,6 +700,8 @@ const char *BackEnd::module_get_language(const char *module_name) {
 
 
 int BackEnd::is_module(const char *mod_name) {
+	if (mod_name == NULL)
+		return 0;
 	ModMap::iterator it = main_mgr->Modules.find(mod_name);
 	if (it != main_mgr->Modules.end()) {
 		return 1;
