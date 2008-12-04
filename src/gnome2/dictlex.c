@@ -1084,7 +1084,7 @@ void gui_create_pm_dictionary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
-	gtk_widget_hide(file3_menu_uiinfo[2]);		// print
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);		// print
 #endif /* __CYGWIN__ */
 
 	view_menu = gtk_menu_new();

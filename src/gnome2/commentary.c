@@ -1096,7 +1096,7 @@ void gui_create_pm_commentary(void)
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[10].widget);	// rename pers.comm
 	gtk_widget_hide(menu1_uiinfo[12].widget);	// read aloud
-	gtk_widget_hide(file3_menu_uiinfo[2]);		// print
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);		// print
 #endif /* __CYGWIN__ */
 
 	

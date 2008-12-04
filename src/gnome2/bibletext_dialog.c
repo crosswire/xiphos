@@ -2185,7 +2185,7 @@ static void create_menu(DIALOG_DATA *t,
 	gtk_widget_hide(menu1_uiinfo[6].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// read aloud
-	gtk_widget_hide(file3_menu_uiinfo[4]);		// print
+	gtk_widget_hide(file3_menu_uiinfo[4].widget);		// print
 #endif /* __CYGWIN__ */
 	gtk_widget_hide(file3_menu_uiinfo[0].widget);
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);

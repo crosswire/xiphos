@@ -977,7 +977,7 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
 #if defined(__CYGWIN__) || defined(WIN32)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
-	gtk_widget_hide(file3_menu_uiinfo[2]);		// print
+	gtk_widget_hide(file3_menu_uiinfo[2].widget);		// print
 #endif /* __CYGWIN__ */
 	
 	view_menu = gtk_menu_new();
