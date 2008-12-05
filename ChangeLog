@@ -1,3 +1,7 @@
+2008-12-05  karl <charcoal@users.sf.net>
+
+	* new general pixbuf finder, #ifdef-compatible with linux and win32.
+
 2008-11-29  karl <charcoal@users.sf.net>
 
 	* fix #2384287 Uninstalling current Bible module causes crashes.

@@ -165,19 +165,17 @@ create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	FASTICON = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					    "/dlg-un-16.png", NULL);
-	NO_INDEX = gtk_widget_render_icon(dialog,
-					  GTK_STOCK_CANCEL,
-					  GTK_ICON_SIZE_MENU, NULL);
-	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					  "/epiphany-secure.png", NULL);
-	REFRESH = gtk_widget_render_icon(dialog,
-					 GTK_STOCK_REFRESH,
-					 GTK_ICON_SIZE_MENU, NULL);
-	BLANK = gtk_widget_render_icon(dialog,
-				       "gnome-stock-blank",
-				       GTK_ICON_SIZE_MENU, NULL);
+	FASTICON  = pixbuf_file_finder("dlg-un-16.png", NULL);
+	NO_INDEX  = gtk_widget_render_icon(dialog,
+					   GTK_STOCK_CANCEL,
+					   GTK_ICON_SIZE_MENU, NULL);
+	LOCKED    = pixbuf_file_finder("epiphany-secure.png", NULL);
+	REFRESH   = gtk_widget_render_icon(dialog,
+					   GTK_STOCK_REFRESH,
+					   GTK_ICON_SIZE_MENU, NULL);
+	BLANK     = gtk_widget_render_icon(dialog,
+					   "gnome-stock-blank",
+					   GTK_ICON_SIZE_MENU, NULL);
 }
 
 

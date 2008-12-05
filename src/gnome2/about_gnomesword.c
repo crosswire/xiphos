@@ -97,7 +97,6 @@ gui_create_about_gnomesword(void)
 {
 	GdkPixbuf *about1_logo_pixbuf;
 	GtkWidget *about1;
-	GError *error = NULL;
 	gchar versionbuild[128];
 
 	snprintf
@@ -109,10 +108,9 @@ gui_create_about_gnomesword(void)
 #endif
 		);
 
-	about1_logo_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR"/about.png", &error);
+	about1_logo_pixbuf = pixbuf_file_finder("about.png", NULL);
 
-	about1 = gtk_about_dialog_new ();
+	about1 = gtk_about_dialog_new();
   
 	g_signal_connect(about1, "response",
 			 G_CALLBACK(on_dialog_response), NULL);
