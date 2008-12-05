@@ -76,6 +76,8 @@ void language_make_list(GList *modlist,
 			GtkTreeIter *uninstalled,
 			void (*add)(GtkTreeModel *, GtkTreeIter, gchar **));
 
+GdkPixbuf *pixbuf_file_finder(char *image, GError **error);
+
 enum {
 	LANGSET_BIBLE,
 	LANGSET_COMMENTARY,

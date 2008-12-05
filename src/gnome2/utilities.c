@@ -1200,4 +1200,22 @@ language_make_list(GList *modlist,
 	}
 }
 
+GdkPixbuf *
+pixbuf_file_finder(char *image, GError **error)
+{
+	GdkPixbuf *p;
+	char *image_file;
+
+#ifndef WIN32
+	image_file = g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
+#else
+	image_file = g_build_filename("..", "share", "pixmaps", "gnomesword",
+				      fname, NULL);
+#endif /* WIN32 */
+
+	p = gdk_pixbuf_new_from_file(image_file, error);
+	g_free(image_file);
+	return p;
+}
+
 /******   end of file   ******/

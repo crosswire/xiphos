@@ -35,6 +35,7 @@
 #include "main/sword.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
+#include "gui/utilities.h"
 #include "gui/widgets.h"
 
 /*****************************************************************************/
@@ -372,11 +373,10 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 GtkWidget *e_splash_new(void)
 {
 	ESplash *new;
-	GdkPixbuf *splash_image_pixbuf;
 	GError *error = NULL;
-	splash_image_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash2.png",
-				     &error);
+	GdkPixbuf *splash_image_pixbuf;
+
+	splash_image_pixbuf = pixbuf_file_finder("splash2.png", &error);
 	if (!splash_image_pixbuf) {
 		GS_warning(("pixmap file error: %s\n",
 			    error->message));
@@ -481,9 +481,7 @@ void gui_splash_init()
 		gtk_object_ref(GTK_OBJECT(splash));
 
 #ifdef USE_GTKMOZEMBED		
-		icon_pixbuf = 
-		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/mozilla-icon.png", &error);
+		icon_pixbuf = pixbuf_file_finder("mozilla-icon.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -498,9 +496,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 #endif
-		icon_pixbuf = 
-		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/gnome-session.png", &error);
+		icon_pixbuf = pixbuf_file_finder("gnome-session.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -514,9 +510,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/gnome-windows.png", &error);
+		icon_pixbuf = pixbuf_file_finder("gnome-windows.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -530,9 +524,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/sword.png", &error);
+		icon_pixbuf = pixbuf_file_finder("sword.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -546,9 +538,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/gs2-48x48.png", &error);
+		icon_pixbuf = pixbuf_file_finder("gs2-48x48.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
