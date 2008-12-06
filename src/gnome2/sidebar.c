@@ -735,20 +735,19 @@ GtkWidget *create_results_menu(void)
 }
 
 static GnomeUIInfo menu_modules_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
 	 N_("Open selected module in a new tab"),
 	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME,
-	 PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Open in a separate window"),
 	 N_("Open selected module in a separate ['dialog'] window"),
 	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 2 */
 	 GNOME_APP_UI_ITEM, N_("About"),
 	 N_("View information about the selected dialog"),
 	 (gpointer) on_about2_activate, NULL, NULL,
@@ -776,6 +775,18 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
 GtkWidget *create_menu_modules(void)
 {
 	GtkWidget *menu_modules;
+
+	/*
+	 * this is total magic.  set up menu before using it.
+	 * indices are direct from GnomeUIInfo above.
+	 */
+	if (!menu_modules_uiinfo[0].pixmap_info)
+		menu_modules_uiinfo[0].pixmap_info =
+		    image_locator("new_tab_button.png");
+	if (!menu_modules_uiinfo[1].pixmap_info)
+		menu_modules_uiinfo[1].pixmap_info =
+		    image_locator("dlg-un.png");
+	/* end magic */
 
 	menu_modules = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu_modules),
@@ -885,20 +896,19 @@ on_edit_activate(GtkMenuItem *menuitem,
 }
 
 static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
-        {
+        { /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
 	 N_("Open selected module in a new tab"),
 	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME,
-	 PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Open in editor"),
 	 N_("Open selected module in a dialog"),
 	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
-	{
+	{ /* 2 */
 	 GNOME_APP_UI_ITEM, N_("About"),
 	 N_("View information about the selected dialog"),
 	 (gpointer) on_about2_activate, NULL, NULL,
@@ -910,6 +920,18 @@ static GnomeUIInfo menu_prayerlist_mod_uiinfo[] = {
 GtkWidget *create_menu_prayerlist_mod(void)
 {
 	GtkWidget *menu;
+
+	/*
+	 * this is total magic.  set up menu before using it.
+	 * indices are direct from GnomeUIInfo above.
+	 */
+	if (!menu_prayerlist_mod_uiinfo[0].pixmap_info)
+		menu_prayerlist_mod_uiinfo[0].pixmap_info =
+		    image_locator("new_tab_button.png");
+	if (!menu_prayerlist_mod_uiinfo[1].pixmap_info)
+		menu_prayerlist_mod_uiinfo[1].pixmap_info =
+		    image_locator("dlg-un.png");
+	/* end magic */
 
 	menu = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu),
@@ -1155,7 +1177,7 @@ static void menu_deactivate_callback(GtkWidget * widget,
 
 
 static GnomeUIInfo menu_uiinfo[] = {
-	{
+	{ /* 0 */
 	 GNOME_APP_UI_ITEM,
 	 N_("_Modules"),
 	 NULL,
@@ -1163,15 +1185,15 @@ static GnomeUIInfo menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK,
 	 GNOME_STOCK_BOOK_RED, 0,
 	 (GdkModifierType) 0, NULL},
-	{
+	{ /* 1 */
 	 GNOME_APP_UI_ITEM,
 	 N_("_Bookmarks"), NULL,
 	 (gpointer) on_bookmarks_activate,
 	 NULL,
 	 NULL, GNOME_APP_PIXMAP_FILENAME,
-	 PACKAGE_PIXMAPS_DIR "/epiphany-bookmarks.png", 0,
+	 NULL /* init'd in menu creation */, 0,
 	 (GdkModifierType) 0, NULL},
-	{
+	{ /* 2 */
 	 GNOME_APP_UI_ITEM,
 	 N_("_Search"),
 	 NULL,
@@ -1180,7 +1202,7 @@ static GnomeUIInfo menu_uiinfo[] = {
 	 GTK_STOCK_FIND,
 	 0,
 	 (GdkModifierType) 0, NULL},
-	{
+	{ /* 3 */
 	 GNOME_APP_UI_ITEM,
 	 N_("Verse _List"),
 	 NULL,
@@ -1213,6 +1235,15 @@ static GnomeUIInfo menu_uiinfo[] = {
 static GtkWidget *create_menu(void)
 {
 	GtkWidget *menu;
+
+	/*
+	 * this is total magic.  set up menu before using it.
+	 * indices are direct from GnomeUIInfo above.
+	 */
+	if (!menu_uiinfo[1].pixmap_info)
+		menu_uiinfo[1].pixmap_info =
+		    image_locator("epiphany-bookmarks.png");
+	/* end magic */
 
 	menu = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu), menu_uiinfo,

@@ -1200,19 +1200,45 @@ language_make_list(GList *modlist,
 	}
 }
 
+/*
+ * caller must free the returned string.
+ */
+char *
+image_locator(char *image)
+{
+#ifndef WIN32
+	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
+#else
+	return g_build_filename("..", "share", "pixmaps", "gnomesword",
+				image, NULL);
+#endif /* WIN32 */
+}
+
+/*
+ * get a pixmap widget from specified file.
+ */
+GtkWidget *
+pixmap_finder(char *image)
+{
+	GtkWidget *w;
+	char *image_file;
+
+	image_file = image_locator(image);
+	w = gtk_image_new_from_file(image_file);
+	g_free(image_file);
+	return w;
+}
+
+/*
+ * get a pixbuf from specified file.
+ */
 GdkPixbuf *
-pixbuf_file_finder(char *image, GError **error)
+pixbuf_finder(char *image, GError **error)
 {
 	GdkPixbuf *p;
 	char *image_file;
 
-#ifndef WIN32
-	image_file = g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
-#else
-	image_file = g_build_filename("..", "share", "pixmaps", "gnomesword",
-				      image, NULL);
-#endif /* WIN32 */
-
+	image_file = image_locator(image);
 	p = gdk_pixbuf_new_from_file(image_file, error);
 	g_free(image_file);
 	return p;

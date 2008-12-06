@@ -520,8 +520,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	if (info->stock_icon) {
 		image = gtk_image_new_from_stock(info->stock_icon,
 						 GTK_ICON_SIZE_DND);
-		/*image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
-		   "/gs2-48x48.png"); */
 		gtk_widget_show(image);
 		gtk_box_pack_start(GTK_BOX(hbox83), image, FALSE, TRUE,
 				   0);
@@ -535,15 +533,12 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gtk_container_set_border_width(GTK_CONTAINER(vbox84), 6);
 
 	if (info->label_top) {
-		//str = g_string_new("");
-		//g_string_printf(str,"<span weight=\"bold\">%s</span>",info->label_top);
 		label_top = gtk_label_new(NULL);
 		gtk_label_set_markup((GtkLabel *) label_top,
 				     info->label_top);
 		gtk_widget_show(label_top);
 		gtk_box_pack_start(GTK_BOX(vbox84), label_top, TRUE,
 				   TRUE, 0);
-		//g_string_free(str,TRUE);
 	}
 
 	if (info->label_middle) {

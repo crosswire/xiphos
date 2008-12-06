@@ -592,7 +592,7 @@ static void create_pixbufs(void)
 
 	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
 	bm_pixbufs->pixbuf_closed =
-	    pixbuf_file_finder("epiphany-bookmarks.png", NULL);
+	    pixbuf_finder("epiphany-bookmarks.png", NULL);
 
 	if (!bm_pixbufs->pixbuf_closed)
 		bm_pixbufs->pixbuf_closed
@@ -605,7 +605,7 @@ static void create_pixbufs(void)
 				   GNOME_STOCK_BOOK_OPEN,
 				   GTK_ICON_SIZE_MENU, NULL);
 	bm_pixbufs->pixbuf_helpdoc =
-	    pixbuf_file_finder("epiphany-bookmark-page.png", NULL);
+	    pixbuf_finder("epiphany-bookmark-page.png", NULL);
 
 	if (!bm_pixbufs->pixbuf_helpdoc)
 		bm_pixbufs->pixbuf_helpdoc
