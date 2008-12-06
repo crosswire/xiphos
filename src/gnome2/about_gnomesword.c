@@ -108,7 +108,7 @@ gui_create_about_gnomesword(void)
 #endif
 		);
 
-	about1_logo_pixbuf = pixbuf_file_finder("about.png", NULL);
+	about1_logo_pixbuf = pixbuf_finder("about.png", NULL);
 
 	about1 = gtk_about_dialog_new();
   

@@ -1104,15 +1104,15 @@ static GnomeUIInfo rr_menu_uiinfo[] = {
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	{ /* 0 */
 	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
-	 N_("Open this bookmark in a dialog"),
+	 N_("Open this bookmark in a new tab"),
 	 (gpointer) on_open_in_tab_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 1 */
 	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
 	 N_("Open this bookmark in a dialog"),
 	 (gpointer) on_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, (GdkModifierType) 0, NULL},
 	{ /* 2 */
 	 GNOME_APP_UI_ITEM, N_("New Folder"),
@@ -1195,6 +1195,18 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 
 void gui_create_bookmark_menu(void)
 {
+	/*
+	 * this is total magic.  set up menu before using it.
+	 * indices are direct from GnomeUIInfo above.
+	 */
+	if (!pmBookmarkTree_uiinfo[0].pixmap_info)
+		pmBookmarkTree_uiinfo[0].pixmap_info =
+		    image_locator("new_tab_button.png");
+	if (!pmBookmarkTree_uiinfo[1].pixmap_info)
+		pmBookmarkTree_uiinfo[1].pixmap_info =
+		    image_locator("dlg-un.png");
+	/* end magic */
+
 	menu.menu = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(menu.menu),
 			    "menu.menu", menu.menu);
@@ -1207,9 +1219,7 @@ void gui_create_bookmark_menu(void)
 	menu.insert = pmBookmarkTree_uiinfo[3].widget;
 	menu.edit = pmBookmarkTree_uiinfo[4].widget;
 	menu.delete = pmBookmarkTree_uiinfo[5].widget;
-	
-	
-	
+
 	menu.reorder = pmBookmarkTree_uiinfo[10].widget;
 
 	menu.bibletime = pmBookmarkTree_uiinfo[12].widget;

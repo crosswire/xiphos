@@ -780,7 +780,7 @@ void create_mainwindow(void)
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_resizable(GTK_WINDOW(widgets.app), TRUE);
 	gnome_window_icon_set_default_from_file
-	    (PACKAGE_PIXMAPS_DIR "/gs2-48x48.png");
+	    (image_locator("gs2-48x48.png"));
 
 	dock1 = GNOME_APP(widgets.app)->dock;
 	gtk_widget_show(dock1);
@@ -820,9 +820,7 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-	
-	tab_button_icon = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
-						"/new_tab_button.png");
+	tab_button_icon = pixmap_finder("new_tab_button.png");
 	gtk_widget_show(tab_button_icon);
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);

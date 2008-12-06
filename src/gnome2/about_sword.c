@@ -115,8 +115,7 @@ gui_create_about_sword(void)
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), vbox, TRUE, TRUE,
 			   0);
 
-	pixmap = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/sword3.png");
+	pixmap = pixmap_finder("sword3.png");
 	gtk_widget_show(pixmap);
 	gtk_box_pack_start(GTK_BOX(vbox), pixmap, FALSE, FALSE, 4);
 

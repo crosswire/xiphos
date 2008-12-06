@@ -165,11 +165,11 @@ create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	FASTICON  = pixbuf_file_finder("dlg-un-16.png", NULL);
+	FASTICON  = pixbuf_finder("dlg-un-16.png", NULL);
 	NO_INDEX  = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_CANCEL,
 					   GTK_ICON_SIZE_MENU, NULL);
-	LOCKED    = pixbuf_file_finder("epiphany-secure.png", NULL);
+	LOCKED    = pixbuf_finder("epiphany-secure.png", NULL);
 	REFRESH   = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_REFRESH,
 					   GTK_ICON_SIZE_MENU, NULL);
@@ -1277,8 +1277,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* fast index ready */
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
-					"/dlg-un-16.png");
+	image = pixmap_finder("dlg-un-16.png");
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
@@ -1290,8 +1289,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* locked */
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
-					"/epiphany-secure.png");
+	image = pixmap_finder("epiphany-secure.png");
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);

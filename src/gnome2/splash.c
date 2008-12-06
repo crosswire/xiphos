@@ -376,7 +376,7 @@ GtkWidget *e_splash_new(void)
 	GError *error = NULL;
 	GdkPixbuf *splash_image_pixbuf;
 
-	splash_image_pixbuf = pixbuf_file_finder("splash2.png", &error);
+	splash_image_pixbuf = pixbuf_finder("splash2.png", &error);
 	if (!splash_image_pixbuf) {
 		GS_warning(("pixmap file error: %s\n",
 			    error->message));
@@ -481,7 +481,7 @@ void gui_splash_init()
 		gtk_object_ref(GTK_OBJECT(splash));
 
 #ifdef USE_GTKMOZEMBED		
-		icon_pixbuf = pixbuf_file_finder("mozilla-icon.png", &error);
+		icon_pixbuf = pixbuf_finder("mozilla-icon.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -496,7 +496,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 #endif
-		icon_pixbuf = pixbuf_file_finder("gnome-session.png", &error);
+		icon_pixbuf = pixbuf_finder("gnome-session.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -510,7 +510,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf = pixbuf_file_finder("gnome-windows.png", &error);
+		icon_pixbuf = pixbuf_finder("gnome-windows.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -524,7 +524,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf = pixbuf_file_finder("sword.png", &error);
+		icon_pixbuf = pixbuf_finder("sword.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
@@ -538,7 +538,7 @@ void gui_splash_init()
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf = pixbuf_file_finder("gs2-48x48.png", &error);
+		icon_pixbuf = pixbuf_finder("gs2-48x48.png", &error);
 		if (!icon_pixbuf) {
 			GS_warning(("pixmap file error: %s\n",
 				    error->message));
