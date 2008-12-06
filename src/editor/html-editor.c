@@ -832,6 +832,36 @@ static void file_selection_ok_cb(GtkWidget * widget, gpointer data)
 static void
 open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 {
+	
+	GtkWidget *dialog;
+	gchar *studypad_dir;
+	
+	studypad_dir = g_strdup_printf("%s/", settings.studypaddir);
+	
+	dialog = gtk_file_chooser_dialog_new("Open File",
+					NULL,
+					GTK_FILE_CHOOSER_ACTION_OPEN,
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					NULL);
+	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, studypad_dir);
+	
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+	{
+		char *filename;
+		
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		filename = g_path_get_basename(filename);			
+		_load_file(e, filename);
+		g_free (filename);
+	}
+	
+	//this actually causes a segfault; sorry!
+	gtk_widget_destroy (dialog);
+	
+	/*
+	
+	
 	GtkWidget *widget;
 	BonoboWidget *control;
 	gchar *directory = NULL;
@@ -851,9 +881,9 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 			directory =
 			    g_strdup_printf("%s/",
 					    settings.studypaddir);
-			gtk_file_selection_set_filename(
-						(GtkFileSelection *) widget, 
-						directory);
+			//gtk_file_selection_set_filename(
+			//			(GtkFileSelection *) widget, 
+			//			directory);
 			g_free(directory);
 		}
 	} else {
@@ -888,7 +918,9 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 	g_signal_connect(file_selection_info.widget, "destroy",
 			 G_CALLBACK(file_selection_destroy_cb), NULL);
 
-	gtk_widget_show(file_selection_info.widget);
+	gtk_dialog_run (GTK_DIALOG (file_selection_info.widget));
+	//gtk_widget_show(file_selection_info.widget);
+	*/
 }
 
 /* "Open through persist stream" dialog.  */
