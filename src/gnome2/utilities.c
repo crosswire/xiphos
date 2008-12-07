@@ -1209,8 +1209,9 @@ image_locator(char *image)
 #ifndef WIN32
 	return g_strdup_printf("%s/%s", PACKAGE_PIXMAPS_DIR, image);
 #else
-	return g_build_filename("..", "share", "pixmaps", "gnomesword",
-				image, NULL);
+	gchar d[PATH_MAX+2];
+	return g_build_filename(getcwd(d, PATH_MAX), "..", "share",
+				"pixmaps", "gnomesword", image, NULL);
 #endif /* WIN32 */
 }
 
