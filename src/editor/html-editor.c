@@ -1244,12 +1244,18 @@ void editor_sync_with_main(void)
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		e = (EDITOR*)tmp->data;
-		if (!e->studypad) {
+		//if (!e->studypad) {
+		switch(e->type) {
+			case STUDYPAD_EDITOR:
+			case BOOK_EDITOR:
+				break;			
+			case NOTE_EDITOR:
 #ifdef OLD_NAVBAR
 			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->sync_button), e);
 #else
 			editor_sync_toggled(GTK_TOGGLE_BUTTON(e->navbar.button_sync), e);
 #endif
+			break;
 		}
 		tmp = g_list_next(tmp);
 	}
