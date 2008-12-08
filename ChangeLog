@@ -1,3 +1,7 @@
+2008-12-08  terry <tbiggs@users.sourceforge.net>
+
+	* fix #2385811 Gnomesword crashes on attempted studypad sync
+
 2008-12-08  karl <charcoal@users.sf.net>
 
 	* re-order mod.mgr columns (push index + locked icons to the right).
