@@ -68,10 +68,10 @@ enum {
 enum {
 	COLUMN_NAME,
 	COLUMN_INSTALLED,
-	COLUMN_FASTREADY,
-	COLUMN_LOCKED,
 	COLUMN_FIXED,
 	COLUMN_INSTALLED_VERSION,
+	COLUMN_FASTREADY,
+	COLUMN_LOCKED,
 	COLUMN_DIFFERENT,
 	COLUMN_AVAILABLE_VERSION,
 	COLUMN_INSTALLSIZE,
@@ -601,7 +601,8 @@ get_list_mods_to_remove_install(int activity)
 static void
 add_module_to_language_folder(GtkTreeModel *model,
 			      GtkTreeIter iter,
-			      MOD_MGR *info)
+			      MOD_MGR *info,
+			      gboolean checkmark)
 {
 	GtkTreeIter iter_iter;
 	GtkTreeIter parent;
@@ -660,12 +661,13 @@ add_module_to_language_folder(GtkTreeModel *model,
 					      &child_iter, &iter_iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 					   COLUMN_NAME, info->name,
-					   COLUMN_INSTALLED, installed,
-					   COLUMN_FASTREADY, fasticon,
-					   COLUMN_LOCKED, locked,
+					   COLUMN_INSTALLED,
+					   (checkmark ? installed : BLANK),
 					   COLUMN_FIXED, FALSE,
 					   COLUMN_INSTALLED_VERSION,
 					   info->old_version,
+					   COLUMN_FASTREADY, fasticon,
+					   COLUMN_LOCKED, locked,
 					   COLUMN_DIFFERENT, refresh,
 					   COLUMN_AVAILABLE_VERSION,
 					   info->new_version,
@@ -973,7 +975,7 @@ load_module_tree(GtkTreeView * treeview,
 			if (!info->installed) {
 				add_module_to_language_folder(GTK_TREE_MODEL
 							      (store), uninstalled,
-							      info);
+							      info, install);
 			} else if ((!info->old_version && info->new_version &&
 				    strcmp(info->new_version, " ")) ||
 				   (info->old_version && !info->new_version) ||
@@ -981,7 +983,7 @@ load_module_tree(GtkTreeView * treeview,
 				    strcmp(info->new_version, info->old_version) > 0)) {
 				add_module_to_language_folder(GTK_TREE_MODEL
 							      (store), update,
-							      info);
+							      info, install);
 			}
 		}
 
@@ -990,32 +992,32 @@ load_module_tree(GtkTreeView * treeview,
 		if (info->type[0] == 'B') {
 			add_module_to_language_folder(GTK_TREE_MODEL
 						      (store), text,
-						      info);
+						      info, install);
 		}
 		else if (info->type[0] == 'C') {
 			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      commentary, info);
+						      (store), commentary,
+						      info, install);
 		}
 		else if (info->is_maps) {
 			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      map, info);
+						      (store), map,
+						      info, install);
 		}
 		else if (info->is_images) {
 			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      image, info);
+						      (store), image,
+						      info, install);
 		}
 		else if (info->is_devotional) {
 			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      devotional, info);
+						      (store), devotional,
+						      info, install);
 		}
 		else if (info->type[0] == 'L') {
 			add_module_to_language_folder(GTK_TREE_MODEL
-						      (store),
-						      dictionary, info);
+						      (store), dictionary,
+						      info, install);
 		}
 		else if (info->type[0] == 'G') {
 			gchar *gstype;
@@ -1024,12 +1026,12 @@ load_module_tree(GtkTreeView * treeview,
 			     == NULL) ||
 			    strcmp(gstype, "PrayerList")) {
 				add_module_to_language_folder
-				    (GTK_TREE_MODEL(store), book, info);
+				    (GTK_TREE_MODEL(store), book, info, install);
 			} else if (settings.prayerlist) {
 				add_language_folder
 				    (GTK_TREE_MODEL(store), prayerlist, info->language);
 				add_module_to_language_folder
-				    (GTK_TREE_MODEL(store), prayerlist, info);
+				    (GTK_TREE_MODEL(store), prayerlist, info, install);
 			}
 		}
 		else {
@@ -1264,38 +1266,17 @@ add_columns(GtkTreeView * treeview,
 
 	/* installed */
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock(GTK_STOCK_APPLY,
-					 GTK_ICON_SIZE_MENU);
+	image = (remove
+		 ? gtk_image_new_from_stock("gnome-stock-blank",
+					    GTK_ICON_SIZE_MENU)
+		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
+					    GTK_ICON_SIZE_MENU));
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "pixbuf", COLUMN_INSTALLED,
-					    NULL);
-	gtk_tree_view_append_column(treeview, column);
-
-	/* fast index ready */
-	column = gtk_tree_view_column_new();
-	image = pixmap_finder("dlg-un-16.png");
-	gtk_widget_show(image);
-	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
-	gtk_tree_view_column_set_widget(column, image);
-	gtk_tree_view_column_pack_start(column, renderer, TRUE);
-	gtk_tree_view_column_set_attributes(column, renderer,
-					    "pixbuf", COLUMN_FASTREADY,
-					    NULL);
-	gtk_tree_view_append_column(treeview, column);
-
-	/* locked */
-	column = gtk_tree_view_column_new();
-	image = pixmap_finder("epiphany-secure.png");
-	gtk_widget_show(image);
-	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
-	gtk_tree_view_column_set_widget(column, image);
-	gtk_tree_view_column_pack_start(column, renderer, TRUE);
-	gtk_tree_view_column_set_attributes(column, renderer,
-					    "pixbuf", COLUMN_LOCKED,
 					    NULL);
 	gtk_tree_view_append_column(treeview, column);
 
@@ -1335,6 +1316,40 @@ add_columns(GtkTreeView * treeview,
 						     renderer, "text",
 						     COLUMN_INSTALLED_VERSION,
 						     NULL);
+	gtk_tree_view_append_column(treeview, column);
+
+	/* fast index ready */
+	column = gtk_tree_view_column_new();
+	image = pixmap_finder("dlg-un-16.png");
+	gtk_widget_show(image);
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+	gtk_tree_view_column_set_widget(column, image);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "pixbuf", COLUMN_FASTREADY,
+					    NULL);
+					/* fixed sizing (25 pixels) */
+	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+					GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_column_set_fixed_width(GTK_TREE_VIEW_COLUMN
+					     (column), 25);
+	gtk_tree_view_append_column(treeview, column);
+
+	/* locked */
+	column = gtk_tree_view_column_new();
+	image = pixmap_finder("epiphany-secure.png");
+	gtk_widget_show(image);
+	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
+	gtk_tree_view_column_set_widget(column, image);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes(column, renderer,
+					    "pixbuf", COLUMN_LOCKED,
+					    NULL);
+					/* fixed sizing (25 pixels) */
+	gtk_tree_view_column_set_sizing(GTK_TREE_VIEW_COLUMN(column),
+					GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_column_set_fixed_width(GTK_TREE_VIEW_COLUMN
+					     (column), 25);
 	gtk_tree_view_append_column(treeview, column);
 
 	if (remove)
@@ -1528,16 +1543,17 @@ create_model(void)
 
 	/* create list store */
 	store = gtk_tree_store_new(NUM_COLUMNS,
-				   G_TYPE_STRING,
-				   GDK_TYPE_PIXBUF,
-				   GDK_TYPE_PIXBUF,
-				   GDK_TYPE_PIXBUF,
-				   G_TYPE_BOOLEAN,
-				   G_TYPE_STRING,
-				   GDK_TYPE_PIXBUF,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING, G_TYPE_BOOLEAN);
+				   G_TYPE_STRING,	/* module name */
+				   GDK_TYPE_PIXBUF,	/* installed */
+				   G_TYPE_BOOLEAN,	/* checkbox */
+				   G_TYPE_STRING,	/* installed verssion */
+				   GDK_TYPE_PIXBUF,	/* fastready */
+				   GDK_TYPE_PIXBUF,	/* locked */
+				   GDK_TYPE_PIXBUF,	/* refresh */
+				   G_TYPE_STRING,	/* available version */
+				   G_TYPE_STRING,	/* size */
+				   G_TYPE_STRING,	/* description */
+				   G_TYPE_BOOLEAN);	/* visibility */
 	return GTK_TREE_MODEL(store);
 }
 
