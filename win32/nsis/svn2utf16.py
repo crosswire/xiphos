@@ -69,6 +69,9 @@ def convert():
         files = os.listdir(fold)
         os.chdir(fold)
         for f in files:
+            # ignore hidden '.svn' folder
+            if f == ".svn":
+                continue
             print fold + "/" + f
             to_utf16(f)
         os.chdir("..")
