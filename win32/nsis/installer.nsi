@@ -93,6 +93,10 @@
     ; Win32 API Messages
     !include "WinMessages.nsh"
 
+    ; Language definition
+    ; contain macros LINGUAS_DEFS, LINGUAS_RESERVE, LINGUAS_USE
+    !include "i18n\utf16_LINGUAS.nsh" ; contain some macros
+
 ;--------------------------------
 ; Global Variables
 
@@ -175,12 +179,10 @@
 
     !define UNINSTALLOG_LOCALIZE 
 
-    !insertmacro MUI_LANGUAGE "English" ;first language is the default
-    !insertmacro MUI_LANGUAGE "Czech"
+    !insertmacro LINGUAS_USE
 
     ; Include localizations
-    !include "i18n\utf16_en.nsh"
-    !include "i18n\utf16_cs.nsh"
+    !insertmacro LINGUAS_INCLUDE
 
 ;--------------------------------
 ; Reserve Files
@@ -194,10 +196,7 @@
     ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
     ReserveFile "${INCL_DIR}\utf16_advuninstlog.nsh"
 
-    ReserveFile "i18n\utf16_en.nsh"
-    ReserveFile "${LIC_FILE_ENGLISH}"
-    ReserveFile "i18n\utf16_cs.nsh"
-    ReserveFile "${LIC_FILE_CZECH}"
+    !insertmacro LINGUAS_RESERVEFILE
 
 ;--------------------------------
 ; Core Section
