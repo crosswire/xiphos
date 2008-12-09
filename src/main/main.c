@@ -60,6 +60,16 @@ int main(int argc, char *argv[])
 	int have_sword_url = FALSE;
 
 #ifdef WIN32
+	/*
+	 * WIN32 perversity: We very much want to be *in* the
+	 * the directory where GnomeSword exists, to keep *.dll
+	 * things happy.  In WIN32land, argv[0] is always
+	 * fully-qualified, so we slice off the binary name and
+	 * chdir() to it immediately.
+	 */
+	*strrchr(argv[0], '\\') = '\0';
+	chdir(argv[0]);
+
 	if (!getenv("SWORD_PATH"))
 		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/.sword",
 				       getenv("ALLUSERSPROFILE")));
