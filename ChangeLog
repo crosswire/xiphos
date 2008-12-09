@@ -1,6 +1,7 @@
 2008-12-09  karl <charcoal@users.sf.net>
 
 	* win32-specific hack, to cd to gnomesword's own dir.
+	* add sidebar-vs-dialog sensitivity to html markup wipe.
 
 2008-12-08  terry <tbiggs@users.sourceforge.net>
 

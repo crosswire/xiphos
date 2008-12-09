@@ -246,16 +246,17 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
  * Synopsis
  *   #include "main/previewer.h"
  *
- *   void mark_search_words( GString *str )	
+ *   void mark_search_words(GString *str, gboolean eliminate)	
  *
  * Description
- *    
+ *    purplifies search terms in results.
+ *    "eliminate" indicates whether to eliminate internal markup.
  *
  * Return value
  *   void
  */
 
-void mark_search_words(GString * str)
+void mark_search_words(GString * str, gboolean eliminate)
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len1, len2, len3, len4;
@@ -280,24 +281,25 @@ void mark_search_words(GString * str)
 		g_strstrip(searchbuf);
 	}
 
-	/* blank out html markup, to avoid mis-marking it as matches. */
-	for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
-		if (t = strchr(s, '>')) {
-			while (s <= t)
-				*(s++) = ' ';
-		} else {
-			GS_message(("mark_search_words: Unmatched <> in %s\n", s));
-			goto out;
+	if (eliminate) {
+		/* blank out html markup, to avoid mis-marking it as matches. */
+		for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
+			if (t = strchr(s, '>')) {
+				while (s <= t)
+					*(s++) = ' ';
+			} else {
+				GS_message(("mark_search_words: Unmatched <> in %s\n", s));
+				goto out;
+			}
+		}
+		/* move <> with excess spaces up close to their intended targets. */
+		for (s = strstr(str->str, " &gt;"); s; s = strstr(str->str, " &gt;")) {
+			memcpy(s, "&gt; ", 5);
+		}
+		for (s = strstr(str->str, "&lt; "); s; s = strstr(s, "&lt; ")) {
+			memcpy(s, " &lt;", 5);
 		}
 	}
-	/* move <> with excess spaces up close to their intended targets. */
-	for (s = strstr(str->str, " &gt;"); s; s = strstr(str->str, " &gt;")) {
-		memcpy(s, "&gt; ", 5);
-	}
-	for (s = strstr(str->str, "&lt; "); s; s = strstr(s, "&lt; ")) {
-		memcpy(s, " &lt;", 5);
-	}
-
 out:
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
@@ -456,7 +458,7 @@ void main_entry_display(gpointer data, gchar * mod_name,
 
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
-		mark_search_words(search_str);
+		mark_search_words(search_str, TRUE);
 		str = g_string_append(str, search_str->str);
 		g_string_free(search_str, TRUE);
 	} else {
