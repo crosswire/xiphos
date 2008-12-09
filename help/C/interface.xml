@@ -541,7 +541,8 @@
 		Footnote content is normally transient in the Previewer: It is displayed while your mouse hovers over the footnote
 		indicator <guibutton>*n</guibutton> in the Bible text, and then disappears when your mouse moves off.  But some
 		translations' footnotes (e.g. NET Bible's) can be very large, so that not all the text is visible.  To anchor the text so
-		that you can scroll it in the Previewer, middle-click the indicator and move to the Previewer.
+		that you can scroll it in the Previewer, middle-click the indicator (or hold down the <guibutton>Shift key</guibutton>)
+		and move to the Previewer.
 		</para>
 		<para>
 		Cross-reference indicators <guibutton>*x</guibutton> also display transiently in the Previewer.  Left-clicking the
