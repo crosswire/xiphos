@@ -13,6 +13,7 @@
   <!ENTITY authors SYSTEM "authors.xml">
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY license SYSTEM "license.xml">
+  <!ENTITY onlinehelp SYSTEM "onlinehelp.xml">
 
   <!ENTITY appversion "2.4.0">
   <!ENTITY manrevision "2.4.0">
@@ -97,6 +98,10 @@ Template last modified Apr 11, 2002
       <author>
         <firstname>Karl</firstname>
         <surname>Kleinpaste</surname>
+      </author>
+      <author>
+	<firstname>Matthew</firstname>
+	<surname>Talbert</surname>
       </author>
 
       <!-- This is appropriate place for other contributors: translators,
@@ -418,6 +423,12 @@ Template last modified Apr 11, 2002
   <sect1 id="journals">
     <title>Journals and Prayer Lists</title>
     &journals;
+  </sect1>
+
+  <!-- Getting Help Online -->
+  <sect1 id="onlinehelp">
+    <title>Getting Help Online</title>
+    &onlinehelp;
   </sect1>
 
   <!-- Authors -->

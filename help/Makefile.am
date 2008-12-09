@@ -15,7 +15,8 @@ DOC_INCLUDES = 	introduction.xml \
 		personal.xml \
 		journals.xml \
 		authors.xml \
-		license.xml		
+		license.xml \
+		onlinehelp.xml		
 
 DOC_FIGURES = 	figures/first_start.png \
 		figures/gtkhtml3-vs-mozembed.png \
