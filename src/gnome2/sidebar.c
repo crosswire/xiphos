@@ -539,6 +539,27 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 					       GdkEventButton * event,
 					       gpointer user_data)
 {
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	gchar *key = NULL;
+	gchar *text = NULL;
+
+	selection =
+	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.results_list);
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key, -1);
+	if (!key)
+		return FALSE;
+
+	if (event->type == GDK_2BUTTON_PRESS)
+	{
+		main_display_bible(NULL, key);
+	}	
 	switch (event->button) {
 	case 3:
 		return TRUE;
@@ -967,6 +988,7 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 
 	GS_warning(("%d", event->keyval));
 	if (event) {
+				
 		switch (event->keyval) {
 		case 0xff0d:	/* "65293" */
 		case 0xff8d:	/* "65421" */
@@ -1057,7 +1079,7 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
-
+		
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "key_press_event",
 			 G_CALLBACK(tree_key_press_cb), NULL);
