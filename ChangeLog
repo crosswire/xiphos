@@ -1,3 +1,7 @@
+2008-12-09  karl <charcoal@users.sf.net>
+
+	* win32-specific hack, to cd to gnomesword's own dir.
+
 2008-12-08  terry <tbiggs@users.sourceforge.net>
 
 	* fix #2385811 Gnomesword crashes on attempted studypad sync
