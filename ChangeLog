@@ -6,6 +6,8 @@
 
 	* re-order mod.mgr columns (push index + locked icons to the right).
 	* no "installed" checkmarks in Maintenance pane.
+	* wipe out html markup in previewer mark_search_words() to avoid
+	  inadvertent match marking of html-internal content.
 
 2008-12-05  karl <charcoal@users.sf.net>
 
