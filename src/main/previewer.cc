@@ -260,15 +260,14 @@ void mark_search_words(GString * str)
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len1, len2, len3, len4;
 	gchar closestr[40], openstr[40];
+	gchar *s, *t;
 
 	/* regular expression search results         **fixme** */
 	if ((settings.searchType == 0) ||
 	    (settings.searchText[0] == '\0')) {
 		return;
 	}
-#ifdef DEBUG
-	g_message(settings.searchText);
-#endif
+	GS_message((settings.searchText));
 	/* close tags */
 	sprintf(closestr, "</b></font>");
 	/* open tags */
@@ -281,6 +280,25 @@ void mark_search_words(GString * str)
 		g_strstrip(searchbuf);
 	}
 
+	/* blank out html markup, to avoid mis-marking it as matches. */
+	for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
+		if (t = strchr(s, '>')) {
+			while (s <= t)
+				*(s++) = ' ';
+		} else {
+			GS_message(("mark_search_words: Unmatched <> in %s\n", s));
+			goto out;
+		}
+	}
+	/* move <> with excess spaces up close to their intended targets. */
+	for (s = strstr(str->str, " &gt;"); s; s = strstr(str->str, " &gt;")) {
+		memcpy(s, "&gt; ", 5);
+	}
+	for (s = strstr(str->str, "&lt; "); s; s = strstr(s, "&lt; ")) {
+		memcpy(s, " &lt;", 5);
+	}
+
+out:
 	/* if we have a muti word search go here */
 	if (settings.searchType == -2 || settings.searchType == -4) {
 		char *token;
