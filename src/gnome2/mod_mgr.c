@@ -1253,6 +1253,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* column for sword module name */
 	renderer = gtk_cell_renderer_text_new();
+
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Module Name"),
 						     renderer, "text",

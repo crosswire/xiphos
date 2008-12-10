@@ -57,7 +57,7 @@ extern PASSAGE_TAB_INFO *cur_passage_tab;
  *   void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
  *
  * Description
- *   return toogle button to normal
+ *   return toggle button to normal
  *
  * Return value
  *   void

@@ -1228,10 +1228,26 @@ static void _modules_lists_changed(GtkTreeSelection *
  *   void
  */
 
-static void _finds_verselist_selection_changed(GtkTreeSelection *
-					    selection, gpointer data)
-{
-	main_finds_verselist_selection_changed(selection, data);
+static void _finds_verselist_selection_changed(GtkWidget * widget,
+						GdkEventButton * event,
+					    	gpointer data)
+{	
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	gchar *key = NULL;
+	gchar *text = NULL;
+
+	selection =
+	    gtk_tree_view_get_selection((GtkTreeView *) search1.listview_verses);
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key, -1);
+		
+	main_finds_verselist_selection_changed(selection, model, event->type == GDK_2BUTTON_PRESS);
 }
 
 
@@ -1489,6 +1505,30 @@ void _setup_listviews(GtkWidget * listview, GCallback callback)
 
 }
 
+static
+void _setup_listviews2(GtkWidget * listview, GCallback callback)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkListStore *model;
+	GObject *selection;
+
+	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(listview),
+				GTK_TREE_MODEL(model));
+	_add_two_text_columns(GTK_TREE_VIEW(listview));
+	if (!callback)
+		return;
+	//selection =
+	//    G_OBJECT(gtk_tree_view_get_selection
+	//	     (GTK_TREE_VIEW(listview)));
+	//g_signal_connect(selection, "changed", G_CALLBACK(callback),
+	//		 NULL);
+	g_signal_connect((gpointer) listview,
+				"button_press_event",
+				G_CALLBACK(callback), NULL);
+
+}
 
 /******************************************************************************
  * Name
@@ -2601,7 +2641,7 @@ void _create_search_dialog(void)
 	search1.listview_results = glade_xml_get_widget(gxml, "treeview9");
 	_setup_listviews(search1.listview_results, (GCallback) _selection_finds_list_changed);
 	search1.listview_verses = glade_xml_get_widget(gxml, "treeview10");  		
-	_setup_listviews(search1.listview_verses, (GCallback) _finds_verselist_selection_changed); 
+	_setup_listviews2(search1.listview_verses, (GCallback) _finds_verselist_selection_changed); 
 	_setup_dnd();
 	_add_html_widget(glade_xml_get_widget(gxml, "vbox12"));
 }
