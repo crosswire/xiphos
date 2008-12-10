@@ -1272,6 +1272,7 @@ add_columns(GtkTreeView * treeview,
 		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
 					    GTK_ICON_SIZE_MENU));
 	gtk_widget_show(image);
+	gtk_widget_set_tooltip_text(image, "Installed");
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1293,7 +1294,7 @@ add_columns(GtkTreeView * treeview,
 		image = gtk_image_new_from_stock(GTK_STOCK_ADD,
 						 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
-
+	gtk_widget_set_tooltip_text(image, "Selected");
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
@@ -1322,6 +1323,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("dlg-un-16.png");
 	gtk_widget_show(image);
+	gtk_widget_set_tooltip_text(image, "Indexed");
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1339,6 +1341,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("epiphany-secure.png");
 	gtk_widget_show(image);
+	gtk_widget_set_tooltip_text(image, "Locked");
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1360,6 +1363,7 @@ add_columns(GtkTreeView * treeview,
 	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
 					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
+	gtk_widget_set_tooltip_text(image, "Update Availability");
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);

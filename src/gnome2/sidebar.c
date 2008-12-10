@@ -562,6 +562,7 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 		main_display_bible(NULL, key);
 		val_key = main_update_nav_controls(settings.currentverse);
 		g_free(val_key);
+
 	}	
 	switch (event->button) {
 	case 3:
