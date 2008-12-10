@@ -94,7 +94,7 @@ static gboolean _in_url;
 static gchar *module_selected;
 gchar *verse_selected;
 
-GtkWidget *remember_button1;	/* needed to change button in search stop */
+GtkWidget *remember_search;	/* needed to change button in search stop */
 
 extern int drag_module_type;
 
@@ -236,20 +236,19 @@ void on_button_begin_search(GtkButton * button, gpointer user_data)
 		terminate_search = TRUE;
 		const gchar *label;
 		label = g_strdup("gtk-find");
-		gtk_button_set_label((GtkButton *)remember_button1, label);
-		gtk_button_set_use_stock(button, TRUE);
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		while (gtk_events_pending())
 			gtk_main_iteration();
-	} else
-	{
+	} else {
 		const gchar *label;
 		label = g_strdup("gtk-stop");
-		gtk_button_set_label((GtkButton *)remember_button1, label);
-		gtk_button_set_use_stock(button, TRUE);
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		main_do_dialog_search();
 		label = g_strdup("gtk-find");
-		gtk_button_set_label((GtkButton *)remember_button1, label);
-		gtk_button_set_use_stock(button, TRUE);
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 	}
 }
 
@@ -2456,8 +2455,8 @@ void _create_search_dialog(void)
 	g_signal_connect(search1.dialog, "destroy",
 			 G_CALLBACK(_on_destroy), NULL);
 
-	remember_button1 = glade_xml_get_widget(gxml, "button1");
-	g_signal_connect(remember_button1, "clicked",
+	remember_search = glade_xml_get_widget(gxml, "button1");
+	g_signal_connect(remember_search, "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);	
 
 	search1.label_search_module =

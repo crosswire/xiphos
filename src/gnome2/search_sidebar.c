@@ -40,6 +40,7 @@
 
 SIDESEARCH ss;
 
+GtkWidget *remember_search;	/* needed to change button in search stop */
 
 /******************************************************************************
  * Name
@@ -61,10 +62,21 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 {
 	if (search_active) {
 		terminate_search = TRUE;
+		const gchar *label;
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	} else {
+		const gchar *label;
+		label = g_strdup("gtk-stop");
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 		main_do_sidebar_search(user_data);
+		label = g_strdup("gtk-find");
+		gtk_button_set_label((GtkButton *)remember_search, label);
+		gtk_button_set_use_stock((GtkButton *)remember_search, TRUE);
 	}
 }
  
@@ -121,7 +133,6 @@ void gui_create_search_sidebar(void)
 	GtkWidget *frame_search;
 	GtkWidget *vbox5;
 	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *btnSearch;
 	GtkWidget *frame2;
 	GtkWidget *vbox2;
 	GtkWidget *frame3;
@@ -173,14 +184,14 @@ void gui_create_search_sidebar(void)
 	gtk_box_pack_start(GTK_BOX(vbox5), ss.entrySearch, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(ss.entrySearch, 130, -1);;	
 	
-	btnSearch = gtk_button_new_from_stock(GTK_STOCK_FIND);
-	gtk_widget_show (btnSearch);
-	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
+	remember_search = gtk_button_new_from_stock(GTK_STOCK_FIND);
+	gtk_widget_show (remember_search);
+	gtk_box_pack_start(GTK_BOX(vbox5), remember_search, TRUE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips,
-			     btnSearch,
+			     remember_search,
 			     _("This is an inclusive (\"AND\") search:\nFind matches showing all words."),
 			     NULL);
-	gtk_button_set_relief (GTK_BUTTON (btnSearch), GTK_RELIEF_NONE);
+	gtk_button_set_relief (GTK_BUTTON (remember_search), GTK_RELIEF_NONE);
 
 	ss.progressbar_search = gtk_progress_bar_new();
 	gtk_widget_show(ss.progressbar_search);
@@ -400,14 +411,14 @@ void gui_create_search_sidebar(void)
 	
 
 	g_signal_connect(GTK_OBJECT(ss.rrbUseBounds),
-			   "toggled",
-			   G_CALLBACK(on_rrbUseBounds_toggled),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(btnSearch), "clicked",
-			   G_CALLBACK(on_search_botton_clicked), NULL);
+			 "toggled",
+			 G_CALLBACK(on_rrbUseBounds_toggled),
+			 NULL);
+	g_signal_connect(GTK_OBJECT(remember_search), "clicked",
+			 G_CALLBACK(on_search_botton_clicked), NULL);
 			   
-       g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
-                          G_CALLBACK(on_search_botton_clicked), NULL);
+	g_signal_connect(GTK_OBJECT(ss.entrySearch), "activate",
+			 G_CALLBACK(on_search_botton_clicked), NULL);
 			   
 			   
 	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",
