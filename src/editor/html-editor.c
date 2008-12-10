@@ -733,7 +733,7 @@ save_through_persist_file(EDITOR * e, const gchar * filename)
 		change_window_title(e->window, filename);
 	}
 	e->is_changed = FALSE;
-	g_free((gchar *) filename);
+	//g_free((gchar *) filename);
 	GNOME_GtkHTML_Editor_Engine_dropUndo(e->engine, &ev);
 	CORBA_exception_free(&ev);
 	return TRUE;
@@ -837,13 +837,22 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 	gchar *studypad_dir;
 	
 	studypad_dir = g_strdup_printf("%s/", settings.studypaddir);
-	
-	dialog = gtk_file_chooser_dialog_new("Open File",
-					NULL,
-					GTK_FILE_CHOOSER_ACTION_OPEN,
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-					NULL);
+	if(op == OP_SAVE_THROUGH_PERSIST_FILE) {		
+		dialog = gtk_file_chooser_dialog_new("Save File As",
+						NULL,
+						GTK_FILE_CHOOSER_ACTION_SAVE,
+						GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						GTK_STOCK_SAVE_AS, GTK_RESPONSE_ACCEPT,
+						NULL);
+		
+	} else {
+		dialog = gtk_file_chooser_dialog_new("Open File",
+						NULL,
+						GTK_FILE_CHOOSER_ACTION_OPEN,
+						GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+						NULL);
+	}
 	gtk_file_chooser_set_current_folder((GtkFileChooser*)dialog, studypad_dir);
 	
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
@@ -851,12 +860,17 @@ open_or_save_as_dialog(EDITOR * e, FileSelectionOperation op)
 		char *filename;
 		
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		filename = g_path_get_basename(filename);			
-		_load_file(e, filename);
+		//filename = g_path_get_basename(filename);
+		GS_message(("filename: %s",filename));
+		if(op == OP_SAVE_THROUGH_PERSIST_FILE) 
+			save_through_persist_file(e, filename);
+		else
+			_load_file(e, filename);
+		
 		g_free (filename);
 	}
 	
-	//this actually causes a segfault; sorry!
+	//this actually causes a segfault; sorry! :FIXED 
 	gtk_widget_destroy (dialog);
 	
 	/*
@@ -1085,12 +1099,12 @@ menu_format_html_cb(BonoboUIComponent * component,
 static void
 _load_file(EDITOR * e, const gchar * filename)
 {
-	GtkWidget *choser;
+	//GtkWidget *choser;
 	if (e->filename)
 		g_free(e->filename);
 	e->filename = g_strdup(filename);
 
-	GS_message((filename));
+	GS_message(("_load_file filename: %s",filename));
 	
 	xml_set_value("GnomeSword", "studypad", "lastfile",
 		      e->filename);
@@ -1130,7 +1144,7 @@ _load_file(EDITOR * e, const gchar * filename)
 		g_warning("Cannot load.");
 	GNOME_GtkHTML_Editor_Engine_dropUndo(e->engine, &ev);
 	CORBA_exception_free(&ev);
-	g_free((gchar *) filename);
+	//g_free((gchar *) filename);
 	e->is_changed = FALSE;
 #endif
 }
