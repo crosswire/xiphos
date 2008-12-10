@@ -47,7 +47,7 @@
     !define APP_URL "http://gnomesword.sf.net/"
 
     ; Paths with application files for installer
-    !define PATH_CORE "..\gs_bin"
+    !define PATH_CORE "..\gs_bin-test"
     !define PATH_IMG "img"
 
     ; Files
@@ -233,10 +233,10 @@ Section $(CORE_SEC_TITLE) SecCore
     ; GnomeSword as default handler of url  sword://
     WriteRegStr HKCR "sword" "" "URL:sword Protocol"
     WriteRegStr HKCR "sword" "URL Protocol" ""
-    WriteRegStr HKCR "sword\shell" "" ""
-    WriteRegStr HKCR "sword\shell\open" "" ""
+    WriteRegStr HKCR "sword\DefaultIcon" "" \
+        '"$INSTDIR\bin\${APP_BINARY_NAME}"'
     WriteRegStr HKCR "sword\shell\open\command" "" \
-        "\$\"$INSTDIR\bin\${APP_BINARY_NAME}\$\" \$\"%1\$\""
+        '"$INSTDIR\bin\${APP_BINARY_NAME}" "%1"'
 
     ;Create uninstaller
     WriteUninstaller "$INSTDIR\${UNINST_EXE}"
