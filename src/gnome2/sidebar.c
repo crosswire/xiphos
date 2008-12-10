@@ -954,7 +954,7 @@ GtkWidget *create_menu_prayerlist_mod(void)
 		    image_locator("new_tab_button.png");
 	if (!menu_prayerlist_mod_uiinfo[1].pixmap_info)
 		menu_prayerlist_mod_uiinfo[1].pixmap_info =
-		    image_locator("dlg-un.png");
+		    image_locator("silk-edit-bookmarks.png");
 	/* end magic */
 
 	menu = gtk_menu_new();

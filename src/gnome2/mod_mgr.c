@@ -165,7 +165,7 @@ create_pixbufs(void)
 	INSTALLED = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
-	FASTICON  = pixbuf_finder("dlg-un-16.png", NULL);
+	FASTICON  = pixbuf_finder("indexed-16.png", NULL);
 	NO_INDEX  = gtk_widget_render_icon(dialog,
 					   GTK_STOCK_CANCEL,
 					   GTK_ICON_SIZE_MENU, NULL);
@@ -1323,7 +1323,7 @@ add_columns(GtkTreeView * treeview,
 
 	/* fast index ready */
 	column = gtk_tree_view_column_new();
-	image = pixmap_finder("dlg-un-16.png");
+	image = pixmap_finder("indexed-16.png");
 	gtk_widget_show(image);
 	gtk_widget_set_tooltip_text(image, _("The index icon means that a fast search ('lucene') index exists for this module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
