@@ -1,3 +1,8 @@
+2008-12-10  karl <charcoal@users.sf.net>
+
+	* configure against gtk_widget_set_tooltip_text() for older
+	  systems (e.g f7).
+
 2008-12-09  karl <charcoal@users.sf.net>
 
 	* win32-specific hack, to cd to gnomesword's own dir.

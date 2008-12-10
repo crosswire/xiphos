@@ -214,6 +214,8 @@ fi
 AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
 AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
 
+AC_CHECK_LIB(gtk-x11-2.0, gtk_widget_set_tooltip_text)
+
 AC_SUBST(GECKO_HOME)
 AC_SUBST(GECKO_COMPONENT_LIBS)
 AC_SUBST(GECKO_COMPONENT_CFLAGS)
