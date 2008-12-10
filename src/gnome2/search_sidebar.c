@@ -32,6 +32,7 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
+#include "main/search_dialog.h"
 #include "main/search_sidebar.h"
 #include "main/sword.h"
 #include "main/settings.h"
@@ -58,7 +59,13 @@ SIDESEARCH ss;
 
 static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 {
-	main_do_sidebar_search(user_data);
+	if (search_active) {
+		terminate_search = TRUE;
+		while (gtk_events_pending())
+			gtk_main_iteration();
+	} else {
+		main_do_sidebar_search(user_data);
+	}
 }
  
 

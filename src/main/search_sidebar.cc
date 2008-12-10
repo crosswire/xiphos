@@ -36,6 +36,7 @@ extern "C" {
 #endif
 	
 
+#include "main/search_dialog.h"
 #include "main/search_sidebar.h"
 #include "main/settings.h"
 #include "main/sword.h"
@@ -64,43 +65,6 @@ static gchar *get_modlist_string(GList * mods);
 static GList *get_custom_list_from_name(const gchar * label);
 static void add_ranges(void);
 static void add_modlist(void);
-
-
-/******************************************************************************
- * Name
- *  search_percent_update
- *
- * Synopsis
- *   #include "main/search.h"
- *
- *   void search_percent_update(char percent, void *userData)	
- *
- * Description
- *    updates the progress bar during shortcut bar search
- *
- * Return value
- *   void
- */ 
-
-void main_sidebar_search_percent_update(char percent, void *userData)
-{
-	char maxHashes = *((char *) userData);
-	float num;
-	char buf[80];
-	static char printed = 0;
-	
-	while ((((float) percent) / 100) * maxHashes > printed) {
-		sprintf(buf, "%f", (((float) percent) / 100));
-		num = (float) percent / 100;
-		gtk_progress_bar_update((GtkProgressBar *)
-				   ss.progressbar_search, num);
-		printed++;
-	}
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	printed = 0;
-}
-
 
 
 /**********************************************************************/
@@ -278,9 +242,14 @@ void main_do_sidebar_search(gpointer user_data)
 	search_params =
 	    GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)->active ? 0 : REG_ICASE;
 
+	terminate_search = FALSE;
+	search_active = TRUE;
+
 	finds = backendSearch->do_module_search(search_module, search_string,
 				 settings.searchType, search_params, FALSE);
 	g_string_free(new_search, TRUE);
+
+	search_active = FALSE;
 
 	fill_search_results_list(finds);
 }
@@ -381,4 +350,44 @@ void main_search_sidebar_fill_bounds_combos(void)
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryLower),0);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(ss.entryUpper),65);	
+}
+
+
+/******************************************************************************
+ * Name
+ *  search_percent_update
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void search_percent_update(char percent, void *userData)	
+ *
+ * Description
+ *    updates the progress bar during shortcut bar search
+ *
+ * Return value
+ *   void
+ */ 
+
+void main_sidebar_search_percent_update(char percent, void *userData)
+{
+	char maxHashes = *((char *) userData);
+	float num;
+	char buf[80];
+	static char printed = 0;
+	
+	if (terminate_search) {
+		backendSearch->terminate_search();
+	} else {
+		while ((((float) percent) / 100) * maxHashes > printed) {
+		    sprintf(buf, "%f", (((float) percent) / 100));
+		    num = (float) percent / 100;
+		    gtk_progress_bar_update((GtkProgressBar *)
+					    ss.progressbar_search, num);
+		    printed++;
+		}
+	}
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	printed = 0;
 }
