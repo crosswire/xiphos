@@ -1242,9 +1242,9 @@ fixed_toggled(GtkCellRendererToggle *cell,
  *   void
  */
 
-#ifndef HAVE_LIBGTK_X11_2_0
+#if !defined(HAVE_LIBGTK_X11_2_0) && !defined(HAVE_LIBGTK_WIN32_2_0)
 #define	gtk_widget_set_tooltip_text(x,y)	/* too old for this tooltip support */
-#endif /* HAVE_LIBGTK_X11_2_0 */
+#endif /* !HAVE_LIBGTK_X11_2_0 && !HAVE_LIBGTK_WIN32_2_0 */
 
 static void
 add_columns(GtkTreeView * treeview,
