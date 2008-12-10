@@ -4,6 +4,7 @@
 	* add sidebar-vs-dialog sensitivity to html markup wipe.
 	* disable Edit->Copy for now -- no supporting function.
 	* fixed sidebar search crash when re-starting running search.
+	* fix double-click failure to update verse navbar.
 
 2008-12-08  terry <tbiggs@users.sourceforge.net>
 
