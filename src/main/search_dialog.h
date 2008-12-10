@@ -30,7 +30,7 @@ extern "C" {
 
 void main_drag_drop_display_in_main(const char * uri);
 void main_add_mod_to_list(GtkWidget * tree_widget, gchar * mod_name);
-void main_finds_verselist_selection_changed(GtkTreeSelection * selection, gpointer data);
+void main_finds_verselist_selection_changed(GtkTreeSelection * selection, GtkTreeModel * model, gboolean is_double_click);
 void main_selection_modules_lists_changed(GtkTreeSelection * selection, gpointer data);
 void main_selection_finds_list_changed(GtkTreeSelection *  selection, gpointer data);
 void main_comboboxentry2_changed(GtkComboBox * combobox, gpointer user_data);

@@ -800,13 +800,14 @@ void main_selection_finds_list_changed(GtkTreeSelection *
  *   void
  */
 
-void main_finds_verselist_selection_changed(GtkTreeSelection * selection, 
-					    gpointer data)
+void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
+					    GtkTreeModel * model, 
+					    gboolean is_double_click)
 {
 	gchar *text, *buf, *module, *key;
 	GString *text_str;
 	gint textlen;
-	GtkTreeModel *model;
+	//GtkTreeModel *model;
 	GtkTreeIter selected;
 	GString *html_text;
 
@@ -835,6 +836,8 @@ void main_finds_verselist_selection_changed(GtkTreeSelection * selection,
 	}
 	const gchar *temp_key = main_url_encode(key);
 	verse_selected = g_strdup_printf("sword://%s/%s", module, temp_key);
+	if (is_double_click)
+		main_url_handler(verse_selected, TRUE);
 	g_free((gchar *)temp_key);
 
 	text_str = g_string_new(backendSearch->get_render_text(module,key));
