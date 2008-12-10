@@ -53,9 +53,9 @@ char *main_get_search_rendered_text(char *module_name, char *key);
 }
 #else
 
+#endif
+
 extern gboolean terminate_search;	// def'd in search_dialog.cc.
 extern gboolean search_active;		// def'd in search_dialog.cc.
-
-#endif
 
 #endif
