@@ -7,6 +7,7 @@
 	* fix double-click failure to update verse navbar.
 	* (mwtalbert) add tooltips to mod.mgr column headers.
 	* new "indexed" icons for mod.mgr from simon meers.
+	* add find/stop toggle to sidebar search.
 
 2008-12-08  terry <tbiggs@users.sourceforge.net>
 
