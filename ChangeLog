@@ -5,6 +5,7 @@
 	* disable Edit->Copy for now -- no supporting function.
 	* fixed sidebar search crash when re-starting running search.
 	* fix double-click failure to update verse navbar.
+	* (mwtalbert) add tooltips to mod.mgr column headers.
 
 2008-12-08  terry <tbiggs@users.sourceforge.net>
 
