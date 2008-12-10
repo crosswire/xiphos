@@ -1272,7 +1272,8 @@ add_columns(GtkTreeView * treeview,
 		 : gtk_image_new_from_stock(GTK_STOCK_APPLY,
 					    GTK_ICON_SIZE_MENU));
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, "Installed");
+	gtk_widget_set_tooltip_text(image,
+				    _("A checkmark means this module is already installed"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1287,14 +1288,15 @@ add_columns(GtkTreeView * treeview,
 			 G_CALLBACK(fixed_toggled), model);
 
 	column = gtk_tree_view_column_new();
-	if (remove)
-		image = gtk_image_new_from_stock("gtk-yes",//GTK_STOCK_REMOVE,
-						 GTK_ICON_SIZE_MENU);
-	else
-		image = gtk_image_new_from_stock(GTK_STOCK_ADD,
-						 GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_stock((remove
+					  ? "gtk-yes" //GTK_STOCK_REMOVE
+					  : GTK_STOCK_ADD),
+					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, "Selected");
+	gtk_widget_set_tooltip_text(image,
+				    (remove
+				     ? _("Click the box to work on this module")
+				     : _("Click the box to select this module for install/update")));
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
@@ -1323,7 +1325,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("dlg-un-16.png");
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, "Indexed");
+	gtk_widget_set_tooltip_text(image, _("The index icon means that a fast search ('lucene') index exists for this module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1341,7 +1343,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("epiphany-secure.png");
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, "Locked");
+	gtk_widget_set_tooltip_text(image, _("The lock icon means that this module is encrypted, and requires that you purchase an unlock key from the content owner"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1363,7 +1365,7 @@ add_columns(GtkTreeView * treeview,
 	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
 					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, "Update Availability");
+	gtk_widget_set_tooltip_text(image, _("The refresh icon means that the Installed module is older than the newer Available module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
