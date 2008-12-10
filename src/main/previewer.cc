@@ -282,15 +282,19 @@ void mark_search_words(GString * str, gboolean eliminate)
 	}
 
 	if (eliminate) {
-		/* blank out html markup, to avoid mis-marking it as matches. */
+		/* blank out html <a></a> markup, to avoid mis-marking it as matches. */
 		for (s = strchr(str->str, '<'); s; s = strchr(s, '<')) {
-			if (t = strchr(s, '>')) {
-				while (s <= t)
-					*(s++) = ' ';
-			} else {
-				GS_message(("mark_search_words: Unmatched <> in %s\n", s));
-				goto out;
-			}
+			if ((*(s+1) == 'a') ||
+			    ((*(s+1) == '/') && (*(s+2) == 'a'))) {
+				if (t = strchr(s, '>')) {
+					while (s <= t)
+						*(s++) = ' ';
+				} else {
+					GS_message(("mark_search_words: Unmatched <> in %s\n", s));
+					goto out;
+				}
+			} else
+				++s;
 		}
 		/* move <> with excess spaces up close to their intended targets. */
 		for (s = strstr(str->str, " &gt;"); s; s = strstr(str->str, " &gt;")) {
