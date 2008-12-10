@@ -1,3 +1,7 @@
+2008-12-08  terry <tbiggs@users.sourceforge.net>
+
+	* fixed studypad open and save as dialogs
+
 2008-12-10  karl <charcoal@users.sf.net>
 
 	* configure against gtk_widget_set_tooltip_text() for older
