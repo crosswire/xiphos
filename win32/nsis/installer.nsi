@@ -43,11 +43,11 @@
     !define APP_NAME "GnomeSword"
     !define APP_BINARY_NAME "gnomesword.exe"
     !define APP_VERS "3.0"
-    !define APP_EDITION "win32-test03"
+    !define APP_EDITION "win32-test04"
     !define APP_URL "http://gnomesword.sf.net/"
 
     ; Paths with application files for installer
-    !define PATH_CORE "..\gs_bin-test"
+    !define PATH_CORE "..\gs_bin"
     !define PATH_IMG "img"
 
     ; Files
