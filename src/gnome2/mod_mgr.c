@@ -1330,7 +1330,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("indexed-16.png");
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The index icon means that a fast search ('lucene') index exists for this module"));
+	gtk_widget_set_tooltip_text(image, _("The index icon means you have built an optimized ('lucene') index for this module for fast searching (see the Maintenance pane for this function)"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1348,7 +1348,7 @@ add_columns(GtkTreeView * treeview,
 	column = gtk_tree_view_column_new();
 	image = pixmap_finder("epiphany-secure.png");
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The lock icon means that this module is encrypted, and requires that you purchase an unlock key from the content owner"));
+	gtk_widget_set_tooltip_text(image, _("The lock icon means this module is encrypted, and requires that you purchase an unlock key from the content owner"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
@@ -1370,7 +1370,7 @@ add_columns(GtkTreeView * treeview,
 	image = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
 					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
-	gtk_widget_set_tooltip_text(image, _("The refresh icon means that the Installed module is older than the newer Available module"));
+	gtk_widget_set_tooltip_text(image, _("The refresh icon means the Installed module is older than the newer Available module: You should update the module"));
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
 	gtk_tree_view_column_set_widget(column, image);
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
