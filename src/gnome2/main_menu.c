@@ -1044,6 +1044,8 @@ gui_create_main_menu(GtkWidget * app)
 	widgets.readaloud_item = view1_menu_uiinfo[9].widget;
 	widgets.showversenum_item = view1_menu_uiinfo[10].widget;
 	widgets.versehighlight_item = view1_menu_uiinfo[11].widget;
+	gtk_widget_hide(edit1_menu_uiinfo[0].widget);	/* disable Copy */
+	gtk_widget_hide(edit1_menu_uiinfo[1].widget);	/* disable Copy */
 #ifdef USE_GTKMOZEMBED
 	widgets.doublespace_item = view1_menu_uiinfo[12].widget;
 #endif /* USE_GTKMOZEMBED */
