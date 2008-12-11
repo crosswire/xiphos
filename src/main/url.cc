@@ -201,9 +201,11 @@ const char *display_progs[] = {
 static gint show_separate_image(const gchar * filename, gboolean clicked)
 {
 	if (clicked) {
-#ifdef GNOME_URL_SHOW_WORKS_LIKE_IT_IS_SUPPOSED_TO
-
-		// (but as of october 2008, it doesn't.)
+#ifdef WIN32
+		// as of october 2008, gnome_url_show() doesn't behave
+		// properly on linux, because it does not respect the user's
+		// preferences properly.  so this is used on windows only.
+		// it kicks off the standard windows fax/pic viewer.
 
 		gboolean result;
 		gchar *file_as_url = g_strdup_printf("file://%s", filename);

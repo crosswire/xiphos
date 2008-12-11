@@ -8,6 +8,7 @@
 	  systems (e.g f7).
 	* set up #ifdef'd symbols for keysyms (linux/win32) to restore
 	  keyboard shortcuts.
+	* enable gnome_url_show() on WIN32 for separate image viewing.
 
 2008-12-09  karl <charcoal@users.sf.net>
 
