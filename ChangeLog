@@ -1,3 +1,8 @@
+2008-12-11  terry <tbiggs@users.sourceforge.net>
+
+	* fixed printing in studypad
+	* hid print menu items in WIN32 - I hope
+	
 2008-12-10  terry <tbiggs@users.sourceforge.net>
 
 	* fixed studypad open and save as dialogs

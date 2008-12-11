@@ -1,0 +1,29 @@
+<Root>
+	<commands>
+	        <cmd name="FileExit" _label="Exit" _tip="Exit the program" pixtype="stock" pixname="Exit" accel="*Control*q"/>
+		<cmd name="FormatHTML" _label="HTML mode" type="toggle" _tip="HTML Format switch"/>
+		<cmd name="DeleteNote"   _label="_Delete Personal Comment"    _tip="Delete the current note" />
+	</commands>
+	<menu>
+		<submenu name="File" _label="_File">
+			<menuitem name="SaveNote" verb="" _label="_Save (Personal Comment)" _tip="Save the current note" pixtype="stock" pixname="Save"/>
+			<separator/>
+			<menuitem name="DeleteNote" verb="" _label="_Delete Personal Comment" _tip="Delete the current note" pixtype="stock" pixname="gtk-delete"/>
+			<separator/>
+			<menuitem name="FileExit" verb="" _label="E_xit"/>
+		</submenu>
+		<placeholder name="Component"/>
+		<submenu name="Format" _label="For_mat">
+			<menuitem name="FormatHTML" verb=""/>
+                       <separator/>
+                       <placeholder name="FormatParagraph"/>
+               </submenu>
+		
+	</menu>
+
+	<dockitem name="Toolbar">
+		<toolitem name="SaveNote" verb="" _label="Save" _tip="Save" pixtype="stock" pixname="Save"/>
+
+		<separator/>
+	</dockitem>
+</Root>

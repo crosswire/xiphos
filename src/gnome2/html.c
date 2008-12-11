@@ -718,7 +718,7 @@ struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
  *
  * Description
  *   printing using gtk_html_print_with_header_footer()
- *
+ * gtk_print
  * Return value
  *   void
  */
