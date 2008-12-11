@@ -1,4 +1,4 @@
-2008-12-08  terry <tbiggs@users.sourceforge.net>
+2008-12-10  terry <tbiggs@users.sourceforge.net>
 
 	* fixed studypad open and save as dialogs
 
@@ -6,6 +6,8 @@
 
 	* configure against gtk_widget_set_tooltip_text() for older
 	  systems (e.g f7).
+	* set up #ifdef'd symbols for keysyms (linux/win32) to restore
+	  keyboard shortcuts.
 
 2008-12-09  karl <charcoal@users.sf.net>
 

@@ -96,4 +96,46 @@ void gui_show_main_window(void);
 }
 #endif
 
+#ifndef WIN32
+
+#define	GS_KEY_F1	67
+#define	GS_KEY_F2	68
+#define	GS_KEY_F3	69
+#define	GS_KEY_F4	70
+
+#define	GS_KEY_B	56
+#define	GS_KEY_C	54
+#define	GS_KEY_D	40
+#define	GS_KEY_F	41
+#define	GS_KEY_G	42
+#define	GS_KEY_L	46
+#define	GS_KEY_N	57
+#define	GS_KEY_P	33
+#define	GS_KEY_Z	52
+
+#define	GS_KEY_PLUS	21
+#define	GS_KEY_MINUS	20
+
+#else
+
+#define	GS_KEY_F1	112
+#define	GS_KEY_F2	113
+#define	GS_KEY_F3	114
+#define	GS_KEY_F4	115
+
+#define	GS_KEY_B	66
+#define	GS_KEY_C	67
+#define	GS_KEY_D	68
+#define	GS_KEY_F	70
+#define	GS_KEY_G	71
+#define	GS_KEY_L	76
+#define	GS_KEY_N	78
+#define	GS_KEY_P	80
+#define	GS_KEY_Z	90
+
+#define	GS_KEY_PLUS	187
+#define	GS_KEY_MINUS	189
+
+#endif /* !WIN32 */
+
 #endif
