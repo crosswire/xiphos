@@ -13,7 +13,9 @@ ui_DATA = \
 	logo.png \
 	sword3.png \
 	editor_studypad.xml \
-	editor_note.xml
+	editor_studypad_WIN32.xml \
+	editor_note.xml \
+	editor_note_WIN32.xml
 
 uidir = $(pkgdatadir)
 
