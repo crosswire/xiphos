@@ -577,19 +577,19 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 	guint state = event->state & (GDK_SHIFT_MASK  | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK );
 
 	switch(event->hardware_keycode) {
-	case 40: // Alt-D  dictionary entry
+	case GS_KEY_D: // Alt-D  dictionary entry
 		if (state == GDK_MOD1_MASK)
 			gtk_widget_grab_focus(widgets.entry_dict);
 		break;
 
-	case 42: // Alt-G  genbook entry
+	case GS_KEY_G: // Alt-G  genbook entry
 		if (state == GDK_MOD1_MASK) {
 			gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_comm_book),1);
 			gtk_widget_grab_focus(navbar_book.lookup_entry);
 		}
 		break;
 
-	case 46: // Ctrl-L  verse entry
+	case GS_KEY_L: // Ctrl-L  verse entry
 		if (state == GDK_CONTROL_MASK)
 #ifdef OLD_NAVBAR
 			gtk_widget_grab_focus(nav_bar.lookup_entry);
@@ -598,7 +598,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 #endif
 		break;
 
-	case 41: // Ctrl-F  find text
+	case GS_KEY_F: // Ctrl-F  find text
 		if (state == GDK_CONTROL_MASK) {
 			if (settings.showtexts) {
 				gui_find_dlg(widgets.html_text,
@@ -623,7 +623,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case 54: // Alt-C  commentary pane
+	case GS_KEY_C: // Alt-C  commentary pane
 		if (state == GDK_MOD1_MASK) {
 #ifdef OLD_NAVBAR
 			gtk_widget_grab_focus(nav_bar.lookup_entry);
@@ -634,7 +634,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case 56: // Alt-B  bookmark
+	case GS_KEY_B: // Alt-B  bookmark
 		if (state == GDK_MOD1_MASK) {
 			gchar *label = g_strdup_printf("%s, %s",
 						       settings.currentverse,
@@ -646,14 +646,14 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 		}
 		break;
 
-	case 52: // Alt-Z  open personal commentary
+	case GS_KEY_Z: // Alt-Z  open personal commentary
 		if (state == GDK_MOD1_MASK)
 			access_to_edit_percomm();
 		break;
 
-	// future reference: 97 = Home; 103 = End; 99 = PageUp; 105 = PageDown
+	// future reference: 97 = Home; 103 = End; 99 = PageUp; 105 = PageDown (Linux)
 
-	case 33:  // P    "previous" or "parallel"
+	case GS_KEY_P: // P    "previous" or "parallel"
 		if (state == GDK_CONTROL_MASK)		// Ctrl-P verse
 			access_on_up_eventbox_button_release_event
 			    (VERSE_BUTTON);
@@ -667,7 +667,7 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			on_undockInt_activate(NULL);
 		break;
 
-	case 57: // N    "next"
+	case GS_KEY_N: // N    "next"
 		if (state == GDK_CONTROL_MASK)		// Ctrl-N verse
 			access_on_down_eventbox_button_release_event
 			    (VERSE_BUTTON);
@@ -679,28 +679,28 @@ gboolean on_vbox1_key_press_event(GtkWidget * widget, GdkEventKey * event,
 			    (BOOK_BUTTON);
 		break;
 
-	case 21: // Ctrl-Plus  Increase base font size
+	case GS_KEY_PLUS : // Ctrl-Plus  Increase base font size
 		if (state == (GDK_CONTROL_MASK|GDK_SHIFT_MASK))
 			new_base_font_size(TRUE);
 		break;
 
-	case 20: // Ctrl-Minus  Decrease base font size
+	case GS_KEY_MINUS: // Ctrl-Minus  Decrease base font size
 		if (state == GDK_CONTROL_MASK)
 			new_base_font_size(FALSE);
 		break;
-	case 67: // F1 help
+	case GS_KEY_F1: // F1 help
 		if (state == 0)
 			on_help_contents_activate(NULL, NULL);
 		break;
-	case 68: // F2 preferences
+	case GS_KEY_F2: // F2 preferences
 		if (state == 0)
 			on_preferences1_activate(NULL, NULL);
 		break;
-	case 69: // F3 search
+	case GS_KEY_F3: // F3 search
 		if (state == 0)
 			main_open_search_dialog();
 		break;
-	case 70: // F4 module manager
+	case GS_KEY_F4: // F4 module manager
 		if (state == 0)
 			on_mod_mgr(NULL, NULL);
 		break;
