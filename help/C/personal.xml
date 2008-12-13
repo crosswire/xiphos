@@ -107,7 +107,8 @@
 		is unlikely that more than a tiny fraction of all verses will
 		have personal commentary attached to them.  A verse list
 		showing where personal commentary notes exist is available
-		from the right-click menu.
+		from <menuchoice><guisubmenu>Right Click</guisubmenu><guimenuitem>
+		Dump Pers.Comm.</guimenuitem></menuchoice>.
 		</para>
 			        
 	        <tip>

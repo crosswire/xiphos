@@ -14,6 +14,7 @@
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY license SYSTEM "license.xml">
   <!ENTITY onlinehelp SYSTEM "onlinehelp.xml">
+  <!ENTITY originallanguage SYSTEM "originallanguage.xml">
 
   <!ENTITY appversion "2.4.0">
   <!ENTITY manrevision "2.4.0">
@@ -429,6 +430,12 @@ Template last modified Apr 11, 2002
   <sect1 id="onlinehelp">
     <title>Getting Help Online</title>
     &onlinehelp;
+  </sect1>
+
+  <!-- Original Language Research -->
+  <sect1 id="originallanguage">
+     <title>Original Language Research</title>
+     &originallanguage;
   </sect1>
 
   <!-- Authors -->
