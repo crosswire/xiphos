@@ -897,16 +897,20 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 N_("Advanced search using the search dialog"),
 	 main_open_search_dialog, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_OPEN,
-	 0, (GdkModifierType) 0, NULL},
+	 GDK_F3, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
-					  NULL),
+	{
+	GNOME_APP_UI_ITEM, N_("_Preferences"),
+	N_("Set user preferences"),
+	on_preferences1_activate, NULL, NULL,
+	GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
+	GDK_F2, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Module Manager"),
 	 N_("Use module manager to install and remove Sword modules"),
 	 on_mod_mgr, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
-	 0, (GdkModifierType) 0, NULL},
+	 GDK_F4, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -1014,7 +1018,7 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 N_("Open the GnomeSword manual"),
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
-	 0, 0, NULL},
+	 GDK_F1, 0, NULL},
 	{
 	GNOME_APP_UI_ITEM, N_("_Mailing List"),
 	N_("Sign up for the users' mailing list"),
@@ -1029,20 +1033,20 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("About _Translation ..."),
+	 GNOME_APP_UI_ITEM, N_("About _Translation"),
 	 N_("Translating GnomeSword to other languages"),
 	 on_about_translation_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project ..."),
+	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project"),
 	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("About _GnomeSword ..."),
+	 GNOME_APP_UI_ITEM, N_("About _GnomeSword"),
 	 N_("About this application"),
 	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
