@@ -24,6 +24,16 @@
 						</para>
     				</listitem>
     			</varlistentry>
+			<varlistentry>
+				<term>Windows</term>
+				<listitem>
+					<para>
+						Go to <menuchoice><guisubmenu>All Programs</guisubmenu><guisubmenu>GnomeSword
+						</guisubmenu><guimenuitem>GnomeSword</guimenuitem></menuchoice>.
+					</para>
+				</listitem>
+			</varlistentry>
+
   		  	</variablelist>
     </sect2>
 <!--Starting Gnomesword for the First Time  -->

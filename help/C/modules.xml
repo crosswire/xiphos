@@ -94,19 +94,42 @@
 			</para>
 
 			<para>
-			Take note of the "Install Destination."  Normal usage of Sword Project tools in Linux/UNIX environments includes
-			one's personal area, under ~/.sword, plus a shared system-wide area readable by all users.  If the user does not
-			have write access to the system area, that selection will be greyed-out and unavailable.
+			Take note of the "Install Destination". In most cases, you will have a choice of a personal area or a system area. 
+			The details vary according to your operating system.
 			</para>
-
-			<para>
-			There have been some requests for <application>GnomeSword</application> to provide a means by which an ordinary
-			(non-root) user could start the program, gain temporary write access to the system area while installing modules,
-			and then revoke that access after installation is complete.  Attempting to devise a scheme to do this has proven
-			quite difficult, given the different superuser management schemes employed by various Linux distributions.
-			Therefore, at this time there are no ongoing plans to try to solve this problem, and users are advised to enable
-			write access to the system area outside <application>GnomeSword</application>.
-			</para>
+			
+			<sect4 id="destination-linux">
+				<title>Linux</title>
+				<para>
+    				Unless you run as root (via su or sudo) you will only be able to install in your personal area, under ~/.sword.
+				If you run as root, or change permissions on the shared directory, you will also be able to install modules for
+				all users, typically in /usr/share/sword. There have been some requests for GnomeSword to provide a means by which
+				an ordinary (non-root) user could start the program, gain temporary write access to the system area while installing
+				modules, and then revoke that access after installation is complete.  Attempting to devise a scheme to do this has
+				proven quite difficult, given the different superuser management schemes employed by various Linux distributions. 
+				Therefore, at this time there are no ongoing plans to try to solve this problem, and users are advised to enable 
+				write access to the system area outside GnomeSword.
+				</para>
+			</sect4>
+			
+			<sect4 id="destination-xp">
+				<title>Windows XP</title>
+				<para>
+				You may install modules to a shared folder so the modules are available to all users. If you have previously used
+				"The Sword Project for Windows", this folder will be "C:\Program Files\Crosswire\The Sword Project\Sword". Otherwise
+				it will be "C:\Documents and Settings\All Users\Application Data\.sword". You may also install modules to a location
+				that can only be seen by you. This location is "C:\Documents and Settings\YOUR NAME\Application Data\.sword".
+				</para>
+			</sect4>
+			
+			<sect4 id="destination-vista">
+				<title>Windows Vista</title>
+				<para>
+				Currently, you will only be able to install to your profile. This folder is "C:\Users\matthew\AppData\Roaming\.sword".
+				Support for shared folders is being worked on.
+				</para>
+			</sect4>
+			
 		</sect3>
 	</sect2>
 	

@@ -244,6 +244,13 @@
 	   </para>
 	   
 	   <para>
+		Simple Searches: just type in the words you want to search for. To return only verses that include all of the words,
+		prefix the word with "+". So, in the KJV, you could find Psalm 23 by searching for "+Lord +shepherd +want". To search for
+		an entire phrase, surround the entire phrase with quotes, like "maketh me to lie down" (note that quotes are unnecessary
+		in all of the other examples).
+	   </para>
+	   
+	   <para>
 		Single Letter Wildcard: to search for "veil" or "vail", use this syntax "v?il". The "?" represents a single character
 		that could be anything. A more complex example returns both spellings for Isaiah used in the KJV. "?saia?" will return
 		results for "Isaiah" and "Esaias".
@@ -283,6 +290,15 @@
 
 	   <para>
 		The "Find" button also stops an in-progress search, as its tooltip indicates.
+	   </para>
+
+	   <para>
+		Results will show in the <guibutton>Results</guibutton> tab. If you wish to show Strongs, Morphology, or Footnote tags,
+		make those selections on the <guibutton>Attributes Search</guibutton> tab. Clicking once on the result will show the result
+		in the <guibutton>Advanced Search</guibutton> previewer. Hovering over Strongs, Morphology, Footnote, or Cross-reference
+		tags will show the results in the main previewer. Double-clicking a result will cause the current tab to navigate to that
+		result. This applies to search results in general books and commentaries as well, but note that the respective tab must
+		be visible.
 	   </para>
 
 	   <warning>
