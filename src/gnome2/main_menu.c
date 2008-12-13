@@ -114,6 +114,65 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_mailing_list_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_mailing_list_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   open web browser to the mailing list signup page
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_mailing_list_activate(GtkMenuItem * menuitem,
+			gpointer user_data)
+{
+	GError *error = NULL;
+	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
+				&error) == FALSE) {
+		GS_warning((error->message));
+		g_error_free (error);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_live_chat_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_live_chat_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   open web browser to mibbit irc chat
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_live_chat_activate(GtkMenuItem * menuitem,
+			gpointer user_data)
+{
+	GError *error = NULL;
+	if (gnome_url_show("http://embed.mibbit.com/?server=irc.freenode.net&channel=%23gnomesword",
+				&error) == FALSE) {
+		GS_warning((error->message));
+		g_error_free (error);
+	}
+}
+
+/******************************************************************************
+ * Name
  *  on_menuHistoryitem1_activate
  *
  * Synopsis
@@ -956,6 +1015,18 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP,
 	 0, 0, NULL},
+	{
+	GNOME_APP_UI_ITEM, N_("_Mailing List"),
+	N_("Sign up for the users' mailing list"),
+	on_mailing_list_activate, NULL, NULL,
+	GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	0, 0, NULL},
+	{
+	GNOME_APP_UI_ITEM, N_("_Live Chat"),
+	N_("Chat with other users and developers"),
+	on_live_chat_activate, NULL, NULL,
+	GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("About _Translation ..."),
