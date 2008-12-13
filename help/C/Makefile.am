@@ -2,7 +2,7 @@ entities = \
 	authors.xml	interface.xml	introduction.xml	journals.xml \
 	legal.xml	license.xml	modules.xml		personal.xml \
 	preferences.xml	search.xml	start.xml		onlinehelp.xml \
-	studypad.xml
+	studypad.xml    originallanguage.xml
 	
 figdir = figures
 docname = gnomesword-manual
