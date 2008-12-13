@@ -463,7 +463,8 @@
 					<para>
 					Read Aloud - If you enable this, then GnomeSword will funnel all selected verses through the
 					<application>festival</application> text-to-speech system.  <application>Festival</application> is a
-					widely-available TTS, often installed by default in Linux distributions.
+					widely-available TTS, often installed by default in Linux distributions. Reading aloud is not currently
+					supported on Windows.
 					</para>
 					<para>
 					Also, mouse-selected text may be read aloud from Bibles, commentaries, and general books, using the
@@ -703,6 +704,18 @@
 						<guibutton>P/N</guibutton>: Book previous/next.
 					</listitem>
 				</itemizedlist>
+			</listitem>
+			<listitem>
+				<guibutton>F1</guibutton>: opens this manual.
+			</listitem>
+			<listitem>
+				<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
+			</listitem>
+			<listitem>
+				<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>.
+			</listitem>
+			<listitem>
+				<guibutton>F4</guibutton>: opens <guibutton>Module Manager</guibutton>.
 			</listitem>
 		</itemizedlist>
 	</sect2>
