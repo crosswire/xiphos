@@ -154,6 +154,7 @@ void change_window_title(GtkWidget * window, const gchar * window_title)
 }
 
 
+#ifdef USE_GTKHTML3_14
 static gint
 _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
                          GtkPrintContext *context)
@@ -302,7 +303,7 @@ _do_print (EDITOR * e,
 	
 	gtk_print_operation_set_default_page_setup(operation, setup);
 	
-	result = gtk_html_print_operation_run (e->html_widget, 
+	result = gtk_html_print_operation_run (GTK_HTML(e->html_widget), 
 					       operation, 
 					       action,
 					       GTK_WINDOW (e->window), 
@@ -318,7 +319,7 @@ _do_print (EDITOR * e,
 
 	return result;
 }
-
+#endif
 
 #ifdef USE_GTKHTML3_14_23
 
@@ -1238,14 +1239,22 @@ static
 void print_message_cb(GtkWidget * widget, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
+#ifdef USE_GTKHTML3_14
 	_do_print(e, GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
+#else
+	gui_html_print(e->html_widget,FALSE);
+#endif
 }
 
 static
 void print_preview_message_cb(GtkWidget * widget, gpointer data)
 {
 	EDITOR *e = (EDITOR *) data;
+#ifdef USE_GTKHTML3_14
 	_do_print(e, GTK_PRINT_OPERATION_ACTION_PREVIEW);
+#else
+	gui_html_print(e->html_widget,TRUE);
+#endif
 }
 
 
