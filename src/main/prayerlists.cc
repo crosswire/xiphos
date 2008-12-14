@@ -191,6 +191,7 @@ prayerlist_construct(gchar *listname, gchar *summary)
 	config[listname]["ModDrv"] = "RawGenBook";
 	config[listname]["GSType"] = "PrayerList";
 	config[listname]["Encoding"] = "UTF-8";
+	config[listname]["SourceType"] = "ThML";
 	config[listname]["Lang"] = sword_locale; // set at startup.
 	config[listname]["Version"] = "0.1";
 	config[listname]["MinimumVersion"] = "1.5.11";
