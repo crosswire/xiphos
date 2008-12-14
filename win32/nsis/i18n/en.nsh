@@ -7,16 +7,6 @@
 ;;
 
 ;--------------------------------
-; Script definitions
-
-!define LIC_FILE_ENGLISH "i18n\utf16_gpl-2.0_en.txt"
-
-;--------------------------------
-; License Page
-
-LicenseLangString LICENSE_FILE ${LANG_ENGLISH} "${LIC_FILE_ENGLISH}"
-
-;--------------------------------
 ; Uninstall Log
 
 LangString UNLOG_HEADER ${LANG_ENGLISH} \
