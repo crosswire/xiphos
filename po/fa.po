@@ -1542,7 +1542,7 @@ msgstr "جستجوی پیسرفته"
 
 #: ../src/gnome2/main_menu.c:767
 msgid "Advanced search using the search dialog"
-msgstr ""جستجوی پیشرفته با استفاده از دیالوگ جستجو
+msgstr "جستجوی پیشرفته با استفاده از دیالوگ جستجو"
 
 #: ../src/gnome2/main_menu.c:775
 msgid "_Module Manager"
