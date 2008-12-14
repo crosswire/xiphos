@@ -1,6 +1,7 @@
 2008-12-13  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2423941 Printing, then navigating genbook causes crash
+	* fixed bug #2413029 Printing User Created Modules ignores markup
 	
 2008-12-13 matthew <ransom1982@users.sourceforge.net>
 
