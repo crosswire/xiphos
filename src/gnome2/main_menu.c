@@ -860,7 +860,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Open Study_Pad"),
 	 N_("Open the StudyPad editor"),
 	 open_studypad, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
+	 GNOME_APP_PIXMAP_FILENAME, NULL /* init'd in menu creation */,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{ GNOME_APP_UI_ITEM, N_("_Open Session"),
@@ -1108,6 +1108,15 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 void
 gui_create_main_menu(GtkWidget * app)
 {
+	/*
+	 * this is total magic.  set up menu before using it.
+	 * indices are direct from GnomeUIInfo above.
+	 */
+	if (!file1_menu_uiinfo[0].pixmap_info)
+		file1_menu_uiinfo[0].pixmap_info =
+		    image_locator("silk-edit-bookmarks.png");
+	/* end magic */
+
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 	
 	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
