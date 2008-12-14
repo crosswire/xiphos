@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-13 17:41+0000\n"
-"PO-Revision-Date: 2008-12-13 17:54+0000\n"
+"POT-Creation-Date: 2008-12-14 16:09+0000\n"
+"PO-Revision-Date: 2008-12-14 16:08+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -27,80 +27,80 @@ msgstr "Estudar a Bíblia"
 msgid "Configuration not found"
 msgstr "Configuração não encontrada"
 
-#: ../src/editor/html-editor.c:262
+#: ../src/editor/html-editor.c:263
 #, c-format
 msgid "Page %d of %d"
 msgstr "Página %d de %d"
 
-#: ../src/editor/html-editor.c:382 ../src/editor/html-editor.c:429
+#: ../src/editor/html-editor.c:383 ../src/editor/html-editor.c:430
 msgid "Save As"
 msgstr "Guardar como"
 
-#: ../src/editor/html-editor.c:400 ../src/editor/html-editor.c:447
+#: ../src/editor/html-editor.c:401 ../src/editor/html-editor.c:448
 msgid "Untitled document"
 msgstr "Documento sem título"
 
-#: ../src/editor/html-editor.c:612
+#: ../src/editor/html-editor.c:613
 msgid "HTML Output"
 msgstr "Saída HTML"
 
-#: ../src/editor/html-editor.c:619
+#: ../src/editor/html-editor.c:620
 msgid "HTML Source"
 msgstr "Fonte HTML"
 
-#: ../src/editor/html-editor.c:626
+#: ../src/editor/html-editor.c:627
 msgid "Plain Source"
 msgstr "Fonte Simples"
 
-#: ../src/editor/html-editor.c:633 ../ui/editor_note.xml.h:15
+#: ../src/editor/html-editor.c:634 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr "Im_primir..."
 
-#: ../src/editor/html-editor.c:640 ../ui/editor_note.xml.h:9
+#: ../src/editor/html-editor.c:641 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr "Ante_visão de Impressão"
 
-#: ../src/editor/html-editor.c:647
+#: ../src/editor/html-editor.c:648
 msgid "_Quit"
 msgstr "_Sair"
 
-#: ../src/editor/html-editor.c:654
+#: ../src/editor/html-editor.c:655
 msgid "_Open"
 msgstr "_Abrir"
 
-#: ../src/editor/html-editor.c:661
+#: ../src/editor/html-editor.c:662
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/editor/html-editor.c:668
+#: ../src/editor/html-editor.c:669
 msgid "Save _As..."
 msgstr "Guardar _Como..."
 
-#: ../src/editor/html-editor.c:675 ../src/gnome2/main_menu.c:1059
+#: ../src/editor/html-editor.c:676 ../src/gnome2/main_menu.c:1059
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
 msgstr "_Ficheiro"
 
-#: ../src/editor/html-editor.c:685
+#: ../src/editor/html-editor.c:686
 msgid "HTML _Output"
 msgstr "_Saída HTML"
 
-#: ../src/editor/html-editor.c:692
+#: ../src/editor/html-editor.c:693
 msgid "_HTML Source"
 msgstr "Fonte _HTML"
 
-#: ../src/editor/html-editor.c:699
+#: ../src/editor/html-editor.c:700
 msgid "_Plain Source"
 msgstr "Fonte _Simples"
 
-#: ../src/editor/html-editor.c:706 ../src/gnome2/main_menu.c:1071
+#: ../src/editor/html-editor.c:707 ../src/gnome2/main_menu.c:1071
 msgid "_View"
 msgstr "_Ver"
 
-#: ../src/editor/html-editor.c:829
+#: ../src/editor/html-editor.c:830
 msgid "Are you sure you want to delete the note for"
 msgstr "Tem a certeza de que quer apagar a nota para"
 
@@ -112,35 +112,35 @@ msgstr "Tem a certeza de que quer apagar a nota para"
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1766 ../src/gnome2/bibletext.c:1139
+#: ../src/editor/html-editor.c:1775 ../src/gnome2/bibletext.c:1139
 #: ../src/gnome2/gbs.c:910 ../src/gnome2/bibletext_dialog.c:2118
 #: ../src/gnome2/dictlex.c:1025 ../src/gnome2/commentary_dialog.c:1656
 #: ../src/gnome2/commentary.c:1003 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr "Ficheiro"
 
-#: ../src/editor/html-editor.c:1767
+#: ../src/editor/html-editor.c:1776
 msgid "Save the changes to document"
 msgstr "Guardar as alterações ao documento"
 
-#: ../src/editor/html-editor.c:1768
+#: ../src/editor/html-editor.c:1777
 msgid "before closing?"
 msgstr "antes de fechar?"
 
-#: ../src/editor/html-editor.c:1775
+#: ../src/editor/html-editor.c:1784
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Se não guardar, as alterações serão definitivamente perdidas."
 
-#: ../src/editor/html-editor.c:2189 ../src/editor/html-editor.c:2192
+#: ../src/editor/html-editor.c:2198 ../src/editor/html-editor.c:2201
 #: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr "StudyPad"
 
-#: ../src/editor/html-editor.c:2207 ../src/editor/html-editor.c:2211
+#: ../src/editor/html-editor.c:2216 ../src/editor/html-editor.c:2220
 msgid "Note Editor"
 msgstr "Editor de Notas"
 
-#: ../src/editor/html-editor.c:2221 ../src/editor/html-editor.c:2225
+#: ../src/editor/html-editor.c:2230 ../src/editor/html-editor.c:2234
 msgid "Prayer List/Journal Editor"
 msgstr "Lista de Oração/Editor de Diário"
 
@@ -629,7 +629,8 @@ msgstr ""
 "Renomear não está disponível em Windows.\n"
 "\n"
 "GnomeSword está limitado pelo sistema de ficheiros de Windows,\n"
-"porque impede a renomeação de componentes do nome de ficheiro para ficheiros presentemente abertos,\n"
+"porque impede a renomeação de componentes do nome de ficheiro para ficheiros "
+"presentemente abertos,\n"
 "tal como os conteúdos deste comentário.\n"
 "Por isso, não é possível renomear comentários pessoais no ambiente Windows."
 
@@ -647,15 +648,15 @@ msgstr "Novo Nome"
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:237 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
 msgid "Name: "
 msgstr "Nome: "
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:251
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr "Os nomes de módulos devem conter apenas [A-Za-z0-9_]."
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:258
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
 msgid "GnomeSword already knows a module by that name."
 msgstr "GnomeSword já conhece um módulo por esse nome."
 
@@ -914,7 +915,7 @@ msgid "Uninstalled"
 msgstr "Desinstalado"
 
 #: ../src/gnome2/mod_mgr.c:958 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:235
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
 #: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Prayer List/Journal"
@@ -953,18 +954,25 @@ msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
 msgstr ""
+"O ícone de índice significa que tem um índice optimizado ('lucene') para "
+"este módulo para pesquisa rápida (veja no painel de Manutenção sobre esta "
+"função)"
 
 #: ../src/gnome2/mod_mgr.c:1351
 msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr ""
+"O ícone de fechadura significa que este módulo está encriptado e requer a "
+"compra de uma chave de abertura ao proprietário do conteúdo"
 
 #: ../src/gnome2/mod_mgr.c:1373
 msgid ""
 "The refresh icon means the Installed module is older than the newer "
 "Available module: You should update the module"
 msgstr ""
+"O ícone de refrescar significa que o módulo instalado é mais antigo do que o "
+"módulo disponível: deve actualizar o módulo"
 
 #: ../src/gnome2/mod_mgr.c:1385
 msgid "Available"
@@ -1251,6 +1259,8 @@ msgid ""
 "This is an inclusive (\"AND\") search:\n"
 "Find matches showing all words."
 msgstr ""
+"Esta é uma pesquisa inclusiva (\"AND\"):\n"
+"Encontrar combinações com todas as palavras."
 
 #: ../src/gnome2/search_sidebar.c:209
 msgid "Search Module"
@@ -2043,7 +2053,7 @@ msgstr "Crescimento"
 msgid "<b>For Growth</b><br>"
 msgstr "<b>Para Crescimento</b><br>"
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:375
+#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
 #: ../src/main/sword_treekey.cc:336
 msgid "Salvation"
 msgstr "Salvação"
@@ -2052,7 +2062,7 @@ msgstr "Salvação"
 msgid "<b>For Salvation</b><br>"
 msgstr "<b>Para Salvação</b><br>"
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
 #: ../src/main/sword_treekey.cc:338
 msgid "Health"
 msgstr "Saúde"
@@ -2121,20 +2131,20 @@ msgstr "Tópico Menor 4"
 msgid "<b>Subtopic 4</b><br>"
 msgstr "<b>Subtópico 4</b><br>"
 
-#: ../src/main/prayerlists.cc:236
+#: ../src/main/prayerlists.cc:237
 msgid "Name for new prayer list or journal"
 msgstr "Nome da nova lista de oração ou diário"
 
-#: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:334
+#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
 #: ../src/main/sword_treekey.cc:376
 msgid "MyPrayerList"
 msgstr "Minha Lista de oração"
 
-#: ../src/main/prayerlists.cc:267
+#: ../src/main/prayerlists.cc:268
 msgid "GnomeSword finds that prayer list already."
 msgstr "GnomeSword já encontra essa lista de oração."
 
-#: ../src/main/prayerlists.cc:280
+#: ../src/main/prayerlists.cc:281
 #, c-format
 msgid ""
 "GnomeSword cannot create module's path:\n"
@@ -2143,11 +2153,11 @@ msgstr ""
 "GnomeSword não pode criar o caminho do módulo:\n"
 "%s"
 
-#: ../src/main/prayerlists.cc:320
+#: ../src/main/prayerlists.cc:321
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
 msgstr "Uma lista de oração básica. \\par\\par Módulo criado por GnomeSword."
 
-#: ../src/main/prayerlists.cc:335
+#: ../src/main/prayerlists.cc:336
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
@@ -2155,63 +2165,63 @@ msgstr ""
 "<b>Pessoas:</b><br>Bob<br>Sam<br>Sue<br><br><b>Igreja:</"
 "b><br>bancos<br>congregação<br>Bíblias para missionários<br><br><br>"
 
-#: ../src/main/prayerlists.cc:361
+#: ../src/main/prayerlists.cc:362
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
 "Uma lista de oração baseada em assunto. \\par\\par Módulo criado por "
 "GnomeSword."
 
-#: ../src/main/prayerlists.cc:376
+#: ../src/main/prayerlists.cc:377
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr "Bob<br>Sam<br>Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Spiritual Growth"
 msgstr "Crescimento Espiritual"
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Mike<br>Steve<br>"
 msgstr "Mike<br>Steve<br>"
 
-#: ../src/main/prayerlists.cc:380
+#: ../src/main/prayerlists.cc:381
 msgid "Sue<br>John<br>"
 msgstr "Sue<br>John<br>"
 
-#: ../src/main/prayerlists.cc:406
+#: ../src/main/prayerlists.cc:407
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
 msgstr "Uma lista de oração mensal. \\par\\par Módulo criado por GnomeSword."
 
-#: ../src/main/prayerlists.cc:457
+#: ../src/main/prayerlists.cc:458
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
 msgstr "Um diário. \\par\\par Módulo criado por GnomeSword."
 
-#: ../src/main/prayerlists.cc:521
+#: ../src/main/prayerlists.cc:522
 msgid ""
 "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
 msgstr ""
 "Um tópico assinalado (ex. sermão). \\par\\par Módulo criado por GnomeSword."
 
-#: ../src/main/prayerlists.cc:535
+#: ../src/main/prayerlists.cc:536
 msgid "Major Topic A"
 msgstr "Tópico Maior A"
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "<b>Major Topic A</b><br>"
 msgstr "<b>Tópico Maior A</b><br>"
 
-#: ../src/main/prayerlists.cc:538
+#: ../src/main/prayerlists.cc:539
 msgid "Major Topic B"
 msgstr "Tópico Maior B"
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "<b>Major Topic B</b><br>"
 msgstr "<b>Tópico Maior B</b><br>"
 
-#: ../src/main/prayerlists.cc:541
+#: ../src/main/prayerlists.cc:542
 msgid "Major Topic C"
 msgstr "Tópico Maior C"
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "<b>Major Topic C</b><br>"
 msgstr "<b>Tópico Maior C</b><br>"
 
@@ -2961,11 +2971,11 @@ msgstr "Entrada de Referência"
 
 #: ../ui/navbar_versekey.glade.h:7
 msgid "Toggle Chapter Button"
-msgstr ""
+msgstr "Botão Mudar Capítulo"
 
 #: ../ui/navbar_versekey.glade.h:8
 msgid "Toggle Verse Button"
-msgstr ""
+msgstr "Botão Mudar Versículo"
 
 #: ../ui/prefs.glade.h:1
 msgid ""
@@ -3450,19 +3460,16 @@ msgid "Custom verse range"
 msgstr "Extensão de versículos personalizada"
 
 #: ../ui/search-dialog.glade.h:37
-#, fuzzy
 msgid "Custom verse range radiobutton"
-msgstr "Extensão de versículos personalizada"
+msgstr "Rádio Extensão de versículos personalizada"
 
 #: ../ui/search-dialog.glade.h:38
-#, fuzzy
 msgid "Delete Range Button"
-msgstr "Apagar Extensão?"
+msgstr "Botão Apagar Extensão"
 
 #: ../ui/search-dialog.glade.h:39
-#, fuzzy
 msgid "Delete Selected Module From List Button"
-msgstr "Remover o módulo seleccionado da lista"
+msgstr "Botão Remover o módulo seleccionado da lista"
 
 #: ../ui/search-dialog.glade.h:40
 msgid "Delete selected range"
@@ -3477,14 +3484,12 @@ msgid "Entire module"
 msgstr "Módulo Inteiro"
 
 #: ../ui/search-dialog.glade.h:43
-#, fuzzy
 msgid "Entire module radiobutton"
-msgstr "Módulo Inteiro"
+msgstr "Rádio Módulo Inteiro"
 
 #: ../ui/search-dialog.glade.h:45
-#, fuzzy
 msgid "Exact phrase radiobutton"
-msgstr "Frase exacta"
+msgstr "Rádio Frase exacta"
 
 #: ../ui/search-dialog.glade.h:46
 msgid ""
@@ -3497,14 +3502,12 @@ msgstr ""
 "Veja as funções de manutenção do Gestor de Módulos"
 
 #: ../ui/search-dialog.glade.h:49
-#, fuzzy
 msgid "Find Button"
-msgstr "Procurar Próximo"
+msgstr "Botão Procurar"
 
 #: ../ui/search-dialog.glade.h:51
-#, fuzzy
 msgid "Footnotes radiobutton"
-msgstr "Notas de rodapé"
+msgstr "Rádio Notas de rodapé"
 
 #: ../ui/search-dialog.glade.h:52
 msgid "In modules that have Footnotes"
@@ -3527,9 +3530,8 @@ msgid "Make selections on the Attribute Search tab"
 msgstr "Fazer selecções na Pesquisa de Atributos"
 
 #: ../ui/search-dialog.glade.h:58
-#, fuzzy
 msgid "Match case checkbox"
-msgstr "Combinar capitalização"
+msgstr "Visto Combinar capitalização"
 
 #: ../ui/search-dialog.glade.h:59
 msgid "Module Selection"
@@ -3540,33 +3542,28 @@ msgid "Module list"
 msgstr "Lista de Módulos"
 
 #: ../ui/search-dialog.glade.h:61
-#, fuzzy
 msgid "Module list radiobutton"
-msgstr "Lista de Módulos"
+msgstr "Rádio Lista de Módulos"
 
 #: ../ui/search-dialog.glade.h:63
-#, fuzzy
 msgid "Morphological Tags radiobutton"
-msgstr "Etiquetas morfológicas"
+msgstr "Rádio Etiquetas morfológicas"
 
 #: ../ui/search-dialog.glade.h:65
-#, fuzzy
 msgid "Multi word radiobutton"
-msgstr "Palavra múltipla"
+msgstr "Rádio Palavra múltipla"
 
 #: ../ui/search-dialog.glade.h:66
-#, fuzzy
 msgid "New Custom Module List Button"
-msgstr "Listas de Módulos personalizadas"
+msgstr "Botão Listas de Módulos personalizadas"
 
 #: ../ui/search-dialog.glade.h:67
 msgid "New Range Button"
 msgstr "Botão de Nova Extensão"
 
 #: ../ui/search-dialog.glade.h:68
-#, fuzzy
 msgid "Open Selection Dialog Button"
-msgstr "Ler Selecção em voz alta"
+msgstr "Botão Abrir Selecção"
 
 #: ../ui/search-dialog.glade.h:69
 msgid "Open a dialog to select modules to add to the list"
@@ -3577,24 +3574,20 @@ msgid "Optimized (\"Lucene\")"
 msgstr "Optimizada (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:71
-#, fuzzy
 msgid "Optimized (\"Lucene\") radiobutton"
-msgstr "Optimizada (\"Lucene\")"
+msgstr "Rádio Optimizada (\"Lucene\")"
 
 #: ../ui/search-dialog.glade.h:72
-#, fuzzy
 msgid "Range Definition Entry"
-msgstr "<b>Definição de Extensão</b>"
+msgstr "Entrada de Definição de Extensão"
 
 #: ../ui/search-dialog.glade.h:73
-#, fuzzy
 msgid "Range Name Entry"
-msgstr "Renomear Comentário"
+msgstr "Entrada de Nome de Extensão"
 
 #: ../ui/search-dialog.glade.h:75
-#, fuzzy
 msgid "Regular expression radiobutton"
-msgstr "Expressão Regular"
+msgstr "Rádio Expressão Regular"
 
 #: ../ui/search-dialog.glade.h:76
 msgid "Remove the selected module from the list"
@@ -3613,9 +3606,8 @@ msgid "Results"
 msgstr "Resultados"
 
 #: ../ui/search-dialog.glade.h:80
-#, fuzzy
 msgid "Save Custom Module List Button"
-msgstr "Listas de Módulos personalizadas"
+msgstr "Botão Guardar Listas de Módulos personalizadas"
 
 #: ../ui/search-dialog.glade.h:81
 msgid "Save Range Button"
@@ -3638,9 +3630,8 @@ msgid "Search  Criteria"
 msgstr "Critério de Pesquisa"
 
 #: ../ui/search-dialog.glade.h:86
-#, fuzzy
 msgid "Search Criteria Treeview"
-msgstr "Critério de Pesquisa"
+msgstr "Vista de Critério de Pesquisa"
 
 #: ../ui/search-dialog.glade.h:87
 msgid "Search entire module"
@@ -3663,27 +3654,24 @@ msgid "Show Footnotes"
 msgstr "Mostrar Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:92
-#, fuzzy
 msgid "Show Footnotes checkbox"
-msgstr "Mostrar Notas de Rodapé"
+msgstr "Visto Mostrar Notas de Rodapé"
 
 #: ../ui/search-dialog.glade.h:93
 msgid "Show Morphological Tags"
 msgstr "Mostrar Etiquetas Morfológicas"
 
 #: ../ui/search-dialog.glade.h:94
-#, fuzzy
 msgid "Show Morphological Tags checkbox"
-msgstr "Mostrar Etiquetas Morfológicas"
+msgstr "Visto Mostrar Etiquetas Morfológicas"
 
 #: ../ui/search-dialog.glade.h:95
 msgid "Show Strong's Numbers"
 msgstr "Mostrar Números Strong"
 
 #: ../ui/search-dialog.glade.h:96
-#, fuzzy
 msgid "Show Strong's Numbers checkbox"
-msgstr "Mostrar Números Strong"
+msgstr "Visto Mostrar Números Strong"
 
 #: ../ui/search-dialog.glade.h:97
 msgid "Show in main window"
@@ -3694,9 +3682,8 @@ msgid "Single module"
 msgstr "Módulo singular"
 
 #: ../ui/search-dialog.glade.h:99
-#, fuzzy
 msgid "Single module radiobutton"
-msgstr "Módulo singular"
+msgstr "Rádio Módulo singular"
 
 #: ../ui/search-dialog.glade.h:100
 msgid "Start/stop searching"
@@ -3707,9 +3694,8 @@ msgid "Strongs Numbers"
 msgstr "Números de Strong"
 
 #: ../ui/search-dialog.glade.h:102
-#, fuzzy
 msgid "Strongs Numbers radiobutton"
-msgstr "Números de Strong"
+msgstr "Rádio Números de Strong"
 
 #: ../ui/search-dialog.glade.h:103
 msgid "Use a custom module list for the search"

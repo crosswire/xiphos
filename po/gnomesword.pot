@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-13 17:55+0000\n"
+"POT-Creation-Date: 2008-12-14 16:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,80 +28,80 @@ msgstr ""
 msgid "Configuration not found"
 msgstr ""
 
-#: ../src/editor/html-editor.c:262
+#: ../src/editor/html-editor.c:263
 #, c-format
 msgid "Page %d of %d"
 msgstr ""
 
-#: ../src/editor/html-editor.c:382 ../src/editor/html-editor.c:429
+#: ../src/editor/html-editor.c:383 ../src/editor/html-editor.c:430
 msgid "Save As"
 msgstr ""
 
-#: ../src/editor/html-editor.c:400 ../src/editor/html-editor.c:447
+#: ../src/editor/html-editor.c:401 ../src/editor/html-editor.c:448
 msgid "Untitled document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:612
+#: ../src/editor/html-editor.c:613
 msgid "HTML Output"
 msgstr ""
 
-#: ../src/editor/html-editor.c:619
+#: ../src/editor/html-editor.c:620
 msgid "HTML Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:626
+#: ../src/editor/html-editor.c:627
 msgid "Plain Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:633 ../ui/editor_note.xml.h:15
+#: ../src/editor/html-editor.c:634 ../ui/editor_note.xml.h:15
 #: ../ui/editor_studypad.xml.h:21
 msgid "_Print..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:640 ../ui/editor_note.xml.h:9
+#: ../src/editor/html-editor.c:641 ../ui/editor_note.xml.h:9
 #: ../ui/editor_studypad.xml.h:14
 msgid "Print Pre_view"
 msgstr ""
 
-#: ../src/editor/html-editor.c:647
+#: ../src/editor/html-editor.c:648
 msgid "_Quit"
 msgstr ""
 
-#: ../src/editor/html-editor.c:654
+#: ../src/editor/html-editor.c:655
 msgid "_Open"
 msgstr ""
 
-#: ../src/editor/html-editor.c:661
+#: ../src/editor/html-editor.c:662
 msgid "_Save"
 msgstr ""
 
-#: ../src/editor/html-editor.c:668
+#: ../src/editor/html-editor.c:669
 msgid "Save _As..."
 msgstr ""
 
-#: ../src/editor/html-editor.c:675 ../src/gnome2/main_menu.c:1059
+#: ../src/editor/html-editor.c:676 ../src/gnome2/main_menu.c:1059
 #: ../ui/editor_note.xml.h:14 ../ui/editor_studypad.xml.h:20
 #: ../ui/editor.xml.h:13
 msgid "_File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:685
+#: ../src/editor/html-editor.c:686
 msgid "HTML _Output"
 msgstr ""
 
-#: ../src/editor/html-editor.c:692
+#: ../src/editor/html-editor.c:693
 msgid "_HTML Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:699
+#: ../src/editor/html-editor.c:700
 msgid "_Plain Source"
 msgstr ""
 
-#: ../src/editor/html-editor.c:706 ../src/gnome2/main_menu.c:1071
+#: ../src/editor/html-editor.c:707 ../src/gnome2/main_menu.c:1071
 msgid "_View"
 msgstr ""
 
-#: ../src/editor/html-editor.c:829
+#: ../src/editor/html-editor.c:830
 msgid "Are you sure you want to delete the note for"
 msgstr ""
 
@@ -113,35 +113,35 @@ msgstr ""
 #. 3
 #. 1
 #. 2
-#: ../src/editor/html-editor.c:1766 ../src/gnome2/bibletext.c:1139
+#: ../src/editor/html-editor.c:1775 ../src/gnome2/bibletext.c:1139
 #: ../src/gnome2/gbs.c:910 ../src/gnome2/bibletext_dialog.c:2118
 #: ../src/gnome2/dictlex.c:1025 ../src/gnome2/commentary_dialog.c:1656
 #: ../src/gnome2/commentary.c:1003 ../src/gnome2/studypad.c:98
 msgid "File"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1767
+#: ../src/editor/html-editor.c:1776
 msgid "Save the changes to document"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1768
+#: ../src/editor/html-editor.c:1777
 msgid "before closing?"
 msgstr ""
 
-#: ../src/editor/html-editor.c:1775
+#: ../src/editor/html-editor.c:1784
 msgid "If you don't save, changes will be permanently lost."
 msgstr ""
 
-#: ../src/editor/html-editor.c:2189 ../src/editor/html-editor.c:2192
+#: ../src/editor/html-editor.c:2198 ../src/editor/html-editor.c:2201
 #: ../src/gnome2/studypad.c:411
 msgid "StudyPad"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2207 ../src/editor/html-editor.c:2211
+#: ../src/editor/html-editor.c:2216 ../src/editor/html-editor.c:2220
 msgid "Note Editor"
 msgstr ""
 
-#: ../src/editor/html-editor.c:2221 ../src/editor/html-editor.c:2225
+#: ../src/editor/html-editor.c:2230 ../src/editor/html-editor.c:2234
 msgid "Prayer List/Journal Editor"
 msgstr ""
 
@@ -636,15 +636,15 @@ msgstr ""
 
 #: ../src/gnome2/commentary.c:481 ../src/gnome2/treekey-editor.c:127
 #: ../src/gnome2/treekey-editor.c:186 ../src/gnome2/treekey-editor.c:272
-#: ../src/main/prayerlists.cc:237 ../src/main/sword_treekey.cc:375
+#: ../src/main/prayerlists.cc:238 ../src/main/sword_treekey.cc:375
 msgid "Name: "
 msgstr ""
 
-#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:251
+#: ../src/gnome2/commentary.c:491 ../src/main/prayerlists.cc:252
 msgid "Module names must contain [A-Za-z0-9_] only."
 msgstr ""
 
-#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:258
+#: ../src/gnome2/commentary.c:498 ../src/main/prayerlists.cc:259
 msgid "GnomeSword already knows a module by that name."
 msgstr ""
 
@@ -884,7 +884,7 @@ msgid "Uninstalled"
 msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:958 ../src/gnome2/sidebar.c:421
-#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:235
+#: ../src/gnome2/utilities.c:544 ../src/main/prayerlists.cc:236
 #: ../src/main/sword_treekey.cc:373 ../src/main/sword_treekey.cc:417
 #: ../src/main/sidebar.cc:1042 ../src/main/sidebar.cc:1044
 msgid "Prayer List/Journal"
@@ -1994,7 +1994,7 @@ msgstr ""
 msgid "<b>For Growth</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:375
+#: ../src/main/prayerlists.cc:122 ../src/main/prayerlists.cc:376
 #: ../src/main/sword_treekey.cc:336
 msgid "Salvation"
 msgstr ""
@@ -2003,7 +2003,7 @@ msgstr ""
 msgid "<b>For Salvation</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:379
+#: ../src/main/prayerlists.cc:124 ../src/main/prayerlists.cc:380
 #: ../src/main/sword_treekey.cc:338
 msgid "Health"
 msgstr ""
@@ -2072,90 +2072,90 @@ msgstr ""
 msgid "<b>Subtopic 4</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:236
+#: ../src/main/prayerlists.cc:237
 msgid "Name for new prayer list or journal"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:238 ../src/main/prayerlists.cc:334
+#: ../src/main/prayerlists.cc:239 ../src/main/prayerlists.cc:335
 #: ../src/main/sword_treekey.cc:376
 msgid "MyPrayerList"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:267
+#: ../src/main/prayerlists.cc:268
 msgid "GnomeSword finds that prayer list already."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:280
+#: ../src/main/prayerlists.cc:281
 #, c-format
 msgid ""
 "GnomeSword cannot create module's path:\n"
 "%s"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:320
+#: ../src/main/prayerlists.cc:321
 msgid "A basic prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:335
+#: ../src/main/prayerlists.cc:336
 msgid ""
 "<b>People:</b><br>Bob<br>Sam<br>Sue<br><br><b>Church:</"
 "b><br>pews<br>fellowship<br>Bibles for missionaries<br><br><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:361
+#: ../src/main/prayerlists.cc:362
 msgid "A subject-based prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:376
+#: ../src/main/prayerlists.cc:377
 msgid "Bob<br>Sam<br>Sue<br>John<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:377
+#: ../src/main/prayerlists.cc:378
 msgid "Spiritual Growth"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:378
+#: ../src/main/prayerlists.cc:379
 msgid "Mike<br>Steve<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:380
+#: ../src/main/prayerlists.cc:381
 msgid "Sue<br>John<br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:406
+#: ../src/main/prayerlists.cc:407
 msgid "A monthly prayer list. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:457
+#: ../src/main/prayerlists.cc:458
 msgid "A daily journal. \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:521
+#: ../src/main/prayerlists.cc:522
 msgid ""
 "An outlined topic (e.g. sermon). \\par\\par Module created by GnomeSword."
 msgstr ""
 
-#: ../src/main/prayerlists.cc:535
+#: ../src/main/prayerlists.cc:536
 msgid "Major Topic A"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:536
+#: ../src/main/prayerlists.cc:537
 msgid "<b>Major Topic A</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:538
+#: ../src/main/prayerlists.cc:539
 msgid "Major Topic B"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:539
+#: ../src/main/prayerlists.cc:540
 msgid "<b>Major Topic B</b><br>"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:541
+#: ../src/main/prayerlists.cc:542
 msgid "Major Topic C"
 msgstr ""
 
-#: ../src/main/prayerlists.cc:542
+#: ../src/main/prayerlists.cc:543
 msgid "<b>Major Topic C</b><br>"
 msgstr ""
 
