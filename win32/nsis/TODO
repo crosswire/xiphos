@@ -1,16 +1,23 @@
 TODO:
+
+    * remove files unnedded by the installer
+
     * Name for the installer binary: "GnomeSword-3.0-win32.exe"
+
+    * translations of GPL license
 
     * Try to simplify i18n declaration
         - inspiration at other OSS projects using NSIS
+
+    * remove 'sword://' handler only, when it was set by GS
+
+    * Shortcuts - ask user whether install them for all users or only
+      for current users
 
     * Write tutor how to generate NSIS installer
 
     * What default folder to use for finding binaries?
 
-    * NSIS should set GnomeSword as handler for url 'sword://' during
-      installation
-
-    * During uninstall remove 'sword://' handle from registry
-
     * Write tutor how to translate installer strings
+
+    * graphics for right-to-left languages

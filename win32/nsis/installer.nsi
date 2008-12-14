@@ -43,8 +43,8 @@
     !define APP_NAME "GnomeSword"
     !define APP_BINARY_NAME "gnomesword.exe"
     !define APP_VERS "3.0"
-    !define APP_EDITION "win32-test04"
-    !define APP_URL "http://gnomesword.sf.net/"
+    !define APP_EDITION "win32-test05"
+    !define APP_URL "http://gnomesword.sf.net"
 
     ; Paths with application files for installer
     !define PATH_CORE "..\gs_bin"
@@ -69,13 +69,17 @@
     !define INCL_DIR "include"
 
     ; REG keys to handle url  sword://  by GnomeSword
+    !define SWURL_REG_ROOT "HKCR" # HKEY_CLASSES_ROOT
+    !define SWURL_REG_KEY "sword"
+    !define SWURL_REG_KEY_ICON "${SWURL_REG_KEY}\DefaultIcon"
+    !define SWURL_REG_KEY_COMMAND "${SWURL_REG_KEY}\shell\open\command"
 
 
 ;--------------------------------
 ; Compression method
 
     SetCompressor /SOLID lzma
-    SetCompressorDictSize 2 ; use less memory
+    SetCompressorDictSize 16 ; in MB, default 8
 
 ;--------------------------------
 ; Includes
@@ -94,7 +98,8 @@
     !include "WinMessages.nsh"
 
     ; Language definition
-    ; contain macros LINGUAS_DEFS, LINGUAS_RESERVE, LINGUAS_USE
+    ; contain macros LINGUAS_DEFS, LINGUAS_RESERVE, LINGUAS_USE,
+    ; LINGUAS_LIC_FILE
     !include "i18n\utf16_LINGUAS.nsh" ; contain some macros
 
 ;--------------------------------
@@ -133,6 +138,9 @@
     !define MUI_HEADERIMAGE
     !define MUI_HEADERIMAGE_BITMAP "${PATH_IMG}\header.bmp"
     !define MUI_HEADERIMAGE_UNBITMAP "${PATH_IMG}\header-uninstall.bmp"
+
+    !define MUI_HEADERIMAGE_BITMAP_RTL "${PATH_IMG}\header-r.bmp"
+    !define MUI_HEADERIMAGE_UNBITMAP_RTL "${PATH_IMG}\header-uninstall-r.bmp"
 
     ;Start Menu Folder Page Configuration
     !define MUI_STARTMENUPAGE_REGISTRY_ROOT "${STM_REG_ROOT}" 
@@ -183,6 +191,7 @@
 
     ; Include localizations
     !insertmacro LINGUAS_INCLUDE
+    !insertmacro LINGUAS_LIC_FILE
 
 ;--------------------------------
 ; Reserve Files
@@ -204,7 +213,9 @@
 ; Section is like one component
 Section $(CORE_SEC_TITLE) SecCore
 
-    ;SectionIn 1 RO ; section is readonly
+    ; shortcuts will be installed for all users - Desktop/Startmenu
+    SetShellVarContext all
+
     SetOutPath '$INSTDIR'
 
     ; Log installed files
@@ -228,18 +239,25 @@ Section $(CORE_SEC_TITLE) SecCore
     ; Add uninstall information to Add/Remove Programs
     WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallDir" "$INSTDIR"
     WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayName" "${APP_NAME}"
-    WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "UninstallString" "$INSTDIR\${UNINST_EXE}"
+    WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "UninstallString" "${UNINST_EXE}"
 
     ; GnomeSword as default handler of url  sword://
-    WriteRegStr HKCR "sword" "" "URL:sword Protocol"
-    WriteRegStr HKCR "sword" "URL Protocol" ""
-    WriteRegStr HKCR "sword\DefaultIcon" "" \
+    ;WriteRegStr HKCR "sword" "" "URL:sword Protocol"
+    ;WriteRegStr HKCR "sword" "URL Protocol" ""
+    ;WriteRegStr HKCR "sword\DefaultIcon" "" \
+        ;'"$INSTDIR\bin\${APP_BINARY_NAME}"'
+    ;WriteRegStr HKCR "sword\shell\open\command" "" \
+        ;'"$INSTDIR\bin\${APP_BINARY_NAME}" "%1"'
+
+    WriteRegStr ${SWURL_REG_ROOT} ${SWURL_REG_KEY} "" "URL:sword Protocol"
+    WriteRegStr ${SWURL_REG_ROOT} ${SWURL_REG_KEY} "URL Protocol" ""
+    WriteRegStr ${SWURL_REG_ROOT} ${SWURL_REG_KEY_ICON} "" \
         '"$INSTDIR\bin\${APP_BINARY_NAME}"'
-    WriteRegStr HKCR "sword\shell\open\command" "" \
+    WriteRegStr ${SWURL_REG_ROOT} ${SWURL_REG_KEY_COMMAND} "" \
         '"$INSTDIR\bin\${APP_BINARY_NAME}" "%1"'
 
     ;Create uninstaller
-    WriteUninstaller "$INSTDIR\${UNINST_EXE}"
+    WriteUninstaller "${UNINST_EXE}"
 
 SectionEnd
 
@@ -295,7 +313,16 @@ Section Uninstall
     RMDir "${ST_MENU}"
     Delete "$DESKTOP\${APP_NAME}.lnk"
 
+    ; clean Windows Registry
+    
+    ; delete installer language
+    DeleteRegKey ${LANG_REG_ROOT} "${LANG_REG_KEY}"
+
+    ; delete from Add/Remove Programs
     DeleteRegKey /ifempty ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}"
+
+    ; delete handler of url  sword://
+    DeleteRegKey ${SWURL_REG_ROOT} ${SWURL_REG_KEY}
 
 SectionEnd
 

@@ -7,16 +7,6 @@
 ;;
 
 ;--------------------------------
-; Script definitions
-
-!define LIC_FILE_CZECH "i18n\utf16_gpl-2.0_cs.txt"
-
-;--------------------------------
-; License Page
-
-LicenseLangString LICENSE_FILE ${LANG_CZECH} "${LIC_FILE_CZECH}"
-
-;--------------------------------
 ; Uninstall Log
 
 LangString UNLOG_HEADER ${LANG_CZECH} \

@@ -1,7 +1,18 @@
+2008-12-14  matysek <matysek03@users.sf.net>
+
+	* preparation for GPL license translations
+	* added de,fa,pt GPL translations
+	* added example graphics for right-to-left languages
+	* shortcuts are now installed for all users by default
+	* fixed uninstalling from Control Center, NSIS set wrong path to
+	  the uninstaller
+	* fixed removing sword handler keys from registry
+	* fixed removing installer language key from registry
+
 2008-12-08  matysek <matysek03@users.sf.net>
 
-	* add translations
-	* fix svn2utf16.py - script now ignores svn folder .svn
+	* added translations
+	* fixed svn2utf16.py - script now ignores svn folder .svn
 
 2008-12-07  matysek <matysek03@users.sf.net>
 
