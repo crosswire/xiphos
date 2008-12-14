@@ -655,6 +655,7 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	GtkWidget *gtk_win;
 	GeckoHtml *html;
 	GtkWidget *vbox = gtk_vbox_new(FALSE, FALSE);
+    	SWDisplay *old_display = 0;
 	SWDisplay *swdisplay = 0;
 	SWMgr *mgr = backend->get_display_mgr();
 	SWModule *mod = mgr->Modules[mod_name];
@@ -670,7 +671,9 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	gtk_widget_show(vbox);
 	gtk_widget_show(GTK_WIDGET(html));
 	gtk_widget_hide(gtk_win);
-	
+    
+	old_display = mod->getDisplay();
+    
 	if (!strcmp(mod->Type(), TEXT_MODS))
 		swdisplay = new GTKPrintChapDisp(GTK_WIDGET(html), backend);
 	else 
@@ -680,6 +683,8 @@ gecko_html_print_document(GtkWindow * window, gchar * mod_name,
 	mod->Display();
 
 	gecko_print_run(window, html, gtk_win, vbox);
+    
+    	mod->setDisplay(old_display);
 	if (swdisplay)
 		delete swdisplay;
 #endif
