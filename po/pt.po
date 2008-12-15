@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gnomesword\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-15 17:43+0000\n"
-"PO-Revision-Date: 2008-12-15 17:43+0000\n"
+"PO-Revision-Date: 2008-12-15 18:21+0000\n"
 "Last-Translator: Ari Constâncio <ari.constancio@gmail.com>\n"
 "Language-Team: Gnomesword Project\n"
 "MIME-Version: 1.0\n"
@@ -1818,7 +1818,7 @@ msgstr "Lista de _mail"
 
 #: ../src/gnome2/main_menu.c:1024
 msgid "Sign up for the users' mailing list"
-msgstr "Inscrever na lista de utilizadores"
+msgstr "Inscrição na lista de utilizadores"
 
 #: ../src/gnome2/main_menu.c:1029
 msgid "_Live Chat"
@@ -1826,7 +1826,7 @@ msgstr "_Chat ao vivo"
 
 #: ../src/gnome2/main_menu.c:1030
 msgid "Chat with other users and developers"
-msgstr "Chat com outros utilizadores e programadores"
+msgstr "Conversar no IRC com outros utilizadores e programadores"
 
 #: ../src/gnome2/main_menu.c:1036
 msgid "About _Translation"
