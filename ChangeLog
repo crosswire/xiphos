@@ -1,6 +1,9 @@
 2008-12-14  karl <charcoal@users.sf.net>
 
 	* add an "edit" pixmap beside "open studypad".
+	* fix #2412580 Indexing Gnomesword-created modules fails
+	  by disabling the capability for journals/prayer lists
+	  (Sword bug -- mkfastmod fails too).
 
 2008-12-13  terry <tbiggs@users.sourceforge.net>
 
