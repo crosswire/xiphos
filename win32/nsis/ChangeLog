@@ -1,3 +1,13 @@
+2008-12-16  matysek <matysek03@users.sf.net>
+
+	* fixed uninstaller disn't remove shortcuts
+	
+2008-12-15  DrMeers
+
+	* changed background color to blue from gray
+	* added original SVG images, script for converting from SVG
+	* added images for RTL languages
+
 2008-12-14  matysek <matysek03@users.sf.net>
 
 	* preparation for GPL license translations

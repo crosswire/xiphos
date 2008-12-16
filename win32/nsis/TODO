@@ -1,6 +1,6 @@
 TODO:
 
-    * remove files unnedded by the installer
+    * remove files unnedded for generating the installer
 
     * Name for the installer binary: "GnomeSword-3.0-win32.exe"
 
@@ -19,5 +19,3 @@ TODO:
     * What default folder to use for finding binaries?
 
     * Write tutor how to translate installer strings
-
-    * graphics for right-to-left languages
