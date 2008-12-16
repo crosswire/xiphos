@@ -622,24 +622,31 @@ void backend_init_module_mgr_config(void)
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
 	FileMgr::createParent(confPath.c_str());
 	remove(confPath.c_str());
-	
+
 	SWConfig config(confPath.c_str());
 
 	InstallSource is("FTP");
 	is.caption = "Crosswire";
 	is.source = "ftp.crosswire.org";
 	is.directory = "/pub/sword/raw";
-	
+
 	config["General"]["PassiveFTP"] = "true";
 	config["Sources"]["FTPSource"] = is.getConfEnt();
 	config.Save();
-	
+
 	InstallSource is_local("DIR");
 	is_local.caption = "cdrom";
 	is_local.source = "[local]";
 	is_local.directory = "/mnt/cdrom";
 	config["Sources"]["DIRSource"] = is_local.getConfEnt();	
 	config.Save();
+
+	// new concept: we are our own first-class source.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "GnomeSword",
+				      "ftp.gnomesword.org",
+				      "/pub/sword");
 }
 
 
