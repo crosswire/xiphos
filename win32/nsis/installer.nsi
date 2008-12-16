@@ -291,6 +291,9 @@ FunctionEnd
 
 Section Uninstall
 
+    ; uninstall shortcuts for all users - Desktop/Startmenu
+    SetShellVarContext all
+
     ; Hack to speed up uninstaller
     RMDir /r "$INSTDIR\bin\*.*"
     RMDir /r "$INSTDIR\etc\*.*"
