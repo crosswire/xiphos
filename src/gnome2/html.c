@@ -737,7 +737,7 @@ _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
 
 	pango_font_description_free (desc);
 	g_object_unref (pango_context);
-	svn 
+	
 	return header_height;
 }
 
