@@ -534,7 +534,7 @@ on_rename_perscomm_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	// manufacture new .conf from old.
 	g_string_printf(workstr,
-			"( cd %s && sed -e '/^\\[/s|^.*$|[%s]|' -e '/^DataPath=/s|rawfiles/.*$|rawfiles/%s/|' < %s > %s.conf ) 2>&1",
+			"( cd \"%s\" && sed -e '/^\\[/s|^.*$|[%s]|' -e '/^DataPath=/s|rawfiles/.*$|rawfiles/%s/|' < \"%s\" > \"%s.conf\" ) 2>&1",
 			modsdir, info->text1, conf_new, conf_old, conf_new);
 	if ((result = popen(workstr->str, "r")) == NULL) {
 		g_string_printf(workstr,

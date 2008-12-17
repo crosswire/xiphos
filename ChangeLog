@@ -3,6 +3,7 @@
 	* add new GnomeSword repo for first-time users.
 	* fix mod.mgr object leaks.
 	* add GnomeSword's own bin dir to $PATH.
+	* change single- to double-quotes in popen(3) strings.
 
 2008-12-16  matthew <ransom1982@users.sourceforge.net>
 
