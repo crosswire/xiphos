@@ -54,8 +54,8 @@ using std::cout;
 using std::cin;
 using std::string;
 
-static SWMgr *mgr;
-static SWMgr *list_mgr;
+static SWMgr *mgr = NULL;
+static SWMgr *list_mgr = NULL;
 static InstallMgr *installMgr;
 static ModMap::iterator it;
 static ModMap::iterator end;
@@ -826,10 +826,16 @@ void backend_init_module_mgr(const char *dir,
 	if (dir) {
 		if (augment) {
 			// normal case: this will include ~/.sword content.
+			if (mgr)
+				delete mgr;
 			mgr = new SWMgr(dir);
 		} else {
 			// local directory install special case.
+			if (mgr)
+				delete mgr;
 		        mgr = new SWMgr();
+			if (list_mgr)
+				delete list_mgr;
 		        list_mgr = new SWMgr(dir, true, 0, false, false);
 			// see template.  re-assert 3 of 4 defaults:
 			// autoload    -> true
@@ -841,6 +847,8 @@ void backend_init_module_mgr(const char *dir,
 			// installed as we prepare to do more installations.
 		}
 	} else {
+		if (mgr)
+			delete mgr;
 		mgr = new SWMgr();
 	}
 

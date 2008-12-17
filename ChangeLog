@@ -1,6 +1,11 @@
 2008-12-16  karl <charcoal@users.sf.net>
 
 	* add new GnomeSword repo for first-time users.
+	* fix mod.mgr object leaks.
+
+2008-12-16  matthew <ransom1982@users.sourceforge.net>
+
+	* fix #2423950 + #2416023 local install glitches.
 
 2008-12-14  karl <charcoal@users.sf.net>
 
