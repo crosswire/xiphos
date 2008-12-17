@@ -87,6 +87,10 @@ handle_error (GError **error)
  *   void
  */
 
+#ifndef O_BINARY
+#define	O_BINARY	0
+#endif
+
 void url_requested(GtkHTML * html, const gchar * url,
 		   GtkHTMLStream * handle)
 {
@@ -96,7 +100,7 @@ void url_requested(GtkHTML * html, const gchar * url,
 	if (!strncmp(url, "file:", 5))
 		url += 5;
 
-	fd = open(url, O_RDONLY);
+	fd = open(url, O_RDONLY | O_BINARY);
 	status = GTK_HTML_STREAM_OK;
 	if (fd != -1) {
 		ssize_t size;
