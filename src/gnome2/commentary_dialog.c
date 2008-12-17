@@ -864,7 +864,7 @@ static void on_print1_activate(GtkMenuItem *menuitem,
 //	embed_print(TRUE, GTK_MOZ_EMBED(cur_d->html));
 	
 #else
-	 gui_html_print(cur_d->html, FALSE);
+	 gui_html_print(cur_d->html, FALSE, cur_d->mod_name);
 #endif
 }
 

@@ -434,7 +434,7 @@ static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   settings.book_mod, 
 				   GECKO_HTML(widgets.html_book));
 #else
-	gui_html_print(widgets.html_book, FALSE);
+	gui_html_print(widgets.html_book, FALSE, settings.book_mod);
 #endif
 }
 

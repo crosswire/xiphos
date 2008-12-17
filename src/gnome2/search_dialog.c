@@ -1243,7 +1243,7 @@ static void _finds_verselist_selection_changed(GtkWidget * widget,
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search1.listview_verses));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
-		return FALSE;
+		return;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key, -1);
 		

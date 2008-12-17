@@ -691,7 +691,7 @@ void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GECKO_HTML(widgets.html_text));
 	
 #else
-	gui_html_print(widgets.html_text, FALSE);
+	gui_html_print(widgets.html_text, FALSE,settings.MainWindowModule);
 #endif
 }
 

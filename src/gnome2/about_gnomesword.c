@@ -26,6 +26,7 @@
 #include <gnome.h>
 
 #include "gui/about_gnomesword.h"
+#include "gui/utilities.h"
 #include "main/settings.h"
 
 static const gchar *authors[] = {

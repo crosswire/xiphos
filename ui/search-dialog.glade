@@ -81,7 +81,7 @@
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
-		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
 		  <property name="width_chars">-1</property>
 		  <property name="single_line_mode">False</property>
 		  <property name="angle">0</property>
@@ -657,7 +657,7 @@
 Indexes must have been built beforehand:
 See Module Manager's maintenance functions</property>
 					  <property name="can_focus">True</property>
-					  <property name="label" translatable="yes">Optimized ("Lucene")</property>
+					  <property name="label" translatable="yes">Optimized (&quot;Lucene&quot;)</property>
 					  <property name="use_underline">True</property>
 					  <property name="relief">GTK_RELIEF_NORMAL</property>
 					  <property name="focus_on_click">True</property>
@@ -666,7 +666,7 @@ See Module Manager's maintenance functions</property>
 					  <property name="draw_indicator">True</property>
 					  <property name="group">radiobutton9</property>
 					  <accessibility>
-					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Optimized ("Lucene") radiobutton</atkproperty>
+					    <atkproperty name="AtkObject::accessible_name" translatable="yes">Optimized (&quot;Lucene&quot;) radiobutton</atkproperty>
 					  </accessibility>
 					</widget>
 					<packing>

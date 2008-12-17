@@ -42,7 +42,7 @@ void gui_copy_html(GtkWidget *html_widget);
 void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data);
 gchar *gui_get_word_or_selection(GtkWidget *html_widget, gboolean word);
 gchar *gui_button_press_lookup(GtkWidget *html_widget);
-void gui_html_print(GtkWidget * htmlwidget, gboolean preview);
+void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name);
 
 #ifdef __cplusplus
 }
