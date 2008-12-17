@@ -30,8 +30,7 @@ libeditor_a_SOURCES = $(HTML_EDITOR_GENERATED)		\
 	html-editor.c html-editor.h  
 # Extra stuff to distribute.
 
-EXTRA_DIST = \
-    $(HTML_EDITOR_GENERATED)
+EXTRA_DIST =
 
 CLEANFILES = \
     $(HTML_EDITOR_GENERATED)
