@@ -355,7 +355,7 @@ GList *mod_mgr_list_local_modules(const char *dir, gboolean augment)
 //	backend_init_main_mgr();
 	backend_init_module_mgr(dir, augment);
 	
-	backend_module_mgr_list_local_modules_init();
+	backend_module_mgr_list_local_modules_init(!augment);
 	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {
 		list = g_list_append(list, (MOD_MGR*) mod_info);
 	}
