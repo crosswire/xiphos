@@ -60,6 +60,15 @@ static GtkHTMLStreamStatus status1;
 gboolean in_url;
 
 
+static void
+handle_error (GError **error)
+{
+	if (*error != NULL) {
+		g_warning ("%s", (*error)->message);
+		g_clear_error (error);
+	}
+}
+
 
 /******************************************************************************
  * Name
@@ -728,7 +737,7 @@ _calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
 
 	pango_font_description_free (desc);
 	g_object_unref (pango_context);
-
+	svn 
 	return header_height;
 }
 
@@ -770,7 +779,7 @@ _draw_header (GtkHTML *html, GtkPrintOperation *operation,
 	gchar *text;
 	cairo_t *cr;
 
-	text = g_strdup_printf ((gchar*) data);
+	text = g_strdup ((gchar*) data);
 
 	desc = pango_font_description_from_string ("Sans Regular 10");
 	layout = gtk_print_context_create_pango_layout (context);
@@ -890,12 +899,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 					       &error);
 
 	g_object_unref (operation);
-	//handle_error (&error);
-
-	//return result;
-	
-	
-	
+	handle_error (&error);
 	
 #else
 #ifdef USE_GTKHTML38
