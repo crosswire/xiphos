@@ -347,6 +347,7 @@ void backend_module_mgr_remote_list_modules_init(const char *sourceName)
 	end = source->second->getMgr()->Modules.end();
 }
 
+
 /******************************************************************************
  * Name
  *   backend_module_mgr_list_local_modules
@@ -363,10 +364,16 @@ void backend_module_mgr_remote_list_modules_init(const char *sourceName)
  *   GList *
  */
 
-void backend_module_mgr_list_local_modules_init()
+void backend_module_mgr_list_local_modules_init(bool for_install)
 {
-	it = mgr->Modules.begin();
-	end = mgr->Modules.end();
+        if (for_install){
+                it = list_mgr->Modules.begin();
+                end = list_mgr->Modules.end();
+        }
+        else{
+                it = mgr->Modules.begin();
+                end = mgr->Modules.end();
+        }
 }
 
 /******************************************************************************
@@ -822,7 +829,8 @@ void backend_init_module_mgr(const char *dir,
 			mgr = new SWMgr(dir);
 		} else {
 			// local directory install special case.
-			mgr = new SWMgr(dir, true, 0, false, false);
+		        mgr = new SWMgr();
+		        list_mgr = new SWMgr(dir, true, 0, false, false);
 			// see template.  re-assert 3 of 4 defaults:
 			// autoload    -> true
 			// filtermgr   -> null
