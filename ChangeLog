@@ -5,6 +5,7 @@
 	* add GnomeSword's own bin dir to $PATH.
 	* change single- to double-quotes in popen(3) strings.
 	* cope with win32's stupid O_BINARY necessity for images.
+	* remove generated editor-related files from EXTRA_DIST.
 
 2008-12-16  matthew <ransom1982@users.sourceforge.net>
 
