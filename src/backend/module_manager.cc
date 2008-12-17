@@ -56,7 +56,7 @@ using std::string;
 
 static SWMgr *mgr = NULL;
 static SWMgr *list_mgr = NULL;
-static InstallMgr *installMgr;
+static InstallMgr *installMgr = NULL;
 static ModMap::iterator it;
 static ModMap::iterator end;
 
@@ -906,5 +906,7 @@ void backend_terminate_module_mgr(void)
 void backend_shut_down_module_mgr(void)
 {
 	delete installMgr;
+	installMgr = NULL;
 	delete mgr;
+	mgr = NULL;
 }
