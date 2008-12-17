@@ -70,13 +70,19 @@ int main(int argc, char *argv[])
 	*strrchr(argv[0], '\\') = '\0';
 	chdir(argv[0]);
 
+	/* add this directory to $PATH for other stuff, e.g. zip */
+	putenv(g_strdup_printf("PATH=%s;%s", argv[0],
+			       getenv("PATH")));
+
+	/* make allowance for pre-existing modules area. */
 	if (!getenv("SWORD_PATH"))
 		putenv(g_strdup_printf("SWORD_PATH=%s/Application Data/.sword",
 				       getenv("ALLUSERSPROFILE")));
 	mkdir(getenv("SWORD_PATH"));
-	putenv(g_strdup_printf("HOME=%s", getenv("APPDATA")));
+
 	/* we need an idea of $HOME that's convenient. */
 	/* this gives us linux-equivalent semantics. */
+	putenv(g_strdup_printf("HOME=%s", getenv("APPDATA")));
 #endif /* WIN32 */
 
 	gui_init(argc, argv);
