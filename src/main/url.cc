@@ -231,7 +231,7 @@ static gint show_separate_image(const gchar * filename, gboolean clicked)
 		}
 
 		GS_print(("file = %s\n", filename));
-		g_string_printf(cmd, "%s '%s' < /dev/null > /dev/null 2>&1 &",
+		g_string_printf(cmd, "%s \"%s\" < /dev/null > /dev/null 2>&1 &",
 				display_progs[i], filename);
 
 		if ((result = popen(cmd->str, "r")) == NULL) {

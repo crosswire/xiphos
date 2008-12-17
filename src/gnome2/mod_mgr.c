@@ -353,7 +353,7 @@ remove_install_modules(GList * modules,
 
 			conf_file = main_get_mod_config_file(buf, destination);
 			g_string_printf(cmd,
-				"( rm -f '%s' && cd '%s' && zip -r '%s' 'mods.d/%s' '%s' ) 2>&1",
+				"( rm -f \"%s\" && cd \"%s\" && zip -r \"%s\" \"mods.d/%s\" \"%s\" ) 2>&1",
 				zipfile,
 				destination,
 				zipfile,
