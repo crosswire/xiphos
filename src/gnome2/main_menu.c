@@ -173,6 +173,35 @@ on_live_chat_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  on_report_bug_activate
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_report_bug_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   open web browser to sourceforge bug tracker
+ *
+ * Return value
+ *   void
+ */
+
+void
+on_report_bug_activate(GtkMenuItem * menuitem,
+			gpointer user_data)
+{
+	GError *error = NULL;
+	if (gnome_url_show("https://sourceforge.net/tracker2/?atid=105528&group_id=5528&func=browse",
+				&error) == FALSE) {
+		GS_warning((error->message));
+		g_error_free (error);
+	}
+}
+
+/******************************************************************************
+ * Name
  *  on_menuHistoryitem1_activate
  *
  * Synopsis
@@ -1023,33 +1052,39 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	GNOME_APP_UI_ITEM, N_("_Mailing List"),
 	N_("Sign up for the users' mailing list"),
 	on_mailing_list_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	0, 0, NULL},
 	{
 	GNOME_APP_UI_ITEM, N_("_Live Chat"),
 	N_("Chat with other users and developers"),
 	on_live_chat_activate, NULL, NULL,
-	GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("_Report Bug"),
+	 N_("Report bug to sourceforge"),
+	 on_report_bug_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
+	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("About _Translation"),
 	 N_("Translating GnomeSword to other languages"),
 	 on_about_translation_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("_About the SWORD Project"),
 	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("About _GnomeSword"),
 	 N_("About this application"),
 	 on_about_gnomesword1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
+	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
 };

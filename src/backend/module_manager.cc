@@ -909,6 +909,6 @@ void backend_shut_down_module_mgr(void)
 	installMgr = NULL;
 	delete mgr;
 	mgr = NULL;
-	delete list_mgr;
+        delete list_mgr; 
 	list_mgr = NULL;
 }
