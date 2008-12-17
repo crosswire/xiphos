@@ -101,7 +101,7 @@ int mod_use_counter[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
 // shell command to obtain size spec: prints exactly "123x456".
 // bad accommodation to Solaris (old sed): we cannot use \(this\|that\|other\).
-#define	IDENTIFY	"identify \"%s\" 2>&1 | head -1 | sed -e 's/^.*BMP //' -e 's/^.*GIF //' -e 's/^.*JPEG //' -e 's/^.*PNG //' -e 's/ .*$//'"
+#define	IDENTIFY	"identify \"%s\" 2>&1 | head -1 | sed -e \"s/^.*BMP //\" -e \"s/^.*GIF //\" -e \"s/^.*JPEG //\" -e \"s/^.*PNG //\" -e \"s/ .*$//\""
 
 int
 ImageDimensions(const char *path, int *x, int *y)
