@@ -706,6 +706,138 @@ struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
 #endif
 }
 
+#ifdef USE_GTKHTML3_14
+static gint
+_calc_header_height (GtkHTML *html, GtkPrintOperation *operation,
+                         GtkPrintContext *context)
+{
+	PangoContext *pango_context;
+	PangoFontDescription *desc;
+	PangoFontMetrics *metrics;
+	gint header_height;
+
+	pango_context = gtk_print_context_create_pango_context (context);
+	desc = pango_font_description_from_string ("Sans Regular 10");
+
+	metrics = pango_context_get_metrics (
+		pango_context, desc, pango_language_get_default ());
+	header_height =
+		pango_font_metrics_get_ascent (metrics) +
+		pango_font_metrics_get_descent (metrics);
+	pango_font_metrics_unref (metrics);
+
+	pango_font_description_free (desc);
+	g_object_unref (pango_context);
+
+	return header_height;
+}
+
+static gint
+_calc_footer_height (GtkHTML *html, GtkPrintOperation *operation,
+                         GtkPrintContext *context)
+{
+	PangoContext *pango_context;
+	PangoFontDescription *desc;
+	PangoFontMetrics *metrics;
+	gint footer_height;
+
+	pango_context = gtk_print_context_create_pango_context (context);
+	desc = pango_font_description_from_string ("Sans Regular 10");
+
+	metrics = pango_context_get_metrics (
+		pango_context, desc, pango_language_get_default ());
+	footer_height =
+		pango_font_metrics_get_ascent (metrics) +
+		pango_font_metrics_get_descent (metrics);
+	pango_font_metrics_unref (metrics);
+
+	pango_font_description_free (desc);
+	g_object_unref (pango_context);
+
+	return footer_height;
+}
+static void
+_draw_header (GtkHTML *html, GtkPrintOperation *operation,
+                  GtkPrintContext *context,
+                  gint page_nr,
+                  PangoRectangle *rec,
+		  gpointer data)
+{
+	PangoFontDescription *desc;
+	PangoLayout *layout;
+	gdouble x, y;
+	gint n_pages;
+	gchar *text;
+	cairo_t *cr;
+
+	text = g_strdup_printf ((gchar*) data);
+
+	desc = pango_font_description_from_string ("Sans Regular 10");
+	layout = gtk_print_context_create_pango_layout (context);
+	pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+	pango_layout_set_font_description (layout, desc);
+	pango_layout_set_text (layout, text, -1);
+	pango_layout_set_width (layout, rec->width);
+
+	x = pango_units_to_double (rec->x);
+	y = pango_units_to_double (rec->y);
+
+	cr = gtk_print_context_get_cairo_context (context);
+
+	cairo_save (cr);
+	cairo_set_source_rgb (cr, .0, .0, .0);
+	cairo_move_to (cr, x, y);
+	pango_cairo_show_layout (cr, layout);
+	cairo_restore (cr);
+
+	g_object_unref (layout);
+	pango_font_description_free (desc);
+
+	g_free (text);
+}
+
+
+static void
+_draw_footer (GtkHTML *html, GtkPrintOperation *operation,
+                  GtkPrintContext *context,
+                  gint page_nr,
+                  PangoRectangle *rec,
+		  gpointer data)
+{
+	PangoFontDescription *desc;
+	PangoLayout *layout;
+	gdouble x, y;
+	gint n_pages;
+	gchar *text;
+	cairo_t *cr;
+
+	g_object_get (operation, "n-pages", &n_pages, NULL);
+	text = g_strdup_printf (_("Page %d of %d"), page_nr + 1, n_pages);
+
+	desc = pango_font_description_from_string ("Sans Regular 10");
+	layout = gtk_print_context_create_pango_layout (context);
+	pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+	pango_layout_set_font_description (layout, desc);
+	pango_layout_set_text (layout, text, -1);
+	pango_layout_set_width (layout, rec->width);
+
+	x = pango_units_to_double (rec->x);
+	y = pango_units_to_double (rec->y);
+
+	cr = gtk_print_context_get_cairo_context (context);
+
+	cairo_save (cr);
+	cairo_set_source_rgb (cr, .0, .0, .0);
+	cairo_move_to (cr, x, y);
+	pango_cairo_show_layout (cr, layout);
+	cairo_restore (cr);
+
+	g_object_unref (layout);
+	pango_font_description_free (desc);
+
+	g_free (text);
+}
+#endif
 
 /******************************************************************************
  * Name
@@ -723,9 +855,49 @@ struct _info *info_new(GtkHTML * html, GnomePrintContext * pc, gdouble * line)
  *   void
  */
 
-void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
+void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_name)
 {
-#ifndef USE_GTKHTML3_14
+#ifdef USE_GTKHTML3_14
+	
+	GtkPrintOperation *operation;
+	GtkPageSetup *setup;
+	GtkPrintOperationResult result;
+	GError *error = NULL;
+	GtkPrintOperationAction action;
+	
+	if(preview)
+		action = GTK_PRINT_OPERATION_ACTION_PREVIEW;
+	else
+		action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
+	
+	operation = gtk_print_operation_new ();
+	
+	setup = gtk_page_setup_new ();
+	gtk_page_setup_set_top_margin(setup,30,GTK_UNIT_PIXEL);
+	gtk_page_setup_set_left_margin(setup,50,GTK_UNIT_PIXEL);
+	
+	gtk_print_operation_set_default_page_setup(operation, setup);
+	
+	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget), 
+					       operation, 
+					       action,
+					       NULL, //GTK_WINDOW (e->window), 
+					       (GtkHTMLPrintCalcHeight) _calc_header_height, /* GtkHTMLPrintCalcHeight  calc_header_height*/
+					       (GtkHTMLPrintCalcHeight) _calc_footer_height, /* GtkHTMLPrintCalcHeight  calc_footer_height*/ 
+					       (GtkHTMLPrintDrawFunc) _draw_header, /* GtkHTMLPrintDrawFunc draw_header */ 
+					       (GtkHTMLPrintDrawFunc) _draw_footer, /* GtkHTMLPrintDrawFunc draw_footer */
+					       (gchar*)mod_name, //e, /* gpointer user_data */ 
+					       &error);
+
+	g_object_unref (operation);
+	//handle_error (&error);
+
+	//return result;
+	
+	
+	
+	
+#else
 #ifdef USE_GTKHTML38
 	GtkHTML *html;
 	GtkWidget *w = NULL;

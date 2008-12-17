@@ -701,7 +701,7 @@ static void on_print1_activate(GtkMenuItem * menuitem,
 				   settings.DictWindowModule, 
 				   GECKO_HTML(widgets.html_dict));
 #else	
-	gui_html_print(widgets.html_dict, FALSE);
+	gui_html_print(widgets.html_dict, FALSE, settings.DictWindowModule);
 #endif
 }
 

@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<para>
-Original Language Research:
-
-Gnomesword is ideally suited for studying the original Greek and Hebrew texts. To get started, you will want the following modules:
-    From Crosswire
-        StrongsHebrew Dictionary (or get StrongsRealHebrew from the Gnomesword repository)
-        StrongsGreek Dictionary (or get StrongsRealGreek from the Gnomesword repository)
-        Robinson Dictionary
-        KJV Bible
-    From Gnomesword
-        For Strongs Dictionaries that are inter-linked and contain the actual Hebrew/Greek characters as well as B-Greek transliteration, get these modules:
-        StrongsRealGreek Dictionary
-        StrongsRealHebrew Dictionary
-       
-        For a module that lets you key in or copy an actual Greek word, try this module:
-       
-        InvertedStrongsRealGreek
-
-Setting up:
-    While still in the module manager, create indexes for all of the modules you just installed. Then open preferences (Edit-&gt;Preferences) and go to Modules-&gt;Misc. Set your Hebrew and Greek lexicons according to what you downloaded. Close preferences and open the KJV module. Turn on the module options "Show Strongs" and "Show Morphology". You should see the Bible text change to show Strongs numbers underneath the appropriate English words. Hover over the numbers (or letters for morphology) with the mouse and you will see the definition displayed in the previewer pane. Click on the link and the definition will show in the dictionary pane. If you are using StrongsRealGreek or StrongsRealHebrew, you can click on any other number referenced in the definition and you will be taken to that entry.
-
-Searching for Strongs numbers:
-    Open Advanced Search (Edit-&gt;Advanced Search, or press "F3"). On the first tab under Search Type, select Attributes. Then click on the Attribute Search tab, and make sure Strongs Numbers is selected. On the same tab, check the box that says "Show Strong's Numbers". Now click in the entry field at the top and search for the number you are looking for preceded by a "G" for Greek or "H" for Hebrew. Once the search is done, the results pane will be shown. Notice that when you click on a result, it will show the result in the preview pane, and the strong's numbers will show as well, following immediately after the words they match. Also note that hovering over these numbers will show the definition in the main preview pane.
-
-Additional Modules:
-    For more advanced research, the following modules are also available:
-   
-    2TGreek (Gnomesword repository) : This module contains the entire Bible in Greek. It combines the LXX and Tischendorf8 NT into one easy-to-use module. In addition, it contains morphological tags for the entire Bible, strongs numbers, Greek Accents, and primary/secondary readings. As with all modules that include strongs, Gnomesword displays 2TGreek in beautiful interlinear form.
-
-    Elzevir Textus Receptus (Crosswire Beta Repository as of this writing) : 1624 edition with Strongs and morphology
-
-    LXX (Crosswire) : the septuagint with Strongs, Morphology, and footnotes
-
-    MorphGNT (Crosswire Beta Repository as of this writing) : This is derived from the morphologically parsed GNT provided by UPenn's CCAT. It was reformatted and error-corrected by James Tauber. It includes Greek accents and morphological tags.
-
-    TR (Crosswire) : This is the Textus Receptus with Strongs and Morphology
-
-    TischMorph (Gnomesword) : As described above, this has Strongs, Morphology, accents, and alternate readings.
-
-    WHNU (Crosswire) : Westcott-Hort of 1881 with Strongs and Morphology
-
-    GreekHebrew (Crosswire) : This is a dictionary keyed to Strongs. It contains words in the LXX that are also found in the new testament. In addition, it contains the equivalent Hebrew words also keyed to Strongs. (Note to Karl: this would work much nicer with links!)
-
-    Didache (Crosswire Beta Repository as of this writing) : This is an early Christian treatise in Greek dated to the late first or early second century. It includes Strongs, Morphology, and Greek accents.
-
-</para>
+<!-- ============= Original Language Research  ============-->
+<sect2 id="orig-lang-install-modules">
+		<title>Installing Needed Modules</title>
+		<para>Gnomesword is ideally suited for studying the original Greek and Hebrew texts. 
+		To get started, you will want the following modules:
+		</para>
+		<para>
+		From Crosswire Repository:
+		</para>
+    		<itemizedlist>
+			<listitem>
+				<para>
+        			StrongsHebrew Dictionary (or get StrongsRealHebrew from the Kleinpaste Repository)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+        			StrongsGreek Dictionary (or get StrongsRealGreek from the Kleinpaste Repository)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Robinson Dictionary
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				KJV Bible
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+		From Kleinpaste Repository:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+				StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek characters, B-Greek transliteration, and self-referencing links)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew characters and self-referencing links)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				InvertedStrongsRealGreek (key in or copy actual Greek word, rather than number)
+				</para>
+			</listitem>
+		</itemizedlist>
+	</sect2>

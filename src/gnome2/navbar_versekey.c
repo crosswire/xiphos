@@ -719,7 +719,7 @@ gboolean on_down_eventbox_button_release_event(GtkWidget * widget,
 gboolean access_on_up_eventbox_button_release_event(gint element)
 {
 	return on_up_eventbox_button_release_event
-	    (NULL, NULL, (void*)element);
+	    (NULL, NULL, GINT_TO_POINTER(element));
 }
 
 /******************************************************************************
@@ -741,7 +741,7 @@ gboolean access_on_up_eventbox_button_release_event(gint element)
 gboolean access_on_down_eventbox_button_release_event(gint element)
 {
 	return on_down_eventbox_button_release_event
-	    (NULL, NULL, (void*)element);
+	    (NULL, NULL, GINT_TO_POINTER(element));
 }
 
 /******************************************************************************

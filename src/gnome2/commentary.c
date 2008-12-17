@@ -351,7 +351,7 @@ static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   settings.CommWindowModule, 
 				   GECKO_HTML(widgets.html_comm));
 #else
-	gui_html_print(widgets.html_comm, FALSE);
+	gui_html_print(widgets.html_comm, FALSE, settings.CommWindowModule);
 #endif
 }
 
