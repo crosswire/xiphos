@@ -1062,7 +1062,7 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("_Report Bug"),
-	 N_("Report bug to sourceforge"),
+	 N_("Report bug to SourceForge"),
 	 on_report_bug_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_ABOUT,
 	 0, 0, NULL},
