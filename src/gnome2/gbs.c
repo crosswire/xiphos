@@ -975,10 +975,14 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	// variants
 	gtk_widget_hide(module_options_menu_uiinfo[13].widget);	// image content
 	gtk_widget_hide(menu1_uiinfo[7].widget);	// unlock_module
-#if defined(__CYGWIN__) || defined(WIN32)
+#if defined(__CYGWIN__)
 	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
-	gtk_widget_hide(file3_menu_uiinfo[2].widget);		// print
-#endif /* __CYGWIN__ */
+	gtk_widget_hide(file3_menu_uiinfo[3].widget);		// print
+#endif /* __CYGWIN__ */ 
+#if defined(WIN32)
+	gtk_widget_hide(menu1_uiinfo[8].widget);	// read aloud
+#endif /* WIN32 */
+
 	
 	view_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),

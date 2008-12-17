@@ -1268,10 +1268,10 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_UNSAFE_VERB("DeleteNote",delete_note_cb),
 	BONOBO_UI_UNSAFE_VERB("NewDoc", open_new_document_cb),
 	BONOBO_UI_UNSAFE_VERB("SavePlainStream",save_through_plain_persist_stream_cb),
-#ifndef WIN32
+//#ifndef WIN32
 	BONOBO_UI_UNSAFE_VERB("PrintMessage", print_message_cb),
 	BONOBO_UI_UNSAFE_VERB("PrintPreviewMessage",print_preview_message_cb),
-#endif
+//#endif
 	BONOBO_UI_UNSAFE_VERB("ViewHTMLSource", view_html_source_cb),
 	BONOBO_UI_UNSAFE_VERB("ViewHTMLSourceHTML",view_html_source_html_cb),
 	BONOBO_UI_UNSAFE_VERB("ViewPlainSource", view_plain_source_cb),
@@ -1994,35 +1994,35 @@ static GtkWidget *container_create(const gchar * window_title,
 
 	CORBA_exception_init(&ev);
 	if (editor->studypad) {
-#ifdef WIN32
+/* #ifdef WIN32
 		bonobo_ui_util_set_ui(component,
 				      INSTALL_PREFIX,
 				      gui_general_user_file
 				      ("/editor_studypad_WIN32.xml", FALSE),
 				      "editor", &ev);
 		
-#else
+#else */
 		bonobo_ui_util_set_ui(component,
 				      INSTALL_PREFIX,
 				      gui_general_user_file
 				      ("/editor_studypad.xml", FALSE),
 				      "editor", &ev);
-#endif
+// #endif
 	} else {
-#ifdef WIN32
+/* #ifdef WIN32
 		bonobo_ui_util_set_ui(component,
 				      INSTALL_PREFIX,
 				      gui_general_user_file
 				      ("/editor_note_WIN32.xml", FALSE),
 				      "editor", &ev);
 		
-#else
+#else */
 		bonobo_ui_util_set_ui(component,
 				      INSTALL_PREFIX,
 				      gui_general_user_file
 				      ("/editor_note.xml", FALSE),
 				      "editor", &ev);
-#endif
+// #endif
 	}
 	CORBA_exception_free(&ev);
 
