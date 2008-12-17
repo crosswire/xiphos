@@ -218,7 +218,7 @@ _draw_header (GtkHTML *html, GtkPrintOperation *operation,
 	gchar *text;
 	cairo_t *cr;
 
-	text = g_strdup_printf (e->filename);
+	text = g_strdup (e->filename);
 
 	desc = pango_font_description_from_string ("Sans Regular 10");
 	layout = gtk_print_context_create_pango_layout (context);
