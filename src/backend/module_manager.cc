@@ -481,7 +481,7 @@ int backend_local_install_module(const char *destdir,
 				 const char *srcdir,
 				 const char *mod_name)
 {
-  SWMgr lmgr((destdir ? destdir : main_get_path_to_mods()),
+        SWMgr lmgr((destdir ? destdir : main_get_path_to_mods()),
 	     true, 0, false, false);
 	return installMgr->installModule(&lmgr, srcdir, mod_name);
 }
