@@ -82,7 +82,7 @@ void mod_mgr_add_source(const char * vtype,
 			const char * caption, 
 			const char * source, 
 			const char * directory);
-void mod_mgr_init(const char *dir);
+void mod_mgr_init(const char *dir, gboolean augment);
 void mod_mgr_shut_down(void);
 void mod_mgr_terminate(void);
 
