@@ -300,9 +300,11 @@ int mod_mgr_uninstall(const char *dir, const char *mod_name)
  *   int
  */
 
-int mod_mgr_remote_install(const char *source_name, const char *mod_name)
+int mod_mgr_remote_install(const char *dir,
+			   const char *source_name,
+			   const char *mod_name)
 {
-	return backend_remote_install_module(source_name, mod_name);
+	return backend_remote_install_module(dir, source_name, mod_name);
 }
 
 
