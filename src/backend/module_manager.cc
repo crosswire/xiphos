@@ -435,7 +435,8 @@ int backend_uninstall_module(const char *dir,
  *   int
  */
 
-int backend_remote_install_module(const char *sourceName,
+int backend_remote_install_module(const char *destdir,
+				  const char *sourceName,
 				  const char *modName)
 {
 	InstallSourceMap::iterator source =
@@ -447,15 +448,16 @@ int backend_remote_install_module(const char *sourceName,
 	}
 	InstallSource *is = source->second;
 	SWMgr *rmgr = is->getMgr();
-	SWModule *module;
 	ModMap::iterator it = rmgr->Modules.find(modName);
 	if (it == rmgr->Modules.end()) {
 		printf("Remote source [%s] does not make available module [%s]\n",
 			sourceName, modName);
 		return -1;
 	}
-	module = it->second;
-	return installMgr->installModule(mgr, 0, module->Name(), is);
+
+	SWMgr dmgr((destdir ? destdir : main_get_path_to_mods()),
+		   true, 0, false, false);
+	return installMgr->installModule(&dmgr, 0, modName, is);
 }
 
 

@@ -389,7 +389,10 @@ remove_install_modules(GList * modules,
 		    (!first_time_user &&	// don't trip on "no modules".
 		     (activity == INSTALL) &&
 		     main_is_module(buf))) {	// delete before re-install
-			GS_print(("remove %s from %s\n", buf, destination));
+			GS_print(("remove %s from %s\n", buf,
+				  (destination
+				   ? destination
+				   : main_get_path_to_mods())));
 			failed = mod_mgr_uninstall(destination, buf);
 			if (failed == -1) {
 				//mod_mgr_shut_down();
@@ -401,7 +404,10 @@ remove_install_modules(GList * modules,
 					GS_warning((new_dest));
 				}
 				GS_print(("removing %s from %s\n",
-					  buf, new_dest));
+					  buf,
+					  (new_dest
+					   ? new_dest
+					   : main_get_path_to_mods())));
 				failed =
 				    mod_mgr_uninstall(new_dest, buf);
 			}
@@ -417,7 +423,7 @@ remove_install_modules(GList * modules,
 			GS_print(("install %s, source=%s\n", buf, source));
 			failed = ((local)
 				  ? mod_mgr_local_install_module(destination, source, buf)
-				  : mod_mgr_remote_install(source, buf));
+				  : mod_mgr_remote_install(destination, source, buf));
 		}
 
 		if (activity == FASTMOD) {
