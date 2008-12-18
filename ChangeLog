@@ -1,3 +1,7 @@
+2008-12-18  karl <charcoal@users.sf.net>
+
+	* mod.mgr hackery: untable /usr/share/sword & ~/.sword.
+
 2008-12-16  karl <charcoal@users.sf.net>
 
 	* add new GnomeSword repo for first-time users.

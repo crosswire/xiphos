@@ -844,7 +844,7 @@ load_module_tree(GtkTreeView * treeview,
 	mod_mgr_shut_down();
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	mod_mgr_init(destination);
+	mod_mgr_init(destination, FALSE);
 
 	if (install) {
 		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
@@ -1727,7 +1727,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 		break;
 	case 1:
 		mod_mgr_shut_down();
-		mod_mgr_init(destination);	
+		mod_mgr_init(destination, FALSE);	
 		break;
 	case 2:
 		/* we already cleared progress bar */
@@ -1749,7 +1749,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			local = FALSE;
 		}
 		mod_mgr_shut_down();
-		mod_mgr_init(destination);
+		mod_mgr_init(destination, FALSE);
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
 	case 4:
@@ -1762,7 +1762,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 			local = FALSE;
 		}
 		mod_mgr_shut_down();
-		mod_mgr_init(destination);
+		mod_mgr_init(destination, FALSE);
 		load_module_tree(GTK_TREE_VIEW(treeview2), FALSE);
 		break;
 	}
@@ -2397,7 +2397,7 @@ on_button7_clicked(GtkButton * button,
 		gtk_main_iteration();
 
 	mod_mgr_shut_down();
-	mod_mgr_init(destination);
+	mod_mgr_init(destination, FALSE);
 
 out:
 	working = FALSE;
@@ -2734,7 +2734,7 @@ setup_ui_labels()
 		mod_mgr_init_config();
 	}
 	have_configs = TRUE;
-	mod_mgr_init(NULL);
+	mod_mgr_init(NULL, TRUE);
 	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
 	gtk_label_set_text(GTK_LABEL(label_home), str->str);
 

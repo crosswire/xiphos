@@ -461,7 +461,7 @@ void mod_mgr_add_source(const char * vtype,
  * Synopsis
  *   #include "main/mod_mgr.hh"
  *
- *   void mod_mgr_init(const char *dir)
+ *   void mod_mgr_init(const char *dir, gboolean augment)
  *
  * Description
  *   
@@ -470,9 +470,9 @@ void mod_mgr_add_source(const char * vtype,
  *   void
  */
 
-void mod_mgr_init(const char *dir)
+void mod_mgr_init(const char *dir, gboolean augment)
 {
-	backend_init_module_mgr(dir, TRUE);
+	backend_init_module_mgr(dir, augment);
 }
 
 /******************************************************************************

@@ -823,16 +823,14 @@ char *set_mod_mgr_locale(const char *sys_locale) {
 void backend_init_module_mgr(const char *dir,
 			     gboolean augment)
 {
+	if (mgr)
+		delete mgr;
 	if (dir) {
 		if (augment) {
 			// normal case: this will include ~/.sword content.
-			if (mgr)
-				delete mgr;
 			mgr = new SWMgr(dir);
 		} else {
 			// local directory install special case.
-			if (mgr)
-				delete mgr;
 		        mgr = new SWMgr();
 			if (list_mgr)
 				delete list_mgr;
@@ -847,9 +845,9 @@ void backend_init_module_mgr(const char *dir,
 			// installed as we prepare to do more installations.
 		}
 	} else {
-		if (mgr)
-			delete mgr;
-		mgr = new SWMgr();
+		mgr = (augment
+		       ? new SWMgr()
+		       : new SWMgr(dir, true, 0, false, false));
 	}
 
 	const char *lang = getenv("LANG");	
