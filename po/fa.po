@@ -664,8 +664,8 @@ msgstr "خلق شکل‌بندی جدید ممکن نشد"
 #: ../src/gnome2/commentary.c:550
 msgid ""
 "Configuration build error:\n"
-"\n"
 msgstr "اشتباه در سازه شکل‌بندی"
+"\n"
 
 #: ../src/gnome2/commentary.c:1045
 msgid "Rename Pers.Comm."
@@ -775,12 +775,11 @@ msgstr "گنوم سورد نتوانست آرشیوگر را راه اندازی
 #: ../src/gnome2/mod_mgr.c:372
 msgid ""
 " archival result:\n"
-"\n"
 msgstr "نتیجه منتج از آرشیو"
+"\n"
 
 #: ../src/gnome2/mod_mgr.c:376
 msgid ""
-"\n"
 "Archive in "
 msgstr "آرشیو کن در"
 
@@ -2178,7 +2177,7 @@ msgstr ""
 #: ../src/main/xml.c:80 ../src/main/xml.c:465
 #, c-format
 msgid "Document not created successfully. \n"
-msgstr "متن به وجود نیامد"
+msgstr "متن به وجود نیامد\n"
 
 #: ../src/main/xml.c:89
 msgid "Personal"
@@ -2215,18 +2214,18 @@ msgstr "1قرن 15: 1"
 #: ../src/main/xml.c:413 ../src/main/xml.c:1077
 #, c-format
 msgid "Document not parsed successfully. \n"
-msgstr "متن شناخته نشد"
+msgstr "متن شناخته نشد\n"
 
 #: ../src/main/xml.c:419 ../src/main/xml.c:680 ../src/main/xml.c:958
 #: ../src/main/xml.c:1137
 #, c-format
 msgid "empty document \n"
-msgstr "متن خالی"
+msgstr "متن خالی\n"
 
 #: ../src/main/xml.c:425
 #, c-format
 msgid "wrong type, root node != SwordBookmarks\n"
-msgstr "نوع پرونده غلط است"
+msgstr "نوع پرونده غلط است\n"
 
 #: ../src/main/xml.c:479
 msgid "Old Testament"
@@ -2255,7 +2254,7 @@ msgstr "مدول دلخواه خود را انتخاب کنید"
 #: ../src/main/xml.c:686 ../src/main/xml.c:964
 #, c-format
 msgid "wrong type, root node != %s\n"
-msgstr "نوع پرونده غلط است"
+msgstr "نوع پرونده غلط است\n"
 
 #: ../src/main/sword_treekey.cc:374
 msgid "Name for new prayer list"
