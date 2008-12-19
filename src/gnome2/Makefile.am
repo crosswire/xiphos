@@ -100,6 +100,7 @@ gnomesword_LDADD = \
     $(GECKO_COMPONENT_LIBS) \
     $(GNOME_SPELL_LIBS)\
     $(SWORD_LIBS) \
+    $(ImageMagick_LIBS) \
     $(UPRINT_LIBS)
 
 EXTRA_DIST = \
