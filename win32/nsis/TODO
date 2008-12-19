@@ -4,8 +4,6 @@ TODO:
 
     * Name for the installer binary: "GnomeSword-3.0-win32.exe"
 
-    * translations of GPL license
-
     * Try to simplify i18n declaration
         - inspiration at other OSS projects using NSIS
 
