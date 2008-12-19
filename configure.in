@@ -41,7 +41,7 @@ AC_SUBST(SWORD_CFLAGS)
 dnl ***
 dnl ImageMagick for image dimensions/resize
 dnl ***
-PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.4.0, , exit)
+PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , exit)
 AC_SUBST(ImageMagick_LIBS)
 AC_SUBST(ImageMagick_CFLAGS)
 
