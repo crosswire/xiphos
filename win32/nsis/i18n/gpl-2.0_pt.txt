@@ -13,10 +13,6 @@
  texto original da GPL GNU, em inglês, faz isso. Contudo, esperamos que esta
  tradução ajude aos que falam português a entender melhor a GPL GNU.
 
-Para sugestões ou correcções a esta tradução, contacte:
-
-miguel.andrade@neoscopio.com
-
 
 --- Tradução do documento original a partir desta linha ---
 
