@@ -38,6 +38,13 @@ PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , exit)
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
 
+dnl ***
+dnl ImageMagick for image dimensions/resize
+dnl ***
+PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.4.0, , exit)
+AC_SUBST(ImageMagick_LIBS)
+AC_SUBST(ImageMagick_CFLAGS)
+
 dnl AC_CHECK_SWORD(1.5.8, [NO])
 
 
@@ -214,6 +221,9 @@ fi
 AC_CHECK_FUNCS(strcasestr, [have_strcasestr="yes"])
 AM_CONDITIONAL(HAVE_STRCASESTR, test x$have_strcasestr = xyes)
 
+dnl all platforms have one of these 2 libs, but not all such libs
+dnl have the needed tooltip routine so we can set tips properly,
+dnl even though they're all "2.0" (ha, giggle - cf. F7).
 AC_CHECK_LIB(gtk-x11-2.0, gtk_widget_set_tooltip_text)
 AC_CHECK_LIB(gtk-win32-2.0, gtk_widget_set_tooltip_text)
 

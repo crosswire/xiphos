@@ -1,6 +1,7 @@
 2008-12-18  karl <charcoal@users.sf.net>
 
-	* mod.mgr hackery: untable /usr/share/sword & ~/.sword.
+	* mod.mgr hackery: untangle /usr/share/sword & ~/.sword.
+	* replace ImageMagick's "identify" with C++ API interface.
 
 2008-12-16  karl <charcoal@users.sf.net>
 
