@@ -291,17 +291,25 @@ _do_print (EDITOR * e,
        GtkPrintOperationAction action)
 {
 	GtkPrintOperation *operation;
+	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
+	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 
-	operation = gtk_print_operation_new ();
+	operation = gtk_print_operation_new ();	
+	psettings = gtk_print_settings_new ();
+	
+	psettings = gtk_print_operation_get_print_settings (operation);
+	
+	letter  = gtk_paper_size_new (GTK_PAPER_NAME_LETTER);
 	
 	setup = gtk_page_setup_new ();
-	gtk_page_setup_set_top_margin(setup,30,GTK_UNIT_PIXEL);
-	gtk_page_setup_set_left_margin(setup,50,GTK_UNIT_PIXEL);
+	gtk_page_setup_set_top_margin (setup,30,GTK_UNIT_PIXEL);
+	gtk_page_setup_set_left_margin (setup,50,GTK_UNIT_PIXEL);
+	gtk_page_setup_set_paper_size (setup,letter);
 	
-	gtk_print_operation_set_default_page_setup(operation, setup);
+	gtk_print_operation_set_default_page_setup (operation, setup);
 	
 	result = gtk_html_print_operation_run (GTK_HTML(e->html_widget), 
 					       operation, 

@@ -873,7 +873,9 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 #ifdef USE_GTKHTML3_14
 	
 	GtkPrintOperation *operation;
+	GtkPrintSettings *psettings;
 	GtkPageSetup *setup;
+	GtkPaperSize *letter;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
 	GtkPrintOperationAction action;
@@ -884,11 +886,17 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 		action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
 	
 	operation = gtk_print_operation_new ();
+	psettings = gtk_print_settings_new ();
+	
+	psettings = gtk_print_operation_get_print_settings (operation);
+	
+	letter  = gtk_paper_size_new(GTK_PAPER_NAME_LETTER);
 	
 	setup = gtk_page_setup_new ();
 	gtk_page_setup_set_top_margin(setup,30,GTK_UNIT_PIXEL);
 	gtk_page_setup_set_left_margin(setup,50,GTK_UNIT_PIXEL);
-	
+	gtk_page_setup_set_paper_size (setup,letter);
+		
 	gtk_print_operation_set_default_page_setup(operation, setup);
 	
 	result = gtk_html_print_operation_run (GTK_HTML(htmlwidget), 
