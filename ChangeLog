@@ -1,7 +1,8 @@
 2008-12-18  karl <charcoal@users.sf.net>
 
 	* mod.mgr hackery: untangle /usr/share/sword & ~/.sword.
-	* replace ImageMagick's "identify" with C++ API interface.
+	* replace ImageMagick's "identify" with C++ API interface
+	  (except in win32 where the per-image libs are a problem).
 
 2008-12-16  karl <charcoal@users.sf.net>
 
