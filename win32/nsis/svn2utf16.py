@@ -35,20 +35,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  
 import os
 import sys
+from os.path import join, dirname, split, abspath
 
 # charsets
 ch_utf8 = "utf8"
 ch_utf16 = "utf16"
 
+# absolute path to folder, where this script is
+base = abspath(__file__)
+base = dirname(base)
+
+
+# join file name with base folder
+def b_join(name):
+    return abspath(join(base, name))
+
+
+# folders, files - use absolute paths
 fprefix = "utf16_" # prefix for new text files in UTF-16LE
-folders = ["i18n", "include"]
-nsis_script = "installer.nsi"
+folders = map(b_join, ["i18n", "include"])
+nsis_script = b_join("installer.nsi")
+
+
+# add prefix 'utf16_' to file name
+def add_fpref(name):
+    (head, tail) = split(name)
+    return join(head, fprefix + tail)
 
 
 # UTF-8 to UTF-16
 def to_utf16(file):
     file_in = open(file, 'r')
-    file_out = open(fprefix + file, 'w')
+    file_out = open(add_fpref(file), 'w')
     
     # conversion
     content = file_in.read()
@@ -62,41 +80,42 @@ def to_utf16(file):
 
 # convert all files to UTF-16
 def convert():
+
     print "converting..."
     print nsis_script
     to_utf16(nsis_script)
+
     for fold in folders:
+        print "dir:", fold
         files = os.listdir(fold)
-        os.chdir(fold)
         for f in files:
             # ignore hidden '.svn' folder
             if f == ".svn":
                 continue
-            print fold + "/" + f
+            f = join(fold, f)
+            print f
             to_utf16(f)
-        os.chdir("..")
     
 
 # delete all UTF-16 files
 def clean():
+
     print "deleting..."
 
-    script = fprefix + nsis_script
+    script = add_fpref(nsis_script)
     if os.path.exists(script):
         print script
         os.remove(script)
 
     for fold in folders:
         files = os.listdir(fold)
-        os.chdir(fold)
         for f in files:
             # file name contains string 'utf16_'
             if f.find(fprefix) >= 0:
-                print fold + "/" + f
+                f = join(fold, f)
+                print f
                 os.remove(f)
-        os.chdir("..")
     
-
 
 def main():
     clean()
