@@ -4,6 +4,7 @@
 	* avoid empty genbook language group when no genbooks but a prayer
 	  list exists.
 	* make sure settings.book_mod is assigned when picking a genbook.
+	* fix det.parallel "(null)" (bad typo from eons ago).
 
 2008-12-18  karl <charcoal@users.sf.net>
 

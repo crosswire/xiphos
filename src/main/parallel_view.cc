@@ -1276,7 +1276,7 @@ void main_update_parallel_page_detached(void)
 		}
 	}
 
-	if (widgets.html_parallel) {
+	if (settings.parallel4Module) {
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
 			settings.bible_verse_num_color,
@@ -1321,11 +1321,7 @@ void main_update_parallel_page_detached(void)
 #endif
 	}
 
-#ifdef USE_GTKMOZEMBED
-	int_display(html, settings.cvparallel);
-#else
 	int_display(html, settings.cvparallel);	
-#endif
 	sprintf(buf, "%s", "</table></body></html>");
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
