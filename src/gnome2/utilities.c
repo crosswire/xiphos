@@ -1163,7 +1163,8 @@ language_make_list(GList *modlist,
 			language_add(info->language, LANGSET_DEVOTIONAL);
 		else if (info->type[0] == 'L')
 			language_add(info->language, LANGSET_DICTIONARY);
-		else if (info->type[0] == 'G')
+		else if ((info->type[0] == 'G') &&
+			 (!main_get_mod_config_entry(info->name, "GSType")))
 			language_add(info->language, LANGSET_GENBOOK);
 
 		modlist = g_list_next(modlist);
