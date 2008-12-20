@@ -31,6 +31,7 @@
 #include "main/xml.h"
 
 #include "gui/navbar_book.h"
+#include "gui/utilities.h"
 
 #include "backend/sword_main.hh"
 
@@ -390,6 +391,10 @@ void main_setup_navbar_book(gchar * book_name, unsigned long offset)
 	gtk_entry_set_text(GTK_ENTRY(navbar_book.lookup_entry), tmpbuf);
 	gtk_tooltips_set_tip(navbar_book.tooltips,
 			     navbar_book.lookup_entry, tmpbuf, NULL);
+
+	if ((settings.book_mod == NULL) ||
+	    (*settings.book_mod == '\0'))
+		gui_reassign_strdup(&settings.book_mod, book_name);
 
 	if (check_for_parent(settings.book_mod, settings.book_offset))
 		gtk_widget_set_sensitive(navbar_book.button_left, TRUE);
