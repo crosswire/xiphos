@@ -111,6 +111,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 
 
 
+
 /******************************************************************************
  * Name
  *   on_changeint2mod_activate
@@ -291,7 +292,7 @@ void gui_popup_menu_parallel(void)
 			   &settings);
 
 	
-	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 2,
+	gtk_menu_popup((GtkMenu*)menu, NULL, NULL, NULL, NULL, 0,
 		     			gtk_get_current_event_time());
 	//gtk_widget_destroy(menu1);
 //	g_free(ops);
