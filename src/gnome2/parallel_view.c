@@ -96,13 +96,14 @@ void on_undockInt_activate(GtkMenuItem * menuitem)
  *   void
  */
 
-static void on_changeint1mod_activate(GtkMenuItem * menuitem,
+void on_changeint1mod_activate(GtkMenuItem * menuitem,
 				      gpointer user_data)
 {
 	
 	gchar *mod_name = NULL;
-
+	GS_message(("mod_name",(gchar *) user_data));
 	mod_name = main_module_name_from_description((gchar *) user_data);
+	
 	if(!mod_name) 
 		return;
 	main_change_parallel_module(PARALLEL1, mod_name);
@@ -271,21 +272,16 @@ void gui_popup_menu_parallel(void)
 	gtk_container_add(GTK_CONTAINER(menu), separator2);
 	gtk_widget_set_sensitive(separator2, FALSE);
 	/* build change parallel modules submenu */
-	main_load_menu_form_mod_list(menu, _("Change parallel 1"),
-			       (GCallback)
-			       on_changeint1mod_activate);
+	main_load_menu_form_mod_list(menu, _("Change parallel 1"),			       
+			       G_CALLBACK(on_changeint1mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 2"),
-			       (GCallback)
-			       on_changeint2mod_activate);
+			       G_CALLBACK(on_changeint2mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 3"),
-			       (GCallback)
-			       on_changeint3mod_activate);
+			      G_CALLBACK(on_changeint3mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 4"),
-			       (GCallback)
-			       on_changeint4mod_activate);
+			       G_CALLBACK(on_changeint4mod_activate));
 	main_load_menu_form_mod_list(menu, _("Change parallel 5"),
-			       (GCallback)
-			       on_changeint5mod_activate);
+			       G_CALLBACK(on_changeint5mod_activate));
 
 /*	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
@@ -350,12 +346,16 @@ _popupmenu_requested_cb(GeckoHtml *html,
 	gui_popup_menu_parallel();
 }
 #else
+static gboolean
 _popupmenu_requested_cb(GtkHTML *html,
 			GdkEventButton * event,
 			gpointer date)
 {
-	if (event->button == 3)
+	if (event->button == 3) {
 		gui_popup_menu_parallel();
+		return 1;
+	}
+	return 0;
 }
 #endif
 
