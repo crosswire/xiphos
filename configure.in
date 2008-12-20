@@ -41,12 +41,14 @@ AC_SUBST(SWORD_CFLAGS)
 dnl ***
 dnl ImageMagick for image dimensions/resize
 dnl ***
-PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , exit)
-AC_SUBST(ImageMagick_LIBS)
-AC_SUBST(ImageMagick_CFLAGS)
-
-dnl AC_CHECK_SWORD(1.5.8, [NO])
-
+case `uname -s` in
+  MINGW*) ;;
+  *)
+    PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , exit)
+    AC_SUBST(ImageMagick_LIBS)
+    AC_SUBST(ImageMagick_CFLAGS)
+    ;;
+esac
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
