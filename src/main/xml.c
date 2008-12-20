@@ -496,7 +496,8 @@ int xml_create_settings_file(char *path)
 			      (const xmlChar *) "label",
 			      (const xmlChar *) _("Sample Module List"));
 	xml_attr =
-	    xmlNewProp(cur_node, (const xmlChar *) "list", (const xmlChar *) _("Select the modules you want"));
+	    xmlNewProp(cur_node, (const xmlChar *) "list",
+		       (const xmlChar *)(gchar *)(get_list(TEXT_LIST)->data));
 
 
 	section_node = xmlNewChild(root_node, NULL,

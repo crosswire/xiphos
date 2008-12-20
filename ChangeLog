@@ -1,3 +1,7 @@
+2008-12-20  karl <charcoal@users.sf.net>
+
+	* adv.search: auto-create 1st sample modlist from available bibles.
+
 2008-12-18  karl <charcoal@users.sf.net>
 
 	* mod.mgr hackery: untangle /usr/share/sword & ~/.sword.
