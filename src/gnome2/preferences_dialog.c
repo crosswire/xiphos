@@ -1737,7 +1737,7 @@ create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, _("Color"), 1, 1, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Sizes"), 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
@@ -1751,7 +1751,7 @@ create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 3, -1);*/
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Options"), 1, 4, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
@@ -1764,7 +1764,7 @@ create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, _("Parallel"), 1, 6, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 7, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Special"), 1, 7, -1);
 
 	return GTK_TREE_MODEL(model);
 }

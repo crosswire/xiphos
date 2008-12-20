@@ -5,6 +5,7 @@
 	  list exists.
 	* make sure settings.book_mod is assigned when picking a genbook.
 	* fix det.parallel "(null)" (bad typo from eons ago).
+	* cosmetic updates to prefs dialog (per domcox some time ago).
 
 2008-12-18  karl <charcoal@users.sf.net>
 
