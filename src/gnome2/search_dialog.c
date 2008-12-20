@@ -204,10 +204,14 @@ void _on_destroy(GtkWidget * dialog, gpointer user_data)
 			gtk_main_iteration();
 	} else {
 		main_close_search_dialog();
-		if (module_selected)
+		if (module_selected) {
 			g_free(module_selected);
-		if (verse_selected)
+			module_selected = NULL;
+		}
+		if (verse_selected) {
 			g_free(verse_selected);
+			verse_selected = NULL;
+		}
 	}
 }
 
