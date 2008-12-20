@@ -36,9 +36,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
-#ifndef WIN32
 #include <Magick++.h>
-#endif /* !WIN32 */
 
 #ifndef WIN32
 #include <sys/socket.h>
@@ -93,9 +91,7 @@ extern ModuleCache::CacheMap ModuleMap;
 
 using namespace sword;
 using namespace std;
-#ifndef WIN32
 using namespace Magick;
-#endif /* !WIN32 */
 
 int strongs_on;
 //T<font size=\"small\" >EST</font>  /* small caps */
@@ -105,7 +101,7 @@ int mod_use_counter[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 		// indexed by module type e.g. COMMENTARY_TYPE.
 		// used to avoid calling _get_size before these windows exist.
 
-#ifndef WIN32
+#if 1
 // The easy ImageMagick API solution in Linux/UNIX environments.
 
 int
@@ -123,7 +119,6 @@ ImageDimensions(const char *path, int *x, int *y)
 }
 #else
 // The ugly "shell command for `identify'" solution.
-// Needed because building ImageMagick for WIN32 is disastrous.
 
 // shell command to obtain size spec: prints exactly "123x456".
 // bad accommodation to Solaris (old sed): we cannot use \(this\|that\|other\).

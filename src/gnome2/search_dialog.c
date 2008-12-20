@@ -895,6 +895,11 @@ void delete_list(GtkButton * button, gpointer user_data)
 	GtkTreeIter selected;
 	gchar *str;
 
+	if (search1.list_rows < 2) {
+		gui_generic_warning(_("The last module list may not be deleted"));
+		return;
+	}
+
 	model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search1.module_lists));
