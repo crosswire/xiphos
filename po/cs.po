@@ -27,6 +27,15 @@
 # verse range               -> rozsah veršů
 # Verse Ranges              -> rozsahy veršů
 #
+# Checkbox                  -> Zaškrtávací pole
+# Combo (Combobox)          -> Roletové menu
+# Entry                     -> Položka
+# Index                     -> Rejstřík
+# Label                     -> Popisek
+# Radiobutton               -> výběrové pole
+# Repository                -> zdroj
+# Treeview                  -> stromový pohled
+#
 # Martin Zibricky <matysek03@users.sourceforge.net>, 2008
 #
 #
