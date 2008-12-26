@@ -1196,8 +1196,17 @@ static void int_display(GtkHTML *html, gchar * key)
 
 void main_update_parallel_page_detached(void)
 {
-	gchar *utf8str, buf[500];
-	gint utf8len;
+	gchar buf[500], *mod_name[5];
+	gint utf8len, j;
+	gchar space[2];  //there is surely a better way?
+	space[0] = ' ';
+	space[1] = '\0';
+	mod_name[0] = (parallel1 ? settings.parallel1Module : space);
+	mod_name[1] = (parallel2 ? settings.parallel2Module : space);
+	mod_name[2] = (parallel3 ? settings.parallel3Module : space);
+	mod_name[3] = (parallel4 ? settings.parallel4Module : space);
+	mod_name[4] = (parallel5 ? settings.parallel5Module : space);
+
 #ifdef USE_GTKMOZEMBED
 	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_parallel_dialog))) return;
 	GeckoHtml *html = GECKO_HTML(widgets.html_parallel_dialog);
@@ -1209,13 +1218,12 @@ void main_update_parallel_page_detached(void)
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
 	htmlstream =
-	    gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
+		gtk_html_begin_content(html, (gchar *)"text/html; charset=utf-8");
 #endif
 	sprintf(buf,HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-//	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
@@ -1224,94 +1232,24 @@ void main_update_parallel_page_detached(void)
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
 #endif
 	}
-
-	if (settings.parallel1Module) {
+	
+	for (j = 0; j < 5; ++j){
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
+			settings.bible_verse_num_color, 
 			settings.verse_num_font_size + settings.base_font_size,
-			settings.parallel1Module);
-
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
+			mod_name[j]);
+		utf8len = strlen(buf);
 		if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
+#ifdef USE_GTKMOZEMBED
 			gecko_html_write(html, buf, utf8len);
 #else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-		}
-	}
-
-	if (settings.parallel2Module) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.parallel2Module);
-
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-		if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-			gecko_html_write(html, buf, utf8len);
-#else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-		}
-	}
-
-	if (settings.parallel3Module) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.parallel3Module);
-
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-		if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-			gecko_html_write(html, buf, utf8len);
-#else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-		}
-	}
-
-	if (settings.parallel4Module) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.parallel4Module);
-
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-		if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-			gecko_html_write(html, buf, utf8len);
-#else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
-#endif
-		}
-	}
-
-	if (settings.parallel5Module) {
-		sprintf(buf,
-			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><font color=\"%s\" size=\"%+d\"><b>%s</b></td>",
-			settings.bible_verse_num_color,
-			settings.verse_num_font_size + settings.base_font_size,
-			settings.parallel5Module);
-
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
-		if (utf8len) {
-#ifdef USE_GTKMOZEMBED	
-			gecko_html_write(html, buf, utf8len);
-#else
-			gtk_html_write(GTK_HTML(html), htmlstream, buf,utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream, buf, utf8len);
 #endif
 		}
 	}
 
 	sprintf(buf, "%s", "</tr>");
-	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
 	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 #ifdef USE_GTKMOZEMBED	
