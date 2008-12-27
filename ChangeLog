@@ -1,6 +1,7 @@
 2008-12-27  karl <charcoal@users.sf.net>
 
 	* tweaks to support externally-launched http:// links.
+	* modifications to improve clarity of configure failures.
 
 2008-12-13  terry <tbiggs@users.sourceforge.net>
 
