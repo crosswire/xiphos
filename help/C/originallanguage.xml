@@ -76,7 +76,7 @@
 		Click on the <interface>Attribute Search</interface> tab, and make check the box that says <guibutton>
 		Strongs Numbers</guibutton>. Now click in the entry field at the top and search for the number you are looking for
 		preceded by "lemma:" and "G" for Greek or "H" for Hebrew. So to look for the Hebrew word tsad-deek (6662), enter 
-		"lemma:G6662". Once the search is done, the results pane will be shown. Notice that when you click on a result, 
+		"lemma:H6662". Once the search is done, the results pane will be shown. Notice that when you click on a result, 
 		it will show the result in the preview pane, and the strong's numbers will show as well, following immediately 
 		after the words they match. Also note that hovering over these numbers will show the definition in the main preview pane.
 		</para>

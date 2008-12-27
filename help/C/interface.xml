@@ -660,6 +660,18 @@
 		</para>
 		<itemizedlist>
 			<listitem>
+				<guibutton>F1</guibutton> starts the Help browser.
+			</listitem>
+			<listitem>
+				<guibutton>F2</guibutton> opens the Preferences dialog.
+			</listitem>
+			<listitem>
+				<guibutton>F3</guibutton> opens Advanced Search.
+			</listitem>
+			<listitem>
+				<guibutton>F4</guibutton> opens the Module Manager.
+			</listitem>
+			<listitem>
 				<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
 				in new verse selection text.  Be aware that, as is the case with most Sword applications,
 				<application>GnomeSword</application> understands many abbreviations: "G" is adequate to specify Genesis,
