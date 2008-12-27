@@ -659,17 +659,17 @@
 		Several keyboard shortcuts exist in <application>GnomeSword</application>:
 		</para>
 		<itemizedlist>
-			<listitem>
-				<guibutton>F1</guibutton> starts the Help browser.
+		       <listitem>
+				<guibutton>F1</guibutton>: opens this manual.
 			</listitem>
 			<listitem>
-				<guibutton>F2</guibutton> opens the Preferences dialog.
+				<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
 			</listitem>
 			<listitem>
-				<guibutton>F3</guibutton> opens Advanced Search.
+				<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>.
 			</listitem>
 			<listitem>
-				<guibutton>F4</guibutton> opens the Module Manager.
+				<guibutton>F4</guibutton>: opens the <guibutton>Module Manager</guibutton>.
 			</listitem>
 			<listitem>
 				<guibutton>Ctrl-L</guibutton> focuses and selects the main verse navbar text.  You can then immediately type
@@ -716,18 +716,6 @@
 						<guibutton>P/N</guibutton>: Book previous/next.
 					</listitem>
 				</itemizedlist>
-			</listitem>
-			<listitem>
-				<guibutton>F1</guibutton>: opens this manual.
-			</listitem>
-			<listitem>
-				<guibutton>F2</guibutton>: opens the <guibutton>Preferences</guibutton> dialog.
-			</listitem>
-			<listitem>
-				<guibutton>F3</guibutton>: opens <guibutton>Advanced Search</guibutton>.
-			</listitem>
-			<listitem>
-				<guibutton>F4</guibutton>: opens <guibutton>Module Manager</guibutton>.
 			</listitem>
 		</itemizedlist>
 	</sect2>

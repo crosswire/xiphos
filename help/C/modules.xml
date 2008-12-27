@@ -125,8 +125,8 @@
 			<sect4 id="destination-vista">
 				<title>Windows Vista</title>
 				<para>
-				Currently, you will only be able to install to your profile. This folder is "C:\Users\matthew\AppData\Roaming\.sword".
-				Support for shared folders is being worked on.
+				Vista works much the same as XP, except for the locations. The private location is 
+				"C:\Users\YOUR NAME\AppData\Roaming\.sword". The shared location is "C:\ProgramData\.sword".
 				</para>
 			</sect4>
 			
