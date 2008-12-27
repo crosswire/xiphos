@@ -120,7 +120,7 @@ static void html_link_message(GtkMozEmbed * embed)
 	
 	GS_message(("html_link_message: url = %s",url));
 	
-	if(shift_key_presed)
+	if (shift_key_presed)
 		return;
 	
 	if (!strlen(url)) { //* moved out of url - clear appbar - info viewer*
@@ -136,7 +136,7 @@ static void html_link_message(GtkMozEmbed * embed)
 		for (url_chase = url; *url_chase; ++url_chase) {
 			switch (*url_chase) {
 			case '/':
-				if(i > 2)
+				if (i > 2)
 				        g_string_append(url_clean, "%2F");
 				else
 					g_string_append_c(url_clean, *url_chase);
@@ -148,19 +148,20 @@ static void html_link_message(GtkMozEmbed * embed)
 			}
 		}
 		GS_message(("\nurl:        %s\nurl_clean: %s",url,url_clean->str));
-		if(priv->is_dialog) {
-			if(main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {	
-				g_string_free(url_clean, TRUE);	
+		if (priv->is_dialog) {
+			if (main_dialogs_url_handler(priv->dialog, url_clean->str, FALSE)) {
+				g_string_free(url_clean, TRUE);
 				return;
 			}
-			
 		} else {
-			if(main_url_handler_gecko(url_clean->str)) {	
-				g_string_free(url_clean, TRUE);	
+			if (main_url_handler_gecko((strncmp(url, "http", 4)
+						    ? url_clean->str
+						    : url))) {
+				g_string_free(url_clean, TRUE);
 				return;
 			}
 		}
-		g_string_free(url_clean, TRUE);	
+		g_string_free(url_clean, TRUE);
 		if (*url == 'I') {
 			return;
 		} else if (*url == 'U') {

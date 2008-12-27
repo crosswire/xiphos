@@ -1,7 +1,10 @@
+2008-12-27  karl <charcoal@users.sf.net>
+
+	* tweaks to support externally-launched http:// links.
+
 2008-12-13  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2430285 gtkhtml parallel view issues
-	
 	
 2008-12-20  karl <charcoal@users.sf.net>
 
@@ -167,8 +170,8 @@
 2008-11-12  karl <charcoal@users.sf.net>
 
 	* fix #2264276 excess characters in double-click dict lookup
-	  (Michael Talbert's update).
-	* add Michael's *.glade updates for accessibility properties
+	  (Matthew Talbert's update).
+	* add Matthew's *.glade updates for accessibility properties
 	  to facilitate UI testing framework.
 
 2008-11-05  karl <charcoal@users.sf.net>

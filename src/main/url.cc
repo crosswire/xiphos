@@ -1122,7 +1122,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		g_string_free(tmpstr, TRUE);
 		delete m_url;
 		retval = 1;
-	}
+	} else if (clicked)
+		gnome_url_show(url, NULL);
 
 	return retval;
 }
