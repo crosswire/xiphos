@@ -147,17 +147,11 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
-		if(GPOINTER_TO_INT(data) == TEXT_TYPE)
+		if (GPOINTER_TO_INT(data) == TEXT_TYPE)
 			main_clear_viewer();
-		/*
-		if (hint.in_popup) {
-			gtk_widget_destroy(hint.hint_window);
-			hint.in_popup = FALSE;
-		}
-		*/
 	} else {
 		in_url = TRUE;	/* we need this for html_button_released */
-		if(main_url_handler(url, FALSE))
+		if (main_url_handler(url, FALSE))
 			return;
 		
 		if (*url == 'I') {
@@ -170,8 +164,6 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
-
-	GS_warning(("link not handled"));
 	}
 }
 
@@ -203,8 +195,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		main_swap_parallel_with_main((gchar *) url);
 		return;
 	}
-	
-	GS_warning(("link not handled"));
 }
 
 
