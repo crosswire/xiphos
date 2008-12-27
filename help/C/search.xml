@@ -236,8 +236,7 @@
 
 	   <para>
 		The default search is multi-word, a somewhat slow and blunt search through module text.  Also available is an optimized
-		search based on the Lucene indexing and search library.  A web search will provide several references to the syntax needed
-		to put to use the power of an optimized Lucene search.  In order to use the optimized search, the index must be constructed
+		search based on the Lucene indexing and search library. In order to use the optimized search, the index must be constructed
 		beforehand: Please see the preceding section on the Module Manager regarding the Maintenance functions, including indexing. A
 		web search will provide several references to the syntax needed to put to use the power of optimized Lucene search. A few
 		examples follow:
@@ -268,8 +267,7 @@
 
 	   <para>
 		By default, two standard search ranges are defined, for Old and New Testament; you may wish to define others for
-		e.g. "Gospels" or "Paul's Epistles".  One (fake) custom module list is present, as a placeholder to make obvious what is
-		required: Since it cannot be known what modules a user will install, no real content for such a module list can be assumed.
+		e.g. "Gospels" or "Paul's Epistles". One custom module list containing only the first Bible found will be present.
 		If desired, new searches can be performed across only the current results of the previous search.  Any modules may be
 		searched, including general books and even dictionaries, in any combination.
 	   </para>
