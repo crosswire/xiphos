@@ -2505,7 +2505,7 @@ msgstr "Les modules peuvent être installés dans un dossier partagé de façon 
 "Program Files\\Crosswire\\The Sword Prject\\Swod », sinon ce cera « C:\\"
 "Documents and Settings\\All Users\\Application Data\\.sword ». Les modules "
 "peuvent être également installés dans un dossier personnel, ce dossier est "
-"C:\\Documents and Settings\YOUR-NAME\\Application Data\\.sword »"
+#"C:\\Documents and Settings\YOUR-NAME\\Application Data\\.sword »"
 
 #: ../C/gnomesword.xml:126(title)
 msgid "Windows Vista"
