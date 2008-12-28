@@ -634,8 +634,8 @@ void load_settings_structure(void)
 	if (buf = xml_get_value("misc", "imageresize")) {
 		settings.imageresize = atoi(buf);
 	} else {
-		xml_add_new_item_to_section("misc","imageresize","0");
-		settings.imageresize = 0;
+		xml_add_new_item_to_section("misc","imageresize","1");
+		settings.imageresize = 1;
 	}
 
 /*	settings.use_studypad =
