@@ -881,13 +881,11 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview, const gchar * mod_
 	psettings = gtk_print_operation_get_print_settings (operation);
 	
 	setup = gtk_page_setup_new ();
-	gtk_page_setup_set_top_margin(setup,30,GTK_UNIT_PIXEL);
-	gtk_page_setup_set_left_margin(setup,50,GTK_UNIT_PIXEL);
+	gtk_page_setup_set_top_margin(setup, 30, GTK_UNIT_PIXEL);
+	gtk_page_setup_set_left_margin(setup, 50, GTK_UNIT_PIXEL);
 	
 #ifdef WIN32
-	letter  = gtk_paper_size_new (GTK_PAPER_NAME_LETTER);
-	gtk_page_setup_set_paper_size (setup,letter);
-	gtk_print_operation_set_use_full_page (operation, TRUE);	
+	gtk_print_operation_set_unit(operation, GTK_UNIT_POINTS);
 #endif
 	
 		
