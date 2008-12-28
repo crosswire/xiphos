@@ -113,7 +113,8 @@ ImageDimensions(const char *path, int *x, int *y)
 		*y = image.baseRows();
 		return 0;
 	}
-	catch (...) {
+	catch (Exception &error_) {
+		GS_warning(("Caught exception: %s", error_.what()));
 		return -1;
 	}
 }
@@ -157,7 +158,7 @@ out:
 	pclose(result);
 	return retval;
 }
-#endif /* WIN32 */
+#endif 
 
 #ifndef HAVE_STRCASESTR
 /*
