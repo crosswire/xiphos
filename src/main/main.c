@@ -63,15 +63,16 @@ int main(int argc, char *argv[])
 	/*
 	 * WIN32 perversity: We very much want to be *in* the
 	 * the directory where GnomeSword exists, to keep *.dll
-	 * things happy.  In WIN32land, argv[0] is always
-	 * fully-qualified, so we slice off the binary name and
-	 * chdir() to it immediately.
+	 * things happy.  Glib provides this nice function for us
+	 * to determine where we are (we can't depend on argv).
 	 */
-	*strrchr(argv[0], '\\') = '\0';
-	chdir(argv[0]);
-
+	gchar *install_dir = g_win32_get_package_installation_directory_of_module(NULL);
+	install_dir = g_strconcat(install_dir, "\0", NULL);
+	install_dir = g_build_filename (install_dir, "bin\0");
+	g_chdir (install_dir);
+	
 	/* add this directory to $PATH for other stuff, e.g. zip */
-	putenv(g_strdup_printf("PATH=%s;%s", argv[0],
+	putenv(g_strdup_printf("PATH=%s;%s", install_dir,
 			       getenv("PATH")));
 
 	/* make allowance for pre-existing modules area. */
