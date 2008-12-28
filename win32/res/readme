@@ -1,0 +1,6 @@
+1. Type this command:
+windres res.rc res.o
+2. Copy res.o to src/gnome2
+3. Modify Makefile to link against this object, like this:
+treekey-editor.$(OBJEXT) utilities.$(OBJEXT) res.$(OBJEXT)
+4. Compile
