@@ -110,6 +110,18 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 		g_error_free (error);        
 	}
 #endif /* __CYGWIN__ */
+#ifdef WIN32
+	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
+	help_file = g_strconcat(help_file, "\0", NULL);
+	help_file = g_build_filename (help_file, "share\0", "help\0", "C\0", "gnomesword.chm\0", NULL);
+	GError *error2 = NULL;
+	if (gnome_url_show ( g_strconcat("file:///", help_file, NULL),
+			   &error2) == FALSE) {
+		GS_warning((error2->message));
+		g_error_free (error2);
+	}
+	g_free (help_file);
+#endif
 }
 
 /******************************************************************************
@@ -134,7 +146,7 @@ on_mailing_list_activate(GtkMenuItem * menuitem,
 			gpointer user_data)
 {
 	GError *error = NULL;
-	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
+	if (gnome_url_show(PACKAGE_BUGREPORT,
 				&error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free (error);
