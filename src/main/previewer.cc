@@ -415,6 +415,11 @@ void main_entry_display(gpointer data, gchar * mod_name,
 	gecko_html_open_stream(html, "text/html");
 #else
 	GtkHTML *html = GTK_HTML(html_widget);
+	PangoContext* pc = gtk_widget_create_pango_context(html_widget);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(
+	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
+	gtk_widget_modify_font(html_widget, desc);
 
 	/* setup gtkhtml widget */
 	was_editable = gtk_html_get_editable(html);
@@ -429,6 +434,15 @@ void main_entry_display(gpointer data, gchar * mod_name,
 			settings.link_color);
 
 	str = g_string_new(tmp_str->str);
+
+	g_string_printf(tmp_str,
+			"<font face=\"%s\" size=\"%+d\">",
+			((mf->old_font) ? mf->old_font : "none"),
+			((mf->old_font_size)
+			? atoi(mf->old_font_size) + settings.base_font_size
+			: settings.base_font_size));
+	str = g_string_append(str, tmp_str->str);
+
 	/* show key in html widget  */
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
@@ -451,14 +465,6 @@ void main_entry_display(gpointer data, gchar * mod_name,
 		}
 		str = g_string_append(str, tmp_str->str);
 	}
-
-	g_string_printf(tmp_str,
-			"<font face=\"%s\" size=\"%+d\">",
-			((mf->old_font) ? mf->old_font : "none"),
-			((mf->old_font_size)
-			? atoi(mf->old_font_size) + settings.base_font_size
-			: settings.base_font_size));
-	str = g_string_append(str, tmp_str->str);
 
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
