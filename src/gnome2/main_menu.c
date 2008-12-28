@@ -103,25 +103,25 @@ on_help_contents_activate(GtkMenuItem * menuitem,
 			    "GnomeSword manual module instead.");
 #else
 	GError *error = NULL;
+# ifdef WIN32
+	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
+	help_file = g_strconcat(help_file, "\0", NULL);
+	help_file = g_build_filename(help_file, "share", "help", "C", "gnomesword.chm", NULL);
+	if (gnome_url_show(g_strconcat("file:///", help_file, NULL),
+			   &error) == FALSE) {
+		GS_warning((error->message));
+		g_error_free(error);
+	}
+	g_free(help_file);
+# else
 	
 	if (gnome_help_display((const gchar*)"gnomesword.xml", 
 			       NULL, &error) == FALSE) {
 		GS_warning((error->message));
-		g_error_free (error);        
+		g_error_free(error);        
 	}
+# endif /* WIN32 */
 #endif /* __CYGWIN__ */
-#ifdef WIN32
-	gchar *help_file = g_win32_get_package_installation_directory_of_module(NULL);
-	help_file = g_strconcat(help_file, "\0", NULL);
-	help_file = g_build_filename (help_file, "share\0", "help\0", "C\0", "gnomesword.chm\0", NULL);
-	GError *error2 = NULL;
-	if (gnome_url_show ( g_strconcat("file:///", help_file, NULL),
-			   &error2) == FALSE) {
-		GS_warning((error2->message));
-		g_error_free (error2);
-	}
-	g_free (help_file);
-#endif
 }
 
 /******************************************************************************
