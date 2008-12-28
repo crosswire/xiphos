@@ -152,6 +152,11 @@ void main_information_viewer(const gchar * mod_name, const gchar * text, const g
 	gecko_html_open_stream(html, "text/html");
 #else
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
+	PangoContext* pc = gtk_widget_create_pango_context(sidebar.html_viewer_widget);
+	PangoFontDescription *desc = pango_context_get_font_description(pc);
+	pango_font_description_set_family(
+	    desc, ((mf->old_font) ? mf->old_font : "Serif"));
+	gtk_widget_modify_font(sidebar.html_viewer_widget, desc);
 #endif
 
 	g_string_printf(tmp_str,
