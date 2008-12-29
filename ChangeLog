@@ -15,7 +15,8 @@
 2008-12-28  terry <tbiggs@users.sourceforge.net>
 
 	* fixing print issues.
-	
+	* fixed bug #2471811 Bookmarks do not work for user-created modules
+
 2008-12-27  karl <charcoal@users.sf.net>
 
 	* tweaks to support externally-launched http:// links.
