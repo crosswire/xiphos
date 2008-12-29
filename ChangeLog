@@ -3,6 +3,7 @@
 	* re-arrange help functions so that just one compiles in.
 	* make image auto-resize default to on.
 	* fix #2471807 gtkhtml previewer font not respected.
+	* fix #2471830 wrong bible navigation, from wrong tab.
 
 2008-12-28  matthew <ransom1982@users.sourceforge.net>
 
