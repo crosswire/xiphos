@@ -4,6 +4,7 @@
 	* make image auto-resize default to on.
 	* fix #2471807 gtkhtml previewer font not respected.
 	* fix #2471830 wrong bible navigation, from wrong tab.
+	* fix configure.in to do preliminary check for gtkhtml3-devel.
 
 2008-12-28  matthew <ransom1982@users.sourceforge.net>
 

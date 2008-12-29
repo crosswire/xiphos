@@ -12,11 +12,22 @@ DIRS="backend gecko editor main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0,,echo some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
+PKG_CHECK_MODULES(GNOME, glib-2.0 gtk+-2.0 libgnomeprintui-2.2 libgnomeui-2.0 libxml-2.0 libglade-2.0,,echo error: some devel libs are missing: check for glib2 gtk2 libgnomeprintui22 libgnomeui libxml2 libglade2 && exit 1)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
 
+dnl ***
+dnl preliminary check for either flavor of libgtkhtml development support
+dnl ***
+PKG_CHECK_MODULES(GTKHTML_314_presence, libgtkhtml-3.14, have_314=yes, have_314=no)
+PKG_CHECK_MODULES(GTKHTML_38_presence,  libgtkhtml-3.8,  have_38=yes,  have_38=no)
+if test "x$have_314" = xno -a "x$have_38" = xno; then
+	echo error: no gtkhtml3 development library is available.
+	exit 1
+else
+	echo gtkhtml3 development library presence...confirmed
+fi
 
 dnl ***
 dnl gtk+-unix-print
@@ -34,14 +45,14 @@ AC_SUBST(UPRINT_CFLAGS)
 dnl ***
 dnl Sword libs
 dnl ***
-PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo either no sword or sword not recent enough && exit 1)
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.11, , echo error: either no sword or sword not recent enough && exit 1)
 AC_SUBST(SWORD_LIBS)
 AC_SUBST(SWORD_CFLAGS)
 
 dnl ***
 dnl ImageMagick for image dimensions/resize
 dnl ***
-PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , echo either no ImageMagick or ImageMagick not recent enough && exit 1)
+PKG_CHECK_MODULES(ImageMagick, ImageMagick++ >= 6.0.0, , echo error: either no ImageMagick or ImageMagick not recent enough && exit 1)
 AC_SUBST(ImageMagick_LIBS)
 AC_SUBST(ImageMagick_CFLAGS)
 
