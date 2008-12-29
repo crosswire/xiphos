@@ -1,14 +1,14 @@
 # French translation of GnomeSword
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # Dominique Corbex <domcox@users.sourceforge.net>, 2008
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-22 22:48+0100\n"
-"PO-Revision-Date: 2008-12-23 22:39+0100\n"
+"PO-Revision-Date: 2008-12-29 22:33+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -2460,7 +2460,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: ../C/gnomesword.xml:103(para)
-#, fuzzy
 msgid ""
 "Unless you run as root (via su or sudo) you will only be able to install in "
 "your personal area, under ~/.sword. If you run as root, or change "
@@ -2474,15 +2473,19 @@ msgid ""
 "various Linux distributions. Therefore, at this time there are no ongoing "
 "plans to try to solve this problem, and users are advised to enable write "
 "access to the system area outside GnomeSword."
-msgstr ""
-"Un certain nombre de demandes ont été émises pour que soit incorporé à "
+msgstr "À moins d'avoir les privilèges du superutilisateur (via su ou sudo), l'installation "
+"n'est possible que dans l'espace personnel, sous le répertoire ~/.sword."
+"En étant superutilisateur, ou en modifiant les permissions de l'espace "
+"système (généralement : /usr/share/sword), il est possible d'installer des "
+"modules accessibles par tous les utilisateurs."
+"Il a été fait un certain nombre de demandes pour que soit incorporé à "
 "&appname; un moyen permettant à un utilisateur ordinaire (non-root) "
-"d'obtenir temporairement les droits d'accès à l'emplacement système pendant "
+"d'obtenir temporairement les droits d'accès à l'espace système pendant "
 "l'installation des modules, puis d'annuler ces droits une fois "
 "l'installation terminée. Étant donné les différentes gestions des droits du "
 "super-utilisateur employées dans l'éventail des distributions Linux, il "
-"s'est trouvé plutôt difficile d'établir un moyen de satisfaire cette "
-"demande. En ce moment, il n'y a aucun projet en cours essayant de résoudre "
+"est plutôt difficile d'établir un moyen de satisfaire cette demande. "
+"En ce moment, il n'y a aucun projet en cours essayant de résoudre "
 "ce problème, il est donc conseillé aux utilisateurs de gérer les droits "
 "d'accès en écriture à l'emplacement système en dehors de &appname;."
 
@@ -2500,12 +2503,12 @@ msgid ""
 "that can only be seen by you. This location is \"C:\\Documents and Settings"
 "\\YOUR NAME\\Application Data\\.sword\"."
 msgstr "Les modules peuvent être installés dans un dossier partagé de façon à "
-"permettre à tous les utilisateurs d'accéder aux modules. Si « The·Sword "
-"Project for Windows » a été utilisé précédemment, ce répertoire sera « C:\\"
-"Program Files\\Crosswire\\The Sword Prject\\Swod », sinon ce cera « C:\\"
-"Documents and Settings\\All Users\\Application Data\\.sword ». Les modules "
-"peuvent être également installés dans un dossier personnel, ce dossier est "
-"C:\\Documents and Settings\\YOUR-NAME\\Application Data\\.sword »"
+"permettre à tous les utilisateurs d'accéder aux modules. Si le logiciel "
+"« The·Sword Project for Windows » a été utilisé précédemment, ce "
+"répertoire est « C:\\\"Program Files\\Crosswire\\The Sword Project\\Sword », "
+"sinon c'est « C:\\\"Documents and Settings\\All Users\\Application Data\\.sword ». "
+"Les modules peuvent être également installés dans un dossier personnel, "
+"ce dossier est C:\\Documents and Settings\\YOUR-NAME\\Application Data\\.sword »"
 
 #: ../C/gnomesword.xml:126(title)
 msgid "Windows Vista"
@@ -2516,7 +2519,9 @@ msgid ""
 "Currently, you will only be able to install to your profile. This folder is "
 "\"C:\\Users\\matthew\\AppData\\Roaming\\.sword\". Support for shared folders "
 "is being worked on."
-msgstr ""
+msgstr "Actuellement, l'installation n'est possible que dans votre session. Le dossier "
+"est « C:\\users\\YOUR_NAME\\AppData\\Roaming\\.sword ». La prise en compte de "
+"l'espace commun est en cours de développement."
 
 #: ../C/gnomesword.xml:138(title) ../C/gnomesword.xml:140(title)
 msgid "Installing, Updating, and Maintaining Modules"
@@ -2583,7 +2588,11 @@ msgid ""
 "module is then unlocked in the main window: Open the module, which will "
 "probably appear blank, then using the right-click context menu, choose "
 "\"Unlock This Module.\""
-msgstr ""
+msgstr "Suite à l'acquisition d'un module crypté et de la clé de déverrouillage associée, "
+"le module est ensuite déverrrouillé dans la fenêtre principale. Ouvrir le module, "
+"qui ne sera sans doute pas affiché, puis dans le menu contextuel affiché à "
+"l'aide du clic droit de la souris, sélectionner <guimenu>Déverrouiller ce "
+"module</guimenu>"
 
 #: ../C/gnomesword.xml:183(title) ../C/gnomesword.xml:185(title)
 #: ../C/gnomesword.xml:198(phrase)
@@ -2748,7 +2757,7 @@ msgstr "Sélecteur de la plage de versets"
 #: ../C/gnomesword.xml:61(para) ../C/gnomesword.xml:173(title)
 #: ../C/search.xml:61(para) ../C/search.xml:173(title)
 msgid "Search Results View"
-msgstr ""
+msgstr "Affichage des résultats"
 
 #: ../C/gnomesword.xml:67(title) ../C/search.xml:67(title)
 msgid "Search Key Entry Box"
@@ -2770,14 +2779,15 @@ msgstr ""
 "recherche."
 
 #: ../C/gnomesword.xml:75(para) ../C/search.xml:75(para)
-#, fuzzy
 msgid ""
 "This search uses the optimized search method (see next section) if the "
 "module has previously been indexed, and will use AND semantics by default "
 "(verses must contain all words you entered)."
 msgstr ""
-"La requête employe une méthode de recherche optimisée plus rapide(Voir la "
-"section suivante) si le module concerné a été précédemment indexé."
+"Cette requête employe la méthode de recherche optimisée (Voir la "
+"section suivante) à la condition que le module concerné ait été précédemment "
+"indexé, et utilisera le ET logique par défaut (les versets doivent contenir tous les "
+"mots saisis)"
 
 #: ../C/gnomesword.xml:84(para) ../C/search.xml:84(para)
 msgid ""
@@ -2937,7 +2947,7 @@ msgstr ""
 msgid ""
 "This shows a list of the current search results for previewing, navigation, "
 "or saving."
-msgstr ""
+msgstr "La liste des résultats est affichée permettant d'obtenir un aperçu du verset retourné, la navigation vers le chapître concerné ou l'enregistrement sous forme de signets."
 
 #: ../C/gnomesword.xml:177(term) ../C/search.xml:177(term)
 msgid "Preview"
@@ -2947,7 +2957,8 @@ msgstr "Aperçu"
 msgid ""
 "To preview the search result, simply click on an individual result. The "
 "entry will show in the preview pane."
-msgstr ""
+msgstr "Pour visualiser le résultat, un simple clic sur un élément affiche le "
+"contenu dans le volet <interface>Aperçu</interface>"
 
 #: ../C/gnomesword.xml:184(term) ../C/search.xml:184(term)
 msgid "Navigation"
@@ -2958,11 +2969,13 @@ msgid ""
 "Navigation to the search result can be done in two ways. To open the result "
 "in a new tab, middle-click the mouse. To open the result in the current tab, "
 "double-click the result."
-msgstr ""
+msgstr "La navigation vers le chapître concerné pour retrouver le contexte s'effectue de "
+"deux manières. Un clic du bouton milieu de la souris ouvre le verset dans un "
+"nouvel onglet, un double-clic l'ouvre dans l'onget courant."
 
 #: ../C/gnomesword.xml:191(term) ../C/search.xml:191(term)
 msgid "Save Results"
-msgstr ""
+msgstr "Enregistrer les résultats"
 
 #: ../C/gnomesword.xml:192(para) ../C/search.xml:192(para)
 msgid ""
@@ -2971,7 +2984,12 @@ msgid ""
 "name for the folder that your results will be saved to. After you have saved "
 "the results, you may view them by going to your bookmarks and finding the "
 "folder you just named."
-msgstr ""
+msgstr "Les résultats de la requête peuvent être enregistrés sous forme de signets. "
+"Dans le menu contextuel obtenu à l'aide du bouton droit de la souris, sélectionner "
+"<guilabel>Convertir en signets</guilabel>, il sera alors demandé le nom du dossier "
+"sous lequel la liste sera enregistrée. Ensuite, une fois la liste sauvegardée, il "
+"devient possible de retrouver les résultats de la requête en affichant les signets "
+"puis en choisissant le dossier précédemment nommé."
 
 #: ../C/gnomesword.xml:203(title)
 msgid "Advanced Searches"
@@ -3010,7 +3028,6 @@ msgstr ""
 "références de Strong des dictionnaires grec et hébreu."
 
 #: ../C/gnomesword.xml:237(para)
-#, fuzzy
 msgid ""
 "The default search is multi-word, a somewhat slow and blunt search through "
 "module text. Also available is an optimized search based on the Lucene "
@@ -3023,26 +3040,13 @@ msgid ""
 "search. A few examples follow:"
 msgstr ""
 "La requête par défaut est de type multi-mots, une recherche quelque peu "
-"lente et rustique. Une requête optimisée basée sur le moteur de recherche "
-"textuelle Lucene est également disponible. La syntaxe acceptée par Lucene "
-"pour les requêtes se révèle particulièrement puissante, bien que "
-"relativement simple. Outre les traditionnels modificateurs «&nbsp;+&nbsp;» et "
-"«&nbsp;-&nbsp;», les jokers «&nbsp;*&nbsp;» et «&nbsp;?&nbsp;», ainsi que les "
-"opérateurs booléens «&nbsp;AND&nbsp;», «&nbsp;OR&nbsp;» et «&nbsp;NOT&nbsp;», "
-"nous avons accès à deux fonctionnalités particulièrement intéressantes. "
-"Ainsi, l'accent circonflexe, placé à la fin d'un mot, permet d'augmenter la "
-"priorité d'un mot, dans la requête «&nbsp;Christ OR Jésus^&nbsp;», Lucene "
-"choisira en priorité le terme «&nbsp;Jésus&nbsp;». Cet opérateur peut être "
-"suivi d'un chiffre positif définissant la valeur de la priorité. A cela "
-"s'ajoute l'opérateur tilde «&nbsp;~&nbsp;» qui trouve un emploi dans deux "
-"situations. Dans l'exemple «&nbsp;Jésus Christ~5&nbsp;», le moteur cherchera "
-"les termes Jésus et Christ situés à une distance de moins de 5 mots l'un de "
-"l'autre. Par contre, la recherche de «&nbsp;forme~&nbsp;» renverra tous les "
-"mots similaires à «&nbsp;forme&nbsp;», ce qui inclut par exemple «&nbsp;"
-"ferme&nbsp;» ou «&nbsp;formel&nbsp;». Enfin, nous pouvons effectuer des "
-"requêtes sur des champs particuliers des documents en préfixant les requêtes "
-"par le nom du champ suivi du caractère deux-points, comme dans «&nbsp;titre:"
-"Jean&nbsp;». "
+"lente et rustique. Une requête optimisée basée sur Lucene, un moteur de "
+"recherche libre qui permet d'indexer et de rechercher du texte est "
+"également disponible. Avant d'utiliser les requêtes optimisées, il est "
+"cependant nécessaire d'indexer les modules, comme indiqué dans la "
+"section « Gérer les modules » de ce manuel. Quelques exemples suivent "
+"démontrant la puissance des requêtes optimisées Lucene (Les références "
+"de la syntaxe Lucene sont disponible sur internet) :"
 
 #: ../C/gnomesword.xml:246(para)
 msgid ""
@@ -3052,7 +3056,13 @@ msgid ""
 "\". To search for an entire phrase, surround the entire phrase with quotes, "
 "like \"maketh me to lie down\" (note that quotes are unnecessary in all of "
 "the other examples)."
-msgstr ""
+msgstr "Requêtes simples : saisir simplement les mots recherchés. Pour obtenir "
+"seulement les versets contenant tous les mots, il suffit de faire précéder "
+"les mots du signe «­­&nbsp;<emphasis>+</emphasis>&nbsp;». Ainsi "
+"la requête «&nbsp;<emphasis>+L'Eternel +mon +berger</emphasis>"
+"&nbsp;» trouve le Psaume 23. Pour rechercher une phrase entière, il suffit de "
+"l'entourer de guillemets, comme dans \"&nbsp;<emphasis>Il me fait reposer "
+"dans de verts pâturages</emphasis>&nbsp;\"."
 
 #: ../C/gnomesword.xml:253(para)
 msgid ""
@@ -3060,13 +3070,24 @@ msgid ""
 "\"v?il\". The \"?\" represents a single character that could be anything. A "
 "more complex example returns both spellings for Isaiah used in the KJV. \"?"
 "saia?\" will return results for \"Isaiah\" and \"Esaias\"."
-msgstr ""
+msgstr "Caractère de substitution unique (&nbsp;?&nbsp;) : Le «­­&nbsp;?&nbsp;»"
+" représente un caractère quelconque. Par exemple, "
+"«­­&nbsp;<emphasis>cri?</emphasis>&nbsp;» permet de rechercher "
+"«­­&nbsp;<emphasis>cris</emphasis>&nbsp;», "
+"«­­&nbsp;<emphasis>crie</emphasis>&nbsp;»,·"
+"«­­&nbsp;<emphasis>crié</emphasis>&nbsp;» etc.. Ceci est pratique "
+"pour retrouver les noms qui peuvent avoir plusieurs écritures ainsi, "
+"«­­&nbsp;<emphasis>?saïe</emphasis>&nbsp;» retrouvera "
+"«­­&nbsp;Esaïe&nbsp;» ou «­­&nbsp;Isaïe&nbsp;»"
 
 #: ../C/gnomesword.xml:259(para)
 msgid ""
 "Multiple Letter Wildcard: to search for \"prophet\" or \"prophesy\" or "
 "\"prophecy\" or \"prophesied\", use this syntax \"prophe*\"."
-msgstr ""
+msgstr "Caractère de substitution multiple (&nbsp;*&nbsp;) : «&nbsp;*&nbsp;» remplace "
+"toute une série de caractères. Ainsi «&nbsp;<emphasis>proph*</emphasis>&nbsp;» "
+"retrouve «&nbsp;prophète&nbsp;», «&nbsp;prophétiser&nbsp;», "
+"«&nbsp;prophétie&nbsp;» etc.."
 
 #: ../C/gnomesword.xml:263(para)
 msgid ""
@@ -3075,7 +3096,13 @@ msgid ""
 "if we wish to search for any occurrence of Isaiah or Esaias that also "
 "mention either prophet, or prophecy, or prophesy, we can do a search like "
 "this: \"?saia? AND prophe*\"."
-msgstr ""
+msgstr "Syntaxe AND : Dans la recherche avancée, pour retourner les résultats pour "
+"tous les termes d'une requête, il est nécessaire de placer l'opérateur logique "
+"«&nbsp;<emphasis>AND</emphasis>&nbsp;» entre les termes. Ainsi pour "
+"retrouver les occurences de «&nbsp;Isaïe&nbsp;» ou «&nbsp;Esaïe&nbsp;» "
+"qui font mention également de «&nbsp;prophète&nbsp;» ou «&nbsp;prophétie"
+"&nbsp;», la requête appropriée est «&nbsp;<emphasis>?saïe AND proph*"
+"</emphasis>&nbsp;»."
 
 #: ../C/gnomesword.xml:269(para)
 msgid ""
@@ -3126,7 +3153,12 @@ msgid ""
 "Strong's references. Enter your search preceded by \"lemma:\", so to search "
 "for Strong's Greek #140, enter \"lemma:G140\". You must have selected "
 "<guibutton>Optimized (\"Lucene\")</guibutton> for this to work."
-msgstr ""
+msgstr "Si vos modules sont indexés, il existe un moyen beaucoup plus rapide pour "
+"rechercher des références de Strong. Une requête doit être précédée du mot "
+"«&nbsp;<emphasis>lemma</emphasis>&nbsp;», par exemple pour "
+"rechercher le nombre de Strong grec 140, saisir «&nbsp;<emphasis>"
+"lemma:G140</emphasis>&nbsp;». Le bouton radio <guibutton>Optimisée Lucene"
+"</guibutton> doit être sélectionné pour que cette requête fonctionne."
 
 #: ../C/gnomesword.xml:291(para)
 msgid ""
@@ -3147,7 +3179,16 @@ msgid ""
 "will cause the current tab to navigate to that result. This applies to "
 "search results in general books and commentaries as well, but note that the "
 "respective tab must be visible."
-msgstr ""
+msgstr "Les résultats sont affichés dans l'onglet <interface>Résultats</interface>. "
+"Pour inclure les nombres de Strong, les étiquettes morphologiques ou les "
+"notes de bas de page, sélectionner ces options dans l'onglet <interface>"
+"Attributs</interface>. Un simple clic sur un résultat affiche le contenu dans "
+"le volet <interface>Aperçu</interface> de la fenêtre <interface>Recherche "
+"Avancée</interface>. Un survol des nombres de Strong, étiquettes morphologiques "
+"ou notes de bas de page affiche le contenu dans le volet <interface>Aperçu"
+"</interface> de la fenêtre principale. Un double-clic fait naviguer l'onglet courant "
+"à la portion du texte contenant le résultat, ceci s'applique également aux "
+"commentaires et aux livres à la condition que ces volets soient visibles."
 
 #: ../C/gnomesword.xml:305(para)
 msgid ""
@@ -3833,7 +3874,6 @@ msgstr ""
 "commentaires personnels."
 
 #: ../C/gnomesword.xml:105(para)
-#, fuzzy
 msgid ""
 "Although there are 31,102 verses in standard versification, it is unlikely "
 "that more than a tiny fraction of all verses will have personal commentary "
@@ -3841,12 +3881,12 @@ msgid ""
 "is available from <menuchoice><guisubmenu>Right Click</"
 "guisubmenu><guimenuitem> Dump Pers.Comm.</guimenuitem></menuchoice>."
 msgstr ""
-"La Bible dans le schéma de versification le plus courant compte 31192 "
-"versets, il est cependant peu probable que tous les versets contiennent des "
-"commentaires personnels. La liste des versets commentés, indiquant les "
-"versets pour lesquels un commentaire personnel existe, s'obtient à l'aide du "
-"choix <guimenuitem>Liste des versets commentés</guimenuitem> dans le menu "
-"contextuel affiché par un clic droit de la souris."
+"Bien que dans le schéma de versification le plus courant la Bible compte 31192 "
+"versets, il est peu probable que plus d'une petite fraction de l'ensemble des versets "
+"contienne des commentaires personnels. Une liste signalant les versets avec "
+"commentaire personnel s'obtient à l'aide du choix <guimenuitem>"
+"Liste des versets commentés</guimenuitem> du menu contextuel obtenu "
+"par un clic droit de la souris."
 
 #: ../C/gnomesword.xml:115(para)
 msgid ""
@@ -4024,7 +4064,7 @@ msgstr "Obtenir de l'aide en ligne"
 
 #: ../C/gnomesword.xml:4(title) ../C/onlinehelp.xml:4(title)
 msgid "Users Mailing List"
-msgstr ""
+msgstr "Liste de diffusion des utilisateurs (NDT:En anglais)"
 
 #: ../C/gnomesword.xml:5(para) ../C/onlinehelp.xml:5(para)
 msgid ""
@@ -4033,11 +4073,16 @@ msgid ""
 "sourceforge.net/lists/listinfo/gnomesword-users/\"> this link</ulink>. Once "
 "you are signed up, you can email the list with any problems you are having "
 "and other users or the developers will respond, typically within a day."
-msgstr ""
+msgstr "Une façon d'obtenir de l'aide au sujet de &appname; est d'utiliser nos "
+"listes de diffusion à faible trafic. il suffit de s'abonner en sélectionnant "
+"<ulink·url=\"https://lists.sourceforge.net/lists/listinfo/gnomesword-users/\"> ce lien</ulink>."
+"Une fois inscrit, un simple e-mail envoyé sur la liste décrivant les problèmes "
+"rencontrés amènera une réponse des autres utilisateurs ou des développeurs "
+"généralement dans la journée."
 
 #: ../C/gnomesword.xml:13(title)
 msgid "Live Chat"
-msgstr ""
+msgstr "Discussion en ligne"
 
 #: ../C/gnomesword.xml:14(para)
 msgid ""
@@ -4050,11 +4095,21 @@ msgid ""
 "available to help you with issues you may be having. Although many times "
 "someone will answer your question immediately, sometimes you may have to "
 "wait a few minutes or longer."
-msgstr ""
+msgstr "Une autre façon d'obtenir de l'aide est le chat en ligne. &appname "
+"a un canal IRC ouvert sur freenode, #&appname;. Un moyen simple "
+"de se connecter est de sélectionner "
+"<ulink·url=\"http://embed.mibbit.com/?server=irc.freenode.net&amp;"
+"channel=%23gnomesword\">ce lien</ulink>. (Ceci ouvre la fenêtre du "
+"navigateur Internet). Ensuite, saisir un pseudo ou accepter celui par "
+"defaut, et sélectionner «&nbsp;Click·to·join·chatroom&nbsp;». Ceci "
+"ouvre l'accès au salon où les développeurs et d'autres utlisateurs sont "
+"prêts à discuter des problèmes rencontrés. Généralement, les réponses "
+"aux questions sont immédiates, mais parfois cea peut prendre quelques "
+"minutes voire plus longtemps."
 
 #: ../C/gnomesword.xml:437(title)
 msgid "Original Language Research"
-msgstr ""
+msgstr "Étude des textes originaux"
 
 #: ../C/gnomesword.xml:4(title) ../C/originallanguage.xml:4(title)
 msgid "Installing Needed Modules"
@@ -4065,57 +4120,66 @@ msgid ""
 "Gnomesword is ideally suited for studying the original Greek and Hebrew "
 "texts. To get started, you will want the following modules:"
 msgstr "Gnomesword convient parfaitement à l'étude des textes originaux en grec ou hébreu. "
-"Pour commencer, les modules à installer sont les suivants :"
+"Pour démarrer, il est recommandé d'installer les modules suivants :"
 
 #: ../C/gnomesword.xml:8(para) ../C/originallanguage.xml:8(para)
 msgid "From Crosswire Repository:"
-msgstr ""
+msgstr "Dépot Crosswire"
 
 #: ../C/gnomesword.xml:13(para) ../C/originallanguage.xml:13(para)
 msgid ""
 "StrongsHebrew Dictionary (or get StrongsRealHebrew from the Kleinpaste "
 "Repository)"
-msgstr ""
+msgstr "Dictionnaire StrongsHebrew (ou le StrongsRealHebrew du dépot Kleinpaste)"
+"<para>[NDT : dictionnaires en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:18(para) ../C/originallanguage.xml:18(para)
 msgid ""
 "StrongsGreek Dictionary (or get StrongsRealGreek from the Kleinpaste "
 "Repository)"
-msgstr ""
+msgstr "Dictionnaire StrongsGreek (ou le StrongsRealGreek du dépot Kleinpaste)"
+"<para>[NDT : dictionnaires en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:23(para) ../C/originallanguage.xml:23(para)
 msgid "Robinson Dictionary"
-msgstr ""
+msgstr "Dictionnaire Robinson (codes morphologiques)"
+"<para>[NDT : dictionnaire en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:28(para) ../C/originallanguage.xml:28(para)
 msgid "KJV Bible"
-msgstr "Bible KJV"
+msgstr "Bible Louis Segond 1910 avec codes Strong et étiquettes morphologiques"
 
 #: ../C/gnomesword.xml:33(para) ../C/originallanguage.xml:33(para)
 msgid "From Kleinpaste Repository:"
-msgstr ""
+msgstr "Dépot Kleinpaste"
 
 #: ../C/gnomesword.xml:38(para) ../C/originallanguage.xml:38(para)
 msgid ""
 "StrongsRealGreek Dictionary (same as StrongsGreek, but with Greek "
 "characters, B-Greek transliteration, and self-referencing links)"
-msgstr ""
+msgstr "Dictionnaire StrongsRealGreek (identique au StrongsGreek, mais avec "
+"caractères grecs, transliteration B-Greek, et liens de renvois)"
+"<para>[NDT : dictionnaire en langue anglaise]</para>"
+""
 
 #: ../C/gnomesword.xml:43(para) ../C/originallanguage.xml:43(para)
 msgid ""
 "StrongsRealHebrew Dictionary (same as StrongsHebrew, but with Hebrew "
 "characters and self-referencing links)"
-msgstr ""
+msgstr "Dictionnaire StrongsRealHebrew (identique au StrongsHebrew, mais avec "
+"caractères hébreu et liens de renvois)"
+"<para>[NDT : dictionnaire en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:48(para) ../C/originallanguage.xml:48(para)
 msgid ""
 "InvertedStrongsRealGreek (key in or copy actual Greek word, rather than "
 "number)"
-msgstr ""
+msgstr "Dictionnaire InvertedStrongsRealGreek définitions des mots grecs"
+"<para>NDT : dictionnaire en langue anglaise]</para>"
 
 #: ../C/gnomesword.xml:56(title)
 msgid "Setting Up"
-msgstr "Paramètrage"
+msgstr "Configurer"
 
 #: ../C/gnomesword.xml:57(para)
 msgid ""
@@ -4136,11 +4200,29 @@ msgid ""
 "definition will show in the dictionary pane. If you are using "
 "StrongsRealGreek or StrongsRealHebrew, you can click on any other number "
 "referenced in the definition and you will be taken to that entry."
-msgstr ""
+msgstr "Ouvrir le gestionnaire de modules et créer un index pour tous les modules "
+"installés. Ensuite fermer le gestionnaire de modules et ouvrir la fenêtre des "
+"préférences comme suit : <menuchoice><guisubmenu>"
+"Éditer</guisubmenu><guimenuitem>·Préférences</guimenuitem>"
+"</menuchoice>·et aller dans·<menuchoice><guisubmenu>Modules</"
+"guisubmenu><guimenuitem>Spécial</guimenuitem></menuchoice>. "
+"Définir ensuite les lexiques hébreu et grec en fonction de ceux installés. "
+"Fermer la fenêtre des préférences. Dans la fenêtre principale, choisir la "
+"Bible Louis Segond 1910, afficher "
+"le menu contextuel par un clic droit de la souris et sélectionner <menuchoice>"
+"<guisubmenu>Options du module</guisubmenu><guimenuitem>Nombres de ·"
+"Strong</guimenuitem></menuchoice>·et·<menuchoice><guisubmenu>"
+"Options du module</guisubmenu><guimenuitem>Étiquettes morphologiques"
+"</guimenuitem></menuchoice>. L'affichage du texte biblique change de façon à "
+"afficher les nombres de Strong sous les mots appropriés. Un survol des nombres "
+"de Strong (ou des étiquettes morphologiques) à l'aide de la souris fait apparaître "
+"la définition dans le volet <interface>Aperçu</interface>. Un clic sur le lien affiche "
+"la définition dans le volet <interface>Dictionnaire</interface>."
+""
 
 #: ../C/gnomesword.xml:73(title)
 msgid "Searching for Strongs Numbers"
-msgstr "Chercher des Nombres de Strong"
+msgstr "Rechercher des Nombres de Strong"
 
 #: ../C/gnomesword.xml:74(para)
 msgid ""
@@ -4157,7 +4239,23 @@ msgid ""
 "strong's numbers will show as well, following immediately after the words "
 "they match. Also note that hovering over these numbers will show the "
 "definition in the main preview pane."
-msgstr ""
+msgstr "Ouvrir la fenêtre <interface>Recherche avancée</interface> par <menuchoice>"
+"<guisubmenu>Éditer</guisubmenu><guimenuitem>Recherche avancée"
+"</guimenuitem></menuchoice> ou·en pressant·<keycap>F3</keycap>. "
+"Dans <interface>Type de requête</interface>, choisir <guibutton>Optimisée "
+"Lucene</guibutton>. Ensuite sélectionner l'onglet <interface>Attributs"
+"</interface>, et cocher la case <guibutton>Nombres de Strong</guibutton>. "
+"Il est maintenant possible de rechercher un nombre de Strong dans la zone "
+"de saisie en le faisant précéder de «&nbsp;<emphasis>lemma:</emphasis>"
+"&nbsp;» accompagné de «&nbsp;<emphasis>G</emphasis>&nbsp;» pour "
+"la langue grecque et «&nbsp;<emphasis>H</emphasis>&nbsp;» pour la "
+"langue hébraïque. Ainsi pour rechercher le mot hébreu <emphasis>tsad-deek"
+" (6662)</emphasis>, entrer : «&nbsp;<emphasis>lemma:G662</emphasis>"
+"&nbsp;». Une fois la recherche terminée et les résultats affichés, un clic sur un "
+"résultat fait afficher le contenu dans la zone <interface>Aperçu</interface> ainsi "
+"que les nombres de Strong suivant immédiatement les mots associés. Noter que "
+"survoler ces nombres avec la souris fait apparaitre la définition dans le volet "
+"<interface>Aperçu</interface> de la fenêtre principale."
 
 #: ../C/gnomesword.xml:86(title)
 msgid "Additional Modules"
@@ -4165,7 +4263,7 @@ msgstr "Modules additionnels"
 
 #: ../C/gnomesword.xml:87(para)
 msgid "For more advanced research, the following modules are also available:"
-msgstr ""
+msgstr "Pour des recherches approfondies, les modules suivants sont aussi disponibles :"
 
 #: ../C/gnomesword.xml:91(para)
 msgid ""
@@ -4174,7 +4272,9 @@ msgid ""
 "In addition, it contains Strongs, Morphology,Greek Accents, and primary/"
 "secondary readings. As with all modules that include Strongs, Gnomesword "
 "displays 2TGreek in beautiful interlinear form."
-msgstr ""
+msgstr "2TGreek (Dépot Kleinpaste) : Ce module contient la Bible entière en langue grecque. "
+"Il combine les modules LXX et Tischendorf8·NT en un seul module avec nombres de "
+"Strong, étiquettes morphologiques et accents grecs"
 
 #: ../C/gnomesword.xml:99(para)
 msgid ""
@@ -4187,7 +4287,8 @@ msgstr "Elzevir Textus Receptus (Source: Crosswire beta) édition 1624 avec "
 msgid ""
 "LXX (Crosswire Repository) : the Septuagint with Strongs, Morphology, and "
 "footnotes"
-msgstr ""
+msgstr "LXX (Dépot Crosswire) : La Septante avec nombres de Strong, étiquettes "
+"morphologiques et notes de bas de page."
 
 #: ../C/gnomesword.xml:109(para)
 msgid ""
@@ -4195,39 +4296,50 @@ msgid ""
 "from the morphologically parsed GNT provided by UPenn's CCAT. It was "
 "reformatted and error-corrected by James Tauber. It includes Greek accents "
 "and Morphology."
-msgstr ""
+msgstr "MorphGNT (Dépot Crosswire beta) : Nouveau Testament grec dérivé du "
+"texte avec analyse des formes du Center for Computer Analysys of Texts "
+"de l'Université de Pennsylvanie. Il a été reformatté et corrigé par James Tauber. "
+"Inclut les accents grecs et les codes morphologiques."
 
 #: ../C/gnomesword.xml:116(para)
 msgid ""
 "TR (Crosswire Repository) : This is the Textus Receptus with Strongs and "
 "Morphology"
-msgstr ""
+msgstr "TR (Dépot Crosswire) : Le Textus Receptus avec codes Strong "
+"et étiquettes morphologiques."
 
 #: ../C/gnomesword.xml:121(para)
 msgid ""
 "TischMorph (Kleinpaste Repository) : As described above, this has Strongs, "
 "Morphology, accents, and alternate readings."
-msgstr ""
+msgstr "TischMorph (Dépot Kleinpaste) : Ce module contient les étiquettes morphologiques,"
+" les accents grecs et les variantes du texte"
 
 #: ../C/gnomesword.xml:126(para)
 msgid ""
 "WHNU (Crosswire Repository) : Westcott-Hort of 1881 with Strongs and "
 "Morphology"
-msgstr ""
+msgstr "WHNU (Dépot Crosswire) : Wescott-Hort de 1881 avec codes Strongs "
+"et étiquettes morphologiques"
 
 #: ../C/gnomesword.xml:131(para)
 msgid ""
 "GreekHebrew (Crosswire Repository) : This is a dictionary keyed to Strongs. "
 "It contains words in the LXX that are also found in the New Testament. In "
 "addition, it contains the equivalent Hebrew words also keyed to Strongs."
-msgstr ""
+msgstr "GreekHebrew (Dépot Crosswire) : Dictionnaire des nombres de Strong. "
+"Il contient des mots de la LXX qui se trouvent aussi dans le Nouveau-"
+"Testament. Additionnellement, il contient les mots équivalents en "
+"hébreu et les nombres de Strong associés."
 
 #: ../C/gnomesword.xml:138(para)
 msgid ""
 "Didache (Crosswire Beta Repository as of this writing) : This is an early "
 "Christian treatise in Greek dated to the late first or early second century. "
 "It includes Strongs, Morphology, and Greek accents."
-msgstr ""
+msgstr "Didache (Répertoire Crosswire Beta) : La Didaché est un ancien traité chrétien "
+"grec datant de la fin du premier ou du début du deuxième siècle. Sont inclus les "
+"codes Strong, les étiquettes morphologiques et les accents grecs."
 
 #: ../C/gnomesword.xml:443(title)
 msgid "Authors"
