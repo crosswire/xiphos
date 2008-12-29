@@ -513,9 +513,15 @@ void load_settings_structure(void)
 		settings.base_font_size_str = g_strdup(buf);
 		settings.base_font_size = atoi(settings.base_font_size_str);
 	} else {
+#ifndef WIN32
 		xml_add_new_item_to_section("fontsize", "basefontsize", "+0");
 		settings.base_font_size_str = g_strdup("+0");
 		settings.base_font_size = 0;
+#else
+		xml_add_new_item_to_section("fontsize", "basefontsize", "+1");
+		settings.base_font_size_str = g_strdup("+1");
+		settings.base_font_size = 1;
+#endif /* WIN32 */
 	}
 
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
