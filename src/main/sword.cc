@@ -665,7 +665,7 @@ void main_init_backend(void)
 
 void main_shutdown_backend(void)
 {
-	if(sword_locale)
+	if (sword_locale)
 		free((char*)sword_locale);
 	sword_locale = NULL;
 	if (backend) 
@@ -1029,7 +1029,7 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 
 	if (strcmp(settings.book_mod, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "book", mod_name);
-		settings.book_mod = xml_get_value("modules", "book");
+		gui_reassign_strdup(&settings.book_mod, (gchar *)mod_name);
 	}
 	
 	if (key == NULL)  // && offset == -1)
@@ -1044,7 +1044,7 @@ void main_display_book(const char * mod_name, const char * key)     //, unsigned
 		settings.book_offset = backend->treekey_set_key((char*)key);
 	} else {
 		settings.book_offset = atol(key);
-		if(settings.book_offset < 4)
+		if (settings.book_offset < 4)
 			settings.book_offset = 4;
 		xml_set_value("GnomeSword", "keys", "book", key);
 		settings.book_key = xml_get_value("keys", "book");
@@ -1076,19 +1076,21 @@ void main_display_commentary(const char * mod_name, const char * key)
 		return;
 	
 	if (!mod_name)
-		mod_name = xml_get_value("modules", "comm");
+		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
+			    ? g_strdup(cur_passage_tab->commentary_mod)
+			    : xml_get_value("modules", "comm"));
 	
 	if (!mod_name || !backend->is_module(mod_name))
 		return;
 	if (!settings.CommWindowModule)
-		settings.CommWindowModule = (char*)mod_name;
+		settings.CommWindowModule = g_strdup((gchar*)mod_name);
 	
 	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
 						
 	if (strcmp(settings.CommWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
-		settings.CommWindowModule = g_strdup(mod_name);
+		gui_reassign_strdup(&settings.CommWindowModule, (gchar *)mod_name);
 
 		char *companion = main_get_mod_config_entry(mod_name, "Companion");
 
@@ -1140,7 +1142,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 	if (!backend->is_module(mod_name))
 		return;
 	if (!settings.DictWindowModule)
-		settings.DictWindowModule = (char*)mod_name;
+		settings.DictWindowModule = g_strdup((gchar*)mod_name);
 
 	if (key == NULL)
 		key = (char*)"Grace";
@@ -1167,7 +1169,7 @@ void main_display_dictionary(const char * mod_name, const char * key)
 			}
 		}
 		xml_set_value("GnomeSword", "modules", "dict", mod_name);
-		settings.DictWindowModule = xml_get_value("modules", "dict");
+		gui_reassign_strdup(&settings.DictWindowModule, (gchar *)mod_name);
 	}
 	
 	 // old_key is uppercase
@@ -1243,9 +1245,11 @@ void main_display_bible(const char * mod_name, const char * key)
 	/* keeps us out of a crash causing loop */	
 	g_signal_handler_block(adjustment, scroll_adj_signal);
 #endif	
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(widgets.html_text))) return;
 	if (!mod_name)
-		mod_name = xml_get_value("modules", "bible");	
+		mod_name = ((settings.browsing && (cur_passage_tab != NULL))
+			    ? g_strdup(cur_passage_tab->text_mod)
+			    : xml_get_value("modules", "bible"));	
 	
 	
 	if (!settings.havebible || !mod_name)
@@ -1254,8 +1258,8 @@ void main_display_bible(const char * mod_name, const char * key)
 		return;
 	
 	if (!settings.MainWindowModule)
-		settings.MainWindowModule = (char*)mod_name;
-	
+		settings.MainWindowModule = g_strdup((gchar*)mod_name);
+
 	if (strcmp(settings.currentverse, key)) {
 		xml_set_value("GnomeSword", "keys", "verse",
 					key);
@@ -1265,7 +1269,7 @@ void main_display_bible(const char * mod_name, const char * key)
 	
 	if (strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "bible", mod_name);
-		settings.MainWindowModule = g_strdup(mod_name);
+		gui_reassign_strdup(&settings.MainWindowModule, (gchar *)mod_name);
 
 		char *companion = main_get_mod_config_entry(mod_name, "Companion");
 
@@ -1395,9 +1399,8 @@ void main_display_devotional(void)
 
 		if (g_list_length(glist) != 0) {
 			xml_set_value("GnomeSword", "modules", "devotional",
-				      (char*)glist->data );
-			settings.devotionalmod = xml_get_value("modules",
-							       "devotional");
+				      (char*)glist->data);
+			gui_reassign_strdup(&settings.devotionalmod, (gchar *)glist->data);
 		} else {
 			gui_generic_warning(_("Daily devotional was requested, but there are none installed."));
 		}
