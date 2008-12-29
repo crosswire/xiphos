@@ -36,6 +36,15 @@ void gui_init(int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 #endif
+#ifdef WIN32
+  gchar *locale_dir = g_win32_get_package_installation_directory_of_module(NULL);
+  locale_dir = g_strconcat(locale_dir, "\0", NULL);
+  locale_dir = g_build_filename (locale_dir, "share", "locale", NULL);
+  bindtextdomain(GETTEXT_PACKAGE, locale_dir);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+  g_free (locale_dir);
+#endif
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
                       argc, argv,
                       GNOME_PROGRAM_STANDARD_PROPERTIES,
