@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-22 21:35+0100\n"
-"PO-Revision-Date: 2008-12-22 22:46+0100\n"
+"PO-Revision-Date: 2008-12-28 11:18+0100\n"
 "Last-Translator: Dominique Corbex <domcox@users.sourceforge.net>\n"
 "Language-Team: Project-Id-Version: gtranslator 1.0.1 <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -976,9 +976,9 @@ msgstr "Installé"
 msgid ""
 "The index icon means you have built an optimized ('lucene') index for this "
 "module for fast searching (see the Maintenance pane for this function)"
-msgstr "L'icône index indique qu'un index optimisé (lucène) a été construit "
-"pour ce module permettant des requêtes très rapides (Voir le choix "
-"Gérer pour cette fonction)"
+msgstr "L'icône index indique qu'un index optimisé "
+"pour des requêtes rapides (lucène) a été construit "
+"à l'aide du bouton indexer."
 ""
 
 #: ../src/gnome2/mod_mgr.c:1361
@@ -986,7 +986,7 @@ msgid ""
 "The lock icon means this module is encrypted, and requires that you purchase "
 "an unlock key from the content owner"
 msgstr "l'icône protection indique un module encrypté et nécessite l'achat d'une clé "
-"de dévérrouillage auprès de l'éditeur du document"
+"de déverrouillage auprès de l'éditeur du document"
 
 #: ../src/gnome2/mod_mgr.c:1383
 msgid ""
@@ -1030,7 +1030,7 @@ msgstr "Répertoire"
 
 #: ../src/gnome2/mod_mgr.c:1525
 msgid "Sources"
-msgstr "Sources"
+msgstr "Dépots"
 
 #: ../src/gnome2/mod_mgr.c:1531 ../src/gnome2/sidebar.c:1404
 #: ../src/gnome2/preferences_dialog.c:1758
@@ -1055,15 +1055,15 @@ msgstr "La liste des modules n'est pas à jour!"
 
 #: ../src/gnome2/mod_mgr.c:1970
 msgid "Select Local Source"
-msgstr "Support local"
+msgstr "Dépot local"
 
 #: ../src/gnome2/mod_mgr.c:2264 ../src/gnome2/mod_mgr.c:2468
 msgid "Remove the selected source"
-msgstr "Supprime la source sélectionnée"
+msgstr "Supprime le dépot sélectionné"
 
 #: ../src/gnome2/mod_mgr.c:2321
 msgid "Enter a remote source"
-msgstr "Ajouter un site de téléchargement"
+msgstr "Ajouter un dépot distant"
 
 #: ../src/gnome2/mod_mgr.c:2325
 msgid "Caption:"
@@ -1085,11 +1085,11 @@ msgstr "Répertoire :"
 #. this can happen at most once
 #: ../src/gnome2/mod_mgr.c:2353
 msgid "A source by that name already exists."
-msgstr "Une source du même nom existe déjà"
+msgstr "Un dépot du même nom existe déjà"
 
 #: ../src/gnome2/mod_mgr.c:2465
 msgid "Delete a remote source"
-msgstr "Supprimer un site de téléchargement"
+msgstr "Supprimer un dépot distant"
 
 #: ../src/gnome2/sidebar_dialog.c:134
 msgid "Sidebar"
@@ -2515,7 +2515,7 @@ msgstr ""
 "\n"
 "Avec votre permission, Gnomesword va lancer le gestionnaire de modules pour "
 "télécharger des modules depuis le site de Crosswire : \n"
-"1. Configuration de la source de téléchargement\n"
+"1. Configuration du dépot distant\n"
 "2. Connexion\n"
 "3. Choix d'un texte biblique dans la langue de votre choix\n"
 "4. Validation par le bouton \"Installer'\n"
@@ -2639,11 +2639,11 @@ msgid ""
 msgstr ""
 "Des références URL de type « sword:// » (similaires aux\n"
 "pages web) peuvent être utilisées par d'autres applications\n"
-"pour rechercher des versets dans la Bible. Votre système\n"
-"n'est actuellement pas configuré pour traiter ces références.\n"
+"pour rechercher des versets bibliques. Votre système n'est\n"
+"actuellement pas configuré pour traiter ces références.\n"
 "\n"
-"Voulez-vous que GnomeSword soit utilisé comme l'application\n"
-"par défaut d'affichage de ces références?"
+"Voulez-vous que GnomeSword soit paramétré comme\n"
+"l'application gérant ces références?"
 
 #: ../src/main/settings.c:729
 msgid ""
@@ -2903,7 +2903,7 @@ msgstr "Version"
 
 #: ../ui/module-manager.glade.h:1
 msgid "<b>Add and Remove Sources</b>"
-msgstr "<b>Gestion des sources de modules </b>"
+msgstr "<b>Gestion des dépots de modules </b>"
 
 #: ../ui/module-manager.glade.h:2
 msgid "<b>Install Destination</b>"
@@ -2911,7 +2911,7 @@ msgstr "<b>Répertoire d'installation</b>"
 
 #: ../ui/module-manager.glade.h:3
 msgid "<b>Install Source</b>"
-msgstr "<b>Source des modules</b>"
+msgstr "<b>Dépot d'installation</b>"
 
 #: ../ui/module-manager.glade.h:4
 msgid "<b>Module Manager</b>"
@@ -2931,16 +2931,16 @@ msgid ""
 "<b>Warning:</b> If you live in a persecuted country and do not wish to risk "
 "detection you should NOT use  the remote installation feature! "
 msgstr ""
-"<b>Attention :</b> Ne pas utiliser le téléchargement dans les pays où il est "
+"<b>Attention :</b> Ne pas utiliser les dépots distants depuis les pays où il est "
 "dangereux d'être repéré!"
 
 #: ../ui/module-manager.glade.h:9
 msgid "<i>Personal area, for your use only:</i>"
-msgstr "<i>Zone personnelle, pour votre usage seulement</i>"
+msgstr "<i>Espace personnel, pour votre usage uniquement</i>"
 
 #: ../ui/module-manager.glade.h:10
 msgid "<i>System area, for all users:</i>"
-msgstr "<i>Zone système, pour tous les utilisateurs</i>"
+msgstr "<i>Espace système, pour tous les utilisateurs</i>"
 
 #: ../ui/module-manager.glade.h:12
 msgid "Continue"
@@ -2948,11 +2948,11 @@ msgstr "Continuer"
 
 #: ../ui/module-manager.glade.h:13
 msgid "Current Remote Sources"
-msgstr "Téléchargement"
+msgstr "Dépots distants"
 
 #: ../ui/module-manager.glade.h:14
 msgid "Current local sources"
-msgstr "Sources locales"
+msgstr "Dépots locaux"
 
 #: ../ui/module-manager.glade.h:15
 msgid "Delete Index"
@@ -2964,7 +2964,7 @@ msgstr "Dossier personnel"
 
 #: ../ui/module-manager.glade.h:19
 msgid "Local"
-msgstr "Source locale"
+msgstr "Dépot local"
 
 #: ../ui/module-manager.glade.h:20
 msgid "Local Install Folder"
@@ -2976,7 +2976,7 @@ msgstr "Gérer les modules"
 
 #: ../ui/module-manager.glade.h:22
 msgid "Remote"
-msgstr "Téléchargement"
+msgstr "Dépot distant"
 
 #: ../ui/module-manager.glade.h:23
 msgid "Sword sys dir"
