@@ -841,18 +841,33 @@ static int show_module_and_key(const char * module, const char * key,
 				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case COMMENTARY_TYPE:
-			case PERCOM_TYPE:								
+			case PERCOM_TYPE:				
 				tmpkey = main_update_nav_controls(key);
 				main_display_bible(NULL, tmpkey);
 				main_display_commentary(module, tmpkey);
 				if(tmpkey) g_free((gchar*)tmpkey);
+				if(gtk_notebook_get_current_page (GTK_NOTEBOOK
+						(widgets.notebook_comm_book)) 
+				   		!= 0)
+					gtk_notebook_set_current_page(
+			 				GTK_NOTEBOOK (widgets.
+							notebook_comm_book),
+							0);
 			break;
 			case DICTIONARY_TYPE:
 				main_display_dictionary((gchar*)module,
 							(gchar*)key);
 			break;
 			case BOOK_TYPE:
+			case PRAYERLIST_TYPE:
 				main_display_book((gchar*)module, (gchar*)key); 
+				if(gtk_notebook_get_current_page (GTK_NOTEBOOK 
+						(widgets.notebook_comm_book)) 
+				   		!= 1)
+					gtk_notebook_set_current_page(
+							GTK_NOTEBOOK (widgets.
+							notebook_comm_book),
+							1);
 			break;
 		}
 	}
