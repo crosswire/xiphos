@@ -54,6 +54,7 @@ public:
 	{
 	}
 	virtual char Display(SWModule &imodule);
+	virtual char DisplayByChapter(SWModule &imodule, gint mod_type);
 
 protected:
 	GtkWidget  *gtkText;
@@ -104,18 +105,26 @@ public:
 	      be(_be),
 	      ops(_ops),
 	      swbuf(""),
-	      is_rtol(FALSE)
+	      is_rtol(FALSE),
+	      strongs_or_morph(FALSE),
+	      strongs_and_morph(FALSE),
+	      cache_flags(0)
 	{
 	}
 	virtual char Display(SWModule &imodule);
+	virtual char DisplayByChapter(SWModule &imodule, gint mod_type);
 
 protected:
 	GtkWidget   *gtkText;
 	DIALOG_DATA *d;
 	BackEnd     *be;
 	GLOBAL_OPS  *ops;
+	MOD_FONT    *mf;
 	SWBuf       swbuf;
 	gboolean    is_rtol;
+	gboolean   strongs_or_morph;
+	gboolean   strongs_and_morph;
+	uint16_t   cache_flags;
 };
 
 class DialogChapDisp : public  DialogEntryDisp {

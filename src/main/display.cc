@@ -93,7 +93,6 @@ using namespace sword;
 using namespace std;
 using namespace Magick;
 
-int strongs_on;
 //T<font size=\"small\" >EST</font>  /* small caps */
 //static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
 
@@ -328,8 +327,7 @@ ClearImages(gchar *text)
 // utility function to write out HTML.
 //
 void
-HtmlOutput(SWModule &imodule,
-	   SWBuf& swbuf,
+HtmlOutput(SWBuf& swbuf,
 	   GtkWidget *gtkText,
 	   MOD_FONT *mf,
 	   char *anchor)
@@ -702,20 +700,106 @@ set_morph_order(SWModule& imodule)
 }
 
 //
+// display of commentary by chapter.
+//
+char
+GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
+{
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	gchar *utf8_key;
+	gchar *buf;
+	char *ModuleName = imodule.Name();
+	const char *rework;	// for image size analysis rework.
+
+	// we come into this routine with swbuf init'd with
+	// boilerplate html startup, plus ops and mf ready.
+
+	cache_flags = ConstructFlags(ops);
+	is_rtol = main_is_mod_rtol(ModuleName);
+
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
+	if (strongs_and_morph)
+		set_morph_order(imodule);
+
+	if (is_rtol)
+		swbuf.append("<div align=right>");
+
+	for (key->Verse(1);
+	     (key->Book()    == curBook)    &&
+	     (key->Chapter() == curChapter) &&
+	     !imodule.Error();
+	     imodule++) {
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [key->Testament()]
+		    [key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			rework = (strongs_or_morph
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
+			if (ops->image_content == 0)
+				ClearImages((gchar *)rework);
+			else if ((ops->image_content == -1) &&	// "unknown"
+				 (strcasestr(rework, "<img ") != NULL)) {
+				ops->image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
+		buf = g_strdup_printf("<a name=\"%d\"> </a><p />",
+				      key->Verse());
+		swbuf.append(buf);
+		g_free(buf);
+		swbuf.append(settings.imageresize
+			     ? AnalyzeForImageSize(rework,
+						   GDK_WINDOW(gtkText->window),
+						   mod_type)
+			     : rework /* left as-is */);
+	}
+
+	if (is_rtol)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
+
+	buf = g_strdup_printf("%d", curVerse);
+	HtmlOutput(swbuf, gtkText, mf, buf);
+	
+	free_font(mf);
+	mf = NULL;
+	g_free(ops);
+	ops = NULL;
+	return 0;
+}
+
+//
 // general display of entries: commentary, genbook, lexdict
 //
 char
 GTKEntryDisp::Display(SWModule &imodule)
 {
+#ifdef USE_GTKMOZEMBED
+	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
+#endif
+
 	gchar *buf;
 	gint mod_type;
 	mf = get_font(imodule.Name());
 	swbuf = "";
 	
-#ifdef USE_GTKMOZEMBED
-	if (!GTK_WIDGET_REALIZED(GTK_WIDGET(gtkText))) return 0;
-#endif
-
 	ops = main_new_globals(imodule.Name());
 
 	const char *rework;	// for image size analysis rework.
@@ -758,6 +842,14 @@ GTKEntryDisp::Display(SWModule &imodule)
 			      imodule.Name());
 	swbuf.append(buf);
 	g_free(buf);
+
+	//
+	// the rest of this routine is irrelevant if we are
+	// instead heading off to show a whole chapter
+	// (this option can be enabled only in commentaries.)
+	//
+	if (ops->commentary_by_chapter)
+		return DisplayByChapter(imodule, mod_type);
 
 	// we will use the module cache for regular commentaries,
 	// which navigate/change a lot, whereas pers.comms, lexdicts,
@@ -829,7 +921,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 
-	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
+	HtmlOutput(swbuf, gtkText, mf, NULL);
 	
 	free_font(mf);
 	mf = NULL;
@@ -1129,7 +1221,8 @@ GTKChapDisp::getVerseAfter(SWModule &imodule)
 // then scribbled out the local static socket with (SayText "...").
 // Non-zero verse param is prefixed onto supplied text.
 //
-void ReadAloud(unsigned int verse, const char *suppliedtext)
+void
+ReadAloud(unsigned int verse, const char *suppliedtext)
 {
 #ifndef WIN32
 	static int tts_socket = -1;	// no initial connection.
@@ -1321,13 +1414,13 @@ void ReadAloud(unsigned int verse, const char *suppliedtext)
 #endif /* WIN32 */
 }
 
-char GTKChapDisp::Display(SWModule &imodule)
+char
+GTKChapDisp::Display(SWModule &imodule)
 {
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
 	char *num;
@@ -1387,7 +1480,6 @@ char GTKChapDisp::Display(SWModule &imodule)
 		swbuf.append("<div align=right>");
 
 	main_set_global_options(ops);
-	strongs_on = ops->strongs;
 	getVerseBefore(imodule);
 
 	for (key->Verse(1);
@@ -1547,7 +1639,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
-	HtmlOutput(imodule, swbuf, gtkText, mf, buf);
+	HtmlOutput(swbuf, gtkText, mf, buf);
 	if (buf)
 		g_free(buf);
 
@@ -1576,14 +1668,14 @@ char GTKChapDisp::Display(SWModule &imodule)
  */
 
 #ifndef USE_GTKMOZEMBED
-char GTKTextviewChapDisp::Display(SWModule &imodule)
+char
+GTKTextviewChapDisp::Display(SWModule &imodule)
 {
 	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curPos = 0;
 	gfloat adjVal;
 	GtkTextMark   *mark = NULL;
 	GtkTextIter iter, startiter, enditer;
@@ -1697,14 +1789,100 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 #endif
 
 
-char DialogEntryDisp::Display(SWModule &imodule)
+//
+// display of commentary by chapter.
+//
+char
+DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 {
-	SWBuf swbuf = "";
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	gchar *utf8_key;
+	gchar *buf;
+	char *ModuleName = imodule.Name();
+	const char *rework;	// for image size analysis rework.
+
+	// we come into this routine with swbuf init'd with
+	// boilerplate html startup, plus ops and mf ready.
+
+	cache_flags = ConstructFlags(ops);
+	is_rtol = main_is_mod_rtol(ModuleName);
+
+	strongs_and_morph = ((ops->strongs || ops->lemmas) &&
+			     ops->morphs);
+	strongs_or_morph  = ((ops->strongs || ops->lemmas) ||
+			     ops->morphs);
+	if (strongs_and_morph)
+		set_morph_order(imodule);
+
+	if (is_rtol)
+		swbuf.append("<div align=right>");
+
+	for (key->Verse(1);
+	     (key->Book()    == curBook)    &&
+	     (key->Chapter() == curChapter) &&
+	     !imodule.Error();
+	     imodule++) {
+
+		ModuleCache::CacheVerse& cVerse = ModuleMap
+		    [ModuleName]
+		    [key->Testament()]
+		    [key->Book()]
+		    [key->Chapter()]
+		    [key->Verse()];
+
+		// use the module cache rather than re-accessing Sword.
+		if (!cVerse.CacheIsValid(cache_flags)) {
+			rework = (strongs_or_morph
+				  ? block_render(imodule.RenderText())
+				  : imodule.RenderText());
+			if (ops->image_content == 0)
+				ClearImages((gchar *)rework);
+			else if ((ops->image_content == -1) &&	// "unknown"
+				 (strcasestr(rework, "<img ") != NULL)) {
+				ops->image_content = 1;		// now known.
+				main_save_module_options(imodule.Name(),
+							 "Image Content", 1);
+			}
+			
+			cVerse.SetText(rework, cache_flags);
+		} else
+			rework = cVerse.GetText();
+		buf = g_strdup_printf("<a name=\"%d\"> </a><p />",
+				      key->Verse());
+		swbuf.append(buf);
+		g_free(buf);
+		swbuf.append(settings.imageresize
+			     ? AnalyzeForImageSize(rework,
+						   GDK_WINDOW(gtkText->window),
+						   mod_type)
+			     : rework /* left as-is */);
+	}
+
+	if (is_rtol)
+		swbuf.append("</div>");
+	swbuf.append("</font></body></html>");
+
+	buf = g_strdup_printf("%d", curVerse);
+	HtmlOutput(swbuf, gtkText, mf, buf);
+	
+	free_font(mf);
+	mf = NULL;
+	g_free(ops);
+	ops = NULL;
+	return 0;
+}
+
+char
+DialogEntryDisp::Display(SWModule &imodule)
+{
+	swbuf = "";
 	char *buf;
-	int curPos = 0;
 	gint mod_type;
-	MOD_FONT *mf = get_font(imodule.Name());
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	mf = get_font(imodule.Name());
+	ops = main_new_globals(imodule.Name());
 	const char *rework;	// for image size analysis rework.
 
 	(const char *)imodule;	// snap to entry
@@ -1731,6 +1909,13 @@ char DialogEntryDisp::Display(SWModule &imodule)
 			      imodule.Name());
 	swbuf.append(buf);
 	g_free(buf);
+
+	//
+	// the rest of this routine is irrelevant if we are
+	// instead heading off to show a whole chapter
+	//
+	if (ops->commentary_by_chapter)
+		return DisplayByChapter(imodule, mod_type);
 
 	if (be->module_type(imodule.Name()) == COMMENTARY_TYPE) {
 		VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1787,7 +1972,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 
 	swbuf.append("</font></body></html>");
 
-	HtmlOutput(imodule, swbuf, gtkText, mf, NULL);
+	HtmlOutput(swbuf, gtkText, mf, NULL);
 
 	free_font(mf);
 	mf = NULL;
@@ -1796,7 +1981,8 @@ char DialogEntryDisp::Display(SWModule &imodule)
 }
 
 
-char DialogChapDisp::Display(SWModule &imodule)
+char
+DialogChapDisp::Display(SWModule &imodule)
 {
 	const char *ModuleName = imodule.Name();
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
@@ -1804,7 +1990,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	int curTestament = key->Testament();
-	int curPos = 0;
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
 	//GString *str = g_string_new(NULL);
@@ -2019,7 +2204,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 		buf = g_strdup_printf("%d", curVerse - display_boundary);
 	else
 		buf = NULL;
-	HtmlOutput(imodule, swbuf, gtkText, mf, buf);
+	HtmlOutput(swbuf, gtkText, mf, buf);
 	if (buf)
 		g_free(buf);
 
@@ -2028,14 +2213,14 @@ char DialogChapDisp::Display(SWModule &imodule)
 
 
 #ifndef USE_GTKMOZEMBED
-char DialogTextviewChapDisp::Display(SWModule &imodule)
+char
+DialogTextviewChapDisp::Display(SWModule &imodule)
 {
 	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curPos = 0;
 	gfloat adjVal;
 	GtkTextMark   *mark = NULL;
 	GtkTextIter iter, startiter, enditer;
@@ -2157,7 +2342,8 @@ char DialogTextviewChapDisp::Display(SWModule &imodule)
 }
 #endif
 
-char GTKPrintEntryDisp::Display(SWModule &imodule)
+char
+GTKPrintEntryDisp::Display(SWModule &imodule)
 {
 #ifdef USE_GTKMOZEMBED
 	gchar *keytext = NULL;
@@ -2226,14 +2412,14 @@ char GTKPrintEntryDisp::Display(SWModule &imodule)
 #endif
 }
 
-char GTKPrintChapDisp::Display(SWModule &imodule)
+char
+GTKPrintChapDisp::Display(SWModule &imodule)
 {
 #ifdef USE_GTKMOZEMBED
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	int curPos = 0;
 	gchar *utf8_key;
 	gchar *buf;
 	gchar *preverse = NULL;
@@ -2281,7 +2467,6 @@ char GTKPrintChapDisp::Display(SWModule &imodule)
 	
 	swbuf = "";
 	main_set_global_options(ops);
-	strongs_on = ops->strongs;
 	
 	gecko_html_write(html,swbuf.c_str(),swbuf.length());
 	
