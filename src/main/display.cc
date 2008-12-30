@@ -760,7 +760,7 @@ GTKEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
-		buf = g_strdup_printf("<a name=\"%d\"> </a><p />",
+		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
 				      key->Verse());
 		swbuf.append(buf);
 		g_free(buf);
@@ -1850,7 +1850,7 @@ DialogEntryDisp::DisplayByChapter(SWModule &imodule, gint mod_type)
 			cVerse.SetText(rework, cache_flags);
 		} else
 			rework = cVerse.GetText();
-		buf = g_strdup_printf("<a name=\"%d\"> </a><p />",
+		buf = g_strdup_printf("<p /><a name=\"%d\"> </a>",
 				      key->Verse());
 		swbuf.append(buf);
 		g_free(buf);
