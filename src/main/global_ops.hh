@@ -46,6 +46,7 @@ struct  _global_ops {
 	gboolean variants_all; 
 	gint module_type;
 	gint image_content;
+	gint commentary_by_chapter;
 };
 
 int main_save_module_options(char * mod_name, const char * option, int choice);

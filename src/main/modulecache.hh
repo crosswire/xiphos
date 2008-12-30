@@ -66,6 +66,7 @@ namespace ModuleCache {
 	static const int VariantsAll        = 0x0800;
 	static const int VariantsPrimary    = 0x1000;
 	static const int VariantsSecondary  = 0x2000;
+	static const int CommentaryChapter  = 0x4000;
 
 	class CacheVerse {
 	public:

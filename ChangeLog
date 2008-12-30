@@ -1,3 +1,7 @@
+2008-12-29  karl <charcoal@users.sf.net>
+
+	* implement commentary view by chapter, instead of just by verse.
+
 2008-12-28  karl <charcoal@users.sf.net>
 
 	* re-arrange help functions so that just one compiles in.
@@ -26,7 +30,7 @@
 2008-12-13  terry <tbiggs@users.sourceforge.net>
 
 	* fixed bug #2430285 gtkhtml parallel view issues
-	
+
 2008-12-20  karl <charcoal@users.sf.net>
 
 	* adv.search: auto-create 1st sample modlist from available bibles.
