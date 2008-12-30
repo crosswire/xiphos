@@ -146,7 +146,7 @@ on_mailing_list_activate(GtkMenuItem * menuitem,
 			gpointer user_data)
 {
 	GError *error = NULL;
-	if (gnome_url_show(PACKAGE_BUGREPORT,
+	if (gnome_url_show("https://lists.sourceforge.net/lists/listinfo/gnomesword-users/",
 				&error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free (error);
@@ -205,7 +205,7 @@ on_report_bug_activate(GtkMenuItem * menuitem,
 			gpointer user_data)
 {
 	GError *error = NULL;
-	if (gnome_url_show("https://sourceforge.net/tracker2/?atid=105528&group_id=5528&func=browse",
+	if (gnome_url_show(PACKAGE_BUGREPORT,
 				&error) == FALSE) {
 		GS_warning((error->message));
 		g_error_free (error);
