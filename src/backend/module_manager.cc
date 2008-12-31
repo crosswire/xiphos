@@ -650,7 +650,11 @@ void backend_init_module_mgr_config(void)
 	is_local.directory = "/mnt/cdrom";
 	config["Sources"]["DIRSource"] = is_local.getConfEnt();	
 	config.Save();
+}
 
+void
+backend_init_module_mgr_config_extras()
+{
 	// new concept: we are our own first-class source.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
@@ -670,7 +674,6 @@ void backend_init_module_mgr_config(void)
 				      "www.crosswire.org",
 				      "/pub/sword/betaraw");
 }
-
 
 /******************************************************************************
  * Name

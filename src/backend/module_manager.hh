@@ -78,6 +78,7 @@ void backend_init_module_mgr(const char *dir, gboolean augment);
 void backend_shut_down_module_mgr(void);
 void backend_terminate_module_mgr(void);
 void backend_init_module_mgr_config(void);
+void backend_init_module_mgr_config_extras(void);
 void backend_module_mgr_clear_config(void);	
 void backend_module_mgr_add_source(const char * vtype, 
 				   const char * type, 
