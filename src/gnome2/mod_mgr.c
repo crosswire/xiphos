@@ -2969,6 +2969,7 @@ void gui_open_mod_mgr_initial_run(void)
 	gtk_dialog_run((GtkDialog *) dlg);
 	gtk_widget_destroy(dlg);
 	first_time_user = FALSE;
+	mod_mgr_init_config_extras();
 }
 
 /******************************************************************************

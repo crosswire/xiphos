@@ -437,6 +437,11 @@ void mod_mgr_init_config()
 	backend_init_module_mgr_config();
 }
 
+void mod_mgr_init_config_extras()
+{
+	backend_init_module_mgr_config_extras();
+}
+
 void mod_mgr_clear_config(void)
 {
 	backend_module_mgr_clear_config();

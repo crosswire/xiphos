@@ -1,3 +1,7 @@
+2008-12-31  karl <charcoal@users.sf.net>
+
+	* re-work extra repos' init so they don't interfere with first run.
+
 2008-12-29  karl <charcoal@users.sf.net>
 
 	* implement commentary view by chapter, instead of just by verse.
