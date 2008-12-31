@@ -657,6 +657,12 @@ void backend_init_module_mgr_config(void)
 				      "GnomeSword",
 				      "ftp.gnomesword.org",
 				      "/ftp/pub/sword");
+	// NET @ bible.org.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "NET",
+				      "ftp.bible.org",
+				      "/sword");
 	// also the beta repo.
 	backend_module_mgr_add_source("FTPSource",
 				      "FTP",
