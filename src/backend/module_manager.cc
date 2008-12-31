@@ -656,7 +656,13 @@ void backend_init_module_mgr_config(void)
 				      "FTP",
 				      "GnomeSword",
 				      "ftp.gnomesword.org",
-				      "/pub/sword");
+				      "/ftp/pub/sword");
+	// also the beta repo.
+	backend_module_mgr_add_source("FTPSource",
+				      "FTP",
+				      "CrossWire-beta",
+				      "www.crosswire.org",
+				      "/pub/sword/betaraw");
 }
 
 
