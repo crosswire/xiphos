@@ -1825,9 +1825,9 @@ msgstr "درباره این برنامه"
 msgid "_Edit"
 msgstr "ویرایش"
 
-#: ../src/gnome2/main_menu.c:1077
-msgid "Hi_story"
-msgstr "سابقه"
+#####: ../src/gnome2/main_menu.c:1077
+####msgid "Hi_story"
+####msgstr "سابقه"
 
 #: ../src/gnome2/main_menu.c:1083
 msgid "_Help"
