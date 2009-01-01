@@ -3049,46 +3049,46 @@ msgstr "توازی مدولها"
 
 #: ../ui/prefs.glade.h:62
 msgid "Parallel 1"
-msgstr "توازی1"
+msgstr "توازی ۱"
 
 #: ../ui/prefs.glade.h:63
 msgid "Parallel 1 Combo"
-msgstr "توازی ترکیبی1"
+msgstr "توازی ترکیبی ۱"
 
 
 #: ../ui/prefs.glade.h:64
 msgid "Parallel 2"
-msgstr "توازی2"
+msgstr "توازی ۲"
 
 #: ../ui/prefs.glade.h:65
 msgid "Parallel 2 Combo"
-msgstr "توازی ترکیبی2"
+msgstr "توازی ترکیبی ۲"
 
 
 #: ../ui/prefs.glade.h:66
 msgid "Parallel 3"
-msgstr "توازی3"
+msgstr "توازی ۳"
 
 #: ../ui/prefs.glade.h:67
 msgid "Parallel 3 Combo"
-msgstr "توازی ترکیبی3"
+msgstr "توازی ترکیبی ۳"
 
 #: ../ui/prefs.glade.h:68
 msgid "Parallel 4"
-msgstr "توازی4"
+msgstr "توازی ۴"
 
 #: ../ui/prefs.glade.h:69
 msgid "Parallel 4 Combo"
-msgstr "توازی ترکیبی4"
+msgstr "توازی ترکیبی ۴"
 ""
 
 #: ../ui/prefs.glade.h:70
 msgid "Parallel 5"
-msgstr "توازی5"
+msgstr "توازی ۵"
 
 #: ../ui/prefs.glade.h:71
 msgid "Parallel 5 Combo"
-msgstr "توازی ترکیبی5"
+msgstr "توازی ترکیبی ۵"
 
 #: ../ui/prefs.glade.h:72
 msgid "Personal Notes"
