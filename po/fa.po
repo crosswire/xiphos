@@ -1769,8 +1769,8 @@ msgid "_Edit"
 msgstr "ویرایش"
 
 #####: ../src/gnome2/main_menu.c:1002
-####msgid "Hi_story"
-####msgstr "سابقه"
+msgid "Hi_story"
+msgstr "سابقه"
 
 #: ../src/gnome2/main_menu.c:1008
 msgid "_Help"
@@ -2324,7 +2324,7 @@ msgstr "%s درپنجره اصلی را نشان بده"
 #: ../src/main/tab_history.c:66 ../src/main/tab_history.c:110
 #: ../src/main/tab_history.c:125
 msgid "H_istory/<Separator>"
-msgstr "سابقه"
+msgstr "سابقه/<Separator>"
 
 #. tab->history_items + 1);
 #: ../src/main/tab_history.c:68 ../src/main/tab_history.c:112
@@ -2360,7 +2360,7 @@ msgid ""
 "\n"
 "Warning: If you live in a persecuted country, use with care.\n"
 "\n"
-"May GتnomeSword invoke the Module Manager so that you may install a Bible?"
+"May GnomeSword invoke the Module Manager so that you may install a Bible?"
 msgstr ""
 
 #: ../src/main/settings.c:107
