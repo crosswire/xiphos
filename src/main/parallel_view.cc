@@ -576,7 +576,7 @@ void main_update_parallel_page(void)
 			
 			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 			font_name = get_conf_file_item(file, mod_name, "Font");
-			if (!font_name) {
+			if (!font_name || !strcmp(font_name, "none")) {
 				font_name =
 				    main_get_mod_config_entry(mod_name, "Font");
 				if (!font_name)
@@ -805,7 +805,7 @@ void main_update_parallel_page(void)
 			//font_name = get_module_font_name(mod_name);
 			file = g_strdup_printf("%s/fonts.conf", settings.gSwordDir);
 			font_name = get_conf_file_item(file, mod_name, "Font");
-			if (!font_name) {
+			if (!font_name || !strcmp(font_name, "none")) {
 				font_name =
 				    main_get_mod_config_entry(mod_name, "Font");
 				if (!font_name)
@@ -1041,7 +1041,8 @@ static void int_display(GtkHTML *html, gchar * key)
 				    + settings.base_font_size);
 
 		use_font_name[j] = get_conf_file_item(file, mod_name[j], "Font");
-		if (use_font_name[j] == NULL) {
+		if ((use_font_name[j] == NULL) ||
+		    !strcmp(use_font_name[j], "none")) {
 			use_font_name[j] =
 			    main_get_mod_config_entry(mod_name[j], "Font");
 			if (!use_font_name[j])
