@@ -1,3 +1,7 @@
+2009-01-04  matysek <matysek03@users.sf.net>
+
+	* added installation of Linux Libertine fonts and Free fonts
+	
 2008-12-20  matysek <matysek03@users.sf.net>
 
 	* absolute paths used in script svn2utf16.py

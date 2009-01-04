@@ -43,12 +43,13 @@
     !define APP_NAME "GnomeSword"
     !define APP_BINARY_NAME "gnomesword.exe"
     !define APP_VERS "3.0"
-    !define APP_EDITION "win32-test05"
+    !define APP_EDITION "win32-test06"
     !define APP_URL "http://gnomesword.sf.net"
 
     ; Paths with application files for installer
     !define PATH_CORE "..\gs_bin"
     !define PATH_IMG "img"
+    !define PATH_FONT "..\fonts"
 
     ; Files
     !define CORE_F "${PATH_CORE}\*.*"
@@ -89,6 +90,9 @@
 
     ; Uninstaller Log
     !include "${INCL_DIR}\utf16_advuninstlog.nsh"
+
+    ; Macro for registering fonts
+    !include "${INCL_DIR}\utf16_fontreg.nsh"
 
     !include "nsDialogs.nsh"
     !include "LogicLib.nsh"
@@ -204,6 +208,7 @@
     ReserveFile "${NSISDIR}\Plugins\System.dll"
     ReserveFile "${NSISDIR}\Plugins\nsDialogs.dll"
     ReserveFile "${INCL_DIR}\utf16_advuninstlog.nsh"
+    ReserveFile "${INCL_DIR}\utf16_fontreg.nsh"
 
     !insertmacro LINGUAS_RESERVEFILE
 
@@ -215,6 +220,38 @@ Section $(CORE_SEC_TITLE) SecCore
 
     ; shortcuts will be installed for all users - Desktop/Startmenu
     SetShellVarContext all
+
+
+    ; Install fonts
+
+    StrCpy $FONT_DIR $FONTS
+
+    ; Libertine fonts
+    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_Re.otf" \
+        "Linux Libertine O (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_Bd.otf" \
+        "Linux Libertine O Bold (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\LinLibertine_It.otf" \
+        "Linux Libertine O Italic (OpenType)"
+
+    ; Free fonts
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSans.otf" \
+        "Free Sans (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSansBold.otf" \
+        "Free Sans Bold (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSansOblique.otf" \
+        "Free Sans Oblique (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerif.otf" \
+        "Free Serif (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerifBold.otf" \
+        "Free Serif Bold (OpenType)"
+    !insertmacro InstallOTFFont "${PATH_FONT}\FreeSerifItalic.otf" \
+        "Free Serif Italic (OpenType)"
+
+    #SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
+    SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=50000
+    
+    ; Install Application files
 
     SetOutPath '$INSTDIR'
 
